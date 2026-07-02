@@ -566,6 +566,138 @@
       "sentiment": "buff",
       "claim": "The new Cycle of Death talent makes Defile-based play much smoother in his view: Defile ticks refund Putrefy cooldown, so big pulls chain extra Putrefies and Magus summons, which is where most of Unholy's AoE damage comes from.",
       "url": "https://youtu.be/ChaOm-iBaqI?t=421"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Beast Mastery",
+      "creator": "Dalaran Gaming",
+      "date": "2026-06-25",
+      "sentiment": "buff",
+      "patchContext": "12.1 PTR (initial June builds)",
+      "claim": "12.1 pushes Beast Mastery toward sustained damage: Razor Sharp (renamed from Heart of the Pack) buffs core pet damage, the redesigned Piercing Fangs adds 15% Kill Command crit damage, and Barbed Shot (+25%), Kill Command (+20%) and Cobra Shot (+20%) all get flat buffs; Wild Thrash granting a flat 10-second Beast Cleave smooths AoE upkeep, and the tier set's Barbed Shot-to-stomp-to-empowered-Cobra-Shot loop may finally bring Cobra Shot back into the rotation.",
+      "url": "https://youtu.be/LwXvzItzHsY?t=227",
+      "superseded": false
+    },
+    {
+      "class": "Hunter",
+      "spec": "Survival",
+      "creator": "Dalaran Gaming",
+      "date": "2026-06-25",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR (initial June builds)",
+      "claim": "Survival's 12.1 changes are mostly quality-of-life: Primal Surge - a talent he calls game-defining for the spec's flow - moved up from the capstone row so it is much easier to reach, the new 2-point Razor's Edge adds crit chance/crit damage scaling to Kill Command and Raptor Strike, and Lethal Barbs was adjusted so auto-attack focus generation adapts to weapon speed, aiming to end the mandatory double-dagger builds Blizzard never intended.",
+      "url": "https://youtu.be/LwXvzItzHsY?t=359",
+      "superseded": false
+    },
+    {
+      "class": "Hunter",
+      "spec": "Marksmanship",
+      "creator": "Dalaran Gaming",
+      "date": "2026-06-25",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR (initial June builds)",
+      "claim": "Marksmanship gets yet another talent revamp after the 12.0.5 changes disappointed: damage is front-loaded with 20% buffs to Aimed Shot, Rapid Fire, Arcane Shot, Multi-Shot and Kill Shot, Explosive Shot is redesigned into repeating explosions with Ignite-style rolling damage (but feels self-contained, barely interacting with the rest of the kit), and the reworked apex talent spreads power between Rapid Fire and Aimed Shot; he reads the direction as stripping friction out of the spec, with tuning left to decide whether it is enough.",
+      "url": "https://youtu.be/LwXvzItzHsY?t=550",
+      "superseded": false
+    },
+    {
+      "class": "Mage",
+      "spec": "Arcane",
+      "creator": "Dalaran Gaming",
+      "date": "2026-06-26",
+      "sentiment": "buff",
+      "patchContext": "12.1 PTR (initial June builds)",
+      "claim": "Arcane is the big winner of the 12.1 Mage revamp: a brand-new Prismatic Bolt apex talent (procs off Arcane Salvo consumption, instantly generates four Arcane Charges, and at rank 2 guarantees Clearcasting with +30% Missiles), Arcane Pulse redesigned into a 15-second-cooldown AoE charge generator, and a second Prismatic Barrier charge for defensive parity; with the tier set angling the spec toward Sunfury and Missiles over Spellslinger, the changes 'on paper look good' and he is excited Arcane could return to the endgame spotlight - though Spellslinger's orb jank goes unaddressed.",
+      "url": "https://youtu.be/LevNqEHVB_o?t=446",
+      "superseded": false
+    },
+    {
+      "class": "Mage",
+      "spec": "Fire",
+      "creator": "Dalaran Gaming",
+      "date": "2026-06-26",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR (initial June builds)",
+      "claim": "Fire's 12.1 direction trades burst for sustain: Pyroblast and Flamestrike damage up 15%, but Fired Up rank 3 now reduces how often Combustion occurs, so there will be fewer big burst windows; he flags that as risky since the Combustion window is most of Fire's fun and the filler rotation is dull - Blizzard may need to make the sustained rotation more interesting if they keep shaving the burst.",
+      "url": "https://youtu.be/LevNqEHVB_o?t=343",
+      "superseded": false
+    },
+    {
+      "class": "Mage",
+      "spec": "Frost",
+      "creator": "Dalaran Gaming",
+      "date": "2026-06-26",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR (initial June builds)",
+      "claim": "Frost is treated as the already-functional Mage spec in 12.1 and gets only light touches: a flat 4% damage buff to base abilities rather than burst tuning, while the improved-barrier rework trades the second Ice Barrier charge (Glacial Bullet no longer grants one) for 10% physical damage reduction and a bigger absorb on each barrier.",
+      "url": "https://youtu.be/LevNqEHVB_o?t=280",
+      "superseded": false
+    },
+    {
+      "class": "Paladin",
+      "spec": "Protection",
+      "creator": "YoDaTV",
+      "date": "2026-06-30",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR",
+      "claim": "The rework decouples Prot Paladin's damage from Avenging Wrath (10% instead of 20%, with Divine Guidance falling to roughly 8-10% of damage from 20-30%), but Sentinel dropping to a 12-second baseline cuts defensive-cooldown coverage from roughly 60-70% of a dungeon to 50-60%; reworked Seal of Reprisal (mobs deal 10% less via Blessed Hammer, currently bugged to reduce YOUR damage) will be mandatory once fixed and locks out Spell Warding, and the fully passive ~3% tier set fails to buff Hammer of Wrath during Wings; he ranks Paladin the close-second tank behind Vengeance DH, cautioning that its table-topping PTR-log damage is inflated by the Marrowgar's Fang trinket.",
+      "url": "https://youtu.be/cLkvJG0DTWI?t=26",
+      "superseded": false
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Vengeance",
+      "creator": "YoDaTV",
+      "date": "2026-06-30",
+      "sentiment": "buff",
+      "patchContext": "12.1 PTR",
+      "claim": "He expects Vengeance DH to be the strongest tank of Season 2 but really annoying to play: survivability is unchanged since the big late-S1 buff yet completely RNG - Void Fall stacks from 35%-chance Fracture procs plus random apex Metamorphosis procs gate your Meta cooldown - and with Aldrachi still gutted you lose Reaver's Glaive and its long-range gathering, so expect aggro problems on pull with three-target Throw Glaive.",
+      "url": "https://youtu.be/cLkvJG0DTWI?t=245",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Guardian",
+      "creator": "YoDaTV",
+      "date": "2026-06-30",
+      "sentiment": "nerf",
+      "patchContext": "12.1 PTR",
+      "claim": "Season 1's meta tank gets gutted in 12.1: Lunation goes from ~3 seconds of Lunar Beam cooldown reduction per cast (enabling near back-to-back beams) to a flat 20-second baseline reduction, killing the live Lunar Beam/Barkskin chaining playstyle and leaving Guardian to kite or survive on Incarnation alone, which high-key players already know is not enough; he would be very surprised to see Guardian stay meta - no tank since BFA (one exception) has held meta two seasons in a row - though its tier set (+5s Incarnation) is the only tank set doing anything defensive.",
+      "url": "https://youtu.be/cLkvJG0DTWI?t=491",
+      "superseded": false
+    },
+    {
+      "class": "Monk",
+      "spec": "Brewmaster",
+      "creator": "YoDaTV",
+      "date": "2026-06-30",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR",
+      "claim": "Brewmaster should land about where it was in Season 1: Battle Flame was reverted, the tier set adds a decent bit of self-healing from fire damage, and nothing meaningful got nerfed; with Guardian Druid gutted he expects Brew to be genuinely strong in physical-damage comps, but probably not so overpowered that it gets played in magic comps.",
+      "url": "https://youtu.be/cLkvJG0DTWI?t=557",
+      "superseded": false
+    },
+    {
+      "class": "Warrior",
+      "spec": "Protection",
+      "creator": "YoDaTV",
+      "date": "2026-06-30",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR",
+      "claim": "Protection Warrior changes little in 12.1: Ravager comes back more often (every ~60s instead of ~90s) but is not an important defensive button, and its PTR damage does not look good - expect Warrior to be good on fights where Spell Reflect matters and mediocre-to-average otherwise.",
+      "url": "https://youtu.be/cLkvJG0DTWI?t=475",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Balance",
+      "creator": "Tettles",
+      "date": "2026-06-21",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR (initial June build)",
+      "claim": "On Moonkin Monthly (with Gamz and Nickdruid) he reads the long 12.1 Balance change list as 'a whole lot of nothing' - tuning shuffles like the Cosmos proc-chance nerf, Orbit Breaker -10%, and a Celestial Fire buff, with the promised damage-cooldown nerfs barely touching Balance; the real change is the tier set: the 2-piece's instant Starfall splash is only ~10% of one tick (nearly nothing on AoE), while the 4-piece eclipse pendulum (10% waning to 2% and back) is probably strong and pushes spender timing toward eclipse edges; his biggest worry is that losing the S1 shooting-stars set collapses this tier's unusually diverse raid builds back to one default.",
+      "url": "https://youtu.be/SS4JFiutLSA?t=1604",
+      "superseded": false
     }
   ]
 }
