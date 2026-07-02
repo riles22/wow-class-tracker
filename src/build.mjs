@@ -1,5 +1,5 @@
 /* Build: data/*.json + src/template.html → dist/index.html
-   The output is a single self-contained file (the SharePoint drop-in). */
+   The output is a single self-contained file — open it directly in a browser. */
 
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { fileURLToPath } from "node:url";

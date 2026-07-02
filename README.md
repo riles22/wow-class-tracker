@@ -3,7 +3,7 @@
 A class/spec performance tracker for WoW Midnight Patch 12.1 PTR ("Curse of Ula'tek").
 Every spec carries ratings from multiple sources (Icy Veins, Method, Wowhead) over its
 12.0.7 / Season 1 baseline, plus per-spec PTR change writeups. The build compiles it all
-into a single self-contained `dist/index.html` you can drop into SharePoint.
+into a single self-contained `dist/index.html` — just open it in a browser.
 
 ## Quick start
 

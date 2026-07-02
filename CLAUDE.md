@@ -2,7 +2,8 @@
 
 Multi-source class/spec performance tracker for WoW Midnight (Patch 12.1 PTR, "Curse of Ula'tek").
 Data lives in `data/*.json`; a build step compiles it with `src/template.html` into **one
-self-contained artifact — `dist/index.html`** — which is what gets dropped into SharePoint.
+self-contained artifact — `dist/index.html`** — a personal project; Riley just opens
+the file directly in a browser (no hosting, no deployment).
 
 ## Commands
 
@@ -147,7 +148,7 @@ data/     specs.json · sources.json · scales.json · ptr-builds.json · commun
 src/      build.mjs · template.html · render.mjs · normalize.mjs · validate.mjs ·
           apply-ratings.mjs · apply-metrics.mjs · serve.mjs
 test/     normalize · validate · render (fight labels) · build
-dist/     index.html  (generated — the SharePoint drop-in)
+dist/     index.html  (generated — open directly in a browser)
 legacy/   original single-file tracker (pre-conversion reference)
 .claude/skills/   refresh-tiers · refresh-metrics · ptr-watch · watch-creators
                   (each has the procedure + hard-won gotchas + a log.md memory)
