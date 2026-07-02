@@ -20,7 +20,7 @@
     --ink:#EDE7F7; --ink-dim:#A99BC7; --ink-faint:#6F6390;
     --accent:#B57BEE; --accent-2:#7FD8FF; --gold:#F0C24B;
 
-    --t-s:#F0C24B; --t-aplus:#C77DFF; --t-a:#6AA8F0; --t-b:#45C4A8; --t-c:#8A93A8; --t-d:#C97A6A;
+    --t-s:#F0C24B; --t-aplus:#C77DFF; --t-a:#6AA8F0; --t-b:#45C4A8; --t-c:#8A93A8; --t-d:#C97A6A; --t-f:#A34E4E;
     --v-pos:#52C97A; --v-mix:#E0A73E; --v-neg:#E0655F;
 
     --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
@@ -78,6 +78,8 @@
     max-width:1120px; margin:0 auto; padding:0 20px;
     display:flex; gap:10px 14px; align-items:center; flex-wrap:wrap
   }
+  .controls-row + .controls-row{margin-top:9px}
+  .ctl{display:flex; align-items:center; gap:8px; flex-wrap:nowrap}
   .seg{display:inline-flex; background:var(--bg-2); border:1px solid var(--edge); border-radius:9px; padding:3px; gap:2px}
   .seg button{
     font-family:var(--body); font-size:13px; font-weight:600; color:var(--ink-dim);
@@ -132,6 +134,7 @@
   .tier[data-t="B"]  {color:var(--t-b);     background:color-mix(in srgb,var(--t-b) 15%,transparent);     border-color:color-mix(in srgb,var(--t-b) 42%,transparent)}
   .tier[data-t="C"]  {color:var(--t-c);     background:color-mix(in srgb,var(--t-c) 15%,transparent);     border-color:color-mix(in srgb,var(--t-c) 42%,transparent)}
   .tier[data-t="D"]  {color:var(--t-d);     background:color-mix(in srgb,var(--t-d) 15%,transparent);     border-color:color-mix(in srgb,var(--t-d) 42%,transparent)}
+  .tier[data-t="F"]  {color:var(--t-f);     background:color-mix(in srgb,var(--t-f) 15%,transparent);     border-color:color-mix(in srgb,var(--t-f) 42%,transparent)}
   .tier[data-t="—"]  {color:var(--ink-faint); background:transparent; border-color:var(--edge); min-width:30px}
 
   .tiercell{display:inline-flex; align-items:center; gap:4px}
@@ -279,7 +282,7 @@
     <p class="eyebrow">WoW Midnight · Patch 12.1 PTR</p>
     <h1 class="title"><span class="curse">Curse of Ula'tek</span> — Spec Tracker</h1>
     <div class="rule"></div>
-    <p class="sub">Live tracker for <b>Patch 12.1 PTR</b> class &amp; tier-set changes, laid over each spec's current <b>12.0.7 / Season 1</b> baseline so you can see where every spec is coming <i>from</i> as the changes land. Ratings come from multiple sources — flip between them or view the computed <b>consensus</b>, with a divergence marker where sources disagree. Click any PTR-tracked row for the full change read.</p>
+    <p class="sub">Live tracker for <b>Patch 12.1 PTR</b> class &amp; tier-set changes, laid over each spec's current <b>12.0.7 / Season 1</b> baseline so you can see where every spec is coming <i>from</i> as the changes land. Five sources feed a computed <b>consensus</b> (divergence marker where they disagree); flip between them, filter by era or a specific fight, and click <b>any row</b> for the full read — PTR changes, current numbers with ranks, sim fight profile, and community takes.</p>
     <div class="stamp">
       <span><b>Baseline:</b> 12.0.7 / Season 1</span>
       <span><b>PTR:</b> 12.1 “Curse of Ula'tek”</span>
@@ -292,20 +295,30 @@
 
 <div class="controls">
   <div class="controls-row">
-    <span class="lbl">Source</span>
-    <div class="seg" id="srcseg" role="group" aria-label="Ratings source"></div>
-    <span class="lbl">Era</span>
-    <div class="seg" id="eraseg" role="group" aria-label="Era">
-      <button data-era="both" aria-pressed="true">Both</button>
-      <button data-era="live" aria-pressed="false">12.0.7</button>
-      <button data-era="ptr" aria-pressed="false">12.1 PTR</button>
+    <div class="ctl">
+      <span class="lbl">Source</span>
+      <div class="seg" id="srcseg" role="group" aria-label="Ratings source"></div>
     </div>
-    <span class="lbl">Role</span>
-    <div class="seg" id="roleseg" role="group" aria-label="Filter by role">
-      <button data-role="All" aria-pressed="true">All</button>
-      <button data-role="DPS" aria-pressed="false">DPS</button>
-      <button data-role="Healer" aria-pressed="false">Healer</button>
-      <button data-role="Tank" aria-pressed="false">Tank</button>
+    <div class="ctl">
+      <span class="lbl">Era</span>
+      <div class="seg" id="eraseg" role="group" aria-label="Era">
+        <button data-era="both" aria-pressed="true">Both</button>
+        <button data-era="live" aria-pressed="false">12.0.7</button>
+        <button data-era="ptr" aria-pressed="false">12.1 PTR</button>
+      </div>
+    </div>
+    <span class="grow"></span>
+    <span class="count" id="count"></span>
+  </div>
+  <div class="controls-row">
+    <div class="ctl">
+      <span class="lbl">Role</span>
+      <div class="seg" id="roleseg" role="group" aria-label="Filter by role">
+        <button data-role="All" aria-pressed="true">All</button>
+        <button data-role="DPS" aria-pressed="false">DPS</button>
+        <button data-role="Healer" aria-pressed="false">Healer</button>
+        <button data-role="Tank" aria-pressed="false">Tank</button>
+      </div>
     </div>
     <label class="toggle">
       <input type="checkbox" id="ptronly">
@@ -313,20 +326,23 @@
       <span>PTR-tracked only</span>
     </label>
     <span class="grow"></span>
-    <label class="lbl" for="fightsel" id="fightlbl" style="margin-right:2px">Fight</label>
-    <select class="sortsel" id="fightsel" aria-label="Per-fight view"></select>
-    <label class="lbl" for="sortsel" style="margin-right:2px">Sort</label>
-    <select class="sortsel" id="sortsel" aria-label="Sort specs">
-      <option value="class">Class</option>
-      <option value="spec">Spec A–Z</option>
-      <option value="raid">Raid tier</option>
-      <option value="mplus">M+ tier</option>
-      <option value="ptr">PTR verdict</option>
-      <option value="simst">ST sim DPS</option>
-      <option value="simaoe">AoE sim DPS</option>
-    </select>
+    <div class="ctl" id="fightctl">
+      <label class="lbl" for="fightsel" id="fightlbl">Fight</label>
+      <select class="sortsel" id="fightsel" aria-label="Per-fight view"></select>
+    </div>
+    <div class="ctl">
+      <label class="lbl" for="sortsel">Sort</label>
+      <select class="sortsel" id="sortsel" aria-label="Sort specs">
+        <option value="class">Class</option>
+        <option value="spec">Spec A–Z</option>
+        <option value="raid">Raid tier</option>
+        <option value="mplus">M+ tier</option>
+        <option value="ptr">PTR verdict</option>
+        <option value="simst">ST sim DPS</option>
+        <option value="simaoe">AoE sim DPS</option>
+      </select>
+    </div>
     <input class="search" id="search" type="search" placeholder="Search spec…" aria-label="Search spec or class">
-    <span class="count" id="count"></span>
   </div>
 </div>
 
@@ -461,8 +477,15 @@ function sourceBreakdownHTML(s){
   const surv = s.survivability
     ? `<div class="setrow"><span class="pc">Survive</span><span class="pct">Archon raid survivability tier: <b>${esc(s.survivability.tier)}</b>${s.survivability.asOf?` <span class="mnote">· ${esc(s.survivability.asOf)}</span>`:""}</span></div>`
     : "";
-  if(!rows && !surv) return "";
-  return `<div class="srcbreak"><p class="d-h">Source ratings</p><div class="setbox">${rows}${surv}</div></div>`;
+  const toolIds = s.role === "Healer" ? ["qelive", "raidbots"] : ["raidbots", "bloodmallet"];
+  const tools = toolIds.map(id => {
+    const src = SOURCES.find(x => x.id === id);
+    const url = src?.url || src?.pages?.[0]?.url;
+    return src && url ? `<a href="${esc(url)}" target="_blank" rel="noopener" title="${esc(src.methodology||"")}">${esc(src.name)}</a>` : "";
+  }).filter(Boolean).join(" · ");
+  const toolRow = tools ? `<div class="setrow"><span class="pc">Tools</span><span class="pct">${tools}</span></div>` : "";
+  if(!rows && !surv && !toolRow) return "";
+  return `<div class="srcbreak"><p class="d-h">Source ratings</p><div class="setbox">${rows}${surv}${toolRow}</div></div>`;
 }
 
 function metricsHTML(s){
@@ -682,7 +705,9 @@ document.getElementById('srclist').innerHTML = SOURCES.filter(s=>Array.isArray(s
       : `${p.bracket==="raid"?"Raid":p.bracket==="mplus"?"M+":""}${p.role && p.role!=="All" ? " · "+esc(p.role) : ""}`;
     const link = p.url ? `<a href="${esc(p.url)}" target="_blank" rel="noopener">${label}</a>` : `<span>${label}</span>`;
     const when = p.snapshot ? esc(p.snapshot)
-      : (src.kind === "reference" || src.kind === "community") ? "—" : "pending fetch";
+      : src.kind === "community" ? "—"
+      : (src.kind === "reference" || p.bracket == null) ? "tool"
+      : "pending fetch";
     return `<div class="srcitem">${link}<span class="when">${when}</span></div>`;
   }).join("");
   const kind = src.kind!=="tier-list" ? ` <span class="mnote">· ${esc(src.kind)}</span>` : "";
@@ -707,11 +732,10 @@ document.getElementById('livelinks').insertAdjacentHTML('beforeend',
 /* ---------- per-fight selector (Archon per-boss / per-dungeon tiers) ---------- */
 (function(){
   const sel = document.getElementById('fightsel');
-  const lbl = document.getElementById('fightlbl');
   const enc = DATA.encounterTiers;
   const raid = Object.entries(enc?.raid || {});
   const mplus = Object.entries(enc?.mplus || {});
-  if(!raid.length && !mplus.length){ sel.style.display='none'; lbl.style.display='none'; return; }
+  if(!raid.length && !mplus.length){ document.getElementById('fightctl').style.display='none'; return; }
   const opt = (bracket, slug, name) => `<option value="${esc(bracket)}|${esc(slug)}">${esc(name)}</option>`;
   sel.innerHTML = `<option value="">All fights</option>`
     + (raid.length ? `<optgroup label="Raid bosses (Archon throughput)">${raid.map(([slug,e])=>opt("raid",slug,e.name)).join("")}</optgroup>` : "")

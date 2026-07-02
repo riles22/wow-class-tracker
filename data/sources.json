@@ -302,12 +302,15 @@
   {
     "id": "simulationcraft",
     "name": "SimulationCraft",
-    "kind": "reference",
+    "kind": "metrics",
     "url": "https://www.simulationcraft.org/",
-    "methodology": "The sim engine's home: nightly MID1_Raid per-spec report (consumed via the bloodmallet/metrics workflow), downloads, docs. The project itself disclaims its profiles as class-comparison rankings — reference link only.",
+    "author": "SimC project nightly (engine-official)",
+    "methodology": "Official nightly MID1_Raid Patchwerk report: one fixed high-ilvl profile per spec/hero-variant, iterations=7500 — we ingest the best variant per DPS spec as 'SimC nightly Patchwerk DPS'. Pure single-target, fixed gear: a sim baseline, not a rankings verdict (the project itself disclaims class comparisons — keep it a number, never a tier).",
     "pages": [
-      { "bracket": null, "role": "All", "label": "Project home + nightly reports", "url": "https://www.simulationcraft.org/", "snapshot": null }
-    ]
+      { "bracket": "raid", "role": "DPS", "label": "MID1_Raid nightly report", "url": "https://www.simulationcraft.org/reports/MID1_Raid.html", "snapshot": "2026-06-30" },
+      { "bracket": null, "role": "All", "label": "Project home (downloads + docs)", "url": "https://www.simulationcraft.org/", "snapshot": null }
+    ],
+    "notes": "Parse the .txt variant (plain text ranking of ~49 MID1_{Class}_{Spec}_{HeroVariant} profiles). Filter to DPS-role roster specs (tanks appear at low DPS; healers absent; Augmentation has no profile — unsimmable support spec)."
   },
   {
     "id": "raidbots",
@@ -324,9 +327,10 @@
     "name": "QE Live",
     "kind": "reference",
     "url": "https://questionablyepic.com/live/",
-    "methodology": "Voulk's healer gearing/trinket evaluation tool (all healer specs). Client-side SPA — no fetchable data, but actively maintained for Midnight (verified via its GitHub repo, 12.0.7 branches). Reference for the healer audience.",
+    "methodology": "Voulk's healer gearing/trinket evaluation tool (all healer specs). Client-side SPA — no fetchable data, but actively maintained for Midnight (verified via its GitHub repo, 12.0.7 branches). Reference for the healer audience; the blog publishes dated Midnight healer articles (e.g. S1 embellishment tier list).",
     "pages": [
-      { "bracket": null, "role": "Healer", "label": "Healer gear evaluator", "url": "https://questionablyepic.com/live/", "snapshot": null }
+      { "bracket": null, "role": "Healer", "label": "Healer gear evaluator", "url": "https://questionablyepic.com/live/", "snapshot": null },
+      { "bracket": null, "role": "Healer", "label": "Blog (dated healer articles)", "url": "https://questionablyepic.com/blog/", "snapshot": null }
     ]
   },
   {

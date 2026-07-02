@@ -24,7 +24,7 @@ Only these four feed the consensus. Scales are normalized via `data/scales.json`
 | **Archon (numeric layer)** | 95th-pct DPS/HPS, M+ score, popularity % | top-end throughput + representation |
 | **Murlok.io** | Avg M+ rating of each spec's top-50 players | "top-50 ceiling" — NOT popularity, NOT a tier |
 | **Bloodmallet (SimC, tier MID1)** | Best-build DPS at 1/2/3/5/8/15 targets | powers ST/Cleave/AoE fight profiles (DPS only; Augmentation unsimmable) |
-| **SimulationCraft nightly** | MID1_Raid all-spec report | cross-check reference |
+| **SimulationCraft nightly** | Best hero-variant Patchwerk DPS per DPS spec from the engine-official MID1_Raid report (daily) | pure ST, fixed profile — a sim baseline next to Bloodmallet, never a tier |
 | **Mythicstats** | Representation % in the top 2000 keys per weekly period | true meta-share (the axis Murlok's fixed-50 sample can't measure); JS-heavy → r.jina.ai |
 
 Every metric gets a computed within-role **rank** (#n/of) at build time.
@@ -72,11 +72,12 @@ shown in each drawer's Source ratings box.
 
 - **Liquid Armory** — SimulationCraft guild-simmed trinket/BiS data. A gearing axis,
   not a spec-strength axis — deliberately not a tier column.
-- **SimulationCraft (project home)** — engine downloads/docs + nightly reports; the
-  project itself disclaims its profiles as class rankings.
 - **Raidbots** — run-your-own-sims tool; no public per-spec aggregates (re-verified).
+  Linked as a Tools row in every spec drawer.
 - **QE Live** — Voulk's healer gear evaluator; client-side SPA, no fetchable data,
-  Midnight-current per its GitHub repo.
+  Midnight-current per its GitHub repo. Tools row on healer specs; its blog publishes
+  dated Midnight healer articles (S1 embellishment tier list, Feb 2026). Voulk himself
+  is a creator entry (Wowhead Healing Expert — Prevoker/Resto Druid).
 - **u.gg/wow** — mirror of Archon.
 
 ## Audited and skipped (re-check later)
