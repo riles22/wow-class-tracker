@@ -45,7 +45,7 @@ shown in each drawer's Source ratings box.
 | Source | Role |
 |---|---|
 | **Blizzard PTR dev-notes forum thread** (Linxy) | canonical per-build tuning notes; Discourse `.json` machine-readable; ~weekly; **new patch = new thread** |
-| **Wowhead news RSS + datamined posts** | discovery (exact pubDates) + mirrors |
+| **Wowhead news RSS + datamined posts** | discovery (exact pubDates) + mirrors; Wowhead's per-spec 12.1 articles are also the source of the tracker's `ptr` writeups |
 | **Icy Veins news** | secondary mirror (dates in slug) |
 | **Warcraft Logs zone 54** (The Venomous Abyss) | 12.1 PTR raid-testing scores — tiny n (~3–100), templated gear, tuning in flux; always "(12.1 PTR …)"-labeled, never mixed into live baselines |
 

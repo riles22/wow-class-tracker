@@ -1,4 +1,571 @@
 {
   "_comment": "Qualitative layer: distilled, cited creator takes per spec — populated by the watch-creators skill from video transcripts. Claims are paraphrased (auto-captions are lossy); every take carries a timestamped deep link for verification. Takes NEVER feed tiers or consensus. superseded: true when a newer take from the same creator or a newer patch state replaces it.",
-  "takes": []
+  "takes": [
+    {
+      "class": "Warlock",
+      "spec": "Affliction",
+      "creator": "Kalamazi",
+      "date": "2026-07-01",
+      "sentiment": "buff",
+      "patchContext": "12.1 PTR (2026-06-30 build)",
+      "claim": "The 06-30 build's Affliction 2-set redesign (Agony +15%, Corruption/Wither +25%) plus the Hellcaller buffs (Blackened Soul +45%, Wither +25%) meaningfully lift Hellcaller single-target funnel; his sims suggest this could push Hellcaller close to or slightly above Soul Harvester in single target, though Hellcaller's shard economy still feels worse.",
+      "url": "https://youtu.be/kprnWqI0hhI?t=607",
+      "superseded": false
+    },
+    {
+      "class": "Warlock",
+      "spec": "Affliction",
+      "creator": "Kalamazi",
+      "date": "2026-07-01",
+      "sentiment": "nerf",
+      "patchContext": "12.1 PTR (2026-06-30 build)",
+      "claim": "The Dark Harvest double-CDR bug (Cold Week + the 4-set Seed→Unstable Affliction interaction each granting cooldown reduction) that made spamming Seed of Corruption in pure single target absurdly strong has been fixed; he expects single-target Seed-spam won't remain worthwhile now that the bug is gone.",
+      "url": "https://youtu.be/kprnWqI0hhI?t=735",
+      "superseded": false
+    },
+    {
+      "class": "Warlock",
+      "spec": "Destruction",
+      "creator": "Kalamazi",
+      "date": "2026-07-01",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR (2026-06-30 build)",
+      "claim": "Destruction feels very undertuned in raid testing; the shared Hellcaller buffs help a little but he questions whether it is enough, and no Destruction capstone or single-target-vs-AoE rework is coming this patch given the fast patch cadence (Mythic testing is the next build).",
+      "url": "https://youtu.be/kprnWqI0hhI?t=926",
+      "superseded": false
+    },
+    {
+      "class": "Hunter",
+      "spec": "Beast Mastery",
+      "creator": "Azortharion",
+      "date": "2026-07-01",
+      "patchContext": "12.1 PTR",
+      "sentiment": "neutral",
+      "claim": "Azortharion reads 12.1 Beast Mastery as power shifted out of Bestial Wrath and cooldown windows into baseline abilities, producing a flatter, more forgiving spec (longer Beast Cleave) whose gameplay feel is basically unchanged — if you like BM now you still will, and vice versa.",
+      "url": "https://hackmd.io/@Azortharion/HunterPatch121-1"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Marksmanship",
+      "creator": "Azortharion",
+      "date": "2026-07-01",
+      "patchContext": "12.1 PTR",
+      "sentiment": "neutral",
+      "claim": "He calls Marksmanship's 12.1 changes a very mixed bag he is genuinely conflicted about: the Explosive Shot redesign and the Black Arrow/Deathblow proc fix are promising, but reduced Aimed Shot emphasis flattens the profile and Bulletstorm nerfs hurt funnel damage, so the verdict depends on how Explosive Shot gameplay pans out.",
+      "url": "https://hackmd.io/@Azortharion/HunterPatch121-1"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Survival",
+      "creator": "Azortharion",
+      "date": "2026-07-01",
+      "patchContext": "12.1 PTR",
+      "sentiment": "buff",
+      "claim": "He counts 12.1 as a win for Survival: Lethal Barbs lets you use any weapon at little to no DPS difference, talent repositioning opens new builds, and with no other meaningful changes the spec stays in an already-strong spot.",
+      "url": "https://hackmd.io/@Azortharion/HunterPatch121-1"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Protection",
+      "creator": "YoDaTV",
+      "date": "2026-07-01",
+      "patchContext": "12.1 PTR",
+      "sentiment": "nerf",
+      "claim": "The 12.1 PTR talent-tree rework leaves Protection Paladin in a bad spot: the bottom gate is now flooded with must-have talents (Sanctuary's 5% damage reduction and Relentless Inquisitor's 5% haste were moved down) without enough points to take them all, and pathing now forces previously never-taken nodes like Focused Enmity to reach key defensives.",
+      "url": "https://youtu.be/Fe_o8xujojM?t=112"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "creator": "AutomaticJak",
+      "date": "2026-07-01",
+      "patchContext": "12.1 PTR",
+      "sentiment": "nerf",
+      "claim": "Holy Paladin brings up the rear among healers for Season 2: heroic raid testing showed no big single-target healing moments for its Holy Light-heavy kit, the Innervate rework works out to a sizable mana nerf for its expensive casts, and passive-healing specs are winning raid spots instead.",
+      "url": "https://youtu.be/d7UY8I6fYbc?t=1634"
+    },
+    {
+      "class": "Priest",
+      "spec": "Discipline",
+      "creator": "AutomaticJak",
+      "date": "2026-07-01",
+      "patchContext": "12.1 PTR",
+      "sentiment": "neutral",
+      "claim": "Discipline's healing numbers were phenomenal in Season 2 raid testing, but with roughly 40-50% of its output coming just from applying Void Shields the spec has become so centralized on its apex talent that the rest of the kit gets lost, which he flags as a design head-scratcher despite the strong throughput.",
+      "url": "https://youtu.be/d7UY8I6fYbc?t=654"
+    },
+    {
+      "class": "Priest",
+      "spec": "Holy",
+      "creator": "AutomaticJak",
+      "date": "2026-07-01",
+      "patchContext": "12.1 PTR",
+      "sentiment": "nerf",
+      "claim": "Holy Priest lands in his Season 2 loser tier: it got no meaningful changes again, the new tier set is built around passively-procced Renews and grants haste (long one of the spec's worst stats), and its shortfall in passive healing keeps it on the bench in raids.",
+      "url": "https://youtu.be/d7UY8I6fYbc?t=1020"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Vengeance",
+      "creator": "YoDaTV",
+      "date": "2026-07-01",
+      "patchContext": "12.1 PTR",
+      "sentiment": "neutral",
+      "claim": "Vengeance's 12.1 changes are small quality-of-life adjustments (Sigil of Chains baseline with Sigil of Silence as an opt-in), and while defensives stay RNG-dependent and pack gathering got worse, the spec still looks like the frontrunner meta tank for Season 2 — especially with Prot Paladin's rework in disarray.",
+      "url": "https://youtu.be/Fe_o8xujojM?t=61"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Blood",
+      "creator": "YoDaTV",
+      "date": "2026-07-01",
+      "patchContext": "12.1 PTR",
+      "sentiment": "neutral",
+      "claim": "Blood DK's updated 12.1 tier set (Death Strike granting passive strength plus occasional Mirror Image procs) is a nice gameplay-changing bonus and its damage is good, but defensively little changes, so he doesn't see Blood becoming the top meta tank.",
+      "url": "https://youtu.be/Fe_o8xujojM?t=105"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Elemental",
+      "creator": "Supatease",
+      "date": "2026-07-01",
+      "patchContext": "12.1 PTR",
+      "sentiment": "neutral",
+      "claim": "Notes the 12.1 build's Shaman changes center on tier sets rather than Elemental, with the class falling in line with Blizzard's stated Season 2 goals of reduced CC and toned-down cooldown power.",
+      "url": "https://youtu.be/C_aiXV_QRBs?t=772"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Enhancement",
+      "creator": "Supatease",
+      "date": "2026-07-01",
+      "patchContext": "12.1 PTR",
+      "sentiment": "buff",
+      "claim": "Reads the reworked Voltaic Blaze two-set, which makes Fire Nova hit the primary target for triple damage, as fixing the bonus losing effectiveness against small pulls and playing much better in PvP by shifting it toward single-target.",
+      "url": "https://youtu.be/C_aiXV_QRBs?t=772"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Affliction",
+      "creator": "Supatease",
+      "date": "2026-07-01",
+      "patchContext": "12.1 PTR",
+      "sentiment": "buff",
+      "claim": "Sees the Blackened Soul and Wither damage buffs plus the redesigned Affliction set bonus (Agony +15%, Corruption +25%) as a very large amount of DoT damage, questioning whether that much power belongs in a set bonus instead of the class baseline.",
+      "url": "https://youtu.be/C_aiXV_QRBs?t=809"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Arms",
+      "creator": "Supatease",
+      "date": "2026-07-01",
+      "patchContext": "12.1 PTR",
+      "sentiment": "buff",
+      "claim": "Likes the Tactical Edge redesign that makes Colossus Smash immediately grant a Sudden Death use, agreeing it will be more rotationally impactful and open interactions for Slayer and execute-focused builds.",
+      "url": "https://youtu.be/C_aiXV_QRBs?t=836"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Protection",
+      "creator": "Supatease",
+      "date": "2026-07-01",
+      "patchContext": "12.1 PTR",
+      "sentiment": "buff",
+      "claim": "Reacts positively to Protection's Revenge update bringing back the free-Revenge counterattack mechanic with an added consistency layer (dodges, parries, and autos can make the next Revenge cost no rage), alongside the Ravager bleed-amp also applying to Prot.",
+      "url": "https://youtu.be/C_aiXV_QRBs?t=870"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Affliction",
+      "creator": "Kalamazi",
+      "date": "2026-07-01",
+      "patchContext": "12.1 PTR",
+      "sentiment": "buff",
+      "claim": "Expects the 45% Blackened Soul and 25% Wither buffs combined with the redesigned Agony/Corruption two-set to be a significant single-target gain for Hellcaller, potentially pushing it very close to or slightly above Soul Harvester for Affliction.",
+      "url": "https://youtu.be/kprnWqI0hhI?t=816"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Destruction",
+      "creator": "Kalamazi",
+      "date": "2026-07-01",
+      "patchContext": "12.1 PTR",
+      "sentiment": "neutral",
+      "claim": "Says Destruction felt very undertuned in 12.1 raid testing and, while the Wither and Blackened Soul buffs help Hellcaller Destro somewhat, he doubts they are enough and expects no capstone or single-target-versus-AoE rework this late in the PTR cycle.",
+      "url": "https://youtu.be/kprnWqI0hhI?t=342"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Affliction",
+      "creator": "Kalamazi",
+      "date": "2026-07-01",
+      "patchContext": "12.1 PTR",
+      "sentiment": "neutral",
+      "claim": "Argues the new Affliction tier set only helps funnel scenarios and does not fix the spec's core single-target-versus-AoE talent split, so with the Dark Harvest cooldown-reduction double-dip bug now fixed, pure single-target Affliction still looks weak.",
+      "url": "https://youtu.be/kprnWqI0hhI?t=964"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Affliction",
+      "creator": "Kalamazi",
+      "date": "2026-06-30",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR raid testing (Heroic, The Venomous Abyss)",
+      "claim": "Affliction looks good on the tier's add-dense, seed-cleave fights (Xal'atath the Soul Coiler, Vashj'ir, The Twin Fangs), but the strength comes from spamming Seed-with-Sow onto stacked targets rather than strong single-target/UA output — it is weak on the pure patchwork boss (Cizzerak) and on the 2-target council fight (Entombed Sentinels).",
+      "url": "https://youtu.be/_62c2WOOnog?t=1114",
+      "superseded": false
+    },
+    {
+      "class": "Warlock",
+      "spec": "Destruction",
+      "creator": "Kalamazi",
+      "date": "2026-06-30",
+      "sentiment": "nerf",
+      "patchContext": "12.1 PTR raid testing (Heroic, The Venomous Abyss)",
+      "claim": "Destruction is 'in a shambles' and 'needs serious help' this tier; the Entombed Sentinels permanent 2-target cleave fight is about the only spot he'd actually pick it.",
+      "url": "https://youtu.be/_62c2WOOnog?t=785",
+      "superseded": false
+    },
+    {
+      "class": "Warlock",
+      "spec": "Demonology",
+      "creator": "Kalamazi",
+      "date": "2026-06-30",
+      "sentiment": "buff",
+      "patchContext": "12.1 PTR raid testing (Heroic, The Venomous Abyss)",
+      "claim": "Demonology is the most flexible and overall strongest Warlock spec in testing — his pick for best overall single target (Corrupted Altar) and strong on Diabolist cleave/council fights like Vashj'ir.",
+      "url": "https://youtu.be/_62c2WOOnog?t=1227",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Balance",
+      "creator": "Dalaran Gaming",
+      "date": "2026-06-30",
+      "patchContext": "12.1 PTR",
+      "sentiment": "nerf",
+      "claim": "The 12.1 Astral Power rework — stronger spenders but a nerfed Touch of the Cosmos free-proc chance — is making Balance feel slower and more filler-cast-heavy in early PTR impressions, and he hopes Blizzard monitors or partially rolls it back before the pacing makes the spec unfun.",
+      "url": "https://youtu.be/4YISlhMXq5c?t=283"
+    },
+    {
+      "class": "Druid",
+      "spec": "Feral",
+      "creator": "Dalaran Gaming",
+      "date": "2026-06-30",
+      "patchContext": "12.1 PTR",
+      "sentiment": "neutral",
+      "claim": "Feral is only getting number tuning in 12.1 (Saber Jaws and Chomp buffed, Ripper up 20%, popular picks trimmed) instead of the spec-tree rework players wanted, and cutting the apex talent's proc chance risks making the spec less proc-driven and less fun even though it has seen decent Mythic+ play.",
+      "url": "https://youtu.be/4YISlhMXq5c?t=403"
+    },
+    {
+      "class": "Druid",
+      "spec": "Guardian",
+      "creator": "Dalaran Gaming",
+      "date": "2026-06-30",
+      "patchContext": "12.1 PTR",
+      "sentiment": "neutral",
+      "claim": "Guardian's old apex talent was so uncompetitive that Season 1 builds ignored it entirely, so the brand-new 12.1 guardian-spirit rework tied to Mangle, Maul and Thrash is a needed redesign — but rank 3 looks unfinished on the PTR and it will take weeks of testing to know if the new version is worth playing.",
+      "url": "https://youtu.be/4YISlhMXq5c?t=575"
+    },
+    {
+      "class": "Druid",
+      "spec": "Restoration",
+      "creator": "Dalaran Gaming",
+      "date": "2026-06-30",
+      "patchContext": "12.1 PTR",
+      "sentiment": "buff",
+      "claim": "Restoration gets the best quality-of-life pass of the Druid specs in 12.1 — mana cost cuts across core spells, a simpler self-contained Innervate, baseline defensive/knockback protection on Tranquility, and a Swiftmend/Everbloom rework — which he hopes makes Resto competitive again after Mistweaver lapped it in Season 1.",
+      "url": "https://youtu.be/4YISlhMXq5c?t=933"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Frost",
+      "creator": "Obli",
+      "date": "2026-06-29",
+      "patchContext": "12.1 PTR",
+      "sentiment": "buff",
+      "claim": "Frost DK looks overtuned on the Season 2 PTR: the shift to a dual-wield-dominated playstyle driven by the new tier set, plus major buffs to Icy Death Torrent and Remorseless Winter and stronger auto-attack damage, make it excellent in both single target and AoE.",
+      "url": "https://youtu.be/uD0TMsLA3do?t=120"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "creator": "Obli",
+      "date": "2026-06-29",
+      "patchContext": "12.1 PTR",
+      "sentiment": "nerf",
+      "claim": "He argues DK's PTR dominance is mostly the last-boss trinket (roughly 1,400 primary stat, far above other options) on top of an above-average class, expects it to be nerfed, and worries Blizzard will instead over-nerf Frost and Unholy themselves before 12.1 goes live.",
+      "url": "https://youtu.be/uD0TMsLA3do?t=188"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "creator": "Obli",
+      "date": "2026-06-29",
+      "patchContext": "12.1 PTR",
+      "sentiment": "neutral",
+      "claim": "Unholy is only slightly behind Frost on the PTR and not out of the meta in his view, but the reworked Soul Reaper now spending ghoul stacks and the 8-ghoul cap on Army of the Dead make the spec feel more rune-starved and slightly clunkier than in Season 1.",
+      "url": "https://youtu.be/uD0TMsLA3do?t=645"
+    },
+    {
+      "class": "Monk",
+      "spec": "Windwalker",
+      "creator": "Pkpawner",
+      "date": "2026-06-27",
+      "patchContext": "12.1 PTR",
+      "sentiment": "neutral",
+      "claim": "After playing every Venomous Abyss PTR boss, Pkpawner thinks the raid broadly suits Windwalker — heavy-movement fights favor its mobility and several encounters fit its damage profile — though a couple are stinkers, with the triple-boss Lost Explorers arguably its worst fight due to lost melee uptime.",
+      "url": "https://youtu.be/rXk-axP9lSU?t=449"
+    },
+    {
+      "class": "Monk",
+      "spec": "Windwalker",
+      "creator": "Pkpawner",
+      "date": "2026-06-27",
+      "patchContext": "12.1 PTR",
+      "sentiment": "neutral",
+      "claim": "He reads Shado-Pan as the stronger hero build across most of the new raid's add-heavy fights thanks to its flexible one-minute cooldowns and stomp burst for clearing add clumps, while Conduit's rigid cooldown timings force awkward delays and only shine on single-target or lineup-friendly bosses.",
+      "url": "https://youtu.be/rXk-axP9lSU?t=61"
+    },
+    {
+      "class": "Monk",
+      "spec": "Windwalker",
+      "creator": "Pkpawner",
+      "date": "2026-06-27",
+      "patchContext": "12.1 PTR",
+      "sentiment": "buff",
+      "claim": "He sees So'leah's recurring 30% damage-amp windows as a chance for Conduit Windwalker to be an exceptional pick that demolishes the boss with disciplined cooldown holding — potentially a prime Windwalker fight if spec tuning lands, reinforced by strong Detox and Transcendence utility.",
+      "url": "https://youtu.be/rXk-axP9lSU?t=309"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Arms",
+      "creator": "Critcake",
+      "date": "2026-06-25",
+      "patchContext": "12.1 PTR",
+      "sentiment": "nerf",
+      "claim": "Feels the Broadstrokes nerf from twelve to six Sweeping Strikes stacks plus a Season 2 tier set with very low single-target value means Arms will feel weak after losing the strong Season 1 set and will probably need buffs.",
+      "url": "https://youtu.be/KeHkLhvr5Z4?t=865"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Arms",
+      "creator": "Critcake",
+      "date": "2026-06-25",
+      "patchContext": "12.1 PTR",
+      "sentiment": "neutral",
+      "claim": "Is disappointed Arms rage income went unaddressed — even perfect play runs out of rage and Execute is so rage-starved that Colossus builds skip it for Slam — and argues the flat 30-second Demolish cooldown still will not sync with Colossus Smash, suggesting a two-hit combo design instead.",
+      "url": "https://youtu.be/KeHkLhvr5Z4?t=908"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Fury",
+      "creator": "Critcake",
+      "date": "2026-06-25",
+      "patchContext": "12.1 PTR",
+      "sentiment": "buff",
+      "claim": "Rates Fury's 12.1 direction positively: the Season 2 tier set is stronger than the current one even if boring, and together with the Hack and Slash rework should bring Raging Blow builds back for Slayer.",
+      "url": "https://youtu.be/KeHkLhvr5Z4?t=952"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Fury",
+      "creator": "Critcake",
+      "date": "2026-06-25",
+      "patchContext": "12.1 PTR",
+      "sentiment": "buff",
+      "claim": "Praises the Rampaging Ruin redesign for removing its single-target penalty and adding roughly four to five percent overall damage on four-target pulls in his PTR testing, making it a worthwhile Mythic+ talent point now.",
+      "url": "https://youtu.be/KeHkLhvr5Z4?t=755"
+    },
+    {
+      "class": "Druid",
+      "spec": "Balance",
+      "creator": "Tettles",
+      "date": "2026-06-23",
+      "patchContext": "12.1 PTR",
+      "sentiment": "neutral",
+      "claim": "He plans to main Balance Druid again for Midnight Season 2, ideally as both raid and Mythic+ main, because 12.1's gearing changes make maintaining separate raid and M+ characters cost roughly 2.5-3 item levels.",
+      "url": "https://youtu.be/Ecumqon_AtQ?t=677"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Augmentation",
+      "creator": "Tettles",
+      "date": "2026-06-23",
+      "patchContext": "12.0.7 live",
+      "sentiment": "neutral",
+      "claim": "He says picking Augmentation Evoker for Season 1 Mythic+ was a good meta read: the spec has been very strong all season and carried him to about 4160 rating almost entirely through pugging.",
+      "url": "https://youtu.be/Ecumqon_AtQ?t=71"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Augmentation",
+      "creator": "Kesslive",
+      "date": "2026-06-21",
+      "patchContext": "12.1 PTR",
+      "sentiment": "buff",
+      "claim": "Kesslive is a big fan of Augmentation's 12.1 two-set (Upheaval cooldown reduced by 10 seconds, stacking with Eruption-based CDR), expecting frequent quadruple Bombardments and heavy Breath of Eons cooldown reduction that he calls amazing for Mythic+.",
+      "url": "https://youtu.be/LHrpY0eiPBI?t=61"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Augmentation",
+      "creator": "Kesslive",
+      "date": "2026-06-21",
+      "patchContext": "12.1 PTR",
+      "sentiment": "neutral",
+      "claim": "He calls the reduction of duplicated Upheavals' knock-up/stopping power a fair nerf to something that was a little overpowered, and since it is the only apex-talent change so far, Augmentation's core duplication gameplay loop and power remain intact.",
+      "url": "https://youtu.be/LHrpY0eiPBI?t=308"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Devastation",
+      "creator": "Kesslive",
+      "date": "2026-06-21",
+      "patchContext": "12.1 PTR",
+      "sentiment": "nerf",
+      "claim": "He is not excited about Devastation's 12.1 tier set at all, criticizing Blizzard for once again buffing Eternity Surge through tier bonuses instead of fixing an ability that players only cast at rank one, and notes week-one PTR Devastation is even behind Preservation on single-target.",
+      "url": "https://youtu.be/LHrpY0eiPBI?t=253"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Devastation",
+      "creator": "Kesslive",
+      "date": "2026-06-21",
+      "patchContext": "12.1 PTR",
+      "sentiment": "neutral",
+      "claim": "He is cautiously optimistic about the rank-three apex rework that ends Dragonrage with casts of the new Unbound Flame (essentially Engulf returning), saying it finally gives the cooldown something to press but may feel clunky, particularly for Scalecommander, and he wanted a deeper rework of the spec's issues.",
+      "url": "https://youtu.be/LHrpY0eiPBI?t=611"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Fury",
+      "creator": "Baze",
+      "date": "2026-06-19",
+      "patchContext": "12.1 PTR",
+      "sentiment": "buff",
+      "claim": "Celebrates Rend becoming Arms-exclusive in 12.1, saying Fury has been plagued by the ability all through Midnight and is finally free of it in single target.",
+      "url": "https://youtu.be/Y4HWWunCXVg?t=43"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Arms",
+      "creator": "Baze",
+      "date": "2026-06-19",
+      "patchContext": "12.1 PTR",
+      "sentiment": "buff",
+      "claim": "Supports Demolish moving to a flat 30-second cooldown aligned with Colossus Smash since he dislikes desynced cooldowns and thinks Arms needs streamlining, calling it a step in the right direction while noting the spec still needs more work.",
+      "url": "https://youtu.be/Y4HWWunCXVg?t=297"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Fury",
+      "creator": "Baze",
+      "date": "2026-06-19",
+      "patchContext": "12.1 PTR",
+      "sentiment": "neutral",
+      "claim": "Argues the Hack and Slash rework misses Fury's real problem: Raging Blow simply does not do damage while Bloodthirst is too strong in Slayer and Thane builds, so Raging Blow needs a substantial baseline buff.",
+      "url": "https://youtu.be/Y4HWWunCXVg?t=502"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Fury",
+      "creator": "Baze",
+      "date": "2026-06-19",
+      "patchContext": "12.1 PTR",
+      "sentiment": "buff",
+      "claim": "Finds the Fury four-piece very promising — Bloodthirst raising Recklessness crit and Raging Blow extending its duration up to six seconds — and thinks Raging Blow could genuinely return if the tuning is strong enough.",
+      "url": "https://youtu.be/Y4HWWunCXVg?t=666"
+    },
+    {
+      "class": "Druid",
+      "spec": "Balance",
+      "creator": "Gamz",
+      "date": "2026-06-14",
+      "patchContext": "12.0.7 live",
+      "sentiment": "buff",
+      "claim": "His Wowhead guide argues that removing Mastery's interaction with damage-over-time effects significantly increases Balance's short-window AoE burst and priority-add damage, a structural change that opens up the playstyle.",
+      "url": "https://www.wowhead.com/guide/classes/druid/balance/overview-pve-dps"
+    },
+    {
+      "class": "Druid",
+      "spec": "Balance",
+      "creator": "Gamz",
+      "date": "2026-06-14",
+      "patchContext": "12.0.7 live",
+      "sentiment": "neutral",
+      "claim": "He rates Balance as a very good spec whenever cooldowns can be lined up with big AoE phases, with Elune's Chosen the better hero talent for single target and still the best overall option in Mythic+.",
+      "url": "https://www.wowhead.com/guide/classes/druid/balance/overview-pve-dps"
+    },
+    {
+      "class": "Mage",
+      "spec": "Fire",
+      "creator": "Preheat",
+      "date": "2026-05-23",
+      "patchContext": "12.0.7 live",
+      "sentiment": "buff",
+      "claim": "Preheat welcomes Fire's roughly 5% overall single-target buff (Pyroblast up 8%, Frostfire Bolt up 5%) as part of an overdue hero-talent tuning pass, and is switching to Frostfire Fire for his raid week because several bosses without spread cleave now look viable for it.",
+      "url": "https://youtu.be/5RsF9saA4L8?t=22"
+    },
+    {
+      "class": "Mage",
+      "spec": "Arcane",
+      "creator": "Preheat",
+      "date": "2026-05-23",
+      "patchContext": "12.0.7 live",
+      "sentiment": "buff",
+      "claim": "He notes Arcane's flat 5% buff lands on a spec whose damage-amp padding (e.g., Crown of the Cosmos' stacking amps and Touch of the Magi double-dipping) is already outsized, so its parse dominance on those fights will only grow, with Sunfury made much better.",
+      "url": "https://youtu.be/5RsF9saA4L8?t=183"
+    },
+    {
+      "class": "Mage",
+      "spec": "Frost",
+      "creator": "Preheat",
+      "date": "2026-05-23",
+      "patchContext": "12.0.7 live",
+      "sentiment": "neutral",
+      "claim": "He argues the tuning pass does not really move the needle for realistic progression: Frost's free spread cleave matches this raid's encounter design, so it remains the default pick even though all three Mage specs now sim similarly on single-target.",
+      "url": "https://youtu.be/5RsF9saA4L8?t=441"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "creator": "Shadarek",
+      "date": "2026-05-22",
+      "patchContext": "12.0.7 live",
+      "sentiment": "neutral",
+      "claim": "From reviewing player logs he argues the biggest Devourer DPS losses are cast downtime and delayed Void Rays: Void Ray outranks Collapsing Star as the highest-priority button, and playing around Voidfall stacks (roughly 12% of damage including its DoT) also feeds soul and Fury generation.",
+      "url": "https://youtu.be/CNzoPSzyEeQ?t=428"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "creator": "Bicepspump",
+      "date": "2026-05-02",
+      "patchContext": "12.0.7 live",
+      "sentiment": "nerf",
+      "claim": "The recent nerfs amount to roughly a 4-5% damage decrease for Unholy, which he considers fine: the spec was S-tier in Mythic+ and has been brought in line rather than knocked out of the meta.",
+      "url": "https://youtu.be/ChaOm-iBaqI?t=37"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "creator": "Bicepspump",
+      "date": "2026-05-02",
+      "patchContext": "12.0.7 live",
+      "sentiment": "buff",
+      "claim": "He calls Festering Scythe becoming a self-buff one of the best changes the spec has received, since it removes the multi-GCD target-swap setup and lets you press the weak-feeling Festering Strike far less often.",
+      "url": "https://youtu.be/ChaOm-iBaqI?t=376"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "creator": "Bicepspump",
+      "date": "2026-05-02",
+      "patchContext": "12.0.7 live",
+      "sentiment": "buff",
+      "claim": "The new Cycle of Death talent makes Defile-based play much smoother in his view: Defile ticks refund Putrefy cooldown, so big pulls chain extra Putrefies and Magus summons, which is where most of Unholy's AoE damage comes from.",
+      "url": "https://youtu.be/ChaOm-iBaqI?t=421"
+    }
+  ]
 }
