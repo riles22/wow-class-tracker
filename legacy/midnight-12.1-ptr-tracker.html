@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curse of Ula'tek — 12.1 PTR Spec Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     DATA vs PRESENTATION
+     All spec data lives in the SPECS[] array in the script block
+     below. To add a spec: append one object. To log a PTR change:
+     add/edit that spec's `ptr` object. Nothing here in the CSS or
+     render logic needs to change.
+     ============================================================ */
+
+  :root{
+    --bg:#0B0713; --bg-2:#130B22; --bg-3:#1B1030;
+    --edge:#2A1D45; --edge-2:#3B2A5E;
+    --ink:#EDE7F7; --ink-dim:#A99BC7; --ink-faint:#6F6390;
+    --accent:#B57BEE; --accent-2:#7FD8FF; --gold:#F0C24B;
+
+    --t-s:#F0C24B; --t-aplus:#C77DFF; --t-a:#6AA8F0; --t-b:#45C4A8; --t-c:#8A93A8;
+    --v-pos:#52C97A; --v-mix:#E0A73E; --v-neg:#E0655F;
+
+    --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
+    --disp:'Cinzel',Georgia,'Times New Roman',serif;
+    --body:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:var(--body); font-size:15px; line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--accent-2); text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  .wrap{max-width:1120px; margin:0 auto; padding:0 20px 72px}
+
+  /* ---------- header ---------- */
+  .masthead{position:relative; overflow:hidden; border-bottom:1px solid var(--edge)}
+  .starfield{position:absolute; inset:0; pointer-events:none; opacity:.7}
+  .masthead-inner{position:relative; max-width:1120px; margin:0 auto; padding:34px 20px 26px}
+  .eyebrow{
+    font-family:var(--mono); font-size:11.5px; letter-spacing:.28em; text-transform:uppercase;
+    color:var(--accent); margin:0 0 12px
+  }
+  .title{
+    font-family:var(--disp); font-weight:700; letter-spacing:.01em;
+    font-size:clamp(28px,5vw,46px); line-height:1.02; margin:0; color:#fff;
+    text-shadow:0 0 34px rgba(181,123,238,.35)
+  }
+  .title .curse{color:var(--accent)}
+  .rule{
+    height:2px; margin:20px 0 14px; border-radius:2px;
+    background:linear-gradient(90deg,transparent,var(--accent) 22%,var(--accent-2) 55%,transparent);
+    background-size:220% 100%; animation:sweep 7s linear infinite
+  }
+  @keyframes sweep{to{background-position:220% 0}}
+  .sub{color:var(--ink-dim); max-width:70ch; margin:0; font-size:14.5px}
+  .sub b{color:var(--ink); font-weight:600}
+  .stamp{
+    font-family:var(--mono); font-size:11.5px; color:var(--ink-faint);
+    margin-top:14px; display:flex; gap:8px 18px; flex-wrap:wrap
+  }
+  .stamp b{color:var(--ink-dim); font-weight:500}
+
+  /* ---------- controls ---------- */
+  .controls{
+    position:sticky; top:0; z-index:20; background:rgba(11,7,19,.86);
+    backdrop-filter:blur(10px); border-bottom:1px solid var(--edge);
+    padding:12px 0; margin-bottom:2px
+  }
+  .controls-row{
+    max-width:1120px; margin:0 auto; padding:0 20px;
+    display:flex; gap:10px 14px; align-items:center; flex-wrap:wrap
+  }
+  .seg{display:inline-flex; background:var(--bg-2); border:1px solid var(--edge); border-radius:9px; padding:3px; gap:2px}
+  .seg button{
+    font-family:var(--body); font-size:13px; font-weight:600; color:var(--ink-dim);
+    background:transparent; border:0; border-radius:6px; padding:6px 13px; cursor:pointer;
+    transition:background .15s,color .15s
+  }
+  .seg button:hover{color:var(--ink)}
+  .seg button[aria-pressed="true"]{background:var(--accent); color:#160a24}
+  .seg button:focus-visible{outline:2px solid var(--accent-2); outline-offset:2px}
+
+  .toggle{display:inline-flex; align-items:center; gap:8px; font-size:13px; color:var(--ink-dim); cursor:pointer; user-select:none}
+  .toggle input{position:absolute; opacity:0; width:1px; height:1px}
+  .switch{width:36px; height:20px; border-radius:20px; background:var(--bg-3); border:1px solid var(--edge-2); position:relative; transition:background .15s}
+  .switch::after{content:""; position:absolute; top:2px; left:2px; width:14px; height:14px; border-radius:50%; background:var(--ink-faint); transition:transform .15s,background .15s}
+  .toggle input:checked + .switch{background:color-mix(in srgb,var(--accent) 55%, transparent)}
+  .toggle input:checked + .switch::after{transform:translateX(16px); background:#fff}
+  .toggle input:focus-visible + .switch{outline:2px solid var(--accent-2); outline-offset:2px}
+
+  .grow{flex:1 1 auto}
+  .search{
+    font-family:var(--body); font-size:13px; color:var(--ink);
+    background:var(--bg-2); border:1px solid var(--edge); border-radius:8px;
+    padding:7px 11px; width:170px; transition:border-color .15s,width .15s
+  }
+  .search::placeholder{color:var(--ink-faint)}
+  .search:focus{outline:none; border-color:var(--accent); width:210px}
+  .sortsel{
+    font-family:var(--body); font-size:13px; color:var(--ink);
+    background:var(--bg-2); border:1px solid var(--edge); border-radius:8px; padding:7px 9px; cursor:pointer
+  }
+  .sortsel:focus-visible{outline:2px solid var(--accent-2); outline-offset:2px}
+  .count{font-family:var(--mono); font-size:11.5px; color:var(--ink-faint); white-space:nowrap}
+  .lbl{font-family:var(--mono); font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-faint); margin-right:-6px}
+
+  /* ---------- legend ---------- */
+  .legend{
+    display:flex; gap:10px 22px; flex-wrap:wrap; align-items:center;
+    padding:14px 0 6px; font-size:12px; color:var(--ink-faint)
+  }
+  .legend .grp{display:flex; gap:9px; align-items:center; flex-wrap:wrap}
+  .legend .note{max-width:52ch; line-height:1.45}
+
+  /* ---------- tier + verdict badges ---------- */
+  .tier{
+    font-family:var(--mono); font-weight:700; font-size:12.5px; letter-spacing:.02em;
+    display:inline-flex; align-items:center; justify-content:center; min-width:30px; height:24px;
+    padding:0 7px; border-radius:6px; border:1px solid transparent
+  }
+  .tier[data-t="S"]  {color:var(--t-s);     background:color-mix(in srgb,var(--t-s) 15%,transparent);     border-color:color-mix(in srgb,var(--t-s) 42%,transparent)}
+  .tier[data-t="A+"] {color:var(--t-aplus); background:color-mix(in srgb,var(--t-aplus) 15%,transparent); border-color:color-mix(in srgb,var(--t-aplus) 42%,transparent)}
+  .tier[data-t="A"]  {color:var(--t-a);     background:color-mix(in srgb,var(--t-a) 15%,transparent);     border-color:color-mix(in srgb,var(--t-a) 42%,transparent)}
+  .tier[data-t="B"]  {color:var(--t-b);     background:color-mix(in srgb,var(--t-b) 15%,transparent);     border-color:color-mix(in srgb,var(--t-b) 42%,transparent)}
+  .tier[data-t="C"]  {color:var(--t-c);     background:color-mix(in srgb,var(--t-c) 15%,transparent);     border-color:color-mix(in srgb,var(--t-c) 42%,transparent)}
+  .tier[data-t="—"]  {color:var(--ink-faint); background:transparent; border-color:var(--edge); min-width:30px}
+
+  .verdict{font-family:var(--mono); font-size:11.5px; font-weight:500; display:inline-flex; align-items:center; gap:6px; white-space:nowrap}
+  .dot{width:8px; height:8px; border-radius:50%; flex:none; box-shadow:0 0 8px currentColor}
+  .verdict[data-v="Positive"]{color:var(--v-pos)}
+  .verdict[data-v="Mixed"]   {color:var(--v-mix)}
+  .verdict[data-v="Negative"]{color:var(--v-neg)}
+  .verdict[data-v="—"]{color:var(--ink-faint)}
+  .verdict[data-v="—"] .dot{background:var(--edge-2); box-shadow:none}
+
+  /* ---------- matrix ---------- */
+  .matrix{margin-top:6px; border:1px solid var(--edge); border-radius:12px; overflow:hidden; background:var(--bg-2)}
+  .head, .row{
+    display:grid;
+    grid-template-columns:minmax(150px,1.7fr) 1fr .7fr 52px 52px minmax(120px,1.25fr) 26px;
+    align-items:center; gap:12px; padding:11px 16px
+  }
+  .head{
+    font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--ink-faint); background:var(--bg-3); border-bottom:1px solid var(--edge); position:sticky; top:0
+  }
+  .grouphdr{
+    grid-column:1/-1; font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--accent); padding:10px 16px 6px; background:linear-gradient(90deg,color-mix(in srgb,var(--accent) 9%,transparent),transparent)
+  }
+  .row{border-bottom:1px solid var(--edge); transition:background .12s}
+  .row:last-child{border-bottom:0}
+  .row.clickable{cursor:pointer}
+  .row.clickable:hover{background:var(--bg-3)}
+  .row:focus-visible{outline:2px solid var(--accent-2); outline-offset:-2px}
+  .spec-name{display:flex; align-items:center; gap:10px; min-width:0}
+  .cbar{width:3px; height:20px; border-radius:3px; flex:none}
+  .spec-txt{font-weight:600; color:var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+  .cls{font-family:var(--mono); font-size:12.5px; color:var(--ink-dim); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+  .role{font-size:12px; color:var(--ink-faint)}
+  .role .rolechip{font-family:var(--mono); font-size:10.5px; letter-spacing:.08em; padding:2px 7px; border-radius:5px; border:1px solid var(--edge-2); color:var(--ink-dim)}
+  .chev{justify-self:end; color:var(--ink-faint); transition:transform .18s,color .15s; font-size:12px}
+  .row.open .chev{transform:rotate(90deg); color:var(--accent)}
+  .row.clickable:hover .chev{color:var(--accent)}
+
+  /* ---------- expand drawer ---------- */
+  .drawer{grid-column:1/-1; overflow:hidden; max-height:0; transition:max-height .28s ease}
+  .drawer-in{padding:4px 2px 14px 16px}
+  .drawer-grid{display:grid; grid-template-columns:1fr; gap:14px; border-left:2px solid var(--accent); padding:12px 0 4px 16px; margin-top:2px}
+  @media(min-width:760px){ .drawer-grid{grid-template-columns:1.35fr 1fr} }
+  .d-summary{color:var(--ink-dim); font-size:14px; margin:0 0 10px}
+  .d-summary .theme{
+    display:inline-block; font-family:var(--mono); font-size:10.5px; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--accent-2); border:1px solid var(--edge-2); border-radius:5px; padding:2px 8px; margin-bottom:9px
+  }
+  .d-h{font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-faint); margin:0 0 7px}
+  .d-list{margin:0 0 12px; padding:0; list-style:none}
+  .d-list li{position:relative; padding-left:16px; margin-bottom:5px; font-size:13.5px; color:var(--ink)}
+  .d-list li::before{content:"›"; position:absolute; left:2px; color:var(--accent); font-weight:700}
+  .setbox{background:var(--bg); border:1px solid var(--edge); border-radius:9px; padding:11px 13px}
+  .setrow{display:flex; gap:10px; font-size:13px; margin-bottom:8px}
+  .setrow:last-child{margin-bottom:0}
+  .setrow .pc{font-family:var(--mono); font-weight:700; font-size:11px; color:var(--gold); border:1px solid color-mix(in srgb,var(--gold) 40%,transparent); border-radius:5px; padding:2px 6px; height:fit-content; white-space:nowrap}
+  .setrow .pct{color:var(--ink-dim)}
+  .watch{margin-top:12px; font-size:13px; color:var(--ink-dim); background:color-mix(in srgb,var(--v-mix) 8%,transparent); border:1px solid color-mix(in srgb,var(--v-mix) 26%,transparent); border-radius:8px; padding:9px 12px}
+  .watch b{font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--v-mix); display:block; margin-bottom:3px}
+  .empty{padding:34px 16px; text-align:center; color:var(--ink-faint); font-size:14px}
+
+  /* ---------- footer ---------- */
+  footer{margin-top:30px; border-top:1px solid var(--edge); padding-top:22px; color:var(--ink-faint); font-size:13px}
+  .foot-grid{display:grid; grid-template-columns:1fr; gap:22px}
+  @media(min-width:720px){ .foot-grid{grid-template-columns:1.1fr .9fr} }
+  .foot-h{font-family:var(--mono); font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); margin:0 0 11px}
+  .srclist{margin:0; padding:0; list-style:none; font-family:var(--mono); font-size:12px}
+  .srclist li, .srcitem{display:flex; justify-content:space-between; gap:12px; padding:5px 0; border-bottom:1px dashed var(--edge)}
+  .srcitem .when{color:var(--ink-dim)}
+  .live{display:flex; gap:8px; flex-wrap:wrap; margin-top:2px}
+  .live a{font-family:var(--mono); font-size:12px; background:var(--bg-2); border:1px solid var(--edge); border-radius:7px; padding:6px 11px; color:var(--accent-2)}
+  .live a:hover{border-color:var(--accent-2); text-decoration:none}
+  .fine{margin-top:20px; font-size:12px; line-height:1.6; color:var(--ink-faint); max-width:88ch}
+  .fine code{font-family:var(--mono); background:var(--bg-2); border:1px solid var(--edge); border-radius:4px; padding:1px 6px; color:var(--ink-dim); font-size:11.5px}
+
+  /* ---------- mobile matrix -> cards ---------- */
+  @media(max-width:759px){
+    .head{display:none}
+    .row{
+      grid-template-columns:1fr auto; grid-auto-rows:min-content;
+      row-gap:9px; padding:13px 15px
+    }
+    .spec-name{grid-column:1; grid-row:1}
+    .chev{grid-column:2; grid-row:1; align-self:center}
+    .cls{grid-column:1/-1; grid-row:2; font-size:12px}
+    .cls::before{content:"Class · "; color:var(--ink-faint)}
+    .role{grid-column:1/-1; grid-row:3; order:0}
+    .metaline{grid-column:1/-1; grid-row:4; display:flex; gap:8px; align-items:center; flex-wrap:wrap}
+    .metaline .mtag{font-family:var(--mono); font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-faint)}
+  }
+  .metaline{display:contents}
+  @media(max-width:759px){ .metaline{display:flex} }
+
+  @media(prefers-reduced-motion:reduce){
+    .rule{animation:none}
+    .drawer,.chev,.row{transition:none}
+    .starfield{display:none}
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <canvas class="starfield" id="stars" aria-hidden="true"></canvas>
+  <div class="masthead-inner">
+    <p class="eyebrow">WoW Midnight · Patch 12.1 PTR</p>
+    <h1 class="title"><span class="curse">Curse of Ula'tek</span> — Spec Tracker</h1>
+    <div class="rule"></div>
+    <p class="sub">Live tracker for <b>Patch 12.1 PTR</b> class &amp; tier-set changes, laid over each spec's current <b>12.0.7 / Season 1</b> baseline so you can see where every spec is coming <i>from</i> as the changes land. Filter by role to compare Raid vs M+ like-for-like; click any PTR-tracked row for the full change read.</p>
+    <div class="stamp">
+      <span><b>Baseline:</b> 12.0.7 / Season 1</span>
+      <span><b>PTR:</b> 12.1 “Curse of Ula'tek”</span>
+      <span><b>Baseline source:</b> Icy Veins tier lists</span>
+      <span><b>Snapshot:</b> Jun 15, 2026</span>
+      <span id="ptrcount"></span>
+    </div>
+  </div>
+</header>
+
+<div class="controls">
+  <div class="controls-row">
+    <span class="lbl">Role</span>
+    <div class="seg" id="roleseg" role="group" aria-label="Filter by role">
+      <button data-role="All" aria-pressed="true">All</button>
+      <button data-role="DPS" aria-pressed="false">DPS</button>
+      <button data-role="Healer" aria-pressed="false">Healer</button>
+      <button data-role="Tank" aria-pressed="false">Tank</button>
+    </div>
+    <label class="toggle">
+      <input type="checkbox" id="ptronly">
+      <span class="switch"></span>
+      <span>PTR-tracked only</span>
+    </label>
+    <span class="grow"></span>
+    <label class="lbl" for="sortsel" style="margin-right:2px">Sort</label>
+    <select class="sortsel" id="sortsel" aria-label="Sort specs">
+      <option value="class">Class</option>
+      <option value="spec">Spec A–Z</option>
+      <option value="raid">Raid tier</option>
+      <option value="mplus">M+ tier</option>
+      <option value="ptr">PTR verdict</option>
+    </select>
+    <input class="search" id="search" type="search" placeholder="Search spec…" aria-label="Search spec or class">
+    <span class="count" id="count"></span>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="legend">
+    <div class="grp">
+      <span class="lbl" style="margin:0">Tiers</span>
+      <span class="tier" data-t="S">S</span>
+      <span class="tier" data-t="A+">A+</span>
+      <span class="tier" data-t="A">A</span>
+      <span class="tier" data-t="B">B</span>
+      <span class="tier" data-t="C">C</span>
+    </div>
+    <div class="grp">
+      <span class="lbl" style="margin:0">PTR read</span>
+      <span class="verdict" data-v="Positive"><span class="dot"></span>Positive</span>
+      <span class="verdict" data-v="Mixed"><span class="dot"></span>Mixed</span>
+      <span class="verdict" data-v="Negative"><span class="dot"></span>Negative</span>
+    </div>
+    <span class="note">Tiers are <b>within role</b> — a healer's S is best among healers, not across the whole game. Filter by role to keep the Raid / M+ columns comparable.</span>
+  </div>
+
+  <div class="matrix" id="matrix"></div>
+
+  <footer>
+    <div class="foot-grid">
+      <div>
+        <p class="foot-h">Baseline sources &amp; snapshot dates</p>
+        <div class="srclist" id="srclist"></div>
+      </div>
+      <div>
+        <p class="foot-h">Refresh with live logs</p>
+        <div class="live">
+          <a href="https://www.archon.gg/wow" target="_blank" rel="noopener">archon.gg</a>
+          <a href="https://murlok.io/meta/dps/m+" target="_blank" rel="noopener">murlok.io</a>
+          <a href="https://u.gg/wow/tier-list" target="_blank" rel="noopener">u.gg</a>
+          <a href="https://www.warcraftlogs.com/" target="_blank" rel="noopener">warcraftlogs</a>
+          <a href="https://www.icy-veins.com/wow/tier-lists" target="_blank" rel="noopener">icy-veins</a>
+        </div>
+        <p class="fine" style="margin-top:16px">
+          The tier columns are a dated Icy Veins snapshot — a starting reference, not a live feed. For the freshest read during progression, cross-check the log dashboards above.
+        </p>
+      </div>
+    </div>
+    <p class="fine">
+      <b style="color:var(--ink-dim)">Maintaining this:</b> everything is driven by the <code>SPECS</code> array at the top of the script. To add a spec, append one object with its <code>raidTier</code> / <code>mplusTier</code>. To log a PTR change, fill in that spec's <code>ptr</code> object (<code>verdict</code>, <code>summary</code>, <code>changes[]</code>, <code>set2</code>, <code>set4</code>, <code>watch</code>). Snapshot dates live in the <code>SOURCES</code> object. No markup or render code needs touching — self-contained, no external dependencies beyond the web fonts, safe to drop into SharePoint.
+    </p>
+  </footer>
+</div>
+
+<script>
+/* ================================================================
+   SOURCES — baseline snapshot metadata (edit dates on refresh)
+   ================================================================ */
+const SOURCES = [
+  { label:"Raid · DPS",    date:"May 19, 2026", url:"https://www.icy-veins.com/wow/dps-rankings-tier-list" },
+  { label:"Raid · Healer", date:"Apr 24, 2026", url:"https://www.icy-veins.com/wow/healer-rankings-tier-list" },
+  { label:"Raid · Tank",   date:"Jun 15, 2026", url:"https://www.icy-veins.com/wow/tank-rankings-tier-list" },
+  { label:"M+ · DPS",      date:"Jun 15, 2026", url:"https://www.icy-veins.com/wow/mythic-dps-tier-list" },
+  { label:"M+ · Healer",   date:"May 19, 2026", url:"https://www.icy-veins.com/wow/mythic-healer-tier-list" },
+  { label:"M+ · Tank",     date:"Jun 15, 2026", url:"https://www.icy-veins.com/wow/mythic-tank-tier-list" },
+];
+
+/* Standard class colors */
+const CLASS_COLOR = {
+  "Death Knight":"#C41E3A","Demon Hunter":"#A330C9","Druid":"#FF7C0A","Evoker":"#33937F",
+  "Hunter":"#AAD372","Mage":"#3FC7EB","Monk":"#00FF98","Paladin":"#F48CBA","Priest":"#E9E9E9",
+  "Rogue":"#FFF468","Shaman":"#0070DD","Warlock":"#8788EE","Warrior":"#C69B6D"
+};
+const CLASS_ORDER = Object.keys(CLASS_COLOR);
+
+/* ================================================================
+   SPECS — the single source of truth.
+   role: "DPS" | "Healer" | "Tank"   (tiers are within-role)
+   raidTier / mplusTier: "S" | "A+" | "A" | "B" | "C" | "—"
+   ptr: null, OR an object logging the 12.1 PTR writeup:
+        { verdict:"Positive|Mixed|Negative", theme:"…", summary:"…",
+          changes:[…], set2:"…", set4:"…", watch:"…" }
+   ================================================================ */
+const SPECS = [
+  /* ---------------- DEATH KNIGHT ---------------- */
+  { cls:"Death Knight", spec:"Blood",  role:"Tank", raidTier:"B",  mplusTier:"C",  ptr:null },
+  { cls:"Death Knight", spec:"Frost",  role:"DPS",  raidTier:"S",  mplusTier:"A",  ptr:null },
+  { cls:"Death Knight", spec:"Unholy", role:"DPS",  raidTier:"A+", mplusTier:"S",  ptr:null },
+
+  /* ---------------- DEMON HUNTER ---------------- */
+  { cls:"Demon Hunter", spec:"Havoc",    role:"DPS",  raidTier:"B",  mplusTier:"A+", ptr:null },
+  { cls:"Demon Hunter", spec:"Devourer", role:"DPS",  raidTier:"A+", mplusTier:"S",  ptr:null },
+  { cls:"Demon Hunter", spec:"Vengeance", role:"Tank", raidTier:"C", mplusTier:"A",
+    ptr:{ verdict:"Negative", theme:"Housekeeping + Sigil reshuffle",
+      summary:"Mostly housekeeping paired with a Sigil reshuffle that leaves Vengeance with arguably the least crowd-control it has ever had. The tier set brings no tanking value.",
+      changes:[
+        "Sigil layout reshuffled; net loss of control tools.",
+        "General numbers/housekeeping pass, no identity change.",
+        "No new defensive or throughput hook to change how it plays."
+      ],
+      set2:"Offensive-leaning bonus with no meaningful tank utility.",
+      set4:"Does nothing to address the raid case — effectively worthless as a tank set.",
+      watch:"Baseline is raid-C / M+-A — great in keys, benched in raid. The set does nothing to fix the raid-desirability problem, and Havoc/Devourer cover the DH utility a raid would want." } },
+
+  /* ---------------- DRUID ---------------- */
+  { cls:"Druid", spec:"Balance", role:"DPS", raidTier:"B", mplusTier:"A",
+    ptr:{ verdict:"Mixed", theme:"Touch the Cosmos nerf",
+      summary:"The pass centers on reining in Touch the Cosmos, with Lunar Calling dropping from 120% to 100%. The tier set (Bark of the Enigmatic Dreamwatcher) reinforces the existing playstyle rather than reshaping it.",
+      changes:[
+        "Lunar Calling 120% → 100%.",
+        "Touch the Cosmos proc value pulled back — the central lever.",
+        "A tuning pass, not a redesign — how the spec plays is unchanged."
+      ],
+      set2:"Feeds the current Eclipse / Astral flow.",
+      set4:"Reinforces the existing rotation without adding a new decision.",
+      watch:"Net power shift is the whole story here; nothing changes about the moment-to-moment. Lukewarm." } },
+  { cls:"Druid", spec:"Feral",   role:"DPS",    raidTier:"C", mplusTier:"A+", ptr:null },
+  { cls:"Druid", spec:"Guardian", role:"Tank",  raidTier:"S", mplusTier:"S",  ptr:null },
+  { cls:"Druid", spec:"Restoration", role:"Healer", raidTier:"S", mplusTier:"S", ptr:null },
+
+  /* ---------------- EVOKER ---------------- */
+  { cls:"Evoker", spec:"Augmentation", role:"DPS", raidTier:"A", mplusTier:"S", ptr:null },
+  { cls:"Evoker", spec:"Devastation",  role:"DPS", raidTier:"B", mplusTier:"C",
+    ptr:{ verdict:"Positive", theme:"Apex redesign → Unbound Flame",
+      summary:"The Apex talent is redesigned into Unbound Flame (a sub-5% damage shift), leaving the rotation largely intact. The tier set is a genuine success, buffing Shattering Star passively.",
+      changes:[
+        "Apex reworked into Unbound Flame — under 5% of damage, low disruption.",
+        "Core rotation stays familiar; this is a refinement, not an overhaul."
+      ],
+      set2:"Clean, passive value.",
+      set4:"Buffs Shattering Star without adding button bloat — one of the better-designed sets.",
+      watch:"The set is good, but a raid-B / M+-C baseline means tuning still has to do the heavy lifting; a well-designed set alone won't move it." } },
+  { cls:"Evoker", spec:"Preservation", role:"Healer", raidTier:"A", mplusTier:"B",
+    ptr:{ verdict:"Positive", theme:"Dream Breath rework",
+      summary:"Dream Breath is reworked for a net ~+10%, pushed into the HoT portion, and Flameshaper ascends as the hero tree of choice. The first clearly-positive verdict in the series, with a strong 2pc.",
+      changes:[
+        "Dream Breath net ~+10%, shifted toward the heal-over-time.",
+        "Flameshaper pulls ahead as the preferred hero tree.",
+        "Rewards the ramp/HoT playstyle Prevoker already leans on."
+      ],
+      set2:"Strong on its own — immediately felt.",
+      set4:"Complements the Dream Breath change and the Flameshaper direction.",
+      watch:"Baseline is raid-A / M+-B; the changes clearly help the raid profile most. The best-received set + kit pass of the tracked healers." } },
+
+  /* ---------------- HUNTER ---------------- */
+  { cls:"Hunter", spec:"Beast Mastery", role:"DPS", raidTier:"B",  mplusTier:"A+", ptr:null },
+  { cls:"Hunter", spec:"Marksmanship", role:"DPS",  raidTier:"A+", mplusTier:"C",  ptr:null },
+  { cls:"Hunter", spec:"Survival", role:"DPS",      raidTier:"S",  mplusTier:"A+",
+    ptr:{ verdict:"Mixed", theme:"Primal Surge moved off capstone",
+      summary:"Primal Surge is relocated up out of the capstone slot, and a new Razor Edge node appears as a suspicious-looking 2-point filler. The tier set is fully passive and misses every stated Blizzard tier-set goal.",
+      changes:[
+        "Primal Surge moved up from the capstone position.",
+        "New Razor Edge node — reads like a 2-point tax rather than a real choice.",
+        "Kit changes don't add interactivity."
+      ],
+      set2:"Passive throughput, no gameplay hook.",
+      set4:"Also passive — misses all of Blizzard's own goals for the set (no rotational change, no new decision).",
+      watch:"Baseline is strong (raid-S), so this won't tank the spec — but the set is a wasted opportunity to make it more engaging." } },
+
+  /* ---------------- MAGE ---------------- */
+  { cls:"Mage", spec:"Arcane", role:"DPS", raidTier:"C",  mplusTier:"B", ptr:null },
+  { cls:"Mage", spec:"Fire",   role:"DPS", raidTier:"C",  mplusTier:"C",
+    ptr:{ verdict:"Mixed", theme:"Combustion → filler shift",
+      summary:"Power is shifted out of Combustion and into filler, a change that lives or dies on tuning. The Pyroclasm-centric tier set likely feels worse to play than what's live.",
+      changes:[
+        "Damage moved from Combustion windows into filler — smoother, less bursty.",
+        "Heavily tuning-dependent; the direction is fine, the numbers decide it.",
+        "Built around Pyroclasm."
+      ],
+      set2:"Ties into the Pyroclasm package.",
+      set4:"Likely feels worse than the current set for most players.",
+      watch:"Spread-cleave weakness persists, and the baseline is already raid-C / M+-C. The shift doesn't address the spec's actual problem areas." } },
+  { cls:"Mage", spec:"Frost", role:"DPS",  raidTier:"A+", mplusTier:"A", ptr:null },
+
+  /* ---------------- MONK ---------------- */
+  { cls:"Monk", spec:"Brewmaster", role:"Tank", raidTier:"A", mplusTier:"A+", ptr:null },
+  { cls:"Monk", spec:"Mistweaver", role:"Healer", raidTier:"S", mplusTier:"S",
+    ptr:{ verdict:"Positive", theme:"Damage→heal conversion cut, Jadefire buff",
+      summary:"A ~30% cut to the damage-to-healing conversion on Spinning Crane Kick / Way of the Crane, offset by a Jadefire buff. The author is positive overall, though hero-tree balance goes untouched.",
+      changes:[
+        "Damage→heal conversion cut ~30% (SCK / Way of the Crane).",
+        "Spinning Crane Kick's effective target threshold shifts ~3 → 8.",
+        "Jadefire buffed to compensate for the conversion loss."
+      ],
+      set2:"Supports the Jadefire-forward direction.",
+      set4:"Leans into the retuned kit.",
+      watch:"Hero-tree balance (Conduit of the Celestials clearly over Master of Harmony) is left unaddressed. Baseline is already dominant — raid-S / M+-S." } },
+  { cls:"Monk", spec:"Windwalker", role:"DPS", raidTier:"A+", mplusTier:"A",
+    ptr:{ verdict:"Mixed", theme:"Burst redistributed into sustained",
+      summary:"Cooldown burst is shaved and funneled into sustained damage for a net gain of only ~1–2%. The real complaint — survivability — is not addressed at all.",
+      changes:[
+        "Burst pulled out of cooldowns, redistributed into sustained.",
+        "Net damage change is small, roughly +1–2%.",
+        "Playstyle feel is slightly smoother but fundamentally the same."
+      ],
+      set2:"Minor throughput.",
+      set4:"Reinforces the sustained-damage shift.",
+      watch:"WarcraftLogs survivability sits near dead-last (≈37–40 of 40) and none of that is touched — the actual reason WW gets cut from rosters." } },
+
+  /* ---------------- PALADIN ---------------- */
+  { cls:"Paladin", spec:"Holy", role:"Healer", raidTier:"B", mplusTier:"A", ptr:null },
+  { cls:"Paladin", spec:"Protection", role:"Tank", raidTier:"B", mplusTier:"A", ptr:null },
+  { cls:"Paladin", spec:"Retribution", role:"DPS", raidTier:"B", mplusTier:"A+", ptr:null },
+
+  /* ---------------- PRIEST ---------------- */
+  { cls:"Priest", spec:"Discipline", role:"Healer", raidTier:"S", mplusTier:"A", ptr:null },
+  { cls:"Priest", spec:"Holy", role:"Healer", raidTier:"B", mplusTier:"—", ptr:null },
+  { cls:"Priest", spec:"Shadow", role:"DPS", raidTier:"A+", mplusTier:"A+",
+    ptr:{ verdict:"Mixed", theme:"Voidform / Void Volley charge rework",
+      summary:"The Voidform and Void Volley charge rework is praised as a real improvement, but Shadeburst's AoE is too weak and the tier set is a complete non-starter.",
+      changes:[
+        "Voidform + Void Volley reworked around charges — well received.",
+        "Shadeburst AoE lands too soft to matter.",
+        "Rotation gains flexibility from the charge system."
+      ],
+      set2:"Underwhelming.",
+      set4:"A complete non-starter — doesn't reward anything the spec wants to do.",
+      watch:"Strong baseline (raid-A+ / M+-A+) means the whiffed set stings less than it would on a weaker spec." } },
+
+  /* ---------------- ROGUE ---------------- */
+  { cls:"Rogue", spec:"Assassination", role:"DPS", raidTier:"B", mplusTier:"A", ptr:null },
+  { cls:"Rogue", spec:"Outlaw", role:"DPS", raidTier:"A", mplusTier:"A+",
+    ptr:{ verdict:"Positive", theme:"Killing Spree +60%, 4pc adds a rotational hook",
+      summary:"Baseline changes improve flow and cooldown economy — Killing Spree +60%, Fast Action promoted to a core talent — and the 4pc is called \"incredible\". The big warning: all three Rogue specs, Outlaw especially, struggle on 2–4 target raid fights.",
+      changes:[
+        "Killing Spree damage +60% — finally worth pressing; likely locks in Trickster again.",
+        "Fast Action buffed: Between the Eyes CD −8s (was −5s), +1% damage per BtE stack — now a core pick.",
+        "New talent connectors (Ruthlessness ↔ Find an Opening; Flickering Steel ↔ Grand Melee).",
+        "Zero In (3%→2%) and Hidden Opportunity (Ambush proc 80%→100%) tweaks miss their stated mark."
+      ],
+      set2:"Dispatch damage +15% — does very little on its own.",
+      set4:"Sinister Strike / Ambush have a 12% chance to make the next Dispatch free at max combo points — adds a track-and-react hook and eases energy income. Currently bugged with Gravedigger, Hand of Fate coins, and Ruthlessness.",
+      watch:"Loss of the Precise Cuts era of cleave has turned Outlaw from a 2–4 target monster into \"borderline unplayable\" on those fights — and the upcoming raid has several 2–3 target encounters. Same trap hits all Rogues." } },
+  { cls:"Rogue", spec:"Subtlety", role:"DPS", raidTier:"A", mplusTier:"A",
+    ptr:{ verdict:"Negative", theme:"Straight nerfs + placeholder set",
+      summary:"A straightforward nerf pass — Shadowcraft takes a real ~40–50% reduction — with a tier set that reads as a placeholder, doing little but empowering Backstab. The most negative writeup of the batch.",
+      changes:[
+        "Shadowcraft cut ~40–50% in real terms.",
+        "General downward tuning with no compensating gameplay change.",
+        "Nothing added to offset the losses."
+      ],
+      set2:"Placeholder-tier value.",
+      set4:"Essentially just pushes more Backstab — no new decision or identity.",
+      watch:"Comes into 12.1 at raid-A / M+-A, so it's nerfing from a fine spot — but the set is the least inspired of the tracked Rogues." } },
+
+  /* ---------------- SHAMAN ---------------- */
+  { cls:"Shaman", spec:"Elemental", role:"DPS", raidTier:"B", mplusTier:"A+", ptr:null },
+  { cls:"Shaman", spec:"Enhancement", role:"DPS", raidTier:"A", mplusTier:"A+", ptr:null },
+  { cls:"Shaman", spec:"Restoration", role:"Healer", raidTier:"B", mplusTier:"A",
+    ptr:{ verdict:"Negative", theme:"Only Farseer touched (Healing Rain rework)",
+      summary:"The only changes are to Farseer, via a Healing Rain rework; the other hero tree is untouched. The tier set is praised as thematic but is overshadowed, and the author flatly calls Resto Shaman the weakest raid healer in the game.",
+      changes:[
+        "Farseer Healing Rain reworked — the sole meaningful change.",
+        "The other hero tree gets nothing.",
+        "Baseline throughput problems remain unaddressed."
+      ],
+      set2:"Thematic and pleasant, but low-impact.",
+      set4:"Overshadowed by stronger healer sets this season.",
+      watch:"Author's verdict: weakest raid healer in the game right now. Baseline raid-B / M+-A — the M+ side carries it; the raid side is the concern the changes don't fix." } },
+
+  /* ---------------- WARLOCK ---------------- */
+  { cls:"Warlock", spec:"Affliction", role:"DPS", raidTier:"A",  mplusTier:"B", ptr:null },
+  { cls:"Warlock", spec:"Demonology", role:"DPS", raidTier:"S",  mplusTier:"A", ptr:null },
+  { cls:"Warlock", spec:"Destruction", role:"DPS", raidTier:"A+", mplusTier:"B", ptr:null },
+
+  /* ---------------- WARRIOR ---------------- */
+  { cls:"Warrior", spec:"Arms", role:"DPS", raidTier:"A", mplusTier:"A+", ptr:null },
+  { cls:"Warrior", spec:"Fury", role:"DPS", raidTier:"A", mplusTier:"A",  ptr:null },
+  { cls:"Warrior", spec:"Protection", role:"Tank", raidTier:"S", mplusTier:"B", ptr:null },
+];
+
+/* ================================================================
+   RENDER LOGIC  (reads SPECS + SOURCES; nothing spec-specific)
+   ================================================================ */
+const TIER_RANK = { "S":0, "A+":1, "A":2, "B":3, "C":4, "—":5 };
+const VERDICT_RANK = { "Positive":0, "Mixed":1, "Negative":2, "—":3 };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+const state = { role:"All", ptrOnly:false, sort:"class", q:"" };
+const matrix = document.getElementById('matrix');
+
+function tierEl(t){ return `<span class="tier" data-t="${esc(t)}" title="${esc(t)} tier">${esc(t)}</span>`; }
+function verdictEl(p){
+  const v = p ? p.verdict : "—";
+  const txt = p ? p.verdict : "—";
+  return `<span class="verdict" data-v="${esc(v)}"><span class="dot"></span>${esc(txt)}</span>`;
+}
+
+function drawerHTML(s){
+  const p = s.ptr;
+  const changes = (p.changes||[]).map(c=>`<li>${esc(c)}</li>`).join("");
+  return `
+   <div class="drawer"><div class="drawer-in"><div class="drawer-grid">
+     <div>
+       <p class="d-summary">${p.theme?`<span class="theme">${esc(p.theme)}</span><br>`:""}${esc(p.summary)}</p>
+       <p class="d-h">Key changes</p>
+       <ul class="d-list">${changes}</ul>
+     </div>
+     <div>
+       <p class="d-h">Season 2 tier set</p>
+       <div class="setbox">
+         <div class="setrow"><span class="pc">2&nbsp;pc</span><span class="pct">${esc(p.set2||"—")}</span></div>
+         <div class="setrow"><span class="pc">4&nbsp;pc</span><span class="pct">${esc(p.set4||"—")}</span></div>
+       </div>
+       ${p.watch?`<div class="watch"><b>Watch</b>${esc(p.watch)}</div>`:""}
+     </div>
+   </div></div></div>`;
+}
+
+function rowHTML(s, idx){
+  const color = CLASS_COLOR[s.cls] || "#888";
+  const hasPtr = !!s.ptr;
+  return `
+   <div class="row ${hasPtr?'clickable':''} ${hasPtr?'has-ptr':''}" data-idx="${idx}"
+        ${hasPtr?`role="button" tabindex="0" aria-expanded="false"`:``}>
+     <div class="spec-name">
+       <span class="cbar" style="background:${color}"></span>
+       <span class="spec-txt">${esc(s.spec)}</span>
+     </div>
+     <div class="cls" style="color:${color}">${esc(s.cls)}</div>
+     <div class="role"><span class="rolechip">${esc(s.role)}</span></div>
+     <div class="metaline">
+       <span class="mtag">Raid</span>${tierEl(s.raidTier)}
+       <span class="mtag">M+</span>${tierEl(s.mplusTier)}
+     </div>
+     ${hasPtr?verdictEl(s.ptr):`<div class="verdict" data-v="—"><span class="dot"></span>—</div>`}
+     <span class="chev">${hasPtr?'▸':''}</span>
+     ${hasPtr?drawerHTML(s):''}
+   </div>`;
+}
+
+function passFilters(s){
+  if(state.role!=="All" && s.role!==state.role) return false;
+  if(state.ptrOnly && !s.ptr) return false;
+  if(state.q){
+    const q = state.q.toLowerCase();
+    if(!(s.spec.toLowerCase().includes(q) || s.cls.toLowerCase().includes(q))) return false;
+  }
+  return true;
+}
+
+function sortList(list){
+  const by = state.sort;
+  const arr = list.slice();
+  if(by==="class"){
+    arr.sort((a,b)=> CLASS_ORDER.indexOf(a.cls)-CLASS_ORDER.indexOf(b.cls) || a.spec.localeCompare(b.spec));
+  } else if(by==="spec"){
+    arr.sort((a,b)=> a.spec.localeCompare(b.spec) || a.cls.localeCompare(b.cls));
+  } else if(by==="raid"){
+    arr.sort((a,b)=> TIER_RANK[a.raidTier]-TIER_RANK[b.raidTier] || a.cls.localeCompare(b.cls) || a.spec.localeCompare(b.spec));
+  } else if(by==="mplus"){
+    arr.sort((a,b)=> TIER_RANK[a.mplusTier]-TIER_RANK[b.mplusTier] || a.cls.localeCompare(b.cls) || a.spec.localeCompare(b.spec));
+  } else if(by==="ptr"){
+    arr.sort((a,b)=> VERDICT_RANK[a.ptr?a.ptr.verdict:"—"]-VERDICT_RANK[b.ptr?b.ptr.verdict:"—"] || a.cls.localeCompare(b.cls) || a.spec.localeCompare(b.spec));
+  }
+  return arr;
+}
+
+function render(){
+  const filtered = SPECS.map((s,i)=>({s,i})).filter(o=>passFilters(o.s));
+  const ordered = sortList(filtered.map(o=>o.s));
+  const idxOf = new Map(SPECS.map((s,i)=>[s,i]));
+
+  let html = `<div class="head">
+      <div>Spec</div><div>Class</div><div>Role</div>
+      <div style="grid-column:span 2">Raid&nbsp;·&nbsp;M+</div><div>12.1 PTR</div><div></div>
+    </div>`;
+
+  if(ordered.length===0){
+    html += `<div class="empty">No specs match these filters.</div>`;
+  } else if(state.sort==="class"){
+    let cur=null;
+    ordered.forEach(s=>{
+      if(s.cls!==cur){ cur=s.cls; html += `<div class="grouphdr">${esc(cur)}</div>`; }
+      html += rowHTML(s, idxOf.get(s));
+    });
+  } else {
+    ordered.forEach(s=> html += rowHTML(s, idxOf.get(s)) );
+  }
+
+  matrix.innerHTML = html;
+  const shown = ordered.length, ptrShown = ordered.filter(s=>s.ptr).length;
+  document.getElementById('count').textContent = `${shown} spec${shown!==1?'s':''}${state.ptrOnly?'':` · ${ptrShown} tracked`}`;
+  wireRows();
+}
+
+function wireRows(){
+  matrix.querySelectorAll('.row.clickable').forEach(row=>{
+    const drawer = row.querySelector('.drawer');
+    const toggle = ()=>{
+      const open = row.classList.toggle('open');
+      row.setAttribute('aria-expanded', open?'true':'false');
+      drawer.style.maxHeight = open ? (drawer.scrollHeight + 40)+'px' : '0px';
+    };
+    row.addEventListener('click', toggle);
+    row.addEventListener('keydown', e=>{
+      if(e.key==='Enter' || e.key===' '){ e.preventDefault(); toggle(); }
+    });
+  });
+}
+
+/* ---------- footer sources ---------- */
+document.getElementById('srclist').innerHTML = SOURCES.map(s=>
+  `<div class="srcitem"><a href="${s.url}" target="_blank" rel="noopener">${esc(s.label)}</a><span class="when">${esc(s.date)}</span></div>`
+).join("");
+document.getElementById('ptrcount').innerHTML =
+  `<b>Tracked:</b> ${SPECS.filter(s=>s.ptr).length} of ${SPECS.length} specs`;
+
+/* ---------- controls wiring ---------- */
+document.getElementById('roleseg').addEventListener('click', e=>{
+  const b = e.target.closest('button'); if(!b) return;
+  state.role = b.dataset.role;
+  document.querySelectorAll('#roleseg button').forEach(x=>x.setAttribute('aria-pressed', x===b?'true':'false'));
+  render();
+});
+document.getElementById('ptronly').addEventListener('change', e=>{ state.ptrOnly = e.target.checked; render(); });
+document.getElementById('sortsel').addEventListener('change', e=>{ state.sort = e.target.value; render(); });
+document.getElementById('search').addEventListener('input', e=>{ state.q = e.target.value.trim(); render(); });
+
+render();
+
+/* ---------- ambient starfield (respects reduced motion) ---------- */
+(function(){
+  const c = document.getElementById('stars');
+  if(!c || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const ctx = c.getContext('2d');
+  let stars = [], raf;
+  function size(){
+    const r = c.parentElement.getBoundingClientRect();
+    c.width = r.width; c.height = r.height;
+    const n = Math.min(90, Math.floor(r.width/14));
+    stars = Array.from({length:n}, ()=>({
+      x:Math.random()*c.width, y:Math.random()*c.height,
+      r:Math.random()*1.3+.3, a:Math.random()*.5+.2, s:Math.random()*.5+.15
+    }));
+  }
+  function draw(){
+    ctx.clearRect(0,0,c.width,c.height);
+    stars.forEach(st=>{
+      st.a += st.s*0.02*(Math.random()<.5?-1:1);
+      st.a = Math.max(.12, Math.min(.75, st.a));
+      ctx.beginPath(); ctx.arc(st.x,st.y,st.r,0,6.283);
+      ctx.fillStyle = `rgba(199,168,255,${st.a})`; ctx.fill();
+    });
+    raf = requestAnimationFrame(draw);
+  }
+  size(); draw();
+  window.addEventListener('resize', ()=>{ cancelAnimationFrame(raf); size(); draw(); });
+})();
+</script>
+</body>
+</html>

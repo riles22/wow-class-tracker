@@ -1,0 +1,16 @@
+{
+  "name": "midnight-ptr-tracker",
+  "version": "1.0.0",
+  "description": "WoW Midnight 12.1 PTR spec tracker — multi-source tier data compiled into a single self-contained HTML artifact",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node src/build.mjs",
+    "test": "node --test",
+    "validate": "node src/validate.mjs",
+    "serve": "node src/serve.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

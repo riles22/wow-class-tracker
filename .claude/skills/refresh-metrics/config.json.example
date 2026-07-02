@@ -1,0 +1,5 @@
+{
+  "_comment": "Copy to config.json (gitignored) after registering a free Warcraft Logs v2 API client at https://www.warcraftlogs.com/api/clients/ — the skill then uses the sanctioned GraphQL API instead of HTML-fallback scraping.",
+  "wclClientId": "YOUR_CLIENT_ID",
+  "wclClientSecret": "YOUR_CLIENT_SECRET"
+}

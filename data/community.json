@@ -1,0 +1,286 @@
+{
+  "_comment": "Curated community links per class — manually maintained, verified before adding, NEVER auto-scraped into tiers. Discord content is not fetchable (auth + TOS); these are links only. Creators are opinion/analysis sources — the kind our PTR writeups quote. Index source: wowhead.com/discord-servers (render via r.jina.ai). Verify creator recency via YouTube oEmbed.",
+  "indexUrl": "https://www.wowhead.com/discord-servers",
+  "verified": "2026-07-01",
+  "classes": [
+    {
+      "class": "Death Knight",
+      "discord": {
+        "name": "Acherus",
+        "url": "https://discord.gg/acherus"
+      },
+      "creators": [
+        {
+          "name": "Bicepspump",
+          "credential": "Icy Veins Unholy Death Knight guide writer (12.0.7 guide updated 2026-06-15); DK DPS theorycrafter, YouTube/Twitch",
+          "url": "https://www.youtube.com/@Bicepspump",
+          "latest": "Unholy DK Mythic+ Guide (Midnight 12.0.5)",
+          "verifiedDate": "2026-05-02"
+        },
+        {
+          "name": "Obli",
+          "credential": "Method content creator; Frost/Unholy DK guides + 12.1 PTR coverage",
+          "url": "https://www.youtube.com/@obliwow",
+          "channelId": "UC04sQauRkMShD_iE5S4MZwg",
+          "latest": "Midnight Season 2 PTR / patch 12.1 DK coverage (uploads 2026-06-27..29)",
+          "verifiedDate": "2026-06-29"
+        }
+      ]
+    },
+    {
+      "class": "Demon Hunter",
+      "discord": {
+        "name": "The Fel Hammer",
+        "url": "https://discord.gg/felhammer"
+      },
+      "creators": [
+        {
+          "name": "Shadarek",
+          "credential": "Devourer DH content",
+          "url": "https://www.youtube.com/watch?v=CNzoPSzyEeQ",
+          "latest": "5 Tips and Tricks for your Devourer Demon Hunter DPS (Midnight S1)",
+          "verifiedDate": "2026-05-22"
+        }
+      ]
+    },
+    {
+      "class": "Druid",
+      "discord": {
+        "name": "Dreamgrove",
+        "url": "https://discord.gg/0dWu0WkuetF87H9H"
+      },
+      "creators": [
+        {
+          "name": "Tettles",
+          "credential": "Balance Druid theorycrafter; host of the Moonkin Monthly analysis series on YouTube",
+          "url": "https://www.youtube.com/@Tettles",
+          "latest": "12.1 Balance Druid Updates Reviewed - Moonkin Monthly ft. Gamz and Nickdruid",
+          "verifiedDate": "2026-06-21"
+        },
+        {
+          "name": "Gamz",
+          "credential": "Wowhead Balance Druid guide writer (12.0.7) and Method Balance Druid guide writer; appears on Moonkin Monthly video analysis",
+          "url": "https://www.wowhead.com/guide/classes/druid/balance/overview-pve-dps",
+          "latest": "Balance Druid DPS Guide - Midnight (Wowhead, Patch 12.0.7)",
+          "verifiedDate": "2026-06-14"
+        }
+      ],
+      "sites": [
+        {
+          "name": "Dreamgrove.gg",
+          "url": "https://www.dreamgrove.gg/",
+          "note": "Druid community site — Balance Compendium updated for Midnight 12.0.7 (2026-06-27); open-source, fully fetchable (verified 2026-07-01)."
+        }
+      ]
+    },
+    {
+      "class": "Evoker",
+      "discord": {
+        "name": "Wyrmrest Temple",
+        "url": "https://discord.gg/JcCFEcmSWD"
+      },
+      "creators": [
+        {
+          "name": "Kesslive",
+          "credential": "Augmentation/Devastation Evoker guide YouTuber (Midnight Season 1 Augmentation guide series, Mar-Jun 2026)",
+          "url": "https://www.youtube.com/@Kesslive",
+          "latest": "12.1 Devastation/Augmentation Evoker First Impressions! Tier Sets + Changes",
+          "verifiedDate": "2026-06-20"
+        }
+      ],
+      "sites": [
+        {
+          "name": "Spiritbloom.pro",
+          "url": "https://spiritbloom.pro/",
+          "note": "Preservation Evoker-centered healer guide hub (also hosts HPal/RSham guides); Midnight-current (verified 2026-07-01)."
+        }
+      ]
+    },
+    {
+      "class": "Hunter",
+      "discord": {
+        "name": "Trueshot Lodge",
+        "url": "https://discord.gg/yqer4BX"
+      },
+      "creators": [
+        {
+          "name": "Azortharion",
+          "credential": "Icy Veins Hunter writer",
+          "url": "https://hackmd.io/@Azortharion/HunterPatch121-1",
+          "latest": "Patch 12.1 / Initial Changes Breakdown (HackMD)",
+          "verifiedDate": "2026-07-01"
+        }
+      ]
+    },
+    {
+      "class": "Mage",
+      "discord": {
+        "name": "Altered Time",
+        "url": "https://discord.gg/WzYCnbg"
+      },
+      "creators": [
+        {
+          "name": "Preheat",
+          "credential": "Wowhead guide writer (Devastation Evoker) and Mage/Evoker content creator; active Midnight Frost Mage guide series on YouTube",
+          "url": "https://www.youtube.com/@Preheat",
+          "latest": "Mage Class Tuning is finally here! World of Warcraft: Midnight 12.0.5",
+          "verifiedDate": "2026-05-22"
+        }
+      ]
+    },
+    {
+      "class": "Monk",
+      "discord": {
+        "name": "Peak of Serenity",
+        "url": "https://discord.gg/0dkfBMAxzTkWj21F"
+      },
+      "creators": [
+        {
+          "name": "Pkpawner",
+          "credential": "High-end Windwalker Monk (3660 M+ rating in TWW S2, Twisting Nether EU); 'Mastering Monk in Midnight' YouTube guide series",
+          "url": "https://www.youtube.com/@Pkpawner",
+          "latest": "Mythic Rotmire Windwalker Monk Guide! | Sporefall Raid 12.0.7",
+          "verifiedDate": "2026-06-17"
+        }
+      ],
+      "sites": [
+        {
+          "name": "Peak of Serenity",
+          "url": "https://www.peakofserenity.com/",
+          "note": "Monk community site (Babylonius) — WW/BrM guides + patch survival guides; Midnight 12.0.7-current (verified 2026-07-01). RSS at /feed/ for recency."
+        }
+      ]
+    },
+    {
+      "class": "Paladin",
+      "discord": {
+        "name": "Hammer of Wrath",
+        "url": "https://discord.gg/hammerofwrath"
+      },
+      "creators": [
+        {
+          "name": "YoDaTV",
+          "credential": "Paladin-focused YouTuber (Protection Paladin analysis + Retribution guides, e.g. 'Quick Retribution Paladin Guide for 12.0.5!' 2026-04-26)",
+          "url": "https://www.youtube.com/@YoDaEZ",
+          "latest": "Did Blizzard Just RUIN Prot Pal? Reviewing the Latest 12.1 Patch Notes...",
+          "verifiedDate": "2026-06-30"
+        }
+      ],
+      "sites": [
+        {
+          "name": "Wings Is Up",
+          "url": "https://wingsisup.com/",
+          "note": "Ellesmere's Holy Paladin guide — Midnight S1 (12.0.5 Quickview; full guide promised for 12.1). Verified 2026-07-01."
+        }
+      ]
+    },
+    {
+      "class": "Priest",
+      "discord": {
+        "name": "Warcraft Priests",
+        "url": "https://discord.gg/WarcraftPriests"
+      },
+      "creators": [
+        {
+          "name": "AutomaticJak",
+          "credential": "Wowhead Holy/Disc Priest guide author (covers all healers)",
+          "url": "https://www.youtube.com/watch?v=-kDDZC6qy5U",
+          "latest": "Season 2 Healer Changes (Midnight 12.1, all 8 healer specs)",
+          "verifiedDate": "2026-06-18"
+        }
+      ],
+      "sites": [
+        {
+          "name": "Warcraft Priests sim charts",
+          "url": "https://warcraftpriests.github.io/?talents=archon&sims=trinkets&fightStyle=Composite",
+          "note": "Shadow Priest SimC charts per hero build / fight style; underlying JSON fetchable from the mid-shadow-priest repo (updated 2026-06-15, verified 2026-07-01)."
+        }
+      ]
+    },
+    {
+      "class": "Rogue",
+      "discord": {
+        "name": "Ravenholdt",
+        "url": "https://discord.gg/0h08tydxoNhfDVZf"
+      },
+      "creators": [
+        {
+          "name": "Dalaran Gaming",
+          "credential": "Rogue-focused guide YouTuber (Midnight pre-patch builds guide 2026-02-13 and 12.0.7 gearing overview)",
+          "url": "https://www.youtube.com/@DalaranGaming",
+          "latest": "Patch 12.0.7 Rogue Overview: New BiS Gear & Folio Guide",
+          "verifiedDate": "2026-06-17"
+        },
+        {
+          "name": "Woxtoxic",
+          "credential": "Outlaw Rogue Mythic+ YouTuber ('Midnight 12.0.5 Outlaw Rogue Mythic+ Guide' 2026-04-29 plus high-key POVs)",
+          "url": "https://www.youtube.com/@woxtoxic",
+          "latest": "+23 Seat of the Triumvirate - Outlaw POV",
+          "verifiedDate": "2026-06-04"
+        }
+      ],
+      "sites": [
+        {
+          "name": "Fuu's Simulation Sheet",
+          "url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRq3Nn1ZvFwaXf1wQTr1RalpWbJTIhQp5xGwEyDTVWyuBWLP9_2rqqsxJSPQJLJAkIiKHy49pVfqEWu/pubhtml",
+          "note": "12.0.7 SimC results for all three Rogue specs by 'fuu' (changelog 2026-05-26, verified 2026-07-01). Tabs need per-gid fetches."
+        }
+      ]
+    },
+    {
+      "class": "Shaman",
+      "discord": {
+        "name": "Earthshrine",
+        "url": "https://discord.gg/0VcupJEQX0HuE5HH"
+      },
+      "creators": [
+        {
+          "name": "Supatease",
+          "credential": "Class-change roundups",
+          "url": "https://www.youtube.com/watch?v=C_aiXV_QRBs",
+          "latest": "12.1 More Class Changes — Did Your Spec Survive?",
+          "verifiedDate": "2026-06-30"
+        }
+      ]
+    },
+    {
+      "class": "Warlock",
+      "discord": {
+        "name": "Council of the Black Harvest",
+        "url": "https://discord.gg/0onXDymd9Wpc2CEu"
+      },
+      "creators": [
+        {
+          "name": "Kalamazi",
+          "credential": "Wowhead Affliction guide author; Team Liquid",
+          "url": "https://www.youtube.com/watch?v=yOY7U5bDvsU",
+          "latest": "My 12.1 PTR Warlock Wishlist & Feedback!",
+          "verifiedDate": "2026-05-30"
+        }
+      ]
+    },
+    {
+      "class": "Warrior",
+      "discord": {
+        "name": "Skyhold",
+        "url": "https://discord.gg/Skyhold"
+      },
+      "creators": [
+        {
+          "name": "Critcake",
+          "credential": "Arms/Fury Warrior analysis YouTuber covering Midnight patches and 12.1 PTR",
+          "url": "https://www.youtube.com/@Critcake",
+          "latest": "Patch 12.1 Arms & Fury Warrior Changes - My Thoughts (Midnight Season 2 PTR)",
+          "verifiedDate": "2026-06-25"
+        },
+        {
+          "name": "Baze",
+          "credential": "Fury/Arms Warrior guide YouTuber ('Midnight Pre-Patch Fury and Arms Warrior Guide' Jan 2026, ongoing 12.1 coverage)",
+          "url": "https://www.youtube.com/@Bazeface",
+          "latest": "12.1 Warrior Changes, Tier sets and more! / Week 1",
+          "verifiedDate": "2026-06-18"
+        }
+      ]
+    }
+  ]
+}

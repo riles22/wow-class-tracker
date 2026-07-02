@@ -1,0 +1,645 @@
+{
+  "date": "2026-07-01",
+  "specs": {
+    "Death Knight|Blood": {
+      "consensus": {
+        "raid": "B",
+        "mplus": "C"
+      },
+      "ranks": {
+        "raid|95th pct DPS (Mythic)": 3,
+        "raid|Popularity": 1,
+        "mplus|M+ score (95th pct)": 3,
+        "mplus|Popularity": 4,
+        "raid|Median rDPS (Mythic, all bosses, tank)": 3,
+        "mplus|Median rDPS (M+, all dungeons, tank)": 3,
+        "mplus|Top-50 avg M+ rating (ceiling)": 3,
+        "mplus|Top-2000 keys representation": 4
+      }
+    },
+    "Death Knight|Frost": {
+      "consensus": {
+        "raid": "A",
+        "mplus": "B"
+      },
+      "ranks": {
+        "raid|95th pct DPS (Mythic)": 7,
+        "raid|Popularity": 18,
+        "mplus|M+ score (95th pct)": 24,
+        "mplus|Popularity": 22,
+        "raid|Median rDPS (Mythic, all bosses)": 22,
+        "mplus|Median rDPS (M+, all dungeons)": 22,
+        "mplus|Top-50 avg M+ rating (ceiling)": 20,
+        "mplus|Top-2000 keys representation": 25
+      }
+    },
+    "Death Knight|Unholy": {
+      "consensus": {
+        "raid": "A",
+        "mplus": "S"
+      },
+      "ranks": {
+        "raid|95th pct DPS (Mythic)": 15,
+        "raid|Popularity": 1,
+        "mplus|M+ score (95th pct)": 3,
+        "mplus|Popularity": 1,
+        "raid|Median rDPS (Mythic, all bosses)": 1,
+        "mplus|Median rDPS (M+, all dungeons)": 1,
+        "mplus|Top-50 avg M+ rating (ceiling)": 1,
+        "mplus|Top-2000 keys representation": 1
+      }
+    },
+    "Demon Hunter|Havoc": {
+      "consensus": {
+        "raid": "A",
+        "mplus": "B"
+      },
+      "ranks": {
+        "raid|95th pct DPS (Mythic)": 6,
+        "raid|Popularity": 14,
+        "mplus|M+ score (95th pct)": 22,
+        "mplus|Popularity": 10,
+        "raid|Median rDPS (Mythic, all bosses)": 18,
+        "mplus|Median rDPS (M+, all dungeons)": 18,
+        "mplus|Top-50 avg M+ rating (ceiling)": 16,
+        "mplus|Top-2000 keys representation": 13
+      }
+    },
+    "Demon Hunter|Devourer": {
+      "consensus": {
+        "raid": "S",
+        "mplus": "A+"
+      },
+      "ranks": {
+        "raid|95th pct DPS (Mythic)": 2,
+        "raid|Popularity": 5,
+        "mplus|M+ score (95th pct)": 2,
+        "mplus|Popularity": 4,
+        "raid|Median rDPS (Mythic, all bosses)": 2,
+        "mplus|Median rDPS (M+, all dungeons)": 2,
+        "mplus|Top-50 avg M+ rating (ceiling)": 2,
+        "mplus|Top-2000 keys representation": 2
+      }
+    },
+    "Demon Hunter|Vengeance": {
+      "consensus": {
+        "raid": "C",
+        "mplus": "B"
+      },
+      "ranks": {
+        "raid|95th pct DPS (Mythic)": 5,
+        "raid|Popularity": 6,
+        "mplus|M+ score (95th pct)": 4,
+        "mplus|Popularity": 6,
+        "raid|Median rDPS (Mythic, all bosses, tank)": 4,
+        "mplus|Median rDPS (M+, all dungeons, tank)": 4,
+        "mplus|Top-50 avg M+ rating (ceiling)": 6,
+        "mplus|Top-2000 keys representation": 6
+      }
+    },
+    "Druid|Balance": {
+      "consensus": {
+        "raid": "B",
+        "mplus": "B"
+      },
+      "ranks": {
+        "raid|95th pct DPS (Mythic)": 11,
+        "raid|Popularity": 10,
+        "mplus|M+ score (95th pct)": 25,
+        "mplus|Popularity": 18,
+        "raid|Median rDPS (Mythic, all bosses)": 26,
+        "mplus|Median rDPS (M+, all dungeons)": 26,
+        "mplus|Top-50 avg M+ rating (ceiling)": 21,
+        "mplus|Top-2000 keys representation": 17
+      }
+    },
+    "Druid|Feral": {
+      "consensus": {
+        "raid": "C",
+        "mplus": "A"
+      },
+      "ranks": {
+        "raid|95th pct DPS (Mythic)": 26,
+        "raid|Popularity": 20,
+        "mplus|M+ score (95th pct)": 8,
+        "mplus|Popularity": 19,
+        "raid|Median rDPS (Mythic, all bosses)": 11,
+        "mplus|Median rDPS (M+, all dungeons)": 11,
+        "mplus|Top-50 avg M+ rating (ceiling)": 6,
+        "mplus|Top-2000 keys representation": 15
+      }
+    },
+    "Druid|Guardian": {
+      "consensus": {
+        "raid": "A+",
+        "mplus": "S"
+      },
+      "ranks": {
+        "raid|95th pct DPS (Mythic)": 1,
+        "raid|Popularity": 2,
+        "mplus|M+ score (95th pct)": 1,
+        "mplus|Popularity": 1,
+        "raid|Median rDPS (Mythic, all bosses, tank)": 1,
+        "mplus|Median rDPS (M+, all dungeons, tank)": 1,
+        "mplus|Top-50 avg M+ rating (ceiling)": 1,
+        "mplus|Top-2000 keys representation": 1
+      }
+    },
+    "Druid|Restoration": {
+      "consensus": {
+        "raid": "A+",
+        "mplus": "A+"
+      },
+      "ranks": {
+        "raid|95th pct HPS (Mythic)": 4,
+        "raid|Popularity": 4,
+        "mplus|M+ score (95th pct)": 7,
+        "mplus|Popularity": 5,
+        "raid|Median HPS (Mythic, all bosses)": 5,
+        "mplus|Median HPS (M+, all dungeons)": 5,
+        "mplus|Top-50 avg M+ rating (ceiling)": 5,
+        "mplus|Top-2000 keys representation": 5
+      }
+    },
+    "Evoker|Augmentation": {
+      "consensus": {
+        "raid": "A",
+        "mplus": "A+"
+      },
+      "ranks": {
+        "raid|95th pct DPS (Mythic)": 3,
+        "raid|Popularity": 7,
+        "mplus|M+ score (95th pct)": 1,
+        "mplus|Popularity": 7,
+        "raid|Median rDPS (Mythic, all bosses)": 3,
+        "mplus|Median rDPS (M+, all dungeons)": 3,
+        "mplus|Top-50 avg M+ rating (ceiling)": 3,
+        "mplus|Top-2000 keys representation": 4
+      }
+    },
+    "Evoker|Devastation": {
+      "consensus": {
+        "raid": "B",
+        "mplus": "C"
+      },
+      "ranks": {
+        "raid|95th pct DPS (Mythic)": 22,
+        "raid|Popularity": 24,
+        "mplus|M+ score (95th pct)": 27,
+        "mplus|Popularity": 27,
+        "raid|Median rDPS (Mythic, all bosses)": 25,
+        "mplus|Median rDPS (M+, all dungeons)": 25,
+        "mplus|Top-50 avg M+ rating (ceiling)": 24,
+        "mplus|Top-2000 keys representation": 27
+      }
+    },
+    "Evoker|Preservation": {
+      "consensus": {
+        "raid": "A+",
+        "mplus": "C"
+      },
+      "ranks": {
+        "raid|95th pct HPS (Mythic)": 3,
+        "raid|Popularity": 7,
+        "mplus|M+ score (95th pct)": 5,
+        "mplus|Popularity": 7,
+        "raid|Median HPS (Mythic, all bosses)": 7,
+        "mplus|Median HPS (M+, all dungeons)": 7,
+        "mplus|Top-50 avg M+ rating (ceiling)": 6,
+        "mplus|Top-2000 keys representation": 7
+      }
+    },
+    "Hunter|Beast Mastery": {
+      "consensus": {
+        "raid": "C",
+        "mplus": "A"
+      },
+      "ranks": {
+        "raid|95th pct DPS (Mythic)": 24,
+        "raid|Popularity": 3,
+        "mplus|M+ score (95th pct)": 16,
+        "mplus|Popularity": 3,
+        "raid|Median rDPS (Mythic, all bosses)": 15,
+        "mplus|Median rDPS (M+, all dungeons)": 15,
+        "mplus|Top-50 avg M+ rating (ceiling)": 14,
+        "mplus|Top-2000 keys representation": 5
+      }
+    },
+    "Hunter|Marksmanship": {
+      "consensus": {
+        "raid": "S",
+        "mplus": "B"
+      },
+      "ranks": {
+        "raid|95th pct DPS (Mythic)": 1,
+        "raid|Popularity": 16,
+        "mplus|M+ score (95th pct)": 17,
+        "mplus|Popularity": 20,
+        "raid|Median rDPS (Mythic, all bosses)": 17,
+        "mplus|Median rDPS (M+, all dungeons)": 17,
+        "mplus|Top-50 avg M+ rating (ceiling)": 22,
+        "mplus|Top-2000 keys representation": 22
+      }
+    },
+    "Hunter|Survival": {
+      "consensus": {
+        "raid": "A+",
+        "mplus": "A"
+      },
+      "ranks": {
+        "raid|95th pct DPS (Mythic)": 4,
+        "raid|Popularity": 17,
+        "mplus|M+ score (95th pct)": 9,
+        "mplus|Popularity": 14,
+        "raid|Median rDPS (Mythic, all bosses)": 7,
+        "mplus|Median rDPS (M+, all dungeons)": 7,
+        "mplus|Top-50 avg M+ rating (ceiling)": 10,
+        "mplus|Top-2000 keys representation": 14
+      }
+    },
+    "Mage|Arcane": {
+      "consensus": {
+        "raid": "C",
+        "mplus": "B"
+      },
+      "ranks": {
+        "raid|95th pct DPS (Mythic)": 27,
+        "raid|Popularity": 27,
+        "mplus|M+ score (95th pct)": 18,
+        "mplus|Popularity": 21,
+        "raid|Median rDPS (Mythic, all bosses)": 16,
+        "mplus|Median rDPS (M+, all dungeons)": 16,
+        "mplus|Top-50 avg M+ rating (ceiling)": 25,
+        "mplus|Top-2000 keys representation": 18
+      }
+    },
+    "Mage|Fire": {
+      "consensus": {
+        "raid": "C",
+        "mplus": "C"
+      },
+      "ranks": {
+        "raid|95th pct DPS (Mythic)": 17,
+        "raid|Popularity": 25,
+        "mplus|M+ score (95th pct)": 20,
+        "mplus|Popularity": 26,
+        "raid|Median rDPS (Mythic, all bosses)": 24,
+        "mplus|Median rDPS (M+, all dungeons)": 24,
+        "mplus|Top-50 avg M+ rating (ceiling)": 26,
+        "mplus|Top-2000 keys representation": 26
+      }
+    },
+    "Mage|Frost": {
+      "consensus": {
+        "raid": "S",
+        "mplus": "A"
+      },
+      "ranks": {
+        "raid|95th pct DPS (Mythic)": 5,
+        "raid|Popularity": 2,
+        "mplus|M+ score (95th pct)": 19,
+        "mplus|Popularity": 6,
+        "raid|Median rDPS (Mythic, all bosses)": 23,
+        "mplus|Median rDPS (M+, all dungeons)": 23,
+        "mplus|Top-50 avg M+ rating (ceiling)": 17,
+        "mplus|Top-2000 keys representation": 6
+      }
+    },
+    "Monk|Brewmaster": {
+      "consensus": {
+        "raid": "B",
+        "mplus": "A+"
+      },
+      "ranks": {
+        "raid|95th pct DPS (Mythic)": 6,
+        "raid|Popularity": 3,
+        "mplus|M+ score (95th pct)": 2,
+        "mplus|Popularity": 3,
+        "raid|Median rDPS (Mythic, all bosses, tank)": 2,
+        "mplus|Median rDPS (M+, all dungeons, tank)": 2,
+        "mplus|Top-50 avg M+ rating (ceiling)": 2,
+        "mplus|Top-2000 keys representation": 2
+      }
+    },
+    "Monk|Mistweaver": {
+      "consensus": {
+        "raid": "S",
+        "mplus": "S"
+      },
+      "ranks": {
+        "raid|95th pct HPS (Mythic)": 1,
+        "raid|Popularity": 2,
+        "mplus|M+ score (95th pct)": 1,
+        "mplus|Popularity": 1,
+        "raid|Median HPS (Mythic, all bosses)": 1,
+        "mplus|Median HPS (M+, all dungeons)": 1,
+        "mplus|Top-50 avg M+ rating (ceiling)": 1,
+        "mplus|Top-2000 keys representation": 1
+      }
+    },
+    "Monk|Windwalker": {
+      "consensus": {
+        "raid": "A+",
+        "mplus": "B"
+      },
+      "ranks": {
+        "raid|95th pct DPS (Mythic)": 8,
+        "raid|Popularity": 15,
+        "mplus|M+ score (95th pct)": 23,
+        "mplus|Popularity": 17,
+        "raid|Median rDPS (Mythic, all bosses)": 19,
+        "mplus|Median rDPS (M+, all dungeons)": 19,
+        "mplus|Top-50 avg M+ rating (ceiling)": 15,
+        "mplus|Top-2000 keys representation": 19
+      }
+    },
+    "Paladin|Holy": {
+      "consensus": {
+        "raid": "B",
+        "mplus": "B"
+      },
+      "ranks": {
+        "raid|95th pct HPS (Mythic)": 6,
+        "raid|Popularity": 5,
+        "mplus|M+ score (95th pct)": 4,
+        "mplus|Popularity": 4,
+        "raid|Median HPS (Mythic, all bosses)": 4,
+        "mplus|Median HPS (M+, all dungeons)": 4,
+        "mplus|Top-50 avg M+ rating (ceiling)": 4,
+        "mplus|Top-2000 keys representation": 4
+      }
+    },
+    "Paladin|Protection": {
+      "consensus": {
+        "raid": "C",
+        "mplus": "B"
+      },
+      "ranks": {
+        "raid|95th pct DPS (Mythic)": 4,
+        "raid|Popularity": 5,
+        "mplus|M+ score (95th pct)": 6,
+        "mplus|Popularity": 2,
+        "raid|Median rDPS (Mythic, all bosses, tank)": 6,
+        "mplus|Median rDPS (M+, all dungeons, tank)": 6,
+        "mplus|Top-50 avg M+ rating (ceiling)": 5,
+        "mplus|Top-2000 keys representation": 3
+      }
+    },
+    "Paladin|Retribution": {
+      "consensus": {
+        "raid": "A",
+        "mplus": "A+"
+      },
+      "ranks": {
+        "raid|95th pct DPS (Mythic)": 21,
+        "raid|Popularity": 4,
+        "mplus|M+ score (95th pct)": 6,
+        "mplus|Popularity": 2,
+        "raid|Median rDPS (Mythic, all bosses)": 6,
+        "mplus|Median rDPS (M+, all dungeons)": 6,
+        "mplus|Top-50 avg M+ rating (ceiling)": 5,
+        "mplus|Top-2000 keys representation": 3
+      }
+    },
+    "Priest|Discipline": {
+      "consensus": {
+        "raid": "A+",
+        "mplus": "A"
+      },
+      "ranks": {
+        "raid|95th pct HPS (Mythic)": 2,
+        "raid|Popularity": 3,
+        "mplus|M+ score (95th pct)": 3,
+        "mplus|Popularity": 3,
+        "raid|Median HPS (Mythic, all bosses)": 2,
+        "mplus|Median HPS (M+, all dungeons)": 2,
+        "mplus|Top-50 avg M+ rating (ceiling)": 3,
+        "mplus|Top-2000 keys representation": 3
+      }
+    },
+    "Priest|Holy": {
+      "consensus": {
+        "raid": "B",
+        "mplus": "C"
+      },
+      "ranks": {
+        "raid|95th pct HPS (Mythic)": 5,
+        "raid|Popularity": 6,
+        "mplus|M+ score (95th pct)": 6,
+        "mplus|Popularity": 6,
+        "raid|Median HPS (Mythic, all bosses)": 6,
+        "mplus|Median HPS (M+, all dungeons)": 6,
+        "mplus|Top-50 avg M+ rating (ceiling)": 7,
+        "mplus|Top-2000 keys representation": 6
+      }
+    },
+    "Priest|Shadow": {
+      "consensus": {
+        "raid": "B",
+        "mplus": "B"
+      },
+      "ranks": {
+        "raid|95th pct DPS (Mythic)": 20,
+        "raid|Popularity": 12,
+        "mplus|M+ score (95th pct)": 13,
+        "mplus|Popularity": 13,
+        "raid|Median rDPS (Mythic, all bosses)": 20,
+        "mplus|Median rDPS (M+, all dungeons)": 20,
+        "mplus|Top-50 avg M+ rating (ceiling)": 11,
+        "mplus|Top-2000 keys representation": 11
+      }
+    },
+    "Rogue|Assassination": {
+      "consensus": {
+        "raid": "C",
+        "mplus": "B"
+      },
+      "ranks": {
+        "raid|95th pct DPS (Mythic)": 25,
+        "raid|Popularity": 26,
+        "mplus|M+ score (95th pct)": 10,
+        "mplus|Popularity": 24,
+        "raid|Median rDPS (Mythic, all bosses)": 14,
+        "mplus|Median rDPS (M+, all dungeons)": 14,
+        "mplus|Top-50 avg M+ rating (ceiling)": 18,
+        "mplus|Top-2000 keys representation": 23
+      }
+    },
+    "Rogue|Outlaw": {
+      "consensus": {
+        "raid": "B",
+        "mplus": "B"
+      },
+      "ranks": {
+        "raid|95th pct DPS (Mythic)": 19,
+        "raid|Popularity": 23,
+        "mplus|M+ score (95th pct)": 5,
+        "mplus|Popularity": 23,
+        "raid|Median rDPS (Mythic, all bosses)": 8,
+        "mplus|Median rDPS (M+, all dungeons)": 8,
+        "mplus|Top-50 avg M+ rating (ceiling)": 7,
+        "mplus|Top-2000 keys representation": 20
+      }
+    },
+    "Rogue|Subtlety": {
+      "consensus": {
+        "raid": "A",
+        "mplus": "A"
+      },
+      "ranks": {
+        "raid|95th pct DPS (Mythic)": 12,
+        "raid|Popularity": 11,
+        "mplus|M+ score (95th pct)": 15,
+        "mplus|Popularity": 15,
+        "raid|Median rDPS (Mythic, all bosses)": 9,
+        "mplus|Median rDPS (M+, all dungeons)": 9,
+        "mplus|Top-50 avg M+ rating (ceiling)": 19,
+        "mplus|Top-2000 keys representation": 21
+      }
+    },
+    "Shaman|Elemental": {
+      "consensus": {
+        "raid": "B",
+        "mplus": "A"
+      },
+      "ranks": {
+        "raid|95th pct DPS (Mythic)": 14,
+        "raid|Popularity": 8,
+        "mplus|M+ score (95th pct)": 14,
+        "mplus|Popularity": 8,
+        "raid|Median rDPS (Mythic, all bosses)": 21,
+        "mplus|Median rDPS (M+, all dungeons)": 21,
+        "mplus|Top-50 avg M+ rating (ceiling)": 13,
+        "mplus|Top-2000 keys representation": 10
+      }
+    },
+    "Shaman|Enhancement": {
+      "consensus": {
+        "raid": "B",
+        "mplus": "A"
+      },
+      "ranks": {
+        "raid|95th pct DPS (Mythic)": 16,
+        "raid|Popularity": 19,
+        "mplus|M+ score (95th pct)": 7,
+        "mplus|Popularity": 11,
+        "raid|Median rDPS (Mythic, all bosses)": 10,
+        "mplus|Median rDPS (M+, all dungeons)": 10,
+        "mplus|Top-50 avg M+ rating (ceiling)": 12,
+        "mplus|Top-2000 keys representation": 9
+      }
+    },
+    "Shaman|Restoration": {
+      "consensus": {
+        "raid": "C",
+        "mplus": "S"
+      },
+      "ranks": {
+        "raid|95th pct HPS (Mythic)": 7,
+        "raid|Popularity": 1,
+        "mplus|M+ score (95th pct)": 2,
+        "mplus|Popularity": 2,
+        "raid|Median HPS (Mythic, all bosses)": 3,
+        "mplus|Median HPS (M+, all dungeons)": 3,
+        "mplus|Top-50 avg M+ rating (ceiling)": 2,
+        "mplus|Top-2000 keys representation": 2
+      }
+    },
+    "Warlock|Affliction": {
+      "consensus": {
+        "raid": "B",
+        "mplus": "B"
+      },
+      "ranks": {
+        "raid|95th pct DPS (Mythic)": 23,
+        "raid|Popularity": 21,
+        "mplus|M+ score (95th pct)": 21,
+        "mplus|Popularity": 16,
+        "raid|Median rDPS (Mythic, all bosses)": 12,
+        "mplus|Median rDPS (M+, all dungeons)": 12,
+        "mplus|Top-50 avg M+ rating (ceiling)": 23,
+        "mplus|Top-2000 keys representation": 16
+      }
+    },
+    "Warlock|Demonology": {
+      "consensus": {
+        "raid": "A+",
+        "mplus": "A"
+      },
+      "ranks": {
+        "raid|95th pct DPS (Mythic)": 13,
+        "raid|Popularity": 6,
+        "mplus|M+ score (95th pct)": 12,
+        "mplus|Popularity": 5,
+        "raid|Median rDPS (Mythic, all bosses)": 5,
+        "mplus|Median rDPS (M+, all dungeons)": 5,
+        "mplus|Top-50 avg M+ rating (ceiling)": 8,
+        "mplus|Top-2000 keys representation": 7
+      }
+    },
+    "Warlock|Destruction": {
+      "consensus": {
+        "raid": "A+",
+        "mplus": "C"
+      },
+      "ranks": {
+        "raid|95th pct DPS (Mythic)": 10,
+        "raid|Popularity": 22,
+        "mplus|M+ score (95th pct)": 26,
+        "mplus|Popularity": 25,
+        "raid|Median rDPS (Mythic, all bosses)": 27,
+        "mplus|Median rDPS (M+, all dungeons)": 27,
+        "mplus|Top-50 avg M+ rating (ceiling)": 27,
+        "mplus|Top-2000 keys representation": 24
+      }
+    },
+    "Warrior|Arms": {
+      "consensus": {
+        "raid": "B",
+        "mplus": "A"
+      },
+      "ranks": {
+        "raid|95th pct DPS (Mythic)": 9,
+        "raid|Popularity": 13,
+        "mplus|M+ score (95th pct)": 4,
+        "mplus|Popularity": 12,
+        "raid|Median rDPS (Mythic, all bosses)": 4,
+        "mplus|Median rDPS (M+, all dungeons)": 4,
+        "mplus|Top-50 avg M+ rating (ceiling)": 4,
+        "mplus|Top-2000 keys representation": 12
+      }
+    },
+    "Warrior|Fury": {
+      "consensus": {
+        "raid": "A",
+        "mplus": "A"
+      },
+      "ranks": {
+        "raid|95th pct DPS (Mythic)": 18,
+        "raid|Popularity": 9,
+        "mplus|M+ score (95th pct)": 11,
+        "mplus|Popularity": 9,
+        "raid|Median rDPS (Mythic, all bosses)": 13,
+        "mplus|Median rDPS (M+, all dungeons)": 13,
+        "mplus|Top-50 avg M+ rating (ceiling)": 9,
+        "mplus|Top-2000 keys representation": 8
+      }
+    },
+    "Warrior|Protection": {
+      "consensus": {
+        "raid": "A+",
+        "mplus": "B"
+      },
+      "ranks": {
+        "raid|95th pct DPS (Mythic)": 2,
+        "raid|Popularity": 4,
+        "mplus|M+ score (95th pct)": 5,
+        "mplus|Popularity": 5,
+        "raid|Median rDPS (Mythic, all bosses, tank)": 5,
+        "mplus|Median rDPS (M+, all dungeons, tank)": 5,
+        "mplus|Top-50 avg M+ rating (ceiling)": 4,
+        "mplus|Top-2000 keys representation": 5
+      }
+    }
+  }
+}

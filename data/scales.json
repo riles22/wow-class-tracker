@@ -1,0 +1,41 @@
+{
+  "_comment": "Tier-scale definitions and the normalization map. Each source declares which scale it uses (sources.json → scale). Values place every tier on one 0–100 axis so sources with different scales can be averaged into a consensus. Consensus bands must be sorted by descending min, ending at 0.",
+  "scales": {
+    "icyveins": {
+      "label": "Icy Veins",
+      "tiers": ["S", "A+", "A", "B", "C"],
+      "values": { "S": 100, "A+": 82, "A": 66, "B": 48, "C": 30 }
+    },
+    "method": {
+      "label": "Method",
+      "tiers": ["S", "A", "B", "C"],
+      "values": { "S": 100, "A": 72, "B": 48, "C": 24 }
+    },
+    "archon": {
+      "label": "Archon",
+      "tiers": ["S", "A", "B", "C"],
+      "values": { "S": 100, "A": 72, "B": 48, "C": 24 }
+    },
+    "wowmeta": {
+      "label": "WoWMeta",
+      "tiers": ["S", "A", "B", "C", "D"],
+      "values": { "S": 100, "A": 72, "B": 52, "C": 34, "D": 16 }
+    },
+    "wowhead": {
+      "label": "Wowhead",
+      "tiers": ["S", "A+", "A", "B", "C", "D", "F"],
+      "values": { "S": 100, "A+": 84, "A": 70, "B": 52, "C": 34, "D": 18, "F": 6 }
+    }
+  },
+  "consensus": {
+    "label": "Consensus",
+    "bands": [
+      { "tier": "S", "min": 88 },
+      { "tier": "A+", "min": 74 },
+      { "tier": "A", "min": 58 },
+      { "tier": "B", "min": 40 },
+      { "tier": "C", "min": 0 }
+    ],
+    "spreadThreshold": 22
+  }
+}

@@ -1,0 +1,4297 @@
+[
+  {
+    "class": "Death Knight",
+    "spec": "Blood",
+    "role": "Tank",
+    "ratings": {
+      "raid": {
+        "icyveins": "B",
+        "method": "B",
+        "wowhead": "B",
+        "archon": "B"
+      },
+      "mplus": {
+        "icyveins": "C",
+        "method": "C",
+        "wowhead": "B",
+        "archon": "C",
+        "wowmeta": "C"
+      }
+    },
+    "ptr": null,
+    "metrics": [
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Mythic)",
+        "value": 87292.1,
+        "unit": "DPS",
+        "n": 34240,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "Popularity",
+        "value": 26.4,
+        "unit": "%",
+        "n": 34240,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "M+ score (95th pct)",
+        "value": 3514,
+        "n": 111272,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "Popularity",
+        "value": 10,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median rDPS (Mythic, all bosses, tank)",
+        "value": 86073,
+        "unit": "rDPS",
+        "n": 142489,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (M+, all dungeons, tank)",
+        "value": 86073,
+        "unit": "rDPS",
+        "n": 142489,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "murlok",
+        "bracket": "mplus",
+        "name": "Top-50 avg M+ rating (ceiling)",
+        "value": 3925,
+        "n": 50,
+        "asOf": "2026-06-28"
+      },
+      {
+        "source": "mythicstats",
+        "bracket": "mplus",
+        "name": "Top-2000 keys representation",
+        "value": 1.6,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      }
+    ],
+    "survivability": {
+      "tier": "A",
+      "source": "archon",
+      "asOf": "2026-07-01"
+    }
+  },
+  {
+    "class": "Death Knight",
+    "spec": "Frost",
+    "role": "DPS",
+    "ratings": {
+      "raid": {
+        "icyveins": "S",
+        "method": "C",
+        "wowhead": "C",
+        "archon": "S"
+      },
+      "mplus": {
+        "icyveins": "A",
+        "method": "B",
+        "wowhead": "B",
+        "archon": "B",
+        "wowmeta": "D"
+      }
+    },
+    "ptr": null,
+    "metrics": [
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Mythic)",
+        "value": 161701.2,
+        "unit": "DPS",
+        "n": 15840,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "Popularity",
+        "value": 1.8,
+        "unit": "%",
+        "n": 15840,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "M+ score (95th pct)",
+        "value": 3522,
+        "n": 34676,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "Popularity",
+        "value": 1.1,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median rDPS (Mythic, all bosses)",
+        "value": 135900,
+        "unit": "rDPS",
+        "n": 44861,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (M+, all dungeons)",
+        "value": 135900,
+        "unit": "rDPS",
+        "n": 44861,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "murlok",
+        "bracket": "mplus",
+        "name": "Top-50 avg M+ rating (ceiling)",
+        "value": 3953,
+        "n": 50,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "mythicstats",
+        "bracket": "mplus",
+        "name": "Top-2000 keys representation",
+        "value": 0.3,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      }
+    ],
+    "fightProfile": {
+      "source": "bloodmallet",
+      "asOf": "2026-07-01",
+      "targets": {
+        "1": 133953,
+        "2": 176421,
+        "3": 215872,
+        "5": 294394,
+        "8": 391776,
+        "15": 593945
+      }
+    },
+    "survivability": {
+      "tier": "S",
+      "source": "archon",
+      "asOf": "2026-07-01"
+    }
+  },
+  {
+    "class": "Death Knight",
+    "spec": "Unholy",
+    "role": "DPS",
+    "ratings": {
+      "raid": {
+        "icyveins": "A+",
+        "method": "B",
+        "wowhead": "A",
+        "archon": "B"
+      },
+      "mplus": {
+        "icyveins": "S",
+        "method": "A",
+        "wowhead": "A+",
+        "archon": "S",
+        "wowmeta": "S"
+      }
+    },
+    "ptr": null,
+    "metrics": [
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Mythic)",
+        "value": 157420.4,
+        "unit": "DPS",
+        "n": 106421,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "Popularity",
+        "value": 12.1,
+        "unit": "%",
+        "n": 106421,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "M+ score (95th pct)",
+        "value": 4020,
+        "n": 396896,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "Popularity",
+        "value": 12,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median rDPS (Mythic, all bosses)",
+        "value": 188533,
+        "unit": "rDPS",
+        "n": 478708,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (M+, all dungeons)",
+        "value": 188533,
+        "unit": "rDPS",
+        "n": 478708,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "murlok",
+        "bracket": "mplus",
+        "name": "Top-50 avg M+ rating (ceiling)",
+        "value": 4277,
+        "n": 50,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "mythicstats",
+        "bracket": "mplus",
+        "name": "Top-2000 keys representation",
+        "value": 10.2,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      }
+    ],
+    "fightProfile": {
+      "source": "bloodmallet",
+      "asOf": "2026-07-01",
+      "targets": {
+        "1": 128395,
+        "2": 174686,
+        "3": 215642,
+        "5": 290690,
+        "8": 413609,
+        "15": 607389
+      }
+    },
+    "survivability": {
+      "tier": "S",
+      "source": "archon",
+      "asOf": "2026-07-01"
+    }
+  },
+  {
+    "class": "Demon Hunter",
+    "spec": "Havoc",
+    "role": "DPS",
+    "ratings": {
+      "raid": {
+        "icyveins": "B",
+        "method": "B",
+        "wowhead": "B",
+        "archon": "S"
+      },
+      "mplus": {
+        "icyveins": "A+",
+        "method": "B",
+        "wowhead": "B",
+        "archon": "B",
+        "wowmeta": "C"
+      }
+    },
+    "ptr": null,
+    "metrics": [
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Mythic)",
+        "value": 162026.4,
+        "unit": "DPS",
+        "n": 20407,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "Popularity",
+        "value": 2.3,
+        "unit": "%",
+        "n": 20407,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "M+ score (95th pct)",
+        "value": 3559,
+        "n": 104623,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "Popularity",
+        "value": 3.2,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median rDPS (Mythic, all bosses)",
+        "value": 140075,
+        "unit": "rDPS",
+        "n": 133344,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (M+, all dungeons)",
+        "value": 140075,
+        "unit": "rDPS",
+        "n": 133344,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "murlok",
+        "bracket": "mplus",
+        "name": "Top-50 avg M+ rating (ceiling)",
+        "value": 4006,
+        "n": 50,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "mythicstats",
+        "bracket": "mplus",
+        "name": "Top-2000 keys representation",
+        "value": 1.4,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      }
+    ],
+    "fightProfile": {
+      "source": "bloodmallet",
+      "asOf": "2026-07-01",
+      "targets": {
+        "1": 119917,
+        "2": 155898,
+        "3": 190319,
+        "5": 249479,
+        "8": 307257,
+        "15": 396535
+      }
+    },
+    "survivability": {
+      "tier": "A",
+      "source": "archon",
+      "asOf": "2026-07-01"
+    }
+  },
+  {
+    "class": "Demon Hunter",
+    "spec": "Devourer",
+    "role": "DPS",
+    "ratings": {
+      "raid": {
+        "icyveins": "A+",
+        "method": "S",
+        "wowhead": "A",
+        "archon": "S"
+      },
+      "mplus": {
+        "icyveins": "S",
+        "method": "A",
+        "wowhead": "A+",
+        "archon": "S",
+        "wowmeta": "A"
+      }
+    },
+    "ptr": null,
+    "metrics": [
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Mythic)",
+        "value": 164147.3,
+        "unit": "DPS",
+        "n": 74130,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "Popularity",
+        "value": 8.4,
+        "unit": "%",
+        "n": 74130,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "M+ score (95th pct)",
+        "value": 4063,
+        "n": 254052,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "Popularity",
+        "value": 7.7,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median rDPS (Mythic, all bosses)",
+        "value": 185054,
+        "unit": "rDPS",
+        "n": 309816,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (M+, all dungeons)",
+        "value": 185054,
+        "unit": "rDPS",
+        "n": 309816,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "murlok",
+        "bracket": "mplus",
+        "name": "Top-50 avg M+ rating (ceiling)",
+        "value": 4277,
+        "n": 50,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "mythicstats",
+        "bracket": "mplus",
+        "name": "Top-2000 keys representation",
+        "value": 7.2,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      }
+    ],
+    "fightProfile": {
+      "source": "bloodmallet",
+      "asOf": "2026-07-01",
+      "targets": {
+        "1": 104255,
+        "2": 151214,
+        "3": 197715,
+        "5": 242076,
+        "8": 340581,
+        "15": 543931
+      }
+    },
+    "survivability": {
+      "tier": "A",
+      "source": "archon",
+      "asOf": "2026-07-01"
+    }
+  },
+  {
+    "class": "Demon Hunter",
+    "spec": "Vengeance",
+    "role": "Tank",
+    "ratings": {
+      "raid": {
+        "icyveins": "C",
+        "wowhead": "C",
+        "archon": "C"
+      },
+      "mplus": {
+        "icyveins": "A",
+        "method": "S",
+        "wowhead": "A",
+        "archon": "C",
+        "wowmeta": "D"
+      }
+    },
+    "ptr": {
+      "verdict": "Negative",
+      "theme": "Housekeeping + Sigil reshuffle",
+      "summary": "Mostly housekeeping paired with a Sigil reshuffle that leaves Vengeance with arguably the least crowd-control it has ever had. The tier set brings no tanking value.",
+      "changes": [
+        "Sigil layout reshuffled; net loss of control tools.",
+        "General numbers/housekeeping pass, no identity change.",
+        "No new defensive or throughput hook to change how it plays."
+      ],
+      "set2": "Offensive-leaning bonus with no meaningful tank utility.",
+      "set4": "Does nothing to address the raid case — effectively worthless as a tank set.",
+      "watch": "Baseline is raid-C / M+-A — great in keys, benched in raid. The set does nothing to fix the raid-desirability problem, and Havoc/Devourer cover the DH utility a raid would want."
+    },
+    "metrics": [
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Mythic)",
+        "value": 83137.8,
+        "unit": "DPS",
+        "n": 7367,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "Popularity",
+        "value": 5.7,
+        "unit": "%",
+        "n": 7367,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "M+ score (95th pct)",
+        "value": 3483,
+        "n": 73154,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "Popularity",
+        "value": 6.6,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median rDPS (Mythic, all bosses, tank)",
+        "value": 82305,
+        "unit": "rDPS",
+        "n": 93416,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (M+, all dungeons, tank)",
+        "value": 82305,
+        "unit": "rDPS",
+        "n": 93416,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "murlok",
+        "bracket": "mplus",
+        "name": "Top-50 avg M+ rating (ceiling)",
+        "value": 3874,
+        "n": 50,
+        "asOf": "2026-06-28"
+      },
+      {
+        "source": "mythicstats",
+        "bracket": "mplus",
+        "name": "Top-2000 keys representation",
+        "value": 0.8,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      }
+    ],
+    "survivability": {
+      "tier": "A",
+      "source": "archon",
+      "asOf": "2026-07-01"
+    }
+  },
+  {
+    "class": "Druid",
+    "spec": "Balance",
+    "role": "DPS",
+    "ratings": {
+      "raid": {
+        "icyveins": "B",
+        "method": "A",
+        "wowhead": "C",
+        "archon": "A"
+      },
+      "mplus": {
+        "icyveins": "A",
+        "method": "B",
+        "wowhead": "A",
+        "archon": "C",
+        "wowmeta": "C"
+      }
+    },
+    "ptr": {
+      "verdict": "Mixed",
+      "theme": "Touch the Cosmos nerf",
+      "summary": "The pass centers on reining in Touch the Cosmos, with Lunar Calling dropping from 120% to 100%. The tier set (Bark of the Enigmatic Dreamwatcher) reinforces the existing playstyle rather than reshaping it.",
+      "changes": [
+        "Lunar Calling 120% → 100%.",
+        "Touch the Cosmos proc value pulled back — the central lever.",
+        "A tuning pass, not a redesign — how the spec plays is unchanged."
+      ],
+      "set2": "Feeds the current Eclipse / Astral flow.",
+      "set4": "Reinforces the existing rotation without adding a new decision.",
+      "watch": "Net power shift is the whole story here; nothing changes about the moment-to-moment. Lukewarm."
+    },
+    "metrics": [
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Mythic)",
+        "value": 159968.4,
+        "unit": "DPS",
+        "n": 32090,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "Popularity",
+        "value": 3.6,
+        "unit": "%",
+        "n": 32090,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "M+ score (95th pct)",
+        "value": 3466,
+        "n": 58271,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "Popularity",
+        "value": 1.8,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median rDPS (Mythic, all bosses)",
+        "value": 122394,
+        "unit": "rDPS",
+        "n": 76106,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (M+, all dungeons)",
+        "value": 122394,
+        "unit": "rDPS",
+        "n": 76106,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "murlok",
+        "bracket": "mplus",
+        "name": "Top-50 avg M+ rating (ceiling)",
+        "value": 3942,
+        "n": 50,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "mythicstats",
+        "bracket": "mplus",
+        "name": "Top-2000 keys representation",
+        "value": 1,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      }
+    ],
+    "fightProfile": {
+      "source": "bloodmallet",
+      "asOf": "2026-07-01",
+      "targets": {
+        "1": 116038,
+        "2": 140709,
+        "3": 186261,
+        "5": 273925,
+        "8": 388119,
+        "15": 618887
+      }
+    },
+    "survivability": {
+      "tier": "B",
+      "source": "archon",
+      "asOf": "2026-07-01"
+    }
+  },
+  {
+    "class": "Druid",
+    "spec": "Feral",
+    "role": "DPS",
+    "ratings": {
+      "raid": {
+        "icyveins": "C",
+        "method": "B",
+        "wowhead": "B",
+        "archon": "C"
+      },
+      "mplus": {
+        "icyveins": "A+",
+        "method": "A",
+        "wowhead": "B",
+        "archon": "A",
+        "wowmeta": "C"
+      }
+    },
+    "ptr": null,
+    "metrics": [
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Mythic)",
+        "value": 149560.4,
+        "unit": "DPS",
+        "n": 9943,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "Popularity",
+        "value": 1.1,
+        "unit": "%",
+        "n": 9943,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "M+ score (95th pct)",
+        "value": 3798,
+        "n": 58254,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "Popularity",
+        "value": 1.8,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median rDPS (Mythic, all bosses)",
+        "value": 150849,
+        "unit": "rDPS",
+        "n": 74551,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (M+, all dungeons)",
+        "value": 150849,
+        "unit": "rDPS",
+        "n": 74551,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "murlok",
+        "bracket": "mplus",
+        "name": "Top-50 avg M+ rating (ceiling)",
+        "value": 4134,
+        "n": 50,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "mythicstats",
+        "bracket": "mplus",
+        "name": "Top-2000 keys representation",
+        "value": 1.2,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      }
+    ],
+    "fightProfile": {
+      "source": "bloodmallet",
+      "asOf": "2026-07-01",
+      "targets": {
+        "1": 133683,
+        "2": 158195,
+        "3": 185592,
+        "5": 225149,
+        "8": 242645,
+        "15": 267993
+      }
+    },
+    "survivability": {
+      "tier": "C",
+      "source": "archon",
+      "asOf": "2026-07-01"
+    }
+  },
+  {
+    "class": "Druid",
+    "spec": "Guardian",
+    "role": "Tank",
+    "ratings": {
+      "raid": {
+        "icyveins": "S",
+        "method": "A",
+        "wowhead": "B",
+        "archon": "S"
+      },
+      "mplus": {
+        "icyveins": "S",
+        "method": "B",
+        "wowhead": "S",
+        "archon": "S",
+        "wowmeta": "S"
+      }
+    },
+    "ptr": null,
+    "metrics": [
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Mythic)",
+        "value": 95039.5,
+        "unit": "DPS",
+        "n": 28380,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "Popularity",
+        "value": 21.9,
+        "unit": "%",
+        "n": 28380,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "M+ score (95th pct)",
+        "value": 3990,
+        "n": 514788,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "Popularity",
+        "value": 46.4,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median rDPS (Mythic, all bosses, tank)",
+        "value": 101557,
+        "unit": "rDPS",
+        "n": 624472,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (M+, all dungeons, tank)",
+        "value": 101557,
+        "unit": "rDPS",
+        "n": 624472,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "murlok",
+        "bracket": "mplus",
+        "name": "Top-50 avg M+ rating (ceiling)",
+        "value": 4267,
+        "n": 50,
+        "asOf": "2026-06-28"
+      },
+      {
+        "source": "mythicstats",
+        "bracket": "mplus",
+        "name": "Top-2000 keys representation",
+        "value": 12.3,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      }
+    ],
+    "survivability": {
+      "tier": "A",
+      "source": "archon",
+      "asOf": "2026-07-01"
+    }
+  },
+  {
+    "class": "Druid",
+    "spec": "Restoration",
+    "role": "Healer",
+    "ratings": {
+      "raid": {
+        "icyveins": "S",
+        "method": "A",
+        "wowhead": "S",
+        "archon": "A"
+      },
+      "mplus": {
+        "icyveins": "S",
+        "method": "S",
+        "wowhead": "S",
+        "archon": "C",
+        "wowmeta": "B"
+      }
+    },
+    "ptr": null,
+    "metrics": [
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct HPS (Mythic)",
+        "value": 190437,
+        "unit": "HPS",
+        "n": 35314,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "Popularity",
+        "value": 14.5,
+        "unit": "%",
+        "n": 35314,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "M+ score (95th pct)",
+        "value": 3396,
+        "n": 97457,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "Popularity",
+        "value": 8.8,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median HPS (Mythic, all bosses)",
+        "value": 64980,
+        "unit": "HPS",
+        "n": 133482,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median HPS (M+, all dungeons)",
+        "value": 64980,
+        "unit": "HPS",
+        "n": 133482,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "murlok",
+        "bracket": "mplus",
+        "name": "Top-50 avg M+ rating (ceiling)",
+        "value": 3912,
+        "n": 50,
+        "asOf": "2026-06-28"
+      },
+      {
+        "source": "mythicstats",
+        "bracket": "mplus",
+        "name": "Top-2000 keys representation",
+        "value": 0.9,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      }
+    ],
+    "survivability": {
+      "tier": "C",
+      "source": "archon",
+      "asOf": "2026-07-01"
+    }
+  },
+  {
+    "class": "Evoker",
+    "spec": "Augmentation",
+    "role": "DPS",
+    "ratings": {
+      "raid": {
+        "icyveins": "A",
+        "method": "B",
+        "wowhead": "A",
+        "archon": "S"
+      },
+      "mplus": {
+        "icyveins": "S",
+        "method": "A",
+        "wowhead": "A+",
+        "archon": "S",
+        "wowmeta": "B"
+      }
+    },
+    "ptr": null,
+    "metrics": [
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Mythic)",
+        "value": 163998.9,
+        "unit": "DPS",
+        "n": 47027,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "Popularity",
+        "value": 5.3,
+        "unit": "%",
+        "n": 47027,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "M+ score (95th pct)",
+        "value": 4133,
+        "n": 160884,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "Popularity",
+        "value": 4.9,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median rDPS (Mythic, all bosses)",
+        "value": 174521,
+        "unit": "rDPS",
+        "n": 194341,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (M+, all dungeons)",
+        "value": 174521,
+        "unit": "rDPS",
+        "n": 194341,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "murlok",
+        "bracket": "mplus",
+        "name": "Top-50 avg M+ rating (ceiling)",
+        "value": 4272,
+        "n": 50,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "mythicstats",
+        "bracket": "mplus",
+        "name": "Top-2000 keys representation",
+        "value": 4.6,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      }
+    ],
+    "survivability": {
+      "tier": "B",
+      "source": "archon",
+      "asOf": "2026-07-01"
+    }
+  },
+  {
+    "class": "Evoker",
+    "spec": "Devastation",
+    "role": "DPS",
+    "ratings": {
+      "raid": {
+        "icyveins": "B",
+        "method": "A",
+        "wowhead": "B",
+        "archon": "B"
+      },
+      "mplus": {
+        "icyveins": "C",
+        "method": "B",
+        "wowhead": "B",
+        "archon": "C",
+        "wowmeta": "D"
+      }
+    },
+    "ptr": {
+      "verdict": "Positive",
+      "theme": "Apex redesign → Unbound Flame",
+      "summary": "The Apex talent is redesigned into Unbound Flame (a sub-5% damage shift), leaving the rotation largely intact. The tier set is a genuine success, buffing Shattering Star passively.",
+      "changes": [
+        "Apex reworked into Unbound Flame — under 5% of damage, low disruption.",
+        "Core rotation stays familiar; this is a refinement, not an overhaul."
+      ],
+      "set2": "Clean, passive value.",
+      "set4": "Buffs Shattering Star without adding button bloat — one of the better-designed sets.",
+      "watch": "The set is good, but a raid-B / M+-C baseline means tuning still has to do the heavy lifting; a well-designed set alone won't move it."
+    },
+    "metrics": [
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Mythic)",
+        "value": 153996.7,
+        "unit": "DPS",
+        "n": 4229,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "Popularity",
+        "value": 0.5,
+        "unit": "%",
+        "n": 4229,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "M+ score (95th pct)",
+        "value": 3401,
+        "n": 16309,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "Popularity",
+        "value": 0.5,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median rDPS (Mythic, all bosses)",
+        "value": 125403,
+        "unit": "rDPS",
+        "n": 21844,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (M+, all dungeons)",
+        "value": 125403,
+        "unit": "rDPS",
+        "n": 21844,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "murlok",
+        "bracket": "mplus",
+        "name": "Top-50 avg M+ rating (ceiling)",
+        "value": 3901,
+        "n": 50,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "mythicstats",
+        "bracket": "mplus",
+        "name": "Top-2000 keys representation",
+        "value": 0.1,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      }
+    ],
+    "fightProfile": {
+      "source": "bloodmallet",
+      "asOf": "2026-07-01",
+      "targets": {
+        "1": 114449,
+        "2": 180678,
+        "3": 239125,
+        "5": 341095,
+        "8": 453873,
+        "15": 711794
+      }
+    },
+    "survivability": {
+      "tier": "B",
+      "source": "archon",
+      "asOf": "2026-07-01"
+    }
+  },
+  {
+    "class": "Evoker",
+    "spec": "Preservation",
+    "role": "Healer",
+    "ratings": {
+      "raid": {
+        "icyveins": "A",
+        "method": "S",
+        "wowhead": "A",
+        "archon": "A"
+      },
+      "mplus": {
+        "icyveins": "B",
+        "method": "B",
+        "wowhead": "B",
+        "archon": "C",
+        "wowmeta": "D"
+      }
+    },
+    "ptr": {
+      "verdict": "Positive",
+      "theme": "Dream Breath rework",
+      "summary": "Dream Breath is reworked for a net ~+10%, pushed into the HoT portion, and Flameshaper ascends as the hero tree of choice. The first clearly-positive verdict in the series, with a strong 2pc.",
+      "changes": [
+        "Dream Breath net ~+10%, shifted toward the heal-over-time.",
+        "Flameshaper pulls ahead as the preferred hero tree.",
+        "Rewards the ramp/HoT playstyle Prevoker already leans on."
+      ],
+      "set2": "Strong on its own — immediately felt.",
+      "set4": "Complements the Dream Breath change and the Flameshaper direction.",
+      "watch": "Baseline is raid-A / M+-B; the changes clearly help the raid profile most. The best-received set + kit pass of the tracked healers."
+    },
+    "metrics": [
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct HPS (Mythic)",
+        "value": 191724.7,
+        "unit": "HPS",
+        "n": 18138,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "Popularity",
+        "value": 7.4,
+        "unit": "%",
+        "n": 18138,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "M+ score (95th pct)",
+        "value": 3462,
+        "n": 28078,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "Popularity",
+        "value": 2.5,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median HPS (Mythic, all bosses)",
+        "value": 62648,
+        "unit": "HPS",
+        "n": 37649,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median HPS (M+, all dungeons)",
+        "value": 62648,
+        "unit": "HPS",
+        "n": 37649,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "murlok",
+        "bracket": "mplus",
+        "name": "Top-50 avg M+ rating (ceiling)",
+        "value": 3897,
+        "n": 50,
+        "asOf": "2026-06-28"
+      },
+      {
+        "source": "mythicstats",
+        "bracket": "mplus",
+        "name": "Top-2000 keys representation",
+        "value": 0.4,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      }
+    ],
+    "survivability": {
+      "tier": "C",
+      "source": "archon",
+      "asOf": "2026-07-01"
+    }
+  },
+  {
+    "class": "Hunter",
+    "spec": "Beast Mastery",
+    "role": "DPS",
+    "ratings": {
+      "raid": {
+        "icyveins": "B",
+        "method": "C",
+        "wowhead": "C",
+        "archon": "C"
+      },
+      "mplus": {
+        "icyveins": "A+",
+        "method": "B",
+        "wowhead": "B",
+        "archon": "B",
+        "wowmeta": "S"
+      }
+    },
+    "ptr": null,
+    "metrics": [
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Mythic)",
+        "value": 151756.4,
+        "unit": "DPS",
+        "n": 75316,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "Popularity",
+        "value": 8.6,
+        "unit": "%",
+        "n": 75316,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "M+ score (95th pct)",
+        "value": 3626,
+        "n": 346547,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "Popularity",
+        "value": 10.5,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median rDPS (Mythic, all bosses)",
+        "value": 144007,
+        "unit": "rDPS",
+        "n": 433319,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (M+, all dungeons)",
+        "value": 144007,
+        "unit": "rDPS",
+        "n": 433319,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "murlok",
+        "bracket": "mplus",
+        "name": "Top-50 avg M+ rating (ceiling)",
+        "value": 4024,
+        "n": 50,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "mythicstats",
+        "bracket": "mplus",
+        "name": "Top-2000 keys representation",
+        "value": 4.4,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      }
+    ],
+    "fightProfile": {
+      "source": "bloodmallet",
+      "asOf": "2026-07-01",
+      "targets": {
+        "1": 121506,
+        "2": 143911,
+        "3": 166084,
+        "5": 207867,
+        "8": 243481,
+        "15": 316753
+      }
+    },
+    "survivability": {
+      "tier": "C",
+      "source": "archon",
+      "asOf": "2026-07-01"
+    }
+  },
+  {
+    "class": "Hunter",
+    "spec": "Marksmanship",
+    "role": "DPS",
+    "ratings": {
+      "raid": {
+        "icyveins": "A+",
+        "method": "S",
+        "wowhead": "A",
+        "archon": "S"
+      },
+      "mplus": {
+        "icyveins": "C",
+        "method": "A",
+        "wowhead": "B",
+        "archon": "B",
+        "wowmeta": "D"
+      }
+    },
+    "ptr": null,
+    "metrics": [
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Mythic)",
+        "value": 165651.7,
+        "unit": "DPS",
+        "n": 17805,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "Popularity",
+        "value": 2,
+        "unit": "%",
+        "n": 17805,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "M+ score (95th pct)",
+        "value": 3618,
+        "n": 40092,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "Popularity",
+        "value": 1.2,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median rDPS (Mythic, all bosses)",
+        "value": 141766,
+        "unit": "rDPS",
+        "n": 52636,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (M+, all dungeons)",
+        "value": 141766,
+        "unit": "rDPS",
+        "n": 52636,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "murlok",
+        "bracket": "mplus",
+        "name": "Top-50 avg M+ rating (ceiling)",
+        "value": 3938,
+        "n": 50,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "mythicstats",
+        "bracket": "mplus",
+        "name": "Top-2000 keys representation",
+        "value": 0.7,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      }
+    ],
+    "fightProfile": {
+      "source": "bloodmallet",
+      "asOf": "2026-07-01",
+      "targets": {
+        "1": 127956,
+        "2": 163897,
+        "3": 178889,
+        "5": 208701,
+        "8": 253229,
+        "15": 335429
+      }
+    },
+    "survivability": {
+      "tier": "A",
+      "source": "archon",
+      "asOf": "2026-07-01"
+    }
+  },
+  {
+    "class": "Hunter",
+    "spec": "Survival",
+    "role": "DPS",
+    "ratings": {
+      "raid": {
+        "icyveins": "S",
+        "method": "B",
+        "wowhead": "B",
+        "archon": "S"
+      },
+      "mplus": {
+        "icyveins": "A+",
+        "method": "A",
+        "wowhead": "B",
+        "archon": "A",
+        "wowmeta": "C"
+      }
+    },
+    "ptr": {
+      "verdict": "Mixed",
+      "theme": "Primal Surge moved off capstone",
+      "summary": "Primal Surge is relocated up out of the capstone slot, and a new Razor Edge node appears as a suspicious-looking 2-point filler. The tier set is fully passive and misses every stated Blizzard tier-set goal.",
+      "changes": [
+        "Primal Surge moved up from the capstone position.",
+        "New Razor Edge node — reads like a 2-point tax rather than a real choice.",
+        "Kit changes don't add interactivity."
+      ],
+      "set2": "Passive throughput, no gameplay hook.",
+      "set4": "Also passive — misses all of Blizzard's own goals for the set (no rotational change, no new decision).",
+      "watch": "Baseline is strong (raid-S), so this won't tank the spec — but the set is a wasted opportunity to make it more engaging."
+    },
+    "metrics": [
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Mythic)",
+        "value": 162879.9,
+        "unit": "DPS",
+        "n": 16412,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "Popularity",
+        "value": 1.9,
+        "unit": "%",
+        "n": 16412,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "M+ score (95th pct)",
+        "value": 3774,
+        "n": 75301,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "Popularity",
+        "value": 2.3,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median rDPS (Mythic, all bosses)",
+        "value": 153319,
+        "unit": "rDPS",
+        "n": 91346,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (M+, all dungeons)",
+        "value": 153319,
+        "unit": "rDPS",
+        "n": 91346,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "murlok",
+        "bracket": "mplus",
+        "name": "Top-50 avg M+ rating (ceiling)",
+        "value": 4057,
+        "n": 50,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "mythicstats",
+        "bracket": "mplus",
+        "name": "Top-2000 keys representation",
+        "value": 1.3,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      }
+    ],
+    "fightProfile": {
+      "source": "bloodmallet",
+      "asOf": "2026-07-01",
+      "targets": {
+        "1": 118483,
+        "2": 186017,
+        "3": 259880,
+        "5": 348922,
+        "8": 431650,
+        "15": 529409
+      }
+    },
+    "survivability": {
+      "tier": "B",
+      "source": "archon",
+      "asOf": "2026-07-01"
+    }
+  },
+  {
+    "class": "Mage",
+    "spec": "Arcane",
+    "role": "DPS",
+    "ratings": {
+      "raid": {
+        "icyveins": "C",
+        "method": "C",
+        "wowhead": "B",
+        "archon": "C"
+      },
+      "mplus": {
+        "icyveins": "B",
+        "method": "B",
+        "wowhead": "B",
+        "archon": "B",
+        "wowmeta": "D"
+      }
+    },
+    "ptr": null,
+    "metrics": [
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Mythic)",
+        "value": 145946.2,
+        "unit": "DPS",
+        "n": 2471,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "Popularity",
+        "value": 0.3,
+        "unit": "%",
+        "n": 2471,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "M+ score (95th pct)",
+        "value": 3595,
+        "n": 40029,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "Popularity",
+        "value": 1.2,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median rDPS (Mythic, all bosses)",
+        "value": 143752,
+        "unit": "rDPS",
+        "n": 50413,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (M+, all dungeons)",
+        "value": 143752,
+        "unit": "rDPS",
+        "n": 50413,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "murlok",
+        "bracket": "mplus",
+        "name": "Top-50 avg M+ rating (ceiling)",
+        "value": 3850,
+        "n": 50,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "mythicstats",
+        "bracket": "mplus",
+        "name": "Top-2000 keys representation",
+        "value": 0.9,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      }
+    ],
+    "fightProfile": {
+      "source": "bloodmallet",
+      "asOf": "2026-07-01",
+      "targets": {
+        "1": 113115,
+        "2": 176918,
+        "3": 227626,
+        "5": 326957,
+        "8": 413620,
+        "15": 582238
+      }
+    },
+    "survivability": {
+      "tier": "C",
+      "source": "archon",
+      "asOf": "2026-07-01"
+    }
+  },
+  {
+    "class": "Mage",
+    "spec": "Fire",
+    "role": "DPS",
+    "ratings": {
+      "raid": {
+        "icyveins": "C",
+        "method": "C",
+        "wowhead": "B",
+        "archon": "B"
+      },
+      "mplus": {
+        "icyveins": "C",
+        "method": "C",
+        "wowhead": "B",
+        "archon": "B",
+        "wowmeta": "D"
+      }
+    },
+    "ptr": {
+      "verdict": "Mixed",
+      "theme": "Combustion → filler shift",
+      "summary": "Power is shifted out of Combustion and into filler, a change that lives or dies on tuning. The Pyroclasm-centric tier set likely feels worse to play than what's live.",
+      "changes": [
+        "Damage moved from Combustion windows into filler — smoother, less bursty.",
+        "Heavily tuning-dependent; the direction is fine, the numbers decide it.",
+        "Built around Pyroclasm."
+      ],
+      "set2": "Ties into the Pyroclasm package.",
+      "set4": "Likely feels worse than the current set for most players.",
+      "watch": "Spread-cleave weakness persists, and the baseline is already raid-C / M+-C. The shift doesn't address the spec's actual problem areas."
+    },
+    "metrics": [
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Mythic)",
+        "value": 156359,
+        "unit": "DPS",
+        "n": 4086,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "Popularity",
+        "value": 0.5,
+        "unit": "%",
+        "n": 4086,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "M+ score (95th pct)",
+        "value": 3589,
+        "n": 19297,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "Popularity",
+        "value": 0.6,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median rDPS (Mythic, all bosses)",
+        "value": 131844,
+        "unit": "rDPS",
+        "n": 25449,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (M+, all dungeons)",
+        "value": 131844,
+        "unit": "rDPS",
+        "n": 25449,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "murlok",
+        "bracket": "mplus",
+        "name": "Top-50 avg M+ rating (ceiling)",
+        "value": 3794,
+        "n": 50,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "mythicstats",
+        "bracket": "mplus",
+        "name": "Top-2000 keys representation",
+        "value": 0.2,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      }
+    ],
+    "fightProfile": {
+      "source": "bloodmallet",
+      "asOf": "2026-07-01",
+      "targets": {
+        "1": 114751,
+        "2": 165538,
+        "3": 216746,
+        "5": 271868,
+        "8": 381215,
+        "15": 536507
+      }
+    },
+    "survivability": {
+      "tier": "A",
+      "source": "archon",
+      "asOf": "2026-07-01"
+    }
+  },
+  {
+    "class": "Mage",
+    "spec": "Frost",
+    "role": "DPS",
+    "ratings": {
+      "raid": {
+        "icyveins": "A+",
+        "method": "S",
+        "wowhead": "A",
+        "archon": "S"
+      },
+      "mplus": {
+        "icyveins": "A",
+        "method": "A",
+        "wowhead": "A",
+        "archon": "B",
+        "wowmeta": "A"
+      }
+    },
+    "ptr": null,
+    "metrics": [
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Mythic)",
+        "value": 162174.7,
+        "unit": "DPS",
+        "n": 93183,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "Popularity",
+        "value": 10.6,
+        "unit": "%",
+        "n": 93183,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "M+ score (95th pct)",
+        "value": 3592,
+        "n": 222079,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "Popularity",
+        "value": 6.7,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median rDPS (Mythic, all bosses)",
+        "value": 133152,
+        "unit": "rDPS",
+        "n": 284023,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (M+, all dungeons)",
+        "value": 133152,
+        "unit": "rDPS",
+        "n": 284023,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "murlok",
+        "bracket": "mplus",
+        "name": "Top-50 avg M+ rating (ceiling)",
+        "value": 4004,
+        "n": 50,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "mythicstats",
+        "bracket": "mplus",
+        "name": "Top-2000 keys representation",
+        "value": 2.7,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      }
+    ],
+    "fightProfile": {
+      "source": "bloodmallet",
+      "asOf": "2026-07-01",
+      "targets": {
+        "1": 117012,
+        "2": 145460,
+        "3": 174029,
+        "5": 231583,
+        "8": 283632,
+        "15": 337247
+      }
+    },
+    "survivability": {
+      "tier": "C",
+      "source": "archon",
+      "asOf": "2026-07-01"
+    }
+  },
+  {
+    "class": "Monk",
+    "spec": "Brewmaster",
+    "role": "Tank",
+    "ratings": {
+      "raid": {
+        "icyveins": "A",
+        "method": "A",
+        "wowhead": "B",
+        "archon": "C"
+      },
+      "mplus": {
+        "icyveins": "A+",
+        "method": "S",
+        "wowhead": "A",
+        "archon": "A",
+        "wowmeta": "B"
+      }
+    },
+    "ptr": null,
+    "metrics": [
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Mythic)",
+        "value": 82967.3,
+        "unit": "DPS",
+        "n": 27166,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "Popularity",
+        "value": 20.9,
+        "unit": "%",
+        "n": 27166,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "M+ score (95th pct)",
+        "value": 3821,
+        "n": 136970,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "Popularity",
+        "value": 12.3,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median rDPS (Mythic, all bosses, tank)",
+        "value": 89961,
+        "unit": "rDPS",
+        "n": 171741,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (M+, all dungeons, tank)",
+        "value": 89961,
+        "unit": "rDPS",
+        "n": 171741,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "murlok",
+        "bracket": "mplus",
+        "name": "Top-50 avg M+ rating (ceiling)",
+        "value": 4144,
+        "n": 50,
+        "asOf": "2026-06-28"
+      },
+      {
+        "source": "mythicstats",
+        "bracket": "mplus",
+        "name": "Top-2000 keys representation",
+        "value": 2.3,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      }
+    ],
+    "survivability": {
+      "tier": "B",
+      "source": "archon",
+      "asOf": "2026-07-01"
+    }
+  },
+  {
+    "class": "Monk",
+    "spec": "Mistweaver",
+    "role": "Healer",
+    "ratings": {
+      "raid": {
+        "icyveins": "S",
+        "method": "S",
+        "wowhead": "S",
+        "archon": "S"
+      },
+      "mplus": {
+        "icyveins": "S",
+        "method": "S",
+        "wowhead": "S",
+        "archon": "S",
+        "wowmeta": "S"
+      }
+    },
+    "ptr": {
+      "verdict": "Positive",
+      "theme": "Damage→heal conversion cut, Jadefire buff",
+      "summary": "A ~30% cut to the damage-to-healing conversion on Spinning Crane Kick / Way of the Crane, offset by a Jadefire buff. The author is positive overall, though hero-tree balance goes untouched.",
+      "changes": [
+        "Damage→heal conversion cut ~30% (SCK / Way of the Crane).",
+        "Spinning Crane Kick's effective target threshold shifts ~3 → 8.",
+        "Jadefire buffed to compensate for the conversion loss."
+      ],
+      "set2": "Supports the Jadefire-forward direction.",
+      "set4": "Leans into the retuned kit.",
+      "watch": "Hero-tree balance (Conduit of the Celestials clearly over Master of Harmony) is left unaddressed. Baseline is already dominant — raid-S / M+-S."
+    },
+    "metrics": [
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct HPS (Mythic)",
+        "value": 196810.5,
+        "unit": "HPS",
+        "n": 52406,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "Popularity",
+        "value": 21.5,
+        "unit": "%",
+        "n": 52406,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "M+ score (95th pct)",
+        "value": 4022,
+        "n": 335807,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "Popularity",
+        "value": 30.3,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median HPS (Mythic, all bosses)",
+        "value": 100738,
+        "unit": "HPS",
+        "n": 404607,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median HPS (M+, all dungeons)",
+        "value": 100738,
+        "unit": "HPS",
+        "n": 404607,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "murlok",
+        "bracket": "mplus",
+        "name": "Top-50 avg M+ rating (ceiling)",
+        "value": 4270,
+        "n": 50,
+        "asOf": "2026-06-28"
+      },
+      {
+        "source": "mythicstats",
+        "bracket": "mplus",
+        "name": "Top-2000 keys representation",
+        "value": 7.7,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      }
+    ],
+    "survivability": {
+      "tier": "C",
+      "source": "archon",
+      "asOf": "2026-07-01"
+    }
+  },
+  {
+    "class": "Monk",
+    "spec": "Windwalker",
+    "role": "DPS",
+    "ratings": {
+      "raid": {
+        "icyveins": "A+",
+        "method": "A",
+        "wowhead": "B",
+        "archon": "S"
+      },
+      "mplus": {
+        "icyveins": "A",
+        "method": "B",
+        "wowhead": "C",
+        "archon": "B",
+        "wowmeta": "C"
+      }
+    },
+    "ptr": {
+      "verdict": "Mixed",
+      "theme": "Burst redistributed into sustained",
+      "summary": "Cooldown burst is shaved and funneled into sustained damage for a net gain of only ~1–2%. The real complaint — survivability — is not addressed at all.",
+      "changes": [
+        "Burst pulled out of cooldowns, redistributed into sustained.",
+        "Net damage change is small, roughly +1–2%.",
+        "Playstyle feel is slightly smoother but fundamentally the same."
+      ],
+      "set2": "Minor throughput.",
+      "set4": "Reinforces the sustained-damage shift.",
+      "watch": "WarcraftLogs survivability sits near dead-last (≈37–40 of 40) and none of that is touched — the actual reason WW gets cut from rosters."
+    },
+    "metrics": [
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Mythic)",
+        "value": 161695.2,
+        "unit": "DPS",
+        "n": 19567,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "Popularity",
+        "value": 2.2,
+        "unit": "%",
+        "n": 19567,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "M+ score (95th pct)",
+        "value": 3541,
+        "n": 63254,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "Popularity",
+        "value": 1.9,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median rDPS (Mythic, all bosses)",
+        "value": 139867,
+        "unit": "rDPS",
+        "n": 80900,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (M+, all dungeons)",
+        "value": 139867,
+        "unit": "rDPS",
+        "n": 80900,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "murlok",
+        "bracket": "mplus",
+        "name": "Top-50 avg M+ rating (ceiling)",
+        "value": 4020,
+        "n": 50,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "mythicstats",
+        "bracket": "mplus",
+        "name": "Top-2000 keys representation",
+        "value": 0.9,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      }
+    ],
+    "fightProfile": {
+      "source": "bloodmallet",
+      "asOf": "2026-07-01",
+      "targets": {
+        "1": 118243,
+        "2": 167586,
+        "3": 224690,
+        "5": 341352,
+        "8": 438588,
+        "15": 581135
+      }
+    },
+    "survivability": {
+      "tier": "C",
+      "source": "archon",
+      "asOf": "2026-07-01"
+    }
+  },
+  {
+    "class": "Paladin",
+    "spec": "Holy",
+    "role": "Healer",
+    "ratings": {
+      "raid": {
+        "icyveins": "B",
+        "method": "A",
+        "wowhead": "B",
+        "archon": "B"
+      },
+      "mplus": {
+        "icyveins": "A",
+        "method": "B",
+        "wowhead": "A",
+        "archon": "B",
+        "wowmeta": "B"
+      }
+    },
+    "ptr": null,
+    "metrics": [
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct HPS (Mythic)",
+        "value": 173765.7,
+        "unit": "HPS",
+        "n": 27183,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "Popularity",
+        "value": 11.1,
+        "unit": "%",
+        "n": 27183,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "M+ score (95th pct)",
+        "value": 3558,
+        "n": 98751,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "Popularity",
+        "value": 8.9,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median HPS (Mythic, all bosses)",
+        "value": 67675,
+        "unit": "HPS",
+        "n": 126852,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median HPS (M+, all dungeons)",
+        "value": 67675,
+        "unit": "HPS",
+        "n": 126852,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "murlok",
+        "bracket": "mplus",
+        "name": "Top-50 avg M+ rating (ceiling)",
+        "value": 3939,
+        "n": 50,
+        "asOf": "2026-06-28"
+      },
+      {
+        "source": "mythicstats",
+        "bracket": "mplus",
+        "name": "Top-2000 keys representation",
+        "value": 1,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      }
+    ],
+    "survivability": {
+      "tier": "C",
+      "source": "archon",
+      "asOf": "2026-07-01"
+    }
+  },
+  {
+    "class": "Paladin",
+    "spec": "Protection",
+    "role": "Tank",
+    "ratings": {
+      "raid": {
+        "icyveins": "B",
+        "method": "C",
+        "wowhead": "C",
+        "archon": "B"
+      },
+      "mplus": {
+        "icyveins": "A",
+        "method": "B",
+        "wowhead": "A",
+        "archon": "C",
+        "wowmeta": "A"
+      }
+    },
+    "ptr": null,
+    "metrics": [
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Mythic)",
+        "value": 85778.9,
+        "unit": "DPS",
+        "n": 9103,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "Popularity",
+        "value": 7,
+        "unit": "%",
+        "n": 9103,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "M+ score (95th pct)",
+        "value": 3436,
+        "n": 165961,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "Popularity",
+        "value": 15,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median rDPS (Mythic, all bosses, tank)",
+        "value": 79853,
+        "unit": "rDPS",
+        "n": 92416,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (M+, all dungeons, tank)",
+        "value": 79853,
+        "unit": "rDPS",
+        "n": 79853,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "murlok",
+        "bracket": "mplus",
+        "name": "Top-50 avg M+ rating (ceiling)",
+        "value": 3895,
+        "n": 50,
+        "asOf": "2026-06-28"
+      },
+      {
+        "source": "mythicstats",
+        "bracket": "mplus",
+        "name": "Top-2000 keys representation",
+        "value": 1.9,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      }
+    ],
+    "survivability": {
+      "tier": "C",
+      "source": "archon",
+      "asOf": "2026-07-01"
+    }
+  },
+  {
+    "class": "Paladin",
+    "spec": "Retribution",
+    "role": "DPS",
+    "ratings": {
+      "raid": {
+        "icyveins": "B",
+        "method": "A",
+        "wowhead": "A",
+        "archon": "B"
+      },
+      "mplus": {
+        "icyveins": "A+",
+        "method": "B",
+        "wowhead": "A",
+        "archon": "A",
+        "wowmeta": "S"
+      }
+    },
+    "ptr": null,
+    "metrics": [
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Mythic)",
+        "value": 154996.4,
+        "unit": "DPS",
+        "n": 74882,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "Popularity",
+        "value": 8.5,
+        "unit": "%",
+        "n": 74882,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "M+ score (95th pct)",
+        "value": 3817,
+        "n": 392867,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "Popularity",
+        "value": 11.9,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median rDPS (Mythic, all bosses)",
+        "value": 154462,
+        "unit": "rDPS",
+        "n": 487306,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (M+, all dungeons)",
+        "value": 154462,
+        "unit": "rDPS",
+        "n": 487306,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "murlok",
+        "bracket": "mplus",
+        "name": "Top-50 avg M+ rating (ceiling)",
+        "value": 4142,
+        "n": 50,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "mythicstats",
+        "bracket": "mplus",
+        "name": "Top-2000 keys representation",
+        "value": 7,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      }
+    ],
+    "fightProfile": {
+      "source": "bloodmallet",
+      "asOf": "2026-07-01",
+      "targets": {
+        "1": 111843,
+        "2": 139825,
+        "3": 175650,
+        "5": 256589,
+        "8": 352348,
+        "15": 481598
+      }
+    },
+    "survivability": {
+      "tier": "C",
+      "source": "archon",
+      "asOf": "2026-07-01"
+    }
+  },
+  {
+    "class": "Priest",
+    "spec": "Discipline",
+    "role": "Healer",
+    "ratings": {
+      "raid": {
+        "icyveins": "S",
+        "method": "A",
+        "wowhead": "A",
+        "archon": "S"
+      },
+      "mplus": {
+        "icyveins": "A",
+        "method": "B",
+        "wowhead": "B",
+        "archon": "A",
+        "wowmeta": "A"
+      }
+    },
+    "ptr": null,
+    "metrics": [
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct HPS (Mythic)",
+        "value": 195136.6,
+        "unit": "HPS",
+        "n": 37258,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "Popularity",
+        "value": 15.3,
+        "unit": "%",
+        "n": 37258,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "M+ score (95th pct)",
+        "value": 3745,
+        "n": 163870,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "Popularity",
+        "value": 14.8,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median HPS (Mythic, all bosses)",
+        "value": 84337,
+        "unit": "HPS",
+        "n": 205035,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median HPS (M+, all dungeons)",
+        "value": 84337,
+        "unit": "HPS",
+        "n": 205035,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "murlok",
+        "bracket": "mplus",
+        "name": "Top-50 avg M+ rating (ceiling)",
+        "value": 4050,
+        "n": 50,
+        "asOf": "2026-06-28"
+      },
+      {
+        "source": "mythicstats",
+        "bracket": "mplus",
+        "name": "Top-2000 keys representation",
+        "value": 2.3,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      }
+    ],
+    "survivability": {
+      "tier": "C",
+      "source": "archon",
+      "asOf": "2026-07-01"
+    }
+  },
+  {
+    "class": "Priest",
+    "spec": "Holy",
+    "role": "Healer",
+    "ratings": {
+      "raid": {
+        "icyveins": "B",
+        "method": "C",
+        "wowhead": "B",
+        "archon": "B"
+      },
+      "mplus": {
+        "icyveins": null,
+        "method": "C",
+        "wowhead": "B",
+        "archon": "C",
+        "wowmeta": "C"
+      }
+    },
+    "ptr": null,
+    "metrics": [
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct HPS (Mythic)",
+        "value": 177611.3,
+        "unit": "HPS",
+        "n": 20470,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "Popularity",
+        "value": 8.4,
+        "unit": "%",
+        "n": 20470,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "M+ score (95th pct)",
+        "value": 3434,
+        "n": 59333,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "Popularity",
+        "value": 5.4,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median HPS (Mythic, all bosses)",
+        "value": 63794,
+        "unit": "HPS",
+        "n": 80192,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median HPS (M+, all dungeons)",
+        "value": 63794,
+        "unit": "HPS",
+        "n": 80192,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "murlok",
+        "bracket": "mplus",
+        "name": "Top-50 avg M+ rating (ceiling)",
+        "value": 3820,
+        "n": 50,
+        "asOf": "2026-06-28"
+      },
+      {
+        "source": "mythicstats",
+        "bracket": "mplus",
+        "name": "Top-2000 keys representation",
+        "value": 0.5,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      }
+    ],
+    "survivability": {
+      "tier": "S",
+      "source": "archon",
+      "asOf": "2026-07-01"
+    }
+  },
+  {
+    "class": "Priest",
+    "spec": "Shadow",
+    "role": "DPS",
+    "ratings": {
+      "raid": {
+        "icyveins": "A+",
+        "method": "B",
+        "wowhead": "B",
+        "archon": "B"
+      },
+      "mplus": {
+        "icyveins": "A+",
+        "method": "B",
+        "wowhead": "C",
+        "archon": "A",
+        "wowmeta": "C"
+      }
+    },
+    "ptr": {
+      "verdict": "Mixed",
+      "theme": "Voidform / Void Volley charge rework",
+      "summary": "The Voidform and Void Volley charge rework is praised as a real improvement, but Shadeburst's AoE is too weak and the tier set is a complete non-starter.",
+      "changes": [
+        "Voidform + Void Volley reworked around charges — well received.",
+        "Shadeburst AoE lands too soft to matter.",
+        "Rotation gains flexibility from the charge system."
+      ],
+      "set2": "Underwhelming.",
+      "set4": "A complete non-starter — doesn't reward anything the spec wants to do.",
+      "watch": "Strong baseline (raid-A+ / M+-A+) means the whiffed set stings less than it would on a weaker spec."
+    },
+    "metrics": [
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Mythic)",
+        "value": 155060.2,
+        "unit": "DPS",
+        "n": 25148,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "Popularity",
+        "value": 2.9,
+        "unit": "%",
+        "n": 25148,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "M+ score (95th pct)",
+        "value": 3718,
+        "n": 89240,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "Popularity",
+        "value": 2.7,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median rDPS (Mythic, all bosses)",
+        "value": 139530,
+        "unit": "rDPS",
+        "n": 114356,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (M+, all dungeons)",
+        "value": 139530,
+        "unit": "rDPS",
+        "n": 114356,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "murlok",
+        "bracket": "mplus",
+        "name": "Top-50 avg M+ rating (ceiling)",
+        "value": 4047,
+        "n": 50,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "mythicstats",
+        "bracket": "mplus",
+        "name": "Top-2000 keys representation",
+        "value": 1.7,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      }
+    ],
+    "fightProfile": {
+      "source": "bloodmallet",
+      "asOf": "2026-07-01",
+      "targets": {
+        "1": 117567,
+        "2": 168809,
+        "3": 219464,
+        "5": 320075,
+        "8": 449783,
+        "15": 669722
+      }
+    },
+    "survivability": {
+      "tier": "B",
+      "source": "archon",
+      "asOf": "2026-07-01"
+    }
+  },
+  {
+    "class": "Rogue",
+    "spec": "Assassination",
+    "role": "DPS",
+    "ratings": {
+      "raid": {
+        "icyveins": "B",
+        "method": "C",
+        "wowhead": "B",
+        "archon": "C"
+      },
+      "mplus": {
+        "icyveins": "A",
+        "method": "B",
+        "wowhead": "B",
+        "archon": "A",
+        "wowmeta": "D"
+      }
+    },
+    "ptr": null,
+    "metrics": [
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Mythic)",
+        "value": 150358.4,
+        "unit": "DPS",
+        "n": 3914,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "Popularity",
+        "value": 0.4,
+        "unit": "%",
+        "n": 3914,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "M+ score (95th pct)",
+        "value": 3743,
+        "n": 29372,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "Popularity",
+        "value": 0.9,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median rDPS (Mythic, all bosses)",
+        "value": 145581,
+        "unit": "rDPS",
+        "n": 38676,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (M+, all dungeons)",
+        "value": 145581,
+        "unit": "rDPS",
+        "n": 38676,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "murlok",
+        "bracket": "mplus",
+        "name": "Top-50 avg M+ rating (ceiling)",
+        "value": 4002,
+        "n": 50,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "mythicstats",
+        "bracket": "mplus",
+        "name": "Top-2000 keys representation",
+        "value": 0.6,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      }
+    ],
+    "fightProfile": {
+      "source": "bloodmallet",
+      "asOf": "2026-07-01",
+      "targets": {
+        "1": 108391,
+        "2": 122008,
+        "3": 140129,
+        "5": 176605,
+        "8": 206503,
+        "15": 188231
+      }
+    },
+    "survivability": {
+      "tier": "B",
+      "source": "archon",
+      "asOf": "2026-07-01"
+    }
+  },
+  {
+    "class": "Rogue",
+    "spec": "Outlaw",
+    "role": "DPS",
+    "ratings": {
+      "raid": {
+        "icyveins": "A",
+        "method": "C",
+        "wowhead": "C",
+        "archon": "B"
+      },
+      "mplus": {
+        "icyveins": "A+",
+        "method": "C",
+        "wowhead": "B",
+        "archon": "A",
+        "wowmeta": "D"
+      }
+    },
+    "ptr": {
+      "verdict": "Positive",
+      "theme": "Killing Spree +60%, 4pc adds a rotational hook",
+      "summary": "Baseline changes improve flow and cooldown economy — Killing Spree +60%, Fast Action promoted to a core talent — and the 4pc is called \"incredible\". The big warning: all three Rogue specs, Outlaw especially, struggle on 2–4 target raid fights.",
+      "changes": [
+        "Killing Spree damage +60% — finally worth pressing; likely locks in Trickster again.",
+        "Fast Action buffed: Between the Eyes CD −8s (was −5s), +1% damage per BtE stack — now a core pick.",
+        "New talent connectors (Ruthlessness ↔ Find an Opening; Flickering Steel ↔ Grand Melee).",
+        "Zero In (3%→2%) and Hidden Opportunity (Ambush proc 80%→100%) tweaks miss their stated mark."
+      ],
+      "set2": "Dispatch damage +15% — does very little on its own.",
+      "set4": "Sinister Strike / Ambush have a 12% chance to make the next Dispatch free at max combo points — adds a track-and-react hook and eases energy income. Currently bugged with Gravedigger, Hand of Fate coins, and Ruthlessness.",
+      "watch": "Loss of the Precise Cuts era of cleave has turned Outlaw from a 2–4 target monster into \"borderline unplayable\" on those fights — and the upcoming raid has several 2–3 target encounters. Same trap hits all Rogues."
+    },
+    "metrics": [
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Mythic)",
+        "value": 155560.3,
+        "unit": "DPS",
+        "n": 5322,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "Popularity",
+        "value": 0.6,
+        "unit": "%",
+        "n": 5322,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "M+ score (95th pct)",
+        "value": 3857,
+        "n": 37545,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "Popularity",
+        "value": 1.1,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median rDPS (Mythic, all bosses)",
+        "value": 152972,
+        "unit": "rDPS",
+        "n": 48599,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (M+, all dungeons)",
+        "value": 152972,
+        "unit": "rDPS",
+        "n": 48599,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "murlok",
+        "bracket": "mplus",
+        "name": "Top-50 avg M+ rating (ceiling)",
+        "value": 4128,
+        "n": 50,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "mythicstats",
+        "bracket": "mplus",
+        "name": "Top-2000 keys representation",
+        "value": 0.9,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      }
+    ],
+    "fightProfile": {
+      "source": "bloodmallet",
+      "asOf": "2026-07-01",
+      "targets": {
+        "1": 127104,
+        "2": 160621,
+        "3": 205470,
+        "5": 297085,
+        "8": 327998,
+        "15": 354552
+      }
+    },
+    "survivability": {
+      "tier": "B",
+      "source": "archon",
+      "asOf": "2026-07-01"
+    }
+  },
+  {
+    "class": "Rogue",
+    "spec": "Subtlety",
+    "role": "DPS",
+    "ratings": {
+      "raid": {
+        "icyveins": "A",
+        "method": "B",
+        "wowhead": "B",
+        "archon": "A"
+      },
+      "mplus": {
+        "icyveins": "A",
+        "method": "A",
+        "wowhead": "B",
+        "archon": "A",
+        "wowmeta": "C"
+      }
+    },
+    "ptr": {
+      "verdict": "Negative",
+      "theme": "Straight nerfs + placeholder set",
+      "summary": "A straightforward nerf pass — Shadowcraft takes a real ~40–50% reduction — with a tier set that reads as a placeholder, doing little but empowering Backstab. The most negative writeup of the batch.",
+      "changes": [
+        "Shadowcraft cut ~40–50% in real terms.",
+        "General downward tuning with no compensating gameplay change.",
+        "Nothing added to offset the losses."
+      ],
+      "set2": "Placeholder-tier value.",
+      "set4": "Essentially just pushes more Backstab — no new decision or identity.",
+      "watch": "Comes into 12.1 at raid-A / M+-A, so it's nerfing from a fine spot — but the set is the least inspired of the tracked Rogues."
+    },
+    "metrics": [
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Mythic)",
+        "value": 158773.1,
+        "unit": "DPS",
+        "n": 31361,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "Popularity",
+        "value": 3.6,
+        "unit": "%",
+        "n": 31361,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "M+ score (95th pct)",
+        "value": 3709,
+        "n": 73491,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "Popularity",
+        "value": 2.2,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median rDPS (Mythic, all bosses)",
+        "value": 151938,
+        "unit": "rDPS",
+        "n": 91077,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (M+, all dungeons)",
+        "value": 151938,
+        "unit": "rDPS",
+        "n": 91077,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "murlok",
+        "bracket": "mplus",
+        "name": "Top-50 avg M+ rating (ceiling)",
+        "value": 3998,
+        "n": 50,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "mythicstats",
+        "bracket": "mplus",
+        "name": "Top-2000 keys representation",
+        "value": 0.9,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      }
+    ],
+    "fightProfile": {
+      "source": "bloodmallet",
+      "asOf": "2026-07-01",
+      "targets": {
+        "1": 123513,
+        "2": 152350,
+        "3": 195367,
+        "5": 310181,
+        "8": 472210,
+        "15": 591351
+      }
+    },
+    "survivability": {
+      "tier": "B",
+      "source": "archon",
+      "asOf": "2026-07-01"
+    }
+  },
+  {
+    "class": "Shaman",
+    "spec": "Elemental",
+    "role": "DPS",
+    "ratings": {
+      "raid": {
+        "icyveins": "B",
+        "method": "B",
+        "wowhead": "B",
+        "archon": "A"
+      },
+      "mplus": {
+        "icyveins": "A+",
+        "method": "A",
+        "wowhead": "A",
+        "archon": "A",
+        "wowmeta": "B"
+      }
+    },
+    "ptr": null,
+    "metrics": [
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Mythic)",
+        "value": 158169.5,
+        "unit": "DPS",
+        "n": 38679,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "Popularity",
+        "value": 4.4,
+        "unit": "%",
+        "n": 38679,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "M+ score (95th pct)",
+        "value": 3714,
+        "n": 132923,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "Popularity",
+        "value": 4,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median rDPS (Mythic, all bosses)",
+        "value": 137963,
+        "unit": "rDPS",
+        "n": 167753,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (M+, all dungeons)",
+        "value": 137963,
+        "unit": "rDPS",
+        "n": 167753,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "murlok",
+        "bracket": "mplus",
+        "name": "Top-50 avg M+ rating (ceiling)",
+        "value": 4040,
+        "n": 50,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "mythicstats",
+        "bracket": "mplus",
+        "name": "Top-2000 keys representation",
+        "value": 1.8,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      }
+    ],
+    "fightProfile": {
+      "source": "bloodmallet",
+      "asOf": "2026-07-01",
+      "targets": {
+        "1": 130034,
+        "2": 151689,
+        "3": 213523,
+        "5": 457209,
+        "8": 576752,
+        "15": 801923
+      }
+    },
+    "survivability": {
+      "tier": "S",
+      "source": "archon",
+      "asOf": "2026-07-01"
+    }
+  },
+  {
+    "class": "Shaman",
+    "spec": "Enhancement",
+    "role": "DPS",
+    "ratings": {
+      "raid": {
+        "icyveins": "A",
+        "method": "B",
+        "wowhead": "C",
+        "archon": "B"
+      },
+      "mplus": {
+        "icyveins": "A+",
+        "method": "B",
+        "wowhead": "B",
+        "archon": "A",
+        "wowmeta": "B"
+      }
+    },
+    "ptr": null,
+    "metrics": [
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Mythic)",
+        "value": 157123.5,
+        "unit": "DPS",
+        "n": 11944,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "Popularity",
+        "value": 1.4,
+        "unit": "%",
+        "n": 11944,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "M+ score (95th pct)",
+        "value": 3802,
+        "n": 104397,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "Popularity",
+        "value": 3.2,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median rDPS (Mythic, all bosses)",
+        "value": 151359,
+        "unit": "rDPS",
+        "n": 129283,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (M+, all dungeons)",
+        "value": 151359,
+        "unit": "rDPS",
+        "n": 129283,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "murlok",
+        "bracket": "mplus",
+        "name": "Top-50 avg M+ rating (ceiling)",
+        "value": 4047,
+        "n": 50,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "mythicstats",
+        "bracket": "mplus",
+        "name": "Top-2000 keys representation",
+        "value": 1.9,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      }
+    ],
+    "fightProfile": {
+      "source": "bloodmallet",
+      "asOf": "2026-07-01",
+      "targets": {
+        "1": 112774,
+        "2": 164502,
+        "3": 222214,
+        "5": 322980,
+        "8": 419589,
+        "15": 641270
+      }
+    },
+    "survivability": {
+      "tier": "A",
+      "source": "archon",
+      "asOf": "2026-07-01"
+    }
+  },
+  {
+    "class": "Shaman",
+    "spec": "Restoration",
+    "role": "Healer",
+    "ratings": {
+      "raid": {
+        "icyveins": "B",
+        "method": "C",
+        "wowhead": "B",
+        "archon": "C"
+      },
+      "mplus": {
+        "icyveins": "A",
+        "method": "S",
+        "wowhead": "S",
+        "archon": "S",
+        "wowmeta": "S"
+      }
+    },
+    "ptr": {
+      "verdict": "Negative",
+      "theme": "Only Farseer touched (Healing Rain rework)",
+      "summary": "The only changes are to Farseer, via a Healing Rain rework; the other hero tree is untouched. The tier set is praised as thematic but is overshadowed, and the author flatly calls Resto Shaman the weakest raid healer in the game.",
+      "changes": [
+        "Farseer Healing Rain reworked — the sole meaningful change.",
+        "The other hero tree gets nothing.",
+        "Baseline throughput problems remain unaddressed."
+      ],
+      "set2": "Thematic and pleasant, but low-impact.",
+      "set4": "Overshadowed by stronger healer sets this season.",
+      "watch": "Author's verdict: weakest raid healer in the game right now. Baseline raid-B / M+-A — the M+ side carries it; the raid side is the concern the changes don't fix."
+    },
+    "metrics": [
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct HPS (Mythic)",
+        "value": 169601.3,
+        "unit": "HPS",
+        "n": 53200,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "Popularity",
+        "value": 21.8,
+        "unit": "%",
+        "n": 53200,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "M+ score (95th pct)",
+        "value": 3890,
+        "n": 323482,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "Popularity",
+        "value": 29.2,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median HPS (Mythic, all bosses)",
+        "value": 79336,
+        "unit": "HPS",
+        "n": 394678,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median HPS (M+, all dungeons)",
+        "value": 79336,
+        "unit": "HPS",
+        "n": 394678,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "murlok",
+        "bracket": "mplus",
+        "name": "Top-50 avg M+ rating (ceiling)",
+        "value": 4157,
+        "n": 50,
+        "asOf": "2026-06-28"
+      },
+      {
+        "source": "mythicstats",
+        "bracket": "mplus",
+        "name": "Top-2000 keys representation",
+        "value": 7.2,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      }
+    ],
+    "survivability": {
+      "tier": "B",
+      "source": "archon",
+      "asOf": "2026-07-01"
+    }
+  },
+  {
+    "class": "Warlock",
+    "spec": "Affliction",
+    "role": "DPS",
+    "ratings": {
+      "raid": {
+        "icyveins": "A",
+        "method": "A",
+        "wowhead": "C",
+        "archon": "C"
+      },
+      "mplus": {
+        "icyveins": "B",
+        "method": "C",
+        "wowhead": "B",
+        "archon": "B",
+        "wowmeta": "C"
+      }
+    },
+    "ptr": null,
+    "metrics": [
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Mythic)",
+        "value": 152032.9,
+        "unit": "DPS",
+        "n": 9777,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "Popularity",
+        "value": 1.1,
+        "unit": "%",
+        "n": 9777,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "M+ score (95th pct)",
+        "value": 3579,
+        "n": 66449,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "Popularity",
+        "value": 2,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median rDPS (Mythic, all bosses)",
+        "value": 148817,
+        "unit": "rDPS",
+        "n": 83653,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (M+, all dungeons)",
+        "value": 148817,
+        "unit": "rDPS",
+        "n": 83653,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "murlok",
+        "bracket": "mplus",
+        "name": "Top-50 avg M+ rating (ceiling)",
+        "value": 3905,
+        "n": 50,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "mythicstats",
+        "bracket": "mplus",
+        "name": "Top-2000 keys representation",
+        "value": 1.1,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      }
+    ],
+    "fightProfile": {
+      "source": "bloodmallet",
+      "asOf": "2026-07-01",
+      "targets": {
+        "1": 114049,
+        "2": 153949,
+        "3": 188601,
+        "5": 254882,
+        "8": 329854,
+        "15": 455395
+      }
+    },
+    "survivability": {
+      "tier": "B",
+      "source": "archon",
+      "asOf": "2026-07-01"
+    }
+  },
+  {
+    "class": "Warlock",
+    "spec": "Demonology",
+    "role": "DPS",
+    "ratings": {
+      "raid": {
+        "icyveins": "S",
+        "method": "S",
+        "wowhead": "A",
+        "archon": "A"
+      },
+      "mplus": {
+        "icyveins": "A",
+        "method": "A",
+        "wowhead": "A+",
+        "archon": "A",
+        "wowmeta": "A"
+      }
+    },
+    "ptr": null,
+    "metrics": [
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Mythic)",
+        "value": 158737.6,
+        "unit": "DPS",
+        "n": 72302,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "Popularity",
+        "value": 8.2,
+        "unit": "%",
+        "n": 72302,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "M+ score (95th pct)",
+        "value": 3726,
+        "n": 226911,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "Popularity",
+        "value": 6.9,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median rDPS (Mythic, all bosses)",
+        "value": 155746,
+        "unit": "rDPS",
+        "n": 287272,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (M+, all dungeons)",
+        "value": 155746,
+        "unit": "rDPS",
+        "n": 287272,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "murlok",
+        "bracket": "mplus",
+        "name": "Top-50 avg M+ rating (ceiling)",
+        "value": 4069,
+        "n": 50,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "mythicstats",
+        "bracket": "mplus",
+        "name": "Top-2000 keys representation",
+        "value": 2.7,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      }
+    ],
+    "fightProfile": {
+      "source": "bloodmallet",
+      "asOf": "2026-07-01",
+      "targets": {
+        "1": 118546,
+        "2": 205781,
+        "3": 261070,
+        "5": 371923,
+        "8": 537629,
+        "15": 785854
+      }
+    },
+    "survivability": {
+      "tier": "C",
+      "source": "archon",
+      "asOf": "2026-07-01"
+    }
+  },
+  {
+    "class": "Warlock",
+    "spec": "Destruction",
+    "role": "DPS",
+    "ratings": {
+      "raid": {
+        "icyveins": "A+",
+        "method": "A",
+        "wowhead": "A",
+        "archon": "A"
+      },
+      "mplus": {
+        "icyveins": "B",
+        "method": "B",
+        "wowhead": "B",
+        "archon": "C",
+        "wowmeta": "D"
+      }
+    },
+    "ptr": null,
+    "metrics": [
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Mythic)",
+        "value": 160123.1,
+        "unit": "DPS",
+        "n": 7960,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "Popularity",
+        "value": 0.9,
+        "unit": "%",
+        "n": 7960,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "M+ score (95th pct)",
+        "value": 3421,
+        "n": 29306,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "Popularity",
+        "value": 0.9,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median rDPS (Mythic, all bosses)",
+        "value": 121589,
+        "unit": "rDPS",
+        "n": 42051,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (M+, all dungeons)",
+        "value": 121589,
+        "unit": "rDPS",
+        "n": 42051,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "murlok",
+        "bracket": "mplus",
+        "name": "Top-50 avg M+ rating (ceiling)",
+        "value": 3724,
+        "n": 50,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "mythicstats",
+        "bracket": "mplus",
+        "name": "Top-2000 keys representation",
+        "value": 0.6,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      }
+    ],
+    "fightProfile": {
+      "source": "bloodmallet",
+      "asOf": "2026-07-01",
+      "targets": {
+        "1": 115238,
+        "2": 148029,
+        "3": 182200,
+        "5": 241456,
+        "8": 351321,
+        "15": 564116
+      }
+    },
+    "survivability": {
+      "tier": "A",
+      "source": "archon",
+      "asOf": "2026-07-01"
+    }
+  },
+  {
+    "class": "Warrior",
+    "spec": "Arms",
+    "role": "DPS",
+    "ratings": {
+      "raid": {
+        "icyveins": "A",
+        "method": "C",
+        "wowhead": "C",
+        "archon": "A"
+      },
+      "mplus": {
+        "icyveins": "A+",
+        "method": "C",
+        "wowhead": "A",
+        "archon": "S",
+        "wowmeta": "C"
+      }
+    },
+    "ptr": null,
+    "metrics": [
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Mythic)",
+        "value": 160309.4,
+        "unit": "DPS",
+        "n": 22404,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "Popularity",
+        "value": 2.5,
+        "unit": "%",
+        "n": 22404,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "M+ score (95th pct)",
+        "value": 3929,
+        "n": 101815,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "Popularity",
+        "value": 3.1,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median rDPS (Mythic, all bosses)",
+        "value": 163106,
+        "unit": "rDPS",
+        "n": 127694,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (M+, all dungeons)",
+        "value": 163106,
+        "unit": "rDPS",
+        "n": 127694,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "murlok",
+        "bracket": "mplus",
+        "name": "Top-50 avg M+ rating (ceiling)",
+        "value": 4161,
+        "n": 50,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "mythicstats",
+        "bracket": "mplus",
+        "name": "Top-2000 keys representation",
+        "value": 1.7,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      }
+    ],
+    "fightProfile": {
+      "source": "bloodmallet",
+      "asOf": "2026-07-01",
+      "targets": {
+        "1": 112582,
+        "2": 156841,
+        "3": 152551,
+        "5": 192923,
+        "8": 241236,
+        "15": 303673
+      }
+    },
+    "survivability": {
+      "tier": "B",
+      "source": "archon",
+      "asOf": "2026-07-01"
+    }
+  },
+  {
+    "class": "Warrior",
+    "spec": "Fury",
+    "role": "DPS",
+    "ratings": {
+      "raid": {
+        "icyveins": "A",
+        "method": "A",
+        "wowhead": "B",
+        "archon": "B"
+      },
+      "mplus": {
+        "icyveins": "A",
+        "method": "B",
+        "wowhead": "B",
+        "archon": "A",
+        "wowmeta": "B"
+      }
+    },
+    "ptr": null,
+    "metrics": [
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Mythic)",
+        "value": 155728.7,
+        "unit": "DPS",
+        "n": 37153,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "Popularity",
+        "value": 4.2,
+        "unit": "%",
+        "n": 37153,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "M+ score (95th pct)",
+        "value": 3737,
+        "n": 123446,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "Popularity",
+        "value": 3.7,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median rDPS (Mythic, all bosses)",
+        "value": 148670,
+        "unit": "rDPS",
+        "n": 155832,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (M+, all dungeons)",
+        "value": 148670,
+        "unit": "rDPS",
+        "n": 155832,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "murlok",
+        "bracket": "mplus",
+        "name": "Top-50 avg M+ rating (ceiling)",
+        "value": 4061,
+        "n": 50,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "mythicstats",
+        "bracket": "mplus",
+        "name": "Top-2000 keys representation",
+        "value": 2.2,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      }
+    ],
+    "fightProfile": {
+      "source": "bloodmallet",
+      "asOf": "2026-07-01",
+      "targets": {
+        "1": 119620,
+        "2": 138582,
+        "3": 161242,
+        "5": 206485,
+        "8": 272985,
+        "15": 345557
+      }
+    },
+    "survivability": {
+      "tier": "B",
+      "source": "archon",
+      "asOf": "2026-07-01"
+    }
+  },
+  {
+    "class": "Warrior",
+    "spec": "Protection",
+    "role": "Tank",
+    "ratings": {
+      "raid": {
+        "icyveins": "S",
+        "method": "S",
+        "wowhead": "A",
+        "archon": "A"
+      },
+      "mplus": {
+        "icyveins": "B",
+        "method": "B",
+        "wowhead": "B",
+        "archon": "C",
+        "wowmeta": "C"
+      }
+    },
+    "ptr": null,
+    "metrics": [
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Mythic)",
+        "value": 92511.7,
+        "unit": "DPS",
+        "n": 23509,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "Popularity",
+        "value": 18.1,
+        "unit": "%",
+        "n": 23509,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "M+ score (95th pct)",
+        "value": 3468,
+        "n": 107872,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "archon",
+        "bracket": "mplus",
+        "name": "Popularity",
+        "value": 9.7,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median rDPS (Mythic, all bosses, tank)",
+        "value": 81109,
+        "unit": "rDPS",
+        "n": 140429,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (M+, all dungeons, tank)",
+        "value": 81109,
+        "unit": "rDPS",
+        "n": 140429,
+        "asOf": "2026-07-01"
+      },
+      {
+        "source": "murlok",
+        "bracket": "mplus",
+        "name": "Top-50 avg M+ rating (ceiling)",
+        "value": 3897,
+        "n": 50,
+        "asOf": "2026-06-28"
+      },
+      {
+        "source": "mythicstats",
+        "bracket": "mplus",
+        "name": "Top-2000 keys representation",
+        "value": 1.3,
+        "unit": "%",
+        "asOf": "2026-07-01"
+      }
+    ],
+    "survivability": {
+      "tier": "S",
+      "source": "archon",
+      "asOf": "2026-07-01"
+    }
+  }
+]
