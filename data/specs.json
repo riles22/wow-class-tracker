@@ -18,7 +18,22 @@
         "wowmeta": "C"
       }
     },
-    "ptr": null,
+    "ptr": {
+      "verdict": "Negative",
+      "theme": "Crimson Scourge tier set — a complete miss",
+      "summary": "Wowhead's Blood writer Mandl calls the Season 2 set a complete miss: it revolves almost solely around Crimson Scourge and Death and Decay, ignoring that CS can't proc while D&D is on the floor and that D&D sits at the very bottom of Blood's damage. Worse for a tank, it provides near-zero defensive value — \"this feels like a DPS tier set.\"",
+      "changes": [
+        "Set built entirely around Crimson Scourge, but CS can't proc while Death and Decay is a visible unit on the floor — the bonus fights the spec's own restrictions.",
+        "The 15% attack speed does little against Blood's ~3s swing timer, and Blood gains very little from extra auto-attacks anyway.",
+        "Doubling Death and Decay 'effectively does nothing' — at a meager 8.3% AP/second it's a footnote in the damage breakdown.",
+        "In AoE it raises the penalty for not fishing a proc (Heart Strike only cleaves 5 targets inside D&D) instead of increasing the payoff of playing properly."
+      ],
+      "set2": "Moderate attack speed plus a small Crimson Scourge proc-chance bump — blunted by Blood's ~3s swings and the can't-proc-while-D&D-is-down restriction.",
+      "set4": "Doubled Death and Decay damage plus 5% crit for 8s on consuming Crimson Scourge — doubling a bottom-of-the-list ability does nothing, and the crit is flat percentage, not rating, so Riposte converts none of it. Zero defensive value.",
+      "watch": "Mandl's ask is a redesign — even tying the bonuses to Runes or RP spent \"would feel like a breath of fresh air.\" As written, a defense-less DPS set gives a raid-B / M+-C tank nothing where it matters; watch for a rework before tuning has anything to carry.",
+      "draft": true,
+      "source": "https://www.wowhead.com/news/a-complete-miss-of-a-tier-set-blood-death-knight-tier-set-review-381973"
+    },
     "metrics": [
       {
         "source": "archon",
@@ -239,7 +254,22 @@
         "wowmeta": "S"
       }
     },
-    "ptr": null,
+    "ptr": {
+      "verdict": "Negative",
+      "theme": "Minion pruning + an all-passive tier set",
+      "summary": "12.1 cuts Unholy's active minion count (Army of the Dead rework, Reanimation becomes Lord of the Dead) and reshuffles burst damage, but Taeznak finds the execution half-baked: commanding your ghouls reduces to mindlessly spamming Scourge Strike, and the tier set is entirely passive. He likes the concepts — \"I can see the intention, and it's incredible\" — but says nearly every piece needs \"a LOT of work.\"",
+      "changes": [
+        "Army of the Dead no longer summons extra ghouls — you command 8 fixed ghouls via Death Order / Epidemic Order, picked by enemy count rather than the player; the net rotation is mindless Scourge Strike spam with Sudden Doom procs devalued.",
+        "Knock-on breakage: Doomed Bidding doesn't work at all (likely a bug), and Outnumber may fall from always-taken capstone to skipped outright, dragging lesser-ghoul talents (Infected Claws, Commander of the Dead, etc.) down with it.",
+        "Soul Reaper now consumes up to 3 Lesser Ghoul stacks instead of 2 Putrefy charges — forcing extra 2-rune Festering Strikes and courting resource starvation in execute, without fixing the old Commander-of-the-Dead overlap problem.",
+        "Army ghouls last 30s and the new Lord of the Dead lich concentrates damage back into burst windows — contradicting the stated burst-reduction goal; the messaging is 'confusing and contradictory' while sustained damage goes untouched."
+      ],
+      "set2": "Magi and Liches swap to a stronger Necrotic Bolt and Withering Grasp — \"vaguely interesting\" for spotlighting the new lich, but entirely passive with zero player control.",
+      "set4": "+130% to both spells against enemies below 35% health — a flat execute amp Taeznak calls \"about as bland and boring as it could possibly get\"; the piece that \"needs a LOT of work,\" and rare in being less interesting than the 2pc.",
+      "watch": "Unholy enters 12.1 from an S1-topping baseline (M+ S-tier across boards), so a trim was expected — the complaint is direction, not numbers. Watch whether Blizzard picks a lane (sustained spec vs ~80%-of-damage-in-cooldowns), fixes the non-functional Doomed Bidding, and adds any decision-making to the one-button Army rotation before ship.",
+      "draft": true,
+      "source": "https://www.wowhead.com/news/a-completely-passive-set-bonus-unholy-dk-review-of-class-changes-and-tier-set-on-381972"
+    },
     "metrics": [
       {
         "source": "archon",
@@ -489,7 +519,23 @@
         "wowmeta": "A"
       }
     },
-    "ptr": null,
+    "ptr": {
+      "verdict": "Positive",
+      "theme": "Void Meta flattened → Soulburst Reap set",
+      "summary": "Blizzard flattens Devourer's all-in Void Meta profile — Mastery's in-Meta bonus cut 66%, offset by a rare 20% all-ability aura buff — and the author judges the stated goal achieved: slightly less damage inside the cooldown, significantly more outside it. The Soulburst tier set is \"AWESOME\" and rotationally transformative, turning Reap into a main focus; the author is having a LOT of fun on PTR.",
+      "changes": [
+        "Mastery: Monster Within's Void Meta bonus cut 66% — the author's own 45% in-Meta mastery drops to 15% on identical gear — pushing gearing toward Crit/Haste come 12.1.",
+        "All ability damage +20% — a 'GIGANTIC' aura buff, rare at this size; with nothing else changing it still nets roughly a 10% loss for Annihilator, before retuning.",
+        "Impending Apocalypse star ramp 30% → 20% (a 5-star window's final star falls from +120% to +80%); Void Meta's Void Ray bonus 67% → 40%; Consume +60%.",
+        "The rebalance hits Annihilator harder than Void-Scarred — likely forcing a hero-talent swap — while Void-Scarred's no-synergy caster/melee split (and Devourer's Bite, which 'needs to go') is left unaddressed.",
+        "Demon Hunters can now equip daggers — fun access to the new cantrip daggers, otherwise uneventful."
+      ],
+      "set2": "Soulburst: a 4+ soul Reap has a 20% chance (deck-of-cards system, so low variance) to make the next Consume instant and explode in AoE — only 1-2% overall, plus minor instant-cast QoL.",
+      "set4": "Where the set shines: Soulburst generates 8 Soul Fragments plus Moment of Craving and Reap gains 20% damage — one of the kit's most efficient soul generators, \"rotationally transformative,\" and a bigger win for Void-Scarred than Annihilator.",
+      "watch": "Eradicate currently can't proc Soulburst — a significant AoE/cleave proc loss the author calls a bug that \"needs to be fixed ASAP\" — and Void-Scarred's caster/melee dysfunction went untouched. From today's S/A-tier baseline the author still expects a \"great spot\" at 12.1 launch, provided that fix lands.",
+      "draft": true,
+      "source": "https://www.wowhead.com/news/an-amazing-new-tier-set-bonus-devourer-dh-tier-set-and-class-changes-review-382015"
+    },
     "metrics": [
       {
         "source": "archon",
@@ -1175,7 +1221,22 @@
         "wowmeta": "B"
       }
     },
-    "ptr": null,
+    "ptr": {
+      "verdict": "Mixed",
+      "theme": "Double-time capped, play-it-safe tier set",
+      "summary": "The Chronowarden Double-time rework caps a critical Ebon Might's stat bonus at 15 seconds and makes it a trackable buff, fixing the spec's worst variance and tracking problems, while Apex Duplicate's Upheavals lose their knockup — \"a strict improvement\" for raids. The tier set is effective but uninspiring, and barring tuning Augmentation looks largely unchanged going into Season 2.",
+      "changes": [
+        "Double-time capped: Ebon Might crit stats now last 15s (Mastery-scaled) as a trackable buff — no more single dice roll deciding a chunk of your damage.",
+        "Time Skip can still chain two crit Ebon Mights for up to 30s of Double-time — enough to cover a full opener burst window.",
+        "Apex Duplicate's Upheavals no longer knock enemies airborne — a strict raid improvement where add positioning matters, and fewer missed dungeon interrupts.",
+        "Healing abilities up 25% across the board (Living Flame, Verdant Embrace, Emerald Blossom, Panacea, Defy Fate, Molten Blood), in line with other DPS specs."
+      ],
+      "set2": "Upheaval CD −10s — straightforward, directly benefits both Chronowarden and Scalecommander.",
+      "set4": "Upheaval magnifies Fate Mirror for 8s (echo 15% → 45%) — a bigger number on a ~3%-of-total-damage passive with no gameplay hook; the author doubts it changes how anyone plays.",
+      "watch": "The S1 set is strong enough that a 2+2 setup \"is actually looking quite attractive\" — expect the old set to be tuned down at season start. From its raid-S/A, M+-staple baseline the article sees Aug \"largely unchanged\" into Season 2, with rough edges (Ebon Might phasing, dead Mastery/Vers) still unaddressed.",
+      "draft": true,
+      "source": "https://www.wowhead.com/news/addressing-the-power-of-double-time-augmentation-evoker-class-changes-and-tier-381986"
+    },
     "metrics": [
       {
         "source": "archon",

@@ -547,7 +547,7 @@ function drawerHTML(s){
   const p = s.ptr;
   const showPtr = state.era !== "live";
   const left = (p && showPtr) ? `
-       <p class="d-summary">${p.theme?`<span class="theme">${esc(p.theme)}</span><br>`:""}${esc(p.summary)}</p>
+       <p class="d-summary">${p.theme?`<span class="theme">${esc(p.theme)}</span> `:""}${p.draft?`<span class="theme" style="color:var(--v-mix); border-color:color-mix(in srgb,var(--v-mix) 45%,transparent)">draft — verify verdict</span>`:""}${p.theme||p.draft?`<br>`:""}${esc(p.summary)}${p.source?` <span class="mnote">— drafted from <a href="${esc(p.source)}" target="_blank" rel="noopener">Wowhead</a></span>`:""}</p>
        <p class="d-h">Key changes</p>
        <ul class="d-list">${(p.changes||[]).map(c=>`<li>${esc(c)}</li>`).join("")}</ul>` : showPtr ? `
        <p class="d-summary"><span class="theme">No 12.1 PTR writeup yet</span><br>Current-season baseline below — the PTR read gets added to data/specs.json when this spec's pass lands.</p>` : `

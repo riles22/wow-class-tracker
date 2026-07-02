@@ -65,7 +65,9 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   across DPS specs** (≥70th = strong, ≤30th = weak) plus a row tag (AoE-lean / ST-lean /
   All-round / Flexible / Low-sims). DPS specs only — healers/tanks have no sim basis.
 - `ptr` is the per-spec 12.1 writeup: `{ verdict: "Positive|Mixed|Negative", theme,
-  summary, changes[], set2, set4, watch }`.
+  summary, changes[], set2, set4, watch }`. Writeups distilled from Wowhead's 12.1
+  spec articles may carry `draft: true` + `source: <url>` — shown with a "draft —
+  verify verdict" chip until Riley confirms (confirming = delete the `draft` flag).
 
 ### Computed at build time (never hand-written)
 - **Movement (▲▼)**: `build` compares consensus tiers + metric ranks against the latest
