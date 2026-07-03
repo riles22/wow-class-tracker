@@ -102,8 +102,13 @@ specsAffected[], highlights[] }`. Canonical source: the official forum thread
 
 ### `data/community.json` — curated community links
 Per class: verified Discord (name + invite from wowhead.com/discord-servers, render via
-r.jina.ai) and creators `{ name, credential, url, latest, verifiedDate }`. Add only
-verified entries; prefer Wowhead/Icy-Veins/Method guide authors.
+r.jina.ai) and creators `{ name, credential, url, latest, verifiedDate, specs? }`. Add
+only verified entries; prefer Wowhead/Icy-Veins/Method guide authors. **`specs`** is
+optional per-creator spec scoping — the specs of that class the creator is actually
+credible on (absent = whole class). Creators specialize (Obli = Frost/Unholy DK, not
+Blood); watch-creators only attributes takes within a creator's scope so a DPS creator
+never lends authority to their class's tank/healer spec. `sites[]` holds class
+community-site links (Peak of Serenity, Dreamgrove, etc.).
 
 ## Refresh workflows
 

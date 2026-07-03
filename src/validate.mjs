@@ -114,11 +114,29 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
   }
 
   // --- community registry ---
+  const specsByClass = new Map();
+  for (const s of specs) {
+    if (!specsByClass.has(s.class)) specsByClass.set(s.class, new Set());
+    specsByClass.get(s.class).add(s.spec);
+  }
   for (const entry of community?.classes ?? []) {
     if (!entry.class) errors.push("community.json: class entry missing class name");
     if (!entry.discord?.name || !entry.discord?.url) errors.push(`community.json: ${entry.class} discord needs name + url`);
     for (const creator of entry.creators ?? []) {
       if (!creator.name || !creator.url) errors.push(`community.json: ${entry.class} creator needs name + url`);
+      // Optional spec scoping: a creator credible on only some of a class's specs.
+      // Absent = whole class. Each listed spec must be a real spec of that class.
+      if (creator.specs != null) {
+        if (!Array.isArray(creator.specs) || creator.specs.length === 0) {
+          errors.push(`community.json: ${entry.class} creator "${creator.name}" specs must be a non-empty array when present`);
+        } else {
+          for (const sp of creator.specs) {
+            if (!specsByClass.get(entry.class)?.has(sp)) {
+              errors.push(`community.json: ${entry.class} creator "${creator.name}" scoped to "${sp}" which is not a ${entry.class} spec`);
+            }
+          }
+        }
+      }
     }
     for (const site of entry.sites ?? []) {
       if (!site.name || !site.url) errors.push(`community.json: ${entry.class} site needs name + url`);

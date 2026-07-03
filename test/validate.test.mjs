@@ -63,6 +63,20 @@ test("validateData requires every scale to declare tiers with numeric values", a
   assert.ok(errors.some(e => e.includes('scale "icyveins" tier "Z" has no numeric value')));
 });
 
+test("a creator's specs scope must be real specs of that class", async () => {
+  const data = await loadData(ROOT);
+  const ok = structuredClone(data);
+  const dk = ok.community.classes.find(c => c.class === "Death Knight");
+  dk.creators[0].specs = ["Frost", "Unholy"]; // both valid DK specs
+  assert.deepEqual(validateData(ok), []);
+
+  const bad = structuredClone(data);
+  const dk2 = bad.community.classes.find(c => c.class === "Death Knight");
+  dk2.creators[0].specs = ["Shadow"]; // a Priest spec — not valid on DK
+  const errors = validateData(bad);
+  assert.ok(errors.some(e => e.includes('scoped to "Shadow"') && e.includes("not a Death Knight spec")));
+});
+
 test("a spec with an omitted ptr key is valid (same as ptr: null)", async () => {
   const data = await loadData(ROOT);
   const clone = structuredClone(data);

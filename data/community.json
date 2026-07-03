@@ -13,6 +13,7 @@
         {
           "name": "Bicepspump",
           "credential": "Icy Veins Unholy Death Knight guide writer (12.0.7 guide updated 2026-06-15); DK DPS theorycrafter, YouTube/Twitch",
+          "specs": ["Unholy"],
           "url": "https://www.youtube.com/@Bicepspump",
           "latest": "Unholy DK Mythic+ Guide (Midnight 12.0.5)",
           "verifiedDate": "2026-05-02",
@@ -21,6 +22,7 @@
         {
           "name": "Obli",
           "credential": "Method content creator; Frost/Unholy DK guides + 12.1 PTR coverage",
+          "specs": ["Frost", "Unholy"],
           "url": "https://www.youtube.com/@obliwow",
           "channelId": "UC04sQauRkMShD_iE5S4MZwg",
           "latest": "Midnight Season 2 PTR / patch 12.1 DK coverage (uploads 2026-06-27..29)",
@@ -230,10 +232,20 @@
         {
           "name": "Woxtoxic",
           "credential": "Outlaw Rogue Mythic+ YouTuber ('Midnight 12.0.5 Outlaw Rogue Mythic+ Guide' 2026-04-29 plus high-key POVs)",
+          "specs": ["Outlaw"],
           "url": "https://www.youtube.com/@woxtoxic",
           "channelId": "UCEwVHfmahFS16sNSytkp2Zg",
           "latest": "+23 Seat of the Triumvirate - Outlaw POV",
           "verifiedDate": "2026-06-04"
+        },
+        {
+          "name": "Shindigg",
+          "credential": "High-key Midnight S1 Rogue player (4026 M+ Outlaw rating); stream-VOD-archive channel (streams as shindigwow on Twitch), not a produced-guide channel — expect to scrub VODs for spec content",
+          "specs": ["Outlaw", "Assassination"],
+          "url": "https://www.youtube.com/@shindigg672",
+          "channelId": "UCwq3e_DOew1ZtLsK32722Iw",
+          "latest": "CHECKING OUT ROGUE ON PTR (2026-07-01); 12.1 RAID TESTING PLAYING ROGUE (2026-06-25)",
+          "verifiedDate": "2026-07-01"
         }
       ],
       "sites": [

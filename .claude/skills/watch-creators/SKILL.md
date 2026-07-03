@@ -25,6 +25,15 @@ locally, and distill them into cited per-spec takes in `data/creator-takes.json`
    video title, date, patch context (announced / PTR / live), sentiment
    (buff / nerf / neutral), and a deep link `https://youtu.be/<id>?t=<seconds>` from
    the caption timestamp. Append to `data/creator-takes.json` (shape in that file).
+   **Spec scoping (important):** creators specialize — most know one or two specs of a
+   class, not all of them (Obli plays Frost/Unholy DK but not Blood; a DPS creator is
+   not authoritative on their class's tank/healer spec). If the creator entry has a
+   `specs` list, only attribute takes to those specs. If it has no list, still apply
+   judgment: attribute a take to a spec **only when the creator demonstrably plays or
+   analyzes it in depth** in the video — never stretch a class-wide label (or a
+   class-tuning-roundup video) into a spec they merely mention in passing. When a
+   video reveals a creator competently covers a spec outside their listed `specs`,
+   note it in the run log for a human to widen the scope — don't silently override.
 4. Supersede: when a creator posts a newer take on the same spec, mark older ones
    `superseded: true` rather than deleting.
 5. `npm test && npm run build`; append date · videos processed · takes added to `log.md`.

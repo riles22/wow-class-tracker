@@ -532,8 +532,10 @@ function takesHTML(s){
 function communityHTML(s){
   const c = (COMMUNITY.classes||[]).find(x=>x.class===s.class);
   if(!c) return "";
-  const creators = (c.creators||[]).map(cr=>
-    `<div>${cr.url?`<a href="${esc(cr.url)}" target="_blank" rel="noopener" title="${esc(cr.latest||"")}">${esc(cr.name)}</a>`:esc(cr.name)}${cr.credential?` <span class="mnote">— ${esc(cr.credential)}</span>`:""}</div>`).join("");
+  const creators = (c.creators||[]).map(cr=>{
+    const scope = Array.isArray(cr.specs) ? ` <span class="mnote" style="color:var(--accent-2)">[${cr.specs.map(esc).join(" · ")}]</span>` : "";
+    return `<div>${cr.url?`<a href="${esc(cr.url)}" target="_blank" rel="noopener" title="${esc(cr.latest||"")}">${esc(cr.name)}</a>`:esc(cr.name)}${scope}${cr.credential?` <span class="mnote">— ${esc(cr.credential)}</span>`:""}</div>`;
+  }).join("");
   const sites = (c.sites||[]).map(site=>
     `<a href="${esc(site.url)}" target="_blank" rel="noopener" title="${esc(site.note||"")}">${esc(site.name)}</a>`).join(" · ");
   return `<div class="srcbreak"><p class="d-h">Community (${esc(s.class)})</p><div class="setbox">
