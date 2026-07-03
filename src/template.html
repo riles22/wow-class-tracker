@@ -434,7 +434,7 @@ const state = { source:"consensus", era:"both", role:"All", ptrOnly:false, sort:
 /* Era tagging: metrics may carry an explicit era; otherwise PTR-labeled names are ptr.
    Creator takes: patchContext mentioning "live" is live-era, everything else 12.1-ish. */
 const metricEra = m => m.era ?? (m.name.includes("12.1 PTR") ? "ptr" : "live");
-const takeEra = t => (t.patchContext||"").toLowerCase().includes("live") ? "live" : "ptr";
+const takeEra = t => (t.patchContext||"").includes("PTR") ? "ptr" : "live"; // key on the PTR marker, not a "live" substring
 const eraOk = era => state.era === "both" || state.era === era;
 const matrix = document.getElementById('matrix');
 

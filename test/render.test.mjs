@@ -5,10 +5,10 @@ import { fightLabels, metricRanks, outlookFor, movementFor } from "../src/render
 test("outlookFor: verdict wins; tuning-line balance covers writeup-less specs", () => {
   const builds = { builds: [{
     date: "2026-06-30",
-    specsAffected: ["Feral Druid", "Mage (class-wide)"],
+    specsAffected: ["Feral Druid", "Mage (class-wide)", "Frost Death Knight"],
     highlights: [
       "Feral Druid — Blood Spattered increases Ferocious Bite damage by 8% (was 2%).",
-      "Frost damage reduced by 10%. (Death Knight — Frost)"
+      "Frost Death Knight — Obliterate damage reduced by 25%."
     ]
   }] };
   const positive = outlookFor({ class: "X", spec: "Y", ptr: { verdict: "Positive" } }, builds);
@@ -21,15 +21,36 @@ test("outlookFor: verdict wins; tuning-line balance covers writeup-less specs", 
   assert.equal(outlookFor({ class: "Rogue", spec: "Outlaw", ptr: null }, builds), null); // untouched
 });
 
+test("outlookFor: no cross-class substring collisions (class-wide or prose mentions)", () => {
+  // "Demon Hunter (class-wide)" must NOT count toward a Hunter spec, and a class-wide
+  // Warrior line that names Arms in prose must NOT be tallied as an Arms nerf.
+  const builds = { builds: [{
+    date: "2026-06-30",
+    specsAffected: ["Demon Hunter (class-wide)", "Warrior (class-wide)", "Arms Warrior"],
+    highlights: [
+      "Demon Hunter (class-wide) — Demon Hunters can now equip daggers.",
+      "Warrior (class-wide) — Rend is now exclusive to Arms; its Rage cost is reduced to 10.",
+      "Arms Warrior — Ignore Pain absorb increased by 25%."
+    ]
+  }] };
+  // Beast Mastery Hunter is untouched — "Demon Hunter (class-wide)" must not match "Hunter".
+  assert.equal(outlookFor({ class: "Hunter", spec: "Beast Mastery", ptr: null }, builds), null);
+  // Arms: only the genuine "Arms Warrior — … increased" line counts (buff); the class-wide
+  // "… reduced …" prose mention of Arms must be ignored → direction up, not flat.
+  const arms = outlookFor({ class: "Warrior", spec: "Arms", ptr: null }, builds);
+  assert.equal(arms.direction, "up");
+  assert.deepEqual([arms.buffs, arms.nerfs], [1, 0]);
+});
+
 test("movementFor computes tier steps and rank deltas vs a snapshot", () => {
   const scales = { consensus: { bands: [{ tier: "S", min: 88 }, { tier: "A", min: 58 }, { tier: "B", min: 0 }] } };
   const specs = [{
     class: "C", spec: "S", role: "DPS",
     consensus: { raid: { tier: "A" }, mplus: { tier: "B" } },
-    metrics: [{ bracket: "raid", name: "Median rDPS", value: 1, rank: 2 }]
+    metrics: [{ source: "warcraftlogs", bracket: "raid", name: "Median rDPS", value: 1, rank: 2 }]
   }];
   const snap = { date: "2026-06-24", specs: { "C|S": {
-    consensus: { raid: "B", mplus: "B" }, ranks: { "raid|Median rDPS": 5 }
+    consensus: { raid: "B", mplus: "B" }, ranks: { "warcraftlogs|raid|Median rDPS": 5 }
   } } };
   movementFor(specs, scales, snap);
   assert.deepEqual(specs[0].movement, { raid: { delta: 1, was: "B", since: "2026-06-24" } });
@@ -38,6 +59,23 @@ test("movementFor computes tier steps and rank deltas vs a snapshot", () => {
   const bare = [{ class: "C", spec: "S", consensus: {}, metrics: [] }];
   movementFor(bare, scales, null);
   assert.equal(bare[0].movement, undefined);
+});
+
+test("movementFor keys rank deltas by source, so same-name metrics don't collide", () => {
+  const scales = { consensus: { bands: [{ tier: "S", min: 0 }] } };
+  const specs = [{
+    class: "C", spec: "S", role: "DPS", consensus: {},
+    metrics: [
+      { source: "warcraftlogs", bracket: "raid", name: "Median rDPS", value: 1, rank: 3 },
+      { source: "simulationcraft", bracket: "raid", name: "Median rDPS", value: 2, rank: 1 }
+    ]
+  }];
+  const snap = { date: "2026-06-24", specs: { "C|S": { consensus: {}, ranks: {
+    "warcraftlogs|raid|Median rDPS": 5, "simulationcraft|raid|Median rDPS": 1
+  } } } };
+  movementFor(specs, scales, snap);
+  assert.equal(specs[0].metrics[0].rankDelta, 2);        // WCL 5 → 3 climbed 2
+  assert.equal(specs[0].metrics[1].rankDelta, undefined); // SimC 1 → 1 unchanged, no false delta
 });
 
 test("metricRanks ranks within (role, bracket, metric name), #1 = highest", () => {
@@ -90,13 +128,19 @@ test("fightLabels skips non-DPS and profile-less specs untouched", () => {
   assert.ok(specs[2].fightProfile.labels);
 });
 
-test("fightLabels uses target-count fallbacks (5T when 8T missing)", () => {
+test("fightLabels uses canonical counts (1/3/8) — no cross-count mixing", () => {
+  // A spec missing the canonical AoE count (8) gets a null AoE label rather than being
+  // ranked on a lower-count sim against the field's 8-target values.
   const specs = [
-    mk("A", { "1": 100000, "3": 150000, "5": 200000 }),
-    mk("B", { "1": 120000, "3": 160000, "5": 260000 }),
-    mk("C", { "1": 110000, "3": 155000, "5": 230000 }),
+    mk("Full1", { "1": 100000, "3": 150000, "8": 300000 }),
+    mk("Full2", { "1": 120000, "3": 160000, "8": 520000 }),
+    mk("No8",   { "1": 110000, "3": 155000, "5": 230000 }), // has 5T, not 8T
   ];
   fightLabels(specs);
-  assert.equal(specs[1].fightProfile.metricsUsed.aoe, 260000);
+  assert.equal(specs[2].fightProfile.metricsUsed.aoe, undefined, "no canonical 8T → no AoE metric");
+  assert.equal(specs[2].fightProfile.labels.aoe, null, "no AoE label rather than a distorted one");
+  assert.equal(specs[2].fightProfile.labels.st, "mid", "ST still labeled from its 1T value");
+  // The two full specs are ranked only against each other's real 8T values.
   assert.equal(specs[1].fightProfile.labels.aoe, "strong");
+  assert.equal(specs[0].fightProfile.labels.aoe, "weak");
 });

@@ -20,7 +20,9 @@ export async function snapshot(root = ROOT, date = new Date().toISOString().slic
         mplus: s.consensus?.mplus?.tier ?? null
       },
       ranks: Object.fromEntries(
-        (s.metrics ?? []).filter(m => m.rank != null).map(m => [`${m.bracket}|${m.name}`, m.rank])
+        // Key includes source so two same-(bracket,name) metrics don't collide (must
+        // match the movement lookup key in render.mjs movementFor).
+        (s.metrics ?? []).filter(m => m.rank != null).map(m => [`${m.source}|${m.bracket}|${m.name}`, m.rank])
       )
     };
   }

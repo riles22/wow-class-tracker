@@ -18,13 +18,15 @@ export function decorateSpecs(specs, sources, scales) {
    target counts (ST = 1T, cleave = 3T, AoE = 8T with fallbacks). Only DPS
    specs with fightProfile.targets participate; labels are relative to that
    population, and the basis (raw numbers) is kept for display. */
+/* Canonical comparison target counts — ST=1, cleave=3, AoE=8. Fixed (no fallback)
+   so the percentile population is strictly same-count: comparing a spec's 5-target
+   sim against the field's 8-target sims would systematically deflate its AoE rank.
+   A spec whose sim data lacks the canonical count gets a null label for that axis
+   (honest "no comparable sim") rather than a wrong one. All current DPS specs carry
+   1/3/8, so this is behavior-neutral today. */
 const pickMetrics = fp => {
   const t = fp.targets ?? {};
-  return {
-    st: t["1"],
-    cleave: t["3"] ?? t["2"] ?? t["4"],
-    aoe: t["8"] ?? t["9"] ?? t["6"] ?? t["5"]
-  };
+  return { st: t["1"], cleave: t["3"], aoe: t["8"] };
 };
 
 export function fightLabels(specs) {
@@ -86,12 +88,18 @@ export function outlookFor(spec, ptrBuilds) {
   const builds = ptrBuilds?.builds ?? [];
   if (!builds.length) return null;
   const full = `${spec.spec} ${spec.class}`;
+  // Exact spec match, or a class-level entry ("Druid (class-wide)", "Warlock (Hellcaller
+  // hero talents)") — anchored with startsWith so "Demon Hunter (class-wide)" can never
+  // match Hunter, nor "Death Knight (…)" match a Knight-less class via substring.
+  const classLevel = `${spec.class} (`;
   const mentioned = builds.filter(b => (b.specsAffected ?? []).some(e =>
-    e === full || (e.includes("class-wide") && e.includes(spec.class)))).length;
+    e === full || e.startsWith(classLevel))).length;
   let buffs = 0, nerfs = 0;
   for (const b of builds) {
     for (const h of b.highlights ?? []) {
-      if (!(h.includes(spec.spec) && h.includes(spec.class))) continue;
+      // Count only lines genuinely ABOUT this spec ("Arms Warrior — …"), not class-wide
+      // lines that merely name it in prose ("Warrior (class-wide) — … exclusive to Arms …").
+      if (!h.startsWith(`${full} `)) continue;
       if (/increas/i.test(h)) buffs++;
       if (/reduc|decreas|nerf/i.test(h)) nerfs++;
     }
@@ -129,7 +137,8 @@ export function movementFor(specs, scales, snapshot) {
     }
     if (Object.keys(movement).length) s.movement = movement;
     for (const m of s.metrics ?? []) {
-      const was = prev.ranks?.[`${m.bracket}|${m.name}`];
+      // Key includes source: two sources can share a (bracket, name) but rank separately.
+      const was = prev.ranks?.[`${m.source}|${m.bracket}|${m.name}`];
       if (was != null && m.rank != null && was !== m.rank) m.rankDelta = was - m.rank;
     }
   }
