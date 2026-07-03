@@ -11,7 +11,11 @@ locally, and distill them into cited per-spec takes in `data/creator-takes.json`
 
 ## Procedure
 
-1. **Discovery**: for each creator with a YouTube channel, fetch
+0. **Skip reference-only creators**: entries with `transcribable: false` (guide-byline
+   or Discord-only authorities — e.g. SimC devs, guide writers) are display-only "who to
+   read" links; the pipeline does not transcribe them. Process only creators with a
+   YouTube `channelId` or a fetchable doc `url` and `transcribable !== false`.
+1. **Discovery**: for each transcribable creator with a YouTube channel, fetch
    `https://www.youtube.com/feeds/videos.xml?channel_id=<id>` (no auth). Resolve an
    unknown channel_id once by grepping `"channelId"` from the raw watch-page HTML
    (browser UA) and cache it on the creator entry as `channelId`. Diff videoIds

@@ -122,6 +122,9 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
   for (const entry of community?.classes ?? []) {
     if (!entry.class) errors.push("community.json: class entry missing class name");
     if (!entry.discord?.name || !entry.discord?.url) errors.push(`community.json: ${entry.class} discord needs name + url`);
+    for (const alt of entry.altDiscords ?? []) {
+      if (!alt.name || !alt.url) errors.push(`community.json: ${entry.class} altDiscord needs name + url`);
+    }
     for (const creator of entry.creators ?? []) {
       if (!creator.name || !creator.url) errors.push(`community.json: ${entry.class} creator needs name + url`);
       // Optional spec scoping: a creator credible on only some of a class's specs.

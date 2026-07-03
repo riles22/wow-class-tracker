@@ -5,7 +5,8 @@
       "name": "tracker",
       "runtimeExecutable": "node",
       "runtimeArgs": ["src/serve.mjs"],
-      "port": 8317
+      "port": 8317,
+      "autoPort": true
     }
   ]
 }

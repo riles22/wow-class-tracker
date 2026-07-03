@@ -107,8 +107,11 @@ only verified entries; prefer Wowhead/Icy-Veins/Method guide authors. **`specs`*
 optional per-creator spec scoping — the specs of that class the creator is actually
 credible on (absent = whole class). Creators specialize (Obli = Frost/Unholy DK, not
 Blood); watch-creators only attributes takes within a creator's scope so a DPS creator
-never lends authority to their class's tank/healer spec. `sites[]` holds class
-community-site links (Peak of Serenity, Dreamgrove, etc.).
+never lends authority to their class's tank/healer spec. `transcribable: false` marks a
+guide-byline/Discord-only authority (SimC devs, guide writers) — a display "who to read"
+link the transcript pipeline skips (shown with a 📖). `sites[]` holds class
+community-site links (Peak of Serenity, Dreamgrove, etc.); `altDiscords[]` holds
+secondary spec-specific Discords (Death's Advance, Focused Will, …).
 
 ## Refresh workflows
 

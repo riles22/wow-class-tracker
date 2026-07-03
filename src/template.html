@@ -228,6 +228,12 @@
   .watch{margin-top:12px; font-size:13px; color:var(--ink-dim); background:color-mix(in srgb,var(--v-mix) 8%,transparent); border:1px solid color-mix(in srgb,var(--v-mix) 26%,transparent); border-radius:8px; padding:9px 12px}
   .watch b{font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--v-mix); display:block; margin-bottom:3px}
   .empty{padding:34px 16px; text-align:center; color:var(--ink-faint); font-size:14px}
+  .ptrcaveat{
+    display:none; margin:10px 0 0; padding:9px 13px; font-size:12.5px; line-height:1.5;
+    color:var(--ink-dim); background:color-mix(in srgb,var(--accent) 7%,transparent);
+    border:1px solid color-mix(in srgb,var(--accent) 26%,transparent); border-radius:8px
+  }
+  .ptrcaveat b{color:var(--accent); font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase}
 
   /* ---------- footer ---------- */
   footer{margin-top:30px; border-top:1px solid var(--edge); padding-top:22px; color:var(--ink-faint); font-size:13px}
@@ -366,6 +372,8 @@
     </div>
     <span class="note">Tiers are <b>within role</b> — a healer's S is best among healers, not across the whole game. Hover any tier badge for the per-source breakdown; click any row for current 12.0.7 numbers.</span>
   </div>
+
+  <p class="ptrcaveat" id="ptrcaveat"><b>PTR read</b> — 12.1 verdicts, tuning notes, and zone-54 testing scores are <b style="text-transform:none;letter-spacing:0;font-family:inherit;font-size:inherit;color:var(--ink)">sim-backed speculation, not empirical truth</b>. Early-patch sims desync between PTR and live, SimC rotations are immature, and testing samples are tiny (n often &lt;100). Treat as directional until ~2 weeks of live logs confirm it.</p>
 
   <div class="matrix" id="matrix"></div>
 
@@ -534,12 +542,15 @@ function communityHTML(s){
   if(!c) return "";
   const creators = (c.creators||[]).map(cr=>{
     const scope = Array.isArray(cr.specs) ? ` <span class="mnote" style="color:var(--accent-2)">[${cr.specs.map(esc).join(" · ")}]</span>` : "";
-    return `<div>${cr.url?`<a href="${esc(cr.url)}" target="_blank" rel="noopener" title="${esc(cr.latest||"")}">${esc(cr.name)}</a>`:esc(cr.name)}${scope}${cr.credential?` <span class="mnote">— ${esc(cr.credential)}</span>`:""}</div>`;
+    const ref = cr.transcribable === false ? ` <span class="mnote" title="Guide/theorycraft reference — read link, not a transcribed video source">📖</span>` : "";
+    return `<div>${cr.url?`<a href="${esc(cr.url)}" target="_blank" rel="noopener" title="${esc(cr.latest||"")}">${esc(cr.name)}</a>`:esc(cr.name)}${scope}${ref}${cr.credential?` <span class="mnote">— ${esc(cr.credential)}</span>`:""}</div>`;
   }).join("");
+  const discords = [c.discord, ...(c.altDiscords||[])].map(dc=>
+    `<a href="${esc(dc.url)}" target="_blank" rel="noopener">${esc(dc.name)}</a>`).join(" · ");
   const sites = (c.sites||[]).map(site=>
     `<a href="${esc(site.url)}" target="_blank" rel="noopener" title="${esc(site.note||"")}">${esc(site.name)}</a>`).join(" · ");
   return `<div class="srcbreak"><p class="d-h">Community (${esc(s.class)})</p><div class="setbox">
-    <div class="setrow"><span class="pc">Discord</span><span class="pct"><a href="${esc(c.discord.url)}" target="_blank" rel="noopener">${esc(c.discord.name)}</a></span></div>
+    <div class="setrow"><span class="pc">Discord</span><span class="pct">${discords}</span></div>
     ${sites?`<div class="setrow"><span class="pc">Sites</span><span class="pct">${sites}</span></div>`:""}
     ${creators?`<div class="setrow"><span class="pc">Creators</span><span class="pct">${creators}</span></div>`:""}
   </div></div>`;
@@ -645,6 +656,7 @@ function render(){
   }
 
   matrix.innerHTML = html;
+  document.getElementById('ptrcaveat').style.display = state.era === "ptr" ? "block" : "none";
   const shown = ordered.length, ptrShown = ordered.filter(s=>s.ptr).length;
   document.getElementById('count').textContent = `${shown} spec${shown!==1?'s':''}${state.ptrOnly?'':` · ${ptrShown} tracked`}`;
   wireRows();

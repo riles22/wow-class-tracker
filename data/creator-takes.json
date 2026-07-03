@@ -2,6 +2,50 @@
   "_comment": "Qualitative layer: distilled, cited creator takes per spec — populated by the watch-creators skill from video transcripts. Claims are paraphrased (auto-captions are lossy); every take carries a timestamped deep link for verification. Takes NEVER feed tiers or consensus. superseded: true when a newer take from the same creator or a newer patch state replaces it.",
   "takes": [
     {
+      "class": "Shaman",
+      "spec": "Elemental",
+      "creator": "Dalaran Gaming",
+      "date": "2026-07-02",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR",
+      "claim": "He reads 12.1 as deliberately weaning Elemental off Ascendance-window and overload RNG: the apex talent's overload amplification drops sharply (Ascendance overload bonus 75% to 30%, activation Lava Bursts at 50% value, rank bonuses trimmed from ~50% to ~30%), while redesigned Power of the Maelstrom (bankable 2-stack Lava Burst amp off Lightning Bolt/Chain Lightning casts) and Stormkeeper (instant, +100% no-overload Lightning Bolts vs overloading Chain Lightnings) push toward deliberate cast-combo gameplay.",
+      "url": "https://youtu.be/00K4UWo-jvI?t=246",
+      "superseded": false
+    },
+    {
+      "class": "Shaman",
+      "spec": "Elemental",
+      "creator": "Dalaran Gaming",
+      "date": "2026-07-02",
+      "sentiment": "buff",
+      "patchContext": "12.1 PTR",
+      "claim": "In exchange for the Ascendance/overload trims, Elemental's base kit gets large compensation buffs — Lava Burst and Lightning Bolt baseline damage up 30%, Chain Lightning and Flame Shock up 60%, plus 25% stronger self-healing (Healing Surge, Earth Shield, Healing Stream Totem) — which he sees as a genuine attempt to make the spec strong outside cooldown windows, cautioning that the burst still needs to feel satisfying for the playstyle to keep its fans.",
+      "url": "https://youtu.be/00K4UWo-jvI?t=424",
+      "superseded": false
+    },
+    {
+      "class": "Shaman",
+      "spec": "Enhancement",
+      "creator": "Dalaran Gaming",
+      "date": "2026-07-02",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR",
+      "claim": "Enhancement's playstyle is built upon rather than redefined in 12.1: the new gameplay hook is the tier set (guaranteed primary-target Fire Nova eruptions every 2 seconds, 4-set Crash Lightning cooldown reduction with a stacking 8% amp that feeds the apex talent) layered on flat base-kit buffs (Lightning Bolt/Chain Lightning +20%, Lava Lash/Stormstrike/melee +15%), while RNG power is trimmed — Doom Winds' Windfury activation bonus halved and Stormbringer's Tempest plus Totemic's Surging Totem tuned down.",
+      "url": "https://youtu.be/00K4UWo-jvI?t=538",
+      "superseded": false
+    },
+    {
+      "class": "Shaman",
+      "spec": "Restoration",
+      "creator": "Dalaran Gaming",
+      "date": "2026-07-02",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR",
+      "claim": "Flags Restoration as the Shaman spec getting conspicuously little PTR attention: its only real 12.1 change is Healing Rain gaining a shorter cooldown with a longer duration so it can be re-placed sooner in raids (mainly a Farseer quality-of-life fix), and he relays community concern about Resto's raid standing carrying over from Season 1 given how much less attention it is receiving than the other two Shaman specs or other healers.",
+      "url": "https://youtu.be/00K4UWo-jvI?t=691",
+      "superseded": false
+    },
+    {
       "class": "Warlock",
       "spec": "Affliction",
       "creator": "Kalamazi",
