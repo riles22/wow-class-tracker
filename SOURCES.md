@@ -63,6 +63,14 @@ shown in each drawer's Source ratings box.
   transcripts (yt-dlp) and distills **creator takes** into `data/creator-takes.json`:
   paraphrased, sentiment-tagged, timestamp-linked. Opinion ≠ tier data; 2+ independent
   creators required before calling anything "consensus".
+- **Per-spec authority coverage**: every one of the 40 specs now has at least one named
+  creator/authority, live-verified and spec-scoped. ~half are **transcribable** (real
+  video/doc channels the pipeline pulls takes from — Reholy, VooDooSaurus, Publik,
+  Clandon, Whispyr, LBNinja7, Obli, Kalamazi, …); the rest are **reference** (📖 —
+  guide-byline / SimC-dev / Discord-only authorities like Archimtiros, Motoko, Saeldur,
+  shown as "who to read" links, not transcribed).
+- **Secondary spec-Discords** (`altDiscords`): Death's Advance (Blood DK), Warcraft
+  Hunter's Union (Hunter), Focused Will (Priest), Ancestral Guidance (Resto Shaman).
 - **Class community sites** (`sites` in community.json, all era-verified 2026-07-01):
   Peak of Serenity (Monk) · Dreamgrove.gg (Druid) · Warcraft Priests sim charts
   (Priest — underlying sim JSON fetchable) · Wings Is Up (Paladin) · Spiritbloom.pro

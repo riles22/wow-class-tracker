@@ -13,7 +13,9 @@
         {
           "name": "Bicepspump",
           "credential": "Icy Veins Unholy Death Knight guide writer (12.0.7 guide updated 2026-06-15); DK DPS theorycrafter, YouTube/Twitch",
-          "specs": ["Unholy"],
+          "specs": [
+            "Unholy"
+          ],
           "url": "https://www.youtube.com/@Bicepspump",
           "latest": "Unholy DK Mythic+ Guide (Midnight 12.0.5)",
           "verifiedDate": "2026-05-02",
@@ -22,11 +24,31 @@
         {
           "name": "Obli",
           "credential": "Method content creator; Frost/Unholy DK guides + 12.1 PTR coverage",
-          "specs": ["Frost", "Unholy"],
+          "specs": [
+            "Frost",
+            "Unholy"
+          ],
           "url": "https://www.youtube.com/@obliwow",
           "channelId": "UC04sQauRkMShD_iE5S4MZwg",
           "latest": "Midnight Season 2 PTR / patch 12.1 DK coverage (uploads 2026-06-27..29)",
           "verifiedDate": "2026-06-29"
+        },
+        {
+          "name": "Reholy",
+          "credential": "Method Blood DK guide author; high-M+/raid Blood DK streamer",
+          "url": "https://www.youtube.com/@Reh0ly",
+          "specs": [
+            "Blood"
+          ],
+          "channelId": "UC1s_i1Gzw8My6NuEgU45btw",
+          "latest": "PTR Altar of Fangs | BDK POV",
+          "verifiedDate": "2026-06-27"
+        }
+      ],
+      "altDiscords": [
+        {
+          "name": "Death's Advance",
+          "url": "https://discord.com/invite/deathsadvance"
         }
       ]
     },
@@ -44,8 +66,44 @@
           "channelId": "UC91kD45lyV3SOUnfarx5Mbw",
           "latest": "5 Tips and Tricks for your Devourer Demon Hunter DPS (Midnight S1)",
           "verifiedDate": "2026-05-22"
+        },
+        {
+          "name": "VooDooSaurus",
+          "credential": "Devourer & Havoc DH creator; co-author of the Icy Veins and Wowhead Devourer guides",
+          "url": "https://www.youtube.com/@VooDooSaurus",
+          "specs": [
+            "Devourer",
+            "Havoc"
+          ],
+          "channelId": "UC2p4FmE0vWokhC1Tz_K0mjQ",
+          "latest": "Devourer Demon Hunter 12.1 Changes! My Thoughts and Dummy Testing!",
+          "verifiedDate": "2026-06-27"
+        },
+        {
+          "name": "Wordup",
+          "credential": "Icy Veins Havoc DH guide author (also co-authors the Devourer guide); Top-100 raider in Echoes",
+          "url": "https://www.icy-veins.com/wow/havoc-demon-hunter-pve-dps-guide",
+          "specs": [
+            "Havoc",
+            "Devourer"
+          ],
+          "transcribable": false,
+          "latest": "Havoc Demon Hunter DPS Guide (Icy Veins, patch 12.0.7)",
+          "verifiedDate": "2026-06-15"
+        },
+        {
+          "name": "Meyra",
+          "credential": "Icy Veins Vengeance DH tank guide author; M+ / multi-tank theorycrafter in the Fel Hammer Discord",
+          "url": "https://www.icy-veins.com/wow/vengeance-demon-hunter-pve-tank-guide",
+          "specs": [
+            "Vengeance"
+          ],
+          "transcribable": false,
+          "latest": "Vengeance Demon Hunter Tank Guide (Icy Veins, patch 12.0.7)",
+          "verifiedDate": "2026-06-15"
         }
-      ]
+      ],
+      "altDiscords": []
     },
     {
       "class": "Druid",
@@ -68,6 +126,39 @@
           "url": "https://www.wowhead.com/guide/classes/druid/balance/overview-pve-dps",
           "latest": "Balance Druid DPS Guide - Midnight (Wowhead, Patch 12.0.7)",
           "verifiedDate": "2026-06-14"
+        },
+        {
+          "name": "Borabank",
+          "credential": "Balance Druid theorycrafter (Country Club raider), Icy Veins Balance author",
+          "url": "https://www.icy-veins.com/wow/balance-druid-pve-dps-guide",
+          "specs": [
+            "Balance"
+          ],
+          "transcribable": false,
+          "latest": "Icy Veins Balance Druid DPS guide, last updated 2026-06-30 (Patch 12.0.7)",
+          "verifiedDate": "2026-06-30"
+        },
+        {
+          "name": "Wordup",
+          "credential": "Feral Druid theorycrafter (world top 100, raids in Echoes), Icy Veins Feral author",
+          "url": "https://www.icy-veins.com/wow/feral-druid-pve-dps-guide",
+          "specs": [
+            "Feral"
+          ],
+          "transcribable": false,
+          "latest": "Icy Veins Feral Druid DPS guide, last updated 2026-06-30 (Patch 12.0.7)",
+          "verifiedDate": "2026-06-30"
+        },
+        {
+          "name": "Pumps",
+          "credential": "Rank-1 Guardian Druid tank (top 1-6 for 12 tiers), Icy Veins Guardian author",
+          "url": "https://www.icy-veins.com/wow/guardian-druid-pve-tank-guide",
+          "specs": [
+            "Guardian"
+          ],
+          "transcribable": false,
+          "latest": "Icy Veins Guardian Druid Tank guide, last updated 2026-06-15 (Patch 12.0.7)",
+          "verifiedDate": "2026-06-15"
         }
       ],
       "sites": [
@@ -75,6 +166,12 @@
           "name": "Dreamgrove.gg",
           "url": "https://www.dreamgrove.gg/",
           "note": "Druid community site — Balance Compendium updated for Midnight 12.0.7 (2026-06-27); open-source, fully fetchable (verified 2026-07-01)."
+        }
+      ],
+      "altDiscords": [
+        {
+          "name": "Dreamgrove",
+          "url": "https://discord.com/invite/dreamgrove"
         }
       ]
     },
@@ -99,6 +196,39 @@
           "url": "https://questionablyepic.com/blog/",
           "latest": "Best Preservation Evoker Talent Builds - Midnight (Wowhead, updated 2026-05-20, 12.0.7)",
           "verifiedDate": "2026-05-20"
+        },
+        {
+          "name": "Saeldur",
+          "credential": "Icy Veins Augmentation Evoker guide author + SimulationCraft developer; Evoker Discord expert, Aug theorycrafter since Dragonflight",
+          "url": "https://www.icy-veins.com/wow/augmentation-evoker-pve-dps-guide",
+          "specs": [
+            "Augmentation"
+          ],
+          "transcribable": false,
+          "latest": "Augmentation Evoker DPS Guide (Icy Veins, updated 2026-06-26, 12.0.7)",
+          "verifiedDate": "2026-06-26"
+        },
+        {
+          "name": "Mytholxgy",
+          "credential": "Icy Veins Preservation Evoker guide author; ex-RWF progression raider/analyst (Pieces, Liquid), Evoker Discord class expert",
+          "url": "https://www.icy-veins.com/wow/preservation-evoker-pve-healing-guide",
+          "specs": [
+            "Preservation"
+          ],
+          "transcribable": false,
+          "latest": "Preservation Evoker Healing Guide (Icy Veins, updated 2026-06-15, 12.0.7)",
+          "verifiedDate": "2026-06-15"
+        },
+        {
+          "name": "Blueprint",
+          "credential": "Icy Veins Devastation Evoker guide author; high-end raider (#1 OCE guild Honestly), Evoker theorycrafter since spec inception",
+          "url": "https://www.icy-veins.com/wow/devastation-evoker-pve-dps-guide",
+          "specs": [
+            "Devastation"
+          ],
+          "transcribable": false,
+          "latest": "Devastation Evoker DPS Guide (Icy Veins, updated 2026-06-30, 12.0.7)",
+          "verifiedDate": "2026-06-30"
         }
       ],
       "sites": [
@@ -123,6 +253,12 @@
           "latest": "Patch 12.1 / Initial Changes Breakdown (HackMD)",
           "verifiedDate": "2026-07-01"
         }
+      ],
+      "altDiscords": [
+        {
+          "name": "Warcraft Hunter's Union",
+          "url": "https://discord.com/invite/G3tYdTG"
+        }
       ]
     },
     {
@@ -139,6 +275,18 @@
           "channelId": "UCO8NNFntaSOytisdf-KNWzA",
           "latest": "Mage Class Tuning is finally here! World of Warcraft: Midnight 12.0.5",
           "verifiedDate": "2026-07-03"
+        },
+        {
+          "name": "Dutchmagoz",
+          "credential": "Owner of Altered Time (Mage Discord); author of the Icy Veins Arcane & Fire Mage guides",
+          "url": "https://www.icy-veins.com/wow/arcane-mage-pve-dps-guide",
+          "specs": [
+            "Arcane",
+            "Fire"
+          ],
+          "transcribable": false,
+          "latest": "Icy Veins Arcane Mage DPS Guide (12.0.7 Midnight), last updated 2026-06-30; Fire guide last updated 2026-06-17",
+          "verifiedDate": "2026-06-30"
         }
       ]
     },
@@ -156,6 +304,39 @@
           "channelId": "UC8HjmV_ber1Y9g7R1uc-vyg",
           "latest": "Mythic Rotmire Windwalker Monk Guide! | Sporefall Raid 12.0.7",
           "verifiedDate": "2026-06-17"
+        },
+        {
+          "name": "LBNinja7",
+          "credential": "Dedicated Mistweaver Monk healer creator; active 12.1 PTR tier-set/raid/M+ coverage",
+          "url": "https://www.youtube.com/channel/UC8n5zBJRVelcB4wWeSmmIGA",
+          "specs": [
+            "Mistweaver"
+          ],
+          "channelId": "UC8n5zBJRVelcB4wWeSmmIGA",
+          "latest": "Less Spin, MORE WIN!!! | Midnight 12.1 PTR Mistweaver Monk",
+          "verifiedDate": "2026-06-27"
+        },
+        {
+          "name": "Sinzhu",
+          "credential": "Icy Veins Brewmaster Monk guide author; Mythic raider, 10-yr Brewmaster, Peak of Serenity contributor",
+          "url": "https://www.icy-veins.com/wow/brewmaster-monk-pve-tank-guide",
+          "specs": [
+            "Brewmaster"
+          ],
+          "transcribable": false,
+          "latest": "Brewmaster Monk Tank Guide (Icy Veins), updated 2026-06-15 for Patch 12.0.7",
+          "verifiedDate": "2026-06-15"
+        },
+        {
+          "name": "Babylonius",
+          "credential": "Icy Veins Windwalker Monk guide author; founder/owner of Peak of Serenity",
+          "url": "https://www.icy-veins.com/wow/windwalker-monk-pve-dps-guide",
+          "specs": [
+            "Windwalker"
+          ],
+          "transcribable": false,
+          "latest": "Windwalker Monk DPS Guide (Icy Veins), updated 2026-06-15 for Patch 12.0.7",
+          "verifiedDate": "2026-06-15"
         }
       ],
       "sites": [
@@ -180,6 +361,39 @@
           "channelId": "UCZiUK-jnb84rNrCANrHsIBg",
           "latest": "Did Blizzard Just RUIN Prot Pal? Reviewing the Latest 12.1 Patch Notes...",
           "verifiedDate": "2026-06-30"
+        },
+        {
+          "name": "Bolas",
+          "credential": "Icy Veins Retribution Paladin guide author; theorycrafter, high-end raider (Honestly, #1 OCE)",
+          "url": "https://www.icy-veins.com/wow/retribution-paladin-pve-dps-guide",
+          "specs": [
+            "Retribution"
+          ],
+          "transcribable": false,
+          "latest": "Retribution Paladin DPS Guide — 12.0.7 (updated 2026-06-15)",
+          "verifiedDate": "2026-06-15"
+        },
+        {
+          "name": "Panthea",
+          "credential": "Icy Veins Protection Paladin guide author; TankNotes author, Hammer of Wrath Discord moderator",
+          "url": "https://www.icy-veins.com/wow/protection-paladin-pve-tank-guide",
+          "specs": [
+            "Protection"
+          ],
+          "transcribable": false,
+          "latest": "Protection Paladin Tank Guide — 12.0.7 (updated 2026-06-15)",
+          "verifiedDate": "2026-06-15"
+        },
+        {
+          "name": "Mytholxgy",
+          "credential": "Icy Veins Holy Paladin guide author; former RWF raider, analyst for Pieces and Liquid",
+          "url": "https://www.icy-veins.com/wow/holy-paladin-pve-healing-guide",
+          "specs": [
+            "Holy"
+          ],
+          "transcribable": false,
+          "latest": "Holy Paladin Healing Guide — 12.0.7 (updated 2026-06-15)",
+          "verifiedDate": "2026-06-15"
         }
       ],
       "sites": [
@@ -204,6 +418,39 @@
           "channelId": "UCzFK2Yn2gu20AWV1raNbiOQ",
           "latest": "Season 2 Healer Changes (Midnight 12.1, all 8 healer specs)",
           "verifiedDate": "2026-06-18"
+        },
+        {
+          "name": "Publik",
+          "credential": "Shadow Priest theorycrafter, SimC dev & Icy Veins guide writer (Warcraft Priests)",
+          "url": "https://www.youtube.com/@Publikwow",
+          "specs": [
+            "Shadow"
+          ],
+          "channelId": "UCe3T4NdDefzMzebcV2HTtuA",
+          "latest": "Icy Veins Shadow Priest guide last updated Jun 22, 2026 (Patch 12.0.7); YouTube channel bio: 'Shadow Priest Theorycrafter, Icy Veins Guide Writer, and SimC Dev.'",
+          "verifiedDate": "2026-06-22"
+        },
+        {
+          "name": "Clandon",
+          "credential": "Owner of Warcraft Priests Class Discord; Icy Veins Discipline Priest guide author",
+          "url": "https://www.youtube.com/@clandon",
+          "specs": [
+            "Discipline"
+          ],
+          "channelId": "UCxy6bJJ49XFSTxSPiU9wmpw",
+          "latest": "Icy Veins Discipline Priest guide last updated Jun 15, 2026 (Patch 12.0.7); byline 'Clandon, Healer in Vindicatum and Owner of Warcraft Priests Class Discord.'",
+          "verifiedDate": "2026-06-15"
+        },
+        {
+          "name": "Niphyr",
+          "credential": "Long-time healing Priest theorycrafter; Icy Veins Holy Priest guide author",
+          "url": "https://www.icy-veins.com/wow/holy-priest-pve-healing-guide",
+          "specs": [
+            "Holy"
+          ],
+          "transcribable": false,
+          "latest": "Icy Veins Holy Priest Healing guide last updated Jun 30, 2026 (Patch 12.0.7); byline 'written by Niphyr, a long-time healing Priest and theorycrafter.'",
+          "verifiedDate": "2026-06-30"
         }
       ],
       "sites": [
@@ -232,7 +479,9 @@
         {
           "name": "Woxtoxic",
           "credential": "Outlaw Rogue Mythic+ YouTuber ('Midnight 12.0.5 Outlaw Rogue Mythic+ Guide' 2026-04-29 plus high-key POVs)",
-          "specs": ["Outlaw"],
+          "specs": [
+            "Outlaw"
+          ],
           "url": "https://www.youtube.com/@woxtoxic",
           "channelId": "UCEwVHfmahFS16sNSytkp2Zg",
           "latest": "+23 Seat of the Triumvirate - Outlaw POV",
@@ -241,11 +490,47 @@
         {
           "name": "Shindigg",
           "credential": "High-key Midnight S1 Rogue player (4026 M+ Outlaw rating); stream-VOD-archive channel (streams as shindigwow on Twitch), not a produced-guide channel — expect to scrub VODs for spec content",
-          "specs": ["Outlaw", "Assassination"],
+          "specs": [
+            "Outlaw",
+            "Assassination"
+          ],
           "url": "https://www.youtube.com/@shindigg672",
           "channelId": "UCwq3e_DOew1ZtLsK32722Iw",
           "latest": "CHECKING OUT ROGUE ON PTR (2026-07-01); 12.1 RAID TESTING PLAYING ROGUE (2026-06-25)",
           "verifiedDate": "2026-07-01"
+        },
+        {
+          "name": "Whispyr",
+          "credential": "Wowhead & Method Assassination Rogue guide author, SimulationCraft contributor, lead Ravenholdt Assa theorycrafter",
+          "url": "https://www.youtube.com/@whispyrRogue",
+          "specs": [
+            "Assassination"
+          ],
+          "channelId": "UCdpGDTwuSqRBdXYnMBF1ayg",
+          "latest": "Assassination Rogue Talent Discussion - Midnight Season 2 PTR",
+          "verifiedDate": "2026-06-28"
+        },
+        {
+          "name": "Stealthi",
+          "credential": "Method Subtlety Rogue guide author, top-end publicly-logged Sub raider (This is Fine, Tarren Mill EU)",
+          "url": "https://www.method.gg/guides/subtlety-rogue",
+          "specs": [
+            "Subtlety"
+          ],
+          "transcribable": false,
+          "latest": "Method Subtlety Rogue Guide (Midnight 12.0.7)",
+          "verifiedDate": "2026-06-16"
+        },
+        {
+          "name": "Eleem",
+          "credential": "Icy Veins Outlaw Rogue guide author, Rogue theorycrafter since Legion, top-100 raider (Ravenholdt)",
+          "url": "https://www.icy-veins.com/wow/outlaw-rogue-pve-dps-guide",
+          "specs": [
+            "Outlaw"
+          ],
+          "transcribable": false,
+          "latest": "Outlaw Rogue DPS Guide (Icy Veins, 12.0.7)",
+          "verifiedDate": "2026-06-15"
         }
       ],
       "sites": [
@@ -270,6 +555,37 @@
           "channelId": "UCt6INY6VJraOZBVWTJKmvkQ",
           "latest": "12.1 More Class Changes — Did Your Spec Survive?",
           "verifiedDate": "2026-06-30"
+        },
+        {
+          "name": "Wordup",
+          "credential": "Icy Veins Enhancement Shaman guide author (12.0.7, updated 2026-06-15); Enhancement theorycrafter",
+          "url": "https://www.icy-veins.com/wow/enhancement-shaman-pve-dps-guide",
+          "specs": [
+            "Enhancement"
+          ],
+          "transcribable": false,
+          "latest": "Enhancement Shaman DPS Guide (Icy Veins, patch 12.0.7)",
+          "verifiedDate": "2026-06-15"
+        },
+        {
+          "name": "Seksi",
+          "credential": "Icy Veins Restoration Shaman guide author (Seksixeny, Cursed Gifts; 12.0.7, updated 2026-06-30)",
+          "url": "https://www.icy-veins.com/wow/restoration-shaman-pve-healing-guide",
+          "specs": [
+            "Restoration"
+          ],
+          "transcribable": false,
+          "verifiedDate": "2026-06-30"
+        },
+        {
+          "name": "Stormy",
+          "credential": "Icy Veins Elemental Shaman guide author (Storm, Earth and Lava theorycrafting team; 12.0.7, updated 2026-06-15)",
+          "url": "https://www.icy-veins.com/wow/elemental-shaman-pve-dps-guide",
+          "specs": [
+            "Elemental"
+          ],
+          "transcribable": false,
+          "verifiedDate": "2026-06-15"
         }
       ]
     },
@@ -287,6 +603,19 @@
           "channelId": "UCp4IOwajCQ50sEqp-SA4g8g",
           "latest": "My 12.1 PTR Warlock Wishlist & Feedback!",
           "verifiedDate": "2026-05-30"
+        },
+        {
+          "name": "Motoko",
+          "credential": "Icy Veins Warlock guide author; theorycrafter for LockOneStopShop",
+          "url": "https://www.icy-veins.com/wow/warlock-guide",
+          "specs": [
+            "Affliction",
+            "Demonology",
+            "Destruction"
+          ],
+          "transcribable": false,
+          "latest": "Icy Veins Warlock guides updated 12.0.7 (Affliction 2026-06-15, Demonology 2026-06-25)",
+          "verifiedDate": "2026-06-25"
         }
       ]
     },
@@ -312,6 +641,47 @@
           "channelId": "UC4vCeSQ24u_yWLuv1vc7P3A",
           "latest": "12.1 Warrior Changes, Tier sets and more! / Week 1",
           "verifiedDate": "2026-06-18"
+        },
+        {
+          "name": "Archimtiros",
+          "credential": "Icy Veins Arms & Fury Warrior author; Warrior theorycrafter and SimulationCraft developer",
+          "url": "https://www.icy-veins.com/wow/arms-warrior-pve-dps-guide",
+          "specs": [
+            "Arms",
+            "Fury"
+          ],
+          "transcribable": false,
+          "latest": "Arms & Fury Warrior DPS guides (12.0.7), updated Jun 15 2026",
+          "verifiedDate": "2026-06-15"
+        },
+        {
+          "name": "Mwahi",
+          "credential": "Icy Veins Protection Warrior author; Prot theorycrafter and Skyhold Warrior Discord moderator",
+          "url": "https://www.icy-veins.com/wow/protection-warrior-pve-tank-guide",
+          "specs": [
+            "Protection"
+          ],
+          "transcribable": false,
+          "latest": "Protection Warrior Tank guide (12.0.7), updated Jun 26 2026",
+          "verifiedDate": "2026-06-26"
+        },
+        {
+          "name": "Dratnos",
+          "credential": "WoW M+ analyst/caster; active 12.1 PTR class-change and Mythic+ coverage (Warrior DPS + general M+)",
+          "url": "https://www.youtube.com/@dratnos",
+          "specs": [
+            "Arms",
+            "Fury"
+          ],
+          "channelId": "UCI-FRT31iq5_xoFG6ngNcpw",
+          "latest": "All Mages get 2x Barrier! Blood DK Tier Reworked! Patch 12.1 PTR Update (2026-07-01)",
+          "verifiedDate": "2026-07-01"
+        }
+      ],
+      "altDiscords": [
+        {
+          "name": "Skyhold",
+          "url": "https://discord.gg/skyhold"
         }
       ]
     }
