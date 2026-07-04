@@ -81,6 +81,56 @@ export function metricRanks(specs) {
   return specs;
 }
 
+/* Dummy Dome composite: the real-player PTR counterpart to the sim fight profile.
+   For each DPS spec, normalize its median DPS at every logged target count to a
+   within-role percentile across the DPS field (same method as fightLabels — robust
+   to the tiny, outlier-prone PTR samples), then average the available counts into a
+   single 0–100 composite and rank DPS specs by it (#1 = highest across the board).
+   coverage = how many of the field's target counts the spec actually logged (an
+   honesty flag: a spec that only logged one dummy is scored only on that one). */
+export function dummyDomeScores(specs) {
+  const dps = specs.filter(s => s.role === "DPS" && s.ptrDummy?.targets && Object.keys(s.ptrDummy.targets).length);
+  if (!dps.length) return specs;
+  const allCounts = [...new Set(dps.flatMap(s => Object.keys(s.ptrDummy.targets)))].sort((a, b) => a - b);
+  const fieldByCount = new Map(
+    allCounts.map(c => [c, dps.map(s => s.ptrDummy.targets[c]).filter(v => typeof v === "number")])
+  );
+  const pct = (arr, v) => {
+    if (arr.length < 2 || typeof v !== "number") return null;
+    return arr.filter(x => x < v).length / (arr.length - 1);
+  };
+  // Coverage floor: a spec earns a headline composite + rank only if it logged all but at
+  // most one target count. Specs log dummies non-randomly (their favorable counts), so
+  // averaging over only-logged counts lets omission inflate a spec — a spec that logged just
+  // its strong dummy would outrank a broadly-tested one, and a single-count spec would get a
+  // whole-field composite from one parse. Below the floor we still keep the per-count
+  // percentiles (each honest against its own full field) but assign no composite/rank.
+  const floor = Math.max(2, allCounts.length - 1);
+  const ranked = [];
+  for (const s of dps) {
+    const perCount = {};
+    const ps = [];
+    for (const c of allCounts) {
+      const p = pct(fieldByCount.get(c), s.ptrDummy.targets[c]);
+      if (p == null) continue;
+      perCount[c] = Math.round(p * 100);
+      ps.push(p);
+    }
+    const coverage = { have: ps.length, of: allCounts.length };
+    if (ps.length >= floor) {
+      const score = Math.round((ps.reduce((a, b) => a + b, 0) / ps.length) * 100);
+      s.ptrDummy = { ...s.ptrDummy, perCount, coverage, score };
+      ranked.push(s);
+    } else {
+      s.ptrDummy = { ...s.ptrDummy, perCount, coverage };
+    }
+  }
+  ranked.sort((a, b) => b.ptrDummy.score - a.ptrDummy.score
+    || a.class.localeCompare(b.class) || a.spec.localeCompare(b.spec));
+  ranked.forEach((s, i) => { s.ptrDummy = { ...s.ptrDummy, rank: i + 1, of: ranked.length }; });
+  return specs;
+}
+
 /* 12.1 outlook: direction derived from the PTR writeup verdict when present,
    else from the balance of buff/nerf tuning lines in the PTR build feed.
    Upgraded automatically when zone-54 PTR metrics land (they join the basis). */
@@ -159,7 +209,7 @@ export function latestSnapshot(sources) {
 
 export function buildPayload({ specs, sources, scales, community, ptrBuilds, creatorTakes, encounterTiers, historySnapshot }) {
   const decorated = movementFor(
-    metricRanks(fightLabels(decorateSpecs(specs, sources, scales))),
+    dummyDomeScores(metricRanks(fightLabels(decorateSpecs(specs, sources, scales)))),
     scales, historySnapshot
   );
   for (const spec of decorated) {

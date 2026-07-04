@@ -624,8 +624,16 @@ function ptrDummyHTML(s){
   const d = s.ptrDummy;
   if(!d?.targets || !Object.keys(d.targets).length) return "";
   const counts = Object.keys(d.targets).sort((a,b)=>a-b).map(t=>`${t}T ${Math.round(d.targets[t]/1000)}k`).join(" · ");
-  return `<div class="srcbreak"><p class="d-h">12.1 PTR Dummy Dome <span class="mnote" style="text-transform:none;letter-spacing:0">real-player logs</span></p>
-    <div class="setbox"><div class="mnote">Median DPS by target count: ${esc(counts)}${d.asOf?` · WCL ${esc(d.asOf)}`:""}. Live PTR testing on fixed-target dummies — the real-player counterpart to the sim profile above (tiny, tuning-in-flux samples).</div></div></div>`;
+  const perCount = d.perCount ? Object.keys(d.perCount).sort((a,b)=>a-b).map(t=>`${t}T ${d.perCount[t]}`).join(" · ") : "";
+  const covN = d.coverage ? `${d.coverage.have}/${d.coverage.of} targets` : "";
+  const ranked = (typeof d.score === "number" && d.rank);
+  const headRow = ranked
+    ? `<div class="setrow"><span class="pc">Score</span><span class="pct"><b style="font-size:15px">${d.score}</b><span class="mnote"> /100 pctile</span> &nbsp;·&nbsp; <b style="color:var(--accent-2)">#${d.rank}</b>/${d.of} DPS <span class="mnote">· ${esc(covN)}</span>${perCount?`<span class="mnote" style="display:block;margin-top:3px">per-target percentile: ${esc(perCount)}</span>`:""}</span></div>`
+    : (perCount ? `<div class="setrow"><span class="pc">Percentiles</span><span class="pct">${esc(perCount)} <span class="mnote">· only ${esc(covN)} logged — no composite rank</span></span></div>` : "");
+  return `<div class="srcbreak"><p class="d-h">PTR numbers · Dummy Dome <span class="mnote" style="text-transform:none;letter-spacing:0">real-player logs · across target counts</span></p>
+    <div class="setbox">${headRow}
+      <div class="mnote"${headRow?' style="margin-top:2px"':''}>Median DPS by target count: ${esc(counts)}${d.asOf?` · WCL ${esc(d.asOf)}`:""}. Score = mean within-role percentile across DPS specs, ranked only for specs logged on all but at most one target count — partial-coverage specs show per-target percentiles only. The real-player counterpart to the sim Fight profile (tiny, tuning-in-flux samples).</div>
+    </div></div>`;
 }
 
 function takesHTML(s){
@@ -680,8 +688,8 @@ function drawerHTML(s){
   const tierset = showPtr ? tierSetHTML(s) : "";
   return `
    <div class="drawer"><div class="drawer-in"><div class="drawer-grid">
-     <div>${left}${metricsHTML(s)}</div>
-     <div>${tierset}${profileHTML(s)}${showPtr?ptrDummyHTML(s):""}${sourceBreakdownHTML(s)}${takesHTML(s)}${communityHTML(s)}</div>
+     <div>${left}${metricsHTML(s)}${showPtr?ptrDummyHTML(s):""}</div>
+     <div>${tierset}${profileHTML(s)}${sourceBreakdownHTML(s)}${takesHTML(s)}${communityHTML(s)}</div>
    </div></div></div>`;
 }
 
