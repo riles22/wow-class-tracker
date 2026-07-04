@@ -4059,21 +4059,22 @@
       }
     },
     "ptr": {
-      "verdict": "Positive",
-      "theme": "Pooling reworked around Envenom — chaining returns to Amirdrassil-style clipping",
-      "summary": "Whispyr calls these solid, well-intended changes aimed squarely at fixing the core design of Assassination's pooling, bringing chaining back to the Amirdrassil style of clipping the last second of Envenom. Reads as genuinely excited to play it.",
+      "verdict": "Mixed",
+      "theme": "Great spec changes, a placeholder tier set",
+      "summary": "The fuller Wowhead review. Whispyr calls the spec changes genuinely great and well-executed — the reworked Implacable apex now refunds Energy on Envenom cast (no more intentionally letting the buff drop), a new Unstable Toxin capstone, talent repositioning, and Iron Wire now spreading make the rotation feel noticeably smoother with real build choices. But the patch is 'lacking otherwise': the tier set is another bland '10% Mastery' stat-stick that misses Blizzard's own complexity/impact goals, and the bigger pain points — Deathstalker's clunk and the dead bottom third of the class tree — went untouched.",
       "changes": [
-        "New talent Unstable Toxin: Envenom +18% damage but -2s duration, rewarding play around the buff window",
-        "Apex Implacable: Envenom +10% damage and restores 2 Energy per combo point — loses the old energy burst but makes more sense",
-        "Internal Bleeding no longer spreads from Crimson Tempest (Iron Wire now does the spreading)",
-        "Deal Fate on Fatebound nerfed, which hurts crit value; Atrophic Poison buffed into a good raid buff",
-        "Blindside / Kingsbane / Deathmark nerfed — the Deathmark cut may actually help by moving damage out of a weak-in-AoE ST cooldown"
+        "Implacable apex reworked (the headline change): Envenom +10% damage and now refunds 2 Energy per combo point on cast — no more waiting for the buff to drop. A welcome simplification; the S1 buff was notoriously buggy to track.",
+        "New capstone Unstable Toxin: Envenom +18% damage but -2s buff duration — a kiss-curse rewarding tight Envenom-window management, most practical in heavy AoE.",
+        "Iron Wire now spreads (via Crimson Tempest) and its stealth / Improved-Garrote Garrotes silence for 5s — new M+ utility vs a ~1-2% DPS choice. Internal Bleeding no longer spreads (self-cast Rupture/Kidney Shot; cover it with Canny Strikes).",
+        "Energy economy retuned: Dashing Scoundrel now grants baseline regen, Motivated Murderer 30% (was 20%), Blindside proc down — leaving Assa slightly faster, ~10-15% more Energy scaling into 5-8T AoE.",
+        "Bleed buffs (Shrouded Suffocation 30%, Avulsion 25%, Rapid Injection 20/40%) plus repositioning give a ~10% uplift in 2-4T cleave; Deathmark (75%, was 100%) and Kingsbane (-15%) nerfed to match the patch; +3% all damage baseline.",
+        "Class / hero: Thistle Tea is now a choice node (auto-at-low-Energy vs active-only), Atrophic Poison buffed to 4% / 60s; Fatebound's Deal Fate extra combo point cut to 60% (was 100%)."
       ],
-      "set2": "No real objection to the 2pc — a straightforward Envenom +10% plus +3% damage dealt that reinforces the reworked Envenom-centric play.",
-      "set4": "Dislikes it: reads as a \"mastery % tier set in disguise,\" just poison/bleed damage bonuses reworded; wishes for something less generic than another flat 'poison/bleed damage X%' set.",
-      "watch": "The pooling rework rides on playing tightly around the shortened Envenom window — Unstable Toxin's -2s duration punishes sloppy chaining, so the payoff depends on executing the Amirdrassil-style clipping cleanly.",
+      "set2": "A generic Nature-damage buff with no gameplay change and no build impact — Whispyr reads the whole set as another 'Mastery %' stat-stick in disguise.",
+      "set4": "The bleed half of the same 'Mastery %' formula. Whispyr's big disappointment: blander than even the Season 1 set, it creates no gameplay and no build decisions and misses Blizzard's stated 'more complex / more impactful' goals — reads as a placeholder or in need of a full rework. Amplifying Poison stays the standard poison pick.",
+      "watch": "Tuning isn't there yet: Unstable Toxin's -2s downside is currently 'actively crippling' in single target — it can cost more Envenom damage than the +18% adds and fights Rapid Injection's 40%, leaving you at the mercy of crit RNG; Iron Wire's new spread doesn't refresh on reapplication (possibly a bug). The louder critique is what went unaddressed: Deathstalker stays buggy, unintuitive and rarely played, and the bottom third of the class tree (Soothing Darkness / Subterfuge / Without a Trace, Thistle Tea, Cold Blooded Killer, Supercharger) stays bland — the obvious place to add the 'build options' Blizzard said they wanted.",
       "draft": true,
-      "sourceLabel": "Whispyr (Wowhead Assa author, Ravenholdt)"
+      "source": "https://www.wowhead.com/news=382079/great-spec-changes-but-lacking-otherwise-assassination-rogue-class-changes-and"
     },
     "metrics": [
       {
