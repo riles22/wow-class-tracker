@@ -70,6 +70,14 @@ export async function applyMetrics(dataPath, root = ROOT) {
     playstyleApplied++;
   }
 
+  // Season 2 tier set bonuses (actual 2pc/4pc text).
+  for (const row of input.tiersets ?? []) {
+    const spec = byKey.get(`${row.class}|${row.spec}`);
+    if (!spec) { unmatched.push(`tierset: ${row.class} / ${row.spec}`); continue; }
+    spec.tierSet = { set2: row.set2 || null, set4: row.set4 || null, source: row.source ?? null, asOf: row.asOf ?? null };
+    playstyleApplied++;
+  }
+
   // Melee-capability verification (updates range + sets meleeCapable for hybrids).
   for (const row of input.melee ?? []) {
     const spec = byKey.get(`${row.class}|${row.spec}`);

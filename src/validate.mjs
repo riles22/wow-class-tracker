@@ -115,6 +115,12 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
       }
     }
 
+    if (spec.tierSet != null) {
+      for (const pc of ["set2", "set4"]) {
+        if (spec.tierSet[pc] != null && typeof spec.tierSet[pc] !== "string") errors.push(`specs.json: ${key} tierSet.${pc} must be a string`);
+      }
+    }
+
     if (spec.survivability != null) {
       if (typeof spec.survivability.tier !== "string" || !spec.survivability.tier) errors.push(`specs.json: ${key} survivability needs a tier string`);
       if (spec.survivability.source && !allSources.has(spec.survivability.source)) errors.push(`specs.json: ${key} survivability from unknown source "${spec.survivability.source}"`);

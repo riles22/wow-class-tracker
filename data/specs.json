@@ -117,6 +117,12 @@
       "complexity": 3,
       "complexityNotes": "Icy Veins describes it as engaging but 'moderately complex' — RP-generation optimization plus chaining numerous small defensive cooldowns; AoEah rates it 'easy/forgiving.' Mid-complexity tank.",
       "meleeCapable": true
+    },
+    "tierSet": {
+      "set2": "Your attack speed is increased by 15%, and Crimson Scourge's chance to occur is increased by an additional 5%.",
+      "set4": "Crimson Scourge increases the damage of your next Death and Decay by 100%, and grants 5% critical strike chance for 8 seconds when consumed.",
+      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+      "asOf": "2026-06-18"
     }
   },
   {
@@ -251,6 +257,12 @@
       "complexity": 2,
       "complexityNotes": "Icy Veins: resource-management builder/spender with Killing Machine/Exterminate procs and burst windows, offers an Easy Mode; AoEah calls it 'a simple rotation of a builder and a spender... easy to understand, fun to pick up.'",
       "meleeCapable": true
+    },
+    "tierSet": {
+      "set2": "Each time Remorseless Winter damages at least 1 enemy, gain Freezing Tempest which grants 2% attack speed and 4% increased Icy Death Torrent damage for 5 sec, stacking.",
+      "set4": "Remorseless Winter deals damage 25% more frequently, and Freezing Tempest lasts 5 seconds longer.",
+      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+      "asOf": "2026-06-18"
     }
   },
   {
@@ -400,6 +412,12 @@
       "complexity": 3,
       "complexityNotes": "Icy Veins: 'the rotation is simpler now with fewer opportunities for skill expression,' but requires plague/disease management, Dark Transformation/Army windows, and pet target-swapping. Moderate.",
       "meleeCapable": true
+    },
+    "tierSet": {
+      "set2": "Your Magus of the Dead and Lord of the Dead cast a more powerful Necrotic Bolt instead of Frostbolt, and Withering Grasp instead of Shadow Bolt.",
+      "set4": "Necrotic Bolt's damage is increased by 130%, and Withering Grasp's damage is increased by 130%, against enemies below 35% health.",
+      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+      "asOf": "2026-06-18"
     }
   },
   {
@@ -534,6 +552,12 @@
       "complexity": 3,
       "complexityNotes": "Icy Veins: 'a lot of hidden complexity to optimize, but... very simple rules,' fast-paced with combo burst windows, has Easy Mode; AoEah rates it 'easy.' Accessible-moderate.",
       "meleeCapable": true
+    },
+    "tierSet": {
+      "set2": "Blade Dance, Chaos Strike, and Essence Break deal 12% increased damage.",
+      "set4": "Essence Break now applies and benefits from the effects of Cycle of Hatred, has 25% increased initial strike damage, and has 2 seconds of increased duration.",
+      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+      "asOf": "2026-06-18"
     }
   },
   {
@@ -684,6 +708,12 @@
       "complexity": 2,
       "complexityNotes": "Icy Veins: 'smooth pick-up-and-play feel' with hidden Void Metamorphosis depth; AoEah rates it 'Easiest — designed for maximum simplicity,' simpler than Havoc with limited buttons. Simple with optional depth.",
       "meleeCapable": false
+    },
+    "tierSet": {
+      "set2": "Harvesting 4 or more Soul Fragments with Reap has a 20% chance to cause your next Consume to be instant cast and explode in a Soulburst, dealing Cosmic damage to nearby enemies.",
+      "set4": "Soulburst generates 8 Soul Fragments and grants Moment of Craving. Reap deals 20% increased damage.",
+      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+      "asOf": "2026-06-18"
     }
   },
   {
@@ -800,6 +830,12 @@
       "complexity": 3,
       "complexityNotes": "Icy Veins: build/spend soul cycle plus weaving multiple sigils and overlapping defensives for offense at a defensive cost; AoEah rates it 'Moderate — much smoother rotation.'",
       "meleeCapable": true
+    },
+    "tierSet": {
+      "set2": "Sigil of Flame's damage over time is increased by 50%. Soul Cleave increases the duration of Sigil of Flame on your primary target by 2 seconds.",
+      "set4": "Immolation Aura and Sigil of Spite deal 100% increased damage against targets affected by your Sigil of Flame.",
+      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+      "asOf": "2026-06-18"
     }
   },
   {
@@ -946,6 +982,12 @@
       "complexity": 3,
       "complexityNotes": "Icy Veins: 'simple but rewarding rotation... with a level of depth,' Eclipse + Astral Power management; AoEah rates it 'Hard — rotation and setup are more involved.' Sources split, settling at moderate.",
       "meleeCapable": false
+    },
+    "tierSet": {
+      "set2": "Starsurge damage increased by 20%. Starfall also deals Astral damage instantly to all valid enemies in range when cast.",
+      "set4": "Your damage is increased by 10% while in any Eclipse. This bonus wanes to 2% at the midpoint of the Eclipse, then waxes back to 10% at the end.",
+      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+      "asOf": "2026-06-18"
     }
   },
   {
@@ -1080,6 +1122,12 @@
       "complexity": 3,
       "complexityNotes": "Wowhead/Method: 'intimidating... two resources and multiple debuffs to maintain,' with expected downtime as the first hurdle; Icy Veins notes Midnight 'significantly reduced management' and calls the slower pace 'intuitive.' Moderate.",
       "meleeCapable": true
+    },
+    "tierSet": {
+      "set2": "When Berserk or Incarnation: Avatar of Ashamane ends, you deal 10% increased damage for 1 second for each combo point spent during Berserk or Incarnation: Avatar of Ashamane.",
+      "set4": "Berserk and Incarnation: Avatar of Ashamane last 10 seconds longer.",
+      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+      "asOf": "2026-06-18"
     }
   },
   {
@@ -1185,6 +1233,12 @@
       "complexity": 2,
       "complexityNotes": "Icy Veins describes the playstyle as 'relatively straightforward' — rage builder/spender with Moonfire spread; AoEah rates it 'Easiest — set and forget... nearly unkillable.' Simple tank.",
       "meleeCapable": true
+    },
+    "tierSet": {
+      "set2": "Thrash has a 20% chance to make your next Mangle deal 100% increased damage.",
+      "set4": "Thrash calls up 3 thorns, each impaling a target for Nature damage and dealing additional Nature damage to up to 5 nearby enemies, and extends the duration of Berserk by 0.5 seconds, up to 5 seconds.",
+      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+      "asOf": "2026-06-18"
     }
   },
   {
@@ -1299,6 +1353,12 @@
       "complexity": 3,
       "complexityNotes": "Icy Veins: flexible HoT kit that requires 'ramping' pre-planning and 'tracking many HoTs at once' (though Midnight trimmed some); AoEah rates it 'Easy — forgiving.' Moderate for the ramp/planning layer.",
       "meleeCapable": true
+    },
+    "tierSet": {
+      "set2": "Rejuvenation has a 15% chance and Nature's Swiftness has a 100% chance to grant Genesis, causing all your heal over time effects to heal for 25% more for 8 seconds. Multiple applications may overlap.",
+      "set4": "Genesis duration is increased by 4 seconds, and gaining Genesis grants Clearcasting.",
+      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+      "asOf": "2026-06-18"
     }
   },
   {
@@ -1428,6 +1488,12 @@
       "complexity": 3,
       "complexityNotes": "Icy Veins: priority 'not very complicated as a whole'; Midnight brought 'a large simplification of buff management,' depth lives in Prescience/Ebon Might target selection where mistimed casts lose DPS — moderate.",
       "meleeCapable": false
+    },
+    "tierSet": {
+      "set2": "Upheaval's cooldown is reduced by 10 seconds.",
+      "set4": "Upheaval magnifies your Fate Mirror effects for 8 seconds, increasing the amount of damage echoed to 45%.",
+      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+      "asOf": "2026-06-18"
     }
   },
   {
@@ -1573,6 +1639,12 @@
       "complexity": 3,
       "complexityNotes": "Icy Veins: 'a good amount of depth in your combat rotation... a more involved and interesting DPS specialization,' built on empower/Essence management around Dragonrage — moderate.",
       "meleeCapable": false
+    },
+    "tierSet": {
+      "set2": "Shattering Star's damage is increased by 150%, and it always casts as if you had reached maximum empower level.",
+      "set4": "Causality reduces the remaining cooldown of your empower spells by an additional 0.1 seconds each time the effect occurs. Eternity Surge deals 10% increased damage.",
+      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+      "asOf": "2026-06-18"
     }
   },
   {
@@ -1699,6 +1771,12 @@
       "complexity": 3,
       "complexityNotes": "Icy Veins: Midnight goal was 'to make the spec much more approachable for new players while also removing some of the very tight timings' — previously demanding, now moderate empower/echo management.",
       "meleeCapable": false
+    },
+    "tierSet": {
+      "set2": "Consuming Essence Burst sends forth a Living Flame at your target at 150% effectiveness, or at a nearby injured target if your primary target is at full health.",
+      "set4": "Green spells restore 5% more health, and Verdant Embrace has a 100% chance to grant Essence Burst.",
+      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+      "asOf": "2026-06-18"
     }
   },
   {
@@ -1833,6 +1911,12 @@
       "complexity": 1,
       "complexityNotes": "Icy Veins: 'simple rotation,' 'does not require you to weave in your cooldowns,' 'ideal for someone new to raiding or just WoW,' fully mobile — very simple/beginner-friendly.",
       "meleeCapable": false
+    },
+    "tierSet": {
+      "set2": "Barbed Shot causes your pets to Stomp 1 additional time at 50% effectiveness.",
+      "set4": "Stomp causes your next Cobra Shot to either benefit from Beast Cleave at 20% effectiveness, or strike your primary target for 30% additional damage, stacking up to 4 times.",
+      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+      "asOf": "2026-06-18"
     }
   },
   {
@@ -1967,6 +2051,12 @@
       "complexity": 4,
       "complexityNotes": "Icy Veins: 'high potential, but high skill floor,' ~40% immobile casts, needs 'excellent awareness of Focus levels and cooldowns at all times' plus Trick Shots weaving under movement — high.",
       "meleeCapable": false
+    },
+    "tierSet": {
+      "set2": "Explosive Shot lasts 1 second longer and deals 20% increased damage.",
+      "set4": "Aimed Shot and Rapid Fire damage increased by 5%. Each time Explosive Shot causes a burst of damage, the cooldown of Aimed Shot and Rapid Fire is reduced by 0.5 seconds.",
+      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+      "asOf": "2026-06-18"
     }
   },
   {
@@ -2113,6 +2203,12 @@
       "complexity": 4,
       "complexityNotes": "Icy Veins: rotation is 'very dynamic, fast-paced, and busy'; high skill ceiling, best players 'make the correct ability decision on the fly' amid competing mechanics — high.",
       "meleeCapable": true
+    },
+    "tierSet": {
+      "set2": "Raptor Strike damage increased by 15%.",
+      "set4": "Mongoose Fury also increases the damage of Wildfire Bomb by 10%.",
+      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+      "asOf": "2026-06-18"
     }
   },
   {
@@ -2247,6 +2343,12 @@
       "complexity": 4,
       "complexityNotes": "Icy Veins: 'relatively complex compared to other specs' — unique mana pool plus heavy cooldown dependence and burst-window sequencing; Midnight trimmed buff tracking but it stays high.",
       "meleeCapable": false
+    },
+    "tierSet": {
+      "set2": "Arcane Missiles fires 1 additional missile and deals 20% increased damage.",
+      "set4": "Each wave of Arcane Missiles increases the damage of your next Arcane Blast, Arcane Pulse, or Prismatic Bolt by 5%, up to 40%.",
+      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+      "asOf": "2026-06-18"
     }
   },
   {
@@ -2393,6 +2495,12 @@
       "complexity": 4,
       "complexityNotes": "Method/Wowhead: moderate-to-high skill ceiling; 'demanding in execution,' juggling Hot Streak procs, Fire Blast charge banking, and the shorter high-value Combustion burst window — high.",
       "meleeCapable": false
+    },
+    "tierSet": {
+      "set2": "Pyroclasm causes Flamestrike and Pyroblast to always critically strike.",
+      "set4": "Pyroclasm reduces the cast time of Flamestrike and Pyroblast by 20% and its damage bonus is increased by 20%.",
+      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+      "asOf": "2026-06-18"
     }
   },
   {
@@ -2527,6 +2635,12 @@
       "complexity": 2,
       "complexityNotes": "Icy Veins: 'The gameplay is incredibly simple to understand,' a 'safe pick for most people' / new players, though Shatter with Brain Freeze + Fingers of Frost proc management adds some depth — simple.",
       "meleeCapable": false
+    },
+    "tierSet": {
+      "set2": "Each stack of Freezing Shattered has a 5% chance to generate an Icicle. Glacial Spike damage increased by 25%.",
+      "set4": "Consuming Glacial Spike has a small chance to grant Glacial Spike. Shatter damage increased by 15%.",
+      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+      "asOf": "2026-06-18"
     }
   },
   {
@@ -2632,6 +2746,12 @@
       "complexity": 3,
       "complexityNotes": "Icy Veins: long 'reputation of requiring many different keybinds' and Stagger 'one of the main difficulties in learning'; Midnight pruned abilities and clarified Stagger — moderate now.",
       "meleeCapable": true
+    },
+    "tierSet": {
+      "set2": "Breath of Fire ignites your next Keg Smash, causing it to explode on contact, dealing additional Flamestrike damage to its primary target and reduced damage to additional targets.",
+      "set4": "Ignited Keg Smashes cause enemies struck to take 8% increased damage from your Physical abilities, and leave a patch of flames on the ground, dealing Fire damage each second for 5 seconds.",
+      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+      "asOf": "2026-06-18"
     }
   },
   {
@@ -2758,6 +2878,12 @@
       "complexity": 4,
       "complexityNotes": "Method: 'one of the more complex healing specs to master'; simplified in Midnight but still an 'always-be-casting' dual-role fistweaving playstyle — moderate-high.",
       "meleeCapable": true
+    },
+    "tierSet": {
+      "set2": "Rising Sun Kick deals 30% increased damage and Rushing Wind Kick's healing is increased by 100%.",
+      "set4": "Rising Sun Kick and Rushing Wind Kick have a chance to cause their next cast to ignore their cooldown and have their mana cost reduced by 100%.",
+      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+      "asOf": "2026-06-18"
     }
   },
   {
@@ -2904,6 +3030,12 @@
       "complexity": 4,
       "complexityNotes": "Icy Veins: Mastery: Combo Strikes 'forces us to prepare and think several steps ahead'; simultaneous Chi/Energy + cooldown management, classic high-APM weaving — high.",
       "meleeCapable": true
+    },
+    "tierSet": {
+      "set2": "Fists of Fury strikes an additional time at the start of its channel at 50% effectiveness.",
+      "set4": "Fists of Fury increases the damage of your next Rising Sun Kick by 10% or Spinning Crane Kick by 20% each time it strikes, stacking up to 6 times.",
+      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+      "asOf": "2026-06-18"
     }
   },
   {
@@ -3018,6 +3150,12 @@
       "complexity": 3,
       "complexityNotes": "Wowhead flags Holy Power as an \"unintuitive resource system\"; Icy Veins frames it as a flexible priority kit with cooldown-dependent output — a standard, moderately demanding healer.",
       "meleeCapable": false
+    },
+    "tierSet": {
+      "set2": "Infusion of Light increases the healing of Flash of Light by an additional 75% and the absorb from Greater Judgment by an additional 75%.",
+      "set4": "Judgment now has a 20% chance to grant Infusion of Light. Holy Light now has a 50% chance to grant Infusion of Light.",
+      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+      "asOf": "2026-06-18"
     }
   },
   {
@@ -3123,6 +3261,12 @@
       "complexity": 2,
       "complexityNotes": "IV: core rotation largely unchanged; difficulty is cooldown-planning for survival. AoEah: Easy.",
       "meleeCapable": true
+    },
+    "tierSet": {
+      "set2": "Consecration is 30% larger and enemies within your Consecration are illuminated, increasing the chance for your abilities to critically strike them by 5%.",
+      "set4": "Enemies struck by Judgment or Crusader Strike take 20% additional Holy damage. If they are struck by a critical strike, the additional damage is increased by 200%.",
+      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+      "asOf": "2026-06-18"
     }
   },
   {
@@ -3257,6 +3401,12 @@
       "complexity": 2,
       "complexityNotes": "IV: Holy Power + cooldown planning, reduced button bloat. AoEah: easiest DPS.",
       "meleeCapable": true
+    },
+    "tierSet": {
+      "set2": "Divine Purpose has an additional 10% chance to activate and consuming it grants Divine Power, increasing Holy damage done by 10% for 12 seconds.",
+      "set4": "Consuming Divine Purpose with Divine Storm causes your next Final Verdict to be free and unleash Divine Arbiter at its target, dealing Holy damage and Holy damage to enemies within 8 yards.",
+      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+      "asOf": "2026-06-18"
     }
   },
   {
@@ -3371,6 +3521,12 @@
       "complexity": 5,
       "complexityNotes": "IV: atonement ramp requires extensive incoming-damage knowledge, 'can be difficult to master'. AoEah: hardest healer.",
       "meleeCapable": false
+    },
+    "tierSet": {
+      "set2": "Penance damage and healing increased by 20%. Casting Penance reduces the cooldown of Mind Blast by 2 seconds.",
+      "set4": "After casting Mind Blast, your next Power Word: Shield or Void Shield absorbs 25% more damage.",
+      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+      "asOf": "2026-06-18"
     }
   },
   {
@@ -3485,6 +3641,12 @@
       "complexity": 2,
       "complexityNotes": "IV: 'one of the easier healers to pick up'. AoEah: easiest healer.",
       "meleeCapable": false
+    },
+    "tierSet": {
+      "set2": "Each target affected by your Renew increases your Haste by 2%, up to 6%.",
+      "set4": "Renew healing increased by 10%. Light's Resurgence now has a 100% chance to leave a Renew on the first target Prayer of Mending heals.",
+      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+      "asOf": "2026-06-18"
     }
   },
   {
@@ -3631,6 +3793,12 @@
       "complexity": 3,
       "complexityNotes": "IV: DoT builder-spender with Insanity/Voidform windows — moderate. AoEah: average.",
       "meleeCapable": false
+    },
+    "tierSet": {
+      "set2": "Tentacle Slam cooldown reduced by 3 seconds and its damage is increased by 100%.",
+      "set4": "After casting Tentacle Slam, your next Vampiric Touch is instant, generates 4 additional Insanity, and conjures Shadowy Apparitions that deal 200% of normal damage.",
+      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+      "asOf": "2026-06-18"
     }
   },
   {
@@ -3765,6 +3933,12 @@
       "complexity": 3,
       "complexityNotes": "IV: Fatebound 'more forgiving'; bleed upkeep + combo-point/Envenom loop. AoEah: average.",
       "meleeCapable": true
+    },
+    "tierSet": {
+      "set2": "Envenom damage increased by 10% and it increases your damage dealt by 3%.",
+      "set4": "Deadly Poison increases your bleed damage on the target by 10%. Auto-attacks against targets with your Amplifying Poison deal 2% increased damage per stack. Wound Poison hits a second time.",
+      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+      "asOf": "2026-06-18"
     }
   },
   {
@@ -3912,6 +4086,12 @@
       "complexity": 4,
       "complexityNotes": "IV: Roll the Bones upkeep + dynamic cooldowns, RNG-driven. AoEah: hardest of the three Rogue specs.",
       "meleeCapable": true
+    },
+    "tierSet": {
+      "set2": "Dispatch damage increased by 15%.",
+      "set4": "Sinister Strike and Ambush have a 12% chance to cause your next Dispatch to be free and deal damage as if you spent the maximum combo points.",
+      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+      "asOf": "2026-06-18"
     }
   },
   {
@@ -4058,6 +4238,12 @@
       "complexity": 4,
       "complexityNotes": "IV rotation: 90s cycle syncing Shadow Blades with dual Shadow Dance windows + proc tracking, ~10% skill gap.",
       "meleeCapable": true
+    },
+    "tierSet": {
+      "set2": "Backstab costs 10 less Energy and deals 100% increased damage. Shuriken Storm costs 5 less Energy and deals 60% increased damage.",
+      "set4": "Lingering Shadow now also benefits Eviscerate and Black Powder at 100% effectiveness.",
+      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+      "asOf": "2026-06-18"
     }
   },
   {
@@ -4192,6 +4378,12 @@
       "complexity": 2,
       "complexityNotes": "Icy Veins: Midnight 'gutted' the complexity of the rotation; 'simple fundamentals for both single-target and AoE'. Simpler than most casters now, with talents able to make it easy or complex — base build is beginner-friendly.",
       "meleeCapable": false
+    },
+    "tierSet": {
+      "set2": "Earth Shock, Elemental Blast, and Earthquake damage increased by 25%.",
+      "set4": "When Stormkeeper or Ascendance fade, your next 2 Lightning Bolts, Chain Lightnings, or Lava Bursts deal 25% increased damage and cause your next Earthquake, Earth Shock, or Elemental Blast to cost 100% less Maelstrom.",
+      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+      "asOf": "2026-06-18"
     }
   },
   {
@@ -4326,6 +4518,12 @@
       "complexity": 4,
       "complexityNotes": "Icy Veins: 'a fairly steep learning curve', 'fast-paced', 'always be pressing something', many moving parts (Maelstrom Weapon stacks, cooldowns, procs) even after the Midnight reduction; Stormbringer build higher RNG and stricter windows.",
       "meleeCapable": true
+    },
+    "tierSet": {
+      "set2": "Voltaic Blaze causes your primary target to erupt in a Fire Nova every 2 seconds for 6 seconds. Fire Nova damage is increased by 200% if it only strikes a single target.",
+      "set4": "Fire Nova reduces the cooldown of Crash Lightning by 2 seconds and increases the damage of your next Crash Lightning by 8%, stacking up to 5 times.",
+      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+      "asOf": "2026-06-18"
     }
   },
   {
@@ -4452,6 +4650,12 @@
       "complexity": 1,
       "complexityNotes": "Icy Veins: 'perhaps the easiest healer in the game' after Midnight removed ~half the active buttons; low skill floor, consistent healing, forgiving. Mastery is positioning/CD timing, not rotation.",
       "meleeCapable": false
+    },
+    "tierSet": {
+      "set2": "Healing Wave and Chain Heal have a chance to create a Healing Rain at the target's location for 10 seconds.",
+      "set4": "Every 1 second, 1 ally inside of Healing Rain gains a watery shield that absorbs X damage for 10 seconds.",
+      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+      "asOf": "2026-06-18"
     }
   },
   {
@@ -4586,6 +4790,12 @@
       "complexity": 3,
       "complexityNotes": "Icy Veins: DoT-maintenance spec; 'may not have many buttons, it requires careful attention to cooldowns and uptimes, with complexity increasing with the number of targets.' Standard priority, multi-dot management scales up in AoE. Ramp shortened in Midnight.",
       "meleeCapable": false
+    },
+    "tierSet": {
+      "set2": "You have a 20% chance to refund a Soul Shard after spending a Soul Shard.",
+      "set4": "Each active Unstable Affliction increases your damage dealt by your spells and abilities by 2%, up to 6%. Seed of Corruption applies Unstable Affliction at 50% effectiveness to your target.",
+      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+      "asOf": "2026-06-18"
     }
   },
   {
@@ -4720,6 +4930,12 @@
       "complexity": 3,
       "complexityNotes": "Icy Veins: 'straightforward and intuitive', embodies always-be-casting; simplified in Midnight (instant Call Dreadstalkers). Base rotation easy; Apex talent adds volatility/optimization depth. Moderate overall.",
       "meleeCapable": false
+    },
+    "tierSet": {
+      "set2": "Wild Imp damage increased by 10%. Implosion damage increased by 20%.",
+      "set4": "When their energy depletes, Wild Imps have a 20% chance to fling themselves at their target and Implode at 150% effectiveness to their main target and 125% effectiveness to other targets.",
+      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+      "asOf": "2026-06-18"
     }
   },
   {
@@ -4854,6 +5070,12 @@
       "complexity": 2,
       "complexityNotes": "Icy Veins: 'a fairly straightforward spec', 'without much rotational complexity'; simple shard-generate-then-spend loop (Immolate + Chaos Bolt). One of the more accessible caster DPS.",
       "meleeCapable": false
+    },
+    "tierSet": {
+      "set2": "Incinerate damage increased by 25% and Incinerate has a 10% increased chance to evoke an Echo of Sargeras.",
+      "set4": "Targets damaged by Echo of Sargeras take 6% increased damage from Echo of Sargeras for 6 seconds.",
+      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+      "asOf": "2026-06-18"
     }
   },
   {
@@ -4988,6 +5210,12 @@
       "complexity": 2,
       "complexityNotes": "Icy Veins: 'relatively simplistic with an easy to get into rotation', 'very straightforward and relatively simple'; beginner-friendly priority list. Depth added only by talent choices.",
       "meleeCapable": true
+    },
+    "tierSet": {
+      "set2": "Mortal Strike damage increased by 10% and when you Slam a target, Slam also deals damage to enemies within 8 yards of it. Deals reduced damage beyond 5 targets.",
+      "set4": "Overpower damage increased by 15%. Mortal Strike and Overpower increase the damage of your next Slam by 10%, stacking up to 3 times.",
+      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+      "asOf": "2026-06-18"
     }
   },
   {
@@ -5122,6 +5350,12 @@
       "complexity": 3,
       "complexityNotes": "Icy Veins: 'relatively simple rotation' BUT 'one of the highest action specializations in the game'; high APM 'can be quite overwhelming while learning'. Simple logic, demanding execution — nudged to 3 for the APM burden.",
       "meleeCapable": true
+    },
+    "tierSet": {
+      "set2": "Raging Blow damage increased by 15% and during Recklessness, Raging Blow extends the duration of Recklessness by 2 seconds, up to 6 seconds.",
+      "set4": "Bloodthirst damage increased by 10% and during Recklessness, Bloodthirst increases the critical strike bonus of Recklessness by 5%, up to 10%.",
+      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+      "asOf": "2026-06-18"
     }
   },
   {
@@ -5227,6 +5461,12 @@
       "complexity": 2,
       "complexityNotes": "Icy Veins: rotation 'relatively straightforward'/'manageable'; simple Shield Slam→Ignore Pain rage loop, 'remains roughly the same' in Midnight. Difficulty is defensive CD timing, not the rotation.",
       "meleeCapable": true
+    },
+    "tierSet": {
+      "set2": "Free Revenges deal 15% additional damage and cause your next Shield Slam to deal 20% additional damage.",
+      "set4": "Ravager and your free Revenges cause all targets to bleed for X damage over 12 sec. Ravager's cooldown is reduced by 30 seconds.",
+      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+      "asOf": "2026-06-18"
     }
   }
 ]

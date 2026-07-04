@@ -620,6 +620,19 @@ function communityHTML(s){
   </div></div>`;
 }
 
+function tierSetHTML(s){
+  const ts = s.tierSet, p = s.ptr;
+  if(!ts && !(p && (p.set2 || p.set4 || p.watch))) return "";
+  // Show the actual datamined bonus (tierSet) with the writeup's commentary beneath it.
+  const piece = (pc, bonus, note) => (!bonus && !note) ? "" :
+    `<div class="setrow"><span class="pc">${pc}</span><span class="pct">${bonus?esc(bonus):"—"}${note?`<span class="mnote" style="display:block;margin-top:3px">▸ ${esc(note)}</span>`:""}</span></div>`;
+  const src = ts?.source
+    ? ` <a href="${esc(ts.source)}" target="_blank" rel="noopener" class="mnote" style="text-transform:none;letter-spacing:0">datamined${ts.asOf?` ${esc(ts.asOf)}`:""} · may still tune</a>` : "";
+  return `<p class="d-h">Season 2 tier set${src}</p><div class="setbox">
+    ${piece("2&nbsp;pc", ts?.set2, p?.set2)}
+    ${piece("4&nbsp;pc", ts?.set4, p?.set4)}
+  </div>${p?.watch?`<div class="watch"><b>Watch</b>${esc(p.watch)}</div>`:""}`;
+}
 function drawerHTML(s){
   const p = s.ptr;
   const showPtr = state.era !== "live";
@@ -629,13 +642,7 @@ function drawerHTML(s){
        <ul class="d-list">${(p.changes||[]).map(c=>`<li>${esc(c)}</li>`).join("")}</ul>` : showPtr ? `
        <p class="d-summary"><span class="theme">No 12.1 PTR writeup yet</span><br>Current-season baseline below — the PTR read gets added to data/specs.json when this spec's pass lands.</p>` : `
        <p class="d-summary"><span class="theme">12.0.7 baseline view</span><br>Live-season data only — switch Era to 12.1 PTR (or Both) for the change read.</p>`;
-  const tierset = (p && showPtr) ? `
-       <p class="d-h">Season 2 tier set</p>
-       <div class="setbox">
-         <div class="setrow"><span class="pc">2&nbsp;pc</span><span class="pct">${esc(p.set2||"—")}</span></div>
-         <div class="setrow"><span class="pc">4&nbsp;pc</span><span class="pct">${esc(p.set4||"—")}</span></div>
-       </div>
-       ${p.watch?`<div class="watch"><b>Watch</b>${esc(p.watch)}</div>`:""}` : "";
+  const tierset = showPtr ? tierSetHTML(s) : "";
   return `
    <div class="drawer"><div class="drawer-in"><div class="drawer-grid">
      <div>${left}${metricsHTML(s)}</div>
