@@ -2,6 +2,72 @@
   "_comment": "Qualitative layer: distilled, cited creator takes per spec — populated by the watch-creators skill from video transcripts. Claims are paraphrased (auto-captions are lossy); every take carries a timestamped deep link for verification. Takes NEVER feed tiers or consensus. superseded: true when a newer take from the same creator or a newer patch state replaces it.",
   "takes": [
     {
+      "class": "Rogue",
+      "spec": "Subtlety",
+      "creator": "Dalaran Gaming",
+      "date": "2026-07-04",
+      "sentiment": "buff",
+      "patchContext": "12.1 PTR (2026-06-30 build)",
+      "claim": "The baffling first-week nerfs that gutted Subtlety's burst resource generation have largely been rolled back this build: Shadow Techniques' base proc frequency is up 40% and it now generates 5 energy per proc (was 4), and Shadowcraft is reworked so Shadow Techniques trigger 25% more often during Shadow Dance and grant an extra combo point (its old bonus energy folded into baseline). The net effect restores the Season 1 feel of overcapping resources and flooding burst windows, so despite the back-and-forth he reads Subtlety as likely pretty strong for Season 2 barring bad tuning.",
+      "url": "https://youtu.be/O9i4K3t3k4c?t=710",
+      "superseded": false
+    },
+    {
+      "class": "Rogue",
+      "spec": "Subtlety",
+      "creator": "Dalaran Gaming",
+      "date": "2026-07-04",
+      "sentiment": "buff",
+      "patchContext": "12.1 PTR (2026-06-30 build)",
+      "claim": "Gormo's Bite is redesigned and relocated to the center of the tree (45s cooldown, 25 energy): it now cleaves the target plus two nearby enemies, applies a 14-second bleed, and repeats 10% of all finisher damage as pure shadow split among affected targets — turning a talent nobody used into genuine three-target cleave and extra armor-bypassing priority-target burst even in single target. Downsides: it costs a GCD, generates no combo points itself, and must be pressed on cooldown to stay synced with the 1.5-minute Shadow Blades. The capstone it displaces, new First Dance (extends Shadow Dance if you stay out of combat 6s), looks niche for PvP/M+ and odd as a capstone.",
+      "url": "https://youtu.be/O9i4K3t3k4c?t=507",
+      "superseded": false
+    },
+    {
+      "class": "Rogue",
+      "spec": "Outlaw",
+      "creator": "Dalaran Gaming",
+      "date": "2026-07-04",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR (2026-06-30 build)",
+      "claim": "Blizzard is trying to revive the ambush build for Outlaw — Audacity now grants ambush +60% damage and the reworked Hidden Opportunity reduces ambush's cost — but on current PTR tuning an ambush build does roughly 10% less than the best (or even mediocre) builds, and Hidden Opportunity is gated behind two points of Summarily Dispatched, competing with Fan the Hammer, Killing Spree, Keep It Rolling and Preparation. Until the effect is baked into Audacity or the pathing is loosened (or ambush's base damage is buffed), the build isn't worth playing.",
+      "url": "https://youtu.be/O9i4K3t3k4c?t=235",
+      "superseded": false
+    },
+    {
+      "class": "Rogue",
+      "spec": "Outlaw",
+      "creator": "Dalaran Gaming",
+      "date": "2026-07-04",
+      "sentiment": "buff",
+      "patchContext": "12.1 PTR (2026-06-30 build)",
+      "claim": "He rates the Outlaw tier set well — 2-set Dispatch +15%, 4-set giving Sinister Strike/Ambush a chance to make the next Dispatch free and hit as if at max combo points. This build's adjustment stops Sinister Strike's double-hit from each separately rolling that proc (now only the initial cast, nominally ~20%), which slightly narrows the gap between ambush and sinister-strike builds and fixes the free Dispatches to correctly interact with the apex/Fatebound (though Trickster stays the likely hero pick). Killing Spree was also tuned to less often hit the wrong target in AoE.",
+      "url": "https://youtu.be/O9i4K3t3k4c?t=419",
+      "superseded": false
+    },
+    {
+      "class": "Rogue",
+      "spec": "Assassination",
+      "creator": "Dalaran Gaming",
+      "date": "2026-07-04",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR (2026-06-30 build)",
+      "claim": "Little new for Assassination this week beyond the strong early changes: the one tweak makes Implacable rank 3's King's Bane shank strikes properly feed combo-point-generator interactions like Lethality (crit) and Cold Blooded Killer, which he welcomes but finds odd didn't already work. He repeatedly flags that Assassination needs more dev follow-up and better communication than it has gotten.",
+      "url": "https://youtu.be/O9i4K3t3k4c?t=130",
+      "superseded": false
+    },
+    {
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "creator": "AutomaticJak",
+      "date": "2026-07-03",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR",
+      "claim": "Season 2's first patch-notes pass nerfs Mistweaver's Spinning Crane Kick damage and Way of the Crane healing transfer while buffing Jadefire Teachings; the tier set both boosts Rising Sun Kick's damage and its extra healing and (4-set) grants a chance for free extra RSK casts — a shift away from 'spin to win and forget,' though he notes you'll still spin at high target counts (players estimate around eight).",
+      "url": "https://youtu.be/12-JheaL90A?t=0",
+      "superseded": false
+    },
+    {
       "class": "Shaman",
       "spec": "Elemental",
       "creator": "Dalaran Gaming",
