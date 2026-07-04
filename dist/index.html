@@ -840,8 +840,8 @@ render();
       opts:[["any","Any"],["DPS","DPS"],["Healer","Healer"],["Tank","Tank"]] },
     { id:"content", label:"Main content", type:"single", def:"both",
       opts:[["both","Both"],["raid","Raid"],["mplus","Mythic+"]] },
-    { id:"priority", label:"How much should being strong matter?", hint:"“strongest” = tier-list consensus (holistic)", type:"single", def:"balanced",
-      opts:[["meta","Chase the strongest"],["balanced","Balanced"],["vibes","Just for fun"]] },
+    { id:"priority", label:"Rank by power, or by how it plays?", hint:"“Strongest” = tier ranking · “Most fun” = ranks by your fight/depth/mobility answers, mostly ignoring power", type:"single", def:"balanced",
+      opts:[["meta","Strongest (tier)"],["balanced","Balanced"],["vibes","Most fun to play"]] },
     { id:"fight", label:"Favorite fight type", hint:"shapes DPS picks", type:"single", def:"any",
       opts:[["any","Any"],["st","Single-target"],["cleave","Cleave"],["aoe","Big AoE"]] },
     { id:"range", label:"Melee or ranged", type:"single", def:"any",
@@ -875,7 +875,9 @@ render();
   const tierScore = (s,b) => { const c = s.consensus?.[b]; return c ? c.score/100 : null; };
   const nOk = m => m.n == null || m.n >= 200; // ignore freak thin-sample metrics
   function throughput(s,b){
-    if(s.role === "Tank") return null; // ranking a tank by its DPS is meaningless
+    // A tank's baseline strength shouldn't be its DPS — but "I want a hard-hitting tank"
+    // is a valid preference, so rank tanks by damage ONLY when the user opts into raw output.
+    if(s.role === "Tank" && !answers.traits.includes("output")) return null;
     const rx = s.role === "Healer" ? /HPS/i : /rDPS|DPS/i;
     const cand = (s.metrics||[]).filter(m => m.bracket===b && m.rank && m.of>1 && nOk(m) && rx.test(m.name));
     if(!cand.length) return null;
@@ -932,9 +934,10 @@ render();
     if(crit.fight != null && crit.fight >= 0.9) chips.push(`fits your ${answers.fight==="st"?"single-target":answers.fight} ask`);
     if(crit.complexity != null && crit.complexity >= 0.7) chips.push(answers.complexity==="deep"?"deep rotation":"simple rotation");
     if(crit.tier != null && crit.tier >= 0.6 && t) chips.push(`${t}-tier ${primary==="raid"?"raid":"M+"}`);
-    if(s.role!=="Tank" && crit.throughput != null && crit.throughput >= 0.66){
+    if(crit.throughput != null && crit.throughput >= 0.66){
+      // For tanks this only fires when the user opted into raw output (see throughput()).
       const m = (s.metrics||[]).filter(x=>x.bracket===primary && x.rank && /rDPS|DPS|HPS/i.test(x.name)).sort((a,b)=>a.rank-b.rank)[0];
-      chips.push(m ? `#${m.rank}/${m.of} raw output` : "high raw output");
+      chips.push(m ? `#${m.rank}/${m.of} ${s.role==="Tank"?"tank damage":"raw output"}` : "high raw output");
     }
     if(crit.rep != null && crit.rep >= 0.75) chips.push("most-played");
     if(crit.mobility != null && crit.mobility >= 0.8) chips.push("very mobile");
@@ -948,7 +951,7 @@ render();
     let pool = SPECS.filter(s => answers.role==="any" || s.role===answers.role);
     if(answers.range!=="any" && anyPlaystyle) pool = pool.filter(s => !s.playstyle || s.playstyle.range===answers.range);
     return pool.map(s => ({ s, ...scoreSpec(s, w) }))
-      .sort((a,b)=> b.score - a.score).slice(0,6);
+      .sort((a,b)=> b.score - a.score).slice(0,12);
   }
 
   /* ---- overlay UI ---- */

@@ -72,9 +72,11 @@ beats spec, meta only bites at the high end" framing. Everything else is small p
 
 1. **Tanks are ranked partly by damage output** — `throughput()` feeds a tank's
    DPS percentile into its "strength" score and a "raw output" chip. Ranking tanks by DPS
-   is meaningless for tank selection. *Fix (small):* `if (s.role==="Tank") return null` in
-   `throughput()`; skip the raw-output chip for tanks. Renormalization redistributes that
-   weight onto tier/survivability/utility automatically. Healers keep their HPS signal.
+   is meaningless for tank *strength*. *Fix (small):* tanks get no throughput signal by
+   default. **Refined per user feedback:** "I want a hard-hitting tank" is a valid
+   *preference*, so tank damage is now **opt-in** — `throughput()` returns null for tanks
+   unless the user ticks "Highest raw output", in which case tanks rank by damage-among-tanks
+   with a "#n/6 tank damage" chip. Default off (audit), explicit on (player choice).
 
 2. **Draft PTR verdicts pose as confirmed signal** — `outlookScore` gives a full up=1.0 to
    any Positive verdict, including `draft:true` writeups distilled from unconfirmed Wowhead
