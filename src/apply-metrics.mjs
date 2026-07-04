@@ -52,6 +52,14 @@ export async function applyMetrics(dataPath, root = ROOT) {
     survivabilityApplied++;
   }
 
+  let playstyleApplied = 0;
+  for (const row of input.playstyle ?? []) {
+    const spec = byKey.get(`${row.class}|${row.spec}`);
+    if (!spec) { unmatched.push(`playstyle: ${row.class} / ${row.spec}`); continue; }
+    spec.playstyle = { range: row.range, mobility: row.mobility, utility: row.utility, notes: row.utilityNotes ?? row.notes ?? null };
+    playstyleApplied++;
+  }
+
   if (unmatched.length) {
     throw new Error(
       `${unmatched.length} row(s) did not match any spec — nothing written:\n` +
@@ -65,7 +73,7 @@ export async function applyMetrics(dataPath, root = ROOT) {
   }
 
   await writeFile(path.join(root, "data", "specs.json"), JSON.stringify(data.specs, null, 2) + "\n");
-  return { metricsApplied, profilesApplied, survivabilityApplied };
+  return { metricsApplied, profilesApplied, survivabilityApplied, playstyleApplied };
 }
 
 const isMain = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
@@ -77,7 +85,7 @@ if (isMain) {
   }
   try {
     const result = await applyMetrics(path.resolve(dataPath));
-    console.log(`✓ applied ${result.metricsApplied} metric(s), ${result.profilesApplied} fight profile(s), ${result.survivabilityApplied} survivability tier(s) → data/specs.json`);
+    console.log(`✓ applied ${result.metricsApplied} metric(s), ${result.profilesApplied} fight profile(s), ${result.survivabilityApplied} survivability tier(s), ${result.playstyleApplied} playstyle(s) → data/specs.json`);
   } catch (error) {
     console.error("✗ " + error.message);
     process.exit(1);

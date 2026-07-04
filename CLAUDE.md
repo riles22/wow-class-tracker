@@ -83,6 +83,13 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   Fight selector swaps the matching tier column. Refresh alongside the tier lists.
 - `spec.survivability` = Archon's raid survivability tier (merge via apply-metrics.mjs
   `survivability` key) — shown in the drawer's Source ratings box.
+- `spec.playstyle` = `{ range: "Melee"|"Ranged", mobility: 1-5, utility: 1-5, notes }`,
+  guide-sourced (Icy Veins strengths/weaknesses); merge via apply-metrics.mjs `playstyle`
+  key. Feeds the **Spec Finder** — a client-side weighted-scoring quiz (template.html,
+  presentation-only, no build step) that ranks all 40 specs against user preferences
+  (role, content, meta-vs-vibes, fight type, melee/ranged, mobility/survivability/
+  utility/12.1-outlook) using existing data + playstyle. Criteria with no data are
+  skipped and weights renormalized, so it degrades gracefully.
 
 ### `data/sources.json` — source registry
 Kinds: `tier-list` (toggle button + consensus; needs `scale`), `metrics` (numbers in

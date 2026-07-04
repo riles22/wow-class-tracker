@@ -101,6 +101,14 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
       }
     }
 
+    if (spec.playstyle != null) {
+      const ps = spec.playstyle;
+      if (!["Melee", "Ranged"].includes(ps.range)) errors.push(`specs.json: ${key} playstyle.range must be "Melee" or "Ranged"`);
+      for (const attr of ["mobility", "utility"]) {
+        if (!Number.isInteger(ps[attr]) || ps[attr] < 1 || ps[attr] > 5) errors.push(`specs.json: ${key} playstyle.${attr} must be an integer 1–5`);
+      }
+    }
+
     if (spec.survivability != null) {
       if (typeof spec.survivability.tier !== "string" || !spec.survivability.tier) errors.push(`specs.json: ${key} survivability needs a tier string`);
       if (spec.survivability.source && !allSources.has(spec.survivability.source)) errors.push(`specs.json: ${key} survivability from unknown source "${spec.survivability.source}"`);

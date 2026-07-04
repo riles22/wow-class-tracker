@@ -108,6 +108,12 @@
       "tier": "A",
       "source": "archon",
       "asOf": "2026-07-01"
+    },
+    "playstyle": {
+      "range": "Melee",
+      "mobility": 2,
+      "utility": 3,
+      "notes": "Combat rez (Raise Ally), Anti-Magic Shell/Zone, Death Grip + Gorefiend's Grasp; no raid buff, no Bloodlust"
     }
   },
   {
@@ -233,6 +239,12 @@
       "tier": "S",
       "source": "archon",
       "asOf": "2026-07-01"
+    },
+    "playstyle": {
+      "range": "Melee",
+      "mobility": 2,
+      "utility": 2,
+      "notes": "Combat rez, Death Grip, Anti-Magic Zone, Blinding Sleet; guide rates utility 'Could Be Better', no raid buff"
     }
   },
   {
@@ -373,6 +385,12 @@
       "tier": "S",
       "source": "archon",
       "asOf": "2026-07-01"
+    },
+    "playstyle": {
+      "range": "Melee",
+      "mobility": 2,
+      "utility": 2,
+      "notes": "Combat rez, Death Grip, Anti-Magic Zone, Blinding Sleet; guide rates utility 'Lackluster', no raid buff"
     }
   },
   {
@@ -498,6 +516,12 @@
       "tier": "A",
       "source": "archon",
       "asOf": "2026-07-01"
+    },
+    "playstyle": {
+      "range": "Melee",
+      "mobility": 5,
+      "utility": 3,
+      "notes": "Chaos Brand raid buff, Darkness group defensive, Chaos Nova/Imprison/Sigil of Misery CC; no rez, no Bloodlust, no immunity"
     }
   },
   {
@@ -639,6 +663,12 @@
       "tier": "A",
       "source": "archon",
       "asOf": "2026-07-01"
+    },
+    "playstyle": {
+      "range": "Ranged",
+      "mobility": 5,
+      "utility": 3,
+      "notes": "Chaos Brand raid buff, Darkness, 30yd Disrupt interrupt, Void Nova ranged AoE stun; no rez, no Bloodlust, no immunity"
     }
   },
   {
@@ -746,6 +776,12 @@
       "tier": "A",
       "source": "archon",
       "asOf": "2026-07-01"
+    },
+    "playstyle": {
+      "range": "Melee",
+      "mobility": 5,
+      "utility": 3,
+      "notes": "Chaos Brand raid buff, Sigil of Silence/Misery, Chaos Nova, Darkness; strong M+ control but 'nothing unique' in raids, no rez"
     }
   },
   {
@@ -883,6 +919,12 @@
       "tier": "B",
       "source": "archon",
       "asOf": "2026-07-01"
+    },
+    "playstyle": {
+      "range": "Ranged",
+      "mobility": 3,
+      "utility": 5,
+      "notes": "Combat rez (Rebirth), Mark of the Wild, Innervate, Solar Beam interrupt, Cyclone/roots/Typhoon, Soothe; cast-heavy on the move"
     }
   },
   {
@@ -1008,6 +1050,12 @@
       "tier": "C",
       "source": "archon",
       "asOf": "2026-07-01"
+    },
+    "playstyle": {
+      "range": "Melee",
+      "mobility": 5,
+      "utility": 5,
+      "notes": "Combat rez (Rebirth), Mark of the Wild, Innervate, Stampeding Roar, Skull Bash, Typhoon/Ursol's Vortex CC"
     }
   },
   {
@@ -1104,6 +1152,12 @@
       "tier": "A",
       "source": "archon",
       "asOf": "2026-07-01"
+    },
+    "playstyle": {
+      "range": "Melee",
+      "mobility": 4,
+      "utility": 4,
+      "notes": "Combat rez (Rebirth), Mark of the Wild, Stampeding Roar, Dream of Cenarius off-heals, Incapacitating Roar; loaded for a tank"
     }
   },
   {
@@ -1200,6 +1254,12 @@
       "tier": "C",
       "source": "archon",
       "asOf": "2026-07-01"
+    },
+    "playstyle": {
+      "range": "Ranged",
+      "mobility": 4,
+      "utility": 5,
+      "notes": "Combat rez (Rebirth), Mark of the Wild ('most powerful raid buff'), Ironbark external, Cyclone/Typhoon/Ursol's Vortex CC, Nature's Cure dispel"
     }
   },
   {
@@ -1320,6 +1380,12 @@
       "tier": "B",
       "source": "archon",
       "asOf": "2026-07-01"
+    },
+    "playstyle": {
+      "range": "Ranged",
+      "mobility": 5,
+      "utility": 5,
+      "notes": "Bloodlust (Fury of the Aspects), Ebon Might/Prescience damage amp, Source of Magic, Rescue/Zephyr externals, Sleep Walk CC, Cauterizing Flame dispel"
     }
   },
   {
@@ -1456,6 +1522,12 @@
       "tier": "B",
       "source": "archon",
       "asOf": "2026-07-01"
+    },
+    "playstyle": {
+      "range": "Ranged",
+      "mobility": 5,
+      "utility": 4,
+      "notes": "Bloodlust (Fury of the Aspects), Source of Magic (3% healing + mana), Rescue, Zephyr, Blessing of the Bronze; weaker in dungeons"
     }
   },
   {
@@ -1564,6 +1636,12 @@
       "tier": "C",
       "source": "archon",
       "asOf": "2026-07-01"
+    },
+    "playstyle": {
+      "range": "Ranged",
+      "mobility": 5,
+      "utility": 3,
+      "notes": "Bloodlust (Fury of the Aspects), Zephyr party DR, Rescue, Obsidian Scales external; no raid buff, guide calls utility its biggest weakness"
     }
   },
   {
@@ -1689,6 +1767,12 @@
       "tier": "C",
       "source": "archon",
       "asOf": "2026-07-01"
+    },
+    "playstyle": {
+      "range": "Ranged",
+      "mobility": 5,
+      "utility": 4,
+      "notes": "Bloodlust (pet Primal Rage), Hunter's Mark 3% buff, Turtle immunity, Tranquilizing Shot, Counter Shot, Intimidation/Binding Shot CC, Roar of Sacrifice external"
     }
   },
   {
@@ -1814,6 +1898,12 @@
       "tier": "A",
       "source": "archon",
       "asOf": "2026-07-01"
+    },
+    "playstyle": {
+      "range": "Ranged",
+      "mobility": 3,
+      "utility": 4,
+      "notes": "Bloodlust (pet Primal Rage), Hunter's Mark 3% buff, Turtle immunity, Tranquilizing Shot, Counter Shot, Intimidation/Freezing Trap CC; ~40% time in immobile Aimed Shot casts"
     }
   },
   {
@@ -1951,6 +2041,12 @@
       "tier": "B",
       "source": "archon",
       "asOf": "2026-07-01"
+    },
+    "playstyle": {
+      "range": "Melee",
+      "mobility": 4,
+      "utility": 4,
+      "notes": "Bloodlust (pet Primal Rage), Hunter's Mark 3% buff, Turtle immunity, Tranquilizing Shot, Muzzle interrupt, Freezing Trap/Intimidation CC, Harpoon gap-closer"
     }
   },
   {
@@ -2076,6 +2172,12 @@
       "tier": "C",
       "source": "archon",
       "asOf": "2026-07-01"
+    },
+    "playstyle": {
+      "range": "Ranged",
+      "mobility": 4,
+      "utility": 5,
+      "notes": "Bloodlust (Time Warp), Arcane Intellect raid buff, Ice Block immunity, Counterspell, Spellsteal, Supernova/Polymorph CC, Remove Curse"
     }
   },
   {
@@ -2213,6 +2315,12 @@
       "tier": "A",
       "source": "archon",
       "asOf": "2026-07-01"
+    },
+    "playstyle": {
+      "range": "Ranged",
+      "mobility": 4,
+      "utility": 5,
+      "notes": "Bloodlust (Time Warp), Arcane Intellect raid buff, Ice Block immunity, Counterspell, Spellsteal, Dragon's Breath/Polymorph CC, Remove Curse"
     }
   },
   {
@@ -2338,6 +2446,12 @@
       "tier": "C",
       "source": "archon",
       "asOf": "2026-07-01"
+    },
+    "playstyle": {
+      "range": "Ranged",
+      "mobility": 3,
+      "utility": 5,
+      "notes": "Bloodlust (Time Warp), Arcane Intellect raid buff, Ice Block immunity, Counterspell, Spellsteal, roots/slows/Ring of Frost CC, Mass Invisibility; guide: brought for utility"
     }
   },
   {
@@ -2434,6 +2548,12 @@
       "tier": "B",
       "source": "archon",
       "asOf": "2026-07-01"
+    },
+    "playstyle": {
+      "range": "Melee",
+      "mobility": 5,
+      "utility": 3,
+      "notes": "Mystic Touch physical debuff, Leg Sweep/Ring of Peace CC, Paralysis (enrage dispel), Detox, Spear Hand Strike interrupt; no Bloodlust or battle rez"
     }
   },
   {
@@ -2542,6 +2662,12 @@
       "tier": "C",
       "source": "archon",
       "asOf": "2026-07-01"
+    },
+    "playstyle": {
+      "range": "Ranged",
+      "mobility": 5,
+      "utility": 2,
+      "notes": "Ring of Peace/Leg Sweep/Paralysis CC, Revival group magic dispel, Mystic Touch (weak), Life Cocoon external; no Bloodlust, no battle rez — guide calls utility its Achilles heel"
     }
   },
   {
@@ -2679,6 +2805,12 @@
       "tier": "C",
       "source": "archon",
       "asOf": "2026-07-01"
+    },
+    "playstyle": {
+      "range": "Melee",
+      "mobility": 5,
+      "utility": 3,
+      "notes": "Ring of Peace area-denial, Leg Sweep AoE stun, Paralysis (enrage dispel), Spear Hand Strike interrupt, Mystic Touch, Touch of Karma (damage cap, not full immunity); no Bloodlust or battle rez"
     }
   },
   {
@@ -2775,6 +2907,12 @@
       "tier": "C",
       "source": "archon",
       "asOf": "2026-07-01"
+    },
+    "playstyle": {
+      "range": "Ranged",
+      "mobility": 2,
+      "utility": 5,
+      "notes": "Aura Mastery raid DR, Devotion Aura, Divine Shield immunity, Blessing of Protection, Blessing of Freedom, Lay on Hands external; no rez/Lust"
     }
   },
   {
@@ -2871,6 +3009,12 @@
       "tier": "C",
       "source": "archon",
       "asOf": "2026-07-01"
+    },
+    "playstyle": {
+      "range": "Melee",
+      "mobility": 2,
+      "utility": 5,
+      "notes": "Two immunities (BoP physical + Blessing of Spellwarding magic), Blessing of Sacrifice, Freedom, steady interrupts (Avenger's Shield/Rebuke), Lay on Hands"
     }
   },
   {
@@ -2996,6 +3140,12 @@
       "tier": "C",
       "source": "archon",
       "asOf": "2026-07-01"
+    },
+    "playstyle": {
+      "range": "Melee",
+      "mobility": 2,
+      "utility": 3,
+      "notes": "Blessings (Protection, Freedom, Sacrifice), Divine Shield immunity, Lay on Hands, Rebuke interrupt; niche in raid, no Spellwarding/rez/Lust"
     }
   },
   {
@@ -3092,6 +3242,12 @@
       "tier": "C",
       "source": "archon",
       "asOf": "2026-07-01"
+    },
+    "playstyle": {
+      "range": "Ranged",
+      "mobility": 2,
+      "utility": 5,
+      "notes": "Power Word: Barrier raid DR, Power Infusion external DPS buff, Pain Suppression, Leap of Faith, Mass Dispel, Psychic Scream; no rez/Lust"
     }
   },
   {
@@ -3188,6 +3344,12 @@
       "tier": "S",
       "source": "archon",
       "asOf": "2026-07-01"
+    },
+    "playstyle": {
+      "range": "Ranged",
+      "mobility": 2,
+      "utility": 5,
+      "notes": "Divine Hymn, Guardian Spirit external, Power Infusion, Symbol of Hope, Leap of Faith, PW: Fortitude raid buff, Psychic Scream; no rez/Lust"
     }
   },
   {
@@ -3325,6 +3487,12 @@
       "tier": "B",
       "source": "archon",
       "asOf": "2026-07-01"
+    },
+    "playstyle": {
+      "range": "Ranged",
+      "mobility": 2,
+      "utility": 4,
+      "notes": "Power Infusion, Silence interrupt, Vampiric Embrace group sustain, Psychic Scream, Shackle, Mass Dispel; no external shields/rez/Lust"
     }
   },
   {
@@ -3450,6 +3618,12 @@
       "tier": "B",
       "source": "archon",
       "asOf": "2026-07-01"
+    },
+    "playstyle": {
+      "range": "Melee",
+      "mobility": 4,
+      "utility": 3,
+      "notes": "Kick interrupt, Cloak of Shadows immunity, Shroud of Concealment, Tricks of the Trade, Blind/Sap CC, Atrophic Poison; strong in M+, weak in raid"
     }
   },
   {
@@ -3588,6 +3762,12 @@
       "tier": "B",
       "source": "archon",
       "asOf": "2026-07-01"
+    },
+    "playstyle": {
+      "range": "Melee",
+      "mobility": 4,
+      "utility": 3,
+      "notes": "Kick interrupt, Cloak of Shadows immunity, Shroud of Concealment, Tricks of the Trade, Blind/Sap CC, Atrophic Poison; strong in M+, weak in raid"
     }
   },
   {
@@ -3725,6 +3905,12 @@
       "tier": "B",
       "source": "archon",
       "asOf": "2026-07-01"
+    },
+    "playstyle": {
+      "range": "Melee",
+      "mobility": 4,
+      "utility": 3,
+      "notes": "Kick interrupt, Cloak of Shadows immunity, Shroud of Concealment, Tricks of the Trade, Blind/Sap CC, Atrophic Poison; strong in M+, weak in raid"
     }
   },
   {
@@ -3850,6 +4036,12 @@
       "tier": "S",
       "source": "archon",
       "asOf": "2026-07-01"
+    },
+    "playstyle": {
+      "range": "Ranged",
+      "mobility": 2,
+      "utility": 4,
+      "notes": "Bloodlust/Heroism, Skyfury raid buff, Wind Shear interrupt, Tremor/Poison Cleansing totems, Purge"
     }
   },
   {
@@ -3975,6 +4167,12 @@
       "tier": "A",
       "source": "archon",
       "asOf": "2026-07-01"
+    },
+    "playstyle": {
+      "range": "Melee",
+      "mobility": 4,
+      "utility": 4,
+      "notes": "Bloodlust/Heroism, Skyfury raid buff, Capacitor/Earthgrab totems, Wind Shear interrupt, cleanses"
     }
   },
   {
@@ -4083,6 +4281,12 @@
       "tier": "B",
       "source": "archon",
       "asOf": "2026-07-01"
+    },
+    "playstyle": {
+      "range": "Ranged",
+      "mobility": 2,
+      "utility": 5,
+      "notes": "Bloodlust/Heroism, Skyfury, Spirit Link Totem, Wind Shear (only healer interrupt), cleanses, combat rez (self)"
     }
   },
   {
@@ -4208,6 +4412,12 @@
       "tier": "B",
       "source": "archon",
       "asOf": "2026-07-01"
+    },
+    "playstyle": {
+      "range": "Ranged",
+      "mobility": 3,
+      "utility": 5,
+      "notes": "Battle rez (Soulstone), Healthstones, Demonic Gateway, Curses, Felhunter interrupt/dispel"
     }
   },
   {
@@ -4333,6 +4543,12 @@
       "tier": "C",
       "source": "archon",
       "asOf": "2026-07-01"
+    },
+    "playstyle": {
+      "range": "Ranged",
+      "mobility": 3,
+      "utility": 5,
+      "notes": "Battle rez (Soulstone), Healthstones, Demonic Gateway, Curses, Felguard/Fel Ravager interrupt"
     }
   },
   {
@@ -4458,6 +4674,12 @@
       "tier": "A",
       "source": "archon",
       "asOf": "2026-07-01"
+    },
+    "playstyle": {
+      "range": "Ranged",
+      "mobility": 1,
+      "utility": 5,
+      "notes": "Battle rez (Soulstone), Healthstones, Demonic Gateway, Curses, Felhunter interrupt (Spell Lock)"
     }
   },
   {
@@ -4583,6 +4805,12 @@
       "tier": "B",
       "source": "archon",
       "asOf": "2026-07-01"
+    },
+    "playstyle": {
+      "range": "Melee",
+      "mobility": 4,
+      "utility": 3,
+      "notes": "Battle Shout, Rallying Cry, Spell Reflection, Pummel interrupt, Piercing Howl; no rez/Lust/immunity"
     }
   },
   {
@@ -4708,6 +4936,12 @@
       "tier": "B",
       "source": "archon",
       "asOf": "2026-07-01"
+    },
+    "playstyle": {
+      "range": "Melee",
+      "mobility": 4,
+      "utility": 3,
+      "notes": "Battle Shout, Rallying Cry, Spell Reflection, Pummel interrupt, Piercing Howl; no rez/Lust/immunity"
     }
   },
   {
@@ -4804,6 +5038,12 @@
       "tier": "S",
       "source": "archon",
       "asOf": "2026-07-01"
+    },
+    "playstyle": {
+      "range": "Melee",
+      "mobility": 3,
+      "utility": 3,
+      "notes": "Battle Shout, Rallying Cry, Shockwave/Storm Bolt stuns, Intimidating Shout, Disrupting Shout silence, Spell Reflection"
     }
   }
 ]
