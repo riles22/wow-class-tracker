@@ -888,16 +888,31 @@ render();
   const avg = a => { const v = a.filter(x => x != null); return v.length ? v.reduce((s,x)=>s+x,0)/v.length : null; };
   const tierScore = (s,b) => { const c = s.consensus?.[b]; return c ? c.score/100 : null; };
   const nOk = m => m.n == null || m.n >= 200; // ignore freak thin-sample metrics
-  function throughput(s,b){
-    // A tank's baseline strength shouldn't be its DPS — but "I want a hard-hitting tank"
-    // is a valid preference, so rank tanks by damage ONLY when the user opts into raw output.
-    if(s.role === "Tank" && !answers.traits.includes("output")) return null;
-    const rx = s.role === "Healer" ? /HPS/i : /rDPS|DPS/i;
+  // The rank (0-1, higher=better) of the best median metric matching rx for bracket b.
+  const rankOf = (s,b,rx) => {
     const cand = (s.metrics||[]).filter(m => m.bracket===b && m.rank && m.of>1 && nOk(m) && rx.test(m.name));
     if(!cand.length) return null;
     const m = cand.find(x => /median/i.test(x.name)) || cand.slice().sort((a,b)=>a.rank-b.rank)[0];
     return 1 - (m.rank-1)/(m.of-1);
+  };
+  // Best (rank,of,bracket) across the brackets in play — used for unambiguous, bracket-
+  // labeled chips (two specs both "#1" are now distinguished by their bracket).
+  function bestMetric(s, rx){
+    let best = null;
+    for(const b of brackets()){
+      const cand = (s.metrics||[]).filter(m => m.bracket===b && m.rank && m.of>1 && nOk(m) && rx.test(m.name));
+      if(!cand.length) continue;
+      const m = cand.find(x => /median/i.test(x.name)) || cand.slice().sort((a,b)=>a.rank-b.rank)[0];
+      if(!best || m.rank < best.rank) best = { rank:m.rank, of:m.of, bracket:b };
+    }
+    return best;
   }
+  const HPS = /HPS/i, DPS = /rDPS|DPS/i, TANKDMG = /tank/i, HEALDMG = /median dps.*healer/i;
+  // Primary output: DPS damage, Healer healing (HPS). Tanks have no throughput "primary".
+  const throughput = (s,b) => s.role==="Tank" ? null : rankOf(s, b, s.role==="Healer" ? HPS : DPS);
+  // Damage dealt by off-DPS roles (tank / healer) — valued only when the user opts into
+  // raw output, so tanks/healers aren't ranked by damage by default (DPS use throughput).
+  const damageRank = (s,b) => s.role==="DPS" ? null : rankOf(s, b, s.role==="Tank" ? TANKDMG : HEALDMG);
   function representation(s,b){
     const m = (s.metrics||[]).find(x => x.bracket===b && x.rank && x.of>1 && nOk(x) && /popularity|representation/i.test(x.name));
     return m ? 1 - (m.rank-1)/(m.of-1) : null;
@@ -923,6 +938,8 @@ render();
   function weights(){
     const w = { ...BASE[answers.priority] };
     for(const t of answers.traits){ const k = TRAIT_CRIT[t]; if(k) w[k] += (TRAIT_BOOST[t] ?? 0.20); }
+    // Opting into raw output also values tank/healer DAMAGE (their off-role contribution).
+    if(answers.traits.includes("output")) w.damage = (w.damage||0) + TRAIT_BOOST.output;
     const sum = Object.values(w).reduce((s,x)=>s+x,0);
     for(const k in w) w[k] /= sum;
     return w;
@@ -933,7 +950,7 @@ render();
       tier: avg(bs.map(b=>tierScore(s,b))), throughput: avg(bs.map(b=>throughput(s,b))),
       rep: avg(bs.map(b=>representation(s,b))), fight: fightFit(s),
       mobility: mobility(s), surv: survScore(s), utility: utility(s), outlook: outlookScore(s),
-      complexity: complexityFit(s)
+      complexity: complexityFit(s), damage: avg(bs.map(b=>damageRank(s,b)))
     };
     let num=0, den=0;
     for(const k in w){ if(crit[k]!=null){ num += w[k]*crit[k]; den += w[k]; } }
@@ -948,10 +965,14 @@ render();
     if(crit.fight != null && crit.fight >= 0.9) chips.push(`fits your ${answers.fight==="st"?"single-target":answers.fight} ask`);
     if(crit.complexity != null && crit.complexity >= 0.7) chips.push(answers.complexity==="deep"?"deep rotation":"simple rotation");
     if(crit.tier != null && crit.tier >= 0.6 && t) chips.push(`${t}-tier ${primary==="raid"?"raid":"M+"}`);
+    const bLbl = b => b==="raid" ? "raid" : "M+";
     if(crit.throughput != null && crit.throughput >= 0.66){
-      // For tanks this only fires when the user opted into raw output (see throughput()).
-      const m = (s.metrics||[]).filter(x=>x.bracket===primary && x.rank && /rDPS|DPS|HPS/i.test(x.name)).sort((a,b)=>a.rank-b.rank)[0];
-      chips.push(m ? `#${m.rank}/${m.of} ${s.role==="Tank"?"tank damage":"raw output"}` : "high raw output");
+      const bm = bestMetric(s, s.role==="Healer" ? HPS : DPS);
+      if(bm) chips.push(`#${bm.rank}/${bm.of} ${s.role==="Healer"?"healing":"raw output"} (${bLbl(bm.bracket)})`);
+    }
+    if(crit.damage != null && crit.damage >= 0.66){ // tank/healer damage (only when raw output opted in)
+      const bm = bestMetric(s, s.role==="Tank" ? TANKDMG : HEALDMG);
+      if(bm) chips.push(`#${bm.rank}/${bm.of} ${s.role==="Tank"?"tank damage":"healer damage"} (${bLbl(bm.bracket)})`);
     }
     if(crit.rep != null && crit.rep >= 0.75) chips.push("most-played");
     if(crit.mobility != null && crit.mobility >= 0.8) chips.push("very mobile");
