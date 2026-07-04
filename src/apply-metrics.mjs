@@ -60,6 +60,16 @@ export async function applyMetrics(dataPath, root = ROOT) {
     playstyleApplied++;
   }
 
+  // Complexity merges into the existing playstyle object (separate fetch).
+  for (const row of input.complexity ?? []) {
+    const spec = byKey.get(`${row.class}|${row.spec}`);
+    if (!spec) { unmatched.push(`complexity: ${row.class} / ${row.spec}`); continue; }
+    spec.playstyle = spec.playstyle ?? {};
+    spec.playstyle.complexity = row.complexity;
+    if (row.complexityNotes) spec.playstyle.complexityNotes = row.complexityNotes;
+    playstyleApplied++;
+  }
+
   if (unmatched.length) {
     throw new Error(
       `${unmatched.length} row(s) did not match any spec — nothing written:\n` +

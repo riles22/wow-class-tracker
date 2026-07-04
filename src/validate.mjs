@@ -107,6 +107,9 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
       for (const attr of ["mobility", "utility"]) {
         if (!Number.isInteger(ps[attr]) || ps[attr] < 1 || ps[attr] > 5) errors.push(`specs.json: ${key} playstyle.${attr} must be an integer 1–5`);
       }
+      if (ps.complexity != null && (!Number.isInteger(ps.complexity) || ps.complexity < 1 || ps.complexity > 5)) {
+        errors.push(`specs.json: ${key} playstyle.complexity must be an integer 1–5`);
+      }
     }
 
     if (spec.survivability != null) {
