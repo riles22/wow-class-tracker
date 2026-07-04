@@ -50,6 +50,13 @@
           "name": "Death's Advance",
           "url": "https://discord.com/invite/deathsadvance"
         }
+      ],
+      "sites": [
+        {
+          "name": "SimC Death Knight APL",
+          "url": "https://github.com/simulationcraft/simc/tree/midnight/engine/class_modules/apl",
+          "note": "Acherus theorycrafters maintain DK APLs directly in the SimulationCraft engine (apl_death_knight)."
+        }
       ]
     },
     {
@@ -103,7 +110,14 @@
           "verifiedDate": "2026-06-15"
         }
       ],
-      "altDiscords": []
+      "altDiscords": [],
+      "sites": [
+        {
+          "name": "SimC Demon Hunter APL",
+          "url": "https://github.com/simulationcraft/simc/tree/midnight/engine/class_modules/apl",
+          "note": "Fel Hammer theorycrafters maintain DH APLs in the SimulationCraft engine (apl_demon_hunter)."
+        }
+      ]
     },
     {
       "class": "Druid",
@@ -166,6 +180,11 @@
           "name": "Dreamgrove.gg",
           "url": "https://www.dreamgrove.gg/",
           "note": "Druid community site — Balance Compendium updated for Midnight 12.0.7 (2026-06-27); open-source, fully fetchable (verified 2026-07-01)."
+        },
+        {
+          "name": "Dreamgrove (APLs / build data)",
+          "url": "https://github.com/dreamgrove/dreamgrove",
+          "note": "Dreamgrove Discord’s open-source guide + build/APL data repo."
         }
       ],
       "altDiscords": [
@@ -236,6 +255,11 @@
           "name": "Spiritbloom.pro",
           "url": "https://spiritbloom.pro/",
           "note": "Preservation Evoker-centered healer guide hub (also hosts HPal/RSham guides); Midnight-current (verified 2026-07-01)."
+        },
+        {
+          "name": "SimC Evoker APL",
+          "url": "https://github.com/simulationcraft/simc/tree/midnight/engine/class_modules/apl",
+          "note": "Wyrmrest Temple theorycrafters (e.g. Saeldur) maintain Evoker APLs in SimC (apl_evoker)."
         }
       ]
     },
@@ -258,6 +282,13 @@
         {
           "name": "Warcraft Hunter's Union",
           "url": "https://discord.com/invite/G3tYdTG"
+        }
+      ],
+      "sites": [
+        {
+          "name": "Azortharion — Midnight Hunter theorycraft",
+          "url": "https://hackmd.io/@Azortharion/MidnightHunterChanges",
+          "note": "Trueshot Lodge head admin’s Midnight BM/MM/SV rotation + damage-calc writeup."
         }
       ]
     },
@@ -287,6 +318,13 @@
           "transcribable": false,
           "latest": "Icy Veins Arcane Mage DPS Guide (12.0.7 Midnight), last updated 2026-06-30; Fire guide last updated 2026-06-17",
           "verifiedDate": "2026-06-30"
+        }
+      ],
+      "sites": [
+        {
+          "name": "SimC Mage APL",
+          "url": "https://github.com/simulationcraft/simc/tree/midnight/engine/class_modules/apl",
+          "note": "Altered Time maintains Mage APLs in SimC (sc_mage); altered-time.com is the community home."
         }
       ]
     },
@@ -344,6 +382,11 @@
           "name": "Peak of Serenity",
           "url": "https://www.peakofserenity.com/",
           "note": "Monk community site (Babylonius) — WW/BrM guides + patch survival guides; Midnight 12.0.7-current (verified 2026-07-01). RSS at /feed/ for recency."
+        },
+        {
+          "name": "WindwalkerAPL (Peak of Serenity)",
+          "url": "https://github.com/Talby223/WindwalkerAPL",
+          "note": "Community-maintained SimC Windwalker APL (current + archived versions)."
         }
       ]
     },
@@ -401,6 +444,11 @@
           "name": "Wings Is Up",
           "url": "https://wingsisup.com/",
           "note": "Ellesmere's Holy Paladin guide — Midnight S1 (12.0.5 Quickview; full guide promised for 12.1). Verified 2026-07-01."
+        },
+        {
+          "name": "SimC Paladin APL",
+          "url": "https://github.com/simulationcraft/simc/tree/midnight/engine/class_modules/apl",
+          "note": "Hammer of Wrath theorycrafters maintain Paladin APLs in SimC (apl_paladin)."
         }
       ]
     },
@@ -458,6 +506,11 @@
           "name": "Warcraft Priests sim charts",
           "url": "https://warcraftpriests.github.io/?talents=archon&sims=trinkets&fightStyle=Composite",
           "note": "Shadow Priest SimC charts per hero build / fight style; underlying JSON fetchable from the mid-shadow-priest repo (updated 2026-06-15, verified 2026-07-01)."
+        },
+        {
+          "name": "Warcraft Priests sims (GitHub)",
+          "url": "https://github.com/WarcraftPriests",
+          "note": "Warcraft Priests Discord’s SimC profile/APL repos (e.g. mid-shadow-priest)."
         }
       ]
     },
@@ -538,6 +591,11 @@
           "name": "Fuu's Simulation Sheet",
           "url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRq3Nn1ZvFwaXf1wQTr1RalpWbJTIhQp5xGwEyDTVWyuBWLP9_2rqqsxJSPQJLJAkIiKHy49pVfqEWu/pubhtml",
           "note": "12.0.7 SimC results for all three Rogue specs by 'fuu' (changelog 2026-05-26, verified 2026-07-01). Tabs need per-gid fetches."
+        },
+        {
+          "name": "Ravenholdt-TC (SimC profiles)",
+          "url": "https://github.com/Ravenholdt-TC",
+          "note": "Ravenholdt theorycraft org — SimC Rogue profiles/benchmarks."
         }
       ]
     },
@@ -587,6 +645,13 @@
           "transcribable": false,
           "verifiedDate": "2026-06-15"
         }
+      ],
+      "sites": [
+        {
+          "name": "Storm, Earth & Lava sims",
+          "url": "https://github.com/stormearthandlava/sims",
+          "note": "Elemental/Enhancement theorycraft team’s SimC profile repo."
+        }
       ]
     },
     {
@@ -616,6 +681,13 @@
           "transcribable": false,
           "latest": "Icy Veins Warlock guides updated 12.0.7 (Affliction 2026-06-15, Demonology 2026-06-25)",
           "verifiedDate": "2026-06-25"
+        }
+      ],
+      "sites": [
+        {
+          "name": "SimC Warlock APL",
+          "url": "https://github.com/simulationcraft/simc/tree/midnight/engine/class_modules/apl",
+          "note": "LockOneStopShop / Council of the Black Harvest maintain Warlock APLs in SimC (warlock.cpp)."
         }
       ]
     },
@@ -682,6 +754,13 @@
         {
           "name": "Skyhold",
           "url": "https://discord.gg/skyhold"
+        }
+      ],
+      "sites": [
+        {
+          "name": "SimC Warrior APL",
+          "url": "https://github.com/simulationcraft/simc/tree/midnight/engine/class_modules/apl",
+          "note": "Skyhold theorycrafters (Archimtiros et al.) maintain Warrior APLs in SimC (apl_warrior)."
         }
       ]
     }

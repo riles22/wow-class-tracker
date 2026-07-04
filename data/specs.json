@@ -1798,7 +1798,22 @@
         "wowmeta": "S"
       }
     },
-    "ptr": null,
+    "ptr": {
+      "verdict": "Mixed",
+      "theme": "Power pulled out of Bestial Wrath into the baseline — flatter, more forgiving, same feel",
+      "summary": "Azortharion reads 12.1 as a rebalance rather than a rework: power is shifted out of Bestial Wrath windows and cooldowns into baseline abilities, so the spec plays flatter and more evenly. He notes AoE takes a real hit, but the moment-to-moment gameplay feel is largely unchanged — if you enjoy BM now, you'll enjoy it post-patch, and vice versa.",
+      "changes": [
+        "Piercing Fangs (crit damage in Bestial Wrath) significantly nerfed, and Bloody Frenzy nerfed — both pulling power out of the burst window; core abilities buffed to compensate",
+        "Kill Cleave now half as effective and Wild Instincts removed entirely, a substantial AoE nerf",
+        "Beast Cleave duration up to 10s, so you no longer have to be perfect with Wild Thrash on cooldown (though casting it immediately is still best)",
+        "Net effect: a flatter power profile spread more evenly across the rotation rather than concentrated in cooldowns"
+      ],
+      "set2": "Reads as more of an AoE boost than a single-target one.",
+      "set4": "Gives Cobra Shot a microscopic AoE splash and nudges you to weave Barbed Shot and Kill Command rather than pressing abilities back-to-back — but he expects the set will mostly play itself.",
+      "watch": "Watch the AoE ceiling: with Wild Instincts gone, Kill Cleave halved, and burst power flattened into the baseline, BM's multi-target output leans on the longer Beast Cleave and the tier set to hold up.",
+      "draft": true,
+      "source": "https://hackmd.io/@Azortharion/HunterPatch121-1"
+    },
     "metrics": [
       {
         "source": "archon",
@@ -1938,7 +1953,23 @@
         "wowmeta": "D"
       }
     },
-    "ptr": null,
+    "ptr": {
+      "verdict": "Mixed",
+      "theme": "The most reworked spec in the patch, riding on how Explosive Shot lands",
+      "summary": "Azortharion calls 12.1 \"a very mixed bag\" for Marksmanship and admits he's \"pretty conflicted\" — MM sees the most gameplay change of any spec, but the outcome hinges entirely on the new Explosive Shot. He's positive on the Deathblow and Black Arrow fixes, but a heavy Bulletstorm nerf and reduced Aimed Shot emphasis leave the net direction genuinely uncertain: \"Could be good, could be bad.\"",
+      "changes": [
+        "Explosive Shot redesigned into a 3-second AoE DoT ticking every second (extendable to 5s), with talent branches to either double the cast for stacked damage or cut its cooldown from 30s to 20s — Azortharion 'likes the double cast part'",
+        "Black Arrow gets a 40% damage buff to offset the Withering Fire nerf and Headshot removal",
+        "Deathblow procs now guarantee the next Aimed Shot is empowered, removing rotational unpredictability — 'very good change'",
+        "Bulletstorm cut to +20% Aimed Shot damage (from 30%) per 10 stacks and now hits only the next shot instead of ~three — 'a massive nerf to the Talent and especially MM's funnel/prio damage'",
+        "Aimed Shot de-emphasized: crit-scaling replaced with a flat 10% crit-damage bump, and Focused Aim's cooldown reduction dropped from 2s to 1s, lowering Aimed Shot frequency"
+      ],
+      "set2": "Reads as a straightforward Explosive Shot amplifier — adds 1s of duration for an extra tick, leaning into the ability the whole patch's success rides on.",
+      "set4": "Grants cooldown reduction off Explosive Shot ticks, but he flags that it \"will not scale with AoE\" — so the payoff stays single-target-weighted rather than rewarding the DoT's new multi-target ceiling.",
+      "watch": "With Bulletstorm gutted and Aimed Shot pushed to the background, MM's priority/funnel damage takes a real hit — whether the spec comes out ahead depends almost entirely on how the reworked Explosive Shot actually performs in practice.",
+      "draft": true,
+      "source": "https://hackmd.io/@Azortharion/HunterPatch121-1"
+    },
     "metrics": [
       {
         "source": "archon",
@@ -3428,7 +3459,23 @@
         "wowmeta": "A"
       }
     },
-    "ptr": null,
+    "ptr": {
+      "verdict": "Mixed",
+      "theme": "Void Shield centralization deepens instead of loosening",
+      "summary": "Thread is appreciative that Blizzard engaged but frustrated the 12.1 pass introduces more problems than it solves: forcing a Void Shield proc via Mind Blast just raises its CPM rather than reducing how much the spec funnels through it, and pulling Atonement application off Penance adds ramp friction on top. The read is that Disc still functions almost entirely through Void Shield, and single-target healing stays weak despite the Shadow Mend buffs. Community wants a systemic redesign, not band-aids.",
+      "changes": [
+        "Atonement no longer applied by Penance — ramp now leans harder on Power Word: Radiance and other appliers, adding friction",
+        "Void Shield proc reworked to a forced proc off Mind Blast; Clandon: this raises Void Shield CPM rather than reducing reliance",
+        "Clandon's Oracle raid example: Void Shield is ~25% of DPS, ~45% of direct healing, ~28% of Atonement healing, and 40%+ of total Atonement applications",
+        "Shadow Mend buffed for single-target healing but still stacks penalties (mana cost, cast time, talent investment) and is seen as weak",
+        "Greater Smite's 2s buff window and Power Word: Solace ('Uppies') on a 4-min CD both flagged as awkward/underwhelming"
+      ],
+      "set2": "Thread does not opine on the tier set; the feedback is confined to class-talent changes.",
+      "set4": "Thread does not opine on the tier set, though its central complaint is directly relevant: a 4pc that buffs Void Shield absorption would reinforce exactly the Void Shield centralization the community is asking Blizzard to dial back.",
+      "watch": "Whether the pass ships without numerically reducing Void Shield's throughput and redistributing that power — the thread's read is that until that happens, Disc keeps living and dying on Void Shield (Voidweaver hero tree, Entropic Rift, Inescapable Torment) with single-target healing left behind.",
+      "draft": true,
+      "source": "https://us.forums.blizzard.com/en/wow/t/121-discipline-priest-feedback/2319269"
+    },
     "metrics": [
       {
         "source": "archon",
@@ -3820,7 +3867,23 @@
         "wowmeta": "D"
       }
     },
-    "ptr": null,
+    "ptr": {
+      "verdict": "Positive",
+      "theme": "Pooling reworked around Envenom — chaining returns to Amirdrassil-style clipping",
+      "summary": "Whispyr calls these solid, well-intended changes aimed squarely at fixing the core design of Assassination's pooling, bringing chaining back to the Amirdrassil style of clipping the last second of Envenom. Reads as genuinely excited to play it.",
+      "changes": [
+        "New talent Unstable Toxin: Envenom +18% damage but -2s duration, rewarding play around the buff window",
+        "Apex Implacable: Envenom +10% damage and restores 2 Energy per combo point — loses the old energy burst but makes more sense",
+        "Internal Bleeding no longer spreads from Crimson Tempest (Iron Wire now does the spreading)",
+        "Deal Fate on Fatebound nerfed, which hurts crit value; Atrophic Poison buffed into a good raid buff",
+        "Blindside / Kingsbane / Deathmark nerfed — the Deathmark cut may actually help by moving damage out of a weak-in-AoE ST cooldown"
+      ],
+      "set2": "No real objection to the 2pc — a straightforward Envenom +10% plus +3% damage dealt that reinforces the reworked Envenom-centric play.",
+      "set4": "Dislikes it: reads as a \"mastery % tier set in disguise,\" just poison/bleed damage bonuses reworded; wishes for something less generic than another flat 'poison/bleed damage X%' set.",
+      "watch": "The pooling rework rides on playing tightly around the shortened Envenom window — Unstable Toxin's -2s duration punishes sloppy chaining, so the payoff depends on executing the Amirdrassil-style clipping cleanly.",
+      "draft": true,
+      "sourceLabel": "Whispyr (Wowhead Assa author, Ravenholdt)"
+    },
     "metrics": [
       {
         "source": "archon",
@@ -5097,7 +5160,23 @@
         "wowmeta": "C"
       }
     },
-    "ptr": null,
+    "ptr": {
+      "verdict": "Mixed",
+      "theme": "A grab-bag rework — a couple wins, a couple losses, mostly mediocre",
+      "summary": "Archimtiros reads the 12.1 Arms pass as \"a couple good changes, a couple bad, and a whole lot of mediocre ones.\" Rend, Ravager, and Tactical Edge get real reworks, but losing guaranteed Sweeping Strikes uptime raises real questions about Arms as the \"2-target pinnacle,\" and Colossus Smash alignment problems persist.",
+      "changes": [
+        "Rend now costs 10 rage and is single-target only; Cleave applies it in AoE. Bloodletting grants 5% ability crit vs Rend targets but no longer extends Rend duration — cheaper, but refresh more often.",
+        "Ravager redesigned: +50% damage, no longer buffs Cleave/Whirlwind, and makes enemies take 25%→50% increased bleed damage for 12s; usable in single target again.",
+        "Broad Strokes cuts Sweeping Strikes to 6 charges (from 12) and Improved Sweeping Strikes is removed — no more 100% Sweep uptime.",
+        "Demolish moved to a flat 30s CD (was variable) but still won't align cleanly with Colossus Smash.",
+        "Tactical Edge redesigned so Colossus Smash grants a Sudden Death use; Master Tactician still terrible."
+      ],
+      "set2": "",
+      "set4": "Decent in AoE but terrible in single target, especially measured against S1's universally-powerful set — a real step down on the ST bench.",
+      "watch": "Losing Improved Sweeping Strikes and 100% Sweep uptime puts Arms' claim as the 2-target pinnacle in question, and Demolish still won't line up with Colossus Smash — the alignment friction that dogged the spec hasn't been solved.",
+      "draft": true,
+      "sourceLabel": "Archimtiros (Icy Veins Arms author, SimC dev, Skyhold)"
+    },
     "metrics": [
       {
         "source": "archon",
@@ -5237,7 +5316,23 @@
         "wowmeta": "B"
       }
     },
-    "ptr": null,
+    "ptr": {
+      "verdict": "Mixed",
+      "theme": "Good-on-paper changes that are hard to actually use — no real gameplay shift yet",
+      "summary": "Archimtiros reads the 12.1 pass as generally good but hard to take advantage of, with no real gameplay changes landing right now. The bright spot is that the tweaks give hope Raging Blow builds might return, but as it stands the new talents largely function as point taxes and the payoff nodes hinge on Raging Blow being worth pressing over Bloodthirst, which it currently isn't.",
+      "changes": [
+        "Rend simplified — no longer a standalone button, now applied by Thunder Clap / Whirlwind",
+        "Whirlwind now generates 3 Rage innately, opening up single-target use; new Carving Blades gives Whirlwind +50% damage on a single target (choice node vs. Meat Cleaver)",
+        "Rampaging Ruin redesigned to be more universal but plays as a talent-point tax — always taken in AoE, forcing you to drop Massacre / Executioner's Wrath / Deep Wounds / Cruelty",
+        "Hack and Slash: Rampage has a 75% chance to refund a Raging Blow charge — only matters if Raging Blow is worth using over Bloodthirst, which it currently isn't",
+        "Mountain Thane: Thunder Blast +40% but Crashing Thunder cut 30%→10%, making it more RNG-dependent"
+      ],
+      "set2": "Reads weak. The Recklessness Raging Blow/Bloodthirst effects are each capped, blunting the payoff.",
+      "set4": "Reads weak overall alongside the 2pc — the capped Recklessness effects leave the set feeling underwhelming.",
+      "watch": "The whole Raging-Blow-refund payoff (Hack and Slash) is dead weight until Raging Blow becomes competitive with Bloodthirst; watch whether a later build shifts that balance, since it's the hinge for the Raging Blow build these changes are gesturing toward.",
+      "draft": true,
+      "sourceLabel": "Archimtiros (Icy Veins Fury author, SimC dev, Skyhold)"
+    },
     "metrics": [
       {
         "source": "archon",
@@ -5377,7 +5472,24 @@
         "wowmeta": "C"
       }
     },
-    "ptr": null,
+    "ptr": {
+      "verdict": "Mixed",
+      "theme": "Sensible defensive gains alongside a questionable bleed pivot; gameplay unchanged",
+      "summary": "Mwahi/Archimtiros read it as a grab bag: some changes are good and make sense, others are really questionable, but gameplay-wise nothing actually changes. The defensive and Execute-support tweaks are welcome, while the Ravager bleed direction feels off-brand — \"seems like we're being turned into a budget Assassination Rogue.\"",
+      "changes": [
+        "Ignore Pain absorb +25% — great, especially for Colossus; Brutal Vitality 8%->10%",
+        "Devastating Focus and Tide of Battle now buff Execute too, so Execute finally hits for something (Colossus catch-up)",
+        "Ravager +50% damage, but the bleed focus is weird — 'budget Assassination Rogue' territory",
+        "Demolish moved to a fixed 30s CD: predictable ST burst, but ~10s longer effective CD in AoE (lost the Dominance of the Colossus reduction)",
+        "Mountain Thane: Thunder Blast +40%, but Crashing Thunder 30%->10% makes it more RNG-dependent",
+        "Revenge free-proc now also triggers from autos (was dodges/parries only) — shrinks the wild raid-vs-dungeon frequency gap"
+      ],
+      "set2": "Lackluster — the free-Revenge proc is RNG-dependent, so it feels inconsistent.",
+      "set4": "Insignificant on the bleed side, with some AoE potential at best.",
+      "watch": "The Ravager/tier-set bleed pivot is the thing to watch — Archimtiros is skeptical it fits Prot's identity, and with the 2pc leaning on RNG procs the set may not move the needle even as Execute and defensives get healthier.",
+      "draft": true,
+      "sourceLabel": "Archimtiros / Mwahi (Skyhold, Icy Veins Prot)"
+    },
     "metrics": [
       {
         "source": "archon",
