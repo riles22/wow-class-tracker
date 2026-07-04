@@ -340,9 +340,33 @@
   .fmeter{height:5px; border-radius:5px; background:var(--bg-3); overflow:hidden; margin-top:4px}
   .fmeter > span{display:block; height:100%; background:linear-gradient(90deg,var(--accent),var(--accent-2))}
 
+  /* The Ladder — ranked bar charts (overlay reuses the Spec Finder shell) */
+  .ladder-panel{max-width:940px}
+  .ladder-hd{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin:14px 0 4px}
+  .laddersearch{background:var(--bg-3); border:1px solid var(--edge-2); border-radius:8px; padding:7px 11px; color:var(--ink); font-family:var(--body); font-size:13px; width:210px; max-width:100%}
+  .laddersearch:focus-visible{outline:2px solid var(--accent-2); outline-offset:1px}
+  .ladder-groups .lgrp{margin-top:12px}
+  .ladder-cap{color:var(--ink-faint); font-size:11.5px; line-height:1.6; margin:14px 0 2px}
+  .ladder-cap b{color:var(--ink-dim)}
+  #ladder-chart{overflow-x:auto}
+  .laddersvg{width:100%; height:auto; display:block; margin-top:4px; min-width:780px}
+  .laddername{font-family:var(--body); font-weight:600; font-size:12px; fill:var(--ink)}
+  .laddernum{font-family:var(--mono); font-size:10px; fill:var(--accent-2)}
+  .ladderval{font-family:var(--mono); font-size:12px; fill:var(--ink)}
+  .ladderbar{transition:width .4s ease}
+  .ladderrow{cursor:pointer}
+  .ladderrow:hover .ladderbar{filter:brightness(1.18)}
+  .ladderrow:focus-visible{outline:none}
+  .ladderrow:focus-visible .laddername{fill:var(--accent-2)}
+  .ladderrow:focus-visible rect.ladderbar{stroke:var(--accent-2); stroke-width:2}
+  .ladderrow.dim{opacity:.24}
+  .ladder-ptr rect.ladderbar{stroke:var(--ink-faint); stroke-dasharray:4 3; stroke-width:1}
+  @media(max-width:560px){ .ladder-panel{margin:0; border-radius:0; min-height:100vh; padding:18px 14px 26px} .laddersearch{width:100%} }
+
   @media(prefers-reduced-motion:reduce){
     .rule{animation:none}
     .drawer,.chev,.row{transition:none}
+    .ladderbar{transition:none}
     .starfield{display:none}
   }
 </style>
@@ -382,6 +406,7 @@
     </div>
     <span class="grow"></span>
     <button class="finderbtn" id="finderbtn" type="button">🧭 Find my spec</button>
+    <button class="finderbtn" id="ladderbtn" type="button" style="background:linear-gradient(90deg,var(--accent-2),var(--accent))">📊 The Ladder</button>
     <span class="count" id="count"></span>
   </div>
   <div class="controls-row">
@@ -919,6 +944,22 @@ document.getElementById('search').addEventListener('input', e=>{ state.q = e.tar
 
 render();
 
+/* Jump from an overlay (Spec Finder / The Ladder) to a spec's matrix row + drawer.
+   Module scope so both overlays share one implementation; closes any open overlay first. */
+function openSpecFromFinder(cls, spec){
+  document.querySelectorAll(".finder-ov.open").forEach(o=>o.classList.remove("open"));
+  document.body.style.overflow="";
+  state.role="All"; state.ptrOnly=false; state.era="both"; state.fight=""; state.q="";
+  document.querySelectorAll('#roleseg button').forEach(x=>x.setAttribute('aria-pressed', x.dataset.role==="All"?'true':'false'));
+  document.querySelectorAll('#eraseg button').forEach(x=>x.setAttribute('aria-pressed', x.dataset.era==="both"?'true':'false'));
+  document.getElementById('ptronly').checked=false; document.getElementById('search').value="";
+  if(document.getElementById('fightsel')) document.getElementById('fightsel').value="";
+  render();
+  const row = [...matrix.querySelectorAll('.row')].find(r =>
+    r.querySelector('.spec-txt')?.textContent===spec && r.querySelector('.cls')?.textContent===cls);
+  if(row){ if(!row.classList.contains('open')) row.click(); row.scrollIntoView({ behavior:"smooth", block:"center" }); }
+}
+
 /* ================================================================
    SPEC FINDER — weighted-scoring quiz over the whole dataset.
    Hard filters: role, melee/ranged. Soft weighted criteria: tier,
@@ -1136,24 +1177,158 @@ render();
     box.querySelectorAll(".fres").forEach(el => el.onclick = () => openSpecFromFinder(el.dataset.cls, el.dataset.spec));
     box.scrollIntoView({ behavior:"smooth", block:"nearest" });
   }
-  function openSpecFromFinder(cls, spec){
-    close();
-    // reset filters so the target row is visible, then open its drawer
-    state.role="All"; state.ptrOnly=false; state.era="both"; state.fight=""; state.q="";
-    document.querySelectorAll('#roleseg button').forEach(x=>x.setAttribute('aria-pressed', x.dataset.role==="All"?'true':'false'));
-    document.querySelectorAll('#eraseg button').forEach(x=>x.setAttribute('aria-pressed', x.dataset.era==="both"?'true':'false'));
-    document.getElementById('ptronly').checked=false; document.getElementById('search').value="";
-    if(document.getElementById('fightsel')) document.getElementById('fightsel').value="";
-    render();
-    const row = [...matrix.querySelectorAll('.row')].find(r =>
-      r.querySelector('.spec-txt')?.textContent===spec && r.querySelector('.cls')?.textContent===cls);
-    if(row){ if(!row.classList.contains('open')) row.click(); row.scrollIntoView({ behavior:"smooth", block:"center" }); }
-  }
   function open(){ renderPanel(); ov.classList.add("open"); document.body.style.overflow="hidden"; }
   function close(){ ov.classList.remove("open"); document.body.style.overflow=""; }
   ov.addEventListener("click", e => { if(e.target===ov) close(); });
   document.addEventListener("keydown", e => { if(e.key==="Escape" && ov.classList.contains("open")) close(); });
   document.getElementById("finderbtn").addEventListener("click", open);
+})();
+
+/* ================================================================
+   THE LADDER — visual ranked bar charts for every quantitative metric.
+   Presentation-only, like the Spec Finder: renders from the built SPECS
+   data (rank/of already computed) as inline SVG. Reuses the Finder overlay
+   shell. Honesty is structural — only numeric series enter the catalog
+   (consensus/survivability tiers never do), sims never share a chart with
+   logs, PTR series are era-gated via metricEra(), and every axis is one
+   (role,bracket,name) group so a chart can't cross roles.
+   ================================================================ */
+(function(){
+  // Catalog keyed EXACTLY like render.mjs metricRanks (role|bracket|name), so each bar
+  // reuses the pre-computed rank/of and can never disagree with the drawer.
+  const catalog = new Map();
+  for(const s of SPECS) for(const m of (s.metrics||[])){
+    const key = `${s.role}|${m.bracket}|${m.name}`;
+    let e = catalog.get(key);
+    if(!e){ e = { key, role:s.role, bracket:m.bracket, name:m.name, source:m.source, unit:m.unit||"", era:metricEra(m), rows:[] }; catalog.set(key, e); }
+    e.rows.push({ spec:s.spec, cls:s.class, value:m.value, rank:m.rank, of:m.of, n:m.n, asOf:m.asOf, rankDelta:m.rankDelta });
+  }
+  // Dummy Dome composite — a genuine build-computed 0–100 ranked score → a ladder series.
+  {
+    const rows = SPECS.filter(s=>s.ptrDummy && typeof s.ptrDummy.score==="number")
+      .map(s=>({ spec:s.spec, cls:s.class, value:s.ptrDummy.score, rank:s.ptrDummy.rank, of:s.ptrDummy.of }));
+    if(rows.length>1) catalog.set("DPS|raid|Dummy Dome composite",
+      { key:"DPS|raid|Dummy Dome composite", role:"DPS", bracket:"raid", name:"Dummy Dome composite", source:"warcraftlogs", unit:"/100", era:"ptr", rows });
+  }
+  // Sim fight profile at canonical target counts (ST / cleave / AoE) → three ladders under Sims.
+  for(const [c,label] of [["1","Sim DPS — 1 target (ST)"],["3","Sim DPS — 3 targets (cleave)"],["8","Sim DPS — 8 targets (AoE)"]]){
+    const rows = SPECS.filter(s=>s.fightProfile?.targets && typeof s.fightProfile.targets[c]==="number")
+      .map(s=>({ spec:s.spec, cls:s.class, value:s.fightProfile.targets[c] }))
+      .sort((a,b)=>b.value-a.value).map((r,i,a)=>({ ...r, rank:i+1, of:a.length }));
+    if(rows.length>1) catalog.set(`DPS|raid|${label}`,
+      { key:`DPS|raid|${label}`, role:"DPS", bracket:"raid", name:label, source:"bloodmallet", unit:"DPS", era:"live", rows });
+  }
+
+  const familyOf = e => e.era==="ptr" ? "PTR"
+    : e.source==="warcraftlogs" ? "Logs"
+    : (e.source==="bloodmallet"||e.source==="simulationcraft") ? "Sims" : "Adoption";
+  const FAMS = [["Logs","Logs · Warcraft Logs medians"],["Sims","Sims · Bloodmallet / SimC (theoretical)"],
+    ["Adoption","Adoption & ceiling · Archon / Murlok / Mythicstats"],["PTR","PTR · directional (12.1)"]];
+  const SRCTAG = {warcraftlogs:"WCL",archon:"Archon",murlok:"Murlok",mythicstats:"Mythicstats",bloodmallet:"sim",simulationcraft:"SimC"};
+  const cleanName = n => n.replace(/, all bosses/g,"").replace(/, all dungeons/g,"")
+    .replace(/ \(95th pct\)/g," 95th").replace(/ \(normalized\)/g,"").replace(/, tank\)/g,")").replace(/, healer\)/g,")");
+  const chipLabel = e => `${cleanName(e.name)} · ${SRCTAG[e.source]||e.source}`;
+  const fmt = v => (Number.isInteger(v)?v:Math.round(v)).toLocaleString("en-US");
+
+  const L = { bracket:"raid", role:"DPS", seriesKey:"", query:"" };
+  let opener = null; // element focus returns to on close (WCAG 2.4.3)
+  function applyDim(){ const q=(L.query||"").toLowerCase(); ov.querySelectorAll(".ladderrow").forEach(g=>g.classList.toggle("dim", !!q && !g.dataset.n.includes(q))); }
+
+  function caption(e){
+    const roleN = SPECS.filter(s=>s.role===e.role).length;
+    const have = e.rows.filter(r=>typeof r.value==="number").length;
+    const pre = [];
+    if(e.era==="ptr") pre.push('<b style="color:var(--v-mix)">12.1 PTR</b> — directional, tiny samples (n often &lt;100), not empirical');
+    if(e.source==="bloodmallet"||e.source==="simulationcraft") pre.push('<b>Sim</b> — theoretical (SimulationCraft), not logged play');
+    if(e.source==="murlok") pre.push("Top-50 <b>ceiling</b> — mean of each spec's best 50 players, <b>not</b> popularity");
+    const unitLabel = e.unit==="%" ? "percent" : e.unit==="/100" ? "0–100 score" : (e.unit||"value");
+    const base = `<b>${have}</b> of ${roleN} ${esc(e.role)} · within-role, ${e.bracket==="raid"?"Raid":"M+"} · higher is better · ${esc(unitLabel)}`;
+    return `<div class="ladder-cap">${[...pre, base].join(" &nbsp;·&nbsp; ")}</div>`;
+  }
+
+  function drawLadder(e){
+    const rows = e.rows.filter(r=>typeof r.value==="number").slice().sort((a,b)=>(a.rank||9e9)-(b.rank||9e9) || b.value-a.value);
+    const N = rows.length, max = Math.max(...rows.map(r=>r.value), 1);
+    const srt = rows.map(r=>r.value).slice().sort((a,b)=>a-b), median = srt[Math.floor(srt.length/2)] || 0;
+    const rowH=24, top=18, bot=10, H=top+N*rowH+bot, barX=200, barW=600, valX=992;
+    const narrow = window.innerWidth < 560;
+    const trunc = s => s.length>18 ? s.slice(0,17)+"…" : s;
+    const bars = rows.map((r,i)=>{
+      const y=top+i*rowH, mid=y+rowH/2, w=Math.max(2, r.value/max*barW), col=CLASS_COLOR[r.cls]||"#888";
+      const nm = trunc(r.spec);
+      const disp = fmt(r.value)+(e.unit==="%"?"%":"");
+      const rk = r.rank||i+1, of = r.of||N;
+      const mv = r.rankDelta ? `<tspan dx="4" fill="${r.rankDelta>0?'var(--v-pos)':'var(--v-neg)'}" font-size="9">${r.rankDelta>0?'▲':'▼'}${Math.abs(r.rankDelta)}</tspan>` : "";
+      const aria = `${r.spec} ${r.cls}, ${disp}${e.unit&&e.unit!=='%'?' '+e.unit:''}, rank ${rk} of ${of} ${e.role}`;
+      const tip = `${r.spec} · ${r.cls} — ${disp} · #${rk} of ${of} ${e.role}${r.n?' · n='+r.n:''}${r.asOf?' · '+r.asOf:''}`;
+      return `<g class="ladderrow${e.era==='ptr'?' ladder-ptr':''}" data-spec="${esc(r.spec)}" data-cls="${esc(r.cls)}" data-n="${esc(r.spec.toLowerCase())}" role="button" tabindex="0" aria-label="${esc(aria)}"><title>${esc(tip)}</title>`
+        + `<circle cx="18" cy="${mid}" r="10" fill="var(--bg-3)" stroke="var(--edge-2)"/><text x="18" y="${mid}" class="laddernum" text-anchor="middle" dominant-baseline="central">${rk}</text>`
+        + `<rect x="40" y="${mid-7}" width="3" height="14" fill="${col}"/><text x="48" y="${mid}" class="laddername" dominant-baseline="central">${esc(nm)}</text>`
+        + `<rect x="${barX}" y="${mid-5}" width="${barW}" height="10" rx="3" fill="var(--edge)" opacity="0.32"/>`
+        + `<rect class="ladderbar" x="${barX}" y="${mid-5}" width="${w.toFixed(1)}" height="10" rx="3" fill="${col}"/>`
+        + `<text x="${valX}" y="${mid}" class="ladderval" text-anchor="end" dominant-baseline="central">${esc(disp)}${mv}</text></g>`;
+    }).join("");
+    const medX = (barX + (median/max)*barW).toFixed(1);
+    const med = (!narrow && N>5) ? `<line x1="${medX}" y1="${top-2}" x2="${medX}" y2="${H-bot}" stroke="var(--ink-faint)" stroke-dasharray="3 3" opacity="0.45" aria-hidden="true"/><text x="${medX}" y="10" fill="var(--ink-faint)" font-size="9" text-anchor="middle" font-family="var(--mono)" aria-hidden="true">med</text>` : "";
+    return `<svg class="laddersvg" viewBox="0 0 1000 ${H}" preserveAspectRatio="xMinYMin meet" role="group" aria-label="${esc(cleanName(e.name))} ranked, ${esc(e.role)} ${e.bracket}">${med}${bars}</svg>`;
+  }
+
+  function renderPanel(focusGroup){
+    const inLive = state.era==="live";
+    const pool = () => [...catalog.values()].filter(e=>e.role===L.role && e.bracket===L.bracket && !(e.era==="ptr"&&inLive));
+    let entries = pool();
+    if(!entries.length){ L.bracket = L.bracket==="raid"?"mplus":"raid"; entries = pool(); }
+    const famIdx = e => FAMS.findIndex(f=>f[0]===familyOf(e));
+    entries.sort((a,b)=> famIdx(a)-famIdx(b)); // group order (Logs first) so the default series is a log median
+    let cur = catalog.get(L.seriesKey);
+    if(!cur || !entries.includes(cur)){ cur = entries[0]; L.seriesKey = cur?cur.key:""; }
+    const groups = FAMS.map(([fam,flabel])=>{
+      const es = entries.filter(e=>familyOf(e)===fam);
+      if(!es.length) return "";
+      return `<div class="lgrp"><p class="d-h" style="margin:0 0 7px">${esc(flabel)}</p><div class="fopts">${
+        es.map(e=>`<button class="fopt" data-key="${esc(e.key)}" aria-pressed="${e===cur}">${esc(chipLabel(e))}</button>`).join("")}</div></div>`;
+    }).join("");
+    const bkt = ["raid","mplus"].map(b=>`<button data-bkt="${b}" aria-pressed="${b===L.bracket}">${b==="raid"?"Raid":"M+"}</button>`).join("");
+    const roles = ["DPS","Healer","Tank"].map(r=>`<button data-lr="${r}" aria-pressed="${r===L.role}">${r}</button>`).join("");
+    ov.innerHTML = `<div class="finder-panel ladder-panel" role="dialog" aria-modal="true" aria-label="The Ladder — metric leaderboard">
+      <div class="finder-head">
+        <div><h2>📊 The Ladder</h2><p>Every quantitative ranking, drawn. Pick a number; specs rank #1&nbsp;→&nbsp;last, colored by class. Click a bar to jump to that spec. Measured numbers stay numbers — the Ladder never turns them into letter grades, never mixes sims with logs, and never crosses roles.</p></div>
+        <button class="finder-x" id="ladder-close" aria-label="Close">✕</button>
+      </div>
+      <div class="ladder-hd">
+        <div class="seg" role="group" aria-label="Bracket" id="ladder-bkt">${bkt}</div>
+        <div class="seg" role="group" aria-label="Role" id="ladder-role">${roles}</div>
+        <input class="laddersearch" id="ladder-search" type="search" value="${esc(L.query)}" placeholder="Highlight a spec…" aria-label="Highlight a spec on the ladder">
+      </div>
+      <div class="ladder-groups">${groups}</div>
+      <div id="ladder-chart">${cur?caption(cur)+drawLadder(cur):`<p class="ladder-cap">No series for this scope.</p>`}</div>
+    </div>`;
+    ov.querySelector("#ladder-close").onclick = close;
+    ov.querySelectorAll("#ladder-bkt button").forEach(b=>b.onclick=()=>{ L.bracket=b.dataset.bkt; renderPanel("bkt"); });
+    ov.querySelectorAll("#ladder-role button").forEach(b=>b.onclick=()=>{ L.role=b.dataset.lr; renderPanel("role"); });
+    ov.querySelectorAll(".lgrp .fopt").forEach(b=>b.onclick=()=>{ L.seriesKey=b.dataset.key; renderPanel("series"); });
+    const sb = ov.querySelector("#ladder-search");
+    sb.oninput = ()=>{ L.query = sb.value.trim(); applyDim(); };
+    applyDim(); // re-apply a persisted highlight to the freshly drawn chart
+    const fsel = { bkt:'#ladder-bkt button[aria-pressed="true"]', role:'#ladder-role button[aria-pressed="true"]', series:'.lgrp .fopt[aria-pressed="true"]' }[focusGroup];
+    if(fsel){ const el = ov.querySelector(fsel); if(el) el.focus(); } // keep focus on the control the user just used
+  }
+
+  const ov = document.createElement("div"); ov.className="finder-ov"; ov.id="ladder-ov"; document.body.appendChild(ov);
+  function open(){ opener=document.activeElement; L.role = (state.role==="All"?"DPS":state.role); renderPanel(); ov.classList.add("open"); document.body.style.overflow="hidden"; const c=ov.querySelector("#ladder-close"); if(c) setTimeout(()=>c.focus(),0); }
+  function close(){ ov.classList.remove("open"); document.body.style.overflow=""; if(opener && opener.focus) opener.focus(); }
+  ov.addEventListener("click", e=>{ const g=e.target.closest(".ladderrow"); if(g){ openSpecFromFinder(g.dataset.cls,g.dataset.spec); return; } if(e.target===ov) close(); });
+  ov.addEventListener("keydown", e=>{
+    if(e.key==="Enter"||e.key===" "){ const g=e.target.closest&&e.target.closest(".ladderrow"); if(g){ e.preventDefault(); openSpecFromFinder(g.dataset.cls,g.dataset.spec); return; } }
+    if(e.key==="Tab" && ov.classList.contains("open")){ // focus trap — keep Tab inside the modal
+      const f=[...ov.querySelectorAll('button, input, [tabindex="0"]')]; if(!f.length) return;
+      const first=f[0], last=f[f.length-1];
+      if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
+      else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
+    }
+  });
+  document.addEventListener("keydown", e=>{ if(e.key==="Escape" && ov.classList.contains("open")) close(); });
+  document.getElementById("ladderbtn").addEventListener("click", open);
 })();
 
 /* ---------- ambient starfield (respects reduced motion) ---------- */
