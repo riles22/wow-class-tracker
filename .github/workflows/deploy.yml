@@ -1,0 +1,60 @@
+name: Build & deploy tracker to GitHub Pages
+
+# The site is data/*.json compiled by src/build.mjs into a single self-contained
+# dist/index.html. This workflow rebuilds from source on every push to master (so the
+# nightly wow-ptr-watch refresh, which commits + pushes, auto-deploys) and can be run
+# by hand. No dependencies to install — the build is plain Node.
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - "data/**"
+      - "src/**"
+      - "package.json"
+      - ".github/workflows/deploy.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Never run two deploys at once; let the newest win.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Validate + test data
+        run: npm test
+      - name: Build dist/index.html
+        run: npm run build
+      - name: Sanity-check the artifact exists
+        run: test -s dist/index.html
+      - name: Configure Pages (auto-enables on first run)
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+      - name: Upload the built site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
