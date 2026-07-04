@@ -79,3 +79,7 @@ Tier and performance data belongs to its publishers — [Icy Veins](https://www.
 [Archon](https://www.archon.gg/wow), [Warcraft Logs](https://www.warcraftlogs.com/),
 [Murlok.io](https://murlok.io/), and [Bloodmallet](https://bloodmallet.com/). This project
 aggregates and links back to them; it doesn't replace them.
+
+Creator takes are the cited opinions of their authors — quoted, linked, and dated in-app
+with full credit, never altered or presented as this project's own. Every creator whose
+analysis is used is acknowledged in the site footer and linked at the point their take appears.

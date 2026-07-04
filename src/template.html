@@ -262,6 +262,10 @@
   .credit{margin-top:24px; padding-top:16px; border-top:1px solid var(--edge); text-align:center; font-size:12.5px; color:var(--ink-faint); letter-spacing:.02em}
   .credit b{font-family:var(--disp); font-weight:600; font-size:14.5px; color:var(--gold); letter-spacing:.05em}
   .credit .keep{display:block; margin-top:5px; font-size:11px; color:var(--ink-faint); opacity:.85}
+  .credits-block{margin-top:22px; padding-top:20px; border-top:1px solid var(--edge)}
+  .creditlist{display:flex; flex-wrap:wrap; gap:3px 0; margin-top:10px; font-family:var(--mono); font-size:12px; line-height:1.7}
+  .creditlist a{color:var(--accent-2)}
+  .creditlist a:hover{color:var(--ink)}
 
   /* ---------- mobile matrix -> cards ---------- */
   @media(max-width:759px){
@@ -461,6 +465,12 @@
           The tier columns are dated snapshots of each source — starting references, not live feeds. For the freshest read during progression, cross-check the log dashboards above.
         </p>
       </div>
+    </div>
+    <div class="credits-block">
+      <p class="foot-h">Creators &amp; theorycrafters</p>
+      <p class="fine" style="margin-top:0">The tiers, sims, and takes here are the work of the WoW community. <b style="color:var(--ink-dim)">Creator takes are cited opinions — quoted, linked, and dated; never altered or presented as our own.</b> Full credit and thanks to everyone whose analysis this aggregates:</p>
+      <div class="creditlist" id="creatorcredits"></div>
+      <p class="fine" style="margin-top:13px">Tier &amp; performance data from <a href="https://www.icy-veins.com/" target="_blank" rel="noopener">Icy&nbsp;Veins</a> · <a href="https://www.method.gg/" target="_blank" rel="noopener">Method</a> · <a href="https://www.wowhead.com/" target="_blank" rel="noopener">Wowhead</a> · <a href="https://www.archon.gg/wow" target="_blank" rel="noopener">Archon</a> · <a href="https://www.warcraftlogs.com/" target="_blank" rel="noopener">Warcraft&nbsp;Logs</a> · <a href="https://murlok.io/" target="_blank" rel="noopener">Murlok.io</a> · <a href="https://bloodmallet.com/" target="_blank" rel="noopener">Bloodmallet</a>. This project aggregates and links back to them — it doesn't replace them.</p>
     </div>
     <p class="fine">
       <b style="color:var(--ink-dim)">Maintaining this:</b> this file is <b>built</b> — the data lives in <code>data/specs.json</code>, <code>data/sources.json</code> and <code>data/scales.json</code> in the project repo. Edit the JSON (or let Claude Code run the refresh workflow in <code>CLAUDE.md</code>), then <code>npm test &amp;&amp; npm run build</code> regenerates this file. Self-contained, no external dependencies beyond the web fonts — just open the file in a browser.
@@ -856,6 +866,25 @@ document.getElementById('buildfeed').innerHTML = (PTR_BUILDS.builds||[]).map(b=>
 /* reference-kind sources (e.g. Liquid Armory) join the live-links row */
 document.getElementById('livelinks').insertAdjacentHTML('beforeend',
   REF_SOURCES.filter(s=>s.url).map(s=>`<a href="${esc(s.url)}" target="_blank" rel="noopener" title="${esc(s.methodology||"")}">${esc(s.name.toLowerCase().replace(/\s+/g,""))}</a>`).join(""));
+
+/* ---------- footer: collective creator credit (deduped across classes + takes) ---------- */
+(function(){
+  const el = document.getElementById('creatorcredits');
+  if(!el) return;
+  // One entry per creator (they recur across classes; guide authors carry a per-class
+  // guide URL, content creators a channel URL) — dedupe by name, first URL wins.
+  const byName = new Map();
+  for(const cls of (COMMUNITY.classes||[]))
+    for(const cr of (cls.creators||[]))
+      if(!byName.has(cr.name)) byName.set(cr.name, { name: cr.name, url: cr.url });
+  // fold in any take-only creator not present in the community registry
+  for(const t of CREATOR_TAKES)
+    if(t.creator && !byName.has(t.creator)) byName.set(t.creator, { name: t.creator, url: t.url });
+  const list = [...byName.values()].sort((a,b)=>a.name.localeCompare(b.name, undefined, {sensitivity:'base'}));
+  el.innerHTML = list.map(c=> c.url
+    ? `<a href="${esc(c.url)}" target="_blank" rel="noopener">${esc(c.name)}</a>`
+    : `<span>${esc(c.name)}</span>`).join('<span class="mnote">&nbsp;·&nbsp;</span>');
+})();
 
 /* ---------- per-fight selector (Archon per-boss / per-dungeon tiers) ---------- */
 (function(){
