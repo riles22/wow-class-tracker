@@ -527,12 +527,24 @@ function verdictEl(s){
   return `<span class="verdict" data-v="${esc(v)}"><span class="dot"></span>${esc(v)}${arrow}</span>`;
 }
 
+const MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const fmtDate = iso => { const m = iso && /^(\d{4})-(\d{2})-(\d{2})/.exec(iso); return m ? `${MON[+m[2]-1]} ${+m[3]}` : ""; };
+/* Snapshot date for a source's rating in this bracket, matching the spec's role page
+   (falls back to an "All"-role page). Sources rate different brackets on different days. */
+function srcDate(src, bracket, role){
+  const pages = src.pages || [];
+  const p = pages.find(x => x.bracket===bracket && x.role===role)
+         || pages.find(x => x.bracket===bracket && (x.role==="All" || x.role==null));
+  return fmtDate(p?.snapshot);
+}
 function sourceBreakdownHTML(s){
   const rows = TIER_SOURCES.map(src => {
     const raid = (s.ratings?.raid?.[src.id]) ?? "—";
     const mplus = (s.ratings?.mplus?.[src.id]) ?? "—";
     if(raid === "—" && mplus === "—") return "";
-    return `<div class="setrow"><span class="pc">${esc(src.name)}</span><span class="pct">Raid ${esc(raid)} · M+ ${esc(mplus)}</span></div>`;
+    const rd = raid !== "—" ? srcDate(src,"raid",s.role) : "";
+    const md = mplus !== "—" ? srcDate(src,"mplus",s.role) : "";
+    return `<div class="setrow"><span class="pc">${esc(src.name)}</span><span class="pct">Raid ${esc(raid)}${rd?` <span class="mnote">${esc(rd)}</span>`:""} · M+ ${esc(mplus)}${md?` <span class="mnote">${esc(md)}</span>`:""}</span></div>`;
   }).filter(Boolean).join("");
   const surv = s.survivability
     ? `<div class="setrow"><span class="pc">Survive</span><span class="pct">Archon raid survivability tier: <b>${esc(s.survivability.tier)}</b>${s.survivability.asOf?` <span class="mnote">· ${esc(s.survivability.asOf)}</span>`:""}</span></div>`
