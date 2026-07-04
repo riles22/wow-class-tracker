@@ -2,8 +2,9 @@
 
 Multi-source class/spec performance tracker for WoW Midnight (Patch 12.1 PTR, "Curse of Ula'tek").
 Data lives in `data/*.json`; a build step compiles it with `src/template.html` into **one
-self-contained artifact — `dist/index.html`** — a personal project; Riley just opens
-the file directly in a browser (no hosting, no deployment).
+self-contained artifact — `dist/index.html`** — a personal project. It's published as a
+public GitHub Pages site (https://riles22.github.io/wow-class-tracker/) that auto-deploys
+on push to `master`; the file also still opens directly in a browser.
 
 ## Commands
 
@@ -172,5 +173,8 @@ legacy/   original single-file tracker (pre-conversion reference)
                   (each has the procedure + hard-won gotchas + a log.md memory)
 ```
 
-A scheduled routine ("wow-ptr-watch", Wednesdays ~9am, managed in the app's Scheduled
-section) runs ptr-watch + watch-creators weekly.
+A scheduled routine ("wow-ptr-watch", 3:10am daily, managed in the app's Scheduled
+section) runs ptr-watch + watch-creators, then — when data changed — snapshots, commits,
+and pushes. The push triggers `.github/workflows/deploy.yml`, which rebuilds
+`dist/index.html` from the data and deploys it to GitHub Pages. It runs locally, so it
+fires while the machine is on / the app is open (otherwise it catches up on next launch).
