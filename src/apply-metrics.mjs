@@ -70,6 +70,14 @@ export async function applyMetrics(dataPath, root = ROOT) {
     playstyleApplied++;
   }
 
+  // 12.1 PTR Dummy Dome — real-player median DPS by fixed target count (WCL zone 52).
+  for (const row of input.ptrdummy ?? []) {
+    const spec = byKey.get(`${row.class}|${row.spec}`);
+    if (!spec) { unmatched.push(`ptrdummy: ${row.class} / ${row.spec}`); continue; }
+    spec.ptrDummy = { source: row.source ?? "warcraftlogs", asOf: row.asOf ?? null, targets: row.targets };
+    playstyleApplied++;
+  }
+
   // Season 2 tier set bonuses (actual 2pc/4pc text).
   for (const row of input.tiersets ?? []) {
     const spec = byKey.get(`${row.class}|${row.spec}`);

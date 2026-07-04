@@ -115,6 +115,14 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
       }
     }
 
+    if (spec.ptrDummy != null) {
+      const targets = Object.entries(spec.ptrDummy.targets ?? {});
+      if (targets.length === 0) errors.push(`specs.json: ${key} ptrDummy.targets must be a non-empty object`);
+      for (const [count, dps] of targets) {
+        if (!/^\d+$/.test(count) || typeof dps !== "number") errors.push(`specs.json: ${key} ptrDummy target "${count}" must map a numeric target count to numeric DPS`);
+      }
+    }
+
     if (spec.tierSet != null) {
       for (const pc of ["set2", "set4"]) {
         if (spec.tierSet[pc] != null && typeof spec.tierSet[pc] !== "string") errors.push(`specs.json: ${key} tierSet.${pc} must be a string`);

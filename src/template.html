@@ -605,6 +605,14 @@ function profileHTML(s){
     </div></div>`;
 }
 
+function ptrDummyHTML(s){
+  const d = s.ptrDummy;
+  if(!d?.targets || !Object.keys(d.targets).length) return "";
+  const counts = Object.keys(d.targets).sort((a,b)=>a-b).map(t=>`${t}T ${Math.round(d.targets[t]/1000)}k`).join(" · ");
+  return `<div class="srcbreak"><p class="d-h">12.1 PTR Dummy Dome <span class="mnote" style="text-transform:none;letter-spacing:0">real-player logs</span></p>
+    <div class="setbox"><div class="mnote">Median DPS by target count: ${esc(counts)}${d.asOf?` · WCL ${esc(d.asOf)}`:""}. Live PTR testing on fixed-target dummies — the real-player counterpart to the sim profile above (tiny, tuning-in-flux samples).</div></div></div>`;
+}
+
 function takesHTML(s){
   const takes = CREATOR_TAKES.filter(t=>t.class===s.class && t.spec===s.spec && !t.superseded && eraOk(takeEra(t)));
   if(!takes.length) return "";
@@ -658,7 +666,7 @@ function drawerHTML(s){
   return `
    <div class="drawer"><div class="drawer-in"><div class="drawer-grid">
      <div>${left}${metricsHTML(s)}</div>
-     <div>${tierset}${profileHTML(s)}${sourceBreakdownHTML(s)}${takesHTML(s)}${communityHTML(s)}</div>
+     <div>${tierset}${profileHTML(s)}${showPtr?ptrDummyHTML(s):""}${sourceBreakdownHTML(s)}${takesHTML(s)}${communityHTML(s)}</div>
    </div></div></div>`;
 }
 
