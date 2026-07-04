@@ -26,10 +26,10 @@
   :root{
     --bg:#0B0713; --bg-2:#130B22; --bg-3:#1B1030;
     --edge:#2A1D45; --edge-2:#3B2A5E;
-    --ink:#EDE7F7; --ink-dim:#A99BC7; --ink-faint:#6F6390;
+    --ink:#EDE7F7; --ink-dim:#A99BC7; --ink-faint:#8B7EAE;
     --accent:#B57BEE; --accent-2:#7FD8FF; --gold:#F0C24B;
 
-    --t-s:#F0C24B; --t-aplus:#C77DFF; --t-a:#6AA8F0; --t-b:#45C4A8; --t-c:#8A93A8; --t-d:#C97A6A; --t-f:#A34E4E;
+    --t-s:#F0C24B; --t-aplus:#C77DFF; --t-a:#6AA8F0; --t-b:#45C4A8; --t-c:#8A93A8; --t-d:#D2887A; --t-f:#D27575;
     --v-pos:#52C97A; --v-mix:#E0A73E; --v-neg:#E0655F;
 
     --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
@@ -43,6 +43,7 @@
     margin:0; background:var(--bg); color:var(--ink);
     font-family:var(--body); font-size:15px; line-height:1.5;
     -webkit-font-smoothing:antialiased;
+    font-variant-numeric:tabular-nums; font-feature-settings:'tnum' 1;
   }
   a{color:var(--accent-2); text-decoration:none}
   a:hover{text-decoration:underline}
@@ -146,7 +147,12 @@
   .tier[data-t="F"]  {color:var(--t-f);     background:color-mix(in srgb,var(--t-f) 15%,transparent);     border-color:color-mix(in srgb,var(--t-f) 42%,transparent)}
   .tier[data-t="—"]  {color:var(--ink-faint); background:transparent; border-color:var(--edge); min-width:30px}
 
-  .tiercell{display:inline-flex; align-items:center; gap:4px}
+  .tiercell{display:grid; grid-template-columns:34px 16px; align-items:center; column-gap:2px; justify-self:start}
+  .tcol{display:flex; flex-direction:column; align-items:stretch; gap:3px; min-width:0}
+  .tcol .tier{width:100%}
+  .tind{display:inline-flex; align-items:center; gap:3px; min-width:0}
+  .tscore{display:block; height:3px; border-radius:3px; background:var(--bg-3); overflow:hidden}
+  .tscore > i{display:block; height:100%; border-radius:3px; background:linear-gradient(90deg,var(--accent),var(--accent-2))}
   .divdot{
     width:7px; height:7px; border-radius:50%; flex:none;
     background:var(--v-mix); box-shadow:0 0 8px var(--v-mix)
@@ -186,7 +192,7 @@
   .matrix{margin-top:6px; border:1px solid var(--edge); border-radius:12px; overflow:hidden; background:var(--bg-2)}
   .head, .row{
     display:grid;
-    grid-template-columns:minmax(150px,1.7fr) 1fr .7fr 64px 64px minmax(120px,1.25fr) 26px;
+    grid-template-columns:minmax(150px,1.7fr) minmax(0,1fr) minmax(118px,.72fr) 64px 64px minmax(120px,1.25fr) 26px;
     align-items:center; gap:12px; padding:11px 16px
   }
   .head{
@@ -205,10 +211,10 @@
   .spec-name{display:flex; align-items:center; gap:10px; min-width:0}
   .cbar{width:3px; height:20px; border-radius:3px; flex:none}
   .spec-txt{font-weight:600; color:var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
-  .cls{font-family:var(--mono); font-size:12.5px; color:var(--ink-dim); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
-  .role{font-size:12px; color:var(--ink-faint)}
+  .cls{font-family:var(--mono); font-size:12.5px; color:var(--ink-dim); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0}
+  .role{font-size:12px; color:var(--ink-faint); min-width:0}
   .role .rolechip{font-family:var(--mono); font-size:10.5px; letter-spacing:.08em; padding:2px 7px; border-radius:5px; border:1px solid var(--edge-2); color:var(--ink-dim)}
-  .chev{justify-self:end; color:var(--ink-faint); transition:transform .18s,color .15s; font-size:12px}
+  .chev{justify-self:end; color:var(--ink-dim); transition:transform .18s,color .15s; font-size:13px}
   .row.open .chev{transform:rotate(90deg); color:var(--accent)}
   .row.clickable:hover .chev{color:var(--accent)}
 
@@ -580,7 +586,11 @@ function ratingFor(s, bracket){
 
 function tierEl(r, mv){
   const arrow = mv ? `<span class="mv" data-d="${mv.delta>0?'up':'down'}" title="was ${esc(mv.was)} on ${esc(mv.since)}">${mv.delta>0?'▲':'▼'}</span>` : '';
-  return `<span class="tiercell"><span class="tier" data-t="${esc(r.tier)}" title="${esc(r.tip)}">${esc(r.tier)}</span>${arrow}${r.div?'<span class="divdot" title="Sources diverge on this rating"></span>':''}</span>`;
+  const dot = r.div ? '<span class="divdot" title="Sources diverge on this rating"></span>' : '';
+  // Consensus-only 0–100 within-tier meter (score already computed; single-source/per-fight = score -1, skipped).
+  const meter = (state.source==="consensus" && r.score>=0)
+    ? `<span class="tscore" title="Consensus score ${r.score}/100 (position within tier)"><i style="width:${r.score}%"></i></span>` : '';
+  return `<span class="tiercell"><span class="tcol"><span class="tier" data-t="${esc(r.tier)}" title="${esc(r.tip)}">${esc(r.tier)}</span>${meter}</span><span class="tind">${arrow}${dot}</span></span>`;
 }
 function verdictEl(s){
   const v = s.ptr ? s.ptr.verdict : "—";
@@ -741,7 +751,7 @@ function rowHTML(s, idx){
        <span class="cbar" style="background:${color}"></span>
        <span class="spec-txt">${esc(s.spec)}</span>
      </div>
-     <div class="cls" style="color:${color}">${esc(s.class)}</div>
+     <div class="cls" style="color:${color}" title="${esc(s.class)}">${esc(s.class)}</div>
      <div class="role"><span class="rolechip">${esc(s.role)}</span>${ptag}</div>
      <div class="metaline">
        <span class="mtag">Raid</span>${tierEl(ratingFor(s,"raid"), showMv ? s.movement?.raid : null)}
