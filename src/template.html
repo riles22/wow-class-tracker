@@ -870,7 +870,7 @@ render();
     { id:"complexity", label:"Rotation depth", hint:"how much to juggle", type:"single", def:"any",
       opts:[["any","Any"],["simple","Simple & forgiving"],["deep","Deep & complex"]] },
     { id:"traits", label:"Extra priorities", hint:"distinct signals — pick any", type:"multi", def:[],
-      opts:[["output","Highest raw output"],["played","Most-played (meta share)"],["mobility","High mobility"],["survivability","Survivability"],["utility","Group utility"],["outlook","Rising in 12.1"]] }
+      opts:[["output","Highest raw output"],["widely","Widely played"],["topmeta","Top-key meta"],["mobility","High mobility"],["survivability","Survivability"],["utility","Group utility"],["outlook","Rising in 12.1"]] }
   ];
   const answers = {}; Q.forEach(q => answers[q.id] = Array.isArray(q.def) ? q.def.slice() : q.def);
   const anyPlaystyle = SPECS.some(s => s.playstyle);
@@ -881,12 +881,12 @@ render();
   // weights() renormalizes, so these are relative. complexity is a fit criterion like
   // fight/mobility (only active when the user picks simple/deep AND the spec has data).
   const BASE = {
-    meta:     { tier:.46, throughput:.07, rep:.04, fight:.13, mobility:.05, surv:.07, utility:.06, outlook:.12, complexity:.05 },
-    balanced: { tier:.22, throughput:.05, rep:.03, fight:.20, mobility:.11, surv:.11, utility:.10, outlook:.18, complexity:.12 },
-    vibes:    { tier:.06, throughput:.02, rep:.01, fight:.30, mobility:.22, surv:.16, utility:.15, outlook:.08, complexity:.14 }
+    meta:     { tier:.46, throughput:.07, pop:.04, fight:.13, mobility:.05, surv:.07, utility:.06, outlook:.12, complexity:.05 },
+    balanced: { tier:.22, throughput:.05, pop:.03, fight:.20, mobility:.11, surv:.11, utility:.10, outlook:.18, complexity:.12 },
+    vibes:    { tier:.06, throughput:.02, pop:.01, fight:.30, mobility:.22, surv:.16, utility:.15, outlook:.08, complexity:.14 }
   };
-  const TRAIT_CRIT = { output:"throughput", played:"rep", mobility:"mobility", survivability:"surv", utility:"utility", outlook:"outlook" };
-  const TRAIT_BOOST = { output:0.30, played:0.28, mobility:0.20, survivability:0.20, utility:0.20, outlook:0.20 };
+  const TRAIT_CRIT = { output:"throughput", widely:"pop", topmeta:"topmeta", mobility:"mobility", survivability:"surv", utility:"utility", outlook:"outlook" };
+  const TRAIT_BOOST = { output:0.30, widely:0.28, topmeta:0.28, mobility:0.20, survivability:0.20, utility:0.20, outlook:0.20 };
   // Deliberate hand curve, roughly aligned to the consensus band centers so an "A" here
   // means about what an "A" tier means. Archon survivability only emits S/A/B/C.
   const SURV_MAP = { S:1, A:0.72, B:0.5, C:0.3 };
@@ -920,8 +920,18 @@ render();
   // Damage dealt by off-DPS roles (tank / healer) — valued only when the user opts into
   // raw output, so tanks/healers aren't ranked by damage by default (DPS use throughput).
   const damageRank = (s,b) => s.role==="DPS" ? null : rankOf(s, b, s.role==="Tank" ? TANKDMG : HEALDMG);
-  function representation(s,b){
-    const m = (s.metrics||[]).find(x => x.bracket===b && x.rank && x.of>1 && nOk(x) && /popularity|representation/i.test(x.name));
+  // Two DISTINCT representation signals (they answer different questions):
+  //  pop = "widely played" — Archon Popularity: share of ALL logged players (raid = Mythic
+  //        logs; M+ = broad +7–24 keys). Adoption, not performance.
+  //  topMeta = "top-key meta" — what the best run: Mythicstats top-2000 M+ keys; for raid
+  //        we only have Mythic-raid popularity (already high-end), so it reuses that.
+  function popRank(s,b){
+    const m = (s.metrics||[]).find(x => x.bracket===b && x.rank && x.of>1 && nOk(x) && /popularity/i.test(x.name));
+    return m ? 1 - (m.rank-1)/(m.of-1) : null;
+  }
+  function topMetaRank(s,b){
+    const rx = b==="mplus" ? /representation/i : /popularity/i;
+    const m = (s.metrics||[]).find(x => x.bracket===b && x.rank && x.of>1 && nOk(x) && rx.test(x.name));
     return m ? 1 - (m.rank-1)/(m.of-1) : null;
   }
   function fightFit(s){
@@ -955,7 +965,7 @@ render();
     const bs = brackets();
     const crit = {
       tier: avg(bs.map(b=>tierScore(s,b))), throughput: avg(bs.map(b=>throughput(s,b))),
-      rep: avg(bs.map(b=>representation(s,b))), fight: fightFit(s),
+      pop: avg(bs.map(b=>popRank(s,b))), topmeta: avg(bs.map(b=>topMetaRank(s,b))), fight: fightFit(s),
       mobility: mobility(s), surv: survScore(s), utility: utility(s), outlook: outlookScore(s),
       complexity: complexityFit(s), damage: avg(bs.map(b=>damageRank(s,b)))
     };
@@ -981,7 +991,8 @@ render();
       const bm = bestMetric(s, s.role==="Tank" ? TANKDMG : HEALDMG);
       if(bm) chips.push(`#${bm.rank}/${bm.of} ${s.role==="Tank"?"tank damage":"healer damage"} (${bLbl(bm.bracket)})`);
     }
-    if(crit.rep != null && crit.rep >= 0.75) chips.push("most-played");
+    if(crit.pop != null && crit.pop >= 0.75) chips.push("widely played");
+    if(crit.topmeta != null && crit.topmeta >= 0.75) chips.push("top-key meta");
     if(crit.mobility != null && crit.mobility >= 0.8) chips.push("very mobile");
     if(crit.surv != null && crit.surv >= 0.7) chips.push(`${s.survivability.tier} survivability`);
     if(crit.utility != null && crit.utility >= 0.8) chips.push("loaded utility");
@@ -1019,7 +1030,7 @@ render();
   function renderPanel(){
     ov.innerHTML = `<div class="finder-panel" role="dialog" aria-label="Spec finder">
       <div class="finder-head">
-        <div><h2>Find your spec</h2><p>Every spec is scored against your preferences using the tracker's live data. Note that <b>tier</b> (holistic consensus rating), <b>raw output</b> (damage/healing numbers), and <b>meta</b> (what's actually played) are different things — “Chase the strongest” ranks by <b>tier</b>; opt into raw output or meta-share separately under Extra priorities. <span style="color:var(--ink-faint)">Every spec clears normal/heroic and low–mid keys; below title-range M+ and Cutting Edge, <b style="color:var(--ink-dim)">the player matters more than the spec</b> — treat these as a shortlist to try, not a verdict.</span></p></div>
+        <div><h2>Find your spec</h2><p>Every spec is scored against your preferences using the tracker's live data. Note that <b>tier</b> (holistic consensus rating), <b>raw output</b> (damage/healing numbers), and <b>meta</b> (what's actually played) are different things — “Chase the strongest” ranks by <b>tier</b>; opt into raw output, <b>Widely played</b> (broad adoption — all logged players), or <b>Top-key meta</b> (what the best run — top-2000 M+ keys) separately under Extra priorities. <span style="color:var(--ink-faint)">Every spec clears normal/heroic and low–mid keys; below title-range M+ and Cutting Edge, <b style="color:var(--ink-dim)">the player matters more than the spec</b> — treat these as a shortlist to try, not a verdict.</span></p></div>
         <button class="finder-x" id="finder-close" aria-label="Close">✕</button>
       </div>
       ${Q.map(q=>`<div class="fq"><span class="lbl">${esc(q.label)}${q.hint?` <span class="hint">· ${esc(q.hint)}</span>`:""}</span><div class="fopts">${optHTML(q)}</div></div>`).join("")}
