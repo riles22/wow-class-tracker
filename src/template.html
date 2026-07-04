@@ -303,6 +303,8 @@
   }
   .fopt:hover{color:var(--ink); border-color:var(--accent)}
   .fopt[aria-pressed="true"]{background:color-mix(in srgb,var(--accent) 22%,transparent); border-color:var(--accent); color:#fff}
+  .fopt:disabled{opacity:.32; cursor:not-allowed; color:var(--ink-faint)}
+  .fopt:disabled:hover{color:var(--ink-faint); border-color:var(--edge-2)}
   .finder-go{margin-top:22px; display:flex; gap:12px; align-items:center; flex-wrap:wrap}
   .finder-note{color:var(--ink-faint); font-size:11.5px; max-width:44ch}
   .fresults{margin-top:20px; display:flex; flex-direction:column; gap:10px}
@@ -946,10 +948,17 @@ render();
     if(crit.outlook != null && crit.outlook === 1) chips.push(s.ptr?.draft ? "rising in 12.1 (draft)" : "rising in 12.1 (PTR)");
     return chips.slice(0,4);
   }
+  // A spec is "melee" if it's melee-primary OR viable in melee (fistweaving MW, weaving
+  // Holy Paladin, etc. — meleeCapable). Ranged means ranged-primary.
+  const supportsRange = (s, r) => {
+    if(r==="any" || !s.playstyle) return true;
+    return r==="Melee" ? (s.playstyle.range==="Melee" || s.playstyle.meleeCapable === true)
+                       : s.playstyle.range==="Ranged";
+  };
   function results(){
     const w = weights();
     let pool = SPECS.filter(s => answers.role==="any" || s.role===answers.role);
-    if(answers.range!=="any" && anyPlaystyle) pool = pool.filter(s => !s.playstyle || s.playstyle.range===answers.range);
+    if(answers.range!=="any" && anyPlaystyle) pool = pool.filter(s => supportsRange(s, answers.range));
     return pool.map(s => ({ s, ...scoreSpec(s, w) }))
       .sort((a,b)=> b.score - a.score).slice(0,12);
   }
@@ -962,7 +971,9 @@ render();
     const val = answers[q.id];
     return q.opts.map(([v,label])=>{
       const on = q.type==="multi" ? val.includes(v) : val===v;
-      return `<button class="fopt" data-q="${esc(q.id)}" data-v="${esc(v)}" aria-pressed="${on}">${esc(label)}</button>`;
+      // All tanks are melee — lock the range question to Melee when Tank is chosen.
+      const off = q.id==="range" && answers.role==="Tank" && v!=="Melee";
+      return `<button class="fopt" data-q="${esc(q.id)}" data-v="${esc(v)}" aria-pressed="${on}"${off?' disabled title="all tanks are melee"':''}>${esc(label)}</button>`;
     }).join("");
   }
   function renderPanel(){
@@ -984,6 +995,7 @@ render();
       const q = Q.find(x=>x.id===b.dataset.q), v = b.dataset.v;
       if(q.type==="multi"){ const i = answers[q.id].indexOf(v); i>=0 ? answers[q.id].splice(i,1) : answers[q.id].push(v); }
       else answers[q.id] = v;
+      if(q.id==="role" && v==="Tank" && answers.range!=="Melee") answers.range = "Melee"; // tanks are all melee
       renderPanel();
     });
   }

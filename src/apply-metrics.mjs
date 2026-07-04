@@ -70,6 +70,16 @@ export async function applyMetrics(dataPath, root = ROOT) {
     playstyleApplied++;
   }
 
+  // Melee-capability verification (updates range + sets meleeCapable for hybrids).
+  for (const row of input.melee ?? []) {
+    const spec = byKey.get(`${row.class}|${row.spec}`);
+    if (!spec) { unmatched.push(`melee: ${row.class} / ${row.spec}`); continue; }
+    spec.playstyle = spec.playstyle ?? {};
+    if (row.primaryRange) spec.playstyle.range = row.primaryRange;
+    spec.playstyle.meleeCapable = !!row.meleeCapable;
+    playstyleApplied++;
+  }
+
   if (unmatched.length) {
     throw new Error(
       `${unmatched.length} row(s) did not match any spec — nothing written:\n` +

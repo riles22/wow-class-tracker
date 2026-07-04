@@ -115,7 +115,8 @@
       "utility": 3,
       "notes": "Combat rez (Raise Ally), Anti-Magic Shell/Zone, Death Grip + Gorefiend's Grasp; no raid buff, no Bloodlust",
       "complexity": 3,
-      "complexityNotes": "Icy Veins describes it as engaging but 'moderately complex' — RP-generation optimization plus chaining numerous small defensive cooldowns; AoEah rates it 'easy/forgiving.' Mid-complexity tank."
+      "complexityNotes": "Icy Veins describes it as engaging but 'moderately complex' — RP-generation optimization plus chaining numerous small defensive cooldowns; AoEah rates it 'easy/forgiving.' Mid-complexity tank.",
+      "meleeCapable": true
     }
   },
   {
@@ -248,7 +249,8 @@
       "utility": 2,
       "notes": "Combat rez, Death Grip, Anti-Magic Zone, Blinding Sleet; guide rates utility 'Could Be Better', no raid buff",
       "complexity": 2,
-      "complexityNotes": "Icy Veins: resource-management builder/spender with Killing Machine/Exterminate procs and burst windows, offers an Easy Mode; AoEah calls it 'a simple rotation of a builder and a spender... easy to understand, fun to pick up.'"
+      "complexityNotes": "Icy Veins: resource-management builder/spender with Killing Machine/Exterminate procs and burst windows, offers an Easy Mode; AoEah calls it 'a simple rotation of a builder and a spender... easy to understand, fun to pick up.'",
+      "meleeCapable": true
     }
   },
   {
@@ -396,7 +398,8 @@
       "utility": 2,
       "notes": "Combat rez, Death Grip, Anti-Magic Zone, Blinding Sleet; guide rates utility 'Lackluster', no raid buff",
       "complexity": 3,
-      "complexityNotes": "Icy Veins: 'the rotation is simpler now with fewer opportunities for skill expression,' but requires plague/disease management, Dark Transformation/Army windows, and pet target-swapping. Moderate."
+      "complexityNotes": "Icy Veins: 'the rotation is simpler now with fewer opportunities for skill expression,' but requires plague/disease management, Dark Transformation/Army windows, and pet target-swapping. Moderate.",
+      "meleeCapable": true
     }
   },
   {
@@ -529,7 +532,8 @@
       "utility": 3,
       "notes": "Chaos Brand raid buff, Darkness group defensive, Chaos Nova/Imprison/Sigil of Misery CC; no rez, no Bloodlust, no immunity",
       "complexity": 3,
-      "complexityNotes": "Icy Veins: 'a lot of hidden complexity to optimize, but... very simple rules,' fast-paced with combo burst windows, has Easy Mode; AoEah rates it 'easy.' Accessible-moderate."
+      "complexityNotes": "Icy Veins: 'a lot of hidden complexity to optimize, but... very simple rules,' fast-paced with combo burst windows, has Easy Mode; AoEah rates it 'easy.' Accessible-moderate.",
+      "meleeCapable": true
     }
   },
   {
@@ -678,7 +682,8 @@
       "utility": 3,
       "notes": "Chaos Brand raid buff, Darkness, 30yd Disrupt interrupt, Void Nova ranged AoE stun; no rez, no Bloodlust, no immunity",
       "complexity": 2,
-      "complexityNotes": "Icy Veins: 'smooth pick-up-and-play feel' with hidden Void Metamorphosis depth; AoEah rates it 'Easiest — designed for maximum simplicity,' simpler than Havoc with limited buttons. Simple with optional depth."
+      "complexityNotes": "Icy Veins: 'smooth pick-up-and-play feel' with hidden Void Metamorphosis depth; AoEah rates it 'Easiest — designed for maximum simplicity,' simpler than Havoc with limited buttons. Simple with optional depth.",
+      "meleeCapable": false
     }
   },
   {
@@ -793,7 +798,8 @@
       "utility": 3,
       "notes": "Chaos Brand raid buff, Sigil of Silence/Misery, Chaos Nova, Darkness; strong M+ control but 'nothing unique' in raids, no rez",
       "complexity": 3,
-      "complexityNotes": "Icy Veins: build/spend soul cycle plus weaving multiple sigils and overlapping defensives for offense at a defensive cost; AoEah rates it 'Moderate — much smoother rotation.'"
+      "complexityNotes": "Icy Veins: build/spend soul cycle plus weaving multiple sigils and overlapping defensives for offense at a defensive cost; AoEah rates it 'Moderate — much smoother rotation.'",
+      "meleeCapable": true
     }
   },
   {
@@ -938,7 +944,8 @@
       "utility": 5,
       "notes": "Combat rez (Rebirth), Mark of the Wild, Innervate, Solar Beam interrupt, Cyclone/roots/Typhoon, Soothe; cast-heavy on the move",
       "complexity": 3,
-      "complexityNotes": "Icy Veins: 'simple but rewarding rotation... with a level of depth,' Eclipse + Astral Power management; AoEah rates it 'Hard — rotation and setup are more involved.' Sources split, settling at moderate."
+      "complexityNotes": "Icy Veins: 'simple but rewarding rotation... with a level of depth,' Eclipse + Astral Power management; AoEah rates it 'Hard — rotation and setup are more involved.' Sources split, settling at moderate.",
+      "meleeCapable": false
     }
   },
   {
@@ -1071,7 +1078,8 @@
       "utility": 5,
       "notes": "Combat rez (Rebirth), Mark of the Wild, Innervate, Stampeding Roar, Skull Bash, Typhoon/Ursol's Vortex CC",
       "complexity": 3,
-      "complexityNotes": "Wowhead/Method: 'intimidating... two resources and multiple debuffs to maintain,' with expected downtime as the first hurdle; Icy Veins notes Midnight 'significantly reduced management' and calls the slower pace 'intuitive.' Moderate."
+      "complexityNotes": "Wowhead/Method: 'intimidating... two resources and multiple debuffs to maintain,' with expected downtime as the first hurdle; Icy Veins notes Midnight 'significantly reduced management' and calls the slower pace 'intuitive.' Moderate.",
+      "meleeCapable": true
     }
   },
   {
@@ -1175,7 +1183,8 @@
       "utility": 4,
       "notes": "Combat rez (Rebirth), Mark of the Wild, Stampeding Roar, Dream of Cenarius off-heals, Incapacitating Roar; loaded for a tank",
       "complexity": 2,
-      "complexityNotes": "Icy Veins describes the playstyle as 'relatively straightforward' — rage builder/spender with Moonfire spread; AoEah rates it 'Easiest — set and forget... nearly unkillable.' Simple tank."
+      "complexityNotes": "Icy Veins describes the playstyle as 'relatively straightforward' — rage builder/spender with Moonfire spread; AoEah rates it 'Easiest — set and forget... nearly unkillable.' Simple tank.",
+      "meleeCapable": true
     }
   },
   {
@@ -1266,6 +1275,15 @@
         "value": 0.9,
         "unit": "%",
         "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median DPS (Mythic, healer)",
+        "value": 2413,
+        "unit": "DPS",
+        "n": 36361,
+        "asOf": "2026-07-01"
       }
     ],
     "survivability": {
@@ -1279,7 +1297,8 @@
       "utility": 5,
       "notes": "Combat rez (Rebirth), Mark of the Wild ('most powerful raid buff'), Ironbark external, Cyclone/Typhoon/Ursol's Vortex CC, Nature's Cure dispel",
       "complexity": 3,
-      "complexityNotes": "Icy Veins: flexible HoT kit that requires 'ramping' pre-planning and 'tracking many HoTs at once' (though Midnight trimmed some); AoEah rates it 'Easy — forgiving.' Moderate for the ramp/planning layer."
+      "complexityNotes": "Icy Veins: flexible HoT kit that requires 'ramping' pre-planning and 'tracking many HoTs at once' (though Midnight trimmed some); AoEah rates it 'Easy — forgiving.' Moderate for the ramp/planning layer.",
+      "meleeCapable": true
     }
   },
   {
@@ -1407,7 +1426,8 @@
       "utility": 5,
       "notes": "Bloodlust (Fury of the Aspects), Ebon Might/Prescience damage amp, Source of Magic, Rescue/Zephyr externals, Sleep Walk CC, Cauterizing Flame dispel",
       "complexity": 3,
-      "complexityNotes": "Icy Veins: priority 'not very complicated as a whole'; Midnight brought 'a large simplification of buff management,' depth lives in Prescience/Ebon Might target selection where mistimed casts lose DPS — moderate."
+      "complexityNotes": "Icy Veins: priority 'not very complicated as a whole'; Midnight brought 'a large simplification of buff management,' depth lives in Prescience/Ebon Might target selection where mistimed casts lose DPS — moderate.",
+      "meleeCapable": false
     }
   },
   {
@@ -1551,7 +1571,8 @@
       "utility": 4,
       "notes": "Bloodlust (Fury of the Aspects), Source of Magic (3% healing + mana), Rescue, Zephyr, Blessing of the Bronze; weaker in dungeons",
       "complexity": 3,
-      "complexityNotes": "Icy Veins: 'a good amount of depth in your combat rotation... a more involved and interesting DPS specialization,' built on empower/Essence management around Dragonrage — moderate."
+      "complexityNotes": "Icy Veins: 'a good amount of depth in your combat rotation... a more involved and interesting DPS specialization,' built on empower/Essence management around Dragonrage — moderate.",
+      "meleeCapable": false
     }
   },
   {
@@ -1654,6 +1675,15 @@
         "value": 0.4,
         "unit": "%",
         "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median DPS (Mythic, healer)",
+        "value": 6040,
+        "unit": "DPS",
+        "n": 18717,
+        "asOf": "2026-07-01"
       }
     ],
     "survivability": {
@@ -1667,7 +1697,8 @@
       "utility": 3,
       "notes": "Bloodlust (Fury of the Aspects), Zephyr party DR, Rescue, Obsidian Scales external; no raid buff, guide calls utility its biggest weakness",
       "complexity": 3,
-      "complexityNotes": "Icy Veins: Midnight goal was 'to make the spec much more approachable for new players while also removing some of the very tight timings' — previously demanding, now moderate empower/echo management."
+      "complexityNotes": "Icy Veins: Midnight goal was 'to make the spec much more approachable for new players while also removing some of the very tight timings' — previously demanding, now moderate empower/echo management.",
+      "meleeCapable": false
     }
   },
   {
@@ -1800,7 +1831,8 @@
       "utility": 4,
       "notes": "Bloodlust (pet Primal Rage), Hunter's Mark 3% buff, Turtle immunity, Tranquilizing Shot, Counter Shot, Intimidation/Binding Shot CC, Roar of Sacrifice external",
       "complexity": 1,
-      "complexityNotes": "Icy Veins: 'simple rotation,' 'does not require you to weave in your cooldowns,' 'ideal for someone new to raiding or just WoW,' fully mobile — very simple/beginner-friendly."
+      "complexityNotes": "Icy Veins: 'simple rotation,' 'does not require you to weave in your cooldowns,' 'ideal for someone new to raiding or just WoW,' fully mobile — very simple/beginner-friendly.",
+      "meleeCapable": false
     }
   },
   {
@@ -1933,7 +1965,8 @@
       "utility": 4,
       "notes": "Bloodlust (pet Primal Rage), Hunter's Mark 3% buff, Turtle immunity, Tranquilizing Shot, Counter Shot, Intimidation/Freezing Trap CC; ~40% time in immobile Aimed Shot casts",
       "complexity": 4,
-      "complexityNotes": "Icy Veins: 'high potential, but high skill floor,' ~40% immobile casts, needs 'excellent awareness of Focus levels and cooldowns at all times' plus Trick Shots weaving under movement — high."
+      "complexityNotes": "Icy Veins: 'high potential, but high skill floor,' ~40% immobile casts, needs 'excellent awareness of Focus levels and cooldowns at all times' plus Trick Shots weaving under movement — high.",
+      "meleeCapable": false
     }
   },
   {
@@ -2078,7 +2111,8 @@
       "utility": 4,
       "notes": "Bloodlust (pet Primal Rage), Hunter's Mark 3% buff, Turtle immunity, Tranquilizing Shot, Muzzle interrupt, Freezing Trap/Intimidation CC, Harpoon gap-closer",
       "complexity": 4,
-      "complexityNotes": "Icy Veins: rotation is 'very dynamic, fast-paced, and busy'; high skill ceiling, best players 'make the correct ability decision on the fly' amid competing mechanics — high."
+      "complexityNotes": "Icy Veins: rotation is 'very dynamic, fast-paced, and busy'; high skill ceiling, best players 'make the correct ability decision on the fly' amid competing mechanics — high.",
+      "meleeCapable": true
     }
   },
   {
@@ -2211,7 +2245,8 @@
       "utility": 5,
       "notes": "Bloodlust (Time Warp), Arcane Intellect raid buff, Ice Block immunity, Counterspell, Spellsteal, Supernova/Polymorph CC, Remove Curse",
       "complexity": 4,
-      "complexityNotes": "Icy Veins: 'relatively complex compared to other specs' — unique mana pool plus heavy cooldown dependence and burst-window sequencing; Midnight trimmed buff tracking but it stays high."
+      "complexityNotes": "Icy Veins: 'relatively complex compared to other specs' — unique mana pool plus heavy cooldown dependence and burst-window sequencing; Midnight trimmed buff tracking but it stays high.",
+      "meleeCapable": false
     }
   },
   {
@@ -2356,7 +2391,8 @@
       "utility": 5,
       "notes": "Bloodlust (Time Warp), Arcane Intellect raid buff, Ice Block immunity, Counterspell, Spellsteal, Dragon's Breath/Polymorph CC, Remove Curse",
       "complexity": 4,
-      "complexityNotes": "Method/Wowhead: moderate-to-high skill ceiling; 'demanding in execution,' juggling Hot Streak procs, Fire Blast charge banking, and the shorter high-value Combustion burst window — high."
+      "complexityNotes": "Method/Wowhead: moderate-to-high skill ceiling; 'demanding in execution,' juggling Hot Streak procs, Fire Blast charge banking, and the shorter high-value Combustion burst window — high.",
+      "meleeCapable": false
     }
   },
   {
@@ -2489,7 +2525,8 @@
       "utility": 5,
       "notes": "Bloodlust (Time Warp), Arcane Intellect raid buff, Ice Block immunity, Counterspell, Spellsteal, roots/slows/Ring of Frost CC, Mass Invisibility; guide: brought for utility",
       "complexity": 2,
-      "complexityNotes": "Icy Veins: 'The gameplay is incredibly simple to understand,' a 'safe pick for most people' / new players, though Shatter with Brain Freeze + Fingers of Frost proc management adds some depth — simple."
+      "complexityNotes": "Icy Veins: 'The gameplay is incredibly simple to understand,' a 'safe pick for most people' / new players, though Shatter with Brain Freeze + Fingers of Frost proc management adds some depth — simple.",
+      "meleeCapable": false
     }
   },
   {
@@ -2593,7 +2630,8 @@
       "utility": 3,
       "notes": "Mystic Touch physical debuff, Leg Sweep/Ring of Peace CC, Paralysis (enrage dispel), Detox, Spear Hand Strike interrupt; no Bloodlust or battle rez",
       "complexity": 3,
-      "complexityNotes": "Icy Veins: long 'reputation of requiring many different keybinds' and Stagger 'one of the main difficulties in learning'; Midnight pruned abilities and clarified Stagger — moderate now."
+      "complexityNotes": "Icy Veins: long 'reputation of requiring many different keybinds' and Stagger 'one of the main difficulties in learning'; Midnight pruned abilities and clarified Stagger — moderate now.",
+      "meleeCapable": true
     }
   },
   {
@@ -2696,6 +2734,15 @@
         "value": 7.7,
         "unit": "%",
         "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median DPS (Mythic, healer)",
+        "value": 12915,
+        "unit": "DPS",
+        "n": 54302,
+        "asOf": "2026-07-01"
       }
     ],
     "survivability": {
@@ -2709,7 +2756,8 @@
       "utility": 2,
       "notes": "Ring of Peace/Leg Sweep/Paralysis CC, Revival group magic dispel, Mystic Touch (weak), Life Cocoon external; no Bloodlust, no battle rez — guide calls utility its Achilles heel",
       "complexity": 4,
-      "complexityNotes": "Method: 'one of the more complex healing specs to master'; simplified in Midnight but still an 'always-be-casting' dual-role fistweaving playstyle — moderate-high."
+      "complexityNotes": "Method: 'one of the more complex healing specs to master'; simplified in Midnight but still an 'always-be-casting' dual-role fistweaving playstyle — moderate-high.",
+      "meleeCapable": true
     }
   },
   {
@@ -2854,7 +2902,8 @@
       "utility": 3,
       "notes": "Ring of Peace area-denial, Leg Sweep AoE stun, Paralysis (enrage dispel), Spear Hand Strike interrupt, Mystic Touch, Touch of Karma (damage cap, not full immunity); no Bloodlust or battle rez",
       "complexity": 4,
-      "complexityNotes": "Icy Veins: Mastery: Combo Strikes 'forces us to prepare and think several steps ahead'; simultaneous Chi/Energy + cooldown management, classic high-APM weaving — high."
+      "complexityNotes": "Icy Veins: Mastery: Combo Strikes 'forces us to prepare and think several steps ahead'; simultaneous Chi/Energy + cooldown management, classic high-APM weaving — high.",
+      "meleeCapable": true
     }
   },
   {
@@ -2945,6 +2994,15 @@
         "value": 1,
         "unit": "%",
         "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median DPS (Mythic, healer)",
+        "value": 4033,
+        "unit": "DPS",
+        "n": 28009,
+        "asOf": "2026-07-01"
       }
     ],
     "survivability": {
@@ -2958,7 +3016,8 @@
       "utility": 5,
       "notes": "Aura Mastery raid DR, Devotion Aura, Divine Shield immunity, Blessing of Protection, Blessing of Freedom, Lay on Hands external; no rez/Lust",
       "complexity": 3,
-      "complexityNotes": "Wowhead flags Holy Power as an \"unintuitive resource system\"; Icy Veins frames it as a flexible priority kit with cooldown-dependent output — a standard, moderately demanding healer."
+      "complexityNotes": "Wowhead flags Holy Power as an \"unintuitive resource system\"; Icy Veins frames it as a flexible priority kit with cooldown-dependent output — a standard, moderately demanding healer.",
+      "meleeCapable": false
     }
   },
   {
@@ -3062,7 +3121,8 @@
       "utility": 5,
       "notes": "Two immunities (BoP physical + Blessing of Spellwarding magic), Blessing of Sacrifice, Freedom, steady interrupts (Avenger's Shield/Rebuke), Lay on Hands",
       "complexity": 2,
-      "complexityNotes": "IV: core rotation largely unchanged; difficulty is cooldown-planning for survival. AoEah: Easy."
+      "complexityNotes": "IV: core rotation largely unchanged; difficulty is cooldown-planning for survival. AoEah: Easy.",
+      "meleeCapable": true
     }
   },
   {
@@ -3195,7 +3255,8 @@
       "utility": 3,
       "notes": "Blessings (Protection, Freedom, Sacrifice), Divine Shield immunity, Lay on Hands, Rebuke interrupt; niche in raid, no Spellwarding/rez/Lust",
       "complexity": 2,
-      "complexityNotes": "IV: Holy Power + cooldown planning, reduced button bloat. AoEah: easiest DPS."
+      "complexityNotes": "IV: Holy Power + cooldown planning, reduced button bloat. AoEah: easiest DPS.",
+      "meleeCapable": true
     }
   },
   {
@@ -3286,6 +3347,15 @@
         "value": 2.3,
         "unit": "%",
         "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median DPS (Mythic, healer)",
+        "value": 27840,
+        "unit": "DPS",
+        "n": 38639,
+        "asOf": "2026-07-01"
       }
     ],
     "survivability": {
@@ -3299,7 +3369,8 @@
       "utility": 5,
       "notes": "Power Word: Barrier raid DR, Power Infusion external DPS buff, Pain Suppression, Leap of Faith, Mass Dispel, Psychic Scream; no rez/Lust",
       "complexity": 5,
-      "complexityNotes": "IV: atonement ramp requires extensive incoming-damage knowledge, 'can be difficult to master'. AoEah: hardest healer."
+      "complexityNotes": "IV: atonement ramp requires extensive incoming-damage knowledge, 'can be difficult to master'. AoEah: hardest healer.",
+      "meleeCapable": false
     }
   },
   {
@@ -3390,6 +3461,15 @@
         "value": 0.5,
         "unit": "%",
         "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median DPS (Mythic, healer)",
+        "value": 8380,
+        "unit": "DPS",
+        "n": 21084,
+        "asOf": "2026-07-01"
       }
     ],
     "survivability": {
@@ -3403,7 +3483,8 @@
       "utility": 5,
       "notes": "Divine Hymn, Guardian Spirit external, Power Infusion, Symbol of Hope, Leap of Faith, PW: Fortitude raid buff, Psychic Scream; no rez/Lust",
       "complexity": 2,
-      "complexityNotes": "IV: 'one of the easier healers to pick up'. AoEah: easiest healer."
+      "complexityNotes": "IV: 'one of the easier healers to pick up'. AoEah: easiest healer.",
+      "meleeCapable": false
     }
   },
   {
@@ -3548,7 +3629,8 @@
       "utility": 4,
       "notes": "Power Infusion, Silence interrupt, Vampiric Embrace group sustain, Psychic Scream, Shackle, Mass Dispel; no external shields/rez/Lust",
       "complexity": 3,
-      "complexityNotes": "IV: DoT builder-spender with Insanity/Voidform windows — moderate. AoEah: average."
+      "complexityNotes": "IV: DoT builder-spender with Insanity/Voidform windows — moderate. AoEah: average.",
+      "meleeCapable": false
     }
   },
   {
@@ -3681,7 +3763,8 @@
       "utility": 3,
       "notes": "Kick interrupt, Cloak of Shadows immunity, Shroud of Concealment, Tricks of the Trade, Blind/Sap CC, Atrophic Poison; strong in M+, weak in raid",
       "complexity": 3,
-      "complexityNotes": "IV: Fatebound 'more forgiving'; bleed upkeep + combo-point/Envenom loop. AoEah: average."
+      "complexityNotes": "IV: Fatebound 'more forgiving'; bleed upkeep + combo-point/Envenom loop. AoEah: average.",
+      "meleeCapable": true
     }
   },
   {
@@ -3827,7 +3910,8 @@
       "utility": 3,
       "notes": "Kick interrupt, Cloak of Shadows immunity, Shroud of Concealment, Tricks of the Trade, Blind/Sap CC, Atrophic Poison; strong in M+, weak in raid",
       "complexity": 4,
-      "complexityNotes": "IV: Roll the Bones upkeep + dynamic cooldowns, RNG-driven. AoEah: hardest of the three Rogue specs."
+      "complexityNotes": "IV: Roll the Bones upkeep + dynamic cooldowns, RNG-driven. AoEah: hardest of the three Rogue specs.",
+      "meleeCapable": true
     }
   },
   {
@@ -3972,7 +4056,8 @@
       "utility": 3,
       "notes": "Kick interrupt, Cloak of Shadows immunity, Shroud of Concealment, Tricks of the Trade, Blind/Sap CC, Atrophic Poison; strong in M+, weak in raid",
       "complexity": 4,
-      "complexityNotes": "IV rotation: 90s cycle syncing Shadow Blades with dual Shadow Dance windows + proc tracking, ~10% skill gap."
+      "complexityNotes": "IV rotation: 90s cycle syncing Shadow Blades with dual Shadow Dance windows + proc tracking, ~10% skill gap.",
+      "meleeCapable": true
     }
   },
   {
@@ -4105,7 +4190,8 @@
       "utility": 4,
       "notes": "Bloodlust/Heroism, Skyfury raid buff, Wind Shear interrupt, Tremor/Poison Cleansing totems, Purge",
       "complexity": 2,
-      "complexityNotes": "Icy Veins: Midnight 'gutted' the complexity of the rotation; 'simple fundamentals for both single-target and AoE'. Simpler than most casters now, with talents able to make it easy or complex — base build is beginner-friendly."
+      "complexityNotes": "Icy Veins: Midnight 'gutted' the complexity of the rotation; 'simple fundamentals for both single-target and AoE'. Simpler than most casters now, with talents able to make it easy or complex — base build is beginner-friendly.",
+      "meleeCapable": false
     }
   },
   {
@@ -4238,7 +4324,8 @@
       "utility": 4,
       "notes": "Bloodlust/Heroism, Skyfury raid buff, Capacitor/Earthgrab totems, Wind Shear interrupt, cleanses",
       "complexity": 4,
-      "complexityNotes": "Icy Veins: 'a fairly steep learning curve', 'fast-paced', 'always be pressing something', many moving parts (Maelstrom Weapon stacks, cooldowns, procs) even after the Midnight reduction; Stormbringer build higher RNG and stricter windows."
+      "complexityNotes": "Icy Veins: 'a fairly steep learning curve', 'fast-paced', 'always be pressing something', many moving parts (Maelstrom Weapon stacks, cooldowns, procs) even after the Midnight reduction; Stormbringer build higher RNG and stricter windows.",
+      "meleeCapable": true
     }
   },
   {
@@ -4341,6 +4428,15 @@
         "value": 7.2,
         "unit": "%",
         "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median DPS (Mythic, healer)",
+        "value": 2801,
+        "unit": "DPS",
+        "n": 54774,
+        "asOf": "2026-07-01"
       }
     ],
     "survivability": {
@@ -4354,7 +4450,8 @@
       "utility": 5,
       "notes": "Bloodlust/Heroism, Skyfury, Spirit Link Totem, Wind Shear (only healer interrupt), cleanses, combat rez (self)",
       "complexity": 1,
-      "complexityNotes": "Icy Veins: 'perhaps the easiest healer in the game' after Midnight removed ~half the active buttons; low skill floor, consistent healing, forgiving. Mastery is positioning/CD timing, not rotation."
+      "complexityNotes": "Icy Veins: 'perhaps the easiest healer in the game' after Midnight removed ~half the active buttons; low skill floor, consistent healing, forgiving. Mastery is positioning/CD timing, not rotation.",
+      "meleeCapable": false
     }
   },
   {
@@ -4487,7 +4584,8 @@
       "utility": 5,
       "notes": "Battle rez (Soulstone), Healthstones, Demonic Gateway, Curses, Felhunter interrupt/dispel",
       "complexity": 3,
-      "complexityNotes": "Icy Veins: DoT-maintenance spec; 'may not have many buttons, it requires careful attention to cooldowns and uptimes, with complexity increasing with the number of targets.' Standard priority, multi-dot management scales up in AoE. Ramp shortened in Midnight."
+      "complexityNotes": "Icy Veins: DoT-maintenance spec; 'may not have many buttons, it requires careful attention to cooldowns and uptimes, with complexity increasing with the number of targets.' Standard priority, multi-dot management scales up in AoE. Ramp shortened in Midnight.",
+      "meleeCapable": false
     }
   },
   {
@@ -4620,7 +4718,8 @@
       "utility": 5,
       "notes": "Battle rez (Soulstone), Healthstones, Demonic Gateway, Curses, Felguard/Fel Ravager interrupt",
       "complexity": 3,
-      "complexityNotes": "Icy Veins: 'straightforward and intuitive', embodies always-be-casting; simplified in Midnight (instant Call Dreadstalkers). Base rotation easy; Apex talent adds volatility/optimization depth. Moderate overall."
+      "complexityNotes": "Icy Veins: 'straightforward and intuitive', embodies always-be-casting; simplified in Midnight (instant Call Dreadstalkers). Base rotation easy; Apex talent adds volatility/optimization depth. Moderate overall.",
+      "meleeCapable": false
     }
   },
   {
@@ -4753,7 +4852,8 @@
       "utility": 5,
       "notes": "Battle rez (Soulstone), Healthstones, Demonic Gateway, Curses, Felhunter interrupt (Spell Lock)",
       "complexity": 2,
-      "complexityNotes": "Icy Veins: 'a fairly straightforward spec', 'without much rotational complexity'; simple shard-generate-then-spend loop (Immolate + Chaos Bolt). One of the more accessible caster DPS."
+      "complexityNotes": "Icy Veins: 'a fairly straightforward spec', 'without much rotational complexity'; simple shard-generate-then-spend loop (Immolate + Chaos Bolt). One of the more accessible caster DPS.",
+      "meleeCapable": false
     }
   },
   {
@@ -4886,7 +4986,8 @@
       "utility": 3,
       "notes": "Battle Shout, Rallying Cry, Spell Reflection, Pummel interrupt, Piercing Howl; no rez/Lust/immunity",
       "complexity": 2,
-      "complexityNotes": "Icy Veins: 'relatively simplistic with an easy to get into rotation', 'very straightforward and relatively simple'; beginner-friendly priority list. Depth added only by talent choices."
+      "complexityNotes": "Icy Veins: 'relatively simplistic with an easy to get into rotation', 'very straightforward and relatively simple'; beginner-friendly priority list. Depth added only by talent choices.",
+      "meleeCapable": true
     }
   },
   {
@@ -5019,7 +5120,8 @@
       "utility": 3,
       "notes": "Battle Shout, Rallying Cry, Spell Reflection, Pummel interrupt, Piercing Howl; no rez/Lust/immunity",
       "complexity": 3,
-      "complexityNotes": "Icy Veins: 'relatively simple rotation' BUT 'one of the highest action specializations in the game'; high APM 'can be quite overwhelming while learning'. Simple logic, demanding execution — nudged to 3 for the APM burden."
+      "complexityNotes": "Icy Veins: 'relatively simple rotation' BUT 'one of the highest action specializations in the game'; high APM 'can be quite overwhelming while learning'. Simple logic, demanding execution — nudged to 3 for the APM burden.",
+      "meleeCapable": true
     }
   },
   {
@@ -5123,7 +5225,8 @@
       "utility": 3,
       "notes": "Battle Shout, Rallying Cry, Shockwave/Storm Bolt stuns, Intimidating Shout, Disrupting Shout silence, Spell Reflection",
       "complexity": 2,
-      "complexityNotes": "Icy Veins: rotation 'relatively straightforward'/'manageable'; simple Shield Slam→Ignore Pain rage loop, 'remains roughly the same' in Midnight. Difficulty is defensive CD timing, not the rotation."
+      "complexityNotes": "Icy Veins: rotation 'relatively straightforward'/'manageable'; simple Shield Slam→Ignore Pain rage loop, 'remains roughly the same' in Midnight. Difficulty is defensive CD timing, not the rotation.",
+      "meleeCapable": true
     }
   }
 ]

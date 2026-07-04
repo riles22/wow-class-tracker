@@ -110,6 +110,9 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
       if (ps.complexity != null && (!Number.isInteger(ps.complexity) || ps.complexity < 1 || ps.complexity > 5)) {
         errors.push(`specs.json: ${key} playstyle.complexity must be an integer 1–5`);
       }
+      if (ps.meleeCapable != null && typeof ps.meleeCapable !== "boolean") {
+        errors.push(`specs.json: ${key} playstyle.meleeCapable must be a boolean`);
+      }
     }
 
     if (spec.survivability != null) {

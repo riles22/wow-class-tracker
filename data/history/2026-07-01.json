@@ -170,7 +170,8 @@
         "warcraftlogs|raid|Median HPS (Mythic, all bosses)": 5,
         "warcraftlogs|mplus|Median HPS (M+, all dungeons)": 5,
         "murlok|mplus|Top-50 avg M+ rating (ceiling)": 5,
-        "mythicstats|mplus|Top-2000 keys representation": 5
+        "mythicstats|mplus|Top-2000 keys representation": 5,
+        "warcraftlogs|raid|Median DPS (Mythic, healer)": 7
       }
     },
     "Evoker|Augmentation": {
@@ -221,7 +222,8 @@
         "warcraftlogs|raid|Median HPS (Mythic, all bosses)": 7,
         "warcraftlogs|mplus|Median HPS (M+, all dungeons)": 7,
         "murlok|mplus|Top-50 avg M+ rating (ceiling)": 6,
-        "mythicstats|mplus|Top-2000 keys representation": 7
+        "mythicstats|mplus|Top-2000 keys representation": 7,
+        "warcraftlogs|raid|Median DPS (Mythic, healer)": 4
       }
     },
     "Hunter|Beast Mastery": {
@@ -361,7 +363,8 @@
         "warcraftlogs|raid|Median HPS (Mythic, all bosses)": 1,
         "warcraftlogs|mplus|Median HPS (M+, all dungeons)": 1,
         "murlok|mplus|Top-50 avg M+ rating (ceiling)": 1,
-        "mythicstats|mplus|Top-2000 keys representation": 1
+        "mythicstats|mplus|Top-2000 keys representation": 1,
+        "warcraftlogs|raid|Median DPS (Mythic, healer)": 2
       }
     },
     "Monk|Windwalker": {
@@ -395,7 +398,8 @@
         "warcraftlogs|raid|Median HPS (Mythic, all bosses)": 4,
         "warcraftlogs|mplus|Median HPS (M+, all dungeons)": 4,
         "murlok|mplus|Top-50 avg M+ rating (ceiling)": 4,
-        "mythicstats|mplus|Top-2000 keys representation": 4
+        "mythicstats|mplus|Top-2000 keys representation": 4,
+        "warcraftlogs|raid|Median DPS (Mythic, healer)": 5
       }
     },
     "Paladin|Protection": {
@@ -445,7 +449,8 @@
         "warcraftlogs|raid|Median HPS (Mythic, all bosses)": 2,
         "warcraftlogs|mplus|Median HPS (M+, all dungeons)": 2,
         "murlok|mplus|Top-50 avg M+ rating (ceiling)": 3,
-        "mythicstats|mplus|Top-2000 keys representation": 3
+        "mythicstats|mplus|Top-2000 keys representation": 3,
+        "warcraftlogs|raid|Median DPS (Mythic, healer)": 1
       }
     },
     "Priest|Holy": {
@@ -461,7 +466,8 @@
         "warcraftlogs|raid|Median HPS (Mythic, all bosses)": 6,
         "warcraftlogs|mplus|Median HPS (M+, all dungeons)": 6,
         "murlok|mplus|Top-50 avg M+ rating (ceiling)": 7,
-        "mythicstats|mplus|Top-2000 keys representation": 6
+        "mythicstats|mplus|Top-2000 keys representation": 6,
+        "warcraftlogs|raid|Median DPS (Mythic, healer)": 3
       }
     },
     "Priest|Shadow": {
@@ -585,7 +591,8 @@
         "warcraftlogs|raid|Median HPS (Mythic, all bosses)": 3,
         "warcraftlogs|mplus|Median HPS (M+, all dungeons)": 3,
         "murlok|mplus|Top-50 avg M+ rating (ceiling)": 2,
-        "mythicstats|mplus|Top-2000 keys representation": 2
+        "mythicstats|mplus|Top-2000 keys representation": 2,
+        "warcraftlogs|raid|Median DPS (Mythic, healer)": 6
       }
     },
     "Warlock|Affliction": {
