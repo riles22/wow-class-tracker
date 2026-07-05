@@ -53,8 +53,27 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.d1.outputs.page_url || steps.d2.outputs.page_url || steps.d3.outputs.page_url }}
     steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
+      # GitHub Pages' deploy API occasionally returns a transient "Deployment failed, try
+      # again later" even though the build + artifact upload succeeded. Retry up to 3 times
+      # with backoff before failing the run; the first success short-circuits the rest.
+      - name: Deploy to GitHub Pages (attempt 1)
+        id: d1
+        uses: actions/deploy-pages@v4
+        continue-on-error: true
+      - name: Back off before retry
+        if: steps.d1.outcome == 'failure'
+        run: sleep 20
+      - name: Deploy to GitHub Pages (attempt 2)
+        id: d2
+        if: steps.d1.outcome == 'failure'
+        uses: actions/deploy-pages@v4
+        continue-on-error: true
+      - name: Back off before final retry
+        if: steps.d1.outcome == 'failure' && steps.d2.outcome == 'failure'
+        run: sleep 40
+      - name: Deploy to GitHub Pages (attempt 3, final)
+        id: d3
+        if: steps.d1.outcome == 'failure' && steps.d2.outcome == 'failure'
         uses: actions/deploy-pages@v4
