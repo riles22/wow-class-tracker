@@ -1,6 +1,6 @@
 ---
 name: ptr-watch
-description: Check for new 12.1 PTR developments and fold them into the tracker — new PTR build tuning notes (official forum thread), new Wowhead datamined tuning posts, and new Warcraft Logs PTR raid-testing data (zone 54). Use when the user says "check the PTR", "any new builds?", "ptr watch", or on a scheduled/loop run.
+description: Check for new 12.1 PTR developments and fold them into the tracker — new PTR build tuning notes (official forum thread), new Wowhead datamined tuning posts, new Warcraft Logs PTR raid-testing data (zone 54), and new real-player Dummy Dome target-count logs (zone 52). Use when the user says "check the PTR", "any new builds?", "ptr watch", or on a scheduled/loop run.
 ---
 
 # PTR watch — the constant-updates loop
@@ -37,7 +37,26 @@ say so and change nothing.
    "12.1 PTR raid testing score (normalized)" with `n` = parses — the tiny-n caveat
    (n ranges ~3–100; world-first testers, templated gear, tuning in flux) lives in the
    name, the `n`, and NEVER in the live baselines. Empty/unchanged = normal; skip silently.
-6. `npm test && npm run build`. Append to `log.md`: date · builds found · zone-54 state.
+6. **WCL Dummy Dome real-player logs (zone 52)**: the real-player counterpart to the sim
+   fight profiles — median rDPS by fixed target count (feeds `spec.ptrDummy`). Zone 52 has
+   NO partitions, one difficulty (3 = Normal) and one size (10); the partition segment is
+   always 1, and `aggregate=amount` → the Score column is median **rDPS** (raw, not the
+   normalized 0–100 that zone 54 uses). Fetch each of the four DPS dummies **once** (polite
+   guest, at most daily; XHR header recipe as in refresh-metrics):
+   `warcraftlogs.com/zone/statistics/table/52/dps/{bossId}/3/10/1/50/1/14/0/DPS/Any/All/0/amount/single/0/-1/?keystone=15&dpstype=rdps`
+   Boss id → target count: **3591** Sinister Single = 1T · **3590** Diabolical Duo = 2T ·
+   **3592** Terrible Trio = 3T · **3593** Fearsome Five = 5T. (3594 Hazardous Healer is a
+   healer dummy — skip it for the DPS ptrDummy.) Each spec row appears **twice** in the raw
+   fragment (54 rows → 27 specs; halve the parse count too). Change detector: only re-ingest
+   when the total parse count increased vs the last run (log it). Merge by writing
+   `{"ptrdummy":[{"class","spec","source":"warcraftlogs","asOf":<today>,"targets":{"1":dps,"3":dps,…}}]}`
+   to a scratch file → `node src/apply-metrics.mjs <file>` — include only the counts a spec
+   actually logged (missing counts are fine; the build's coverage floor decides which specs
+   earn a ranked composite). The composite score/rank + per-target percentiles are computed
+   at build time (`dummyDomeScores` in render.mjs) — never hand-write them. Empty/unchanged
+   = normal; skip silently.
+7. `npm test && npm run build`. Append to `log.md`: date · builds found · zone-54 state ·
+   zone-52 (Dummy Dome) state.
 
 ## Gotchas
 

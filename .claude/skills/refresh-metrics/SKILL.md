@@ -51,7 +51,9 @@ Never commit config.json (gitignored); never print the secret.
   data. **Zone 52 is "Dummy Dome"** — a target-dummy sim harness (Sinister Single 1T /
   Diabolical Duo 2T / Terrible Trio 3T / Fearsome Five 5T / Hazardous Healer), NOT a raid;
   it's real-player fixed-target-count DPS/HPS (a logged analogue of Bloodmallet's target
-  scaling). Don't confuse 52 with 54. (52 is a candidate future fight-type source.)
+  scaling). Don't confuse 52 with 54. (52 now feeds `spec.ptrDummy` — refreshed by
+  ptr-watch step 6; boss ids 3591=1T / 3590=2T / 3592=3T / 3593=5T, `aggregate=amount`
+  → median rDPS. Merge via `apply-metrics.mjs` `ptrdummy` key.)
   data; label metric names with "(12.1 PTR …)" and keep them out of live baselines.
   Mythic zone 46 requires `size=20`; `difficulty=4` is HEROIC, Mythic is 5.
 - Fight-profile labels are computed at build time (within-role percentiles) — you only
