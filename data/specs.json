@@ -4697,7 +4697,23 @@
         "wowmeta": "B"
       }
     },
-    "ptr": null,
+    "ptr": {
+      "verdict": "Mixed",
+      "theme": "Fun to play and buffed, but old structural baggage lingers",
+      "summary": "Wordup's Wowhead review. The 12.1 changes are almost universally buffs (Totemic ~+3%, Stormbringer +3–5% by target count) and he strongly agrees the reworked spec's gameplay is 'very good'; the Season 2 tier set is a big step up from S1's whelming offering and looks like a solid all-rounder. But the article's weight is on 'baggage' that has lingered since Beta: an all-or-nothing cooldown profile on both hero trees, the frustrating Doom Winds/Ascendance 'deck of cards' RNG, lost priority/funnel damage, and Totemic slipping behind Stormbringer again — the same War Within reset pattern.",
+      "changes": [
+        "Core buffs aimed at the weak downtime between cooldowns: Lightning Bolt & Chain Lightning +20%; Lava Lash & Stormstrike +15%; melee +15%.",
+        "Doom Winds now increases Windfury Weapon activation chance by 50% (was 100%) — trims the mass-AoE Windfury spike, felt mainly by Totemic.",
+        "Stormbringer nerf: Tempest main-target −10%, secondary-target −30%.",
+        "Totemic nerf: Surging Totem Tremor −15%, Surging Bolt −10%.",
+        "Net is still almost universally a buff (Totemic ~+3%, −1% in mass AoE; Stormbringer +3–5% by target count), but Wordup notes the devs' stated goal of shifting damage OUT of cooldown windows wasn't really achieved — only Totemic's Surging Totem took a real hit and it was mostly offset."
+      ],
+      "set2": "Reworked this week and much improved over S1. Built around Voltaic Blaze; the previous version had a single-target 'killswitch' (lost its 200% multiplier the moment a 2nd target appeared) — now a strong, self-sufficient universal bonus (its own Fire Nova procs) with the set's value weighted heavily here. Wordup is 'very happy' Blizzard caught the single-target-contingent design and pivoted before live.",
+      "set4": "Adds extra Voltaic Blaze stacks plus Crash Lightning CDR. Heavily favors Stormbringer, which has the spare GCDs to weave Voltaic Blaze as a priority; Totemic struggles to juggle it against Storm Unleashed and its totem cadence. Fire Nova becomes a nice single-target pickup but is NOT a mandatory talent swap — a welcome, less-forceful tier-set design. Overall a solid all-rounder giving damage in nearly all situations.",
+      "watch": "The 'baggage': both hero trees are all-or-nothing cooldown profiles with little build diversity ('a red Totemic and a blue Stormbringer'); the Doom Winds/Ascendance deck-of-cards RNG is a sore point — a 600-Maelstrom, 3-proc deck that can run ~1000 stacks (~5 min) between procs and doesn't reset without relogging, 'bordering on ruining the feel'; Descending Skies hard-locks Stormbringer to Ascendance with no controlled alternative; and the Crash Lightning damage split stripped Enhancement's traditional priority/funnel strength (Totemic hit hardest — Totemic Rebound fires on the wrong target). It's shaping up like the War Within pattern: Totemic is hit harder by the nerfs and gains less from the buffs/tier set while Stormbringer pulls ahead again. Structure/tuning, not resolved yet.",
+      "draft": true,
+      "source": "https://www.wowhead.com/news=382092/fun-to-play-but-has-some-baggage-enhancement-shaman-class-changes-and-tier-set"
+    },
     "metrics": [
       {
         "source": "archon",
