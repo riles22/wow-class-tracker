@@ -160,9 +160,9 @@
 
   /* ---------- fight-profile chips + metric notes ---------- */
   .ptag{
-    font-family:var(--mono); font-size:9.5px; letter-spacing:.05em; white-space:nowrap;
-    padding:2px 6px; border-radius:5px; margin-left:7px;
-    border:1px solid var(--edge-2); color:var(--accent-2)
+    font-family:var(--mono); font-size:10px; letter-spacing:.05em; white-space:nowrap;
+    padding:2px 6px; border-radius:5px; margin-left:auto;
+    border:1px solid var(--edge-2); color:var(--ink-dim)
   }
   .fchips{display:flex; gap:6px; flex-wrap:wrap; align-items:center}
   .fchip{font-family:var(--mono); font-size:10.5px; padding:2px 7px; border-radius:5px; border:1px solid var(--edge-2); color:var(--ink-dim)}
@@ -215,10 +215,10 @@
   .row.clickable:hover{background:var(--bg-3)}
   .row:focus-visible{outline:2px solid var(--accent-2); outline-offset:-2px}
   .spec-name{display:flex; align-items:center; gap:10px; min-width:0}
-  .cbar{width:3px; height:20px; border-radius:3px; flex:none}
+  .cbar{width:4px; height:20px; border-radius:3px; flex:none}
   .spec-txt{font-weight:600; color:var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
   .cls{font-family:var(--mono); font-size:12.5px; color:var(--ink-dim); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0}
-  .role{font-size:12px; color:var(--ink-faint); min-width:0}
+  .role{font-size:12px; color:var(--ink-faint); min-width:0; display:flex; align-items:center; gap:6px}
   .role .rolechip{font-family:var(--mono); font-size:10.5px; letter-spacing:.08em; padding:2px 7px; border-radius:5px; border:1px solid var(--edge-2); color:var(--ink-dim)}
   .chev{justify-self:end; color:var(--ink-dim); transition:transform .18s,color .15s; font-size:13px}
   .row.open .chev{transform:rotate(90deg); color:var(--accent)}
@@ -333,8 +333,18 @@
   }
   .fopt:hover{color:var(--ink); border-color:var(--accent)}
   .fopt[aria-pressed="true"]{background:color-mix(in srgb,var(--accent) 22%,transparent); border-color:var(--accent); color:#fff}
-  .fopt:disabled{opacity:.32; cursor:not-allowed; color:var(--ink-faint)}
-  .fopt:disabled:hover{color:var(--ink-faint); border-color:var(--edge-2)}
+  .fopt:disabled{opacity:.6; cursor:not-allowed; color:var(--ink-dim)}
+  .fopt:disabled:hover{color:var(--ink-dim); border-color:var(--edge-2)}
+  /* focus-visible coverage on every interactive element */
+  .search:focus-visible, .sortsel:focus-visible, .fopt:focus-visible, .finder-x:focus-visible{outline:2px solid var(--accent-2); outline-offset:2px}
+  /* active (non-default) filter/sort cue on selects + search */
+  .sortsel.engaged, .search.engaged{border-color:var(--accent); box-shadow:inset 3px 0 0 var(--accent)}
+  /* coarse-pointer (touch) targets — desktop density unchanged */
+  @media(pointer:coarse){
+    .seg button, .fopt, .finderbtn, .search, .sortsel, .laddersearch{min-height:44px}
+    .toggle{min-height:44px}
+    .finder-x{width:40px; height:40px}
+  }
   .finder-go{margin-top:22px; display:flex; gap:12px; align-items:center; flex-wrap:wrap}
   .finder-note{color:var(--ink-faint); font-size:11.5px; max-width:44ch}
   .fresults{margin-top:20px; display:flex; flex-direction:column; gap:10px}
@@ -844,6 +854,10 @@ function render(){
   document.getElementById('count').textContent = `${shown} spec${shown!==1?'s':''}${state.ptrOnly?'':` · ${ptrShown} tracked`}`;
   wireRows();
   matrix.querySelectorAll('.hsort').forEach(b=> b.onclick = ()=> setSort(b.dataset.sort));
+  // active-filter cues: light up controls that are off their default
+  document.getElementById('fightsel')?.classList.toggle('engaged', !!state.fight);
+  document.getElementById('sortsel')?.classList.toggle('engaged', state.sort!=='raid');
+  document.getElementById('search')?.classList.toggle('engaged', !!state.q);
 }
 
 /* Single entry point for sorting — keeps the clickable headers, the Sort dropdown, and
@@ -1187,7 +1201,7 @@ function openSpecFromFinder(cls, spec){
     }).join("");
   }
   function renderPanel(){
-    ov.innerHTML = `<div class="finder-panel" role="dialog" aria-label="Spec finder">
+    ov.innerHTML = `<div class="finder-panel" role="dialog" aria-modal="true" aria-label="Spec finder">
       <div class="finder-head">
         <div><h2>Find your spec</h2><p>Every spec is scored against your preferences using the tracker's live data. Note that <b>tier</b> (holistic consensus rating), <b>raw output</b> (damage/healing numbers), and <b>meta</b> (what's actually played) are different things — “Chase the strongest” ranks by <b>tier</b>; opt into raw output, <b>Widely played</b> (broad adoption — all logged players), or <b>Top-key meta</b> (what the best run — top-2000 M+ keys) separately under Extra priorities. <span style="color:var(--ink-faint)">Every spec clears normal/heroic and low–mid keys; below title-range M+ and Cutting Edge, <b style="color:var(--ink-dim)">the player matters more than the spec</b> — treat these as a shortlist to try, not a verdict.</span></p></div>
         <button class="finder-x" id="finder-close" aria-label="Close">✕</button>
@@ -1223,9 +1237,17 @@ function openSpecFromFinder(cls, spec){
     box.querySelectorAll(".fres").forEach(el => el.onclick = () => openSpecFromFinder(el.dataset.cls, el.dataset.spec));
     box.scrollIntoView({ behavior:"smooth", block:"nearest" });
   }
-  function open(){ renderPanel(); ov.classList.add("open"); document.body.style.overflow="hidden"; }
-  function close(){ ov.classList.remove("open"); document.body.style.overflow=""; }
+  let opener=null;
+  function open(){ opener=document.activeElement; renderPanel(); ov.classList.add("open"); document.body.style.overflow="hidden"; const c=ov.querySelector("#finder-close"); if(c) setTimeout(()=>c.focus(),0); }
+  function close(){ ov.classList.remove("open"); document.body.style.overflow=""; if(opener && opener.focus) opener.focus(); }
   ov.addEventListener("click", e => { if(e.target===ov) close(); });
+  ov.addEventListener("keydown", e => { // focus trap — keep Tab inside the modal
+    if(e.key!=="Tab" || !ov.classList.contains("open")) return;
+    const f=[...ov.querySelectorAll('button, input, [tabindex="0"]')]; if(!f.length) return;
+    const first=f[0], last=f[f.length-1];
+    if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
+    else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
+  });
   document.addEventListener("keydown", e => { if(e.key==="Escape" && ov.classList.contains("open")) close(); });
   document.getElementById("finderbtn").addEventListener("click", open);
 })();
