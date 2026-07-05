@@ -3490,7 +3490,23 @@
         "wowmeta": "S"
       }
     },
-    "ptr": null,
+    "ptr": {
+      "verdict": "Mixed",
+      "theme": "Smoother Holy Power, but a controversial 4-set that fights the spec's identity",
+      "summary": "Bolas's Wowhead review. The 12.1 changes make Holy Power generation far more predictable and much faster — decoupling Ret from needing a Shaman's Skyfury and letting Art of War stack twice, both of which Bolas thinks feel genuinely better. But he argues the direction keeps pushing Ret toward \"spend Holy Power ASAP with little agency,\" Avenging Wrath eats a notable burst nerf, and the real story is the tier set: a solid, inoffensive 2pc paired with a 4pc that's \"one of the most controversial set bonuses in the Retribution community in recent memory\" for forcing you to use the \"wrong\" spender for the target count.",
+      "changes": [
+        "Crusading Strikes flips from −20% to +15% auto-attack speed and no longer procs off Skyfury or generates Holy Power from extra Skyfury attacks — roughly 20% more hits, decoupling Ret from needing a Shaman in group and smoothing (but flooding) Holy Power generation.",
+        "Art of War can now accumulate one extra charge (Apex Talent: Light Within Rank 1) — Bolas's favourite change; removes the awkward Holy Power loss from having to instantly spend procs. Side effect: makes Improved Blade of Justice much worse, since its use case was banking charges for procs.",
+        "Damage shuffled out of cooldowns into the core kit: Blade of Justice +40%; Templar Strike/Slash, Judgment, Hammer of Wrath all +50%; Final Verdict and Divine Storm +15%. Offsetting nerfs: Art of War's Blade of Justice bonus 150%→80%, Divine Toll's Judgment 100%→50%, Light Within Rank 3 damage −25%.",
+        "Avenging Wrath now grants +15% damage and crit (was +20%) — Bolas calls it a fairly severe nerf given Ret's AW window wasn't especially strong to begin with, though 12.1 is bringing cooldown nerfs to most specs.",
+        "Healing buffed across the board: Flash of Light, Word of Glory, and Eternal Flame all +25%. Templar's Hammer of Light now costs 3 Holy Power (was 5) but deals −30% damage (does not affect PvP)."
+      ],
+      "set2": "Divine Purpose gains an additional 10% chance to activate, and consuming it grants Divine Power — +10% Holy damage done for 12 seconds. Bolas calls it \"pretty solid and inoffensive\": a clean, uncontroversial throughput bonus.",
+      "set4": "Consuming Divine Purpose with Divine Storm grants 2 stacks of Divine Arbiter, making your next Final Verdicts unleash an AoE Holy nuke (8-yd splash) — but only if no Arbiter stacks are already active, so once you hold stacks you must spend Divine Purpose on Final Verdict (the single-target spender) instead. \"One of the most controversial set bonuses in the Retribution community in recent memory\": it forces the \"wrong\" spender for the target count, which the official feedback thread explicitly flagged as a degenerate/unintended rotation impact. Bolas thinks it misses the mark — easy to accidentally misplay and punishing when you do, yet with a low skill ceiling once learned, bucking Ret's beginner-friendly Dragonflight-era identity.",
+      "watch": "Bolas's core worry is agency: faster, smoother generation plays better moment-to-moment than 12.0's spikiness, but it pushes Ret even further toward \"dump Holy Power ASAP\" with little management to optimize. Hero Talents remain Templar-dominant (though the new set is stronger for Herald of the Sun and balance has improved), held back partly by an Instrument of Retribution bug that makes Hammer of Wrath uncastable for the rest of an Avenging Wrath if a proc was already active — minor for Templar, a big loss for Herald of the Sun. Verdict call is editorial — draft.",
+      "draft": true,
+      "source": "https://www.wowhead.com/news=382093/a-very-controversial-4-set-retribution-paladin-class-changes-and-tier-set-review"
+    },
     "metrics": [
       {
         "source": "archon",
