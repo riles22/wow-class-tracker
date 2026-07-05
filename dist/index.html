@@ -192,13 +192,19 @@
   .matrix{margin-top:6px; border:1px solid var(--edge); border-radius:12px; overflow:hidden; background:var(--bg-2)}
   .head, .row{
     display:grid;
-    grid-template-columns:minmax(150px,1.7fr) minmax(0,1fr) minmax(118px,.72fr) 64px 64px minmax(120px,1.25fr) 26px;
+    grid-template-columns:minmax(150px,1.6fr) 72px 72px minmax(104px,.85fr) minmax(118px,.72fr) minmax(110px,1.15fr) 26px;
     align-items:center; gap:12px; padding:11px 16px
   }
   .head{
     font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase;
     color:var(--ink-faint); background:var(--bg-3); border-bottom:1px solid var(--edge); position:sticky; top:0
   }
+  .hsort{font-family:inherit; font-size:inherit; letter-spacing:inherit; text-transform:inherit; color:inherit;
+    background:none; border:0; padding:0; margin:0; cursor:pointer; text-align:left; display:inline-flex; align-items:center; gap:4px}
+  .hsort:hover{color:var(--ink-dim)}
+  .hsort.on{color:var(--accent)}
+  .hsort:focus-visible{outline:2px solid var(--accent-2); outline-offset:2px; border-radius:3px}
+  .hcaret{font-size:8px; line-height:1}
   .grouphdr{
     grid-column:1/-1; font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase;
     color:var(--accent); padding:10px 16px 6px; background:linear-gradient(90deg,color-mix(in srgb,var(--accent) 9%,transparent),transparent)
@@ -436,6 +442,13 @@
       <select class="sortsel" id="fightsel" aria-label="Per-fight view"></select>
     </div>
     <div class="ctl">
+      <span class="lbl">View</span>
+      <div class="seg" id="groupseg" role="group" aria-label="Group or rank the list">
+        <button data-g="class" aria-pressed="false">Group by class</button>
+        <button data-g="rank" aria-pressed="true">Rank all</button>
+      </div>
+    </div>
+    <div class="ctl">
       <label class="lbl" for="sortsel">Sort</label>
       <select class="sortsel" id="sortsel" aria-label="Sort specs">
         <option value="class">Class</option>
@@ -549,7 +562,7 @@ function draftSrcHTML(p){
   return "";
 }
 
-const state = { source:"consensus", era:"both", role:"All", ptrOnly:false, sort:"class", q:"", fight:"" };
+const state = { source:"consensus", era:"both", role:"All", ptrOnly:false, sort:"raid", q:"", fight:"" };
 
 /* Era tagging: metrics may carry an explicit era; otherwise PTR-labeled names are ptr.
    Creator takes: patchContext mentioning "live" is live-era, everything else 12.1-ish. */
@@ -751,12 +764,12 @@ function rowHTML(s, idx){
        <span class="cbar" style="background:${color}"></span>
        <span class="spec-txt">${esc(s.spec)}</span>
      </div>
-     <div class="cls" style="color:${color}" title="${esc(s.class)}">${esc(s.class)}</div>
-     <div class="role"><span class="rolechip">${esc(s.role)}</span>${ptag}</div>
      <div class="metaline">
        <span class="mtag">Raid</span>${tierEl(ratingFor(s,"raid"), showMv ? s.movement?.raid : null)}
        <span class="mtag">M+</span>${tierEl(ratingFor(s,"mplus"), showMv ? s.movement?.mplus : null)}
      </div>
+     <div class="cls" style="color:${color}" title="${esc(s.class)}">${esc(s.class)}</div>
+     <div class="role"><span class="rolechip">${esc(s.role)}</span>${ptag}</div>
      ${state.era!=="live"?verdictEl(s):`<div class="verdict" data-v="—"><span class="dot"></span>—</div>`}
      <span class="chev">▸</span>
      ${drawerHTML(s)}
@@ -797,9 +810,9 @@ function render(){
   const ordered = sortList(filtered);
   const idxOf = new Map(SPECS.map((s,i)=>[s,i]));
 
+  const hcell = (key, label) => `<button class="hsort${state.sort===key?' on':''}" data-sort="${key}" aria-label="Sort by ${esc(label)}"${state.sort===key?' aria-pressed="true"':''}>${label}${state.sort===key?' <span class="hcaret">▾</span>':''}</button>`;
   let html = `<div class="head">
-      <div>Spec</div><div>Class</div><div>Role</div>
-      <div style="grid-column:span 2">Raid&nbsp;·&nbsp;M+</div><div>12.1 PTR</div><div></div>
+      ${hcell('spec','Spec')}${hcell('raid','Raid')}${hcell('mplus','M+')}${hcell('class','Class')}<div>Role</div>${hcell('ptr','12.1 PTR')}<div></div>
     </div>`;
 
   if(ordered.length===0){
@@ -819,6 +832,16 @@ function render(){
   const shown = ordered.length, ptrShown = ordered.filter(s=>s.ptr).length;
   document.getElementById('count').textContent = `${shown} spec${shown!==1?'s':''}${state.ptrOnly?'':` · ${ptrShown} tracked`}`;
   wireRows();
+  matrix.querySelectorAll('.hsort').forEach(b=> b.onclick = ()=> setSort(b.dataset.sort));
+}
+
+/* Single entry point for sorting — keeps the clickable headers, the Sort dropdown, and
+   the Group/Rank toggle in sync, then re-renders (header carets rebuild from state.sort). */
+function setSort(key){
+  state.sort = key;
+  const sel = document.getElementById('sortsel'); if(sel) sel.value = key;
+  document.querySelectorAll('#groupseg button').forEach(b=> b.setAttribute('aria-pressed', (b.dataset.g==='class') === (key==='class') ? 'true' : 'false'));
+  render();
 }
 
 function wireRows(){
@@ -949,7 +972,9 @@ document.getElementById('roleseg').addEventListener('click', e=>{
   render();
 });
 document.getElementById('ptronly').addEventListener('change', e=>{ state.ptrOnly = e.target.checked; render(); });
-document.getElementById('sortsel').addEventListener('change', e=>{ state.sort = e.target.value; render(); });
+document.getElementById('sortsel').value = state.sort; // sync dropdown to the rank-all default
+document.getElementById('sortsel').addEventListener('change', e=>{ setSort(e.target.value); });
+document.querySelectorAll('#groupseg button').forEach(b=> b.addEventListener('click', ()=> setSort(b.dataset.g==='class'?'class':'raid')));
 document.getElementById('search').addEventListener('input', e=>{ state.q = e.target.value.trim(); render(); });
 
 render();
