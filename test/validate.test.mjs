@@ -129,6 +129,23 @@ test("a creator's specs scope must be real specs of that class", async () => {
   assert.ok(errors.some(e => e.includes('scoped to "Shadow"') && e.includes("not a Death Knight spec")));
 });
 
+test("every take's creator must be registered for that class, within their specs scope", async () => {
+  const data = await loadData(ROOT);
+  assert.deepEqual(validateData(data), [], "real data must satisfy the authority model");
+  const broken = structuredClone(data);
+  broken.creatorTakes.takes.push({ class: "Mage", spec: "Frost", creator: "TotallyUnregistered",
+    date: "2026-07-06", claim: "x", url: "https://youtu.be/x" });
+  // an existing scoped creator attributed outside their scope
+  const scoped = broken.community.classes.flatMap(c => (c.creators ?? []).map(cr => ({ cls: c.class, cr })))
+    .find(x => Array.isArray(x.cr.specs));
+  const otherSpec = broken.specs.find(s => s.class === scoped.cls && !scoped.cr.specs.includes(s.spec));
+  broken.creatorTakes.takes.push({ class: scoped.cls, spec: otherSpec.spec, creator: scoped.cr.name,
+    date: "2026-07-06", claim: "x", url: "https://youtu.be/x" });
+  const errors = validateData(broken);
+  assert.ok(errors.some(e => e.includes('"TotallyUnregistered"') && e.includes("no Mage entry")));
+  assert.ok(errors.some(e => e.includes("outside their declared specs scope")));
+});
+
 test("a spec with an omitted ptr key is valid (same as ptr: null)", async () => {
   const data = await loadData(ROOT);
   const clone = structuredClone(data);

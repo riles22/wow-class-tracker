@@ -220,9 +220,20 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
 
   // --- creator takes (qualitative layer) ---
   const specKeys = new Set(specs.map(s => `${s.class}|${s.spec}`));
+  // Authority model: a take may only be attributed to a creator registered for that class
+  // in community.json, and within their specs scope when one is declared.
+  const creatorScope = new Map(); // "class|creator" -> specs[]|null (null = whole class)
+  for (const entry of community?.classes ?? [])
+    for (const creator of entry.creators ?? [])
+      creatorScope.set(`${entry.class}|${creator.name}`, creator.specs ?? null);
   for (const take of creatorTakes?.takes ?? []) {
     if (!specKeys.has(`${take.class}|${take.spec}`)) errors.push(`creator-takes.json: take references unknown spec ${take.class} / ${take.spec}`);
     if (!take.creator || !take.claim || !take.url) errors.push(`creator-takes.json: take for ${take.spec} needs creator + claim + url`);
+    if (take.creator && take.class) {
+      const scopeKey = `${take.class}|${take.creator}`;
+      if (!creatorScope.has(scopeKey)) errors.push(`creator-takes.json: "${take.creator}" has a ${take.class} take but no ${take.class} entry in community.json`);
+      else { const scope = creatorScope.get(scopeKey); if (scope && !scope.includes(take.spec)) errors.push(`creator-takes.json: "${take.creator}" take for ${take.class}/${take.spec} is outside their declared specs scope [${scope.join(", ")}]`); }
+    }
     isoOk(take.date, `creator-takes.json: take for ${take.spec} date`);
     if (take.url != null) {
       // Take URLs flow from untrusted transcripts through the nightly LLM into clickable

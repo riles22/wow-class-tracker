@@ -43,6 +43,15 @@
           "channelId": "UC1s_i1Gzw8My6NuEgU45btw",
           "latest": "PTR Altar of Fangs | BDK POV",
           "verifiedDate": "2026-06-27"
+        },
+        {
+          "name": "YoDaTV",
+          "credential": "Tank-focused YouTuber (State of Tanks series); takes scoped to tank specs he reviews",
+          "url": "https://www.youtube.com/@YoDaEZ",
+          "channelId": "UCZiUK-jnb84rNrCANrHsIBg",
+          "specs": [
+            "Blood"
+          ]
         }
       ],
       "altDiscords": [
@@ -108,6 +117,15 @@
           "transcribable": false,
           "latest": "Vengeance Demon Hunter Tank Guide (Icy Veins, patch 12.0.7)",
           "verifiedDate": "2026-06-15"
+        },
+        {
+          "name": "YoDaTV",
+          "credential": "Tank-focused YouTuber (State of Tanks series); takes scoped to tank specs he reviews",
+          "url": "https://www.youtube.com/@YoDaEZ",
+          "channelId": "UCZiUK-jnb84rNrCANrHsIBg",
+          "specs": [
+            "Vengeance"
+          ]
         }
       ],
       "altDiscords": [],
@@ -182,6 +200,27 @@
             "Restoration"
           ],
           "channelId": "UC8n5zBJRVelcB4wWeSmmIGA"
+        },
+        {
+          "name": "Dalaran Gaming",
+          "credential": "Class-overview YouTuber — news/patch reviews across classes; takes scoped per video",
+          "url": "https://www.youtube.com/@DalaranGaming",
+          "channelId": "UCobP8-RBCEPh4Bzsm02BNFQ",
+          "specs": [
+            "Balance",
+            "Feral",
+            "Guardian",
+            "Restoration"
+          ]
+        },
+        {
+          "name": "YoDaTV",
+          "credential": "Tank-focused YouTuber (State of Tanks series); takes scoped to tank specs he reviews",
+          "url": "https://www.youtube.com/@YoDaEZ",
+          "channelId": "UCZiUK-jnb84rNrCANrHsIBg",
+          "specs": [
+            "Guardian"
+          ]
         }
       ],
       "sites": [
@@ -266,6 +305,24 @@
             "Preservation"
           ],
           "channelId": "UC8n5zBJRVelcB4wWeSmmIGA"
+        },
+        {
+          "name": "Tettles",
+          "credential": "Balance Druid theorycrafter; occasional adjacent-class analysis, scoped",
+          "url": "https://www.youtube.com/@Tettles",
+          "channelId": "UCQxhna2XRWA_Pts6abbpEIg",
+          "specs": [
+            "Augmentation"
+          ]
+        },
+        {
+          "name": "AutomaticJak",
+          "credential": "Wowhead healer guide author — cross-class healer coverage; takes scoped to the specs he reviews",
+          "url": "https://www.youtube.com/watch?v=-kDDZC6qy5U",
+          "channelId": "UCzFK2Yn2gu20AWV1raNbiOQ",
+          "specs": [
+            "Preservation"
+          ]
         }
       ],
       "sites": [
@@ -294,6 +351,17 @@
           "url": "https://hackmd.io/@Azortharion/HunterPatch121-1",
           "latest": "Patch 12.1 / Initial Changes Breakdown (HackMD)",
           "verifiedDate": "2026-07-01"
+        },
+        {
+          "name": "Dalaran Gaming",
+          "credential": "Class-overview YouTuber — news/patch reviews across classes; takes scoped per video",
+          "url": "https://www.youtube.com/@DalaranGaming",
+          "channelId": "UCobP8-RBCEPh4Bzsm02BNFQ",
+          "specs": [
+            "Beast Mastery",
+            "Marksmanship",
+            "Survival"
+          ]
         }
       ],
       "altDiscords": [
@@ -336,6 +404,17 @@
           "transcribable": false,
           "latest": "Icy Veins Arcane Mage DPS Guide (12.0.7 Midnight), last updated 2026-06-30; Fire guide last updated 2026-06-17",
           "verifiedDate": "2026-06-30"
+        },
+        {
+          "name": "Dalaran Gaming",
+          "credential": "Class-overview YouTuber — news/patch reviews across classes; takes scoped per video",
+          "url": "https://www.youtube.com/@DalaranGaming",
+          "channelId": "UCobP8-RBCEPh4Bzsm02BNFQ",
+          "specs": [
+            "Arcane",
+            "Fire",
+            "Frost"
+          ]
         }
       ],
       "sites": [
@@ -393,6 +472,24 @@
           "transcribable": false,
           "latest": "Windwalker Monk DPS Guide (Icy Veins), updated 2026-06-15 for Patch 12.0.7",
           "verifiedDate": "2026-06-15"
+        },
+        {
+          "name": "AutomaticJak",
+          "credential": "Wowhead healer guide author — cross-class healer coverage; takes scoped to the specs he reviews",
+          "url": "https://www.youtube.com/watch?v=-kDDZC6qy5U",
+          "channelId": "UCzFK2Yn2gu20AWV1raNbiOQ",
+          "specs": [
+            "Mistweaver"
+          ]
+        },
+        {
+          "name": "YoDaTV",
+          "credential": "Tank-focused YouTuber (State of Tanks series); takes scoped to tank specs he reviews",
+          "url": "https://www.youtube.com/@YoDaEZ",
+          "channelId": "UCZiUK-jnb84rNrCANrHsIBg",
+          "specs": [
+            "Brewmaster"
+          ]
         }
       ],
       "sites": [
@@ -464,6 +561,15 @@
             "Holy"
           ],
           "channelId": "UC8n5zBJRVelcB4wWeSmmIGA"
+        },
+        {
+          "name": "AutomaticJak",
+          "credential": "Wowhead healer guide author — cross-class healer coverage; takes scoped to the specs he reviews",
+          "url": "https://www.youtube.com/watch?v=-kDDZC6qy5U",
+          "channelId": "UCzFK2Yn2gu20AWV1raNbiOQ",
+          "specs": [
+            "Holy"
+          ]
         }
       ],
       "sites": [
@@ -690,6 +796,17 @@
             "Restoration"
           ],
           "channelId": "UC8n5zBJRVelcB4wWeSmmIGA"
+        },
+        {
+          "name": "Dalaran Gaming",
+          "credential": "Class-overview YouTuber — news/patch reviews across classes; takes scoped per video",
+          "url": "https://www.youtube.com/@DalaranGaming",
+          "channelId": "UCobP8-RBCEPh4Bzsm02BNFQ",
+          "specs": [
+            "Elemental",
+            "Enhancement",
+            "Restoration"
+          ]
         }
       ],
       "sites": [
@@ -727,6 +844,15 @@
           "transcribable": false,
           "latest": "Icy Veins Warlock guides updated 12.0.7 (Affliction 2026-06-15, Demonology 2026-06-25)",
           "verifiedDate": "2026-06-25"
+        },
+        {
+          "name": "Supatease",
+          "credential": "Class-change roundups; takes scoped to specs covered in depth",
+          "url": "https://www.youtube.com/watch?v=C_aiXV_QRBs",
+          "channelId": "UCt6INY6VJraOZBVWTJKmvkQ",
+          "specs": [
+            "Affliction"
+          ]
         }
       ],
       "sites": [
@@ -794,6 +920,25 @@
           "channelId": "UCI-FRT31iq5_xoFG6ngNcpw",
           "latest": "All Mages get 2x Barrier! Blood DK Tier Reworked! Patch 12.1 PTR Update (2026-07-01)",
           "verifiedDate": "2026-07-01"
+        },
+        {
+          "name": "Supatease",
+          "credential": "Class-change roundups; takes scoped to specs covered in depth",
+          "url": "https://www.youtube.com/watch?v=C_aiXV_QRBs",
+          "channelId": "UCt6INY6VJraOZBVWTJKmvkQ",
+          "specs": [
+            "Arms",
+            "Protection"
+          ]
+        },
+        {
+          "name": "YoDaTV",
+          "credential": "Tank-focused YouTuber (State of Tanks series); takes scoped to tank specs he reviews",
+          "url": "https://www.youtube.com/@YoDaEZ",
+          "channelId": "UCZiUK-jnb84rNrCANrHsIBg",
+          "specs": [
+            "Protection"
+          ]
         }
       ],
       "altDiscords": [
