@@ -11,6 +11,6 @@
     "serve": "node src/serve.mjs"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   }
 }

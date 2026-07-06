@@ -4,6 +4,8 @@ name: Build & deploy tracker to GitHub Pages
 # dist/index.html. This workflow rebuilds from source on every push to master (so the
 # nightly wow-ptr-watch refresh, which commits + pushes, auto-deploys) and can be run
 # by hand. No dependencies to install — the build is plain Node.
+# Actions are pinned to commit SHAs (tag comments alongside) — supply-chain hygiene for
+# a workflow that runs unattended nightly.
 
 on:
   push:
@@ -11,46 +13,53 @@ on:
     paths:
       - "data/**"
       - "src/**"
+      - "test/**"
       - "package.json"
       - ".github/workflows/deploy.yml"
   workflow_dispatch:
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-# Never run two deploys at once; let the newest win.
+# One deploy at a time; per GitHub's Pages guidance, let in-flight deploys finish
+# rather than cancelling them mid-flight.
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
-          node-version: "20"
+          node-version: "22"
       - name: Validate + test data
         run: npm test
       - name: Build dist/index.html
         run: npm run build
       - name: Sanity-check the artifact exists
         run: test -s dist/index.html
+      - name: Warn if the committed dist drifted from the rebuilt one (non-fatal)
+        run: |
+          if ! git diff --quiet -- dist/index.html; then
+            echo "::warning::committed dist/index.html differs from the CI rebuild — it was likely committed from stale data or never rebuilt; the DEPLOYED site uses the fresh build, but the committed copy is misleading."
+          fi
       - name: Configure Pages (auto-enables on first run)
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
         with:
           enablement: true
       - name: Upload the built site
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
         with:
           path: dist
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.d1.outputs.page_url || steps.d2.outputs.page_url || steps.d3.outputs.page_url }}
@@ -60,7 +69,7 @@ jobs:
       # with backoff before failing the run; the first success short-circuits the rest.
       - name: Deploy to GitHub Pages (attempt 1)
         id: d1
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
         continue-on-error: true
       - name: Back off before retry
         if: steps.d1.outcome == 'failure'
@@ -68,7 +77,7 @@ jobs:
       - name: Deploy to GitHub Pages (attempt 2)
         id: d2
         if: steps.d1.outcome == 'failure'
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
         continue-on-error: true
       - name: Back off before final retry
         if: steps.d1.outcome == 'failure' && steps.d2.outcome == 'failure'
@@ -76,4 +85,4 @@ jobs:
       - name: Deploy to GitHub Pages (attempt 3, final)
         id: d3
         if: steps.d1.outcome == 'failure' && steps.d2.outcome == 'failure'
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4

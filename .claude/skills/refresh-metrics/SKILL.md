@@ -54,8 +54,10 @@ Never commit config.json (gitignored); never print the secret.
   scaling). Don't confuse 52 with 54. (52 now feeds `spec.ptrDummy` — refreshed by
   ptr-watch step 6; boss ids 3591=1T / 3590=2T / 3592=3T / 3593=5T, `aggregate=amount`
   → median rDPS. Merge via `apply-metrics.mjs` `ptrdummy` key.)
-  data; label metric names with "(12.1 PTR …)" and keep them out of live baselines.
-  Mythic zone 46 requires `size=20`; `difficulty=4` is HEROIC, Mythic is 5.
+- **PTR data stays labeled**: metric names carry "(12.1 PTR …)" AND rows carry
+  `era: "ptr"` (apply-metrics preserves it; validation enforces name↔era agreement).
+  Keep PTR series out of live baselines.
+- Live raid zone 46: Mythic requires `size=20`; `difficulty=4` is HEROIC, Mythic is 5.
 - Fight-profile labels are computed at build time (within-role percentiles) — you only
   supply raw `targets`; don't hand-write labels.
 - Healers/tanks get no Bloodmallet profiles (DPS sims only) — that's by design.

@@ -62,23 +62,33 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   The UI has an Era toggle (Both / 12.0.7 / 12.1 PTR) filtering verdicts, writeups,
   era-tagged metrics, and creator takes.
 - `fightProfile.targets` maps target count → sim DPS (best build per count). The build
-  derives ST/cleave/AoE labels (1T / 3T / 8T-with-fallbacks) as **within-role percentiles
-  across DPS specs** (≥70th = strong, ≤30th = weak) plus a row tag (AoE-lean / ST-lean /
-  All-round / Flexible / Low-sims). DPS specs only — healers/tanks have no sim basis.
+  derives ST/cleave/AoE labels (canonical counts 1/3/8; a spec missing a count gets a
+  null label) as **within-role percentiles across DPS specs** (≥70th = strong, ≤30th =
+  weak) plus a row tag (AoE-lean / ST-lean / All-round / Flexible / Low-sims; null when
+  no canonical count is comparable). DPS specs only — healers/tanks have no sim basis.
+- `ptrDummy` = real-player Dummy Dome logs (WCL zone 52): `{ source, asOf,
+  targets: {"<count>": medianRDPS} }`, merged via apply-metrics.mjs `ptrdummy` key.
+  The build computes a 0–100 composite + rank across target counts (`dummyDomeScores`
+  in render.mjs, coverage-floored) — never hand-write score/rank/perCount.
 - `ptr` is the per-spec 12.1 writeup: `{ verdict: "Positive|Mixed|Negative", theme,
-  summary, changes[], set2, set4, watch }`. Writeups distilled from Wowhead's 12.1
-  spec articles may carry `draft: true` + `source: <url>` — shown with a "draft —
-  verify verdict" chip until Riley confirms (confirming = delete the `draft` flag).
+  summary, changes[], set2, set4, watch }`. Writeups distilled from articles/posts
+  carry `draft: true` + `source: <url>` (or `sourceLabel: "<who> — Discord"` for
+  unlinkable posts) — shown with a "draft — unconfirmed verdict" chip until Riley
+  confirms (confirming = delete the `draft` flag). Validation requires provenance
+  on every draft.
 
 ### Computed at build time (never hand-written)
-- **Movement (▲▼)**: `build` compares consensus tiers + metric ranks against the latest
-  `data/history/*.json` snapshot. **Every refresh workflow ends with
-  `node src/snapshot.mjs`** (after build + verify) so the next run has a baseline.
-  A "pending"-looking zero-movement build right after a snapshot is correct behavior.
-- **12.1 outlook (↗→↘)**: from the spec's `ptr.verdict` when present, else the balance
-  of buff/nerf lines mentioning the spec in `data/ptr-builds.json` highlights; shown in
-  the verdict column with the basis in the tooltip. Extend `outlookFor` (render.mjs) to
-  fold in zone-54 PTR metrics once those start landing.
+- **Movement (▲▼)**: `build` compares consensus tiers + metric ranks + the Dummy Dome
+  composite rank against the movement baseline — the most recent `data/history/*.json`
+  snapshot that DIFFERS from the current state (`pickBaseline` in render.mjs skips
+  post-refresh snapshots identical to now, so CI rebuilds show real movement). **Every
+  refresh that changed data ends with `node src/snapshot.mjs`.** Zero movement means
+  nothing actually moved since the last change — that's honest, not broken.
+- **12.1 outlook (↗→↘)**: from the spec's CONFIRMED `ptr.verdict` when present (draft
+  verdicts are suppressed), else the balance of buff/nerf tuning lines classified by
+  `classifyHighlight` (render.mjs — resource-aware: "cooldown reduced" is a buff, and
+  the "X% (was Y%)" idiom is decided by the values). The zone-54 raid-testing rank is
+  named in the basis string for context but never drives the direction.
 - **Fight view**: `data/encounter-tiers.json` holds Archon per-boss (throughput) and
   per-dungeon (score) tiers — single-source by design, labeled as Archon in the UI; the
   Fight selector swaps the matching tier column. Refresh alongside the tier lists.
@@ -95,8 +105,10 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
 
 ### `data/sources.json` — source registry
 Kinds: `tier-list` (toggle button + consensus; needs `scale`), `metrics` (numbers in
-drawers), `notes-feed` (PTR build feed), `reference` (footer link only). Each has
-`pages[]` with `bracket`, `role`, optional `label`, `url`, `snapshot` (ISO date).
+drawers), `notes-feed` (PTR build feed), `reference` (footer link only), `community`
+(community-layer registry entries). Each has `pages[]` with `bracket`, `role`,
+optional `label`, `url`, `snapshot` (ISO date). All URLs must be https:// —
+validation enforces it (plus a citation-host allowlist on creator-take URLs).
 
 ### `data/scales.json` — tier scales + normalization
 Each scale maps tiers onto one 0–100 axis; consensus = mean of available tier-list scores
@@ -124,7 +136,7 @@ secondary spec-specific Discords (Death's Advance, Focused Will, …).
 
 ## Refresh workflows
 
-### Tier lists (Icy Veins / Method / Wowhead / Archon)
+### Tier lists (every `tier-list` source — currently Icy Veins / Method / Wowhead / Archon / WoWMeta)
 1. Fetch each page in `sources.json` live; era-verify (Midnight S1, Devourer in DPS lists).
    Archon: parse the `__NEXT_DATA__` JSON script tag from raw HTML (WebFetch markdown
    drops it); raid = throughput tierList, M+ = score tierList.
@@ -134,7 +146,9 @@ secondary spec-specific Discords (Death's Advance, Focused Will, …).
 
 ### Metrics (Warcraft Logs / Murlok / Archon numbers)
 1. WCL: zone 46 = live S1 raid (Mythic = difficulty **5**, size 20, partition 3 = 12.0.7);
-   zone 47 = M+ S1; zone **54 is the 12.1 PTR raid** — PTR data only. Statistics-table
+   zone 47 = M+ S1; zone **54 is the 12.1 PTR raid**; zone **52 is the Dummy Dome**
+   (fixed-target-count PTR dummies → `spec.ptrDummy`, see the ptr-watch skill) — PTR
+   data only, era-tagged `"ptr"`. Statistics-table
    endpoint needs `X-Requested-With: XMLHttpRequest` + browser UA + Referer; response is
    an HTML fragment with unclosed `<td>` — parse leniently. **Be a polite guest**: fetch
    each cut once, at most daily; the sanctioned long-term path is their free v2 GraphQL
@@ -163,12 +177,16 @@ auto-replace.
 
 ```
 data/     specs.json · sources.json · scales.json · ptr-builds.json · community.json ·
-          creator-takes.json  (qualitative layer — cited creator takes, never tiers)
+          creator-takes.json (qualitative layer — cited creator takes, never tiers) ·
+          encounter-tiers.json (per-boss/dungeon Archon tiers) ·
+          history/ (movement baselines written by snapshot.mjs)
 src/      build.mjs · template.html · render.mjs · normalize.mjs · validate.mjs ·
-          apply-ratings.mjs · apply-metrics.mjs · serve.mjs
-test/     normalize · validate · render (fight labels) · build
+          apply-ratings.mjs · apply-metrics.mjs · snapshot.mjs · serve.mjs
+test/     normalize · validate · render · build · apply-metrics · apply-ratings
 dist/     index.html  (generated — open directly in a browser)
+docs/     working notes (e.g. finder-audit.md)
 legacy/   original single-file tracker (pre-conversion reference)
+.github/  workflows/deploy.yml (build+deploy Pages on push) · workflows/ci.yml (tests on every push)
 .claude/skills/   refresh-tiers · refresh-metrics · ptr-watch · watch-creators
                   (each has the procedure + hard-won gotchas + a log.md memory)
 ```

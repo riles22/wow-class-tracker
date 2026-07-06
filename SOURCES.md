@@ -6,7 +6,7 @@ Every source feeding the tracker, by layer. Machine-readable registry: `data/sou
 
 ## 1 · Tier lists → the letter columns + Consensus
 
-Only these four feed the consensus. Scales are normalized via `data/scales.json`.
+Only these tier-list sources feed the consensus (five today — the table below is the list). Scales are normalized via `data/scales.json`.
 
 | Source | Scale | Lens | Cadence | Notes |
 |---|---|---|---|---|

@@ -13,7 +13,8 @@ Made by **Beefdad**. A personal project — if you fork, share, or repost it, pl
 
 ## What it shows
 
-- **Consensus tiers** from Icy Veins, Method, Wowhead, and Archon, each mapped onto one
+- **Consensus tiers** from every tier-list source in `sources.json` (currently Icy Veins,
+  Method, Wowhead, Archon, and WoWMeta), each mapped onto one
   0–100 axis and averaged — with a divergence marker where the sources disagree. A toggle
   switches from the consensus to any single source.
 - **Era toggle** — view the 12.0.7 live season, the 12.1 PTR read, or both at once.

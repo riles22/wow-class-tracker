@@ -1,6 +1,6 @@
 ---
 name: refresh-tiers
-description: Refresh the tracker's tier-list ratings from Icy Veins, Method, Wowhead, and Archon. Use when the user says "refresh tiers", "update the tier lists", "pull new rankings", or when snapshot dates in data/sources.json look stale (tier lists move weekly-ish).
+description: Refresh the tracker's tier-list ratings from every tier-list source in data/sources.json (currently Icy Veins, Method, Wowhead, Archon, WoWMeta). Use when the user says "refresh tiers", "update the tier lists", "pull new rankings", or when snapshot dates in data/sources.json look stale (tier lists move weekly-ish).
 ---
 
 # Refresh tier-list ratings
@@ -11,7 +11,8 @@ Fetch the current Midnight tier lists live and merge them into `data/specs.json`
 ## Procedure
 
 1. Read `data/sources.json` for the pages of each `kind: "tier-list"` source
-   (icyveins, method, wowhead, archon). Fan out fetch agents per source (a Workflow
+   (currently icyveins, method, wowhead, archon, wowmeta — the registry is the source
+   of truth, not this list). Fan out fetch agents per source (a Workflow
    with one agent per source works well — see the transcript of run `wf_b286902c-03c`
    for a proven prompt shape, including the era-verification requirement).
 2. Era-verify every page: "Midnight", Season 1 / 12.0.x, or Devourer DH present in DPS
@@ -20,9 +21,11 @@ Fetch the current Midnight tier lists live and merge them into `data/specs.json`
    class/spec names from `data/specs.json` to a scratch file.
 4. `node src/apply-ratings.mjs <file>` — refuses to write on unmatched rows.
 5. Update `snapshot` dates (and moved URLs) in `data/sources.json`.
-6. `npm test && npm run build`. Append a line to `.claude/skills/refresh-tiers/log.md`
-   If any data/ file changed this run, finish with `node src/snapshot.mjs` (movement baseline; loadData skips baselines identical to the current state, so ordering vs the build is safe).
-   (date · sources refreshed · notable tier movements) so the next run can diff.
+6. `npm test && npm run build`. If any data/ file changed this run, finish with
+   `node src/snapshot.mjs` (movement baseline; loadData skips baselines identical to the
+   current state, so ordering vs the build is safe). Append a line to
+   `.claude/skills/refresh-tiers/log.md` (date · sources refreshed · notable tier
+   movements) so the next run can diff.
 
 ## Gotchas (hard-won — trust these over intuition)
 
