@@ -266,12 +266,12 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-05",
+      "asOf": "2026-07-06",
       "targets": {
-        "1": 143122,
+        "1": 143881,
         "2": 210271,
         "3": 265220,
-        "5": 506458
+        "5": 509915
       }
     }
   },
@@ -431,7 +431,7 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-05",
+      "asOf": "2026-07-06",
       "targets": {
         "1": 166161,
         "2": 164117,
@@ -580,9 +580,9 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-05",
+      "asOf": "2026-07-06",
       "targets": {
-        "1": 132827,
+        "1": 127682,
         "2": 189661,
         "5": 284781
       }
@@ -745,12 +745,12 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-05",
+      "asOf": "2026-07-06",
       "targets": {
-        "1": 124325,
+        "1": 130335,
         "2": 149456,
         "3": 193943,
-        "5": 286916
+        "5": 311385
       }
     }
   },
@@ -1029,7 +1029,7 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-05",
+      "asOf": "2026-07-06",
       "targets": {
         "1": 134606,
         "2": 219164,
@@ -1179,12 +1179,12 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-05",
+      "asOf": "2026-07-06",
       "targets": {
-        "1": 148508,
+        "1": 149282,
         "2": 190683,
         "3": 268586,
-        "5": 448394
+        "5": 448922
       }
     }
   },
@@ -1555,9 +1555,9 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-05",
+      "asOf": "2026-07-06",
       "targets": {
-        "5": 225774
+        "5": 253988
       }
     }
   },
@@ -1713,12 +1713,12 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-05",
+      "asOf": "2026-07-06",
       "targets": {
         "1": 147003,
         "2": 206801,
         "3": 186968,
-        "5": 329404
+        "5": 332113
       }
     }
   },
@@ -1881,10 +1881,11 @@
         "Piercing Fangs (crit damage in Bestial Wrath) significantly nerfed, and Bloody Frenzy nerfed — both pulling power out of the burst window; core abilities buffed to compensate",
         "Kill Cleave now half as effective and Wild Instincts removed entirely, a substantial AoE nerf",
         "Beast Cleave duration up to 10s, so you no longer have to be perfect with Wild Thrash on cooldown (though casting it immediately is still best)",
-        "Net effect: a flatter power profile spread more evenly across the rotation rather than concentrated in cooldowns"
+        "Net effect: a flatter power profile spread more evenly across the rotation rather than concentrated in cooldowns",
+        "Wowhead's Tarlo corroborates the Mixed read: core buffs (Barbed Shot / Kill Command / Cobra Shot +20–25%, Beast Cleave to 10s, Hunter's Mark to 5 targets) are solid, but the Piercing Fangs redesign lands 'very bad' and BM still lacks a strong niche on big pulls or burst phases"
       ],
-      "set2": "Reads as more of an AoE boost than a single-target one.",
-      "set4": "Gives Cobra Shot a microscopic AoE splash and nudges you to weave Barbed Shot and Kill Command rather than pressing abilities back-to-back — but he expects the set will mostly play itself.",
+      "set2": "Reads as more of an AoE boost than a single-target one. Tarlo details it as Barbed Shot making pets Stomp one extra time at 50% effectiveness.",
+      "set4": "Stomp grants a Cobra Shot benefit — 20% Beast Cleave effectiveness or a 30% single-target bonus (stacking to 4). Because the 4pc reads the cosmetic Beast Cleave buff, optimal play requires manually '/cancelaura Beast Cleave' in priority-AoE, 2-target, and burst windows — Tarlo flags this as an unfortunate degenerate interaction. Azortharion expects the set will mostly play itself otherwise.",
       "watch": "Watch the AoE ceiling: with Wild Instincts gone, Kill Cleave halved, and burst power flattened into the baseline, BM's multi-target output leans on the longer Beast Cleave and the tier set to hold up.",
       "draft": true,
       "source": "https://hackmd.io/@Azortharion/HunterPatch121-1"
@@ -2010,12 +2011,12 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-05",
+      "asOf": "2026-07-06",
       "targets": {
         "1": 163415,
         "2": 219877,
         "3": 259492,
-        "5": 366742
+        "5": 370398
       }
     }
   },
@@ -2176,7 +2177,7 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-05",
+      "asOf": "2026-07-06",
       "targets": {
         "1": 108589,
         "5": 227703
@@ -2336,7 +2337,7 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-05",
+      "asOf": "2026-07-06",
       "targets": {
         "1": 157421,
         "5": 378150
@@ -2484,12 +2485,12 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-05",
+      "asOf": "2026-07-06",
       "targets": {
-        "1": 132073,
+        "1": 135765,
         "2": 233520,
         "3": 148960,
-        "5": 405391
+        "5": 404501
       }
     }
   },
@@ -2646,12 +2647,12 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-05",
+      "asOf": "2026-07-06",
       "targets": {
-        "1": 100499,
+        "1": 102577,
         "2": 118755,
         "3": 178672,
-        "5": 301085
+        "5": 337375
       }
     }
   },
@@ -2796,11 +2797,11 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-05",
+      "asOf": "2026-07-06",
       "targets": {
-        "1": 136767,
+        "1": 136921,
         "2": 272954,
-        "5": 410786
+        "5": 411107
       }
     }
   },
@@ -3200,7 +3201,7 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-05",
+      "asOf": "2026-07-06",
       "targets": {
         "1": 149801,
         "2": 216286,
@@ -3628,7 +3629,7 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-05",
+      "asOf": "2026-07-06",
       "targets": {
         "1": 142037,
         "2": 217380,
@@ -4046,7 +4047,7 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-05",
+      "asOf": "2026-07-06",
       "targets": {
         "1": 110777,
         "2": 173488,
@@ -4213,7 +4214,7 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-05",
+      "asOf": "2026-07-06",
       "targets": {
         "1": 121550,
         "3": 199680,
@@ -4375,7 +4376,7 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-05",
+      "asOf": "2026-07-06",
       "targets": {
         "1": 125505,
         "3": 206439,
@@ -4536,7 +4537,7 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-05",
+      "asOf": "2026-07-06",
       "targets": {
         "1": 112345,
         "3": 159592,
@@ -4685,9 +4686,9 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-05",
+      "asOf": "2026-07-06",
       "targets": {
-        "1": 132459,
+        "1": 132227,
         "2": 170540,
         "3": 252941,
         "5": 494796
@@ -4851,7 +4852,7 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-05",
+      "asOf": "2026-07-06",
       "targets": {
         "1": 135751,
         "2": 200891,
@@ -5133,7 +5134,7 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-05",
+      "asOf": "2026-07-06",
       "targets": {
         "1": 109167,
         "2": 167551,
@@ -5283,12 +5284,12 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-05",
+      "asOf": "2026-07-06",
       "targets": {
-        "1": 143081,
+        "1": 140853,
         "2": 328201,
         "3": 316867,
-        "5": 431564
+        "5": 431060
       }
     }
   },
@@ -5433,9 +5434,9 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-05",
+      "asOf": "2026-07-06",
       "targets": {
-        "1": 104793,
+        "1": 100168,
         "2": 197904,
         "3": 173086,
         "5": 328058
@@ -5599,12 +5600,12 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-05",
+      "asOf": "2026-07-06",
       "targets": {
-        "1": 114974,
+        "1": 116360,
         "2": 221181,
         "3": 336270,
-        "5": 376192
+        "5": 372880
       }
     }
   },
@@ -5765,7 +5766,7 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-05",
+      "asOf": "2026-07-06",
       "targets": {
         "1": 123684,
         "5": 314152
