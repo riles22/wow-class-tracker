@@ -40,7 +40,7 @@ locally, and distill them into cited per-spec takes in `data/creator-takes.json`
    note it in the run log for a human to widen the scope — don't silently override.
 4. Supersede: when a creator posts a newer take on the same spec, mark older ones
    `superseded: true` rather than deleting.
-5. `npm test && npm run build`; append date · videos processed · takes added to `log.md`.
+5. `npm test && npm run build`; append date · videos processed · takes added to `log.md`. If any data/ file changed this run, finish with `node src/snapshot.mjs` (movement baseline; loadData skips baselines identical to the current state, so ordering vs the build is safe).
 
 ## Gotchas
 

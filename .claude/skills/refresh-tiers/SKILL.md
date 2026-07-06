@@ -21,6 +21,7 @@ Fetch the current Midnight tier lists live and merge them into `data/specs.json`
 4. `node src/apply-ratings.mjs <file>` — refuses to write on unmatched rows.
 5. Update `snapshot` dates (and moved URLs) in `data/sources.json`.
 6. `npm test && npm run build`. Append a line to `.claude/skills/refresh-tiers/log.md`
+   If any data/ file changed this run, finish with `node src/snapshot.mjs` (movement baseline; loadData skips baselines identical to the current state, so ordering vs the build is safe).
    (date · sources refreshed · notable tier movements) so the next run can diff.
 
 ## Gotchas (hard-won — trust these over intuition)

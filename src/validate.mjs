@@ -197,13 +197,20 @@ export async function loadData(root) {
     read("community.json"), read("ptr-builds.json"), read("creator-takes.json"),
     read("encounter-tiers.json")
   ]);
-  // latest movement baseline from data/history/ (optional — absent before first snapshot)
-  let historySnapshot = null;
+  // Movement baselines from data/history/, newest first (capped — baselines past the first
+  // that differs are never consulted). A missing directory means "no history yet"; any
+  // OTHER failure (unreadable/corrupt JSON) throws — a corrupt history file must error,
+  // not silently zero the movement feature.
+  let historySnapshots = [];
   try {
-    const files = (await readdir(path.join(root, "data", "history"))).filter(f => f.endsWith(".json")).sort();
-    if (files.length) historySnapshot = JSON.parse(await readFile(path.join(root, "data", "history", files.at(-1)), "utf8"));
-  } catch { /* no history yet */ }
-  return { specs, sources, scales, community, ptrBuilds, creatorTakes, encounterTiers, historySnapshot };
+    const dir = path.join(root, "data", "history");
+    const files = (await readdir(dir)).filter(f => f.endsWith(".json")).sort().reverse().slice(0, 30);
+    historySnapshots = await Promise.all(files.map(async f => JSON.parse(await readFile(path.join(dir, f), "utf8"))));
+  } catch (error) {
+    if (error?.code !== "ENOENT") throw error;
+  }
+  return { specs, sources, scales, community, ptrBuilds, creatorTakes, encounterTiers,
+           historySnapshot: historySnapshots[0] ?? null, historySnapshots };
 }
 
 const isMain = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);

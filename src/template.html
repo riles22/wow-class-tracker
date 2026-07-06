@@ -704,7 +704,7 @@ function ptrDummyHTML(s){
   const covN = d.coverage ? `${d.coverage.have}/${d.coverage.of} targets` : "";
   const ranked = (typeof d.score === "number" && d.rank);
   const headRow = ranked
-    ? `<div class="setrow"><span class="pc">Score</span><span class="pct"><b style="font-size:15px">${d.score}</b><span class="mnote"> /100 pctile</span> &nbsp;·&nbsp; <b style="color:var(--accent-2)">#${d.rank}</b>/${d.of} DPS <span class="mnote">· ${esc(covN)}</span>${perCount?`<span class="mnote" style="display:block;margin-top:3px">per-target percentile: ${esc(perCount)}</span>`:""}</span></div>`
+    ? `<div class="setrow"><span class="pc">Score</span><span class="pct"><b style="font-size:15px">${d.score}</b><span class="mnote"> /100 pctile</span> &nbsp;·&nbsp; <b style="color:var(--accent-2)">#${d.rank}</b>/${d.of} DPS${d.rankDelta?` <span class="mv" data-d="${d.rankDelta>0?'up':'down'}" title="composite rank ${d.rankDelta>0?'climbed':'fell'} ${Math.abs(d.rankDelta)} since ${esc(d.since||"last snapshot")}">${d.rankDelta>0?'▲':'▼'}${Math.abs(d.rankDelta)}</span>`:""} <span class="mnote">· ${esc(covN)}</span>${perCount?`<span class="mnote" style="display:block;margin-top:3px">per-target percentile: ${esc(perCount)}</span>`:""}</span></div>`
     : (perCount ? `<div class="setrow"><span class="pc">Percentiles</span><span class="pct">${esc(perCount)} <span class="mnote">· only ${esc(covN)} logged — no composite rank</span></span></div>` : "");
   return `<div class="srcbreak"><p class="d-h">PTR numbers · Dummy Dome <span class="mnote" style="text-transform:none;letter-spacing:0">real-player logs · across target counts</span></p>
     <div class="setbox">${headRow}

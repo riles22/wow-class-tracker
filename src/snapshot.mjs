@@ -6,26 +6,16 @@ import { writeFile, mkdir } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { loadData } from "./validate.mjs";
-import { buildPayload } from "./render.mjs";
+import { buildPayload, snapshotStateOf } from "./render.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
 export async function snapshot(root = ROOT, date = new Date().toISOString().slice(0, 10)) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) throw new Error(`snapshot date must be YYYY-MM-DD, got "${date}"`);
   const payload = buildPayload(await loadData(root));
-  const snap = { date, specs: {} };
-  for (const s of payload.specs) {
-    snap.specs[`${s.class}|${s.spec}`] = {
-      consensus: {
-        raid: s.consensus?.raid?.tier ?? null,
-        mplus: s.consensus?.mplus?.tier ?? null
-      },
-      ranks: Object.fromEntries(
-        // Key includes source so two same-(bracket,name) metrics don't collide (must
-        // match the movement lookup key in render.mjs movementFor).
-        (s.metrics ?? []).filter(m => m.rank != null).map(m => [`${m.source}|${m.bracket}|${m.name}`, m.rank])
-      )
-    };
-  }
+  // snapshotStateOf is shared with the movement reader (render.mjs pickBaseline/movementFor)
+  // so the stored key format can never drift from the lookup.
+  const snap = { date, specs: snapshotStateOf(payload.specs) };
   const dir = path.join(root, "data", "history");
   await mkdir(dir, { recursive: true });
   const outPath = path.join(dir, `${date}.json`);
@@ -35,6 +25,11 @@ export async function snapshot(root = ROOT, date = new Date().toISOString().slic
 
 const isMain = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
 if (isMain) {
-  const result = await snapshot(ROOT, process.argv[2] || undefined);
-  console.log(`✓ snapshot → ${result.outPath} (${result.specs} specs)`);
+  try {
+    const result = await snapshot(ROOT, process.argv[2] || undefined);
+    console.log(`✓ snapshot → ${result.outPath} (${result.specs} specs)`);
+  } catch (error) {
+    console.error("✗ " + error.message);
+    process.exit(1);
+  }
 }

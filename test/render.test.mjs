@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { fightLabels, metricRanks, outlookFor, movementFor } from "../src/render.mjs";
+import { fightLabels, metricRanks, outlookFor, movementFor, snapshotStateOf, pickBaseline } from "../src/render.mjs";
 
 test("outlookFor: verdict wins; tuning-line balance covers writeup-less specs", () => {
   const builds = { builds: [{
@@ -76,6 +76,51 @@ test("movementFor keys rank deltas by source, so same-name metrics don't collide
   movementFor(specs, scales, snap);
   assert.equal(specs[0].metrics[0].rankDelta, 2);        // WCL 5 → 3 climbed 2
   assert.equal(specs[0].metrics[1].rankDelta, undefined); // SimC 1 → 1 unchanged, no false delta
+});
+
+test("snapshotStateOf round-trips into movementFor (shared key format cannot drift)", () => {
+  const scales = { consensus: { bands: [{ tier: "S", min: 88 }, { tier: "A", min: 58 }, { tier: "B", min: 0 }] } };
+  const spec = {
+    class: "C", spec: "S", role: "DPS",
+    consensus: { raid: { tier: "A" }, mplus: { tier: "B" } },
+    metrics: [{ source: "warcraftlogs", bracket: "raid", name: "Median rDPS", value: 100, rank: 4 }],
+    ptrDummy: { rank: 7, of: 23, score: 61, targets: { "1": 1 } }
+  };
+  // Snapshot the state exactly as snapshot.mjs would, then move the world and re-compare.
+  const snap = { date: "2026-07-01", specs: snapshotStateOf([spec]) };
+  assert.equal(snap.specs["C|S"].ranks["warcraftlogs|raid|Median rDPS"], 4);
+  assert.deepEqual(snap.specs["C|S"].dummy, { rank: 7, score: 61 });
+  const moved = {
+    ...spec,
+    consensus: { raid: { tier: "S" }, mplus: { tier: "B" } },
+    metrics: [{ source: "warcraftlogs", bracket: "raid", name: "Median rDPS", value: 120, rank: 1 }],
+    ptrDummy: { rank: 3, of: 23, score: 74, targets: { "1": 1 } }
+  };
+  movementFor([moved], scales, snap);
+  assert.deepEqual(moved.movement, { raid: { delta: 1, was: "A", since: "2026-07-01" } });
+  assert.equal(moved.metrics[0].rankDelta, 3);
+  assert.equal(moved.ptrDummy.rankDelta, 4); // climbed 7 → 3
+  assert.equal(moved.ptrDummy.since, "2026-07-01");
+});
+
+test("pickBaseline skips snapshots identical to the present state (post-refresh snapshots)", () => {
+  const spec = {
+    class: "C", spec: "S", role: "DPS",
+    consensus: { raid: { tier: "A" }, mplus: { tier: "B" } },
+    metrics: [{ source: "x", bracket: "raid", name: "M", value: 1, rank: 2 }]
+  };
+  const identical = { date: "2026-07-06", specs: snapshotStateOf([spec]) };            // the CI-rebuild case
+  const older = { date: "2026-07-04", specs: { "C|S": { consensus: { raid: "B", mplus: "B" }, ranks: { "x|raid|M": 5 } } } };
+  // Newest matches current state → must fall through to the older, differing baseline.
+  assert.equal(pickBaseline([spec], [identical, older]), older);
+  // Only identical snapshots → no usable baseline (honest zero movement).
+  assert.equal(pickBaseline([spec], [identical]), null);
+  // No history at all.
+  assert.equal(pickBaseline([spec], []), null);
+  // An old snapshot that predates the dummy section is compared without it (not "different" by absence).
+  const preDummySpec = { ...spec, ptrDummy: { rank: 5, of: 23, score: 50, targets: { "1": 1 } } };
+  const preDummySnap = { date: "2026-07-01", specs: snapshotStateOf([spec]) }; // no dummy stored
+  assert.equal(pickBaseline([preDummySpec], [preDummySnap]), null, "dummy-only additions must not fake a baseline diff");
 });
 
 test("metricRanks ranks within (role, bracket, metric name), #1 = highest", () => {

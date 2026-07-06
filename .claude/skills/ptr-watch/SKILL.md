@@ -55,8 +55,10 @@ say so and change nothing.
    earn a ranked composite). The composite score/rank + per-target percentiles are computed
    at build time (`dummyDomeScores` in render.mjs) — never hand-write them. Empty/unchanged
    = normal; skip silently.
-7. `npm test && npm run build`. Append to `log.md`: date · builds found · zone-54 state ·
-   zone-52 (Dummy Dome) state.
+7. `npm test && npm run build`. If any `data/` file changed this run, also run
+   `node src/snapshot.mjs` (movement baseline; loadData skips baselines identical to the
+   current state, so ordering vs the build is safe). Append to `log.md`: date · builds
+   found · zone-54 state · zone-52 (Dummy Dome) state.
 
 ## Gotchas
 

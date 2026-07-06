@@ -172,8 +172,57 @@ export function outlookFor(spec, ptrBuilds) {
   };
 }
 
-/* Movement vs the latest data/history snapshot: consensus-tier steps per bracket
-   (positive delta = improved) and per-metric rank deltas (positive = climbed). */
+/* The comparable state a snapshot stores for one build — shared by snapshot.mjs (writer)
+   and pickBaseline/movementFor (readers) so the key format can never drift. */
+export function snapshotStateOf(specs) {
+  const out = {};
+  for (const s of specs) {
+    const entry = {
+      consensus: {
+        raid: s.consensus?.raid?.tier ?? null,
+        mplus: s.consensus?.mplus?.tier ?? null
+      },
+      ranks: Object.fromEntries(
+        // Key includes source so two same-(bracket,name) metrics don't collide.
+        (s.metrics ?? []).filter(m => m.rank != null).map(m => [`${m.source}|${m.bracket}|${m.name}`, m.rank])
+      )
+    };
+    if (s.ptrDummy?.rank != null) entry.dummy = { rank: s.ptrDummy.rank, score: s.ptrDummy.score ?? null };
+    out[`${s.class}|${s.spec}`] = entry;
+  }
+  return out;
+}
+
+/* Movement baseline: the most recent snapshot whose stored state DIFFERS from the present
+   state. Refresh workflows snapshot AFTER refreshing, so the newest snapshot equals the
+   just-refreshed data — a degenerate baseline that can never show movement (every CI
+   rebuild deployed zero arrows). Skipping identical snapshots restores "movement since
+   the last change" regardless of workflow ordering. Sections a snapshot predates (e.g.
+   dummy on older files) are ignored, not treated as differences. */
+export function pickBaseline(specs, snapshots) {
+  const now = snapshotStateOf(specs);
+  for (const snap of snapshots ?? []) {
+    if (snap?.specs && baselineDiffers(now, snap.specs)) return snap;
+  }
+  return null;
+}
+function baselineDiffers(now, then) {
+  const anyDummy = Object.values(then).some(e => e && e.dummy);
+  const keys = new Set([...Object.keys(now), ...Object.keys(then)]);
+  for (const k of keys) {
+    const a = now[k], b = then[k];
+    if (!a || !b) return true;
+    if (a.consensus.raid !== (b.consensus?.raid ?? null) || a.consensus.mplus !== (b.consensus?.mplus ?? null)) return true;
+    const ar = a.ranks ?? {}, br = b.ranks ?? {};
+    for (const r of new Set([...Object.keys(ar), ...Object.keys(br)])) if (ar[r] !== br[r]) return true;
+    if (anyDummy && (a.dummy?.rank ?? null) !== (b.dummy?.rank ?? null)) return true;
+  }
+  return false;
+}
+
+/* Movement vs the chosen baseline snapshot: consensus-tier steps per bracket
+   (positive delta = improved), per-metric rank deltas, and the Dummy Dome
+   composite rank delta (positive = climbed). */
 export function movementFor(specs, scales, snapshot) {
   if (!snapshot?.specs) return specs;
   const bandIdx = new Map(scales.consensus.bands.map((b, i) => [b.tier, i]));
@@ -194,6 +243,9 @@ export function movementFor(specs, scales, snapshot) {
       const was = prev.ranks?.[`${m.source}|${m.bracket}|${m.name}`];
       if (was != null && m.rank != null && was !== m.rank) m.rankDelta = was - m.rank;
     }
+    if (prev.dummy?.rank != null && s.ptrDummy?.rank != null && prev.dummy.rank !== s.ptrDummy.rank) {
+      s.ptrDummy = { ...s.ptrDummy, rankDelta: prev.dummy.rank - s.ptrDummy.rank, since: snapshot.date };
+    }
   }
   return specs;
 }
@@ -207,11 +259,12 @@ export function latestSnapshot(sources) {
   return dates.at(-1) ?? null;
 }
 
-export function buildPayload({ specs, sources, scales, community, ptrBuilds, creatorTakes, encounterTiers, historySnapshot }) {
-  const decorated = movementFor(
-    dummyDomeScores(metricRanks(fightLabels(decorateSpecs(specs, sources, scales)))),
-    scales, historySnapshot
-  );
+export function buildPayload({ specs, sources, scales, community, ptrBuilds, creatorTakes, encounterTiers, historySnapshot, historySnapshots }) {
+  const scored = dummyDomeScores(metricRanks(fightLabels(decorateSpecs(specs, sources, scales))));
+  // Prefer the full history (skip snapshots identical to the present state); fall back to
+  // the single-snapshot param for callers/tests that pass one directly.
+  const baseline = historySnapshots ? pickBaseline(scored, historySnapshots) : (historySnapshot ?? null);
+  const decorated = movementFor(scored, scales, baseline);
   for (const spec of decorated) {
     const outlook = outlookFor(spec, ptrBuilds);
     if (outlook) spec.outlook = outlook;
@@ -235,7 +288,7 @@ export function buildPayload({ specs, sources, scales, community, ptrBuilds, cre
       trackedCount: specs.filter(spec => spec.ptr).length,
       latestSnapshot: latestSnapshot(sources),
       latestPtrBuild: latestBuild,
-      movementSince: historySnapshot?.date ?? null
+      movementSince: baseline?.date ?? null
     }
   };
 }
