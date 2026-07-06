@@ -1,0 +1,74 @@
+# Cloud routine: nightly tracker refresh (machine-off automation)
+
+Setup lives at **claude.ai/code/routines** → New routine. Settings:
+
+| Setting | Value |
+|---|---|
+| Repository | `riles22/wow-class-tracker` (authorize the GitHub App when asked) |
+| **Branch pushes** | **Enable "Allow unrestricted branch pushes"** for this repo — the pipeline requires pushes to `master` (default is `claude/`-prefixed branches only, which would strand the deploy) |
+| Environment | Network access ON (default); no setup script needed (`pip install -U yt-dlp` happens in-run) |
+| Trigger | Schedule → Daily → 3:10 AM local |
+| After saving | **Run once immediately** — the first run doubles as the cloud-connectivity test |
+
+The local `wow-ptr-watch` scheduled task should be **disabled** once the cloud routine's
+first run succeeds (two independent pushers risk duplicate takes); keep it for manual runs.
+
+## Routine prompt (paste verbatim)
+
+You maintain the WoW Midnight 12.1 PTR spec tracker in riles22/wow-class-tracker (this
+cloud session has the repo checked out; run `git pull origin master` first and work on
+master). The public site riles22.github.io/wow-class-tracker auto-deploys from master via
+the repo's GitHub Actions.
+
+Read CLAUDE.md (the project contract) before acting. The refresh skills live in the repo
+at .claude/skills/ — ptr-watch, watch-creators, refresh-tiers, refresh-metrics — each
+SKILL.md has the exact procedure, verified fetch recipes, and hard-won gotchas; follow
+them exactly.
+
+Every run:
+
+1. PTR watch (.claude/skills/ptr-watch/SKILL.md): Wowhead news RSS + the official forum
+   thread (URL in data/ptr-builds.json) for PTR builds newer than the newest logged one;
+   Warcraft Logs zone 54 (PTR raid testing) and zone 52 (Dummy Dome) with the skill's
+   change detection (re-ingest only when total parse counts increased); distill new spec
+   writeups per the auto-confirm policy — faithful distillation of the SOURCE's verdict,
+   mandatory source URL or sourceLabel.
+
+2. Creators watch (.claude/skills/watch-creators/SKILL.md): poll the creator YouTube RSS
+   feeds in data/community.json, title-filter for Midnight/12.1 relevance, fetch
+   transcripts with yt-dlp (install first: `python3 -m pip install -U yt-dlp`), distill
+   cited per-spec takes. CLOUD CAVEAT: YouTube may bot-block datacenter IPs. If transcript
+   downloads fail after the skill's normal retries, do NOT hammer — record the new video
+   IDs as "pending (cloud IP blocked)" in the skill's log.md, skip their distillation, and
+   say so in the report.
+
+3. Weekly freshness: if the newest tier-list `snapshot` date in data/sources.json is more
+   than 6 days old, also run .claude/skills/refresh-tiers/SKILL.md; if the newest live
+   (non-PTR) metric `asOf` in data/specs.json is more than 6 days old, also run
+   .claude/skills/refresh-metrics/SKILL.md. The WCL API credentials file is NOT available
+   in this environment (gitignored) — use the skills' HTML recipes with polite-guest
+   etiquette.
+
+4. Run `npm test && npm run build`. If either fails: `git checkout -- data/ dist/`, report
+   the failure with the error output, and do NOT commit or push.
+
+5. If any data/ file changed this run: `node src/snapshot.mjs`, then stage EXPLICITLY —
+   `git add data/ dist/ ".claude/skills/*/log.md"` (never `git add -A`) — commit with a
+   concise one-line summary ("Nightly refresh <date>: <what changed>"), ending the message
+   with: Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>
+   Then push to master. If the push is rejected, `git pull --rebase` once and push again;
+   if it still fails, report it — NEVER force-push or rewrite history. If only the skill
+   logs changed, commit and push "Nightly refresh <date>: no updates" the same way.
+
+6. Finish with a report: builds found · zone-54 and zone-52 state · videos processed and
+   takes added · weekly refreshes run (or skipped as fresh) · whether you pushed · and a
+   CLOUD CONNECTIVITY section listing each endpoint you hit and whether it worked from
+   this environment (Wowhead RSS, Blizzard forum JSON, WCL statistics, YouTube RSS,
+   yt-dlp transcripts, tier-list pages when refreshed).
+
+Hard rules (also in CLAUDE.md): all game data is fetched live, never from model memory —
+Midnight postdates every model's training cutoff, so anything unfetchable stays absent
+rather than guessed; if nothing is new anywhere, change no data; never hand-edit
+dist/index.html; PTR-quality data stays era-labeled and out of live baselines; creator
+takes are cited opinion and never move a tier; be a polite guest (single fetches, sleep
+between yt-dlp requests, backoff on 404s instead of hammering).
