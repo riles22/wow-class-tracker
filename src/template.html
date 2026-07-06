@@ -57,7 +57,7 @@
   .starfield{position:absolute; inset:0; pointer-events:none; opacity:.7}
   .masthead-inner{position:relative; max-width:1120px; margin:0 auto; padding:34px 20px 26px}
   .eyebrow{
-    font-family:var(--mono); font-size:11.5px; letter-spacing:.28em; text-transform:uppercase;
+    font-family:var(--mono); font-size:11px; letter-spacing:.28em; text-transform:uppercase;
     color:var(--accent); margin:0 0 12px
   }
   .title{
@@ -72,10 +72,10 @@
     background-size:220% 100%; animation:sweep 7s linear infinite
   }
   @keyframes sweep{to{background-position:220% 0}}
-  .sub{color:var(--ink-dim); max-width:70ch; margin:0; font-size:14.5px}
+  .sub{color:var(--ink-dim); max-width:70ch; margin:0; font-size:14px}
   .sub b{color:var(--ink); font-weight:600}
   .stamp{
-    font-family:var(--mono); font-size:11.5px; color:var(--ink-faint);
+    font-family:var(--mono); font-size:11px; color:var(--ink-faint);
     margin-top:14px; display:flex; gap:8px 18px; flex-wrap:wrap
   }
   .stamp b{color:var(--ink-dim); font-weight:500}
@@ -123,20 +123,20 @@
     background:var(--bg-2); border:1px solid var(--edge); border-radius:8px; padding:7px 9px; cursor:pointer
   }
   .sortsel:focus-visible{outline:2px solid var(--accent-2); outline-offset:2px}
-  .count{font-family:var(--mono); font-size:11.5px; color:var(--ink-faint); white-space:nowrap}
-  .lbl{font-family:var(--mono); font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-faint); margin-right:-6px}
+  .count{font-family:var(--mono); font-size:11px; color:var(--ink-faint); white-space:nowrap}
+  .lbl{font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-faint); margin-right:-6px}
 
   /* ---------- legend ---------- */
   .legend{
     display:flex; gap:10px 22px; flex-wrap:wrap; align-items:center;
-    padding:14px 0 6px; font-size:12px; color:var(--ink-faint)
+    padding:12px 0 8px; font-size:12px; color:var(--ink-faint)
   }
   .legend .grp{display:flex; gap:9px; align-items:center; flex-wrap:wrap}
   .legend .note{max-width:52ch; line-height:1.45}
 
   /* ---------- tier + verdict badges ---------- */
   .tier{
-    font-family:var(--mono); font-weight:700; font-size:12.5px; letter-spacing:.02em;
+    font-family:var(--mono); font-weight:700; font-size:12px; letter-spacing:.02em;
     display:inline-flex; align-items:center; justify-content:center; min-width:30px; height:24px;
     padding:0 7px; border-radius:6px; border:1px solid transparent
   }
@@ -155,19 +155,18 @@
   .tind{display:inline-flex; align-items:center; gap:3px; min-width:0}
   .tscore{display:block; height:3px; border-radius:3px; background:var(--bg-3); overflow:hidden}
   .tscore > i{display:block; height:100%; border-radius:3px; background:linear-gradient(90deg,var(--accent),var(--accent-2))}
-  .divdot{
-    width:7px; height:7px; border-radius:50%; flex:none;
-    background:var(--v-mix); box-shadow:0 0 8px var(--v-mix)
-  }
+  /* divergence marker: a ± glyph, not a bare dot — the shape carries the meaning for
+     color-blind users, grayscale, and touch (WCAG 1.4.1); amber is reinforcement only */
+  .divmark{font-family:var(--mono); font-weight:700; font-size:11px; color:var(--v-mix); cursor:help; flex:none; line-height:1}
 
   /* ---------- fight-profile chips + metric notes ---------- */
   .ptag{
-    font-family:var(--mono); font-size:10px; letter-spacing:.05em; white-space:nowrap;
+    font-family:var(--mono); font-size:11px; letter-spacing:.05em; white-space:nowrap;
     padding:2px 6px; border-radius:5px; margin-left:auto;
     border:1px solid var(--edge-2); color:var(--ink-dim)
   }
   .fchips{display:flex; gap:6px; flex-wrap:wrap; align-items:center}
-  .fchip{font-family:var(--mono); font-size:10.5px; padding:2px 7px; border-radius:5px; border:1px solid var(--edge-2); color:var(--ink-dim)}
+  .fchip{font-family:var(--mono); font-size:11px; padding:2px 7px; border-radius:5px; border:1px solid var(--edge-2); color:var(--ink-dim)}
   .fchip[data-l="strong"]{color:var(--v-pos); border-color:color-mix(in srgb,var(--v-pos) 42%,transparent); background:color-mix(in srgb,var(--v-pos) 9%,transparent)}
   .fchip[data-l="weak"]{color:var(--v-neg); border-color:color-mix(in srgb,var(--v-neg) 42%,transparent); background:color-mix(in srgb,var(--v-neg) 9%,transparent)}
   .mnote{color:var(--ink-faint); font-size:11px}
@@ -175,14 +174,14 @@
   .olk[data-d="up"]{color:var(--v-pos)}
   .olk[data-d="down"]{color:var(--v-neg)}
   .olk[data-d="flat"]{color:var(--ink-faint)}
-  .mv{font-size:9.5px; margin-left:2px; cursor:help}
+  .mv{font-size:11px; margin-left:2px; cursor:help}
   .mv[data-d="up"]{color:var(--v-pos)}
   .mv[data-d="down"]{color:var(--v-neg)}
   .metrics{margin-top:12px}
   .metrics .setbox{margin-bottom:10px}
   .metrics .pct b{color:var(--ink); font-weight:600}
 
-  .verdict{font-family:var(--mono); font-size:11.5px; font-weight:500; display:inline-flex; align-items:center; gap:6px; white-space:nowrap}
+  .verdict{font-family:var(--mono); font-size:11px; font-weight:500; display:inline-flex; align-items:center; gap:6px; white-space:nowrap}
   .dot{width:8px; height:8px; border-radius:50%; flex:none; box-shadow:0 0 8px currentColor}
   .verdict[data-v="Positive"]{color:var(--v-pos)}
   .verdict[data-v="Mixed"]   {color:var(--v-mix)}
@@ -191,15 +190,18 @@
   .verdict[data-v="—"] .dot{background:var(--edge-2); box-shadow:none}
 
   /* ---------- matrix ---------- */
-  .matrix{margin-top:6px; border:1px solid var(--edge); border-radius:12px; overflow:hidden; background:var(--bg-2)}
+  /* overflow:clip (NOT hidden): hidden creates a scroll container, which silently kills
+     position:sticky for the column header and group headers; clip just trims the radius. */
+  .matrix{margin-top:6px; border:1px solid var(--edge); border-radius:12px; overflow:clip; background:var(--bg-2)}
   .head, .row{
     display:grid;
     grid-template-columns:minmax(150px,1.6fr) 72px 72px minmax(104px,.85fr) minmax(118px,.72fr) minmax(110px,1.15fr) 26px;
-    align-items:center; gap:12px; padding:11px 16px
+    align-items:center; gap:12px; padding:12px 16px
   }
   .head{
-    font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase;
-    color:var(--ink-faint); background:var(--bg-3); border-bottom:1px solid var(--edge); position:sticky; top:0
+    font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--ink-faint); background:var(--bg-3); border-bottom:1px solid var(--edge);
+    position:sticky; top:var(--controls-h, 0px); z-index:6
   }
   .hsort{font-family:inherit; font-size:inherit; letter-spacing:inherit; text-transform:inherit; color:inherit;
     background:none; border:0; padding:0; margin:0; cursor:pointer; text-align:left; display:inline-flex; align-items:center; gap:4px}
@@ -209,7 +211,10 @@
   .hcaret{font-size:8px; line-height:1}
   .grouphdr{
     grid-column:1/-1; font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase;
-    color:var(--accent); padding:10px 16px 6px; background:linear-gradient(90deg,color-mix(in srgb,var(--accent) 9%,transparent),transparent)
+    color:var(--accent); padding:10px 16px 6px;
+    background-color:var(--bg-2); /* opaque when stuck — rows must not show through */
+    background-image:linear-gradient(90deg,color-mix(in srgb,var(--accent) 9%,transparent),transparent);
+    position:sticky; top:calc(var(--controls-h, 0px) + var(--head-h, 0px)); z-index:5
   }
   .row{border-bottom:1px solid var(--edge); transition:background .12s}
   .row:last-child{border-bottom:0}
@@ -219,10 +224,10 @@
   .spec-name{display:flex; align-items:center; gap:10px; min-width:0}
   .cbar{width:4px; height:20px; border-radius:3px; flex:none}
   .spec-txt{font-weight:600; color:var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
-  .newbadge{font-family:var(--mono); font-size:8.5px; font-weight:700; letter-spacing:.09em; color:#160a24; background:var(--gold); border-radius:4px; padding:2px 5px; margin-left:-2px; flex:none; cursor:help; align-self:center}
-  .cls{font-family:var(--mono); font-size:12.5px; color:var(--ink-dim); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0}
+  .newbadge{font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:.09em; color:#160a24; background:var(--gold); border-radius:4px; padding:2px 5px; margin-left:-2px; flex:none; cursor:help; align-self:center}
+  .cls{font-family:var(--mono); font-size:12px; color:var(--ink-dim); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0}
   .role{font-size:12px; color:var(--ink-faint); min-width:0; display:flex; align-items:center; gap:6px}
-  .role .rolechip{font-family:var(--mono); font-size:10.5px; letter-spacing:.08em; padding:2px 7px; border-radius:5px; border:1px solid var(--edge-2); color:var(--ink-dim)}
+  .role .rolechip{font-family:var(--mono); font-size:11px; letter-spacing:.08em; padding:2px 7px; border-radius:5px; border:1px solid var(--edge-2); color:var(--ink-dim)}
   .chev{justify-self:end; color:var(--ink-dim); transition:transform .18s,color .15s; font-size:13px}
   .row.open .chev{transform:rotate(90deg); color:var(--accent)}
   .row.clickable:hover .chev{color:var(--accent)}
@@ -236,14 +241,14 @@
   @media(min-width:760px){ .drawer-grid{grid-template-columns:1.35fr 1fr} }
   .d-summary{color:var(--ink-dim); font-size:14px; margin:0 0 10px}
   .d-summary .theme{
-    display:inline-block; font-family:var(--mono); font-size:10.5px; letter-spacing:.06em; text-transform:uppercase;
+    display:inline-block; font-family:var(--mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase;
     color:var(--accent-2); border:1px solid var(--edge-2); border-radius:5px; padding:2px 8px; margin-bottom:9px
   }
-  .d-h{font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-faint); margin:0 0 7px}
+  .d-h{font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-faint); margin:0 0 8px}
   .d-list{margin:0 0 12px; padding:0; list-style:none}
-  .d-list li{position:relative; padding-left:16px; margin-bottom:5px; font-size:13.5px; color:var(--ink)}
+  .d-list li{position:relative; padding-left:16px; margin-bottom:6px; font-size:13px; color:var(--ink)}
   .d-list li::before{content:"›"; position:absolute; left:2px; color:var(--accent); font-weight:700}
-  .setbox{background:var(--bg); border:1px solid var(--edge); border-radius:9px; padding:11px 13px}
+  .setbox{background:var(--bg); border:1px solid var(--edge); border-radius:9px; padding:12px 12px}
   .setrow{display:flex; gap:10px; font-size:13px; margin-bottom:8px}
   .setrow:last-child{margin-bottom:0}
   .setrow .pc{font-family:var(--mono); font-weight:700; font-size:11px; color:var(--gold); border:1px solid color-mix(in srgb,var(--gold) 40%,transparent); border-radius:5px; padding:2px 6px; height:fit-content; white-space:nowrap}
@@ -251,21 +256,21 @@
   .srcbreak{margin-top:12px}
   .srcbreak .setrow{align-items:center}
   .srcbreak .pc{color:var(--accent-2); border-color:color-mix(in srgb,var(--accent-2) 40%,transparent)}
-  .watch{margin-top:12px; font-size:13px; color:var(--ink-dim); background:color-mix(in srgb,var(--v-mix) 8%,transparent); border:1px solid color-mix(in srgb,var(--v-mix) 26%,transparent); border-radius:8px; padding:9px 12px}
-  .watch b{font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--v-mix); display:block; margin-bottom:3px}
+  .watch{margin-top:12px; font-size:13px; color:var(--ink-dim); background:color-mix(in srgb,var(--v-mix) 8%,transparent); border:1px solid color-mix(in srgb,var(--v-mix) 26%,transparent); border-radius:8px; padding:8px 12px}
+  .watch b{font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--v-mix); display:block; margin-bottom:3px}
   .empty{padding:34px 16px; text-align:center; color:var(--ink-faint); font-size:14px}
   .ptrcaveat{
-    display:none; margin:10px 0 0; padding:9px 13px; font-size:12.5px; line-height:1.5;
+    display:none; margin:10px 0 0; padding:9px 13px; font-size:12px; line-height:1.5;
     color:var(--ink-dim); background:color-mix(in srgb,var(--accent) 7%,transparent);
     border:1px solid color-mix(in srgb,var(--accent) 26%,transparent); border-radius:8px
   }
-  .ptrcaveat b{color:var(--accent); font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase}
+  .ptrcaveat b{color:var(--accent); font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase}
 
   /* ---------- footer ---------- */
   footer{margin-top:30px; border-top:1px solid var(--edge); padding-top:22px; color:var(--ink-faint); font-size:13px}
   .foot-grid{display:grid; grid-template-columns:1fr; gap:22px}
   @media(min-width:720px){ .foot-grid{grid-template-columns:1.1fr .9fr} }
-  .foot-h{font-family:var(--mono); font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); margin:0 0 11px}
+  .foot-h{font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); margin:0 0 11px}
   .srclist{margin:0 0 16px; padding:0; list-style:none; font-family:var(--mono); font-size:12px}
   .srcgroup{color:var(--ink-dim); padding:7px 0 3px; border-bottom:1px solid var(--edge); display:flex; justify-content:space-between; gap:12px}
   .srcgroup .how{color:var(--ink-faint); font-size:11px; text-align:right; max-width:34ch}
@@ -275,8 +280,8 @@
   .live a{font-family:var(--mono); font-size:12px; background:var(--bg-2); border:1px solid var(--edge); border-radius:7px; padding:6px 11px; color:var(--accent-2)}
   .live a:hover{border-color:var(--accent-2); text-decoration:none}
   .fine{margin-top:20px; font-size:12px; line-height:1.6; color:var(--ink-faint); max-width:88ch}
-  .fine code{font-family:var(--mono); background:var(--bg-2); border:1px solid var(--edge); border-radius:4px; padding:1px 6px; color:var(--ink-dim); font-size:11.5px}
-  .credit{margin-top:24px; padding-top:16px; border-top:1px solid var(--edge); text-align:center; font-size:12.5px; color:var(--ink-faint); letter-spacing:.02em}
+  .fine code{font-family:var(--mono); background:var(--bg-2); border:1px solid var(--edge); border-radius:4px; padding:1px 6px; color:var(--ink-dim); font-size:11px}
+  .credit{margin-top:24px; padding-top:16px; border-top:1px solid var(--edge); text-align:center; font-size:12px; color:var(--ink-faint); letter-spacing:.02em}
   .credit b{font-family:var(--disp); font-weight:600; font-size:14.5px; color:var(--gold); letter-spacing:.05em}
   .credit .keep{display:block; margin-top:5px; font-size:11px; color:var(--ink-faint); opacity:.85}
   .credits-block{margin-top:22px; padding-top:20px; border-top:1px solid var(--edge)}
@@ -297,7 +302,7 @@
     .cls::before{content:"Class · "; color:var(--ink-faint)}
     .role{grid-column:1/-1; grid-row:3; order:0}
     .metaline{grid-column:1/-1; grid-row:4; display:flex; gap:8px; align-items:center; flex-wrap:wrap}
-    .metaline .mtag{display:inline; font-family:var(--mono); font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-faint)}
+    .metaline .mtag{display:inline; font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-faint)}
   }
   /* Desktop: the header row already labels the two tier columns, so the inline
      Raid/M+ labels are hidden — with display:contents the row must contribute
@@ -328,12 +333,12 @@
   }
   .finder-head{display:flex; align-items:flex-start; justify-content:space-between; gap:14px; margin-bottom:6px}
   .finder-head h2{font-family:var(--disp); font-size:24px; margin:0; color:#fff}
-  .finder-head p{margin:5px 0 0; color:var(--ink-dim); font-size:13.5px; max-width:56ch}
+  .finder-head p{margin:5px 0 0; color:var(--ink-dim); font-size:13px; max-width:56ch}
   .finder-x{background:var(--bg-3); border:1px solid var(--edge-2); color:var(--ink-dim); border-radius:8px; width:32px; height:32px; cursor:pointer; font-size:16px; flex:none}
   .finder-x:hover{color:var(--ink)}
   .fq{margin-top:18px}
   .fq > .lbl{margin:0 0 8px; display:block}
-  .fq .hint{color:var(--ink-faint); text-transform:none; letter-spacing:0; font-family:var(--body); font-size:11.5px}
+  .fq .hint{color:var(--ink-faint); text-transform:none; letter-spacing:0; font-family:var(--body); font-size:11px}
   .fopts{display:flex; gap:8px; flex-wrap:wrap}
   .fopt{
     font-family:var(--body); font-size:13px; color:var(--ink-dim); cursor:pointer;
@@ -354,7 +359,7 @@
     .finder-x{width:40px; height:40px}
   }
   .finder-go{margin-top:22px; display:flex; gap:12px; align-items:center; flex-wrap:wrap}
-  .finder-note{color:var(--ink-faint); font-size:11.5px; max-width:44ch}
+  .finder-note{color:var(--ink-faint); font-size:11px; max-width:44ch}
   .fresults{margin-top:20px; display:flex; flex-direction:column; gap:10px}
   .fres{
     display:grid; grid-template-columns:26px 1fr auto; gap:12px; align-items:center;
@@ -364,9 +369,9 @@
   .fres .frank{font-family:var(--disp); font-size:19px; color:var(--ink-faint); text-align:center}
   .fres .fname{font-weight:700; color:var(--ink)}
   .fres .fname .fcls{font-family:var(--mono); font-size:12px; margin-left:8px}
-  .fres .frole{font-family:var(--mono); font-size:10px; letter-spacing:.08em; color:var(--ink-faint)}
+  .fres .frole{font-family:var(--mono); font-size:11px; letter-spacing:.08em; color:var(--ink-faint)}
   .fwhy{display:flex; gap:6px; flex-wrap:wrap; margin-top:6px}
-  .fwhy .wchip{font-family:var(--mono); font-size:10.5px; padding:2px 7px; border-radius:5px; border:1px solid var(--edge-2); color:var(--accent-2)}
+  .fwhy .wchip{font-family:var(--mono); font-size:11px; padding:2px 7px; border-radius:5px; border:1px solid var(--edge-2); color:var(--accent-2)}
   .fscore{text-align:right; min-width:74px}
   .fscore .fpct{font-family:var(--mono); font-weight:700; font-size:15px; color:var(--accent)}
   .fmeter{height:5px; border-radius:5px; background:var(--bg-3); overflow:hidden; margin-top:4px}
@@ -378,7 +383,7 @@
   .laddersearch{background:var(--bg-3); border:1px solid var(--edge-2); border-radius:8px; padding:7px 11px; color:var(--ink); font-family:var(--body); font-size:13px; width:210px; max-width:100%}
   .laddersearch:focus-visible{outline:2px solid var(--accent-2); outline-offset:1px}
   .ladder-groups .lgrp{margin-top:12px}
-  .ladder-cap{color:var(--ink-faint); font-size:11.5px; line-height:1.6; margin:14px 0 2px}
+  .ladder-cap{color:var(--ink-faint); font-size:11px; line-height:1.6; margin:14px 0 2px}
   .ladder-cap b{color:var(--ink-dim)}
   #ladder-chart{overflow-x:auto}
   .laddersvg{width:100%; height:auto; display:block; margin-top:4px; min-width:780px}
@@ -497,7 +502,7 @@
       <span class="verdict" data-v="Negative"><span class="dot"></span>Negative</span>
     </div>
     <div class="grp">
-      <span class="divdot"></span><span>sources diverge (consensus view)</span>
+      <span class="divmark">±</span><span>sources diverge (consensus view)</span>
     </div>
     <div class="grp">
       <span class="ptag" style="margin-left:0">AoE-lean</span><span>sim fight profile (DPS) — expand a row for the numbers</span>
@@ -594,9 +599,10 @@ function srcHostLabel(url){
   if(/discord/.test(url)) return "Discord";
   try { return new URL(url).hostname.replace(/^www\./,""); } catch(e){ return "source"; }
 }
+/* Writeups are attributed distillations (no review gate — the attribution IS the honesty). */
 function draftSrcHTML(p){
-  if(p.source) return ` <span class="mnote">— drafted from <a href="${esc(safeHref(p.source))}" target="_blank" rel="noopener">${esc(srcHostLabel(p.source))}</a></span>`;
-  if(p.sourceLabel) return ` <span class="mnote">— drafted from ${esc(p.sourceLabel)}</span>`;
+  if(p.source) return ` <span class="mnote">— distilled from <a href="${esc(safeHref(p.source))}" target="_blank" rel="noopener">${esc(srcHostLabel(p.source))}</a></span>`;
+  if(p.sourceLabel) return ` <span class="mnote">— distilled from ${esc(p.sourceLabel)}</span>`;
   return "";
 }
 
@@ -637,7 +643,7 @@ function ratingFor(s, bracket){
 
 function tierEl(r, mv){
   const arrow = mv ? `<span class="mv" data-d="${mv.delta>0?'up':'down'}" title="was ${esc(mv.was)} on ${esc(mv.since)}">${mv.delta>0?'▲':'▼'}</span>` : '';
-  const dot = r.div ? '<span class="divdot" title="Sources diverge on this rating"></span>' : '';
+  const dot = r.div ? '<span class="divmark" title="Sources diverge on this rating" aria-label="sources diverge">±</span>' : '';
   // Consensus-only 0–100 within-tier meter (score already computed; single-source/per-fight = score -1, skipped).
   const meter = (state.source==="consensus" && r.score>=0)
     ? `<span class="tscore" title="Consensus score ${r.score}/100 (position within tier)"><i style="width:${r.score}%"></i></span>` : '';
@@ -784,7 +790,7 @@ function drawerHTML(s){
   if(s.movement?.mplus) signals.push(`M+ tier was ${s.movement.mplus.was} on ${s.movement.mplus.since}`);
   const signalHTML = signals.length ? `<p class="mnote" style="margin:0 0 10px">${signals.map(esc).join("<br>")}</p>` : "";
   const left = (p && showPtr) ? `
-       <p class="d-summary">${p.theme?`<span class="theme">${esc(p.theme)}</span> `:""}${p.draft?`<span class="theme" style="color:var(--v-mix); border-color:color-mix(in srgb,var(--v-mix) 45%,transparent)" title="Distilled from the cited source; the verdict hasn't been confirmed by the maintainer yet">draft — unconfirmed verdict</span>`:""}${p.theme||p.draft?`<br>`:""}${esc(p.summary)}${draftSrcHTML(p)}</p>
+       <p class="d-summary">${p.theme?`<span class="theme">${esc(p.theme)}</span><br>`:""}${esc(p.summary)}${draftSrcHTML(p)}</p>
        ${signalHTML}<p class="d-h">Key changes</p>
        <ul class="d-list">${(p.changes||[]).map(c=>`<li>${esc(c)}</li>`).join("")}</ul>` : showPtr ? `
        <p class="d-summary"><span class="theme">No 12.1 PTR writeup yet</span><br>${state.era==="ptr"
@@ -931,7 +937,21 @@ function render(){
   document.getElementById('fightsel')?.classList.toggle('engaged', !!state.fight);
   document.getElementById('sortsel')?.classList.toggle('engaged', state.sort!=='raid');
   document.getElementById('search')?.classList.toggle('engaged', !!state.q);
+  setStickyOffsets(); // header rebuilt above — remeasure the sticky stack
 }
+
+/* Sticky-stack offsets: the column header pins below the (variable-height) sticky
+   controls, and class-group headers pin below both. Measured, not hardcoded — the
+   controls wrap at different widths, and on mobile they're static (offset 0). */
+const controlsEl = document.querySelector('.controls');
+function setStickyOffsets(){
+  const sticky = getComputedStyle(controlsEl).position === 'sticky';
+  document.documentElement.style.setProperty('--controls-h', (sticky ? controlsEl.offsetHeight : 0) + 'px');
+  const head = matrix.querySelector('.head');
+  document.documentElement.style.setProperty('--head-h', (head && head.offsetParent !== null ? head.offsetHeight : 0) + 'px');
+}
+let stickyTimer = null;
+window.addEventListener('resize', ()=>{ clearTimeout(stickyTimer); stickyTimer = setTimeout(setStickyOffsets, 150); });
 
 /* Single entry point for sorting — keeps the clickable headers, the Sort dropdown, and
    the Group/Rank toggle in sync, then re-renders (header carets rebuild from state.sort). */
@@ -1220,7 +1240,10 @@ function openSpecFromFinder(cls, spec){
   const mobility = s => s.playstyle ? s.playstyle.mobility/5 : null;
   const utility  = s => s.playstyle ? s.playstyle.utility/5 : null;
   const survScore = s => s.survivability ? (SURV_MAP[s.survivability.tier] ?? null) : null;
-  const outlookScore = s => { const d = s.outlook?.direction; return d==="up"?1 : d==="down"?0.15 : d==="flat"?0.55 : null; };
+  // "No outlook signal" scores the same neutral as "flat" instead of being skipped —
+  // skip-and-renormalize would otherwise make missing data BEAT a known-declining spec
+  // (the one criterion that's still commonly null now that all 40 have playstyle data).
+  const outlookScore = s => { const d = s.outlook?.direction; return d==="up"?1 : d==="down"?0.15 : 0.55; };
 
   function weights(){
     const w = { ...BASE[answers.priority] };
@@ -1269,7 +1292,7 @@ function openSpecFromFinder(cls, spec){
     if(crit.mobility != null && crit.mobility >= 0.8) chips.push("very mobile");
     if(crit.surv != null && crit.surv >= 0.7) chips.push(`${s.survivability.tier} survivability`);
     if(crit.utility != null && crit.utility >= 0.8) chips.push("loaded utility");
-    if(crit.outlook != null && crit.outlook === 1) chips.push(s.ptr?.draft ? "rising in 12.1 (draft)" : "rising in 12.1 (PTR)");
+    if(crit.outlook != null && crit.outlook === 1) chips.push("rising in 12.1 (PTR)");
     return chips.slice(0,4);
   }
   // A spec is "melee" if it's melee-primary OR viable in melee (fistweaving MW, weaving
@@ -1284,7 +1307,11 @@ function openSpecFromFinder(cls, spec){
     let pool = SPECS.filter(s => answers.role==="any" || s.role===answers.role);
     if(answers.range!=="any" && anyPlaystyle) pool = pool.filter(s => supportsRange(s, answers.range));
     return pool.map(s => ({ s, ...scoreSpec(s, w) }))
-      .sort((a,b)=> b.score - a.score).slice(0,12);
+      // deterministic tiebreak: equal scores order by tier, then name — never insertion order
+      .sort((a,b)=> b.score - a.score
+        || (b.crit.tier ?? 0) - (a.crit.tier ?? 0)
+        || a.s.spec.localeCompare(b.s.spec) || a.s.class.localeCompare(b.s.class))
+      .slice(0,12);
   }
 
   /* ---- overlay UI ---- */

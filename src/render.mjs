@@ -181,10 +181,10 @@ export function outlookFor(spec, ptrBuilds) {
       else if (dir === "nerf") nerfs++;
     }
   }
-  // A draft writeup's verdict is unconfirmed (distilled from a Wowhead article, not yet
-  // blessed by Riley) — don't let it drive a full up/down outlook; fall through to the
-  // buff/nerf tuning-line balance, which is a real signal. Self-heals on confirm.
-  const verdict = spec.ptr?.draft ? null : (spec.ptr?.verdict ?? null);
+  // Policy (Riley, 2026-07-06): writeups are attributed distillations of cited
+  // theorycrafters and count as confirmed on landing — the verdict always drives the
+  // outlook. Honesty lives in the mandatory source attribution, not a review gate.
+  const verdict = spec.ptr?.verdict ?? null;
   let direction = null;
   if (verdict === "Positive") direction = "up";
   else if (verdict === "Negative") direction = "down";

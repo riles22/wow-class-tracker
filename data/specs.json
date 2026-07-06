@@ -31,7 +31,6 @@
       "set2": "Moderate attack speed plus a small Crimson Scourge proc-chance bump — blunted by Blood's ~3s swings and the can't-proc-while-D&D-is-down restriction.",
       "set4": "Doubled Death and Decay damage plus 5% crit for 8s on consuming Crimson Scourge — doubling a bottom-of-the-list ability does nothing, and the crit is flat percentage, not rating, so Riposte converts none of it. Zero defensive value.",
       "watch": "Mandl's ask is a redesign — even tying the bonuses to Runes or RP spent \"would feel like a breath of fresh air.\" As written, a defense-less DPS set gives a raid-B / M+-C tank nothing where it matters; watch for a rework before tuning has anything to carry.",
-      "draft": true,
       "source": "https://www.wowhead.com/news/a-complete-miss-of-a-tier-set-blood-death-knight-tier-set-review-381973"
     },
     "metrics": [
@@ -308,7 +307,6 @@
       "set2": "Magi and Liches swap to a stronger Necrotic Bolt and Withering Grasp — \"vaguely interesting\" for spotlighting the new lich, but entirely passive with zero player control.",
       "set4": "+130% to both spells against enemies below 35% health — a flat execute amp Taeznak calls \"about as bland and boring as it could possibly get\"; the piece that \"needs a LOT of work,\" and rare in being less interesting than the 2pc.",
       "watch": "Unholy enters 12.1 from an S1-topping baseline (M+ S-tier across boards), so a trim was expected — the complaint is direction, not numbers. Watch whether Blizzard picks a lane (sustained spec vs ~80%-of-damage-in-cooldowns), fixes the non-functional Doomed Bidding, and adds any decision-making to the one-button Army rotation before ship.",
-      "draft": true,
       "source": "https://www.wowhead.com/news/a-completely-passive-set-bonus-unholy-dk-review-of-class-changes-and-tier-set-on-381972"
     },
     "metrics": [
@@ -624,7 +622,6 @@
       "set2": "Soulburst: a 4+ soul Reap has a 20% chance (deck-of-cards system, so low variance) to make the next Consume instant and explode in AoE — only 1-2% overall, plus minor instant-cast QoL.",
       "set4": "Where the set shines: Soulburst generates 8 Soul Fragments plus Moment of Craving and Reap gains 20% damage — one of the kit's most efficient soul generators, \"rotationally transformative,\" and a bigger win for Void-Scarred than Annihilator.",
       "watch": "Eradicate currently can't proc Soulburst — a significant AoE/cleave proc loss the author calls a bug that \"needs to be fixed ASAP\" — and Void-Scarred's caster/melee dysfunction went untouched. From today's S/A-tier baseline the author still expects a \"great spot\" at 12.1 launch, provided that fix lands.",
-      "draft": true,
       "source": "https://www.wowhead.com/news/an-amazing-new-tier-set-bonus-devourer-dh-tier-set-and-class-changes-review-382015"
     },
     "metrics": [
@@ -787,7 +784,8 @@
       ],
       "set2": "Offensive-leaning bonus with no meaningful tank utility.",
       "set4": "Does nothing to address the raid case — effectively worthless as a tank set.",
-      "watch": "Baseline is raid-C / M+-A — great in keys, benched in raid. The set does nothing to fix the raid-desirability problem, and Havoc/Devourer cover the DH utility a raid would want."
+      "watch": "Baseline is raid-C / M+-A — great in keys, benched in raid. The set does nothing to fix the raid-desirability problem, and Havoc/Devourer cover the DH utility a raid would want.",
+      "sourceLabel": "Wowhead 12.1 class preview"
     },
     "metrics": [
       {
@@ -910,7 +908,8 @@
       ],
       "set2": "Feeds the current Eclipse / Astral flow.",
       "set4": "Reinforces the existing rotation without adding a new decision.",
-      "watch": "Net power shift is the whole story here; nothing changes about the moment-to-moment. Lukewarm."
+      "watch": "Net power shift is the whole story here; nothing changes about the moment-to-moment. Lukewarm.",
+      "sourceLabel": "Wowhead 12.1 class preview"
     },
     "metrics": [
       {
@@ -1457,7 +1456,6 @@
       "set2": "Upheaval CD −10s — straightforward, directly benefits both Chronowarden and Scalecommander.",
       "set4": "Upheaval magnifies Fate Mirror for 8s (echo 15% → 45%) — a bigger number on a ~3%-of-total-damage passive with no gameplay hook; the author doubts it changes how anyone plays.",
       "watch": "The S1 set is strong enough that a 2+2 setup \"is actually looking quite attractive\" — expect the old set to be tuned down at season start. From its raid-S/A, M+-staple baseline the article sees Aug \"largely unchanged\" into Season 2, with rough edges (Ebon Might phasing, dead Mastery/Vers) still unaddressed.",
-      "draft": true,
       "source": "https://www.wowhead.com/news/addressing-the-power-of-double-time-augmentation-evoker-class-changes-and-tier-381986"
     },
     "metrics": [
@@ -1597,7 +1595,8 @@
       ],
       "set2": "Clean, passive value.",
       "set4": "Buffs Shattering Star without adding button bloat — one of the better-designed sets.",
-      "watch": "The set is good, but a raid-B / M+-C baseline means tuning still has to do the heavy lifting; a well-designed set alone won't move it."
+      "watch": "The set is good, but a raid-B / M+-C baseline means tuning still has to do the heavy lifting; a well-designed set alone won't move it.",
+      "sourceLabel": "Wowhead 12.1 class preview"
     },
     "metrics": [
       {
@@ -1760,7 +1759,8 @@
       ],
       "set2": "Strong on its own — immediately felt.",
       "set4": "Complements the Dream Breath change and the Flameshaper direction.",
-      "watch": "Baseline is raid-A / M+-B; the changes clearly help the raid profile most. The best-received set + kit pass of the tracked healers."
+      "watch": "Baseline is raid-A / M+-B; the changes clearly help the raid profile most. The best-received set + kit pass of the tracked healers.",
+      "sourceLabel": "Wowhead 12.1 class preview"
     },
     "metrics": [
       {
@@ -1895,7 +1895,6 @@
       "set2": "Reads as more of an AoE boost than a single-target one. Tarlo details it as Barbed Shot making pets Stomp one extra time at 50% effectiveness.",
       "set4": "Stomp grants a Cobra Shot benefit — 20% Beast Cleave effectiveness or a 30% single-target bonus (stacking to 4). Because the 4pc reads the cosmetic Beast Cleave buff, optimal play requires manually '/cancelaura Beast Cleave' in priority-AoE, 2-target, and burst windows — Tarlo flags this as an unfortunate degenerate interaction. Azortharion expects the set will mostly play itself otherwise.",
       "watch": "Watch the AoE ceiling: with Wild Instincts gone, Kill Cleave halved, and burst power flattened into the baseline, BM's multi-target output leans on the longer Beast Cleave and the tier set to hold up.",
-      "draft": true,
       "source": "https://hackmd.io/@Azortharion/HunterPatch121-1"
     },
     "metrics": [
@@ -2062,7 +2061,6 @@
       "set2": "Reads as a straightforward Explosive Shot amplifier — adds 1s of duration for an extra tick, leaning into the ability the whole patch's success rides on.",
       "set4": "Grants cooldown reduction off Explosive Shot ticks, but he flags that it \"will not scale with AoE\" — so the payoff stays single-target-weighted rather than rewarding the DoT's new multi-target ceiling.",
       "watch": "With Bulletstorm gutted and Aimed Shot pushed to the background, MM's priority/funnel damage takes a real hit — whether the spec comes out ahead depends almost entirely on how the reworked Explosive Shot actually performs in practice.",
-      "draft": true,
       "source": "https://hackmd.io/@Azortharion/HunterPatch121-1"
     },
     "metrics": [
@@ -2224,7 +2222,8 @@
       ],
       "set2": "Passive throughput, no gameplay hook.",
       "set4": "Also passive — misses all of Blizzard's own goals for the set (no rotational change, no new decision).",
-      "watch": "Baseline is strong (raid-S), so this won't tank the spec — but the set is a wasted opportunity to make it more engaging."
+      "watch": "Baseline is strong (raid-S), so this won't tank the spec — but the set is a wasted opportunity to make it more engaging.",
+      "sourceLabel": "Wowhead 12.1 class preview"
     },
     "metrics": [
       {
@@ -2536,7 +2535,8 @@
       ],
       "set2": "Ties into the Pyroclasm package.",
       "set4": "Likely feels worse than the current set for most players.",
-      "watch": "Spread-cleave weakness persists, and the baseline is already raid-C / M+-C. The shift doesn't address the spec's actual problem areas."
+      "watch": "Spread-cleave weakness persists, and the baseline is already raid-C / M+-C. The shift doesn't address the spec's actual problem areas.",
+      "sourceLabel": "Wowhead 12.1 class preview"
     },
     "metrics": [
       {
@@ -2960,7 +2960,8 @@
       ],
       "set2": "Supports the Jadefire-forward direction.",
       "set4": "Leans into the retuned kit.",
-      "watch": "Hero-tree balance (Conduit of the Celestials clearly over Master of Harmony) is left unaddressed. Baseline is already dominant — raid-S / M+-S."
+      "watch": "Hero-tree balance (Conduit of the Celestials clearly over Master of Harmony) is left unaddressed. Baseline is already dominant — raid-S / M+-S.",
+      "sourceLabel": "Wowhead 12.1 class preview"
     },
     "metrics": [
       {
@@ -3092,7 +3093,8 @@
       ],
       "set2": "Minor throughput.",
       "set4": "Reinforces the sustained-damage shift.",
-      "watch": "WarcraftLogs survivability sits near dead-last (≈37–40 of 40) and none of that is touched — the actual reason WW gets cut from rosters."
+      "watch": "WarcraftLogs survivability sits near dead-last (≈37–40 of 40) and none of that is touched — the actual reason WW gets cut from rosters.",
+      "sourceLabel": "Wowhead 12.1 class preview"
     },
     "metrics": [
       {
@@ -3257,7 +3259,6 @@
       "set2": "A pretty standard set — makes Infusions feel better and more important not to waste (+25% on Infused Flash of Light, +30% on Greater Judgment), but not particularly strong compared to other healers' 2pc bonuses.",
       "set4": "Originally a 50% chance for Holy Light to grant Infusion of Light — which also caused wasted procs since you don't know you've proc'd until you've already queued the next spell. The 6/30 buff to a guaranteed 100% chance fixes that and is 'a great change': Holy Light is now a reliable Infusion generator, no more back-to-back spamming, and much more fun to play.",
       "watch": "The 4pc exists to fix real gameplay gaps — making Judgment worth casting without an Infusion proc and cutting hardcast Flash of Light — and Clarius argues effects that fix gameplay issues should be baseline, not gated behind a temporary tier set. He also hoped for more talent-tree cleanup: lots of weak kiss/curse talents (Call of the Righteous, Rising Sunlight, Seraphic Barrier), and the essential Inflorescence of the Sunwell is still buried behind three mediocre talents.",
-      "draft": true,
       "sourceLabel": "Clarius (Hammer of Wrath) — Discord"
     },
     "metrics": [
@@ -3393,7 +3394,6 @@
       "set2": "The \"Crusader Strike\" set (Blessed Hammer, Hammer of the Righteous, Crusader Strike and Judgment) is a pure damage amp — those hits deal 20% increased damage, or 60% if the hit crits. The crew reads it as a straightforward offensive lever that rewards building around crit to hit the higher tier, doubling down on Prot's damage rotation rather than adding defensive value.",
       "set4": null,
       "watch": "Note: the sources describe the tier set as a single combined mechanic and do not cleanly split a 2pc vs 4pc bonus, so the whole tier-set read sits in set2 and set4 is left empty. These are PTR values on top of an early, still-shifting tree — several of the nerfs are undocumented (Fluttershy) and the Hammer of Wrath Discord is tracking a live bug list, so the 60%-on-crit set payoff and the net offensive floor could both move before 12.1 ships. Treat the numbers as against the 12.0.7 baseline.",
-      "draft": true,
       "sourceLabel": "Woliance & Fluttershy (Hammer of Wrath) — Discord"
     },
     "metrics": [
@@ -3520,7 +3520,6 @@
       "set2": "Divine Purpose gains an additional 10% chance to activate, and consuming it grants Divine Power — +10% Holy damage done for 12 seconds. Bolas calls it \"pretty solid and inoffensive\": a clean, uncontroversial throughput bonus.",
       "set4": "Consuming Divine Purpose with Divine Storm grants 2 stacks of Divine Arbiter, making your next Final Verdicts unleash an AoE Holy nuke (8-yd splash) — but only if no Arbiter stacks are already active, so once you hold stacks you must spend Divine Purpose on Final Verdict (the single-target spender) instead. \"One of the most controversial set bonuses in the Retribution community in recent memory\": it forces the \"wrong\" spender for the target count, which the official feedback thread explicitly flagged as a degenerate/unintended rotation impact. Bolas thinks it misses the mark — easy to accidentally misplay and punishing when you do, yet with a low skill ceiling once learned, bucking Ret's beginner-friendly Dragonflight-era identity.",
       "watch": "Bolas's core worry is agency: faster, smoother generation plays better moment-to-moment than 12.0's spikiness, but it pushes Ret even further toward \"dump Holy Power ASAP\" with little management to optimize. Hero Talents remain Templar-dominant (though the new set is stronger for Herald of the Sun and balance has improved), held back partly by an Instrument of Retribution bug that makes Hammer of Wrath uncastable for the rest of an Avenging Wrath if a proc was already active — minor for Templar, a big loss for Herald of the Sun. Verdict call is editorial — draft.",
-      "draft": true,
       "source": "https://www.wowhead.com/news=382093/a-very-controversial-4-set-retribution-paladin-class-changes-and-tier-set-review"
     },
     "metrics": [
@@ -3687,7 +3686,6 @@
       "set2": "Thread does not opine on the tier set; the feedback is confined to class-talent changes.",
       "set4": "Thread does not opine on the tier set, though its central complaint is directly relevant: a 4pc that buffs Void Shield absorption would reinforce exactly the Void Shield centralization the community is asking Blizzard to dial back.",
       "watch": "Whether the pass ships without numerically reducing Void Shield's throughput and redistributing that power — the thread's read is that until that happens, Disc keeps living and dying on Void Shield (Voidweaver hero tree, Entropic Rift, Inescapable Torment) with single-target healing left behind.",
-      "draft": true,
       "source": "https://us.forums.blizzard.com/en/wow/t/121-discipline-priest-feedback/2319269"
     },
     "metrics": [
@@ -3940,7 +3938,8 @@
       ],
       "set2": "Underwhelming.",
       "set4": "A complete non-starter — doesn't reward anything the spec wants to do.",
-      "watch": "Strong baseline (raid-A+ / M+-A+) means the whiffed set stings less than it would on a weaker spec."
+      "watch": "Strong baseline (raid-A+ / M+-A+) means the whiffed set stings less than it would on a weaker spec.",
+      "sourceLabel": "Wowhead 12.1 class preview"
     },
     "metrics": [
       {
@@ -4107,7 +4106,6 @@
       "set2": "A generic Nature-damage buff with no gameplay change and no build impact — Whispyr reads the whole set as another 'Mastery %' stat-stick in disguise.",
       "set4": "The bleed half of the same 'Mastery %' formula. Whispyr's big disappointment: blander than even the Season 1 set, it creates no gameplay and no build decisions and misses Blizzard's stated 'more complex / more impactful' goals — reads as a placeholder or in need of a full rework. Amplifying Poison stays the standard poison pick.",
       "watch": "Tuning isn't there yet: Unstable Toxin's -2s downside is currently 'actively crippling' in single target — it can cost more Envenom damage than the +18% adds and fights Rapid Injection's 40%, leaving you at the mercy of crit RNG; Iron Wire's new spread doesn't refresh on reapplication (possibly a bug). The louder critique is what went unaddressed: Deathstalker stays buggy, unintuitive and rarely played, and the bottom third of the class tree (Soothing Darkness / Subterfuge / Without a Trace, Thistle Tea, Cold Blooded Killer, Supercharger) stays bland — the obvious place to add the 'build options' Blizzard said they wanted.",
-      "draft": true,
       "source": "https://www.wowhead.com/news=382079/great-spec-changes-but-lacking-otherwise-assassination-rogue-class-changes-and"
     },
     "metrics": [
@@ -4271,7 +4269,8 @@
       ],
       "set2": "Dispatch damage +15% — does very little on its own.",
       "set4": "Sinister Strike / Ambush have a 12% chance to make the next Dispatch free at max combo points — adds a track-and-react hook and eases energy income. Currently bugged with Gravedigger, Hand of Fate coins, and Ruthlessness.",
-      "watch": "Loss of the Precise Cuts era of cleave has turned Outlaw from a 2–4 target monster into \"borderline unplayable\" on those fights — and the upcoming raid has several 2–3 target encounters. Same trap hits all Rogues."
+      "watch": "Loss of the Precise Cuts era of cleave has turned Outlaw from a 2–4 target monster into \"borderline unplayable\" on those fights — and the upcoming raid has several 2–3 target encounters. Same trap hits all Rogues.",
+      "sourceLabel": "Wowhead 12.1 class preview"
     },
     "metrics": [
       {
@@ -4433,7 +4432,8 @@
       ],
       "set2": "Placeholder-tier value.",
       "set4": "Essentially just pushes more Backstab — no new decision or identity.",
-      "watch": "Comes into 12.1 at raid-A / M+-A, so it's nerfing from a fine spot — but the set is the least inspired of the tracked Rogues."
+      "watch": "Comes into 12.1 at raid-A / M+-A, so it's nerfing from a fine spot — but the set is the least inspired of the tracked Rogues.",
+      "sourceLabel": "Wowhead 12.1 class preview"
     },
     "metrics": [
       {
@@ -4749,7 +4749,6 @@
       "set2": "Reworked this week and much improved over S1. Built around Voltaic Blaze; the previous version had a single-target 'killswitch' (lost its 200% multiplier the moment a 2nd target appeared) — now a strong, self-sufficient universal bonus (its own Fire Nova procs) with the set's value weighted heavily here. Wordup is 'very happy' Blizzard caught the single-target-contingent design and pivoted before live.",
       "set4": "Adds extra Voltaic Blaze stacks plus Crash Lightning CDR. Heavily favors Stormbringer, which has the spare GCDs to weave Voltaic Blaze as a priority; Totemic struggles to juggle it against Storm Unleashed and its totem cadence. Fire Nova becomes a nice single-target pickup but is NOT a mandatory talent swap — a welcome, less-forceful tier-set design. Overall a solid all-rounder giving damage in nearly all situations.",
       "watch": "The 'baggage': both hero trees are all-or-nothing cooldown profiles with little build diversity ('a red Totemic and a blue Stormbringer'); the Doom Winds/Ascendance deck-of-cards RNG is a sore point — a 600-Maelstrom, 3-proc deck that can run ~1000 stacks (~5 min) between procs and doesn't reset without relogging, 'bordering on ruining the feel'; Descending Skies hard-locks Stormbringer to Ascendance with no controlled alternative; and the Crash Lightning damage split stripped Enhancement's traditional priority/funnel strength (Totemic hit hardest — Totemic Rebound fires on the wrong target). It's shaping up like the War Within pattern: Totemic is hit harder by the nerfs and gains less from the buffs/tier set while Stormbringer pulls ahead again. Structure/tuning, not resolved yet.",
-      "draft": true,
       "source": "https://www.wowhead.com/news=382092/fun-to-play-but-has-some-baggage-enhancement-shaman-class-changes-and-tier-set"
     },
     "metrics": [
@@ -4913,7 +4912,8 @@
       ],
       "set2": "Thematic and pleasant, but low-impact.",
       "set4": "Overshadowed by stronger healer sets this season.",
-      "watch": "Author's verdict: weakest raid healer in the game right now. Baseline raid-B / M+-A — the M+ side carries it; the raid side is the concern the changes don't fix."
+      "watch": "Author's verdict: weakest raid healer in the game right now. Baseline raid-B / M+-A — the M+ side carries it; the raid side is the concern the changes don't fix.",
+      "sourceLabel": "Wowhead 12.1 class preview"
     },
     "metrics": [
       {
@@ -5501,7 +5501,6 @@
       "set2": "",
       "set4": "Decent in AoE but terrible in single target, especially measured against S1's universally-powerful set — a real step down on the ST bench.",
       "watch": "Losing Improved Sweeping Strikes and 100% Sweep uptime puts Arms' claim as the 2-target pinnacle in question, and Demolish still won't line up with Colossus Smash — the alignment friction that dogged the spec hasn't been solved.",
-      "draft": true,
       "sourceLabel": "Archimtiros (Icy Veins Arms author, SimC dev, Skyhold)"
     },
     "metrics": [
@@ -5668,7 +5667,6 @@
       "set2": "Reads weak. The Recklessness Raging Blow/Bloodthirst effects are each capped, blunting the payoff.",
       "set4": "Reads weak overall alongside the 2pc — the capped Recklessness effects leave the set feeling underwhelming.",
       "watch": "The whole Raging-Blow-refund payoff (Hack and Slash) is dead weight until Raging Blow becomes competitive with Bloodthirst; watch whether a later build shifts that balance, since it's the hinge for the Raging Blow build these changes are gesturing toward.",
-      "draft": true,
       "sourceLabel": "Archimtiros (Icy Veins Fury author, SimC dev, Skyhold)"
     },
     "metrics": [
@@ -5834,7 +5832,6 @@
       "set2": "Lackluster — the free-Revenge proc is RNG-dependent, so it feels inconsistent.",
       "set4": "Insignificant on the bleed side, with some AoE potential at best.",
       "watch": "The Ravager/tier-set bleed pivot is the thing to watch — Archimtiros is skeptical it fits Prot's identity, and with the 2pc leaning on RNG procs the set may not move the needle even as Execute and defensives get healthier.",
-      "draft": true,
       "sourceLabel": "Archimtiros / Mwahi (Skyhold, Icy Veins Prot)"
     },
     "metrics": [

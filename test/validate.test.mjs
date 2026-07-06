@@ -72,13 +72,14 @@ test("validateData checks encounter-tiers, specsAffected, draft provenance, and 
   Object.values(enc.tiers)[0] = enc.tiers[Object.keys(enc.tiers)[1]]; // keep shape valid
   enc.tiers[Object.keys(broken.encounterTiers.raid[slug].tiers)[1]] = "SS";
   broken.ptrBuilds.builds[0].specsAffected.push("Swashbuckler Rogue");
-  const draft = broken.specs.find(s => s.ptr?.draft);
-  delete draft.ptr.source; delete draft.ptr.sourceLabel;
+  const writeup = broken.specs.find(s => s.ptr);
+  delete writeup.ptr.source; delete writeup.ptr.sourceLabel;
   const errors = validateData(broken);
   assert.ok(errors.some(e => e.includes('unknown spec "Bard|Minstrel"')));
   assert.ok(errors.some(e => e.includes('tier "SS" not in the archon scale')));
   assert.ok(errors.some(e => e.includes('"Swashbuckler Rogue" matches no roster spec')));
-  assert.ok(errors.some(e => e.includes("draft writeup needs a source URL or sourceLabel")));
+  // auto-confirm policy: EVERY writeup must carry provenance (attribution is the honesty)
+  assert.ok(errors.some(e => e.includes("writeup needs a source URL or sourceLabel")));
   // fullRoster opt: dropping a spec fails only when the option is on
   const short = structuredClone(data);
   short.specs = short.specs.slice(0, 39);

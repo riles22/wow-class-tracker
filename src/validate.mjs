@@ -175,8 +175,9 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
       if (typeof spec.ptr?.summary !== "string" || !spec.ptr.summary) errors.push(`specs.json: ${key} ptr.summary missing`);
       if (!Array.isArray(spec.ptr?.changes) || spec.ptr.changes.length === 0) errors.push(`specs.json: ${key} ptr.changes must be a non-empty array`);
       urlOk(spec.ptr.source, `specs.json: ${key} ptr.source`);
-      // Provenance rule: an unconfirmed draft must say where it was distilled from.
-      if (spec.ptr.draft && !spec.ptr.source && !spec.ptr.sourceLabel) errors.push(`specs.json: ${key} draft writeup needs a source URL or sourceLabel`);
+      // Provenance rule: every writeup is an attributed distillation — since verdicts
+      // auto-confirm (no review gate), the attribution IS the honesty and is mandatory.
+      if (!spec.ptr.source && !spec.ptr.sourceLabel) errors.push(`specs.json: ${key} writeup needs a source URL or sourceLabel`);
     }
   }
 

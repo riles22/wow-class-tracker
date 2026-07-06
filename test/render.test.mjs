@@ -165,20 +165,23 @@ test("fightLabels: a spec with no comparable sims gets tag null, not 'Flexible'"
   assert.deepEqual(specs[2].fightProfile.labels, { st: null, cleave: null, aoe: null });
 });
 
-test("outlookFor: a draft verdict never drives the arrow — falls through to tuning balance", () => {
+test("outlookFor: the writeup verdict always drives the arrow (auto-confirm policy)", () => {
   const builds = { builds: [{
     date: "2026-06-30",
     specsAffected: ["Outlaw Rogue"],
     highlights: ["Outlaw Rogue — Dispatch damage reduced by 10%."]
   }] };
-  // Draft Positive must NOT produce "up": the unconfirmed verdict is suppressed and the
-  // nerf line drives the direction instead.
-  const draft = outlookFor({ class: "Rogue", spec: "Outlaw", ptr: { verdict: "Positive", draft: true } }, builds);
-  assert.equal(draft.direction, "down");
-  assert.match(draft.basis, /no writeup yet/);
-  // The same verdict confirmed (no draft flag) wins over the tuning lines.
-  const confirmed = outlookFor({ class: "Rogue", spec: "Outlaw", ptr: { verdict: "Positive" } }, builds);
-  assert.equal(confirmed.direction, "up");
+  // Policy 2026-07-06: writeups are attributed distillations and count as confirmed on
+  // landing — the verdict outranks the tuning-line balance, even against a nerf line,
+  // and even if a legacy draft flag is somehow present.
+  const withVerdict = outlookFor({ class: "Rogue", spec: "Outlaw", ptr: { verdict: "Positive" } }, builds);
+  assert.equal(withVerdict.direction, "up");
+  assert.match(withVerdict.basis, /PTR read: Positive/);
+  const legacyDraft = outlookFor({ class: "Rogue", spec: "Outlaw", ptr: { verdict: "Positive", draft: true } }, builds);
+  assert.equal(legacyDraft.direction, "up");
+  // No writeup at all → the tuning balance still decides.
+  const none = outlookFor({ class: "Rogue", spec: "Outlaw", ptr: null }, builds);
+  assert.equal(none.direction, "down");
 });
 
 const dd = (spec, targets, role = "DPS") => ({ class: "X", spec, role, ptrDummy: { source: "warcraftlogs", targets } });

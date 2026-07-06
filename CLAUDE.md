@@ -71,11 +71,14 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   The build computes a 0–100 composite + rank across target counts (`dummyDomeScores`
   in render.mjs, coverage-floored) — never hand-write score/rank/perCount.
 - `ptr` is the per-spec 12.1 writeup: `{ verdict: "Positive|Mixed|Negative", theme,
-  summary, changes[], set2, set4, watch }`. Writeups distilled from articles/posts
-  carry `draft: true` + `source: <url>` (or `sourceLabel: "<who> — Discord"` for
-  unlinkable posts) — shown with a "draft — unconfirmed verdict" chip until Riley
-  confirms (confirming = delete the `draft` flag). Validation requires provenance
-  on every draft.
+  summary, changes[], set2, set4, watch, source|sourceLabel }`. **Writeups are
+  attributed distillations and auto-confirm on landing** (policy 2026-07-06: Riley
+  defers to the cited theorycrafters — no review gate). The honesty lives in the
+  mandatory provenance: every writeup MUST carry `source: <url>` (or
+  `sourceLabel: "<who> — Discord"` for unlinkable posts); validation enforces it.
+  Distill faithfully — the verdict is the SOURCE's read, never the distiller's own
+  editorial call. The old `draft: true` flag is retired (treated as confirmed if ever
+  encountered).
 
 ### Computed at build time (never hand-written)
 - **Movement (▲▼)**: `build` compares consensus tiers + metric ranks + the Dummy Dome
@@ -84,8 +87,8 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   post-refresh snapshots identical to now, so CI rebuilds show real movement). **Every
   refresh that changed data ends with `node src/snapshot.mjs`.** Zero movement means
   nothing actually moved since the last change — that's honest, not broken.
-- **12.1 outlook (↗→↘)**: from the spec's CONFIRMED `ptr.verdict` when present (draft
-  verdicts are suppressed), else the balance of buff/nerf tuning lines classified by
+- **12.1 outlook (↗→↘)**: from the spec's `ptr.verdict` when present (writeups
+  auto-confirm — see the ptr bullet), else the balance of buff/nerf tuning lines classified by
   `classifyHighlight` (render.mjs — resource-aware: "cooldown reduced" is a buff, and
   the "X% (was Y%)" idiom is decided by the values). The zone-54 raid-testing rank is
   named in the basis string for context but never drives the direction.

@@ -21,12 +21,15 @@ say so and change nothing.
 3. **For each new build**: add an entry to `data/ptr-builds.json` (newest first):
    `{date, label, forumPostNumber, forumUrl, wowheadUrl, icyveinsUrl, specsAffected[],
    highlights[]}` — highlights are verbatim tuning lines with "(Class — Spec)" suffix.
-4. **Spec writeups**: the existing `ptr` writeups were distilled from **Wowhead's 12.1
-   spec articles** — so while scanning the RSS, also flag per-spec 12.1 review/first-look
+4. **Spec writeups**: while scanning the RSS, also flag per-spec 12.1 review/first-look
    articles ("12.1 <spec> changes/review/tier set...") as writeup material for untracked
-   specs. For specs with meaningful new changes, propose updates to their `ptr` object
-   in `data/specs.json` (plan-first: show the diff before applying; verdict calls are
-   editorial — draft, don't decide).
+   specs, and distill them into the spec's `ptr` object in `data/specs.json`.
+   **Auto-confirm policy (2026-07-06)**: writeups land confirmed — no draft flag, no
+   review gate. The honesty requirements instead: (a) EVERY writeup carries `source`
+   (URL) or `sourceLabel` (validation enforces it); (b) distill FAITHFULLY — the
+   verdict must be the source's own read, never your editorial call; if the source
+   gives no clear verdict, don't write a writeup from it. Don't rewrite an existing
+   writeup wholesale on tuning-only changes — append to `changes[]` / adjust `watch`.
 5. **WCL PTR raid testing (zone 54)**: verified working URL (2026-07-01, Heroic —
    where testing currently happens; Mythic is empty until those windows open):
    `warcraftlogs.com/zone/statistics/table/54/dps/0/4/10/1/1000/1/14/0/DPS/Any/All/0/normalized/single/0/-1/?keystone=15&dpstype=rdps`
