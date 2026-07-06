@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { fightLabels, metricRanks, outlookFor, movementFor, snapshotStateOf, pickBaseline } from "../src/render.mjs";
+import { fightLabels, metricRanks, outlookFor, movementFor, snapshotStateOf, pickBaseline, dummyDomeScores } from "../src/render.mjs";
 
 test("outlookFor: verdict wins; tuning-line balance covers writeup-less specs", () => {
   const builds = { builds: [{
@@ -135,6 +135,69 @@ test("metricRanks ranks within (role, bracket, metric name), #1 = highest", () =
   assert.deepEqual([specs[0].metrics[0].rank, specs[0].metrics[0].of], [2, 2]);
   assert.deepEqual([specs[0].metrics[1].rank], [1]); // popularity ranked separately
   assert.deepEqual([specs[2].metrics[0].rank, specs[2].metrics[0].of], [1, 1]);
+});
+
+test("outlookFor: a draft verdict never drives the arrow — falls through to tuning balance", () => {
+  const builds = { builds: [{
+    date: "2026-06-30",
+    specsAffected: ["Outlaw Rogue"],
+    highlights: ["Outlaw Rogue — Dispatch damage reduced by 10%."]
+  }] };
+  // Draft Positive must NOT produce "up": the unconfirmed verdict is suppressed and the
+  // nerf line drives the direction instead.
+  const draft = outlookFor({ class: "Rogue", spec: "Outlaw", ptr: { verdict: "Positive", draft: true } }, builds);
+  assert.equal(draft.direction, "down");
+  assert.match(draft.basis, /no writeup yet/);
+  // The same verdict confirmed (no draft flag) wins over the tuning lines.
+  const confirmed = outlookFor({ class: "Rogue", spec: "Outlaw", ptr: { verdict: "Positive" } }, builds);
+  assert.equal(confirmed.direction, "up");
+});
+
+const dd = (spec, targets, role = "DPS") => ({ class: "X", spec, role, ptrDummy: { source: "warcraftlogs", targets } });
+
+test("dummyDomeScores: composite = mean within-role percentile; rank ties break deterministically", () => {
+  const specs = [
+    dd("Top",    { "1": 300, "5": 300 }),
+    dd("Mid",    { "1": 200, "5": 200 }),
+    dd("Bottom", { "1": 100, "5": 100 }),
+  ];
+  dummyDomeScores(specs);
+  const by = n => specs.find(s => s.spec === n).ptrDummy;
+  assert.equal(by("Top").score, 100);    // 100th pct at both counts
+  assert.equal(by("Bottom").score, 0);   // 0th pct at both counts
+  assert.equal(by("Mid").score, 50);
+  assert.deepEqual([by("Top").rank, by("Top").of], [1, 3]);
+  assert.deepEqual(by("Top").perCount, { "1": 100, "5": 100 });
+});
+
+test("dummyDomeScores: coverage floor — partial-coverage specs keep percentiles but get no rank", () => {
+  const specs = [
+    dd("Full1",   { "1": 300, "2": 300, "3": 300, "5": 300 }),
+    dd("Full2",   { "1": 200, "2": 200, "3": 200, "5": 200 }),
+    dd("Full3",   { "1": 150, "2": 150, "3": 150, "5": 150 }),
+    dd("OneOnly", { "5": 999 }),                       // field max at 5T — omission must not rank it
+    dd("TwoOnly", { "1": 250, "5": 250 }),             // 2 of 4 < floor(3)
+  ];
+  dummyDomeScores(specs);
+  const by = n => specs.find(s => s.spec === n).ptrDummy;
+  assert.equal(by("OneOnly").rank, undefined, "single-count spec must not receive a composite rank");
+  assert.equal(by("OneOnly").score, undefined);
+  assert.deepEqual(by("OneOnly").perCount, { "5": 100 }, "per-count percentile is still computed");
+  assert.deepEqual(by("OneOnly").coverage, { have: 1, of: 4 });
+  assert.equal(by("TwoOnly").rank, undefined, "2-of-4 coverage is below the floor");
+  assert.equal(by("Full1").of, 3, "ranked field = only the specs meeting the floor");
+});
+
+test("dummyDomeScores: non-DPS specs are excluded from the field entirely", () => {
+  const specs = [
+    dd("D1", { "1": 300, "5": 300 }),
+    dd("D2", { "1": 200, "5": 200 }),
+    dd("Healy", { "1": 999, "5": 999 }, "Healer"),
+  ];
+  dummyDomeScores(specs);
+  assert.equal(specs[2].ptrDummy.score, undefined, "healer must not be scored");
+  assert.equal(specs[0].ptrDummy.of, 2, "field size excludes the healer");
+  assert.equal(specs[0].ptrDummy.score, 100, "healer's big numbers must not deflate DPS percentiles");
 });
 
 const mk = (spec, targets) => ({

@@ -23,15 +23,67 @@ test("the repo's data has all 40 Midnight specs across 13 classes", async () => 
 test("validateData catches bad tiers, roles, sources and duplicates", async () => {
   const data = await loadData(ROOT);
   const broken = structuredClone(data);
-  broken.specs[0].role = "Bard";
-  broken.specs[1].ratings.raid.icyveins = "SS";
-  broken.specs[2].ratings.raid.unknownsource = "A";
-  broken.specs.push(structuredClone(broken.specs[3]));
+  // find()-based (not positional): survives any reordering of specs.json
+  broken.specs.find(s => s.role === "Tank").role = "Bard";
+  broken.specs.find(s => s.ratings?.raid?.icyveins).ratings.raid.icyveins = "SS";
+  broken.specs.find(s => s.ratings?.raid).ratings.raid.unknownsource = "A";
+  broken.specs.push(structuredClone(broken.specs.find(s => s.role === "DPS")));
   const errors = validateData(broken);
   assert.ok(errors.some(e => e.includes('invalid role "Bard"')));
   assert.ok(errors.some(e => e.includes('tier "SS"')));
   assert.ok(errors.some(e => e.includes('unknown source "unknownsource"')));
   assert.ok(errors.some(e => e.includes("duplicate spec")));
+});
+
+test("validateData enforces https-only URLs and the take-host allowlist", async () => {
+  const data = await loadData(ROOT);
+  const broken = structuredClone(data);
+  broken.creatorTakes.takes.find(t => t.url).url = "javascript:alert(1)";
+  broken.creatorTakes.takes.filter(t => t.url)[1].url = "https://evil.example.com/x";
+  broken.community.classes[0].discord.url = "http://discord.gg/x"; // http, not https
+  const errors = validateData(broken);
+  assert.ok(errors.some(e => e.includes("must be https://") && e.includes("javascript:")));
+  assert.ok(errors.some(e => e.includes("not in the citation allowlist")));
+  assert.ok(errors.some(e => e.includes("discord url must be a valid https:// URL")));
+});
+
+test("validateData enforces era↔name consistency, finite values, and metric uniqueness", async () => {
+  const data = await loadData(ROOT);
+  const broken = structuredClone(data);
+  const spec = broken.specs.find(s => (s.metrics ?? []).length >= 2);
+  spec.metrics[0].value = -10;
+  spec.metrics[1].era = "ptr"; // live-named series claiming ptr
+  const dupSpec = broken.specs.find(s => s !== spec && (s.metrics ?? []).length >= 1);
+  dupSpec.metrics.push(structuredClone(dupSpec.metrics[0]));
+  const ptrSpec = broken.specs.find(s => (s.metrics ?? []).some(m => m.name.includes("12.1 PTR")));
+  ptrSpec.metrics.find(m => m.name.includes("12.1 PTR")).era = "live"; // PTR-named series claiming live
+  const errors = validateData(broken);
+  assert.ok(errors.some(e => e.includes("finite non-negative")));
+  assert.ok(errors.some(e => e.includes("no PTR label")));
+  assert.ok(errors.some(e => e.includes("duplicate metric")));
+  assert.ok(errors.some(e => e.includes('named 12.1 PTR but tagged era "live"')));
+});
+
+test("validateData checks encounter-tiers, specsAffected, draft provenance, and full roster", async () => {
+  const data = await loadData(ROOT);
+  const broken = structuredClone(data);
+  const [slug, enc] = Object.entries(broken.encounterTiers.raid)[0];
+  enc.tiers["Bard|Minstrel"] = "S";
+  Object.values(enc.tiers)[0] = enc.tiers[Object.keys(enc.tiers)[1]]; // keep shape valid
+  enc.tiers[Object.keys(broken.encounterTiers.raid[slug].tiers)[1]] = "SS";
+  broken.ptrBuilds.builds[0].specsAffected.push("Swashbuckler Rogue");
+  const draft = broken.specs.find(s => s.ptr?.draft);
+  delete draft.ptr.source; delete draft.ptr.sourceLabel;
+  const errors = validateData(broken);
+  assert.ok(errors.some(e => e.includes('unknown spec "Bard|Minstrel"')));
+  assert.ok(errors.some(e => e.includes('tier "SS" not in the archon scale')));
+  assert.ok(errors.some(e => e.includes('"Swashbuckler Rogue" matches no roster spec')));
+  assert.ok(errors.some(e => e.includes("draft writeup needs a source URL or sourceLabel")));
+  // fullRoster opt: dropping a spec fails only when the option is on
+  const short = structuredClone(data);
+  short.specs = short.specs.slice(0, 39);
+  assert.ok(!validateData(short).some(e => e.includes("exactly 40")));
+  assert.ok(validateData(short, { fullRoster: true }).some(e => e.includes("exactly 40")));
 });
 
 test("validateData catches malformed ptr writeups", async () => {
