@@ -1278,6 +1278,15 @@ function openSpecFromFinder(cls, spec){
     if(rows.length>1) catalog.set("DPS|raid|Dummy Dome composite",
       { key:"DPS|raid|Dummy Dome composite", role:"DPS", bracket:"raid", name:"Dummy Dome composite", source:"warcraftlogs", unit:"/100", era:"ptr", rows });
   }
+  // Dummy Dome per-target-count — real-player median rDPS at each fixed target count (the
+  // composite above blends these; these expose the raw per-count ranking). PTR family.
+  for(const [c,label] of [["1","Dummy Dome — 1 target"],["2","Dummy Dome — 2 targets"],["3","Dummy Dome — 3 targets"],["5","Dummy Dome — 5 targets"]]){
+    const rows = SPECS.filter(s=>s.ptrDummy?.targets && typeof s.ptrDummy.targets[c]==="number")
+      .map(s=>({ spec:s.spec, cls:s.class, value:s.ptrDummy.targets[c] }))
+      .sort((a,b)=>b.value-a.value).map((r,i,a)=>({ ...r, rank:i+1, of:a.length }));
+    if(rows.length>1) catalog.set(`DPS|raid|${label}`,
+      { key:`DPS|raid|${label}`, role:"DPS", bracket:"raid", name:label, source:"warcraftlogs", unit:"rDPS", era:"ptr", rows });
+  }
   // Sim fight profile at canonical target counts (ST / cleave / AoE) → three ladders under Sims.
   for(const [c,label] of [["1","Sim DPS — 1 target (ST)"],["3","Sim DPS — 3 targets (cleave)"],["8","Sim DPS — 8 targets (AoE)"]]){
     const rows = SPECS.filter(s=>s.fightProfile?.targets && typeof s.fightProfile.targets[c]==="number")
