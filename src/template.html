@@ -302,7 +302,12 @@
      exactly 7 grid items or every row misaligns. Mobile shows them again. */
   .metaline{display:contents}
   .metaline .mtag{display:none}
-  @media(max-width:759px){ .metaline{display:flex} }
+  @media(max-width:759px){
+    .metaline{display:flex}
+    .metaline .mtag{display:inline} /* must be re-shown HERE — the rule inside the card block above loses the cascade to the display:none default */
+    .controls{position:static} /* sticky controls ate ~55% of a phone viewport */
+    .seg{flex-wrap:wrap} /* the source segment is ~500px unwrapped — wrap instead of forcing horizontal pan */
+  }
 
   /* ---------- spec finder ---------- */
   .finderbtn{
@@ -337,7 +342,7 @@
   .fopt:disabled{opacity:.6; cursor:not-allowed; color:var(--ink-dim)}
   .fopt:disabled:hover{color:var(--ink-dim); border-color:var(--edge-2)}
   /* focus-visible coverage on every interactive element */
-  .search:focus-visible, .sortsel:focus-visible, .fopt:focus-visible, .finder-x:focus-visible{outline:2px solid var(--accent-2); outline-offset:2px}
+  .search:focus-visible, .sortsel:focus-visible, .fopt:focus-visible, .finder-x:focus-visible, .fres:focus-visible{outline:2px solid var(--accent-2); outline-offset:2px}
   /* active (non-default) filter/sort cue on selects + search */
   .sortsel.engaged, .search.engaged{border-color:var(--accent); box-shadow:inset 3px 0 0 var(--accent)}
   /* coarse-pointer (touch) targets — desktop density unchanged */
@@ -910,6 +915,7 @@ function wireRows(){
       toggle();
     });
     row.addEventListener('keydown', e=>{
+      if(e.target.closest('.drawer')) return; // Enter on a focused drawer link must navigate, not collapse
       if(e.key==='Enter' || e.key===' '){ e.preventDefault(); toggle(); }
     });
   });
@@ -1155,10 +1161,13 @@ function openSpecFromFinder(cls, spec){
 
   function weights(){
     const w = { ...BASE[answers.priority] };
-    for(const t of answers.traits){ const k = TRAIT_CRIT[t]; if(k) w[k] += (TRAIT_BOOST[t] ?? 0.20); }
+    // (w[k]||0): a trait may key a criterion absent from this priority's base — without the
+    // guard, undefined + boost = NaN poisons the whole normalized vector (every score 0).
+    for(const t of answers.traits){ const k = TRAIT_CRIT[t]; if(k) w[k] = (w[k]||0) + (TRAIT_BOOST[t] ?? 0.20); }
     // Opting into raw output also values tank/healer DAMAGE (their off-role contribution).
     if(answers.traits.includes("output")) w.damage = (w.damage||0) + TRAIT_BOOST.output;
     const sum = Object.values(w).reduce((s,x)=>s+x,0);
+    if(!Number.isFinite(sum) || sum <= 0) throw new Error("Finder weights degenerate: " + JSON.stringify(w));
     for(const k in w) w[k] /= sum;
     return w;
   }
@@ -1228,7 +1237,8 @@ function openSpecFromFinder(cls, spec){
       return `<button class="fopt" data-q="${esc(q.id)}" data-v="${esc(v)}" aria-pressed="${on}"${off?' disabled title="all tanks are melee"':''}>${esc(label)}</button>`;
     }).join("");
   }
-  function renderPanel(){
+  let resultsShown = false;
+  function renderPanel(focusQ, focusV){
     ov.innerHTML = `<div class="finder-panel" role="dialog" aria-modal="true" aria-label="Spec finder">
       <div class="finder-head">
         <div><h2>Find your spec</h2><p>Every spec is scored against your preferences using the tracker's live data. Note that <b>tier</b> (holistic consensus rating), <b>raw output</b> (damage/healing numbers), and <b>meta</b> (what's actually played) are different things — “Chase the strongest” ranks by <b>tier</b>; opt into raw output, <b>Widely played</b> (broad adoption — all logged players), or <b>Top-key meta</b> (what the best run — top-2000 M+ keys) separately under Extra priorities. <span style="color:var(--ink-faint)">Every spec clears normal/heroic and low–mid keys; below title-range M+ and Cutting Edge, <b style="color:var(--ink-dim)">the player matters more than the spec</b> — treat these as a shortlist to try, not a verdict.</span></p></div>
@@ -1242,28 +1252,39 @@ function openSpecFromFinder(cls, spec){
       <div class="fresults" id="fresults"></div>
     </div>`;
     ov.querySelector("#finder-close").onclick = close;
-    ov.querySelector("#finder-run").onclick = showResults;
+    ov.querySelector("#finder-run").onclick = () => showResults();
     ov.querySelectorAll(".fopt").forEach(b => b.onclick = () => {
       const q = Q.find(x=>x.id===b.dataset.q), v = b.dataset.v;
       if(q.type==="multi"){ const i = answers[q.id].indexOf(v); i>=0 ? answers[q.id].splice(i,1) : answers[q.id].push(v); }
       else answers[q.id] = v;
       if(q.id==="role" && v==="Tank" && answers.range!=="Melee") answers.range = "Melee"; // tanks are all melee
-      renderPanel();
+      renderPanel(q.id, v);
     });
+    // keep focus on the option the user just clicked (the rebuild would drop it to <body>),
+    // and keep visible results in sync with the changed answers instead of vanishing.
+    if(focusQ != null){
+      const b = ov.querySelector(`.fopt[data-q="${CSS.escape(focusQ)}"][data-v="${CSS.escape(focusV)}"]`);
+      if(b) b.focus();
+    }
+    if(resultsShown) showResults(false);
   }
-  function showResults(){
+  function showResults(scroll = true){
+    resultsShown = true;
     const box = ov.querySelector("#fresults");
     box.innerHTML = results().map((r,i)=>{
       const color = CLASS_COLOR[r.s.class] || "#888";
       const chips = whyChips(r.s, r.crit).map(c=>`<span class="wchip">${esc(c)}</span>`).join("");
-      return `<div class="fres" data-cls="${esc(r.s.class)}" data-spec="${esc(r.s.spec)}">
+      return `<div class="fres" role="button" tabindex="0" data-cls="${esc(r.s.class)}" data-spec="${esc(r.s.spec)}" aria-label="Open ${esc(r.s.spec)} ${esc(r.s.class)} in the tracker">
         <div class="frank">${i+1}</div>
         <div><div class="fname"><span class="cbar" style="display:inline-block;width:3px;height:13px;vertical-align:middle;margin-right:7px;background:${color}"></span>${esc(r.s.spec)}<span class="fcls" style="color:${color}">${esc(r.s.class)}</span> <span class="frole">${esc(r.s.role)}</span></div><div class="fwhy">${chips}</div></div>
         <div class="fscore"><div class="fpct">${Math.round(r.score*100)}</div><div class="fmeter"><span style="width:${Math.round(r.score*100)}%"></span></div></div>
       </div>`;
     }).join("");
-    box.querySelectorAll(".fres").forEach(el => el.onclick = () => openSpecFromFinder(el.dataset.cls, el.dataset.spec));
-    box.scrollIntoView({ behavior:"smooth", block:"nearest" });
+    box.querySelectorAll(".fres").forEach(el => {
+      el.onclick = () => openSpecFromFinder(el.dataset.cls, el.dataset.spec);
+      el.onkeydown = e => { if(e.key==="Enter"||e.key===" "){ e.preventDefault(); openSpecFromFinder(el.dataset.cls, el.dataset.spec); } };
+    });
+    if(scroll) box.scrollIntoView({ behavior:"smooth", block:"nearest" });
   }
   let opener=null;
   function open(){ opener=document.activeElement; renderPanel(); ov.classList.add("open"); document.body.style.overflow="hidden"; const c=ov.querySelector("#finder-close"); if(c) setTimeout(()=>c.focus(),0); }
