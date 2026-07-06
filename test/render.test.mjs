@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { fightLabels, metricRanks, outlookFor, movementFor, snapshotStateOf, pickBaseline, dummyDomeScores } from "../src/render.mjs";
+import { fightLabels, metricRanks, outlookFor, movementFor, snapshotStateOf, pickBaseline, dummyDomeScores, classifyHighlight } from "../src/render.mjs";
 
 test("outlookFor: verdict wins; tuning-line balance covers writeup-less specs", () => {
   const builds = { builds: [{
@@ -135,6 +135,34 @@ test("metricRanks ranks within (role, bracket, metric name), #1 = highest", () =
   assert.deepEqual([specs[0].metrics[0].rank, specs[0].metrics[0].of], [2, 2]);
   assert.deepEqual([specs[0].metrics[1].rank], [1]); // popularity ranked separately
   assert.deepEqual([specs[2].metrics[0].rank, specs[2].metrics[0].of], [1, 1]);
+});
+
+test("classifyHighlight: resource terms invert direction; '(was N%)' idiom decides by value", () => {
+  // plain stat direction
+  assert.equal(classifyHighlight("Obliterate damage increased by 8%."), "buff");
+  assert.equal(classifyHighlight("Kingsbane damage reduced by 15%."), "nerf");
+  // resource/tempo inversion — the old word-count called both of these wrong
+  assert.equal(classifyHighlight("Deathmark's cooldown has been reduced by 30 seconds."), "buff");
+  assert.equal(classifyHighlight("Fan of Knives Energy cost increased by 5."), "nerf");
+  // "X by N% (was M%)" — the verb lies, the values don't
+  assert.equal(classifyHighlight("Deathmark increases the damage of your Rupture by 75% (was 100%)."), "nerf");
+  assert.equal(classifyHighlight("Shrouded Suffocation increases Garrote damage by 30% (was 20%)."), "buff");
+  assert.equal(classifyHighlight("Deal Fate now has a 60% chance to grant a combo point (was 100%)."), "nerf");
+  // resource + (was) inversion: a longer cooldown is a nerf even though the value rose
+  assert.equal(classifyHighlight("Vendetta cooldown increased to 3 minutes (was 2)."), "nerf");
+  // no signal
+  assert.equal(classifyHighlight("Poison Bomb's visual has been adjusted."), null);
+});
+
+test("fightLabels: a spec with no comparable sims gets tag null, not 'Flexible'", () => {
+  const specs = [
+    mk("Full1", { "1": 100000, "3": 150000, "8": 300000 }),
+    mk("Full2", { "1": 120000, "3": 160000, "8": 520000 }),
+    mk("OnlyFive", { "5": 230000 }), // no canonical counts at all
+  ];
+  fightLabels(specs);
+  assert.equal(specs[2].fightProfile.tag, null);
+  assert.deepEqual(specs[2].fightProfile.labels, { st: null, cleave: null, aoe: null });
 });
 
 test("outlookFor: a draft verdict never drives the arrow — falls through to tuning balance", () => {

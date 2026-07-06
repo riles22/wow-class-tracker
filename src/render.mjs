@@ -52,7 +52,8 @@ export function fightLabels(specs) {
       aoe: label(pct(cols.aoe, m.aoe))
     };
     let tag = "Flexible";
-    if (labels.st === "strong" && labels.aoe === "strong") tag = "All-round";
+    if (labels.st == null && labels.cleave == null && labels.aoe == null) tag = null; // no comparable sims — no tag, not "Flexible"
+    else if (labels.st === "strong" && labels.aoe === "strong") tag = "All-round";
     else if (labels.aoe === "strong") tag = "AoE-lean";
     else if (labels.st === "strong") tag = "ST-lean";
     else if (labels.st === "weak" && labels.aoe === "weak") tag = "Low-sims";
@@ -131,9 +132,34 @@ export function dummyDomeScores(specs) {
   return specs;
 }
 
+/* Classify one tuning highlight as "buff" | "nerf" | null. Two things a bare
+   increase/reduce word-count gets wrong, handled per clause with first-signal-wins:
+   - resource/tempo terms invert direction ("cooldown reduced" is a buff,
+     "cost increased" a nerf);
+   - the patch-note "X by 75% (was 100%)" idiom is a nerf despite saying "increases". */
+export function classifyHighlight(h) {
+  for (const clause of String(h).split(/[,;.]|\band\b/i)) {
+    const res = /\b(cooldown|recharge|cost|cast time)\b/i.test(clause);
+    // "… 60% chance … (was 100%)": compare the LAST number before the paren to the old value.
+    const was = /([\d.]+)[^()\d]*\(\s*was\s+([\d.]+)\s*%?\s*\)/i.exec(clause);
+    if (was) {
+      const now = parseFloat(was[1]), before = parseFloat(was[2]);
+      if (now === before) continue;
+      const valueUp = now > before;
+      return (valueUp !== res) ? "buff" : "nerf"; // higher value = buff, unless it's a cost/cooldown
+    }
+    const down = /\b(reduc\w*|decreas\w*|nerf\w*|lower\w*)\b/i.test(clause);
+    const up = /\b(increas\w*|improv\w*|buff\w*)\b/i.test(clause);
+    if (down && !up) return res ? "buff" : "nerf";
+    if (up && !down) return res ? "nerf" : "buff";
+  }
+  return null;
+}
+
 /* 12.1 outlook: direction derived from the PTR writeup verdict when present,
-   else from the balance of buff/nerf tuning lines in the PTR build feed.
-   Upgraded automatically when zone-54 PTR metrics land (they join the basis). */
+   else from the balance of buff/nerf tuning lines in the PTR build feed. The zone-54
+   PTR raid-testing rank, when landed, is NAMED in the basis string for context but
+   does not flip the direction (tiny-n testing data stays informative, not a driver). */
 export function outlookFor(spec, ptrBuilds) {
   const builds = ptrBuilds?.builds ?? [];
   if (!builds.length) return null;
@@ -150,8 +176,9 @@ export function outlookFor(spec, ptrBuilds) {
       // Count only lines genuinely ABOUT this spec ("Arms Warrior — …"), not class-wide
       // lines that merely name it in prose ("Warrior (class-wide) — … exclusive to Arms …").
       if (!h.startsWith(`${full} `)) continue;
-      if (/increas/i.test(h)) buffs++;
-      if (/reduc|decreas|nerf/i.test(h)) nerfs++;
+      const dir = classifyHighlight(h); // each line counts once, resource-aware
+      if (dir === "buff") buffs++;
+      else if (dir === "nerf") nerfs++;
     }
   }
   // A draft writeup's verdict is unconfirmed (distilled from a Wowhead article, not yet
@@ -165,10 +192,14 @@ export function outlookFor(spec, ptrBuilds) {
   else if (buffs || nerfs) direction = buffs > nerfs ? "up" : nerfs > buffs ? "down" : "flat";
   else if (mentioned) direction = "flat";
   if (!direction) return null;
+  // Zone-54 raid-testing rank joins the basis STRING for context (never the direction —
+  // tiny-n testing data stays informative, not a driver).
+  const testing = (spec.metrics ?? []).find(m => m.name === "12.1 PTR raid testing score (normalized)");
   return {
     direction, builds: mentioned, buffs, nerfs,
     basis: `${verdict ? `PTR read: ${verdict}` : "no writeup yet"} · touched in ${mentioned} of ${builds.length} PTR builds` +
-      (buffs || nerfs ? ` · highlighted tuning lines +${buffs}/−${nerfs}` : "")
+      (buffs || nerfs ? ` · highlighted tuning lines +${buffs}/−${nerfs}` : "") +
+      (testing?.rank ? ` · PTR raid-testing (zone 54) rank #${testing.rank}/${testing.of}` : "")
   };
 }
 

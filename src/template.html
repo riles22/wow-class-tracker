@@ -502,10 +502,19 @@
     <div class="grp">
       <span class="ptag" style="margin-left:0">AoE-lean</span><span>sim fight profile (DPS) — expand a row for the numbers</span>
     </div>
+    <div class="grp">
+      <span class="mv" data-d="up" style="margin:0">▲</span><span class="mv" data-d="down" style="margin:0">▼</span><span>tier / rank moved since the last data change (hover for from-when)</span>
+    </div>
+    <div class="grp">
+      <span class="olk" data-d="up" style="margin:0">↗</span><span class="olk" data-d="flat" style="margin:0">→</span><span class="olk" data-d="down" style="margin:0">↘</span><span>12.1 outlook next to the verdict (from writeup or tuning balance)</span>
+    </div>
+    <div class="grp">
+      <span class="newbadge" style="margin:0">NEW</span><span>fresh take / tuning for this spec in the last <span id="newwindow">3</span> days</span>
+    </div>
     <span class="note">Tiers are <b>within role</b> — a healer's S is best among healers, not across the whole game. Hover any tier badge for the per-source breakdown; click any row for current 12.0.7 numbers.</span>
   </div>
 
-  <p class="ptrcaveat" id="ptrcaveat"><b>PTR read</b> — 12.1 verdicts, tuning notes, and zone-54 testing scores are <b style="text-transform:none;letter-spacing:0;font-family:inherit;font-size:inherit;color:var(--ink)">sim-backed speculation, not empirical truth</b>. Early-patch sims desync between PTR and live, SimC rotations are immature, and testing samples are tiny (n often &lt;100). Treat as directional until ~2 weeks of live logs confirm it.</p>
+  <p class="ptrcaveat" id="ptrcaveat"><b>PTR read</b> — 12.1 verdicts, tuning notes, and PTR raid-testing scores (WCL zone 54) are <b style="text-transform:none;letter-spacing:0;font-family:inherit;font-size:inherit;color:var(--ink)">sim-backed speculation, not empirical truth</b>. Early-patch sims desync between PTR and live, SimC rotations are immature, and testing samples are tiny (n often &lt;100). Treat as directional until ~2 weeks of live logs confirm it.</p>
 
   <div class="matrix" id="matrix"></div>
 
@@ -682,7 +691,8 @@ function metricsHTML(s){
     const val = typeof m.value==="number" ? m.value.toLocaleString("en-US") : esc(String(m.value));
     const mvArrow = m.rankDelta ? ` <span class="mv" data-d="${m.rankDelta>0?'up':'down'}" title="rank ${m.rankDelta>0?'climbed':'fell'} ${Math.abs(m.rankDelta)} since ${esc(META.movementSince||"last snapshot")}">${m.rankDelta>0?'▲':'▼'}${Math.abs(m.rankDelta)}</span>` : "";
     const rank = m.rank ? ` <span class="mnote">· <b style="color:var(--accent-2)">#${m.rank}</b>/${m.of} ${esc(s.role)}${mvArrow}</span>` : "";
-    return `<div class="setrow"><span class="pc">${esc(src?src.name:m.source)}</span><span class="pct">${esc(m.name)}: <b>${val}</b>${m.unit?` ${esc(m.unit)}`:""}${rank}${m.n?` <span class="mnote">(n=${Number(m.n).toLocaleString("en-US")})</span>`:""}${m.asOf?` <span class="mnote">· ${esc(m.asOf)}</span>`:""}</span></div>`;
+    const rdpsTip = /rDPS/.test(m.name) || m.unit === "rDPS" ? ` title="rDPS = raid-contribution DPS: your damage with externals/raid-buff gains removed (Warcraft Logs)"` : "";
+    return `<div class="setrow"><span class="pc">${esc(src?src.name:m.source)}</span><span class="pct"${rdpsTip}>${esc(m.name)}: <b>${val}</b>${m.unit?` ${esc(m.unit)}`:""}${rank}${m.n?` <span class="mnote">(n=${Number(m.n).toLocaleString("en-US")})</span>`:""}${m.asOf?` <span class="mnote">· ${esc(m.asOf)}</span>`:""}</span></div>`;
   };
   const section = (label, items) => items.length ? `<p class="d-h">${label}</p><div class="setbox">${items.map(row).join("")}</div>` : "";
   const live = m => metricEra(m)==="live", ptr = m => metricEra(m)==="ptr";
@@ -766,12 +776,21 @@ function tierSetHTML(s){
 function drawerHTML(s){
   const p = s.ptr;
   const showPtr = state.era !== "live";
+  // Hover-only info (outlook basis, movement history) restated as text so touch and
+  // keyboard users can reach what mouse users see in tooltips. Additive.
+  const signals = [];
+  if(showPtr && s.outlook) signals.push(`12.1 outlook ${s.outlook.direction==="up"?"↗ improving":s.outlook.direction==="down"?"↘ declining":"→ holding"} — ${s.outlook.basis}`);
+  if(s.movement?.raid) signals.push(`Raid tier was ${s.movement.raid.was} on ${s.movement.raid.since}`);
+  if(s.movement?.mplus) signals.push(`M+ tier was ${s.movement.mplus.was} on ${s.movement.mplus.since}`);
+  const signalHTML = signals.length ? `<p class="mnote" style="margin:0 0 10px">${signals.map(esc).join("<br>")}</p>` : "";
   const left = (p && showPtr) ? `
-       <p class="d-summary">${p.theme?`<span class="theme">${esc(p.theme)}</span> `:""}${p.draft?`<span class="theme" style="color:var(--v-mix); border-color:color-mix(in srgb,var(--v-mix) 45%,transparent)">draft — verify verdict</span>`:""}${p.theme||p.draft?`<br>`:""}${esc(p.summary)}${draftSrcHTML(p)}</p>
-       <p class="d-h">Key changes</p>
+       <p class="d-summary">${p.theme?`<span class="theme">${esc(p.theme)}</span> `:""}${p.draft?`<span class="theme" style="color:var(--v-mix); border-color:color-mix(in srgb,var(--v-mix) 45%,transparent)" title="Distilled from the cited source; the verdict hasn't been confirmed by the maintainer yet">draft — unconfirmed verdict</span>`:""}${p.theme||p.draft?`<br>`:""}${esc(p.summary)}${draftSrcHTML(p)}</p>
+       ${signalHTML}<p class="d-h">Key changes</p>
        <ul class="d-list">${(p.changes||[]).map(c=>`<li>${esc(c)}</li>`).join("")}</ul>` : showPtr ? `
-       <p class="d-summary"><span class="theme">No 12.1 PTR writeup yet</span><br>Current-season baseline below — the PTR read gets added to data/specs.json when this spec's pass lands.</p>` : `
-       <p class="d-summary"><span class="theme">12.0.7 baseline view</span><br>Live-season data only — switch Era to 12.1 PTR (or Both) for the change read.</p>`;
+       <p class="d-summary"><span class="theme">No 12.1 PTR writeup yet</span><br>${state.era==="ptr"
+         ? "Only PTR-era numbers are shown in this view — switch Era to Both for the 12.0.7 baseline alongside."
+         : "Current-season baseline below — the PTR read gets added to data/specs.json when this spec's pass lands."}</p>${signalHTML}` : `
+       <p class="d-summary"><span class="theme">12.0.7 baseline view</span><br>Live-season data only — switch Era to 12.1 PTR (or Both) for the change read.</p>${signalHTML}`;
   const tierset = showPtr ? tierSetHTML(s) : "";
   // Inner content only — the .drawer shell is emitted empty by rowHTML and filled lazily
   // on open, so render() rebuilds ~1.3K visible nodes instead of ~9.3K (85% was drawers).
@@ -786,6 +805,7 @@ function drawerHTML(s){
    change and no build timestamp. Signals: a non-superseded creator take, or a PTR build
    that touched the spec. Returns the freshest {kind,label,date} or null. */
 const NEW_WINDOW_DAYS = 3;
+{ const el = document.getElementById("newwindow"); if(el) el.textContent = NEW_WINDOW_DAYS; } // legend stays in sync
 function newInfoFor(s){
   const parse = d => { const m=/^(\d{4})-(\d{2})-(\d{2})/.exec(d||""); return m ? Date.UTC(+m[1],+m[2]-1,+m[3]) : null; };
   const now = Date.now();
@@ -894,7 +914,9 @@ function render(){
   }
 
   matrix.innerHTML = html;
-  document.getElementById('ptrcaveat').style.display = state.era === "ptr" ? "block" : "none";
+  // The speculation caveat belongs to EVERY view that shows PTR content, including the
+  // default "Both" — hiding it from first-time visitors buried the honesty disclaimer.
+  document.getElementById('ptrcaveat').style.display = state.era === "live" ? "none" : "block";
   const shown = ordered.length, ptrShown = ordered.filter(s=>s.ptr).length;
   document.getElementById('count').textContent = `${shown} spec${shown!==1?'s':''}${state.ptrOnly?'':` · ${ptrShown} tracked`}`;
   // restore drawers that were open before this re-render (fresh DOM, current-era content)
@@ -1409,7 +1431,8 @@ function openSpecFromFinder(cls, spec){
     if(e.source==="bloodmallet"||e.source==="simulationcraft") pre.push('<b>Sim</b> — theoretical (SimulationCraft), not logged play');
     if(e.source==="murlok") pre.push("Top-50 <b>ceiling</b> — mean of each spec's best 50 players, <b>not</b> popularity");
     const unitLabel = e.unit==="%" ? "percent" : e.unit==="/100" ? "0–100 score" : (e.unit||"value");
-    const base = `<b>${have}</b> of ${roleN} ${esc(e.role)} · within-role, ${e.bracket==="raid"?"Raid":"M+"} · higher is better · ${esc(unitLabel)}`;
+    const unitHTML = e.unit==="rDPS" ? `<span title="rDPS = raid-contribution DPS: your damage with externals/raid-buff gains removed (Warcraft Logs)" style="cursor:help;border-bottom:1px dotted var(--ink-faint)">rDPS</span>` : esc(unitLabel);
+    const base = `<b>${have}</b> of ${roleN} ${esc(e.role)} · within-role, ${e.bracket==="raid"?"Raid":"M+"} · higher is better · ${unitHTML}`;
     return `<div class="ladder-cap">${[...pre, base].join(" &nbsp;·&nbsp; ")}</div>`;
   }
 
