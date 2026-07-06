@@ -10,7 +10,7 @@
 -->
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-Fmv/9RXpyz84xW37bUZz4Mh/ePWBMK1CA40vldg7Ksw='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-JdTIOkpcSorfaI8H32CmrDfodc8QJ4N9X4obvpNovxU='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="Beefdad">
 <title>Curse of Ula'tek — 12.1 PTR Spec Tracker</title>
@@ -133,7 +133,8 @@
     padding:12px 0 8px; font-size:12px; color:var(--ink-faint)
   }
   .legend .grp{display:flex; gap:9px; align-items:center; flex-wrap:wrap}
-  .legend .note{max-width:52ch; line-height:1.45}
+  .legend .note{max-width:88ch; line-height:1.45; flex-basis:100%}
+  .lsep{width:1px; height:12px; background:var(--edge-2); flex:none}
 
   /* ---------- tier + verdict badges ---------- */
   .tier{
@@ -421,9 +422,7 @@
     <div class="stamp">
       <span><b>Baseline:</b> 12.0.7 / Season 1</span>
       <span><b>PTR:</b> 12.1 “Curse of Ula'tek”</span>
-      <span id="stamp-sources"></span>
       <span id="stamp-snapshot"></span>
-      <span id="ptrcount"></span>
     </div>
   </div>
 </header>
@@ -442,10 +441,6 @@
         <button data-era="ptr" aria-pressed="false">12.1 PTR</button>
       </div>
     </div>
-    <span class="grow"></span>
-    <button class="finderbtn" id="finderbtn" type="button">🧭 Find my spec</button>
-    <button class="finderbtn" id="ladderbtn" type="button" style="background:linear-gradient(90deg,var(--accent-2),var(--accent))">📊 The Ladder</button>
-    <span class="count" id="count"></span>
   </div>
   <div class="controls-row">
     <div class="ctl">
@@ -487,37 +482,38 @@
       </select>
     </div>
     <input class="search" id="search" type="search" placeholder="Search spec…" aria-label="Search spec or class">
+    <span class="grow"></span>
+    <div class="ctl"><!-- no-break pair: the two overlay CTAs always wrap together -->
+      <button class="finderbtn" id="finderbtn" type="button">🧭 Find my spec</button>
+      <button class="finderbtn" id="ladderbtn" type="button" style="background:linear-gradient(90deg,var(--accent-2),var(--accent))">📊 The Ladder</button>
+    </div>
   </div>
 </div>
 
 <div class="wrap">
 
-  <div class="legend">
-    <div class="grp" id="tierlegend">
+  <div class="legend"><!-- three labeled clusters: everything tier-column, everything PTR, the profile chip -->
+    <div class="grp">
       <span class="lbl" style="margin:0">Tiers</span>
+      <span class="grp" id="tierlegend" style="gap:6px"></span>
+      <span class="divmark">±</span><span>sources diverge (consensus)</span>
+      <span class="lsep" aria-hidden="true"></span>
+      <span class="mv" data-d="up" style="margin:0">▲</span><span class="mv" data-d="down" style="margin:0">▼</span><span>tier / rank moved since the last data change (hover for from-when)</span>
     </div>
     <div class="grp">
       <span class="lbl" style="margin:0">PTR read</span>
       <span class="verdict" data-v="Positive"><span class="dot"></span>Positive</span>
       <span class="verdict" data-v="Mixed"><span class="dot"></span>Mixed</span>
       <span class="verdict" data-v="Negative"><span class="dot"></span>Negative</span>
-    </div>
-    <div class="grp">
-      <span class="divmark">±</span><span>sources diverge (consensus view)</span>
-    </div>
-    <div class="grp">
-      <span class="ptag" style="margin-left:0">AoE-lean</span><span>sim fight profile (DPS) — expand a row for the numbers</span>
-    </div>
-    <div class="grp">
-      <span class="mv" data-d="up" style="margin:0">▲</span><span class="mv" data-d="down" style="margin:0">▼</span><span>tier / rank moved since the last data change (hover for from-when)</span>
-    </div>
-    <div class="grp">
       <span class="olk" data-d="up" style="margin:0">↗</span><span class="olk" data-d="flat" style="margin:0">→</span><span class="olk" data-d="down" style="margin:0">↘</span><span>12.1 outlook next to the verdict (from writeup or tuning balance)</span>
-    </div>
-    <div class="grp">
+      <span class="lsep" aria-hidden="true"></span>
       <span class="newbadge" style="margin:0">NEW</span><span>fresh take / tuning for this spec in the last <span id="newwindow">3</span> days</span>
     </div>
-    <span class="note">Tiers are <b>within role</b> — a healer's S is best among healers, not across the whole game. Hover any tier badge for the per-source breakdown; click any row for current 12.0.7 numbers.</span>
+    <div class="grp">
+      <span class="lbl" style="margin:0">Profile</span>
+      <span class="ptag" style="margin-left:0">AoE-lean</span><span>sim fight profile (DPS) — expand a row for the numbers</span>
+    </div>
+    <span class="note"><span class="count" id="count"></span> · Tiers are <b>within role</b> — a healer's S is best among healers, not across the whole game. Hover any tier badge for the per-source breakdown; click any row for current 12.0.7 numbers.</span>
   </div>
 
   <p class="ptrcaveat" id="ptrcaveat"><b>PTR read</b> — 12.1 verdicts, tuning notes, and PTR raid-testing scores (WCL zone 54) are <b style="text-transform:none;letter-spacing:0;font-family:inherit;font-size:inherit;color:var(--ink)">sim-backed speculation, not empirical truth</b>. Early-patch sims desync between PTR and live, SimC rotations are immature, and testing samples are tiny (n often &lt;100). Treat as directional until ~2 weeks of live logs confirm it.</p>
@@ -1023,15 +1019,14 @@ srcseg.addEventListener('click', e=>{
   legend.insertAdjacentHTML('beforeend', tiers.map(t=>`<span class="tier" data-t="${esc(t)}">${esc(t)}</span>`).join(""));
 })();
 
-/* ---------- masthead stamp ---------- */
-document.getElementById('stamp-sources').innerHTML =
-  `<b>Sources:</b> ${TIER_SOURCES.map(s=>esc(s.name)).join(" · ")}`;
+/* ---------- masthead stamp ----------
+   No "Sources:" list here — the interactive source toggle directly below IS the live
+   list; no "Tracked:" either — the legend count carries it and doubles as filter
+   feedback. The stamp keeps only what nothing else shows: the data freshness dates. */
 if(META.latestSnapshot){
   document.getElementById('stamp-snapshot').innerHTML = `<b>Latest snapshot:</b> ${esc(META.latestSnapshot)}`
     + (META.latestPtrBuild ? ` <b style="margin-left:14px">Latest PTR build:</b> ${esc(META.latestPtrBuild)}` : "");
 }
-document.getElementById('ptrcount').innerHTML =
-  `<b>Tracked:</b> ${META.trackedCount} of ${META.specCount} specs`;
 
 /* ---------- footer: source registry (tier lists + metrics + notes feeds) ---------- */
 document.getElementById('srclist').innerHTML = SOURCES.filter(s=>Array.isArray(s.pages)).map(src=>{
