@@ -9,7 +9,7 @@ and a spec-finder quiz — compiled into one self-contained HTML page.
 
 **▶ Live: https://riles22.github.io/wow-class-tracker/**
 
-Made by **Beefdad**. A personal project — if you fork, share, or repost it, please keep the credit.
+Made by **[riles22](https://github.com/riles22)**. A personal project — if you fork, share, or repost it, please keep the credit.
 
 ## What it shows
 
