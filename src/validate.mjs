@@ -9,9 +9,26 @@ const ROLES = new Set(["DPS", "Healer", "Tank"]);
 const BRACKETS = new Set(["raid", "mplus"]);
 const VERDICTS = new Set(["Positive", "Mixed", "Negative"]);
 const KINDS = new Set(["tier-list", "metrics", "notes-feed", "reference", "community"]);
+const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
+// Creator-take URLs come from an autonomous nightly pipeline over untrusted transcripts —
+// beyond https-only they must point at a host the pipeline actually cites.
+const TAKE_HOSTS = new Set(["youtube.com", "www.youtube.com", "m.youtube.com", "youtu.be", "hackmd.io", "wowhead.com", "www.wowhead.com"]);
+const httpsUrl = v => { try { return new URL(v).protocol === "https:"; } catch { return false; } };
 
-export function validateData({ specs, sources, scales, community, ptrBuilds, creatorTakes }) {
+/* opts.fullRoster: enforce the real 40-spec Midnight roster — used by the CLI, the build,
+   and the apply-* merge scripts (which operate on the repo's real data), but not by unit
+   fixtures, which validate small synthetic datasets. */
+export function validateData({ specs, sources, scales, community, ptrBuilds, creatorTakes, encounterTiers }, opts = {}) {
   const errors = [];
+  const isoOk = (v, what) => { if (v != null && !ISO_DATE.test(v)) errors.push(`${what} must be YYYY-MM-DD, got "${v}"`); };
+  const urlOk = (v, what) => { if (v != null && !httpsUrl(v)) errors.push(`${what} must be a valid https:// URL, got "${v}"`); };
+
+  if (opts.fullRoster) {
+    if (specs.length !== 40) errors.push(`specs.json: Midnight roster must be exactly 40 specs (got ${specs.length})`);
+    if (!specs.some(s => s.class === "Demon Hunter" && s.spec === "Devourer")) {
+      errors.push("specs.json: Midnight roster must include Demon Hunter / Devourer");
+    }
+  }
 
   // --- scales ---
   const bands = scales?.consensus?.bands;
@@ -47,6 +64,11 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
     if (!source.id || !source.name) errors.push(`sources.json: source missing id or name (${JSON.stringify(source.id)})`);
     allSources.add(source.id);
     if (!KINDS.has(source.kind)) errors.push(`sources.json: source "${source.id}" has unknown kind "${source.kind}"`);
+    urlOk(source.url, `sources.json: source "${source.id}" url`);
+    for (const page of source.pages ?? []) {
+      urlOk(page.url, `sources.json: source "${source.id}" page url`);
+      isoOk(page.snapshot, `sources.json: source "${source.id}" page snapshot`);
+    }
     if (source.kind === "tier-list") {
       if (!scales.scales?.[source.scale]) {
         errors.push(`sources.json: source "${source.id}" references unknown scale "${source.scale}"`);
@@ -81,22 +103,33 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
       }
     }
 
+    const metricKeys = new Set();
     for (const metric of spec.metrics ?? []) {
       if (!allSources.has(metric.source)) errors.push(`specs.json: ${key} metric from unknown source "${metric.source}"`);
       if (!BRACKETS.has(metric.bracket)) errors.push(`specs.json: ${key} metric has invalid bracket "${metric.bracket}"`);
       if (typeof metric.name !== "string" || !metric.name) errors.push(`specs.json: ${key} metric missing name`);
-      if (typeof metric.value !== "number") errors.push(`specs.json: ${key} metric "${metric.name}" value must be a number`);
+      // All current series are non-negative magnitudes; NaN/Infinity must never reach the page.
+      if (!Number.isFinite(metric.value) || metric.value < 0) errors.push(`specs.json: ${key} metric "${metric.name}" value must be a finite non-negative number`);
       if (metric.era != null && !["live", "ptr"].includes(metric.era)) errors.push(`specs.json: ${key} metric "${metric.name}" era must be "live" or "ptr"`);
+      // Era gating (hard rule 3) must agree with the display-name convention both ways:
+      // a "12.1 PTR"-named series may not claim live, and an era:"ptr" series must say PTR in its name.
+      if (metric.name?.includes("12.1 PTR") && metric.era === "live") errors.push(`specs.json: ${key} metric "${metric.name}" is named 12.1 PTR but tagged era "live"`);
+      if (metric.era === "ptr" && !/PTR/.test(metric.name ?? "")) errors.push(`specs.json: ${key} metric "${metric.name}" is era "ptr" but its name carries no PTR label`);
+      isoOk(metric.asOf, `specs.json: ${key} metric "${metric.name}" asOf`);
+      const mkey = `${metric.source}|${metric.bracket}|${metric.name}`;
+      if (metricKeys.has(mkey)) errors.push(`specs.json: ${key} duplicate metric (${mkey}) — the upsert key must be unique per spec`);
+      metricKeys.add(mkey);
     }
 
     if (spec.fightProfile != null) {
       const fp = spec.fightProfile;
       if (!allSources.has(fp.source)) errors.push(`specs.json: ${key} fightProfile from unknown source "${fp.source}"`);
+      isoOk(fp.asOf, `specs.json: ${key} fightProfile.asOf`);
       const targets = Object.entries(fp.targets ?? {});
       if (targets.length === 0) errors.push(`specs.json: ${key} fightProfile.targets must be a non-empty object`);
       for (const [count, dps] of targets) {
-        if (!/^\d+$/.test(count) || typeof dps !== "number") {
-          errors.push(`specs.json: ${key} fightProfile target "${count}" must map a numeric target count to numeric DPS`);
+        if (!/^\d+$/.test(count) || !Number.isFinite(dps) || dps < 0) {
+          errors.push(`specs.json: ${key} fightProfile target "${count}" must map a numeric target count to finite non-negative DPS`);
         }
       }
     }
@@ -116,10 +149,11 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
     }
 
     if (spec.ptrDummy != null) {
+      isoOk(spec.ptrDummy.asOf, `specs.json: ${key} ptrDummy.asOf`);
       const targets = Object.entries(spec.ptrDummy.targets ?? {});
       if (targets.length === 0) errors.push(`specs.json: ${key} ptrDummy.targets must be a non-empty object`);
       for (const [count, dps] of targets) {
-        if (!/^\d+$/.test(count) || typeof dps !== "number") errors.push(`specs.json: ${key} ptrDummy target "${count}" must map a numeric target count to numeric DPS`);
+        if (!/^\d+$/.test(count) || !Number.isFinite(dps) || dps < 0) errors.push(`specs.json: ${key} ptrDummy target "${count}" must map a numeric target count to finite non-negative DPS`);
       }
     }
 
@@ -127,6 +161,8 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
       for (const pc of ["set2", "set4"]) {
         if (spec.tierSet[pc] != null && typeof spec.tierSet[pc] !== "string") errors.push(`specs.json: ${key} tierSet.${pc} must be a string`);
       }
+      urlOk(spec.tierSet.source, `specs.json: ${key} tierSet.source`);
+      isoOk(spec.tierSet.asOf, `specs.json: ${key} tierSet.asOf`);
     }
 
     if (spec.survivability != null) {
@@ -138,6 +174,9 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
       if (!VERDICTS.has(spec.ptr?.verdict)) errors.push(`specs.json: ${key} ptr.verdict "${spec.ptr?.verdict}" invalid`);
       if (typeof spec.ptr?.summary !== "string" || !spec.ptr.summary) errors.push(`specs.json: ${key} ptr.summary missing`);
       if (!Array.isArray(spec.ptr?.changes) || spec.ptr.changes.length === 0) errors.push(`specs.json: ${key} ptr.changes must be a non-empty array`);
+      urlOk(spec.ptr.source, `specs.json: ${key} ptr.source`);
+      // Provenance rule: an unconfirmed draft must say where it was distilled from.
+      if (spec.ptr.draft && !spec.ptr.source && !spec.ptr.sourceLabel) errors.push(`specs.json: ${key} draft writeup needs a source URL or sourceLabel`);
     }
   }
 
@@ -150,11 +189,16 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
   for (const entry of community?.classes ?? []) {
     if (!entry.class) errors.push("community.json: class entry missing class name");
     if (!entry.discord?.name || !entry.discord?.url) errors.push(`community.json: ${entry.class} discord needs name + url`);
+    urlOk(entry.discord?.url, `community.json: ${entry.class} discord url`);
     for (const alt of entry.altDiscords ?? []) {
       if (!alt.name || !alt.url) errors.push(`community.json: ${entry.class} altDiscord needs name + url`);
+      urlOk(alt.url, `community.json: ${entry.class} altDiscord "${alt.name}" url`);
     }
+    for (const site of entry.sites ?? []) urlOk(site.url, `community.json: ${entry.class} site "${site.name}" url`);
     for (const creator of entry.creators ?? []) {
       if (!creator.name || !creator.url) errors.push(`community.json: ${entry.class} creator needs name + url`);
+      urlOk(creator.url, `community.json: ${entry.class} creator "${creator.name}" url`);
+      isoOk(creator.verifiedDate, `community.json: ${entry.class} creator "${creator.name}" verifiedDate`);
       // Optional spec scoping: a creator credible on only some of a class's specs.
       // Absent = whole class. Each listed spec must be a real spec of that class.
       if (creator.specs != null) {
@@ -179,12 +223,44 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
   for (const take of creatorTakes?.takes ?? []) {
     if (!specKeys.has(`${take.class}|${take.spec}`)) errors.push(`creator-takes.json: take references unknown spec ${take.class} / ${take.spec}`);
     if (!take.creator || !take.claim || !take.url) errors.push(`creator-takes.json: take for ${take.spec} needs creator + claim + url`);
+    isoOk(take.date, `creator-takes.json: take for ${take.spec} date`);
+    if (take.url != null) {
+      // Take URLs flow from untrusted transcripts through the nightly LLM into clickable
+      // hrefs — https only AND a known citation host, so a smuggled URL fails CI.
+      if (!httpsUrl(take.url)) errors.push(`creator-takes.json: take for ${take.spec} url must be https:// (got "${take.url}")`);
+      else if (!TAKE_HOSTS.has(new URL(take.url).host)) errors.push(`creator-takes.json: take for ${take.spec} url host "${new URL(take.url).host}" not in the citation allowlist`);
+    }
   }
 
   // --- PTR build feed ---
+  const rosterNames = new Set(specs.map(s => `${s.spec} ${s.class}`));
+  const classNames = new Set(specs.map(s => s.class));
   for (const build of ptrBuilds?.builds ?? []) {
     if (!/^\d{4}-\d{2}-\d{2}$/.test(build.date ?? "")) errors.push(`ptr-builds.json: build missing ISO date (${JSON.stringify(build.date)})`);
     if (!build.forumUrl) errors.push(`ptr-builds.json: build ${build.date} missing forumUrl`);
+    for (const u of ["forumUrl", "wowheadUrl", "icyveinsUrl"]) urlOk(build[u], `ptr-builds.json: build ${build.date} ${u}`);
+    // Each entry must resolve against the roster ("Spec Class") or a class-wide prefix
+    // ("Class (…)"), otherwise outlookFor silently never counts it.
+    for (const e of build.specsAffected ?? []) {
+      const classWide = [...classNames].some(c => e.startsWith(`${c} (`));
+      if (!rosterNames.has(e) && !classWide) errors.push(`ptr-builds.json: build ${build.date} specsAffected "${e}" matches no roster spec or "Class (" prefix`);
+    }
+  }
+
+  // --- encounter tiers (per-boss / per-dungeon Archon tiers; a whole displayed file) ---
+  if (encounterTiers != null) {
+    isoOk(encounterTiers.asOf, "encounter-tiers.json: asOf");
+    const archon = scales.scales?.archon;
+    for (const bracket of ["raid", "mplus"]) {
+      for (const [slug, enc] of Object.entries(encounterTiers[bracket] ?? {})) {
+        if (typeof enc.name !== "string" || !enc.name) errors.push(`encounter-tiers.json: ${bracket}/${slug} needs a name`);
+        for (const [k, tier] of Object.entries(enc.tiers ?? {})) {
+          const [cls, sp] = k.split("|");
+          if (!specKeys.has(`${cls}|${sp}`)) errors.push(`encounter-tiers.json: ${bracket}/${slug} references unknown spec "${k}"`);
+          if (archon && archon.values?.[tier] === undefined) errors.push(`encounter-tiers.json: ${bracket}/${slug} "${k}" tier "${tier}" not in the archon scale`);
+        }
+      }
+    }
   }
 
   return errors;
@@ -217,7 +293,7 @@ const isMain = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPat
 if (isMain) {
   const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
   const data = await loadData(root);
-  const errors = validateData(data);
+  const errors = validateData(data, { fullRoster: true });
   if (errors.length) {
     console.error(`✗ ${errors.length} validation error(s):`);
     for (const error of errors) console.error("  - " + error);

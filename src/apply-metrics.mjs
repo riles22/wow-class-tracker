@@ -33,6 +33,7 @@ export async function applyMetrics(dataPath, root = ROOT) {
     if (row.unit != null) entry.unit = row.unit;
     if (row.n != null) entry.n = row.n;
     if (row.asOf != null) entry.asOf = row.asOf;
+    if (row.era != null) entry.era = row.era; // era gating must survive the merge, not ride on name inference
     if (existing >= 0) spec.metrics[existing] = entry; else spec.metrics.push(entry);
     metricsApplied++;
   }
@@ -103,7 +104,7 @@ export async function applyMetrics(dataPath, root = ROOT) {
     );
   }
 
-  const errors = validateData(data);
+  const errors = validateData(data, { fullRoster: true });
   if (errors.length) {
     throw new Error("Merged data failed validation — nothing written:\n" + errors.map(e => "  - " + e).join("\n"));
   }

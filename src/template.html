@@ -566,7 +566,11 @@ const CLASS_COLOR = {
 const CLASS_ORDER = Object.keys(CLASS_COLOR);
 
 const VERDICT_RANK = { "Positive":0, "Mixed":1, "Negative":2, "—":3 };
-const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+/* Defense-in-depth for data-derived link targets: validation already enforces https://
+   at merge time, but a URL that somehow reaches the page under another scheme
+   (javascript:, data:) must render inert, not clickable. */
+const safeHref = u => /^https:\/\//i.test(String(u)) ? u : "#";
 function srcHostLabel(url){
   if(/wowhead\.com/.test(url)) return "Wowhead";
   if(/forums\.blizzard\.com/.test(url)) return "Blizzard forums";
@@ -575,7 +579,7 @@ function srcHostLabel(url){
   try { return new URL(url).hostname.replace(/^www\./,""); } catch(e){ return "source"; }
 }
 function draftSrcHTML(p){
-  if(p.source) return ` <span class="mnote">— drafted from <a href="${esc(p.source)}" target="_blank" rel="noopener">${esc(srcHostLabel(p.source))}</a></span>`;
+  if(p.source) return ` <span class="mnote">— drafted from <a href="${esc(safeHref(p.source))}" target="_blank" rel="noopener">${esc(srcHostLabel(p.source))}</a></span>`;
   if(p.sourceLabel) return ` <span class="mnote">— drafted from ${esc(p.sourceLabel)}</span>`;
   return "";
 }
@@ -656,7 +660,7 @@ function sourceBreakdownHTML(s){
   const tools = toolIds.map(id => {
     const src = SOURCES.find(x => x.id === id);
     const url = src?.url || src?.pages?.[0]?.url;
-    return src && url ? `<a href="${esc(url)}" target="_blank" rel="noopener" title="${esc(src.methodology||"")}">${esc(src.name)}</a>` : "";
+    return src && url ? `<a href="${esc(safeHref(url))}" target="_blank" rel="noopener" title="${esc(src.methodology||"")}">${esc(src.name)}</a>` : "";
   }).filter(Boolean).join(" · ");
   const toolRow = tools ? `<div class="setrow"><span class="pc">Tools</span><span class="pct">${tools}</span></div>` : "";
   if(!rows && !surv && !toolRow) return "";
@@ -716,7 +720,7 @@ function takesHTML(s){
   const takes = CREATOR_TAKES.filter(t=>t.class===s.class && t.spec===s.spec && !t.superseded && eraOk(takeEra(t)));
   if(!takes.length) return "";
   const rows = takes.map(t=>
-    `<div class="setrow"><span class="pc" data-sent="${esc(t.sentiment||"")}">${esc(t.sentiment||"take")}</span><span class="pct">${esc(t.claim)} <span class="mnote">— <a href="${esc(t.url)}" target="_blank" rel="noopener">${esc(t.creator)}, ${esc(t.date||"")}</a>${t.patchContext?` · ${esc(t.patchContext)}`:""}</span></span></div>`).join("");
+    `<div class="setrow"><span class="pc" data-sent="${esc(t.sentiment||"")}">${esc(t.sentiment||"take")}</span><span class="pct">${esc(t.claim)} <span class="mnote">— <a href="${esc(safeHref(t.url))}" target="_blank" rel="noopener">${esc(t.creator)}, ${esc(t.date||"")}</a>${t.patchContext?` · ${esc(t.patchContext)}`:""}</span></span></div>`).join("");
   return `<div class="srcbreak"><p class="d-h">Creator takes <span class="mnote">(opinion, cited — never feeds tiers)</span></p><div class="setbox">${rows}</div></div>`;
 }
 
@@ -726,12 +730,12 @@ function communityHTML(s){
   const creators = (c.creators||[]).map(cr=>{
     const scope = Array.isArray(cr.specs) ? ` <span class="mnote" style="color:var(--accent-2)">[${cr.specs.map(esc).join(" · ")}]</span>` : "";
     const ref = cr.transcribable === false ? ` <span class="mnote" title="Guide/theorycraft reference — read link, not a transcribed video source">📖</span>` : "";
-    return `<div>${cr.url?`<a href="${esc(cr.url)}" target="_blank" rel="noopener" title="${esc(cr.latest||"")}">${esc(cr.name)}</a>`:esc(cr.name)}${scope}${ref}${cr.credential?` <span class="mnote">— ${esc(cr.credential)}</span>`:""}</div>`;
+    return `<div>${cr.url?`<a href="${esc(safeHref(cr.url))}" target="_blank" rel="noopener" title="${esc(cr.latest||"")}">${esc(cr.name)}</a>`:esc(cr.name)}${scope}${ref}${cr.credential?` <span class="mnote">— ${esc(cr.credential)}</span>`:""}</div>`;
   }).join("");
   const discords = [c.discord, ...(c.altDiscords||[])].map(dc=>
-    `<a href="${esc(dc.url)}" target="_blank" rel="noopener">${esc(dc.name)}</a>`).join(" · ");
+    `<a href="${esc(safeHref(dc.url))}" target="_blank" rel="noopener">${esc(dc.name)}</a>`).join(" · ");
   const sites = (c.sites||[]).map(site=>
-    `<a href="${esc(site.url)}" target="_blank" rel="noopener" title="${esc(site.note||"")}">${esc(site.name)}</a>`).join(" · ");
+    `<a href="${esc(safeHref(site.url))}" target="_blank" rel="noopener" title="${esc(site.note||"")}">${esc(site.name)}</a>`).join(" · ");
   return `<div class="srcbreak"><p class="d-h">Community (${esc(s.class)})</p><div class="setbox">
     <div class="setrow"><span class="pc">Discord</span><span class="pct">${discords}</span></div>
     ${sites?`<div class="setrow"><span class="pc">Sites</span><span class="pct">${sites}</span></div>`:""}
@@ -746,7 +750,7 @@ function tierSetHTML(s){
   const piece = (pc, bonus, note) => (!bonus && !note) ? "" :
     `<div class="setrow"><span class="pc">${pc}</span><span class="pct">${bonus?esc(bonus):"—"}${note?`<span class="mnote" style="display:block;margin-top:3px">▸ ${esc(note)}</span>`:""}</span></div>`;
   const src = ts?.source
-    ? ` <a href="${esc(ts.source)}" target="_blank" rel="noopener" class="mnote" style="text-transform:none;letter-spacing:0">datamined${ts.asOf?` ${esc(ts.asOf)}`:""} · may still tune</a>` : "";
+    ? ` <a href="${esc(safeHref(ts.source))}" target="_blank" rel="noopener" class="mnote" style="text-transform:none;letter-spacing:0">datamined${ts.asOf?` ${esc(ts.asOf)}`:""} · may still tune</a>` : "";
   return `<p class="d-h">Season 2 tier set${src}</p><div class="setbox">
     ${piece("2&nbsp;pc", ts?.set2, p?.set2)}
     ${piece("4&nbsp;pc", ts?.set4, p?.set4)}
@@ -958,7 +962,7 @@ document.getElementById('srclist').innerHTML = SOURCES.filter(s=>Array.isArray(s
   const pages = (src.pages||[]).map(p=>{
     const label = p.label ? esc(p.label)
       : `${p.bracket==="raid"?"Raid":p.bracket==="mplus"?"M+":""}${p.role && p.role!=="All" ? " · "+esc(p.role) : ""}`;
-    const link = p.url ? `<a href="${esc(p.url)}" target="_blank" rel="noopener">${label}</a>` : `<span>${label}</span>`;
+    const link = p.url ? `<a href="${esc(safeHref(p.url))}" target="_blank" rel="noopener">${label}</a>` : `<span>${label}</span>`;
     const when = p.snapshot ? esc(p.snapshot)
       : src.kind === "community" ? "—"
       : (src.kind === "reference" || p.bracket == null) ? "tool"
@@ -972,9 +976,9 @@ document.getElementById('srclist').innerHTML = SOURCES.filter(s=>Array.isArray(s
 /* ---------- footer: 12.1 PTR build feed ---------- */
 document.getElementById('buildfeed').innerHTML = (PTR_BUILDS.builds||[]).map(b=>{
   const links = [
-    `<a href="${esc(b.forumUrl)}" target="_blank" rel="noopener">${esc(b.date)}</a>`,
-    b.wowheadUrl ? `<a href="${esc(b.wowheadUrl)}" target="_blank" rel="noopener">wowhead</a>` : "",
-    b.icyveinsUrl ? `<a href="${esc(b.icyveinsUrl)}" target="_blank" rel="noopener">icy-veins</a>` : ""
+    `<a href="${esc(safeHref(b.forumUrl))}" target="_blank" rel="noopener">${esc(b.date)}</a>`,
+    b.wowheadUrl ? `<a href="${esc(safeHref(b.wowheadUrl))}" target="_blank" rel="noopener">wowhead</a>` : "",
+    b.icyveinsUrl ? `<a href="${esc(safeHref(b.icyveinsUrl))}" target="_blank" rel="noopener">icy-veins</a>` : ""
   ].filter(Boolean).join(" · ");
   const affected = (b.specsAffected||[]).length;
   return `<div class="srcitem"><span>${links} <span class="mnote">${esc(b.label||"")}</span></span><span class="when">${affected?affected+" specs":""}</span></div>`;
@@ -982,7 +986,7 @@ document.getElementById('buildfeed').innerHTML = (PTR_BUILDS.builds||[]).map(b=>
 
 /* reference-kind sources (e.g. Liquid Armory) join the live-links row */
 document.getElementById('livelinks').insertAdjacentHTML('beforeend',
-  REF_SOURCES.filter(s=>s.url).map(s=>`<a href="${esc(s.url)}" target="_blank" rel="noopener" title="${esc(s.methodology||"")}">${esc(s.name.toLowerCase().replace(/\s+/g,""))}</a>`).join(""));
+  REF_SOURCES.filter(s=>s.url).map(s=>`<a href="${esc(safeHref(s.url))}" target="_blank" rel="noopener" title="${esc(s.methodology||"")}">${esc(s.name.toLowerCase().replace(/\s+/g,""))}</a>`).join(""));
 
 /* ---------- footer: collective creator credit (deduped across classes + takes) ---------- */
 (function(){
@@ -999,7 +1003,7 @@ document.getElementById('livelinks').insertAdjacentHTML('beforeend',
     if(t.creator && !byName.has(t.creator)) byName.set(t.creator, { name: t.creator, url: t.url });
   const list = [...byName.values()].sort((a,b)=>a.name.localeCompare(b.name, undefined, {sensitivity:'base'}));
   el.innerHTML = list.map(c=> c.url
-    ? `<a href="${esc(c.url)}" target="_blank" rel="noopener">${esc(c.name)}</a>`
+    ? `<a href="${esc(safeHref(c.url))}" target="_blank" rel="noopener">${esc(c.name)}</a>`
     : `<span>${esc(c.name)}</span>`).join('<span class="mnote">&nbsp;·&nbsp;</span>');
 })();
 

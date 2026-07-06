@@ -41,7 +41,7 @@ export async function applyRatings(ratingsPath, root = ROOT) {
     );
   }
 
-  const errors = validateData(data);
+  const errors = validateData(data, { fullRoster: true });
   if (errors.length) {
     throw new Error("Merged data failed validation — nothing written:\n" + errors.map(e => "  - " + e).join("\n"));
   }
