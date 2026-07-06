@@ -30,7 +30,10 @@ by hand — it is generated.
    Archon raid tiers come from its **throughput** tier list (not the default popularity
    grouping); Archon M+ tiers from its **score** tier list.
 4. `src/template.html` is presentation only — zero data in it.
-5. Data-changing workflows run **plan-first**: propose the diff, then apply.
+5. Data-changing workflows run **plan-first**: propose the diff, then apply. *(Interactive
+   sessions only — the unattended nightly routine has no one to propose to; its
+   substitute guardrails are the validation-gated merges, the test suite, explicit path
+   staging, rollback on failure, and the run report.)*
 6. Discord content is never fetched (auth + TOS) — `data/community.json` holds curated
    links only, manually verified. Creator videos are opinion/analysis, not tier data.
 
