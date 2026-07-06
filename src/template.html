@@ -15,7 +15,9 @@
 <title>Curse of Ula'tek — 12.1 PTR Spec Tracker</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- Fonts load async from the main script (CSP-safe, no inline handler) so first paint
+     never blocks on Google Fonts; display=swap covers the swap-in. -->
+<noscript><link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
 <style>
   /* ============================================================
      PRESENTATION ONLY — all data lives in data/*.json and is
@@ -544,6 +546,11 @@
 </div>
 
 <script>
+/* Async font load — kicked off first so the swap happens as early as possible. */
+{ const l = document.createElement("link"); l.rel = "stylesheet";
+  l.href = "https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap";
+  document.head.appendChild(l); }
+
 /* Injected at build time by src/build.mjs — do not edit by hand. */
 const DATA = __DATA_JSON__;
 
@@ -766,11 +773,12 @@ function drawerHTML(s){
        <p class="d-summary"><span class="theme">No 12.1 PTR writeup yet</span><br>Current-season baseline below — the PTR read gets added to data/specs.json when this spec's pass lands.</p>` : `
        <p class="d-summary"><span class="theme">12.0.7 baseline view</span><br>Live-season data only — switch Era to 12.1 PTR (or Both) for the change read.</p>`;
   const tierset = showPtr ? tierSetHTML(s) : "";
-  return `
-   <div class="drawer"><div class="drawer-in"><div class="drawer-grid">
+  // Inner content only — the .drawer shell is emitted empty by rowHTML and filled lazily
+  // on open, so render() rebuilds ~1.3K visible nodes instead of ~9.3K (85% was drawers).
+  return `<div class="drawer-in"><div class="drawer-grid">
      <div>${left}${metricsHTML(s)}${showPtr?ptrDummyHTML(s):""}</div>
      <div>${tierset}${profileHTML(s)}${sourceBreakdownHTML(s)}${takesHTML(s)}${communityHTML(s)}</div>
-   </div></div></div>`;
+   </div></div>`;
 }
 
 /* "New" freshness cue — is there fresh info for this spec within the last few days of the
@@ -822,7 +830,7 @@ function rowHTML(s, idx, simBar){
      ${state.era!=="live"?verdictEl(s):`<div class="verdict" data-v="—"><span class="dot"></span>—</div>`}
      <span class="chev">▸</span>
      ${simBar && typeof s.fightProfile?.metricsUsed?.[simBar.key]==="number" ? `<div class="rowbar" aria-hidden="true" title="Sim ${simBar.label} DPS ${Math.round(s.fightProfile.metricsUsed[simBar.key]).toLocaleString('en-US')}"><i style="width:${(s.fightProfile.metricsUsed[simBar.key]/simBar.max*100).toFixed(1)}%;background:${color}"></i></div>` : ""}
-     ${drawerHTML(s)}
+     <div class="drawer"></div>
    </div>`;
 }
 
@@ -889,8 +897,14 @@ function render(){
   document.getElementById('ptrcaveat').style.display = state.era === "ptr" ? "block" : "none";
   const shown = ordered.length, ptrShown = ordered.filter(s=>s.ptr).length;
   document.getElementById('count').textContent = `${shown} spec${shown!==1?'s':''}${state.ptrOnly?'':` · ${ptrShown} tracked`}`;
-  wireRows();
-  matrix.querySelectorAll('.hsort').forEach(b=> b.onclick = ()=> setSort(b.dataset.sort));
+  // restore drawers that were open before this re-render (fresh DOM, current-era content)
+  if(openRows.size) matrix.querySelectorAll('.row.clickable').forEach(row=>{
+    const s = SPECS[+row.dataset.idx];
+    if(!openRows.has(`${s.class}|${s.spec}`)) return;
+    fillDrawer(row);
+    row.classList.add('open'); row.setAttribute('aria-expanded','true');
+    row.querySelector('.drawer').style.maxHeight = 'none'; // restored instantly, no animation
+  });
   // active-filter cues: light up controls that are off their default
   document.getElementById('fightsel')?.classList.toggle('engaged', !!state.fight);
   document.getElementById('sortsel')?.classList.toggle('engaged', state.sort!=='raid');
@@ -906,24 +920,43 @@ function setSort(key){
   render();
 }
 
-function wireRows(){
-  matrix.querySelectorAll('.row.clickable').forEach(row=>{
-    const drawer = row.querySelector('.drawer');
-    const toggle = ()=>{
-      const open = row.classList.toggle('open');
-      row.setAttribute('aria-expanded', open?'true':'false');
-      drawer.style.maxHeight = open ? (drawer.scrollHeight + 40)+'px' : '0px';
-    };
-    row.addEventListener('click', e=>{
-      if(e.target.closest('.drawer')) return; // clicks inside the open drawer (selecting text, etc.) must not collapse it
-      toggle();
-    });
-    row.addEventListener('keydown', e=>{
-      if(e.target.closest('.drawer')) return; // Enter on a focused drawer link must navigate, not collapse
-      if(e.key==='Enter' || e.key===' '){ e.preventDefault(); toggle(); }
-    });
-  });
+/* Drawers open lazily and survive re-renders (keyed class|spec). One delegated
+   listener pair on #matrix replaces 40 per-row pairs re-created every render. */
+const openRows = new Set();
+function fillDrawer(row){
+  row.querySelector('.drawer').innerHTML = drawerHTML(SPECS[+row.dataset.idx]);
 }
+function toggleRow(row){
+  const s = SPECS[+row.dataset.idx];
+  const drawer = row.querySelector('.drawer');
+  const open = row.classList.toggle('open');
+  row.setAttribute('aria-expanded', open?'true':'false');
+  const key = `${s.class}|${s.spec}`;
+  if(open){
+    openRows.add(key);
+    if(!drawer.firstChild) fillDrawer(row);
+    drawer.style.maxHeight = (drawer.scrollHeight + 40)+'px';
+    // Unlock to 'none' once the transition lands so late layout changes (fonts, viewport
+    // resize across the 760px breakpoint) can never clip the open drawer.
+    const unlock = ev => { if(ev.target!==drawer) return; drawer.removeEventListener('transitionend', unlock); if(row.classList.contains('open')) drawer.style.maxHeight='none'; };
+    drawer.addEventListener('transitionend', unlock);
+    setTimeout(()=>{ if(row.classList.contains('open') && drawer.style.maxHeight!=='none') drawer.style.maxHeight='none'; }, 350); // reduced-motion fallback (no transitionend)
+  } else {
+    openRows.delete(key);
+    if(drawer.style.maxHeight==='none'){ drawer.style.maxHeight = drawer.scrollHeight+'px'; void drawer.offsetHeight; } // restore a pixel value so the collapse animates
+    drawer.style.maxHeight = '0px';
+  }
+}
+matrix.addEventListener('click', e=>{
+  const hs = e.target.closest('.hsort'); if(hs){ setSort(hs.dataset.sort); return; }
+  if(e.target.closest('.drawer')) return; // clicks inside the open drawer (selecting text, links) must not collapse it
+  const row = e.target.closest('.row.clickable'); if(row) toggleRow(row);
+});
+matrix.addEventListener('keydown', e=>{
+  if(e.key!=='Enter' && e.key!==' ') return;
+  if(e.target.closest('.drawer') || e.target.closest('.hsort')) return; // drawer links navigate; header buttons act natively
+  const row = e.target.closest('.row.clickable'); if(row){ e.preventDefault(); toggleRow(row); }
+});
 
 /* ---------- source toggle (Consensus + one button per tier-list source) ---------- */
 const srcseg = document.getElementById('srcseg');
@@ -1038,7 +1071,11 @@ document.getElementById('ptronly').addEventListener('change', e=>{ state.ptrOnly
 document.getElementById('sortsel').value = state.sort; // sync dropdown to the rank-all default
 document.getElementById('sortsel').addEventListener('change', e=>{ setSort(e.target.value); });
 document.querySelectorAll('#groupseg button').forEach(b=> b.addEventListener('click', ()=> setSort(b.dataset.g==='class'?'class':'raid')));
-document.getElementById('search').addEventListener('input', e=>{ state.q = e.target.value.trim(); render(); });
+let searchTimer = null; // debounce the full re-render; state.q updates immediately
+document.getElementById('search').addEventListener('input', e=>{
+  state.q = e.target.value.trim();
+  clearTimeout(searchTimer); searchTimer = setTimeout(render, 120);
+});
 
 render();
 
