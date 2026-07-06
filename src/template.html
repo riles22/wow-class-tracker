@@ -217,6 +217,7 @@
   .spec-name{display:flex; align-items:center; gap:10px; min-width:0}
   .cbar{width:4px; height:20px; border-radius:3px; flex:none}
   .spec-txt{font-weight:600; color:var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+  .newbadge{font-family:var(--mono); font-size:8.5px; font-weight:700; letter-spacing:.09em; color:#160a24; background:var(--gold); border-radius:4px; padding:2px 5px; margin-left:-2px; flex:none; cursor:help; align-self:center}
   .cls{font-family:var(--mono); font-size:12.5px; color:var(--ink-dim); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0}
   .role{font-size:12px; color:var(--ink-faint); min-width:0; display:flex; align-items:center; gap:6px}
   .role .rolechip{font-family:var(--mono); font-size:10.5px; letter-spacing:.08em; padding:2px 7px; border-radius:5px; border:1px solid var(--edge-2); color:var(--ink-dim)}
@@ -763,6 +764,33 @@ function drawerHTML(s){
    </div></div></div>`;
 }
 
+/* "New" freshness cue — is there fresh info for this spec within the last few days of the
+   VIEWER's clock? Uses new Date() at render time so the badge auto-expires with no data
+   change and no build timestamp. Signals: a non-superseded creator take, or a PTR build
+   that touched the spec. Returns the freshest {kind,label,date} or null. */
+const NEW_WINDOW_DAYS = 3;
+function newInfoFor(s){
+  const parse = d => { const m=/^(\d{4})-(\d{2})-(\d{2})/.exec(d||""); return m ? Date.UTC(+m[1],+m[2]-1,+m[3]) : null; };
+  const now = Date.now();
+  let best = null;
+  const consider = (dateStr, label) => {
+    const ms = parse(dateStr); if(ms==null) return;
+    const age = (now - ms) / 86400000;
+    if(age < -1 || age > NEW_WINDOW_DAYS) return; // future-slack 1d; expires after the window
+    if(!best || ms > best.ms) best = { ms, label, date: dateStr };
+  };
+  for(const t of CREATOR_TAKES)
+    if(t.class===s.class && t.spec===s.spec && !t.superseded) consider(t.date, `${t.creator} take`);
+  const full = `${s.spec} ${s.class}`, classLevel = `${s.class} (`;
+  for(const b of (PTR_BUILDS.builds||[]))
+    if((b.specsAffected||[]).some(e=> e===full || e.startsWith(classLevel))) consider(b.date, `${b.label||"PTR build"} tuning`);
+  return best;
+}
+function newBadgeHTML(s){
+  const ni = newInfoFor(s);
+  return ni ? `<span class="newbadge" title="New — ${esc(ni.label)} · ${esc(ni.date)}" aria-label="New info for this spec: ${esc(ni.label)} ${esc(ni.date)}">NEW</span>` : "";
+}
+
 function rowHTML(s, idx, simBar){
   const color = CLASS_COLOR[s.class] || "#888";
   const hasPtr = !!s.ptr;
@@ -774,7 +802,7 @@ function rowHTML(s, idx, simBar){
         role="button" tabindex="0" aria-expanded="false">
      <div class="spec-name">
        <span class="cbar" style="background:${color}"></span>
-       <span class="spec-txt">${esc(s.spec)}</span>
+       <span class="spec-txt">${esc(s.spec)}</span>${newBadgeHTML(s)}
      </div>
      <div class="metaline">
        <span class="mtag">Raid</span>${tierEl(ratingFor(s,"raid"), showMv ? s.movement?.raid : null)}
