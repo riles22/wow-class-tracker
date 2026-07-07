@@ -11,14 +11,22 @@ Numbers stay numbers — **never convert metrics to letter tiers.**
 
 ## WCL API (preferred when configured)
 
-If `.claude/skills/refresh-metrics/config.json` exists (see `config.json.example`),
-use the sanctioned v2 GraphQL API instead of HTML scraping: POST client-credentials to
-`https://www.warcraftlogs.com/oauth/token`, then query
+Credentials come from either source, checked in this order:
+1. **Environment variables** `WCL_CLIENT_ID` + `WCL_CLIENT_SECRET` — used by the **cloud
+   routine** (set as routine environment secrets; the local config.json is gitignored and
+   absent in the cloud). This is the required path when running server-side: WCL asks
+   scrapers to "use the API instead," and datacenter IPs are more likely to be throttled
+   on the HTML endpoint, so authenticate as the registered client instead of scraping.
+2. **`.claude/skills/refresh-metrics/config.json`** (see `config.json.example`) — the
+   local path, same two fields (`clientId`, `clientSecret`).
+
+If either is present, use the sanctioned v2 GraphQL API instead of HTML scraping: POST
+client-credentials to `https://www.warcraftlogs.com/oauth/token`, then query
 `https://www.warcraftlogs.com/api/v2/client` (zone rankings/statistics by encounter,
-difficulty, metric). If config.json is absent, use the HTML fallback below and remind
-the user ONCE per session that registering a free client at
-warcraftlogs.com/api/clients/ makes this sanctioned and more reliable.
-Never commit config.json (gitignored); never print the secret.
+difficulty, metric). If NEITHER is present, use the HTML fallback below and remind the
+user ONCE per session that registering a free client at warcraftlogs.com/api/clients/
+makes this sanctioned and more reliable.
+Never commit config.json or echo the secret (env or file) into logs, commits, or reports.
 
 ## Sources & recipes
 

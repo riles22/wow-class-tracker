@@ -5,13 +5,21 @@ Setup lives at **claude.ai/code/routines** → New routine. Settings:
 | Setting | Value |
 |---|---|
 | Repository | `riles22/wow-class-tracker` (authorize the GitHub App when asked) |
-| **Branch pushes** | **Enable "Allow unrestricted branch pushes"** for this repo — the pipeline requires pushes to `master` (default is `claude/`-prefixed branches only, which would strand the deploy) |
+| **Branch pushes** | **Enable "Allow unrestricted branch pushes"** for this repo. This is the fix for the first run landing nothing: by default routines push a `claude/…` branch and open a PR, which never triggers the deploy (that fires only on a push to `master`). With the toggle on, the routine's `git push origin master` in step 5 works. |
+| Environment secrets | `WCL_CLIENT_ID` and `WCL_CLIENT_SECRET` — the Warcraft Logs API client (register free at warcraftlogs.com/api/clients if you haven't). Lets the metrics refresh authenticate as you via the sanctioned API instead of scraping HTML from a datacenter IP. |
 | Environment | Network access ON (default); no setup script needed (`pip install -U yt-dlp` happens in-run) |
 | Trigger | Schedule → Daily → 3:10 AM local |
-| After saving | **Run once immediately** — the first run doubles as the cloud-connectivity test |
+| After saving | **Run once immediately** — the first run doubles as the cloud-connectivity test; read its report's CLOUD CONNECTIVITY section |
 
 The local `wow-ptr-watch` scheduled task should be **disabled** once the cloud routine's
-first run succeeds (two independent pushers risk duplicate takes); keep it for manual runs.
+first run pushes to master successfully (two independent pushers risk duplicate takes);
+keep it for manual runs.
+
+**Creator takes during a machine-off stretch:** yt-dlp transcript fetches are the one part
+likely to fail from a cloud IP (YouTube bot-blocks datacenters). That's acceptable — the
+routine logs those videos as "pending" and moves on; creator takes are the non-time-critical
+opinion layer and batch-catch-up on the next local run. Everything time-sensitive (PTR
+builds, tuning, raid-testing logs, tiers, metrics-via-API) flows regardless.
 
 ## Routine prompt (paste verbatim)
 
@@ -45,9 +53,10 @@ Every run:
 3. Weekly freshness: if the newest tier-list `snapshot` date in data/sources.json is more
    than 6 days old, also run .claude/skills/refresh-tiers/SKILL.md; if the newest live
    (non-PTR) metric `asOf` in data/specs.json is more than 6 days old, also run
-   .claude/skills/refresh-metrics/SKILL.md. The WCL API credentials file is NOT available
-   in this environment (gitignored) — use the skills' HTML recipes with polite-guest
-   etiquette.
+   .claude/skills/refresh-metrics/SKILL.md. For Warcraft Logs, use the sanctioned v2 API
+   authenticated with the WCL_CLIENT_ID / WCL_CLIENT_SECRET environment variables (the
+   refresh-metrics skill documents the OAuth flow); do not scrape the HTML endpoint from
+   this environment. Be a polite guest on every source.
 
 4. Run `npm test && npm run build`. If either fails: `git checkout -- data/ dist/`, report
    the failure with the error output, and do NOT commit or push.
