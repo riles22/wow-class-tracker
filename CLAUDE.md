@@ -138,7 +138,11 @@ never lends authority to their class's tank/healer spec. `transcribable: false` 
 guide-byline/Discord-only authority (SimC devs, guide writers) — a display "who to read"
 link the transcript pipeline skips (shown with a 📖). `sites[]` holds class
 community-site links (Peak of Serenity, Dreamgrove, etc.); `altDiscords[]` holds
-secondary spec-specific Discords (Death's Advance, Focused Will, …).
+secondary spec-specific Discords (Death's Advance, Focused Will, …). Top-level
+**`generalCreators[]`** is the cross-class PTR-news lane (e.g. izen): polled by
+watch-creators for build/tuning LEADS (verified against the official forum before
+logging) and linked under the build feed — never a per-spec take authority, by
+construction (the take-scope validation only reads `classes[].creators`).
 
 ## Refresh workflows
 

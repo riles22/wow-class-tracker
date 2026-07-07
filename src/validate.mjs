@@ -218,6 +218,15 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
       if (!site.name || !site.url) errors.push(`community.json: ${entry.class} site needs name + url`);
     }
   }
+  // General-coverage creators (cross-class PTR news lane — e.g. izen). Deliberately a
+  // SEPARATE list from classes[].creators: they are never per-spec take authorities
+  // (the take-scope check below only reads classes[].creators, so a general creator
+  // can't lend authority to a spec take by construction).
+  for (const gc of community?.generalCreators ?? []) {
+    if (!gc.name || !gc.url) errors.push(`community.json: generalCreators entry needs name + url`);
+    urlOk(gc.url, `community.json: general creator "${gc.name}" url`);
+    isoOk(gc.verifiedDate, `community.json: general creator "${gc.name}" verifiedDate`);
+  }
 
   // --- creator takes (qualitative layer) ---
   const specKeys = new Set(specs.map(s => `${s.class}|${s.spec}`));

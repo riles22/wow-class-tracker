@@ -1055,6 +1055,13 @@ document.getElementById('buildfeed').innerHTML = (PTR_BUILDS.builds||[]).map(b=>
   return `<div class="srcitem"><span>${links} <span class="mnote">${esc(b.label||"")}</span></span><span class="when">${affected?affected+" specs":""}</span></div>`;
 }).join("") || `<div class="srcitem"><span class="mnote">No builds logged yet.</span></div>`;
 
+/* General-coverage creators (cross-class PTR news — registry in community.json
+   generalCreators; a news lane, never per-spec tier authority) join the build feed. */
+document.getElementById('buildfeed').insertAdjacentHTML('beforeend',
+  (COMMUNITY.generalCreators||[]).map(gc=>
+    `<div class="srcitem"><span><a href="${esc(safeHref(gc.url))}" target="_blank" rel="noopener">${esc(gc.name)}</a> <span class="mnote">general PTR coverage${gc.latest?` — latest: ${esc(gc.latest)}`:""}</span></span><span class="when">${esc(gc.verifiedDate||"")}</span></div>`
+  ).join(""));
+
 /* reference-kind sources (e.g. Liquid Armory) join the live-links row */
 document.getElementById('livelinks').insertAdjacentHTML('beforeend',
   REF_SOURCES.filter(s=>s.url).map(s=>`<a href="${esc(safeHref(s.url))}" target="_blank" rel="noopener" title="${esc(s.methodology||"")}">${esc(s.name.toLowerCase().replace(/\s+/g,""))}</a>`).join(""));

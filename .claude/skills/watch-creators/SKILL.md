@@ -40,6 +40,16 @@ locally, and distill them into cited per-spec takes in `data/creator-takes.json`
    note it in the run log for a human to widen the scope — don't silently override.
 4. Supersede: when a creator posts a newer take on the same spec, mark older ones
    `superseded: true` rather than deleting.
+4b. **General-coverage creators** (`community.json` top-level `generalCreators` — e.g.
+   izen): a cross-class PTR-NEWS lane, not a take lane. Poll their RSS the same way,
+   title-filter for 12.1/PTR/Season relevance, but **never distill per-spec takes from
+   them** (they're deliberately outside the take-authority model, and validation would
+   reject the attribution). Instead: (a) treat their videos as LEADS — if one covers a
+   PTR build, tuning pass, or system change not yet in `data/ptr-builds.json`, verify it
+   against the canonical official forum thread before logging anything (the video is the
+   tip-off, never the source of record); (b) refresh the entry's `latest` field
+   (title + date) so the site's build-feed link stays current; (c) note processed
+   videoIds in `log.md`'s seen-set like any other creator.
 5. `npm test && npm run build`; append date · videos processed · takes added to `log.md`. If any data/ file changed this run, finish with `node src/snapshot.mjs` (movement baseline; loadData skips baselines identical to the current state, so ordering vs the build is safe).
 
 ## Gotchas

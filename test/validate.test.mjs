@@ -41,10 +41,12 @@ test("validateData enforces https-only URLs and the take-host allowlist", async 
   broken.creatorTakes.takes.find(t => t.url).url = "javascript:alert(1)";
   broken.creatorTakes.takes.filter(t => t.url)[1].url = "https://evil.example.com/x";
   broken.community.classes[0].discord.url = "http://discord.gg/x"; // http, not https
+  broken.community.generalCreators = [{ name: "Sketchy", url: "javascript:alert(1)" }];
   const errors = validateData(broken);
   assert.ok(errors.some(e => e.includes("must be https://") && e.includes("javascript:")));
   assert.ok(errors.some(e => e.includes("not in the citation allowlist")));
   assert.ok(errors.some(e => e.includes("discord url must be a valid https:// URL")));
+  assert.ok(errors.some(e => e.includes('general creator "Sketchy" url')));
 });
 
 test("validateData enforces era↔name consistency, finite values, and metric uniqueness", async () => {
