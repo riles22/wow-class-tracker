@@ -1,3 +1,15 @@
+# ⛔ SUPERSEDED — see `.github/workflows/nightly.yml`
+
+> **2026-07-07:** The claude.ai cloud-routine approach below is retired. Two test runs
+> proved the routine itself worked but could never publish: the Claude-for-GitHub
+> connector is **read-only** (every push 403s, even to its own scratch branch), and its
+> permission level isn't user-upgradable. The nightly now runs as a **GitHub Actions
+> workflow** (`.github/workflows/nightly.yml`) — Claude Code headless on a GitHub runner,
+> which always has write access to its own repo. Secrets live in
+> Settings → Secrets → Actions: `CLAUDE_CODE_OAUTH_TOKEN` (from `claude setup-token`,
+> ~1-year validity — renew it), `WCL_CLIENT_ID`, `WCL_CLIENT_SECRET`.
+> This file is kept for the routine-prompt history only.
+
 # Cloud routine: nightly tracker refresh (machine-off automation)
 
 Setup lives at **claude.ai/code/routines** → New routine. Settings:

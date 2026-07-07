@@ -1,0 +1,176 @@
+name: Nightly tracker refresh
+
+# Machine-off nightly automation: runs Claude Code headlessly on a GitHub runner to do
+# the same refresh the local wow-ptr-watch task did — PTR builds, WCL zones 54/52,
+# creator RSS, weekly tier/metric freshness — then commit + push to master.
+#
+# Why Actions instead of a claude.ai cloud routine: the Claude-for-GitHub connector is
+# read-only (pushes 403), while a workflow's GITHUB_TOKEN always has write access to its
+# own repo. One gotcha handled below: GITHUB_TOKEN pushes do NOT auto-trigger other
+# workflows (loop protection), so the deploy is dispatched explicitly after a data push.
+#
+# Secrets required (Settings → Secrets and variables → Actions):
+#   CLAUDE_CODE_OAUTH_TOKEN — from `claude setup-token` (Pro/Max; valid ~1 year — renew!)
+#   WCL_CLIENT_ID           — Warcraft Logs v2 API client UUID
+#   WCL_CLIENT_SECRET       — Warcraft Logs v2 API client secret
+
+on:
+  schedule:
+    - cron: "10 10 * * *" # 10:10 UTC (~3:10am Pacific in summer, 2:10am in winter — the hour drift is fine; GitHub cron is best-effort ±minutes)
+  workflow_dispatch: # manual test runs
+
+concurrency:
+  group: nightly-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50 # job-level backstop; the Claude step has its own tighter timeout
+    permissions:
+      contents: write
+      actions: write # lets the final step dispatch the deploy workflow
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          fetch-depth: 0 # full history: rebase-on-rejection + movement baselines
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "22"
+
+      - name: Record pre-run state
+        id: pre
+        run: echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: Git identity (matches repo history)
+        run: |
+          git config user.name "Riley"
+          git config user.email "120138825+riles22@users.noreply.github.com"
+
+      # First-party action; intentionally on the v1 major tag (not SHA-pinned like the
+      # actions above) so the runtime keeps pace with Claude Code CLI/auth changes.
+      # timeout at the STEP (not just job) so a hang still lets later steps run —
+      # a step timeout fails the step; a job timeout cancels everything after it.
+      - name: Nightly refresh (Claude Code, headless)
+        uses: anthropics/claude-code-action@v1
+        timeout-minutes: 40
+        env:
+          WCL_CLIENT_ID: ${{ secrets.WCL_CLIENT_ID }}
+          WCL_CLIENT_SECRET: ${{ secrets.WCL_CLIENT_SECRET }}
+        with:
+          # Explicit github_token: without it the action attempts an OIDC exchange that
+          # needs id-token:write + the (read-only) Claude GitHub App — fatal on night one.
+          # GITHUB_TOKEN also keeps pushes non-retriggering, which the dispatch step assumes.
+          github_token: ${{ github.token }}
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          claude_args: |
+            --permission-mode bypassPermissions
+            --max-turns 250
+            --model claude-sonnet-5
+          prompt: |
+            You maintain the WoW Midnight 12.1 PTR spec tracker in this checked-out repo
+            (master branch, CI runner). The public site riles22.github.io/wow-class-tracker
+            auto-deploys from master (a later workflow step handles triggering it — you
+            just commit and push).
+
+            Read CLAUDE.md (the project contract) before acting. The refresh skills live
+            at .claude/skills/ — ptr-watch, watch-creators, refresh-tiers, refresh-metrics
+            — each SKILL.md has the exact procedure, verified fetch recipes, and hard-won
+            gotchas; follow them exactly.
+
+            Every run:
+
+            1. PTR watch (.claude/skills/ptr-watch/SKILL.md): Wowhead news RSS + the
+               official forum thread (URL in data/ptr-builds.json) for PTR builds newer
+               than the newest logged one; Warcraft Logs zone 54 (PTR raid testing) and
+               zone 52 (Dummy Dome) with the skill's change detection (re-ingest only when
+               total parse counts increased); distill new spec writeups per the
+               auto-confirm policy — faithful distillation of the SOURCE's verdict,
+               mandatory source URL or sourceLabel.
+               For ALL Warcraft Logs data use the sanctioned v2 GraphQL API authenticated
+               with the WCL_CLIENT_ID / WCL_CLIENT_SECRET environment variables (OAuth
+               client-credentials flow — the refresh-metrics SKILL.md documents it). Do
+               NOT scrape the WCL HTML endpoint from this runner (Cloudflare blocks
+               datacenter IPs). If the API fails, leave WCL-derived data unchanged and
+               say so in the run summary — never guess.
+
+            2. Creators watch (.claude/skills/watch-creators/SKILL.md): poll the creator
+               YouTube RSS feeds in data/community.json, title-filter for Midnight/12.1
+               relevance, fetch transcripts with yt-dlp (install first:
+               `pipx install yt-dlp` — pipx is preinstalled on this runner; if that
+               fails, `python3 -m pip install --break-system-packages -U yt-dlp` — plain
+               pip may hit PEP 668 on Ubuntu 24.04), distill cited per-spec takes. YouTube
+               may bot-block this runner's IP: if transcript downloads fail after the
+               skill's normal retries, do NOT hammer — record the new video IDs as
+               "pending (datacenter IP blocked)" in the skill's log.md, skip their
+               distillation, and note it in the summary.
+
+            3. Weekly freshness: if the newest tier-list `snapshot` date in
+               data/sources.json is more than 6 days old, also run refresh-tiers; if the
+               newest live (non-PTR) metric `asOf` in data/specs.json is more than 6 days
+               old, also run refresh-metrics (WCL parts via the API, as above).
+
+            4. Run `npm test && npm run build`. If either fails: `git checkout -- data/ dist/`,
+               and end the run reporting the failure — do NOT commit or push.
+
+            5. If any data/ file changed this run: `node src/snapshot.mjs`, then stage
+               EXPLICITLY — `git add data/ dist/ ".claude/skills/*/log.md"` (never
+               `git add -A`) — commit with a concise one-line summary
+               ("Nightly refresh <date>: <what changed>"), ending the message with:
+               Co-Authored-By: Claude <noreply@anthropic.com>
+               Then `git push origin master`. If the push is rejected, `git pull --rebase`
+               once and push again; if it still fails, report it — NEVER force-push.
+               If only the skill logs changed, commit and push
+               "Nightly refresh <date>: no updates" the same way.
+
+            6. End with a short summary: builds found · zone-54/zone-52 state · videos and
+               takes · weekly refreshes run or skipped-as-fresh · whether you pushed.
+
+            FAILURE SENTINEL (so problems aren't buried in a green run): on any HARD
+            failure — npm test or build failing, an unrecoverable push rejection, or the
+            WCL API refusing auth — append one line describing it to the file
+            "$RUNNER_TEMP/refresh-failed" before ending. Do NOT write the sentinel for
+            expected degradations (YouTube blocking transcripts from this IP, a source
+            being temporarily unreachable with data left unchanged) — those belong in the
+            summary only.
+
+            Hard rules (also in CLAUDE.md): all game data is fetched live, never from
+            model memory — Midnight postdates every training cutoff, so anything
+            unfetchable stays absent rather than guessed; if nothing is new anywhere,
+            change no data; never hand-edit dist/index.html; PTR-quality data stays
+            era-labeled and out of live baselines; creator takes are cited opinion and
+            never move a tier; be a polite guest (single fetches, sleep between yt-dlp
+            requests, backoff instead of hammering); never echo the WCL secret.
+
+      # GITHUB_TOKEN pushes don't auto-trigger `on: push` workflows (GitHub loop
+      # protection), so if this run pushed site-relevant changes, dispatch the deploy
+      # explicitly. workflow_dispatch is the documented exception that GITHUB_TOKEN may
+      # trigger. Logs-only pushes correctly skip this (mirrors deploy.yml's path filter).
+      # `!cancelled()` (not `success()`): if the run pushed and THEN died (step timeout,
+      # API error), the data must still deploy — otherwise it strands undeployed forever,
+      # since the next night's baseline already includes it.
+      - name: Trigger Pages deploy if the site's inputs changed
+        if: ${{ !cancelled() && steps.pre.outputs.sha != '' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git fetch origin master
+          if ! git diff --quiet "${{ steps.pre.outputs.sha }}" origin/master -- data/ src/ dist/ package.json; then
+            echo "Data changed → dispatching deploy workflow"
+            gh workflow run deploy.yml --ref master
+          else
+            echo "No site-relevant changes pushed — deploy not needed"
+          fi
+
+      # Promote prompt-level "soft" failures (test/build failure, dead WCL auth,
+      # unpushable commit) to a real job failure so GitHub emails the owner — otherwise
+      # they'd hide behind three weeks of green checkmarks.
+      - name: Surface soft failures
+        if: always()
+        run: |
+          if [ -f "$RUNNER_TEMP/refresh-failed" ]; then
+            echo "## Nightly refresh reported failures" >> "$GITHUB_STEP_SUMMARY"
+            cat "$RUNNER_TEMP/refresh-failed" >> "$GITHUB_STEP_SUMMARY"
+            cat "$RUNNER_TEMP/refresh-failed"
+            exit 1
+          fi

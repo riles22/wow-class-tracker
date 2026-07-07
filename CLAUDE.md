@@ -197,8 +197,12 @@ legacy/   original single-file tracker (pre-conversion reference)
                   (each has the procedure + hard-won gotchas + a log.md memory)
 ```
 
-A scheduled routine ("wow-ptr-watch", 3:10am daily, managed in the app's Scheduled
-section) runs ptr-watch + watch-creators, then — when data changed — snapshots, commits,
-and pushes. The push triggers `.github/workflows/deploy.yml`, which rebuilds
-`dist/index.html` from the data and deploys it to GitHub Pages. It runs locally, so it
-fires while the machine is on / the app is open (otherwise it catches up on next launch).
+Nightly automation lives in `.github/workflows/nightly.yml` (cron 10:10 UTC = the 3:10am
+local slot): Claude Code runs headlessly on a GitHub runner — ptr-watch + watch-creators +
+the weekly tier/metric freshness checks — then snapshots, commits, pushes, and dispatches
+deploy.yml explicitly (GITHUB_TOKEN pushes don't auto-trigger workflows). WCL data comes
+via the v2 API using `WCL_CLIENT_ID`/`WCL_CLIENT_SECRET` repo secrets; auth is
+`CLAUDE_CODE_OAUTH_TOKEN` (~1-year validity — renew). YouTube transcripts may be
+IP-blocked on runners; those videos queue as "pending" and catch up in local runs. The
+old local scheduled task and claude.ai cloud routine are retired (docs/cloud-routine.md
+records why); the local task can still be run manually for transcript catch-up.
