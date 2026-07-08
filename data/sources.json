@@ -11,37 +11,37 @@
         "bracket": "raid",
         "role": "DPS",
         "url": "https://www.icy-veins.com/wow/dps-rankings-tier-list",
-        "snapshot": "2026-05-19"
+        "snapshot": "2026-07-08"
       },
       {
         "bracket": "raid",
         "role": "Healer",
         "url": "https://www.icy-veins.com/wow/healer-rankings-tier-list",
-        "snapshot": "2026-04-24"
+        "snapshot": "2026-07-08"
       },
       {
         "bracket": "raid",
         "role": "Tank",
         "url": "https://www.icy-veins.com/wow/tank-rankings-tier-list",
-        "snapshot": "2026-06-15"
+        "snapshot": "2026-07-08"
       },
       {
         "bracket": "mplus",
         "role": "DPS",
         "url": "https://www.icy-veins.com/wow/mythic-dps-tier-list",
-        "snapshot": "2026-06-15"
+        "snapshot": "2026-07-08"
       },
       {
         "bracket": "mplus",
         "role": "Healer",
         "url": "https://www.icy-veins.com/wow/mythic-healer-tier-list",
-        "snapshot": "2026-05-19"
+        "snapshot": "2026-07-08"
       },
       {
         "bracket": "mplus",
         "role": "Tank",
         "url": "https://www.icy-veins.com/wow/mythic-tank-tier-list",
-        "snapshot": "2026-06-15"
+        "snapshot": "2026-07-08"
       }
     ]
   },
@@ -57,16 +57,16 @@
         "bracket": "mplus",
         "role": "All",
         "url": "https://www.method.gg/guides/tier-list/mythic-plus",
-        "snapshot": "2026-03-31"
+        "snapshot": "2026-07-08"
       },
       {
         "bracket": "raid",
         "role": "All",
         "url": "https://www.method.gg/guides/tier-list/raiding",
-        "snapshot": "2026-03-31"
+        "snapshot": "2026-07-08"
       }
     ],
-    "notes": "Raid list omits Vengeance DH (not ranked on the page as of the 2026-03-31 snapshot)."
+    "notes": "Raid list omits Vengeance DH (not ranked on the page). Method's list content is unchanged since its 2026-03-31 revision; re-verified live and era-confirmed (Devourer present) 2026-07-08."
   },
   {
     "id": "wowhead",
@@ -80,37 +80,37 @@
         "bracket": "raid",
         "role": "DPS",
         "url": "https://www.wowhead.com/guide/classes/tier-lists/dps-rankings-raids",
-        "snapshot": "2026-06-25"
+        "snapshot": "2026-07-08"
       },
       {
         "bracket": "raid",
         "role": "Healer",
         "url": "https://www.wowhead.com/guide/classes/tier-lists/healer-rankings-raids",
-        "snapshot": "2026-04-21"
+        "snapshot": "2026-07-08"
       },
       {
         "bracket": "raid",
         "role": "Tank",
         "url": "https://www.wowhead.com/guide/classes/tier-lists/tank-rankings-raids",
-        "snapshot": "2026-06-25"
+        "snapshot": "2026-07-08"
       },
       {
         "bracket": "mplus",
         "role": "DPS",
         "url": "https://www.wowhead.com/guide/classes/tier-lists/dps-rankings-mythic-plus",
-        "snapshot": "2026-04-19"
+        "snapshot": "2026-07-08"
       },
       {
         "bracket": "mplus",
         "role": "Healer",
         "url": "https://www.wowhead.com/guide/classes/tier-lists/healer-rankings-mythic-plus",
-        "snapshot": "2026-05-06"
+        "snapshot": "2026-07-08"
       },
       {
         "bracket": "mplus",
         "role": "Tank",
         "url": "https://www.wowhead.com/guide/classes/tier-lists/tank-rankings-mythic-plus",
-        "snapshot": "2026-05-28"
+        "snapshot": "2026-07-08"
       }
     ]
   },
@@ -126,41 +126,59 @@
         "bracket": "raid",
         "role": "DPS",
         "url": "https://www.archon.gg/wow/tier-list/dps-rankings/raid/mythic/all-bosses",
-        "snapshot": "2026-07-01"
+        "snapshot": "2026-07-08"
       },
       {
         "bracket": "raid",
         "role": "Healer",
         "url": "https://www.archon.gg/wow/tier-list/healer-rankings/raid/mythic/all-bosses",
-        "snapshot": "2026-07-01"
+        "snapshot": "2026-07-08"
       },
       {
         "bracket": "raid",
         "role": "Tank",
         "url": "https://www.archon.gg/wow/tier-list/tank-rankings/raid/mythic/all-bosses",
-        "snapshot": "2026-07-01"
+        "snapshot": "2026-07-08"
       },
       {
         "bracket": "mplus",
         "role": "DPS",
         "url": "https://www.archon.gg/wow/tier-list/dps-rankings/mythic-plus/10/all-dungeons/this-week",
-        "snapshot": "2026-07-01"
+        "snapshot": "2026-07-08"
       },
       {
         "bracket": "mplus",
         "role": "Healer",
         "url": "https://www.archon.gg/wow/tier-list/healer-rankings/mythic-plus/10/all-dungeons/this-week",
-        "snapshot": "2026-07-01"
+        "snapshot": "2026-07-08"
       },
       {
         "bracket": "mplus",
         "role": "Tank",
         "url": "https://www.archon.gg/wow/tier-list/tank-rankings/mythic-plus/10/all-dungeons/this-week",
-        "snapshot": "2026-07-01"
+        "snapshot": "2026-07-08"
       },
-      { "bracket": "raid", "role": "All", "label": "Per-boss tiers (9 bosses, throughput)", "url": "https://www.archon.gg/wow/tier-list/dps-rankings/raid/mythic/imperator", "snapshot": "2026-07-01" },
-      { "bracket": "mplus", "role": "All", "label": "Per-dungeon tiers (8 dungeons, score)", "url": "https://www.archon.gg/wow/tier-list/dps-rankings/mythic-plus/10/windrunner-spire/this-week", "snapshot": "2026-07-01" },
-      { "bracket": "raid", "role": "All", "label": "Survivability tiers (Mythic raid)", "url": "https://www.archon.gg/wow/tier-list/dps-rankings/raid/mythic/all-bosses", "snapshot": "2026-07-01" }
+      {
+        "bracket": "raid",
+        "role": "All",
+        "label": "Per-boss tiers (9 bosses, throughput)",
+        "url": "https://www.archon.gg/wow/tier-list/dps-rankings/raid/mythic/imperator",
+        "snapshot": "2026-07-08"
+      },
+      {
+        "bracket": "mplus",
+        "role": "All",
+        "label": "Per-dungeon tiers (8 dungeons, score)",
+        "url": "https://www.archon.gg/wow/tier-list/dps-rankings/mythic-plus/10/windrunner-spire/this-week",
+        "snapshot": "2026-07-08"
+      },
+      {
+        "bracket": "raid",
+        "role": "All",
+        "label": "Survivability tiers (Mythic raid)",
+        "url": "https://www.archon.gg/wow/tier-list/dps-rankings/raid/mythic/all-bosses",
+        "snapshot": "2026-07-08"
+      }
     ],
     "notes": "Fetch recipe: parse the __NEXT_DATA__ JSON script tag from raw HTML (WebFetch markdown drops it). Raid pages carry three tierLists (popularity/throughput/survivability) — use metric \"throughput\"; M+ pages use metric \"score\". Mirrored at u.gg/wow."
   },
@@ -172,12 +190,45 @@
     "author": "Hypermeta Network (algorithmic)",
     "methodology": "Algorithmic S/A/B/C/D tier lists: Ckmeans clustering of the lower-bound 95% CI of official Blizzard M+ scores per spec (raid and PvP lists too). Population-statistics lens — distinct from Archon (Warcraft Logs top-end) and editorial lists. Updated frequently.",
     "pages": [
-      { "bracket": "mplus", "role": "DPS", "url": "https://wowmeta.com/wow/mythic-plus-dps-tier-list", "snapshot": "2026-06-30" },
-      { "bracket": "mplus", "role": "Healer", "url": "https://wowmeta.com/wow/mythic-plus-healer-tier-list", "snapshot": "2026-06-30" },
-      { "bracket": "mplus", "role": "Tank", "url": "https://wowmeta.com/wow/mythic-plus-tank-tier-list", "snapshot": "2026-06-30" },
-      { "bracket": "raid", "role": "DPS", "label": "Raid · DPS (currently unranked — 0 records)", "url": "https://wowmeta.com/wow/raid-dps-tier-list", "snapshot": null },
-      { "bracket": "raid", "role": "Healer", "label": "Raid · Healer (currently unranked)", "url": "https://wowmeta.com/wow/raid-healer-tier-list", "snapshot": null },
-      { "bracket": "raid", "role": "Tank", "label": "Raid · Tank (currently unranked)", "url": "https://wowmeta.com/wow/raid-tank-tier-list", "snapshot": null }
+      {
+        "bracket": "mplus",
+        "role": "DPS",
+        "url": "https://wowmeta.com/wow/mythic-plus-dps-tier-list",
+        "snapshot": "2026-07-08"
+      },
+      {
+        "bracket": "mplus",
+        "role": "Healer",
+        "url": "https://wowmeta.com/wow/mythic-plus-healer-tier-list",
+        "snapshot": "2026-07-08"
+      },
+      {
+        "bracket": "mplus",
+        "role": "Tank",
+        "url": "https://wowmeta.com/wow/mythic-plus-tank-tier-list",
+        "snapshot": "2026-07-08"
+      },
+      {
+        "bracket": "raid",
+        "role": "DPS",
+        "label": "Raid · DPS (currently unranked — 0 records)",
+        "url": "https://wowmeta.com/wow/raid-dps-tier-list",
+        "snapshot": null
+      },
+      {
+        "bracket": "raid",
+        "role": "Healer",
+        "label": "Raid · Healer (currently unranked)",
+        "url": "https://wowmeta.com/wow/raid-healer-tier-list",
+        "snapshot": null
+      },
+      {
+        "bracket": "raid",
+        "role": "Tank",
+        "label": "Raid · Tank (currently unranked)",
+        "url": "https://wowmeta.com/wow/raid-tank-tier-list",
+        "snapshot": null
+      }
     ],
     "notes": "JS-rendered (SvelteKit) — WebFetch returns an empty shell; fetch via the r.jina.ai proxy. Scale S/A/B/C/D plus 'X = Unranked' (X is omitted, never stored). Raid pages verified Midnight-era but hold 0 records as of 2026-07-01 (all specs X) — ingest raid tiers when they populate."
   },
@@ -193,14 +244,14 @@
         "role": "All",
         "label": "Raid statistics (zone 46, Mythic)",
         "url": "https://www.warcraftlogs.com/zone/statistics/46",
-        "snapshot": "2026-07-01"
+        "snapshot": "2026-07-08"
       },
       {
         "bracket": "mplus",
         "role": "All",
         "label": "M+ statistics (zone 47)",
         "url": "https://www.warcraftlogs.com/zone/statistics/47",
-        "snapshot": "2026-07-01"
+        "snapshot": "2026-07-08"
       }
     ]
   },
@@ -215,19 +266,19 @@
         "bracket": "mplus",
         "role": "DPS",
         "url": "https://murlok.io/meta/dps/m+",
-        "snapshot": "2026-07-01"
+        "snapshot": "2026-07-08"
       },
       {
         "bracket": "mplus",
         "role": "Healer",
         "url": "https://murlok.io/meta/healer/m+",
-        "snapshot": "2026-07-01"
+        "snapshot": "2026-07-08"
       },
       {
         "bracket": "mplus",
         "role": "Tank",
         "url": "https://murlok.io/meta/tank/m+",
-        "snapshot": "2026-07-01"
+        "snapshot": "2026-07-08"
       }
     ]
   },
@@ -243,14 +294,14 @@
         "role": "DPS",
         "label": "Target-count sims",
         "url": "https://bloodmallet.com/",
-        "snapshot": "2026-07-01"
+        "snapshot": "2026-07-08"
       },
       {
         "bracket": "raid",
         "role": "DPS",
         "label": "Official SimC nightly",
         "url": "https://www.simulationcraft.org/reports/MID1_Raid.html",
-        "snapshot": "2026-07-01"
+        "snapshot": "2026-07-08"
       }
     ]
   },
@@ -261,7 +312,13 @@
     "author": "raptoranka",
     "methodology": "Weekly per-spec M+ meta statistics from the top 2000 keys of each reset period: representation % per spec (the meta-share axis Murlok cannot provide), spec diversity by key level, top comps. JS-heavy — fetch via r.jina.ai proxy.",
     "pages": [
-      { "bracket": "mplus", "role": "All", "label": "Top-2000 keys representation", "url": "https://mythicstats.com/", "snapshot": "2026-07-01" }
+      {
+        "bracket": "mplus",
+        "role": "All",
+        "label": "Top-2000 keys representation",
+        "url": "https://mythicstats.com/",
+        "snapshot": "2026-07-01"
+      }
     ]
   },
   {
@@ -295,8 +352,20 @@
     "author": "Class Discords + verified creators (data/community.json)",
     "methodology": "Qualitative layer: 13 class Discords (links only — content not fetchable, auth + TOS) and 1-2 verified creators per class whose video transcripts feed cited creator takes (data/creator-takes.json). Opinion, never tier data.",
     "pages": [
-      { "bracket": null, "role": "All", "label": "Class Discord index (13 classes)", "url": "https://www.wowhead.com/discord-servers", "snapshot": "2026-07-01" },
-      { "bracket": null, "role": "All", "label": "Verified creators → takes in spec drawers", "url": null, "snapshot": "2026-07-01" }
+      {
+        "bracket": null,
+        "role": "All",
+        "label": "Class Discord index (13 classes)",
+        "url": "https://www.wowhead.com/discord-servers",
+        "snapshot": "2026-07-01"
+      },
+      {
+        "bracket": null,
+        "role": "All",
+        "label": "Verified creators → takes in spec drawers",
+        "url": null,
+        "snapshot": "2026-07-01"
+      }
     ]
   },
   {
@@ -307,8 +376,20 @@
     "author": "SimC project nightly (engine-official)",
     "methodology": "Official nightly MID1_Raid Patchwerk report: one fixed high-ilvl profile per spec/hero-variant, iterations=7500 — we ingest the best variant per DPS spec as 'SimC nightly Patchwerk DPS'. Pure single-target, fixed gear: a sim baseline, not a rankings verdict (the project itself disclaims class comparisons — keep it a number, never a tier).",
     "pages": [
-      { "bracket": "raid", "role": "DPS", "label": "MID1_Raid nightly report", "url": "https://www.simulationcraft.org/reports/MID1_Raid.html", "snapshot": "2026-06-30" },
-      { "bracket": null, "role": "All", "label": "Project home (downloads + docs)", "url": "https://www.simulationcraft.org/", "snapshot": null }
+      {
+        "bracket": "raid",
+        "role": "DPS",
+        "label": "MID1_Raid nightly report",
+        "url": "https://www.simulationcraft.org/reports/MID1_Raid.html",
+        "snapshot": "2026-07-08"
+      },
+      {
+        "bracket": null,
+        "role": "All",
+        "label": "Project home (downloads + docs)",
+        "url": "https://www.simulationcraft.org/",
+        "snapshot": null
+      }
     ],
     "notes": "Parse the .txt variant (plain text ranking of ~49 MID1_{Class}_{Spec}_{HeroVariant} profiles). Filter to DPS-role roster specs (tanks appear at low DPS; healers absent; Augmentation has no profile — unsimmable support spec)."
   },
@@ -319,7 +400,13 @@
     "url": "https://www.raidbots.com/simbot",
     "methodology": "User-run cloud SimC (Top Gear, Droptimizer, Quick Sim) — the canonical place to sim YOUR character. No public per-spec aggregates (re-verified 2026-07-01), so reference only.",
     "pages": [
-      { "bracket": null, "role": "All", "label": "Simbot (run your own sims)", "url": "https://www.raidbots.com/simbot", "snapshot": null }
+      {
+        "bracket": null,
+        "role": "All",
+        "label": "Simbot (run your own sims)",
+        "url": "https://www.raidbots.com/simbot",
+        "snapshot": null
+      }
     ]
   },
   {
@@ -329,8 +416,20 @@
     "url": "https://questionablyepic.com/live/",
     "methodology": "Voulk's healer gearing/trinket evaluation tool (all healer specs). Client-side SPA — no fetchable data, but actively maintained for Midnight (verified via its GitHub repo, 12.0.7 branches). Reference for the healer audience; the blog publishes dated Midnight healer articles (e.g. S1 embellishment tier list).",
     "pages": [
-      { "bracket": null, "role": "Healer", "label": "Healer gear evaluator", "url": "https://questionablyepic.com/live/", "snapshot": null },
-      { "bracket": null, "role": "Healer", "label": "Blog (dated healer articles)", "url": "https://questionablyepic.com/blog/", "snapshot": null }
+      {
+        "bracket": null,
+        "role": "Healer",
+        "label": "Healer gear evaluator",
+        "url": "https://questionablyepic.com/live/",
+        "snapshot": null
+      },
+      {
+        "bracket": null,
+        "role": "Healer",
+        "label": "Blog (dated healer articles)",
+        "url": "https://questionablyepic.com/blog/",
+        "snapshot": null
+      }
     ]
   },
   {
@@ -340,7 +439,13 @@
     "url": "https://liquidarmory.com/",
     "methodology": "SimulationCraft-driven guild-simmed trinket and best-in-slot data. A gearing axis, not a spec-strength axis — linked as an external reference, never rendered as a tier column.",
     "pages": [
-      { "bracket": null, "role": "All", "label": "Armory (guild-simmed trinkets / BiS)", "url": "https://liquidarmory.com/", "snapshot": null }
+      {
+        "bracket": null,
+        "role": "All",
+        "label": "Armory (guild-simmed trinkets / BiS)",
+        "url": "https://liquidarmory.com/",
+        "snapshot": null
+      }
     ]
   }
 ]

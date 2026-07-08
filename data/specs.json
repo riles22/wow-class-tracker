@@ -8,14 +8,14 @@
         "icyveins": "B",
         "method": "B",
         "wowhead": "B",
-        "archon": "B"
+        "archon": "A"
       },
       "mplus": {
         "icyveins": "C",
         "method": "C",
         "wowhead": "B",
         "archon": "C",
-        "wowmeta": "C"
+        "wowmeta": "B"
       }
     },
     "ptr": {
@@ -38,10 +38,9 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 87292.1,
+        "value": 89000,
         "unit": "DPS",
-        "n": 34240,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
@@ -57,42 +56,41 @@
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
         "value": 3514,
-        "n": 111272,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 10,
+        "value": 10.16,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses, tank)",
-        "value": 86073,
+        "value": 76412,
         "unit": "rDPS",
-        "n": 142489,
-        "asOf": "2026-07-01"
+        "n": 30890,
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons, tank)",
-        "value": 86073,
+        "value": 86391,
         "unit": "rDPS",
-        "n": 142489,
-        "asOf": "2026-07-01"
+        "n": 129733,
+        "asOf": "2026-07-08"
       },
       {
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3925,
+        "value": 3951,
         "n": 50,
-        "asOf": "2026-06-28"
+        "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
@@ -139,7 +137,7 @@
         "icyveins": "A",
         "method": "B",
         "wowhead": "B",
-        "archon": "B",
+        "archon": "C",
         "wowmeta": "D"
       }
     },
@@ -149,61 +147,58 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 161701.2,
+        "value": 163666,
         "unit": "DPS",
-        "n": 15840,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 1.8,
+        "value": 1.92,
         "unit": "%",
-        "n": 15840,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3522,
-        "n": 34676,
-        "asOf": "2026-07-01"
+        "value": 3486,
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 1.1,
+        "value": 1.31,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 135900,
+        "value": 149688,
         "unit": "rDPS",
-        "n": 44861,
-        "asOf": "2026-07-01"
+        "n": 15395,
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 135900,
+        "value": 132978,
         "unit": "rDPS",
-        "n": 44861,
-        "asOf": "2026-07-01"
+        "n": 51604,
+        "asOf": "2026-07-08"
       },
       {
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3953,
+        "value": 3967,
         "n": 50,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
@@ -227,21 +222,21 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 137680,
+        "value": 137620,
         "unit": "DPS",
-        "asOf": "2026-06-30"
+        "asOf": "2026-07-08"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-01",
+      "asOf": "2026-07-08",
       "targets": {
-        "1": 133953,
-        "2": 176421,
-        "3": 215872,
-        "5": 294394,
-        "8": 391776,
-        "15": 593945
+        "1": 133933,
+        "2": 176457,
+        "3": 215985,
+        "5": 294424,
+        "8": 391980,
+        "15": 594123
       }
     },
     "survivability": {
@@ -284,7 +279,7 @@
         "icyveins": "A+",
         "method": "B",
         "wowhead": "A",
-        "archon": "B"
+        "archon": "A"
       },
       "mplus": {
         "icyveins": "S",
@@ -314,61 +309,58 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 157420.4,
+        "value": 159573,
         "unit": "DPS",
-        "n": 106421,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 12.1,
+        "value": 11.83,
         "unit": "%",
-        "n": 106421,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 4020,
-        "n": 396896,
-        "asOf": "2026-07-01"
+        "value": 4062,
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 12,
+        "value": 12.24,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 188533,
+        "value": 144656,
         "unit": "rDPS",
-        "n": 478708,
-        "asOf": "2026-07-01"
+        "n": 93250,
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 188533,
+        "value": 195130,
         "unit": "rDPS",
-        "n": 478708,
-        "asOf": "2026-07-01"
+        "n": 434116,
+        "asOf": "2026-07-08"
       },
       {
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4277,
+        "value": 4288,
         "n": 50,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
@@ -392,21 +384,21 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 133244,
+        "value": 133239,
         "unit": "DPS",
-        "asOf": "2026-06-30"
+        "asOf": "2026-07-08"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-01",
+      "asOf": "2026-07-08",
       "targets": {
-        "1": 128395,
-        "2": 174686,
-        "3": 215642,
-        "5": 290690,
-        "8": 413609,
-        "15": 607389
+        "1": 128228,
+        "2": 174873,
+        "3": 215371,
+        "5": 290513,
+        "8": 413523,
+        "15": 606949
       }
     },
     "survivability": {
@@ -455,7 +447,7 @@
         "method": "B",
         "wowhead": "B",
         "archon": "B",
-        "wowmeta": "C"
+        "wowmeta": "B"
       }
     },
     "ptr": null,
@@ -464,27 +456,24 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 162026.4,
+        "value": 164541,
         "unit": "DPS",
-        "n": 20407,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 2.3,
+        "value": 2.37,
         "unit": "%",
-        "n": 20407,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3559,
-        "n": 104623,
-        "asOf": "2026-07-01"
+        "value": 3577,
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
@@ -492,33 +481,33 @@
         "name": "Popularity",
         "value": 3.2,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 140075,
+        "value": 147602,
         "unit": "rDPS",
-        "n": 133344,
-        "asOf": "2026-07-01"
+        "n": 18811,
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 140075,
+        "value": 143421,
         "unit": "rDPS",
-        "n": 133344,
-        "asOf": "2026-07-01"
+        "n": 119368,
+        "asOf": "2026-07-08"
       },
       {
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4006,
+        "value": 4026,
         "n": 50,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
@@ -542,21 +531,21 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 120062,
+        "value": 120086,
         "unit": "DPS",
-        "asOf": "2026-06-30"
+        "asOf": "2026-07-08"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-01",
+      "asOf": "2026-07-08",
       "targets": {
-        "1": 119917,
-        "2": 155898,
-        "3": 190319,
-        "5": 249479,
-        "8": 307257,
-        "15": 396535
+        "1": 119957,
+        "2": 155982,
+        "3": 190288,
+        "5": 249528,
+        "8": 307451,
+        "15": 396292
       }
     },
     "survivability": {
@@ -629,61 +618,58 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 164147.3,
+        "value": 166831,
         "unit": "DPS",
-        "n": 74130,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 8.4,
+        "value": 8.17,
         "unit": "%",
-        "n": 74130,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 4063,
-        "n": 254052,
-        "asOf": "2026-07-01"
+        "value": 4107,
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 7.7,
+        "value": 7.51,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 185054,
+        "value": 148703,
         "unit": "rDPS",
-        "n": 309816,
-        "asOf": "2026-07-01"
+        "n": 64773,
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 185054,
+        "value": 192968,
         "unit": "rDPS",
-        "n": 309816,
-        "asOf": "2026-07-01"
+        "n": 268676,
+        "asOf": "2026-07-08"
       },
       {
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4277,
+        "value": 4287,
         "n": 50,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
@@ -707,21 +693,21 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 106505,
+        "value": 106800,
         "unit": "DPS",
-        "asOf": "2026-06-30"
+        "asOf": "2026-07-08"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-01",
+      "asOf": "2026-07-08",
       "targets": {
-        "1": 104255,
-        "2": 151214,
-        "3": 197715,
-        "5": 242076,
-        "8": 340581,
-        "15": 543931
+        "1": 103948,
+        "2": 150867,
+        "3": 197325,
+        "5": 241011,
+        "8": 339646,
+        "15": 541227
       }
     },
     "survivability": {
@@ -792,10 +778,9 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 83137.8,
+        "value": 84100,
         "unit": "DPS",
-        "n": 7367,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
@@ -810,43 +795,42 @@
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3483,
-        "n": 73154,
-        "asOf": "2026-07-01"
+        "value": 3478,
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 6.6,
+        "value": 6.82,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses, tank)",
-        "value": 82305,
+        "value": 71721,
         "unit": "rDPS",
-        "n": 93416,
-        "asOf": "2026-07-01"
+        "n": 6698,
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons, tank)",
-        "value": 82305,
+        "value": 82550,
         "unit": "rDPS",
-        "n": 93416,
-        "asOf": "2026-07-01"
+        "n": 86818,
+        "asOf": "2026-07-08"
       },
       {
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3874,
+        "value": 3885,
         "n": 50,
-        "asOf": "2026-06-28"
+        "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
@@ -887,7 +871,7 @@
         "icyveins": "B",
         "method": "A",
         "wowhead": "C",
-        "archon": "A"
+        "archon": "S"
       },
       "mplus": {
         "icyveins": "A",
@@ -916,61 +900,58 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 159968.4,
+        "value": 165143,
         "unit": "DPS",
-        "n": 32090,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 3.6,
+        "value": 3.65,
         "unit": "%",
-        "n": 32090,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3466,
-        "n": 58271,
-        "asOf": "2026-07-01"
+        "value": 3481,
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 1.8,
+        "value": 1.77,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 122394,
+        "value": 147013,
         "unit": "rDPS",
-        "n": 76106,
-        "asOf": "2026-07-01"
+        "n": 28927,
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 122394,
+        "value": 126812,
         "unit": "rDPS",
-        "n": 76106,
-        "asOf": "2026-07-01"
+        "n": 68127,
+        "asOf": "2026-07-08"
       },
       {
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3942,
+        "value": 3939,
         "n": 50,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
@@ -994,21 +975,21 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 116072,
+        "value": 116117,
         "unit": "DPS",
-        "asOf": "2026-06-30"
+        "asOf": "2026-07-08"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-01",
+      "asOf": "2026-07-08",
       "targets": {
-        "1": 116038,
-        "2": 140709,
-        "3": 186261,
-        "5": 273925,
-        "8": 388119,
-        "15": 618887
+        "1": 116028,
+        "2": 140667,
+        "3": 186220,
+        "5": 273645,
+        "8": 388380,
+        "15": 619195
       }
     },
     "survivability": {
@@ -1051,7 +1032,7 @@
         "icyveins": "C",
         "method": "B",
         "wowhead": "B",
-        "archon": "C"
+        "archon": "B"
       },
       "mplus": {
         "icyveins": "A+",
@@ -1067,61 +1048,58 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 149560.4,
+        "value": 156208,
         "unit": "DPS",
-        "n": 9943,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 1.1,
+        "value": 1.14,
         "unit": "%",
-        "n": 9943,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3798,
-        "n": 58254,
-        "asOf": "2026-07-01"
+        "value": 3868,
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 1.8,
+        "value": 1.84,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 150849,
+        "value": 138117,
         "unit": "rDPS",
-        "n": 74551,
-        "asOf": "2026-07-01"
+        "n": 9285,
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 150849,
+        "value": 159375,
         "unit": "rDPS",
-        "n": 74551,
-        "asOf": "2026-07-01"
+        "n": 69020,
+        "asOf": "2026-07-08"
       },
       {
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4134,
+        "value": 4153,
         "n": 50,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
@@ -1145,21 +1123,21 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 133638,
+        "value": 133590,
         "unit": "DPS",
-        "asOf": "2026-06-30"
+        "asOf": "2026-07-08"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-01",
+      "asOf": "2026-07-08",
       "targets": {
-        "1": 133683,
-        "2": 158195,
-        "3": 185592,
-        "5": 225149,
-        "8": 242645,
-        "15": 267993
+        "1": 133603,
+        "2": 158096,
+        "3": 185434,
+        "5": 225208,
+        "8": 242882,
+        "15": 267948
       }
     },
     "survivability": {
@@ -1218,10 +1196,9 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 95039.5,
+        "value": 96500,
         "unit": "DPS",
-        "n": 28380,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
@@ -1236,43 +1213,42 @@
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3990,
-        "n": 514788,
-        "asOf": "2026-07-01"
+        "value": 4022,
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 46.4,
+        "value": 45.61,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses, tank)",
-        "value": 101557,
+        "value": 79770,
         "unit": "rDPS",
-        "n": 624472,
-        "asOf": "2026-07-01"
+        "n": 24627,
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons, tank)",
-        "value": 101557,
+        "value": 105729,
         "unit": "rDPS",
-        "n": 624472,
-        "asOf": "2026-07-01"
+        "n": 545402,
+        "asOf": "2026-07-08"
       },
       {
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4267,
+        "value": 4284,
         "n": 50,
-        "asOf": "2026-06-28"
+        "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
@@ -1316,7 +1292,7 @@
         "archon": "A"
       },
       "mplus": {
-        "icyveins": "S",
+        "icyveins": "B",
         "method": "S",
         "wowhead": "S",
         "archon": "C",
@@ -1329,61 +1305,58 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct HPS (Mythic)",
-        "value": 190437,
+        "value": 194942,
         "unit": "HPS",
-        "n": 35314,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 14.5,
+        "value": 14.27,
         "unit": "%",
-        "n": 35314,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3396,
-        "n": 97457,
-        "asOf": "2026-07-01"
+        "value": 3401,
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 8.8,
+        "value": 8.44,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median HPS (Mythic, all bosses)",
-        "value": 64980,
+        "value": 168623,
         "unit": "HPS",
-        "n": 133482,
-        "asOf": "2026-07-01"
+        "n": 30856,
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median HPS (M+, all dungeons)",
-        "value": 64980,
+        "value": 64378,
         "unit": "HPS",
-        "n": 133482,
-        "asOf": "2026-07-01"
+        "n": 113329,
+        "asOf": "2026-07-08"
       },
       {
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3912,
+        "value": 3910,
         "n": 50,
-        "asOf": "2026-06-28"
+        "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
@@ -1397,10 +1370,10 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median DPS (Mythic, healer)",
-        "value": 2413,
+        "value": 4397,
         "unit": "DPS",
-        "n": 36361,
-        "asOf": "2026-07-01"
+        "n": 30856,
+        "asOf": "2026-07-08"
       }
     ],
     "survivability": {
@@ -1463,61 +1436,58 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 163998.9,
+        "value": 166797,
         "unit": "DPS",
-        "n": 47027,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 5.3,
+        "value": 5.39,
         "unit": "%",
-        "n": 47027,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 4133,
-        "n": 160884,
-        "asOf": "2026-07-01"
+        "value": 4143,
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 4.9,
+        "value": 4.83,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 174521,
+        "value": 146878,
         "unit": "rDPS",
-        "n": 194341,
-        "asOf": "2026-07-01"
+        "n": 42714,
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 174521,
+        "value": 182644,
         "unit": "rDPS",
-        "n": 194341,
-        "asOf": "2026-07-01"
+        "n": 171524,
+        "asOf": "2026-07-08"
       },
       {
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4272,
+        "value": 4288,
         "n": 50,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
@@ -1603,61 +1573,58 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 153996.7,
+        "value": 157945,
         "unit": "DPS",
-        "n": 4229,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 0.5,
+        "value": 0.51,
         "unit": "%",
-        "n": 4229,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3401,
-        "n": 16309,
-        "asOf": "2026-07-01"
+        "value": 3412,
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 0.5,
+        "value": 0.51,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 125403,
+        "value": 143095,
         "unit": "rDPS",
-        "n": 21844,
-        "asOf": "2026-07-01"
+        "n": 4102,
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 125403,
+        "value": 127016,
         "unit": "rDPS",
-        "n": 21844,
-        "asOf": "2026-07-01"
+        "n": 20608,
+        "asOf": "2026-07-08"
       },
       {
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3901,
+        "value": 3921,
         "n": 50,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
@@ -1681,21 +1648,21 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 117051,
+        "value": 117028,
         "unit": "DPS",
-        "asOf": "2026-06-30"
+        "asOf": "2026-07-08"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-01",
+      "asOf": "2026-07-08",
       "targets": {
-        "1": 114449,
-        "2": 180678,
-        "3": 239125,
-        "5": 341095,
-        "8": 453873,
-        "15": 711794
+        "1": 114487,
+        "2": 180694,
+        "3": 239353,
+        "5": 341186,
+        "8": 454051,
+        "15": 711801
       }
     },
     "survivability": {
@@ -1741,7 +1708,7 @@
         "archon": "A"
       },
       "mplus": {
-        "icyveins": "B",
+        "icyveins": "C",
         "method": "B",
         "wowhead": "B",
         "archon": "C",
@@ -1767,61 +1734,58 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct HPS (Mythic)",
-        "value": 191724.7,
+        "value": 196650,
         "unit": "HPS",
-        "n": 18138,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 7.4,
+        "value": 7.37,
         "unit": "%",
-        "n": 18138,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3462,
-        "n": 28078,
-        "asOf": "2026-07-01"
+        "value": 3452,
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 2.5,
+        "value": 2.77,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median HPS (Mythic, all bosses)",
-        "value": 62648,
+        "value": 170662,
         "unit": "HPS",
-        "n": 37649,
-        "asOf": "2026-07-01"
+        "n": 15964,
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median HPS (M+, all dungeons)",
-        "value": 62648,
+        "value": 61106,
         "unit": "HPS",
-        "n": 37649,
-        "asOf": "2026-07-01"
+        "n": 37408,
+        "asOf": "2026-07-08"
       },
       {
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3897,
+        "value": 3879,
         "n": 50,
-        "asOf": "2026-06-28"
+        "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
@@ -1835,10 +1799,10 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median DPS (Mythic, healer)",
-        "value": 6040,
+        "value": 9189,
         "unit": "DPS",
-        "n": 18717,
-        "asOf": "2026-07-01"
+        "n": 15964,
+        "asOf": "2026-07-08"
       }
     ],
     "survivability": {
@@ -1902,61 +1866,58 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 151756.4,
+        "value": 153800,
         "unit": "DPS",
-        "n": 75316,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 8.6,
+        "value": 8.67,
         "unit": "%",
-        "n": 75316,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3626,
-        "n": 346547,
-        "asOf": "2026-07-01"
+        "value": 3645,
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 10.5,
+        "value": 10.69,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 144007,
+        "value": 140043,
         "unit": "rDPS",
-        "n": 433319,
-        "asOf": "2026-07-01"
+        "n": 68467,
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 144007,
+        "value": 145646,
         "unit": "rDPS",
-        "n": 433319,
-        "asOf": "2026-07-01"
+        "n": 391329,
+        "asOf": "2026-07-08"
       },
       {
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4024,
+        "value": 4034,
         "n": 50,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
@@ -1980,21 +1941,21 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 121491,
+        "value": 121550,
         "unit": "DPS",
-        "asOf": "2026-06-30"
+        "asOf": "2026-07-08"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-01",
+      "asOf": "2026-07-08",
       "targets": {
-        "1": 121506,
-        "2": 143911,
-        "3": 166084,
-        "5": 207867,
-        "8": 243481,
-        "15": 316753
+        "1": 121362,
+        "2": 143924,
+        "3": 165950,
+        "5": 207747,
+        "8": 243761,
+        "15": 316702
       }
     },
     "survivability": {
@@ -2068,61 +2029,58 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 165651.7,
+        "value": 168204,
         "unit": "DPS",
-        "n": 17805,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 2,
+        "value": 2.04,
         "unit": "%",
-        "n": 17805,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3618,
-        "n": 40092,
-        "asOf": "2026-07-01"
+        "value": 3630,
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 1.2,
+        "value": 1.25,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 141766,
+        "value": 152032,
         "unit": "rDPS",
-        "n": 52636,
-        "asOf": "2026-07-01"
+        "n": 16107,
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 141766,
+        "value": 142983,
         "unit": "rDPS",
-        "n": 52636,
-        "asOf": "2026-07-01"
+        "n": 48593,
+        "asOf": "2026-07-08"
       },
       {
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3938,
+        "value": 3950,
         "n": 50,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
@@ -2146,21 +2104,21 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 128124,
+        "value": 128092,
         "unit": "DPS",
-        "asOf": "2026-06-30"
+        "asOf": "2026-07-08"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-01",
+      "asOf": "2026-07-08",
       "targets": {
-        "1": 127956,
-        "2": 163897,
-        "3": 178889,
-        "5": 208701,
-        "8": 253229,
-        "15": 335429
+        "1": 128015,
+        "2": 163911,
+        "3": 178868,
+        "5": 208618,
+        "8": 253464,
+        "15": 334895
       }
     },
     "survivability": {
@@ -2230,61 +2188,58 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 162879.9,
+        "value": 165164,
         "unit": "DPS",
-        "n": 16412,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 1.9,
+        "value": 1.81,
         "unit": "%",
-        "n": 16412,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3774,
-        "n": 75301,
-        "asOf": "2026-07-01"
+        "value": 3820,
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 2.3,
+        "value": 2.13,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 153319,
+        "value": 152077,
         "unit": "rDPS",
-        "n": 91346,
-        "asOf": "2026-07-01"
+        "n": 14335,
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 153319,
+        "value": 157369,
         "unit": "rDPS",
-        "n": 91346,
-        "asOf": "2026-07-01"
+        "n": 75711,
+        "asOf": "2026-07-08"
       },
       {
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4057,
+        "value": 4076,
         "n": 50,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
@@ -2308,21 +2263,21 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 118767,
+        "value": 118802,
         "unit": "DPS",
-        "asOf": "2026-06-30"
+        "asOf": "2026-07-08"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-01",
+      "asOf": "2026-07-08",
       "targets": {
-        "1": 118483,
-        "2": 186017,
-        "3": 259880,
-        "5": 348922,
-        "8": 431650,
-        "15": 529409
+        "1": 118350,
+        "2": 185852,
+        "3": 259620,
+        "5": 349384,
+        "8": 432391,
+        "15": 529061
       }
     },
     "survivability": {
@@ -2379,61 +2334,58 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 145946.2,
+        "value": 152071,
         "unit": "DPS",
-        "n": 2471,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 0.3,
+        "value": 0.32,
         "unit": "%",
-        "n": 2471,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3595,
-        "n": 40029,
-        "asOf": "2026-07-01"
+        "value": 3618,
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 1.2,
+        "value": 1.38,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 143752,
+        "value": 135988,
         "unit": "rDPS",
-        "n": 50413,
-        "asOf": "2026-07-01"
+        "n": 2638,
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 143752,
+        "value": 147084,
         "unit": "rDPS",
-        "n": 50413,
-        "asOf": "2026-07-01"
+        "n": 52514,
+        "asOf": "2026-07-08"
       },
       {
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3850,
+        "value": 3881,
         "n": 50,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
@@ -2457,21 +2409,21 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 117557,
+        "value": 117627,
         "unit": "DPS",
-        "asOf": "2026-06-30"
+        "asOf": "2026-07-08"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-01",
+      "asOf": "2026-07-08",
       "targets": {
-        "1": 113115,
-        "2": 176918,
-        "3": 227626,
-        "5": 326957,
-        "8": 413620,
-        "15": 582238
+        "1": 113188,
+        "2": 176897,
+        "3": 227826,
+        "5": 326961,
+        "8": 413558,
+        "15": 582208
       }
     },
     "survivability": {
@@ -2514,7 +2466,7 @@
         "icyveins": "C",
         "method": "C",
         "wowhead": "B",
-        "archon": "B"
+        "archon": "A"
       },
       "mplus": {
         "icyveins": "C",
@@ -2543,61 +2495,58 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 156359,
+        "value": 159073,
         "unit": "DPS",
-        "n": 4086,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 0.5,
+        "value": 0.48,
         "unit": "%",
-        "n": 4086,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3589,
-        "n": 19297,
-        "asOf": "2026-07-01"
+        "value": 3607,
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 0.6,
+        "value": 0.56,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 131844,
+        "value": 144069,
         "unit": "rDPS",
-        "n": 25449,
-        "asOf": "2026-07-01"
+        "n": 3889,
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 131844,
+        "value": 132810,
         "unit": "rDPS",
-        "n": 25449,
-        "asOf": "2026-07-01"
+        "n": 21838,
+        "asOf": "2026-07-08"
       },
       {
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3794,
+        "value": 3811,
         "n": 50,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
@@ -2621,21 +2570,21 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 120487,
+        "value": 120482,
         "unit": "DPS",
-        "asOf": "2026-06-30"
+        "asOf": "2026-07-08"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-01",
+      "asOf": "2026-07-08",
       "targets": {
-        "1": 114751,
-        "2": 165538,
-        "3": 216746,
-        "5": 271868,
-        "8": 381215,
-        "15": 536507
+        "1": 114776,
+        "2": 165657,
+        "3": 216361,
+        "5": 272349,
+        "8": 381145,
+        "15": 536341
       }
     },
     "survivability": {
@@ -2694,61 +2643,58 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 162174.7,
+        "value": 164505,
         "unit": "DPS",
-        "n": 93183,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 10.6,
+        "value": 10.54,
         "unit": "%",
-        "n": 93183,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3592,
-        "n": 222079,
-        "asOf": "2026-07-01"
+        "value": 3601,
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 6.7,
+        "value": 6.63,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 133152,
+        "value": 150793,
         "unit": "rDPS",
-        "n": 284023,
-        "asOf": "2026-07-01"
+        "n": 82967,
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 133152,
+        "value": 134426,
         "unit": "rDPS",
-        "n": 284023,
-        "asOf": "2026-07-01"
+        "n": 248539,
+        "asOf": "2026-07-08"
       },
       {
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4004,
+        "value": 4017,
         "n": 50,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
@@ -2772,21 +2718,21 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 121598,
+        "value": 121597,
         "unit": "DPS",
-        "asOf": "2026-06-30"
+        "asOf": "2026-07-08"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-01",
+      "asOf": "2026-07-08",
       "targets": {
-        "1": 117012,
-        "2": 145460,
-        "3": 174029,
-        "5": 231583,
-        "8": 283632,
-        "15": 337247
+        "1": 116986,
+        "2": 145476,
+        "3": 174003,
+        "5": 231587,
+        "8": 283861,
+        "15": 337171
       }
     },
     "survivability": {
@@ -2844,10 +2790,9 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 82967.3,
+        "value": 84300,
         "unit": "DPS",
-        "n": 27166,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
@@ -2862,43 +2807,42 @@
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3821,
-        "n": 136970,
-        "asOf": "2026-07-01"
+        "value": 3854,
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 12.3,
+        "value": 11.65,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses, tank)",
-        "value": 89961,
+        "value": 74120,
         "unit": "rDPS",
-        "n": 171741,
-        "asOf": "2026-07-01"
+        "n": 22907,
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons, tank)",
-        "value": 89961,
+        "value": 92550,
         "unit": "rDPS",
-        "n": 171741,
-        "asOf": "2026-07-01"
+        "n": 144202,
+        "asOf": "2026-07-08"
       },
       {
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4144,
+        "value": 4167,
         "n": 50,
-        "asOf": "2026-06-28"
+        "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
@@ -2968,61 +2912,58 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct HPS (Mythic)",
-        "value": 196810.5,
+        "value": 200949,
         "unit": "HPS",
-        "n": 52406,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 21.5,
+        "value": 21.33,
         "unit": "%",
-        "n": 52406,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 4022,
-        "n": 335807,
-        "asOf": "2026-07-01"
+        "value": 4074,
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 30.3,
+        "value": 29.53,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median HPS (Mythic, all bosses)",
-        "value": 100738,
+        "value": 172245,
         "unit": "HPS",
-        "n": 404607,
-        "asOf": "2026-07-01"
+        "n": 46094,
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median HPS (M+, all dungeons)",
-        "value": 100738,
+        "value": 103532,
         "unit": "HPS",
-        "n": 404607,
-        "asOf": "2026-07-01"
+        "n": 350169,
+        "asOf": "2026-07-08"
       },
       {
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4270,
+        "value": 4288,
         "n": 50,
-        "asOf": "2026-06-28"
+        "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
@@ -3036,10 +2977,10 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median DPS (Mythic, healer)",
-        "value": 12915,
+        "value": 15530,
         "unit": "DPS",
-        "n": 54302,
-        "asOf": "2026-07-01"
+        "n": 46094,
+        "asOf": "2026-07-08"
       }
     ],
     "survivability": {
@@ -3101,61 +3042,58 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 161695.2,
+        "value": 163802,
         "unit": "DPS",
-        "n": 19567,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 2.2,
+        "value": 2.21,
         "unit": "%",
-        "n": 19567,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3541,
-        "n": 63254,
-        "asOf": "2026-07-01"
+        "value": 3575,
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 1.9,
+        "value": 1.86,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 139867,
+        "value": 145002,
         "unit": "rDPS",
-        "n": 80900,
-        "asOf": "2026-07-01"
+        "n": 17527,
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 139867,
+        "value": 141786,
         "unit": "rDPS",
-        "n": 80900,
-        "asOf": "2026-07-01"
+        "n": 70333,
+        "asOf": "2026-07-08"
       },
       {
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4020,
+        "value": 4018,
         "n": 50,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
@@ -3179,21 +3117,21 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 118362,
+        "value": 118305,
         "unit": "DPS",
-        "asOf": "2026-06-30"
+        "asOf": "2026-07-08"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-01",
+      "asOf": "2026-07-08",
       "targets": {
-        "1": 118243,
-        "2": 167586,
-        "3": 224690,
-        "5": 341352,
-        "8": 438588,
-        "15": 581135
+        "1": 118210,
+        "2": 167690,
+        "3": 224655,
+        "5": 341358,
+        "8": 438762,
+        "15": 581200
       }
     },
     "survivability": {
@@ -3236,10 +3174,10 @@
         "icyveins": "B",
         "method": "A",
         "wowhead": "B",
-        "archon": "B"
+        "archon": "C"
       },
       "mplus": {
-        "icyveins": "A",
+        "icyveins": "B",
         "method": "B",
         "wowhead": "A",
         "archon": "B",
@@ -3266,61 +3204,58 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct HPS (Mythic)",
-        "value": 173765.7,
+        "value": 177214,
         "unit": "HPS",
-        "n": 27183,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 11.1,
+        "value": 11.23,
         "unit": "%",
-        "n": 27183,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3558,
-        "n": 98751,
-        "asOf": "2026-07-01"
+        "value": 3559,
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 8.9,
+        "value": 8.8,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median HPS (Mythic, all bosses)",
-        "value": 67675,
+        "value": 156055,
         "unit": "HPS",
-        "n": 126852,
-        "asOf": "2026-07-01"
+        "n": 24233,
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median HPS (M+, all dungeons)",
-        "value": 67675,
+        "value": 67506,
         "unit": "HPS",
-        "n": 126852,
-        "asOf": "2026-07-01"
+        "n": 111043,
+        "asOf": "2026-07-08"
       },
       {
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3939,
+        "value": 3957,
         "n": 50,
-        "asOf": "2026-06-28"
+        "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
@@ -3334,10 +3269,10 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median DPS (Mythic, healer)",
-        "value": 4033,
+        "value": 5847,
         "unit": "DPS",
-        "n": 28009,
-        "asOf": "2026-07-01"
+        "n": 24233,
+        "asOf": "2026-07-08"
       }
     ],
     "survivability": {
@@ -3401,10 +3336,9 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 85778.9,
+        "value": 86800,
         "unit": "DPS",
-        "n": 9103,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
@@ -3420,42 +3354,41 @@
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
         "value": 3436,
-        "n": 165961,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 15,
+        "value": 15.96,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses, tank)",
-        "value": 79853,
+        "value": 75015,
         "unit": "rDPS",
-        "n": 92416,
-        "asOf": "2026-07-01"
+        "n": 8555,
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons, tank)",
-        "value": 79853,
+        "value": 80376,
         "unit": "rDPS",
-        "n": 79853,
-        "asOf": "2026-07-01"
+        "n": 203444,
+        "asOf": "2026-07-08"
       },
       {
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3895,
+        "value": 3923,
         "n": 50,
-        "asOf": "2026-06-28"
+        "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
@@ -3527,61 +3460,58 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 154996.4,
+        "value": 156775,
         "unit": "DPS",
-        "n": 74882,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 8.5,
+        "value": 8.57,
         "unit": "%",
-        "n": 74882,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3817,
-        "n": 392867,
-        "asOf": "2026-07-01"
+        "value": 3850,
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 11.9,
+        "value": 12.01,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 154462,
+        "value": 141013,
         "unit": "rDPS",
-        "n": 487306,
-        "asOf": "2026-07-01"
+        "n": 67701,
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 154462,
+        "value": 158405,
         "unit": "rDPS",
-        "n": 487306,
-        "asOf": "2026-07-01"
+        "n": 437094,
+        "asOf": "2026-07-08"
       },
       {
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4142,
+        "value": 4151,
         "n": 50,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
@@ -3605,21 +3535,21 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 112053,
+        "value": 112108,
         "unit": "DPS",
-        "asOf": "2026-06-30"
+        "asOf": "2026-07-08"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-01",
+      "asOf": "2026-07-08",
       "targets": {
-        "1": 111843,
-        "2": 139825,
-        "3": 175650,
-        "5": 256589,
-        "8": 352348,
-        "15": 481598
+        "1": 111859,
+        "2": 139719,
+        "3": 175635,
+        "5": 256668,
+        "8": 352541,
+        "15": 482545
       }
     },
     "survivability": {
@@ -3693,61 +3623,58 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct HPS (Mythic)",
-        "value": 195136.6,
+        "value": 199478,
         "unit": "HPS",
-        "n": 37258,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 15.3,
+        "value": 15.18,
         "unit": "%",
-        "n": 37258,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3745,
-        "n": 163870,
-        "asOf": "2026-07-01"
+        "value": 3769,
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 14.8,
+        "value": 15.3,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median HPS (Mythic, all bosses)",
-        "value": 84337,
+        "value": 176772,
         "unit": "HPS",
-        "n": 205035,
-        "asOf": "2026-07-01"
+        "n": 32704,
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median HPS (M+, all dungeons)",
-        "value": 84337,
+        "value": 85533,
         "unit": "HPS",
-        "n": 205035,
-        "asOf": "2026-07-01"
+        "n": 190271,
+        "asOf": "2026-07-08"
       },
       {
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4050,
+        "value": 4073,
         "n": 50,
-        "asOf": "2026-06-28"
+        "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
@@ -3761,10 +3688,10 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median DPS (Mythic, healer)",
-        "value": 27840,
+        "value": 31663,
         "unit": "DPS",
-        "n": 38639,
-        "asOf": "2026-07-01"
+        "n": 32704,
+        "asOf": "2026-07-08"
       }
     ],
     "survivability": {
@@ -3800,7 +3727,7 @@
         "archon": "B"
       },
       "mplus": {
-        "icyveins": null,
+        "icyveins": "C",
         "method": "C",
         "wowhead": "B",
         "archon": "C",
@@ -3813,61 +3740,58 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct HPS (Mythic)",
-        "value": 177611.3,
+        "value": 181815,
         "unit": "HPS",
-        "n": 20470,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 8.4,
+        "value": 8.7,
         "unit": "%",
-        "n": 20470,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3434,
-        "n": 59333,
-        "asOf": "2026-07-01"
+        "value": 3446,
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 5.4,
+        "value": 5.43,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median HPS (Mythic, all bosses)",
-        "value": 63794,
+        "value": 156845,
         "unit": "HPS",
-        "n": 80192,
-        "asOf": "2026-07-01"
+        "n": 18796,
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median HPS (M+, all dungeons)",
-        "value": 63794,
+        "value": 64992,
         "unit": "HPS",
-        "n": 80192,
-        "asOf": "2026-07-01"
+        "n": 72156,
+        "asOf": "2026-07-08"
       },
       {
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3820,
+        "value": 3838,
         "n": 50,
-        "asOf": "2026-06-28"
+        "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
@@ -3881,10 +3805,10 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median DPS (Mythic, healer)",
-        "value": 8380,
+        "value": 10942,
         "unit": "DPS",
-        "n": 21084,
-        "asOf": "2026-07-01"
+        "n": 18796,
+        "asOf": "2026-07-08"
       }
     ],
     "survivability": {
@@ -3924,7 +3848,7 @@
         "method": "B",
         "wowhead": "C",
         "archon": "A",
-        "wowmeta": "C"
+        "wowmeta": "B"
       }
     },
     "ptr": {
@@ -3946,61 +3870,58 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 155060.2,
+        "value": 156839,
         "unit": "DPS",
-        "n": 25148,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 2.9,
+        "value": 2.97,
         "unit": "%",
-        "n": 25148,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3718,
-        "n": 89240,
-        "asOf": "2026-07-01"
+        "value": 3756,
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 2.7,
+        "value": 2.77,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 139530,
+        "value": 142407,
         "unit": "rDPS",
-        "n": 114356,
-        "asOf": "2026-07-01"
+        "n": 23650,
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 139530,
+        "value": 140920,
         "unit": "rDPS",
-        "n": 114356,
-        "asOf": "2026-07-01"
+        "n": 105982,
+        "asOf": "2026-07-08"
       },
       {
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4047,
+        "value": 4059,
         "n": 50,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
@@ -4024,21 +3945,21 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 117812,
+        "value": 117780,
         "unit": "DPS",
-        "asOf": "2026-06-30"
+        "asOf": "2026-07-08"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-01",
+      "asOf": "2026-07-08",
       "targets": {
-        "1": 117567,
-        "2": 168809,
-        "3": 219464,
-        "5": 320075,
-        "8": 449783,
-        "15": 669722
+        "1": 117612,
+        "2": 168841,
+        "3": 219337,
+        "5": 319950,
+        "8": 449661,
+        "15": 670087
       }
     },
     "survivability": {
@@ -4113,61 +4034,58 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 150358.4,
+        "value": 153436,
         "unit": "DPS",
-        "n": 3914,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 0.4,
+        "value": 0.43,
         "unit": "%",
-        "n": 3914,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3743,
-        "n": 29372,
-        "asOf": "2026-07-01"
+        "value": 3784,
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 0.9,
+        "value": 0.91,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 145581,
+        "value": 140650,
         "unit": "rDPS",
-        "n": 38676,
-        "asOf": "2026-07-01"
+        "n": 3439,
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 145581,
+        "value": 149454,
         "unit": "rDPS",
-        "n": 38676,
-        "asOf": "2026-07-01"
+        "n": 35324,
+        "asOf": "2026-07-08"
       },
       {
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4002,
+        "value": 4018,
         "n": 50,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
@@ -4191,21 +4109,21 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 108308,
+        "value": 107727,
         "unit": "DPS",
-        "asOf": "2026-06-30"
+        "asOf": "2026-07-08"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-01",
+      "asOf": "2026-07-08",
       "targets": {
-        "1": 108391,
-        "2": 122008,
-        "3": 140129,
-        "5": 176605,
-        "8": 206503,
-        "15": 188231
+        "1": 107681,
+        "2": 120092,
+        "3": 136953,
+        "5": 170921,
+        "8": 197364,
+        "15": 185256
       }
     },
     "survivability": {
@@ -4277,61 +4195,58 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 155560.3,
+        "value": 157029,
         "unit": "DPS",
-        "n": 5322,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 0.6,
+        "value": 0.58,
         "unit": "%",
-        "n": 5322,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3857,
-        "n": 37545,
-        "asOf": "2026-07-01"
+        "value": 3896,
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 1.1,
+        "value": 1.13,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 152972,
+        "value": 141852,
         "unit": "rDPS",
-        "n": 48599,
-        "asOf": "2026-07-01"
+        "n": 4665,
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 152972,
+        "value": 156468,
         "unit": "rDPS",
-        "n": 48599,
-        "asOf": "2026-07-01"
+        "n": 42901,
+        "asOf": "2026-07-08"
       },
       {
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4128,
+        "value": 4147,
         "n": 50,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
@@ -4355,21 +4270,21 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 128260,
+        "value": 128122,
         "unit": "DPS",
-        "asOf": "2026-06-30"
+        "asOf": "2026-07-08"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-01",
+      "asOf": "2026-07-08",
       "targets": {
-        "1": 127104,
-        "2": 160621,
-        "3": 205470,
-        "5": 297085,
-        "8": 327998,
-        "15": 354552
+        "1": 127039,
+        "2": 160702,
+        "3": 205319,
+        "5": 296987,
+        "8": 328074,
+        "15": 355006
       }
     },
     "survivability": {
@@ -4408,7 +4323,7 @@
     "role": "DPS",
     "ratings": {
       "raid": {
-        "icyveins": "A",
+        "icyveins": "A+",
         "method": "B",
         "wowhead": "B",
         "archon": "A"
@@ -4440,61 +4355,58 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 158773.1,
+        "value": 161459,
         "unit": "DPS",
-        "n": 31361,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 3.6,
+        "value": 3.64,
         "unit": "%",
-        "n": 31361,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3709,
-        "n": 73491,
-        "asOf": "2026-07-01"
+        "value": 3718,
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 2.2,
+        "value": 2.17,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 151938,
+        "value": 148608,
         "unit": "rDPS",
-        "n": 91077,
-        "asOf": "2026-07-01"
+        "n": 28791,
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 151938,
+        "value": 153091,
         "unit": "rDPS",
-        "n": 91077,
-        "asOf": "2026-07-01"
+        "n": 79573,
+        "asOf": "2026-07-08"
       },
       {
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3998,
+        "value": 4001,
         "n": 50,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
@@ -4518,21 +4430,21 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 123477,
+        "value": 123548,
         "unit": "DPS",
-        "asOf": "2026-06-30"
+        "asOf": "2026-07-08"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-01",
+      "asOf": "2026-07-08",
       "targets": {
-        "1": 123513,
-        "2": 152350,
-        "3": 195367,
-        "5": 310181,
-        "8": 472210,
-        "15": 591351
+        "1": 123476,
+        "2": 152387,
+        "3": 195353,
+        "5": 309894,
+        "8": 472474,
+        "15": 591342
       }
     },
     "survivability": {
@@ -4590,61 +4502,58 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 158169.5,
+        "value": 160781,
         "unit": "DPS",
-        "n": 38679,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 4.4,
+        "value": 4.45,
         "unit": "%",
-        "n": 38679,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3714,
-        "n": 132923,
-        "asOf": "2026-07-01"
+        "value": 3740,
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 4,
+        "value": 3.96,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 137963,
+        "value": 143542,
         "unit": "rDPS",
-        "n": 167753,
-        "asOf": "2026-07-01"
+        "n": 35248,
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 137963,
+        "value": 139459,
         "unit": "rDPS",
-        "n": 167753,
-        "asOf": "2026-07-01"
+        "n": 146859,
+        "asOf": "2026-07-08"
       },
       {
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4040,
+        "value": 4053,
         "n": 50,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
@@ -4668,9 +4577,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 126791,
+        "value": 126859,
         "unit": "DPS",
-        "asOf": "2026-06-30"
+        "asOf": "2026-07-08"
       }
     ],
     "fightProfile": {
@@ -4725,7 +4634,7 @@
         "icyveins": "A",
         "method": "B",
         "wowhead": "C",
-        "archon": "B"
+        "archon": "A"
       },
       "mplus": {
         "icyveins": "A+",
@@ -4756,10 +4665,9 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 157123.5,
+        "value": 159566,
         "unit": "DPS",
-        "n": 11944,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
@@ -4767,50 +4675,48 @@
         "name": "Popularity",
         "value": 1.4,
         "unit": "%",
-        "n": 11944,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3802,
-        "n": 104397,
-        "asOf": "2026-07-01"
+        "value": 3820,
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 3.2,
+        "value": 3.21,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 151359,
+        "value": 143528,
         "unit": "rDPS",
-        "n": 129283,
-        "asOf": "2026-07-01"
+        "n": 11152,
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 151359,
+        "value": 153565,
         "unit": "rDPS",
-        "n": 129283,
-        "asOf": "2026-07-01"
+        "n": 117546,
+        "asOf": "2026-07-08"
       },
       {
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4047,
+        "value": 4054,
         "n": 50,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
@@ -4834,21 +4740,21 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 112809,
+        "value": 112783,
         "unit": "DPS",
-        "asOf": "2026-06-30"
+        "asOf": "2026-07-08"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-01",
+      "asOf": "2026-07-08",
       "targets": {
-        "1": 112774,
-        "2": 164502,
-        "3": 222214,
-        "5": 322980,
-        "8": 419589,
-        "15": 641270
+        "1": 112715,
+        "2": 164447,
+        "3": 221840,
+        "5": 322874,
+        "8": 419320,
+        "15": 640905
       }
     },
     "survivability": {
@@ -4894,10 +4800,10 @@
         "archon": "C"
       },
       "mplus": {
-        "icyveins": "A",
+        "icyveins": "A+",
         "method": "S",
         "wowhead": "S",
-        "archon": "S",
+        "archon": "A",
         "wowmeta": "S"
       }
     },
@@ -4920,61 +4826,58 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct HPS (Mythic)",
-        "value": 169601.3,
+        "value": 173928,
         "unit": "HPS",
-        "n": 53200,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 21.8,
+        "value": 21.92,
         "unit": "%",
-        "n": 53200,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3890,
-        "n": 323482,
-        "asOf": "2026-07-01"
+        "value": 3900,
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 29.2,
+        "value": 29.73,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median HPS (Mythic, all bosses)",
-        "value": 79336,
+        "value": 149603,
         "unit": "HPS",
-        "n": 394678,
-        "asOf": "2026-07-01"
+        "n": 47037,
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median HPS (M+, all dungeons)",
-        "value": 79336,
+        "value": 81441,
         "unit": "HPS",
-        "n": 394678,
-        "asOf": "2026-07-01"
+        "n": 359368,
+        "asOf": "2026-07-08"
       },
       {
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4157,
+        "value": 4182,
         "n": 50,
-        "asOf": "2026-06-28"
+        "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
@@ -4988,10 +4891,10 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median DPS (Mythic, healer)",
-        "value": 2801,
+        "value": 7790,
         "unit": "DPS",
-        "n": 54774,
-        "asOf": "2026-07-01"
+        "n": 47037,
+        "asOf": "2026-07-08"
       }
     ],
     "survivability": {
@@ -5040,61 +4943,58 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 152032.9,
+        "value": 154156,
         "unit": "DPS",
-        "n": 9777,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 1.1,
+        "value": 1.09,
         "unit": "%",
-        "n": 9777,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3579,
-        "n": 66449,
-        "asOf": "2026-07-01"
+        "value": 3584,
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 2,
+        "value": 1.98,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 148817,
+        "value": 141485,
         "unit": "rDPS",
-        "n": 83653,
-        "asOf": "2026-07-01"
+        "n": 8632,
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 148817,
+        "value": 149277,
         "unit": "rDPS",
-        "n": 83653,
-        "asOf": "2026-07-01"
+        "n": 73818,
+        "asOf": "2026-07-08"
       },
       {
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3905,
+        "value": 3919,
         "n": 50,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
@@ -5118,21 +5018,21 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 114390,
+        "value": 114272,
         "unit": "DPS",
-        "asOf": "2026-06-30"
+        "asOf": "2026-07-08"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-01",
+      "asOf": "2026-07-08",
       "targets": {
-        "1": 114049,
-        "2": 153949,
-        "3": 188601,
-        "5": 254882,
-        "8": 329854,
-        "15": 455395
+        "1": 114127,
+        "2": 153940,
+        "3": 188763,
+        "5": 254942,
+        "8": 329947,
+        "15": 455724
       }
     },
     "survivability": {
@@ -5191,61 +5091,58 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 158737.6,
+        "value": 160935,
         "unit": "DPS",
-        "n": 72302,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 8.2,
+        "value": 8.16,
         "unit": "%",
-        "n": 72302,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3726,
-        "n": 226911,
-        "asOf": "2026-07-01"
+        "value": 3757,
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 6.9,
+        "value": 6.56,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 155746,
+        "value": 145897,
         "unit": "rDPS",
-        "n": 287272,
-        "asOf": "2026-07-01"
+        "n": 64293,
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 155746,
+        "value": 158780,
         "unit": "rDPS",
-        "n": 287272,
-        "asOf": "2026-07-01"
+        "n": 242031,
+        "asOf": "2026-07-08"
       },
       {
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4069,
+        "value": 4082,
         "n": 50,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
@@ -5269,21 +5166,21 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 118696,
+        "value": 118542,
         "unit": "DPS",
-        "asOf": "2026-06-30"
+        "asOf": "2026-07-08"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-01",
+      "asOf": "2026-07-08",
       "targets": {
-        "1": 118546,
-        "2": 205781,
-        "3": 261070,
-        "5": 371923,
-        "8": 537629,
-        "15": 785854
+        "1": 118513,
+        "2": 205765,
+        "3": 261052,
+        "5": 371817,
+        "8": 537648,
+        "15": 785370
       }
     },
     "survivability": {
@@ -5342,61 +5239,58 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 160123.1,
+        "value": 161038,
         "unit": "DPS",
-        "n": 7960,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 0.9,
+        "value": 0.94,
         "unit": "%",
-        "n": 7960,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3421,
-        "n": 29306,
-        "asOf": "2026-07-01"
+        "value": 3414,
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 0.9,
+        "value": 0.89,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 121589,
+        "value": 147504,
         "unit": "rDPS",
-        "n": 42051,
-        "asOf": "2026-07-01"
+        "n": 7496,
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 121589,
+        "value": 120533,
         "unit": "rDPS",
-        "n": 42051,
-        "asOf": "2026-07-01"
+        "n": 37430,
+        "asOf": "2026-07-08"
       },
       {
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3724,
+        "value": 3738,
         "n": 50,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
@@ -5420,21 +5314,21 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 115396,
+        "value": 115241,
         "unit": "DPS",
-        "asOf": "2026-06-30"
+        "asOf": "2026-07-08"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-01",
+      "asOf": "2026-07-08",
       "targets": {
-        "1": 115238,
-        "2": 148029,
-        "3": 182200,
-        "5": 241456,
-        "8": 351321,
-        "15": 564116
+        "1": 114984,
+        "2": 147682,
+        "3": 181618,
+        "5": 241090,
+        "8": 350665,
+        "15": 562207
       }
     },
     "survivability": {
@@ -5508,61 +5402,58 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 160309.4,
+        "value": 162193,
         "unit": "DPS",
-        "n": 22404,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 2.5,
+        "value": 2.4,
         "unit": "%",
-        "n": 22404,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3929,
-        "n": 101815,
-        "asOf": "2026-07-01"
+        "value": 3976,
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 3.1,
+        "value": 2.92,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 163106,
+        "value": 145583,
         "unit": "rDPS",
-        "n": 127694,
-        "asOf": "2026-07-01"
+        "n": 18934,
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 163106,
+        "value": 170468,
         "unit": "rDPS",
-        "n": 127694,
-        "asOf": "2026-07-01"
+        "n": 107056,
+        "asOf": "2026-07-08"
       },
       {
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4161,
+        "value": 4182,
         "n": 50,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
@@ -5586,21 +5477,21 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 107525,
+        "value": 107505,
         "unit": "DPS",
-        "asOf": "2026-06-30"
+        "asOf": "2026-07-08"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-01",
+      "asOf": "2026-07-08",
       "targets": {
-        "1": 112582,
-        "2": 156841,
-        "3": 152551,
-        "5": 192923,
-        "8": 241236,
-        "15": 303673
+        "1": 112641,
+        "2": 156775,
+        "3": 152562,
+        "5": 192895,
+        "8": 241038,
+        "15": 303660
       }
     },
     "survivability": {
@@ -5674,61 +5565,58 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 155728.7,
+        "value": 157903,
         "unit": "DPS",
-        "n": 37153,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 4.2,
+        "value": 4.33,
         "unit": "%",
-        "n": 37153,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3737,
-        "n": 123446,
-        "asOf": "2026-07-01"
+        "value": 3777,
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 3.7,
+        "value": 3.74,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 148670,
+        "value": 143337,
         "unit": "rDPS",
-        "n": 155832,
-        "asOf": "2026-07-01"
+        "n": 34363,
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 148670,
+        "value": 151752,
         "unit": "rDPS",
-        "n": 155832,
-        "asOf": "2026-07-01"
+        "n": 138544,
+        "asOf": "2026-07-08"
       },
       {
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4061,
+        "value": 4069,
         "n": 50,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
@@ -5752,21 +5640,21 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 114179,
+        "value": 114241,
         "unit": "DPS",
-        "asOf": "2026-06-30"
+        "asOf": "2026-07-08"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-01",
+      "asOf": "2026-07-08",
       "targets": {
-        "1": 119620,
-        "2": 138582,
-        "3": 161242,
-        "5": 206485,
-        "8": 272985,
-        "15": 345557
+        "1": 119613,
+        "2": 138632,
+        "3": 161144,
+        "5": 206500,
+        "8": 273029,
+        "15": 345336
       }
     },
     "survivability": {
@@ -5807,7 +5695,7 @@
         "icyveins": "S",
         "method": "S",
         "wowhead": "A",
-        "archon": "A"
+        "archon": "S"
       },
       "mplus": {
         "icyveins": "B",
@@ -5839,10 +5727,9 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 92511.7,
+        "value": 94300,
         "unit": "DPS",
-        "n": 23509,
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
@@ -5857,43 +5744,42 @@
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3468,
-        "n": 107872,
-        "asOf": "2026-07-01"
+        "value": 3477,
+        "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 9.7,
+        "value": 9.8,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses, tank)",
-        "value": 81109,
+        "value": 81183,
         "unit": "rDPS",
-        "n": 140429,
-        "asOf": "2026-07-01"
+        "n": 22023,
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons, tank)",
-        "value": 81109,
+        "value": 82011,
         "unit": "rDPS",
-        "n": 140429,
-        "asOf": "2026-07-01"
+        "n": 126093,
+        "asOf": "2026-07-08"
       },
       {
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3897,
+        "value": 3931,
         "n": 50,
-        "asOf": "2026-06-28"
+        "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
