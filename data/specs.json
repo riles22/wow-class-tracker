@@ -26,11 +26,12 @@
         "Set built entirely around Crimson Scourge, but CS can't proc while Death and Decay is a visible unit on the floor — the bonus fights the spec's own restrictions.",
         "The 15% attack speed does little against Blood's ~3s swing timer, and Blood gains very little from extra auto-attacks anyway.",
         "Doubling Death and Decay 'effectively does nothing' — at a meager 8.3% AP/second it's a footnote in the damage breakdown.",
-        "In AoE it raises the penalty for not fishing a proc (Heart Strike only cleaves 5 targets inside D&D) instead of increasing the payoff of playing properly."
+        "In AoE it raises the penalty for not fishing a proc (Heart Strike only cleaves 5 targets inside D&D) instead of increasing the payoff of playing properly.",
+        "PTR build 68569 (2026-07-08): the Venomous Abyss tier set is now implemented for testing with a NEW design — 2-set builds Blood Debt on Death Strike (Strength up to 5%, then a 10%-Strength Marrowrend at 10 stacks); 4-set makes that Marrowrend generate +3 Bone Shield and deal Shadow AoE. This is a distinct set from the Crimson Scourge / Death-and-Decay concept Mandl reviewed below."
       ],
       "set2": "Moderate attack speed plus a small Crimson Scourge proc-chance bump — blunted by Blood's ~3s swings and the can't-proc-while-D&D-is-down restriction.",
       "set4": "Doubled Death and Decay damage plus 5% crit for 8s on consuming Crimson Scourge — doubling a bottom-of-the-list ability does nothing, and the crit is flat percentage, not rating, so Riposte converts none of it. Zero defensive value.",
-      "watch": "Mandl's ask is a redesign — even tying the bonuses to Runes or RP spent \"would feel like a breath of fresh air.\" As written, a defense-less DPS set gives a raid-B / M+-C tank nothing where it matters; watch for a rework before tuning has anything to carry.",
+      "watch": "Mandl's ask is a redesign — even tying the bonuses to Runes or RP spent \"would feel like a breath of fresh air.\" As written, a defense-less DPS set gives a raid-B / M+-C tank nothing where it matters; watch for a rework before tuning has anything to carry. (Note: build 68569 replaced this Crimson Scourge/D&D set with a new Blood Debt / Marrowrend design that is now implemented for testing — Mandl's Negative verdict was of the earlier concept; the current set is pending fresh review.)",
       "source": "https://www.wowhead.com/news/a-complete-miss-of-a-tier-set-blood-death-knight-tier-set-review-381973"
     },
     "metrics": [
@@ -56,13 +57,14 @@
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
         "value": 3514,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 10.16,
+        "value": 10.2,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -89,16 +91,16 @@
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3951,
-        "n": 50,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 1.6,
+        "value": 2.6,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
@@ -165,7 +167,7 @@
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 1.92,
+        "value": 1.9,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -174,13 +176,14 @@
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
         "value": 3486,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 1.31,
+        "value": 1.3,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -207,16 +210,16 @@
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3967,
-        "n": 50,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.3,
+        "value": 0.9,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
@@ -225,7 +228,7 @@
         "value": 90.74,
         "unit": "score",
         "n": 43,
-        "asOf": "2026-07-01",
+        "asOf": "2026-07-08",
         "era": "ptr"
       },
       {
@@ -281,12 +284,12 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-07",
+      "asOf": "2026-07-08",
       "targets": {
-        "1": 143881,
+        "1": 137036,
         "2": 210271,
         "3": 265220,
-        "5": 506204
+        "5": 502911
       }
     }
   },
@@ -317,7 +320,8 @@
         "Army of the Dead no longer summons extra ghouls — you command 8 fixed ghouls via Death Order / Epidemic Order, picked by enemy count rather than the player; the net rotation is mindless Scourge Strike spam with Sudden Doom procs devalued.",
         "Knock-on breakage: Doomed Bidding doesn't work at all (likely a bug), and Outnumber may fall from always-taken capstone to skipped outright, dragging lesser-ghoul talents (Infected Claws, Commander of the Dead, etc.) down with it.",
         "Soul Reaper now consumes up to 3 Lesser Ghoul stacks instead of 2 Putrefy charges — forcing extra 2-rune Festering Strikes and courting resource starvation in execute, without fixing the old Commander-of-the-Dead overlap problem.",
-        "Army ghouls last 30s and the new Lord of the Dead lich concentrates damage back into burst windows — contradicting the stated burst-reduction goal; the messaging is 'confusing and contradictory' while sustained damage goes untouched."
+        "Army ghouls last 30s and the new Lord of the Dead lich concentrates damage back into burst windows — contradicting the stated burst-reduction goal; the messaging is 'confusing and contradictory' while sustained damage goes untouched.",
+        "PTR build 68569 (2026-07-08): overperformance nerf after first Heroic raid testing — all damage −8%, Lord of the Dead −25%, Magus of the Dead −15%, Lesser Ghoul damage −15%, Putrefy/Pestilence/Infected Claw/Virulent Plague −25%, Necrotic Coil −18%; Rider of the Apocalypse's Whitemane Death Coil/Undeath −25%."
       ],
       "set2": "Magi and Liches swap to a stronger Necrotic Bolt and Withering Grasp — \"vaguely interesting\" for spotlighting the new lich, but entirely passive with zero player control.",
       "set4": "+130% to both spells against enemies below 35% health — a flat execute amp Taeznak calls \"about as bland and boring as it could possibly get\"; the piece that \"needs a LOT of work,\" and rare in being less interesting than the 2pc.",
@@ -337,7 +341,7 @@
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 11.83,
+        "value": 11.8,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -346,13 +350,14 @@
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
         "value": 4062,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 12.24,
+        "value": 12.2,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -379,16 +384,16 @@
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4288,
-        "n": 50,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 10.2,
+        "value": 7.2,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
@@ -397,7 +402,7 @@
         "value": 81.22,
         "unit": "score",
         "n": 85,
-        "asOf": "2026-07-01",
+        "asOf": "2026-07-08",
         "era": "ptr"
       },
       {
@@ -453,9 +458,9 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-07",
+      "asOf": "2026-07-08",
       "targets": {
-        "1": 166161,
+        "1": 165051,
         "2": 164117,
         "5": 498825
       }
@@ -494,7 +499,7 @@
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 2.37,
+        "value": 2.4,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -503,6 +508,7 @@
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
         "value": 3577,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
@@ -536,16 +542,16 @@
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4026,
-        "n": 50,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 1.4,
+        "value": 2,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
@@ -554,7 +560,7 @@
         "value": 76.74,
         "unit": "score",
         "n": 36,
-        "asOf": "2026-07-01",
+        "asOf": "2026-07-08",
         "era": "ptr"
       },
       {
@@ -610,9 +616,9 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-07",
+      "asOf": "2026-07-08",
       "targets": {
-        "1": 127682,
+        "1": 137641,
         "2": 189661,
         "5": 284781
       }
@@ -646,7 +652,8 @@
         "All ability damage +20% — a 'GIGANTIC' aura buff, rare at this size; with nothing else changing it still nets roughly a 10% loss for Annihilator, before retuning.",
         "Impending Apocalypse star ramp 30% → 20% (a 5-star window's final star falls from +120% to +80%); Void Meta's Void Ray bonus 67% → 40%; Consume +60%.",
         "The rebalance hits Annihilator harder than Void-Scarred — likely forcing a hero-talent swap — while Void-Scarred's no-synergy caster/melee split (and Devourer's Bite, which 'needs to go') is left unaddressed.",
-        "Demon Hunters can now equip daggers — fun access to the new cantrip daggers, otherwise uneventful."
+        "Demon Hunters can now equip daggers — fun access to the new cantrip daggers, otherwise uneventful.",
+        "PTR build 68569 (2026-07-08): all ability damage increased by 10% (an underperformance buff), while sibling spec Havoc took −5%."
       ],
       "set2": "Soulburst: a 4+ soul Reap has a 20% chance (deck-of-cards system, so low variance) to make the next Consume instant and explode in AoE — only 1-2% overall, plus minor instant-cast QoL.",
       "set4": "Where the set shines: Soulburst generates 8 Soul Fragments plus Moment of Craving and Reap gains 20% damage — one of the kit's most efficient soul generators, \"rotationally transformative,\" and a bigger win for Void-Scarred than Annihilator.",
@@ -666,7 +673,7 @@
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 8.17,
+        "value": 8.2,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -675,13 +682,14 @@
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
         "value": 4107,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 7.51,
+        "value": 7.5,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -708,16 +716,16 @@
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4287,
-        "n": 50,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 7.2,
+        "value": 3.9,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
@@ -726,7 +734,7 @@
         "value": 64.35,
         "unit": "score",
         "n": 42,
-        "asOf": "2026-07-01",
+        "asOf": "2026-07-08",
         "era": "ptr"
       },
       {
@@ -782,10 +790,9 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-07",
+      "asOf": "2026-07-08",
       "targets": {
-        "1": 130122,
-        "2": 149456,
+        "1": 132348,
         "3": 193943,
         "5": 305158
       }
@@ -846,13 +853,14 @@
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
         "value": 3478,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 6.82,
+        "value": 6.8,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -879,16 +887,16 @@
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3885,
-        "n": 50,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.8,
+        "value": 1.4,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
@@ -948,7 +956,8 @@
       "changes": [
         "Lunar Calling 120% → 100%.",
         "Touch the Cosmos proc value pulled back — the central lever.",
-        "A tuning pass, not a redesign — how the spec plays is unchanged."
+        "A tuning pass, not a redesign — how the spec plays is unchanged.",
+        "PTR build 68569 (2026-07-08): across-the-board buff — all damage +3.5%, Moonfire/Sunfire/Shooting Stars/Wrath +10%, Starfire +20%, Umbral Intensity 12%, plus Keeper of the Grove Starfall buffs (dev intent: bring DoT/builder damage up to match the strong Starsurge/Starfall spenders)."
       ],
       "set2": "Feeds the current Eclipse / Astral flow.",
       "set4": "Reinforces the existing rotation without adding a new decision.",
@@ -968,7 +977,7 @@
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 3.65,
+        "value": 3.6,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -977,13 +986,14 @@
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
         "value": 3481,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 1.77,
+        "value": 1.8,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -1010,7 +1020,7 @@
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3939,
-        "n": 50,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
@@ -1019,7 +1029,7 @@
         "name": "Top-2000 keys representation",
         "value": 1,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
@@ -1028,7 +1038,7 @@
         "value": 71.94,
         "unit": "score",
         "n": 66,
-        "asOf": "2026-07-01",
+        "asOf": "2026-07-08",
         "era": "ptr"
       },
       {
@@ -1084,12 +1094,12 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-07",
+      "asOf": "2026-07-08",
       "targets": {
-        "1": 134606,
-        "2": 219164,
+        "1": 135302,
+        "2": 186141,
         "3": 282089,
-        "5": 348381
+        "5": 356503
       }
     }
   },
@@ -1126,7 +1136,7 @@
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 1.14,
+        "value": 1.1,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -1135,13 +1145,14 @@
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
         "value": 3868,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 1.84,
+        "value": 1.8,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -1168,16 +1179,16 @@
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4153,
-        "n": 50,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 1.2,
+        "value": 1.4,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
@@ -1186,7 +1197,7 @@
         "value": 63.35,
         "unit": "score",
         "n": 3,
-        "asOf": "2026-07-01",
+        "asOf": "2026-07-08",
         "era": "ptr"
       },
       {
@@ -1242,12 +1253,12 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-07",
+      "asOf": "2026-07-08",
       "targets": {
         "1": 149282,
         "2": 190683,
         "3": 268586,
-        "5": 450022
+        "5": 449924
       }
     }
   },
@@ -1294,13 +1305,14 @@
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
         "value": 4022,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 45.61,
+        "value": 45.6,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -1327,16 +1339,16 @@
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4284,
-        "n": 50,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 12.3,
+        "value": 7.7,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
@@ -1412,13 +1424,14 @@
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
         "value": 3401,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 8.44,
+        "value": 8.4,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -1445,16 +1458,16 @@
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3910,
-        "n": 50,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.9,
+        "value": 2,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
@@ -1524,7 +1537,8 @@
         "Double-time capped: Ebon Might crit stats now last 15s (Mastery-scaled) as a trackable buff — no more single dice roll deciding a chunk of your damage.",
         "Time Skip can still chain two crit Ebon Mights for up to 30s of Double-time — enough to cover a full opener burst window.",
         "Apex Duplicate's Upheavals no longer knock enemies airborne — a strict raid improvement where add positioning matters, and fewer missed dungeon interrupts.",
-        "Healing abilities up 25% across the board (Living Flame, Verdant Embrace, Emerald Blossom, Panacea, Defy Fate, Molten Blood), in line with other DPS specs."
+        "Healing abilities up 25% across the board (Living Flame, Verdant Embrace, Emerald Blossom, Panacea, Defy Fate, Molten Blood), in line with other DPS specs.",
+        "PTR build 68569 (2026-07-08): Scalecommander's Wingleader redesigned — per-target Deep Breath/Breath of Eons CDR replaces the old spread-Bombardment mechanic (Command Squadron Pyre +40%, Maneuverability DoT +40% to compensate); Chronowarden's Double-time now extends rather than overwrites on reapply. Devs say they'll keep watching Augmentation's performance."
       ],
       "set2": "Upheaval CD −10s — straightforward, directly benefits both Chronowarden and Scalecommander.",
       "set4": "Upheaval magnifies Fate Mirror for 8s (echo 15% → 45%) — a bigger number on a ~3%-of-total-damage passive with no gameplay hook; the author doubts it changes how anyone plays.",
@@ -1544,7 +1558,7 @@
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 5.39,
+        "value": 5.4,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -1553,13 +1567,14 @@
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
         "value": 4143,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 4.83,
+        "value": 4.8,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -1586,16 +1601,16 @@
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4288,
-        "n": 50,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 4.6,
+        "value": 2.9,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
@@ -1604,7 +1619,7 @@
         "value": 67.62,
         "unit": "score",
         "n": 48,
-        "asOf": "2026-07-01",
+        "asOf": "2026-07-08",
         "era": "ptr"
       },
       {
@@ -1640,7 +1655,7 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-07",
+      "asOf": "2026-07-08",
       "targets": {
         "5": 253988
       }
@@ -1671,7 +1686,8 @@
       "summary": "The Apex talent is redesigned into Unbound Flame (a sub-5% damage shift), leaving the rotation largely intact. The tier set is a genuine success, buffing Shattering Star passively.",
       "changes": [
         "Apex reworked into Unbound Flame — under 5% of damage, low disruption.",
-        "Core rotation stays familiar; this is a refinement, not an overhaul."
+        "Core rotation stays familiar; this is a refinement, not an overhaul.",
+        "PTR build 68569 (2026-07-08): Scalecommander's Wingleader redesigned — per-target Deep Breath/Breath of Eons CDR replaces the old spread-Bombardment mechanic, with Command Squadron's Pyre +40% and Maneuverability's DoT +40% as area-damage compensation."
       ],
       "set2": "Clean, passive value.",
       "set4": "Buffs Shattering Star without adding button bloat — one of the better-designed sets.",
@@ -1691,7 +1707,7 @@
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 0.51,
+        "value": 0.5,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -1700,13 +1716,14 @@
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
         "value": 3412,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 0.51,
+        "value": 0.5,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -1733,16 +1750,16 @@
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3921,
-        "n": 50,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.1,
+        "value": 0.5,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
@@ -1751,7 +1768,7 @@
         "value": 62.89,
         "unit": "score",
         "n": 22,
-        "asOf": "2026-07-01",
+        "asOf": "2026-07-08",
         "era": "ptr"
       },
       {
@@ -1807,7 +1824,7 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-07",
+      "asOf": "2026-07-08",
       "targets": {
         "1": 144764,
         "2": 206801,
@@ -1871,13 +1888,14 @@
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
         "value": 3452,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 2.77,
+        "value": 2.8,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -1904,16 +1922,16 @@
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3879,
-        "n": 50,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.4,
+        "value": 0.6,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
@@ -1984,7 +2002,8 @@
         "Kill Cleave now half as effective and Wild Instincts removed entirely, a substantial AoE nerf",
         "Beast Cleave duration up to 10s, so you no longer have to be perfect with Wild Thrash on cooldown (though casting it immediately is still best)",
         "Net effect: a flatter power profile spread more evenly across the rotation rather than concentrated in cooldowns",
-        "Wowhead's Tarlo corroborates the Mixed read: core buffs (Barbed Shot / Kill Command / Cobra Shot +20–25%, Beast Cleave to 10s, Hunter's Mark to 5 targets) are solid, but the Piercing Fangs redesign lands 'very bad' and BM still lacks a strong niche on big pulls or burst phases"
+        "Wowhead's Tarlo corroborates the Mixed read: core buffs (Barbed Shot / Kill Command / Cobra Shot +20–25%, Beast Cleave to 10s, Hunter's Mark to 5 targets) are solid, but the Piercing Fangs redesign lands 'very bad' and BM still lacks a strong niche on big pulls or burst phases",
+        "PTR build 68569 (2026-07-08): Cobra Shot reshaped — base damage +30% and Auto Shot +20%, but its modifiers were cut (Serpentine Strikes crit-dmg 20% was 50%, Cobra Senses 10% was 35%, Pack Leader's Hogstrider +100% was 200%) and Barbed Shot −12%; the 4-set single-target bonus dropped to +15%/stack (was 30%). Devs continuing to monitor BM throughput."
       ],
       "set2": "Reads as more of an AoE boost than a single-target one. Tarlo details it as Barbed Shot making pets Stomp one extra time at 50% effectiveness.",
       "set4": "Stomp grants a Cobra Shot benefit — 20% Beast Cleave effectiveness or a 30% single-target bonus (stacking to 4). Because the 4pc reads the cosmetic Beast Cleave buff, optimal play requires manually '/cancelaura Beast Cleave' in priority-AoE, 2-target, and burst windows — Tarlo flags this as an unfortunate degenerate interaction. Azortharion expects the set will mostly play itself otherwise.",
@@ -2004,7 +2023,7 @@
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 8.67,
+        "value": 8.7,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -2013,13 +2032,14 @@
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
         "value": 3645,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 10.69,
+        "value": 10.7,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -2046,16 +2066,16 @@
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4034,
-        "n": 50,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 4.4,
+        "value": 6.4,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
@@ -2064,7 +2084,7 @@
         "value": 75.93,
         "unit": "score",
         "n": 104,
-        "asOf": "2026-07-01",
+        "asOf": "2026-07-08",
         "era": "ptr"
       },
       {
@@ -2120,10 +2140,9 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-07",
+      "asOf": "2026-07-08",
       "targets": {
-        "1": 163415,
-        "2": 219877,
+        "1": 163241,
         "3": 259492,
         "5": 366742
       }
@@ -2157,7 +2176,8 @@
         "Black Arrow gets a 40% damage buff to offset the Withering Fire nerf and Headshot removal",
         "Deathblow procs now guarantee the next Aimed Shot is empowered, removing rotational unpredictability — 'very good change'",
         "Bulletstorm cut to +20% Aimed Shot damage (from 30%) per 10 stacks and now hits only the next shot instead of ~three — 'a massive nerf to the Talent and especially MM's funnel/prio damage'",
-        "Aimed Shot de-emphasized: crit-scaling replaced with a flat 10% crit-damage bump, and Focused Aim's cooldown reduction dropped from 2s to 1s, lowering Aimed Shot frequency"
+        "Aimed Shot de-emphasized: crit-scaling replaced with a flat 10% crit-damage bump, and Focused Aim's cooldown reduction dropped from 2s to 1s, lowering Aimed Shot frequency",
+        "PTR build 68569 (2026-07-08): sizeable catch-up buffs — Multi-Shot +80%, Steady Shot +50%, Kill Shot +25%, Rapid Fire/Volley/Auto Shot +20%, Arcane Shot +15%, Dark Ranger's Black Arrow +25% (devs explicitly bringing MM's damage up after the patch's reworks)."
       ],
       "set2": "Reads as a straightforward Explosive Shot amplifier — adds 1s of duration for an extra tick, leaning into the ability the whole patch's success rides on.",
       "set4": "Grants cooldown reduction off Explosive Shot ticks, but he flags that it \"will not scale with AoE\" — so the payoff stays single-target-weighted rather than rewarding the DoT's new multi-target ceiling.",
@@ -2177,7 +2197,7 @@
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 2.04,
+        "value": 2,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -2186,13 +2206,14 @@
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
         "value": 3630,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 1.25,
+        "value": 1.2,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -2219,16 +2240,16 @@
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3950,
-        "n": 50,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.7,
+        "value": 0.9,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
@@ -2237,7 +2258,7 @@
         "value": 56.94,
         "unit": "score",
         "n": 6,
-        "asOf": "2026-07-01",
+        "asOf": "2026-07-08",
         "era": "ptr"
       },
       {
@@ -2293,7 +2314,7 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-07",
+      "asOf": "2026-07-08",
       "targets": {
         "1": 108589,
         "5": 227703
@@ -2346,7 +2367,7 @@
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 1.81,
+        "value": 1.8,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -2355,13 +2376,14 @@
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
         "value": 3820,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 2.13,
+        "value": 2.1,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -2388,16 +2410,16 @@
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4076,
-        "n": 50,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 1.3,
+        "value": 1.2,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
@@ -2406,7 +2428,7 @@
         "value": 57.87,
         "unit": "score",
         "n": 8,
-        "asOf": "2026-07-01",
+        "asOf": "2026-07-08",
         "era": "ptr"
       },
       {
@@ -2462,9 +2484,9 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-07",
+      "asOf": "2026-07-08",
       "targets": {
-        "1": 157421,
+        "1": 171871,
         "5": 378150
       }
     }
@@ -2502,7 +2524,7 @@
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 0.32,
+        "value": 0.3,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -2511,13 +2533,14 @@
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
         "value": 3618,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 1.38,
+        "value": 1.4,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -2544,16 +2567,16 @@
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3881,
-        "n": 50,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.9,
+        "value": 1.2,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
@@ -2562,7 +2585,7 @@
         "value": 72.55,
         "unit": "score",
         "n": 49,
-        "asOf": "2026-07-01",
+        "asOf": "2026-07-08",
         "era": "ptr"
       },
       {
@@ -2618,12 +2641,12 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-07",
+      "asOf": "2026-07-08",
       "targets": {
-        "1": 135819,
-        "2": 233520,
+        "1": 135478,
+        "2": 236240,
         "3": 148960,
-        "5": 405050
+        "5": 407937
       }
     }
   },
@@ -2653,7 +2676,8 @@
       "changes": [
         "Damage moved from Combustion windows into filler — smoother, less bursty.",
         "Heavily tuning-dependent; the direction is fine, the numbers decide it.",
-        "Built around Pyroclasm."
+        "Built around Pyroclasm.",
+        "PTR build 68569 (2026-07-08): all ability damage +12% and Pyroclasm duration 20s (was 15s) — a straightforward buff to an underperformer."
       ],
       "set2": "Ties into the Pyroclasm package.",
       "set4": "Likely feels worse than the current set for most players.",
@@ -2673,7 +2697,7 @@
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 0.48,
+        "value": 0.5,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -2682,13 +2706,14 @@
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
         "value": 3607,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 0.56,
+        "value": 0.6,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -2715,16 +2740,16 @@
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3811,
-        "n": 50,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.2,
+        "value": 0.5,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
@@ -2733,7 +2758,7 @@
         "value": 55.68,
         "unit": "score",
         "n": 5,
-        "asOf": "2026-07-01",
+        "asOf": "2026-07-08",
         "era": "ptr"
       },
       {
@@ -2789,12 +2814,12 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-07",
+      "asOf": "2026-07-08",
       "targets": {
-        "1": 102640,
-        "2": 118755,
-        "3": 178672,
-        "5": 342313
+        "1": 105298,
+        "2": 128476,
+        "3": 184580,
+        "5": 337375
       }
     }
   },
@@ -2831,7 +2856,7 @@
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 10.54,
+        "value": 10.5,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -2840,13 +2865,14 @@
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
         "value": 3601,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 6.63,
+        "value": 6.6,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -2873,16 +2899,16 @@
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4017,
-        "n": 50,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 2.7,
+        "value": 3.9,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
@@ -2891,7 +2917,7 @@
         "value": 83.26,
         "unit": "score",
         "n": 85,
-        "asOf": "2026-07-01",
+        "asOf": "2026-07-08",
         "era": "ptr"
       },
       {
@@ -2947,11 +2973,11 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-07",
+      "asOf": "2026-07-08",
       "targets": {
-        "1": 137462,
+        "1": 137547,
         "2": 271926,
-        "5": 410786
+        "5": 416118
       }
     }
   },
@@ -2998,13 +3024,14 @@
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
         "value": 3854,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 11.65,
+        "value": 11.6,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -3031,16 +3058,16 @@
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4167,
-        "n": 50,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 2.3,
+        "value": 2.6,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
@@ -3100,7 +3127,8 @@
       "changes": [
         "Damage→heal conversion cut ~30% (SCK / Way of the Crane).",
         "Spinning Crane Kick's effective target threshold shifts ~3 → 8.",
-        "Jadefire buffed to compensate for the conversion loss."
+        "Jadefire buffed to compensate for the conversion loss.",
+        "PTR build 68569 (2026-07-08): Spinning Crane Kick damage +10%, plus a fix so Temple Training's SCK increase now applies to Mistweaver."
       ],
       "set2": "Supports the Jadefire-forward direction.",
       "set4": "Leans into the retuned kit.",
@@ -3129,13 +3157,14 @@
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
         "value": 4074,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 29.53,
+        "value": 29.5,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -3162,16 +3191,16 @@
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4288,
-        "n": 50,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 7.7,
+        "value": 5.9,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
@@ -3240,7 +3269,8 @@
       "changes": [
         "Burst pulled out of cooldowns, redistributed into sustained.",
         "Net damage change is small, roughly +1–2%.",
-        "Playstyle feel is slightly smoother but fundamentally the same."
+        "Playstyle feel is slightly smoother but fundamentally the same.",
+        "PTR build 68569 (2026-07-08): defensive/utility bumps — Combat Wisdom now grants +5% stamina and Calming Presence reduces damage taken by 10% (was 6%)."
       ],
       "set2": "Minor throughput.",
       "set4": "Reinforces the sustained-damage shift.",
@@ -3260,7 +3290,7 @@
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 2.21,
+        "value": 2.2,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -3269,13 +3299,14 @@
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
         "value": 3575,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 1.86,
+        "value": 1.9,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -3302,16 +3333,16 @@
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4018,
-        "n": 50,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.9,
+        "value": 1.2,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
@@ -3320,7 +3351,7 @@
         "value": 74.57,
         "unit": "score",
         "n": 33,
-        "asOf": "2026-07-01",
+        "asOf": "2026-07-08",
         "era": "ptr"
       },
       {
@@ -3376,7 +3407,7 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-07",
+      "asOf": "2026-07-08",
       "targets": {
         "1": 149801,
         "2": 216286,
@@ -3412,7 +3443,8 @@
         "4pc buffed on 6/30 from a 50% chance to a 100% chance for Holy Light to grant Infusion of Light — 'a great change,' you can now always rely on Holy Light for Infusions and stop spamming them back to back.",
         "6/30 also brought Eternal Flame closer to Light of Dawn, opening builds that drop Unending Light / Breaking Dawn and enable Empyrean Legacy / Truth Prevails with EF as the main HP spender — better healing profile and more fun.",
         "Pillars of Light + the EF buff + the new set make Beacon of Virtue far more appealing; for M+, where EF was already best, it's a straight buff.",
-        "2pc increases Infusion of Light additively: Infused Flash of Light heals +275% instead of +200% (a 25% bump) and Greater Judgment hits +225% instead of +150% (a 30% bump)."
+        "2pc increases Infusion of Light additively: Infused Flash of Light heals +275% instead of +200% (a 25% bump) and Greater Judgment hits +225% instead of +150% (a 30% bump).",
+        "PTR build 68569 (2026-07-08): broad buff for talent diversity — all healing +8%, Holy Shock +10%, the 2-set now doubles Infusion of Light (100%, was 75%), plus buffs to Truth Prevails, Saved by the Light, Overflowing Light, Awakening, Ringing of the Heavens and more."
       ],
       "set2": "A pretty standard set — makes Infusions feel better and more important not to waste (+25% on Infused Flash of Light, +30% on Greater Judgment), but not particularly strong compared to other healers' 2pc bonuses.",
       "set4": "Originally a 50% chance for Holy Light to grant Infusion of Light — which also caused wasted procs since you don't know you've proc'd until you've already queued the next spell. The 6/30 buff to a guaranteed 100% chance fixes that and is 'a great change': Holy Light is now a reliable Infusion generator, no more back-to-back spamming, and much more fun to play.",
@@ -3441,6 +3473,7 @@
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
         "value": 3559,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
@@ -3474,16 +3507,16 @@
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3957,
-        "n": 50,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 1,
+        "value": 1.4,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
@@ -3554,7 +3587,8 @@
         "Undocumented nerf: Divine Exaction cut to +50% extra damage, down from +150%.",
         "Undocumented nerf: Blessed Assurance now +100% extra on Blessed Hammer / Hammer of the Righteous after a spender, down from +200%.",
         "Undocumented nerf: Glory of the Vanguard secondary damage reduced to 50%, down from 100%.",
-        "Undocumented buff: Undying Embers now heals for at least 125% of Refining Fire damage, scaling up to 300% as HP drops."
+        "Undocumented buff: Undying Embers now heals for at least 125% of Refining Fire damage, scaling up to 300% as HP drops.",
+        "PTR build 68569 (2026-07-08): Lightsmith's Divine Guidance redesigned (each Holy Power ability empowers the next Consecration to deal split Holy damage and heal up to 3 allies); several fixes/QoL (Blessed Word, Valiant Crusade no longer cancels on death, Improved Ardent Defender fatal-damage indicator) and Guardian of Ancient Kings' initial cooldown raised to 8s."
       ],
       "set2": "The \"Crusader Strike\" set (Blessed Hammer, Hammer of the Righteous, Crusader Strike and Judgment) is a pure damage amp — those hits deal 20% increased damage, or 60% if the hit crits. The crew reads it as a straightforward offensive lever that rewards building around crit to hit the higher tier, doubling down on Prot's damage rotation rather than adding defensive value.",
       "set4": null,
@@ -3584,13 +3618,14 @@
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
         "value": 3436,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 15.96,
+        "value": 16,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -3617,16 +3652,16 @@
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3923,
-        "n": 50,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 1.9,
+        "value": 4.2,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
@@ -3688,7 +3723,8 @@
         "Art of War can now accumulate one extra charge (Apex Talent: Light Within Rank 1) — Bolas's favourite change; removes the awkward Holy Power loss from having to instantly spend procs. Side effect: makes Improved Blade of Justice much worse, since its use case was banking charges for procs.",
         "Damage shuffled out of cooldowns into the core kit: Blade of Justice +40%; Templar Strike/Slash, Judgment, Hammer of Wrath all +50%; Final Verdict and Divine Storm +15%. Offsetting nerfs: Art of War's Blade of Justice bonus 150%→80%, Divine Toll's Judgment 100%→50%, Light Within Rank 3 damage −25%.",
         "Avenging Wrath now grants +15% damage and crit (was +20%) — Bolas calls it a fairly severe nerf given Ret's AW window wasn't especially strong to begin with, though 12.1 is bringing cooldown nerfs to most specs.",
-        "Healing buffed across the board: Flash of Light, Word of Glory, and Eternal Flame all +25%. Templar's Hammer of Light now costs 3 Holy Power (was 5) but deals −30% damage (does not affect PvP)."
+        "Healing buffed across the board: Flash of Light, Word of Glory, and Eternal Flame all +25%. Templar's Hammer of Light now costs 3 Holy Power (was 5) but deals −30% damage (does not affect PvP).",
+        "PTR build 68569 (2026-07-08): all damage −6%, and the Venomous Abyss 4-set reworked — consuming Divine Purpose now grants Divine Arbiter (empowering other Holy Power spenders to hit for Holy AoE; Divine Arbiter damage +35%), an attempt to address the tier set's pain points while keeping its identity."
       ],
       "set2": "Divine Purpose gains an additional 10% chance to activate, and consuming it grants Divine Power — +10% Holy damage done for 12 seconds. Bolas calls it \"pretty solid and inoffensive\": a clean, uncontroversial throughput bonus.",
       "set4": "Consuming Divine Purpose with Divine Storm grants 2 stacks of Divine Arbiter, making your next Final Verdicts unleash an AoE Holy nuke (8-yd splash) — but only if no Arbiter stacks are already active, so once you hold stacks you must spend Divine Purpose on Final Verdict (the single-target spender) instead. \"One of the most controversial set bonuses in the Retribution community in recent memory\": it forces the \"wrong\" spender for the target count, which the official feedback thread explicitly flagged as a degenerate/unintended rotation impact. Bolas thinks it misses the mark — easy to accidentally misplay and punishing when you do, yet with a low skill ceiling once learned, bucking Ret's beginner-friendly Dragonflight-era identity.",
@@ -3708,7 +3744,7 @@
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 8.57,
+        "value": 8.6,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -3717,13 +3753,14 @@
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
         "value": 3850,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 12.01,
+        "value": 12,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -3750,16 +3787,16 @@
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4151,
-        "n": 50,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 7,
+        "value": 6.6,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
@@ -3768,7 +3805,7 @@
         "value": 70.22,
         "unit": "score",
         "n": 45,
-        "asOf": "2026-07-01",
+        "asOf": "2026-07-08",
         "era": "ptr"
       },
       {
@@ -3824,12 +3861,12 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-07",
+      "asOf": "2026-07-08",
       "targets": {
-        "1": 142308,
+        "1": 141766,
         "2": 202357,
         "3": 268918,
-        "5": 382048
+        "5": 386215
       }
     }
   },
@@ -3861,7 +3898,8 @@
         "Void Shield proc reworked to a forced proc off Mind Blast; Clandon: this raises Void Shield CPM rather than reducing reliance",
         "Clandon's Oracle raid example: Void Shield is ~25% of DPS, ~45% of direct healing, ~28% of Atonement healing, and 40%+ of total Atonement applications",
         "Shadow Mend buffed for single-target healing but still stacks penalties (mana cost, cast time, talent investment) and is seen as weak",
-        "Greater Smite's 2s buff window and Power Word: Solace ('Uppies') on a 4-min CD both flagged as awkward/underwhelming"
+        "Greater Smite's 2s buff window and Power Word: Solace ('Uppies') on a 4-min CD both flagged as awkward/underwhelming",
+        "PTR build 68569 (2026-07-08): Void Shield absorption −30% with the power redistributed (all healing/absorption +10%, Ultimate Penitence +30%, Greater Smite 4s, Atonement 32% was 30%) — dev intent to reduce the overbearing focus on triggering Void Shield."
       ],
       "set2": "Thread does not opine on the tier set; the feedback is confined to class-talent changes.",
       "set4": "Thread does not opine on the tier set, though its central complaint is directly relevant: a 4pc that buffs Void Shield absorption would reinforce exactly the Void Shield centralization the community is asking Blizzard to dial back.",
@@ -3890,6 +3928,7 @@
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
         "value": 3769,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
@@ -3923,16 +3962,16 @@
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4073,
-        "n": 50,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 2.3,
+        "value": 3,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
@@ -4017,13 +4056,14 @@
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
         "value": 3446,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 5.43,
+        "value": 5.4,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -4050,16 +4090,16 @@
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3838,
-        "n": 50,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.5,
+        "value": 0.6,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
@@ -4128,7 +4168,8 @@
       "changes": [
         "Voidform + Void Volley reworked around charges — well received.",
         "Shadeburst AoE lands too soft to matter.",
-        "Rotation gains flexibility from the charge system."
+        "Rotation gains flexibility from the charge system.",
+        "PTR build 68569 (2026-07-08): all ability damage increased by 8%."
       ],
       "set2": "Underwhelming.",
       "set4": "A complete non-starter — doesn't reward anything the spec wants to do.",
@@ -4148,7 +4189,7 @@
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 2.97,
+        "value": 3,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -4157,13 +4198,14 @@
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
         "value": 3756,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 2.77,
+        "value": 2.8,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -4190,16 +4232,16 @@
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4059,
-        "n": 50,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 1.7,
+        "value": 1.6,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
@@ -4208,7 +4250,7 @@
         "value": 78.78,
         "unit": "score",
         "n": 65,
-        "asOf": "2026-07-01",
+        "asOf": "2026-07-08",
         "era": "ptr"
       },
       {
@@ -4264,9 +4306,9 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-07",
+      "asOf": "2026-07-08",
       "targets": {
-        "1": 110777,
+        "1": 111177,
         "2": 173488,
         "3": 233124,
         "5": 313612
@@ -4322,7 +4364,7 @@
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 0.43,
+        "value": 0.4,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -4331,13 +4373,14 @@
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
         "value": 3784,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 0.91,
+        "value": 0.9,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -4364,7 +4407,7 @@
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4018,
-        "n": 50,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
@@ -4373,7 +4416,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.6,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
@@ -4382,7 +4425,7 @@
         "value": 67.9,
         "unit": "score",
         "n": 7,
-        "asOf": "2026-07-01",
+        "asOf": "2026-07-08",
         "era": "ptr"
       },
       {
@@ -4438,11 +4481,11 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-07",
+      "asOf": "2026-07-08",
       "targets": {
         "1": 121550,
         "3": 199680,
-        "5": 345207
+        "5": 346055
       }
     }
   },
@@ -4493,7 +4536,7 @@
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 0.58,
+        "value": 0.6,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -4502,13 +4545,14 @@
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
         "value": 3896,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 1.13,
+        "value": 1.1,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -4535,7 +4579,7 @@
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4147,
-        "n": 50,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
@@ -4544,7 +4588,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.9,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
@@ -4553,7 +4597,7 @@
         "value": 57.91,
         "unit": "score",
         "n": 6,
-        "asOf": "2026-07-01",
+        "asOf": "2026-07-08",
         "era": "ptr"
       },
       {
@@ -4609,7 +4653,7 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-07",
+      "asOf": "2026-07-08",
       "targets": {
         "1": 125505,
         "3": 206439,
@@ -4643,7 +4687,8 @@
       "changes": [
         "Shadowcraft cut ~40–50% in real terms.",
         "General downward tuning with no compensating gameplay change.",
-        "Nothing added to offset the losses."
+        "Nothing added to offset the losses.",
+        "PTR build 68569 (2026-07-08): all ability damage reduced by 8% (PvE only) — an overperformance trim after first Heroic testing."
       ],
       "set2": "Placeholder-tier value.",
       "set4": "Essentially just pushes more Backstab — no new decision or identity.",
@@ -4663,7 +4708,7 @@
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 3.64,
+        "value": 3.6,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -4672,13 +4717,14 @@
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
         "value": 3718,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 2.17,
+        "value": 2.2,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -4705,16 +4751,16 @@
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4001,
-        "n": 50,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.9,
+        "value": 1.2,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
@@ -4723,7 +4769,7 @@
         "value": 69.68,
         "unit": "score",
         "n": 41,
-        "asOf": "2026-07-01",
+        "asOf": "2026-07-08",
         "era": "ptr"
       },
       {
@@ -4779,7 +4825,7 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-07",
+      "asOf": "2026-07-08",
       "targets": {
         "1": 112345,
         "3": 159592,
@@ -4820,7 +4866,7 @@
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 4.45,
+        "value": 4.4,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -4829,13 +4875,14 @@
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
         "value": 3740,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 3.96,
+        "value": 4,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -4862,16 +4909,16 @@
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4053,
-        "n": 50,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 1.8,
+        "value": 2.3,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
@@ -4880,7 +4927,7 @@
         "value": 73.98,
         "unit": "score",
         "n": 44,
-        "asOf": "2026-07-01",
+        "asOf": "2026-07-08",
         "era": "ptr"
       },
       {
@@ -4936,10 +4983,10 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-07",
+      "asOf": "2026-07-08",
       "targets": {
-        "1": 132519,
-        "2": 170540,
+        "1": 132287,
+        "2": 175335,
         "3": 252941,
         "5": 494796
       }
@@ -4973,7 +5020,8 @@
         "Doom Winds now increases Windfury Weapon activation chance by 50% (was 100%) — trims the mass-AoE Windfury spike, felt mainly by Totemic.",
         "Stormbringer nerf: Tempest main-target −10%, secondary-target −30%.",
         "Totemic nerf: Surging Totem Tremor −15%, Surging Bolt −10%.",
-        "Net is still almost universally a buff (Totemic ~+3%, −1% in mass AoE; Stormbringer +3–5% by target count), but Wordup notes the devs' stated goal of shifting damage OUT of cooldown windows wasn't really achieved — only Totemic's Surging Totem took a real hit and it was mostly offset."
+        "Net is still almost universally a buff (Totemic ~+3%, −1% in mass AoE; Stormbringer +3–5% by target count), but Wordup notes the devs' stated goal of shifting damage OUT of cooldown windows wasn't really achieved — only Totemic's Surging Totem took a real hit and it was mostly offset.",
+        "PTR build 68569 (2026-07-08): Venomous Abyss 4-set fixes — Short Circuit now actually gets consumed, Crash Lightning (Unleashed) again hits all targets, and the 4-set now boosts the Crash Lightning weapon-enhancement damage (averaged across active stacks)."
       ],
       "set2": "Reworked this week and much improved over S1. Built around Voltaic Blaze; the previous version had a single-target 'killswitch' (lost its 200% multiplier the moment a 2nd target appeared) — now a strong, self-sufficient universal bonus (its own Fire Nova procs) with the set's value weighted heavily here. Wordup is 'very happy' Blizzard caught the single-target-contingent design and pivoted before live.",
       "set4": "Adds extra Voltaic Blaze stacks plus Crash Lightning CDR. Heavily favors Stormbringer, which has the spare GCDs to weave Voltaic Blaze as a priority; Totemic struggles to juggle it against Storm Unleashed and its totem cadence. Fire Nova becomes a nice single-target pickup but is NOT a mandatory talent swap — a welcome, less-forceful tier-set design. Overall a solid all-rounder giving damage in nearly all situations.",
@@ -5002,13 +5050,14 @@
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
         "value": 3820,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 3.21,
+        "value": 3.2,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -5035,16 +5084,16 @@
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4054,
-        "n": 50,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 1.9,
+        "value": 2.1,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
@@ -5053,7 +5102,7 @@
         "value": 69.28,
         "unit": "score",
         "n": 21,
-        "asOf": "2026-07-01",
+        "asOf": "2026-07-08",
         "era": "ptr"
       },
       {
@@ -5109,12 +5158,12 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-07",
+      "asOf": "2026-07-08",
       "targets": {
-        "1": 135751,
-        "2": 200891,
+        "1": 136328,
+        "2": 190150,
         "3": 279431,
-        "5": 374838
+        "5": 372043
       }
     }
   },
@@ -5144,7 +5193,8 @@
       "changes": [
         "Farseer Healing Rain reworked — the sole meaningful change.",
         "The other hero tree gets nothing.",
-        "Baseline throughput problems remain unaddressed."
+        "Baseline throughput problems remain unaddressed.",
+        "PTR build 68569 (2026-07-08): Acid Rain damage +50% but now ticks every 2s (was 1s); fixes so Healing Rain heals immediately on cast and both Acid/Healing Rain grant a proper final partial tick."
       ],
       "set2": "Thematic and pleasant, but low-impact.",
       "set4": "Overshadowed by stronger healer sets this season.",
@@ -5173,13 +5223,14 @@
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
         "value": 3900,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 29.73,
+        "value": 29.7,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -5206,16 +5257,16 @@
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4182,
-        "n": 50,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 7.2,
+        "value": 6.6,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
@@ -5291,7 +5342,7 @@
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 1.09,
+        "value": 1.1,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -5300,13 +5351,14 @@
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
         "value": 3584,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 1.98,
+        "value": 2,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -5333,16 +5385,16 @@
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3919,
-        "n": 50,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 1.1,
+        "value": 1.4,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
@@ -5351,7 +5403,7 @@
         "value": 75.06,
         "unit": "score",
         "n": 62,
-        "asOf": "2026-07-01",
+        "asOf": "2026-07-08",
         "era": "ptr"
       },
       {
@@ -5407,12 +5459,12 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-07",
+      "asOf": "2026-07-08",
       "targets": {
         "1": 110680,
         "2": 167551,
         "3": 300056,
-        "5": 409832
+        "5": 409000
       }
     }
   },
@@ -5449,7 +5501,7 @@
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 8.16,
+        "value": 8.2,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -5458,13 +5510,14 @@
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
         "value": 3757,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 6.56,
+        "value": 6.6,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -5491,16 +5544,16 @@
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4082,
-        "n": 50,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 2.7,
+        "value": 3,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
@@ -5509,7 +5562,7 @@
         "value": 70.34,
         "unit": "score",
         "n": 48,
-        "asOf": "2026-07-01",
+        "asOf": "2026-07-08",
         "era": "ptr"
       },
       {
@@ -5565,12 +5618,11 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-07",
+      "asOf": "2026-07-08",
       "targets": {
-        "1": 150794,
-        "2": 328201,
-        "3": 316867,
-        "5": 430585
+        "1": 121268,
+        "3": 247816,
+        "5": 404381
       }
     }
   },
@@ -5607,7 +5659,7 @@
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 0.94,
+        "value": 0.9,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -5616,13 +5668,14 @@
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
         "value": 3414,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 0.89,
+        "value": 0.9,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -5649,16 +5702,16 @@
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3738,
-        "n": 50,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.6,
+        "value": 0.5,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
@@ -5667,7 +5720,7 @@
         "value": 53.03,
         "unit": "score",
         "n": 20,
-        "asOf": "2026-07-01",
+        "asOf": "2026-07-08",
         "era": "ptr"
       },
       {
@@ -5723,7 +5776,7 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-07",
+      "asOf": "2026-07-08",
       "targets": {
         "1": 107430,
         "2": 197904,
@@ -5760,7 +5813,8 @@
         "Ravager redesigned: +50% damage, no longer buffs Cleave/Whirlwind, and makes enemies take 25%→50% increased bleed damage for 12s; usable in single target again.",
         "Broad Strokes cuts Sweeping Strikes to 6 charges (from 12) and Improved Sweeping Strikes is removed — no more 100% Sweep uptime.",
         "Demolish moved to a flat 30s CD (was variable) but still won't align cleanly with Colossus Smash.",
-        "Tactical Edge redesigned so Colossus Smash grants a Sudden Death use; Master Tactician still terrible."
+        "Tactical Edge redesigned so Colossus Smash grants a Sudden Death use; Master Tactician still terrible.",
+        "PTR build 68569 (2026-07-08): single-target buffs into Slayer — melee auto-attack +100%, the 2-set now boosts both Mortal Strike and Execute (was Mortal Strike only), and Slayer's Dominance proc chance 25% (was 15%); devs targeting Arms/Slayer's lagging single-target."
       ],
       "set2": "",
       "set4": "Decent in AoE but terrible in single target, especially measured against S1's universally-powerful set — a real step down on the ST bench.",
@@ -5789,13 +5843,14 @@
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
         "value": 3976,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 2.92,
+        "value": 2.9,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -5822,16 +5877,16 @@
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4182,
-        "n": 50,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 1.7,
+        "value": 2.1,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
@@ -5840,7 +5895,7 @@
         "value": 75.89,
         "unit": "score",
         "n": 41,
-        "asOf": "2026-07-01",
+        "asOf": "2026-07-08",
         "era": "ptr"
       },
       {
@@ -5896,9 +5951,9 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-07",
+      "asOf": "2026-07-08",
       "targets": {
-        "1": 116360,
+        "1": 111242,
         "2": 221181,
         "3": 336270,
         "5": 365100
@@ -5933,7 +5988,8 @@
         "Whirlwind now generates 3 Rage innately, opening up single-target use; new Carving Blades gives Whirlwind +50% damage on a single target (choice node vs. Meat Cleaver)",
         "Rampaging Ruin redesigned to be more universal but plays as a talent-point tax — always taken in AoE, forcing you to drop Massacre / Executioner's Wrath / Deep Wounds / Cruelty",
         "Hack and Slash: Rampage has a 75% chance to refund a Raging Blow charge — only matters if Raging Blow is worth using over Bloodthirst, which it currently isn't",
-        "Mountain Thane: Thunder Blast +40% but Crashing Thunder cut 30%→10%, making it more RNG-dependent"
+        "Mountain Thane: Thunder Blast +40% but Crashing Thunder cut 30%→10%, making it more RNG-dependent",
+        "PTR build 68569 (2026-07-08): Bloodbath rebalanced toward the bleed — initial hit −12%, bleed +300% (dev-stated net-neutral to Bloodbath's overall damage)."
       ],
       "set2": "Reads weak. The Recklessness Raging Blow/Bloodthirst effects are each capped, blunting the payoff.",
       "set4": "Reads weak overall alongside the 2pc — the capped Recklessness effects leave the set feeling underwhelming.",
@@ -5953,7 +6009,7 @@
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 4.33,
+        "value": 4.3,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -5962,13 +6018,14 @@
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
         "value": 3777,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 3.74,
+        "value": 3.7,
         "unit": "%",
         "asOf": "2026-07-08"
       },
@@ -5995,16 +6052,16 @@
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4069,
-        "n": 50,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 2.2,
+        "value": 2.1,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
@@ -6013,7 +6070,7 @@
         "value": 69.89,
         "unit": "score",
         "n": 31,
-        "asOf": "2026-07-01",
+        "asOf": "2026-07-08",
         "era": "ptr"
       },
       {
@@ -6069,7 +6126,7 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-07-07",
+      "asOf": "2026-07-08",
       "targets": {
         "1": 123684,
         "5": 322318
@@ -6105,7 +6162,8 @@
         "Ravager +50% damage, but the bleed focus is weird — 'budget Assassination Rogue' territory",
         "Demolish moved to a fixed 30s CD: predictable ST burst, but ~10s longer effective CD in AoE (lost the Dominance of the Colossus reduction)",
         "Mountain Thane: Thunder Blast +40%, but Crashing Thunder 30%->10% makes it more RNG-dependent",
-        "Revenge free-proc now also triggers from autos (was dodges/parries only) — shrinks the wild raid-vs-dungeon frequency gap"
+        "Revenge free-proc now also triggers from autos (was dodges/parries only) — shrinks the wild raid-vs-dungeon frequency gap",
+        "PTR build 68569 (2026-07-08): 4-set Bloody Rebuke bleed +100%, Unyielding's Defensive Stance bonus +6% (was 4%), and Colossus buffed (Practiced Strikes +4 Rage, No Stranger to Pain / Dominance of the Colossus improved) to close the gap with Mountain Thane."
       ],
       "set2": "Lackluster — the free-Revenge proc is RNG-dependent, so it feels inconsistent.",
       "set4": "Insignificant on the bleed side, with some AoE potential at best.",
@@ -6135,6 +6193,7 @@
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
         "value": 3477,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
@@ -6168,16 +6227,16 @@
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3931,
-        "n": 50,
+        "unit": "",
         "asOf": "2026-07-08"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 1.3,
+        "value": 1.7,
         "unit": "%",
-        "asOf": "2026-07-01"
+        "asOf": "2026-07-08"
       },
       {
         "source": "warcraftlogs",
