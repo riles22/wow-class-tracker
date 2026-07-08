@@ -572,6 +572,9 @@ const META = DATA.meta;
 const COMMUNITY = DATA.community || { classes: [] };
 const PTR_BUILDS = DATA.ptrBuilds || { builds: [] };
 const CREATOR_TAKES = (DATA.creatorTakes && DATA.creatorTakes.takes) || [];
+/* Meta-outlook notes: general-creator (news-lane) per-spec season/meta reads — a
+   separate lane from specialist CREATOR_TAKES, never a tier/consensus input. */
+const META_NOTES = (DATA.creatorTakes && DATA.creatorTakes.metaNotes) || [];
 const TIER_SOURCES = SOURCES.filter(s => s.kind === "tier-list");
 const REF_SOURCES = SOURCES.filter(s => s.kind === "reference");
 
@@ -744,6 +747,17 @@ function takesHTML(s){
   return `<div class="srcbreak"><p class="d-h">Creator takes <span class="mnote">(opinion, cited — never feeds tiers)</span></p><div class="setbox">${rows}</div></div>`;
 }
 
+/* Meta outlook: per-spec season/meta reads from the general PTR-news creators (e.g. izen).
+   Deliberately distinct from specialist Creator takes — cross-class opinion, cited, and
+   never a tier/consensus/movement input. */
+function metaNotesHTML(s){
+  const notes = META_NOTES.filter(n=>n.class===s.class && n.spec===s.spec && !n.superseded && eraOk(takeEra(n)));
+  if(!notes.length) return "";
+  const rows = notes.map(n=>
+    `<div class="setrow"><span class="pc" data-sent="${esc(n.sentiment||"")}">${esc(n.sentiment||"note")}</span><span class="pct">${esc(n.note)} <span class="mnote">— <a href="${esc(safeHref(n.url))}" target="_blank" rel="noopener">${esc(n.creator)}, ${esc(n.date||"")}</a>${n.patchContext?` · ${esc(n.patchContext)}`:""}</span></span></div>`).join("");
+  return `<div class="srcbreak"><p class="d-h">Meta outlook <span class="mnote">(general PTR-news creators — cross-class opinion, cited; never feeds tiers)</span></p><div class="setbox">${rows}</div></div>`;
+}
+
 function communityHTML(s){
   const c = (COMMUNITY.classes||[]).find(x=>x.class===s.class);
   if(!c) return "";
@@ -799,7 +813,7 @@ function drawerHTML(s){
   // on open, so render() rebuilds ~1.3K visible nodes instead of ~9.3K (85% was drawers).
   return `<div class="drawer-in"><div class="drawer-grid">
      <div>${left}${metricsHTML(s)}${showPtr?ptrDummyHTML(s):""}</div>
-     <div>${tierset}${profileHTML(s)}${sourceBreakdownHTML(s)}${takesHTML(s)}${communityHTML(s)}</div>
+     <div>${tierset}${profileHTML(s)}${sourceBreakdownHTML(s)}${takesHTML(s)}${metaNotesHTML(s)}${communityHTML(s)}</div>
    </div></div>`;
 }
 
@@ -1079,6 +1093,9 @@ document.getElementById('livelinks').insertAdjacentHTML('beforeend',
   // fold in any take-only creator not present in the community registry
   for(const t of CREATOR_TAKES)
     if(t.creator && !byName.has(t.creator)) byName.set(t.creator, { name: t.creator, url: t.url });
+  // fold in general PTR-news creators whose meta-outlook notes are aggregated here
+  for(const gc of (COMMUNITY.generalCreators||[]))
+    if(gc.name && !byName.has(gc.name)) byName.set(gc.name, { name: gc.name, url: gc.url });
   const list = [...byName.values()].sort((a,b)=>a.name.localeCompare(b.name, undefined, {sensitivity:'base'}));
   el.innerHTML = list.map(c=> c.url
     ? `<a href="${esc(safeHref(c.url))}" target="_blank" rel="noopener">${esc(c.name)}</a>`

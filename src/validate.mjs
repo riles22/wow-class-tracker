@@ -253,6 +253,27 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
     }
   }
 
+  // --- meta-outlook notes (general-creator qualitative layer) ---
+  // INVERSE of the take authority model above: metaNotes may ONLY be authored by a
+  // generalCreators entry (the cross-class PTR-news lane — e.g. izen). This keeps the
+  // news-lane generalists firewalled out of the specialist take/consensus layers while
+  // still surfacing their per-spec season/meta OUTLOOK opinion in a separate, clearly
+  // labeled lane. A specialist take belongs in takes[] (class-scoped creator); a broad
+  // "this spec looks good/bad for the season" read belongs here.
+  const generalCreatorNames = new Set((community?.generalCreators ?? []).map(g => g.name));
+  const META_SENTIMENTS = new Set(["positive", "negative", "neutral", "mixed"]);
+  for (const note of creatorTakes?.metaNotes ?? []) {
+    if (!specKeys.has(`${note.class}|${note.spec}`)) errors.push(`creator-takes.json: metaNote references unknown spec ${note.class} / ${note.spec}`);
+    if (!note.creator || !note.note || !note.url) errors.push(`creator-takes.json: metaNote for ${note.spec} needs creator + note + url`);
+    if (note.creator && !generalCreatorNames.has(note.creator)) errors.push(`creator-takes.json: metaNote creator "${note.creator}" must be a generalCreators entry — specialist per-spec takes belong in takes[], not metaNotes[]`);
+    if (!META_SENTIMENTS.has(note.sentiment)) errors.push(`creator-takes.json: metaNote for ${note.spec} sentiment "${note.sentiment}" invalid (positive|negative|neutral|mixed)`);
+    isoOk(note.date, `creator-takes.json: metaNote for ${note.spec} date`);
+    if (note.url != null) {
+      if (!httpsUrl(note.url)) errors.push(`creator-takes.json: metaNote for ${note.spec} url must be https:// (got "${note.url}")`);
+      else if (!TAKE_HOSTS.has(new URL(note.url).host)) errors.push(`creator-takes.json: metaNote for ${note.spec} url host "${new URL(note.url).host}" not in the citation allowlist`);
+    }
+  }
+
   // --- PTR build feed ---
   const rosterNames = new Set(specs.map(s => `${s.spec} ${s.class}`));
   const classNames = new Set(specs.map(s => s.class));

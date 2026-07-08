@@ -63,6 +63,13 @@ shown in each drawer's Source ratings box.
   transcripts (yt-dlp) and distills **creator takes** into `data/creator-takes.json`:
   paraphrased, sentiment-tagged, timestamp-linked. Opinion ≠ tier data; 2+ independent
   creators required before calling anything "consensus".
+- **General PTR-news creators** (`generalCreators` in `data/community.json` — e.g. izen):
+  a cross-class news lane, deliberately NOT specialist take authorities. They feed two
+  things: build/tuning **leads** (verified against the official forum before logging) and
+  a separate **`metaNotes[]`** lane — per-spec season/meta OUTLOOK reads (which specs look
+  strong/weak), cited + dated, rendered as a distinct "Meta outlook" drawer section.
+  Validation firewalls it: a `metaNotes` author must be a `generalCreators` entry, so a
+  generalist can never lend authority to the specialist `takes[]` / consensus layers.
 - **Per-spec authority coverage**: every one of the 40 specs now has at least one named
   creator/authority, live-verified and spec-scoped. ~half are **transcribable** (real
   video/doc channels the pipeline pulls takes from — Reholy, VooDooSaurus, Publik,

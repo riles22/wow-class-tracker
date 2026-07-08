@@ -149,6 +149,24 @@ test("every take's creator must be registered for that class, within their specs
   assert.ok(errors.some(e => e.includes("outside their declared specs scope")));
 });
 
+test("meta-outlook notes may only be authored by a generalCreators entry", async () => {
+  const data = await loadData(ROOT);
+  assert.deepEqual(validateData(data), [], "real data must satisfy the meta-note model");
+  const broken = structuredClone(data);
+  broken.creatorTakes.metaNotes = broken.creatorTakes.metaNotes ?? [];
+  // a name that is NOT a generalCreators entry cannot author a metaNote (firewall: those
+  // belong in takes[] under a class-scoped creator, not the general news lane)
+  broken.creatorTakes.metaNotes.push({ class: "Mage", spec: "Frost", creator: "Not A General Creator",
+    date: "2026-07-08", sentiment: "positive", note: "x", url: "https://youtu.be/x" });
+  // a valid general creator but an invalid sentiment
+  const gc = broken.community.generalCreators?.[0];
+  if (gc) broken.creatorTakes.metaNotes.push({ class: "Mage", spec: "Fire", creator: gc.name,
+    date: "2026-07-08", sentiment: "bullish", note: "x", url: "https://youtu.be/x" });
+  const errors = validateData(broken);
+  assert.ok(errors.some(e => e.includes("must be a generalCreators entry")), "non-general creator rejected");
+  if (gc) assert.ok(errors.some(e => e.includes("sentiment") && e.includes("invalid")), "bad sentiment rejected");
+});
+
 test("a spec with an omitted ptr key is valid (same as ptr: null)", async () => {
   const data = await loadData(ROOT);
   const clone = structuredClone(data);

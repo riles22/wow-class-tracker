@@ -141,8 +141,13 @@ community-site links (Peak of Serenity, Dreamgrove, etc.); `altDiscords[]` holds
 secondary spec-specific Discords (Death's Advance, Focused Will, …). Top-level
 **`generalCreators[]`** is the cross-class PTR-news lane (e.g. izen): polled by
 watch-creators for build/tuning LEADS (verified against the official forum before
-logging) and linked under the build feed — never a per-spec take authority, by
-construction (the take-scope validation only reads `classes[].creators`).
+logging) and linked under the build feed — never a specialist per-spec take authority, by
+construction (the take-scope validation only reads `classes[].creators`). Their per-spec
+season/meta OUTLOOK reads land in a SEPARATE `creator-takes.json` `metaNotes[]` lane
+(sentiment positive|negative|neutral|mixed, cited + dated), rendered as a distinct "Meta
+outlook" drawer section — validation requires a `metaNotes` author be a `generalCreators`
+entry, so the news-lane generalists stay firewalled out of the specialist `takes[]` /
+consensus layers while their meta commentary still surfaces per spec.
 
 ## Refresh workflows
 
@@ -191,7 +196,8 @@ auto-replace.
 
 ```
 data/     specs.json · sources.json · scales.json · ptr-builds.json · community.json ·
-          creator-takes.json (qualitative layer — cited creator takes, never tiers) ·
+          creator-takes.json (qualitative layer — cited specialist takes[] + general-creator
+          metaNotes[] season/meta outlook, never tiers) ·
           encounter-tiers.json (per-boss/dungeon Archon tiers) ·
           history/ (movement baselines written by snapshot.mjs)
 src/      build.mjs · template.html · render.mjs · normalize.mjs · validate.mjs ·

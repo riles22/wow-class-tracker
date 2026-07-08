@@ -1,5 +1,5 @@
 {
-  "_comment": "Qualitative layer: distilled, cited creator takes per spec — populated by the watch-creators skill from video transcripts. Claims are paraphrased (auto-captions are lossy); every take carries a timestamped deep link for verification. Takes NEVER feed tiers or consensus. superseded: true when a newer take from the same creator or a newer patch state replaces it.",
+  "_comment": "Qualitative layer: distilled, cited creator takes per spec — populated by the watch-creators skill from video transcripts. Claims are paraphrased (auto-captions are lossy); every take carries a timestamped deep link for verification. Takes NEVER feed tiers or consensus. superseded: true when a newer take from the same creator or a newer patch state replaces it. metaNotes[]: a SEPARATE lane for per-spec season/meta-OUTLOOK reads from the general PTR-news creators (generalCreators in community.json — e.g. izen). Same honesty rules (cited, timestamped, never feeds tiers) but validation requires the creator be a generalCreators entry, so news-lane generalists stay firewalled out of the specialist takes[]/consensus layers. sentiment: positive|negative|neutral|mixed. patchContext carries the content lens (raid vs M+ outlook); a spec may hold one of each.",
   "takes": [
     {
       "class": "Rogue",
@@ -1137,6 +1137,360 @@
       "patchContext": "12.1 PTR",
       "claim": "Reads Preservation as still fun and 'slept on' going into Season 2 (as it was in S1, where the build wasn't solved until a mid-season rework) rather than an obvious meta pick, and cautions it's 'way too early to tell' which healer ends up best. He plays Chrono Warden but thinks the 12.1 changes make Flame Shaper 'look pretty solid' and wants to test it, likes double Verdant Embrace even more in S2, and floats an experimental Emerald Blossom Essence-Burst-spender build as possible 'spice.'",
       "url": "https://youtu.be/p6vz0EUrIqM?t=287",
+      "superseded": false
+    }
+  ],
+  "metaNotes": [
+    {
+      "class": "Death Knight",
+      "spec": "Frost",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-08",
+      "sentiment": "positive",
+      "note": "izen reads Frost DK as the clear standout of the raid testing — the one outlier that sits at or near the top of essentially every boss regardless of whether the fight wants single target, cleave or AoE. He credits its free passive AoE (Icy Death Torrent auto-attack cleave) for letting it excel on single-target fights without giving anything up, and names it the overall best DPS so far.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/3hdleEsSGrs?t=145",
+      "superseded": false
+    },
+    {
+      "class": "Mage",
+      "spec": "Frost",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-08",
+      "sentiment": "positive",
+      "note": "izen puts Frost Mage among the top three overall DPS in the testing, driven mainly by its strong two-target cleave, which shone on the cleave-heavy fights like Twin Fangs and the Lost Explorers council.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/3hdleEsSGrs?t=844",
+      "superseded": false
+    },
+    {
+      "class": "Priest",
+      "spec": "Shadow",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-08",
+      "sentiment": "positive",
+      "note": "izen rates Shadow Priest as one of the best overall performers, valued for its multi-target/multi-dot flexibility — it held up on the caster AoE opener, was the biggest non-Frost-DK outlier on the two-target Tomb Sentinels, and reached five-target spread cleave on Twin Fangs.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/3hdleEsSGrs?t=300",
+      "superseded": false
+    },
+    {
+      "class": "Warrior",
+      "spec": "Arms",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-08",
+      "sentiment": "positive",
+      "note": "izen highlights Arms Warrior as a strong overall performer thanks to its very good two-target cleave from Sweeping Strikes, which gave it value on the council and Twin Fangs fights, and it also placed among the top melee on the movement-heavy single-target boss.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/3hdleEsSGrs?t=557",
+      "superseded": false
+    },
+    {
+      "class": "Warlock",
+      "spec": "Affliction",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-08",
+      "sentiment": "positive",
+      "note": "izen sees Affliction as a strong AoE/multi-dot pick that performed well on caster-and-spread fights — the add-heavy opener, the council (agony/corruption across three targets), and Twin Fangs' five-target spread. He notes it's less ideal on pure single target, since it has to actively cast for its AoE rather than getting it for free, but overall counts it among the better specs.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/3hdleEsSGrs?t=124",
+      "superseded": false
+    },
+    {
+      "class": "Hunter",
+      "spec": "Beast Mastery",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-08",
+      "sentiment": "positive",
+      "note": "izen counts BM Hunter among the strong overall performers and calls it the 'melee-adopted' ranged spec — fully mobile with instant abilities, so it topped the movement-heavy pure-single-target fight (Zoroak) alongside the melee where static casters struggled.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/3hdleEsSGrs?t=721",
+      "superseded": false
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Havoc",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-08",
+      "sentiment": "positive",
+      "note": "izen lists Havoc among the better overall DPS of the testing, and it appeared near the top of the movement-heavy single-target fight where mobile melee were favored.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/3hdleEsSGrs?t=905",
+      "superseded": false
+    },
+    {
+      "class": "Mage",
+      "spec": "Arcane",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-08",
+      "sentiment": "positive",
+      "note": "izen says Arcane Mage was doing very well on the caster-friendly fights — the sustained-AoE opener and the stationary single-target boss (Bashnik) — because it picks up free AoE through Arcane Missiles/Barrage and the prismatic-bolt splash while doing its single-target rotation.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/3hdleEsSGrs?t=453",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Balance",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-08",
+      "sentiment": "mixed",
+      "note": "izen names Balance among the casters favored on the sustained-AoE opener (Nexali) and includes it in the five-target spread-cleave group that thrives on Twin Fangs, so he reads it as well-positioned on the multi-target fights.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/3hdleEsSGrs?t=124",
+      "superseded": false
+    },
+    {
+      "class": "Shaman",
+      "spec": "Elemental",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-08",
+      "sentiment": "mixed",
+      "note": "izen lists Elemental among the casters doing well on the large sustained-AoE opener (Nexali), where slow ramping multi-target damage is rewarded.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/3hdleEsSGrs?t=124",
+      "superseded": false
+    },
+    {
+      "class": "Evoker",
+      "spec": "Preservation",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-08",
+      "sentiment": "positive",
+      "note": "izen calls Preservation Evoker the clear best healer in the testing — practically the only spec pushing toward ~300k HPS. He credits the big Dream Breath heal-over-time buff (average ~1.2M per HoT cast) plus the new tier set's Sea of Essence bursts, which have pushed it into a Flame Shaper build.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/3hdleEsSGrs?t=940",
+      "superseded": false
+    },
+    {
+      "class": "Priest",
+      "spec": "Discipline",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-08",
+      "sentiment": "neutral",
+      "note": "izen reads Discipline as essentially unchanged — still an atonement spec, with Blizzard continuing to shift power toward Void Shield and away from atonement, a trend that isn't reversing in the patch. He frames it as static rather than improving.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/3hdleEsSGrs?t=963",
+      "superseded": false
+    },
+    {
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-08",
+      "sentiment": "neutral",
+      "note": "izen sees Mistweaver as unchanged — same very high APM, same three-ability rotation cadence, and the same hero-talent/talent setup, with no meaningful shift in how it plays or performs.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/3hdleEsSGrs?t=980",
+      "superseded": false
+    },
+    {
+      "class": "Priest",
+      "spec": "Holy",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-08",
+      "sentiment": "negative",
+      "note": "izen groups Holy Priest with the healers that were performing horribly in the testing; it has only been buffed 'a bit,' leaving it well behind the standout Preservation.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/3hdleEsSGrs?t=927",
+      "superseded": false
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-08",
+      "sentiment": "negative",
+      "note": "izen counts Holy Paladin among the healers that were doing badly in the raid testing, receiving only a small buff so far and still lagging the top healers.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/3hdleEsSGrs?t=927",
+      "superseded": false
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Frost",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-06",
+      "sentiment": "positive",
+      "note": "izen reads Frost DK as looking strong for S2 M+ — it is far and away the most-played DPS in the PTR. He credits the rework: the burst window (Pillar of Frost, Breath, Obliterate) was nerfed while passive damage like Howling Blast, Icy Death Torrent and Remorseless Winter was roughly doubled, and it is putting up top results. He cautions the heavy play partly reflects excitement over big changes, but the parses back it up.",
+      "patchContext": "Season 2 PTR — M+ outlook",
+      "url": "https://youtu.be/kue_ZtjTSr8?t=187",
+      "superseded": false
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-06",
+      "sentiment": "positive",
+      "note": "izen reads Unholy as staying meta and strong into S2, but sees it as the less exciting DK — its PTR changes look long on paper yet barely alter the playstyle, so fewer players are testing it versus the more heavily reworked Frost.",
+      "patchContext": "Season 2 PTR — M+ outlook",
+      "url": "https://youtu.be/kue_ZtjTSr8?t=209",
+      "superseded": false
+    },
+    {
+      "class": "Mage",
+      "spec": "Arcane",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-06",
+      "sentiment": "positive",
+      "note": "izen reads Arcane as looking strong and among the most-played DPS in PTR M+. He points to an Apex rework adding Prismatic Bolt (now the hardest-hitting ability) and a new tier set that pulls Arcane Missiles back into the core AoE rotation, driving both strong results and player hype.",
+      "patchContext": "Season 2 PTR — M+ outlook",
+      "url": "https://youtu.be/kue_ZtjTSr8?t=332",
+      "superseded": false
+    },
+    {
+      "class": "Mage",
+      "spec": "Fire",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-06",
+      "sentiment": "negative",
+      "note": "izen reads Fire Mage as weak — he flatly says Fire and Frost are 'down there because they're bad, especially Fire Mage,' which is why Mage interest has shifted entirely to Arcane.",
+      "patchContext": "Season 2 PTR — M+ outlook",
+      "url": "https://youtu.be/kue_ZtjTSr8?t=250",
+      "superseded": false
+    },
+    {
+      "class": "Mage",
+      "spec": "Frost",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-06",
+      "sentiment": "negative",
+      "note": "izen reads Frost Mage as bad/weak for S2, lumping it with Fire as the underperforming Mage specs players are abandoning in favor of the reworked Arcane.",
+      "patchContext": "Season 2 PTR — M+ outlook",
+      "url": "https://youtu.be/kue_ZtjTSr8?t=250",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Guardian",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-06",
+      "sentiment": "neutral",
+      "note": "izen notes Guardian is the reigning meta tank yet the least-played tank in the PTR — not from any tuning knock, but because it is overshadowed by the newly buffed Prot Paladin soaking up all the interest.",
+      "patchContext": "Season 2 PTR — M+ outlook",
+      "url": "https://youtu.be/kue_ZtjTSr8?t=815",
+      "superseded": false
+    },
+    {
+      "class": "Paladin",
+      "spec": "Protection",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-06",
+      "sentiment": "positive",
+      "note": "izen reads Prot Paladin as the standout tank for S2, by far the most-played, thanks to a large pile of defensive buffs: Ardent Defender granting +20% max HP and now keeping its buffs through the cheat-death proc, the now-fixed Silver Reprisal, plus more self-healing from Avenger's Shield, Consecration and a much-improved Word of Glory.",
+      "patchContext": "Season 2 PTR — M+ outlook",
+      "url": "https://youtu.be/kue_ZtjTSr8?t=500",
+      "superseded": false
+    },
+    {
+      "class": "Evoker",
+      "spec": "Augmentation",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-06",
+      "sentiment": "mixed",
+      "note": "izen reads Aug as still strong (hence still popular) but not improved — it gets almost no tuning, loses a powerful S1 tier set for roughly a wash, and takes an M+ nerf now that its Apex no longer grants free knock-up crowd control. Nothing to be excited about.",
+      "patchContext": "Season 2 PTR — M+ outlook",
+      "url": "https://youtu.be/kue_ZtjTSr8?t=540",
+      "superseded": false
+    },
+    {
+      "class": "Hunter",
+      "spec": "Marksmanship",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-06",
+      "sentiment": "positive",
+      "note": "izen reads Marksmanship as trending up — after its latest changes (including repeated Explosive Shot buffs) it has climbed in both play rate and results, doing very well especially in AoE, and is now a genuine alternative to BM.",
+      "patchContext": "Season 2 PTR — M+ outlook",
+      "url": "https://youtu.be/kue_ZtjTSr8?t=602",
+      "superseded": false
+    },
+    {
+      "class": "Hunter",
+      "spec": "Beast Mastery",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-06",
+      "sentiment": "positive",
+      "note": "izen reads BM as looking good — it was already the stronger Hunter spec by default, and its tier set makes Cobra Shot (an already-frequent filler) its strongest button, without changing the rotation.",
+      "patchContext": "Season 2 PTR — M+ outlook",
+      "url": "https://youtu.be/kue_ZtjTSr8?t=623",
+      "superseded": false
+    },
+    {
+      "class": "Warlock",
+      "spec": "Affliction",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-06",
+      "sentiment": "positive",
+      "note": "izen reads Affliction as the dominant, most-played Warlock in PTR M+ results and top damage — but he is puzzled, because it is one of the least-changed specs (only minor tier-set buffs to Agony/Corruption), so its strength is not really coming from S2 tuning.",
+      "patchContext": "Season 2 PTR — M+ outlook",
+      "url": "https://youtu.be/kue_ZtjTSr8?t=705",
+      "superseded": false
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Havoc",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-06",
+      "sentiment": "positive",
+      "note": "izen reads Havoc as looking good, holding near-equal damage and popularity with Devourer despite receiving little tuning focus — its 4-piece tier set brings back Essence Break, a ~40s burst window that lines up perfectly with M+ pulls.",
+      "patchContext": "Season 2 PTR — M+ outlook",
+      "url": "https://youtu.be/kue_ZtjTSr8?t=952",
+      "superseded": false
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-06",
+      "sentiment": "positive",
+      "note": "izen reads Devourer as looking good for S2, sitting near-equal to Havoc in both damage and popularity — it got the biggest rework, with a large mastery/in-meta damage nerf offset by a flat 20% buff to everything else plus a 'very cool' new tier set.",
+      "patchContext": "Season 2 PTR — M+ outlook",
+      "url": "https://youtu.be/kue_ZtjTSr8?t=870",
+      "superseded": false
+    },
+    {
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-06",
+      "sentiment": "positive",
+      "note": "izen reads Mistweaver as remaining one of the two most-popular healers, carrying over its established S1 strength with nothing notable changed.",
+      "patchContext": "Season 2 PTR — M+ outlook",
+      "url": "https://youtu.be/kue_ZtjTSr8?t=993",
+      "superseded": false
+    },
+    {
+      "class": "Priest",
+      "spec": "Discipline",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-06",
+      "sentiment": "positive",
+      "note": "izen reads Disc as a top-popularity healer for S2, played into far more and much higher keys than a struggling spec like Preservation.",
+      "patchContext": "Season 2 PTR — M+ outlook",
+      "url": "https://youtu.be/kue_ZtjTSr8?t=1014",
+      "superseded": false
+    },
+    {
+      "class": "Shaman",
+      "spec": "Restoration",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-06",
+      "sentiment": "neutral",
+      "note": "izen lists Resto Shaman among the still-popular, 'still here' healers alongside Mistweaver and Disc, but gives it no individual read — essentially unchanged from S1.",
+      "patchContext": "Season 2 PTR — M+ outlook",
+      "url": "https://youtu.be/kue_ZtjTSr8?t=993",
+      "superseded": false
+    },
+    {
+      "class": "Evoker",
+      "spec": "Preservation",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-06",
+      "sentiment": "mixed",
+      "note": "izen reads Preservation as improving but still weak in M+ — historically poor and still stuck in few, low keys far behind other healers, though it gets another round of helpful changes (low-target healing QOL, plus a tier set granting extra Essence Bursts and a 150% Chrono Flame). Nowhere near the hype of Prot Pal, Frost DK or Arcane.",
+      "patchContext": "Season 2 PTR — M+ outlook",
+      "url": "https://youtu.be/kue_ZtjTSr8?t=1075",
       "superseded": false
     }
   ]
