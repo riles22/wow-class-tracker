@@ -96,11 +96,17 @@ shown in each drawer's Source ratings box.
 
 ## Access & etiquette
 
+Policy 2026-07-08: **pull every source fresh on every run** — no staleness gate and no
+at-most-daily cap. The retry-with-backoff and inter-request sleeps below are kept purely
+as reliability mechanics (so fetches succeed / avoid bot-blocks), not as pull limits.
+
 - **Warcraft Logs**: v2 GraphQL API is **configured and verified** (client credentials
   in the gitignored `.claude/skills/refresh-metrics/config.json`; token grant + zone
   query tested 2026-07-01). HTML statistics tables remain the fallback: XHR headers,
-  fetch once, at most daily.
-- **Archon / Murlok / Bloodmallet / Blizzard forums / YouTube RSS**: plain fetches,
-  once per page per refresh, retry-with-backoff, no hammering.
-- **YouTube transcripts**: yt-dlp, low volume, store summaries + short excerpts with
-  links — never redistribute full transcripts.
+  fetched fresh every run (residential IP; the runner uses the API since datacenter IPs
+  are Cloudflare-blocked on the HTML endpoint).
+- **Archon / Murlok / Bloodmallet / Blizzard forums / YouTube RSS**: plain fetches every
+  run, retry-with-backoff on transient 404s (reliability, not a cap).
+- **YouTube transcripts**: yt-dlp with a short sleep between requests (avoids bot-blocks);
+  low volume, store summaries + short excerpts with links — never redistribute full
+  transcripts.

@@ -52,9 +52,12 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
 - Bloodmallet class names are **snake_case** (`demon_hunter`, `beast_mastery`); the
   `targets` chart type and `hecticaddcleave` fight style return errors — use
   `talent_target_scaling`. Confirm `simc_settings.tier == "MID1"` on every chart.
-- **WCL politeness**: fetch each cut once, at most daily; the server literally replies
-  "Use the API … instead of scraping HTML" without the XHR header. Long-term, register
-  a free v2 GraphQL client (warcraftlogs.com/api/v2/client) and migrate.
+- **WCL fetching**: pull each cut fresh every run — no at-most-daily cap (policy
+  2026-07-08: pull everything every run). The server replies "Use the API … instead of
+  scraping HTML" without the XHR header, so always send the XHR header + browser UA +
+  Referer. The sanctioned path is a free v2 GraphQL client (warcraftlogs.com/api/v2/client)
+  — the runner uses it (datacenter IPs get Cloudflare-blocked on the HTML endpoint); the
+  HTML endpoint works from a residential IP for local runs.
 - **Zone 54 is the 12.1 PTR raid** (Venomous Abyss), zone 56 M+ S2 PTR — PTR-quality
   data. **Zone 52 is "Dummy Dome"** — a target-dummy sim harness (Sinister Single 1T /
   Diabolical Duo 2T / Terrible Trio 3T / Fearsome Five 5T / Hazardous Healer), NOT a raid;

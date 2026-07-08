@@ -160,9 +160,11 @@ construction (the take-scope validation only reads `classes[].creators`).
    (fixed-target-count PTR dummies → `spec.ptrDummy`, see the ptr-watch skill) — PTR
    data only, era-tagged `"ptr"`. Statistics-table
    endpoint needs `X-Requested-With: XMLHttpRequest` + browser UA + Referer; response is
-   an HTML fragment with unclosed `<td>` — parse leniently. **Be a polite guest**: fetch
-   each cut once, at most daily; the sanctioned long-term path is their free v2 GraphQL
-   API (OAuth client).
+   an HTML fragment with unclosed `<td>` — parse leniently. **Fetch each cut fresh every
+   run** — the automation no longer gates fetches on staleness or a once-daily cap (policy
+   2026-07-08: pull everything every run). The sanctioned long-term path is still their
+   free v2 GraphQL API (OAuth client); keep the mechanical retry/backoff so fetches
+   succeed.
 2. Murlok meta pages: plain GET (r.jina.ai does NOT work on it).
 3. Write `{ "metrics": [...], "profiles": [...] }` to a scratch file →
    `node src/apply-metrics.mjs <file>`; `npm test && npm run build`.
@@ -203,7 +205,8 @@ legacy/   original single-file tracker (pre-conversion reference)
 
 Nightly automation lives in `.github/workflows/nightly.yml` (cron 10:10 UTC = the 3:10am
 local slot): Claude Code runs headlessly on a GitHub runner — ptr-watch + watch-creators +
-the weekly tier/metric freshness checks — then snapshots, commits, pushes, and dispatches
+a full tier/metric refresh **every run** (policy 2026-07-08: no staleness gate — every
+source is pulled fresh nightly) — then snapshots, commits, pushes, and dispatches
 deploy.yml explicitly (GITHUB_TOKEN pushes don't auto-trigger workflows). WCL data comes
 via the v2 API using `WCL_CLIENT_ID`/`WCL_CLIENT_SECRET` repo secrets; auth is
 `CLAUDE_CODE_OAUTH_TOKEN` (~1-year validity — renew). YouTube transcripts may be

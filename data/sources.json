@@ -237,7 +237,7 @@
     "name": "Warcraft Logs",
     "kind": "metrics",
     "author": "Warcraft Logs aggregate statistics",
-    "methodology": "Per-spec aggregate combat-log statistics: median (50th percentile) rDPS/HPS and parse counts. Live Season 1 raid = zone 46 (Mythic = difficulty 5, size 20, partition 3 = patch 12.0.7); M+ Season 1 = zone 47; zone 54 is the 12.1 PTR Season 2 raid (PTR-quality data only). Sanctioned long-term access is the v2 GraphQL API (free OAuth client); HTML statistics tables are a tolerated-but-discouraged fallback — cache aggressively, fetch at most daily.",
+    "methodology": "Per-spec aggregate combat-log statistics: median (50th percentile) rDPS/HPS and parse counts. Live Season 1 raid = zone 46 (Mythic = difficulty 5, size 20, partition 3 = patch 12.0.7); M+ Season 1 = zone 47; zone 54 is the 12.1 PTR Season 2 raid (PTR-quality data only). Sanctioned long-term access is the v2 GraphQL API (free OAuth client); HTML statistics tables are the fallback, fetched fresh every run (policy 2026-07-08: no at-most-daily cap; datacenter IPs are Cloudflare-blocked on the HTML endpoint so the runner uses the API).",
     "pages": [
       {
         "bracket": "raid",

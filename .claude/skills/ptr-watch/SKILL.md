@@ -35,29 +35,32 @@ say so and change nothing.
    `warcraftlogs.com/zone/statistics/table/54/dps/0/4/10/1/1000/1/14/0/DPS/Any/All/0/normalized/single/0/-1/?keystone=15&dpstype=rdps`
    (XHR header recipe as in refresh-metrics; zone 54 has NO partitions — that segment
    is always 1; difficulty 4=Heroic size 10, 5=Mythic size 20; `aggregate=normalized`
-   → Score is 0–100 points, not raw DPS). Change detector: only ingest when total
-   parse count increased vs the last run (log it in log.md). Merge as metrics named
-   "12.1 PTR raid testing score (normalized)" with `n` = parses — the tiny-n caveat
+   → Score is 0–100 points, not raw DPS). Ingest EVERY run (policy 2026-07-08: no
+   change-detector gate — re-ingest the current values regardless of whether the parse
+   count moved; still log the parse count in log.md for the record). Merge as metrics
+   named "12.1 PTR raid testing score (normalized)" with `n` = parses — the tiny-n caveat
    (n ranges ~3–100; world-first testers, templated gear, tuning in flux) lives in the
-   name, the `n`, and NEVER in the live baselines. Empty/unchanged = normal; skip silently.
+   name, the `n`, and NEVER in the live baselines. Empty = nothing to ingest (skip that,
+   it's not an error); otherwise always ingest the live values.
 6. **WCL Dummy Dome real-player logs (zone 52)**: the real-player counterpart to the sim
    fight profiles — median rDPS by fixed target count (feeds `spec.ptrDummy`). Zone 52 has
    NO partitions, one difficulty (3 = Normal) and one size (10); the partition segment is
    always 1, and `aggregate=amount` → the Score column is median **rDPS** (raw, not the
-   normalized 0–100 that zone 54 uses). Fetch each of the four DPS dummies **once** (polite
-   guest, at most daily; XHR header recipe as in refresh-metrics):
+   normalized 0–100 that zone 54 uses). Fetch each of the four DPS dummies fresh every run
+   (no at-most-daily cap — policy 2026-07-08; XHR header recipe as in refresh-metrics):
    `warcraftlogs.com/zone/statistics/table/52/dps/{bossId}/3/10/1/50/1/14/0/DPS/Any/All/0/amount/single/0/-1/?keystone=15&dpstype=rdps`
    Boss id → target count: **3591** Sinister Single = 1T · **3590** Diabolical Duo = 2T ·
    **3592** Terrible Trio = 3T · **3593** Fearsome Five = 5T. (3594 Hazardous Healer is a
    healer dummy — skip it for the DPS ptrDummy.) Each spec row appears **twice** in the raw
-   fragment (54 rows → 27 specs; halve the parse count too). Change detector: only re-ingest
-   when the total parse count increased vs the last run (log it). Merge by writing
+   fragment (54 rows → 27 specs; halve the parse count too). Ingest EVERY run (policy
+   2026-07-08: no change-detector gate — always re-merge the current medians regardless
+   of whether the parse count moved up, down, or held; still log the count). Merge by writing
    `{"ptrdummy":[{"class","spec","source":"warcraftlogs","asOf":<today>,"targets":{"1":dps,"3":dps,…}}]}`
    to a scratch file → `node src/apply-metrics.mjs <file>` — include only the counts a spec
    actually logged (missing counts are fine; the build's coverage floor decides which specs
    earn a ranked composite). The composite score/rank + per-target percentiles are computed
-   at build time (`dummyDomeScores` in render.mjs) — never hand-write them. Empty/unchanged
-   = normal; skip silently.
+   at build time (`dummyDomeScores` in render.mjs) — never hand-write them. Empty = nothing
+   to ingest (not an error); otherwise always ingest the live values, even if unchanged.
 7. `npm test && npm run build`. If any `data/` file changed this run, also run
    `node src/snapshot.mjs` (movement baseline; loadData skips baselines identical to the
    current state, so ordering vs the build is safe). Append to `log.md`: date · builds

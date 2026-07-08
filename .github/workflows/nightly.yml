@@ -2,7 +2,7 @@ name: Nightly tracker refresh
 
 # Machine-off nightly automation: runs Claude Code headlessly on a GitHub runner to do
 # the same refresh the local wow-ptr-watch task did — PTR builds, WCL zones 54/52,
-# creator RSS, weekly tier/metric freshness — then commit + push to master.
+# creator RSS, and a full tier/metric refresh every run — then commit + push to master.
 #
 # Why Actions instead of a claude.ai cloud routine: the Claude-for-GitHub connector is
 # read-only (pushes 403), while a workflow's GITHUB_TOKEN always has write access to its
@@ -83,8 +83,8 @@ jobs:
             1. PTR watch (.claude/skills/ptr-watch/SKILL.md): Wowhead news RSS + the
                official forum thread (URL in data/ptr-builds.json) for PTR builds newer
                than the newest logged one; Warcraft Logs zone 54 (PTR raid testing) and
-               zone 52 (Dummy Dome) with the skill's change detection (re-ingest only when
-               total parse counts increased); distill new spec writeups per the
+               zone 52 (Dummy Dome) — ingest both EVERY run regardless of parse-count
+               movement (policy 2026-07-08: no change-detector gate); distill new spec writeups per the
                auto-confirm policy — faithful distillation of the SOURCE's verdict,
                mandatory source URL or sourceLabel.
                For ALL Warcraft Logs data use the sanctioned v2 GraphQL API authenticated
@@ -105,10 +105,10 @@ jobs:
                "pending (datacenter IP blocked)" in the skill's log.md, skip their
                distillation, and note it in the summary.
 
-            3. Weekly freshness: if the newest tier-list `snapshot` date in
-               data/sources.json is more than 6 days old, also run refresh-tiers; if the
-               newest live (non-PTR) metric `asOf` in data/specs.json is more than 6 days
-               old, also run refresh-metrics (WCL parts via the API, as above).
+            3. Full refresh EVERY run (policy 2026-07-08 — no staleness gate): always run
+               refresh-tiers AND refresh-metrics (WCL parts via the API, as above),
+               regardless of the tier `snapshot` / metric `asOf` dates. Pull every source
+               fresh each run; do not skip on "already fresh" data.
 
             4. Run `npm test && npm run build`. If either fails: `git checkout -- data/ dist/`,
                and end the run reporting the failure — do NOT commit or push.
