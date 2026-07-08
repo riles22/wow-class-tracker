@@ -156,9 +156,11 @@ construction (the take-scope validation only reads `classes[].creators`).
 
 ### Metrics (Warcraft Logs / Murlok / Archon numbers)
 1. WCL: zone 46 = live S1 raid (Mythic = difficulty **5**, size 20, partition 3 = 12.0.7);
-   zone 47 = M+ S1; zone **54 is the 12.1 PTR raid**; zone **52 is the Dummy Dome**
-   (fixed-target-count PTR dummies → `spec.ptrDummy`, see the ptr-watch skill) — PTR
-   data only, era-tagged `"ptr"`. Statistics-table
+   zone 47 = M+ S1 (difficulty **10**, size 5, partition 1); zone **54 is the 12.1 PTR raid**;
+   zone **56 is the 12.1 PTR M+** ("Mythic+ Season 2 (PTR)", same recipe as zone 47 →
+   metrics "Median rDPS/HPS (12.1 PTR M+ testing[, tank])", see the ptr-watch skill);
+   zone **52 is the Dummy Dome** (fixed-target-count PTR dummies → `spec.ptrDummy`, see
+   the ptr-watch skill) — all PTR data era-tagged `"ptr"`. Statistics-table
    endpoint needs `X-Requested-With: XMLHttpRequest` + browser UA + Referer; response is
    an HTML fragment with unclosed `<td>` — parse leniently. **Fetch each cut fresh every
    run** — the automation no longer gates fetches on staleness or a once-daily cap (policy

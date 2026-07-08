@@ -99,6 +99,16 @@
         "value": 1.6,
         "unit": "%",
         "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (12.1 PTR M+ testing, tank)",
+        "value": 132694,
+        "unit": "rDPS",
+        "n": 76,
+        "asOf": "2026-07-08",
+        "era": "ptr"
       }
     ],
     "survivability": {
@@ -225,6 +235,16 @@
         "value": 137620,
         "unit": "DPS",
         "asOf": "2026-07-08"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (12.1 PTR M+ testing)",
+        "value": 295238,
+        "unit": "rDPS",
+        "n": 351,
+        "asOf": "2026-07-08",
+        "era": "ptr"
       }
     ],
     "fightProfile": {
@@ -387,6 +407,16 @@
         "value": 133239,
         "unit": "DPS",
         "asOf": "2026-07-08"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (12.1 PTR M+ testing)",
+        "value": 246460,
+        "unit": "rDPS",
+        "n": 123,
+        "asOf": "2026-07-08",
+        "era": "ptr"
       }
     ],
     "fightProfile": {
@@ -534,6 +564,16 @@
         "value": 120086,
         "unit": "DPS",
         "asOf": "2026-07-08"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (12.1 PTR M+ testing)",
+        "value": 212316,
+        "unit": "rDPS",
+        "n": 78,
+        "asOf": "2026-07-08",
+        "era": "ptr"
       }
     ],
     "fightProfile": {
@@ -696,6 +736,16 @@
         "value": 106800,
         "unit": "DPS",
         "asOf": "2026-07-08"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (12.1 PTR M+ testing)",
+        "value": 179430,
+        "unit": "rDPS",
+        "n": 69,
+        "asOf": "2026-07-08",
+        "era": "ptr"
       }
     ],
     "fightProfile": {
@@ -839,6 +889,16 @@
         "value": 0.8,
         "unit": "%",
         "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (12.1 PTR M+ testing, tank)",
+        "value": 122653,
+        "unit": "rDPS",
+        "n": 77,
+        "asOf": "2026-07-08",
+        "era": "ptr"
       }
     ],
     "survivability": {
@@ -978,6 +1038,16 @@
         "value": 116117,
         "unit": "DPS",
         "asOf": "2026-07-08"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (12.1 PTR M+ testing)",
+        "value": 236414,
+        "unit": "rDPS",
+        "n": 46,
+        "asOf": "2026-07-08",
+        "era": "ptr"
       }
     ],
     "fightProfile": {
@@ -1126,6 +1196,16 @@
         "value": 133590,
         "unit": "DPS",
         "asOf": "2026-07-08"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (12.1 PTR M+ testing)",
+        "value": 245203,
+        "unit": "rDPS",
+        "n": 44,
+        "asOf": "2026-07-08",
+        "era": "ptr"
       }
     ],
     "fightProfile": {
@@ -1257,6 +1337,16 @@
         "value": 12.3,
         "unit": "%",
         "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (12.1 PTR M+ testing, tank)",
+        "value": 115343,
+        "unit": "rDPS",
+        "n": 49,
+        "asOf": "2026-07-08",
+        "era": "ptr"
       }
     ],
     "survivability": {
@@ -1374,6 +1464,16 @@
         "unit": "DPS",
         "n": 30856,
         "asOf": "2026-07-08"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median HPS (12.1 PTR M+ testing)",
+        "value": 136032,
+        "unit": "HPS",
+        "n": 54,
+        "asOf": "2026-07-08",
+        "era": "ptr"
       }
     ],
     "survivability": {
@@ -1505,6 +1605,16 @@
         "unit": "score",
         "n": 48,
         "asOf": "2026-07-01",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (12.1 PTR M+ testing)",
+        "value": 245635,
+        "unit": "rDPS",
+        "n": 154,
+        "asOf": "2026-07-08",
         "era": "ptr"
       }
     ],
@@ -1651,6 +1761,16 @@
         "value": 117028,
         "unit": "DPS",
         "asOf": "2026-07-08"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (12.1 PTR M+ testing)",
+        "value": 179308,
+        "unit": "rDPS",
+        "n": 35,
+        "asOf": "2026-07-08",
+        "era": "ptr"
       }
     ],
     "fightProfile": {
@@ -1803,6 +1923,16 @@
         "unit": "DPS",
         "n": 15964,
         "asOf": "2026-07-08"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median HPS (12.1 PTR M+ testing)",
+        "value": 148340,
+        "unit": "HPS",
+        "n": 68,
+        "asOf": "2026-07-08",
+        "era": "ptr"
       }
     ],
     "survivability": {
@@ -1944,6 +2074,16 @@
         "value": 121550,
         "unit": "DPS",
         "asOf": "2026-07-08"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (12.1 PTR M+ testing)",
+        "value": 226275,
+        "unit": "rDPS",
+        "n": 133,
+        "asOf": "2026-07-08",
+        "era": "ptr"
       }
     ],
     "fightProfile": {
@@ -2107,6 +2247,16 @@
         "value": 128092,
         "unit": "DPS",
         "asOf": "2026-07-08"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (12.1 PTR M+ testing)",
+        "value": 191813,
+        "unit": "rDPS",
+        "n": 22,
+        "asOf": "2026-07-08",
+        "era": "ptr"
       }
     ],
     "fightProfile": {
@@ -2266,6 +2416,16 @@
         "value": 118802,
         "unit": "DPS",
         "asOf": "2026-07-08"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (12.1 PTR M+ testing)",
+        "value": 235667,
+        "unit": "rDPS",
+        "n": 56,
+        "asOf": "2026-07-08",
+        "era": "ptr"
       }
     ],
     "fightProfile": {
@@ -2412,6 +2572,16 @@
         "value": 117627,
         "unit": "DPS",
         "asOf": "2026-07-08"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (12.1 PTR M+ testing)",
+        "value": 263832,
+        "unit": "rDPS",
+        "n": 356,
+        "asOf": "2026-07-08",
+        "era": "ptr"
       }
     ],
     "fightProfile": {
@@ -2573,6 +2743,16 @@
         "value": 120482,
         "unit": "DPS",
         "asOf": "2026-07-08"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (12.1 PTR M+ testing)",
+        "value": 171508,
+        "unit": "rDPS",
+        "n": 6,
+        "asOf": "2026-07-08",
+        "era": "ptr"
       }
     ],
     "fightProfile": {
@@ -2721,6 +2901,16 @@
         "value": 121597,
         "unit": "DPS",
         "asOf": "2026-07-08"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (12.1 PTR M+ testing)",
+        "value": 196383,
+        "unit": "rDPS",
+        "n": 33,
+        "asOf": "2026-07-08",
+        "era": "ptr"
       }
     ],
     "fightProfile": {
@@ -2851,6 +3041,16 @@
         "value": 2.3,
         "unit": "%",
         "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (12.1 PTR M+ testing, tank)",
+        "value": 127963,
+        "unit": "rDPS",
+        "n": 82,
+        "asOf": "2026-07-08",
+        "era": "ptr"
       }
     ],
     "survivability": {
@@ -2981,6 +3181,16 @@
         "unit": "DPS",
         "n": 46094,
         "asOf": "2026-07-08"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median HPS (12.1 PTR M+ testing)",
+        "value": 171669,
+        "unit": "HPS",
+        "n": 277,
+        "asOf": "2026-07-08",
+        "era": "ptr"
       }
     ],
     "survivability": {
@@ -3120,6 +3330,16 @@
         "value": 118305,
         "unit": "DPS",
         "asOf": "2026-07-08"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (12.1 PTR M+ testing)",
+        "value": 184170,
+        "unit": "rDPS",
+        "n": 25,
+        "asOf": "2026-07-08",
+        "era": "ptr"
       }
     ],
     "fightProfile": {
@@ -3273,6 +3493,16 @@
         "unit": "DPS",
         "n": 24233,
         "asOf": "2026-07-08"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median HPS (12.1 PTR M+ testing)",
+        "value": 137809,
+        "unit": "HPS",
+        "n": 84,
+        "asOf": "2026-07-08",
+        "era": "ptr"
       }
     ],
     "survivability": {
@@ -3397,6 +3627,16 @@
         "value": 1.9,
         "unit": "%",
         "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (12.1 PTR M+ testing, tank)",
+        "value": 171132,
+        "unit": "rDPS",
+        "n": 399,
+        "asOf": "2026-07-08",
+        "era": "ptr"
       }
     ],
     "survivability": {
@@ -3538,6 +3778,16 @@
         "value": 112108,
         "unit": "DPS",
         "asOf": "2026-07-08"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (12.1 PTR M+ testing)",
+        "value": 240550,
+        "unit": "rDPS",
+        "n": 154,
+        "asOf": "2026-07-08",
+        "era": "ptr"
       }
     ],
     "fightProfile": {
@@ -3692,6 +3942,16 @@
         "unit": "DPS",
         "n": 32704,
         "asOf": "2026-07-08"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median HPS (12.1 PTR M+ testing)",
+        "value": 153757,
+        "unit": "HPS",
+        "n": 130,
+        "asOf": "2026-07-08",
+        "era": "ptr"
       }
     ],
     "survivability": {
@@ -3809,6 +4069,16 @@
         "unit": "DPS",
         "n": 18796,
         "asOf": "2026-07-08"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median HPS (12.1 PTR M+ testing)",
+        "value": 118900,
+        "unit": "HPS",
+        "n": 19,
+        "asOf": "2026-07-08",
+        "era": "ptr"
       }
     ],
     "survivability": {
@@ -3948,6 +4218,16 @@
         "value": 117780,
         "unit": "DPS",
         "asOf": "2026-07-08"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (12.1 PTR M+ testing)",
+        "value": 225355,
+        "unit": "rDPS",
+        "n": 65,
+        "asOf": "2026-07-08",
+        "era": "ptr"
       }
     ],
     "fightProfile": {
@@ -4112,6 +4392,16 @@
         "value": 107727,
         "unit": "DPS",
         "asOf": "2026-07-08"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (12.1 PTR M+ testing)",
+        "value": 193535,
+        "unit": "rDPS",
+        "n": 26,
+        "asOf": "2026-07-08",
+        "era": "ptr"
       }
     ],
     "fightProfile": {
@@ -4273,6 +4563,16 @@
         "value": 128122,
         "unit": "DPS",
         "asOf": "2026-07-08"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (12.1 PTR M+ testing)",
+        "value": 211429,
+        "unit": "rDPS",
+        "n": 17,
+        "asOf": "2026-07-08",
+        "era": "ptr"
       }
     ],
     "fightProfile": {
@@ -4433,6 +4733,16 @@
         "value": 123548,
         "unit": "DPS",
         "asOf": "2026-07-08"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (12.1 PTR M+ testing)",
+        "value": 173390,
+        "unit": "rDPS",
+        "n": 32,
+        "asOf": "2026-07-08",
+        "era": "ptr"
       }
     ],
     "fightProfile": {
@@ -4580,6 +4890,16 @@
         "value": 126859,
         "unit": "DPS",
         "asOf": "2026-07-08"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (12.1 PTR M+ testing)",
+        "value": 274233,
+        "unit": "rDPS",
+        "n": 120,
+        "asOf": "2026-07-08",
+        "era": "ptr"
       }
     ],
     "fightProfile": {
@@ -4743,6 +5063,16 @@
         "value": 112783,
         "unit": "DPS",
         "asOf": "2026-07-08"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (12.1 PTR M+ testing)",
+        "value": 234384,
+        "unit": "rDPS",
+        "n": 93,
+        "asOf": "2026-07-08",
+        "era": "ptr"
       }
     ],
     "fightProfile": {
@@ -4895,6 +5225,16 @@
         "unit": "DPS",
         "n": 47037,
         "asOf": "2026-07-08"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median HPS (12.1 PTR M+ testing)",
+        "value": 141340,
+        "unit": "HPS",
+        "n": 156,
+        "asOf": "2026-07-08",
+        "era": "ptr"
       }
     ],
     "survivability": {
@@ -5021,6 +5361,16 @@
         "value": 114272,
         "unit": "DPS",
         "asOf": "2026-07-08"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (12.1 PTR M+ testing)",
+        "value": 281051,
+        "unit": "rDPS",
+        "n": 140,
+        "asOf": "2026-07-08",
+        "era": "ptr"
       }
     ],
     "fightProfile": {
@@ -5169,6 +5519,16 @@
         "value": 118542,
         "unit": "DPS",
         "asOf": "2026-07-08"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (12.1 PTR M+ testing)",
+        "value": 248098,
+        "unit": "rDPS",
+        "n": 40,
+        "asOf": "2026-07-08",
+        "era": "ptr"
       }
     ],
     "fightProfile": {
@@ -5317,6 +5677,16 @@
         "value": 115241,
         "unit": "DPS",
         "asOf": "2026-07-08"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (12.1 PTR M+ testing)",
+        "value": 179342,
+        "unit": "rDPS",
+        "n": 7,
+        "asOf": "2026-07-08",
+        "era": "ptr"
       }
     ],
     "fightProfile": {
@@ -5480,6 +5850,16 @@
         "value": 107505,
         "unit": "DPS",
         "asOf": "2026-07-08"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (12.1 PTR M+ testing)",
+        "value": 282272,
+        "unit": "rDPS",
+        "n": 88,
+        "asOf": "2026-07-08",
+        "era": "ptr"
       }
     ],
     "fightProfile": {
@@ -5643,6 +6023,16 @@
         "value": 114241,
         "unit": "DPS",
         "asOf": "2026-07-08"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (12.1 PTR M+ testing)",
+        "value": 220118,
+        "unit": "rDPS",
+        "n": 47,
+        "asOf": "2026-07-08",
+        "era": "ptr"
       }
     ],
     "fightProfile": {
@@ -5788,6 +6178,16 @@
         "value": 1.3,
         "unit": "%",
         "asOf": "2026-07-01"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median rDPS (12.1 PTR M+ testing, tank)",
+        "value": 126908,
+        "unit": "rDPS",
+        "n": 105,
+        "asOf": "2026-07-08",
+        "era": "ptr"
       }
     ],
     "survivability": {

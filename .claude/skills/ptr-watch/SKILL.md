@@ -61,10 +61,28 @@ say so and change nothing.
    earn a ranked composite). The composite score/rank + per-target percentiles are computed
    at build time (`dummyDomeScores` in render.mjs) — never hand-write them. Empty = nothing
    to ingest (not an error); otherwise always ingest the live values, even if unchanged.
-7. `npm test && npm run build`. If any `data/` file changed this run, also run
+7. **WCL PTR M+ testing (zone 56 = "Mythic+ Season 2 (PTR)")**: the M+ counterpart to the
+   zone-54 raid series — real-player Season 2 keys on the PTR. Same table recipe as the
+   LIVE M+ zone 47 (**difficulty 10 / size 5 / partition 1**; role tokens are plural —
+   `DPS` / `Tanks` / `Healers`; `aggregate=amount` → median rDPS/HPS, NOT the normalized
+   0–100 that zone 54 raid uses). Fetch three cuts fresh every run (policy 2026-07-08 — no
+   cap; XHR header recipe as in refresh-metrics):
+   `warcraftlogs.com/zone/statistics/table/56/dps/0/10/5/1/1000/1/14/0/DPS/Any/All/0/amount/single/0/-1/?keystone=15&dpstype=rdps`
+   (swap `/DPS/`→`/Tanks/` for the tank cut; for healers use `.../56/hps/0/10/5/1/1000/1/14/0/Healers/...`).
+   Value = the Score column (median), `n` = the Parses column. Merge as **metrics** (era
+   `ptr`, bracket `mplus`) named exactly: DPS → "Median rDPS (12.1 PTR M+ testing)"
+   (27 specs), tank → "Median rDPS (12.1 PTR M+ testing, tank)" (6), healer → "Median HPS
+   (12.1 PTR M+ testing)" (7). Write `{"metrics":[…]}` to a scratch file →
+   `node src/apply-metrics.mjs <file>`. The "12.1 PTR" in the name auto-tags era ptr
+   (validation enforces name↔era); rank/of are build-computed; keep it OUT of the live
+   baselines and label it PTR. Ingest EVERY run regardless of parse-count movement (no
+   change-detector gate); empty table = nothing to ingest (not an error). Note the zone-56
+   total parse count in log.md for the record. (Zone **55** = "Mythic+ Season 2" non-PTR,
+   for when S2 goes live; zone **57** = "The Tidebound Grotto" raid — not tracked yet.)
+8. `npm test && npm run build`. If any `data/` file changed this run, also run
    `node src/snapshot.mjs` (movement baseline; loadData skips baselines identical to the
    current state, so ordering vs the build is safe). Append to `log.md`: date · builds
-   found · zone-54 state · zone-52 (Dummy Dome) state.
+   found · zone-54 (PTR raid) state · zone-52 (Dummy Dome) state · zone-56 (PTR M+) state.
 
 ## Gotchas
 

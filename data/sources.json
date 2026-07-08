@@ -237,7 +237,7 @@
     "name": "Warcraft Logs",
     "kind": "metrics",
     "author": "Warcraft Logs aggregate statistics",
-    "methodology": "Per-spec aggregate combat-log statistics: median (50th percentile) rDPS/HPS and parse counts. Live Season 1 raid = zone 46 (Mythic = difficulty 5, size 20, partition 3 = patch 12.0.7); M+ Season 1 = zone 47; zone 54 is the 12.1 PTR Season 2 raid (PTR-quality data only). Sanctioned long-term access is the v2 GraphQL API (free OAuth client); HTML statistics tables are the fallback, fetched fresh every run (policy 2026-07-08: no at-most-daily cap; datacenter IPs are Cloudflare-blocked on the HTML endpoint so the runner uses the API).",
+    "methodology": "Per-spec aggregate combat-log statistics: median (50th percentile) rDPS/HPS and parse counts. Live Season 1 raid = zone 46 (Mythic = difficulty 5, size 20, partition 3 = patch 12.0.7); M+ Season 1 = zone 47 (difficulty 10, size 5, partition 1); zone 54 is the 12.1 PTR raid and zone 56 is the 12.1 PTR M+ (\"Mythic+ Season 2 (PTR)\", same recipe as zone 47) — both PTR-quality, era-tagged \"ptr\", kept out of live baselines. Sanctioned long-term access is the v2 GraphQL API (free OAuth client, exposes live zones only — PTR zones are HTML-only); HTML statistics tables are the fallback, fetched fresh every run (policy 2026-07-08: no at-most-daily cap; datacenter IPs are Cloudflare-blocked on the HTML endpoint so the runner uses the API).",
     "pages": [
       {
         "bracket": "raid",
@@ -251,6 +251,13 @@
         "role": "All",
         "label": "M+ statistics (zone 47)",
         "url": "https://www.warcraftlogs.com/zone/statistics/47",
+        "snapshot": "2026-07-08"
+      },
+      {
+        "bracket": "mplus",
+        "role": "All",
+        "label": "12.1 PTR M+ testing (zone 56, Mythic+ Season 2 PTR)",
+        "url": "https://www.warcraftlogs.com/zone/statistics/56",
         "snapshot": "2026-07-08"
       }
     ]
