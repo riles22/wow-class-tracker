@@ -16,7 +16,12 @@ name: Nightly tracker refresh
 
 on:
   schedule:
-    - cron: "10 10 * * *" # 10:10 UTC (~3:10am Pacific in summer, 2:10am in winter — the hour drift is fine; GitHub cron is best-effort ±minutes)
+    # 10:37 UTC (~3:37am Pacific summer). Deliberately an ODD minute off the top-of-hour:
+    # GitHub's scheduled runs are best-effort and get delayed/dropped during the congestion
+    # at :00–:10 (which is exactly what dropped the 2026-07-09 run — "job not acquired by
+    # runner"). An off-peak minute measurably lowers that risk. Miss is self-healing anyway:
+    # the refresh is idempotent, so the next run catches up everything new since the last.
+    - cron: "37 10 * * *"
   workflow_dispatch: # manual test runs
 
 concurrency:
