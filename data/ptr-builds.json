@@ -3,6 +3,35 @@
   "thread": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811",
   "builds": [
     {
+      "date": "2026-07-09",
+      "label": "Follow-up notes (forum post #13): PvP-only talent adjustments + item note (no PvE class tuning)",
+      "forumPostNumber": 13,
+      "forumUrl": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/13",
+      "wowheadUrl": null,
+      "icyveinsUrl": null,
+      "specsAffected": [],
+      "highlights": [
+        "PvP only (out of scope for this tracker's PvE ratings) — Restoration Druid: Call of Ohn'ahra now increases Nature's Swiftness cooldown by 30s (was 10s). Evoker: Swoop Up PvP talent removed. Hunter: Hunting Pack radius 30yd (was 15yd); Chimaeral Sting no longer applies subsequent effects when dispelled; Roar of Sacrifice reduces PvP damage taken by 25% (was 15%). Mage: Improved Mass Invisibility CDR 3min (was 4min); Ring of Fire duration 4s (was 3s); Arcanosphere damage +25%; Overpowered Barrier absorption +60% (was +100%).",
+        "Items — Trinketaur now also offers Nebulous Voidcores for PTR testing."
+      ]
+    },
+    {
+      "date": "2026-07-08",
+      "label": "Follow-up notes (forum post #12): Unholy DK tuning bug fix + housing wipe/import",
+      "forumPostNumber": 12,
+      "forumUrl": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/12",
+      "wowheadUrl": "https://www.wowhead.com/news=382118/patch-12-1-ptr-official-development-notes-protection-paladin-talent-adjustments",
+      "icyveinsUrl": null,
+      "specsAffected": [
+        "Unholy Death Knight"
+      ],
+      "highlights": [
+        "Unholy Death Knight — Dev note: \"We're resolving a bug that affected Unholy Death Knight's tuning and making additional adjustments to our latest tuning pass as a result.\" The overall damage reduction from the 07-08 (build 68569) tuning pass is corrected from −8% to −3% (i.e. the original −8% blanket nerf was itself buggy and overshot).",
+        "Unholy Death Knight — Fixed Nazgrim's Conquest incorrectly granting additional Strength when Magus of the Dead is sacrificed for Lord of the Dead; Nazgrim's Conquest no longer grants Strength from critters/low-level targets.",
+        "Non-class: Housing wiped and re-importable from live (Character Copy → 'Copy Account Data'); Blueprints available for testing again."
+      ]
+    },
+    {
       "date": "2026-07-08",
       "label": "Weekly PTR build (Build 68569): post-Heroic-testing tuning — over-performers nerfed (Frost DK, Unholy DK, Havoc DH, Subtlety Rogue, Retribution Paladin) and under-performers buffed (Marksmanship Hunter, Fire Mage, Destruction Warlock, Devourer DH, Balance Druid, Arms Warrior); Blood DK tier set implemented, Scalecommander Wingleader CDR reworked, Discipline Void Shield power redistributed, Mythic raid + Season 2 dungeon testing opens",
       "forumPostNumber": 11,
