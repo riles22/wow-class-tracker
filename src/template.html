@@ -101,6 +101,10 @@
   }
   .seg button:hover{color:var(--ink)}
   .seg button[aria-pressed="true"]{background:var(--accent); color:#160a24}
+  /* our computed 12.1 forecast — dashed outline keeps it visually distinct from fetched sources */
+  .seg button.projbtn{border:1px dashed color-mix(in srgb,var(--gold) 55%,transparent); color:var(--gold)}
+  .seg button.projbtn[aria-pressed="true"]{background:var(--gold); border-color:var(--gold); color:#241a06}
+  .seg button.projbtn:disabled{opacity:.35; cursor:not-allowed}
   .seg button:focus-visible{outline:2px solid var(--accent-2); outline-offset:2px}
 
   .toggle{display:inline-flex; align-items:center; gap:8px; font-size:13px; color:var(--ink-dim); cursor:pointer; user-select:none}
@@ -573,7 +577,9 @@ const COMMUNITY = DATA.community || { classes: [] };
 const PTR_BUILDS = DATA.ptrBuilds || { builds: [] };
 const CREATOR_TAKES = (DATA.creatorTakes && DATA.creatorTakes.takes) || [];
 /* Meta-outlook notes: general-creator (news-lane) per-spec season/meta reads — a
-   separate lane from specialist CREATOR_TAKES, never a tier/consensus input. */
+   separate lane from specialist CREATOR_TAKES. Never a source-tier/consensus input;
+   the newest bracket-scoped, non-superseded read DOES nudge our own 12.1 projection
+   by ±3 — always disclosed by name in that projection's basis string. */
 const META_NOTES = (DATA.creatorTakes && DATA.creatorTakes.metaNotes) || [];
 const TIER_SOURCES = SOURCES.filter(s => s.kind === "tier-list");
 const REF_SOURCES = SOURCES.filter(s => s.kind === "reference");
@@ -635,6 +641,12 @@ function ratingFor(s, bracket){
     const breakdown = c.perSource.map(p => `${p.label}: ${p.tier}`).join(" · ");
     return { tier:c.tier, score:c.score, div:c.diverges, tip:`Consensus ${c.tier} — ${breakdown}` };
   }
+  if(state.source === "projection"){
+    const p = s.projection ? s.projection[bracket] : null;
+    if(!p) return { tier:"—", score:-1, div:false, tip:"No projection — no live baseline or PTR data to project from" };
+    return { tier:p.tier, score:p.score, div:false,
+             tip:`Our 12.1 ${bracket==="raid"?"raid":"M+"} projection: ${p.tier} (${p.score}/100, confidence ${p.confidence}) — ${p.basis}` };
+  }
   const src = TIER_SOURCES.find(x => x.id === state.source);
   const tier = (s.ratings && s.ratings[bracket] && s.ratings[bracket][state.source]) ?? null;
   if(tier == null) return { tier:"—", score:-1, div:false, tip:`${src.name}: not rated` };
@@ -644,9 +656,11 @@ function ratingFor(s, bracket){
 function tierEl(r, mv){
   const arrow = mv ? `<span class="mv" data-d="${mv.delta>0?'up':'down'}" title="was ${esc(mv.was)} on ${esc(mv.since)}">${mv.delta>0?'▲':'▼'}</span>` : '';
   const dot = r.div ? '<span class="divmark" title="Sources diverge on this rating" aria-label="sources diverge">±</span>' : '';
-  // Consensus-only 0–100 within-tier meter (score already computed; single-source/per-fight = score -1, skipped).
-  const meter = (state.source==="consensus" && r.score>=0)
-    ? `<span class="tscore" title="Consensus score ${r.score}/100 (position within tier)"><i style="width:${r.score}%"></i></span>` : '';
+  // 0–100 within-tier meter for the two computed views (consensus + our projection).
+  // Suppressed in the per-fight view: there the score is an Archon scale value, and a
+  // meter labeled "Consensus/Projection score" over an Archon number would be a lie.
+  const meter = ((state.source==="consensus" || state.source==="projection") && r.score>=0 && !state.fight)
+    ? `<span class="tscore" title="${state.source==="consensus"?"Consensus":"Projection"} score ${r.score}/100 (position within tier)"><i style="width:${r.score}%"></i></span>` : '';
   return `<span class="tiercell"><span class="tcol"><span class="tier" data-t="${esc(r.tier)}" title="${esc(r.tip)}">${esc(r.tier)}</span>${meter}</span><span class="tind">${arrow}${dot}</span></span>`;
 }
 function verdictEl(s){
@@ -678,6 +692,12 @@ function sourceBreakdownHTML(s){
   const surv = s.survivability
     ? `<div class="setrow"><span class="pc">Survive</span><span class="pct">Archon raid survivability tier: <b>${esc(s.survivability.tier)}</b>${s.survivability.asOf?` <span class="mnote">· ${esc(s.survivability.asOf)}</span>`:""}</span></div>`
     : "";
+  // Our computed 12.1 forecast, PTR views only — full component math shown so the
+  // number is auditable, never oracular. Not a source; never feeds consensus.
+  const projLine = p => p ? `<b>${esc(p.tier)}</b> (${p.score}/100, ${esc(p.confidence)}) <span class="mnote">— ${esc(p.basis)}</span>` : "—";
+  const proj = (s.projection && state.era !== "live")
+    ? `<div class="setrow"><span class="pc" style="color:var(--gold)">Ours: 12.1</span><span class="pct">Raid ${projLine(s.projection.raid)}<br>M+ ${projLine(s.projection.mplus)}</span></div>`
+    : "";
   const toolIds = s.role === "Healer" ? ["qelive", "raidbots"] : ["raidbots", "bloodmallet"];
   const tools = toolIds.map(id => {
     const src = SOURCES.find(x => x.id === id);
@@ -685,8 +705,8 @@ function sourceBreakdownHTML(s){
     return src && url ? `<a href="${esc(safeHref(url))}" target="_blank" rel="noopener" title="${esc(src.methodology||"")}">${esc(src.name)}</a>` : "";
   }).filter(Boolean).join(" · ");
   const toolRow = tools ? `<div class="setrow"><span class="pc">Tools</span><span class="pct">${tools}</span></div>` : "";
-  if(!rows && !surv && !toolRow) return "";
-  return `<div class="srcbreak"><p class="d-h">Source ratings</p><div class="setbox">${rows}${surv}${toolRow}</div></div>`;
+  if(!rows && !surv && !proj && !toolRow) return "";
+  return `<div class="srcbreak"><p class="d-h">Source ratings</p><div class="setbox">${rows}${proj}${surv}${toolRow}</div></div>`;
 }
 
 function metricsHTML(s){
@@ -748,14 +768,15 @@ function takesHTML(s){
 }
 
 /* Meta outlook: per-spec season/meta reads from the general PTR-news creators (e.g. izen).
-   Deliberately distinct from specialist Creator takes — cross-class opinion, cited, and
-   never a tier/consensus/movement input. */
+   Deliberately distinct from specialist Creator takes — cross-class opinion, cited.
+   Never a source-tier/consensus/movement input; its one disclosed influence is the ±3
+   nudge in our own 12.1 projection (bracket-scoped, non-superseded, named in the basis). */
 function metaNotesHTML(s){
   const notes = META_NOTES.filter(n=>n.class===s.class && n.spec===s.spec && !n.superseded && eraOk(takeEra(n)));
   if(!notes.length) return "";
   const rows = notes.map(n=>
     `<div class="setrow"><span class="pc" data-sent="${esc(n.sentiment||"")}">${esc(n.sentiment||"note")}</span><span class="pct">${esc(n.note)} <span class="mnote">— <a href="${esc(safeHref(n.url))}" target="_blank" rel="noopener">${esc(n.creator)}, ${esc(n.date||"")}</a>${n.patchContext?` · ${esc(n.patchContext)}`:""}</span></span></div>`).join("");
-  return `<div class="srcbreak"><p class="d-h">Meta outlook <span class="mnote">(general PTR-news creators — cross-class opinion, cited; never feeds tiers)</span></p><div class="setbox">${rows}</div></div>`;
+  return `<div class="srcbreak"><p class="d-h">Meta outlook <span class="mnote">(general PTR-news creators — cross-class opinion, cited; never feeds source tiers or consensus — the newest read nudges our 12.1 projection ±3, disclosed in its basis)</span></p><div class="setbox">${rows}</div></div>`;
 }
 
 function communityHTML(s){
@@ -901,6 +922,20 @@ function sortList(list){
 }
 
 function render(){
+  // The 12.1 projection is meaningless in a 12.0.7-only view: disable its button there,
+  // and if it was active, fall back to consensus BEFORE building the matrix.
+  {
+    const pb = srcseg.querySelector('.projbtn');
+    if(pb){
+      pb.disabled = state.era === "live";
+      pb.title = pb.disabled ? "Our 12.1 forecast needs the PTR layer — switch Era to Both or 12.1 PTR"
+        : "Our computed 12.1 forecast — live baseline + PTR testing + Dummy Dome + outlook + meta reads. A projection, not a source.";
+      if(pb.disabled && state.source === "projection"){
+        state.source = "consensus";
+        srcseg.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed', x.dataset.source==="consensus"?'true':'false'));
+      }
+    }
+  }
   const filtered = SPECS.filter(passFilters);
   const ordered = sortList(filtered);
   const idxOf = new Map(SPECS.map((s,i)=>[s,i]));
@@ -1015,9 +1050,12 @@ matrix.addEventListener('keydown', e=>{
 const srcseg = document.getElementById('srcseg');
 srcseg.innerHTML =
   `<button data-source="consensus" aria-pressed="true">Consensus</button>` +
-  TIER_SOURCES.map(s=>`<button data-source="${esc(s.id)}" aria-pressed="false">${esc(s.name)}</button>`).join("");
+  TIER_SOURCES.map(s=>`<button data-source="${esc(s.id)}" aria-pressed="false">${esc(s.name)}</button>`).join("") +
+  // The tracker's OWN computed 12.1 forecast — deliberately last + visually distinct
+  // (dashed border) so it can't be mistaken for one of the fetched sources.
+  `<button data-source="projection" class="projbtn" aria-pressed="false" title="Our computed 12.1 forecast — live baseline + PTR testing + Dummy Dome + outlook + meta reads. A projection, not a source.">Ours: 12.1 ✦</button>`;
 srcseg.addEventListener('click', e=>{
-  const b = e.target.closest('button'); if(!b) return;
+  const b = e.target.closest('button'); if(!b || b.disabled) return;
   state.source = b.dataset.source;
   srcseg.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed', x===b?'true':'false'));
   render();

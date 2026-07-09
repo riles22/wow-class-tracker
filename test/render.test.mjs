@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { fightLabels, metricRanks, outlookFor, movementFor, snapshotStateOf, pickBaseline, dummyDomeScores, classifyHighlight } from "../src/render.mjs";
+import { fightLabels, metricRanks, outlookFor, movementFor, snapshotStateOf, pickBaseline, dummyDomeScores, classifyHighlight, projectionFor } from "../src/render.mjs";
 
 test("outlookFor: verdict wins; tuning-line balance covers writeup-less specs", () => {
   const builds = { builds: [{
@@ -182,6 +182,85 @@ test("outlookFor: the writeup verdict always drives the arrow (auto-confirm poli
   // No writeup at all → the tuning balance still decides.
   const none = outlookFor({ class: "Rogue", spec: "Outlaw", ptr: null }, builds);
   assert.equal(none.direction, "down");
+});
+
+const PROJ_SCALES = { consensus: { bands: [
+  { tier: "S", min: 88 }, { tier: "A", min: 70 }, { tier: "B", min: 50 }, { tier: "C", min: 0 }
+] } };
+
+test("projectionFor: full-signal math is exact and transparent", () => {
+  const spec = {
+    class: "X", spec: "Full", role: "DPS",
+    consensus: { raid: { score: 80 } },
+    metrics: [{ bracket: "raid", name: "12.1 PTR raid testing score (normalized)", rank: 1, of: 27 }],
+    ptrDummy: { score: 90 },
+    outlook: { direction: "up" }
+  };
+  const notes = [
+    { class: "X", spec: "Full", sentiment: "negative", date: "2026-07-01" },
+    { class: "X", spec: "Full", sentiment: "positive", date: "2026-07-08" } // newest wins
+  ];
+  const p = projectionFor(spec, "raid", PROJ_SCALES, notes);
+  // emp = (100*2 + 90*1)/3 = 96.67; base = .55*80 + .45*96.67 = 87.5; +7 up +3 note = 97.5 → 98
+  assert.equal(p.score, 98);
+  assert.equal(p.tier, "S");
+  assert.equal(p.confidence, "high"); // testing + dummy + outlook = 3 signals
+  assert.match(p.basis, /live baseline 80/);
+  assert.match(p.basis, /raid-testing pct 100/);
+  assert.match(p.basis, /Dummy Dome 90/);
+  assert.match(p.basis, /outlook \+7/);
+  assert.match(p.basis, /meta read \+3/);
+});
+
+test("projectionFor: prior-only, PTR-only, and no-data cases stay honest", () => {
+  const priorOnly = projectionFor({ class:"X", spec:"P", role:"DPS", consensus:{ raid:{ score: 62 } } }, "raid", PROJ_SCALES);
+  assert.equal(priorOnly.score, 62); // weights renormalize to the one component
+  assert.equal(priorOnly.confidence, "prior-only");
+  const ptrOnly = projectionFor({ class:"X", spec:"Q", role:"DPS",
+    metrics: [{ bracket:"raid", name:"12.1 PTR raid testing score (normalized)", rank: 27, of: 27 }] }, "raid", PROJ_SCALES);
+  assert.equal(ptrOnly.score, 0); // bottom of the testing field, nothing else
+  assert.equal(ptrOnly.confidence, "low");
+  assert.equal(projectionFor({ class:"X", spec:"R", role:"DPS" }, "raid", PROJ_SCALES), null, "nothing to project from → null, not a guess");
+});
+
+test("projectionFor: meta nudge is bracket-scoped and skips superseded notes", () => {
+  const spec = { class:"X", spec:"S", role:"DPS", consensus:{ raid:{score:50}, mplus:{score:50} } };
+  const notes = [
+    { class:"X", spec:"S", sentiment:"positive", date:"2026-07-08", patchContext:"Season 2 PTR — raid testing outlook" },
+    { class:"X", spec:"S", sentiment:"negative", date:"2026-07-06", patchContext:"Season 2 PTR — M+ outlook" }
+  ];
+  // izen's raid read must never color the M+ projection under his name (and vice versa)
+  assert.equal(projectionFor(spec, "raid", PROJ_SCALES, notes).score, 53);
+  const mplus = projectionFor(spec, "mplus", PROJ_SCALES, notes);
+  assert.equal(mplus.score, 47);
+  assert.match(mplus.basis, /meta read −3/);
+  // a retracted (superseded) newest note must not nudge — matches the drawer's filter
+  const sup = projectionFor(spec, "raid", PROJ_SCALES, [
+    { class:"X", spec:"S", sentiment:"positive", date:"2026-07-09", superseded:true, patchContext:"raid outlook" },
+    { class:"X", spec:"S", sentiment:"negative", date:"2026-07-05", patchContext:"raid outlook" }
+  ]);
+  assert.equal(sup.score, 47);
+});
+
+test("projectionFor: M+ uses the role's own zone-56 series; shifts clamp to 0–100", () => {
+  const healer = {
+    class:"X", spec:"H", role:"Healer",
+    consensus: { mplus: { score: 4 } },
+    metrics: [
+      { bracket:"mplus", name:"Median HPS (12.1 PTR M+ testing)", rank: 7, of: 7 },
+      { bracket:"mplus", name:"Median rDPS (12.1 PTR M+ testing)", rank: 1, of: 27 } // wrong series — must be ignored for healers
+    ],
+    outlook: { direction: "down" }
+  };
+  const p = projectionFor(healer, "mplus", PROJ_SCALES, [{ class:"X", spec:"H", sentiment:"negative", date:"2026-07-08" }]);
+  // emp = HPS pct 0 (last of 7); base = .55*4 + .45*0 = 2.2; −7 −3 → clamped at 0
+  assert.equal(p.score, 0);
+  assert.equal(p.tier, "C");
+  const tank = {
+    class:"X", spec:"T", role:"Tank",
+    metrics: [{ bracket:"mplus", name:"Median rDPS (12.1 PTR M+ testing, tank)", rank: 1, of: 6 }]
+  };
+  assert.equal(projectionFor(tank, "mplus", PROJ_SCALES).score, 100); // top of the tank field
 });
 
 const dd = (spec, targets, role = "DPS") => ({ class: "X", spec, role, ptrDummy: { source: "warcraftlogs", targets } });

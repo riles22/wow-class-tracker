@@ -203,6 +203,86 @@ export function outlookFor(spec, ptrBuilds) {
   };
 }
 
+/* ---- 12.1 projection: the tracker's OWN synthesized tier list for the coming patch.
+   A computed forecast, NOT a source — it never feeds consensus (it derives from it),
+   is era-gated to PTR views, and carries its full component breakdown for transparency.
+
+   Formula per spec+bracket, everything on one 0–100 axis:
+     base  = weighted mean of { live consensus score (w=0.55) ,
+                                PTR empirical (w=0.45) } — renormalized when one absent.
+       PTR empirical (per bracket, within-role percentiles ×100):
+         raid  = mean of { zone-54 testing-score percentile (w=2),
+                           Dummy Dome composite (w=1, DPS only) }
+         mplus = mean of { zone-56 M+ testing percentile — rDPS / tank rDPS / HPS
+                           by role (w=2), Dummy Dome composite (w=1, DPS only) }
+     shift = 12.1 outlook direction: up +7 · down −7 · flat 0  (verdict-driven, see
+             outlookFor — tiny-n testing never drives direction, only the empirical term)
+     nudge = newest general-creator meta note for the spec: positive +3 · negative −3
+     score = clamp(base + shift + nudge, 0, 100) → tier via the same consensus bands.
+   Confidence = how many independent PTR signals exist (testing, dummy, writeup/tuning):
+   3 → high, 2 → medium, 1 → low, 0 → prior-only (live baseline, no PTR evidence). */
+const PTR_MPLUS_SERIES = {
+  DPS: "Median rDPS (12.1 PTR M+ testing)",
+  Tank: "Median rDPS (12.1 PTR M+ testing, tank)",
+  Healer: "Median HPS (12.1 PTR M+ testing)"
+};
+function rankPct(spec, bracket, name) {
+  const m = (spec.metrics ?? []).find(x => x.bracket === bracket && x.name === name);
+  if (!m || m.rank == null || !m.of || m.of < 2) return null;
+  return (1 - (m.rank - 1) / (m.of - 1)) * 100;
+}
+export function projectionFor(spec, bracket, scales, metaNotes = []) {
+  const prior = spec.consensus?.[bracket]?.score ?? null;
+  const testing = bracket === "raid"
+    ? rankPct(spec, "raid", "12.1 PTR raid testing score (normalized)")
+    : rankPct(spec, "mplus", PTR_MPLUS_SERIES[spec.role]);
+  const dummy = spec.ptrDummy?.score ?? null; // DPS-only composite, already 0–100
+  const empParts = [[testing, 2], [dummy, 1]].filter(([v]) => v != null);
+  const emp = empParts.length
+    ? empParts.reduce((s, [v, w]) => s + v * w, 0) / empParts.reduce((s, [, w]) => s + w, 0)
+    : null;
+  const baseParts = [[prior, 0.55], [emp, 0.45]].filter(([v]) => v != null);
+  if (!baseParts.length) return null; // nothing to project from — honest "—"
+  const base = baseParts.reduce((s, [v, w]) => s + v * w, 0) / baseParts.reduce((s, [, w]) => s + w, 0);
+  const dir = spec.outlook?.direction ?? null;
+  const shift = dir === "up" ? 7 : dir === "down" ? -7 : 0;
+  // Bracket-scoped + supersession-aware note selection: a creator's raid read must
+  // never color the M+ projection under their name (izen's reads genuinely differ per
+  // bracket), and a retracted (superseded) note must not nudge what the drawer hides.
+  // Notes whose patchContext names no bracket apply to both.
+  const note = metaNotes
+    .filter(n => n.class === spec.class && n.spec === spec.spec && n.sentiment && !n.superseded)
+    .filter(n => {
+      const pc = String(n.patchContext ?? "");
+      const mentionsRaid = /raid/i.test(pc), mentionsMplus = /m\+|mythic/i.test(pc);
+      if (!mentionsRaid && !mentionsMplus) return true;
+      return bracket === "raid" ? mentionsRaid : mentionsMplus;
+    })
+    .sort((a, b) => String(b.date).localeCompare(String(a.date)))[0] ?? null;
+  const nudge = note?.sentiment === "positive" ? 3 : note?.sentiment === "negative" ? -3 : 0;
+  const score = Math.round(Math.min(100, Math.max(0, base + shift + nudge)));
+  const band = scales.consensus.bands.find(b => score >= b.min);
+  const signals = (testing != null ? 1 : 0) + (dummy != null ? 1 : 0) + (dir != null ? 1 : 0);
+  const confidence = signals >= 3 ? "high" : signals === 2 ? "medium" : signals === 1 ? "low" : "prior-only";
+  return {
+    tier: band ? band.tier : null, score, confidence,
+    basis: `live baseline ${prior != null ? Math.round(prior) : "—"}`
+      + (testing != null ? ` · PTR ${bracket === "raid" ? "raid-testing" : "M+ testing"} pct ${Math.round(testing)}` : "")
+      + (dummy != null ? ` · Dummy Dome ${Math.round(dummy)}` : "")
+      + (dir ? ` · outlook ${dir === "up" ? "+7" : dir === "down" ? "−7" : "0"}` : "")
+      + (nudge ? ` · meta read ${nudge > 0 ? "+3" : "−3"} (${note.creator})` : "")
+  };
+}
+export function projections(specs, scales, creatorTakes) {
+  const metaNotes = creatorTakes?.metaNotes ?? [];
+  for (const spec of specs) {
+    const raid = projectionFor(spec, "raid", scales, metaNotes);
+    const mplus = projectionFor(spec, "mplus", scales, metaNotes);
+    if (raid || mplus) spec.projection = { raid, mplus };
+  }
+  return specs;
+}
+
 /* The comparable state a snapshot stores for one build — shared by snapshot.mjs (writer)
    and pickBaseline/movementFor (readers) so the key format can never drift. */
 export function snapshotStateOf(specs) {
@@ -300,6 +380,7 @@ export function buildPayload({ specs, sources, scales, community, ptrBuilds, cre
     const outlook = outlookFor(spec, ptrBuilds);
     if (outlook) spec.outlook = outlook;
   }
+  projections(decorated, scales, creatorTakes); // after consensus/ranks/dummy/outlook — it consumes all four
   const latestBuild = ptrBuilds?.builds?.[0]?.date ?? null;
   // notes-feed pages track build posts, not page snapshots — stamp them from the feed
   const stampedSources = sources.map(source => source.kind !== "notes-feed" ? source : {

@@ -16,6 +16,9 @@ Only these tier-list sources feed the consensus (five today — the table below 
 | **Archon** | S/A/B/C | Statistical (Warcraft Logs parses / Blizzard leaderboards, 14-day window) | **daily** | raid tiers = *throughput* list, M+ = *score* list; mirrored at u.gg |
 | **WoWMeta** | S/A/B/C/D | Algorithmic (Ckmeans clustering of official Blizzard M+ score CIs) | frequent | population-statistics lens, distinct from Archon's top-end logs; JS-rendered → r.jina.ai |
 
+### Not a source: the "Ours: 12.1" projection
+The tracker also renders its OWN computed 12.1 forecast (projection lane). It is deliberately absent from this inventory: it fetches nothing, feeds nothing — it derives from the sources above (live consensus + WCL PTR testing + Dummy Dome + outlook + cited meta reads) and is labeled, styled, and era-gated as a projection everywhere it appears. See CLAUDE.md → "Computed at build time."
+
 ## 2 · Quantitative metrics → numbers in drawers (never letters)
 
 | Source | What we take | Honest label |

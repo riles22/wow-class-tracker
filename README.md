@@ -25,6 +25,11 @@ Made by **[riles22](https://github.com/riles22)**. A personal project — if you
 - **12.1 PTR layer** — per-spec change writeups, datamined Season 2 tier-set bonuses, the
   official PTR build feed, Warcraft Logs zone-54 raid testing, and **Dummy Dome** (zone-52)
   real-player DPS by target count with a normalized composite score + rank across the field.
+- **"Ours: 12.1" projection** — the tracker's own computed forecast tier list for the
+  coming patch (raid + M+): live consensus baseline blended with PTR raid/M+ testing
+  percentiles and Dummy Dome composites, nudged by the tuning outlook and cited meta
+  reads — every cell carries its full component math and a confidence tag. A projection,
+  not a source: it never feeds the consensus.
 - **Movement arrows** (▲▼) versus the previous snapshot, per tier and per metric.
 - **Spec Finder** — a weighted quiz that ranks all 40 specs against your preferences (role,
   content, meta-vs-vibes, fight type, melee/ranged, mobility, survivability, utility, outlook).

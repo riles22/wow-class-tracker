@@ -95,6 +95,15 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   `classifyHighlight` (render.mjs — resource-aware: "cooldown reduced" is a buff, and
   the "X% (was Y%)" idiom is decided by the values). The zone-54 raid-testing rank is
   named in the basis string for context but never drives the direction.
+- **12.1 projection ("Ours: 12.1")**: the tracker's OWN forecast tier list for raid+M+,
+  computed in `projectionFor` (render.mjs) — live consensus baseline (w .55) blended
+  with PTR empiricals (zone-54/56 testing percentile w 2 : Dummy Dome w 1; total .45,
+  renormalized when absent), shifted by outlook direction (±7) and the newest
+  general-creator meta read (±3), clamped and mapped through the consensus bands, with
+  a confidence tag (high/medium/low/prior-only by PTR-signal count). **A projection is
+  NOT a source**: it never feeds consensus (it derives from it), is era-gated out of
+  12.0.7-only views, and every surface carries its component basis string. Tune weights
+  in code only — never hand-write `spec.projection`.
 - **Fight view**: `data/encounter-tiers.json` holds Archon per-boss (throughput) and
   per-dungeon (score) tiers — single-source by design, labeled as Archon in the UI; the
   Fight selector swaps the matching tier column. Refresh alongside the tier lists.
@@ -147,7 +156,9 @@ season/meta OUTLOOK reads land in a SEPARATE `creator-takes.json` `metaNotes[]` 
 (sentiment positive|negative|neutral|mixed, cited + dated), rendered as a distinct "Meta
 outlook" drawer section — validation requires a `metaNotes` author be a `generalCreators`
 entry, so the news-lane generalists stay firewalled out of the specialist `takes[]` /
-consensus layers while their meta commentary still surfaces per spec.
+consensus layers while their meta commentary still surfaces per spec. One disclosed
+exception: the newest bracket-scoped, non-superseded read nudges the 12.1 projection
+±3, named in that projection's basis string.
 
 ## Refresh workflows
 

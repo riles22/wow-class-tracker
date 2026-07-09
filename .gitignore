@@ -5,3 +5,7 @@ Thumbs.db
 
 # WCL API credentials
 .claude/skills/refresh-metrics/config.json
+
+# machine-local skills mirror (may contain the gitignored WCL config) — never commit
+.agents/
+AGENTS.md
