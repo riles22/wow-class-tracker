@@ -114,6 +114,15 @@ jobs:
                refresh-tiers AND refresh-metrics (WCL parts via the API, as above),
                regardless of the tier `snapshot` / metric `asOf` dates. Pull every source
                fresh each run; do not skip on "already fresh" data.
+               SEASON-FLIP GUARD: if era-verification fails because the sources now
+               self-identify as Season 2 / 12.1 LIVE (not because a page is broken),
+               the patch has LAUNCHED. Keep refusing to ingest S2-live data as if it
+               were 12.0.7 (correct), but do NOT treat it as a quiet skip: put
+               "SEASON 2 IS LIVE — tracker needs its 12.1-live migration (new WCL
+               zones, era model, source pages)" at the TOP of the run summary, repeat
+               it every night until addressed, and keep the rest of the run working.
+               Do not attempt the migration autonomously — the era model needs a
+               human decision.
 
             4. Run `npm test && npm run build`. If either fails: `git checkout -- data/ dist/`,
                and end the run reporting the failure — do NOT commit or push.
