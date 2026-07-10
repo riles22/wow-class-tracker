@@ -1287,6 +1287,83 @@
       "claim": "The latest 12.1 PTR build completely fixed the Protection Paladin talent tree in his view: Spell Warding is no longer stuck in a choice node with Improved Ardent Defender, previously blocking talents are now choice nodes, and Sanctuary and Relentless Inquisitor moved up so the bottom gate is no longer a problem — you can keep your old point spread. He notes the new damage-vs-Sanctuary choice node is a real pick in raid/low keys but 5% DR still wins in serious keys.",
       "url": "https://youtu.be/_ja6zB0PF-k?t=0",
       "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Restoration",
+      "creator": "LBNinja7",
+      "date": "2026-07-09",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR — build 68569 healer tuning (dev notes reaction)",
+      "claim": "Reads the Genesis nerf (healing-over-time amp 25% → 15%) as an expected, healthy redistribution — the proc was so strong it 'kneecapped' how strong the rest of the kit could be — with the compensating mastery buff enabling better tank/spot healing in dungeons and better raid healing; also likes the 4-set redesign (Nature's Swiftness/Tranquility/Ironbark now 100% chance to grant a longer Genesis): less oomph per proc, more uptime. Overall 'great tweaks in the right direction' to keep Resto Druid stable into Season 2.",
+      "url": "https://youtu.be/kP8A2ISdUiw?t=20",
+      "superseded": false
+    },
+    {
+      "class": "Evoker",
+      "spec": "Preservation",
+      "creator": "LBNinja7",
+      "date": "2026-07-09",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR — build 68569 healer tuning (dev notes reaction)",
+      "claim": "Sees the wave of Dream Breath support-talent nerfs (Inner Flame 60% → 50%, Spiritual Clarity CDR 10s → 6s, Expanded Lungs 30% → 20%, Fulminous Roar 20% → 15%) as justified rebalancing after the Dream Breath HoT was 'giga buffed' — 'the natural flow of tuning'; highlights the Consume Flame buff (200% → 300% of consumed HoT) plus new Fluttering Seedlings consumption and injured-ally targeting preference as real gains for a Flame Shaper/Emerald Blossom build. Preservation 'still looking pretty solid' on the PTR; he wants more Flame Shaper reps before a verdict.",
+      "url": "https://youtu.be/kP8A2ISdUiw?t=100",
+      "superseded": false
+    },
+    {
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "creator": "LBNinja7",
+      "date": "2026-07-09",
+      "sentiment": "buff",
+      "patchContext": "12.1 PTR — build 68569 healer tuning (dev notes reaction)",
+      "claim": "Reads the Spinning Crane Kick buff as a deliberate partial walk-back of the overcorrected pre-PTR nerf, not a re-break: Mistweaver is already 'performing the best in a key on the PTR', and this just makes SCK feel justified again on big AoE packs while keeping the healthier press-all-your-buttons play. People scared of 'why buff Mistweaver?' are misreading a self-correction.",
+      "url": "https://youtu.be/kP8A2ISdUiw?t=316",
+      "superseded": false
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "creator": "LBNinja7",
+      "date": "2026-07-09",
+      "sentiment": "buff",
+      "patchContext": "12.1 PTR — build 68569 healer tuning (dev notes reaction)",
+      "claim": "The change list he's most excited about in the whole healer wave: +8% all healing, the 2-set Infusion of Light effectiveness 75% → 100%, Word of Glory/Eternal Flame +5%, and Holy Shock +10% (which cascades into Divine Toll and every Holy-Shock-scaling talent). Calls Overflowing Light (30% → 50% of Holy Shock overhealing to shield) a 'double whammy' with the Holy Shock buff and the change that excites him most — he sees a potential shielding build and Avenging Crusader/Lightsmith becoming at least conversational, though nothing here 'busts or breaks' Holy Paladin.",
+      "url": "https://youtu.be/kP8A2ISdUiw?t=436",
+      "superseded": false
+    },
+    {
+      "class": "Priest",
+      "spec": "Discipline",
+      "creator": "LBNinja7",
+      "date": "2026-07-09",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR — build 68569 healer tuning (dev notes reaction)",
+      "claim": "Reads the Void Shield −30% absorption vs Ultimate Penitence +30% / Greater Smite 4s / blanket +10% healing-absorption package as a real trade-off — stronger cooldown moments, weaker steady-state, with Oracle likely feeling the Void Shield nerf hardest in M+. His critique: Blizzard keeps toggling the Atonement slider when they should leave Atonement alone and buff Penance DAMAGE instead — on the current PTR a Voidweaver Penance 'kind of tickles' where it used to be the capitalizing ramp finisher.",
+      "url": "https://youtu.be/kP8A2ISdUiw?t=870",
+      "superseded": false
+    },
+    {
+      "class": "Priest",
+      "spec": "Holy",
+      "creator": "LBNinja7",
+      "date": "2026-07-09",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR — build 68569 healer tuning (dev notes reaction)",
+      "claim": "The +10% healing buff was 'definitely necessary' for a spec reliant on healing alone, and the mana help (Benediction cost reduction, Apotheosis holy-word discount 50% → 70%) targets the real Archon-build mana strain — but of the whole healer wave he is 'least excited about the lack of things on Holy Priest'; he's saving a fuller verdict for a dedicated healer-opinions video.",
+      "url": "https://youtu.be/kP8A2ISdUiw?t=1039",
+      "superseded": false
+    },
+    {
+      "class": "Shaman",
+      "spec": "Restoration",
+      "creator": "LBNinja7",
+      "date": "2026-07-09",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR — build 68569 healer tuning (dev notes reaction)",
+      "claim": "Resto Shaman 'finally makes it on a patch note and it feels like three quality-of-life changes': Acid Rain +50% damage but ticking every 2s (was 1s) — front-loaded value whose intent he can't read (guaranteed first tick vs a stealth raid-movement nerf) — plus two Healing Rain tick/partial-tick bug fixes that matter more now the tier set spawns extra Healing Rains. He's genuinely ambivalent whether the package is a positive or a negative.",
+      "url": "https://youtu.be/kP8A2ISdUiw?t=1105",
+      "superseded": false
     }
   ],
   "metaNotes": [
