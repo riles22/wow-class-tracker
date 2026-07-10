@@ -299,7 +299,58 @@ export function snapshotStateOf(specs) {
       )
     };
     if (s.ptrDummy?.rank != null) entry.dummy = { rank: s.ptrDummy.rank, score: s.ptrDummy.score ?? null };
+    // Enrichment (2026-07-09) — TIMELINE/report-card payload, deliberately IGNORED by
+    // baselineDiffers/movementFor (movement semantics stay tier/rank-grained):
+    // exact consensus scores, and the projection so the forecast's own history is
+    // preserved for the post-launch report card (basis strings excluded — bulky,
+    // reconstructible from the code at any commit).
+    entry.scores = {
+      raid: s.consensus?.raid?.score ?? null,
+      mplus: s.consensus?.mplus?.score ?? null
+    };
+    if (s.projection) {
+      const slim = p => p ? { tier: p.tier, score: p.score, confidence: p.confidence } : null;
+      entry.projection = { raid: slim(s.projection.raid), mplus: slim(s.projection.mplus) };
+    }
     out[`${s.class}|${s.spec}`] = entry;
+  }
+  return out;
+}
+
+/* Per-spec time series for the drawer timeline, built from the daily history snapshots
+   (oldest → newest). Pre-enrichment snapshots stored only tier LETTERS — those map to
+   band-midpoint scores so the line still draws; enriched snapshots (2026-07-09+) carry
+   exact consensus scores and the projection's own history (the report-card raw data). */
+export function historySeries(specs, scales, snapshots) {
+  const bands = scales.consensus.bands; // sorted by descending min
+  const midOf = tier => {
+    const i = bands.findIndex(b => b.tier === tier);
+    if (i < 0) return null;
+    const hi = i === 0 ? 100 : bands[i - 1].min;
+    return Math.round((bands[i].min + hi) / 2);
+  };
+  const ordered = [...(snapshots ?? [])].filter(s => s?.date && s.specs)
+    .sort((a, b) => String(a.date).localeCompare(String(b.date)));
+  if (!ordered.length) return null;
+  const out = {
+    dates: ordered.map(s => s.date),
+    // Which snapshots carry EXACT scores (enrichment, 2026-07-09+). Earlier points are
+    // reconstructed from tier letters — the UI must draw them distinctly, or the
+    // midpoint→exact boundary reads as a score move that never happened.
+    enriched: ordered.map(s => Object.values(s.specs).some(e => e?.scores && (e.scores.raid != null || e.scores.mplus != null))),
+    specs: {}
+  };
+  for (const s of specs) {
+    const key = `${s.class}|${s.spec}`;
+    const row = { raid: [], mplus: [], projRaid: [], projMplus: [] };
+    for (const snap of ordered) {
+      const e = snap.specs[key];
+      row.raid.push(e?.scores?.raid ?? (e?.consensus?.raid != null ? midOf(e.consensus.raid) : null));
+      row.mplus.push(e?.scores?.mplus ?? (e?.consensus?.mplus != null ? midOf(e.consensus.mplus) : null));
+      row.projRaid.push(e?.projection?.raid?.score ?? null);
+      row.projMplus.push(e?.projection?.mplus?.score ?? null);
+    }
+    out.specs[key] = row;
   }
   return out;
 }
@@ -390,6 +441,7 @@ export function buildPayload({ specs, sources, scales, community, ptrBuilds, cre
   return {
     specs: decorated,
     sources: stampedSources,
+    history: historySeries(decorated, scales, historySnapshots),
     scales,
     community: community ?? null,
     ptrBuilds: ptrBuilds ?? null,

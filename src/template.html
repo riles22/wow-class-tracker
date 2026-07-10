@@ -164,6 +164,33 @@
   /* divergence marker: a ± glyph, not a bare dot — the shape carries the meaning for
      color-blind users, grayscale, and touch (WCAG 1.4.1); amber is reinforcement only */
   .divmark{font-family:var(--mono); font-weight:700; font-size:11px; color:var(--v-mix); cursor:help; flex:none; line-height:1}
+  /* watchlist star — quiet until starred */
+  .starbtn{background:none; border:0; cursor:pointer; font-size:13px; color:var(--ink-faint); padding:0 2px; line-height:1; flex:none; transition:color .15s}
+  .starbtn:hover, .starbtn.on{color:var(--gold)}
+  .starbtn:focus-visible{outline:2px solid var(--accent); outline-offset:1px; border-radius:4px}
+  /* "what changed" strip */
+  .changes{margin:10px 0 0; border:1px solid var(--edge); border-radius:10px; background:var(--bg-2); font-size:13px}
+  .changes summary{cursor:pointer; padding:9px 14px; color:var(--ink-dim); list-style:none; display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+  .changes summary::-webkit-details-marker{display:none}
+  .changes summary b{color:var(--ink)}
+  .changes[open] summary{border-bottom:1px solid var(--edge)}
+  .changes .chlist{padding:8px 14px 10px; display:flex; flex-direction:column; gap:4px; color:var(--ink-dim)}
+  .changes .chlist .mv{margin:0}
+  /* drawer timeline sparklines */
+  .spark{display:flex; align-items:center; gap:8px; margin:2px 0}
+  .spark svg{flex:none; background:color-mix(in srgb,var(--bg-3) 60%,transparent); border:1px solid var(--edge); border-radius:6px}
+  .spark .lbl2{font-family:var(--mono); font-size:11px; color:var(--ink-faint); width:34px; flex:none}
+  /* compare tray + overlay table */
+  .cmp-tray{position:fixed; right:16px; bottom:16px; z-index:60; background:var(--bg-2); border:1px solid var(--edge-2); border-radius:12px; padding:10px 12px; display:none; flex-direction:column; gap:8px; box-shadow:0 8px 30px rgba(0,0,0,.45); max-width:260px}
+  .cmp-tray.show{display:flex}
+  .cmp-tray .cmp-item{display:flex; align-items:center; gap:8px; font-size:13px}
+  .cmp-tray .cmp-item button{background:none; border:0; color:var(--ink-faint); cursor:pointer; font-size:13px}
+  .cmp-tray .cmp-go{font-family:var(--body); font-weight:600; font-size:13px; background:var(--accent); color:#160a24; border:0; border-radius:8px; padding:7px 12px; cursor:pointer}
+  .cmpbtn{font-family:var(--body); font-size:12px; font-weight:600; color:var(--accent-2); background:none; border:1px solid color-mix(in srgb,var(--accent-2) 40%,transparent); border-radius:7px; padding:3px 9px; cursor:pointer; margin-left:8px}
+  .cmpbtn.on{background:var(--accent-2); color:#08222e; border-color:var(--accent-2)}
+  .cmp-table{width:100%; border-collapse:collapse; font-size:13px}
+  .cmp-table th, .cmp-table td{padding:8px 10px; text-align:left; border-bottom:1px solid var(--edge); vertical-align:top}
+  .cmp-table th:first-child, .cmp-table td:first-child{font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--ink-faint); white-space:nowrap}
 
   /* ---------- fight-profile chips + metric notes ---------- */
   .ptag{
@@ -461,6 +488,11 @@
       <span class="switch"></span>
       <span>PTR-tracked only</span>
     </label>
+    <label class="toggle" title="Only specs you've starred (saved in this browser)">
+      <input type="checkbox" id="staronly">
+      <span class="switch"></span>
+      <span>★ Starred</span>
+    </label>
     <span class="grow"></span>
     <div class="ctl" id="fightctl">
       <label class="lbl" for="fightsel" id="fightlbl">Fight</label>
@@ -519,6 +551,8 @@
     </div>
     <span class="note"><span class="count" id="count"></span> · Tiers are <b>within role</b> — a healer's S is best among healers, not across the whole game. Hover any tier badge for the per-source breakdown; click any row for current 12.0.7 numbers.</span>
   </div>
+
+  <div id="changes"></div>
 
   <p class="ptrcaveat" id="ptrcaveat"><b>PTR read</b> — 12.1 verdicts, tuning notes, and PTR raid-testing scores (WCL zone 54) are <b style="text-transform:none;letter-spacing:0;font-family:inherit;font-size:inherit;color:var(--ink)">sim-backed speculation, not empirical truth</b>. Early-patch sims desync between PTR and live, SimC rotations are immature, and testing samples are tiny (n often &lt;100). Treat as directional until ~2 weeks of live logs confirm it.</p>
 
@@ -612,7 +646,43 @@ function draftSrcHTML(p){
   return "";
 }
 
-const state = { source:"consensus", era:"both", role:"All", ptrOnly:false, sort:"raid", q:"", fight:"" };
+const state = { source:"consensus", era:"both", role:"All", ptrOnly:false, starOnly:false, sort:"raid", q:"", fight:"" };
+const STATE_DEFAULTS = { ...state };
+
+/* ---------- watchlist (localStorage) + deep links (URL hash) ---------- */
+// Defensive: corrupted storage or private-mode quota must never kill the page script.
+const STARS = (() => {
+  try { const v = JSON.parse(localStorage.getItem("wct-stars") || "[]"); return new Set(Array.isArray(v) ? v : []); }
+  catch { return new Set(); }
+})();
+const saveStars = () => { try { localStorage.setItem("wct-stars", JSON.stringify([...STARS])); } catch {} };
+const slugOf = s => `${s.class} ${s.spec}`.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+let hashSpec = null;   // slug of the most recently opened drawer — mirrored into the URL
+let applyingHash = false;
+const HASH_KEYS = { src:"source", era:"era", role:"role", ptr:"ptrOnly", star:"starOnly", sort:"sort", q:"q", fight:"fight" };
+function writeHash(){
+  if(applyingHash) return;
+  const p = new URLSearchParams();
+  for(const [k, sk] of Object.entries(HASH_KEYS)){
+    const v = state[sk];
+    if(v !== STATE_DEFAULTS[sk]) p.set(k, typeof v === "boolean" ? "1" : v);
+  }
+  if(hashSpec) p.set("spec", hashSpec);
+  const h = p.toString();
+  history.replaceState(null, "", h ? "#" + h : location.pathname + location.search);
+}
+function applyHash(){
+  const p = new URLSearchParams(location.hash.slice(1));
+  for(const [k, sk] of Object.entries(HASH_KEYS)){
+    if(!p.has(k)) continue;
+    const raw = p.get(k);
+    state[sk] = typeof STATE_DEFAULTS[sk] === "boolean" ? raw === "1" : raw;
+  }
+  // sanity: unknown source/era values fall back to defaults rather than blank views
+  if(state.source !== "consensus" && state.source !== "projection" && !TIER_SOURCES.some(s=>s.id===state.source)) state.source = "consensus";
+  if(!["both","live","ptr"].includes(state.era)) state.era = "both";
+  return p.get("spec"); // slug to open after first render (null if none)
+}
 
 /* Era tagging: metrics may carry an explicit era; otherwise PTR-labeled names are ptr.
    Creator takes: patchContext mentioning "live" is live-era, everything else 12.1-ish. */
@@ -833,8 +903,8 @@ function drawerHTML(s){
   // Inner content only — the .drawer shell is emitted empty by rowHTML and filled lazily
   // on open, so render() rebuilds ~1.3K visible nodes instead of ~9.3K (85% was drawers).
   return `<div class="drawer-in"><div class="drawer-grid">
-     <div>${left}${metricsHTML(s)}${showPtr?ptrDummyHTML(s):""}</div>
-     <div>${tierset}${profileHTML(s)}${sourceBreakdownHTML(s)}${takesHTML(s)}${metaNotesHTML(s)}${communityHTML(s)}</div>
+     <div>${left}${metricsHTML(s)}${showPtr?ptrDummyHTML(s):""}${timelineHTML(s)}</div>
+     <div>${cmpBtnHTML(s)}${tierset}${profileHTML(s)}${sourceBreakdownHTML(s)}${takesHTML(s)}${metaNotesHTML(s)}${communityHTML(s)}</div>
    </div></div>`;
 }
 
@@ -877,6 +947,9 @@ function rowHTML(s, idx, simBar){
         role="button" tabindex="0" aria-expanded="false">
      <div class="spec-name">
        <span class="cbar" style="background:${color}"></span>
+       <button class="starbtn${STARS.has(`${s.class}|${s.spec}`)?' on':''}" type="button" data-key="${esc(`${s.class}|${s.spec}`)}"
+               title="${STARS.has(`${s.class}|${s.spec}`)?'Remove from':'Add to'} watchlist" aria-label="${STARS.has(`${s.class}|${s.spec}`)?'Unstar':'Star'} ${esc(s.spec)} ${esc(s.class)}"
+               aria-pressed="${STARS.has(`${s.class}|${s.spec}`)?'true':'false'}">${STARS.has(`${s.class}|${s.spec}`)?'★':'☆'}</button>
        <span class="spec-txt">${esc(s.spec)}</span>${newBadgeHTML(s)}
      </div>
      <div class="metaline">
@@ -895,6 +968,7 @@ function rowHTML(s, idx, simBar){
 function passFilters(s){
   if(state.role!=="All" && s.role!==state.role) return false;
   if(state.ptrOnly && !s.ptr) return false;
+  if(state.starOnly && !STARS.has(`${s.class}|${s.spec}`)) return false;
   if(state.q){
     const q = state.q.toLowerCase();
     if(!(s.spec.toLowerCase().includes(q) || s.class.toLowerCase().includes(q))) return false;
@@ -984,6 +1058,7 @@ function render(){
   document.getElementById('sortsel')?.classList.toggle('engaged', state.sort!=='raid');
   document.getElementById('search')?.classList.toggle('engaged', !!state.q);
   setStickyOffsets(); // header rebuilt above — remeasure the sticky stack
+  writeHash(); // the URL always mirrors the final rendered state (shareable deep link)
 }
 
 /* Sticky-stack offsets: the column header pins below the (variable-height) sticky
@@ -1022,6 +1097,7 @@ function toggleRow(row){
   const key = `${s.class}|${s.spec}`;
   if(open){
     openRows.add(key);
+    hashSpec = slugOf(s); writeHash(); // deep link mirrors the most recently opened drawer
     if(!drawer.firstChild) fillDrawer(row);
     drawer.style.maxHeight = (drawer.scrollHeight + 40)+'px';
     // Unlock to 'none' once the transition lands so late layout changes (fonts, viewport
@@ -1031,18 +1107,36 @@ function toggleRow(row){
     setTimeout(()=>{ if(row.classList.contains('open') && drawer.style.maxHeight!=='none') drawer.style.maxHeight='none'; }, 350); // reduced-motion fallback (no transitionend)
   } else {
     openRows.delete(key);
+    if(hashSpec === slugOf(s)){ hashSpec = null; writeHash(); }
     if(drawer.style.maxHeight==='none'){ drawer.style.maxHeight = drawer.scrollHeight+'px'; void drawer.offsetHeight; } // restore a pixel value so the collapse animates
     drawer.style.maxHeight = '0px';
   }
 }
 matrix.addEventListener('click', e=>{
   const hs = e.target.closest('.hsort'); if(hs){ setSort(hs.dataset.sort); return; }
+  const cb = e.target.closest('.cmpbtn');
+  if(cb){ // compare toggle lives inside the drawer — handle before the drawer guard
+    if(!toggleCompare(cb.dataset.cmp)){ cb.textContent = 'max 3 specs'; setTimeout(syncCmpButtons, 900); }
+    else syncCmpButtons();
+    return;
+  }
+  const star = e.target.closest('.starbtn');
+  if(star){ // star toggle must never open/close the row
+    const key = star.dataset.key;
+    STARS.has(key) ? STARS.delete(key) : STARS.add(key);
+    saveStars();
+    if(state.starOnly) render(); // membership changes the visible list
+    else { const on = STARS.has(key); star.classList.toggle('on', on); star.textContent = on?'★':'☆'; star.setAttribute('aria-pressed', on?'true':'false'); }
+    return;
+  }
   if(e.target.closest('.drawer')) return; // clicks inside the open drawer (selecting text, links) must not collapse it
   const row = e.target.closest('.row.clickable'); if(row) toggleRow(row);
 });
 matrix.addEventListener('keydown', e=>{
   if(e.key!=='Enter' && e.key!==' ') return;
-  if(e.target.closest('.drawer') || e.target.closest('.hsort')) return; // drawer links navigate; header buttons act natively
+  // drawer links navigate; header/star/compare buttons activate natively (their click
+  // handlers route them) — preventDefault here would swallow the button activation
+  if(e.target.closest('.drawer') || e.target.closest('.hsort') || e.target.closest('.starbtn') || e.target.closest('.cmpbtn')) return;
   const row = e.target.closest('.row.clickable'); if(row){ e.preventDefault(); toggleRow(row); }
 });
 
@@ -1168,6 +1262,7 @@ document.getElementById('roleseg').addEventListener('click', e=>{
   render();
 });
 document.getElementById('ptronly').addEventListener('change', e=>{ state.ptrOnly = e.target.checked; render(); });
+document.getElementById('staronly').addEventListener('change', e=>{ state.starOnly = e.target.checked; render(); });
 document.getElementById('sortsel').value = state.sort; // sync dropdown to the rank-all default
 document.getElementById('sortsel').addEventListener('change', e=>{ setSort(e.target.value); });
 document.querySelectorAll('#groupseg button').forEach(b=> b.addEventListener('click', ()=> setSort(b.dataset.g==='class'?'class':'raid')));
@@ -1177,22 +1272,186 @@ document.getElementById('search').addEventListener('input', e=>{
   clearTimeout(searchTimer); searchTimer = setTimeout(render, 120);
 });
 
-render();
+/* ---------- drawer timeline: score history over the daily snapshots ---------- */
+const HIST = DATA.history || null;
+function sparkSVG(cons, proj){
+  const n = cons.length; if(n < 2) return "";
+  const W = 210, H = 40, P = 3;
+  const x = i => P + i*(W-2*P)/(n-1), y = v => H-P - (v/100)*(H-2*P);
+  const path = arr => { let d = "", pen = false;
+    arr.forEach((v,i)=>{ if(v==null){ pen=false; return; } d += (pen?" L":" M")+x(i).toFixed(1)+" "+y(v).toFixed(1); pen=true; });
+    return d.trim(); };
+  // Isolated points (null/edge on both sides) draw as zero-length strokes — dot them.
+  const dots = (arr, color) => arr.map((v,i)=> v!=null && (i===0||arr[i-1]==null) && (i===n-1||arr[i+1]==null)
+    ? `<circle cx="${x(i).toFixed(1)}" cy="${y(v).toFixed(1)}" r="2" fill="${color}"/>` : "").join("");
+  // Split the consensus line where exact scores begin: earlier points are RECONSTRUCTED
+  // from tier letters (band midpoints) — drawn faded so the boundary can't read as a
+  // real score move. The reconstructed segment overlaps the first exact point to stay
+  // visually continuous without implying precision.
+  const firstExact = HIST.enriched ? HIST.enriched.indexOf(true) : -1;
+  let recon = "", exact = "";
+  if(firstExact > 0){
+    recon = path(cons.map((v,i)=> i<=firstExact ? v : null));
+    exact = path(cons.map((v,i)=> i>=firstExact ? v : null));
+  } else if(firstExact === 0){ exact = path(cons); }
+  else { recon = path(cons); } // no enriched history at all — everything is reconstructed
+  const projOn = proj && proj.some(v=>v!=null);
+  const p = projOn ? path(proj) : "";
+  if(!recon && !exact && !p && !projOn) return "";
+  return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="score history sparkline">`
+    + (recon?`<path d="${recon}" fill="none" stroke="var(--accent-2)" stroke-width="1.5" stroke-dasharray="2 3" opacity=".45"/>`:"")
+    + (exact?`<path d="${exact}" fill="none" stroke="var(--accent-2)" stroke-width="1.5"/>`:"")
+    + (p?`<path d="${p}" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-dasharray="4 3"/>`:"")
+    + dots(cons, "var(--accent-2)") + (projOn ? dots(proj, "var(--gold)") : "") + `</svg>`;
+}
+function timelineHTML(s){
+  if(!HIST) return "";
+  const h = HIST.specs[`${s.class}|${s.spec}`]; if(!h) return "";
+  const showProj = state.era !== "live";
+  const projShown = showProj && (h.projRaid.some(v=>v!=null) || h.projMplus.some(v=>v!=null));
+  const hasRecon = HIST.enriched && HIST.enriched.indexOf(true) !== 0;
+  const raid = sparkSVG(h.raid, showProj ? h.projRaid : null);
+  const mplus = sparkSVG(h.mplus, showProj ? h.projMplus : null);
+  if(!raid && !mplus) return "";
+  return `<div class="srcbreak"><p class="d-h">Timeline <span class="mnote">(consensus score 0–100${hasRecon?" · faded start = reconstructed from tier letters":""}${projShown?" · gold = our 12.1 projection":""} · ${esc(fmtDate(HIST.dates[0]))} → ${esc(fmtDate(HIST.dates[HIST.dates.length-1]))})</span></p>
+    ${raid?`<div class="spark"><span class="lbl2">Raid</span>${raid}</div>`:""}
+    ${mplus?`<div class="spark"><span class="lbl2">M+</span>${mplus}</div>`:""}</div>`;
+}
+
+/* ---------- Compare: pin up to 3 specs side by side (session-only) ---------- */
+const COMPARE = new Set();
+const cmpTray = document.createElement("div"); cmpTray.className = "cmp-tray"; document.body.appendChild(cmpTray);
+const cmpOv = document.createElement("div"); cmpOv.className = "finder-ov"; cmpOv.id = "cmp-ov"; document.body.appendChild(cmpOv);
+function cmpBtnHTML(s){
+  const key = `${s.class}|${s.spec}`, on = COMPARE.has(key);
+  return `<button class="cmpbtn${on?' on':''}" type="button" data-cmp="${esc(key)}" aria-pressed="${on?'true':'false'}">${on?'✓ In compare':'⚖ Compare'}</button>`;
+}
+function syncCmpButtons(){
+  document.querySelectorAll(".cmpbtn").forEach(b=>{
+    const on = COMPARE.has(b.dataset.cmp);
+    b.classList.toggle("on", on); b.textContent = on?'✓ In compare':'⚖ Compare'; b.setAttribute("aria-pressed", on?"true":"false");
+  });
+}
+function updateTray(){
+  if(!COMPARE.size){ cmpTray.classList.remove("show"); cmpTray.innerHTML = ""; return; }
+  cmpTray.classList.add("show");
+  cmpTray.innerHTML = [...COMPARE].map(k=>{ const [c,sp] = k.split("|");
+    return `<span class="cmp-item"><span style="color:${CLASS_COLOR[c]||'#888'}" aria-hidden="true">●</span> ${esc(sp)} <span class="mnote">${esc(c)}</span> <button data-uncmp="${esc(k)}" aria-label="Remove ${esc(sp)} ${esc(c)} from compare">✕</button></span>`; }).join("")
+    + `<button class="cmp-go" id="cmp-go"${COMPARE.size<2?' disabled':''}>Compare ${COMPARE.size} side by side</button>`;
+  cmpTray.querySelectorAll("[data-uncmp]").forEach(b=> b.onclick = ()=>{ COMPARE.delete(b.dataset.uncmp); updateTray(); syncCmpButtons(); });
+  const go = cmpTray.querySelector("#cmp-go"); if(go) go.onclick = openCompare;
+}
+function toggleCompare(key){
+  if(COMPARE.has(key)) COMPARE.delete(key);
+  else { if(COMPARE.size >= 3) return false; COMPARE.add(key); }
+  updateTray(); return true;
+}
+function closeCompare(){ cmpOv.classList.remove("open"); document.body.style.overflow = ""; }
+cmpOv.addEventListener("click", e=>{ if(e.target === cmpOv) closeCompare(); });
+document.addEventListener("keydown", e=>{ if(e.key === "Escape" && cmpOv.classList.contains("open")) closeCompare(); });
+function cmpLiveMedian(s, b){
+  const rx = s.role === "Healer" ? /Median HPS/ : s.role === "Tank" ? /Median rDPS.*tank/ : /Median rDPS(?!.*tank)/;
+  const m = (s.metrics||[]).find(m => m.bracket === b && metricEra(m) === "live" && rx.test(m.name));
+  return m ? `${Math.round(m.value).toLocaleString("en-US")}${m.rank?` <span class="mnote">#${m.rank}/${m.of}</span>`:""}` : "—";
+}
+function openCompare(){
+  const list = [...COMPARE].map(k => SPECS.find(s => `${s.class}|${s.spec}` === k)).filter(Boolean);
+  if(list.length < 2) return;
+  const tierCell = (s,b)=>{ const c = s.consensus?.[b]; return c ? `<span class="tier" data-t="${esc(c.tier)}">${esc(c.tier)}</span> <span class="mnote">${c.score}/100</span>` : "—"; };
+  const projCell = (s,b)=>{ const p = s.projection?.[b]; return p ? `<span class="tier" data-t="${esc(p.tier)}">${esc(p.tier)}</span> <span class="mnote">${p.score}/100 · ${esc(p.confidence)}</span>` : "—"; };
+  const rows = [
+    ["Role", s=>esc(s.role)],
+    ["Consensus · Raid", s=>tierCell(s,"raid")],
+    ["Consensus · M+", s=>tierCell(s,"mplus")],
+    // era-gated like everywhere else: the projection never appears in a 12.0.7-only view
+    ...(state.era !== "live" ? [
+      ["Ours: 12.1 · Raid", s=>projCell(s,"raid")],
+      ["Ours: 12.1 · M+", s=>projCell(s,"mplus")]
+    ] : []),
+    ["Live raid median", s=>cmpLiveMedian(s,"raid")],
+    ["Live M+ median", s=>cmpLiveMedian(s,"mplus")],
+    ...(state.era !== "live" ? [["Dummy Dome (PTR)", s=>s.ptrDummy?.score!=null?`${s.ptrDummy.score}/100 <span class="mnote">#${s.ptrDummy.rank}/${s.ptrDummy.of}</span>`:"—"]] : []),
+    ["Fight profile", s=>s.fightProfile?.tag ? esc(s.fightProfile.tag) : "—"],
+    ["Mobility", s=>s.playstyle ? `${s.playstyle.mobility}/5` : "—"],
+    ["Utility", s=>s.playstyle ? `${s.playstyle.utility}/5` : "—"],
+    ["Complexity", s=>s.playstyle ? `${s.playstyle.complexity}/5` : "—"],
+    ["Survivability", s=>s.survivability ? esc(s.survivability.tier) : "—"],
+    ...(state.era !== "live" ? [["12.1 outlook", s=>{ const o = s.outlook, v = s.ptr?.verdict;
+      return ((v?esc(v)+" ":"") + (o ? (o.direction==="up"?"↗":o.direction==="down"?"↘":"→") : "")) || "—"; }]] : [])
+  ];
+  cmpOv.innerHTML = `<div class="finder-panel" role="dialog" aria-modal="true" aria-label="Compare specs">
+    <div class="finder-head"><div><h2>⚖ Compare</h2><p>Side by side, same rules as everywhere else — measured numbers stay numbers, and the 12.1 forecast stays labeled as ours.</p></div>
+    <button class="finder-x" id="cmp-close" aria-label="Close">✕</button></div>
+    <div style="overflow-x:auto"><table class="cmp-table"><thead><tr><th></th>${list.map(s=>`<th style="color:${CLASS_COLOR[s.class]||'#888'}">${esc(s.spec)}<br><span class="mnote">${esc(s.class)}</span></th>`).join("")}</tr></thead>
+    <tbody>${rows.map(([label,fn])=>`<tr><td>${label}</td>${list.map(s=>`<td>${fn(s)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>
+  </div>`;
+  cmpOv.querySelector("#cmp-close").onclick = closeCompare;
+  cmpOv.classList.add("open"); document.body.style.overflow = "hidden";
+  setTimeout(()=>cmpOv.querySelector("#cmp-close").focus(), 0);
+}
+
+/* ---------- "what changed" strip — narrates the movement baseline diff ---------- */
+(function(){
+  const host = document.getElementById('changes');
+  if(!host) return;
+  const moves = [];
+  for(const s of SPECS) for(const b of ["raid","mplus"]) if(s.movement?.[b]) moves.push({ s, b, m: s.movement[b] });
+  const dummyMoves = SPECS.filter(s=>s.ptrDummy?.rankDelta);
+  const fresh = SPECS.filter(s=>newInfoFor(s)).length;
+  if(!moves.length && !dummyMoves.length && !fresh){ host.remove(); return; }
+  const ups = moves.filter(x=>x.m.delta>0).length, downs = moves.filter(x=>x.m.delta<0).length;
+  const line = x => `<span><b>${esc(x.s.spec)} ${esc(x.s.class)}</b> ${x.b==="raid"?"Raid":"M+"} ${esc(x.m.was)} → ${esc(x.s.consensus?.[x.b]?.tier ?? "—")} <span class="mv" data-d="${x.m.delta>0?'up':'down'}">${x.m.delta>0?'▲':'▼'}</span> <span class="mnote">since ${esc(fmtDate(x.m.since))}</span></span>`;
+  host.innerHTML = `<details class="changes"><summary><b>What changed</b>${META.movementSince?` <span class="mnote">since ${esc(fmtDate(META.movementSince))}</span>`:""} — <span class="mv" data-d="up">▲${ups}</span> <span class="mv" data-d="down">▼${downs}</span> tier moves · ${dummyMoves.length} Dummy Dome shifts · ${fresh} specs with fresh info${META.latestPtrBuild?` · latest PTR build ${esc(fmtDate(META.latestPtrBuild))}`:""}</summary>
+    <div class="chlist">${moves.map(line).join("") || "<span class='mnote'>No tier moves since the baseline.</span>"}
+    ${dummyMoves.map(s=>`<span><b>${esc(s.spec)} ${esc(s.class)}</b> Dummy Dome rank ${s.ptrDummy.rankDelta>0?'climbed':'fell'} ${Math.abs(s.ptrDummy.rankDelta)} <span class="mnote">(now #${s.ptrDummy.rank}/${s.ptrDummy.of})</span></span>`).join("")}</div></details>`;
+})();
+
+/* ---------- boot: apply the deep link, sync widgets to state, first render ---------- */
+function syncControls(){
+  document.querySelectorAll('#eraseg button').forEach(x=>x.setAttribute('aria-pressed', x.dataset.era===state.era?'true':'false'));
+  document.querySelectorAll('#roleseg button').forEach(x=>x.setAttribute('aria-pressed', x.dataset.role===state.role?'true':'false'));
+  srcseg.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed', x.dataset.source===state.source?'true':'false'));
+  document.querySelectorAll('#groupseg button').forEach(x=>x.setAttribute('aria-pressed', (x.dataset.g==='class')===(state.sort==='class')?'true':'false'));
+  document.getElementById('ptronly').checked = state.ptrOnly;
+  document.getElementById('staronly').checked = state.starOnly;
+  document.getElementById('sortsel').value = state.sort;
+  document.getElementById('search').value = state.q;
+  const fsel = document.getElementById('fightsel');
+  if(fsel && [...fsel.options].some(o=>o.value===state.fight)) fsel.value = state.fight; else state.fight = "";
+}
+/* Open a spec's row in the CURRENT view (no filter reset) — deep-link landing + overlay jumps. */
+function openRowFor(cls, spec){
+  const row = [...matrix.querySelectorAll('.row')].find(r =>
+    r.querySelector('.spec-txt')?.textContent===spec && r.querySelector('.cls')?.textContent===cls);
+  if(row){ if(!row.classList.contains('open')) row.click(); row.scrollIntoView({ behavior:"smooth", block:"center" }); }
+  return !!row;
+}
+{
+  applyingHash = true;
+  const pendingSpec = applyHash();
+  applyingHash = false;
+  syncControls();
+  render();
+  if(pendingSpec){
+    const target = SPECS.find(s=>slugOf(s)===pendingSpec);
+    // if the linked spec is hidden by the linked filters, it just doesn't open — honest no-op
+    if(target) openRowFor(target.class, target.spec);
+  }
+}
 
 /* Jump from an overlay (Spec Finder / The Ladder) to a spec's matrix row + drawer.
    Module scope so both overlays share one implementation; closes any open overlay first. */
 function openSpecFromFinder(cls, spec){
   document.querySelectorAll(".finder-ov.open").forEach(o=>o.classList.remove("open"));
   document.body.style.overflow="";
-  state.role="All"; state.ptrOnly=false; state.era="both"; state.fight=""; state.q="";
+  state.role="All"; state.ptrOnly=false; state.starOnly=false; state.era="both"; state.fight=""; state.q="";
+  document.getElementById('staronly').checked=false;
   document.querySelectorAll('#roleseg button').forEach(x=>x.setAttribute('aria-pressed', x.dataset.role==="All"?'true':'false'));
   document.querySelectorAll('#eraseg button').forEach(x=>x.setAttribute('aria-pressed', x.dataset.era==="both"?'true':'false'));
   document.getElementById('ptronly').checked=false; document.getElementById('search').value="";
   if(document.getElementById('fightsel')) document.getElementById('fightsel').value="";
   render();
-  const row = [...matrix.querySelectorAll('.row')].find(r =>
-    r.querySelector('.spec-txt')?.textContent===spec && r.querySelector('.cls')?.textContent===cls);
-  if(row){ if(!row.classList.contains('open')) row.click(); row.scrollIntoView({ behavior:"smooth", block:"center" }); }
+  openRowFor(cls, spec);
 }
 
 /* ================================================================

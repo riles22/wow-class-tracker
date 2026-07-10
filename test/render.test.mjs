@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { fightLabels, metricRanks, outlookFor, movementFor, snapshotStateOf, pickBaseline, dummyDomeScores, classifyHighlight, projectionFor } from "../src/render.mjs";
+import { fightLabels, metricRanks, outlookFor, movementFor, snapshotStateOf, pickBaseline, dummyDomeScores, classifyHighlight, projectionFor, historySeries } from "../src/render.mjs";
 
 test("outlookFor: verdict wins; tuning-line balance covers writeup-less specs", () => {
   const builds = { builds: [{
@@ -182,6 +182,43 @@ test("outlookFor: the writeup verdict always drives the arrow (auto-confirm poli
   // No writeup at all → the tuning balance still decides.
   const none = outlookFor({ class: "Rogue", spec: "Outlaw", ptr: null }, builds);
   assert.equal(none.direction, "down");
+});
+
+test("snapshot enrichment (scores/projection) never disturbs movement semantics", () => {
+  const spec = {
+    class: "X", spec: "A", role: "DPS",
+    consensus: { raid: { tier: "A", score: 71 }, mplus: { tier: "B", score: 55 } },
+    metrics: [{ source: "s", bracket: "raid", name: "m", rank: 2, value: 1, of: 5 }],
+    projection: { raid: { tier: "A", score: 74, confidence: "high", basis: "x" }, mplus: null }
+  };
+  const now = snapshotStateOf([spec]);
+  assert.equal(now["X|A"].scores.raid, 71, "enriched snapshot carries exact scores");
+  assert.equal(now["X|A"].projection.raid.score, 74);
+  assert.equal(now["X|A"].projection.raid.basis, undefined, "bulky basis strings stay out of history");
+  // identical classic state but WILDLY different enrichment → still not a movement baseline
+  const then = structuredClone(now);
+  then["X|A"].scores = { raid: 5, mplus: 5 };
+  then["X|A"].projection = { raid: { tier: "C", score: 5, confidence: "low" }, mplus: null };
+  assert.equal(pickBaseline([spec], [{ date: "2026-07-01", specs: then }]), null,
+    "scores/projection differences alone must not create a baseline (movement is tier/rank-grained)");
+});
+
+test("historySeries: tier-only history maps to band midpoints; enriched history is exact", () => {
+  const scales = { consensus: { bands: [
+    { tier: "S", min: 88 }, { tier: "A", min: 70 }, { tier: "B", min: 50 }, { tier: "C", min: 0 }
+  ] } };
+  const spec = { class: "X", spec: "A" };
+  const snaps = [ // deliberately newest-first, as loadData returns them
+    { date: "2026-07-09", specs: { "X|A": { consensus: { raid: "A", mplus: "B" }, scores: { raid: 73, mplus: 51 },
+      projection: { raid: { tier: "A", score: 80, confidence: "high" }, mplus: null } } } },
+    { date: "2026-07-01", specs: { "X|A": { consensus: { raid: "S", mplus: null }, ranks: {} } } } // pre-enrichment
+  ];
+  const h = historySeries([spec], scales, snaps);
+  assert.deepEqual(h.dates, ["2026-07-01", "2026-07-09"], "series runs oldest → newest");
+  assert.deepEqual(h.enriched, [false, true], "the UI needs the reconstruction boundary to draw honestly");
+  assert.deepEqual(h.specs["X|A"].raid, [94, 73]); // S midpoint (88..100 → 94), then exact
+  assert.deepEqual(h.specs["X|A"].mplus, [null, 51]); // unrated stays null, never guessed
+  assert.deepEqual(h.specs["X|A"].projRaid, [null, 80]); // projection history starts at enrichment
 });
 
 const PROJ_SCALES = { consensus: { bands: [

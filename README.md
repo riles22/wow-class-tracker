@@ -30,6 +30,10 @@ Made by **[riles22](https://github.com/riles22)**. A personal project — if you
   percentiles and Dummy Dome composites, nudged by the tuning outlook and cited meta
   reads — every cell carries its full component math and a confidence tag. A projection,
   not a source: it never feeds the consensus.
+- **Timeline sparklines** — every drawer charts the spec's consensus score (and our 12.1
+  projection) across the daily history snapshots — the story of the meta, not just today.
+- **Deep links, watchlist & compare** — every view is a shareable URL; star your specs
+  (saved in-browser) and pin up to three side by side.
 - **Movement arrows** (▲▼) versus the previous snapshot, per tier and per metric.
 - **Spec Finder** — a weighted quiz that ranks all 40 specs against your preferences (role,
   content, meta-vs-vibes, fight type, melee/ranged, mobility, survivability, utility, outlook).

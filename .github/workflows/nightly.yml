@@ -87,7 +87,9 @@ jobs:
 
             1. PTR watch (.claude/skills/ptr-watch/SKILL.md): Wowhead news RSS + the
                official forum thread (URL in data/ptr-builds.json) for PTR builds newer
-               than the newest logged one; Warcraft Logs zone 54 (PTR raid testing) and
+               than the newest logged one; Warcraft Logs zone 54 (PTR raid testing —
+               ALL THREE role cuts per the skill: DPS, Healers/hps, Tanks; one shared
+               metric name so within-role ranks and the projection consume them) and
                zone 52 (Dummy Dome) — ingest both EVERY run regardless of parse-count
                movement (policy 2026-07-08: no change-detector gate); distill new spec writeups per the
                auto-confirm policy — faithful distillation of the SOURCE's verdict,

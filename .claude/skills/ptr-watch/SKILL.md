@@ -33,6 +33,13 @@ say so and change nothing.
 5. **WCL PTR raid testing (zone 54)**: verified working URL (2026-07-01, Heroic —
    where testing currently happens; Mythic is empty until those windows open):
    `warcraftlogs.com/zone/statistics/table/54/dps/0/4/10/1/1000/1/14/0/DPS/Any/All/0/normalized/single/0/-1/?keystone=15&dpstype=rdps`
+   **All three roles every run (2026-07-09 — feeds projection confidence for healers/tanks):**
+   healers = same URL with `hps` metric + `Healers` role token; tanks = `dps` + `Tanks`.
+   All three cuts merge under the SAME metric name "12.1 PTR raid testing score
+   (normalized)" — ranks are computed within-role at build, so one name serves all roles.
+   Fragment gotcha: rows have NO anchor tags — spec comes from the sprite class
+   (`actor-sprite-Druid-Restoration`), class from the row's `td nowrap class="…"`
+   (CamelCase → spaced); values are Score / Max / Parses in `main-table-number` cells.
    (XHR header recipe as in refresh-metrics; zone 54 has NO partitions — that segment
    is always 1; difficulty 4=Heroic size 10, 5=Mythic size 20; `aggregate=normalized`
    → Score is 0–100 points, not raw DPS). Ingest EVERY run (policy 2026-07-08: no

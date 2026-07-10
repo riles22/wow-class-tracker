@@ -104,6 +104,19 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   NOT a source**: it never feeds consensus (it derives from it), is era-gated out of
   12.0.7-only views, and every surface carries its component basis string. Tune weights
   in code only — never hand-write `spec.projection`.
+- **History snapshots are ENRICHED** (2026-07-09): `snapshotStateOf` stores exact
+  consensus scores + the projection (tier/score/confidence, no basis strings) alongside
+  the classic tiers/ranks. Movement/baseline comparison stays tier/rank-grained — the
+  enrichment feeds the drawer **Timeline** sparklines (`historySeries` → payload
+  `history`) and is the raw data for the post-launch **forecast report card** (grade the
+  frozen pre-launch projection against the first settled S2 consensus).
+- **Zone-54 raid testing covers ALL ROLES** (2026-07-09): healer (hps) and tank cuts
+  merge under the SAME metric name as DPS — "12.1 PTR raid testing score (normalized)" —
+  so within-role ranks and the projection consume them with no special-casing.
+- **Client-side UX lanes** (template-only, no build step): URL-hash deep links (state +
+  open drawer, `applyHash`/`writeHash`), localStorage watchlist (★ + Starred filter),
+  the "What changed" strip (narrates the movement-baseline diff), and Compare (pin ≤3
+  specs side by side; era-gates the projection rows like every other surface).
 - **Fight view**: `data/encounter-tiers.json` holds Archon per-boss (throughput) and
   per-dungeon (score) tiers — single-source by design, labeled as Archon in the UI; the
   Fight selector swaps the matching tier column. Refresh alongside the tier lists.
