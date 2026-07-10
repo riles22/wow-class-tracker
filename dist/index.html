@@ -11,7 +11,7 @@
 -->
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-YB/vcGF3JgT+d/ETH2355D++Gjsg8WWFpPYdfwsOTGQ='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-iI7BvLytKjX2ACkUQzdcdPNABo9efTtX687eGUWhQIw='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="riles22">
 <title>Curse of Ula'tek — 12.1 PTR Spec Tracker</title>
@@ -181,6 +181,12 @@
   .spark{display:flex; align-items:center; gap:8px; margin:2px 0}
   .spark svg{flex:none; background:color-mix(in srgb,var(--bg-3) 60%,transparent); border:1px solid var(--edge); border-radius:6px}
   .spark .lbl2{font-family:var(--mono); font-size:11px; color:var(--ink-faint); width:34px; flex:none}
+  /* floating utility corner: back-to-top + close-all-drawers (bottom-left; compare tray owns bottom-right) */
+  .utilbar{position:fixed; left:16px; bottom:16px; z-index:59; display:none; flex-direction:column; gap:8px; align-items:flex-start}
+  .utilbar.show{display:flex}
+  .utilbar button{display:none; font-family:var(--body); font-size:12px; font-weight:600; color:var(--ink-dim); background:var(--bg-2); border:1px solid var(--edge-2); border-radius:999px; padding:8px 14px; cursor:pointer; box-shadow:0 4px 16px rgba(0,0,0,.4); transition:color .15s,border-color .15s}
+  .utilbar button.show{display:block}
+  .utilbar button:hover{color:var(--ink); border-color:var(--accent)}
   /* compare tray + overlay table */
   .cmp-tray{position:fixed; right:16px; bottom:16px; z-index:60; background:var(--bg-2); border:1px solid var(--edge-2); border-radius:12px; padding:10px 12px; display:none; flex-direction:column; gap:8px; box-shadow:0 8px 30px rgba(0,0,0,.45); max-width:260px}
   .cmp-tray.show{display:flex}
@@ -1098,6 +1104,7 @@ function toggleRow(row){
   const key = `${s.class}|${s.spec}`;
   if(open){
     openRows.add(key);
+    updateUtilBar();
     hashSpec = slugOf(s); writeHash(); // deep link mirrors the most recently opened drawer
     if(!drawer.firstChild) fillDrawer(row);
     drawer.style.maxHeight = (drawer.scrollHeight + 40)+'px';
@@ -1108,6 +1115,7 @@ function toggleRow(row){
     setTimeout(()=>{ if(row.classList.contains('open') && drawer.style.maxHeight!=='none') drawer.style.maxHeight='none'; }, 350); // reduced-motion fallback (no transitionend)
   } else {
     openRows.delete(key);
+    updateUtilBar();
     if(hashSpec === slugOf(s)){ hashSpec = null; writeHash(); }
     if(drawer.style.maxHeight==='none'){ drawer.style.maxHeight = drawer.scrollHeight+'px'; void drawer.offsetHeight; } // restore a pixel value so the collapse animates
     drawer.style.maxHeight = '0px';
@@ -1391,6 +1399,31 @@ function openCompare(){
   setTimeout(()=>cmpOv.querySelector("#cmp-close").focus(), 0);
 }
 
+/* ---------- floating utility corner: back-to-top + close-all-drawers ---------- */
+const utilBar = document.createElement('div'); utilBar.className = 'utilbar'; document.body.appendChild(utilBar);
+utilBar.innerHTML = `<button id="toTop" type="button" aria-label="Back to top">↑ Top</button><button id="closeAll" type="button" aria-label="Close all open drawers">Close all</button>`;
+const toTopBtn = utilBar.querySelector('#toTop'), closeAllBtn = utilBar.querySelector('#closeAll');
+toTopBtn.onclick = () => window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+function closeAllDrawers(){
+  matrix.querySelectorAll('.row.open').forEach(row=>{
+    row.classList.remove('open'); row.setAttribute('aria-expanded','false');
+    const d = row.querySelector('.drawer');
+    if(d){ if(d.style.maxHeight==='none'){ d.style.maxHeight = d.scrollHeight+'px'; void d.offsetHeight; } d.style.maxHeight = '0px'; }
+  });
+  openRows.clear();
+  if(hashSpec){ hashSpec = null; writeHash(); }
+  updateUtilBar();
+}
+closeAllBtn.onclick = closeAllDrawers;
+function updateUtilBar(){
+  toTopBtn.classList.toggle('show', window.scrollY > 600);
+  closeAllBtn.classList.toggle('show', openRows.size > 0);
+  closeAllBtn.textContent = `Close all (${openRows.size})`;
+  utilBar.classList.toggle('show', window.scrollY > 600 || openRows.size > 0);
+}
+let utilTick = false;
+window.addEventListener('scroll', ()=>{ if(utilTick) return; utilTick = true; requestAnimationFrame(()=>{ utilTick = false; updateUtilBar(); }); }, { passive: true });
+
 /* ---------- "what changed" strip — narrates the movement baseline diff ---------- */
 (function(){
   const host = document.getElementById('changes');
@@ -1501,7 +1534,13 @@ function openSpecFromFinder(cls, spec){
 
   const brackets = () => answers.content === "both" ? ["raid","mplus"] : [answers.content];
   const avg = a => { const v = a.filter(x => x != null); return v.length ? v.reduce((s,x)=>s+x,0)/v.length : null; };
-  const tierScore = (s,b) => { const c = s.consensus?.[b]; return c ? c.score/100 : null; };
+  // Era-aware strength signal: in the 12.1 PTR view, "tier" means OUR projection (the
+  // forecast of next season's tiers) instead of the live consensus — disclosed in the
+  // results header so the ranking's basis is never ambiguous.
+  const tierScore = (s,b) => {
+    if(state.era === "ptr"){ const p = s.projection?.[b]; return p ? p.score/100 : null; }
+    const c = s.consensus?.[b]; return c ? c.score/100 : null;
+  };
   const nOk = m => m.n == null || m.n >= 200; // ignore freak thin-sample metrics
   // The rank (0-1, higher=better) of the best median metric matching rx for bracket b.
   const rankOf = (s,b,rx) => {
@@ -1590,12 +1629,14 @@ function openSpecFromFinder(cls, spec){
   function whyChips(s, crit){
     const chips = [];
     const primary = brackets()[0];
-    const t = s.consensus?.[primary]?.tier;
+    // chip label follows the same era-aware signal tierScore ranks by
+    const t = state.era === "ptr" ? s.projection?.[primary]?.tier : s.consensus?.[primary]?.tier;
+    const tierWord = state.era === "ptr" ? "projected " : "";
     // Preference-relative chips first (fight type + complexity only appear when the user
     // asked for them) — they confirm the tool honored the explicit ask, so never slice them.
     if(crit.fight != null && crit.fight >= 0.9) chips.push(`fits your ${answers.fight==="st"?"single-target":answers.fight} ask`);
     if(crit.complexity != null && crit.complexity >= 0.7) chips.push(answers.complexity==="deep"?"deep rotation":"simple rotation");
-    if(crit.tier != null && crit.tier >= 0.6 && t) chips.push(`${t}-tier ${primary==="raid"?"raid":"M+"}`);
+    if(crit.tier != null && crit.tier >= 0.6 && t) chips.push(`${tierWord}${t}-tier ${primary==="raid"?"raid":"M+"}`);
     const bLbl = b => b==="raid" ? "raid" : "M+";
     if(crit.throughput != null && crit.throughput >= 0.66){
       const bm = bestMetric(s, s.role==="Healer" ? HPS : DPS);
@@ -1679,7 +1720,14 @@ function openSpecFromFinder(cls, spec){
   function showResults(scroll = true){
     resultsShown = true;
     const box = ov.querySelector("#fresults");
-    box.innerHTML = results().map((r,i)=>{
+    const list = results();
+    const signalNote = state.era === "ptr"
+      ? `<div class="mnote" style="margin:0 0 8px">Strength signal: <b style="color:var(--gold)">our 12.1 projection</b> (Era is set to 12.1 PTR) — a forecast, not a source.</div>`
+      : "";
+    const cmpTop = list.length >= 2
+      ? `<div style="margin:0 0 10px"><button class="cmpbtn" id="finder-cmp-top" type="button">⚖ Compare my top ${Math.min(3, list.length)}</button></div>`
+      : "";
+    box.innerHTML = signalNote + cmpTop + list.map((r,i)=>{
       const color = CLASS_COLOR[r.s.class] || "#888";
       const chips = whyChips(r.s, r.crit).map(c=>`<span class="wchip">${esc(c)}</span>`).join("");
       return `<div class="fres" role="button" tabindex="0" data-cls="${esc(r.s.class)}" data-spec="${esc(r.s.spec)}" aria-label="Open ${esc(r.s.spec)} ${esc(r.s.class)} in the tracker">
@@ -1688,6 +1736,14 @@ function openSpecFromFinder(cls, spec){
         <div class="fscore"><div class="fpct">${Math.round(r.score*100)}</div><div class="fmeter"><span style="width:${Math.round(r.score*100)}%"></span></div></div>
       </div>`;
     }).join("");
+    const cmpTopBtn = box.querySelector("#finder-cmp-top");
+    if(cmpTopBtn) cmpTopBtn.onclick = () => {
+      COMPARE.clear();
+      list.slice(0, 3).forEach(r => COMPARE.add(`${r.s.class}|${r.s.spec}`));
+      document.querySelectorAll(".finder-ov.open").forEach(o=>o.classList.remove("open"));
+      document.body.style.overflow = "";
+      updateTray(); syncCmpButtons(); openCompare();
+    };
     box.querySelectorAll(".fres").forEach(el => {
       el.onclick = () => openSpecFromFinder(el.dataset.cls, el.dataset.spec);
       el.onkeydown = e => { if(e.key==="Enter"||e.key===" "){ e.preventDefault(); openSpecFromFinder(el.dataset.cls, el.dataset.spec); } };
