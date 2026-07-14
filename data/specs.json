@@ -15,7 +15,7 @@
         "method": "C",
         "wowhead": "B",
         "archon": "C",
-        "wowmeta": "B"
+        "wowmeta": "C"
       }
     },
     "ptr": {
@@ -39,33 +39,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 90353.32,
+        "value": 90951,
         "unit": "DPS",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 27.04,
+        "value": 27.35,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3512,
+        "value": 3514,
         "unit": "score",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 10.26,
+        "value": 10.18,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -91,7 +91,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3951,
         "unit": "rating",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "mythicstats",
@@ -99,7 +99,7 @@
         "name": "Top-2000 keys representation",
         "value": 0,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -125,7 +125,7 @@
     "survivability": {
       "tier": "A",
       "source": "archon",
-      "asOf": "2026-07-09"
+      "asOf": "2026-07-14"
     },
     "playstyle": {
       "range": "Melee",
@@ -152,7 +152,7 @@
         "icyveins": "S",
         "method": "C",
         "wowhead": "C",
-        "archon": "A"
+        "archon": "S"
       },
       "mplus": {
         "icyveins": "A",
@@ -168,33 +168,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 165983.45,
+        "value": 167545.6,
         "unit": "DPS",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 2.04,
+        "value": 2.09,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3472,
+        "value": 3460,
         "unit": "score",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 1.5,
+        "value": 1.57,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -220,7 +220,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3967,
         "unit": "rating",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "mythicstats",
@@ -228,7 +228,7 @@
         "name": "Top-2000 keys representation",
         "value": 0,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -261,7 +261,7 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-12",
+      "asOf": "2026-07-14",
       "targets": {
         "1": 133933,
         "2": 176457,
@@ -274,7 +274,7 @@
     "survivability": {
       "tier": "S",
       "source": "archon",
-      "asOf": "2026-07-09"
+      "asOf": "2026-07-14"
     },
     "playstyle": {
       "range": "Melee",
@@ -314,7 +314,7 @@
       },
       "mplus": {
         "icyveins": "S",
-        "method": "S",
+        "method": "A",
         "wowhead": "A+",
         "archon": "S",
         "wowmeta": "S"
@@ -342,33 +342,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 162246.87,
+        "value": 163069.6,
         "unit": "DPS",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 11.48,
+        "value": 11.35,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 4090,
+        "value": 4098,
         "unit": "score",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 12.42,
+        "value": 12.4,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -394,7 +394,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4288,
         "unit": "rating",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "mythicstats",
@@ -402,7 +402,7 @@
         "name": "Top-2000 keys representation",
         "value": 16.6,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -435,7 +435,7 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-12",
+      "asOf": "2026-07-14",
       "targets": {
         "1": 128228,
         "2": 174873,
@@ -448,7 +448,7 @@
     "survivability": {
       "tier": "S",
       "source": "archon",
-      "asOf": "2026-07-09"
+      "asOf": "2026-07-14"
     },
     "playstyle": {
       "range": "Melee",
@@ -492,7 +492,7 @@
         "method": "B",
         "wowhead": "B",
         "archon": "B",
-        "wowmeta": "B"
+        "wowmeta": "C"
       }
     },
     "ptr": null,
@@ -501,33 +501,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 167681.6,
+        "value": 168538.5,
         "unit": "DPS",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 2.41,
+        "value": 2.44,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3594,
+        "value": 3614,
         "unit": "score",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 3.23,
+        "value": 3.21,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -553,7 +553,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4026,
         "unit": "rating",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "mythicstats",
@@ -561,7 +561,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.1,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -594,7 +594,7 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-12",
+      "asOf": "2026-07-14",
       "targets": {
         "1": 119957,
         "2": 155982,
@@ -605,9 +605,9 @@
       }
     },
     "survivability": {
-      "tier": "S",
+      "tier": "A",
       "source": "archon",
-      "asOf": "2026-07-09"
+      "asOf": "2026-07-14"
     },
     "playstyle": {
       "range": "Melee",
@@ -675,33 +675,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 169997.19,
+        "value": 171148.6,
         "unit": "DPS",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 7.97,
+        "value": 7.91,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 4137,
+        "value": 4142,
         "unit": "score",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 7.41,
+        "value": 7.37,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -727,7 +727,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4287,
         "unit": "rating",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "mythicstats",
@@ -735,7 +735,7 @@
         "name": "Top-2000 keys representation",
         "value": 15.4,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -768,7 +768,7 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-12",
+      "asOf": "2026-07-14",
       "targets": {
         "1": 103948,
         "2": 150867,
@@ -781,7 +781,7 @@
     "survivability": {
       "tier": "A",
       "source": "archon",
-      "asOf": "2026-07-09"
+      "asOf": "2026-07-14"
     },
     "playstyle": {
       "range": "Ranged",
@@ -845,33 +845,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 85535.92,
+        "value": 86013.3,
         "unit": "DPS",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 5.95,
+        "value": 5.88,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3480,
+        "value": 3482,
         "unit": "score",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 7.06,
+        "value": 7.22,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -897,7 +897,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3885,
         "unit": "rating",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "mythicstats",
@@ -905,7 +905,7 @@
         "name": "Top-2000 keys representation",
         "value": 0,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -931,7 +931,7 @@
     "survivability": {
       "tier": "A",
       "source": "archon",
-      "asOf": "2026-07-09"
+      "asOf": "2026-07-14"
     },
     "playstyle": {
       "range": "Melee",
@@ -988,33 +988,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 170535.69,
+        "value": 171741.6,
         "unit": "DPS",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 3.72,
+        "value": 3.76,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3485,
+        "value": 3484,
         "unit": "score",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 1.83,
+        "value": 1.91,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -1040,7 +1040,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3939,
         "unit": "rating",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "mythicstats",
@@ -1048,7 +1048,7 @@
         "name": "Top-2000 keys representation",
         "value": 0,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -1081,7 +1081,7 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-12",
+      "asOf": "2026-07-14",
       "targets": {
         "1": 116028,
         "2": 140667,
@@ -1094,7 +1094,7 @@
     "survivability": {
       "tier": "B",
       "source": "archon",
-      "asOf": "2026-07-09"
+      "asOf": "2026-07-14"
     },
     "playstyle": {
       "range": "Ranged",
@@ -1131,14 +1131,14 @@
         "icyveins": "C",
         "method": "B",
         "wowhead": "B",
-        "archon": "B"
+        "archon": "A"
       },
       "mplus": {
         "icyveins": "A+",
-        "method": "S",
+        "method": "A",
         "wowhead": "B",
         "archon": "A",
-        "wowmeta": "C"
+        "wowmeta": "D"
       }
     },
     "ptr": null,
@@ -1147,33 +1147,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 161448.76,
+        "value": 163662.9,
         "unit": "DPS",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 1.19,
+        "value": 1.2,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3922,
+        "value": 3939,
         "unit": "score",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 1.91,
+        "value": 1.93,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -1199,7 +1199,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4153,
         "unit": "rating",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "mythicstats",
@@ -1207,7 +1207,7 @@
         "name": "Top-2000 keys representation",
         "value": 2.3,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -1240,7 +1240,7 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-12",
+      "asOf": "2026-07-14",
       "targets": {
         "1": 133603,
         "2": 158096,
@@ -1253,7 +1253,7 @@
     "survivability": {
       "tier": "B",
       "source": "archon",
-      "asOf": "2026-07-09"
+      "asOf": "2026-07-14"
     },
     "playstyle": {
       "range": "Melee",
@@ -1306,33 +1306,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 99167.78,
+        "value": 99880.2,
         "unit": "DPS",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 20.82,
+        "value": 20.39,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 4062,
+        "value": 4077,
         "unit": "score",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 44.99,
+        "value": 44.68,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -1358,7 +1358,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4284,
         "unit": "rating",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "mythicstats",
@@ -1366,7 +1366,7 @@
         "name": "Top-2000 keys representation",
         "value": 17.2,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -1392,7 +1392,7 @@
     "survivability": {
       "tier": "B",
       "source": "archon",
-      "asOf": "2026-07-09"
+      "asOf": "2026-07-14"
     },
     "playstyle": {
       "range": "Melee",
@@ -1435,33 +1435,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct HPS (Mythic)",
-        "value": 196327.7,
+        "value": 196959.6,
         "unit": "HPS",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 14.33,
+        "value": 14.26,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3400,
+        "value": 3399,
         "unit": "score",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 8.08,
+        "value": 7.89,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -1487,7 +1487,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3910,
         "unit": "rating",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "mythicstats",
@@ -1495,7 +1495,7 @@
         "name": "Top-2000 keys representation",
         "value": 0,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -1530,7 +1530,7 @@
     "survivability": {
       "tier": "C",
       "source": "archon",
-      "asOf": "2026-07-09"
+      "asOf": "2026-07-14"
     },
     "playstyle": {
       "range": "Ranged",
@@ -1589,33 +1589,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 170488.95,
+        "value": 171862.7,
         "unit": "DPS",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 5.47,
+        "value": 5.49,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 4182,
+        "value": 4197,
         "unit": "score",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 4.85,
+        "value": 4.83,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -1641,7 +1641,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4288,
         "unit": "rating",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "mythicstats",
@@ -1649,7 +1649,7 @@
         "name": "Top-2000 keys representation",
         "value": 15.5,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -1675,7 +1675,7 @@
     "survivability": {
       "tier": "B",
       "source": "archon",
-      "asOf": "2026-07-09"
+      "asOf": "2026-07-14"
     },
     "playstyle": {
       "range": "Ranged",
@@ -1712,7 +1712,7 @@
         "archon": "A"
       },
       "mplus": {
-        "icyveins": "B",
+        "icyveins": "C",
         "method": "B",
         "wowhead": "B",
         "archon": "C",
@@ -1738,9 +1738,9 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 164133.25,
+        "value": 165529.8,
         "unit": "DPS",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
@@ -1748,15 +1748,15 @@
         "name": "Popularity",
         "value": 0.55,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3417,
+        "value": 3416,
         "unit": "score",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
@@ -1764,7 +1764,7 @@
         "name": "Popularity",
         "value": 0.54,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -1790,7 +1790,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3921,
         "unit": "rating",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "mythicstats",
@@ -1798,7 +1798,7 @@
         "name": "Top-2000 keys representation",
         "value": 0,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -1831,7 +1831,7 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-12",
+      "asOf": "2026-07-14",
       "targets": {
         "1": 114487,
         "2": 180694,
@@ -1844,7 +1844,7 @@
     "survivability": {
       "tier": "B",
       "source": "archon",
-      "asOf": "2026-07-09"
+      "asOf": "2026-07-14"
     },
     "playstyle": {
       "range": "Ranged",
@@ -1910,33 +1910,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct HPS (Mythic)",
-        "value": 197841.55,
+        "value": 198318.5,
         "unit": "HPS",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 7.39,
+        "value": 7.46,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3450,
+        "value": 3454,
         "unit": "score",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 2.94,
+        "value": 3,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -1962,7 +1962,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3879,
         "unit": "rating",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "mythicstats",
@@ -1970,7 +1970,7 @@
         "name": "Top-2000 keys representation",
         "value": 0,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -2005,7 +2005,7 @@
     "survivability": {
       "tier": "C",
       "source": "archon",
-      "asOf": "2026-07-09"
+      "asOf": "2026-07-14"
     },
     "playstyle": {
       "range": "Ranged",
@@ -2039,7 +2039,7 @@
         "method": "B",
         "wowhead": "B",
         "archon": "B",
-        "wowmeta": "S"
+        "wowmeta": "A"
       }
     },
     "ptr": {
@@ -2064,33 +2064,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 156410.44,
+        "value": 157320.8,
         "unit": "DPS",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 8.69,
+        "value": 8.67,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3659,
+        "value": 3672,
         "unit": "score",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 10.63,
+        "value": 10.59,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -2116,7 +2116,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4034,
         "unit": "rating",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "mythicstats",
@@ -2124,7 +2124,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.2,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -2157,7 +2157,7 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-12",
+      "asOf": "2026-07-14",
       "targets": {
         "1": 121362,
         "2": 143924,
@@ -2170,7 +2170,7 @@
     "survivability": {
       "tier": "C",
       "source": "archon",
-      "asOf": "2026-07-09"
+      "asOf": "2026-07-14"
     },
     "playstyle": {
       "range": "Ranged",
@@ -2209,7 +2209,7 @@
         "archon": "S"
       },
       "mplus": {
-        "icyveins": "B",
+        "icyveins": "C",
         "method": "A",
         "wowhead": "B",
         "archon": "B",
@@ -2238,25 +2238,25 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 170447.9,
+        "value": 171269.1,
         "unit": "DPS",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 2.04,
+        "value": 2.06,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3644,
+        "value": 3659,
         "unit": "score",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
@@ -2264,7 +2264,7 @@
         "name": "Popularity",
         "value": 1.23,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -2290,7 +2290,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3950,
         "unit": "rating",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "mythicstats",
@@ -2298,7 +2298,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.1,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -2331,7 +2331,7 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-12",
+      "asOf": "2026-07-14",
       "targets": {
         "1": 128015,
         "2": 163911,
@@ -2342,9 +2342,9 @@
       }
     },
     "survivability": {
-      "tier": "S",
+      "tier": "A",
       "source": "archon",
-      "asOf": "2026-07-09"
+      "asOf": "2026-07-14"
     },
     "playstyle": {
       "range": "Ranged",
@@ -2383,7 +2383,7 @@
       },
       "mplus": {
         "icyveins": "A+",
-        "method": "S",
+        "method": "A",
         "wowhead": "B",
         "archon": "A",
         "wowmeta": "C"
@@ -2408,33 +2408,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 168043.64,
+        "value": 168890.7,
         "unit": "DPS",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 1.79,
+        "value": 1.77,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3853,
+        "value": 3870,
         "unit": "score",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 2.03,
+        "value": 1.99,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -2460,7 +2460,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4076,
         "unit": "rating",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "mythicstats",
@@ -2468,7 +2468,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.4,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -2501,7 +2501,7 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-12",
+      "asOf": "2026-07-14",
       "targets": {
         "1": 118350,
         "2": 185852,
@@ -2514,7 +2514,7 @@
     "survivability": {
       "tier": "B",
       "source": "archon",
-      "asOf": "2026-07-09"
+      "asOf": "2026-07-14"
     },
     "playstyle": {
       "range": "Melee",
@@ -2580,17 +2580,17 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 154658.33,
+        "value": 156090.2,
         "unit": "DPS",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 0.39,
+        "value": 0.43,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
@@ -2598,15 +2598,15 @@
         "name": "M+ score (95th pct)",
         "value": 3631,
         "unit": "score",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 1.6,
+        "value": 1.74,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -2632,7 +2632,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3881,
         "unit": "rating",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "mythicstats",
@@ -2640,7 +2640,7 @@
         "name": "Top-2000 keys representation",
         "value": 0,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -2673,7 +2673,7 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-12",
+      "asOf": "2026-07-14",
       "targets": {
         "1": 113188,
         "2": 176897,
@@ -2686,7 +2686,7 @@
     "survivability": {
       "tier": "B",
       "source": "archon",
-      "asOf": "2026-07-09"
+      "asOf": "2026-07-14"
     },
     "playstyle": {
       "range": "Ranged",
@@ -2725,7 +2725,7 @@
         "archon": "A"
       },
       "mplus": {
-        "icyveins": "B",
+        "icyveins": "C",
         "method": "C",
         "wowhead": "B",
         "archon": "B",
@@ -2752,25 +2752,25 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 162786.88,
+        "value": 163919.4,
         "unit": "DPS",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 0.52,
+        "value": 0.53,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3623,
+        "value": 3625,
         "unit": "score",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
@@ -2778,7 +2778,7 @@
         "name": "Popularity",
         "value": 0.55,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -2804,7 +2804,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3811,
         "unit": "rating",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "mythicstats",
@@ -2812,7 +2812,7 @@
         "name": "Top-2000 keys representation",
         "value": 0,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -2845,7 +2845,7 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-12",
+      "asOf": "2026-07-14",
       "targets": {
         "1": 114776,
         "2": 165657,
@@ -2858,7 +2858,7 @@
     "survivability": {
       "tier": "A",
       "source": "archon",
-      "asOf": "2026-07-09"
+      "asOf": "2026-07-14"
     },
     "playstyle": {
       "range": "Ranged",
@@ -2905,39 +2905,55 @@
         "wowmeta": "A"
       }
     },
-    "ptr": null,
+    "ptr": {
+      "verdict": "Mixed",
+      "theme": "Damage up, survivability down",
+      "summary": "A flat 4% damage buff and a tier set that adds real rotation variety land alongside a defensive pass Dorovon calls a net nerf specifically for Frost — Improved Ice Barrier loses its HP bonus, Temporal Realignment's redesign is less reliable for preventing surprise deaths, and he closes that Frost will keep struggling to survive in Season 2.",
+      "changes": [
+        "All damage dealt increased by 4%.",
+        "New talent Improved Warding: reduces AoE damage taken by 4% — helps but Dorovon calls it inconsistent.",
+        "Temporal Realignment redesigned: now immediately heals 20% health + an additional 30% over 6s, but the new form is less reliable for preventing unexpected deaths than the old design.",
+        "Improved Ice Barrier redesigned: gains an additional charge and reduces physical damage taken by 10%, but loses its prior 5% max-HP bonus — a real survivability hit.",
+        "Hand of Frost (Rank 2) burst nerfed: 0.5%/1% increased spell damage, down from 1%/2% — developers cited it as addressing excessive burst damage."
+      ],
+      "set2": "Each stack of Freezing Shattered has a 5% chance to generate an Icicle; Glacial Spike damage increased by 25%.",
+      "set4": "Casting Glacial Spike has a chance to rapidly generate 5 Icicles over 1s; Shatter damage increased by 10%. Dorovon flags a mechanical flaw — the bonus procs off a 2-RPPM system that behaves inconsistently and often fails to respect bad-luck protection.",
+      "watch": "Dorovon: \"the defensive changes in 12.1 are arguably a nerf to Frost specifically\" despite Blizzard's stated goal of improving overall Mage survivability — closing verdict is that \"Frost is just going to continue to struggle to survive in Season 2.\"",
+      "sourceLabel": "Wowhead — Dorovon (Frost Mage guide writer)",
+      "source": "https://www.wowhead.com/news=382151/a-reduction-in-defensives-frost-mage-class-changes-and-tier-set-review"
+    },
     "metrics": [
       {
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 167603.17,
+        "value": 168640.6,
         "unit": "DPS",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 10.43,
+        "value": 10.4,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3603,
+        "value": 3609,
         "unit": "score",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 6.55,
+        "value": 6.5,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -2963,7 +2979,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4017,
         "unit": "rating",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "mythicstats",
@@ -2971,7 +2987,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.1,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -3004,7 +3020,7 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-12",
+      "asOf": "2026-07-14",
       "targets": {
         "1": 116986,
         "2": 145476,
@@ -3017,7 +3033,7 @@
     "survivability": {
       "tier": "C",
       "source": "archon",
-      "asOf": "2026-07-09"
+      "asOf": "2026-07-14"
     },
     "playstyle": {
       "range": "Ranged",
@@ -3061,7 +3077,7 @@
         "method": "S",
         "wowhead": "A",
         "archon": "A",
-        "wowmeta": "B"
+        "wowmeta": "A"
       }
     },
     "ptr": null,
@@ -3070,33 +3086,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 86028.19,
+        "value": 86680.6,
         "unit": "DPS",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 19.1,
+        "value": 18.92,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3878,
+        "value": 3923,
         "unit": "score",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 11.23,
+        "value": 10.92,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -3122,7 +3138,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4167,
         "unit": "rating",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "mythicstats",
@@ -3130,7 +3146,7 @@
         "name": "Top-2000 keys representation",
         "value": 2.8,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -3156,7 +3172,7 @@
     "survivability": {
       "tier": "B",
       "source": "archon",
-      "asOf": "2026-07-09"
+      "asOf": "2026-07-14"
     },
     "playstyle": {
       "range": "Melee",
@@ -3187,10 +3203,10 @@
       },
       "mplus": {
         "icyveins": "S",
-        "method": "A",
+        "method": "S",
         "wowhead": "S",
         "archon": "S",
-        "wowmeta": "S"
+        "wowmeta": "A"
       }
     },
     "ptr": {
@@ -3213,33 +3229,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct HPS (Mythic)",
-        "value": 203274.13,
+        "value": 204255,
         "unit": "HPS",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 21.34,
+        "value": 21.38,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 4095,
+        "value": 4123,
         "unit": "score",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 29.37,
+        "value": 29.33,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -3265,7 +3281,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4288,
         "unit": "rating",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "mythicstats",
@@ -3273,7 +3289,7 @@
         "name": "Top-2000 keys representation",
         "value": 15.5,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -3308,7 +3324,7 @@
     "survivability": {
       "tier": "C",
       "source": "archon",
-      "asOf": "2026-07-09"
+      "asOf": "2026-07-14"
     },
     "playstyle": {
       "range": "Ranged",
@@ -3365,9 +3381,9 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 166819.09,
+        "value": 167402.5,
         "unit": "DPS",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
@@ -3375,23 +3391,23 @@
         "name": "Popularity",
         "value": 2.21,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3587,
+        "value": 3592,
         "unit": "score",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 1.83,
+        "value": 1.81,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -3417,7 +3433,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4018,
         "unit": "rating",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "mythicstats",
@@ -3425,7 +3441,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.2,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -3458,7 +3474,7 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-12",
+      "asOf": "2026-07-14",
       "targets": {
         "1": 118210,
         "2": 167690,
@@ -3471,7 +3487,7 @@
     "survivability": {
       "tier": "C",
       "source": "archon",
-      "asOf": "2026-07-09"
+      "asOf": "2026-07-14"
     },
     "playstyle": {
       "range": "Melee",
@@ -3515,7 +3531,7 @@
         "method": "B",
         "wowhead": "A",
         "archon": "C",
-        "wowmeta": "B"
+        "wowmeta": "C"
       }
     },
     "ptr": {
@@ -3539,33 +3555,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct HPS (Mythic)",
-        "value": 177953.39,
+        "value": 178618.4,
         "unit": "HPS",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 11.29,
+        "value": 11.2,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3564,
+        "value": 3559,
         "unit": "score",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 8.64,
+        "value": 8.55,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -3591,7 +3607,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3957,
         "unit": "rating",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "mythicstats",
@@ -3599,7 +3615,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.1,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -3634,7 +3650,7 @@
     "survivability": {
       "tier": "C",
       "source": "archon",
-      "asOf": "2026-07-09"
+      "asOf": "2026-07-14"
     },
     "playstyle": {
       "range": "Ranged",
@@ -3668,7 +3684,7 @@
         "method": "B",
         "wowhead": "A",
         "archon": "C",
-        "wowmeta": "A"
+        "wowmeta": "B"
       }
     },
     "ptr": {
@@ -3693,17 +3709,17 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 87253.93,
+        "value": 87437,
         "unit": "DPS",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 7.69,
+        "value": 7.91,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
@@ -3711,15 +3727,15 @@
         "name": "M+ score (95th pct)",
         "value": 3435,
         "unit": "score",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 16.62,
+        "value": 17.13,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -3745,7 +3761,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3923,
         "unit": "rating",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "mythicstats",
@@ -3753,7 +3769,7 @@
         "name": "Top-2000 keys representation",
         "value": 0,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -3779,7 +3795,7 @@
     "survivability": {
       "tier": "C",
       "source": "archon",
-      "asOf": "2026-07-09"
+      "asOf": "2026-07-14"
     },
     "playstyle": {
       "range": "Melee",
@@ -3838,33 +3854,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 159490.62,
+        "value": 160548.7,
         "unit": "DPS",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 8.4,
+        "value": 8.34,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3879,
+        "value": 3884,
         "unit": "score",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 11.89,
+        "value": 11.83,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -3890,7 +3906,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4151,
         "unit": "rating",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "mythicstats",
@@ -3898,7 +3914,7 @@
         "name": "Top-2000 keys representation",
         "value": 2.1,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -3931,7 +3947,7 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-12",
+      "asOf": "2026-07-14",
       "targets": {
         "1": 111859,
         "2": 139719,
@@ -3944,7 +3960,7 @@
     "survivability": {
       "tier": "B",
       "source": "archon",
-      "asOf": "2026-07-09"
+      "asOf": "2026-07-14"
     },
     "playstyle": {
       "range": "Melee",
@@ -3988,7 +4004,7 @@
         "method": "B",
         "wowhead": "B",
         "archon": "A",
-        "wowmeta": "A"
+        "wowmeta": "C"
       }
     },
     "ptr": {
@@ -4013,33 +4029,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct HPS (Mythic)",
-        "value": 201168.34,
+        "value": 202506,
         "unit": "HPS",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 15.09,
+        "value": 15.18,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3793,
+        "value": 3806,
         "unit": "score",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 15.52,
+        "value": 15.66,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -4065,7 +4081,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4073,
         "unit": "rating",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "mythicstats",
@@ -4073,7 +4089,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.4,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -4108,7 +4124,7 @@
     "survivability": {
       "tier": "C",
       "source": "archon",
-      "asOf": "2026-07-09"
+      "asOf": "2026-07-14"
     },
     "playstyle": {
       "range": "Ranged",
@@ -4142,7 +4158,7 @@
         "method": "C",
         "wowhead": "B",
         "archon": "C",
-        "wowmeta": "C"
+        "wowmeta": "D"
       }
     },
     "ptr": null,
@@ -4151,33 +4167,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct HPS (Mythic)",
-        "value": 184107.43,
+        "value": 185117.2,
         "unit": "HPS",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 8.92,
+        "value": 8.96,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3471,
+        "value": 3479,
         "unit": "score",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 5.38,
+        "value": 5.4,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -4203,7 +4219,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3838,
         "unit": "rating",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "mythicstats",
@@ -4211,7 +4227,7 @@
         "name": "Top-2000 keys representation",
         "value": 0,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -4246,7 +4262,7 @@
     "survivability": {
       "tier": "S",
       "source": "archon",
-      "asOf": "2026-07-09"
+      "asOf": "2026-07-14"
     },
     "playstyle": {
       "range": "Ranged",
@@ -4280,7 +4296,7 @@
         "method": "B",
         "wowhead": "C",
         "archon": "A",
-        "wowmeta": "B"
+        "wowmeta": "C"
       }
     },
     "ptr": {
@@ -4303,33 +4319,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 159812.71,
+        "value": 160782.5,
         "unit": "DPS",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 3.09,
+        "value": 3.11,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3795,
+        "value": 3814,
         "unit": "score",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 2.82,
+        "value": 2.86,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -4355,7 +4371,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4059,
         "unit": "rating",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "mythicstats",
@@ -4363,7 +4379,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.3,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -4396,7 +4412,7 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-12",
+      "asOf": "2026-07-14",
       "targets": {
         "1": 117612,
         "2": 168841,
@@ -4409,7 +4425,7 @@
     "survivability": {
       "tier": "B",
       "source": "archon",
-      "asOf": "2026-07-09"
+      "asOf": "2026-07-14"
     },
     "playstyle": {
       "range": "Ranged",
@@ -4478,33 +4494,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 156676.26,
+        "value": 157292,
         "unit": "DPS",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 0.47,
+        "value": 0.48,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3810,
+        "value": 3823,
         "unit": "score",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 0.91,
+        "value": 0.92,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -4530,7 +4546,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4018,
         "unit": "rating",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "mythicstats",
@@ -4538,7 +4554,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.2,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -4571,7 +4587,7 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-12",
+      "asOf": "2026-07-14",
       "targets": {
         "1": 107681,
         "2": 120092,
@@ -4582,9 +4598,9 @@
       }
     },
     "survivability": {
-      "tier": "A",
+      "tier": "B",
       "source": "archon",
-      "asOf": "2026-07-09"
+      "asOf": "2026-07-14"
     },
     "playstyle": {
       "range": "Melee",
@@ -4650,33 +4666,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 158955.26,
+        "value": 160854.8,
         "unit": "DPS",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 0.58,
+        "value": 0.57,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3936,
+        "value": 3942,
         "unit": "score",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 1.12,
+        "value": 1.11,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -4702,7 +4718,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4147,
         "unit": "rating",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "mythicstats",
@@ -4710,7 +4726,7 @@
         "name": "Top-2000 keys representation",
         "value": 1.6,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -4743,7 +4759,7 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-12",
+      "asOf": "2026-07-14",
       "targets": {
         "1": 127039,
         "2": 160702,
@@ -4756,7 +4772,7 @@
     "survivability": {
       "tier": "A",
       "source": "archon",
-      "asOf": "2026-07-09"
+      "asOf": "2026-07-14"
     },
     "playstyle": {
       "range": "Melee",
@@ -4797,7 +4813,7 @@
       },
       "mplus": {
         "icyveins": "A",
-        "method": "S",
+        "method": "A",
         "wowhead": "B",
         "archon": "A",
         "wowmeta": "C"
@@ -4823,9 +4839,9 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 164446.52,
+        "value": 165820.2,
         "unit": "DPS",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
@@ -4833,23 +4849,23 @@
         "name": "Popularity",
         "value": 3.69,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3728,
+        "value": 3755,
         "unit": "score",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 2.15,
+        "value": 2.14,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -4875,7 +4891,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4001,
         "unit": "rating",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "mythicstats",
@@ -4883,7 +4899,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.2,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -4916,7 +4932,7 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-12",
+      "asOf": "2026-07-14",
       "targets": {
         "1": 123476,
         "2": 152387,
@@ -4927,9 +4943,9 @@
       }
     },
     "survivability": {
-      "tier": "A",
+      "tier": "B",
       "source": "archon",
-      "asOf": "2026-07-09"
+      "asOf": "2026-07-14"
     },
     "playstyle": {
       "range": "Melee",
@@ -4981,33 +4997,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 163581.73,
+        "value": 164480.6,
         "unit": "DPS",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 4.56,
+        "value": 4.6,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3754,
+        "value": 3767,
         "unit": "score",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 3.96,
+        "value": 4,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -5033,7 +5049,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4053,
         "unit": "rating",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "mythicstats",
@@ -5041,7 +5057,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.3,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -5087,7 +5103,7 @@
     "survivability": {
       "tier": "S",
       "source": "archon",
-      "asOf": "2026-07-09"
+      "asOf": "2026-07-14"
     },
     "playstyle": {
       "range": "Ranged",
@@ -5129,7 +5145,7 @@
         "method": "B",
         "wowhead": "B",
         "archon": "A",
-        "wowmeta": "B"
+        "wowmeta": "C"
       }
     },
     "ptr": {
@@ -5154,33 +5170,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 162189.39,
+        "value": 163444.7,
         "unit": "DPS",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 1.47,
+        "value": 1.46,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3830,
+        "value": 3852,
         "unit": "score",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 3.25,
+        "value": 3.3,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -5206,7 +5222,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4054,
         "unit": "rating",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "mythicstats",
@@ -5214,7 +5230,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.4,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -5247,7 +5263,7 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-12",
+      "asOf": "2026-07-14",
       "targets": {
         "1": 112715,
         "2": 164447,
@@ -5260,7 +5276,7 @@
     "survivability": {
       "tier": "A",
       "source": "archon",
-      "asOf": "2026-07-09"
+      "asOf": "2026-07-14"
     },
     "playstyle": {
       "range": "Melee",
@@ -5327,33 +5343,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct HPS (Mythic)",
-        "value": 176440.62,
+        "value": 177595.1,
         "unit": "HPS",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 21.64,
+        "value": 21.56,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3939,
+        "value": 3946,
         "unit": "score",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 30.07,
+        "value": 30.16,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -5379,7 +5395,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4182,
         "unit": "rating",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "mythicstats",
@@ -5387,7 +5403,7 @@
         "name": "Top-2000 keys representation",
         "value": 4,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -5422,7 +5438,7 @@
     "survivability": {
       "tier": "B",
       "source": "archon",
-      "asOf": "2026-07-09"
+      "asOf": "2026-07-14"
     },
     "playstyle": {
       "range": "Ranged",
@@ -5465,33 +5481,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 156998.57,
+        "value": 157937.7,
         "unit": "DPS",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 1.13,
+        "value": 1.16,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3592,
+        "value": 3594,
         "unit": "score",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 2.02,
+        "value": 2.05,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -5517,7 +5533,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3919,
         "unit": "rating",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "mythicstats",
@@ -5525,7 +5541,7 @@
         "name": "Top-2000 keys representation",
         "value": 0,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -5558,7 +5574,7 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-12",
+      "asOf": "2026-07-14",
       "targets": {
         "1": 114127,
         "2": 153940,
@@ -5571,7 +5587,7 @@
     "survivability": {
       "tier": "B",
       "source": "archon",
-      "asOf": "2026-07-09"
+      "asOf": "2026-07-14"
     },
     "playstyle": {
       "range": "Ranged",
@@ -5624,33 +5640,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 163102.99,
+        "value": 163968,
         "unit": "DPS",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 8.05,
+        "value": 8.04,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3792,
+        "value": 3807,
         "unit": "score",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 6.33,
+        "value": 6.19,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -5676,7 +5692,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4082,
         "unit": "rating",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "mythicstats",
@@ -5684,7 +5700,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.2,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -5717,7 +5733,7 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-12",
+      "asOf": "2026-07-14",
       "targets": {
         "1": 118513,
         "2": 205765,
@@ -5730,7 +5746,7 @@
     "survivability": {
       "tier": "B",
       "source": "archon",
-      "asOf": "2026-07-09"
+      "asOf": "2026-07-14"
     },
     "playstyle": {
       "range": "Ranged",
@@ -5782,25 +5798,25 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 163250.83,
+        "value": 164340.7,
         "unit": "DPS",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 0.99,
+        "value": 1.03,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3431,
+        "value": 3441,
         "unit": "score",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
@@ -5808,7 +5824,7 @@
         "name": "Popularity",
         "value": 0.88,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -5834,7 +5850,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3738,
         "unit": "rating",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "mythicstats",
@@ -5842,7 +5858,7 @@
         "name": "Top-2000 keys representation",
         "value": 0,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -5875,7 +5891,7 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-12",
+      "asOf": "2026-07-14",
       "targets": {
         "1": 114984,
         "2": 147682,
@@ -5888,7 +5904,7 @@
     "survivability": {
       "tier": "A",
       "source": "archon",
-      "asOf": "2026-07-09"
+      "asOf": "2026-07-14"
     },
     "playstyle": {
       "range": "Ranged",
@@ -5957,25 +5973,25 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 164073.07,
+        "value": 164860.7,
         "unit": "DPS",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 2.3,
+        "value": 2.29,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 4015,
+        "value": 4029,
         "unit": "score",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
@@ -5983,7 +5999,7 @@
         "name": "Popularity",
         "value": 2.86,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -6009,7 +6025,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4182,
         "unit": "rating",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "mythicstats",
@@ -6017,7 +6033,7 @@
         "name": "Top-2000 keys representation",
         "value": 3.4,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -6050,7 +6066,7 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-12",
+      "asOf": "2026-07-14",
       "targets": {
         "1": 112641,
         "2": 156775,
@@ -6063,7 +6079,7 @@
     "survivability": {
       "tier": "B",
       "source": "archon",
-      "asOf": "2026-07-09"
+      "asOf": "2026-07-14"
     },
     "playstyle": {
       "range": "Melee",
@@ -6132,33 +6148,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 160095.12,
+        "value": 161018.9,
         "unit": "DPS",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 4.37,
+        "value": 4.38,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3790,
+        "value": 3816,
         "unit": "score",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 3.69,
+        "value": 3.68,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -6184,7 +6200,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4069,
         "unit": "rating",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "mythicstats",
@@ -6192,7 +6208,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.3,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -6225,7 +6241,7 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-12",
+      "asOf": "2026-07-14",
       "targets": {
         "1": 119613,
         "2": 138632,
@@ -6238,7 +6254,7 @@
     "survivability": {
       "tier": "B",
       "source": "archon",
-      "asOf": "2026-07-09"
+      "asOf": "2026-07-14"
     },
     "playstyle": {
       "range": "Melee",
@@ -6306,33 +6322,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 95766.2,
+        "value": 96427,
         "unit": "DPS",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 19.4,
+        "value": 19.55,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3483,
+        "value": 3484,
         "unit": "score",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 9.84,
+        "value": 9.87,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -6358,7 +6374,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3931,
         "unit": "rating",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "mythicstats",
@@ -6366,7 +6382,7 @@
         "name": "Top-2000 keys representation",
         "value": 0,
         "unit": "%",
-        "asOf": "2026-07-12"
+        "asOf": "2026-07-14"
       },
       {
         "source": "warcraftlogs",
@@ -6392,7 +6408,7 @@
     "survivability": {
       "tier": "S",
       "source": "archon",
-      "asOf": "2026-07-09"
+      "asOf": "2026-07-14"
     },
     "playstyle": {
       "range": "Melee",
