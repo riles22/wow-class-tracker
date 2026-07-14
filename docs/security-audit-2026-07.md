@@ -58,13 +58,21 @@ cuts at 07-09 — and still went green. Now:
   Blizzard mass retune passes only via an explicit, cited `anomalyAck` that lands in
   the run report.
 
-### 3. WCL data stale-by-design on GitHub runners — **alerting addressed; runner choice is the owner's**
+### 3. WCL data stale-by-design on GitHub runners — **alerting addressed; root cause pinned; runner choice is the owner's**
 
 - Staleness is now measured and alerted (10-day threshold on every WCL cut) instead of
   silent: the heartbeat files/updates an issue and goes red — the audit's "open an
   automated issue when WCL remains unavailable for multiple runs".
 - The manifest (committed nightly) is the current/stale/unavailable status surface;
   drawers already carry per-metric asOf dates.
+- **Root cause resolved to a precise upstream bug (2026-07-14):** Cloudflare transport
+  from datacenter runners is SOLVED (header recipe in the refresh-metrics skill), and
+  the remaining blocker is WCL-side — the v2 API's `characterRankings` 500s on the
+  whole rDPS metric family (`rdps`/`ndps`/`cdps`/`bossrdps`) on every encounter while
+  `dps`/`hps`/`default` work; `default` was probe-verified to be plain dps, so no honest
+  workaround exists. A dispatch-only diagnostic (`.github/workflows/wcl-probe.yml` →
+  `src/wcl-probe.mjs`) re-checks in ~20s. **Owner option:** report the repro to WCL
+  (any v2 client-credentials query with `metric: rdps` → "Internal server error").
 - **Owner option, not doable from the repo:** a self-hosted runner on the residential
   connection for WCL acquisition, or keep the manual local catch-up runs. If a
   self-hosted runner is added, keep it for the *fetch* stage only.

@@ -58,6 +58,31 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
   Referer. The sanctioned path is a free v2 GraphQL client (warcraftlogs.com/api/v2/client)
   — the runner uses it (datacenter IPs get Cloudflare-blocked on the HTML endpoint); the
   HTML endpoint works from a residential IP for local runs.
+- **WCL v2 API status (2026-07-14, probe-verified — read before re-deriving ANY of it):**
+  - **Transport is SOLVED from datacenter runners.** Recipe: browser `User-Agent` on the
+    `POST /oauth/token` call; `Origin: https://www.warcraftlogs.com` +
+    `Referer: https://www.warcraftlogs.com/` + a `sec-ch-ua` header on the
+    `/api/v2/client` POST. Without these, Cloudflare silently empty-bodies the token
+    call and 403-challenges the GraphQL call. Reference implementation: `src/wcl-probe.mjs`.
+  - **The blocker is WCL-side, not ours:** `characterRankings` throws a bare
+    "Internal server error" for the entire redistributed-credit metric family
+    (`rdps`/`ndps`/`cdps`/`bossrdps`) on EVERY encounter — live zone 46 and PTR zone 52
+    alike — while `dps`/`hps`/`wdps`/`default` work. Bisected argument-by-argument
+    (className/specName/difficulty/partition all fine) and reproduced deterministically.
+  - **`metric: default` is NOT a workaround:** probe-verified byte-identical to plain
+    `dps` (joined by character name, 0.00% delta on live and dummy encounters). Do not
+    substitute `dps`-family numbers under the rDPS-labeled series (honest source
+    typing), and do not rebuild statistics-table medians from rankings pages — the
+    leaderboard is a paginated top-parses list (`count` is page-local), not the parse
+    population, and zone 54's cross-boss normalized score has no API analogue at all.
+  - **Standing behavior until WCL fixes it:** ONE cheap retry per run (a single
+    `metric: rdps` query on a known-good encounter, e.g. 3176); if still 500, record
+    the five WCL manifest rows as `unreachable` with this reason and leave data
+    unchanged. The dispatch-only workflow **"WCL API probe (diagnostic)"**
+    (`.github/workflows/wcl-probe.yml`) re-checks the whole picture in ~20s. If rdps
+    starts working: zone 52 (single encounter per target count, small population) is
+    the first candidate for an API-median recipe — validate full-population coverage
+    by paginating to the end and comparing counts before trusting any median.
 - **Zone 54 is the 12.1 PTR raid** (Venomous Abyss), zone 56 M+ S2 PTR — PTR-quality
   data. **Zone 52 is "Dummy Dome"** — a target-dummy sim harness (Sinister Single 1T /
   Diabolical Duo 2T / Terrible Trio 3T / Fearsome Five 5T / Hazardous Healer), NOT a raid;
