@@ -192,6 +192,10 @@ snapshot/asOf dates, so quiet skips and dishonest rows fail the publish. **Every
 refresh — nightly or local — ends by updating the manifest**; the freshness heartbeat
 (`.github/workflows/freshness.yml` → `check-refresh --age`) also accepts a new history
 snapshot as proof of life, and alerts (issue + red run) on staleness past thresholds.
+The committed manifest is always the PREVIOUS run's record — never evidence about the
+current run, and its standing skip/unreachable explanations never excuse skipping
+again: each run attempts every requirement fresh and rewrites the file (fresh `run` +
+`startedAt`); the nightly publish gate hard-fails on an unchanged manifest file.
 
 ### Tier lists (every `tier-list` source — currently Icy Veins / Method / Wowhead / Archon / WoWMeta)
 1. Fetch each page in `sources.json` live; era-verify (Midnight S1, Devourer in DPS lists).
