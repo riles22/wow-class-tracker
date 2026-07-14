@@ -30,6 +30,13 @@ say so and change nothing.
    verdict must be the source's own read, never your editorial call; if the source
    gives no clear verdict, don't write a writeup from it. Don't rewrite an existing
    writeup wholesale on tuning-only changes — append to `changes[]` / adjust `watch`.
+   **WCL runner status (2026-07-14, applies to steps 5-7):** the HTML statistics URLs
+   below work from residential IPs (local runs); on datacenter runners use the v2
+   GraphQL API — but its rDPS-family metrics currently 500 server-side, so these cuts
+   are expected `unreachable` from CI until WCL fixes it. The proven transport recipe,
+   the full bug status, the retry protocol, and the probe workflow are documented ONCE
+   in the refresh-metrics SKILL.md ("WCL v2 API status") — read that before spending
+   any run time re-deriving WCL behavior.
 5. **WCL PTR raid testing (zone 54)**: verified working URL (2026-07-01, Heroic —
    where testing currently happens; Mythic is empty until those windows open):
    `warcraftlogs.com/zone/statistics/table/54/dps/0/4/10/1/1000/1/14/0/DPS/Any/All/0/normalized/single/0/-1/?keystone=15&dpstype=rdps`
