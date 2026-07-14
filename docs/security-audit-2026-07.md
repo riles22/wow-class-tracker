@@ -115,6 +115,21 @@ README now says Node 20+ (matching `package.json` engines); MIT `LICENSE` added 
 README note that the aggregated data stays the publishers'; `.github/dependabot.yml`
 covers github-actions + pip.
 
+## Shakeout results (2026-07-14, first supervised run of the new pipeline)
+
+The architecture verified end to end on a manual dispatch: the de-privileged agent job
+ran clean under `contents: read` (pinned action, pinned yt-dlp, artifact handoff), and
+the publish job's three gates, no-op commit logic, and conditional deploy all behaved.
+The run also exposed one behavioral hole: the agent found the seed manifest already
+dated "today", treated it as proof the run had happened, and no-opped in under four
+minutes — inheriting the standing "skipped" explanations without attempting the work.
+Fixed the same day: the prompt now states the committed manifest is the *previous*
+run's record and must be rebuilt from each run's own outcomes (with a fresh
+`startedAt`), and the publish gate hard-fails if `data/run-manifest.json` is unchanged
+from the committed copy. Run history from the same investigation: the old architecture
+went green on 07-10, 07-11, and 07-13 while committing nothing — the manifest
+requirement now makes a verifiable no-op impossible.
+
 ## Owner actions (not possible from repo files)
 
 1. **Branch protection on master** — require the `Tests` check. Note the nightly

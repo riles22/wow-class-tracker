@@ -142,11 +142,17 @@ jobs:
                source's edits (`git checkout -- <files>`) and record it as parse_error
                in the manifest.
 
-            5. Write data/run-manifest.json EVERY run — even a no-changes run. It is the
-               machine-readable contract the publish gate (src/check-refresh.mjs)
+            5. Write data/run-manifest.json EVERY run — even a no-changes run. The
+               committed manifest you find in the repo is the PREVIOUS run's record:
+               it is NEVER evidence about this run, and a standing skipped/unreachable
+               explanation in it NEVER excuses skipping this run — attempt every
+               requirement fresh, then rebuild the file from scratch from THIS run's
+               own outcomes (the publish gate fails if the file is unchanged). It is
+               the machine-readable contract the publish gate (src/check-refresh.mjs)
                enforces against data/required-sources.json:
                  {
                    "run": "<today UTC, YYYY-MM-DD>",
+                   "startedAt": "<this run's start, full UTC ISO 8601 — proves a fresh write>",
                    "summary": "<one line, <=180 chars — becomes the commit message>",
                    "sources": [ ONE row per requirement key in data/required-sources.json:
                      { "source": "<key>", "result": "success|partial|unreachable|blocked|parse_error|skipped",
@@ -256,7 +262,16 @@ jobs:
       - name: "Gate 2: build"
         run: npm run build
       - name: "Gate 3: refresh contract (manifest · completeness · anomaly)"
-        run: node src/check-refresh.mjs --manifest
+        run: |
+          # The agent must have REWRITTEN the manifest this run. An unchanged file
+          # means it free-rode on the previous run's record instead of doing
+          # verifiable work — exactly what the first shakeout run did (2026-07-14):
+          # it read a manifest already dated "today" and concluded it was done.
+          if git diff --quiet -- data/run-manifest.json; then
+            echo "::error::data/run-manifest.json is unchanged from the committed copy — the refresh agent did not write a fresh manifest this run"
+            exit 1
+          fi
+          node src/check-refresh.mjs --manifest
 
       - name: Snapshot movement baseline (only when data beyond the manifest changed)
         run: |
