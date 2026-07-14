@@ -4,6 +4,59 @@ Keep the newest ~20 entries; prune older ones when appending. Machine state the 
 detectors rely on (parse counts, seen video IDs) must stay in the NEWEST entries or a
 dedicated section — narrative prose older than that is prunable memory.
 
+- 2026-07-14 (second nightly run, later cycle, CI runner — Sonnet 5) · builds found: **0 new.**
+  Forum thread (topic 2317811) newest post still **#13** (Linxy, 2026-07-09 00:08Z) —
+  highest_post_number=13, posts_count=11, byte-identical again. Wowhead RSS since the
+  earlier 07-14 run's 07-13 16:28 recap check: five new items, all non-tuning — "What is
+  Classic+?" (382163), SoD community event extension (382162), Classic+ flight-paths
+  op-ed (382154), "More Mythic Venomous Abyss Raid Testing on July 16th" (382157 —
+  informational testing-schedule note, not class tuning), "The Big Haranir Revelation"
+  lore piece (382153). No new writeup-material articles → no specs.json changes this
+  cycle (Frost Mage's writeup from the earlier 07-14 run stands; PTR-tracked specs
+  still 29). · **WCL API: MAJOR BREAKTHROUGH on reachability, but a new precise
+  blocker found.** Both prior blanket findings ("Cloudflare 403s the HTML endpoint from
+  this datacenter IP" and "GraphQL returns bare Internal server error") turned out to
+  be conflatable — re-tested from scratch per this run's mandate to use ONLY the v2
+  GraphQL API: (1) `POST /oauth/token` was silently getting Cloudflare-blocked (empty
+  body) with a bare curl call — adding a real browser `User-Agent` fixed OAuth
+  immediately (token issued, scopes view-user-profile/view-private-reports). (2) The
+  GraphQL `/api/v2/client` endpoint was ALSO being Cloudflare-blocked (403 challenge
+  page) even with a valid bearer token and UA — adding `Origin: https://www.warcraftlogs.com`,
+  `Referer: https://www.warcraftlogs.com/`, and a `sec-ch-ua` header cleared that block
+  too (confirmed via `rateLimitData` returning real JSON). **So the API itself is fully
+  reachable this run** — a first, and worth keeping these headers in the standing recipe.
+  (3) With the transport fixed, isolated the actual `characterRankings` failure by
+  bisecting arguments one at a time on a known-good LIVE encounter (3176 Imperator
+  Averzian) and independently on PTR encounter 3591 (zone 52 dummy): className,
+  specName, partition, and difficulty args all work fine; the failure is the **`metric`
+  argument value itself** — `metric: rdps` (and its siblings `ndps`, `cdps`, `bossrdps`,
+  i.e. the composite/redistributed-credit metric family) throws "Internal server error"
+  on EVERY encounter tried, while `metric: dps`, `hps`, `wdps`, and `default` all return
+  normal paginated rankings. This is a genuine, narrow, reproducible server-side bug/gap
+  in WCL's v2 API for the rDPS-family metrics specifically — not an auth, transport, or
+  query-shape problem. Since every existing WCL metric in this tracker (zone 54 raid
+  testing score, zone 52 Dummy Dome medians, zone 56 M+ testing) is methodologically
+  rDPS (external-cooldown-redistributed damage, matching the retired HTML endpoint's
+  `dpstype=rdps`), silently substituting raw `dps` under the same metric names would
+  quietly change what's being measured — a Honest-source-typing violation — so per
+  policy this was NOT done. Additionally, even if rdps worked, zone 54's cross-boss
+  normalized 0–100 score has no GraphQL analogue at all (`characterRankings` is a
+  single-encounter per-(class,spec) leaderboard, paginated ~100/page; reconstructing
+  WCL's own cross-boss normalization algorithm from raw pages would be inventing an
+  unvalidated statistic, not fetching one) — so full parity would still be impractical
+  even with a working rdps field. **Net outcome: zone-54 (all 3 roles), zone-52, and
+  zone-56 data all LEFT UNCHANGED at their 2026-07-09 baselines** (raid Heroic 27
+  DPS/7 Healer/6 Tank specs; Dummy Dome 27 specs; M+ testing 27 DPS/6 tank/7 healer) —
+  no data fetched or fabricated. **Follow-up for next session:** the Cloudflare-bypass
+  header recipe (UA + Origin + Referer + sec-ch-ua) is now proven and should let a
+  future run skip re-litigating transport and go straight to watching whether WCL fixes
+  the `rdps`/`ndps`/`cdps`/`bossrdps` metric values (retry periodically — cheap, single
+  bisection query) rather than assuming the whole API is down. Season-flip check: forum
+  thread and all Wowhead RSS items this cycle describe 12.1 as still PTR/testing (the
+  382157 item is literally about scheduling MORE PTR testing) — **no season-2-live
+  signal, tracker unaffected.** npm test 65/65 pass, build OK (527.6 KB, 40 specs, 29
+  PTR-tracked; no data files changed by this run, so no snapshot needed for this scope).
+
 - 2026-07-14 (nightly scheduled run, CI runner — Sonnet 5) · builds found: **0 new.** Forum thread (topic 2317811) newest post still **#13** (Linxy, 2026-07-09 00:08Z) — highest_post_number=13, posts_count=11, byte-identical. Wowhead RSS since the 07-12 run: **"Patch 12.1 PTR News and Datamining Recap for Last Week - Build 68570" (Archimtiros, news=382158, 07-13)** verified via r.jina.ai to be a **recap article only** — "Build 68570" is the recap's own title numbering, not a new client build or forum post; it re-links the already-logged build 68569 dev notes plus the Arcane Mage (382132, already distilled) and Scalecommander Wingleader-reaction (382133, already distilled) pieces. No new forum post → no ptr-builds.json entry. **One genuine new writeup-material item: "A Reduction in Defensives? - Frost Mage Class Changes and Tier Set Review" (Dorovon, Wowhead Frost Mage guide writer, news=382151, 07-12)** → **added Frost Mage's first `ptr` writeup** (verdict Mixed — flat 4% dmg buff + a tier set with real rotation variety, but Dorovon calls the defensive pass "arguably a nerf to Frost specifically" — Improved Ice Barrier loses its HP bonus, Temporal Realignment less reliable — closing that Frost "will continue to struggle to survive in Season 2"; PTR-tracked specs 28→29). · **zone-54/zone-52/zone-56: WCL confirmed UNREACHABLE again this run** — re-tested both paths independently: v2 GraphQL `characterRankings` still returns a bare "Internal server error" on a known-good live encounter (zone 46 Imperator Averzian, correct args) AND on zone-52/56 PTR encounters directly (tested encounter 3591 and 12660) — same server-side/field-level failure as 07-12, not a query-shape issue; HTML endpoint 403s from this datacenter IP as expected. No data fetched or fabricated; existing 07-09 baselines (zone-54 Heroic 27/1121, zone-52 total 1446, zone-56 DPS 27/2732 tank 6/912 healer 7/912) left unchanged. npm test/build run combined with tiers/metrics/creators this cycle (see below).
 
 - 2026-07-12 (nightly scheduled run, CI runner — Sonnet 5) · builds found: **0 new.** Forum thread (topic 2317811) newest post still **#13** (Linxy, 2026-07-09 00:08Z) — highest_post_number=13, posts_count=11, byte-identical. Wowhead RSS since the 07-09 late-night run: one writeup-material item — **"New Prismatic Bolt Ability and Improved Defensives - Arcane Mage Class Changes" (Porom, Wowhead Arcane Mage guide writer, news=382132, 07-10)** → **added Arcane Mage's first `ptr` writeup** (verdict Mixed — new Prismatic Bolt Apex talent + Refractive Images defensive talent welcomed, but Porom still calls the spec "a shell of what it was less than a year ago" over inadequate defenses; PTR-tracked specs 27→28). Other new RSS items non-tuning (Ion Hazzikostas PCGamesN interview, Classic+ dungeon op-ed, WoW Portal Room Q&A announcement, housing decor previews ×2). · **zone-54/zone-52/zone-56: WCL v2 GraphQL API confirmed UNREACHABLE this run** — independently re-verified beyond just the "no aggregate equivalent" finding: `characterRankings` now returns a bare "Internal server error" even on a known-good LIVE encounter (zone 46 Imperator Averzian) with fully correct args (difficulty/size/partition), not just on the PTR zones' flexible-size encounters — confirms this is a genuine server-side/field-level issue with the sanctioned API for this client, not a query-shape mistake. HTML endpoint stays off-limits on this datacenter-IP runner per the runner mandate. No data fetched or fabricated; existing 07-09 baselines (zone-54 Heroic 27/1121, zone-52 total 1446, zone-56 DPS 27/2732 tank 6/912 healer 7/912) left unchanged. npm test 54/54 pass, build OK (525.3 KB; combined run with tiers/metrics/creators).

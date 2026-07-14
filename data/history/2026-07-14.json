@@ -1,5 +1,6 @@
 {
   "date": "2026-07-14",
+  "projectionVersion": 1,
   "specs": {
     "Death Knight|Blood": {
       "consensus": {
@@ -20,7 +21,7 @@
       },
       "scores": {
         "raid": 49,
-        "mplus": 33
+        "mplus": 36
       },
       "projection": {
         "raid": {
@@ -29,8 +30,8 @@
           "confidence": "medium"
         },
         "mplus": {
-          "tier": "C",
-          "score": 38,
+          "tier": "B",
+          "score": 40,
           "confidence": "medium"
         }
       }
@@ -89,7 +90,7 @@
         "murlok|mplus|Top-50 avg M+ rating (ceiling)": 1,
         "mythicstats|mplus|Top-2000 keys representation": 1,
         "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 3,
-        "simulationcraft|raid|SimC nightly Patchwerk DPS": 3,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 2,
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 17
       },
       "dummy": {
@@ -240,7 +241,7 @@
         "murlok|mplus|Top-50 avg M+ rating (ceiling)": 22,
         "mythicstats|mplus|Top-2000 keys representation": 22,
         "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 13,
-        "simulationcraft|raid|SimC nightly Patchwerk DPS": 18,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 16,
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 7
       },
       "dummy": {
@@ -279,7 +280,7 @@
         "murlok|mplus|Top-50 avg M+ rating (ceiling)": 5,
         "mythicstats|mplus|Top-2000 keys representation": 5,
         "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 27,
-        "simulationcraft|raid|SimC nightly Patchwerk DPS": 2,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 3,
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 12
       },
       "dummy": {
@@ -288,7 +289,7 @@
       },
       "scores": {
         "raid": 51,
-        "mplus": 59
+        "mplus": 62
       },
       "projection": {
         "raid": {
@@ -298,7 +299,7 @@
         },
         "mplus": {
           "tier": "A",
-          "score": 68,
+          "score": 69,
           "confidence": "high"
         }
       }
@@ -357,7 +358,7 @@
       },
       "scores": {
         "raid": 86,
-        "mplus": 65
+        "mplus": 59
       },
       "projection": {
         "raid": {
@@ -367,7 +368,7 @@
         },
         "mplus": {
           "tier": "A",
-          "score": 65,
+          "score": 62,
           "confidence": "medium"
         }
       }
@@ -421,7 +422,7 @@
         "murlok|mplus|Top-50 avg M+ rating (ceiling)": 23,
         "mythicstats|mplus|Top-2000 keys representation": 23,
         "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 21,
-        "simulationcraft|raid|SimC nightly Patchwerk DPS": 17,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 15,
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 27
       },
       "dummy": {
@@ -430,7 +431,7 @@
       },
       "scores": {
         "raid": 61,
-        "mplus": 34
+        "mplus": 38
       },
       "projection": {
         "raid": {
@@ -440,7 +441,7 @@
         },
         "mplus": {
           "tier": "C",
-          "score": 33,
+          "score": 35,
           "confidence": "high"
         }
       }
@@ -504,7 +505,7 @@
       },
       "scores": {
         "raid": 33,
-        "mplus": 60
+        "mplus": 66
       },
       "projection": {
         "raid": {
@@ -514,7 +515,7 @@
         },
         "mplus": {
           "tier": "A",
-          "score": 61,
+          "score": 64,
           "confidence": "high"
         }
       }
@@ -539,7 +540,7 @@
       },
       "scores": {
         "raid": 88,
-        "mplus": 44
+        "mplus": 47
       },
       "projection": {
         "raid": {
@@ -549,7 +550,7 @@
         },
         "mplus": {
           "tier": "C",
-          "score": 34,
+          "score": 36,
           "confidence": "medium"
         }
       }
@@ -604,7 +605,7 @@
         "murlok|mplus|Top-50 avg M+ rating (ceiling)": 25,
         "mythicstats|mplus|Top-2000 keys representation": 24,
         "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 12,
-        "simulationcraft|raid|SimC nightly Patchwerk DPS": 16,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 14,
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 4
       },
       "dummy": {
@@ -613,7 +614,7 @@
       },
       "scores": {
         "raid": 33,
-        "mplus": 42
+        "mplus": 46
       },
       "projection": {
         "raid": {
@@ -623,7 +624,7 @@
         },
         "mplus": {
           "tier": "A",
-          "score": 58,
+          "score": 61,
           "confidence": "high"
         }
       }
@@ -652,7 +653,7 @@
       },
       "scores": {
         "raid": 45,
-        "mplus": 34
+        "mplus": 38
       },
       "projection": {
         "raid": {
@@ -662,7 +663,7 @@
         },
         "mplus": {
           "tier": "C",
-          "score": 20,
+          "score": 23,
           "confidence": "high"
         }
       }
@@ -725,7 +726,7 @@
       },
       "scores": {
         "raid": 54,
-        "mplus": 79
+        "mplus": 75
       },
       "projection": {
         "raid": {
@@ -735,7 +736,7 @@
         },
         "mplus": {
           "tier": "A",
-          "score": 61,
+          "score": 59,
           "confidence": "medium"
         }
       }
@@ -790,7 +791,7 @@
         "murlok|mplus|Top-50 avg M+ rating (ceiling)": 16,
         "mythicstats|mplus|Top-2000 keys representation": 14,
         "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 11,
-        "simulationcraft|raid|SimC nightly Patchwerk DPS": 14,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 18,
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 21
       },
       "dummy": {
@@ -834,7 +835,7 @@
       },
       "scores": {
         "raid": 49,
-        "mplus": 45
+        "mplus": 48
       },
       "projection": {
         "raid": {
@@ -843,8 +844,8 @@
           "confidence": "medium"
         },
         "mplus": {
-          "tier": "C",
-          "score": 39,
+          "tier": "B",
+          "score": 41,
           "confidence": "medium"
         }
       }
@@ -868,7 +869,7 @@
       },
       "scores": {
         "raid": 33,
-        "mplus": 52
+        "mplus": 56
       },
       "projection": {
         "raid": {
@@ -878,7 +879,7 @@
         },
         "mplus": {
           "tier": "A+",
-          "score": 77,
+          "score": 79,
           "confidence": "medium"
         }
       }
@@ -925,7 +926,7 @@
     "Priest|Discipline": {
       "consensus": {
         "raid": "A+",
-        "mplus": "B"
+        "mplus": "A"
       },
       "ranks": {
         "archon|raid|95th pct HPS (Mythic)": 2,
@@ -942,7 +943,7 @@
       },
       "scores": {
         "raid": 86,
-        "mplus": 54
+        "mplus": 62
       },
       "projection": {
         "raid": {
@@ -951,8 +952,8 @@
           "confidence": "medium"
         },
         "mplus": {
-          "tier": "A",
-          "score": 70,
+          "tier": "A+",
+          "score": 75,
           "confidence": "medium"
         }
       }
@@ -977,7 +978,7 @@
       },
       "scores": {
         "raid": 43,
-        "mplus": 29
+        "mplus": 33
       },
       "projection": {
         "raid": {
@@ -987,7 +988,7 @@
         },
         "mplus": {
           "tier": "C",
-          "score": 16,
+          "score": 18,
           "confidence": "medium"
         }
       }
@@ -1007,7 +1008,7 @@
         "murlok|mplus|Top-50 avg M+ rating (ceiling)": 11,
         "mythicstats|mplus|Top-2000 keys representation": 10,
         "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 4,
-        "simulationcraft|raid|SimC nightly Patchwerk DPS": 15,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 13,
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 10
       },
       "dummy": {
@@ -1016,7 +1017,7 @@
       },
       "scores": {
         "raid": 58,
-        "mplus": 54
+        "mplus": 58
       },
       "projection": {
         "raid": {
@@ -1026,7 +1027,7 @@
         },
         "mplus": {
           "tier": "B",
-          "score": 52,
+          "score": 54,
           "confidence": "high"
         }
       }
@@ -1186,7 +1187,7 @@
     "Shaman|Enhancement": {
       "consensus": {
         "raid": "B",
-        "mplus": "B"
+        "mplus": "A"
       },
       "ranks": {
         "archon|raid|95th pct DPS (Mythic)": 18,
@@ -1207,7 +1208,7 @@
       },
       "scores": {
         "raid": 55,
-        "mplus": 58
+        "mplus": 61
       },
       "projection": {
         "raid": {
@@ -1216,8 +1217,8 @@
           "confidence": "high"
         },
         "mplus": {
-          "tier": "B",
-          "score": 57,
+          "tier": "A",
+          "score": 59,
           "confidence": "high"
         }
       }
@@ -1311,7 +1312,7 @@
         "murlok|mplus|Top-50 avg M+ rating (ceiling)": 8,
         "mythicstats|mplus|Top-2000 keys representation": 17,
         "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 14,
-        "simulationcraft|raid|SimC nightly Patchwerk DPS": 13,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 17,
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 5
       },
       "dummy": {
