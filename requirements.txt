@@ -1,0 +1,5 @@
+# Python tools for the NIGHTLY WORKFLOW RUNNER only — this is a plain-Node project
+# (no npm dependencies; see package.json). Pinned exactly so the secret-bearing
+# nightly job never resolves an arbitrary "latest" package (2026-07-14 audit);
+# Dependabot proposes weekly tested bumps. Installed in .github/workflows/nightly.yml.
+yt-dlp==2026.7.4

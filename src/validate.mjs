@@ -14,13 +14,30 @@ const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
 // beyond https-only they must point at a host the pipeline actually cites.
 const TAKE_HOSTS = new Set(["youtube.com", "www.youtube.com", "m.youtube.com", "youtu.be", "hackmd.io", "wowhead.com", "www.wowhead.com"]);
 const httpsUrl = v => { try { return new URL(v).protocol === "https:"; } catch { return false; } };
+// Shape-valid ≠ real: "2026-99-99" matches the regex but is not a date. Round-trip
+// through Date.UTC so month/day overflow is rejected instead of silently normalized.
+const isRealDate = v => {
+  const [y, m, d] = v.split("-").map(Number);
+  const dt = new Date(Date.UTC(y, m - 1, d));
+  return dt.getUTCFullYear() === y && dt.getUTCMonth() === m - 1 && dt.getUTCDate() === d;
+};
 
 /* opts.fullRoster: enforce the real 40-spec Midnight roster — used by the CLI, the build,
    and the apply-* merge scripts (which operate on the repo's real data), but not by unit
    fixtures, which validate small synthetic datasets. */
 export function validateData({ specs, sources, scales, community, ptrBuilds, creatorTakes, encounterTiers }, opts = {}) {
   const errors = [];
-  const isoOk = (v, what) => { if (v != null && !ISO_DATE.test(v)) errors.push(`${what} must be YYYY-MM-DD, got "${v}"`); };
+  // Every date in the data is a claim about when something was fetched or published —
+  // none may sit in the future. +1 day of skew allowed: a nightly UTC run can honestly
+  // stamp "tomorrow" relative to a validator still on the previous local day.
+  const today = opts.now ?? new Date().toISOString().slice(0, 10);
+  const maxDate = new Date(new Date(today + "T00:00:00Z").getTime() + 86400000).toISOString().slice(0, 10);
+  const isoOk = (v, what) => {
+    if (v == null) return;
+    if (!ISO_DATE.test(v)) { errors.push(`${what} must be YYYY-MM-DD, got "${v}"`); return; }
+    if (!isRealDate(v)) { errors.push(`${what} is not a real calendar date, got "${v}"`); return; }
+    if (v > maxDate) errors.push(`${what} is future-dated ("${v}", allowed through ${maxDate}) — data can't be newer than now`);
+  };
   const urlOk = (v, what) => { if (v != null && !httpsUrl(v)) errors.push(`${what} must be a valid https:// URL, got "${v}"`); };
 
   if (opts.fullRoster) {
@@ -62,6 +79,7 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
   const allSources = new Set();
   for (const source of sources) {
     if (!source.id || !source.name) errors.push(`sources.json: source missing id or name (${JSON.stringify(source.id)})`);
+    if (allSources.has(source.id)) errors.push(`sources.json: duplicate source id "${source.id}"`);
     allSources.add(source.id);
     if (!KINDS.has(source.kind)) errors.push(`sources.json: source "${source.id}" has unknown kind "${source.kind}"`);
     urlOk(source.url, `sources.json: source "${source.id}" url`);
@@ -187,8 +205,11 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
     if (!specsByClass.has(s.class)) specsByClass.set(s.class, new Set());
     specsByClass.get(s.class).add(s.spec);
   }
+  const seenClasses = new Set();
   for (const entry of community?.classes ?? []) {
     if (!entry.class) errors.push("community.json: class entry missing class name");
+    if (seenClasses.has(entry.class)) errors.push(`community.json: duplicate class entry "${entry.class}"`);
+    seenClasses.add(entry.class);
     if (!entry.discord?.name || !entry.discord?.url) errors.push(`community.json: ${entry.class} discord needs name + url`);
     urlOk(entry.discord?.url, `community.json: ${entry.class} discord url`);
     for (const alt of entry.altDiscords ?? []) {
@@ -196,8 +217,13 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
       urlOk(alt.url, `community.json: ${entry.class} altDiscord "${alt.name}" url`);
     }
     for (const site of entry.sites ?? []) urlOk(site.url, `community.json: ${entry.class} site "${site.name}" url`);
+    const seenCreators = new Set();
     for (const creator of entry.creators ?? []) {
       if (!creator.name || !creator.url) errors.push(`community.json: ${entry.class} creator needs name + url`);
+      // Duplicate creators in one class would double-attribute takes (creatorScope below
+      // keys on class|name) and double-render in the drawer.
+      if (seenCreators.has(creator.name)) errors.push(`community.json: ${entry.class} has duplicate creator "${creator.name}"`);
+      seenCreators.add(creator.name);
       urlOk(creator.url, `community.json: ${entry.class} creator "${creator.name}" url`);
       isoOk(creator.verifiedDate, `community.json: ${entry.class} creator "${creator.name}" verifiedDate`);
       // Optional spec scoping: a creator credible on only some of a class's specs.
@@ -222,8 +248,11 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
   // SEPARATE list from classes[].creators: they are never per-spec take authorities
   // (the take-scope check below only reads classes[].creators, so a general creator
   // can't lend authority to a spec take by construction).
+  const seenGeneral = new Set();
   for (const gc of community?.generalCreators ?? []) {
     if (!gc.name || !gc.url) errors.push(`community.json: generalCreators entry needs name + url`);
+    if (seenGeneral.has(gc.name)) errors.push(`community.json: duplicate general creator "${gc.name}"`);
+    seenGeneral.add(gc.name);
     urlOk(gc.url, `community.json: general creator "${gc.name}" url`);
     isoOk(gc.verifiedDate, `community.json: general creator "${gc.name}" verifiedDate`);
   }
@@ -278,7 +307,8 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
   const rosterNames = new Set(specs.map(s => `${s.spec} ${s.class}`));
   const classNames = new Set(specs.map(s => s.class));
   for (const build of ptrBuilds?.builds ?? []) {
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(build.date ?? "")) errors.push(`ptr-builds.json: build missing ISO date (${JSON.stringify(build.date)})`);
+    if (build.date == null) errors.push("ptr-builds.json: build missing date");
+    else isoOk(build.date, `ptr-builds.json: build date`);
     if (!build.forumUrl) errors.push(`ptr-builds.json: build ${build.date} missing forumUrl`);
     for (const u of ["forumUrl", "wowheadUrl", "icyveinsUrl"]) urlOk(build[u], `ptr-builds.json: build ${build.date} ${u}`);
     // Each entry must resolve against the roster ("Spec Class") or a class-wide prefix

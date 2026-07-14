@@ -39,4 +39,5 @@ test("payload decorates every spec with consensus for both brackets", async () =
   assert.equal(payload.meta.specCount, 40);
   assert.equal(payload.meta.trackedCount, data.specs.filter(s => s.ptr).length);
   assert.ok(payload.meta.latestSnapshot >= "2026-06-15");
+  assert.ok(Number.isInteger(payload.meta.projectionVersion) && payload.meta.projectionVersion >= 1);
 });

@@ -50,7 +50,8 @@ npm run build   # → dist/index.html
 npm run serve   # preview at http://localhost:8317
 ```
 
-Requires **Node 18+**. No dependencies to install — the build is plain Node.
+Requires **Node 20+** (see `engines` in `package.json`). No dependencies to install —
+the build is plain Node.
 
 ## How it works
 
@@ -73,11 +74,17 @@ build time — never hand-written.
 ## Auto-updating
 
 The site keeps itself current. A nightly [Claude Code](https://claude.com/claude-code)
-routine (`wow-ptr-watch`) checks for new PTR builds and tuning notes, new raid-testing data,
-and new creator videos; distills anything new into `data/*.json`; then commits and pushes. A
-GitHub Actions workflow rebuilds `dist/index.html` from the data and deploys it to GitHub
-Pages. **All game data is fetched live, never recalled from model memory** — Midnight
-postdates the model's training cutoff, so anything unfetchable is left blank rather than guessed.
+agent checks for new PTR builds and tuning notes, new raid-testing data, and new creator
+videos, and distills anything new into `data/*.json` — but it holds **no write
+credentials**: it leaves its changes plus a machine-readable run manifest
+(`data/run-manifest.json`, one honest result row per required source) for a separate
+deterministic publish job. That job runs the gates — schema validation + unit tests, the
+build, and `src/check-refresh.mjs` (source completeness, freshness, and mass-movement
+anomaly checks against `data/required-sources.json`) — and only then commits, pushes, and
+deploys to GitHub Pages. A daily heartbeat workflow goes red and files an issue if the
+nightly stops completing or any source's data grows stale. **All game data is fetched
+live, never recalled from model memory** — Midnight postdates the model's training
+cutoff, so anything unfetchable is left blank rather than guessed.
 
 For the full refresh and add-source procedures, open the project with Claude Code —
 `CLAUDE.md` documents them, and `SOURCES.md` is the human-readable source inventory.
@@ -93,3 +100,10 @@ aggregates and links back to them; it doesn't replace them.
 Creator takes are the cited opinions of their authors — quoted, linked, and dated in-app
 with full credit, never altered or presented as this project's own. Every creator whose
 analysis is used is acknowledged in the site footer and linked at the point their take appears.
+
+## License
+
+The **code** (build scripts, template, workflows) is [MIT-licensed](LICENSE) — fork away,
+keep the credit. The **data** is not the code's to license: tier ratings, logs medians,
+sims, and creator opinions belong to the publishers and authors credited above and in
+`SOURCES.md`, and remain under their terms.

@@ -1,0 +1,16 @@
+# Keep the unattended automation's supply chain walked forward by reviewed PRs
+# (2026-07-14 audit): all workflow actions are pinned to commit SHAs, and yt-dlp is
+# pinned in requirements.txt — Dependabot proposes the bumps, CI tests them.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+  # requirements.txt at the repo root holds the nightly runner's pinned yt-dlp.
+  # yt-dlp must move quickly (YouTube breaks old versions) — weekly tested bumps
+  # instead of installing "latest" inside the secret-bearing job.
+  - package-ecosystem: pip
+    directory: "/"
+    schedule:
+      interval: weekly

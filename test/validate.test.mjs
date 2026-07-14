@@ -35,6 +35,25 @@ test("validateData catches bad tiers, roles, sources and duplicates", async () =
   assert.ok(errors.some(e => e.includes("duplicate spec")));
 });
 
+test("validateData rejects impossible dates, future dates, and duplicate registry entries", async () => {
+  const data = await loadData(ROOT);
+  const broken = structuredClone(data);
+  broken.specs.find(s => (s.metrics ?? []).some(m => m.asOf)).metrics.find(m => m.asOf).asOf = "2026-99-99";
+  broken.sources.find(s => (s.pages ?? []).some(p => p.snapshot)).pages.find(p => p.snapshot).snapshot = "2199-01-01";
+  broken.sources.push(structuredClone(broken.sources[0]));
+  const cls = broken.community.classes.find(c => (c.creators ?? []).length);
+  cls.creators.push(structuredClone(cls.creators[0]));
+  broken.community.classes.push(structuredClone(broken.community.classes[0]));
+  broken.community.generalCreators.push(structuredClone(broken.community.generalCreators[0]));
+  const errors = validateData(broken, { now: "2026-07-14" });
+  assert.ok(errors.some(e => e.includes('not a real calendar date, got "2026-99-99"')));
+  assert.ok(errors.some(e => e.includes("future-dated") && e.includes("2199-01-01")));
+  assert.ok(errors.some(e => e.includes("duplicate source id")));
+  assert.ok(errors.some(e => e.includes("duplicate creator")));
+  assert.ok(errors.some(e => e.includes("duplicate class entry")));
+  assert.ok(errors.some(e => e.includes("duplicate general creator")));
+});
+
 test("validateData enforces https-only URLs and the take-host allowlist", async () => {
   const data = await loadData(ROOT);
   const broken = structuredClone(data);
