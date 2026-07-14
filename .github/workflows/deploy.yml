@@ -46,7 +46,7 @@ jobs:
             echo "::warning::committed dist/index.html differs from the CI rebuild — it was likely committed from stale data or never rebuilt; the DEPLOYED site uses the fresh build, but the committed copy is misleading."
           fi
       - name: Configure Pages (auto-enables on first run)
-        uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
         with:
           enablement: true
       - name: Upload the built site
