@@ -1,13 +1,23 @@
 name: Nightly tracker refresh
 
-# Machine-off nightly automation: runs Claude Code headlessly on a GitHub runner to do
-# the same refresh the local wow-ptr-watch task did — PTR builds, WCL zones 54/52,
-# creator RSS, and a full tier/metric refresh every run — then commit + push to master.
+# Machine-off nightly automation, restructured 2026-07-14 per the external security
+# audit into two isolated stages:
 #
-# Why Actions instead of a claude.ai cloud routine: the Claude-for-GitHub connector is
-# read-only (pushes 403), while a workflow's GITHUB_TOKEN always has write access to its
-# own repo. One gotcha handled below: GITHUB_TOKEN pushes do NOT auto-trigger other
-# workflows (loop protection), so the deploy is dispatched explicitly after a data push.
+#   refresh (AI agent, DE-PRIVILEGED) — Claude Code runs headlessly and consumes
+#     untrusted web content (tier pages, forum posts, YouTube transcripts). Its job
+#     token is read-only (contents: read, nothing else), checkout credentials are not
+#     persisted, and it is told not to (and cannot) push, so prompt-injected content
+#     in a scraped page can neither commit to this repo nor dispatch workflows. It
+#     leaves its edits in the working tree, writes the machine-readable
+#     data/run-manifest.json, and hands everything to the publish job as an artifact.
+#     Residual risk (documented in docs/security-audit-2026-07.md): the WCL API
+#     credentials and the Claude OAuth token are necessarily present in this job.
+#
+#   publish (deterministic, PRIVILEGED) — no AI. Downloads the artifact, runs the
+#     gates (npm test → build → src/check-refresh.mjs manifest/freshness/anomaly
+#     enforcement against data/required-sources.json), snapshots, stages explicit
+#     paths only, commits, pushes, and dispatches the Pages deploy. If any gate
+#     fails, nothing is published and the artifact is retained for debugging.
 #
 # Secrets required (Settings → Secrets and variables → Actions):
 #   CLAUDE_CODE_OAUTH_TOKEN — from `claude setup-token` (Pro/Max; valid ~1 year — renew!)
@@ -20,7 +30,8 @@ on:
     # GitHub's scheduled runs are best-effort and get delayed/dropped during the congestion
     # at :00–:10 (which is exactly what dropped the 2026-07-09 run — "job not acquired by
     # runner"). An off-peak minute measurably lowers that risk. Miss is self-healing anyway:
-    # the refresh is idempotent, so the next run catches up everything new since the last.
+    # the refresh is idempotent, so the next run catches up everything new since the last —
+    # and the freshness heartbeat (freshness.yml) now makes a missed night visible.
     - cron: "37 10 * * *"
   workflow_dispatch: # manual test runs
 
@@ -33,31 +44,29 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 50 # job-level backstop; the Claude step has its own tighter timeout
     permissions:
-      contents: write
-      actions: write # lets the final step dispatch the deploy workflow
+      contents: read # the agent job holds NO write scopes — publication happens in `publish`
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
-          fetch-depth: 0 # full history: rebase-on-rejection + movement baselines
+          # No token left in .git/config: the agent's shell has no ambient push credential.
+          persist-credentials: false
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: "22"
 
-      - name: Record pre-run state
-        id: pre
-        run: echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+      # yt-dlp at the version pinned in requirements.txt (Dependabot walks it forward
+      # with tested PRs) — the agent must never install or upgrade packages itself
+      # during the secret-bearing run.
+      - name: Install pinned yt-dlp
+        run: pipx install "yt-dlp==$(sed -n 's/^yt-dlp==//p' requirements.txt)"
 
-      - name: Git identity (matches repo history)
-        run: |
-          git config user.name "Riley"
-          git config user.email "120138825+riles22@users.noreply.github.com"
-
-      # First-party action; intentionally on the v1 major tag (not SHA-pinned like the
-      # actions above) so the runtime keeps pace with Claude Code CLI/auth changes.
+      # First-party action, pinned to the v1-tag commit (audit: unpinned mutable tags are
+      # a supply-chain risk in an unattended secret-bearing job). Dependabot proposes
+      # reviewed bumps, so the runtime still tracks Claude Code CLI/auth changes.
       # timeout at the STEP (not just job) so a hang still lets later steps run —
       # a step timeout fails the step; a job timeout cancels everything after it.
       - name: Nightly refresh (Claude Code, headless)
-        uses: anthropics/claude-code-action@v1
+        uses: anthropics/claude-code-action@f1bd27ca5b54584506e40e17884d90bdaaa1a9b3 # v1
         timeout-minutes: 40
         env:
           WCL_CLIENT_ID: ${{ secrets.WCL_CLIENT_ID }}
@@ -65,7 +74,7 @@ jobs:
         with:
           # Explicit github_token: without it the action attempts an OIDC exchange that
           # needs id-token:write + the (read-only) Claude GitHub App — fatal on night one.
-          # GITHUB_TOKEN also keeps pushes non-retriggering, which the dispatch step assumes.
+          # This job's GITHUB_TOKEN is minted with contents:read only (see permissions).
           github_token: ${{ github.token }}
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           claude_args: |
@@ -75,8 +84,9 @@ jobs:
           prompt: |
             You maintain the WoW Midnight 12.1 PTR spec tracker in this checked-out repo
             (master branch, CI runner). The public site riles22.github.io/wow-class-tracker
-            auto-deploys from master (a later workflow step handles triggering it — you
-            just commit and push).
+            deploys from master. You are the FETCH-AND-DISTILL stage only: you have no
+            write credentials by design. Leave every change in the working tree — a
+            separate deterministic job validates, gates, commits, pushes, and deploys.
 
             Read CLAUDE.md (the project contract) before acting. The refresh skills live
             at .claude/skills/ — ptr-watch, watch-creators, refresh-tiers, refresh-metrics
@@ -99,88 +109,100 @@ jobs:
                client-credentials flow — the refresh-metrics SKILL.md documents it). Do
                NOT scrape the WCL HTML endpoint from this runner (Cloudflare blocks
                datacenter IPs). If the API fails, leave WCL-derived data unchanged and
-               say so in the run summary — never guess.
+               record it honestly in the run manifest — never guess.
 
             2. Creators watch (.claude/skills/watch-creators/SKILL.md): poll the creator
                YouTube RSS feeds in data/community.json, title-filter for Midnight/12.1
-               relevance, fetch transcripts with yt-dlp (install first:
-               `pipx install yt-dlp` — pipx is preinstalled on this runner; if that
-               fails, `python3 -m pip install --break-system-packages -U yt-dlp` — plain
-               pip may hit PEP 668 on Ubuntu 24.04), distill cited per-spec takes. YouTube
-               may bot-block this runner's IP: if transcript downloads fail after the
-               skill's normal retries, do NOT hammer — record the new video IDs as
-               "pending (datacenter IP blocked)" in the skill's log.md, skip their
-               distillation, and note it in the summary.
+               relevance, fetch transcripts with yt-dlp (ALREADY INSTALLED at the version
+               pinned in requirements.txt — never install, upgrade, or replace it, or any
+               other package), distill cited per-spec takes. YouTube may bot-block this
+               runner's IP: if transcript downloads fail after the skill's normal retries,
+               do NOT hammer — record the new video IDs as "pending (datacenter IP
+               blocked)" in the skill's log.md, skip their distillation, and note it in
+               the manifest's creators row.
 
             3. Full refresh EVERY run (policy 2026-07-08 — no staleness gate): always run
                refresh-tiers AND refresh-metrics (WCL parts via the API, as above),
                regardless of the tier `snapshot` / metric `asOf` dates. Pull every source
-               fresh each run; do not skip on "already fresh" data.
+               fresh each run; do not skip on "already fresh" data. data/required-sources.json
+               is the authoritative checklist of what "every source" means — every key in
+               it must be attempted and accounted for.
                SEASON-FLIP GUARD: if era-verification fails because the sources now
                self-identify as Season 2 / 12.1 LIVE (not because a page is broken),
                the patch has LAUNCHED. Keep refusing to ingest S2-live data as if it
                were 12.0.7 (correct), but do NOT treat it as a quiet skip: put
                "SEASON 2 IS LIVE — tracker needs its 12.1-live migration (new WCL
-               zones, era model, source pages)" at the TOP of the run summary, repeat
-               it every night until addressed, and keep the rest of the run working.
-               Do not attempt the migration autonomously — the era model needs a
-               human decision.
+               zones, era model, source pages)" at the TOP of the run summary AND in
+               every affected manifest row's detail, repeat it every night until
+               addressed, and keep the rest of the run working. Do not attempt the
+               migration autonomously — the era model needs a human decision.
 
-            4. Run `npm test && npm run build`. If either fails: `git checkout -- data/ dist/`,
-               and end the run reporting the failure — do NOT commit or push.
+            4. Run `npm test && npm run build` as a self-check. If it fails, fix your
+               data edits; if a source's data can't be made valid, revert just that
+               source's edits (`git checkout -- <files>`) and record it as parse_error
+               in the manifest.
 
-            5. If any data/ file changed this run: `node src/snapshot.mjs`, then stage
-               EXPLICITLY — `git add data/ dist/ ".claude/skills/*/log.md"` (never
-               `git add -A`) — commit with a concise one-line summary
-               ("Nightly refresh <date>: <what changed>"), ending the message with:
-               Co-Authored-By: Claude <noreply@anthropic.com>
-               Then `git push origin master`. If the push is rejected, `git pull --rebase`
-               once and push again; if it still fails, report it — NEVER force-push.
-               If only the skill logs changed, commit and push
-               "Nightly refresh <date>: no updates" the same way.
+            5. Write data/run-manifest.json EVERY run — even a no-changes run. It is the
+               machine-readable contract the publish gate (src/check-refresh.mjs)
+               enforces against data/required-sources.json:
+                 {
+                   "run": "<today UTC, YYYY-MM-DD>",
+                   "summary": "<one line, <=180 chars — becomes the commit message>",
+                   "sources": [ ONE row per requirement key in data/required-sources.json:
+                     { "source": "<key>", "result": "success|partial|unreachable|blocked|parse_error|skipped",
+                       "detail": "<the honest reason — REQUIRED for every result except success>",
+                       "previousAsOf": "<date before this run>", "newAsOf": "<date after>" } ]
+                 }
+               Honesty rules: "success" ONLY when the source's stored dates actually
+               advanced this run — the gate cross-checks the repo state and fails
+               dishonest claims. Anything less than a full landing is partial/
+               unreachable/blocked/parse_error WITH the reason; "skipped" without a
+               detail fails the whole publish. If a mass tier shift is a REAL Blizzard
+               retune (not a parse artifact), set "anomalyAck": "<reason + citation>" —
+               never set it for any other purpose.
 
-            6. End with a short summary: builds found · zone-54/zone-52 state · videos and
-               takes · weekly refreshes run or skipped-as-fresh · whether you pushed.
+            6. Do NOT commit, push, tag, or dispatch anything, and do not write outside
+               this working tree — publication is the deterministic publish job's.
+
+            7. End with a short summary: builds found · zone-54/zone-52 state · videos
+               and takes · sources refreshed vs degraded.
 
             FAILURE SENTINEL (so problems aren't buried in a green run): on any HARD
-            failure — npm test or build failing, an unrecoverable push rejection, or the
+            failure — npm test or build failing at the end despite fixes, or the
             WCL API refusing auth — append one line describing it to the file
             "$RUNNER_TEMP/refresh-failed" before ending. Do NOT write the sentinel for
             expected degradations (YouTube blocking transcripts from this IP, a source
             being temporarily unreachable with data left unchanged) — those belong in the
-            summary only.
+            manifest and summary only.
 
             Hard rules (also in CLAUDE.md): all game data is fetched live, never from
             model memory — Midnight postdates every training cutoff, so anything
             unfetchable stays absent rather than guessed; if nothing is new anywhere,
-            change no data; never hand-edit dist/index.html; PTR-quality data stays
-            era-labeled and out of live baselines; creator takes are cited opinion and
-            never move a tier; be a polite guest (single fetches, sleep between yt-dlp
-            requests, backoff instead of hammering); never echo the WCL secret.
+            change no data (the manifest still gets written); never hand-edit
+            dist/index.html; PTR-quality data stays era-labeled and out of live
+            baselines; creator takes are cited opinion and never move a tier; be a
+            polite guest (single fetches, sleep between yt-dlp requests, backoff instead
+            of hammering); never echo the WCL secret.
 
-      # GITHUB_TOKEN pushes don't auto-trigger `on: push` workflows (GitHub loop
-      # protection), so if this run pushed site-relevant changes, dispatch the deploy
-      # explicitly. workflow_dispatch is the documented exception that GITHUB_TOKEN may
-      # trigger. Logs-only pushes correctly skip this (mirrors deploy.yml's path filter).
-      # `!cancelled()` (not `success()`): if the run pushed and THEN died (step timeout,
-      # API error), the data must still deploy — otherwise it strands undeployed forever,
-      # since the next night's baseline already includes it.
-      - name: Trigger Pages deploy if the site's inputs changed
-        if: ${{ !cancelled() && steps.pre.outputs.sha != '' }}
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          git fetch origin master
-          if ! git diff --quiet "${{ steps.pre.outputs.sha }}" origin/master -- data/ src/ dist/ package.json; then
-            echo "Data changed → dispatching deploy workflow"
-            gh workflow run deploy.yml --ref master
-          else
-            echo "No site-relevant changes pushed — deploy not needed"
-          fi
+      # Hand the agent's working-tree output to the privileged job. Everything the
+      # publish job may commit travels here — data/ (incl. the run manifest) and the
+      # skill logs. dist/ is deliberately NOT transferred: publish rebuilds it from
+      # source, so a tampered build artifact can't ride along.
+      - name: Upload refresh output for the publish job
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: nightly-refresh
+          include-hidden-files: true # .claude/ skill logs
+          retention-days: 7
+          path: |
+            data/
+            .claude/skills/*/log.md
 
-      # Promote prompt-level "soft" failures (test/build failure, dead WCL auth,
-      # unpushable commit) to a real job failure so GitHub emails the owner — otherwise
-      # they'd hide behind three weeks of green checkmarks.
+      # Promote prompt-level "soft" failures (test/build failure, dead WCL auth) to a
+      # real job failure so GitHub emails the owner — otherwise they'd hide behind
+      # three weeks of green checkmarks. The publish job still runs (!cancelled()) and
+      # its gates decide whether the partial output is publishable.
       - name: Surface soft failures
         if: always()
         run: |
@@ -190,3 +212,88 @@ jobs:
             cat "$RUNNER_TEMP/refresh-failed"
             exit 1
           fi
+
+  publish:
+    # Deterministic publication — no AI, no untrusted fetches. Runs even when the
+    # refresh job surfaced a soft failure (matching the old "pushed and then died"
+    # semantics): the gates below, not the agent's exit code, decide publishability.
+    needs: refresh
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+      actions: write # dispatches the Pages deploy workflow
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          fetch-depth: 0 # rebase-on-rejection + movement baselines
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "22"
+
+      - name: Git identity (matches repo history)
+        run: |
+          git config user.name "Riley"
+          git config user.email "120138825+riles22@users.noreply.github.com"
+
+      # Overlays the agent's data/ + skill logs onto the fresh checkout. (Overlay can't
+      # express file DELETIONS — fine here: the refresh only ever edits/adds data files,
+      # and a gate failure blocks anything malformed that overlaying could produce.)
+      - name: Download refresh output
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: nightly-refresh
+          path: .
+
+      - name: Show what the refresh changed
+        run: git status --porcelain && git --no-pager diff --stat || true
+
+      # THE GATES. Order matters: schema/unit tests first, then the build (which
+      # re-validates and produces dist/), then the manifest/freshness/anomaly contract.
+      - name: "Gate 1: validate + unit tests"
+        run: npm test
+      - name: "Gate 2: build"
+        run: npm run build
+      - name: "Gate 3: refresh contract (manifest · completeness · anomaly)"
+        run: node src/check-refresh.mjs --manifest
+
+      - name: Snapshot movement baseline (only when data beyond the manifest changed)
+        run: |
+          if git status --porcelain -- data/ | grep -v "data/run-manifest.json" | grep -q .; then
+            node src/snapshot.mjs
+          else
+            echo "No data changes beyond the run manifest — no snapshot"
+          fi
+
+      - name: Commit and push (explicit paths only)
+        id: commit
+        run: |
+          git add data/ dist/ ".claude/skills/*/log.md"
+          if git diff --cached --quiet; then
+            echo "Nothing to commit"
+            echo "pushed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          # Site-relevant = anything staged beyond the manifest + skill logs.
+          if git diff --cached --quiet -- data/ dist/ ':(exclude)data/run-manifest.json'; then
+            echo "deploy=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "deploy=true" >> "$GITHUB_OUTPUT"
+          fi
+          # Commit title comes from the agent-written manifest summary — sanitized to
+          # one printable ASCII line, hard-capped, because that text originated from
+          # untrusted web content.
+          SUMMARY="$(node -e 'const m=JSON.parse(require("fs").readFileSync("data/run-manifest.json","utf8")); console.log(String(m.summary??"refresh").replace(/[^\x20-\x7E]/g," ").replace(/\s+/g," ").trim().slice(0,180))')"
+          git commit -m "Nightly refresh $(date -u +%F): ${SUMMARY}" -m "Co-Authored-By: Claude <noreply@anthropic.com>"
+          git push origin master || { git pull --rebase origin master && git push origin master; }
+          echo "pushed=true" >> "$GITHUB_OUTPUT"
+
+      # GITHUB_TOKEN pushes don't auto-trigger `on: push` workflows (GitHub loop
+      # protection), so dispatch the deploy explicitly when site inputs changed.
+      # Manifest-only and logs-only commits correctly skip this.
+      - name: Trigger Pages deploy if the site's inputs changed
+        if: steps.commit.outputs.pushed == 'true' && steps.commit.outputs.deploy == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy.yml --ref master

@@ -1,0 +1,25 @@
+{
+  "comment": "Machine-readable refresh status — written by the nightly agent EVERY run, enforced by src/check-refresh.mjs against data/required-sources.json. This seed row-set reconstructs the 2026-07-12 run (the last before manifest enforcement) from its commit message and the stored snapshot/asOf dates; results marked skipped/partial here are exactly the quiet drift the external audit flagged.",
+  "run": "2026-07-12",
+  "summary": "Arcane Mage PTR writeup, full tier/metrics refresh (14 tier moves, Method mplus S-tier refills); WCL zones unreachable from runner",
+  "sources": [
+    { "source": "icyveins", "result": "success", "previousAsOf": "2026-07-09", "newAsOf": "2026-07-12" },
+    { "source": "method", "result": "success", "previousAsOf": "2026-07-09", "newAsOf": "2026-07-12" },
+    { "source": "wowhead", "result": "partial", "detail": "mplus/Tank page left at 2026-07-09 by the 2026-07-12 run (pre-manifest; cause unrecorded)", "previousAsOf": "2026-07-09", "newAsOf": "2026-07-12" },
+    { "source": "archon-tiers", "result": "success", "previousAsOf": "2026-07-09", "newAsOf": "2026-07-12" },
+    { "source": "archon-encounters", "result": "skipped", "detail": "not refreshed by the 2026-07-12 run (pre-manifest enforcement); left at 2026-07-09", "previousAsOf": "2026-07-09", "newAsOf": "2026-07-09" },
+    { "source": "archon-survivability", "result": "skipped", "detail": "not refreshed by the 2026-07-12 run (pre-manifest enforcement); left at 2026-07-09", "previousAsOf": "2026-07-09", "newAsOf": "2026-07-09" },
+    { "source": "wowmeta", "result": "success", "previousAsOf": "2026-07-09", "newAsOf": "2026-07-12" },
+    { "source": "wcl-live-raid", "result": "unreachable", "detail": "WCL unreachable from GitHub-hosted runner on 2026-07-12 (per run report); data left at 2026-07-09", "previousAsOf": "2026-07-09", "newAsOf": "2026-07-09" },
+    { "source": "wcl-live-mplus", "result": "unreachable", "detail": "WCL unreachable from GitHub-hosted runner on 2026-07-12; data left at 2026-07-09", "previousAsOf": "2026-07-09", "newAsOf": "2026-07-09" },
+    { "source": "wcl-ptr-raid", "result": "unreachable", "detail": "zone 54 unreachable from GitHub-hosted runner on 2026-07-12; data left at 2026-07-09", "previousAsOf": "2026-07-09", "newAsOf": "2026-07-09" },
+    { "source": "wcl-ptr-mplus", "result": "unreachable", "detail": "zone 56 unreachable from GitHub-hosted runner on 2026-07-12; data left at 2026-07-09", "previousAsOf": "2026-07-09", "newAsOf": "2026-07-09" },
+    { "source": "wcl-dummy-dome", "result": "unreachable", "detail": "zone 52 unreachable from GitHub-hosted runner on 2026-07-12; data left at 2026-07-09", "previousAsOf": "2026-07-09", "newAsOf": "2026-07-09" },
+    { "source": "murlok", "result": "success", "previousAsOf": "2026-07-09", "newAsOf": "2026-07-12" },
+    { "source": "bloodmallet", "result": "success", "previousAsOf": "2026-07-09", "newAsOf": "2026-07-12" },
+    { "source": "simulationcraft", "result": "skipped", "detail": "treated as out of scope by the 2026-07-12 run (the drift the audit flagged); left at 2026-07-09", "previousAsOf": "2026-07-09", "newAsOf": "2026-07-09" },
+    { "source": "mythicstats", "result": "success", "previousAsOf": "2026-07-09", "newAsOf": "2026-07-12" },
+    { "source": "blizzard-ptr", "result": "success", "detail": "no build newer than 2026-07-09 on the official thread" },
+    { "source": "creators", "result": "success", "detail": "Arcane Mage PTR writeup added from creator coverage" }
+  ]
+}

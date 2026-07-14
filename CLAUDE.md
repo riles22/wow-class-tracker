@@ -12,6 +12,8 @@ on push to `master`; the file also still opens directly in a browser.
 - `npm run build` — data + template → `dist/index.html`
 - `npm run validate` — data checks only
 - `npm run serve` — preview `dist/index.html` at http://localhost:8317
+- `node src/check-refresh.mjs --manifest|--age` — refresh integrity gates (nightly
+  publish contract / staleness heartbeat) against `data/required-sources.json`
 
 Always run `npm test && npm run build` after any data edit. Never edit `dist/index.html`
 by hand — it is generated.
@@ -32,8 +34,10 @@ by hand — it is generated.
 4. `src/template.html` is presentation only — zero data in it.
 5. Data-changing workflows run **plan-first**: propose the diff, then apply. *(Interactive
    sessions only — the unattended nightly routine has no one to propose to; its
-   substitute guardrails are the validation-gated merges, the test suite, explicit path
-   staging, rollback on failure, and the run report.)*
+   substitute guardrails are the validation-gated merges, the test suite, the
+   run-manifest completeness/honesty/anomaly gates (`src/check-refresh.mjs` vs
+   `data/required-sources.json`), explicit path staging, rollback on failure, and the
+   run report.)*
 6. Discord content is never fetched (auth + TOS) — `data/community.json` holds curated
    links only, manually verified. Creator videos are opinion/analysis, not tier data.
 
@@ -175,6 +179,20 @@ exception: the newest bracket-scoped, non-superseded read nudges the 12.1 projec
 
 ## Refresh workflows
 
+### Run manifest + integrity gates (2026-07-14 security audit)
+`data/required-sources.json` is the machine-readable refresh contract — every source a
+full refresh must account for, with staleness thresholds, row-count floors, and
+mass-movement anomaly limits. `data/run-manifest.json` is the per-run status file: one
+honest result row per requirement (`success | partial | unreachable | blocked |
+parse_error | skipped`; everything but success needs a `detail`), plus `run`, `summary`
+(becomes the nightly commit message), and optional `anomalyAck` (ONLY for a real,
+citable Blizzard mass retune). `node src/check-refresh.mjs --manifest` enforces it in
+the nightly publish gate — "success" claims are cross-checked against the actual stored
+snapshot/asOf dates, so quiet skips and dishonest rows fail the publish. **Every full
+refresh — nightly or local — ends by updating the manifest**; the freshness heartbeat
+(`.github/workflows/freshness.yml` → `check-refresh --age`) also accepts a new history
+snapshot as proof of life, and alerts (issue + red run) on staleness past thresholds.
+
 ### Tier lists (every `tier-list` source — currently Icy Veins / Method / Wowhead / Archon / WoWMeta)
 1. Fetch each page in `sources.json` live; era-verify (Midnight S1, Devourer in DPS lists).
    Archon: parse the `__NEXT_DATA__` JSON script tag from raw HTML (WebFetch markdown
@@ -223,24 +241,39 @@ data/     specs.json · sources.json · scales.json · ptr-builds.json · commun
           creator-takes.json (qualitative layer — cited specialist takes[] + general-creator
           metaNotes[] season/meta outlook, never tiers) ·
           encounter-tiers.json (per-boss/dungeon Archon tiers) ·
+          required-sources.json (refresh contract: required sources, staleness thresholds,
+          row floors, anomaly limits) · run-manifest.json (per-run status file — see
+          "Run manifest + integrity gates") ·
           history/ (movement baselines written by snapshot.mjs)
 src/      build.mjs · template.html · render.mjs · normalize.mjs · validate.mjs ·
-          apply-ratings.mjs · apply-metrics.mjs · snapshot.mjs · serve.mjs
-test/     normalize · validate · render · build · apply-metrics · apply-ratings
+          apply-ratings.mjs · apply-metrics.mjs · snapshot.mjs · serve.mjs ·
+          check-refresh.mjs (manifest/freshness/anomaly gates)
+test/     normalize · validate · render · build · apply-metrics · apply-ratings · check-refresh
 dist/     index.html  (generated — open directly in a browser)
-docs/     working notes (e.g. finder-audit.md)
+docs/     working notes (finder-audit.md · security-audit-2026-07.md — audit disposition)
 legacy/   original single-file tracker (pre-conversion reference)
-.github/  workflows/deploy.yml (build+deploy Pages on push) · workflows/ci.yml (tests on every push)
+.github/  workflows/deploy.yml (build+deploy Pages on push) · workflows/ci.yml (tests on
+          every push) · workflows/freshness.yml (daily staleness heartbeat → alert issue) ·
+          dependabot.yml (weekly action-SHA + pip bumps; requirements.txt pins yt-dlp)
 .claude/skills/   refresh-tiers · refresh-metrics · ptr-watch · watch-creators
                   (each has the procedure + hard-won gotchas + a log.md memory)
 ```
 
-Nightly automation lives in `.github/workflows/nightly.yml` (cron 10:10 UTC = the 3:10am
-local slot): Claude Code runs headlessly on a GitHub runner — ptr-watch + watch-creators +
-a full tier/metric refresh **every run** (policy 2026-07-08: no staleness gate — every
-source is pulled fresh nightly) — then snapshots, commits, pushes, and dispatches
-deploy.yml explicitly (GITHUB_TOKEN pushes don't auto-trigger workflows). WCL data comes
-via the v2 API using `WCL_CLIENT_ID`/`WCL_CLIENT_SECRET` repo secrets; auth is
+Nightly automation lives in `.github/workflows/nightly.yml` (cron 10:37 UTC), split into
+two isolated jobs since the 2026-07-14 security audit. The **refresh** job runs Claude
+Code headlessly with a READ-ONLY token (no push/dispatch scopes, checkout credentials
+not persisted, yt-dlp preinstalled at the `requirements.txt` pin, action pinned by
+commit SHA) — ptr-watch + watch-creators + a full tier/metric refresh **every run**
+(policy 2026-07-08: no staleness gate — every source is pulled fresh nightly) — then
+writes `data/run-manifest.json` and hands `data/` + skill logs to the **publish** job as
+an artifact. Publish (deterministic, no AI, holds the write token) gates on `npm test` →
+`npm run build` → `node src/check-refresh.mjs --manifest`, then snapshots, stages
+explicit paths, commits (title = the manifest summary, sanitized), pushes, and
+dispatches deploy.yml (GITHUB_TOKEN pushes don't auto-trigger workflows). A daily
+heartbeat (`freshness.yml`) alerts via issue + red run when the last refresh signal
+exceeds 36h or a source exceeds its max age. WCL data comes via the v2 API using
+`WCL_CLIENT_ID`/`WCL_CLIENT_SECRET` repo secrets — necessarily still present in the
+agent job, the documented residual risk in `docs/security-audit-2026-07.md`; auth is
 `CLAUDE_CODE_OAUTH_TOKEN` (~1-year validity — renew). YouTube transcripts may be
 IP-blocked on runners; those videos queue as "pending" and catch up in local runs. The
 old local scheduled task and claude.ai cloud routine are retired (docs/cloud-routine.md

@@ -1,0 +1,59 @@
+name: Data freshness heartbeat
+
+# The 2026-07-09→07-12 nightly gap and the quietly-stale sources the external audit
+# flagged were only findable by reading workflow logs. This heartbeat makes absence
+# itself visible: every afternoon (after the nightly window) it checks the COMMITTED
+# state — how old the last run manifest is, and every required source's data age
+# against data/required-sources.json — and on any violation opens/updates an alert
+# issue and goes red. Staleness alerts fire even when the nightly EXPLAINED the
+# staleness (e.g. WCL unreachable from runner IPs): the alert is visibility, not
+# blame, and maps to the audit's "alert when a high-value source exceeds its age".
+
+on:
+  schedule:
+    - cron: "23 17 * * *" # ~7h after the nightly; odd minute for the same congestion reason
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  heartbeat:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "22"
+
+      - name: Check committed-data freshness
+        id: check
+        run: |
+          set -o pipefail
+          if node src/check-refresh.mjs --age 2>&1 | tee freshness-report.txt; then
+            echo "stale=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "stale=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Open or update the alert issue
+        if: steps.check.outputs.stale == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          title="Data freshness alert (automated heartbeat)"
+          body="$(printf 'The freshness heartbeat found stale state at %s:\n\n```\n%s\n```\n\nSource: .github/workflows/freshness.yml → src/check-refresh.mjs --age (thresholds in data/required-sources.json). Close this once resolved — the heartbeat files a fresh alert if staleness recurs.' "$(date -u +%FT%TZ)" "$(cat freshness-report.txt)")"
+          num="$(gh issue list --state open --search "in:title \"$title\"" --json number --jq '.[0].number')" || num=""
+          if [ -n "$num" ]; then
+            gh issue comment "$num" --body "$body"
+          else
+            gh issue create --title "$title" --body "$body"
+          fi
+
+      - name: Go red when stale
+        if: steps.check.outputs.stale == 'true'
+        run: |
+          cat freshness-report.txt
+          exit 1

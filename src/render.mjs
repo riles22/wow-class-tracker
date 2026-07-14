@@ -221,6 +221,13 @@ export function outlookFor(spec, ptrBuilds) {
      score = clamp(base + shift + nudge, 0, 100) → tier via the same consensus bands.
    Confidence = how many independent PTR signals exist (testing, dummy, writeup/tuning):
    3 → high, 2 → medium, 1 → low, 0 → prior-only (live baseline, no PTR evidence). */
+/* Projection formula version — bump on ANY change to the weights, inputs, or clamps
+   below (v1 = the 2026-07-06 formula: prior .55 / empirical .45, testing:dummy 2:1,
+   outlook ±7, meta read ±3). Stamped into the payload and every history snapshot so
+   the post-launch report card grades each frozen forecast against the formula that
+   actually produced it. */
+export const PROJECTION_VERSION = 1;
+
 const PTR_MPLUS_SERIES = {
   DPS: "Median rDPS (12.1 PTR M+ testing)",
   Tank: "Median rDPS (12.1 PTR M+ testing, tank)",
@@ -452,7 +459,8 @@ export function buildPayload({ specs, sources, scales, community, ptrBuilds, cre
       trackedCount: specs.filter(spec => spec.ptr).length,
       latestSnapshot: latestSnapshot(sources),
       latestPtrBuild: latestBuild,
-      movementSince: baseline?.date ?? null
+      movementSince: baseline?.date ?? null,
+      projectionVersion: PROJECTION_VERSION
     }
   };
 }
