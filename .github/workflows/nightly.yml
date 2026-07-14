@@ -1,7 +1,7 @@
 name: Nightly tracker refresh
 
 # Machine-off nightly automation, restructured 2026-07-14 per the external security
-# audit into two isolated stages:
+# audit into isolated stages (tightened the same day by the follow-up re-audit):
 #
 #   refresh (AI agent, DE-PRIVILEGED) — Claude Code runs headlessly and consumes
 #     untrusted web content (tier pages, forum posts, YouTube transcripts). Its job
@@ -10,14 +10,21 @@ name: Nightly tracker refresh
 #     in a scraped page can neither commit to this repo nor dispatch workflows. It
 #     leaves its edits in the working tree, writes the machine-readable
 #     data/run-manifest.json, and hands everything to the publish job as an artifact.
-#     Residual risk (documented in docs/security-audit-2026-07.md): the WCL API
-#     credentials and the Claude OAuth token are necessarily present in this job.
+#     WCL credentials are NOT in the agent's env (re-audit): a deterministic step
+#     runs src/fetch-wcl.mjs FIRST with the secrets scoped to that step alone, and
+#     uploads wcl-fetch/evidence.json as its own artifact before the agent starts —
+#     the agent's only WCL input, and tamper-evident for the publish gate.
+#     Residual risk (documented in docs/security-audit-2026-07.md): the Claude OAuth
+#     token is necessarily present in the agent step (it IS the agent's auth).
 #
-#   publish (deterministic, PRIVILEGED) — no AI. Downloads the artifact, runs the
+#   publish (deterministic, PRIVILEGED) — no AI. Downloads the artifacts, runs the
 #     gates (npm test → build → src/check-refresh.mjs manifest/freshness/anomaly
-#     enforcement against data/required-sources.json), snapshots, stages explicit
-#     paths only, commits, pushes, and dispatches the Pages deploy. If any gate
-#     fails, nothing is published and the artifact is retained for debugging.
+#     enforcement against data/required-sources.json + the WCL evidence), snapshots,
+#     stages explicit paths only, commits, pushes, and dispatches the Pages deploy.
+#     If any gate fails, nothing is published and the artifacts are retained for
+#     debugging. The anomaly gate's override is HUMAN-ONLY: the anomaly_ack
+#     workflow_dispatch input below — the agent-written manifest can propose an ack
+#     but never satisfy the gate (re-audit).
 #
 # Secrets required (Settings → Secrets and variables → Actions):
 #   CLAUDE_CODE_OAUTH_TOKEN — from `claude setup-token` (Pro/Max; valid ~1 year — renew!)
@@ -33,7 +40,16 @@ on:
     # the refresh is idempotent, so the next run catches up everything new since the last —
     # and the freshness heartbeat (freshness.yml) now makes a missed night visible.
     - cron: "37 10 * * *"
-  workflow_dispatch: # manual test runs
+  workflow_dispatch: # manual test runs; also the ONLY way to approve an anomaly
+    inputs:
+      anomaly_ack:
+        description: >-
+          Human approval for a mass tier-movement anomaly (reason + citation, e.g.
+          "Blizzard 12.1 mass retune, forum post #19"). Leave empty for normal runs —
+          only set it when re-running after the anomaly gate blocked a REAL, citable
+          Blizzard mass retune. Scheduled runs can never carry an ack.
+        required: false
+        default: ""
 
 concurrency:
   group: nightly-refresh
@@ -60,17 +76,36 @@ jobs:
       - name: Install pinned yt-dlp
         run: pipx install "yt-dlp==$(sed -n 's/^yt-dlp==//p' requirements.txt)"
 
+      # Deterministic WCL stage (re-audit 2026-07-14): the ONLY step holding the WCL
+      # credentials — step-scoped env, gone before the agent starts. Writes
+      # wcl-fetch/evidence.json (the agent's only WCL input). Always exits 0 when
+      # evidence was written; bad verdicts are surfaced by "Surface soft failures".
+      - name: Deterministic WCL fetch (only step with WCL credentials)
+        env:
+          WCL_CLIENT_ID: ${{ secrets.WCL_CLIENT_ID }}
+          WCL_CLIENT_SECRET: ${{ secrets.WCL_CLIENT_SECRET }}
+        run: node src/fetch-wcl.mjs
+
+      # Uploaded BEFORE the agent runs: the publish gate cross-checks the agent's WCL
+      # manifest rows against THIS copy, so the agent (which can edit the working-tree
+      # copy) has no window to tamper with what the gate reads.
+      - name: Publish WCL fetch evidence (pre-agent, tamper-evident)
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: wcl-evidence
+          retention-days: 7
+          path: wcl-fetch/
+
       # First-party action, pinned to the v1-tag commit (audit: unpinned mutable tags are
       # a supply-chain risk in an unattended secret-bearing job). Dependabot proposes
       # reviewed bumps, so the runtime still tracks Claude Code CLI/auth changes.
       # timeout at the STEP (not just job) so a hang still lets later steps run —
       # a step timeout fails the step; a job timeout cancels everything after it.
+      # NOTE (re-audit): no WCL_* env here — the agent job's only secret is the Claude
+      # OAuth token, which is the agent's own auth.
       - name: Nightly refresh (Claude Code, headless)
         uses: anthropics/claude-code-action@f1bd27ca5b54584506e40e17884d90bdaaa1a9b3 # v1
         timeout-minutes: 40
-        env:
-          WCL_CLIENT_ID: ${{ secrets.WCL_CLIENT_ID }}
-          WCL_CLIENT_SECRET: ${{ secrets.WCL_CLIENT_SECRET }}
         with:
           # Explicit github_token: without it the action attempts an OIDC exchange that
           # needs id-token:write + the (read-only) Claude GitHub App — fatal on night one.
@@ -104,12 +139,18 @@ jobs:
                movement (policy 2026-07-08: no change-detector gate); distill new spec writeups per the
                auto-confirm policy — faithful distillation of the SOURCE's verdict,
                mandatory source URL or sourceLabel.
-               For ALL Warcraft Logs data use the sanctioned v2 GraphQL API authenticated
-               with the WCL_CLIENT_ID / WCL_CLIENT_SECRET environment variables (OAuth
-               client-credentials flow — the refresh-metrics SKILL.md documents it). Do
-               NOT scrape the WCL HTML endpoint from this runner (Cloudflare blocks
-               datacenter IPs). If the API fails, leave WCL-derived data unchanged and
-               record it honestly in the run manifest — never guess.
+               WARCRAFT LOGS: you hold NO WCL credentials (2026-07-14 re-audit — the
+               secret-bearing fetch is the deterministic step that ran before you).
+               Read wcl-fetch/evidence.json and write the five WCL manifest rows from
+               it honestly: while it reports verdict "rdps-broken", every WCL cut is
+               unreachable with that detail and the stored data stays unchanged. NEVER
+               claim success on a WCL row — the publish gate cross-checks an evidence
+               artifact uploaded before you started, which you cannot modify. If the
+               verdict is "rdps-restored", put "WCL RDPS RESTORED — owner decision
+               needed on the median recipe" at the TOP of the summary (still no ingest
+               this run); if it is "no-credentials" or "oauth-failed", surface that at
+               the top of the summary too. Do NOT fetch anything from warcraftlogs.com
+               yourself, by any means — no API, no HTML scraping, no workarounds.
 
             2. Creators watch (.claude/skills/watch-creators/SKILL.md): poll the creator
                YouTube RSS feeds in data/community.json, title-filter for Midnight/12.1
@@ -122,7 +163,7 @@ jobs:
                the manifest's creators row.
 
             3. Full refresh EVERY run (policy 2026-07-08 — no staleness gate): always run
-               refresh-tiers AND refresh-metrics (WCL parts via the API, as above),
+               refresh-tiers AND refresh-metrics (WCL parts are evidence-only, per 1),
                regardless of the tier `snapshot` / metric `asOf` dates. Pull every source
                fresh each run; do not skip on "already fresh" data. data/required-sources.json
                is the authoritative checklist of what "every source" means — every key in
@@ -163,9 +204,11 @@ jobs:
                advanced this run — the gate cross-checks the repo state and fails
                dishonest claims. Anything less than a full landing is partial/
                unreachable/blocked/parse_error WITH the reason; "skipped" without a
-               detail fails the whole publish. If a mass tier shift is a REAL Blizzard
-               retune (not a parse artifact), set "anomalyAck": "<reason + citation>" —
-               never set it for any other purpose.
+               detail fails the whole publish. If a mass tier shift looks like a REAL
+               Blizzard retune (not a parse artifact), set "anomalyAckProposal":
+               "<reason + citation>" — it does NOT bypass the anomaly gate (only a
+               human re-running this workflow with the anomaly_ack input can); it is
+               your evidence for that human. Never set it for any other purpose.
 
             6. Do NOT commit, push, tag, or dispatch anything, and do not write outside
                this working tree — publication is the deterministic publish job's.
@@ -174,12 +217,13 @@ jobs:
                and takes · sources refreshed vs degraded.
 
             FAILURE SENTINEL (so problems aren't buried in a green run): on any HARD
-            failure — npm test or build failing at the end despite fixes, or the
-            WCL API refusing auth — append one line describing it to the file
-            "$RUNNER_TEMP/refresh-failed" before ending. Do NOT write the sentinel for
-            expected degradations (YouTube blocking transcripts from this IP, a source
-            being temporarily unreachable with data left unchanged) — those belong in the
-            manifest and summary only.
+            failure — npm test or build failing at the end despite fixes — append one
+            line describing it to the file "$RUNNER_TEMP/refresh-failed" before ending.
+            (WCL auth problems are surfaced deterministically from the evidence file by
+            the workflow itself — summary mention per 1 is enough.) Do NOT write the
+            sentinel for expected degradations (YouTube blocking transcripts from this
+            IP, a source being temporarily unreachable with data left unchanged) — those
+            belong in the manifest and summary only.
 
             Hard rules (also in CLAUDE.md): all game data is fetched live, never from
             model memory — Midnight postdates every training cutoff, so anything
@@ -188,7 +232,8 @@ jobs:
             dist/index.html; PTR-quality data stays era-labeled and out of live
             baselines; creator takes are cited opinion and never move a tier; be a
             polite guest (single fetches, sleep between yt-dlp requests, backoff instead
-            of hammering); never echo the WCL secret.
+            of hammering); never echo any credential or token (you hold no WCL secrets —
+            see 1 — and your own auth token must never appear in output either).
 
       # Hand the agent's working-tree output to the privileged job. Everything the
       # publish job may commit travels here — data/ (incl. the run manifest) and the
@@ -205,19 +250,32 @@ jobs:
             data/
             .claude/skills/*/log.md
 
-      # Promote prompt-level "soft" failures (test/build failure, dead WCL auth) to a
-      # real job failure so GitHub emails the owner — otherwise they'd hide behind
-      # three weeks of green checkmarks. The publish job still runs (!cancelled()) and
-      # its gates decide whether the partial output is publishable.
+      # Promote "soft" failures to a real job failure so GitHub emails the owner —
+      # otherwise they'd hide behind three weeks of green checkmarks. Two kinds: the
+      # agent's sentinel (test/build failure), and — checked deterministically, not via
+      # the agent — a WCL fetch evidence verdict that means credential/config rot.
+      # The publish job still runs (!cancelled()) and its gates decide whether the
+      # partial output is publishable.
       - name: Surface soft failures
         if: always()
         run: |
+          failed=0
           if [ -f "$RUNNER_TEMP/refresh-failed" ]; then
             echo "## Nightly refresh reported failures" >> "$GITHUB_STEP_SUMMARY"
             cat "$RUNNER_TEMP/refresh-failed" >> "$GITHUB_STEP_SUMMARY"
             cat "$RUNNER_TEMP/refresh-failed"
-            exit 1
+            failed=1
           fi
+          if [ -f wcl-fetch/evidence.json ]; then
+            verdict="$(node -e 'console.log(JSON.parse(require("fs").readFileSync("wcl-fetch/evidence.json","utf8")).verdict ?? "")' 2>/dev/null || echo unreadable)"
+            case "$verdict" in
+              no-credentials|oauth-failed|unreadable)
+                echo "## WCL fetch step could not authenticate (verdict: $verdict) — check WCL_CLIENT_ID/WCL_CLIENT_SECRET" >> "$GITHUB_STEP_SUMMARY"
+                echo "WCL fetch verdict: $verdict"
+                failed=1;;
+            esac
+          fi
+          exit "$failed"
 
   publish:
     # Deterministic publication — no AI, no untrusted fetches. Runs even when the
@@ -252,6 +310,15 @@ jobs:
           name: nightly-refresh
           path: .
 
+      # The evidence copy the gate trusts: uploaded by the deterministic fetch step
+      # BEFORE the agent ran (the agent's working-tree copy travels nowhere). A missing
+      # artifact fails this step — and therefore the publish — by design.
+      - name: Download WCL fetch evidence (pre-agent artifact)
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: wcl-evidence
+          path: wcl-fetch
+
       - name: Show what the refresh changed
         run: git status --porcelain && git --no-pager diff --stat || true
 
@@ -261,7 +328,13 @@ jobs:
         run: npm test
       - name: "Gate 2: build"
         run: npm run build
-      - name: "Gate 3: refresh contract (manifest · completeness · anomaly)"
+      - name: "Gate 3: refresh contract (manifest · completeness · anomaly · WCL evidence)"
+        env:
+          # HUMAN-ONLY anomaly override: empty on scheduled runs; a person supplies it
+          # via Run workflow → anomaly_ack after reviewing a blocked mass movement.
+          # The agent-written manifest can only PROPOSE an ack (anomalyAckProposal),
+          # which check-refresh prints for that person — it never satisfies the gate.
+          ANOMALY_ACK: ${{ inputs.anomaly_ack }}
         run: |
           # The agent must have REWRITTEN the manifest this run. An unchanged file
           # means it free-rode on the previous run's record instead of doing

@@ -9,77 +9,76 @@
      2. What does `metric: default` actually resolve to? The SITE's default damage
         ranking is rDPS in modern content, so `default` may reach rDPS data through
         a resolver path the broken enum doesn't. Test: join default-vs-dps rankings
-        by character name — identical amounts ⇒ default==dps (no workaround);
-        systematically different ⇒ default is the redistributed family (workaround).
+        by CANONICAL character key — identical amounts ⇒ default==dps (no
+        workaround); systematically different ⇒ default is the redistributed
+        family (workaround).
      3. Does the encounter-wide leaderboard cover the FULL parse population on the
         small PTR zones (zone-52 Dummy Dome)? If count ≈ the statistics table's
         known parse totals, a true median is computable from rankings pages without
         inventing an aggregate.
 
-   Run via .github/workflows/wcl-probe.yml (WCL_CLIENT_ID/WCL_CLIENT_SECRET env).
-   Prints values and counts only — never the token or secrets. */
+   Join hygiene (2026-07-14 re-audit): rankings are joined by region+server+name,
+   not name alone — different characters can share a name across realms/regions.
+   Keys that still collide within one ranking are EXCLUDED from the equivalence
+   comparison (counted, never guessed), and pages 1–2 are compared, not just page 1.
+
+   Transport (headers, OAuth, GraphQL POST) is imported from src/fetch-wcl.mjs —
+   the nightly's deterministic fetch stage — so the proven recipe lives in exactly
+   one place. Run via .github/workflows/wcl-probe.yml (WCL_CLIENT_ID /
+   WCL_CLIENT_SECRET env). Prints values and counts only — never the token or
+   secrets. */
+
+import { oauthToken, gql } from "./fetch-wcl.mjs";
 
 const ID = process.env.WCL_CLIENT_ID, SECRET = process.env.WCL_CLIENT_SECRET;
 if (!ID || !SECRET) { console.error("✗ WCL_CLIENT_ID / WCL_CLIENT_SECRET not set"); process.exit(1); }
 
-// Header recipe proven by the 2026-07-14 run: browser UA for the token POST;
-// Origin + Referer + sec-ch-ua to clear Cloudflare on the GraphQL POST.
-const UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36";
-const GQL_HEADERS = token => ({
-  "authorization": `Bearer ${token}`,
-  "content-type": "application/json",
-  "user-agent": UA,
-  "origin": "https://www.warcraftlogs.com",
-  "referer": "https://www.warcraftlogs.com/",
-  "sec-ch-ua": '"Chromium";v="126", "Not.A/Brand";v="24"'
-});
-
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
-async function token() {
-  const res = await fetch("https://www.warcraftlogs.com/oauth/token", {
-    method: "POST",
-    headers: {
-      "authorization": "Basic " + Buffer.from(`${ID}:${SECRET}`).toString("base64"),
-      "content-type": "application/x-www-form-urlencoded",
-      "user-agent": UA
-    },
-    body: "grant_type=client_credentials"
-  });
-  const body = await res.text();
-  if (!res.ok) { console.error(`✗ token POST ${res.status} (body ${body.length} bytes)`); process.exit(1); }
-  const t = JSON.parse(body).access_token;
-  console.log(`✓ OAuth token issued (len ${t.length})`);
-  return t;
-}
-
-async function gql(t, query) {
-  const res = await fetch("https://www.warcraftlogs.com/api/v2/client", {
-    method: "POST", headers: GQL_HEADERS(t), body: JSON.stringify({ query })
-  });
-  const text = await res.text();
-  let json = null;
-  try { json = JSON.parse(text); } catch { /* Cloudflare HTML or the like */ }
-  return { status: res.status, json, textHead: text.slice(0, 120) };
-}
+/* Canonical character key: region + server + name. characterRankings rows carry
+   server info in varying shapes across zones — fall back progressively; whatever
+   ambiguity survives is caught by the collision counter below and excluded rather
+   than compared by guess. */
+const charKey = r => [
+  r.region?.slug ?? r.region?.name ?? r.regionName ?? (typeof r.region === "string" ? r.region : ""),
+  r.server?.id ?? r.serverID ?? r.server?.slug ?? r.server?.name ?? r.serverName ?? (typeof r.server === "string" ? r.server : ""),
+  r.name ?? ""
+].join("|");
 
 /* characterRankings returns a JSON scalar blob; shape observed: { page, hasMorePages,
-   count, rankings: [{ name, class, spec, amount, ... }] } — read defensively. */
-async function probeRankings(t, encounterId, metric, extraArgs = "") {
-  const q = `{ worldData { encounter(id: ${encounterId}) { name characterRankings(metric: ${metric}, page: 1${extraArgs}) } } }`;
-  const { status, json, textHead } = await gql(t, q);
-  if (!json) return { ok: false, err: `HTTP ${status}, non-JSON: ${textHead}` };
-  if (json.errors?.length) return { ok: false, err: json.errors.map(e => e.message).join("; ") };
-  const enc = json.data?.worldData?.encounter;
-  const blob = enc?.characterRankings;
-  if (!blob) return { ok: false, err: "no characterRankings in response" };
-  const rankings = blob.rankings ?? [];
+   count, rankings: [{ name, class, spec, amount, server?, ... }] } — read defensively.
+   Fetches up to `pages` pages (stops early when hasMorePages is false). */
+async function probeRankings(t, encounterId, metric, pages = 1, extraArgs = "") {
+  const all = [];
+  let encName = null, keys = null, count = null, hasMore = null;
+  for (let page = 1; page <= pages; page++) {
+    if (page > 1) await sleep(600); // polite guest
+    const q = `{ worldData { encounter(id: ${encounterId}) { name characterRankings(metric: ${metric}, page: ${page}${extraArgs}) } } }`;
+    const { status, json, textHead } = await gql(t, q);
+    if (!json) return { ok: false, err: `HTTP ${status}, non-JSON: ${textHead}` };
+    if (json.errors?.length) return { ok: false, err: json.errors.map(e => e.message).join("; ") };
+    const enc = json.data?.worldData?.encounter;
+    const blob = enc?.characterRankings;
+    if (!blob) return { ok: false, err: "no characterRankings in response" };
+    encName = enc.name;
+    keys = Object.keys(blob).join(",");
+    count = blob.count ?? null;
+    hasMore = blob.hasMorePages ?? null;
+    all.push(...(blob.rankings ?? []));
+    if (!blob.hasMorePages) break;
+  }
+  const byKey = new Map(), collided = new Set();
+  for (const r of all) {
+    const k = charKey(r);
+    if (byKey.has(k) && byKey.get(k) !== r.amount) collided.add(k);
+    else byKey.set(k, r.amount);
+  }
+  for (const k of collided) byKey.delete(k); // ambiguous identity — never compare by guess
   return {
-    ok: true, encName: enc.name, keys: Object.keys(blob).join(","),
-    count: blob.count ?? null, hasMore: blob.hasMorePages ?? null,
-    n: rankings.length,
-    sample: rankings.slice(0, 3).map(r => `${r.name}(${r.class}/${r.spec})=${r.amount}`),
-    byName: new Map(rankings.map(r => [r.name, r.amount]))
+    ok: true, encName, keys, count, hasMore,
+    n: all.length, collided: collided.size,
+    sample: all.slice(0, 3).map(r => `${r.name}(${r.class}/${r.spec})=${r.amount}`),
+    byKey
   };
 }
 
@@ -88,8 +87,12 @@ const ENCOUNTERS = [
   { id: 3591, label: "zone52 Dummy Dome 1-target" }
 ];
 const METRICS = ["dps", "rdps", "ndps", "default"];
+const EQUIV_PAGES = 2; // compare beyond page 1 before drawing a semantic conclusion
 
-const t = await token();
+const auth = await oauthToken(ID, SECRET);
+if (!auth.ok) { console.error(`✗ token POST ${auth.status}`); process.exit(1); }
+console.log(`✓ OAuth token issued (len ${auth.token.length})`);
+const t = auth.token;
 
 const rl = await gql(t, "{ rateLimitData { limitPerHour pointsSpentThisHour } }");
 console.log("rateLimitData:", JSON.stringify(rl.json?.data?.rateLimitData ?? rl.textHead));
@@ -98,31 +101,33 @@ const results = {};
 for (const enc of ENCOUNTERS) {
   for (const metric of METRICS) {
     await sleep(600); // polite guest
-    const r = await probeRankings(t, enc.id, metric);
+    const pages = metric === "dps" || metric === "default" ? EQUIV_PAGES : 1;
+    const r = await probeRankings(t, enc.id, metric, pages);
     results[`${enc.id}:${metric}`] = r;
     console.log(r.ok
-      ? `✓ enc ${enc.id} [${enc.label}] metric=${metric} → n=${r.n} count=${r.count} hasMore=${r.hasMore} keys=[${r.keys}] sample: ${r.sample.join(" · ")}`
+      ? `✓ enc ${enc.id} [${enc.label}] metric=${metric} → n=${r.n} count=${r.count} hasMore=${r.hasMore} collidedKeys=${r.collided} keys=[${r.keys}] sample: ${r.sample.join(" · ")}`
       : `✗ enc ${enc.id} [${enc.label}] metric=${metric} → ${r.err}`);
   }
 }
 
-// Equivalence: default vs dps, joined by character name on page 1.
+// Equivalence: default vs dps, joined by canonical character key over pages 1–2.
 for (const enc of ENCOUNTERS) {
   const d = results[`${enc.id}:default`], p = results[`${enc.id}:dps`];
   if (!d?.ok || !p?.ok) { console.log(`— equivalence enc ${enc.id}: skipped (missing side)`); continue; }
   let same = 0, diff = 0, maxRel = 0;
-  for (const [name, amt] of d.byName) {
-    if (!p.byName.has(name)) continue;
-    const other = p.byName.get(name);
+  for (const [key, amt] of d.byKey) {
+    if (!p.byKey.has(key)) continue;
+    const other = p.byKey.get(key);
     if (amt === other) same++;
     else { diff++; if (other) maxRel = Math.max(maxRel, Math.abs(amt - other) / other); }
   }
-  console.log(`≟ enc ${enc.id} default-vs-dps (joined by name): identical=${same} differing=${diff} maxRelDelta=${(maxRel * 100).toFixed(2)}%`);
+  const excluded = d.collided + p.collided;
+  console.log(`≟ enc ${enc.id} default-vs-dps (canonical key, ${EQUIV_PAGES} pages): identical=${same} differing=${diff} maxRelDelta=${(maxRel * 100).toFixed(2)}% ambiguousExcluded=${excluded}`);
   console.log(diff === 0 && same > 0
     ? `  → metric "default" resolves to plain dps here — NOT an rdps workaround`
     : diff > 0
       ? `  → metric "default" returns DIFFERENT numbers than dps — likely the redistributed (rDPS-family) path; workaround viable, verify direction/magnitude`
-      : `  → no overlapping names; inconclusive`);
+      : `  → no overlapping canonical keys; inconclusive`);
 }
 
 // Population coverage on the small PTR encounter: does the unfiltered leaderboard

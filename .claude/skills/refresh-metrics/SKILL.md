@@ -11,12 +11,16 @@ Numbers stay numbers — **never convert metrics to letter tiers.**
 
 ## WCL API (preferred when configured)
 
-Credentials come from either source, checked in this order:
-1. **Environment variables** `WCL_CLIENT_ID` + `WCL_CLIENT_SECRET` — used by the **cloud
-   routine** (set as routine environment secrets; the local config.json is gitignored and
-   absent in the cloud). This is the required path when running server-side: WCL asks
-   scrapers to "use the API instead," and datacenter IPs are more likely to be throttled
-   on the HTML endpoint, so authenticate as the registered client instead of scraping.
+**Nightly CI (2026-07-14 re-audit): the agent has NO WCL credentials.** A deterministic
+pre-agent workflow step runs `src/fetch-wcl.mjs` with `WCL_CLIENT_ID`/`WCL_CLIENT_SECRET`
+scoped to that step alone and writes `wcl-fetch/evidence.json` — on the runner, read
+that file and record the five WCL manifest rows from it; never fetch warcraftlogs.com
+yourself there (the publish gate cross-checks a pre-agent copy of the evidence, so a
+fabricated WCL "success" fails the publish). Everything below applies to LOCAL runs.
+
+Local credentials come from either source, checked in this order:
+1. **Environment variables** `WCL_CLIENT_ID` + `WCL_CLIENT_SECRET` (also what
+   `src/fetch-wcl.mjs` reads — you can run it locally to reproduce the CI evidence).
 2. **`.claude/skills/refresh-metrics/config.json`** (see `config.json.example`) — the
    local path, same two fields (`clientId`, `clientSecret`).
 
@@ -78,11 +82,16 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
   - **Standing behavior until WCL fixes it:** ONE cheap retry per run (a single
     `metric: rdps` query on a known-good encounter, e.g. 3176); if still 500, record
     the five WCL manifest rows as `unreachable` with this reason and leave data
-    unchanged. The dispatch-only workflow **"WCL API probe (diagnostic)"**
+    unchanged. On the nightly runner this check IS `src/fetch-wcl.mjs` (the
+    deterministic pre-agent step — read its `wcl-fetch/evidence.json` instead of
+    re-running anything); locally you can run the same script or the query by hand.
+    The dispatch-only workflow **"WCL API probe (diagnostic)"**
     (`.github/workflows/wcl-probe.yml`) re-checks the whole picture in ~20s. If rdps
     starts working: zone 52 (single encounter per target count, small population) is
     the first candidate for an API-median recipe — validate full-population coverage
-    by paginating to the end and comparing counts before trusting any median.
+    by paginating to the end and comparing counts before trusting any median, and
+    freeze the recipe into `src/fetch-wcl.mjs` (owner decision), never into the
+    nightly agent.
 - **Zone 54 is the 12.1 PTR raid** (Venomous Abyss), zone 56 M+ S2 PTR — PTR-quality
   data. **Zone 52 is "Dummy Dome"** — a target-dummy sim harness (Sinister Single 1T /
   Diabolical Duo 2T / Terrible Trio 3T / Fearsome Five 5T / Hazardous Healer), NOT a raid;

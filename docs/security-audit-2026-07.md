@@ -29,12 +29,11 @@ Done (`.github/workflows/nightly.yml`):
   Dependabot proposes reviewed bumps.
 
 Residual, by design (revisit if the threat model changes):
-- **WCL API credentials and the Claude OAuth token remain in the agent job's env.** The
-  OAuth token is inherent (it *is* the agent's auth). Removing the WCL creds requires
-  rewriting the WCL ingestion as a deterministic pre-fetch stage that runs before the
-  agent — the audit's "stage 1". Worth doing if/when the WCL v2 GraphQL queries are
-  stable enough to freeze into a script; tracked as the main follow-up. Exposure today:
-  a free-tier API client (rate-limited, revocable, no PII).
+- ~~**WCL API credentials and the Claude OAuth token remain in the agent job's env.**~~
+  **Closed by the 2026-07-14 re-audit remediation** (see the re-audit section below):
+  the WCL credentials now live only in a deterministic pre-agent step
+  (`src/fetch-wcl.mjs`), step-scoped and gone before the agent starts. The Claude
+  OAuth token remains in the agent step — inherent (it *is* the agent's auth).
 - `--permission-mode bypassPermissions` stays: the run is headless (nobody to answer
   prompts), and the meaningful boundary is now credential scope rather than tool
   prompts. A deny-list would be theater against injection; the read-only token is not.
@@ -137,6 +136,95 @@ run's record and must be rebuilt from each run's own outcomes (with a fresh
 from the committed copy. Run history from the same investigation: the old architecture
 went green on 07-10, 07-11, and 07-13 while committing nothing — the manifest
 requirement now makes a verifiable no-op impossible.
+
+## Re-audit disposition (2026-07-14, second external audit — verified before applying)
+
+The outside auditor re-reviewed all repos the same day and rated this one A−/B+. Every
+wow-class-tracker claim was independently verified against the code before acting —
+all of them held up (its "genuinely fixed" list matched the workflows/gates exactly;
+its current-WCL-state description matched the committed manifest). Findings →
+disposition:
+
+### High: AI still holds secrets while consuming untrusted content — **fixed**
+The WCL credentials are no longer in the agent's environment. A deterministic step
+(`src/fetch-wcl.mjs`) runs FIRST with `WCL_CLIENT_ID`/`WCL_CLIENT_SECRET` scoped to
+that step alone, performs the standing per-run WCL protocol (one cheap `rdps` check —
+the entire rDPS family still 500s upstream, so nothing can honestly land anyway), and
+writes `wcl-fetch/evidence.json` — the agent's ONLY WCL input. When WCL fixes the
+rDPS family, the median recipe gets frozen into that script (zone 52 first), never
+into the agent. Remaining in the agent step: `CLAUDE_CODE_OAUTH_TOKEN` only
+(inherent — it is the agent's auth), exactly as the re-audit concedes.
+
+### High: anomalyAck controlled by the same AI being gated — **fixed**
+`checkAnomaly`'s ack now reaches the gate ONLY via the `anomaly_ack`
+workflow_dispatch input (→ `ANOMALY_ACK` env on the publish job's Gate 3) or a local
+`--ack=` flag — i.e. a human. Scheduled runs can never carry one. The agent may write
+`anomalyAckProposal` (reason + citation) into the manifest; the gate prints it as
+evidence for the reviewing human and it satisfies nothing.
+
+### High/medium: "success" does not prove a source was fetched this run — **fixed for WCL, tightened elsewhere, residual documented**
+- WCL rows are cross-checked against the fetch evidence, which is uploaded as its own
+  artifact BEFORE the agent runs (`wcl-evidence`) — the publish gate reads that copy,
+  so the agent has no tamper window. `success` on a WCL row requires
+  `evidence.landed[key].rows > 0`; today that is impossible by construction, which is
+  honest (nothing lands while rDPS is broken).
+- `startedAt` is now required and validated (full ISO instant, must belong to the
+  run); future-dated `run` values are rejected; `data/history/` snapshots are
+  validated (a planted future-dated snapshot could otherwise silence the heartbeat
+  forever and corrupt movement baselines — found during this remediation's own sweep).
+- Residual, accepted: for the AI-scraped web sources (tier pages etc.) there is no
+  deterministic fetch layer to generate content hashes — building one would mean
+  rewriting the scraping deterministically, which is exactly what the AI distillation
+  stage exists to avoid. Those sources keep the date/row/anomaly/row-drop teeth.
+
+### Medium: one fresh metric can mask a mostly stale source — **fixed**
+Metric-family date probes (`metrics`, `ptrDummy`) now return a COVERAGE date — the
+min-th-freshest row's `asOf` (min = `date.minFresh`, else `rows.min`, else 1) — in
+both the publish gate's success teeth and the heartbeat's staleness math. A single
+fresh row no longer vouches for a cut whose other role cuts stayed old.
+
+### Medium: row floors permit substantial silent loss — **fixed**
+`checkRowDrop` compares every requirement's row count against the last committed
+state (`git show HEAD:` — by construction a gate-passing state) and fails the publish
+on a >`maxRowDropPct` (25%) shrink, even when still above the absolute floor.
+
+### Medium: freshness uses dates rather than startedAt — **fixed**
+The heartbeat parses `manifest.startedAt` as a real instant (36h now means 36h); the
+date-only `run` value is strictly the legacy fallback for the same event, and history
+snapshots stay date-grained (aging a bare date against a real clock would over-age a
+same-day local snapshot into a false alert).
+
+### Medium: WCL probe joins characters only by name — **fixed; conclusion re-checkable**
+`wcl-probe.mjs` now joins by region+server+name, EXCLUDES keys that still collide
+(counted, never guessed), compares pages 1–2, and imports its transport from
+`fetch-wcl.mjs` so the recipe lives once. Note: the original "default == plain dps"
+conclusion is expected to survive — a name-collision artifact biases toward
+*differing* amounts, not identical ones — but the next dispatch of the probe workflow
+re-verifies it under the fixed join.
+
+### Additional suggestions — adopted / declined
+- Heartbeat issue lifecycle — **adopted**: auto-close on recovery, body refreshed
+  daily while stale, comment only when the violating set changes (fingerprint line
+  from `check-refresh --age`). Also fixed a latent first-alert bug: `--jq
+  '.[0].number'` prints literal `null` on an empty list, so the create-issue branch
+  could never run; now `// empty`.
+- Fetch evidence retained even on failed publication — **adopted** (the
+  `wcl-evidence` artifact uploads before the agent, retention 7 days, regardless of
+  publish outcome).
+- Manual review for new source domains / creator authority — **already largely
+  enforced in validation** (https-only, citation-host allowlist, creator-scope and
+  generalCreators firewalls); a formal review process for config changes is an owner
+  process choice, see owner actions.
+- Commit signing / artifact attestation — **not adopted**: `GITHUB_TOKEN` pushes are
+  already attributable to the workflow, the publish job is deterministic from gated
+  inputs, and Pages redeploys rebuild from source; attestation adds moving parts
+  without changing what an attacker able to defeat the gates could do. Revisit if the
+  site ever gains consumers who need provenance.
+
+### Re-audit points that were already true (no change needed)
+- "The current manifest is now honest [about WCL]" — matches the committed manifest.
+- "The unchanged-manifest check prevents exact reuse" — and the new
+  startedAt/coverage/evidence teeth close the cheap ways around it.
 
 ## Owner actions (not possible from repo files)
 

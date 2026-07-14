@@ -179,19 +179,27 @@ exception: the newest bracket-scoped, non-superseded read nudges the 12.1 projec
 
 ## Refresh workflows
 
-### Run manifest + integrity gates (2026-07-14 security audit)
+### Run manifest + integrity gates (2026-07-14 security audit + same-day re-audit)
 `data/required-sources.json` is the machine-readable refresh contract — every source a
-full refresh must account for, with staleness thresholds, row-count floors, and
-mass-movement anomaly limits. `data/run-manifest.json` is the per-run status file: one
+full refresh must account for, with staleness thresholds, row-count floors, a
+row-drop limit (`maxRowDropPct` vs the last committed state), and mass-movement
+anomaly limits. `data/run-manifest.json` is the per-run status file: one
 honest result row per requirement (`success | partial | unreachable | blocked |
-parse_error | skipped`; everything but success needs a `detail`), plus `run`, `summary`
-(becomes the nightly commit message), and optional `anomalyAck` (ONLY for a real,
-citable Blizzard mass retune). `node src/check-refresh.mjs --manifest` enforces it in
+parse_error | skipped`; everything but success needs a `detail`), plus `run`, a full
+ISO `startedAt` (required — the heartbeat's precision signal), `summary`
+(becomes the nightly commit message), and optional `anomalyAckProposal` (the agent's
+cited evidence FOR a human ack — **the anomaly gate itself only accepts the
+human-supplied `anomaly_ack` workflow input**, never anything agent-written).
+`node src/check-refresh.mjs --manifest` enforces it in
 the nightly publish gate — "success" claims are cross-checked against the actual stored
-snapshot/asOf dates, so quiet skips and dishonest rows fail the publish. **Every full
+snapshot/asOf dates (metric families use COVERAGE dates: the min-th-freshest row, so
+one fresh row can't vouch for a stale cut) and, for WCL rows, against
+`wcl-fetch/evidence.json` from the deterministic fetch step — so quiet skips and
+dishonest rows fail the publish. **Every full
 refresh — nightly or local — ends by updating the manifest**; the freshness heartbeat
 (`.github/workflows/freshness.yml` → `check-refresh --age`) also accepts a new history
-snapshot as proof of life, and alerts (issue + red run) on staleness past thresholds.
+snapshot as proof of life, alerts (one auto-closing issue + red run) on staleness past
+thresholds, and comments only when the violating set changes.
 The committed manifest is always the PREVIOUS run's record — never evidence about the
 current run, and its standing skip/unreachable explanations never excuse skipping
 again: each run attempts every requirement fresh and rewrites the file (fresh `run` +
@@ -264,21 +272,28 @@ legacy/   original single-file tracker (pre-conversion reference)
 ```
 
 Nightly automation lives in `.github/workflows/nightly.yml` (cron 10:37 UTC), split into
-two isolated jobs since the 2026-07-14 security audit. The **refresh** job runs Claude
+isolated stages since the 2026-07-14 security audit (tightened by the same-day
+re-audit). First a **deterministic WCL fetch step** — the ONLY process holding
+`WCL_CLIENT_ID`/`WCL_CLIENT_SECRET` (step-scoped env) — runs `src/fetch-wcl.mjs` and
+writes `wcl-fetch/evidence.json`, uploaded as its own artifact before the agent
+starts. Then the **refresh** job's agent step runs Claude
 Code headlessly with a READ-ONLY token (no push/dispatch scopes, checkout credentials
 not persisted, yt-dlp preinstalled at the `requirements.txt` pin, action pinned by
-commit SHA) — ptr-watch + watch-creators + a full tier/metric refresh **every run**
+commit SHA, NO WCL credentials — the evidence file is its only WCL input) —
+ptr-watch + watch-creators + a full tier/metric refresh **every run**
 (policy 2026-07-08: no staleness gate — every source is pulled fresh nightly) — then
 writes `data/run-manifest.json` and hands `data/` + skill logs to the **publish** job as
 an artifact. Publish (deterministic, no AI, holds the write token) gates on `npm test` →
-`npm run build` → `node src/check-refresh.mjs --manifest`, then snapshots, stages
+`npm run build` → `node src/check-refresh.mjs --manifest` (which cross-checks WCL rows
+against the pre-agent evidence artifact and takes its anomaly ack ONLY from the
+human `anomaly_ack` workflow input), then snapshots, stages
 explicit paths, commits (title = the manifest summary, sanitized), pushes, and
 dispatches deploy.yml (GITHUB_TOKEN pushes don't auto-trigger workflows). A daily
-heartbeat (`freshness.yml`) alerts via issue + red run when the last refresh signal
-exceeds 36h or a source exceeds its max age. WCL data comes via the v2 API using
-`WCL_CLIENT_ID`/`WCL_CLIENT_SECRET` repo secrets — necessarily still present in the
-agent job, the documented residual risk in `docs/security-audit-2026-07.md`; auth is
-`CLAUDE_CODE_OAUTH_TOKEN` (~1-year validity — renew). YouTube transcripts may be
+heartbeat (`freshness.yml`) alerts via a single auto-closing issue + red run when the
+last refresh signal exceeds 36h (full-timestamp precision via the manifest's
+`startedAt`) or a source exceeds its max age. The agent step's only secret is
+`CLAUDE_CODE_OAUTH_TOKEN` (~1-year validity — renew), the documented inherent
+residual in `docs/security-audit-2026-07.md`. YouTube transcripts may be
 IP-blocked on runners; those videos queue as "pending" and catch up in local runs. The
 old local scheduled task and claude.ai cloud routine are retired (docs/cloud-routine.md
 records why); the local task can still be run manually for transcript catch-up.

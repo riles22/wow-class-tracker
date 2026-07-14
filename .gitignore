@@ -6,6 +6,10 @@ Thumbs.db
 # WCL API credentials
 .claude/skills/refresh-metrics/config.json
 
+# deterministic WCL fetch output (src/fetch-wcl.mjs) — travels between nightly jobs
+# as an artifact, never committed
+wcl-fetch/
+
 # machine-local skills mirror (may contain the gitignored WCL config) — never commit
 .agents/
 AGENTS.md

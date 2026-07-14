@@ -25,7 +25,7 @@ const isRealDate = v => {
 /* opts.fullRoster: enforce the real 40-spec Midnight roster — used by the CLI, the build,
    and the apply-* merge scripts (which operate on the repo's real data), but not by unit
    fixtures, which validate small synthetic datasets. */
-export function validateData({ specs, sources, scales, community, ptrBuilds, creatorTakes, encounterTiers }, opts = {}) {
+export function validateData({ specs, sources, scales, community, ptrBuilds, creatorTakes, encounterTiers, historySnapshots }, opts = {}) {
   const errors = [];
   // Every date in the data is a claim about when something was fetched or published —
   // none may sit in the future. +1 day of skew allowed: a nightly UTC run can honestly
@@ -317,6 +317,17 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
       const classWide = [...classNames].some(c => e.startsWith(`${c} (`));
       if (!rosterNames.has(e) && !classWide) errors.push(`ptr-builds.json: build ${build.date} specsAffected "${e}" matches no roster spec or "Class (" prefix`);
     }
+  }
+
+  // --- history snapshots (movement baselines + the freshness heartbeat's proof of life) ---
+  // The nightly agent's whole data/ tree travels to the publish job, so a snapshot it
+  // wrote is committed like any data file. A future-dated snapshot would permanently
+  // silence the staleness heartbeat (checkFreshness trusts historySnapshots[0].date)
+  // and corrupt every movement baseline — reject it like any other future-dated claim.
+  for (const snap of historySnapshots ?? []) {
+    isoOk(snap?.date, "data/history: snapshot date");
+    if (snap?.date == null) errors.push("data/history: snapshot missing its date field");
+    if (snap?.specs == null || typeof snap.specs !== "object") errors.push(`data/history: snapshot ${snap?.date ?? "?"} has no specs state`);
   }
 
   // --- encounter tiers (per-boss / per-dungeon Archon tiers; a whole displayed file) ---

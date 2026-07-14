@@ -3,11 +3,14 @@ name: Data freshness heartbeat
 # The 2026-07-09→07-12 nightly gap and the quietly-stale sources the external audit
 # flagged were only findable by reading workflow logs. This heartbeat makes absence
 # itself visible: every afternoon (after the nightly window) it checks the COMMITTED
-# state — how old the last run manifest is, and every required source's data age
-# against data/required-sources.json — and on any violation opens/updates an alert
-# issue and goes red. Staleness alerts fire even when the nightly EXPLAINED the
-# staleness (e.g. WCL unreachable from runner IPs): the alert is visibility, not
-# blame, and maps to the audit's "alert when a high-value source exceeds its age".
+# state — how old the last refresh signal is (manifest startedAt at full-timestamp
+# precision), and every required source's data age against
+# data/required-sources.json — and on any violation maintains ONE alert issue and
+# goes red. Issue lifecycle (re-audit 2026-07-14): body refreshed daily while stale,
+# comment only when the violating set changes (fingerprint), auto-close on recovery.
+# Staleness alerts fire even when the nightly EXPLAINED the staleness (e.g. WCL
+# unreachable from runner IPs): the alert is visibility, not blame, and maps to the
+# audit's "alert when a high-value source exceeds its age".
 
 on:
   schedule:
@@ -37,19 +40,44 @@ jobs:
           else
             echo "stale=true" >> "$GITHUB_OUTPUT"
           fi
+          # Stable violation fingerprint (sorted keys) — the alert issue comments only
+          # when THIS changes, not on every daily re-check (re-audit: no unbounded
+          # daily comments on one standing issue).
+          echo "fingerprint=$(sed -n 's/^fingerprint=//p' freshness-report.txt | tail -1)" >> "$GITHUB_OUTPUT"
 
+      # One standing alert issue while stale: created on the first violation, body
+      # refreshed (not commented) on unchanged staleness, a comment added only when
+      # the violating set changes, and auto-closed by the step below on recovery.
       - name: Open or update the alert issue
         if: steps.check.outputs.stale == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
+          FP: ${{ steps.check.outputs.fingerprint }}
         run: |
           title="Data freshness alert (automated heartbeat)"
-          body="$(printf 'The freshness heartbeat found stale state at %s:\n\n```\n%s\n```\n\nSource: .github/workflows/freshness.yml → src/check-refresh.mjs --age (thresholds in data/required-sources.json). Close this once resolved — the heartbeat files a fresh alert if staleness recurs.' "$(date -u +%FT%TZ)" "$(cat freshness-report.txt)")"
-          num="$(gh issue list --state open --search "in:title \"$title\"" --json number --jq '.[0].number')" || num=""
-          if [ -n "$num" ]; then
-            gh issue comment "$num" --body "$body"
-          else
+          marker="<!-- freshness-fingerprint: ${FP} -->"
+          body="$(printf '%s\nThe freshness heartbeat found stale state at %s:\n\n```\n%s\n```\n\nSource: .github/workflows/freshness.yml → src/check-refresh.mjs --age (thresholds in data/required-sources.json). While staleness persists the body above is refreshed daily; a comment is added only when the set of stale sources changes. The heartbeat closes this automatically once everything is back within thresholds.' "$marker" "$(date -u +%FT%TZ)" "$(cat freshness-report.txt)")"
+          num="$(gh issue list --state open --search "in:title \"$title\"" --json number --jq '.[0].number // empty')" || num=""
+          if [ -z "$num" ]; then
             gh issue create --title "$title" --body "$body"
+          else
+            prev="$(gh issue view "$num" --json body --jq .body | sed -n 's/^<!-- freshness-fingerprint: \(.*\) -->$/\1/p' | head -1)"
+            gh issue edit "$num" --body "$body"
+            if [ "$prev" != "$FP" ]; then
+              gh issue comment "$num" --body "Stale-source set changed: \`${prev:-unknown}\` → \`${FP}\` — see the refreshed issue body for the current report."
+            fi
+          fi
+
+      - name: Close the alert issue on recovery
+        if: steps.check.outputs.stale == 'false'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          title="Data freshness alert (automated heartbeat)"
+          num="$(gh issue list --state open --search "in:title \"$title\"" --json number --jq '.[0].number // empty')" || num=""
+          if [ -n "$num" ]; then
+            gh issue comment "$num" --body "Recovered: the $(date -u +%FT%TZ) heartbeat found every source back within thresholds. Auto-closing."
+            gh issue close "$num"
           fi
 
       - name: Go red when stale

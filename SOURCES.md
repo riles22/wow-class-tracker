@@ -113,8 +113,10 @@ as reliability mechanics (so fetches succeed / avoid bot-blocks), not as pull li
 - **Warcraft Logs**: v2 GraphQL API is **configured and verified** (client credentials
   in the gitignored `.claude/skills/refresh-metrics/config.json`; token grant + zone
   query tested 2026-07-01). HTML statistics tables remain the fallback: XHR headers,
-  fetched fresh every run (residential IP; the runner uses the API since datacenter IPs
-  are Cloudflare-blocked on the HTML endpoint).
+  fetched fresh every run (residential IP; datacenter IPs are Cloudflare-blocked on
+  the HTML endpoint). On the nightly runner, API access happens ONLY in the
+  deterministic pre-agent fetch step (`src/fetch-wcl.mjs`, 2026-07-14 re-audit) — the
+  AI agent holds no WCL credentials and consumes its evidence file instead.
 - **Archon / Murlok / Bloodmallet / Blizzard forums / YouTube RSS**: plain fetches every
   run, retry-with-backoff on transient 404s (reliability, not a cap).
 - **YouTube transcripts**: yt-dlp with a short sleep between requests (avoids bot-blocks);

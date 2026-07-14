@@ -68,6 +68,21 @@ test("validateData enforces https-only URLs and the take-host allowlist", async 
   assert.ok(errors.some(e => e.includes('general creator "Sketchy" url')));
 });
 
+test("validateData rejects planted or malformed history snapshots (heartbeat-silencing guard)", async () => {
+  const data = await loadData(ROOT);
+  const broken = structuredClone(data);
+  // A future-dated snapshot would become historySnapshots[0]: the movement baseline
+  // AND the freshness heartbeat's proof of life — the exact shape a prompt-injected
+  // nightly agent could plant, since its whole data/ tree gets committed.
+  broken.historySnapshots.unshift({ date: "2199-01-01", specs: {} });
+  broken.historySnapshots.push({ specs: {} });
+  broken.historySnapshots.push({ date: "2026-07-01" });
+  const errors = validateData(broken, { now: "2026-07-14" });
+  assert.ok(errors.some(e => e.includes("data/history") && e.includes("future-dated") && e.includes("2199-01-01")));
+  assert.ok(errors.some(e => e.includes("data/history") && e.includes("missing its date")));
+  assert.ok(errors.some(e => e.includes("data/history") && e.includes("no specs state")));
+});
+
 test("validateData enforces era↔name consistency, finite values, and metric uniqueness", async () => {
   const data = await loadData(ROOT);
   const broken = structuredClone(data);
