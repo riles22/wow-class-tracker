@@ -1,0 +1,29 @@
+name: WCL API probe (diagnostic)
+
+# Manual-dispatch-only diagnostic for the standing WCL v2 GraphQL issue (the
+# rdps-family metrics 500 on every encounter — see docs/security-audit-2026-07.md
+# and .claude/skills/ptr-watch/log.md 2026-07-14). Deterministic: runs a fixed
+# probe script with the WCL API secrets and prints values/counts only — no AI, no
+# untrusted-content interpretation, never echoes credentials. Cheap to re-run when
+# checking whether WCL has fixed the broken metrics.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "22"
+      - name: Probe the WCL v2 API
+        env:
+          WCL_CLIENT_ID: ${{ secrets.WCL_CLIENT_ID }}
+          WCL_CLIENT_SECRET: ${{ secrets.WCL_CLIENT_SECRET }}
+        run: node src/wcl-probe.mjs
