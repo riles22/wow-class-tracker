@@ -44,30 +44,42 @@ export const gqlHeaders = token => ({
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
+/* Both transport helpers are TOTAL — a rejected fetch() (DNS, reset, TLS, proxy)
+   becomes a status-0 result, never a throw. This script runs unattended before the
+   nightly agent; a crash here would kill the whole refresh job, when the honest
+   outcome of a network failure is simply evidence saying so (verdict network-failed). */
 export async function oauthToken(id, secret) {
-  const res = await fetch("https://www.warcraftlogs.com/oauth/token", {
-    method: "POST",
-    headers: {
-      "authorization": "Basic " + Buffer.from(`${id}:${secret}`).toString("base64"),
-      "content-type": "application/x-www-form-urlencoded",
-      "user-agent": UA
-    },
-    body: "grant_type=client_credentials"
-  });
-  const body = await res.text();
-  if (!res.ok) return { ok: false, status: res.status, bodyBytes: body.length };
-  try { return { ok: true, token: JSON.parse(body).access_token }; }
-  catch { return { ok: false, status: res.status, bodyBytes: body.length }; }
+  try {
+    const res = await fetch("https://www.warcraftlogs.com/oauth/token", {
+      method: "POST",
+      headers: {
+        "authorization": "Basic " + Buffer.from(`${id}:${secret}`).toString("base64"),
+        "content-type": "application/x-www-form-urlencoded",
+        "user-agent": UA
+      },
+      body: "grant_type=client_credentials"
+    });
+    const body = await res.text();
+    if (!res.ok) return { ok: false, status: res.status, bodyBytes: body.length };
+    try { return { ok: true, token: JSON.parse(body).access_token }; }
+    catch { return { ok: false, status: res.status, bodyBytes: body.length }; }
+  } catch (err) {
+    return { ok: false, status: 0, error: err?.cause?.code ?? err?.message ?? String(err) };
+  }
 }
 
 export async function gql(token, query) {
-  const res = await fetch("https://www.warcraftlogs.com/api/v2/client", {
-    method: "POST", headers: gqlHeaders(token), body: JSON.stringify({ query })
-  });
-  const text = await res.text();
-  let json = null;
-  try { json = JSON.parse(text); } catch { /* Cloudflare HTML or the like */ }
-  return { status: res.status, json, textHead: text.slice(0, 120) };
+  try {
+    const res = await fetch("https://www.warcraftlogs.com/api/v2/client", {
+      method: "POST", headers: gqlHeaders(token), body: JSON.stringify({ query })
+    });
+    const text = await res.text();
+    let json = null;
+    try { json = JSON.parse(text); } catch { /* Cloudflare HTML or the like */ }
+    return { status: res.status, json, textHead: text.slice(0, 120) };
+  } catch (err) {
+    return { status: 0, json: null, textHead: `fetch failed: ${err?.cause?.code ?? err?.message ?? err}` };
+  }
 }
 
 /* Pure verdict mapping — unit-tested. `probe` is the rdps characterRankings attempt:
@@ -78,10 +90,11 @@ export function verdictFor({ hasCreds, oauth, transportOk, probe }) {
     verdict: "no-credentials",
     detail: "WCL_CLIENT_ID / WCL_CLIENT_SECRET are not set — the fetch step ran without credentials (secret rot or workflow misconfiguration)"
   };
-  if (!oauth?.ok) return {
-    verdict: "oauth-failed",
-    detail: `OAuth client-credentials POST failed (HTTP ${oauth?.status ?? "?"}) — check the WCL client secrets`
-  };
+  if (!oauth?.ok) return oauth?.status === 0
+    ? { verdict: "network-failed",
+        detail: `OAuth POST never reached WCL (${oauth.error ?? "network failure"}) — transport problem, not a credential conclusion` }
+    : { verdict: "oauth-failed",
+        detail: `OAuth client-credentials POST failed (HTTP ${oauth?.status ?? "?"}) — check the WCL client secrets` };
   if (!transportOk || !probe) return {
     verdict: "network-failed",
     detail: "GraphQL transport to /api/v2/client failed after retry (Cloudflare or network) — no metric conclusion possible this run"

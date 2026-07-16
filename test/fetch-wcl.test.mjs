@@ -19,6 +19,12 @@ test("verdictFor: OAuth rejection", () => {
   assert.match(r.detail, /401/);
 });
 
+test("verdictFor: an unreachable OAuth endpoint (status 0) is a transport verdict, not a credential one", () => {
+  const r = verdictFor({ hasCreds: true, oauth: { ok: false, status: 0, error: "ENOTFOUND" }, transportOk: false, probe: null });
+  assert.equal(r.verdict, "network-failed");
+  assert.match(r.detail, /ENOTFOUND/);
+});
+
 test("verdictFor: transport failure after retry", () => {
   const r = verdictFor({ hasCreds: true, oauth: { ok: true }, transportOk: false, probe: null });
   assert.equal(r.verdict, "network-failed");
