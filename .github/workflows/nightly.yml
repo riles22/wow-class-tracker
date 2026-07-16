@@ -6,12 +6,6 @@ on:
   schedule:
     - cron: "37 10 * * *"
   workflow_dispatch:
-  # A reviewed change to this workflow immediately exercises the new path once
-  # after merge; ordinary data pushes do not trigger another refresh.
-  push:
-    branches: [master]
-    paths:
-      - ".github/workflows/nightly.yml"
 
 concurrency:
   group: nightly-refresh
@@ -47,6 +41,7 @@ jobs:
         with:
           github_token: ${{ github.token }}
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          allowed_bots: "github-actions[bot]"
           claude_args: |
             --permission-mode bypassPermissions
             --max-turns 250
@@ -106,6 +101,7 @@ jobs:
         with:
           github_token: ${{ github.token }}
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          allowed_bots: "github-actions[bot]"
           claude_args: |
             --permission-mode bypassPermissions
             --max-turns 180
