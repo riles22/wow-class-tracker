@@ -1,5 +1,7 @@
 name: Dispatch nightly refresh after workflow changes
 
+# Recovery trigger: this follow-up change lands after the dispatcher already exists on
+# master, guaranteeing that GitHub evaluates its push event and starts nightly.yml.
 on:
   push:
     branches: [master]
