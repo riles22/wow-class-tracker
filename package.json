@@ -5,8 +5,11 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "prebuild": "node src/apply-community-overrides.mjs",
     "build": "node src/build.mjs",
+    "pretest": "node src/apply-community-overrides.mjs",
     "test": "node --test",
+    "prevalidate": "node src/apply-community-overrides.mjs",
     "validate": "node src/validate.mjs",
     "serve": "node src/serve.mjs"
   },
