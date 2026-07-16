@@ -216,6 +216,19 @@ jobs:
             7. End with a short summary: builds found · zone-54/zone-52 state · videos
                and takes · sources refreshed vs degraded.
 
+            COMPLETION CONTRACT — the single most common way this run fails: the run
+            is NOT COMPLETE until data/run-manifest.json is REWRITTEN with this run's
+            outcomes. On 2026-07-15 AND 2026-07-16 the agent did real work (07-16
+            even logged a new PTR build) and then ended without writing the manifest
+            — the publish gate threw BOTH nights away entirely, data changes
+            included. Do not repeat that. Before ending, run
+            `git diff --stat -- data/run-manifest.json` and confirm it shows a
+            change. If you must stop early for ANY reason — degraded sources,
+            nothing new anywhere, errors you cannot fix, uncertainty — write the
+            manifest FIRST, with honest rows for exactly what you attempted and
+            what you did not get to, then stop. Ending without a rewritten manifest
+            wastes the entire night no matter how much else you did.
+
             FAILURE SENTINEL (so problems aren't buried in a green run): on any HARD
             failure — npm test or build failing at the end despite fixes — append one
             line describing it to the file "$RUNNER_TEMP/refresh-failed" before ending.
@@ -264,6 +277,15 @@ jobs:
             echo "## Nightly refresh reported failures" >> "$GITHUB_STEP_SUMMARY"
             cat "$RUNNER_TEMP/refresh-failed" >> "$GITHUB_STEP_SUMMARY"
             cat "$RUNNER_TEMP/refresh-failed"
+            failed=1
+          fi
+          # The 2026-07-15/16 failure shape, detected AT THE SOURCE: the agent ended
+          # without rewriting the manifest. The publish gate refuses such a run
+          # anyway, but there the refresh job shows a misleading green — fail HERE
+          # with the real reason so the notification email points at the cause.
+          if git diff --quiet -- data/run-manifest.json; then
+            echo "## Agent ended without rewriting data/run-manifest.json — the whole run is unpublishable (completion contract violated; see the prompt)" >> "$GITHUB_STEP_SUMMARY"
+            echo "Agent ended without rewriting data/run-manifest.json"
             failed=1
           fi
           if [ -f wcl-fetch/evidence.json ]; then
