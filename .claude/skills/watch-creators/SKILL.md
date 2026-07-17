@@ -21,9 +21,20 @@ locally, and distill them into cited per-spec takes in `data/creator-takes.json`
    (browser UA) and cache it on the creator entry as `channelId`. Diff videoIds
    against `log.md`'s seen-set. **Title-filter before fetching** — creators post
    off-topic content; require class/spec/Midnight/12.1/Season keywords.
-2. **Transcript** (videos ≥2–6h old — auto-captions lag upload):
+2. **Transcript** (videos ≥2–6h old — auto-captions lag upload). Sources in order:
+   (a) **Nightly runner:** `transcript-fetch/<videoId>.json` — pre-fetched by the
+   deterministic step (`src/fetch-transcripts.mjs`, Supadata captions API,
+   `mode=native` = YouTube's own auto-captions; `chunks[].offset` is
+   **milliseconds**). Check `transcript-fetch/summary.json` first; NEVER call the
+   API or YouTube yourself in a nightly run.
+   (b) **Local/residential runs:**
    `yt-dlp --no-update --extractor-args "youtube:player_client=android" --skip-download --write-auto-subs --sub-langs en --sub-format json3 --sleep-requests 1.5 -o "<scratchpad>/%(id)s.%(ext)s" <url>`
    Flatten json3 events to text, PRESERVING per-event `tStartMs`.
+   (c) **Neither available** → queue it in `data/pending-transcripts.json`
+   (`{id, creator, title, published, queuedAt}` — the machine queue the deterministic
+   step drains, 25 fetches/run inside the free-tier budget); log.md keeps the
+   human-readable trail. Remove a video from the queue ONLY once distilled or
+   transcript-verified-skipped.
 3. **Distill**: one summarization pass per video with a WoW-vocab-primed prompt:
    map mentions to exact roster spec names; emit discrete claims, each with creator,
    video title, date, patch context (announced / PTR / live), sentiment

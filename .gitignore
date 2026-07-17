@@ -13,3 +13,6 @@ wcl-fetch/
 # machine-local skills mirror (may contain the gitignored WCL config) — never commit
 .agents/
 AGENTS.md
+
+# deterministic pre-agent transcript stage output (consumed in-run, never committed)
+transcript-fetch/

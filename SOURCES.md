@@ -131,6 +131,11 @@ as reliability mechanics (so fetches succeed / avoid bot-blocks), not as pull li
   player-encounter entries.
 - **Archon / Murlok / Bloodmallet / Blizzard forums / YouTube RSS**: plain fetches every
   run, retry-with-backoff on transient 404s (reliability, not a cap).
-- **YouTube transcripts**: yt-dlp with a short sleep between requests (avoids bot-blocks);
-  low volume, store summaries + short excerpts with links — never redistribute full
-  transcripts.
+- **YouTube transcripts**: two transports, same captions. On the nightly runner the
+  deterministic `src/fetch-transcripts.mjs` step (the only holder of the optional
+  `TRANSCRIPT_API_KEY`) pulls YouTube's own auto-captions through the Supadata API
+  (`mode=native`, 25/run inside the free tier) for videos queued in
+  `data/pending-transcripts.json` — datacenter IPs can't reach YouTube directly
+  (bot-wall; the android-client workaround failed 2026-07-17). Local/residential runs
+  still use yt-dlp with a short sleep between requests. Either way: low volume, store
+  summaries + short excerpts with links — never redistribute full transcripts.

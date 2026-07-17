@@ -207,3 +207,23 @@ test("a spec with an omitted ptr key is valid (same as ptr: null)", async () => 
   delete clone.specs.find(s => s.ptr === null).ptr;
   assert.deepEqual(validateData(clone), []);
 });
+
+test("pending transcript queue: id shape is a hard gate (ids reach fetch URLs)", async () => {
+  const data = await loadData(ROOT);
+  const broken = structuredClone(data);
+  broken.pendingTranscripts = { videos: [
+    { id: "https://evil", creator: "X", title: "t", published: "2026-07-17", queuedAt: "2026-07-17" },
+    { id: "Rmkxzb1QQSQ", creator: "", title: "t", published: "2026-07-17", queuedAt: "2026-07-17" },
+    { id: "Rmkxzb1QQSQ", creator: "AutomaticJak", title: "dup id", published: "2026-07-17", queuedAt: "2026-07-17" },
+    { id: "vK-qyvXOVYM", creator: "izen", title: "ok", published: "2099-01-01", queuedAt: "2026-07-17" },
+  ]};
+  const errors = validateData(broken, { now: "2026-07-17" });
+  assert.ok(errors.some(e => e.includes('"https://evil"') && e.includes("11-char")), "url-shaped id rejected");
+  assert.ok(errors.some(e => e.includes("needs a creator")), "empty creator rejected");
+  assert.ok(errors.some(e => e.includes("queued twice")), "duplicate id rejected");
+  assert.ok(errors.some(e => e.includes("future-dated")), "future publish date rejected");
+  // a missing queue file stays valid (lane is optional)
+  const none = structuredClone(data);
+  none.pendingTranscripts = null;
+  assert.ok(!validateData(none, { now: "2026-07-17" }).some(e => e.includes("pending-transcripts")));
+});

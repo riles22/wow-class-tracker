@@ -264,10 +264,14 @@ data/     specs.json · sources.json · scales.json · ptr-builds.json · commun
           required-sources.json (refresh contract: required sources, staleness thresholds,
           row floors, anomaly limits) · run-manifest.json (per-run status file — see
           "Run manifest + integrity gates") ·
+          pending-transcripts.json (machine transcript queue: agents append/remove,
+          the deterministic fetch step drains) ·
           history/ (movement baselines written by snapshot.mjs)
 src/      build.mjs · template.html · render.mjs · normalize.mjs · validate.mjs ·
           apply-ratings.mjs · apply-metrics.mjs · snapshot.mjs · serve.mjs ·
-          check-refresh.mjs (manifest/freshness/anomaly gates)
+          check-refresh.mjs (manifest/freshness/anomaly gates) ·
+          fetch-wcl.mjs + fetch-transcripts.mjs (deterministic pre-agent stages —
+          the only WCL / transcript-API credential holders)
 test/     normalize · validate · render · build · apply-metrics · apply-ratings · check-refresh
 dist/     index.html  (generated — open directly in a browser)
 docs/     working notes (finder-audit.md · security-audit-2026-07.md — audit disposition)
@@ -284,7 +288,13 @@ isolated stages since the 2026-07-14 security audit (tightened by the same-day
 re-audit). First a **deterministic WCL fetch step** — the ONLY process holding
 `WCL_CLIENT_ID`/`WCL_CLIENT_SECRET` (step-scoped env) — runs `src/fetch-wcl.mjs` and
 writes `wcl-fetch/evidence.json`, uploaded as its own artifact before the agent
-starts. Then the **refresh** job runs a PRIMARY agent and — when a deterministic
+starts. A second deterministic stage (`src/fetch-transcripts.mjs`, step-scoped
+OPTIONAL `TRANSCRIPT_API_KEY`) drains the agent-maintained
+`data/pending-transcripts.json` queue through the Supadata captions API
+(`mode=native` — YouTube's own auto-captions; offsets in ms) into
+`transcript-fetch/` for the agents to distill; a missing key is a clean
+"no-credentials" skip (datacenter IPs can't reach YouTube directly — 2026-07
+bot-wall, android-client workaround failed 2026-07-17). Then the **refresh** job runs a PRIMARY agent and — when a deterministic
 completion check finds the manifest unwritten or failing (the recurring 07-15→07-17
 early-stop failure) — a RECOVERY agent, both Claude
 Code headless with a READ-ONLY token (no push/dispatch scopes, checkout credentials

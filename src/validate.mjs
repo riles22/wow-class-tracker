@@ -25,7 +25,7 @@ const isRealDate = v => {
 /* opts.fullRoster: enforce the real 40-spec Midnight roster — used by the CLI, the build,
    and the apply-* merge scripts (which operate on the repo's real data), but not by unit
    fixtures, which validate small synthetic datasets. */
-export function validateData({ specs, sources, scales, community, ptrBuilds, creatorTakes, encounterTiers, historySnapshots }, opts = {}) {
+export function validateData({ specs, sources, scales, community, ptrBuilds, creatorTakes, encounterTiers, historySnapshots, pendingTranscripts }, opts = {}) {
   const errors = [];
   // Every date in the data is a claim about when something was fetched or published —
   // none may sit in the future. +1 day of skew allowed: a nightly UTC run can honestly
@@ -346,6 +346,27 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
     }
   }
 
+  // --- pending transcript queue (agent-maintained; ids reach the deterministic
+  // fetch step's URLs, so the 11-char id shape is a hard requirement here) ---
+  if (pendingTranscripts != null) {
+    const vids = pendingTranscripts.videos;
+    if (!Array.isArray(vids)) {
+      errors.push("pending-transcripts.json: videos must be an array");
+    } else {
+      const seen = new Set();
+      for (const v of vids) {
+        const label = `pending-transcripts.json: video "${v?.id ?? "?"}"`;
+        if (typeof v?.id !== "string" || !/^[A-Za-z0-9_-]{11}$/.test(v.id)) errors.push(`${label} needs an 11-char YouTube id`);
+        else if (seen.has(v.id)) errors.push(`${label} is queued twice`);
+        else seen.add(v.id);
+        if (typeof v?.creator !== "string" || !v.creator) errors.push(`${label} needs a creator`);
+        if (typeof v?.title !== "string" || !v.title) errors.push(`${label} needs a title`);
+        isoOk(v?.published, `${label} published`);
+        isoOk(v?.queuedAt, `${label} queuedAt`);
+      }
+    }
+  }
+
   return errors;
 }
 
@@ -368,8 +389,16 @@ export async function loadData(root) {
   } catch (error) {
     if (error?.code !== "ENOENT") throw error;
   }
+  // Transcript queue is optional (repos without the transcript lane), but corrupt
+  // JSON must error, not silently drop the queue.
+  let pendingTranscripts = null;
+  try {
+    pendingTranscripts = await read("pending-transcripts.json");
+  } catch (error) {
+    if (error?.code !== "ENOENT") throw error;
+  }
   return { specs, sources, scales, community, ptrBuilds, creatorTakes, encounterTiers,
-           historySnapshot: historySnapshots[0] ?? null, historySnapshots };
+           historySnapshot: historySnapshots[0] ?? null, historySnapshots, pendingTranscripts };
 }
 
 const isMain = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);

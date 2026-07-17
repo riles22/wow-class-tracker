@@ -95,6 +95,17 @@ jobs:
           retention-days: 7
           path: wcl-fetch/
 
+      # Deterministic transcript stage (owner-approved 2026-07-17): the ONLY step
+      # holding TRANSCRIPT_API_KEY (Supadata; mode=native = YouTube's own captions,
+      # the same source yt-dlp read before the datacenter bot-wall). Drains the
+      # agent-maintained data/pending-transcripts.json queue into transcript-fetch/
+      # for the agents to distill. A missing secret is a CLEAN skip (verdict
+      # no-credentials) — the lane activates the run after the owner adds the secret.
+      - name: Deterministic transcript fetch (only step with the transcript API key)
+        env:
+          TRANSCRIPT_API_KEY: ${{ secrets.TRANSCRIPT_API_KEY }}
+        run: node src/fetch-transcripts.mjs
+
       # First-party action pinned to the v1-tag commit (unpinned mutable tags are a
       # supply-chain risk in an unattended secret-bearing job); Dependabot proposes
       # reviewed bumps. NOTE: no WCL_* env on either agent step — their only secret
@@ -156,6 +167,17 @@ jobs:
             install, upgrade, or replace it or any other package), back off from datacenter
             blocking, and record pending videos rather than hammering. Creator opinions never
             move tiers.
+
+            YOUTUBE TRANSCRIPTS: you hold NO transcript credentials. A deterministic step may
+            have pre-fetched queued videos into transcript-fetch/ (summary.json + one
+            <videoId>.json per video; chunk offsets are MILLISECONDS). Distill takes/metaNotes
+            from those files per the watch-creators skill, and maintain
+            data/pending-transcripts.json honestly: remove ONLY videos you distilled or
+            transcript-verified-skipped, append new in-scope videos that have no fetched
+            transcript. Never fetch transcripts from YouTube or any transcript API yourself.
+            summary.json verdict "no-credentials" = the optional key isn't configured yet;
+            keep queueing pending as before. Verdict "unauthorized" or "limit-exceeded" =
+            put "TRANSCRIPT API KEY problem: <verdict>" near the top of the manifest summary.
 
             SEASON-FLIP GUARD: if era-verification fails because sources now self-identify as
             Season 2 / 12.1 LIVE (not because a page is broken), the patch has LAUNCHED. Keep
@@ -252,7 +274,9 @@ jobs:
             step — never re-fetch or edit those rows); the other cuts stay degraded with the
             evidence's rawRecipes[key] or verdict detail (the publish gate cross-checks a
             pre-agent artifact copy you cannot modify). Do not fetch warcraftlogs.com yourself,
-            by any means.
+            by any means. Same for YouTube transcripts: distill only from the pre-fetched
+            transcript-fetch/ files (offsets in ms), maintain data/pending-transcripts.json
+            honestly, and never fetch transcripts yourself.
 
             Rebuild data/run-manifest.json from scratch with a current UTC startedAt and one
             honest row per required source, each with previousAsOf/newAsOf copied from the real
