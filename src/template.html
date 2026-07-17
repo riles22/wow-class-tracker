@@ -909,9 +909,21 @@ function drawerHTML(s){
   // Inner content only — the .drawer shell is emitted empty by rowHTML and filled lazily
   // on open, so render() rebuilds ~1.3K visible nodes instead of ~9.3K (85% was drawers).
   return `<div class="drawer-in"><div class="drawer-grid">
-     <div>${left}${metricsHTML(s)}${showPtr?ptrDummyHTML(s):""}${timelineHTML(s)}</div>
+     <div>${left}${showPtr?buildChangesHTML(s):""}${metricsHTML(s)}${showPtr?ptrDummyHTML(s):""}${timelineHTML(s)}</div>
      <div>${cmpBtnHTML(s)}${tierset}${profileHTML(s)}${sourceBreakdownHTML(s)}${takesHTML(s)}${metaNotesHTML(s)}${communityHTML(s)}</div>
    </div></div>`;
+}
+
+/* Official PTR tuning, per build (build-time derived spec.buildChanges — verbatim
+   Blizzard forum lines attributed by the same rule as the outlook arrow). The FACTS
+   lane, distinct from the writeup's cited distillation and the creators' opinions. */
+function buildChangesHTML(s){
+  const bc = s.buildChanges || [];
+  if(!bc.length) return "";
+  return `<div class="d-sec"><p class="d-h">Official PTR tuning — Blizzard notes, by build</p>${bc.map(b=>`
+    <p class="d-h" style="margin:10px 0 4px;text-transform:none;letter-spacing:0">${esc(fmtDate(b.date))}${b.forumUrl?` · <a href="${esc(safeHref(b.forumUrl))}" target="_blank" rel="noopener">forum post${b.forumPostNumber!=null?` #${esc(String(b.forumPostNumber))}`:""}</a>`:""}</p>
+    <ul class="d-list">${b.lines.map(l=>`<li>${esc(l)}</li>`).join("")}</ul>`).join("")}
+    <p class="mnote">Verbatim from the official PTR development notes — the 12.1 writeup above is a cited distillation, and creator takes are opinion.</p></div>`;
 }
 
 /* "New" freshness cue — is there fresh info for this spec within the last few days of the

@@ -1,6 +1,35 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { fightLabels, metricRanks, outlookFor, movementFor, snapshotStateOf, pickBaseline, dummyDomeScores, classifyHighlight, projectionFor, historySeries } from "../src/render.mjs";
+import { fightLabels, metricRanks, outlookFor, movementFor, snapshotStateOf, pickBaseline, dummyDomeScores, classifyHighlight, projectionFor, historySeries, specBuildChanges } from "../src/render.mjs";
+
+test("specBuildChanges: official lines grouped by build, spec-prefix attribution identical to the outlook's", () => {
+  const builds = { builds: [
+    { date: "2026-07-14", forumPostNumber: 14, forumUrl: "https://example.com/t/1/14",
+      highlights: [
+        "Havoc Demon Hunter Inertia effect now increases damage by 12% (was 18%).",
+        "Devourer Demon Hunter Hungering Slash bug fixed.",
+        "Demon Hunter (class-wide) Sigils radius increased.", // class-wide: excluded from spec lists
+        "Survival Hunter Flamefang-Pitch removed."
+      ] },
+    { date: "2026-07-01", forumPostNumber: 9, forumUrl: "https://example.com/t/1/9",
+      highlights: ["Havoc Demon Hunter Blade Dance damage increased by 6%."] },
+    { date: "2026-06-24", forumPostNumber: 5, highlights: ["Feral Druid energy regen up."] }
+  ] };
+  const havoc = specBuildChanges({ class: "Demon Hunter", spec: "Havoc" }, builds);
+  assert.equal(havoc.length, 2); // the 06-24 build has no Havoc lines and is omitted
+  assert.deepEqual(havoc.map(b => b.date), ["2026-07-14", "2026-07-01"]); // newest first, per feed order
+  assert.deepEqual(havoc[0].lines, ["Inertia effect now increases damage by 12% (was 18%)."]); // prefix stripped, rest verbatim
+  assert.equal(havoc[0].forumPostNumber, 14);
+  assert.equal(havoc[0].forumUrl, "https://example.com/t/1/14");
+
+  // Anchored prefixes: "Demon Hunter" lines never leak into Hunter specs, and
+  // class-wide lines belong to the build feed, not any one spec's fact list.
+  const survival = specBuildChanges({ class: "Hunter", spec: "Survival" }, builds);
+  assert.deepEqual(survival[0].lines, ["Flamefang-Pitch removed."]);
+  assert.equal(survival.length, 1);
+  assert.ok(!havoc[0].lines.some(l => l.includes("Sigils")));
+  assert.deepEqual(specBuildChanges({ class: "Warrior", spec: "Arms" }, builds), []);
+});
 
 test("outlookFor: verdict wins; tuning-line balance covers writeup-less specs", () => {
   const builds = { builds: [{

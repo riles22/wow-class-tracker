@@ -160,6 +160,24 @@ export function classifyHighlight(h) {
    else from the balance of buff/nerf tuning lines in the PTR build feed. The zone-54
    PTR raid-testing rank, when landed, is NAMED in the basis string for context but
    does not flip the direction (tiny-n testing data stays informative, not a driver). */
+/* Per-spec OFFICIAL tuning lines grouped by build, newest first (builds are stored
+   newest-first). The line-attribution rule is byte-identical to outlookFor's
+   (startsWith "Spec Class ") so the drawer's fact list and the outlook arrow can
+   never disagree about which lines are "about this spec" — class-wide prose mentions
+   stay out of both. The redundant spec prefix is stripped for display inside the
+   spec's own drawer; the line text is otherwise verbatim from the forum notes. */
+export function specBuildChanges(spec, ptrBuilds) {
+  const prefix = `${spec.spec} ${spec.class} `;
+  const out = [];
+  for (const b of ptrBuilds?.builds ?? []) {
+    const lines = (b.highlights ?? []).filter(h => h.startsWith(prefix)).map(h => h.slice(prefix.length));
+    if (lines.length) {
+      out.push({ date: b.date, forumPostNumber: b.forumPostNumber ?? null, forumUrl: b.forumUrl ?? null, lines });
+    }
+  }
+  return out;
+}
+
 export function outlookFor(spec, ptrBuilds) {
   const builds = ptrBuilds?.builds ?? [];
   if (!builds.length) return null;
@@ -437,6 +455,8 @@ export function buildPayload({ specs, sources, scales, community, ptrBuilds, cre
   for (const spec of decorated) {
     const outlook = outlookFor(spec, ptrBuilds);
     if (outlook) spec.outlook = outlook;
+    const changes = specBuildChanges(spec, ptrBuilds);
+    if (changes.length) spec.buildChanges = changes;
   }
   projections(decorated, scales, creatorTakes); // after consensus/ranks/dummy/outlook — it consumes all four
   const latestBuild = ptrBuilds?.builds?.[0]?.date ?? null;
