@@ -24,3 +24,17 @@ parse counts and baselines the change detectors need live in the entries themsel
   popularity, Murlok top-50 ceilings, Mythicstats top-2000 representation, SimC nightly
   Patchwerk, Bloodmallet talent_target_scaling fight profiles (26 DPS specs, MID1).
   Merged via apply-metrics.mjs; asOf 2026-07-01 across the quantitative layer.
+
+- 2026-07-17 (nightly recovery run — Opus 4.8): full quantitative refresh.
+  **Murlok** 40/40 top-50 ceilings (plain GET; all values byte-identical, stable).
+  **Bloodmallet** 26/27 DPS fight profiles (talent_target_scaling/castingpatchwerk, MID1
+  + ptr:0 confirmed; Augmentation absent by design; **Elemental Shaman RECOVERED** a fresh
+  chart after being stuck at 2026-07-01; other 25 byte-identical). **SimC nightly** 26/26
+  DPS (SimC 1205-01, WoW 12.0.7.68453 Live hotfix 07-13; ≤2.0% nightly deltas, Enhancement
+  largest). **Mythicstats** period 1071→1072 (via /period/latest redirect), 40/40 computed
+  as class% × within-class spec%; role subtotals re-verified Tank 20.0 / Healer 20.1 /
+  DPS 60.1, total 100.2. **Archon survivability** recovered (40 rows, merged via
+  apply-metrics survivability key). **WCL: 5 zones UNREACHABLE** — pre-agent
+  wcl-fetch/evidence.json verdict rdps-broken (characterRankings metric:rdps → Internal
+  server error on enc 3176, 0 rows landed); agent holds no WCL creds and did not fetch
+  warcraftlogs.com; zones 46/47/52/54/56 left at 2026-07-09 baselines. npm test 85/85, build OK.

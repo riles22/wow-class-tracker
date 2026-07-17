@@ -11,37 +11,37 @@
         "bracket": "raid",
         "role": "DPS",
         "url": "https://www.icy-veins.com/wow/dps-rankings-tier-list",
-        "snapshot": "2026-07-14"
+        "snapshot": "2026-07-17"
       },
       {
         "bracket": "raid",
         "role": "Healer",
         "url": "https://www.icy-veins.com/wow/healer-rankings-tier-list",
-        "snapshot": "2026-07-14"
+        "snapshot": "2026-07-17"
       },
       {
         "bracket": "raid",
         "role": "Tank",
         "url": "https://www.icy-veins.com/wow/tank-rankings-tier-list",
-        "snapshot": "2026-07-14"
+        "snapshot": "2026-07-17"
       },
       {
         "bracket": "mplus",
         "role": "DPS",
         "url": "https://www.icy-veins.com/wow/mythic-dps-tier-list",
-        "snapshot": "2026-07-14"
+        "snapshot": "2026-07-17"
       },
       {
         "bracket": "mplus",
         "role": "Healer",
         "url": "https://www.icy-veins.com/wow/mythic-healer-tier-list",
-        "snapshot": "2026-07-14"
+        "snapshot": "2026-07-17"
       },
       {
         "bracket": "mplus",
         "role": "Tank",
         "url": "https://www.icy-veins.com/wow/mythic-tank-tier-list",
-        "snapshot": "2026-07-14"
+        "snapshot": "2026-07-17"
       }
     ]
   },
@@ -57,13 +57,13 @@
         "bracket": "mplus",
         "role": "All",
         "url": "https://www.method.gg/guides/tier-list/mythic-plus",
-        "snapshot": "2026-07-14"
+        "snapshot": "2026-07-17"
       },
       {
         "bracket": "raid",
         "role": "All",
         "url": "https://www.method.gg/guides/tier-list/raiding",
-        "snapshot": "2026-07-14"
+        "snapshot": "2026-07-17"
       }
     ],
     "notes": "Raid list omits Vengeance DH (not ranked on the page). Method's list content is unchanged since its 2026-03-31 revision; re-verified live and era-confirmed (Devourer present) 2026-07-09."
@@ -120,67 +120,67 @@
     "kind": "tier-list",
     "scale": "archon",
     "author": "Archon.gg (statistical)",
-    "methodology": "Statistical tier lists computed from Warcraft Logs parses and Blizzard leaderboards \u2014 14-day rolling window, refreshed daily. Raid tiers read from the throughput metric tier list (NOT the default popularity grouping); M+ tiers from the M+ score tier list. Mirrored at u.gg/wow.",
+    "methodology": "Statistical tier lists computed from Warcraft Logs parses and Blizzard leaderboards — 14-day rolling window, refreshed daily. Raid tiers read from the throughput metric tier list (NOT the default popularity grouping); M+ tiers from the M+ score tier list. Mirrored at u.gg/wow.",
     "pages": [
       {
         "bracket": "raid",
         "role": "DPS",
         "url": "https://www.archon.gg/wow/tier-list/dps-rankings/raid/mythic/all-bosses",
-        "snapshot": "2026-07-14"
+        "snapshot": "2026-07-17"
       },
       {
         "bracket": "raid",
         "role": "Healer",
         "url": "https://www.archon.gg/wow/tier-list/healer-rankings/raid/mythic/all-bosses",
-        "snapshot": "2026-07-14"
+        "snapshot": "2026-07-17"
       },
       {
         "bracket": "raid",
         "role": "Tank",
         "url": "https://www.archon.gg/wow/tier-list/tank-rankings/raid/mythic/all-bosses",
-        "snapshot": "2026-07-14"
+        "snapshot": "2026-07-17"
       },
       {
         "bracket": "mplus",
         "role": "DPS",
         "url": "https://www.archon.gg/wow/tier-list/dps-rankings/mythic-plus/10/all-dungeons/this-week",
-        "snapshot": "2026-07-14"
+        "snapshot": "2026-07-17"
       },
       {
         "bracket": "mplus",
         "role": "Healer",
         "url": "https://www.archon.gg/wow/tier-list/healer-rankings/mythic-plus/10/all-dungeons/this-week",
-        "snapshot": "2026-07-14"
+        "snapshot": "2026-07-17"
       },
       {
         "bracket": "mplus",
         "role": "Tank",
         "url": "https://www.archon.gg/wow/tier-list/tank-rankings/mythic-plus/10/all-dungeons/this-week",
-        "snapshot": "2026-07-14"
+        "snapshot": "2026-07-17"
       },
       {
         "bracket": "raid",
         "role": "All",
         "label": "Per-boss tiers (9 bosses, throughput)",
         "url": "https://www.archon.gg/wow/tier-list/dps-rankings/raid/mythic/imperator",
-        "snapshot": "2026-07-14"
+        "snapshot": "2026-07-17"
       },
       {
         "bracket": "mplus",
         "role": "All",
         "label": "Per-dungeon tiers (8 dungeons, score)",
         "url": "https://www.archon.gg/wow/tier-list/dps-rankings/mythic-plus/10/windrunner-spire/this-week",
-        "snapshot": "2026-07-14"
+        "snapshot": "2026-07-17"
       },
       {
         "bracket": "raid",
         "role": "All",
         "label": "Survivability tiers (Mythic raid)",
         "url": "https://www.archon.gg/wow/tier-list/dps-rankings/raid/mythic/all-bosses",
-        "snapshot": "2026-07-14"
+        "snapshot": "2026-07-17"
       }
     ],
-    "notes": "Fetch recipe: parse the __NEXT_DATA__ JSON script tag from raw HTML (WebFetch markdown drops it). Raid pages carry three tierLists (popularity/throughput/survivability) \u2014 use metric \"throughput\"; M+ pages use metric \"score\". Mirrored at u.gg/wow."
+    "notes": "Fetch recipe: parse the __NEXT_DATA__ JSON script tag from raw HTML (WebFetch markdown drops it). Raid pages carry three tierLists (popularity/throughput/survivability) — use metric \"throughput\"; M+ pages use metric \"score\". Mirrored at u.gg/wow."
   },
   {
     "id": "wowmeta",
@@ -188,56 +188,56 @@
     "kind": "tier-list",
     "scale": "wowmeta",
     "author": "Hypermeta Network (algorithmic)",
-    "methodology": "Algorithmic S/A/B/C/D tier lists: Ckmeans clustering of the lower-bound 95% CI of official Blizzard M+ scores per spec (raid and PvP lists too). Population-statistics lens \u2014 distinct from Archon (Warcraft Logs top-end) and editorial lists. Updated frequently.",
+    "methodology": "Algorithmic S/A/B/C/D tier lists: Ckmeans clustering of the lower-bound 95% CI of official Blizzard M+ scores per spec (raid and PvP lists too). Population-statistics lens — distinct from Archon (Warcraft Logs top-end) and editorial lists. Updated frequently.",
     "pages": [
       {
         "bracket": "mplus",
         "role": "DPS",
         "url": "https://wowmeta.com/wow/mythic-plus-dps-tier-list",
-        "snapshot": "2026-07-14"
+        "snapshot": "2026-07-17"
       },
       {
         "bracket": "mplus",
         "role": "Healer",
         "url": "https://wowmeta.com/wow/mythic-plus-healer-tier-list",
-        "snapshot": "2026-07-14"
+        "snapshot": "2026-07-17"
       },
       {
         "bracket": "mplus",
         "role": "Tank",
         "url": "https://wowmeta.com/wow/mythic-plus-tank-tier-list",
-        "snapshot": "2026-07-14"
+        "snapshot": "2026-07-17"
       },
       {
         "bracket": "raid",
         "role": "DPS",
-        "label": "Raid \u00b7 DPS (currently unranked \u2014 0 records)",
+        "label": "Raid · DPS (currently unranked — 0 records)",
         "url": "https://wowmeta.com/wow/raid-dps-tier-list",
         "snapshot": null
       },
       {
         "bracket": "raid",
         "role": "Healer",
-        "label": "Raid \u00b7 Healer (currently unranked)",
+        "label": "Raid · Healer (currently unranked)",
         "url": "https://wowmeta.com/wow/raid-healer-tier-list",
         "snapshot": null
       },
       {
         "bracket": "raid",
         "role": "Tank",
-        "label": "Raid \u00b7 Tank (currently unranked)",
+        "label": "Raid · Tank (currently unranked)",
         "url": "https://wowmeta.com/wow/raid-tank-tier-list",
         "snapshot": null
       }
     ],
-    "notes": "JS-rendered (SvelteKit) \u2014 WebFetch returns an empty shell; fetch via the r.jina.ai proxy. Scale S/A/B/C/D plus 'X = Unranked' (X is omitted, never stored). Raid pages verified Midnight-era but hold 0-2 records as of 2026-07-09 (nearly all specs still X) \u2014 ingest raid tiers when they populate."
+    "notes": "JS-rendered (SvelteKit) — WebFetch returns an empty shell; fetch via the r.jina.ai proxy. Scale S/A/B/C/D plus 'X = Unranked' (X is omitted, never stored). Raid pages verified Midnight-era but hold 0-2 records as of 2026-07-09 (nearly all specs still X) — ingest raid tiers when they populate."
   },
   {
     "id": "warcraftlogs",
     "name": "Warcraft Logs",
     "kind": "metrics",
     "author": "Warcraft Logs aggregate statistics",
-    "methodology": "Per-spec aggregate combat-log statistics: median (50th percentile) rDPS/HPS and parse counts. Live Season 1 raid = zone 46 (Mythic = difficulty 5, size 20, partition 3 = patch 12.0.7); M+ Season 1 = zone 47 (difficulty 10, size 5, partition 1); zone 54 is the 12.1 PTR raid and zone 56 is the 12.1 PTR M+ (\"Mythic+ Season 2 (PTR)\", same recipe as zone 47) \u2014 both PTR-quality, era-tagged \"ptr\", kept out of live baselines. Sanctioned long-term access is the v2 GraphQL API (free OAuth client, exposes live zones only \u2014 PTR zones are HTML-only); HTML statistics tables are the fallback, fetched fresh every run (policy 2026-07-08: no at-most-daily cap; datacenter IPs are Cloudflare-blocked on the HTML endpoint so the runner uses the API).",
+    "methodology": "Per-spec aggregate combat-log statistics: median (50th percentile) rDPS/HPS and parse counts. Live Season 1 raid = zone 46 (Mythic = difficulty 5, size 20, partition 3 = patch 12.0.7); M+ Season 1 = zone 47 (difficulty 10, size 5, partition 1); zone 54 is the 12.1 PTR raid and zone 56 is the 12.1 PTR M+ (\"Mythic+ Season 2 (PTR)\", same recipe as zone 47) — both PTR-quality, era-tagged \"ptr\", kept out of live baselines. Sanctioned long-term access is the v2 GraphQL API (free OAuth client, exposes live zones only — PTR zones are HTML-only); HTML statistics tables are the fallback, fetched fresh every run (policy 2026-07-08: no at-most-daily cap; datacenter IPs are Cloudflare-blocked on the HTML endpoint so the runner uses the API).",
     "pages": [
       {
         "bracket": "raid",
@@ -267,25 +267,25 @@
     "name": "Murlok.io",
     "kind": "metrics",
     "author": "Murlok.io (Blizzard API leaderboard data)",
-    "methodology": "Average M+ rating of each spec's own top-50 rated players (US/EU/KR/TW, refreshed ~8h). This is a top-end ceiling measure \u2014 NOT representation share and NOT a strength tier; every spec always samples exactly 50 players. Never convert to letter grades.",
+    "methodology": "Average M+ rating of each spec's own top-50 rated players (US/EU/KR/TW, refreshed ~8h). This is a top-end ceiling measure — NOT representation share and NOT a strength tier; every spec always samples exactly 50 players. Never convert to letter grades.",
     "pages": [
       {
         "bracket": "mplus",
         "role": "DPS",
         "url": "https://murlok.io/meta/dps/m+",
-        "snapshot": "2026-07-14"
+        "snapshot": "2026-07-17"
       },
       {
         "bracket": "mplus",
         "role": "Healer",
         "url": "https://murlok.io/meta/healer/m+",
-        "snapshot": "2026-07-14"
+        "snapshot": "2026-07-17"
       },
       {
         "bracket": "mplus",
         "role": "Tank",
         "url": "https://murlok.io/meta/tank/m+",
-        "snapshot": "2026-07-14"
+        "snapshot": "2026-07-17"
       }
     ]
   },
@@ -294,21 +294,21 @@
     "name": "Bloodmallet (SimC)",
     "kind": "metrics",
     "author": "Bloodmallet / SimulationCraft (tier MID1)",
-    "methodology": "SimulationCraft per-spec simulations, refreshed ~daily. Target-count scaling (talent_target_scaling chart: DPS at 1/2/3/\u2026/15 targets, best build per count) powers the fight-type profiles for DPS specs. Sim DPS is point-in-time and build-dependent \u2014 display as numbers, never letters. JSON API: bloodmallet.com/chart/get/{chart}/{fight_style}/{snake_case_class}/{spec}.",
+    "methodology": "SimulationCraft per-spec simulations, refreshed ~daily. Target-count scaling (talent_target_scaling chart: DPS at 1/2/3/…/15 targets, best build per count) powers the fight-type profiles for DPS specs. Sim DPS is point-in-time and build-dependent — display as numbers, never letters. JSON API: bloodmallet.com/chart/get/{chart}/{fight_style}/{snake_case_class}/{spec}.",
     "pages": [
       {
         "bracket": "raid",
         "role": "DPS",
         "label": "Target-count sims",
         "url": "https://bloodmallet.com/",
-        "snapshot": "2026-07-14"
+        "snapshot": "2026-07-17"
       },
       {
         "bracket": "raid",
         "role": "DPS",
         "label": "Official SimC nightly",
         "url": "https://www.simulationcraft.org/reports/MID1_Raid.html",
-        "snapshot": "2026-07-14"
+        "snapshot": "2026-07-17"
       }
     ]
   },
@@ -317,14 +317,14 @@
     "name": "Mythicstats",
     "kind": "metrics",
     "author": "raptoranka",
-    "methodology": "Weekly per-spec M+ meta statistics from the top 2000 keys of each reset period: representation % per spec (the meta-share axis Murlok cannot provide), spec diversity by key level, top comps. JS-heavy \u2014 fetch via r.jina.ai proxy.",
+    "methodology": "Weekly per-spec M+ meta statistics from the top 2000 keys of each reset period: representation % per spec (the meta-share axis Murlok cannot provide), spec diversity by key level, top comps. JS-heavy — fetch via r.jina.ai proxy.",
     "pages": [
       {
         "bracket": "mplus",
         "role": "All",
         "label": "Top-2000 keys representation",
         "url": "https://mythicstats.com/",
-        "snapshot": "2026-07-14"
+        "snapshot": "2026-07-17"
       }
     ]
   },
@@ -332,8 +332,8 @@
     "id": "blizzard-ptr",
     "name": "Blizzard 12.1 PTR notes",
     "kind": "notes-feed",
-    "author": "Blizzard (Linxy) \u2014 official PTR development notes",
-    "methodology": "Canonical source for 12.1 tuning: the 'Midnight: Curse of Ula'tek PTR Development Notes' forum thread. Each PTR build's changes arrive as a new reply post (~weekly). Machine-readable via Discourse JSON (append .json). New waves are discovered via the Wowhead news RSS (exact pubDates), filtered for '12.1 PTR' + Development Notes/Class Tuning/Datamined. A new patch cycle means a NEW thread \u2014 re-discover per patch.",
+    "author": "Blizzard (Linxy) — official PTR development notes",
+    "methodology": "Canonical source for 12.1 tuning: the 'Midnight: Curse of Ula'tek PTR Development Notes' forum thread. Each PTR build's changes arrive as a new reply post (~weekly). Machine-readable via Discourse JSON (append .json). New waves are discovered via the Wowhead news RSS (exact pubDates), filtered for '12.1 PTR' + Development Notes/Class Tuning/Datamined. A new patch cycle means a NEW thread — re-discover per patch.",
     "url": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811",
     "pages": [
       {
@@ -357,7 +357,7 @@
     "name": "Community",
     "kind": "community",
     "author": "Class Discords + verified creators (data/community.json)",
-    "methodology": "Qualitative layer: 13 class Discords (links only \u2014 content not fetchable, auth + TOS) and 1-2 verified creators per class whose video transcripts feed cited creator takes (data/creator-takes.json). Opinion, never tier data.",
+    "methodology": "Qualitative layer: 13 class Discords (links only — content not fetchable, auth + TOS) and 1-2 verified creators per class whose video transcripts feed cited creator takes (data/creator-takes.json). Opinion, never tier data.",
     "pages": [
       {
         "bracket": null,
@@ -369,7 +369,7 @@
       {
         "bracket": null,
         "role": "All",
-        "label": "Verified creators \u2192 takes in spec drawers",
+        "label": "Verified creators → takes in spec drawers",
         "url": null,
         "snapshot": "2026-07-01"
       }
@@ -381,14 +381,14 @@
     "kind": "metrics",
     "url": "https://www.simulationcraft.org/",
     "author": "SimC project nightly (engine-official)",
-    "methodology": "Official nightly MID1_Raid Patchwerk report: one fixed high-ilvl profile per spec/hero-variant, iterations=7500 \u2014 we ingest the best variant per DPS spec as 'SimC nightly Patchwerk DPS'. Pure single-target, fixed gear: a sim baseline, not a rankings verdict (the project itself disclaims class comparisons \u2014 keep it a number, never a tier).",
+    "methodology": "Official nightly MID1_Raid Patchwerk report: one fixed high-ilvl profile per spec/hero-variant, iterations=7500 — we ingest the best variant per DPS spec as 'SimC nightly Patchwerk DPS'. Pure single-target, fixed gear: a sim baseline, not a rankings verdict (the project itself disclaims class comparisons — keep it a number, never a tier).",
     "pages": [
       {
         "bracket": "raid",
         "role": "DPS",
         "label": "MID1_Raid nightly report",
         "url": "https://www.simulationcraft.org/reports/MID1_Raid.html",
-        "snapshot": "2026-07-14"
+        "snapshot": "2026-07-17"
       },
       {
         "bracket": null,
@@ -398,14 +398,14 @@
         "snapshot": null
       }
     ],
-    "notes": "Parse the .txt variant (plain text ranking of ~49 MID1_{Class}_{Spec}_{HeroVariant} profiles). Filter to DPS-role roster specs (tanks appear at low DPS; healers absent; Augmentation has no profile \u2014 unsimmable support spec)."
+    "notes": "Parse the .txt variant (plain text ranking of ~49 MID1_{Class}_{Spec}_{HeroVariant} profiles). Filter to DPS-role roster specs (tanks appear at low DPS; healers absent; Augmentation has no profile — unsimmable support spec)."
   },
   {
     "id": "raidbots",
     "name": "Raidbots",
     "kind": "reference",
     "url": "https://www.raidbots.com/simbot",
-    "methodology": "User-run cloud SimC (Top Gear, Droptimizer, Quick Sim) \u2014 the canonical place to sim YOUR character. No public per-spec aggregates (re-verified 2026-07-01), so reference only.",
+    "methodology": "User-run cloud SimC (Top Gear, Droptimizer, Quick Sim) — the canonical place to sim YOUR character. No public per-spec aggregates (re-verified 2026-07-01), so reference only.",
     "pages": [
       {
         "bracket": null,
@@ -421,7 +421,7 @@
     "name": "QE Live",
     "kind": "reference",
     "url": "https://questionablyepic.com/live/",
-    "methodology": "Voulk's healer gearing/trinket evaluation tool (all healer specs). Client-side SPA \u2014 no fetchable data, but actively maintained for Midnight (verified via its GitHub repo, 12.0.7 branches). Reference for the healer audience; the blog publishes dated Midnight healer articles (e.g. S1 embellishment tier list).",
+    "methodology": "Voulk's healer gearing/trinket evaluation tool (all healer specs). Client-side SPA — no fetchable data, but actively maintained for Midnight (verified via its GitHub repo, 12.0.7 branches). Reference for the healer audience; the blog publishes dated Midnight healer articles (e.g. S1 embellishment tier list).",
     "pages": [
       {
         "bracket": null,
@@ -444,7 +444,7 @@
     "name": "Liquid Armory",
     "kind": "reference",
     "url": "https://liquidarmory.com/",
-    "methodology": "SimulationCraft-driven guild-simmed trinket and best-in-slot data. A gearing axis, not a spec-strength axis \u2014 linked as an external reference, never rendered as a tier column.",
+    "methodology": "SimulationCraft-driven guild-simmed trinket and best-in-slot data. A gearing axis, not a spec-strength axis — linked as an external reference, never rendered as a tier column.",
     "pages": [
       {
         "bracket": null,

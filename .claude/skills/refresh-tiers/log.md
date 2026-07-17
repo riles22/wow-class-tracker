@@ -22,3 +22,16 @@ Keep the newest ~20 entries; prune older ones when appending.
   sources fetched live and era-verified (Icy Veins, Method, Wowhead, Archon
   throughput/score lists, WoWMeta via r.jina.ai); merged via apply-ratings.mjs;
   snapshot dates set in sources.json. See wf_b286902c-03c for the proven fetch shape.
+
+- 2026-07-17 (nightly recovery run — primary agent exited without a manifest; Opus 4.8):
+  all five tier-list sources attempted live. **Icy Veins / Method / Archon / WoWMeta
+  refreshed** (parsed deterministically: IV tier-list table, Method tier__tier blocks,
+  Archon __NEXT_DATA__ throughput/score, WoWMeta SvelteKit border-tier-list classes);
+  80/80 IV rows, Method raid 39 (Vengeance DH still omitted upstream) + M+ 40 (empty S
+  this week), Archon 80, WoWMeta 40 (monotonic S→D verified). **Wowhead UNREACHABLE from
+  CI** — raw 403 + r.jina.ai 403 + WebFetch returns only the JS shell; left 2026-07-14
+  untouched. Movement: 17 consensus tier moves (0 ≥2-band, within anomaly limits). Notable:
+  Archon raid throughput reshuffle (5 S→A, 8 A→B); WoWMeta big weekly churn (26/40 moved);
+  IV M+ MM Hunter/Devastation Evoker/Fire Mage B→C; Method M+ Brewmaster/Vengeance DH/Resto
+  Shaman S→A; Resto Shaman Archon M+ A→S. Archon **survivability RECOVERED** (was empty
+  upstream on 07-14) — 40 rows, only 3 moves vs last-good baseline. npm test 85/85, build OK.

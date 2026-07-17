@@ -96,3 +96,20 @@ dedicated section — narrative prose older than that is prunable memory.
 - 2026-07-01 (scheduled evening run) · builds found: 0 new (forum thread still at post #10, 2026-06-30; RSS items since 06-30 are all non-tuning — raid maps, housing non-combat pets, world map/Coiled Isle; the 06-27 Wowhead Subtlety review is already reflected in Subtlety's Negative ptr writeup) · zone-54 state: Heroic UNCHANGED — 27 DPS specs, 1066 total parses, identical to the 07-01 baseline (change detector: no increase → no ingest); Mythic (difficulty 5) still empty as expected. No ptr-watch data changes. npm test 24/24 pass, build OK (combined run with watch-creators; 40 specs, 227.4 KB).
 - 2026-07-03 (scheduled Wed run) · builds found: 0 new. Forum thread (topic 2317811) newest post still #10 (Linxy, 2026-06-30) — already logged; highest_post_number=10. Wowhead RSS since 06-30 is all non-tuning (housing decor/pets/exterior, raid maps, cosmetics, S2 M+ dungeon *availability* for testing, splash/loading screens, QoL, 06-30 hotfixes, and the 06-30 "Datamined Class Tuning" datamining companion to the already-logged 06-30 build). · zone-54 state: Heroic UNCHANGED — 27 DPS specs, 1066 total parses, byte-identical to the 07-01 baseline (Frost DK 90.74/n43, Frost Mage 83.26/n85, Unholy DK 81.22/n85, … Destruction 53.03/n20); change detector: no increase → no ingest. Mythic (difficulty 5) still empty (0 rows). No ptr-watch data changes. npm test 25/25 pass, build OK (combined run with watch-creators; 40 specs, 265.0 KB).
 - 2026-07-01 · builds found: 0 new (canonical forum thread newest = post #10, 2026-06-30, already logged; Wowhead "Datamined Class Tuning and Tier Set Changes" 2026-06-30 is the datamining companion to that same build, not a new one; other RSS items were non-tuning housing/QoL/interview/map content) · zone-54 state: FIRST ingest — Heroic "The Venomous Abyss" statistics now populated. 27 DPS specs, ~1066 total parses (prior baseline: none). Merged as "12.1 PTR raid testing score (normalized)" (unit score, aggregate=normalized 0–100, n=parses, era ptr). Top: Frost DK 90.74 (n=43), Frost Mage 83.26 (n=85), Unholy DK 81.22 (n=85). Bottom: Destruction Warlock 53.03, Fire Mage 55.68, MM Hunter 56.94. Mythic (difficulty 5) still empty — testing concluded Heroic; Mythic windows open next build. npm test 24/24 pass, build OK (40 specs, 197.6 KB).
+
+- 2026-07-17 (nightly recovery run — Opus 4.8) · builds found: **1 new** (2 forum posts).
+  Forum thread (topic 2317811) now tops at **post #15** (was #13): **#14** (Linxy,
+  2026-07-14T21:57Z) "Week of July 14th — Class Changes & Tier Sets" + **#15** (2026-07-14T22:46Z)
+  Rogue Outlaw addendum, matching Wowhead news=382170 "(Rogue Added)…Week of July 14th".
+  Logged ONE ptr-builds.json entry (forumPostNumber 14, newest-first) with PvE tuning
+  highlights for **17 specs across 10 classes**: Havoc DH (Inertia 18%→12%), Devourer DH,
+  Resto/Guardian Druid, Preservation Evoker, BM/MM Hunter (Explosive Shot +100%), **Survival
+  Hunter** (Flamefang Pitch removed + Bombardier/Wildfire rework), Arcane/Fire Mage, Prot
+  Paladin (Hammer&Anvil −20%, 4pc 200%→100%), Holy Priest (mana −10%, Benediction +15%),
+  Shadow Priest (Idol of N'Zoth Insanity halved), Resto Shaman (Healing Rain +20%), Aff
+  Warlock (Hedonic Gorging new, Patient Zero removed), Destro Warlock (all dmg −5%), Outlaw
+  Rogue (Killing Spree rework). Plus S2 systems (Corrosive Power/Coiled Isle), M+ S2 boss
+  tuning, PvP/UI. **NOT logged:** 07-16 Wowhead "Class Tuning Hotfixes" (news=382189) — PTR
+  hotfixes with no forum post, per canonical-source rule. · **zone-54/52/56 WCL UNREACHABLE**
+  again (pre-agent evidence.json rdps-broken; 500 upstream) — baselines unchanged at 07-09.
+  npm test 85/85, build OK.

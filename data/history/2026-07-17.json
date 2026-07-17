@@ -1,0 +1,1487 @@
+{
+  "date": "2026-07-17",
+  "projectionVersion": 1,
+  "specs": {
+    "Death Knight|Blood": {
+      "consensus": {
+        "raid": "B",
+        "mplus": "C"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 3,
+        "archon|raid|Popularity": 1,
+        "archon|mplus|M+ score (95th pct)": 3,
+        "archon|mplus|Popularity": 4,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses, tank)": 3,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons, tank)": 3,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 3,
+        "mythicstats|mplus|Top-2000 keys representation": 3,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing, tank)": 3,
+        "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 1
+      },
+      "scores": {
+        "raid": 49,
+        "mplus": 36
+      },
+      "projection": {
+        "raid": {
+          "tier": "A",
+          "score": 65,
+          "confidence": "medium"
+        },
+        "mplus": {
+          "tier": "B",
+          "score": 40,
+          "confidence": "medium"
+        }
+      }
+    },
+    "Death Knight|Frost": {
+      "consensus": {
+        "raid": "B",
+        "mplus": "B"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 8,
+        "archon|raid|Popularity": 16,
+        "archon|mplus|M+ score (95th pct)": 25,
+        "archon|mplus|Popularity": 21,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 4,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 24,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 20,
+        "mythicstats|mplus|Top-2000 keys representation": 23,
+        "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 1,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 1,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 2
+      },
+      "dummy": {
+        "rank": 7,
+        "score": 68
+      },
+      "scores": {
+        "raid": 58,
+        "mplus": 45
+      },
+      "projection": {
+        "raid": {
+          "tier": "A",
+          "score": 68,
+          "confidence": "high"
+        },
+        "mplus": {
+          "tier": "B",
+          "score": 57,
+          "confidence": "high"
+        }
+      }
+    },
+    "Death Knight|Unholy": {
+      "consensus": {
+        "raid": "A",
+        "mplus": "S"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 19,
+        "archon|raid|Popularity": 1,
+        "archon|mplus|M+ score (95th pct)": 3,
+        "archon|mplus|Popularity": 1,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 14,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 1,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 1,
+        "mythicstats|mplus|Top-2000 keys representation": 1,
+        "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 3,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 2,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 17
+      },
+      "dummy": {
+        "rank": 3,
+        "score": 79
+      },
+      "scores": {
+        "raid": 62,
+        "mplus": 91
+      },
+      "projection": {
+        "raid": {
+          "tier": "A",
+          "score": 67,
+          "confidence": "high"
+        },
+        "mplus": {
+          "tier": "A",
+          "score": 69,
+          "confidence": "high"
+        }
+      }
+    },
+    "Demon Hunter|Havoc": {
+      "consensus": {
+        "raid": "B",
+        "mplus": "B"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 7,
+        "archon|raid|Popularity": 13,
+        "archon|mplus|M+ score (95th pct)": 20,
+        "archon|mplus|Popularity": 11,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 7,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 17,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 15,
+        "mythicstats|mplus|Top-2000 keys representation": 13,
+        "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 5,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 11,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 15
+      },
+      "dummy": {
+        "rank": 19,
+        "score": 23
+      },
+      "scores": {
+        "raid": 55,
+        "mplus": 53
+      },
+      "projection": {
+        "raid": {
+          "tier": "A",
+          "score": 66,
+          "confidence": "high"
+        },
+        "mplus": {
+          "tier": "B",
+          "score": 56,
+          "confidence": "high"
+        }
+      }
+    },
+    "Demon Hunter|Devourer": {
+      "consensus": {
+        "raid": "S",
+        "mplus": "S"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 4,
+        "archon|raid|Popularity": 6,
+        "archon|mplus|M+ score (95th pct)": 2,
+        "archon|mplus|Popularity": 4,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 5,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 2,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 3,
+        "mythicstats|mplus|Top-2000 keys representation": 2,
+        "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 20,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 26,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 19
+      },
+      "dummy": {
+        "rank": 13,
+        "score": 48
+      },
+      "scores": {
+        "raid": 88,
+        "mplus": 91
+      },
+      "projection": {
+        "raid": {
+          "tier": "A",
+          "score": 71,
+          "confidence": "high"
+        },
+        "mplus": {
+          "tier": "A+",
+          "score": 76,
+          "confidence": "high"
+        }
+      }
+    },
+    "Demon Hunter|Vengeance": {
+      "consensus": {
+        "raid": "C",
+        "mplus": "B"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 6,
+        "archon|raid|Popularity": 6,
+        "archon|mplus|M+ score (95th pct)": 5,
+        "archon|mplus|Popularity": 6,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses, tank)": 6,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons, tank)": 4,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 6,
+        "mythicstats|mplus|Top-2000 keys representation": 5,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing, tank)": 5,
+        "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 6
+      },
+      "scores": {
+        "raid": 29,
+        "mplus": 53
+      },
+      "projection": {
+        "raid": {
+          "tier": "C",
+          "score": 9,
+          "confidence": "medium"
+        },
+        "mplus": {
+          "tier": "C",
+          "score": 31,
+          "confidence": "medium"
+        }
+      }
+    },
+    "Druid|Balance": {
+      "consensus": {
+        "raid": "A",
+        "mplus": "B"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 2,
+        "archon|raid|Popularity": 10,
+        "archon|mplus|M+ score (95th pct)": 24,
+        "archon|mplus|Popularity": 18,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 8,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 25,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 22,
+        "mythicstats|mplus|Top-2000 keys representation": 24,
+        "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 13,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 16,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 7
+      },
+      "dummy": {
+        "rank": 9,
+        "score": 61
+      },
+      "scores": {
+        "raid": 64,
+        "mplus": 48
+      },
+      "projection": {
+        "raid": {
+          "tier": "A",
+          "score": 64,
+          "confidence": "high"
+        },
+        "mplus": {
+          "tier": "A",
+          "score": 59,
+          "confidence": "high"
+        }
+      }
+    },
+    "Druid|Feral": {
+      "consensus": {
+        "raid": "B",
+        "mplus": "A"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 17,
+        "archon|raid|Popularity": 20,
+        "archon|mplus|M+ score (95th pct)": 6,
+        "archon|mplus|Popularity": 17,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 25,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 5,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 5,
+        "mythicstats|mplus|Top-2000 keys representation": 10,
+        "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 27,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 3,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 12
+      },
+      "dummy": {
+        "rank": 4,
+        "score": 72
+      },
+      "scores": {
+        "raid": 45,
+        "mplus": 66
+      },
+      "projection": {
+        "raid": {
+          "tier": "B",
+          "score": 43,
+          "confidence": "high"
+        },
+        "mplus": {
+          "tier": "A",
+          "score": 71,
+          "confidence": "high"
+        }
+      }
+    },
+    "Druid|Guardian": {
+      "consensus": {
+        "raid": "A+",
+        "mplus": "S"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 1,
+        "archon|raid|Popularity": 2,
+        "archon|mplus|M+ score (95th pct)": 1,
+        "archon|mplus|Popularity": 1,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses, tank)": 2,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons, tank)": 1,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 1,
+        "mythicstats|mplus|Top-2000 keys representation": 1,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing, tank)": 6,
+        "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 4
+      },
+      "scores": {
+        "raid": 81,
+        "mplus": 90
+      },
+      "projection": {
+        "raid": {
+          "tier": "A",
+          "score": 63,
+          "confidence": "medium"
+        },
+        "mplus": {
+          "tier": "B",
+          "score": 50,
+          "confidence": "medium"
+        }
+      }
+    },
+    "Druid|Restoration": {
+      "consensus": {
+        "raid": "A+",
+        "mplus": "B"
+      },
+      "ranks": {
+        "archon|raid|95th pct HPS (Mythic)": 4,
+        "archon|raid|Popularity": 4,
+        "archon|mplus|M+ score (95th pct)": 7,
+        "archon|mplus|Popularity": 5,
+        "warcraftlogs|raid|Median HPS (Mythic, all bosses)": 4,
+        "warcraftlogs|mplus|Median HPS (M+, all dungeons)": 6,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 5,
+        "mythicstats|mplus|Top-2000 keys representation": 7,
+        "warcraftlogs|raid|Median DPS (Mythic, healer)": 7,
+        "warcraftlogs|mplus|Median HPS (12.1 PTR M+ testing)": 4,
+        "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 4
+      },
+      "scores": {
+        "raid": 86,
+        "mplus": 52
+      },
+      "projection": {
+        "raid": {
+          "tier": "A+",
+          "score": 77,
+          "confidence": "medium"
+        },
+        "mplus": {
+          "tier": "A",
+          "score": 58,
+          "confidence": "medium"
+        }
+      }
+    },
+    "Evoker|Augmentation": {
+      "consensus": {
+        "raid": "A",
+        "mplus": "S"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 1,
+        "archon|raid|Popularity": 7,
+        "archon|mplus|M+ score (95th pct)": 1,
+        "archon|mplus|Popularity": 7,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 9,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 3,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 2,
+        "mythicstats|mplus|Top-2000 keys representation": 3,
+        "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 17,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 13
+      },
+      "scores": {
+        "raid": 71,
+        "mplus": 91
+      },
+      "projection": {
+        "raid": {
+          "tier": "B",
+          "score": 53,
+          "confidence": "medium"
+        },
+        "mplus": {
+          "tier": "A+",
+          "score": 74,
+          "confidence": "medium"
+        }
+      }
+    },
+    "Evoker|Devastation": {
+      "consensus": {
+        "raid": "A",
+        "mplus": "C"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 11,
+        "archon|raid|Popularity": 24,
+        "archon|mplus|M+ score (95th pct)": 27,
+        "archon|mplus|Popularity": 27,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 18,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 26,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 23,
+        "mythicstats|mplus|Top-2000 keys representation": 25,
+        "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 21,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 15,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 27
+      },
+      "dummy": {
+        "rank": 11,
+        "score": 49
+      },
+      "scores": {
+        "raid": 61,
+        "mplus": 34
+      },
+      "projection": {
+        "raid": {
+          "tier": "B",
+          "score": 52,
+          "confidence": "high"
+        },
+        "mplus": {
+          "tier": "C",
+          "score": 33,
+          "confidence": "high"
+        }
+      }
+    },
+    "Evoker|Preservation": {
+      "consensus": {
+        "raid": "A+",
+        "mplus": "C"
+      },
+      "ranks": {
+        "archon|raid|95th pct HPS (Mythic)": 3,
+        "archon|raid|Popularity": 7,
+        "archon|mplus|M+ score (95th pct)": 6,
+        "archon|mplus|Popularity": 7,
+        "warcraftlogs|raid|Median HPS (Mythic, all bosses)": 3,
+        "warcraftlogs|mplus|Median HPS (M+, all dungeons)": 7,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 6,
+        "mythicstats|mplus|Top-2000 keys representation": 6,
+        "warcraftlogs|raid|Median DPS (Mythic, healer)": 4,
+        "warcraftlogs|mplus|Median HPS (12.1 PTR M+ testing)": 3,
+        "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 1
+      },
+      "scores": {
+        "raid": 77,
+        "mplus": 38
+      },
+      "projection": {
+        "raid": {
+          "tier": "S",
+          "score": 94,
+          "confidence": "medium"
+        },
+        "mplus": {
+          "tier": "A",
+          "score": 58,
+          "confidence": "medium"
+        }
+      }
+    },
+    "Hunter|Beast Mastery": {
+      "consensus": {
+        "raid": "C",
+        "mplus": "B"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 25,
+        "archon|raid|Popularity": 3,
+        "archon|mplus|M+ score (95th pct)": 16,
+        "archon|mplus|Popularity": 3,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 26,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 16,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 14,
+        "mythicstats|mplus|Top-2000 keys representation": 7,
+        "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 6,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 9,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 14
+      },
+      "dummy": {
+        "rank": 8,
+        "score": 64
+      },
+      "scores": {
+        "raid": 33,
+        "mplus": 56
+      },
+      "projection": {
+        "raid": {
+          "tier": "B",
+          "score": 49,
+          "confidence": "high"
+        },
+        "mplus": {
+          "tier": "A",
+          "score": 58,
+          "confidence": "high"
+        }
+      }
+    },
+    "Hunter|Marksmanship": {
+      "consensus": {
+        "raid": "S",
+        "mplus": "B"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 3,
+        "archon|raid|Popularity": 17,
+        "archon|mplus|M+ score (95th pct)": 17,
+        "archon|mplus|Popularity": 22,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 2,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 18,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 21,
+        "mythicstats|mplus|Top-2000 keys representation": 20,
+        "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 25,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 5,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 23
+      },
+      "scores": {
+        "raid": 88,
+        "mplus": 47
+      },
+      "projection": {
+        "raid": {
+          "tier": "B",
+          "score": 52,
+          "confidence": "medium"
+        },
+        "mplus": {
+          "tier": "C",
+          "score": 36,
+          "confidence": "medium"
+        }
+      }
+    },
+    "Hunter|Survival": {
+      "consensus": {
+        "raid": "A",
+        "mplus": "A"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 5,
+        "archon|raid|Popularity": 18,
+        "archon|mplus|M+ score (95th pct)": 8,
+        "archon|mplus|Popularity": 16,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 1,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 8,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 9,
+        "mythicstats|mplus|Top-2000 keys representation": 14,
+        "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 23,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 12,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 8
+      },
+      "scores": {
+        "raid": 68,
+        "mplus": 70
+      },
+      "projection": {
+        "raid": {
+          "tier": "B",
+          "score": 44,
+          "confidence": "medium"
+        },
+        "mplus": {
+          "tier": "A",
+          "score": 71,
+          "confidence": "medium"
+        }
+      }
+    },
+    "Mage|Arcane": {
+      "consensus": {
+        "raid": "C",
+        "mplus": "B"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 27,
+        "archon|raid|Popularity": 27,
+        "archon|mplus|M+ score (95th pct)": 18,
+        "archon|mplus|Popularity": 20,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 27,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 15,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 25,
+        "mythicstats|mplus|Top-2000 keys representation": 21,
+        "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 12,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 14,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 4
+      },
+      "dummy": {
+        "rank": 17,
+        "score": 38
+      },
+      "scores": {
+        "raid": 33,
+        "mplus": 50
+      },
+      "projection": {
+        "raid": {
+          "tier": "B",
+          "score": 44,
+          "confidence": "high"
+        },
+        "mplus": {
+          "tier": "A",
+          "score": 63,
+          "confidence": "high"
+        }
+      }
+    },
+    "Mage|Fire": {
+      "consensus": {
+        "raid": "C",
+        "mplus": "C"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 16,
+        "archon|raid|Popularity": 25,
+        "archon|mplus|M+ score (95th pct)": 19,
+        "archon|mplus|Popularity": 26,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 15,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 23,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 26,
+        "mythicstats|mplus|Top-2000 keys representation": 26,
+        "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 26,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 10,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 24
+      },
+      "dummy": {
+        "rank": 22,
+        "score": 8
+      },
+      "scores": {
+        "raid": 39,
+        "mplus": 38
+      },
+      "projection": {
+        "raid": {
+          "tier": "C",
+          "score": 21,
+          "confidence": "high"
+        },
+        "mplus": {
+          "tier": "C",
+          "score": 23,
+          "confidence": "high"
+        }
+      }
+    },
+    "Mage|Frost": {
+      "consensus": {
+        "raid": "A+",
+        "mplus": "A"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 6,
+        "archon|raid|Popularity": 2,
+        "archon|mplus|M+ score (95th pct)": 21,
+        "archon|mplus|Popularity": 5,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 3,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 22,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 18,
+        "mythicstats|mplus|Top-2000 keys representation": 15,
+        "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 2,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 8,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 22
+      },
+      "dummy": {
+        "rank": 1,
+        "score": 87
+      },
+      "scores": {
+        "raid": 81,
+        "mplus": 58
+      },
+      "projection": {
+        "raid": {
+          "tier": "S",
+          "score": 89,
+          "confidence": "high"
+        },
+        "mplus": {
+          "tier": "B",
+          "score": 48,
+          "confidence": "high"
+        }
+      }
+    },
+    "Monk|Brewmaster": {
+      "consensus": {
+        "raid": "B",
+        "mplus": "A"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 5,
+        "archon|raid|Popularity": 4,
+        "archon|mplus|M+ score (95th pct)": 2,
+        "archon|mplus|Popularity": 3,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses, tank)": 5,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons, tank)": 2,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 2,
+        "mythicstats|mplus|Top-2000 keys representation": 2,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing, tank)": 4,
+        "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 3
+      },
+      "scores": {
+        "raid": 54,
+        "mplus": 74
+      },
+      "projection": {
+        "raid": {
+          "tier": "B",
+          "score": 57,
+          "confidence": "medium"
+        },
+        "mplus": {
+          "tier": "A",
+          "score": 59,
+          "confidence": "medium"
+        }
+      }
+    },
+    "Monk|Mistweaver": {
+      "consensus": {
+        "raid": "S",
+        "mplus": "S"
+      },
+      "ranks": {
+        "archon|raid|95th pct HPS (Mythic)": 1,
+        "archon|raid|Popularity": 2,
+        "archon|mplus|M+ score (95th pct)": 1,
+        "archon|mplus|Popularity": 2,
+        "warcraftlogs|raid|Median HPS (Mythic, all bosses)": 2,
+        "warcraftlogs|mplus|Median HPS (M+, all dungeons)": 1,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 1,
+        "mythicstats|mplus|Top-2000 keys representation": 1,
+        "warcraftlogs|raid|Median DPS (Mythic, healer)": 2,
+        "warcraftlogs|mplus|Median HPS (12.1 PTR M+ testing)": 1,
+        "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 3
+      },
+      "scores": {
+        "raid": 100,
+        "mplus": 94
+      },
+      "projection": {
+        "raid": {
+          "tier": "S",
+          "score": 92,
+          "confidence": "medium"
+        },
+        "mplus": {
+          "tier": "S",
+          "score": 100,
+          "confidence": "medium"
+        }
+      }
+    },
+    "Monk|Windwalker": {
+      "consensus": {
+        "raid": "A",
+        "mplus": "B"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 9,
+        "archon|raid|Popularity": 15,
+        "archon|mplus|M+ score (95th pct)": 23,
+        "archon|mplus|Popularity": 19,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 13,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 19,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 16,
+        "mythicstats|mplus|Top-2000 keys representation": 22,
+        "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 11,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 18,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 21
+      },
+      "dummy": {
+        "rank": 2,
+        "score": 80
+      },
+      "scores": {
+        "raid": 70,
+        "mplus": 46
+      },
+      "projection": {
+        "raid": {
+          "tier": "A",
+          "score": 69,
+          "confidence": "high"
+        },
+        "mplus": {
+          "tier": "B",
+          "score": 44,
+          "confidence": "high"
+        }
+      }
+    },
+    "Paladin|Holy": {
+      "consensus": {
+        "raid": "B",
+        "mplus": "B"
+      },
+      "ranks": {
+        "archon|raid|95th pct HPS (Mythic)": 6,
+        "archon|raid|Popularity": 5,
+        "archon|mplus|M+ score (95th pct)": 4,
+        "archon|mplus|Popularity": 4,
+        "warcraftlogs|raid|Median HPS (Mythic, all bosses)": 6,
+        "warcraftlogs|mplus|Median HPS (M+, all dungeons)": 4,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 4,
+        "mythicstats|mplus|Top-2000 keys representation": 4,
+        "warcraftlogs|raid|Median DPS (Mythic, healer)": 6,
+        "warcraftlogs|mplus|Median HPS (12.1 PTR M+ testing)": 6,
+        "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 7
+      },
+      "scores": {
+        "raid": 49,
+        "mplus": 48
+      },
+      "projection": {
+        "raid": {
+          "tier": "C",
+          "score": 37,
+          "confidence": "medium"
+        },
+        "mplus": {
+          "tier": "B",
+          "score": 41,
+          "confidence": "medium"
+        }
+      }
+    },
+    "Paladin|Protection": {
+      "consensus": {
+        "raid": "C",
+        "mplus": "B"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 4,
+        "archon|raid|Popularity": 5,
+        "archon|mplus|M+ score (95th pct)": 6,
+        "archon|mplus|Popularity": 2,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses, tank)": 4,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons, tank)": 6,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 5,
+        "mythicstats|mplus|Top-2000 keys representation": 6,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing, tank)": 1,
+        "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 5
+      },
+      "scores": {
+        "raid": 33,
+        "mplus": 45
+      },
+      "projection": {
+        "raid": {
+          "tier": "C",
+          "score": 27,
+          "confidence": "medium"
+        },
+        "mplus": {
+          "tier": "A",
+          "score": 73,
+          "confidence": "medium"
+        }
+      }
+    },
+    "Paladin|Retribution": {
+      "consensus": {
+        "raid": "A",
+        "mplus": "A"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 23,
+        "archon|raid|Popularity": 4,
+        "archon|mplus|M+ score (95th pct)": 7,
+        "archon|mplus|Popularity": 2,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 24,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 7,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 6,
+        "mythicstats|mplus|Top-2000 keys representation": 4,
+        "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 9,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 23,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 9
+      },
+      "dummy": {
+        "rank": 5,
+        "score": 72
+      },
+      "scores": {
+        "raid": 60,
+        "mplus": 69
+      },
+      "projection": {
+        "raid": {
+          "tier": "A",
+          "score": 65,
+          "confidence": "high"
+        },
+        "mplus": {
+          "tier": "A",
+          "score": 70,
+          "confidence": "high"
+        }
+      }
+    },
+    "Priest|Discipline": {
+      "consensus": {
+        "raid": "A+",
+        "mplus": "A"
+      },
+      "ranks": {
+        "archon|raid|95th pct HPS (Mythic)": 2,
+        "archon|raid|Popularity": 3,
+        "archon|mplus|M+ score (95th pct)": 3,
+        "archon|mplus|Popularity": 3,
+        "warcraftlogs|raid|Median HPS (Mythic, all bosses)": 1,
+        "warcraftlogs|mplus|Median HPS (M+, all dungeons)": 2,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 3,
+        "mythicstats|mplus|Top-2000 keys representation": 3,
+        "warcraftlogs|raid|Median DPS (Mythic, healer)": 1,
+        "warcraftlogs|mplus|Median HPS (12.1 PTR M+ testing)": 2,
+        "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 2
+      },
+      "scores": {
+        "raid": 86,
+        "mplus": 58
+      },
+      "projection": {
+        "raid": {
+          "tier": "A+",
+          "score": 85,
+          "confidence": "medium"
+        },
+        "mplus": {
+          "tier": "A",
+          "score": 72,
+          "confidence": "medium"
+        }
+      }
+    },
+    "Priest|Holy": {
+      "consensus": {
+        "raid": "B",
+        "mplus": "C"
+      },
+      "ranks": {
+        "archon|raid|95th pct HPS (Mythic)": 5,
+        "archon|raid|Popularity": 6,
+        "archon|mplus|M+ score (95th pct)": 5,
+        "archon|mplus|Popularity": 6,
+        "warcraftlogs|raid|Median HPS (Mythic, all bosses)": 5,
+        "warcraftlogs|mplus|Median HPS (M+, all dungeons)": 5,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 7,
+        "mythicstats|mplus|Top-2000 keys representation": 5,
+        "warcraftlogs|raid|Median DPS (Mythic, healer)": 3,
+        "warcraftlogs|mplus|Median HPS (12.1 PTR M+ testing)": 7,
+        "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 5
+      },
+      "scores": {
+        "raid": 43,
+        "mplus": 33
+      },
+      "projection": {
+        "raid": {
+          "tier": "C",
+          "score": 29,
+          "confidence": "medium"
+        },
+        "mplus": {
+          "tier": "C",
+          "score": 11,
+          "confidence": "medium"
+        }
+      }
+    },
+    "Priest|Shadow": {
+      "consensus": {
+        "raid": "B",
+        "mplus": "B"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 22,
+        "archon|raid|Popularity": 12,
+        "archon|mplus|M+ score (95th pct)": 12,
+        "archon|mplus|Popularity": 12,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 20,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 20,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 11,
+        "mythicstats|mplus|Top-2000 keys representation": 12,
+        "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 4,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 13,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 10
+      },
+      "dummy": {
+        "rank": 20,
+        "score": 17
+      },
+      "scores": {
+        "raid": 58,
+        "mplus": 58
+      },
+      "projection": {
+        "raid": {
+          "tier": "A",
+          "score": 64,
+          "confidence": "high"
+        },
+        "mplus": {
+          "tier": "B",
+          "score": 54,
+          "confidence": "high"
+        }
+      }
+    },
+    "Rogue|Assassination": {
+      "consensus": {
+        "raid": "C",
+        "mplus": "A"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 26,
+        "archon|raid|Popularity": 26,
+        "archon|mplus|M+ score (95th pct)": 10,
+        "archon|mplus|Popularity": 24,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 23,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 14,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 17,
+        "mythicstats|mplus|Top-2000 keys representation": 18,
+        "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 19,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 24,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 20
+      },
+      "dummy": {
+        "rank": 18,
+        "score": 31
+      },
+      "scores": {
+        "raid": 37,
+        "mplus": 58
+      },
+      "projection": {
+        "raid": {
+          "tier": "C",
+          "score": 34,
+          "confidence": "high"
+        },
+        "mplus": {
+          "tier": "B",
+          "score": 45,
+          "confidence": "high"
+        }
+      }
+    },
+    "Rogue|Outlaw": {
+      "consensus": {
+        "raid": "B",
+        "mplus": "A"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 21,
+        "archon|raid|Popularity": 23,
+        "archon|mplus|M+ score (95th pct)": 5,
+        "archon|mplus|Popularity": 23,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 21,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 9,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 7,
+        "mythicstats|mplus|Top-2000 keys representation": 17,
+        "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 22,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 4,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 18
+      },
+      "dummy": {
+        "rank": 10,
+        "score": 51
+      },
+      "scores": {
+        "raid": 43,
+        "mplus": 60
+      },
+      "projection": {
+        "raid": {
+          "tier": "B",
+          "score": 44,
+          "confidence": "high"
+        },
+        "mplus": {
+          "tier": "A",
+          "score": 58,
+          "confidence": "high"
+        }
+      }
+    },
+    "Rogue|Subtlety": {
+      "consensus": {
+        "raid": "A",
+        "mplus": "A"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 10,
+        "archon|raid|Popularity": 11,
+        "archon|mplus|M+ score (95th pct)": 15,
+        "archon|mplus|Popularity": 14,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 6,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 11,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 19,
+        "mythicstats|mplus|Top-2000 keys representation": 16,
+        "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 18,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 7,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 25
+      },
+      "dummy": {
+        "rank": 21,
+        "score": 10
+      },
+      "scores": {
+        "raid": 60,
+        "mplus": 63
+      },
+      "projection": {
+        "raid": {
+          "tier": "C",
+          "score": 35,
+          "confidence": "high"
+        },
+        "mplus": {
+          "tier": "C",
+          "score": 31,
+          "confidence": "high"
+        }
+      }
+    },
+    "Shaman|Elemental": {
+      "consensus": {
+        "raid": "B",
+        "mplus": "A"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 13,
+        "archon|raid|Popularity": 8,
+        "archon|mplus|M+ score (95th pct)": 14,
+        "archon|mplus|Popularity": 8,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 17,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 21,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 13,
+        "mythicstats|mplus|Top-2000 keys representation": 11,
+        "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 10,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 6,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 3
+      },
+      "scores": {
+        "raid": 49,
+        "mplus": 70
+      },
+      "projection": {
+        "raid": {
+          "tier": "B",
+          "score": 56,
+          "confidence": "medium"
+        },
+        "mplus": {
+          "tier": "A+",
+          "score": 80,
+          "confidence": "medium"
+        }
+      }
+    },
+    "Shaman|Enhancement": {
+      "consensus": {
+        "raid": "B",
+        "mplus": "A"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 18,
+        "archon|raid|Popularity": 19,
+        "archon|mplus|M+ score (95th pct)": 9,
+        "archon|mplus|Popularity": 10,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 16,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 10,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 12,
+        "mythicstats|mplus|Top-2000 keys representation": 8,
+        "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 16,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 20,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 11
+      },
+      "dummy": {
+        "rank": 14,
+        "score": 47
+      },
+      "scores": {
+        "raid": 49,
+        "mplus": 65
+      },
+      "projection": {
+        "raid": {
+          "tier": "B",
+          "score": 47,
+          "confidence": "high"
+        },
+        "mplus": {
+          "tier": "A",
+          "score": 61,
+          "confidence": "high"
+        }
+      }
+    },
+    "Shaman|Restoration": {
+      "consensus": {
+        "raid": "C",
+        "mplus": "A+"
+      },
+      "ranks": {
+        "archon|raid|95th pct HPS (Mythic)": 7,
+        "archon|raid|Popularity": 1,
+        "archon|mplus|M+ score (95th pct)": 2,
+        "archon|mplus|Popularity": 1,
+        "warcraftlogs|raid|Median HPS (Mythic, all bosses)": 7,
+        "warcraftlogs|mplus|Median HPS (M+, all dungeons)": 3,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 2,
+        "mythicstats|mplus|Top-2000 keys representation": 2,
+        "warcraftlogs|raid|Median DPS (Mythic, healer)": 5,
+        "warcraftlogs|mplus|Median HPS (12.1 PTR M+ testing)": 5,
+        "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 6
+      },
+      "scores": {
+        "raid": 37,
+        "mplus": 85
+      },
+      "projection": {
+        "raid": {
+          "tier": "C",
+          "score": 21,
+          "confidence": "medium"
+        },
+        "mplus": {
+          "tier": "B",
+          "score": 55,
+          "confidence": "medium"
+        }
+      }
+    },
+    "Warlock|Affliction": {
+      "consensus": {
+        "raid": "B",
+        "mplus": "B"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 24,
+        "archon|raid|Popularity": 21,
+        "archon|mplus|M+ score (95th pct)": 22,
+        "archon|mplus|Popularity": 15,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 22,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 13,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 24,
+        "mythicstats|mplus|Top-2000 keys representation": 19,
+        "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 8,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 21,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 1
+      },
+      "dummy": {
+        "rank": 12,
+        "score": 49
+      },
+      "scores": {
+        "raid": 49,
+        "mplus": 45
+      },
+      "projection": {
+        "raid": {
+          "tier": "A",
+          "score": 66,
+          "confidence": "high"
+        },
+        "mplus": {
+          "tier": "A",
+          "score": 69,
+          "confidence": "high"
+        }
+      }
+    },
+    "Warlock|Demonology": {
+      "consensus": {
+        "raid": "A+",
+        "mplus": "A"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 15,
+        "archon|raid|Popularity": 5,
+        "archon|mplus|M+ score (95th pct)": 13,
+        "archon|mplus|Popularity": 6,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 11,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 6,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 8,
+        "mythicstats|mplus|Top-2000 keys representation": 6,
+        "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 14,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 17,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 5
+      },
+      "dummy": {
+        "rank": 16,
+        "score": 40
+      },
+      "scores": {
+        "raid": 80,
+        "mplus": 73
+      },
+      "projection": {
+        "raid": {
+          "tier": "A",
+          "score": 65,
+          "confidence": "high"
+        },
+        "mplus": {
+          "tier": "A",
+          "score": 72,
+          "confidence": "high"
+        }
+      }
+    },
+    "Warlock|Destruction": {
+      "consensus": {
+        "raid": "A",
+        "mplus": "C"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 14,
+        "archon|raid|Popularity": 22,
+        "archon|mplus|M+ score (95th pct)": 26,
+        "archon|mplus|Popularity": 25,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 10,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 27,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 27,
+        "mythicstats|mplus|Top-2000 keys representation": 27,
+        "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 24,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 19,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 26
+      },
+      "dummy": {
+        "rank": 15,
+        "score": 47
+      },
+      "scores": {
+        "raid": 68,
+        "mplus": 38
+      },
+      "projection": {
+        "raid": {
+          "tier": "B",
+          "score": 52,
+          "confidence": "high"
+        },
+        "mplus": {
+          "tier": "C",
+          "score": 36,
+          "confidence": "high"
+        }
+      }
+    },
+    "Warrior|Arms": {
+      "consensus": {
+        "raid": "B",
+        "mplus": "A"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 12,
+        "archon|raid|Popularity": 14,
+        "archon|mplus|M+ score (95th pct)": 4,
+        "archon|mplus|Popularity": 13,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 12,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 4,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 4,
+        "mythicstats|mplus|Top-2000 keys representation": 5,
+        "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 7,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 25,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 6
+      },
+      "dummy": {
+        "rank": 6,
+        "score": 69
+      },
+      "scores": {
+        "raid": 43,
+        "mplus": 70
+      },
+      "projection": {
+        "raid": {
+          "tier": "B",
+          "score": 57,
+          "confidence": "high"
+        },
+        "mplus": {
+          "tier": "A",
+          "score": 73,
+          "confidence": "high"
+        }
+      }
+    },
+    "Warrior|Fury": {
+      "consensus": {
+        "raid": "A",
+        "mplus": "A"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 20,
+        "archon|raid|Popularity": 9,
+        "archon|mplus|M+ score (95th pct)": 11,
+        "archon|mplus|Popularity": 9,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 19,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 12,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 10,
+        "mythicstats|mplus|Top-2000 keys representation": 9,
+        "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 15,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 22,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 16
+      },
+      "scores": {
+        "raid": 60,
+        "mplus": 62
+      },
+      "projection": {
+        "raid": {
+          "tier": "B",
+          "score": 54,
+          "confidence": "medium"
+        },
+        "mplus": {
+          "tier": "B",
+          "score": 53,
+          "confidence": "medium"
+        }
+      }
+    },
+    "Warrior|Protection": {
+      "consensus": {
+        "raid": "A+",
+        "mplus": "C"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 2,
+        "archon|raid|Popularity": 3,
+        "archon|mplus|M+ score (95th pct)": 4,
+        "archon|mplus|Popularity": 5,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses, tank)": 1,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons, tank)": 5,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 4,
+        "mythicstats|mplus|Top-2000 keys representation": 4,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing, tank)": 2,
+        "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 2
+      },
+      "scores": {
+        "raid": 86,
+        "mplus": 38
+      },
+      "projection": {
+        "raid": {
+          "tier": "A+",
+          "score": 83,
+          "confidence": "medium"
+        },
+        "mplus": {
+          "tier": "B",
+          "score": 57,
+          "confidence": "medium"
+        }
+      }
+    }
+  }
+}
