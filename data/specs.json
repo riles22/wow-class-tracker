@@ -39,33 +39,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 90951,
+        "value": 91673.5,
         "unit": "DPS",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 27.35,
+        "value": 27.1,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3514,
+        "value": 3527,
         "unit": "score",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 10.18,
+        "value": 10.26,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "warcraftlogs",
@@ -168,33 +168,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 167545.6,
+        "value": 169164.8,
         "unit": "DPS",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 2.09,
+        "value": 2.13,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3460,
+        "value": 3466,
         "unit": "score",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 1.57,
+        "value": 1.64,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "warcraftlogs",
@@ -244,7 +244,7 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 137696,
+        "value": 137720,
         "unit": "DPS",
         "asOf": "2026-07-17"
       },
@@ -262,9 +262,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 143680,
+        "value": 143881,
         "unit": "DPS",
-        "n": 84,
+        "n": 83,
         "asOf": "2026-07-17",
         "era": "ptr"
       },
@@ -295,6 +295,26 @@
         "value": 464183,
         "unit": "DPS",
         "n": 96,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median raw DPS (12.1 PTR Venomous Abyss, pooled)",
+        "value": 145913,
+        "unit": "DPS",
+        "n": 44,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
+        "value": 253292,
+        "unit": "DPS",
+        "n": 564,
         "asOf": "2026-07-17",
         "era": "ptr"
       }
@@ -382,33 +402,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 163069.6,
+        "value": 165511.1,
         "unit": "DPS",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 11.35,
+        "value": 11.15,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 4098,
+        "value": 4122,
         "unit": "score",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 12.4,
+        "value": 12.2,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "warcraftlogs",
@@ -458,7 +478,7 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 134454,
+        "value": 134489,
         "unit": "DPS",
         "asOf": "2026-07-17"
       },
@@ -476,9 +496,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 158688,
+        "value": 160951,
         "unit": "DPS",
-        "n": 71,
+        "n": 70,
         "asOf": "2026-07-17",
         "era": "ptr"
       },
@@ -509,6 +529,26 @@
         "value": 477822,
         "unit": "DPS",
         "n": 48,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median raw DPS (12.1 PTR Venomous Abyss, pooled)",
+        "value": 135363,
+        "unit": "DPS",
+        "n": 101,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
+        "value": 201767,
+        "unit": "DPS",
+        "n": 182,
         "asOf": "2026-07-17",
         "era": "ptr"
       }
@@ -581,33 +621,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 168538.5,
+        "value": 170586.6,
         "unit": "DPS",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 2.44,
+        "value": 2.47,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3614,
+        "value": 3629,
         "unit": "score",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 3.21,
+        "value": 3.22,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "warcraftlogs",
@@ -657,7 +697,7 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 120071,
+        "value": 120093,
         "unit": "DPS",
         "asOf": "2026-07-17"
       },
@@ -698,6 +738,26 @@
         "value": 292832,
         "unit": "DPS",
         "n": 14,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median raw DPS (12.1 PTR Venomous Abyss, pooled)",
+        "value": 121485,
+        "unit": "DPS",
+        "n": 41,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
+        "value": 199162,
+        "unit": "DPS",
+        "n": 113,
         "asOf": "2026-07-17",
         "era": "ptr"
       }
@@ -785,33 +845,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 171148.6,
+        "value": 173891,
         "unit": "DPS",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 7.91,
+        "value": 7.77,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 4142,
+        "value": 4156,
         "unit": "score",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 7.37,
+        "value": 7.31,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "warcraftlogs",
@@ -861,7 +921,7 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 107115,
+        "value": 107071,
         "unit": "DPS",
         "asOf": "2026-07-17"
       },
@@ -879,9 +939,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 177282,
+        "value": 177508,
         "unit": "DPS",
-        "n": 341,
+        "n": 340,
         "asOf": "2026-07-17",
         "era": "ptr"
       },
@@ -912,6 +972,26 @@
         "value": 469312,
         "unit": "DPS",
         "n": 115,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median raw DPS (12.1 PTR Venomous Abyss, pooled)",
+        "value": 108347,
+        "unit": "DPS",
+        "n": 51,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
+        "value": 231953,
+        "unit": "DPS",
+        "n": 306,
         "asOf": "2026-07-17",
         "era": "ptr"
       }
@@ -995,33 +1075,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 86013.3,
+        "value": 86882.7,
         "unit": "DPS",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 5.88,
+        "value": 6.21,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3482,
+        "value": 3485,
         "unit": "score",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 7.22,
+        "value": 7.36,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "warcraftlogs",
@@ -1138,33 +1218,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 171741.6,
+        "value": 174279.4,
         "unit": "DPS",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 3.76,
+        "value": 3.89,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3484,
+        "value": 3485,
         "unit": "score",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 1.91,
+        "value": 2.03,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "warcraftlogs",
@@ -1214,7 +1294,7 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 116063,
+        "value": 116011,
         "unit": "DPS",
         "asOf": "2026-07-17"
       },
@@ -1232,9 +1312,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 169144,
+        "value": 170209,
         "unit": "DPS",
-        "n": 280,
+        "n": 277,
         "asOf": "2026-07-17",
         "era": "ptr"
       },
@@ -1242,9 +1322,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 2T)",
-        "value": 279120,
+        "value": 278359,
         "unit": "DPS",
-        "n": 15,
+        "n": 17,
         "asOf": "2026-07-17",
         "era": "ptr"
       },
@@ -1262,9 +1342,29 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 362566,
+        "value": 372393,
         "unit": "DPS",
-        "n": 29,
+        "n": 35,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median raw DPS (12.1 PTR Venomous Abyss, pooled)",
+        "value": 114212,
+        "unit": "DPS",
+        "n": 73,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
+        "value": 244223,
+        "unit": "DPS",
+        "n": 351,
         "asOf": "2026-07-17",
         "era": "ptr"
       }
@@ -1337,9 +1437,9 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 163662.9,
+        "value": 166303.9,
         "unit": "DPS",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
@@ -1347,23 +1447,23 @@
         "name": "Popularity",
         "value": 1.2,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3939,
+        "value": 3945,
         "unit": "score",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 1.93,
+        "value": 1.96,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "warcraftlogs",
@@ -1413,7 +1513,7 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 133594,
+        "value": 133660,
         "unit": "DPS",
         "asOf": "2026-07-17"
       },
@@ -1464,6 +1564,26 @@
         "value": 450483,
         "unit": "DPS",
         "n": 69,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median raw DPS (12.1 PTR Venomous Abyss, pooled)",
+        "value": 100904,
+        "unit": "DPS",
+        "n": 5,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
+        "value": 212952,
+        "unit": "DPS",
+        "n": 77,
         "asOf": "2026-07-17",
         "era": "ptr"
       }
@@ -1536,33 +1656,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 99880.2,
+        "value": 101814.7,
         "unit": "DPS",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 20.39,
+        "value": 20.06,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 4077,
+        "value": 4094,
         "unit": "score",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 44.68,
+        "value": 43.89,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "warcraftlogs",
@@ -1665,33 +1785,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct HPS (Mythic)",
-        "value": 196959.6,
+        "value": 197092.6,
         "unit": "HPS",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 14.26,
+        "value": 14.14,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3399,
+        "value": 3396,
         "unit": "score",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 7.89,
+        "value": 7.77,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "warcraftlogs",
@@ -1819,9 +1939,9 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 171862.7,
+        "value": 174441.8,
         "unit": "DPS",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
@@ -1829,23 +1949,23 @@
         "name": "Popularity",
         "value": 5.49,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 4197,
+        "value": 4223,
         "unit": "score",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 4.83,
+        "value": 4.78,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "warcraftlogs",
@@ -1920,6 +2040,26 @@
         "n": 10,
         "asOf": "2026-07-17",
         "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median raw DPS (12.1 PTR Venomous Abyss, pooled)",
+        "value": 108582,
+        "unit": "DPS",
+        "n": 56,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
+        "value": 209060,
+        "unit": "DPS",
+        "n": 233,
+        "asOf": "2026-07-17",
+        "era": "ptr"
       }
     ],
     "survivability": {
@@ -1988,17 +2128,17 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 165529.8,
+        "value": 169439.7,
         "unit": "DPS",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 0.55,
+        "value": 0.59,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
@@ -2006,15 +2146,15 @@
         "name": "M+ score (95th pct)",
         "value": 3416,
         "unit": "score",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 0.54,
+        "value": 0.57,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "warcraftlogs",
@@ -2064,7 +2204,7 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 116980,
+        "value": 116915,
         "unit": "DPS",
         "asOf": "2026-07-17"
       },
@@ -2115,6 +2255,26 @@
         "value": 325759,
         "unit": "DPS",
         "n": 23,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median raw DPS (12.1 PTR Venomous Abyss, pooled)",
+        "value": 94353,
+        "unit": "DPS",
+        "n": 25,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
+        "value": 176156,
+        "unit": "DPS",
+        "n": 62,
         "asOf": "2026-07-17",
         "era": "ptr"
       }
@@ -2200,17 +2360,17 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct HPS (Mythic)",
-        "value": 198318.5,
+        "value": 199017.5,
         "unit": "HPS",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 7.46,
+        "value": 7.74,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
@@ -2218,15 +2378,15 @@
         "name": "M+ score (95th pct)",
         "value": 3454,
         "unit": "score",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 3,
+        "value": 3.12,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "warcraftlogs",
@@ -2354,33 +2514,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 157320.8,
+        "value": 159123.6,
         "unit": "DPS",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 8.67,
+        "value": 8.68,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3672,
+        "value": 3686,
         "unit": "score",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 10.59,
+        "value": 10.43,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "warcraftlogs",
@@ -2430,7 +2590,7 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 121541,
+        "value": 121524,
         "unit": "DPS",
         "asOf": "2026-07-17"
       },
@@ -2481,6 +2641,26 @@
         "value": 368776,
         "unit": "DPS",
         "n": 63,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median raw DPS (12.1 PTR Venomous Abyss, pooled)",
+        "value": 121311,
+        "unit": "DPS",
+        "n": 116,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
+        "value": 207284,
+        "unit": "DPS",
+        "n": 190,
         "asOf": "2026-07-17",
         "era": "ptr"
       }
@@ -2568,33 +2748,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 171269.1,
+        "value": 173537.1,
         "unit": "DPS",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 2.06,
+        "value": 2.08,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3659,
+        "value": 3648,
         "unit": "score",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 1.23,
+        "value": 1.28,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "warcraftlogs",
@@ -2644,7 +2824,7 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 128044,
+        "value": 128040,
         "unit": "DPS",
         "asOf": "2026-07-17"
       },
@@ -2695,6 +2875,26 @@
         "value": 505924,
         "unit": "DPS",
         "n": 78,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median raw DPS (12.1 PTR Venomous Abyss, pooled)",
+        "value": 93715,
+        "unit": "DPS",
+        "n": 10,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
+        "value": 226805,
+        "unit": "DPS",
+        "n": 135,
         "asOf": "2026-07-17",
         "era": "ptr"
       }
@@ -2778,33 +2978,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 168890.7,
+        "value": 170844.3,
         "unit": "DPS",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 1.77,
+        "value": 1.72,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3870,
+        "value": 3887,
         "unit": "score",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 1.99,
+        "value": 1.95,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "warcraftlogs",
@@ -2854,7 +3054,7 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 118725,
+        "value": 118791,
         "unit": "DPS",
         "asOf": "2026-07-17"
       },
@@ -2885,6 +3085,26 @@
         "value": 452084,
         "unit": "DPS",
         "n": 69,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median raw DPS (12.1 PTR Venomous Abyss, pooled)",
+        "value": 93974,
+        "unit": "DPS",
+        "n": 10,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
+        "value": 220772,
+        "unit": "DPS",
+        "n": 132,
         "asOf": "2026-07-17",
         "era": "ptr"
       }
@@ -2970,33 +3190,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 156090.2,
+        "value": 156885.5,
         "unit": "DPS",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 0.43,
+        "value": 0.48,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3631,
+        "value": 3614,
         "unit": "score",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 1.74,
+        "value": 1.98,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "warcraftlogs",
@@ -3046,7 +3266,7 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 117614,
+        "value": 117580,
         "unit": "DPS",
         "asOf": "2026-07-17"
       },
@@ -3064,9 +3284,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 149843,
+        "value": 158425,
         "unit": "DPS",
-        "n": 124,
+        "n": 138,
         "asOf": "2026-07-17",
         "era": "ptr"
       },
@@ -3097,6 +3317,26 @@
         "value": 437866,
         "unit": "DPS",
         "n": 189,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median raw DPS (12.1 PTR Venomous Abyss, pooled)",
+        "value": 127845,
+        "unit": "DPS",
+        "n": 60,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
+        "value": 242467,
+        "unit": "DPS",
+        "n": 911,
         "asOf": "2026-07-17",
         "era": "ptr"
       }
@@ -3182,33 +3422,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 163919.4,
+        "value": 165163.4,
         "unit": "DPS",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 0.53,
+        "value": 0.55,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3625,
+        "value": 3618,
         "unit": "score",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 0.55,
+        "value": 0.58,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "warcraftlogs",
@@ -3258,7 +3498,7 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 120457,
+        "value": 120462,
         "unit": "DPS",
         "asOf": "2026-07-17"
       },
@@ -3276,9 +3516,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 154171,
+        "value": 155302,
         "unit": "DPS",
-        "n": 98,
+        "n": 95,
         "asOf": "2026-07-17",
         "era": "ptr"
       },
@@ -3309,6 +3549,26 @@
         "value": 411985,
         "unit": "DPS",
         "n": 74,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median raw DPS (12.1 PTR Venomous Abyss, pooled)",
+        "value": 106502,
+        "unit": "DPS",
+        "n": 5,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
+        "value": 249097,
+        "unit": "DPS",
+        "n": 82,
         "asOf": "2026-07-17",
         "era": "ptr"
       }
@@ -3397,33 +3657,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 168640.6,
+        "value": 170581.1,
         "unit": "DPS",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 10.4,
+        "value": 10.35,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3609,
+        "value": 3617,
         "unit": "score",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 6.5,
+        "value": 6.47,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "warcraftlogs",
@@ -3473,7 +3733,7 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 121625,
+        "value": 121561,
         "unit": "DPS",
         "asOf": "2026-07-17"
       },
@@ -3524,6 +3784,26 @@
         "value": 450262,
         "unit": "DPS",
         "n": 105,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median raw DPS (12.1 PTR Venomous Abyss, pooled)",
+        "value": 128479,
+        "unit": "DPS",
+        "n": 103,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
+        "value": 182290,
+        "unit": "DPS",
+        "n": 44,
         "asOf": "2026-07-17",
         "era": "ptr"
       }
@@ -3596,33 +3876,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 86680.6,
+        "value": 87798.2,
         "unit": "DPS",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 18.92,
+        "value": 18.37,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3923,
+        "value": 3940,
         "unit": "score",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 10.92,
+        "value": 10.57,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "warcraftlogs",
@@ -3739,33 +4019,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct HPS (Mythic)",
-        "value": 204255,
+        "value": 205879.6,
         "unit": "HPS",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 21.38,
+        "value": 21.51,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 4123,
+        "value": 4128,
         "unit": "score",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 29.33,
+        "value": 29.08,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "warcraftlogs",
@@ -3891,33 +4171,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 167402.5,
+        "value": 170212.7,
         "unit": "DPS",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 2.21,
+        "value": 2.24,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3592,
+        "value": 3595,
         "unit": "score",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 1.81,
+        "value": 1.82,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "warcraftlogs",
@@ -3967,7 +4247,7 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 115450,
+        "value": 118341,
         "unit": "DPS",
         "asOf": "2026-07-17"
       },
@@ -4018,6 +4298,26 @@
         "value": 391715,
         "unit": "DPS",
         "n": 10,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median raw DPS (12.1 PTR Venomous Abyss, pooled)",
+        "value": 119740,
+        "unit": "DPS",
+        "n": 40,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
+        "value": 190072,
+        "unit": "DPS",
+        "n": 52,
         "asOf": "2026-07-17",
         "era": "ptr"
       }
@@ -4105,33 +4405,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct HPS (Mythic)",
-        "value": 178618.4,
+        "value": 180388.5,
         "unit": "HPS",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 11.2,
+        "value": 11.23,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3559,
+        "value": 3577,
         "unit": "score",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 8.55,
+        "value": 8.53,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "warcraftlogs",
@@ -4259,17 +4559,17 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 87437,
+        "value": 89101.9,
         "unit": "DPS",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 7.91,
+        "value": 8.29,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
@@ -4277,15 +4577,15 @@
         "name": "M+ score (95th pct)",
         "value": 3435,
         "unit": "score",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 17.13,
+        "value": 17.97,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "warcraftlogs",
@@ -4404,33 +4704,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 160548.7,
+        "value": 162545.5,
         "unit": "DPS",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 8.34,
+        "value": 8.27,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3884,
+        "value": 3901,
         "unit": "score",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 11.83,
+        "value": 11.66,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "warcraftlogs",
@@ -4480,7 +4780,7 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 112125,
+        "value": 112093,
         "unit": "DPS",
         "asOf": "2026-07-17"
       },
@@ -4531,6 +4831,26 @@
         "value": 404830,
         "unit": "DPS",
         "n": 42,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median raw DPS (12.1 PTR Venomous Abyss, pooled)",
+        "value": 110934,
+        "unit": "DPS",
+        "n": 55,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
+        "value": 212905,
+        "unit": "DPS",
+        "n": 261,
         "asOf": "2026-07-17",
         "era": "ptr"
       }
@@ -4619,33 +4939,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct HPS (Mythic)",
-        "value": 202506,
+        "value": 203584.5,
         "unit": "HPS",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 15.18,
+        "value": 15.17,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3806,
+        "value": 3810,
         "unit": "score",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 15.66,
+        "value": 15.98,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "warcraftlogs",
@@ -4757,33 +5077,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct HPS (Mythic)",
-        "value": 185117.2,
+        "value": 186338.1,
         "unit": "HPS",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 8.96,
+        "value": 9.02,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3479,
+        "value": 3488,
         "unit": "score",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 5.4,
+        "value": 5.47,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "warcraftlogs",
@@ -4909,33 +5229,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 160782.5,
+        "value": 163017.2,
         "unit": "DPS",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 3.11,
+        "value": 3.21,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3814,
+        "value": 3817,
         "unit": "score",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 2.86,
+        "value": 2.92,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "warcraftlogs",
@@ -4985,7 +5305,7 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 117759,
+        "value": 118026,
         "unit": "DPS",
         "asOf": "2026-07-17"
       },
@@ -5003,9 +5323,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 155491,
+        "value": 155550,
         "unit": "DPS",
-        "n": 115,
+        "n": 113,
         "asOf": "2026-07-17",
         "era": "ptr"
       },
@@ -5036,6 +5356,26 @@
         "value": 358604,
         "unit": "DPS",
         "n": 81,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median raw DPS (12.1 PTR Venomous Abyss, pooled)",
+        "value": 117097,
+        "unit": "DPS",
+        "n": 80,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
+        "value": 236087,
+        "unit": "DPS",
+        "n": 227,
         "asOf": "2026-07-17",
         "era": "ptr"
       }
@@ -5124,33 +5464,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 157292,
+        "value": 159020.3,
         "unit": "DPS",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 0.48,
+        "value": 0.5,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3823,
+        "value": 3836,
         "unit": "score",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 0.92,
+        "value": 0.93,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "warcraftlogs",
@@ -5200,7 +5540,7 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 107769,
+        "value": 107791,
         "unit": "DPS",
         "asOf": "2026-07-17"
       },
@@ -5251,6 +5591,26 @@
         "value": 366144,
         "unit": "DPS",
         "n": 37,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median raw DPS (12.1 PTR Venomous Abyss, pooled)",
+        "value": 117369,
+        "unit": "DPS",
+        "n": 8,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
+        "value": 197834,
+        "unit": "DPS",
+        "n": 49,
         "asOf": "2026-07-17",
         "era": "ptr"
       }
@@ -5336,25 +5696,25 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 160854.8,
+        "value": 163292.3,
         "unit": "DPS",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 0.57,
+        "value": 0.55,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3942,
+        "value": 3956,
         "unit": "score",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
@@ -5362,7 +5722,7 @@
         "name": "Popularity",
         "value": 1.11,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "warcraftlogs",
@@ -5412,7 +5772,7 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 128467,
+        "value": 128275,
         "unit": "DPS",
         "asOf": "2026-07-17"
       },
@@ -5463,6 +5823,26 @@
         "value": 341172,
         "unit": "DPS",
         "n": 9,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median raw DPS (12.1 PTR Venomous Abyss, pooled)",
+        "value": 93194,
+        "unit": "DPS",
+        "n": 7,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
+        "value": 216483,
+        "unit": "DPS",
+        "n": 78,
         "asOf": "2026-07-17",
         "era": "ptr"
       }
@@ -5549,25 +5929,25 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 165820.2,
+        "value": 168173.5,
         "unit": "DPS",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 3.69,
+        "value": 3.66,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3755,
+        "value": 3781,
         "unit": "score",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
@@ -5575,7 +5955,7 @@
         "name": "Popularity",
         "value": 2.14,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "warcraftlogs",
@@ -5625,7 +6005,7 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 123512,
+        "value": 123572,
         "unit": "DPS",
         "asOf": "2026-07-17"
       },
@@ -5643,9 +6023,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 126710,
+        "value": 127434,
         "unit": "DPS",
-        "n": 31,
+        "n": 30,
         "asOf": "2026-07-17",
         "era": "ptr"
       },
@@ -5676,6 +6056,26 @@
         "value": 282974,
         "unit": "DPS",
         "n": 18,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median raw DPS (12.1 PTR Venomous Abyss, pooled)",
+        "value": 117634,
+        "unit": "DPS",
+        "n": 48,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
+        "value": 201361,
+        "unit": "DPS",
+        "n": 46,
         "asOf": "2026-07-17",
         "era": "ptr"
       }
@@ -5747,33 +6147,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 164480.6,
+        "value": 166082.7,
         "unit": "DPS",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 4.6,
+        "value": 4.74,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3767,
+        "value": 3773,
         "unit": "score",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 4,
+        "value": 4.02,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "warcraftlogs",
@@ -5823,7 +6223,7 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 126882,
+        "value": 126713,
         "unit": "DPS",
         "asOf": "2026-07-17"
       },
@@ -5841,9 +6241,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 132579,
+        "value": 133970,
         "unit": "DPS",
-        "n": 43,
+        "n": 45,
         "asOf": "2026-07-17",
         "era": "ptr"
       },
@@ -5851,9 +6251,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 2T)",
-        "value": 165745,
+        "value": 232932,
         "unit": "DPS",
-        "n": 3,
+        "n": 9,
         "asOf": "2026-07-17",
         "era": "ptr"
       },
@@ -5863,7 +6263,7 @@
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 3T)",
         "value": 258532,
         "unit": "DPS",
-        "n": 2,
+        "n": 4,
         "asOf": "2026-07-17",
         "era": "ptr"
       },
@@ -5874,6 +6274,26 @@
         "value": 495854,
         "unit": "DPS",
         "n": 40,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median raw DPS (12.1 PTR Venomous Abyss, pooled)",
+        "value": 123908,
+        "unit": "DPS",
+        "n": 49,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
+        "value": 253091,
+        "unit": "DPS",
+        "n": 332,
         "asOf": "2026-07-17",
         "era": "ptr"
       }
@@ -5960,33 +6380,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 163444.7,
+        "value": 165650.2,
         "unit": "DPS",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 1.46,
+        "value": 1.48,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3852,
+        "value": 3854,
         "unit": "score",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 3.3,
+        "value": 3.42,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "warcraftlogs",
@@ -6036,7 +6456,7 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 115078,
+        "value": 114963,
         "unit": "DPS",
         "asOf": "2026-07-17"
       },
@@ -6054,9 +6474,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 137280,
+        "value": 137776,
         "unit": "DPS",
-        "n": 50,
+        "n": 49,
         "asOf": "2026-07-17",
         "era": "ptr"
       },
@@ -6087,6 +6507,26 @@
         "value": 374597,
         "unit": "DPS",
         "n": 54,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median raw DPS (12.1 PTR Venomous Abyss, pooled)",
+        "value": 117258,
+        "unit": "DPS",
+        "n": 25,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
+        "value": 226626,
+        "unit": "DPS",
+        "n": 217,
         "asOf": "2026-07-17",
         "era": "ptr"
       }
@@ -6173,33 +6613,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct HPS (Mythic)",
-        "value": 177595.1,
+        "value": 179068.6,
         "unit": "HPS",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 21.56,
+        "value": 21.2,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3946,
+        "value": 3970,
         "unit": "score",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 30.16,
+        "value": 30.04,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "warcraftlogs",
@@ -6311,9 +6751,9 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 157937.7,
+        "value": 159929.1,
         "unit": "DPS",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
@@ -6321,23 +6761,23 @@
         "name": "Popularity",
         "value": 1.16,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3594,
+        "value": 3598,
         "unit": "score",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 2.05,
+        "value": 2.12,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "warcraftlogs",
@@ -6387,7 +6827,7 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 114324,
+        "value": 114353,
         "unit": "DPS",
         "asOf": "2026-07-17"
       },
@@ -6405,9 +6845,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 117175,
+        "value": 117943,
         "unit": "DPS",
-        "n": 37,
+        "n": 34,
         "asOf": "2026-07-17",
         "era": "ptr"
       },
@@ -6438,6 +6878,26 @@
         "value": 408169,
         "unit": "DPS",
         "n": 29,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median raw DPS (12.1 PTR Venomous Abyss, pooled)",
+        "value": 131845,
+        "unit": "DPS",
+        "n": 76,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
+        "value": 254579,
+        "unit": "DPS",
+        "n": 283,
         "asOf": "2026-07-17",
         "era": "ptr"
       }
@@ -6510,33 +6970,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 163968,
+        "value": 165431.7,
         "unit": "DPS",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 8.04,
+        "value": 7.98,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3807,
+        "value": 3814,
         "unit": "score",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 6.19,
+        "value": 5.99,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "warcraftlogs",
@@ -6586,7 +7046,7 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 115678,
+        "value": 115651,
         "unit": "DPS",
         "asOf": "2026-07-17"
       },
@@ -6637,6 +7097,26 @@
         "value": 441929,
         "unit": "DPS",
         "n": 46,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median raw DPS (12.1 PTR Venomous Abyss, pooled)",
+        "value": 105218,
+        "unit": "DPS",
+        "n": 53,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
+        "value": 233726,
+        "unit": "DPS",
+        "n": 95,
         "asOf": "2026-07-17",
         "era": "ptr"
       }
@@ -6708,33 +7188,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 164340.7,
+        "value": 166517.7,
         "unit": "DPS",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 1.03,
+        "value": 1.04,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3441,
+        "value": 3439,
         "unit": "score",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 0.88,
+        "value": 0.92,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "warcraftlogs",
@@ -6784,7 +7264,7 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 115184,
+        "value": 115198,
         "unit": "DPS",
         "asOf": "2026-07-17"
       },
@@ -6802,9 +7282,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 153778,
+        "value": 154200,
         "unit": "DPS",
-        "n": 59,
+        "n": 57,
         "asOf": "2026-07-17",
         "era": "ptr"
       },
@@ -6835,6 +7315,26 @@
         "value": 322557,
         "unit": "DPS",
         "n": 8,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median raw DPS (12.1 PTR Venomous Abyss, pooled)",
+        "value": 105969,
+        "unit": "DPS",
+        "n": 25,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
+        "value": 250056,
+        "unit": "DPS",
+        "n": 62,
         "asOf": "2026-07-17",
         "era": "ptr"
       }
@@ -6923,33 +7423,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 164860.7,
+        "value": 166546.3,
         "unit": "DPS",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 2.29,
+        "value": 2.22,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 4029,
+        "value": 4042,
         "unit": "score",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 2.86,
+        "value": 2.9,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "warcraftlogs",
@@ -6999,7 +7499,7 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 107518,
+        "value": 107567,
         "unit": "DPS",
         "asOf": "2026-07-17"
       },
@@ -7017,9 +7517,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 122436,
+        "value": 128187,
         "unit": "DPS",
-        "n": 39,
+        "n": 41,
         "asOf": "2026-07-17",
         "era": "ptr"
       },
@@ -7027,9 +7527,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 2T)",
-        "value": 252401,
+        "value": 259070,
         "unit": "DPS",
-        "n": 17,
+        "n": 20,
         "asOf": "2026-07-17",
         "era": "ptr"
       },
@@ -7047,9 +7547,29 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 459478,
+        "value": 460524,
         "unit": "DPS",
-        "n": 57,
+        "n": 58,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median raw DPS (12.1 PTR Venomous Abyss, pooled)",
+        "value": 106670,
+        "unit": "DPS",
+        "n": 52,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
+        "value": 254255,
+        "unit": "DPS",
+        "n": 369,
         "asOf": "2026-07-17",
         "era": "ptr"
       }
@@ -7138,33 +7658,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 161018.9,
+        "value": 162720.6,
         "unit": "DPS",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 4.38,
+        "value": 4.39,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3816,
+        "value": 3830,
         "unit": "score",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 3.68,
+        "value": 3.65,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "warcraftlogs",
@@ -7214,7 +7734,7 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 114235,
+        "value": 114203,
         "unit": "DPS",
         "asOf": "2026-07-17"
       },
@@ -7265,6 +7785,26 @@
         "value": 322318,
         "unit": "DPS",
         "n": 13,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "raid",
+        "name": "Median raw DPS (12.1 PTR Venomous Abyss, pooled)",
+        "value": 115339,
+        "unit": "DPS",
+        "n": 32,
+        "asOf": "2026-07-17",
+        "era": "ptr"
+      },
+      {
+        "source": "warcraftlogs",
+        "bracket": "mplus",
+        "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
+        "value": 200663,
+        "unit": "DPS",
+        "n": 66,
         "asOf": "2026-07-17",
         "era": "ptr"
       }
@@ -7352,33 +7892,33 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 96427,
+        "value": 97157.4,
         "unit": "DPS",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 19.55,
+        "value": 19.97,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3484,
+        "value": 3487,
         "unit": "score",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 9.87,
+        "value": 9.94,
         "unit": "%",
-        "asOf": "2026-07-14"
+        "asOf": "2026-07-17"
       },
       {
         "source": "warcraftlogs",

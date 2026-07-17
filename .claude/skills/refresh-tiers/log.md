@@ -43,3 +43,14 @@ Keep the newest ~20 entries; prune older ones when appending.
   — parse cross-checked vs the visible tier list. Consensus effect only 9 single-band M+ moves,
   0 two-band (well under anomaly limits). Archon encounters (51 pages) + survivability (40)
   re-fetched, 0 changes. npm test 88/88, build OK.
+
+- 2026-07-17 (nightly late run — Fable 5) · all 5 tier sources re-fetched live, era-verified
+  (IV "Midnight (12.0.7)", Method Devourer present, Wowhead "Midnight Season 1", Archon Devourer
+  in DPS lists, WoWMeta MID1-era ladder). IV 80 rows (A+ present raid+M+), Method 79 (Vengeance DH
+  still omitted from raid upstream), Wowhead 80 via r.jina.ai (new render typo "Restoration
+  Druid(S-Tier)" — no space before paren — handled), Archon 80 (__NEXT_DATA__ throughput/score;
+  upstream lastUpdated 2026-07-16T12:00Z), WoWMeta 40 M+ (Rankings table cross-checked vs visible
+  ckmeans list, 0 mismatches; raid pages still "0 records" upstream — left unranked). apply-ratings
+  359 rows, **0 tier moves vs HEAD** (WoWMeta stable this run after its earlier same-day reshuffle).
+  Archon encounters: all 51 pages re-fetched, 680 cells, 0 changed (asOf 07-17). Survivability 40
+  rows re-merged, 0 moves. npm test 91/91, build OK.

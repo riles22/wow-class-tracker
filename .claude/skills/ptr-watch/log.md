@@ -120,3 +120,14 @@ dedicated section — narrative prose older than that is prunable memory.
   not a build) + 07-14 datamined tier-set post (WL/SP/Surv, already in build #14). ptr-builds.json
   unchanged. **zone-54/52/56 WCL evidence-only, verdict rdps-broken** (500 upstream) — baselines 07-09.
   npm test 88/88, build OK.
+
+- 2026-07-17 (nightly late run — Fable 5) · builds found: 0 new. Forum thread (topic 2317811, .json)
+  still tops at post #15 (Rogue Outlaw addendum, 07-14) under build #14 already logged. Wowhead RSS
+  newest 12.1 items: 07-16 "Class Tuning Hotfixes on Patch 12.1 PTR" (news=382189 — PTR hotfixes, NO
+  forum post → not a build per canonical-source rule, unchanged triage), 07-16 "Heroic and Mythic
+  Tidebound Grotto Raid Testing Tomorrow" (zone-57 raid, not tracked), 07-16 Holy Paladin tier-set
+  review (news=382188 — spec already has a Clarius-sourced writeup; tuning already in build #14, no
+  wholesale rewrite per policy). ptr-builds.json unchanged. · zone-54/52/56 WCL evidence-only —
+  wcl-fetch/evidence.json verdict rdps-broken (metric:rdps 500 on enc 3176) — rDPS baselines stay
+  07-09; deterministic step merged raw-DPS series pre-agent (dummy 103 rows refreshed; NEW pooled
+  zone-54 Venomous Abyss 27 rows n=44-avg, zone-56 M+ keys 27 rows). npm test 91/91, build OK.

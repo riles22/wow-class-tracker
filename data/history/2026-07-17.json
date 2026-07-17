@@ -42,7 +42,7 @@
         "mplus": "B"
       },
       "ranks": {
-        "archon|raid|95th pct DPS (Mythic)": 8,
+        "archon|raid|95th pct DPS (Mythic)": 10,
         "archon|raid|Popularity": 16,
         "archon|mplus|M+ score (95th pct)": 25,
         "archon|mplus|Popularity": 21,
@@ -54,9 +54,11 @@
         "simulationcraft|raid|SimC nightly Patchwerk DPS": 1,
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 2,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 17,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 11,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 12,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 13,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 5
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 5,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 1,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 3
       },
       "dummy": {
         "rank": 7,
@@ -85,7 +87,7 @@
         "mplus": "S"
       },
       "ranks": {
-        "archon|raid|95th pct DPS (Mythic)": 19,
+        "archon|raid|95th pct DPS (Mythic)": 17,
         "archon|raid|Popularity": 1,
         "archon|mplus|M+ score (95th pct)": 3,
         "archon|mplus|Popularity": 1,
@@ -97,9 +99,11 @@
         "simulationcraft|raid|SimC nightly Patchwerk DPS": 2,
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 17,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 5,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 19,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 20,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 10,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 3
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 3,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 2,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 20
       },
       "dummy": {
         "rank": 3,
@@ -128,9 +132,9 @@
         "mplus": "B"
       },
       "ranks": {
-        "archon|raid|95th pct DPS (Mythic)": 7,
+        "archon|raid|95th pct DPS (Mythic)": 6,
         "archon|raid|Popularity": 13,
-        "archon|mplus|M+ score (95th pct)": 20,
+        "archon|mplus|M+ score (95th pct)": 18,
         "archon|mplus|Popularity": 11,
         "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 7,
         "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 17,
@@ -139,9 +143,11 @@
         "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 5,
         "simulationcraft|raid|SimC nightly Patchwerk DPS": 11,
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 15,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 23,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 18,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 25
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 24,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 19,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 25,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 7,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 23
       },
       "dummy": {
         "rank": 19,
@@ -170,7 +176,7 @@
         "mplus": "A+"
       },
       "ranks": {
-        "archon|raid|95th pct DPS (Mythic)": 4,
+        "archon|raid|95th pct DPS (Mythic)": 3,
         "archon|raid|Popularity": 6,
         "archon|mplus|M+ score (95th pct)": 2,
         "archon|mplus|Popularity": 4,
@@ -182,9 +188,11 @@
         "simulationcraft|raid|SimC nightly Patchwerk DPS": 26,
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 19,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 2,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 8,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 9,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 16,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 4
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 4,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 18,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 11
       },
       "dummy": {
         "rank": 13,
@@ -250,18 +258,20 @@
         "archon|raid|95th pct DPS (Mythic)": 2,
         "archon|raid|Popularity": 10,
         "archon|mplus|M+ score (95th pct)": 24,
-        "archon|mplus|Popularity": 18,
+        "archon|mplus|Popularity": 16,
         "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 8,
         "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 25,
         "murlok|mplus|Top-50 avg M+ rating (ceiling)": 22,
         "mythicstats|mplus|Top-2000 keys representation": 24,
         "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 13,
-        "simulationcraft|raid|SimC nightly Patchwerk DPS": 16,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 17,
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 7,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 3,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 2,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 7,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 19
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 17,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 15,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 7
       },
       "dummy": {
         "rank": 9,
@@ -290,10 +300,10 @@
         "mplus": "A"
       },
       "ranks": {
-        "archon|raid|95th pct DPS (Mythic)": 17,
+        "archon|raid|95th pct DPS (Mythic)": 14,
         "archon|raid|Popularity": 20,
         "archon|mplus|M+ score (95th pct)": 6,
-        "archon|mplus|Popularity": 17,
+        "archon|mplus|Popularity": 18,
         "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 25,
         "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 5,
         "murlok|mplus|Top-50 avg M+ rating (ceiling)": 5,
@@ -301,10 +311,12 @@
         "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 27,
         "simulationcraft|raid|SimC nightly Patchwerk DPS": 3,
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 12,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 9,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 17,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 10,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 18,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 11,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 8
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 8,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 23,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 16
       },
       "dummy": {
         "rank": 4,
@@ -413,7 +425,9 @@
         "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 17,
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 13,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 25,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 27
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 27,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 17,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 18
       },
       "scores": {
         "raid": 71,
@@ -438,8 +452,8 @@
         "mplus": "C"
       },
       "ranks": {
-        "archon|raid|95th pct DPS (Mythic)": 11,
-        "archon|raid|Popularity": 24,
+        "archon|raid|95th pct DPS (Mythic)": 9,
+        "archon|raid|Popularity": 23,
         "archon|mplus|M+ score (95th pct)": 27,
         "archon|mplus|Popularity": 27,
         "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 18,
@@ -447,12 +461,14 @@
         "murlok|mplus|Top-50 avg M+ rating (ceiling)": 23,
         "mythicstats|mplus|Top-2000 keys representation": 25,
         "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 21,
-        "simulationcraft|raid|SimC nightly Patchwerk DPS": 15,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 16,
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 27,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 15,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 20,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 21,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 21,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 22
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 22,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 24,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 27
       },
       "dummy": {
         "rank": 11,
@@ -528,9 +544,11 @@
         "simulationcraft|raid|SimC nightly Patchwerk DPS": 9,
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 14,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 4,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 7,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 8,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 14,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 17
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 18,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 8,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 19
       },
       "dummy": {
         "rank": 8,
@@ -559,7 +577,7 @@
         "mplus": "B"
       },
       "ranks": {
-        "archon|raid|95th pct DPS (Mythic)": 3,
+        "archon|raid|95th pct DPS (Mythic)": 4,
         "archon|raid|Popularity": 17,
         "archon|mplus|M+ score (95th pct)": 17,
         "archon|mplus|Popularity": 22,
@@ -573,7 +591,9 @@
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 14,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 5,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 1,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 1
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 1,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 26,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 12
       },
       "scores": {
         "raid": 88,
@@ -601,7 +621,7 @@
         "archon|raid|95th pct DPS (Mythic)": 5,
         "archon|raid|Popularity": 18,
         "archon|mplus|M+ score (95th pct)": 8,
-        "archon|mplus|Popularity": 16,
+        "archon|mplus|Popularity": 19,
         "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 1,
         "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 8,
         "murlok|mplus|Top-50 avg M+ rating (ceiling)": 9,
@@ -610,7 +630,9 @@
         "simulationcraft|raid|SimC nightly Patchwerk DPS": 12,
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 8,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 1,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 7
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 7,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 25,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 14
       },
       "scores": {
         "raid": 68,
@@ -637,19 +659,21 @@
       "ranks": {
         "archon|raid|95th pct DPS (Mythic)": 27,
         "archon|raid|Popularity": 27,
-        "archon|mplus|M+ score (95th pct)": 18,
-        "archon|mplus|Popularity": 20,
+        "archon|mplus|M+ score (95th pct)": 21,
+        "archon|mplus|Popularity": 17,
         "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 27,
         "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 15,
         "murlok|mplus|Top-50 avg M+ rating (ceiling)": 25,
         "mythicstats|mplus|Top-2000 keys representation": 21,
         "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 12,
-        "simulationcraft|raid|SimC nightly Patchwerk DPS": 14,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 15,
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 4,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 11,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 6,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 6,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 7,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 18,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 11
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 11,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 5,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 8
       },
       "dummy": {
         "rank": 17,
@@ -678,8 +702,8 @@
         "mplus": "C"
       },
       "ranks": {
-        "archon|raid|95th pct DPS (Mythic)": 16,
-        "archon|raid|Popularity": 25,
+        "archon|raid|95th pct DPS (Mythic)": 19,
+        "archon|raid|Popularity": 24,
         "archon|mplus|M+ score (95th pct)": 19,
         "archon|mplus|Popularity": 26,
         "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 15,
@@ -689,10 +713,12 @@
         "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 26,
         "simulationcraft|raid|SimC nightly Patchwerk DPS": 10,
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 24,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 7,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 8,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 25,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 22,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 12
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 12,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 20,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 6
       },
       "dummy": {
         "rank": 22,
@@ -721,9 +747,9 @@
         "mplus": "A"
       },
       "ranks": {
-        "archon|raid|95th pct DPS (Mythic)": 6,
+        "archon|raid|95th pct DPS (Mythic)": 7,
         "archon|raid|Popularity": 2,
-        "archon|mplus|M+ score (95th pct)": 21,
+        "archon|mplus|M+ score (95th pct)": 20,
         "archon|mplus|Popularity": 5,
         "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 3,
         "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 22,
@@ -735,7 +761,9 @@
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 18,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 3,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 8,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 9
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 9,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 4,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 26
       },
       "dummy": {
         "rank": 1,
@@ -799,7 +827,7 @@
       },
       "ranks": {
         "archon|raid|95th pct HPS (Mythic)": 1,
-        "archon|raid|Popularity": 2,
+        "archon|raid|Popularity": 1,
         "archon|mplus|M+ score (95th pct)": 1,
         "archon|mplus|Popularity": 2,
         "warcraftlogs|raid|Median HPS (Mythic, all bosses)": 2,
@@ -833,21 +861,23 @@
         "mplus": "B"
       },
       "ranks": {
-        "archon|raid|95th pct DPS (Mythic)": 9,
-        "archon|raid|Popularity": 15,
+        "archon|raid|95th pct DPS (Mythic)": 8,
+        "archon|raid|Popularity": 14,
         "archon|mplus|M+ score (95th pct)": 23,
-        "archon|mplus|Popularity": 19,
+        "archon|mplus|Popularity": 20,
         "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 13,
         "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 19,
         "murlok|mplus|Top-50 avg M+ rating (ceiling)": 16,
         "mythicstats|mplus|Top-2000 keys representation": 22,
         "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 11,
-        "simulationcraft|raid|SimC nightly Patchwerk DPS": 18,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 13,
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 21,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 13,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 9,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 10,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 6,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 15
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 15,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 9,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 25
       },
       "dummy": {
         "rank": 2,
@@ -957,9 +987,11 @@
         "simulationcraft|raid|SimC nightly Patchwerk DPS": 23,
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 9,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 16,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 13,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 14,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 12,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 14
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 14,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 16,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 17
       },
       "dummy": {
         "rank": 5,
@@ -1058,7 +1090,7 @@
         "mplus": "B"
       },
       "ranks": {
-        "archon|raid|95th pct DPS (Mythic)": 22,
+        "archon|raid|95th pct DPS (Mythic)": 21,
         "archon|raid|Popularity": 12,
         "archon|mplus|M+ score (95th pct)": 12,
         "archon|mplus|Popularity": 12,
@@ -1067,12 +1099,14 @@
         "murlok|mplus|Top-50 avg M+ rating (ceiling)": 11,
         "mythicstats|mplus|Top-2000 keys representation": 12,
         "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 4,
-        "simulationcraft|raid|SimC nightly Patchwerk DPS": 13,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 14,
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 10,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 6,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 12,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 7,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 13,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 23,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 20
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 20,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 13,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 9
       },
       "dummy": {
         "rank": 20,
@@ -1115,7 +1149,9 @@
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 25,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 23,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 20,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 18
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 19,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 11,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 24
       },
       "dummy": {
         "rank": 18,
@@ -1144,8 +1180,8 @@
         "mplus": "B"
       },
       "ranks": {
-        "archon|raid|95th pct DPS (Mythic)": 21,
-        "archon|raid|Popularity": 23,
+        "archon|raid|95th pct DPS (Mythic)": 20,
+        "archon|raid|Popularity": 25,
         "archon|mplus|M+ score (95th pct)": 5,
         "archon|mplus|Popularity": 23,
         "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 21,
@@ -1155,10 +1191,12 @@
         "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 22,
         "simulationcraft|raid|SimC nightly Patchwerk DPS": 4,
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 18,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 10,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 14,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 11,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 15,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 17,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 21
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 21,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 27,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 15
       },
       "dummy": {
         "rank": 10,
@@ -1187,9 +1225,9 @@
         "mplus": "A"
       },
       "ranks": {
-        "archon|raid|95th pct DPS (Mythic)": 10,
+        "archon|raid|95th pct DPS (Mythic)": 11,
         "archon|raid|Popularity": 11,
-        "archon|mplus|M+ score (95th pct)": 15,
+        "archon|mplus|M+ score (95th pct)": 14,
         "archon|mplus|Popularity": 14,
         "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 6,
         "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 11,
@@ -1198,10 +1236,12 @@
         "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 18,
         "simulationcraft|raid|SimC nightly Patchwerk DPS": 7,
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 25,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 22,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 23,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 24,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 24,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 26
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 26,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 10,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 21
       },
       "dummy": {
         "rank": 21,
@@ -1230,9 +1270,9 @@
         "mplus": "A"
       },
       "ranks": {
-        "archon|raid|95th pct DPS (Mythic)": 13,
+        "archon|raid|95th pct DPS (Mythic)": 15,
         "archon|raid|Popularity": 8,
-        "archon|mplus|M+ score (95th pct)": 14,
+        "archon|mplus|M+ score (95th pct)": 15,
         "archon|mplus|Popularity": 8,
         "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 17,
         "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 21,
@@ -1242,9 +1282,11 @@
         "simulationcraft|raid|SimC nightly Patchwerk DPS": 6,
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 3,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 21,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 22,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 6,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 15,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 2
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 2,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 6,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 4
       },
       "scores": {
         "raid": 49,
@@ -1269,7 +1311,7 @@
         "mplus": "A"
       },
       "ranks": {
-        "archon|raid|95th pct DPS (Mythic)": 18,
+        "archon|raid|95th pct DPS (Mythic)": 16,
         "archon|raid|Popularity": 19,
         "archon|mplus|M+ score (95th pct)": 9,
         "archon|mplus|Popularity": 10,
@@ -1280,10 +1322,12 @@
         "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 16,
         "simulationcraft|raid|SimC nightly Patchwerk DPS": 20,
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 11,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 20,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 16,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 19,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 17,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 9,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 16
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 16,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 12,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 13
       },
       "dummy": {
         "rank": 14,
@@ -1313,7 +1357,7 @@
       },
       "ranks": {
         "archon|raid|95th pct HPS (Mythic)": 7,
-        "archon|raid|Popularity": 1,
+        "archon|raid|Popularity": 2,
         "archon|mplus|M+ score (95th pct)": 2,
         "archon|mplus|Popularity": 1,
         "warcraftlogs|raid|Median HPS (Mythic, all bosses)": 7,
@@ -1359,9 +1403,11 @@
         "simulationcraft|raid|SimC nightly Patchwerk DPS": 21,
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 1,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 26,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 21,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 22,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 5,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 13
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 13,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 3,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 1
       },
       "dummy": {
         "rank": 12,
@@ -1390,7 +1436,7 @@
         "mplus": "A"
       },
       "ranks": {
-        "archon|raid|95th pct DPS (Mythic)": 15,
+        "archon|raid|95th pct DPS (Mythic)": 18,
         "archon|raid|Popularity": 5,
         "archon|mplus|M+ score (95th pct)": 13,
         "archon|mplus|Popularity": 6,
@@ -1399,12 +1445,14 @@
         "murlok|mplus|Top-50 avg M+ rating (ceiling)": 8,
         "mythicstats|mplus|Top-2000 keys representation": 6,
         "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 14,
-        "simulationcraft|raid|SimC nightly Patchwerk DPS": 17,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 18,
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 5,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 19,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 20,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 1,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 3,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 10
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 10,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 22,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 10
       },
       "dummy": {
         "rank": 16,
@@ -1433,7 +1481,7 @@
         "mplus": "C"
       },
       "ranks": {
-        "archon|raid|95th pct DPS (Mythic)": 14,
+        "archon|raid|95th pct DPS (Mythic)": 13,
         "archon|raid|Popularity": 22,
         "archon|mplus|M+ score (95th pct)": 26,
         "archon|mplus|Popularity": 25,
@@ -1444,10 +1492,12 @@
         "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 24,
         "simulationcraft|raid|SimC nightly Patchwerk DPS": 19,
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 26,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 8,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 15,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 9,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 16,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 19,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 23
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 23,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 21,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 5
       },
       "dummy": {
         "rank": 15,
@@ -1477,7 +1527,7 @@
       },
       "ranks": {
         "archon|raid|95th pct DPS (Mythic)": 12,
-        "archon|raid|Popularity": 14,
+        "archon|raid|Popularity": 15,
         "archon|mplus|M+ score (95th pct)": 4,
         "archon|mplus|Popularity": 13,
         "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 12,
@@ -1487,10 +1537,12 @@
         "warcraftlogs|raid|12.1 PTR raid testing score (normalized)": 7,
         "simulationcraft|raid|SimC nightly Patchwerk DPS": 25,
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 6,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 24,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 22,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 4,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 2,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 6
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 6,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 19,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 2
       },
       "dummy": {
         "rank": 6,
@@ -1519,7 +1571,7 @@
         "mplus": "A"
       },
       "ranks": {
-        "archon|raid|95th pct DPS (Mythic)": 20,
+        "archon|raid|95th pct DPS (Mythic)": 22,
         "archon|raid|Popularity": 9,
         "archon|mplus|M+ score (95th pct)": 11,
         "archon|mplus|Popularity": 9,
@@ -1531,9 +1583,11 @@
         "simulationcraft|raid|SimC nightly Patchwerk DPS": 22,
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 16,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 12,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 10,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 11,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 4,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 24
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 24,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 14,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 22
       },
       "scores": {
         "raid": 60,

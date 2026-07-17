@@ -131,3 +131,30 @@ streams, Supatease "Road to Rank 1" VODs) and roundup-only videos (Dratnos, out 
   · r5tL2gAEhSw (Holy Pal, 07-10) · nSw9iA4kGBE (MW/HPal/Pres, 07-09). Prior pending (Obli Xhem4-XtOmc,
   Shadarek tB6Gse0qckA, Kalamazi 6nr1LrYp0xc/MbRU0TaQKww, Tettles fw9buyf2n1o/0nW0wnI4OTo, Supatease
   HuRjN73exFk, AutomaticJak TXv5nof2mZw) carries forward — those feeds were among today's 404s.
+
+- 2026-07-17 (nightly late run — Fable 5) · yt-dlp 2026.07.04 (not touched per run rules). **All 25
+  unique creator RSS feeds returned entries this run** (the earlier same-day 404 block cleared).
+  38 unseen videos since the seen-set. **Transcripts still UNREACHABLE** — yt-dlp "Sign in to
+  confirm you're not a bot" (verified once on vK-qyvXOVYM, not hammered) — **0 takes / 0 metaNotes
+  distilled**. New in-scope PENDING (transcript-blocked): izen vK-qyvXOVYM (S2 M+ TOP-5 DPS
+  metaNotes archetype, 07-14) · YoDaTV S4VNrinPFTA (12.1 M+ tierlist update w/ Prot Pally read,
+  07-15; in-scope via Paladin entry). General-creator LEADS verified: izen B2iGuHL_iPI (07-15,
+  "Round #5 of Balance Tuning — Prot Pal nerf/HPriest buffs") matches already-logged build #14 +
+  the 07-16 no-forum-post hotfixes — no unverified build added; **izen latest field refreshed**
+  (community.json, verifiedDate 07-17). Prior pending list carries forward (Obli Xhem4-XtOmc,
+  Shadarek tB6Gse0qckA, Kalamazi 6nr1LrYp0xc/MbRU0TaQKww, Tettles fw9buyf2n1o/0nW0wnI4OTo,
+  Supatease HuRjN73exFk, AutomaticJak TXv5nof2mZw, MadSkillzzTV JytzZ28QBkY/8hzzon6tf9M/r5tL2gAEhSw/
+  nSw9iA4kGBE).
+## Seen/triaged this run (07-17 late — add to seen-set)
+Pending in-scope: vK-qyvXOVYM (izen metaNotes) · S4VNrinPFTA (YoDaTV Prot Pally tierlist) ·
+B2iGuHL_iPI (izen lead, latest refreshed) · 6wo6wkSvznQ (izen 07-02 mage-defensives lead, tuning
+already in logged builds). Triaged-skipped: chLJ-HXwGBs, OGqHbH5nHOI (Kalamazi stream/sub-event) ·
+E3s8PdtytPA, c5iedJiEJXc, 3sO9f48Opzg, fl_fuoYOpz8, sKXS6NKrnDc, 7za0qAgY-pw, 1Bn3akReOi4,
+6n3vvDqWaEE, osE5k0vToqI, onKjBxnmbno, dA3J8TLErXg, xoU2T53L99M, 6NIaXiYh9zE (Supatease PvP/VOD/
+out-of-scope Rogue+Hunter) · SgX0IB4INHk, ryDr3EeAAMM (Critcake reclear/keys POV) · vSIzz6fBctY,
+w-iGfC8y5_M, YObr6op6JOg, CwIYQl4u1Q0, W39Qd5_iRQA (Dalaran PvP duels/livestreams) · Q3JU6l4YPbg
+(Dalaran cross-class M+ roundup — no-roundup rule) · zd-Y-hHmlKs (Dalaran Priest preview —
+out of listed scope, flagged for human scope review) · n2ga6kdiGVQ, oWLz9ZyV9Ko (LBNinja7 generic
+how-to/short) · TNoCCQWk01A, ztdsBTukkkw (Shindigg short/reclear) · JI7BWAjtfOI, YDwvn8SaXfU,
+NihCvD5hHjA (YoDaTV key POVs) · rhE3OYf-VPU (AutomaticJak title-push VOD) · JLLekdtEaUs
+(MadSkillzzTV addon video) · t_a8Z280vPE (Shadarek key POV).

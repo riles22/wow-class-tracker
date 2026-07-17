@@ -45,3 +45,15 @@ parse counts and baselines the change detectors need live in the entries themsel
   → Internal server error on enc 3176); agent holds no creds, did not fetch warcraftlogs.com;
   zones 46/47/52(rDPS)/54/56 left at 07-09. **wcl-dummy-raw LANDED**: fetch-wcl.mjs merged 103
   raw-DPS medians (1T:2000 2T:149 3T:109 5T:1481 players) before agent start. npm test 88/88, build OK.
+
+- 2026-07-17 (nightly late run — Fable 5) · Murlok 40/40 plain GET (byte-identical to same-day
+  baseline). Bloodmallet 26/26 talent_target_scaling, MID1 + ptr:0 confirmed on every chart,
+  0 profile changes. SimC MID1_Raid.txt same engine build (1205-01, WoW 12.0.7.68453 hotfix 07-13)
+  but a FRESH nightly sim — 26/26 DPS specs, 26 value deltas vs HEAD (normal nightly variance).
+  Mythicstats period 1072 MID1 via /period/latest (direct per-spec % list this time), 40/40,
+  sum 100.2, byte-identical. **Archon numbers refreshed 07-14→07-17** (specRankingsSection precise
+  values; upstream lastUpdated 07-16T12:00Z): 152 value updates across 95th pct DPS/HPS, M+ score,
+  Popularity. WCL: evidence.json verdict rdps-broken (metric:rdps 500 on enc 3176) — zones
+  46/47/52(rDPS)/54/56 unchanged at 07-09; agent holds no creds, fetched nothing from WCL. Raw-DPS
+  series (dummy 103 rows + NEW zone-54/56 pooled 27+27) merged by the deterministic pre-agent step.
+  npm test 91/91, build OK.
