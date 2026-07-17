@@ -181,30 +181,90 @@ export function buildDummyRawRows(byEncounter, roster, asOf) {
   return rows;
 }
 
-async function fetchDummyRawMedians(token) {
-  const byEncounter = [], perEncounter = {};
-  for (const enc of DUMMY_ENCOUNTERS) {
-    const rankings = [];
-    let ok = true, reason = null;
-    for (let page = 1; page <= MAX_DUMMY_PAGES; page++) {
-      await sleep(600); // polite guest
-      const q = `{ worldData { encounter(id: ${enc.id}) { characterRankings(metric: dps, page: ${page}) } } }`;
-      const r = await gql(token, q);
-      const blob = r.json?.data?.worldData?.encounter?.characterRankings;
-      if (!blob || r.json?.errors?.length) {
-        ok = false;
-        reason = r.json?.errors?.map(e => e.message).join("; ") ?? `HTTP ${r.status}, no characterRankings`;
-        break;
-      }
-      rankings.push(...(blob.rankings ?? []));
-      if (!blob.hasMorePages) break;
-      if (page === MAX_DUMMY_PAGES) { ok = false; reason = `population exceeds the ${MAX_DUMMY_PAGES}-page budget — owner decision needed before trusting a median`; }
+/* Pooled variant (recipes #2/#3, owner-approved 2026-07-17): one row per spec whose
+   population is every ranked (player, encounter) best-parse across the zone, pooled.
+   Used for the small PTR zones 54/56 where the stored rDPS/normalized series are
+   frozen by the upstream rdps-family 500. ALL discovered encounters must paginate to
+   completion or the recipe contributes nothing that night — a missing boss/dungeon
+   would bias per-spec pooled medians, not just shrink n. */
+export function buildPooledRawRows(encounterRankings, roster, asOf, name, bracket) {
+  const groups = new Map();
+  for (const enc of encounterRankings) {
+    for (const r of enc.rankings) {
+      let cls = String(r.class ?? ""), sp = String(r.spec ?? "");
+      if (!roster.has(`${cls}|${sp}`)) { cls = spacedName(cls); sp = spacedName(sp); }
+      if (!roster.has(`${cls}|${sp}`)) continue;
+      const amount = Number(r.amount);
+      if (!Number.isFinite(amount) || amount < 0) continue;
+      const key = `${cls}|${sp}`;
+      if (!groups.has(key)) groups.set(key, []);
+      groups.get(key).push(amount);
     }
-    perEncounter[`${enc.targets}T`] = ok ? { ok: true, players: rankings.length } : { ok: false, reason };
-    if (ok) byEncounter.push({ targets: enc.targets, rankings });
-    // Complete pagination or nothing: a failed encounter contributes no rows.
   }
-  return { byEncounter, perEncounter };
+  const rows = [];
+  for (const [key, amounts] of groups) {
+    const [cls, sp] = key.split("|");
+    rows.push({ class: cls, spec: sp, bracket, source: "warcraftlogs", name,
+      value: Math.round(medianOf(amounts)), unit: "DPS", n: amounts.length, asOf, era: "ptr" });
+  }
+  return rows;
+}
+
+async function discoverEncounters(token, zoneId) {
+  const r = await gql(token, `{ worldData { zone(id: ${zoneId}) { encounters { id name } } } }`);
+  const encounters = r.json?.data?.worldData?.zone?.encounters;
+  if (!Array.isArray(encounters) || !encounters.length) {
+    return { error: r.json?.errors?.map(e => e.message).join("; ") ?? `HTTP ${r.status}, no encounters for zone ${zoneId}` };
+  }
+  return { encounters };
+}
+
+async function paginateEncounter(token, encounterId, { difficulty } = {}) {
+  const rankings = [];
+  const args = difficulty != null ? `, difficulty: ${difficulty}` : "";
+  for (let page = 1; page <= MAX_DUMMY_PAGES; page++) {
+    await sleep(600); // polite guest
+    const q = `{ worldData { encounter(id: ${encounterId}) { characterRankings(metric: dps, page: ${page}${args}) } } }`;
+    const r = await gql(token, q);
+    const blob = r.json?.data?.worldData?.encounter?.characterRankings;
+    if (!blob || r.json?.errors?.length) {
+      return { ok: false, reason: r.json?.errors?.map(e => e.message).join("; ") ?? `HTTP ${r.status}, no characterRankings` };
+    }
+    rankings.push(...(blob.rankings ?? []));
+    if (!blob.hasMorePages) return { ok: true, rankings };
+  }
+  return { ok: false, reason: `population exceeds the ${MAX_DUMMY_PAGES}-page budget — owner decision needed before trusting a median` };
+}
+
+/* The three frozen raw-DPS recipes. Names are chosen to NEVER match the frozen
+   rDPS/normalized requirements' namePatterns (wcl-ptr-raid: "12.1 PTR raid testing";
+   wcl-ptr-mplus: "12.1 PTR M+ testing") — fresh raw rows must not let a manifest row
+   vouch for the stale series (a regression test pins this). */
+export const RAW_RECIPES = [
+  { key: "wcl-dummy-raw", mode: "targets", encounters: DUMMY_ENCOUNTERS, bracket: "raid" },
+  { key: "wcl-ptr-raid-raw", mode: "pooled", zoneId: 54, difficulty: 4, bracket: "raid",
+    name: "Median raw DPS (12.1 PTR Venomous Abyss, pooled)" }, // Heroic — where testing happens
+  { key: "wcl-ptr-mplus-raw", mode: "pooled", zoneId: 56, bracket: "mplus",
+    name: "Median raw DPS (12.1 PTR M+ keys, pooled)" }
+];
+
+async function fetchRawRecipe(token, recipe) {
+  const perEncounter = {};
+  let encounters;
+  if (recipe.mode === "targets") {
+    encounters = recipe.encounters.map(e => ({ id: e.id, label: `${e.targets}T`, targets: e.targets }));
+  } else {
+    const found = await discoverEncounters(token, recipe.zoneId);
+    if (found.error) return { rows: [], perEncounter, discoverError: found.error };
+    encounters = found.encounters.map(e => ({ id: e.id, label: e.name }));
+  }
+  const complete = [];
+  for (const enc of encounters) {
+    const r = await paginateEncounter(token, enc.id, { difficulty: recipe.difficulty });
+    perEncounter[enc.label] = r.ok ? { ok: true, players: r.rankings.length } : { ok: false, reason: r.reason };
+    if (r.ok) complete.push({ ...enc, rankings: r.rankings });
+  }
+  return { encounters, complete, perEncounter };
 }
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -256,31 +316,58 @@ async function main() {
         evidence.probes.push({ name: `rdps@${RDPS_PROBE_ENCOUNTER}`, ok: errors.length === 0 && rankings > 0, httpStatus: r.status, errors, rankings });
         console.log(errors.length ? `✗ rdps probe: ${errors.join("; ")}` : `✓ rdps probe: ${rankings} rankings on page 1`);
 
-        // Zone-52 raw-DPS medians (frozen recipe #1) — metric: dps, so this runs and
-        // can LAND regardless of the rdps family's state.
+        // Raw-DPS median recipes (#1 zone 52 per-target, #2 zone 54 pooled, #3 zone 56
+        // pooled) — metric: dps, so these run and can LAND regardless of the rdps
+        // family's state. Each recipe merges INDEPENDENTLY: a shape surprise in one
+        // zone becomes that recipe's evidence entry, never a blocker for the others.
+        evidence.rawRecipes = {};
+        let roster = null;
         try {
           const specs = JSON.parse(await readFile(path.join(rootDir, "data", "specs.json"), "utf8"));
-          const roster = new Set(specs.filter(s => s.role === "DPS").map(s => `${s.class}|${s.spec}`));
-          const { byEncounter, perEncounter } = await fetchDummyRawMedians(state.oauth.token);
-          const today = new Date().toISOString().slice(0, 10);
-          const rows = buildDummyRawRows(byEncounter, roster, today);
-          evidence.dummyRaw = { perEncounter, rowsBuilt: rows.length };
-          if (rows.length) {
-            const scratch = path.join(outDir, "dummy-raw-metrics.json");
-            await mkdir(outDir, { recursive: true });
-            await writeFile(scratch, JSON.stringify({ metrics: rows }, null, 2) + "\n");
-            // applyMetrics refuses atomically on unmatched rows or validation failure —
-            // a refusal is recorded as evidence, never a crash and never a partial write.
-            const applied = await applyMetrics(scratch, rootDir);
-            evidence.dummyRaw.applied = applied.metricsApplied;
-            evidence.landed["wcl-dummy-raw"] = { rows: applied.metricsApplied, perEncounter };
-            console.log(`✓ dummy-raw: ${applied.metricsApplied} median raw-DPS rows merged (${Object.entries(perEncounter).map(([t, e]) => `${t}:${e.ok ? e.players + "p" : "failed"}`).join(" ")})`);
-          } else {
-            console.log(`✗ dummy-raw: no complete encounter populations (${JSON.stringify(perEncounter)})`);
-          }
+          roster = new Set(specs.filter(s => s.role === "DPS").map(s => `${s.class}|${s.spec}`));
         } catch (err) {
-          evidence.dummyRaw = { ...(evidence.dummyRaw ?? {}), error: err?.message ?? String(err) };
-          console.log(`::warning title=Dummy Dome raw-median recipe failed::${err?.message ?? err}`);
+          console.log(`::warning title=Raw-median recipes skipped::cannot load roster: ${err?.message ?? err}`);
+        }
+        for (const recipe of roster ? RAW_RECIPES : []) {
+          const ev = { perEncounter: {}, rowsBuilt: 0 };
+          evidence.rawRecipes[recipe.key] = ev;
+          try {
+            const fetched = await fetchRawRecipe(state.oauth.token, recipe);
+            ev.perEncounter = fetched.perEncounter;
+            if (fetched.discoverError) {
+              ev.error = `encounter discovery failed: ${fetched.discoverError}`;
+              console.log(`✗ ${recipe.key}: ${ev.error}`);
+              continue;
+            }
+            const today = new Date().toISOString().slice(0, 10);
+            let rows = [];
+            if (recipe.mode === "targets") {
+              rows = buildDummyRawRows(fetched.complete, roster, today);
+            } else if (fetched.complete.length === fetched.encounters.length) {
+              // Pooled medians need EVERY encounter: a missing boss/dungeon biases the
+              // pool, it doesn't just shrink it.
+              rows = buildPooledRawRows(fetched.complete, roster, today, recipe.name, recipe.bracket);
+            } else {
+              ev.error = "incomplete zone coverage — pooled median withheld";
+            }
+            ev.rowsBuilt = rows.length;
+            if (rows.length) {
+              const scratch = path.join(outDir, `${recipe.key}-metrics.json`);
+              await mkdir(outDir, { recursive: true });
+              await writeFile(scratch, JSON.stringify({ metrics: rows }, null, 2) + "\n");
+              // applyMetrics refuses atomically on unmatched rows or validation
+              // failure — a refusal is evidence, never a crash or a partial write.
+              const applied = await applyMetrics(scratch, rootDir);
+              ev.applied = applied.metricsApplied;
+              evidence.landed[recipe.key] = { rows: applied.metricsApplied, perEncounter: ev.perEncounter };
+              console.log(`✓ ${recipe.key}: ${applied.metricsApplied} median raw-DPS rows merged (${Object.entries(ev.perEncounter).map(([t, e]) => `${t}:${e.ok ? e.players + "p" : "failed"}`).join(" ")})`);
+            } else {
+              console.log(`✗ ${recipe.key}: nothing to merge (${ev.error ?? "no complete encounter populations"})`);
+            }
+          } catch (err) {
+            ev.error = err?.message ?? String(err);
+            console.log(`::warning title=Raw-median recipe ${recipe.key} failed::${ev.error}`);
+          }
         }
       }
     }

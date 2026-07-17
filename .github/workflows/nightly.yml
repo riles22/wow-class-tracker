@@ -127,14 +127,16 @@ jobs:
             src/fetch-wcl.mjs and wrote wcl-fetch/evidence.json — your ONLY WCL input,
             covering every WCL cut (live zones 46/47, PTR zones 54/56, Dummy Dome zone 52).
             Write every WCL manifest row (wcl-live-raid, wcl-live-mplus, wcl-ptr-raid,
-            wcl-ptr-mplus, wcl-dummy-dome, wcl-dummy-raw) from it honestly. A WCL row may
-            claim success ONLY when evidence.landed[key] shows rows — normally just
-            wcl-dummy-raw, whose zone-52 raw-DPS medians the fetch step merges into
-            specs.json ITSELF before you start (never re-fetch, recompute, or edit those
-            rows; if its landed entry is absent, report it unreachable/parse_error with
-            the evidence's dummyRaw detail). While the evidence reports verdict
-            "rdps-broken", the other five cuts are unreachable with that detail and their
-            stored data stays unchanged — the publish gate cross-checks an evidence
+            wcl-ptr-mplus, wcl-dummy-dome, wcl-dummy-raw, wcl-ptr-raid-raw,
+            wcl-ptr-mplus-raw) from it honestly. A WCL row may claim success ONLY when
+            evidence.landed[key] shows rows — normally just the three *-raw keys, whose
+            raw-DPS medians the fetch step merges into specs.json ITSELF before you start
+            (never re-fetch, recompute, or edit those rows; if a landed entry is absent,
+            report that key partial/unreachable/parse_error with the evidence's
+            rawRecipes[key] detail — an empty PTR zone between testing windows is
+            "partial", not an error). While the evidence reports verdict "rdps-broken",
+            the five frozen rDPS/normalized cuts are unreachable with that detail and
+            their stored data stays unchanged — the publish gate cross-checks an evidence
             artifact uploaded before you started, which you cannot modify. If the verdict
             is "rdps-restored", put "WCL RDPS RESTORED — owner decision needed on the
             median recipe" at the TOP of the summary; if it is "no-credentials" or
@@ -237,12 +239,13 @@ jobs:
             Never guess, commit, push, dispatch, or expose secrets.
 
             WARCRAFT LOGS: you hold NO WCL credentials — wcl-fetch/evidence.json (written by the
-            deterministic pre-agent step) is your only WCL input; write all six WCL manifest
+            deterministic pre-agent step) is your only WCL input; write all eight WCL manifest
             rows from it honestly. Success is allowed ONLY where evidence.landed[key] shows rows
-            (normally just wcl-dummy-raw, already merged into specs.json by the fetch step —
-            never re-fetch or edit those rows); the other cuts stay unreachable with the
-            evidence detail (the publish gate cross-checks a pre-agent artifact copy you cannot
-            modify). Do not fetch warcraftlogs.com yourself, by any means.
+            (normally just the three *-raw keys, already merged into specs.json by the fetch
+            step — never re-fetch or edit those rows); the other cuts stay degraded with the
+            evidence's rawRecipes[key] or verdict detail (the publish gate cross-checks a
+            pre-agent artifact copy you cannot modify). Do not fetch warcraftlogs.com yourself,
+            by any means.
 
             Rebuild data/run-manifest.json from scratch with a current UTC startedAt and one
             honest row per required source, each with previousAsOf/newAsOf copied from the real

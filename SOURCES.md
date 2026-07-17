@@ -117,12 +117,18 @@ as reliability mechanics (so fetches succeed / avoid bot-blocks), not as pull li
   the HTML endpoint). On the nightly runner, API access happens ONLY in the
   deterministic pre-agent fetch step (`src/fetch-wcl.mjs`, 2026-07-14 re-audit) — the
   AI agent holds no WCL credentials and consumes its evidence file instead.
-  **"Median raw DPS (12.1 PTR Dummy Dome, NT)"** (added 2026-07-17): per-spec medians
-  of each ranked player's best zone-52 parse in RAW `dps`, computed by the fetch step
-  from complete leaderboard pagination. Honesty notes: raw DPS ≠ rDPS (no external-buff
+  **"Median raw DPS (12.1 PTR Dummy Dome, NT)"** plus the pooled
+  **"…(12.1 PTR Venomous Abyss, pooled)"** (zone 54, Heroic — where testing happens)
+  and **"…(12.1 PTR M+ keys, pooled)"** (zone 56) series (added 2026-07-17): per-spec
+  medians of each ranked player's best parse in RAW `dps`, computed by the fetch step
+  from complete leaderboard pagination (pooled series require EVERY discovered
+  boss/dungeon to enumerate fully, else that night contributes nothing — a missing
+  encounter would bias the pool). Honesty notes: raw DPS ≠ rDPS (no external-buff
   redistribution — support specs like Augmentation read low by construction, which is
-  why this series never substitutes for the frozen rDPS cuts), and best-parse-per-player
-  medians ≠ the statistics table's per-parse medians. `n` = ranked players.
+  why these series never substitute for the frozen rDPS/normalized cuts and never feed
+  the projection), best-parse-per-player medians ≠ the statistics table's per-parse
+  medians, and pooled = one number across all bosses/dungeons. `n` = ranked
+  player-encounter entries.
 - **Archon / Murlok / Bloodmallet / Blizzard forums / YouTube RSS**: plain fetches every
   run, retry-with-backoff on transient 404s (reliability, not a cap).
 - **YouTube transcripts**: yt-dlp with a short sleep between requests (avoids bot-blocks);
