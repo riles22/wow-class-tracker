@@ -104,7 +104,7 @@ jobs:
           claude_args: |
             --permission-mode bypassPermissions
             --max-turns 250
-            --model claude-sonnet-5
+            --model claude-opus-4-8
           prompt: |
             Maintain the WoW Midnight tracker in this checked-out repository. You are the
             unprivileged fetch-and-distill stage: never commit, push, tag, dispatch a workflow,
@@ -200,7 +200,7 @@ jobs:
           claude_args: |
             --permission-mode bypassPermissions
             --max-turns 180
-            --model claude-sonnet-5
+            --model claude-opus-4-8
           prompt: |
             The primary nightly agent exited without satisfying the deterministic refresh
             contract. Resume from the CURRENT working tree; preserve valid completed work and

@@ -253,8 +253,8 @@ and the MadSkillzzTV creator addition bundled into #11. Reconciled as follows:
   creator authority (MadSkillzzTV, scoped to six healer specs) into a
   security-sounding PR — exactly the shape this audit says needs human sign-off.
   The entry was kept (it was authored under the owner's account and validates
-  cleanly) — **owner: confirm the addition was intended**, or remove it from
-  `data/community-overrides.json`.
+  cleanly) — and the owner confirmed on 2026-07-17 that the MadSkillzzTV addition
+  was intended. The review-before-new-creator-authority rule stands for next time.
 
 ## Owner actions (not possible from repo files)
 
