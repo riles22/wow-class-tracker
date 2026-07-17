@@ -182,6 +182,14 @@ jobs:
             attempted and what you did not get to, then stop. Ending without a rewritten
             manifest wastes the entire night no matter how much else you did.
 
+      # The action writes its execution log to $RUNNER_TEMP/claude-execution-output.json
+      # and the recovery pass OVERWRITES it — preserve the primary's copy first. These
+      # transcripts are the only way to see WHY an agent ended early (the recurring
+      # failure is model-independent: sonnet and opus both do it).
+      - name: Preserve primary agent transcript
+        if: always()
+        run: cp "$RUNNER_TEMP/claude-execution-output.json" "$RUNNER_TEMP/agent-primary.json" 2>/dev/null || true
+
       - name: Check primary agent completion
         id: primary_check
         continue-on-error: true
@@ -256,6 +264,32 @@ jobs:
               echo "::error::WCL fetch step could not authenticate (verdict: $verdict) — check WCL_CLIENT_ID/WCL_CLIENT_SECRET"
               exit 1;;
           esac
+
+      # When the night failed, put the agents' final moves where remote diagnosis can
+      # read them (the job log) — artifacts alone need an interactive download.
+      - name: Dump agent transcript tails (failure diagnosis)
+        if: failure()
+        run: |
+          for f in "$RUNNER_TEMP/agent-primary.json" "$RUNNER_TEMP/claude-execution-output.json"; do
+            [ -f "$f" ] || continue
+            echo "===== tail of ${f##*/} ====="
+            tail -c 16000 "$f" || true
+            echo
+          done
+
+      # Full transcripts for interactive download (public repo: contents are the
+      # agents' reasoning over already-public web pages; no secrets — the agents hold
+      # none, and the action masks their own token).
+      - name: Upload agent transcripts (diagnosis)
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: agent-transcripts
+          retention-days: 7
+          if-no-files-found: ignore
+          path: |
+            ${{ runner.temp }}/agent-primary.json
+            ${{ runner.temp }}/claude-execution-output.json
 
       # Everything the publish job may commit travels here — data/ (incl. the run
       # manifest) and the skill logs. dist/ is deliberately NOT transferred: publish
