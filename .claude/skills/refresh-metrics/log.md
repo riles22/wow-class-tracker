@@ -77,3 +77,18 @@ every chart), targets at 1/2/3/5/8/15, 0 changes. SimC nightly MID1_Raid 1205-01
 WCL evidence.json verdict rdps-broken — zones 46/47/52(rDPS)/54/56 stay 07-09 (agent holds no creds,
 fetched nothing from warcraftlogs.com); raw-DPS series (dummy 103 + zone-54/56 pooled 27+27) merged
 by the deterministic pre-agent step. npm test + build below.
+
+## 2026-07-17 (nightly, 16:45Z) — all live-number sources re-fetched, 0 value changes
+Murlok (3 pages, plain GET): 40 top-50 ceiling rows (range 3738-4288), 0 changes; the three "12.1"
+hits are SVG path coords, not a season flip. Mythicstats (r.jina.ai /period/latest): period 1072
+MID1, 40 specs, sum 100.2%, 0 changes. SimC nightly (MID1_Raid.txt, 1205-01 / 12.0.7.68453 Live /
+hotfix 07-13): 26 best-variant DPS rows, 0 changes. Archon numbers (__NEXT_DATA__ specRankingsSection):
+160 rows (33 DPS + 7 HPS + 40 M+score + 80 popularity), 0 value changes (dropped a stray `n` field I
+first added — restored to the stored no-`n` shape so the merge is a true no-op). Bloodmallet (26 DPS
+charts, talent_target_scaling/castingpatchwerk; MID1+ptr:0 confirmed each): 26 profiles, 0 target
+changes. Archon per-encounter tiers (51 pages, 9 bosses throughput + 8 dungeons score × 3 roles):
+680 cells, all 40/40 specs, 0 changes — encounter-tiers.json left unchanged. Archon survivability:
+tierList EMPTY (tiers:[]) on all 3 raid pages again (throughput full 27/7/6) — transient upstream,
+40 stored rows unchanged. WCL: agent holds no creds; evidence.json verdict rdps-broken → 5 rDPS cuts
+unreachable (2026-07-09 baseline), 3 raw cuts merged by the deterministic step (103/27/27). apply-metrics
+266 metrics + 26 profiles → no-op; only the deterministic WCL raw rows differ in the working tree.

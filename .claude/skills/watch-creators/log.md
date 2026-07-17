@@ -190,3 +190,19 @@ residential proxy / self-hosted runner) is the owner's. **0 takes / 0 metaNotes 
 izen (general) has no genuinely-new video (newest publish is prior 07-15, already seen + verified vs
 build #14); no new build lead. New pending: AutomaticJak Rmkxzb1QQSQ; prior pending queue carries
 forward for local transcript catch-up.
+
+## 2026-07-17 (nightly, 16:45Z) — 2 new in-scope videos queued, transcripts still no-credentials
+All 25 unique creator RSS feeds polled live (25/25 OK). Diffed vs seen-set (326 ids in log) +
+pending queue (18). Recent window (≥07-15): 36 entries; all but 3 already seen/pending. **3
+genuinely-new videos published 07-17:**
+  · AutomaticJak `LHPjq9142qM` "MW Title Push then PTR M+" — AutomaticJak scope Evoker/Monk/Paladin/
+    Priest; MW=Mistweaver + PTR M+ analysis, distillable → QUEUED PENDING (transcript unavailable).
+  · MadSkillzzTV `I_nFVVmv610` "12.1 BEST M+ HEALERS (so far) | Tier List & Latest Changes" — healer
+    specialist, PTR healer meta read, distillable → QUEUED PENDING.
+  · Supatease `LcWIPLhak0E` "REROLLING FEELS SO GOOD" — reroll gameplay VOD, no tuning/tier content;
+    triaged-skipped.
+Kalamazi `chLJ-HXwGBs` (Tidebound Grotto = untracked zone-57 raid, Twitch sub-event stream) out of
+tuning/tier scope — no action. **Transcripts: `transcript-fetch/summary.json` verdict `no-credentials`
+(TRANSCRIPT_API_KEY not configured) — 0 fetched, 0 takes / 0 metaNotes distilled.** izen (general)
+newest is 07-15 `B2iGuHL_iPI` (Round #5 balance tuning — matches the 07-16 PTR hotfixes, no forum
+dev-notes post → no new build to log), already seen. Pending queue now 20 (18 carried + 2 new).

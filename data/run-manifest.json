@@ -1,71 +1,155 @@
 {
   "run": "2026-07-17",
-  "startedAt": "2026-07-17T14:02:09Z",
-  "summary": "Tiers+metrics re-fetched live: 0 moves, 0 changes. WCL rdps still 500 (5 cuts unreachable, 3 raw landed). Archon surv empty upstream. No new PTR build; transcripts IP-blocked.",
+  "startedAt": "2026-07-17T16:48:28Z",
+  "summary": "Tiers+metrics re-fetched live: 0 moves/0 changes. WCL rdps 500: 5 cuts unreachable, 3 raw landed. Wowhead tank-M+ blocked, carried. Archon surv empty. No new build; 2 vids queued.",
   "sources": [
-    { "source": "icyveins", "result": "success",
-      "detail": "All 6 pages (raid+M+, all roles) fetched live via curl and parsed from table.tier-list rows (spec-icon src filter drops in-description spell icons); era-verified Midnight/Season 1/12.0.7/Devourer. 80 spec-tier assignments (40 raid + 40 M+), 0 unmatched. 0 tier moves vs stored — re-verified live, stable.",
-      "previousAsOf": "2026-07-17", "newAsOf": "2026-07-17" },
-    { "source": "method", "result": "success",
-      "detail": "Both pages fetched live and parsed from tier__tier blocks (data-original-title entries); era-verified (Devourer present). Raid 39 specs (Vengeance DH still omitted upstream — absence, not error); M+ 40 (S tier empty upstream; dungeon-difficulty noise dropped by roster matching). 0 moves vs stored.",
-      "previousAsOf": "2026-07-17", "newAsOf": "2026-07-17" },
-    { "source": "wowhead", "result": "success",
-      "detail": "All 6 pages fetched via r.jina.ai and parsed from the numbered ranking lists; era-verified Midnight Season 1. 40+40 specs matched (S-Tier and hyphen/missing-space tier idioms handled leniently). 0 moves vs stored.",
-      "previousAsOf": "2026-07-17", "newAsOf": "2026-07-17" },
-    { "source": "archon-tiers", "result": "success",
-      "detail": "All 6 raid(throughput)/M+(score) pages parsed from __NEXT_DATA__ specTierListSection; 80 rows matched roster (icon Class-Spec map), 0 unmatched; upstream lastUpdated raid 2026-07-16T12:00Z, M+ 2026-07-17T12:00Z. 0 tier moves vs stored. specRankingsSection numbers re-parsed (160 rows: 95th pct DPS/HPS, M+ score, Popularity) — 0 value changes vs stored.",
-      "previousAsOf": "2026-07-17", "newAsOf": "2026-07-17" },
-    { "source": "archon-encounters", "result": "success",
-      "detail": "Full re-fetch of all 9 raid bosses + 8 M+ dungeons across all 3 roles (51 pages; throughput for raid / score for M+); every encounter parsed 40/40 specs from __NEXT_DATA__. 680 cells, 0 unmatched, 0 changed vs stored; encounter-tiers.json asOf already 2026-07-17.",
-      "previousAsOf": "2026-07-17", "newAsOf": "2026-07-17" },
-    { "source": "archon-survivability", "result": "partial",
-      "detail": "Survivability tierList returned EMPTY (tiers: []) on all 3 raid pages this fetch — transient upstream state (throughput on the same pages was full at 27/7/6). Nothing to parse; stored 40 survivability rows left unchanged at asOf 2026-07-17 (well within the 10-day threshold). Not an error.",
-      "previousAsOf": "2026-07-17", "newAsOf": "2026-07-17" },
-    { "source": "wowmeta", "result": "success",
-      "detail": "All 3 M+ pages (DPS/Healer/Tank) fetched via r.jina.ai; Rankings-table Tier column parsed (X/Unranked skipped), 40 specs matched by spec-slug icon. 0 moves vs stored. Raid pages still '0 records' upstream — left unranked (snapshot null).",
-      "previousAsOf": "2026-07-17", "newAsOf": "2026-07-17" },
-    { "source": "wcl-live-raid", "result": "unreachable",
-      "detail": "Per the pre-agent deterministic WCL fetch step (wcl-fetch/evidence.json, verdict rdps-broken, attemptedAt 2026-07-17T13:59:20Z): characterRankings(metric: rdps) returns a bare Internal server error on encounter 3176 — the redistributed-credit metric family is still broken upstream. Agent holds no WCL credentials and did not fetch warcraftlogs.com. Zone 46 Mythic medians unchanged at the 2026-07-09 baseline.",
-      "previousAsOf": "2026-07-09", "newAsOf": "2026-07-09" },
-    { "source": "wcl-live-mplus", "result": "unreachable",
+    {
+      "source": "icyveins",
+      "result": "success",
+      "detail": "All 6 pages (raid+M+, all roles) fetched live via curl; parsed from table.tier-list rows (img alt + class-slug; in-description spell icons excluded). Era-verified Midnight/Season 1/12.0.7/Devourer. 80 assignments (40 raid + 40 M+), 0 unmatched, 0 tier moves vs stored.",
+      "previousAsOf": "2026-07-17",
+      "newAsOf": "2026-07-17"
+    },
+    {
+      "source": "method",
+      "result": "success",
+      "detail": "Both pages fetched live; parsed from tier__tier s/a/b/c-tier blocks via de-hyphenated /images/icons/spec/<class>/<spec>.png slugs. Era-verified (Devourer present). Raid 39 (Vengeance DH still omitted upstream — absence, not error), M+ 40 → 79 rows, 0 moves vs stored.",
+      "previousAsOf": "2026-07-17",
+      "newAsOf": "2026-07-17"
+    },
+    {
+      "source": "wowhead",
+      "result": "partial",
+      "detail": "5 of 6 pages fetched via r.jina.ai and parsed from numbered ranking lists (lenient for -Tier/missing-paren idioms); era-verified Midnight Season 1. 74 rows, 0 moves vs stored. tank-M+ page unreachable this run (jina returned a 282b cached probe; direct fetch = 919b Cloudflare challenge) — its 6 stored rows carried unchanged, era re-confirmed Midnight S1 via the page header (WebFetch). Total 80 rows intact.",
+      "previousAsOf": "2026-07-17",
+      "newAsOf": "2026-07-17"
+    },
+    {
+      "source": "archon-tiers",
+      "result": "success",
+      "detail": "All 6 raid(throughput)/M+(score) pages parsed from __NEXT_DATA__ specTierListSection; 80 rows matched roster via /wow/builds/<spec>/<class>/ slugs, 0 unmatched; upstream lastUpdated raid 2026-07-16T12:00Z, M+ 2026-07-17T12:00Z. 0 moves vs stored. specRankingsSection numbers re-parsed (160 rows) — 0 value changes vs stored.",
+      "previousAsOf": "2026-07-17",
+      "newAsOf": "2026-07-17"
+    },
+    {
+      "source": "archon-encounters",
+      "result": "success",
+      "detail": "Full re-fetch of all 9 raid bosses (throughput) + 8 M+ dungeons (score) across all 3 roles (51 pages); every encounter parsed 40/40 specs from __NEXT_DATA__. 680 cells, 0 unmatched, 0 changed vs stored; encounter-tiers.json asOf already 2026-07-17, left unchanged.",
+      "previousAsOf": "2026-07-17",
+      "newAsOf": "2026-07-17"
+    },
+    {
+      "source": "archon-survivability",
+      "result": "partial",
+      "detail": "Survivability tierList returned EMPTY (tiers: []) on all 3 raid pages this fetch — transient upstream state (throughput on the same pages was full at 27/7/6). Nothing to parse; stored 40 survivability rows left unchanged at asOf 2026-07-17 (within the 10-day threshold). Not an error.",
+      "previousAsOf": "2026-07-17",
+      "newAsOf": "2026-07-17"
+    },
+    {
+      "source": "wowmeta",
+      "result": "success",
+      "detail": "All 3 M+ pages (DPS/Healer/Tank) fetched via r.jina.ai; Rankings-table Tier column parsed (X/Unranked skipped), 40 specs matched by spec-slug URL. 0 moves vs stored. Raid pages still 0-records upstream — left unranked (snapshot null).",
+      "previousAsOf": "2026-07-17",
+      "newAsOf": "2026-07-17"
+    },
+    {
+      "source": "wcl-live-raid",
+      "result": "unreachable",
+      "detail": "Per the pre-agent deterministic WCL fetch step (wcl-fetch/evidence.json, verdict rdps-broken, attemptedAt 2026-07-17T16:19:57Z): characterRankings(metric: rdps) returns a bare Internal server error on encounter 3176 — the redistributed-credit metric family is still broken upstream. Agent holds no WCL credentials and did not fetch warcraftlogs.com. Zone 46 Mythic medians unchanged at the 2026-07-09 baseline.",
+      "previousAsOf": "2026-07-09",
+      "newAsOf": "2026-07-09"
+    },
+    {
+      "source": "wcl-live-mplus",
+      "result": "unreachable",
       "detail": "Same upstream rdps Internal server error (evidence.json rdps-broken); no zone 47 M+ cut can honestly land. Data unchanged at 2026-07-09 baseline.",
-      "previousAsOf": "2026-07-09", "newAsOf": "2026-07-09" },
-    { "source": "wcl-ptr-raid", "result": "unreachable",
+      "previousAsOf": "2026-07-09",
+      "newAsOf": "2026-07-09"
+    },
+    {
+      "source": "wcl-ptr-raid",
+      "result": "unreachable",
       "detail": "Same upstream rdps Internal server error (evidence.json rdps-broken); zone 54 (all 3 role cuts) cannot land. 12.1 PTR raid-testing normalized scores unchanged at 2026-07-09 baseline.",
-      "previousAsOf": "2026-07-09", "newAsOf": "2026-07-09" },
-    { "source": "wcl-ptr-mplus", "result": "unreachable",
+      "previousAsOf": "2026-07-09",
+      "newAsOf": "2026-07-09"
+    },
+    {
+      "source": "wcl-ptr-mplus",
+      "result": "unreachable",
       "detail": "Same upstream rdps Internal server error (evidence.json rdps-broken); zone 56 (DPS/tank/healer) cannot land. 12.1 PTR M+ testing metrics unchanged at 2026-07-09 baseline.",
-      "previousAsOf": "2026-07-09", "newAsOf": "2026-07-09" },
-    { "source": "wcl-dummy-dome", "result": "unreachable",
+      "previousAsOf": "2026-07-09",
+      "newAsOf": "2026-07-09"
+    },
+    {
+      "source": "wcl-dummy-dome",
+      "result": "unreachable",
       "detail": "Same upstream rdps Internal server error (evidence.json rdps-broken); zone 52 Dummy Dome aggregate=amount median rDPS cannot land. spec.ptrDummy unchanged at 2026-07-09 baseline.",
-      "previousAsOf": "2026-07-09", "newAsOf": "2026-07-09" },
-    { "source": "wcl-dummy-raw", "result": "success",
-      "detail": "The deterministic src/fetch-wcl.mjs step (frozen recipe) re-paginated each DPS dummy's full metric:dps leaderboard and merged 103 per-spec raw-DPS medians before the agent started (evidence.landed wcl-dummy-raw = 103 rows; per-encounter players 1T:2000 2T:160 3T:111 5T:1523). Agent did not re-fetch or edit these rows; asOf 2026-07-17.",
-      "previousAsOf": "2026-07-17", "newAsOf": "2026-07-17" },
-    { "source": "wcl-ptr-raid-raw", "result": "success",
-      "detail": "The deterministic fetch step pooled zone-54 Heroic best-parse raw-DPS across 8 bosses (6 with players: Nek'zali 370, Sentinels 363, Vashnik 678, Lost Explorers 150, Sszorak 184, Twin Fangs 146; Coiled Altar and Ula'tek 0 — untested windows) and merged 27 rows (evidence.landed = 27). Agent did not re-fetch or edit; asOf 2026-07-17.",
-      "previousAsOf": "2026-07-17", "newAsOf": "2026-07-17" },
-    { "source": "wcl-ptr-mplus-raw", "result": "success",
-      "detail": "The deterministic fetch step pooled zone-56 S2 PTR key raw-DPS across all 8 dungeons (players 594-2000 each) and merged 27 rows (evidence.landed = 27). Agent did not re-fetch or edit; asOf 2026-07-17.",
-      "previousAsOf": "2026-07-17", "newAsOf": "2026-07-17" },
-    { "source": "murlok", "result": "success",
-      "detail": "40/40 rows (27 DPS + 7 healer + 6 tank) fetched live via plain GET and parsed for the top-50 avg M+ rating ceiling (36 distinct values, 3738-4288); era-verified Midnight Season 1 (the three 12.1 hits are SVG path coordinates, no season flip). 0 value changes vs stored — confirmed stable, not a stale skip.",
-      "previousAsOf": "2026-07-17", "newAsOf": "2026-07-17" },
-    { "source": "bloodmallet", "result": "success",
+      "previousAsOf": "2026-07-09",
+      "newAsOf": "2026-07-09"
+    },
+    {
+      "source": "wcl-dummy-raw",
+      "result": "success",
+      "detail": "The deterministic src/fetch-wcl.mjs step (frozen recipe) re-paginated each DPS dummy metric:dps leaderboard and merged 103 per-spec raw-DPS medians before the agent started (evidence.landed wcl-dummy-raw = 103 rows; players 1T:2000 2T:160 3T:111 5T:1532). Agent did not re-fetch or edit these rows; asOf 2026-07-17.",
+      "previousAsOf": "2026-07-17",
+      "newAsOf": "2026-07-17"
+    },
+    {
+      "source": "wcl-ptr-raid-raw",
+      "result": "success",
+      "detail": "The deterministic fetch step pooled zone-54 Heroic best-parse raw-DPS across 8 bosses (6 with players: Nek zali 370, Sentinels 363, Vashnik 678, Lost Explorers 150, Sszorak 184, Twin Fangs 146; Coiled Altar and Ula tek 0 — untested windows) and merged 27 rows (evidence.landed = 27). Agent did not re-fetch or edit; asOf 2026-07-17.",
+      "previousAsOf": "2026-07-17",
+      "newAsOf": "2026-07-17"
+    },
+    {
+      "source": "wcl-ptr-mplus-raw",
+      "result": "success",
+      "detail": "The deterministic fetch step pooled zone-56 S2 PTR key raw-DPS across all 8 dungeons (players 619-2000 each) and merged 27 rows (evidence.landed = 27). Agent did not re-fetch or edit; asOf 2026-07-17.",
+      "previousAsOf": "2026-07-17",
+      "newAsOf": "2026-07-17"
+    },
+    {
+      "source": "murlok",
+      "result": "success",
+      "detail": "40/40 rows (27 DPS + 7 healer + 6 tank) fetched live via plain GET; parsed for the top-50 avg M+ rating ceiling (range 3738-4288). Era-verified Midnight Season 1 (the three 12.1 hits are SVG path coordinates, no season flip). 0 value changes vs stored.",
+      "previousAsOf": "2026-07-17",
+      "newAsOf": "2026-07-17"
+    },
+    {
+      "source": "bloodmallet",
+      "result": "success",
       "detail": "26/26 non-Augmentation DPS fight profiles fetched via talent_target_scaling/castingpatchwerk; MID1 + ptr:0 confirmed on every chart; best-build DPS at counts 1/2/3/5/8/15. Augmentation absent by design. 0 target changes vs stored.",
-      "previousAsOf": "2026-07-17", "newAsOf": "2026-07-17" },
-    { "source": "simulationcraft", "result": "success",
-      "detail": "Nightly MID1_Raid report re-fetched (SimulationCraft 1205-01, World of Warcraft 12.0.7.68453 Live, hotfix 2026-07-13 — era-verified, no season flip). 26/26 DPS specs parsed as best variant per spec from the global DPS Ranking; 0 value deltas vs stored (nightly build unchanged since last fetch). Augmentation excluded by design.",
-      "previousAsOf": "2026-07-17", "newAsOf": "2026-07-17" },
-    { "source": "mythicstats", "result": "success",
-      "detail": "Period 1072 MID1 (unchanged period; era-verified) parsed from /period/latest 'Spec representation in top keys' (section-bounded to avoid a later table); 40/40 specs, sum 100.2%. 0 value changes vs stored — confirmed stable.",
-      "previousAsOf": "2026-07-17", "newAsOf": "2026-07-17" },
-    { "source": "blizzard-ptr", "result": "success",
-      "detail": "Forum thread (Discourse .json) + Wowhead news RSS both checked live. Thread tops at post #15 (Linxy Rogue Outlaw addendum, 07-14 22:46Z) under already-logged build #14 — NO new forum build. RSS newest 12.1 items are 07-16 or older, all prior-triaged (07-16 Class Tuning Hotfixes = PTR hotfixes with no forum post; 07-16 Holy Paladin tier-set review = spec already has a writeup; 07-16 M+ mob-count tooltip = not tuning). ptr-builds.json unchanged. Aff/Destro Warlock still lack ptr writeups but the 07-14 datamined recap carries no source verdict — none fabricated. zone-54/52/56 are evidence-only (rdps-broken, see WCL rows).",
-      "previousAsOf": null, "newAsOf": null },
-    { "source": "creators", "result": "partial",
-      "detail": "All 25 unique creator YouTube RSS feeds fetched live (25/25 OK). 3 genuinely-new videos published 07-17: AutomaticJak Rmkxzb1QQSQ (MW/Pres/Holy healer tuning — IN scope, queued pending) · Dalaran xRk0mNKX6OE (Evoker 12.1 — out of Dalaran's listed scope, flagged for human) · Tettles fy1ojTpwNyo (M+ retrospective, not tuning). All other unseen ids are <=06-30 pre-log-window back-catalog. Transcripts UNREACHABLE — the owner-approved player_client=android experiment did NOT bypass the block: yt-dlp returned HTTP 429 + 'Sign in to confirm you're not a bot' on Rmkxzb1QQSQ (verified once, not hammered). 0 takes / 0 metaNotes. izen (general) has no genuinely-new video; no new build lead. Pending queue carries forward for local transcript catch-up.",
-      "previousAsOf": null, "newAsOf": null }
+      "previousAsOf": "2026-07-17",
+      "newAsOf": "2026-07-17"
+    },
+    {
+      "source": "simulationcraft",
+      "result": "success",
+      "detail": "Nightly MID1_Raid report re-fetched (SimulationCraft 1205-01, WoW 12.0.7.68453 Live, hotfix 2026-07-13 — era-verified, no season flip). 26/26 DPS specs parsed as best variant per spec from the global DPS Ranking; 0 value deltas vs stored. Augmentation excluded by design.",
+      "previousAsOf": "2026-07-17",
+      "newAsOf": "2026-07-17"
+    },
+    {
+      "source": "mythicstats",
+      "result": "success",
+      "detail": "Period 1072 MID1 (unchanged period; era-verified) parsed from /period/latest Spec representation in top keys (section-bounded); 40/40 specs, sum 100.2%. 0 value changes vs stored.",
+      "previousAsOf": "2026-07-17",
+      "newAsOf": "2026-07-17"
+    },
+    {
+      "source": "blizzard-ptr",
+      "result": "success",
+      "detail": "Forum thread (Discourse .json) + Wowhead news RSS both checked live. Thread tops at post #15 (Linxy Rogue Outlaw addendum, 07-14 22:46Z) under already-logged build #14 — NO new forum build. RSS newest 12.1 items are 07-16 or older, all prior-triaged (07-16 Class Tuning Hotfixes = PTR hotfixes with no forum post; 07-16 Holy Paladin tier-set review = spec already has a writeup; 07-16 M+ mob-count tooltip = not tuning). ptr-builds.json unchanged. Writeup-less specs (Aff/Demo/Destro Warlock et al.) have no source verdict in the datamined recaps — none fabricated. zone-54/52/56 evidence-only (rdps-broken, see WCL rows).",
+      "previousAsOf": null,
+      "newAsOf": null
+    },
+    {
+      "source": "creators",
+      "result": "partial",
+      "detail": "All 25 unique creator YouTube RSS feeds fetched live (25/25 OK). 3 genuinely-new videos published 07-17: AutomaticJak LHPjq9142qM (MW PTR M+ — in scope, queued pending) and MadSkillzzTV I_nFVVmv610 (12.1 best M+ healers tier list — in scope, queued pending); Supatease LcWIPLhak0E (reroll gameplay — skipped). All other unseen ids are pre-log-window back-catalog. Transcripts UNAVAILABLE: transcript-fetch/summary.json verdict no-credentials (TRANSCRIPT_API_KEY unset), 0 fetched → 0 takes / 0 metaNotes. Pending queue 18 to 20. izen (general) newest 07-15, already seen; no new build lead.",
+      "previousAsOf": null,
+      "newAsOf": null
+    }
   ],
   "anomalyAckProposal": null
 }

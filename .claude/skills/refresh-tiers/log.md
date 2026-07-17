@@ -74,3 +74,15 @@ HEAD on every source** — re-verified live, stable (no apply-ratings needed). A
 51 pages (9 bosses throughput + 8 dungeons score × 3 roles), 680 cells, 0 changed. Archon
 survivability: tierList returned EMPTY (0 tiers) on all 3 raid pages this fetch — transient upstream
 state, stored 40 rows (asOf 07-17) left unchanged. npm test + build below.
+
+## 2026-07-17 (nightly, 16:45Z) — all 5 tier sources re-fetched live, 0 moves
+Icy Veins (6 pages, curl; table.tier-list img-alt/class parse; era Midnight S1/12.0.7/Devourer):
+80 rows, 0 moves. Method (2 pages; tier__tier + de-hyphenated /spec/<class>/<spec>.png slugs):
+raid 39 (Vengeance DH still omitted upstream), M+ 40 → 79 rows, 0 moves. Wowhead (r.jina.ai;
+numbered `N. Spec Class (X Tier)` lists, lenient for `-Tier`/missing-paren idioms): 5/6 pages =
+74 rows, 0 moves; **tank-M+ page jina-blocked (cached-probe 282b, direct 919b CF challenge) — its 6
+stored rows carried unchanged, era re-confirmed Midnight S1 via WebFetch header**. Archon (6 pages,
+__NEXT_DATA__ throughput/score tierLists): 80 rows, 0 moves; lastUpdated raid 07-16 / M+ 07-17.
+WoWMeta (r.jina.ai; Rankings table tier col, X skipped): 40 M+ rows, 0 moves; raid still 0-records.
+apply-ratings 353 rows → confirmed no-op (specs.json unchanged by ratings). Encounter tiers refreshed
+alongside (see refresh-metrics log). Snapshots already 2026-07-17.

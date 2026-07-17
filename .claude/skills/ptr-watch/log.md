@@ -151,3 +151,16 @@ Warlock still lack `ptr` writeups (07-14 Wowhead datamined recap is not verdict-
 fabricated, honest source typing). WCL zones 54/52/56 evidence-only: evidence.json verdict
 rdps-broken (metric:rdps 500 on enc 3176) — rDPS/normalized baselines stay 07-09; deterministic step
 already merged the raw-DPS series (dummy 103, zone-54 raid 27, zone-56 M+ 27). npm test + build below.
+
+## 2026-07-17 (nightly, 16:45Z) — no new build; WCL PTR evidence-only (rdps-broken)
+Forum Discourse `.json` fetched live: `highest_post_number` = 15; top post #15 (Linxy, Rogue Outlaw
+addendum, 07-14 22:46Z) already logged under build #14 — NO new forum build. Wowhead news RSS newest
+12.1 items are ≤07-16, all prior-triaged: 07-16 "Class Tuning Hotfixes on Patch 12.1 PTR" (PTR
+hotfixes, no forum dev-notes post → not a logged build); 07-16 Holy Paladin tier-set review (spec
+already has a writeup); 07-16 M+ mob-count tooltip (not tuning). `ptr-builds.json` unchanged. Specs
+still lacking writeups (Frost DK, Havoc DH, Feral, Guardian, Resto Druid, Brewmaster, Holy Priest,
+Elemental, Aff/Demo/Destro Warlock) — the 07-14 datamined recaps carry no source verdict; none
+fabricated (honesty rule). WCL PTR zones 54/52/56 are evidence-only this run: `wcl-fetch/evidence.json`
+verdict `rdps-broken` (characterRankings metric:rdps → Internal server error), so the 5 rDPS/normalized
+cuts stay at their 2026-07-09 baseline; the 3 raw-DPS cuts (dummy-raw 103, ptr-raid-raw 27,
+ptr-mplus-raw 27) were merged by the deterministic fetch step before the agent ran.
