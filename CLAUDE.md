@@ -301,12 +301,18 @@ about a failed night (they found the 07-15→17 root cause — agents background
 polls and ending their turn to "wait" — in one run; subagent tools are disabled and
 both prompts carry the single-shot rule for exactly that reason). (`dispatch-nightly.yml` auto-kicks a nightly run whenever a
 workflow-file change lands on master, via `gh workflow run` as github-actions[bot] —
-`allowed_bots` on the agent steps permits that actor.) Publish (deterministic, no AI, holds the write token) gates on `npm test` →
+`allowed_bots` on the agent steps permits that actor.) A `workflow_dispatch` input
+`agent_model` overrides both agents' model for a single run (default
+`claude-opus-4-8`) — one-off model trials without editing the workflow. Publish (deterministic, no AI, holds the write token) gates on `npm test` →
 `npm run build` → `node src/check-refresh.mjs --manifest` (which cross-checks WCL rows
 against the pre-agent evidence artifact and takes its anomaly ack ONLY from the
 human `anomaly_ack` workflow input), then snapshots, stages
 explicit paths, commits (title = the manifest summary, sanitized), pushes, and
-dispatches deploy.yml (GITHUB_TOKEN pushes don't auto-trigger workflows). A daily
+dispatches deploy.yml (GITHUB_TOKEN pushes don't auto-trigger workflows). Publish
+checks out CURRENT master (not the trigger sha), and a push race rebases +
+rebuilds the generated dist/ deterministically — any other conflict fails RED
+instead of silently dropping the night (2026-07-17 fix: bash `-e` is suppressed
+inside a `|| { … }` fallback group, which let a conflicted rebase pass green). A daily
 heartbeat (`freshness.yml`) alerts via a single auto-closing issue + red run when the
 last refresh signal exceeds 36h (full-timestamp precision via the manifest's
 `startedAt`) or a source exceeds its max age. The agent step's only secret is
