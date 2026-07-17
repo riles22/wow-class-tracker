@@ -57,3 +57,13 @@ parse counts and baselines the change detectors need live in the entries themsel
   46/47/52(rDPS)/54/56 unchanged at 07-09; agent holds no creds, fetched nothing from WCL. Raw-DPS
   series (dummy 103 rows + NEW zone-54/56 pooled 27+27) merged by the deterministic pre-agent step.
   npm test 91/91, build OK.
+
+## 2026-07-17 (nightly, later) — metrics all re-fetched live, stable
+Murlok 40/40 top-50 M+ ceilings (plain GET; era-verified, 12.1 hits were SVG coords), 0 changes.
+Bloodmallet 26/26 non-Aug DPS profiles (MID1+ptr:0 confirmed), 0 target changes. SimC nightly
+1205-01 / WoW 12.0.7.68453 Live (hotfix 07-13) 26/26 best-variant, 0 deltas (build unchanged since
+last fetch). Mythicstats period 1072 40/40, sum 100.2%, 0 changes. Archon numbers re-merged (160
+rows), 0 value changes (upstream lastUpdated 07-16T12:00Z unchanged). WCL evidence.json verdict
+rdps-broken (metric:rdps 500 on enc 3176) — zones 46/47/52(rDPS)/54/56 stay 07-09; agent no creds,
+fetched nothing. Raw-DPS series (dummy 103 + zone-54/56 pooled 27+27) merged pre-agent. npm test
+91/91, build OK.

@@ -54,3 +54,12 @@ Keep the newest ~20 entries; prune older ones when appending.
   359 rows, **0 tier moves vs HEAD** (WoWMeta stable this run after its earlier same-day reshuffle).
   Archon encounters: all 51 pages re-fetched, 680 cells, 0 changed (asOf 07-17). Survivability 40
   rows re-merged, 0 moves. npm test 91/91, build OK.
+
+## 2026-07-17 (nightly, later) — all 5 tier sources re-fetched live, 0 moves
+Re-verified every tier-list source fresh: Icy Veins 80 (raid+M+, table.tier-list alts, spell-icon
+noise filtered), Method raid 39 (Vengeance DH still omitted) / M+ 40 (S tier empty upstream, dungeon
+list excluded), Wowhead 80 (r.jina.ai; "Subtlety Rogue B Tier)" missing-open-paren handled; mplus-tank
+needed a cache-opt-out retry), Archon 80 (__NEXT_DATA__ throughput/score, upstream lastUpdated
+2026-07-16T12:00Z), WoWMeta 40 M+ (Rankings table vs ckmeans DPS S3/A3/B5/C9/D7, 0 mismatches; raid
+still "0 records"). apply-ratings 359 rows, **0 tier moves vs HEAD**. Archon encounters: all 51 pages,
+680 cells, 0 changed. Survivability 40 rows, 0 moves. npm test 91/91, build OK.

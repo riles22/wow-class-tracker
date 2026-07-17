@@ -158,3 +158,13 @@ out of listed scope, flagged for human scope review) · n2ga6kdiGVQ, oWLz9ZyV9Ko
 how-to/short) · TNoCCQWk01A, ztdsBTukkkw (Shindigg short/reclear) · JI7BWAjtfOI, YDwvn8SaXfU,
 NihCvD5hHjA (YoDaTV key POVs) · rhE3OYf-VPU (AutomaticJak title-push VOD) · JLLekdtEaUs
 (MadSkillzzTV addon video) · t_a8Z280vPE (Shadarek key POV).
+
+## 2026-07-17 (nightly, later) — feeds polled, no new videos, transcripts IP-blocked
+All 25 unique creator RSS feeds fetched live and FRESH (newest uploads 07-17 Kalamazi/Supatease,
+07-16 several) — every recent upload already in the seen-set. **No genuinely-new videos since the
+last run**: the newest UNSEEN item is 2026-06-30, i.e. pre-log-window back-catalog (log's seen-set
+only spans 07-03→07-17), not a new publish. Transcripts still UNREACHABLE — yt-dlp "Sign in to
+confirm you're not a bot" (verified once on vK-qyvXOVYM, not hammered) — **0 takes / 0 metaNotes**.
+izen (general creator) newest is 07-15, already seen + prior-verified vs build #14 — no new build
+lead. Prior pending queue (izen vK-qyvXOVYM, YoDaTV S4VNrinPFTA, + carried Obli/Kalamazi/Tettles/
+Supatease/AutomaticJak/MadSkillzzTV) unchanged, awaits local transcript catch-up.

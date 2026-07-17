@@ -131,3 +131,12 @@ dedicated section — narrative prose older than that is prunable memory.
   wcl-fetch/evidence.json verdict rdps-broken (metric:rdps 500 on enc 3176) — rDPS baselines stay
   07-09; deterministic step merged raw-DPS series pre-agent (dummy 103 rows refreshed; NEW pooled
   zone-54 Venomous Abyss 27 rows n=44-avg, zone-56 M+ keys 27 rows). npm test 91/91, build OK.
+
+## 2026-07-17 (nightly, later) — no new PTR build
+Forum thread (Discourse .json) tops at post #15 (Rogue Outlaw addendum, 07-14) under already-logged
+build #14 — no new forum build. Wowhead RSS newest 12.1 items 07-16 or older, all prior-triaged
+(07-16 Class Tuning Hotfixes = no forum post, not a build; 07-16 Holy Paladin tier-set review = spec
+already has a Clarius writeup, tuning in build #14; 07-16 M+ mob-count tooltip = not tuning).
+ptr-builds.json unchanged. zone-54/52/56 evidence-only — evidence.json rdps-broken; rDPS/normalized
+baselines stay 07-09; deterministic step merged raw-DPS series (dummy 103, zone-54 27, zone-56 27).
+npm test 91/91, build OK.
