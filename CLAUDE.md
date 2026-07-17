@@ -75,6 +75,10 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   no canonical count is comparable). DPS specs only — healers/tanks have no sim basis.
 - `ptrDummy` = real-player Dummy Dome logs (WCL zone 52): `{ source, asOf,
   targets: {"<count>": medianRDPS} }`, merged via apply-metrics.mjs `ptrdummy` key.
+  A parallel **"Median raw DPS (12.1 PTR Dummy Dome, NT)"** metric series (plain
+  `dps`, best-parse-per-player medians) is fetched AND merged by the deterministic
+  `src/fetch-wcl.mjs` step (frozen recipe, owner-approved 2026-07-17) — agents never
+  write it, and it never substitutes for the rDPS series (honest source typing).
   The build computes a 0–100 composite + rank across target counts (`dummyDomeScores`
   in render.mjs, coverage-floored) — never hand-write score/rank/perCount.
 - `ptr` is the per-spec 12.1 writeup: `{ verdict: "Positive|Mixed|Negative", theme,

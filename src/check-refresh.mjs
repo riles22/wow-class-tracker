@@ -77,7 +77,9 @@ export function probeDate(req, data) {
   if (!p) return null;
   const coverage = dates => {
     if (!dates.length) return null;
-    const min = p.minFresh ?? req.rows?.min ?? 1;
+    // Clamp ≥1: a bootstrap requirement may carry rows.min 0 (see required-sources
+    // comment), which must mean "no floor", never dates[length] === undefined.
+    const min = Math.max(1, p.minFresh ?? req.rows?.min ?? 1);
     return dates[Math.max(0, dates.length - min)];
   };
   if (p.type === "pages") {

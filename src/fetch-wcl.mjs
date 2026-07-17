@@ -24,9 +24,10 @@
    a deterministic red flag in the "Surface soft failures" step). Never echoes the
    token or secrets. */
 
-import { writeFile, mkdir } from "node:fs/promises";
+import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
+import { applyMetrics } from "./apply-metrics.mjs";
 
 // Header recipe proven by the 2026-07-14 run (see refresh-metrics SKILL.md, "WCL v2
 // API status"): browser UA on the token POST; Origin + Referer + sec-ch-ua clear
@@ -117,6 +118,97 @@ export function verdictFor({ hasCreds, oauth, transportOk, probe }) {
 // Averzian) — the rdps-family bug reproduces on every encounter, so one suffices.
 const RDPS_PROBE_ENCOUNTER = 3176;
 
+/* --- Frozen median recipe #1 (owner-approved 2026-07-17): zone-52 Dummy Dome
+   RAW-DPS medians.
+
+   metric: dps sits outside the broken rDPS family, and zone 52's population is small
+   enough to paginate to exhaustion, so a true median is computable without inventing
+   an aggregate. Two honesty rules are load-bearing:
+   - RAW DPS IS NEVER DRESSED UP AS rDPS. These land as their own metric series
+     ("Median raw DPS (12.1 PTR Dummy Dome, NT)"); spec.ptrDummy (median rDPS) stays
+     frozen at its last honest cut until WCL fixes the API.
+   - COMPLETE PAGINATION OR NOTHING. Rankings are best-parse-per-player sorted
+     best-first, so a partially-paginated median is biased high — an encounter that
+     fails mid-pagination (or exceeds the page budget) contributes zero rows.
+   The statistic is therefore "median best-parse raw DPS per ranked player", with n =
+   ranked players — a different (and honestly labeled) statistic than the statistics
+   table's per-parse medians. */
+export const DUMMY_ENCOUNTERS = [
+  { id: 3591, targets: "1" }, // Sinister Single
+  { id: 3590, targets: "2" }, // Diabolical Duo
+  { id: 3592, targets: "3" }, // Terrible Trio
+  { id: 3593, targets: "5" }  // Fearsome Five
+];
+const MAX_DUMMY_PAGES = 25; // ~2500 players/encounter — far above zone 52's observed ~800
+
+// API class/spec strings come camel-cased ("DemonHunter", "BeastMastery") — split to
+// roster names only when the raw string doesn't already match the roster.
+export const spacedName = s => String(s ?? "").replace(/([a-z])([A-Z])/g, "$1 $2");
+
+export const medianOf = values => {
+  if (!values.length) return null;
+  const v = [...values].sort((a, b) => a - b);
+  const mid = v.length >> 1;
+  return v.length % 2 ? v[mid] : (v[mid - 1] + v[mid]) / 2;
+};
+
+/* Pure row builder — unit-tested. byEncounter: [{ targets, rankings: [{class, spec,
+   amount}] }] (complete populations only); roster: Set of "Class|Spec" for DPS specs. */
+export function buildDummyRawRows(byEncounter, roster, asOf) {
+  const rows = [];
+  for (const enc of byEncounter) {
+    const groups = new Map();
+    for (const r of enc.rankings) {
+      let cls = String(r.class ?? ""), sp = String(r.spec ?? "");
+      if (!roster.has(`${cls}|${sp}`)) { cls = spacedName(cls); sp = spacedName(sp); }
+      if (!roster.has(`${cls}|${sp}`)) continue; // non-DPS role or unknown spec — not this series' population
+      const key = `${cls}|${sp}`;
+      const amount = Number(r.amount);
+      if (!Number.isFinite(amount) || amount < 0) continue;
+      if (!groups.has(key)) groups.set(key, []);
+      groups.get(key).push(amount);
+    }
+    for (const [key, amounts] of groups) {
+      const [cls, sp] = key.split("|");
+      rows.push({
+        class: cls, spec: sp, bracket: "raid", source: "warcraftlogs",
+        name: `Median raw DPS (12.1 PTR Dummy Dome, ${enc.targets}T)`,
+        value: Math.round(medianOf(amounts)), unit: "DPS", n: amounts.length,
+        asOf, era: "ptr"
+      });
+    }
+  }
+  return rows;
+}
+
+async function fetchDummyRawMedians(token) {
+  const byEncounter = [], perEncounter = {};
+  for (const enc of DUMMY_ENCOUNTERS) {
+    const rankings = [];
+    let ok = true, reason = null;
+    for (let page = 1; page <= MAX_DUMMY_PAGES; page++) {
+      await sleep(600); // polite guest
+      const q = `{ worldData { encounter(id: ${enc.id}) { characterRankings(metric: dps, page: ${page}) } } }`;
+      const r = await gql(token, q);
+      const blob = r.json?.data?.worldData?.encounter?.characterRankings;
+      if (!blob || r.json?.errors?.length) {
+        ok = false;
+        reason = r.json?.errors?.map(e => e.message).join("; ") ?? `HTTP ${r.status}, no characterRankings`;
+        break;
+      }
+      rankings.push(...(blob.rankings ?? []));
+      if (!blob.hasMorePages) break;
+      if (page === MAX_DUMMY_PAGES) { ok = false; reason = `population exceeds the ${MAX_DUMMY_PAGES}-page budget — owner decision needed before trusting a median`; }
+    }
+    perEncounter[`${enc.targets}T`] = ok ? { ok: true, players: rankings.length } : { ok: false, reason };
+    if (ok) byEncounter.push({ targets: enc.targets, rankings });
+    // Complete pagination or nothing: a failed encounter contributes no rows.
+  }
+  return { byEncounter, perEncounter };
+}
+
+const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+
 async function main() {
   const outDir = process.argv.find(a => a.startsWith("--out="))?.slice(6) ?? "wcl-fetch";
   const ID = process.env.WCL_CLIENT_ID, SECRET = process.env.WCL_CLIENT_SECRET;
@@ -163,6 +255,33 @@ async function main() {
         state.probe = { encounterId: RDPS_PROBE_ENCOUNTER, httpStatus: r.status, errors, rankings };
         evidence.probes.push({ name: `rdps@${RDPS_PROBE_ENCOUNTER}`, ok: errors.length === 0 && rankings > 0, httpStatus: r.status, errors, rankings });
         console.log(errors.length ? `✗ rdps probe: ${errors.join("; ")}` : `✓ rdps probe: ${rankings} rankings on page 1`);
+
+        // Zone-52 raw-DPS medians (frozen recipe #1) — metric: dps, so this runs and
+        // can LAND regardless of the rdps family's state.
+        try {
+          const specs = JSON.parse(await readFile(path.join(rootDir, "data", "specs.json"), "utf8"));
+          const roster = new Set(specs.filter(s => s.role === "DPS").map(s => `${s.class}|${s.spec}`));
+          const { byEncounter, perEncounter } = await fetchDummyRawMedians(state.oauth.token);
+          const today = new Date().toISOString().slice(0, 10);
+          const rows = buildDummyRawRows(byEncounter, roster, today);
+          evidence.dummyRaw = { perEncounter, rowsBuilt: rows.length };
+          if (rows.length) {
+            const scratch = path.join(outDir, "dummy-raw-metrics.json");
+            await mkdir(outDir, { recursive: true });
+            await writeFile(scratch, JSON.stringify({ metrics: rows }, null, 2) + "\n");
+            // applyMetrics refuses atomically on unmatched rows or validation failure —
+            // a refusal is recorded as evidence, never a crash and never a partial write.
+            const applied = await applyMetrics(scratch, rootDir);
+            evidence.dummyRaw.applied = applied.metricsApplied;
+            evidence.landed["wcl-dummy-raw"] = { rows: applied.metricsApplied, perEncounter };
+            console.log(`✓ dummy-raw: ${applied.metricsApplied} median raw-DPS rows merged (${Object.entries(perEncounter).map(([t, e]) => `${t}:${e.ok ? e.players + "p" : "failed"}`).join(" ")})`);
+          } else {
+            console.log(`✗ dummy-raw: no complete encounter populations (${JSON.stringify(perEncounter)})`);
+          }
+        } catch (err) {
+          evidence.dummyRaw = { ...(evidence.dummyRaw ?? {}), error: err?.message ?? String(err) };
+          console.log(`::warning title=Dummy Dome raw-median recipe failed::${err?.message ?? err}`);
+        }
       }
     }
   } else {

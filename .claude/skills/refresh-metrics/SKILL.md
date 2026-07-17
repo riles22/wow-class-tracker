@@ -92,6 +92,17 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
     by paginating to the end and comparing counts before trusting any median, and
     freeze the recipe into `src/fetch-wcl.mjs` (owner decision), never into the
     nightly agent.
+  - **Frozen recipe #1 (owner-approved 2026-07-17): zone-52 RAW-DPS medians.**
+    `src/fetch-wcl.mjs` paginates each DPS dummy's full `metric: dps` leaderboard
+    (complete pagination or that encounter contributes nothing — rankings are
+    best-parse-per-player sorted best-first, so a partial median is biased high) and
+    merges per-spec medians via apply-metrics as
+    `"Median raw DPS (12.1 PTR Dummy Dome, NT)"` (bracket raid, era ptr, n = ranked
+    players). This is a DIFFERENT statistic from both `spec.ptrDummy` (median rDPS —
+    still frozen until WCL fixes the API) and the statistics table's per-parse
+    medians — raw DPS is never dressed up as rDPS (Aug Evoker is why), and agents
+    never re-fetch or edit these rows (manifest key `wcl-dummy-raw`, success only via
+    `evidence.landed`).
 - **Zone 54 is the 12.1 PTR raid** (Venomous Abyss), zone 56 M+ S2 PTR — PTR-quality
   data. **Zone 52 is "Dummy Dome"** — a target-dummy sim harness (Sinister Single 1T /
   Diabolical Duo 2T / Terrible Trio 3T / Fearsome Five 5T / Hazardous Healer), NOT a raid;
