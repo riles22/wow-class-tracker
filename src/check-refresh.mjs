@@ -115,16 +115,30 @@ export function checkManifest(config, manifest, data, now, evidence = null) {
   const errors = [], degraded = [], notes = [];
   if (!manifest || typeof manifest !== "object") return { errors: ["run-manifest: missing or unreadable"], degraded, notes };
   const nowDate = dateOf(now);
+  const nowIsInstant = ISO_INSTANT.test(String(now));
+  const nowMs = nowIsInstant ? Date.parse(now) : utc(nowDate);
   if (!ISO_DATE.test(manifest.run ?? "")) errors.push(`run-manifest: run must be YYYY-MM-DD (got ${JSON.stringify(manifest.run)})`);
   else if (ageDays(nowDate, manifest.run) > 1) errors.push(`run-manifest: run date ${manifest.run} is not this run (now ${nowDate}) — the agent must write the manifest every run`);
   else if (ageDays(nowDate, manifest.run) < -1) errors.push(`run-manifest: run date ${manifest.run} is in the future (now ${nowDate})`);
+  // The gate must never accept the override field it exists to guard (folded from the
+  // 2026-07-16 provenance gate): the ONLY ack path is the human anomaly_ack workflow
+  // input. Agents write anomalyAckProposal, which the CLI merely prints for the human.
+  if (Object.prototype.hasOwnProperty.call(manifest, "anomalyAck")) {
+    errors.push('run-manifest: "anomalyAck" is not accepted from the agent-written manifest — a human supplies the anomaly_ack workflow input; write anomalyAckProposal (reason + citation) instead');
+  }
   // startedAt proves a fresh write at full-timestamp precision (the heartbeat consumes
-  // it); a date-only or missing value defeats both.
+  // it); a date-only or missing value defeats both, and a copied old instant defeats
+  // the "fresh" part — when the gate itself knows the real time (full-ISO now, as the
+  // CLI always passes), the write must be recent and not from the future.
   const started = manifest.startedAt;
   if (typeof started !== "string" || !ISO_INSTANT.test(started) || Number.isNaN(Date.parse(started))) {
     errors.push(`run-manifest: startedAt must be a full ISO 8601 instant proving a fresh write (got ${JSON.stringify(started ?? null)})`);
   } else if (ISO_DATE.test(manifest.run ?? "") && Math.abs(ageDays(dateOf(started), manifest.run)) > 1) {
     errors.push(`run-manifest: startedAt ${started} does not belong to run ${manifest.run}`);
+  } else if (nowIsInstant && Date.parse(started) - nowMs > 30 * 60000) {
+    errors.push(`run-manifest: startedAt ${started} is in the future`);
+  } else if (nowIsInstant && nowMs - Date.parse(started) > 12 * 3600000) {
+    errors.push(`run-manifest: startedAt ${started} is ${Math.round((nowMs - Date.parse(started)) / 3600000)}h old — not a fresh write from this run`);
   }
   if (typeof manifest.summary !== "string" || !manifest.summary.trim()) errors.push("run-manifest: summary (one line, becomes the commit message) is required");
   else if (manifest.summary.length > 200) errors.push(`run-manifest: summary too long (${manifest.summary.length} > 200 chars)`);
@@ -157,6 +171,19 @@ export function checkManifest(config, manifest, data, now, evidence = null) {
     if (DEGRADED.has(row.result)) {
       if (!detail) { errors.push(`run-manifest: "${req.key}" is ${row.result} with no detail — unexplained ${row.result} fails the run`); continue; }
       degraded.push(`${req.key}: ${row.result} — ${detail}`);
+    }
+    // previousAsOf/newAsOf are required descriptive provenance on every row (folded
+    // from the 2026-07-16 provenance gate). Exact equality against recomputed probe
+    // dates proved brittle — six agent runs never satisfied it; the substantive teeth
+    // are the success/coverage cross-checks below — but the fields must exist (null
+    // for undated feeds) and may never regress.
+    for (const field of ["previousAsOf", "newAsOf"]) {
+      if (!Object.prototype.hasOwnProperty.call(row, field)) {
+        errors.push(`run-manifest: "${req.key}" must include ${field} (null when the source has no dated state)`);
+      }
+    }
+    if (ISO_DATE.test(row.previousAsOf ?? "") && ISO_DATE.test(row.newAsOf ?? "") && row.newAsOf < row.previousAsOf) {
+      errors.push(`run-manifest: "${req.key}" newAsOf ${row.newAsOf} regressed below previousAsOf ${row.previousAsOf}`);
     }
     // Anti-drift teeth: a "success" claim must be visible in the stored data. This is
     // what makes the manifest more than prose — the agent can't mark a source fresh
@@ -328,7 +355,7 @@ if (isMain) {
     const a = baseline
       ? checkAnomaly(snapshotStateOf(payload.specs), baseline.specs, data.scales.consensus.bands, config.anomaly, trustedAck)
       : { errors: [], notes: ["no history snapshot — anomaly gate skipped"], twoBand: 0, total: 0 };
-    const proposal = manifest?.anomalyAckProposal ?? manifest?.anomalyAck ?? null;
+    const proposal = manifest?.anomalyAckProposal ?? null;
     if (a.errors.length && typeof proposal === "string" && proposal.trim()) {
       console.log(`  note: the agent PROPOSED an anomaly ack (not trusted — a human must re-run with the anomaly_ack input to approve): ${proposal.trim()}`);
     }

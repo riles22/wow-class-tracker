@@ -1,7 +1,7 @@
 {
   "_comment": "Curated community links per class — manually maintained, verified before adding, NEVER auto-scraped into tiers. Discord content is not fetchable (auth + TOS); these are links only. Creators are opinion/analysis sources — the kind our PTR writeups quote. Index source: wowhead.com/discord-servers (render via r.jina.ai). Verify creator recency via YouTube oEmbed.",
   "indexUrl": "https://www.wowhead.com/discord-servers",
-  "verified": "2026-07-01",
+  "verified": "2026-07-16",
   "classes": [
     {
       "class": "Death Knight",
@@ -221,6 +221,17 @@
           "specs": [
             "Guardian"
           ]
+        },
+        {
+          "name": "MadSkillzzTV",
+          "credential": "Long-running World of Warcraft healer specialist; guides, tips, UI, raid and Mythic+ coverage across all healer classes/specs",
+          "url": "https://www.youtube.com/@madskillzztv",
+          "channelId": "UCh9tBg-00bU299M4wc9YUDQ",
+          "latest": "Midnight healer Mythic+ and raid coverage across Restoration Druid/Shaman and Preservation Evoker",
+          "verifiedDate": "2026-07-16",
+          "specs": [
+            "Restoration"
+          ]
         }
       ],
       "sites": [
@@ -320,6 +331,17 @@
           "credential": "Wowhead healer guide author — cross-class healer coverage; takes scoped to the specs he reviews",
           "url": "https://www.youtube.com/watch?v=-kDDZC6qy5U",
           "channelId": "UCzFK2Yn2gu20AWV1raNbiOQ",
+          "specs": [
+            "Preservation"
+          ]
+        },
+        {
+          "name": "MadSkillzzTV",
+          "credential": "Long-running World of Warcraft healer specialist; guides, tips, UI, raid and Mythic+ coverage across all healer classes/specs",
+          "url": "https://www.youtube.com/@madskillzztv",
+          "channelId": "UCh9tBg-00bU299M4wc9YUDQ",
+          "latest": "Midnight healer Mythic+ and raid coverage across Restoration Druid/Shaman and Preservation Evoker",
+          "verifiedDate": "2026-07-16",
           "specs": [
             "Preservation"
           ]
@@ -490,6 +512,17 @@
           "specs": [
             "Brewmaster"
           ]
+        },
+        {
+          "name": "MadSkillzzTV",
+          "credential": "Long-running World of Warcraft healer specialist; guides, tips, UI, raid and Mythic+ coverage across all healer classes/specs",
+          "url": "https://www.youtube.com/@madskillzztv",
+          "channelId": "UCh9tBg-00bU299M4wc9YUDQ",
+          "latest": "Midnight healer Mythic+ and raid coverage across Restoration Druid/Shaman and Preservation Evoker",
+          "verifiedDate": "2026-07-16",
+          "specs": [
+            "Mistweaver"
+          ]
         }
       ],
       "sites": [
@@ -570,6 +603,17 @@
           "specs": [
             "Holy"
           ]
+        },
+        {
+          "name": "MadSkillzzTV",
+          "credential": "Long-running World of Warcraft healer specialist; guides, tips, UI, raid and Mythic+ coverage across all healer classes/specs",
+          "url": "https://www.youtube.com/@madskillzztv",
+          "channelId": "UCh9tBg-00bU299M4wc9YUDQ",
+          "latest": "Midnight healer Mythic+ and raid coverage across Restoration Druid/Shaman and Preservation Evoker",
+          "verifiedDate": "2026-07-16",
+          "specs": [
+            "Holy"
+          ]
         }
       ],
       "sites": [
@@ -642,6 +686,18 @@
             "Holy"
           ],
           "channelId": "UC8n5zBJRVelcB4wWeSmmIGA"
+        },
+        {
+          "name": "MadSkillzzTV",
+          "credential": "Long-running World of Warcraft healer specialist; guides, tips, UI, raid and Mythic+ coverage across all healer classes/specs",
+          "url": "https://www.youtube.com/@madskillzztv",
+          "channelId": "UCh9tBg-00bU299M4wc9YUDQ",
+          "latest": "Midnight healer Mythic+ and raid coverage across Restoration Druid/Shaman and Preservation Evoker",
+          "verifiedDate": "2026-07-16",
+          "specs": [
+            "Discipline",
+            "Holy"
+          ]
         }
       ],
       "sites": [
@@ -805,6 +861,17 @@
           "specs": [
             "Elemental",
             "Enhancement",
+            "Restoration"
+          ]
+        },
+        {
+          "name": "MadSkillzzTV",
+          "credential": "Long-running World of Warcraft healer specialist; guides, tips, UI, raid and Mythic+ coverage across all healer classes/specs",
+          "url": "https://www.youtube.com/@madskillzztv",
+          "channelId": "UCh9tBg-00bU299M4wc9YUDQ",
+          "latest": "Midnight healer Mythic+ and raid coverage across Restoration Druid/Shaman and Preservation Evoker",
+          "verifiedDate": "2026-07-16",
+          "specs": [
             "Restoration"
           ]
         }

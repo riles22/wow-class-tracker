@@ -1,30 +1,27 @@
 name: Nightly tracker refresh
 
-# Machine-off nightly automation, restructured 2026-07-14 per the external security
-# audit into isolated stages (tightened the same day by the follow-up re-audit):
+# Machine-off nightly automation. Isolated stages (2026-07-14 security audit + same-day
+# re-audit; agent-resilience pass 2026-07-16/17 after six consecutive incomplete runs):
 #
-#   refresh (AI agent, DE-PRIVILEGED) — Claude Code runs headlessly and consumes
-#     untrusted web content (tier pages, forum posts, YouTube transcripts). Its job
-#     token is read-only (contents: read, nothing else), checkout credentials are not
-#     persisted, and it is told not to (and cannot) push, so prompt-injected content
-#     in a scraped page can neither commit to this repo nor dispatch workflows. It
-#     leaves its edits in the working tree, writes the machine-readable
-#     data/run-manifest.json, and hands everything to the publish job as an artifact.
-#     WCL credentials are NOT in the agent's env (re-audit): a deterministic step
-#     runs src/fetch-wcl.mjs FIRST with the secrets scoped to that step alone, and
-#     uploads wcl-fetch/evidence.json as its own artifact before the agent starts —
-#     the agent's only WCL input, and tamper-evident for the publish gate.
-#     Residual risk (documented in docs/security-audit-2026-07.md): the Claude OAuth
-#     token is necessarily present in the agent step (it IS the agent's auth).
-#
-#   publish (deterministic, PRIVILEGED) — no AI. Downloads the artifacts, runs the
-#     gates (npm test → build → src/check-refresh.mjs manifest/freshness/anomaly
-#     enforcement against data/required-sources.json + the WCL evidence), snapshots,
-#     stages explicit paths only, commits, pushes, and dispatches the Pages deploy.
-#     If any gate fails, nothing is published and the artifacts are retained for
-#     debugging. The anomaly gate's override is HUMAN-ONLY: the anomaly_ack
-#     workflow_dispatch input below — the agent-written manifest can propose an ack
-#     but never satisfy the gate (re-audit).
+#   1. Deterministic WCL fetch — the ONLY step holding WCL_CLIENT_ID/WCL_CLIENT_SECRET
+#      (step-scoped env). Runs src/fetch-wcl.mjs, writes wcl-fetch/evidence.json, and
+#      uploads it as its own artifact BEFORE any agent runs — the agents' only WCL
+#      input, and tamper-evident for the publish gate.
+#   2. Primary agent (DE-PRIVILEGED) — Claude Code fetches untrusted web content on a
+#      contents:read token with no persisted checkout credentials and NO WCL secrets;
+#      its only secret is its own OAuth token. Leaves edits in the working tree and
+#      rebuilds data/run-manifest.json.
+#   3. Recovery agent — runs only when the primary ended without satisfying the
+#      deterministic completion check (the recurring failure shape: agents ending
+#      after minutes with no manifest).
+#   4. Final deterministic completion gate — manifest rewritten + npm test + build +
+#      check-refresh + WCL-credential health, so an incomplete refresh fails HERE
+#      with the real reason.
+#   5. publish (deterministic, PRIVILEGED) — no AI. Downloads the artifacts, re-runs
+#      every gate (cross-checking WCL manifest rows against the pre-agent evidence
+#      artifact), snapshots, stages explicit paths, commits, pushes, dispatches the
+#      Pages deploy. The anomaly gate's override is HUMAN-ONLY via the anomaly_ack
+#      workflow_dispatch input — the agent-written manifest can only propose.
 #
 # Secrets required (Settings → Secrets and variables → Actions):
 #   CLAUDE_CODE_OAUTH_TOKEN — from `claude setup-token` (Pro/Max; valid ~1 year — renew!)
@@ -33,14 +30,9 @@ name: Nightly tracker refresh
 
 on:
   schedule:
-    # 10:37 UTC (~3:37am Pacific summer). Deliberately an ODD minute off the top-of-hour:
-    # GitHub's scheduled runs are best-effort and get delayed/dropped during the congestion
-    # at :00–:10 (which is exactly what dropped the 2026-07-09 run — "job not acquired by
-    # runner"). An off-peak minute measurably lowers that risk. Miss is self-healing anyway:
-    # the refresh is idempotent, so the next run catches up everything new since the last —
-    # and the freshness heartbeat (freshness.yml) now makes a missed night visible.
+    # 10:37 UTC — deliberately an odd minute; :00–:10 congestion drops scheduled runs.
     - cron: "37 10 * * *"
-  workflow_dispatch: # manual test runs; also the ONLY way to approve an anomaly
+  workflow_dispatch: # manual runs; also the ONLY way to approve an anomaly
     inputs:
       anomaly_ack:
         description: >-
@@ -58,37 +50,37 @@ concurrency:
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 50 # job-level backstop; the Claude step has its own tighter timeout
+    timeout-minutes: 90
     permissions:
       contents: read # the agent job holds NO write scopes — publication happens in `publish`
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
         with:
-          # No token left in .git/config: the agent's shell has no ambient push credential.
+          # No token left in .git/config: the agents' shells have no ambient push credential.
           persist-credentials: false
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+          fetch-depth: 1
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: "22"
 
-      # yt-dlp at the version pinned in requirements.txt (Dependabot walks it forward
-      # with tested PRs) — the agent must never install or upgrade packages itself
-      # during the secret-bearing run.
+      # yt-dlp at the version pinned in requirements.txt — the agents must never
+      # install or upgrade packages themselves.
       - name: Install pinned yt-dlp
         run: pipx install "yt-dlp==$(sed -n 's/^yt-dlp==//p' requirements.txt)"
 
       # Deterministic WCL stage (re-audit 2026-07-14): the ONLY step holding the WCL
-      # credentials — step-scoped env, gone before the agent starts. Writes
-      # wcl-fetch/evidence.json (the agent's only WCL input). Always exits 0 when
-      # evidence was written; bad verdicts are surfaced by "Surface soft failures".
+      # credentials — step-scoped env, gone before any agent starts. Always exits 0
+      # when evidence was written; bad verdicts go red in the final gate.
       - name: Deterministic WCL fetch (only step with WCL credentials)
         env:
           WCL_CLIENT_ID: ${{ secrets.WCL_CLIENT_ID }}
           WCL_CLIENT_SECRET: ${{ secrets.WCL_CLIENT_SECRET }}
         run: node src/fetch-wcl.mjs
 
-      # Uploaded BEFORE the agent runs: the publish gate cross-checks the agent's WCL
-      # manifest rows against THIS copy, so the agent (which can edit the working-tree
-      # copy) has no window to tamper with what the gate reads.
+      # Uploaded BEFORE the agents run: the publish gate cross-checks WCL manifest
+      # rows against THIS copy, so an agent (which can edit the working-tree copy)
+      # has no window to tamper with what the gate reads.
       - name: Publish WCL fetch evidence (pre-agent, tamper-evident)
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
@@ -96,213 +88,185 @@ jobs:
           retention-days: 7
           path: wcl-fetch/
 
-      # First-party action, pinned to the v1-tag commit (audit: unpinned mutable tags are
-      # a supply-chain risk in an unattended secret-bearing job). Dependabot proposes
-      # reviewed bumps, so the runtime still tracks Claude Code CLI/auth changes.
-      # timeout at the STEP (not just job) so a hang still lets later steps run —
-      # a step timeout fails the step; a job timeout cancels everything after it.
-      # NOTE (re-audit): no WCL_* env here — the agent job's only secret is the Claude
-      # OAuth token, which is the agent's own auth.
-      - name: Nightly refresh (Claude Code, headless)
+      # First-party action pinned to the v1-tag commit (unpinned mutable tags are a
+      # supply-chain risk in an unattended secret-bearing job); Dependabot proposes
+      # reviewed bumps. NOTE: no WCL_* env on either agent step — their only secret
+      # is the Claude OAuth token (their own auth).
+      - name: Primary full refresh (Claude Code, read-only token)
+        id: primary_agent
+        continue-on-error: true
         uses: anthropics/claude-code-action@f1bd27ca5b54584506e40e17884d90bdaaa1a9b3 # v1
-        timeout-minutes: 40
+        timeout-minutes: 42
         with:
-          # Explicit github_token: without it the action attempts an OIDC exchange that
-          # needs id-token:write + the (read-only) Claude GitHub App — fatal on night one.
-          # This job's GITHUB_TOKEN is minted with contents:read only (see permissions).
           github_token: ${{ github.token }}
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          allowed_bots: "github-actions[bot]"
           claude_args: |
             --permission-mode bypassPermissions
             --max-turns 250
             --model claude-sonnet-5
           prompt: |
-            You maintain the WoW Midnight 12.1 PTR spec tracker in this checked-out repo
-            (master branch, CI runner). The public site riles22.github.io/wow-class-tracker
-            deploys from master. You are the FETCH-AND-DISTILL stage only: you have no
-            write credentials by design. Leave every change in the working tree — a
-            separate deterministic job validates, gates, commits, pushes, and deploys.
+            Maintain the WoW Midnight tracker in this checked-out repository. You are the
+            unprivileged fetch-and-distill stage: never commit, push, tag, dispatch a workflow,
+            print a secret, or write outside this working tree.
 
-            Read CLAUDE.md (the project contract) before acting. The refresh skills live
-            at .claude/skills/ — ptr-watch, watch-creators, refresh-tiers, refresh-metrics
-            — each SKILL.md has the exact procedure, verified fetch recipes, and hard-won
-            gotchas; follow them exactly.
+            Read CLAUDE.md and all four refresh skills before acting:
+            .claude/skills/ptr-watch/SKILL.md
+            .claude/skills/watch-creators/SKILL.md
+            .claude/skills/refresh-tiers/SKILL.md
+            .claude/skills/refresh-metrics/SKILL.md
 
-            Every run:
+            Complete ALL four skills in this run. Attempt every key in
+            data/required-sources.json even when stored data is already fresh (policy
+            2026-07-08: no staleness gate). Fetch game data live; never substitute model
+            memory or guesses. Expected source degradation must leave existing data
+            unchanged and be recorded honestly.
 
-            1. PTR watch (.claude/skills/ptr-watch/SKILL.md): Wowhead news RSS + the
-               official forum thread (URL in data/ptr-builds.json) for PTR builds newer
-               than the newest logged one; Warcraft Logs zone 54 (PTR raid testing —
-               ALL THREE role cuts per the skill: DPS, Healers/hps, Tanks; one shared
-               metric name so within-role ranks and the projection consume them) and
-               zone 52 (Dummy Dome) — ingest both EVERY run regardless of parse-count
-               movement (policy 2026-07-08: no change-detector gate); distill new spec writeups per the
-               auto-confirm policy — faithful distillation of the SOURCE's verdict,
-               mandatory source URL or sourceLabel.
-               WARCRAFT LOGS: you hold NO WCL credentials (2026-07-14 re-audit — the
-               secret-bearing fetch is the deterministic step that ran before you).
-               Read wcl-fetch/evidence.json and write the five WCL manifest rows from
-               it honestly: while it reports verdict "rdps-broken", every WCL cut is
-               unreachable with that detail and the stored data stays unchanged. NEVER
-               claim success on a WCL row — the publish gate cross-checks an evidence
-               artifact uploaded before you started, which you cannot modify. If the
-               verdict is "rdps-restored", put "WCL RDPS RESTORED — owner decision
-               needed on the median recipe" at the TOP of the summary (still no ingest
-               this run); if it is "no-credentials" or "oauth-failed", surface that at
-               the top of the summary too. Do NOT fetch anything from warcraftlogs.com
-               yourself, by any means — no API, no HTML scraping, no workarounds.
+            WARCRAFT LOGS: you hold NO WCL credentials. A deterministic step already ran
+            src/fetch-wcl.mjs and wrote wcl-fetch/evidence.json — your ONLY WCL input,
+            covering every WCL cut (live zones 46/47, PTR zones 54/56, Dummy Dome zone 52).
+            Write the five WCL manifest rows from it honestly: while it reports verdict
+            "rdps-broken", every WCL cut is unreachable with that detail and stored WCL data
+            stays unchanged. NEVER claim success on a WCL row — the publish gate cross-checks
+            an evidence artifact uploaded before you started, which you cannot modify. If the
+            verdict is "rdps-restored", put "WCL RDPS RESTORED — owner decision needed on the
+            median recipe" at the TOP of the summary; if it is "no-credentials" or
+            "oauth-failed", surface that at the top too. Do NOT fetch anything from
+            warcraftlogs.com yourself, by any means — no API, no HTML scraping, no workarounds.
 
-            2. Creators watch (.claude/skills/watch-creators/SKILL.md): poll the creator
-               YouTube RSS feeds in data/community.json, title-filter for Midnight/12.1
-               relevance, fetch transcripts with yt-dlp (ALREADY INSTALLED at the version
-               pinned in requirements.txt — never install, upgrade, or replace it, or any
-               other package), distill cited per-spec takes. YouTube may bot-block this
-               runner's IP: if transcript downloads fail after the skill's normal retries,
-               do NOT hammer — record the new video IDs as "pending (datacenter IP
-               blocked)" in the skill's log.md, skip their distillation, and note it in
-               the manifest's creators row.
+            PTR watch must check the official forum thread and the Wowhead news RSS for new
+            builds (the WCL zone-54/52 parts are evidence-only, per above). Creator watch must
+            poll every configured YouTube feed; use the already-installed yt-dlp (never
+            install, upgrade, or replace it or any other package), back off from datacenter
+            blocking, and record pending videos rather than hammering. Creator opinions never
+            move tiers.
 
-            3. Full refresh EVERY run (policy 2026-07-08 — no staleness gate): always run
-               refresh-tiers AND refresh-metrics (WCL parts are evidence-only, per 1),
-               regardless of the tier `snapshot` / metric `asOf` dates. Pull every source
-               fresh each run; do not skip on "already fresh" data. data/required-sources.json
-               is the authoritative checklist of what "every source" means — every key in
-               it must be attempted and accounted for.
-               SEASON-FLIP GUARD: if era-verification fails because the sources now
-               self-identify as Season 2 / 12.1 LIVE (not because a page is broken),
-               the patch has LAUNCHED. Keep refusing to ingest S2-live data as if it
-               were 12.0.7 (correct), but do NOT treat it as a quiet skip: put
-               "SEASON 2 IS LIVE — tracker needs its 12.1-live migration (new WCL
-               zones, era model, source pages)" at the TOP of the run summary AND in
-               every affected manifest row's detail, repeat it every night until
-               addressed, and keep the rest of the run working. Do not attempt the
-               migration autonomously — the era model needs a human decision.
+            SEASON-FLIP GUARD: if era-verification fails because sources now self-identify as
+            Season 2 / 12.1 LIVE (not because a page is broken), the patch has LAUNCHED. Keep
+            refusing to ingest S2-live data as 12.0.7, but put "SEASON 2 IS LIVE — tracker
+            needs its 12.1-live migration" at the TOP of the summary and in every affected
+            row's detail. Do not attempt the migration autonomously.
 
-            4. Run `npm test && npm run build` as a self-check. If it fails, fix your
-               data edits; if a source's data can't be made valid, revert just that
-               source's edits (`git checkout -- <files>`) and record it as parse_error
-               in the manifest.
+            Rebuild data/run-manifest.json from scratch for THIS run — the committed copy is
+            the PREVIOUS run's record and never excuses skipping work. It must contain today's
+            UTC run date, a current full UTC startedAt instant, a <=180-character summary, and
+            exactly one source row per requirement key, each with previousAsOf/newAsOf (the
+            stored dates before/after this run — copy them from the actual data files, never
+            fabricate) and an honest result: "success" ONLY when the source's stored dates
+            actually advanced this run; anything less is partial/unreachable/blocked/
+            parse_error WITH the reason; "skipped" without a detail fails the publish. NEVER
+            write an "anomalyAck" field — the gate rejects any manifest carrying it. If a mass
+            tier shift looks like a REAL Blizzard retune (not a parse artifact), set
+            "anomalyAckProposal": "<reason + citation>" — it does NOT bypass the anomaly gate
+            (only a human re-running this workflow with the anomaly_ack input can); it is your
+            evidence for that human.
 
-            5. Write data/run-manifest.json EVERY run — even a no-changes run. The
-               committed manifest you find in the repo is the PREVIOUS run's record:
-               it is NEVER evidence about this run, and a standing skipped/unreachable
-               explanation in it NEVER excuses skipping this run — attempt every
-               requirement fresh, then rebuild the file from scratch from THIS run's
-               own outcomes (the publish gate fails if the file is unchanged). It is
-               the machine-readable contract the publish gate (src/check-refresh.mjs)
-               enforces against data/required-sources.json:
-                 {
-                   "run": "<today UTC, YYYY-MM-DD>",
-                   "startedAt": "<this run's start, full UTC ISO 8601 — proves a fresh write>",
-                   "summary": "<one line, <=180 chars — becomes the commit message>",
-                   "sources": [ ONE row per requirement key in data/required-sources.json:
-                     { "source": "<key>", "result": "success|partial|unreachable|blocked|parse_error|skipped",
-                       "detail": "<the honest reason — REQUIRED for every result except success>",
-                       "previousAsOf": "<date before this run>", "newAsOf": "<date after>" } ]
-                 }
-               Honesty rules: "success" ONLY when the source's stored dates actually
-               advanced this run — the gate cross-checks the repo state and fails
-               dishonest claims. Anything less than a full landing is partial/
-               unreachable/blocked/parse_error WITH the reason; "skipped" without a
-               detail fails the whole publish. If a mass tier shift looks like a REAL
-               Blizzard retune (not a parse artifact), set "anomalyAckProposal":
-               "<reason + citation>" — it does NOT bypass the anomaly gate (only a
-               human re-running this workflow with the anomaly_ack input can); it is
-               your evidence for that human. Never set it for any other purpose.
+            Run npm test and npm run build before finishing. If a source edit cannot be made
+            valid, revert only that source's edits (git checkout -- <files>) and record
+            parse_error with a useful reason. Do not stop after PTR/creator work; tiers,
+            metrics, tests, build, and the fresh manifest are mandatory.
 
-            6. Do NOT commit, push, tag, or dispatch anything, and do not write outside
-               this working tree — publication is the deterministic publish job's.
+            COMPLETION CONTRACT — the single most common way this run fails (six consecutive
+            nights, 2026-07-15 → 07-17, were thrown away because agents ended early): the run
+            is NOT COMPLETE until data/run-manifest.json is REWRITTEN with this run's outcomes
+            and `node src/check-refresh.mjs --manifest` passes. Before ending, run
+            `git diff --stat -- data/run-manifest.json` and confirm it shows a change. If you
+            must stop early for ANY reason — degraded sources, nothing new anywhere, errors
+            you cannot fix — write the manifest FIRST, with honest rows for exactly what you
+            attempted and what you did not get to, then stop. Ending without a rewritten
+            manifest wastes the entire night no matter how much else you did.
 
-            7. End with a short summary: builds found · zone-54/zone-52 state · videos
-               and takes · sources refreshed vs degraded.
+      - name: Check primary agent completion
+        id: primary_check
+        continue-on-error: true
+        env:
+          ANOMALY_ACK: ${{ inputs.anomaly_ack }}
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- data/run-manifest.json; then
+            echo "::error::Primary agent did not rewrite data/run-manifest.json"
+            exit 1
+          fi
+          node src/check-refresh.mjs --manifest
 
-            COMPLETION CONTRACT — the single most common way this run fails: the run
-            is NOT COMPLETE until data/run-manifest.json is REWRITTEN with this run's
-            outcomes. On 2026-07-15 AND 2026-07-16 the agent did real work (07-16
-            even logged a new PTR build) and then ended without writing the manifest
-            — the publish gate threw BOTH nights away entirely, data changes
-            included. Do not repeat that. Before ending, run
-            `git diff --stat -- data/run-manifest.json` and confirm it shows a
-            change. If you must stop early for ANY reason — degraded sources,
-            nothing new anywhere, errors you cannot fix, uncertainty — write the
-            manifest FIRST, with honest rows for exactly what you attempted and
-            what you did not get to, then stop. Ending without a rewritten manifest
-            wastes the entire night no matter how much else you did.
+      - name: Recovery pass for incomplete refresh
+        if: steps.primary_agent.outcome != 'success' || steps.primary_check.outcome != 'success'
+        uses: anthropics/claude-code-action@f1bd27ca5b54584506e40e17884d90bdaaa1a9b3 # v1
+        timeout-minutes: 35
+        with:
+          github_token: ${{ github.token }}
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          allowed_bots: "github-actions[bot]"
+          claude_args: |
+            --permission-mode bypassPermissions
+            --max-turns 180
+            --model claude-sonnet-5
+          prompt: |
+            The primary nightly agent exited without satisfying the deterministic refresh
+            contract. Resume from the CURRENT working tree; preserve valid completed work and
+            inspect git diff plus all four skill logs to identify what is missing.
 
-            FAILURE SENTINEL (so problems aren't buried in a green run): on any HARD
-            failure — npm test or build failing at the end despite fixes — append one
-            line describing it to the file "$RUNNER_TEMP/refresh-failed" before ending.
-            (WCL auth problems are surfaced deterministically from the evidence file by
-            the workflow itself — summary mention per 1 is enough.) Do NOT write the
-            sentinel for expected degradations (YouTube blocking transcripts from this
-            IP, a source being temporarily unreachable with data left unchanged) — those
-            belong in the manifest and summary only.
+            Read CLAUDE.md and the ptr-watch, watch-creators, refresh-tiers, and refresh-metrics
+            SKILL.md files. Finish every missing skill and attempt every requirement in
+            data/required-sources.json. The common failure is stopping after PTR/creator work, so
+            explicitly complete tiers and metrics before finalizing. Use only live fetched data.
+            Never guess, commit, push, dispatch, or expose secrets.
 
-            Hard rules (also in CLAUDE.md): all game data is fetched live, never from
-            model memory — Midnight postdates every training cutoff, so anything
-            unfetchable stays absent rather than guessed; if nothing is new anywhere,
-            change no data (the manifest still gets written); never hand-edit
-            dist/index.html; PTR-quality data stays era-labeled and out of live
-            baselines; creator takes are cited opinion and never move a tier; be a
-            polite guest (single fetches, sleep between yt-dlp requests, backoff instead
-            of hammering); never echo any credential or token (you hold no WCL secrets —
-            see 1 — and your own auth token must never appear in output either).
+            WARCRAFT LOGS: you hold NO WCL credentials — wcl-fetch/evidence.json (written by the
+            deterministic pre-agent step) is your only WCL input; write the five WCL manifest
+            rows from it honestly and never claim success on them (the publish gate cross-checks
+            a pre-agent artifact copy you cannot modify). Do not fetch warcraftlogs.com yourself,
+            by any means.
 
-      # Hand the agent's working-tree output to the privileged job. Everything the
-      # publish job may commit travels here — data/ (incl. the run manifest) and the
-      # skill logs. dist/ is deliberately NOT transferred: publish rebuilds it from
-      # source, so a tampered build artifact can't ride along.
-      - name: Upload refresh output for the publish job
+            Rebuild data/run-manifest.json from scratch with a current UTC startedAt and one
+            honest row per required source, each with previousAsOf/newAsOf copied from the real
+            stored data. NEVER write an "anomalyAck" field (the gate rejects it); a real mass
+            retune goes in "anomalyAckProposal" with a citation, for human review. Run npm test
+            and npm run build, repair or narrowly revert invalid source edits, and do not finish
+            until both commands and `node src/check-refresh.mjs --manifest` pass. Ending without
+            a rewritten, passing manifest throws the whole night away — six consecutive nights
+            were lost exactly that way.
+
+      - name: Final deterministic completion gate
+        if: always() && !cancelled()
+        env:
+          ANOMALY_ACK: ${{ inputs.anomaly_ack }}
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- data/run-manifest.json; then
+            echo "::error::data/run-manifest.json is unchanged; no complete refresh was produced"
+            exit 1
+          fi
+          npm test
+          npm run build
+          node src/check-refresh.mjs --manifest
+          # WCL credential/config rot is invisible to the agents (they never hold the
+          # secrets) — surface it deterministically as a red refresh job.
+          verdict="$(node -e 'console.log(JSON.parse(require("fs").readFileSync("wcl-fetch/evidence.json","utf8")).verdict ?? "")' 2>/dev/null || echo unreadable)"
+          case "$verdict" in
+            no-credentials|oauth-failed|unreadable)
+              echo "::error::WCL fetch step could not authenticate (verdict: $verdict) — check WCL_CLIENT_ID/WCL_CLIENT_SECRET"
+              exit 1;;
+          esac
+
+      # Everything the publish job may commit travels here — data/ (incl. the run
+      # manifest) and the skill logs. dist/ is deliberately NOT transferred: publish
+      # rebuilds it from source, so a tampered build artifact can't ride along.
+      - name: Upload refresh output for publication or debugging
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: nightly-refresh
-          include-hidden-files: true # .claude/ skill logs
+          include-hidden-files: true
           retention-days: 7
           path: |
             data/
             .claude/skills/*/log.md
 
-      # Promote "soft" failures to a real job failure so GitHub emails the owner —
-      # otherwise they'd hide behind three weeks of green checkmarks. Two kinds: the
-      # agent's sentinel (test/build failure), and — checked deterministically, not via
-      # the agent — a WCL fetch evidence verdict that means credential/config rot.
-      # The publish job still runs (!cancelled()) and its gates decide whether the
-      # partial output is publishable.
-      - name: Surface soft failures
-        if: always()
-        run: |
-          failed=0
-          if [ -f "$RUNNER_TEMP/refresh-failed" ]; then
-            echo "## Nightly refresh reported failures" >> "$GITHUB_STEP_SUMMARY"
-            cat "$RUNNER_TEMP/refresh-failed" >> "$GITHUB_STEP_SUMMARY"
-            cat "$RUNNER_TEMP/refresh-failed"
-            failed=1
-          fi
-          # The 2026-07-15/16 failure shape, detected AT THE SOURCE: the agent ended
-          # without rewriting the manifest. The publish gate refuses such a run
-          # anyway, but there the refresh job shows a misleading green — fail HERE
-          # with the real reason so the notification email points at the cause.
-          if git diff --quiet -- data/run-manifest.json; then
-            echo "## Agent ended without rewriting data/run-manifest.json — the whole run is unpublishable (completion contract violated; see the prompt)" >> "$GITHUB_STEP_SUMMARY"
-            echo "Agent ended without rewriting data/run-manifest.json"
-            failed=1
-          fi
-          if [ -f wcl-fetch/evidence.json ]; then
-            verdict="$(node -e 'console.log(JSON.parse(require("fs").readFileSync("wcl-fetch/evidence.json","utf8")).verdict ?? "")' 2>/dev/null || echo unreadable)"
-            case "$verdict" in
-              no-credentials|oauth-failed|unreadable)
-                echo "## WCL fetch step could not authenticate (verdict: $verdict) — check WCL_CLIENT_ID/WCL_CLIENT_SECRET" >> "$GITHUB_STEP_SUMMARY"
-                echo "WCL fetch verdict: $verdict"
-                failed=1;;
-            esac
-          fi
-          exit "$failed"
-
   publish:
     # Deterministic publication — no AI, no untrusted fetches. Runs even when the
-    # refresh job surfaced a soft failure (matching the old "pushed and then died"
-    # semantics): the gates below, not the agent's exit code, decide publishability.
+    # refresh job failed: the gates below, not the agents' exit codes, decide
+    # publishability, and they re-run from scratch on the downloaded artifacts.
     needs: refresh
     if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
@@ -311,21 +275,20 @@ jobs:
       contents: write
       actions: write # dispatches the Pages deploy workflow
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
         with:
-          fetch-depth: 0 # rebase-on-rejection + movement baselines
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+          fetch-depth: 0 # rebase-on-rejection + movement baselines + row-drop baseline
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: "22"
 
-      - name: Git identity (matches repo history)
+      - name: Git identity
         run: |
           git config user.name "Riley"
           git config user.email "120138825+riles22@users.noreply.github.com"
 
-      # Overlays the agent's data/ + skill logs onto the fresh checkout. (Overlay can't
-      # express file DELETIONS — fine here: the refresh only ever edits/adds data files,
-      # and a gate failure blocks anything malformed that overlaying could produce.)
+      # Overlays the agents' data/ + skill logs onto the fresh checkout.
       - name: Download refresh output
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
@@ -333,8 +296,8 @@ jobs:
           path: .
 
       # The evidence copy the gate trusts: uploaded by the deterministic fetch step
-      # BEFORE the agent ran (the agent's working-tree copy travels nowhere). A missing
-      # artifact fails this step — and therefore the publish — by design.
+      # BEFORE any agent ran (the agents' working-tree copy travels nowhere). A
+      # missing artifact fails this step — and therefore the publish — by design.
       - name: Download WCL fetch evidence (pre-agent artifact)
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
@@ -344,31 +307,30 @@ jobs:
       - name: Show what the refresh changed
         run: git status --porcelain && git --no-pager diff --stat || true
 
-      # THE GATES. Order matters: schema/unit tests first, then the build (which
-      # re-validates and produces dist/), then the manifest/freshness/anomaly contract.
       - name: "Gate 1: validate + unit tests"
         run: npm test
+
       - name: "Gate 2: build"
         run: npm run build
+
       - name: "Gate 3: refresh contract (manifest · completeness · anomaly · WCL evidence)"
         env:
           # HUMAN-ONLY anomaly override: empty on scheduled runs; a person supplies it
           # via Run workflow → anomaly_ack after reviewing a blocked mass movement.
-          # The agent-written manifest can only PROPOSE an ack (anomalyAckProposal),
-          # which check-refresh prints for that person — it never satisfies the gate.
+          # The agent-written manifest can only PROPOSE (anomalyAckProposal), which
+          # check-refresh prints for that person — it never satisfies the gate.
           ANOMALY_ACK: ${{ inputs.anomaly_ack }}
         run: |
-          # The agent must have REWRITTEN the manifest this run. An unchanged file
-          # means it free-rode on the previous run's record instead of doing
-          # verifiable work — exactly what the first shakeout run did (2026-07-14):
-          # it read a manifest already dated "today" and concluded it was done.
+          # The agents must have REWRITTEN the manifest this run. An unchanged file
+          # means the run free-rode on the previous record instead of doing
+          # verifiable work (first shakeout, 2026-07-14).
           if git diff --quiet -- data/run-manifest.json; then
-            echo "::error::data/run-manifest.json is unchanged from the committed copy — the refresh agent did not write a fresh manifest this run"
+            echo "::error::data/run-manifest.json is unchanged from the committed copy"
             exit 1
           fi
           node src/check-refresh.mjs --manifest
 
-      - name: Snapshot movement baseline (only when data beyond the manifest changed)
+      - name: Snapshot movement baseline
         run: |
           if git status --porcelain -- data/ | grep -v "data/run-manifest.json" | grep -q .; then
             node src/snapshot.mjs
@@ -376,7 +338,7 @@ jobs:
             echo "No data changes beyond the run manifest — no snapshot"
           fi
 
-      - name: Commit and push (explicit paths only)
+      - name: Commit and push explicit paths
         id: commit
         run: |
           git add data/ dist/ ".claude/skills/*/log.md"
@@ -385,15 +347,13 @@ jobs:
             echo "pushed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          # Site-relevant = anything staged beyond the manifest + skill logs.
           if git diff --cached --quiet -- data/ dist/ ':(exclude)data/run-manifest.json'; then
             echo "deploy=false" >> "$GITHUB_OUTPUT"
           else
             echo "deploy=true" >> "$GITHUB_OUTPUT"
           fi
           # Commit title comes from the agent-written manifest summary — sanitized to
-          # one printable ASCII line, hard-capped, because that text originated from
-          # untrusted web content.
+          # one printable ASCII line, hard-capped (it originated from untrusted web content).
           SUMMARY="$(node -e 'const m=JSON.parse(require("fs").readFileSync("data/run-manifest.json","utf8")); console.log(String(m.summary??"refresh").replace(/[^\x20-\x7E]/g," ").replace(/\s+/g," ").trim().slice(0,180))')"
           git commit -m "Nightly refresh $(date -u +%F): ${SUMMARY}" -m "Co-Authored-By: Claude <noreply@anthropic.com>"
           git push origin master || { git pull --rebase origin master && git push origin master; }
@@ -401,8 +361,7 @@ jobs:
 
       # GITHUB_TOKEN pushes don't auto-trigger `on: push` workflows (GitHub loop
       # protection), so dispatch the deploy explicitly when site inputs changed.
-      # Manifest-only and logs-only commits correctly skip this.
-      - name: Trigger Pages deploy if the site's inputs changed
+      - name: Trigger Pages deploy when site inputs changed
         if: steps.commit.outputs.pushed == 'true' && steps.commit.outputs.deploy == 'true'
         env:
           GH_TOKEN: ${{ github.token }}

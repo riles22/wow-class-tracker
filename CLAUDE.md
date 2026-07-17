@@ -185,11 +185,15 @@ full refresh must account for, with staleness thresholds, row-count floors, a
 row-drop limit (`maxRowDropPct` vs the last committed state), and mass-movement
 anomaly limits. `data/run-manifest.json` is the per-run status file: one
 honest result row per requirement (`success | partial | unreachable | blocked |
-parse_error | skipped`; everything but success needs a `detail`), plus `run`, a full
-ISO `startedAt` (required — the heartbeat's precision signal), `summary`
+parse_error | skipped`; everything but success needs a `detail`; every row carries
+`previousAsOf`/`newAsOf` — the stored dates before/after the run, null for undated
+feeds, never regressing), plus `run`, a full
+ISO `startedAt` (required — the heartbeat's precision signal; must be a FRESH
+instant, ≤12h old at gate time), `summary`
 (becomes the nightly commit message), and optional `anomalyAckProposal` (the agent's
 cited evidence FOR a human ack — **the anomaly gate itself only accepts the
-human-supplied `anomaly_ack` workflow input**, never anything agent-written).
+human-supplied `anomaly_ack` workflow input**, never anything agent-written; a
+manifest carrying the old `anomalyAck` field is rejected outright).
 `node src/check-refresh.mjs --manifest` enforces it in
 the nightly publish gate — "success" claims are cross-checked against the actual stored
 snapshot/asOf dates (metric families use COVERAGE dates: the min-th-freshest row, so
@@ -276,14 +280,20 @@ isolated stages since the 2026-07-14 security audit (tightened by the same-day
 re-audit). First a **deterministic WCL fetch step** — the ONLY process holding
 `WCL_CLIENT_ID`/`WCL_CLIENT_SECRET` (step-scoped env) — runs `src/fetch-wcl.mjs` and
 writes `wcl-fetch/evidence.json`, uploaded as its own artifact before the agent
-starts. Then the **refresh** job's agent step runs Claude
-Code headlessly with a READ-ONLY token (no push/dispatch scopes, checkout credentials
+starts. Then the **refresh** job runs a PRIMARY agent and — when a deterministic
+completion check finds the manifest unwritten or failing (the recurring 07-15→07-17
+early-stop failure) — a RECOVERY agent, both Claude
+Code headless with a READ-ONLY token (no push/dispatch scopes, checkout credentials
 not persisted, yt-dlp preinstalled at the `requirements.txt` pin, action pinned by
-commit SHA, NO WCL credentials — the evidence file is its only WCL input) —
+commit SHA, NO WCL credentials — the evidence file is their only WCL input) —
 ptr-watch + watch-creators + a full tier/metric refresh **every run**
 (policy 2026-07-08: no staleness gate — every source is pulled fresh nightly) — then
-writes `data/run-manifest.json` and hands `data/` + skill logs to the **publish** job as
-an artifact. Publish (deterministic, no AI, holds the write token) gates on `npm test` →
+a final deterministic completion gate (manifest rewritten + tests + build +
+check-refresh + WCL-credential health) fails the job with the real reason if the
+night is incomplete, and `data/` + skill logs go to the **publish** job as
+an artifact. (`dispatch-nightly.yml` auto-kicks a nightly run whenever a
+workflow-file change lands on master, via `gh workflow run` as github-actions[bot] —
+`allowed_bots` on the agent steps permits that actor.) Publish (deterministic, no AI, holds the write token) gates on `npm test` →
 `npm run build` → `node src/check-refresh.mjs --manifest` (which cross-checks WCL rows
 against the pre-agent evidence artifact and takes its anomaly ack ONLY from the
 human `anomaly_ack` workflow input), then snapshots, stages

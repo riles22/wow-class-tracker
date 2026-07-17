@@ -1,0 +1,20 @@
+{
+  "creators": [
+    {
+      "name": "MadSkillzzTV",
+      "credential": "Long-running World of Warcraft healer specialist; guides, tips, UI, raid and Mythic+ coverage across all healer classes/specs",
+      "url": "https://www.youtube.com/@madskillzztv",
+      "channelId": "UCh9tBg-00bU299M4wc9YUDQ",
+      "latest": "Midnight healer Mythic+ and raid coverage across Restoration Druid/Shaman and Preservation Evoker",
+      "verifiedDate": "2026-07-16",
+      "scopes": [
+        { "class": "Druid", "specs": ["Restoration"] },
+        { "class": "Evoker", "specs": ["Preservation"] },
+        { "class": "Monk", "specs": ["Mistweaver"] },
+        { "class": "Paladin", "specs": ["Holy"] },
+        { "class": "Priest", "specs": ["Discipline", "Holy"] },
+        { "class": "Shaman", "specs": ["Restoration"] }
+      ]
+    }
+  ]
+}

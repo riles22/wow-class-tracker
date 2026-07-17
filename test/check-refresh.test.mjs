@@ -37,9 +37,9 @@ const goodManifest = () => ({
   startedAt: "2026-07-14T10:41:00Z",
   summary: "test run",
   sources: [
-    { source: "alpha", result: "success" },
-    { source: "beta", result: "success" },
-    { source: "feed", result: "success" }
+    { source: "alpha", result: "success", previousAsOf: "2026-07-10", newAsOf: "2026-07-14" },
+    { source: "beta", result: "success", previousAsOf: "2026-07-10", newAsOf: "2026-07-14" },
+    { source: "feed", result: "success", previousAsOf: null, newAsOf: null }
   ]
 });
 
@@ -63,7 +63,7 @@ test("metric probes take a COVERAGE date — one fresh row cannot vouch for a mo
   assert.equal(probeDate(req, data), "2026-07-10"); // masked staleness now visible
 
   const cfg = { ...config, requirements: [req] };
-  const m = { ...goodManifest(), sources: [{ source: "gamma", result: "success" }] };
+  const m = { ...goodManifest(), sources: [{ source: "gamma", result: "success", previousAsOf: "2026-07-10", newAsOf: "2026-07-14" }] };
   const masked = checkManifest(cfg, m, data, "2026-07-14");
   assert.ok(masked.errors.some(e => e.includes('"gamma" claims success but stored data is dated 2026-07-10')));
 
@@ -128,6 +128,39 @@ test("stale run dates, duplicate rows, and missing summaries fail", () => {
   assert.ok(r.errors.some(e => e.includes('duplicate row for "alpha"')));
 });
 
+test("provenance fields: previousAsOf/newAsOf are required per row and may never regress; anomalyAck is rejected outright", () => {
+  const bare = goodManifest();
+  delete bare.sources[0].previousAsOf;
+  delete bare.sources[1].newAsOf;
+  const r = checkManifest(config, bare, freshData(), "2026-07-14");
+  assert.ok(r.errors.some(e => e.includes('"alpha" must include previousAsOf')));
+  assert.ok(r.errors.some(e => e.includes('"beta" must include newAsOf')));
+
+  const regressed = goodManifest();
+  regressed.sources[0].newAsOf = "2026-07-01"; // below previousAsOf 2026-07-10
+  assert.ok(checkManifest(config, regressed, freshData(["2026-07-14", "2026-07-14"]), "2026-07-14")
+    .errors.some(e => e.includes('"alpha" newAsOf 2026-07-01 regressed')));
+
+  // The gate never accepts its own override from the agent-written file — only the
+  // human anomaly_ack workflow input (wired in the CLI) can acknowledge an anomaly.
+  const acked = { ...goodManifest(), anomalyAck: "totally a real retune, trust me" };
+  assert.ok(checkManifest(config, acked, freshData(), "2026-07-14")
+    .errors.some(e => e.includes('"anomalyAck" is not accepted')));
+  const proposed = { ...goodManifest(), anomalyAckProposal: "Blizzard post #19" };
+  assert.deepEqual(checkManifest(config, proposed, freshData(), "2026-07-14").errors, []);
+});
+
+test("startedAt must be a FRESH write: a copied old instant or a future one fails when the gate knows the real time", () => {
+  const old = goodManifest(); // startedAt 2026-07-14T10:41:00Z
+  const r = checkManifest(config, old, freshData(), "2026-07-14T23:30:00Z"); // ~12.8h later
+  assert.ok(r.errors.some(e => e.includes("not a fresh write")));
+  assert.deepEqual(checkManifest(config, old, freshData(), "2026-07-14T18:00:00Z").errors, []); // 7.3h — fine
+
+  const future = { ...goodManifest(), startedAt: "2026-07-14T12:00:00Z" };
+  assert.ok(checkManifest(config, future, freshData(), "2026-07-14T10:00:00Z")
+    .errors.some(e => e.includes("is in the future")));
+});
+
 test("startedAt is required, must be a real instant, and must belong to the run", () => {
   const missing = goodManifest();
   delete missing.startedAt;
@@ -158,7 +191,8 @@ const evConfig = {
       rows: { type: "metrics", source: "beta", namePattern: "^Beta", min: 1 } }
   ]
 };
-const evManifest = rows => ({ run: "2026-07-14", startedAt: "2026-07-14T10:41:00Z", summary: "t", sources: rows });
+const evManifest = rows => ({ run: "2026-07-14", startedAt: "2026-07-14T10:41:00Z", summary: "t",
+  sources: rows.map(r => ({ previousAsOf: "2026-07-09", newAsOf: "2026-07-14", ...r })) });
 const evidenceOf = extra => ({ attemptedAt: "2026-07-14T10:39:00Z", verdict: "rdps-broken", detail: "rdps 500s", landed: {}, ...extra });
 
 test("evidence-gated success needs the deterministic fetch to have landed rows", () => {

@@ -1,7 +1,8 @@
 name: Tests
 
-# npm test on EVERY push and PR — the deploy workflow's path filter can skip
-# docs-only pushes, but a test regression should never be able to land silently.
+# Validate every push and pull request with the same plain-Node test/build path
+# used by the Pages deployment. This catches schema, integration, and generated
+# artifact failures before changes reach master.
 
 on:
   push:
@@ -10,12 +11,23 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: tests-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: "22"
-      - run: npm test
+      - name: Validate and test
+        run: npm test
+      - name: Build production artifact
+        run: npm run build
+      - name: Sanity-check generated site
+        run: |
+          test -s dist/index.html
+          git diff --check

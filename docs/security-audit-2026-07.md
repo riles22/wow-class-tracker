@@ -226,6 +226,36 @@ re-verifies it under the fixed join.
 - "The unchanged-manifest check prevents exact reuse" — and the new
   startedAt/coverage/evidence teeth close the cheap ways around it.
 
+## Reconciliation with the parallel agent PRs (2026-07-17)
+
+While the re-audit remediation sat unmerged on its branch, a separate agent session
+(under the owner's account) merged PRs #11–#14 to master: a provenance gate
+(`check-manifest-provenance.mjs`), a primary+recovery two-agent nightly, a
+`dispatch-nightly.yml` auto-trigger, CI build steps, a community-overrides registry —
+and the MadSkillzzTV creator addition bundled into #11. Reconciled as follows:
+
+- **Kept**: the primary+recovery agent structure, the final deterministic completion
+  gate, `dispatch-nightly.yml` + `allowed_bots`, the CI build step, the
+  community-overrides mechanism (it feeds `community.json` through full validation
+  via npm pre-hooks — not a bypass).
+- **Folded into `check-refresh.mjs`** (one gate, one file): rejecting any
+  agent-written `anomalyAck` outright, requiring `previousAsOf`/`newAsOf` on every
+  row, the no-regression rule, and a fresh-`startedAt` window (12h).
+- **Removed**: `check-manifest-provenance.mjs` + its tests. Two defects: exact
+  equality between agent-written `previousAsOf`/`newAsOf` and recomputed probe dates
+  (an agent must reimplement probe semantics perfectly to pass — none of four runs
+  did), and `test/nightly-provenance-gate.test.mjs`, a publish-job-only test
+  asserting the OVERLAID manifest passes with a 3-hour startedAt window — a time
+  bomb that misdirected every failure into "Gate 1: unit tests" whenever the refresh
+  job had already failed. The kept substantive teeth (coverage dates, WCL evidence,
+  row floors, row-drop, anomaly limits) police the same risks deterministically.
+- **Flagged for the owner**: PRs #11–#14 merged without review, and #11 bundled new
+  creator authority (MadSkillzzTV, scoped to six healer specs) into a
+  security-sounding PR — exactly the shape this audit says needs human sign-off.
+  The entry was kept (it was authored under the owner's account and validates
+  cleanly) — **owner: confirm the addition was intended**, or remove it from
+  `data/community-overrides.json`.
+
 ## Owner actions (not possible from repo files)
 
 1. **Branch protection on master** — require the `Tests` check. Note the nightly
