@@ -290,7 +290,7 @@ jobs:
 
       # Overlays the agents' data/ + skill logs onto the fresh checkout.
       - name: Download refresh output
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
           name: nightly-refresh
           path: .
@@ -299,7 +299,7 @@ jobs:
       # BEFORE any agent ran (the agents' working-tree copy travels nowhere). A
       # missing artifact fails this step — and therefore the publish — by design.
       - name: Download WCL fetch evidence (pre-agent artifact)
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
           name: wcl-evidence
           path: wcl-fetch
