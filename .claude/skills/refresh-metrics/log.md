@@ -67,3 +67,13 @@ rows), 0 value changes (upstream lastUpdated 07-16T12:00Z unchanged). WCL eviden
 rdps-broken (metric:rdps 500 on enc 3176) — zones 46/47/52(rDPS)/54/56 stay 07-09; agent no creds,
 fetched nothing. Raw-DPS series (dummy 103 + zone-54/56 pooled 27+27) merged pre-agent. npm test
 91/91, build OK.
+
+## 2026-07-17 (nightly, latest) — all live metrics re-fetched, 0 changes; WCL rdps still broken
+Murlok 40/40 (plain GET; top-50 avg M+ rating 3738–4288; 12.1 hits were SVG coords, no season flip),
+0 changes. Bloodmallet 26/26 non-Aug DPS (talent_target_scaling/castingpatchwerk, MID1 + ptr:0 on
+every chart), targets at 1/2/3/5/8/15, 0 changes. SimC nightly MID1_Raid 1205-01 / 12.0.7.68453 Live
+(hotfix 07-13, build unchanged) 26/26 best-variant, 0 deltas. Mythicstats period 1072 40/40 sum
+100.2%, 0 changes. Archon numbers 160 rows (95th pct DPS/HPS, M+ score, Popularity), 0 value changes.
+WCL evidence.json verdict rdps-broken — zones 46/47/52(rDPS)/54/56 stay 07-09 (agent holds no creds,
+fetched nothing from warcraftlogs.com); raw-DPS series (dummy 103 + zone-54/56 pooled 27+27) merged
+by the deterministic pre-agent step. npm test + build below.

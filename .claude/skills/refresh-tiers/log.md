@@ -63,3 +63,14 @@ needed a cache-opt-out retry), Archon 80 (__NEXT_DATA__ throughput/score, upstre
 2026-07-16T12:00Z), WoWMeta 40 M+ (Rankings table vs ckmeans DPS S3/A3/B5/C9/D7, 0 mismatches; raid
 still "0 records"). apply-ratings 359 rows, **0 tier moves vs HEAD**. Archon encounters: all 51 pages,
 680 cells, 0 changed. Survivability 40 rows, 0 moves. npm test 91/91, build OK.
+
+## 2026-07-17 (nightly, latest) — all 5 tier sources re-fetched live, 0 moves
+Icy Veins 80 (curl, table.tier-list rows, spec-icon filter; era Midnight/Season 1/12.0.7/Devourer),
+Method raid 39 (Vengeance DH omitted upstream) / M+ 40 (S tier empty; roster-matched to drop the
+dungeon-difficulty noise), Wowhead 80 (r.jina.ai; S-Tier/hyphen + missing-open-paren handled
+leniently), Archon 80 (__NEXT_DATA__ throughput raid / score M+; raid lastUpdated 07-16T12:00Z, M+
+07-17T12:00Z). WoWMeta 40 M+ (r.jina.ai Rankings table; raid still "0 records"). **0 tier moves vs
+HEAD on every source** — re-verified live, stable (no apply-ratings needed). Archon encounters: all
+51 pages (9 bosses throughput + 8 dungeons score × 3 roles), 680 cells, 0 changed. Archon
+survivability: tierList returned EMPTY (0 tiers) on all 3 raid pages this fetch — transient upstream
+state, stored 40 rows (asOf 07-17) left unchanged. npm test + build below.

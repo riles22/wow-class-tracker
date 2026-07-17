@@ -168,3 +168,25 @@ confirm you're not a bot" (verified once on vK-qyvXOVYM, not hammered) — **0 t
 izen (general creator) newest is 07-15, already seen + prior-verified vs build #14 — no new build
 lead. Prior pending queue (izen vK-qyvXOVYM, YoDaTV S4VNrinPFTA, + carried Obli/Kalamazi/Tettles/
 Supatease/AutomaticJak/MadSkillzzTV) unchanged, awaits local transcript catch-up.
+
+## 2026-07-17 (nightly, latest) — 3 genuinely-new videos, transcripts still IP-blocked; android-client experiment FAILED
+All 25 unique creator RSS feeds fetched live and FRESH (25/25 OK, one retry pass). Diffed vs the
+455-id seen-set: 175 "unseen" ids, but all but 3 are ≤2026-06-30 pre-log-window back-catalog (the
+seen-set only spans 07-03→07-17), NOT new publishes. **3 genuinely-new videos (published 07-17,
+after the last run):**
+  · AutomaticJak `Rmkxzb1QQSQ` "BIG MW/Pres Nerfs, Holy Shock STILL Sucks and MORE Healer Tuning" —
+    IN-SCOPE (AutomaticJak lists Evoker/Monk/Paladin/Priest; MW=Mistweaver, Pres=Preservation,
+    Holy Shock=Holy Paladin all in scope). Would be distillable → QUEUED PENDING (transcript blocked).
+  · Dalaran Gaming `xRk0mNKX6OE` "Everything Changing For Evokers In Patch 12.1 (Early PTR Preview)" —
+    OUT of Dalaran's listed scope (Druid/Mage/Rogue/Shaman, not Evoker); flagged for human scope
+    review, NOT attributed.
+  · Tettles `fy1ojTpwNyo` "How Mythic+ Changed World of Warcraft Forever" — M+ history retrospective,
+    not spec tuning/tier material; triaged-skipped.
+**Bot-check experiment result (owner-approved 2026-07-17):** the `player_client=android` extractor
+arg did NOT bypass the datacenter block — yt-dlp returned HTTP 429 + "Sign in to confirm you're not
+a bot" on Rmkxzb1QQSQ (verified ONCE, not hammered). YouTube's client hole appears closed for the
+runner IP; per the skill, videos queue pending and the fallback decision (managed transcript API /
+residential proxy / self-hosted runner) is the owner's. **0 takes / 0 metaNotes distilled.**
+izen (general) has no genuinely-new video (newest publish is prior 07-15, already seen + verified vs
+build #14); no new build lead. New pending: AutomaticJak Rmkxzb1QQSQ; prior pending queue carries
+forward for local transcript catch-up.

@@ -140,3 +140,14 @@ already has a Clarius writeup, tuning in build #14; 07-16 M+ mob-count tooltip =
 ptr-builds.json unchanged. zone-54/52/56 evidence-only — evidence.json rdps-broken; rDPS/normalized
 baselines stay 07-09; deterministic step merged raw-DPS series (dummy 103, zone-54 27, zone-56 27).
 npm test 91/91, build OK.
+
+## 2026-07-17 (nightly, latest) — no new build; WCL evidence-only, rdps still broken
+Forum thread `.json` fetched live: tops at post #15 (Linxy Rogue Outlaw addendum, 07-14 22:46Z)
+under already-logged build #14 — NO new forum post. Wowhead news RSS fetched live: newest 12.1 items
+are ≤07-16 (07-16 Class Tuning Hotfixes = PTR hotfixes, no forum post → not a build; 07-16 Holy
+Paladin tier-set review = spec already has a writeup; 07-16 M+ mob-count tooltip = not tuning), all
+prior-triaged. ptr-builds.json unchanged. Untracked-writeup candidates noted: Affliction/Destruction
+Warlock still lack `ptr` writeups (07-14 Wowhead datamined recap is not verdict-bearing — no writeup
+fabricated, honest source typing). WCL zones 54/52/56 evidence-only: evidence.json verdict
+rdps-broken (metric:rdps 500 on enc 3176) — rDPS/normalized baselines stay 07-09; deterministic step
+already merged the raw-DPS series (dummy 103, zone-54 raid 27, zone-56 M+ 27). npm test + build below.
