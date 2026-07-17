@@ -42,7 +42,11 @@ export function chunksOf(payload) {
 export function statusOf(httpStatus, body) {
   const code = body && typeof body.error === "string" ? body.error : null;
   if (httpStatus === 200) return { status: "fetched", stop: false };
-  if (httpStatus === 401 || httpStatus === 403 || code === "unauthorized") return { status: "unauthorized", stop: true };
+  // A 403 WITHOUT Supadata's JSON error envelope is an egress/proxy/CDN block, not a
+  // key verdict (2026-07-17: a sandbox proxy 403 masqueraded as "unauthorized") —
+  // report it as blocking so nobody rotates a healthy key over network plumbing.
+  if (httpStatus === 401 || code === "unauthorized") return { status: "unauthorized", stop: true };
+  if (httpStatus === 403) return code ? { status: "unauthorized", stop: true } : { status: "blocked-403", stop: true };
   if (httpStatus === 429 || code === "limit-exceeded" || code === "upgrade-required") return { status: "limit-exceeded", stop: true };
   if (httpStatus === 404 || code === "transcript-unavailable" || code === "not-found") return { status: "unavailable", stop: false };
   if (httpStatus === 0) return { status: "network-failed", stop: false };
@@ -56,7 +60,7 @@ export function verdictOf(results, hadKey) {
   const statuses = Object.values(results);
   if (statuses.includes("unauthorized")) return "unauthorized";
   if (statuses.includes("limit-exceeded")) return "limit-exceeded";
-  if (statuses.length && statuses.every(s => s === "network-failed")) return "network-failed";
+  if (statuses.length && statuses.every(s => s === "network-failed" || s === "blocked-403")) return "network-failed";
   return "ok";
 }
 

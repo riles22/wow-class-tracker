@@ -36,6 +36,8 @@ test("statusOf maps credential and limit failures to stop-early", () => {
   assert.deepEqual(statusOf(200, {}), { status: "fetched", stop: false });
   assert.deepEqual(statusOf(401, null), { status: "unauthorized", stop: true });
   assert.deepEqual(statusOf(403, { error: "unauthorized" }), { status: "unauthorized", stop: true });
+  // 403 without Supadata's JSON envelope = egress/proxy block, never a key verdict
+  assert.deepEqual(statusOf(403, null), { status: "blocked-403", stop: true });
   assert.deepEqual(statusOf(429, null), { status: "limit-exceeded", stop: true });
   assert.deepEqual(statusOf(402, { error: "limit-exceeded" }), { status: "limit-exceeded", stop: true });
   assert.deepEqual(statusOf(404, { error: "transcript-unavailable" }), { status: "unavailable", stop: false });
@@ -48,6 +50,7 @@ test("verdictOf: missing key wins, then credential problems, then all-network, e
   assert.equal(verdictOf({ a: "fetched:10", b: "unauthorized" }, true), "unauthorized");
   assert.equal(verdictOf({ a: "fetched:10", b: "limit-exceeded" }, true), "limit-exceeded");
   assert.equal(verdictOf({ a: "network-failed", b: "network-failed" }, true), "network-failed");
+  assert.equal(verdictOf({ a: "blocked-403" }, true), "network-failed"); // proxy 403 ≠ bad key
   assert.equal(verdictOf({ a: "fetched:10", b: "unavailable", c: "network-failed" }, true), "ok");
   assert.equal(verdictOf({}, true), "ok"); // empty queue with a key is a clean run
 });
