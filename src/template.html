@@ -514,6 +514,7 @@
     <div class="ctl">
       <label class="lbl" for="sortsel">Sort</label>
       <select class="sortsel" id="sortsel" aria-label="Sort specs">
+        <option value="overall">Overall (Raid + M+)</option>
         <option value="class">Class</option>
         <option value="spec">Spec A–Z</option>
         <option value="raid">Raid tier</option>
@@ -652,7 +653,7 @@ function draftSrcHTML(p){
   return "";
 }
 
-const state = { source:"consensus", era:"both", role:"All", ptrOnly:false, starOnly:false, sort:"raid", q:"", fight:"" };
+const state = { source:"consensus", era:"both", role:"All", ptrOnly:false, starOnly:false, sort:"overall", q:"", fight:"" };
 const STATE_DEFAULTS = { ...state };
 
 /* ---------- watchlist (localStorage) + deep links (URL hash) ---------- */
@@ -1003,6 +1004,15 @@ function sortList(list){
     arr.sort((a,b)=> a.spec.localeCompare(b.spec) || a.class.localeCompare(b.class));
   } else if(by==="raid" || by==="mplus"){
     arr.sort((a,b)=> ratingFor(b,by).score - ratingFor(a,by).score || a.class.localeCompare(b.class) || a.spec.localeCompare(b.spec));
+  } else if(by==="overall"){
+    // Combined Raid+M+ ordering under the ACTIVE lens (consensus / one source / our
+    // projection): mean of the bracket scores that exist, so a spec rated in only one
+    // bracket ranks by that bracket instead of being punished for a missing column.
+    const ov = new Map(arr.map(s => {
+      const parts = [ratingFor(s,"raid").score, ratingFor(s,"mplus").score].filter(v => v >= 0);
+      return [s, parts.length ? parts.reduce((x,y)=>x+y,0)/parts.length : -1];
+    }));
+    arr.sort((a,b)=> ov.get(b)-ov.get(a) || a.class.localeCompare(b.class) || a.spec.localeCompare(b.spec));
   } else if(by==="ptr"){
     arr.sort((a,b)=> VERDICT_RANK[a.ptr?a.ptr.verdict:"—"]-VERDICT_RANK[b.ptr?b.ptr.verdict:"—"] || a.class.localeCompare(b.class) || a.spec.localeCompare(b.spec));
   } else if(by==="simst" || by==="simaoe"){
@@ -1073,7 +1083,7 @@ function render(){
   });
   // active-filter cues: light up controls that are off their default
   document.getElementById('fightsel')?.classList.toggle('engaged', !!state.fight);
-  document.getElementById('sortsel')?.classList.toggle('engaged', state.sort!=='raid');
+  document.getElementById('sortsel')?.classList.toggle('engaged', state.sort!=='overall');
   document.getElementById('search')?.classList.toggle('engaged', !!state.q);
   setStickyOffsets(); // header rebuilt above — remeasure the sticky stack
   writeHash(); // the URL always mirrors the final rendered state (shareable deep link)
@@ -1285,7 +1295,7 @@ document.getElementById('ptronly').addEventListener('change', e=>{ state.ptrOnly
 document.getElementById('staronly').addEventListener('change', e=>{ state.starOnly = e.target.checked; render(); });
 document.getElementById('sortsel').value = state.sort; // sync dropdown to the rank-all default
 document.getElementById('sortsel').addEventListener('change', e=>{ setSort(e.target.value); });
-document.querySelectorAll('#groupseg button').forEach(b=> b.addEventListener('click', ()=> setSort(b.dataset.g==='class'?'class':'raid')));
+document.querySelectorAll('#groupseg button').forEach(b=> b.addEventListener('click', ()=> setSort(b.dataset.g==='class'?'class':'overall')));
 let searchTimer = null; // debounce the full re-render; state.q updates immediately
 document.getElementById('search').addEventListener('input', e=>{
   state.q = e.target.value.trim();
