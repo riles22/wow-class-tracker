@@ -113,3 +113,10 @@ dedicated section — narrative prose older than that is prunable memory.
   hotfixes with no forum post, per canonical-source rule. · **zone-54/52/56 WCL UNREACHABLE**
   again (pre-agent evidence.json rdps-broken; 500 upstream) — baselines unchanged at 07-09.
   npm test 85/85, build OK.
+
+- 2026-07-17 (nightly — Opus 4.8) · Forum thread (.json) + Wowhead RSS checked live. Thread tops
+  at post #15 (Rogue Outlaw addendum, 07-14) under build #14 already logged — **no new forum build**.
+  RSS newest 12.1 items = 07-16 "Class Tuning Hotfixes" (news=382189, PTR hotfixes, no forum post →
+  not a build) + 07-14 datamined tier-set post (WL/SP/Surv, already in build #14). ptr-builds.json
+  unchanged. **zone-54/52/56 WCL evidence-only, verdict rdps-broken** (500 upstream) — baselines 07-09.
+  npm test 88/88, build OK.

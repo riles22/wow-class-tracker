@@ -120,3 +120,14 @@ back", 07-15) + 0nW0wnI4OTo (gearing, 07-15) · Supatease HuRjN73exFk (12.1 heal
 changes, 07-17) · AutomaticJak TXv5nof2mZw (HPal PTR M+, 07-16). Triaged-skipped: PvP-duel
 / stream-VOD / key-POV content (Dalaran PvP duels, YoDaTV/Shindigg/Shadarek/Woxtoxic/Critcake
 streams, Supatease "Road to Rank 1" VODs) and roundup-only videos (Dratnos, out of Arms/Fury scope).
+
+- 2026-07-17 (nightly — Opus 4.8) · yt-dlp 2026.07.04 (current). YouTube RSS heavily IP-throttled:
+  only **7/25 feeds returned entries** (Obli, Tettles, LBNinja7, Publik, Dalaran Gaming, MadSkillzzTV,
+  Kesslive); the other 18 gave persistent HTTP 404 across 3 staggered retry rounds (datacenter block
+  that did not clear in-run). **Transcripts UNREACHABLE** — yt-dlp bot-check ("Sign in to confirm
+  you're not a bot"), verified on one video, not hammered — **0 takes / 0 metaNotes distilled**.
+  community.json/creator-takes.json unchanged. New in-scope PENDING (transcript-blocked): MadSkillzzTV
+  12.1 healer M+ testing set — JytzZ28QBkY (best M+ healer, 07-11) · 8hzzon6tf9M (Disc/Holy/RSham, 07-10)
+  · r5tL2gAEhSw (Holy Pal, 07-10) · nSw9iA4kGBE (MW/HPal/Pres, 07-09). Prior pending (Obli Xhem4-XtOmc,
+  Shadarek tB6Gse0qckA, Kalamazi 6nr1LrYp0xc/MbRU0TaQKww, Tettles fw9buyf2n1o/0nW0wnI4OTo, Supatease
+  HuRjN73exFk, AutomaticJak TXv5nof2mZw) carries forward — those feeds were among today's 404s.

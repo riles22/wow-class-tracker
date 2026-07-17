@@ -38,3 +38,10 @@ parse counts and baselines the change detectors need live in the entries themsel
   wcl-fetch/evidence.json verdict rdps-broken (characterRankings metric:rdps → Internal
   server error on enc 3176, 0 rows landed); agent holds no WCL creds and did not fetch
   warcraftlogs.com; zones 46/47/52/54/56 left at 2026-07-09 baselines. npm test 85/85, build OK.
+
+- 2026-07-17 (nightly — Opus 4.8) · Murlok 40/40 (byte-identical), Bloodmallet 26/26 MID1+ptr:0
+  (byte-identical), SimC 1205-01 26/26 (same nightly build, 0 deltas), Mythicstats P1072 40/40
+  (6 specs ±0.1, live intra-period churn). **WCL: evidence.json verdict rdps-broken** (metric:rdps
+  → Internal server error on enc 3176); agent holds no creds, did not fetch warcraftlogs.com;
+  zones 46/47/52(rDPS)/54/56 left at 07-09. **wcl-dummy-raw LANDED**: fetch-wcl.mjs merged 103
+  raw-DPS medians (1T:2000 2T:149 3T:109 5T:1481 players) before agent start. npm test 88/88, build OK.

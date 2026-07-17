@@ -35,3 +35,11 @@ Keep the newest ~20 entries; prune older ones when appending.
   IV M+ MM Hunter/Devastation Evoker/Fire Mage B→C; Method M+ Brewmaster/Vengeance DH/Resto
   Shaman S→A; Resto Shaman Archon M+ A→S. Archon **survivability RECOVERED** (was empty
   upstream on 07-14) — 40 rows, only 3 moves vs last-good baseline. npm test 85/85, build OK.
+
+- 2026-07-17 (nightly — Opus 4.8) · all 5 tier sources re-fetched live. **Wowhead RECOVERED**
+  via r.jina.ai (was bot-blocked 07-14) → advanced 07-14→07-17, 40+40 specs. IV/Method/Archon
+  byte-identical to the same-day 03:20 baseline (0 moves). **WoWMeta M+ reshuffled** 26/40 cells
+  (live ckmeans re-cluster; e.g. BM Hunter B→S, Augmentation S→B, Prot Paladin D→A, Outlaw A→D)
+  — parse cross-checked vs the visible tier list. Consensus effect only 9 single-band M+ moves,
+  0 two-band (well under anomaly limits). Archon encounters (51 pages) + survivability (40)
+  re-fetched, 0 changes. npm test 88/88, build OK.
