@@ -1,25 +1,12 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
   "videos": [
-    { "id": "Xhem4-XtOmc", "creator": "Obli", "title": "DK meta shift S2", "published": "2026-07-14", "queuedAt": "2026-07-17" },
-    { "id": "tB6Gse0qckA", "creator": "Shadarek", "title": "Havoc DH — Bleak Outlook", "published": "2026-07-14", "queuedAt": "2026-07-17" },
-    { "id": "6nr1LrYp0xc", "creator": "Kalamazi", "title": "Affliction talent / Destro nerfs", "published": "2026-07-15", "queuedAt": "2026-07-17" },
-    { "id": "MbRU0TaQKww", "creator": "Kalamazi", "title": "Warlock 12.1 follow-up", "published": "2026-07-15", "queuedAt": "2026-07-17" },
-    { "id": "YczUs2OcaJQ", "creator": "MadSkillzzTV", "title": "Mistweaver M+", "published": "2026-07-12", "queuedAt": "2026-07-17" },
-    { "id": "faDcvghS7ao", "creator": "MadSkillzzTV", "title": "Holy Paladin", "published": "2026-07-13", "queuedAt": "2026-07-17" },
-    { "id": "QimwxPWKd_s", "creator": "MadSkillzzTV", "title": "Best M+ healer — HPal/Priest", "published": "2026-07-13", "queuedAt": "2026-07-17" },
-    { "id": "fw9buyf2n1o", "creator": "Tettles", "title": "Balance — Moonkin is back", "published": "2026-07-15", "queuedAt": "2026-07-17" },
-    { "id": "0nW0wnI4OTo", "creator": "Tettles", "title": "Gearing", "published": "2026-07-15", "queuedAt": "2026-07-17" },
-    { "id": "HuRjN73exFk", "creator": "Supatease", "title": "12.1 healer class changes", "published": "2026-07-17", "queuedAt": "2026-07-17" },
-    { "id": "TXv5nof2mZw", "creator": "AutomaticJak", "title": "HPal PTR M+", "published": "2026-07-16", "queuedAt": "2026-07-17" },
-    { "id": "JytzZ28QBkY", "creator": "MadSkillzzTV", "title": "Best M+ healer (12.1 testing)", "published": "2026-07-11", "queuedAt": "2026-07-17" },
-    { "id": "8hzzon6tf9M", "creator": "MadSkillzzTV", "title": "Disc/Holy/RSham 12.1 testing", "published": "2026-07-10", "queuedAt": "2026-07-17" },
-    { "id": "r5tL2gAEhSw", "creator": "MadSkillzzTV", "title": "Holy Paladin 12.1 testing", "published": "2026-07-10", "queuedAt": "2026-07-17" },
-    { "id": "nSw9iA4kGBE", "creator": "MadSkillzzTV", "title": "MW/HPal/Pres 12.1 testing", "published": "2026-07-09", "queuedAt": "2026-07-17" },
-    { "id": "vK-qyvXOVYM", "creator": "izen", "title": "S2 M+ Top-5 DPS (metaNotes lane)", "published": "2026-07-14", "queuedAt": "2026-07-17" },
-    { "id": "S4VNrinPFTA", "creator": "YoDaTV", "title": "12.1 M+ tierlist update (Prot Pally read)", "published": "2026-07-15", "queuedAt": "2026-07-17" },
-    { "id": "Rmkxzb1QQSQ", "creator": "AutomaticJak", "title": "MW/Pres/Holy healer tuning", "published": "2026-07-17", "queuedAt": "2026-07-17" },
-    { "id": "LHPjq9142qM", "creator": "AutomaticJak", "title": "MW Title Push then PTR M+", "published": "2026-07-17", "queuedAt": "2026-07-17" },
-    { "id": "I_nFVVmv610", "creator": "MadSkillzzTV", "title": "12.1 Best M+ healers (so far) — tier list & latest changes", "published": "2026-07-17", "queuedAt": "2026-07-17" }
+    {
+      "id": "LHPjq9142qM",
+      "creator": "AutomaticJak",
+      "title": "MW Title Push then PTR M+",
+      "published": "2026-07-17",
+      "queuedAt": "2026-07-17"
+    }
   ]
 }

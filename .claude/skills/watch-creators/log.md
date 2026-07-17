@@ -206,3 +206,25 @@ tuning/tier scope — no action. **Transcripts: `transcript-fetch/summary.json` 
 (TRANSCRIPT_API_KEY not configured) — 0 fetched, 0 takes / 0 metaNotes distilled.** izen (general)
 newest is 07-15 `B2iGuHL_iPI` (Round #5 balance tuning — matches the 07-16 PTR hotfixes, no forum
 dev-notes post → no new build to log), already seen. Pending queue now 20 (18 carried + 2 new).
+
+## 2026-07-17 (nightly, 17:0xZ) — TRANSCRIPT PIPELINE LIVE: 19 transcripts distilled (24 takes + 5 metaNotes)
+TRANSCRIPT_API_KEY now configured — `transcript-fetch/summary.json` verdict `ok`, 19/20 fetched
+(supadata native captions, ms offsets); LHPjq9142qM errored (invalid-request) → stays pending. First
+real distillation run since the transcript drought. Feeds: all 25 RSS polled live (25/25 OK); no
+genuinely-new in-scope videos vs the seen-set (recent Dalaran roundup/out-of-scope, izen B2iGuHL_iPI
+lead already seen+verified, Supatease/Shindigg/Critcake/YoDaTV/LBNinja7 streams/POVs all prior-triaged).
+Distilled (removed from pending):
+  · Obli Xhem4-XtOmc (07-14): Unholy nerf→off meta, Frost holds/dual-wield — 2 takes (DK Unholy nerf, Frost neutral).
+  · Shadarek tB6Gse0qckA (07-14): Havoc 2x nerf (Inertia 12%/6s, 5% aura), tier-set desync — Havoc nerf take (DH creator, in-depth Havoc analysis).
+  · Kalamazi 6nr1LrYp0xc + MbRU0TaQKww (07-15): Patient Zero removed/Hedonic Gorging, Seed-UA bug fixed→ST still bad, Destro 4-set rework −5%, Demo M+ front-runner — 3 takes (Aff nerf, Destro nerf, Demo buff).
+  · YoDaTV S4VNrinPFTA (07-15): Prot Pal −10-15% dmg no surv nerf still frontrunner tank; Guardian bugfix; Brew fine in physical; Blood same; VDH close 2nd — 5 takes.
+  · Tettles fw9buyf2n1o (07-15): Moonkin best raid DPS in testing, weak tier set/Apex — Balance buff take.
+  · MadSkillzzTV I_nFVVmv610 (07-17 healer tier list, culmination of 07-09→07-13 testing vids): MW S, HPal ?/high-A no-holy-shock, Totemic RSham A, Pres A, Disc A, RDruid B undertuned, HPriest ? — 7 takes.
+  · AutomaticJak Rmkxzb1QQSQ (07-17, corroborated by TXv5nof2mZw 07-16): Pres nerf, MW nerf-but-strong, HPal sleeper, Disc mixed, HPriest buff — 5 takes.
+  · izen vK-qyvXOVYM (07-14, generalCreator → metaNotes M+ lens): Arcane Mage / Frost DK / Ele Shaman positive, Balance neutral, Devourer mixed — 5 metaNotes (superseded older izen Arcane/FrostDK/Devourer M+ notes).
+Transcript-verified-skipped (removed, superseded/no in-scope take): YczUs2OcaJQ, faDcvghS7ao, r5tL2gAEhSw,
+QimwxPWKd_s, JytzZ28QBkY, 8hzzon6tf9M, nSw9iA4kGBE (older MadSkillzz healer-testing iterations → folded into
+07-17 tier list) · 0nW0wnI4OTo (Tettles gearing ramble, no spec-strength take) · HuRjN73exFk (Supatease healer
+class-change roundup, PvP-lensed — no in-depth in-scope spec take; Resto Shaman covered by MadSkillzz) ·
+TXv5nof2mZw (AutomaticJak HPal deep-dive, corroborates Rmkxzb1QQSQ). Superseded 31 older takes for same
+(creator,spec). Pending queue 20→1 (LHPjq9142qM only). 24 takes + 5 metaNotes added; `latest` refreshed.
