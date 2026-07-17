@@ -295,7 +295,11 @@ ptr-watch + watch-creators + a full tier/metric refresh **every run**
 a final deterministic completion gate (manifest rewritten + tests + build +
 check-refresh + WCL-credential health) fails the job with the real reason if the
 night is incomplete, and `data/` + skill logs go to the **publish** job as
-an artifact. (`dispatch-nightly.yml` auto-kicks a nightly run whenever a
+an artifact. Agent transcripts upload as the `agent-transcripts` artifact every run
+and their tails are dumped into the job log on failure — READ THEM before theorizing
+about a failed night (they found the 07-15→17 root cause — agents backgrounding slow
+polls and ending their turn to "wait" — in one run; subagent tools are disabled and
+both prompts carry the single-shot rule for exactly that reason). (`dispatch-nightly.yml` auto-kicks a nightly run whenever a
 workflow-file change lands on master, via `gh workflow run` as github-actions[bot] —
 `allowed_bots` on the agent steps permits that actor.) Publish (deterministic, no AI, holds the write token) gates on `npm test` →
 `npm run build` → `node src/check-refresh.mjs --manifest` (which cross-checks WCL rows
