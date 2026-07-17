@@ -22,7 +22,7 @@ locally, and distill them into cited per-spec takes in `data/creator-takes.json`
    against `log.md`'s seen-set. **Title-filter before fetching** — creators post
    off-topic content; require class/spec/Midnight/12.1/Season keywords.
 2. **Transcript** (videos ≥2–6h old — auto-captions lag upload):
-   `yt-dlp --no-update --skip-download --write-auto-subs --sub-langs en --sub-format json3 --sleep-requests 1.5 -o "<scratchpad>/%(id)s.%(ext)s" <url>`
+   `yt-dlp --no-update --extractor-args "youtube:player_client=android" --skip-download --write-auto-subs --sub-langs en --sub-format json3 --sleep-requests 1.5 -o "<scratchpad>/%(id)s.%(ext)s" <url>`
    Flatten json3 events to text, PRESERVING per-event `tStartMs`.
 3. **Distill**: one summarization pass per video with a WoW-vocab-primed prompt:
    map mentions to exact roster spec names; emit discrete claims, each with creator,
@@ -75,8 +75,17 @@ locally, and distill them into cited per-spec takes in `data/creator-takes.json`
 - Auto-captions are ASR: WoW vocab gets mangled ("dragonfly talents" = Dragonflight,
   "It's Jack" = Jak). Never quote captions verbatim without the timestamp link;
   paraphrase in the claim text.
-- Update yt-dlp weekly in the same run (`python -m pip install -U yt-dlp`) — extractor
-  rot is the #1 failure mode; the current install warns it's >90 days old.
+- NEVER install or upgrade yt-dlp in-run — the version is pinned in requirements.txt
+  (Dependabot proposes weekly bumps; the nightly preinstalls the pin). Extractor rot
+  shows up as sudden parse failures across ALL videos: record it in the run log and
+  leave the bump to Dependabot review.
+- **Bot-check experiment (owner-approved 2026-07-17):** `--extractor-args
+  "youtube:player_client=android"` is in the transcript command to dodge the
+  datacenter-IP "Sign in to confirm you're not a bot" wall that blocks runners
+  (residential IPs unaffected). Judge it on a few nights' log entries: if transcripts
+  now land from the runner, keep it; if YouTube closes the client hole (failures
+  return), queue videos pending as before and note it — the fallback decision
+  (managed transcript API / residential proxy / self-hosted runner) is the owner's.
 - TOS: low-volume personal-use transcript fetching only. Store summaries + short
   excerpts with links, never redistribute full transcripts. RSS is explicitly public.
 - Framing: label takes "Creator take — <name>, <date>"; require 2+ independent
