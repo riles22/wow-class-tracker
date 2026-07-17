@@ -105,6 +105,7 @@ jobs:
             --permission-mode bypassPermissions
             --max-turns 250
             --model claude-opus-4-8
+            --disallowedTools "Agent,Task"
           prompt: |
             Maintain the WoW Midnight tracker in this checked-out repository. You are the
             unprivileged fetch-and-distill stage: never commit, push, tag, dispatch a workflow,
@@ -172,15 +173,23 @@ jobs:
             parse_error with a useful reason. Do not stop after PTR/creator work; tiers,
             metrics, tests, build, and the fresh manifest are mandatory.
 
-            COMPLETION CONTRACT — the single most common way this run fails (six consecutive
-            nights, 2026-07-15 → 07-17, were thrown away because agents ended early): the run
-            is NOT COMPLETE until data/run-manifest.json is REWRITTEN with this run's outcomes
-            and `node src/check-refresh.mjs --manifest` passes. Before ending, run
-            `git diff --stat -- data/run-manifest.json` and confirm it shows a change. If you
-            must stop early for ANY reason — degraded sources, nothing new anywhere, errors
-            you cannot fix — write the manifest FIRST, with honest rows for exactly what you
-            attempted and what you did not get to, then stop. Ending without a rewritten
-            manifest wastes the entire night no matter how much else you did.
+            SINGLE-SHOT SESSION — the proven cause of every lost night since 07-15: this is
+            a one-shot headless run. The moment you end your turn, the workflow moves on and
+            you are NEVER woken again. Do NOT run anything in the background to "wait" for —
+            no background agents or tasks, no completion notifications, no deferred polling
+            (the 07-17 recovery agent finished every source, then ended its turn "waiting for
+            the async creators poll to complete", and the whole night was discarded with the
+            manifest unwritten). Subagent tools are disabled in this run; do ALL work inline
+            in the foreground, slow feed polls included.
+
+            COMPLETION CONTRACT: the run is NOT COMPLETE until data/run-manifest.json is
+            REWRITTEN with this run's outcomes and `node src/check-refresh.mjs --manifest`
+            passes. Before ending, run `git diff --stat -- data/run-manifest.json` and
+            confirm it shows a change. If you must stop early for ANY reason — degraded
+            sources, nothing new anywhere, errors you cannot fix — write the manifest FIRST,
+            with honest rows for exactly what you attempted and what you did not get to,
+            then stop. Ending without a rewritten manifest wastes the entire night no matter
+            how much else you did.
 
       # The action writes its execution log to $RUNNER_TEMP/claude-execution-output.json
       # and the recovery pass OVERWRITES it — preserve the primary's copy first. These
@@ -215,6 +224,7 @@ jobs:
             --permission-mode bypassPermissions
             --max-turns 180
             --model claude-opus-4-8
+            --disallowedTools "Agent,Task"
           prompt: |
             The primary nightly agent exited without satisfying the deterministic refresh
             contract. Resume from the CURRENT working tree; preserve valid completed work and
@@ -239,9 +249,15 @@ jobs:
             stored data. NEVER write an "anomalyAck" field (the gate rejects it); a real mass
             retune goes in "anomalyAckProposal" with a citation, for human review. Run npm test
             and npm run build, repair or narrowly revert invalid source edits, and do not finish
-            until both commands and `node src/check-refresh.mjs --manifest` pass. Ending without
-            a rewritten, passing manifest throws the whole night away — six consecutive nights
-            were lost exactly that way.
+            until both commands and `node src/check-refresh.mjs --manifest` pass.
+
+            SINGLE-SHOT SESSION — the proven cause of every lost night: the moment you end
+            your turn, this session is over and you are NEVER woken again. Do NOT run
+            anything in the background to "wait" for (background agents/tasks, completion
+            notifications, deferred polls) — that is exactly how the previous runs died,
+            finishing every source and then yielding while a creators poll ran in the
+            background. Subagent tools are disabled; do ALL work inline in the foreground,
+            and never end your turn until the manifest is rewritten and the gate passes.
 
       - name: Final deterministic completion gate
         if: always() && !cancelled()
