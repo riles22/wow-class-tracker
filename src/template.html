@@ -1815,7 +1815,8 @@ function openSpecFromFinder(cls, spec){
     ["Adoption","Adoption & ceiling · Archon / Murlok / Mythicstats"],["PTR","PTR · directional (12.1)"]];
   const SRCTAG = {warcraftlogs:"WCL",archon:"Archon",murlok:"Murlok",mythicstats:"Mythicstats",bloodmallet:"sim",simulationcraft:"SimC"};
   const cleanName = n => n.replace(/, all bosses/g,"").replace(/, all dungeons/g,"")
-    .replace(/ \(95th pct\)/g," 95th").replace(/ \(normalized\)/g,"").replace(/, tank\)/g,")").replace(/, healer\)/g,")");
+    .replace(/ \(95th pct\)/g," 95th").replace(/ \(normalized\)/g,"").replace(/, tank\)/g,")").replace(/, healer\)/g,")")
+    .replace(/12\.1 PTR Dummy Dome, /g,"Dummy "); // family header already says PTR — chips read "…(Dummy 1T)"
   const chipLabel = e => `${cleanName(e.name)} · ${SRCTAG[e.source]||e.source}`;
   const fmt = v => (Number.isInteger(v)?v:Math.round(v)).toLocaleString("en-US");
 

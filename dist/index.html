@@ -11,7 +11,7 @@
 -->
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-Q8SStTfrifk0euo4Nnj0NnHBKWIDeqdm0+fhqj0F2uQ='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-BaLEPdr2rgpfb5hPYpbHwQgmKL8gB8JpZvOZMrKYTZU='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="riles22">
 <title>Curse of Ula'tek — 12.1 PTR Spec Tracker</title>
@@ -1816,7 +1816,8 @@ function openSpecFromFinder(cls, spec){
     ["Adoption","Adoption & ceiling · Archon / Murlok / Mythicstats"],["PTR","PTR · directional (12.1)"]];
   const SRCTAG = {warcraftlogs:"WCL",archon:"Archon",murlok:"Murlok",mythicstats:"Mythicstats",bloodmallet:"sim",simulationcraft:"SimC"};
   const cleanName = n => n.replace(/, all bosses/g,"").replace(/, all dungeons/g,"")
-    .replace(/ \(95th pct\)/g," 95th").replace(/ \(normalized\)/g,"").replace(/, tank\)/g,")").replace(/, healer\)/g,")");
+    .replace(/ \(95th pct\)/g," 95th").replace(/ \(normalized\)/g,"").replace(/, tank\)/g,")").replace(/, healer\)/g,")")
+    .replace(/12\.1 PTR Dummy Dome, /g,"Dummy "); // family header already says PTR — chips read "…(Dummy 1T)"
   const chipLabel = e => `${cleanName(e.name)} · ${SRCTAG[e.source]||e.source}`;
   const fmt = v => (Number.isInteger(v)?v:Math.round(v)).toLocaleString("en-US");
 
