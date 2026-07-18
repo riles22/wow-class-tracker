@@ -92,3 +92,14 @@ tierList EMPTY (tiers:[]) on all 3 raid pages again (throughput full 27/7/6) —
 40 stored rows unchanged. WCL: agent holds no creds; evidence.json verdict rdps-broken → 5 rDPS cuts
 unreachable (2026-07-09 baseline), 3 raw cuts merged by the deterministic step (103/27/27). apply-metrics
 266 metrics + 26 profiles → no-op; only the deterministic WCL raw rows differ in the working tree.
+
+## 2026-07-18 (nightly) — all live-number sources refreshed; Archon numbers drifted, WCL still rdps-broken
+Archon numbers (specRankingsSection, 160 cells) re-parsed live — 149 small drifts (95th-pct DPS/HPS,
+M+ score, Popularity) from the rolling window; ingested, asOf 07-18. Murlok 40/40 plain GET, 0 value
+changes (parser now anchors on href to catch reversed href/class attribute order). Bloodmallet 26/26
+DPS profiles (MID1+ptr:0), 0 target changes. SimC nightly MID1_Raid .txt (1205-01, WoW 12.0.7.68453
+Live, hotfix 07-18) 26/26 best-variant, small nightly deltas (hyphen hero-variant + anomalous 0% block
+handled via max). Mythicstats period 1072 unchanged (Fortified/Tyrannical) — same distribution, 40 rows
+re-stamped current. WCL: agent holds no creds; evidence.json verdict rdps-broken → 5 rDPS/normalized cuts
+unreachable (2026-07-09 baseline), 3 raw cuts merged by the deterministic step (dummy-raw 103, ptr-raid-raw
+27, ptr-mplus-raw 27), asOf 07-18.

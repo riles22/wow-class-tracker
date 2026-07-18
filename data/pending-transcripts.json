@@ -2,11 +2,18 @@
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
   "videos": [
     {
-      "id": "LHPjq9142qM",
-      "creator": "AutomaticJak",
-      "title": "MW Title Push then PTR M+",
+      "id": "Gz17CIGREfU",
+      "creator": "LBNinja7",
+      "title": "My Honest Opinion of Healers in Season 2...",
       "published": "2026-07-17",
-      "queuedAt": "2026-07-17"
+      "queuedAt": "2026-07-18"
+    },
+    {
+      "id": "WQI9eNr4qpo",
+      "creator": "izen (Izenhart)",
+      "title": "Season 2 PTR More Buffs & Nerfs | Healers Tuning & Raid Testing",
+      "published": "2026-07-17",
+      "queuedAt": "2026-07-18"
     }
   ]
 }

@@ -228,3 +228,17 @@ QimwxPWKd_s, JytzZ28QBkY, 8hzzon6tf9M, nSw9iA4kGBE (older MadSkillzz healer-test
 class-change roundup, PvP-lensed — no in-depth in-scope spec take; Resto Shaman covered by MadSkillzz) ·
 TXv5nof2mZw (AutomaticJak HPal deep-dive, corroborates Rmkxzb1QQSQ). Superseded 31 older takes for same
 (creator,spec). Pending queue 20→1 (LHPjq9142qM only). 24 takes + 5 metaNotes added; `latest` refreshed.
+
+## 2026-07-18 (nightly) — 1 take distilled (LHPjq9142qM); 2 new in-scope videos queued
+All 25 unique creator RSS feeds polled live (25/25 OK). Transcript LHPjq9142qM (AutomaticJak "MW Title
+Push then PTR M+", now retitled Ragnarok sponsored) fetched by the deterministic step this run →
+distilled 1 take: **Holy Priest** S2 M+ meta caveat (no poison dispel across ~6 S2 dungeons makes Priest
+a tough meta ask; rates Holy Paladin + Mistweaver the best two healers for the season's M+ heal checks).
+His MW/HPal keys reads duplicate same-day takes 148/149 (Rmkxzb1QQSQ) → transcript-verified-skipped.
+Removed LHPjq9142qM from pending. **2 genuinely-new in-scope videos published after last run's ~17:0xZ
+poll → QUEUED PENDING** (no transcript this run): LBNinja7 `Gz17CIGREfU` "My Honest Opinion of Healers
+in Season 2..." (cross-healer creator) and izen `WQI9eNr4qpo` "Season 2 PTR More Buffs & Nerfs | Healers
+Tuning & Raid Testing" (generalCreator → metaNotes lane + build-lead check: no new forum build). izen
+`latest` refreshed to WQI9eNr4qpo. Out-of-scope/triaged (not queued): Supatease Class-Tuning-S1 roundup
++ PVP vids (prior precedent), Kalamazi Tidebound Grotto (zone-57, untracked), Dalaran PvP duels. Pending
+queue 1 → 2.

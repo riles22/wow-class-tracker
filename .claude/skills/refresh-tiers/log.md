@@ -86,3 +86,14 @@ __NEXT_DATA__ throughput/score tierLists): 80 rows, 0 moves; lastUpdated raid 07
 WoWMeta (r.jina.ai; Rankings table tier col, X skipped): 40 M+ rows, 0 moves; raid still 0-records.
 apply-ratings 353 rows → confirmed no-op (specs.json unchanged by ratings). Encounter tiers refreshed
 alongside (see refresh-metrics log). Snapshots already 2026-07-17.
+
+## 2026-07-18 (nightly) — Archon repopulated survivability + 2 real M+ moves; other lists 0-change
+All 5 tier-list sources fetched live. Icy Veins (curl, 6 pages) 80 rows 0 moves; Method (2 pages) raid
+39 / M+ 40 0 moves (Vengeance DH still omitted); Wowhead (r.jina.ai, 6 pages) 80 rows 0 moves (parser
+now handles S-tier + missing-open-paren idiom e.g. 'Subtlety Rogue B Tier)'); Archon (__NEXT_DATA__
+throughput/score, lastUpdated 07-17T12Z) **2 M+ tier moves: Restoration Shaman S->A, Discipline Priest
+A->B** (both 1-band → 2 consensus moves, under anomaly limits). WoWMeta (r.jina.ai, 3 M+ pages) 40 rows
+0 moves, raid still 0-records. **Archon survivability tierList REPOPULATED** (was empty last run): 40/40,
+8 real 1-band shifts (Marksmanship A->S, Devastation/Retribution/Feral/RestoSham/RestoDruid/Preservation/
+Discipline up a band). Archon encounters: 51 pages, 680 cells, 46 changed across 11 encounters. All page
+snapshots + encounter-tiers.json asOf advanced 07-17 → 07-18. Era-verified everywhere (Midnight S1 12.0.7).

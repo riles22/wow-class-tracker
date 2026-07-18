@@ -164,3 +164,11 @@ fabricated (honesty rule). WCL PTR zones 54/52/56 are evidence-only this run: `w
 verdict `rdps-broken` (characterRankings metric:rdps → Internal server error), so the 5 rDPS/normalized
 cuts stay at their 2026-07-09 baseline; the 3 raw-DPS cuts (dummy-raw 103, ptr-raid-raw 27,
 ptr-mplus-raw 27) were merged by the deterministic fetch step before the agent ran.
+
+## 2026-07-18 (nightly) — no new build; forum tops at #15, 07-17 RSS items out of class-build scope
+Forum thread (Discourse .json) tops at post #15 (Linxy Rogue Outlaw addendum, 07-14) under already-logged
+build #14 — no new development-notes build. Wowhead RSS newest 12.1 items (07-17) are PvP Class Tuning,
+a Delve boss preview, and 'More Season 2 Mythic+ Tuning' (dungeon/boss, not class) — none a new class
+build nor a per-spec review with a clear verdict; ptr-builds.json unchanged, no writeups fabricated.
+WCL zones 54/52/56 are evidence-only (rdps-broken) — see refresh-metrics log; the 3 raw cuts landed via
+the deterministic step. No zone-54/52/56 rDPS state change (frozen at 2026-07-09).
