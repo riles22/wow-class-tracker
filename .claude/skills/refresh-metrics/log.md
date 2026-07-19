@@ -103,3 +103,18 @@ handled via max). Mythicstats period 1072 unchanged (Fortified/Tyrannical) — s
 re-stamped current. WCL: agent holds no creds; evidence.json verdict rdps-broken → 5 rDPS/normalized cuts
 unreachable (2026-07-09 baseline), 3 raw cuts merged by the deterministic step (dummy-raw 103, ptr-raid-raw
 27, ptr-mplus-raw 27), asOf 07-18.
+
+## 2026-07-19 (nightly) — Murlok/SimC/Mythicstats/Bloodmallet refreshed; WCL evidence-only (rdps-broken)
+Murlok 40/40 (27 DPS+7 heal+6 tank) plain GET, parsed by spec-name h3 (handles reversed href/class order),
+range 3738–4288, 0 value changes vs stored (Murlok ~8h refresh). SimC MID1_Raid.html (37MB): era-verified
+WoW 12.0.7.68453 Live hotfix 2026-07-18, SimC 1205-01 (the visible "12.3.0" is Highcharts JS, not WoW) —
+26/26 DPS best-variant per spec, all 26 shifted (nightly sim variance). Mythicstats Period 1072 (ongoing
+reset): representation section 39 specs (Resto Druid absent = negligible top-2000 presence, kept at stored
+0.1), 38/39 values moved vs stored (an ongoing period's distribution evolves daily — prior run's "no change"
+was a same-day coincidence). Bloodmallet 26 non-Aug DPS talent_target_scaling, MID1 + ptr(=string "0")
+confirmed, 0 target changes vs stored. **WCL**: agent holds no creds; wcl-fetch/evidence.json verdict
+`rdps-broken` (characterRankings metric:rdps → Internal server error on enc 3176) → the 5 rDPS/normalized
+cuts (live raid/mplus, PTR raid/mplus, dummy-dome) unreachable, data unchanged at 2026-07-09 baseline. The
+3 raw cuts were merged by the deterministic src/fetch-wcl.mjs BEFORE the agent: wcl-dummy-raw 103 rows
+(players 1T:2000/2T:172/3T:115/5T:1642), wcl-ptr-raid-raw 27 (6 of 8 bosses populated; Coiled Altar & Ula'tek
+0 = untested), wcl-ptr-mplus-raw 27 (all 8 dungeons). asOf 07-18→07-19 on the merged/refreshed families.

@@ -97,3 +97,15 @@ A->B** (both 1-band → 2 consensus moves, under anomaly limits). WoWMeta (r.jin
 8 real 1-band shifts (Marksmanship A->S, Devastation/Retribution/Feral/RestoSham/RestoDruid/Preservation/
 Discipline up a band). Archon encounters: 51 pages, 680 cells, 46 changed across 11 encounters. All page
 snapshots + encounter-tiers.json asOf advanced 07-17 → 07-18. Era-verified everywhere (Midnight S1 12.0.7).
+
+## 2026-07-19 (nightly) — all 5 tier-list sources refreshed live; 1 M+ tier move + 4 survivability shifts
+Icy Veins (6 pages, curl), Method (2), Wowhead (6, r.jina.ai), Archon (6, __NEXT_DATA__ throughput/score),
+WoWMeta (3 M+, r.jina.ai) all fetched live and era-verified (Midnight Season 1 / 12.0.7; Devourer present).
+80 rows each for IV/Wowhead/Archon; Method 79 (Vengeance DH still omitted upstream — absence, not error);
+WoWMeta 40 M+ (raid pages still "0 records" upstream → left unranked/null). **Tier moves vs stored:**
+IV 0, Method 0, Wowhead 0, WoWMeta 0; **Archon 1 M+ move — Discipline Priest B→A** (reverting yesterday's
+A→B churn). Archon upstream lastUpdated 2026-07-18T12Z (daily noon refresh, today's not yet posted). 0 unmatched
+across all sources. **Survivability** (Archon throughput pages, all 40 specs): 4 one-band shifts — RestoSham A→B,
+RestoDruid/Preservation/Discipline B→C (healers softening). **Encounters** (51 pages: 9 bosses throughput +
+8 dungeons score × 3 roles): 680 cells, 0 unmatched, 36 changed across 13 encounters (normal daily churn).
+snapshots 07-18→07-19.

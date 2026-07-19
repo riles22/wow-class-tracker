@@ -172,3 +172,15 @@ a Delve boss preview, and 'More Season 2 Mythic+ Tuning' (dungeon/boss, not clas
 build nor a per-spec review with a clear verdict; ptr-builds.json unchanged, no writeups fabricated.
 WCL zones 54/52/56 are evidence-only (rdps-broken) — see refresh-metrics log; the 3 raw cuts landed via
 the deterministic step. No zone-54/52/56 rDPS state change (frozen at 2026-07-09).
+
+## 2026-07-19 (nightly) — no new forum build; WCL PTR cuts evidence-only (rdps-broken)
+Forum thread (Discourse .json) checked live: highest_post_number 15, newest post #15 (Linxy, Rogue Outlaw
+addendum, 2026-07-14T22:46Z) already logged under build #14 — NO new forum development-notes build.
+Wowhead news RSS checked live: newest 12.1 items (07-16→07-18) are PvP Class Tuning (07-17), More Season 2
+M+ tuning (07-17, dungeon/boss), a Season 2 Delve boss preview (07-18), housing decor (07-18), and a "Class
+Tuning Hotfixes on PTR for July 16th" HOTFIX — none a new class development-notes build post, and no new
+per-spec review with a clear verdict. izen's 07-17 recap corroborated the 07-16 healer hotfix tuning
+(verified against the forum: no new dev-notes post → not logged as a build). ptr-builds.json unchanged; no
+writeups fabricated. zone-54 (PTR raid) / 52 (Dummy Dome) / 56 (PTR M+) are evidence-only this run: WCL
+evidence.json verdict rdps-broken → the normalized/rDPS zone cuts unreachable (data at 2026-07-09 baseline);
+the 3 raw-DPS pooled cuts were merged by the deterministic fetch step (see refresh-metrics log). No season flip.

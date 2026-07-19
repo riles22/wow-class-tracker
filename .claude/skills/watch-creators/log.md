@@ -242,3 +242,29 @@ Tuning & Raid Testing" (generalCreator → metaNotes lane + build-lead check: no
 `latest` refreshed to WQI9eNr4qpo. Out-of-scope/triaged (not queued): Supatease Class-Tuning-S1 roundup
 + PVP vids (prior precedent), Kalamazi Tidebound Grotto (zone-57, untracked), Dalaran PvP duels. Pending
 queue 1 → 2.
+
+## 2026-07-19 (nightly) — 12 items distilled from 2 pre-fetched transcripts; 25/25 feeds polled; queue 2→0
+All 25 unique creator RSS feeds polled live (25/25 OK). Both queued videos were pre-fetched by the
+deterministic transcript step (summary.json verdict `ok`, 2/2 fetched) and distilled:
+  · **LBNinja7 `Gz17CIGREfU`** (07-17, "My Honest Opinion of Healers in Season 2") — cross-healer creator,
+    6 takes within his scoped specs: **Resto Shaman** buff (drought→downpour, tier-set Healing Rain/Downpour),
+    **Mistweaver** mixed (Spinning Crane nerf → more dynamic Rising Sunkick rotation, "looking very good";
+    Jade Empowerment/Master of Harmony left dead), **Resto Druid** nerf (powerful tier set nerfed → kit
+    lacking), **Holy Paladin** buff (damage buffs more rewarding), **Holy Priest** neutral (solid/fun but no
+    standout, wants a real DR + M+ reason), **Disc Priest** mixed (proc-fishy, but Void Shield nerf a good
+    disperse). Superseded 18 prior LBNinja7 takes on those 6 specs (Preservation's 3 left intact — no clear
+    read this video).
+  · **izen `WQI9eNr4qpo`** (07-17, "Season 2 PTR More Buffs & Nerfs | Healers Tuning & Raid Testing") →
+    generalCreator metaNotes, 6 healer raid-testing-outlook reads: **Resto Druid** negative (Abundance
+    buffed back but still one of the weaker/less-popular), **Preservation** mixed (was best/most-popular,
+    hefty Dream Breath/blessing nerfs toward the pack; Echo/TA flexibility), **Mistweaver** mixed (−8% all
+    healing + odd +50% mastery), **Holy Paladin** positive (most-buffed of the cycle; no-Holy-Shock build
+    still wins), **Disc** mixed (Penance up, Atonement/Void Shield raid nerf ~net nerf, ~neutral M+),
+    **Holy Priest** positive (+20% total over 3 rounds, testing okay now). Superseded 5 prior izen raid-lens
+    notes on those specs. Also confirmed no new forum build lead (the tuning izen recaps = the 07-16 PTR
+    hotfix, not a new dev-notes post). izen `latest` refreshed to `5wntDvx3wmo` (07-18 delve-boss preview).
+**0 new in-scope videos queued** — all genuinely-new videos this poll were out of scope: DalaranGaming/
+Supatease PvP 1v1 duels + PvP/hangout streams, Critcake/Kalamazi/Shadarek/Shindigg gameplay streams (prior-
+triaged), izen `5wntDvx3wmo` delve-boss mechanics (no per-spec meta read), DalaranGaming "Blizzard fixing
+issues" general news, Supatease "Class Tuning Update S1" roundup (prior precedent: no in-depth in-scope take).
+Pending queue 2→0. 6 takes + 6 metaNotes added.

@@ -887,7 +887,7 @@
       "sentiment": "neutral",
       "claim": "He frames 12.1 as trading Mistweaver's Season 1 identity (Spinning Crane Kick spam, which made it the meta healer) for a single-target Rising Sun Kick game plan, and considers it a fair, more enjoyable trade — losing the Renewing Mist tier bonus roughly cancels the RSK gains — expecting Mistweaver to stay viable and near the top of the healer charts, with more players actually enjoying it.",
       "url": "https://youtu.be/MIr8QJ39tXA?t=648",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Monk",
@@ -898,7 +898,7 @@
       "sentiment": "buff",
       "claim": "After playing the new tier set in Altar of Fangs he's sold on it: it grants frequent Rising Sun Kick resets (five-plus RSKs back-to-back during a Thunder Focus Tea window), and its Ancient Teachings healing carried many pulls even while he still spun — most importantly RSK finally gives Mistweaver real priority-target and boss damage/healing, long its biggest weakness.",
       "url": "https://youtu.be/MIr8QJ39tXA?t=1266",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Monk",
@@ -909,7 +909,7 @@
       "sentiment": "neutral",
       "claim": "New talent Vital Expenditure makes Soothing Mist slam as a HoT (he suspects it's skipped in raid for mana reasons, favoring the other node), and he's intrigued by a Rushing Wind Kick Mythic+ build — but flags that the tier set currently cannot proc off Rushing Wind Kick (~200 attempts, zero procs, apparently bugged), so that build is on hold pending a fix.",
       "url": "https://youtu.be/MIr8QJ39tXA?t=1153",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Rogue",
@@ -986,7 +986,7 @@
       "patchContext": "12.1 PTR (2026-06-30 build)",
       "claim": "Voidweaver Disc — gutted and 'laid to rest' last season for its early-Season-1 raid crimes — is being brought back in a big way for Season 2. The headline change is Void Infusion buffed from 50% to 75%, so the build now wants to extend Entropic Rift as long as possible to keep that shadow-damage buff up near-permanently. He's more excited for Voidweaver than any other healer bar the Resto Shaman tier set, and in-key it out-healed the tank and posted strong atonement-driven damage — though he stresses healer damage across the board is a joke now that Spinning Crane Kick is nerfed.",
       "url": "https://youtu.be/cbhkb7xcGSc?t=14",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Priest",
@@ -997,7 +997,7 @@
       "patchContext": "12.1 PTR (2026-06-30 build)",
       "claim": "The new Disc tier set creates a very strong Voidweaver loop: Penance shaves time off the Mind Blast cooldown, so you almost always have an Entropic Rift available on demand — press Mind Blast a couple seconds before incoming party damage so the rift is grown/blown at the moment you need it, then Penance again to reset it for near-permanent rift uptime. He flags this as something to watch especially if Voidweaver starts being played in raid again, since a near-always-up healing ramp is exactly the kind of raid-oppressive pattern that gets Disc nerfed.",
       "url": "https://youtu.be/cbhkb7xcGSc?t=223",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Priest",
@@ -1008,7 +1008,7 @@
       "patchContext": "12.1 PTR (2026-06-30 build)",
       "claim": "Shadow Mend has been reworked from a fished-for proc (which last season could hit like a Lay on Hands) into a constant baseline effect that is individually weaker. He likes having one less proc to wait on, but worries it no longer provides the big single-target emergency punch and reads as better in raid than in M+. Separately he notes the Oracle hero tree is changing so Penance no longer applies Atonement, costing an extra global at certain times — a real but modest downside — and argues Disc needs a defining gimmick (like the perma-uptime rift ramp) rather than raw numbers, because whenever it's numerically strong it breaks raid and then gets nerfed into the ground for M+.",
       "url": "https://youtu.be/cbhkb7xcGSc?t=366",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Paladin",
@@ -1019,7 +1019,7 @@
       "patchContext": "12.1 PTR (2026-06-30 build)",
       "claim": "The headline 20% blanket damage buff sounds big but he calls it 'almost nothing' in practice — Holy Paladin's damage baseline is so low (roughly 7k DPS even while burning every offensive global, wings and Divine Toll) that 20% of it barely moves the needle. The meaningful damage gain is actually the buffs to the single-target spenders Word of Glory and Eternal Flame, which through Liberation make a single-target-spender build viable again: he drops the three Light of Dawn talent points, presses Judgment on cooldown for Righteous Judgment, and leans on Shield of the Righteous → Shining Righteousness → Divine Purpose for free enhanced spenders. He still wants more, e.g. Righteous Judgment buffed toward Healing Rain's damage.",
       "url": "https://youtu.be/AZ-0nE4qtZ0?t=836",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Paladin",
@@ -1030,7 +1030,7 @@
       "patchContext": "12.1 PTR (2026-06-30 build)",
       "claim": "He didn't think Holy Paladin needed the healing buffs — it has been a very good healer two seasons running, just slept-on and overshadowed by Mistweaver — and with Mistweaver's Spinning Crane Kick nerfed he thinks the door is open for Holy Paladin to 'take the throne if it wants it.' He praises its high skill ceiling and high floor (harder to pilot than press-SCK Mistweaver), notes comfortable mana even without Beacon of Virtue on this single-target-spender build, and expects a competitive healer season overall — while cautioning the damage still needs another pass and that he doubts Blizzard is done tweaking the spec.",
       "url": "https://youtu.be/AZ-0nE4qtZ0?t=495",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Shaman",
@@ -1041,7 +1041,7 @@
       "patchContext": "12.1 PTR",
       "claim": "The Restoration tier set is the 12.1 change he's most excited about across all healers. The 2-piece gives Healing Wave and Chain Heal a chance to spawn a free Healing Rain on the target, so because Resto spams those buttons you get a near-constant stream of extra Healing Rains — it topped his healing sources in a key even while he mostly spammed Healing Wave. He flags a working PTR interaction where Acid Rain damage and Downpour both apply to those free tier-set Healing Rains — an emergent 'step-two' buff that quietly strengthens Downpour and Acid Rain builds even though the patch notes don't list them as changed.",
       "url": "https://youtu.be/WbrPIWgO5Bs?t=613",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Shaman",
@@ -1052,7 +1052,7 @@
       "patchContext": "12.1 PTR",
       "claim": "He's lukewarm on the 4-piece: it rolls a shield onto one person standing in your Healing Rain at a time, which he finds boring and 'non-exciting', and — more importantly — he doubts it scales into raid, since one-in-five people getting a shield in a 5-man is far more valuable than one-in-twenty in a raid. He worries a set this strong in M+ won't translate to the raid healing Resto actually needs.",
       "url": "https://youtu.be/WbrPIWgO5Bs?t=196",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Shaman",
@@ -1063,7 +1063,7 @@
       "patchContext": "12.1 PTR",
       "claim": "Despite getting one of the shortest change lists of any healer, Resto is a net gainer in 12.1 (unlike Mistweaver, which he sees losing ground to the Spinning Crane Kick nerf). The Farseer hero tree is buffed fairly significantly — ancestor damage up, Chain Lightning hitting more targets, and Lava Burst scaling harder with crit — on top of a quality-of-life change letting Farseer reposition its Healing Rain. He's impressed with the Farseer tree and keen to play it.",
       "url": "https://youtu.be/WbrPIWgO5Bs?t=412",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Shaman",
@@ -1074,7 +1074,7 @@
       "patchContext": "12.1 PTR",
       "claim": "Bottom line: a genuinely fun, high-variance tier set ('you gamble, but if you win, you win big') and he's a fan of the spec — but he still thinks Resto needs more raid-healing love and doesn't expect much from it in raid testing, since the standout 2-piece is weighted toward 5-man healing and doesn't scale up; he'd even settle for a flat Healing Rain healing buff. He also notes Resto does noticeably less spec damage than Mistweaver, especially off Farseer in single target.",
       "url": "https://youtu.be/WbrPIWgO5Bs?t=969",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Evoker",
@@ -1305,7 +1305,7 @@
       "patchContext": "12.1 PTR — build 68569 healer tuning (dev notes reaction)",
       "claim": "Reads the Genesis nerf (healing-over-time amp 25% → 15%) as an expected, healthy redistribution — the proc was so strong it 'kneecapped' how strong the rest of the kit could be — with the compensating mastery buff enabling better tank/spot healing in dungeons and better raid healing; also likes the 4-set redesign (Nature's Swiftness/Tranquility/Ironbark now 100% chance to grant a longer Genesis): less oomph per proc, more uptime. Overall 'great tweaks in the right direction' to keep Resto Druid stable into Season 2.",
       "url": "https://youtu.be/kP8A2ISdUiw?t=20",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Evoker",
@@ -1327,7 +1327,7 @@
       "patchContext": "12.1 PTR — build 68569 healer tuning (dev notes reaction)",
       "claim": "Reads the Spinning Crane Kick buff as a deliberate partial walk-back of the overcorrected pre-PTR nerf, not a re-break: Mistweaver is already 'performing the best in a key on the PTR', and this just makes SCK feel justified again on big AoE packs while keeping the healthier press-all-your-buttons play. People scared of 'why buff Mistweaver?' are misreading a self-correction.",
       "url": "https://youtu.be/kP8A2ISdUiw?t=316",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Paladin",
@@ -1338,7 +1338,7 @@
       "patchContext": "12.1 PTR — build 68569 healer tuning (dev notes reaction)",
       "claim": "The change list he's most excited about in the whole healer wave: +8% all healing, the 2-set Infusion of Light effectiveness 75% → 100%, Word of Glory/Eternal Flame +5%, and Holy Shock +10% (which cascades into Divine Toll and every Holy-Shock-scaling talent). Calls Overflowing Light (30% → 50% of Holy Shock overhealing to shield) a 'double whammy' with the Holy Shock buff and the change that excites him most — he sees a potential shielding build and Avenging Crusader/Lightsmith becoming at least conversational, though nothing here 'busts or breaks' Holy Paladin.",
       "url": "https://youtu.be/kP8A2ISdUiw?t=436",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Priest",
@@ -1349,7 +1349,7 @@
       "patchContext": "12.1 PTR — build 68569 healer tuning (dev notes reaction)",
       "claim": "Reads the Void Shield −30% absorption vs Ultimate Penitence +30% / Greater Smite 4s / blanket +10% healing-absorption package as a real trade-off — stronger cooldown moments, weaker steady-state, with Oracle likely feeling the Void Shield nerf hardest in M+. His critique: Blizzard keeps toggling the Atonement slider when they should leave Atonement alone and buff Penance DAMAGE instead — on the current PTR a Voidweaver Penance 'kind of tickles' where it used to be the capitalizing ramp finisher.",
       "url": "https://youtu.be/kP8A2ISdUiw?t=870",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Priest",
@@ -1360,7 +1360,7 @@
       "patchContext": "12.1 PTR — build 68569 healer tuning (dev notes reaction)",
       "claim": "The +10% healing buff was 'definitely necessary' for a spec reliant on healing alone, and the mana help (Benediction cost reduction, Apotheosis holy-word discount 50% → 70%) targets the real Archon-build mana strain — but of the whole healer wave he is 'least excited about the lack of things on Holy Priest'; he's saving a fuller verdict for a dedicated healer-opinions video.",
       "url": "https://youtu.be/kP8A2ISdUiw?t=1039",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Shaman",
@@ -1371,7 +1371,7 @@
       "patchContext": "12.1 PTR — build 68569 healer tuning (dev notes reaction)",
       "claim": "Resto Shaman 'finally makes it on a patch note and it feels like three quality-of-life changes': Acid Rain +50% damage but ticking every 2s (was 1s) — front-loaded value whose intent he can't read (guaranteed first tick vs a stealth raid-movement nerf) — plus two Healing Rain tick/partial-tick bug fixes that matter more now the tier set spawns extra Healing Rains. He's genuinely ambivalent whether the package is a positive or a negative.",
       "url": "https://youtu.be/kP8A2ISdUiw?t=1105",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Death Knight",
@@ -1647,6 +1647,72 @@
       "claim": "On his PTR M+ stream AutomaticJak says he likes a lot about Priest in keys, but expects it to be a very tough ask for Priest to be meta in a Season 2 with roughly six dungeons carrying poison dispels — the class can't dispel poison. He rates Holy Paladin and Mistweaver Monk as the best two healers for meeting the season's M+ heal checks right now, subject to further tuning.",
       "url": "https://youtu.be/LHPjq9142qM?t=16426",
       "superseded": false
+    },
+    {
+      "class": "Shaman",
+      "spec": "Restoration",
+      "creator": "LBNinja7",
+      "date": "2026-07-17",
+      "sentiment": "buff",
+      "patchContext": "12.1 PTR — Season 2 healer testing",
+      "claim": "LBNinja7 is very positive on Resto Shaman in Season 2: after a long tuning drought it's now a 'downpour', with the tier set turning Healing Rain/Downpour into big satisfying moments — the free healing resources you spawn by healing allies proc a fully-powered Downpour, and he loves that Acid Rain deals damage. His one caveat is that Resto stacks several procs (Deeply Rooted Elements/Ascendance, Apex totem, tier set) that feel brutal on the pulls where they don't hit.",
+      "url": "https://youtu.be/Gz17CIGREfU?t=559",
+      "superseded": false
+    },
+    {
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "creator": "LBNinja7",
+      "date": "2026-07-17",
+      "sentiment": "mixed",
+      "patchContext": "12.1 PTR — Season 2 healer testing",
+      "claim": "LBNinja7 (a Mistweaver main) is enthusiastic about Mistweaver on the PTR: Spinning Crane Kick was nerfed so it no longer dominates the rotation, which he loves — Rising Sunkick returns as a payoff button reset by Tiger Palm/Blackout Kick, making the rotation far more dynamic, and he says it's 'looking very good on the PTR right now.' Downsides: hero-tree/talent options like Jade Empowerment and much of the Master of Harmony tree are left behind and feel dead relative to Conduit.",
+      "url": "https://youtu.be/Gz17CIGREfU?t=443",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Restoration",
+      "creator": "LBNinja7",
+      "date": "2026-07-17",
+      "sentiment": "nerf",
+      "patchContext": "12.1 PTR — Season 2 healer testing",
+      "claim": "LBNinja7 thinks Resto Druid looks undertuned on the PTR: it was given a very powerful tier-set proc, Blizzard balanced the rest of the kit around it, then nerfed the proc — leaving a kit that now feels lacking. He stresses this is early PTR and very likely to change.",
+      "url": "https://youtu.be/Gz17CIGREfU?t=266",
+      "superseded": false
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "creator": "LBNinja7",
+      "date": "2026-07-17",
+      "sentiment": "buff",
+      "patchContext": "12.1 PTR — Season 2 healer testing",
+      "claim": "LBNinja7 welcomes Holy Paladin's PTR damage buffs: pressing Shield of the Righteous and throwing Judgment for Consecration make it more dynamic and rewarding (less pure whack-a-mole than Resto Druid). The damage itself isn't huge, but the buff meaningfully adds to playability and fun.",
+      "url": "https://youtu.be/Gz17CIGREfU?t=641",
+      "superseded": false
+    },
+    {
+      "class": "Priest",
+      "spec": "Holy",
+      "creator": "LBNinja7",
+      "date": "2026-07-17",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR — Season 2 healer testing",
+      "claim": "LBNinja7 says Holy Priest still needs its time in the light — it's solid and fun but has no standout that makes it worth pushing, and he's skeptical blanket healing buffs fix it (they get reverted after raid overperformance). He wants a real damage-reduction cooldown and a genuine reason to play it in M+.",
+      "url": "https://youtu.be/Gz17CIGREfU?t=728",
+      "superseded": false
+    },
+    {
+      "class": "Priest",
+      "spec": "Discipline",
+      "creator": "LBNinja7",
+      "date": "2026-07-17",
+      "sentiment": "mixed",
+      "patchContext": "12.1 PTR — Season 2 healer testing",
+      "claim": "LBNinja7 flags Disc Priest as increasingly proc-fishy (packs feel much safer with Void Shield active), but calls the recent Void Shield nerf a good change — it reduces reliance on the shield and disperses that power across the rest of the kit.",
+      "url": "https://youtu.be/Gz17CIGREfU?t=67",
+      "superseded": false
     }
   ],
   "metaNotes": [
@@ -1780,7 +1846,7 @@
       "note": "izen reads Discipline as essentially unchanged — still an atonement spec, with Blizzard continuing to shift power toward Void Shield and away from atonement, a trend that isn't reversing in the patch. He frames it as static rather than improving.",
       "patchContext": "Season 2 PTR — raid testing outlook",
       "url": "https://youtu.be/3hdleEsSGrs?t=963",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Monk",
@@ -1791,7 +1857,7 @@
       "note": "izen sees Mistweaver as unchanged — same very high APM, same three-ability rotation cadence, and the same hero-talent/talent setup, with no meaningful shift in how it plays or performs.",
       "patchContext": "Season 2 PTR — raid testing outlook",
       "url": "https://youtu.be/3hdleEsSGrs?t=980",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Priest",
@@ -2088,7 +2154,7 @@
       "note": "Calls Preservation the best-performing healer in PTR raid testing by a reasonable margin — essentially the only healer clearing the top HPS benchmarks — driven by the Dream Breath HoT rebalance, so the broad nerf to that package was expected.",
       "patchContext": "Season 2 PTR — raid outlook",
       "url": "https://youtu.be/o7GiLqBNja8?t=498",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Hunter",
@@ -2143,7 +2209,7 @@
       "note": "Calls Holy Paladin one of the biggest winners — a second consecutive round of large buffs to spenders, all healing, and the tier set — though he flags a design worry that the buffed, infusion-empowered single-target spender is now so strong it threatens to make Holy Shock obsolete until a follow-up rebalance.",
       "patchContext": "Season 2 PTR — raid outlook",
       "url": "https://youtu.be/o7GiLqBNja8?t=811",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Paladin",
@@ -2165,7 +2231,7 @@
       "note": "Reads Holy Priest as one of the few healers failing the raid HPS benchmarks, with severe mana problems; the mana discounts and 10% healing buff help but skip its biggest mana drain, moving it from terrible to only slightly below average in his estimation.",
       "patchContext": "Season 2 PTR — raid outlook",
       "url": "https://youtu.be/o7GiLqBNja8?t=1136",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Priest",
@@ -2275,6 +2341,72 @@
       "note": "izen has Devourer DH among the most popular M+ specs after its recent +10% buff, edging out Havoc. But its huge burst-window identity is much diminished from live — heavy mastery and Collapsing Star nerfs pushed many players off the Annihilator/collapsing-star build (especially in raid); it stays competitive in M+ where burst windows still pay off, just far less dominant than on live.",
       "patchContext": "Season 2 PTR — M+ outlook",
       "url": "https://youtu.be/vK-qyvXOVYM?t=989",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Restoration",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-17",
+      "sentiment": "negative",
+      "note": "izen notes Abundance was buffed (Regrowth crit chance and mana discount to 60% from 50%, plus +25% base Regrowth) to coax Resto Druid back onto Regrowth after Season 2 caps Abundance at 50% (down from 96%). Even post-buff it returns to roughly its current healing profile and remained one of the weaker — and less-popular — healers in the PTR raid testing.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/WQI9eNr4qpo?t=132",
+      "superseded": false
+    },
+    {
+      "class": "Evoker",
+      "spec": "Preservation",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-17",
+      "sentiment": "mixed",
+      "note": "izen says Preservation was the most-popular and generally best-performing healer in the raid testing (top results, even on the actual kills), but took hefty nerfs — Dream Breath nerfed again plus its blessing (Nourish's/Ritual's) healing down — bringing it closer to the pack. It stays manageable because Echo/Temporal Anomaly let it pivot heal-duplication from Dream Breath onto Reversion.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/WQI9eNr4qpo?t=284",
+      "superseded": false
+    },
+    {
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-17",
+      "sentiment": "mixed",
+      "note": "izen: Mistweaver, which was performing okay in testing (rarely top, rarely bottom), got an 8% across-the-board healing nerf paired with an odd +50% mastery buff — a stat Mistweaver has long disliked. The now effectively-doubled mastery softens the hit and adds future value, but it still nets to a nerf for the spec.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/WQI9eNr4qpo?t=440",
+      "superseded": false
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-17",
+      "sentiment": "positive",
+      "note": "izen calls Holy Paladin the most-buffed healer of the PTR cycle — successive rounds buffing healing, spenders, damage, Pillar of Light/Beacon passives, and now a +50% Holy Shock buff plus mana discount. The pile of buffs is strong enough that the no-Holy-Shock build (Holy Light → guaranteed Infusion → instant Flash of Light) still wins, so even the buffed Holy Shock isn't worth pressing.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/WQI9eNr4qpo?t=577",
+      "superseded": false
+    },
+    {
+      "class": "Priest",
+      "spec": "Discipline",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-17",
+      "sentiment": "mixed",
+      "note": "izen: Disc's Season 2 tuning pushes power from Void Shield back into Penance (Penance up, Shadow Mend spot healing up) while nerfing Atonement in raid (~7% less at 20 targets) and Void Shield — a net nerf in raid, roughly neutral in M+ where you actually use these. He likes the direction (curbing the Void-Shield value creep), though the tier set's guaranteed Void Shield on Mind Blast reset means you'll still cast more of them in Season 2.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/WQI9eNr4qpo?t=845",
+      "superseded": false
+    },
+    {
+      "class": "Priest",
+      "spec": "Holy",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-17",
+      "sentiment": "positive",
+      "note": "izen: Holy Priest is one of the more-buffed healers after Holy Paladin — +10% healing, mana discounts, and Benediction now cast about twice as often (tied to Holy Word/Serenity rather than Apotheosis), plus a smaller latest round buffing Prayer of Mending +20% and Prompt Prognosis. After roughly three rounds of buffs (over 20% more total healing) it's now testing okay, up notably from the prior week.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/WQI9eNr4qpo?t=945",
       "superseded": false
     }
   ]
