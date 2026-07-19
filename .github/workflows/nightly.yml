@@ -61,7 +61,7 @@ jobs:
     permissions:
       contents: read # the agent job holds NO write scopes — publication happens in `publish`
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           # No token left in .git/config: the agents' shells have no ambient push credential.
           persist-credentials: false
@@ -368,7 +368,7 @@ jobs:
       actions: write # dispatches the Pages deploy workflow
       issues: write # posts the per-run digest comment (owner's daily email)
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           # CURRENT master, not the trigger-time sha: commits that land on master while
           # the ~30-min refresh job runs (2026-07-17: a template feature) otherwise
