@@ -322,7 +322,11 @@ dispatches deploy.yml (GITHUB_TOKEN pushes don't auto-trigger workflows). Publis
 checks out CURRENT master (not the trigger sha), and a push race rebases +
 rebuilds the generated dist/ deterministically — any other conflict fails RED
 instead of silently dropping the night (2026-07-17 fix: bash `-e` is suppressed
-inside a `|| { … }` fallback group, which let a conflicted rebase pass green). A daily
+inside a `|| { … }` fallback group, which let a conflicted rebase pass green).
+After a successful push, publish runs `src/digest.mjs HEAD^ HEAD` (deterministic
+buildPayload diff: tier/projection/source moves, new takes+metaNotes, new builds,
+verdict changes, manifest health) and comments it on the pinned "Nightly digest"
+issue — GitHub notification mail is the owner's daily change email. A daily
 heartbeat (`freshness.yml`) alerts via a single auto-closing issue + red run when the
 last refresh signal exceeds 36h (full-timestamp precision via the manifest's
 `startedAt`) or a source exceeds its max age. The agent step's only secret is

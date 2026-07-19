@@ -366,6 +366,7 @@ jobs:
     permissions:
       contents: write
       actions: write # dispatches the Pages deploy workflow
+      issues: write # posts the per-run digest comment (owner's daily email)
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
         with:
@@ -492,3 +493,25 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run deploy.yml --ref master
+
+      # Owner-facing change digest (owner-requested 2026-07-17): deterministic diff
+      # of the just-pushed commit vs its parent (same derivation the site uses),
+      # posted as a comment on the pinned "Nightly digest" issue — GitHub's own
+      # notification mail delivers each comment to issue subscribers. No AI, no
+      # credentials beyond GITHUB_TOKEN; a digest hiccup never reddens a good publish.
+      - name: Post run digest to the pinned issue
+        if: steps.commit.outputs.pushed == 'true'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DIGEST_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          node src/digest.mjs HEAD^ HEAD > "$RUNNER_TEMP/digest.md"
+          num="$(gh issue list --state open --search "in:title \"Nightly digest\"" --json number --jq '.[0].number // empty')" || num=""
+          if [ -z "$num" ]; then
+            url="$(gh issue create --title "Nightly digest — per-run change summaries" \
+              --body "Automated per-run change digests (tier moves, new creator takes, new PTR builds, health) land as comments here — @riles22 stay subscribed to this issue to receive each one by email. Closing it just rotates the thread (the next publish opens a fresh one); to stop digests entirely, remove the 'Post run digest' step from nightly.yml, or use this issue's Unsubscribe button to silence the emails.")"
+            num="${url##*/}"
+          fi
+          gh issue comment "$num" --body-file "$RUNNER_TEMP/digest.md"
