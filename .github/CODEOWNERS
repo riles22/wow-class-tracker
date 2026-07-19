@@ -1,0 +1,22 @@
+# Protection boundary for the unattended nightly automation (2026-07-18 portfolio
+# audit): the files below decide WHAT the agents may write and WHICH sources are
+# authoritative. Ownership here is declarative until a branch ruleset requires
+# code-owner review — enable that under Settings → Rules if/when the repo gains
+# other contributors. The nightly publish job never touches these paths (it stages
+# only data/ dist/ and skill logs), so this boundary is also enforced structurally.
+
+# CI / automation definitions and the supply-chain pins they rely on
+/.github/ @riles22
+/requirements.txt @riles22
+
+# Semantic registries: which sources exist, how tiers normalize, what a refresh owes
+/data/sources.json @riles22
+/data/scales.json @riles22
+/data/required-sources.json @riles22
+/data/community.json @riles22
+
+# The deterministic gatekeepers themselves
+/src/validate.mjs @riles22
+/src/check-refresh.mjs @riles22
+/src/apply-ratings.mjs @riles22
+/src/apply-metrics.mjs @riles22

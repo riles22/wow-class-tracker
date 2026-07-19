@@ -13,6 +13,25 @@ const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
 // Creator-take URLs come from an autonomous nightly pipeline over untrusted transcripts —
 // beyond https-only they must point at a host the pipeline actually cites.
 const TAKE_HOSTS = new Set(["youtube.com", "www.youtube.com", "m.youtube.com", "youtu.be", "hackmd.io", "wowhead.com", "www.wowhead.com"]);
+// Same principle extended repo-wide (2026-07-18 portfolio audit): every URL field the
+// nightly agent can write is pinned to hosts a human approved here. validate.mjs is
+// code — the nightly cannot publish changes to it — so widening a list is inherently
+// a reviewed edit. New legit host → the run fails red → add it here with eyes on it.
+const BLIZZARD_FORUM_HOSTS = new Set(["us.forums.blizzard.com", "eu.forums.blizzard.com"]);
+// PTR writeup provenance: theorycrafter platforms + the ecosystem's known guide/sim/log sites.
+const WRITEUP_HOSTS = new Set([...TAKE_HOSTS, ...BLIZZARD_FORUM_HOSTS,
+  "icy-veins.com", "www.icy-veins.com", "method.gg", "www.method.gg",
+  "questionablyepic.com", "www.questionablyepic.com", "bloodmallet.com",
+  "simulationcraft.org", "www.simulationcraft.org", "raidbots.com", "www.raidbots.com",
+  "liquidarmory.com", "www.liquidarmory.com", "archon.gg", "www.archon.gg",
+  "raider.io", "murlok.io", "mythicstats.com", "wowmeta.com",
+  "warcraftlogs.com", "www.warcraftlogs.com",
+]);
+const DISCORD_HOSTS = new Set(["discord.gg", "discord.com", "www.discord.com"]);
+// Creator channel/author pages: video platforms + guide sites that carry bylines.
+const CREATOR_HOSTS = new Set([...WRITEUP_HOSTS, "twitch.tv", "www.twitch.tv"]);
+const WOWHEAD_HOSTS = new Set(["wowhead.com", "www.wowhead.com"]);
+const ICYVEINS_HOSTS = new Set(["icy-veins.com", "www.icy-veins.com"]);
 const httpsUrl = v => { try { return new URL(v).protocol === "https:"; } catch { return false; } };
 // Shape-valid ≠ real: "2026-99-99" matches the regex but is not a date. Round-trip
 // through Date.UTC so month/day overflow is rejected instead of silently normalized.
@@ -39,6 +58,9 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
     if (v > maxDate) errors.push(`${what} is future-dated ("${v}", allowed through ${maxDate}) — data can't be newer than now`);
   };
   const urlOk = (v, what) => { if (v != null && !httpsUrl(v)) errors.push(`${what} must be a valid https:// URL, got "${v}"`); };
+  // Host pinning on top of urlOk — fires only on parseable https URLs, so a value
+  // that is broken outright gets one error (urlOk's), not two.
+  const hostOk = (v, hosts, what) => { if (v != null && httpsUrl(v) && !hosts.has(new URL(v).host)) errors.push(`${what} host "${new URL(v).host}" is not in the approved host allowlist`); };
 
   if (opts.fullRoster) {
     if (specs.length !== 40) errors.push(`specs.json: Midnight roster must be exactly 40 specs (got ${specs.length})`);
@@ -180,6 +202,7 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
         if (spec.tierSet[pc] != null && typeof spec.tierSet[pc] !== "string") errors.push(`specs.json: ${key} tierSet.${pc} must be a string`);
       }
       urlOk(spec.tierSet.source, `specs.json: ${key} tierSet.source`);
+      hostOk(spec.tierSet.source, WRITEUP_HOSTS, `specs.json: ${key} tierSet.source`);
       isoOk(spec.tierSet.asOf, `specs.json: ${key} tierSet.asOf`);
     }
 
@@ -193,6 +216,7 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
       if (typeof spec.ptr?.summary !== "string" || !spec.ptr.summary) errors.push(`specs.json: ${key} ptr.summary missing`);
       if (!Array.isArray(spec.ptr?.changes) || spec.ptr.changes.length === 0) errors.push(`specs.json: ${key} ptr.changes must be a non-empty array`);
       urlOk(spec.ptr.source, `specs.json: ${key} ptr.source`);
+      hostOk(spec.ptr.source, WRITEUP_HOSTS, `specs.json: ${key} ptr.source`);
       // Provenance rule: every writeup is an attributed distillation — since verdicts
       // auto-confirm (no review gate), the attribution IS the honesty and is mandatory.
       if (!spec.ptr.source && !spec.ptr.sourceLabel) errors.push(`specs.json: ${key} writeup needs a source URL or sourceLabel`);
@@ -212,9 +236,11 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
     seenClasses.add(entry.class);
     if (!entry.discord?.name || !entry.discord?.url) errors.push(`community.json: ${entry.class} discord needs name + url`);
     urlOk(entry.discord?.url, `community.json: ${entry.class} discord url`);
+    hostOk(entry.discord?.url, DISCORD_HOSTS, `community.json: ${entry.class} discord url`);
     for (const alt of entry.altDiscords ?? []) {
       if (!alt.name || !alt.url) errors.push(`community.json: ${entry.class} altDiscord needs name + url`);
       urlOk(alt.url, `community.json: ${entry.class} altDiscord "${alt.name}" url`);
+      hostOk(alt.url, DISCORD_HOSTS, `community.json: ${entry.class} altDiscord "${alt.name}" url`);
     }
     for (const site of entry.sites ?? []) urlOk(site.url, `community.json: ${entry.class} site "${site.name}" url`);
     const seenCreators = new Set();
@@ -225,6 +251,7 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
       if (seenCreators.has(creator.name)) errors.push(`community.json: ${entry.class} has duplicate creator "${creator.name}"`);
       seenCreators.add(creator.name);
       urlOk(creator.url, `community.json: ${entry.class} creator "${creator.name}" url`);
+      hostOk(creator.url, CREATOR_HOSTS, `community.json: ${entry.class} creator "${creator.name}" url`);
       isoOk(creator.verifiedDate, `community.json: ${entry.class} creator "${creator.name}" verifiedDate`);
       // Optional spec scoping: a creator credible on only some of a class's specs.
       // Absent = whole class. Each listed spec must be a real spec of that class.
@@ -254,6 +281,7 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
     if (seenGeneral.has(gc.name)) errors.push(`community.json: duplicate general creator "${gc.name}"`);
     seenGeneral.add(gc.name);
     urlOk(gc.url, `community.json: general creator "${gc.name}" url`);
+    hostOk(gc.url, CREATOR_HOSTS, `community.json: general creator "${gc.name}" url`);
     isoOk(gc.verifiedDate, `community.json: general creator "${gc.name}" verifiedDate`);
   }
 
@@ -306,11 +334,18 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
   // --- PTR build feed ---
   const rosterNames = new Set(specs.map(s => `${s.spec} ${s.class}`));
   const classNames = new Set(specs.map(s => s.class));
+  urlOk(ptrBuilds?.thread, "ptr-builds.json: thread");
+  hostOk(ptrBuilds?.thread, BLIZZARD_FORUM_HOSTS, "ptr-builds.json: thread");
   for (const build of ptrBuilds?.builds ?? []) {
     if (build.date == null) errors.push("ptr-builds.json: build missing date");
     else isoOk(build.date, `ptr-builds.json: build date`);
     if (!build.forumUrl) errors.push(`ptr-builds.json: build ${build.date} missing forumUrl`);
     for (const u of ["forumUrl", "wowheadUrl", "icyveinsUrl"]) urlOk(build[u], `ptr-builds.json: build ${build.date} ${u}`);
+    // The feed's canonical source is the official forum thread; the news links are
+    // site-specific by definition — any other host means a fabricated citation.
+    hostOk(build.forumUrl, BLIZZARD_FORUM_HOSTS, `ptr-builds.json: build ${build.date} forumUrl`);
+    hostOk(build.wowheadUrl, WOWHEAD_HOSTS, `ptr-builds.json: build ${build.date} wowheadUrl`);
+    hostOk(build.icyveinsUrl, ICYVEINS_HOSTS, `ptr-builds.json: build ${build.date} icyveinsUrl`);
     // Each entry must resolve against the roster ("Spec Class") or a class-wide prefix
     // ("Class (…)"), otherwise outlookFor silently never counts it.
     for (const e of build.specsAffected ?? []) {
