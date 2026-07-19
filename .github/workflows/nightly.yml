@@ -89,7 +89,7 @@ jobs:
       # rows against THIS copy, so an agent (which can edit the working-tree copy)
       # has no window to tamper with what the gate reads.
       - name: Publish WCL fetch evidence (pre-agent, tamper-evident)
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: wcl-evidence
           retention-days: 7
@@ -113,7 +113,7 @@ jobs:
       - name: Primary full refresh (Claude Code, read-only token)
         id: primary_agent
         continue-on-error: true
-        uses: anthropics/claude-code-action@f1bd27ca5b54584506e40e17884d90bdaaa1a9b3 # v1
+        uses: anthropics/claude-code-action@af0559ee4f514d1ef21826982bed13f7edc3c35e # v1
         timeout-minutes: 42
         with:
           github_token: ${{ github.token }}
@@ -245,7 +245,7 @@ jobs:
 
       - name: Recovery pass for incomplete refresh
         if: steps.primary_agent.outcome != 'success' || steps.primary_check.outcome != 'success'
-        uses: anthropics/claude-code-action@f1bd27ca5b54584506e40e17884d90bdaaa1a9b3 # v1
+        uses: anthropics/claude-code-action@af0559ee4f514d1ef21826982bed13f7edc3c35e # v1
         timeout-minutes: 35
         with:
           github_token: ${{ github.token }}
@@ -332,7 +332,7 @@ jobs:
       # none, and the action masks their own token).
       - name: Upload agent transcripts (diagnosis)
         if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: agent-transcripts
           retention-days: 7
@@ -346,7 +346,7 @@ jobs:
       # rebuilds it from source, so a tampered build artifact can't ride along.
       - name: Upload refresh output for publication or debugging
         if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: nightly-refresh
           include-hidden-files: true
