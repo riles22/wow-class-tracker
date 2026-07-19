@@ -118,3 +118,14 @@ cuts (live raid/mplus, PTR raid/mplus, dummy-dome) unreachable, data unchanged a
 3 raw cuts were merged by the deterministic src/fetch-wcl.mjs BEFORE the agent: wcl-dummy-raw 103 rows
 (players 1T:2000/2T:172/3T:115/5T:1642), wcl-ptr-raid-raw 27 (6 of 8 bosses populated; Coiled Altar & Ula'tek
 0 = untested), wcl-ptr-mplus-raw 27 (all 8 dungeons). asOf 07-18→07-19 on the merged/refreshed families.
+
+## 2026-07-19 (21:1xZ, 2nd nightly run)
+Murlok 40/40 top-50 M+ rating ceilings (range 3738-4288), 0 changes. Bloodmallet 26
+non-Aug DPS talent_target_scaling, MID1 confirmed, 0 target changes. SimC nightly
+MID1_Raid (12.0.7.68453 Live — no season flip) 26/26 best-variant DPS, 0 changes.
+Mythicstats period 1072 (ongoing reset) 39 specs (Resto Druid absent), 0 changes.
+**WCL**: agent holds no creds; evidence.json verdict `rdps-broken` → the 5
+rDPS/normalized cuts (live raid/mplus, PTR raid/mplus, dummy-dome) unreachable, unchanged
+at 2026-07-09 baseline. 3 raw cuts merged by the deterministic fetch step BEFORE agent:
+wcl-dummy-raw 103 (players 1T:2000/2T:175/3T:122/5T:1695), wcl-ptr-raid-raw 27 (6/8
+bosses; Coiled Altar & Ula'tek 0 = untested), wcl-ptr-mplus-raw 27 (all 8 dungeons). asOf 07-19.

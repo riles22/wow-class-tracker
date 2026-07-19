@@ -283,3 +283,14 @@ Dalaran carries no Monk spec-scope (same handling as his 07-17 Evoker preview `x
 his DH scope), Shindigg `kINGIlRORo4` (DH keys stream), Kalamazi `kZ1K_ynyq0E` (PTR keys stream), Critcake
 `gaZGPSZLEg0` (Warrior io gameplay), Supatease `sZwBwfkcuZ0` aside all prior-triaged. izen newest still
 `5wntDvx3wmo` (07-18 delve preview, already latest) — no new generalCreator meta/build content. Pending 0→1.
+
+## 2026-07-19 (21:1xZ, 2nd nightly run)
+All 25 unique creator RSS feeds polled live (25/25 OK). Transcript queue: the deterministic
+step reported sZwBwfkcuZ0 "unavailable" (summary.json verdict ok, requested 1/fetched 0) —
+nothing to distill; creator-takes.json unchanged. **Queued 1 new in-scope video**: Supatease
+`HeHi9Y5aYX8` "Class Tuning Update Season 1 Midnight" (07-18; passes class-tuning title
+filter, Supatease scope Sham/Lock/Warr). **Triaged out** (out of scope, not queued): Supatease
+PvP news (yaFXwh7aOVU/xUKBXzWCJAs/aCNaf6Q6J9A) + reroll/hangout streams; Dalaran 5v5-duel PvP
+entertainment (zLt0bLAxmdI/Q5ggb-Clkk8/ElvdcB-d5Mw) + "Blizzard Fixing Issues" general-news
+(V8doyR2hOE4); Critcake io-push gameplay (wyWZMj0HDQw). izen newest 5wntDvx3wmo (already
+`latest`, delve preview — not a meta/build video). Pending queue 1→2.

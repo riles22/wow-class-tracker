@@ -109,3 +109,15 @@ across all sources. **Survivability** (Archon throughput pages, all 40 specs): 4
 RestoDruid/Preservation/Discipline B→C (healers softening). **Encounters** (51 pages: 9 bosses throughput +
 8 dungeons score × 3 roles): 680 cells, 0 unmatched, 36 changed across 13 encounters (normal daily churn).
 snapshots 07-18→07-19.
+
+## 2026-07-19 (21:1xZ, 2nd nightly run)
+All 5 tier sources re-fetched live. IV 80 (curl; table.tier-list incl A+), Method 79
+(raid 39 — Vengeance DH still omitted upstream; M+ 40; data-original-title parse),
+Wowhead 80 (raw HTML after transient 919b Cloudflare block cleared; inline "(X Tier)" +
+[tier-list=rows]/[spec-badge] shortcode for healer-raid & tank-M+), Archon 80
+(__NEXT_DATA__ throughput/score), WoWMeta 40 M+ (raw SSR table; era MN 12.0.7/Season 1,
+12.1 substrings are SVG coords — NO season flip; raid pages still unranked). 359 ratings
+applied, **0 tier moves vs committed** (upstream unchanged since the earlier 07-19 run).
+**Survivability**: all 40 specs incl TANKS this run (tank raid survivability tierList
+populated again after prior run's empty/partial). **Encounters**: 51 pages, 680 cells,
+0 changed vs committed. snapshots 07-19.
