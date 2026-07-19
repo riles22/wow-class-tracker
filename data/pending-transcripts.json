@@ -1,4 +1,12 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
-  "videos": []
+  "videos": [
+    {
+      "id": "sZwBwfkcuZ0",
+      "creator": "Supatease",
+      "title": "The Tides of The Meta Are Shifting",
+      "published": "2026-07-19",
+      "queuedAt": "2026-07-19"
+    }
+  ]
 }

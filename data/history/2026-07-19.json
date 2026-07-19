@@ -58,7 +58,7 @@
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 13,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 7,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 1,
-        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 4
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 5
       },
       "dummy": {
         "rank": 7,
@@ -66,7 +66,7 @@
       },
       "scores": {
         "raid": 58,
-        "mplus": 41
+        "mplus": 45
       },
       "projection": {
         "raid": {
@@ -76,7 +76,7 @@
         },
         "mplus": {
           "tier": "A",
-          "score": 58,
+          "score": 60,
           "confidence": "high"
         }
       }
@@ -147,7 +147,7 @@
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 19,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 25,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 7,
-        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 23
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 24
       },
       "dummy": {
         "rank": 19,
@@ -173,7 +173,7 @@
     "Demon Hunter|Devourer": {
       "consensus": {
         "raid": "S",
-        "mplus": "A+"
+        "mplus": "S"
       },
       "ranks": {
         "archon|raid|95th pct DPS (Mythic)": 3,
@@ -188,11 +188,11 @@
         "simulationcraft|raid|SimC nightly Patchwerk DPS": 26,
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 19,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 1,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 5,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 6,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 14,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 5,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 4,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 18,
-        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 10
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 12
       },
       "dummy": {
         "rank": 13,
@@ -200,7 +200,7 @@
       },
       "scores": {
         "raid": 88,
-        "mplus": 86
+        "mplus": 91
       },
       "projection": {
         "raid": {
@@ -210,7 +210,7 @@
         },
         "mplus": {
           "tier": "A",
-          "score": 71,
+          "score": 73,
           "confidence": "high"
         }
       }
@@ -234,7 +234,7 @@
       },
       "scores": {
         "raid": 29,
-        "mplus": 50
+        "mplus": 53
       },
       "projection": {
         "raid": {
@@ -244,7 +244,7 @@
         },
         "mplus": {
           "tier": "C",
-          "score": 30,
+          "score": 31,
           "confidence": "medium"
         }
       }
@@ -269,7 +269,7 @@
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 5,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 2,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 6,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 17,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 16,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 15,
         "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 6
       },
@@ -324,7 +324,7 @@
       },
       "scores": {
         "raid": 45,
-        "mplus": 62
+        "mplus": 66
       },
       "projection": {
         "raid": {
@@ -334,7 +334,7 @@
         },
         "mplus": {
           "tier": "A",
-          "score": 69,
+          "score": 71,
           "confidence": "high"
         }
       }
@@ -376,7 +376,7 @@
     "Druid|Restoration": {
       "consensus": {
         "raid": "A+",
-        "mplus": "A"
+        "mplus": "B"
       },
       "ranks": {
         "archon|raid|95th pct HPS (Mythic)": 4,
@@ -393,7 +393,7 @@
       },
       "scores": {
         "raid": 86,
-        "mplus": 59
+        "mplus": 52
       },
       "projection": {
         "raid": {
@@ -403,7 +403,7 @@
         },
         "mplus": {
           "tier": "A",
-          "score": 62,
+          "score": 58,
           "confidence": "medium"
         }
       }
@@ -411,7 +411,7 @@
     "Evoker|Augmentation": {
       "consensus": {
         "raid": "A",
-        "mplus": "A+"
+        "mplus": "S"
       },
       "ranks": {
         "archon|raid|95th pct DPS (Mythic)": 1,
@@ -427,11 +427,11 @@
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 25,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 27,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 17,
-        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 18
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 19
       },
       "scores": {
         "raid": 71,
-        "mplus": 82
+        "mplus": 91
       },
       "projection": {
         "raid": {
@@ -440,8 +440,8 @@
           "confidence": "medium"
         },
         "mplus": {
-          "tier": "A",
-          "score": 69,
+          "tier": "A+",
+          "score": 74,
           "confidence": "medium"
         }
       }
@@ -511,7 +511,7 @@
       },
       "scores": {
         "raid": 77,
-        "mplus": 34
+        "mplus": 38
       },
       "projection": {
         "raid": {
@@ -520,8 +520,8 @@
           "confidence": "medium"
         },
         "mplus": {
-          "tier": "B",
-          "score": 56,
+          "tier": "A",
+          "score": 58,
           "confidence": "medium"
         }
       }
@@ -529,7 +529,7 @@
     "Hunter|Beast Mastery": {
       "consensus": {
         "raid": "C",
-        "mplus": "A"
+        "mplus": "B"
       },
       "ranks": {
         "archon|raid|95th pct DPS (Mythic)": 26,
@@ -548,7 +548,7 @@
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 15,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 19,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 8,
-        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 19
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 18
       },
       "dummy": {
         "rank": 8,
@@ -556,7 +556,7 @@
       },
       "scores": {
         "raid": 33,
-        "mplus": 66
+        "mplus": 56
       },
       "projection": {
         "raid": {
@@ -566,7 +566,7 @@
         },
         "mplus": {
           "tier": "A",
-          "score": 64,
+          "score": 58,
           "confidence": "high"
         }
       }
@@ -589,7 +589,7 @@
         "simulationcraft|raid|SimC nightly Patchwerk DPS": 5,
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 23,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 4,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 6,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 3,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 1,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 1,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 26,
@@ -597,7 +597,7 @@
       },
       "scores": {
         "raid": 88,
-        "mplus": 44
+        "mplus": 47
       },
       "projection": {
         "raid": {
@@ -607,7 +607,7 @@
         },
         "mplus": {
           "tier": "C",
-          "score": 34,
+          "score": 36,
           "confidence": "medium"
         }
       }
@@ -630,13 +630,13 @@
         "simulationcraft|raid|SimC nightly Patchwerk DPS": 12,
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 8,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 3,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 4,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 5,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 25,
         "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 15
       },
       "scores": {
         "raid": 68,
-        "mplus": 62
+        "mplus": 70
       },
       "projection": {
         "raid": {
@@ -646,7 +646,7 @@
         },
         "mplus": {
           "tier": "A",
-          "score": 67,
+          "score": 71,
           "confidence": "medium"
         }
       }
@@ -681,7 +681,7 @@
       },
       "scores": {
         "raid": 33,
-        "mplus": 46
+        "mplus": 50
       },
       "projection": {
         "raid": {
@@ -691,7 +691,7 @@
         },
         "mplus": {
           "tier": "A",
-          "score": 61,
+          "score": 63,
           "confidence": "high"
         }
       }
@@ -726,7 +726,7 @@
       },
       "scores": {
         "raid": 39,
-        "mplus": 34
+        "mplus": 38
       },
       "projection": {
         "raid": {
@@ -736,7 +736,7 @@
         },
         "mplus": {
           "tier": "C",
-          "score": 20,
+          "score": 23,
           "confidence": "high"
         }
       }
@@ -759,7 +759,7 @@
         "simulationcraft|raid|SimC nightly Patchwerk DPS": 8,
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 22,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 20,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 3,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 4,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 8,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 10,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 4,
@@ -771,7 +771,7 @@
       },
       "scores": {
         "raid": 81,
-        "mplus": 66
+        "mplus": 58
       },
       "projection": {
         "raid": {
@@ -781,7 +781,7 @@
         },
         "mplus": {
           "tier": "B",
-          "score": 52,
+          "score": 48,
           "confidence": "high"
         }
       }
@@ -805,7 +805,7 @@
       },
       "scores": {
         "raid": 54,
-        "mplus": 70
+        "mplus": 74
       },
       "projection": {
         "raid": {
@@ -814,8 +814,8 @@
           "confidence": "medium"
         },
         "mplus": {
-          "tier": "B",
-          "score": 57,
+          "tier": "A",
+          "score": 59,
           "confidence": "medium"
         }
       }
@@ -954,7 +954,7 @@
       },
       "scores": {
         "raid": 33,
-        "mplus": 56
+        "mplus": 45
       },
       "projection": {
         "raid": {
@@ -963,8 +963,8 @@
           "confidence": "medium"
         },
         "mplus": {
-          "tier": "A+",
-          "score": 79,
+          "tier": "A",
+          "score": 73,
           "confidence": "medium"
         }
       }
@@ -972,7 +972,7 @@
     "Paladin|Retribution": {
       "consensus": {
         "raid": "A",
-        "mplus": "A+"
+        "mplus": "A"
       },
       "ranks": {
         "archon|raid|95th pct DPS (Mythic)": 23,
@@ -999,7 +999,7 @@
       },
       "scores": {
         "raid": 60,
-        "mplus": 74
+        "mplus": 69
       },
       "projection": {
         "raid": {
@@ -1009,7 +1009,7 @@
         },
         "mplus": {
           "tier": "A",
-          "score": 72,
+          "score": 70,
           "confidence": "high"
         }
       }
@@ -1034,7 +1034,7 @@
       },
       "scores": {
         "raid": 86,
-        "mplus": 62
+        "mplus": 58
       },
       "projection": {
         "raid": {
@@ -1043,8 +1043,8 @@
           "confidence": "medium"
         },
         "mplus": {
-          "tier": "A+",
-          "score": 75,
+          "tier": "A",
+          "score": 72,
           "confidence": "medium"
         }
       }
@@ -1106,7 +1106,7 @@
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 23,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 21,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 13,
-        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 11
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 10
       },
       "dummy": {
         "rank": 20,
@@ -1132,7 +1132,7 @@
     "Rogue|Assassination": {
       "consensus": {
         "raid": "C",
-        "mplus": "B"
+        "mplus": "A"
       },
       "ranks": {
         "archon|raid|95th pct DPS (Mythic)": 25,
@@ -1159,7 +1159,7 @@
       },
       "scores": {
         "raid": 37,
-        "mplus": 51
+        "mplus": 58
       },
       "projection": {
         "raid": {
@@ -1169,7 +1169,7 @@
         },
         "mplus": {
           "tier": "B",
-          "score": 41,
+          "score": 45,
           "confidence": "high"
         }
       }
@@ -1177,7 +1177,7 @@
     "Rogue|Outlaw": {
       "consensus": {
         "raid": "B",
-        "mplus": "B"
+        "mplus": "A"
       },
       "ranks": {
         "archon|raid|95th pct DPS (Mythic)": 22,
@@ -1194,7 +1194,7 @@
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 10,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 15,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 17,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 16,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 17,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 27,
         "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 13
       },
@@ -1204,7 +1204,7 @@
       },
       "scores": {
         "raid": 43,
-        "mplus": 49
+        "mplus": 60
       },
       "projection": {
         "raid": {
@@ -1213,8 +1213,8 @@
           "confidence": "high"
         },
         "mplus": {
-          "tier": "B",
-          "score": 52,
+          "tier": "A",
+          "score": 58,
           "confidence": "high"
         }
       }
@@ -1241,7 +1241,7 @@
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 24,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 26,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 10,
-        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 24
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 23
       },
       "dummy": {
         "rank": 21,
@@ -1249,7 +1249,7 @@
       },
       "scores": {
         "raid": 60,
-        "mplus": 59
+        "mplus": 63
       },
       "projection": {
         "raid": {
@@ -1259,7 +1259,7 @@
         },
         "mplus": {
           "tier": "C",
-          "score": 29,
+          "score": 31,
           "confidence": "high"
         }
       }
@@ -1335,7 +1335,7 @@
       },
       "scores": {
         "raid": 49,
-        "mplus": 61
+        "mplus": 65
       },
       "projection": {
         "raid": {
@@ -1345,7 +1345,7 @@
         },
         "mplus": {
           "tier": "A",
-          "score": 59,
+          "score": 61,
           "confidence": "high"
         }
       }
@@ -1370,7 +1370,7 @@
       },
       "scores": {
         "raid": 37,
-        "mplus": 85
+        "mplus": 80
       },
       "projection": {
         "raid": {
@@ -1380,7 +1380,7 @@
         },
         "mplus": {
           "tier": "B",
-          "score": 55,
+          "score": 52,
           "confidence": "medium"
         }
       }
@@ -1415,7 +1415,7 @@
       },
       "scores": {
         "raid": 49,
-        "mplus": 41
+        "mplus": 45
       },
       "projection": {
         "raid": {
@@ -1425,7 +1425,7 @@
         },
         "mplus": {
           "tier": "A",
-          "score": 67,
+          "score": 69,
           "confidence": "high"
         }
       }
@@ -1452,7 +1452,7 @@
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 3,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 11,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 22,
-        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 12
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 11
       },
       "dummy": {
         "rank": 16,
@@ -1497,7 +1497,7 @@
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 19,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 22,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 21,
-        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 5
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 4
       },
       "dummy": {
         "rank": 15,
@@ -1538,7 +1538,7 @@
         "simulationcraft|raid|SimC nightly Patchwerk DPS": 25,
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 6,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 13,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 4,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 5,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 2,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 2,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 19,
@@ -1550,7 +1550,7 @@
       },
       "scores": {
         "raid": 43,
-        "mplus": 62
+        "mplus": 70
       },
       "projection": {
         "raid": {
@@ -1560,7 +1560,7 @@
         },
         "mplus": {
           "tier": "A",
-          "score": 69,
+          "score": 73,
           "confidence": "high"
         }
       }
@@ -1591,7 +1591,7 @@
       },
       "scores": {
         "raid": 60,
-        "mplus": 58
+        "mplus": 62
       },
       "projection": {
         "raid": {
@@ -1601,7 +1601,7 @@
         },
         "mplus": {
           "tier": "B",
-          "score": 51,
+          "score": 53,
           "confidence": "medium"
         }
       }
@@ -1609,7 +1609,7 @@
     "Warrior|Protection": {
       "consensus": {
         "raid": "A+",
-        "mplus": "B"
+        "mplus": "C"
       },
       "ranks": {
         "archon|raid|95th pct DPS (Mythic)": 2,
@@ -1625,7 +1625,7 @@
       },
       "scores": {
         "raid": 86,
-        "mplus": 41
+        "mplus": 38
       },
       "projection": {
         "raid": {
@@ -1634,8 +1634,8 @@
           "confidence": "medium"
         },
         "mplus": {
-          "tier": "A",
-          "score": 59,
+          "tier": "B",
+          "score": 57,
           "confidence": "medium"
         }
       }

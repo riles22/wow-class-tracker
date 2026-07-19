@@ -268,3 +268,18 @@ Supatease PvP 1v1 duels + PvP/hangout streams, Critcake/Kalamazi/Shadarek/Shindi
 triaged), izen `5wntDvx3wmo` delve-boss mechanics (no per-spec meta read), DalaranGaming "Blizzard fixing
 issues" general news, Supatease "Class Tuning Update S1" roundup (prior precedent: no in-depth in-scope take).
 Pending queue 2→0. 6 takes + 6 metaNotes added.
+
+## 2026-07-19 (nightly, 2nd run) — 25/25 feeds polled; 1 new video queued; queue 0→1
+All 25 unique creator RSS feeds polled live (25/25 OK). Transcript queue was EMPTY at fetch time
+(summary.json `requested:0 fetched:0 verdict:ok`) — nothing to distill this run; creator-takes.json
+unchanged. **1 genuinely-new in-scope video QUEUED PENDING** (no transcript available this run):
+Supatease `sZwBwfkcuZ0` "The Tides of The Meta Are Shifting" (07-19 14:32Z) — vague title + empty RSS
+description, but Supatease is a scoped Shaman/Warlock/Warrior theorycrafter and a "meta shifting" video
+is plausibly an S2 outlook; queued so a future transcript run distills-or-verified-skips rather than
+dropping a possible meta signal. Out-of-scope / triaged (not queued): **DalaranGaming `CTByGtlOgkc`**
+"What's Changing For Monks In Patch 12.1? (Early PTR Preview)" — a datamined patch-note readthrough, and
+Dalaran carries no Monk spec-scope (same handling as his 07-17 Evoker preview `xRk0mNKX6OE`); Supatease
+`FmcXJz3ab5k`/`cDoPzWhqGDc` (hangout/reroll streams), Shadarek `Gk-AT8rktWE` (Guardian Druid stream, off
+his DH scope), Shindigg `kINGIlRORo4` (DH keys stream), Kalamazi `kZ1K_ynyq0E` (PTR keys stream), Critcake
+`gaZGPSZLEg0` (Warrior io gameplay), Supatease `sZwBwfkcuZ0` aside all prior-triaged. izen newest still
+`5wntDvx3wmo` (07-18 delve preview, already latest) — no new generalCreator meta/build content. Pending 0→1.
