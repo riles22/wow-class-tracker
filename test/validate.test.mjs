@@ -68,6 +68,35 @@ test("validateData enforces https-only URLs and the take-host allowlist", async 
   assert.ok(errors.some(e => e.includes('general creator "Sketchy" url')));
 });
 
+test("host allowlists pin every agent-writable URL field, not just creator takes", async () => {
+  const data = await loadData(ROOT);
+  const broken = structuredClone(data);
+  // Each value is a well-formed https URL — only the HOST is wrong, so any error
+  // below comes from hostOk, not the https check.
+  broken.specs.find(s => s.ptr?.source).ptr.source = "https://evil.example.com/writeup";
+  const cls = broken.community.classes.find(c => (c.creators ?? []).length);
+  cls.creators[0].url = "https://evil.example.com/channel";
+  cls.discord.url = "https://evil.example.com/invite";
+  broken.ptrBuilds.thread = "https://evil.example.com/thread.json";
+  broken.ptrBuilds.builds[0].forumUrl = "https://evil.example.com/post/19";
+  broken.ptrBuilds.builds[0].wowheadUrl = "https://evil.example.com/news";
+  const errors = validateData(broken);
+  const pinned = errors.filter(e => e.includes('host "evil.example.com" is not in the approved host allowlist'));
+  assert.equal(pinned.length, 6);
+  assert.ok(pinned.some(e => e.includes("ptr.source")));
+  assert.ok(pinned.some(e => e.includes("creator")));
+  assert.ok(pinned.some(e => e.includes("discord url")));
+  assert.ok(pinned.some(e => e.includes("ptr-builds.json: thread")));
+  assert.ok(pinned.some(e => e.includes("forumUrl")));
+  assert.ok(pinned.some(e => e.includes("wowheadUrl")));
+  // A malformed URL still reports exactly once (urlOk), never a second hostOk error.
+  const single = structuredClone(data);
+  single.ptrBuilds.builds[0].forumUrl = "http://us.forums.blizzard.com/x";
+  const singleErrors = validateData(single).filter(e => e.includes("forumUrl"));
+  assert.equal(singleErrors.length, 1);
+  assert.ok(singleErrors[0].includes("must be a valid https:// URL"));
+});
+
 test("validateData rejects planted or malformed history snapshots (heartbeat-silencing guard)", async () => {
   const data = await loadData(ROOT);
   const broken = structuredClone(data);

@@ -30,8 +30,8 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: "22"
       - name: Validate + test data
@@ -46,7 +46,7 @@ jobs:
             echo "::warning::committed dist/index.html differs from the CI rebuild — it was likely committed from stale data or never rebuilt; the DEPLOYED site uses the fresh build, but the committed copy is misleading."
           fi
       - name: Configure Pages (auto-enables on first run)
-        uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
         with:
           enablement: true
       - name: Upload the built site
@@ -69,7 +69,7 @@ jobs:
       # with backoff before failing the run; the first success short-circuits the rest.
       - name: Deploy to GitHub Pages (attempt 1)
         id: d1
-        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
+        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5.0.0
         continue-on-error: true
       - name: Back off before retry
         if: steps.d1.outcome == 'failure'
@@ -77,7 +77,7 @@ jobs:
       - name: Deploy to GitHub Pages (attempt 2)
         id: d2
         if: steps.d1.outcome == 'failure'
-        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
+        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5.0.0
         continue-on-error: true
       - name: Back off before final retry
         if: steps.d1.outcome == 'failure' && steps.d2.outcome == 'failure'
@@ -85,4 +85,4 @@ jobs:
       - name: Deploy to GitHub Pages (attempt 3, final)
         id: d3
         if: steps.d1.outcome == 'failure' && steps.d2.outcome == 'failure'
-        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
+        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5.0.0

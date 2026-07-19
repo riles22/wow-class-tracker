@@ -144,7 +144,10 @@ Kinds: `tier-list` (toggle button + consensus; needs `scale`), `metrics` (number
 drawers), `notes-feed` (PTR build feed), `reference` (footer link only), `community`
 (community-layer registry entries). Each has `pages[]` with `bracket`, `role`,
 optional `label`, `url`, `snapshot` (ISO date). All URLs must be https:// —
-validation enforces it (plus a citation-host allowlist on creator-take URLs).
+validation enforces it, plus host allowlists on every agent-writable URL field
+(creator-take/metaNote citations, writeup + tier-set sources, community discord/creator
+links, PTR build-feed links — the approved-host sets live in `src/validate.mjs`; a new
+legitimate host fails the run red and is added there as a reviewed code edit).
 
 ### `data/scales.json` — tier scales + normalization
 Each scale maps tiers onto one 0–100 axis; consensus = mean of available tier-list scores
@@ -274,11 +277,14 @@ src/      build.mjs · template.html · render.mjs · normalize.mjs · validate.
           the only WCL / transcript-API credential holders)
 test/     normalize · validate · render · build · apply-metrics · apply-ratings · check-refresh
 dist/     index.html  (generated — open directly in a browser)
-docs/     working notes (finder-audit.md · security-audit-2026-07.md — audit disposition)
+docs/     working notes (finder-audit.md · security-audit-2026-07.md ·
+          portfolio-audit-2026-07-18.md — audit dispositions)
 legacy/   original single-file tracker (pre-conversion reference)
 .github/  workflows/deploy.yml (build+deploy Pages on push) · workflows/ci.yml (tests on
           every push) · workflows/freshness.yml (daily staleness heartbeat → alert issue) ·
-          dependabot.yml (weekly action-SHA + pip bumps; requirements.txt pins yt-dlp)
+          dependabot.yml (weekly grouped action-SHA + pip bumps; requirements.txt pins
+          yt-dlp) · CODEOWNERS (declares the human-owned boundary: workflows, gate
+          contract, scales, registries, gatekeeper code)
 .claude/skills/   refresh-tiers · refresh-metrics · ptr-watch · watch-creators
                   (each has the procedure + hard-won gotchas + a log.md memory)
 ```
@@ -313,7 +319,12 @@ both prompts carry the single-shot rule for exactly that reason). (`dispatch-nig
 workflow-file change lands on master, via `gh workflow run` as github-actions[bot] —
 `allowed_bots` on the agent steps permits that actor.) A `workflow_dispatch` input
 `agent_model` overrides both agents' model for a single run (default
-`claude-opus-4-8`) — one-off model trials without editing the workflow. Publish (deterministic, no AI, holds the write token) gates on `npm test` →
+`claude-opus-4-8`) — one-off model trials without editing the workflow. Publish (deterministic, no AI, holds the write token) gates on a
+boundary guard ("Gate 0", 2026-07-18 portfolio audit: the artifact may not alter the
+gate contract `required-sources.json`, `scales.json`, or registry structure in
+`sources.json`/`community.json` beyond their agent-updatable fields — those fail the
+night red; agent-shipped `data/history/` snapshots are reset so movement/anomaly
+baselines always come from committed history) → `npm test` →
 `npm run build` → `node src/check-refresh.mjs --manifest` (which cross-checks WCL rows
 against the pre-agent evidence artifact and takes its anomaly ack ONLY from the
 human `anomaly_ack` workflow input), then snapshots, stages

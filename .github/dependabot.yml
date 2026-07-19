@@ -7,6 +7,13 @@ updates:
     directory: "/"
     schedule:
       interval: weekly
+    # One grouped PR per week instead of one PR per action (2026-07-18 portfolio
+    # audit): individual action PRs conflict with each other and with workflow
+    # edits on master; grouped bumps rebase as a unit and get one CI verdict.
+    groups:
+      workflow-actions:
+        patterns:
+          - "*"
   # requirements.txt at the repo root holds the nightly runner's pinned yt-dlp.
   # yt-dlp must move quickly (YouTube breaks old versions) — weekly tested bumps
   # instead of installing "latest" inside the secret-bearing job.
