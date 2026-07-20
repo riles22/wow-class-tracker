@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { tierMoves, newEntries, verdictChanges, digestMarkdown } from "../src/digest.mjs";
+import { tierMoves, newEntries, verdictChanges, videoActivity, digestMarkdown } from "../src/digest.mjs";
 
 const spec = (cls, sp, over = {}) => ({ class: cls, spec: sp, ...over });
 const payload = (specs, extra = {}) => ({
@@ -63,6 +63,58 @@ test("digestMarkdown: quiet run says so honestly; degraded sources footer appear
   assert.ok(md.includes("> All fresh."));
   assert.ok(md.includes("[workflow run](https://example.com/run)"));
   assert.ok(md.includes("1 source degraded (wcl-ptr-raid)"));
+});
+
+test("videoActivity classifies cleared queue entries by whether new takes/notes cite them", () => {
+  const oldPending = { videos: [{ id: "aaa111", creator: "Obli", title: "DK in 12.1" }, { id: "bbb222", creator: "Supatease", title: "PvP tuning" }] };
+  const newPending = { videos: [{ id: "ccc333", creator: "Kalamazi", title: "Warlock buffs?", published: "2026-07-20" }, { id: "ddd444", creator: "Held", title: "Old queued vid" }] };
+  const oldPendingWithD = { videos: [...oldPending.videos, { id: "ddd444", creator: "Held", title: "Old queued vid" }] };
+  const takes = [{ url: "https://youtu.be/aaa111?t=60" }];
+  const act = videoActivity(oldPendingWithD, newPending, takes, []);
+  assert.deepEqual(act.distilled.map(v => v.id), ["aaa111"]);
+  assert.deepEqual(act.skipped.map(v => v.id), ["bbb222"]);
+  assert.deepEqual(act.queued.map(v => v.id), ["ccc333"]);
+  assert.deepEqual(act.waiting.map(v => v.id), ["ddd444"]);
+});
+
+test("videoActivity tolerates missing queue files (revs predating the lane)", () => {
+  const act = videoActivity(null, { videos: [{ id: "x", creator: "C", title: "T" }] }, [], []);
+  assert.deepEqual(act.queued.map(v => v.id), ["x"]);
+  assert.deepEqual(videoActivity(null, null, [], []), { distilled: [], skipped: [], queued: [], waiting: [] });
+});
+
+test("digestMarkdown renders the Creator videos section and it suppresses the quiet-run line", () => {
+  const p = payload([]);
+  const md = digestMarkdown({ oldPayload: p, newPayload: p, manifest: null, runUrl: null,
+    oldPending: { videos: [{ id: "bbb222", creator: "Supatease", title: "PvP tuning" }] },
+    newPending: { videos: [{ id: "ccc333", creator: "Kalamazi", title: "Warlock buffs?", published: "2026-07-20" }] } });
+  assert.ok(md.includes("**Creator videos:**"));
+  assert.ok(md.includes("Checked & skipped — transcript verified out of scope, no PvE tier/meta content: **Supatease** — “PvP tuning” ([watch](https://youtu.be/bbb222))"));
+  assert.ok(md.includes("Queued for the next transcript run: **Kalamazi** — “Warlock buffs?” (published 2026-07-20, [watch](https://youtu.be/ccc333))"));
+  assert.ok(!md.includes("Quiet run"));
+});
+
+test("digestMarkdown marks a cleared video distilled when its takes landed; unchanged waiting queue keeps the quiet line", () => {
+  const oldP = payload([]);
+  const newP = payload([], { creatorTakes: { takes: [
+    { creator: "Obli", class: "Death Knight", spec: "Unholy", sentiment: "nerf", claim: "less rDPS", url: "https://youtu.be/aaa111?t=60", superseded: false },
+  ], metaNotes: [] } });
+  const md = digestMarkdown({ oldPayload: oldP, newPayload: newP, manifest: null, runUrl: null,
+    oldPending: { videos: [{ id: "aaa111", creator: "Obli", title: "DK in 12.1" }] },
+    newPending: { videos: [] } });
+  assert.ok(md.includes("Distilled — takes below: **Obli** — “DK in 12.1” ([watch](https://youtu.be/aaa111))"));
+  // a queue that merely carries over is visible but does not make the run non-quiet
+  const carry = { videos: [{ id: "eee555", creator: "C", title: "Waiting vid" }] };
+  const quiet = digestMarkdown({ oldPayload: oldP, newPayload: oldP, manifest: null, runUrl: null, oldPending: carry, newPending: carry });
+  assert.ok(quiet.includes("Still waiting in the queue: **C** “Waiting vid”"));
+  assert.ok(quiet.includes("Quiet run"));
+});
+
+test("digestMarkdown omits the Creator videos section when no queue data is passed (back-compat)", () => {
+  const p = payload([]);
+  const md = digestMarkdown({ oldPayload: p, newPayload: p, manifest: null, runUrl: null });
+  assert.ok(!md.includes("Creator videos"));
+  assert.ok(md.includes("Quiet run"));
 });
 
 test("digestMarkdown lists new takes with sentiment, truncation, and link", () => {
