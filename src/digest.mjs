@@ -68,15 +68,25 @@ const cap = (arr, n, line) => arr.slice(0, n).map(line).concat(arr.length > n ? 
 /* Video-lane activity from the pending-transcripts queue diff. A video that left
    the queue was either distilled (some new take/metaNote cites its id) or
    transcript-verified out of scope; a video that entered it waits for the next
-   deterministic transcript run. Queue files may be null at revs predating the lane. */
+   deterministic transcript run. Queue files may be null at revs predating the lane.
+   Callers must pass the UNFILTERED new take/note lists: a take superseded in the
+   same run still proves its video was distilled. Id extraction covers every URL
+   shape the validator's TAKE_HOSTS allowlist admits (youtu.be/<id> plus
+   youtube.com watch?v= / embed / shorts / live). */
+const videoId = url => {
+  const m = String(url ?? "").match(/youtu\.be\/([\w-]+)/) ??
+    String(url ?? "").match(/[?&]v=([\w-]+)/) ??
+    String(url ?? "").match(/\/(?:embed|shorts|live)\/([\w-]+)/);
+  return m ? m[1] : null;
+};
 export function videoActivity(oldPending, newPending, newTakes, newNotes) {
   const oldVids = oldPending?.videos ?? [], newVids = newPending?.videos ?? [];
   const queued = newEntries(oldVids, newVids, v => v.id);
   const cleared = newEntries(newVids, oldVids, v => v.id);
   const citedIds = new Set();
   for (const e of [...(newTakes ?? []), ...(newNotes ?? [])]) {
-    const m = String(e.url ?? "").match(/youtu\.be\/([\w-]+)/);
-    if (m) citedIds.add(m[1]);
+    const id = videoId(e.url);
+    if (id) citedIds.add(id);
   }
   return {
     distilled: cleared.filter(v => citedIds.has(v.id)),
@@ -91,8 +101,10 @@ export function digestMarkdown({ oldPayload, newPayload, manifest, runUrl, oldPe
   const noteId = n => `${n.creator}|${n.spec}|${n.patchContext}|${n.url}`;
   const buildId = b => String(b.forumPostNumber ?? `${b.date}|${b.label}`);
   const moves = tierMoves(oldPayload, newPayload);
-  const takes = newEntries(oldPayload.creatorTakes?.takes, newPayload.creatorTakes?.takes, takeId).filter(t => !t.superseded);
-  const notes = newEntries(oldPayload.creatorTakes?.metaNotes, newPayload.creatorTakes?.metaNotes, noteId).filter(n => !n.superseded);
+  const takesAll = newEntries(oldPayload.creatorTakes?.takes, newPayload.creatorTakes?.takes, takeId);
+  const notesAll = newEntries(oldPayload.creatorTakes?.metaNotes, newPayload.creatorTakes?.metaNotes, noteId);
+  const takes = takesAll.filter(t => !t.superseded);
+  const notes = notesAll.filter(n => !n.superseded);
   const builds = newEntries(oldPayload.ptrBuilds?.builds, newPayload.ptrBuilds?.builds, buildId);
   const verdicts = verdictChanges(oldPayload, newPayload);
 
@@ -110,7 +122,7 @@ export function digestMarkdown({ oldPayload, newPayload, manifest, runUrl, oldPe
     lines.push(...builds.map(b => `- ${b.date} — ${b.label}${b.forumUrl ? ` ([notes](${b.forumUrl}))` : ""}`), "");
   }
   if (verdicts.length) lines.push(`**Writeup verdicts:**`, ...verdicts.map(v => `- ${v}`), "");
-  const vids = videoActivity(oldPending, newPending, takes, notes);
+  const vids = videoActivity(oldPending, newPending, takesAll, notesAll);
   const watch = v => `[watch](https://youtu.be/${v.id})`;
   if (vids.distilled.length || vids.skipped.length || vids.queued.length || vids.waiting.length) {
     lines.push(`**Creator videos:**`);

@@ -110,6 +110,39 @@ test("digestMarkdown marks a cleared video distilled when its takes landed; unch
   assert.ok(quiet.includes("Quiet run"));
 });
 
+test("videoActivity recognizes every validator-allowed YouTube URL shape as a citation", () => {
+  const pendingWith = ids => ({ videos: ids.map(id => ({ id, creator: "C", title: "T" })) });
+  const cleared4 = pendingWith(["idAAA", "idBBB", "idCCC", "idDDD"]);
+  const takes = [
+    { url: "https://youtu.be/idAAA?t=60" },
+    { url: "https://www.youtube.com/watch?v=idBBB&t=60s" },
+    { url: "https://m.youtube.com/watch?app=m&v=idCCC" },
+    { url: "https://www.youtube.com/shorts/idDDD" },
+  ];
+  const act = videoActivity(cleared4, { videos: [] }, takes, []);
+  assert.deepEqual(act.distilled.map(v => v.id).sort(), ["idAAA", "idBBB", "idCCC", "idDDD"]);
+  assert.deepEqual(act.skipped, []);
+});
+
+test("a video whose takes land already-superseded in the same run still counts as distilled", () => {
+  const oldP = payload([]);
+  // backlog catch-up: two videos from the same creator/spec distilled in ONE run —
+  // the older video's take is born superseded, but its video was still distilled
+  const newP = payload([], { creatorTakes: { takes: [
+    { creator: "Supatease", class: "Shaman", spec: "Restoration", sentiment: "buff", claim: "older read", url: "https://youtu.be/oldVID111?t=60", superseded: true },
+    { creator: "Supatease", class: "Shaman", spec: "Restoration", sentiment: "buff", claim: "newer read", url: "https://youtu.be/newVID222?t=90", superseded: false },
+  ], metaNotes: [] } });
+  const md = digestMarkdown({ oldPayload: oldP, newPayload: newP, manifest: null, runUrl: null,
+    oldPending: { videos: [{ id: "oldVID111", creator: "Supatease", title: "Older video" }, { id: "newVID222", creator: "Supatease", title: "Newer video" }] },
+    newPending: { videos: [] } });
+  assert.ok(md.includes("Distilled — takes below: **Supatease** — “Older video”"));
+  assert.ok(md.includes("Distilled — takes below: **Supatease** — “Newer video”"));
+  assert.ok(!md.includes("Checked & skipped"));
+  // display sections still hide the superseded take itself
+  assert.ok(md.includes("New creator takes (1)"));
+  assert.ok(!md.includes("older read"));
+});
+
 test("digestMarkdown omits the Creator videos section when no queue data is passed (back-compat)", () => {
   const p = payload([]);
   const md = digestMarkdown({ oldPayload: p, newPayload: p, manifest: null, runUrl: null });
