@@ -193,3 +193,12 @@ already-logged build #14 — NO new development-notes build. Wowhead RSS newest 
 review) — none a new class dev-notes build; the 07-16 Holy Paladin review is already
 covered by the existing Clarius writeup (Positive). ptr-builds.json unchanged; no writeups
 fabricated. zone-54/52/56 evidence-only (rdps-broken); 3 raw cuts merged by fetch step. No season flip.
+
+## 2026-07-20 (nightly) — no new forum build; WCL PTR cuts evidence-only (rdps-broken)
+Forum thread (Discourse .json) tops at post #15 (Linxy Rogue Outlaw addendum, 07-14) under already-logged
+build #14 — NO new development-notes build. Wowhead RSS newest 12.1 items (07-19 Temple of Sethraliss M+ S2
+first-look; 07-18 delve boss preview + wooden decor; 07-17 PvP Class Tuning + More S2 M+ Tuning; 07-16 Class
+Tuning HOTFIXES + M+ tooltip mob-count) — none a new class dev-notes build post, none a per-spec review with
+a clear verdict. ptr-builds.json unchanged; no writeups fabricated. zone-54/52/56 evidence-only: WCL
+evidence.json verdict rdps-broken → the normalized/rDPS cuts unreachable (data at 2026-07-09 baseline); the
+3 raw-DPS pooled cuts merged by the deterministic fetch step (see refresh-metrics log). No season flip.

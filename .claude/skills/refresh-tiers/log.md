@@ -121,3 +121,18 @@ applied, **0 tier moves vs committed** (upstream unchanged since the earlier 07-
 **Survivability**: all 40 specs incl TANKS this run (tank raid survivability tierList
 populated again after prior run's empty/partial). **Encounters**: 51 pages, 680 cells,
 0 changed vs committed. snapshots 07-19.
+
+## 2026-07-20 (nightly) — 5 tier sources refreshed live; 8 WoWMeta M+ Ckmeans moves, else 0
+IV (6 pages, curl, table.tier-list incl A+), Method (2; raid 39 — Vengeance DH omitted upstream; M+ 40;
+tier__title→data-original-title), Wowhead (6, raw HTML after a transient 919b Cloudflare 403 cleared on
+retry), Archon (6, __NEXT_DATA__ throughput/score; upstream lastUpdated 07-19T12:00Z), WoWMeta (3 M+,
+r.jina.ai) all fetched live + era-verified (Midnight S1 12.0.7, Devourer present; WoWMeta '12.1' substrings
+are SVG coords — NO season flip). 359 ratings applied, 0 unmatched. **Wowhead parse fix:** the M+ B tier-label
+is `[tier-label bg=q3]B [/tier-label]` (trailing space) — my first regex missed it and mis-mapped 16 B-tier
+M+ DPS specs to A; tolerant-whitespace regex → real moves 0 (cross-checked vs the inline '(X Tier)' text).
+**Tier moves vs committed:** IV/Method/Wowhead/Archon 0; **WoWMeta 8 M+** (ResoSham A→S, DiscPriest B→A,
+RestoDruid D→B, PresEvoker C→D, ProtPal D→A, Brew A→B, ProtWar D→C, VengDH C→D) — all Ckmeans reclustering
+on small tank/healer n, verified against raw markdown (grouped + rankings tables agree), NOT a Blizzard
+retune; consensus moved only 2 specs (0 of ≥2 bands). **Survivability** all 40 specs (DPS 27+heal 7+tank 6),
+0 moves. **Encounters** 51 pages (9 bosses throughput + 8 dungeons score × 3 roles): 680 cells, 0 unmatched,
+43 changed (normal churn). snapshots 07-19→07-20.

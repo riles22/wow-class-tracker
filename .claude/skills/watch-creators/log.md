@@ -294,3 +294,23 @@ PvP news (yaFXwh7aOVU/xUKBXzWCJAs/aCNaf6Q6J9A) + reroll/hangout streams; Dalaran
 entertainment (zLt0bLAxmdI/Q5ggb-Clkk8/ElvdcB-d5Mw) + "Blizzard Fixing Issues" general-news
 (V8doyR2hOE4); Critcake io-push gameplay (wyWZMj0HDQw). izen newest 5wntDvx3wmo (already
 `latest`, delve preview — not a meta/build video). Pending queue 1→2.
+
+## 2026-07-20 (nightly) — 25/25 feeds polled; 2 transcripts distilled (PvP-skipped); queue 2→3
+All 25 unique creator RSS feeds polled live (25/25 OK). **Transcript step fetched 2 videos** (summary.json
+verdict ok, offsets ms): both Supatease — `sZwBwfkcuZ0` "The Tides of The Meta Are Shifting" (07-19) +
+`HeHi9Y5aYX8` "Class Tuning Update Season 1 Midnight" (07-18). **Both transcript-verified-skipped as PvP-only**:
+HeHi9Y5aYX8 is entirely the July 21 PvP-specific tuning (DH survivability, Mistweaver Way-of-the-Crane PvP
+heal transfer, Holy/Disc Priest + Resto Shaman PvP heals) — no PvE tier/meta; sZwBwfkcuZ0 is a ~2h solo-shuffle/
+BG-blitz Elemental Shaman gameplay VOD framed on the same PvP tuning (keyword scan: raid/mythic/tier-set/parse
+all ~0). creator-takes.json unchanged. Removed both from the pending queue. **Queued 3 new in-scope 12.1
+candidates** (no transcript this run): Kalamazi `okWbk283nd0` "Warlock MAY Need Some Buffs in 12.1" (07-20,
+Affliction/Warlock scope, clearly PvE); Supatease `9XVHns6dRuY` "New Meta Incoming" (07-19) + `HuRjN73exFk`
+"12.1 Class Changes Update Healers" (07-17) — ambiguous meta/class-change roundups in Supatease's Sham/Lock/Warr
+scope, queued to distill-or-verified-skip. **izen** newest `5wntDvx3wmo` (07-18 delve preview, already `latest`;
+07-17 WQI9eNr4qpo healer-tuning recap already seen) — no new generalCreator meta/build content. **Triaged out**
+(off-scope, not queued): Shadarek CDHf1dkEGb0/fJMckvIB11Y (Guardian-Druid + Havoc keys streams, off his DH-take
+scope), Shindigg 18v8Z_w1jjA (DH keys), Dalaran ifQ0QExZO9E/zLt0bLAxmdI/ElvdcB-d5Mw/Q5ggb-Clkk8/vSIzz6fBctY/
+YObr6op6JOg (5v5-duel PvP) + V8doyR2hOE4/w-iGfC8y5_M (general-news + PTR testing livestream), Supatease PvP-news
++ Road-to-Rank-1 streams, Critcake wyWZMj0HDQw/SgX0IB4INHk (io gameplay), LBNinja7 n2ga6kdiGVQ (how-to-heal-a-
+tank tutorial, not a spec read), AutomaticJak TXv5nof2mZw (RSham/HPal M+ UI stream), Kalamazi OGqHbH5nHOI
+(sub-event), YoDaTV Tr7xu8oXiPY (twitch restream). Pending queue 2→3.

@@ -129,3 +129,17 @@ rDPS/normalized cuts (live raid/mplus, PTR raid/mplus, dummy-dome) unreachable, 
 at 2026-07-09 baseline. 3 raw cuts merged by the deterministic fetch step BEFORE agent:
 wcl-dummy-raw 103 (players 1T:2000/2T:175/3T:122/5T:1695), wcl-ptr-raid-raw 27 (6/8
 bosses; Coiled Altar & Ula'tek 0 = untested), wcl-ptr-mplus-raw 27 (all 8 dungeons). asOf 07-19.
+
+## 2026-07-20 (nightly) — Murlok/SimC/Mythicstats/Bloodmallet/Archon# refreshed; WCL evidence-only (rdps-broken)
+Murlok 40/40 (27 DPS+7 heal+6 tank) plain GET, spec-page card (href slug → first 4-digit li rating), range
+3738-4288, 0 value changes (Murlok ~8h refresh, top-50 stable). SimC MID1_Raid.txt (1.5MB): era 12.0.7.68453
+Live (hotfix 07-18) — 26/26 DPS best hero-variant per spec from Player: MID1_ sections (tanks/healers/Aug
+excluded), all 26 shifted (nightly sim variance). Mythicstats period 1072 via r.jina.ai /period/latest
+(homepage lacks % data): 39 specs (Resto Druid absent, kept stored), 0 changes. Bloodmallet 26 non-Aug DPS
+talent_target_scaling, MID1 confirmed, counts 1/2/3/5/8/15, 0 target changes. Archon numbers (95th pct
+DPS/HPS + Popularity raid; M+ score + Popularity) 40 specs from __NEXT_DATA__ specRankings table, 157/160
+changed (daily). **WCL**: agent holds no creds; evidence.json verdict `rdps-broken` (characterRankings
+metric:rdps → Internal server error, enc 3176) → the 5 rDPS/normalized cuts unreachable, unchanged at
+2026-07-09 baseline. 3 raw cuts merged by the deterministic fetch step BEFORE agent: wcl-dummy-raw 103
+(players 1T:2000/2T:175/3T:122/5T:1711), wcl-ptr-raid-raw 27 (6/8 bosses; Coiled Altar & Ula'tek 0=untested),
+wcl-ptr-mplus-raw 27 (all 8 dungeons). asOf 07-20.
