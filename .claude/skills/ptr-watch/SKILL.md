@@ -20,7 +20,9 @@ say so and change nothing.
    new Linxy posts.
 3. **For each new build**: add an entry to `data/ptr-builds.json` (newest first):
    `{date, label, forumPostNumber, forumUrl, wowheadUrl, icyveinsUrl, specsAffected[],
-   highlights[]}` — highlights are verbatim tuning lines with "(Class — Spec)" suffix.
+   highlights[]}` — highlights are verbatim tuning lines naming the spec, in practice
+   as a "Spec Class — …" prefix (the older "(Class — Spec)" suffix is also accepted;
+   the tier-set gate below matches either form).
    **Tier-set changes are NEVER optional highlights** (2026-07-21 audit: three builds of
    set redesigns silently missed the feed AND the spec cards): every line in the notes
    that changes a set bonus becomes a highlight, and for each affected spec you ALSO

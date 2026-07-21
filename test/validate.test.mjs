@@ -289,3 +289,15 @@ test("tier-set upkeep gate: ignores highlights without a set keyword or naming n
   });
   assert.ok(!validateData(broken).some(e => e.includes("tierSet.asOf") && e.includes("2026-07-19")));
 });
+
+test("tier-set upkeep gate: matches the '(Class — Spec)' suffix form and the piece idiom", async () => {
+  const data = await loadData(ROOT);
+  const broken = structuredClone(data);
+  broken.ptrBuilds.builds.unshift({
+    date: "2026-07-19", label: "test build", forumPostNumber: 99,
+    forumUrl: "https://us.forums.blizzard.com/en/wow/t/x/1/99",
+    specsAffected: ["Outlaw Rogue"],
+    highlights: ["The Venomous Abyss 4-piece bonus chance increased to 25% (Rogue — Outlaw)"],
+  });
+  assert.ok(validateData(broken).some(e => e.includes("Outlaw Rogue tierSet.asOf") && e.includes("2026-07-19")));
+});

@@ -70,7 +70,9 @@ for (const [label, url] of STAT_TABLES) {
 }
 
 const ID = process.env.WCL_CLIENT_ID, SECRET = process.env.WCL_CLIENT_SECRET;
-if (!ID || !SECRET) { console.error("— WCL_CLIENT_ID / WCL_CLIENT_SECRET not set; site-table probe above is the whole result"); process.exit(0); }
+// Missing credentials still fails RED (the nightly's WCL health depends on them) —
+// the credential-free table probe above has already printed its results by now.
+if (!ID || !SECRET) { console.error("✗ WCL_CLIENT_ID / WCL_CLIENT_SECRET not set (site-table probe above still ran)"); process.exit(1); }
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 

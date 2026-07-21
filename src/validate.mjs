@@ -362,12 +362,15 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
   // or after the build date. A re-verify that finds the wording unchanged still bumps
   // asOf with the build's source — cheap, and it keeps the card's "datamined <date>"
   // label honest. False positives only ever cost that same re-verify.
-  const SET_KEYWORD = /\btier[ -]sets?\b|\b[24][ -]set\b|\b[24]\s?pc\b|\bset bonus/i;
+  const SET_KEYWORD = /\btier[ -]sets?\b|\b[24][ -](?:set|piece)\b|\b[24]\s?pc\b|\bset bonus/i;
   for (const spec of specs) {
+    // Both highlight conventions in the wild: the feed's "Spec Class — …" prefix and
+    // the skill-documented "(Class — Spec)" suffix (em-dash or hyphen).
     const name = `${spec.spec} ${spec.class}`;
+    const names = [name, `(${spec.class} — ${spec.spec})`, `(${spec.class} - ${spec.spec})`];
     const newest = (ptrBuilds?.builds ?? [])
       .filter(b => ISO_DATE.test(b.date ?? "") &&
-        (b.highlights ?? []).some(h => typeof h === "string" && h.includes(name) && SET_KEYWORD.test(h)))
+        (b.highlights ?? []).some(h => typeof h === "string" && names.some(n => h.includes(n)) && SET_KEYWORD.test(h)))
       .reduce((m, b) => (b.date > m ? b.date : m), "");
     if (newest && !(spec.tierSet?.asOf >= newest)) {
       errors.push(`specs.json: ${name} tierSet.asOf ${spec.tierSet?.asOf ?? "(absent)"} predates the ${newest} build whose notes touched this tier set — update tierSet (set2/set4/asOf/source) alongside the build entry`);
