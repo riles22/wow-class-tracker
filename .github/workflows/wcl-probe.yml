@@ -41,13 +41,8 @@ jobs:
             const p = posts.find(p => p.post_number === n);
             if (!p) { console.log(`\n===== post #${n}: NOT in post_stream =====`); continue; }
             const text = (p.raw ?? p.cooked ?? "").replace(/<[^>]+>/g, "").replace(/&amp;/g, "&").replace(/&#39;|&rsquo;/g, "'").replace(/&quot;/g, '"');
-            console.log(`\n===== post #${n} (${p.created_at}) — set-bonus lines =====`);
-            const lines = text.split("\n");
-            lines.forEach((line, i) => {
-              if (/venomous abyss|tier set|[24][ -]set|set bonus/i.test(line)) {
-                console.log(`  [ctx] ${lines[i-1]?.trim() ?? ""}`);
-                console.log(`  ${line.trim()}`);
-              }
-            });
+            console.log(`\n===== post #${n} (${p.created_at}) — FULL TEXT =====`);
+            for (const line of text.split("\n")) { const l = line.trimEnd(); if (l.trim()) console.log(l); }
+            console.log(`===== end post #${n} =====`);
           }
           NODE_EOF
