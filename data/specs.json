@@ -29,8 +29,8 @@
         "In AoE it raises the penalty for not fishing a proc (Heart Strike only cleaves 5 targets inside D&D) instead of increasing the payoff of playing properly.",
         "PTR build 68569 (2026-07-08): the Venomous Abyss tier set is now implemented for testing with a NEW design — 2-set builds Blood Debt on Death Strike (Strength up to 5%, then a 10%-Strength Marrowrend at 10 stacks); 4-set makes that Marrowrend generate +3 Bone Shield and deal Shadow AoE. This is a distinct set from the Crimson Scourge / Death-and-Decay concept Mandl reviewed below."
       ],
-      "set2": "Moderate attack speed plus a small Crimson Scourge proc-chance bump — blunted by Blood's ~3s swings and the can't-proc-while-D&D-is-down restriction.",
-      "set4": "Doubled Death and Decay damage plus 5% crit for 8s on consuming Crimson Scourge — doubling a bottom-of-the-list ability does nothing, and the crit is flat percentage, not rating, so Riposte converts none of it. Zero defensive value.",
+      "set2": "Moderate attack speed plus a small Crimson Scourge proc-chance bump — blunted by Blood's ~3s swings and the can't-proc-while-D&D-is-down restriction. (Reviews the original Crimson Scourge design — the set was redesigned in the 07-08 build; see Key changes.)",
+      "set4": "Doubled Death and Decay damage plus 5% crit for 8s on consuming Crimson Scourge — doubling a bottom-of-the-list ability does nothing, and the crit is flat percentage, not rating, so Riposte converts none of it. Zero defensive value. (Reviews the original design, replaced 07-08.)",
       "watch": "Mandl's ask is a redesign — even tying the bonuses to Runes or RP spent \"would feel like a breath of fresh air.\" As written, a defense-less DPS set gives a raid-B / M+-C tank nothing where it matters; watch for a rework before tuning has anything to carry. (Note: build 68569 replaced this Crimson Scourge/D&D set with a new Blood Debt / Marrowrend design that is now implemented for testing — Mandl's Negative verdict was of the earlier concept; the current set is pending fresh review.)",
       "source": "https://www.wowhead.com/news/a-complete-miss-of-a-tier-set-blood-death-knight-tier-set-review-381973"
     },
@@ -137,10 +137,10 @@
       "meleeCapable": true
     },
     "tierSet": {
-      "set2": "Your attack speed is increased by 15%, and Crimson Scourge's chance to occur is increased by an additional 5%.",
-      "set4": "Crimson Scourge increases the damage of your next Death and Decay by 100%, and grants 5% critical strike chance for 8 seconds when consumed.",
-      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
-      "asOf": "2026-06-18"
+      "set2": "When you Death Strike, gain a stack of Blood Debt, increasing Strength by 0.5%, up to 5%. When Blood Debt reaches 10 stacks, your next Marrowrend consumes it granting 10% Strength for 10 seconds.",
+      "set4": "When consuming Blood Debt, your next Marrowrend generates 3 additional Bone Shield charges and deals Shadow damage to your target and nearby enemies.",
+      "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/11",
+      "asOf": "2026-07-08"
     }
   },
   {
@@ -1396,10 +1396,10 @@
       "meleeCapable": false
     },
     "tierSet": {
-      "set2": "Starsurge damage increased by 20%. Starfall also deals Astral damage instantly to all valid enemies in range when cast.",
+      "set2": "Starsurge damage increased by 20%. Starfall also deals Astral damage instantly to all valid enemies in range when cast (instant Starfall damage increased by 15% on 07-08).",
       "set4": "Your damage is increased by 10% while in any Eclipse. This bonus wanes to 2% at the midpoint of the Eclipse, then waxes back to 10% at the end.",
-      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
-      "asOf": "2026-06-18"
+      "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/11",
+      "asOf": "2026-07-08"
     },
     "ptrDummy": {
       "source": "warcraftlogs",
@@ -1892,10 +1892,10 @@
       "meleeCapable": true
     },
     "tierSet": {
-      "set2": "Rejuvenation has a 15% chance and Nature's Swiftness has a 100% chance to grant Genesis, causing all your heal over time effects to heal for 25% more for 8 seconds. Multiple applications may overlap.",
-      "set4": "Genesis duration is increased by 4 seconds, and gaining Genesis grants Clearcasting.",
-      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
-      "asOf": "2026-06-18"
+      "set2": "Rejuvenation has a 15% chance and Nature's Swiftness has a 100% chance to grant Genesis, causing all your heal over time effects to heal for 15% more for 8 seconds. Multiple applications may overlap.",
+      "set4": "Nature's Swiftness, Tranquility, and Incarnation: Tree of Life or Convoke the Spirits have a 100% chance to grant Genesis, and its duration is increased by 4 seconds.",
+      "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/14",
+      "asOf": "2026-07-14"
     }
   },
   {
@@ -2505,7 +2505,7 @@
         "PTR build 68569 (2026-07-08): Cobra Shot reshaped — base damage +30% and Auto Shot +20%, but its modifiers were cut (Serpentine Strikes crit-dmg 20% was 50%, Cobra Senses 10% was 35%, Pack Leader's Hogstrider +100% was 200%) and Barbed Shot −12%; the 4-set single-target bonus dropped to +15%/stack (was 30%). Devs continuing to monitor BM throughput."
       ],
       "set2": "Reads as more of an AoE boost than a single-target one. Tarlo details it as Barbed Shot making pets Stomp one extra time at 50% effectiveness.",
-      "set4": "Stomp grants a Cobra Shot benefit — 20% Beast Cleave effectiveness or a 30% single-target bonus (stacking to 4). Because the 4pc reads the cosmetic Beast Cleave buff, optimal play requires manually '/cancelaura Beast Cleave' in priority-AoE, 2-target, and burst windows — Tarlo flags this as an unfortunate degenerate interaction. Azortharion expects the set will mostly play itself otherwise.",
+      "set4": "Stomp grants a Cobra Shot benefit — 20% Beast Cleave effectiveness or a 30% single-target bonus (stacking to 4). Because the 4pc reads the cosmetic Beast Cleave buff, optimal play requires manually '/cancelaura Beast Cleave' in priority-AoE, 2-target, and burst windows — Tarlo flags this as an unfortunate degenerate interaction. Azortharion expects the set will mostly play itself otherwise. (Pre-07-08 values — the single-target bonus was since reduced to 15% per stack.)",
       "watch": "Watch the AoE ceiling: with Wild Instincts gone, Kill Cleave halved, and burst power flattened into the baseline, BM's multi-target output leans on the longer Beast Cleave and the tier set to hold up.",
       "source": "https://hackmd.io/@Azortharion/HunterPatch121-1"
     },
@@ -2693,9 +2693,9 @@
     },
     "tierSet": {
       "set2": "Barbed Shot causes your pets to Stomp 1 additional time at 50% effectiveness.",
-      "set4": "Stomp causes your next Cobra Shot to either benefit from Beast Cleave at 20% effectiveness, or strike your primary target for 30% additional damage, stacking up to 4 times.",
-      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
-      "asOf": "2026-06-18"
+      "set4": "Stomp causes your next Cobra Shot to either benefit from Beast Cleave at 20% effectiveness, or strike your primary target for 15% additional damage, stacking up to 4 times.",
+      "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/11",
+      "asOf": "2026-07-08"
     },
     "ptrDummy": {
       "source": "warcraftlogs",
@@ -2738,7 +2738,7 @@
         "Aimed Shot de-emphasized: crit-scaling replaced with a flat 10% crit-damage bump, and Focused Aim's cooldown reduction dropped from 2s to 1s, lowering Aimed Shot frequency",
         "PTR build 68569 (2026-07-08): sizeable catch-up buffs — Multi-Shot +80%, Steady Shot +50%, Kill Shot +25%, Rapid Fire/Volley/Auto Shot +20%, Arcane Shot +15%, Dark Ranger's Black Arrow +25% (devs explicitly bringing MM's damage up after the patch's reworks)."
       ],
-      "set2": "Reads as a straightforward Explosive Shot amplifier — adds 1s of duration for an extra tick, leaning into the ability the whole patch's success rides on.",
+      "set2": "Reads as a straightforward Explosive Shot amplifier — adds 1s of duration for an extra tick, leaning into the ability the whole patch's success rides on. (Pre-06-30 — the 2-set damage component was since cut to 5%, moved into baseline Explosive Shot.)",
       "set4": "Grants cooldown reduction off Explosive Shot ticks, but he flags that it \"will not scale with AoE\" — so the payoff stays single-target-weighted rather than rewarding the DoT's new multi-target ceiling.",
       "watch": "With Bulletstorm gutted and Aimed Shot pushed to the background, MM's priority/funnel damage takes a real hit — whether the spec comes out ahead depends almost entirely on how the reworked Explosive Shot actually performs in practice.",
       "source": "https://hackmd.io/@Azortharion/HunterPatch121-1"
@@ -2926,10 +2926,10 @@
       "meleeCapable": false
     },
     "tierSet": {
-      "set2": "Explosive Shot lasts 1 second longer and deals 20% increased damage.",
+      "set2": "Explosive Shot lasts 1 second longer and deals 5% increased damage.",
       "set4": "Aimed Shot and Rapid Fire damage increased by 5%. Each time Explosive Shot causes a burst of damage, the cooldown of Aimed Shot and Rapid Fire is reduced by 0.5 seconds.",
-      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
-      "asOf": "2026-06-18"
+      "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/10",
+      "asOf": "2026-06-30"
     },
     "ptrDummy": {
       "source": "warcraftlogs",
@@ -2968,8 +2968,8 @@
         "New Razor Edge node — reads like a 2-point tax rather than a real choice.",
         "Kit changes don't add interactivity."
       ],
-      "set2": "Passive throughput, no gameplay hook.",
-      "set4": "Also passive — misses all of Blizzard's own goals for the set (no rotational change, no new decision).",
+      "set2": "Passive throughput, no gameplay hook. (Reviews the pre-07-14 design — the 07-14 build reworked both bonuses around Mongoose Fury and Boomstick.)",
+      "set4": "Also passive — misses all of Blizzard's own goals for the set (no rotational change, no new decision). (Reviews the pre-07-14 design.)",
       "watch": "Baseline is strong (raid-S), so this won't tank the spec — but the set is a wasted opportunity to make it more engaging.",
       "sourceLabel": "Wowhead 12.1 class preview"
     },
@@ -3136,10 +3136,10 @@
       "meleeCapable": true
     },
     "tierSet": {
-      "set2": "Raptor Strike damage increased by 15%.",
-      "set4": "Mongoose Fury also increases the damage of Wildfire Bomb by 10%.",
-      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
-      "asOf": "2026-06-18"
+      "set2": "Mongoose Fury increases the damage of Wildfire Bomb by 10%.",
+      "set4": "Each blast of Boomstick increases the duration of Mongoose Fury by 1 second. Mongoose Fury effects are increased by 10%.",
+      "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/14",
+      "asOf": "2026-07-14"
     },
     "ptrDummy": {
       "source": "warcraftlogs",
@@ -3602,8 +3602,8 @@
     "tierSet": {
       "set2": "Pyroclasm causes Flamestrike and Pyroblast to always critically strike.",
       "set4": "Pyroclasm reduces the cast time of Flamestrike and Pyroblast by 20% and its damage bonus is increased by 20%.",
-      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
-      "asOf": "2026-06-18"
+      "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/14",
+      "asOf": "2026-07-14"
     },
     "ptrDummy": {
       "source": "warcraftlogs",
@@ -3836,9 +3836,9 @@
     },
     "tierSet": {
       "set2": "Each stack of Freezing Shattered has a 5% chance to generate an Icicle. Glacial Spike damage increased by 25%.",
-      "set4": "Consuming Glacial Spike has a small chance to grant Glacial Spike. Shatter damage increased by 15%.",
-      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
-      "asOf": "2026-06-18"
+      "set4": "Consuming Glacial Spike has a small chance to generate 5 Icicles over 1 second (was: immediately granting the Glacial Spike! effect). Shatter damage increased by 15%.",
+      "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/11",
+      "asOf": "2026-07-08"
     },
     "ptrDummy": {
       "source": "warcraftlogs",
@@ -4395,7 +4395,7 @@
         "2pc increases Infusion of Light additively: Infused Flash of Light heals +275% instead of +200% (a 25% bump) and Greater Judgment hits +225% instead of +150% (a 30% bump).",
         "PTR build 68569 (2026-07-08): broad buff for talent diversity — all healing +8%, Holy Shock +10%, the 2-set now doubles Infusion of Light (100%, was 75%), plus buffs to Truth Prevails, Saved by the Light, Overflowing Light, Awakening, Ringing of the Heavens and more."
       ],
-      "set2": "A pretty standard set — makes Infusions feel better and more important not to waste (+25% on Infused Flash of Light, +30% on Greater Judgment), but not particularly strong compared to other healers' 2pc bonuses.",
+      "set2": "A pretty standard set — makes Infusions feel better and more important not to waste (+25% on Infused Flash of Light, +30% on Greater Judgment), but not particularly strong compared to other healers' 2pc bonuses. (Pre-07-08 — Infusion of Light effectiveness was since raised to 100%.)",
       "set4": "Originally a 50% chance for Holy Light to grant Infusion of Light — which also caused wasted procs since you don't know you've proc'd until you've already queued the next spell. The 6/30 buff to a guaranteed 100% chance fixes that and is 'a great change': Holy Light is now a reliable Infusion generator, no more back-to-back spamming, and much more fun to play.",
       "watch": "The 4pc exists to fix real gameplay gaps — making Judgment worth casting without an Infusion proc and cutting hardcast Flash of Light — and Clarius argues effects that fix gameplay issues should be baseline, not gated behind a temporary tier set. He also hoped for more talent-tree cleanup: lots of weak kiss/curse talents (Call of the Righteous, Rising Sunlight, Seraphic Barrier), and the essential Inflorescence of the Sunwell is still buried behind three mediocre talents.",
       "sourceLabel": "Clarius (Hammer of Wrath) — Discord"
@@ -4512,10 +4512,10 @@
       "meleeCapable": false
     },
     "tierSet": {
-      "set2": "Infusion of Light increases the healing of Flash of Light by an additional 75% and the absorb from Greater Judgment by an additional 75%.",
+      "set2": "Infusion of Light increases the healing of Flash of Light by an additional 100% and the absorb from Greater Judgment by an additional 100%.",
       "set4": "Judgment now has a 20% chance to grant Infusion of Light. Holy Light now has a 100% chance to grant Infusion of Light.",
-      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
-      "asOf": "2026-06-30"
+      "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/11",
+      "asOf": "2026-07-08"
     }
   },
   {
@@ -4549,7 +4549,7 @@
         "Undocumented buff: Undying Embers now heals for at least 125% of Refining Fire damage, scaling up to 300% as HP drops.",
         "PTR build 68569 (2026-07-08): Lightsmith's Divine Guidance redesigned (each Holy Power ability empowers the next Consecration to deal split Holy damage and heal up to 3 allies); several fixes/QoL (Blessed Word, Valiant Crusade no longer cancels on death, Improved Ardent Defender fatal-damage indicator) and Guardian of Ancient Kings' initial cooldown raised to 8s."
       ],
-      "set2": "The \"Crusader Strike\" set (Blessed Hammer, Hammer of the Righteous, Crusader Strike and Judgment) is a pure damage amp — those hits deal 20% increased damage, or 60% if the hit crits. The crew reads it as a straightforward offensive lever that rewards building around crit to hit the higher tier, doubling down on Prot's damage rotation rather than adding defensive value.",
+      "set2": "The \"Crusader Strike\" set (Blessed Hammer, Hammer of the Righteous, Crusader Strike and Judgment) is a pure damage amp — those hits deal 20% increased damage, or 60% if the hit crits. The crew reads it as a straightforward offensive lever that rewards building around crit to hit the higher tier, doubling down on Prot's damage rotation rather than adding defensive value. (Pre-07-14 — the crit bonus was since halved: 100% additional damage, was 200%.)",
       "set4": null,
       "watch": "Note: the sources describe the tier set as a single combined mechanic and do not cleanly split a 2pc vs 4pc bonus, so the whole tier-set read sits in set2 and set4 is left empty. These are PTR values on top of an early, still-shifting tree — several of the nerfs are undocumented (Fluttershy) and the Hammer of Wrath Discord is tracking a live bug list, so the 60%-on-crit set payoff and the net offensive floor could both move before 12.1 ships. Treat the numbers as against the 12.0.7 baseline.",
       "sourceLabel": "Woliance & Fluttershy (Hammer of Wrath) — Discord"
@@ -4658,9 +4658,9 @@
     },
     "tierSet": {
       "set2": "Consecration is 30% larger and enemies within your Consecration are illuminated, increasing the chance for your abilities to critically strike them by 5%.",
-      "set4": "Enemies struck by Judgment or Crusader Strike take 20% additional Holy damage. If they are struck by a critical strike, the additional damage is increased by 200%.",
-      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
-      "asOf": "2026-06-18"
+      "set4": "Enemies struck by Judgment or Crusader Strike take 20% additional Holy damage. If they are struck by a critical strike, the additional damage is increased by 100%.",
+      "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/14",
+      "asOf": "2026-07-14"
     }
   },
   {
@@ -4695,7 +4695,7 @@
         "PTR build 68569 (2026-07-08): all damage −6%, and the Venomous Abyss 4-set reworked — consuming Divine Purpose now grants Divine Arbiter (empowering other Holy Power spenders to hit for Holy AoE; Divine Arbiter damage +35%), an attempt to address the tier set's pain points while keeping its identity."
       ],
       "set2": "Divine Purpose gains an additional 10% chance to activate, and consuming it grants Divine Power — +10% Holy damage done for 12 seconds. Bolas calls it \"pretty solid and inoffensive\": a clean, uncontroversial throughput bonus.",
-      "set4": "Consuming Divine Purpose with Divine Storm grants 2 stacks of Divine Arbiter, making your next Final Verdicts unleash an AoE Holy nuke (8-yd splash) — but only if no Arbiter stacks are already active, so once you hold stacks you must spend Divine Purpose on Final Verdict (the single-target spender) instead. \"One of the most controversial set bonuses in the Retribution community in recent memory\": it forces the \"wrong\" spender for the target count, which the official feedback thread explicitly flagged as a degenerate/unintended rotation impact. Bolas thinks it misses the mark — easy to accidentally misplay and punishing when you do, yet with a low skill ceiling once learned, bucking Ret's beginner-friendly Dragonflight-era identity.",
+      "set4": "Consuming Divine Purpose with Divine Storm grants 2 stacks of Divine Arbiter, making your next Final Verdicts unleash an AoE Holy nuke (8-yd splash) — but only if no Arbiter stacks are already active, so once you hold stacks you must spend Divine Purpose on Final Verdict (the single-target spender) instead. \"One of the most controversial set bonuses in the Retribution community in recent memory\": it forces the \"wrong\" spender for the target count, which the official feedback thread explicitly flagged as a degenerate/unintended rotation impact. Bolas thinks it misses the mark — easy to accidentally misplay and punishing when you do, yet with a low skill ceiling once learned, bucking Ret's beginner-friendly Dragonflight-era identity. (Reviews the pre-07-08 iteration — the 4-set was reworked on 07-08: any Holy Power spender, cannot occur while active; see Key changes.)",
       "watch": "Bolas's core worry is agency: faster, smoother generation plays better moment-to-moment than 12.0's spikiness, but it pushes Ret even further toward \"dump Holy Power ASAP\" with little management to optimize. Hero Talents remain Templar-dominant (though the new set is stronger for Herald of the Sun and balance has improved), held back partly by an Instrument of Retribution bug that makes Hammer of Wrath uncastable for the rest of an Avenging Wrath if a proc was already active — minor for Templar, a big loss for Herald of the Sun. Verdict call is editorial — draft.",
       "source": "https://www.wowhead.com/news=382093/a-very-controversial-4-set-retribution-paladin-class-changes-and-tier-set-review"
     },
@@ -4883,9 +4883,9 @@
     },
     "tierSet": {
       "set2": "Divine Purpose has an additional 10% chance to activate and consuming it grants Divine Power, increasing Holy damage done by 10% for 12 seconds.",
-      "set4": "Consuming Divine Purpose with Divine Storm causes your next Final Verdict to be free and unleash Divine Arbiter at its target, dealing Holy damage and Holy damage to enemies within 8 yards.",
-      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
-      "asOf": "2026-06-18"
+      "set4": "Consuming Divine Purpose grants Divine Arbiter, empowering your other Holy Power spenders to unleash an arbiter of light at their primary target, dealing Holy damage and Holy damage to enemies within 8 yards. Cannot occur while Divine Arbiter is active. Divine Arbiter damage increased by 35% (07-08).",
+      "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/11",
+      "asOf": "2026-07-08"
     },
     "ptrDummy": {
       "source": "warcraftlogs",
@@ -5184,10 +5184,10 @@
       "meleeCapable": false
     },
     "tierSet": {
-      "set2": "Each target affected by your Renew increases your Haste by 2%, up to 6%.",
+      "set2": "Each target affected by your Renew increases your Critical Strike chance by 2%, up to 6%.",
       "set4": "Renew healing increased by 10%. Light's Resurgence now has a 100% chance to leave a Renew on the first target Prayer of Mending heals.",
-      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
-      "asOf": "2026-06-18"
+      "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/10",
+      "asOf": "2026-06-30"
     }
   },
   {
@@ -5220,7 +5220,7 @@
         "PTR build 68569 (2026-07-08): all ability damage increased by 8%."
       ],
       "set2": "Underwhelming.",
-      "set4": "A complete non-starter — doesn't reward anything the spec wants to do.",
+      "set4": "A complete non-starter — doesn't reward anything the spec wants to do. (Reviews the pre-07-14 design — the 07-14 build redesigned the 4-set around a free Void Volley proc.)",
       "watch": "Strong baseline (raid-A+ / M+-A+) means the whiffed set stings less than it would on a weaker spec.",
       "sourceLabel": "Wowhead 12.1 class preview"
     },
@@ -5408,9 +5408,9 @@
     },
     "tierSet": {
       "set2": "Tentacle Slam cooldown reduced by 3 seconds and its damage is increased by 100%.",
-      "set4": "After casting Tentacle Slam, your next Vampiric Touch is instant, generates 4 additional Insanity, and conjures Shadowy Apparitions that deal 200% of normal damage.",
-      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
-      "asOf": "2026-06-18"
+      "set4": "Tentacle Slam has a 100% chance to grant a free use of Void Volley at 125% effectiveness.",
+      "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/14",
+      "asOf": "2026-07-14"
     },
     "ptrDummy": {
       "source": "warcraftlogs",
@@ -5687,7 +5687,7 @@
         "Zero In (3%→2%) and Hidden Opportunity (Ambush proc 80%→100%) tweaks miss their stated mark."
       ],
       "set2": "Dispatch damage +15% — does very little on its own.",
-      "set4": "Sinister Strike / Ambush have a 12% chance to make the next Dispatch free at max combo points — adds a track-and-react hook and eases energy income. Currently bugged with Gravedigger, Hand of Fate coins, and Ruthlessness.",
+      "set4": "Sinister Strike / Ambush have a 12% chance to make the next Dispatch free at max combo points — adds a track-and-react hook and eases energy income. Currently bugged with Gravedigger, Hand of Fate coins, and Ruthlessness. (Pre-06-30 values — proc chance since raised to 20%, Opportunity hits excluded.)",
       "watch": "Loss of the Precise Cuts era of cleave has turned Outlaw from a 2–4 target monster into \"borderline unplayable\" on those fights — and the upcoming raid has several 2–3 target encounters. Same trap hits all Rogues.",
       "sourceLabel": "Wowhead 12.1 class preview"
     },
@@ -5875,9 +5875,9 @@
     },
     "tierSet": {
       "set2": "Dispatch damage increased by 15%.",
-      "set4": "Sinister Strike and Ambush have a 12% chance to cause your next Dispatch to be free and deal damage as if you spent the maximum combo points.",
-      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
-      "asOf": "2026-06-18"
+      "set4": "Sinister Strike and Ambush have a 20% chance to cause your next Dispatch to be free and deal damage as if you spent the maximum combo points. Cannot activate from Sinister Strike's additional Opportunity hits.",
+      "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/10",
+      "asOf": "2026-06-30"
     },
     "ptrDummy": {
       "source": "warcraftlogs",
@@ -6558,10 +6558,10 @@
       "meleeCapable": true
     },
     "tierSet": {
-      "set2": "Voltaic Blaze causes your primary target to erupt in a Fire Nova every 2 seconds for 6 seconds. Fire Nova damage is increased by 200% if it only strikes a single target.",
-      "set4": "Fire Nova reduces the cooldown of Crash Lightning by 2 seconds and increases the damage of your next Crash Lightning by 8%, stacking up to 5 times.",
-      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
-      "asOf": "2026-06-18"
+      "set2": "Voltaic Blaze causes your primary target to erupt in a Fire Nova every 2 seconds for 6 seconds. Fire Nova deals 200% increased damage to the primary target of your Voltaic Blaze.",
+      "set4": "Fire Nova reduces the cooldown of Crash Lightning by 2 seconds and increases the damage of your next Crash Lightning by 8%, stacking up to 5 times (07-08: the Short Circuit aura now also boosts the Crash Lightning weapon-enhancement effect, averaged across stacks).",
+      "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/11",
+      "asOf": "2026-07-08"
     },
     "ptrDummy": {
       "source": "warcraftlogs",
@@ -6604,7 +6604,7 @@
         "PTR build 68569 (2026-07-08): Acid Rain damage +50% but now ticks every 2s (was 1s); fixes so Healing Rain heals immediately on cast and both Acid/Healing Rain grant a proper final partial tick."
       ],
       "set2": "Thematic and pleasant, but low-impact.",
-      "set4": "Overshadowed by stronger healer sets this season.",
+      "set4": "Overshadowed by stronger healer sets this season. (Pre-06-30 — the absorb value was since increased by 300%.)",
       "watch": "Author's verdict: weakest raid healer in the game right now. Baseline raid-B / M+-A — the M+ side carries it; the raid side is the concern the changes don't fix.",
       "sourceLabel": "Wowhead 12.1 class preview"
     },
@@ -6721,9 +6721,9 @@
     },
     "tierSet": {
       "set2": "Healing Wave and Chain Heal have a chance to create a Healing Rain at the target's location for 10 seconds.",
-      "set4": "Every 1 second, 1 ally inside of Healing Rain gains a watery shield that absorbs X damage for 10 seconds.",
-      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
-      "asOf": "2026-06-18"
+      "set4": "Every 1 second, 1 ally inside of Healing Rain gains a watery shield that absorbs damage for 10 seconds (absorb value increased by 300% on 06-30).",
+      "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/10",
+      "asOf": "2026-06-30"
     }
   },
   {
@@ -6929,10 +6929,10 @@
       "meleeCapable": false
     },
     "tierSet": {
-      "set2": "You have a 20% chance to refund a Soul Shard after spending a Soul Shard.",
-      "set4": "Each active Unstable Affliction increases your damage dealt by your spells and abilities by 2%, up to 6%. Seed of Corruption applies Unstable Affliction at 50% effectiveness to your target.",
-      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
-      "asOf": "2026-06-18"
+      "set2": "Agony damage increased by 15%. Corruption damage increased by 25%. Seed of Corruption applies Unstable Affliction at 20% effectiveness to your target.",
+      "set4": "Each active Unstable Affliction increases your damage dealt by your spells and abilities by 2%, up to 6%.",
+      "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/11",
+      "asOf": "2026-07-08"
     },
     "ptrDummy": {
       "source": "warcraftlogs",
@@ -7367,9 +7367,9 @@
     },
     "tierSet": {
       "set2": "Incinerate damage increased by 25% and Incinerate has a 10% increased chance to evoke an Echo of Sargeras.",
-      "set4": "Targets damaged by Echo of Sargeras take 6% increased damage from Echo of Sargeras for 6 seconds.",
-      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
-      "asOf": "2026-06-18"
+      "set4": "Targets damaged by Echo of Sargeras take 6% increased damage from your spells and abilities for 6 seconds.",
+      "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/14",
+      "asOf": "2026-07-14"
     },
     "ptrDummy": {
       "source": "warcraftlogs",
@@ -7414,7 +7414,7 @@
         "PTR build 68569 (2026-07-08): single-target buffs into Slayer — melee auto-attack +100%, the 2-set now boosts both Mortal Strike and Execute (was Mortal Strike only), and Slayer's Dominance proc chance 25% (was 15%); devs targeting Arms/Slayer's lagging single-target."
       ],
       "set2": "",
-      "set4": "Decent in AoE but terrible in single target, especially measured against S1's universally-powerful set — a real step down on the ST bench.",
+      "set4": "Decent in AoE but terrible in single target, especially measured against S1's universally-powerful set — a real step down on the ST bench. (Pre-07-08 — single-target buffs landed since, incl. Execute joining the 2-set; see Key changes.)",
       "watch": "Losing Improved Sweeping Strikes and 100% Sweep uptime puts Arms' claim as the 2-target pinnacle in question, and Demolish still won't line up with Colossus Smash — the alignment friction that dogged the spec hasn't been solved.",
       "sourceLabel": "Archimtiros (Icy Veins Arms author, SimC dev, Skyhold)"
     },
@@ -7601,10 +7601,10 @@
       "meleeCapable": true
     },
     "tierSet": {
-      "set2": "Mortal Strike damage increased by 10% and when you Slam a target, Slam also deals damage to enemies within 8 yards of it. Deals reduced damage beyond 5 targets.",
+      "set2": "Mortal Strike and Execute damage increased by 10% and when you Slam a target, Slam also deals damage to enemies within 8 yards of it. Deals reduced damage beyond 5 targets.",
       "set4": "Overpower damage increased by 15%. Mortal Strike and Overpower increase the damage of your next Slam by 10%, stacking up to 3 times.",
-      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
-      "asOf": "2026-06-18"
+      "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/11",
+      "asOf": "2026-07-08"
     },
     "ptrDummy": {
       "source": "warcraftlogs",
@@ -7883,7 +7883,7 @@
         "PTR build 68569 (2026-07-08): 4-set Bloody Rebuke bleed +100%, Unyielding's Defensive Stance bonus +6% (was 4%), and Colossus buffed (Practiced Strikes +4 Rage, No Stranger to Pain / Dominance of the Colossus improved) to close the gap with Mountain Thane."
       ],
       "set2": "Lackluster — the free-Revenge proc is RNG-dependent, so it feels inconsistent.",
-      "set4": "Insignificant on the bleed side, with some AoE potential at best.",
+      "set4": "Insignificant on the bleed side, with some AoE potential at best. (Pre-07-08 — the bleed was since doubled.)",
       "watch": "The Ravager/tier-set bleed pivot is the thing to watch — Archimtiros is skeptical it fits Prot's identity, and with the 2pc leaning on RNG procs the set may not move the needle even as Execute and defensives get healthier.",
       "sourceLabel": "Archimtiros / Mwahi (Skyhold, Icy Veins Prot)"
     },
@@ -7991,9 +7991,9 @@
     },
     "tierSet": {
       "set2": "Free Revenges deal 15% additional damage and cause your next Shield Slam to deal 20% additional damage.",
-      "set4": "Ravager and your free Revenges cause all targets to bleed for X damage over 12 sec. Ravager's cooldown is reduced by 30 seconds.",
-      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
-      "asOf": "2026-06-18"
+      "set4": "Ravager and your free Revenges cause all targets to bleed for damage over 12 sec (Bloody Rebuke bleed damage increased by 100% on 07-08). Ravager's cooldown is reduced by 30 seconds.",
+      "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/11",
+      "asOf": "2026-07-08"
     }
   }
 ]

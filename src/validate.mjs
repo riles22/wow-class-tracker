@@ -354,6 +354,26 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
     }
   }
 
+  // --- tier-set upkeep gate (2026-07-21) ---
+  // The spec card's "Season 2 tier set" box renders spec.tierSet as fact; builds keep
+  // revising set bonuses, and before this gate nothing forced the field to follow
+  // (every card but one still showed the 06-18 datamine on 07-21). Rule: when a build's
+  // highlights name a spec next to a set keyword, that spec's tierSet.asOf must be on
+  // or after the build date. A re-verify that finds the wording unchanged still bumps
+  // asOf with the build's source — cheap, and it keeps the card's "datamined <date>"
+  // label honest. False positives only ever cost that same re-verify.
+  const SET_KEYWORD = /\btier[ -]sets?\b|\b[24][ -]set\b|\b[24]\s?pc\b|\bset bonus/i;
+  for (const spec of specs) {
+    const name = `${spec.spec} ${spec.class}`;
+    const newest = (ptrBuilds?.builds ?? [])
+      .filter(b => ISO_DATE.test(b.date ?? "") &&
+        (b.highlights ?? []).some(h => typeof h === "string" && h.includes(name) && SET_KEYWORD.test(h)))
+      .reduce((m, b) => (b.date > m ? b.date : m), "");
+    if (newest && !(spec.tierSet?.asOf >= newest)) {
+      errors.push(`specs.json: ${name} tierSet.asOf ${spec.tierSet?.asOf ?? "(absent)"} predates the ${newest} build whose notes touched this tier set — update tierSet (set2/set4/asOf/source) alongside the build entry`);
+    }
+  }
+
   // --- history snapshots (movement baselines + the freshness heartbeat's proof of life) ---
   // The nightly agent's whole data/ tree travels to the publish job, so a snapshot it
   // wrote is committed like any data file. A future-dated snapshot would permanently

@@ -27,22 +27,3 @@ jobs:
           WCL_CLIENT_ID: ${{ secrets.WCL_CLIENT_ID }}
           WCL_CLIENT_SECRET: ${{ secrets.WCL_CLIENT_SECRET }}
         run: node src/wcl-probe.mjs
-      - name: "TEMP (branch-only, 2026-07-21): fetch PTR dev-notes thread for verbatim tier-set text"
-        run: |
-          curl -sS -m 60 -H "Accept: application/json" \
-            "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811.json?include_raw=1" \
-            -o thread.json
-          node --input-type=module - <<'NODE_EOF'
-          import { readFileSync } from "node:fs";
-          const t = JSON.parse(readFileSync("thread.json", "utf8"));
-          const posts = t.post_stream?.posts ?? [];
-          console.log(`thread: ${t.title} — ${posts.length} posts in stream`);
-          for (const n of [10, 11, 14, 15]) {
-            const p = posts.find(p => p.post_number === n);
-            if (!p) { console.log(`\n===== post #${n}: NOT in post_stream =====`); continue; }
-            const text = (p.raw ?? p.cooked ?? "").replace(/<[^>]+>/g, "").replace(/&amp;/g, "&").replace(/&#39;|&rsquo;/g, "'").replace(/&quot;/g, '"');
-            console.log(`\n===== post #${n} (${p.created_at}) — FULL TEXT =====`);
-            for (const line of text.split("\n")) { const l = line.trimEnd(); if (l.trim()) console.log(l); }
-            console.log(`===== end post #${n} =====`);
-          }
-          NODE_EOF

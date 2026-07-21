@@ -21,6 +21,18 @@ say so and change nothing.
 3. **For each new build**: add an entry to `data/ptr-builds.json` (newest first):
    `{date, label, forumPostNumber, forumUrl, wowheadUrl, icyveinsUrl, specsAffected[],
    highlights[]}` — highlights are verbatim tuning lines with "(Class — Spec)" suffix.
+   **Tier-set changes are NEVER optional highlights** (2026-07-21 audit: three builds of
+   set redesigns silently missed the feed AND the spec cards): every line in the notes
+   that changes a set bonus becomes a highlight, and for each affected spec you ALSO
+   update `spec.tierSet` in `data/specs.json` — recompose `set2`/`set4` from the
+   official wording (verbatim where the notes give the full bonus; a clean value swap
+   into the stored text otherwise; a dated parenthetical amendment when neither is
+   safe), set `asOf` to the build date and `source` to the forum post URL. A pure
+   bug-fix still bumps `asOf` (re-verified). Then re-read the writeup's `ptr.set2/set4`
+   commentary: if it reviews a now-replaced design, append a dated "(pre-<date> …)"
+   note — attributed commentary about a dead design must say so. `npm test` enforces
+   the pairing: a set-touching highlight whose spec's `tierSet.asOf` predates the
+   build date fails validation (the tier-set upkeep gate in `src/validate.mjs`).
 4. **Spec writeups**: while scanning the RSS, also flag per-spec 12.1 review/first-look
    articles ("12.1 <spec> changes/review/tier set...") as writeup material for untracked
    specs, and distill them into the spec's `ptr` object in `data/specs.json`.

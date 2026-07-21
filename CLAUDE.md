@@ -128,6 +128,13 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
 - **Fight view**: `data/encounter-tiers.json` holds Archon per-boss (throughput) and
   per-dungeon (score) tiers — single-source by design, labeled as Archon in the UI; the
   Fight selector swaps the matching tier column. Refresh alongside the tier lists.
+- `spec.tierSet` = the Season 2 set bonuses as fact: `{ set2, set4, asOf, source }`,
+  official-notes/datamine-sourced (host-allowlisted). The drawer's "Season 2 tier set"
+  box renders it as the primary line with the writeup's `ptr.set2/set4` as commentary
+  beneath. **ptr-watch must update it whenever a build's notes touch a set bonus**
+  (asOf = build date, source = the forum post) — the tier-set upkeep gate in
+  validate.mjs fails the run when a set-touching build highlight lands without the
+  spec's `tierSet.asOf` catching up.
 - `spec.survivability` = Archon's raid survivability tier (merge via apply-metrics.mjs
   `survivability` key) — shown in the drawer's Source ratings box.
 - `spec.playstyle` = `{ range: "Melee"|"Ranged", mobility: 1-5, utility: 1-5, complexity: 1-5, notes }`,

@@ -256,3 +256,36 @@ test("pending transcript queue: id shape is a hard gate (ids reach fetch URLs)",
   none.pendingTranscripts = null;
   assert.ok(!validateData(none, { now: "2026-07-17" }).some(e => e.includes("pending-transcripts")));
 });
+
+test("tier-set upkeep gate: a build highlight naming a spec + set keyword forces tierSet.asOf forward", async () => {
+  const data = await loadData(ROOT);
+  const broken = structuredClone(data);
+  // Plant a new build whose highlight touches Outlaw Rogue's tier set.
+  broken.ptrBuilds.builds.unshift({
+    date: "2026-07-19", label: "test build", forumPostNumber: 99,
+    forumUrl: "https://us.forums.blizzard.com/en/wow/t/x/1/99",
+    specsAffected: ["Outlaw Rogue"],
+    highlights: ["Outlaw Rogue — The Venomous Abyss 4-set bonus chance increased to 25%."],
+  });
+  const errors = validateData(broken);
+  assert.ok(errors.some(e => e.includes("Outlaw Rogue tierSet.asOf") && e.includes("2026-07-19")));
+  // Bumping asOf to the build date satisfies the gate.
+  const fixed = structuredClone(broken);
+  fixed.specs.find(s => s.class === "Rogue" && s.spec === "Outlaw").tierSet.asOf = "2026-07-19";
+  assert.ok(!validateData(fixed).some(e => e.includes("Outlaw Rogue tierSet.asOf")));
+});
+
+test("tier-set upkeep gate: ignores highlights without a set keyword or naming no spec", async () => {
+  const data = await loadData(ROOT);
+  const broken = structuredClone(data);
+  broken.ptrBuilds.builds.unshift({
+    date: "2026-07-19", label: "test build", forumPostNumber: 99,
+    forumUrl: "https://us.forums.blizzard.com/en/wow/t/x/1/99",
+    specsAffected: ["Outlaw Rogue"],
+    highlights: [
+      "Outlaw Rogue — Dispatch damage increased by 10%.",          // no set keyword
+      "Season 2 tier sets unlock at renown 12 for all classes.",   // set keyword, no spec name
+    ],
+  });
+  assert.ok(!validateData(broken).some(e => e.includes("tierSet.asOf") && e.includes("2026-07-19")));
+});

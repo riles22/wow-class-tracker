@@ -202,3 +202,20 @@ Tuning HOTFIXES + M+ tooltip mob-count) — none a new class dev-notes build pos
 a clear verdict. ptr-builds.json unchanged; no writeups fabricated. zone-54/52/56 evidence-only: WCL
 evidence.json verdict rdps-broken → the normalized/rDPS cuts unreachable (data at 2026-07-09 baseline); the
 3 raw-DPS pooled cuts merged by the deterministic fetch step (see refresh-metrics log). No season flip.
+
+## 2026-07-21 (interactive, owner-requested) — tier-set audit + backfill; gate added
+Owner asked whether spec-card tier-set sections track PTR set changes. They did NOT:
+39/40 `tierSet` entries still carried the 06-18 Wowhead datamine (only Holy Pal 06-30),
+and posts 10/11/14 held THREE builds of set revisions — several never even logged as
+highlights (MM, Holy Priest, Outlaw, Enh, RSham 06-30; Balance, RDruid-2set, Frost Mage,
+Holy Pal 07-08; Shadow 07-14). Session egress blocks the forum, so verbatim wording was
+fetched via a branch-dispatched wcl-probe run (runners reach it fine; Discourse topic
+.json holds all posts' raw). Backfilled 20 specs' tierSet (asOf = newest change build,
+source = the forum post), appended dated "(pre-<date> …)" notes to 12 writeups whose set
+commentary reviewed replaced designs, and added the missing set highlights to the feed.
+NEW GATE: validate.mjs fails when a build highlight names a spec + set keyword newer
+than that spec's tierSet.asOf — step 3 now documents the pairing. ALSO re-probed WCL
+(same run): GraphQL rdps family still 500s; the site statistics tables are
+Cloudflare-challenged from datacenter runners (HTTP 403 challenge on z52/z54/z46) —
+Dummy Dome rDPS stays unreachable from CI; a residential/local run remains the only
+catch-up path.
