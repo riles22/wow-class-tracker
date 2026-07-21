@@ -143,3 +143,16 @@ metric:rdps → Internal server error, enc 3176) → the 5 rDPS/normalized cuts 
 2026-07-09 baseline. 3 raw cuts merged by the deterministic fetch step BEFORE agent: wcl-dummy-raw 103
 (players 1T:2000/2T:175/3T:122/5T:1711), wcl-ptr-raid-raw 27 (6/8 bosses; Coiled Altar & Ula'tek 0=untested),
 wcl-ptr-mplus-raw 27 (all 8 dungeons). asOf 07-20.
+
+## 2026-07-21 (nightly)
+WCL: agent holds no creds — read wcl-fetch/evidence.json (verdict rdps-broken). 3 raw-DPS families already
+merged by the deterministic fetch step (asOf 07-21): dummy-raw 103 rows, ptr-raid-raw 27, ptr-mplus-raw 27.
+The 5 frozen rDPS/normalized cuts unreachable (upstream Internal server error), data unchanged at 07-09.
+Murlok: 40/40 top-50 M+ rating ceilings (plain GET, h3+first-4-digit), range 3738-4288, 0 value changes.
+Bloodmallet: 26/26 non-Aug DPS fight profiles (talent_target_scaling/castingpatchwerk, MID1 confirmed, counts
+1/2/3/5/8/15), 0 target changes. SimC nightly MID1_Raid (.txt, build 12.0.7.68453 Live hotfix 07-20, no flip):
+26/26 DPS best hero-variant from the DPS Ranking table. Mythicstats: period 1072 (MID1, no flip) via r.jina.ai
+/period/latest — 34 specs on the representation list (6 at ~0 keys this early-period: Blood DK, Vengeance DH,
+Devastation, Holy Pal, Holy Priest, Resto Druid — upsert keeps their stored values, 40 stored). Archon drawer
+numbers (95th pct DPS / popularity / M+ score — ungated, not in required-sources) left at 07-20: the popularity
+% isn't cleanly present in the tierList entries and I won't fabricate it.

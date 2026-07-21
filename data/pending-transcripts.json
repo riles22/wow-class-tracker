@@ -2,25 +2,18 @@
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
   "videos": [
     {
-      "id": "okWbk283nd0",
-      "creator": "Kalamazi",
-      "title": "Warlock MAY Need Some Buffs in 12.1 | Feedback & UI Updates/Changes",
+      "id": "m5lEbh4lrHA",
+      "creator": "izen (Izenhart)",
+      "title": "12.1 PTR - Best DPS Specs After Tuning | Mythic Raid Testing Results",
       "published": "2026-07-20",
-      "queuedAt": "2026-07-20"
+      "queuedAt": "2026-07-21"
     },
     {
-      "id": "9XVHns6dRuY",
+      "id": "BvJ3o0_Tt3Q",
       "creator": "Supatease",
-      "title": "New Meta Incoming",
-      "published": "2026-07-19",
-      "queuedAt": "2026-07-20"
-    },
-    {
-      "id": "HuRjN73exFk",
-      "creator": "Supatease",
-      "title": "12.1 Class Changes Update Healers",
-      "published": "2026-07-17",
-      "queuedAt": "2026-07-20"
+      "title": "12.1 Most Nerfed Class",
+      "published": "2026-07-20",
+      "queuedAt": "2026-07-21"
     }
   ]
 }

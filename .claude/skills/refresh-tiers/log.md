@@ -136,3 +136,16 @@ on small tank/healer n, verified against raw markdown (grouped + rankings tables
 retune; consensus moved only 2 specs (0 of ≥2 bands). **Survivability** all 40 specs (DPS 27+heal 7+tank 6),
 0 moves. **Encounters** 51 pages (9 bosses throughput + 8 dungeons score × 3 roles): 680 cells, 0 unmatched,
 43 changed (normal churn). snapshots 07-19→07-20.
+
+## 2026-07-21 (nightly)
+All 5 tier-list sources re-fetched live and era-verified (Midnight S1 / 12.0.7 / Devourer present; no season
+flip). IcyVeins 80 rows (curl, table.tier-list img-alt), 0 moves. Method raid 39 (Vengeance DH still omitted
+upstream) + M+ 40 = 79 rows (tier__tier blocks), 0 moves. Wowhead 80 rows via r.jina.ai numbered-ranking list
+(raw HTML Cloudflare-403'd this run — fell back to jina proxy; regex tolerant of "(X Tier)"/"X-Tier"/missing
+open-paren source typos), 0 moves. Archon 80 rows from __NEXT_DATA__ throughput(raid)/score(M+), upstream
+lastUpdated 2026-07-20T12:00Z (daily noon; 07-21 not yet posted) — 2 moves (Disc Priest M+ A→B, Destro raid
+B→A). WoWMeta M+ 40 rows via r.jina.ai Rankings table (cross-checked vs grouped tier list — agree), **18
+moves** — WoWMeta Ckmeans reclustering (its published tier column tracks representation n, which swings during
+the reset week); verified real upstream data, NOT a parse artifact or Blizzard retune. Archon encounters: full
+3-role re-fetch across 9 bosses + 8 dungeons (51 pages), 680 cells, 41 changed (normal churn), 40/40 each.
+Archon survivability 40 rows, 2 moves (Guardian A→B, Devastation A→B). Snapshots 07-21.

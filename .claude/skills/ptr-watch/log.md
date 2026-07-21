@@ -202,3 +202,13 @@ Tuning HOTFIXES + M+ tooltip mob-count) — none a new class dev-notes build pos
 a clear verdict. ptr-builds.json unchanged; no writeups fabricated. zone-54/52/56 evidence-only: WCL
 evidence.json verdict rdps-broken → the normalized/rDPS cuts unreachable (data at 2026-07-09 baseline); the
 3 raw-DPS pooled cuts merged by the deterministic fetch step (see refresh-metrics log). No season flip.
+
+## 2026-07-21 (nightly)
+Forum Discourse JSON + Wowhead news RSS both checked live. Official thread tops at post #15 (Linxy Rogue
+Outlaw addendum, 07-14), already accounted for under logged build #14 — NO new development-notes build.
+RSS newest 12.1 items (07-21 Combat Potions/Consumables; 07-20 datamined cinematic text [lore], Ruby Life
+Pools M+ S2 first-look; 07-19 Temple of Sethraliss S2 first-look) — none a class dev-notes build. The 07-15
+"Datamined Class and Tier Set Changes — Warlock/Shadow Priest/Survival Hunter" reflects the already-logged
+07-14 build and predates last run. No season flip (all sources still "Season 2 (PTR)" / 12.0.7 live).
+ptr-builds.json unchanged; no writeups fabricated. WCL zones 54/52/56 evidence-only (rdps-broken per
+wcl-fetch/evidence.json).

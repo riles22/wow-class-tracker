@@ -91,7 +91,8 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3951,
         "unit": "rating",
-        "asOf": "2026-07-20"
+        "n": 50,
+        "asOf": "2026-07-21"
       },
       {
         "source": "mythicstats",
@@ -125,7 +126,7 @@
     "survivability": {
       "tier": "A",
       "source": "archon",
-      "asOf": "2026-07-20"
+      "asOf": "2026-07-21"
     },
     "playstyle": {
       "range": "Melee",
@@ -159,7 +160,7 @@
         "method": "B",
         "wowhead": "B",
         "archon": "C",
-        "wowmeta": "C"
+        "wowmeta": "D"
       }
     },
     "ptr": null,
@@ -220,15 +221,16 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3967,
         "unit": "rating",
-        "asOf": "2026-07-20"
+        "n": 50,
+        "asOf": "2026-07-21"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.1,
+        "value": 0,
         "unit": "%",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -244,9 +246,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 137748,
+        "value": 137702,
         "unit": "DPS",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -262,10 +264,10 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 144512,
+        "value": 145609,
         "unit": "DPS",
-        "n": 84,
-        "asOf": "2026-07-20",
+        "n": 81,
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -275,7 +277,7 @@
         "value": 210271,
         "unit": "DPS",
         "n": 2,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -285,7 +287,7 @@
         "value": 265168,
         "unit": "DPS",
         "n": 1,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -295,7 +297,7 @@
         "value": 461965,
         "unit": "DPS",
         "n": 97,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -305,23 +307,23 @@
         "value": 145913,
         "unit": "DPS",
         "n": 44,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 252250,
+        "value": 251898,
         "unit": "DPS",
-        "n": 590,
-        "asOf": "2026-07-20",
+        "n": 596,
+        "asOf": "2026-07-21",
         "era": "ptr"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-20",
+      "asOf": "2026-07-21",
       "targets": {
         "1": 133933,
         "2": 176457,
@@ -334,7 +336,7 @@
     "survivability": {
       "tier": "S",
       "source": "archon",
-      "asOf": "2026-07-20"
+      "asOf": "2026-07-21"
     },
     "playstyle": {
       "range": "Melee",
@@ -454,15 +456,16 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4288,
         "unit": "rating",
-        "asOf": "2026-07-20"
+        "n": 50,
+        "asOf": "2026-07-21"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 16.7,
+        "value": 16.8,
         "unit": "%",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -478,9 +481,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 134484,
+        "value": 134518,
         "unit": "DPS",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -496,10 +499,10 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 160951,
+        "value": 163214,
         "unit": "DPS",
-        "n": 70,
-        "asOf": "2026-07-20",
+        "n": 69,
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -509,7 +512,7 @@
         "value": 183463,
         "unit": "DPS",
         "n": 2,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -519,17 +522,17 @@
         "value": 272495,
         "unit": "DPS",
         "n": 1,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 477822,
+        "value": 471371,
         "unit": "DPS",
-        "n": 48,
-        "asOf": "2026-07-20",
+        "n": 51,
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -539,7 +542,7 @@
         "value": 135363,
         "unit": "DPS",
         "n": 101,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -548,14 +551,14 @@
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
         "value": 214477,
         "unit": "DPS",
-        "n": 179,
-        "asOf": "2026-07-20",
+        "n": 181,
+        "asOf": "2026-07-21",
         "era": "ptr"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-20",
+      "asOf": "2026-07-21",
       "targets": {
         "1": 128228,
         "2": 174873,
@@ -568,7 +571,7 @@
     "survivability": {
       "tier": "S",
       "source": "archon",
-      "asOf": "2026-07-20"
+      "asOf": "2026-07-21"
     },
     "playstyle": {
       "range": "Melee",
@@ -673,15 +676,16 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4026,
         "unit": "rating",
-        "asOf": "2026-07-20"
+        "n": 50,
+        "asOf": "2026-07-21"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.4,
+        "value": 0.1,
         "unit": "%",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -697,9 +701,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 120120,
+        "value": 120075,
         "unit": "DPS",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -718,7 +722,7 @@
         "value": 126422,
         "unit": "DPS",
         "n": 18,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -728,7 +732,7 @@
         "value": 189661,
         "unit": "DPS",
         "n": 2,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -738,7 +742,7 @@
         "value": 292832,
         "unit": "DPS",
         "n": 14,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -748,7 +752,7 @@
         "value": 121485,
         "unit": "DPS",
         "n": 41,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -757,14 +761,14 @@
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
         "value": 198770,
         "unit": "DPS",
-        "n": 110,
-        "asOf": "2026-07-20",
+        "n": 112,
+        "asOf": "2026-07-21",
         "era": "ptr"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-20",
+      "asOf": "2026-07-21",
       "targets": {
         "1": 119957,
         "2": 155982,
@@ -777,7 +781,7 @@
     "survivability": {
       "tier": "A",
       "source": "archon",
-      "asOf": "2026-07-20"
+      "asOf": "2026-07-21"
     },
     "playstyle": {
       "range": "Melee",
@@ -820,7 +824,7 @@
         "method": "A",
         "wowhead": "A+",
         "archon": "S",
-        "wowmeta": "S"
+        "wowmeta": "A"
       }
     },
     "ptr": {
@@ -897,15 +901,16 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4287,
         "unit": "rating",
-        "asOf": "2026-07-20"
+        "n": 50,
+        "asOf": "2026-07-21"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 14.7,
+        "value": 15.7,
         "unit": "%",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -921,9 +926,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 107138,
+        "value": 107221,
         "unit": "DPS",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -939,10 +944,10 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 186670,
+        "value": 188068,
         "unit": "DPS",
-        "n": 266,
-        "asOf": "2026-07-20",
+        "n": 280,
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -952,7 +957,7 @@
         "value": 240663,
         "unit": "DPS",
         "n": 5,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -962,17 +967,17 @@
         "value": 263110,
         "unit": "DPS",
         "n": 11,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 509266,
+        "value": 519016,
         "unit": "DPS",
-        "n": 159,
-        "asOf": "2026-07-20",
+        "n": 172,
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -982,23 +987,23 @@
         "value": 108347,
         "unit": "DPS",
         "n": 51,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 238202,
+        "value": 239613,
         "unit": "DPS",
-        "n": 391,
-        "asOf": "2026-07-20",
+        "n": 405,
+        "asOf": "2026-07-21",
         "era": "ptr"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-20",
+      "asOf": "2026-07-21",
       "targets": {
         "1": 103948,
         "2": 150867,
@@ -1011,7 +1016,7 @@
     "survivability": {
       "tier": "A",
       "source": "archon",
-      "asOf": "2026-07-20"
+      "asOf": "2026-07-21"
     },
     "playstyle": {
       "range": "Ranged",
@@ -1127,7 +1132,8 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3885,
         "unit": "rating",
-        "asOf": "2026-07-20"
+        "n": 50,
+        "asOf": "2026-07-21"
       },
       {
         "source": "mythicstats",
@@ -1161,7 +1167,7 @@
     "survivability": {
       "tier": "A",
       "source": "archon",
-      "asOf": "2026-07-20"
+      "asOf": "2026-07-21"
     },
     "playstyle": {
       "range": "Melee",
@@ -1270,7 +1276,8 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3939,
         "unit": "rating",
-        "asOf": "2026-07-20"
+        "n": 50,
+        "asOf": "2026-07-21"
       },
       {
         "source": "mythicstats",
@@ -1278,7 +1285,7 @@
         "name": "Top-2000 keys representation",
         "value": 0,
         "unit": "%",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -1294,9 +1301,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 115973,
+        "value": 116006,
         "unit": "DPS",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -1312,10 +1319,10 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 172785,
+        "value": 172979,
         "unit": "DPS",
-        "n": 272,
-        "asOf": "2026-07-20",
+        "n": 270,
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -1325,7 +1332,7 @@
         "value": 282502,
         "unit": "DPS",
         "n": 25,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -1335,7 +1342,7 @@
         "value": 284730,
         "unit": "DPS",
         "n": 10,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -1345,7 +1352,7 @@
         "value": 389302,
         "unit": "DPS",
         "n": 41,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -1355,23 +1362,23 @@
         "value": 114212,
         "unit": "DPS",
         "n": 73,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 247946,
+        "value": 248075,
         "unit": "DPS",
-        "n": 429,
-        "asOf": "2026-07-20",
+        "n": 462,
+        "asOf": "2026-07-21",
         "era": "ptr"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-20",
+      "asOf": "2026-07-21",
       "targets": {
         "1": 116028,
         "2": 140667,
@@ -1384,7 +1391,7 @@
     "survivability": {
       "tier": "B",
       "source": "archon",
-      "asOf": "2026-07-20"
+      "asOf": "2026-07-21"
     },
     "playstyle": {
       "range": "Ranged",
@@ -1428,7 +1435,7 @@
         "method": "A",
         "wowhead": "B",
         "archon": "A",
-        "wowmeta": "B"
+        "wowmeta": "C"
       }
     },
     "ptr": null,
@@ -1489,15 +1496,16 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4153,
         "unit": "rating",
-        "asOf": "2026-07-20"
+        "n": 50,
+        "asOf": "2026-07-21"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 1.6,
+        "value": 1.9,
         "unit": "%",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -1513,9 +1521,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 133623,
+        "value": 133668,
         "unit": "DPS",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -1531,10 +1539,10 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 155439,
+        "value": 155559,
         "unit": "DPS",
-        "n": 84,
-        "asOf": "2026-07-20",
+        "n": 87,
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -1544,7 +1552,7 @@
         "value": 190683,
         "unit": "DPS",
         "n": 1,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -1554,7 +1562,7 @@
         "value": 268586,
         "unit": "DPS",
         "n": 6,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -1564,7 +1572,7 @@
         "value": 452603,
         "unit": "DPS",
         "n": 73,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -1574,7 +1582,7 @@
         "value": 100904,
         "unit": "DPS",
         "n": 5,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -1584,13 +1592,13 @@
         "value": 214807,
         "unit": "DPS",
         "n": 78,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-20",
+      "asOf": "2026-07-21",
       "targets": {
         "1": 133603,
         "2": 158096,
@@ -1603,7 +1611,7 @@
     "survivability": {
       "tier": "B",
       "source": "archon",
-      "asOf": "2026-07-20"
+      "asOf": "2026-07-21"
     },
     "playstyle": {
       "range": "Melee",
@@ -1708,15 +1716,16 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4284,
         "unit": "rating",
-        "asOf": "2026-07-20"
+        "n": 50,
+        "asOf": "2026-07-21"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 17.6,
+        "value": 17.7,
         "unit": "%",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -1740,9 +1749,9 @@
       }
     ],
     "survivability": {
-      "tier": "A",
+      "tier": "B",
       "source": "archon",
-      "asOf": "2026-07-20"
+      "asOf": "2026-07-21"
     },
     "playstyle": {
       "range": "Melee",
@@ -1837,7 +1846,8 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3910,
         "unit": "rating",
-        "asOf": "2026-07-20"
+        "n": 50,
+        "asOf": "2026-07-21"
       },
       {
         "source": "mythicstats",
@@ -1880,7 +1890,7 @@
     "survivability": {
       "tier": "C",
       "source": "archon",
-      "asOf": "2026-07-20"
+      "asOf": "2026-07-21"
     },
     "playstyle": {
       "range": "Ranged",
@@ -1914,7 +1924,7 @@
         "method": "A",
         "wowhead": "A+",
         "archon": "S",
-        "wowmeta": "S"
+        "wowmeta": "B"
       }
     },
     "ptr": {
@@ -1991,15 +2001,16 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4288,
         "unit": "rating",
-        "asOf": "2026-07-20"
+        "n": 50,
+        "asOf": "2026-07-21"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 12.9,
+        "value": 16,
         "unit": "%",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -2028,7 +2039,7 @@
         "value": 158055,
         "unit": "DPS",
         "n": 2,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -2038,7 +2049,7 @@
         "value": 244970,
         "unit": "DPS",
         "n": 12,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -2048,24 +2059,24 @@
         "value": 108582,
         "unit": "DPS",
         "n": 56,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 208762,
+        "value": 208911,
         "unit": "DPS",
-        "n": 239,
-        "asOf": "2026-07-20",
+        "n": 240,
+        "asOf": "2026-07-21",
         "era": "ptr"
       }
     ],
     "survivability": {
       "tier": "B",
       "source": "archon",
-      "asOf": "2026-07-20"
+      "asOf": "2026-07-21"
     },
     "playstyle": {
       "range": "Ranged",
@@ -2180,7 +2191,8 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3921,
         "unit": "rating",
-        "asOf": "2026-07-20"
+        "n": 50,
+        "asOf": "2026-07-21"
       },
       {
         "source": "mythicstats",
@@ -2204,9 +2216,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 116933,
+        "value": 116851,
         "unit": "DPS",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -2222,30 +2234,30 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 151029,
+        "value": 174864,
         "unit": "DPS",
-        "n": 16,
-        "asOf": "2026-07-20",
+        "n": 30,
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 2T)",
-        "value": 179968,
+        "value": 206801,
         "unit": "DPS",
-        "n": 3,
-        "asOf": "2026-07-20",
+        "n": 5,
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 3T)",
-        "value": 186968,
+        "value": 187329,
         "unit": "DPS",
-        "n": 8,
-        "asOf": "2026-07-20",
+        "n": 9,
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -2255,7 +2267,7 @@
         "value": 325759,
         "unit": "DPS",
         "n": 23,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -2265,23 +2277,23 @@
         "value": 94353,
         "unit": "DPS",
         "n": 25,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 179168,
+        "value": 179428,
         "unit": "DPS",
-        "n": 67,
-        "asOf": "2026-07-20",
+        "n": 68,
+        "asOf": "2026-07-21",
         "era": "ptr"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-20",
+      "asOf": "2026-07-21",
       "targets": {
         "1": 114487,
         "2": 180694,
@@ -2292,9 +2304,9 @@
       }
     },
     "survivability": {
-      "tier": "A",
+      "tier": "B",
       "source": "archon",
-      "asOf": "2026-07-20"
+      "asOf": "2026-07-21"
     },
     "playstyle": {
       "range": "Ranged",
@@ -2412,7 +2424,8 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3879,
         "unit": "rating",
-        "asOf": "2026-07-20"
+        "n": 50,
+        "asOf": "2026-07-21"
       },
       {
         "source": "mythicstats",
@@ -2420,7 +2433,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.1,
         "unit": "%",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -2455,7 +2468,7 @@
     "survivability": {
       "tier": "C",
       "source": "archon",
-      "asOf": "2026-07-20"
+      "asOf": "2026-07-21"
     },
     "playstyle": {
       "range": "Ranged",
@@ -2489,7 +2502,7 @@
         "method": "B",
         "wowhead": "B",
         "archon": "B",
-        "wowmeta": "B"
+        "wowmeta": "S"
       }
     },
     "ptr": {
@@ -2566,15 +2579,16 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4034,
         "unit": "rating",
-        "asOf": "2026-07-20"
+        "n": 50,
+        "asOf": "2026-07-21"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.7,
+        "value": 0.3,
         "unit": "%",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -2590,9 +2604,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 121493,
+        "value": 121547,
         "unit": "DPS",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -2611,7 +2625,7 @@
         "value": 161065,
         "unit": "DPS",
         "n": 81,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -2621,7 +2635,7 @@
         "value": 219877,
         "unit": "DPS",
         "n": 1,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -2631,7 +2645,7 @@
         "value": 259492,
         "unit": "DPS",
         "n": 1,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -2641,7 +2655,7 @@
         "value": 368776,
         "unit": "DPS",
         "n": 63,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -2651,23 +2665,23 @@
         "value": 121311,
         "unit": "DPS",
         "n": 116,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 209340,
+        "value": 209549,
         "unit": "DPS",
-        "n": 191,
-        "asOf": "2026-07-20",
+        "n": 192,
+        "asOf": "2026-07-21",
         "era": "ptr"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-20",
+      "asOf": "2026-07-21",
       "targets": {
         "1": 121362,
         "2": 143924,
@@ -2680,7 +2694,7 @@
     "survivability": {
       "tier": "C",
       "source": "archon",
-      "asOf": "2026-07-20"
+      "asOf": "2026-07-21"
     },
     "playstyle": {
       "range": "Ranged",
@@ -2723,7 +2737,7 @@
         "method": "A",
         "wowhead": "B",
         "archon": "B",
-        "wowmeta": "C"
+        "wowmeta": "D"
       }
     },
     "ptr": {
@@ -2800,15 +2814,16 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3950,
         "unit": "rating",
-        "asOf": "2026-07-20"
+        "n": 50,
+        "asOf": "2026-07-21"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.2,
+        "value": 0.1,
         "unit": "%",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -2824,9 +2839,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 128049,
+        "value": 128055,
         "unit": "DPS",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -2845,7 +2860,7 @@
         "value": 162706,
         "unit": "DPS",
         "n": 104,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -2855,7 +2870,7 @@
         "value": 272946,
         "unit": "DPS",
         "n": 20,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -2865,17 +2880,17 @@
         "value": 379762,
         "unit": "DPS",
         "n": 14,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 514687,
+        "value": 512320,
         "unit": "DPS",
-        "n": 105,
-        "asOf": "2026-07-20",
+        "n": 111,
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -2885,23 +2900,23 @@
         "value": 93715,
         "unit": "DPS",
         "n": 10,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 246748,
+        "value": 248375,
         "unit": "DPS",
-        "n": 203,
-        "asOf": "2026-07-20",
+        "n": 232,
+        "asOf": "2026-07-21",
         "era": "ptr"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-20",
+      "asOf": "2026-07-21",
       "targets": {
         "1": 128015,
         "2": 163911,
@@ -2914,7 +2929,7 @@
     "survivability": {
       "tier": "A",
       "source": "archon",
-      "asOf": "2026-07-20"
+      "asOf": "2026-07-21"
     },
     "playstyle": {
       "range": "Ranged",
@@ -2956,7 +2971,7 @@
         "method": "A",
         "wowhead": "B",
         "archon": "A",
-        "wowmeta": "A"
+        "wowmeta": "C"
       }
     },
     "ptr": {
@@ -3030,15 +3045,16 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4076,
         "unit": "rating",
-        "asOf": "2026-07-20"
+        "n": 50,
+        "asOf": "2026-07-21"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.5,
+        "value": 0.3,
         "unit": "%",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -3054,9 +3070,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 118762,
+        "value": 118788,
         "unit": "DPS",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -3075,7 +3091,7 @@
         "value": 178573,
         "unit": "DPS",
         "n": 56,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -3085,7 +3101,7 @@
         "value": 489429,
         "unit": "DPS",
         "n": 84,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -3095,23 +3111,23 @@
         "value": 93974,
         "unit": "DPS",
         "n": 10,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 221156,
+        "value": 221770,
         "unit": "DPS",
-        "n": 153,
-        "asOf": "2026-07-20",
+        "n": 158,
+        "asOf": "2026-07-21",
         "era": "ptr"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-20",
+      "asOf": "2026-07-21",
       "targets": {
         "1": 118350,
         "2": 185852,
@@ -3124,7 +3140,7 @@
     "survivability": {
       "tier": "B",
       "source": "archon",
-      "asOf": "2026-07-20"
+      "asOf": "2026-07-21"
     },
     "playstyle": {
       "range": "Melee",
@@ -3165,7 +3181,7 @@
         "method": "B",
         "wowhead": "B",
         "archon": "B",
-        "wowmeta": "B"
+        "wowmeta": "C"
       }
     },
     "ptr": {
@@ -3242,7 +3258,8 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3881,
         "unit": "rating",
-        "asOf": "2026-07-20"
+        "n": 50,
+        "asOf": "2026-07-21"
       },
       {
         "source": "mythicstats",
@@ -3250,7 +3267,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.1,
         "unit": "%",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -3266,9 +3283,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 117621,
+        "value": 117569,
         "unit": "DPS",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -3284,10 +3301,10 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 177226,
+        "value": 179017,
         "unit": "DPS",
-        "n": 158,
-        "asOf": "2026-07-20",
+        "n": 154,
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -3297,7 +3314,7 @@
         "value": 220574,
         "unit": "DPS",
         "n": 5,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -3307,17 +3324,17 @@
         "value": 205826,
         "unit": "DPS",
         "n": 4,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 466799,
+        "value": 478106,
         "unit": "DPS",
-        "n": 232,
-        "asOf": "2026-07-20",
+        "n": 244,
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -3327,23 +3344,23 @@
         "value": 127845,
         "unit": "DPS",
         "n": 60,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 244744,
+        "value": 244564,
         "unit": "DPS",
-        "n": 1077,
-        "asOf": "2026-07-20",
+        "n": 1117,
+        "asOf": "2026-07-21",
         "era": "ptr"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-20",
+      "asOf": "2026-07-21",
       "targets": {
         "1": 113188,
         "2": 176897,
@@ -3356,7 +3373,7 @@
     "survivability": {
       "tier": "B",
       "source": "archon",
-      "asOf": "2026-07-20"
+      "asOf": "2026-07-21"
     },
     "playstyle": {
       "range": "Ranged",
@@ -3399,7 +3416,7 @@
         "method": "C",
         "wowhead": "B",
         "archon": "B",
-        "wowmeta": "C"
+        "wowmeta": "D"
       }
     },
     "ptr": {
@@ -3474,7 +3491,8 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3811,
         "unit": "rating",
-        "asOf": "2026-07-20"
+        "n": 50,
+        "asOf": "2026-07-21"
       },
       {
         "source": "mythicstats",
@@ -3482,7 +3500,7 @@
         "name": "Top-2000 keys representation",
         "value": 0,
         "unit": "%",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -3500,7 +3518,7 @@
         "name": "SimC nightly Patchwerk DPS",
         "value": 120532,
         "unit": "DPS",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -3516,10 +3534,10 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 156522,
+        "value": 156777,
         "unit": "DPS",
-        "n": 85,
-        "asOf": "2026-07-20",
+        "n": 82,
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -3529,7 +3547,7 @@
         "value": 128476,
         "unit": "DPS",
         "n": 2,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -3539,7 +3557,7 @@
         "value": 178672,
         "unit": "DPS",
         "n": 3,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -3549,7 +3567,7 @@
         "value": 406746,
         "unit": "DPS",
         "n": 79,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -3559,23 +3577,23 @@
         "value": 106502,
         "unit": "DPS",
         "n": 5,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 247427,
+        "value": 238684,
         "unit": "DPS",
-        "n": 87,
-        "asOf": "2026-07-20",
+        "n": 96,
+        "asOf": "2026-07-21",
         "era": "ptr"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-20",
+      "asOf": "2026-07-21",
       "targets": {
         "1": 114776,
         "2": 165657,
@@ -3588,7 +3606,7 @@
     "survivability": {
       "tier": "A",
       "source": "archon",
-      "asOf": "2026-07-20"
+      "asOf": "2026-07-21"
     },
     "playstyle": {
       "range": "Ranged",
@@ -3632,7 +3650,7 @@
         "method": "A",
         "wowhead": "A",
         "archon": "B",
-        "wowmeta": "C"
+        "wowmeta": "A"
       }
     },
     "ptr": {
@@ -3709,15 +3727,16 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4017,
         "unit": "rating",
-        "asOf": "2026-07-20"
+        "n": 50,
+        "asOf": "2026-07-21"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.3,
+        "value": 0.1,
         "unit": "%",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -3733,9 +3752,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 121650,
+        "value": 121605,
         "unit": "DPS",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -3754,7 +3773,7 @@
         "value": 141731,
         "unit": "DPS",
         "n": 132,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -3764,7 +3783,7 @@
         "value": 271926,
         "unit": "DPS",
         "n": 14,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -3774,7 +3793,7 @@
         "value": 280225,
         "unit": "DPS",
         "n": 2,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -3784,7 +3803,7 @@
         "value": 448479,
         "unit": "DPS",
         "n": 108,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -3794,7 +3813,7 @@
         "value": 128479,
         "unit": "DPS",
         "n": 103,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -3803,14 +3822,14 @@
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
         "value": 178640,
         "unit": "DPS",
-        "n": 56,
-        "asOf": "2026-07-20",
+        "n": 60,
+        "asOf": "2026-07-21",
         "era": "ptr"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-20",
+      "asOf": "2026-07-21",
       "targets": {
         "1": 116986,
         "2": 145476,
@@ -3823,7 +3842,7 @@
     "survivability": {
       "tier": "C",
       "source": "archon",
-      "asOf": "2026-07-20"
+      "asOf": "2026-07-21"
     },
     "playstyle": {
       "range": "Ranged",
@@ -3928,15 +3947,16 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4167,
         "unit": "rating",
-        "asOf": "2026-07-20"
+        "n": 50,
+        "asOf": "2026-07-21"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 2.1,
+        "value": 2.3,
         "unit": "%",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -3962,7 +3982,7 @@
     "survivability": {
       "tier": "B",
       "source": "archon",
-      "asOf": "2026-07-20"
+      "asOf": "2026-07-21"
     },
     "playstyle": {
       "range": "Melee",
@@ -4071,15 +4091,16 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4288,
         "unit": "rating",
-        "asOf": "2026-07-20"
+        "n": 50,
+        "asOf": "2026-07-21"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 14,
+        "value": 16.1,
         "unit": "%",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -4114,7 +4135,7 @@
     "survivability": {
       "tier": "C",
       "source": "archon",
-      "asOf": "2026-07-20"
+      "asOf": "2026-07-21"
     },
     "playstyle": {
       "range": "Ranged",
@@ -4223,15 +4244,16 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4018,
         "unit": "rating",
-        "asOf": "2026-07-20"
+        "n": 50,
+        "asOf": "2026-07-21"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.2,
+        "value": 0.1,
         "unit": "%",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -4247,9 +4269,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 118380,
+        "value": 118408,
         "unit": "DPS",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -4268,7 +4290,7 @@
         "value": 149229,
         "unit": "DPS",
         "n": 14,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -4278,7 +4300,7 @@
         "value": 216286,
         "unit": "DPS",
         "n": 6,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -4288,17 +4310,17 @@
         "value": 282489,
         "unit": "DPS",
         "n": 4,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 391715,
+        "value": 412357,
         "unit": "DPS",
-        "n": 10,
-        "asOf": "2026-07-20",
+        "n": 11,
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -4308,23 +4330,23 @@
         "value": 119740,
         "unit": "DPS",
         "n": 40,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 196688,
+        "value": 205766,
         "unit": "DPS",
-        "n": 60,
-        "asOf": "2026-07-20",
+        "n": 64,
+        "asOf": "2026-07-21",
         "era": "ptr"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-20",
+      "asOf": "2026-07-21",
       "targets": {
         "1": 118210,
         "2": 167690,
@@ -4337,7 +4359,7 @@
     "survivability": {
       "tier": "C",
       "source": "archon",
-      "asOf": "2026-07-20"
+      "asOf": "2026-07-21"
     },
     "playstyle": {
       "range": "Melee",
@@ -4457,7 +4479,8 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3957,
         "unit": "rating",
-        "asOf": "2026-07-20"
+        "n": 50,
+        "asOf": "2026-07-21"
       },
       {
         "source": "mythicstats",
@@ -4500,7 +4523,7 @@
     "survivability": {
       "tier": "C",
       "source": "archon",
-      "asOf": "2026-07-20"
+      "asOf": "2026-07-21"
     },
     "playstyle": {
       "range": "Ranged",
@@ -4611,15 +4634,16 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3923,
         "unit": "rating",
-        "asOf": "2026-07-20"
+        "n": 50,
+        "asOf": "2026-07-21"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.1,
+        "value": 0,
         "unit": "%",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -4645,7 +4669,7 @@
     "survivability": {
       "tier": "C",
       "source": "archon",
-      "asOf": "2026-07-20"
+      "asOf": "2026-07-21"
     },
     "playstyle": {
       "range": "Melee",
@@ -4679,7 +4703,7 @@
         "method": "B",
         "wowhead": "A",
         "archon": "A",
-        "wowmeta": "A"
+        "wowmeta": "S"
       }
     },
     "ptr": {
@@ -4756,15 +4780,16 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4151,
         "unit": "rating",
-        "asOf": "2026-07-20"
+        "n": 50,
+        "asOf": "2026-07-21"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 3.6,
+        "value": 1.9,
         "unit": "%",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -4780,9 +4805,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 112042,
+        "value": 112135,
         "unit": "DPS",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -4798,10 +4823,10 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 146640,
+        "value": 146699,
         "unit": "DPS",
-        "n": 81,
-        "asOf": "2026-07-20",
+        "n": 79,
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -4811,7 +4836,7 @@
         "value": 207341,
         "unit": "DPS",
         "n": 9,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -4821,7 +4846,7 @@
         "value": 268309,
         "unit": "DPS",
         "n": 12,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -4831,7 +4856,7 @@
         "value": 395670,
         "unit": "DPS",
         "n": 52,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -4841,23 +4866,23 @@
         "value": 110934,
         "unit": "DPS",
         "n": 55,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 212461,
+        "value": 212018,
         "unit": "DPS",
-        "n": 302,
-        "asOf": "2026-07-20",
+        "n": 309,
+        "asOf": "2026-07-21",
         "era": "ptr"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-20",
+      "asOf": "2026-07-21",
       "targets": {
         "1": 111859,
         "2": 139719,
@@ -4870,7 +4895,7 @@
     "survivability": {
       "tier": "B",
       "source": "archon",
-      "asOf": "2026-07-20"
+      "asOf": "2026-07-21"
     },
     "playstyle": {
       "range": "Melee",
@@ -4913,7 +4938,7 @@
         "icyveins": "A",
         "method": "B",
         "wowhead": "B",
-        "archon": "A",
+        "archon": "B",
         "wowmeta": "A"
       }
     },
@@ -4991,15 +5016,16 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4073,
         "unit": "rating",
-        "asOf": "2026-07-20"
+        "n": 50,
+        "asOf": "2026-07-21"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.7,
+        "value": 0.5,
         "unit": "%",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -5034,7 +5060,7 @@
     "survivability": {
       "tier": "C",
       "source": "archon",
-      "asOf": "2026-07-20"
+      "asOf": "2026-07-21"
     },
     "playstyle": {
       "range": "Ranged",
@@ -5129,7 +5155,8 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3838,
         "unit": "rating",
-        "asOf": "2026-07-20"
+        "n": 50,
+        "asOf": "2026-07-21"
       },
       {
         "source": "mythicstats",
@@ -5172,7 +5199,7 @@
     "survivability": {
       "tier": "S",
       "source": "archon",
-      "asOf": "2026-07-20"
+      "asOf": "2026-07-21"
     },
     "playstyle": {
       "range": "Ranged",
@@ -5281,15 +5308,16 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4059,
         "unit": "rating",
-        "asOf": "2026-07-20"
+        "n": 50,
+        "asOf": "2026-07-21"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 1,
+        "value": 0.7,
         "unit": "%",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -5305,9 +5333,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 117312,
+        "value": 117272,
         "unit": "DPS",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -5323,10 +5351,10 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 160932,
+        "value": 161329,
         "unit": "DPS",
-        "n": 103,
-        "asOf": "2026-07-20",
+        "n": 97,
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -5336,7 +5364,7 @@
         "value": 208980,
         "unit": "DPS",
         "n": 8,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -5346,17 +5374,17 @@
         "value": 178503,
         "unit": "DPS",
         "n": 8,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 358604,
+        "value": 360521,
         "unit": "DPS",
-        "n": 81,
-        "asOf": "2026-07-20",
+        "n": 82,
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -5366,23 +5394,23 @@
         "value": 117097,
         "unit": "DPS",
         "n": 80,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 238783,
+        "value": 238525,
         "unit": "DPS",
-        "n": 247,
-        "asOf": "2026-07-20",
+        "n": 254,
+        "asOf": "2026-07-21",
         "era": "ptr"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-20",
+      "asOf": "2026-07-21",
       "targets": {
         "1": 117612,
         "2": 168841,
@@ -5395,7 +5423,7 @@
     "survivability": {
       "tier": "B",
       "source": "archon",
-      "asOf": "2026-07-20"
+      "asOf": "2026-07-21"
     },
     "playstyle": {
       "range": "Ranged",
@@ -5439,7 +5467,7 @@
         "method": "B",
         "wowhead": "B",
         "archon": "A",
-        "wowmeta": "B"
+        "wowmeta": "D"
       }
     },
     "ptr": {
@@ -5516,15 +5544,16 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4018,
         "unit": "rating",
-        "asOf": "2026-07-20"
+        "n": 50,
+        "asOf": "2026-07-21"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.3,
+        "value": 0.2,
         "unit": "%",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -5540,9 +5569,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 107757,
+        "value": 107787,
         "unit": "DPS",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -5558,10 +5587,10 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 126190,
+        "value": 128766,
         "unit": "DPS",
-        "n": 26,
-        "asOf": "2026-07-20",
+        "n": 24,
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -5571,7 +5600,7 @@
         "value": 157699,
         "unit": "DPS",
         "n": 5,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -5581,7 +5610,7 @@
         "value": 200954,
         "unit": "DPS",
         "n": 3,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -5591,7 +5620,7 @@
         "value": 366144,
         "unit": "DPS",
         "n": 37,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -5601,23 +5630,23 @@
         "value": 117369,
         "unit": "DPS",
         "n": 8,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 202648,
+        "value": 202762,
         "unit": "DPS",
-        "n": 59,
-        "asOf": "2026-07-20",
+        "n": 60,
+        "asOf": "2026-07-21",
         "era": "ptr"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-20",
+      "asOf": "2026-07-21",
       "targets": {
         "1": 107681,
         "2": 120092,
@@ -5630,7 +5659,7 @@
     "survivability": {
       "tier": "B",
       "source": "archon",
-      "asOf": "2026-07-20"
+      "asOf": "2026-07-21"
     },
     "playstyle": {
       "range": "Melee",
@@ -5673,7 +5702,7 @@
         "method": "C",
         "wowhead": "B",
         "archon": "A",
-        "wowmeta": "A"
+        "wowmeta": "D"
       }
     },
     "ptr": {
@@ -5748,15 +5777,16 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4147,
         "unit": "rating",
-        "asOf": "2026-07-20"
+        "n": 50,
+        "asOf": "2026-07-21"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 1.1,
+        "value": 1.5,
         "unit": "%",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -5772,9 +5802,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 128262,
+        "value": 128006,
         "unit": "DPS",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -5793,7 +5823,7 @@
         "value": 153031,
         "unit": "DPS",
         "n": 19,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -5803,7 +5833,7 @@
         "value": 204870,
         "unit": "DPS",
         "n": 2,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -5813,17 +5843,17 @@
         "value": 235999,
         "unit": "DPS",
         "n": 2,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 385546,
+        "value": 373742,
         "unit": "DPS",
-        "n": 12,
-        "asOf": "2026-07-20",
+        "n": 13,
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -5833,23 +5863,23 @@
         "value": 93194,
         "unit": "DPS",
         "n": 7,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 231451,
+        "value": 233291,
         "unit": "DPS",
-        "n": 97,
-        "asOf": "2026-07-20",
+        "n": 104,
+        "asOf": "2026-07-21",
         "era": "ptr"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-20",
+      "asOf": "2026-07-21",
       "targets": {
         "1": 127039,
         "2": 160702,
@@ -5862,7 +5892,7 @@
     "survivability": {
       "tier": "B",
       "source": "archon",
-      "asOf": "2026-07-20"
+      "asOf": "2026-07-21"
     },
     "playstyle": {
       "range": "Melee",
@@ -5906,7 +5936,7 @@
         "method": "A",
         "wowhead": "B",
         "archon": "A",
-        "wowmeta": "B"
+        "wowmeta": "C"
       }
     },
     "ptr": {
@@ -5981,15 +6011,16 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4001,
         "unit": "rating",
-        "asOf": "2026-07-20"
+        "n": 50,
+        "asOf": "2026-07-21"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.2,
+        "value": 0.1,
         "unit": "%",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -6005,9 +6036,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 123472,
+        "value": 123503,
         "unit": "DPS",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -6023,10 +6054,10 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 129622,
+        "value": 131119,
         "unit": "DPS",
-        "n": 25,
-        "asOf": "2026-07-20",
+        "n": 20,
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -6036,7 +6067,7 @@
         "value": 136508,
         "unit": "DPS",
         "n": 2,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -6046,7 +6077,7 @@
         "value": 159592,
         "unit": "DPS",
         "n": 2,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -6056,7 +6087,7 @@
         "value": 282974,
         "unit": "DPS",
         "n": 18,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -6066,23 +6097,23 @@
         "value": 117634,
         "unit": "DPS",
         "n": 48,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 200439,
+        "value": 199667,
         "unit": "DPS",
-        "n": 46,
-        "asOf": "2026-07-20",
+        "n": 47,
+        "asOf": "2026-07-21",
         "era": "ptr"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-20",
+      "asOf": "2026-07-21",
       "targets": {
         "1": 123476,
         "2": 152387,
@@ -6095,7 +6126,7 @@
     "survivability": {
       "tier": "B",
       "source": "archon",
-      "asOf": "2026-07-20"
+      "asOf": "2026-07-21"
     },
     "playstyle": {
       "range": "Melee",
@@ -6199,15 +6230,16 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4053,
         "unit": "rating",
-        "asOf": "2026-07-20"
+        "n": 50,
+        "asOf": "2026-07-21"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.7,
+        "value": 0.4,
         "unit": "%",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -6223,9 +6255,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 126884,
+        "value": 126922,
         "unit": "DPS",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -6241,10 +6273,10 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 137477,
+        "value": 138023,
         "unit": "DPS",
-        "n": 56,
-        "asOf": "2026-07-20",
+        "n": 54,
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -6254,7 +6286,7 @@
         "value": 232932,
         "unit": "DPS",
         "n": 9,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -6264,17 +6296,17 @@
         "value": 258532,
         "unit": "DPS",
         "n": 4,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 504110,
+        "value": 506545,
         "unit": "DPS",
-        "n": 58,
-        "asOf": "2026-07-20",
+        "n": 60,
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -6284,23 +6316,23 @@
         "value": 123908,
         "unit": "DPS",
         "n": 49,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 257409,
+        "value": 256977,
         "unit": "DPS",
-        "n": 400,
-        "asOf": "2026-07-20",
+        "n": 435,
+        "asOf": "2026-07-21",
         "era": "ptr"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-20",
+      "asOf": "2026-07-21",
       "targets": {
         "1": 129897,
         "2": 151384,
@@ -6313,7 +6345,7 @@
     "survivability": {
       "tier": "S",
       "source": "archon",
-      "asOf": "2026-07-20"
+      "asOf": "2026-07-21"
     },
     "playstyle": {
       "range": "Ranged",
@@ -6355,7 +6387,7 @@
         "method": "B",
         "wowhead": "B",
         "archon": "A",
-        "wowmeta": "A"
+        "wowmeta": "B"
       }
     },
     "ptr": {
@@ -6432,15 +6464,16 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4054,
         "unit": "rating",
-        "asOf": "2026-07-20"
+        "n": 50,
+        "asOf": "2026-07-21"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.7,
+        "value": 0.4,
         "unit": "%",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -6456,9 +6489,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 114988,
+        "value": 115051,
         "unit": "DPS",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -6474,10 +6507,10 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 139809,
+        "value": 140042,
         "unit": "DPS",
-        "n": 47,
-        "asOf": "2026-07-20",
+        "n": 46,
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -6487,7 +6520,7 @@
         "value": 190698,
         "unit": "DPS",
         "n": 7,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -6497,7 +6530,7 @@
         "value": 279431,
         "unit": "DPS",
         "n": 2,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -6507,7 +6540,7 @@
         "value": 374838,
         "unit": "DPS",
         "n": 55,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -6517,23 +6550,23 @@
         "value": 117258,
         "unit": "DPS",
         "n": 25,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 226736,
+        "value": 228294,
         "unit": "DPS",
-        "n": 265,
-        "asOf": "2026-07-20",
+        "n": 271,
+        "asOf": "2026-07-21",
         "era": "ptr"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-20",
+      "asOf": "2026-07-21",
       "targets": {
         "1": 112715,
         "2": 164447,
@@ -6546,7 +6579,7 @@
     "survivability": {
       "tier": "A",
       "source": "archon",
-      "asOf": "2026-07-20"
+      "asOf": "2026-07-21"
     },
     "playstyle": {
       "range": "Melee",
@@ -6665,15 +6698,16 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4182,
         "unit": "rating",
-        "asOf": "2026-07-20"
+        "n": 50,
+        "asOf": "2026-07-21"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 5,
+        "value": 3.3,
         "unit": "%",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -6708,7 +6742,7 @@
     "survivability": {
       "tier": "B",
       "source": "archon",
-      "asOf": "2026-07-20"
+      "asOf": "2026-07-21"
     },
     "playstyle": {
       "range": "Ranged",
@@ -6742,7 +6776,7 @@
         "method": "C",
         "wowhead": "B",
         "archon": "B",
-        "wowmeta": "B"
+        "wowmeta": "C"
       }
     },
     "ptr": null,
@@ -6803,15 +6837,16 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3919,
         "unit": "rating",
-        "asOf": "2026-07-20"
+        "n": 50,
+        "asOf": "2026-07-21"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.1,
+        "value": 0,
         "unit": "%",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -6827,9 +6862,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 114308,
+        "value": 114380,
         "unit": "DPS",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -6845,10 +6880,10 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 124302,
+        "value": 124755,
         "unit": "DPS",
         "n": 23,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -6858,7 +6893,7 @@
         "value": 170647,
         "unit": "DPS",
         "n": 5,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -6868,17 +6903,17 @@
         "value": 300056,
         "unit": "DPS",
         "n": 1,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 409000,
+        "value": 407620,
         "unit": "DPS",
-        "n": 30,
-        "asOf": "2026-07-20",
+        "n": 32,
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -6888,7 +6923,7 @@
         "value": 131845,
         "unit": "DPS",
         "n": 76,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -6897,14 +6932,14 @@
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
         "value": 254686,
         "unit": "DPS",
-        "n": 302,
-        "asOf": "2026-07-20",
+        "n": 306,
+        "asOf": "2026-07-21",
         "era": "ptr"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-20",
+      "asOf": "2026-07-21",
       "targets": {
         "1": 114127,
         "2": 153940,
@@ -6917,7 +6952,7 @@
     "survivability": {
       "tier": "B",
       "source": "archon",
-      "asOf": "2026-07-20"
+      "asOf": "2026-07-21"
     },
     "playstyle": {
       "range": "Ranged",
@@ -7022,15 +7057,16 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4082,
         "unit": "rating",
-        "asOf": "2026-07-20"
+        "n": 50,
+        "asOf": "2026-07-21"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.7,
+        "value": 0.3,
         "unit": "%",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -7046,9 +7082,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 115587,
+        "value": 115635,
         "unit": "DPS",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -7067,7 +7103,7 @@
         "value": 143335,
         "unit": "DPS",
         "n": 65,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -7077,7 +7113,7 @@
         "value": 328201,
         "unit": "DPS",
         "n": 1,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -7087,17 +7123,17 @@
         "value": 316867,
         "unit": "DPS",
         "n": 2,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 441929,
+        "value": 435062,
         "unit": "DPS",
-        "n": 46,
-        "asOf": "2026-07-20",
+        "n": 48,
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -7107,7 +7143,7 @@
         "value": 105218,
         "unit": "DPS",
         "n": 53,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -7117,13 +7153,13 @@
         "value": 235174,
         "unit": "DPS",
         "n": 106,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-20",
+      "asOf": "2026-07-21",
       "targets": {
         "1": 118513,
         "2": 205765,
@@ -7136,7 +7172,7 @@
     "survivability": {
       "tier": "B",
       "source": "archon",
-      "asOf": "2026-07-20"
+      "asOf": "2026-07-21"
     },
     "playstyle": {
       "range": "Ranged",
@@ -7172,7 +7208,7 @@
         "icyveins": "A+",
         "method": "A",
         "wowhead": "A",
-        "archon": "B"
+        "archon": "A"
       },
       "mplus": {
         "icyveins": "B",
@@ -7240,7 +7276,8 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3738,
         "unit": "rating",
-        "asOf": "2026-07-20"
+        "n": 50,
+        "asOf": "2026-07-21"
       },
       {
         "source": "mythicstats",
@@ -7248,7 +7285,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.1,
         "unit": "%",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -7264,9 +7301,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 115200,
+        "value": 115212,
         "unit": "DPS",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -7282,10 +7319,10 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 154582,
+        "value": 157474,
         "unit": "DPS",
-        "n": 56,
-        "asOf": "2026-07-20",
+        "n": 54,
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -7295,7 +7332,7 @@
         "value": 197717,
         "unit": "DPS",
         "n": 10,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -7305,7 +7342,7 @@
         "value": 203505,
         "unit": "DPS",
         "n": 2,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -7315,7 +7352,7 @@
         "value": 329489,
         "unit": "DPS",
         "n": 10,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -7325,23 +7362,23 @@
         "value": 105969,
         "unit": "DPS",
         "n": 25,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 252636,
+        "value": 245847,
         "unit": "DPS",
-        "n": 79,
-        "asOf": "2026-07-20",
+        "n": 85,
+        "asOf": "2026-07-21",
         "era": "ptr"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-20",
+      "asOf": "2026-07-21",
       "targets": {
         "1": 114984,
         "2": 147682,
@@ -7354,7 +7391,7 @@
     "survivability": {
       "tier": "A",
       "source": "archon",
-      "asOf": "2026-07-20"
+      "asOf": "2026-07-21"
     },
     "playstyle": {
       "range": "Ranged",
@@ -7398,7 +7435,7 @@
         "method": "C",
         "wowhead": "A",
         "archon": "S",
-        "wowmeta": "A"
+        "wowmeta": "C"
       }
     },
     "ptr": {
@@ -7475,15 +7512,16 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4182,
         "unit": "rating",
-        "asOf": "2026-07-20"
+        "n": 50,
+        "asOf": "2026-07-21"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 2.7,
+        "value": 2.9,
         "unit": "%",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -7499,9 +7537,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 107580,
+        "value": 107474,
         "unit": "DPS",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -7517,10 +7555,10 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 146830,
+        "value": 146626,
         "unit": "DPS",
-        "n": 48,
-        "asOf": "2026-07-20",
+        "n": 49,
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -7530,27 +7568,27 @@
         "value": 260735,
         "unit": "DPS",
         "n": 21,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 3T)",
-        "value": 346783,
+        "value": 361528,
         "unit": "DPS",
-        "n": 13,
-        "asOf": "2026-07-20",
+        "n": 15,
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 505846,
+        "value": 511529,
         "unit": "DPS",
-        "n": 77,
-        "asOf": "2026-07-20",
+        "n": 85,
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -7560,23 +7598,23 @@
         "value": 106670,
         "unit": "DPS",
         "n": 52,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 256290,
+        "value": 257734,
         "unit": "DPS",
-        "n": 470,
-        "asOf": "2026-07-20",
+        "n": 499,
+        "asOf": "2026-07-21",
         "era": "ptr"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-20",
+      "asOf": "2026-07-21",
       "targets": {
         "1": 112641,
         "2": 156775,
@@ -7589,7 +7627,7 @@
     "survivability": {
       "tier": "B",
       "source": "archon",
-      "asOf": "2026-07-20"
+      "asOf": "2026-07-21"
     },
     "playstyle": {
       "range": "Melee",
@@ -7633,7 +7671,7 @@
         "method": "B",
         "wowhead": "B",
         "archon": "A",
-        "wowmeta": "A"
+        "wowmeta": "B"
       }
     },
     "ptr": {
@@ -7710,15 +7748,16 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4069,
         "unit": "rating",
-        "asOf": "2026-07-20"
+        "n": 50,
+        "asOf": "2026-07-21"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.6,
+        "value": 0.1,
         "unit": "%",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -7736,7 +7775,7 @@
         "name": "SimC nightly Patchwerk DPS",
         "value": 114230,
         "unit": "DPS",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -7752,10 +7791,10 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 152358,
+        "value": 149733,
         "unit": "DPS",
-        "n": 11,
-        "asOf": "2026-07-20",
+        "n": 12,
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -7765,7 +7804,7 @@
         "value": 213847,
         "unit": "DPS",
         "n": 4,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -7775,17 +7814,17 @@
         "value": 300135,
         "unit": "DPS",
         "n": 4,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 322318,
+        "value": 326063,
         "unit": "DPS",
-        "n": 13,
-        "asOf": "2026-07-20",
+        "n": 15,
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -7795,7 +7834,7 @@
         "value": 115339,
         "unit": "DPS",
         "n": 32,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       },
       {
@@ -7805,13 +7844,13 @@
         "value": 203915,
         "unit": "DPS",
         "n": 78,
-        "asOf": "2026-07-20",
+        "asOf": "2026-07-21",
         "era": "ptr"
       }
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-20",
+      "asOf": "2026-07-21",
       "targets": {
         "1": 119613,
         "2": 138632,
@@ -7824,7 +7863,7 @@
     "survivability": {
       "tier": "B",
       "source": "archon",
-      "asOf": "2026-07-20"
+      "asOf": "2026-07-21"
     },
     "playstyle": {
       "range": "Melee",
@@ -7944,15 +7983,16 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3931,
         "unit": "rating",
-        "asOf": "2026-07-20"
+        "n": 50,
+        "asOf": "2026-07-21"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.1,
+        "value": 0,
         "unit": "%",
-        "asOf": "2026-07-20"
+        "asOf": "2026-07-21"
       },
       {
         "source": "warcraftlogs",
@@ -7978,7 +8018,7 @@
     "survivability": {
       "tier": "S",
       "source": "archon",
-      "asOf": "2026-07-20"
+      "asOf": "2026-07-21"
     },
     "playstyle": {
       "range": "Melee",
