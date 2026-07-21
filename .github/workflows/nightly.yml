@@ -61,7 +61,7 @@ jobs:
     permissions:
       contents: read # the agent job holds NO write scopes — publication happens in `publish`
     steps:
-      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           # No token left in .git/config: the agents' shells have no ambient push credential.
           persist-credentials: false
@@ -89,7 +89,7 @@ jobs:
       # rows against THIS copy, so an agent (which can edit the working-tree copy)
       # has no window to tamper with what the gate reads.
       - name: Publish WCL fetch evidence (pre-agent, tamper-evident)
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: wcl-evidence
           retention-days: 7
@@ -113,7 +113,7 @@ jobs:
       - name: Primary full refresh (Claude Code, read-only token)
         id: primary_agent
         continue-on-error: true
-        uses: anthropics/claude-code-action@f1bd27ca5b54584506e40e17884d90bdaaa1a9b3 # v1
+        uses: anthropics/claude-code-action@b76a0776ae74036e77cd11018083743453d7ad35 # v1
         timeout-minutes: 42
         with:
           github_token: ${{ github.token }}
@@ -245,7 +245,7 @@ jobs:
 
       - name: Recovery pass for incomplete refresh
         if: steps.primary_agent.outcome != 'success' || steps.primary_check.outcome != 'success'
-        uses: anthropics/claude-code-action@f1bd27ca5b54584506e40e17884d90bdaaa1a9b3 # v1
+        uses: anthropics/claude-code-action@b76a0776ae74036e77cd11018083743453d7ad35 # v1
         timeout-minutes: 35
         with:
           github_token: ${{ github.token }}
@@ -332,7 +332,7 @@ jobs:
       # none, and the action masks their own token).
       - name: Upload agent transcripts (diagnosis)
         if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: agent-transcripts
           retention-days: 7
@@ -346,7 +346,7 @@ jobs:
       # rebuilds it from source, so a tampered build artifact can't ride along.
       - name: Upload refresh output for publication or debugging
         if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: nightly-refresh
           include-hidden-files: true
@@ -368,7 +368,7 @@ jobs:
       actions: write # dispatches the Pages deploy workflow
       issues: write # posts the per-run digest comment (owner's daily email)
     steps:
-      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           # CURRENT master, not the trigger-time sha: commits that land on master while
           # the ~30-min refresh job runs (2026-07-17: a template feature) otherwise
