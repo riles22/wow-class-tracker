@@ -1415,7 +1415,7 @@
       "patchContext": "12.1 PTR — Season 2 M+ testing",
       "claim": "Patient Zero was removed and replaced by a new talent, Hedonic Gorging (buffing Drain Life, Siphon Life's Corruption bonus and Dark Harvest), while the tier-set bug that let Seed-applied Unstable Affliction deal 100% value (intended 20%) was fixed — together a big drop in Aff's prior-target/funnel damage. AoE stays strong (arguably slightly better via Dark Harvest) but single target remains, in his words, horrendous and got no fix; no Warlock spec received real changes this pass.",
       "url": "https://youtu.be/6nr1LrYp0xc?t=700",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Warlock",
@@ -1426,7 +1426,7 @@
       "patchContext": "12.1 PTR — Season 2",
       "claim": "Destruction took a 5% aura nerf (after a 10% buff the prior week — he feels it shouldn't have been touched since it's still weak). The 4-set was reworked so Dark Titan's Mark now buffs all damage to the target by 6% (near-100% single-target uptime) instead of only Echo of Sargeras, helping single target, but the Apex proc no longer replicates through Havoc, hurting two-target cleave. He thinks all three Warlock specs need buffs.",
       "url": "https://youtu.be/6nr1LrYp0xc?t=735",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Warlock",
@@ -1437,7 +1437,7 @@
       "patchContext": "12.1 PTR — Season 2 M+ testing",
       "claim": "Comparing the three Warlock specs, Kalamazi expects Demonology to be the M+ front-runner (and often the best Warlock spec per fight): it puts out strong AoE with essentially no single-target loss between its M+ and single-target builds, whereas Affliction is stuck being a single-target-weak AoE spec.",
       "url": "https://youtu.be/6nr1LrYp0xc?t=713",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Paladin",
@@ -1712,6 +1712,39 @@
       "patchContext": "12.1 PTR — Season 2 healer testing",
       "claim": "LBNinja7 flags Disc Priest as increasingly proc-fishy (packs feel much safer with Void Shield active), but calls the recent Void Shield nerf a good change — it reduces reliance on the shield and disperses that power across the rest of the kit.",
       "url": "https://youtu.be/Gz17CIGREfU?t=67",
+      "superseded": false
+    },
+    {
+      "class": "Warlock",
+      "spec": "Demonology",
+      "creator": "Kalamazi",
+      "date": "2026-07-20",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR — post-raid-testing tuning",
+      "claim": "With raid testing concluded, Kalamazi calls Demonology the most complete and ready-to-go Warlock spec for 12.1 — it has a good stacked-cleave profile — but says its raw single target feels mediocre and hasn't kept pace: it got no real buffs or nerfs this cycle (only a tier-set change) while other classes improved, so he wants a single-target bump. He also flags that heavy pet-movement fights (Nek'zali, Vashnik, Lost Explorers) make Demo awkward as pets chase adds ~30 yards across the room.",
+      "url": "https://youtu.be/okWbk283nd0?t=510",
+      "superseded": false
+    },
+    {
+      "class": "Warlock",
+      "spec": "Affliction",
+      "creator": "Kalamazi",
+      "date": "2026-07-20",
+      "sentiment": "nerf",
+      "patchContext": "12.1 PTR — post-raid-testing tuning",
+      "claim": "Post-raid-testing, Kalamazi reads Affliction as one of the weakest specs — it's only brought on this tier's seed-cleave fights (Nek'zali, Lost Explorers, Twin Fangs, Vashnik) for Seed of Corruption spam, not for its dots, and its single target stays poor after the tier-set Unstable Affliction application was nerfed (50%->20%, a 100%-value bug fixed) and Patient Zero was removed. He argues Patient Zero's removal opens the door for Blizzard to buff baseline Unstable Affliction (which would also scale the tier set), wants Fatal Echoes fixed to refresh any UA stack, and would shorten Dark Lair/Malefic Grasp to 1 minute; he also laments Hellcaller being 'dead' after Seed of Corruption was pulled from Malevolence. Expects Warlock near the bottom of the upcoming compiled sims.",
+      "url": "https://youtu.be/okWbk283nd0?t=700",
+      "superseded": false
+    },
+    {
+      "class": "Warlock",
+      "spec": "Destruction",
+      "creator": "Kalamazi",
+      "date": "2026-07-20",
+      "sentiment": "nerf",
+      "patchContext": "12.1 PTR — post-raid-testing tuning",
+      "claim": "Kalamazi says a 5% aura nerf snuck in last week alongside the 4-set rework (6% damage to the Echo of Sargeras target) — roughly a wash in single target where that buff stays up, but a real loss in the spread/Hellcaller cleave this tier rewards (In-tomb Sentinels, Coiled Altar phases 2-3) because Echo of Sargeras no longer procs on both Havoc targets simultaneously. He reads Destro as having good spread-cleave profiles for the tier's fights yet doing markedly less damage than DKs, Hunters, Boomkin and Shadow, and wants the aura nerf reverted with a small (~3-4%) tier-set tune-down.",
+      "url": "https://youtu.be/okWbk283nd0?t=1092",
       "superseded": false
     }
   ],

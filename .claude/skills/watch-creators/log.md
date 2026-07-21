@@ -314,3 +314,26 @@ YObr6op6JOg (5v5-duel PvP) + V8doyR2hOE4/w-iGfC8y5_M (general-news + PTR testing
 + Road-to-Rank-1 streams, Critcake wyWZMj0HDQw/SgX0IB4INHk (io gameplay), LBNinja7 n2ga6kdiGVQ (how-to-heal-a-
 tank tutorial, not a spec read), AutomaticJak TXv5nof2mZw (RSham/HPal M+ UI stream), Kalamazi OGqHbH5nHOI
 (sub-event), YoDaTV Tr7xu8oXiPY (twitch restream). Pending queue 2→3.
+
+## 2026-07-21 (nightly) — 25/25 feeds polled; 3 transcripts distilled (1 kept, 2 PvP-skipped); queue 3→2
+All 25 unique creator RSS feeds polled live (25/25 OK). **Transcript step fetched all 3 queued videos**
+(summary.json verdict ok, offsets ms). **Distilled — Kalamazi `okWbk283nd0`** "Warlock MAY Need Some Buffs
+in 12.1" (07-20): a genuine PvE post-raid-testing Warlock tuning breakdown → added 3 Warlock takes
+(Demonology neutral — complete but ST-mediocre; Affliction nerf — only played for seed-cleave, ST poor
+after tier-set 50→20% + Patient Zero removal, hopes baseline UA buff; Destruction nerf — 5% aura nerf +
+4-set rework hurts spread/Havoc cleave). Superseded the 3 older 07-15 Kalamazi Warlock takes. **Both
+Supatease videos transcript-verified-skipped as PvP-only**: `9XVHns6dRuY` "New Meta Incoming" (07-19) is a
+~4h solo-shuffle/BG-blitz/arena VOD — its meta reads (Unholy DK/BM Hunter strong, "Aff best spec", Resto
+Sham decent, Frost Mage better) are all PvP-arena context; the "tier list" he references is a PvP one.
+`HuRjN73exFk` "12.1 Class Changes Update Healers" (07-17) is a PvP-framed healer-tuning roundup (solo
+shuffle/BG/dueling lens) with only a passing Resto Shaman mention in Supatease's Shaman scope — not in-depth
+PvE analysis. Removed all 3 from the queue. **Queued 2 new**: izen `m5lEbh4lrHA` "12.1 PTR - Best DPS Specs
+After Tuning | Mythic Raid Testing Results" (07-20 — generalCreator metaNotes material, refreshed izen
+`latest`) and Supatease `BvJ3o0_Tt3Q` "12.1 Most Nerfed Class" (07-20 — ambiguous class-tuning roundup in
+scope, distill-or-verified-skip). **Triaged out** (off-scope, not queued): Kesslive I2tMsLhcSX8 (warmode
+trolling), Supatease vWY4_2KpAxk/TvhgUOxCngY/sp6z-7NqpmY (solo-shuffle/PvP tier list/Ele damage clip),
+LBNinja7 Po44tj5ZV00 (non-spec vlog), Shadarek CDHf1dkEGb0 (Guardian keys stream, off DH scope), YoDaTV
+eWQJwJ24WR0/3jG7SoN4iRo (Prot Pal S2 keys streams), Critcake jWMfdOLOlpY (io push), Dalaran QQnqyNs4NFs/
+sfjc1GJkjfg/ifQ0QExZO9E (5v5 duels + PvP-changes news), Shindigg 7Ta7gtyP_xY/18v8Z_w1jjA (DH keys),
+AutomaticJak kXOdbKJPvxo (MW/Pres/HPriest M+ UI stream). izen newest is m5lEbh4lrHA (now queued). Pending
+queue 3→2.
