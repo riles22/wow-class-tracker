@@ -30,8 +30,47 @@
 
 import { oauthToken, gql } from "./fetch-wcl.mjs";
 
+/* ---- Site statistics-table transport probe (2026-07-21, owner-requested) ----
+   The site's own median-table endpoint is a SEPARATE path from the broken GraphQL
+   rdps family (the owner notes /zone/rankings/52 renders fine in a browser). This
+   section answers, credential-free: does the statistics table serve rdps data to a
+   datacenter runner with the documented XHR-header recipe, or does Cloudflare
+   challenge it? Prints sizes and row signatures only. */
+const TABLE_HEADERS = {
+  "X-Requested-With": "XMLHttpRequest",
+  "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+  "Accept": "text/html, */*; q=0.01",
+  "Accept-Language": "en-US,en;q=0.9",
+  "Referer": "https://www.warcraftlogs.com/zone/statistics/52",
+};
+async function probeStatTable(label, url) {
+  try {
+    const res = await fetch(url, { headers: TABLE_HEADERS });
+    const body = await res.text();
+    const sprites = [...body.matchAll(/actor-sprite-[A-Za-z]+-[A-Za-z]+/g)].length;
+    const numCells = (body.match(/main-table-number/g) ?? []).length;
+    const challenged = /cf-browser-verification|challenge-platform|Just a moment/i.test(body);
+    console.log(`◇ ${label}: HTTP ${res.status}, ${body.length}B, spriteRows=${sprites}, numberCells=${numCells}${challenged ? ", CLOUDFLARE CHALLENGE" : ""}`);
+    if (sprites > 0) console.log(`   first sprite: ${body.match(/actor-sprite-[A-Za-z-]+/)?.[0]}`);
+    return { status: res.status, sprites, numCells, challenged };
+  } catch (e) {
+    console.log(`◇ ${label}: FETCH FAILED — ${e.message}`);
+    return { err: String(e) };
+  }
+}
+const STAT_TABLES = [
+  ["z52 1T rdps (amount)", "https://www.warcraftlogs.com/zone/statistics/table/52/dps/3591/3/10/1/50/1/14/0/DPS/Any/All/0/amount/single/0/-1/?keystone=15&dpstype=rdps"],
+  ["z52 1T dps control", "https://www.warcraftlogs.com/zone/statistics/table/52/dps/3591/3/10/1/50/1/14/0/DPS/Any/All/0/amount/single/0/-1/?keystone=15&dpstype=dps"],
+  ["z54 raid rdps (normalized)", "https://www.warcraftlogs.com/zone/statistics/table/54/dps/0/4/10/1/1000/1/14/0/DPS/Any/All/0/normalized/single/0/-1/?keystone=15&dpstype=rdps"],
+  ["z46 live raid rdps (amount)", "https://www.warcraftlogs.com/zone/statistics/table/46/dps/0/5/20/3/1000/1/14/0/DPS/Any/All/0/amount/single/0/-1/?dpstype=rdps"],
+];
+for (const [label, url] of STAT_TABLES) {
+  await probeStatTable(label, url);
+  await new Promise(r => setTimeout(r, 800)); // polite guest
+}
+
 const ID = process.env.WCL_CLIENT_ID, SECRET = process.env.WCL_CLIENT_SECRET;
-if (!ID || !SECRET) { console.error("✗ WCL_CLIENT_ID / WCL_CLIENT_SECRET not set"); process.exit(1); }
+if (!ID || !SECRET) { console.error("— WCL_CLIENT_ID / WCL_CLIENT_SECRET not set; site-table probe above is the whole result"); process.exit(0); }
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
