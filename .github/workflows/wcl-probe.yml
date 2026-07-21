@@ -27,32 +27,3 @@ jobs:
           WCL_CLIENT_ID: ${{ secrets.WCL_CLIENT_ID }}
           WCL_CLIENT_SECRET: ${{ secrets.WCL_CLIENT_SECRET }}
         run: node src/wcl-probe.mjs
-      - name: "TEMP (branch-only, 2026-07-21): Supadata web-scrape probe vs WCL"
-        env:
-          TRANSCRIPT_API_KEY: ${{ secrets.TRANSCRIPT_API_KEY }}
-        run: |
-          if [ -z "$TRANSCRIPT_API_KEY" ]; then echo "no TRANSCRIPT_API_KEY configured — Supadata probe skipped"; exit 0; fi
-          node --input-type=module - <<'NODE_EOF'
-          const key = process.env.TRANSCRIPT_API_KEY;
-          const targets = [
-            ["z52 XHR fragment rdps", "https://www.warcraftlogs.com/zone/statistics/table/52/dps/3591/3/10/1/50/1/14/0/DPS/Any/All/0/amount/single/0/-1/?keystone=15&dpstype=rdps"],
-            ["z52 statistics page", "https://www.warcraftlogs.com/zone/statistics/52"],
-          ];
-          for (const [label, url] of targets) {
-            let res, body = "";
-            try {
-              res = await fetch(`https://api.supadata.ai/v1/web/scrape?url=${encodeURIComponent(url)}`,
-                { headers: { "x-api-key": key, accept: "application/json" } });
-              body = await res.text();
-            } catch (e) { console.log(`SUPADATA ${label}: FETCH FAILED — ${e.message}`); continue; }
-            let content = body;
-            try { const j = JSON.parse(body); content = j.content ?? j.markdown ?? JSON.stringify(j).slice(0, 500); } catch {}
-            const sprites = (content.match(/actor-sprite/g) ?? []).length;
-            const specHits = (content.match(/Devourer|Havoc|Marksmanship|Windwalker|Elemental/g) ?? []).length;
-            const numbers = (content.match(/\b\d{5,6}(?:\.\d+)?\b/g) ?? []).length;
-            const cf = /Just a moment|challenge-platform|Verifying you are human|cf-browser-verification/i.test(content);
-            console.log(`SUPADATA ${label}: HTTP ${res.status}, ${content.length} chars, spriteTokens=${sprites}, specNameHits=${specHits}, bigNumbers=${numbers}${cf ? ", CLOUDFLARE CHALLENGE TEXT" : ""}`);
-            console.log(`   head: ${content.slice(0, 350).replace(/\n/g, " | ")}`);
-            await new Promise(r => setTimeout(r, 1500));
-          }
-          NODE_EOF

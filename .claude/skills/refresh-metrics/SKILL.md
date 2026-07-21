@@ -79,6 +79,14 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
     typing), and do not rebuild statistics-table medians from rankings pages — the
     leaderboard is a paginated top-parses list (`count` is page-local), not the parse
     population, and zone 54's cross-boss normalized score has no API analogue at all.
+  - **Third-party scrape proxies are a dead end (probe-verified 2026-07-21):** a
+    Supadata `/v1/web/scrape` probe (owner-requested) DOES clear Cloudflare, but the
+    statistics-table fragment answers non-XHR scrapers with WCL's explicit refusal
+    ("Use the API at /v1/docs instead of scraping HTML."), and the rendered
+    statistics PAGE returns only navigation chrome — the table loads via XHR after
+    render, so no values come through (bigNumbers=0). The refusal message also
+    settles the etiquette question: WCL's stated policy is API-only, and the API is
+    exactly what's broken. Do not retry other scrape proxies; wait for the rdps fix.
   - **Standing behavior until WCL fixes it:** ONE cheap retry per run (a single
     `metric: rdps` query on a known-good encounter, e.g. 3176); if still 500, record
     the five WCL manifest rows as `unreachable` with this reason and leave data
