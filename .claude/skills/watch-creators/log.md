@@ -337,3 +337,27 @@ eWQJwJ24WR0/3jG7SoN4iRo (Prot Pal S2 keys streams), Critcake jWMfdOLOlpY (io pus
 sfjc1GJkjfg/ifQ0QExZO9E (5v5 duels + PvP-changes news), Shindigg 7Ta7gtyP_xY/18v8Z_w1jjA (DH keys),
 AutomaticJak kXOdbKJPvxo (MW/Pres/HPriest M+ UI stream). izen newest is m5lEbh4lrHA (now queued). Pending
 queue 3→2.
+
+## 2026-07-22 (nightly) — 25/25 feeds polled; 2 pre-fetched transcripts distilled; queue 2→8
+All 25 unique creator RSS feeds polled live (25/25 OK, one retry logic). **Deterministic transcript step
+fetched both queued videos** (summary.json verdict ok, offsets ms). **Distilled — izen `m5lEbh4lrHA`**
+"12.1 PTR - Best DPS Specs After Tuning | Mythic Raid Testing Results" (07-20, generalCreator): a full
+Season-2 Mythic-raid-testing DPS recap → **17 new metaNotes** (lens "Season 2 PTR — raid testing outlook"),
+superseding 12 older izen raid-lens notes for the same specs. Positive (tuned across profiles): Elemental,
+Balance, Arcane, Devourer, Frost DK, Arms, Ret. Mixed (profile-dependent): Shadow, Frost Mage, Affliction,
+Devastation. Negative (undertuned/disappointing): Assassination, Fury, Fire Mage, Augmentation, Survival,
+Feral. **Supatease `BvJ3o0_Tt3Q`** "12.1 Most Nerfed Class" (07-20) transcript-verified-skipped: a 19-chunk
+PvP snippet about Frost Mage / Rogue-Mage snare nerfs — PvP context + out of Supatease's PvE scope
+(Shaman/Affliction/Arms-Prot). Removed both from queue. izen `latest` refreshed to his newer `g0NmG9sVQ-Q`
+(07-21 Season 2 gearing-systems news — no per-spec reads, systems lens, not queued).
+**Queued 8 new in-scope build-#16 reaction videos** (no transcripts available to the agent): Kalamazi
+`Xy8iV9-WcRI` (Warlock changes), Whispyr `e_2JhO06r7Y` (Assassination buffs), Baze `nqEdcFi_7wk` (Fury/Arms
+buffs), Obli `5PpRdVE02Y8` (Unholy DK San'layn), Shadarek `QPqLeneGJUg` (Havoc/Devourer buffs), VooDooSaurus
+`1-5RVwgA6KM` (Devourer sims), Dratnos `7UTSF0BXbD4` (PTR changes recap — Arms/Fury scope), Supatease
+`GIMxSexKfis` (12.1 BIG Class Update roundup, distill-or-skip). **Triaged out** (off-scope, not queued):
+Supatease PvP/rap/drama/Ele-PVP-guide streams (`1UKu8qGszVc` `VNyFSQir2hE` `XYZUWEdEgpk` `J4e3QMpeS6g`
+`X1R8EvIlmXc` `yxRmKx5Q1WA` `vWY4_2KpAxk`), Dalaran PvP duels + news (`YLpjECBfyLg` `Y_aGr-34u8M`
+`s97eN2P7FoA`), Critcake io pushes (`lsQr_Efa0pA` `zzHKjkTYv-w`), AutomaticJak `Uu3t2siWgbQ` (UI/sponsored),
+Obli `Q0DXJzjCqL8` (DK defensives tutorial, no meta read), Preheat `nsqND5BS-C4` (PTR-Mage livestream),
+Shadarek `Qzys9RKWpPo` (Dev DH raiding stream), Shindigg `LJ94XJVXPL8` (raid stream), Tettles `QADGvYl5GCw`
+(GM-cheating drama), YoDaTV `fPJ9Iw2B5Vk` (twitch restream). Pending queue 2→8.

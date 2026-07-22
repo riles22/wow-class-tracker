@@ -156,3 +156,16 @@ Bloodmallet: 26/26 non-Aug DPS fight profiles (talent_target_scaling/castingpatc
 Devastation, Holy Pal, Holy Priest, Resto Druid — upsert keeps their stored values, 40 stored). Archon drawer
 numbers (95th pct DPS / popularity / M+ score — ungated, not in required-sources) left at 07-20: the popularity
 % isn't cleanly present in the tierList entries and I won't fabricate it.
+
+## 2026-07-22 (nightly) — non-WCL metrics refreshed live; WCL evidence-only (rdps-broken)
+- **WCL**: agent holds no creds; per wcl-fetch/evidence.json verdict rdps-broken (attemptedAt 07-22T12:14Z).
+  The deterministic fetch step merged the 3 raw-DPS series before the agent started (Dummy Dome 103, Venomous
+  Abyss raid 27, M+ keys 27; all asOf 07-22). The 5 rDPS/normalized cuts (live raid/mplus zone 46/47, PTR raid
+  zone 54, PTR mplus zone 56, Dummy Dome rDPS zone 52) stay unreachable at their 2026-07-09 baseline.
+- **Murlok** 40/40 (27 DPS + 7 healer + 6 tank), plain GET, display-name→first-4-digit rating, range 3738–4288.
+- **Bloodmallet** 26/26 non-Aug DPS fight profiles via talent_target_scaling/castingpatchwerk; MID1 confirmed;
+  targets 1/2/3/5/8/15 from the single MID1 build.
+- **SimC** nightly MID1_Raid.txt (1.5MB) DPS Ranking parsed; best hero-variant per DPS spec = 26/26.
+- **Mythicstats** period 1072 (1073 not yet built/404) via r.jina.ai; era "Period 1072 MID1", no season flip;
+  35 specs parsed from the representation list; 5 absent (~0 keys: Blood DK, Resto Druid, Devastation Evoker,
+  Holy Pal, Holy Priest) keep stored values via upsert.
