@@ -2,60 +2,32 @@
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
   "videos": [
     {
-      "id": "Xy8iV9-WcRI",
+      "id": "0mtKobeslFA",
+      "creator": "izen (Izenhart)",
+      "title": "12.1 PTR - Specs Balance Tuning #7 | It's Almost All Buffs!",
+      "published": "2026-07-22",
+      "queuedAt": "2026-07-23"
+    },
+    {
+      "id": "32hM_eLonR4",
+      "creator": "MadSkillzzTV",
+      "title": "12.1 PTR Healer M+ Testing (Big Resto Shaman Changes & More)",
+      "published": "2026-07-22",
+      "queuedAt": "2026-07-23"
+    },
+    {
+      "id": "beBJZnCXF0s",
+      "creator": "Kesslive",
+      "title": "Weekly 12.1 PTR Evoker Update",
+      "published": "2026-07-22",
+      "queuedAt": "2026-07-23"
+    },
+    {
+      "id": "C82WusrvQ1E",
       "creator": "Kalamazi",
-      "title": "New PTR Build & Warlock Changes!",
+      "title": "NEW Warlock PTR Changes! Demo Nerfed & Aff Buffed",
       "published": "2026-07-22",
-      "queuedAt": "2026-07-22"
-    },
-    {
-      "id": "e_2JhO06r7Y",
-      "creator": "Whispyr",
-      "title": "Blizzard gave me Assassination Buffs for my Birthday",
-      "published": "2026-07-22",
-      "queuedAt": "2026-07-22"
-    },
-    {
-      "id": "nqEdcFi_7wk",
-      "creator": "Baze",
-      "title": "Unannounced 12.1 Massive Fury & Arms Warrior Buffs/Changes Season 2 Midnight Curse of Ula'tek",
-      "published": "2026-07-22",
-      "queuedAt": "2026-07-22"
-    },
-    {
-      "id": "5PpRdVE02Y8",
-      "creator": "Obli",
-      "title": "San'layn is BACK - Unholy DK no longer in the bin! / Midnight 12.1 PTR",
-      "published": "2026-07-22",
-      "queuedAt": "2026-07-22"
-    },
-    {
-      "id": "QPqLeneGJUg",
-      "creator": "Shadarek",
-      "title": "Havoc and Collapsing Star Devourer BUFFS",
-      "published": "2026-07-22",
-      "queuedAt": "2026-07-22"
-    },
-    {
-      "id": "1-5RVwgA6KM",
-      "creator": "VooDooSaurus",
-      "title": "12.1 Devourer Demon Hunter Sims and Gameplay! How are the builds looking?",
-      "published": "2026-07-21",
-      "queuedAt": "2026-07-22"
-    },
-    {
-      "id": "7UTSF0BXbD4",
-      "creator": "Dratnos",
-      "title": "More PTR Changes - Hunter's Mark Reverted, Rogue Buffed! & More",
-      "published": "2026-07-22",
-      "queuedAt": "2026-07-22"
-    },
-    {
-      "id": "GIMxSexKfis",
-      "creator": "Supatease",
-      "title": "12.1 BIG Class Update",
-      "published": "2026-07-22",
-      "queuedAt": "2026-07-22"
+      "queuedAt": "2026-07-23"
     }
   ]
 }

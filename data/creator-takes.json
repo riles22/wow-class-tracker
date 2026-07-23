@@ -268,7 +268,8 @@
       "patchContext": "12.1 PTR",
       "sentiment": "buff",
       "claim": "Sees the Blackened Soul and Wither damage buffs plus the redesigned Affliction set bonus (Agony +15%, Corruption +25%) as a very large amount of DoT damage, questioning whether that much power belongs in a set bonus instead of the class baseline.",
-      "url": "https://youtu.be/C_aiXV_QRBs?t=809"
+      "url": "https://youtu.be/C_aiXV_QRBs?t=809",
+      "superseded": true
     },
     {
       "class": "Warrior",
@@ -569,7 +570,8 @@
       "patchContext": "12.1 PTR",
       "sentiment": "buff",
       "claim": "Celebrates Rend becoming Arms-exclusive in 12.1, saying Fury has been plagued by the ability all through Midnight and is finally free of it in single target.",
-      "url": "https://youtu.be/Y4HWWunCXVg?t=43"
+      "url": "https://youtu.be/Y4HWWunCXVg?t=43",
+      "superseded": true
     },
     {
       "class": "Warrior",
@@ -579,7 +581,8 @@
       "patchContext": "12.1 PTR",
       "sentiment": "buff",
       "claim": "Supports Demolish moving to a flat 30-second cooldown aligned with Colossus Smash since he dislikes desynced cooldowns and thinks Arms needs streamlining, calling it a step in the right direction while noting the spec still needs more work.",
-      "url": "https://youtu.be/Y4HWWunCXVg?t=297"
+      "url": "https://youtu.be/Y4HWWunCXVg?t=297",
+      "superseded": true
     },
     {
       "class": "Warrior",
@@ -589,7 +592,8 @@
       "patchContext": "12.1 PTR",
       "sentiment": "neutral",
       "claim": "Argues the Hack and Slash rework misses Fury's real problem: Raging Blow simply does not do damage while Bloodthirst is too strong in Slayer and Thane builds, so Raging Blow needs a substantial baseline buff.",
-      "url": "https://youtu.be/Y4HWWunCXVg?t=502"
+      "url": "https://youtu.be/Y4HWWunCXVg?t=502",
+      "superseded": true
     },
     {
       "class": "Warrior",
@@ -599,7 +603,8 @@
       "patchContext": "12.1 PTR",
       "sentiment": "buff",
       "claim": "Finds the Fury four-piece very promising — Bloodthirst raising Recklessness crit and Raging Blow extending its duration up to six seconds — and thinks Raging Blow could genuinely return if the tuning is strong enough.",
-      "url": "https://youtu.be/Y4HWWunCXVg?t=666"
+      "url": "https://youtu.be/Y4HWWunCXVg?t=666",
+      "superseded": true
     },
     {
       "class": "Druid",
@@ -659,7 +664,8 @@
       "patchContext": "12.0.7 live",
       "sentiment": "neutral",
       "claim": "From reviewing player logs he argues the biggest Devourer DPS losses are cast downtime and delayed Void Rays: Void Ray outranks Collapsing Star as the highest-priority button, and playing around Voidfall stacks (roughly 12% of damage including its DoT) also feeds soul and Fury generation.",
-      "url": "https://youtu.be/CNzoPSzyEeQ?t=428"
+      "url": "https://youtu.be/CNzoPSzyEeQ?t=428",
+      "superseded": true
     },
     {
       "class": "Death Knight",
@@ -832,7 +838,7 @@
       "sentiment": "neutral",
       "claim": "The 12.1 pass nerfs Devourer's cooldown-window power — Mastery: Monster Within's in-Void-Meta bonus cut 66%, Void Ray's in/out-of-meta delta shrunk, and Collapsing Star stacks ramping slower (0/20/40/60% vs the old 0/30/60/90%) plus the lost S1 tier set — but compensates with a +20% all-ability damage aura; he measures roughly an 8-10% single-target loss if you change nothing, yet expects a small net gain once you re-stat away from the now-much-weaker Mastery into Crit/Haste, and welcomes the CD-vs-steady-state rebalance (shared with Unholy DK, Windwalker, Elemental) as good design.",
       "url": "https://youtu.be/a0hILGpu68o?t=452",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Demon Hunter",
@@ -843,7 +849,7 @@
       "sentiment": "buff",
       "claim": "He loves the new Devourer tier set: Reap gains a 20% chance to make the next Consume instant and explode a Soul Burst for AoE, and the 4-set has that Soul Burst generate 8 soul fragments plus a Moment of Craving and buff Reap damage 20% — effectively an instant ~10-soul generator that reshapes the rotation around pressing Reap far more, which he calls very strong and fun (exact proc mechanic still being reverse-engineered), and which favors the Void's Guard hero build that reaps more.",
       "url": "https://youtu.be/a0hILGpu68o?t=495",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Demon Hunter",
@@ -865,7 +871,7 @@
       "sentiment": "buff",
       "claim": "With better Sims now available, he reverses his earlier build call: the best Devourer build is a Void Scar melee build that does NOT press Collapsing Star at any target count. The Mastery/Collapsing Star nerfs plus the +20% aura pushed the spec toward Crit, and Crit-scaling melee talents (Hungry Slash now triggers Burning Blades for a 35% amp while Void-scarred, Soul Forge Blades, Flamebound) now hit hard — he cites Void Surge ~14%, Hungry Slash ~10-12%, The Hunt ~8% of damage; caster/Collapsing-Star builds sim '20-25% behind' this melee build. He calls it high-skill, fun, and mobile (only Void Ray is a hard-cast).",
       "url": "https://youtu.be/37ves2D6mpc?t=81",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Demon Hunter",
@@ -876,7 +882,7 @@
       "sentiment": "neutral",
       "claim": "He explains why Collapsing Star is dead weight this build despite still being talented (only for Rolling Torment's stacks): the Apex needed to make it hit is too expensive for Void-scarred, casting it wipes ~30 stacks of Rolling Torment (a ~20% amp on leaving meta that he calls one of the spec's best talents), and Crit — which the build stacks — scales Collapsing Star worst since rank-one already makes it always crit. He says Star needs a heavy buff. The playstyle is button-dense (Reap/Call spam plus a melee combo) with frequent burst and free cleave; Soul Emulation stays core, and Void Scar plays more mobile than Annihilator at the cost of a Shift charge.",
       "url": "https://youtu.be/37ves2D6mpc?t=326",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Monk",
@@ -920,7 +926,7 @@
       "sentiment": "neutral",
       "claim": "He reads Assassination's 12.1 changes as pretty good overall: the Implacable/apex rework is fine and now fully passive (no ramp/drop), builds stay largely the same as Season 1 with minor tweaks, and Fatebound survives the Deal Fate coin-proc nerf (100% to 60%) without forcing a Deathstalker swap — his caveat is 'as long as you ignore Unstable Toxin and some Deathstalker awkwardness.'",
       "url": "https://youtu.be/UO681BcajRc?t=1861",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Rogue",
@@ -931,7 +937,7 @@
       "sentiment": "nerf",
       "claim": "He calls the new capstone Unstable Toxin undertuned: shaving 2 seconds off Envenom is a heavy downside (Envenom uptime drops from ~95% to ~65-70%, costing Rapid Injection and Inspiring Strike uptime) for only 18% Envenom damage, so it isn't worth taking in single target or cleave — its only real niche is as a giga-AoE/priority-damage talent in Mythic+.",
       "url": "https://youtu.be/UO681BcajRc?t=442",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Rogue",
@@ -942,7 +948,7 @@
       "sentiment": "nerf",
       "claim": "The Dashing Scoundrel rework to flat energy regeneration removes its AoE scaling (it used to snowball off poison crits into huge AoE energy), turning a must-take-everywhere ~3.5% talent into a ~2.5% single-target-only one that lost about a third of its value and is no longer the AoE pick.",
       "url": "https://youtu.be/UO681BcajRc?t=649",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Priest",
@@ -1382,7 +1388,7 @@
       "patchContext": "12.1 PTR — Season 2 M+ testing",
       "claim": "After returning from a break Obli reads Unholy as knocked off the meta: base-ability, trinket and Death and Decay nerfs landed alongside the Nazgrim-bug fix that had been propping up Unholy's damage. Testing it himself in the new Season 2 dungeon rotation (Temple of Sethraliss, King's Rest, Ruby Life Pools) the logs look very poor and few players are on it — he was unimpressed and was even out-DPSed by Devastation Evoker in his keys.",
       "url": "https://youtu.be/Xhem4-XtOmc?t=60",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Death Knight",
@@ -1404,7 +1410,7 @@
       "patchContext": "12.1 PTR — Season 2",
       "claim": "Shadarek is disappointed by two consecutive Havoc nerfs: Inertia dropped to 12% for 6s (was 18% for 5s), roughly a 20% value cut that makes Fel-Scarred/non-Inertia builds preferable, on top of an earlier 5% aura nerf. He also pans the tier set for desyncing Essence Break from Eye Beam; the one small addition (Never Say Die, ~3% for Fel-Scarred) barely offsets it. Reads Havoc as heading into Season 2 mediocre-to-bad with near-zero high-end representation.",
       "url": "https://youtu.be/tB6Gse0qckA?t=24",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Warlock",
@@ -1723,7 +1729,7 @@
       "patchContext": "12.1 PTR — post-raid-testing tuning",
       "claim": "With raid testing concluded, Kalamazi calls Demonology the most complete and ready-to-go Warlock spec for 12.1 — it has a good stacked-cleave profile — but says its raw single target feels mediocre and hasn't kept pace: it got no real buffs or nerfs this cycle (only a tier-set change) while other classes improved, so he wants a single-target bump. He also flags that heavy pet-movement fights (Nek'zali, Vashnik, Lost Explorers) make Demo awkward as pets chase adds ~30 yards across the room.",
       "url": "https://youtu.be/okWbk283nd0?t=510",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Warlock",
@@ -1734,7 +1740,7 @@
       "patchContext": "12.1 PTR — post-raid-testing tuning",
       "claim": "Post-raid-testing, Kalamazi reads Affliction as one of the weakest specs — it's only brought on this tier's seed-cleave fights (Nek'zali, Lost Explorers, Twin Fangs, Vashnik) for Seed of Corruption spam, not for its dots, and its single target stays poor after the tier-set Unstable Affliction application was nerfed (50%->20%, a 100%-value bug fixed) and Patient Zero was removed. He argues Patient Zero's removal opens the door for Blizzard to buff baseline Unstable Affliction (which would also scale the tier set), wants Fatal Echoes fixed to refresh any UA stack, and would shorten Dark Lair/Malefic Grasp to 1 minute; he also laments Hellcaller being 'dead' after Seed of Corruption was pulled from Malevolence. Expects Warlock near the bottom of the upcoming compiled sims.",
       "url": "https://youtu.be/okWbk283nd0?t=700",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Warlock",
@@ -1745,6 +1751,138 @@
       "patchContext": "12.1 PTR — post-raid-testing tuning",
       "claim": "Kalamazi says a 5% aura nerf snuck in last week alongside the 4-set rework (6% damage to the Echo of Sargeras target) — roughly a wash in single target where that buff stays up, but a real loss in the spread/Hellcaller cleave this tier rewards (In-tomb Sentinels, Coiled Altar phases 2-3) because Echo of Sargeras no longer procs on both Havoc targets simultaneously. He reads Destro as having good spread-cleave profiles for the tier's fights yet doing markedly less damage than DKs, Hunters, Boomkin and Shadow, and wants the aura nerf reverted with a small (~3-4%) tier-set tune-down.",
       "url": "https://youtu.be/okWbk283nd0?t=1092",
+      "superseded": false
+    },
+    {
+      "class": "Rogue",
+      "spec": "Assassination",
+      "creator": "Whispyr",
+      "date": "2026-07-22",
+      "sentiment": "buff",
+      "patchContext": "12.1 PTR (2026-07-21 build)",
+      "claim": "Whispyr reads the 07-21 pass as a modest, welcome-but-underwhelming buff: Assassination got a flat +6% all-damage increase and the 4pc now adds another ~1% melee damage, which he's happy to take. But he argues the +15% to the Implacable Strikes / lashings Apex talent still isn't enough to make the Apex worth taking (it lands around a 2.5% talent), so he expects the bleed build without Dragon-Tempered Blades to remain the meta and would rather the Apex be redesigned than repeatedly buffed.",
+      "url": "https://youtu.be/e_2JhO06r7Y?t=36",
+      "superseded": false
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "creator": "Obli",
+      "date": "2026-07-22",
+      "sentiment": "buff",
+      "patchContext": "12.1 PTR (2026-07-21 build)",
+      "claim": "Obli is enthusiastic that the San'layn build is finally viable again after a huge 07-21 buff: the Blood Beast's damage was buffed ~1400% (auto-attacks plus its explosion), which is targeted at San'layn specifically and pushes it above the Rider build without disturbing Blood, Frost or Rider. Unholy also picked up Epidemic +75%, plus graveyard, Putrify AoE and minor disease buffs. He much prefers San'layn's playstyle over Rider and wants the changes to ship, while cautioning the 1400% figure will likely be tuned down before live.",
+      "url": "https://youtu.be/5PpRdVE02Y8?t=10",
+      "superseded": false
+    },
+    {
+      "class": "Warrior",
+      "spec": "Fury",
+      "creator": "Baze",
+      "date": "2026-07-22",
+      "sentiment": "buff",
+      "patchContext": "12.1 PTR (2026-07-21 build)",
+      "claim": "Baze flags large unannounced (not in the notes) Slayer buffs that help Fury a lot: Executioner max stacks 3->5 and Frenzy 4->10 (fixing an async-stacking bug), which can stack to ~20% haste for 12s. On top of that Fury's Rampage/Reap damage is up 80%, Ground Current up 150%, and Thunder Blast hits harder. He reads it as a massive Fury buff on a spec already performing well.",
+      "url": "https://youtu.be/nqEdcFi_7wk?t=23",
+      "superseded": false
+    },
+    {
+      "class": "Warrior",
+      "spec": "Arms",
+      "creator": "Baze",
+      "date": "2026-07-22",
+      "sentiment": "buff",
+      "patchContext": "12.1 PTR (2026-07-21 build)",
+      "claim": "Baze notes the same unannounced Slayer stack increases (Executioner 3->5, Frenzy 4->10) also buff Arms, alongside listed Arms changes: Dreadnought is now purely AoE with damage +100% and no longer damaging your Overpower target, Cleave damage -10% (Blizzard felt it dominated the rotation), and Opportunist grants +20% damage and +20% crit damage to your next Overpower. He's positive on the direction.",
+      "url": "https://youtu.be/nqEdcFi_7wk?t=178",
+      "superseded": false
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "creator": "Shadarek",
+      "date": "2026-07-22",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR (2026-07-21 build)",
+      "claim": "Shadarek is skeptical of the Devourer changes: Collapsing Star was buffed only 12% when he thinks it needed roughly three times that, and it was paired with Annihilator and Eradicate nerfs plus a priority-target nerf. He says single-target Collapsing Star/Annihilator builds are still ~15% behind the Apex-less Void's Guard builds and remain non-viable at the high end, so the net leaves Collapsing Star still in the bin.",
+      "url": "https://youtu.be/QPqLeneGJUg?t=20",
+      "superseded": false
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Havoc",
+      "creator": "Shadarek",
+      "date": "2026-07-22",
+      "sentiment": "buff",
+      "patchContext": "12.1 PTR (2026-07-21 build)",
+      "claim": "Shadarek reads the Havoc pass as a sensible net buff/rebalance: +5% all damage (reverting the previous build's 5% aura nerf) with Immolation Aura shaved 8% to rein in how much of Havoc's single-target and AoE damage it represents, plus a ~13% increase to Demon Blades fury generation, which he calls significant.",
+      "url": "https://youtu.be/QPqLeneGJUg?t=96",
+      "superseded": false
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "creator": "VooDooSaurus",
+      "date": "2026-07-21",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR (2026-07-21 build)",
+      "claim": "In his Season 2 Devourer sims, VooDoo finds the Void's Guard melee build about 14% ahead of Annihilator in pure single target (Annihilator was heavily nerfed and the new tier set favors Void's Guard), so the melee Void's Guard build is the one to play this tier while the Collapsing Star half of the spec sits idle. He describes Devourer as effectively two specs stapled together and is genuinely optimistic and excited about it for next season.",
+      "url": "https://youtu.be/1-5RVwgA6KM?t=60",
+      "superseded": false
+    },
+    {
+      "class": "Warlock",
+      "spec": "Affliction",
+      "creator": "Kalamazi",
+      "date": "2026-07-22",
+      "sentiment": "buff",
+      "patchContext": "12.1 PTR (2026-07-21 build)",
+      "claim": "Kalamazi thinks the 07-21 changes make Affliction meaningfully better, especially in single target / M+: the new Impetus Wrath talent gives Drain Soul, Malefic Grasp and Shadow Bolt +10% (20% under Haunt) and Shard Instability was redesigned around free Seed/Unstable Affliction procs, addressing Affliction's single-target weakness — he floats it possibly being best in single target and the best Warlock spec for M+. His main reservation is that Affliction is being redesigned around a tier set that will disappear after the tier.",
+      "url": "https://youtu.be/Xy8iV9-WcRI?t=1011",
+      "superseded": false
+    },
+    {
+      "class": "Warlock",
+      "spec": "Demonology",
+      "creator": "Kalamazi",
+      "date": "2026-07-22",
+      "sentiment": "nerf",
+      "patchContext": "12.1 PTR (2026-07-21 build)",
+      "claim": "Kalamazi is negative on Demonology after another round of Diabolist nerfs this build (~20% off most Diabolist abilities plus Flames of Xoroth), which he says make no sense; he reads Demonology as effectively dead for the coming season and clearly behind Affliction and Destruction.",
+      "url": "https://youtu.be/Xy8iV9-WcRI?t=1213",
+      "superseded": false
+    },
+    {
+      "class": "Warrior",
+      "spec": "Arms",
+      "creator": "Dratnos",
+      "date": "2026-07-22",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR (2026-07-21 build)",
+      "claim": "Reading through the PTR notes, Dratnos frames the Arms Dreadnought change as a good move: making Dreadnought purely AoE damage (+100%, no longer hitting the Overpower target) with Cleave -10% spreads Arms' AoE off its Cleave-dominated profile and gives Slayer better options, letting Blizzard tune the AoE rotation on its own.",
+      "url": "https://youtu.be/7UTSF0BXbD4?t=1174",
+      "superseded": false
+    },
+    {
+      "class": "Shaman",
+      "spec": "Restoration",
+      "creator": "Supatease",
+      "date": "2026-07-22",
+      "sentiment": "buff",
+      "patchContext": "12.1 PTR (2026-07-21 build)",
+      "claim": "Supatease highlights a sizeable Restoration Shaman pass: tuning and reworks to several underperforming talents/interactions, improved Chain Heal from the Farseer ancestors, and a new talent (Swelling Tides) letting Healing Stream and Stormstream Totem extend the duration of your active totems. He reads it as a solid, welcome update for Resto.",
+      "url": "https://youtu.be/GIMxSexKfis?t=591",
+      "superseded": false
+    },
+    {
+      "class": "Warlock",
+      "spec": "Affliction",
+      "creator": "Supatease",
+      "date": "2026-07-22",
+      "sentiment": "buff",
+      "patchContext": "12.1 PTR (2026-07-21 build)",
+      "claim": "Supatease likes the Affliction rework in this build: Nocturnal Yield is removed with its free-Seed functionality folded into Shard Instability, and a new Impetus Wrath talent adds Haunt-synergy priority damage (Shadow Bolt/Drain Soul/Malefic Grasp +10%, 20% under Haunt). He calls it a fun update with good Haunt synergies.",
+      "url": "https://youtu.be/GIMxSexKfis?t=689",
       "superseded": false
     }
   ],
