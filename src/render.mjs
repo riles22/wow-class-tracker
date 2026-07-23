@@ -245,6 +245,11 @@ export function outlookFor(spec, ptrBuilds) {
    the post-launch report card grades each frozen forecast against the formula that
    actually produced it. */
 export const PROJECTION_VERSION = 1;
+// Snapshot phase marker — the season/settledness tag the post-launch forecast report
+// card uses to find its endpoint ("first settled S2 consensus") without reading commit
+// history. Flip to "12.1-live" (or the S2 season id) when 12.1 ships and the tracker is
+// reconfigured for the live season — the boundary is then the first non-"12.1-ptr" snapshot.
+export const SNAPSHOT_PHASE = "12.1-ptr";
 
 const PTR_MPLUS_SERIES = {
   DPS: "Median rDPS (12.1 PTR M+ testing)",

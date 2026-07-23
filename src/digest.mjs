@@ -13,6 +13,8 @@
  * Usage: node src/digest.mjs <oldRev> <newRev>     (e.g. HEAD^ HEAD)
  */
 import { execFileSync } from "node:child_process";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { buildPayload } from "./render.mjs";
 
 const keyOf = s => `${s.class}|${s.spec}`;
@@ -163,7 +165,7 @@ export function payloadAt(rev) {
   return buildPayload(data);
 }
 
-const isMain = process.argv[1] && process.argv[1].endsWith("digest.mjs");
+const isMain = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
 if (isMain) {
   const [oldRev, newRev] = [process.argv[2] ?? "HEAD^", process.argv[3] ?? "HEAD"];
   let manifest = null;

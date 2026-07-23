@@ -76,6 +76,34 @@ test("metric probes take a COVERAGE date — one fresh row cannot vouch for a mo
   assert.equal(probeDate(req, data), "2026-07-14");
 });
 
+test("probes: ptrDummy type reads spec.ptrDummy coverage date + count", () => {
+  // min above the row count → coverage returns the OLDEST present date, like the real
+  // wcl-dummy-dome requirement (min 15): one fresh spec can't vouch for a stale cut.
+  const req = { key: "dome", label: "Dummy Dome", maxAgeDays: 10,
+    date: { type: "ptrDummy" }, rows: { type: "ptrDummy", min: 15 } };
+  const data = freshData();
+  data.specs[0].ptrDummy = { asOf: "2026-07-14", targets: { "1": 100 } };
+  data.specs[1].ptrDummy = { asOf: "2026-07-10", targets: { "1": 90 } };
+  assert.equal(probeDate(req, data), "2026-07-10");
+  assert.equal(probeRows(req, data), 2);
+  // a spec without ptrDummy neither dates nor counts
+  data.specs[1].ptrDummy = undefined;
+  assert.equal(probeDate(req, data), "2026-07-14");
+  assert.equal(probeRows(req, data), 1);
+});
+
+test("probes: encounterTiers type reads the file asOf + raid/mplus cell count", () => {
+  const req = { key: "enc", label: "Encounter tiers", maxAgeDays: 10,
+    date: { type: "encounterTiers" }, rows: { type: "encounterTiers", min: 1 } };
+  const data = { ...freshData(),
+    encounterTiers: { asOf: "2026-07-14", raid: { "Boss A": {}, "Boss B": {} }, mplus: { "Dungeon A": {} } } };
+  assert.equal(probeDate(req, data), "2026-07-14");
+  assert.equal(probeRows(req, data), 3); // 2 raid + 1 mplus
+  // absent file: null date, zero rows (the gate's min floor then complains)
+  assert.equal(probeDate(req, { ...freshData(), encounterTiers: null }), null);
+  assert.equal(probeRows(req, { ...freshData(), encounterTiers: null }), 0);
+});
+
 test("a complete, honest manifest passes with no errors", () => {
   const r = checkManifest(config, goodManifest(), freshData(), "2026-07-14");
   assert.deepEqual(r.errors, []);
