@@ -40,7 +40,18 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
   — parse with regex, not a strict parser. Metric names in use:
   "Median rDPS (Mythic, all bosses)" / "Median HPS (…)" / "…(M+, all dungeons)".
 - **Archon numbers** (same `__NEXT_DATA__` JSON as tiers): "95th pct DPS (Mythic)",
-  "M+ score (95th pct)", "Popularity" (fraction × 100, unit "%").
+  "95th pct HPS (Mythic)", "M+ score (95th pct)", "Popularity" (fraction × 100, unit "%").
+  **Read them from `props.pageProps.page.specRankingsSection.table.data[]`** — each row is
+  `{item: "<ActorIcon type='Class-Spec'>…", dps, survivability, popularity, parses}` (raid
+  DPS/healer pages carry `dps`/`hps` + `popularity`; the M+ page carries the score +
+  `popularity`). **NOT the `tierList` structure** — that holds only letter tiers, no
+  numbers. (2026-07-21 stall root cause: an agent looked for popularity in `tierList`,
+  didn't find it, and left ALL four numeric series stale at 07-20 rather than refreshing
+  the ones it could — popularity is and was cleanly in `specRankingsSection`, verified by
+  runner probe 2026-07-23.) Refresh every run; **emit a manifest row for BOTH `archon-metrics`
+  (the throughput series) and `archon-popularity`** (now gated in required-sources.json — a
+  missing row fails the publish). If a series ever genuinely can't be parsed, mark just
+  that requirement `parse_error` with a detail; never leave the others stale by coupling.
 - **Murlok** meta pages (plain GET; **r.jina.ai does NOT work on murlok**):
   "Top-50 avg M+ rating (ceiling)" — it is the avg rating of each spec's own top-50
   players, NOT popularity; keep the "(ceiling)" in the name.
@@ -52,18 +63,29 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
   testing parses with per-spec 90/95/99th-pct raw DPS. Fetch
   `docs.google.com/spreadsheets/d/1HpszfQOHqDQj8gacsID5Wq7OP6ndpGXoD2PgIs_dGB8/htmlview`
   and parse the tab map from the `items.push({name: "...", ...gid=N` script blocks —
-  tab names are `<d/m> <HC|M> <Boss> (#n)`. Take the NEWEST Venomous Abyss week's tabs
+  tab names are `<d/m> <HC|M> <Boss> (#n)`. Take the NEWEST **Mythic (`M`)** week's tabs
   (SKIP Tidebound Grotto tabs — that is zone 57, not tracked; skip Backend/Template/
-  Data tabs), fetch each `export?format=csv&gid=<gid>`, read the right-hand percentile
-  block (Class | 90th | 95th | 99th; class-spec is CamelCase like `DeathKnight-Frost`),
-  and merge ONE row per DPS-roster spec: max 99th-pct across that week's bosses as
-  "99th pct DPS (12.1 PTR Mythic raid testing, Robydoby)" (bracket raid, unit DPS,
-  asOf = the week date from the tab names, era auto-ptr from the name). The HEALER
-  sheet (id 1MBadxaZWpwj7h_3HcOtteypK3WSgp6o9sUIqvTryju4, same tab layout) merges the
-  same way for Healer-roster specs as "99th pct HPS (12.1 PTR Mythic raid testing,
-  Robydoby)" (unit HPS). No `n` — the
-  sheet does not expose per-percentile parse counts; never fabricate one. The sheet
-  asks for visible credit — the registry entry + drawer label carry it; keep them.
+  Data tabs). The metric name hardcodes "Mythic", so if the newest week is Heroic-only
+  (`HC`), either keep the last Mythic week or relabel — never merge HC numbers under the
+  Mythic name. Fetch each `export?format=csv&gid=<gid>`, **split on `\r?\n`** (the CSV is
+  CRLF — a plain `\n` split leaves a trailing `\r` that breaks the last column), read the
+  right-hand percentile block (Class | 90th | 95th | 99th; class-spec is CamelCase like
+  `DeathKnight-Frost`), and merge ONE row per DPS-roster spec: max 99th-pct across that
+  week's bosses as "99th pct DPS (12.1 PTR Mythic raid testing, Robydoby)" (bracket raid,
+  unit DPS, asOf = the week date from the tab names, era auto-ptr from the name). The
+  HEALER sheet (id 1MBadxaZWpwj7h_3HcOtteypK3WSgp6o9sUIqvTryju4, same tab layout) merges
+  the same way for Healer-roster specs as "99th pct HPS (12.1 PTR Mythic raid testing,
+  Robydoby)" (unit HPS). A DPS spec absent from every boss that week (e.g. Marksmanship
+  Hunter had zero logged parses the 16/7 week → 26/27 DPS landed) is a legitimate upstream
+  absence, NOT a parse error — don't force it. **No tank series**: the sheets have no tank
+  tab, and the tank specs that appear in the per-boss DPS lists are logged as tank-DPS
+  (not a meaningful tank metric) — do not ingest them. No `n` — the sheet does not expose
+  per-percentile parse counts; never fabricate one.
+  **Posture — best-effort, deliberately OUTSIDE the refresh contract**: robydoby is NOT in
+  required-sources.json by design. It is one volunteer's manually-updated community sheet;
+  its going quiet must never redden a nightly. Refresh it opportunistically during metric
+  runs, tolerate staleness, and do NOT propose it into required-sources.json. The sheets
+  ask for visible credit — the registry entry + drawer label carry it; keep them.
 - **Bloodmallet** (fight profiles, DPS specs only):
   `GET bloodmallet.com/chart/get/talent_target_scaling/castingpatchwerk/{class}/{spec}`
   — take BEST build DPS per target count (1/2/3/5/8/15) into `profiles[].targets`.
