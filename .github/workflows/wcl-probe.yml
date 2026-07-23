@@ -27,33 +27,3 @@ jobs:
           WCL_CLIENT_ID: ${{ secrets.WCL_CLIENT_ID }}
           WCL_CLIENT_SECRET: ${{ secrets.WCL_CLIENT_SECRET }}
         run: node src/wcl-probe.mjs
-      - name: "TEMP (branch-only, 2026-07-22): Robydoby sheet public-access + tab map probe"
-        run: |
-          SHEET=1HpszfQOHqDQj8gacsID5Wq7OP6ndpGXoD2PgIs_dGB8
-          echo "--- htmlview (tab names + gids) ---"
-          curl -sS -L -m 60 "https://docs.google.com/spreadsheets/d/$SHEET/htmlview" -o view.html -w "htmlview: HTTP %{http_code}, %{size_download}b\n" || true
-          echo "--- raw tab-marker hunt ---"
-          grep -oE 'sheet-button[^>]{0,30}' view.html | sort -u | head -30 || true
-          grep -oE '"name":"[^"]{1,50}"' view.html | sort -u | head -40 || true
-          grep -oE 'items.push\(\{name: "[^"]+", pageUrl: "[^"]*gid=[0-9]+' view.html | head -30 || true
-          grep -oE '<a[^>]*#gid=[0-9]+[^>]*>[^<]{1,50}' view.html | head -30 || true
-          echo "--- switcher block ---"
-          grep -oE '.{0,80}gid=[0-9]+.{0,80}' view.html | head -25 || true
-          echo "--- csv export gid=0 (no auth) ---"
-          curl -sS -L -m 60 "https://docs.google.com/spreadsheets/d/$SHEET/export?format=csv&gid=0" -o t.csv -w "export: HTTP %{http_code}, %{size_download}b\n" || true
-          head -c 400 t.csv | tr -d '\0'; echo
-      - name: "TEMP (branch-only): zone-54 encounter id->name map"
-        env:
-          WCL_CLIENT_ID: ${{ secrets.WCL_CLIENT_ID }}
-          WCL_CLIENT_SECRET: ${{ secrets.WCL_CLIENT_SECRET }}
-        run: |
-          node --input-type=module - <<'NODE_EOF'
-          import { oauthToken, gql } from "./src/fetch-wcl.mjs";
-          const auth = await oauthToken(process.env.WCL_CLIENT_ID, process.env.WCL_CLIENT_SECRET);
-          if (!auth.ok) { console.log("token failed"); process.exit(0); }
-          for (const z of [54, 44]) {
-            const r = await gql(auth.token, `{ worldData { zone(id: ${z}) { name encounters { id name } } } }`);
-            const zone = r.json?.data?.worldData?.zone;
-            console.log(`zone ${z} (${zone?.name}): ${(zone?.encounters ?? []).map(e => `${e.id}=${e.name}`).join(" | ")}`);
-          }
-          NODE_EOF

@@ -47,6 +47,20 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
 - **Mythicstats** (mythicstats.com): per-spec representation % in the top 2000 keys per
   weekly period — metric name "Top-2000 keys representation", unit "%". JS-heavy; fetch
   via r.jina.ai. Note the period id in the refresh log.
+- **Robydoby PTR raid sheet** (community Google Sheet, no auth — public CSV export;
+  registered 2026-07-23, owner-approved): per-boss tabs of curated WCL zone-54
+  testing parses with per-spec 90/95/99th-pct raw DPS. Fetch
+  `docs.google.com/spreadsheets/d/1HpszfQOHqDQj8gacsID5Wq7OP6ndpGXoD2PgIs_dGB8/htmlview`
+  and parse the tab map from the `items.push({name: "...", ...gid=N` script blocks —
+  tab names are `<d/m> <HC|M> <Boss> (#n)`. Take the NEWEST Venomous Abyss week's tabs
+  (SKIP Tidebound Grotto tabs — that is zone 57, not tracked; skip Backend/Template/
+  Data tabs), fetch each `export?format=csv&gid=<gid>`, read the right-hand percentile
+  block (Class | 90th | 95th | 99th; class-spec is CamelCase like `DeathKnight-Frost`),
+  and merge ONE row per DPS-roster spec: max 99th-pct across that week's bosses as
+  "99th pct DPS (12.1 PTR Mythic raid testing, Robydoby)" (bracket raid, unit DPS,
+  asOf = the week date from the tab names, era auto-ptr from the name). No `n` — the
+  sheet does not expose per-percentile parse counts; never fabricate one. The sheet
+  asks for visible credit — the registry entry + drawer label carry it; keep them.
 - **Bloodmallet** (fight profiles, DPS specs only):
   `GET bloodmallet.com/chart/get/talent_target_scaling/castingpatchwerk/{class}/{spec}`
   — take BEST build DPS per target count (1/2/3/5/8/15) into `profiles[].targets`.
