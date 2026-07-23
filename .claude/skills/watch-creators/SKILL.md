@@ -90,13 +90,16 @@ locally, and distill them into cited per-spec takes in `data/creator-takes.json`
   (Dependabot proposes weekly bumps; the nightly preinstalls the pin). Extractor rot
   shows up as sudden parse failures across ALL videos: record it in the run log and
   leave the bump to Dependabot review.
-- **Bot-check experiment (owner-approved 2026-07-17):** `--extractor-args
-  "youtube:player_client=android"` is in the transcript command to dodge the
-  datacenter-IP "Sign in to confirm you're not a bot" wall that blocks runners
-  (residential IPs unaffected). Judge it on a few nights' log entries: if transcripts
-  now land from the runner, keep it; if YouTube closes the client hole (failures
-  return), queue videos pending as before and note it — the fallback decision
-  (managed transcript API / residential proxy / self-hosted runner) is the owner's.
+- **Runner bot-wall — SETTLED (2026-07-17):** the datacenter-IP "Sign in to confirm
+  you're not a bot" wall blocks direct yt-dlp transcript fetches from runners
+  (residential IPs unaffected). The `youtube:player_client=android` extractor-args
+  workaround was tried and FAILED (2026-07-17). The landed fallback is the **Supadata
+  captions API** — a deterministic pre-agent step (`src/fetch-transcripts.mjs`, drains
+  `data/pending-transcripts.json`, `mode=native` = YouTube's own auto-captions). Agents
+  do NOT fetch YouTube directly on the runner: queue in-scope videos to
+  `pending-transcripts.json` and the transcript step drains them; genuinely IP-blocked
+  videos catch up in a local run. This decision is closed — do not re-litigate the
+  android client or re-judge the fallback.
 - TOS: low-volume personal-use transcript fetching only. Store summaries + short
   excerpts with links, never redistribute full transcripts. RSS is explicitly public.
 - Framing: label takes "Creator take — <name>, <date>"; require 2+ independent

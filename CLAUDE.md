@@ -231,7 +231,7 @@ again: each run attempts every requirement fresh and rewrites the file (fresh `r
    file → `node src/apply-ratings.mjs <file>` (refuses on unmatched rows).
 3. Update `snapshot` dates in `sources.json`; `npm test && npm run build`.
 
-### Metrics (Warcraft Logs / Murlok / Archon numbers)
+### Metrics (Warcraft Logs / Murlok / Archon numbers / SimC / Mythicstats / Bloodmallet / Robydoby)
 1. WCL: zone 46 = live S1 raid (Mythic = difficulty **5**, size 20, partition 3 = 12.0.7);
    zone 47 = M+ S1 (difficulty **10**, size 5, partition 1); zone **54 is the 12.1 PTR raid**;
    zone **56 is the 12.1 PTR M+** ("Mythic+ Season 2 (PTR)", same recipe as zone 47 →
@@ -268,6 +268,8 @@ auto-replace.
 
 ```
 data/     specs.json · sources.json · scales.json · ptr-builds.json · community.json ·
+          community-overrides.json (agent-curated community edits, applied at prebuild —
+          see apply-community-overrides.mjs) ·
           creator-takes.json (qualitative layer — cited specialist takes[] + general-creator
           metaNotes[] season/meta outlook, never tiers) ·
           encounter-tiers.json (per-boss/dungeon Archon tiers) ·
@@ -276,19 +278,25 @@ data/     specs.json · sources.json · scales.json · ptr-builds.json · commun
           "Run manifest + integrity gates") ·
           pending-transcripts.json (machine transcript queue: agents append/remove,
           the deterministic fetch step drains) ·
-          history/ (movement baselines written by snapshot.mjs)
+          history/ (enriched movement/timeline snapshots written by snapshot.mjs)
 src/      build.mjs · template.html · render.mjs · normalize.mjs · validate.mjs ·
-          apply-ratings.mjs · apply-metrics.mjs · snapshot.mjs · serve.mjs ·
+          apply-ratings.mjs · apply-metrics.mjs · apply-community-overrides.mjs
+          (prebuild/prevalidate — hard-fails if absent) · snapshot.mjs · serve.mjs ·
+          digest.mjs (per-run change digest) ·
           check-refresh.mjs (manifest/freshness/anomaly gates) ·
           fetch-wcl.mjs + fetch-transcripts.mjs (deterministic pre-agent stages —
-          the only WCL / transcript-API credential holders)
-test/     normalize · validate · render · build · apply-metrics · apply-ratings · check-refresh
+          the only WCL / transcript-API credential holders) ·
+          wcl-probe.mjs (dispatch-only WCL/diagnostic probe, no standing role)
+test/     normalize · validate · render · build · apply-metrics · apply-ratings ·
+          check-refresh · community-overrides · digest · fetch-transcripts · fetch-wcl
 dist/     index.html  (generated — open directly in a browser)
 docs/     working notes (finder-audit.md · security-audit-2026-07.md ·
           portfolio-audit-2026-07-18.md — audit dispositions)
 legacy/   original single-file tracker (pre-conversion reference)
 .github/  workflows/deploy.yml (build+deploy Pages on push) · workflows/ci.yml (tests on
           every push) · workflows/freshness.yml (daily staleness heartbeat → alert issue) ·
+          workflows/nightly.yml + workflows/dispatch-nightly.yml (the refresh + its
+          auto-kick) · workflows/wcl-probe.yml (dispatch-only WCL/diagnostic probe) ·
           dependabot.yml (weekly grouped action-SHA + pip bumps; requirements.txt pins
           yt-dlp) · CODEOWNERS (declares the human-owned boundary: workflows, gate
           contract, scales, registries, gatekeeper code)
@@ -322,8 +330,10 @@ an artifact. Agent transcripts upload as the `agent-transcripts` artifact every 
 and their tails are dumped into the job log on failure — READ THEM before theorizing
 about a failed night (they found the 07-15→17 root cause — agents backgrounding slow
 polls and ending their turn to "wait" — in one run; subagent tools are disabled and
-both prompts carry the single-shot rule for exactly that reason). (`dispatch-nightly.yml` auto-kicks a nightly run whenever a
-workflow-file change lands on master, via `gh workflow run` as github-actions[bot] —
+both prompts carry the single-shot rule for exactly that reason). (`dispatch-nightly.yml` auto-kicks a nightly run when a
+change to **`nightly.yml` or `dispatch-nightly.yml` specifically** lands on master (its
+`push.paths` filter — NOT any workflow file; e.g. a `wcl-probe.yml` edit does not
+trigger it), via `gh workflow run` as github-actions[bot] —
 `allowed_bots` on the agent steps permits that actor.) A `workflow_dispatch` input
 `agent_model` overrides both agents' model for a single run (default
 `claude-opus-4-8`) — one-off model trials without editing the workflow. Publish (deterministic, no AI, holds the write token) gates on a
