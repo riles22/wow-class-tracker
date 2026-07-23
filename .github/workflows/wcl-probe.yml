@@ -46,7 +46,7 @@ jobs:
             out.push(cur); return out; };
           for (const t of week) {
             const csv = await (await fetch(`https://docs.google.com/spreadsheets/d/${SHEET}/export?format=csv&gid=${t.gid}`)).text();
-            const lines = csv.split("\n").map(parseCsv);
+            const lines = csv.split(/\r?\n/).map(parseCsv);
             const hdr = lines.find(c => c.filter(x => x === "90th Percentile").length);
             if (!hdr) { console.log(`TAB ${t.name}: no percentile header`); continue; }
             const i = hdr.lastIndexOf("90th Percentile");
