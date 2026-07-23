@@ -53,6 +53,10 @@ jobs:
             const rows = lines.filter(c => /^[A-Za-z]+-[A-Za-z]+$/.test(c[i - 1] ?? "") && /^[\d,]+$/.test(c[i + 2] ?? ""))
               .map(c => [c[i - 1], c[i], c[i + 1], c[i + 2]]);
             console.log(`TAB ${t.name}: ${JSON.stringify(rows)}`);
+            if (!rows.length) {
+              console.log(`  HDR(${i}): ${JSON.stringify(hdr)}`);
+              lines.slice(0, 25).forEach((c, n) => { if (c.length > 3) console.log(`  L${n}: ${JSON.stringify(c.slice(Math.max(0, i - 3), i + 4))}`); });
+            }
             await new Promise(r => setTimeout(r, 800));
           }
           NODE_EOF
