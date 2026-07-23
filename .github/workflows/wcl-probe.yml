@@ -27,3 +27,29 @@ jobs:
           WCL_CLIENT_ID: ${{ secrets.WCL_CLIENT_ID }}
           WCL_CLIENT_SECRET: ${{ secrets.WCL_CLIENT_SECRET }}
         run: node src/wcl-probe.mjs
+      - name: "TEMP (branch-only): Archon numeric-metric structure probe (M1)"
+        run: |
+          node --input-type=module - <<'NODE_EOF'
+          const url = "https://www.archon.gg/wow/tier-list/dps-rankings/raid/mythic/all-bosses";
+          const html = await (await fetch(url, { headers: { "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/126 Safari/537.36" } })).text();
+          const m = html.match(/<script id="__NEXT_DATA__"[^>]*>([\s\S]*?)<\/script>/);
+          if (!m) { console.log("NO __NEXT_DATA__; len", html.length, html.slice(0,300)); process.exit(0); }
+          const data = JSON.parse(m[1]);
+          const walk = (o, path, hits) => {
+            if (o && typeof o === "object") {
+              for (const k of Object.keys(o)) {
+                if (/popularity|percentile|p95|dps|score|ranking|spec/i.test(k)) hits.push(`${path}.${k} = ${JSON.stringify(o[k]).slice(0,80)}`);
+                if (typeof o[k] === "object") walk(o[k], `${path}.${k}`, hits);
+              }
+            }
+            return hits;
+          };
+          const hits = walk(data.props?.pageProps ?? data, "pageProps", []);
+          console.log("KEY HITS (first 40):");
+          for (const h of hits.slice(0, 40)) console.log("  " + h);
+          // dump one spec entry fully
+          const findArr = (o) => { let r=null; JSON.stringify(o,(k,v)=>{ if(Array.isArray(v)&&v.length>20&&v[0]&&typeof v[0]==="object"&&!r){const ks=Object.keys(v[0]).join(",");if(/spec|class|dps|score|pop/i.test(ks))r={ks,sample:v[0]};} return v;}); return r; };
+          const arr = findArr(data.props?.pageProps);
+          console.log("\nLARGEST SPEC-ISH ARRAY keys:", arr?.ks);
+          console.log("SAMPLE ENTRY:", JSON.stringify(arr?.sample).slice(0,600));
+          NODE_EOF
