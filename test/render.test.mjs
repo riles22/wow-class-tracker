@@ -306,6 +306,13 @@ test("projectionFor: meta nudge is bracket-scoped and skips superseded notes", (
     { class:"X", spec:"S", sentiment:"negative", date:"2026-07-05", patchContext:"raid outlook" }
   ]);
   assert.equal(sup.score, 47);
+  // an UNDATED note must never win the newest-read sort (it stringifies to "undefined",
+  // which sorts above every ISO date descending) — the dated negative read must prevail
+  const undated = projectionFor(spec, "raid", PROJ_SCALES, [
+    { class:"X", spec:"S", sentiment:"positive", patchContext:"raid outlook" },
+    { class:"X", spec:"S", sentiment:"negative", date:"2026-07-05", patchContext:"raid outlook" }
+  ]);
+  assert.equal(undated.score, 47, "undated note must not beat a dated one");
 });
 
 test("projectionFor: M+ uses the role's own zone-56 series; shifts clamp to 0–100", () => {
