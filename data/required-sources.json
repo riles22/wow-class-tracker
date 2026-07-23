@@ -93,6 +93,38 @@
       }
     },
     {
+      "key": "archon-metrics",
+      "label": "Archon numeric throughput metrics (95th-pct DPS/HPS + M+ score, from specRankingsSection)",
+      "maxAgeDays": 5,
+      "date": {
+        "type": "metrics",
+        "source": "archon",
+        "namePattern": "^95th pct DPS \\(Mythic"
+      },
+      "rows": {
+        "type": "metrics",
+        "source": "archon",
+        "namePattern": "^95th pct DPS \\(Mythic",
+        "min": 25
+      }
+    },
+    {
+      "key": "archon-popularity",
+      "label": "Archon popularity % (raid + M+, from specRankingsSection \u2014 the series a 07-21 recipe-navigation error silently stalled)",
+      "maxAgeDays": 5,
+      "date": {
+        "type": "metrics",
+        "source": "archon",
+        "namePattern": "^Popularity$"
+      },
+      "rows": {
+        "type": "metrics",
+        "source": "archon",
+        "namePattern": "^Popularity$",
+        "min": 60
+      }
+    },
+    {
       "key": "wowmeta",
       "label": "WoWMeta M+ tier lists (raid currently unranked upstream)",
       "maxAgeDays": 4,
