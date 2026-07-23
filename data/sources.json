@@ -457,16 +457,23 @@
   },
   {
     "id": "robydoby",
-    "name": "Robydoby PTR raid sheet",
+    "name": "Robydoby PTR raid sheets",
     "kind": "metrics",
     "author": "Robydoby (Arctic Avengers, EU-Kazzak) — community theorycrafter; the sheet asks for a visible link wherever it is used",
-    "methodology": "Curated per-encounter aggregation of Warcraft Logs 12.1 PTR raid-testing (zone 54) parses: per-spec 90th/95th/99th percentile raw DPS with quality filters (min fight length, optional kills-only). A top-end percentile view that complements the tracker's own pooled per-player medians — numbers only, never a tier.",
+    "methodology": "Curated per-encounter aggregation of Warcraft Logs 12.1 PTR raid-testing (zone 54) parses: per-spec 90th/95th/99th percentile raw DPS/HPS (separate DPS and Healer sheets) with quality filters (min fight length, optional kills-only). A top-end percentile view that complements the tracker's own pooled per-player medians — numbers only, never a tier.",
     "pages": [
       {
         "bracket": "raid",
         "role": "DPS",
         "label": "12.1 PTR raid testing percentiles (Google Sheet, public CSV export)",
         "url": "https://docs.google.com/spreadsheets/d/1HpszfQOHqDQj8gacsID5Wq7OP6ndpGXoD2PgIs_dGB8/edit",
+        "snapshot": "2026-07-23"
+      },
+      {
+        "bracket": "raid",
+        "role": "Healer",
+        "label": "12.1 PTR raid testing healer percentiles (Google Sheet, public CSV export)",
+        "url": "https://docs.google.com/spreadsheets/d/1MBadxaZWpwj7h_3HcOtteypK3WSgp6o9sUIqvTryju4/edit",
         "snapshot": "2026-07-23"
       }
     ]

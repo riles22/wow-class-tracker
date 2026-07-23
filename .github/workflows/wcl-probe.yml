@@ -27,36 +27,3 @@ jobs:
           WCL_CLIENT_ID: ${{ secrets.WCL_CLIENT_ID }}
           WCL_CLIENT_SECRET: ${{ secrets.WCL_CLIENT_SECRET }}
         run: node src/wcl-probe.mjs
-      - name: "TEMP (branch-only): Robydoby HEALER sheet tab map + newest-week percentiles"
-        run: |
-          node --input-type=module - <<'NODE_EOF'
-          const SHEET = "1MBadxaZWpwj7h_3HcOtteypK3WSgp6o9sUIqvTryju4";
-          const view = await (await fetch(`https://docs.google.com/spreadsheets/d/${SHEET}/htmlview`)).text();
-          const tabs = [...view.matchAll(/items\.push\(\{name: "((?:[^"\\]|\\.)+)", pageUrl: "[^"]*gid=(\d+)/g)]
-            .map(m => ({ name: m[1].replace(/\\\//g, "/"), gid: m[2] }));
-          console.log("TABS:", JSON.stringify(tabs));
-          const va = tabs.filter(t => /^\d+\/\d+ (HC|M) /.test(t.name) && !/Tidebound/i.test(t.name));
-          const dateOf = t => { const [d, mo] = t.name.match(/^(\d+)\/(\d+)/).slice(1).map(Number); return mo * 100 + d; };
-          const newest = Math.max(...va.map(dateOf));
-          const week = va.filter(t => dateOf(t) === newest);
-          console.log("NEWEST WEEK:", JSON.stringify(week.map(t => t.name)));
-          const parseCsv = line => { const out = []; let cur = "", q = false;
-            for (const ch of line) { if (q) { if (ch === '"') q = false; else cur += ch; }
-              else if (ch === '"') q = true; else if (ch === ",") { out.push(cur); cur = ""; } else cur += ch; }
-            out.push(cur); return out; };
-          for (const t of week) {
-            const csv = await (await fetch(`https://docs.google.com/spreadsheets/d/${SHEET}/export?format=csv&gid=${t.gid}`)).text();
-            const lines = csv.split(/\r?\n/).map(parseCsv);
-            const hdr = lines.find(c => c.filter(x => x === "90th Percentile").length);
-            if (!hdr) { console.log(`TAB ${t.name}: no percentile header`); continue; }
-            const i = hdr.lastIndexOf("90th Percentile");
-            const rows = lines.filter(c => /^[A-Za-z]+-[A-Za-z]+$/.test(c[i - 1] ?? "") && /^[\d,]+$/.test(c[i + 2] ?? ""))
-              .map(c => [c[i - 1], c[i], c[i + 1], c[i + 2]]);
-            console.log(`TAB ${t.name}: ${JSON.stringify(rows)}`);
-            if (!rows.length) {
-              console.log(`  HDR(${i}): ${JSON.stringify(hdr)}`);
-              lines.slice(0, 25).forEach((c, n) => { if (c.length > 3) console.log(`  L${n}: ${JSON.stringify(c.slice(Math.max(0, i - 3), i + 4))}`); });
-            }
-            await new Promise(r => setTimeout(r, 800));
-          }
-          NODE_EOF

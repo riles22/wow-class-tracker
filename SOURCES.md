@@ -28,7 +28,7 @@ The tracker also renders its OWN computed 12.1 forecast (projection lane). It is
 | **Murlok.io** | Avg M+ rating of each spec's top-50 players | "top-50 ceiling" — NOT popularity, NOT a tier |
 | **Bloodmallet (SimC, tier MID1)** | Best-build DPS at 1/2/3/5/8/15 targets | powers ST/Cleave/AoE fight profiles (DPS only; Augmentation unsimmable) |
 | **SimulationCraft nightly** | Best hero-variant Patchwerk DPS per DPS spec from the engine-official MID1_Raid report (daily) | pure ST, fixed profile — a sim baseline next to Bloodmallet, never a tier |
-| **Robydoby PTR raid sheet** (Google Sheet, public CSV) | Per-spec 99th-pct raw DPS from curated WCL zone-54 testing parses, newest Venomous Abyss week | community-curated top-end percentile; DPS specs only; **credit Robydoby with a visible link wherever used** (the sheet asks for it) |
+| **Robydoby PTR raid sheets** (Google Sheets, public CSV) | Per-spec 99th-pct raw DPS + HPS from curated WCL zone-54 testing parses, newest Venomous Abyss week (separate DPS & Healer sheets) | community-curated top-end percentile; DPS + healer specs; **credit Robydoby with a visible link wherever used** (the sheets ask for it) |
 | **Mythicstats** | Representation % in the top 2000 keys per weekly period | true meta-share (the axis Murlok's fixed-50 sample can't measure); JS-heavy → r.jina.ai |
 
 Every metric gets a computed within-role **rank** (#n/of) at build time.

@@ -47,7 +47,7 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
 - **Mythicstats** (mythicstats.com): per-spec representation % in the top 2000 keys per
   weekly period — metric name "Top-2000 keys representation", unit "%". JS-heavy; fetch
   via r.jina.ai. Note the period id in the refresh log.
-- **Robydoby PTR raid sheet** (community Google Sheet, no auth — public CSV export;
+- **Robydoby PTR raid sheets** (community Google Sheets, no auth — public CSV export;
   registered 2026-07-23, owner-approved): per-boss tabs of curated WCL zone-54
   testing parses with per-spec 90/95/99th-pct raw DPS. Fetch
   `docs.google.com/spreadsheets/d/1HpszfQOHqDQj8gacsID5Wq7OP6ndpGXoD2PgIs_dGB8/htmlview`
@@ -58,7 +58,10 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
   block (Class | 90th | 95th | 99th; class-spec is CamelCase like `DeathKnight-Frost`),
   and merge ONE row per DPS-roster spec: max 99th-pct across that week's bosses as
   "99th pct DPS (12.1 PTR Mythic raid testing, Robydoby)" (bracket raid, unit DPS,
-  asOf = the week date from the tab names, era auto-ptr from the name). No `n` — the
+  asOf = the week date from the tab names, era auto-ptr from the name). The HEALER
+  sheet (id 1MBadxaZWpwj7h_3HcOtteypK3WSgp6o9sUIqvTryju4, same tab layout) merges the
+  same way for Healer-roster specs as "99th pct HPS (12.1 PTR Mythic raid testing,
+  Robydoby)" (unit HPS). No `n` — the
   sheet does not expose per-percentile parse counts; never fabricate one. The sheet
   asks for visible credit — the registry entry + drawer label carry it; keep them.
 - **Bloodmallet** (fight profiles, DPS specs only):
