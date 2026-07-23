@@ -324,6 +324,9 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
     if (!note.creator || !note.note || !note.url) errors.push(`creator-takes.json: metaNote for ${note.spec} needs creator + note + url`);
     if (note.creator && !generalCreatorNames.has(note.creator)) errors.push(`creator-takes.json: metaNote creator "${note.creator}" must be a generalCreators entry — specialist per-spec takes belong in takes[], not metaNotes[]`);
     if (!META_SENTIMENTS.has(note.sentiment)) errors.push(`creator-takes.json: metaNote for ${note.spec} sentiment "${note.sentiment}" invalid (positive|negative|neutral|mixed)`);
+    // date is MANDATORY, not optional: projectionFor picks the newest-dated metaNote to
+    // drive the ±3 nudge, and an undated note would sort above every dated one.
+    if (!note.date) errors.push(`creator-takes.json: metaNote for ${note.spec} needs a date (drives the projection's newest-read nudge)`);
     isoOk(note.date, `creator-takes.json: metaNote for ${note.spec} date`);
     if (note.url != null) {
       if (!httpsUrl(note.url)) errors.push(`creator-takes.json: metaNote for ${note.spec} url must be https:// (got "${note.url}")`);

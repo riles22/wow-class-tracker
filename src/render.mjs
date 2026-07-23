@@ -276,7 +276,10 @@ export function projectionFor(spec, bracket, scales, metaNotes = []) {
   // bracket), and a retracted (superseded) note must not nudge what the drawer hides.
   // Notes whose patchContext names no bracket apply to both.
   const note = metaNotes
-    .filter(n => n.class === spec.class && n.spec === spec.spec && n.sentiment && !n.superseded)
+    // `n.date` is required: an undated note stringifies to "undefined", which sorts
+    // ABOVE every ISO date in a descending localeCompare and would silently win the
+    // "newest read" nudge. Validation enforces the date; this filter is defence in depth.
+    .filter(n => n.class === spec.class && n.spec === spec.spec && n.sentiment && n.date && !n.superseded)
     .filter(n => {
       const pc = String(n.patchContext ?? "");
       const mentionsRaid = /raid/i.test(pc), mentionsMplus = /m\+|mythic/i.test(pc);
