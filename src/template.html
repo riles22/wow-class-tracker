@@ -137,6 +137,9 @@
     padding:12px 0 8px; font-size:12px; color:var(--ink-faint)
   }
   .legend .grp{display:flex; gap:9px; align-items:center; flex-wrap:wrap}
+  /* Keep each glyph(s)+phrase as one unit so the phrase can never wrap away from its
+     glyph (audit L11); the phrase itself still wraps internally on narrow screens. */
+  .legend .li{display:inline-flex; align-items:baseline; gap:6px}
   .legend .note{max-width:88ch; line-height:1.45; flex-basis:100%}
   .lsep{width:1px; height:12px; background:var(--edge-2); flex:none}
 
@@ -159,6 +162,9 @@
   .tcol{display:flex; flex-direction:column; align-items:stretch; gap:3px; min-width:0}
   .tcol .tier{width:100%}
   .tind{display:inline-flex; align-items:center; gap:3px; min-width:0}
+  /* Fight view: overall-consensus tier for the non-fight bracket reads as dimmed context (M4). */
+  .tiercell.isoverall{opacity:.5}
+  .tiercell.isoverall .tier{text-decoration:underline dotted; text-underline-offset:3px}
   .tscore{display:block; height:3px; border-radius:3px; background:var(--bg-3); overflow:hidden}
   .tscore > i{display:block; height:100%; border-radius:3px; background:linear-gradient(90deg,var(--accent),var(--accent-2))}
   /* divergence marker: a ± glyph, not a bare dot — the shape carries the meaning for
@@ -182,6 +188,9 @@
   .spark .lbl2{font-family:var(--mono); font-size:11px; color:var(--ink-faint); width:34px; flex:none}
   /* floating utility corner: back-to-top + close-all-drawers (bottom-left; compare tray owns bottom-right) */
   .utilbar{position:fixed; left:16px; bottom:16px; z-index:59; display:none; flex-direction:column; gap:8px; align-items:flex-start}
+  /* Narrow viewports: leave scroll clearance so an open drawer's last lines never sit
+     under the fixed Top / Close-all buttons (L12). */
+  @media (max-width:480px){ body.util-on{padding-bottom:96px} }
   .utilbar.show{display:flex}
   .utilbar button{display:none; font-family:var(--body); font-size:12px; font-weight:600; color:var(--ink-dim); background:var(--bg-2); border:1px solid var(--edge-2); border-radius:999px; padding:8px 14px; cursor:pointer; box-shadow:0 4px 16px rgba(0,0,0,.4); transition:color .15s,border-color .15s}
   .utilbar button.show{display:block}
@@ -556,22 +565,22 @@
     <div class="grp">
       <span class="lbl" style="margin:0">Tiers</span>
       <span class="grp" id="tierlegend" style="gap:6px"></span>
-      <span class="divmark">±</span><span>sources diverge (consensus)</span>
+      <span class="li"><span class="divmark">±</span><span>sources diverge (consensus)</span></span>
       <span class="lsep" aria-hidden="true"></span>
-      <span class="mv" data-d="up" style="margin:0">▲</span><span class="mv" data-d="down" style="margin:0">▼</span><span>tier / rank moved since the last data change (hover for from-when)</span>
+      <span class="li"><span class="mv" data-d="up" style="margin:0">▲</span><span class="mv" data-d="down" style="margin:0">▼</span><span>tier / rank moved since the last data change (hover for from-when)</span></span>
     </div>
-    <div class="grp">
+    <div class="grp" id="ptrlegend">
       <span class="lbl" style="margin:0">PTR read</span>
       <span class="verdict" data-v="Positive"><span class="dot"></span>Positive</span>
       <span class="verdict" data-v="Mixed"><span class="dot"></span>Mixed</span>
       <span class="verdict" data-v="Negative"><span class="dot"></span>Negative</span>
-      <span class="olk" data-d="up" style="margin:0">↗</span><span class="olk" data-d="flat" style="margin:0">→</span><span class="olk" data-d="down" style="margin:0">↘</span><span>12.1 outlook next to the verdict (from writeup or tuning balance)</span>
+      <span class="li"><span class="olk" data-d="up" style="margin:0">↗</span><span class="olk" data-d="flat" style="margin:0">→</span><span class="olk" data-d="down" style="margin:0">↘</span><span>12.1 outlook next to the verdict (from writeup or tuning balance)</span></span>
       <span class="lsep" aria-hidden="true"></span>
-      <span class="newbadge" style="margin:0">NEW</span><span>fresh take / tuning for this spec in the last <span id="newwindow">3</span> days</span>
+      <span class="li"><span class="newbadge" style="margin:0">NEW</span><span>fresh take / tuning for this spec in the last <span id="newwindow">3</span> days</span></span>
     </div>
     <div class="grp">
       <span class="lbl" style="margin:0">Profile</span>
-      <span class="ptag" style="margin-left:0">AoE-lean</span><span>sim fight profile (DPS) — expand a row for the numbers</span>
+      <span class="li"><span class="ptag" style="margin-left:0">AoE-lean</span><span>sim fight profile (DPS) — expand a row for the numbers</span></span>
     </div>
     <span class="note"><span class="count" id="count"></span> · Tiers are <b>within role</b> — a healer's S is best among healers, not across the whole game. Hover any tier badge for the per-source breakdown; click any row for current 12.0.7 numbers.</span>
   </div>
@@ -692,6 +701,11 @@ function writeHash(){
     if(v !== STATE_DEFAULTS[sk]) p.set(k, typeof v === "boolean" ? "1" : v);
   }
   if(hashSpec) p.set("spec", hashSpec);
+  // Pinned compare set travels in the URL too, so a comparison is shareable (L14).
+  if(typeof COMPARE !== "undefined" && COMPARE.size){
+    const slugs = [...COMPARE].map(k=>{ const s = SPECS.find(x=>`${x.class}|${x.spec}`===k); return s?slugOf(s):null; }).filter(Boolean);
+    if(slugs.length) p.set("cmp", slugs.join(","));
+  }
   const h = p.toString();
   history.replaceState(null, "", h ? "#" + h : location.pathname + location.search);
 }
@@ -705,6 +719,12 @@ function applyHash(){
   // sanity: unknown source/era values fall back to defaults rather than blank views
   if(state.source !== "consensus" && state.source !== "projection" && !TIER_SOURCES.some(s=>s.id===state.source)) state.source = "consensus";
   if(!["both","live","ptr"].includes(state.era)) state.era = "both";
+  // Restore a shared compare set (L14): resolve slugs → keys, cap at 3.
+  const cmp = p.get("cmp");
+  if(cmp && typeof COMPARE !== "undefined"){
+    cmp.split(",").forEach(slug=>{ const s = SPECS.find(x=>slugOf(x)===slug);
+      if(s && COMPARE.size < 3) COMPARE.add(`${s.class}|${s.spec}`); });
+  }
   return p.get("spec"); // slug to open after first render (null if none)
 }
 
@@ -727,7 +747,12 @@ function ratingFor(s, bracket){
       return { tier, score:SCALES.scales.archon.values[tier] ?? 0, div:false,
                tip:`Archon ${fightBracket==="raid"?"throughput":"M+ score"} tier on ${enc.name}: ${tier}` };
     }
-    return { tier:"—", score:-1, div:false, tip:"Per-fight view — this bracket has no data for the selected fight" };
+    // The non-selected bracket has no per-fight data. Rather than 40 bare em-dashes,
+    // show that bracket's OVERALL consensus tier, dimmed and marked "overall" (M4).
+    const c = s.consensus?.[bracket];
+    if(!c) return { tier:"—", score:-1, div:false, tip:"Per-fight view — no overall rating for this bracket" };
+    return { tier:c.tier, score:-1, div:false, overall:true,
+             tip:`Per-fight view — ${bracket==="raid"?"Raid":"M+"} isn't the selected fight's bracket; showing overall consensus ${c.tier}` };
   }
   if(state.source === "consensus"){
     const c = s.consensus ? s.consensus[bracket] : null;
@@ -755,7 +780,9 @@ function tierEl(r, mv){
   // meter labeled "Consensus/Projection score" over an Archon number would be a lie.
   const meter = ((state.source==="consensus" || state.source==="projection") && r.score>=0 && !state.fight)
     ? `<span class="tscore" title="${state.source==="consensus"?"Consensus":"Projection"} score ${r.score}/100 (position within tier)"><i style="width:${r.score}%"></i></span>` : '';
-  return `<span class="tiercell"><span class="tcol"><span class="tier" data-t="${esc(r.tier)}" title="${esc(r.tip)}">${esc(r.tier)}</span>${meter}</span><span class="tind">${arrow}${dot}</span></span>`;
+  // Fight view: the non-fight bracket shows its overall consensus tier, dimmed with a
+  // dotted underline so it reads as "context, not this fight" (tooltip explains) (M4).
+  return `<span class="tiercell${r.overall?' isoverall':''}"><span class="tcol"><span class="tier" data-t="${esc(r.tier)}" title="${esc(r.tip)}">${esc(r.tier)}</span>${meter}</span><span class="tind">${arrow}${dot}</span></span>`;
 }
 function verdictEl(s){
   const v = s.ptr ? s.ptr.verdict : "—";
@@ -902,8 +929,23 @@ function tierSetHTML(s){
   const ts = s.tierSet, p = s.ptr;
   if(!ts && !(p && (p.set2 || p.set4 || p.watch))) return "";
   // Show the actual datamined bonus (tierSet) with the writeup's commentary beneath it.
-  const piece = (pc, bonus, note) => (!bonus && !note) ? "" :
-    `<div class="setrow"><span class="pc">${pc}</span><span class="pct">${bonus?esc(bonus):"—"}${note?`<span class="mnote" style="display:block;margin-top:3px">▸ ${esc(note)}</span>`:""}</span></div>`;
+  // If the commentary predates the datamined bonus (it reviews a since-replaced design,
+  // marked by a trailing "(pre-<date> …)"/"(Reviews the pre-… )" clause), surface that
+  // reconciliation FIRST as a badge — otherwise the reader meets stale numbers before
+  // learning they're stale (audit M5).
+  const piece = (pc, bonus, note) => {
+    if (!bonus && !note) return "";
+    let body = note, pre = "";
+    if (note) {
+      const m = note.match(/\s*\(((?:Reviews the )?[Pp]re-[^)]*|[^)]*\bpre-\d[^)]*)\)\s*$/);
+      if (m) { pre = m[1].replace(/^Reviews the /i, "").replace(/\.$/, ""); body = note.slice(0, m.index).trim(); }
+    }
+    const commentary = note
+      ? `${pre?`<span class="mnote" style="display:block;margin-top:3px;color:var(--accent)">⚠ ${esc(pre)}</span>`:""}`
+        + `<span class="mnote" style="display:block;margin-top:3px">▸ ${esc(body)}</span>`
+      : "";
+    return `<div class="setrow"><span class="pc">${pc}</span><span class="pct">${bonus?esc(bonus):"—"}${commentary}</span></div>`;
+  };
   const src = ts?.source
     ? ` <a href="${esc(safeHref(ts.source))}" target="_blank" rel="noopener" class="mnote" style="text-transform:none;letter-spacing:0">datamined${ts.asOf?` ${esc(ts.asOf)}`:""} · may still tune</a>` : "";
   return `<p class="d-h">Season 2 tier set${src}</p><div class="setbox">
@@ -1000,7 +1042,7 @@ function rowHTML(s, idx, simBar){
      </div>
      <div class="cls" style="color:${color}" title="${esc(s.class)}">${esc(s.class)}</div>
      <div class="role"><span class="rolechip">${esc(s.role)}</span>${ptag}</div>
-     ${state.era!=="live"?verdictEl(s):`<div class="verdict" data-v="—"><span class="dot"></span>—</div>`}
+     ${state.era!=="live"?verdictEl(s):`<div class="verdict verdict-empty" aria-hidden="true"></div>`}
      <span class="chev">▸</span>
      ${simBar && typeof s.fightProfile?.metricsUsed?.[simBar.key]==="number" ? `<div class="rowbar" aria-hidden="true" title="Sim ${simBar.label} DPS ${Math.round(s.fightProfile.metricsUsed[simBar.key]).toLocaleString('en-US')}"><i style="width:${(s.fightProfile.metricsUsed[simBar.key]/simBar.max*100).toFixed(1)}%;background:${color}"></i></div>` : ""}
      <div class="drawer"></div>
@@ -1094,6 +1136,9 @@ function render(){
   // The speculation caveat belongs to EVERY view that shows PTR content, including the
   // default "Both" — hiding it from first-time visitors buried the honesty disclaimer.
   document.getElementById('ptrcaveat').style.display = state.era === "live" ? "none" : "block";
+  // The PTR-read legend cluster explains a column that live view hides — hide it too (L9).
+  const ptrLeg = document.getElementById('ptrlegend');
+  if(ptrLeg) ptrLeg.style.display = state.era === "live" ? "none" : "";
   const shown = ordered.length, ptrShown = ordered.filter(s=>s.ptr).length;
   document.getElementById('count').textContent = `${shown} spec${shown!==1?'s':''}${state.ptrOnly?'':` · ${ptrShown} tracked`}`;
   // restore drawers that were open before this re-render (fresh DOM, current-era content)
@@ -1408,13 +1453,13 @@ function updateTray(){
   cmpTray.innerHTML = [...COMPARE].map(k=>{ const [c,sp] = k.split("|");
     return `<span class="cmp-item"><span style="color:${CLASS_COLOR[c]||'#888'}" aria-hidden="true">●</span> ${esc(sp)} <span class="mnote">${esc(c)}</span> <button data-uncmp="${esc(k)}" aria-label="Remove ${esc(sp)} ${esc(c)} from compare">✕</button></span>`; }).join("")
     + `<button class="cmp-go" id="cmp-go"${COMPARE.size<2?' disabled':''}>Compare ${COMPARE.size} side by side</button>`;
-  cmpTray.querySelectorAll("[data-uncmp]").forEach(b=> b.onclick = ()=>{ COMPARE.delete(b.dataset.uncmp); updateTray(); syncCmpButtons(); });
+  cmpTray.querySelectorAll("[data-uncmp]").forEach(b=> b.onclick = ()=>{ COMPARE.delete(b.dataset.uncmp); updateTray(); syncCmpButtons(); writeHash(); });
   const go = cmpTray.querySelector("#cmp-go"); if(go) go.onclick = openCompare;
 }
 function toggleCompare(key){
   if(COMPARE.has(key)) COMPARE.delete(key);
   else { if(COMPARE.size >= 3) return false; COMPARE.add(key); }
-  updateTray(); return true;
+  updateTray(); writeHash(); return true;
 }
 function closeCompare(){ cmpOv.classList.remove("open"); document.body.style.overflow = ""; }
 cmpOv.addEventListener("click", e=>{ if(e.target === cmpOv) closeCompare(); });
@@ -1440,14 +1485,19 @@ function openCompare(){
     ] : []),
     ["Live raid median", s=>cmpLiveMedian(s,"raid")],
     ["Live M+ median", s=>cmpLiveMedian(s,"mplus")],
-    ...(state.era !== "live" ? [["Dummy Dome (PTR)", s=>s.ptrDummy?.score!=null?`${s.ptrDummy.score}/100 <span class="mnote">#${s.ptrDummy.rank}/${s.ptrDummy.of}</span>`:"—"]] : []),
+    // Zone-54 PTR raid testing covers ALL roles (unlike the DPS-only Dummy Dome) — give
+    // healers/tanks a measured PTR row too, not just a gap (L13).
+    ...(state.era !== "live" ? [["PTR raid testing", s=>{ const m=(s.metrics||[]).find(m=>m.name==="12.1 PTR raid testing score (normalized)");
+      return m ? `${Math.round(m.value)}/100${m.rank?` <span class="mnote">#${m.rank}/${m.of}</span>`:""}` : "—"; }]] : []),
+    ...(state.era !== "live" ? [["Dummy Dome (PTR, DPS)", s=>s.ptrDummy?.score!=null?`${s.ptrDummy.score}/100 <span class="mnote">#${s.ptrDummy.rank}/${s.ptrDummy.of}</span>`:"—"]] : []),
     ["Fight profile", s=>s.fightProfile?.tag ? esc(s.fightProfile.tag) : "—"],
     ["Mobility", s=>s.playstyle ? `${s.playstyle.mobility}/5` : "—"],
     ["Utility", s=>s.playstyle ? `${s.playstyle.utility}/5` : "—"],
     ["Complexity", s=>s.playstyle ? `${s.playstyle.complexity}/5` : "—"],
     ["Survivability", s=>s.survivability ? esc(s.survivability.tier) : "—"],
     ...(state.era !== "live" ? [["12.1 outlook", s=>{ const o = s.outlook, v = s.ptr?.verdict;
-      return ((v?esc(v)+" ":"") + (o ? (o.direction==="up"?"↗":o.direction==="down"?"↘":"→") : "")) || "—"; }]] : [])
+      const word = o ? (o.direction==="up"?"↗ improving":o.direction==="down"?"↘ declining":"→ holding") : "";
+      return ((v?esc(v)+" ":"") + word) || "—"; }]] : [])
   ];
   cmpOv.innerHTML = `<div class="finder-panel" role="dialog" aria-modal="true" aria-label="Compare specs">
     <div class="finder-head"><div><h2>⚖ Compare</h2><p>Side by side, same rules as everywhere else — measured numbers stay numbers, and the 12.1 forecast stays labeled as ours.</p></div>
@@ -1480,7 +1530,9 @@ function updateUtilBar(){
   toTopBtn.classList.toggle('show', window.scrollY > 600);
   closeAllBtn.classList.toggle('show', openRows.size > 0);
   closeAllBtn.textContent = `Close all (${openRows.size})`;
-  utilBar.classList.toggle('show', window.scrollY > 600 || openRows.size > 0);
+  const utilShown = window.scrollY > 600 || openRows.size > 0;
+  utilBar.classList.toggle('show', utilShown);
+  document.body.classList.toggle('util-on', utilShown); // scroll clearance on mobile (L12)
 }
 let utilTick = false;
 window.addEventListener('scroll', ()=>{ if(utilTick) return; utilTick = true; requestAnimationFrame(()=>{ utilTick = false; updateUtilBar(); }); }, { passive: true });
@@ -1531,6 +1583,12 @@ function openRowFor(cls, spec){
     const target = SPECS.find(s=>slugOf(s)===pendingSpec);
     // if the linked spec is hidden by the linked filters, it just doesn't open — honest no-op
     if(target) openRowFor(target.class, target.spec);
+  }
+  // Reflect a restored compare set in the tray + drawer buttons, and open the panel if
+  // the shared link carried one (L14).
+  if(typeof COMPARE !== "undefined" && COMPARE.size){
+    updateTray(); syncCmpButtons();
+    if(new URLSearchParams(location.hash.slice(1)).has("cmp") && COMPARE.size >= 2) openCompare();
   }
 }
 
@@ -1905,10 +1963,15 @@ function openSpecFromFinder(cls, spec){
     const srt = rows.map(r=>r.value).slice().sort((a,b)=>a-b), median = srt[Math.floor(srt.length/2)] || 0;
     const rowH=24, top=18, bot=10, H=top+N*rowH+bot, barX=200, barW=600, valX=992;
     const narrow = window.innerWidth < 560;
-    const trunc = s => s.length>18 ? s.slice(0,17)+"…" : s;
+    const trunc = s => s.length>20 ? s.slice(0,19)+"…" : s;
+    // Same spec name from two classes (Frost Mage vs Frost DK, Resto Druid vs Shaman…)
+    // is ambiguous by text alone — append a class tag so it doesn't rely on bar colour,
+    // which color-blind readers can't use (#10).
+    const nameCount = {}; rows.forEach(r=> nameCount[r.spec] = (nameCount[r.spec]||0)+1);
+    const CLS_ABBR = {"Death Knight":"DK","Demon Hunter":"DH","Druid":"Dru","Evoker":"Evo","Hunter":"Hun","Mage":"Mage","Monk":"Monk","Paladin":"Pal","Priest":"Pri","Rogue":"Rog","Shaman":"Sha","Warlock":"Lock","Warrior":"War"};
     const bars = rows.map((r,i)=>{
       const y=top+i*rowH, mid=y+rowH/2, w=Math.max(2, r.value/max*barW), col=CLASS_COLOR[r.cls]||"#888";
-      const nm = trunc(r.spec);
+      const nm = trunc(nameCount[r.spec]>1 ? `${r.spec} (${CLS_ABBR[r.cls]||r.cls})` : r.spec);
       const disp = fmt(r.value)+(e.unit==="%"?"%":"");
       const rk = r.rank||i+1, of = r.of||N;
       const mv = r.rankDelta ? `<tspan dx="4" fill="${r.rankDelta>0?'var(--v-pos)':'var(--v-neg)'}" font-size="9">${r.rankDelta>0?'▲':'▼'}${Math.abs(r.rankDelta)}</tspan>` : "";
