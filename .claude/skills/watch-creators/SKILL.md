@@ -49,8 +49,17 @@ locally, and distill them into cited per-spec takes in `data/creator-takes.json`
    class-tuning-roundup video) into a spec they merely mention in passing. When a
    video reveals a creator competently covers a spec outside their listed `specs`,
    note it in the run log for a human to widen the scope — don't silently override.
-4. Supersede: when a creator posts a newer take on the same spec, mark older ones
-   `superseded: true` rather than deleting.
+4. Supersede — **do this EVERY time you add a take, it is not optional** (audit
+   2026-07-23 found 16 creator+spec pairs carrying multiple live takes across tuning
+   passes): when you distill a new take for (creator, spec), scan the existing
+   `takes[]` for that SAME creator + SAME spec and mark the older one `superseded: true`
+   (never delete — the archive stays). Guardrail against over-superseding: only retire a
+   prior take the new one genuinely REPLACES — same lens (both raid, both M+, or both
+   general). A creator's still-valid raid take and a new M+ take on the same spec are
+   COMPLEMENTARY; keep both live. The drawer shows only non-superseded takes and the
+   projection's date-sort assumes the newest live take is the current read, so a stale
+   un-superseded take both clutters the drawer and can mislead — supersede diligently,
+   but only within the same lens.
 4b. **General-coverage creators** (`community.json` top-level `generalCreators` — e.g.
    izen): a cross-class PTR-NEWS lane, NOT a specialist take lane. Poll their RSS the same
    way, title-filter for 12.1/PTR/Season relevance. **Never distill specialist per-spec
