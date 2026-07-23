@@ -1758,7 +1758,7 @@
       "note": "izen reads Frost DK as the clear standout of the raid testing — the one outlier that sits at or near the top of essentially every boss regardless of whether the fight wants single target, cleave or AoE. He credits its free passive AoE (Icy Death Torrent auto-attack cleave) for letting it excel on single-target fights without giving anything up, and names it the overall best DPS so far.",
       "patchContext": "Season 2 PTR — raid testing outlook",
       "url": "https://youtu.be/3hdleEsSGrs?t=145",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Mage",
@@ -1769,7 +1769,7 @@
       "note": "izen puts Frost Mage among the top three overall DPS in the testing, driven mainly by its strong two-target cleave, which shone on the cleave-heavy fights like Twin Fangs and the Lost Explorers council.",
       "patchContext": "Season 2 PTR — raid testing outlook",
       "url": "https://youtu.be/3hdleEsSGrs?t=844",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Priest",
@@ -1802,7 +1802,7 @@
       "note": "izen sees Affliction as a strong AoE/multi-dot pick that performed well on caster-and-spread fights — the add-heavy opener, the council (agony/corruption across three targets), and Twin Fangs' five-target spread. He notes it's less ideal on pure single target, since it has to actively cast for its AoE rather than getting it for free, but overall counts it among the better specs.",
       "patchContext": "Season 2 PTR — raid testing outlook",
       "url": "https://youtu.be/3hdleEsSGrs?t=124",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Hunter",
@@ -1835,7 +1835,7 @@
       "note": "izen says Arcane Mage was doing very well on the caster-friendly fights — the sustained-AoE opener and the stationary single-target boss (Bashnik) — because it picks up free AoE through Arcane Missiles/Barrage and the prismatic-bolt splash while doing its single-target rotation.",
       "patchContext": "Season 2 PTR — raid testing outlook",
       "url": "https://youtu.be/3hdleEsSGrs?t=453",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Druid",
@@ -1857,7 +1857,7 @@
       "note": "izen lists Elemental among the casters doing well on the large sustained-AoE opener (Nexali), where slow ramping multi-target damage is rewarded.",
       "patchContext": "Season 2 PTR — raid testing outlook",
       "url": "https://youtu.be/3hdleEsSGrs?t=124",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Evoker",
@@ -2143,7 +2143,7 @@
       "note": "Says Devourer's rework direction was praised but its actual damage was low — effectively nerfed compared to live — so the 10% buff is Blizzard trying to bump an underperformer up.",
       "patchContext": "Season 2 PTR — raid outlook",
       "url": "https://youtu.be/o7GiLqBNja8?t=209",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Druid",
@@ -2154,7 +2154,7 @@
       "note": "Reads Balance as well positioned for this raid: it wasn't awful in single target, the tested raid has few pure single-target fights, and Balance benefits from multi-target on many encounters — with the new buffs skewing AoE, he calls it a good change even if parts net out flat.",
       "patchContext": "Season 2 PTR — raid outlook",
       "url": "https://youtu.be/o7GiLqBNja8?t=265",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Evoker",
@@ -2165,7 +2165,7 @@
       "note": "Judges the Scalecommander package to be in a pretty tough spot for Devastation after the Wingleader rework — decoupling the cooldown reduction from Bombardments is both a playstyle change and a significant net nerf in his view.",
       "patchContext": "Season 2 PTR — raid outlook",
       "url": "https://youtu.be/o7GiLqBNja8?t=440",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Evoker",
@@ -2176,7 +2176,7 @@
       "note": "Extends the same read to Augmentation: the Wingleader rework leaves Scalecommander in a tough situation for both Evoker DPS specs, since the cooldown reduction is far less frequent than before.",
       "patchContext": "Season 2 PTR — raid outlook",
       "url": "https://youtu.be/o7GiLqBNja8?t=485",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Evoker",
@@ -2220,7 +2220,7 @@
       "note": "Reads Fire as doing extremely low damage across the board on the PTR and being barely played in testing — the ~12% buff is Blizzard trying to revive a spec players weren't even bothering to try.",
       "patchContext": "Season 2 PTR — raid outlook",
       "url": "https://youtu.be/o7GiLqBNja8?t=687",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Monk",
@@ -2275,7 +2275,7 @@
       "note": "Sees Shadow as already doing well — a major beneficiary of the many multi-target fights in this raid — and finds it curious that it's getting a further flat 8% buff anyway, though he notes it wasn't especially popular as a DPS pick.",
       "patchContext": "Season 2 PTR — raid outlook",
       "url": "https://youtu.be/o7GiLqBNja8?t=1183",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Rogue",
@@ -2319,7 +2319,7 @@
       "note": "Reads Arms as notably weak in pure single-target raid fights while doing quite a bit better with cleave and in M+ AoE; the new buffs (execute, melee damage) deliberately target that single-target hole, worth roughly 5% ST and almost nothing in AoE.",
       "patchContext": "Season 2 PTR — raid outlook",
       "url": "https://youtu.be/o7GiLqBNja8?t=1376",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Mage",
@@ -2440,6 +2440,193 @@
       "note": "izen: Holy Priest is one of the more-buffed healers after Holy Paladin — +10% healing, mana discounts, and Benediction now cast about twice as often (tied to Holy Word/Serenity rather than Apotheosis), plus a smaller latest round buffing Prayer of Mending +20% and Prompt Prognosis. After roughly three rounds of buffs (over 20% more total healing) it's now testing okay, up notably from the prior week.",
       "patchContext": "Season 2 PTR — raid testing outlook",
       "url": "https://youtu.be/WQI9eNr4qpo?t=945",
+      "superseded": false
+    },
+    {
+      "class": "Shaman",
+      "spec": "Elemental",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-20",
+      "sentiment": "positive",
+      "note": "The standout of this round of Mythic raid testing: izen reads Elemental as the overall best DPS so far — top 10 on every tested boss and top 5 on all but one. He stresses it performs regardless of damage profile, excelling on pure single-target fights (Coiled Altar, Vashnik) as well as spread/AoE ones, which he attributes to strong tuning rather than a favorable profile.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/m5lEbh4lrHA?t=190",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Balance",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-20",
+      "sentiment": "positive",
+      "note": "A surprise strong performer izen didn't expect to highlight: Balance sits top-5/6 across both the spread-cleave fights and the pure single-target Coiled Altar. He frames it (with Elemental) as tuned highly regardless of profile — its multi-dotting wins on spread fights while it still ranks at the top of single target.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/m5lEbh4lrHA?t=193",
+      "superseded": false
+    },
+    {
+      "class": "Mage",
+      "spec": "Arcane",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-20",
+      "sentiment": "positive",
+      "note": "izen reads Arcane as one of the best-tuned DPS this cycle — very strong from 1 up to 4+ targets (Arcane Barrage splash, Prismatic Vault splash, the rebuffed reusable Arcane Missiles as an AoE button) and, crucially, also the best of the mages in single target. He explicitly places it above Frost Mage right now.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/m5lEbh4lrHA?t=412",
+      "superseded": false
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-20",
+      "sentiment": "positive",
+      "note": "Devourer remains a consistent top performer across every tested boss, with the raid largely settled on the melee 'False Cards' build down the left side of the tree that ignores the Collapsing Star apex (Collapsing Star kept only for short M+ burst windows). izen notes it doing very well on both spread and single-target profiles.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/m5lEbh4lrHA?t=221",
+      "superseded": false
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Frost",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-20",
+      "sentiment": "positive",
+      "note": "Even after multiple nerfs this cycle, izen names Frost DK one of the best-performing raid specs — it held up through the latest round of PTR testing and stayed near the top, one of his overall highlights of the meta alongside Arms and Ret.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/m5lEbh4lrHA?t=1145",
+      "superseded": false
+    },
+    {
+      "class": "Warrior",
+      "spec": "Arms",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-20",
+      "sentiment": "positive",
+      "note": "One of the few melee izen highlights in a caster-favored meta: Arms posts two of the better overall results despite being surrounded by casters, thanks to ~86% boss (single-target) damage and excellent, high-uptime two-target cleave. Caveat: Arms received no tuning in the latest round — this is standing strength, not a new buff.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/m5lEbh4lrHA?t=176",
+      "superseded": false
+    },
+    {
+      "class": "Paladin",
+      "spec": "Retribution",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-20",
+      "sentiment": "positive",
+      "note": "izen repeatedly pairs Ret ('red paladin') with Arms as the top melee in this testing round — strong single-target-weighted results that keep it competitive even on the caster-favoring add fights. Like Arms, it received no changes in the latest tuning pass, so this is existing strength.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/m5lEbh4lrHA?t=176",
+      "superseded": false
+    },
+    {
+      "class": "Priest",
+      "spec": "Shadow",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-20",
+      "sentiment": "mixed",
+      "note": "Profile-dependent for Shadow: izen has it near the top on the spread/multi-target fights (Soul Coiler, the three-target Lost Explorers) where its dots gain value, but it slips on the more single-target fights (Vashnik, Coiled Altar). A good-but-conditional read driven by damage profile more than raw tuning.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/m5lEbh4lrHA?t=479",
+      "superseded": false
+    },
+    {
+      "class": "Mage",
+      "spec": "Frost",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-20",
+      "sentiment": "mixed",
+      "note": "izen reads Frost Mage as good but outshone by Arcane: very strong on two-to-three-target cleave, but the closer a fight gets to pure single target the worse it does, where Arcane clearly pulls ahead. A solid cleave spec that no longer wins the mage slot outright.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/m5lEbh4lrHA?t=414",
+      "superseded": false
+    },
+    {
+      "class": "Warlock",
+      "spec": "Affliction",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-20",
+      "sentiment": "mixed",
+      "note": "Very profile-dependent: Affliction shines on the spread add fights (Soul Coiler, where izen notes it doing only ~12% boss damage and 88% on adds) but does noticeably worse in single target. He explicitly attributes its high placements to a favorable damage profile rather than across-the-board tuning.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/m5lEbh4lrHA?t=479",
+      "superseded": false
+    },
+    {
+      "class": "Evoker",
+      "spec": "Devastation",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-20",
+      "sentiment": "mixed",
+      "note": "izen reads Devastation as reasonably okay in single target but getting worse the more spread adds a fight has — the inverse of the dot/spread specs. A middling, profile-sensitive result rather than a clear winner or loser.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/m5lEbh4lrHA?t=1240",
+      "superseded": false
+    },
+    {
+      "class": "Rogue",
+      "spec": "Assassination",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-20",
+      "sentiment": "negative",
+      "note": "izen groups Assassination with the consistent bottom performers across all four tested bosses — he argues it isn't a damage-profile problem but simply low, undertuned numbers relative to the rest of the field.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/m5lEbh4lrHA?t=592",
+      "superseded": false
+    },
+    {
+      "class": "Warrior",
+      "spec": "Fury",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-20",
+      "sentiment": "negative",
+      "note": "Fury lands in izen's consistently-poor bottom group across the tested bosses; aside from a single-target-fight cameo in top logs, he reads it as undertuned rather than merely profile-unlucky.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/m5lEbh4lrHA?t=594",
+      "superseded": false
+    },
+    {
+      "class": "Mage",
+      "spec": "Fire",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-20",
+      "sentiment": "negative",
+      "note": "izen lists Fire Mage among the persistent bottom performers (with Assassination, Fury, Augmentation) — consistently low results across fights that he attributes to undertuning, not damage profile.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/m5lEbh4lrHA?t=594",
+      "superseded": false
+    },
+    {
+      "class": "Evoker",
+      "spec": "Augmentation",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-20",
+      "sentiment": "negative",
+      "note": "Augmentation sits among izen's bottom performers, 'not being anything special' across the tested bosses. He caveats that Aug logs are inherently delicate to read (its contribution is buff-based), but the raw placement is poor.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/m5lEbh4lrHA?t=594",
+      "superseded": false
+    },
+    {
+      "class": "Hunter",
+      "spec": "Survival",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-20",
+      "sentiment": "negative",
+      "note": "Despite the recent PTR talent changes refocusing it around Wildfire Bomb, izen calls Survival's raid-testing results disappointing — it did not translate the buffs into competitive numbers this round.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/m5lEbh4lrHA?t=45",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Feral",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-20",
+      "sentiment": "negative",
+      "note": "izen points viewers to Feral as one of the disappointing results in the testing data — a weak showing across the tested bosses.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/m5lEbh4lrHA?t=1097",
       "superseded": false
     }
   ]

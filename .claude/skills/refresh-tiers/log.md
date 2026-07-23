@@ -149,3 +149,15 @@ moves** — WoWMeta Ckmeans reclustering (its published tier column tracks repre
 the reset week); verified real upstream data, NOT a parse artifact or Blizzard retune. Archon encounters: full
 3-role re-fetch across 9 bosses + 8 dungeons (51 pages), 680 cells, 41 changed (normal churn), 40/40 each.
 Archon survivability 40 rows, 2 moves (Guardian A→B, Devastation A→B). Snapshots 07-21.
+
+## 2026-07-22 (nightly) — all 5 tier sources refreshed live; 359 ratings + 40 survivability + 680 encounter cells
+Icy Veins (6 pages, linear tier→spec-icon scan, incl A+ M+ tier), Method (raid 39 — Vengeance DH still omitted
+upstream = absence; M+ 40, dungeon-list block correctly rejected), Wowhead (6 pages via r.jina.ai; regex made
+tolerant of "(S-Tier)"/"(S Tier)"/no-space and the "16. Subtlety Rogue B Tier)" missing-open-paren typo),
+Archon (57 pages: 6 tier + 3 survivability-shared + 51 encounters, parsed from __NEXT_DATA__, name field
+space-stripped to match roster; upstream lastUpdated 2026-07-21T12:00Z), WoWMeta (3 M+ via r.jina.ai; era
+"MN 12.0.7 / Season 1", NO season flip). 40/40 specs each source/bracket (except Method raid 39). Moves vs
+committed: Icy Veins/Method/Wowhead 0; Archon 3 M+ (Holy Pal C→B, Disc Priest B→A, Resto Shaman A→S — normal
+daily churn); WoWMeta 24 M+ (Ckmeans reclustering during the reset week — its published tier column tracks
+representation n; verified against the page, NOT a Blizzard retune); survivability 4 (see manifest). Snapshots
+07-22 (WoWMeta raid pages still null/unranked upstream). encounter-tiers.json asOf 07-22.
