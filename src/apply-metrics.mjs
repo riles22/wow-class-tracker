@@ -72,19 +72,21 @@ export async function applyMetrics(dataPath, root = ROOT) {
   }
 
   // 12.1 PTR Dummy Dome — real-player median DPS by fixed target count (WCL zone 52).
+  let ptrDummyApplied = 0;
   for (const row of input.ptrdummy ?? []) {
     const spec = byKey.get(`${row.class}|${row.spec}`);
     if (!spec) { unmatched.push(`ptrdummy: ${row.class} / ${row.spec}`); continue; }
     spec.ptrDummy = { source: row.source ?? "warcraftlogs", asOf: row.asOf ?? null, targets: row.targets };
-    playstyleApplied++;
+    ptrDummyApplied++;
   }
 
   // Season 2 tier set bonuses (actual 2pc/4pc text).
+  let tierSetsApplied = 0;
   for (const row of input.tiersets ?? []) {
     const spec = byKey.get(`${row.class}|${row.spec}`);
     if (!spec) { unmatched.push(`tierset: ${row.class} / ${row.spec}`); continue; }
     spec.tierSet = { set2: row.set2 || null, set4: row.set4 || null, source: row.source ?? null, asOf: row.asOf ?? null };
-    playstyleApplied++;
+    tierSetsApplied++;
   }
 
   // Melee-capability verification (updates range + sets meleeCapable for hybrids).
@@ -110,7 +112,7 @@ export async function applyMetrics(dataPath, root = ROOT) {
   }
 
   await writeFile(path.join(root, "data", "specs.json"), JSON.stringify(data.specs, null, 2) + "\n");
-  return { metricsApplied, profilesApplied, survivabilityApplied, playstyleApplied };
+  return { metricsApplied, profilesApplied, survivabilityApplied, playstyleApplied, ptrDummyApplied, tierSetsApplied };
 }
 
 const isMain = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
@@ -122,7 +124,13 @@ if (isMain) {
   }
   try {
     const result = await applyMetrics(path.resolve(dataPath));
-    console.log(`✓ applied ${result.metricsApplied} metric(s), ${result.profilesApplied} fight profile(s), ${result.survivabilityApplied} survivability tier(s), ${result.playstyleApplied} playstyle(s) → data/specs.json`);
+    const parts = [
+      `${result.metricsApplied} metric(s)`, `${result.profilesApplied} fight profile(s)`,
+      `${result.survivabilityApplied} survivability tier(s)`, `${result.playstyleApplied} playstyle(s)`,
+    ];
+    if (result.ptrDummyApplied) parts.push(`${result.ptrDummyApplied} Dummy Dome`);
+    if (result.tierSetsApplied) parts.push(`${result.tierSetsApplied} tier set(s)`);
+    console.log(`✓ applied ${parts.join(", ")} → data/specs.json`);
   } catch (error) {
     console.error("✗ " + error.message);
     process.exit(1);

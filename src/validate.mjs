@@ -438,14 +438,18 @@ export async function loadData(root) {
     read("community.json"), read("ptr-builds.json"), read("creator-takes.json"),
     read("encounter-tiers.json")
   ]);
-  // Movement baselines from data/history/, newest first (capped — baselines past the first
-  // that differs are never consulted). A missing directory means "no history yet"; any
-  // OTHER failure (unreadable/corrupt JSON) throws — a corrupt history file must error,
-  // not silently zero the movement feature.
+  // History snapshots from data/history/, newest first. The cap bounds two consumers:
+  // movement baselines (pickBaseline stops at the first DIFFERING snapshot, so any cap
+  // ≥ a few days is plenty there) AND the drawer Timeline sparklines + the post-launch
+  // forecast report card (historySeries), which want the WHOLE pre-launch window. At
+  // daily cadence 120 covers ~4 months (the full 12.1-PTR → early-S2 horizon) without
+  // truncating the Timeline as the season runs long. A missing directory means "no
+  // history yet"; any OTHER failure (unreadable/corrupt JSON) throws — a corrupt history
+  // file must error, not silently zero the movement feature.
   let historySnapshots = [];
   try {
     const dir = path.join(root, "data", "history");
-    const files = (await readdir(dir)).filter(f => f.endsWith(".json")).sort().reverse().slice(0, 30);
+    const files = (await readdir(dir)).filter(f => f.endsWith(".json")).sort().reverse().slice(0, 120);
     historySnapshots = await Promise.all(files.map(async f => JSON.parse(await readFile(path.join(dir, f), "utf8"))));
   } catch (error) {
     if (error?.code !== "ENOENT") throw error;

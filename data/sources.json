@@ -259,6 +259,20 @@
         "label": "12.1 PTR M+ testing (zone 56, Mythic+ Season 2 PTR)",
         "url": "https://www.warcraftlogs.com/zone/statistics/56",
         "snapshot": "2026-07-09"
+      },
+      {
+        "bracket": "raid",
+        "role": "DPS",
+        "label": "12.1 PTR raid testing (zone 54, The Venomous Abyss)",
+        "url": "https://www.warcraftlogs.com/zone/statistics/54",
+        "snapshot": "2026-07-09"
+      },
+      {
+        "bracket": "raid",
+        "role": "DPS",
+        "label": "12.1 PTR Dummy Dome (zone 52, fixed target counts)",
+        "url": "https://www.warcraftlogs.com/zone/statistics/52",
+        "snapshot": "2026-07-09"
       }
     ]
   },
