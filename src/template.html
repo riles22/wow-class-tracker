@@ -304,6 +304,22 @@
     border:1px solid color-mix(in srgb,var(--accent) 26%,transparent); border-radius:8px
   }
   .ptrcaveat b{color:var(--accent); font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase}
+  /* Data-health banner (H1): honest, visible marker that a subset of empirical data is
+     frozen upstream while the header's "latest snapshot" reflects the nightly-fresh
+     tiers/sims. Amber, full-bleed under the masthead, only shown when a series is stale. */
+  .datahealth{
+    max-width:var(--wrap,1100px); margin:14px auto 0; padding:10px 14px; font-size:12.5px;
+    line-height:1.5; color:var(--ink-dim); border-radius:8px;
+    background:color-mix(in srgb,#e8a13a 12%,transparent);
+    border:1px solid color-mix(in srgb,#e8a13a 42%,transparent)
+  }
+  .datahealth b{color:#e8a13a; font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase}
+  .datahealth .dh-series{color:var(--ink-faint); font-size:11.5px}
+  /* Stale metric row in drawers (audit suggestion #1): a row whose asOf trails its box's
+     freshest by the frozen threshold reads muted + amber-dated, so a 07-09 median next to
+     07-22 siblings is visibly, not silently, old. */
+  .setrow.stale{opacity:.72}
+  .setrow.stale .pct .asof{color:#e8a13a}
 
   /* ---------- footer ---------- */
   footer{margin-top:30px; border-top:1px solid var(--edge); padding-top:22px; color:var(--ink-faint); font-size:13px}
@@ -463,6 +479,7 @@
     </div>
   </div>
 </header>
+<div id="datahealth" class="datahealth" hidden></div>
 
 <div class="controls">
   <div class="controls-row">
@@ -789,13 +806,19 @@ function sourceBreakdownHTML(s){
 function metricsHTML(s){
   const list = (s.metrics || []).filter(m=>eraOk(metricEra(m)));
   if(!list.length) return "";
+  // Freshest asOf in this spec's numbers box; a row trailing it by the frozen threshold
+  // gets the muted "stale" treatment so a mid-outage 07-09 median reads as visibly old.
+  const boxLatest = list.map(m=>m.asOf).filter(Boolean).sort().slice(-1)[0] || null;
+  const staleGap = (from,to) => Math.round((Date.parse(to)-Date.parse(from))/86400000);
   const row = m => {
     const src = SOURCES.find(x=>x.id===m.source);
     const val = typeof m.value==="number" ? m.value.toLocaleString("en-US") : esc(String(m.value));
     const mvArrow = m.rankDelta ? ` <span class="mv" data-d="${m.rankDelta>0?'up':'down'}" title="rank ${m.rankDelta>0?'climbed':'fell'} ${Math.abs(m.rankDelta)} since ${esc(META.movementSince||"last snapshot")}">${m.rankDelta>0?'▲':'▼'}${Math.abs(m.rankDelta)}</span>` : "";
     const rank = m.rank ? ` <span class="mnote">· <b style="color:var(--accent-2)">#${m.rank}</b>/${m.of} ${esc(s.role)}${mvArrow}</span>` : "";
     const rdpsTip = /rDPS/.test(m.name) || m.unit === "rDPS" ? ` title="rDPS = raid-contribution DPS: your damage with externals/raid-buff gains removed (Warcraft Logs)"` : "";
-    return `<div class="setrow"><span class="pc">${esc(src?src.name:m.source)}</span><span class="pct"${rdpsTip}>${esc(m.name)}: <b>${val}</b>${m.unit?` ${esc(m.unit)}`:""}${rank}${m.n?` <span class="mnote">(n=${Number(m.n).toLocaleString("en-US")})</span>`:""}${m.asOf?` <span class="mnote">· ${esc(m.asOf)}</span>`:""}</span></div>`;
+    const stale = m.asOf && boxLatest && staleGap(m.asOf, boxLatest) > 7;
+    const asof = m.asOf ? ` <span class="mnote">· <span class="asof"${stale?` title="frozen — upstream rDPS outage since ${esc(m.asOf)}"`:""}>${esc(m.asOf)}</span></span>` : "";
+    return `<div class="setrow${stale?" stale":""}"><span class="pc">${esc(src?src.name:m.source)}</span><span class="pct"${rdpsTip}>${esc(m.name)}: <b>${val}</b>${m.unit?` ${esc(m.unit)}`:""}${rank}${m.n?` <span class="mnote">(n=${Number(m.n).toLocaleString("en-US")})</span>`:""}${asof}</span></div>`;
   };
   const section = (label, items) => items.length ? `<p class="d-h">${label}</p><div class="setbox">${items.map(row).join("")}</div>` : "";
   const live = m => metricEra(m)==="live", ptr = m => metricEra(m)==="ptr";
@@ -1203,6 +1226,23 @@ if(META.latestSnapshot){
   document.getElementById('stamp-snapshot').innerHTML = `<b>Latest snapshot:</b> ${esc(META.latestSnapshot)}`
     + (META.latestPtrBuild ? ` <b style="margin-left:14px">Latest PTR build:</b> ${esc(META.latestPtrBuild)}` : "");
 }
+
+/* Data-health banner (H1): the header's "latest snapshot" is the freshest data we have,
+   but several Warcraft Logs cuts are frozen mid-outage. Name that honestly and in place
+   rather than letting the fresh date speak for the stale series. */
+(function(){
+  const dh = DATA.dataHealth;
+  const el = document.getElementById('datahealth');
+  if(!dh || !dh.series || !dh.series.length){ el.hidden = true; return; }
+  const n = dh.series.length;
+  const names = dh.series.map(s=>s.label).join(" · ");
+  el.innerHTML = `<b>Heads up</b> ${n} Warcraft Logs metric ${n===1?"series is":"series are"} frozen at `
+    + `<b style="text-transform:none;letter-spacing:0;font-family:inherit;font-size:inherit">${esc(dh.oldest)}</b> `
+    + `— the redistributed-DPS (rDPS/HPS) family is mid-outage upstream, so those cuts have not refreshed since. `
+    + `Tier lists, sims, projections, and the raw-DPS series refresh nightly (latest ${esc(dh.latest)}); each frozen row shows its own ${esc(dh.oldest)} date. `
+    + `<span class="dh-series">Affected: ${esc(names)}.</span>`;
+  el.hidden = false;
+})();
 
 /* ---------- footer: source registry (tier lists + metrics + notes feeds) ---------- */
 document.getElementById('srclist').innerHTML = SOURCES.filter(s=>Array.isArray(s.pages)).map(src=>{

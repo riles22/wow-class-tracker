@@ -454,6 +454,40 @@ export function latestSnapshot(sources) {
   return dates.at(-1) ?? null;
 }
 
+// Number of days a metric series may trail the freshest empirical data before it is
+// called "frozen" in the honesty banner (H1). 7 clears normal per-source refresh
+// staggering (Archon numbers a day behind sims is not "frozen") while catching the
+// multi-week WCL rDPS outage (07-09 vs a 07-22 frontier = 13 days → flagged).
+const STALE_DAYS = 7;
+const dayGap = (from, to) => Math.round((Date.parse(to) - Date.parse(from)) / 86_400_000);
+
+/* Data-health summary for the site's honesty banner: which empirical metric series
+   have fallen far behind the freshest data (the WCL rDPS outage freezes several cuts
+   at 2026-07-09 while tiers/sims refresh nightly, so the header's "latest snapshot"
+   date over-promises for those series). Pure over the specs — no clock, no config;
+   the frontier is the newest asOf actually present. Returns null when there's nothing
+   to compare, or { latest, oldest, series[] } (series empty when all cuts are fresh). */
+export function dataHealth(specs) {
+  const newest = new Map(); // series label → newest asOf seen
+  const note = (label, asOf) => {
+    if (!asOf) return;
+    const cur = newest.get(label);
+    if (!cur || asOf > cur) newest.set(label, asOf);
+  };
+  for (const spec of specs) {
+    for (const m of spec.metrics ?? []) note(m.name, m.asOf);
+    if (spec.ptrDummy?.asOf) note("Dummy Dome rDPS (real-player medians)", spec.ptrDummy.asOf);
+  }
+  const dates = [...newest.values()].sort();
+  if (!dates.length) return null;
+  const latest = dates[dates.length - 1];
+  const series = [...newest.entries()]
+    .filter(([, asOf]) => dayGap(asOf, latest) > STALE_DAYS)
+    .map(([label, asOf]) => ({ label, asOf }))
+    .sort((a, b) => a.asOf.localeCompare(b.asOf) || a.label.localeCompare(b.label));
+  return { latest, oldest: series[0]?.asOf ?? null, series };
+}
+
 export function buildPayload({ specs, sources, scales, community, ptrBuilds, creatorTakes, encounterTiers, historySnapshot, historySnapshots }) {
   const scored = dummyDomeScores(metricRanks(fightLabels(decorateSpecs(specs, sources, scales))));
   // Prefer the full history (skip snapshots identical to the present state); fall back to
@@ -482,6 +516,7 @@ export function buildPayload({ specs, sources, scales, community, ptrBuilds, cre
     ptrBuilds: ptrBuilds ?? null,
     creatorTakes: creatorTakes ?? null,
     encounterTiers: encounterTiers ?? null,
+    dataHealth: dataHealth(decorated),
     meta: {
       specCount: specs.length,
       trackedCount: specs.filter(spec => spec.ptr).length,
