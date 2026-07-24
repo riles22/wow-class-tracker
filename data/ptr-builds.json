@@ -3,6 +3,36 @@
   "thread": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811",
   "builds": [
     {
+      "date": "2026-07-23",
+      "label": "Week of July 23rd — Class Bug Fixes & Tuning: mostly bug fixes across Hunter (BM/MM/Survival), Evoker (Preservation) and Monk, plus targeted tuning — Restoration Druid Regrowth -20%, Mistweaver Morning Breeze rebalance, Holy Paladin Venomous Abyss 4-set mana-cost change + healing buff, Discipline Priest Void Shield. PTR marked a release candidate.",
+      "forumPostNumber": 17,
+      "forumUrl": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/17",
+      "wowheadUrl": "https://www.wowhead.com/news=382249/patch-12-1-ptr-development-notes-class-bug-fixes",
+      "icyveinsUrl": null,
+      "specsAffected": [
+        "Restoration Druid",
+        "Preservation Evoker",
+        "Beast Mastery Hunter",
+        "Marksmanship Hunter",
+        "Survival Hunter",
+        "Brewmaster Monk",
+        "Mistweaver Monk",
+        "Holy Paladin",
+        "Discipline Priest"
+      ],
+      "highlights": [
+        "Restoration Druid — Regrowth healing reduced by 20%; fixed Abundance's bonus crit chance to Regrowth not working and the Abundance effect not being extended by Flourish.",
+        "Preservation Evoker — Fixed Consume Flame healing not being increased by Grace Period or similar effects; Fluttering Seedlings healing is now also increased by Titan's Gift.",
+        "Beast Mastery Hunter — Fixed Dark Ranger's Through The Eyes not properly increasing Withering Fire's damage.",
+        "Marksmanship Hunter — Multiple fixes: Spotter's Mark: Rapid Fire consumption, Aspect of the Hydra + Deathblow/Deathbringer interactions, and Explosive Shot's explosion incorrectly hitting its primary target.",
+        "Survival Hunter — Fixed Raptor Swipe's Sentinel's Mark targeting, Outland Venom not being applied by Pack Leader periodic effects, and Mastery: Spirit Bond double-affecting some Pack Leader summons.",
+        "Brewmaster Monk — Fixed Flurry Strikes' Physical damage not being correctly increased by Bring Me Another or the Venomous Abyss 4-set bonus.",
+        "Mistweaver Monk — Morning Breeze effectiveness reduced by 60%, adjusted down in accordance with the Mastery: Gust of Mist increases in Curse of Ula'tek (dev note: leaves the talent at a similar overall level).",
+        "Holy Paladin — The Venomous Abyss 4-set bonus now additionally increases Holy Light's mana cost by 60% (to curb over-efficiency); All healing increased by 5% to compensate.",
+        "Discipline Priest — Apex Talent Master the Darkness: Void Shield absorption increased by 3%."
+      ]
+    },
+    {
       "date": "2026-07-21",
       "label": "Week of July 21st — Class Tuning & Tier Sets: PvE tuning for Death Knight (Blood/Unholy + San'layn), Demon Hunter (Havoc/Devourer/Vengeance), Druid (Balance/Feral), Evoker (Augmentation/Devastation), Hunter (BM/MM rework/Survival + Hunter's Mark reverted to 1 target), Mage (Arcane), Paladin (Protection/Retribution), Rogue (Assassination/Outlaw/Subtlety), Restoration Shaman rework, Warlock (Affliction rework/Demonology), Warrior (Arms/Fury/Protection); plus Venomous Abyss tier-set changes and Season 2 dungeon testing (July 21–27).",
       "forumPostNumber": 16,

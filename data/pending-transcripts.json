@@ -2,32 +2,53 @@
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
   "videos": [
     {
-      "id": "0mtKobeslFA",
-      "creator": "izen (Izenhart)",
-      "title": "12.1 PTR - Specs Balance Tuning #7 | It's Almost All Buffs!",
-      "published": "2026-07-22",
-      "queuedAt": "2026-07-23"
-    },
-    {
-      "id": "32hM_eLonR4",
+      "id": "rVQpKFFfMso",
       "creator": "MadSkillzzTV",
-      "title": "12.1 PTR Healer M+ Testing (Big Resto Shaman Changes & More)",
-      "published": "2026-07-22",
-      "queuedAt": "2026-07-23"
+      "title": "12.1 PTR Finding Best M+ Healer (Monk/Shaman/Priest/Evoker) | NEW UI",
+      "published": "2026-07-23",
+      "queuedAt": "2026-07-24"
     },
     {
-      "id": "beBJZnCXF0s",
-      "creator": "Kesslive",
-      "title": "Weekly 12.1 PTR Evoker Update",
-      "published": "2026-07-22",
-      "queuedAt": "2026-07-23"
+      "id": "6G_Sg4xJol4",
+      "creator": "izen (Izenhart)",
+      "title": "This Hunter's Mark New(Old) Change Is Stealing Your Raid Spots! | Midnight Season 2 PTR",
+      "published": "2026-07-23",
+      "queuedAt": "2026-07-24"
     },
     {
-      "id": "C82WusrvQ1E",
+      "id": "-G4jfNvelp0",
       "creator": "Kalamazi",
-      "title": "NEW Warlock PTR Changes! Demo Nerfed & Aff Buffed",
-      "published": "2026-07-22",
-      "queuedAt": "2026-07-23"
+      "title": "Mythic Raid Testing Yeeee",
+      "published": "2026-07-24",
+      "queuedAt": "2026-07-24"
+    },
+    {
+      "id": "KMrletaO_a8",
+      "creator": "AutomaticJak",
+      "title": "PTR RSham Rework then Disc Key | UI in description!",
+      "published": "2026-07-23",
+      "queuedAt": "2026-07-24"
+    },
+    {
+      "id": "ayJrRKgwX0A",
+      "creator": "YoDaTV",
+      "title": "Investigating the Rumours of a Blood DK Meta on Midnight Season 2 PTR!",
+      "published": "2026-07-24",
+      "queuedAt": "2026-07-24"
+    },
+    {
+      "id": "YbjvOhxVrw0",
+      "creator": "YoDaTV",
+      "title": "EMERGENCY TIERLIST UPDATE! Mistweaver NERFED and Holy Paladin BUFFED!",
+      "published": "2026-07-24",
+      "queuedAt": "2026-07-24"
+    },
+    {
+      "id": "L-Y9k2YL34M",
+      "creator": "Supatease",
+      "title": "12.1 Class Update / Blizzard Employee FIRED",
+      "published": "2026-07-24",
+      "queuedAt": "2026-07-24"
     }
   ]
 }

@@ -530,7 +530,8 @@
       "patchContext": "12.1 PTR",
       "sentiment": "buff",
       "claim": "Kesslive is a big fan of Augmentation's 12.1 two-set (Upheaval cooldown reduced by 10 seconds, stacking with Eruption-based CDR), expecting frequent quadruple Bombardments and heavy Breath of Eons cooldown reduction that he calls amazing for Mythic+.",
-      "url": "https://youtu.be/LHrpY0eiPBI?t=61"
+      "url": "https://youtu.be/LHrpY0eiPBI?t=61",
+      "superseded": true
     },
     {
       "class": "Evoker",
@@ -540,7 +541,8 @@
       "patchContext": "12.1 PTR",
       "sentiment": "neutral",
       "claim": "He calls the reduction of duplicated Upheavals' knock-up/stopping power a fair nerf to something that was a little overpowered, and since it is the only apex-talent change so far, Augmentation's core duplication gameplay loop and power remain intact.",
-      "url": "https://youtu.be/LHrpY0eiPBI?t=308"
+      "url": "https://youtu.be/LHrpY0eiPBI?t=308",
+      "superseded": true
     },
     {
       "class": "Evoker",
@@ -550,7 +552,8 @@
       "patchContext": "12.1 PTR",
       "sentiment": "nerf",
       "claim": "He is not excited about Devastation's 12.1 tier set at all, criticizing Blizzard for once again buffing Eternity Surge through tier bonuses instead of fixing an ability that players only cast at rank one, and notes week-one PTR Devastation is even behind Preservation on single-target.",
-      "url": "https://youtu.be/LHrpY0eiPBI?t=253"
+      "url": "https://youtu.be/LHrpY0eiPBI?t=253",
+      "superseded": true
     },
     {
       "class": "Evoker",
@@ -560,7 +563,8 @@
       "patchContext": "12.1 PTR",
       "sentiment": "neutral",
       "claim": "He is cautiously optimistic about the rank-three apex rework that ends Dragonrage with casts of the new Unbound Flame (essentially Engulf returning), saying it finally gives the cooldown something to press but may feel clunky, particularly for Scalecommander, and he wanted a deeper rework of the spec's issues.",
-      "url": "https://youtu.be/LHrpY0eiPBI?t=611"
+      "url": "https://youtu.be/LHrpY0eiPBI?t=611",
+      "superseded": true
     },
     {
       "class": "Warrior",
@@ -1542,7 +1546,7 @@
       "patchContext": "12.1 PTR — Season 2 M+ testing",
       "claim": "MadSkillzz ranks Totemic Resto Shaman in A tier — lots of passive healing and damage, a healing-rain tier set (whose RNG procs he dislikes and wishes were partly guaranteed like Resto Druid's Genesis) — and says he'd be very surprised if Totemic Resto Shaman isn't meta again as part of the melee/physical stack comps thanks to Bloodlust, Skyfury and range interrupt.",
       "url": "https://youtu.be/I_nFVVmv610?t=1421",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Evoker",
@@ -1751,7 +1755,7 @@
       "patchContext": "12.1 PTR — post-raid-testing tuning",
       "claim": "Kalamazi says a 5% aura nerf snuck in last week alongside the 4-set rework (6% damage to the Echo of Sargeras target) — roughly a wash in single target where that buff stays up, but a real loss in the spread/Hellcaller cleave this tier rewards (In-tomb Sentinels, Coiled Altar phases 2-3) because Echo of Sargeras no longer procs on both Havoc targets simultaneously. He reads Destro as having good spread-cleave profiles for the tier's fights yet doing markedly less damage than DKs, Hunters, Boomkin and Shadow, and wants the aura nerf reverted with a small (~3-4%) tier-set tune-down.",
       "url": "https://youtu.be/okWbk283nd0?t=1092",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Rogue",
@@ -1883,6 +1887,50 @@
       "patchContext": "12.1 PTR (2026-07-21 build)",
       "claim": "Supatease likes the Affliction rework in this build: Nocturnal Yield is removed with its free-Seed functionality folded into Shard Instability, and a new Impetus Wrath talent adds Haunt-synergy priority damage (Shadow Bolt/Drain Soul/Malefic Grasp +10%, 20% under Haunt). He calls it a fun update with good Haunt synergies.",
       "url": "https://youtu.be/GIMxSexKfis?t=689",
+      "superseded": false
+    },
+    {
+      "class": "Evoker",
+      "spec": "Augmentation",
+      "creator": "Kesslive",
+      "date": "2026-07-22",
+      "sentiment": "buff",
+      "patchContext": "12.1 PTR (2026-07-22, post-build tuning)",
+      "claim": "Kesslive is cautiously positive on the latest Augmentation changes: a flat 3% aura buff plus a Wing Leader buff (Scale Commander's Breath of Eons cooldown reduction now 1.5s per target struck, was 1s) brings 'double dupe' back on the table in AoE, and the Season 1 two-set no longer extends Eruption so the two-piece/two-piece setup is finally dead. He notes Scale Commander was ~7.7% behind Chrono Warden in all content after the earlier Wing Leader nerf and hopes this closes the AoE gap; he still expects Aug raid performance to be good (especially Chrono Warden Aug), calling it a welcome step in the right direction while he re-tests.",
+      "url": "https://youtu.be/beBJZnCXF0s?t=260",
+      "superseded": false
+    },
+    {
+      "class": "Evoker",
+      "spec": "Devastation",
+      "creator": "Kesslive",
+      "date": "2026-07-22",
+      "sentiment": "nerf",
+      "patchContext": "12.1 PTR (2026-07-22, post-build tuning)",
+      "claim": "Kesslive is frustrated and disappointed with Devastation: while it got some buffs after being caught in the Aug/Havoc rebalance, he feels the PTR cycles keep handing Devastation the same Eternity Surge tier set every season with no fundamental changes to the spec itself, and calls Dev 'overly disappointing' as a result.",
+      "url": "https://youtu.be/beBJZnCXF0s?t=464",
+      "superseded": false
+    },
+    {
+      "class": "Warlock",
+      "spec": "Destruction",
+      "creator": "Kalamazi",
+      "date": "2026-07-22",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR (2026-07-22, post-build tuning)",
+      "claim": "In this build's testing Kalamazi found Destruction 'surprisingly okayish' — the best of the three Warlock specs in single target and helped by the many havoc-cleave fights in the raid — but stresses all three lock specs feel middling/bottom-mid in single target and the class needs meaningful buffs; his worry is that Blizzard sees Destro sitting above the other locks and nerfs it rather than bringing the class up.",
+      "url": "https://youtu.be/C82WusrvQ1E?t=960",
+      "superseded": false
+    },
+    {
+      "class": "Shaman",
+      "spec": "Restoration",
+      "creator": "MadSkillzzTV",
+      "date": "2026-07-22",
+      "sentiment": "buff",
+      "patchContext": "12.1 PTR — Season 2 M+ testing",
+      "claim": "After the build's big Resto Shaman changes (healing-rain buffs incl. Swelling Tides' 6-target healing rain, a large Farseer catch-up buff, and buffed riptide) MadSkillzz is enthusiastic — he thinks Resto Shaman 'might secretly be really nice in raid' and is back as a raid healer. He's clear the buffs read as more raid-impactful than M+ (Swelling Tides is a raid-only change), and in M+ it feels better but he doesn't think it's the clear best; with raid testing over he cautions the raid read is partly guesswork.",
+      "url": "https://youtu.be/32hM_eLonR4?t=983",
       "superseded": false
     }
   ],
@@ -2072,7 +2120,7 @@
       "note": "izen reads Unholy as staying meta and strong into S2, but sees it as the less exciting DK — its PTR changes look long on paper yet barely alter the playstyle, so fewer players are testing it versus the more heavily reworked Frost.",
       "patchContext": "Season 2 PTR — M+ outlook",
       "url": "https://youtu.be/kue_ZtjTSr8?t=209",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Mage",
@@ -2512,7 +2560,7 @@
       "note": "izen has Devourer DH among the most popular M+ specs after its recent +10% buff, edging out Havoc. But its huge burst-window identity is much diminished from live — heavy mastery and Collapsing Star nerfs pushed many players off the Annihilator/collapsing-star build (especially in raid); it stays competitive in M+ where burst windows still pay off, just far less dominant than on live.",
       "patchContext": "Season 2 PTR — M+ outlook",
       "url": "https://youtu.be/vK-qyvXOVYM?t=989",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Druid",
@@ -2589,7 +2637,7 @@
       "note": "The standout of this round of Mythic raid testing: izen reads Elemental as the overall best DPS so far — top 10 on every tested boss and top 5 on all but one. He stresses it performs regardless of damage profile, excelling on pure single-target fights (Coiled Altar, Vashnik) as well as spread/AoE ones, which he attributes to strong tuning rather than a favorable profile.",
       "patchContext": "Season 2 PTR — raid testing outlook",
       "url": "https://youtu.be/m5lEbh4lrHA?t=190",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Druid",
@@ -2600,7 +2648,7 @@
       "note": "A surprise strong performer izen didn't expect to highlight: Balance sits top-5/6 across both the spread-cleave fights and the pure single-target Coiled Altar. He frames it (with Elemental) as tuned highly regardless of profile — its multi-dotting wins on spread fights while it still ranks at the top of single target.",
       "patchContext": "Season 2 PTR — raid testing outlook",
       "url": "https://youtu.be/m5lEbh4lrHA?t=193",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Mage",
@@ -2611,7 +2659,7 @@
       "note": "izen reads Arcane as one of the best-tuned DPS this cycle — very strong from 1 up to 4+ targets (Arcane Barrage splash, Prismatic Vault splash, the rebuffed reusable Arcane Missiles as an AoE button) and, crucially, also the best of the mages in single target. He explicitly places it above Frost Mage right now.",
       "patchContext": "Season 2 PTR — raid testing outlook",
       "url": "https://youtu.be/m5lEbh4lrHA?t=412",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Demon Hunter",
@@ -2644,7 +2692,7 @@
       "note": "One of the few melee izen highlights in a caster-favored meta: Arms posts two of the better overall results despite being surrounded by casters, thanks to ~86% boss (single-target) damage and excellent, high-uptime two-target cleave. Caveat: Arms received no tuning in the latest round — this is standing strength, not a new buff.",
       "patchContext": "Season 2 PTR — raid testing outlook",
       "url": "https://youtu.be/m5lEbh4lrHA?t=176",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Paladin",
@@ -2765,6 +2813,83 @@
       "note": "izen points viewers to Feral as one of the disappointing results in the testing data — a weak showing across the tested bosses.",
       "patchContext": "Season 2 PTR — raid testing outlook",
       "url": "https://youtu.be/m5lEbh4lrHA?t=1097",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Balance",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-22",
+      "sentiment": "positive",
+      "note": "izen calls Balance one of the standout raid-testing performers of the PTR (his 'best five-ish' alongside Devourer, Arcane, Elemental and Arms), noting it has flown under the radar and been helped by Guardian and Resto Druid falling out of favor. The Stellar Amplification change nets out to a small nerf but he considers it philosophically good (capping the multi-target tab-target degeneracy); Balance stays strong.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/0mtKobeslFA?t=453",
+      "superseded": false
+    },
+    {
+      "class": "Mage",
+      "spec": "Arcane",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-22",
+      "sentiment": "mixed",
+      "note": "izen frames Arcane's ~2% Prismatic Bolt splash nerf as deserved: Arcane was one of the PTR all-stars in both performance and popularity and was placing top-three/top-four in the latest raid testing. He expects it to remain strong after only a light trim, with the bigger unknown being how much the Reflection of Radiance proc-rate nerf hits M+.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/0mtKobeslFA?t=1068",
+      "superseded": false
+    },
+    {
+      "class": "Shaman",
+      "spec": "Elemental",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-22",
+      "sentiment": "positive",
+      "note": "izen again lists Elemental among the outstanding raid-testing results of the PTR (his standout group of Devourer, Arcane, Elemental, Balance and Arms), continuing to read it as one of the stronger raid DPS specs going into Season 2.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/0mtKobeslFA?t=485",
+      "superseded": false
+    },
+    {
+      "class": "Warrior",
+      "spec": "Arms",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-22",
+      "sentiment": "positive",
+      "note": "izen keeps Arms in his standout raid-testing group. The cleave-nerf / Dreadnought-buff change nets out roughly neutral-to-slightly-positive (he's puzzled Blizzard talked about spreading damage off cleave but only really buffed Dreadnought), so Arms holds its strong raid standing.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/0mtKobeslFA?t=1535",
+      "superseded": false
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-22",
+      "sentiment": "positive",
+      "note": "izen notes Devourer remains one of the most popular M+ picks and kept gapping Havoc across single-target, two-target cleave and spread-dot profiles in raid testing. The build's Collapsing Star buff / Eradicate + Annihilator nerf is a rework attempt that makes Collapsing Star usable again — especially in M+, where frequent pull-by-pull burst windows suit it — so he stays positive on Devourer for keys.",
+      "patchContext": "Season 2 PTR — M+ outlook",
+      "url": "https://youtu.be/0mtKobeslFA?t=262",
+      "superseded": false
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-22",
+      "sentiment": "negative",
+      "note": "izen says Unholy's AoE-focused buffs (Epidemic/Graveyard/Virulent Plague/Putrefy, ~6-7% AoE) still leave it lagging comfortably behind Frost DK, which was ahead in the raid testing and far more popular in M+ keys — he points to how hard it is to even find Unholy logs in current M+ testing.",
+      "patchContext": "Season 2 PTR — M+ outlook",
+      "url": "https://youtu.be/0mtKobeslFA?t=178",
+      "superseded": false
+    },
+    {
+      "class": "Shaman",
+      "spec": "Restoration",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-22",
+      "sentiment": "positive",
+      "note": "izen reads Resto Shaman as one of the more popular healers in the PTR (behind Disc and Mistweaver) and a consistent top-four in the latest raid-testing results after prior buffs. This build only slightly trims its increasingly strong healing rain (bonus rain 8s not 10s, absorb -30%) while adding riptide buffs and a big Farseer catch-up, so his raid read stays positive.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/0mtKobeslFA?t=1247",
       "superseded": false
     }
   ]
