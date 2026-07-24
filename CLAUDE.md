@@ -291,7 +291,10 @@ test/     normalize · validate · render · build · apply-metrics · apply-rat
           check-refresh · community-overrides · digest · fetch-transcripts · fetch-wcl
 dist/     index.html  (generated — open directly in a browser)
 docs/     working notes (finder-audit.md · security-audit-2026-07.md ·
-          portfolio-audit-2026-07-18.md — audit dispositions)
+          cloud-routine.md · portfolio-audit-2026-07-18.md · audit-2026-07-23.md ·
+          audit-2026-07-24.md — audit dispositions. Read the NEWEST audit before
+          proposing work: its "Still open" and "Leave alone" sections record what has
+          already been decided, and re-litigating them wastes a run.)
 legacy/   original single-file tracker (pre-conversion reference)
 .github/  workflows/deploy.yml (build+deploy Pages on push) · workflows/ci.yml (tests on
           every push) · workflows/freshness.yml (daily staleness heartbeat → alert issue) ·
@@ -358,8 +361,12 @@ new takes+metaNotes, new builds, verdict changes, manifest health) and comments 
 on the pinned "Nightly digest" issue — GitHub notification mail is the owner's
 daily change email. A daily
 heartbeat (`freshness.yml`) alerts via a single auto-closing issue + red run when the
-last refresh signal exceeds 36h (full-timestamp precision via the manifest's
-`startedAt`) or a source exceeds its max age. The agent step's only secret is
+last refresh signal exceeds `maxRunAgeHours` in `data/required-sources.json` (30h since
+2026-07-23; that file is the single source of truth for the number) or a source exceeds
+its max age. **Caveat, 2026-07-24 audit finding A1:** the history-snapshot proof-of-life
+signal is date-only, so a snapshot dated yesterday always evaluates to exactly 24h and
+suppresses the check — a *single* missed night is currently undetectable regardless of
+the threshold. Fix the signal precedence before trusting the number. The agent step's only secret is
 `CLAUDE_CODE_OAUTH_TOKEN` (~1-year validity — renew), the documented inherent
 residual in `docs/security-audit-2026-07.md`. YouTube transcripts may be
 IP-blocked on runners; those videos queue as "pending" and catch up in local runs. The
