@@ -48,10 +48,15 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
   numbers. (2026-07-21 stall root cause: an agent looked for popularity in `tierList`,
   didn't find it, and left ALL four numeric series stale at 07-20 rather than refreshing
   the ones it could — popularity is and was cleanly in `specRankingsSection`, verified by
-  runner probe 2026-07-23.) Refresh every run; **emit a manifest row for BOTH `archon-metrics`
-  (the throughput series) and `archon-popularity`** (now gated in required-sources.json — a
-  missing row fails the publish). If a series ever genuinely can't be parsed, mark just
-  that requirement `parse_error` with a detail; never leave the others stale by coupling.
+  runner probe 2026-07-23.) Refresh every run; **emit a manifest row for ALL FOUR Archon
+  numeric requirements — `archon-metrics` (95th-pct DPS, raid), `archon-hps` (95th-pct HPS,
+  raid healers), `archon-mplus-score` (M+ score 95th pct) and `archon-popularity`** — each
+  is separately gated in required-sources.json, and a missing row fails the publish. They
+  are split deliberately: one combined row would hide which of the four series failed.
+  (`archon-hps` and `archon-mplus-score` were added by the 2026-07-24 audit, D4 — 47
+  published rows had neither a date gate nor a row floor and could vanish silently.)
+  If a series ever genuinely can't be parsed, mark just that requirement `parse_error`
+  with a detail; never leave the others stale by coupling.
 - **Murlok** meta pages (plain GET; **r.jina.ai does NOT work on murlok**):
   "Top-50 avg M+ rating (ceiling)" — it is the avg rating of each spec's own top-50
   players, NOT popularity; keep the "(ceiling)" in the name.
@@ -92,6 +97,15 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
 
 ## Gotchas
 
+- **Bumping a `snapshot` date in `sources.json` no longer makes a source look fresh.**
+  Since the 2026-07-24 audit (D3) the staleness gate for murlok, mythicstats,
+  simulationcraft, bloodmallet and the WCL cuts reads the **data's own coverage date** —
+  the min-th-freshest `asOf` across the actual rows (or `fightProfile.asOf` for sims) —
+  not the page snapshot an agent writes by hand. Before that, rewriting 106 metric rows
+  to 53 days stale while leaving the snapshots at today produced **zero** violations from
+  either gate. Practical consequence: if a parse fails, say so in the manifest row and
+  leave the data alone — you cannot paper over it, and you no longer need to, because the
+  gate now measures the thing that matters.
 - Bloodmallet class names are **snake_case** (`demon_hunter`, `beast_mastery`); the
   `targets` chart type and `hecticaddcleave` fight style return errors — use
   `talent_target_scaling`. Confirm `simc_settings.tier == "MID1"` on every chart.

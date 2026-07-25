@@ -143,10 +143,15 @@ export function digestMarkdown({ oldPayload, newPayload, manifest, runUrl, oldPe
     lines.push(...cap(notes, 8, n => `- **${n.creator}** on ${n.spec} ${n.class} (${n.sentiment}, ${n.patchContext}): ${String(n.note ?? "").slice(0, 120)}`), "");
   }
   const videoChange = vids.distilled.length || vids.skipped.length || vids.queued.length;
-  if (!moves.length && !takes.length && !notes.length && !builds.length && !verdicts.length && !videoChange) {
-    lines.push("Quiet run: every source re-verified fresh — no tier moves, no new takes, no new builds. (That's honest stability, not a stuck pipeline.)");
-  }
   const degraded = (manifest?.sources ?? []).filter(r => r.result && r.result !== "success");
+  if (!moves.length && !takes.length && !notes.length && !builds.length && !verdicts.length && !videoChange) {
+    // "Every source re-verified fresh" was emitted on ANY no-change run, including one
+    // where nothing arrived at all — the most comforting possible wording for the least
+    // healthy possible night (audit 2026-07-24, A4). Say which it actually was.
+    lines.push(degraded.length
+      ? `Quiet run — but ${degraded.length} of ${manifest.sources.length} source${degraded.length === 1 ? " was" : "s were"} degraded this run (${degraded.map(r => r.source).join(", ")}). The tracker did not move because that data did not arrive, not because the field is stable.`
+      : "Quiet run: every source re-verified fresh — no tier moves, no new takes, no new builds. (That's honest stability, not a stuck pipeline.)");
+  }
   if (degraded.length) lines.push(`_Health: ${degraded.length} source${degraded.length === 1 ? "" : "s"} degraded (${degraded.map(r => r.source).join(", ")}) — details in the run manifest._`);
   return lines.join("\n").replace(/\n{3,}/g, "\n\n").trim();
 }

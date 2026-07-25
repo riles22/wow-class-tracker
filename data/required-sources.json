@@ -1,6 +1,7 @@
 {
-  "comment": "The nightly refresh contract (2026-07-14, from the external security audit; tightened by the same-day re-audit). Every requirement here must have a row in data/run-manifest.json each run \u2014 src/check-refresh.mjs enforces it in the publish gate (--manifest) and the heartbeat (--age). maxAgeDays = staleness alert threshold for the committed data (alerts fire even for EXPLAINED staleness \u2014 visibility, not blame). rows.min = catastrophic-shrink floor, set ~60-65% of the 2026-07-14 real counts; raise/lower only with a reviewed reason. Date probes: pages = oldest matching sources.json page snapshot (a lagging page is a finding); metrics/ptrDummy = the COVERAGE date, i.e. the min-th-freshest asOf (min = date.minFresh, else rows.min, else 1) \u2014 one fresh row cannot vouch for a cut whose other role cuts/specs stayed old. evidence: \"wcl\" marks requirements cross-checked against wcl-fetch/evidence.json (written by the deterministic credentialed fetch step, uploaded before the agent runs): a success row needs evidence-landed rows, not just the agent's word. wcl-dummy-raw floors were tightened to min 60 + maxAgeDays 10 on 2026-07-17 after the first verified landing (103 rows).",
-  "maxRunAgeHours": 30,
+  "comment": "The nightly refresh contract (2026-07-14, from the external security audit; tightened by the same-day re-audit). Every requirement here must have a row in data/run-manifest.json each run \u2014 src/check-refresh.mjs enforces it in the publish gate (--manifest) and the heartbeat (--age). maxAgeDays = staleness alert threshold for the committed data (alerts fire even for EXPLAINED staleness \u2014 visibility, not blame). rows.min = catastrophic-shrink floor, set ~60-65% of the 2026-07-14 real counts; raise/lower only with a reviewed reason. Date probes: pages = oldest matching sources.json page snapshot (a lagging page is a finding); metrics/ptrDummy = the COVERAGE date, i.e. the min-th-freshest asOf (min = date.minFresh, else rows.min, else 1) \u2014 one fresh row cannot vouch for a cut whose other role cuts/specs stayed old. evidence: \"wcl\" marks requirements cross-checked against wcl-fetch/evidence.json (written by the deterministic credentialed fetch step, uploaded before the agent runs): a success row needs evidence-landed rows, not just the agent's word. wcl-dummy-raw floors were tightened to min 60 + maxAgeDays 10 on 2026-07-17 after the first verified landing (103 rows). 2026-07-24 audit (D3/D4/N5): date probes for murlok, mythicstats, simulationcraft, bloodmallet and the three page-probed WCL cuts now read the DATA's own coverage date rather than the agent-written sources.json page snapshot \u2014 before this, rewriting 106 metric rows to 53 days stale while leaving snapshots at today produced zero violations from either gate. New probe type fightProfiles covers spec.fightProfile.asOf (sims live outside spec.metrics). encounterTiers ROW probes now count tier rows, not encounters: a partial Archon parse keeps all 17 encounters and empties their tier maps, so the old probe scored 17 while 92.5% of the surface was gone. archon-hps and archon-mplus-score were added \u2014 47 published rows previously had neither a date gate nor a row floor. minSuccessfulSources = catastrophe floor: a run where essentially nothing arrived must not publish as a quiet night (healthy runs sit at 17-19 of 25).",
+  "maxRunAgeHours": 28,
+  "minSuccessfulSources": 12,
   "maxRowDropPct": 0.25,
   "anomaly": {
     "maxTwoBandMoves": 6,
@@ -75,7 +76,7 @@
       },
       "rows": {
         "type": "encounterTiers",
-        "min": 12
+        "min": 600
       }
     },
     {
@@ -105,6 +106,38 @@
         "type": "metrics",
         "source": "archon",
         "namePattern": "^95th pct DPS \\(Mythic",
+        "min": 25
+      }
+    },
+    {
+      "key": "archon-hps",
+      "label": "Archon 95th-pct HPS (raid, healers)",
+      "maxAgeDays": 5,
+      "date": {
+        "type": "metrics",
+        "source": "archon",
+        "namePattern": "^95th pct HPS \\(Mythic"
+      },
+      "rows": {
+        "type": "metrics",
+        "source": "archon",
+        "namePattern": "^95th pct HPS \\(Mythic",
+        "min": 5
+      }
+    },
+    {
+      "key": "archon-mplus-score",
+      "label": "Archon M+ score (95th pct)",
+      "maxAgeDays": 5,
+      "date": {
+        "type": "metrics",
+        "source": "archon",
+        "namePattern": "^M\\+ score \\(95th pct\\)$"
+      },
+      "rows": {
+        "type": "metrics",
+        "source": "archon",
+        "namePattern": "^M\\+ score \\(95th pct\\)$",
         "min": 25
       }
     },
@@ -145,9 +178,9 @@
       "maxAgeDays": 10,
       "evidence": "wcl",
       "date": {
-        "type": "pages",
-        "sourceId": "warcraftlogs",
-        "labelIncludes": "zone 46"
+        "type": "metrics",
+        "source": "warcraftlogs",
+        "namePattern": "^Median .*\\(Mythic"
       },
       "rows": {
         "type": "metrics",
@@ -162,9 +195,9 @@
       "maxAgeDays": 10,
       "evidence": "wcl",
       "date": {
-        "type": "pages",
-        "sourceId": "warcraftlogs",
-        "labelIncludes": "zone 47"
+        "type": "metrics",
+        "source": "warcraftlogs",
+        "namePattern": "^Median .*\\(M\\+, all dungeons"
       },
       "rows": {
         "type": "metrics",
@@ -196,9 +229,9 @@
       "maxAgeDays": 10,
       "evidence": "wcl",
       "date": {
-        "type": "pages",
-        "sourceId": "warcraftlogs",
-        "labelIncludes": "zone 56"
+        "type": "metrics",
+        "source": "warcraftlogs",
+        "namePattern": "12\\.1 PTR M\\+ testing"
       },
       "rows": {
         "type": "metrics",
@@ -279,8 +312,9 @@
       "label": "Murlok top-50 M+ rating ceilings",
       "maxAgeDays": 5,
       "date": {
-        "type": "pages",
-        "sourceId": "murlok"
+        "type": "metrics",
+        "source": "murlok",
+        "namePattern": "Top-50 avg M\\+ rating"
       },
       "rows": {
         "type": "metrics",
@@ -294,9 +328,8 @@
       "label": "Bloodmallet target-count sims / fight profiles",
       "maxAgeDays": 5,
       "date": {
-        "type": "pages",
-        "sourceId": "bloodmallet",
-        "labelIncludes": "Target-count"
+        "type": "fightProfiles",
+        "source": "bloodmallet"
       },
       "rows": {
         "type": "fightProfiles",
@@ -309,9 +342,9 @@
       "label": "SimC nightly MID1 raid report",
       "maxAgeDays": 10,
       "date": {
-        "type": "pages",
-        "sourceId": "simulationcraft",
-        "labelIncludes": "nightly report"
+        "type": "metrics",
+        "source": "simulationcraft",
+        "namePattern": "SimC nightly"
       },
       "rows": {
         "type": "metrics",
@@ -325,8 +358,9 @@
       "label": "Mythicstats top-2000 keys representation",
       "maxAgeDays": 5,
       "date": {
-        "type": "pages",
-        "sourceId": "mythicstats"
+        "type": "metrics",
+        "source": "mythicstats",
+        "namePattern": "Top-2000 keys"
       },
       "rows": {
         "type": "metrics",

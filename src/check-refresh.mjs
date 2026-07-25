@@ -88,6 +88,13 @@ export function probeDate(req, data) {
   }
   if (p.type === "metrics") return coverage(matchMetrics(p, data.specs).map(m => m.asOf).filter(Boolean).sort());
   if (p.type === "ptrDummy") return coverage(data.specs.map(s => s.ptrDummy?.asOf).filter(Boolean).sort());
+  // Sims live on spec.fightProfile, not spec.metrics, so a "metrics" probe can't see
+  // them and bloodmallet was left reading its own page snapshot (audit 2026-07-24, D3).
+  if (p.type === "fightProfiles") {
+    return coverage(data.specs
+      .filter(s => p.source == null || s.fightProfile?.source === p.source)
+      .map(s => s.fightProfile?.asOf).filter(Boolean).sort());
+  }
   if (p.type === "encounterTiers") return data.encounterTiers?.asOf ?? null;
   throw new Error(`unknown date probe type "${p.type}" (${req.key})`);
 }
@@ -106,7 +113,13 @@ export function probeRows(req, data) {
   if (p.type === "ptrDummy") return data.specs.filter(s => s.ptrDummy != null).length;
   if (p.type === "survivability") return data.specs.filter(s => s.survivability != null).length;
   if (p.type === "encounterTiers") {
-    return Object.keys(data.encounterTiers?.raid ?? {}).length + Object.keys(data.encounterTiers?.mplus ?? {}).length;
+    // Count TIER ROWS, not encounters. Counting encounters made the floor blind to the
+    // thing that actually breaks: a partial Archon parse keeps all 17 encounters and
+    // empties their tier maps. Truncating every encounter to 3 specs (680 -> 51 rows,
+    // 92.5% of the surface) passed every gate green (audit 2026-07-24, N5).
+    const count = bucket => Object.values(data.encounterTiers?.[bucket] ?? {})
+      .reduce((n, e) => n + Object.keys(e?.tiers ?? {}).length, 0);
+    return count("raid") + count("mplus");
   }
   throw new Error(`unknown rows probe type "${p.type}" (${req.key})`);
 }
@@ -210,6 +223,17 @@ export function checkManifest(config, manifest, data, now, evidence = null) {
     }
   }
   for (const key of rows.keys()) notes.push(`run-manifest: row "${key}" matches no requirement (stale key after a config change?)`);
+  // A night where nothing at all arrived is currently indistinguishable from a healthy
+  // quiet night: every row can be an honest "unreachable" and the gate passes, because
+  // no rule says any source must actually have advanced (audit 2026-07-24, A4). Healthy
+  // runs sit around 17-19 of 25, so the floor is a catastrophe detector, not a quality
+  // bar — it fires only when the run brought back essentially nothing.
+  if (config.minSuccessfulSources != null) {
+    const ok = (manifest.sources ?? []).filter(r => r.result === "success").length;
+    if (ok < config.minSuccessfulSources) {
+      errors.push(`run-manifest: only ${ok} source${ok === 1 ? "" : "s"} succeeded, below the ${config.minSuccessfulSources} floor — this run brought back almost nothing; publishing it would present a failed night as a quiet one`);
+    }
+  }
   return { errors, degraded, notes };
 }
 
@@ -259,8 +283,19 @@ export function checkFreshness(config, manifest, data, now) {
   } else if (manifest?.run && ISO_DATE.test(manifest.run)) {
     signals.push({ label: `manifest run ${manifest.run}`, hours: ageDays(nowDate, manifest.run) * 24 });
   }
+  // The snapshot signal exists so a LOCAL refresh (which snapshots per the hard rule)
+  // isn't read as a dead nightly — so it only has a job to do when it is NEWER than the
+  // manifest. Pushed unconditionally it was strictly harmful: a date-only snapshot is
+  // evaluated at midnight grain, so one dated yesterday always scores exactly 24h and
+  // beat any startedAt older than that, capping the measured age at 24h and making a
+  // SINGLE missed night undetectable at any threshold (audit 2026-07-24, A1 — the real
+  // age at the 17:23 heartbeat after one miss is ~28.6h). Comparing dates keeps the
+  // legacy date-only `run` fallback working when startedAt is absent.
   const snap = data.historySnapshots?.[0]?.date;
-  if (snap && ISO_DATE.test(snap)) signals.push({ label: `history snapshot ${snap}`, hours: ageDays(nowDate, snap) * 24 });
+  const manifestDate = dateOf(manifest?.startedAt ?? manifest?.run ?? "");
+  if (snap && ISO_DATE.test(snap) && (!ISO_DATE.test(manifestDate) || snap > manifestDate)) {
+    signals.push({ label: `history snapshot ${snap}`, hours: ageDays(nowDate, snap) * 24 });
+  }
 
   const freshest = signals.length ? signals.reduce((a, b) => (b.hours < a.hours ? b : a)) : null;
   if (!freshest) {

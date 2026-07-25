@@ -65,6 +65,24 @@ test("digestMarkdown: quiet run says so honestly; degraded sources footer appear
   assert.ok(md.includes("1 source degraded (wcl-ptr-raid)"));
 });
 
+test("digestMarkdown: a quiet run on degraded sources does not claim everything was re-verified (audit 2026-07-24, A4)", () => {
+  const p = payload([spec("Rogue", "Outlaw", { consensus: { raid: { tier: "A" }, mplus: { tier: "A" } } })]);
+  const md = digestMarkdown({ oldPayload: p, newPayload: p,
+    manifest: { summary: "Nothing landed.", sources: [
+      { source: "icyveins", result: "unreachable" },
+      { source: "method", result: "unreachable" },
+      { source: "wowhead", result: "success" }] } });
+  // the comforting wording is exactly wrong on the least healthy possible night
+  assert.ok(!md.includes("every source re-verified fresh"), md);
+  assert.ok(md.includes("2 of 3 sources were degraded"), md);
+  assert.ok(md.includes("did not move because that data did not arrive"), md);
+
+  // a genuinely clean quiet night keeps the reassurance
+  const clean = digestMarkdown({ oldPayload: p, newPayload: p,
+    manifest: { summary: "All fresh.", sources: [{ source: "icyveins", result: "success" }] } });
+  assert.ok(clean.includes("every source re-verified fresh"), clean);
+});
+
 test("videoActivity classifies cleared queue entries by whether new takes/notes cite them", () => {
   const oldPending = { videos: [{ id: "aaa111", creator: "Obli", title: "DK in 12.1" }, { id: "bbb222", creator: "Supatease", title: "PvP tuning" }] };
   const newPending = { videos: [{ id: "ccc333", creator: "Kalamazi", title: "Warlock buffs?", published: "2026-07-20" }, { id: "ddd444", creator: "Held", title: "Old queued vid" }] };

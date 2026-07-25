@@ -76,6 +76,54 @@ test("metric probes take a COVERAGE date — one fresh row cannot vouch for a mo
   assert.equal(probeDate(req, data), "2026-07-14");
 });
 
+test("probes: fightProfiles reads spec.fightProfile coverage, not the page snapshot (audit 2026-07-24, D3)", () => {
+  // Sims live outside spec.metrics, so bloodmallet's date probe used to read the page
+  // snapshot an agent writes by hand — 106 rows aged 53 days passed both gates green.
+  const req = { key: "sims", label: "Sims", maxAgeDays: 5,
+    date: { type: "fightProfiles", source: "bloodmallet" },
+    rows: { type: "fightProfiles", source: "bloodmallet", min: 2 } };
+  const data = freshData();
+  data.specs[0].fightProfile = { source: "bloodmallet", asOf: "2026-07-14" };
+  data.specs[1].fightProfile = { source: "bloodmallet", asOf: "2026-07-10" };
+  assert.equal(probeDate(req, data), "2026-07-10"); // coverage, not the freshest row
+  assert.equal(probeRows(req, data), 2);
+
+  // a fresh page snapshot cannot vouch for stale sims any more
+  const stale = checkFreshness({ ...config, requirements: [req] }, goodManifest(), data, "2026-07-20");
+  assert.ok(stale.violations.some(v => v.includes("sims") && v.includes("10 days stale")),
+    JSON.stringify(stale.violations));
+
+  // another source's profiles don't count toward this requirement
+  data.specs[1].fightProfile = { source: "other", asOf: "2026-07-14" };
+  assert.equal(probeRows(req, data), 1);
+});
+
+test("probes: encounterTiers counts TIER ROWS, not encounters (audit 2026-07-24, N5)", () => {
+  const req = { key: "enc", label: "Encounters", maxAgeDays: null,
+    date: null, rows: { type: "encounterTiers", min: 6 } };
+  const full = {
+    ...freshData(),
+    encounterTiers: {
+      raid: { a: { name: "A", tiers: { "X|One": "S", "X|Two": "A", "X|Three": "B" } },
+              b: { name: "B", tiers: { "X|One": "A", "X|Two": "B", "X|Three": "C" } } },
+      mplus: { c: { name: "C", tiers: { "X|One": "S", "X|Two": "A" } } }
+    }
+  };
+  assert.equal(probeRows(req, full), 8); // 3 + 3 + 2 rows, NOT 3 encounters
+
+  // the real failure shape: a partial parse keeps every encounter and guts its tier map.
+  // Under the old encounter-count probe this scored 3 and sailed past any sane floor.
+  const gutted = JSON.parse(JSON.stringify(full));
+  for (const b of ["raid", "mplus"]) {
+    for (const k of Object.keys(gutted.encounterTiers[b])) {
+      gutted.encounterTiers[b][k].tiers = { "X|One": "S" };
+    }
+  }
+  assert.equal(Object.keys(gutted.encounterTiers.raid).length + Object.keys(gutted.encounterTiers.mplus).length, 3);
+  assert.equal(probeRows(req, gutted), 3);
+  assert.ok(probeRows(req, gutted) < req.rows.min, "a gutted parse must fall below the floor");
+});
+
 test("probes: ptrDummy type reads spec.ptrDummy coverage date + count", () => {
   // min above the row count → coverage returns the OLDEST present date, like the real
   // wcl-dummy-dome requirement (min 15): one fresh spec can't vouch for a stale cut.
@@ -92,16 +140,39 @@ test("probes: ptrDummy type reads spec.ptrDummy coverage date + count", () => {
   assert.equal(probeRows(req, data), 1);
 });
 
-test("probes: encounterTiers type reads the file asOf + raid/mplus cell count", () => {
+test("probes: encounterTiers type reads the file asOf + total tier-row count", () => {
+  // Rewritten 2026-07-24 (N5): this used to assert the ENCOUNTER count, which is exactly
+  // the blind spot — encounters survive a partial parse, their tier maps do not.
   const req = { key: "enc", label: "Encounter tiers", maxAgeDays: 10,
     date: { type: "encounterTiers" }, rows: { type: "encounterTiers", min: 1 } };
-  const data = { ...freshData(),
-    encounterTiers: { asOf: "2026-07-14", raid: { "Boss A": {}, "Boss B": {} }, mplus: { "Dungeon A": {} } } };
+  const data = { ...freshData(), encounterTiers: { asOf: "2026-07-14",
+    raid: { "Boss A": { tiers: { "X|One": "S", "X|Two": "A" } }, "Boss B": { tiers: { "X|One": "B" } } },
+    mplus: { "Dungeon A": { tiers: { "X|One": "A", "X|Two": "C" } } } } };
   assert.equal(probeDate(req, data), "2026-07-14");
-  assert.equal(probeRows(req, data), 3); // 2 raid + 1 mplus
+  assert.equal(probeRows(req, data), 5); // 2 + 1 raid rows + 2 mplus rows, not 3 encounters
+  // encounters present but empty is the partial-parse shape — it must score ZERO
+  const empty = { ...freshData(),
+    encounterTiers: { asOf: "2026-07-14", raid: { "Boss A": {}, "Boss B": {} }, mplus: { "Dungeon A": {} } } };
+  assert.equal(probeRows(req, empty), 0);
   // absent file: null date, zero rows (the gate's min floor then complains)
   assert.equal(probeDate(req, { ...freshData(), encounterTiers: null }), null);
   assert.equal(probeRows(req, { ...freshData(), encounterTiers: null }), 0);
+});
+
+test("a run where essentially nothing arrived cannot publish as a quiet night (audit 2026-07-24, A4)", () => {
+  const cfg = { ...config, minSuccessfulSources: 2 };
+  const allDead = { ...goodManifest(), sources: goodManifest().sources.map(r =>
+    ({ ...r, result: "unreachable", detail: "upstream down", newAsOf: r.previousAsOf })) };
+  const r = checkManifest(cfg, allDead, freshData(), "2026-07-14");
+  assert.ok(r.errors.some(e => e.includes("below the 2 floor")), JSON.stringify(r.errors));
+
+  // …and an ordinary partially-degraded night still passes
+  const ok = checkManifest(cfg, goodManifest(), freshData(), "2026-07-14");
+  assert.deepEqual(ok.errors, []);
+
+  // absent config key = no floor (back-compat with an un-migrated contract)
+  assert.deepEqual(checkManifest(config, allDead, freshData(), "2026-07-14").errors
+    .filter(e => e.includes("floor —")), []);
 });
 
 test("a complete, honest manifest passes with no errors", () => {
@@ -309,6 +380,32 @@ test("a newer history snapshot counts as proof of life (local refreshes count), 
   const r = checkFreshness(config, null, data, "2026-07-15T23:00:00Z");
   assert.ok(!r.violations.some(v => v.includes("run-age") || v.includes("h old")));
   assert.ok(r.report.some(l => l.includes("history snapshot 2026-07-15")));
+
+  // …and it still wins over an OLDER manifest, which is the case it exists for: a local
+  // refresh that snapshotted after the last nightly must not read as a dead nightly.
+  const m = { ...goodManifest(), startedAt: "2026-07-13T02:00:00Z" };
+  const local = checkFreshness(config, m, data, "2026-07-15T23:00:00Z");
+  assert.deepEqual(local.violations, []);
+  assert.ok(local.report.some(l => l.includes("history snapshot 2026-07-15")));
+});
+
+test("a same-dated history snapshot cannot mask a missed nightly (audit 2026-07-24, A1)", () => {
+  // The real shape: the nightly starts ~12:47Z and snapshots the same day; the heartbeat
+  // runs at 17:23Z. If the next night never fires, the last signal is ~28.6h old at the
+  // following heartbeat — but a date-only snapshot dated the SAME day scores exactly 24h
+  // and, pushed unconditionally, capped the measured age at 24h forever.
+  const m = { ...goodManifest(), run: "2026-07-14", startedAt: "2026-07-14T12:47:00Z" };
+  const data = { ...freshData(), historySnapshots: [{ date: "2026-07-14" }] };
+
+  const missed = checkFreshness({ ...config, maxRunAgeHours: 28 }, m, data, "2026-07-15T17:23:00Z");
+  assert.ok(missed.violations.some(v => v.includes("run-age") || v.includes("h old")),
+    `a missed night must alert, got ${JSON.stringify(missed.violations)}`);
+  assert.ok(missed.report.some(l => l.includes("manifest startedAt")),
+    "the precise signal must be the one reported, not the midnight-grain snapshot");
+
+  // the same night, landed: ~4.6h old, no alert — the threshold must not cry wolf
+  const healthy = checkFreshness({ ...config, maxRunAgeHours: 28 }, m, data, "2026-07-14T17:23:00Z");
+  assert.deepEqual(healthy.violations, []);
 });
 
 /* --- anomaly gate ------------------------------------------------------------------ */

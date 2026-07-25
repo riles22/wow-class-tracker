@@ -537,6 +537,10 @@ export function dataHealth(specs) {
     for (const m of spec.metrics ?? []) note(m.name, m.asOf, m.source);
     // ptrDummy carries its own source id — read it rather than assuming Warcraft Logs.
     if (spec.ptrDummy?.asOf) note("Dummy Dome rDPS (real-player medians)", spec.ptrDummy.asOf, spec.ptrDummy.source);
+    // Sims live outside spec.metrics, so a stalled Bloodmallet run had no staleness
+    // surface anywhere — not the gate, not the heartbeat, not this banner (audit
+    // 2026-07-24, D3). Its gate probe is fixed; this is the user-visible half.
+    if (spec.fightProfile?.asOf) note("Sim fight profiles (target-count DPS)", spec.fightProfile.asOf, spec.fightProfile.source);
   }
   const dates = [...newest.values()].map(v => v.asOf).sort();
   if (!dates.length) return null;
