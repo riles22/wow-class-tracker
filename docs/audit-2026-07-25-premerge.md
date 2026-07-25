@@ -93,6 +93,17 @@ that file does not have.
   implemented). Still unguarded on values; row counts and dates are covered.
 - **Run-level failure coverage.** A `workflow_run`-triggered watcher is the right instrument
   for "the job never started". Not built; the 28h heartbeat covers it ~5h later.
+- **The deployed drawer Timeline is permanently one night behind.** Found while verifying
+  the post-merge nightly. The publish job's step order is `Gate 2: build` → `Gate 3:
+  check-refresh` → `Snapshot movement baseline` → `Commit`, so the dist it commits was built
+  before that night's snapshot existed and its `history` series always stops one day short.
+  The gate-before-snapshot order is deliberate (the anomaly gate must compare against the
+  *previous* snapshot) and must not change. The fix is an extra `npm run build` **after** the
+  snapshot step, which is safe by construction: `pickBaseline` skips snapshots identical to
+  the present state, and a just-written snapshot is the present state, so `movementSince` and
+  every arrow are unchanged — only `history` gains the missing point. Not applied: it edits
+  `nightly.yml`, which is human-owned per CODEOWNERS and auto-kicks a full nightly run on
+  merge. Tonight's lag was corrected by committing a rebuilt dist instead.
 - **Robydoby is intentionally outside the refresh contract.** It looks like a monitoring blind
   spot — 33 stored rows, no requirement row, 9 days stale and nothing would ever say so — and
   it was added as a requirement during this pass before `SOURCES.md:31` was found to state the
