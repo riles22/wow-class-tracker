@@ -34,7 +34,15 @@ Made by **[riles22](https://github.com/riles22)**. A personal project — if you
   projection) across the daily history snapshots — the story of the meta, not just today.
 - **Deep links, watchlist & compare** — every view is a shareable URL; star your specs
   (saved in-browser) and pin up to three side by side.
-- **Movement arrows** (▲▼) versus the previous snapshot, per tier and per metric.
+- **Movement arrows** (▲▼) versus the last snapshot where anything actually changed —
+  per tier and per metric, for the consensus and for our own 12.1 forecast.
+- **"Into 12.1 — biggest movers"** — the specs whose forecast tier differs most from their
+  live consensus, ranked both ways, so the season-over-season shift is one glance.
+- **Fight view** — pick a raid boss or M+ dungeon and the matching tier column swaps to
+  Archon's per-encounter tiers (single-source by design, and labelled as Archon).
+- **The Ladder** — rank the whole field by any measured series (log medians, sims, 95th
+  percentiles, adoption, PTR cuts). Measured numbers stay numbers: it never turns them
+  into letter grades, never mixes sims with logs, and never crosses roles.
 - **Spec Finder** — a weighted quiz that ranks all 40 specs against your preferences (role,
   content, meta-vs-vibes, fight type, melee/ranged, mobility, survivability, utility, outlook).
 - **Cited creator takes** — a distilled, linked opinion layer that never feeds tiers — plus
@@ -66,6 +74,8 @@ presentation-only `src/template.html` into a single `dist/index.html`.
   produces the consensus
 - `data/ptr-builds.json` — the dated 12.1 PTR build feed from Blizzard's official dev-notes thread
 - `data/creator-takes.json` — the cited creator-take layer
+- `data/encounter-tiers.json` — Archon's per-boss (throughput) and per-dungeon (score)
+  tiers, behind the Fight selector
 - `data/community.json` — curated class Discords + verified creators (links only)
 
 Consensus, movement, fight-profile labels, and the Dummy Dome composite are all computed at

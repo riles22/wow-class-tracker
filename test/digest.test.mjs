@@ -180,3 +180,30 @@ test("digestMarkdown lists new takes with sentiment, truncation, and link", () =
   assert.ok(md.includes("[watch](https://youtu.be/abc?t=60)"));
   assert.ok(!md.includes("already superseded"));
 });
+
+test("digestMarkdown escapes untrusted third-party text (audit 2026-07-24, S1)", () => {
+  // Video titles, creator names and claims come from outside this repo and land in a
+  // GitHub comment that renders Markdown — the one rendered surface with no escaper.
+  const p = payload([spec("Rogue", "Outlaw", { consensus: { raid: { tier: "A" }, mplus: { tier: "A" } } })]);
+  const evil = payload([spec("Rogue", "Outlaw", { consensus: { raid: { tier: "A" }, mplus: { tier: "A" } } })], {
+    creatorTakes: {
+      takes: [{ creator: "Bad](javascript:alert(1))", spec: "Outlaw", class: "Rogue", sentiment: "buff",
+        claim: "legit\nBAD **Injected heading**\n- forged bullet [x](http://evil)",
+        url: "https://youtu.be/abc" }],
+      metaNotes: [],
+    },
+  });
+  const md = digestMarkdown({ oldPayload: p, newPayload: evil, manifest: { summary: "ok", sources: [] } });
+
+  assert.ok(!/\n- forged/.test(md), "an embedded newline must not break out of its bullet");
+  assert.ok(!/\[x\]\(http/.test(md), "a markdown link in untrusted text must not survive as a link");
+  assert.ok(!/\*\*Injected heading\*\*/.test(md), "untrusted bold must be escaped");
+  assert.match(md, /Bad\\\]\\\(javascript/, "the creator name must be escaped, not dropped");
+  // the legitimate, repo-controlled watch link is untouched
+  assert.match(md, /\[watch\]\(https:\/\/youtu\.be\/abc\)/);
+
+  // a newline in the manifest summary cannot forge sections either
+  const forged = digestMarkdown({ oldPayload: p, newPayload: p,
+    manifest: { summary: "fine\n**Tier moves (99 specs):**", sources: [] } });
+  assert.ok(!/^\*\*Tier moves/m.test(forged), "the summary must not be able to forge a section heading");
+});

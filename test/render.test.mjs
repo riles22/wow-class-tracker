@@ -2,33 +2,63 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { fightLabels, metricRanks, outlookFor, movementFor, projectionMovementFor, snapshotStateOf, pickBaseline, dummyDomeScores, classifyHighlight, projectionFor, historySeries, specBuildChanges } from "../src/render.mjs";
 
-test("specBuildChanges: official lines grouped by build, spec-prefix attribution identical to the outlook's", () => {
+test("specBuildChanges: spec lines by prefix, class-wide lines by build membership", () => {
   const builds = { builds: [
     { date: "2026-07-14", forumPostNumber: 14, forumUrl: "https://example.com/t/1/14",
+      specsAffected: ["Havoc Demon Hunter", "Devourer Demon Hunter", "Demon Hunter (class-wide)", "Survival Hunter"],
       highlights: [
         "Havoc Demon Hunter Inertia effect now increases damage by 12% (was 18%).",
         "Devourer Demon Hunter Hungering Slash bug fixed.",
-        "Demon Hunter (class-wide) Sigils radius increased.", // class-wide: excluded from spec lists
+        "Demon Hunter (class-wide) Sigils radius increased.",
         "Survival Hunter Flamefang-Pitch removed."
       ] },
     { date: "2026-07-01", forumPostNumber: 9, forumUrl: "https://example.com/t/1/9",
+      specsAffected: ["Havoc Demon Hunter"],
       highlights: ["Havoc Demon Hunter Blade Dance damage increased by 6%."] },
-    { date: "2026-06-24", forumPostNumber: 5, highlights: ["Feral Druid energy regen up."] }
+    { date: "2026-06-24", forumPostNumber: 5, specsAffected: ["Feral Druid"],
+      highlights: ["Feral Druid energy regen up."] }
   ] };
   const havoc = specBuildChanges({ class: "Demon Hunter", spec: "Havoc" }, builds);
-  assert.equal(havoc.length, 2); // the 06-24 build has no Havoc lines and is omitted
+  assert.equal(havoc.length, 2); // the 06-24 build has no Demon Hunter lines and is omitted
   assert.deepEqual(havoc.map(b => b.date), ["2026-07-14", "2026-07-01"]); // newest first, per feed order
-  assert.deepEqual(havoc[0].lines, ["Inertia effect now increases damage by 12% (was 18%)."]); // prefix stripped, rest verbatim
   assert.equal(havoc[0].forumPostNumber, 14);
   assert.equal(havoc[0].forumUrl, "https://example.com/t/1/14");
 
-  // Anchored prefixes: "Demon Hunter" lines never leak into Hunter specs, and
-  // class-wide lines belong to the build feed, not any one spec's fact list.
+  // Rewritten 2026-07-24 (D6): this used to assert the class-wide line's ABSENCE. Five
+  // real class-level highlights reached no drawer at all, and for nine spec-build pairs
+  // the class line was the spec's only line, so the build's date vanished with it.
+  // Spec lines lose their redundant prefix; class-wide lines keep their full text and
+  // are flagged so the UI can mark them as scope, not spec-specific tuning.
+  assert.deepEqual(havoc[0].lines, [
+    { text: "Inertia effect now increases damage by 12% (was 18%).", classWide: false },
+    { text: "Demon Hunter (class-wide) Sigils radius increased.", classWide: true }
+  ]);
+
+  // Still anchored: "Demon Hunter (class-wide)" must never leak into a Hunter spec, and
+  // Survival's own line is unaffected by the neighbouring class.
   const survival = specBuildChanges({ class: "Hunter", spec: "Survival" }, builds);
-  assert.deepEqual(survival[0].lines, ["Flamefang-Pitch removed."]);
-  assert.equal(survival.length, 1);
-  assert.ok(!havoc[0].lines.some(l => l.includes("Sigils")));
+  assert.deepEqual(survival.map(b => b.date), ["2026-07-14"]);
+  assert.deepEqual(survival[0].lines, [{ text: "Flamefang-Pitch removed.", classWide: false }]);
+  assert.ok(!survival[0].lines.some(l => /Sigils/.test(l.text)));
   assert.deepEqual(specBuildChanges({ class: "Warrior", spec: "Arms" }, builds), []);
+});
+
+test("specBuildChanges: a class-wide line reaches only the specs that build says it touched", () => {
+  // The reason scoping is by specsAffected and not by matching "<Class> (" in the text:
+  // "Death Knight (San'layn) …" would otherwise attach to Frost DK, which is not a
+  // San'layn spec — and the build data already says so.
+  const builds = { builds: [{
+    date: "2026-07-21", forumPostNumber: 16,
+    specsAffected: ["Blood Death Knight", "Unholy Death Knight"],
+    highlights: ["Death Knight (San'layn) Blood-Soaked Ground now reduces physical damage taken by 8% (was 5%)."]
+  }] };
+  const blood = specBuildChanges({ class: "Death Knight", spec: "Blood" }, builds);
+  assert.equal(blood.length, 1);
+  assert.equal(blood[0].lines[0].classWide, true);
+  assert.equal(blood[0].date, "2026-07-21"); // the build's DATE survives with it
+
+  // Frost DK is omitted from specsAffected, so the line must not reach it
+  assert.deepEqual(specBuildChanges({ class: "Death Knight", spec: "Frost" }, builds), []);
 });
 
 test("outlookFor: verdict wins; tuning-line balance covers writeup-less specs", () => {
@@ -540,4 +570,38 @@ test("projectionMovementFor is a no-op before projections() has run (ordering co
     "Monk|Brewmaster": { consensus: { raid: "B" }, projection: { raid: { tier: "B", score: 57 }, mplus: null } } } };
   projectionMovementFor(specs, scales, snapshot);
   assert.equal(specs[0].projMovement, undefined);
+});
+
+test("metricRanks: tied values share a rank (audit 2026-07-24, C6)", () => {
+  const m = (name, value) => ({ source: "wcl", bracket: "raid", name, value });
+  const specs = [
+    { class: "C", spec: "A", role: "DPS", metrics: [m("Median rDPS", 100)] },
+    { class: "C", spec: "B", role: "DPS", metrics: [m("Median rDPS", 100)] },
+    { class: "C", spec: "C", role: "DPS", metrics: [m("Median rDPS", 100)] },
+    { class: "C", spec: "D", role: "DPS", metrics: [m("Median rDPS", 90)] },
+  ];
+  metricRanks(specs);
+  // three identical numbers cannot be #1/#2/#3 — that publishes an ordering the data
+  // does not contain, and hands rankPct three different percentiles for one value
+  assert.deepEqual(specs.slice(0, 3).map(s => s.metrics[0].rank), [1, 1, 1]);
+  assert.equal(specs[3].metrics[0].rank, 4); // competition ranking: next rank skips
+  assert.deepEqual(specs.map(s => s.metrics[0].of), [4, 4, 4, 4]);
+});
+
+test("projectionFor: a 'Mythic raid' meta note cannot nudge the M+ projection (audit C5)", () => {
+  const scales = { consensus: { bands: [{ tier: "S", min: 85 }, { tier: "A", min: 60 }, { tier: "B", min: 0 }] } };
+  const spec = { class: "Priest", spec: "Holy", role: "Healer",
+    consensus: { raid: { score: 50 }, mplus: { score: 50 } }, metrics: [] };
+  const note = { class: "Priest", spec: "Holy", creator: "izen", sentiment: "positive",
+    date: "2026-07-20", patchContext: "Season 2 PTR — Mythic raid outlook" };
+  // "Mythic raid" used to match the M+ regex via its bare /mythic/ alternative
+  const mplus = projectionFor(spec, "mplus", scales, [note]);
+  assert.ok(!/meta read/.test(mplus.basis), `M+ must not take a raid note: ${mplus.basis}`);
+  const raid = projectionFor(spec, "raid", scales, [note]);
+  assert.match(raid.basis, /meta read \+3/);
+
+  // an explicit bracket wins over the text heuristic
+  const explicit = { ...note, bracket: "mplus", patchContext: "Season 2 PTR — Mythic raid outlook" };
+  assert.match(projectionFor(spec, "mplus", scales, [explicit]).basis, /meta read \+3/);
+  assert.ok(!/meta read/.test(projectionFor(spec, "raid", scales, [explicit]).basis));
 });

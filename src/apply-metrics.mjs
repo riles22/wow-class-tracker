@@ -57,7 +57,15 @@ export async function applyMetrics(dataPath, root = ROOT) {
   for (const row of input.playstyle ?? []) {
     const spec = byKey.get(`${row.class}|${row.spec}`);
     if (!spec) { unmatched.push(`playstyle: ${row.class} / ${row.spec}`); continue; }
-    spec.playstyle = { range: row.range, mobility: row.mobility, utility: row.utility, notes: row.utilityNotes ?? row.notes ?? null };
+    // SPREAD, don't replace: a bare assignment wiped complexity, complexityNotes and any
+    // other field merged by the separate complexity fetch — silently, since validation
+    // cannot see a missing optional field. Those fields feed the Spec Finder
+    // (audit 2026-07-24, C4).
+    spec.playstyle = {
+      ...(spec.playstyle ?? {}),
+      range: row.range, mobility: row.mobility, utility: row.utility,
+      notes: row.utilityNotes ?? row.notes ?? null
+    };
     playstyleApplied++;
   }
 

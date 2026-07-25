@@ -12,9 +12,10 @@ Fetch the current Midnight tier lists live and merge them into `data/specs.json`
 
 1. Read `data/sources.json` for the pages of each `kind: "tier-list"` source
    (currently icyveins, method, wowhead, archon, wowmeta — the registry is the source
-   of truth, not this list). Fan out fetch agents per source (a Workflow
-   with one agent per source works well — see the transcript of run `wf_b286902c-03c`
-   for a proven prompt shape, including the era-verification requirement).
+   of truth, not this list). **Fetch each page inline, one source at a time.** Do NOT fan
+   out subagents: the nightly runner passes `--disallowedTools "Agent,Task"`, so the call
+   fails, and backgrounding slow work to "wait" for it was the root cause of the
+   2026-07-15→17 lost nights. Era-verify as you go (step 2).
 2. Era-verify every page: "Midnight", Season 1 / 12.0.x, or Devourer DH present in DPS
    lists. Unverifiable → skip that source, never guess.
 3. Write rows `[{class, spec, bracket: "raid"|"mplus", source, tier}]` using the EXACT

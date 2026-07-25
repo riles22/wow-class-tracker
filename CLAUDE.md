@@ -118,6 +118,15 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   enrichment feeds the drawer **Timeline** sparklines (`historySeries` → payload
   `history`) and is the raw data for the post-launch **forecast report card** (grade the
   frozen pre-launch projection against the first settled S2 consensus).
+- **`SNAPSHOT_PHASE` (`render.mjs`) is a one-shot OWNER action at 12.1 launch**: flip
+  `"12.1-ptr"` to the live Season-2 id. The first non-`12.1-ptr` snapshot is the endpoint
+  the forecast report card grades the frozen pre-launch projection against, so nothing
+  downstream can infer the boundary if this is missed. Recorded here because a code
+  comment is invisible to whoever notices 12.1 going live (2026-07-24 audit, X3).
+- **`dataHealth()` (`render.mjs`)** computes the frozen-series banner: every metric,
+  `ptrDummy` and `fightProfile` date, grouped BY SOURCE so a stalled non-WCL feed is never
+  announced as a Warcraft Logs outage. Staleness is relative to the data's own newest
+  date — deliberately clock-free, which keeps it honest when page snapshot dates lie.
 - **Zone-54 raid testing covers ALL ROLES** (2026-07-09): healer (hps) and tank cuts
   merge under the SAME metric name as DPS — "12.1 PTR raid testing score (normalized)" —
   so within-role ranks and the projection consume them with no special-casing.

@@ -77,7 +77,14 @@ export function metricRanks(specs) {
   }
   for (const arr of groups.values()) {
     arr.sort((a, b) => b.value - a.value);
-    arr.forEach((metric, i) => { metric.rank = i + 1; metric.of = arr.length; });
+    // Competition ranking: identical measured values share a rank. Ordering them #11 vs
+    // #12 on the same number publishes a distinction the data does not contain, and
+    // rankPct then hands the projection two different percentiles for one value
+    // (audit 2026-07-24, C6).
+    arr.forEach((metric, i) => {
+      metric.rank = (i > 0 && arr[i - 1].value === metric.value) ? arr[i - 1].rank : i + 1;
+      metric.of = arr.length;
+    });
   }
   return specs;
 }
@@ -128,7 +135,11 @@ export function dummyDomeScores(specs) {
   }
   ranked.sort((a, b) => b.ptrDummy.score - a.ptrDummy.score
     || a.class.localeCompare(b.class) || a.spec.localeCompare(b.spec));
-  ranked.forEach((s, i) => { s.ptrDummy = { ...s.ptrDummy, rank: i + 1, of: ranked.length }; });
+  ranked.forEach((s, i) => {
+    const prev = i > 0 ? ranked[i - 1] : null;
+    const rank = (prev && prev.ptrDummy.score === s.ptrDummy.score) ? prev.ptrDummy.rank : i + 1;
+    s.ptrDummy = { ...s.ptrDummy, rank, of: ranked.length }; // ties share a rank, as above
+  });
   return specs;
 }
 
@@ -220,16 +231,39 @@ export function classifyHighlight(h) {
    PTR raid-testing rank, when landed, is NAMED in the basis string for context but
    does not flip the direction (tiny-n testing data stays informative, not a driver). */
 /* Per-spec OFFICIAL tuning lines grouped by build, newest first (builds are stored
-   newest-first). The line-attribution rule is byte-identical to outlookFor's
-   (startsWith "Spec Class ") so the drawer's fact list and the outlook arrow can
-   never disagree about which lines are "about this spec" — class-wide prose mentions
-   stay out of both. The redundant spec prefix is stripped for display inside the
-   spec's own drawer; the line text is otherwise verbatim from the forum notes. */
+   newest-first). Two kinds of line reach a spec's drawer:
+
+   - SPEC lines ("Arms Warrior — …"), matched by the "Spec Class " prefix. This rule is
+     byte-identical to outlookFor's, so the drawer's fact list and the outlook arrow can
+     never disagree about which lines are "about this spec".
+   - CLASS-WIDE lines ("Hunter (all specs) — …"), scoped by BUILD MEMBERSHIP: included
+     only when this spec appears in that build's specsAffected. Before this, five
+     class-level highlights reached no drawer at all — including Hunter's Mark reverting
+     to 1 target — and for nine spec-build pairs the class line was the spec's ONLY line,
+     so the build's date vanished with it (audit 2026-07-24, D6).
+
+   Membership, not text matching, is the scoping rule on purpose: matching "<Class> (" in
+   the highlight would attach "Death Knight (San'layn) Blood-Soaked Ground…" to Frost DK,
+   which is not a San'layn spec — and the data already knows better, since that build's
+   specsAffected lists Blood and Unholy and deliberately omits Frost.
+
+   This is DISPLAY ONLY. outlookFor still scores spec lines exclusively; that exclusion is
+   deliberate and documented there. The redundant spec prefix is stripped for display; the
+   line text is otherwise verbatim from the forum notes. */
 export function specBuildChanges(spec, ptrBuilds) {
   const prefix = `${spec.spec} ${spec.class} `;
+  const full = `${spec.spec} ${spec.class}`;
+  const classLevel = `${spec.class} (`;
   const out = [];
   for (const b of ptrBuilds?.builds ?? []) {
-    const lines = (b.highlights ?? []).filter(h => h.startsWith(prefix)).map(h => h.slice(prefix.length));
+    const affected = b.specsAffected ?? [];
+    // Does this build claim to touch this spec (by name, or via a class-level entry)?
+    const touchesSpec = affected.some(e => e === full || e.startsWith(classLevel));
+    const lines = [];
+    for (const h of b.highlights ?? []) {
+      if (h.startsWith(prefix)) { lines.push({ text: h.slice(prefix.length), classWide: false }); continue; }
+      if (touchesSpec && h.startsWith(classLevel)) lines.push({ text: h, classWide: true });
+    }
     if (lines.length) {
       out.push({ date: b.date, forumPostNumber: b.forumPostNumber ?? null, forumUrl: b.forumUrl ?? null, lines });
     }
@@ -252,6 +286,8 @@ export function outlookFor(spec, ptrBuilds) {
     for (const h of b.highlights ?? []) {
       // Count only lines genuinely ABOUT this spec ("Arms Warrior — …"), not class-wide
       // lines that merely name it in prose ("Warrior (class-wide) — … exclusive to Arms …").
+      // Class-wide lines DO reach the drawer's fact list (specBuildChanges scopes them by
+      // build membership); they are excluded from SCORING only, which is what this is.
       if (!h.startsWith(`${full} `)) continue;
       const dir = classifyHighlight(h); // each line counts once, resource-aware
       if (dir === "buff") buffs++;
@@ -272,10 +308,19 @@ export function outlookFor(spec, ptrBuilds) {
   // Zone-54 raid-testing rank joins the basis STRING for context (never the direction —
   // tiny-n testing data stays informative, not a driver).
   const testing = (spec.metrics ?? []).find(m => m.name === "12.1 PTR raid testing score (normalized)");
+  // Writeups auto-confirm and carry no date (they are cited distillations, per policy),
+  // so a verdict distilled before three tuning passes still drives the arrow and a ±7
+  // projection shift. Until `ptr.asOf` is backfilled and can be compared properly, at
+  // least STATE the contradiction rather than silently resolving it: Blood DK publishes
+  // "Negative" while its own official lines are +2/−0 (audit 2026-07-24, D5).
+  const balance = buffs - nerfs;
+  const contradicts = (verdict === "Negative" && balance > 0) || (verdict === "Positive" && balance < 0);
   return {
     direction, builds: mentioned, buffs, nerfs,
+    contradicted: contradicts || undefined,
     basis: `${verdict ? `PTR read: ${verdict}` : "no writeup yet"} · touched in ${mentioned} of ${builds.length} PTR builds` +
       (buffs || nerfs ? ` · highlighted tuning lines +${buffs}/−${nerfs}` : "") +
+      (contradicts ? ` (the writeup predates this tuning — its ${verdict.toLowerCase()} read disagrees with the official lines since)` : "") +
       (testing?.rank ? ` · PTR raid-testing (zone 54) rank #${testing.rank}/${testing.of}` : "")
   };
 }
@@ -346,7 +391,13 @@ export function projectionFor(spec, bracket, scales, metaNotes = []) {
     .filter(n => n.class === spec.class && n.spec === spec.spec && n.sentiment && n.date && !n.superseded)
     .filter(n => {
       const pc = String(n.patchContext ?? "");
-      const mentionsRaid = /raid/i.test(pc), mentionsMplus = /m\+|mythic/i.test(pc);
+      // "Mythic raid" must not read as M+. The bare /mythic/ alternative matched it —
+      // the exact cross-bracket leak the comment above says it prevents (audit C5).
+      // An explicit n.bracket wins when present; the text heuristic is the fallback.
+      if (n.bracket === "raid" || n.bracket === "mplus") return n.bracket === bracket;
+      if (n.bracket === "both") return true;
+      const mentionsRaid = /\braid\b/i.test(pc);
+      const mentionsMplus = /m\+|mythic\s*plus|dungeon|keystone|\bkeys?\b/i.test(pc);
       if (!mentionsRaid && !mentionsMplus) return true;
       return bracket === "raid" ? mentionsRaid : mentionsMplus;
     })

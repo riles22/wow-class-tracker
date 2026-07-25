@@ -565,6 +565,11 @@
   /* geometry already fits the measured container — no minimum, so nothing pans off-screen */
   .laddersvg.tight{min-width:0}
   .ladder-stale{color:#e8a13a; cursor:help}
+  /* a class-wide tuning line applies to this spec via its build's specsAffected, not by
+     naming it — the chip says so rather than letting it read as a spec-specific note */
+  .contra{color:var(--v-mix); font-size:11px; margin-left:3px; cursor:help}
+  .cwchip{font-family:var(--mono); font-size:9px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--ink-faint); border:1px solid var(--edge-2); border-radius:4px; padding:1px 5px; margin-right:6px; white-space:nowrap}
   .laddername{font-family:var(--body); font-weight:600; font-size:12px; fill:var(--ink)}
   .laddernum{font-family:var(--mono); font-size:10px; fill:var(--accent-2)}
   .ladderval{font-family:var(--mono); font-size:12px; fill:var(--ink)}
@@ -918,7 +923,10 @@ function verdictEl(s){
   const v = s.ptr ? s.ptr.verdict : "—";
   const o = s.outlook;
   const arrow = o ? `<span class="olk" data-d="${esc(o.direction)}" title="${esc(`12.1 outlook: ${o.direction} — ${o.basis}`)}">${o.direction==="up"?"↗":o.direction==="down"?"↘":"→"}</span>` : "";
-  return `<span class="verdict" data-v="${esc(v)}"><span class="dot"></span>${esc(v)}${arrow}</span>`;
+  // A verdict that disagrees with the spec's own later official tuning is disclosed on the
+  // scan row, not just inside the drawer — it is the reason the arrow points where it does.
+  const contra = o?.contradicted ? `<span class="contra" title="${esc(`This verdict disagrees with the official tuning since: +${o.buffs}/−${o.nerfs}. Writeups carry no date yet, so read it as possibly superseded.`)}">⚠</span>` : "";
+  return `<span class="verdict" data-v="${esc(v)}"><span class="dot"></span>${esc(v)}${arrow}${contra}</span>`;
 }
 
 const MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
@@ -1129,7 +1137,7 @@ function buildChangesHTML(s){
   if(!bc.length) return "";
   return `<div class="d-sec"><p class="d-h">Official PTR tuning — Blizzard notes, by build</p>${bc.map(b=>`
     <p class="d-h" style="margin:10px 0 4px;text-transform:none;letter-spacing:0">${esc(fmtDate(b.date))}${b.forumUrl?` · <a href="${esc(safeHref(b.forumUrl))}" target="_blank" rel="noopener">forum post${b.forumPostNumber!=null?` #${esc(String(b.forumPostNumber))}`:""}</a>`:""}</p>
-    <ul class="d-list">${b.lines.map(l=>`<li>${esc(l)}</li>`).join("")}</ul>`).join("")}
+    <ul class="d-list">${b.lines.map(l=>`<li${l.classWide?' class="cw"':''}>${l.classWide?'<span class="cwchip">class-wide</span>':''}${esc(l.text)}</li>`).join("")}</ul>`).join("")}
     <p class="mnote">Verbatim from the official PTR development notes — the 12.1 writeup above is a cited distillation, and creator takes are opinion.</p></div>`;
 }
 

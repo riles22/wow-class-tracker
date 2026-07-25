@@ -80,3 +80,21 @@ test("profiles merge replaces fightProfile; survivability and playstyle merge th
   assert.equal(outlaw.survivability.source, "archon"); // default
   assert.equal(outlaw.playstyle.complexity, 3);
 });
+
+test("playstyle merge preserves fields landed by the separate complexity fetch (audit C4)", async () => {
+  // Land complexity first, then a playstyle row for the same spec. A bare assignment in
+  // the playstyle branch wiped complexity/complexityNotes silently — validation cannot
+  // see a missing optional field, and those fields feed the Spec Finder.
+  await applyMetrics(await input({ complexity: [
+    { class: "Rogue", spec: "Outlaw", complexity: 4, complexityNotes: "tricky" }
+  ] }), root);
+  await applyMetrics(await input({ playstyle: [
+    { class: "Rogue", spec: "Outlaw", range: "Melee", mobility: 5, utility: 3, notes: "n" }
+  ] }), root);
+
+  const outlaw = (await readSpecs()).find(s => s.class === "Rogue" && s.spec === "Outlaw");
+  assert.equal(outlaw.playstyle.complexity, 4, "complexity must survive a later playstyle merge");
+  assert.equal(outlaw.playstyle.complexityNotes, "tricky");
+  assert.equal(outlaw.playstyle.mobility, 5);   // …and the new fields still land
+  assert.equal(outlaw.playstyle.range, "Melee");
+});

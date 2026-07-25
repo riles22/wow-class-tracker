@@ -98,6 +98,18 @@ export function videoActivity(oldPending, newPending, newTakes, newNotes) {
   };
 }
 
+/* The digest is the ONE place third-party text reaches a rendered surface without an
+   escaper: YouTube video titles, creator names and take/note claims all originate outside
+   this repo and land in a GitHub comment that renders Markdown. A title containing
+   `[x](javascript:…)` becomes a link, and an embedded newline breaks out of its bullet and
+   can forge new sections (audit 2026-07-24, S1). Collapse whitespace, then escape the
+   Markdown control set. Deliberately NOT applied to URL targets — those are already
+   https-validated and host-allowlisted, and escaping them would break the links. */
+const md = s => String(s ?? "")
+  .replace(/\s*\n\s*/g, " ")
+  .replace(/([\\`*_[\]()#>|!~])/g, "\\$1")
+  .trim();
+
 export function digestMarkdown({ oldPayload, newPayload, manifest, runUrl, oldPending = null, newPending = null }) {
   const takeId = t => `${t.creator}|${t.spec}|${t.url}`;
   const noteId = n => `${n.creator}|${n.spec}|${n.patchContext}|${n.url}`;
@@ -111,7 +123,7 @@ export function digestMarkdown({ oldPayload, newPayload, manifest, runUrl, oldPe
   const verdicts = verdictChanges(oldPayload, newPayload);
 
   const lines = [];
-  if (manifest?.summary) lines.push(`> ${manifest.summary}`);
+  if (manifest?.summary) lines.push(`> ${md(manifest.summary)}`);
   if (runUrl) lines.push(`> [workflow run](${runUrl})`);
   lines.push("");
 
@@ -121,26 +133,26 @@ export function digestMarkdown({ oldPayload, newPayload, manifest, runUrl, oldPe
   }
   if (builds.length) {
     lines.push(`**New PTR build${builds.length === 1 ? "" : "s"}:**`);
-    lines.push(...builds.map(b => `- ${b.date} — ${b.label}${b.forumUrl ? ` ([notes](${b.forumUrl}))` : ""}`), "");
+    lines.push(...builds.map(b => `- ${b.date} — ${md(b.label)}${b.forumUrl ? ` ([notes](${b.forumUrl}))` : ""}`), "");
   }
   if (verdicts.length) lines.push(`**Writeup verdicts:**`, ...verdicts.map(v => `- ${v}`), "");
   const vids = videoActivity(oldPending, newPending, takesAll, notesAll);
   const watch = v => `[watch](https://youtu.be/${v.id})`;
   if (vids.distilled.length || vids.skipped.length || vids.queued.length || vids.waiting.length) {
     lines.push(`**Creator videos:**`);
-    lines.push(...vids.distilled.map(v => `- Distilled — takes below: **${v.creator}** — “${v.title}” (${watch(v)})`));
-    lines.push(...vids.skipped.map(v => `- Checked & skipped — transcript verified out of scope, no PvE tier/meta content: **${v.creator}** — “${v.title}” (${watch(v)})`));
-    lines.push(...vids.queued.map(v => `- Queued for the next transcript run: **${v.creator}** — “${v.title}” (${v.published ? `published ${v.published}, ` : ""}${watch(v)})`));
-    if (vids.waiting.length) lines.push(`- Still waiting in the queue: ${vids.waiting.map(v => `**${v.creator}** “${v.title}”`).join(" · ")}`);
+    lines.push(...vids.distilled.map(v => `- Distilled — takes below: **${md(v.creator)}** — “${md(v.title)}” (${watch(v)})`));
+    lines.push(...vids.skipped.map(v => `- Checked & skipped — transcript verified out of scope, no PvE tier/meta content: **${md(v.creator)}** — “${md(v.title)}” (${watch(v)})`));
+    lines.push(...vids.queued.map(v => `- Queued for the next transcript run: **${md(v.creator)}** — “${md(v.title)}” (${v.published ? `published ${v.published}, ` : ""}${watch(v)})`));
+    if (vids.waiting.length) lines.push(`- Still waiting in the queue: ${vids.waiting.map(v => `**${md(v.creator)}** “${md(v.title)}”`).join(" · ")}`);
     lines.push("");
   }
   if (takes.length) {
     lines.push(`**New creator takes (${takes.length}):**`);
-    lines.push(...cap(takes, 12, t => `- **${t.creator}** on ${t.spec} ${t.class} (${t.sentiment}): ${String(t.claim ?? "").slice(0, 140)}${t.url ? ` — [watch](${t.url})` : ""}`), "");
+    lines.push(...cap(takes, 12, t => `- **${md(t.creator)}** on ${md(t.spec)} ${md(t.class)} (${md(t.sentiment)}): ${md(t.claim).slice(0, 140)}${t.url ? ` — [watch](${t.url})` : ""}`), "");
   }
   if (notes.length) {
     lines.push(`**New meta-outlook notes (${notes.length}):**`);
-    lines.push(...cap(notes, 8, n => `- **${n.creator}** on ${n.spec} ${n.class} (${n.sentiment}, ${n.patchContext}): ${String(n.note ?? "").slice(0, 120)}`), "");
+    lines.push(...cap(notes, 8, n => `- **${md(n.creator)}** on ${md(n.spec)} ${md(n.class)} (${md(n.sentiment)}, ${md(n.patchContext)}): ${md(n.note).slice(0, 120)}`), "");
   }
   const videoChange = vids.distilled.length || vids.skipped.length || vids.queued.length;
   const degraded = (manifest?.sources ?? []).filter(r => r.result && r.result !== "success");
