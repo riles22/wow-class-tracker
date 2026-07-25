@@ -382,10 +382,24 @@ export const PROJECTION_VERSION = 2;
 /* Rank-map version, stamped beside it. `snapshotStateOf().ranks` feeds movement
    comparison, and its meaning changed in the same commit as PROJECTION_VERSION v2:
    ties now share a rank, and rows below MIN_RANK_N carry no rank at all (so they are
-   absent from the map rather than present with a misleading number). A movement diff
-   across the v1→v2 boundary will narrate definitional change as if it were real
-   movement — expect exactly one such night, and do not chase it. */
+   absent from the map rather than present with a misleading number).
+
+   These markers are LOAD-BEARING, not documentation. A diff across a version boundary
+   narrates definitional change as if it were real movement, so the readers below refuse
+   to make cross-version comparisons: `versionOf` resolves a snapshot's effective version
+   (absent field = 1, since every snapshot written before the marker existed came from the
+   v1 formulas), and baselineDiffers/movementFor/projectionMovementFor/historySeries each
+   drop the sections the boundary invalidates while keeping the ones it doesn't.
+
+   Why degrade rather than reject: consensus TIERS are version-independent, and every
+   snapshot on disk is rank-v1. Skipping mismatched snapshots outright would leave no
+   baseline at all and silence real consensus movement — the opposite failure, and worse,
+   because it is silent. So a cross-version baseline is still chosen and still narrates
+   consensus; only the rank, dummy and projection arrows fall away. */
 export const RANK_VERSION = 2;
+const versionOf = (snap, field) => snap?.[field] ?? 1;
+const ranksComparableWith = snap => versionOf(snap, "rankVersion") === RANK_VERSION;
+const projComparableWith = snap => versionOf(snap, "projectionVersion") === PROJECTION_VERSION;
 // Snapshot phase marker — the season/settledness tag the post-launch forecast report
 // card uses to find its endpoint ("first settled S2 consensus") without reading commit
 // history. Flip to "12.1-live" (or the S2 season id) when 12.1 ships and the tracker is
@@ -520,16 +534,22 @@ export function historySeries(specs, scales, snapshots) {
     enriched: ordered.map(s => Object.values(s.specs).some(e => e?.scores && (e.scores.raid != null || e.scores.mplus != null))),
     specs: {}
   };
+  // Projection scores are only comparable within one PROJECTION_VERSION. Points from an
+  // older formula are dropped to null rather than plotted: a gap is honest, whereas
+  // splicing v1 and v2 scores into one line draws a step the spec never took (the exact
+  // thing PROJECTION_VERSION exists to prevent). Consensus scores are unaffected — they
+  // come from the sources, not from our formula.
+  const projOk = ordered.map(projComparableWith);
   for (const s of specs) {
     const key = `${s.class}|${s.spec}`;
     const row = { raid: [], mplus: [], projRaid: [], projMplus: [] };
-    for (const snap of ordered) {
+    ordered.forEach((snap, i) => {
       const e = snap.specs[key];
       row.raid.push(e?.scores?.raid ?? (e?.consensus?.raid != null ? midOf(e.consensus.raid) : null));
       row.mplus.push(e?.scores?.mplus ?? (e?.consensus?.mplus != null ? midOf(e.consensus.mplus) : null));
-      row.projRaid.push(e?.projection?.raid?.score ?? null);
-      row.projMplus.push(e?.projection?.mplus?.score ?? null);
-    }
+      row.projRaid.push(projOk[i] ? (e?.projection?.raid?.score ?? null) : null);
+      row.projMplus.push(projOk[i] ? (e?.projection?.mplus?.score ?? null) : null);
+    });
     out.specs[key] = row;
   }
   return out;
@@ -544,17 +564,21 @@ export function historySeries(specs, scales, snapshots) {
 export function pickBaseline(specs, snapshots) {
   const now = snapshotStateOf(specs);
   for (const snap of snapshots ?? []) {
-    if (snap?.specs && baselineDiffers(now, snap.specs)) return snap;
+    // Rank state from a different RANK_VERSION is not evidence of change — comparing it
+    // would make every rank-v1 snapshot look "different" and stop the walk one snapshot
+    // too early, hiding the real consensus movement further back.
+    if (snap?.specs && baselineDiffers(now, snap.specs, ranksComparableWith(snap))) return snap;
   }
   return null;
 }
-function baselineDiffers(now, then) {
+function baselineDiffers(now, then, ranksComparable = true) {
   const anyDummy = Object.values(then).some(e => e && e.dummy);
   const keys = new Set([...Object.keys(now), ...Object.keys(then)]);
   for (const k of keys) {
     const a = now[k], b = then[k];
     if (!a || !b) return true;
     if (a.consensus.raid !== (b.consensus?.raid ?? null) || a.consensus.mplus !== (b.consensus?.mplus ?? null)) return true;
+    if (!ranksComparable) continue; // consensus tiers are version-independent; ranks are not
     const ar = a.ranks ?? {}, br = b.ranks ?? {};
     for (const r of new Set([...Object.keys(ar), ...Object.keys(br)])) if (ar[r] !== br[r]) return true;
     if (anyDummy && (a.dummy?.rank ?? null) !== (b.dummy?.rank ?? null)) return true;
@@ -567,6 +591,10 @@ function baselineDiffers(now, then) {
    composite rank delta (positive = climbed). */
 export function movementFor(specs, scales, snapshot) {
   if (!snapshot?.specs) return specs;
+  // Consensus tiers are letters and mean the same thing in every version; ranks changed
+  // meaning at RANK_VERSION 2 (ties share a rank, sub-MIN_RANK_N rows carry none), so a
+  // cross-version rank diff is definitional, not movement.
+  const ranksComparable = ranksComparableWith(snapshot);
   const bandIdx = new Map(scales.consensus.bands.map((b, i) => [b.tier, i]));
   for (const s of specs) {
     const prev = snapshot.specs[`${s.class}|${s.spec}`];
@@ -580,6 +608,7 @@ export function movementFor(specs, scales, snapshot) {
       }
     }
     if (Object.keys(movement).length) s.movement = movement;
+    if (!ranksComparable) continue;
     for (const m of s.metrics ?? []) {
       // Key includes source: two sources can share a (bracket, name) but rank separately.
       const was = prev.ranks?.[`${m.source}|${m.bracket}|${m.name}`];
@@ -612,6 +641,10 @@ export function movementFor(specs, scales, snapshot) {
    edge, so a bare arrow would imply a shift it did not earn. */
 export function projectionMovementFor(specs, scales, snapshot) {
   if (!snapshot?.specs) return specs;
+  // A projection computed by a different formula version is not a comparable "was".
+  // Without this, changing the weights would publish a field-wide wave of forecast arrows
+  // narrating our own code change as if the specs had moved.
+  if (!projComparableWith(snapshot)) return specs;
   const bandIdx = new Map(scales.consensus.bands.map((b, i) => [b.tier, i]));
   for (const s of specs) {
     const prev = snapshot.specs[`${s.class}|${s.spec}`];

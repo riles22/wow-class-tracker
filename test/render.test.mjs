@@ -1,6 +1,13 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { dataHealth, fightLabels, metricRanks, outlookFor, movementFor, projectionMovementFor, snapshotStateOf, pickBaseline, dummyDomeScores, classifyHighlight, projectionFor, historySeries, specBuildChanges } from "../src/render.mjs";
+import { readFile } from "node:fs/promises";
+import { dataHealth, fightLabels, metricRanks, outlookFor, movementFor, projectionMovementFor, snapshotStateOf, pickBaseline, dummyDomeScores, classifyHighlight, projectionFor, historySeries, specBuildChanges, PROJECTION_VERSION, RANK_VERSION } from "../src/render.mjs";
+
+/* Stamp a fixture snapshot as current-version. An UNSTAMPED snapshot means version 1 —
+   every snapshot written before the markers existed came from the v1 formulas — so a
+   fixture that means "same version as now" has to say so, exactly like snapshot.mjs does.
+   Tests that exercise the CROSS-version path deliberately skip this. */
+const cur = snap => ({ ...snap, projectionVersion: PROJECTION_VERSION, rankVersion: RANK_VERSION });
 
 test("specBuildChanges: spec lines by prefix, class-wide lines by build membership", () => {
   const builds = { builds: [
@@ -108,9 +115,9 @@ test("movementFor computes tier steps and rank deltas vs a snapshot", () => {
     consensus: { raid: { tier: "A" }, mplus: { tier: "B" } },
     metrics: [{ source: "warcraftlogs", bracket: "raid", name: "Median rDPS", value: 1, rank: 2 }]
   }];
-  const snap = { date: "2026-06-24", specs: { "C|S": {
+  const snap = cur({ date: "2026-06-24", specs: { "C|S": {
     consensus: { raid: "B", mplus: "B" }, ranks: { "warcraftlogs|raid|Median rDPS": 5 }
-  } } };
+  } } });
   movementFor(specs, scales, snap);
   assert.deepEqual(specs[0].movement, { raid: { delta: 1, was: "B", since: "2026-06-24" } });
   assert.equal(specs[0].metrics[0].rankDelta, 3); // climbed 5 → 2
@@ -129,9 +136,9 @@ test("movementFor keys rank deltas by source, so same-name metrics don't collide
       { source: "simulationcraft", bracket: "raid", name: "Median rDPS", value: 2, rank: 1 }
     ]
   }];
-  const snap = { date: "2026-06-24", specs: { "C|S": { consensus: {}, ranks: {
+  const snap = cur({ date: "2026-06-24", specs: { "C|S": { consensus: {}, ranks: {
     "warcraftlogs|raid|Median rDPS": 5, "simulationcraft|raid|Median rDPS": 1
-  } } } };
+  } } } });
   movementFor(specs, scales, snap);
   assert.equal(specs[0].metrics[0].rankDelta, 2);        // WCL 5 → 3 climbed 2
   assert.equal(specs[0].metrics[1].rankDelta, undefined); // SimC 1 → 1 unchanged, no false delta
@@ -146,7 +153,7 @@ test("snapshotStateOf round-trips into movementFor (shared key format cannot dri
     ptrDummy: { rank: 7, of: 23, score: 61, targets: { "1": 1 } }
   };
   // Snapshot the state exactly as snapshot.mjs would, then move the world and re-compare.
-  const snap = { date: "2026-07-01", specs: snapshotStateOf([spec]) };
+  const snap = cur({ date: "2026-07-01", specs: snapshotStateOf([spec]) });
   assert.equal(snap.specs["C|S"].ranks["warcraftlogs|raid|Median rDPS"], 4);
   assert.deepEqual(snap.specs["C|S"].dummy, { rank: 7, score: 61 });
   const moved = {
@@ -331,8 +338,8 @@ test("historySeries: tier-only history maps to band midpoints; enriched history 
   ] } };
   const spec = { class: "X", spec: "A" };
   const snaps = [ // deliberately newest-first, as loadData returns them
-    { date: "2026-07-09", specs: { "X|A": { consensus: { raid: "A", mplus: "B" }, scores: { raid: 73, mplus: 51 },
-      projection: { raid: { tier: "A", score: 80, confidence: "high" }, mplus: null } } } },
+    cur({ date: "2026-07-09", specs: { "X|A": { consensus: { raid: "A", mplus: "B" }, scores: { raid: 73, mplus: 51 },
+      projection: { raid: { tier: "A", score: 80, confidence: "high" }, mplus: null } } } }),
     { date: "2026-07-01", specs: { "X|A": { consensus: { raid: "S", mplus: null }, ranks: {} } } } // pre-enrichment
   ];
   const h = historySeries([spec], scales, snaps);
@@ -540,10 +547,10 @@ test("projectionMovementFor narrates the forecast's own moves and never touches 
     { class: "Mage", spec: "Frost", consensus: { raid: { tier: "A" } },
       projection: { raid: { tier: "B", score: 50 }, mplus: null } },
   ];
-  const snapshot = { date: "2026-07-23", specs: {
+  const snapshot = cur({ date: "2026-07-23", specs: {
     "Monk|Brewmaster": { consensus: { raid: "B" }, projection: { raid: { tier: "B", score: 57 }, mplus: { tier: "A", score: 66 } } },
     "Mage|Frost": { consensus: { raid: "B" }, projection: { raid: { tier: "B", score: 50 }, mplus: null } },
-  } };
+  } });
 
   movementFor(specs, scales, snapshot);
   projectionMovementFor(specs, scales, snapshot);
@@ -566,10 +573,88 @@ test("projectionMovementFor is a no-op before projections() has run (ordering co
   // so spec.projection did not exist yet and it silently produced nothing (audit C3).
   const scales = { consensus: { bands: [{ tier: "A", min: 60 }, { tier: "B", min: 0 }] } };
   const specs = [{ class: "Monk", spec: "Brewmaster", consensus: { raid: { tier: "B" } } }]; // no .projection yet
-  const snapshot = { date: "2026-07-23", specs: {
-    "Monk|Brewmaster": { consensus: { raid: "B" }, projection: { raid: { tier: "B", score: 57 }, mplus: null } } } };
+  const snapshot = cur({ date: "2026-07-23", specs: {
+    "Monk|Brewmaster": { consensus: { raid: "B" }, projection: { raid: { tier: "B", score: 57 }, mplus: null } } } });
   projectionMovementFor(specs, scales, snapshot);
   assert.equal(specs[0].projMovement, undefined);
+  // Guard the guard: the same call WITH a projection present must narrate, or this test
+  // would pass for any reason at all (it once did — the version gate, not the ordering,
+  // was what made it green after the markers landed).
+  const ready = [{ ...specs[0], projection: { raid: { tier: "A", score: 65 }, mplus: null } }];
+  projectionMovementFor(ready, scales, snapshot);
+  assert.equal(ready[0].projMovement.raid.was, "B", "the fixture must be capable of producing a move");
+});
+
+/* The version markers are load-bearing, not documentation. When PROJECTION_VERSION or
+   RANK_VERSION is bumped, the recompute must NOT be published as movement — and the
+   sections the bump does not invalidate must keep working. Both halves matter: the naive
+   "skip mismatched snapshots" fix passes the first half and silently breaks the second,
+   which is how the branch shipped 11 phantom forecast arrows while hiding 9 real
+   consensus moves. */
+test("a rank-version boundary suppresses rank arrows but still narrates consensus movement", () => {
+  const scales = { consensus: { bands: [{ tier: "S", min: 88 }, { tier: "A", min: 58 }, { tier: "B", min: 0 }] } };
+  const specs = () => [{
+    class: "C", spec: "S", role: "DPS",
+    consensus: { raid: { tier: "A" }, mplus: { tier: "B" } },
+    metrics: [{ source: "wcl", bracket: "raid", name: "M", value: 1, rank: 2 }],
+    ptrDummy: { rank: 3, of: 20, score: 70, targets: { "1": 1 } }
+  }];
+  const body = { "C|S": { consensus: { raid: "B", mplus: "B" }, ranks: { "wcl|raid|M": 5 }, dummy: { rank: 9, score: 40 } } };
+
+  const sameVersion = movementFor(specs(), scales, cur({ date: "2026-07-23", specs: body }))[0];
+  assert.deepEqual(sameVersion.movement, { raid: { delta: 1, was: "B", since: "2026-07-23" } });
+  assert.equal(sameVersion.metrics[0].rankDelta, 3, "same version → rank arrows are real");
+  assert.equal(sameVersion.ptrDummy.rankDelta, 6);
+
+  // Unstamped == rank v1. The tier move is still true across the boundary; the rank move is not.
+  const crossVersion = movementFor(specs(), scales, { date: "2026-07-23", specs: body })[0];
+  assert.deepEqual(crossVersion.movement, { raid: { delta: 1, was: "B", since: "2026-07-23" } },
+    "consensus tiers are version-independent — suppressing them would hide real movement");
+  assert.equal(crossVersion.metrics[0].rankDelta, undefined, "a redefined rank is not a rank change");
+  assert.equal(crossVersion.ptrDummy.rankDelta, undefined);
+});
+
+test("a rank-version boundary does not stop pickBaseline one snapshot short", () => {
+  // The failure this pins: v1 ranks all read as "different", so the newest v1 snapshot looks
+  // like a valid baseline and the walk stops there — reporting zero consensus movement for a
+  // night that actually moved, while narrating the rank redefinition as change.
+  const spec = {
+    class: "C", spec: "S", role: "DPS",
+    consensus: { raid: { tier: "A" }, mplus: { tier: "B" } },
+    metrics: [{ source: "x", bracket: "raid", name: "M", value: 1, rank: 2 }]
+  };
+  const v1SameTiers = { date: "2026-07-24", specs: { "C|S": { consensus: { raid: "A", mplus: "B" }, ranks: { "x|raid|M": 17 } } } };
+  const v1RealMove  = { date: "2026-07-23", specs: { "C|S": { consensus: { raid: "B", mplus: "B" }, ranks: { "x|raid|M": 17 } } } };
+  assert.equal(pickBaseline([spec], [v1SameTiers, v1RealMove]), v1RealMove,
+    "same tiers + differently-defined ranks is not a difference");
+});
+
+test("a projection-version boundary drops forecast arrows and un-splices the timeline", () => {
+  const scales = { consensus: { bands: [{ tier: "S", min: 85 }, { tier: "A", min: 60 }, { tier: "B", min: 0 }] } };
+  const spec = { class: "Monk", spec: "Brewmaster", consensus: { raid: { tier: "B" } },
+    projection: { raid: { tier: "A", score: 64 }, mplus: null } };
+  const body = { "Monk|Brewmaster": { consensus: { raid: "B" },
+    scores: { raid: 55, mplus: null }, projection: { raid: { tier: "B", score: 52 }, mplus: null } } };
+
+  const same = projectionMovementFor([{ ...spec }], scales, cur({ date: "2026-07-24", specs: body }))[0];
+  assert.equal(same.projMovement.raid.was, "B");
+
+  const across = projectionMovementFor([{ ...spec }], scales, { date: "2026-07-24", specs: body })[0];
+  assert.equal(across.projMovement, undefined, "our own formula change is not a spec's movement");
+
+  // …and the drawer sparkline must not splice the two formulas into one line.
+  const h = historySeries([spec], scales, [{ date: "2026-07-24", specs: body }]);
+  assert.deepEqual(h.specs["Monk|Brewmaster"].projRaid, [null], "a v1 projection point is a gap, not a step");
+  assert.deepEqual(h.specs["Monk|Brewmaster"].raid, [55], "consensus scores come from the sources — never version-gated");
+});
+
+test("snapshot.mjs stamps the versions the readers gate on (writer/reader cannot drift)", async () => {
+  // The round-trip test above calls snapshotStateOf directly, which does NOT stamp versions —
+  // so it cannot see a drift in the one place that does. Assert against the real writer.
+  const src = await readFile(new URL("../src/snapshot.mjs", import.meta.url), "utf8");
+  for (const field of ["projectionVersion: PROJECTION_VERSION", "rankVersion: RANK_VERSION"]) {
+    assert.ok(src.includes(field), `snapshot.mjs must stamp ${field} — unstamped snapshots read as v1 forever`);
+  }
 });
 
 test("metricRanks: tied values share a rank (audit 2026-07-24, C6)", () => {
