@@ -1,5 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import { checkManifest, checkFreshness, checkAnomaly, checkRowDrop, checkValueMove, probeDate, probeRows, ageDays } from "../src/check-refresh.mjs";
 
 /* Small synthetic world: one tier-list source (two pages), one metrics source, one
@@ -173,6 +174,15 @@ test("a run where essentially nothing arrived cannot publish as a quiet night (a
   // absent config key = no floor (back-compat with an un-migrated contract)
   assert.deepEqual(checkManifest(config, allDead, freshData(), "2026-07-14").errors
     .filter(e => e.includes("floor —")), []);
+
+  // The floor must not be satisfiable by INVENTED rows. A row keyed to no requirement is
+  // never probed against a stored date, so padding was a free pass for the one actor this
+  // gate constrains — the process that writes the manifest (audit 2026-07-25).
+  const padded = { ...allDead, sources: [...allDead.sources,
+    ...Array.from({ length: 5 }, (_, i) => ({ source: `padding-${i}`, result: "success", detail: null, previousAsOf: null, newAsOf: null })) ] };
+  const p = checkManifest(cfg, padded, freshData(), "2026-07-14");
+  assert.ok(p.errors.some(e => e.includes("below the 2 floor")),
+    "invented success rows must not count toward the floor: " + JSON.stringify(p.errors));
 });
 
 test("a complete, honest manifest passes with no errors", () => {
@@ -486,4 +496,64 @@ test("checkValueMove catches units/column-parse shapes, not normal churn (audit 
   assert.deepEqual(acked.errors, [], "…and clears with the human ack");
   assert.match(acked.notes[0], /approved by human ack — Archon recipe fix/);
   assert.ok(acked.acked.length > 0, "the acked findings are still reported for the record");
+});
+
+test("the value-move ack is a separate human token from the anomaly ack, and its waivers are printed", async () => {
+  /* Both gates are human-only, but they are unrelated judgements. Feeding one token to
+     both meant a human re-running to approve a citable mass TIER retune also, silently,
+     approved every VALUE finding in that run — including ones they never saw, because
+     `acked` was computed and then discarded (audit 2026-07-25). This pins the wiring: the
+     function-level behaviour is covered above, but the defect lived entirely in the CLI. */
+  const src = await readFile(new URL("../src/check-refresh.mjs", import.meta.url), "utf8");
+
+  assert.match(src, /VALUE_MOVE_ACK/, "the value gate needs its own env input");
+  assert.match(src, /checkValueMove\(config, data, prevData, valueAck\)/,
+    "checkValueMove must receive the value ack, never the anomaly ack");
+  assert.match(src, /checkAnomaly\(.*config\.anomaly, trustedAck\)/, "the anomaly gate keeps its own token");
+  // No silent fallback: `valueAck = … ?? ANOMALY_ACK` would restore the exact defect.
+  const valueLine = src.split("\n").find(l => l.includes("const valueAck"));
+  assert.ok(valueLine && !valueLine.includes("ANOMALY_ACK") && !valueLine.includes("trustedAck"),
+    "the value ack must not fall back to the anomaly ack: " + valueLine);
+  assert.match(src, /waived by value ack/, "a human must see WHAT their ack waived, not just how many");
+
+  const wf = await readFile(new URL("../.github/workflows/nightly.yml", import.meta.url), "utf8");
+  assert.match(wf, /value_move_ack:/, "the separate input must be dispatchable");
+  assert.match(wf, /VALUE_MOVE_ACK: \$\{\{ inputs\.value_move_ack \}\}/,
+    "…and wired to the gate step, or the input is decorative");
+});
+
+test("checkValueMove covers sims and Dummy Dome, not just spec.metrics", () => {
+  /* fightProfile.targets and ptrDummy.targets live OUTSIDE spec.metrics. Indexing only
+     spec.metrics left 244 large-magnitude numbers on real data completely unguarded: a
+     1000x Bloodmallet parse published green. Bloodmallet is re-fetched and re-merged by an
+     agent parse every night, so it is squarely in the threat model this guard exists for
+     (audit 2026-07-25). Replayed over 18 real nightly transitions, the added coverage
+     produced zero new findings — it is coverage, not noise. */
+  const cfg = { ...config, maxValueMovePct: 0.6, maxFamilyMedianMovePct: 0.35, minValueMagnitude: 100 };
+  const mk = (sim, dummy) => ({ specs: sim.map((v, i) => ({
+    class: "C", spec: `P${i}`, role: "DPS", metrics: [],
+    fightProfile: { source: "bloodmallet", asOf: "2026-07-14", targets: { "1": v, "3": v * 2 } },
+    ptrDummy: { source: "warcraftlogs", asOf: "2026-07-14", targets: { "1": dummy[i] } },
+  })) });
+  const base = mk([100000, 110000, 120000, 130000, 140000, 150000],
+                  [90000, 95000, 100000, 105000, 110000, 115000]);
+
+  assert.deepEqual(checkValueMove(cfg, base, base).errors, [], "an unchanged night is silent");
+  // normal sim churn between Bloodmallet runs
+  assert.deepEqual(checkValueMove(cfg, mk([112000, 104000, 131000, 121000, 152000, 141000],
+                                          [93000, 91000, 106000, 99000, 117000, 110000]), base).errors, []);
+
+  const rescaled = checkValueMove(cfg, mk(base.specs.map(s => s.fightProfile.targets["1"] * 1000),
+                                          base.specs.map(s => s.ptrDummy.targets["1"])), base);
+  assert.ok(rescaled.errors.some(e => e.includes("bloodmallet|sim|targets.1")),
+    "a rescaled sim column must be caught: " + JSON.stringify(rescaled.errors.slice(0, 2)));
+  assert.ok(rescaled.errors.some(e => /family median move/.test(e) && e.includes("sim")),
+    "…and the family median move alongside it");
+
+  const dummyBroken = checkValueMove(cfg, mk(base.specs.map(s => s.fightProfile.targets["1"]),
+                                             base.specs.map(s => s.ptrDummy.targets["1"] * 1000)), base);
+  assert.ok(dummyBroken.errors.some(e => e.includes("warcraftlogs|dummy|targets.1")),
+    "a rescaled Dummy Dome column must be caught too");
+  // …and the sim family, untouched in that run, stays silent — no blanket reddening.
+  assert.ok(!dummyBroken.errors.some(e => e.includes("|sim|")), "an unrelated healthy family must not be dragged in");
 });

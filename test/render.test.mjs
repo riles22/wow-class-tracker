@@ -189,6 +189,37 @@ test("pickBaseline skips snapshots identical to the present state (post-refresh 
   assert.equal(pickBaseline([preDummySpec], [preDummySnap]), null, "dummy-only additions must not fake a baseline diff");
 });
 
+test("specBuildChanges: a hero-tree scope is not class-wide", () => {
+  /* "Class (…)" was read as whole-class for ANY parenthetical, so a hero-tree line
+     attached to specs that do not have that tree — the exact mis-attribution this
+     function's comment claims to prevent. data/ptr-builds.json already carries the shape
+     ("Warlock (Hellcaller hero talents)", "Death Knight (San'layn)"), so this was latent,
+     not theoretical (audit 2026-07-25). */
+  const builds = { builds: [{ date: "2026-06-30", forumPostNumber: 9,
+    specsAffected: ["Warlock (Hellcaller hero talents)", "Affliction Warlock"],
+    highlights: ["Warlock (Hellcaller hero talents) Wither ticks 10% faster."] }] };
+  const linesFor = spec => specBuildChanges({ class: "Warlock", spec }, builds)[0]?.lines ?? [];
+
+  assert.deepEqual(linesFor("Demonology"), [], "Demonology has no Hellcaller tree");
+  assert.deepEqual(linesFor("Destruction"), [], "…nor Destruction");
+  assert.deepEqual(linesFor("Affliction"), [
+    { text: "Warlock (Hellcaller hero talents) Wither ticks 10% faster.", classWide: true }
+  ], "…but a spec the build names outright still gets the line");
+
+  // The genuine whole-class sentinels keep reaching every spec, named or not.
+  const wide = { builds: [{ date: "2026-06-23", forumPostNumber: 8,
+    specsAffected: ["Warlock (class-wide)"],
+    highlights: ["Warlock (class-wide) Soulstone cooldown reduced."] }] };
+  for (const spec of ["Affliction", "Demonology", "Destruction"]) {
+    assert.equal(specBuildChanges({ class: "Warlock", spec }, wide)[0]?.lines.length, 1,
+      `${spec} must still receive a real class-wide line`);
+  }
+  const allSpecs = { builds: [{ date: "2026-06-23", forumPostNumber: 8,
+    specsAffected: ["Hunter (all specs)"], highlights: ["Hunter (all specs) Mark is single-target."] }] };
+  assert.equal(specBuildChanges({ class: "Hunter", spec: "Survival" }, allSpecs)[0]?.lines.length, 1,
+    "\"(all specs)\" is the same promise worded differently");
+});
+
 test("metricRanks ranks within (role, bracket, metric name), #1 = highest", () => {
   const m = (name, value, bracket = "raid") => ({ source: "x", bracket, name, value });
   const specs = [
@@ -747,6 +778,46 @@ test("dataHealth stays clock-free and ships what the client needs to age it (aud
   assert.deepEqual(mixed.series.map(s => s.label), ["Frozen"]);
   assert.equal(mixed.oldest, "2026-06-01");
   assert.equal(mixed.series[0].source, "warcraftlogs");
+});
+
+test("dataHealth splits Warcraft Logs' two pipelines, so fresh rows never join an outage clause", () => {
+  // The banner groups by source. Warcraft Logs runs two independently-healthy feeds, and
+  // once the reader's clock ages the FRESH one past the threshold too, source-only grouping
+  // folds it into the outage clause and stamps it with the outage's date. Real shape:
+  // rDPS/HPS frozen 2026-07-09, raw-DPS landing nightly, read on/after 2026-08-01.
+  const h = dataHealth([{ metrics: [
+    { name: "Median rDPS (Mythic, all bosses)", asOf: "2026-07-09", source: "warcraftlogs" },
+    { name: "Median HPS (M+, all dungeons)", asOf: "2026-07-09", source: "warcraftlogs" },
+    // The trap: a healer's DAMAGE row off the same rdps endpoint. /rDPS|HPS/ misses it.
+    { name: "Median DPS (Mythic, healer)", asOf: "2026-07-09", source: "warcraftlogs" },
+    { name: "12.1 PTR raid testing score (normalized)", asOf: "2026-07-09", source: "warcraftlogs" },
+    { name: "Median raw DPS (12.1 PTR Dummy Dome, 1T)", asOf: "2026-07-24", source: "warcraftlogs" },
+    { name: "Median raw DPS (12.1 PTR M+ keys, pooled)", asOf: "2026-07-24", source: "warcraftlogs" },
+    { name: "Top-50 avg M+ rating (ceiling)", asOf: "2026-07-24", source: "murlok" },
+  ] }]);
+
+  const fam = Object.fromEntries(h.all.map(s => [s.label, s.family]));
+  assert.equal(fam["Median DPS (Mythic, healer)"], "redistributed",
+    "a healer damage row is the erroring family despite its name");
+  assert.equal(fam["12.1 PTR raid testing score (normalized)"], "redistributed");
+  assert.equal(fam["Median raw DPS (12.1 PTR Dummy Dome, 1T)"], "raw");
+  assert.equal(fam["Top-50 avg M+ rating (ceiling)"], undefined,
+    "single-pipeline sources carry no family, so they get no causal wording");
+
+  // Replay the client's grouping at a date that ages BOTH families past the threshold.
+  const ref = "2026-08-05";
+  const stale = h.all.filter(s => (Date.parse(ref) - Date.parse(s.asOf)) / 86400000 > h.staleDays);
+  assert.equal(stale.length, 7, "by August every row here is stale — that is the trigger");
+  const groups = new Map();
+  for (const s of stale) {
+    const key = s.family ? `${s.source}|${s.family}` : s.source;
+    const g = groups.get(key) || { n: 0, oldest: null };
+    g.n++; if (!g.oldest || s.asOf < g.oldest) g.oldest = s.asOf;
+    groups.set(key, g);
+  }
+  assert.deepEqual(groups.get("warcraftlogs|redistributed"), { n: 4, oldest: "2026-07-09" });
+  assert.deepEqual(groups.get("warcraftlogs|raw"), { n: 2, oldest: "2026-07-24" },
+    "the raw family keeps its own, later date instead of inheriting 2026-07-09");
 });
 
 test("dataHealth is a pure function of the data — identical input, identical output", () => {

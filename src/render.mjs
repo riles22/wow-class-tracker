@@ -264,6 +264,11 @@ export function classifyHighlight(h) {
    This is DISPLAY ONLY. outlookFor still scores spec lines exclusively; that exclusion is
    deliberate and documented there. The redundant spec prefix is stripped for display; the
    line text is otherwise verbatim from the forum notes. */
+/* The parentheticals that genuinely mean "every spec of this class", as they appear in the
+   official notes. Anything else in "Class (…)" form is a narrower scope — almost always a
+   hero talent tree — and must not be read as class-wide. */
+const CLASS_WIDE = /\((?:class-wide|all specs)\)/;
+
 export function specBuildChanges(spec, ptrBuilds) {
   const prefix = `${spec.spec} ${spec.class} `;
   const full = `${spec.spec} ${spec.class}`;
@@ -271,12 +276,21 @@ export function specBuildChanges(spec, ptrBuilds) {
   const out = [];
   for (const b of ptrBuilds?.builds ?? []) {
     const affected = b.specsAffected ?? [];
-    // Does this build claim to touch this spec (by name, or via a class-level entry)?
-    const touchesSpec = affected.some(e => e === full || e.startsWith(classLevel));
+    const namedHere = affected.includes(full);
+    // "Class (…)" is not automatically the whole class. Only the explicit whole-class
+    // sentinels are; the rest are HERO-TREE scopes ("Warlock (Hellcaller hero talents)",
+    // "Death Knight (San'layn)") that reach some specs and not others, and the data does
+    // not say which. Treating them as class-wide attached a Hellcaller line to Demonology,
+    // which has no Hellcaller tree — the exact mis-attribution this function's comment
+    // claims to prevent (audit 2026-07-25). A hero-tree line therefore attaches only when
+    // the build's specsAffected names this spec outright: informative where the feed is
+    // explicit, silent where it is not, and never guessing.
+    const touchesSpec = affected.some(e => e === full || (e.startsWith(classLevel) && CLASS_WIDE.test(e)));
     const lines = [];
     for (const h of b.highlights ?? []) {
       if (h.startsWith(prefix)) { lines.push({ text: h.slice(prefix.length), classWide: false }); continue; }
-      if (touchesSpec && h.startsWith(classLevel)) lines.push({ text: h, classWide: true });
+      if (!h.startsWith(classLevel)) continue;
+      if (CLASS_WIDE.test(h) ? touchesSpec : namedHere) lines.push({ text: h, classWide: true });
     }
     if (lines.length) {
       out.push({ date: b.date, forumPostNumber: b.forumPostNumber ?? null, forumUrl: b.forumUrl ?? null, lines });
@@ -691,6 +705,17 @@ const dayGap = (from, to) => Math.round((Date.parse(to) - Date.parse(from)) / 86
 /* Staleness measured against the data's OWN newest date — deliberately clock-free, which
    is what keeps this honest when agent-written page snapshots lie, and keeps the build a
    pure function of the data. See the note inside about where the absolute check lives. */
+/* Which Warcraft Logs pipeline a series comes from. The two are independently healthy:
+   `characterRankings(metric: rdps)` — the redistributed family, including HPS and the
+   normalized raid-testing score, and INCLUDING "Median DPS (Mythic, healer)", which is a
+   healer's damage off the same endpoint — has been erroring upstream since 2026-07-09,
+   while the deterministic raw-DPS fetch lands nightly. Grouping the banner by source alone
+   folds them together and announces fresh rows as part of an outage, misdated by weeks
+   (audit 2026-07-25). A name regex is not enough: /rDPS|HPS/ misses the healer row, which
+   is exactly the kind of row the banner must not misattribute. The rule is the inverse and
+   it is total — "raw DPS" is the raw family, everything else on this source is not. */
+const wclFamily = label => (/\braw DPS\b/i.test(label) ? "raw" : "redistributed");
+
 export function dataHealth(specs) {
   const newest = new Map(); // series label → { asOf: newest seen, source }
   const note = (label, asOf, source) => {
@@ -714,7 +739,12 @@ export function dataHealth(specs) {
   // used to announce every stall as a Warcraft Logs rDPS outage, which made two Robydoby
   // Google Sheets a WCL API failure (audit 2026-07-24, D1).
   const all = [...newest.entries()]
-    .map(([label, v]) => ({ label, asOf: v.asOf, source: v.source ?? null }))
+    .map(([label, v]) => ({
+      label, asOf: v.asOf, source: v.source ?? null,
+      // Only Warcraft Logs has two independently-healthy pipelines to tell apart; every
+      // other source is one feed, so it carries no family and gets no causal wording.
+      ...(v.source === "warcraftlogs" ? { family: wclFamily(label) } : {})
+    }))
     .sort((a, b) => a.asOf.localeCompare(b.asOf) || a.label.localeCompare(b.label));
   // `series` is the self-relative answer: stale against the data's OWN newest date. It has
   // one blind spot — if the whole empirical layer stalls together, `latest` stalls with it

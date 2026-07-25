@@ -74,3 +74,32 @@ test("removing a scope RETRACTS the injected creator (audit 2026-07-24, C8)", ()
   const third = applyCommunityOverrides(second, { creators: [] });
   assert.deepEqual(third.classes.find(x => x.class === "Rogue").creators.map(c => c.name), ["HandCurated"]);
 });
+
+test("re-applying is position-stable, so appending a curated creator cannot reorder the file", () => {
+  /* The applier runs at every prebuild, and Gate 0 compares the WHOLE community.json.
+     Sweeping managed entries out before the upsert meant each re-injection was pushed to
+     the end of its array, so adding one hand-curated creator to a class that already had
+     an injected one reordered the file — and the nightly then failed red, blaming the
+     agent for a reorder the applier produced (audit 2026-07-25). The C8 test above
+     `.sort()`s its names, which is precisely why this shipped. */
+  const registry = { creators: [
+    { name: "Injected", url: "https://youtube.com/@inj", credential: "c",
+      scopes: [{ class: "Rogue", specs: ["Outlaw"] }] },
+  ] };
+  const base = applyCommunityOverrides({ classes: [
+    { class: "Rogue", creators: [{ name: "First", url: "https://youtube.com/@a", credential: "x" }] },
+  ] }, registry);
+  assert.deepEqual(base.classes[0].creators.map(c => c.name), ["First", "Injected"]);
+
+  // Idempotence: re-applying an already-applied file must be a byte-for-byte no-op.
+  assert.deepEqual(applyCommunityOverrides(base, registry), base,
+    "a second apply must not move anything — the nightly applies on every build");
+
+  // The real scenario: the owner appends a curated creator, then the nightly re-applies.
+  const appended = JSON.parse(JSON.stringify(base));
+  appended.classes[0].creators.push({ name: "Newly Curated", url: "https://youtube.com/@n", credential: "y" });
+  const after = applyCommunityOverrides(appended, registry);
+  assert.deepEqual(after.classes[0].creators.map(c => c.name), ["First", "Injected", "Newly Curated"],
+    "the injected creator keeps its slot; only the genuinely new entry moves");
+  assert.deepEqual(after, appended, "…so the applier writes nothing at all");
+});

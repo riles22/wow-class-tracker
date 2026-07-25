@@ -229,7 +229,13 @@ export function checkManifest(config, manifest, data, now, evidence = null) {
   // runs sit around 17-19 of 25, so the floor is a catastrophe detector, not a quality
   // bar — it fires only when the run brought back essentially nothing.
   if (config.minSuccessfulSources != null) {
-    const ok = (manifest.sources ?? []).filter(r => r.result === "success").length;
+    // Count only rows that ANSWER a requirement. Counting every row let the floor be met
+    // with invented keys: rows matching no requirement are never probed against stored
+    // dates, so ten `padding-N` successes satisfied the floor while all 25 real sources
+    // said "unreachable". The one actor this gate exists to constrain is the one that
+    // writes this file (audit 2026-07-25).
+    const reqKeys = new Set(config.requirements.map(r => r.key));
+    const ok = (manifest.sources ?? []).filter(r => r.result === "success" && reqKeys.has(r.source)).length;
     if (ok < config.minSuccessfulSources) {
       errors.push(`run-manifest: only ${ok} source${ok === 1 ? "" : "s"} succeeded, below the ${config.minSuccessfulSources} floor — this run brought back almost nothing; publishing it would present a failed night as a quiet one`);
     }
@@ -265,8 +271,10 @@ export function checkRowDrop(config, data, prevData) {
    all constrain how MANY rows arrive and how fresh they are — nothing constrained the
    numbers themselves. A units error or a parse that reads the wrong column publishes green
    and silently rewrites the throughput ranks the whole "how do specs stack up" job rests
-   on. Compares each (spec, source, bracket, name) value against the last COMMITTED state,
-   which by construction already passed every gate.
+   on. Compares every stored number against the last COMMITTED state, which by construction
+   already passed every gate: spec.metrics rows, spec.fightProfile.targets (sims) and
+   spec.ptrDummy.targets. Coverage is the point — it read only spec.metrics at first, which
+   left every sim and Dummy Dome number free to be rescaled 1000x and publish green.
 
    Two limits, both deliberately generous: the raw-DPS PTR series legitimately churns
    10-20% night to night on small samples, so a single row must move a LOT to trip, and a
@@ -286,13 +294,27 @@ export function checkValueMove(config, data, prevData, ack = null) {
   const minMag = config.minValueMagnitude ?? 100;
   const index = specs => {
     const byKey = new Map(), byFamily = new Map();
+    const add = (key, fam, value) => {
+      if (typeof value !== "number") return;
+      byKey.set(key, value);
+      if (!byFamily.has(fam)) byFamily.set(fam, []);
+      byFamily.get(fam).push(value);
+    };
     for (const s of specs ?? []) {
       for (const m of s.metrics ?? []) {
-        if (typeof m.value !== "number") continue;
-        byKey.set(`${s.class}|${s.spec}|${m.source}|${m.bracket}|${m.name}`, m.value);
-        const fam = `${m.source}|${m.bracket}|${m.name}`;
-        if (!byFamily.has(fam)) byFamily.set(fam, []);
-        byFamily.get(fam).push(m.value);
+        add(`${s.class}|${s.spec}|${m.source}|${m.bracket}|${m.name}`, `${m.source}|${m.bracket}|${m.name}`, m.value);
+      }
+      // Sim and Dummy Dome numbers live OUTSIDE spec.metrics, and reading only
+      // spec.metrics left 244 large-magnitude values completely unguarded — a 1000x
+      // Bloodmallet parse published green (audit 2026-07-25). Bloodmallet is re-fetched
+      // and re-merged by an agent parse every night, which is exactly the exposure this
+      // guard exists for; a partial mis-parse also corrupts the Dummy Dome composite,
+      // the fight-profile labels and the projection's PTR term, not just the printed number.
+      for (const [count, value] of Object.entries(s.fightProfile?.targets ?? {})) {
+        add(`${s.class}|${s.spec}|${s.fightProfile.source}|sim|targets.${count}`, `${s.fightProfile.source}|sim|targets.${count}`, value);
+      }
+      for (const [count, value] of Object.entries(s.ptrDummy?.targets ?? {})) {
+        add(`${s.class}|${s.spec}|${s.ptrDummy.source}|dummy|targets.${count}`, `${s.ptrDummy.source}|dummy|targets.${count}`, value);
       }
     }
     return { byKey, byFamily };
@@ -455,6 +477,11 @@ if (isMain) {
     // The trusted ack comes from a human (workflow input / env / --ack), NEVER from
     // the agent-written manifest.
     const trustedAck = args.find(a => a.startsWith("--ack="))?.slice(6) ?? process.env.ANOMALY_ACK ?? null;
+    // The value-move gate takes its OWN ack. Sharing one token meant a human re-running to
+    // approve a mass tier retune silently waived every value-move finding in the same run —
+    // two unrelated judgements on one signature (audit 2026-07-25). Falling back to the
+    // anomaly ack would recreate exactly that, so there is deliberately no fallback.
+    const valueAck = args.find(a => a.startsWith("--value-ack="))?.slice(12) ?? process.env.VALUE_MOVE_ACK ?? null;
     const payload = buildPayload(data);
     const baseline = data.historySnapshots?.[0] ?? null;
     const a = baseline
@@ -476,11 +503,14 @@ if (isMain) {
     } catch { prevData = null; }
     if (!prevData) console.log("  note: no HEAD baseline readable — row-drop and value-move guards skipped");
     const drop = checkRowDrop(config, data, prevData);
-    // Same trusted, human-only ack as the tier anomaly gate: a reviewed recipe change
-    // (e.g. the 2026-07-23 Archon fix, which rescaled two whole families the next night)
-    // is exactly the legitimate case, and it must be approvable rather than unpublishable.
-    const vals = checkValueMove(config, data, prevData, trustedAck); // shares the same HEAD baseline
+    // Human-only ack, distinct from the tier one: a reviewed recipe change (e.g. the
+    // 2026-07-23 Archon fix, which rescaled two whole families the next night) is exactly
+    // the legitimate case, and it must be approvable rather than unpublishable.
+    const vals = checkValueMove(config, data, prevData, valueAck); // shares the HEAD baseline, not the ack
     for (const n of vals.notes ?? []) console.log("  note: " + n);
+    // Show what was waived. An ack that prints only a count asks a human to approve a set
+    // they were never shown — `acked` was computed and then dropped on the floor.
+    for (const f of vals.acked ?? []) console.log("    waived by value ack: " + f);
     failures.push(...m.errors, ...a.errors, ...drop.errors, ...vals.errors);
     for (const d of m.degraded) console.log("  degraded: " + d);
     for (const n of [...m.notes, ...a.notes]) console.log("  note: " + n);

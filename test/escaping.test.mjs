@@ -19,11 +19,11 @@ import path from "node:path";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
-/* Two shapes: one that breaks out of a text node, one that breaks out of an attribute. */
+/* Only the text-node shape is used here. The attribute-break and javascript:-href probes
+   moved to test/ui-invariants.test.mjs when the client-rendered sinks did — a static scan
+   cannot see them, so keeping unused copies here implied coverage this file does not have. */
 const MARK = "XSSPROBE";
 const TEXT_BREAK = `${MARK}</script><img src=x onerror="window.__pwned=1">`;
-const ATTR_BREAK = `${MARK}" onmouseover="window.__pwned=1" x="`;
-const BAD_HREF = "javascript:window.__pwned=1";
 
 test("the payload island can never terminate its own <script> block", async () => {
   // This IS a build-time property, so a static check is the right shape for it. The

@@ -43,6 +43,15 @@ on:
           Blizzard mass retune. Scheduled runs can never carry an ack.
         required: false
         default: ""
+      value_move_ack:
+        description: >-
+          Human approval for a large METRIC-VALUE move (reason + citation, e.g. "Archon
+          column parse corrected, 47 rows rescaled"). Separate from anomaly_ack on
+          purpose: one token approving both would let a reviewed tier retune silently
+          waive every unrelated value finding in the same run. Leave empty for normal
+          runs; scheduled runs can never carry an ack.
+        required: false
+        default: ""
       agent_model:
         description: >-
           Claude model for BOTH refresh agents, this run only (one-off trials, e.g.
@@ -483,11 +492,13 @@ jobs:
 
       - name: "Gate 3: refresh contract (manifest · completeness · anomaly · WCL evidence)"
         env:
-          # HUMAN-ONLY anomaly override: empty on scheduled runs; a person supplies it
-          # via Run workflow → anomaly_ack after reviewing a blocked mass movement.
-          # The agent-written manifest can only PROPOSE (anomalyAckProposal), which
-          # check-refresh prints for that person — it never satisfies the gate.
+          # HUMAN-ONLY overrides: empty on scheduled runs; a person supplies them
+          # via Run workflow after reviewing what the gate blocked. The agent-written
+          # manifest can only PROPOSE (anomalyAckProposal), which check-refresh prints
+          # for that person — it never satisfies either gate. The two are separate
+          # inputs so approving a tier retune cannot waive unrelated value findings.
           ANOMALY_ACK: ${{ inputs.anomaly_ack }}
+          VALUE_MOVE_ACK: ${{ inputs.value_move_ack }}
         run: |
           # The agents must have REWRITTEN the manifest this run. An unchanged file
           # means the run free-rode on the previous record instead of doing
@@ -587,10 +598,18 @@ jobs:
           gh issue comment "$num" --body-file "$RUNNER_TEMP/digest.md"
 
       # A failed publish used to reach the owner as a bare "workflow failed" email, with
-      # the actual reason only in job logs that need an interactive download — which is
-      # exactly how the 2026-07-25 failure became undiagnosable remotely. The gates
+      # the actual reason only in job logs that need an interactive download. The gates
       # already print their real reason to stdout; capture it and post it where the
       # digest goes, so a red night explains itself in the same inbox as a green one.
+      #
+      # SCOPE, precisely (audit 2026-07-25): this is a STEP-level `if: failure()`, so it
+      # covers a gate failing inside this job, and a `refresh` job that fails or times out
+      # (publish is `if: !cancelled()`, so it still starts and its first step fails).
+      # It does NOT cover the 2026-07-25 incident itself — a publish job GitHub never
+      # assigned a runner to. No step in a job that never started can report anything, so
+      # that mode is covered by the freshness heartbeat instead: `maxRunAgeHours: 28` turns
+      # a missed night into a red run plus an alert issue roughly 5h later. Run-level
+      # coverage would need a separate `workflow_run`-triggered workflow.
       - name: Report a failed publish to the pinned issue
         if: failure()
         continue-on-error: true

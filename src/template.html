@@ -689,8 +689,6 @@
 
   <div id="changes"></div>
 
-  <div id="movers"></div>
-
   <details class="legend-wrap" id="legendwrap">
     <summary>Legend — tiers, PTR read, profile chips</summary>
   <div class="legend"><!-- three labeled clusters: everything tier-column, everything PTR, the profile chip -->
@@ -723,6 +721,13 @@
        honesty disclaimer from first-time visitors. Condensed in place instead — the claim
        stays visible, the three sentences of explanation fold. -->
   <div class="ptrcaveat" id="ptrcaveat"><b>PTR read</b> — everything 12.1 on this page is <b style="text-transform:none;letter-spacing:0;font-family:inherit;font-size:inherit;color:var(--ink)">early evidence, not settled fact</b>. <details class="caveat-more"><summary>what that means</summary>Sim numbers (Bloodmallet, SimC) desync between PTR and live and run immature rotations. PTR log cuts (WCL zones 52/54/56, Robydoby) are real player parses, but on tiny, tuning-in-flux samples (n often &lt;100). Treat all of it as directional until ~2 weeks of live logs confirm it.</details></div>
+
+  <!-- BELOW the PTR caveat, deliberately. The biggest forecast movers are precisely the
+       rows driven hardest by tiny-n PTR cuts, so headlining them above their own caveat
+       inverts the reading order. This block and renderMovers()'s comment must agree —
+       they did not until 2026-07-25, when the comment described a placement the markup
+       never had. A browser invariant asserts the DOM order, not the comment. -->
+  <div id="movers"></div>
 
   <div class="matrix" id="matrix"></div>
 
@@ -1288,10 +1293,15 @@ function render(){
       const projView = state.source === "projection" && state.era !== "live" && !state.fight;
       const eraPtr = state.era === "ptr" && !state.fight && !projView;
       note.hidden = !(projView || eraPtr);
+      // Name the letters' ACTUAL origin. This note exists to stop letter misattribution,
+      // so it must not itself say "consensus" while a single-source view is on screen —
+      // six of the seven ptr-era views are a named tier list, not the consensus.
+      const srcName = TIER_SOURCES.find(s => s.id === state.source)?.name;
+      const letters = srcName ? `<b>${esc(srcName)}'s 12.0.7 tiers</b>` : `the <b>12.0.7 consensus</b>`;
       note.innerHTML = projView
         ? `<b>Our own forecast</b> — live consensus blended with PTR raid/M+ testing and Dummy Dome data, shifted by the tuning outlook. A projection, not a source: it never feeds the consensus.`
         : eraPtr
-          ? `The tier columns still show the <b>12.0.7 consensus</b> — era filters verdicts, writeups and PTR numbers, not the letters. For a Season-2 read, pick <b>Ours: 12.1 ✦</b>.`
+          ? `The tier columns still show ${letters} — era filters verdicts, writeups and PTR numbers, not the letters. For a Season-2 read, pick <b>Ours: 12.1 ✦</b>.`
           : "";
     }
   }
@@ -1536,25 +1546,36 @@ if(META.latestSnapshot){
   // One clause per stalled SOURCE, each with its own date. A single "N Warcraft Logs
   // series frozen" sentence misattributed two Robydoby Google Sheets to a WCL rDPS
   // outage they cannot possibly be part of (audit 2026-07-24, D1).
+  // Group by source AND family. Warcraft Logs runs two independently-healthy pipelines:
+  // the redistributed (rDPS/HPS) family is mid-outage upstream while the raw-DPS series
+  // land nightly. Grouping by source alone folds the fresh rows into the outage clause and
+  // stamps them with the outage's date — which starts happening the moment the reader's
+  // clock ages the fresh rows past the threshold too (audit 2026-07-25).
   const bySource = new Map();
   stale.forEach(s=>{
     const id = s.source || "unknown";
-    const g = bySource.get(id) || { id, n:0, oldest:null };
+    const key = s.family ? `${id}|${s.family}` : id;
+    const g = bySource.get(key) || { key, id, family: s.family || null, n:0, oldest:null };
     g.n++; if(!g.oldest || s.asOf < g.oldest) g.oldest = s.asOf;
-    bySource.set(id, g);
+    bySource.set(key, g);
   });
   const bold = t => `<b style="text-transform:none;letter-spacing:0;font-family:inherit;font-size:inherit">${esc(t)}</b>`;
   const clause = g => {
     const label = (SOURCES.find(x=>x.id===g.id)||{}).name || g.id;
-    const noun = `${g.n} ${esc(label)} ${g.n===1?"series":"series"}`;
-    // Only Warcraft Logs is mid-outage; anything else simply hasn't refreshed.
-    return g.id === "warcraftlogs"
-      ? `${noun} frozen at ${bold(g.oldest)} — the redistributed-DPS (rDPS/HPS) family is mid-outage upstream`
+    const fam = g.family === "redistributed" ? " rDPS/HPS" : g.family === "raw" ? " raw-DPS" : "";
+    const noun = `${g.n} ${esc(label)}${fam} series`;
+    // The outage claim belongs to the family that is actually mid-outage, and to nothing
+    // else. Every other stalled group simply hasn't refreshed — say only that.
+    return g.family === "redistributed"
+      ? `${noun} frozen at ${bold(g.oldest)} — that family is erroring upstream`
       : `${noun} last updated ${bold(g.oldest)}`;
   };
-  const groups = [...bySource.values()].sort((a,b)=> b.n-a.n || a.id.localeCompare(b.id));
+  const groups = [...bySource.values()].sort((a,b)=> b.n-a.n || a.key.localeCompare(b.key));
   el.innerHTML = `<b>Heads up</b> ${groups.map(clause).join("; ")}. `
-    + `Tier lists, sims, and the raw-DPS series refresh nightly (latest ${esc(dh.latest)}); each frozen row shows its own date. `
+    // Only claim what this function can see. It reads metric dates, never sources.json,
+    // so "tier lists refresh nightly" was unverifiable here — and false exactly when the
+    // nightly stalls, which is when the banner matters most.
+    + `Freshest data we hold is ${esc(dh.latest)}; each row shows its own date. `
     + `Our 12.1 projection is recomputed nightly, but its PTR-empirical term still comes from the frozen ${esc(oldest)} cuts. `
     + `<details class="dh-series"><summary>Affected: ${n} series</summary>${esc(names)}.</details>`;
   el.hidden = false;
@@ -1873,9 +1894,11 @@ function renderChanges(){
 }
 
 /* "Into 12.1 — biggest movers": the compressed answer to "how do specs stack up next
-   season?". Every input is already in the payload — 44 of 80 (spec, bracket) pairs change
-   tier letter between the live consensus and the forecast — but seeing it meant pressing
-   Consensus, memorising 80 cells, pressing Ours: 12.1 and diffing by hand.
+   season?". Every input is already in the payload — 43 of 80 (spec, bracket) pairs, across
+   32 distinct specs, change tier letter between the live consensus and the forecast — but
+   seeing it meant pressing Consensus, memorising 80 cells, pressing Ours: 12.1 and diffing
+   by hand. The two counts are different things and the summary reports the SPEC one;
+   printing the pair count as "specs" published "43 specs" on a 40-spec roster.
 
    Four constraints, all deliberate:
    - a FUNCTION called from render(), never a boot IIFE: the era toggle re-renders, and a
@@ -1908,7 +1931,10 @@ function renderMovers(){
       <span class="mvr-d" data-d="${r.delta>0?'up':'down'}">${r.delta>0?"+":""}${r.delta} pts</span>
     </button>`;
   host.hidden = false;
-  host.innerHTML = `<details class="movers"><summary><b>Into 12.1 — biggest movers</b> <span class="mnote">our forecast vs the live consensus · ${rows.length} specs change tier</span></summary>
+  // Count SPECS, not (spec, bracket) pairs — a spec moving in both brackets is one spec.
+  // The naive rows.length published "43 specs change tier" on a 40-spec roster.
+  const movedSpecs = new Set(rows.map(r => `${r.s.class}|${r.s.spec}`)).size;
+  host.innerHTML = `<details class="movers"><summary><b>Into 12.1 — biggest movers</b> <span class="mnote">our forecast vs the live consensus · ${movedSpecs} of ${SPECS.length} specs change tier</span></summary>
     <p class="mnote mvr-note">This is <b>our own 12.1 projection</b>, not a source — live consensus blended with PTR testing and Dummy Dome data, shifted by the tuning outlook. Points are forecast-score deltas. Open a spec for its full basis.</p>
     <div class="mvr-cols">
       <div><p class="d-h">Rising into 12.1</p><div class="chlist">${risers.map(cell).join("") || "<span class='mnote'>None.</span>"}</div></div>

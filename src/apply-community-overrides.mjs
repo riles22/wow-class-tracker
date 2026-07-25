@@ -8,16 +8,19 @@ export function applyCommunityOverrides(community, registry) {
   const output = clone(community);
   const classes = new Map((output.classes ?? []).map(entry => [entry.class, entry]));
 
-  /* Sweep before upsert, so the override file is the single source of truth for what it
-     injects. Without this the applier only ever ADDED: narrowing a creator's scopes, or
+  /* Reconcile so the override file is the single source of truth for what it injects.
+     Without reconciliation the applier only ever ADDED: narrowing a creator's scopes, or
      deleting the entry outright, left the previously-injected creator in community.json
-     forever, with nothing to reconcile it against (audit 2026-07-24, C8). Only entries
-     this applier wrote are removed — hand-curated creators carry no marker and are never
-     touched. */
-  for (const entry of output.classes ?? []) {
-    if (!Array.isArray(entry.creators)) continue;
-    entry.creators = entry.creators.filter(c => c.managedBy !== "overrides");
-  }
+     forever (audit 2026-07-24, C8). Only entries this applier wrote are reconciled —
+     hand-curated creators carry no marker and are never touched.
+
+     Retraction happens AFTER the upsert, not before it. Sweeping first meant every
+     re-injected creator was `push`ed back at the end of its array, so appending one
+     hand-curated creator to a class silently reordered community.json — and Gate 0, which
+     compares the whole file, then failed the night and blamed the agent for a reorder the
+     applier itself produced (audit 2026-07-25). Upserting in place keeps positions stable;
+     the sole write is the value at the index the entry already occupies. */
+  const reinjected = new Map(); // class → names this run actually injected
 
   for (const creator of registry?.creators ?? []) {
     const { scopes, ...base } = creator;
@@ -34,9 +37,14 @@ export function applyCommunityOverrides(community, registry) {
 
       const creators = entry.creators ?? (entry.creators = []);
       const scoped = { ...base, specs: [...scope.specs], managedBy: "overrides" };
+      // Name match wins regardless of who wrote the existing entry — same capture
+      // behaviour as before this change, deliberately: refusing on collision would make
+      // any community.json that already has a same-named curator unbuildable.
       const index = creators.findIndex(existing => existing.name === base.name);
       if (index >= 0) creators[index] = scoped;
       else creators.push(scoped);
+      if (!reinjected.has(scope.class)) reinjected.set(scope.class, new Set());
+      reinjected.get(scope.class).add(base.name);
     }
 
     if (base.verifiedDate && (!output.verified || base.verifiedDate > output.verified)) {
@@ -44,8 +52,17 @@ export function applyCommunityOverrides(community, registry) {
     }
   }
 
+  // Retract what this applier wrote and no longer injects. Survivors keep their position;
+  // only genuine removals change the array.
+  for (const entry of output.classes ?? []) {
+    if (!Array.isArray(entry.creators)) continue;
+    const keep = reinjected.get(entry.class) ?? EMPTY;
+    entry.creators = entry.creators.filter(c => c.managedBy !== "overrides" || keep.has(c.name));
+  }
+
   return output;
 }
+const EMPTY = new Set();
 
 export async function applyCommunityOverridesToFile(root) {
   const communityPath = path.join(root, "data", "community.json");

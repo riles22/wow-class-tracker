@@ -14,7 +14,17 @@
    runs it on a tight clock. So Playwright is NOT a dependency of this repo: when it is
    absent, or dist/ has not been built, every test here skips cleanly. CI installs it in
    its own job (.github/workflows/ci.yml) so the invariants are actually exercised on
-   every push. Run locally with: npm run build && npm i --no-save playwright && npm test */
+   every push.
+
+   Run locally with:
+     npm run build && npm i --no-save playwright && npx playwright install chromium && npm test
+   The `playwright` package ships no postinstall browser download, so omitting the third
+   command leaves node_modules complete but no browser on disk — and these tests then FAIL
+   (11 red) rather than skip, because a browser that will not launch is deliberately not a
+   skip condition: treating it as one would let a broken CI browser produce a green run
+   with 11 invariants silently dropped. If a browser is already present under a build
+   number this playwright does not expect (sandboxes and CI images pin their own), point
+   at it instead: PLAYWRIGHT_CHROMIUM_EXECUTABLE=/path/to/chrome npm test */
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
@@ -275,6 +285,24 @@ ui("the Into-12.1 movers strip is era-gated, ranked, and drills through", async 
   const glyphs = await page.evaluate(() => document.querySelector("#movers").textContent);
   assert.ok(!/[▲▼]/.test(glyphs), "the forecast lane must not reuse the ▲▼ history-movement glyphs");
 
+  // These rows are the ones driven hardest by tiny-n PTR cuts, so they must not headline
+  // above their own caveat. renderMovers()'s comment asserted this placement while the
+  // markup had it backwards for the strip's whole life (audit 2026-07-25) — assert the DOM,
+  // not the comment.
+  const order = await page.evaluate(() => {
+    const m = document.getElementById("movers"), c = document.getElementById("ptrcaveat");
+    return !!(m && c) && (c.compareDocumentPosition(m) & Node.DOCUMENT_POSITION_FOLLOWING) !== 0;
+  });
+  assert.equal(order, true, "the movers strip must render BELOW the PTR caveat");
+
+  // The summary counts SPECS, not (spec, bracket) pairs — it published "43 specs change
+  // tier" on a 40-spec roster.
+  const summary = await page.evaluate(() => document.querySelector("#movers summary").textContent);
+  const claimed = +(/(\d+) of (\d+) specs change tier/.exec(summary)?.[1] ?? NaN);
+  const realSpecs = new Set(expected.map(e => `${e.cls}|${e.spec}`)).size;
+  assert.equal(claimed, realSpecs, `summary says ${claimed} specs, real count is ${realSpecs}: "${summary.trim()}"`);
+  assert.ok(claimed <= data.specs.length, "a spec count can never exceed the roster");
+
   // a 12.0.7-only view has no forecast, so the strip must disappear
   await page.evaluate(() => document.querySelector('#eraseg button[data-era="live"]').click());
   await page.waitForTimeout(200);
@@ -395,6 +423,21 @@ test("no agent-writable field can inject markup or a handler into the rendered p
     if (firstRaid) enc.raid[firstRaid].name = TEXT_BREAK;
     await save("encounter-tiers.json", enc);
 
+    /* ptr-builds.json is the most agent-written file in the repo: the nightly ptr-watch
+       skill copies `highlights[]` verbatim out of a fetched Discourse thread. It was the
+       one sink this fixture never poisoned, and the omission was load-bearing — mutating
+       the "Official PTR tuning" list's `esc()` away left this test green (audit 2026-07-25).
+       The highlight needs the "<Spec> <Class> " prefix or specBuildChanges drops it and the
+       section never renders, which would make a poisoned fixture pass for the wrong reason. */
+    const builds = await load("ptr-builds.json");
+    const b0 = builds.builds?.[0];
+    if (b0) {
+      b0.specsAffected = [...new Set([...(b0.specsAffected ?? []), `${s.spec} ${s.class}`])];
+      b0.highlights = [`${s.spec} ${s.class} ${TEXT_BREAK}`, ...(b0.highlights ?? [])];
+      b0.label = ATTR_BREAK;
+      await save("ptr-builds.json", builds);
+    }
+
     const { build } = await import("../src/build.mjs");
     await build(root);   // real pipeline, including validation
     const hostile = path.join(root, "dist", "index.html");
@@ -417,6 +460,10 @@ test("no agent-writable field can inject markup or a handler into the rendered p
         badHrefs: [...document.querySelectorAll("[href]")]
           .filter(e => !/^(https:|#|$)/.test(e.getAttribute("href") ?? "")).length,
         markVisible: document.body.innerText.includes(mark),
+        // Count the sinks the probe actually reached. A poisoned field whose section never
+        // renders proves nothing, and this fixture has already shipped one of those.
+        markedSinks: [...document.querySelectorAll(".drawer *")]
+          .filter(e => [...e.childNodes].some(n => n.nodeType === 3 && n.textContent.includes(mark))).length,
       }), MARK);
 
       assert.equal(found.pwned, false, "an injected handler executed");
@@ -424,6 +471,8 @@ test("no agent-writable field can inject markup or a handler into the rendered p
       assert.equal(found.handlers, 0, "an inline on* handler reached the DOM");
       assert.equal(found.badHrefs, 0, "a non-https href reached the DOM");
       assert.equal(found.markVisible, true, "sanity: the probe must render as inert TEXT");
+      assert.ok(found.markedSinks >= 4,
+        `sanity: the probe must reach several drawer sinks, saw ${found.markedSinks} — a fixture that renders nothing cannot detect anything`);
     } finally {
       await page.close();
     }
