@@ -358,11 +358,34 @@ export function outlookFor(spec, ptrBuilds) {
    Confidence = how many independent PTR signals exist (testing, dummy, writeup/tuning):
    3 → high, 2 → medium, 1 → low, 0 → prior-only (live baseline, no PTR evidence). */
 /* Projection formula version — bump on ANY change to the weights, inputs, or clamps
-   below (v1 = the 2026-07-06 formula: prior .55 / empirical .45, testing:dummy 2:1,
-   outlook ±7, meta read ±3). Stamped into the payload and every history snapshot so
-   the post-launch report card grades each frozen forecast against the formula that
-   actually produced it. */
-export const PROJECTION_VERSION = 1;
+   below. Stamped into the payload and every history snapshot so the post-launch report
+   card grades each frozen forecast against the formula that actually produced it, and
+   never averages two different formulas into one series.
+
+   v1 — 2026-07-06. Prior .55 / empirical .45, testing:dummy 2:1, outlook ±7, meta ±3.
+   v2 — 2026-07-25 (audit 2026-07-24). Weights and clamps UNCHANGED; the INPUTS moved,
+        which is exactly what this marker exists for:
+          · rankPct now returns null for rows below MIN_RANK_N (10 parses), so the
+            PTR-testing term drops out for thin cuts instead of using a rank derived
+            from one player's median;
+          · tied metric values share a rank (competition ranking), so tied specs now
+            get identical percentiles instead of arbitrarily different ones;
+          · a meta note whose context says "Mythic raid" no longer nudges the M+
+            bracket (the bare /mythic/ alternative used to match it);
+          · classifyHighlight was corrected — plural resource terms, the
+            "(was N <unit>)" idiom, and bug-fix notes — which moved the outlook ±7
+            term for 7 specs.
+        Practical consequence for the report card: v1 and v2 projections are NOT one
+        series. Grade them separately, or grade only v2 onward. */
+export const PROJECTION_VERSION = 2;
+
+/* Rank-map version, stamped beside it. `snapshotStateOf().ranks` feeds movement
+   comparison, and its meaning changed in the same commit as PROJECTION_VERSION v2:
+   ties now share a rank, and rows below MIN_RANK_N carry no rank at all (so they are
+   absent from the map rather than present with a misleading number). A movement diff
+   across the v1→v2 boundary will narrate definitional change as if it were real
+   movement — expect exactly one such night, and do not chase it. */
+export const RANK_VERSION = 2;
 // Snapshot phase marker — the season/settledness tag the post-launch forecast report
 // card uses to find its endpoint ("first settled S2 consensus") without reading commit
 // history. Flip to "12.1-live" (or the S2 season id) when 12.1 ships and the tracker is
@@ -711,7 +734,8 @@ export function buildPayload({ specs, sources, scales, community, ptrBuilds, cre
       latestSnapshot: latestSnapshot(sources),
       latestPtrBuild: latestBuild,
       movementSince: baseline?.date ?? null,
-      projectionVersion: PROJECTION_VERSION
+      projectionVersion: PROJECTION_VERSION,
+      rankVersion: RANK_VERSION
     }
   };
 }
