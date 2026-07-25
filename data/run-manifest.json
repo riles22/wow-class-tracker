@@ -27,7 +27,7 @@
     {
       "source": "archon-tiers",
       "result": "success",
-      "detail": "All 6 raid(throughput)/M+(score) pages re-parsed from __NEXT_DATA__ specTierListSection (icon 'Class-Spec' → roster); Archon lastUpdated 07-23. 80 rows, 0 unmatched, 5 tier moves vs committed (raid Arms/Elemental/Enhancement B→A, M+ Resto Sham S→A, M+ Disc Priest A→B = normal Archon daily churn). Snapshots 07-24.",
+      "detail": "All 6 raid(throughput)/M+(score) pages re-parsed from __NEXT_DATA__ specTierListSection (icon 'Class-Spec' \u2192 roster); Archon lastUpdated 07-23. 80 rows, 0 unmatched, 5 tier moves vs committed (raid Arms/Elemental/Enhancement B\u2192A, M+ Resto Sham S\u2192A, M+ Disc Priest A\u2192B = normal Archon daily churn). Snapshots 07-24.",
       "previousAsOf": "2026-07-23",
       "newAsOf": "2026-07-24"
     },
@@ -53,23 +53,37 @@
       "newAsOf": "2026-07-24"
     },
     {
+      "source": "archon-hps",
+      "result": "skipped",
+      "detail": "Requirement added 2026-07-25 (audit D4) \u2014 placeholder so the row set matches required-sources.json; first attempted next run.",
+      "previousAsOf": "2026-07-24",
+      "newAsOf": "2026-07-24"
+    },
+    {
+      "source": "archon-mplus-score",
+      "result": "skipped",
+      "detail": "Requirement added 2026-07-25 (audit D4) \u2014 placeholder so the row set matches required-sources.json; first attempted next run.",
+      "previousAsOf": "2026-07-24",
+      "newAsOf": "2026-07-24"
+    },
+    {
       "source": "archon-popularity",
       "result": "success",
-      "detail": "Popularity % (fraction×100) from specRankingsSection.table.data[] across all 6 pages = 80 rows (raid 40 + M+ 40). asOf 07-24; previous stored 07-20. Parsed cleanly from specRankingsSection, not tierList (the 07-21 stall root cause).",
+      "detail": "Popularity % (fraction\u00d7100) from specRankingsSection.table.data[] across all 6 pages = 80 rows (raid 40 + M+ 40). asOf 07-24; previous stored 07-20. Parsed cleanly from specRankingsSection, not tierList (the 07-21 stall root cause).",
       "previousAsOf": "2026-07-20",
       "newAsOf": "2026-07-24"
     },
     {
       "source": "wowmeta",
       "result": "success",
-      "detail": "3 M+ pages re-fetched via DIRECT fetch (r.jina.ai was IP-403 all run; SvelteKit now SSRs the tier data). Parsed the alt='X tier' table AND cross-checked the per-spec 'top-0 absolute' badge (both agree). Era-verified 'Mythic+ Season 1 / MN 12.0.7' — NO season flip. 40/40 specs (S/A/B/C/D), 0 unmatched. 28 M+ tier moves = another Ckmeans reset-week recluster (tracks representation; verified vs the page, NOT a Blizzard retune — consensus moved only 9 bands, 0 two-band). Raid pages still unranked upstream. Snapshots 07-24.",
+      "detail": "3 M+ pages re-fetched via DIRECT fetch (r.jina.ai was IP-403 all run; SvelteKit now SSRs the tier data). Parsed the alt='X tier' table AND cross-checked the per-spec 'top-0 absolute' badge (both agree). Era-verified 'Mythic+ Season 1 / MN 12.0.7' \u2014 NO season flip. 40/40 specs (S/A/B/C/D), 0 unmatched. 28 M+ tier moves = another Ckmeans reset-week recluster (tracks representation; verified vs the page, NOT a Blizzard retune \u2014 consensus moved only 9 bands, 0 two-band). Raid pages still unranked upstream. Snapshots 07-24.",
       "previousAsOf": "2026-07-23",
       "newAsOf": "2026-07-24"
     },
     {
       "source": "wcl-live-raid",
       "result": "unreachable",
-      "detail": "Per wcl-fetch/evidence.json (verdict rdps-broken, attemptedAt 2026-07-24T12:05Z): characterRankings(metric: rdps) returns a bare Internal server error on encounter 3176 — the redistributed-credit metric family is still broken upstream. No evidence.landed entry for this cut; agent holds no WCL creds and did not fetch warcraftlogs.com. Zone 46 Mythic medians unchanged at the 2026-07-09 baseline.",
+      "detail": "Per wcl-fetch/evidence.json (verdict rdps-broken, attemptedAt 2026-07-24T12:05Z): characterRankings(metric: rdps) returns a bare Internal server error on encounter 3176 \u2014 the redistributed-credit metric family is still broken upstream. No evidence.landed entry for this cut; agent holds no WCL creds and did not fetch warcraftlogs.com. Zone 46 Mythic medians unchanged at the 2026-07-09 baseline.",
       "previousAsOf": "2026-07-09",
       "newAsOf": "2026-07-09"
     },
@@ -125,7 +139,7 @@
     {
       "source": "murlok",
       "result": "success",
-      "detail": "40/40 rows (27 DPS + 7 healer + 6 tank) re-fetched live via plain GET; parsed each meta-item card by display name → rating-before-</li>. Era-verified Midnight Season 1. Range 3738-4288. asOf 07-24.",
+      "detail": "40/40 rows (27 DPS + 7 healer + 6 tank) re-fetched live via plain GET; parsed each meta-item card by display name \u2192 rating-before-</li>. Era-verified Midnight Season 1. Range 3738-4288. asOf 07-24.",
       "previousAsOf": "2026-07-23",
       "newAsOf": "2026-07-24"
     },
@@ -139,28 +153,28 @@
     {
       "source": "simulationcraft",
       "result": "success",
-      "detail": "Nightly MID1_Raid.html (37 MB) re-fetched; parsed the #raid_dps highcharts single-target series ({name:'MID1_Class_Spec_Hero', y:dps}, best hero-variant per spec, JS-function-safe brace extraction) = 26/26 DPS (Frost DK 137690 ≈ committed 137691). Build MID1 (12.0.7), no season flip. Tanks/healers/Augmentation excluded by design. asOf 07-24.",
+      "detail": "Nightly MID1_Raid.html (37 MB) re-fetched; parsed the #raid_dps highcharts single-target series ({name:'MID1_Class_Spec_Hero', y:dps}, best hero-variant per spec, JS-function-safe brace extraction) = 26/26 DPS (Frost DK 137690 \u2248 committed 137691). Build MID1 (12.0.7), no season flip. Tanks/healers/Augmentation excluded by design. asOf 07-24.",
       "previousAsOf": "2026-07-23",
       "newAsOf": "2026-07-24"
     },
     {
       "source": "mythicstats",
       "result": "success",
-      "detail": "Period 1073 (same id as prior run) re-fetched live via DIRECT fetch of /period/latest (r.jina.ai IP-403; SvelteKit SSRs the data). The week's keys accumulated since 07-23 so 37/40 representation values moved (Devourer 8.5→12.1, Aug 4.4→8.1). All 40 specs parsed, era 'Period 1073 MID1', no season flip. asOf 07-24.",
+      "detail": "Period 1073 (same id as prior run) re-fetched live via DIRECT fetch of /period/latest (r.jina.ai IP-403; SvelteKit SSRs the data). The week's keys accumulated since 07-23 so 37/40 representation values moved (Devourer 8.5\u219212.1, Aug 4.4\u21928.1). All 40 specs parsed, era 'Period 1073 MID1', no season flip. asOf 07-24.",
       "previousAsOf": "2026-07-23",
       "newAsOf": "2026-07-24"
     },
     {
       "source": "blizzard-ptr",
       "result": "success",
-      "detail": "Forum thread (Discourse .json) + Wowhead news RSS both checked live. NEW build logged: forum post #17 (Linxy, 2026-07-23, 'Additional changes / Class Bug Fixes') — mostly bug fixes plus targeted tuning (Resto Druid Regrowth -20%, Mistweaver Morning Breeze -60%, Disc Void Shield +3%) and TWO set-bonus changes: Holy Paladin VA 4-set now adds +60% Holy Light mana cost (+5% healing), Brewmaster VA 4-set Flurry Strikes bug fix — both tierSet.asOf bumped to 07-23. PTR now a release candidate but still PTR (thread still '12.1 PTR Development Notes', no season flip). Wowhead's Sub Rogue/Holy Pal tier-set datamine article was jina/CF-403 from the runner — Holy Pal captured from the forum; the Sub Rogue tier-set change is not in the forum notes and was NOT ingested (unverifiable from runner).",
+      "detail": "Forum thread (Discourse .json) + Wowhead news RSS both checked live. NEW build logged: forum post #17 (Linxy, 2026-07-23, 'Additional changes / Class Bug Fixes') \u2014 mostly bug fixes plus targeted tuning (Resto Druid Regrowth -20%, Mistweaver Morning Breeze -60%, Disc Void Shield +3%) and TWO set-bonus changes: Holy Paladin VA 4-set now adds +60% Holy Light mana cost (+5% healing), Brewmaster VA 4-set Flurry Strikes bug fix \u2014 both tierSet.asOf bumped to 07-23. PTR now a release candidate but still PTR (thread still '12.1 PTR Development Notes', no season flip). Wowhead's Sub Rogue/Holy Pal tier-set datamine article was jina/CF-403 from the runner \u2014 Holy Pal captured from the forum; the Sub Rogue tier-set change is not in the forum notes and was NOT ingested (unverifiable from runner).",
       "previousAsOf": null,
       "newAsOf": null
     },
     {
       "source": "creators",
       "result": "success",
-      "detail": "All 25 unique creator RSS feeds polled live (25/25 OK). Deterministic transcript step fetched all 4 queued 07-22 videos (summary.json verdict ok). Distilled 4 specialist takes: Kesslive beBJZnCXF0s (Augmentation buff / Devastation nerf-sentiment), Kalamazi C82WusrvQ1E (Destruction neutral — Aff/Demo already covered by the 07-22 Xy8iV9-WcRI takes, transcript-verified as duplicate, not re-added), MadSkillzzTV 32hM_eLonR4 (Resto Shaman buff). izen 0mtKobeslFA (generalCreator) → 7 new metaNotes (build-#16 reaction). Superseded 6 older takes + 6 older metaNotes. Queued 7 new in-scope videos (no transcript to the agent); izen latest refreshed to 6G_Sg4xJol4. Pending queue 4→7.",
+      "detail": "All 25 unique creator RSS feeds polled live (25/25 OK). Deterministic transcript step fetched all 4 queued 07-22 videos (summary.json verdict ok). Distilled 4 specialist takes: Kesslive beBJZnCXF0s (Augmentation buff / Devastation nerf-sentiment), Kalamazi C82WusrvQ1E (Destruction neutral \u2014 Aff/Demo already covered by the 07-22 Xy8iV9-WcRI takes, transcript-verified as duplicate, not re-added), MadSkillzzTV 32hM_eLonR4 (Resto Shaman buff). izen 0mtKobeslFA (generalCreator) \u2192 7 new metaNotes (build-#16 reaction). Superseded 6 older takes + 6 older metaNotes. Queued 7 new in-scope videos (no transcript to the agent); izen latest refreshed to 6G_Sg4xJol4. Pending queue 4\u21927.",
       "previousAsOf": null,
       "newAsOf": null
     }

@@ -273,11 +273,17 @@ export function checkRowDrop(config, data, prevData) {
    family median moving is the shape of a units/column error rather than tuning. Rows that
    are new, removed, zero-based, or whose family is tiny are skipped — the row floors cover
    those. Limits live in required-sources.json so tuning them stays a reviewed edit. */
-export function checkValueMove(config, data, prevData) {
+export function checkValueMove(config, data, prevData, ack = null) {
   const errors = [];
   if (!prevData || config.maxValueMovePct == null) return { errors };
   const maxRow = config.maxValueMovePct;
   const maxMedian = config.maxFamilyMedianMovePct ?? maxRow * 0.6;
+  // Relative movement is meaningless near zero. "Top-2000 keys representation" is a
+  // percentage that legitimately swings 0.1 -> 0.9 (an 800% "move" that is numerically
+  // nothing), and replaying this guard over the real nightly history showed those rows
+  // alone reddening otherwise-healthy nights. Units errors — the shape this exists for —
+  // happen on large-magnitude series, so gate on absolute size first.
+  const minMag = config.minValueMagnitude ?? 100;
   const index = specs => {
     const byKey = new Map(), byFamily = new Map();
     for (const s of specs ?? []) {
@@ -301,6 +307,7 @@ export function checkValueMove(config, data, prevData) {
   for (const [key, was] of prev.byKey) {
     const now = cur.byKey.get(key);
     if (now == null || was === 0) continue; // new/removed rows are the row floors' job
+    if (Math.abs(was) < minMag) continue;   // percentages and other near-zero series
     const move = Math.abs(now - was) / Math.abs(was);
     if (move > maxRow) {
       errors.push(`value move: "${key}" went ${was} → ${now} (${Math.round(move * 100)}% vs the last committed state, max ${Math.round(maxRow * 100)}%) — units/column-parse shape; a real upstream jump needs a reviewed limit change in required-sources.json`);
@@ -310,11 +317,14 @@ export function checkValueMove(config, data, prevData) {
     const nowArr = cur.byFamily.get(fam);
     if (!nowArr || wasArr.length < 5 || nowArr.length < 5) continue;
     const w = median(wasArr), n = median(nowArr);
-    if (!w) continue;
+    if (!w || Math.abs(w) < minMag) continue;
     const move = Math.abs(n - w) / Math.abs(w);
     if (move > maxMedian) {
       errors.push(`family median move: "${fam}" median went ${w} → ${n} (${Math.round(move * 100)}%, max ${Math.round(maxMedian * 100)}%) — a whole family shifting together is a units/parse change, not tuning`);
     }
+  }
+  if (errors.length && ack) {
+    return { errors: [], notes: [`value-move guard: ${errors.length} finding(s) approved by human ack — ${ack}`], acked: errors };
   }
   return { errors };
 }
@@ -466,7 +476,11 @@ if (isMain) {
     } catch { prevData = null; }
     if (!prevData) console.log("  note: no HEAD baseline readable — row-drop and value-move guards skipped");
     const drop = checkRowDrop(config, data, prevData);
-    const vals = checkValueMove(config, data, prevData); // shares the same HEAD baseline
+    // Same trusted, human-only ack as the tier anomaly gate: a reviewed recipe change
+    // (e.g. the 2026-07-23 Archon fix, which rescaled two whole families the next night)
+    // is exactly the legitimate case, and it must be approvable rather than unpublishable.
+    const vals = checkValueMove(config, data, prevData, trustedAck); // shares the same HEAD baseline
+    for (const n of vals.notes ?? []) console.log("  note: " + n);
     failures.push(...m.errors, ...a.errors, ...drop.errors, ...vals.errors);
     for (const d of m.degraded) console.log("  degraded: " + d);
     for (const n of [...m.notes, ...a.notes]) console.log("  note: " + n);

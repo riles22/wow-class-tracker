@@ -277,7 +277,9 @@ auto-replace.
 
 ```
 data/     specs.json · sources.json · scales.json · ptr-builds.json · community.json ·
-          community-overrides.json (agent-curated community edits, applied at prebuild —
+          community-overrides.json (OWNER-curated community edits, applied at prebuild; agents
+          may not edit it — Gate 0 applies it before its boundary diff, so an agent edit
+          fails the night red —
           see apply-community-overrides.mjs) ·
           creator-takes.json (qualitative layer — cited specialist takes[] + general-creator
           metaNotes[] season/meta outlook, never tiers) ·
@@ -370,12 +372,14 @@ new takes+metaNotes, new builds, verdict changes, manifest health) and comments 
 on the pinned "Nightly digest" issue — GitHub notification mail is the owner's
 daily change email. A daily
 heartbeat (`freshness.yml`) alerts via a single auto-closing issue + red run when the
-last refresh signal exceeds `maxRunAgeHours` in `data/required-sources.json` (30h since
-2026-07-23; that file is the single source of truth for the number) or a source exceeds
-its max age. **Caveat, 2026-07-24 audit finding A1:** the history-snapshot proof-of-life
-signal is date-only, so a snapshot dated yesterday always evaluates to exactly 24h and
-suppresses the check — a *single* missed night is currently undetectable regardless of
-the threshold. Fix the signal precedence before trusting the number. The agent step's only secret is
+last refresh signal exceeds `maxRunAgeHours` in `data/required-sources.json` (28h since
+2026-07-25; that file is the single source of truth for the number) or a source exceeds
+its max age. The A1 blind spot is FIXED (2026-07-24 audit): the history-snapshot
+proof-of-life signal now counts only when strictly newer than the manifest date, so a
+same-dated snapshot can no longer cap the measured age at 24h and mask a missed night.
+Margin is thin by design — a healthy night reads ~5h and a single miss ~28.6h — so a
+nightly that lands after ~13:23 UTC re-opens the gap; widen the freshness cron or lower
+the threshold if start times drift later. The agent step's only secret is
 `CLAUDE_CODE_OAUTH_TOKEN` (~1-year validity — renew), the documented inherent
 residual in `docs/security-audit-2026-07.md`. YouTube transcripts may be
 IP-blocked on runners; those videos queue as "pending" and catch up in local runs. The

@@ -437,7 +437,7 @@ test("anomaly gate: ordinary single-band drift passes untouched", () => {
 });
 
 test("checkValueMove catches units/column-parse shapes, not normal churn (audit 2026-07-24, A3)", () => {
-  const cfg = { ...config, maxValueMovePct: 0.60, maxFamilyMedianMovePct: 0.35 };
+  const cfg = { ...config, maxValueMovePct: 0.60, maxFamilyMedianMovePct: 0.35, minValueMagnitude: 100 };
   const mk = vals => ({ specs: vals.map((v, i) => ({
     class: "C", spec: `S${i}`, role: "DPS",
     metrics: [{ source: "wcl", bracket: "raid", name: "Median rDPS", value: v, asOf: "2026-07-14" }],
@@ -464,4 +464,26 @@ test("checkValueMove catches units/column-parse shapes, not normal churn (audit 
 
   // new and removed rows are the row floors' business, not this guard's
   assert.deepEqual(checkValueMove(cfg, mk([100, 110, 120, 130, 140, 150, 999]), base).errors, []);
+
+  // NEAR-ZERO SERIES ARE EXEMPT. Replaying this guard over the real nightly history showed
+  // percentage metrics reddening healthy nights on their own: "Top-2000 keys
+  // representation" legitimately swings 0.1 -> 0.9, an 800% "move" that is numerically
+  // nothing. Relative movement is only meaningful above some magnitude, and units errors
+  // — the shape this exists for — happen on large-magnitude series.
+  const pct = vals => ({ specs: vals.map((v, i) => ({
+    class: "C", spec: `P${i}`, role: "DPS",
+    metrics: [{ source: "mythicstats", bracket: "mplus", name: "Top-2000 keys representation", value: v, asOf: "2026-07-14" }],
+  })) });
+  const pctBase = pct([0.1, 0.4, 0.9, 1.1, 2.0, 4.4]);
+  assert.deepEqual(checkValueMove(cfg, pct([0.9, 0.1, 0.3, 0.2, 1.5, 3.0]), pctBase).errors, [],
+    "a percentage series must not trip a relative-movement guard");
+
+  // A REVIEWED rescale (e.g. the 2026-07-23 Archon recipe fix, which legitimately moved
+  // two whole families the next night) must be approvable, not unpublishable.
+  const rescaled = mk(base.specs.map(s => s.metrics[0].value * 30));
+  assert.ok(checkValueMove(cfg, rescaled, base).errors.length > 0, "a family rescale is flagged");
+  const acked = checkValueMove(cfg, rescaled, base, "Archon recipe fix, audit M1");
+  assert.deepEqual(acked.errors, [], "…and clears with the human ack");
+  assert.match(acked.notes[0], /approved by human ack — Archon recipe fix/);
+  assert.ok(acked.acked.length > 0, "the acked findings are still reported for the record");
 });

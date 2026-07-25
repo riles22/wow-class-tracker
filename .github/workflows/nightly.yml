@@ -129,6 +129,11 @@ jobs:
             unprivileged fetch-and-distill stage: never commit, push, tag, dispatch a workflow,
             print a secret, or write outside this working tree.
 
+            data/required-sources.json and data/scales.json are the GATE CONTRACT — never
+            edit them. If check-refresh reports a missing manifest row, the fix is to write
+            that row, never to delete the requirement: publish diffs the contract against
+            master and fails the night red either way.
+
             Read CLAUDE.md and all four refresh skills before acting:
             .claude/skills/ptr-watch/SKILL.md
             .claude/skills/watch-creators/SKILL.md
@@ -267,6 +272,11 @@ jobs:
             explicitly complete tiers and metrics before finalizing. Use only live fetched data.
             Never guess, commit, push, dispatch, or expose secrets.
 
+            data/required-sources.json and data/scales.json are the GATE CONTRACT — never
+            edit them. If check-refresh reports a missing manifest row, write that row; do
+            not delete the requirement. Publish diffs the contract against master and fails
+            the night red either way, so removing a requirement only wastes the run.
+
             WARCRAFT LOGS: you hold NO WCL credentials — wcl-fetch/evidence.json (written by the
             deterministic pre-agent step) is your only WCL input; write all eight WCL manifest
             rows from it honestly. Success is allowed ONLY where evidence.landed[key] shows rows
@@ -327,14 +337,15 @@ jobs:
             echo
           done
 
-      # Full transcripts for interactive download. Uploaded on FAILURE only: they exist
-      # for post-mortems, which only happen on a red night, and the previous "no secrets"
-      # justification leaned on log masking — which protects logs, not files written to
-      # disk and then uploaded (audit 2026-07-24, S5). The agents genuinely hold no
-      # credentials, so this is defence in depth rather than a known leak; a green run
-      # simply has nothing to diagnose. The failure tail above still lands in the job log.
+      # Full transcripts for interactive download, on EVERY run. S5 briefly narrowed this
+      # to `if: failure()` on the theory that only red nights need post-mortems — which is
+      # wrong in the shape that actually bites: on 2026-07-25 the refresh job was GREEN and
+      # `publish` failed, so a refresh-scoped failure() condition would have uploaded
+      # nothing for the one night anyone needed to read. Transcripts also found the
+      # 07-15..17 root cause. The agents hold no credentials, so the residual is a public
+      # repo carrying the agents' reasoning over already-public pages — accepted.
       - name: Upload agent transcripts (diagnosis)
-        if: failure()
+        if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: agent-transcripts
