@@ -298,3 +298,39 @@ ui("a change-strip row drills through even when a filter is hiding that spec", a
   const open = await page.evaluate(() => [...document.querySelectorAll(".row.open .spec-txt")].map(e => e.textContent.trim()));
   assert.deepEqual(open, [target.spec], `jumping to ${target.cls} ${target.spec} must open it whatever filter was active`);
 });
+
+ui("the Ladder shows every name AND every number without panning, at any width", async page => {
+  // It used to be a fixed 1000-unit canvas with min-width:780px and values at x=992, so
+  // below ~828px you got names or numbers but never both, with no cue that it panned.
+  for (const width of [1440, 1024, 768, 560, 390]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.evaluate(() => document.getElementById("ladderbtn").click());
+    await page.waitForTimeout(450);
+    const r = await page.evaluate(() => {
+      const host = document.querySelector("#ladder-chart");
+      const h = host.getBoundingClientRect();
+      const inView = el => { const b = el.getBoundingClientRect(); return b.left >= h.left - 1 && b.right <= h.right + 1; };
+      const vals = [...document.querySelectorAll(".ladderval")], names = [...document.querySelectorAll(".laddername")];
+      let overlaps = 0;
+      document.querySelectorAll(".ladderrow").forEach(g => {
+        const v = g.querySelector(".ladderval"), b = g.querySelector(".ladderbar");
+        if (!v || !b) return;
+        const vr = v.getBoundingClientRect(), br = b.getBoundingClientRect();
+        if (vr.left < br.right && vr.right > br.left && vr.top < br.bottom && vr.bottom > br.top) overlaps++;
+      });
+      return {
+        n: vals.length, valsOut: vals.filter(e => !inView(e)).length, namesOut: names.filter(e => !inView(e)).length,
+        pans: host.scrollWidth > host.clientWidth, overlaps,
+        dated: /\d{4}-\d{2}-\d{2}/.test(document.querySelector(".ladder-cap")?.textContent ?? ""),
+      };
+    });
+    assert.ok(r.n > 5, `${width}px: expected a populated ladder`);
+    assert.equal(r.valsOut, 0, `${width}px: ${r.valsOut} value labels outside the visible area`);
+    assert.equal(r.namesOut, 0, `${width}px: ${r.namesOut} spec names outside the visible area`);
+    assert.equal(r.pans, false, `${width}px: the chart must not require horizontal panning`);
+    assert.equal(r.overlaps, 0, `${width}px: ${r.overlaps} value labels collide with their own bar`);
+    assert.ok(r.dated, `${width}px: every ladder caption must state its own date`);
+    await page.keyboard.press("Escape");
+    await page.waitForTimeout(150);
+  }
+});
