@@ -3,6 +3,8 @@
   "maxRunAgeHours": 28,
   "minSuccessfulSources": 12,
   "maxRowDropPct": 0.25,
+  "maxValueMovePct": 0.6,
+  "maxFamilyMedianMovePct": 0.35,
   "anomaly": {
     "maxTwoBandMoves": 6,
     "maxTotalMoves": 25

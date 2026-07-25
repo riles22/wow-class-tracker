@@ -30,6 +30,15 @@ const WRITEUP_HOSTS = new Set([...TAKE_HOSTS, ...BLIZZARD_FORUM_HOSTS,
 const DISCORD_HOSTS = new Set(["discord.gg", "discord.com", "www.discord.com"]);
 // Creator channel/author pages: video platforms + guide sites that carry bylines.
 const CREATOR_HOSTS = new Set([...WRITEUP_HOSTS, "twitch.tv", "www.twitch.tv"]);
+/* Class community sites — the last agent-writable URL field that was https-only but not
+   host-allowlisted, contradicting CLAUDE.md's "host allowlists on every agent-writable URL
+   field" (audit 2026-07-24, S2). Seeded from the eight hosts already in use, so it lands
+   green; a new legitimate community site fails the run red and is added here as a reviewed
+   edit, exactly like every other allowlist in this file. */
+const SITE_HOSTS = new Set([
+  "docs.google.com", "github.com", "hackmd.io", "spiritbloom.pro",
+  "warcraftpriests.github.io", "wingsisup.com", "www.dreamgrove.gg", "www.peakofserenity.com"
+]);
 const WOWHEAD_HOSTS = new Set(["wowhead.com", "www.wowhead.com"]);
 const ICYVEINS_HOSTS = new Set(["icy-veins.com", "www.icy-veins.com"]);
 const httpsUrl = v => { try { return new URL(v).protocol === "https:"; } catch { return false; } };
@@ -242,7 +251,10 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
       urlOk(alt.url, `community.json: ${entry.class} altDiscord "${alt.name}" url`);
       hostOk(alt.url, DISCORD_HOSTS, `community.json: ${entry.class} altDiscord "${alt.name}" url`);
     }
-    for (const site of entry.sites ?? []) urlOk(site.url, `community.json: ${entry.class} site "${site.name}" url`);
+    for (const site of entry.sites ?? []) {
+      urlOk(site.url, `community.json: ${entry.class} site "${site.name}" url`);
+      hostOk(site.url, SITE_HOSTS, `community.json: ${entry.class} site "${site.name}"`);
+    }
     const seenCreators = new Set();
     for (const creator of entry.creators ?? []) {
       if (!creator.name || !creator.url) errors.push(`community.json: ${entry.class} creator needs name + url`);

@@ -2488,8 +2488,18 @@ function openSpecFromFinder(cls, spec){
     });
     raf = requestAnimationFrame(draw);
   }
-  size(); draw();
-  window.addEventListener('resize', ()=>{ cancelAnimationFrame(raf); size(); draw(); });
+  // The loop used to run forever, repainting at 60fps with the masthead scrolled
+  // thousands of pixels off-screen (audit 2026-07-24, P3). Pause when the canvas leaves
+  // the viewport and re-arm when it returns. `raf = 0` is the "stopped" sentinel so a
+  // re-entry can never stack two loops. The reduced-motion bail above still means this
+  // never starts at all for those users, which is the correct behaviour and is untouched.
+  function start(){ if(!raf) draw(); }
+  function stop(){ if(raf){ cancelAnimationFrame(raf); raf = 0; } }
+  size(); start();
+  if(window.IntersectionObserver){
+    new IntersectionObserver(es => { es[0].isIntersecting ? start() : stop(); }).observe(c);
+  }
+  window.addEventListener('resize', ()=>{ stop(); size(); start(); });
 })();
 </script>
 </body>

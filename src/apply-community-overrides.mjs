@@ -8,6 +8,17 @@ export function applyCommunityOverrides(community, registry) {
   const output = clone(community);
   const classes = new Map((output.classes ?? []).map(entry => [entry.class, entry]));
 
+  /* Sweep before upsert, so the override file is the single source of truth for what it
+     injects. Without this the applier only ever ADDED: narrowing a creator's scopes, or
+     deleting the entry outright, left the previously-injected creator in community.json
+     forever, with nothing to reconcile it against (audit 2026-07-24, C8). Only entries
+     this applier wrote are removed — hand-curated creators carry no marker and are never
+     touched. */
+  for (const entry of output.classes ?? []) {
+    if (!Array.isArray(entry.creators)) continue;
+    entry.creators = entry.creators.filter(c => c.managedBy !== "overrides");
+  }
+
   for (const creator of registry?.creators ?? []) {
     const { scopes, ...base } = creator;
     if (!base.name || !base.url || !Array.isArray(scopes) || scopes.length === 0) {
@@ -22,7 +33,7 @@ export function applyCommunityOverrides(community, registry) {
       }
 
       const creators = entry.creators ?? (entry.creators = []);
-      const scoped = { ...base, specs: [...scope.specs] };
+      const scoped = { ...base, specs: [...scope.specs], managedBy: "overrides" };
       const index = creators.findIndex(existing => existing.name === base.name);
       if (index >= 0) creators[index] = scoped;
       else creators.push(scoped);

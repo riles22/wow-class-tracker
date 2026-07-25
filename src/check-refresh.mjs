@@ -261,6 +261,64 @@ export function checkRowDrop(config, data, prevData) {
   return { errors };
 }
 
+/* Value-movement guard (audit 2026-07-24, A3). Row floors, drop limits and coverage dates
+   all constrain how MANY rows arrive and how fresh they are — nothing constrained the
+   numbers themselves. A units error or a parse that reads the wrong column publishes green
+   and silently rewrites the throughput ranks the whole "how do specs stack up" job rests
+   on. Compares each (spec, source, bracket, name) value against the last COMMITTED state,
+   which by construction already passed every gate.
+
+   Two limits, both deliberately generous: the raw-DPS PTR series legitimately churns
+   10-20% night to night on small samples, so a single row must move a LOT to trip, and a
+   family median moving is the shape of a units/column error rather than tuning. Rows that
+   are new, removed, zero-based, or whose family is tiny are skipped — the row floors cover
+   those. Limits live in required-sources.json so tuning them stays a reviewed edit. */
+export function checkValueMove(config, data, prevData) {
+  const errors = [];
+  if (!prevData || config.maxValueMovePct == null) return { errors };
+  const maxRow = config.maxValueMovePct;
+  const maxMedian = config.maxFamilyMedianMovePct ?? maxRow * 0.6;
+  const index = specs => {
+    const byKey = new Map(), byFamily = new Map();
+    for (const s of specs ?? []) {
+      for (const m of s.metrics ?? []) {
+        if (typeof m.value !== "number") continue;
+        byKey.set(`${s.class}|${s.spec}|${m.source}|${m.bracket}|${m.name}`, m.value);
+        const fam = `${m.source}|${m.bracket}|${m.name}`;
+        if (!byFamily.has(fam)) byFamily.set(fam, []);
+        byFamily.get(fam).push(m.value);
+      }
+    }
+    return { byKey, byFamily };
+  };
+  const median = arr => {
+    if (!arr.length) return null;
+    const a = [...arr].sort((x, y) => x - y);
+    return a[Math.floor(a.length / 2)];
+  };
+  const prev = index(prevData.specs), cur = index(data.specs);
+
+  for (const [key, was] of prev.byKey) {
+    const now = cur.byKey.get(key);
+    if (now == null || was === 0) continue; // new/removed rows are the row floors' job
+    const move = Math.abs(now - was) / Math.abs(was);
+    if (move > maxRow) {
+      errors.push(`value move: "${key}" went ${was} → ${now} (${Math.round(move * 100)}% vs the last committed state, max ${Math.round(maxRow * 100)}%) — units/column-parse shape; a real upstream jump needs a reviewed limit change in required-sources.json`);
+    }
+  }
+  for (const [fam, wasArr] of prev.byFamily) {
+    const nowArr = cur.byFamily.get(fam);
+    if (!nowArr || wasArr.length < 5 || nowArr.length < 5) continue;
+    const w = median(wasArr), n = median(nowArr);
+    if (!w) continue;
+    const move = Math.abs(n - w) / Math.abs(w);
+    if (move > maxMedian) {
+      errors.push(`family median move: "${fam}" median went ${w} → ${n} (${Math.round(move * 100)}%, max ${Math.round(maxMedian * 100)}%) — a whole family shifting together is a units/parse change, not tuning`);
+    }
+  }
+  return { errors };
+}
+
 /* --- the heartbeat ----------------------------------------------------------------- */
 
 export function checkFreshness(config, manifest, data, now) {
@@ -406,9 +464,10 @@ if (isMain) {
       const [prevSpecs, prevEnc] = await Promise.all([gitShow("data/specs.json"), gitShow("data/encounter-tiers.json")]);
       if (prevSpecs) prevData = { specs: JSON.parse(prevSpecs), encounterTiers: prevEnc ? JSON.parse(prevEnc) : null };
     } catch { prevData = null; }
-    if (!prevData) console.log("  note: no HEAD baseline readable — row-drop guard skipped");
+    if (!prevData) console.log("  note: no HEAD baseline readable — row-drop and value-move guards skipped");
     const drop = checkRowDrop(config, data, prevData);
-    failures.push(...m.errors, ...a.errors, ...drop.errors);
+    const vals = checkValueMove(config, data, prevData); // shares the same HEAD baseline
+    failures.push(...m.errors, ...a.errors, ...drop.errors, ...vals.errors);
     for (const d of m.degraded) console.log("  degraded: " + d);
     for (const n of [...m.notes, ...a.notes]) console.log("  note: " + n);
     if (!m.errors.length) console.log(`  movement vs ${baseline?.date ?? "—"}: ${a.total} tier moves (${a.twoBand} of ≥2 bands)`);

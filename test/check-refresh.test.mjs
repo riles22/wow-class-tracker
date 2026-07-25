@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { checkManifest, checkFreshness, checkAnomaly, checkRowDrop, probeDate, probeRows, ageDays } from "../src/check-refresh.mjs";
+import { checkManifest, checkFreshness, checkAnomaly, checkRowDrop, checkValueMove, probeDate, probeRows, ageDays } from "../src/check-refresh.mjs";
 
 /* Small synthetic world: one tier-list source (two pages), one metrics source, one
    probe-less feed requirement — enough to exercise every gate rule without the repo's
@@ -434,4 +434,34 @@ test("anomaly gate: ordinary single-band drift passes untouched", () => {
   assert.deepEqual(r.errors, []);
   assert.equal(r.twoBand, 0);
   assert.equal(r.total, 2);
+});
+
+test("checkValueMove catches units/column-parse shapes, not normal churn (audit 2026-07-24, A3)", () => {
+  const cfg = { ...config, maxValueMovePct: 0.60, maxFamilyMedianMovePct: 0.35 };
+  const mk = vals => ({ specs: vals.map((v, i) => ({
+    class: "C", spec: `S${i}`, role: "DPS",
+    metrics: [{ source: "wcl", bracket: "raid", name: "Median rDPS", value: v, asOf: "2026-07-14" }],
+  })) });
+  const base = mk([100, 110, 120, 130, 140, 150]);
+
+  // no baseline, or no configured limit: the guard is inert
+  assert.deepEqual(checkValueMove(cfg, base, null).errors, []);
+  assert.deepEqual(checkValueMove(config, mk([1, 1, 1, 1, 1, 1]), base).errors, []);
+
+  // realistic night-to-night churn on small PTR samples must not trip
+  assert.deepEqual(checkValueMove(cfg, mk([115, 96, 138, 118, 122, 168]), base).errors, []);
+
+  // a units error moves the whole family together — the shape this exists for
+  const unitsError = checkValueMove(cfg, mk(base.specs.map(s => s.metrics[0].value / 1000)), base);
+  assert.ok(unitsError.errors.length >= 6, "every row of a rescaled family must be flagged");
+  assert.ok(unitsError.errors.some(e => /family median move/.test(e)),
+    "…and the family median move must be called out as its own finding");
+
+  // one row moving alone is still caught above the row limit
+  const oneRow = checkValueMove(cfg, mk([100, 110, 120, 130, 140, 400]), base);
+  assert.equal(oneRow.errors.filter(e => /^value move/.test(e)).length, 1);
+  assert.match(oneRow.errors[0], /C\|S5\|wcl\|raid\|Median rDPS/);
+
+  // new and removed rows are the row floors' business, not this guard's
+  assert.deepEqual(checkValueMove(cfg, mk([100, 110, 120, 130, 140, 150, 999]), base).errors, []);
 });

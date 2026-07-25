@@ -57,7 +57,7 @@ concurrency:
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 110   # 90 left the recovery path ~6 min of headroom (audit A7)
     permissions:
       contents: read # the agent job holds NO write scopes — publication happens in `publish`
     steps:
@@ -114,7 +114,7 @@ jobs:
         id: primary_agent
         continue-on-error: true
         uses: anthropics/claude-code-action@f1bd27ca5b54584506e40e17884d90bdaaa1a9b3 # v1
-        timeout-minutes: 42
+        timeout-minutes: 55    # the 07-24 primary ran 39m05s against the old 42 (audit A7)
         with:
           github_token: ${{ github.token }}
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
@@ -327,11 +327,14 @@ jobs:
             echo
           done
 
-      # Full transcripts for interactive download (public repo: contents are the
-      # agents' reasoning over already-public web pages; no secrets — the agents hold
-      # none, and the action masks their own token).
+      # Full transcripts for interactive download. Uploaded on FAILURE only: they exist
+      # for post-mortems, which only happen on a red night, and the previous "no secrets"
+      # justification leaned on log masking — which protects logs, not files written to
+      # disk and then uploaded (audit 2026-07-24, S5). The agents genuinely hold no
+      # credentials, so this is defence in depth rather than a known leak; a green run
+      # simply has nothing to diagnose. The failure tail above still lands in the job log.
       - name: Upload agent transcripts (diagnosis)
-        if: always()
+        if: failure()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: agent-transcripts
@@ -443,6 +446,14 @@ jobs:
             if (changedBeyond("data/community.json", ["latest", "verifiedDate"])) bad.push("data/community.json (membership/links, beyond latest+verifiedDate)");
             if (bad.length) { console.error(`::error::refresh artifact changed ${bad.join(" and ")} — registry edits ship only via reviewed commits to master`); process.exit(1); }
           '
+          # Gate 0 diffs files it knows about; anything the artifact ADDS under data/ was
+          # invisible to it and would be committed unreviewed (audit 2026-07-24, S6).
+          # history/ is reset just below, so nothing legitimate trips this.
+          if git status --porcelain -- data/ | grep -E '^\?\?' | grep -v ' data/history/' | grep -q .; then
+            git status --porcelain -- data/ | grep -E '^\?\?' | grep -v ' data/history/'
+            echo "::error::refresh artifact added new file(s) under data/ — new data files ship via reviewed commits to master"
+            exit 1
+          fi
           if git status --porcelain -- data/history/ | grep -q .; then
             echo "Resetting agent-supplied data/history/ changes — the baseline must be committed history, and publish snapshots after the gates:"
             git status --porcelain -- data/history/
