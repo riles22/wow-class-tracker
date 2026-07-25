@@ -31,3 +31,27 @@ jobs:
         run: |
           test -s dist/index.html
           git diff --check
+
+  # The client half of the product — ~1,400 lines of JavaScript in src/template.html —
+  # has no coverage in the job above, because `npm test` is deliberately dependency-free
+  # (zero npm deps, nothing to poison) and the nightly publish gate runs it on a clock.
+  # Playwright therefore lives HERE and nowhere else: a separate, non-publishing job that
+  # installs it fresh, so the invariants get exercised on every push without putting a
+  # browser download or a dependency tree anywhere near the release path.
+  # test/ui-invariants.test.mjs skips itself when playwright is absent, so the job above
+  # stays green and fast.
+  ui-invariants:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "22"
+      - name: Build the artifact under test
+        run: npm run build
+      - name: Install Playwright (not saved — never becomes a repo dependency)
+        run: |
+          npm install --no-save playwright@1.61.1
+          npx playwright install --with-deps chromium
+      - name: UI invariants
+        run: node --test test/ui-invariants.test.mjs

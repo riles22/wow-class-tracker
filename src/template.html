@@ -1064,7 +1064,11 @@ function newBadgeHTML(s){
 function rowHTML(s, idx, simBar){
   const color = CLASS_COLOR[s.class] || "#888";
   const hasPtr = !!s.ptr;
-  const showMv = state.source==="consensus" && !state.fight;
+  // The projection moved MORE than the consensus on 07-23->07-24 (13 tier moves vs 9)
+  // and rendered an arrow-free grid, because movement was consensus-only (C3).
+  const projView = state.source==="projection" && state.era!=="live";
+  const showMv = !state.fight && (state.source==="consensus" || projView);
+  const mvOf = (s,b) => showMv ? (projView ? s.projMovement?.[b] : s.movement?.[b]) : null;
   const ptag = s.fightProfile && s.fightProfile.tag
     ? `<span class="ptag" title="Sim-based fight profile — expand for details">${esc(s.fightProfile.tag)}</span>` : "";
   return `
@@ -1078,8 +1082,8 @@ function rowHTML(s, idx, simBar){
        <span class="spec-txt">${esc(s.spec)}</span>${newBadgeHTML(s)}
      </div>
      <div class="metaline">
-       <span class="mtag">Raid</span>${tierEl(ratingFor(s,"raid"), showMv ? s.movement?.raid : null)}
-       <span class="mtag">M+</span>${tierEl(ratingFor(s,"mplus"), showMv ? s.movement?.mplus : null)}
+       <span class="mtag">Raid</span>${tierEl(ratingFor(s,"raid"), mvOf(s,"raid"))}
+       <span class="mtag">M+</span>${tierEl(ratingFor(s,"mplus"), mvOf(s,"mplus"))}
      </div>
      <div class="cls" style="color:${color}" title="${esc(s.class)}">${esc(s.class)}</div>
      <div class="role"><span class="rolechip">${esc(s.role)}</span>${ptag}</div>
@@ -1239,6 +1243,7 @@ function render(){
     rd.style.maxHeight = 'none'; // restored instantly, no animation
     rd.inert = false;            // re-rendered rows start inert (see the row template)
   });
+  renderChanges(); // narrates the movement lane of the view just rendered — must follow it
   // active-filter cues: light up controls that are off their default
   document.getElementById('fightsel')?.classList.toggle('engaged', !!state.fight);
   document.getElementById('sortsel')?.classList.toggle('engaged', state.sort!=='overall');
@@ -1670,20 +1675,41 @@ let utilTick = false;
 window.addEventListener('scroll', ()=>{ if(utilTick) return; utilTick = true; requestAnimationFrame(()=>{ utilTick = false; updateUtilBar(); }); }, { passive: true });
 
 /* ---------- "what changed" strip — narrates the movement baseline diff ---------- */
-(function(){
+/* The "What changed" strip. Must be a FUNCTION called from render(), not a boot-time
+   IIFE: it narrates a movement lane, and which lane is correct depends on the view the
+   user is looking at. As a boot IIFE it hardcoded the consensus letters forever, so with
+   "Ours: 12.1" selected the page read "Protection Warrior M+ B → C ▼" directly above a
+   grid row showing M+ = B — the same contradiction in the Icy Veins and Archon views
+   (audit 2026-07-24, C3). */
+function renderChanges(){
   const host = document.getElementById('changes');
   if(!host) return;
+  // Narrate the lane the grid is actually drawing. The projection lane is era-gated out
+  // of a 12.0.7-only view exactly like every other projection surface.
+  const onProj = state.source === "projection" && state.era !== "live";
+  const key    = onProj ? "projMovement" : "movement";
+  const label  = onProj ? "Ours: 12.1" : "Consensus";
+  const tierNow = (s, b) => (onProj ? s.projection?.[b]?.tier : s.consensus?.[b]?.tier) ?? "—";
+
   const moves = [];
-  for(const s of SPECS) for(const b of ["raid","mplus"]) if(s.movement?.[b]) moves.push({ s, b, m: s.movement[b] });
+  for(const s of SPECS) for(const b of ["raid","mplus"]) if(s[key]?.[b]) moves.push({ s, b, m: s[key][b] });
   const dummyMoves = SPECS.filter(s=>s.ptrDummy?.rankDelta);
   const fresh = SPECS.filter(s=>newInfoFor(s)).length;
-  if(!moves.length && !dummyMoves.length && !fresh){ host.remove(); return; }
+  if(!moves.length && !dummyMoves.length && !fresh){ host.hidden = true; host.innerHTML = ""; return; }
+  host.hidden = false;
   const ups = moves.filter(x=>x.m.delta>0).length, downs = moves.filter(x=>x.m.delta<0).length;
-  const line = x => `<span><b>${esc(x.s.spec)} ${esc(x.s.class)}</b> ${x.b==="raid"?"Raid":"M+"} ${esc(x.m.was)} → ${esc(x.s.consensus?.[x.b]?.tier ?? "—")} <span class="mv" data-d="${x.m.delta>0?'up':'down'}">${x.m.delta>0?'▲':'▼'}</span> <span class="mnote">since ${esc(fmtDate(x.m.since))}</span></span>`;
-  host.innerHTML = `<details class="changes"><summary><b>What changed</b>${META.movementSince?` <span class="mnote">since ${esc(fmtDate(META.movementSince))}</span>`:""} — <span class="mv" data-d="up">▲${ups}</span> <span class="mv" data-d="down">▼${downs}</span> tier moves · ${dummyMoves.length} Dummy Dome shifts · ${fresh} specs with fresh info${META.latestPtrBuild?` · latest PTR build ${esc(fmtDate(META.latestPtrBuild))}`:""}</summary>
-    <div class="chlist">${moves.map(line).join("") || "<span class='mnote'>No tier moves since the baseline.</span>"}
+  const line = x => {
+    // The projection is jittery in a way the consensus is not — a band edge can flip on a
+    // 1-2 point move — so its arrows carry the score delta rather than implying a shift
+    // of the same weight as a consensus move.
+    const sd = x.m.scoreDelta != null
+      ? ` <span class="mnote">(${x.m.scoreDelta>0?"+":""}${x.m.scoreDelta} pts)</span>` : "";
+    return `<span><b>${esc(x.s.spec)} ${esc(x.s.class)}</b> <span class="mnote">${esc(label)}</span> ${x.b==="raid"?"Raid":"M+"} ${esc(x.m.was)} → ${esc(tierNow(x.s,x.b))} <span class="mv" data-d="${x.m.delta>0?'up':'down'}" title="${esc(label)} ${x.b==="raid"?"raid":"M+"} tier ${x.m.delta>0?'rose':'fell'} since ${esc(fmtDate(x.m.since))}${x.m.scoreDelta!=null?`, score ${x.m.scoreDelta>0?"+":""}${x.m.scoreDelta}`:""}">${x.m.delta>0?'▲':'▼'}</span> <span class="mnote">since ${esc(fmtDate(x.m.since))}</span></span>`;
+  };
+  host.innerHTML = `<details class="changes"><summary><b>What changed</b> <span class="mnote">${esc(label)}${META.movementSince?` · since ${esc(fmtDate(META.movementSince))}`:""}</span> — <span class="mv" data-d="up">▲${ups}</span> <span class="mv" data-d="down">▼${downs}</span> tier moves · ${dummyMoves.length} Dummy Dome shifts · ${fresh} specs with fresh info${META.latestPtrBuild?` · latest PTR build ${esc(fmtDate(META.latestPtrBuild))}`:""}</summary>
+    <div class="chlist">${moves.map(line).join("") || `<span class='mnote'>No ${esc(label)} tier moves since the baseline.</span>`}
     ${dummyMoves.map(s=>`<span><b>${esc(s.spec)} ${esc(s.class)}</b> Dummy Dome rank ${s.ptrDummy.rankDelta>0?'climbed':'fell'} ${Math.abs(s.ptrDummy.rankDelta)} <span class="mnote">(now #${s.ptrDummy.rank}/${s.ptrDummy.of})</span></span>`).join("")}</div></details>`;
-})();
+}
 
 /* ---------- boot: apply the deep link, sync widgets to state, first render ---------- */
 function syncControls(){

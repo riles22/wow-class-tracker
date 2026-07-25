@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { fightLabels, metricRanks, outlookFor, movementFor, snapshotStateOf, pickBaseline, dummyDomeScores, classifyHighlight, projectionFor, historySeries, specBuildChanges } from "../src/render.mjs";
+import { fightLabels, metricRanks, outlookFor, movementFor, projectionMovementFor, snapshotStateOf, pickBaseline, dummyDomeScores, classifyHighlight, projectionFor, historySeries, specBuildChanges } from "../src/render.mjs";
 
 test("specBuildChanges: official lines grouped by build, spec-prefix attribution identical to the outlook's", () => {
   const builds = { builds: [
@@ -497,4 +497,47 @@ test("fightLabels uses canonical counts (1/3/8) — no cross-count mixing", () =
   // The two full specs are ranked only against each other's real 8T values.
   assert.equal(specs[1].fightProfile.labels.aoe, "strong");
   assert.equal(specs[0].fightProfile.labels.aoe, "weak");
+});
+
+test("projectionMovementFor narrates the forecast's own moves and never touches consensus movement", () => {
+  const scales = { consensus: { bands: [
+    { tier: "S", min: 85 }, { tier: "A", min: 60 }, { tier: "B", min: 40 }, { tier: "C", min: 0 }] } };
+  const specs = [
+    // projection moved B -> A, consensus stood still
+    { class: "Monk", spec: "Brewmaster", consensus: { raid: { tier: "B" } },
+      projection: { raid: { tier: "A", score: 64 }, mplus: { tier: "A", score: 66 } } },
+    // consensus moved B -> A, projection stood still
+    { class: "Mage", spec: "Frost", consensus: { raid: { tier: "A" } },
+      projection: { raid: { tier: "B", score: 50 }, mplus: null } },
+  ];
+  const snapshot = { date: "2026-07-23", specs: {
+    "Monk|Brewmaster": { consensus: { raid: "B" }, projection: { raid: { tier: "B", score: 57 }, mplus: { tier: "A", score: 66 } } },
+    "Mage|Frost": { consensus: { raid: "B" }, projection: { raid: { tier: "B", score: 50 }, mplus: null } },
+  } };
+
+  movementFor(specs, scales, snapshot);
+  projectionMovementFor(specs, scales, snapshot);
+
+  // the forecast's own move is now narrated, with its score delta for jitter disclosure
+  assert.equal(specs[0].projMovement.raid.was, "B");
+  assert.equal(specs[0].projMovement.raid.delta, 1);
+  assert.equal(specs[0].projMovement.raid.scoreDelta, 7);
+  assert.equal(specs[0].projMovement.mplus, undefined); // unchanged bracket stays silent
+  // …and it did NOT invent a consensus move
+  assert.equal(specs[0].movement, undefined);
+
+  // the reverse spec: consensus moved, projection did not
+  assert.equal(specs[1].movement.raid.was, "B");
+  assert.equal(specs[1].projMovement, undefined);
+});
+
+test("projectionMovementFor is a no-op before projections() has run (ordering contract)", () => {
+  // The first cut of this lived inside movementFor, which runs BEFORE projections() —
+  // so spec.projection did not exist yet and it silently produced nothing (audit C3).
+  const scales = { consensus: { bands: [{ tier: "A", min: 60 }, { tier: "B", min: 0 }] } };
+  const specs = [{ class: "Monk", spec: "Brewmaster", consensus: { raid: { tier: "B" } } }]; // no .projection yet
+  const snapshot = { date: "2026-07-23", specs: {
+    "Monk|Brewmaster": { consensus: { raid: "B" }, projection: { raid: { tier: "B", score: 57 }, mplus: null } } } };
+  projectionMovementFor(specs, scales, snapshot);
+  assert.equal(specs[0].projMovement, undefined);
 });

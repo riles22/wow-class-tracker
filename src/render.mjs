@@ -504,6 +504,47 @@ export function movementFor(specs, scales, snapshot) {
   return specs;
 }
 
+
+/* The projection's OWN movement, as a SEPARATE pass (audit 2026-07-24, C3).
+   It was computed and stored by snapshotStateOf every night and then thrown away: 13
+   projection tier moves against 9 consensus moves on 07-23→07-24, while the grid rendered
+   no arrows at all in the "Ours: 12.1" view and the change strip printed consensus letters
+   over it.
+
+   Why its own function rather than a branch inside movementFor: `projections()` runs AFTER
+   movementFor (it consumes consensus + ranks + dummy + outlook, all of which movementFor's
+   inputs precede), so inside movementFor `spec.projection` does not exist yet and this
+   silently produced nothing. Keeping it separate makes that ordering a contract rather
+   than a trap, and leaves movementFor's tier/rank-grained semantics untouched.
+
+   This never feeds consensus (hard rule 3) and is deliberately NOT part of
+   baselineDiffers — baseline selection stays tier/rank-grained, and a derived, jittery
+   quantity must not get to choose it. scoreDelta rides along because the projection is
+   jittery in a way the consensus is not: 6 of those 13 moves were ≤2 points across a band
+   edge, so a bare arrow would imply a shift it did not earn. */
+export function projectionMovementFor(specs, scales, snapshot) {
+  if (!snapshot?.specs) return specs;
+  const bandIdx = new Map(scales.consensus.bands.map((b, i) => [b.tier, i]));
+  for (const s of specs) {
+    const prev = snapshot.specs[`${s.class}|${s.spec}`];
+    if (!prev?.projection) continue;
+    const projMovement = {};
+    for (const bracket of ["raid", "mplus"]) {
+      const now = s.projection?.[bracket];
+      const was = prev.projection?.[bracket];
+      if (now?.tier && was?.tier && now.tier !== was.tier && bandIdx.has(now.tier) && bandIdx.has(was.tier)) {
+        projMovement[bracket] = {
+          delta: bandIdx.get(was.tier) - bandIdx.get(now.tier),
+          was: was.tier, since: snapshot.date,
+          scoreDelta: (now.score != null && was.score != null) ? now.score - was.score : null
+        };
+      }
+    }
+    if (Object.keys(projMovement).length) s.projMovement = projMovement;
+  }
+  return specs;
+}
+
 export function latestSnapshot(sources) {
   const dates = sources
     .flatMap(source => source.pages ?? [])
@@ -568,6 +609,7 @@ export function buildPayload({ specs, sources, scales, community, ptrBuilds, cre
     if (changes.length) spec.buildChanges = changes;
   }
   projections(decorated, scales, creatorTakes); // after consensus/ranks/dummy/outlook — it consumes all four
+  projectionMovementFor(decorated, scales, baseline); // MUST follow projections() — see its comment
   const latestBuild = ptrBuilds?.builds?.[0]?.date ?? null;
   // notes-feed pages track build posts, not page snapshots — stamp them from the feed
   const stampedSources = sources.map(source => source.kind !== "notes-feed" ? source : {
