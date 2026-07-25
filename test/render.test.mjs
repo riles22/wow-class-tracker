@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { fightLabels, metricRanks, outlookFor, movementFor, projectionMovementFor, snapshotStateOf, pickBaseline, dummyDomeScores, classifyHighlight, projectionFor, historySeries, specBuildChanges } from "../src/render.mjs";
+import { dataHealth, fightLabels, metricRanks, outlookFor, movementFor, projectionMovementFor, snapshotStateOf, pickBaseline, dummyDomeScores, classifyHighlight, projectionFor, historySeries, specBuildChanges } from "../src/render.mjs";
 
 test("specBuildChanges: spec lines by prefix, class-wide lines by build membership", () => {
   const builds = { builds: [
@@ -604,4 +604,42 @@ test("projectionFor: a 'Mythic raid' meta note cannot nudge the M+ projection (a
   const explicit = { ...note, bracket: "mplus", patchContext: "Season 2 PTR — Mythic raid outlook" };
   assert.match(projectionFor(spec, "mplus", scales, [explicit]).basis, /meta read \+3/);
   assert.ok(!/meta read/.test(projectionFor(spec, "raid", scales, [explicit]).basis));
+});
+
+test("metricRanks: a tiny-n row keeps its value but earns no rank (audit 2026-07-24, D7)", () => {
+  const m = (n, value) => ({ source: "wcl", bracket: "raid", name: "12.1 PTR raid testing score", value, n });
+  const specs = [
+    { class: "C", spec: "Big1", role: "DPS", metrics: [m(400, 100)] },
+    { class: "C", spec: "Big2", role: "DPS", metrics: [m(120, 90)] },
+    { class: "C", spec: "Thin", role: "DPS", metrics: [m(1, 999)] },   // one parse, highest value
+    { class: "C", spec: "NoN", role: "DPS", metrics: [{ source: "sim", bracket: "raid", name: "Sim DPS", value: 5 }] },
+  ];
+  metricRanks(specs);
+  // a single-parse median must not be published as #1 of the field…
+  assert.equal(specs[2].metrics[0].rank, undefined);
+  assert.equal(specs[2].metrics[0].of, undefined);
+  assert.equal(specs[2].metrics[0].value, 999, "the measurement itself is still shown");
+  // …and must not inflate `of` for the rows that do rank
+  assert.deepEqual([specs[0].metrics[0].rank, specs[0].metrics[0].of], [1, 2]);
+  assert.deepEqual([specs[1].metrics[0].rank, specs[1].metrics[0].of], [2, 2]);
+  // a source that reports no sample size at all (sims, scores) is unaffected
+  assert.equal(specs[3].metrics[0].rank, 1);
+
+  // upsert safety: a row that used to rank and now falls below the floor loses its rank
+  specs[0].metrics[0].n = 2;
+  metricRanks(specs);
+  assert.equal(specs[0].metrics[0].rank, undefined, "a stale rank must be cleared, not kept");
+});
+
+test("dataHealth: a uniformly frozen layer still raises the banner when given a clock (audit C7)", () => {
+  const mk = asOf => ({ metrics: [{ name: "A", asOf, source: "warcraftlogs" }, { name: "B", asOf, source: "warcraftlogs" }] });
+  const frozen = [mk("2026-06-01"), mk("2026-06-01")];
+  // self-relative only: everything stalled together, so every gap is 0 and it goes silent
+  assert.equal(dataHealth(frozen).series.length, 0);
+  // with a real build clock the same state is correctly reported as stale
+  assert.equal(dataHealth(frozen, "2026-07-25").series.length, 2);
+  // and a healthy pipeline is unaffected — no false alarm
+  assert.equal(dataHealth([mk("2026-07-25")], "2026-07-25").series.length, 0);
+  // the source travels with each entry, so the banner can attribute the stall correctly
+  assert.equal(dataHealth(frozen, "2026-07-25").series[0].source, "warcraftlogs");
 });

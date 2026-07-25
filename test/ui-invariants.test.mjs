@@ -47,8 +47,12 @@ const reason = !chromium
 
 /* One browser for the whole file; each test gets a fresh page. */
 let browser = null;
-const newPage = async (hash = "") => {
+const ensureBrowser = async () => {
   if (!browser) browser = await chromium.launch(EXECUTABLE ? { executablePath: EXECUTABLE } : {});
+  return browser;
+};
+const newPage = async (hash = "") => {
+  await ensureBrowser();
   const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
   const errors = [];
   page.on("pageerror", e => errors.push(String(e.message)));
@@ -332,5 +336,98 @@ ui("the Ladder shows every name AND every number without panning, at any width",
     assert.ok(r.dated, `${width}px: every ladder caption must state its own date`);
     await page.keyboard.press("Escape");
     await page.waitForTimeout(150);
+  }
+});
+
+/* Rendered XSS probe. The escaping boundary is the artifact's one load-bearing security
+   property, and it can only be checked where the interpolation actually happens: in the
+   browser. A static scan of dist/index.html cannot see it — verified by mutation, where
+   removing esc() from the take-claim sink left a static check green.
+
+   The fixture deliberately poisons only fields that still PASS validation (build() runs
+   the full validator). That is the realistic threat model: an agent distilling a hostile
+   creator post writes data that satisfies every schema rule. Identity fields that
+   participate in cross-checks — a take's creator/class/spec — are left alone, because
+   corrupting those is caught upstream and would make this test prove the wrong thing. */
+test("no agent-writable field can inject markup or a handler into the rendered page", skipOpts, async () => {
+  const { mkdtemp, rm, cp, readFile, writeFile } = await import("node:fs/promises");
+  const { tmpdir } = await import("node:os");
+  const MARK = "XSSPROBE";
+  const TEXT_BREAK = `${MARK}</` + `script><img src=x onerror="window.__pwned=1">`;
+  const ATTR_BREAK = `${MARK}" onmouseover="window.__pwned=1" x="`;
+
+  const root = await mkdtemp(path.join(tmpdir(), "tracker-xss-"));
+  try {
+    await cp(path.join(ROOT, "data"), path.join(root, "data"), { recursive: true });
+    await cp(path.join(ROOT, "src"), path.join(root, "src"), { recursive: true });
+    const dp = f => path.join(root, "data", f);
+    const load = async f => JSON.parse(await readFile(dp(f), "utf8"));
+    const save = (f, v) => writeFile(dp(f), JSON.stringify(v, null, 2) + "\n");
+
+    // Poison the prose of a spec that already HAS a creator take, so every sink in one
+    // drawer renders at once.
+    const takes = await load("creator-takes.json");
+    const victim = takes.takes.find(x => !x.superseded) ?? takes.takes[0];
+    const specs = await load("specs.json");
+    const s = specs.find(x => x.class === victim.class && x.spec === victim.spec) ?? specs[0];
+
+    s.ptr = { verdict: "Mixed", theme: TEXT_BREAK, summary: ATTR_BREAK,
+      changes: [TEXT_BREAK, ATTR_BREAK], set2: TEXT_BREAK, set4: ATTR_BREAK,
+      watch: TEXT_BREAK, source: "https://www.wowhead.com/news/probe" };
+    s.tierSet = { set2: TEXT_BREAK, set4: ATTR_BREAK, asOf: "2026-07-24", source: "https://www.wowhead.com/probe" };
+    s.metrics = [...(s.metrics ?? []), { source: "warcraftlogs", bracket: "raid",
+      name: `Median rDPS ${TEXT_BREAK}`, value: 1, unit: ATTR_BREAK, asOf: "2026-07-24" }];
+    await save("specs.json", specs);
+
+    victim.claim = TEXT_BREAK;                 // creator/class/spec left intact on purpose
+    const note = takes.metaNotes?.[0];
+    if (note) note.note = ATTR_BREAK;
+    await save("creator-takes.json", takes);
+
+    const community = await load("community.json");
+    const cls = (community.classes ?? []).find(c => c.class === s.class);
+    if (cls?.creators?.[0]) cls.creators[0].credential = TEXT_BREAK;   // name is cross-checked
+    if (cls?.sites?.[0]) cls.sites[0].name = ATTR_BREAK;
+    await save("community.json", community);
+
+    const enc = await load("encounter-tiers.json");
+    const firstRaid = Object.keys(enc.raid ?? {})[0];
+    if (firstRaid) enc.raid[firstRaid].name = TEXT_BREAK;
+    await save("encounter-tiers.json", enc);
+
+    const { build } = await import("../src/build.mjs");
+    await build(root);   // real pipeline, including validation
+    const hostile = path.join(root, "dist", "index.html");
+
+    const page = await (await ensureBrowser()).newPage({ viewport: { width: 1440, height: 1000 } });
+    try {
+      await page.goto("file://" + hostile);
+      await page.waitForFunction(() => document.querySelectorAll(".row").length > 0, { timeout: 15000 });
+      await page.evaluate(spec => {
+        [...document.querySelectorAll(".row.clickable")]
+          .find(r => r.querySelector(".spec-txt")?.textContent.trim() === spec)?.click();
+      }, s.spec);
+      await page.waitForTimeout(700);
+
+      const found = await page.evaluate(mark => ({
+        pwned: !!window.__pwned,
+        injectedImgs: document.querySelectorAll("img[onerror], img[src='x']").length,
+        handlers: [...document.querySelectorAll("*")]
+          .filter(e => [...e.attributes].some(a => /^on/i.test(a.name))).length,
+        badHrefs: [...document.querySelectorAll("[href]")]
+          .filter(e => !/^(https:|#|$)/.test(e.getAttribute("href") ?? "")).length,
+        markVisible: document.body.innerText.includes(mark),
+      }), MARK);
+
+      assert.equal(found.pwned, false, "an injected handler executed");
+      assert.equal(found.injectedImgs, 0, "injected <img> reached the DOM");
+      assert.equal(found.handlers, 0, "an inline on* handler reached the DOM");
+      assert.equal(found.badHrefs, 0, "a non-https href reached the DOM");
+      assert.equal(found.markVisible, true, "sanity: the probe must render as inert TEXT");
+    } finally {
+      await page.close();
+    }
+  } finally {
+    await rm(root, { recursive: true, force: true });
   }
 });

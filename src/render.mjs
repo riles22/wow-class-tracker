@@ -66,6 +66,16 @@ export function fightLabels(specs) {
    #1 = highest value. All current metrics are higher-is-better (DPS/HPS medians,
    95th-pct throughput, M+ score, popularity %, rating ceilings); if a
    lower-is-better metric is ever added, extend this with a direction flag. */
+/* Sample floor for ranking. A median over a handful of parses is a number, not a
+   position: 52 rows across seven PTR families were ranked off fewer than 10 parses,
+   including single-player medians published as "#14/25 DPS" and fed to the projection
+   through rankPct (audit 2026-07-24, D7). Rows below the floor keep their VALUE — the
+   drawer still shows the measurement with its n — but get no rank, and do not count
+   toward `of`, so "#x of y" stays truthful. `n == null` means the source does not report
+   a sample size (sims, scores); those are unaffected. This mirrors dummyDomeScores'
+   coverage floor, which already refuses a headline number on thin evidence. */
+export const MIN_RANK_N = 10;
+
 export function metricRanks(specs) {
   const groups = new Map();
   for (const spec of specs) {
@@ -75,7 +85,11 @@ export function metricRanks(specs) {
       groups.get(key).push(metric);
     }
   }
-  for (const arr of groups.values()) {
+  for (const all of groups.values()) {
+    // Unranked rows are cleared explicitly: metrics upsert in place, so a row that used
+    // to clear the floor and no longer does must lose its stale rank.
+    for (const m of all) { if (m.n != null && m.n < MIN_RANK_N) { delete m.rank; delete m.of; } }
+    const arr = all.filter(m => m.n == null || m.n >= MIN_RANK_N);
     arr.sort((a, b) => b.value - a.value);
     // Competition ranking: identical measured values share a rank. Ordering them #11 vs
     // #12 on the same number publishes a distinction the data does not contain, and
@@ -618,7 +632,15 @@ const dayGap = (from, to) => Math.round((Date.parse(to) - Date.parse(from)) / 86
    date over-promises for those series). Pure over the specs — no clock, no config;
    the frontier is the newest asOf actually present. Returns null when there's nothing
    to compare, or { latest, oldest, series[] } (series empty when all cuts are fresh). */
-export function dataHealth(specs) {
+/* `now` is an OPTIONAL build-time date (YYYY-MM-DD). Without it the computation is purely
+   self-relative — staleness measured against the data's own newest date — which is what
+   keeps this honest when agent-written page snapshots lie, and is why the relative design
+   is kept rather than replaced. But it has one blind spot: if the whole empirical layer
+   stalls together, `latest` stalls with it, every gap is 0, and the banner goes silent at
+   exactly the moment it matters most (audit 2026-07-24, C7). Passing a real clock (build
+   time, not any fetched date) as an upper bound closes that without giving up the
+   relative behaviour when the data is fresh. */
+export function dataHealth(specs, now = null) {
   const newest = new Map(); // series label → { asOf: newest seen, source }
   const note = (label, asOf, source) => {
     if (!asOf) return;
@@ -637,17 +659,22 @@ export function dataHealth(specs) {
   const dates = [...newest.values()].map(v => v.asOf).sort();
   if (!dates.length) return null;
   const latest = dates[dates.length - 1];
+  // Measure against whichever is later: the freshest data, or today. Identical to the old
+  // behaviour whenever the pipeline is healthy (they coincide); the difference only shows
+  // when EVERYTHING has stopped moving, which is the case the old rule could not see.
+  const today = typeof now === "string" && /^\d{4}-\d{2}-\d{2}/.test(now) ? now.slice(0, 10) : null;
+  const reference = today && today > latest ? today : latest;
   // The source travels with each frozen series so the banner can attribute the stall
   // correctly. It used to announce every stall as a Warcraft Logs rDPS outage, which
   // made two Robydoby Google Sheets a WCL API failure (audit 2026-07-24, D1).
   const series = [...newest.entries()]
-    .filter(([, v]) => dayGap(v.asOf, latest) > STALE_DAYS)
+    .filter(([, v]) => dayGap(v.asOf, reference) > STALE_DAYS)
     .map(([label, v]) => ({ label, asOf: v.asOf, source: v.source ?? null }))
     .sort((a, b) => a.asOf.localeCompare(b.asOf) || a.label.localeCompare(b.label));
-  return { latest, oldest: series[0]?.asOf ?? null, series };
+  return { latest, reference, oldest: series[0]?.asOf ?? null, series };
 }
 
-export function buildPayload({ specs, sources, scales, community, ptrBuilds, creatorTakes, encounterTiers, historySnapshot, historySnapshots }) {
+export function buildPayload({ specs, sources, scales, community, ptrBuilds, creatorTakes, encounterTiers, historySnapshot, historySnapshots, now = null }) {
   const scored = dummyDomeScores(metricRanks(fightLabels(decorateSpecs(specs, sources, scales))));
   // Prefer the full history (skip snapshots identical to the present state); fall back to
   // the single-snapshot param for callers/tests that pass one directly.
@@ -676,7 +703,7 @@ export function buildPayload({ specs, sources, scales, community, ptrBuilds, cre
     ptrBuilds: ptrBuilds ?? null,
     creatorTakes: creatorTakes ?? null,
     encounterTiers: encounterTiers ?? null,
-    dataHealth: dataHealth(decorated),
+    dataHealth: dataHealth(decorated, now),
     meta: {
       specCount: specs.length,
       trackedCount: specs.filter(spec => spec.ptr).length,

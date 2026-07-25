@@ -22,7 +22,10 @@ export async function build(root = ROOT) {
     throw new Error("src/template.html is missing the __DATA_JSON__ placeholder");
   }
 
-  const payload = buildPayload(data);
+  // A real clock, supplied only here: render.mjs stays pure and its tests stay
+  // deterministic, while the shipped artifact can measure staleness against today —
+  // the case where the whole empirical layer freezes at once (see dataHealth).
+  const payload = buildPayload({ ...data, now: new Date().toISOString().slice(0, 10) });
   // Escape "<" so the payload can never terminate the surrounding <script> block.
   const json = JSON.stringify(payload).replace(/</g, "\\u003c");
   let html = template.replace("__DATA_JSON__", () => json);
