@@ -348,7 +348,7 @@ change to **`nightly.yml` or `dispatch-nightly.yml` specifically** lands on mast
 trigger it), via `gh workflow run` as github-actions[bot] —
 `allowed_bots` on the agent steps permits that actor.) A `workflow_dispatch` input
 `agent_model` overrides both agents' model for a single run (default
-`claude-opus-4-8`) — one-off model trials without editing the workflow. Publish (deterministic, no AI, holds the write token) gates on a
+`claude-opus-5`) — one-off model trials without editing the workflow. Publish (deterministic, no AI, holds the write token) gates on a
 boundary guard ("Gate 0", 2026-07-18 portfolio audit: the artifact may not alter the
 gate contract `required-sources.json`, `scales.json`, or registry structure in
 `sources.json`/`community.json` beyond their agent-updatable fields — those fail the
