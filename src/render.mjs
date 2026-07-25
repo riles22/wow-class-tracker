@@ -632,15 +632,10 @@ const dayGap = (from, to) => Math.round((Date.parse(to) - Date.parse(from)) / 86
    date over-promises for those series). Pure over the specs — no clock, no config;
    the frontier is the newest asOf actually present. Returns null when there's nothing
    to compare, or { latest, oldest, series[] } (series empty when all cuts are fresh). */
-/* `now` is an OPTIONAL build-time date (YYYY-MM-DD). Without it the computation is purely
-   self-relative — staleness measured against the data's own newest date — which is what
-   keeps this honest when agent-written page snapshots lie, and is why the relative design
-   is kept rather than replaced. But it has one blind spot: if the whole empirical layer
-   stalls together, `latest` stalls with it, every gap is 0, and the banner goes silent at
-   exactly the moment it matters most (audit 2026-07-24, C7). Passing a real clock (build
-   time, not any fetched date) as an upper bound closes that without giving up the
-   relative behaviour when the data is fresh. */
-export function dataHealth(specs, now = null) {
+/* Staleness measured against the data's OWN newest date — deliberately clock-free, which
+   is what keeps this honest when agent-written page snapshots lie, and keeps the build a
+   pure function of the data. See the note inside about where the absolute check lives. */
+export function dataHealth(specs) {
   const newest = new Map(); // series label → { asOf: newest seen, source }
   const note = (label, asOf, source) => {
     if (!asOf) return;
@@ -659,19 +654,25 @@ export function dataHealth(specs, now = null) {
   const dates = [...newest.values()].map(v => v.asOf).sort();
   if (!dates.length) return null;
   const latest = dates[dates.length - 1];
-  // Measure against whichever is later: the freshest data, or today. Identical to the old
-  // behaviour whenever the pipeline is healthy (they coincide); the difference only shows
-  // when EVERYTHING has stopped moving, which is the case the old rule could not see.
-  const today = typeof now === "string" && /^\d{4}-\d{2}-\d{2}/.test(now) ? now.slice(0, 10) : null;
-  const reference = today && today > latest ? today : latest;
-  // The source travels with each frozen series so the banner can attribute the stall
-  // correctly. It used to announce every stall as a Warcraft Logs rDPS outage, which
-  // made two Robydoby Google Sheets a WCL API failure (audit 2026-07-24, D1).
-  const series = [...newest.entries()]
-    .filter(([, v]) => dayGap(v.asOf, reference) > STALE_DAYS)
+  // The source travels with each series so the banner can attribute a stall correctly. It
+  // used to announce every stall as a Warcraft Logs rDPS outage, which made two Robydoby
+  // Google Sheets a WCL API failure (audit 2026-07-24, D1).
+  const all = [...newest.entries()]
     .map(([label, v]) => ({ label, asOf: v.asOf, source: v.source ?? null }))
     .sort((a, b) => a.asOf.localeCompare(b.asOf) || a.label.localeCompare(b.label));
-  return { latest, reference, oldest: series[0]?.asOf ?? null, series };
+  // `series` is the self-relative answer: stale against the data's OWN newest date. It has
+  // one blind spot — if the whole empirical layer stalls together, `latest` stalls with it
+  // and this goes empty at exactly the moment it matters (audit C7). The absolute check
+  // that closes it is applied in the BROWSER instead of here, against the reader's clock:
+  //   - the build stays a pure function of the data, so dist/index.html is byte-identical
+  //     for identical data. Baking the build date in made the artifact change every night
+  //     even on a completely quiet run, and publish commits dist.
+  //   - a page read a month later ages honestly rather than reporting how fresh it looked
+  //     on the day it was generated.
+  // `all` carries every series' date so the client can redo the comparison; `staleDays` is
+  // the threshold so the two implementations cannot drift apart.
+  const series = all.filter(v => dayGap(v.asOf, latest) > STALE_DAYS);
+  return { latest, oldest: series[0]?.asOf ?? null, series, all, staleDays: STALE_DAYS };
 }
 
 export function buildPayload({ specs, sources, scales, community, ptrBuilds, creatorTakes, encounterTiers, historySnapshot, historySnapshots, now = null }) {
@@ -703,7 +704,7 @@ export function buildPayload({ specs, sources, scales, community, ptrBuilds, cre
     ptrBuilds: ptrBuilds ?? null,
     creatorTakes: creatorTakes ?? null,
     encounterTiers: encounterTiers ?? null,
-    dataHealth: dataHealth(decorated, now),
+    dataHealth: dataHealth(decorated),
     meta: {
       specCount: specs.length,
       trackedCount: specs.filter(spec => spec.ptr).length,

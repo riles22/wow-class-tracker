@@ -631,15 +631,44 @@ test("metricRanks: a tiny-n row keeps its value but earns no rank (audit 2026-07
   assert.equal(specs[0].metrics[0].rank, undefined, "a stale rank must be cleared, not kept");
 });
 
-test("dataHealth: a uniformly frozen layer still raises the banner when given a clock (audit C7)", () => {
-  const mk = asOf => ({ metrics: [{ name: "A", asOf, source: "warcraftlogs" }, { name: "B", asOf, source: "warcraftlogs" }] });
+test("dataHealth stays clock-free and ships what the client needs to age it (audit C7)", () => {
+  const mk = asOf => ({ metrics: [{ name: "A", asOf, source: "warcraftlogs" }, { name: "B", asOf, source: "robydoby" }] });
   const frozen = [mk("2026-06-01"), mk("2026-06-01")];
-  // self-relative only: everything stalled together, so every gap is 0 and it goes silent
-  assert.equal(dataHealth(frozen).series.length, 0);
-  // with a real build clock the same state is correctly reported as stale
-  assert.equal(dataHealth(frozen, "2026-07-25").series.length, 2);
-  // and a healthy pipeline is unaffected — no false alarm
-  assert.equal(dataHealth([mk("2026-07-25")], "2026-07-25").series.length, 0);
-  // the source travels with each entry, so the banner can attribute the stall correctly
-  assert.equal(dataHealth(frozen, "2026-07-25").series[0].source, "warcraftlogs");
+  const h = dataHealth(frozen);
+
+  // Self-relative: everything stalled together, so every gap is 0 and `series` is empty.
+  // That is the documented blind spot, and it is NOT closed here — closing it at build
+  // time would bake the build date into dist and churn the artifact nightly.
+  assert.equal(h.series.length, 0);
+
+  // What IS shipped is the raw material for the browser to redo the comparison against
+  // the reader's own clock: every series with its date and source, plus the threshold.
+  assert.equal(h.all.length, 2);
+  assert.equal(h.staleDays, 7);
+  assert.deepEqual(h.all.map(s => s.source).sort(), ["robydoby", "warcraftlogs"]);
+  const ref = "2026-07-25";
+  const clientStale = h.all.filter(s => (Date.parse(ref) - Date.parse(s.asOf)) / 86400000 > h.staleDays);
+  assert.equal(clientStale.length, 2, "the client can see what the build deliberately cannot");
+
+  // A mixed state still resolves self-relatively at build time, sources intact. NOTE the
+  // labels must differ: entries are keyed by metric NAME across all specs, keeping the
+  // newest date per name — same-named metrics on two specs collapse to one entry.
+  const mixed = dataHealth([
+    { metrics: [{ name: "Fresh", asOf: "2026-07-25", source: "archon" }] },
+    { metrics: [{ name: "Frozen", asOf: "2026-06-01", source: "warcraftlogs" }] },
+  ]);
+  assert.equal(mixed.latest, "2026-07-25");
+  assert.equal(mixed.all.length, 2);
+  assert.deepEqual(mixed.series.map(s => s.label), ["Frozen"]);
+  assert.equal(mixed.oldest, "2026-06-01");
+  assert.equal(mixed.series[0].source, "warcraftlogs");
+});
+
+test("dataHealth is a pure function of the data — identical input, identical output", () => {
+  // build.mjs used to pass `new Date()` in, which made dist/index.html differ every night
+  // even when nothing changed, and publish commits dist.
+  const mk = asOf => ({ metrics: [{ name: "A", asOf, source: "warcraftlogs" }] });
+  const a = dataHealth([mk("2026-06-01"), mk("2026-07-20")]);
+  const b = dataHealth([mk("2026-06-01"), mk("2026-07-20")]);
+  assert.deepEqual(a, b);
 });

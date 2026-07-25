@@ -1514,14 +1514,30 @@ if(META.latestSnapshot){
 (function(){
   const dh = DATA.dataHealth;
   const el = document.getElementById('datahealth');
-  if(!dh || !dh.series || !dh.series.length){ el.hidden = true; return; }
-  const n = dh.series.length;
-  const names = dh.series.map(s=>s.label).join(" · ");
+  if(!dh){ el.hidden = true; return; }
+  // The build ships the SELF-RELATIVE answer (stale against the data's own newest date)
+  // and the full dated list. The absolute check is applied here, against the READER's
+  // clock, for two reasons: the build stays a pure function of the data — baking today's
+  // date in made dist/index.html change every night even on a quiet run, and publish
+  // commits dist — and a page read weeks later ages honestly instead of reporting how
+  // fresh it looked the day it was generated. Falls back to the build-time list if an
+  // older payload has no `all` (audit 2026-07-24, C7).
+  const gap = (from,to) => Math.round((Date.parse(to)-Date.parse(from))/86400000);
+  const todayISO = new Date().toISOString().slice(0,10);
+  const stale = (() => {
+    if(!Array.isArray(dh.all)) return dh.series || [];
+    const ref = todayISO > dh.latest ? todayISO : dh.latest;
+    return dh.all.filter(s => gap(s.asOf, ref) > (dh.staleDays ?? 7));
+  })();
+  if(!stale.length){ el.hidden = true; return; }
+  const oldest = stale[0]?.asOf ?? dh.oldest;
+  const n = stale.length;
+  const names = stale.map(s=>s.label).join(" · ");
   // One clause per stalled SOURCE, each with its own date. A single "N Warcraft Logs
   // series frozen" sentence misattributed two Robydoby Google Sheets to a WCL rDPS
   // outage they cannot possibly be part of (audit 2026-07-24, D1).
   const bySource = new Map();
-  dh.series.forEach(s=>{
+  stale.forEach(s=>{
     const id = s.source || "unknown";
     const g = bySource.get(id) || { id, n:0, oldest:null };
     g.n++; if(!g.oldest || s.asOf < g.oldest) g.oldest = s.asOf;
@@ -1539,8 +1555,8 @@ if(META.latestSnapshot){
   const groups = [...bySource.values()].sort((a,b)=> b.n-a.n || a.id.localeCompare(b.id));
   el.innerHTML = `<b>Heads up</b> ${groups.map(clause).join("; ")}. `
     + `Tier lists, sims, and the raw-DPS series refresh nightly (latest ${esc(dh.latest)}); each frozen row shows its own date. `
-    + `Our 12.1 projection is recomputed nightly, but its PTR-empirical term still comes from the frozen ${esc(dh.oldest)} cuts. `
-    + `<details class="dh-series"><summary>Affected: ${dh.series.length} series</summary>${esc(names)}.</details>`;
+    + `Our 12.1 projection is recomputed nightly, but its PTR-empirical term still comes from the frozen ${esc(oldest)} cuts. `
+    + `<details class="dh-series"><summary>Affected: ${n} series</summary>${esc(names)}.</details>`;
   el.hidden = false;
 })();
 
