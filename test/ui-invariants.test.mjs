@@ -237,3 +237,64 @@ ui("closed drawers contribute no keyboard tab stops", async page => {
   assert.equal(state.open, 0);
   assert.equal(state.leaky, 0, "every closed drawer must be inert");
 });
+
+ui("the Into-12.1 movers strip is era-gated, ranked, and drills through", async page => {
+  const data = payload();
+  const expected = [];
+  for (const s of data.specs) for (const b of ["raid", "mplus"]) {
+    const p = s.projection?.[b], c = s.consensus?.[b];
+    if (p?.score != null && c?.score != null && p.tier && c.tier && p.tier !== c.tier) {
+      expected.push({ cls: s.class, spec: s.spec, delta: p.score - c.score });
+    }
+  }
+  assert.ok(expected.length > 0, "expected the forecast to disagree with the consensus somewhere");
+
+  await page.evaluate(() => document.querySelector("#movers details").open = true);
+  await page.waitForTimeout(150);
+  const shown = await page.evaluate(() => [...document.querySelectorAll("#movers .mvr")].map(b => ({
+    cls: b.dataset.cls, spec: b.dataset.spec,
+    delta: +(/(-?\d+) pts/.exec(b.textContent)?.[1] ?? NaN),
+  })));
+  assert.ok(shown.length > 0, "expected movers rows");
+
+  // every rendered row must be a real consensus→forecast tier change with the right delta
+  for (const row of shown) {
+    const match = expected.find(e => e.cls === row.cls && e.spec === row.spec && e.delta === row.delta);
+    assert.ok(match, `movers row ${row.cls} ${row.spec} ${row.delta} is not a real forecast-vs-consensus change`);
+  }
+  // Both lists lead with the BIGGEST move: risers descending (+28 first), fallers
+  // ascending (-40 first). Sorting fallers descending would bury the headline drop.
+  const risers = shown.filter(r => r.delta > 0), fallers = shown.filter(r => r.delta < 0);
+  assert.deepEqual(risers, [...risers].sort((a, b) => b.delta - a.delta), "risers must lead with the biggest gain");
+  assert.deepEqual(fallers, [...fallers].sort((a, b) => a.delta - b.delta), "fallers must lead with the biggest drop");
+  // it must NOT borrow the movement glyphs — those mean a different axis
+  const glyphs = await page.evaluate(() => document.querySelector("#movers").textContent);
+  assert.ok(!/[▲▼]/.test(glyphs), "the forecast lane must not reuse the ▲▼ history-movement glyphs");
+
+  // a 12.0.7-only view has no forecast, so the strip must disappear
+  await page.evaluate(() => document.querySelector('#eraseg button[data-era="live"]').click());
+  await page.waitForTimeout(200);
+  assert.equal(await page.evaluate(() => document.getElementById("movers").hidden), true,
+    "the movers strip must be era-gated out of a 12.0.7-only view");
+});
+
+ui("a change-strip row drills through even when a filter is hiding that spec", async page => {
+  // openRowFor only searches the CURRENT view and returns false when a filter hides the
+  // row, so a naive wiring silently did nothing — the fallback clears filters first.
+  await page.evaluate(() => document.querySelector('#roleseg button[data-role="Healer"]').click());
+  await page.waitForTimeout(200);
+  await page.evaluate(() => { const d = document.querySelector("#changes details"); if (d) d.open = true; });
+  await page.waitForTimeout(150);
+
+  const target = await page.evaluate(() => {
+    const b = [...document.querySelectorAll("#changes .chjump")]
+      .find(x => !x.closest(".chfresh"));
+    if (!b) return null;
+    b.click();
+    return { cls: b.dataset.cls, spec: b.dataset.spec };
+  });
+  assert.ok(target, "expected at least one change row to jump from");
+  await page.waitForTimeout(1200);
+  const open = await page.evaluate(() => [...document.querySelectorAll(".row.open .spec-txt")].map(e => e.textContent.trim()));
+  assert.deepEqual(open, [target.spec], `jumping to ${target.cls} ${target.spec} must open it whatever filter was active`);
+});

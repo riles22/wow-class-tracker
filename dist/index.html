@@ -11,7 +11,7 @@
 -->
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-NimywOeAFcJDblPPCxkQNX2OsUd1ISRSJFqKEOuwW8Q='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-t+cSgxi/fooO73UNuNy2fniti4PhSAOITM13HrGLCxw='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="riles22">
 <title>Curse of Ula'tek — 12.1 PTR Spec Tracker</title>
@@ -76,6 +76,12 @@
   @keyframes sweep{to{background-position:220% 0}}
   .sub{color:var(--ink-dim); max-width:70ch; margin:0; font-size:14px}
   .sub b{color:var(--ink); font-weight:600}
+  .sub-more{display:inline}
+  .sub-more > summary{display:inline; cursor:pointer; color:var(--accent-2); font-size:13px; text-decoration:underline dotted; text-underline-offset:3px}
+  .sub-more > summary::-webkit-details-marker{display:none}
+  .sub-more > summary:focus-visible{outline:2px solid var(--accent-2); outline-offset:2px; border-radius:3px}
+  .sub-more[open] > summary{display:block; margin:6px 0 3px}
+  .sub-more[open]{display:block; margin-top:4px}
   .stamp{
     font-family:var(--mono); font-size:11px; color:var(--ink-faint);
     margin-top:14px; display:flex; gap:8px 18px; flex-wrap:wrap
@@ -144,6 +150,60 @@
     display:flex; gap:10px 22px; flex-wrap:wrap; align-items:center;
     padding:12px 0 8px; font-size:12px; color:var(--ink-faint)
   }
+  /* The legend is reference material — needed once, then never again — and it cost four
+     wrapped rows (~330px on a phone) directly above the data. It folds; the "within role"
+     note does NOT (it is an honesty statement, not a key) and sits outside as .standalone.
+     Open by default on wide screens, where the space is free. */
+  .legend-wrap{padding:10px 0 2px}
+  .legend-wrap > summary{
+    font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--ink-faint); cursor:pointer; list-style:none; display:inline-flex; align-items:center; gap:6px
+  }
+  .legend-wrap > summary::-webkit-details-marker{display:none}
+  .legend-wrap > summary::before{content:"▸"; font-size:9px; transition:transform .15s}
+  .legend-wrap[open] > summary::before{transform:rotate(90deg)}
+  .legend-wrap > summary:hover{color:var(--ink-dim)}
+  .legend-wrap > summary:focus-visible{outline:2px solid var(--accent-2); outline-offset:3px; border-radius:3px}
+  .legend-wrap .legend{padding-top:6px}
+  /* phones pay ~330px for the legend; wide screens do not, so it starts open there */
+  @media(max-width:759px){ .sub{font-size:13px; max-width:none} }
+  .note.standalone{display:block; font-size:12px; color:var(--ink-faint); padding:2px 0 4px; max-width:78ch}
+  /* change rows are leads you can follow, not decoration */
+  .chjump{
+    display:block; width:100%; text-align:left; font:inherit; color:var(--ink-dim);
+    background:none; border:0; border-radius:6px; padding:4px 8px; margin:0 -8px; cursor:pointer
+  }
+  .chjump:hover{background:var(--bg-3); color:var(--ink)}
+  .chjump:focus-visible{outline:2px solid var(--accent-2); outline-offset:-2px}
+  .chjump b{color:var(--ink)}
+  .chfresh{margin-top:8px}
+  .chfresh > summary{cursor:pointer; font-size:12px; color:var(--ink-faint)}
+  .chfresh > summary:focus-visible{outline:2px solid var(--accent-2); outline-offset:2px; border-radius:3px}
+  /* Into 12.1 — the forecast lane. Gold throughout, matching the projection's own accent,
+     and deliberately NOT the ▲▼ movement glyphs, which mean a different axis. */
+  .movers{
+    margin:8px 0 0; padding:9px 13px; font-size:12px;
+    background:color-mix(in srgb,var(--gold) 6%,transparent);
+    border:1px solid color-mix(in srgb,var(--gold) 28%,transparent); border-radius:8px
+  }
+  .movers > summary{cursor:pointer; color:var(--ink-dim); list-style:none}
+  .movers > summary::-webkit-details-marker{display:none}
+  .movers > summary b{color:var(--gold); font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase}
+  .movers > summary:focus-visible{outline:2px solid var(--accent-2); outline-offset:2px; border-radius:3px}
+  .mvr-note{margin:8px 0 10px; max-width:80ch}
+  .mvr-cols{display:grid; grid-template-columns:1fr; gap:10px 26px}
+  @media(min-width:760px){ .mvr-cols{grid-template-columns:1fr 1fr} }
+  .mvr{display:grid; grid-template-columns:1fr auto auto; gap:8px; align-items:baseline}
+  .mvr-t{font-family:var(--mono); font-size:11px; color:var(--ink-dim); white-space:nowrap}
+  .mvr-d{font-family:var(--mono); font-size:11px; font-weight:700; white-space:nowrap}
+  .mvr-d[data-d="up"]{color:var(--v-pos)}
+  .mvr-d[data-d="down"]{color:var(--v-neg)}
+  /* the caveat keeps its claim inline and folds only the explanation */
+  .caveat-more{display:inline}
+  .caveat-more > summary{display:inline; cursor:pointer; color:var(--accent-2); text-decoration:underline dotted; text-underline-offset:3px}
+  .caveat-more > summary::-webkit-details-marker{display:none}
+  .caveat-more > summary:focus-visible{outline:2px solid var(--accent-2); outline-offset:2px; border-radius:3px}
+  .caveat-more[open] > summary{display:block; margin-bottom:4px}
   .legend .grp{display:flex; gap:9px; align-items:center; flex-wrap:wrap}
   /* Keep each glyph(s)+phrase as one unit so the phrase can never wrap away from its
      glyph (audit L11); the phrase itself still wraps internally on narrow screens. */
@@ -358,7 +418,11 @@
     border:1px solid color-mix(in srgb,#e8a13a 42%,transparent)
   }
   .datahealth b{color:#e8a13a; font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase}
-  .datahealth .dh-series{color:var(--ink-faint); font-size:11.5px}
+  /* the enumeration is 200+px of the phone banner; the honest headline above it is not */
+  .datahealth .dh-series{color:var(--ink-faint); font-size:11.5px; margin-top:4px}
+  .datahealth .dh-series > summary{cursor:pointer; color:var(--ink-faint); text-decoration:underline dotted; text-underline-offset:3px; list-style:none; display:inline-block}
+  .datahealth .dh-series > summary::-webkit-details-marker{display:none}
+  .datahealth .dh-series > summary:focus-visible{outline:2px solid var(--accent-2); outline-offset:2px; border-radius:3px}
   /* Stale metric row in drawers (audit suggestion #1): a row whose asOf trails its box's
      freshest by the frozen threshold reads muted + amber-dated, so a 07-09 median next to
      07-22 siblings is visibly, not silently, old. */
@@ -516,7 +580,9 @@
     <p class="eyebrow">WoW Midnight · Patch 12.1 PTR</p>
     <h1 class="title"><span class="curse">Curse of Ula'tek</span> — Spec Tracker</h1>
     <div class="rule"></div>
-    <p class="sub">Live tracker for <b>Patch 12.1 PTR</b> class &amp; tier-set changes, laid over each spec's current <b>12.0.7 / Season 1</b> baseline so you can see where every spec is coming <i>from</i> as the changes land. Five sources feed a computed <b>consensus</b> (divergence marker where they disagree); flip between them, filter by era or a specific fight, and click <b>any row</b> for the full read — PTR changes, current numbers with ranks, sim fight profile, and community takes.</p>
+    <!-- One sentence of lede; the mental model folds. This paragraph ran five lines and
+         was ~40% of a 329px masthead sitting directly above a page people check daily. -->
+    <div class="sub">Where every spec stands going into <b>12.1 “Curse of Ula'tek”</b> — PTR changes laid over its current <b>12.0.7 / Season 1</b> baseline. <details class="sub-more"><summary>How to read it</summary>Five tier lists feed a computed <b>consensus</b>, with a <b>±</b> marker where they disagree — flip between them with <b>Source</b>, or pick <b>Ours: 12.1&nbsp;✦</b> for this site's own Season-2 forecast (a projection, never a source). Filter by era or a specific fight, and click <b>any row</b> for the full read: PTR changes, current numbers with ranks, sim fight profile, and community takes.</details></div>
     <div class="stamp">
       <span><b>Baseline:</b> 12.0.7 / Season 1</span>
       <span><b>PTR:</b> 12.1 “Curse of Ula'tek”</span>
@@ -597,6 +663,15 @@
 
 <div class="wrap">
 
+  <!-- What changed leads: this is a page people check daily, and the change
+       narration used to sit 773px down on desktop / 1,658px on a phone, below the
+       masthead, the health banner, three control rows and a four-row legend. -->
+  <div id="changes"></div>
+
+  <div id="movers"></div>
+
+  <details class="legend-wrap" id="legendwrap">
+    <summary>Legend — tiers, PTR read, profile chips</summary>
   <div class="legend"><!-- three labeled clusters: everything tier-column, everything PTR, the profile chip -->
     <div class="grp">
       <span class="lbl" style="margin:0">Tiers</span>
@@ -618,12 +693,15 @@
       <span class="lbl" style="margin:0">Profile</span>
       <span class="li"><span class="ptag" style="margin-left:0">AoE-lean</span><span>sim fight profile (DPS) — expand a row for the numbers</span></span>
     </div>
-    <span class="note"><span class="count" id="count"></span> · Tiers are <b>within role</b> — a healer's S is best among healers, not across the whole game. Hover any tier badge for the per-source breakdown; click any row for current 12.0.7 numbers.</span>
   </div>
+  </details>
 
-  <div id="changes"></div>
+  <span class="note standalone"><span class="count" id="count"></span> · Tiers are <b>within role</b> — a healer's S is best among healers, not across the whole game.</span>
 
-  <p class="ptrcaveat" id="ptrcaveat"><b>PTR read</b> — 12.1 verdicts, tuning notes, and PTR raid-testing scores (WCL zone 54) are <b style="text-transform:none;letter-spacing:0;font-family:inherit;font-size:inherit;color:var(--ink)">sim-backed speculation, not empirical truth</b>. Early-patch sims desync between PTR and live, SimC rotations are immature, and testing samples are tiny (n often &lt;100). Treat as directional until ~2 weeks of live logs confirm it.</p>
+  <!-- Deliberately NOT a disclosure: template history records that hiding this buried the
+       honesty disclaimer from first-time visitors. Condensed in place instead — the claim
+       stays visible, the three sentences of explanation fold. -->
+  <div class="ptrcaveat" id="ptrcaveat"><b>PTR read</b> — everything 12.1 on this page is <b style="text-transform:none;letter-spacing:0;font-family:inherit;font-size:inherit;color:var(--ink)">early evidence, not settled fact</b>. <details class="caveat-more"><summary>what that means</summary>Sim numbers (Bloodmallet, SimC) desync between PTR and live and run immature rotations. PTR log cuts (WCL zones 52/54/56, Robydoby) are real player parses, but on tiny, tuning-in-flux samples (n often &lt;100). Treat all of it as directional until ~2 weeks of live logs confirm it.</details></div>
 
   <div class="matrix" id="matrix"></div>
 
@@ -1245,6 +1323,7 @@ function render(){
     rd.inert = false;            // re-rendered rows start inert (see the row template)
   });
   renderChanges(); // narrates the movement lane of the view just rendered — must follow it
+  renderMovers();  // era-gated forecast-vs-live compression — same reason it isn't a boot IIFE
   // active-filter cues: light up controls that are off their default
   document.getElementById('fightsel')?.classList.toggle('engaged', !!state.fight);
   document.getElementById('sortsel')?.classList.toggle('engaged', state.sort!=='overall');
@@ -1408,7 +1487,7 @@ if(META.latestSnapshot){
   el.innerHTML = `<b>Heads up</b> ${groups.map(clause).join("; ")}. `
     + `Tier lists, sims, and the raw-DPS series refresh nightly (latest ${esc(dh.latest)}); each frozen row shows its own date. `
     + `Our 12.1 projection is recomputed nightly, but its PTR-empirical term still comes from the frozen ${esc(dh.oldest)} cuts. `
-    + `<span class="dh-series">Affected: ${esc(names)}.</span>`;
+    + `<details class="dh-series"><summary>Affected: ${dh.series.length} series</summary>${esc(names)}.</details>`;
   el.hidden = false;
 })();
 
@@ -1695,7 +1774,8 @@ function renderChanges(){
   const moves = [];
   for(const s of SPECS) for(const b of ["raid","mplus"]) if(s[key]?.[b]) moves.push({ s, b, m: s[key][b] });
   const dummyMoves = SPECS.filter(s=>s.ptrDummy?.rankDelta);
-  const fresh = SPECS.filter(s=>newInfoFor(s)).length;
+  const freshSpecs = SPECS.filter(s=>newInfoFor(s));
+  const fresh = freshSpecs.length;
   if(!moves.length && !dummyMoves.length && !fresh){ host.hidden = true; host.innerHTML = ""; return; }
   host.hidden = false;
   const ups = moves.filter(x=>x.m.delta>0).length, downs = moves.filter(x=>x.m.delta<0).length;
@@ -1705,12 +1785,76 @@ function renderChanges(){
     // of the same weight as a consensus move.
     const sd = x.m.scoreDelta != null
       ? ` <span class="mnote">(${x.m.scoreDelta>0?"+":""}${x.m.scoreDelta} pts)</span>` : "";
-    return `<span><b>${esc(x.s.spec)} ${esc(x.s.class)}</b> <span class="mnote">${esc(label)}</span> ${x.b==="raid"?"Raid":"M+"} ${esc(x.m.was)} → ${esc(tierNow(x.s,x.b))} <span class="mv" data-d="${x.m.delta>0?'up':'down'}" title="${esc(label)} ${x.b==="raid"?"raid":"M+"} tier ${x.m.delta>0?'rose':'fell'} since ${esc(fmtDate(x.m.since))}${x.m.scoreDelta!=null?`, score ${x.m.scoreDelta>0?"+":""}${x.m.scoreDelta}`:""}">${x.m.delta>0?'▲':'▼'}</span> <span class="mnote">since ${esc(fmtDate(x.m.since))}</span></span>`;
+    return `<button type="button" class="chjump" data-cls="${esc(x.s.class)}" data-spec="${esc(x.s.spec)}"><b>${esc(x.s.spec)} ${esc(x.s.class)}</b> <span class="mnote">${esc(label)}</span> ${x.b==="raid"?"Raid":"M+"} ${esc(x.m.was)} → ${esc(tierNow(x.s,x.b))} <span class="mv" data-d="${x.m.delta>0?'up':'down'}" title="${esc(label)} ${x.b==="raid"?"raid":"M+"} tier ${x.m.delta>0?'rose':'fell'} since ${esc(fmtDate(x.m.since))}${x.m.scoreDelta!=null?`, score ${x.m.scoreDelta>0?"+":""}${x.m.scoreDelta}`:""}">${x.m.delta>0?'▲':'▼'}</span>${sd} <span class="mnote">since ${esc(fmtDate(x.m.since))}</span></button>`;
   };
   host.innerHTML = `<details class="changes"><summary><b>What changed</b> <span class="mnote">${esc(label)}${META.movementSince?` · since ${esc(fmtDate(META.movementSince))}`:""}</span> — <span class="mv" data-d="up">▲${ups}</span> <span class="mv" data-d="down">▼${downs}</span> tier moves · ${dummyMoves.length} Dummy Dome shifts · ${fresh} specs with fresh info${META.latestPtrBuild?` · latest PTR build ${esc(fmtDate(META.latestPtrBuild))}`:""}</summary>
     <div class="chlist">${moves.map(line).join("") || `<span class='mnote'>No ${esc(label)} tier moves since the baseline.</span>`}
-    ${dummyMoves.map(s=>`<span><b>${esc(s.spec)} ${esc(s.class)}</b> Dummy Dome rank ${s.ptrDummy.rankDelta>0?'climbed':'fell'} ${Math.abs(s.ptrDummy.rankDelta)} <span class="mnote">(now #${s.ptrDummy.rank}/${s.ptrDummy.of})</span></span>`).join("")}</div></details>`;
+    ${dummyMoves.map(s=>`<button type="button" class="chjump" data-cls="${esc(s.class)}" data-spec="${esc(s.spec)}"><b>${esc(s.spec)} ${esc(s.class)}</b> Dummy Dome rank ${s.ptrDummy.rankDelta>0?'climbed':'fell'} ${Math.abs(s.ptrDummy.rankDelta)} <span class="mnote">(now #${s.ptrDummy.rank}/${s.ptrDummy.of})</span></button>`).join("")}</div>
+    ${freshSpecs.length?`<details class="chfresh"><summary>${freshSpecs.length} specs with fresh info</summary><div class="chlist">${freshSpecs.map(s=>`<button type="button" class="chjump" data-cls="${esc(s.class)}" data-spec="${esc(s.spec)}"><b>${esc(s.spec)} ${esc(s.class)}</b> <span class="mnote">new take or tuning in the last ${NEW_WINDOW_DAYS} days</span></button>`).join("")}</div></details>`:""}
+    </details>`;
 }
+
+/* "Into 12.1 — biggest movers": the compressed answer to "how do specs stack up next
+   season?". Every input is already in the payload — 44 of 80 (spec, bracket) pairs change
+   tier letter between the live consensus and the forecast — but seeing it meant pressing
+   Consensus, memorising 80 cells, pressing Ours: 12.1 and diffing by hand.
+
+   Four constraints, all deliberate:
+   - a FUNCTION called from render(), never a boot IIFE: the era toggle re-renders, and a
+     boot-time gate would leave a 12.0.7 view showing forecast rows;
+   - it does NOT reuse ▲/▼ — those are legend-reserved for movement against the history
+     baseline, and this is a different axis entirely (forecast vs live, not now vs before);
+   - the number is labelled as a forecast score delta, never as a tier "drop";
+   - it sits BELOW the PTR caveat, because the biggest movers are exactly the rows most
+     driven by tiny-n PTR cuts, and headlining them above their own caveat inverts the
+     reading order. */
+function renderMovers(){
+  const host = document.getElementById('movers');
+  if(!host) return;
+  // Era-gated like every other projection surface: a 12.0.7-only view has no forecast.
+  if(state.era === "live"){ host.hidden = true; host.innerHTML = ""; return; }
+  const rows = [];
+  for(const s of SPECS) for(const b of ["raid","mplus"]){
+    const p = s.projection?.[b], c = s.consensus?.[b];
+    if(p?.score == null || c?.score == null || !p.tier || !c.tier) continue;
+    if(p.tier === c.tier) continue; // a letter change is the threshold — score jitter is not news
+    rows.push({ s, b, delta: p.score - c.score, from: c.tier, to: p.tier, conf: p.confidence });
+  }
+  if(!rows.length){ host.hidden = true; host.innerHTML = ""; return; }
+  rows.sort((a,z)=> z.delta - a.delta);
+  const risers = rows.filter(r=>r.delta>0).slice(0,5);
+  const fallers = rows.filter(r=>r.delta<0).slice(-5).reverse();
+  const cell = r => `<button type="button" class="chjump mvr" data-cls="${esc(r.s.class)}" data-spec="${esc(r.s.spec)}" title="${esc(`${r.s.spec} ${r.s.class} — live ${r.b==="raid"?"raid":"M+"} consensus ${r.from}, our 12.1 forecast ${r.to} (${r.conf} confidence). A forecast, not a source.`)}">
+      <b>${esc(r.s.spec)}</b> <span class="mnote">${esc(r.s.class)} · ${r.b==="raid"?"Raid":"M+"}</span>
+      <span class="mvr-t">${esc(r.from)} → ${esc(r.to)}</span>
+      <span class="mvr-d" data-d="${r.delta>0?'up':'down'}">${r.delta>0?"+":""}${r.delta} pts</span>
+    </button>`;
+  host.hidden = false;
+  host.innerHTML = `<details class="movers"><summary><b>Into 12.1 — biggest movers</b> <span class="mnote">our forecast vs the live consensus · ${rows.length} specs change tier</span></summary>
+    <p class="mnote mvr-note">This is <b>our own 12.1 projection</b>, not a source — live consensus blended with PTR testing and Dummy Dome data, shifted by the tuning outlook. Points are forecast-score deltas. Open a spec for its full basis.</p>
+    <div class="mvr-cols">
+      <div><p class="d-h">Rising into 12.1</p><div class="chlist">${risers.map(cell).join("") || "<span class='mnote'>None.</span>"}</div></div>
+      <div><p class="d-h">Falling into 12.1</p><div class="chlist">${fallers.map(cell).join("") || "<span class='mnote'>None.</span>"}</div></div>
+    </div></details>`;
+}
+
+/* Delegated jump: a change row is a lead, and a lead that cannot be followed is decoration.
+   openRowFor only searches the CURRENT view and returns false when a filter hides the row
+   (verified: with Role=Healer, openRowFor("Hunter","Beast Mastery") === false and nothing
+   happens), so fall back to the finder's opener, which clears filters first. */
+document.addEventListener("click", e => {
+  const b = e.target.closest(".chjump"); if(!b) return;
+  const { cls, spec } = b.dataset;
+  if(!openRowFor(cls, spec)) openSpecFromFinder(cls, spec);
+});
+
+/* The legend starts open on wide screens (the space is free there) and closed on phones,
+   where it cost ~330px directly above the first spec. Only the initial state is set —
+   after that it is the user's toggle to own, so a resize never reopens what they closed. */
+(function(){
+  const lw = document.getElementById('legendwrap');
+  if(lw) lw.open = window.matchMedia('(min-width:760px)').matches;
+})();
 
 /* ---------- boot: apply the deep link, sync widgets to state, first render ---------- */
 function syncControls(){
