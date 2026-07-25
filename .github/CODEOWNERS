@@ -14,6 +14,9 @@
 /data/scales.json @riles22
 /data/required-sources.json @riles22
 /data/community.json @riles22
+# Applied into community.json at prebuild, so it is a registry edit by another route
+# (audit 2026-07-24, A2 — Gate 0 now applies it before its own boundary diff).
+/data/community-overrides.json @riles22
 
 # The deterministic gatekeepers themselves
 /src/validate.mjs @riles22

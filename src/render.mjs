@@ -132,26 +132,85 @@ export function dummyDomeScores(specs) {
   return specs;
 }
 
-/* Classify one tuning highlight as "buff" | "nerf" | null. Two things a bare
-   increase/reduce word-count gets wrong, handled per clause with first-signal-wins:
-   - resource/tempo terms invert direction ("cooldown reduced" is a buff,
-     "cost increased" a nerf);
-   - the patch-note "X by 75% (was 100%)" idiom is a nerf despite saying "increases". */
+/* Resource/tempo terms invert direction ("cooldown reduced" is a buff, "cost increased"
+   a nerf). The `s?` is load-bearing: the real 2026-07-14 line "…mana costs reduced by
+   10%" classified as a NERF for want of it (audit 2026-07-24, C1). */
+const RESOURCE_TERM = /\b(cooldown|recharge|cost|cast time)s?\b/i;
+const TUNING_VERB = /\b(reduc|decreas|nerf|lower|increas|improv|buff)\w*\b/i;
+const BUGFIX_MARK = /\(bug fix(?:es)?\)|\bbug fix(?:es)?\b|\bfixed\b|\bno longer incorrectly\b/i;
+/* Patch-note units, normalized so "90 sec (was 60 seconds)" compares but
+   "1 minute (was 20 seconds)" does not. */
+const UNIT_ALIAS = {
+  s: "s", sec: "s", secs: "s", second: "s", seconds: "s",
+  min: "m", mins: "m", minute: "m", minutes: "m",
+  yd: "yd", yds: "yd", yard: "yd", yards: "yd"
+};
+const normUnit = u => {
+  if (!u) return null;
+  const k = String(u).toLowerCase();
+  return UNIT_ALIAS[k] ?? k.replace(/s$/, "");
+};
+
+/* Is this sentence ABOUT a bug fix rather than a power change? Blizzard's fix notes are
+   written with tuning verbs ("Fixed X not being correctly INCREASED by Y"), so a bare
+   verb count reads them as buffs — that is how Brewmaster published a full-tier 12.1
+   promotion off one "Fixed …" line (audit 2026-07-24, N4). A sentence is a fix when it
+   carries the explicit "(bug fix)" marker, or when its fix word precedes any tuning verb
+   — which keeps Resto Druid's "Regrowth healing reduced by 20%; fixed Abundance's…"
+   scoring as the nerf it is, because the real change is its own sentence. */
+function isBugFixSentence(s) {
+  const mark = BUGFIX_MARK.exec(s);
+  if (!mark) return false;
+  if (/\(bug fix(?:es)?\)/i.test(s)) return true;
+  const verb = TUNING_VERB.exec(s);
+  return !verb || mark.index < verb.index;
+}
+
+/* Classify one tuning highlight as "buff" | "nerf" | null. Three things a bare
+   increase/reduce word-count gets wrong — resource inversion, the "X by 75% (was 100%)"
+   idiom, and bug-fix framing — handled per clause with first-signal-wins. */
 export function classifyHighlight(h) {
-  for (const clause of String(h).split(/[,;.]|\band\b/i)) {
-    const res = /\b(cooldown|recharge|cost|cast time)\b/i.test(clause);
-    // "… 60% chance … (was 100%)": compare the LAST number before the paren to the old value.
-    const was = /([\d.]+)[^()\d]*\(\s*was\s+([\d.]+)\s*%?\s*\)/i.exec(clause);
-    if (was) {
-      const now = parseFloat(was[1]), before = parseFloat(was[2]);
-      if (now === before) continue;
-      const valueUp = now > before;
-      return (valueUp !== res) ? "buff" : "nerf"; // higher value = buff, unless it's a cost/cooldown
+  // Sentences first, so a whole bug-fix sentence can be dropped before any clause inside
+  // it is scored. The lookarounds keep decimals intact: "12.1" and "1.5 sec" never split.
+  for (const sentence of String(h).split(/(?<!\d)[.;](?!\d)/)) {
+    if (isBugFixSentence(sentence)) continue;
+    for (const clause of sentence.split(/,|\band\b/i)) {
+      const res = RESOURCE_TERM.test(clause);
+      // "… 60% chance … (was 100%)": compare the LAST number before the paren to the old
+      // value. Both sides may carry a unit and a trailing phrase, but neither trailing
+      // phrase may contain a further number — "at 50% effectiveness (was 40% at 70%)" is
+      // a two-axis change whose bare 50-vs-40 comparison would be meaningless.
+      const was = /([\d.]+)\s*(%|[a-z]+)?[^()\d]*\(\s*was\s+([\d.]+)\s*(%|[a-z]+)?[^()\d]*\)/i.exec(clause);
+      const down = /\b(reduc\w*|decreas\w*|nerf\w*|lower\w*)\b/i.test(clause);
+      const up = /\b(increas\w*|improv\w*|buff\w*)\b/i.test(clause);
+      const verbDir = (down && !up) ? (res ? "buff" : "nerf")
+        : (up && !down) ? (res ? "nerf" : "buff")
+          : null;
+      if (was) {
+        const now = parseFloat(was[1]), before = parseFloat(was[3]);
+        const unitNow = normUnit(was[2]), unitBefore = normUnit(was[4]);
+        // Disagreeing units make the numbers incomparable: "now lasts 1 minute (was 20
+        // seconds)" is a 3× buff, not a cut. Skip rather than guess.
+        if (unitNow && unitBefore && unitNow !== unitBefore) continue;
+        if (now === before) continue;
+        // Is the number the resource's LEVEL ("cooldown increased to 3 minutes") or the
+        // SIZE OF A DELTA applied to it ("reduces cooldown BY 1s", "5 seconds of cooldown
+        // reduction")? The distinction inverts the answer: a bigger cooldown is a nerf,
+        // but a bigger cooldown *reduction* is a buff. When the clause states a delta the
+        // verb already fixes the direction, and the value only says how much of it.
+        // Deliberately scoped to clauses naming a resource — that is the only place the
+        // inversion below can misfire, and a broader rule would mis-read lines like
+        // "reduces physical damage taken by 8% (was 5%)", where the plain higher-is-better
+        // reading is already correct.
+        const isDelta = /\bby\s+[\d.]/i.test(clause) || /\b(reduction|increase)\b/i.test(clause);
+        if (isDelta && res && verbDir) {
+          const flipped = verbDir === "buff" ? "nerf" : "buff";
+          return now > before ? verbDir : flipped;
+        }
+        return ((now > before) !== res) ? "buff" : "nerf"; // higher level = buff, unless it's a cost/cooldown
+      }
+      if (verbDir) return verbDir;
     }
-    const down = /\b(reduc\w*|decreas\w*|nerf\w*|lower\w*)\b/i.test(clause);
-    const up = /\b(increas\w*|improv\w*|buff\w*)\b/i.test(clause);
-    if (down && !up) return res ? "buff" : "nerf";
-    if (up && !down) return res ? "nerf" : "buff";
   }
   return null;
 }
@@ -468,22 +527,26 @@ const dayGap = (from, to) => Math.round((Date.parse(to) - Date.parse(from)) / 86
    the frontier is the newest asOf actually present. Returns null when there's nothing
    to compare, or { latest, oldest, series[] } (series empty when all cuts are fresh). */
 export function dataHealth(specs) {
-  const newest = new Map(); // series label → newest asOf seen
-  const note = (label, asOf) => {
+  const newest = new Map(); // series label → { asOf: newest seen, source }
+  const note = (label, asOf, source) => {
     if (!asOf) return;
     const cur = newest.get(label);
-    if (!cur || asOf > cur) newest.set(label, asOf);
+    if (!cur || asOf > cur.asOf) newest.set(label, { asOf, source: source ?? cur?.source ?? null });
   };
   for (const spec of specs) {
-    for (const m of spec.metrics ?? []) note(m.name, m.asOf);
-    if (spec.ptrDummy?.asOf) note("Dummy Dome rDPS (real-player medians)", spec.ptrDummy.asOf);
+    for (const m of spec.metrics ?? []) note(m.name, m.asOf, m.source);
+    // ptrDummy carries its own source id — read it rather than assuming Warcraft Logs.
+    if (spec.ptrDummy?.asOf) note("Dummy Dome rDPS (real-player medians)", spec.ptrDummy.asOf, spec.ptrDummy.source);
   }
-  const dates = [...newest.values()].sort();
+  const dates = [...newest.values()].map(v => v.asOf).sort();
   if (!dates.length) return null;
   const latest = dates[dates.length - 1];
+  // The source travels with each frozen series so the banner can attribute the stall
+  // correctly. It used to announce every stall as a Warcraft Logs rDPS outage, which
+  // made two Robydoby Google Sheets a WCL API failure (audit 2026-07-24, D1).
   const series = [...newest.entries()]
-    .filter(([, asOf]) => dayGap(asOf, latest) > STALE_DAYS)
-    .map(([label, asOf]) => ({ label, asOf }))
+    .filter(([, v]) => dayGap(v.asOf, latest) > STALE_DAYS)
+    .map(([label, v]) => ({ label, asOf: v.asOf, source: v.source ?? null }))
     .sort((a, b) => a.asOf.localeCompare(b.asOf) || a.label.localeCompare(b.label));
   return { latest, oldest: series[0]?.asOf ?? null, series };
 }

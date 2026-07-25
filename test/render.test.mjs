@@ -183,6 +183,69 @@ test("classifyHighlight: resource terms invert direction; '(was N%)' idiom decid
   assert.equal(classifyHighlight("Poison Bomb's visual has been adjusted."), null);
 });
 
+test("classifyHighlight: plural resource terms count (audit 2026-07-24 C1)", () => {
+  // The real 2026-07-14 Holy Priest line published as a NERF because the trailing "s"
+  // killed the word boundary — both of its official lines are buffs.
+  assert.equal(classifyHighlight("Flash Heal and Prayer of Healing mana costs reduced by 10%."), "buff");
+  assert.equal(classifyHighlight("Rune Strike cooldowns reduced by 5s."), "buff");
+  assert.equal(classifyHighlight("Arcane Blast now costs 20 Focus (was 25)."), "buff");
+  // singular still behaves exactly as before
+  assert.equal(classifyHighlight("Fan of Knives Energy cost increased by 5."), "nerf");
+});
+
+test("classifyHighlight: the '(was N <unit>)' idiom, decimals, and unit mismatch (audit L1 / 2026-07-24 C2)", () => {
+  // reported by the 2026-07-23 audit, never actioned — a bare unit made the branch miss
+  assert.equal(classifyHighlight("Cooldown now 90 sec (was 60 sec)."), "nerf");
+  // the clause splitter must not split inside a decimal ("4.5 seconds")
+  assert.equal(
+    classifyHighlight("Blightburst now causes Putrefy to extend the duration of plagues by 3 seconds (was 4.5 seconds)."),
+    "nerf");
+  // a trailing phrase inside the paren is fine…
+  assert.equal(classifyHighlight("Slayer Opportunist now grants 20% damage (was 10% each)."), "buff");
+  // …but a SECOND number in it makes the comparison meaningless — skip, don't guess
+  assert.equal(
+    classifyHighlight("Star Cascade now has a 30% chance to launch a Starsurge at 50% effectiveness (was 40% at 70%)"),
+    null);
+  // disagreeing units are incomparable: this is a 3x buff, not a cut from 20 to 1
+  assert.equal(classifyHighlight("Hogstrider now lasts 1 minute (was 20 seconds)."), null);
+  // …while equivalent units still compare
+  assert.equal(classifyHighlight("Cooldown now 90 sec (was 60 seconds)."), "nerf");
+});
+
+test("classifyHighlight: a resource DELTA is not a resource LEVEL", () => {
+  // A bigger cooldown is a nerf; a bigger cooldown *reduction* is a buff. Both real lines.
+  assert.equal(
+    classifyHighlight("Scalecommander Wingleader now reduces Deep Breath cooldown by 1s per target struck (was 0.5s)."),
+    "buff");
+  assert.equal(
+    classifyHighlight("Wildfire Shells now grants 5 seconds of Wildfire Bomb cooldown reduction (was 2 seconds)."),
+    "buff");
+  // the delta rule is scoped to resource clauses, so the plain higher-is-better reading
+  // still wins where it is already correct
+  assert.equal(
+    classifyHighlight("Blood-Soaked Ground now reduces physical damage taken by 8% (was 5%)."),
+    "buff");
+  assert.equal(classifyHighlight("Deathmark increases the damage of your Rupture by 75% (was 100%)."), "nerf");
+});
+
+test("classifyHighlight: bug-fix notes are not tuning direction (audit 2026-07-24 N4)", () => {
+  // Blizzard's fix notes are written with tuning verbs; a bare verb count reads them as
+  // buffs. This one line published Brewmaster a full tier up in the 12.1 forecast.
+  assert.equal(
+    classifyHighlight("Brewmaster Monk — Fixed Flurry Strikes' Physical damage not being correctly increased by Bring Me Another or the Venomous Abyss 4-set bonus."),
+    null);
+  assert.equal(
+    classifyHighlight("Arms Warrior Fixed an issue with the 2-set bonus causing Concussive Slam to trigger Mortal Wounds (bug fix)."),
+    null);
+  // a REAL change in its own sentence still scores, even when a fix rides along after it
+  assert.equal(
+    classifyHighlight("Restoration Druid — Regrowth healing reduced by 20%; fixed Abundance's bonus crit chance to Regrowth not working."),
+    "nerf");
+  assert.equal(
+    classifyHighlight("Preservation Evoker — Fixed Consume Flame healing not being increased by Grace Period; Fluttering Seedlings healing is now also increased by Titan's Gift."),
+    "buff");
+});
+
 test("fightLabels: a spec with no comparable sims gets tag null, not 'Flexible'", () => {
   const specs = [
     mk("Full1", { "1": 100000, "3": 150000, "8": 300000 }),

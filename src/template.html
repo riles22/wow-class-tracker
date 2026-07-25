@@ -106,6 +106,13 @@
   .seg button.projbtn[aria-pressed="true"]{background:var(--gold); border-color:var(--gold); color:#241a06}
   .seg button.projbtn:disabled{opacity:.35; cursor:not-allowed}
   .seg button:focus-visible{outline:2px solid var(--accent-2); outline-offset:2px}
+  /* A picked fight overrides the source entirely, so the segment goes inert and names
+     what actually drives the columns instead of leaving a button lit over other data. */
+  .seg.overridden button{opacity:.3; cursor:not-allowed}
+  .segoverride{
+    display:inline-flex; align-items:center; font-family:var(--body); font-size:13px; font-weight:600;
+    background:var(--accent-2); color:#0c1c22; border-radius:6px; padding:6px 13px; cursor:help
+  }
 
   .toggle{display:inline-flex; align-items:center; gap:8px; font-size:13px; color:var(--ink-dim); cursor:pointer; user-select:none}
   .toggle input{position:absolute; opacity:0; width:1px; height:1px}
@@ -163,8 +170,14 @@
   .tcol .tier{width:100%}
   .tind{display:inline-flex; align-items:center; gap:3px; min-width:0}
   /* Fight view: overall-consensus tier for the non-fight bracket reads as dimmed context (M4). */
-  .tiercell.isoverall{opacity:.5}
-  .tiercell.isoverall .tier{text-decoration:underline dotted; text-underline-offset:3px}
+  /* "Context, not this fight" is carried by the dashed/dotted chrome, NOT by fading the
+     letter: a blanket opacity:.5 dropped these tier glyphs to 2.4:1–3.6:1 contrast, below
+     AA, when every tier color clears 4.5:1 at full strength (audit 2026-07-24). */
+  .tiercell.isoverall .tier{
+    opacity:1; border-style:dashed;
+    text-decoration:underline dotted; text-underline-offset:3px
+  }
+  .tiercell.isoverall .tscore{opacity:.45}
   .tscore{display:block; height:3px; border-radius:3px; background:var(--bg-3); overflow:hidden}
   .tscore > i{display:block; height:100%; border-radius:3px; background:linear-gradient(90deg,var(--accent),var(--accent-2))}
   /* divergence marker: a ± glyph, not a bare dot — the shape carries the meaning for
@@ -257,6 +270,13 @@
   .hsort.on{color:var(--accent)}
   .hsort:focus-visible{outline:2px solid var(--accent-2); outline-offset:2px; border-radius:3px}
   .hcaret{font-size:8px; line-height:1}
+  /* column-header qualifier ("Vorasius · Archon", "overall") — says which patch/source
+     the letters under it came from, so a screenshot of the grid can't misattribute them.
+     flex-basis:100% drops it onto its own line: the tier columns are far narrower than
+     an encounter name, and inline it overlaps the next column. */
+  .hsort{flex-wrap:wrap}
+  .hqual{flex-basis:100%; font-size:9px; letter-spacing:.04em; line-height:1.25; color:var(--ink-faint);
+         text-transform:none; overflow-wrap:anywhere}
   .grouphdr{
     grid-column:1/-1; font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase;
     color:var(--accent); padding:10px 16px 6px;
@@ -264,7 +284,13 @@
     background-image:linear-gradient(90deg,color-mix(in srgb,var(--accent) 9%,transparent),transparent);
     position:sticky; top:calc(var(--controls-h, 0px) + var(--head-h, 0px)); z-index:5
   }
-  .row{border-bottom:1px solid var(--edge); transition:background .12s}
+  /* Skip layout/paint for rows scrolled out of view. Every control toggle rebuilds all
+     40 rows and re-parses each open drawer; measured at 4x CPU throttle this took it from
+     125ms -> 33ms with nothing open and 1,580ms -> 421ms with all 40 drawers open, with
+     pixel-identical output (audit 2026-07-24, P1). contain-intrinsic-size holds the
+     scrollbar steady at the measured row heights (67px desktop / 182px card layout). */
+  .row{border-bottom:1px solid var(--edge); transition:background .12s;
+       content-visibility:auto; contain-intrinsic-size:auto 67px}
   .row:last-child{border-bottom:0}
   .row.clickable{cursor:pointer}
   .row.clickable:hover{background:var(--bg-3)}
@@ -304,6 +330,14 @@
   .srcbreak{margin-top:12px}
   .srcbreak .setrow{align-items:center}
   .srcbreak .pc{color:var(--accent-2); border-color:color-mix(in srgb,var(--accent-2) 40%,transparent)}
+  /* Creator-take and meta-note sentiment. The data-sent attribute has been emitted since
+     the lane shipped but never had a rule, so every sentiment rendered identically
+     (audit 2026-07-24). Color reinforces the word, which stays visible — never encodes
+     alone. Reuses the verdict palette so "positive" reads the same everywhere. */
+  .setrow .pc[data-sent="positive"], .setrow .pc[data-sent="buff"]{color:var(--v-pos); border-color:color-mix(in srgb,var(--v-pos) 42%,transparent)}
+  .setrow .pc[data-sent="negative"], .setrow .pc[data-sent="nerf"]{color:var(--v-neg); border-color:color-mix(in srgb,var(--v-neg) 42%,transparent)}
+  .setrow .pc[data-sent="mixed"]{color:var(--v-mix); border-color:color-mix(in srgb,var(--v-mix) 42%,transparent)}
+  .setrow .pc[data-sent="neutral"]{color:var(--ink-dim); border-color:var(--edge-2)}
   .watch{margin-top:12px; font-size:13px; color:var(--ink-dim); background:color-mix(in srgb,var(--v-mix) 8%,transparent); border:1px solid color-mix(in srgb,var(--v-mix) 26%,transparent); border-radius:8px; padding:8px 12px}
   .watch b{font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--v-mix); display:block; margin-bottom:3px}
   .empty{padding:34px 16px; text-align:center; color:var(--ink-faint); font-size:14px}
@@ -358,7 +392,8 @@
     .head{display:none}
     .row{
       grid-template-columns:1fr auto; grid-auto-rows:min-content;
-      row-gap:9px; padding:13px 15px
+      row-gap:9px; padding:13px 15px;
+      contain-intrinsic-size:auto 182px /* card layout is taller — measured at 390px */
     }
     .spec-name{grid-column:1; grid-row:1}
     .chev{grid-column:2; grid-row:1; align-self:center}
@@ -844,7 +879,13 @@ function metricsHTML(s){
     const rank = m.rank ? ` <span class="mnote">· <b style="color:var(--accent-2)">#${m.rank}</b>/${m.of} ${esc(s.role)}${mvArrow}</span>` : "";
     const rdpsTip = /rDPS/.test(m.name) || m.unit === "rDPS" ? ` title="rDPS = raid-contribution DPS: your damage with externals/raid-buff gains removed (Warcraft Logs)"` : "";
     const stale = m.asOf && boxLatest && staleGap(m.asOf, boxLatest) > 7;
-    const asof = m.asOf ? ` <span class="mnote">· <span class="asof"${stale?` title="frozen — upstream rDPS outage since ${esc(m.asOf)}"`:""}>${esc(m.asOf)}</span></span>` : "";
+    // Only blame the rDPS outage for rows that are actually Warcraft Logs cuts; every
+    // other stalled source gets a neutral statement of fact (audit 2026-07-24, D1).
+    const staleTip = !stale ? ""
+      : m.source === "warcraftlogs"
+        ? ` title="frozen — upstream rDPS outage since ${esc(m.asOf)}"`
+        : ` title="frozen — last refreshed ${esc(m.asOf)}"`;
+    const asof = m.asOf ? ` <span class="mnote">· <span class="asof"${staleTip}>${esc(m.asOf)}</span></span>` : "";
     return `<div class="setrow${stale?" stale":""}"><span class="pc">${esc(src?src.name:m.source)}</span><span class="pct"${rdpsTip}>${esc(m.name)}: <b>${val}</b>${m.unit?` ${esc(m.unit)}`:""}${rank}${m.n?` <span class="mnote">(n=${Number(m.n).toLocaleString("en-US")})</span>`:""}${asof}</span></div>`;
   };
   const section = (label, items) => items.length ? `<p class="d-h">${label}</p><div class="setbox">${items.map(row).join("")}</div>` : "";
@@ -1045,7 +1086,7 @@ function rowHTML(s, idx, simBar){
      ${state.era!=="live"?verdictEl(s):`<div class="verdict verdict-empty" aria-hidden="true"></div>`}
      <span class="chev">▸</span>
      ${simBar && typeof s.fightProfile?.metricsUsed?.[simBar.key]==="number" ? `<div class="rowbar" aria-hidden="true" title="Sim ${simBar.label} DPS ${Math.round(s.fightProfile.metricsUsed[simBar.key]).toLocaleString('en-US')}"><i style="width:${(s.fightProfile.metricsUsed[simBar.key]/simBar.max*100).toFixed(1)}%;background:${color}"></i></div>` : ""}
-     <div class="drawer"></div>
+     <div class="drawer" inert></div>
    </div>`;
 }
 
@@ -1089,15 +1130,51 @@ function sortList(list){
 }
 
 function render(){
+  // The per-fight view is Archon Season-1 data and answers to neither control: it
+  // overrides whatever source is selected, and it is 12.0.7-era. Both were silently
+  // true before (audit 2026-07-24, N1) — a lit "Ours: 12.1 ✦" over Archon boss tiers.
+  // Mirror of the projection rule below: the era that has no data for a view disables it.
+  {
+    const fsel = document.getElementById('fightsel');
+    if(fsel){
+      const blocked = state.era === "ptr";
+      fsel.disabled = blocked;
+      fsel.title = blocked
+        ? "Per-fight tiers are Archon Season-1 (12.0.7) data — switch Era to Both or 12.0.7 to use them"
+        : "Archon per-boss (throughput) / per-dungeon (score) tiers — replaces the selected source while a fight is picked";
+      if(blocked && state.fight){ state.fight = ""; fsel.value = ""; }
+    }
+  }
+  // While a fight is picked the source segment is not in control of what the grid shows,
+  // so it must not look like it is: disable it, unpress every button, and say who IS.
+  {
+    const onFight = !!state.fight;
+    srcseg.classList.toggle('overridden', onFight);
+    srcseg.querySelectorAll('button').forEach(x=>{
+      x.disabled = onFight;
+      // Restore the lit button on the way out — state.source survives the fight view,
+      // so the segment has to come back showing which source it is about to use again.
+      x.setAttribute('aria-pressed', (!onFight && x.dataset.source === state.source) ? 'true' : 'false');
+    });
+    let chip = srcseg.querySelector('.segoverride');
+    if(onFight && !chip){
+      chip = document.createElement('span');
+      chip.className = 'segoverride';
+      chip.textContent = 'Archon · per-fight';
+      chip.title = 'A fight is selected, so the tier columns show Archon per-encounter tiers (12.0.7 / Season 1) instead of the chosen source. Clear the Fight selector to go back.';
+      srcseg.appendChild(chip);
+    } else if(!onFight && chip){ chip.remove(); }
+  }
   // The 12.1 projection is meaningless in a 12.0.7-only view: disable its button there,
   // and if it was active, fall back to consensus BEFORE building the matrix.
   {
     const pb = srcseg.querySelector('.projbtn');
     if(pb){
-      pb.disabled = state.era === "live";
-      pb.title = pb.disabled ? "Our 12.1 forecast needs the PTR layer — switch Era to Both or 12.1 PTR"
+      // …but don't re-enable it when the fight view has just disabled the whole segment.
+      pb.disabled = state.era === "live" || !!state.fight;
+      pb.title = state.era === "live" ? "Our 12.1 forecast needs the PTR layer — switch Era to Both or 12.1 PTR"
         : "Our computed 12.1 forecast — live baseline + PTR testing + Dummy Dome + outlook + meta reads. A projection, not a source.";
-      if(pb.disabled && state.source === "projection"){
+      if(state.era === "live" && state.source === "projection"){
         state.source = "consensus";
         srcseg.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed', x.dataset.source==="consensus"?'true':'false'));
       }
@@ -1115,9 +1192,20 @@ function render(){
     if(vals.length) simBar = { key, label: key==="st"?"ST":"AoE", max: Math.max(...vals) };
   }
 
-  const hcell = (key, label) => `<button class="hsort${state.sort===key?' on':''}" data-sort="${key}" aria-label="Sort by ${esc(label)}"${state.sort===key?' aria-pressed="true"':''}>${label}${state.sort===key?' <span class="hcaret">▾</span>':''}</button>`;
+  const hcell = (key, label, aria) => `<button class="hsort${state.sort===key?' on':''}" data-sort="${key}" aria-label="Sort by ${esc(aria || label)}"${state.sort===key?' aria-pressed="true"':''}>${label}${state.sort===key?' <span class="hcaret">▾</span>':''}</button>`;
+  // In the per-fight view the two tier columns hold different things — one is this
+  // encounter's Archon tier, the other is that bracket's overall consensus. Say so in
+  // the header rather than relying on a hover tooltip (audit 2026-07-24, N1).
+  const fightHead = (bracket, label) => {
+    if(!state.fight) return { label, aria: label };
+    const [fb, slug] = state.fight.split("|");
+    if(bracket !== fb) return { label: `${label} <span class="hqual">overall</span>`, aria: `${label}, overall consensus` };
+    const name = (DATA.encounterTiers?.[fb] || {})[slug]?.name ?? slug;
+    return { label: `${label} <span class="hqual">${esc(name)} · Archon</span>`, aria: `${label}, ${name}, Archon tier` };
+  };
+  const rh = fightHead('raid','Raid'), mh = fightHead('mplus','M+');
   let html = `<div class="head">
-      ${hcell('spec','Spec')}${hcell('raid','Raid')}${hcell('mplus','M+')}${hcell('class','Class')}<div>Role</div>${hcell('ptr','12.1 PTR')}<div></div>
+      ${hcell('spec','Spec')}${hcell('raid',rh.label,rh.aria)}${hcell('mplus',mh.label,mh.aria)}${hcell('class','Class')}<div>Role</div>${hcell('ptr','12.1 PTR')}<div></div>
     </div>`;
 
   if(ordered.length===0){
@@ -1147,7 +1235,9 @@ function render(){
     if(!openRows.has(`${s.class}|${s.spec}`)) return;
     fillDrawer(row);
     row.classList.add('open'); row.setAttribute('aria-expanded','true');
-    row.querySelector('.drawer').style.maxHeight = 'none'; // restored instantly, no animation
+    const rd = row.querySelector('.drawer');
+    rd.style.maxHeight = 'none'; // restored instantly, no animation
+    rd.inert = false;            // re-rendered rows start inert (see the row template)
   });
   // active-filter cues: light up controls that are off their default
   document.getElementById('fightsel')?.classList.toggle('engaged', !!state.fight);
@@ -1195,6 +1285,7 @@ function toggleRow(row){
     openRows.add(key);
     updateUtilBar();
     hashSpec = slugOf(s); writeHash(); // deep link mirrors the most recently opened drawer
+    drawer.inert = false;
     if(!drawer.firstChild) fillDrawer(row);
     drawer.style.maxHeight = (drawer.scrollHeight + 40)+'px';
     // Unlock to 'none' once the transition lands so late layout changes (fonts, viewport
@@ -1208,6 +1299,13 @@ function toggleRow(row){
     if(hashSpec === slugOf(s)){ hashSpec = null; writeHash(); }
     if(drawer.style.maxHeight==='none'){ drawer.style.maxHeight = drawer.scrollHeight+'px'; void drawer.offsetHeight; } // restore a pixel value so the collapse animates
     drawer.style.maxHeight = '0px';
+    // A collapsed drawer is only visually clipped (max-height:0), so its links and
+    // buttons stayed focusable and in the a11y tree — three closed drawers left ~61
+    // dead Tab stops with no visible focus ring (audit 2026-07-24). `inert` removes the
+    // subtree from focus and AT without any visual effect, so no transition juggling is
+    // needed; deliberately NOT paired with aria-hidden, which must never wrap a subtree
+    // that is about to hold focus again.
+    drawer.inert = true;
   }
 }
 matrix.addEventListener('click', e=>{
@@ -1281,10 +1379,29 @@ if(META.latestSnapshot){
   if(!dh || !dh.series || !dh.series.length){ el.hidden = true; return; }
   const n = dh.series.length;
   const names = dh.series.map(s=>s.label).join(" · ");
-  el.innerHTML = `<b>Heads up</b> ${n} Warcraft Logs metric ${n===1?"series is":"series are"} frozen at `
-    + `<b style="text-transform:none;letter-spacing:0;font-family:inherit;font-size:inherit">${esc(dh.oldest)}</b> `
-    + `— the redistributed-DPS (rDPS/HPS) family is mid-outage upstream, so those cuts have not refreshed since. `
-    + `Tier lists, sims, projections, and the raw-DPS series refresh nightly (latest ${esc(dh.latest)}); each frozen row shows its own ${esc(dh.oldest)} date. `
+  // One clause per stalled SOURCE, each with its own date. A single "N Warcraft Logs
+  // series frozen" sentence misattributed two Robydoby Google Sheets to a WCL rDPS
+  // outage they cannot possibly be part of (audit 2026-07-24, D1).
+  const bySource = new Map();
+  dh.series.forEach(s=>{
+    const id = s.source || "unknown";
+    const g = bySource.get(id) || { id, n:0, oldest:null };
+    g.n++; if(!g.oldest || s.asOf < g.oldest) g.oldest = s.asOf;
+    bySource.set(id, g);
+  });
+  const bold = t => `<b style="text-transform:none;letter-spacing:0;font-family:inherit;font-size:inherit">${esc(t)}</b>`;
+  const clause = g => {
+    const label = (SOURCES.find(x=>x.id===g.id)||{}).name || g.id;
+    const noun = `${g.n} ${esc(label)} ${g.n===1?"series":"series"}`;
+    // Only Warcraft Logs is mid-outage; anything else simply hasn't refreshed.
+    return g.id === "warcraftlogs"
+      ? `${noun} frozen at ${bold(g.oldest)} — the redistributed-DPS (rDPS/HPS) family is mid-outage upstream`
+      : `${noun} last updated ${bold(g.oldest)}`;
+  };
+  const groups = [...bySource.values()].sort((a,b)=> b.n-a.n || a.id.localeCompare(b.id));
+  el.innerHTML = `<b>Heads up</b> ${groups.map(clause).join("; ")}. `
+    + `Tier lists, sims, and the raw-DPS series refresh nightly (latest ${esc(dh.latest)}); each frozen row shows its own date. `
+    + `Our 12.1 projection is recomputed nightly, but its PTR-empirical term still comes from the frozen ${esc(dh.oldest)} cuts. `
     + `<span class="dh-series">Affected: ${esc(names)}.</span>`;
   el.hidden = false;
 })();
@@ -1461,8 +1578,22 @@ function toggleCompare(key){
   else { if(COMPARE.size >= 3) return false; COMPARE.add(key); }
   updateTray(); writeHash(); return true;
 }
-function closeCompare(){ cmpOv.classList.remove("open"); document.body.style.overflow = ""; }
+// Compare declared aria-modal="true" with no focus trap and no focus restore, so the
+// first Tab escaped to the page behind it (audit 2026-07-24). Same pattern as the Ladder.
+let cmpOpener = null;
+function closeCompare(){
+  cmpOv.classList.remove("open"); document.body.style.overflow = "";
+  if(cmpOpener && cmpOpener.focus) cmpOpener.focus();
+  cmpOpener = null;
+}
 cmpOv.addEventListener("click", e=>{ if(e.target === cmpOv) closeCompare(); });
+cmpOv.addEventListener("keydown", e=>{
+  if(e.key !== "Tab" || !cmpOv.classList.contains("open")) return; // focus trap
+  const f = [...cmpOv.querySelectorAll('button, input, [tabindex="0"]')]; if(!f.length) return;
+  const first = f[0], last = f[f.length-1];
+  if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+  else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+});
 document.addEventListener("keydown", e=>{ if(e.key === "Escape" && cmpOv.classList.contains("open")) closeCompare(); });
 function cmpLiveMedian(s, b){
   const rx = s.role === "Healer" ? /Median HPS/ : s.role === "Tank" ? /Median rDPS.*tank/ : /Median rDPS(?!.*tank)/;
@@ -1506,6 +1637,7 @@ function openCompare(){
     <tbody>${rows.map(([label,fn])=>`<tr><td>${label}</td>${list.map(s=>`<td>${fn(s)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>
   </div>`;
   cmpOv.querySelector("#cmp-close").onclick = closeCompare;
+  cmpOpener = document.activeElement;
   cmpOv.classList.add("open"); document.body.style.overflow = "hidden";
   setTimeout(()=>cmpOv.querySelector("#cmp-close").focus(), 0);
 }
@@ -1519,7 +1651,7 @@ function closeAllDrawers(){
   matrix.querySelectorAll('.row.open').forEach(row=>{
     row.classList.remove('open'); row.setAttribute('aria-expanded','false');
     const d = row.querySelector('.drawer');
-    if(d){ if(d.style.maxHeight==='none'){ d.style.maxHeight = d.scrollHeight+'px'; void d.offsetHeight; } d.style.maxHeight = '0px'; }
+    if(d){ if(d.style.maxHeight==='none'){ d.style.maxHeight = d.scrollHeight+'px'; void d.offsetHeight; } d.style.maxHeight = '0px'; d.inert = true; }
   });
   openRows.clear();
   if(hashSpec){ hashSpec = null; writeHash(); }

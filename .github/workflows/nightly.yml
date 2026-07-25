@@ -416,6 +416,14 @@ jobs:
       - name: "Gate 0: agent output stays inside its boundaries"
         run: |
           set -euo pipefail
+          # Apply community overrides FIRST, so the community.json this gate inspects is
+          # the effective post-override file. Gate 1's prevalidate and Gate 2's prebuild
+          # both run this applier, and it injects creators — so before this line an agent
+          # could edit the (unchecked) overrides registry and have membership changes
+          # land in community.json *after* the boundary check had already passed
+          # (audit 2026-07-24, A2). On a normal night this is a no-op: the committed
+          # community.json already has the owner's reviewed overrides applied.
+          node src/apply-community-overrides.mjs
           if ! git diff --quiet HEAD -- data/required-sources.json data/scales.json; then
             git --no-pager diff HEAD -- data/required-sources.json data/scales.json
             echo "::error::refresh artifact modified the gate contract or tier scales — these ship only via reviewed commits to master"
