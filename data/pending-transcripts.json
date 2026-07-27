@@ -1,4 +1,61 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
-  "videos": []
+  "videos": [
+    {
+      "id": "m81w4xTnRrs",
+      "creator": "izen (Izenhart)",
+      "title": "The Specs On Life Support In Season 2's PTR | 12.1 & Meta Talk",
+      "published": "2026-07-26",
+      "queuedAt": "2026-07-27"
+    },
+    {
+      "id": "Z8MTZevobgw",
+      "creator": "MadSkillzzTV",
+      "title": "12.1 PTR Finding Best M+ Healer (New Big Hotfixes)",
+      "published": "2026-07-26",
+      "queuedAt": "2026-07-27"
+    },
+    {
+      "id": "ZOVnfoXjuoc",
+      "creator": "Kalamazi",
+      "title": "Which Warlock Spec Looks BEST in 12.1 Mythic +?",
+      "published": "2026-07-27",
+      "queuedAt": "2026-07-27"
+    },
+    {
+      "id": "_V1s61R-mio",
+      "creator": "AutomaticJak",
+      "title": "Caster HPal OWNS in Season 2",
+      "published": "2026-07-27",
+      "queuedAt": "2026-07-27"
+    },
+    {
+      "id": "wLqVYLOUg8o",
+      "creator": "AutomaticJak",
+      "title": "Mastery Mistweaver and No Shock-adin?",
+      "published": "2026-07-26",
+      "queuedAt": "2026-07-27"
+    },
+    {
+      "id": "aqe2LKeMIqQ",
+      "creator": "Tettles",
+      "title": "Hard Work (Moonkin) finally Beats Talent (All Other Classes)",
+      "published": "2026-07-26",
+      "queuedAt": "2026-07-27"
+    },
+    {
+      "id": "cQHcrw2m_OU",
+      "creator": "Dalaran Gaming",
+      "title": "Wow 12.1 Rogue PTR: Outlaw & Assassination Buffed, Subtlety Forgotten",
+      "published": "2026-07-26",
+      "queuedAt": "2026-07-27"
+    },
+    {
+      "id": "laCDMF4Wy_s",
+      "creator": "Reholy",
+      "title": "PTR +17 King's Rest | San'layn Blood DK | 12.1",
+      "published": "2026-07-26",
+      "queuedAt": "2026-07-27"
+    }
+  ]
 }
