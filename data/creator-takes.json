@@ -2394,6 +2394,94 @@
       "claim": "MadSkillzz thinks Discipline \"could be really fun to play\" in Season 2 but is held back by two fixable things: mana and atonement throughput. He says mana is a genuine issue even when he takes a pet, and that running Oracle without Mindbender leaves Shield Discipline as his only real return; he wants more atonement transfer so Disc's AoE healing feels better. He does not place it among his Mythic+ contenders.",
       "url": "https://youtu.be/Z8MTZevobgw?t=18165",
       "superseded": false
+    },
+    {
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "creator": "LBNinja7",
+      "date": "2026-07-28",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR — S2 M+ healer tier list",
+      "claim": "Ranks Mistweaver top healer for S2 M+ but deliberately S, not S+: the PTR data showing another head-and-shoulders gap is 'a PTR mistake' — the nerfed Spinning Crane Kick no longer sets them apart the way S1 did, though buffed mastery/Rising Sun Kick (healing near a Sheilun's per press) keeps them the top dog.",
+      "url": "https://youtu.be/ZWFtBrOS8lA?t=194",
+      "superseded": false
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "creator": "LBNinja7",
+      "date": "2026-07-28",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR — S2 M+ healer tier list",
+      "claim": "Holy Paladin is his #2 and 'one Mistweaver nerf or one buff away' from the top meta pick: the tier set enables a three-punch spot-heal combo (Holy Light → two guaranteed Infusions → double giga Flash of Light) that's massive outside cooldowns, stacked buffs have quietly compounded, and unlike Resto Shaman the proc is guaranteed. Notes he's rated HPal high out of PTRs before and been right.",
+      "url": "https://youtu.be/ZWFtBrOS8lA?t=255",
+      "superseded": false
+    },
+    {
+      "class": "Shaman",
+      "spec": "Restoration",
+      "creator": "LBNinja7",
+      "date": "2026-07-28",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR — S2 M+ healer tier list",
+      "claim": "Resto Shaman lands A: a one-trick pony whose trick (stacked Healing Rains from the tier set + downpour + passive damage) is genuinely strong, plus a utility season — the only healer purging the many annoying casts, AoE-poison dispel. But the trick is 'worse than Mistweaver's last trick' and it leans on unguaranteed procs.",
+      "url": "https://youtu.be/ZWFtBrOS8lA?t=443",
+      "superseded": false
+    },
+    {
+      "class": "Priest",
+      "spec": "Discipline",
+      "creator": "LBNinja7",
+      "date": "2026-07-28",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR — S2 M+ healer tier list",
+      "claim": "Disc is his #4: before the Void Shield nerfs he'd have put it above Resto Shaman — the nerf is noticeable — but atonement passive healing, strong Shadow Mend (no proc-fishing needed), and fast Mindbender cycling keep Oracle disc 'really strong'; mana (stopping a push group to drink) is what drags it down.",
+      "url": "https://youtu.be/ZWFtBrOS8lA?t=672",
+      "superseded": false
+    },
+    {
+      "class": "Evoker",
+      "spec": "Preservation",
+      "creator": "LBNinja7",
+      "date": "2026-07-28",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR — S2 M+ healer tier list",
+      "claim": "Preservation is his sleeper: the new tier set makes formerly-dead setup globals (Echo, Temporal Anomaly) fire strong Living Flames so 'every global feels impactful', damage is overlooked, and Rewind is still the best healing cooldown — but it's a jack-of-all-trades that Mistweaver mostly just outclasses, lacking a unique reason for high keys.",
+      "url": "https://youtu.be/ZWFtBrOS8lA?t=794",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Restoration",
+      "creator": "LBNinja7",
+      "date": "2026-07-28",
+      "sentiment": "nerf",
+      "patchContext": "12.1 PTR — S2 M+ healer tier list",
+      "claim": "Resto Druid near the bottom: the abundance cap (from ~96% bonus crit to 50–60%) 'has felt so punishing', the kit was balanced around a since-nerfed tier set, and Convoke without Nature's Swiftness sometimes whiffs into Moonfires — 'sprinting at a Mistweaver's jog' for similar throughput with far less damage. Expects Resto Druid to be an early buff candidate.",
+      "url": "https://youtu.be/ZWFtBrOS8lA?t=978",
+      "superseded": false
+    },
+    {
+      "class": "Priest",
+      "spec": "Holy",
+      "creator": "LBNinja7",
+      "date": "2026-07-28",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR — S2 M+ healer tier list",
+      "claim": "Holy Priest is his bottom pick: it loses the throughput war to the healers above it AND to its own sister spec (Disc spot-heals better), perma-ramping flash-heal/PoH spam with no payoff; 'why would I bring a holy priest to a key… there's honestly no answer' beyond apotheosis — he wants a kit identity change, not another blanket buff.",
+      "url": "https://youtu.be/ZWFtBrOS8lA?t=1142",
+      "superseded": false
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "creator": "AutomaticJak",
+      "date": "2026-07-27",
+      "sentiment": "buff",
+      "patchContext": "12.1 PTR — caster-build showcase",
+      "claim": "'Caster Holy Paladin is here': the tier set's guaranteed Infusion on Holy Light plus the 2pc's doubled infusion flash heals makes it the most caster-centric HPal he can remember — high on-demand output whenever needed, with Beacon of Virtue + Moment of Compassion synergy; the flip side is Wings and Divine Toll feel like mediocre cooldowns.",
+      "url": "https://youtu.be/_V1s61R-mio?t=1",
+      "superseded": false
     }
   ],
   "metaNotes": [
@@ -2901,7 +2989,7 @@
       "note": "Flags Protection Paladin as a potential meta pick: it kept its double round of buffs without a nerf, and PTR M+ tanks already pushing 18-20 keys are doing it on Prot Paladin — a strong hint about its power level.",
       "patchContext": "Season 2 PTR — M+ outlook",
       "url": "https://youtu.be/o7GiLqBNja8?t=962",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Priest",
@@ -3517,6 +3605,50 @@
       "note": "izen calls Havoc versus Devourer the largest in-class gap left in the PTR's bottom half: about 13 Devourer Demon Hunters are being played for every Havoc, and the divergence in keys has widened over the last four days while Devourer has also been a consistent top raid-testing performer. He says Havoc still needs a lot to close that gap, and rates it a worse problem than the other intra-class gaps (Frost vs Arcane, Fury vs Arms, BM vs Marksmanship, Demo/Destro vs Affliction, Unholy vs Frost) because those are smaller and leave a playable alternative.",
       "patchContext": "Season 2 PTR — M+ outlook",
       "url": "https://youtu.be/m81w4xTnRrs?t=803",
+      "superseded": false
+    },
+    {
+      "class": "Shaman",
+      "spec": "Enhancement",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-12",
+      "sentiment": "mixed",
+      "note": "One of the ~5 melee specs repeatedly appearing higher up in the raid-testing tables (helped by fresh buffs) while most melee bunch at the bottom of a caster-favored tier.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/gCNuP2AWvjU?t=1099",
+      "superseded": false
+    },
+    {
+      "class": "Monk",
+      "spec": "Windwalker",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-12",
+      "sentiment": "mixed",
+      "note": "Given 'perhaps an out' among the melee — seen higher up often enough across the tested bosses to join Arms/Frost/Enhancement/Ret as the melee that work, in a tier otherwise favoring casters.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/gCNuP2AWvjU?t=1099",
+      "superseded": false
+    },
+    {
+      "class": "Paladin",
+      "spec": "Protection",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-11",
+      "sentiment": "positive",
+      "note": "The runaway top tank of PTR M+: played more than every other tank spec combined, completing keys 3–5 levels higher than Blood/Guardian/Brew and 1–2 above Prot Warrior/Vengeance, with the most tank damage — the ~25–30% buff package plus talent-tree cleanup made it the most stable tank; he expects nerfs and considers it pole position for S2 meta tank.",
+      "patchContext": "Season 2 PTR — M+ outlook",
+      "url": "https://youtu.be/z9sYqwzriCk?t=21",
+      "superseded": false
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-27",
+      "sentiment": "positive",
+      "note": "The turbulent riser: already top-3 in PTR M+ and, filtered to the last day of logged keys, now FIRST over Mistweaver — buffed across the board (spenders, Holy Shock, infusions via the tier set) with the crippling Holy Light mana economy actually fixed; the one weakness left is poor damage, well below Mistweaver's. Tied, he notes, to Prot Paladin's fate for the paladin slot.",
+      "patchContext": "Season 2 PTR — M+ outlook",
+      "url": "https://youtu.be/bAE5lf3wK_M?t=84",
       "superseded": false
     }
   ]
