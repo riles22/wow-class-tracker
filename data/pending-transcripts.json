@@ -2,25 +2,25 @@
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
   "videos": [
     {
-      "id": "aqe2LKeMIqQ",
-      "creator": "Tettles",
-      "title": "Hard Work (Moonkin) finally Beats Talent (All Other Classes)",
-      "published": "2026-07-26",
-      "queuedAt": "2026-07-27"
-    },
-    {
-      "id": "bAE5lf3wK_M",
-      "creator": "izen (Izenhart)",
-      "title": "Are The Buffs Enough For The Top Meta Spot? | 12.1 PTR & Holy Paladin Changes",
-      "published": "2026-07-27",
-      "queuedAt": "2026-07-28"
-    },
-    {
-      "id": "M_qVqxU_SrA",
-      "creator": "Baze",
-      "title": "Arms is so back 12.1 15+ Blinding Vale PTR",
+      "id": "Z8Jygl_NpF4",
+      "creator": "Shadarek",
+      "title": "TIERLIST | WoW: Midnight Season 2 (Important)",
       "published": "2026-07-28",
-      "queuedAt": "2026-07-28"
+      "queuedAt": "2026-07-29"
+    },
+    {
+      "id": "Zf3GQqG-z8s",
+      "creator": "MadSkillzzTV",
+      "title": "12.1 Best M+ Healers (UPDATED) | Healer Tier List - Midnight Season 2",
+      "published": "2026-07-28",
+      "queuedAt": "2026-07-29"
+    },
+    {
+      "id": "fUZTzvbL3OU",
+      "creator": "izen (Izenhart)",
+      "title": "The Incredible Bug Kneecapping Blood DK Is Now GONE!",
+      "published": "2026-07-28",
+      "queuedAt": "2026-07-29"
     }
   ]
 }

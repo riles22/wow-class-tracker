@@ -1513,7 +1513,7 @@
       "patchContext": "12.1 PTR — Season 2 raid + M+ testing",
       "claim": "Tettles reads Moonkin as probably the best raid DPS in Season 2 testing (with a caveat that a couple of PTR raid bosses inflated its meter via adds that don't take reduced damage) and strong in M+. His main gripe is the tier set / Apex talent, which he finds underwhelming and disconnected from the rotation — he thinks Balance quietly needs a tier-set buff.",
       "url": "https://youtu.be/fw9buyf2n1o?t=318",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Monk",
@@ -1799,7 +1799,7 @@
       "patchContext": "12.1 PTR (2026-07-21 build)",
       "claim": "Baze notes the same unannounced Slayer stack increases (Executioner 3->5, Frenzy 4->10) also buff Arms, alongside listed Arms changes: Dreadnought is now purely AoE with damage +100% and no longer damaging your Overpower target, Cleave damage -10% (Blizzard felt it dominated the rotation), and Opportunist grants +20% damage and +20% crit damage to your next Overpower. He's positive on the direction.",
       "url": "https://youtu.be/nqEdcFi_7wk?t=178",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Demon Hunter",
@@ -2481,6 +2481,28 @@
       "patchContext": "12.1 PTR — caster-build showcase",
       "claim": "'Caster Holy Paladin is here': the tier set's guaranteed Infusion on Holy Light plus the 2pc's doubled infusion flash heals makes it the most caster-centric HPal he can remember — high on-demand output whenever needed, with Beacon of Virtue + Moment of Compassion synergy; the flip side is Wings and Divine Toll feel like mediocre cooldowns.",
       "url": "https://youtu.be/_V1s61R-mio?t=1",
+      "superseded": false
+    },
+    {
+      "class": "Warrior",
+      "spec": "Arms",
+      "creator": "Baze",
+      "date": "2026-07-28",
+      "sentiment": "buff",
+      "patchContext": "12.1 PTR — Mythic+ key testing",
+      "claim": "Baze — normally a Fury player who has disliked Arms since BFA — says this is the best Arms has felt in a very long time on the 12.1 PTR. He credits two Slayer changes: the Sudden Death proc chance raised from 15% to 25%, and a new talent (Tactical's Edge) granting a free Sudden Death proc on Colossus Smash, which turns the spec into a genuinely execute-centric, much faster-paced rotation (three Bladestorms inside Avatar, two inside a Colossus Smash window). He also notes Arms is no longer rage-starved or dependent on a Shaman for resources, and that in a +15 Blinding Vale his damage breakdown had Execute first 'by a mile' ahead of Bladestorm and Reap the Storm — adding that even if the numbers get nerfed, the gameplay loop alone is worth the pick.",
+      "url": "https://youtu.be/M_qVqxU_SrA?t=116",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Balance",
+      "creator": "Tettles",
+      "date": "2026-07-26",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR — Season 2 outlook",
+      "claim": "Asked on stream whether Season 2 is a 'Moonkin tier', Tettles gives a more guarded read than his mid-July one: he thinks the spec may well get nerfed again, and says that after the first round of nerfs it no longer looked insane in raid — but he still puts it among the top couple of specs. In the same stretch he reads the wider PTR board as unusually crowded (Marksmanship Hunter possibly the top DPS on logs; Moonkin, Arcane Mage, Arms Warrior and Elemental Shaman all looking good), and notes he barely engages with the tier set while playing.",
+      "url": "https://youtu.be/aqe2LKeMIqQ?t=10036",
       "superseded": false
     }
   ],
