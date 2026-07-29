@@ -109,11 +109,33 @@ say so and change nothing.
    baselines and label it PTR. Ingest EVERY run regardless of parse-count movement (no
    change-detector gate); empty table = nothing to ingest (not an error). Note the zone-56
    total parse count in log.md for the record. (Zone **55** = "Mythic+ Season 2" non-PTR,
-   for when S2 goes live; zone **57** = "The Tidebound Grotto" raid — not tracked yet.)
+   for when S2 goes live.)
+7b. **WCL Tidebound Grotto (zone 57)**: the S2 single-boss flex raid — boss id **3379**
+   "Nymrissa Wavecaller" (boss segment 0 works too; one encounter). Zone structure
+   verified 2026-07-28: difficulties LFR **1**/Normal **3**/Heroic **4**/Mythic **5**;
+   sizes so far Normal/Heroic/LFR = 10, Mythic = **25** (NOT the size-20 Mythic of
+   zones 46/54); NO partitions (segment stays 1). Check the three cuts each run at the
+   difficulty where testing is happening (probe Normal 10 first, then Heroic 10,
+   then Mythic 25 — same fallthrough logic as zone-54's Heroic→Mythic move):
+   `warcraftlogs.com/zone/statistics/table/57/dps/0/{diff}/{size}/1/1000/1/14/0/DPS/Any/All/0/amount/single/0/-1/?keystone=15&dpstype=rdps`
+   (healers = `hps` + `Healers`; tanks = `dps` + `Tanks`; `aggregate=amount` → median
+   rDPS/HPS, matching zone-56 style — a single boss makes raw medians more honest than
+   the normalized 0–100 used for zone-54's multi-boss pool). Merge as metrics (era
+   `ptr`, bracket `raid`) named exactly: DPS → "Median rDPS (12.1 PTR Tidebound Grotto)",
+   tank → "Median rDPS (12.1 PTR Tidebound Grotto, tank)", healer → "Median HPS
+   (12.1 PTR Tidebound Grotto)". These names are NOT consumed by the projection
+   (`projectionFor` reads its inputs by exact name) — display-only by construction.
+   **As of 2026-07-28 every table is empty** — 34 combos probed (all difficulties ×
+   sizes 0/10/15/20/25 × partitions 1–2 × boss 0/3379) all return WCL's honest
+   "No statistics have been collected" message even though testing occurred (~07-14+;
+   the raid is noted to open Aug 18) — WCL simply hasn't aggregated statistics for the
+   zone yet. Empty = nothing to ingest (not an error); ingest the moment rows appear
+   and log the first-ingest parse counts.
 8. `npm test && npm run build`. If any `data/` file changed this run, also run
    `node src/snapshot.mjs` (movement baseline; loadData skips baselines identical to the
    current state, so ordering vs the build is safe). Append to `log.md`: date · builds
-   found · zone-54 (PTR raid) state · zone-52 (Dummy Dome) state · zone-56 (PTR M+) state.
+   found · zone-54 (PTR raid) state · zone-52 (Dummy Dome) state · zone-56 (PTR M+)
+   state · zone-57 (Tidebound Grotto) state.
 
 ## Gotchas
 
