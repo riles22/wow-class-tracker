@@ -660,11 +660,15 @@
       "creators": [
         {
           "name": "AutomaticJak",
-          "credential": "Wowhead Holy/Disc Priest guide author (covers all healers)",
+          "credential": "Wowhead healer guide author — cross-class healer coverage; takes scoped to the specs he reviews",
           "url": "https://www.youtube.com/watch?v=-kDDZC6qy5U",
           "channelId": "UCzFK2Yn2gu20AWV1raNbiOQ",
           "latest": "A new Resto Shaman rework just dropped — Farseer may finally be back for Season 2 (2026-07-30)",
-          "verifiedDate": "2026-06-18"
+          "verifiedDate": "2026-06-18",
+          "specs": [
+            "Discipline",
+            "Holy"
+          ]
         },
         {
           "name": "Publik",
