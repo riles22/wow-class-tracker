@@ -2,17 +2,10 @@
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
   "videos": [
     {
-      "id": "nZX2jWzYDB8",
-      "creator": "MadSkillzzTV",
-      "title": "12.1 Healer Prep for Season 2",
-      "published": "2026-07-29",
-      "queuedAt": "2026-07-30"
-    },
-    {
-      "id": "Kwugqa7HFao",
-      "creator": "izen (Izenhart)",
-      "title": "Season 2’s BIGGEST Gearing Changes & Tips For Season 2 | Don’t Get Baited By Mythic+",
-      "published": "2026-07-29",
+      "id": "7pNUYPaoePY",
+      "creator": "Shadarek",
+      "title": "State of Havoc DH Season 2",
+      "published": "2026-07-30",
       "queuedAt": "2026-07-30"
     }
   ]

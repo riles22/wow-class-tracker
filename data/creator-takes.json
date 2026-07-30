@@ -2514,7 +2514,7 @@
       "patchContext": "12.1 PTR — Season 2 M+ testing",
       "claim": "Drops Mistweaver to A tier in his retested M+ list. The mastery-stacking Morning Breeze / Rising Sun Kick build he had been calling S+ (Mistweavers doing 90–100k damage in keys with the healing to match) is dead after Morning Breeze effectiveness was cut 60%, on top of the ~8% overall healing nerf. Back on a normal stat priority it still felt quite strong on both damage and healing, but he calls the Sheilun/Vivify part of the toolkit weak and expects Blizzard to revisit it — which is why he no longer puts it in S.",
       "url": "https://youtu.be/Zf3GQqG-z8s?t=1028",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Paladin",
@@ -2525,7 +2525,7 @@
       "patchContext": "12.1 PTR — Season 2 M+ testing",
       "claim": "His biggest riser: high A tier, and he says some people would put it in S. Holy Shock healing +50% and its cheaper mana finally killed the no-Holy-Shock build, and the 4-set now carries what he thinks may be the first outright negative tier-set clause (Holy Light mana cost +60% in the notes, closer to 50% datamined) offset by a 5% healing increase. He reads that trade as good: you save Holy Light for emergencies and always have a button, and the spec's gameplay is simply better for it. Lightsmith with Beacon of Virtue pleasantly surprised him and he thinks he had been sleeping on it. Stays A only out of cautious optimism.",
       "url": "https://youtu.be/Zf3GQqG-z8s?t=1167",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Shaman",
@@ -2580,6 +2580,39 @@
       "patchContext": "12.1 PTR — Season 2 M+ testing",
       "claim": "Stays around B tier. He is clear that Holy Priest is not bad and can push decently high keys, and the Oracle buffs (Premonition of Insight, Prayer of Mending) landed, but the currently popular dual-Oracle build leaves him with few healing buttons for his taste, its damage sits on the low end, and he wants significant — including gameplay — changes he is not holding his breath for.",
       "url": "https://youtu.be/Zf3GQqG-z8s?t=1390",
+      "superseded": false
+    },
+    {
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "creator": "MadSkillzzTV",
+      "date": "2026-07-29",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR — Season 2 M+ testing",
+      "claim": "Softens yesterday's drop after retesting both builds post-Morning-Breeze. The mastery-stacking build is 'a lot weaker' but still playable; on base mastery he found Rising Sun Kick weaker and Spinning Crane Kick better, spinning to win at roughly five targets, and he personally preferred that normal build for large trash. A post-nerf normal-build log he pulls up does 61k damage — 'not the worst, not the best', a bit above average, against the ~100k the mastery build used to reach. His summary is that monks are not bad after the changes at all; the real drag is spot healing, with Vivify and Sheilun's Gift feeling like they do very little. He expects Blizzard to buff Sheilun's and for Monk to climb back a bit.",
+      "url": "https://youtu.be/nZX2jWzYDB8?t=1872",
+      "superseded": false
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "creator": "MadSkillzzTV",
+      "date": "2026-07-29",
+      "sentiment": "buff",
+      "patchContext": "12.1 PTR — Season 2 M+ testing",
+      "claim": "Firms his ranking up from 'high A, some would say S' to naming Holy Paladin the front runner for the best healer of the first four or five weeks of Season 2, and putting it in S tier alongside Resto Shaman — with the distinction that Resto Shaman earns its slot inside the melee/physical comp while Holy Paladin 'looks to be just good in any' comp. He caveats that hotfixes are still landing and a lot will change after those first weeks.",
+      "url": "https://youtu.be/nZX2jWzYDB8?t=2852",
+      "superseded": false
+    },
+    {
+      "class": "Shaman",
+      "spec": "Restoration",
+      "creator": "MadSkillzzTV",
+      "date": "2026-07-29",
+      "sentiment": "buff",
+      "patchContext": "12.1 PTR — Season 2 raid outlook",
+      "claim": "A raid-side read to go with his M+ one: Resto Shaman 'is looking way better' in raid on the back of the latest buffs, where in Mythic+ he still frames it as a spec built for the melee/physical comp. He is openly sceptical of raid healer tier lists at this point, though — the rework only had two Mythic test bosses behind it, which he says is nowhere near enough to rank healers on.",
+      "url": "https://youtu.be/nZX2jWzYDB8?t=16616",
       "superseded": false
     }
   ],
