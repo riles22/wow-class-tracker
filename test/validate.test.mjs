@@ -1,6 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { fileURLToPath } from "node:url";
+import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { validateData, loadData } from "../src/validate.mjs";
 
@@ -300,4 +301,47 @@ test("tier-set upkeep gate: matches the '(Class — Spec)' suffix form and the p
     highlights: ["The Venomous Abyss 4-piece bonus chance increased to 25% (Rogue — Outlaw)"],
   });
   assert.ok(validateData(broken).some(e => e.includes("Outlaw Rogue tierSet.asOf") && e.includes("2026-07-19")));
+});
+
+test("a new writeup must carry ptr.asOf; the pre-2026-07-26 ones are grandfathered", async () => {
+  /* Without a date, a read from three weeks ago is presented exactly like last night's,
+     and nothing on the page can age it — dataHealth() reads metric/sim/dummy dates and
+     never sees writeups. It matters most for the unlinkable ones: a Discord post has no
+     page to date, so whoever pastes it is the only possible source of the date, and once
+     the writeup lands the chance to record it is gone. The 29 existing writeups predate
+     the rule and their dates are genuinely unrecoverable (14 cite an undated Wowhead
+     preview, 3 cite Discord), so they are grandfathered rather than back-dated with a
+     guess — hard rule 1. */
+  const data = await loadData(ROOT);
+  assert.deepEqual(validateData(data).filter(e => /asOf/.test(e)), [],
+    "the committed data must pass as-is — the grandfather list has to match reality");
+
+  // A spec that has no writeup today gets one, undated: rejected.
+  const added = structuredClone(data);
+  const fresh = added.specs.find(s => !s.ptr);
+  assert.ok(fresh, "expected at least one untracked spec to use as the fixture");
+  fresh.ptr = { verdict: "Mixed", summary: "s", changes: ["c"], sourceLabel: "Someone (Server) — Discord" };
+  assert.ok(validateData(added).some(e => e.includes(`${fresh.class} / ${fresh.spec} writeup needs ptr.asOf`)),
+    "a NEW undated writeup is exactly what this gate exists to stop");
+
+  // …and accepted once dated.
+  fresh.ptr.asOf = "2026-07-26";
+  assert.deepEqual(validateData(added).filter(e => /asOf/.test(e)), []);
+
+  // A grandfathered writeup may omit the date, but anything it DOES carry is checked —
+  // the exemption is from having a date, not from having an honest one.
+  const bad = structuredClone(data);
+  const old = bad.specs.find(s => s.ptr && !s.ptr.asOf);
+  assert.ok(old, "expected grandfathered writeups to still exist");
+  old.ptr.asOf = "July 2026";
+  assert.ok(validateData(bad).some(e => e.includes("ptr.asOf must be YYYY-MM-DD")));
+  old.ptr.asOf = "2027-01-01";
+  assert.ok(validateData(bad).some(e => /ptr\.asOf is future-dated/.test(e)),
+    "a writeup cannot be dated after the data it describes");
+
+  // The list is keyed "Class|Spec" while the error prefix is "Class / Spec" — a mismatch
+  // there would silently exempt nobody (or everybody), so pin the key format.
+  const src = await readFile(new URL("../src/validate.mjs", import.meta.url), "utf8");
+  assert.match(src, /UNDATED_WRITEUPS\.has\(`\$\{spec\.class\}\|\$\{spec\.spec\}`\)/,
+    "the grandfather lookup must use the pipe key the list is written in");
 });

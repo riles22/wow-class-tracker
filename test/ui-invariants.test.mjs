@@ -198,29 +198,62 @@ ui("the What-changed strip agrees with the arrows the grid actually draws", asyn
   await page.evaluate(() => document.querySelector('#srcseg button[data-source="consensus"]').click());
   await page.waitForTimeout(150);
   const read = () => page.evaluate(() => {
-    const strip = document.getElementById("changes")?.textContent ?? "";
+    const host = document.getElementById("changes");
+    const strip = host?.textContent ?? "";
     const up = /▲\s*(\d+)/.exec(strip), down = /▼\s*(\d+)/.exec(strip);
     const drawn = [...document.querySelectorAll("#matrix .mv")];
     return {
+      shown: !!host && !host.hidden && strip.trim().length > 0,
       stripUp: up ? +up[1] : 0, stripDown: down ? +down[1] : 0,
       drawnUp: drawn.filter(e => e.dataset.d === "up").length,
       drawnDown: drawn.filter(e => e.dataset.d === "down").length,
       label: (document.querySelector("#changes summary")?.textContent ?? ""),
     };
   });
-  const consensus = await read();
-  assert.equal(consensus.drawnUp, consensus.stripUp, `consensus: strip ▲${consensus.stripUp}, grid ${consensus.drawnUp}`);
-  assert.equal(consensus.drawnDown, consensus.stripDown, `consensus: strip ▼${consensus.stripDown}, grid ${consensus.drawnDown}`);
-  assert.match(consensus.label, /Consensus/, "the strip must name the lane it is narrating");
+
+  /* Agreement has TWO honest shapes, and asserting only the first is how this test broke:
+     it required the strip to be present in the projection lane, which was only true while
+     the payload carried 11 phantom forecast arrows from the v1→v2 recompute. With those
+     correctly gone, the strip hides — and hiding is right, because zero movement means
+     nothing moved. So: when the strip is up, its counts and lane label must match the grid;
+     when it is hidden, the grid must draw nothing. Both directions are checked, so an
+     empty strip can never be a free pass for a grid that IS drawing arrows. */
+  const agrees = (v, lane, labelRe) => {
+    if (v.shown) {
+      assert.equal(v.drawnUp, v.stripUp, `${lane}: strip ▲${v.stripUp}, grid ${v.drawnUp}`);
+      assert.equal(v.drawnDown, v.stripDown, `${lane}: strip ▼${v.stripDown}, grid ${v.drawnDown}`);
+      assert.match(v.label, labelRe, `${lane}: the strip must name the lane it is narrating`);
+    } else {
+      assert.equal(v.drawnUp + v.drawnDown, 0,
+        `${lane}: the strip is hidden but the grid draws ${v.drawnUp + v.drawnDown} arrows — the page contradicts itself`);
+    }
+  };
+
+  agrees(await read(), "consensus", /Consensus/);
 
   // …and the same must hold in the projection view, which had NO arrows at all while the
   // strip went on printing consensus letters over it (audit 2026-07-24, C3).
   await page.evaluate(() => document.querySelector('#srcseg button[data-source="projection"]').click());
   await page.waitForTimeout(200);
-  const proj = await read();
-  assert.equal(proj.drawnUp, proj.stripUp, `projection: strip ▲${proj.stripUp}, grid ${proj.drawnUp}`);
-  assert.equal(proj.drawnDown, proj.stripDown, `projection: strip ▼${proj.stripDown}, grid ${proj.drawnDown}`);
-  assert.match(proj.label, /Ours: 12\.1/, "the strip must switch lanes with the view");
+  agrees(await read(), "projection", /Ours: 12\.1/);
+
+  // The lane really does switch when there IS something to narrate — otherwise the whole
+  // test could pass on a payload with no movement anywhere, which is the state that broke it.
+  const labelled = await page.evaluate(() => {
+    const out = {};
+    for (const src of ["consensus", "projection"]) {
+      document.querySelector(`#srcseg button[data-source="${src}"]`).click();
+      const host = document.getElementById("changes");
+      out[src] = (!host.hidden && host.textContent.trim()) ? (document.querySelector("#changes summary")?.textContent ?? "") : null;
+    }
+    return out;
+  });
+  const shownLanes = Object.entries(labelled).filter(([, v]) => v);
+  assert.ok(shownLanes.length > 0, "sanity: at least one lane must have movement to narrate");
+  for (const [src, label] of shownLanes) {
+    assert.match(label, src === "consensus" ? /Consensus/ : /Ours: 12\.1/,
+      `the ${src} strip must name its own lane, not the other one`);
+  }
 });
 
 ui("a deep link restores view state and the named drawer", async page => {

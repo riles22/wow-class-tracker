@@ -8,6 +8,26 @@ import path from "node:path";
 const ROLES = new Set(["DPS", "Healer", "Tank"]);
 const BRACKETS = new Set(["raid", "mplus"]);
 const VERDICTS = new Set(["Positive", "Mixed", "Negative"]);
+
+/* Writeups that predate the ptr.asOf requirement (2026-07-26). Every one of these was
+   distilled without recording when its source actually said it, and the date is no longer
+   recoverable: 14 cite a Wowhead class preview whose article date nobody wrote down, 3 cite
+   unlinkable Discord/guide-author posts, and hard rule 1 forbids filling any of it in from
+   memory. So they are grandfathered rather than back-dated with a guess.
+
+   THIS LIST MAY ONLY SHRINK. Removing a name is how a writeup gets a real date — either
+   because someone supplied the source's date, or because the writeup was rewritten from a
+   fresh, dated read. Never add to it: a new undated writeup is exactly what the gate exists
+   to stop. */
+const UNDATED_WRITEUPS = new Set([
+  "Death Knight|Blood", "Death Knight|Unholy", "Demon Hunter|Devourer", "Demon Hunter|Vengeance",
+  "Druid|Balance", "Evoker|Augmentation", "Evoker|Devastation", "Evoker|Preservation",
+  "Hunter|Beast Mastery", "Hunter|Marksmanship", "Hunter|Survival", "Mage|Arcane", "Mage|Fire",
+  "Mage|Frost", "Monk|Mistweaver", "Monk|Windwalker", "Paladin|Holy", "Paladin|Protection",
+  "Paladin|Retribution", "Priest|Discipline", "Priest|Shadow", "Rogue|Assassination",
+  "Rogue|Outlaw", "Rogue|Subtlety", "Shaman|Enhancement", "Shaman|Restoration",
+  "Warrior|Arms", "Warrior|Fury", "Warrior|Protection"
+]);
 const KINDS = new Set(["tier-list", "metrics", "notes-feed", "reference", "community"]);
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
 // Creator-take URLs come from an autonomous nightly pipeline over untrusted transcripts —
@@ -229,6 +249,18 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
       // Provenance rule: every writeup is an attributed distillation — since verdicts
       // auto-confirm (no review gate), the attribution IS the honesty and is mandatory.
       if (!spec.ptr.source && !spec.ptr.sourceLabel) errors.push(`specs.json: ${key} writeup needs a source URL or sourceLabel`);
+      // …and WHEN the source said it. Without a date, a read from three weeks ago is
+      // presented exactly like last night's, and nothing on the page can age it: the
+      // staleness banner reads metric/sim/dummy dates and never sees writeups at all.
+      // It matters most for the unlinkable ones — a Discord post has no page to date, so
+      // the person pasting it is the only possible source of the date, and by the time the
+      // writeup lands the chance to record it is gone.
+      // NB: `key` is the human-readable "Class / Spec"; the grandfather list is keyed on the
+      // pipe form used everywhere else (snapshots, movement maps), so build it explicitly.
+      if (spec.ptr.asOf != null) isoOk(spec.ptr.asOf, `specs.json: ${key} ptr.asOf`);
+      else if (!UNDATED_WRITEUPS.has(`${spec.class}|${spec.spec}`)) {
+        errors.push(`specs.json: ${key} writeup needs ptr.asOf (the date the SOURCE said it — the article's date, or the day you read the Discord post). Only the ${UNDATED_WRITEUPS.size} pre-2026-07-26 writeups listed in UNDATED_WRITEUPS may omit it, and that list may only shrink`);
+      }
     }
   }
 

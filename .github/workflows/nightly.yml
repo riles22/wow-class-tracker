@@ -510,12 +510,31 @@ jobs:
           node src/check-refresh.mjs --manifest
 
       - name: Snapshot movement baseline
+        id: snap
         run: |
           if git status --porcelain -- data/ | grep -v "data/run-manifest.json" | grep -q .; then
             node src/snapshot.mjs
+            echo "wrote=1" >> "$GITHUB_OUTPUT"
           else
             echo "No data changes beyond the run manifest — no snapshot"
           fi
+
+      # Gate 2 built dist BEFORE the snapshot above existed, so the dist we were about to
+      # commit always stopped one day short in the drawer Timeline — a permanent lag, since
+      # every night repeats it. Rebuilding here picks the new point up.
+      #
+      # This cannot move anything else: pickBaseline deliberately SKIPS snapshots identical
+      # to the present state (that is what it was written for — post-refresh snapshots), and
+      # a snapshot written seconds ago from this very data IS the present state. So the
+      # baseline, every tier arrow, every rank delta and the whole projection lane are
+      # unchanged; only `history` gains its missing point.
+      #
+      # It must stay AFTER the gates, not before: Gate 3's anomaly check compares the current
+      # consensus against the newest committed snapshot, so gating after snapshotting would
+      # compare tonight's data against itself and could never fire.
+      - name: Rebuild dist so the Timeline includes tonight's snapshot
+        if: steps.snap.outputs.wrote == '1'
+        run: npm run build
 
       - name: Commit and push explicit paths
         id: commit

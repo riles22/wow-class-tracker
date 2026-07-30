@@ -812,10 +812,15 @@ function srcHostLabel(url){
   if(/discord/.test(url)) return "Discord";
   try { return new URL(url).hostname.replace(/^www\./,""); } catch(e){ return "source"; }
 }
-/* Writeups are attributed distillations (no review gate — the attribution IS the honesty). */
+/* Writeups are attributed distillations (no review gate — the attribution IS the honesty).
+   The date is part of that attribution: a theorycrafter's read from three weeks ago and one
+   from last night are otherwise presented identically, and the staleness banner cannot see
+   writeups at all (dataHealth reads metric/sim/dummy dates only). Writeups predating the
+   requirement carry no date and simply show none — never a guessed one. */
 function draftSrcHTML(p){
-  if(p.source) return ` <span class="mnote">— distilled from <a href="${esc(safeHref(p.source))}" target="_blank" rel="noopener">${esc(srcHostLabel(p.source))}</a></span>`;
-  if(p.sourceLabel) return ` <span class="mnote">— distilled from ${esc(p.sourceLabel)}</span>`;
+  const when = p.asOf ? ` <span class="mnote" title="when the source said it">· ${esc(p.asOf)}</span>` : "";
+  if(p.source) return ` <span class="mnote">— distilled from <a href="${esc(safeHref(p.source))}" target="_blank" rel="noopener">${esc(srcHostLabel(p.source))}</a></span>${when}`;
+  if(p.sourceLabel) return ` <span class="mnote">— distilled from ${esc(p.sourceLabel)}</span>${when}`;
   return "";
 }
 
