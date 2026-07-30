@@ -1821,7 +1821,7 @@
       "patchContext": "12.1 PTR (2026-07-21 build)",
       "claim": "Shadarek reads the Havoc pass as a sensible net buff/rebalance: +5% all damage (reverting the previous build's 5% aura nerf) with Immolation Aura shaved 8% to rein in how much of Havoc's single-target and AoE damage it represents, plus a ~13% increase to Demon Blades fury generation, which he calls significant.",
       "url": "https://youtu.be/QPqLeneGJUg?t=96",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Demon Hunter",
@@ -2613,6 +2613,39 @@
       "patchContext": "12.1 PTR — Season 2 raid outlook",
       "claim": "A raid-side read to go with his M+ one: Resto Shaman 'is looking way better' in raid on the back of the latest buffs, where in Mythic+ he still frames it as a spec built for the melee/physical comp. He is openly sceptical of raid healer tier lists at this point, though — the rework only had two Mythic test bosses behind it, which he says is nowhere near enough to rank healers on.",
       "url": "https://youtu.be/nZX2jWzYDB8?t=16616",
+      "superseded": false
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Havoc",
+      "creator": "Shadarek",
+      "date": "2026-07-30",
+      "sentiment": "mixed",
+      "patchContext": "12.1 PTR — Season 2 outlook",
+      "claim": "State-of-Havoc snapshot going into Season 2: Aldrachi Reaver pulls clear of Felscarred — roughly 4% ahead in single target against about 1% on live — because the Felscarred package was hit from every side at once, with Inertia's damage amp cut from 18% to 12% (he considers it no longer worth running), Blind Fury's fury generation nerfed, and Immolation Aura losing both fury generation and 8% damage, while Aldrachi is largely indifferent to all three and kept its aura compensation. He expects the same pure single-target Aldrachi build to also be correct in Mythic+ (Felscarred about 3% behind), where Havoc's AoE stays mediocre but its priority and funnel damage remain, in his words, unmatched. His overall read is unenthusiastic: the shift looks to him like Felscarred being dragged down rather than Aldrachi being made genuinely good, and he expects no further changes before the season starts.",
+      "url": "https://youtu.be/7pNUYPaoePY?t=56",
+      "superseded": false
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Havoc",
+      "creator": "Shadarek",
+      "date": "2026-07-30",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR — Season 2 tier set",
+      "claim": "On the Season 2 set he is lukewarm: he rates it a decent roughly 8-9% damage overall, but calls the 2-set boring (a flat damage increase to Blade Dance and Chaos Strike, including their Metamorphosis versions, plus Essence Break) and says the 4-set actively feels bad because it forces Essence Break into every build on a cooldown deliberately desynced from the rest of the kit — you simply press it on cooldown and the window no longer lines up with anything. He also flags the 4-set bonus currently landing on the damage-over-time portion instead of the initial strike, a bug that makes it slightly stronger in single target and weaker in AoE until it is corrected.",
+      "url": "https://youtu.be/7pNUYPaoePY?t=855",
+      "superseded": false
+    },
+    {
+      "class": "Shaman",
+      "spec": "Restoration",
+      "creator": "AutomaticJak",
+      "date": "2026-07-30",
+      "sentiment": "buff",
+      "patchContext": "12.1 PTR — Season 2 outlook",
+      "claim": "Brief short-form read on the Resto Shaman rework: he thinks Farseer \"might finally be back\" for Season 2 on the back of the large Riptide healing buffs, the new talent that extends Riptides off totems, and the big buff to the ancestors' Chain Heal. He expects the changes to make the spec run considerably smoother, and singles out the new raid's many spread-out encounters as the setting where Farseer should be able to compete.",
+      "url": "https://youtu.be/xote4lf9dfs?t=0",
       "superseded": false
     }
   ],
