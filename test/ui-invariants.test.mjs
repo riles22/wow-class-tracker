@@ -432,9 +432,12 @@ test("no agent-writable field can inject markup or a handler into the rendered p
     const specs = await load("specs.json");
     const s = specs.find(x => x.class === victim.class && x.spec === victim.spec) ?? specs[0];
 
+    // asOf is required on any writeup this fixture SYNTHESISES (the victim spec may not
+    // have had one), and it is itself a rendered field — so poison-adjacent values must
+    // still be valid data, or the hostile build fails validation before it can be probed.
     s.ptr = { verdict: "Mixed", theme: TEXT_BREAK, summary: ATTR_BREAK,
       changes: [TEXT_BREAK, ATTR_BREAK], set2: TEXT_BREAK, set4: ATTR_BREAK,
-      watch: TEXT_BREAK, source: "https://www.wowhead.com/news/probe" };
+      watch: TEXT_BREAK, source: "https://www.wowhead.com/news/probe", asOf: "2026-07-24" };
     s.tierSet = { set2: TEXT_BREAK, set4: ATTR_BREAK, asOf: "2026-07-24", source: "https://www.wowhead.com/probe" };
     s.metrics = [...(s.metrics ?? []), { source: "warcraftlogs", bracket: "raid",
       name: `Median rDPS ${TEXT_BREAK}`, value: 1, unit: ATTR_BREAK, asOf: "2026-07-24" }];

@@ -40,7 +40,13 @@ say so and change nothing.
    specs, and distill them into the spec's `ptr` object in `data/specs.json`.
    **Auto-confirm policy (2026-07-06)**: writeups land confirmed — no draft flag, no
    review gate. The honesty requirements instead: (a) EVERY writeup carries `source`
-   (URL) or `sourceLabel` (validation enforces it); (b) distill FAITHFULLY — the
+   (URL) or `sourceLabel` (validation enforces it); (b) **every NEW writeup also carries
+   `ptr.asOf`** — the date the SOURCE published or said it, which for an article is its
+   own publication date, NOT the date you fetched it (added 2026-07-26; validation fails
+   the run without it). The only writeups allowed to omit it are the 29 grandfathered in
+   `UNDATED_WRITEUPS` (`src/validate.mjs`), and **that list may only shrink** — if you
+   rewrite one of those from a fresh, dated source, add the date and delete its name from
+   the list in the same edit. Never add a name to it; (c) distill FAITHFULLY — the
    verdict must be the source's own read, never your editorial call; if the source
    gives no clear verdict, don't write a writeup from it. Don't rewrite an existing
    writeup wholesale on tuning-only changes — append to `changes[]` / adjust `watch`.
