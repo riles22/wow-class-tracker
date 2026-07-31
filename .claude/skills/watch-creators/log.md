@@ -293,3 +293,33 @@ Shadarek `Qzys9RKWpPo` (Dev DH raiding stream), Shindigg `LJ94XJVXPL8` (raid str
 
 - 2026-07-30 (LOCAL run, Opus 5 — collided with the CI nightly; see refresh-metrics log for the reconciliation) · Polled **25 channels** (52 transcribable class creators + izen), 0 RSS failures, 72 videos since 07-26, 19 new + title-relevant, **8 transcripts fetched** with yt-dlp at the requirements.txt pin (2026.07.04, **not upgraded**). The nightly had already distilled the MadSkillzz healer tier list (`Zf3GQqG-z8s`) and Baze's Arms video (`M_qVqxU_SrA`), so those were dropped on reconciliation. **3 takes re-applied, 1 superseded:** · `7pNUYPaoePY` **Shadarek "State of Havoc DH Season 2" (07-30)** — published after the nightly ran, so genuinely new. Two takes kept live as complementary lenses: *outlook* (Aldrachi ~4% clear of Felscarred in ST vs ~1% live, because Inertia 18→12%, Blind Fury and Immolation Aura nerfs all land on Felscarred and miss Aldrachi — he reads it as Felscarred dragged down rather than Aldrachi fixed, and expects no more changes before season start) and *tier set* (~8-9% but the 4-set "actively feels bad" forcing Essence Break onto a desynced cooldown; its 35% currently lands on the DoT instead of the initial strike). Superseded his 07-22 Havoc take. · `xote4lf9dfs` **AutomaticJak Resto Shaman** — **owner decision this run:** Riley confirmed Jak is credible on **all healing specs**, so he was added to **Shaman/Restoration** (the explicit ask) and **Druid/Restoration** (the only other healer spec he lacked), `latest` refreshed across all six entries. With scope widened the read landed as 1 take (Farseer "might finally be back" on the Riptide / totem-extension / ancestor-Chain-Heal buffs; flagged in the claim as a brief short-form read, since the video is a sponsored short). · **4 transcript-verified skips:** `Z8Jygl_NpF4` Shadarek "TIERLIST (Important)" is a **comedy bit** (every DH spec top, an actual "fake humans" tier for Augmentation); `aqe2LKeMIqQ` Tettles and `nZX2jWzYDB8` MadSkillzz are **stream VODs** (~5h for the latter) whose only spec reads are one-line chat replies; izen `Kwugqa7HFao` "Season 2's BIGGEST Gearing Changes" is gearing/loot strategy with **no per-spec meta reads** (4 incidental class mentions in 4k words) → no metaNotes. · **Left for a human:** Jak's **Priest** entry still has no `specs` list (= whole class, which includes Shadow, a DPS spec). If his authority is healer-only that entry wants scoping to Discipline/Holy — not changed here, since narrowing an existing scope was not requested. · Also reconciled the scheduled-task prompt (`~/.claude/scheduled-tasks/wow-ptr-watch/SKILL.md`): its standing "Update yt-dlp first (pip install -U yt-dlp)" line contradicted this skill's pin rule and now says not to upgrade in-run.
   - **Follow-up (owner decision, same day):** Riley confirmed AutomaticJak should not carry Shadow, so his **Priest** entry was scoped from whole-class to `["Discipline","Holy"]` and its credential aligned with his other five entries. This closes the item flagged earlier today. He now covers **exactly the 7 healer specs and no DPS spec** (Druid/Resto, Evoker/Pres, Monk/MW, Paladin/Holy, Priest/Disc+Holy, Shaman/Resto). No takes were orphaned — he has never had a Shadow take, and his two live Priest takes (Disc + Holy, 07-23) stay in scope.
+
+## 2026-07-31 (nightly) — 25/25 feeds polled; 1 transcript verified against an existing take; queue 1→5
+All 25 unique transcribable creator RSS feeds polled live, **25/25 HTTP 200 on the first attempt**, no retries.
+The deterministic transcript step fetched the single queued video (`summary.json` verdict `ok`, 473 chunks).
+**ALREADY DISTILLED — Shadarek `7pNUYPaoePY`** "State of Havoc DH Season 2" (07-30): read the fetched
+transcript end to end and checked it against the **two Havoc takes already dated 2026-07-30** in
+`creator-takes.json` (deep links `t=56` and `t=855`, landed by the 07-31 local run). They are faithful and
+complete — Aldrachi ~4% ahead of Felscarred in single target vs ~1% on live (Inertia 18%→12%, Blind Fury
+fury-gen nerf, Immolation Aura losing fury + 8% damage, all of which Aldrachi is indifferent to); the same
+pure single-target Aldrachi build correct in M+ with Felscarred ~3% behind; AoE mediocre but funnel/priority
+"unmatched"; set rated ~8–9% overall with the 4-set disliked for desyncing Essence Break, and the 35% bonus
+currently landing on the DoT instead of the initial strike. **No duplicate take written**; removed from the
+queue as distilled. His 07-22 same-lens Havoc take was already `superseded`.
+**Queued 5 new in-scope videos** (no transcript available to the agent): izen `OQa0Yzv18Hs` (07-30 "PTR
+Mythic+ Best DPS Specs — Arms Stocks Rising" — generalCreator **metaNotes** material, M+ lens; `latest`
+refreshed to it), Shadarek `Z8Jygl_NpF4` (07-28 "TIERLIST | WoW: Midnight Season 2"), YoDaTV `CNWAq9aOHO4`
+(07-30 "Blood DK Meta CONFIRMED? Mythic+ Tierlist Update" — **his declared scope is Protection Warrior, so
+only a Prot Warrior take could ever come out of it**; distill-or-verified-skip), Obli `owCby8soRNY` (07-31
+San'layn Unholy DK PTR, inside his Frost/Unholy scope), Kalamazi `YOnGHSUZ4A0` (07-31 "Do These 5 Things NOW
+To Prep For Patch 12.1" — distill-or-verified-skip). **Not re-queued:** izen `Kwugqa7HFao`, already
+transcript-verified-skipped on 07-30.
+**Triaged out** (off-scope, not queued): 12 Supatease PvP/stream uploads (incl. `31IkN0ugTDM` PvP tier list,
+`nsSEqadIPnE` Ele Shaman — outside his Arms/Prot scope), 6 Dalaran Gaming PvP-duel + systems-news items,
+4 Tettles podcast/drama uploads, 3 YoDaTV twitch restreams, **MadSkillzzTV `_qJcyZP-TRw` and AutomaticJak
+`S8UQh8VaPWA` — both healer-TRINKET videos: gear, not a spec-strength read**, plus stream VODs from Preheat
+(`QBGm9cgEjLE`), Shindigg (`9UT5iwBhW4s`, `TFgO-q1S4Vw`), Critcake (x2), AutomaticJak (x2), LBNinja7 (x2),
+Shadarek `xdjL13tqUIs` (Heroes of Hammerwatch 2 stream) and Kalamazi `7rIorwjv4_0` + `UnoZnAX_Alo`
+(untitled PTR stream VODs). **Note for the seen-set:** `log.md` had no entries between 07-22 and today, so
+this run reconstructed the seen-set from `creator-takes.json` URLs (92 distilled videoIds) + the pending
+queue + a 2026-07-28 publish-date cutoff rather than from the log. No creator opinion touched any rating.

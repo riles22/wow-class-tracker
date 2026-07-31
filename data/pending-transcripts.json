@@ -2,11 +2,39 @@
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
   "videos": [
     {
-      "id": "7pNUYPaoePY",
-      "creator": "Shadarek",
-      "title": "State of Havoc DH Season 2",
+      "id": "OQa0Yzv18Hs",
+      "creator": "izen (Izenhart)",
+      "title": "For The First Time In 10 Years? | PTR Mythic+ Best DPS Specs - Arms Stocks Rising",
       "published": "2026-07-30",
-      "queuedAt": "2026-07-30"
+      "queuedAt": "2026-07-31"
+    },
+    {
+      "id": "Z8Jygl_NpF4",
+      "creator": "Shadarek",
+      "title": "TIERLIST | WoW: Midnight Season 2 (Important)",
+      "published": "2026-07-28",
+      "queuedAt": "2026-07-31"
+    },
+    {
+      "id": "CNWAq9aOHO4",
+      "creator": "YoDaTV",
+      "title": "Blood DK Meta CONFIRMED? Mythic+ Tierlist Update (July 30)",
+      "published": "2026-07-30",
+      "queuedAt": "2026-07-31"
+    },
+    {
+      "id": "owCby8soRNY",
+      "creator": "Obli",
+      "title": "Playing with BLIGHTFALL! / San'layn Unholy DK 12.1 PTR",
+      "published": "2026-07-31",
+      "queuedAt": "2026-07-31"
+    },
+    {
+      "id": "YOnGHSUZ4A0",
+      "creator": "Kalamazi",
+      "title": "Do These 5 Things NOW To Prep For Patch 12.1!",
+      "published": "2026-07-31",
+      "queuedAt": "2026-07-31"
     }
   ]
 }
