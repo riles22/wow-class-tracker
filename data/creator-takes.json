@@ -1942,7 +1942,7 @@
       "patchContext": "12.1 PTR — Season 2 M+ testing",
       "claim": "After a hands-on Blood DK deep dive, YoDaTV reverses his earlier neutral read: the build's defensive pass (Dancing Rune Weapon DR, +5% parry that lands closer to ~10% because parry is additive, Blood Shield/Blood Charge DR) leaves Blood one to two key levels safer inside Rune Weapon, and San'layn now matches or beats Deathbringer defensively (Blood-Soaked Ground 5%→8%) while Pact of the San'layn's shadow-damage share went 10%→15%, making its AoE 'really crazy'. Comparing his own Kings' Rest keys against his Paladin, the DK took slightly less damage and needed roughly half the healing at similar damage output — and his Paladin logs predate two rounds of Paladin nerfs. He calls Perseverance of the Ebon Blade a failed buff that is now just 4% DR on low uptime, and notes DK still lacks a raid buff beyond Grip and has clumsier ranged pack-gathering than Paladin.",
       "url": "https://youtu.be/ayJrRKgwX0A?t=372",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Paladin",
@@ -1953,7 +1953,7 @@
       "patchContext": "12.1 PTR — Season 2 M+ testing",
       "claim": "YoDaTV demotes Prot Paladin a tier and out of his meta-contender group: the Reflection of Radiance nerf (much shorter Sentinel uptime) is 'really, really big' on top of the prior week's damage nerf, and his own log comparison put Blood DK ahead of it in everything except utility. He still rates it a strong off-meta pick with a high win rate in pug and sub-title keys.",
       "url": "https://youtu.be/YbjvOhxVrw0?t=359",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Paladin",
@@ -1964,7 +1964,7 @@
       "patchContext": "12.1 PTR — Season 2 M+ testing",
       "claim": "YoDaTV calls Holy Paladin the front-runner among healers on the PTR — already the most stable healer in his groups, now getting an overall 5% healing buff, and helped as much by the surrounding meta shifting (Blood DK rising, Prot Paladin falling) as by its own tuning. He is wary of the new 4-set drawback, joking he hopes his Holy Paladin does not have to drink through the whole key.",
       "url": "https://youtu.be/YbjvOhxVrw0?t=208",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Warrior",
@@ -1975,7 +1975,7 @@
       "patchContext": "12.1 PTR — Season 2 M+ testing",
       "claim": "YoDaTV keeps Prot Warrior below Prot Paladin and 'significantly worse', but hard to move out entirely: spell reflect is worth a big chunk of health on a lot of this dungeon pool's casts and Battle Shout is a real raid buff. He puts it one or two buffs away from being a decent meta contender — right now it simply does not do enough damage.",
       "url": "https://youtu.be/YbjvOhxVrw0?t=382",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Demon Hunter",
@@ -1986,7 +1986,7 @@
       "patchContext": "12.1 PTR — Season 2 M+ testing",
       "claim": "YoDaTV leaves Vengeance among his meta contenders — damage was increased, it still brings Chaos Brand — but flags its survivability as the most RNG-dependent of the tanks (Void Fall procs), noting every tank now leans on procs (Prot Paladin on resets, Blood DK on Dance of Midnight) and Vengeance most of all.",
       "url": "https://youtu.be/YbjvOhxVrw0?t=178",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Monk",
@@ -1997,7 +1997,7 @@
       "patchContext": "12.1 PTR — Season 2 M+ testing",
       "claim": "YoDaTV thinks the Flurry Strikes 4-set bug fix might make Brewmaster playable but still nowhere near its Season 1 standing, and does not expect it to be meta — the damage he has seen from it is low. He can see it being played in the same all-physical composition it gets slotted into every season.",
       "url": "https://youtu.be/YbjvOhxVrw0?t=506",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Druid",
@@ -2008,7 +2008,7 @@
       "patchContext": "12.1 PTR — Season 2 M+ testing",
       "claim": "YoDaTV does not expect Guardian to be meta next season — the damage output he has seen from bear (and Brewmaster) on the PTR is low. He keeps it outside his contender group with no tuning yet to change that.",
       "url": "https://youtu.be/YbjvOhxVrw0?t=504",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Monk",
@@ -2118,7 +2118,7 @@
       "patchContext": "12.1 PTR — Mythic+ (hands-on +15 Blinding Vale run)",
       "claim": "Playing San'layn Unholy through a PTR +15, Obli says the buffed build 'inches ahead' of Frost as the better DK spec: the 45-second burst window is considerably stronger, and the damage people dismiss as a small Blood Beast melee buff actually lands through its Corrupted Blood AoE component. He rates single-target and especially execute as excellent (Death Coil and Vampiric Strike both gain ~30% under 35% health) but calls two- and three-target cleave 'not fantastic', and drops Soul Reaper entirely in keys for Necrotic Coil. He also warns the spec is now materially harder than live Unholy — holding seven stacks of Essence of the Blood Queen between packs depends on the tank, and dropping the buff is where San'layn falls off.",
       "url": "https://youtu.be/UJxhJRYxe9s?t=667",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Death Knight",
@@ -2667,6 +2667,105 @@
       "patchContext": "12.1 PTR (2026-07-21 build)",
       "claim": "On the 07-21 tuning: the flat 6% damage buff is welcome, but the Implacable rank-3 buff is \"kinda pathetic\" and the 4-set's 3%-per-stack Amplifying Poison is merely fine — nothing changes current theorycrafting except discouraging the 4/4 apex drop, which he expects players will drop anyway.",
       "url": "https://youtu.be/e_2JhO06r7Y"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Blood",
+      "creator": "YoDaTV",
+      "date": "2026-07-30",
+      "sentiment": "buff",
+      "patchContext": "12.1 PTR — Season 2 M+ testing",
+      "claim": "Tier-list update a week out from Season 2, with no further tuning expected before launch: YoDaTV puts Blood DK alone in S+, calling it simultaneously the highest-damage AND the tankiest tank for the first time in a very long while. He quantifies the Apex-talent bug fix — Dancing Rune Weapon was ADDING 4% damage taken per weapon instead of removing it, so with two weapons up for roughly half a dungeon the Season 2 swing is about 20% less damage taken over that stretch — layered on top of separate survivability buffs. He reads Blood as the most likely meta tank, and expects any incoming nerf to land on damage, which would leave it merely S as the tankiest tank. His own caveat: most of the top keys on the PTR are still not being done by Blood DK, and he has not personally pushed high keys on it.",
+      "url": "https://youtu.be/CNWAq9aOHO4?t=26",
+      "superseded": false
+    },
+    {
+      "class": "Paladin",
+      "spec": "Protection",
+      "creator": "YoDaTV",
+      "date": "2026-07-30",
+      "sentiment": "nerf",
+      "patchContext": "12.1 PTR — Season 2 M+ testing",
+      "claim": "Drops Prot Paladin to A+ — still 'the best tank after Blood DK', but he reads the spec as gutted by the Reflection of Radiance nerf. His accounting: the +10% DR from Blessed Hammer is roughly washed out by Sentinel dropping 15s to 12s, and then the Reflection of Radiance nerf takes another large bite because Sentinel uptime falls further. Against Blood DK it takes more damage, needs more healing and does less damage, surviving on tier placement mainly because it brings Blessing of Sacrifice. He openly hopes for a compensating buff. Honest counter-evidence he raises himself: from logs, the highest keys on the PTR are still being done by Prot Paladin, so it may yet be strong at the very top.",
+      "url": "https://youtu.be/CNWAq9aOHO4?t=664",
+      "superseded": false
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "creator": "YoDaTV",
+      "date": "2026-07-30",
+      "sentiment": "buff",
+      "patchContext": "12.1 PTR — Season 2 M+ testing",
+      "claim": "Holds Holy Paladin in S as the best healer going into Season 2 on pure healing — by far the best at keeping a group alive through mistakes and hard heal checks, to the point that he essentially stops seeing deaths-to-healing with one in the group. What keeps it out of S+ is damage, which is noticeably low on the Herald of the Sun healing build and unhelped by the lack of a raid buff. He flags the failure mode explicitly: if a dungeon's wall turns out to be damage rather than survival, a lower-healing/higher-damage healer like Resto Shaman or Mistweaver could take the slot. He also notes the healer damage spread is far tighter than Season 1's Mistweaver blowout. Self-declared caveat: he is not a healer player and is reading from group outcomes.",
+      "url": "https://youtu.be/CNWAq9aOHO4?t=103",
+      "superseded": false
+    },
+    {
+      "class": "Paladin",
+      "spec": "Retribution",
+      "creator": "YoDaTV",
+      "date": "2026-07-30",
+      "sentiment": "mixed",
+      "patchContext": "12.1 PTR — Season 2 M+ testing",
+      "claim": "Places Retribution in A+ after playing alongside several Ret Paladins on the PTR: the damage is 'actually really good', but he reads the spec as still carrying its Season 1 gaps — slightly squishier than the genuinely tanky DPS classes, and no damage-oriented raid buff to justify the slot in a meta comp. A brief placement inside a broad tier-list rundown rather than a hands-on deep dive.",
+      "url": "https://youtu.be/CNWAq9aOHO4?t=1019",
+      "superseded": false
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Vengeance",
+      "creator": "YoDaTV",
+      "date": "2026-07-30",
+      "sentiment": "mixed",
+      "patchContext": "12.1 PTR — Season 2 M+ testing",
+      "claim": "Keeps Vengeance in A+ and sums it up as 'one buff away'. On damage he is positive — Annihilator is doing well and, counting Chaos Brand, he rates it roughly on par with Blood DK; he tested Ultrakill and measured it about 30% behind, so he advises against that build. Two caveats carry the mixed read: survivability and especially self-healing are well short of Blood DK, and outside Metamorphosis — tanking on Fiery Brand with no meta up — the spec genuinely needs external healing. He also flags a live Void Fall Meteor double-proc interaction (Spirit Bomb into Soul Cleave) that, if fixed, would make the damage considerably worse.",
+      "url": "https://youtu.be/CNWAq9aOHO4?t=740",
+      "superseded": false
+    },
+    {
+      "class": "Monk",
+      "spec": "Brewmaster",
+      "creator": "YoDaTV",
+      "date": "2026-07-30",
+      "sentiment": "mixed",
+      "patchContext": "12.1 PTR — Season 2 M+ testing",
+      "claim": "Rates Brewmaster in A — his 'playable in weird comps, but not meta' band. His read is narrow but consistent: damage is a bit low, while survivability is good enough to hold up in very high keystones. He notes with interest the one group that reliably runs Brewmaster plus Resto Shaman every season and expects them to make it work again.",
+      "url": "https://youtu.be/CNWAq9aOHO4?t=1095",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Guardian",
+      "creator": "YoDaTV",
+      "date": "2026-07-30",
+      "sentiment": "nerf",
+      "patchContext": "12.1 PTR — Season 2 M+ testing",
+      "claim": "Drops Guardian to A, calling bear 'pretty nerfed since last season'. He believes there is still a playable build that mirrors the Season 1 one with Mangle in place of the Thrash/Wildfire pairing, and that it remains genuinely tanky — but the damage is very low, single target especially, so he does not see it reaching the meta. He rates it perfectly playable rather than bad.",
+      "url": "https://youtu.be/CNWAq9aOHO4?t=1070",
+      "superseded": false
+    },
+    {
+      "class": "Warrior",
+      "spec": "Protection",
+      "creator": "YoDaTV",
+      "date": "2026-07-30",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR — Season 2 M+ testing",
+      "claim": "Leaves Prot Warrior in A, in essentially the same place he had it in Season 1 — with one situational upgrade: Spell Reflect is unusually valuable across the Season 2 dungeon pool. He points to reflectable casts scattered through the new pool (the large mob upstairs in Ruby Life Pools is his worked example) as free, sometimes substantial, priority damage. Not a meta call — a same-placement read with a new upside.",
+      "url": "https://youtu.be/CNWAq9aOHO4?t=1122",
+      "superseded": false
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "creator": "Obli",
+      "date": "2026-07-31",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR — Mythic+ (hands-on San'layn Blightfall run)",
+      "claim": "A full hands-on Mythic+ run on the San'layn Blightfall build, which he says has now pushed ahead of Rider as the Unholy pick. His damage read is deliberately deflationary: he finishes the key around 360-400k overall and states flatly that Unholy is 'definitely not OP' and that Arms Warrior does the same damage — rejecting the S-tier framing outright. Single target from Blightfall he calls okay but not stellar, and he highlights a structural weakness in the 45-second cadence: one Dark Transformation window including the consumed Blightfall is worth only about 120k DPS, because Unholy has nothing else on that timer (he thinks Frost's 45-second window is clearly better). He also warns the build is group-dependent — his own numbers were inflated by Shaman mastery, Havoc's magic-damage buff and Power Infusion, and in a fast-clearing key with a top-tier pilot he could not ramp at all. Build notes: Blightfall scales with Soul Reaper for a 20% bonus worth actively lining up; take Desecrate over the Death and Decay Vampiric Strike proc talent. He calls this the hardest version of DK to play by a distance, and is withholding a written guide because he does not consider the build solved yet.",
+      "url": "https://youtu.be/owCby8soRNY?t=1127",
+      "superseded": false
     }
   ],
   "metaNotes": [
@@ -3845,6 +3944,17 @@
       "note": "Follows up his tank-mover call with the cause: Blood's Apex talent Dance of Midnight had its stacking value written into a damage-TAKEN field instead of damage-REDUCED, so every extra Dancing Rune Weapon proc was adding ~4% damage taken rather than removing it — live since Midnight launched. With that fixed on top of the 4%→6% buff he shows the swing in logs: the same Shinki +17 went from 220k to 166k damage taken per second and from 57k to 39k external HPS required, and a recent +20 puts Blood at 48k external HPS against Prot Paladin's 45k. His read is that Blood DK is now a genuine meta-tank contender for Season 2. He mentions Vengeance's fiery-brand duration bug only as a smaller comparison, not a strength call.",
       "patchContext": "Season 2 PTR — M+ outlook",
       "url": "https://youtu.be/fUZTzvbL3OU?t=316",
+      "superseded": false
+    },
+    {
+      "class": "Warrior",
+      "spec": "Arms",
+      "creator": "izen (Izenhart)",
+      "date": "2026-07-30",
+      "sentiment": "positive",
+      "note": "Frames Arms as the standout story of the Season 2 PTR: a spec that has been among the four or five least-played M+ specs every season since Legion, and — with Feral and Devastation — one of the only ones never to make a meta comp, is right now the most-picked DPS in +20s on the PTR two weeks out. He attributes the shift to Slayer overtaking Colossus rather than to Arms broadly: Tactical Edge was rebuilt to grant a guaranteed Sudden Death proc off every Colossus Smash (which accelerates Bladestorm, guarantees a Reap the Storm proc and applies Overwhelmed per Executioner stack), Slayer's Dominance went 15% to 25%, and a bug fix raised the Executioner stack cap from three to five. He shows Bladestorm's effective cooldown collapsing from 90s to roughly 24-26s in practice. Beyond raw output he credits Arms' priority damage — Slayer Strike, Mortal Strike and Execute stay single-target while the AoE runs — contrasting it with Marksmanship, which out-damages Arms overall yet loses on priority targets. The caveat he names himself: Arms brings no dispel and an Attack Power buff unlikely to matter in the ranged-caster comps it would need to join, which he calls the one real obstacle to a genuine meta slot — and he expects nerfs are possible before launch.",
+      "patchContext": "Season 2 PTR — M+ outlook",
+      "url": "https://youtu.be/OQa0Yzv18Hs?t=132",
       "superseded": false
     }
   ]
