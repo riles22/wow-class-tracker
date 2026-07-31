@@ -1,15 +1,21 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
-  "videos": [
+  "videos": [],
+  "skipped": [
     {
       "id": "YOnGHSUZ4A0",
       "creator": "Kalamazi",
       "title": "Do These 5 Things NOW To Prep For Patch 12.1!",
-      "published": "2026-07-31",
-      "queuedAt": "2026-07-31"
-    }
-  ],
-  "skipped": [
+      "reason": "A pre-patch character-prep PSA end to end — finish the Omnium Folio, farm Sporfall 298s to pre-fill slots before Mythic-zero week, craft embellished and socketed Season 1 bracers/belt/cloak while the crests still exist, spend expiring currencies, level the Valera delve companion. Its only spec mention is listing which slots the Warlock set leaves open, a loot-targeting example the skill says not to inflate into a take. 0 takes, 0 metaNotes. Same shape as izen Kwugqa7HFao. Transcript verified in full 2026-07-31 (local run).",
+      "verifiedAt": "2026-07-31"
+    },
+    {
+      "id": "hvxrLgUQk1w",
+      "creator": "Supatease",
+      "title": "12.1 Class Tuning BIG BUFFS Incoming",
+      "reason": "A straight read-through of the 2026-07-31 PTR notes across every class, with brief PvP-lens asides — the class-tuning-roundup shape the skill explicitly says not to stretch into per-spec takes. His own class lane is Shaman and the Elemental Farseer lines get one sentence of narration with no analysis. He is not a generalCreators entry, so the metaNotes lane is closed to him by validation. 0 takes, 0 metaNotes. Transcript verified in full 2026-07-31 (local run). NOTE FOR A HUMAN: this cross-class PTR-news format is generalCreators-lane behaviour — worth considering whether he belongs there, but registry scope is not an agent's call.",
+      "verifiedAt": "2026-07-31"
+    },
     {
       "id": "Z8Jygl_NpF4",
       "creator": "Shadarek",

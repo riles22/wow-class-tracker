@@ -4,6 +4,61 @@ Keep the newest ~20 entries; prune older ones when appending. Machine state the 
 detectors rely on (parse counts, seen video IDs) must stay in the NEWEST entries or a
 dedicated section — narrative prose older than that is prunable memory.
 
+- 2026-07-31 (scheduled LOCAL run, ~20:45Z — Opus 5) · yt-dlp 2026.07.04 (the
+  requirements.txt pin; not touched). **All 25 unique transcribable feeds returned 200 on
+  the first attempt, 0 retries.** Residential IP, so transcripts fetched directly — 3
+  pulled, 3 resolved, **queue 1 → 0**. · **DISTILLED — Shadarek `mV7NM-Vh90I` "Havoc BUFFED
+  & Devourer NERFED Class Tuning" (07-31)**, his same-day analysis of forum post #18, and
+  the reason this run found the build worth cross-checking in the first place. **2 takes
+  added**, both cited to timestamps: **Havoc** (buff, t=166) — he sims the pass at ~+3.6%
+  Aldrachi Reaver (235.6k→244k) and ~+4.8% for a Fel-Scarred build that drops Deflecting
+  Dance (230k→241k), cutting the hero-tree gap from ~6k to ~3k DPS, and deliberately
+  discounts the Essence Break component because the sims still model the 4-set amplifying
+  the DoT rather than the initial strike; **Devourer** (nerf, t=58) — the Eradicate
+  secondary-target 15% cut is overdue and correct in his read (the values were split apart
+  in the .5 patch precisely to be tuned and then left identical), hitting Void's Guard
+  hardest, while the Annihilator Final Hour 8s→6s change is one he cannot account for and
+  which costs both haste uptime and DR. **Superseded 2 same-lens takes**: his 07-30 Havoc
+  "Season 2 outlook" (its Aldrachi-vs-Fel-Scarred gap figure is exactly what the new take
+  updates, and its closing "expects no further changes before the season starts" was
+  overtaken by this build the next day) and his 07-22 Devourer build-tuning read. **Left
+  live**: his 07-30 Havoc TIER SET take — a different lens the new video only brushes in
+  passing, and consistently (both flag the same 4-set-hits-the-DoT bug). Spec scoping: his
+  Demon Hunter entry has no `specs` list, and he analyses both specs in depth here with
+  sims and mechanics, so both attributions are earned rather than stretched. · **VERIFIED
+  SKIPS → `skipped[]` (2 added, durable):** Kalamazi `YOnGHSUZ4A0` "Do These 5 Things NOW To
+  Prep For Patch 12.1" — a character-prep PSA (Omnium Folio, Sporfall 298s, crafted
+  embellished/socketed S1 gear, expiring currencies, Valera leveling); its only spec mention
+  is which slots the Warlock set leaves open, the loot-targeting example the skill says not
+  to inflate. Supatease `hvxrLgUQk1w` "12.1 Class Tuning BIG BUFFS Incoming" — a straight
+  read-through of the whole 07-31 notes across every class with PvP-lens asides, i.e. the
+  class-tuning-roundup shape the skill explicitly says not to stretch into per-spec takes;
+  his own lane is Shaman and the Elemental Farseer lines get one narrated sentence with no
+  analysis. **He is NOT a `generalCreators` entry, so the metaNotes lane is closed to him by
+  validation — 0 metaNotes.** ⚠️ **FOR A HUMAN:** this cross-class PTR-news format IS
+  generalCreators-lane behaviour and he does it regularly; worth deciding whether Supatease
+  belongs there. Registry scope is an owner call, so nothing was changed — flagged only.
+  · **TRIAGED OUT without a transcript fetch (title-filter / established pattern — add to
+  seen):** MadSkillzzTV `W1vqQebN9UU` "12.1 Healer Prep/Alt Gearing & UI Setup | *NEW* !UI
+  !Tierlist" (his stream-VOD title convention, !commands), AutomaticJak `tLxl5mlWNpU`
+  "Sethrallis' Reworked Final Boss" (dungeon-encounter content, not spec strength), Dalaran
+  Gaming `pZohT7rRJy8` "WoW Midnight 12.1: New Prey System Change & Rewards" (systems news).
+  Everything else in the 07-28→07-31 RSS window was already in the seen-set from the
+  nightly and the 10:14-local run (checked by id against creator-takes.json,
+  pending-transcripts.json and this log): Obli owCby8soRNY, YoDaTV CNWAq9aOHO4, izen
+  OQa0Yzv18Hs + fUZTzvbL3OU, Shadarek 7pNUYPaoePY + Z8Jygl_NpF4, Baze M_qVqxU_SrA, LBNinja7
+  ZWFtBrOS8lA, MadSkillzzTV Zf3GQqG-z8s + nZX2jWzYDB8, AutomaticJak xote4lf9dfs, plus the
+  usual stream/PvP/key-POV VODs. · community.json untouched (no `latest` field needed
+  refreshing — izen's newest upload OQa0Yzv18Hs was already recorded this morning).
+  · videos processed: **3 transcripts** · takes added: **2** · takes superseded: **2** ·
+  metaNotes added: **0** · queue 1 → 0, skipped[] 3 → 5. npm test 163 (152/11/0), build OK,
+  snapshot written then rebuilt.
+
+## Seen/triaged this run (07-31 local, ~20:45Z — add to seen-set)
+Distilled: mV7NM-Vh90I (Shadarek, 2 takes). Verified-skipped → `skipped[]`: YOnGHSUZ4A0
+(Kalamazi), hvxrLgUQk1w (Supatease). Triaged-skipped (no transcript): W1vqQebN9UU
+(MadSkillzzTV), tLxl5mlWNpU (AutomaticJak), pZohT7rRJy8 (Dalaran Gaming).
+
 - 2026-07-14 (nightly scheduled run, CI runner — Sonnet 5, second cycle) · yt-dlp already current at the requirements.txt pin (2026.07.04; not upgraded per runner policy). RSS: **all 24 feeds (23 transcribable creators + izen general lane) returned 200** (single fetch each, polite 1.5s sleep between). Dedup vs the full seen-set (log.md + creator-takes.json) + the prior cycle's 4 carried-over pendings: only **2 genuinely new uploads** since the prior 07-14 cycle — Supatease **OmC9bQZBlds** "Road to Rank 1 Multiclasser Day 3 Part 2" (07-14, same off-topic PvP-multiclasser shorts pattern as the already-skipped OmC9bQZBlds-adjacent batch — title-filter fail) and Kalamazi **5W-ULkFRjVI** "12.1 PTR The Venomous Abyss Normal Full Clear | Warlock POV" (07-14, raid-clear POV not a spec-changes analysis — same pattern as his recurring stream/testing VODs — title-filter fail); both added to seen. · **Retried all 4 carried-over pending transcripts** (Y6dW5dWoKGo LBNinja7 Holy Priest, yjJgdFZtscI Tettles Moonkin/Balance, z9sYqwzriCk izen M+ tank meta, gCNuP2AWvjU izen raid DPS meta) — **yt-dlp hit YouTube's bot-check ("Sign in to confirm you're not a bot") on all 4, consecutive failures** — not hammered further per the runner-IP-block mandate; all 4 remain **pending (datacenter IP blocked)**, NOT added to seen, for a future local run to catch up (Holy Priest video is now on its 4th pending run, Moonkin/izen-tank on their 3rd). · videos processed: **0 transcripts** · takes added: **0** · metaNotes added: **0**. **community.json unchanged** — izen's `latest`/`verifiedDate` already reflect the 07-12 gCNuP2AWvjU title from the prior cycle (confirmed current, no newer izen upload this cycle); no specialist creator `latest` fields refreshed (not warranted this cycle — no new confirmed-content videos). npm test 65/65 pass, build OK (527.6 KB byte-identical to committed dist — no data/ changed, so `node src/snapshot.mjs` not run this cycle).
 
 ## Seen/processed videoIds (nightly run 07-14 second cycle)

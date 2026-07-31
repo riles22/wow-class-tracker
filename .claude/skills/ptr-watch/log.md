@@ -4,6 +4,62 @@ Keep the newest ~20 entries; prune older ones when appending. Machine state the 
 detectors rely on (parse counts, seen video IDs) must stay in the NEWEST entries or a
 dedicated section — narrative prose older than that is prunable memory.
 
+- 2026-07-31 (scheduled LOCAL run, ~20:45Z — Opus 5) · builds found: **1 NEW — forum post
+  #18, Linxy 2026-07-31T18:49:03Z, "Week of July 31st — Class Tuning & Tier Sets".** It
+  landed ~6h AFTER the nightly's forum check (12:51Z, which correctly recorded
+  highest_post_number=17) and ~1.5h after the 10:14-local run, so this is the first run
+  that could see it. Thread now highest_post_number=18 / posts_count=16. **Logged to
+  ptr-builds.json**: 24 PvE specs affected, 27 highlights (24 spec lines + Delves, Events,
+  PvP). Broad pass — San'layn Blood and Unholy AoE pulled back, Havoc buffed across its
+  primary abilities, Devourer cleave trimmed, Balance nerfed / Guardian +8%, Devastation's
+  Scintillation interaction fixed with baseline compensation, BM/MM cut, Arcane single-target
+  raised, Fire +6%, Frost's set and 2-target cleave trimmed, Holy Paladin/Priest +5% healing,
+  Shadow spread-cleave trimmed, all three Rogue specs given aura buffs, Elemental's Farseer
+  Ancestors cut 20%, all three Warlocks' single target raised with Destruction's cleave
+  trimmed, Arms trimmed with a 4-set rework, Protection Warrior +6%. · **TIER-SET UPKEEP —
+  6 specs updated** (`tierSet.set2/set4/asOf/source` → post #18): Devastation Evoker 2-set
+  Shattering Star 150%→50%; Frost Mage 2-set Glacial Spike 25%→20% + Icicle chance 5%→4%,
+  4-set Shatter 10%→5%; Shadow Priest 4-set free Void Volley 125%→100%; Arms Warrior 4-set
+  Slam bonus 10%→20% stacking to 5 (was 3). Two needed judgment rather than a clean swap:
+  **Unholy DK** — the notes say "The Venomous Abyss set bonus – damage of Necrotic Bolt and
+  Withering Grasp increased by 25%" WITHOUT naming the piece, so per the skill's
+  "neither-is-safe" rule it went in as a dated parenthetical on set2 (the bonus that grants
+  both spells), with the ambiguity stated in the text rather than silently resolved.
+  **Demonology Warlock** — a TOOLTIP fix: the 4-set had displayed Implosion at 125%/150%
+  (which is what we had stored, copied from that wrong tooltip) against intended 250%/225%;
+  corrected with a dated note saying the effect itself did not change. · **Writeup upkeep**
+  (no verdict flipped — writeups are the cited author's read, and an official tuning build
+  is not that author speaking): Frost Mage's `ptr.set2/set4` commentary got "(Pre-07-31
+  values…)" markers because it quotes numbers this build changed (the RPPM criticism still
+  stands); Arms Warrior got a 07-31 `changes[]` line plus a note in `set4` that the build
+  answers the review's own complaint — the 3-stack Slam cap it called commonly overflowed
+  rose to 5 with the bonus doubled. · **NOT logged as a build:** Wowhead news=382321 "Patch
+  12.1 PTR Hotfixes" (07-31) — a PTR-realm hotfix list (Freightrunner's Flask scaling,
+  Evoker Twin Flame -20% / Consume Flame heal 300%→240% + no longer ignoring caster healing
+  modifiers, Shaman Ride the Lightning +59%) with NO forum post behind it. Only forum-posted
+  PTR builds go in the feed. Worth watching whether these reappear in a later dev-notes post.
+  · **Wowhead article transport note:** news article pages CloudFront-403 from this
+  residential IP even with the full browser header set that works on the tier-list pages
+  (919-byte error doc); r.jina.ai renders them fine and was used for 382321. The build's
+  `wowheadUrl` (news=382322, "Class Tuning and Dev Notes for July 31st - Rogue Aura Buffs")
+  is taken from the RSS feed entry, which is authoritative for title+link+date. · **zone 54
+  (PTR raid testing): EMPTY, ingested nothing.** Both cuts probed fresh (Heroic 4/10 and
+  Mythic 5/20, rdps normalized) — HTTP 200, 3037 bytes, table headers render but ZERO
+  `main-table-number` cells, with WCL's own "bosses will only be included after 50 public
+  kills" notice. The 14-day rolling window has aged out the mid-July parses, as the
+  standing finding predicts. **Stored 34 rows and the source snapshot deliberately LEFT at
+  2026-07-28** so the staleness stays visible instead of being papered over. · **zone 57
+  (Tidebound Grotto): still EMPTY** — Normal 10 / Heroic 10 / Mythic 25 all probed, 0 rows.
+  Never yet aggregated by WCL; raid opens Aug 18. · **zones 52 (Dummy Dome) and 56 (PTR M+):
+  NOT re-fetched — verified current instead.** Both already carry 2026-07-31 data from the
+  10:14-local run of the same day (ptrDummy 27 specs; zone-56 27 DPS / 6 tank / 7 healer),
+  and the local-run skill's scope rule is to verify-and-log what has already landed today
+  rather than regenerate it. · No season flip: 12.1 launches Aug 11, Season 2 Aug 18 — post
+  #18 is still PTR notes and every source still self-identifies as Season 1 / 12.0.7.
+  SNAPSHOT_PHASE still needs its one-shot owner flip ~2026-08-18. · npm test 163 (152 pass /
+  11 skip / 0 fail), build OK 842.3 KB / 40 specs / 31 PTR-tracked, snapshot written, rebuilt
+  after it. Manifest deliberately NOT rewritten (partial run — see the run report).
+
 - 2026-07-14 (second nightly run, later cycle, CI runner — Sonnet 5) · builds found: **0 new.**
   Forum thread (topic 2317811) newest post still **#13** (Linxy, 2026-07-09 00:08Z) —
   highest_post_number=13, posts_count=11, byte-identical again. Wowhead RSS since the
