@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { scoreFor, consensusTier, consensusFor } from "../src/normalize.mjs";
+import { scoreFor, consensusTier, consensusFor, isLiveEra, ptrTierSources } from "../src/normalize.mjs";
 
 const scales = {
   scales: {
@@ -87,4 +87,40 @@ test("reference-kind sources are excluded from consensus", () => {
   const c = consensusFor({ icyveins: "A", liquid: "S" }, sources, scales);
   assert.equal(c.perSource.length, 1);
   assert.equal(c.perSource[0].source, "icyveins");
+});
+
+/* ---- era gating: a PTR tier list is a real source that is NOT part of the live mean ---- */
+
+const eraSources = [
+  ...sources,
+  { id: "icyveins-ptr", name: "Icy Veins (12.1 PTR)", kind: "tier-list", era: "ptr", scale: "icyveins" }
+];
+
+test("era:\"ptr\" tier lists are excluded from the live consensus", () => {
+  const withPtr = consensusFor({ icyveins: "A", method: "S", "icyveins-ptr": "C" }, eraSources, scales);
+  const without = consensusFor({ icyveins: "A", method: "S" }, eraSources, scales);
+  // The PTR letter is stored and readable, but it moves neither the mean nor the spread.
+  assert.equal(withPtr.score, without.score);
+  assert.equal(withPtr.spread, without.spread);
+  assert.equal(withPtr.diverges, without.diverges);
+  assert.deepEqual(withPtr.perSource.map(p => p.source), ["icyveins", "method"]);
+});
+
+test("a spec rated ONLY by a PTR list has no live consensus at all", () => {
+  // Not "C", not 0 — null. A 12.1 opinion is not evidence about the patch we are running.
+  assert.equal(consensusFor({ "icyveins-ptr": "S" }, eraSources, scales), null);
+});
+
+test("era defaults to live when absent, so existing sources are untouched", () => {
+  assert.equal(isLiveEra({ id: "icyveins", kind: "tier-list" }), true);
+  assert.equal(isLiveEra({ id: "x", kind: "tier-list", era: "live" }), true);
+  assert.equal(isLiveEra({ id: "x", kind: "tier-list", era: "ptr" }), false);
+});
+
+test("ptrTierSources returns era-gated tier lists only, in registry order", () => {
+  assert.deepEqual(ptrTierSources(eraSources).map(s => s.id), ["icyveins-ptr"]);
+  assert.deepEqual(ptrTierSources(sources), []);
+  assert.deepEqual(ptrTierSources(undefined), []);
+  // a metrics-kind source is not a tier list even if it were era-tagged
+  assert.deepEqual(ptrTierSources([{ id: "m", kind: "metrics", era: "ptr" }]), []);
 });

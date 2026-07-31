@@ -61,6 +61,10 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
 }
 ```
 - `ratings` keys are tier-list source ids; tiers must exist in that source's scale (null = unrated → "—").
+  A source carrying `era: "ptr"` is stored here like any other but is **excluded from the
+  consensus** (`consensusFor`) and hidden in the 12.0.7-only view — see the sources.json
+  section. Adding one does NOT bump `CONSENSUS_VERSION`: the live source set is unchanged,
+  so no movement baseline is invalidated.
 - `metrics` rows upsert by (source, bracket, name) — see `src/apply-metrics.mjs`. Each
   may carry `era: "live" | "ptr"` (default live; names containing "12.1 PTR" are
   inferred ptr). At build time every metric gets `rank`/`of` — its position within
@@ -105,13 +109,20 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   named in the basis string for context but never drives the direction.
 - **12.1 projection ("Ours: 12.1")**: the tracker's OWN forecast tier list for raid+M+,
   computed in `projectionFor` (render.mjs) — live consensus baseline (w .55) blended
-  with PTR empiricals (zone-54/56 testing percentile w 2 : Dummy Dome w 1; total .45,
-  renormalized when absent), shifted by outlook direction (±7) and the newest
+  with PTR empiricals (zone-54/56 testing percentile w 2 : Dummy Dome w 1; total .45)
+  and the external era-gated PTR tier list (w .25, `ptrTierRead`), all renormalized when
+  absent, shifted by outlook direction (±7) and the newest
   general-creator meta read (±3), clamped and mapped through the consensus bands, with
-  a confidence tag (high/medium/low/prior-only by PTR-signal count). **A projection is
+  a confidence tag. **A projection is
   NOT a source**: it never feeds consensus (it derives from it), is era-gated out of
   12.0.7-only views, and every surface carries its component basis string. Tune weights
   in code only — never hand-write `spec.projection`.
+  **Confidence is a RATIO, not a count** (v3, 2026-07-31): signals present ÷ signals
+  *obtainable* for that spec+bracket — all → high, more than half → medium, any → low,
+  none → prior-only. A raw count breaks whenever a signal type arrives with near-universal
+  coverage (the PTR tier list rates 38 of 40, and counting it moved 39 of 40 M+ specs to
+  "high"), and it permanently capped healers/tanks below "high" for lacking a DPS-only
+  Dummy Dome signal they can never have.
 - **History snapshots are ENRICHED** (2026-07-09): `snapshotStateOf` stores exact
   consensus scores + the projection (tier/score/confidence, no basis strings) alongside
   the classic tiers/ranks. Movement/baseline comparison stays tier/rank-grained — the
@@ -159,7 +170,14 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
 Kinds: `tier-list` (toggle button + consensus; needs `scale`), `metrics` (numbers in
 drawers), `notes-feed` (PTR build feed), `reference` (footer link only), `community`
 (community-layer registry entries). Each has `pages[]` with `bracket`, `role`,
-optional `label`, `url`, `snapshot` (ISO date). All URLs must be https:// —
+optional `label`, `url`, `snapshot` (ISO date) and optional `published` (the date the PAGE
+states about itself — never later than `snapshot`).
+Optional **`era`** (`"live"` default | `"ptr"`) marks a source whose ratings describe a
+patch we are not running: an `era: "ptr"` tier list keeps its toggle button, its column,
+its drawer row and its projection input, but `consensusFor` skips it and the 12.0.7-only
+view disables it. A typo'd era fails validation rather than defaulting to live, and a
+registry with no live-era tier list fails too (the consensus would have nothing to
+average). Currently one: `icyveins-ptr` (M+ only). All URLs must be https:// —
 validation enforces it, plus host allowlists on every agent-writable URL field
 (creator-take/metaNote citations, writeup + tier-set sources, community discord/creator
 links, PTR build-feed links — the approved-host sets live in `src/validate.mjs`; a new
@@ -242,6 +260,14 @@ publishes `lowerBound` as a number; recipe in the refresh-metrics skill.)*
 2. Write rows `[{class, spec, bracket, source, tier}]` (exact roster names) to a scratch
    file → `node src/apply-ratings.mjs <file>` (refuses on unmatched rows).
 3. Update `snapshot` dates in `sources.json`; `npm test && npm run build`.
+
+**`icyveins-ptr` is in this loop too** (added 2026-07-31) — same fetch, same
+`apply-ratings.mjs`, but it era-verifies the OTHER way: the page must self-identify as
+**12.1 / Season 2**, not Season 1. M+ only (no PTR raid list exists — do not invent one),
+6-band scale including **B+**, and specs the page marks **TBD are written as explicit
+`null`**, never omitted and never guessed. It also carries `published` (the page's own
+date, from JSON-LD `dateModified` / the "Last UPDATED" line) alongside `snapshot`. It has
+its own row in `required-sources.json`, so a run that skips it fails the publish gate.
 
 ### Metrics (Warcraft Logs / Murlok / Archon numbers / SimC / Mythicstats / Bloodmallet / Robydoby)
 1. WCL: zone 46 = live S1 raid (Mythic = difficulty **5**, size 20, partition 3 = 12.0.7);

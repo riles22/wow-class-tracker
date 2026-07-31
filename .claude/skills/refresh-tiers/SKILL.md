@@ -18,6 +18,10 @@ Fetch the current Midnight tier lists live and merge them into `data/specs.json`
    2026-07-15→17 lost nights. Era-verify as you go (step 2).
 2. Era-verify every page: "Midnight", Season 1 / 12.0.x, or Devourer DH present in DPS
    lists. Unverifiable → skip that source, never guess.
+   **Except the era-gated sources** (`era: "ptr"` in the registry — `icyveins-ptr` today):
+   those must verify as **12.1 / Season 2**. A page that reads Season 1 is the WRONG page
+   for that source and must not be applied. Record each page's OWN date in `published`
+   (JSON-LD `dateModified`, or the in-body "Last UPDATED" line) as well as `snapshot`.
 3. Write rows `[{class, spec, bracket: "raid"|"mplus", source, tier}]` using the EXACT
    class/spec names from `data/specs.json` to a scratch file.
 4. `node src/apply-ratings.mjs <file>` — refuses to write on unmatched rows.
@@ -66,6 +70,24 @@ Fetch the current Midnight tier lists live and merge them into `data/specs.json`
   **transport-induced view flips, not upstream movement** — they nonetheless fed
   consensus, the ▲▼ engine and `data/history/`, so the movement narrative for those
   dates is not trustworthy. Record which transport you used, every run.
-- **murlok-style numbers are NOT tiers.** Only the four tier-list sources feed consensus.
+- **`icyveins-ptr` is a tier list you fetch but must NEVER let into the consensus.** It is
+  era-gated in the registry (`era: "ptr"`), so `consensusFor` already skips it — you do not
+  need to do anything to keep it out, and you must not "fix" a spec whose consensus ignores
+  it. Its shape differs from every other source here in four ways, all deliberate:
+  · **M+ only** — three pages (`mythic-ptr-{dps,healer,tank}-tier-list`). Icy Veins
+    publishes no PTR raid list. If one ever appears, it needs a registry page + a
+    `required-sources` review, not an improvised row.
+  · **Six bands, including `B+`** (S/A+/A/B+/B/C) on its own `icyveins-ptr` scale. The live
+    `icyveins` scale has five and does NOT include B+ — applying a PTR row under the live
+    source id will fail validation, which is the intended backstop.
+  · **`TBD` is a real upstream state**, not a parse miss. Write it as an explicit `null`
+    (Augmentation Evoker and Vengeance DH were TBD at adoption). Omitting the row instead
+    loses the distinction between "unplaced by the authors" and "we never checked".
+  · **Weekly cadence** — rebuilt Sundays 14:00 CEST on stream, then published. Its
+    `published` date trailing `snapshot` by up to a week is NORMAL and not a finding; a
+    `published` date that stops advancing for more than ~2 weeks IS one (nothing gates it —
+    see the known gap in SOURCES.md).
+- **murlok-style numbers are NOT tiers.** Only the four LIVE tier-list sources feed
+  consensus; era-gated lists are shown and feed the projection, never the mean.
 - A new source first needs a scale in `data/scales.json` (check each tier round-trips
   through the consensus bands) and a registry entry — config only, no code.

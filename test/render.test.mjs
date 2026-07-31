@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
-import { dataHealth, fightLabels, metricRanks, outlookFor, movementFor, projectionMovementFor, snapshotStateOf, pickBaseline, dummyDomeScores, classifyHighlight, projectionFor, historySeries, specBuildChanges, PROJECTION_VERSION, RANK_VERSION, CONSENSUS_VERSION } from "../src/render.mjs";
+import { dataHealth, fightLabels, metricRanks, outlookFor, movementFor, projectionMovementFor, snapshotStateOf, pickBaseline, dummyDomeScores, classifyHighlight, projectionFor, ptrTierRead, historySeries, specBuildChanges, PROJECTION_VERSION, RANK_VERSION, CONSENSUS_VERSION } from "../src/render.mjs";
 
 /* Stamp a fixture snapshot as current-version. An UNSTAMPED snapshot means version 1 —
    every snapshot written before the markers existed came from the v1 formulas — so a
@@ -909,4 +909,94 @@ test("dataHealth is a pure function of the data — identical input, identical o
   const a = dataHealth([mk("2026-06-01"), mk("2026-07-20")]);
   const b = dataHealth([mk("2026-06-01"), mk("2026-07-20")]);
   assert.deepEqual(a, b);
+});
+
+/* ---- external PTR tier list as a projection input (PROJECTION_VERSION 3) ---- */
+
+const PTR_SRC = [
+  { id: "icyveins", name: "Icy Veins", kind: "tier-list", scale: "icyveins" },
+  { id: "icyveins-ptr", name: "Icy Veins (12.1 PTR)", kind: "tier-list", era: "ptr", scale: "icyveins-ptr",
+    pages: [{ bracket: "mplus", role: "DPS" }, { bracket: "mplus", role: "Healer" }, { bracket: "mplus", role: "Tank" }] }
+];
+const PTR_PROJ_SCALES = {
+  ...PROJ_SCALES,
+  scales: {
+    icyveins: { tiers: ["S", "A"], values: { S: 100, A: 66 } },
+    "icyveins-ptr": { tiers: ["S", "A+", "A", "B+", "B", "C"], values: { S: 100, "A+": 82, A: 66, "B+": 57, B: 48, C: 30 } }
+  }
+};
+
+test("ptrTierRead: reads era-gated lists only, and TBD stays absent rather than zero", () => {
+  const spec = { ratings: { mplus: { icyveins: "S", "icyveins-ptr": "B+" } } };
+  const r = ptrTierRead(spec, "mplus", PTR_SRC, PTR_PROJ_SCALES);
+  assert.equal(r.score, 57);
+  assert.equal(r.tiers, "B+");
+  assert.equal(r.label, "Icy Veins (12.1 PTR)");
+  // The live list's "S" is not read here even though it sits in the same ratings object.
+  assert.notEqual(r.score, 100);
+  // Upstream TBD is stored as an explicit null: missing evidence, NOT a bottom-tier verdict.
+  const tbd = { ratings: { mplus: { "icyveins-ptr": null } } };
+  assert.equal(ptrTierRead(tbd, "mplus", PTR_SRC, PTR_PROJ_SCALES), null);
+  // No PTR raid list exists, so the raid bracket has no external read.
+  assert.equal(ptrTierRead(spec, "raid", PTR_SRC, PTR_PROJ_SCALES), null);
+});
+
+test("projectionFor: the PTR tier list enters the base at w=0.25 and is named in the basis", () => {
+  const spec = {
+    class: "X", spec: "P", role: "Healer",
+    consensus: { mplus: { score: 60 } },
+    ratings: { mplus: { "icyveins-ptr": "S" } }
+  };
+  const p = projectionFor(spec, "mplus", PTR_PROJ_SCALES, [], PTR_SRC);
+  // base = (.55*60 + .25*100) / .80 = 72.5 → 73 (no empirical, no outlook, no note)
+  assert.equal(p.score, 73);
+  assert.match(p.basis, /Icy Veins \(12\.1 PTR\) S \(100\)/);
+  // Same spec with the PTR source withheld: prior only.
+  const bare = projectionFor(spec, "mplus", PTR_PROJ_SCALES, [], []);
+  assert.equal(bare.score, 60);
+  assert.doesNotMatch(bare.basis, /PTR\)/);
+});
+
+test("projectionFor: the bracket with no PTR list keeps its v2 math exactly", () => {
+  // The real shape: an M+ letter exists, a raid one does not (Icy Veins publishes no PTR
+  // raid list, and refresh-tiers is instructed never to invent one). The raid projection
+  // must therefore be byte-identical to what it was before this input existed — that is
+  // the property that let CONSENSUS_VERSION stay put and raid confidence stay unchanged.
+  const spec = {
+    class: "X", spec: "R", role: "DPS",
+    consensus: { raid: { score: 50 }, mplus: { score: 50 } },
+    ratings: { mplus: { "icyveins-ptr": "S" } }
+  };
+  const raidWith = projectionFor(spec, "raid", PTR_PROJ_SCALES, [], PTR_SRC);
+  const raidWithout = projectionFor(spec, "raid", PTR_PROJ_SCALES, [], []);
+  assert.deepEqual(raidWith, raidWithout, "no PTR raid list → the raid forecast is untouched");
+  assert.doesNotMatch(raidWith.basis, /PTR\)/);
+
+  const mplus = projectionFor(spec, "mplus", PTR_PROJ_SCALES, [], PTR_SRC);
+  assert.ok(mplus.score > 50, "M+ moves toward the PTR list's S");
+});
+
+test("confidence is a ratio against obtainable signals, not a raw count", () => {
+  const base = { class: "X", spec: "C", consensus: { mplus: { score: 60 }, raid: { score: 60 } } };
+  // Healer M+: obtainable = testing + outlook + PTR list = 3 (no Dummy Dome for healers).
+  const healerAll = projectionFor({
+    ...base, role: "Healer",
+    metrics: [{ bracket: "mplus", name: "Median HPS (12.1 PTR M+ testing)", rank: 1, of: 7 }],
+    outlook: { direction: "up" },
+    ratings: { mplus: { "icyveins-ptr": "A" } }
+  }, "mplus", PTR_PROJ_SCALES, [], PTR_SRC);
+  assert.equal(healerAll.confidence, "high", "everything obtainable for a healer → high");
+
+  // One signal of two obtainable must stay "low" — strictly more than half for medium.
+  const thin = projectionFor({ ...base, role: "Healer", outlook: { direction: "up" } },
+    "raid", PTR_PROJ_SCALES, [], PTR_SRC);
+  assert.equal(thin.confidence, "low", "1 of 2 obtainable is thin evidence, not medium");
+
+  // Regression guard: a DPS spec's RAID bracket is unchanged from v2 (3 obtainable).
+  const dpsRaid = projectionFor({
+    ...base, role: "DPS",
+    metrics: [{ bracket: "raid", name: "12.1 PTR raid testing score (normalized)", rank: 1, of: 27 }],
+    ptrDummy: { score: 90 }, outlook: { direction: "up" }
+  }, "raid", PTR_PROJ_SCALES, [], PTR_SRC);
+  assert.equal(dpsRaid.confidence, "high"); // 3 of 3
 });

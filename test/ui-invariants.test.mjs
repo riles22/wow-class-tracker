@@ -516,3 +516,47 @@ test("no agent-writable field can inject markup or a handler into the rendered p
     await rm(root, { recursive: true, force: true });
   }
 });
+
+ui("an era-gated PTR tier list shows its own 12.1 letters and is unreachable in the 12.0.7 view", async page => {
+  const data = payload();
+  const ptr = data.sources.find(s => s.kind === "tier-list" && s.era === "ptr");
+  assert.ok(ptr, "expected an era-gated tier-list source in the payload");
+  const subject = data.specs.find(s => s.ratings?.mplus?.[ptr.id] != null);
+  assert.ok(subject, "expected at least one spec rated by the PTR list");
+
+  // 1. In the default (Both) era it behaves like any other source view: its OWN letters.
+  await page.evaluate(id => document.querySelector(`#srcseg button[data-source="${id}"]`).click(), ptr.id);
+  await page.waitForTimeout(120);
+  const [raid, mplus] = await tiersOf(page, subject.class, subject.spec);
+  assert.equal(mplus, subject.ratings.mplus[ptr.id], "M+ column shows the PTR list's letter");
+  // Icy Veins publishes no PTR raid list, so the raid column must be an honest dash —
+  // never the live letter or the consensus quietly standing in for a source that is absent.
+  assert.equal(raid, "—", "no PTR raid list exists, so the raid column is a dash");
+
+  // 2. The letters are 12.1, so the view note must not describe them as 12.0.7 tiers.
+  const note = await page.evaluate(() => {
+    const n = document.getElementById("viewnote");
+    return n && !n.hidden ? n.textContent : "";
+  });
+  assert.match(note, /12\.1 PTR/, "the view note names the era of the letters on screen");
+  assert.doesNotMatch(note, /12\.0\.7 tiers/, "PTR letters must never be labelled 12.0.7");
+
+  // 3. Switching to the 12.0.7-only era must take the view away — a 12.1 opinion has no
+  //    place in a live-only read — and land somewhere honest rather than a blank grid.
+  await page.evaluate(() => document.querySelector('#eraseg button[data-era="live"]').click());
+  await page.waitForTimeout(150);
+  const gate = await page.evaluate(id => ({
+    disabled: document.querySelector(`#srcseg button[data-source="${id}"]`).disabled,
+    pressedSource: document.querySelector('#srcseg button[aria-pressed="true"]')?.dataset.source ?? null
+  }), ptr.id);
+  assert.equal(gate.disabled, true, "the PTR source button is disabled in the 12.0.7 view");
+  assert.equal(gate.pressedSource, "consensus", "the view falls back to consensus, not a blank grid");
+  const [, backToConsensus] = await tiersOf(page, subject.class, subject.spec);
+  assert.equal(backToConsensus, subject.consensus.mplus.tier, "the grid now shows the live consensus");
+
+  // 4. The "N tier lists feed a computed consensus" blurb must count LIVE lists only.
+  const live = data.sources.filter(s => s.kind === "tier-list" && (s.era ?? "live") === "live").length;
+  const words = ["No","One","Two","Three","Four","Five","Six","Seven","Eight","Nine"];
+  const shown = await page.evaluate(() => document.getElementById("tlcount")?.textContent ?? "");
+  assert.equal(shown, words[live], "the derived tier-list count excludes era-gated lists");
+});

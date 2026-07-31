@@ -46,6 +46,39 @@
     ]
   },
   {
+    "id": "icyveins-ptr",
+    "name": "Icy Veins (12.1 PTR)",
+    "kind": "tier-list",
+    "era": "ptr",
+    "scale": "icyveins-ptr",
+    "author": "Icy Veins guide writers",
+    "methodology": "Icy Veins' forward-looking Mythic+ tier lists for Patch 12.1 / Season 2, built on the PTR from a mix of throughput and group-added value (utility, survivability, mobility, self-sustain). Rebuilt weekly on stream (Sundays, 14:00 CEST) and then published, so its own date lags the fetch by up to a week. M+ only — Icy Veins publishes no PTR raid list. Specs the authors have not yet placed are shown as TBD upstream and stored as null here, never guessed.",
+    "notes": "ERA-GATED: this is a 12.1 PTR opinion, so it is excluded from the live 12.0.7 consensus (see consensusFor in src/normalize.mjs) and hidden entirely in the 12.0.7-only view. It feeds the 12.1 projection as one weighted input among several. It is the only EXTERNAL 12.1 letter opinion the tracker carries — every other PTR signal is either raw measurement (zone 54/56, Dummy Dome) or our own computation.",
+    "pages": [
+      {
+        "bracket": "mplus",
+        "role": "DPS",
+        "url": "https://www.icy-veins.com/wow/mythic-ptr-dps-tier-list",
+        "snapshot": "2026-07-31",
+        "published": "2026-07-26"
+      },
+      {
+        "bracket": "mplus",
+        "role": "Healer",
+        "url": "https://www.icy-veins.com/wow/mythic-ptr-healer-tier-list",
+        "snapshot": "2026-07-31",
+        "published": "2026-07-26"
+      },
+      {
+        "bracket": "mplus",
+        "role": "Tank",
+        "url": "https://www.icy-veins.com/wow/mythic-ptr-tank-tier-list",
+        "snapshot": "2026-07-31",
+        "published": "2026-07-26"
+      }
+    ]
+  },
+  {
     "id": "method",
     "name": "Method",
     "kind": "tier-list",

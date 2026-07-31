@@ -6,7 +6,7 @@ Every source feeding the tracker, by layer. Machine-readable registry: `data/sou
 
 ## 1 · Tier lists → the letter columns + Consensus
 
-Only these tier-list sources feed the consensus (five today — the table below is the list). Scales are normalized via `data/scales.json`.
+Only these tier-list sources feed the consensus (**four** today — the table below is the list; the count is derived on the page, never written down). Scales are normalized via `data/scales.json`. A tier list carrying `era: "ptr"` is a source in every other respect but is **excluded from the consensus** — see the era-gated table below.
 
 | Source | Scale | Lens | Cadence | Notes |
 |---|---|---|---|---|
@@ -16,8 +16,42 @@ Only these tier-list sources feed the consensus (five today — the table below 
 | **Archon** | S/A/B/C | Statistical (Warcraft Logs parses / Blizzard leaderboards, 14-day window) | **daily** | raid tiers = *throughput* list, M+ = *score* list; mirrored at u.gg |
 | ~~**WoWMeta**~~ | — | **Retyped to a metrics source 2026-07-31** — see layer 2. Its letters were Ckmeans clusters of an undocumented toggle defaulting to PLAYER COUNT (representation, not performance), and its HTML transport served a stale 2026-03-23 prerender. Consensus is now four tier-list sources. | | |
 
+### Era-gated tier lists → their own column, never the consensus
+
+A tier list whose letters describe **12.1**, not the patch we are running. Stored in
+`spec.ratings` like any other source, shown as its own column and in the drawer's source
+box, and consumed by the 12.1 projection — but never averaged into the 12.0.7 consensus,
+and hidden entirely in the 12.0.7-only era view.
+
+| Source | Scale | Lens | Cadence | Notes |
+|---|---|---|---|---|
+| **Icy Veins (12.1 PTR)** | S/A+/A/B+/B/C | Forward PTR read — throughput + group-added value (utility, survivability, mobility, sustain) | rebuilt weekly on stream (Sun 14:00 CEST), then published | **M+ only** — no PTR raid list exists, so the raid column is an honest dash. Full 40-spec coverage; specs the authors have not placed are **TBD upstream → stored as explicit `null`**, never guessed. |
+
+Three things about it are load-bearing:
+
+- **Its own scale.** Icy Veins' PTR lists publish a sixth band (**B+**) their live lists do
+  not, so `icyveins-ptr` is a separate entry in `scales.json`. Reusing the 5-band
+  `icyveins` scale would have silently squashed B+ into a neighbour. Shared tiers keep the
+  live anchors exactly, so the same author's live and PTR reads are comparable on the axis.
+- **It disagrees with its own live list — hard.** At adoption (2026-07-31) 33 of 40 specs
+  sat in a different band than Icy Veins' live 12.0.7 M+ list, including multi-band swings
+  in both directions (Marksmanship C→A+, Blood DK C→A+, Guardian S→B+). That divergence is
+  the argument for carrying it *and* the argument for never letting it near the consensus.
+- **It is the only EXTERNAL 12.1 letter opinion the tracker holds.** Every other PTR signal
+  is either raw measurement (zone 54/56, Dummy Dome) or our own computation, so this is the
+  one input that can flag a spec the empiricals cannot see yet — a rework whose logs have
+  not landed. It enters the projection at the lightest weight for the same reason it is
+  valuable: it is one outlet's subjective forward read.
+
+**Known gap:** the refresh contract's `pages` date probe reads the agent-written
+`snapshot`, not the page's own `published` date. Because this list rebuilds only weekly,
+`published` legitimately trails `snapshot` by up to 7 days — so a nightly that keeps
+fetching successfully after Icy Veins *stops* updating the list would look fresh
+indefinitely. That is the WoWMeta failure mode in a new key; `page.published` is recorded
+on every page so a future probe can close it.
+
 ### Not a source: the "Ours: 12.1" projection
-The tracker also renders its OWN computed 12.1 forecast (projection lane). It is deliberately absent from this inventory: it fetches nothing, feeds nothing — it derives from the sources above (live consensus + WCL PTR testing + Dummy Dome + outlook + cited meta reads) and is labeled, styled, and era-gated as a projection everywhere it appears. See CLAUDE.md → "Computed at build time."
+The tracker also renders its OWN computed 12.1 forecast (projection lane). It is deliberately absent from this inventory: it fetches nothing, feeds nothing — it derives from the sources above (live consensus + WCL PTR testing + Dummy Dome + the era-gated PTR tier list + outlook + cited meta reads) and is labeled, styled, and era-gated as a projection everywhere it appears. See CLAUDE.md → "Computed at build time."
 
 ## 2 · Quantitative metrics → numbers in drawers (never letters)
 

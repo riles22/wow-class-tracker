@@ -32,7 +32,7 @@
     --ink:#EDE7F7; --ink-dim:#A99BC7; --ink-faint:#8B7EAE;
     --accent:#B57BEE; --accent-2:#7FD8FF; --gold:#F0C24B;
 
-    --t-s:#F0C24B; --t-aplus:#C77DFF; --t-a:#6AA8F0; --t-b:#45C4A8; --t-c:#8A93A8; --t-d:#D2887A; --t-f:#D27575;
+    --t-s:#F0C24B; --t-aplus:#C77DFF; --t-a:#6AA8F0; --t-bplus:#4FBCBB; --t-b:#45C4A8; --t-c:#8A93A8; --t-d:#D2887A; --t-f:#D27575;
     --v-pos:#52C97A; --v-mix:#E0A73E; --v-neg:#E0655F;
 
     --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
@@ -231,6 +231,9 @@
   .tier[data-t="S"]  {color:var(--t-s);     background:color-mix(in srgb,var(--t-s) 15%,transparent);     border-color:color-mix(in srgb,var(--t-s) 42%,transparent)}
   .tier[data-t="A+"] {color:var(--t-aplus); background:color-mix(in srgb,var(--t-aplus) 15%,transparent); border-color:color-mix(in srgb,var(--t-aplus) 42%,transparent)}
   .tier[data-t="A"]  {color:var(--t-a);     background:color-mix(in srgb,var(--t-a) 15%,transparent);     border-color:color-mix(in srgb,var(--t-a) 42%,transparent)}
+  /* B+ exists only on the Icy Veins 12.1 PTR scale — sits between A and B in hue as it
+     does in rank, so an unstyled band can never read as "no tier". */
+  .tier[data-t="B+"] {color:var(--t-bplus); background:color-mix(in srgb,var(--t-bplus) 15%,transparent); border-color:color-mix(in srgb,var(--t-bplus) 42%,transparent)}
   .tier[data-t="B"]  {color:var(--t-b);     background:color-mix(in srgb,var(--t-b) 15%,transparent);     border-color:color-mix(in srgb,var(--t-b) 42%,transparent)}
   .tier[data-t="C"]  {color:var(--t-c);     background:color-mix(in srgb,var(--t-c) 15%,transparent);     border-color:color-mix(in srgb,var(--t-c) 42%,transparent)}
   .tier[data-t="D"]  {color:var(--t-d);     background:color-mix(in srgb,var(--t-d) 15%,transparent);     border-color:color-mix(in srgb,var(--t-d) 42%,transparent)}
@@ -789,6 +792,12 @@ const CREATOR_TAKES = (DATA.creatorTakes && DATA.creatorTakes.takes) || [];
    by ±3 — always disclosed by name in that projection's basis string. */
 const META_NOTES = (DATA.creatorTakes && DATA.creatorTakes.metaNotes) || [];
 const TIER_SOURCES = SOURCES.filter(s => s.kind === "tier-list");
+/* Era-gated tier lists: sources whose LETTERS describe 12.1, not the patch we are on.
+   They are excluded from the consensus at build time (consensusFor) and from the
+   12.0.7-only view here, exactly like the projection — see the srcseg block in render().
+   Everything else about them is an ordinary source: real letters, real provenance. */
+const PTR_TIER_IDS = new Set(TIER_SOURCES.filter(s => s.era === "ptr").map(s => s.id));
+const isPtrSource = id => PTR_TIER_IDS.has(id);
 const REF_SOURCES = SOURCES.filter(s => s.kind === "reference");
 
 /* Standard class colors */
@@ -912,8 +921,20 @@ function ratingFor(s, bracket){
              tip:`Our 12.1 ${bracket==="raid"?"raid":"M+"} projection: ${p.tier} (${p.score}/100, confidence ${p.confidence}) — ${p.basis}` };
   }
   const src = TIER_SOURCES.find(x => x.id === state.source);
-  const tier = (s.ratings && s.ratings[bracket] && s.ratings[bracket][state.source]) ?? null;
-  if(tier == null) return { tier:"—", score:-1, div:false, tip:`${src.name}: not rated` };
+  const rated = (s.ratings && s.ratings[bracket]) || {};
+  const tier = rated[state.source] ?? null;
+  if(tier == null){
+    // Three different facts, three different tooltips. "Not rated" was the only one, and
+    // it would have been wrong twice over for a PTR list: Icy Veins publishes no 12.1 raid
+    // list at all (an absent SOURCE, not 40 unrated specs), and the specs it explicitly
+    // parks as TBD are stored as an explicit null — known-unplaced, not unchecked.
+    const hasBracket = (src.pages||[]).some(p => p.bracket === bracket);
+    const stored = Object.prototype.hasOwnProperty.call(rated, state.source);
+    return { tier:"—", score:-1, div:false,
+             tip: !hasBracket ? `${src.name}: publishes no ${bracket==="raid"?"raid":"M+"} list`
+                : stored ? `${src.name}: listed, not yet placed (TBD upstream)`
+                : `${src.name}: not rated` };
+  }
   return { tier, score:SCALES.scales[src.scale].values[tier] ?? 0, div:false, tip:`${src.name}: ${tier}` };
 }
 
@@ -950,13 +971,30 @@ function srcDate(src, bracket, role){
   return fmtDate(p?.snapshot);
 }
 function sourceBreakdownHTML(s){
-  const rows = TIER_SOURCES.map(src => {
-    const raid = (s.ratings?.raid?.[src.id]) ?? "—";
-    const mplus = (s.ratings?.mplus?.[src.id]) ?? "—";
+  // Era-gated tier lists drop out of the 12.0.7-only view entirely — same rule as the
+  // projection below, for the same reason: in a live-only view a 12.1 letter is noise at
+  // best and a misread baseline at worst.
+  const rows = TIER_SOURCES.filter(src => !(isPtrSource(src.id) && state.era === "live")).map(src => {
+    // A stored-but-null rating means the source LISTS this spec and has not placed it
+    // (Icy Veins' PTR "TBD"). That is different from not rating it at all, and the
+    // difference is worth a word: without it the row vanishes entirely and the drawer
+    // implies the source never looked at the spec.
+    const cell = bracket => {
+      const r = (s.ratings && s.ratings[bracket]) || {};
+      if(r[src.id] != null) return r[src.id];
+      return Object.prototype.hasOwnProperty.call(r, src.id) ? "TBD" : "—";
+    };
+    const raid = cell("raid"), mplus = cell("mplus");
     if(raid === "—" && mplus === "—") return "";
     const rd = raid !== "—" ? srcDate(src,"raid",s.role) : "";
     const md = mplus !== "—" ? srcDate(src,"mplus",s.role) : "";
-    return `<div class="setrow"><span class="pc">${esc(src.name)}</span><span class="pct">Raid ${esc(raid)}${rd?` <span class="mnote">${esc(rd)}</span>`:""} · M+ ${esc(mplus)}${md?` <span class="mnote">${esc(md)}</span>`:""}</span></div>`;
+    // The consensus row above averages LIVE lists only, so a PTR list sitting in the same
+    // box must say why its letters are not in that mean — otherwise the box reads as
+    // "here are the N sources behind the consensus" and quietly miscounts itself.
+    const tag = isPtrSource(src.id)
+      ? ` <span class="mnote" title="A 12.1 PTR read. Excluded from the 12.0.7 consensus; feeds our 12.1 forecast instead.">12.1 PTR · not in consensus</span>`
+      : "";
+    return `<div class="setrow"><span class="pc">${esc(src.name)}</span><span class="pct">Raid ${esc(raid)}${rd?` <span class="mnote">${esc(rd)}</span>`:""} · M+ ${esc(mplus)}${md?` <span class="mnote">${esc(md)}</span>`:""}${tag}</span></div>`;
   }).filter(Boolean).join("");
   const surv = s.survivability
     ? `<div class="setrow"><span class="pc">Survive</span><span class="pct">Archon raid survivability tier: <b>${esc(s.survivability.tier)}</b>${s.survivability.asOf?` <span class="mnote">· ${esc(s.survivability.asOf)}</span>`:""}</span></div>`
@@ -1296,15 +1334,22 @@ function render(){
     const note = document.getElementById('viewnote');
     if(note){
       const projView = state.source === "projection" && state.era !== "live" && !state.fight;
-      const eraPtr = state.era === "ptr" && !state.fight && !projView;
-      note.hidden = !(projView || eraPtr);
+      // A selected PTR tier list is its own case. Without this the eraPtr branch below
+      // would announce "the tier columns still show Icy Veins (12.1 PTR)'s 12.0.7 tiers —
+      // for a Season-2 read pick Ours: 12.1" over a column that is already a Season-2
+      // read: the exact letter misattribution this note exists to prevent.
+      const ptrListView = isPtrSource(state.source) && state.era !== "live" && !state.fight;
+      const eraPtr = state.era === "ptr" && !state.fight && !projView && !ptrListView;
+      note.hidden = !(projView || eraPtr || ptrListView);
       // Name the letters' ACTUAL origin. This note exists to stop letter misattribution,
       // so it must not itself say "consensus" while a single-source view is on screen —
       // six of the seven ptr-era views are a named tier list, not the consensus.
       const srcName = TIER_SOURCES.find(s => s.id === state.source)?.name;
       const letters = srcName ? `<b>${esc(srcName)}'s 12.0.7 tiers</b>` : `the <b>12.0.7 consensus</b>`;
       note.innerHTML = projView
-        ? `<b>Our own forecast</b> — live consensus blended with PTR raid/M+ testing and Dummy Dome data, shifted by the tuning outlook. A projection, not a source: it never feeds the consensus.`
+        ? `<b>Our own forecast</b> — live consensus blended with PTR raid/M+ testing, Dummy Dome data and the external 12.1 tier list, shifted by the tuning outlook. A projection, not a source: it never feeds the consensus.`
+        : ptrListView
+          ? `<b>${esc(srcName)}</b> — someone else's <b>12.1 PTR</b> letters, shown as their own column (M+ only; the raid column has no such list). Never averaged into the 12.0.7 consensus; one weighted input to <b>Ours: 12.1 ✦</b>.`
         : eraPtr
           ? `The tier columns still show ${letters} — era filters verdicts, writeups and PTR numbers, not the letters. For a Season-2 read, pick <b>Ours: 12.1 ✦</b>.`
           : "";
@@ -1312,6 +1357,8 @@ function render(){
   }
   // The 12.1 projection is meaningless in a 12.0.7-only view: disable its button there,
   // and if it was active, fall back to consensus BEFORE building the matrix.
+  // Era-gated tier lists (icyveins-ptr) get the identical treatment — their letters are
+  // 12.1 reads, so a 12.0.7-only view must not be able to select one.
   {
     const pb = srcseg.querySelector('.projbtn');
     if(pb){
@@ -1319,10 +1366,19 @@ function render(){
       pb.disabled = state.era === "live" || !!state.fight;
       pb.title = state.era === "live" ? "Our 12.1 forecast needs the PTR layer — switch Era to Both or 12.1 PTR"
         : "Our computed 12.1 forecast — live baseline + PTR testing + Dummy Dome + outlook + meta reads. A projection, not a source.";
-      if(state.era === "live" && state.source === "projection"){
-        state.source = "consensus";
-        srcseg.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed', x.dataset.source==="consensus"?'true':'false'));
-      }
+    }
+    srcseg.querySelectorAll('button[data-source]').forEach(b=>{
+      if(!isPtrSource(b.dataset.source)) return;
+      b.disabled = state.era === "live" || !!state.fight;
+      b.title = state.era === "live"
+        ? "A 12.1 PTR tier list — switch Era to Both or 12.1 PTR to view it"
+        : "A 12.1 PTR tier list. Shown as its own column; it never feeds the 12.0.7 consensus.";
+    });
+    // One fallback for both gated view kinds, after the disabling above so the pressed
+    // state below can never light a button the user cannot click.
+    if(state.era === "live" && (state.source === "projection" || isPtrSource(state.source))){
+      state.source = "consensus";
+      srcseg.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed', x.dataset.source==="consensus"?'true':'false'));
     }
   }
   const filtered = SPECS.filter(passFilters);
@@ -1604,7 +1660,10 @@ if(META.latestSnapshot){
 (() => {
   const el = document.getElementById('tlcount');
   if (!el) return;
-  const n = SOURCES.filter(s => s.kind === "tier-list").length;
+  // LIVE tier lists only — the sentence says these "feed a computed consensus", and an
+  // era-gated PTR list does not. Counting it would restate the WoWMeta bug in a new key:
+  // a number on the page that its own toggles contradict.
+  const n = SOURCES.filter(s => s.kind === "tier-list" && (s.era ?? "live") === "live").length;
   const words = ["No","One","Two","Three","Four","Five","Six","Seven","Eight","Nine"];
   el.textContent = words[n] ?? String(n);
 })();

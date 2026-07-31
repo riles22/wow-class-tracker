@@ -2,7 +2,7 @@
    sim-derived fight-profile labels, collect metadata. Pure functions — no
    filesystem access. */
 
-import { consensusFor } from "./normalize.mjs";
+import { consensusFor, ptrTierSources, scoreFor } from "./normalize.mjs";
 
 export function decorateSpecs(specs, sources, scales) {
   return specs.map(spec => ({
@@ -359,18 +359,32 @@ export function outlookFor(spec, ptrBuilds) {
 
    Formula per spec+bracket, everything on one 0–100 axis:
      base  = weighted mean of { live consensus score (w=0.55) ,
-                                PTR empirical (w=0.45) } — renormalized when one absent.
+                                PTR empirical (w=0.45) ,
+                                external PTR tier list (w=0.25) } — renormalized when
+             any are absent (so a spec with all three gives the PTR list ~20% of base).
        PTR empirical (per bracket, within-role percentiles ×100):
          raid  = mean of { zone-54 testing-score percentile (w=2),
                            Dummy Dome composite (w=1, DPS only) }
          mplus = mean of { zone-56 M+ testing percentile — rDPS / tank rDPS / HPS
                            by role (w=2), Dummy Dome composite (w=1, DPS only) }
+       External PTR tier list = mean of every era:"ptr" tier-list source that rates this
+         spec+bracket, through its own scale (Icy Veins' 12.1 M+ lists today — M+ only,
+         so the raid bracket falls back to prior+empirical alone). It is deliberately the
+         LIGHTEST base term: it is one outlet's subjective forward read, where the prior
+         is four sources agreeing and the empirical is measurement. It is nonetheless the
+         only EXTERNAL 12.1 opinion in the formula — everything else is our own reading of
+         raw data — so it is the one term that can catch a spec the empiricals cannot yet
+         see (a rework whose logs have not landed).
      shift = 12.1 outlook direction: up +7 · down −7 · flat 0  (verdict-driven, see
              outlookFor — tiny-n testing never drives direction, only the empirical term)
      nudge = newest general-creator meta note for the spec: positive +3 · negative −3
      score = clamp(base + shift + nudge, 0, 100) → tier via the same consensus bands.
-   Confidence = how many independent PTR signals exist (testing, dummy, writeup/tuning):
-   3 → high, 2 → medium, 1 → low, 0 → prior-only (live baseline, no PTR evidence). */
+   Confidence = independent PTR signals present (testing, dummy, external PTR tier list,
+   writeup/tuning outlook) as a RATIO of the signals OBTAINABLE for that spec and bracket:
+   all → high · more than half → medium · any → low · none → prior-only (live baseline, no
+   PTR evidence). Obtainable is not four for everyone — Dummy Dome is DPS-only and no PTR
+   raid tier list exists — which is the whole reason it is a ratio; see the block at the
+   confidence assignment below for what a raw count got wrong. */
 /* Projection formula version — bump on ANY change to the weights, inputs, or clamps
    below. Stamped into the payload and every history snapshot so the post-launch report
    card grades each frozen forecast against the formula that actually produced it, and
@@ -390,8 +404,15 @@ export function outlookFor(spec, ptrBuilds) {
             "(was N <unit>)" idiom, and bug-fix notes — which moved the outlook ±7
             term for 7 specs.
         Practical consequence for the report card: v1 and v2 projections are NOT one
-        series. Grade them separately, or grade only v2 onward. */
-export const PROJECTION_VERSION = 2;
+        series. Grade them separately, or grade only v2 onward.
+   v3 — 2026-07-31. A new INPUT: external PTR tier lists (era:"ptr" sources) enter the
+        base as a third term at w=0.25, and count toward the confidence signal tally.
+        Prior .55 / empirical .45 / outlook ±7 / meta ±3 are all unchanged — but because
+        the weights renormalize, adding a third term reweights the other two wherever it
+        is present (a spec with all three reads .44/.36/.20 rather than .55/.45). Today
+        that means every M+ projection moves and every raid projection does not, since
+        Icy Veins publishes no PTR raid list. v2 and v3 are NOT one series. */
+export const PROJECTION_VERSION = 3;
 
 /* Rank-map version, stamped beside it. `snapshotStateOf().ranks` feeds movement
    comparison, and its meaning changed in the same commit as PROJECTION_VERSION v2:
@@ -424,7 +445,11 @@ export const RANK_VERSION = 2;
    count rather than the performance metric it advertises), taking the M+ mean from five
    tier-list sources to four and shifting 9 of 40 M+ tiers by one band on its own.
 
-   Bump this ONLY when the tier-list source SET changes, never for upstream data movement.
+   Bump this ONLY when the LIVE tier-list source set changes, never for upstream data
+   movement — and note that adding an era:"ptr" tier list is NOT such a change. Era-gated
+   sources are excluded by consensusFor, so the live mean is composed of exactly the same
+   sources before and after (icyveins-ptr, added 2026-07-31, moved no consensus cell and
+   did not bump this). Only a live source arriving, leaving, or being retyped does.
    Degrade-don't-reject, as with ranks: a cross-version baseline is still chosen and still
    narrates ranks, dummy and projection; only the consensus arrows fall away. Every
    snapshot on disk is rankVersion 2, so baseline selection survives the boundary. */
@@ -449,7 +474,26 @@ function rankPct(spec, bracket, name) {
   if (!m || m.rank == null || !m.of || m.of < 2) return null;
   return (1 - (m.rank - 1) / (m.of - 1)) * 100;
 }
-export function projectionFor(spec, bracket, scales, metaNotes = []) {
+/* External PTR tier-list opinion for one spec+bracket, on the shared 0–100 axis.
+   Mean across every era:"ptr" tier-list source that rates it (one today). Returns null
+   when none does — including the upstream "TBD" case, which is stored as an explicit
+   null rating and must stay ABSENT from the formula rather than scoring 0: "not yet
+   placed" is missing evidence, not a bottom-tier verdict. */
+export function ptrTierRead(spec, bracket, sources, scales) {
+  const parts = [];
+  for (const source of ptrTierSources(sources)) {
+    const tier = spec.ratings?.[bracket]?.[source.id] ?? null;
+    const score = scoreFor(scales, source.scale, tier);
+    if (score !== null) parts.push({ label: source.name, tier, score });
+  }
+  if (!parts.length) return null;
+  return {
+    score: parts.reduce((sum, p) => sum + p.score, 0) / parts.length,
+    tiers: parts.map(p => p.tier).join("/"),
+    label: parts.length === 1 ? parts[0].label : `${parts.length} PTR lists`
+  };
+}
+export function projectionFor(spec, bracket, scales, metaNotes = [], sources = []) {
   const prior = spec.consensus?.[bracket]?.score ?? null;
   const testing = bracket === "raid"
     ? rankPct(spec, "raid", "12.1 PTR raid testing score (normalized)")
@@ -459,7 +503,8 @@ export function projectionFor(spec, bracket, scales, metaNotes = []) {
   const emp = empParts.length
     ? empParts.reduce((s, [v, w]) => s + v * w, 0) / empParts.reduce((s, [, w]) => s + w, 0)
     : null;
-  const baseParts = [[prior, 0.55], [emp, 0.45]].filter(([v]) => v != null);
+  const ptrList = ptrTierRead(spec, bracket, sources, scales);
+  const baseParts = [[prior, 0.55], [emp, 0.45], [ptrList?.score ?? null, 0.25]].filter(([v]) => v != null);
   if (!baseParts.length) return null; // nothing to project from — honest "—"
   const base = baseParts.reduce((s, [v, w]) => s + v * w, 0) / baseParts.reduce((s, [, w]) => s + w, 0);
   const dir = spec.outlook?.direction ?? null;
@@ -489,22 +534,51 @@ export function projectionFor(spec, bracket, scales, metaNotes = []) {
   const nudge = note?.sentiment === "positive" ? 3 : note?.sentiment === "negative" ? -3 : 0;
   const score = Math.round(Math.min(100, Math.max(0, base + shift + nudge)));
   const band = scales.consensus.bands.find(b => score >= b.min);
-  const signals = (testing != null ? 1 : 0) + (dummy != null ? 1 : 0) + (dir != null ? 1 : 0);
-  const confidence = signals >= 3 ? "high" : signals === 2 ? "medium" : signals === 1 ? "low" : "prior-only";
+  const signals = (testing != null ? 1 : 0) + (dummy != null ? 1 : 0) + (dir != null ? 1 : 0)
+    + (ptrList ? 1 : 0);
+  /* Confidence is a ratio against the signal types that COULD exist for this spec+bracket,
+     not a raw count. Two reasons, one new and one long-standing:
+
+     · A raw count breaks the moment a signal type arrives with near-universal coverage.
+       The PTR tier list rates 38 of 40 specs, so counting it moved 39 of 40 M+ specs to
+       "high" (from 18) — everyone shifted up by one, "high" quietly came to mean what
+       "medium" meant, and the tag stopped discriminating between a well-evidenced spec
+       and an ordinary one. Rating against what is obtainable is immune to that.
+     · Dummy Dome is DPS-only by construction and no PTR raid tier list exists, so under a
+       raw count a healer's raid projection could never exceed "medium" no matter how
+       complete its evidence was. That was always a misread: it measured which signals the
+       tracker collects, not how well-supported the forecast is.
+
+     Bands: everything obtainable → high · MORE than half → medium · any → low · none →
+     prior-only. Strictly more than half, not at least: with two obtainable signals a
+     single one is thin evidence and must keep reading "low" — the tag's real job is the
+     warning at the bottom, and an "at least half" band silently promoted every one-signal
+     healer and tank to medium. A DPS spec's raid bracket is unchanged from v2 (3 of 3
+     high, 2 medium, 1 low), which is what every existing snapshot was written under. */
+  const ptrListPossible = ptrTierSources(sources).some(s =>
+    (s.pages ?? []).some(p => p.bracket === bracket && (p.role === spec.role || p.role === "All" || p.role == null)));
+  const available = 2 // PTR testing + tuning outlook: obtainable for every spec and bracket
+    + (spec.role === "DPS" ? 1 : 0) // Dummy Dome: DPS-only
+    + (ptrListPossible ? 1 : 0);    // an era:"ptr" tier list covering this bracket+role
+  const confidence = signals === 0 ? "prior-only"
+    : signals >= available ? "high"
+    : signals > available / 2 ? "medium"
+    : "low";
   return {
     tier: band ? band.tier : null, score, confidence,
     basis: `live baseline ${prior != null ? Math.round(prior) : "—"}`
       + (testing != null ? ` · PTR ${bracket === "raid" ? "raid-testing" : "M+ testing"} pct ${Math.round(testing)}` : "")
       + (dummy != null ? ` · Dummy Dome ${Math.round(dummy)}` : "")
+      + (ptrList ? ` · ${ptrList.label} ${ptrList.tiers} (${Math.round(ptrList.score)})` : "")
       + (dir ? ` · outlook ${dir === "up" ? "+7" : dir === "down" ? "−7" : "0"}` : "")
       + (nudge ? ` · meta read ${nudge > 0 ? "+3" : "−3"} (${note.creator})` : "")
   };
 }
-export function projections(specs, scales, creatorTakes) {
+export function projections(specs, scales, creatorTakes, sources = []) {
   const metaNotes = creatorTakes?.metaNotes ?? [];
   for (const spec of specs) {
-    const raid = projectionFor(spec, "raid", scales, metaNotes);
-    const mplus = projectionFor(spec, "mplus", scales, metaNotes);
+    const raid = projectionFor(spec, "raid", scales, metaNotes, sources);
+    const mplus = projectionFor(spec, "mplus", scales, metaNotes, sources);
     if (raid || mplus) spec.projection = { raid, mplus };
   }
   return specs;
@@ -851,7 +925,9 @@ export function buildPayload({ specs, sources, scales, community, ptrBuilds, cre
     const changes = specBuildChanges(spec, ptrBuilds);
     if (changes.length) spec.buildChanges = changes;
   }
-  projections(decorated, scales, creatorTakes); // after consensus/ranks/dummy/outlook — it consumes all four
+  // after consensus/ranks/dummy/outlook — it consumes all four, plus the era:"ptr" tier
+  // lists it reads straight off spec.ratings via the registry
+  projections(decorated, scales, creatorTakes, sources);
   projectionMovementFor(decorated, scales, baseline); // MUST follow projections() — see its comment
   const latestBuild = ptrBuilds?.builds?.[0]?.date ?? null;
   // notes-feed pages track build posts, not page snapshots — stamp them from the feed
