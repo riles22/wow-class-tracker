@@ -23,8 +23,7 @@ const UNDATED_WRITEUPS = new Set([
   "Death Knight|Unholy", "Demon Hunter|Devourer", "Demon Hunter|Vengeance",
   "Hunter|Beast Mastery", "Hunter|Marksmanship", "Hunter|Survival", "Mage|Arcane", "Mage|Fire",
   "Mage|Frost", "Monk|Mistweaver", "Monk|Windwalker", "Paladin|Retribution", "Priest|Discipline", "Priest|Shadow", "Rogue|Assassination",
-  "Rogue|Outlaw", "Rogue|Subtlety", "Shaman|Enhancement", "Shaman|Restoration",
-  "Warrior|Arms", "Warrior|Fury", "Warrior|Protection"
+  "Rogue|Outlaw", "Rogue|Subtlety", "Shaman|Enhancement", "Warrior|Protection"
 ]);
 const KINDS = new Set(["tier-list", "metrics", "notes-feed", "reference", "community"]);
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
