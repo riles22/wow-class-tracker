@@ -1,7 +1,7 @@
 {
   "date": "2026-07-31",
   "phase": "12.1-ptr",
-  "projectionVersion": 2,
+  "projectionVersion": 3,
   "rankVersion": 2,
   "consensusVersion": 2,
   "specs": {
@@ -34,8 +34,8 @@
         },
         "mplus": {
           "tier": "A",
-          "score": 66,
-          "confidence": "medium"
+          "score": 70,
+          "confidence": "high"
         }
       }
     },
@@ -78,7 +78,7 @@
         },
         "mplus": {
           "tier": "B",
-          "score": 43,
+          "score": 50,
           "confidence": "high"
         }
       }
@@ -121,8 +121,8 @@
           "confidence": "medium"
         },
         "mplus": {
-          "tier": "A",
-          "score": 70,
+          "tier": "A+",
+          "score": 74,
           "confidence": "high"
         }
       }
@@ -161,8 +161,8 @@
           "confidence": "low"
         },
         "mplus": {
-          "tier": "C",
-          "score": 39,
+          "tier": "B",
+          "score": 49,
           "confidence": "medium"
         }
       }
@@ -207,7 +207,7 @@
         },
         "mplus": {
           "tier": "S",
-          "score": 96,
+          "score": 95,
           "confidence": "high"
         }
       }
@@ -287,7 +287,7 @@
         },
         "mplus": {
           "tier": "A",
-          "score": 64,
+          "score": 71,
           "confidence": "high"
         }
       }
@@ -360,8 +360,8 @@
         },
         "mplus": {
           "tier": "B",
-          "score": 52,
-          "confidence": "medium"
+          "score": 54,
+          "confidence": "high"
         }
       }
     },
@@ -395,9 +395,9 @@
           "confidence": "low"
         },
         "mplus": {
-          "tier": "C",
-          "score": 34,
-          "confidence": "medium"
+          "tier": "B",
+          "score": 40,
+          "confidence": "high"
         }
       }
     },
@@ -438,7 +438,7 @@
         "mplus": {
           "tier": "B",
           "score": 44,
-          "confidence": "high"
+          "confidence": "medium"
         }
       }
     },
@@ -482,7 +482,7 @@
         },
         "mplus": {
           "tier": "C",
-          "score": 29,
+          "score": 32,
           "confidence": "high"
         }
       }
@@ -518,8 +518,8 @@
         },
         "mplus": {
           "tier": "B",
-          "score": 43,
-          "confidence": "medium"
+          "score": 48,
+          "confidence": "high"
         }
       }
     },
@@ -558,7 +558,7 @@
         },
         "mplus": {
           "tier": "B",
-          "score": 50,
+          "score": 54,
           "confidence": "medium"
         }
       }
@@ -603,7 +603,7 @@
         },
         "mplus": {
           "tier": "A+",
-          "score": 74,
+          "score": 77,
           "confidence": "high"
         }
       }
@@ -643,7 +643,7 @@
         },
         "mplus": {
           "tier": "B",
-          "score": 49,
+          "score": 52,
           "confidence": "medium"
         }
       }
@@ -687,8 +687,8 @@
           "confidence": "medium"
         },
         "mplus": {
-          "tier": "B",
-          "score": 57,
+          "tier": "A",
+          "score": 66,
           "confidence": "high"
         }
       }
@@ -727,7 +727,7 @@
         },
         "mplus": {
           "tier": "C",
-          "score": 31,
+          "score": 35,
           "confidence": "medium"
         }
       }
@@ -772,7 +772,7 @@
         },
         "mplus": {
           "tier": "B",
-          "score": 50,
+          "score": 51,
           "confidence": "high"
         }
       }
@@ -806,8 +806,8 @@
         },
         "mplus": {
           "tier": "B",
-          "score": 47,
-          "confidence": "medium"
+          "score": 46,
+          "confidence": "high"
         }
       }
     },
@@ -843,7 +843,7 @@
         "mplus": {
           "tier": "S",
           "score": 100,
-          "confidence": "medium"
+          "confidence": "high"
         }
       }
     },
@@ -886,7 +886,7 @@
         },
         "mplus": {
           "tier": "A",
-          "score": 63,
+          "score": 62,
           "confidence": "high"
         }
       }
@@ -922,8 +922,8 @@
         },
         "mplus": {
           "tier": "A+",
-          "score": 74,
-          "confidence": "medium"
+          "score": 81,
+          "confidence": "high"
         }
       }
     },
@@ -956,8 +956,8 @@
         },
         "mplus": {
           "tier": "A",
-          "score": 68,
-          "confidence": "medium"
+          "score": 71,
+          "confidence": "high"
         }
       }
     },
@@ -996,8 +996,8 @@
           "confidence": "low"
         },
         "mplus": {
-          "tier": "B",
-          "score": 55,
+          "tier": "A",
+          "score": 60,
           "confidence": "medium"
         }
       }
@@ -1033,8 +1033,8 @@
         },
         "mplus": {
           "tier": "B",
-          "score": 40,
-          "confidence": "medium"
+          "score": 44,
+          "confidence": "high"
         }
       }
     },
@@ -1070,7 +1070,7 @@
         "mplus": {
           "tier": "B",
           "score": 55,
-          "confidence": "medium"
+          "confidence": "high"
         }
       }
     },
@@ -1109,7 +1109,7 @@
         },
         "mplus": {
           "tier": "A",
-          "score": 64,
+          "score": 67,
           "confidence": "medium"
         }
       }
@@ -1152,7 +1152,7 @@
         },
         "mplus": {
           "tier": "B",
-          "score": 47,
+          "score": 50,
           "confidence": "high"
         }
       }
@@ -1195,7 +1195,7 @@
         },
         "mplus": {
           "tier": "A",
-          "score": 62,
+          "score": 64,
           "confidence": "high"
         }
       }
@@ -1238,7 +1238,7 @@
         },
         "mplus": {
           "tier": "C",
-          "score": 28,
+          "score": 26,
           "confidence": "high"
         }
       }
@@ -1282,8 +1282,8 @@
           "confidence": "medium"
         },
         "mplus": {
-          "tier": "A",
-          "score": 73,
+          "tier": "A+",
+          "score": 74,
           "confidence": "high"
         }
       }
@@ -1323,7 +1323,7 @@
         },
         "mplus": {
           "tier": "B",
-          "score": 49,
+          "score": 52,
           "confidence": "medium"
         }
       }
@@ -1359,8 +1359,8 @@
         },
         "mplus": {
           "tier": "A+",
-          "score": 75,
-          "confidence": "medium"
+          "score": 81,
+          "confidence": "high"
         }
       }
     },
@@ -1402,7 +1402,7 @@
         },
         "mplus": {
           "tier": "B",
-          "score": 43,
+          "score": 47,
           "confidence": "high"
         }
       }
@@ -1446,7 +1446,7 @@
         },
         "mplus": {
           "tier": "A",
-          "score": 59,
+          "score": 60,
           "confidence": "high"
         }
       }
@@ -1490,7 +1490,7 @@
         },
         "mplus": {
           "tier": "B",
-          "score": 46,
+          "score": 50,
           "confidence": "high"
         }
       }
@@ -1536,7 +1536,7 @@
         },
         "mplus": {
           "tier": "A+",
-          "score": 83,
+          "score": 87,
           "confidence": "high"
         }
       }
@@ -1574,8 +1574,8 @@
           "confidence": "low"
         },
         "mplus": {
-          "tier": "C",
-          "score": 38,
+          "tier": "B",
+          "score": 42,
           "confidence": "medium"
         }
       }
@@ -1608,9 +1608,9 @@
           "confidence": "low"
         },
         "mplus": {
-          "tier": "C",
-          "score": 39,
-          "confidence": "medium"
+          "tier": "B",
+          "score": 44,
+          "confidence": "high"
         }
       }
     }

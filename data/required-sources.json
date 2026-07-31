@@ -26,6 +26,21 @@
       }
     },
     {
+      "key": "icyveins-ptr",
+      "label": "Icy Veins 12.1 PTR tier lists (M+, all roles)",
+      "comment": "Era-gated 12.1 opinion: it never feeds the live consensus, so a miss cannot move a published tier — but it IS a projection input, so a silent miss would quietly reweight every M+ forecast. maxAgeDays 4 matches its siblings and measures OUR fetch cadence, not the page's. Upstream rebuilds only weekly (Sundays 14:00 CEST), so page.published legitimately trails page.snapshot by up to 7 days; the pages probe reads snapshot, so content staleness UPSTREAM is not gated here (see SOURCES.md). rows.min 24 is ~63% of the 38 rated rows at 2026-07-31, matching the floors used elsewhere; the 2 upstream TBDs are stored as explicit nulls and do not count.",
+      "maxAgeDays": 4,
+      "date": {
+        "type": "pages",
+        "sourceId": "icyveins-ptr"
+      },
+      "rows": {
+        "type": "ratings",
+        "sourceId": "icyveins-ptr",
+        "min": 24
+      }
+    },
+    {
       "key": "method",
       "label": "Method tier lists (raid + M+)",
       "maxAgeDays": 4,

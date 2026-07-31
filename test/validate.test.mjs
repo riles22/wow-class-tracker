@@ -370,3 +370,48 @@ test("a new writeup must carry ptr.asOf; the pre-2026-07-26 ones are grandfather
   assert.match(src, /UNDATED_WRITEUPS\.has\(`\$\{spec\.class\}\|\$\{spec\.spec\}`\)/,
     "the grandfather lookup must use the pipe key the list is written in");
 });
+
+test("validateData rejects an unknown era rather than defaulting it to live", async () => {
+  const data = await loadData(ROOT);
+  const broken = structuredClone(data);
+  // A typo here is the one mistake the era lane cannot survive quietly: defaulting it to
+  // "live" would average a 12.1 tier list into the 12.0.7 consensus with no visible sign.
+  broken.sources.find(s => s.kind === "tier-list").era = "PTR";
+  const errors = validateData(broken);
+  assert.ok(errors.some(e => e.includes('unknown era "PTR"')), errors.join("\n"));
+});
+
+test("validateData accepts the two legal era values", async () => {
+  const data = await loadData(ROOT);
+  for (const era of ["live", "ptr"]) {
+    const copy = structuredClone(data);
+    copy.sources.find(s => s.id === "method").era = era;
+    assert.deepEqual(validateData(copy).filter(e => e.includes("era")), []);
+  }
+});
+
+test("validateData rejects a registry whose tier lists are ALL era-gated", async () => {
+  const data = await loadData(ROOT);
+  const broken = structuredClone(data);
+  // Consensus averages live sources only, so a registry of nothing but PTR lists would
+  // render 80 empty consensus cells under toggles that still promise a consensus.
+  for (const s of broken.sources) if (s.kind === "tier-list") s.era = "ptr";
+  const errors = validateData(broken);
+  assert.ok(errors.some(e => e.includes("no LIVE-era tier-list sources")), errors.join("\n"));
+});
+
+test("the PTR tier list is registered as era-gated and M+ only", async () => {
+  const { sources, specs } = await loadData(ROOT);
+  const ptr = sources.find(s => s.id === "icyveins-ptr");
+  assert.ok(ptr, "icyveins-ptr is in the registry");
+  assert.equal(ptr.era, "ptr");
+  assert.equal(ptr.kind, "tier-list");
+  // Icy Veins publishes no PTR raid list; claiming one would invent a source.
+  assert.deepEqual([...new Set(ptr.pages.map(p => p.bracket))], ["mplus"]);
+  assert.equal(specs.filter(s => s.ratings?.raid?.["icyveins-ptr"] !== undefined).length, 0);
+  // Full roster coverage, with the two upstream TBDs stored as explicit nulls.
+  const rated = specs.filter(s => s.ratings?.mplus?.["icyveins-ptr"] != null).length;
+  const tbd = specs.filter(s => s.ratings?.mplus?.["icyveins-ptr"] === null).length;
+  assert.equal(rated + tbd, 40);
+  assert.equal(tbd, 2);
+});

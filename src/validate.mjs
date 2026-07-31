@@ -4,6 +4,7 @@
 import { readFile, readdir } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
+import { isLiveEra } from "./normalize.mjs";
 
 const ROLES = new Set(["DPS", "Healer", "Tank"]);
 const BRACKETS = new Set(["raid", "mplus"]);
@@ -127,6 +128,7 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
 
   // --- sources ---
   const tierSources = new Map();
+  const liveTierSources = new Set();
   const allSources = new Set();
   for (const source of sources) {
     if (!source.id || !source.name) errors.push(`sources.json: source missing id or name (${JSON.stringify(source.id)})`);
@@ -147,14 +149,28 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
         errors.push(`sources.json: source "${source.id}" page published ${page.published} is newer than its snapshot ${page.snapshot} — a page cannot publish after it was fetched`);
       }
     }
+    // `era` marks a source whose ratings describe a patch we are not running. Only "ptr"
+    // is gated today; the default (absent) is "live". A typo'd value must fail loudly
+    // rather than default to live — a PTR list silently averaged into the 12.0.7
+    // consensus is precisely the dishonesty the era lane exists to prevent.
+    if (source.era !== undefined && source.era !== "live" && source.era !== "ptr") {
+      errors.push(`sources.json: source "${source.id}" has unknown era "${source.era}" (expected "live" or "ptr")`);
+    }
     if (source.kind === "tier-list") {
       if (!scales.scales?.[source.scale]) {
         errors.push(`sources.json: source "${source.id}" references unknown scale "${source.scale}"`);
       }
       tierSources.set(source.id, source);
+      if (isLiveEra(source)) liveTierSources.add(source.id);
     }
   }
   if (tierSources.size === 0) errors.push("sources.json: no tier-list sources defined");
+  // The consensus is composed of LIVE-era tier lists only (consensusFor). A registry
+  // holding nothing but PTR lists would build a page whose every consensus cell is "—"
+  // while the toggles still promise one, so this is an error, not a quiet empty column.
+  if (tierSources.size > 0 && liveTierSources.size === 0) {
+    errors.push("sources.json: no LIVE-era tier-list sources defined — the consensus would have nothing to average");
+  }
 
   // --- specs ---
   const seen = new Set();
