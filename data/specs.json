@@ -642,7 +642,21 @@
         "wowmeta": "C"
       }
     },
-    "ptr": null,
+    "ptr": {
+      "verdict": "Positive",
+      "theme": "Essence Break bought back into the rotation",
+      "summary": "The 7/21 pass is a net buff the author reads as decisive for Essence Break: a flat 5% to all damage, a 35% buff to Essence Break's initial hit, and a 4-set that adds another 35% on top — enough, in his words, that the talent will now simply be played. The paired Immolation Aura nerf and Fury-generation shuffle are framed as intent, not collateral: Blizzard reducing how much of Havoc's damage and resource income hangs off one button.",
+      "changes": [
+        "All damage +5%; Essence Break initial damage +35%.",
+        "The Venomous Abyss 4-set now raises Essence Break's initial damage by 35% (was 25%), stacking with the baseline buff.",
+        "Immolation Aura damage -8%, with Burning Hatred's Fury per tick cut to 30 (was 40) — the spec is deliberately made less reliant on Immolation Aura for both damage and Fury.",
+        "Demon Blades Fury generation raised to 10-16 (was 8-15), partly backfilling the Burning Hatred loss."
+      ],
+      "set4": "The 4-set's Essence Break bonus rose 25% → 35% in the same build, compounding the baseline Essence Break buff rather than substituting for it.",
+      "watch": "The author had not yet simmed the changes when he posted — the read is on the tuning numbers, not on output. How much of the Immolation Aura Fury loss the Demon Blades increase actually replaces is the open question.",
+      "sourceLabel": "VooDooSaurus (The Fel Hammer) — Discord",
+      "asOf": "2026-07-21"
+    },
     "metrics": [
       {
         "source": "archon",
@@ -871,11 +885,12 @@
         "Impending Apocalypse star ramp 30% → 20% (a 5-star window's final star falls from +120% to +80%); Void Meta's Void Ray bonus 67% → 40%; Consume +60%.",
         "The rebalance hits Annihilator harder than Void-Scarred — likely forcing a hero-talent swap — while Void-Scarred's no-synergy caster/melee split (and Devourer's Bite, which 'needs to go') is left unaddressed.",
         "Demon Hunters can now equip daggers — fun access to the new cantrip daggers, otherwise uneventful.",
-        "PTR build 68569 (2026-07-08): all ability damage increased by 10% (an underperformance buff), while sibling spec Havoc took −5%."
+        "PTR build 68569 (2026-07-08): all ability damage increased by 10% (an underperformance buff), while sibling spec Havoc took −5%.",
+        "Follow-up tuning (7/21, revised for the 7/23 mini-patch) nets to almost nothing in a Fel Hammer theorycrafter's read: Collapsing Star +12% against Otherworldly Focus 35% → 30% leaves a small Void-Scarred Caster buff and only a slight Annihilator buff — far less than Annihilator needs to compete with Void-Scarred — while Eradicate -6% is a 6% cut to the whole Reap/Cull/Eradicate suite."
       ],
       "set2": "Soulburst: a 4+ soul Reap has a 20% chance (deck-of-cards system, so low variance) to make the next Consume instant and explode in AoE — only 1-2% overall, plus minor instant-cast QoL.",
       "set4": "Where the set shines: Soulburst generates 8 Soul Fragments plus Moment of Craving and Reap gains 20% damage — one of the kit's most efficient soul generators, \"rotationally transformative,\" and a bigger win for Void-Scarred than Annihilator.",
-      "watch": "Eradicate currently can't proc Soulburst — a significant AoE/cleave proc loss the author calls a bug that \"needs to be fixed ASAP\" — and Void-Scarred's caster/melee dysfunction went untouched. From today's S/A-tier baseline the author still expects a \"great spot\" at 12.1 launch, provided that fix lands.",
+      "watch": "Eradicate currently can't proc Soulburst — a significant AoE/cleave proc loss the author calls a bug that \"needs to be fixed ASAP\" — and Void-Scarred's caster/melee dysfunction went untouched. From today's S/A-tier baseline the author still expects a \"great spot\" at 12.1 launch, provided that fix lands. As of the 7/23 revision the Annihilator/Void-Scarred gap had not closed: the same tuning that slightly helped Annihilator helped Void-Scarred Caster more.",
       "source": "https://www.wowhead.com/news/an-amazing-new-tier-set-bonus-devourer-dh-tier-set-and-class-changes-review-382015"
     },
     "metrics": [
@@ -1255,18 +1270,19 @@
     },
     "ptr": {
       "verdict": "Mixed",
-      "theme": "Touch the Cosmos nerf",
-      "summary": "The pass centers on reining in Touch the Cosmos, with Lunar Calling dropping from 120% to 100%. The tier set (Bark of the Enigmatic Dreamwatcher) reinforces the existing playstyle rather than reshaping it.",
+      "theme": "Tuning churn, gameplay untouched",
+      "summary": "A Dreamgrove theorycrafter's running 12.1 impressions post, revised through five PTR builds. The through-line is that almost nothing about how the spec plays changes — the pass is a series of tuning moves that trade against each other. The 4-set is called out as numerically weak and probably needing a buff; Elune's Chosen and Keeper have been nerfed and buffed in turn to the point that the author no longer has a confident pick between them.",
       "changes": [
-        "Lunar Calling 120% → 100%.",
-        "Touch the Cosmos proc value pulled back — the central lever.",
-        "A tuning pass, not a redesign — how the spec plays is unchanged.",
-        "PTR build 68569 (2026-07-08): across-the-board buff — all damage +3.5%, Moonfire/Sunfire/Shooting Stars/Wrath +10%, Starfire +20%, Umbral Intensity 12%, plus Keeper of the Grove Starfall buffs (dev intent: bring DoT/builder damage up to match the strong Starsurge/Starfall spenders)."
+        "The 4-set is on the weaker side numerically and probably needs a buff; the rest of the pass is a handful of changes that don't really change your gameplay.",
+        "Elune's Chosen was nerfed hard on Wrath casts (6/30), and Eclipse has been nerfed on single target twice — still ahead of Keeper, though Keeper was buffed to even it out (7/21).",
+        "Treants' damage buff was walked back; passive damage effects were then buffed heavily on 7/8, to the point the author flagged Starfall as possibly needing a nerf.",
+        "Orbit Breaker's bug fix removed its boss-combat reset, which hurts Keeper — the author's read is that you now just play Firmament if you path there at all.",
+        "Stellar Amplification applying to only one target kills the target-swapping tech, but frees up middle-tree points for some builds."
       ],
-      "set2": "Feeds the current Eclipse / Astral flow.",
-      "set4": "Reinforces the existing rotation without adding a new decision.",
-      "watch": "Net power shift is the whole story here; nothing changes about the moment-to-moment. Lukewarm.",
-      "sourceLabel": "Wowhead 12.1 class preview"
+      "set4": "Called out as numerically weak and probably in need of a buff — the author's clearest single complaint about the pass.",
+      "watch": "The author opens by warning, in capitals, that PTR tuning numbers cannot support meta predictions. He also discounts his own strongest data point: the spec did a lot of damage in raid testing and he expects nerfs for it, while noting Moonkin always looks good in uncoordinated groups, so raid testing flatters it relative to live. As of 7/21 it had dodged those nerfs again.",
+      "sourceLabel": "remove touch the cosmos (Dreamgrove) — Discord",
+      "asOf": "2026-07-21"
     },
     "metrics": [
       {
@@ -1991,22 +2007,20 @@
       }
     },
     "ptr": {
-      "verdict": "Mixed",
-      "theme": "Double-time capped, play-it-safe tier set",
-      "summary": "The Chronowarden Double-time rework caps a critical Ebon Might's stat bonus at 15 seconds and makes it a trackable buff, fixing the spec's worst variance and tracking problems, while Apex Duplicate's Upheavals lose their knockup — \"a strict improvement\" for raids. The tier set is effective but uninspiring, and barring tuning Augmentation looks largely unchanged going into Season 2.",
+      "verdict": "Negative",
+      "theme": "Wingleader gutted, M+ identity with it",
+      "summary": "Two Wyrmrest Temple reads a week apart land in the same place. With Wingleader's scaling gone, Scalecommander sits 7.7% behind Chronowarden in all content — \"just dead\", after being 10-15% ahead in Mythic+ — and Augmentation's AoE has no replacement for it. The author's expectation is that the spec is no longer M+ dominant or invited to groups, while raid is likely okay but not exceptional.",
       "changes": [
-        "Double-time capped: Ebon Might crit stats now last 15s (Mastery-scaled) as a trackable buff — no more single dice roll deciding a chunk of your damage.",
-        "Time Skip can still chain two crit Ebon Mights for up to 30s of Double-time — enough to cover a full opener burst window.",
-        "Apex Duplicate's Upheavals no longer knock enemies airborne — a strict raid improvement where add positioning matters, and fewer missed dungeon interrupts.",
-        "Healing abilities up 25% across the board (Living Flame, Verdant Embrace, Emerald Blossom, Panacea, Defy Fate, Molten Blood), in line with other DPS specs.",
-        "PTR build 68569 (2026-07-08): Scalecommander's Wingleader redesigned — per-target Deep Breath/Breath of Eons CDR replaces the old spread-Bombardment mechanic (Command Squadron Pyre +40%, Maneuverability DoT +40% to compensate); Chronowarden's Double-time now extends rather than overwrites on reapply. Devs say they'll keep watching Augmentation's performance.",
-        "Wingleader reaction (Wowhead Aug writer Jereico, 2026-07-09, news=382133): the redesign cuts ~70% of Scalecommander's average Breath of Eons CDR in AoE (up to 80% single-target); the Command Squadron/Maneuverability +40% buffs 'most certainly do not compensate'. He is not immediately worried about the damage (expects considerable numerical tuning before Season 2) but flags the gameplay-feel cost — Bombardments loses its engine role and Scalecommander risks playing nearly identically to Chronowarden.",
-        "PTR build (2026-07-21): all ability and pet damage +3% and Scalecommander Wingleader partly restored (Breath of Eons cooldown now -1.5s per target struck, was -1s); the Midnight Season 1 2-set no longer increases the duration Eruption extends Ebon Might."
+        "Scalecommander is 7.7% behind Chronowarden in all content, having previously been ~10-15% ahead in Mythic+ while Chronowarden was considered unplayable there.",
+        "Augmentation's AoE cannot leverage the old Wingleader scaling, taking the spec out of M+ dominance and, in the author's read, out of invites.",
+        "The new set is built around Fate Mirror, so with weaker personal damage and fewer duplicates the spec leans much harder on ally performance.",
+        "Chronowarden's Double-time change is a net ~1% loss; Eons-first openers are roughly equal.",
+        "Every hero-talent and class build is the same across all content — Rumbling Earth, Mighty Inferno, Threads, Plot the Future — because nothing else is tuned to compete."
       ],
-      "set2": "Upheaval CD −10s — straightforward, directly benefits both Chronowarden and Scalecommander.",
-      "set4": "Upheaval magnifies Fate Mirror for 8s (echo 15% → 45%) — a bigger number on a ~3%-of-total-damage passive with no gameplay hook; the author doubts it changes how anyone plays.",
-      "watch": "The S1 set is strong enough that a 2+2 setup \"is actually looking quite attractive\" — expect the old set to be tuned down at season start. From its raid-S/A, M+-staple baseline the article sees Aug \"largely unchanged\" into Season 2, with rough edges (Ebon Might phasing, dead Mastery/Vers) still unaddressed. Post-68569: watch Scalecommander tuning — Jereico calls the Wingleader nerf one of the most consequential Aug changes of Midnight and expects further adjustments before S2.",
-      "source": "https://www.wowhead.com/news/addressing-the-power-of-double-time-augmentation-evoker-class-changes-and-tier-381986"
+      "set4": "The new Chronowarden 4-set is quite good — about 0.5% ahead of 2+2, and clearly ahead once the ilvl difference is counted. On Scalecommander the author still runs 2pc+2pc.",
+      "watch": "Raid is the surviving case: possibly picked up in a race for Evoker buffs like Time Spiral, though Preservation is preferred as it stands. Earlier (7/8) another Wyrmrest voice called Wingleader \"found dead in the gutter\" and judged the Command Squadron and Melt Armor buffs nowhere near compensating — with the caveat that there was still time before release for another iteration.",
+      "sourceLabel": "\"Aug is Saved\" (Wyrmrest Temple) — Discord",
+      "asOf": "2026-07-18"
     },
     "metrics": [
       {
@@ -2208,18 +2222,19 @@
       }
     },
     "ptr": {
-      "verdict": "Positive",
-      "theme": "Apex redesign → Unbound Flame",
-      "summary": "The Apex talent is redesigned into Unbound Flame (a sub-5% damage shift), leaving the rotation largely intact. The tier set is a genuine success, buffing Shattering Star passively.",
+      "verdict": "Mixed",
+      "theme": "Good redesign, thin tuning",
+      "summary": "A Wyrmrest Temple theorycrafter's state-of-the-PTR post separates the design from the numbers. Unbound Flame is called a massive improvement over Risen Fury that plays well for both hero trees and directly buffs the apex, and Eternity Surge now hits like a truck — but overall tuning is judged a bit low, and both hero trees carry unresolved problems.",
       "changes": [
-        "Apex reworked into Unbound Flame — under 5% of damage, low disruption.",
-        "Core rotation stays familiar; this is a refinement, not an overhaul.",
-        "PTR build 68569 (2026-07-08): Scalecommander's Wingleader redesigned — per-target Deep Breath/Breath of Eons CDR replaces the old spread-Bombardment mechanic, with Command Squadron's Pyre +40% and Maneuverability's DoT +40% as area-damage compensation."
+        "Unbound Flame is a massive improvement over Risen Fury, works for both hero trees, and is a direct buff to the apex.",
+        "Sweep is relegated to a pure AoE talent.",
+        "Eternity Surge hits like a truck, but Scintillations introduce large damage variance on short fights.",
+        "Flameshaper plays much as it did in 12.0 — Disintegrate is used up to 3 targets with Fire Breath upranked to match — but Pyre and the other red spells besides Fire Breath remain underwhelming.",
+        "Scalecommander also plays much as before, with Pyre pushed up to 5-7 targets, but the talent restrictions leave it with a severe lack of essence and essence burst."
       ],
-      "set2": "Clean, passive value.",
-      "set4": "Buffs Shattering Star without adding button bloat — one of the better-designed sets.",
-      "watch": "The set is good, but a raid-B / M+-C baseline means tuning still has to do the heavy lifting; a well-designed set alone won't move it.",
-      "sourceLabel": "Wowhead 12.1 class preview"
+      "watch": "Overall tuning is a bit low in the author's read, and the Scintillations variance is a short-fight problem specifically — worth separating from steady-state throughput when the numbers land.",
+      "sourceLabel": "Baumritter (Wyrmrest Temple) — Discord",
+      "asOf": "2026-07-17"
     },
     "metrics": [
       {
@@ -2463,7 +2478,8 @@
       "set2": "Strong on its own — immediately felt.",
       "set4": "Complements the Dream Breath change and the Flameshaper direction.",
       "watch": "Baseline is raid-A / M+-B; the changes clearly help the raid profile most. The best-received set + kit pass of the tracked healers.",
-      "sourceLabel": "Wowhead 12.1 class preview"
+      "source": "https://www.wowhead.com/news/a-new-specialty-for-dream-breath-preservation-evoker-class-changes-and-tier-set-382017",
+      "asOf": "2026-06-27"
     },
     "metrics": [
       {
@@ -3104,11 +3120,12 @@
       "changes": [
         "Primal Surge moved up from the capstone position.",
         "New Razor Edge node — reads like a 2-point tax rather than a real choice.",
-        "Kit changes don't add interactivity."
+        "Kit changes don't add interactivity.",
+        "The 7/23 bug fixes shift the hero-tree balance in a Trueshot Lodge read: Mastery: Spirit Bond no longer double-dips on some Pack Leader summons, cutting Boar damage 50-60% for a ~3.5-4% Pack Leader loss across the board — enough, in the author's view, to put Pack Leader convincingly behind Sentinel in all content."
       ],
       "set2": "Passive throughput, no gameplay hook. (Reviews the pre-07-14 design — the 07-14 build reworked both bonuses around Mongoose Fury and Boomstick.)",
       "set4": "Also passive — misses all of Blizzard's own goals for the set (no rotational change, no new decision). (Reviews the pre-07-14 design.)",
-      "watch": "Baseline is strong (raid-S), so this won't tank the spec — but the set is a wasted opportunity to make it more engaging.",
+      "watch": "Baseline is strong (raid-S), so this won't tank the spec — but the set is a wasted opportunity to make it more engaging. Two fixes cut the other way for Sentinel: Raptor Swipe can no longer apply Sentinel's Mark to untargeted units — which had been quietly helping on 10 of 11 Season-1 raid encounters — while the Outland Venom fix may make that talent viable for Sentinel, though the author measures it at 2% crit damage per stack rather than the advertised 4%.",
       "sourceLabel": "Wowhead 12.1 class preview"
     },
     "metrics": [

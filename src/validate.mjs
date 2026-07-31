@@ -21,7 +21,6 @@ const VERDICTS = new Set(["Positive", "Mixed", "Negative"]);
    to stop. */
 const UNDATED_WRITEUPS = new Set([
   "Death Knight|Blood", "Death Knight|Unholy", "Demon Hunter|Devourer", "Demon Hunter|Vengeance",
-  "Druid|Balance", "Evoker|Augmentation", "Evoker|Devastation", "Evoker|Preservation",
   "Hunter|Beast Mastery", "Hunter|Marksmanship", "Hunter|Survival", "Mage|Arcane", "Mage|Fire",
   "Mage|Frost", "Monk|Mistweaver", "Monk|Windwalker", "Paladin|Holy", "Paladin|Protection",
   "Paladin|Retribution", "Priest|Discipline", "Priest|Shadow", "Rogue|Assassination",
@@ -56,7 +55,10 @@ const CREATOR_HOSTS = new Set([...WRITEUP_HOSTS, "twitch.tv", "www.twitch.tv"]);
    green; a new legitimate community site fails the run red and is added here as a reviewed
    edit, exactly like every other allowlist in this file. */
 const SITE_HOSTS = new Set([
-  "docs.google.com", "github.com", "hackmd.io", "spiritbloom.pro",
+  // azortharion.com added 2026-07-31: the Hunter sims site, requested by the owner while
+  // pasting Trueshot Lodge content. Azortharion is already a registered whole-class Hunter
+  // creator (community.json) and his HackMD is already a site here.
+  "azortharion.com", "docs.google.com", "github.com", "hackmd.io", "spiritbloom.pro",
   "warcraftpriests.github.io", "wingsisup.com", "www.dreamgrove.gg", "www.peakofserenity.com"
 ]);
 const WOWHEAD_HOSTS = new Set(["wowhead.com", "www.wowhead.com"]);
