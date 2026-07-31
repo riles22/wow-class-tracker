@@ -4,6 +4,38 @@ Keep the newest ~20 entries; prune older ones when appending. Machine state the 
 detectors rely on (parse counts, seen video IDs) must stay in the NEWEST entries or a
 dedicated section — narrative prose older than that is prunable memory.
 
+- 2026-07-31 (nightly CI, ~22:41Z — Opus 5; single-shot) · **All 25 unique transcribable
+  feeds polled live — 25/25 HTTP 200 on the first attempt, 0 retries, 0 backoff.** The
+  deterministic transcript step ran against an **EMPTY queue** (summary.json verdict `ok`,
+  requested 0, fetched 0) because the 20:45Z local run had already drained it — so there
+  was nothing to distil, and the agent fetched no transcript from YouTube or any API. ·
+  **34 videos published since 2026-07-30** across all feeds; every one but a single video
+  was already in the seen-set (creator-takes deep links + `pending-transcripts` `videos[]`
+  and `skipped[]` + this log's per-run seen sections). · **QUEUED 1 genuinely new in-scope
+  video: Kalamazi `Hn9upmp8ywc` (07-31, "BIG Warlock Buffs Are Here!")** — inside his
+  class-wide Warlock scope and plainly about build #18's Warlock pass (Haunt 12→16%, Shadow
+  Bolt +45%, Demonbolt +55%, Soul Fire +45%, Havoc 60→50%). His `community.json` `latest`
+  was **deliberately NOT rewritten** — summarising a video whose transcript has not been
+  read would be an unsourced claim; it gets refreshed when the take lands. · **TRIAGED OUT
+  by title filter** (streams / PvP / systems-and-Classic+ news / restreams — the established
+  pattern): YoDaTV `4TADJ-f8jec` + `vHv9Ixzoquc`, Tettles `c0HjG3hASUQ`, Dalaran Gaming
+  `FIEboW-px8k` + `ItSboOGdXOY`, AutomaticJak `svrjfd3_ebk`, Supatease `M-QRkzkQ-X0` +
+  `XnhSoy695cg`, Critcake `qkqwSJtmD88` + `AAm0W2V4xLE`, Kalamazi `UnoZnAX_Alo`. · Queue
+  **0 → 1**, `skipped[]` unchanged at 5. **No creator opinion touched any rating.** ·
+  ⚠️ **FOR A HUMAN — seen-set fragility, quantified this run:** deriving the seen-set by
+  regex over this log's prose left **~180 pre-July videos** across the 25 feeds looking
+  "new". They are not — they sat in the RSS windows of every run since 07-14 and were
+  triaged by entries that have since been pruned. Treating them as seen is the right call
+  today, but the durable fix is a **persisted seen-set file** (the same reasoning that
+  produced `skipped[]`), not more prose. Until then, a run that trusts the regex will keep
+  re-surfacing months-old VODs.
+
+## Seen/triaged this run (07-31 nightly, ~22:41Z — add to seen-set)
+Queued: Hn9upmp8ywc (Kalamazi). Triaged-skipped (no transcript, title filter): 4TADJ-f8jec,
+vHv9Ixzoquc (YoDaTV), c0HjG3hASUQ (Tettles), FIEboW-px8k, ItSboOGdXOY (Dalaran Gaming),
+svrjfd3_ebk (AutomaticJak), M-QRkzkQ-X0, XnhSoy695cg (Supatease), qkqwSJtmD88, AAm0W2V4xLE
+(Critcake), UnoZnAX_Alo (Kalamazi).
+
 - 2026-07-31 (scheduled LOCAL run, ~20:45Z — Opus 5) · yt-dlp 2026.07.04 (the
   requirements.txt pin; not touched). **All 25 unique transcribable feeds returned 200 on
   the first attempt, 0 retries.** Residential IP, so transcripts fetched directly — 3

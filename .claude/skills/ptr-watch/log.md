@@ -4,6 +4,37 @@ Keep the newest ~20 entries; prune older ones when appending. Machine state the 
 detectors rely on (parse counts, seen video IDs) must stay in the NEWEST entries or a
 dedicated section — narrative prose older than that is prunable memory.
 
+- 2026-07-31 (nightly CI, ~22:41Z — Opus 5; single-shot) · builds found: **0 new.** Thread
+  Discourse `.json` fetched live: `highest_post_number` still **18**, newest post still
+  Linxy 2026-07-31 — i.e. the build the 20:45Z local run logged 2h earlier. ptr-builds.json
+  untouched, tier-set upkeep gate quiet (npm test green). · Wowhead news RSS (40 items, back
+  to 07-25) polled live. **Three 07-31 headlines were OPENED and READ rather than judged by
+  title** — the shape that has burned earlier runs: `news=382322` **is** build #18 (already
+  logged); `news=382321` "Patch 12.1 PTR Hotfixes — Freightrunners Nerfed and Small Class
+  Tuning" is a **PTR hotfix** report (trinket crit scaling 1020→689 at Myth 6/6, plus one
+  Evoker and one Shaman line) with **no corresponding forum post** — hotfixes are not
+  builds, so no feed entry is due; `news=382325` "Season 2 Mythic+ Dungeon Tuning Notes" is
+  creature/dungeon tuning with **zero spec and zero set content** (Ruby Life Pools routing,
+  Sethraliss/Kings' Rest/Murder Row/Blinding Vale/Voidscar numbers), the same shape as the
+  07-28 dungeon-tuning post that prior runs also did not log. **Gotcha worth keeping:** the
+  bare `wowhead.com/news=<id>` form is CloudFront-403'd from the runner; the RSS `<link>`
+  slug form works, but **only with `curl -L`** (it 301s to a `…-<id>` canonical URL). ·
+  **Writeups:** no new per-spec 12.1 review article in the window; the two that exist
+  (news=382300 Resto Shaman 07-29, news=382219 Fury Warrior 07-25) are already distilled
+  with `source` + `asOf`. 9 specs still have no writeup and still have no source article to
+  distil. ⚠️ **FOR A HUMAN:** Fury Warrior's `ptr.asOf` reads **2026-07-31** while its own
+  `sourceLabel` dates the Archimtiros review to **2026-07-25** — under the asOf rule that
+  should be the source's publication date. Flagged, not touched: fixing it is a
+  re-distillation decision, not an unsourced edit. · **WCL zones are evidence-only here**
+  (no credentials on the runner): evidence verdict `rdps-broken`, so zone-54 (PTR raid),
+  zone-52 (Dummy Dome) and zone-56 (PTR M+) rDPS state is **unchanged**, and zone-57
+  (Tidebound Grotto) could not be probed at all — the standing 07-28 finding holds (WCL has
+  not aggregated statistics for that zone; the raid opens Aug 18). The three deterministic
+  raw-DPS series DID land pre-agent (103 / 27 / 27 rows) and were not touched. · **NO SEASON
+  FLIP** — 12.1 launches Aug 11, Season 2 Aug 18; every live source still self-identifies
+  Midnight S1 / 12.0.7. **STANDING OWNER REMINDER: `SNAPSHOT_PHASE` in render.mjs needs its
+  one-shot flip around 2026-08-18.** · npm test 176 (164/12/0), build OK, snapshot written.
+
 - 2026-07-31 (scheduled LOCAL run, ~20:45Z — Opus 5) · builds found: **1 NEW — forum post
   #18, Linxy 2026-07-31T18:49:03Z, "Week of July 31st — Class Tuning & Tier Sets".** It
   landed ~6h AFTER the nightly's forum check (12:51Z, which correctly recorded

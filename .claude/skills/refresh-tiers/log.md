@@ -2,6 +2,37 @@
 
 Keep the newest ~20 entries; prune older ones when appending.
 
+- 2026-07-31 (nightly CI, ~22:41Z — Opus 5; single-shot) · **All 5 tier-list sources fetched
+  live, 0 tier moves anywhere.** Transports, recorded per the standing rule: **icyveins** 6
+  pages + **icyveins-ptr** 3 pages by direct curl with a browser UA (200, 212–371 KB);
+  **method** 2 pages by direct curl; **wowhead** 6 pages by direct curl with the FULL browser
+  header set; **archon** 6 aggregate + 51 encounter pages by direct curl → `__NEXT_DATA__`.
+  No proxy was used anywhere this run. · **Page-published dates checked, not just the 200s:**
+  Icy Veins live JSON-LD `dateModified` 2026-07-01; **icyveins-ptr `dateModified`
+  2026-07-26T10:53 + in-body "Last UPDATED - 26th of July"** — unchanged, so `published` stays
+  07-26 while `snapshot` (our cadence) is 07-31; that is the documented weekly-rebuild lag,
+  not a finding, and it is still well inside the ~2-week alarm. Archon `lastUpdated`
+  advanced **2026-07-30T12:00Z → 2026-07-31T12:00Z** on all 6 aggregate pages — it DID
+  re-aggregate, and produced **zero** tier movement on both brackets (the survivability
+  lists did move; see refresh-metrics). · **Counts:** icyveins 80 (27/7/6 × 2), icyveins-ptr
+  40 = **38 rated + the 2 upstream TBDs re-confirmed and written as explicit nulls**
+  (Augmentation Evoker on the DPS page, Vengeance DH on the tank page — both sit in a real
+  `<td>TBD</td>` row, which is why the parser must not silently drop non-letter tiers),
+  method 79 (raid still omits Vengeance DH; the 8 rejected M+ strings are the dungeon tier
+  list), wowhead 80, archon 80. 0 unmatched rows across all 359. · **Era verification:**
+  every live page self-identifies Midnight 12.0.7 / Season 1; the era-gated PTR pages
+  self-identify "Patch 12.1 / Season 2" — the opposite check, as required. Wowhead's single
+  "Season 2" hit per page is a `[-- Season 2 --]` editorial comment marker in the markup,
+  not a ranking. **No season flip.** · **Parser note worth carrying:** on Icy Veins, take the
+  FIRST `alt=` after each `class="tier-list-entry"` — that is what excludes the spell-icon
+  alts inside the expandable details blocks without any allow-list. On Wowhead, unescape
+  `\/`→`/` in the `WH.markup.printHtml` payload BEFORE matching, or `[/tier-list]` is
+  invisible. · **encounter-tiers.json: 51 pages, all 200, every encounter parsed a complete
+  40/40** (the merge refuses anything under 40), 680 cells re-verified, **0 changed** — the
+  file is byte-identical after the merge, which is the honest result of an aggregate re-run
+  that moved no per-fight bands. · npm test 176 (164 pass / 12 skipped / 0 fail), build OK
+  848.7 KB, snapshot written.
+
 - 2026-07-31 (interactive, local — owner-directed source adoption, NOT a refresh) · **Added `icyveins-ptr` as the tracker's first era-gated tier list.** Riley asked whether Icy Veins' PTR lists were tracked; they were not — the six registered Icy Veins pages are all live 12.0.7. Pages fetched from Riley's own machine (this session's egress policy denies icy-veins.com, r.jina.ai and every other source host — a remote session cannot refresh anything, only the nightly runner and local runs can). Verified 12.1/Season 2 in body text, JSON-LD `dateModified` 2026-07-26T10:53Z on all three pages, in-body "Last UPDATED - 26th of July". **40/40 roster coverage** (27 DPS / 7 healer / 6 tank is the complete Midnight roster — it only LOOKS partial next to the DPS page), 38 rated + 2 upstream TBD (Augmentation Evoker, Vengeance DH) stored as explicit nulls. **Six-band scale including B+**, which the live `icyveins` scale does not have — hence a separate `icyveins-ptr` scale anchored to the live values with B+ at 57. **33 of 40 specs disagree with Icy Veins' own live M+ list** (Marksmanship C→A+, Blood DK C→A+, Arcane B→S vs Guardian S→B+, Brewmaster A+→B, Subtlety A→C) — independently authored, which is both why it is worth carrying and why it must never touch the consensus. Verified consensus moved **0 of 80 cells** after the change, so `CONSENSUS_VERSION` stays 2 and no movement baseline was invalidated. Projection went to v3: the PTR list enters the base at w .25 (8 of 80 projection tier cells moved, all M+ — raid has no PTR list and is byte-identical to v2). Confidence became a ratio against obtainable signals after the raw count pushed 39 of 40 M+ specs to "high". npm test 179/179 (incl. 12 Playwright UI invariants), build OK. **The next nightly MUST fetch it** — it has a `required-sources.json` row now, so a skipped fetch fails the publish gate.
 
 - 2026-07-14 (second nightly pass same day, CI runner — Sonnet 5; orchestrated run, no staleness gate) · Re-fetched **all 5 tier-list sources live** via 6 parallel general-purpose agents (5 sources + a dedicated encounter-tiers agent this time), era-verified (Devourer present in every DPS list; IV/Method/Wowhead/WoWMeta self-identify Midnight S1/12.0.7; Archon lastUpdated 2026-07-13/14T12:00Z): icyveins 80 rows, method 79 (raid still omits Vengeance DH), wowhead 80 (0 diffs — genuine zero-movement, independently re-verified), archon-primary 80 (6 primary raid/mplus pages, 0 diffs), wowmeta 40 (M+ only; raid still 0-2 records/unranked). **359 rows applied via apply-ratings.mjs, 18 real tier changes**: Icy Veins mplus MM Hunter/Devastation Evoker/Fire Mage C→B (continues the back-and-forth flagged repeatedly since 07-08 — now B again); Method raid Blood DK newly rated (unrated→B), Method mplus Resto Druid S→A and Mistweaver S→A; **WoWMeta mplus moves 12 of 40 specs** (11 up: Blood DK C→B, Feral D→C, Beast Mastery A→S, Arcane D→C, Mistweaver A→S, Holy Pal C→B, Prot Pal B→A, Discipline C→A (2-band), Holy Priest D→C, Shadow C→B, Enhancement C→B; 1 down: Brewmaster A→B) — anti-off-by-one anchors (Guardian tank S, Retribution DPS S) held, so this reads as genuine live drift, not a parse regression; only 1 two-band move and 18 total moves, both well under the anomaly thresholds (6 two-band / 25 total). **This run's full 17-page encounter-tiers.json refresh completed** (9 bosses + 8 dungeons, 27 DPS cells each via curl+`__NEXT_DATA__` parse, additively merged over existing tank/healer carry-over entries): 40 individual boss/dungeon-spec cells changed, asOf→07-14. **Archon survivability came back genuinely EMPTY this run** (`tiers: []` on all 3 raid pages, cross-checked against the `_next/data` JSON endpoint too — not a parse artifact) — per the never-guess rule, did NOT overwrite the existing 40-row 07-14 survivability data; left as-is, flagged for next run's re-check. Snapshot dates in sources.json already read 2026-07-14 from the prior same-day run — no edit needed. npm test 65/65 pass, build OK (527.2 KB). `node src/snapshot.mjs` re-run (same-day snapshot updated to reflect the new movement, 37 lines diff).
