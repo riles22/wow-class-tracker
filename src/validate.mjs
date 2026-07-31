@@ -20,7 +20,7 @@ const VERDICTS = new Set(["Positive", "Mixed", "Negative"]);
    fresh, dated read. Never add to it: a new undated writeup is exactly what the gate exists
    to stop. */
 const UNDATED_WRITEUPS = new Set([
-  "Death Knight|Blood", "Death Knight|Unholy", "Demon Hunter|Devourer", "Demon Hunter|Vengeance",
+  "Death Knight|Unholy", "Demon Hunter|Devourer", "Demon Hunter|Vengeance",
   "Hunter|Beast Mastery", "Hunter|Marksmanship", "Hunter|Survival", "Mage|Arcane", "Mage|Fire",
   "Mage|Frost", "Monk|Mistweaver", "Monk|Windwalker", "Paladin|Holy", "Paladin|Protection",
   "Paladin|Retribution", "Priest|Discipline", "Priest|Shadow", "Rogue|Assassination",

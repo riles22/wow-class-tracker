@@ -19,20 +19,22 @@
       }
     },
     "ptr": {
-      "verdict": "Negative",
-      "theme": "Crimson Scourge tier set — a complete miss",
-      "summary": "Wowhead's Blood writer Mandl calls the Season 2 set a complete miss: it revolves almost solely around Crimson Scourge and Death and Decay, ignoring that CS can't proc while D&D is on the floor and that D&D sits at the very bottom of Blood's damage. Worse for a tank, it provides near-zero defensive value — \"this feels like a DPS tier set.\"",
+      "verdict": "Mixed",
+      "theme": "Blood Debt set lands well; hero race too close to call",
+      "summary": "A Death's Advance theorycrafter's read of the redesigned Venomous Abyss set is that Blizzard fixed the consistency problem: where the scrapped Crimson Scourge design paid out unevenly by target count and hero tree, the Blood Debt set is worth a steady +6-8% damage for both hero talents at every target count checked, with only a small gap between them. What it is not is a defensive set — survivability impact is measured as mostly negligible — and the San'layn-versus-Deathbringer question is left explicitly open: his gut says Deathbringer holds M+, but San'layn gained enough this patch that he won't take a strong stance before live data.",
       "changes": [
-        "Set built entirely around Crimson Scourge, but CS can't proc while Death and Decay is a visible unit on the floor — the bonus fights the spec's own restrictions.",
-        "The 15% attack speed does little against Blood's ~3s swing timer, and Blood gains very little from extra auto-attacks anyway.",
-        "Doubling Death and Decay 'effectively does nothing' — at a meager 8.3% AP/second it's a footnote in the damage breakdown.",
-        "In AoE it raises the penalty for not fishing a proc (Heart Strike only cleaves 5 targets inside D&D) instead of increasing the payoff of playing properly.",
-        "PTR build 68569 (2026-07-08): the Venomous Abyss tier set is now implemented for testing with a NEW design — 2-set builds Blood Debt on Death Strike (Strength up to 5%, then a 10%-Strength Marrowrend at 10 stacks); 4-set makes that Marrowrend generate +3 Bone Shield and deal Shadow AoE. This is a distinct set from the Crimson Scourge / Death-and-Decay concept Mandl reviewed below."
+        "The implemented Blood Debt set matches the 06-30 preview with seemingly no modification. Mechanics as tested: stacks have no duration and persist through combat drops, Death Strike cleave grants only one stack, stacking continues during the 10%-Strength buff, and the 10-stack itself is the enhanced-Marrowrend trigger — no second buff to track.",
+        "Measured M+ gains: Deathbringer +6% single-target / +7% at 5-10 targets; San'layn +7% / +8% — far more even than the scrapped Crimson Scourge design (+6/+4.5 and +10/+8), and consistent across target counts.",
+        "At 10 stacks the enhanced Marrowrend becomes a high-priority cast; the damage is strong enough that sitting on a 10-stack indefinitely is not worthwhile.",
+        "Season 2 re-buffs The Blood is Life: base Blood Beast and explosion damage +1400%, Pact of the San'layn +50% — the one Blood mechanic that scales exponentially with target count, and historically the piece modeling underweights.",
+        "San'layn also picks up Blood-Soaked Ground physical mitigation 5% → 8% (07-21) and disproportionately benefits from the Dance of Midnight bug fix, since its higher haste procs Dancing Rune Weapon more often.",
+        "Historical note: Wowhead's Mandl reviewed the original Crimson Scourge / Death-and-Decay set as \"a complete miss\" — that Negative applied to a design previewed away on 06-30 and replaced in the 07-08 build; this writeup reviews its replacement."
       ],
-      "set2": "Moderate attack speed plus a small Crimson Scourge proc-chance bump — blunted by Blood's ~3s swings and the can't-proc-while-D&D-is-down restriction. (Reviews the original Crimson Scourge design — the set was redesigned in the 07-08 build; see Key changes.)",
-      "set4": "Doubled Death and Decay damage plus 5% crit for 8s on consuming Crimson Scourge — doubling a bottom-of-the-list ability does nothing, and the crit is flat percentage, not rating, so Riposte converts none of it. Zero defensive value. (Reviews the original design, replaced 07-08.)",
-      "watch": "Mandl's ask is a redesign — even tying the bonuses to Runes or RP spent \"would feel like a breath of fresh air.\" As written, a defense-less DPS set gives a raid-B / M+-C tank nothing where it matters; watch for a rework before tuning has anything to carry. (Note: build 68569 replaced this Crimson Scourge/D&D set with a new Blood Debt / Marrowrend design that is now implemented for testing — Mandl's Negative verdict was of the earlier concept; the current set is pending fresh review.)",
-      "source": "https://www.wowhead.com/news/a-complete-miss-of-a-tier-set-blood-death-knight-tier-set-review-381973"
+      "set2": "Blood Debt on Death Strike (to 5% Strength, then a 10%-Strength enhanced Marrowrend at 10 stacks) — measured at a consistent damage gain for both hero trees, with the stack bookkeeping deliberately forgiving: no duration, no combat-drop loss, no cleave multi-stacking.",
+      "set4": "The enhanced Marrowrend's +3 Bone Shield and Shadow AoE make it a high-priority cast at 10 stacks. Across both bonuses the set reads as offense-only — survivability impact mostly negligible — so the old complaint that a tank's set carries no defensive value still applies to the numbers, if not to the design's coherence.",
+      "watch": "The hero-talent call is the thing to watch, and the author lays out why prediction keeps failing for this spec: Essence of the Blood Queen models assume melee uptime reality never delivers; The Blood is Life's exponential AoE scaling isn't weighted by standard target-count methodology; the defensive value of extra Death Strikes is ambiguous; and Deathbringer's smoother pull setup and threat are invisible to all three metrics. Deathbringer won Midnight S1 decisively, but the S2 set, Blood Beast re-buff, Blood-Soaked Ground, and the Dance of Midnight fix all favor San'layn — his stance is Deathbringer until live logs or significant tuning say otherwise, held loosely.",
+      "sourceLabel": "Kyrasis (Death's Advance) — Discord",
+      "asOf": "2026-07-21"
     },
     "metrics": [
       {
