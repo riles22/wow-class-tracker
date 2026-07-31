@@ -53,6 +53,15 @@
             "Blood"
           ],
           "latest": "12.1 M+ tier list update — Prot Paladin nerf, DK/tank reads (2026-07-15)"
+        },
+        {
+          "name": "Kyrasis",
+          "specs": [
+            "Blood"
+          ],
+          "url": "https://www.youtube.com/channel/UCyIuz1C5jul5q7aAHvEIwJQ",
+          "credential": "Blood DK theorycrafter since Legion (Death's Advance); Advanced Blood DK Guide author, high-M+ player",
+          "verifiedDate": "2026-07-31"
         }
       ],
       "altDiscords": [
@@ -640,6 +649,16 @@
             "Holy"
           ],
           "managedBy": "overrides"
+        },
+        {
+          "name": "Ellesmere",
+          "specs": [
+            "Holy"
+          ],
+          "url": "https://www.twitch.tv/ellesmere_gaming",
+          "credential": "Wings Is Up author (wingsisup.com — registered under Paladin sites); Method-profiled M+ Holy Paladin streamer",
+          "transcribable": false,
+          "verifiedDate": "2026-07-31"
         }
       ],
       "sites": [
@@ -652,6 +671,11 @@
           "name": "SimC Paladin APL",
           "url": "https://github.com/simulationcraft/simc/tree/midnight/engine/class_modules/apl",
           "note": "Hammer of Wrath theorycrafters maintain Paladin APLs in SimC (apl_paladin)."
+        },
+        {
+          "name": "Midnight Paladin bug list (Hammer of Wrath)",
+          "url": "https://docs.google.com/spreadsheets/d/1UEnjqlEqB65htF03vjZgx6P-HmB0mo1VuLRL-cSInwo/edit",
+          "note": "Community-maintained list of live Paladin bugs, referenced by the Prot staff (paste-supplied 2026-07-31)."
         }
       ]
     },
@@ -815,6 +839,16 @@
           "transcribable": false,
           "latest": "Outlaw Rogue DPS Guide (Icy Veins, 12.0.7)",
           "verifiedDate": "2026-06-15"
+        },
+        {
+          "name": "Fuu",
+          "specs": [
+            "Subtlety"
+          ],
+          "url": "https://www.wowhead.com/author/fuu1",
+          "credential": "Wowhead Rogue class expert; lead Subtlety theorycrafter since Legion; maintains Fuu's Simulation Sheet (registered under Rogue sites)",
+          "transcribable": false,
+          "verifiedDate": "2026-07-31"
         }
       ],
       "sites": [
