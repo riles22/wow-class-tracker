@@ -35,6 +35,16 @@ locally, and distill them into cited per-spec takes in `data/creator-takes.json`
    step drains, 25 fetches/run inside the free-tier budget); log.md keeps the
    human-readable trail. Remove a video from the queue ONLY once distilled or
    transcript-verified-skipped.
+   **When you transcript-verify a video and distil NOTHING from it, move it to the
+   `skipped[]` lane in the same file** — `{id, creator, title, reason, verifiedAt}`, where
+   `reason` says what the transcript actually turned out to be. Validation enforces the
+   shape and refuses to let an id sit in both lanes. This lane is DURABLE: before it
+   existed (added 2026-07-31), "verified-skipped" lived only in log.md prose, every run
+   re-derived its seen-set by regex over that prose, and Shadarek's comedy tier list
+   `Z8Jygl_NpF4` came back three separate times — each costing a transcript fetch and a
+   re-read. **Step 1 discovery must treat `skipped[]` ids as already-seen**, exactly like
+   distilled ones. Only re-open one if you have a positive reason (e.g. the creator
+   re-uploaded different content under the same id), and say so in the log.
 3. **Distill**: one summarization pass per video with a WoW-vocab-primed prompt:
    map mentions to exact roster spec names; emit discrete claims, each with creator,
    video title, date, patch context (announced / PTR / live), sentiment

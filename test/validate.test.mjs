@@ -258,6 +258,31 @@ test("pending transcript queue: id shape is a hard gate (ids reach fetch URLs)",
   assert.ok(!validateData(none, { now: "2026-07-17" }).some(e => e.includes("pending-transcripts")));
 });
 
+test("pending transcript queue: skipped[] is durable and cannot overlap the queue", async () => {
+  const data = await loadData(ROOT);
+  const broken = structuredClone(data);
+  broken.pendingTranscripts = {
+    videos: [{ id: "Rmkxzb1QQSQ", creator: "AutomaticJak", title: "t", published: "2026-07-17", queuedAt: "2026-07-17" }],
+    skipped: [
+      // same id in both lanes — the exact ambiguity that let a skipped video be re-queued
+      { id: "Rmkxzb1QQSQ", creator: "AutomaticJak", title: "t", reason: "a sufficiently long reason", verifiedAt: "2026-07-17" },
+      { id: "Z8Jygl_NpF4", creator: "Shadarek", title: "t", reason: "short", verifiedAt: "2026-07-17" },
+      { id: "vK-qyvXOVYM", creator: "izen", title: "t", reason: "a sufficiently long reason", verifiedAt: "2099-01-01" },
+      { id: "vK-qyvXOVYM", creator: "izen", title: "dup", reason: "a sufficiently long reason", verifiedAt: "2026-07-17" },
+    ],
+  };
+  const errors = validateData(broken, { now: "2026-07-17" });
+  assert.ok(errors.some(e => e.includes("both queued and skipped")), "an id in both lanes is rejected");
+  assert.ok(errors.some(e => e.includes("needs a reason")), "a bare/short reason is rejected");
+  assert.ok(errors.some(e => e.includes("listed twice")), "duplicate skipped id rejected");
+  assert.ok(errors.some(e => e.includes("future-dated")), "future verifiedAt rejected");
+  // the lane is optional, and the committed file must itself be clean
+  const noSkip = structuredClone(data);
+  delete noSkip.pendingTranscripts.skipped;
+  assert.ok(!validateData(noSkip, { now: "2026-07-17" }).some(e => e.includes("skipped")));
+  assert.deepEqual(validateData(data).filter(e => e.includes("skipped")), []);
+});
+
 test("tier-set upkeep gate: a build highlight naming a spec + set keyword forces tierSet.asOf forward", async () => {
   const data = await loadData(ROOT);
   const broken = structuredClone(data);

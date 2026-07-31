@@ -69,6 +69,61 @@ runs (2026-07-31), which were sound but left drift the next nightly had to absor
    the digest thread should record them, run `node src/digest.mjs HEAD^ HEAD` and paste
    the output as a comment on the pinned issue manually.
 
+## Scope — decide this before touching anything
+
+CI runs the full refresh nightly (`.github/workflows/nightly.yml`, 10:37 UTC). The
+scheduled local task now fires at **07:10 local (14:09 UTC)**, i.e. *after* CI, which is
+the correct order for a catch-up run. **Default scope is residential-only catch-up** —
+the things a datacenter runner physically cannot do:
+
+- drain `data/pending-transcripts.json` with yt-dlp (datacenter IPs hit YouTube's bot wall);
+- re-fetch the WCL cuts the nightly recorded `unreachable` (the HTML statistics endpoints
+  work from a residential IP, not from CI);
+- verify-and-log what CI already refreshed today rather than rewriting it.
+
+Independently regenerating data CI already produced is what makes a push unmergeable —
+two independently regenerated datasets do not merge mechanically (proven 2026-07-31,
+conflicts across ~8 data files). Do a **full** refresh only when the nightly did not run
+or you intend to replace it; then the manifest rule above applies. The 2026-07-08
+no-staleness-gate policy still holds *within* whichever scope you pick.
+
+## The work — each skill's SKILL.md is authoritative
+
+1. **`ptr-watch`** — Wowhead news RSS + the official forum thread for new builds; WCL
+   zones **54** (PTR raid), **52** (Dummy Dome), **56** (PTR M+), **57** (Tidebound
+   Grotto). Zone 54 has been empty upstream since 2026-07-31 (the 14-day rolling window
+   aged out the mid-July parses) and 57 has never aggregated — **empty is not an error**:
+   ingest nothing and leave both the stored rows and that zone's `snapshot` alone, so the
+   staleness stays visible rather than being papered over.
+2. **`watch-creators`** — draining the transcript queue is the main reason this run
+   exists. Honour the `skipped[]` lane (durable verified-skips), the same-lens supersede
+   pass, and the `generalCreators` → `metaNotes[]` firewall.
+3. **`refresh-tiers` / `refresh-metrics`** — scoped per above. 🛑 **Do not apply WoWMeta
+   M+ rows or re-stamp their `snapshot`** while that source is under review (see
+   `refresh-tiers/log.md`, 2026-07-31).
+
+## Orchestration limits (a scheduled run is unattended)
+
+- **Never end the turn while a Workflow or background agent is still running.** Workflow
+  backgrounds its agents; stopping to "wait" ends the run with a mutated tree, and the
+  clean-tree precheck then makes the *next* run refuse to start. One backgrounded turn
+  costs two runs — this is the 2026-07-15→17 failure mode. Poll to completion inside the
+  turn, or do the work solo.
+- Fan-out, if used, is **read-only verification that reports back and never writes**
+  (parse verification, era-verification, `log.md` precedent lookups, checking a
+  distillation against its cited source). Cap ~4 concurrent.
+- **Single-threaded, main agent only:** every `apply-*.mjs` merge and direct `data/*.json`
+  write; `npm test && npm run build`; `snapshot.mjs`; the manifest rewrite; all git
+  staging, commit and push.
+- If a verification agent and the main line disagree, **do not push** — report and stop.
+
+## Report shape
+
+Builds found; zone 54/52/56/57 state; videos processed and queue count before→after;
+takes **and** metaNotes added; sources refreshed vs verified-unchanged; whether the
+manifest was rewritten or deliberately left alone and why; what `check-refresh
+--manifest` printed; what was rebuilt; whether you pushed.
+
 ## What a local run must never do
 
 - Edit `data/community-overrides.json`, `data/required-sources.json`, `data/scales.json`,

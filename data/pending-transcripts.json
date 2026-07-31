@@ -2,18 +2,34 @@
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
   "videos": [
     {
-      "id": "Z8Jygl_NpF4",
-      "creator": "Shadarek",
-      "title": "TIERLIST | WoW: Midnight Season 2 (Important)",
-      "published": "2026-07-28",
-      "queuedAt": "2026-07-31"
-    },
-    {
       "id": "YOnGHSUZ4A0",
       "creator": "Kalamazi",
       "title": "Do These 5 Things NOW To Prep For Patch 12.1!",
       "published": "2026-07-31",
       "queuedAt": "2026-07-31"
+    }
+  ],
+  "skipped": [
+    {
+      "id": "Z8Jygl_NpF4",
+      "creator": "Shadarek",
+      "title": "TIERLIST | WoW: Midnight Season 2 (Important)",
+      "reason": "Comedy video, not analysis — specs are ranked by whether they are Demon Hunters, Rogues are \"always down at D tier\", and Augmentation goes in a \"fake humans\" tier. No genuine spec-strength read. Transcript verified in full twice (2026-07-30 nightly and 2026-07-30 local); it kept returning to the queue because verified-skipped had no durable record.",
+      "verifiedAt": "2026-07-30"
+    },
+    {
+      "id": "Kwugqa7HFao",
+      "creator": "izen (Izenhart)",
+      "title": "Season 2's BIGGEST Gearing Changes & Tips For Season 2",
+      "reason": "A gearing / bonus-roll / great-vault PSA end to end (heroic bonus rolls to mythic track, 1:1 vault conversion, crest surplus, stockpiling tokens). Its only spec mentions are loot-targeting examples, which the skill explicitly says not to inflate into meta notes. 0 metaNotes, no build or tuning lead. Transcript verified in full twice (2026-07-30).",
+      "verifiedAt": "2026-07-30"
+    },
+    {
+      "id": "aqe2LKeMIqQ",
+      "creator": "Tettles",
+      "title": "Stream VOD",
+      "reason": "Livestream VOD whose only spec reads are one-line replies to chat — no sustained analysis to distil. Transcript verified 2026-07-30 (local run).",
+      "verifiedAt": "2026-07-30"
     }
   ]
 }

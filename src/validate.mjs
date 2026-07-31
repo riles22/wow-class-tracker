@@ -470,6 +470,31 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
         isoOk(v?.queuedAt, `${label} queuedAt`);
       }
     }
+
+    // skipped[] is the durable record of videos whose transcript WAS read and which were
+    // deliberately not distilled. Before it existed, "verified-skipped" lived only in
+    // log.md prose, so every run re-derived its seen-set by regex and any miss re-queued
+    // the video — Shadarek's comedy tier list came back three times (2026-07-31 fix).
+    const skipped = pendingTranscripts.skipped;
+    if (skipped != null) {
+      if (!Array.isArray(skipped)) {
+        errors.push("pending-transcripts.json: skipped must be an array");
+      } else {
+        const seenSkip = new Set();
+        const queued = new Set(Array.isArray(vids) ? vids.map(v => v?.id) : []);
+        for (const s of skipped) {
+          const label = `pending-transcripts.json: skipped "${s?.id ?? "?"}"`;
+          if (typeof s?.id !== "string" || !/^[A-Za-z0-9_-]{11}$/.test(s.id)) errors.push(`${label} needs an 11-char YouTube id`);
+          else if (seenSkip.has(s.id)) errors.push(`${label} is listed twice`);
+          else seenSkip.add(s.id);
+          if (queued.has(s.id)) errors.push(`${label} is both queued and skipped — it must be one or the other`);
+          if (typeof s?.creator !== "string" || !s.creator) errors.push(`${label} needs a creator`);
+          // the reason is the whole point: a bare id would be indistinguishable from a bug
+          if (typeof s?.reason !== "string" || s.reason.length < 10) errors.push(`${label} needs a reason (why the transcript yielded nothing)`);
+          isoOk(s?.verifiedAt, `${label} verifiedAt`);
+        }
+      }
+    }
   }
 
   return errors;
