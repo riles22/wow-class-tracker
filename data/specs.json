@@ -4063,7 +4063,22 @@
         "wowmeta": "A"
       }
     },
-    "ptr": null,
+    "ptr": {
+      "verdict": "Mixed",
+      "theme": "Net-neutral tuning, bland set, one defensive wildcard",
+      "summary": "Peak of Serenity's Brewmaster writer reads the 12.1 pass as deliberately flat: nearly every class change is a net-neutral offset for players and creatures gaining 25% health and damage at max level, not a power shift. The set bonuses are judged fairly bland for now — extra Fire damage feeding Vital Flame is welcome, and the 4-piece amounts to a stronger Mystic Touch. The one genuine unknown is a datamined doubling of Celestial Brew and Celestial Infusion's cooldown AND absorb, which never made official notes.",
+      "changes": [
+        "The absorb/heal-percentage buffs (Celestial Brew/Infusion +25%, Staggering Strikes +25%, Awakening Spirit +25%, Vital Flame 40% → 50%, Chi Transfer 50% → 60%, Vigorous Expulsion, Spirit of the Ox) are scaling offsets for the 25% health/creature-damage increase, not net gains.",
+        "The max-health increase slightly reduces Gift of the Ox sphere spawn frequency by the mechanic's design — noted as unlikely to be felt in practice, based on past instances.",
+        "Datamined in the 06-30 build, undocumented: Celestial Brew and Celestial Infusion recharge doubled to 1.5 minutes with absorbs doubled to match. Possibly a bug, but the paired change reads intentional — one guess is making Light Brewing's percentage CDR feel weightier against Training of Niuzao.",
+        "07-21: Flurry Strikes' Physical damage now correctly benefits from Bring Me Another and the Venomous Abyss 4-set (bug fix). 12.1 sims remain work-in-progress through the tuning churn, so no meaningful sim delta lands from it."
+      ],
+      "set2": "The ignited Keg Smash is more Fire damage in the kit, which Vital Flame converts to healing — the author's one warm note on an otherwise bland pair.",
+      "set4": "Read as \"stronger Mystic Touch\": an 8% Physical-damage amplifier plus a fire patch. The Scorched / Hot Potato cooldown-manager entries presumably track these ignited-keg effects.",
+      "watch": "The Celestial Brew/Infusion doubling is the thing to resolve — bug or redesign. The author's own counsel is to test it on PTR and leave feedback before concluding it's terrible; a 1.5-minute defensive cadence would change brew rhythm more than anything else in the pass.",
+      "sourceLabel": "Sinzhu (Peak of Serenity) — Discord",
+      "asOf": "2026-07-21"
+    },
     "metrics": [
       {
         "source": "archon",
@@ -4204,11 +4219,14 @@
         "Damage→heal conversion cut ~30% (SCK / Way of the Crane).",
         "Spinning Crane Kick's effective target threshold shifts ~3 → 8.",
         "Jadefire buffed to compensate for the conversion loss.",
-        "PTR build 68569 (2026-07-08): Spinning Crane Kick damage +10%, plus a fix so Temple Training's SCK increase now applies to Mistweaver."
+        "PTR build 68569 (2026-07-08): Spinning Crane Kick damage +10%, plus a fix so Temple Training's SCK increase now applies to Mistweaver.",
+        "A Peak of Serenity changelog tracks the rebalance landing harder than the notes read one build at a time: Way of the Crane's transfer fell 340% → 280% at reveal, and after the later Spinning Crane Kick nerf-then-partial-revert the author measures the total package at -15.3% week-over-week and -29.9% versus live.",
+        "Two blanket healing cuts landed along the way (-3% at reveal, -7% in a later hotfix wave), traded against Mastery: Gust of Mists +50% twice (baseline mastery 249.48% after the second), mana returns +20% across most sources (Mana Tea 5,400 → 6,480 per stack), and Rising Mist's internal cooldown halved to 500ms — the Mastery-forward shift the developers said they wanted, enforced by nerfing the alternatives.",
+        "Morning Breeze was cut 60% explicitly to keep pace with the Gust of Mists increases — the developers' note frames it as holding the talent's effectiveness level, not nerfing it."
       ],
       "set2": "Supports the Jadefire-forward direction.",
       "set4": "Leans into the retuned kit.",
-      "watch": "Hero-tree balance (Conduit of the Celestials clearly over Master of Harmony) is left unaddressed. Baseline is already dominant — raid-S / M+-S.",
+      "watch": "Hero-tree balance (Conduit of the Celestials clearly over Master of Harmony) is left unaddressed. Baseline is already dominant — raid-S / M+-S. The Peak of Serenity read to carry forward: the damage-to-healing conversion loop is roughly 30% weaker than live even after the partial Spinning Crane Kick walk-back, so how much of the Positive design read survives contact with the final tuning is the open question.",
       "sourceLabel": "Wowhead 12.1 class preview"
     },
     "metrics": [
@@ -4368,11 +4386,13 @@
         "Burst pulled out of cooldowns, redistributed into sustained.",
         "Net damage change is small, roughly +1–2%.",
         "Playstyle feel is slightly smoother but fundamentally the same.",
-        "PTR build 68569 (2026-07-08): defensive/utility bumps — Combat Wisdom now grants +5% stamina and Calming Presence reduces damage taken by 10% (was 6%)."
+        "PTR build 68569 (2026-07-08): defensive/utility bumps — Combat Wisdom now grants +5% stamina and Calming Presence reduces damage taken by 10% (was 6%).",
+        "Peak of Serenity set sims (06-21): Shadopan 8.8% single-target and 12.8% on a dungeon route, Conduit 10.6% single-target — on the lower end of set-bonus gains, but the set is judged very well designed. Shadopan reads slightly ahead of Conduit with AoE close.",
+        "A Peak of Serenity veteran's forum feedback (07-24) pushes back on the latest datamined buffs — Spinning Crane Kick +38% across two builds among them — arguing that stacking power into SCK is the wrong place for it even when the sign is positive."
       ],
       "set2": "Minor throughput.",
       "set4": "Reinforces the sustained-damage shift.",
-      "watch": "WarcraftLogs survivability sits near dead-last (≈37–40 of 40) and none of that is touched — the actual reason WW gets cut from rosters.",
+      "watch": "WarcraftLogs survivability sits near dead-last (≈37–40 of 40) and none of that is touched — the actual reason WW gets cut from rosters. The 07-24 forum feedback (us.forums.blizzard.com/en/wow/t/windwalker-feedback-to-latest-datamining/2329846) is the community counterweight to the buff wave: the complaint is about WHERE the power lands, not how much.",
       "sourceLabel": "Wowhead 12.1 class preview"
     },
     "metrics": [
