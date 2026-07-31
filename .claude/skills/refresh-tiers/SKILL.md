@@ -43,6 +43,33 @@ Fetch the current Midnight tier lists live and merge them into `data/specs.json`
 - **WoWMeta is JS-rendered (SvelteKit)** — WebFetch returns an empty shell; fetch via
   the r.jina.ai proxy. Its scale is S/A/B/C/D; page URLs live under /wow/…-tier-list
   (re-discover from the nav on 404).
+- 🛑 **WOWMETA M+ IS UNDER REVIEW — DO NOT INGEST OR RE-STAMP IT** (2026-07-31, owner
+  decision pending; evidence in this skill's log.md). Two independent defects, both
+  verified: (a) the **live** view clusters its letters on **player count**, not the
+  `lb_ci` performance metric its own prose claims — the page has an undocumented
+  "Popular Choice" / "Optimized Potential" toggle and defaults to Popular Choice, so the
+  letters are a popularity ranking feeding the M+ letter consensus (hard rule 3); and
+  (b) a **direct** fetch returns a stale SSR prerender stamped `dateModified
+  2026-03-23`, which is what committed data actually matches (27/27, vs 9/27 for the
+  live view) — 130 days old while `sources.json` stamped it `2026-07-31` (hard rule 1).
+  Until Riley rules, skip wowmeta in step 3 and **leave its `snapshot` values alone**
+  rather than writing today's date. The wowmeta **raid** pages stay uningested with
+  `snapshot: null` — that disposition is unchanged and separate.
+- **A 200 is not freshness — check the page's OWN published date.** The wowmeta freeze
+  went unnoticed for a week because every run fetched successfully, parsed 40/40 rows,
+  logged "0 moves", and wrote today's date. Nothing in the tracker surfaces a stale
+  *tier-list* source: `check-refresh`'s staleness gate reads the agent-written
+  `snapshot`, and `dataHealth()` only inspects metrics / ptrDummy / fightProfile. So for
+  every tier source, read the date the page publishes about itself — JSON-LD
+  `dateModified`, a "Last updated" string, Archon's `lastUpdated`, WoWMeta's
+  "Last updated:" — and log it. If it disagrees with the transport you used, say so and
+  do not stamp the snapshot with today.
+- **Transport can silently change the DATA, not just the delivery.** Direct-vs-proxy on
+  wowmeta returns different datasets (March-23 prerender vs July-28 live), which is why
+  the 07-17→07-24 "WoWMeta reclustering" entries (26/40, 24/40, 18/40, 28/40 moves) are
+  **transport-induced view flips, not upstream movement** — they nonetheless fed
+  consensus, the ▲▼ engine and `data/history/`, so the movement narrative for those
+  dates is not trustworthy. Record which transport you used, every run.
 - **murlok-style numbers are NOT tiers.** Only the five tier-list sources feed consensus.
 - A new source first needs a scale in `data/scales.json` (check each tier round-trips
   through the consensus bands) and a registry entry — config only, no code.
