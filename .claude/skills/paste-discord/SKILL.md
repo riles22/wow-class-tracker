@@ -35,6 +35,30 @@ deliverable. It exists only long enough to distill from.
 
 ### 2. Collect the provenance triple — who / where / when
 
+**Server names (owner-confirmed, 2026-07-31).** These are the Discords Riley actually reads,
+per class — use them for the `(<Server>)` part of `sourceLabel` unless a paste explicitly
+names a different server:
+
+| Class | Server | Notes |
+|---|---|---|
+| Warrior | Skyhold | |
+| Paladin | Hammer of Wrath | |
+| Hunter | Trueshot Lodge | **Riley does not use Warcraft Hunter's Union** — never attribute a paste there (it stays in the registry as a community link only) |
+| Rogue | Ravenholdt | |
+| Priest | Warcraft Priests | |
+| Death Knight | Acherus | Blood-specific content: Death's Advance |
+| Shaman | Earthshrine | Resto-specific content: Ancestral Guidance (attribution only — not in the registry until a verified invite is supplied) |
+| Warlock | Council of the Black Harvest | |
+| Monk | Peak of Serenity | |
+| Druid | Dreamgrove | |
+| Demon Hunter | The Fel Hammer | |
+| Evoker | Wyrmrest Temple | |
+| Mage | Altered Time | |
+
+A paste with no server named gets the class's server from this table. A spec-scoped server
+(Death's Advance, Ancestral Guidance) is used only when the content is clearly from there —
+when in doubt, the class server is the honest default.
+
 Every pasted item needs all three before anything is written:
 
 - **who** — the person, with their credential if they have one ("Clarius", "Archimtiros
