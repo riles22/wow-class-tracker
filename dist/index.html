@@ -11,7 +11,7 @@
 -->
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-YYCIsXFd0xynbQMiT5VBEi5FG89dl01A2cC/JFW2SwE='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-Sbw7dDHP2C4WbtsgQCa+fWmg7KbWVYlJ/MEHyoLI2Yw='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="riles22">
 <title>Curse of Ula'tek — 12.1 PTR Spec Tracker</title>
@@ -602,7 +602,7 @@
     <div class="rule"></div>
     <!-- One sentence of lede; the mental model folds. This paragraph ran five lines and
          was ~40% of a 329px masthead sitting directly above a page people check daily. -->
-    <div class="sub">Where every spec stands going into <b>12.1 “Curse of Ula'tek”</b> — PTR changes laid over its current <b>12.0.7 / Season 1</b> baseline. <details class="sub-more"><summary>How to read it</summary>Five tier lists feed a computed <b>consensus</b>, with a <b>±</b> marker where they disagree — flip between them with <b>View</b>, or pick <b>Ours: 12.1&nbsp;✦</b> for this site's own Season-2 forecast (a projection, never a source). Filter by era or a specific fight, and click <b>any row</b> for the full read: PTR changes, current numbers with ranks, sim fight profile, and community takes.</details></div>
+    <div class="sub">Where every spec stands going into <b>12.1 “Curse of Ula'tek”</b> — PTR changes laid over its current <b>12.0.7 / Season 1</b> baseline. <details class="sub-more"><summary>How to read it</summary><span id="tlcount">Several</span> tier lists feed a computed <b>consensus</b>, with a <b>±</b> marker where they disagree — flip between them with <b>View</b>, or pick <b>Ours: 12.1&nbsp;✦</b> for this site's own Season-2 forecast (a projection, never a source). Filter by era or a specific fight, and click <b>any row</b> for the full read: PTR changes, current numbers with ranks, sim fight profile, and community takes.</details></div>
     <div class="stamp">
       <span><b>Baseline:</b> 12.0.7 / Season 1</span>
       <span><b>PTR:</b> 12.1 “Curse of Ula'tek”</span>
@@ -1596,6 +1596,18 @@ if(META.latestSnapshot){
     + `Our 12.1 projection is recomputed nightly, but its PTR-empirical term still comes from the frozen ${esc(oldest)} cuts. `
     + `<details class="dh-series"><summary>Affected: ${n} series</summary>${esc(names)}.</details>`;
   el.hidden = false;
+})();
+
+/* How-to-read blurb: the tier-list COUNT is derived, never written down. It read a
+   hardcoded "Five" for the first hours after WoWMeta was retyped out of the consensus on
+   2026-07-31 — the page contradicting its own toggles. Anything that states how many
+   sources there are must come from the registry. */
+(() => {
+  const el = document.getElementById('tlcount');
+  if (!el) return;
+  const n = SOURCES.filter(s => s.kind === "tier-list").length;
+  const words = ["No","One","Two","Three","Four","Five","Six","Seven","Eight","Nine"];
+  el.textContent = words[n] ?? String(n);
 })();
 
 /* ---------- footer: source registry (tier lists + metrics + notes feeds) ---------- */
