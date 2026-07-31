@@ -647,6 +647,46 @@ test("a rank-version boundary suppresses rank arrows but still narrates consensu
   assert.equal(crossVersion.ptrDummy.rankDelta, undefined);
 });
 
+test("dataHealth surfaces a frozen TIER-LIST source (the WoWMeta blind spot)", async () => {
+  const { dataHealth, tierListHealth } = await import("../src/render.mjs");
+  // A live metric feed sets the frontier; the tier list behind it is the thing under test.
+  const specs = [{ class: "C", spec: "S", role: "DPS",
+    metrics: [{ source: "archon", bracket: "raid", name: "M", value: 1, asOf: "2026-07-31" }] }];
+
+  // Healthy weekly cadence: 10 days behind the frontier must NOT flag (that false positive
+  // is what makes a banner get ignored — tier lists move weekly-ish by design).
+  const weekly = [{ id: "icyveins", name: "Icy Veins", kind: "tier-list", pages: [{ snapshot: "2026-07-21" }] }];
+  assert.equal(dataHealth(specs, weekly).series.filter(s => s.kind === "tier-list").length, 0);
+
+  // The real failure: a source frozen far behind the frontier is now visible.
+  const frozen = [{ id: "wowmeta", name: "WoWMeta", kind: "tier-list", pages: [{ snapshot: "2026-03-23" }] }];
+  const flagged = dataHealth(specs, frozen).series.filter(s => s.kind === "tier-list");
+  assert.equal(flagged.length, 1, "a 130-day-old tier list must reach the banner");
+  assert.equal(flagged[0].asOf, "2026-03-23");
+
+  // A source is only as fresh as its LAGGIEST page (wowhead once left M+ Tank at 07-09).
+  const laggy = [{ id: "wowhead", name: "Wowhead", kind: "tier-list",
+    pages: [{ snapshot: "2026-07-31" }, { snapshot: "2026-07-31" }, { snapshot: "2026-06-01" }] }];
+  assert.equal(tierListHealth(laggy)[0].asOf, "2026-06-01", "newest page must not mask a stalled one");
+
+  // Attestation: "published" is claimed only when EVERY page carries one. A mixed source
+  // falls back to the weaker wording AND the older date rather than printing a
+  // publication date it cannot vouch for.
+  const mixed = tierListHealth([{ id: "m", name: "M", kind: "tier-list",
+    pages: [{ published: "2026-07-20", snapshot: "2026-07-31" }, { snapshot: "2026-07-10" }] }])[0];
+  assert.equal(mixed.attested, "self");
+  assert.equal(mixed.asOf, "2026-07-10");
+  const pub = tierListHealth([{ id: "p", name: "P", kind: "tier-list",
+    pages: [{ published: "2026-07-20" }, { published: "2026-07-25" }] }])[0];
+  assert.equal(pub.attested, "published");
+  assert.equal(pub.asOf, "2026-07-20");
+
+  // A source retyped away from tier-list drops off this path and uses the metric one.
+  assert.deepEqual(tierListHealth([{ id: "wowmeta", kind: "metrics", pages: [{ snapshot: "2026-03-23" }] }]), []);
+  // Still clock-free and still safe with no sources passed at all.
+  assert.equal(dataHealth(specs).series.length, 0);
+});
+
 test("a consensus-composition boundary suppresses tier arrows but keeps ranks, dummy and the timeline", () => {
   // Why this exists: when a tier-list source leaves the consensus (WoWMeta retyped to
   // kind:"metrics" on 2026-07-31), every spec's mean recomposes at once. Narrating that as

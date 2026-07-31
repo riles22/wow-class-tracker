@@ -719,7 +719,54 @@ export function latestSnapshot(sources) {
 // staggering (Archon numbers a day behind sims is not "frozen") while catching the
 // multi-week WCL rDPS outage (07-09 vs a 07-22 frontier = 13 days → flagged).
 const STALE_DAYS = 7;
+
+/* Tier lists publish on an EDITORIAL cadence (CLAUDE.md: "tier lists move weekly-ish"),
+   so they legitimately trail a frontier that daily metric feeds set. Reusing STALE_DAYS
+   here would flag a perfectly healthy source that simply had a quiet week — the false
+   positive that makes a banner get ignored. 14 clears a normal weekly cadence with slack
+   while still catching the failure this exists for: WoWMeta sat on a 2026-03-23 prerender
+   for a week (130 days behind) with nothing anywhere in the tracker surfacing it. */
+const TIER_STALE_DAYS = 14;
 const dayGap = (from, to) => Math.round((Date.parse(to) - Date.parse(from)) / 86_400_000);
+
+/* Tier-list sources publish LETTERS, not metrics, so before 2026-07-31 they had no
+   staleness surface anywhere: not the gate (which reads the agent-written `snapshot`),
+   not the heartbeat, not this banner (which only ever walked spec.metrics / ptrDummy /
+   fightProfile). That blind spot is how the WoWMeta freeze survived a week of runs that
+   each fetched successfully, parsed 40/40 rows and logged "0 moves".
+
+   Two honesty rules are baked in here:
+   - A source is only as fresh as its LAGGIEST page. Wowhead once left its M+ Tank page at
+     07-09 while the other five refreshed; taking the newest would have hidden that.
+   - `published` (the date the PAGE says about itself — JSON-LD dateModified, "Last
+     updated", Archon's lastUpdated) outranks `snapshot` (which an agent writes and which
+     WoWMeta's proved can simply be false). But the "published" claim is only made when
+     EVERY page of that source carries one: a source with mixed attestation falls back to
+     the weaker "self-reported" wording rather than printing a publication date it cannot
+     vouch for. That mixed case is precisely where a naive implementation prints a
+     confident, wrong date.
+
+   A source retyped away from `tier-list` (as WoWMeta was) correctly stops appearing here
+   and picks up the ordinary metric path instead — it now has real `asOf` dates to trail. */
+export function tierListHealth(sources) {
+  const out = [];
+  for (const source of sources ?? []) {
+    if (source.kind !== "tier-list") continue;
+    const dated = (source.pages ?? [])
+      .map(p => ({ date: p.published ?? p.snapshot ?? null, attested: p.published ? "published" : "self" }))
+      .filter(d => d.date);
+    if (!dated.length) continue;
+    out.push({
+      label: `${source.name ?? source.id} tier list`,
+      asOf: dated.map(d => d.date).sort()[0],
+      source: source.id,
+      kind: "tier-list",
+      attested: dated.every(d => d.attested === "published") ? "published" : "self",
+      pages: dated.length
+    });
+  }
+  return out;
+}
 
 /* Data-health summary for the site's honesty banner: which empirical metric series
    have fallen far behind the freshest data (the WCL rDPS outage freezes several cuts
@@ -741,7 +788,7 @@ const dayGap = (from, to) => Math.round((Date.parse(to) - Date.parse(from)) / 86
    it is total — "raw DPS" is the raw family, everything else on this source is not. */
 const wclFamily = label => (/\braw DPS\b/i.test(label) ? "raw" : "redistributed");
 
-export function dataHealth(specs) {
+export function dataHealth(specs, sources = null) {
   const newest = new Map(); // series label → { asOf: newest seen, source }
   const note = (label, asOf, source) => {
     if (!asOf) return;
@@ -757,7 +804,10 @@ export function dataHealth(specs) {
     // 2026-07-24, D3). Its gate probe is fixed; this is the user-visible half.
     if (spec.fightProfile?.asOf) note("Sim fight profiles (target-count DPS)", spec.fightProfile.asOf, spec.fightProfile.source);
   }
-  const dates = [...newest.values()].map(v => v.asOf).sort();
+  const tiers = tierListHealth(sources);
+  // Tier dates join the frontier: it means "the newest data of ANY kind we hold", so a
+  // still-refreshing tier list correctly keeps exposing a stalled metric feed.
+  const dates = [...[...newest.values()].map(v => v.asOf), ...tiers.map(t => t.asOf)].sort();
   if (!dates.length) return null;
   const latest = dates[dates.length - 1];
   // The source travels with each series so the banner can attribute a stall correctly. It
@@ -770,6 +820,7 @@ export function dataHealth(specs) {
       // other source is one feed, so it carries no family and gets no causal wording.
       ...(v.source === "warcraftlogs" ? { family: wclFamily(label) } : {})
     }))
+    .concat(tiers)
     .sort((a, b) => a.asOf.localeCompare(b.asOf) || a.label.localeCompare(b.label));
   // `series` is the self-relative answer: stale against the data's OWN newest date. It has
   // one blind spot — if the whole empirical layer stalls together, `latest` stalls with it
@@ -782,8 +833,10 @@ export function dataHealth(specs) {
   //     on the day it was generated.
   // `all` carries every series' date so the client can redo the comparison; `staleDays` is
   // the threshold so the two implementations cannot drift apart.
-  const series = all.filter(v => dayGap(v.asOf, latest) > STALE_DAYS);
-  return { latest, oldest: series[0]?.asOf ?? null, series, all, staleDays: STALE_DAYS };
+  const thresholdFor = v => (v.kind === "tier-list" ? TIER_STALE_DAYS : STALE_DAYS);
+  const series = all.filter(v => dayGap(v.asOf, latest) > thresholdFor(v));
+  return { latest, oldest: series[0]?.asOf ?? null, series, all,
+    staleDays: STALE_DAYS, tierStaleDays: TIER_STALE_DAYS };
 }
 
 export function buildPayload({ specs, sources, scales, community, ptrBuilds, creatorTakes, encounterTiers, historySnapshot, historySnapshots, now = null }) {
@@ -815,7 +868,7 @@ export function buildPayload({ specs, sources, scales, community, ptrBuilds, cre
     ptrBuilds: ptrBuilds ?? null,
     creatorTakes: creatorTakes ?? null,
     encounterTiers: encounterTiers ?? null,
-    dataHealth: dataHealth(decorated),
+    dataHealth: dataHealth(decorated, sources),
     meta: {
       specCount: specs.length,
       trackedCount: specs.filter(spec => spec.ptr).length,

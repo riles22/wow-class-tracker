@@ -163,7 +163,7 @@
     {
       "key": "wowmeta",
       "label": "WoWMeta M+ population lb_ci rating (metrics; letters retired 2026-07-31)",
-      "maxAgeDays": 4,
+      "maxAgeDays": 8,
       "date": {
         "type": "metrics",
         "source": "wowmeta",
@@ -174,7 +174,8 @@
         "source": "wowmeta",
         "namePattern": "lower-bound 95% CI",
         "min": 35
-      }
+      },
+      "note": "maxAgeDays raised 4 -> 8 on 2026-07-31. The 4 was never exercised: until the retype the stored date was agent-written and therefore always today, so the gate could not fire. asOf is now the source-published snapshotDate, which legitimately lags (07-28 on a 07-31 run), and 8 absorbs a weekly cadence while still catching a genuine freeze. Retighten once WoWMeta’s real cadence has been observed over a few cycles."
     },
     {
       "key": "wcl-live-raid",

@@ -137,6 +137,15 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
     for (const page of source.pages ?? []) {
       urlOk(page.url, `sources.json: source "${source.id}" page url`);
       isoOk(page.snapshot, `sources.json: source "${source.id}" page snapshot`);
+      // `published` is the date the PAGE states about itself (JSON-LD dateModified, a
+      // "Last updated" string, Archon's lastUpdated) as opposed to `snapshot`, which an
+      // agent writes. Optional, but it is the only one that can contradict a run: WoWMeta
+      // served a 2026-03-23 prerender under nightly `snapshot: "2026-07-31"` stamps for a
+      // week. It may never be in the future, and never predate nothing — see dataHealth.
+      isoOk(page.published, `sources.json: source "${source.id}" page published`);
+      if (page.published && page.snapshot && page.published > page.snapshot) {
+        errors.push(`sources.json: source "${source.id}" page published ${page.published} is newer than its snapshot ${page.snapshot} — a page cannot publish after it was fetched`);
+      }
     }
     if (source.kind === "tier-list") {
       if (!scales.scales?.[source.scale]) {

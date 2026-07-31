@@ -1542,7 +1542,10 @@ if(META.latestSnapshot){
   const stale = (() => {
     if(!Array.isArray(dh.all)) return dh.series || [];
     const ref = todayISO > dh.latest ? todayISO : dh.latest;
-    return dh.all.filter(s => gap(s.asOf, ref) > (dh.staleDays ?? 7));
+    // Tier lists publish on an editorial cadence and carry a looser threshold; using the
+    // metric one here would flag a healthy weekly source every time it had a quiet week.
+    const limit = s => (s.kind === "tier-list" ? (dh.tierStaleDays ?? 14) : (dh.staleDays ?? 7));
+    return dh.all.filter(s => gap(s.asOf, ref) > limit(s));
   })();
   if(!stale.length){ el.hidden = true; return; }
   const oldest = stale[0]?.asOf ?? dh.oldest;
@@ -1560,7 +1563,8 @@ if(META.latestSnapshot){
   stale.forEach(s=>{
     const id = s.source || "unknown";
     const key = s.family ? `${id}|${s.family}` : id;
-    const g = bySource.get(key) || { key, id, family: s.family || null, n:0, oldest:null };
+    const g = bySource.get(key) || { key, id, family: s.family || null, kind: s.kind || null,
+      attested: s.attested || null, n:0, oldest:null };
     g.n++; if(!g.oldest || s.asOf < g.oldest) g.oldest = s.asOf;
     bySource.set(key, g);
   });
@@ -1568,6 +1572,13 @@ if(META.latestSnapshot){
   const clause = g => {
     const label = (SOURCES.find(x=>x.id===g.id)||{}).name || g.id;
     const fam = g.family === "redistributed" ? " rDPS/HPS" : g.family === "raw" ? " raw-DPS" : "";
+    // A tier list is not a "series", and its date is usually SELF-reported (what the run
+    // wrote) rather than a date the page states about itself — say which, because a
+    // self-reported date is exactly the thing that lied during the WoWMeta freeze.
+    if (g.kind === "tier-list") {
+      const how = g.attested === "published" ? "published" : "last fetched";
+      return `the ${esc(label)} tier list was ${how} ${bold(g.oldest)}`;
+    }
     const noun = `${g.n} ${esc(label)}${fam} series`;
     // The outage claim belongs to the family that is actually mid-outage, and to nothing
     // else. Every other stalled group simply hasn't refreshed — say only that.
@@ -1577,9 +1588,9 @@ if(META.latestSnapshot){
   };
   const groups = [...bySource.values()].sort((a,b)=> b.n-a.n || a.key.localeCompare(b.key));
   el.innerHTML = `<b>Heads up</b> ${groups.map(clause).join("; ")}. `
-    // Only claim what this function can see. It reads metric dates, never sources.json,
-    // so "tier lists refresh nightly" was unverifiable here — and false exactly when the
-    // nightly stalls, which is when the banner matters most.
+    // Only claim what this function can see. It reads metric dates AND (since 2026-07-31)
+    // tier-list page dates, so a frozen tier list is no longer invisible — but a tier
+    // date is only as good as its attestation, which the clause states.
     + `Freshest data we hold is ${esc(dh.latest)}; each row shows its own date. `
     + `Our 12.1 projection is recomputed nightly, but its PTR-empirical term still comes from the frozen ${esc(oldest)} cuts. `
     + `<details class="dh-series"><summary>Affected: ${n} series</summary>${esc(names)}.</details>`;
