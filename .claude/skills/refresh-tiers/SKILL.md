@@ -1,6 +1,6 @@
 ---
 name: refresh-tiers
-description: Refresh the tracker's tier-list ratings from every tier-list source in data/sources.json (currently Icy Veins, Method, Wowhead, Archon, WoWMeta). Use when the user says "refresh tiers", "update the tier lists", "pull new rankings", or when snapshot dates in data/sources.json look stale (tier lists move weekly-ish).
+description: Refresh the tracker's tier-list ratings from every tier-list source in data/sources.json (currently Icy Veins, Method, Wowhead, Archon). Use when the user says "refresh tiers", "update the tier lists", "pull new rankings", or when snapshot dates in data/sources.json look stale (tier lists move weekly-ish).
 ---
 
 # Refresh tier-list ratings
@@ -11,7 +11,7 @@ Fetch the current Midnight tier lists live and merge them into `data/specs.json`
 ## Procedure
 
 1. Read `data/sources.json` for the pages of each `kind: "tier-list"` source
-   (currently icyveins, method, wowhead, archon, wowmeta — the registry is the source
+   (currently icyveins, method, wowhead, archon — the registry is the source
    of truth, not this list). **Fetch each page inline, one source at a time.** Do NOT fan
    out subagents: the nightly runner passes `--disallowedTools "Agent,Task"`, so the call
    fails, and backgrounding slow work to "wait" for it was the root cause of the
@@ -40,21 +40,17 @@ Fetch the current Midnight tier lists live and merge them into `data/specs.json`
   HTML. Wowhead's M+ DPS scale includes **A+**; role pages can have empty tiers.
 - **Method's raid list URL is `/guides/tier-list/raiding`** (not `/raid`), and it may
   omit specs entirely (Vengeance DH was absent 2026-03) — omit, don't invent.
-- **WoWMeta is JS-rendered (SvelteKit)** — WebFetch returns an empty shell; fetch via
-  the r.jina.ai proxy. Its scale is S/A/B/C/D; page URLs live under /wow/…-tier-list
-  (re-discover from the nav on 404).
-- 🛑 **WOWMETA M+ IS UNDER REVIEW — DO NOT INGEST OR RE-STAMP IT** (2026-07-31, owner
-  decision pending; evidence in this skill's log.md). Two independent defects, both
-  verified: (a) the **live** view clusters its letters on **player count**, not the
-  `lb_ci` performance metric its own prose claims — the page has an undocumented
-  "Popular Choice" / "Optimized Potential" toggle and defaults to Popular Choice, so the
-  letters are a popularity ranking feeding the M+ letter consensus (hard rule 3); and
-  (b) a **direct** fetch returns a stale SSR prerender stamped `dateModified
-  2026-03-23`, which is what committed data actually matches (27/27, vs 9/27 for the
-  live view) — 130 days old while `sources.json` stamped it `2026-07-31` (hard rule 1).
-  Until Riley rules, skip wowmeta in step 3 and **leave its `snapshot` values alone**
-  rather than writing today's date. The wowmeta **raid** pages stay uningested with
-  `snapshot: null` — that disposition is unchanged and separate.
+- ✅ **WoWMeta is NO LONGER a tier-list source — do not fetch it here** (retyped to
+  `kind: "metrics"` 2026-07-31, owner-approved; recipe now lives in **refresh-metrics**).
+  It was removed from the letter consensus because two defects made its letters unusable:
+  (a) they are Ckmeans clusters of an undocumented "Popular Choice"/"Optimized Potential"
+  toggle that defaults to **player count**, so they ranked representation rather than
+  performance (hard rule 3) — Augmentation had the highest lb_ci of all 27 M+ DPS specs
+  while sitting in B; and (b) the HTML transport served a stale S3 prerender
+  (`dateModified 2026-03-23`) that committed data matched 27/27 against the live view's
+  9/27 — 130 days old under a `2026-07-31` stamp (hard rule 1). The tracker now publishes
+  its `lowerBound` as a NUMBER from the JSON API. **Consensus is four tier-list sources:
+  Icy Veins, Method, Wowhead, Archon.**
 - **A 200 is not freshness — check the page's OWN published date.** The wowmeta freeze
   went unnoticed for a week because every run fetched successfully, parsed 40/40 rows,
   logged "0 moves", and wrote today's date. Nothing in the tracker surfaces a stale
@@ -70,6 +66,6 @@ Fetch the current Midnight tier lists live and merge them into `data/specs.json`
   **transport-induced view flips, not upstream movement** — they nonetheless fed
   consensus, the ▲▼ engine and `data/history/`, so the movement narrative for those
   dates is not trustworthy. Record which transport you used, every run.
-- **murlok-style numbers are NOT tiers.** Only the five tier-list sources feed consensus.
+- **murlok-style numbers are NOT tiers.** Only the four tier-list sources feed consensus.
 - A new source first needs a scale in `data/scales.json` (check each tier round-trips
   through the consensus bands) and a registry entry — config only, no code.

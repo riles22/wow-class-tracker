@@ -14,8 +14,7 @@
         "icyveins": "C",
         "method": "C",
         "wowhead": "B",
-        "archon": "C",
-        "wowmeta": "B"
+        "archon": "C"
       }
     },
     "ptr": {
@@ -126,6 +125,15 @@
         "n": 6,
         "asOf": "2026-07-28",
         "era": "ptr"
+      },
+      {
+        "source": "wowmeta",
+        "bracket": "mplus",
+        "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
+        "value": 335.68,
+        "unit": "rating",
+        "n": 35519,
+        "asOf": "2026-07-28"
       }
     ],
     "survivability": {
@@ -164,8 +172,7 @@
         "icyveins": "A",
         "method": "B",
         "wowhead": "B",
-        "archon": "C",
-        "wowmeta": "C"
+        "archon": "C"
       }
     },
     "ptr": null,
@@ -335,6 +342,15 @@
         "n": 583,
         "asOf": "2026-07-31",
         "era": "ptr"
+      },
+      {
+        "source": "wowmeta",
+        "bracket": "mplus",
+        "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
+        "value": 326.94,
+        "unit": "rating",
+        "n": 14737,
+        "asOf": "2026-07-28"
       }
     ],
     "fightProfile": {
@@ -395,8 +411,7 @@
         "icyveins": "S",
         "method": "A",
         "wowhead": "A+",
-        "archon": "S",
-        "wowmeta": "S"
+        "archon": "S"
       }
     },
     "ptr": {
@@ -582,6 +597,15 @@
         "n": 303,
         "asOf": "2026-07-31",
         "era": "ptr"
+      },
+      {
+        "source": "wowmeta",
+        "bracket": "mplus",
+        "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
+        "value": 393.92,
+        "unit": "rating",
+        "n": 74855,
+        "asOf": "2026-07-28"
       }
     ],
     "fightProfile": {
@@ -641,8 +665,7 @@
         "icyveins": "A+",
         "method": "B",
         "wowhead": "B",
-        "archon": "B",
-        "wowmeta": "C"
+        "archon": "B"
       }
     },
     "ptr": {
@@ -816,6 +839,15 @@
         "n": 112,
         "asOf": "2026-07-31",
         "era": "ptr"
+      },
+      {
+        "source": "wowmeta",
+        "bracket": "mplus",
+        "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
+        "value": 339,
+        "unit": "rating",
+        "n": 24798,
+        "asOf": "2026-07-28"
       }
     ],
     "fightProfile": {
@@ -874,8 +906,7 @@
         "icyveins": "S",
         "method": "A",
         "wowhead": "A+",
-        "archon": "S",
-        "wowmeta": "S"
+        "archon": "S"
       }
     },
     "ptr": {
@@ -1062,6 +1093,15 @@
         "n": 719,
         "asOf": "2026-07-31",
         "era": "ptr"
+      },
+      {
+        "source": "wowmeta",
+        "bracket": "mplus",
+        "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
+        "value": 391.17,
+        "unit": "rating",
+        "n": 52678,
+        "asOf": "2026-07-28"
       }
     ],
     "fightProfile": {
@@ -1121,8 +1161,7 @@
         "icyveins": "A",
         "method": "A",
         "wowhead": "A",
-        "archon": "C",
-        "wowmeta": "C"
+        "archon": "C"
       }
     },
     "ptr": {
@@ -1229,6 +1268,15 @@
         "n": 2,
         "asOf": "2026-07-28",
         "era": "ptr"
+      },
+      {
+        "source": "wowmeta",
+        "bracket": "mplus",
+        "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
+        "value": 334.32,
+        "unit": "rating",
+        "n": 21231,
+        "asOf": "2026-07-28"
       }
     ],
     "survivability": {
@@ -1267,8 +1315,7 @@
         "icyveins": "A",
         "method": "B",
         "wowhead": "A",
-        "archon": "C",
-        "wowmeta": "C"
+        "archon": "C"
       }
     },
     "ptr": {
@@ -1453,6 +1500,15 @@
         "n": 716,
         "asOf": "2026-07-31",
         "era": "ptr"
+      },
+      {
+        "source": "wowmeta",
+        "bracket": "mplus",
+        "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
+        "value": 334.41,
+        "unit": "rating",
+        "n": 26717,
+        "asOf": "2026-07-28"
       }
     ],
     "fightProfile": {
@@ -1513,8 +1569,7 @@
         "icyveins": "A+",
         "method": "A",
         "wowhead": "B",
-        "archon": "A",
-        "wowmeta": "B"
+        "archon": "A"
       }
     },
     "ptr": null,
@@ -1674,6 +1729,15 @@
         "n": 95,
         "asOf": "2026-07-31",
         "era": "ptr"
+      },
+      {
+        "source": "wowmeta",
+        "bracket": "mplus",
+        "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
+        "value": 353.09,
+        "unit": "rating",
+        "n": 16057,
+        "asOf": "2026-07-28"
       }
     ],
     "fightProfile": {
@@ -1732,8 +1796,7 @@
         "icyveins": "S",
         "method": "B",
         "wowhead": "S",
-        "archon": "S",
-        "wowmeta": "S"
+        "archon": "S"
       }
     },
     "ptr": null,
@@ -1817,6 +1880,15 @@
         "n": 50,
         "asOf": "2026-07-31",
         "era": "ptr"
+      },
+      {
+        "source": "wowmeta",
+        "bracket": "mplus",
+        "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
+        "value": 388.37,
+        "unit": "rating",
+        "n": 92213,
+        "asOf": "2026-07-28"
       }
     ],
     "survivability": {
@@ -1855,8 +1927,7 @@
         "icyveins": "B",
         "method": "A",
         "wowhead": "S",
-        "archon": "C",
-        "wowmeta": "D"
+        "archon": "C"
       }
     },
     "ptr": null,
@@ -1967,6 +2038,15 @@
         "value": 385703,
         "unit": "HPS",
         "asOf": "2026-07-24"
+      },
+      {
+        "source": "wowmeta",
+        "bracket": "mplus",
+        "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
+        "value": 319.58,
+        "unit": "rating",
+        "n": 22628,
+        "asOf": "2026-07-28"
       }
     ],
     "survivability": {
@@ -2005,8 +2085,7 @@
         "icyveins": "S",
         "method": "A",
         "wowhead": "A+",
-        "archon": "S",
-        "wowmeta": "S"
+        "archon": "S"
       }
     },
     "ptr": {
@@ -2173,6 +2252,15 @@
         "n": 244,
         "asOf": "2026-07-31",
         "era": "ptr"
+      },
+      {
+        "source": "wowmeta",
+        "bracket": "mplus",
+        "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
+        "value": 408.77,
+        "unit": "rating",
+        "n": 26442,
+        "asOf": "2026-07-28"
       }
     ],
     "survivability": {
@@ -2220,8 +2308,7 @@
         "icyveins": "C",
         "method": "B",
         "wowhead": "B",
-        "archon": "C",
-        "wowmeta": "D"
+        "archon": "C"
       }
     },
     "ptr": {
@@ -2405,6 +2492,15 @@
         "n": 65,
         "asOf": "2026-07-31",
         "era": "ptr"
+      },
+      {
+        "source": "wowmeta",
+        "bracket": "mplus",
+        "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
+        "value": 323.35,
+        "unit": "rating",
+        "n": 5049,
+        "asOf": "2026-07-28"
       }
     ],
     "fightProfile": {
@@ -2465,8 +2561,7 @@
         "icyveins": "C",
         "method": "B",
         "wowhead": "B",
-        "archon": "C",
-        "wowmeta": "C"
+        "archon": "C"
       }
     },
     "ptr": {
@@ -2591,6 +2686,15 @@
         "value": 412472,
         "unit": "HPS",
         "asOf": "2026-07-24"
+      },
+      {
+        "source": "wowmeta",
+        "bracket": "mplus",
+        "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
+        "value": 323.23,
+        "unit": "rating",
+        "n": 9013,
+        "asOf": "2026-07-28"
       }
     ],
     "survivability": {
@@ -2629,8 +2733,7 @@
         "icyveins": "A+",
         "method": "B",
         "wowhead": "B",
-        "archon": "B",
-        "wowmeta": "B"
+        "archon": "B"
       }
     },
     "ptr": {
@@ -2816,6 +2919,15 @@
         "n": 182,
         "asOf": "2026-07-31",
         "era": "ptr"
+      },
+      {
+        "source": "wowmeta",
+        "bracket": "mplus",
+        "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
+        "value": 345.36,
+        "unit": "rating",
+        "n": 73459,
+        "asOf": "2026-07-28"
       }
     ],
     "fightProfile": {
@@ -2873,8 +2985,7 @@
         "icyveins": "C",
         "method": "A",
         "wowhead": "B",
-        "archon": "B",
-        "wowmeta": "C"
+        "archon": "B"
       }
     },
     "ptr": {
@@ -3052,6 +3163,15 @@
         "n": 601,
         "asOf": "2026-07-31",
         "era": "ptr"
+      },
+      {
+        "source": "wowmeta",
+        "bracket": "mplus",
+        "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
+        "value": 330.34,
+        "unit": "rating",
+        "n": 14578,
+        "asOf": "2026-07-28"
       }
     ],
     "fightProfile": {
@@ -3112,8 +3232,7 @@
         "icyveins": "A+",
         "method": "A",
         "wowhead": "B",
-        "archon": "A",
-        "wowmeta": "A"
+        "archon": "A"
       }
     },
     "ptr": {
@@ -3277,6 +3396,15 @@
         "n": 150,
         "asOf": "2026-07-31",
         "era": "ptr"
+      },
+      {
+        "source": "wowmeta",
+        "bracket": "mplus",
+        "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
+        "value": 365.67,
+        "unit": "rating",
+        "n": 15749,
+        "asOf": "2026-07-28"
       }
     ],
     "fightProfile": {
@@ -3335,8 +3463,7 @@
         "icyveins": "B",
         "method": "B",
         "wowhead": "B",
-        "archon": "C",
-        "wowmeta": "B"
+        "archon": "C"
       }
     },
     "ptr": {
@@ -3522,6 +3649,15 @@
         "n": 1438,
         "asOf": "2026-07-31",
         "era": "ptr"
+      },
+      {
+        "source": "wowmeta",
+        "bracket": "mplus",
+        "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
+        "value": 339.18,
+        "unit": "rating",
+        "n": 23972,
+        "asOf": "2026-07-28"
       }
     ],
     "fightProfile": {
@@ -3581,8 +3717,7 @@
         "icyveins": "C",
         "method": "C",
         "wowhead": "B",
-        "archon": "B",
-        "wowmeta": "C"
+        "archon": "B"
       }
     },
     "ptr": {
@@ -3756,6 +3891,15 @@
         "n": 85,
         "asOf": "2026-07-31",
         "era": "ptr"
+      },
+      {
+        "source": "wowmeta",
+        "bracket": "mplus",
+        "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
+        "value": 325.34,
+        "unit": "rating",
+        "n": 5565,
+        "asOf": "2026-07-28"
       }
     ],
     "fightProfile": {
@@ -3814,8 +3958,7 @@
         "icyveins": "A",
         "method": "A",
         "wowhead": "A",
-        "archon": "B",
-        "wowmeta": "C"
+        "archon": "B"
       }
     },
     "ptr": {
@@ -4001,6 +4144,15 @@
         "n": 65,
         "asOf": "2026-07-31",
         "era": "ptr"
+      },
+      {
+        "source": "wowmeta",
+        "bracket": "mplus",
+        "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
+        "value": 336.41,
+        "unit": "rating",
+        "n": 51064,
+        "asOf": "2026-07-28"
       }
     ],
     "fightProfile": {
@@ -4060,8 +4212,7 @@
         "icyveins": "A+",
         "method": "A",
         "wowhead": "A",
-        "archon": "A",
-        "wowmeta": "A"
+        "archon": "A"
       }
     },
     "ptr": {
@@ -4170,6 +4321,15 @@
         "n": 1,
         "asOf": "2026-07-28",
         "era": "ptr"
+      },
+      {
+        "source": "wowmeta",
+        "bracket": "mplus",
+        "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
+        "value": 361.23,
+        "unit": "rating",
+        "n": 24840,
+        "asOf": "2026-07-28"
       }
     ],
     "survivability": {
@@ -4208,8 +4368,7 @@
         "icyveins": "S",
         "method": "A",
         "wowhead": "S",
-        "archon": "S",
-        "wowmeta": "S"
+        "archon": "S"
       }
     },
     "ptr": {
@@ -4337,6 +4496,15 @@
         "value": 341024,
         "unit": "HPS",
         "asOf": "2026-07-24"
+      },
+      {
+        "source": "wowmeta",
+        "bracket": "mplus",
+        "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
+        "value": 378.83,
+        "unit": "rating",
+        "n": 66597,
+        "asOf": "2026-07-28"
       }
     ],
     "survivability": {
@@ -4375,8 +4543,7 @@
         "icyveins": "A",
         "method": "B",
         "wowhead": "C",
-        "archon": "B",
-        "wowmeta": "C"
+        "archon": "B"
       }
     },
     "ptr": {
@@ -4562,6 +4729,15 @@
         "n": 147,
         "asOf": "2026-07-31",
         "era": "ptr"
+      },
+      {
+        "source": "wowmeta",
+        "bracket": "mplus",
+        "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
+        "value": 335.74,
+        "unit": "rating",
+        "n": 14678,
+        "asOf": "2026-07-28"
       }
     ],
     "fightProfile": {
@@ -4621,8 +4797,7 @@
         "icyveins": "B",
         "method": "B",
         "wowhead": "A",
-        "archon": "C",
-        "wowmeta": "B"
+        "archon": "C"
       }
     },
     "ptr": {
@@ -4754,6 +4929,15 @@
         "value": 379564,
         "unit": "HPS",
         "asOf": "2026-07-24"
+      },
+      {
+        "source": "wowmeta",
+        "bracket": "mplus",
+        "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
+        "value": 337.97,
+        "unit": "rating",
+        "n": 26698,
+        "asOf": "2026-07-28"
       }
     ],
     "survivability": {
@@ -4792,8 +4976,7 @@
         "icyveins": "A",
         "method": "B",
         "wowhead": "A",
-        "archon": "C",
-        "wowmeta": "D"
+        "archon": "C"
       }
     },
     "ptr": {
@@ -4904,6 +5087,15 @@
         "n": 5,
         "asOf": "2026-07-28",
         "era": "ptr"
+      },
+      {
+        "source": "wowmeta",
+        "bracket": "mplus",
+        "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
+        "value": 333.33,
+        "unit": "rating",
+        "n": 59565,
+        "asOf": "2026-07-28"
       }
     ],
     "survivability": {
@@ -4942,8 +5134,7 @@
         "icyveins": "A+",
         "method": "B",
         "wowhead": "A",
-        "archon": "A",
-        "wowmeta": "A"
+        "archon": "A"
       }
     },
     "ptr": {
@@ -5129,6 +5320,15 @@
         "n": 352,
         "asOf": "2026-07-31",
         "era": "ptr"
+      },
+      {
+        "source": "wowmeta",
+        "bracket": "mplus",
+        "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
+        "value": 358.14,
+        "unit": "rating",
+        "n": 84602,
+        "asOf": "2026-07-28"
       }
     ],
     "fightProfile": {
@@ -5187,8 +5387,7 @@
         "icyveins": "A",
         "method": "B",
         "wowhead": "B",
-        "archon": "B",
-        "wowmeta": "B"
+        "archon": "B"
       }
     },
     "ptr": {
@@ -5315,6 +5514,15 @@
         "value": 387425,
         "unit": "HPS",
         "asOf": "2026-07-24"
+      },
+      {
+        "source": "wowmeta",
+        "bracket": "mplus",
+        "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
+        "value": 344.96,
+        "unit": "rating",
+        "n": 42877,
+        "asOf": "2026-07-28"
       }
     ],
     "survivability": {
@@ -5353,8 +5561,7 @@
         "icyveins": "C",
         "method": "C",
         "wowhead": "B",
-        "archon": "C",
-        "wowmeta": "C"
+        "archon": "C"
       }
     },
     "ptr": null,
@@ -5465,6 +5672,15 @@
         "value": 329298,
         "unit": "HPS",
         "asOf": "2026-07-24"
+      },
+      {
+        "source": "wowmeta",
+        "bracket": "mplus",
+        "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
+        "value": 325.86,
+        "unit": "rating",
+        "n": 17581,
+        "asOf": "2026-07-28"
       }
     ],
     "survivability": {
@@ -5503,8 +5719,7 @@
         "icyveins": "A+",
         "method": "B",
         "wowhead": "C",
-        "archon": "A",
-        "wowmeta": "B"
+        "archon": "A"
       }
     },
     "ptr": {
@@ -5688,6 +5903,15 @@
         "n": 346,
         "asOf": "2026-07-31",
         "era": "ptr"
+      },
+      {
+        "source": "wowmeta",
+        "bracket": "mplus",
+        "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
+        "value": 341.82,
+        "unit": "rating",
+        "n": 31425,
+        "asOf": "2026-07-28"
       }
     ],
     "fightProfile": {
@@ -5746,8 +5970,7 @@
         "icyveins": "A",
         "method": "B",
         "wowhead": "B",
-        "archon": "A",
-        "wowmeta": "B"
+        "archon": "A"
       }
     },
     "ptr": {
@@ -5924,6 +6147,15 @@
         "n": 77,
         "asOf": "2026-07-31",
         "era": "ptr"
+      },
+      {
+        "source": "wowmeta",
+        "bracket": "mplus",
+        "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
+        "value": 338.9,
+        "unit": "rating",
+        "n": 8306,
+        "asOf": "2026-07-28"
       }
     ],
     "fightProfile": {
@@ -5984,8 +6216,7 @@
         "icyveins": "A+",
         "method": "C",
         "wowhead": "B",
-        "archon": "A",
-        "wowmeta": "A"
+        "archon": "A"
       }
     },
     "ptr": {
@@ -6162,6 +6393,15 @@
         "n": 149,
         "asOf": "2026-07-31",
         "era": "ptr"
+      },
+      {
+        "source": "wowmeta",
+        "bracket": "mplus",
+        "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
+        "value": 346.48,
+        "unit": "rating",
+        "n": 8825,
+        "asOf": "2026-07-28"
       }
     ],
     "fightProfile": {
@@ -6222,8 +6462,7 @@
         "icyveins": "A",
         "method": "A",
         "wowhead": "B",
-        "archon": "A",
-        "wowmeta": "B"
+        "archon": "A"
       }
     },
     "ptr": {
@@ -6411,6 +6650,15 @@
         "n": 53,
         "asOf": "2026-07-31",
         "era": "ptr"
+      },
+      {
+        "source": "wowmeta",
+        "bracket": "mplus",
+        "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
+        "value": 353.36,
+        "unit": "rating",
+        "n": 14945,
+        "asOf": "2026-07-28"
       }
     ],
     "fightProfile": {
@@ -6471,8 +6719,7 @@
         "icyveins": "A+",
         "method": "A",
         "wowhead": "A",
-        "archon": "A",
-        "wowmeta": "B"
+        "archon": "A"
       }
     },
     "ptr": null,
@@ -6642,6 +6889,15 @@
         "n": 688,
         "asOf": "2026-07-31",
         "era": "ptr"
+      },
+      {
+        "source": "wowmeta",
+        "bracket": "mplus",
+        "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
+        "value": 341.29,
+        "unit": "rating",
+        "n": 35632,
+        "asOf": "2026-07-28"
       }
     ],
     "fightProfile": {
@@ -6701,8 +6957,7 @@
         "icyveins": "A+",
         "method": "B",
         "wowhead": "B",
-        "archon": "A",
-        "wowmeta": "A"
+        "archon": "A"
       }
     },
     "ptr": {
@@ -6888,6 +7143,15 @@
         "n": 263,
         "asOf": "2026-07-31",
         "era": "ptr"
+      },
+      {
+        "source": "wowmeta",
+        "bracket": "mplus",
+        "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
+        "value": 354.35,
+        "unit": "rating",
+        "n": 29445,
+        "asOf": "2026-07-28"
       }
     ],
     "fightProfile": {
@@ -6946,8 +7210,7 @@
         "icyveins": "A+",
         "method": "A",
         "wowhead": "S",
-        "archon": "A",
-        "wowmeta": "A"
+        "archon": "A"
       }
     },
     "ptr": {
@@ -7076,6 +7339,15 @@
         "value": 447296,
         "unit": "HPS",
         "asOf": "2026-07-24"
+      },
+      {
+        "source": "wowmeta",
+        "bracket": "mplus",
+        "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
+        "value": 368.13,
+        "unit": "rating",
+        "n": 75327,
+        "asOf": "2026-07-28"
       }
     ],
     "survivability": {
@@ -7114,8 +7386,7 @@
         "icyveins": "B",
         "method": "C",
         "wowhead": "B",
-        "archon": "B",
-        "wowmeta": "B"
+        "archon": "B"
       }
     },
     "ptr": null,
@@ -7285,6 +7556,15 @@
         "n": 345,
         "asOf": "2026-07-31",
         "era": "ptr"
+      },
+      {
+        "source": "wowmeta",
+        "bracket": "mplus",
+        "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
+        "value": 343.78,
+        "unit": "rating",
+        "n": 17939,
+        "asOf": "2026-07-28"
       }
     ],
     "fightProfile": {
@@ -7344,8 +7624,7 @@
         "icyveins": "A",
         "method": "A",
         "wowhead": "A+",
-        "archon": "A",
-        "wowmeta": "A"
+        "archon": "A"
       }
     },
     "ptr": null,
@@ -7515,6 +7794,15 @@
         "n": 145,
         "asOf": "2026-07-31",
         "era": "ptr"
+      },
+      {
+        "source": "wowmeta",
+        "bracket": "mplus",
+        "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
+        "value": 354.32,
+        "unit": "rating",
+        "n": 40057,
+        "asOf": "2026-07-28"
       }
     ],
     "fightProfile": {
@@ -7574,8 +7862,7 @@
         "icyveins": "B",
         "method": "B",
         "wowhead": "B",
-        "archon": "C",
-        "wowmeta": "D"
+        "archon": "C"
       }
     },
     "ptr": null,
@@ -7745,6 +8032,15 @@
         "n": 137,
         "asOf": "2026-07-31",
         "era": "ptr"
+      },
+      {
+        "source": "wowmeta",
+        "bracket": "mplus",
+        "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
+        "value": 313.19,
+        "unit": "rating",
+        "n": 11385,
+        "asOf": "2026-07-28"
       }
     ],
     "fightProfile": {
@@ -7804,8 +8100,7 @@
         "icyveins": "A+",
         "method": "C",
         "wowhead": "A",
-        "archon": "S",
-        "wowmeta": "A"
+        "archon": "S"
       }
     },
     "ptr": {
@@ -7997,6 +8292,15 @@
         "n": 947,
         "asOf": "2026-07-31",
         "era": "ptr"
+      },
+      {
+        "source": "wowmeta",
+        "bracket": "mplus",
+        "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
+        "value": 353.7,
+        "unit": "rating",
+        "n": 28807,
+        "asOf": "2026-07-28"
       }
     ],
     "fightProfile": {
@@ -8057,8 +8361,7 @@
         "icyveins": "A",
         "method": "B",
         "wowhead": "B",
-        "archon": "A",
-        "wowmeta": "A"
+        "archon": "A"
       }
     },
     "ptr": {
@@ -8251,6 +8554,15 @@
         "n": 95,
         "asOf": "2026-07-31",
         "era": "ptr"
+      },
+      {
+        "source": "wowmeta",
+        "bracket": "mplus",
+        "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
+        "value": 348.66,
+        "unit": "rating",
+        "n": 26964,
+        "asOf": "2026-07-28"
       }
     ],
     "fightProfile": {
@@ -8309,8 +8621,7 @@
         "icyveins": "B",
         "method": "B",
         "wowhead": "B",
-        "archon": "C",
-        "wowmeta": "D"
+        "archon": "C"
       }
     },
     "ptr": {
@@ -8411,6 +8722,15 @@
         "n": 77,
         "asOf": "2026-07-31",
         "era": "ptr"
+      },
+      {
+        "source": "wowmeta",
+        "bracket": "mplus",
+        "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
+        "value": 329.08,
+        "unit": "rating",
+        "n": 27217,
+        "asOf": "2026-07-28"
       }
     ],
     "survivability": {

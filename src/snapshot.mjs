@@ -6,7 +6,7 @@ import { writeFile, mkdir } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { loadData } from "./validate.mjs";
-import { buildPayload, snapshotStateOf, PROJECTION_VERSION, RANK_VERSION, SNAPSHOT_PHASE } from "./render.mjs";
+import { buildPayload, snapshotStateOf, PROJECTION_VERSION, RANK_VERSION, CONSENSUS_VERSION, SNAPSHOT_PHASE } from "./render.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -17,8 +17,11 @@ export async function snapshot(root = ROOT, date = new Date().toISOString().slic
   // so the stored key format can never drift from the lookup. projectionVersion pins which
   // formula produced the stored projections — the report card must never grade a v1
   // forecast against v2 semantics.
+  // consensusVersion pins WHICH tier-list sources composed the stored consensus, so a
+  // later registry change cannot be narrated as spec movement.
   const snap = { date, phase: SNAPSHOT_PHASE, projectionVersion: PROJECTION_VERSION,
-    rankVersion: RANK_VERSION, specs: snapshotStateOf(payload.specs) };
+    rankVersion: RANK_VERSION, consensusVersion: CONSENSUS_VERSION,
+    specs: snapshotStateOf(payload.specs) };
   const dir = path.join(root, "data", "history");
   await mkdir(dir, { recursive: true });
   const outPath = path.join(dir, `${date}.json`);

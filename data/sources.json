@@ -185,52 +185,51 @@
   {
     "id": "wowmeta",
     "name": "WoWMeta",
-    "kind": "tier-list",
-    "scale": "wowmeta",
+    "kind": "metrics",
     "author": "Hypermeta Network (algorithmic)",
-    "methodology": "Algorithmic S/A/B/C/D tier lists: Ckmeans clustering of the lower-bound 95% CI of official Blizzard M+ scores per spec (raid and PvP lists too). Population-statistics lens — distinct from Archon (Warcraft Logs top-end) and editorial lists. Updated frequently.",
+    "methodology": "Population-wide Mythic+ statistics from the official Blizzard M+ API. The tracker ingests lowerBound (the lower bound of the 95% CI of a spec's MEAN Blizzard M+ rating across all logged players) as a number — deliberately NOT as letter tiers. Retyped from tier-list to metrics on 2026-07-31: the site's published letters are Ckmeans clusters of an undocumented \"Popular Choice\" / \"Optimized Potential\" toggle that defaults to PLAYER COUNT, so its letters ranked representation rather than performance (Augmentation had the highest lb_ci of all 27 M+ DPS specs while sitting in B; Retribution was 15th and sat in S). Distinct from Murlok's top-50 ceiling and Archon's Warcraft Logs top-end: this is a sample-size-penalised population MEAN, not a ceiling.",
     "pages": [
       {
         "bracket": "mplus",
         "role": "DPS",
         "url": "https://wowmeta.com/wow/mythic-plus-dps-tier-list",
-        "snapshot": "2026-07-31"
+        "snapshot": "2026-07-28"
       },
       {
         "bracket": "mplus",
         "role": "Healer",
         "url": "https://wowmeta.com/wow/mythic-plus-healer-tier-list",
-        "snapshot": "2026-07-31"
+        "snapshot": "2026-07-28"
       },
       {
         "bracket": "mplus",
         "role": "Tank",
         "url": "https://wowmeta.com/wow/mythic-plus-tank-tier-list",
-        "snapshot": "2026-07-31"
+        "snapshot": "2026-07-28"
       },
       {
         "bracket": "raid",
         "role": "DPS",
-        "label": "Raid · DPS (currently unranked — 0 records)",
+        "label": "Raid · DPS (live upstream, but lowerBound is DPS throughput — not ingested)",
         "url": "https://wowmeta.com/wow/raid-dps-tier-list",
         "snapshot": null
       },
       {
         "bracket": "raid",
         "role": "Healer",
-        "label": "Raid · Healer (currently unranked)",
+        "label": "Raid · Healer (live upstream, but lowerBound is DPS throughput — not ingested)",
         "url": "https://wowmeta.com/wow/raid-healer-tier-list",
         "snapshot": null
       },
       {
         "bracket": "raid",
         "role": "Tank",
-        "label": "Raid · Tank (currently unranked)",
+        "label": "Raid · Tank (live upstream, but lowerBound is DPS throughput — not ingested)",
         "url": "https://wowmeta.com/wow/raid-tank-tier-list",
         "snapshot": null
       }
     ],
-    "notes": "JS-rendered (SvelteKit) — WebFetch returns an empty shell; fetch via the r.jina.ai proxy. Scale S/A/B/C/D plus 'X = Unranked' (X is omitted, never stored). Raid pages verified Midnight-era but hold 0-2 records as of 2026-07-09 (nearly all specs still X) — ingest raid tiers when they populate."
+    "notes": "Fetch the JSON API directly, NOT the web page: https://data.wowmeta.com/rankings/midnight/mplus/all/0.json (one file backs all three M+ pages) plus https://data.wowmeta.com/manifest.json for snapshotDate (= the page's \"Last updated\", and the honest asOf). Plain curl, no headers, no proxy. Select blocks by categoryType in {dps,hps,tank} + sortField \"lowerBound\" + keyRange undefined — WHITELIST those three, since \"melee\"/\"ranged\" are subsets of dps and would double-count. The wowmeta.com HTML is a STALE S3 prerender (dateModified 2026-03-23) and r.jina.ai is non-deterministic about executing the page JS — neither is a trustworthy transport. The raid endpoint (/rankings/midnight/raid/all-bosses/5.json) is live but its lowerBound is DPS THROUGHPUT (~180k), a different quantity on a different scale — do not merge it under the M+ rating name."
   },
   {
     "id": "warcraftlogs",

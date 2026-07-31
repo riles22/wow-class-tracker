@@ -91,6 +91,39 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
   its going quiet must never redden a nightly. Refresh it opportunistically during metric
   runs, tolerate staleness, and do NOT propose it into required-sources.json. The sheets
   ask for visible credit — the registry entry + drawer label carry it; keep them.
+- **WoWMeta** (population-wide M+ rating — retyped from tier-list to metrics 2026-07-31):
+  fetch the **JSON API**, never the web page. Two plain `curl` calls, no headers, no proxy,
+  no auth (AmazonS3 behind CloudFront — no Cloudflare, so it should work from CI too,
+  though that is high-confidence-unproven until the first nightly):
+  ```
+  curl -sf https://data.wowmeta.com/manifest.json                          # -> snapshotDate = the asOf
+  curl -sf https://data.wowmeta.com/rankings/midnight/mplus/all/0.json     # -> one file, all 3 M+ pages
+  ```
+  The rankings file is an array of **44 blocks**; select
+  `categoryType ∈ {dps, hps, tank}` **+** `sortField === "lowerBound"` **+**
+  `keyRange === undefined` (All Keys) → 27 + 7 + 6 = **40 rows**. **WHITELIST those three
+  categoryTypes — do not merely blacklist "dungeon"**: `melee` and `ranged` are SUBSETS of
+  `dps` and silently double-count 27 specs. Merge `lowerBound` as
+  **"M+ lower-bound 95% CI rating (Blizzard API, population-wide)"** (bracket mplus, unit
+  `rating`, `n` = `numberOfCharacters`, `asOf` = `manifest.snapshotDate`).
+  `classSpec.className`/`.spec` are byte-identical to the roster — 40/40, no mapping table.
+  - **`asOf` is the SOURCE's snapshotDate, never today.** It legitimately lags the run
+    (07-28 on a 07-31 run), so the manifest success cross-check (stored date must be
+    within 1 day of the run) will reject a `success` claim on a lagging day. Record
+    **`partial`** with the upstream date in the detail — the real staleness alarm is
+    `maxAgeDays: 4` in required-sources.json, not the success claim.
+  - **Never fetch wowmeta.com HTML**: it is a stale S3 prerender (`dateModified`
+    2026-03-23) that the tracker unknowingly ingested for a week, and r.jina.ai is
+    non-deterministic about executing the page JS. Both are untrustworthy transports.
+  - Its published LETTERS are not ingested and must not be: they are Ckmeans clusters of an
+    undocumented "Popular Choice"/"Optimized Potential" toggle defaulting to **player
+    count**, so they rank representation, not performance. `lowerBound` is the CI lower
+    bound of a spec's **mean** Blizzard rating across all logged players — a
+    sample-size-penalised population mean, **not a ceiling** (that is `maxAmount`). Keep it
+    clearly distinct from Murlok's top-50 ceiling.
+  - The raid endpoint (`/rankings/midnight/raid/all-bosses/5.json`) is live, but its
+    `lowerBound` is **DPS throughput** (~180k), a different quantity on a different scale —
+    do not merge it under the M+ rating name.
 - **Bloodmallet** (fight profiles, DPS specs only):
   `GET bloodmallet.com/chart/get/talent_target_scaling/castingpatchwerk/{class}/{spec}`
   — take BEST build DPS per target count (1/2/3/5/8/15) into `profiles[].targets`.

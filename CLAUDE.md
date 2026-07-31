@@ -232,7 +232,10 @@ current run, and its standing skip/unreachable explanations never excuse skippin
 again: each run attempts every requirement fresh and rewrites the file (fresh `run` +
 `startedAt`); the nightly publish gate hard-fails on an unchanged manifest file.
 
-### Tier lists (every `tier-list` source — currently Icy Veins / Method / Wowhead / Archon / WoWMeta)
+### Tier lists (every `tier-list` source — currently Icy Veins / Method / Wowhead / Archon)
+*(WoWMeta was retyped to `kind: "metrics"` on 2026-07-31 — its letters clustered on player
+count, not performance, and its HTML transport served a 130-day-old prerender. It now
+publishes `lowerBound` as a number; recipe in the refresh-metrics skill.)*
 1. Fetch each page in `sources.json` live; era-verify (Midnight S1, Devourer in DPS lists).
    Archon: parse the `__NEXT_DATA__` JSON script tag from raw HTML (WebFetch markdown
    drops it); raid = throughput tierList, M+ = score tierList.

@@ -1,13 +1,14 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
-import { dataHealth, fightLabels, metricRanks, outlookFor, movementFor, projectionMovementFor, snapshotStateOf, pickBaseline, dummyDomeScores, classifyHighlight, projectionFor, historySeries, specBuildChanges, PROJECTION_VERSION, RANK_VERSION } from "../src/render.mjs";
+import { dataHealth, fightLabels, metricRanks, outlookFor, movementFor, projectionMovementFor, snapshotStateOf, pickBaseline, dummyDomeScores, classifyHighlight, projectionFor, historySeries, specBuildChanges, PROJECTION_VERSION, RANK_VERSION, CONSENSUS_VERSION } from "../src/render.mjs";
 
 /* Stamp a fixture snapshot as current-version. An UNSTAMPED snapshot means version 1 —
    every snapshot written before the markers existed came from the v1 formulas — so a
    fixture that means "same version as now" has to say so, exactly like snapshot.mjs does.
    Tests that exercise the CROSS-version path deliberately skip this. */
-const cur = snap => ({ ...snap, projectionVersion: PROJECTION_VERSION, rankVersion: RANK_VERSION });
+const cur = snap => ({ ...snap, projectionVersion: PROJECTION_VERSION, rankVersion: RANK_VERSION,
+  consensusVersion: CONSENSUS_VERSION });
 
 test("specBuildChanges: spec lines by prefix, class-wide lines by build membership", () => {
   const builds = { builds: [
@@ -175,8 +176,8 @@ test("pickBaseline skips snapshots identical to the present state (post-refresh 
     consensus: { raid: { tier: "A" }, mplus: { tier: "B" } },
     metrics: [{ source: "x", bracket: "raid", name: "M", value: 1, rank: 2 }]
   };
-  const identical = { date: "2026-07-06", specs: snapshotStateOf([spec]) };            // the CI-rebuild case
-  const older = { date: "2026-07-04", specs: { "C|S": { consensus: { raid: "B", mplus: "B" }, ranks: { "x|raid|M": 5 } } } };
+  const identical = cur({ date: "2026-07-06", specs: snapshotStateOf([spec]) });       // the CI-rebuild case
+  const older = cur({ date: "2026-07-04", specs: { "C|S": { consensus: { raid: "B", mplus: "B" }, ranks: { "x|raid|M": 5 } } } });
   // Newest matches current state → must fall through to the older, differing baseline.
   assert.equal(pickBaseline([spec], [identical, older]), older);
   // Only identical snapshots → no usable baseline (honest zero movement).
@@ -185,7 +186,7 @@ test("pickBaseline skips snapshots identical to the present state (post-refresh 
   assert.equal(pickBaseline([spec], []), null);
   // An old snapshot that predates the dummy section is compared without it (not "different" by absence).
   const preDummySpec = { ...spec, ptrDummy: { rank: 5, of: 23, score: 50, targets: { "1": 1 } } };
-  const preDummySnap = { date: "2026-07-01", specs: snapshotStateOf([spec]) }; // no dummy stored
+  const preDummySnap = cur({ date: "2026-07-01", specs: snapshotStateOf([spec]) }); // no dummy stored
   assert.equal(pickBaseline([preDummySpec], [preDummySnap]), null, "dummy-only additions must not fake a baseline diff");
 });
 
@@ -637,12 +638,52 @@ test("a rank-version boundary suppresses rank arrows but still narrates consensu
   assert.equal(sameVersion.metrics[0].rankDelta, 3, "same version → rank arrows are real");
   assert.equal(sameVersion.ptrDummy.rankDelta, 6);
 
-  // Unstamped == rank v1. The tier move is still true across the boundary; the rank move is not.
-  const crossVersion = movementFor(specs(), scales, { date: "2026-07-23", specs: body })[0];
+  // Rank v1, consensus current. The tier move is still true across the boundary; the rank move is not.
+  const crossVersion = movementFor(specs(), scales,
+    { date: "2026-07-23", specs: body, consensusVersion: CONSENSUS_VERSION })[0];
   assert.deepEqual(crossVersion.movement, { raid: { delta: 1, was: "B", since: "2026-07-23" } },
     "consensus tiers are version-independent — suppressing them would hide real movement");
   assert.equal(crossVersion.metrics[0].rankDelta, undefined, "a redefined rank is not a rank change");
   assert.equal(crossVersion.ptrDummy.rankDelta, undefined);
+});
+
+test("a consensus-composition boundary suppresses tier arrows but keeps ranks, dummy and the timeline", () => {
+  // Why this exists: when a tier-list source leaves the consensus (WoWMeta retyped to
+  // kind:"metrics" on 2026-07-31), every spec's mean recomposes at once. Narrating that as
+  // spec movement would publish arrows for specs whose standing did not change at all.
+  const scales = { consensus: { bands: [{ tier: "S", min: 85 }, { tier: "A", min: 60 }, { tier: "B", min: 0 }] } };
+  const specs = () => [{
+    class: "C", spec: "S", role: "DPS",
+    consensus: { raid: { tier: "A" }, mplus: { tier: "B" } },
+    metrics: [{ source: "wcl", bracket: "raid", name: "M", value: 1, rank: 2 }],
+    ptrDummy: { rank: 3, of: 20, score: 70, targets: { "1": 1 } }
+  }];
+  const body = { "C|S": { consensus: { raid: "B", mplus: "B" }, ranks: { "wcl|raid|M": 5 }, dummy: { rank: 9, score: 40 } } };
+
+  // Rank/projection current, consensus composition OLD → tier arrows drop, the rest survive.
+  const crossConsensus = movementFor(specs(), scales,
+    { date: "2026-07-23", specs: body, rankVersion: RANK_VERSION, projectionVersion: PROJECTION_VERSION })[0];
+  assert.equal(crossConsensus.movement, undefined, "a recomposed consensus is not spec movement");
+  assert.equal(crossConsensus.metrics[0].rankDelta, 3, "ranks are unaffected by a consensus recompose");
+  assert.equal(crossConsensus.ptrDummy.rankDelta, 6, "dummy ranks are unaffected too");
+
+  // Same composition → the tier arrow is real and must still narrate.
+  assert.deepEqual(movementFor(specs(), scales, cur({ date: "2026-07-23", specs: body }))[0].movement,
+    { raid: { delta: 1, was: "B", since: "2026-07-23" } });
+
+  // Baseline selection must not treat a recomposed consensus as evidence of change...
+  const consOnly = { date: "2026-07-22", specs: { "C|S": { consensus: { raid: "B", mplus: "B" }, ranks: { "wcl|raid|M": 2 } } },
+    rankVersion: RANK_VERSION };
+  assert.equal(pickBaseline(specs(), [consOnly]), null, "tier-only diff across the boundary is not a baseline");
+  // ...but a genuine rank difference across the same boundary still is.
+  const rankMoved = { date: "2026-07-22", specs: { "C|S": { consensus: { raid: "B", mplus: "B" }, ranks: { "wcl|raid|M": 5 } } },
+    rankVersion: RANK_VERSION };
+  assert.equal(pickBaseline(specs(), [rankMoved]), rankMoved);
+
+  // The Timeline is source-derived, not formula-derived, so consensus points keep plotting.
+  const series = historySeries(specs(), scales, [{ date: "2026-07-23", specs: body }]);
+  assert.equal(series.specs["C|S"].raid.filter(v => v != null).length, 1,
+    "consensus sparkline survives a composition boundary");
 });
 
 test("a rank-version boundary does not stop pickBaseline one snapshot short", () => {
@@ -654,8 +695,9 @@ test("a rank-version boundary does not stop pickBaseline one snapshot short", ()
     consensus: { raid: { tier: "A" }, mplus: { tier: "B" } },
     metrics: [{ source: "x", bracket: "raid", name: "M", value: 1, rank: 2 }]
   };
-  const v1SameTiers = { date: "2026-07-24", specs: { "C|S": { consensus: { raid: "A", mplus: "B" }, ranks: { "x|raid|M": 17 } } } };
-  const v1RealMove  = { date: "2026-07-23", specs: { "C|S": { consensus: { raid: "B", mplus: "B" }, ranks: { "x|raid|M": 17 } } } };
+  const v1 = snap => ({ ...snap, consensusVersion: CONSENSUS_VERSION }); // rank-v1, consensus current
+  const v1SameTiers = v1({ date: "2026-07-24", specs: { "C|S": { consensus: { raid: "A", mplus: "B" }, ranks: { "x|raid|M": 17 } } } });
+  const v1RealMove  = v1({ date: "2026-07-23", specs: { "C|S": { consensus: { raid: "B", mplus: "B" }, ranks: { "x|raid|M": 17 } } } });
   assert.equal(pickBaseline([spec], [v1SameTiers, v1RealMove]), v1RealMove,
     "same tiers + differently-defined ranks is not a difference");
 });

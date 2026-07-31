@@ -411,9 +411,28 @@ export const PROJECTION_VERSION = 2;
    because it is silent. So a cross-version baseline is still chosen and still narrates
    consensus; only the rank, dummy and projection arrows fall away. */
 export const RANK_VERSION = 2;
+
+/* Consensus-composition version. Consensus SCORES are source-derived, not formula-derived
+   (see historySeries), so this is deliberately NOT a formula marker like the two above and
+   it does NOT gate the Timeline sparklines — a source going quiet upstream is ordinary
+   movement and must keep narrating.
+
+   What it does gate is the one case that is NOT movement: when we change WHICH sources
+   compose the consensus, every spec's mean recomposes at once and the ▲▼ engine would
+   narrate a registry decision as spec movement. v2 = 2026-07-31, when WoWMeta left the M+
+   consensus (retyped to kind:"metrics" after its letters were found to cluster on player
+   count rather than the performance metric it advertises), taking the M+ mean from five
+   tier-list sources to four and shifting 9 of 40 M+ tiers by one band on its own.
+
+   Bump this ONLY when the tier-list source SET changes, never for upstream data movement.
+   Degrade-don't-reject, as with ranks: a cross-version baseline is still chosen and still
+   narrates ranks, dummy and projection; only the consensus arrows fall away. Every
+   snapshot on disk is rankVersion 2, so baseline selection survives the boundary. */
+export const CONSENSUS_VERSION = 2;
 const versionOf = (snap, field) => snap?.[field] ?? 1;
 const ranksComparableWith = snap => versionOf(snap, "rankVersion") === RANK_VERSION;
 const projComparableWith = snap => versionOf(snap, "projectionVersion") === PROJECTION_VERSION;
+const consensusComparableWith = snap => versionOf(snap, "consensusVersion") === CONSENSUS_VERSION;
 // Snapshot phase marker — the season/settledness tag the post-launch forecast report
 // card uses to find its endpoint ("first settled S2 consensus") without reading commit
 // history. Flip to "12.1-live" (or the S2 season id) when 12.1 ships and the tracker is
@@ -581,17 +600,20 @@ export function pickBaseline(specs, snapshots) {
     // Rank state from a different RANK_VERSION is not evidence of change — comparing it
     // would make every rank-v1 snapshot look "different" and stop the walk one snapshot
     // too early, hiding the real consensus movement further back.
-    if (snap?.specs && baselineDiffers(now, snap.specs, ranksComparableWith(snap))) return snap;
+    if (snap?.specs && baselineDiffers(now, snap.specs, ranksComparableWith(snap), consensusComparableWith(snap))) return snap;
   }
   return null;
 }
-function baselineDiffers(now, then, ranksComparable = true) {
+function baselineDiffers(now, then, ranksComparable = true, consensusComparable = true) {
   const anyDummy = Object.values(then).some(e => e && e.dummy);
   const keys = new Set([...Object.keys(now), ...Object.keys(then)]);
   for (const k of keys) {
     const a = now[k], b = then[k];
     if (!a || !b) return true;
-    if (a.consensus.raid !== (b.consensus?.raid ?? null) || a.consensus.mplus !== (b.consensus?.mplus ?? null)) return true;
+    // Across a consensus-composition boundary every mean recomposes at once, so a tier
+    // difference is definitional, not evidence of change — the same reasoning ranks use.
+    if (consensusComparable &&
+        (a.consensus.raid !== (b.consensus?.raid ?? null) || a.consensus.mplus !== (b.consensus?.mplus ?? null))) return true;
     if (!ranksComparable) continue; // consensus tiers are version-independent; ranks are not
     const ar = a.ranks ?? {}, br = b.ranks ?? {};
     for (const r of new Set([...Object.keys(ar), ...Object.keys(br)])) if (ar[r] !== br[r]) return true;
@@ -609,12 +631,15 @@ export function movementFor(specs, scales, snapshot) {
   // meaning at RANK_VERSION 2 (ties share a rank, sub-MIN_RANK_N rows carry none), so a
   // cross-version rank diff is definitional, not movement.
   const ranksComparable = ranksComparableWith(snapshot);
+  // Consensus arrows are suppressed across a composition boundary (CONSENSUS_VERSION):
+  // the mean recomposed for every spec at once, which is a registry decision, not movement.
+  const consensusComparable = consensusComparableWith(snapshot);
   const bandIdx = new Map(scales.consensus.bands.map((b, i) => [b.tier, i]));
   for (const s of specs) {
     const prev = snapshot.specs[`${s.class}|${s.spec}`];
     if (!prev) continue;
     const movement = {};
-    for (const bracket of ["raid", "mplus"]) {
+    for (const bracket of consensusComparable ? ["raid", "mplus"] : []) {
       const now = s.consensus?.[bracket]?.tier;
       const was = prev.consensus?.[bracket];
       if (now && was && now !== was && bandIdx.has(now) && bandIdx.has(was)) {
@@ -798,7 +823,8 @@ export function buildPayload({ specs, sources, scales, community, ptrBuilds, cre
       latestPtrBuild: latestBuild,
       movementSince: baseline?.date ?? null,
       projectionVersion: PROJECTION_VERSION,
-      rankVersion: RANK_VERSION
+      rankVersion: RANK_VERSION,
+      consensusVersion: CONSENSUS_VERSION
     }
   };
 }
