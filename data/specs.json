@@ -4625,20 +4625,25 @@
     },
     "ptr": {
       "verdict": "Positive",
-      "theme": "From \"zero changes\" to a genuinely fun 4pc",
-      "summary": "Clarius notes Holy Pally opened 12.1 with literally zero patch-note changes beyond a tier set, but the 6/30 build turned it around: the 4pc went from a coin-flip to a guaranteed Infusion of Light on Holy Light, and talent tuning to Eternal Flame and Pillars of Light opened up genuinely fresh, more fun builds. Good changes overall — he just wishes more of the talent-tree work had been baseline instead of tied to a temporary set.",
+      "theme": "From \"zero changes\" to a better spec by three corrections",
+      "summary": "Clarius's running read spans the whole PTR cycle: a reveal with literally zero Holy changes beyond the set, a 4-piece upgraded from coin-flip to guaranteed Infusion on Holy Light, an accidental no-Holy-Shock build born from that same 4-piece, a 50% Holy Shock healing buff that briefly made every build equal, and finally a tier-set-attached Holy Light mana increase that kills the degenerate build for good. His close: throughput is up significantly, Eternal Flame is now the default spender with a better healing profile, and he is personally pleased with where it landed.",
       "changes": [
         "4pc buffed on 6/30 from a 50% chance to a 100% chance for Holy Light to grant Infusion of Light — 'a great change,' you can now always rely on Holy Light for Infusions and stop spamming them back to back.",
         "6/30 also brought Eternal Flame closer to Light of Dawn, opening builds that drop Unending Light / Breaking Dawn and enable Empyrean Legacy / Truth Prevails with EF as the main HP spender — better healing profile and more fun.",
         "Pillars of Light + the EF buff + the new set make Beacon of Virtue far more appealing; for M+, where EF was already best, it's a straight buff.",
         "2pc increases Infusion of Light additively: Infused Flash of Light heals +275% instead of +200% (a 25% bump) and Greater Judgment hits +225% instead of +150% (a 30% bump).",
         "PTR build 68569 (2026-07-08): broad buff for talent diversity — all healing +8%, Holy Shock +10%, the 2-set now doubles Infusion of Light (100%, was 75%), plus buffs to Truth Prevails, Saved by the Light, Overflowing Light, Awakening, Ringing of the Heavens and more.",
-        "PTR 2026-07-23 (post-writeup tuning): Blizzard found the 4-set was leaving Holy Paladin more mana-efficient than intended and added a 60% Holy Light mana-cost increase to the 4-set, while raising overall healing by 5% to compensate — a net efficiency check, not a redesign of the Infusion mechanic."
+        "PTR 2026-07-23 (post-writeup tuning): Blizzard found the 4-set was leaving Holy Paladin more mana-efficient than intended and added a 60% Holy Light mana-cost increase to the 4-set, while raising overall healing by 5% to compensate — a net efficiency check, not a redesign of the Infusion mechanic.",
+        "The 4-piece's guaranteed Infusion enabled a \"no Holy Shock\" build — skipping Holy Shock entirely funds Holy Light on every non-proc GCD, spends less mana than normal play, and eliminates weak filler casts. He published proof-of-concept (log + video) while predicting it would be fixed before launch.",
+        "The subsequent 50% Holy Shock healing buff (plus 11% mana cut) was far larger than he expected: post-buff raid testing had normal and no-HS builds, Herald and Lightsmith alike, performing so evenly that \"you could play whichever you prefer\".",
+        "The fix arrived as a tier-set-attached ~50% Holy Light mana increase — killing no-HS for good while leaving the satisfying always-proc 4-piece intact, with a 5% healing compensation. His read: strange to tie a malus to a set, but the right call versus nerfing the 4-piece, and precedent says spell nerfs made for sets don't get reverted later.",
+        "End state: Season-1-like play but with everything healing significantly more, Eternal Flame ahead of Light of Dawn as the default spender, Judgment over unbuffed Flash of Light thanks to the 2-piece, and mana effectively under your control through Holy Light volume."
       ],
       "set2": "A pretty standard set — makes Infusions feel better and more important not to waste (+25% on Infused Flash of Light, +30% on Greater Judgment), but not particularly strong compared to other healers' 2pc bonuses. (Pre-07-08 — Infusion of Light effectiveness was since raised to 100%.)",
       "set4": "Originally a 50% chance for Holy Light to grant Infusion of Light — which also caused wasted procs since you don't know you've proc'd until you've already queued the next spell. The 6/30 buff to a guaranteed 100% chance fixes that and is 'a great change': Holy Light is now a reliable Infusion generator, no more back-to-back spamming, and much more fun to play. (07-23 PTR: a 60% Holy Light mana-cost increase was added to the 4-set to rein in its mana efficiency, paired with a 5% overall healing buff — the reliability the writeup praises is unchanged.)",
-      "watch": "The 4pc exists to fix real gameplay gaps — making Judgment worth casting without an Infusion proc and cutting hardcast Flash of Light — and Clarius argues effects that fix gameplay issues should be baseline, not gated behind a temporary tier set. He also hoped for more talent-tree cleanup: lots of weak kiss/curse talents (Call of the Righteous, Rising Sunlight, Seraphic Barrier), and the essential Inflorescence of the Sunwell is still buried behind three mediocre talents.",
-      "sourceLabel": "Clarius (Hammer of Wrath) — Discord"
+      "watch": "His remaining complaints are structural, not tuning: too many kiss/curse talents (Call of the Righteous, Seraphic Barrier) whose downsides outweigh their point, and Inflorescence of the Sunwell — near-mandatory with this set — gated behind three mediocre talents. Lightsmith remains a no-Holy-Shock-style spender at heart and tested strongest with Beacon of Virtue by a small margin, but the busier rotation makes normal Herald the likely best build for most players.",
+      "source": "https://www.wowhead.com/news/a-shocking-tier-set-holy-paladin-class-changes-and-tier-set-review-382188",
+      "asOf": "2026-07-24"
     },
     "metrics": [
       {
@@ -4804,7 +4809,8 @@
       "set2": "The \"Crusader Strike\" set (Blessed Hammer, Hammer of the Righteous, Crusader Strike and Judgment) is a pure damage amp — those hits deal 20% increased damage, or 60% if the hit crits. The crew reads it as a straightforward offensive lever that rewards building around crit to hit the higher tier, doubling down on Prot's damage rotation rather than adding defensive value. (Pre-07-14 — the crit bonus was since halved: 100% additional damage, was 200%.)",
       "set4": null,
       "watch": "Note: the sources describe the tier set as a single combined mechanic and do not cleanly split a 2pc vs 4pc bonus, so the whole tier-set read sits in set2 and set4 is left empty. These are PTR values on top of an early, still-shifting tree — several of the nerfs are undocumented (Fluttershy) and the Hammer of Wrath Discord is tracking a live bug list, so the 60%-on-crit set payoff and the net offensive floor could both move before 12.1 ships. Treat the numbers as against the 12.0.7 baseline.",
-      "sourceLabel": "Woliance & Fluttershy (Hammer of Wrath) — Discord"
+      "sourceLabel": "Woliance & Fluttershy (Hammer of Wrath) — Discord",
+      "asOf": "2026-06-20"
     },
     "metrics": [
       {
@@ -5989,11 +5995,14 @@
         "Killing Spree damage +60% — finally worth pressing; likely locks in Trickster again.",
         "Fast Action buffed: Between the Eyes CD −8s (was −5s), +1% damage per BtE stack — now a core pick.",
         "New talent connectors (Ruthlessness ↔ Find an Opening; Flickering Steel ↔ Grand Melee).",
-        "Zero In (3%→2%) and Hidden Opportunity (Ambush proc 80%→100%) tweaks miss their stated mark."
+        "Zero In (3%→2%) and Hidden Opportunity (Ambush proc 80%→100%) tweaks miss their stated mark.",
+        "A Ravenholdt sim-worker's initial read (06-18) was lukewarm — numeric tuning where design was hoped for, the Killing Spree +60% called \"the laziest way to make it feel better to cast\" — but by 07-02 his sims and playtesting flipped the story: energy is SOLVED at standard ~25% haste with the tier set doing the heavy lifting, exactly where Outlaw needs to be.",
+        "Build state from those sims: Fast Action is very strong and always taken; Trickster runs ~3% ahead of Fatebound; Killing Spree now outranks Preparation in the priority and is no longer cancelled routinely. Known bug: the tier-set Dispatch can't proc Ruthlessness unless boosted by Supercharger or Coup de Grace. The hopeful Hidden Opportunity build still sims >10% behind.",
+        "The 07-15 Killing Spree pass is judged genuinely good — KS no longer fights Supercharge and flows under Adrenaline Rush, worth about 3% — with two corrections to Blizzard's own wording: Ruthlessness means KS at 7 combo points still slightly overcaps, and Adrenaline Rush's execution speedup is 25%, not the stated 20%."
       ],
       "set2": "Dispatch damage +15% — does very little on its own.",
       "set4": "Sinister Strike / Ambush have a 12% chance to make the next Dispatch free at max combo points — adds a track-and-react hook and eases energy income. Currently bugged with Gravedigger, Hand of Fate coins, and Ruthlessness. (Pre-06-30 values — proc chance since raised to 20%, Opportunity hits excluded.)",
-      "watch": "Loss of the Precise Cuts era of cleave has turned Outlaw from a 2–4 target monster into \"borderline unplayable\" on those fights — and the upcoming raid has several 2–3 target encounters. Same trap hits all Rogues.",
+      "watch": "Loss of the Precise Cuts era of cleave has turned Outlaw from a 2–4 target monster into \"borderline unplayable\" on those fights — and the upcoming raid has several 2–3 target encounters. Same trap hits all Rogues. Standing caveats from the sim side: 2-3-target cleave energy strain persists into Season 2, and the spec's famously wide RNG range isn't narrowing — Fast Action may widen it.",
       "sourceLabel": "Wowhead 12.1 class preview"
     },
     "metrics": [
@@ -6224,11 +6233,15 @@
         "Shadowcraft cut ~40–50% in real terms.",
         "General downward tuning with no compensating gameplay change.",
         "Nothing added to offset the losses.",
-        "PTR build 68569 (2026-07-08): all ability damage reduced by 8% (PvE only) — an overperformance trim after first Heroic testing."
+        "PTR build 68569 (2026-07-08): all ability damage reduced by 8% (PvE only) — an overperformance trim after first Heroic testing.",
+        "Ravenholdt's reveal-day read (06-18) was brutal: the Shadowcraft change alone cuts combo point and energy generation an estimated 20-30%, the 4-piece desyncs Shadow Dance from Secret Technique, and the on-PTR spec was described as having \"no cleave, no burst, no priority damage and no notable utility\" — \"to say I am disappointed would be a massive understatement.\"",
+        "The 06-30 build walked most of it back: Shadowcraft's combo points restored (~20% over live, energy still cut), the reworked Goremaw praised as a large usability step (finisher-damage-fed splitting that even enables funnel), The First Dance rewarded properly — \"pretty much what people wanted to see,\" with the oddity that the walk-back abandons Blizzard's own stated anti-overcapping goal.",
+        "Then the tuning turned again: an 8% blanket nerf on 07-08 (with the caveat that other strong specs were nerfed too), and by 07-21 the Goremaw buff only promotes it \"from underwhelming to mediocre\" while the spec \"remains completely over.\"",
+        "07-23 datamine: the SEASON 1 set is nerfed from ~7-8% to ~4-5% — expected, aimed at retiring 2p2p into Season 2, though possibly not enough to beat the ilvl upgrade on set slots, so 2p2p may survive early season."
       ],
       "set2": "Placeholder-tier value.",
       "set4": "Essentially just pushes more Backstab — no new decision or identity.",
-      "watch": "Comes into 12.1 at raid-A / M+-A, so it's nerfing from a fine spot — but the set is the least inspired of the tracked Rogues.",
+      "watch": "Comes into 12.1 at raid-A / M+-A, so it's nerfing from a fine spot — but the set is the least inspired of the tracked Rogues. The Ravenholdt arc to carry: reveal-day despair, a 06-30 walk-back that restored resources and goodwill, then renewed nerfs through late July — the burst identity loss the original Negative describes was never restored, only the resource floor.",
       "sourceLabel": "Wowhead 12.1 class preview"
     },
     "metrics": [
