@@ -3,6 +3,42 @@
 Keep the newest ~20 entries; prune older ones when appending (prose is memory, not state —
 parse counts and baselines the change detectors need live in the entries themselves).
 
+- 2026-08-01 (LOCAL run, ~14:1xZ — Opus 5; scheduled residential catch-up after the 10:37Z
+  nightly). Scope: residential-only — WCL cuts CI recorded `unreachable` + the transcript
+  queue. Nothing CI already refreshed (tiers/archon/murlok/wowmeta/simc/bloodmallet/
+  mythicstats/robydoby) was re-fetched or rewritten. · **ALL FIVE rDPS CUTS RESTORED — and
+  the transport finding is the reusable part: `curl` clears Cloudflare from this residential
+  IP where Node's built-in `fetch()` does NOT.** A first probe using `fetch()` with the exact
+  documented XHR-header recipe got HTTP 403 + `challenge-platform` on all five URLs; the same
+  headers via `curl` returned HTTP 200 with full tables. This is a TLS-fingerprint block, not
+  an IP block — so "the HTML endpoint works from residential" is only true through curl. Any
+  future local run should skip the `fetch()` attempt entirely. (The GraphQL `rdps` family is
+  still 500 upstream — this run went nowhere near the API; the statistics table is a separate
+  path and is what served these medians.) · **Zone 46 live raid** (diff 5 / size 20 / part 3,
+  `amount`, `dpstype=rdps`): DPS 27/27, tank 6/6, healer HPS 7/7, healer DPS 7/7 = 47 rows,
+  parses 2,119–41,509. Moves vs the stored 07-31 values are uniformly tiny — every one of the
+  47 moved, max 0.63% (Vengeance DH 75,770→76,248) — exactly the shape of one extra day of
+  logs on a large population. · **Zone 47 live M+** (diff 10 / size 5 / part 1): 27 + 6 + 7 =
+  40 rows, max move 1.30% (Arms Warrior 171,358→169,124). · **Zone 56 PTR M+**: 27 + 6 + 7 =
+  40 rows, parses 19–688, max move 4.78% (Aug Evoker 253,022→240,921) — larger swings, small n,
+  expected. · **Zone 52 Dummy Dome** → `spec.ptrDummy`, 27 specs: 1T 27 specs / 2T 17 / 3T 12 /
+  5T 27 (parses 1–235), coverage histogram {2 counts: 8 specs, 3: 9, 4: 10}. Moves up to 23%
+  (Windwalker Monk 5T 544,091→418,149) — tiny-n volatility, not a parse fault. **Parser note:
+  the "each spec appears twice" duplication documented for zone 52 did NOT occur this run**
+  (dupes=0 on every cut); the dedupe-on-first-occurrence guard stayed in anyway. · **Zone 54
+  PTR raid is still EMPTY upstream** — all four probes (Heroic 4/10 DPS+tank+healer and Mythic
+  5/20 DPS) returned 9.1 KB fragments with 0 spec rows. Per the standing rule, nothing was
+  ingested and **the stored 34 rows AND that page's `snapshot` were both left at 2026-07-28**
+  so the staleness stays visible rather than being papered over. · Bumped `sources.json`
+  snapshots to 2026-08-01 for zones 46/47/56/52 ONLY. · `dpstype=dps` and `dpstype=rdps`
+  return byte-identical tables for the zone-46 healer-DPS cut (verified), so
+  "Median DPS (Mythic, healer)" carries no methodology ambiguity. · 127 metric rows + 27
+  ptrDummy specs via apply-metrics.mjs, 0 unmatched. npm test 182 (170/12/0), build OK
+  961.7 KB, snapshot written, rebuilt after the snapshot. · **Manifest deliberately NOT
+  touched** — this was a partial run, so its rows still read the previous night's
+  `unreachable` for these five cuts while the stored data is now fresh. That is the bounded
+  one-day drift the local-run skill describes; tonight's nightly rewrites the file.
+
 - 2026-07-31 (nightly CI, ~22:41Z — Opus 5; single-shot) · **WCL: agent holds no credentials;
   `wcl-fetch/evidence.json` (attemptedAt 22:38:03Z) is the only input and the verdict is
   still `rdps-broken`** — `characterRankings(metric: rdps)` on encounter 3176 returns HTTP

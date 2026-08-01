@@ -4,6 +4,33 @@ Keep the newest ~20 entries; prune older ones when appending. Machine state the 
 detectors rely on (parse counts, seen video IDs) must stay in the NEWEST entries or a
 dedicated section — narrative prose older than that is prunable memory.
 
+- 2026-08-01 (LOCAL run, ~14:1xZ — Opus 5; scheduled residential catch-up after the 10:37Z
+  nightly). **Queue drain only — no re-discovery pass.** The nightly had already polled all
+  25 transcribable feeds today (25/25) and its sole unresolved output was one queued video;
+  re-running discovery ~2h later would only surface uploads too fresh for auto-captions
+  (the ≥2–6h rule), so scope stayed on the drain. Queue **1 → 0**; `skipped[]` unchanged at 4.
+  · **`okDLvLGMFzs`** (Obli, "Single target BUFF, AOE NERF(?) for Unholy DK! / Midnight
+  Season 2 PTR 12.1", published 08-01) — yt-dlp at the pinned 2026.07.04, json3 auto-subs,
+  245 events / ~8 min. Fetched clean from this residential IP (the runner bot-wall does not
+  apply here); the SABR + impersonation warnings printed but the subtitle download succeeded,
+  so they are noise, not failure. **1 take added, Unholy DK.** His read: the 08-01 pass looks
+  like an AoE nerf but is net a single-target buff — Virulent Plague −10%, graveyard −15%,
+  Epidemic −12% are all modest, the auto-attack doubling only moves melee ~2%→4.4% on a dummy
+  (still ~2% in a key, which he reads as a deliberate anti-pseudo-ranged nudge), and the real
+  gain is Corrupted Blood/withering grasp +25%. He points at the single-target dummy
+  leaderboard filling with 07-31/08-01 parses where it had been stale June logs, and lands on
+  "A plus", explicitly rejecting the S-tier framing others are giving it. · **Superseded** his
+  2026-07-31 Unholy take (`owCby8soRNY`) — same creator, same spec, same PTR-strength lens,
+  one day apart with a tuning pass in between, so the newer genuinely replaces the strength
+  read rather than complementing it. His 07-25 Frost take stays live (different spec). ·
+  **Scope firewall held twice**: the video opens on Blood's San'layn nerf, and Blood is
+  outside Obli's registered `specs` (Frost/Unholy) — no Blood take written. And "Frost went
+  unscathed, no changes to Frost" is a patch-notes fact, not a spec-strength analysis, so no
+  Frost take either; writing one would have inflated a non-statement. · Refreshed Obli's
+  `latest` in community.json. · 0 metaNotes (Obli is a class specialist, not a
+  `generalCreators` entry — that lane stays closed to him by validation). · npm test 182
+  (170/12/0), build OK, snapshot written.
+
 - 2026-07-31 (nightly CI, ~22:41Z — Opus 5; single-shot) · **All 25 unique transcribable
   feeds polled live — 25/25 HTTP 200 on the first attempt, 0 retries, 0 backoff.** The
   deterministic transcript step ran against an **EMPTY queue** (summary.json verdict `ok`,
