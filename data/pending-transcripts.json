@@ -2,11 +2,11 @@
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
   "videos": [
     {
-      "id": "Hn9upmp8ywc",
-      "creator": "Kalamazi",
-      "title": "BIG Warlock Buffs Are Here!",
-      "published": "2026-07-31",
-      "queuedAt": "2026-07-31"
+      "id": "okDLvLGMFzs",
+      "creator": "Obli",
+      "title": "Single target BUFF, AOE NERF(?) for Unholy DK! / Midnight Season 2 PTR 12.1",
+      "published": "2026-08-01",
+      "queuedAt": "2026-08-01"
     }
   ],
   "skipped": [
