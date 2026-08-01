@@ -35,6 +35,19 @@ say so and change nothing.
    note — attributed commentary about a dead design must say so. `npm test` enforces
    the pairing: a set-touching highlight whose spec's `tierSet.asOf` predates the
    build date fails validation (the tier-set upkeep gate in `src/validate.mjs`).
+3b. **Every spec you list in `specsAffected` must get a line in `highlights`.**
+   `npm test` enforces it (coverage gate in validate.mjs) — a spec named as affected with
+   no line that `specBuildChanges` would surface fails the run. Class-wide lines count,
+   scoped by build membership. This gate exists because the four earliest builds were
+   seeded with a handful of marquee lines against a full specsAffected list: build #1
+   named 39 specs and carried 6 lines, and 30 specs' 12.1 changes were invisible for six
+   weeks. Distill EVERY spec the post touches, not just the headline changes.
+   **Style for dense builds: one consolidated line per spec** (semicolon-separated, as in
+   builds #16 and #18) rather than one line per bullet. Note the consequence — a
+   consolidated line that mixes buffs and nerfs classifies as null and does not vote in
+   the outlook tally, which is intended: it is genuinely not evidence of a direction.
+   If a spec's changes ARE one-directional, keep them in one line so they do vote.
+
 4. **Spec writeups**: while scanning the RSS, also flag per-spec 12.1 review/first-look
    articles ("12.1 <spec> changes/review/tier set...") as writeup material for untracked
    specs, and distill them into the spec's `ptr` object in `data/specs.json`.

@@ -1000,3 +1000,29 @@ test("confidence is a ratio against obtainable signals, not a raw count", () => 
   }, "raid", PTR_PROJ_SCALES, [], PTR_SRC);
   assert.equal(dpsRaid.confidence, "high"); // 3 of 3
 });
+
+/* ---- classifyHighlight unanimity (PROJECTION_VERSION 4) ---- */
+
+test("classifyHighlight: a line mixing a buff and a nerf is ambiguous, not the first clause", () => {
+  // The real shape that motivated this: one consolidated per-spec line carrying both.
+  const mixed = "Elemental Shaman Lava Burst damage increased by 30%; Ascendance now increases the damage of Elemental Overload by 30% (was 75%).";
+  assert.equal(classifyHighlight(mixed), null);
+  // Order must not matter — first-clause-wins would have returned "nerf" for this one.
+  const flipped = "Elemental Shaman Ascendance now increases the damage of Elemental Overload by 30% (was 75%); Lava Burst damage increased by 30%.";
+  assert.equal(classifyHighlight(flipped), null);
+});
+
+test("classifyHighlight: single-direction lines are unchanged, however many clauses", () => {
+  assert.equal(classifyHighlight("Fire Mage Pyroblast damage increased by 15%, Flamestrike damage increased by 15%, and Scorch damage increased by 10%."), "buff");
+  assert.equal(classifyHighlight("Frost Death Knight All ability damage reduced by 10%; melee damage reduced by 20%; Obliterate damage reduced by 10%."), "nerf");
+  assert.equal(classifyHighlight("Guardian Druid All damage increased by 8%."), "buff");
+  assert.equal(classifyHighlight("Some spec — a purely descriptive line with no tuning verb at all."), null);
+});
+
+test("classifyHighlight: resource inversion and the (was N) idiom still decide, and still agree", () => {
+  // A cooldown REDUCTION is a buff; pairing it with another buff must stay unanimous.
+  assert.equal(classifyHighlight("Guardian Druid Lunation reduces Lunar Beam's cooldown by 20 seconds (was 3 seconds per Arcane ability)."), "buff");
+  assert.equal(classifyHighlight("Sigil of Chains cooldown reduced to 60 seconds (was 90 seconds), and Roaring Fire damage increased by 10%."), "buff");
+  // Bug-fix sentences are dropped before scoring, so they cannot create false ambiguity.
+  assert.equal(classifyHighlight("Fixed an issue where Wild Guardian was not correctly increasing Thrash and Mangle damage. All damage increased by 8%."), "buff");
+});

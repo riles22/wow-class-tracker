@@ -105,7 +105,11 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
 - **12.1 outlook (↗→↘)**: from the spec's `ptr.verdict` when present (writeups
   auto-confirm — see the ptr bullet), else the balance of buff/nerf tuning lines classified by
   `classifyHighlight` (render.mjs — resource-aware: "cooldown reduced" is a buff, and
-  the "X% (was Y%)" idiom is decided by the values). The zone-54 raid-testing rank is
+  the "X% (was Y%)" idiom is decided by the values). **Classification requires UNANIMITY
+  across a line's clauses** (2026-08-01): a line carrying both a buff and a nerf returns
+  null and does not vote, because the feed's consolidated one-line-per-spec style makes
+  mixed lines common and first-clause-wins scored them off whichever change happened to
+  be written first. The zone-54 raid-testing rank is
   named in the basis string for context but never drives the direction.
 - **12.1 projection ("Ours: 12.1")**: the tracker's OWN forecast tier list for raid+M+,
   computed in `projectionFor` (render.mjs) — live consensus baseline (w .55) blended
@@ -193,6 +197,16 @@ Per build: `{ date, label, forumPostNumber, forumUrl, wowheadUrl, icyveinsUrl,
 specsAffected[], highlights[] }`. Canonical source: the official forum thread
 (`thread` key) — each PTR build is a new reply post, machine-readable via Discourse
 `.json`. **A new patch cycle means a NEW thread** — re-discover via Wowhead news RSS.
+**`specsAffected` and `highlights` must agree** — a coverage gate in validate.mjs fails
+the run when a spec named in `specsAffected` receives no line that `specBuildChanges`
+would surface (class-wide lines count, via build membership). Added 2026-08-01 after an
+audit found the four earliest builds under-distilled at seeding: build #1 named 39 specs
+but carried 6 lines, so 30 specs' 12.1 changes reached no drawer and never entered the
+outlook tally for six weeks — every field individually well-formed, the two just never
+checked against each other. All four (#1/#6/#10/#11) were backfilled from the forum
+posts; drawer coverage went 118 → 190 spec-build entries.
+Dense builds use ONE consolidated line per spec (see #16) — which is why
+`classifyHighlight` requires clause unanimity; see PROJECTION_VERSION v4.
 
 ### `data/community.json` — curated community links
 Per class: verified Discord (name + invite from wowhead.com/discord-servers, render via

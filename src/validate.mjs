@@ -5,6 +5,7 @@ import { readFile, readdir } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { isLiveEra } from "./normalize.mjs";
+import { specBuildChanges } from "./render.mjs";
 
 const ROLES = new Set(["DPS", "Healer", "Tank"]);
 const BRACKETS = new Set(["raid", "mplus"]);
@@ -423,6 +424,28 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
     for (const e of build.specsAffected ?? []) {
       const classWide = [...classNames].some(c => e.startsWith(`${c} (`));
       if (!rosterNames.has(e) && !classWide) errors.push(`ptr-builds.json: build ${build.date} specsAffected "${e}" matches no roster spec or "Class (" prefix`);
+    }
+    // --- coverage gate (2026-08-01) ---
+    // specsAffected and highlights are written independently, and nothing forced them to
+    // agree. Build #1 recorded 39 affected specs but only 6 highlight lines, so 30 specs'
+    // 12.1 changes reached no drawer and never entered the outlook tally — invisible for
+    // six weeks, because every field was individually well-formed. Builds #6/#10/#11 had
+    // the same shape. Rule: a spec named in specsAffected must actually receive a line.
+    // Class-wide entries are exempt (they are scoped by membership, not by their own
+    // line), and a build with no highlights at all is a legitimate no-tuning post.
+    // Reachability is asked of specBuildChanges itself, never re-implemented here: the
+    // drawer's rule includes class-wide lines scoped by build membership, and a gate with
+    // its own copy of the rule would drift from the surface it is supposed to protect.
+    if ((build.highlights ?? []).length) {
+      const missing = (build.specsAffected ?? [])
+        .filter(e => rosterNames.has(e))
+        .filter(e => {
+          const spec = specs.find(s => `${s.spec} ${s.class}` === e);
+          return spec && !specBuildChanges(spec, ptrBuilds).some(x => x.date === build.date);
+        });
+      if (missing.length) {
+        errors.push(`ptr-builds.json: build ${build.date} lists ${missing.length} spec(s) in specsAffected with no highlight line — they would reach no drawer: ${missing.slice(0, 6).join(", ")}${missing.length > 6 ? ", …" : ""}`);
+      }
     }
   }
 
