@@ -51,6 +51,37 @@ say so and change nothing.
 4. **Spec writeups**: while scanning the RSS, also flag per-spec 12.1 review/first-look
    articles ("12.1 <spec> changes/review/tier set...") as writeup material for untracked
    specs, and distill them into the spec's `ptr` object in `data/specs.json`.
+
+   **Wowhead RSS is a discovery lane, NOT the only one** (2026-08-01). Nine specs sat at
+   `ptr: null` for weeks with run after run logging "no article covering any of them
+   appeared in the RSS window" — the RSS window is a few days wide and Wowhead's preview
+   series does not cover every spec, so a spec Wowhead never wrote about could never
+   arrive. The existing 31 writeups already came from five different places: 20 Wowhead,
+   **7 class Discord**, 2 hackmd.io, 1 Blizzard forum, 1 named guide author. So when a
+   spec is uncovered, work the lanes in this order before concluding it has nothing:
+
+   a. **Wowhead directly** — search the site for the spec's 12.1 article rather than
+      waiting for it to appear in the RSS window; older articles have scrolled out.
+   b. **Icy Veins NEWS** (`icy-veins.com/wow/news/...`) — their PTR lane is news posts,
+      not the spec guides. The guides self-identify as **12.0.7** and will not carry 12.1
+      analysis until launch, so do not burn a run diffing them expecting Season-2 content.
+   c. **Class Discords** via `paste-discord` — already the source of 7 writeups. Dreamgrove
+      (Druid), Council of the Black Harvest (Warlock), Earthshrine (Shaman), Warcraft
+      Priests, Death's Advance (DK). Not fetchable; Riley pastes.
+   d. **Community sites / HackMD guides** in `community.json` `sites[]` — the BM and MM
+      Hunter writeups came from hackmd.io.
+   e. **The spec's registered expert** in `community.json`. Every uncovered spec has one,
+      and most are `transcribable: false` 📖 precisely because they publish as guide
+      bylines and Discord posts rather than video. That flag marks WHERE to read them,
+      not that they are unreadable.
+
+   List the uncovered specs every run rather than remembering them:
+   `node -e "const s=require('./data/specs.json');console.log(s.filter(x=>!x.ptr).map(x=>x.class+' '+x.spec).join('\n'))"`
+
+   **A spec with no published analysis stays `ptr: null` — that is the correct outcome,
+   not a failure.** The verdict must be the source's read (see (c) below), so "nobody has
+   written about Feral yet" is an honest answer the UI already renders as pending. Never
+   manufacture a writeup from tuning lines to close the gap.
    **Auto-confirm policy (2026-07-06)**: writeups land confirmed — no draft flag, no
    review gate. The honesty requirements instead: (a) EVERY writeup carries `source`
    (URL) or `sourceLabel` (validation enforces it); (b) **every NEW writeup also carries
