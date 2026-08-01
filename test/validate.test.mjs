@@ -415,3 +415,37 @@ test("the PTR tier list is registered as era-gated and M+ only", async () => {
   assert.equal(rated + tbd, 40);
   assert.equal(tbd, 2);
 });
+
+test("build coverage gate: a spec in specsAffected with no line that reaches it fails", async () => {
+  const data = await loadData(ROOT);
+  const broken = structuredClone(data);
+  const build = broken.ptrBuilds.builds.find(b => b.highlights.length > 3);
+  // Name a spec as affected without giving it any line — the exact shape of the 2026-06-18
+  // defect, where 39 specs were listed against 6 highlight lines.
+  build.specsAffected.push("Subtlety Rogue");
+  build.highlights = build.highlights.filter(h => !h.startsWith("Subtlety Rogue") && !h.startsWith("Rogue ("));
+  const errors = validateData(broken, { fullRoster: true });
+  assert.ok(errors.some(e => e.includes("no highlight line") && e.includes("Subtlety Rogue")), errors.join("\n"));
+});
+
+test("build coverage gate: a class-wide line counts as reaching its build's specs", async () => {
+  const data = await loadData(ROOT);
+  const copy = structuredClone(data);
+  const build = copy.ptrBuilds.builds.find(b => b.date === "2026-07-08" && b.forumPostNumber === 11);
+  // Preservation Evoker is covered by its own line; swap it for class-wide-only coverage
+  // and the gate must still pass — reachability is specBuildChanges' rule, not a copy.
+  build.highlights = build.highlights.filter(h => !h.startsWith("Preservation Evoker"));
+  assert.ok(build.specsAffected.includes("Preservation Evoker"));
+  assert.ok(build.highlights.some(h => h.startsWith("Evoker (class-wide)")), "fixture needs the class-wide line");
+  const errors = validateData(copy, { fullRoster: true }).filter(e => e.includes("Preservation Evoker"));
+  assert.deepEqual(errors, []);
+});
+
+test("build coverage gate: a no-tuning post with zero highlights is legitimate", async () => {
+  const data = await loadData(ROOT);
+  const copy = structuredClone(data);
+  const build = copy.ptrBuilds.builds.find(b => b.forumPostNumber === 11);
+  build.highlights = [];
+  const errors = validateData(copy, { fullRoster: true }).filter(e => e.includes("no highlight line"));
+  assert.deepEqual(errors, []);
+});

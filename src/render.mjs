@@ -193,8 +193,28 @@ function isBugFixSentence(s) {
 
 /* Classify one tuning highlight as "buff" | "nerf" | null. Three things a bare
    increase/reduce word-count gets wrong — resource inversion, the "X by 75% (was 100%)"
-   idiom, and bug-fix framing — handled per clause with first-signal-wins. */
+   idiom, and bug-fix framing — are handled per clause.
+
+   UNANIMITY, not first-signal-wins (2026-08-01). Every scoreable clause votes, and the
+   line only classifies when they AGREE; a line carrying both a buff and a nerf returns
+   null and does not vote in the outlook tally.
+
+   Why this changed: highlights are not always one atomic tuning fact. The feed's own
+   convention for dense builds (build #16 onward) is ONE consolidated line per spec —
+   "Lava Burst and Lightning Bolt damage increased by 30%; … Ascendance now increases
+   Elemental Overload damage by 30% (was 75%)" — where first-signal-wins scored the whole
+   line off whichever clause happened to come first and silently discarded the rest. That
+   made Elemental Shaman's 6/18 pass read as a pure buff and flipped its outlook, with the
+   larger nerf in the same sentence never counted. 16 of the 139 highlights on file mix
+   directions this way.
+
+   Returning null is the honest answer, not a cop-out: "this line contains both a buff and
+   a nerf" genuinely is not evidence of a direction, and outlookFor's tally is a COUNT of
+   directional lines. A mixed line that voted either way would be a coin flip presented as
+   a finding. Specs whose builds are all mixed lines simply fall to "flat" with a basis
+   string that shows +0/−0 — visibly no signal, rather than an invented one. */
 export function classifyHighlight(h) {
+  const verdicts = new Set();
   // Sentences first, so a whole bug-fix sentence can be dropped before any clause inside
   // it is scored. The lookarounds keep decimals intact: "12.1" and "1.5 sec" never split.
   for (const sentence of String(h).split(/(?<!\d)[.;](?!\d)/)) {
@@ -230,14 +250,18 @@ export function classifyHighlight(h) {
         const isDelta = /\bby\s+[\d.]/i.test(clause) || /\b(reduction|increase)\b/i.test(clause);
         if (isDelta && res && verbDir) {
           const flipped = verbDir === "buff" ? "nerf" : "buff";
-          return now > before ? verbDir : flipped;
+          verdicts.add(now > before ? verbDir : flipped);
+        } else {
+          verdicts.add(((now > before) !== res) ? "buff" : "nerf"); // higher level = buff, unless it's a cost/cooldown
         }
-        return ((now > before) !== res) ? "buff" : "nerf"; // higher level = buff, unless it's a cost/cooldown
+        continue; // the numeric idiom already decided this clause; the bare verb must not re-vote it
       }
-      if (verbDir) return verbDir;
+      if (verbDir) verdicts.add(verbDir);
     }
   }
-  return null;
+  // 0 scoreable clauses → no signal. 1 direction → that direction. Both → ambiguous,
+  // which is not a direction and must not be reported as one.
+  return verdicts.size === 1 ? [...verdicts][0] : null;
 }
 
 /* 12.1 outlook: direction derived from the PTR writeup verdict when present,
@@ -411,8 +435,19 @@ export function outlookFor(spec, ptrBuilds) {
         the weights renormalize, adding a third term reweights the other two wherever it
         is present (a spec with all three reads .44/.36/.20 rather than .55/.45). Today
         that means every M+ projection moves and every raid projection does not, since
-        Icy Veins publishes no PTR raid list. v2 and v3 are NOT one series. */
-export const PROJECTION_VERSION = 3;
+        Icy Veins publishes no PTR raid list. v2 and v3 are NOT one series.
+   v4 — 2026-08-01. Weights and inputs UNCHANGED; the outlook TERM moved, for two reasons
+        that landed together:
+          · classifyHighlight now requires unanimity across a line's clauses — a line
+            carrying both a buff and a nerf returns null instead of being scored off
+            whichever clause came first. 13 of the 139 highlights on file reclassify.
+          · the four earliest builds (#1/#6/#10/#11) were backfilled from the forum posts
+            after an audit found specsAffected and highlights disagreeing: build #1 named
+            39 specs but carried 6 lines, so 30 specs' 12.1 changes had never reached the
+            outlook tally at all. Coverage went from 9 to 40 specs on #1 alone.
+        Net effect: 3 of 40 outlook directions and 1 of 80 projection tiers move. Both
+        changes make the tally MORE complete, so v4 scores are not comparable to v3. */
+export const PROJECTION_VERSION = 4;
 
 /* Rank-map version, stamped beside it. `snapshotStateOf().ranks` feeds movement
    comparison, and its meaning changed in the same commit as PROJECTION_VERSION v2:
