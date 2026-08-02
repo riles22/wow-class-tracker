@@ -15,7 +15,24 @@ say so and change nothing.
    `log.md` (last run).
 2. **New builds?** Fetch the Wowhead news RSS (`wowhead.com/news/rss/all`) and filter
    titles for "12.1 PTR" + (Development Notes | Class Tuning | Datamined) with pubDate
-   after the newest logged build. Then fetch the official thread's Discourse JSON
+   after the newest logged build.
+   **RSS transport facts, verified 2026-08-01 — do not re-derive:**
+   · Items are `<title>` THEN `<link>`. A regex keyed on `<link>...</link>` followed by
+     `<title>` matches ZERO items and looks exactly like an empty feed. Parse per
+     `<item>` block, never by tag adjacency. This cost two probe rewrites.
+   · Each item carries `<content:encoded>` with the FULL article body (longest seen
+     ~36 KB). ONE RSS fetch gives you all ~40 article texts — no per-article fetching,
+     which also makes Cloudflare on the article pages irrelevant.
+   · `wowhead.com/guide/*` IS Cloudflare-403 to plain urllib regardless of User-Agent.
+   · Build-recap articles carry a navigation index listing every spec name in a row
+     ("...Feral DruidGuardian DruidRestoration Druid..."), which matches any spec filter.
+     Require a change verb near the match or strip nav blocks, or one article "mentions"
+     all 40 specs.
+   · **Icy Veins is fetchable but NOT discoverable**: `/wow/news` is JS-hydrated (200,
+     ~42 KB, zero `/wow/news/` hrefs) and `/wow/rss/news.xml` 404s. Direct article URLs
+     fetch fine. Discovery therefore comes off Wowhead RSS or a search engine; Icy Veins
+     is where you READ once you already hold a URL.
+   Then fetch the official thread's Discourse JSON
    (thread URL in `data/ptr-builds.json` + `.json`) and read `post_stream.posts` for
    new Linxy posts.
 3. **For each new build**: add an entry to `data/ptr-builds.json` (newest first):
@@ -35,6 +52,27 @@ say so and change nothing.
    note — attributed commentary about a dead design must say so. `npm test` enforces
    the pairing: a set-touching highlight whose spec's `tierSet.asOf` predates the
    build date fails validation (the tier-set upkeep gate in `src/validate.mjs`).
+3a. **Three channels, not one** (2026-08-01). The feed tracks official forum BUILD
+   posts. Wowhead also publishes datamined tuning articles and **PTR hotfix** round-ups —
+   "Last night, a few hotfixes were pushed to the Patch 12.1 PTR" — which are neither
+   build posts nor live-realm hotfixes. A PTR hotfix is real 12.1 tuning the forum thread
+   never carries, so it can be absent from the feed while every gate stays green
+   (confirmed case: Ride the Lightning +59%, Wowhead news=382321, 2026-07-31). Before
+   logging one, check whether it sits under a bare CLASS heading with no spec qualifier —
+   that one does, so attributing it to Elemental is inference. It belongs as a
+   `Class (class-wide)` line or not at all.
+
+3c. **PvP-only changes are OUT OF SCOPE** — this tracker rates PvE. A change that only
+   alters PvP combat must never be written as a `Spec Class ...` highlight: it would let a
+   PvP nerf vote in the PvE outlook tally. Precedent when logging one for the record is to
+   prefix it `PvP only (out of scope for this tracker's PvE ratings) - `, which
+   deliberately fails the `Spec Class ` prefix and so reaches no drawer. Lines that merely
+   CARRY a PvP exclusion ("All damage increased by 6%. This does not apply to PvP
+   combat.") are ordinary PvE lines — keep those. Worked example: the 2026-07-31 notes
+   contain a Restoration Druid entry, but it is PvP-only (-10% healing in PvP), which is
+   why build #18 correctly lists no Restoration Druid line and the coverage gate is right
+   to stay quiet.
+
 3b. **Every spec you list in `specsAffected` must get a line in `highlights`.**
    `npm test` enforces it (coverage gate in validate.mjs) — a spec named as affected with
    no line that `specBuildChanges` would surface fails the run. Class-wide lines count,
@@ -51,6 +89,45 @@ say so and change nothing.
 4. **Spec writeups**: while scanning the RSS, also flag per-spec 12.1 review/first-look
    articles ("12.1 <spec> changes/review/tier set...") as writeup material for untracked
    specs, and distill them into the spec's `ptr` object in `data/specs.json`.
+
+   **Wowhead RSS is a discovery lane, NOT the only one** (2026-08-01). Nine specs sat at
+   `ptr: null` for weeks with run after run logging "no article covering any of them
+   appeared in the RSS window" — the RSS window is a few days wide and Wowhead's preview
+   series does not cover every spec, so a spec Wowhead never wrote about could never
+   arrive. The existing 31 writeups already came from five different places: 20 Wowhead,
+   **7 class Discord**, 2 hackmd.io, 1 Blizzard forum, 1 named guide author. So when a
+   spec is uncovered, work the lanes in this order before concluding it has nothing:
+
+   a. **Wowhead directly** — search the site for the spec's 12.1 article rather than
+      waiting for it to appear in the RSS window; older articles have scrolled out.
+   b. **Icy Veins NEWS** (`icy-veins.com/wow/news/...`) — their PTR lane is news posts,
+      not the spec guides. The guides self-identify as **12.0.7** and will not carry 12.1
+      analysis until launch, so do not burn a run diffing them expecting Season-2 content.
+   c. **Class Discords** via `paste-discord` — already the source of 7 writeups. Dreamgrove
+      (Druid), Council of the Black Harvest (Warlock), Earthshrine (Shaman), Warcraft
+      Priests, Death's Advance (DK). Not fetchable; Riley pastes.
+   d. **Community sites / HackMD guides** in `community.json` `sites[]` — the BM and MM
+      Hunter writeups came from hackmd.io.
+   e. **The spec's registered expert** in `community.json`. Every uncovered spec has one,
+      and most are `transcribable: false` 📖 precisely because they publish as guide
+      bylines and Discord posts rather than video. That flag marks WHERE to read them,
+      not that they are unreadable.
+
+   **Read the notes with their heading structure INTACT.** Flattening to prose destroys
+   the nesting that establishes which spec owns a line, and the same spell appears under
+   several specs with different values: in the 2026-06-18 notes "Wild Growth healing
+   increased by 25%" belongs to Balance, to Feral, AND to Heart of the Wild, while
+   Restoration's own line says **20%**. A 2026-08-01 research pass had one reader get it
+   right and a second "correct" it to 25% off the flattened text. Spec+class key shapes do
+   NOT prevent this — only section attribution does.
+
+   List the uncovered specs every run rather than remembering them:
+   `node -e "const s=require('./data/specs.json');console.log(s.filter(x=>!x.ptr).map(x=>x.class+' '+x.spec).join('\n'))"`
+
+   **A spec with no published analysis stays `ptr: null` — that is the correct outcome,
+   not a failure.** The verdict must be the source's read (see (c) below), so "nobody has
+   written about Feral yet" is an honest answer the UI already renders as pending. Never
+   manufacture a writeup from tuning lines to close the gap.
    **Auto-confirm policy (2026-07-06)**: writeups land confirmed — no draft flag, no
    review gate. The honesty requirements instead: (a) EVERY writeup carries `source`
    (URL) or `sourceLabel` (validation enforces it); (b) **every NEW writeup also carries
