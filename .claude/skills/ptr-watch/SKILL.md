@@ -62,6 +62,22 @@ say so and change nothing.
    that one does, so attributing it to Elemental is inference. It belongs as a
    `Class (class-wide)` line or not at all.
 
+3b. **The development-notes thread is not the only Blizzard channel** (2026-08-02).
+   Blizzard also posts class tuning as **standalone blue posts** in other forum topics —
+   confirmed case: Kaivax, "Healer Tuning - July 16", six healer specs of real 12.1
+   tuning that reached no drawer for 17 days. Polling `2317811.json` can never surface
+   these: they have their own topic id (the number ending the Wowhead blue-tracker slug,
+   e.g. `…-2327376`), so they are a different topic, not a reply. Sweep the Wowhead
+   **blue-tracker index** as well as the thread. Two traps in that one post:
+   - The blue tracker stamps each topic with the patch that was LIVE at posting time —
+     this one reads "(Patch 12.0.7)" while the body says "hotfixes to the PTR … in Curse
+     of Ula'tek". **Trust the body, not the tag.** Getting this backwards either drops
+     real 12.1 data or files live-realm tuning as PTR.
+   - Log it `kind: "hotfix"`. It has a forum origin but no post number in the tracked
+     thread, and `forumUrl` is validated as the dev-notes-thread citation — cite the
+     blue-tracker mirror via `wowheadUrl` and say in the `label` that it was a
+     standalone blue post.
+
 3c. **PvP-only changes are OUT OF SCOPE** — this tracker rates PvE. A change that only
    alters PvP combat must never be written as a `Spec Class ...` highlight: it would let a
    PvP nerf vote in the PvE outlook tally. Precedent when logging one for the record is to

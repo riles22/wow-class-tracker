@@ -193,6 +193,29 @@
       ]
     },
     {
+      "date": "2026-07-16",
+      "kind": "hotfix",
+      "label": "Healer tuning hotfixed to the PTR mid-week (Kaivax, \"Healer Tuning - July 16\"). This landed as a STANDALONE blue post, not a reply in the development-notes thread, so it carries no forum post number and is cited to the Wowhead blue-tracker mirror; the blue tracker's \"(Patch 12.0.7)\" tag is its label for the live patch at posting time, while the post body states the changes are hotfixes to the Curse of Ula'tek PTR. Restoration Druid Regrowth buff, a Preservation Evoker raid-to-triage rebalance, Mistweaver -8% all healing against a Gust of Mist buff, Holy Paladin Holy Shock +50%, Discipline Priest Penance and Shadow Mend buffs against an Atonement mass-healing falloff and a Void Shield trim, and Holy Priest Prayer of Mending +20%.",
+      "wowheadUrl": "https://www.wowhead.com/blue-tracker/topic/us/healer-tuning-july-16-2327376",
+      "icyveinsUrl": null,
+      "specsAffected": [
+        "Restoration Druid",
+        "Preservation Evoker",
+        "Mistweaver Monk",
+        "Holy Paladin",
+        "Discipline Priest",
+        "Holy Priest"
+      ],
+      "highlights": [
+        "Restoration Druid — Regrowth healing increased by 25%; Abundance increases the critical strike chance of Regrowth by 60% (was 50%) and reduces its cost by 60% (was 50%).",
+        "Preservation Evoker — Raid healing pulled back and triage healing raised (dev note: Preservation had eclipsed other healers in raid by a significant margin, while not overperforming in dungeons). Dream Breath healing over time reduced by 25%; Merithra's Blessing healing reduced by 10%; Reverberations causes Verdant Embrace to heal for 40% over 8 sec (was 60%); the class set triggers Living Flame at 100% value (was 150%). Living Flame healing increased by 30%; Verdant Embrace healing increased by 40%; Life Spark increases the healing and damage of Living Flame by 100% (was 50%) (does not affect PvP combat).",
+        "Mistweaver Monk — All healing reduced by 8%; Mastery: Gust of Mist healing increased by 50%.",
+        "Holy Paladin — Holy Shock healing increased by 50%; Holy Shock mana cost decreased by 11%.",
+        "Discipline Priest — Penance damage and healing increased by 15%; Grim Deliverance now increases Shadow Mend healing by 40% (was 30%) and increases its cast time by 0.3 seconds (was 0.5 seconds). Atonement healing falls off more sharply when healing more than 5 targets (dev note: at exactly 10 targets it would be about 7% less effective than before); Void Shield absorption reduced by 10%.",
+        "Holy Priest — Prayer of Mending healing increased by 20%; Oracle: Prompt Prognosis healing increased by 30%."
+      ]
+    },
+    {
       "date": "2026-07-14",
       "label": "Week of July 14th — Class Changes & Tier Sets (Rogue added in forum post #15): PvE tuning for Demon Hunter, Druid, Evoker, Hunter (Survival Flamefang-Pitch removal + rework), Mage, Paladin, Priest, Shaman, Warlock, Rogue; plus Season 2 systems (Corrosive Power / Coiled Isle), M+ Season 2 boss tuning, and PvP/UI notes.",
       "forumPostNumber": 14,

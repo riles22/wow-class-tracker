@@ -473,7 +473,13 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
   // or after the build date. A re-verify that finds the wording unchanged still bumps
   // asOf with the build's source — cheap, and it keeps the card's "datamined <date>"
   // label honest. False positives only ever cost that same re-verify.
-  const SET_KEYWORD = /\btier[ -]sets?\b|\b[24][ -](?:set|piece)\b|\b[24]\s?pc\b|\bset bonus/i;
+  // "class set" was added 2026-08-02: the 07-16 healer hotfix wrote the Preservation
+  // Evoker 2-set change as "Class set triggers Living Flame at 100% value (was 150%)" —
+  // no "tier", no piece count, no "bonus" — so it named a spec beside a real set
+  // revision and the gate stayed green. Blizzard uses "class set" and "tier set"
+  // interchangeably in blue posts, so match both rather than relying on the feed
+  // normalising the wording.
+  const SET_KEYWORD = /\b(?:tier|class)[ -]sets?\b|\b[24][ -](?:set|piece)\b|\b[24]\s?pc\b|\bset bonus/i;
   for (const spec of specs) {
     // Both highlight conventions in the wild: the feed's "Spec Class — …" prefix and
     // the skill-documented "(Class — Spec)" suffix (em-dash or hyphen).
