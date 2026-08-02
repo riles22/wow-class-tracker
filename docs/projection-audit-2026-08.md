@@ -1,9 +1,10 @@
 # 12.1 projection model — audit scope (2026-08-02)
 
-**Status: SCOPE ONLY. No model change has been made.** This document enumerates every
-input, weight and threshold in `projectionFor`, states the justification each currently
-has, measures how much each one actually moves the output, and lists what evidence would
-change it. Riley reviews this before anything is touched.
+**Status: P1–P5 complete. Shipped PROJECTION_VERSION 5 and 6; P4 and P5 closed with no
+change, deliberately.** This document enumerates every input, weight and threshold in
+`projectionFor`, states the justification each has, measures how much each actually moves
+the output, and records what was changed and what was left alone. Sections are in audit
+order; the resolutions are inline.
 
 ## Why now, and why it cannot wait until after launch
 
@@ -19,7 +20,7 @@ consensus. Two consequences:
 So the audit window is now through ~Aug 10. After that the model should be frozen on
 purpose, not by accident.
 
-## The model as it stands (PROJECTION_VERSION 4)
+## The model as it stood at audit start (PROJECTION_VERSION 4)
 
 Per spec and bracket, everything on one 0–100 axis:
 
@@ -178,6 +179,192 @@ will answer and this one cannot.
   obtainable signals.
 - Snapshots before 2026-07-09 carry no projection at all. The grader returns "nothing to
   grade" for them rather than a 0% score, which would read as total failure.
+
+## P1 resolved — shipped as PROJECTION_VERSION 5 (2026-08-02)
+
+Options **A + C** adopted, moving **5 of 80** tier cells: Unholy DK raid B→A, Outlaw raid
+B→C, Outlaw M+ A→B, Elemental raid B→A, Demonology raid A→B.
+
+**A design detail changed on measurement.** C was first written as "an undated verdict
+falls back to the tuning tally", which sounded more informative than discarding it. Built
+that way it moved **13** cells, not 5. Cause: **13 of the 19 undated verdicts are
+"Mixed"**, which reads as flat and therefore contributes nothing today — the fallback
+would have converted all 13 into directional shifts at once, in precisely the case where a
+line count is least trustworthy. "Mixed" is a theorycrafter saying the changes cut both
+ways, and that read ages far better than a "Positive" does. Shipped as: an undated verdict
+contributes **no** shift. Removing an untrustworthy input must not manufacture a new one.
+
+## P3 findings (2026-08-02) — the meta nudge
+
+The audit flagged the ±3 as moving as many tier cells as an entire external tier list. Two
+facts found on inspection make it worse than the sensitivity table suggested.
+
+**All 108 metaNotes come from one person.** The `generalCreators` lane has exactly one
+contributor, izen (Izenhart). "The newest general-creator meta read" is always the same
+individual, so the obvious remedies — weight by agreement, require corroboration — have
+nobody to corroborate against today.
+
+**Seven of 80 published tier cells are decided by that one read:**
+
+| cell | without nudge → with | nudge |
+|---|---|---|
+| Demon Hunter Devourer raid | A+ → **S** | +3 |
+| Demon Hunter Devourer mplus | A+ → **S** | +3 |
+| Hunter Marksmanship mplus | A → A+ | +3 |
+| Paladin Holy raid | B → A | +3 |
+| Monk Brewmaster mplus | B → **C** | −3 |
+| Rogue Outlaw mplus | A → B | −3 |
+| Warrior Fury raid | A → B | −3 |
+
+**The sentiment is volatile on its own terms.** 24 specs carry more than one live
+(non-superseded) note and only the newest counts. izen's own read on Beast Mastery went
+positive (07-06) → negative (07-09) in three days; Discipline positive → mixed; Devastation
+mixed → negative. The nudge tracks whichever way the most recent one landed.
+
+Also worth noting: only 2 of 4 sentiment values do anything — `mixed` (25 notes) and
+`neutral` (6) map to 0 — so 31 of 108 notes are inert by design.
+
+### The structural objection
+
+Everything else in this tracker refuses to let one source decide a letter. The consensus
+averages four tier lists precisely so no single outlet dominates; Murlok's numbers are
+never converted to tiers; an era-gated PTR list is excluded from the mean. The meta nudge
+is the **one** place where a single individual's unquantified sentiment moves a published
+tier — and it currently does so seven times, including putting Devourer at S in both
+brackets.
+
+### Options
+
+| option | effect today |
+|---|---|
+| **1. Stop feeding the nudge into the projection; keep displaying it** in the drawer's Meta outlook section | 7 cells revert; the qualitative read stays visible to readers, just not in the forecast |
+| **2. Require ≥2 independent general creators to agree** | identical to option 1 today (one creator), self-reactivating if the lane grows |
+| **3. Reduce the magnitude** (±1 or ±2) | fewer crossings, but no magnitude can *never* cross a band — it only makes single-source tier control rarer, not principled |
+| **4. Keep as-is** | already disclosed in every basis string |
+
+**Recommendation: option 2.** It is option 1 in practice today, but it states the actual
+principle — corroboration, not deletion — and reactivates on its own if a second general
+creator is ever registered. It is also the option most consistent with how every other
+layer of this tracker already treats a lone source.
+
+This one needs Riley's call: it removes a signal he deliberately added, and unlike P1 the
+current behaviour is not internally incoherent — just single-sourced.
+
+## P3 resolved — shipped as PROJECTION_VERSION 6 (2026-08-02)
+
+Both constraints, because they are not independent.
+
+**Corroboration.** A nudge now requires **≥2 general creators whose newest live reads
+agree**, unanimously — matching the clause-unanimity rule `classifyHighlight` already
+uses, since a lane that disagrees with itself is not evidence of a direction. Newest-per-
+creator, so a prolific contributor cannot corroborate themselves.
+
+**Bound.** The nudge may **no longer change the published tier**. The tier is decided by
+evidence (base + outlook shift); the nudge then moves the score only *within* that band,
+so it still drives the meter, the ordering and the basis string. This generalises the
+objection instead of special-casing S — there is no principled reason a sentiment may
+promote into A+ but not into S.
+
+**Why both, and why the bound is the load-bearing one.** Asked directly whether five
+creators agreeing should move Brewmaster C→B, the honest answer is *no* — so source count
+alone was never the right gate, and a bare ≥2 rule would have quietly restored a behaviour
+we do not endorse the first time the lane grew. Bounded, the answer flips to *yes*: several
+agreeing reads adjusting a score without touching a letter is precisely what a nudge is.
+
+**The reactivation path is tested, not dormant.** A code path that is unreachable today,
+untested, and self-activating the first time someone registers a second creator would fire
+months from now unattended and start moving published output with nobody watching — worse
+than an honest deletion. `test/render.test.mjs` therefore stands up a synthetic two-creator
+lane and pins: the quorum firing, the bound holding at the band ceiling (87 not 89) and
+symmetrically at the floor (74 not 72), disagreement producing nothing, one creator's two
+notes counting as one voice, and superseded/off-bracket/undated reads failing to pad a
+quorum.
+
+### Net effect, v4 → v6: 10 of 80 tier cells
+
+| | |
+|---|---|
+| P1 (v5) | Unholy DK raid B→A · Outlaw raid B→C · Elemental raid B→A · Demonology raid A→B |
+| P3 (v6) | **Devourer raid S→A+** · **Devourer M+ S→A+** · Marksmanship M+ A+→A · Brewmaster M+ C→B · Holy Paladin raid A→B · Fury raid B→A |
+
+Devourer coming off S in both brackets is the headline: it was the clearest case of an
+input named "nudge" deciding the top of the chart on one person's sentiment.
+
+The qualitative read is unchanged and still rendered in the drawer's Meta outlook section.
+It stopped steering the forecast; it did not stop being published.
+
+## P4 and P5 closed with no change (2026-08-02)
+
+### P4a — the finding that outranks every weight question
+
+**21 of 40 raid cells have a base that is 100% the 12.0.7 consensus.** Not weighted
+towards it — entirely it. Their basis strings read `live baseline 49 · outlook 0`, with no
+PTR term of any kind. A further 19 are prior + Dummy Dome. **No raid cell has a PTR
+raid-testing term at all**, because every zone-54 row sits below `MIN_RANK_N` (34 of 74
+testing rows are unranked; the n distribution is min 1, p25 4, median 40).
+
+**Re-verified 2026-08-02 after the local run restored all five WCL rDPS cuts** (master
+`bf69002`): still 21 prior-only raid cells, still **zero** with a raid-testing term. So
+this was never the outage — fresh zone-54 data changes nothing, because the testing
+population itself is tiny-n (world-first testers on templated gear) and sits below the
+floor regardless of how recently it was fetched. The finding is structural, not
+transient.
+
+So for half the raid bracket, "our 12.1 forecast" is last patch's consensus plus a tuning
+shift. That is not a modelling error — it is the honest consequence of the PTR raid data
+not existing yet — and **the model already says so: all 21 are tagged `low` confidence.**
+The confidence ratio introduced in v3 is doing exactly the job it was built for.
+
+No change made. Reweighting cannot manufacture evidence, and lowering `MIN_RANK_N` to
+admit n=1–4 medians would reintroduce precisely the defect audit D7 removed. The fix is
+data — the WCL API recovering, or a local run restoring the series — not a coefficient.
+
+**Handover to the UI pass:** a `low`-confidence letter currently looks identical to a
+well-evidenced one in the "Ours: 12.1" column. The disclosure exists but lives in the
+basis string, which means hovering or opening the drawer. Half the raid forecasts are
+carrying that caveat invisibly. That is a presentation problem, not a model one, and it is
+the single highest-value thing the UI/UX pass could address.
+
+### P4b — the other blend questions, measured and left alone
+
+- Effective prior weight after renormalization: 100% when it is the only term (21 raid
+  cells), 69% with the PTR list only, 55% with the empirical, 44% with all three. The
+  spread is entirely driven by which evidence exists, not by the coefficients.
+- Dummy Dome is DPS-only, so healers and tanks blend fewer terms. Confidence accounts for
+  this since v3; the blend deliberately does not, because renormalizing already gives the
+  remaining terms their full share.
+- No time decay on the prior. Worth revisiting **after** the grade — with 21 cells resting
+  entirely on the prior, decaying it today would just move them toward an empty middle.
+
+### P5 — band fit, and a real compression signal
+
+The projection maps through bands calibrated for consensus means. Comparing distributions:
+
+| bracket | source | mean | sd | band spread |
+|---|---|---|---|---|
+| raid | consensus | 58.9 | 18.2 | C7 B14 A9 A+8 S2 |
+| raid | projection | 58.3 | 18.7 | C9 B12 A10 A+6 S3 |
+| mplus | consensus | 60.1 | 16.2 | C5 B11 A15 A+5 S4 |
+| **mplus** | **projection** | **59.3** | **14.3** | **C3 B18 A12 A+6 S1** |
+
+Raid fits well. **M+ is compressed**: sd 14.3 against the consensus's 16.2, with 18 specs
+piled into B and only one reaching S where the consensus has four. That is regression
+toward the mean, the expected behaviour of any averaging model — and it means the forecast
+systematically under-calls extremes.
+
+No change made, on purpose. Correcting variance without accuracy evidence risks
+overshooting in the other direction, and the drift metric cannot adjudicate it (a
+compressed forecast that hugs the middle would *improve* its drift score). This is exactly
+what the post-launch grade is for: if S2 settles with four S-tier M+ specs and the frozen
+forecast called one, the compression is real and quantified. Recorded here so that check
+gets made rather than rediscovered.
+
+## Recommended freeze
+
+The model is coherent as of v6 and the two open questions (prior decay, M+ compression)
+both need the grade to settle. **Freeze at v6 through launch.** Reopen once the first
+settled Season-2 consensus exists and the report card can rank options on accuracy rather
+than coherence.
 
 ## Proposed method
 
