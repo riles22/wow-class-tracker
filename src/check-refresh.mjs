@@ -41,7 +41,7 @@ import { execFile } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { loadData, validateData } from "./validate.mjs";
-import { buildPayload, snapshotStateOf } from "./render.mjs";
+import { buildPayload, snapshotStateOf, SNAPSHOT_PHASE, PHASE_FLIP_DUE } from "./render.mjs";
 
 export const RESULTS = new Set(["success", "partial", "unreachable", "blocked", "parse_error", "skipped"]);
 // Results that mean "didn't fully land" — allowed with a reason, never silently.
@@ -398,6 +398,14 @@ export function checkFreshness(config, manifest, data, now) {
       violations.push(`last refresh (${freshest.label}) is ${Math.round(hours)}h old (max ${config.maxRunAgeHours}h) — the nightly is not completing`);
       keys.push("run-age");
     }
+  }
+  /* The one-shot launch flip. SNAPSHOT_PHASE is an owner action with no other detector:
+     if it is missed, post-launch snapshots keep the pre-launch tag, the report card can
+     never locate the boundary it grades against, and nothing downstream can infer it
+     later. Checked here because the heartbeat runs daily and already knows how to shout. */
+  if (SNAPSHOT_PHASE === "12.1-ptr" && dateOf(nowDate) > PHASE_FLIP_DUE) {
+    violations.push(`SNAPSHOT_PHASE is still "12.1-ptr" past ${PHASE_FLIP_DUE} — flip it in src/render.mjs to the live Season-2 id. Until then every snapshot is tagged pre-launch and the forecast report card cannot find the boundary it grades the frozen projection against.`);
+    keys.push("snapshot-phase");
   }
   for (const req of config.requirements) {
     if (req.maxAgeDays == null || !req.date) continue;
