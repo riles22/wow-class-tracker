@@ -412,7 +412,23 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
   for (const build of ptrBuilds?.builds ?? []) {
     if (build.date == null) errors.push("ptr-builds.json: build missing date");
     else isoOk(build.date, `ptr-builds.json: build date`);
-    if (!build.forumUrl) errors.push(`ptr-builds.json: build ${build.date} missing forumUrl`);
+    /* Entry kind (2026-08-02). The feed was built around official forum BUILD posts and
+       required forumUrl on every entry — which made a PTR HOTFIX unaddable, because
+       hotfixes are pushed between builds and the forum thread never carries them. They
+       are real 12.1 tuning (Ride the Lightning +59%, Wowhead news=382321, 2026-07-31),
+       so their absence was a coverage hole every gate reported as green. A hotfix cites
+       the Wowhead round-up instead; each kind must carry the citation it actually has,
+       and neither may be cited to a source it does not come from. */
+    const kind = build.kind ?? "build";
+    if (kind !== "build" && kind !== "hotfix") {
+      errors.push(`ptr-builds.json: entry ${build.date} has unknown kind "${build.kind}" (expected "build" or "hotfix")`);
+    }
+    if (kind === "build" && !build.forumUrl) errors.push(`ptr-builds.json: build ${build.date} missing forumUrl`);
+    if (kind === "hotfix") {
+      if (!build.wowheadUrl) errors.push(`ptr-builds.json: hotfix ${build.date} missing wowheadUrl — a hotfix has no forum post, so the Wowhead round-up is its citation`);
+      if (build.forumUrl) errors.push(`ptr-builds.json: hotfix ${build.date} carries a forumUrl — hotfixes are not forum build posts and must not be cited as one`);
+      if (build.forumPostNumber != null) errors.push(`ptr-builds.json: hotfix ${build.date} carries a forumPostNumber — there is no forum post to number`);
+    }
     for (const u of ["forumUrl", "wowheadUrl", "icyveinsUrl"]) urlOk(build[u], `ptr-builds.json: build ${build.date} ${u}`);
     // The feed's canonical source is the official forum thread; the news links are
     // site-specific by definition — any other host means a fabricated citation.
