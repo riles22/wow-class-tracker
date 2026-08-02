@@ -317,7 +317,8 @@ export function specBuildChanges(spec, ptrBuilds) {
       if (CLASS_WIDE.test(h) ? touchesSpec : namedHere) lines.push({ text: h, classWide: true });
     }
     if (lines.length) {
-      out.push({ date: b.date, forumPostNumber: b.forumPostNumber ?? null, forumUrl: b.forumUrl ?? null, lines });
+      out.push({ date: b.date, kind: b.kind ?? "build", forumPostNumber: b.forumPostNumber ?? null,
+        forumUrl: b.forumUrl ?? null, wowheadUrl: b.wowheadUrl ?? null, lines });
     }
   }
   return out;

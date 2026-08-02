@@ -449,3 +449,50 @@ test("build coverage gate: a no-tuning post with zero highlights is legitimate",
   const errors = validateData(copy, { fullRoster: true }).filter(e => e.includes("no highlight line"));
   assert.deepEqual(errors, []);
 });
+
+test("ptr-builds: a hotfix entry is valid without a forum post", async () => {
+  const data = await loadData(ROOT);
+  const copy = structuredClone(data);
+  // PTR hotfixes are pushed between builds and the forum thread never carries them, so
+  // requiring forumUrl on every entry made them unaddable — a real coverage hole that
+  // every gate reported as green (2026-08-02).
+  copy.ptrBuilds.builds.unshift({
+    date: "2026-07-31", kind: "hotfix",
+    label: "PTR hotfixes pushed overnight",
+    wowheadUrl: "https://www.wowhead.com/news=382321",
+    specsAffected: ["Shaman (class-wide)"],
+    highlights: ["Shaman (class-wide) Ride the Lightning damage increased by 59%."]
+  });
+  assert.deepEqual(validateData(copy, { fullRoster: true }), []);
+});
+
+test("ptr-builds: each entry kind must carry the citation it actually has", async () => {
+  const data = await loadData(ROOT);
+  const base = {
+    date: "2026-07-31", label: "x", specsAffected: [],
+    highlights: ["Shaman (class-wide) something happened."]
+  };
+  const errs = entry => {
+    const c = structuredClone(data); c.ptrBuilds.builds.unshift(entry);
+    return validateData(c, { fullRoster: true });
+  };
+  // a hotfix with no Wowhead round-up has no citation at all
+  assert.ok(errs({ ...base, kind: "hotfix" }).some(e => e.includes("missing wowheadUrl")));
+  // …and must never be dressed up as a forum build post
+  assert.ok(errs({ ...base, kind: "hotfix", wowheadUrl: "https://www.wowhead.com/news=1",
+    forumUrl: "https://us.forums.blizzard.com/en/wow/t/x/1" }).some(e => e.includes("carries a forumUrl")));
+  assert.ok(errs({ ...base, kind: "hotfix", wowheadUrl: "https://www.wowhead.com/news=1",
+    forumPostNumber: 19 }).some(e => e.includes("carries a forumPostNumber")));
+  // a build still requires its forum post
+  assert.ok(errs({ ...base, kind: "build" }).some(e => e.includes("missing forumUrl")));
+  // and an unknown kind fails rather than defaulting
+  assert.ok(errs({ ...base, kind: "datamine", forumUrl: "https://us.forums.blizzard.com/en/wow/t/x/1" })
+    .some(e => e.includes('unknown kind "datamine"')));
+});
+
+test("ptr-builds: entries without an explicit kind are still builds", async () => {
+  const data = await loadData(ROOT);
+  // Every existing entry predates the field; none may start failing.
+  assert.ok(data.ptrBuilds.builds.every(b => b.kind === undefined));
+  assert.deepEqual(validateData(data, { fullRoster: true }), []);
+});

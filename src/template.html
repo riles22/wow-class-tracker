@@ -1207,7 +1207,7 @@ function buildChangesHTML(s){
   const bc = s.buildChanges || [];
   if(!bc.length) return "";
   return `<div class="d-sec"><p class="d-h">Official PTR tuning — Blizzard notes, by build</p>${bc.map(b=>`
-    <p class="d-h" style="margin:10px 0 4px;text-transform:none;letter-spacing:0">${esc(fmtDate(b.date))}${b.forumUrl?` · <a href="${esc(safeHref(b.forumUrl))}" target="_blank" rel="noopener">forum post${b.forumPostNumber!=null?` #${esc(String(b.forumPostNumber))}`:""}</a>`:""}</p>
+    <p class="d-h" style="margin:10px 0 4px;text-transform:none;letter-spacing:0">${esc(fmtDate(b.date))}${b.kind==="hotfix"?` · <span class="cwchip">hotfix</span>`:""}${b.forumUrl?` · <a href="${esc(safeHref(b.forumUrl))}" target="_blank" rel="noopener">forum post${b.forumPostNumber!=null?` #${esc(String(b.forumPostNumber))}`:""}</a>`:b.wowheadUrl?` · <a href="${esc(safeHref(b.wowheadUrl))}" target="_blank" rel="noopener">hotfix round-up</a>`:""}</p>
     <ul class="d-list">${b.lines.map(l=>`<li${l.classWide?' class="cw"':''}>${l.classWide?'<span class="cwchip">class-wide</span>':''}${esc(l.text)}</li>`).join("")}</ul>`).join("")}
     <p class="mnote">Verbatim from the official PTR development notes — the 12.1 writeup above is a cited distillation, and creator takes are opinion.</p></div>`;
 }
@@ -1709,8 +1709,12 @@ document.getElementById('srclist').innerHTML = SOURCES.filter(s=>Array.isArray(s
 
 /* ---------- footer: 12.1 PTR build feed ---------- */
 document.getElementById('buildfeed').innerHTML = (PTR_BUILDS.builds||[]).map(b=>{
+  // A hotfix has no forum post, so the date links to whatever citation it does have —
+  // previously this produced an href of "" for any entry without a forumUrl.
+  const dateHref = b.forumUrl || b.wowheadUrl || b.icyveinsUrl || "";
   const links = [
-    `<a href="${esc(safeHref(b.forumUrl))}" target="_blank" rel="noopener">${esc(b.date)}</a>`,
+    dateHref ? `<a href="${esc(safeHref(dateHref))}" target="_blank" rel="noopener">${esc(b.date)}</a>` : `<span>${esc(b.date)}</span>`,
+    b.kind === "hotfix" ? `<span class="mnote">hotfix</span>` : "",
     b.wowheadUrl ? `<a href="${esc(safeHref(b.wowheadUrl))}" target="_blank" rel="noopener">wowhead</a>` : "",
     b.icyveinsUrl ? `<a href="${esc(safeHref(b.icyveinsUrl))}" target="_blank" rel="noopener">icy-veins</a>` : ""
   ].filter(Boolean).join(" · ");
