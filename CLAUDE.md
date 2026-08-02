@@ -94,6 +94,15 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   Distill faithfully — the verdict is the SOURCE's read, never the distiller's own
   editorial call. The old `draft: true` flag is retired (treated as confirmed if ever
   encountered).
+  **A creator take is NOT a writeup fallback** (decided 2026-08-02). Nine specs still
+  have no writeup, and all nine already carry cited creator takes (1–15 each) that the
+  drawer renders. Promoting one into `ptr.verdict` is tempting and wrong: a take steers
+  nothing today, while a verdict drives a ±7 outlook shift in the projection — so the
+  promotion would hand a single YouTube video direct control of the forecast (Feral has
+  exactly one take). That is the same inversion rejected on the meta nudge: the strongest
+  evidence display-only, the weakest steering. Absent writeups stay absent; the takes
+  already cover the qualitative layer, and the honest UI fix is to point at them rather
+  than say "pending fetch" as though nothing were known.
 
 ### Computed at build time (never hand-written)
 - **Movement (▲▼)**: `build` compares consensus tiers + metric ranks + the Dummy Dome
@@ -352,7 +361,11 @@ docs/     working notes (finder-audit.md · security-audit-2026-07.md ·
           cloud-routine.md · portfolio-audit-2026-07-18.md · audit-2026-07-23.md ·
           audit-2026-07-24.md — audit dispositions. Read the NEWEST audit before
           proposing work: its "Still open" and "Leave alone" sections record what has
-          already been decided, and re-litigating them wastes a run.)
+          already been decided, and re-litigating them wastes a run.
+          projection-audit-2026-08.md — the 12.1 model audit, with the frozen-weights
+          recommendation. compare-all-scope.md — the QUEUED full-roster comparison
+          view: all 40 specs as rows against every rating and rank as columns. It is
+          the next build item, ahead of the UI/UX pass and the S2 transition scope.)
 legacy/   original single-file tracker (pre-conversion reference)
 .github/  workflows/deploy.yml (build+deploy Pages on push) · workflows/ci.yml (tests on
           every push) · workflows/freshness.yml (daily staleness heartbeat → alert issue) ·
