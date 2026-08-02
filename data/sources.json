@@ -441,7 +441,7 @@
         "role": "All",
         "label": "Project home (downloads + docs)",
         "url": "https://www.simulationcraft.org/",
-        "snapshot": "2026-08-01"
+        "snapshot": "2026-08-02"
       }
     ],
     "notes": "Parse the .txt variant (plain text ranking of ~49 MID1_{Class}_{Spec}_{HeroVariant} profiles). Filter to DPS-role roster specs (tanks appear at low DPS; healers absent; Augmentation has no profile — unsimmable support spec)."
