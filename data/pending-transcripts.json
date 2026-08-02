@@ -1,6 +1,70 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
-  "videos": [],
+  "videos": [
+    {
+      "id": "Elr2gfyCFsE",
+      "creator": "LBNinja7",
+      "title": "What to Expect in Season 2 As Each Healer Spec | 12.1",
+      "published": "2026-08-02",
+      "queuedAt": "2026-08-02"
+    },
+    {
+      "id": "AfxJlv15i04",
+      "creator": "AutomaticJak",
+      "title": "Season 2 PTR M+ Healer Tier List",
+      "published": "2026-08-01",
+      "queuedAt": "2026-08-02"
+    },
+    {
+      "id": "3E1yuNcmS2g",
+      "creator": "MadSkillzzTV",
+      "title": "12.1 Best M+ Healers | Midnight PTR",
+      "published": "2026-08-01",
+      "queuedAt": "2026-08-02"
+    },
+    {
+      "id": "btNeQrcDcaI",
+      "creator": "AutomaticJak",
+      "title": "PTR Raid Heal Testing then MW Title Keys | UI in description!",
+      "published": "2026-08-01",
+      "queuedAt": "2026-08-02"
+    },
+    {
+      "id": "DnYoCpImTZw",
+      "creator": "Kalamazi",
+      "title": "BIG Warlock Buffs Announced For 12.1! Is It Enough?",
+      "published": "2026-08-01",
+      "queuedAt": "2026-08-02"
+    },
+    {
+      "id": "NAErjQ18w0Y",
+      "creator": "Supatease",
+      "title": "12.1 Elemental Shaman Good Main?",
+      "published": "2026-08-01",
+      "queuedAt": "2026-08-02"
+    },
+    {
+      "id": "yd6v1ih-aWw",
+      "creator": "Supatease",
+      "title": "Arms Warrior is Sick",
+      "published": "2026-08-01",
+      "queuedAt": "2026-08-02"
+    },
+    {
+      "id": "9cnTo1yK3C8",
+      "creator": "YoDaTV",
+      "title": "Did Blizzard Just SOLVE the Meta for Season 2? (Patch Notes & Tierlist Update)",
+      "published": "2026-08-01",
+      "queuedAt": "2026-08-02"
+    },
+    {
+      "id": "OP49uzLmaDk",
+      "creator": "izen (Izenhart)",
+      "title": "12.1 PTR - Specs Balance Tuning #9 | This Time It's Nerfs",
+      "published": "2026-08-01",
+      "queuedAt": "2026-08-02"
+    }
+  ],
   "skipped": [
     {
       "id": "YOnGHSUZ4A0",
