@@ -436,6 +436,24 @@ export function outlookFor(spec, ptrBuilds) {
         is present (a spec with all three reads .44/.36/.20 rather than .55/.45). Today
         that means every M+ projection moves and every raid projection does not, since
         Icy Veins publishes no PTR raid list. v2 and v3 are NOT one series.
+   v5 — 2026-08-02 (audit, docs/projection-audit-2026-08.md). Weights and inputs
+        UNCHANGED; the outlook SHIFT changed shape, which the audit measured as the single
+        biggest lever in the model (removing it moved 12 of 80 tier cells, more than any
+        weight perturbation).
+          · (A) the shift now scales with tally strength — 1 line ±3, 2 lines ±5, 3+ ±7 —
+            instead of a flat ±7 whether the balance was one line or five. A DATED verdict
+            still earns the full 7: it is a whole-spec read, not a line count.
+          · (C) an UNDATED verdict may no longer drive the shift, and contributes none.
+            The data layer already treats undated writeups as a shrink-only legacy set;
+            the model now agrees with it. Falling back to the tuning tally was measured
+            and rejected — 13 of the 19 undated verdicts are "Mixed", so the fallback
+            would manufacture directional shifts for 13 specs whose cited read says the
+            changes cut both ways (13 tier cells moved rather than 5).
+        Justified by coherence, not accuracy — the old behaviour was indefensible on its
+        own terms (one line worth the same as five; an undateable read moving a band), and
+        deliberately NOT selected by improving the report card's drift number, which
+        rewards a forecast that merely copies the live consensus. v4 and v5 are NOT one
+        series; the post-launch grade is what can rank them.
    v4 — 2026-08-01. Weights and inputs UNCHANGED; the outlook TERM moved, for two reasons
         that landed together:
           · classifyHighlight now requires unanimity across a line's clauses — a line
@@ -447,7 +465,7 @@ export function outlookFor(spec, ptrBuilds) {
             outlook tally at all. Coverage went from 9 to 40 specs on #1 alone.
         Net effect: 3 of 40 outlook directions and 1 of 80 projection tiers move. Both
         changes make the tally MORE complete, so v4 scores are not comparable to v3. */
-export const PROJECTION_VERSION = 4;
+export const PROJECTION_VERSION = 5;
 
 /* Rank-map version, stamped beside it. `snapshotStateOf().ranks` feeds movement
    comparison, and its meaning changed in the same commit as PROJECTION_VERSION v2:
@@ -543,7 +561,32 @@ export function projectionFor(spec, bracket, scales, metaNotes = [], sources = [
   if (!baseParts.length) return null; // nothing to project from — honest "—"
   const base = baseParts.reduce((s, [v, w]) => s + v * w, 0) / baseParts.reduce((s, [, w]) => s + w, 0);
   const dir = spec.outlook?.direction ?? null;
-  const shift = dir === "up" ? 7 : dir === "down" ? -7 : 0;
+  /* Outlook shift, v5. Two defects the 2026-08-02 audit measured, both fixed here.
+
+     (C) An UNDATED verdict may not drive the shift. Validation already requires
+     `ptr.asOf` on every new writeup and keeps UNDATED_WRITEUPS as a shrink-only list of
+     grandfathered exceptions — but the model ignored that distinction, so three tier
+     cells rested on a read whose date nobody recorded (Unholy DK raid sat a band lower
+     for a "Negative" of unknown vintage). Such a verdict now contributes NO shift.
+
+     Falling back to the tuning tally instead was the first design and was rejected on
+     measurement: 13 of the 19 undated verdicts are "Mixed", which reads as flat and
+     therefore contributes nothing today. Falling back would convert all 13 into
+     directional shifts at once — 13 tier cells rather than 5 — and it would do so in
+     exactly the case where a line count is least trustworthy. "Mixed" is a
+     theorycrafter saying the changes cut both ways; that read ages far better than a
+     "Positive", so overriding it with arithmetic is the wrong direction of travel.
+     Removing an untrustworthy input should not manufacture a new one in its place.
+
+     (A) The shift SCALES with tally strength. It was a flat ±7 whether the balance was
+     one line or five: Elemental Shaman lost a full band on a single nerf line while
+     Guardian's 4/0 was worth exactly the same. A dated verdict still earns the full 7 —
+     it is a theorycrafter's whole-spec read, not a line count. */
+  const bal = (spec.outlook?.buffs ?? 0) - (spec.outlook?.nerfs ?? 0);
+  const datedVerdict = !!spec.ptr?.verdict && !!spec.ptr?.asOf;
+  const shiftDir = datedVerdict || !spec.ptr?.verdict ? dir : null; // undated verdict → no shift
+  const mag = datedVerdict ? 7 : Math.min(7, 3 + 2 * Math.max(0, Math.abs(bal) - 1));
+  const shift = shiftDir === "up" ? mag : shiftDir === "down" ? -mag : 0;
   // Bracket-scoped + supersession-aware note selection: a creator's raid read must
   // never color the M+ projection under their name (izen's reads genuinely differ per
   // bracket), and a retracted (superseded) note must not nudge what the drawer hides.

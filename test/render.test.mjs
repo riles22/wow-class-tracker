@@ -392,7 +392,10 @@ test("projectionFor: full-signal math is exact and transparent", () => {
     consensus: { raid: { score: 80 } },
     metrics: [{ bracket: "raid", name: "12.1 PTR raid testing score (normalized)", rank: 1, of: 27 }],
     ptrDummy: { score: 90 },
-    outlook: { direction: "up" }
+    // buffs/nerfs are part of the real outlook shape and, since v5, decide the shift's
+    // MAGNITUDE. A bare {direction} is a shape outlookFor never emits for a verdict-less
+    // spec: it always sets both counts, and derives "up" from buffs > nerfs.
+    outlook: { direction: "up", buffs: 3, nerfs: 0 }
   };
   const notes = [
     { class: "X", spec: "Full", sentiment: "negative", date: "2026-07-01" },
@@ -1025,4 +1028,54 @@ test("classifyHighlight: resource inversion and the (was N) idiom still decide, 
   assert.equal(classifyHighlight("Sigil of Chains cooldown reduced to 60 seconds (was 90 seconds), and Roaring Fire damage increased by 10%."), "buff");
   // Bug-fix sentences are dropped before scoring, so they cannot create false ambiguity.
   assert.equal(classifyHighlight("Fixed an issue where Wild Guardian was not correctly increasing Thrash and Mangle damage. All damage increased by 8%."), "buff");
+});
+
+/* ---- outlook shift v5: magnitude scaling + undated verdicts (audit P1) ---- */
+
+const shiftSpec = (over = {}) => ({
+  class: "X", spec: "S", role: "Healer",
+  consensus: { raid: { score: 60 } }, ...over
+});
+const shiftOf = spec => projectionFor(spec, "raid", PTR_PROJ_SCALES, [], []).score - 60;
+
+test("shift scales with tally strength: one line is not worth five", () => {
+  const t = (b, n) => shiftSpec({ outlook: { direction: b > n ? "up" : "down", buffs: b, nerfs: n } });
+  assert.equal(shiftOf(t(1, 0)), 3, "a single buff line earns +3, not the full +7");
+  assert.equal(shiftOf(t(2, 0)), 5);
+  assert.equal(shiftOf(t(3, 0)), 7, "three or more saturates at +7");
+  assert.equal(shiftOf(t(5, 0)), 7);
+  assert.equal(shiftOf(t(0, 1)), -3, "and symmetrically downward");
+  assert.equal(shiftOf(t(4, 1)), 7, "balance 3 saturates");
+  // The defect this fixes: before v5 every one of the above was ±7.
+});
+
+test("a DATED verdict still earns the full shift regardless of line count", () => {
+  const s = shiftSpec({
+    outlook: { direction: "up", buffs: 1, nerfs: 0 },
+    ptr: { verdict: "Positive", asOf: "2026-07-30", source: "https://www.wowhead.com/news=1" }
+  });
+  assert.equal(shiftOf(s), 7, "a whole-spec read is not a line count");
+});
+
+test("an UNDATED verdict contributes no shift at all", () => {
+  const undated = shiftSpec({
+    outlook: { direction: "down", buffs: 0, nerfs: 0 },
+    ptr: { verdict: "Negative", source: "https://www.wowhead.com/news=1" }
+  });
+  assert.equal(shiftOf(undated), 0, "an unfalsifiable read must not move the forecast");
+  // …and it must not fall back to the tally either: 13 of 19 undated verdicts are
+  // "Mixed", so a fallback would manufacture direction for specs whose cited read says
+  // the changes cut both ways.
+  const undatedMixed = shiftSpec({
+    outlook: { direction: "flat", buffs: 4, nerfs: 0 },
+    ptr: { verdict: "Mixed", source: "https://www.wowhead.com/news=1" }
+  });
+  assert.equal(shiftOf(undatedMixed), 0, "a strong tally must not override an undated Mixed read");
+});
+
+test("v5 leaves the verdict-less path driven purely by its own tally", () => {
+  const none = shiftSpec({ outlook: { direction: "up", buffs: 2, nerfs: 0 } });
+  assert.equal(shiftOf(none), 5);
+  const flat = shiftSpec({ outlook: { direction: "flat", buffs: 1, nerfs: 1 } });
+  assert.equal(shiftOf(flat), 0, "a balanced tally is flat, and flat is zero at any magnitude");
 });

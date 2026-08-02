@@ -1,7 +1,7 @@
 {
   "date": "2026-08-02",
   "phase": "12.1-ptr",
-  "projectionVersion": 4,
+  "projectionVersion": 5,
   "rankVersion": 2,
   "consensusVersion": 2,
   "specs": {
@@ -73,12 +73,12 @@
       "projection": {
         "raid": {
           "tier": "B",
-          "score": 45,
+          "score": 49,
           "confidence": "medium"
         },
         "mplus": {
           "tier": "B",
-          "score": 49,
+          "score": 53,
           "confidence": "high"
         }
       }
@@ -117,13 +117,13 @@
       },
       "projection": {
         "raid": {
-          "tier": "B",
-          "score": 57,
+          "tier": "A",
+          "score": 64,
           "confidence": "medium"
         },
         "mplus": {
           "tier": "A+",
-          "score": 76,
+          "score": 83,
           "confidence": "high"
         }
       }
@@ -203,12 +203,12 @@
       "projection": {
         "raid": {
           "tier": "S",
-          "score": 95,
+          "score": 88,
           "confidence": "medium"
         },
         "mplus": {
           "tier": "S",
-          "score": 96,
+          "score": 89,
           "confidence": "high"
         }
       }
@@ -237,12 +237,12 @@
       "projection": {
         "raid": {
           "tier": "C",
-          "score": 22,
+          "score": 29,
           "confidence": "low"
         },
         "mplus": {
           "tier": "B",
-          "score": 43,
+          "score": 50,
           "confidence": "medium"
         }
       }
@@ -322,12 +322,12 @@
       "projection": {
         "raid": {
           "tier": "B",
-          "score": 49,
+          "score": 45,
           "confidence": "low"
         },
         "mplus": {
           "tier": "A",
-          "score": 70,
+          "score": 66,
           "confidence": "medium"
         }
       }
@@ -392,12 +392,12 @@
       "projection": {
         "raid": {
           "tier": "S",
-          "score": 90,
+          "score": 88,
           "confidence": "low"
         },
         "mplus": {
           "tier": "B",
-          "score": 47,
+          "score": 45,
           "confidence": "high"
         }
       }
@@ -843,7 +843,7 @@
         },
         "mplus": {
           "tier": "S",
-          "score": 100,
+          "score": 96,
           "confidence": "high"
         }
       }
@@ -1193,13 +1193,13 @@
       },
       "projection": {
         "raid": {
-          "tier": "B",
-          "score": 46,
+          "tier": "C",
+          "score": 39,
           "confidence": "medium"
         },
         "mplus": {
-          "tier": "A",
-          "score": 64,
+          "tier": "B",
+          "score": 57,
           "confidence": "high"
         }
       }
@@ -1237,12 +1237,12 @@
       "projection": {
         "raid": {
           "tier": "C",
-          "score": 25,
+          "score": 32,
           "confidence": "medium"
         },
         "mplus": {
           "tier": "C",
-          "score": 26,
+          "score": 33,
           "confidence": "high"
         }
       }
@@ -1281,13 +1281,13 @@
       },
       "projection": {
         "raid": {
-          "tier": "B",
-          "score": 57,
+          "tier": "A",
+          "score": 61,
           "confidence": "medium"
         },
         "mplus": {
           "tier": "A+",
-          "score": 75,
+          "score": 79,
           "confidence": "high"
         }
       }
@@ -1444,13 +1444,13 @@
       },
       "projection": {
         "raid": {
-          "tier": "A",
-          "score": 61,
+          "tier": "B",
+          "score": 57,
           "confidence": "medium"
         },
         "mplus": {
           "tier": "A",
-          "score": 69,
+          "score": 65,
           "confidence": "high"
         }
       }

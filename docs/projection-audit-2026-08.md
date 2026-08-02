@@ -179,6 +179,76 @@ will answer and this one cannot.
 - Snapshots before 2026-07-09 carry no projection at all. The grader returns "nothing to
   grade" for them rather than a 0% score, which would read as total failure.
 
+## P1 resolved — shipped as PROJECTION_VERSION 5 (2026-08-02)
+
+Options **A + C** adopted, moving **5 of 80** tier cells: Unholy DK raid B→A, Outlaw raid
+B→C, Outlaw M+ A→B, Elemental raid B→A, Demonology raid A→B.
+
+**A design detail changed on measurement.** C was first written as "an undated verdict
+falls back to the tuning tally", which sounded more informative than discarding it. Built
+that way it moved **13** cells, not 5. Cause: **13 of the 19 undated verdicts are
+"Mixed"**, which reads as flat and therefore contributes nothing today — the fallback
+would have converted all 13 into directional shifts at once, in precisely the case where a
+line count is least trustworthy. "Mixed" is a theorycrafter saying the changes cut both
+ways, and that read ages far better than a "Positive" does. Shipped as: an undated verdict
+contributes **no** shift. Removing an untrustworthy input must not manufacture a new one.
+
+## P3 findings (2026-08-02) — the meta nudge
+
+The audit flagged the ±3 as moving as many tier cells as an entire external tier list. Two
+facts found on inspection make it worse than the sensitivity table suggested.
+
+**All 108 metaNotes come from one person.** The `generalCreators` lane has exactly one
+contributor, izen (Izenhart). "The newest general-creator meta read" is always the same
+individual, so the obvious remedies — weight by agreement, require corroboration — have
+nobody to corroborate against today.
+
+**Seven of 80 published tier cells are decided by that one read:**
+
+| cell | without nudge → with | nudge |
+|---|---|---|
+| Demon Hunter Devourer raid | A+ → **S** | +3 |
+| Demon Hunter Devourer mplus | A+ → **S** | +3 |
+| Hunter Marksmanship mplus | A → A+ | +3 |
+| Paladin Holy raid | B → A | +3 |
+| Monk Brewmaster mplus | B → **C** | −3 |
+| Rogue Outlaw mplus | A → B | −3 |
+| Warrior Fury raid | A → B | −3 |
+
+**The sentiment is volatile on its own terms.** 24 specs carry more than one live
+(non-superseded) note and only the newest counts. izen's own read on Beast Mastery went
+positive (07-06) → negative (07-09) in three days; Discipline positive → mixed; Devastation
+mixed → negative. The nudge tracks whichever way the most recent one landed.
+
+Also worth noting: only 2 of 4 sentiment values do anything — `mixed` (25 notes) and
+`neutral` (6) map to 0 — so 31 of 108 notes are inert by design.
+
+### The structural objection
+
+Everything else in this tracker refuses to let one source decide a letter. The consensus
+averages four tier lists precisely so no single outlet dominates; Murlok's numbers are
+never converted to tiers; an era-gated PTR list is excluded from the mean. The meta nudge
+is the **one** place where a single individual's unquantified sentiment moves a published
+tier — and it currently does so seven times, including putting Devourer at S in both
+brackets.
+
+### Options
+
+| option | effect today |
+|---|---|
+| **1. Stop feeding the nudge into the projection; keep displaying it** in the drawer's Meta outlook section | 7 cells revert; the qualitative read stays visible to readers, just not in the forecast |
+| **2. Require ≥2 independent general creators to agree** | identical to option 1 today (one creator), self-reactivating if the lane grows |
+| **3. Reduce the magnitude** (±1 or ±2) | fewer crossings, but no magnitude can *never* cross a band — it only makes single-source tier control rarer, not principled |
+| **4. Keep as-is** | already disclosed in every basis string |
+
+**Recommendation: option 2.** It is option 1 in practice today, but it states the actual
+principle — corroboration, not deletion — and reactivates on its own if a second general
+creator is ever registered. It is also the option most consistent with how every other
+layer of this tracker already treats a lone source.
+
+This one needs Riley's call: it removes a signal he deliberately added, and unlike P1 the
+current behaviour is not internally incoherent — just single-sourced.
+
 ## Proposed method
 
 1. **Build the report card first, retrospectively.** We have enriched history snapshots
