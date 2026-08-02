@@ -179,6 +179,63 @@ will answer and this one cannot.
 - Snapshots before 2026-07-09 carry no projection at all. The grader returns "nothing to
   grade" for them rather than a 0% score, which would read as total failure.
 
+## P1 findings (2026-08-02) — what the ±7 is actually doing
+
+Removing the shift moves 12 of 80 tier cells. Those 12 are the forecasts that rest
+entirely on the least principled term in the model, so they are worth naming:
+
+| cell | without shift → with | driver |
+|---|---|---|
+| Death Knight Unholy raid | A → **B** | **UNDATED** verdict *Negative* |
+| Rogue Outlaw raid | C → **B** | **UNDATED** verdict *Positive* |
+| Rogue Outlaw mplus | B → **A** | **UNDATED** verdict *Positive* |
+| Demon Hunter Havoc raid | B → A | dated verdict *Positive* |
+| Paladin Holy raid | B → A | dated verdict *Positive* |
+| Shaman Restoration mplus | A → A+ | dated verdict *Positive* |
+| Druid Guardian raid | A+ → **S** | tally 4/0 |
+| Druid Guardian mplus | B → A | tally 4/0 |
+| Druid Restoration raid | A+ → **S** | tally 3/1 |
+| Warlock Destruction raid | B → A | tally 4/1 |
+| **Shaman Elemental raid** | A → **B** | **tally 0/1 — one nerf line** |
+| **Warlock Demonology raid** | B → **A** | **tally 1/0 — one buff line** |
+
+Six verdict-driven, six tally-driven, **three driven by a verdict with no date at all**.
+
+**Two defects are now quantified rather than asserted.**
+
+*Magnitude is discarded, and it matters.* Among specs with no writeup, the tallies on file
+span `0/1`, `1/0`, `1/1`, `2/3`, `3/1`, `4/0`, `4/1`, `5/0` — and every one receives the
+identical ±7. Elemental Shaman's raid forecast drops a full band on the strength of **one**
+nerf line; Demonology gains one on **one** buff line; Guardian's 4/0 and Destruction's 4/1
+are worth exactly the same as those singletons.
+
+*Undated verdicts move tiers.* Validation already requires `ptr.asOf` on every NEW writeup,
+and `UNDATED_WRITEUPS` is an explicitly shrink-only list of 19 grandfathered exceptions. But
+the model does not honour that distinction: an undated verdict drives a full ±7 today, and
+three tier cells currently rest on one. Unholy DK's raid forecast is a band lower because of
+a *Negative* read whose date nobody recorded.
+
+### Candidate fixes, characterised
+
+| option | change | tier cells moved |
+|---|---|---|
+| **A** | shift scales with tally strength (1 line → 3, 2 → 5, 3+ → 7; verdicts keep 7) | 2 |
+| **B** | flat floor: `\|balance\| ≤ 1` → 3, else 7 | 2 (identical to A today) |
+| **C** | an undated verdict may not drive the shift; fall back to the tally | 3 |
+
+A and B are indistinguishable on current data because no spec sits at `\|balance\| = 2`;
+A generalises, B has a cliff there. C is orthogonal to both — it fixes provenance, not
+magnitude, and can be adopted alongside. Together: 5 of 80 cells.
+
+C's honest cost: Outlaw *loses* two bands (raid B→C, M+ A→B) because an undated Positive
+read was lifting it. That is the point — without a dated source we should not be lifting it.
+
+**What this evidence is and is not.** These options are justified by *coherence*, not
+accuracy: the current behaviour is indefensible on its own terms (one line worth the same
+as five; an unfalsifiable input moving a band), not "the new behaviour scores better".
+Nothing here was chosen by improving the drift number, per the trap above. Only the
+post-launch grade can rank them on accuracy.
+
 ## Proposed method
 
 1. **Build the report card first, retrospectively.** We have enriched history snapshots
