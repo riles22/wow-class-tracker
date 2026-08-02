@@ -249,6 +249,49 @@ layer of this tracker already treats a lone source.
 This one needs Riley's call: it removes a signal he deliberately added, and unlike P1 the
 current behaviour is not internally incoherent — just single-sourced.
 
+## P3 resolved — shipped as PROJECTION_VERSION 6 (2026-08-02)
+
+Both constraints, because they are not independent.
+
+**Corroboration.** A nudge now requires **≥2 general creators whose newest live reads
+agree**, unanimously — matching the clause-unanimity rule `classifyHighlight` already
+uses, since a lane that disagrees with itself is not evidence of a direction. Newest-per-
+creator, so a prolific contributor cannot corroborate themselves.
+
+**Bound.** The nudge may **no longer change the published tier**. The tier is decided by
+evidence (base + outlook shift); the nudge then moves the score only *within* that band,
+so it still drives the meter, the ordering and the basis string. This generalises the
+objection instead of special-casing S — there is no principled reason a sentiment may
+promote into A+ but not into S.
+
+**Why both, and why the bound is the load-bearing one.** Asked directly whether five
+creators agreeing should move Brewmaster C→B, the honest answer is *no* — so source count
+alone was never the right gate, and a bare ≥2 rule would have quietly restored a behaviour
+we do not endorse the first time the lane grew. Bounded, the answer flips to *yes*: several
+agreeing reads adjusting a score without touching a letter is precisely what a nudge is.
+
+**The reactivation path is tested, not dormant.** A code path that is unreachable today,
+untested, and self-activating the first time someone registers a second creator would fire
+months from now unattended and start moving published output with nobody watching — worse
+than an honest deletion. `test/render.test.mjs` therefore stands up a synthetic two-creator
+lane and pins: the quorum firing, the bound holding at the band ceiling (87 not 89) and
+symmetrically at the floor (74 not 72), disagreement producing nothing, one creator's two
+notes counting as one voice, and superseded/off-bracket/undated reads failing to pad a
+quorum.
+
+### Net effect, v4 → v6: 10 of 80 tier cells
+
+| | |
+|---|---|
+| P1 (v5) | Unholy DK raid B→A · Outlaw raid B→C · Elemental raid B→A · Demonology raid A→B |
+| P3 (v6) | **Devourer raid S→A+** · **Devourer M+ S→A+** · Marksmanship M+ A+→A · Brewmaster M+ C→B · Holy Paladin raid A→B · Fury raid B→A |
+
+Devourer coming off S in both brackets is the headline: it was the clearest case of an
+input named "nudge" deciding the top of the chart on one person's sentiment.
+
+The qualitative read is unchanged and still rendered in the drawer's Meta outlook section.
+It stopped steering the forecast; it did not stop being published.
+
 ## Proposed method
 
 1. **Build the report card first, retrospectively.** We have enriched history snapshots

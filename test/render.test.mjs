@@ -397,20 +397,23 @@ test("projectionFor: full-signal math is exact and transparent", () => {
     // spec: it always sets both counts, and derives "up" from buffs > nerfs.
     outlook: { direction: "up", buffs: 3, nerfs: 0 }
   };
+  // Both notes are from the SAME (unnamed) creator, so since v6 they are one voice and
+  // cannot corroborate each other — the nudge stays dormant. Kept as a fixture precisely
+  // to pin that: before v6 the newest of these two moved the score by +3.
   const notes = [
-    { class: "X", spec: "Full", sentiment: "negative", date: "2026-07-01" },
-    { class: "X", spec: "Full", sentiment: "positive", date: "2026-07-08" } // newest wins
+    { class: "X", spec: "Full", creator: "solo", sentiment: "negative", date: "2026-07-01" },
+    { class: "X", spec: "Full", creator: "solo", sentiment: "positive", date: "2026-07-08" }
   ];
   const p = projectionFor(spec, "raid", PROJ_SCALES, notes);
-  // emp = (100*2 + 90*1)/3 = 96.67; base = .55*80 + .45*96.67 = 87.5; +7 up +3 note = 97.5 → 98
-  assert.equal(p.score, 98);
+  // emp = (100*2 + 90*1)/3 = 96.67; base = .55*80 + .45*96.67 = 87.5; +7 up, no nudge → 95
+  assert.equal(p.score, 95);
   assert.equal(p.tier, "S");
   assert.equal(p.confidence, "high"); // testing + dummy + outlook = 3 signals
   assert.match(p.basis, /live baseline 80/);
   assert.match(p.basis, /raid-testing pct 100/);
   assert.match(p.basis, /Dummy Dome 90/);
   assert.match(p.basis, /outlook \+7/);
-  assert.match(p.basis, /meta read \+3/);
+  assert.doesNotMatch(p.basis, /meta read/, "one creator is not corroboration");
 });
 
 test("projectionFor: prior-only, PTR-only, and no-data cases stay honest", () => {
@@ -425,29 +428,37 @@ test("projectionFor: prior-only, PTR-only, and no-data cases stay honest", () =>
 });
 
 test("projectionFor: meta nudge is bracket-scoped and skips superseded notes", () => {
-  const spec = { class:"X", spec:"S", role:"DPS", consensus:{ raid:{score:50}, mplus:{score:50} } };
+  // Base 55 sits MID-band (B spans 50-69 in PROJ_SCALES) so the v6 within-tier bound is
+  // not the thing being measured here — at 50 a downward nudge would hit the band floor
+  // and this test would silently stop exercising bracket scoping at all.
+  const spec = { class:"X", spec:"S", role:"DPS", consensus:{ raid:{score:55}, mplus:{score:55} } };
+  // Each bracket gets its own CORROBORATED pair (v6), so bracket scoping is still what
+  // is under test rather than the quorum rule.
   const notes = [
-    { class:"X", spec:"S", sentiment:"positive", date:"2026-07-08", patchContext:"Season 2 PTR — raid testing outlook" },
-    { class:"X", spec:"S", sentiment:"negative", date:"2026-07-06", patchContext:"Season 2 PTR — M+ outlook" }
+    { class:"X", spec:"S", creator:"a", sentiment:"positive", date:"2026-07-08", patchContext:"Season 2 PTR — raid testing outlook" },
+    { class:"X", spec:"S", creator:"b", sentiment:"positive", date:"2026-07-07", patchContext:"Season 2 PTR — raid testing outlook" },
+    { class:"X", spec:"S", creator:"a", sentiment:"negative", date:"2026-07-06", patchContext:"Season 2 PTR — M+ outlook" },
+    { class:"X", spec:"S", creator:"b", sentiment:"negative", date:"2026-07-05", patchContext:"Season 2 PTR — M+ outlook" }
   ];
-  // izen's raid read must never color the M+ projection under his name (and vice versa)
-  assert.equal(projectionFor(spec, "raid", PROJ_SCALES, notes).score, 53);
+  // a raid read must never color the M+ projection, and vice versa
+  assert.equal(projectionFor(spec, "raid", PROJ_SCALES, notes).score, 58);
   const mplus = projectionFor(spec, "mplus", PROJ_SCALES, notes);
-  assert.equal(mplus.score, 47);
+  assert.equal(mplus.score, 52);
   assert.match(mplus.basis, /meta read −3/);
-  // a retracted (superseded) newest note must not nudge — matches the drawer's filter
+  // a retracted (superseded) note must not count toward the quorum — matches the drawer
   const sup = projectionFor(spec, "raid", PROJ_SCALES, [
-    { class:"X", spec:"S", sentiment:"positive", date:"2026-07-09", superseded:true, patchContext:"raid outlook" },
-    { class:"X", spec:"S", sentiment:"negative", date:"2026-07-05", patchContext:"raid outlook" }
+    { class:"X", spec:"S", creator:"a", sentiment:"positive", date:"2026-07-09", superseded:true, patchContext:"raid outlook" },
+    { class:"X", spec:"S", creator:"b", sentiment:"negative", date:"2026-07-05", patchContext:"raid outlook" },
+    { class:"X", spec:"S", creator:"c", sentiment:"negative", date:"2026-07-04", patchContext:"raid outlook" }
   ]);
-  assert.equal(sup.score, 47);
-  // an UNDATED note must never win the newest-read sort (it stringifies to "undefined",
-  // which sorts above every ISO date descending) — the dated negative read must prevail
+  assert.equal(sup.score, 52);
+  // an UNDATED note is dropped outright, so it can neither win a sort nor pad a quorum
   const undated = projectionFor(spec, "raid", PROJ_SCALES, [
-    { class:"X", spec:"S", sentiment:"positive", patchContext:"raid outlook" },
-    { class:"X", spec:"S", sentiment:"negative", date:"2026-07-05", patchContext:"raid outlook" }
+    { class:"X", spec:"S", creator:"a", sentiment:"positive", patchContext:"raid outlook" },
+    { class:"X", spec:"S", creator:"b", sentiment:"negative", date:"2026-07-05", patchContext:"raid outlook" },
+    { class:"X", spec:"S", creator:"c", sentiment:"negative", date:"2026-07-04", patchContext:"raid outlook" }
   ]);
-  assert.equal(undated.score, 47, "undated note must not beat a dated one");
+  assert.equal(undated.score, 52, "undated note must not beat dated ones");
 });
 
 test("projectionFor: M+ uses the role's own zone-56 series; shifts clamp to 0–100", () => {
@@ -793,18 +804,23 @@ test("projectionFor: a 'Mythic raid' meta note cannot nudge the M+ projection (a
   const scales = { consensus: { bands: [{ tier: "S", min: 85 }, { tier: "A", min: 60 }, { tier: "B", min: 0 }] } };
   const spec = { class: "Priest", spec: "Holy", role: "Healer",
     consensus: { raid: { score: 50 }, mplus: { score: 50 } }, metrics: [] };
-  const note = { class: "Priest", spec: "Holy", creator: "izen", sentiment: "positive",
-    date: "2026-07-20", patchContext: "Season 2 PTR — Mythic raid outlook" };
+  // A corroborated pair (v6) so the C5 leak, not the quorum rule, is what is under test.
+  const pair = [
+    { class: "Priest", spec: "Holy", creator: "izen", sentiment: "positive",
+      date: "2026-07-20", patchContext: "Season 2 PTR — Mythic raid outlook" },
+    { class: "Priest", spec: "Holy", creator: "other", sentiment: "positive",
+      date: "2026-07-19", patchContext: "Season 2 PTR — Mythic raid outlook" }
+  ];
   // "Mythic raid" used to match the M+ regex via its bare /mythic/ alternative
-  const mplus = projectionFor(spec, "mplus", scales, [note]);
+  const mplus = projectionFor(spec, "mplus", scales, pair);
   assert.ok(!/meta read/.test(mplus.basis), `M+ must not take a raid note: ${mplus.basis}`);
-  const raid = projectionFor(spec, "raid", scales, [note]);
+  const raid = projectionFor(spec, "raid", scales, pair);
   assert.match(raid.basis, /meta read \+3/);
 
   // an explicit bracket wins over the text heuristic
-  const explicit = { ...note, bracket: "mplus", patchContext: "Season 2 PTR — Mythic raid outlook" };
-  assert.match(projectionFor(spec, "mplus", scales, [explicit]).basis, /meta read \+3/);
-  assert.ok(!/meta read/.test(projectionFor(spec, "raid", scales, [explicit]).basis));
+  const explicit = pair.map(n => ({ ...n, bracket: "mplus" }));
+  assert.match(projectionFor(spec, "mplus", scales, explicit).basis, /meta read \+3/);
+  assert.ok(!/meta read/.test(projectionFor(spec, "raid", scales, explicit).basis));
 });
 
 test("metricRanks: a tiny-n row keeps its value but earns no rank (audit 2026-07-24, D7)", () => {
@@ -1078,4 +1094,67 @@ test("v5 leaves the verdict-less path driven purely by its own tally", () => {
   assert.equal(shiftOf(none), 5);
   const flat = shiftSpec({ outlook: { direction: "flat", buffs: 1, nerfs: 1 } });
   assert.equal(shiftOf(flat), 0, "a balanced tally is flat, and flat is zero at any magnitude");
+});
+
+/* ---- meta nudge v6: corroboration + within-tier bound (audit P3) ---- */
+
+const NUDGE_SCALES = { consensus: { bands: [
+  { tier: "S", min: 88 }, { tier: "A+", min: 74 }, { tier: "A", min: 58 },
+  { tier: "B", min: 40 }, { tier: "C", min: 0 }
+] } };
+// Base 86 with no shift: sits 2 points under the S edge, so an unbounded +3 would promote
+// it — the exact Devourer shape that motivated the bound.
+const nudgeSpec = { class: "X", spec: "N", role: "Healer", consensus: { raid: { score: 86 } } };
+const note = (creator, sentiment, date, over = {}) =>
+  ({ class: "X", spec: "N", creator, sentiment, date, bracket: "both", ...over });
+
+test("nudge: a lone creator no longer moves anything", () => {
+  const p = projectionFor(nudgeSpec, "raid", NUDGE_SCALES, [note("solo", "positive", "2026-07-30")], []);
+  assert.equal(p.score, 86, "one voice does not even move the score");
+  assert.equal(p.tier, "A+");
+  assert.doesNotMatch(p.basis, /meta read/);
+});
+
+/* THE REACTIVATION PATH. This is the code that switches itself on the first time a second
+   general creator is registered, potentially months from now and unattended. It is pinned
+   here so it can never fire unseen. */
+test("nudge: two agreeing creators reactivate it — score moves, tier does NOT", () => {
+  const p = projectionFor(nudgeSpec, "raid", NUDGE_SCALES,
+    [note("izen", "positive", "2026-07-30"), note("second", "positive", "2026-07-29")], []);
+  assert.equal(p.tier, "A+", "the bound holds: a nudge may not promote into S");
+  assert.equal(p.score, 87, "clamped to the top of the evidence band, not 89");
+  assert.match(p.basis, /meta read \+3 \(2 creators agree, within-tier only\)/);
+});
+
+test("nudge: disagreement is not evidence of a direction", () => {
+  const p = projectionFor(nudgeSpec, "raid", NUDGE_SCALES,
+    [note("izen", "positive", "2026-07-30"), note("second", "negative", "2026-07-29")], []);
+  assert.equal(p.score, 86);
+  assert.doesNotMatch(p.basis, /meta read/);
+});
+
+test("nudge: one creator's two notes are one voice, not corroboration", () => {
+  // Newest-per-creator, so a prolific creator cannot corroborate themselves.
+  const p = projectionFor(nudgeSpec, "raid", NUDGE_SCALES,
+    [note("izen", "positive", "2026-07-30"), note("izen", "positive", "2026-07-20")], []);
+  assert.equal(p.score, 86);
+  assert.doesNotMatch(p.basis, /meta read/);
+});
+
+test("nudge: downward is bounded by the band FLOOR, symmetrically", () => {
+  const low = { class: "X", spec: "N", role: "Healer", consensus: { raid: { score: 75 } } };
+  const p = projectionFor(low, "raid", NUDGE_SCALES,
+    [note("izen", "negative", "2026-07-30"), note("second", "negative", "2026-07-29")], []);
+  assert.equal(p.tier, "A+", "must not demote out of the band evidence chose");
+  assert.equal(p.score, 74, "clamped to the band floor, not 72");
+});
+
+test("nudge: a superseded or off-bracket read does not count toward the quorum", () => {
+  const p = projectionFor(nudgeSpec, "raid", NUDGE_SCALES, [
+    note("izen", "positive", "2026-07-30"),
+    note("second", "positive", "2026-07-29", { superseded: true }),
+    note("third", "positive", "2026-07-28", { bracket: "mplus" })
+  ], []);
+  assert.equal(p.score, 86, "one eligible voice remains, so no quorum");
+  assert.doesNotMatch(p.basis, /meta read/);
 });

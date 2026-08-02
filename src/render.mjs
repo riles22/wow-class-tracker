@@ -454,6 +454,14 @@ export function outlookFor(spec, ptrBuilds) {
         deliberately NOT selected by improving the report card's drift number, which
         rewards a forecast that merely copies the live consensus. v4 and v5 are NOT one
         series; the post-launch grade is what can rank them.
+   v6 — 2026-08-02 (audit P3). The meta nudge, twice constrained. It now requires >= 2
+        general creators whose newest live reads AGREE, and it may no longer change the
+        published tier — it moves the score within the band evidence already chose.
+        Today the lane has exactly one contributor, so the nudge is dormant and 7 tier
+        cells revert to their evidence-only letters (Devourer raid+M+ off S, Marksmanship
+        M+, Holy Paladin raid, Brewmaster M+, Outlaw M+, Fury raid). The bound is what
+        makes the corroboration gate safe to reactivate: unbounded, a quorum would simply
+        restore quorum-flavoured tier control. v5 and v6 are NOT one series.
    v4 — 2026-08-01. Weights and inputs UNCHANGED; the outlook TERM moved, for two reasons
         that landed together:
           · classifyHighlight now requires unanimity across a line's clauses — a line
@@ -465,7 +473,7 @@ export function outlookFor(spec, ptrBuilds) {
             outlook tally at all. Coverage went from 9 to 40 specs on #1 alone.
         Net effect: 3 of 40 outlook directions and 1 of 80 projection tiers move. Both
         changes make the tally MORE complete, so v4 scores are not comparable to v3. */
-export const PROJECTION_VERSION = 5;
+export const PROJECTION_VERSION = 6;
 
 /* Rank-map version, stamped beside it. `snapshotStateOf().ranks` feeds movement
    comparison, and its meaning changed in the same commit as PROJECTION_VERSION v2:
@@ -591,7 +599,7 @@ export function projectionFor(spec, bracket, scales, metaNotes = [], sources = [
   // never color the M+ projection under their name (izen's reads genuinely differ per
   // bracket), and a retracted (superseded) note must not nudge what the drawer hides.
   // Notes whose patchContext names no bracket apply to both.
-  const note = metaNotes
+  const notes = metaNotes
     // `n.date` is required: an undated note stringifies to "undefined", which sorts
     // ABOVE every ISO date in a descending localeCompare and would silently win the
     // "newest read" nudge. Validation enforces the date; this filter is defence in depth.
@@ -608,10 +616,52 @@ export function projectionFor(spec, bracket, scales, metaNotes = [], sources = [
       if (!mentionsRaid && !mentionsMplus) return true;
       return bracket === "raid" ? mentionsRaid : mentionsMplus;
     })
-    .sort((a, b) => String(b.date).localeCompare(String(a.date)))[0] ?? null;
-  const nudge = note?.sentiment === "positive" ? 3 : note?.sentiment === "negative" ? -3 : 0;
-  const score = Math.round(Math.min(100, Math.max(0, base + shift + nudge)));
-  const band = scales.consensus.bands.find(b => score >= b.min);
+    .sort((a, b) => String(b.date).localeCompare(String(a.date)));
+  /* Meta nudge, v6. Two independent defects, and they interact — the bound is what makes
+     the corroboration gate safe to switch back on.
+
+     CORROBORATION (>= 2 creators, unanimous). Every other layer of this tracker refuses
+     single-source authority: the consensus averages four tier lists so no outlet
+     dominates, Murlok's quantified large-N numbers are never converted to letters, an
+     era-gated PTR list is excluded from the mean. The nudge was the one place a lone
+     individual's unquantified sentiment steered a published forecast — and all 108
+     metaNotes on file come from one person, so "the newest general-creator read" was
+     always the same voice. Unanimity rather than majority, matching classifyHighlight:
+     a lane that disagrees with itself is not evidence of a direction. Corroboration is
+     also a real noise filter — one read flipping in three days (izen's Beast Mastery,
+     positive 07-06 to negative 07-09) is noise; several flipping together is a signal.
+
+     BOUND (may not change the published tier). An input named "nudge" that promotes a
+     spec into S is not nudging, it is deciding: Devourer reached the headline tier in
+     BOTH brackets on one person's sentiment. The nudge now adjusts the score — so it
+     still moves the meter, the ordering and the basis string — but the letter is decided
+     by evidence alone. This generalises the objection rather than special-casing S:
+     there is no principled reason a sentiment may promote into A+ but not into S.
+
+     Why both. Asked directly whether five creators agreeing should move Brewmaster C→B,
+     the honest answer is no — so source count alone was never the right gate, and a bare
+     >=2 rule would have quietly restored a behaviour we do not endorse the moment the
+     lane grew. Bounded, the answer flips to yes: several agreeing reads adjusting a score
+     without touching a letter is exactly what a nudge should be. */
+  const newestPerCreator = new Map();
+  for (const n of notes) if (!newestPerCreator.has(n.creator)) newestPerCreator.set(n.creator, n);
+  const dirs = [...newestPerCreator.values()]
+    .map(n => n.sentiment === "positive" ? 1 : n.sentiment === "negative" ? -1 : 0)
+    .filter(Boolean);
+  const corroborated = dirs.length >= 2 && dirs.every(d => d === dirs[0]);
+  const nudge = corroborated ? dirs[0] * 3 : 0;
+  const note = corroborated ? notes[0] : null;
+  const nudgeCreators = corroborated ? newestPerCreator.size : 0;
+
+  // Tier is decided WITHOUT the nudge; the nudge then moves the score only within that
+  // band. Clamping rather than discarding keeps the meter and the ordering informative.
+  const evidenceScore = Math.round(Math.min(100, Math.max(0, base + shift)));
+  const band = scales.consensus.bands.find(b => evidenceScore >= b.min);
+  const bandIdx = scales.consensus.bands.indexOf(band);
+  const ceiling = bandIdx <= 0 ? 100 : scales.consensus.bands[bandIdx - 1].min - 1;
+  const score = nudge
+    ? Math.min(ceiling, Math.max(band.min, Math.round(evidenceScore + nudge)))
+    : evidenceScore;
   const signals = (testing != null ? 1 : 0) + (dummy != null ? 1 : 0) + (dir != null ? 1 : 0)
     + (ptrList ? 1 : 0);
   /* Confidence is a ratio against the signal types that COULD exist for this spec+bracket,
@@ -649,7 +699,7 @@ export function projectionFor(spec, bracket, scales, metaNotes = [], sources = [
       + (dummy != null ? ` · Dummy Dome ${Math.round(dummy)}` : "")
       + (ptrList ? ` · ${ptrList.label} ${ptrList.tiers} (${Math.round(ptrList.score)})` : "")
       + (dir ? ` · outlook ${dir === "up" ? "+7" : dir === "down" ? "−7" : "0"}` : "")
-      + (nudge ? ` · meta read ${nudge > 0 ? "+3" : "−3"} (${note.creator})` : "")
+      + (nudge ? ` · meta read ${nudge > 0 ? "+3" : "−3"} (${nudgeCreators} creators agree, within-tier only)` : "")
   };
 }
 export function projections(specs, scales, creatorTakes, sources = []) {
