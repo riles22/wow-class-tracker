@@ -2306,7 +2306,7 @@
       "patchContext": "12.1 PTR — Season 2 M+ testing",
       "claim": "Dal reads Assassination as looking genuinely good for Season 2: a 6% damage buff, a 15% buff to Implacable's fourth-strike component, and tier-set buffs pushing the double-poison build (Deadly Poison giving +10% blade damage, Amplifying Poison auto-attacks 2% -> 3%). It is testing really well in Mythic+ and feels strong to play. His reservation is gameplay, not power: making Implacable's rank 1 passively restore energy freed the spec from a Vendetta-macro workaround, but rank 3 is weak enough that theorycrafters expect to drop the fourth Apex point entirely, leaving a build of flat damage passives with no new decisions.",
       "url": "https://youtu.be/cQHcrw2m_OU?t=259",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Rogue",
@@ -2317,7 +2317,7 @@
       "patchContext": "12.1 PTR — Season 2 M+ testing",
       "claim": "Dal rates the Outlaw changes as solid mechanical wins: Killing Spree no longer wastes over-capped combo points (they now add 15% damage per point instead of duration), it drains 20% faster inside Dread Rush without losing damage, and it skips targets with 5%+ damage reduction or immunity. Audacity now grants +80% Ambush damage passively and Subtlety Dispatch is up 15-30% (plus 50% under Between the Eyes), which makes an \"Ambush build\" viable on damage. But he is clear it does not restore the old Ambush playstyle — Ambush is just a stronger Sinister Strike proc, not a Vanish/Dance rotation — and the strongest new M+ build may sacrifice the Apex talent, the same passivity problem he flags for Assassination.",
       "url": "https://youtu.be/cQHcrw2m_OU?t=324",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Rogue",
@@ -2328,7 +2328,7 @@
       "patchContext": "12.1 PTR — Season 2 M+ testing",
       "claim": "Dal says Blizzard has put Subtlety \"back into a bit of a disaster spot\". The only recent help is a Goremaw's Bite pass — more direct and bleed damage plus 20% of finisher damage repeated as Shadow split across affected enemies — which he measures at roughly a 2% overall damage buff, \"okay, just not quite powerful\". He calls the spec's tuning \"pretty abysmal\" and notes it is barely represented in PTR Mythic+ logs compared with its Season 1 popularity: \"everybody almost forgot that Subtlety exists in Season 2\". He caveats that tuning is still weeks from final, so he is judging the direction rather than the final numbers.",
       "url": "https://youtu.be/cQHcrw2m_OU?t=704",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Paladin",
@@ -3096,7 +3096,7 @@
       "patchContext": "12.1 PTR (2026-07-31 build) — Season 2 M+ tier list update",
       "url": "https://youtu.be/9cnTo1yK3C8?t=10",
       "claim": "He puts the damage nerf at roughly 4-5% depending on target count and says it is not big enough to move Blood off the number-one tank spot: survivability was untouched, so he still reads it as the tankiest tank, and even after the cut he thinks its damage is the best of all tanks once raid buffs are counted. Blood stays in his S+ row.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Druid",
@@ -3206,6 +3206,50 @@
       "patchContext": "12.1 PTR — Elemental rework read; his own testing shown is on PvP dummies and duels, with the PvE read taken from reviewing logs",
       "url": "https://youtu.be/NAErjQ18w0Y?t=63",
       "claim": "He reads 12.1's Elemental pass as part of a game-wide move of power out of cooldowns and into baseline abilities: Ascendance was stripped down substantially and the damage redistributed, which he says shows up as much healthier sustained output. He rates the Season 2 set bonus strongly — 25% more Earth Shock / Earthquake / Elemental Blast damage, plus free empowered casts and a Maelstrom-free Earthquake when Storm Keeper or Ascendance falls off — and calls 12.1 a 'feels-good patch' for the spec. Framing caveat: the damage numbers he shows are from PvP training dummies and a duel, and he says his PvE read comes from reviewing other players' logs rather than his own PvE testing.",
+      "superseded": false
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Blood",
+      "creator": "YoDaTV",
+      "date": "2026-08-02",
+      "sentiment": "buff",
+      "patchContext": "12.1 PTR — his Season 2 Blood DK Mythic+ guide",
+      "url": "https://youtu.be/vgBQJjfT20g?t=4",
+      "claim": "Opens his Season 2 M+ guide by calling Blood DK the best tank for Mythic+ at the start of the season on current PTR testing: the most damage of any tank (especially AoE), the best self-healing, and the steadiest health bar he has seen in high keys. He credits the buffs plus the Apex-talent hotfix that flipped the talent from INCREASING damage taken by 4% to reducing it by 6% per stack — roughly a 10% swing with one weapon active and up to ~20% with two. He recommends San'layn over Deathbringer (Blood Soaked Ground now 8% physical reduction, was 5%) for damage, calling survivability between the two close and saying theorycraft may even favour Deathbringer slightly. Versatility/Haste for M+ because defensive stats beat damage stats in keys. He rates the Season 2 tier set 'very good' but says his HPL testing shows no reason to consume the 4-set at 10 stacks off cooldown — Marrowrend when you would anyway and take the strength then.",
+      "superseded": false
+    },
+    {
+      "class": "Rogue",
+      "spec": "Assassination",
+      "creator": "Dalaran Gaming",
+      "date": "2026-08-02",
+      "sentiment": "mixed",
+      "patchContext": "12.1 PTR — walkthrough of the 2026-07-31 class tuning notes",
+      "url": "https://youtu.be/9l7sbfFnwSE?t=842",
+      "claim": "Calls the 10% damage buff 'very solid, big numbers, kind of what assassination really needed', but says it does not fix the spec's actual problem: good single target, decent AoE, yet it falls behind specifically at two and three targets, where it used to have good tools and no longer does. He groups this with Outlaw and Subtlety as the same unaddressed class-wide weakness and says a lot of players were hoping Blizzard would address it in this pass and it did not.",
+      "superseded": false
+    },
+    {
+      "class": "Rogue",
+      "spec": "Outlaw",
+      "creator": "Dalaran Gaming",
+      "date": "2026-08-02",
+      "sentiment": "mixed",
+      "patchContext": "12.1 PTR — walkthrough of the 2026-07-31 class tuning notes",
+      "url": "https://youtu.be/9l7sbfFnwSE?t=867",
+      "claim": "Reads the 6% buff as smaller than the other two Rogue specs but still needed and welcome. Same structural caveat as the rest of the class: Blade Flurry handles wide AoE fine, but Outlaw is much weaker at two and three targets than in past expansions, and this pass did nothing about that dead zone.",
+      "superseded": false
+    },
+    {
+      "class": "Rogue",
+      "spec": "Subtlety",
+      "creator": "Dalaran Gaming",
+      "date": "2026-08-02",
+      "sentiment": "mixed",
+      "patchContext": "12.1 PTR — walkthrough of the 2026-07-31 class tuning notes",
+      "url": "https://youtu.be/9l7sbfFnwSE?t=894",
+      "claim": "Says Subtlety needed the buff and the 10% is good, but is unconvinced by the new reward talent Warfiend's Bite — the returning Legion artifact ability, meant to be decent at both single target and cleave, which in his view 'just doesn't accomplish that goal', leaving the spec still on the weaker side there. Shares the class-wide two-to-three-target dead zone he says Blizzard did not address in this pass.",
       "superseded": false
     }
   ],

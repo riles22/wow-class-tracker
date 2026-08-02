@@ -79,6 +79,22 @@
       ]
     },
     {
+      "date": "2026-07-31",
+      "kind": "hotfix",
+      "label": "PTR hotfixes pushed overnight (no forum post — Wowhead round-up is the only source): Freightrunner's Flask crit scaling nerfed, Evoker Twin Flame / Consume Flame cuts, Shaman Ride the Lightning +59%. Every class line in the source sits under a bare CLASS heading with no spec qualifier, so they are recorded class-wide rather than attributed to a spec.",
+      "wowheadUrl": "https://www.wowhead.com/news=382321/patch-12-1-ptr-hotfixes-freightrunners-nerfed-and-small-class-tuning",
+      "icyveinsUrl": null,
+      "specsAffected": [
+        "Evoker (class-wide)",
+        "Shaman (class-wide)"
+      ],
+      "highlights": [
+        "Evoker (class-wide) Twin Flame damage reduced by 20%; Consume Flame now heals for 240% of the consume (was 300%); Consume Flame no longer ignores Caster healing modifiers.",
+        "Shaman (class-wide) Ride the Lightning damage increased by 59%.",
+        "Non-class: Freightrunner's Flask scaling nerfed — Crit reduced by 32.5% at Myth 6/6 item level, to 689 (was 1020); at Champion 1/6 it is now a slight buff."
+      ]
+    },
+    {
       "date": "2026-07-23",
       "label": "Week of July 23rd — Class Bug Fixes & Tuning: mostly bug fixes across Hunter (BM/MM/Survival), Evoker (Preservation) and Monk, plus targeted tuning — Restoration Druid Regrowth -20%, Mistweaver Morning Breeze rebalance, Holy Paladin Venomous Abyss 4-set mana-cost change + healing buff, Discipline Priest Void Shield. PTR marked a release candidate.",
       "forumPostNumber": 17,

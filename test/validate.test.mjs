@@ -492,7 +492,13 @@ test("ptr-builds: each entry kind must carry the citation it actually has", asyn
 
 test("ptr-builds: entries without an explicit kind are still builds", async () => {
   const data = await loadData(ROOT);
-  // Every existing entry predates the field; none may start failing.
-  assert.ok(data.ptrBuilds.builds.every(b => b.kind === undefined));
+  // `kind` is optional and was added after every entry then on file. An entry that omits
+  // it must still be read as a build — i.e. still held to the forum-post citation.
+  // Asserting the file carried NO kind at all was a fixture assumption about the data,
+  // not about the behaviour: it broke the moment the first real hotfix was logged
+  // (2026-08-02, the 07-31 round-up). Assert the behaviour instead.
+  const implicit = data.ptrBuilds.builds.filter(b => b.kind === undefined);
+  assert.ok(implicit.length);
+  assert.ok(implicit.every(b => b.forumUrl));
   assert.deepEqual(validateData(data, { fullRoster: true }), []);
 });
