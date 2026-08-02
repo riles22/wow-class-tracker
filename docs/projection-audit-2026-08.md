@@ -125,6 +125,60 @@ all, 1:1 changes one cell. It is a tuning knob that does not tune.
 - **Nothing measures whether past projections were correct.** The report card is designed
   but does not exist. Without it the audit can only reason about coherence, not accuracy.
 
+## First measurements from the report card (2026-08-02)
+
+`src/report-card.mjs` is built and runs retrospectively. Sweeping every snapshot that
+carries a projection against the newest consensus gives this:
+
+| horizon | forecast | proj v | exact | within 1 | MAE (bands) | bias (bands) | bias (pts) |
+|---|---|---|---|---|---|---|---|
+| 23 d | 2026-07-10 | 1 | 43% | 86% | 0.71 | −0.14 | −3.0 |
+| 19 d | 2026-07-14 | 1 | 43% | 89% | 0.69 | −0.11 | −3.1 |
+| 15 d | 2026-07-18 | 1 | 44% | 86% | 0.70 | −0.17 | −3.8 |
+| 10 d | 2026-07-23 | 1 | 43% | 89% | 0.69 | −0.14 | −4.0 |
+| 8 d | 2026-07-25 | 2 | 46% | 88% | 0.66 | −0.14 | −3.5 |
+| 5 d | 2026-07-28 | 2 | 48% | 85% | 0.69 | −0.21 | −3.4 |
+| 3 d | 2026-07-30 | 2 | 46% | 85% | 0.70 | −0.17 | −2.5 |
+| **2 d** | 2026-07-31 | **3** | 50% | 90% | 0.61 | **+0.01** | **−0.6** |
+| **1 d** | 2026-08-01 | **4** | 50% | 91% | 0.61 | **+0.01** | **−0.1** |
+
+Two findings, one of them load-bearing for how the audit should proceed.
+
+**1. Error does not grow with horizon.** A 23-day-old forecast scores MAE 0.71 bands; a
+1-day-old one scores 0.61. If the gap between projection and consensus were accumulated
+meta movement, it would widen with distance — it barely does. So the ~0.65-band standing
+gap is *structural*, not drift. That is what makes it worth auditing at all.
+
+**2. The v2→v3 boundary removed a persistent pessimistic lean.** Every v1 and v2 forecast
+sits ≈0.15 bands / 3–4 points BELOW the live consensus, and that lean does not shrink as
+the horizon shortens (v2 at 8 days is −0.14, v2 at 3 days is −0.17). At v3 it goes to
++0.01 / −0.6 and stays there at v4. The jump lands exactly on the version boundary, not on
+a horizon boundary, which points at the change itself: v3 added the external PTR tier list
+to the base. It appears to have been correcting a real bias, not just adding noise.
+
+### The trap this metric sets, stated before anyone optimises into it
+
+A projection identical to the live consensus would score **100% exact, zero bias** — and be
+worthless, because it forecasts nothing. Drift rewards the trivial model. It is therefore
+diagnostic only: useful for spotting a systematic lean, never a target to tune toward.
+Nothing in the audit may be justified by "it improves the drift number". Only the
+post-launch grade, against a settled Season-2 consensus, can score accuracy.
+
+The corollary matters too: v3's bias of ~0 is not automatically *better* than v1's −0.15.
+It means the forecast now sits centred on the live picture. Whether that is right depends
+entirely on how much 12.1 actually moves the meta — which is precisely what the real grade
+will answer and this one cannot.
+
+### Also worth noting
+
+- Confidence is doing real work: `high`-confidence cells score MAE 0.64 vs `medium` at
+  0.78. The tag is not decorative, which is mild evidence for the v3 ratio change.
+- Tanks are the weakest cohort (33% exact, MAE 1.0 across 12 cells) and healers the
+  strongest (57%, MAE 0.5). Small n, but consistent with tanks having the fewest
+  obtainable signals.
+- Snapshots before 2026-07-09 carry no projection at all. The grader returns "nothing to
+  grade" for them rather than a 0% score, which would read as total failure.
+
 ## Proposed method
 
 1. **Build the report card first, retrospectively.** We have enriched history snapshots
