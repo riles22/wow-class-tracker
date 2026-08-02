@@ -560,3 +560,46 @@ ui("an era-gated PTR tier list shows its own 12.1 letters and is unreachable in 
   const shown = await page.evaluate(() => document.getElementById("tlcount")?.textContent ?? "");
   assert.equal(shown, words[live], "the derived tier-list count excludes era-gated lists");
 });
+
+ui("the 12.1 forecast column shows its evidence strength, and only there", async page => {
+  const data = payload();
+  // Projection view, Both era — the only place confidence describes what is on screen.
+  await page.evaluate(() => document.querySelector('#srcseg button[data-source="projection"]').click());
+  await page.waitForTimeout(150);
+
+  const shown = await page.evaluate(() => [...document.querySelectorAll(".row.clickable")].map(r => ({
+    spec: r.querySelector(".spec-txt")?.textContent.trim(),
+    cls: r.querySelector(".cls")?.textContent.trim(),
+    conf: [...r.querySelectorAll(".conf")].map(c => c.dataset.c)
+  })));
+  assert.ok(shown.length > 0);
+
+  // Every rendered marker must match the payload's confidence for that spec+bracket —
+  // the grid may not claim more (or less) evidence than the projection actually has.
+  let checked = 0;
+  for (const row of shown) {
+    const spec = data.specs.find(s => s.spec === row.spec && s.class === row.cls);
+    if (!spec?.projection) continue;
+    const expected = ["raid", "mplus"]
+      .map(b => spec.projection[b]?.confidence)
+      .filter(Boolean);
+    assert.deepEqual(row.conf, expected, `${row.cls} ${row.spec}: grid confidence must equal payload confidence`);
+    checked += expected.length;
+  }
+  assert.ok(checked >= 40, `expected to verify many cells, saw ${checked}`);
+
+  // The audit's P4a case must be visible, not merely encoded: low/prior-only cells exist
+  // and are distinguishable from high ones.
+  const weak = shown.flatMap(r => r.conf).filter(c => c === "low" || c === "prior-only").length;
+  assert.ok(weak > 0, "expected some thinly-evidenced forecasts to be marked");
+
+  // A fetched source's letters are NOT ours to caveat — no marker outside the forecast.
+  await page.evaluate(() => document.querySelector('#srcseg button[data-source="icyveins"]').click());
+  await page.waitForTimeout(150);
+  assert.equal(await page.evaluate(() => document.querySelectorAll("#matrix .conf").length), 0,
+    "confidence must not appear over a source's own ratings");
+  await page.evaluate(() => document.querySelector('#srcseg button[data-source="consensus"]').click());
+  await page.waitForTimeout(150);
+  assert.equal(await page.evaluate(() => document.querySelectorAll("#matrix .conf").length), 0,
+    "consensus is measured, not forecast — no confidence marker");
+});
