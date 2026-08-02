@@ -557,3 +557,29 @@ test("checkValueMove covers sims and Dummy Dome, not just spec.metrics", () => {
   // …and the sim family, untouched in that run, stays silent — no blanket reddening.
   assert.ok(!dummyBroken.errors.some(e => e.includes("|sim|")), "an unrelated healthy family must not be dragged in");
 });
+
+/* ---- the one-shot launch flip (2026-08-02) ---- */
+
+test("age gate: SNAPSHOT_PHASE still pre-launch past its due date is a violation", () => {
+  const after = checkFreshness(config, goodManifest(), freshData(), "2026-08-25");
+  assert.ok(after.violations.some(v => v.includes("SNAPSHOT_PHASE")), after.violations.join("\n"));
+  assert.ok(after.fingerprint.includes("snapshot-phase"));
+});
+
+test("age gate: the flip is NOT nagged before its due date", () => {
+  // Season 2 opens 08-18 and the due date carries slack for a delayed launch. A gate
+  // that fires early trains the owner to ignore it, which is worse than no gate.
+  const before = checkFreshness(config, goodManifest(), freshData(), "2026-08-12");
+  assert.ok(!before.violations.some(v => v.includes("SNAPSHOT_PHASE")), before.violations.join("\n"));
+  assert.ok(!before.fingerprint.includes("snapshot-phase"));
+});
+
+test("age gate: once flipped, the check goes quiet forever", async () => {
+  // Guards against the gate becoming a permanent nag after a correct flip: the condition
+  // is on the phase VALUE, not the date, so a live-season id passes at any future date.
+  const { PHASE_FLIP_DUE } = await import("../src/render.mjs");
+  assert.match(PHASE_FLIP_DUE, /^\d{4}-\d{2}-\d{2}$/);
+  const src = await readFile(new URL("../src/check-refresh.mjs", import.meta.url), "utf8");
+  assert.match(src, /SNAPSHOT_PHASE === "12\.1-ptr" && dateOf\(nowDate\) > PHASE_FLIP_DUE/,
+    "the gate must test the phase VALUE, so flipping it silences the check permanently");
+});

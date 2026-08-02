@@ -134,7 +134,11 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   `history`) and is the raw data for the post-launch **forecast report card** (grade the
   frozen pre-launch projection against the first settled S2 consensus).
 - **`SNAPSHOT_PHASE` (`render.mjs`) is a one-shot OWNER action at 12.1 launch**: flip
-  `"12.1-ptr"` to the live Season-2 id. The first non-`12.1-ptr` snapshot is the endpoint
+  `"12.1-ptr"` to the live Season-2 id. **Gated since 2026-08-02**: `check-refresh --age`
+  (the daily heartbeat) fails red once `PHASE_FLIP_DUE` passes with the flip undone, so
+  the one action nothing else can detect after the fact now announces itself. The gate
+  tests the phase VALUE, so flipping it silences the check permanently — it cannot become
+  a standing nag. Update `PHASE_FLIP_DUE` alongside the flip if launch slips. The first non-`12.1-ptr` snapshot is the endpoint
   the forecast report card grades the frozen pre-launch projection against, so nothing
   downstream can infer the boundary if this is missed. Recorded here because a code
   comment is invisible to whoever notices 12.1 going live (2026-07-24 audit, X3).

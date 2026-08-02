@@ -524,6 +524,21 @@ const consensusComparableWith = snap => versionOf(snap, "consensusVersion") === 
 // history. Flip to "12.1-live" (or the S2 season id) when 12.1 ships and the tracker is
 // reconfigured for the live season — the boundary is then the first non-"12.1-ptr" snapshot.
 export const SNAPSHOT_PHASE = "12.1-ptr";
+/* The date by which SNAPSHOT_PHASE must no longer read "12.1-ptr". Season 2 opens
+   2026-08-18 (12.1 itself lands 08-11); a couple of days of slack absorbs a delayed
+   launch without nagging.
+
+   This exists because the flip is the one action in the whole system that NOTHING can
+   detect after the fact. Miss it and every post-launch snapshot is still stamped
+   "12.1-ptr", so the forecast report card can never find the boundary it grades the
+   frozen pre-launch projection against — and the loss is silent and permanent, since
+   the pre-launch state cannot be reconstructed later. Every other lapse here announces
+   itself: stale data trips a staleness gate, a missed nightly trips the heartbeat, a
+   bad parse trips the anomaly gate. This one just quietly produces a wrong answer
+   forever, which is exactly the kind of failure the rest of this repo refuses to allow.
+   `check-refresh --age` therefore fails red once this date passes with the flip
+   undone, turning the one silent failure into a loud one. */
+export const PHASE_FLIP_DUE = "2026-08-20";
 
 const PTR_MPLUS_SERIES = {
   DPS: "Median rDPS (12.1 PTR M+ testing)",
