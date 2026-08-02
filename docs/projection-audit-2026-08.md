@@ -301,8 +301,14 @@ It stopped steering the forecast; it did not stop being published.
 towards it — entirely it. Their basis strings read `live baseline 49 · outlook 0`, with no
 PTR term of any kind. A further 19 are prior + Dummy Dome. **No raid cell has a PTR
 raid-testing term at all**, because every zone-54 row sits below `MIN_RANK_N` (34 of 74
-testing rows are unranked; the n distribution is min 1, p25 4, median 40) and the series
-has been frozen since 07-28 by the WCL `rdps` outage.
+testing rows are unranked; the n distribution is min 1, p25 4, median 40).
+
+**Re-verified 2026-08-02 after the local run restored all five WCL rDPS cuts** (master
+`bf69002`): still 21 prior-only raid cells, still **zero** with a raid-testing term. So
+this was never the outage — fresh zone-54 data changes nothing, because the testing
+population itself is tiny-n (world-first testers on templated gear) and sits below the
+floor regardless of how recently it was fetched. The finding is structural, not
+transient.
 
 So for half the raid bracket, "our 12.1 forecast" is last patch's consensus plus a tuning
 shift. That is not a modelling error — it is the honest consequence of the PTR raid data

@@ -248,7 +248,8 @@
       "patchContext": "12.1 PTR",
       "sentiment": "neutral",
       "claim": "Notes the 12.1 build's Shaman changes center on tier sets rather than Elemental, with the class falling in line with Blizzard's stated Season 2 goals of reduced CC and toned-down cooldown power.",
-      "url": "https://youtu.be/C_aiXV_QRBs?t=772"
+      "url": "https://youtu.be/C_aiXV_QRBs?t=772",
+      "superseded": true
     },
     {
       "class": "Shaman",
@@ -1601,7 +1602,7 @@
       "patchContext": "12.1 PTR — Season 2 raid + M+ testing",
       "claim": "AutomaticJak walks through big Preservation raid-healing nerfs (Dream Breath HoT -25%, class-set Living Flame down to 100% from 150%, Malygos's Blessing -10%) partly offset by dungeon triage buffs (Verdant Embrace +40%, Living Flame +30%). The class-set nerf also hits Pres's strong M+ damage. It's still on the higher band in raid testing but moving toward balanced — and Pres historically only earns raid representation when it's dominant, so he's wary its tools remain insufficient.",
       "url": "https://youtu.be/Rmkxzb1QQSQ?t=184",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Monk",
@@ -2052,7 +2053,7 @@
       "patchContext": "12.1 PTR — Season 2 M+ testing",
       "claim": "AutomaticJak thinks Disc is in a 'much, much better spot' for next season: Void Shield was over-nerfed and atonement buffed in return, so the spec is no longer the Void Shield spam simulator it was mid-PTR (he expects a small Void Shield correction back up, since it currently shields for less than Power Word: Shield). His worries are mana generation and comp dependence — he expects Disc to struggle in high keys unless the group can cover poison dispels for it, and he expects Blizzard to keep buffing atonement while trimming Disc's direct damage.",
       "url": "https://youtu.be/KMrletaO_a8?t=275",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Priest",
@@ -2063,7 +2064,7 @@
       "patchContext": "12.1 PTR — Season 2 M+ testing",
       "claim": "AutomaticJak reports no Holy Priest changes this week and a split profile: Oracle Holy is 'really good' and feels good in dungeons and is playable in keys now, while Archon looks better in raid and the spec overall still reads a bit too weak there. He speculates the Holy Priest developer is spread across other classes, and notes Holy Priest and Preservation are being logged more than Resto Druid on the PTR.",
       "url": "https://youtu.be/KMrletaO_a8?t=2058",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Monk",
@@ -2162,7 +2163,7 @@
       "patchContext": "12.1 PTR — Season 2 healer review (wishlist format)",
       "claim": "LBNinja7 rates the Resto Shaman tier set as one of the coolest in Season 2 and praises how its healing rains synergise with talents like Downpour, but says it leans heavily on the party clumping together: the passive rains the set procs are wasted when they land on an isolated ally, a gripe he compares to the melee-stacking requirement Preservation Evoker used to carry.",
       "url": "https://youtu.be/MFpxVDQGU5I?t=60",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Priest",
@@ -2173,7 +2174,7 @@
       "patchContext": "12.1 PTR — Season 2 healer review (wishlist format)",
       "claim": "LBNinja7 says Disc has had a lot of Season 2 changes and fixes but still feels lacking in the Voidweaver department: Shadow Mend and the apex talent cover spot healing well and the tier set's more frequent Mind Blast restores the old rapid cooldown cycle, yet he thinks it has lost the punch that used to finish a ramp, singling out Penance's damage as 'barely moving health bars' even with Voidweaver.",
       "url": "https://youtu.be/MFpxVDQGU5I?t=121",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Priest",
@@ -2184,7 +2185,7 @@
       "patchContext": "12.1 PTR — Season 2 healer review (wishlist format)",
       "claim": "LBNinja7 notes Holy Priest picked up further Season 2 buffs, especially to spot healing, and can heal through most mechanics — but argues its kit still gives no reason to bring it over Disc in Mythic+: outside of raw throughput 'they just don't bring anything else'. He frames its recurring problem as years of healing being buffed and nerfed, leaving it either in a good raid spot or nowhere.",
       "url": "https://youtu.be/MFpxVDQGU5I?t=151",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Druid",
@@ -2195,7 +2196,7 @@
       "patchContext": "12.1 PTR — Season 2 healer review (wishlist format)",
       "claim": "LBNinja7 is glad Blizzard cut the Resto Druid tier-set proc from a 25% to a 15% HoT buff while buffing hots like Wild Growth, which makes the set less punishing when it does not proc — but he says the swing is still noticeable when a big healing check arrives with no proc up. He does not want more power taken out of the set (that would cost its appeal) and instead compares the problem to Resto Shaman's old Surging Totem RNG, which a guaranteed proc fixed.",
       "url": "https://youtu.be/MFpxVDQGU5I?t=273",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Monk",
@@ -2206,7 +2207,7 @@
       "patchContext": "12.1 PTR — Season 2 healer review (wishlist format)",
       "claim": "LBNinja7 agrees Mistweaver is 'very good' coming into Season 2 and says the Spinning Crane Kick nerf gave it a real rotation again. His only complaint is build diversity: he is tired of effectively having one hero-talent choice, with Conduit dominant and Master of Harmony short of a reason to play it.",
       "url": "https://youtu.be/MFpxVDQGU5I?t=364",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Paladin",
@@ -2217,7 +2218,7 @@
       "patchContext": "12.1 PTR — Season 2 healer review (wishlist format)",
       "claim": "LBNinja7 says Holy Paladin 'has gotten a ton of love recently' and that the large Holy Shock buff has slowed down the odd no-Holy-Shock build. He is not unhappy with its current state, but thinks it lacks anything as distinctive as it once had and currently reads as 'just a whack-a-mole healer' — he wants an Ashen Hollow-style standout, particularly on the damage side, to make it stand out again.",
       "url": "https://youtu.be/MFpxVDQGU5I?t=427",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Evoker",
@@ -2228,7 +2229,7 @@
       "patchContext": "12.1 PTR — Season 2 healer review (wishlist format)",
       "claim": "Preservation is the one healer LBNinja7 says needs no fixing at all: he likes the direction Blizzard has taken it, calls the Season 2 tier set surprisingly well designed (the Essence Burst it generates gives a frequent powerful spot heal or damage), and singles out Flame Shaper as 'cranking damage on the PTR' — a damage-oriented, glass-cannon hero tree he thinks every healer should have.",
       "url": "https://youtu.be/MFpxVDQGU5I?t=522",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Druid",
@@ -2250,7 +2251,7 @@
       "patchContext": "12.1 PTR — Season 2 M+ testing",
       "claim": "AutomaticJak now rates Holy Paladin one of the highest-HPS healers in Season 2 dungeons — \"the best, if not second best\", and \"definitely S tier\" on healing throughput. He argues the 4-set's 60% Holy Light mana penalty is what makes the kit whole: the no-Holy-Shock build is dead, Holy Shock is back as the mana-efficient single-target button, and mana is comfortable enough to run Beacon of Virtue in dungeons (and in some raid runs). He also likes that the drawback is bolted to a temporary tier set rather than the baseline kit, so it disappears next season. Herald and Lightsmith are both viable — Clarius told him Herald heals a little better, Lightsmith does more damage. His 07-27 follow-up short adds that this is the most caster-centric Holy Paladin he can remember, with Wings and Divine Toll feeling like mediocre cooldowns next to the Holy Light -> Infusion -> Flash of Light core.",
       "url": "https://youtu.be/wLqVYLOUg8o?t=401",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Monk",
@@ -2261,7 +2262,7 @@
       "patchContext": "12.1 PTR — post Morning Breeze −60% testing",
       "claim": "After the Morning Breeze −60% cut on top of the earlier 8% caster-healing nerf, AutomaticJak reads Mistweaver as over-nerfed and lands it around A-ish tier for Mythic+, \"maybe a little bit lower if it's going to struggle with some of the healing checks\" — worse than Holy Paladin in keys and behind a lot of healers in raid, with the Way of the Serpent caster raid style feeling especially weak. He thinks Blizzard was solving a low-priority problem (making mastery a good stat), that the version from about two weeks earlier — Rising Sun Kick valuable, no forced spin-to-win, real value from Shaohao's Gift — was close to perfect, and that the spec has \"the bones of very good gameplay\" with haphazard numbers that need a course correction before launch.",
       "url": "https://youtu.be/wLqVYLOUg8o?t=739",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Warlock",
@@ -2503,7 +2504,7 @@
       "patchContext": "12.1 PTR — Season 2 outlook",
       "claim": "Asked on stream whether Season 2 is a 'Moonkin tier', Tettles gives a more guarded read than his mid-July one: he thinks the spec may well get nerfed again, and says that after the first round of nerfs it no longer looked insane in raid — but he still puts it among the top couple of specs. In the same stretch he reads the wider PTR board as unusually crowded (Marksmanship Hunter possibly the top DPS on logs; Moonkin, Arcane Mage, Arms Warrior and Elemental Shaman all looking good), and notes he barely engages with the tier set while playing.",
       "url": "https://youtu.be/aqe2LKeMIqQ?t=10036",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Monk",
@@ -2536,7 +2537,7 @@
       "patchContext": "12.1 PTR — Season 2 M+ testing",
       "claim": "Keeps Resto Shaman where it was (A tier) and says he could nitpick it into S. He is explicitly happy about the tier-set nerf: the spec has too much of its power sitting in RNG (tier set, Ascendance and Stormstream procs), so moving power out of the set and into the baseline toolkit is the right direction. Farseer's Chain Heal buffs made that tree feel decent, but Totemic in a full physical-melee composition felt really great, and he would be surprised if Totemic Resto is not part of that comp in Season 2.",
       "url": "https://youtu.be/Zf3GQqG-z8s?t=1083",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Evoker",
@@ -2547,7 +2548,7 @@
       "patchContext": "12.1 PTR — Season 2 M+ testing",
       "claim": "Calls Preservation the biggest underdog and most underappreciated healer on the PTR — healing is there, damage is absolutely there, and he likes the tier set (mostly tested Flame Shaper, plus an Emerald Blossom / Fluttering Seedlings build). But he separates that from the meta question and answers it himself: probably not meta, because it is harder to pilot, has range limitations and no good raid buff. Held at its existing placement.",
       "url": "https://youtu.be/Zf3GQqG-z8s?t=1222",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Priest",
@@ -2558,7 +2559,7 @@
       "patchContext": "12.1 PTR — Season 2 M+ testing",
       "claim": "The healer that falls in this update — down to a new B+ row, because he admits he was generous in last week's ranking before testing most of the builds. A week focused on Oracle left mana still an issue and, more importantly, he wants more Atonement transfer in the panic moments: every healer above Discipline gave him an easier time in the same keys. He thinks a couple more tuning passes could make it climb, and that Blizzard is nervous about tuning it for M+ without breaking raid.",
       "url": "https://youtu.be/Zf3GQqG-z8s?t=1278",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Druid",
@@ -2569,7 +2570,7 @@
       "patchContext": "12.1 PTR — Season 2 M+ testing",
       "claim": "Held in place. The Abundance / Regrowth buffs and the Abundance crit bug fix landed, but he still wants further M+ buffs, and calls Wildstalker Resto's damage quite low — partly because there is no time to apply bleeds when the healing demand is that high. He also misses Verdant Infusion no longer extending HoTs and says he is jealous of the HoT-extension talent Resto Shaman just got. Expects Blizzard to keep buffing it, but flags that as speculation.",
       "url": "https://youtu.be/Zf3GQqG-z8s?t=1334",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Priest",
@@ -2580,7 +2581,7 @@
       "patchContext": "12.1 PTR — Season 2 M+ testing",
       "claim": "Stays around B tier. He is clear that Holy Priest is not bad and can push decently high keys, and the Oracle buffs (Premonition of Insight, Prayer of Mending) landed, but the currently popular dual-Oracle build leaves him with few healing buttons for his taste, its damage sits on the low end, and he wants significant — including gameplay — changes he is not holding his breath for.",
       "url": "https://youtu.be/Zf3GQqG-z8s?t=1390",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Monk",
@@ -2591,7 +2592,7 @@
       "patchContext": "12.1 PTR — Season 2 M+ testing",
       "claim": "Softens yesterday's drop after retesting both builds post-Morning-Breeze. The mastery-stacking build is 'a lot weaker' but still playable; on base mastery he found Rising Sun Kick weaker and Spinning Crane Kick better, spinning to win at roughly five targets, and he personally preferred that normal build for large trash. A post-nerf normal-build log he pulls up does 61k damage — 'not the worst, not the best', a bit above average, against the ~100k the mastery build used to reach. His summary is that monks are not bad after the changes at all; the real drag is spot healing, with Vivify and Sheilun's Gift feeling like they do very little. He expects Blizzard to buff Sheilun's and for Monk to climb back a bit.",
       "url": "https://youtu.be/nZX2jWzYDB8?t=1872",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Paladin",
@@ -2602,7 +2603,7 @@
       "patchContext": "12.1 PTR — Season 2 M+ testing",
       "claim": "Firms his ranking up from 'high A, some would say S' to naming Holy Paladin the front runner for the best healer of the first four or five weeks of Season 2, and putting it in S tier alongside Resto Shaman — with the distinction that Resto Shaman earns its slot inside the melee/physical comp while Holy Paladin 'looks to be just good in any' comp. He caveats that hotfixes are still landing and a lot will change after those first weeks.",
       "url": "https://youtu.be/nZX2jWzYDB8?t=2852",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Shaman",
@@ -2646,7 +2647,7 @@
       "patchContext": "12.1 PTR — Season 2 outlook",
       "claim": "Brief short-form read on the Resto Shaman rework: he thinks Farseer \"might finally be back\" for Season 2 on the back of the large Riptide healing buffs, the new talent that extends Riptides off totems, and the big buff to the ancestors' Chain Heal. He expects the changes to make the spec run considerably smoother, and singles out the new raid's many spread-out encounters as the setting where Farseer should be able to compete.",
       "url": "https://youtu.be/xote4lf9dfs?t=0",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Priest",
@@ -2677,7 +2678,7 @@
       "patchContext": "12.1 PTR — Season 2 M+ testing",
       "claim": "Tier-list update a week out from Season 2, with no further tuning expected before launch: YoDaTV puts Blood DK alone in S+, calling it simultaneously the highest-damage AND the tankiest tank for the first time in a very long while. He quantifies the Apex-talent bug fix — Dancing Rune Weapon was ADDING 4% damage taken per weapon instead of removing it, so with two weapons up for roughly half a dungeon the Season 2 swing is about 20% less damage taken over that stretch — layered on top of separate survivability buffs. He reads Blood as the most likely meta tank, and expects any incoming nerf to land on damage, which would leave it merely S as the tankiest tank. His own caveat: most of the top keys on the PTR are still not being done by Blood DK, and he has not personally pushed high keys on it.",
       "url": "https://youtu.be/CNWAq9aOHO4?t=26",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Paladin",
@@ -2688,7 +2689,7 @@
       "patchContext": "12.1 PTR — Season 2 M+ testing",
       "claim": "Drops Prot Paladin to A+ — still 'the best tank after Blood DK', but he reads the spec as gutted by the Reflection of Radiance nerf. His accounting: the +10% DR from Blessed Hammer is roughly washed out by Sentinel dropping 15s to 12s, and then the Reflection of Radiance nerf takes another large bite because Sentinel uptime falls further. Against Blood DK it takes more damage, needs more healing and does less damage, surviving on tier placement mainly because it brings Blessing of Sacrifice. He openly hopes for a compensating buff. Honest counter-evidence he raises himself: from logs, the highest keys on the PTR are still being done by Prot Paladin, so it may yet be strong at the very top.",
       "url": "https://youtu.be/CNWAq9aOHO4?t=664",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Paladin",
@@ -2699,7 +2700,7 @@
       "patchContext": "12.1 PTR — Season 2 M+ testing",
       "claim": "Holds Holy Paladin in S as the best healer going into Season 2 on pure healing — by far the best at keeping a group alive through mistakes and hard heal checks, to the point that he essentially stops seeing deaths-to-healing with one in the group. What keeps it out of S+ is damage, which is noticeably low on the Herald of the Sun healing build and unhelped by the lack of a raid buff. He flags the failure mode explicitly: if a dungeon's wall turns out to be damage rather than survival, a lower-healing/higher-damage healer like Resto Shaman or Mistweaver could take the slot. He also notes the healer damage spread is far tighter than Season 1's Mistweaver blowout. Self-declared caveat: he is not a healer player and is reading from group outcomes.",
       "url": "https://youtu.be/CNWAq9aOHO4?t=103",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Paladin",
@@ -2710,7 +2711,7 @@
       "patchContext": "12.1 PTR — Season 2 M+ testing",
       "claim": "Places Retribution in A+ after playing alongside several Ret Paladins on the PTR: the damage is 'actually really good', but he reads the spec as still carrying its Season 1 gaps — slightly squishier than the genuinely tanky DPS classes, and no damage-oriented raid buff to justify the slot in a meta comp. A brief placement inside a broad tier-list rundown rather than a hands-on deep dive.",
       "url": "https://youtu.be/CNWAq9aOHO4?t=1019",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Demon Hunter",
@@ -2721,7 +2722,7 @@
       "patchContext": "12.1 PTR — Season 2 M+ testing",
       "claim": "Keeps Vengeance in A+ and sums it up as 'one buff away'. On damage he is positive — Annihilator is doing well and, counting Chaos Brand, he rates it roughly on par with Blood DK; he tested Ultrakill and measured it about 30% behind, so he advises against that build. Two caveats carry the mixed read: survivability and especially self-healing are well short of Blood DK, and outside Metamorphosis — tanking on Fiery Brand with no meta up — the spec genuinely needs external healing. He also flags a live Void Fall Meteor double-proc interaction (Spirit Bomb into Soul Cleave) that, if fixed, would make the damage considerably worse.",
       "url": "https://youtu.be/CNWAq9aOHO4?t=740",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Monk",
@@ -2732,7 +2733,7 @@
       "patchContext": "12.1 PTR — Season 2 M+ testing",
       "claim": "Rates Brewmaster in A — his 'playable in weird comps, but not meta' band. His read is narrow but consistent: damage is a bit low, while survivability is good enough to hold up in very high keystones. He notes with interest the one group that reliably runs Brewmaster plus Resto Shaman every season and expects them to make it work again.",
       "url": "https://youtu.be/CNWAq9aOHO4?t=1095",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Druid",
@@ -2743,7 +2744,7 @@
       "patchContext": "12.1 PTR — Season 2 M+ testing",
       "claim": "Drops Guardian to A, calling bear 'pretty nerfed since last season'. He believes there is still a playable build that mirrors the Season 1 one with Mangle in place of the Thrash/Wildfire pairing, and that it remains genuinely tanky — but the damage is very low, single target especially, so he does not see it reaching the meta. He rates it perfectly playable rather than bad.",
       "url": "https://youtu.be/CNWAq9aOHO4?t=1070",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Warrior",
@@ -2754,7 +2755,7 @@
       "patchContext": "12.1 PTR — Season 2 M+ testing",
       "claim": "Leaves Prot Warrior in A, in essentially the same place he had it in Season 1 — with one situational upgrade: Spell Reflect is unusually valuable across the Season 2 dungeon pool. He points to reflectable casts scattered through the new pool (the large mob upstairs in Ruby Life Pools is his worked example) as free, sometimes substantial, priority damage. Not a meta call — a same-placement read with a new upside.",
       "url": "https://youtu.be/CNWAq9aOHO4?t=1122",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Death Knight",
@@ -2787,7 +2788,7 @@
       "patchContext": "12.1 PTR — Season 2 M+ testing",
       "claim": "Rates Arms the best DPS going into Season 2, top of his S tier. He does not claim it tops every dungeon — he expects it to lead at lower target counts — but credits great funnel, single target that is 'no longer terrible', and strong two-target cleave he thinks is unusually relevant in the new pool. He also rates it genuinely tanky, singling out Spell Reflect as disproportionately good in Season 2 (reflecting the dog back on the boss in Altar of the Fangs, reflecting the elementals upstairs in Ruby Life Pools for large priority damage). He pre-empts the obvious objection — Arms could already do this in Season 1 — by arguing the three Season 1 meta DPS were outliers that have since been reined in (Unholy DK's Cycle of Death, Augmentation carrying three players through a key, an overtuned Devourer), while Arms itself gained single-target damage and what he considers a very good tier set. Attributed after Riley widened his Warrior scope from Protection-only to Protection + Arms on 2026-07-31.",
       "url": "https://youtu.be/CNWAq9aOHO4?t=204",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Demon Hunter",
@@ -2853,6 +2854,358 @@
       "patchContext": "12.1 PTR (2026-07-31 build) — Season 2 M+ outlook",
       "claim": "Playing keys after the tuning pass, Kalamazi puts all three Warlock specs close together in Mythic+ but leans Destruction as the pick, since its single target should stay somewhat ahead even in keys and it is \"really impressive in mass AoE\" with the Diabolist package. He is explicit that the gap is small and that where Warlock lands depends on the several specs nerfed in the same build, so he will not commit harder than \"it could lowkey be Destro\".",
       "url": "https://youtu.be/Hn9upmp8ywc?t=8857",
+      "superseded": false
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "creator": "AutomaticJak",
+      "date": "2026-08-01",
+      "sentiment": "buff",
+      "patchContext": "12.1 PTR — Season 2 M+ healer tier list",
+      "url": "https://youtu.be/AfxJlv15i04?t=154",
+      "claim": "Jak's only S-tier healer. He credits the raw output: the tier set turns Holy Light into an Infusion of Light engine (Inflorescence granting two, Judgment a 20% chance) and the 2-set doubles the healing of those Infusion-empowered Flash of Lights, while Virtue spell-queuing and Shield of the Righteous keep mana workable. He notes the post-buff Holy Shock means it is no longer a no-Shock build, and that the poison-dispel-heavy dungeon pool (six of eight) plus bleeds make Cleanse Toxins and Blessing of Protection unusually valuable. His own caveat: no raid buff and low personal damage, so if another healer is tuned to comparable output while bringing Skyfury or Mark of the Wild, Paladin can fall off the list.",
+      "superseded": false
+    },
+    {
+      "class": "Shaman",
+      "spec": "Restoration",
+      "creator": "AutomaticJak",
+      "date": "2026-08-01",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR — Season 2 M+ healer tier list",
+      "url": "https://youtu.be/AfxJlv15i04?t=339",
+      "claim": "A tier, and the top of it. Despite the Farseer buffs he still finds Totemic better in most dungeons — Farseer's single-target healing is good but the niche rarely gets realised when AoE healing is what the pull demands. He likes the tier set's extra Healing Rains stacking with Downpour and Acid Rain, especially in melee comps where everyone is inside them, but rates the raw output clearly below Holy Paladin (good AoE, weak single target) and calls the gameplay unexciting with no new resource or Apex interaction. Skyfury and Poison Cleansing Totem are what keep it high.",
+      "superseded": false
+    },
+    {
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "creator": "AutomaticJak",
+      "date": "2026-08-01",
+      "sentiment": "nerf",
+      "patchContext": "12.1 PTR — Season 2 M+ healer tier list",
+      "url": "https://youtu.be/AfxJlv15i04?t=431",
+      "claim": "He argues the attempt to force mastery into a good position broke the spec: buffing mastery while nerfing the Forecaster-side caster healing made the Rising Sun Kick / Ancient Teachings build dominant, and then the ~60% Morning Breeze cut removed it without restoring the rest. Conduit and Revival no longer feel like real cooldowns; Chi-Ji and Thunder Focus Tea still work but are much weaker; and the Season 1 backstop of falling back on casted healing does not function any more. His conclusion is blunt for a spec that was recently top of the list: Mistweaver actually needs buffs to get back to a good position.",
+      "superseded": false
+    },
+    {
+      "class": "Priest",
+      "spec": "Discipline",
+      "creator": "AutomaticJak",
+      "date": "2026-08-01",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR — Season 2 M+ healer tier list",
+      "url": "https://youtu.be/AfxJlv15i04?t=583",
+      "claim": "B tier. Output with the Oracle setup is fine — permanent Shadow Mend access, Surge of Light discounts and Divine Aegis absorbs off crits make it reliable — but Voidweaver is too weak, and the season's biggest problem is the dispel profile: with poisons in six of eight dungeons, a group that cannot cover the dispels eats through Pain Suppression charges. Mana is better than Season 1 but still has no active regeneration (even Shadowfiend barely helps), so drinking stops are unavoidable.",
+      "superseded": false
+    },
+    {
+      "class": "Priest",
+      "spec": "Holy",
+      "creator": "AutomaticJak",
+      "date": "2026-08-01",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR — Season 2 M+ healer tier list",
+      "url": "https://youtu.be/AfxJlv15i04?t=706",
+      "claim": "C tier. He rates Oracle considerably stronger than Archon right now and says the healing output itself is genuinely good, but the spec is dragged down by cooldowns that do not feel strong (Prayer of Healing goes on the back burner without Archon's modifiers), heavy immobility, and weak Prayer of Mending. The revamped Apex turning every Serenity into a Benediction Flash Heal helps single-target but leaves it with no tool to lift the whole party at once. He credits a real niche — one of the strongest healers into rot damage — while concluding other healers are simply too well-rounded to pass up.",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Restoration",
+      "creator": "AutomaticJak",
+      "date": "2026-08-01",
+      "sentiment": "nerf",
+      "patchContext": "12.1 PTR — Season 2 M+ healer tier list",
+      "url": "https://youtu.be/AfxJlv15i04?t=799",
+      "claim": "C tier, and his harshest read of the list. He accepts the Tranquility quality-of-life change but says everything else made the spec worse: losing the Swiftmend HoT extension and Burden of Vision leaves the HoTs feeling inert, the shift onto Clearcasting Regrowth does not compensate, and the granular control that made Resto Druid satisfying in dungeons is gone. Mastery no longer feels powerful, and outside Convoke or a trinket he does not see the output meeting the season's heal checks. He notes he has never seen Druid players this unhappy with the spec, and quotes one on stream to that effect.",
+      "superseded": false
+    },
+    {
+      "class": "Evoker",
+      "spec": "Preservation",
+      "creator": "AutomaticJak",
+      "date": "2026-08-01",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR — Season 2 M+ healer tier list",
+      "url": "https://youtu.be/AfxJlv15i04?t=984",
+      "claim": "He rates the healing side as fully covered — the 2-set fires a Living Flame on Essence Burst consumption, the 4-set guarantees Essence Burst off Verdant Embrace, and Flame Shaper is strong with Dream Breath HoTs plus Fluttering Seedlings triggering Consume Flame — and he is seeing 90-100k personal damage in dungeons off double Fire Breath charges. What drags it down the list is unchanged: a proactive setup cost, far more GCDs and cognitive load than other healers, and an almost non-existent raid cooldown. His framing is that Preservation mains can meet the hardest HPS checks, but the extra work buys no extra reward over an easier healer.",
+      "superseded": false
+    },
+    {
+      "class": "Priest",
+      "spec": "Discipline",
+      "creator": "LBNinja7",
+      "date": "2026-08-02",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR — Season 2 main-choice review (pros/cons)",
+      "url": "https://youtu.be/Elr2gfyCFsE?t=41",
+      "claim": "Pro: spot healing is much more impactful, with permanent Shadow Mend uptime supplementing Penance and shields. Con: the mana cost of leaning into Shadow Mend is real — Priest was the only healer he had to stop and drink on consistently across his PTR testing — and the season's boss design punishes its low mobility, with repeated knockback-then-run-in mechanics and fights that keep you moving. He describes the spec as a 'satisfaction factory' to play but flags mana and mobility as the two things to watch.",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Restoration",
+      "creator": "LBNinja7",
+      "date": "2026-08-02",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR — Season 2 main-choice review (pros/cons)",
+      "url": "https://youtu.be/Elr2gfyCFsE?t=255",
+      "claim": "His original main, and he says the 12.1 version feels like home: the playstyle shifts back off Regrowth toward Rejuvenation and Wild Growth, which is repetitive but comforting, and the healing profile stays unusually flexible (spread Rejuvs for AoE, stack HoTs for spot healing). Two cons: it is more proc-reliant than other healers because so many spells are balanced around the tier-set proc, so a dry stretch forces bad cooldown usage; and it is simply low numerically on the PTR. He frames that as a good position to be in — strong in a vacuum, one numeric buff (he suggests something like 8% overall healing) away from cranking.",
+      "superseded": false
+    },
+    {
+      "class": "Shaman",
+      "spec": "Restoration",
+      "creator": "LBNinja7",
+      "date": "2026-08-02",
+      "sentiment": "buff",
+      "patchContext": "12.1 PTR — Season 2 main-choice review (pros/cons)",
+      "url": "https://youtu.be/Elr2gfyCFsE?t=466",
+      "claim": "He reads the proc density as a pro rather than a flaw: free Healing Rains that trigger Downpour and Acid Rain, free Apex totems and free Ascendance arrive on a conveyor belt that makes the rotation feel rewarding, on top of steady passive AoE from Healing Rain and Riptide and solid Chain Heal spot healing. He calls it the safest, most cushioned healer to sit behind. Two cons: it leans on the party stacking tightly enough for spawned Healing Rains to cover everyone, which is a pug risk, and the constant proc-fishing gives it a gambling feel.",
+      "superseded": false
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "creator": "LBNinja7",
+      "date": "2026-08-02",
+      "sentiment": "buff",
+      "patchContext": "12.1 PTR — Season 2 main-choice review (pros/cons)",
+      "url": "https://youtu.be/Elr2gfyCFsE?t=678",
+      "claim": "He keeps it short because of how much hype it already has: the build revolves around the spec's strongest buttons, with Holy Light generating free Infusion of Light for instant empowered Flash of Lights, and the tier set built directly around that loop. Given the mana to sustain it, he calls the burst, spot and cleave healing enormous, and Avenging Wrath plus the two instant Holy Lights from the new set 'god mode'. The best Holy Paladin season he has seen in years. His only con is the hype itself — a heavily-picked spec carries nerf risk, and he has watched a guild swap into the PTR darling and get nerfed during the race.",
+      "superseded": false
+    },
+    {
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "creator": "LBNinja7",
+      "date": "2026-08-02",
+      "sentiment": "buff",
+      "patchContext": "12.1 PTR — Season 2 main-choice review (pros/cons)",
+      "url": "https://youtu.be/Elr2gfyCFsE?t=833",
+      "claim": "As a Mistweaver main he calls the dynamic rotation genuinely back — Spinning Crane Kick nerfed, Rising Sun Kick, Ancient Teachings and Jade Fire Teachings buffed — which he rates as great for the player even if it is not what makes the spec strong. On placement he is explicit that after the PTR nerfs he still has Mistweaver in S tier, moving from what he considered S+ down to S, now contested by Holy Paladin (which he says he would also raise to S having tested it more), and argues the spec is criminally underrated by the community post-nerf. The trade-off he names: it is no longer the one-button pack-healer of Season 1.",
+      "superseded": false
+    },
+    {
+      "class": "Priest",
+      "spec": "Holy",
+      "creator": "LBNinja7",
+      "date": "2026-08-02",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR — Season 2 main-choice review (pros/cons)",
+      "url": "https://youtu.be/Elr2gfyCFsE?t=986",
+      "claim": "He thinks the spec is getting slightly better into Season 2 but leads with the non-gameplay problem: community perception in Mythic+ has been low long enough that it is self-sustaining, and the practical con is not getting invited. Mechanically he flags the same Priest mana and mobility issues as Discipline, and a tier set that is entirely passive (a HoT you do not apply generating a crit buff) — relaxing for a casual player, unsatisfying for a min-maxer. The pros he names are structural: the free swap to Discipline mid-season that no other healer class has, two genuinely close hero trees (he still rates Oracle stronger), and strong ramp healing that rewards banking Prayer of Mending, Lightweaver stacks and Holy Words before damage.",
+      "superseded": false
+    },
+    {
+      "class": "Evoker",
+      "spec": "Preservation",
+      "creator": "LBNinja7",
+      "date": "2026-08-02",
+      "sentiment": "buff",
+      "patchContext": "12.1 PTR — Season 2 main-choice review (pros/cons)",
+      "url": "https://youtu.be/Elr2gfyCFsE?t=1321",
+      "claim": "The spec he is most enthusiastic about — 'it just keeps winning'. Season 2 leans further into Dream Breath's HoT, and he says Flame Shaper was giga-buffed alongside it: high healer damage, and a Consume Flame that now bursts for much more. He calls it the best 'hipster' pick — not in the race for the top healer slot, but strong, and he openly says he cannot personally find cons for it while acknowledging that is a biased read and inviting the audience to name them.",
+      "superseded": false
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "creator": "MadSkillzzTV",
+      "date": "2026-08-01",
+      "sentiment": "buff",
+      "patchContext": "12.1 PTR — Season 2 M+ healer tier list (short-form update)",
+      "url": "https://youtu.be/3E1yuNcmS2g?t=8",
+      "claim": "After weeks of testing he says it is finally time to place Holy Paladin in S tier, pointing at the 07-31 buff on top of what he describes as buffs almost every single week, and concludes Paladin will be significantly better in Season 2 than it was in Season 1.",
+      "superseded": false
+    },
+    {
+      "class": "Shaman",
+      "spec": "Restoration",
+      "creator": "MadSkillzzTV",
+      "date": "2026-08-01",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR — Season 2 M+ healer tier list (short-form update)",
+      "url": "https://youtu.be/3E1yuNcmS2g?t=17",
+      "claim": "He frames Resto Shaman as a composition pick rather than a raw-output one: Skyfury, Bloodlust and a ranged interrupt slot it well into the physical melee comp, and if you enjoy that comp he rates it a decent choice.",
+      "superseded": false
+    },
+    {
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "creator": "MadSkillzzTV",
+      "date": "2026-08-01",
+      "sentiment": "nerf",
+      "patchContext": "12.1 PTR — Season 2 M+ healer tier list (short-form update)",
+      "url": "https://youtu.be/3E1yuNcmS2g?t=30",
+      "claim": "He says Mistweaver was genuinely strong on the PTR until it was nerfed and is still a solid healer, but that its toolkit is now lacking in places and Blizzard needs to address the Sheilun's Gift / Vivify side of the kit.",
+      "superseded": false
+    },
+    {
+      "class": "Evoker",
+      "spec": "Preservation",
+      "creator": "MadSkillzzTV",
+      "date": "2026-08-01",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR — Season 2 M+ healer tier list (short-form update)",
+      "url": "https://youtu.be/3E1yuNcmS2g?t=44",
+      "claim": "Calls Preservation the biggest underdog healer of the season — it can put out good healing and an insane amount of damage — while naming the same two obstacles as everyone else: it is harder to play, and it has no good raid buff.",
+      "superseded": false
+    },
+    {
+      "class": "Priest",
+      "spec": "Discipline",
+      "creator": "MadSkillzzTV",
+      "date": "2026-08-01",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR — Season 2 M+ healer tier list (short-form update)",
+      "url": "https://youtu.be/3E1yuNcmS2g?t=53",
+      "claim": "His ask for Discipline is specific rather than a placement call: he wants more Atonement transfer buffs aimed at Mythic+ content.",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Restoration",
+      "creator": "MadSkillzzTV",
+      "date": "2026-08-01",
+      "sentiment": "nerf",
+      "patchContext": "12.1 PTR — Season 2 M+ healer tier list (short-form update)",
+      "url": "https://youtu.be/3E1yuNcmS2g?t=58",
+      "claim": "He says Resto Druid's damage is really not good and he would like to see further healing buffs, reading the spec as caught in Blizzard's difficulty balancing it between raid and Mythic+ at the same time.",
+      "superseded": false
+    },
+    {
+      "class": "Priest",
+      "spec": "Holy",
+      "creator": "MadSkillzzTV",
+      "date": "2026-08-01",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR — Season 2 M+ healer tier list (short-form update)",
+      "url": "https://youtu.be/3E1yuNcmS2g?t=74",
+      "claim": "Notes Holy Priest received buffs and could rise a little on his list as a result, but says he would have liked more impactful gameplay changes for it in Mythic+ rather than numbers.",
+      "superseded": false
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Blood",
+      "creator": "YoDaTV",
+      "date": "2026-08-01",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR (2026-07-31 build) — Season 2 M+ tier list update",
+      "url": "https://youtu.be/9cnTo1yK3C8?t=10",
+      "claim": "He puts the damage nerf at roughly 4-5% depending on target count and says it is not big enough to move Blood off the number-one tank spot: survivability was untouched, so he still reads it as the tankiest tank, and even after the cut he thinks its damage is the best of all tanks once raid buffs are counted. Blood stays in his S+ row.",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Guardian",
+      "creator": "YoDaTV",
+      "date": "2026-08-01",
+      "sentiment": "buff",
+      "patchContext": "12.1 PTR (2026-07-31 build) — Season 2 M+ tier list update",
+      "url": "https://youtu.be/9cnTo1yK3C8?t=93",
+      "claim": "The 8% damage buff moves Guardian up to his A+ 'one buff away' row. Playing it himself, he found the Druid of the Claw no-Rejuvenation build about as tanky as Blood DK, but still doing less than half of a DPS's damage where Blood sits closer to 60-70%, and lower than Blood even counting Mark of the Wild. He thinks one more damage buff would make it a genuine meta contender — and adds he is not hoping for that after a season of bear.",
+      "superseded": false
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Vengeance",
+      "creator": "YoDaTV",
+      "date": "2026-08-01",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR (2026-07-31 build) — Season 2 M+ tier list update",
+      "url": "https://youtu.be/9cnTo1yK3C8?t=614",
+      "claim": "He rates Vengeance's damage as very close to Blood DK's after the Blood nerf, before Chaos Brand, but holds it out of the meta on survivability: Annihilator's cooldowns are RNG enough to make mitigation inconsistent, and Aldrachi Reaver is steadier but unplayable on damage. His read is that one defensive buff could make it meta, and it is not there yet.",
+      "superseded": false
+    },
+    {
+      "class": "Monk",
+      "spec": "Brewmaster",
+      "creator": "YoDaTV",
+      "date": "2026-08-01",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR (2026-07-31 build) — Season 2 M+ tier list update",
+      "url": "https://youtu.be/9cnTo1yK3C8?t=769",
+      "claim": "A tier alongside Prot Warrior: he says both can definitely survive the keys, but they require noticeably more healing than Blood DK and have to work harder while doing less damage, which is what keeps them a row below the tanks he would build a comp around.",
+      "superseded": false
+    },
+    {
+      "class": "Warrior",
+      "spec": "Protection",
+      "creator": "YoDaTV",
+      "date": "2026-08-01",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR (2026-07-31 build) — Season 2 M+ tier list update",
+      "url": "https://youtu.be/9cnTo1yK3C8?t=769",
+      "claim": "A tier with Brewmaster — survivable in keys but needing more healing and doing less damage than Blood DK. He calls the 6% damage buff in the 07-31 notes 'not nothing' but does not see it splashing Prot Warrior into the meta.",
+      "superseded": false
+    },
+    {
+      "class": "Paladin",
+      "spec": "Protection",
+      "creator": "YoDaTV",
+      "date": "2026-08-01",
+      "sentiment": "nerf",
+      "patchContext": "12.1 PTR (2026-07-31 build) — Season 2 M+ tier list update",
+      "url": "https://youtu.be/9cnTo1yK3C8?t=584",
+      "claim": "He says Prot Paladin has lost its lustre since the Reflection of Radiance nerf: still tanky inside cooldowns, but cooldown uptime is now low and its damage is nowhere near Blood DK's. Without a compensation buff for that nerf he does not see it being good in the meta.",
+      "superseded": false
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "creator": "YoDaTV",
+      "date": "2026-08-01",
+      "sentiment": "buff",
+      "patchContext": "12.1 PTR (2026-07-31 build) — Season 2 M+ tier list update",
+      "url": "https://youtu.be/9cnTo1yK3C8?t=216",
+      "claim": "He calls the extra 5% healing a head-scratcher because Holy Paladin was already by far the best throughput healer in Mythic+ and is now further ahead, and places it in his S+ row as the default healer pick on output alone. The caveat he raises is composition rather than power: a Blood DK tank plus a Holy Paladin healer is zero raid buffs, so if a Shaman or Druid healer can meet the heal checks, they may get played over it.",
+      "superseded": false
+    },
+    {
+      "class": "Paladin",
+      "spec": "Retribution",
+      "creator": "YoDaTV",
+      "date": "2026-08-01",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR (2026-07-31 build) — Season 2 M+ tier list update",
+      "url": "https://youtu.be/9cnTo1yK3C8?t=829",
+      "claim": "A tier, from his own play: damage is fine under normal conditions but the spec has bad edge cases — an immune boss phase, or a fight where the one-minute cooldowns do not line up — and he rates it clearly worse than Season 1 Retribution.",
+      "superseded": false
+    },
+    {
+      "class": "Warrior",
+      "spec": "Arms",
+      "creator": "YoDaTV",
+      "date": "2026-08-01",
+      "sentiment": "buff",
+      "patchContext": "12.1 PTR (2026-07-31 build) — Season 2 M+ tier list update",
+      "url": "https://youtu.be/9cnTo1yK3C8?t=370",
+      "claim": "He reads the 07-31 pass as a very small net nerf (under ~2% single target) offset by a compensating AoE buff, and keeps Arms in S+ as the best melee in the game right now: decent single target, really good funnel, a great damage profile and a very tanky body. He notes the awkwardness that his two best DPS specs, Arms and Arcane Mage, are mutually exclusive on raid buffs — a group cannot benefit from both Battle Shout and Arcane Intellect — and wonders whether class balance ends up bad enough that you play both anyway.",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Balance",
+      "creator": "Tettles",
+      "date": "2026-08-01",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR (2026-07-31 build) — Season 2 raid profile",
+      "url": "https://youtu.be/_oVhOLNc3Dg?t=12189",
+      "claim": "Despite the stream title, Tettles explicitly disclaims the doom read as clickbait: he puts the 07-31 nerf at around 3% and says the spec is fine, while adding he would be surprised if it ends up good in both raid and Mythic+. His substantive concern is the raid's damage profile rather than the tuning — he calls Venomous Abyss the least balanced profile he can remember, with two of the last three bosses being two-target fights, which is where Moonkin is weakest; it is good on three of the first four (Lost Explorers, Vashnik, Nek'zali), so how it fares depends on which bosses turn out to be hard. He separately notes Moonkin's burst is bottom-half of the cast even on the Convoke / Keeper of the Grove build, capping around 284k against roughly 338k for Unholy DK, so its value rests on sustained casting rather than cooldown windows.",
+      "superseded": false
+    },
+    {
+      "class": "Shaman",
+      "spec": "Elemental",
+      "creator": "Supatease",
+      "date": "2026-08-01",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR — Elemental rework read; his own testing shown is on PvP dummies and duels, with the PvE read taken from reviewing logs",
+      "url": "https://youtu.be/NAErjQ18w0Y?t=63",
+      "claim": "He reads 12.1's Elemental pass as part of a game-wide move of power out of cooldowns and into baseline abilities: Ascendance was stripped down substantially and the damage redistributed, which he says shows up as much healthier sustained output. He rates the Season 2 set bonus strongly — 25% more Earth Shock / Earthquake / Elemental Blast damage, plus free empowered casts and a Maelstrom-free Earthquake when Storm Keeper or Ascendance falls off — and calls 12.1 a 'feels-good patch' for the spec. Framing caveat: the damage numbers he shows are from PvP training dummies and a duel, and he says his PvE read comes from reviewing other players' logs rather than his own PvE testing.",
       "superseded": false
     }
   ],
@@ -3438,7 +3791,7 @@
       "note": "izen names Arcane Mage the clear standout of the PTR M+ so far — by far the most popular DPS (roughly doubling to tripling other specs in representation) and a very strong performer. The Prismatic Bolt Apex upgrade adds a huge chunk of damage, orb-mastery lets Arcane Orb consume Clearcasting, and the spec also gained strong defensive layers (extra barrier charge, flat AoE reduction), making it a prime meta candidate.",
       "patchContext": "Season 2 PTR — M+ outlook",
       "url": "https://youtu.be/vK-qyvXOVYM?t=71",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Death Knight",
@@ -3460,7 +3813,7 @@
       "note": "izen highlights Elemental Shaman as drastically buffed and reworked for M+: the spec swings from its Stormbringer lightning build to a Farseer fire build (big base-spell buffs offsetting Ascendance nerfs, Voltaic Blaze enabling AoE Lava Bursts). It's doing very well in the PTR with strong AoE and strong priority/funnel damage.",
       "patchContext": "Season 2 PTR — M+ outlook",
       "url": "https://youtu.be/vK-qyvXOVYM?t=585",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Druid",
@@ -3471,7 +3824,7 @@
       "note": "izen notes Balance Druid is doing quite well and is popular in higher M+ keys, and has been buffed to be numerically stronger — but stresses it plays essentially the same as it does on live (mostly flat damage-number changes), so he doesn't weight it as a major mover in the PTR M+ picture.",
       "patchContext": "Season 2 PTR — M+ outlook",
       "url": "https://youtu.be/vK-qyvXOVYM?t=874",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Demon Hunter",
@@ -3592,7 +3945,7 @@
       "note": "Devourer remains a consistent top performer across every tested boss, with the raid largely settled on the melee 'False Cards' build down the left side of the tree that ignores the Collapsing Star apex (Collapsing Star kept only for short M+ burst windows). izen notes it doing very well on both spread and single-target profiles.",
       "patchContext": "Season 2 PTR — raid testing outlook",
       "url": "https://youtu.be/m5lEbh4lrHA?t=221",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Death Knight",
@@ -3636,7 +3989,7 @@
       "note": "Profile-dependent for Shadow: izen has it near the top on the spread/multi-target fights (Soul Coiler, the three-target Lost Explorers) where its dots gain value, but it slips on the more single-target fights (Vashnik, Coiled Altar). A good-but-conditional read driven by damage profile more than raw tuning.",
       "patchContext": "Season 2 PTR — raid testing outlook",
       "url": "https://youtu.be/m5lEbh4lrHA?t=479",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Mage",
@@ -3680,7 +4033,7 @@
       "note": "izen groups Assassination with the consistent bottom performers across all four tested bosses — he argues it isn't a damage-profile problem but simply low, undertuned numbers relative to the rest of the field.",
       "patchContext": "Season 2 PTR — raid testing outlook",
       "url": "https://youtu.be/m5lEbh4lrHA?t=592",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Warrior",
@@ -3823,7 +4176,7 @@
       "note": "izen picks Marksmanship as the DPS riser of the past week in PTR Mythic+: already top-six by popularity, now top-three over the last week and second over the last day, with visibly more top key results. He is explicit that this is 'low-profile' growth that is NOT coming from the reworked talents — even after the Explosive Shot bug fixes, Explosive Shot still comfortably outdamages Aimed Shot, so Tactical Reload and Windrunner's Quiver still are not worth taking and the intended return of Aimed Shot as the main button has not happened. The rise is essentially the flat +5% damage buff outweighing the −20% Multi-Shot nerf.",
       "patchContext": "Season 2 PTR — M+ outlook",
       "url": "https://youtu.be/wa60mXTVPxY?t=60",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Monk",
@@ -3867,7 +4220,7 @@
       "note": "Guardian is izen's other tank on 'life support': near-abandoned in PTR keys even though it is one of Season 1's two most popular tanks. He calls its tier set poor — the 2-piece damage increase is weak and a longer Incarnation is not relevant given how long it already lasts — and rejects both the 'nobody plays it because it is old meta' and the 'no comp slot' explanations, since Prot Paladin, Holy Paladin and Ret are all played heavily. His read is simply that it did not get enough positive changes.",
       "patchContext": "Season 2 PTR — M+ outlook",
       "url": "https://youtu.be/m81w4xTnRrs?t=279",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Warrior",
@@ -3878,7 +4231,7 @@
       "note": "izen groups Protection Warrior with Brewmaster and Guardian as the PTR's least-played tanks — an 'ill omen' three weeks out from the patch. He notes the comp-synergy excuse fails here too, since Devourer and Vengeance are both played more than Guardian and Prot Warrior despite Vengeance sharing a class with a meta DPS. He points the next rounds of tuning at this group.",
       "patchContext": "Season 2 PTR — M+ outlook",
       "url": "https://youtu.be/m81w4xTnRrs?t=174",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Druid",
@@ -3900,7 +4253,7 @@
       "note": "izen splits Holy Priest by content: after its multiple PTR buffs it has been performing very well in raid testing — he cautions that the newest Mythic cuts are on short 90-second pulls and reads the ~7-minute Lost Explorers fight as the better sample — but it remains one of the traditionally worst Mythic+ healers, and he lists it (with Preservation) among the specs needing help specifically in keys.",
       "patchContext": "Season 2 PTR — M+ outlook",
       "url": "https://youtu.be/m81w4xTnRrs?t=383",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Evoker",
@@ -3955,7 +4308,7 @@
       "note": "izen's second DPS priority after Rogues is Evoker, and Devastation is the cleaner half of it. He reads it as better in raid than in Mythic+ — usually just outside the top eight and landing between middle and bottom depending on the fight — and says that over the most recent days it has been having a poor time in the highest keys being run (19s and 20s). He wants buffs that lift it to middling-to-average without creating a new top pick.",
       "patchContext": "Season 2 PTR — M+ outlook",
       "url": "https://youtu.be/m81w4xTnRrs?t=745",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Evoker",
@@ -4021,7 +4374,7 @@
       "note": "The turbulent riser: already top-3 in PTR M+ and, filtered to the last day of logged keys, now FIRST over Mistweaver — buffed across the board (spenders, Holy Shock, infusions via the tier set) with the crippling Holy Light mana economy actually fixed; the one weakness left is poor damage, well below Mistweaver's. Tied, he notes, to Prot Paladin's fate for the paladin slot.",
       "patchContext": "Season 2 PTR — M+ outlook",
       "url": "https://youtu.be/bAE5lf3wK_M?t=84",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Death Knight",
@@ -4032,7 +4385,7 @@
       "note": "Follows up his tank-mover call with the cause: Blood's Apex talent Dance of Midnight had its stacking value written into a damage-TAKEN field instead of damage-REDUCED, so every extra Dancing Rune Weapon proc was adding ~4% damage taken rather than removing it — live since Midnight launched. With that fixed on top of the 4%→6% buff he shows the swing in logs: the same Shinki +17 went from 220k to 166k damage taken per second and from 57k to 39k external HPS required, and a recent +20 puts Blood at 48k external HPS against Prot Paladin's 45k. His read is that Blood DK is now a genuine meta-tank contender for Season 2. He mentions Vengeance's fiery-brand duration bug only as a smaller comparison, not a strength call.",
       "patchContext": "Season 2 PTR — M+ outlook",
       "url": "https://youtu.be/fUZTzvbL3OU?t=316",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Warrior",
@@ -4043,6 +4396,193 @@
       "note": "Frames Arms as the standout story of the Season 2 PTR: a spec that has been among the four or five least-played M+ specs every season since Legion, and — with Feral and Devastation — one of the only ones never to make a meta comp, is right now the most-picked DPS in +20s on the PTR two weeks out. He attributes the shift to Slayer overtaking Colossus rather than to Arms broadly: Tactical Edge was rebuilt to grant a guaranteed Sudden Death proc off every Colossus Smash (which accelerates Bladestorm, guarantees a Reap the Storm proc and applies Overwhelmed per Executioner stack), Slayer's Dominance went 15% to 25%, and a bug fix raised the Executioner stack cap from three to five. He shows Bladestorm's effective cooldown collapsing from 90s to roughly 24-26s in practice. Beyond raw output he credits Arms' priority damage — Slayer Strike, Mortal Strike and Execute stay single-target while the AoE runs — contrasting it with Marksmanship, which out-damages Arms overall yet loses on priority targets. The caveat he names himself: Arms brings no dispel and an Attack Power buff unlikely to matter in the ranged-caster comps it would need to join, which he calls the one real obstacle to a genuine meta slot — and he expects nerfs are possible before launch.",
       "patchContext": "Season 2 PTR — M+ outlook",
       "url": "https://youtu.be/OQa0Yzv18Hs?t=132",
+      "superseded": true
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Blood",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-01",
+      "sentiment": "positive",
+      "note": "Frames the nerf as confirmation of strength rather than a setback: after weeks of buffs and bug fixes Blood set itself up as the most popular tank in PTR Mythic+, and what it lost is damage only — Blood Beast explosion −10%, Frenzied Bloodthirst's Death Strike/Death Coil bonus −1% per stack, Visceral Strength −2%. He calls getting nerfed this little 'a win' given the power level and stresses the recent damage-reduction gains were left untouched.",
+      "patchContext": "Season 2 PTR — M+ outlook",
+      "url": "https://youtu.be/OP49uzLmaDk?t=62",
+      "superseded": false
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-01",
+      "sentiment": "mixed",
+      "note": "He rates Devourer as one of the better performers across the whole testing period — consistently near the top of raid results and one of the more consistent Mythic+ DPS entries — and reads the nerf as deserved. Mechanically it lands twice: the Eradicate splash cut hits the Void-Scarred build hardest (it leans on Eradicate where Annihilator gets more from Collapsing Star), and Annihilator then eats its own trim with Final Hour's Voidful bonus persisting 6 seconds instead of 8.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/OP49uzLmaDk?t=185",
+      "superseded": false
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Havoc",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-01",
+      "sentiment": "positive",
+      "note": "He describes Havoc as reasonably poor across the testing compared with Devourer, both in overall raid results and in Mythic+, and far less played. The combined Blade Dance / Chaos Strike / cooldown / Essence Break package nets to about 5% in both AoE and single-target-focused fights, which he calls exactly the kind of buff a weaker spec should be getting this close to release.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/OP49uzLmaDk?t=278",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Balance",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-01",
+      "sentiment": "mixed",
+      "note": "He pushes back on Balance being underrated: it is currently the fifth most-played DPS spec in PTR Mythic+ and was doing well across multiple raid bosses on the strength of spread-cleave multi-dotting. The nerf is roughly 3% single target (Starsurge only) but 6-8% in AoE depending on pull size, because Moonfire, Sunfire, Starfire and Starfall all take cuts — so the larger the Mythic+ pulls, the more it costs.",
+      "patchContext": "Season 2 PTR — M+ outlook",
+      "url": "https://youtu.be/OP49uzLmaDk?t=340",
+      "superseded": false
+    },
+    {
+      "class": "Evoker",
+      "spec": "Devastation",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-01",
+      "sentiment": "negative",
+      "note": "He walks through the Scintillation bug — the tier set made every Shattering Star fire as if fully empowered, including the level-one Eternity Surges Scintillation launches, bypassing that talent's 40% effectiveness — and explains the fix stacks two reductions: the 2-set's Shattering Star bonus drops from 150% to 50%, and the Scintillation multiplier now applies. Even with Deep Breath, Pyre and a 40% Disintegrate buff as compensation, he calculates the pass as roughly a 2% net nerf, which he calls weird given that Devastation was already rated poorly in both Mythic+ and raid testing.",
+      "patchContext": "Season 2 PTR — M+ outlook",
+      "url": "https://youtu.be/OP49uzLmaDk?t=462",
+      "superseded": false
+    },
+    {
+      "class": "Hunter",
+      "spec": "Marksmanship",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-01",
+      "sentiment": "negative",
+      "note": "He totals the 33% Explosive Shot cut plus the 5% all-damage aura at roughly a 12% nerf and calls it very large. He accepts Blizzard's stated reason — a run of bug fixes kept raising Explosive Shot's damage without any tuning behind it — but notes Marksmanship had been doing quite well on PTR AoE, which is exactly what the cut targets.",
+      "patchContext": "Season 2 PTR — M+ outlook",
+      "url": "https://youtu.be/OP49uzLmaDk?t=616",
+      "superseded": false
+    },
+    {
+      "class": "Mage",
+      "spec": "Arcane",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-01",
+      "sentiment": "positive",
+      "note": "His question mark of the round: Arcane was already one of the best Mythic+ DPS specs and one of the best overall raid performers, and it still came out of the pass buffed. He dismisses the headline Arcane Blast +20% as irrelevant because Prismatic Bolt procs already replace roughly two of every three Arcane Blast casts, but flags the real one — Splintering Orbs raising the Arcane Orb bonus from 10% to 50%, which gains more value in Mythic+.",
+      "patchContext": "Season 2 PTR — M+ outlook",
+      "url": "https://youtu.be/OP49uzLmaDk?t=677",
+      "superseded": false
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-01",
+      "sentiment": "positive",
+      "note": "He calls the flat 5% healing buff the more worrying of the two healer buffs: Holy Paladin is already the most-played Mythic+ healer on the PTR, and in the four days since he last checked — when it had only just edged past Mistweaver — it has gone to roughly two-and-a-half to three times Mistweaver's pick rate. His read is that it already looked strong and did not need it.",
+      "patchContext": "Season 2 PTR — M+ outlook",
+      "url": "https://youtu.be/OP49uzLmaDk?t=894",
+      "superseded": false
+    },
+    {
+      "class": "Priest",
+      "spec": "Holy",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-01",
+      "sentiment": "neutral",
+      "note": "He finds the Holy Priest buff more understandable than the Holy Paladin one but questions the diagnosis: the reason Holy Priest is not played in Mythic+ has never been that it heals for too little, and it was doing fine in raid testing — so a flat healing increase is fine but not aimed at the actual problem.",
+      "patchContext": "Season 2 PTR — M+ outlook",
+      "url": "https://youtu.be/OP49uzLmaDk?t=926",
+      "superseded": false
+    },
+    {
+      "class": "Rogue",
+      "spec": "Assassination",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-01",
+      "sentiment": "positive",
+      "note": "He calls the flat 10% aura buff the most understandable change of the round: Rogues sat consistently towards the bottom for most of the fights tested regardless of damage type, and Assassination is one of the two specs getting the full 10%.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/OP49uzLmaDk?t=926",
+      "superseded": false
+    },
+    {
+      "class": "Rogue",
+      "spec": "Subtlety",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-01",
+      "sentiment": "positive",
+      "note": "Subtlety takes the same flat 10% buff, and he singles it out as the correction of a mistake — he calls the 8% nerf it received a couple of weeks earlier 'really weird' given the spec was barely being played at all in either raid or Mythic+. He stops short of predicting it works, saying only that we will see whether the flat buffs do anything.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/OP49uzLmaDk?t=958",
+      "superseded": false
+    },
+    {
+      "class": "Rogue",
+      "spec": "Outlaw",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-01",
+      "sentiment": "positive",
+      "note": "Outlaw gets the smallest of the three Rogue buffs at 6%, which he reads as deliberate: it was the Rogue spec doing slightly better than the others across raid testing, so it needed the least.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/OP49uzLmaDk?t=958",
+      "superseded": false
+    },
+    {
+      "class": "Shaman",
+      "spec": "Elemental",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-01",
+      "sentiment": "mixed",
+      "note": "He notes Shaman is the interesting target here because, unlike Rogues, Elemental was actually good — consistently strong in raid testing and consistently popular in Mythic+, often present in the top keys. The nerf goes at the hero talent rather than the spec: two 20% cuts inside Farseer, which is the de facto pick, netting roughly 5% and hurting more in AoE than single target. He reads it as reasonable given the observed power level and popularity.",
+      "patchContext": "Season 2 PTR — M+ outlook",
+      "url": "https://youtu.be/OP49uzLmaDk?t=988",
+      "superseded": false
+    },
+    {
+      "class": "Priest",
+      "spec": "Shadow",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-01",
+      "sentiment": "negative",
+      "note": "He groups Shadow with Balance as a spread-cleave outlier Blizzard appears concerned about for this raid, where several bosses put spread adds or multiple bosses up at once. The Void Volley cuts (−10%, −25% after a Tentacle slam, another 10% on Archon) come to only about a 2% nerf in pure AoE but specifically reduce the spread-cleave value that made the spec attractive on those encounters.",
+      "patchContext": "Season 2 PTR — raid testing outlook",
+      "url": "https://youtu.be/OP49uzLmaDk?t=1020",
+      "superseded": false
+    },
+    {
+      "class": "Warrior",
+      "spec": "Arms",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-01",
+      "sentiment": "positive",
+      "note": "After his own video calling Arms a first-in-a-decade S-tier candidate, he reads this round as Arms getting away with it. Sweeping Strikes −5% is small because much of the kit (Overpower's shockwave, Reap the Storm, Cleave, and Colossus's Concussive Slam splash) does not scale with it, and the Execute −15% costs Slayer about 3.5% but Colossus only about 0.45%. Against that, the 4-set went from 10% stacking three times to 20% stacking five — a straight buff to Colossus, which keeps Slam and its Apex-upgraded Heroic Strike. Net: roughly a 3% nerf on Slayer, effectively a buff if you fully optimise the new 4-set as Colossus.",
+      "patchContext": "Season 2 PTR — M+ outlook",
+      "url": "https://youtu.be/OP49uzLmaDk?t=1146",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Guardian",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-01",
+      "sentiment": "positive",
+      "note": "Reads the flat 8% as a straightforward correction for one of the two tanks doing the least damage overall, noting the current top tank damage dealers are Blood DK and Prot Paladin.",
+      "patchContext": "Season 2 PTR — M+ outlook",
+      "url": "https://youtu.be/OP49uzLmaDk?t=432",
+      "superseded": false
+    },
+    {
+      "class": "Warrior",
+      "spec": "Protection",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-01",
+      "sentiment": "positive",
+      "note": "Gets the same treatment as Guardian as the other lowest-damage tank — a generic damage increase he calls rather inconsequential to how the spec will play or how well it will do.",
+      "patchContext": "Season 2 PTR — M+ outlook",
+      "url": "https://youtu.be/OP49uzLmaDk?t=1395",
       "superseded": false
     }
   ]
