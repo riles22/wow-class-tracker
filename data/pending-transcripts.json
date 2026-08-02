@@ -1,64 +1,14 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
-  "videos": [
-    {
-      "id": "Elr2gfyCFsE",
-      "creator": "LBNinja7",
-      "title": "What to Expect in Season 2 As Each Healer Spec | 12.1",
-      "published": "2026-08-02",
-      "queuedAt": "2026-08-02"
-    },
-    {
-      "id": "OP49uzLmaDk",
-      "creator": "izen (Izenhart)",
-      "title": "12.1 PTR - Specs Balance Tuning #9 | This Time It's Nerfs",
-      "published": "2026-08-01",
-      "queuedAt": "2026-08-02"
-    },
+  "videos": [],
+  "skipped": [
     {
       "id": "DnYoCpImTZw",
       "creator": "Kalamazi",
       "title": "BIG Warlock Buffs Announced For 12.1! Is It Enough?",
-      "published": "2026-08-01",
-      "queuedAt": "2026-08-02"
+      "reason": "Edited re-cut of the same 2026-08-01 session already distilled from the 4h stream Hn9upmp8ywc: identical 07-31-build walkthrough and identical dummy tests (Destruction ~156k, Demonology ~146k, Affliction ~144k single target), the same Haunt-instead-of-Unstable-Affliction complaint and the same 'Destro ahead by ~10k' conclusion. His three live 08-01 Warlock takes already carry those numbers, so distilling it again would only duplicate them; his closing per-boss guesses are explicitly provisional and he defers the ranking to a later tier-list video. Transcript verified in full 2026-08-02 (nightly CI).",
+      "verifiedAt": "2026-08-02"
     },
-    {
-      "id": "AfxJlv15i04",
-      "creator": "AutomaticJak",
-      "title": "Season 2 PTR M+ Healer Tier List",
-      "published": "2026-08-01",
-      "queuedAt": "2026-08-02"
-    },
-    {
-      "id": "3E1yuNcmS2g",
-      "creator": "MadSkillzzTV",
-      "title": "12.1 Best M+ Healers | Midnight PTR #worldofwarcraft",
-      "published": "2026-08-01",
-      "queuedAt": "2026-08-02"
-    },
-    {
-      "id": "NAErjQ18w0Y",
-      "creator": "Supatease",
-      "title": "12.1 Elemental Shaman Good Main?",
-      "published": "2026-08-01",
-      "queuedAt": "2026-08-02"
-    },
-    {
-      "id": "9cnTo1yK3C8",
-      "creator": "YoDaTV",
-      "title": "Did Blizzard Just SOLVE the Meta for Season 2? (Patch Notes & Tierlist Update)",
-      "published": "2026-08-01",
-      "queuedAt": "2026-08-02"
-    },
-    {
-      "id": "_oVhOLNc3Dg",
-      "creator": "Tettles",
-      "title": "Moonkin is gone",
-      "published": "2026-08-01",
-      "queuedAt": "2026-08-02"
-    }
-  ],
-  "skipped": [
     {
       "id": "YOnGHSUZ4A0",
       "creator": "Kalamazi",
