@@ -1,9 +1,10 @@
 # 12.1 projection model — audit scope (2026-08-02)
 
-**Status: SCOPE ONLY. No model change has been made.** This document enumerates every
-input, weight and threshold in `projectionFor`, states the justification each currently
-has, measures how much each one actually moves the output, and lists what evidence would
-change it. Riley reviews this before anything is touched.
+**Status: P1–P5 complete. Shipped PROJECTION_VERSION 5 and 6; P4 and P5 closed with no
+change, deliberately.** This document enumerates every input, weight and threshold in
+`projectionFor`, states the justification each has, measures how much each actually moves
+the output, and records what was changed and what was left alone. Sections are in audit
+order; the resolutions are inline.
 
 ## Why now, and why it cannot wait until after launch
 
@@ -19,7 +20,7 @@ consensus. Two consequences:
 So the audit window is now through ~Aug 10. After that the model should be frozen on
 purpose, not by accident.
 
-## The model as it stands (PROJECTION_VERSION 4)
+## The model as it stood at audit start (PROJECTION_VERSION 4)
 
 Per spec and bracket, everything on one 0–100 axis:
 
@@ -291,6 +292,73 @@ input named "nudge" deciding the top of the chart on one person's sentiment.
 
 The qualitative read is unchanged and still rendered in the drawer's Meta outlook section.
 It stopped steering the forecast; it did not stop being published.
+
+## P4 and P5 closed with no change (2026-08-02)
+
+### P4a — the finding that outranks every weight question
+
+**21 of 40 raid cells have a base that is 100% the 12.0.7 consensus.** Not weighted
+towards it — entirely it. Their basis strings read `live baseline 49 · outlook 0`, with no
+PTR term of any kind. A further 19 are prior + Dummy Dome. **No raid cell has a PTR
+raid-testing term at all**, because every zone-54 row sits below `MIN_RANK_N` (34 of 74
+testing rows are unranked; the n distribution is min 1, p25 4, median 40) and the series
+has been frozen since 07-28 by the WCL `rdps` outage.
+
+So for half the raid bracket, "our 12.1 forecast" is last patch's consensus plus a tuning
+shift. That is not a modelling error — it is the honest consequence of the PTR raid data
+not existing yet — and **the model already says so: all 21 are tagged `low` confidence.**
+The confidence ratio introduced in v3 is doing exactly the job it was built for.
+
+No change made. Reweighting cannot manufacture evidence, and lowering `MIN_RANK_N` to
+admit n=1–4 medians would reintroduce precisely the defect audit D7 removed. The fix is
+data — the WCL API recovering, or a local run restoring the series — not a coefficient.
+
+**Handover to the UI pass:** a `low`-confidence letter currently looks identical to a
+well-evidenced one in the "Ours: 12.1" column. The disclosure exists but lives in the
+basis string, which means hovering or opening the drawer. Half the raid forecasts are
+carrying that caveat invisibly. That is a presentation problem, not a model one, and it is
+the single highest-value thing the UI/UX pass could address.
+
+### P4b — the other blend questions, measured and left alone
+
+- Effective prior weight after renormalization: 100% when it is the only term (21 raid
+  cells), 69% with the PTR list only, 55% with the empirical, 44% with all three. The
+  spread is entirely driven by which evidence exists, not by the coefficients.
+- Dummy Dome is DPS-only, so healers and tanks blend fewer terms. Confidence accounts for
+  this since v3; the blend deliberately does not, because renormalizing already gives the
+  remaining terms their full share.
+- No time decay on the prior. Worth revisiting **after** the grade — with 21 cells resting
+  entirely on the prior, decaying it today would just move them toward an empty middle.
+
+### P5 — band fit, and a real compression signal
+
+The projection maps through bands calibrated for consensus means. Comparing distributions:
+
+| bracket | source | mean | sd | band spread |
+|---|---|---|---|---|
+| raid | consensus | 58.9 | 18.2 | C7 B14 A9 A+8 S2 |
+| raid | projection | 58.3 | 18.7 | C9 B12 A10 A+6 S3 |
+| mplus | consensus | 60.1 | 16.2 | C5 B11 A15 A+5 S4 |
+| **mplus** | **projection** | **59.3** | **14.3** | **C3 B18 A12 A+6 S1** |
+
+Raid fits well. **M+ is compressed**: sd 14.3 against the consensus's 16.2, with 18 specs
+piled into B and only one reaching S where the consensus has four. That is regression
+toward the mean, the expected behaviour of any averaging model — and it means the forecast
+systematically under-calls extremes.
+
+No change made, on purpose. Correcting variance without accuracy evidence risks
+overshooting in the other direction, and the drift metric cannot adjudicate it (a
+compressed forecast that hugs the middle would *improve* its drift score). This is exactly
+what the post-launch grade is for: if S2 settles with four S-tier M+ specs and the frozen
+forecast called one, the compression is real and quantified. Recorded here so that check
+gets made rather than rediscovered.
+
+## Recommended freeze
+
+The model is coherent as of v6 and the two open questions (prior decay, M+ compression)
+both need the grade to settle. **Freeze at v6 through launch.** Reopen once the first
+settled Season-2 consensus exists and the report card can rank options on accuracy rather
+than coherence.
 
 ## Proposed method
 
