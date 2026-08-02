@@ -3,6 +3,48 @@
 Keep the newest ~20 entries; prune older ones when appending (prose is memory, not state —
 parse counts and baselines the change detectors need live in the entries themselves).
 
+- 2026-08-02 (LOCAL run, ~14:2xZ — Opus 5; scheduled residential catch-up after the 10:37Z
+  nightly, which itself was the second run of the day). Scope: residential-only — the five
+  WCL rDPS cuts CI recorded `unreachable`. Nothing CI already refreshed (tiers/archon/
+  murlok/wowmeta/simc/bloodmallet/mythicstats) was re-fetched or rewritten; the transcript
+  queue was already drained to 0 by the nightly's deterministic step, so watch-creators had
+  nothing residential to do. · **ALL FIVE rDPS CUTS RESTORED again; the 08-01 curl finding
+  held exactly** — `curl` with the XHR header recipe cleared Cloudflare on the first try for
+  every URL (HTTP 200, no retries, no backoff); Node `fetch()` was not attempted, per that
+  entry's advice. The GraphQL `rdps` family is still 500 upstream and was not touched — the
+  statistics table is a separate path and is what served these medians. · **PRECISION GOTCHA
+  WORTH KEEPING: the stored WCL convention is INTEGER, the fragment serves 2-decimal values.**
+  Merging raw would have shown 127/127 "moves" that are partly rounding noise — the same
+  phantom-move shape wowmeta hit on 07-31. Verified every stored value across all four series
+  is an integer, rounded before applying, then re-diffed. · **Zone 46 live raid** (diff 5 /
+  size 20 / part 3, `amount`, `dpstype=rdps`): DPS 27/27, tank 6/6, healer HPS 7/7, healer DPS
+  7/7 = 47 rows, parses 2,065-39,923 (raid DPS total 391,889). All 47 moved but **uniformly
+  tiny — median 0.13-0.42%, max 1.16%** (healer-DPS cut), the one-extra-day-of-logs shape.
+  · **Zone 47 live M+** (diff 10 / size 5 / part 1): 27 + 6 + 7 = 40 rows, parses
+  20,465-374,422; median move 0.16-0.29%, max 1.40%. · **Zone 56 PTR M+**: 27 + 6 + 7 = 40
+  rows, parses 20-765 (total 8,545); median ~1%, max 11.86% (Devastation Evoker
+  229,895->257,167) — small-n volatility, expected and not a parse fault. · **Zone 52 Dummy
+  Dome** -> `spec.ptrDummy`, 27 specs: 1T 27 / 2T 16 / 3T 13 / 5T 27, parses 1-250, coverage
+  histogram {2 counts: 8 specs, 3: 9, 4: 10}. Moves up to 21.9% (Feral Druid 5T
+  407,004->496,027) — tiny-n, as documented. **The "each spec appears twice" zone-52
+  duplication did NOT occur this run either** (raw==rows on all four cuts, dupes=0) — second
+  consecutive run without it; the dedupe-on-first-occurrence guard stayed in anyway. · **Zone
+  54 PTR raid still EMPTY upstream** (4 probes: Heroic 4/10 DPS+tank+healer, Mythic 5/20 DPS —
+  all 9.1 KB fragments, headers render but zero data rows, and the fragment carries WCL's own
+  "50 public kills" aggregation-threshold note). Per the standing rule nothing was ingested
+  and **the stored 34 rows AND that page's `snapshot` were both left at 2026-07-28.**
+  · **Zone 57 Tidebound Grotto still empty** — 3 probes (Normal 3/10, Heroic 4/10, Mythic
+  5/25) each returned the literal 114-byte "No statistics have been collected" message.
+  · Bumped `sources.json` snapshots to 2026-08-02 for zones 46/47/56/52 ONLY. · 127 metric
+  rows + 27 ptrDummy specs via apply-metrics.mjs, **0 unmatched**; diff verified scoped —
+  only `warcraftlogs` series and `ptrDummy` moved, no roster/metric-count change, no other
+  source touched. npm test 190 (178/12/0), build OK 995.5 KB, snapshot written, rebuilt after
+  the snapshot. · **Manifest deliberately NOT touched** — partial run, so its five WCL rows
+  still read the previous night's `unreachable` while the stored data is now fresh. That is
+  the bounded one-day drift the local-run skill describes. `check-refresh --manifest` PASSED
+  (exit 0) rather than failing its usual single line, because the nightly's `startedAt` was
+  only ~2.6h old and still inside the 12h window.
+
 - 2026-08-01 (LOCAL run, ~14:1xZ — Opus 5; scheduled residential catch-up after the 10:37Z
   nightly). Scope: residential-only — WCL cuts CI recorded `unreachable` + the transcript
   queue. Nothing CI already refreshed (tiers/archon/murlok/wowmeta/simc/bloodmallet/
