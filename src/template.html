@@ -239,6 +239,12 @@
   .tier[data-t="D"]  {color:var(--t-d);     background:color-mix(in srgb,var(--t-d) 15%,transparent);     border-color:color-mix(in srgb,var(--t-d) 42%,transparent)}
   .tier[data-t="F"]  {color:var(--t-f);     background:color-mix(in srgb,var(--t-f) 15%,transparent);     border-color:color-mix(in srgb,var(--t-f) 42%,transparent)}
   .tier[data-t="—"]  {color:var(--ink-faint); background:transparent; border-color:var(--edge); min-width:30px}
+  /* Evidence strength for the projection column. Deliberately quiet at high/medium — the
+     signal a reader needs is which forecasts are THIN, so only those two states carry
+     colour. Letter-spacing keeps three glyphs inside the indicator slot. */
+  .conf{font-size:9px; letter-spacing:-.3px; line-height:1; color:var(--ink-faint); cursor:help; white-space:nowrap}
+  .conf[data-c="low"]{color:var(--t-d)}
+  .conf[data-c="prior-only"]{color:var(--t-f)}
 
   .tiercell{display:grid; grid-template-columns:34px 16px; align-items:center; column-gap:2px; justify-self:start}
   .tcol{display:flex; flex-direction:column; align-items:stretch; gap:3px; min-width:0}
@@ -699,6 +705,7 @@
       <span class="lbl" style="margin:0">Tiers</span>
       <span class="grp" id="tierlegend" style="gap:6px"></span>
       <span class="li"><span class="divmark">±</span><span>sources diverge (consensus)</span></span>
+      <span class="li"><span class="conf" data-c="high" style="margin:0">●●●</span><span class="conf" data-c="low" style="margin:0">●○○</span><span>evidence behind our 12.1 forecast — three dots means every obtainable PTR signal is present, one means it mostly reflects the 12.0.7 baseline</span></span>
       <span class="lsep" aria-hidden="true"></span>
       <span class="li"><span class="mv" data-d="up" style="margin:0">▲</span><span class="mv" data-d="down" style="margin:0">▼</span><span>tier / rank moved since the last data change (hover for from-when)</span></span>
     </div>
@@ -917,7 +924,7 @@ function ratingFor(s, bracket){
   if(state.source === "projection"){
     const p = s.projection ? s.projection[bracket] : null;
     if(!p) return { tier:"—", score:-1, div:false, tip:"No projection — no live baseline or PTR data to project from" };
-    return { tier:p.tier, score:p.score, div:false,
+    return { tier:p.tier, score:p.score, div:false, conf:p.confidence,
              tip:`Our 12.1 ${bracket==="raid"?"raid":"M+"} projection: ${p.tier} (${p.score}/100, confidence ${p.confidence}) — ${p.basis}` };
   }
   const src = TIER_SOURCES.find(x => x.id === state.source);
@@ -948,7 +955,23 @@ function tierEl(r, mv){
     ? `<span class="tscore" title="${state.source==="consensus"?"Consensus":"Projection"} score ${r.score}/100 (position within tier)"><i style="width:${r.score}%"></i></span>` : '';
   // Fight view: the non-fight bracket shows its overall consensus tier, dimmed with a
   // dotted underline so it reads as "context, not this fight" (tooltip explains) (M4).
-  return `<span class="tiercell${r.overall?' isoverall':''}"><span class="tcol"><span class="tier" data-t="${esc(r.tier)}" title="${esc(r.tip)}">${esc(r.tier)}</span>${meter}</span><span class="tind">${arrow}${dot}</span></span>`;
+  /* Confidence, in the GRID rather than only the tooltip (2026-08-02 projection audit,
+     P4a). 21 of 40 raid forecasts have a base that is 100% the 12.0.7 consensus — no PTR
+     term at all — and they rendered as a letter indistinguishable from a well-evidenced
+     one. The caveat existed, in a basis string reachable only by hovering or opening the
+     drawer. A forecast that is mostly last patch has to LOOK different while scanning.
+     Projection view only: confidence describes the forecast, and painting it over a
+     fetched source's letters would attribute our uncertainty to them. */
+  const CONF_GLYPH = { high: "●●●", medium: "●●○", low: "●○○", "prior-only": "○○○" };
+  const CONF_TIP = {
+    high: "High confidence — every PTR signal obtainable for this spec and bracket is present",
+    medium: "Medium confidence — more than half the obtainable PTR signals are present",
+    low: "Low confidence — only one obtainable PTR signal is present; this forecast leans on the 12.0.7 baseline",
+    "prior-only": "No PTR evidence at all — this is the 12.0.7 consensus, not a forecast"
+  };
+  const conf = (state.source === "projection" && r.conf && CONF_GLYPH[r.conf])
+    ? `<span class="conf" data-c="${esc(r.conf)}" title="${esc(CONF_TIP[r.conf])}" aria-label="${esc(r.conf)} confidence">${CONF_GLYPH[r.conf]}</span>` : '';
+  return `<span class="tiercell${r.overall?' isoverall':''}"><span class="tcol"><span class="tier" data-t="${esc(r.tier)}" title="${esc(r.tip)}">${esc(r.tier)}</span>${meter}</span><span class="tind">${arrow}${dot}${conf}</span></span>`;
 }
 function verdictEl(s){
   const v = s.ptr ? s.ptr.verdict : "—";
