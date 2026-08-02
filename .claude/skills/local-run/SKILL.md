@@ -113,8 +113,13 @@ no-staleness-gate policy still holds *within* whichever scope you pick.
   (parse verification, era-verification, `log.md` precedent lookups, checking a
   distillation against its cited source). Cap ~4 concurrent.
 - **Single-threaded, main agent only:** every `apply-*.mjs` merge and direct `data/*.json`
-  write; `npm test && npm run build`; `snapshot.mjs`; the manifest rewrite; all git
-  staging, commit and push.
+  write; `npm test && npm run build`; `snapshot.mjs`; the final rebuild; the manifest
+  rewrite; all git staging, commit and push. (This list is a CONCURRENCY policy, not a
+  running order — read it as "none of these may be delegated", not as a sequence. The
+  order is steps 1-7 above, and step 6's rebuild-AFTER-snapshot is the part this list
+  looks like it contradicts. On 2026-08-02 a local run followed this line's apparent
+  ordering, shipped a dist whose Timeline ended on a null point for all 40 specs, and
+  needed a follow-up commit to fix it.)
 - If a verification agent and the main line disagree, **do not push** — report and stop.
 
 ## Report shape
