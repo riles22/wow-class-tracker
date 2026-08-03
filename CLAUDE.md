@@ -94,15 +94,17 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   Distill faithfully — the verdict is the SOURCE's read, never the distiller's own
   editorial call. The old `draft: true` flag is retired (treated as confirmed if ever
   encountered).
-  **A creator take is NOT a writeup fallback** (decided 2026-08-02). Nine specs still
-  have no writeup, and all nine already carry cited creator takes (1–15 each) that the
-  drawer renders. Promoting one into `ptr.verdict` is tempting and wrong: a take steers
-  nothing today, while a verdict drives a ±7 outlook shift in the projection — so the
-  promotion would hand a single YouTube video direct control of the forecast (Feral has
-  exactly one take). That is the same inversion rejected on the meta nudge: the strongest
-  evidence display-only, the weakest steering. Absent writeups stay absent; the takes
-  already cover the qualitative layer, and the honest UI fix is to point at them rather
-  than say "pending fetch" as though nothing were known.
+  **Creator takes ARE the writeup fallback — but as an aggregate, never promoted into
+  `ptr.verdict`** (Riley, 2026-08-03, superseding the 08-02 note that kept them out
+  entirely: "we picked these experts for a reason: they are experts"). The distinction is
+  the whole point. Writing one take's sentiment into `ptr.verdict` would hand a single
+  YouTube video the full ±7 outlook shift — Feral has exactly one take — which is the
+  "weakest evidence steers" inversion already rejected on the meta nudge. Instead
+  `expertRead()` (render.mjs, PROJECTION_VERSION 7) aggregates the whole non-superseded
+  PTR-era take set, one vote per creator, shrunk by corroboration. Nine specs still have
+  no writeup; the aggregate now supplies their outlook direction. **Do not** hand-write a
+  `ptr` writeup from a creator take to "fill the gap" — the model already reads them, and
+  a fabricated writeup would double-count.
 
 ### Computed at build time (never hand-written)
 - **Movement (▲▼)**: `build` compares consensus tiers + metric ranks + the Dummy Dome
