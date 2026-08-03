@@ -432,11 +432,11 @@ export function outlookFor(spec, ptrBuilds, takes = []) {
   // Zone-54 raid-testing rank joins the basis STRING for context (never the direction —
   // tiny-n testing data stays informative, not a driver).
   const testing = (spec.metrics ?? []).find(m => m.name === "12.1 PTR raid testing score (normalized)");
-  // Writeups auto-confirm and carry no date (they are cited distillations, per policy),
-  // so a verdict distilled before three tuning passes still drives the arrow and a ±7
-  // projection shift. Until `ptr.asOf` is backfilled and can be compared properly, at
-  // least STATE the contradiction rather than silently resolving it: Blood DK publishes
-  // "Negative" while its own official lines are +2/−0 (audit 2026-07-24, D5).
+  // Writeups auto-confirm, so a verdict distilled before three tuning passes still drives
+  // the ARROW. It no longer drives the projection shift when undated — v5 made an undated
+  // verdict contribute zero (see projectionFor) — and this comment claimed otherwise until
+  // 2026-08-03. Either way, STATE the contradiction rather than silently resolving it:
+  // Blood DK publishes "Negative" while its own official lines are +2/−0 (audit 07-24, D5).
   const balance = buffs - nerfs;
   const contradicts = (verdict === "Negative" && balance > 0) || (verdict === "Positive" && balance < 0);
   const expertPhrase = expert
@@ -787,6 +787,18 @@ export function projectionFor(spec, bracket, scales, metaNotes = [], sources = [
   const score = within
     ? Math.min(ceiling, Math.max(band.min, Math.round(evidenceScore + within)))
     : evidenceScore;
+  /* The within-band terms are printed at their REQUESTED size, but the tier edge can eat
+     part or all of them — and 5 of 80 cells silently advertised a number the score never
+     received (3 of them printed "+1" and applied 0). That is the same defect the outlook
+     term was fixed for one commit earlier, reintroduced by the expert term added in the
+     same commit; the "within-tier only" label discloses that the LETTER is bounded, not
+     that the printed number was discarded. Apportioning a partial clamp between two terms
+     would be arbitrary, so state the applied total instead and let the per-term numbers
+     stand as what was asked for. */
+  const appliedWithin = score - evidenceScore;
+  const clampNote = within && appliedWithin !== within
+    ? ` · within-tier terms capped at ${appliedWithin > 0 ? "+" : ""}${appliedWithin} by the ${band ? band.tier : "tier"} edge`
+    : "";
   const signals = (testing != null ? 1 : 0) + (dummy != null ? 1 : 0) + (dir != null ? 1 : 0)
     + (ptrList ? 1 : 0);
   /* Confidence is a ratio against the signal types that COULD exist for this spec+bracket,
@@ -833,6 +845,7 @@ export function projectionFor(spec, bracket, scales, metaNotes = [], sources = [
       + (expertAdj ? ` · expert takes ${expertAdj > 0 ? "+" : "−"}${Math.abs(expertAdj)}` +
           ` (${expert.creators} creator${expert.creators === 1 ? "" : "s"}, within-tier only)` : "")
       + (nudge ? ` · meta read ${nudge > 0 ? "+3" : "−3"} (${nudgeCreators} creators agree, within-tier only)` : "")
+      + clampNote
   };
 }
 export function projections(specs, scales, creatorTakes, sources = []) {
