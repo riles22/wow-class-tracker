@@ -135,9 +135,31 @@ export function dummyDomeScores(specs) {
   const fieldByCount = new Map(
     allCounts.map(c => [c, dps.map(s => s.ptrDummy.targets[c]).filter(v => typeof v === "number")])
   );
+  /* Tie-aware MIDRANK (2026-08-03, external audit). The old form counted only strictly
+     lower values, so an all-tied field mapped every spec to 0 — the bottom of the scale —
+     while ranking them all #1. Half credit for ties puts a fully tied field at 0.5
+     (everyone at the median, which is what a tie means) and leaves an untied field alone. */
   const pct = (arr, v) => {
     if (arr.length < 2 || typeof v !== "number") return null;
-    return arr.filter(x => x < v).length / (arr.length - 1);
+    const below = arr.filter(x => x < v).length;
+    const tied = arr.filter(x => x === v).length - 1; // exclude self
+    return (below + 0.5 * Math.max(0, tied)) / (arr.length - 1);
+  };
+  /* SAMPLE-SIZE FLOOR (2026-08-03, external audit). Every ordinary metric loses its rank
+     below MIN_RANK_N parses, but this composite had no such guard: it gated only on how
+     many target COUNTS a spec logged, so a count backed by two parses counted the same as
+     one backed by ninety. 12 of 19 scored composites included at least one such cut.
+
+     ptrDummy stores only count→DPS, but the parallel "Median raw DPS (12.1 PTR Dummy Dome,
+     NT)" rows come from the same zone-52 fetch at the same target counts and DO carry n, so
+     the sample size is recoverable without a data migration. It is the population of the
+     raw-DPS series rather than of the rDPS cut — a different statistic over the same
+     players — so treat it as a faithful proxy; if the two series ever diverge in coverage,
+     carry n on ptrDummy itself instead of inferring it here. */
+  const enoughParses = (spec, count) => {
+    const m = (spec.metrics ?? []).find(x =>
+      x.name === `Median raw DPS (12.1 PTR Dummy Dome, ${count}T)`);
+    return m?.n == null || m.n >= MIN_RANK_N; // unknown n stays in; a KNOWN thin cut drops out
   };
   // Coverage floor: a spec earns a headline composite + rank only if it logged all but at
   // most one target count. Specs log dummies non-randomly (their favorable counts), so
@@ -150,13 +172,17 @@ export function dummyDomeScores(specs) {
   for (const s of dps) {
     const perCount = {};
     const ps = [];
+    const thin = [];
     for (const c of allCounts) {
       const p = pct(fieldByCount.get(c), s.ptrDummy.targets[c]);
       if (p == null) continue;
       perCount[c] = Math.round(p * 100);
-      ps.push(p);
+      // A thin cut still DISPLAYS — it is honest against its own field — but does not vote
+      // in the headline composite.
+      if (enoughParses(s, c)) ps.push(p); else thin.push(Number(c));
     }
-    const coverage = { have: ps.length, of: allCounts.length };
+    const coverage = { have: ps.length, of: allCounts.length,
+      ...(thin.length ? { thin } : {}) };
     if (ps.length >= floor) {
       const score = Math.round((ps.reduce((a, b) => a + b, 0) / ps.length) * 100);
       s.ptrDummy = { ...s.ptrDummy, perCount, coverage, score };

@@ -1320,3 +1320,27 @@ test("projectionFor: a publisher publishing twice has its combined share disclos
   assert.match(p.basis, /same publisher as one of the live lists/,
     "a third of a forecast tracing to one outlet is disclosed, not left to be derived");
 });
+
+test("dummyDomeScores: tie-aware midranks, and thin cuts do not vote", () => {
+  // An all-tied field used to map every spec to 0 — the BOTTOM of the scale — while
+  // ranking them all #1. A tie means the median, not last place.
+  const tied = ["a", "b", "c"].map(k => ({ class: "C", spec: k, role: "DPS",
+    ptrDummy: { targets: { "1": 100, "2": 100 } } }));
+  dummyDomeScores(tied);
+  assert.equal(tied[0].ptrDummy.perCount["1"], 50, "a fully tied field sits at the median");
+  assert.equal(tied[0].ptrDummy.score, 50);
+
+  // A cut backed by fewer than MIN_RANK_N parses still displays (honest against its own
+  // field) but must not vote in the headline composite — the guard every other metric has.
+  const mk = (spec, v, n1) => ({ class: "C", spec, role: "DPS",
+    ptrDummy: { targets: { "1": v, "2": v, "3": v } },
+    metrics: [{ name: "Median raw DPS (12.1 PTR Dummy Dome, 1T)", n: n1 },
+              { name: "Median raw DPS (12.1 PTR Dummy Dome, 2T)", n: 50 },
+              { name: "Median raw DPS (12.1 PTR Dummy Dome, 3T)", n: 50 }] });
+  const field = [mk("x", 100, 1), mk("y", 200, 50), mk("z", 300, 50)];
+  dummyDomeScores(field);
+  assert.deepEqual(field[0].ptrDummy.coverage.thin, [1], "the n=1 cut is named as thin");
+  assert.equal(field[0].ptrDummy.coverage.have, 2, "…and excluded from the voting set");
+  assert.ok(field[0].ptrDummy.perCount["1"] != null, "but still shown");
+  assert.equal(field[1].ptrDummy.coverage.thin, undefined, "well-sampled specs are untouched");
+});
