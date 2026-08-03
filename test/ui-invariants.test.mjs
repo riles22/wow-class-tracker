@@ -358,7 +358,19 @@ ui("a change-strip row drills through even when a filter is hiding that spec", a
     b.click();
     return { cls: b.dataset.cls, spec: b.dataset.spec };
   });
-  assert.ok(target, "expected at least one change row to jump from");
+  /* A genuinely empty strip is a legitimate state, not a failure: movement tracks
+     consensus tiers and metric ranks, so a refresh that only moved projections or
+     confidence honestly produces zero rows ("zero movement means nothing actually moved").
+     Asserting a non-empty strip tested the DATASET, not the code, and went red the first
+     time a real change happened to move nothing movement watches (2026-08-03). Assert the
+     invariant instead — rows drill through — and require the empty case to agree with the
+     payload rather than be waved through. */
+  if (!target) {
+    const moved = payload().specs.reduce((n, sp) =>
+      n + Object.values(sp.movement ?? {}).filter(Boolean).length, 0);
+    assert.equal(moved, 0, "an empty change strip must mean the payload really has no movement");
+    return;
+  }
   await page.waitForTimeout(1200);
   const open = await page.evaluate(() => [...document.querySelectorAll(".row.open .spec-txt")].map(e => e.textContent.trim()));
   assert.deepEqual(open, [target.spec], `jumping to ${target.cls} ${target.spec} must open it whatever filter was active`);

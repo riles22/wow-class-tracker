@@ -1248,3 +1248,75 @@ test("projectionFor: the expert read either decides or adjusts, never both", () 
   assert.ok(adjusted.score >= PROJ_SCALES.consensus.bands.find(b => b.tier === "S").min,
     "clamped to the band floor rather than dropping out of it");
 });
+
+/* ---------- 2026-08-03 external audit: input validity, confidence, quorum ---------- */
+
+test("dummyDomeScores: the support spec is not measurable in a dummy room", () => {
+  // Augmentation's own damage is intentionally low because its contribution is buffing
+  // allies, and a dummy room has no allies. Scoring it as ordinary DPS put the same rDPS
+  // statistic that ranks it 2/27 in live raid at 19/19 here, and that composite was the
+  // ENTIRE PTR empirical term for its raid forecast.
+  const mk = (cls, spec, role, v) => ({ class: cls, spec, role,
+    ptrDummy: { targets: { "1": v, "2": v, "3": v } } });
+  const specs = [
+    mk("Evoker", "Augmentation", "DPS", 79755),   // support: far below the field
+    mk("Mage", "Arcane", "DPS", 200000),
+    mk("Rogue", "Outlaw", "DPS", 150000),
+    mk("Hunter", "Survival", "DPS", 126678)
+  ];
+  dummyDomeScores(specs);
+  const aug = specs[0];
+  assert.equal(aug.ptrDummy.score, undefined, "no composite for a support spec");
+  assert.equal(aug.ptrDummy.rank, undefined, "…and no rank");
+  // It must also leave the percentile DENOMINATOR: its outlier low value was depressing
+  // every other spec's field position, not just producing a wrong number for itself.
+  assert.equal(specs[3].ptrDummy.perCount["1"], 0,
+    "the real field's bottom spec sits at the bottom, not lifted by an excluded outlier");
+  assert.equal(specs[1].ptrDummy.score, 100, "and the top of the real field is still 100");
+});
+
+test("projectionFor: an outlook the model refused to apply is not counted as evidence", () => {
+  const base = {
+    class: "X", spec: "C", role: "DPS",
+    consensus: { raid: { score: 60 } },
+    metrics: [{ bracket: "raid", name: "12.1 PTR raid testing score (normalized)", rank: 5, of: 27 }],
+    outlook: { direction: "down", buffs: 0, nerfs: 2 }
+  };
+  // An UNDATED verdict contributes no shift (v5) — so it must not count toward confidence
+  // either. The model cannot decline to trust a read and cite it as evidence at once.
+  const undated = projectionFor({ ...base, ptr: { verdict: "Negative" } }, "raid", PROJ_SCALES);
+  const dated = projectionFor({ ...base, ptr: { verdict: "Negative", asOf: "2026-07-01" } }, "raid", PROJ_SCALES);
+  assert.ok(["low", "medium"].includes(undated.confidence));
+  assert.notEqual(undated.confidence, dated.confidence,
+    "the dated verdict is evidence; the undated one the model ignored is not");
+  assert.match(undated.basis, /outlook 0/, "and it applied nothing, as v5 requires");
+});
+
+test("projectionFor: the meta nudge counts only the creators that actually agreed", () => {
+  const spec = { class: "X", spec: "Q", role: "DPS", consensus: { raid: { score: 60 } },
+    outlook: { direction: "flat", buffs: 1, nerfs: 1 } };
+  // Two positives and one Mixed: the nudge fires (two agree, nobody dissents) but the
+  // basis must say two, not three. An abstention is not a vote in either direction.
+  const notes = [
+    { class: "X", spec: "Q", creator: "a", sentiment: "positive", date: "2026-07-01" },
+    { class: "X", spec: "Q", creator: "b", sentiment: "positive", date: "2026-07-02" },
+    { class: "X", spec: "Q", creator: "c", sentiment: "mixed", date: "2026-07-03" }
+  ];
+  const p = projectionFor(spec, "raid", PROJ_SCALES, notes);
+  assert.match(p.basis, /meta read \+3 \(2 creators agree/,
+    "the count describes the agreeing set, not the whole lane");
+});
+
+test("projectionFor: a publisher publishing twice has its combined share disclosed", () => {
+  const spec = { class: "X", spec: "P", role: "DPS", consensus: { mplus: { score: 60 } },
+    ratings: { mplus: { icyveins: "A", "icyveins-ptr": "S" } } };
+  const sources = [
+    { id: "icyveins", kind: "tier-list", name: "Icy Veins", scale: "icyveins",
+      pages: [{ bracket: "mplus" }] },
+    { id: "icyveins-ptr", kind: "tier-list", era: "ptr", name: "Icy Veins (12.1 PTR)",
+      scale: "icyveins-ptr", pages: [{ bracket: "mplus" }] }
+  ];
+  const p = projectionFor(spec, "mplus", PTR_PROJ_SCALES, [], sources);
+  assert.match(p.basis, /same publisher as one of the live lists/,
+    "a third of a forecast tracing to one outlet is disclosed, not left to be derived");
+});

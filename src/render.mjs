@@ -2,7 +2,7 @@
    sim-derived fight-profile labels, collect metadata. Pure functions — no
    filesystem access. */
 
-import { consensusFor, ptrTierSources, scoreFor } from "./normalize.mjs";
+import { consensusFor, isLiveEra, ptrTierSources, scoreFor } from "./normalize.mjs";
 
 export function decorateSpecs(specs, sources, scales) {
   return specs.map(spec => ({
@@ -110,8 +110,26 @@ export function metricRanks(specs) {
    single 0–100 composite and rank DPS specs by it (#1 = highest across the board).
    coverage = how many of the field's target counts the spec actually logged (an
    honesty flag: a spec that only logged one dummy is scored only on that one). */
+/* SUPPORT SPECS ARE NOT MEASURABLE HERE (2026-08-03, external audit). The Dummy Dome
+   measures PERSONAL throughput. Augmentation is the game's only support spec: its own
+   damage is deliberately low because its contribution is buffing allies, and a dummy
+   room has no allies to buff. The same rDPS statistic ranks it 2 of 27 in live Mythic
+   raid and 19 of 19 here — the cleanest possible demonstration that this environment
+   measures exactly the thing the spec sacrifices.
+
+   That invalid composite was not a rounding error: its zone-54 raid-testing row is n=5,
+   below MIN_RANK_N, so the Dummy Dome was the ENTIRE PTR empirical term for its raid
+   forecast, and it published C/34 against a live consensus of A/71.
+
+   Excluding it from `fieldByCount` as well as from scoring is deliberate — its 79,755 at
+   one target sits far below the next-lowest spec (126,678) and was depressing every other
+   spec's percentile denominator too. This is the same exclusion healers and tanks already
+   get, applied for the same reason: the measurement does not describe the role. */
+const SUPPORT_SPECS = new Set(["Evoker|Augmentation"]);
+const dummyMeasurable = s => s.role === "DPS" && !SUPPORT_SPECS.has(`${s.class}|${s.spec}`);
+
 export function dummyDomeScores(specs) {
-  const dps = specs.filter(s => s.role === "DPS" && s.ptrDummy?.targets && Object.keys(s.ptrDummy.targets).length);
+  const dps = specs.filter(s => dummyMeasurable(s) && s.ptrDummy?.targets && Object.keys(s.ptrDummy.targets).length);
   if (!dps.length) return specs;
   const allCounts = [...new Set(dps.flatMap(s => Object.keys(s.ptrDummy.targets)))].sort((a, b) => a - b);
   const fieldByCount = new Map(
@@ -671,9 +689,20 @@ export function projectionFor(spec, bracket, scales, metaNotes = [], sources = [
     ? empParts.reduce((s, [v, w]) => s + v * w, 0) / empParts.reduce((s, [, w]) => s + w, 0)
     : null;
   const ptrList = ptrTierRead(spec, bracket, sources, scales);
+  /* A PTR list whose id extends a live source's id ("icyveins-ptr" over "icyveins") is the
+     same outlet publishing twice. Compute that outlet's combined effective share so the
+     basis can state it rather than leaving a reader to derive it from the weights. */
+  const livePublishers = (sources ?? []).filter(x => x.kind === "tier-list" && isLiveEra(x));
+  const ptrSrc = ptrTierSources(sources ?? []).find(x => spec.ratings?.[bracket]?.[x.id] != null);
+  const twin = ptrSrc ? livePublishers.find(x => ptrSrc.id.startsWith(x.id + "-")) : null;
   const baseParts = [[prior, 0.55], [emp, 0.45], [ptrList?.score ?? null, 0.25]].filter(([v]) => v != null);
   if (!baseParts.length) return null; // nothing to project from — honest "—"
   const base = baseParts.reduce((s, [v, w]) => s + v * w, 0) / baseParts.reduce((s, [, w]) => s + w, 0);
+  const totalW = baseParts.reduce((s, [, w]) => s + w, 0);
+  const ratedLive = livePublishers.filter(x => spec.ratings?.[bracket]?.[x.id] != null).length;
+  const sharedPublisherPct = (twin && ptrList && prior != null && ratedLive)
+    ? Math.round(((0.55 / totalW) / ratedLive + (0.25 / totalW)) * 100)
+    : null;
   const dir = spec.outlook?.direction ?? null;
   /* Outlook shift, v5. Two defects the 2026-08-02 audit measured, both fixed here.
 
@@ -758,15 +787,22 @@ export function projectionFor(spec, bracket, scales, metaNotes = [], sources = [
      >=2 rule would have quietly restored a behaviour we do not endorse the moment the
      lane grew. Bounded, the answer flips to yes: several agreeing reads adjusting a score
      without touching a letter is exactly what a nudge should be. */
+  /* The count must describe the AGREEING set, not the lane (2026-08-03, external audit).
+     Mixed and neutral reads are filtered out before the unanimity test — correctly, an
+     abstention is not a vote — but the displayed count was taken from the unfiltered map,
+     so two positives plus one Mixed fired the nudge and announced "3 creators agree" when
+     only two did. Dormant today (all 125 metaNotes come from one creator) and therefore
+     exactly the kind of defect that would have gone live silently the day a second general
+     creator was registered. */
   const newestPerCreator = new Map();
   for (const n of notes) if (!newestPerCreator.has(n.creator)) newestPerCreator.set(n.creator, n);
-  const dirs = [...newestPerCreator.values()]
-    .map(n => n.sentiment === "positive" ? 1 : n.sentiment === "negative" ? -1 : 0)
-    .filter(Boolean);
-  const corroborated = dirs.length >= 2 && dirs.every(d => d === dirs[0]);
-  const nudge = corroborated ? dirs[0] * 3 : 0;
+  const votes = [...newestPerCreator.values()]
+    .map(n => ({ n, d: n.sentiment === "positive" ? 1 : n.sentiment === "negative" ? -1 : 0 }))
+    .filter(v => v.d);
+  const corroborated = votes.length >= 2 && votes.every(v => v.d === votes[0].d);
+  const nudge = corroborated ? votes[0].d * 3 : 0;
   const note = corroborated ? notes[0] : null;
-  const nudgeCreators = corroborated ? newestPerCreator.size : 0;
+  const nudgeCreators = corroborated ? votes.length : 0;
 
   /* Expert ADJUSTMENT (v7). The expert read either decides the outlook or adjusts the
      score — never both, which is what keeps it from being counted twice. It decided
@@ -799,7 +835,13 @@ export function projectionFor(spec, bracket, scales, metaNotes = [], sources = [
   const clampNote = within && appliedWithin !== within
     ? ` · within-tier terms capped at ${appliedWithin > 0 ? "+" : ""}${appliedWithin} by the ${band ? band.tier : "tier"} edge`
     : "";
-  const signals = (testing != null ? 1 : 0) + (dummy != null ? 1 : 0) + (dir != null ? 1 : 0)
+  /* The outlook counts as evidence only when it was ELIGIBLE to act (2026-08-03, external
+     audit). An undated verdict is refused a shift by the v5 rule above, yet was still
+     tallied as a present signal — the model declining to trust a read while simultaneously
+     citing it as evidence of being well-evidenced. Using shiftDir keeps a DATED "flat"
+     verdict as evidence (a real read that happens to point nowhere) and drops only the
+     ones the model itself rejected. 38 of 80 cells fall one confidence band. */
+  const signals = (testing != null ? 1 : 0) + (dummy != null ? 1 : 0) + (shiftDir != null ? 1 : 0)
     + (ptrList ? 1 : 0);
   /* Confidence is a ratio against the signal types that COULD exist for this spec+bracket,
      not a raw count. Two reasons, one new and one long-standing:
@@ -834,7 +876,15 @@ export function projectionFor(spec, bracket, scales, metaNotes = [], sources = [
     basis: `live baseline ${prior != null ? Math.round(prior) : "—"}`
       + (testing != null ? ` · PTR ${bracket === "raid" ? "raid-testing" : "M+ testing"} pct ${Math.round(testing)}` : "")
       + (dummy != null ? ` · Dummy Dome ${Math.round(dummy)}` : "")
-      + (ptrList ? ` · ${ptrList.label} ${ptrList.tiers} (${Math.round(ptrList.score)})` : "")
+      /* Publisher concentration, disclosed (2026-08-03, external audit). When the era:"ptr"
+         list comes from a publisher that ALSO has a live tier list, that publisher's
+         combined share of this forecast is roughly triple any other's — measured at 31%
+         for Icy Veins in M+ against 11% each for Method, Wowhead and Archon. No formula
+         defect: a second PTR list would halve the 20% term automatically, and the two
+         lists are not a duplicate vote. But no surface said it, and a third of a forecast
+         tracing to one outlet is something a reader should be told, not have to derive. */
+      + (ptrList ? ` · ${ptrList.label} ${ptrList.tiers} (${Math.round(ptrList.score)})` +
+          (sharedPublisherPct != null ? ` — same publisher as one of the live lists, ~${sharedPublisherPct}% of this forecast combined` : "") : "")
       // Report the shift ACTUALLY applied. This read "+7"/"−7" from v1 through v6, which
       // stopped being true at v5 when the magnitude began scaling with tally strength —
       // so a spec shifted +3 published a basis claiming +7. A transparency string that
