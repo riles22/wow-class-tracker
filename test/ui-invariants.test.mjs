@@ -358,7 +358,19 @@ ui("a change-strip row drills through even when a filter is hiding that spec", a
     b.click();
     return { cls: b.dataset.cls, spec: b.dataset.spec };
   });
-  assert.ok(target, "expected at least one change row to jump from");
+  /* A genuinely empty strip is a legitimate state, not a failure: movement tracks
+     consensus tiers and metric ranks, so a refresh that only moved projections or
+     confidence honestly produces zero rows ("zero movement means nothing actually moved").
+     Asserting a non-empty strip tested the DATASET, not the code, and went red the first
+     time a real change happened to move nothing movement watches (2026-08-03). Assert the
+     invariant instead — rows drill through — and require the empty case to agree with the
+     payload rather than be waved through. */
+  if (!target) {
+    const moved = payload().specs.reduce((n, sp) =>
+      n + Object.values(sp.movement ?? {}).filter(Boolean).length, 0);
+    assert.equal(moved, 0, "an empty change strip must mean the payload really has no movement");
+    return;
+  }
   await page.waitForTimeout(1200);
   const open = await page.evaluate(() => [...document.querySelectorAll(".row.open .spec-txt")].map(e => e.textContent.trim()));
   assert.deepEqual(open, [target.spec], `jumping to ${target.cls} ${target.spec} must open it whatever filter was active`);
@@ -602,4 +614,113 @@ ui("the 12.1 forecast column shows its evidence strength, and only there", async
   await page.waitForTimeout(150);
   assert.equal(await page.evaluate(() => document.querySelectorAll("#matrix .conf").length), 0,
     "consensus is measured, not forecast — no confidence marker");
+});
+
+/* ---------- Compare all: the full-roster matrix ---------- */
+
+ui("Compare all shows each source's OWN letters and each role's OWN ranks", async page => {
+  const data = payload();
+  await page.click("#allbtn");
+  await page.waitForSelector("table.alltab tbody tr");
+
+  // Every tier cell must equal that source's stored rating for that spec+bracket. This is
+  // the guarantee that caught source-view bleed on the main grid; a second surface drawing
+  // the same letters needs it independently or it can drift on its own.
+  const seen = await page.$$eval("table.alltab tbody tr", rows => {
+    const heads = [...document.querySelectorAll("table.alltab thead tr:first-child th")]
+      .map(th => th.dataset.k || "nm");
+    return rows.map(r => {
+      const out = { spec: r.dataset.spec, cls: r.dataset.cls, tiers: {}, ranks: {} };
+      [...r.children].forEach((td, i) => {
+        const k = heads[i]; if (!k || k === "nm") return;
+        const t = td.querySelector(".all-t");
+        if (t) out.tiers[k] = t.textContent.trim();
+        else if (td.classList.contains("all-rk")) out.ranks[k] = td.textContent.trim();
+      });
+      return out;
+    });
+  });
+  assert.equal(seen.length, data.specs.length, "every spec gets a row");
+
+  let checked = 0;
+  for (const row of seen) {
+    const spec = data.specs.find(s => s.spec === row.spec && s.class === row.cls);
+    for (const [key, shownTier] of Object.entries(row.tiers)) {
+      const expected = key === "consensus" ? spec.consensus?.raid?.tier
+        : key === "projection" ? spec.projection?.raid?.tier
+        : spec.ratings?.raid?.[key];
+      assert.equal(shownTier, expected, `${row.cls} ${row.spec} ${key}: matrix letter must equal the payload's`);
+      checked++;
+    }
+  }
+  assert.ok(checked > 100, `expected many tier cells verified, saw ${checked}`);
+
+  // A rank shown against a spec must be that spec's rank in the family matching its ROLE.
+  const wcl = { DPS: "Median rDPS (Mythic, all bosses)", Tank: "Median rDPS (Mythic, all bosses, tank)",
+                Healer: "Median HPS (Mythic, all bosses)" };
+  let rk = 0;
+  for (const row of seen) {
+    const shown = row.ranks["m:wcl"];
+    if (!shown || shown === "—" || shown === "·") continue;
+    const spec = data.specs.find(s => s.spec === row.spec && s.class === row.cls);
+    const m = spec.metrics.find(x => x.bracket === "raid" && x.name === wcl[spec.role]);
+    assert.equal(shown.replace("#", ""), String(m.rank),
+      `${row.cls} ${row.spec}: WCL rank must come from the ${spec.role} family`);
+    rk++;
+  }
+  assert.ok(rk > 20, `expected many rank cells verified, saw ${rk}`);
+});
+
+ui("Compare all distinguishes 'no such measurement' from 'not fetched', and era-gates", async page => {
+  await page.click("#allbtn");
+  await page.waitForSelector("table.alltab tbody tr");
+
+  // A healer has no SimC sim by construction (·); that is not the same claim as a metric
+  // family that exists for the role but has no row yet (—). Conflating them would let the
+  // page imply a fetch is pending for a number that can never exist.
+  const marks = await page.$$eval("table.alltab tbody tr", rows => {
+    const heads = [...document.querySelectorAll("table.alltab thead tr:first-child th")].map(th => th.dataset.k || "nm");
+    const col = heads.indexOf("m:simc");
+    return rows.map(r => ({ role: r.querySelector(".all-role").textContent, txt: r.children[col].textContent.trim() }));
+  });
+  const healers = marks.filter(m => /Healer/.test(m.role));
+  assert.ok(healers.length > 0 && healers.every(m => m.txt === "·"),
+    "healers must read '·' (no sim basis), never '—' (pending)");
+  assert.ok(marks.some(m => /DPS/.test(m.role) && m.txt.startsWith("#")), "DPS specs do have sim ranks");
+
+  // Era gate: the PTR list, our forecast and the PTR-testing column must be ABSENT in the
+  // 12.0.7-only view, not merely blank — same rule every other surface follows.
+  const cols = () => page.$$eval("table.alltab thead tr:first-child th", th => th.map(x => x.dataset.k || "nm"));
+  assert.ok((await cols()).includes("projection"), "the forecast column shows in the default (both) era");
+  await page.click("#all-close");
+  await page.evaluate(() => document.querySelector('#eraseg button[data-era="live"]').click());
+  await page.click("#allbtn");
+  await page.waitForSelector("table.alltab tbody tr");
+  const live = await cols();
+  assert.ok(!live.includes("projection"), "our 12.1 forecast is era-gated out of the 12.0.7 view");
+  assert.ok(!live.includes("m:ptr"), "PTR testing ranks are era-gated out");
+  assert.ok(!live.some(k => k === "icyveins-ptr"), "the PTR tier list is era-gated out");
+  assert.ok(live.includes("consensus") && live.includes("icyveins"), "live-era columns remain");
+});
+
+ui("Compare all sorts tiers by scale score, not alphabetically", async page => {
+  await page.click("#allbtn");
+  await page.waitForSelector("table.alltab tbody tr");
+  await page.click('thead th[data-k="consensus"]');   // already the default key; this toggles
+  await page.click('thead th[data-k="consensus"]');   // …back to descending
+  // Locate the consensus column by its header key — a positional selector silently reads
+  // whichever column the era gate happens to have left in that slot.
+  const order = await page.$$eval("table.alltab tbody tr", rows => {
+    const heads = [...document.querySelectorAll("table.alltab thead tr:first-child th")].map(th => th.dataset.k || "nm");
+    const col = heads.indexOf("consensus");
+    return rows.map(r => { const t = r.children[col].querySelector(".all-t"); return t ? t.textContent.trim() : null; });
+  });
+  const data = payload();
+  const rank = t => data.scales.consensus.bands.findIndex(b => b.tier === t);
+  const seen = order.filter(Boolean).map(rank);
+  // Alphabetically "A+" sorts before "A" and "B+" before "B"; by score the opposite holds.
+  // Asserting monotonic band order catches either mistake.
+  for (let i = 1; i < seen.length; i++) {
+    assert.ok(seen[i] >= seen[i - 1], `tier order must follow the scale, not the alphabet (position ${i})`);
+  }
 });

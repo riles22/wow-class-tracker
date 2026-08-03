@@ -1,7 +1,7 @@
 {
   "date": "2026-08-03",
   "phase": "12.1-ptr",
-  "projectionVersion": 6,
+  "projectionVersion": 7,
   "rankVersion": 2,
   "consensusVersion": 2,
   "specs": {
@@ -29,12 +29,12 @@
       "projection": {
         "raid": {
           "tier": "B",
-          "score": 49,
+          "score": 50,
           "confidence": "low"
         },
         "mplus": {
           "tier": "A",
-          "score": 67,
+          "score": 68,
           "confidence": "high"
         }
       }
@@ -62,10 +62,6 @@
         "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 7,
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 24
       },
-      "dummy": {
-        "rank": 14,
-        "score": 35
-      },
       "scores": {
         "raid": 58,
         "mplus": 48
@@ -73,13 +69,13 @@
       "projection": {
         "raid": {
           "tier": "B",
-          "score": 45,
-          "confidence": "medium"
+          "score": 55,
+          "confidence": "low"
         },
         "mplus": {
           "tier": "B",
           "score": 47,
-          "confidence": "high"
+          "confidence": "medium"
         }
       }
     },
@@ -108,8 +104,8 @@
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 2
       },
       "dummy": {
-        "rank": 6,
-        "score": 69
+        "rank": 7,
+        "score": 68
       },
       "scores": {
         "raid": 62,
@@ -118,13 +114,13 @@
       "projection": {
         "raid": {
           "tier": "A",
-          "score": 65,
-          "confidence": "medium"
+          "score": 66,
+          "confidence": "low"
         },
         "mplus": {
           "tier": "A+",
-          "score": 86,
-          "confidence": "high"
+          "score": 87,
+          "confidence": "medium"
         }
       }
     },
@@ -158,12 +154,12 @@
       "projection": {
         "raid": {
           "tier": "A",
-          "score": 62,
+          "score": 63,
           "confidence": "low"
         },
         "mplus": {
           "tier": "B",
-          "score": 54,
+          "score": 55,
           "confidence": "medium"
         }
       }
@@ -193,8 +189,8 @@
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 3
       },
       "dummy": {
-        "rank": 7,
-        "score": 68
+        "rank": 8,
+        "score": 66
       },
       "scores": {
         "raid": 88,
@@ -203,13 +199,13 @@
       "projection": {
         "raid": {
           "tier": "A+",
-          "score": 79,
-          "confidence": "medium"
+          "score": 77,
+          "confidence": "low"
         },
         "mplus": {
           "tier": "A+",
-          "score": 83,
-          "confidence": "high"
+          "score": 82,
+          "confidence": "medium"
         }
       }
     },
@@ -238,12 +234,12 @@
         "raid": {
           "tier": "C",
           "score": 29,
-          "confidence": "low"
+          "confidence": "prior-only"
         },
         "mplus": {
           "tier": "A",
           "score": 59,
-          "confidence": "medium"
+          "confidence": "low"
         }
       }
     },
@@ -274,7 +270,7 @@
       },
       "dummy": {
         "rank": 5,
-        "score": 71
+        "score": 70
       },
       "scores": {
         "raid": 57,
@@ -283,12 +279,12 @@
       "projection": {
         "raid": {
           "tier": "A",
-          "score": 63,
+          "score": 62,
           "confidence": "medium"
         },
         "mplus": {
           "tier": "A",
-          "score": 67,
+          "score": 66,
           "confidence": "high"
         }
       }
@@ -355,13 +351,13 @@
       },
       "projection": {
         "raid": {
-          "tier": "S",
-          "score": 88,
+          "tier": "A+",
+          "score": 84,
           "confidence": "low"
         },
         "mplus": {
           "tier": "A",
-          "score": 64,
+          "score": 60,
           "confidence": "high"
         }
       }
@@ -391,13 +387,13 @@
       },
       "projection": {
         "raid": {
-          "tier": "S",
-          "score": 93,
+          "tier": "A+",
+          "score": 83,
           "confidence": "low"
         },
         "mplus": {
-          "tier": "B",
-          "score": 47,
+          "tier": "C",
+          "score": 37,
           "confidence": "high"
         }
       }
@@ -422,24 +418,20 @@
         "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 22,
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 1
       },
-      "dummy": {
-        "rank": 19,
-        "score": 0
-      },
       "scores": {
         "raid": 71,
         "mplus": 89
       },
       "projection": {
         "raid": {
-          "tier": "C",
-          "score": 32,
-          "confidence": "medium"
+          "tier": "A",
+          "score": 65,
+          "confidence": "low"
         },
         "mplus": {
           "tier": "B",
-          "score": 44,
-          "confidence": "medium"
+          "score": 46,
+          "confidence": "low"
         }
       }
     },
@@ -469,7 +461,7 @@
       },
       "dummy": {
         "rank": 9,
-        "score": 59
+        "score": 51
       },
       "scores": {
         "raid": 55,
@@ -478,12 +470,12 @@
       "projection": {
         "raid": {
           "tier": "B",
-          "score": 57,
+          "score": 52,
           "confidence": "medium"
         },
         "mplus": {
           "tier": "C",
-          "score": 37,
+          "score": 35,
           "confidence": "high"
         }
       }
@@ -514,12 +506,12 @@
       "projection": {
         "raid": {
           "tier": "A+",
-          "score": 84,
+          "score": 85,
           "confidence": "low"
         },
         "mplus": {
           "tier": "A",
-          "score": 60,
+          "score": 61,
           "confidence": "high"
         }
       }
@@ -553,13 +545,13 @@
       "projection": {
         "raid": {
           "tier": "C",
-          "score": 33,
-          "confidence": "low"
+          "score": 34,
+          "confidence": "prior-only"
         },
         "mplus": {
           "tier": "A",
-          "score": 58,
-          "confidence": "medium"
+          "score": 59,
+          "confidence": "low"
         }
       }
     },
@@ -589,7 +581,7 @@
       },
       "dummy": {
         "rank": 2,
-        "score": 91
+        "score": 90
       },
       "scores": {
         "raid": 81,
@@ -598,13 +590,13 @@
       "projection": {
         "raid": {
           "tier": "A+",
-          "score": 86,
-          "confidence": "medium"
+          "score": 85,
+          "confidence": "low"
         },
         "mplus": {
           "tier": "A+",
           "score": 74,
-          "confidence": "high"
+          "confidence": "medium"
         }
       }
     },
@@ -638,13 +630,13 @@
       "projection": {
         "raid": {
           "tier": "A",
-          "score": 68,
-          "confidence": "low"
+          "score": 69,
+          "confidence": "prior-only"
         },
         "mplus": {
           "tier": "A",
-          "score": 58,
-          "confidence": "medium"
+          "score": 59,
+          "confidence": "low"
         }
       }
     },
@@ -683,13 +675,13 @@
       "projection": {
         "raid": {
           "tier": "A",
-          "score": 58,
-          "confidence": "medium"
+          "score": 59,
+          "confidence": "low"
         },
         "mplus": {
           "tier": "A",
-          "score": 67,
-          "confidence": "high"
+          "score": 68,
+          "confidence": "medium"
         }
       }
     },
@@ -723,12 +715,12 @@
         "raid": {
           "tier": "C",
           "score": 39,
-          "confidence": "low"
+          "confidence": "prior-only"
         },
         "mplus": {
           "tier": "C",
           "score": 35,
-          "confidence": "medium"
+          "confidence": "low"
         }
       }
     },
@@ -757,8 +749,8 @@
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 20
       },
       "dummy": {
-        "rank": 8,
-        "score": 65
+        "rank": 6,
+        "score": 69
       },
       "scores": {
         "raid": 81,
@@ -767,13 +759,13 @@
       "projection": {
         "raid": {
           "tier": "A+",
-          "score": 74,
-          "confidence": "medium"
+          "score": 76,
+          "confidence": "low"
         },
         "mplus": {
           "tier": "B",
-          "score": 48,
-          "confidence": "high"
+          "score": 49,
+          "confidence": "medium"
         }
       }
     },
@@ -837,13 +829,13 @@
       "projection": {
         "raid": {
           "tier": "S",
-          "score": 100,
-          "confidence": "low"
+          "score": 98,
+          "confidence": "prior-only"
         },
         "mplus": {
           "tier": "S",
-          "score": 93,
-          "confidence": "high"
+          "score": 91,
+          "confidence": "medium"
         }
       }
     },
@@ -870,24 +862,20 @@
         "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 3,
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 21
       },
-      "dummy": {
-        "rank": 12,
-        "score": 42
-      },
       "scores": {
         "raid": 70,
         "mplus": 49
       },
       "projection": {
         "raid": {
-          "tier": "B",
-          "score": 57,
-          "confidence": "medium"
+          "tier": "A",
+          "score": 70,
+          "confidence": "prior-only"
         },
         "mplus": {
           "tier": "A",
-          "score": 61,
-          "confidence": "high"
+          "score": 68,
+          "confidence": "low"
         }
       }
     },
@@ -917,12 +905,12 @@
       "projection": {
         "raid": {
           "tier": "B",
-          "score": 56,
+          "score": 57,
           "confidence": "low"
         },
         "mplus": {
           "tier": "A+",
-          "score": 78,
+          "score": 81,
           "confidence": "high"
         }
       }
@@ -951,12 +939,12 @@
       "projection": {
         "raid": {
           "tier": "C",
-          "score": 33,
+          "score": 32,
           "confidence": "low"
         },
         "mplus": {
           "tier": "A",
-          "score": 68,
+          "score": 67,
           "confidence": "high"
         }
       }
@@ -992,12 +980,12 @@
         "raid": {
           "tier": "A",
           "score": 60,
-          "confidence": "low"
+          "confidence": "prior-only"
         },
         "mplus": {
           "tier": "A",
           "score": 63,
-          "confidence": "medium"
+          "confidence": "low"
         }
       }
     },
@@ -1028,12 +1016,12 @@
         "raid": {
           "tier": "A+",
           "score": 86,
-          "confidence": "low"
+          "confidence": "prior-only"
         },
         "mplus": {
           "tier": "B",
           "score": 47,
-          "confidence": "high"
+          "confidence": "medium"
         }
       }
     },
@@ -1098,8 +1086,8 @@
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 15
       },
       "dummy": {
-        "rank": 15,
-        "score": 33
+        "rank": 10,
+        "score": 35
       },
       "scores": {
         "raid": 58,
@@ -1108,13 +1096,13 @@
       "projection": {
         "raid": {
           "tier": "B",
-          "score": 47,
-          "confidence": "medium"
+          "score": 49,
+          "confidence": "low"
         },
         "mplus": {
           "tier": "A",
-          "score": 58,
-          "confidence": "high"
+          "score": 60,
+          "confidence": "medium"
         }
       }
     },
@@ -1138,10 +1126,6 @@
         "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 16,
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 19
       },
-      "dummy": {
-        "rank": 13,
-        "score": 39
-      },
       "scores": {
         "raid": 37,
         "mplus": 60
@@ -1150,12 +1134,12 @@
         "raid": {
           "tier": "C",
           "score": 38,
-          "confidence": "medium"
+          "confidence": "prior-only"
         },
         "mplus": {
           "tier": "A",
-          "score": 61,
-          "confidence": "high"
+          "score": 66,
+          "confidence": "low"
         }
       }
     },
@@ -1181,10 +1165,6 @@
         "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 12,
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 12
       },
-      "dummy": {
-        "rank": 11,
-        "score": 45
-      },
       "scores": {
         "raid": 43,
         "mplus": 58
@@ -1192,13 +1172,13 @@
       "projection": {
         "raid": {
           "tier": "B",
-          "score": 44,
-          "confidence": "medium"
+          "score": 43,
+          "confidence": "prior-only"
         },
         "mplus": {
           "tier": "A",
-          "score": 65,
-          "confidence": "high"
+          "score": 71,
+          "confidence": "low"
         }
       }
     },
@@ -1224,24 +1204,20 @@
         "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 24,
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 9
       },
-      "dummy": {
-        "rank": 18,
-        "score": 9
-      },
       "scores": {
         "raid": 54,
         "mplus": 66
       },
       "projection": {
         "raid": {
-          "tier": "C",
-          "score": 34,
-          "confidence": "medium"
+          "tier": "B",
+          "score": 54,
+          "confidence": "prior-only"
         },
         "mplus": {
           "tier": "C",
-          "score": 36,
-          "confidence": "high"
+          "score": 35,
+          "confidence": "low"
         }
       }
     },
@@ -1271,7 +1247,7 @@
       },
       "dummy": {
         "rank": 4,
-        "score": 76
+        "score": 74
       },
       "scores": {
         "raid": 49,
@@ -1279,13 +1255,13 @@
       },
       "projection": {
         "raid": {
-          "tier": "A",
-          "score": 58,
+          "tier": "B",
+          "score": 57,
           "confidence": "medium"
         },
         "mplus": {
           "tier": "A+",
-          "score": 77,
+          "score": 78,
           "confidence": "high"
         }
       }
@@ -1319,13 +1295,13 @@
       "projection": {
         "raid": {
           "tier": "B",
-          "score": 49,
-          "confidence": "low"
+          "score": 50,
+          "confidence": "prior-only"
         },
         "mplus": {
           "tier": "B",
-          "score": 51,
-          "confidence": "medium"
+          "score": 52,
+          "confidence": "low"
         }
       }
     },
@@ -1355,12 +1331,12 @@
       "projection": {
         "raid": {
           "tier": "B",
-          "score": 44,
+          "score": 45,
           "confidence": "low"
         },
         "mplus": {
           "tier": "A+",
-          "score": 81,
+          "score": 82,
           "confidence": "high"
         }
       }
@@ -1387,24 +1363,20 @@
         "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 8,
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 14
       },
-      "dummy": {
-        "rank": 17,
-        "score": 12
-      },
       "scores": {
         "raid": 49,
         "mplus": 43
       },
       "projection": {
         "raid": {
-          "tier": "C",
-          "score": 32,
-          "confidence": "medium"
+          "tier": "B",
+          "score": 49,
+          "confidence": "low"
         },
         "mplus": {
           "tier": "B",
-          "score": 44,
-          "confidence": "high"
+          "score": 47,
+          "confidence": "medium"
         }
       }
     },
@@ -1431,24 +1403,20 @@
         "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 15,
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 7
       },
-      "dummy": {
-        "rank": 16,
-        "score": 28
-      },
       "scores": {
         "raid": 80,
         "mplus": 74
       },
       "projection": {
         "raid": {
-          "tier": "A",
-          "score": 60,
-          "confidence": "medium"
+          "tier": "A+",
+          "score": 83,
+          "confidence": "low"
         },
         "mplus": {
           "tier": "A",
-          "score": 67,
-          "confidence": "high"
+          "score": 71,
+          "confidence": "medium"
         }
       }
     },
@@ -1475,10 +1443,6 @@
         "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 13,
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 27
       },
-      "dummy": {
-        "rank": 10,
-        "score": 54
-      },
       "scores": {
         "raid": 68,
         "mplus": 43
@@ -1486,13 +1450,13 @@
       "projection": {
         "raid": {
           "tier": "A",
-          "score": 69,
-          "confidence": "medium"
+          "score": 72,
+          "confidence": "low"
         },
         "mplus": {
           "tier": "B",
-          "score": 53,
-          "confidence": "high"
+          "score": 47,
+          "confidence": "medium"
         }
       }
     },
@@ -1532,12 +1496,12 @@
       "projection": {
         "raid": {
           "tier": "A",
-          "score": 66,
+          "score": 68,
           "confidence": "medium"
         },
         "mplus": {
           "tier": "A+",
-          "score": 82,
+          "score": 84,
           "confidence": "high"
         }
       }
@@ -1571,12 +1535,12 @@
       "projection": {
         "raid": {
           "tier": "A",
-          "score": 60,
+          "score": 62,
           "confidence": "low"
         },
         "mplus": {
           "tier": "B",
-          "score": 46,
+          "score": 48,
           "confidence": "medium"
         }
       }
@@ -1605,13 +1569,13 @@
       "projection": {
         "raid": {
           "tier": "A+",
-          "score": 86,
-          "confidence": "low"
+          "score": 87,
+          "confidence": "prior-only"
         },
         "mplus": {
           "tier": "B",
-          "score": 47,
-          "confidence": "high"
+          "score": 48,
+          "confidence": "medium"
         }
       }
     }

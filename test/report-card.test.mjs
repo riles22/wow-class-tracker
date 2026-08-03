@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
-import { gradeSnapshot, bandIndexer, launchPair, loadSnapshots } from "../src/report-card.mjs";
+import { gradeSnapshot, bandIndexer, launchPair, loadSnapshots, spearman, ndcgAtK, rankingFor, carryForward } from "../src/report-card.mjs";
 import { readFile } from "node:fs/promises";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -50,13 +50,48 @@ test("mode is carried through and never inferred by the grader itself", () => {
   assert.equal(gradeSnapshot(f, a, SCALES, { mode: "grade" }).mode, "grade");
 });
 
-test("launchPair returns null until the phase boundary actually happens", () => {
+test("launchPair keeps FROZEN and SETTLED as separate events", () => {
   const pre = [snap("2026-08-01", {}), snap("2026-08-02", {})];
-  assert.equal(launchPair(pre), null, "all pre-launch → nothing to grade yet");
-  const withPost = [...pre, { ...snap("2026-08-19", {}), phase: "12.1-live" }];
-  const pair = launchPair(withPost);
-  assert.equal(pair.forecast.date, "2026-08-02", "last pre-launch snapshot is the frozen forecast");
-  assert.equal(pair.actual.date, "2026-08-19", "first post-launch snapshot is the outcome");
+  assert.match(launchPair(pre).reason, /has not happened yet/,
+    "a reason, not null — 'not yet' and 'the marker was never set' are different problems");
+
+  // Launch day is NOT a settled outcome. One phase flip cannot mean both "stop forecasting"
+  // and "the meta has settled"; grading against day 0 grades the outlets' week-one guess.
+  const launchOnly = [...pre, { ...snap("2026-08-19", {}), phase: "12.1-live" }];
+  assert.match(launchPair(launchOnly).reason, /not settled yet/);
+  assert.equal(launchPair(launchOnly).settleBy, "2026-09-02", "launch + 14 days");
+
+  const settled = [...launchOnly,
+    { ...snap("2026-08-25", {}), phase: "12.1-live" },   // still inside the window
+    { ...snap("2026-09-04", {}), phase: "12.1-live" }];
+  const pair = launchPair(settled);
+  assert.equal(pair.actual.date, "2026-09-04", "the first snapshot at or past the settle date");
+  assert.equal(pair.forecast.date, "2026-08-02", "inferred freeze point: last pre-launch snapshot");
+  assert.equal(pair.frozenExplicit, false, "…and it says the freeze was inferred, not declared");
+
+  // An explicit freeze marker wins over recency, so a late pre-launch refresh cannot
+  // quietly move the forecast being graded.
+  const marked = [{ ...snap("2026-08-01", {}), frozen: true }, snap("2026-08-02", {}),
+    { ...snap("2026-08-19", {}), phase: "12.1-live" }, { ...snap("2026-09-04", {}), phase: "12.1-live" }];
+  const explicit = launchPair(marked);
+  assert.equal(explicit.forecast.date, "2026-08-01");
+  assert.equal(explicit.frozenExplicit, true);
+});
+
+test("gradeSnapshot reports COVERAGE, so a one-cell grade cannot read as 100%", () => {
+  // The degenerate case the audit named: forecast one cell, get it right, publish
+  // "100% exact" with nothing saying 79 cells were dropped.
+  const f = snap("2026-08-02", { "Mage|Fire": { projection: { raid: { tier: "A", score: 60 } } },
+                                 "Mage|Frost": { projection: {} } });
+  const a = snap("2026-09-04", { "Mage|Fire": { consensus: { raid: "A" }, scores: { raid: 61 } },
+                                 "Mage|Frost": { consensus: { raid: "B" }, scores: { raid: 45 } } });
+  const g = gradeSnapshot(f, a, SCALES, { mode: "grade" });
+  assert.equal(g.overall.exactPct, 100, "the graded cell really was exact");
+  assert.equal(g.coverage.graded, 1);
+  assert.ok(g.coverage.obtainable >= 2, "…but two cells had an outcome to grade against");
+  assert.equal(g.coverage.declined, 1, "the unforecast cell is counted, not silently dropped");
+  assert.equal(g.coverage.sufficient, false, "and the result declares itself not a full grade");
+  assert.ok(g.coverage.coveragePct < 100);
 });
 
 test("bandIndexer orders best-first and rejects unknown tiers", () => {
@@ -92,4 +127,63 @@ test("snapshots predating the projection grade to null, not to a fabricated zero
   const r = gradeSnapshot(preProjection, snaps.at(-1), scales);
   assert.equal(r.overall, null);
   assert.deepEqual(r.rows, []);
+});
+
+/* ---------- ranking metrics + the carry-forward baseline ---------- */
+
+test("spearman: agreement, inversion, ties, and refusal on tiny n", () => {
+  assert.equal(spearman([1, 2, 3, 4], [10, 20, 30, 40]), 1);
+  assert.equal(spearman([1, 2, 3, 4], [40, 30, 20, 10]), -1);
+  assert.equal(spearman([1, 2], [2, 1]), null, "two points always correlate perfectly — refuse");
+  // Ties get midranks, so a tied pair does not fabricate an ordering.
+  const withTies = spearman([1, 2, 2, 3], [1, 2, 2, 3]);
+  assert.equal(withTies, 1);
+});
+
+test("ndcgAtK: a perfect ordering is 1, a bad one is measurably less", () => {
+  const rows = [
+    { forecastScore: 90, actualScore: 90 },
+    { forecastScore: 80, actualScore: 80 },
+    { forecastScore: 70, actualScore: 70 },
+    { forecastScore: 60, actualScore: 60 }
+  ];
+  assert.equal(ndcgAtK(rows, 3), 1);
+  const inverted = rows.map((r, i) => ({ ...r, forecastScore: rows[rows.length - 1 - i].forecastScore }));
+  assert.ok(ndcgAtK(inverted, 3) < 1);
+});
+
+test("rankingFor: k follows the role field size, and top-tier recall is band-based", () => {
+  const mk = (spec, role, f, a, fT = "A", aT = "A") =>
+    ({ spec, role, bracket: "raid", forecastScore: f, actualScore: a, forecastTier: fT, actualTier: aT });
+  const rows = [
+    // 6 DPS — top-5 makes sense; forecast gets 4 of the actual top 5.
+    mk("d1", "DPS", 90, 95), mk("d2", "DPS", 85, 90), mk("d3", "DPS", 80, 85),
+    mk("d4", "DPS", 75, 80), mk("d5", "DPS", 40, 75), mk("d6", "DPS", 70, 40),
+    // 4 healers — k must drop to 3, not pretend 5 is meaningful in a field of 4.
+    mk("h1", "Healer", 90, 90, "S", "S"), mk("h2", "Healer", 80, 80, "A+", "A+"),
+    mk("h3", "Healer", 70, 70, "A", "S"), mk("h4", "Healer", 60, 60)
+  ];
+  const r = rankingFor(rows);
+  assert.equal(r["raid/DPS"].k, 5);
+  assert.equal(r["raid/DPS"].topK.overlap, 4, "d6 forecast into the top 5, d5 actually there");
+  assert.equal(r["raid/Healer"].k, 3);
+  // Top-tier recall: three cells SETTLED S/A+ (h1, h2, h3); the forecast placed two there.
+  assert.equal(r["raid/top-tier"].of, 3);
+  assert.equal(r["raid/top-tier"].hit, 2);
+});
+
+test("carryForward graded against its own source is perfect — that is the point", () => {
+  // The baseline copies the frozen live consensus forward. Graded against that same
+  // consensus it must score 100% — which is exactly why drift may never be a target and
+  // why the CLI hides the baseline outside grade mode.
+  const frozen = snap("2026-08-02", {
+    "A|X": { consensus: { raid: "S", mplus: "A" }, scores: { raid: 90, mplus: 60 } },
+    "A|Y": { consensus: { raid: "B" }, scores: { raid: 45 } }
+  });
+  const base = carryForward(frozen);
+  assert.equal(base.specs["A|X"].projection.raid.tier, "S");
+  assert.equal(base.specs["A|Y"].projection.mplus, null, "no consensus → no baseline claim");
+  const g = gradeSnapshot(base, frozen, SCALES, { mode: "drift" });
+  assert.equal(g.overall.exactPct, 100);
+  assert.equal(g.overall.meanAbsScore, 0);
 });

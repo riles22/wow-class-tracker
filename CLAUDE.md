@@ -94,6 +94,17 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   Distill faithfully — the verdict is the SOURCE's read, never the distiller's own
   editorial call. The old `draft: true` flag is retired (treated as confirmed if ever
   encountered).
+  **Creator takes ARE the writeup fallback — but as an aggregate, never promoted into
+  `ptr.verdict`** (Riley, 2026-08-03, superseding the 08-02 note that kept them out
+  entirely: "we picked these experts for a reason: they are experts"). The distinction is
+  the whole point. Writing one take's sentiment into `ptr.verdict` would hand a single
+  YouTube video the full ±7 outlook shift — Feral has exactly one take — which is the
+  "weakest evidence steers" inversion already rejected on the meta nudge. Instead
+  `expertRead()` (render.mjs, PROJECTION_VERSION 7) aggregates the whole non-superseded
+  PTR-era take set, one vote per creator, shrunk by corroboration. Nine specs still have
+  no writeup; the aggregate now supplies their outlook direction. **Do not** hand-write a
+  `ptr` writeup from a creator take to "fill the gap" — the model already reads them, and
+  a fabricated writeup would double-count.
 
 ### Computed at build time (never hand-written)
 - **Movement (▲▼)**: `build` compares consensus tiers + metric ranks + the Dummy Dome
@@ -133,6 +144,23 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   enrichment feeds the drawer **Timeline** sparklines (`historySeries` → payload
   `history`) and is the raw data for the post-launch **forecast report card** (grade the
   frozen pre-launch projection against the first settled S2 consensus).
+- **Two one-shot OWNER actions at 12.1 launch, and they are DIFFERENT events**
+  (2026-08-03, external audit). `node src/snapshot.mjs --frozen` on the LAST pre-launch
+  refresh declares which forecast the report card grades — and also writes the immutable
+  forecast artifact `data/forecasts/frozen-<date>.json` (all 80 cells with component
+  values + eligibility flags, git SHA, data hash, per-source snapshot dates): the record
+  a post-launch audit re-derives the grade from, committed once by the owner and never
+  regenerated. The grade itself reports coverage before accuracy, ranking metrics
+  (Spearman / NDCG / top-k within role, S-A+ recall) and a carry-forward baseline —
+  if the model cannot beat a forecast that just copies the frozen live consensus forward,
+  the projection machinery added nothing; the `SNAPSHOT_PHASE` flip below
+  says 12.1 is live. One boolean cannot encode both — flip at launch and the first live
+  snapshot is a week-one guess rather than an outcome, flip after settlement and
+  post-launch data has already leaked into the "frozen" forecast. Without `--frozen`,
+  `launchPair` infers the freeze point from recency and a late pre-launch refresh silently
+  moves what gets graded (it reports `frozenExplicit: false` when it had to guess).
+  The settled side is chosen by date, not by the flip: `SETTLE_DAYS = [14, 28]` after
+  launch, because tier lists churn hard in week one.
 - **`SNAPSHOT_PHASE` (`render.mjs`) is a one-shot OWNER action at 12.1 launch**: flip
   `"12.1-ptr"` to the live Season-2 id. **Gated since 2026-08-02**: `check-refresh --age`
   (the daily heartbeat) fails red once `PHASE_FLIP_DUE` passes with the flip undone, so
@@ -153,6 +181,15 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   open drawer, `applyHash`/`writeHash`), localStorage watchlist (★ + Starred filter),
   the "What changed" strip (narrates the movement-baseline diff), and Compare (pin ≤3
   specs side by side; era-gates the projection rows like every other surface).
+  **⊞ Compare all** is the full-roster matrix (built 2026-08-03, `docs/compare-all-scope.md`):
+  40 specs as rows against every source letter, the consensus, the forecast and the metric
+  ranks, sortable and filterable per column. Its one non-obvious idea is the
+  **role-polymorphic rank column** — 28 metric families collapse to ~5 because ranks are
+  already computed within (role, bracket, name), so "WCL median" resolves to rDPS / tank
+  rDPS / HPS by the row's role. Two absences render differently and must stay that way:
+  `·` = no such measurement exists for that role, `—` = it exists but has not landed.
+  Covered by three UI invariants; the overlay does NOT yet write hash state (neither do
+  the Finder or the Ladder — fix all three together in the UI/UX pass).
 - **Fight view**: `data/encounter-tiers.json` holds Archon per-boss (throughput) and
   per-dungeon (score) tiers — single-source by design, labeled as Archon in the UI; the
   Fight selector swaps the matching tier column. Refresh alongside the tier lists.
@@ -352,7 +389,11 @@ docs/     working notes (finder-audit.md · security-audit-2026-07.md ·
           cloud-routine.md · portfolio-audit-2026-07-18.md · audit-2026-07-23.md ·
           audit-2026-07-24.md — audit dispositions. Read the NEWEST audit before
           proposing work: its "Still open" and "Leave alone" sections record what has
-          already been decided, and re-litigating them wastes a run.)
+          already been decided, and re-litigating them wastes a run.
+          projection-audit-2026-08.md — the 12.1 model audit, with the frozen-weights
+          recommendation. compare-all-scope.md — the design record for ⊞ Compare all
+          (BUILT 2026-08-03), including the deltas between scope and build. Next in the
+          queue: the UI/UX pass, then the S2 transition scope.)
 legacy/   original single-file tracker (pre-conversion reference)
 .github/  workflows/deploy.yml (build+deploy Pages on push) · workflows/ci.yml (tests on
           every push) · workflows/freshness.yml (daily staleness heartbeat → alert issue) ·
