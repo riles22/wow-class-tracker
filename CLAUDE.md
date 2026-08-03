@@ -162,6 +162,15 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   open drawer, `applyHash`/`writeHash`), localStorage watchlist (★ + Starred filter),
   the "What changed" strip (narrates the movement-baseline diff), and Compare (pin ≤3
   specs side by side; era-gates the projection rows like every other surface).
+  **⊞ Compare all** is the full-roster matrix (built 2026-08-03, `docs/compare-all-scope.md`):
+  40 specs as rows against every source letter, the consensus, the forecast and the metric
+  ranks, sortable and filterable per column. Its one non-obvious idea is the
+  **role-polymorphic rank column** — 28 metric families collapse to ~5 because ranks are
+  already computed within (role, bracket, name), so "WCL median" resolves to rDPS / tank
+  rDPS / HPS by the row's role. Two absences render differently and must stay that way:
+  `·` = no such measurement exists for that role, `—` = it exists but has not landed.
+  Covered by three UI invariants; the overlay does NOT yet write hash state (neither do
+  the Finder or the Ladder — fix all three together in the UI/UX pass).
 - **Fight view**: `data/encounter-tiers.json` holds Archon per-boss (throughput) and
   per-dungeon (score) tiers — single-source by design, labeled as Archon in the UI; the
   Fight selector swaps the matching tier column. Refresh alongside the tier lists.
@@ -363,9 +372,9 @@ docs/     working notes (finder-audit.md · security-audit-2026-07.md ·
           proposing work: its "Still open" and "Leave alone" sections record what has
           already been decided, and re-litigating them wastes a run.
           projection-audit-2026-08.md — the 12.1 model audit, with the frozen-weights
-          recommendation. compare-all-scope.md — the QUEUED full-roster comparison
-          view: all 40 specs as rows against every rating and rank as columns. It is
-          the next build item, ahead of the UI/UX pass and the S2 transition scope.)
+          recommendation. compare-all-scope.md — the design record for ⊞ Compare all
+          (BUILT 2026-08-03), including the deltas between scope and build. Next in the
+          queue: the UI/UX pass, then the S2 transition scope.)
 legacy/   original single-file tracker (pre-conversion reference)
 .github/  workflows/deploy.yml (build+deploy Pages on push) · workflows/ci.yml (tests on
           every push) · workflows/freshness.yml (daily staleness heartbeat → alert issue) ·
