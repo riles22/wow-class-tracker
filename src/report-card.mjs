@@ -48,17 +48,26 @@ export function gradeSnapshot(forecast, actual, scales, { mode = "drift", specs 
   const roleOf = new Map(specs.map(s => [`${s.class}|${s.spec}`, s.role]));
   const rows = [];
 
+  /* COVERAGE (2026-08-03, external audit). Skipping ungradeable cells is right, but
+     reporting only the graded ones is not: a run that graded 1 of 80 cells and got it
+     right returned "100% exact" with nothing saying the other 79 were dropped. Accuracy
+     without a denominator is the single most misleading number this file could publish,
+     and it is a ONE-SHOT measurement — there is no second Season-2 launch to re-run it
+     against. Count what was obtainable and why each cell fell out. */
+  let obtainable = 0, declined = 0, ungradeable = 0, rosterGap = 0;
+
   for (const [key, f] of Object.entries(forecast.specs ?? {})) {
     const a = actual.specs?.[key];
-    if (!a) continue; // spec absent from one side — roster change, not a miss
+    if (!a) { rosterGap += BRACKETS.length; continue; } // absent one side — roster change, not a miss
     for (const bracket of BRACKETS) {
       const fTier = f.projection?.[bracket]?.tier ?? null;
       const aTier = a.consensus?.[bracket] ?? null;
-      // A missing forecast is "we declined to predict", which is honest and must not be
-      // scored as a miss. A missing actual means nothing to grade against.
-      if (fTier == null || aTier == null) continue;
+      // A cell is OBTAINABLE when the outcome exists to grade against; whether we forecast
+      // it is our choice, and declining is honest but must still show up in the denominator.
+      if (aTier != null) obtainable++; else { ungradeable++; continue; }
+      if (fTier == null) { declined++; continue; }
       const fi = idx(fTier), ai = idx(aTier);
-      if (fi == null || ai == null) continue;
+      if (fi == null || ai == null) { ungradeable++; continue; }
       rows.push({
         spec: key.replace("|", " "), bracket,
         role: roleOf.get(key) ?? null,
@@ -100,8 +109,17 @@ export function gradeSnapshot(forecast, actual, scales, { mode = "drift", specs 
     return Object.fromEntries(Object.entries(out).map(([k, v]) => [k, agg(v)]));
   };
 
+  const coverage = {
+    graded: rows.length, obtainable,
+    coveragePct: obtainable ? Math.round(rows.length / obtainable * 100) : 0,
+    declined, ungradeable, rosterGap,
+    // A grade covering less than most of the obtainable field is not a grade of the model,
+    // it is a grade of a subset — say so in the object rather than in a comment.
+    sufficient: obtainable > 0 && rows.length / obtainable >= 0.8
+  };
+
   return {
-    mode,
+    mode, coverage,
     forecastDate: forecast.date, actualDate: actual.date,
     forecastPhase: forecast.phase ?? null, actualPhase: actual.phase ?? null,
     projectionVersion: forecast.projectionVersion ?? 1,
@@ -123,11 +141,45 @@ export async function loadSnapshots(root = ROOT) {
    forecast, and the first post-launch one as the settled outcome. Returns null when the
    boundary has not happened yet — which is the state today, and the reason the CLI
    falls back to drift mode instead of inventing a grade. */
-export function launchPair(snapshots, prePhase = "12.1-ptr") {
+/* Days after launch at which a Season-2 consensus is treated as SETTLED. Tier lists
+   churn hard in week one; grading against day 0 grades the outlets' first guess, not the
+   meta. Two checkpoints so a single noisy week cannot define the verdict. */
+export const SETTLE_DAYS = [14, 28];
+const addDays = (iso, n) => {
+  const [y, m, d] = iso.split("-").map(Number);
+  const t = Date.UTC(y, m - 1, d) + n * 86400000;
+  return new Date(t).toISOString().slice(0, 10);
+};
+
+/* FROZEN and SETTLED are two different events and one phase flip cannot encode both
+   (2026-08-03, external audit). Flip at launch and the first live snapshot is a
+   week-one guess, not an outcome; flip after settlement and post-launch observations have
+   already leaked into what we call the frozen forecast.
+
+   So each side is chosen by its own explicit marker:
+     forecast — the newest snapshot carrying `frozen: true`, falling back to the last
+                pre-phase snapshot (with `frozenExplicit: false` recorded, so a reader
+                knows the freeze point was inferred rather than declared);
+     actual   — the first post-phase snapshot at least `settleDays` after launch.
+   Returns { reason } instead of null when a pair cannot be formed, because "not yet" and
+   "the marker was never set" are different problems and only one of them is fine. */
+export function launchPair(snapshots, prePhase = "12.1-ptr", { settleDays = SETTLE_DAYS[0] } = {}) {
   const pre = snapshots.filter(s => (s.phase ?? prePhase) === prePhase);
   const post = snapshots.filter(s => (s.phase ?? prePhase) !== prePhase);
-  if (!pre.length || !post.length) return null;
-  return { forecast: pre.at(-1), actual: post[0] };
+  if (!pre.length) return { reason: "no pre-launch snapshots" };
+  if (!post.length) return { reason: "launch has not happened yet (no post-phase snapshot)" };
+  const frozen = pre.filter(s => s.frozen === true);
+  const forecast = frozen.length ? frozen.at(-1) : pre.at(-1);
+  const launchDate = post[0].date;
+  const settleBy = addDays(launchDate, settleDays);
+  const actual = post.find(s => s.date >= settleBy);
+  if (!actual) {
+    return { reason: `season not settled yet — need a snapshot on or after ${settleBy} ` +
+      `(launch ${launchDate} + ${settleDays}d); newest post-launch is ${post.at(-1).date}`,
+      forecast, launchDate, settleBy };
+  }
+  return { forecast, actual, launchDate, settleBy, settleDays,
+    frozenExplicit: frozen.length > 0 };
 }
 
 const fmt = a => a ? `${String(a.exactPct).padStart(3)}% exact · ${String(a.withinOnePct).padStart(3)}% within one band · MAE ${a.meanAbsBands} bands · bias ${a.biasBands > 0 ? "+" : ""}${a.biasBands}${a.biasScore != null ? ` (${a.biasScore > 0 ? "+" : ""}${a.biasScore} pts)` : ""} · n=${a.n}` : "—";
@@ -146,9 +198,12 @@ if (isMain) {
     forecast = snapshots.find(s => s.date === fDate) ?? snapshots[0];
     actual = snapshots.find(s => s.date === aDate) ?? snapshots.at(-1);
     mode = (actual.phase ?? "12.1-ptr") !== "12.1-ptr" ? "grade" : "drift";
-  } else if (pair) {
+  } else if (pair.actual) {
     ({ forecast, actual } = pair); mode = "grade";
   } else {
+    // launchPair now returns a REASON rather than a bare null, because "launch has not
+    // happened" and "the season has not settled" call for different waiting.
+    if (pair.reason) console.log(`\n(no grade yet: ${pair.reason})`);
     forecast = snapshots[0]; actual = snapshots.at(-1); mode = "drift";
   }
 
@@ -159,7 +214,19 @@ if (isMain) {
     console.log("  12.1 forecast is not wrong for disagreeing with the patch it never predicted.");
     console.log("  Read the bias line only — it says which way the model leans.");
   }
-  console.log(`  forecast ${r.forecastDate} (phase ${r.forecastPhase}, projection v${r.projectionVersion}) → actual ${r.actualDate} (phase ${r.actualPhase})\n`);
+  console.log(`  forecast ${r.forecastDate} (phase ${r.forecastPhase}, projection v${r.projectionVersion}) → actual ${r.actualDate} (phase ${r.actualPhase})`);
+  // Coverage before accuracy, always: a percentage without its denominator is the most
+  // misleading thing this tool could print, and this is a one-shot measurement.
+  const c = r.coverage;
+  console.log(`  coverage   ${c.graded}/${c.obtainable} gradeable cells (${c.coveragePct}%)` +
+    `${c.declined ? ` · ${c.declined} declined` : ""}${c.ungradeable ? ` · ${c.ungradeable} no outcome` : ""}` +
+    `${c.rosterGap ? ` · ${c.rosterGap} roster gap` : ""}` +
+    `${c.sufficient ? "" : "  ← PARTIAL: this grades a subset, not the model"}`);
+  if (r.mode === "grade" && pair.frozenExplicit === false) {
+    console.log("  NOTE: the freeze point was INFERRED (last pre-launch snapshot), not declared.");
+    console.log("        Mark the frozen forecast explicitly next cycle — see launchPair.");
+  }
+  console.log("");
   console.log("  overall   ", fmt(r.overall));
   for (const [k, v] of Object.entries(r.byBracket)) console.log(`  ${k.padEnd(10)}`, fmt(v));
   console.log();

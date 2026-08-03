@@ -50,13 +50,48 @@ test("mode is carried through and never inferred by the grader itself", () => {
   assert.equal(gradeSnapshot(f, a, SCALES, { mode: "grade" }).mode, "grade");
 });
 
-test("launchPair returns null until the phase boundary actually happens", () => {
+test("launchPair keeps FROZEN and SETTLED as separate events", () => {
   const pre = [snap("2026-08-01", {}), snap("2026-08-02", {})];
-  assert.equal(launchPair(pre), null, "all pre-launch → nothing to grade yet");
-  const withPost = [...pre, { ...snap("2026-08-19", {}), phase: "12.1-live" }];
-  const pair = launchPair(withPost);
-  assert.equal(pair.forecast.date, "2026-08-02", "last pre-launch snapshot is the frozen forecast");
-  assert.equal(pair.actual.date, "2026-08-19", "first post-launch snapshot is the outcome");
+  assert.match(launchPair(pre).reason, /has not happened yet/,
+    "a reason, not null — 'not yet' and 'the marker was never set' are different problems");
+
+  // Launch day is NOT a settled outcome. One phase flip cannot mean both "stop forecasting"
+  // and "the meta has settled"; grading against day 0 grades the outlets' week-one guess.
+  const launchOnly = [...pre, { ...snap("2026-08-19", {}), phase: "12.1-live" }];
+  assert.match(launchPair(launchOnly).reason, /not settled yet/);
+  assert.equal(launchPair(launchOnly).settleBy, "2026-09-02", "launch + 14 days");
+
+  const settled = [...launchOnly,
+    { ...snap("2026-08-25", {}), phase: "12.1-live" },   // still inside the window
+    { ...snap("2026-09-04", {}), phase: "12.1-live" }];
+  const pair = launchPair(settled);
+  assert.equal(pair.actual.date, "2026-09-04", "the first snapshot at or past the settle date");
+  assert.equal(pair.forecast.date, "2026-08-02", "inferred freeze point: last pre-launch snapshot");
+  assert.equal(pair.frozenExplicit, false, "…and it says the freeze was inferred, not declared");
+
+  // An explicit freeze marker wins over recency, so a late pre-launch refresh cannot
+  // quietly move the forecast being graded.
+  const marked = [{ ...snap("2026-08-01", {}), frozen: true }, snap("2026-08-02", {}),
+    { ...snap("2026-08-19", {}), phase: "12.1-live" }, { ...snap("2026-09-04", {}), phase: "12.1-live" }];
+  const explicit = launchPair(marked);
+  assert.equal(explicit.forecast.date, "2026-08-01");
+  assert.equal(explicit.frozenExplicit, true);
+});
+
+test("gradeSnapshot reports COVERAGE, so a one-cell grade cannot read as 100%", () => {
+  // The degenerate case the audit named: forecast one cell, get it right, publish
+  // "100% exact" with nothing saying 79 cells were dropped.
+  const f = snap("2026-08-02", { "Mage|Fire": { projection: { raid: { tier: "A", score: 60 } } },
+                                 "Mage|Frost": { projection: {} } });
+  const a = snap("2026-09-04", { "Mage|Fire": { consensus: { raid: "A" }, scores: { raid: 61 } },
+                                 "Mage|Frost": { consensus: { raid: "B" }, scores: { raid: 45 } } });
+  const g = gradeSnapshot(f, a, SCALES, { mode: "grade" });
+  assert.equal(g.overall.exactPct, 100, "the graded cell really was exact");
+  assert.equal(g.coverage.graded, 1);
+  assert.ok(g.coverage.obtainable >= 2, "…but two cells had an outcome to grade against");
+  assert.equal(g.coverage.declined, 1, "the unforecast cell is counted, not silently dropped");
+  assert.equal(g.coverage.sufficient, false, "and the result declares itself not a full grade");
+  assert.ok(g.coverage.coveragePct < 100);
 });
 
 test("bandIndexer orders best-first and rejects unknown tiers", () => {

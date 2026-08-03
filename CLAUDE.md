@@ -144,6 +144,16 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   enrichment feeds the drawer **Timeline** sparklines (`historySeries` → payload
   `history`) and is the raw data for the post-launch **forecast report card** (grade the
   frozen pre-launch projection against the first settled S2 consensus).
+- **Two one-shot OWNER actions at 12.1 launch, and they are DIFFERENT events**
+  (2026-08-03, external audit). `node src/snapshot.mjs --frozen` on the LAST pre-launch
+  refresh declares which forecast the report card grades; the `SNAPSHOT_PHASE` flip below
+  says 12.1 is live. One boolean cannot encode both — flip at launch and the first live
+  snapshot is a week-one guess rather than an outcome, flip after settlement and
+  post-launch data has already leaked into the "frozen" forecast. Without `--frozen`,
+  `launchPair` infers the freeze point from recency and a late pre-launch refresh silently
+  moves what gets graded (it reports `frozenExplicit: false` when it had to guess).
+  The settled side is chosen by date, not by the flip: `SETTLE_DAYS = [14, 28]` after
+  launch, because tier lists churn hard in week one.
 - **`SNAPSHOT_PHASE` (`render.mjs`) is a one-shot OWNER action at 12.1 launch**: flip
   `"12.1-ptr"` to the live Season-2 id. **Gated since 2026-08-02**: `check-refresh --age`
   (the daily heartbeat) fails red once `PHASE_FLIP_DUE` passes with the flip undone, so

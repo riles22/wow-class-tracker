@@ -10,7 +10,7 @@ import { buildPayload, snapshotStateOf, PROJECTION_VERSION, RANK_VERSION, CONSEN
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
-export async function snapshot(root = ROOT, date = new Date().toISOString().slice(0, 10)) {
+export async function snapshot(root = ROOT, date = new Date().toISOString().slice(0, 10), { frozen = false } = {}) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) throw new Error(`snapshot date must be YYYY-MM-DD, got "${date}"`);
   const payload = buildPayload(await loadData(root));
   // snapshotStateOf is shared with the movement reader (render.mjs pickBaseline/movementFor)
@@ -19,8 +19,16 @@ export async function snapshot(root = ROOT, date = new Date().toISOString().slic
   // forecast against v2 semantics.
   // consensusVersion pins WHICH tier-list sources composed the stored consensus, so a
   // later registry change cannot be narrated as spec movement.
+  /* `frozen` DECLARES this snapshot as the pre-launch forecast the report card grades
+     (2026-08-03, external audit). It is separate from the phase flip on purpose: the flip
+     says "12.1 is live", which is not the same event as "stop forecasting, this is our
+     final answer", and one boolean cannot honestly encode both. Without it launchPair has
+     to infer the freeze point from recency, so a late pre-launch refresh silently moves
+     the forecast being graded. Set with `node src/snapshot.mjs --frozen`, once, on the
+     last snapshot before 12.1 goes live. */
   const snap = { date, phase: SNAPSHOT_PHASE, projectionVersion: PROJECTION_VERSION,
     rankVersion: RANK_VERSION, consensusVersion: CONSENSUS_VERSION,
+    ...(frozen ? { frozen: true } : {}),
     specs: snapshotStateOf(payload.specs) };
   const dir = path.join(root, "data", "history");
   await mkdir(dir, { recursive: true });
@@ -32,8 +40,11 @@ export async function snapshot(root = ROOT, date = new Date().toISOString().slic
 const isMain = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
 if (isMain) {
   try {
-    const result = await snapshot(ROOT, process.argv[2] || undefined);
-    console.log(`✓ snapshot → ${result.outPath} (${result.specs} specs)`);
+    const frozen = process.argv.includes("--frozen");
+    const dateArg = process.argv.slice(2).find(a => !a.startsWith("--"));
+    const result = await snapshot(ROOT, dateArg || undefined, { frozen });
+    console.log(`✓ snapshot → ${result.outPath} (${result.specs} specs)` +
+      (frozen ? " — FROZEN: this is the forecast the report card will grade" : ""));
   } catch (error) {
     console.error("✗ " + error.message);
     process.exit(1);
