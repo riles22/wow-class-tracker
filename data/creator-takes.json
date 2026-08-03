@@ -2405,7 +2405,7 @@
       "patchContext": "12.1 PTR — S2 M+ healer tier list",
       "claim": "Ranks Mistweaver top healer for S2 M+ but deliberately S, not S+: the PTR data showing another head-and-shoulders gap is 'a PTR mistake' — the nerfed Spinning Crane Kick no longer sets them apart the way S1 did, though buffed mastery/Rising Sun Kick (healing near a Sheilun's per press) keeps them the top dog.",
       "url": "https://youtu.be/ZWFtBrOS8lA?t=194",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Paladin",
@@ -2416,7 +2416,7 @@
       "patchContext": "12.1 PTR — S2 M+ healer tier list",
       "claim": "Holy Paladin is his #2 and 'one Mistweaver nerf or one buff away' from the top meta pick: the tier set enables a three-punch spot-heal combo (Holy Light → two guaranteed Infusions → double giga Flash of Light) that's massive outside cooldowns, stacked buffs have quietly compounded, and unlike Resto Shaman the proc is guaranteed. Notes he's rated HPal high out of PTRs before and been right.",
       "url": "https://youtu.be/ZWFtBrOS8lA?t=255",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Shaman",
@@ -2427,7 +2427,7 @@
       "patchContext": "12.1 PTR — S2 M+ healer tier list",
       "claim": "Resto Shaman lands A: a one-trick pony whose trick (stacked Healing Rains from the tier set + downpour + passive damage) is genuinely strong, plus a utility season — the only healer purging the many annoying casts, AoE-poison dispel. But the trick is 'worse than Mistweaver's last trick' and it leans on unguaranteed procs.",
       "url": "https://youtu.be/ZWFtBrOS8lA?t=443",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Priest",
@@ -2438,7 +2438,7 @@
       "patchContext": "12.1 PTR — S2 M+ healer tier list",
       "claim": "Disc is his #4: before the Void Shield nerfs he'd have put it above Resto Shaman — the nerf is noticeable — but atonement passive healing, strong Shadow Mend (no proc-fishing needed), and fast Mindbender cycling keep Oracle disc 'really strong'; mana (stopping a push group to drink) is what drags it down.",
       "url": "https://youtu.be/ZWFtBrOS8lA?t=672",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Evoker",
@@ -2449,7 +2449,7 @@
       "patchContext": "12.1 PTR — S2 M+ healer tier list",
       "claim": "Preservation is his sleeper: the new tier set makes formerly-dead setup globals (Echo, Temporal Anomaly) fire strong Living Flames so 'every global feels impactful', damage is overlooked, and Rewind is still the best healing cooldown — but it's a jack-of-all-trades that Mistweaver mostly just outclasses, lacking a unique reason for high keys.",
       "url": "https://youtu.be/ZWFtBrOS8lA?t=794",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Druid",
@@ -2460,7 +2460,7 @@
       "patchContext": "12.1 PTR — S2 M+ healer tier list",
       "claim": "Resto Druid near the bottom: the abundance cap (from ~96% bonus crit to 50–60%) 'has felt so punishing', the kit was balanced around a since-nerfed tier set, and Convoke without Nature's Swiftness sometimes whiffs into Moonfires — 'sprinting at a Mistweaver's jog' for similar throughput with far less damage. Expects Resto Druid to be an early buff candidate.",
       "url": "https://youtu.be/ZWFtBrOS8lA?t=978",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Priest",
@@ -2471,7 +2471,7 @@
       "patchContext": "12.1 PTR — S2 M+ healer tier list",
       "claim": "Holy Priest is his bottom pick: it loses the throughput war to the healers above it AND to its own sister spec (Disc spot-heals better), perma-ramping flash-heal/PoH spam with no payoff; 'why would I bring a holy priest to a key… there's honestly no answer' beyond apotheosis — he wants a kit identity change, not another blanket buff.",
       "url": "https://youtu.be/ZWFtBrOS8lA?t=1142",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Paladin",
@@ -2821,7 +2821,7 @@
       "patchContext": "12.1 PTR (2026-07-31 build) — post-tuning raid/dummy testing",
       "claim": "Testing the 07-31 tuning pass live (Soul Fire +45%, Chaos Bolt +5%, Havoc 60%→50%), Kalamazi calls Destruction the strongest Warlock spec for single-target damage \"by a decent margin\" and says he would play it on most raid fights this tier; his own session averages put Destro around 153-155k against roughly 146k for Demonology and 144k for Affliction. He argues the Havoc trim was unnecessary given the Chaos Bolt buff, and stresses the read is provisional because most of the specs above Warlock were nerfed in the same pass.",
       "url": "https://youtu.be/Hn9upmp8ywc?t=8753",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Warlock",
@@ -2832,7 +2832,7 @@
       "patchContext": "12.1 PTR (2026-07-31 build) — post-tuning raid/dummy testing",
       "claim": "Kalamazi reads the Shadow Bolt +45% / Demonbolt +55% / Summon Gloomhound +35% package as a substantial single-target buff that likely pushes Demonology back into a Sacrificed Souls build, and finds implosion builds edging out Power Siphon ones in his dummy tests. His sims have Soul Harvester slightly ahead of Diabolist. He ends the session with Demonology and Affliction close together but still behind Destruction, and notes the buffs are almost entirely single-target so they do not change the spec's cleave profile.",
       "url": "https://youtu.be/Hn9upmp8ywc?t=4307",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Warlock",
@@ -2843,7 +2843,7 @@
       "patchContext": "12.1 PTR (2026-07-31 build) — post-tuning raid/dummy testing",
       "claim": "Kalamazi treats the Haunt buff (damage-dealt modifier 12%→16%) as a real but insufficient single-target fix for Affliction — he wanted a direct Unstable Affliction buff instead and says a 4% effective aura bump \"isn't going to do much\" for the spec. He does credit it with adding some funnel damage on the UA target and expects Affliction to be worth playing on a handful of seed-spam fights in the raid, but still ranks it below Destruction and roughly level with Demonology.",
       "url": "https://youtu.be/Hn9upmp8ywc?t=8999",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Warlock",
@@ -3251,6 +3251,106 @@
       "url": "https://youtu.be/9l7sbfFnwSE?t=894",
       "claim": "Says Subtlety needed the buff and the 10% is good, but is unconvinced by the new reward talent Warfiend's Bite — the returning Legion artifact ability, meant to be decent at both single target and cleave, which in his view 'just doesn't accomplish that goal', leaving the spec still on the weaker side there. Shares the class-wide two-to-three-target dead zone he says Blizzard did not address in this pass.",
       "superseded": false
+    },
+    {
+      "class": "Warlock",
+      "spec": "Destruction",
+      "creator": "Kalamazi",
+      "date": "2026-08-03",
+      "sentiment": "buff",
+      "patchContext": "12.1 PTR — Venomous Abyss per-boss raid outlook",
+      "url": "https://youtu.be/ReWs_ZnYtO8?t=845",
+      "claim": "Reads Venomous Abyss as overwhelmingly a Destruction raid: every boss except the opener looks like a Destro fight to him, and he calls it the best Warlock spec for the tier in both single target and spread cleave, with Hellcaller the build throughout and the Mayhem-vs-Havoc choice close on the multi-target bosses. He tempers it at class level though — he does not think Warlock single target is in a phenomenal spot and says there are definitely classes ahead of them, so Destro is best-of-three rather than strong outright. Expects further tuning around the week the raid opens."
+    },
+    {
+      "class": "Warlock",
+      "spec": "Affliction",
+      "creator": "Kalamazi",
+      "date": "2026-08-03",
+      "sentiment": "nerf",
+      "patchContext": "12.1 PTR — Venomous Abyss per-boss raid outlook",
+      "url": "https://youtu.be/ReWs_ZnYtO8?t=806",
+      "claim": "Calls Affliction undertuned for the tier. After the tier-set nerf and bug fixes plus the removal of Patient Zero and Nocturnal Yield it no longer brings the single target the old full-value Unstable Affliction set did, and what is left is narrow: it works where you can spam Seed of Corruption into stacked adds (he floats it for the opening boss) rather than because dots are good, which he frames as playing the spec for the seed gimmick. Also notes it no longer has the cooldown reduction to get Dark Harvest onto the Twin Fangs back-room adds."
+    },
+    {
+      "class": "Warlock",
+      "spec": "Demonology",
+      "creator": "Kalamazi",
+      "date": "2026-08-03",
+      "sentiment": "mixed",
+      "patchContext": "12.1 PTR — Venomous Abyss per-boss raid outlook",
+      "url": "https://youtu.be/ReWs_ZnYtO8?t=920",
+      "claim": "Places Demonology as a situational middle option: single target sims about level with Affliction (a bit either side depending on Apex RNG) and it is good at stack cleave, but pet travel time makes it awkward on the add-chasing fights, he found it clunky on Coiled Altar, and demo nerfs are landing. He floats it as a possibility on a couple of bosses without it displacing Destruction anywhere."
+    },
+    {
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "creator": "LBNinja7",
+      "date": "2026-08-02",
+      "sentiment": "nerf",
+      "patchContext": "12.1 PTR — S2 M+ healer tier list (corrected)",
+      "url": "https://youtu.be/gvh4R_QSwaI?t=69",
+      "claim": "Corrects his earlier ranking and drops Mistweaver a clear step below Holy Paladin, to the back of A tier. As a Mistweaver main he says the Rising Sun Kick nerf hurts less on its own than people expected — the globals still heal well for their cost — but that it exposed how little Shaluun's Gift and the spec's spot healing contribute now they are no longer hidden behind the oversized kicks. Calls it a jack of all trades, master of none, and says he has not enjoyed its PTR raid healing outside Chi-Ji."
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "creator": "LBNinja7",
+      "date": "2026-08-02",
+      "sentiment": "buff",
+      "patchContext": "12.1 PTR — S2 M+ healer tier list (corrected)",
+      "url": "https://youtu.be/gvh4R_QSwaI?t=237",
+      "claim": "Ranks Holy Paladin the best healer and the lone S tier, though deliberately not S+, on survivability and large burst healing. His one reservation is composition: it brings Devotion Aura but does not amplify the Blood DK / Arcane Mage / Warrior core he says has been dominating PTR keys, the way Mistweaver or Resto Shaman can — which he thinks leaves a window open for those two in push groups."
+    },
+    {
+      "class": "Shaman",
+      "spec": "Restoration",
+      "creator": "LBNinja7",
+      "date": "2026-08-02",
+      "sentiment": "buff",
+      "patchContext": "12.1 PTR — S2 M+ healer tier list (corrected)",
+      "url": "https://youtu.be/gvh4R_QSwaI?t=289",
+      "claim": "Moves Resto Shaman to the top of A tier as the consistent healer of the season and expects it to chisel its way into the meta composition — helped, he notes, by its raid buff being unlikely to be covered by a DPS spec in the group."
+    },
+    {
+      "class": "Priest",
+      "spec": "Discipline",
+      "creator": "LBNinja7",
+      "date": "2026-08-02",
+      "sentiment": "neutral",
+      "patchContext": "12.1 PTR — S2 M+ healer tier list (corrected)",
+      "url": "https://youtu.be/gvh4R_QSwaI?t=384",
+      "claim": "Keeps Discipline in the solid middle — 'still very solid' — below the top three but comfortably clear of the bottom, and in comp terms he treats it as the better of the two Priest healers rather than the other way round."
+    },
+    {
+      "class": "Evoker",
+      "spec": "Preservation",
+      "creator": "LBNinja7",
+      "date": "2026-08-02",
+      "sentiment": "buff",
+      "patchContext": "12.1 PTR — S2 M+ healer tier list (corrected)",
+      "url": "https://youtu.be/gvh4R_QSwaI?t=343",
+      "claim": "Continues to call Preservation the healer people are not looking at — still very solid and his standing sleeper pick for the season."
+    },
+    {
+      "class": "Priest",
+      "spec": "Holy",
+      "creator": "LBNinja7",
+      "date": "2026-08-02",
+      "sentiment": "mixed",
+      "patchContext": "12.1 PTR — S2 M+ healer tier list (corrected)",
+      "url": "https://youtu.be/gvh4R_QSwaI?t=396",
+      "claim": "Defends Holy Priest as better than its reputation — he notes the recent healing buff and says it has climbed steadily from a genuinely bad early PTR — but keeps it near the bottom because of comp: he reads it as essentially a worse Disc Priest in a group."
+    },
+    {
+      "class": "Druid",
+      "spec": "Restoration",
+      "creator": "LBNinja7",
+      "date": "2026-08-02",
+      "sentiment": "mixed",
+      "patchContext": "12.1 PTR — S2 M+ healer tier list (corrected)",
+      "url": "https://youtu.be/gvh4R_QSwaI?t=343",
+      "claim": "Same shape as his Holy Priest read: much improved since early PTR and better than a lot of people think, but he reads it as a worse Resto Shaman in a composition, which caps where it can land. Stresses the whole list is PTR speculation and should be taken with a grain of salt."
     }
   ],
   "metaNotes": [
