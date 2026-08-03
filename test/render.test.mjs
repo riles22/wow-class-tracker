@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
-import { dataHealth, fightLabels, metricRanks, outlookFor, movementFor, projectionMovementFor, snapshotStateOf, pickBaseline, dummyDomeScores, classifyHighlight, projectionFor, ptrTierRead, historySeries, specBuildChanges, PROJECTION_VERSION, RANK_VERSION, CONSENSUS_VERSION } from "../src/render.mjs";
+import { expertRead, EXPERT_MIN, dataHealth, fightLabels, metricRanks, outlookFor, movementFor, projectionMovementFor, snapshotStateOf, pickBaseline, dummyDomeScores, classifyHighlight, projectionFor, ptrTierRead, historySeries, specBuildChanges, PROJECTION_VERSION, RANK_VERSION, CONSENSUS_VERSION } from "../src/render.mjs";
 
 /* Stamp a fixture snapshot as current-version. An UNSTAMPED snapshot means version 1 —
    every snapshot written before the markers existed came from the v1 formulas — so a
@@ -1157,4 +1157,94 @@ test("nudge: a superseded or off-bracket read does not count toward the quorum",
   ], []);
   assert.equal(p.score, 86, "one eligible voice remains, so no quorum");
   assert.doesNotMatch(p.basis, /meta read/);
+});
+
+/* ---------- v7: the specialist creator takes enter the model ---------- */
+
+const TK = (creator, sentiment, date = "2026-07-20", extra = {}) =>
+  ({ class: "X", spec: "E", creator, sentiment, date, patchContext: "12.1 PTR", ...extra });
+const ESPEC = { class: "X", spec: "E" };
+
+test("expertRead: corroboration outranks a single loud voice", () => {
+  // The exact inversion this estimator exists to prevent. Raw net sentiment says the
+  // lone creator (+1.00) is a stronger read than five agreeing ones (+0.60); shrinkage
+  // by n/(n+2) flips that ordering, which is what "they are experts" has to mean.
+  const lone = expertRead(ESPEC, [TK("solo", "buff")]);
+  const panel = expertRead(ESPEC, [
+    TK("a", "buff"), TK("b", "buff"), TK("c", "buff"), TK("d", "buff"), TK("e", "neutral")
+  ]);
+  assert.equal(lone.raw, 1, "raw sentiment rates the lone voice highest");
+  assert.ok(panel.raw < lone.raw, "…and the panel lower, because one member abstained");
+  assert.ok(panel.shrunk > lone.shrunk, "shrunk, five creators outweigh one");
+  assert.equal(lone.creators, 1);
+  assert.equal(panel.creators, 5);
+});
+
+test("expertRead: one prolific creator is one vote, not eight", () => {
+  const prolific = expertRead(ESPEC, Array.from({ length: 8 }, () => TK("loud", "buff")));
+  const single = expertRead(ESPEC, [TK("loud", "buff")]);
+  assert.equal(prolific.shrunk, single.shrunk, "averaging within creator first");
+  assert.equal(prolific.creators, 1);
+  assert.equal(prolific.takes, 8, "take count is still reported honestly");
+});
+
+test("expertRead: superseded and live-era takes are excluded", () => {
+  assert.equal(expertRead(ESPEC, [TK("a", "buff", "2026-07-20", { superseded: true })]), null);
+  assert.equal(expertRead(ESPEC, [TK("a", "buff", "2026-07-20", { patchContext: "12.0.7 live" })]), null);
+  assert.equal(expertRead(ESPEC, []), null, "no takes → no read, never a zero");
+  // A creator holding two opposing claims averages to zero rather than the newer winning:
+  // `superseded` is the curator's tool for retraction and code must not second-guess it.
+  assert.equal(expertRead(ESPEC, [TK("k", "nerf", "2026-07-27"), TK("k", "buff", "2026-08-01")]).shrunk, 0);
+});
+
+test("outlookFor: experts set the direction only when no writeup exists", () => {
+  const builds = { builds: [{ date: "2026-07-01", specsAffected: ["E X"],
+    highlights: ["E X — All damage increased by 10%."] }] };     // tally says up
+  const bearish = [TK("a", "nerf"), TK("b", "nerf"), TK("c", "nerf")];
+  const noWriteup = outlookFor({ ...ESPEC, ptr: null }, builds, bearish);
+  assert.equal(noWriteup.direction, "down", "the expert panel overrides a positive tally");
+  assert.equal(noWriteup.source, "expert");
+  assert.match(noWriteup.basis, /expert takes/);
+  const withWriteup = outlookFor({ ...ESPEC, ptr: { verdict: "Positive" } }, builds, bearish);
+  assert.equal(withWriteup.direction, "up", "a writeup still outranks the takes");
+  assert.equal(withWriteup.source, "verdict");
+});
+
+test("outlookFor: a split or barely-there panel falls through to the tally", () => {
+  const builds = { builds: [{ date: "2026-07-01", specsAffected: ["E X"],
+    highlights: ["E X — All damage increased by 10%."] }] };
+  const split = outlookFor({ ...ESPEC, ptr: null }, builds, [TK("a", "buff"), TK("b", "nerf")]);
+  assert.equal(split.source, "tally", "net zero is not a direction");
+  assert.equal(split.direction, "up");
+  // One creator, one buff → shrunk .33, comfortably over the floor; one creator whose own
+  // claims mostly abstain lands under it and must not steer.
+  const weak = outlookFor({ ...ESPEC, ptr: null }, builds,
+    [TK("a", "buff"), TK("a", "neutral"), TK("a", "neutral"), TK("a", "neutral")]);
+  assert.ok(Math.abs(expertRead(ESPEC, [TK("a", "buff"), TK("a", "neutral"),
+    TK("a", "neutral"), TK("a", "neutral")]).shrunk) < EXPERT_MIN);
+  assert.equal(weak.source, "tally");
+});
+
+test("projectionFor: the expert read either decides or adjusts, never both", () => {
+  const base = {
+    class: "X", spec: "E", role: "DPS",
+    consensus: { raid: { score: 80 } },
+    metrics: [{ bracket: "raid", name: "12.1 PTR raid testing score (normalized)", rank: 1, of: 27 }],
+    ptrDummy: { score: 90 }
+  };
+  // Expert-driven: magnitude scales with the shrunk strength instead of the line count,
+  // and stays under a dated verdict's flat 7 no matter how large the panel.
+  const decided = projectionFor(
+    { ...base, ptr: null, outlook: { direction: "up", source: "expert", buffs: 5, nerfs: 0,
+      expert: { shrunk: 0.25, creators: 2, takes: 2, raw: 0.5 } } }, "raid", PROJ_SCALES);
+  assert.equal(decided.score, 91, "base 87.5 + round(2 + 5*.25) = +3");
+  // Writeup present: the same read now only adjusts, and cannot move the letter.
+  const adjusted = projectionFor(
+    { ...base, ptr: { verdict: "Positive", asOf: "2026-07-01" },
+      outlook: { direction: "up", source: "verdict", buffs: 5, nerfs: 0,
+        expert: { shrunk: -1, creators: 9, takes: 9, raw: -1 } } }, "raid", PROJ_SCALES);
+  assert.equal(adjusted.tier, "S", "the published letter is decided without the takes");
+  assert.ok(adjusted.score < 95, "…but the score still moves, so ordering stays informative");
+  assert.ok(adjusted.score >= PROJ_SCALES.consensus.bands.find(b => b.tier === "S").min,
+    "clamped to the band floor rather than dropping out of it");
 });

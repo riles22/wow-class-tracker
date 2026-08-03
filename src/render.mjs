@@ -324,7 +324,64 @@ export function specBuildChanges(spec, ptrBuilds) {
   return out;
 }
 
-export function outlookFor(spec, ptrBuilds) {
+/* ---- expert read: the specialist creator takes, aggregated (v7, 2026-08-02) ----
+   Policy (Riley, 2026-08-02): "we picked these experts for a reason: they are experts."
+   The takes[] lane was display-only; it now steers the 12.1 projection. Two structural
+   facts about the data decide the shape of this function.
+
+   (1) COVERAGE IS TOTAL. All 40 specs carry at least one non-superseded PTR-era take —
+   better than every other PTR signal we hold (external PTR tier list 38/40, zone-54
+   raid testing 34/40, Dummy Dome 26/40). So this is not a fallback that fires rarely;
+   it fires everywhere, which is exactly why it must be bounded rather than loud.
+
+   (2) RAW NET SENTIMENT INVERTS THE EVIDENCE ORDERING. Counted straight, Arcane Mage
+   reads +1.00 from a single take by a single creator while Arms Warrior reads +0.65
+   from eight takes by five creators — one voice outranking five agreeing ones. That is
+   the same "weakest evidence steers" inversion already rejected for the meta nudge.
+
+   The fix is shrinkage toward zero by corroboration: average within each creator first
+   (so one prolific creator is one vote, not eight), average across creators, then scale
+   by n/(n+SHRINK) for n distinct creators. With SHRINK = 2 the multiplier runs
+   .33 / .50 / .60 / .67 / .71 for 1..5 creators, which puts Arms (+0.46) above Arcane
+   (+0.33) and keeps even a unanimous large panel short of a written verdict's authority.
+
+   NO CODE-LEVEL RECENCY RULE, deliberately. The metaNotes lane keeps only the newest
+   note per creator, and copying that here is tempting: Kalamazi tags Affliction "nerf"
+   on 07-27 and "buff" on 08-01, and averaging them to zero looks like it is discarding
+   his current position. It is not. Takes are per-claim, so one creator can hold two true
+   readings at once (weak in M+ dummy testing, better after the 07-31 tuning) — and
+   `superseded` already exists for genuine retraction, actively used on 190 of 298 takes.
+   A heuristic that silently overrode that flag would be code second-guessing curation.
+   If a take is stale, mark it superseded; do not teach the estimator to guess.
+
+   Sentiment here is per-CLAIM ("this change is a buff"), not a whole-spec verdict — the
+   same shape as the build-line tally, but filtered through people who chose what was
+   worth discussing. That is why it slots into the outlook ladder between the writeup and
+   the mechanical tally, rather than becoming a competing base term. */
+export const EXPERT_SHRINK = 2;
+export const EXPERT_MIN = 0.15; // below this the read is too weak/split to set a direction
+
+export function expertRead(spec, takes = []) {
+  const mine = (takes ?? []).filter(t =>
+    t.class === spec.class && t.spec === spec.spec && !t.superseded &&
+    // Same era test the drawer uses: keyed on the PTR marker, never a "live" substring.
+    String(t.patchContext ?? "").includes("PTR"));
+  if (!mine.length) return null;
+  const byCreator = new Map();
+  for (const t of mine) {
+    const s = t.sentiment === "buff" ? 1 : t.sentiment === "nerf" ? -1 : 0; // neutral/mixed abstain
+    if (!byCreator.has(t.creator)) byCreator.set(t.creator, []);
+    byCreator.get(t.creator).push(s);
+  }
+  const perCreator = [...byCreator.values()].map(a => a.reduce((p, q) => p + q, 0) / a.length);
+  const raw = perCreator.reduce((p, q) => p + q, 0) / perCreator.length;
+  const creators = byCreator.size;
+  const shrunk = raw * (creators / (creators + EXPERT_SHRINK));
+  const newest = mine.map(t => t.date).filter(Boolean).sort().reverse()[0] ?? null;
+  return { raw: +raw.toFixed(3), shrunk: +shrunk.toFixed(3), creators, takes: mine.length, newest };
+}
+
+export function outlookFor(spec, ptrBuilds, takes = []) {
   const builds = ptrBuilds?.builds ?? [];
   if (!builds.length) return null;
   const full = `${spec.spec} ${spec.class}`;
@@ -351,12 +408,26 @@ export function outlookFor(spec, ptrBuilds) {
   // theorycrafters and count as confirmed on landing — the verdict always drives the
   // outlook. Honesty lives in the mandatory source attribution, not a review gate.
   const verdict = spec.ptr?.verdict ?? null;
-  let direction = null;
-  if (verdict === "Positive") direction = "up";
-  else if (verdict === "Negative") direction = "down";
-  else if (verdict === "Mixed") direction = "flat";
-  else if (buffs || nerfs) direction = buffs > nerfs ? "up" : nerfs > buffs ? "down" : "flat";
-  else if (mentioned) direction = "flat";
+  /* Direction ladder, best evidence first (v7, 2026-08-02):
+       1. the writeup verdict — a theorycrafter's whole-spec written read
+       2. the expert take consensus — specialists, corroboration-shrunk
+       3. the build-line tally — Blizzard's own lines, counted mechanically
+     Step 2 is the writeup fallback Riley asked for: nine specs have no writeup and all
+     nine carry cited takes, so the qualitative layer no longer goes silent just because
+     no one wrote a structured distillation. It sits ABOVE the tally because a specialist
+     choosing what mattered beats counting every line equally, and BELOW the verdict
+     because a per-claim sentiment is not a whole-spec read.
+     EXPERT_MIN keeps a split or barely-there panel from casting a direction it does not
+     actually have; those specs fall through to the tally exactly as before. */
+  const expert = expertRead(spec, takes);
+  const expertDecides = !verdict && expert != null && Math.abs(expert.shrunk) >= EXPERT_MIN;
+  let direction = null, source = null;
+  if (verdict === "Positive") { direction = "up"; source = "verdict"; }
+  else if (verdict === "Negative") { direction = "down"; source = "verdict"; }
+  else if (verdict === "Mixed") { direction = "flat"; source = "verdict"; }
+  else if (expertDecides) { direction = expert.shrunk > 0 ? "up" : "down"; source = "expert"; }
+  else if (buffs || nerfs) { direction = buffs > nerfs ? "up" : nerfs > buffs ? "down" : "flat"; source = "tally"; }
+  else if (mentioned) { direction = "flat"; source = "tally"; }
   if (!direction) return null;
   // Zone-54 raid-testing rank joins the basis STRING for context (never the direction —
   // tiny-n testing data stays informative, not a driver).
@@ -368,10 +439,17 @@ export function outlookFor(spec, ptrBuilds) {
   // "Negative" while its own official lines are +2/−0 (audit 2026-07-24, D5).
   const balance = buffs - nerfs;
   const contradicts = (verdict === "Negative" && balance > 0) || (verdict === "Positive" && balance < 0);
+  const expertPhrase = expert
+    ? ` · expert takes ${expert.shrunk > 0 ? "+" : ""}${expert.shrunk.toFixed(2)} ` +
+      `(${expert.takes} take${expert.takes === 1 ? "" : "s"} from ${expert.creators} ` +
+      `creator${expert.creators === 1 ? "" : "s"}, corroboration-weighted` +
+      `${source === "expert" ? " — sets the direction, no writeup on file" : ""})`
+    : "";
   return {
-    direction, builds: mentioned, buffs, nerfs,
+    direction, source, expert: expert ?? undefined, builds: mentioned, buffs, nerfs,
     contradicted: contradicts || undefined,
     basis: `${verdict ? `PTR read: ${verdict}` : "no writeup yet"} · touched in ${mentioned} of ${builds.length} PTR builds` +
+      expertPhrase +
       (buffs || nerfs ? ` · highlighted tuning lines +${buffs}/−${nerfs}` : "") +
       (contradicts ? ` (the writeup predates this tuning — its ${verdict.toLowerCase()} read disagrees with the official lines since)` : "") +
       (testing?.rank ? ` · PTR raid-testing (zone 54) rank #${testing.rank}/${testing.of}` : "")
@@ -473,8 +551,20 @@ export function outlookFor(spec, ptrBuilds) {
             39 specs but carried 6 lines, so 30 specs' 12.1 changes had never reached the
             outlook tally at all. Coverage went from 9 to 40 specs on #1 alone.
         Net effect: 3 of 40 outlook directions and 1 of 80 projection tiers move. Both
-        changes make the tally MORE complete, so v4 scores are not comparable to v3. */
-export const PROJECTION_VERSION = 6;
+        changes make the tally MORE complete, so v4 scores are not comparable to v3.
+   v7 — 2026-08-02. A new INPUT: the specialist creator takes (`creator-takes.json`
+        takes[]) enter the model, on Riley's direction — the lane was display-only and
+        the people in it were chosen for their expertise. See expertRead() for the
+        estimator and why it shrinks by corroboration. Two entry points, mutually
+        exclusive per spec so nothing is counted twice:
+          · no writeup → the expert consensus SETS the outlook direction (the fallback
+            for the nine specs with no ptr writeup) and its magnitude, capped below a
+            dated verdict's flat 7;
+          · writeup present → the expert consensus ADJUSTS the score within its band
+            (±4 at the cap), like the meta nudge and bounded for the same reason.
+        Prior/empirical/PTR-list weights, the verdict's ±7 and the meta nudge's ±3 are
+        all unchanged. Not one series with v6. */
+export const PROJECTION_VERSION = 7;
 
 /* Rank-map version, stamped beside it. `snapshotStateOf().ranks` feeds movement
    comparison, and its meaning changed in the same commit as PROJECTION_VERSION v2:
@@ -609,7 +699,16 @@ export function projectionFor(spec, bracket, scales, metaNotes = [], sources = [
   const bal = (spec.outlook?.buffs ?? 0) - (spec.outlook?.nerfs ?? 0);
   const datedVerdict = !!spec.ptr?.verdict && !!spec.ptr?.asOf;
   const shiftDir = datedVerdict || !spec.ptr?.verdict ? dir : null; // undated verdict → no shift
-  const mag = datedVerdict ? 7 : Math.min(7, 3 + 2 * Math.max(0, Math.abs(bal) - 1));
+  /* (v7) When the expert panel set the direction, it also sets the magnitude — scaled by
+     the same corroboration-shrunk strength, so one take moves less than five agreeing
+     ones. The ceiling is deliberately below a dated verdict's flat 7: a realistic maximum
+     panel (8 unanimous creators → shrunk .80) reaches 6, so no amount of take volume ever
+     outranks a theorycrafter who sat down and wrote the spec up. */
+  const expert = spec.outlook?.expert ?? null;
+  const expertDrives = spec.outlook?.source === "expert";
+  const mag = datedVerdict ? 7
+    : expertDrives ? Math.min(7, Math.round(2 + 5 * Math.abs(expert.shrunk)))
+    : Math.min(7, 3 + 2 * Math.max(0, Math.abs(bal) - 1));
   const shift = shiftDir === "up" ? mag : shiftDir === "down" ? -mag : 0;
   // Bracket-scoped + supersession-aware note selection: a creator's raid read must
   // never color the M+ projection under their name (izen's reads genuinely differ per
@@ -669,14 +768,24 @@ export function projectionFor(spec, bracket, scales, metaNotes = [], sources = [
   const note = corroborated ? notes[0] : null;
   const nudgeCreators = corroborated ? newestPerCreator.size : 0;
 
-  // Tier is decided WITHOUT the nudge; the nudge then moves the score only within that
-  // band. Clamping rather than discarding keeps the meter and the ordering informative.
+  /* Expert ADJUSTMENT (v7). The expert read either decides the outlook or adjusts the
+     score — never both, which is what keeps it from being counted twice. It decided
+     above only when no writeup exists; here it applies in the other case, so a spec WITH
+     a writeup still has its specialists heard rather than ignored ("include them in our
+     calculations", Riley 2026-08-02). Bounded like the meta nudge and for the same
+     reason: it moves the meter, the ordering and the basis string, but the published
+     letter stays decided by the writeup and the measurements. ±4 at the cap, and
+     realistically ±1 to ±3 once shrinkage is applied. */
+  const expertAdj = !expertDrives && expert ? Math.round(4 * expert.shrunk) : 0;
+  // Tier is decided WITHOUT the nudge or the expert adjustment; both then move the score
+  // only within that band. Clamping rather than discarding keeps the meter informative.
   const evidenceScore = Math.round(Math.min(100, Math.max(0, base + shift)));
   const band = scales.consensus.bands.find(b => evidenceScore >= b.min);
   const bandIdx = scales.consensus.bands.indexOf(band);
   const ceiling = bandIdx <= 0 ? 100 : scales.consensus.bands[bandIdx - 1].min - 1;
-  const score = nudge
-    ? Math.min(ceiling, Math.max(band.min, Math.round(evidenceScore + nudge)))
+  const within = nudge + expertAdj;
+  const score = within
+    ? Math.min(ceiling, Math.max(band.min, Math.round(evidenceScore + within)))
     : evidenceScore;
   const signals = (testing != null ? 1 : 0) + (dummy != null ? 1 : 0) + (dir != null ? 1 : 0)
     + (ptrList ? 1 : 0);
@@ -1064,7 +1173,7 @@ export function buildPayload({ specs, sources, scales, community, ptrBuilds, cre
   const baseline = historySnapshots ? pickBaseline(scored, historySnapshots) : (historySnapshot ?? null);
   const decorated = movementFor(scored, scales, baseline);
   for (const spec of decorated) {
-    const outlook = outlookFor(spec, ptrBuilds);
+    const outlook = outlookFor(spec, ptrBuilds, creatorTakes?.takes ?? []);
     if (outlook) spec.outlook = outlook;
     const changes = specBuildChanges(spec, ptrBuilds);
     if (changes.length) spec.buildChanges = changes;
