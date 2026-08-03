@@ -899,6 +899,21 @@ export function projectionFor(spec, bracket, scales, metaNotes = [], sources = [
     : "low";
   return {
     tier: band ? band.tier : null, score, confidence,
+    /* `parts` is the basis string AS DATA (2026-08-03, external audit — the freeze
+       artifact). Every number a post-launch audit needs was previously recoverable only
+       by parsing prose, which is how the ±7 misreport survived two versions unnoticed.
+       requested vs applied are both stated because the band clamp can eat within-tier
+       terms; eligibility flags record what the model REFUSED, not just what it used. */
+    parts: {
+      prior: prior != null ? Math.round(prior) : null,
+      testing: testing != null ? Math.round(testing) : null,
+      dummy: dummy != null ? Math.round(dummy) : null,
+      ptrList: ptrList ? Math.round(ptrList.score) : null,
+      shift, shiftEligible: shiftDir != null,
+      expertAdjRequested: expertAdj, nudgeRequested: nudge,
+      withinApplied: appliedWithin, evidenceScore,
+      signals, obtainable: available
+    },
     basis: `live baseline ${prior != null ? Math.round(prior) : "—"}`
       + (testing != null ? ` · PTR ${bracket === "raid" ? "raid-testing" : "M+ testing"} pct ${Math.round(testing)}` : "")
       + (dummy != null ? ` · Dummy Dome ${Math.round(dummy)}` : "")

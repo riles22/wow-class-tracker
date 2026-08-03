@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
-import { gradeSnapshot, bandIndexer, launchPair, loadSnapshots } from "../src/report-card.mjs";
+import { gradeSnapshot, bandIndexer, launchPair, loadSnapshots, spearman, ndcgAtK, rankingFor, carryForward } from "../src/report-card.mjs";
 import { readFile } from "node:fs/promises";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -127,4 +127,63 @@ test("snapshots predating the projection grade to null, not to a fabricated zero
   const r = gradeSnapshot(preProjection, snaps.at(-1), scales);
   assert.equal(r.overall, null);
   assert.deepEqual(r.rows, []);
+});
+
+/* ---------- ranking metrics + the carry-forward baseline ---------- */
+
+test("spearman: agreement, inversion, ties, and refusal on tiny n", () => {
+  assert.equal(spearman([1, 2, 3, 4], [10, 20, 30, 40]), 1);
+  assert.equal(spearman([1, 2, 3, 4], [40, 30, 20, 10]), -1);
+  assert.equal(spearman([1, 2], [2, 1]), null, "two points always correlate perfectly — refuse");
+  // Ties get midranks, so a tied pair does not fabricate an ordering.
+  const withTies = spearman([1, 2, 2, 3], [1, 2, 2, 3]);
+  assert.equal(withTies, 1);
+});
+
+test("ndcgAtK: a perfect ordering is 1, a bad one is measurably less", () => {
+  const rows = [
+    { forecastScore: 90, actualScore: 90 },
+    { forecastScore: 80, actualScore: 80 },
+    { forecastScore: 70, actualScore: 70 },
+    { forecastScore: 60, actualScore: 60 }
+  ];
+  assert.equal(ndcgAtK(rows, 3), 1);
+  const inverted = rows.map((r, i) => ({ ...r, forecastScore: rows[rows.length - 1 - i].forecastScore }));
+  assert.ok(ndcgAtK(inverted, 3) < 1);
+});
+
+test("rankingFor: k follows the role field size, and top-tier recall is band-based", () => {
+  const mk = (spec, role, f, a, fT = "A", aT = "A") =>
+    ({ spec, role, bracket: "raid", forecastScore: f, actualScore: a, forecastTier: fT, actualTier: aT });
+  const rows = [
+    // 6 DPS — top-5 makes sense; forecast gets 4 of the actual top 5.
+    mk("d1", "DPS", 90, 95), mk("d2", "DPS", 85, 90), mk("d3", "DPS", 80, 85),
+    mk("d4", "DPS", 75, 80), mk("d5", "DPS", 40, 75), mk("d6", "DPS", 70, 40),
+    // 4 healers — k must drop to 3, not pretend 5 is meaningful in a field of 4.
+    mk("h1", "Healer", 90, 90, "S", "S"), mk("h2", "Healer", 80, 80, "A+", "A+"),
+    mk("h3", "Healer", 70, 70, "A", "S"), mk("h4", "Healer", 60, 60)
+  ];
+  const r = rankingFor(rows);
+  assert.equal(r["raid/DPS"].k, 5);
+  assert.equal(r["raid/DPS"].topK.overlap, 4, "d6 forecast into the top 5, d5 actually there");
+  assert.equal(r["raid/Healer"].k, 3);
+  // Top-tier recall: three cells SETTLED S/A+ (h1, h2, h3); the forecast placed two there.
+  assert.equal(r["raid/top-tier"].of, 3);
+  assert.equal(r["raid/top-tier"].hit, 2);
+});
+
+test("carryForward graded against its own source is perfect — that is the point", () => {
+  // The baseline copies the frozen live consensus forward. Graded against that same
+  // consensus it must score 100% — which is exactly why drift may never be a target and
+  // why the CLI hides the baseline outside grade mode.
+  const frozen = snap("2026-08-02", {
+    "A|X": { consensus: { raid: "S", mplus: "A" }, scores: { raid: 90, mplus: 60 } },
+    "A|Y": { consensus: { raid: "B" }, scores: { raid: 45 } }
+  });
+  const base = carryForward(frozen);
+  assert.equal(base.specs["A|X"].projection.raid.tier, "S");
+  assert.equal(base.specs["A|Y"].projection.mplus, null, "no consensus → no baseline claim");
+  const g = gradeSnapshot(base, frozen, SCALES, { mode: "drift" });
+  assert.equal(g.overall.exactPct, 100);
+  assert.equal(g.overall.meanAbsScore, 0);
 });

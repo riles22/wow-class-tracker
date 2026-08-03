@@ -146,7 +146,14 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   frozen pre-launch projection against the first settled S2 consensus).
 - **Two one-shot OWNER actions at 12.1 launch, and they are DIFFERENT events**
   (2026-08-03, external audit). `node src/snapshot.mjs --frozen` on the LAST pre-launch
-  refresh declares which forecast the report card grades; the `SNAPSHOT_PHASE` flip below
+  refresh declares which forecast the report card grades — and also writes the immutable
+  forecast artifact `data/forecasts/frozen-<date>.json` (all 80 cells with component
+  values + eligibility flags, git SHA, data hash, per-source snapshot dates): the record
+  a post-launch audit re-derives the grade from, committed once by the owner and never
+  regenerated. The grade itself reports coverage before accuracy, ranking metrics
+  (Spearman / NDCG / top-k within role, S-A+ recall) and a carry-forward baseline —
+  if the model cannot beat a forecast that just copies the frozen live consensus forward,
+  the projection machinery added nothing; the `SNAPSHOT_PHASE` flip below
   says 12.1 is live. One boolean cannot encode both — flip at launch and the first live
   snapshot is a week-one guess rather than an outcome, flip after settlement and
   post-launch data has already leaked into the "frozen" forecast. Without `--frozen`,

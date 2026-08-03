@@ -2,7 +2,9 @@
    Run AFTER a refresh + build — the next build shows movement (tier ▲▼, rank deltas)
    against the latest snapshot on disk. Usage: node src/snapshot.mjs [YYYY-MM-DD] */
 
-import { writeFile, mkdir } from "node:fs/promises";
+import { writeFile, mkdir, readFile, readdir } from "node:fs/promises";
+import { createHash } from "node:crypto";
+import { execSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { loadData } from "./validate.mjs";
@@ -34,7 +36,49 @@ export async function snapshot(root = ROOT, date = new Date().toISOString().slic
   await mkdir(dir, { recursive: true });
   const outPath = path.join(dir, `${date}.json`);
   await writeFile(outPath, JSON.stringify(snap, null, 2) + "\n");
-  return { outPath, specs: Object.keys(snap.specs).length };
+
+  /* The IMMUTABLE FORECAST ARTIFACT (2026-08-03, external audit). The history snapshot
+     above is deliberately slim — movement and timelines read it daily. This file is the
+     opposite: written once, at freeze, with everything a post-launch audit needs to
+     re-derive or dispute the grade — every cell's component values and eligibility flags
+     (projection.parts), the exact code identity (git SHA + versions), a hash of the data
+     that produced it, and each source's own snapshot date. Nothing downstream reads it on
+     a schedule; its only consumer is the report card and whoever argues with it. */
+  let frozenPath = null;
+  if (frozen) {
+    const sha = (() => { try { return execSync("git rev-parse HEAD", { cwd: root }).toString().trim(); } catch { return null; } })();
+    const dataDir = path.join(root, "data");
+    const hash = createHash("sha256");
+    for (const f of (await readdir(dataDir)).filter(f => f.endsWith(".json")).sort()) {
+      hash.update(f); hash.update(await readFile(path.join(dataDir, f)));
+    }
+    const sources = JSON.parse(await readFile(path.join(dataDir, "sources.json"), "utf8"));
+    const cells = {};
+    for (const sp of payload.specs) {
+      cells[`${sp.class}|${sp.spec}`] = {
+        role: sp.role,
+        raid: sp.projection?.raid ?? null,
+        mplus: sp.projection?.mplus ?? null,
+        outlook: sp.outlook ? { direction: sp.outlook.direction, source: sp.outlook.source ?? null,
+          buffs: sp.outlook.buffs, nerfs: sp.outlook.nerfs } : null
+      };
+    }
+    const artifact = {
+      kind: "frozen-forecast", date, phase: SNAPSHOT_PHASE,
+      projectionVersion: PROJECTION_VERSION, rankVersion: RANK_VERSION,
+      consensusVersion: CONSENSUS_VERSION,
+      gitSha: sha, dataSha256: hash.digest("hex"),
+      sourceDates: Object.fromEntries((sources ?? [])
+        .filter(x => x.pages?.length)
+        .map(x => [x.id, x.pages.map(pg => pg.snapshot).sort().at(-1) ?? null])),
+      cells
+    };
+    const fDir = path.join(root, "data", "forecasts");
+    await mkdir(fDir, { recursive: true });
+    frozenPath = path.join(fDir, `frozen-${date}.json`);
+    await writeFile(frozenPath, JSON.stringify(artifact, null, 2) + "\n");
+  }
+  return { outPath, frozenPath, specs: Object.keys(snap.specs).length };
 }
 
 const isMain = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
@@ -45,6 +89,7 @@ if (isMain) {
     const result = await snapshot(ROOT, dateArg || undefined, { frozen });
     console.log(`✓ snapshot → ${result.outPath} (${result.specs} specs)` +
       (frozen ? " — FROZEN: this is the forecast the report card will grade" : ""));
+    if (result.frozenPath) console.log(`✓ immutable forecast artifact → ${result.frozenPath}`);
   } catch (error) {
     console.error("✗ " + error.message);
     process.exit(1);

@@ -119,7 +119,7 @@ export function gradeSnapshot(forecast, actual, scales, { mode = "drift", specs 
   };
 
   return {
-    mode, coverage,
+    mode, coverage, ranking: rankingFor(rows),
     forecastDate: forecast.date, actualDate: actual.date,
     forecastPhase: forecast.phase ?? null, actualPhase: actual.phase ?? null,
     projectionVersion: forecast.projectionVersion ?? 1,
@@ -129,6 +129,104 @@ export function gradeSnapshot(forecast, actual, scales, { mode = "drift", specs 
     byRole: by(r => r.role ?? "unknown"),
     rows
   };
+}
+
+/* ---- Ranking metrics (2026-08-03, external audit; adopted with "grading infrastructure
+   only"). Tier accuracy rewards the trivial model: a forecast that copies the live
+   consensus forward scores near-perfectly on exact-band while predicting nothing. What
+   the site is FOR is putting the right specs near the top, so the grade must include
+   metrics that measure ordering — and they only make sense WITHIN a role, because this
+   project never ranks across role boundaries anywhere else either.
+
+   k is 5 for DPS and 3 for healers/tanks (fields of ~13/7/6 per bracket): "top five
+   healers of seven" would be a participation prize. Precision equals recall here (both
+   sets have size k), so one overlap number is reported, not two dressed as two. */
+const midranks = xs => {
+  const idx = xs.map((v, i) => [v, i]).sort((a, b) => a[0] - b[0]);
+  const out = new Array(xs.length);
+  let i = 0;
+  while (i < idx.length) {
+    let j = i;
+    while (j + 1 < idx.length && idx[j + 1][0] === idx[i][0]) j++;
+    const r = (i + j) / 2 + 1;               // ties share the midrank, same rule the
+    for (let k = i; k <= j; k++) out[idx[k][1]] = r;   // Dummy Dome percentile now uses
+    i = j + 1;
+  }
+  return out;
+};
+
+export function spearman(a, b) {
+  if (a.length !== b.length || a.length < 3) return null;
+  const ra = midranks(a), rb = midranks(b);
+  const mean = xs => xs.reduce((s, x) => s + x, 0) / xs.length;
+  const ma = mean(ra), mb = mean(rb);
+  let num = 0, da = 0, db = 0;
+  for (let i = 0; i < ra.length; i++) {
+    num += (ra[i] - ma) * (rb[i] - mb);
+    da += (ra[i] - ma) ** 2; db += (rb[i] - mb) ** 2;
+  }
+  return da && db ? +(num / Math.sqrt(da * db)).toFixed(3) : null;
+}
+
+export function ndcgAtK(rows, k) {
+  // Relevance = the settled score; order = the forecast's. Linear gains — the scores are
+  // already a calibrated 0-100 axis, and exponential gains would let one S-tier outcome
+  // dominate the whole number.
+  if (rows.length < 2) return null;
+  const kk = Math.min(k, rows.length);
+  const byForecast = [...rows].sort((x, y) => y.forecastScore - x.forecastScore);
+  const byActual = [...rows].sort((x, y) => y.actualScore - x.actualScore);
+  const dcg = list => list.slice(0, kk).reduce((s, r, i) => s + r.actualScore / Math.log2(i + 2), 0);
+  const ideal = dcg(byActual);
+  return ideal ? +(dcg(byForecast) / ideal).toFixed(3) : null;
+}
+
+export function rankingFor(rows) {
+  const scored = rows.filter(r => r.forecastScore != null && r.actualScore != null);
+  const out = {};
+  for (const bracket of BRACKETS) {
+    for (const role of ["DPS", "Healer", "Tank"]) {
+      const sub = scored.filter(r => r.bracket === bracket && r.role === role);
+      if (sub.length < 3) continue;
+      const k = role === "DPS" ? 5 : 3;
+      const actualTop = new Set([...sub].sort((x, y) => y.actualScore - x.actualScore)
+        .slice(0, k).map(r => r.spec));
+      const forecastTop = new Set([...sub].sort((x, y) => y.forecastScore - x.forecastScore)
+        .slice(0, k).map(r => r.spec));
+      const overlap = [...forecastTop].filter(x => actualTop.has(x)).length;
+      out[`${bracket}/${role}`] = {
+        n: sub.length, k,
+        spearman: spearman(sub.map(r => r.forecastScore), sub.map(r => r.actualScore)),
+        ndcg: ndcgAtK(sub, k),
+        topK: { overlap, of: k, pct: Math.round(overlap / k * 100) }
+      };
+    }
+    // Top-tier recall is band-based, so it can aggregate across roles without ranking
+    // across them: of the cells that SETTLED S or A+, how many did the forecast place there?
+    const sub = rows.filter(r => r.bracket === bracket);
+    const topActual = sub.filter(r => r.actualTier === "S" || r.actualTier === "A+");
+    if (topActual.length) {
+      const hit = topActual.filter(r => r.forecastTier === "S" || r.forecastTier === "A+").length;
+      out[`${bracket}/top-tier`] = { recall: +(hit / topActual.length).toFixed(2),
+        hit, of: topActual.length };
+    }
+  }
+  return out;
+}
+
+/* The baseline every grade is read against: a "forecast" that copies the frozen
+   snapshot's LIVE consensus forward unchanged. If the model cannot beat this on the
+   ranking metrics, the projection machinery is decoration — which is exactly the finding
+   the drift analysis already flagged as a risk, and why drift must never be a target. */
+export function carryForward(snapshot) {
+  const specs = {};
+  for (const [k, v] of Object.entries(snapshot.specs ?? {})) {
+    specs[k] = { projection: Object.fromEntries(BRACKETS.map(b => [b,
+      v.consensus?.[b] != null
+        ? { tier: v.consensus[b], score: v.scores?.[b] ?? null }
+        : null])) };
+  }
+  return { ...snapshot, specs, carryForward: true };
 }
 
 export async function loadSnapshots(root = ROOT) {
@@ -228,6 +326,33 @@ if (isMain) {
   }
   console.log("");
   console.log("  overall   ", fmt(r.overall));
+
+  /* Ranking is what the site is FOR — putting the right specs near the top — and it is
+     also the axis where the trivial model can actually lose. In grade mode the same rows
+     are graded twice: once for the model, once for a "forecast" that just carried the
+     frozen live consensus forward. If those columns look alike, the projection machinery
+     added nothing; that comparison is the entire reason the baseline exists. In drift
+     mode the baseline is skipped — the actual side IS the live consensus there, so the
+     baseline would grade near-perfect by construction and the comparison would flatter
+     nobody honestly. */
+  const rk = r.ranking ?? {};
+  if (Object.keys(rk).length) {
+    const base = r.mode === "grade"
+      ? gradeSnapshot(carryForward(forecast), actual, scales, { mode: "grade", specs }).ranking
+      : null;
+    console.log("\n  ranking (within role — ordering, not letters):");
+    for (const [key, m] of Object.entries(rk)) {
+      if (key.endsWith("/top-tier")) {
+        console.log(`    ${key.padEnd(14)} S/A+ recall ${m.recall} (${m.hit}/${m.of})`);
+        continue;
+      }
+      const b = base?.[key];
+      console.log(`    ${key.padEnd(14)} spearman ${String(m.spearman).padStart(6)} · ` +
+        `NDCG@${m.k} ${String(m.ndcg).padStart(5)} · top-${m.k} ${m.topK.overlap}/${m.topK.of}` +
+        (b ? `   vs carry-forward: ${b.spearman} / ${b.ndcg} / ${b.topK.overlap}/${b.topK.of}` : ""));
+    }
+    if (r.mode !== "grade") console.log("    (baseline comparison appears in GRADE mode only — in drift the baseline is the answer key)");
+  }
   for (const [k, v] of Object.entries(r.byBracket)) console.log(`  ${k.padEnd(10)}`, fmt(v));
   console.log();
   for (const [k, v] of Object.entries(r.byConfidence)) console.log(`  conf ${k.padEnd(11)}`, fmt(v));
