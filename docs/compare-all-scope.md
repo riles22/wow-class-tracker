@@ -1,7 +1,8 @@
 # "Compare all" — the full-roster comparison view
 
-**Status:** scoped 2026-08-02, not yet built. Queued ahead of the UI/UX pass and the
-S2 transition scope at Riley's direction.
+**Status:** BUILT 2026-08-03. Scoped 2026-08-02; shipped as the ⊞ Compare all overlay
+with three UI invariants covering it. This file is now the design record, not a queue
+item. Deltas from the scope are noted inline below.
 
 ## What it is
 
@@ -96,6 +97,19 @@ the existing `applyHash`/`writeHash` state like every other view.
   (hard rule 4: `template.html` carries zero data).
 - Not a replacement for the main grid or for Compare.
 - No CSV/clipboard export in v1.
+
+## Deltas from the scope, as built
+
+- **Fit.** Rows landed at ~19px, so 40 rows plus the two header rows need ~830px of
+  table. `max-height: calc(100vh - 205px)` clears that on a 1080p desktop; a 720p laptop
+  scrolls inside the container. "Fits on a desktop screen", as predicted — not "never
+  scrolls".
+- **Cross-role rank sorting needed a warning, not a fix.** Sorting a rank column with
+  role=All interleaves three separate within-role ladders, so three rows legitimately
+  read "#1". That is correct (ranks never crossed a role boundary) but reads as a bug, so
+  the count line says so and points at the role filter.
+- **Deep-linking deferred.** The overlay does not yet write hash state; opening it is not
+  shareable. Not required for v1 and the other two overlays behave the same way.
 
 ## Tests
 

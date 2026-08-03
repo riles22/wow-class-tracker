@@ -11,7 +11,7 @@
 -->
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-cdo/baaEoW3dQhPi1/OEcJ1ujxfg+Wc4Io7lbkmnkYI='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-aoRzdxzAS7CwGJ59oEiUbjPs0vNPkO2qRdN6PVz3A5E='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="riles22">
 <title>Curse of Ula'tek — 12.1 PTR Spec Tracker</title>
@@ -562,6 +562,38 @@
   .fmeter{height:5px; border-radius:5px; background:var(--bg-3); overflow:hidden; margin-top:4px}
   .fmeter > span{display:block; height:100%; background:linear-gradient(90deg,var(--accent),var(--accent-2))}
 
+  /* Compare all — the full-roster matrix (overlay reuses the Spec Finder shell).
+     Wider than the other overlays by necessity: ~12 columns against 40 rows. Rows are
+     sized to fit a desktop viewport without vertical scrolling, with a readability floor
+     below which the table scrolls inside its own container rather than the body. */
+  .all-panel{max-width:min(1600px, 97vw); padding:18px 16px 20px}
+  .all-hd{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin:12px 0 8px}
+  .all-count{color:var(--ink-faint); font-size:11px; font-family:var(--mono)}
+  .all-wrap{overflow:auto; max-height:calc(100vh - 205px); border:1px solid var(--edge); border-radius:8px}
+  table.alltab{border-collapse:separate; border-spacing:0; width:100%; font-size:12px}
+  table.alltab th, table.alltab td{padding:2px 7px; white-space:nowrap; border-bottom:1px solid var(--edge)}
+  table.alltab thead th{position:sticky; top:0; z-index:3; background:var(--bg-2); text-align:center;
+    font-family:var(--body); font-weight:600; font-size:11px; color:var(--ink-dim); cursor:pointer; user-select:none}
+  table.alltab thead tr.filt th{top:44px; z-index:3; cursor:default; padding:2px 4px; background:var(--bg-3)}
+  table.alltab thead th.grp{cursor:default; font-size:10px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint)}
+  table.alltab .nm{position:sticky; left:0; z-index:2; background:var(--bg-2); text-align:left; min-width:158px}
+  table.alltab thead .nm{z-index:4}
+  table.alltab tbody tr:hover .nm{background:var(--bg-3)}
+  table.alltab tbody tr{cursor:pointer}
+  table.alltab tbody tr:hover td{background:rgba(255,255,255,.03)}
+  .all-role{color:var(--ink-faint); font-size:10px; font-family:var(--mono); margin-left:5px}
+  .all-t{display:inline-block; min-width:26px; text-align:center; border-radius:4px; padding:1px 5px;
+    font-family:var(--mono); font-weight:700; font-size:11px; color:#0b0d10}
+  .all-none{color:var(--ink-faint); font-family:var(--mono)}
+  .all-rk{font-family:var(--mono); font-size:11px; text-align:center}
+  .all-rk b{color:var(--accent-2); font-weight:700}
+  .all-ours{background:rgba(120,160,255,.07)}
+  table.alltab th.all-ours{background:var(--bg-2)}
+  .all-fs{background:var(--bg-2); border:1px solid var(--edge-2); border-radius:5px; color:var(--ink);
+    font-family:var(--mono); font-size:10px; padding:2px 3px; width:100%; min-width:46px}
+  .all-sortmk{color:var(--accent-2); font-size:9px}
+  @media(max-width:900px){ .all-panel{margin:0; border-radius:0; min-height:100vh} .all-wrap{max-height:none} }
+
   /* The Ladder — ranked bar charts (overlay reuses the Spec Finder shell) */
   .ladder-panel{max-width:940px}
   .ladder-hd{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin:14px 0 4px}
@@ -686,6 +718,7 @@
     <div class="ctl"><!-- no-break pair: the two overlay CTAs always wrap together -->
       <button class="finderbtn" id="finderbtn" type="button">🧭 Find my spec</button>
       <button class="finderbtn" id="ladderbtn" type="button" style="background:linear-gradient(90deg,var(--accent-2),var(--accent))">📊 The Ladder</button>
+      <button class="finderbtn" id="allbtn" type="button" style="background:linear-gradient(90deg,var(--accent),var(--accent-2))">⊞ Compare all</button>
     </div>
   </div>
 </div>
@@ -2618,6 +2651,214 @@ function openSpecFromFinder(cls, spec){
     clearTimeout(rz);
     rz = setTimeout(()=>{ if(ov.classList.contains("open")) renderPanel(); }, 150);
   });
+})();
+
+/* ---------- Compare all — every spec against every rating and rank, one screen ----------
+   The transposed Compare (.cmp-table) caps at 3 specs because each extra spec costs
+   horizontal width. Turning it sideways inverts the scaling problem: specs become rows,
+   which are cheap, and attributes become columns, which are a fixed count.
+
+   The column collapse that makes 28 metric families tractable: ranks are ALREADY computed
+   within (role, bracket, name), so one column can be role-polymorphic — "WCL median"
+   resolves to rDPS, rDPS-tank or HPS by the row's role and shows that rank. No rank is
+   ever compared across a role boundary, because none of them ever crossed one. */
+(function(){
+  const A = { bracket:"raid", sortKey:"consensus", sortDir:-1, q:"", role:"All", filt:{} };
+  let opener = null;
+  // tierEl() keeps its own copy function-scoped; this view needs the same glyphs for the
+  // projection column's confidence dots.
+  const CONF_GLYPH = { high: "●●●", medium: "●●○", low: "●○○", "prior-only": "○○○" };
+
+  // Role-polymorphic metric columns. `names` maps role → the metric family that measures
+  // that role; null means the measurement does not exist for the role (a tank has no sim,
+  // a healer no Dummy Dome), which is a different fact from "we have not fetched it yet"
+  // and must render differently.
+  const COLS = {
+    raid: [
+      { key:"wcl", label:"WCL median", era:"live", tip:"Warcraft Logs median, Mythic raid — rDPS for DPS, tank rDPS for tanks, HPS for healers. Rank within role.",
+        names:{ DPS:"Median rDPS (Mythic, all bosses)", Tank:"Median rDPS (Mythic, all bosses, tank)", Healer:"Median HPS (Mythic, all bosses)" } },
+      { key:"archon", label:"Archon", era:"live", tip:"Archon 95th-percentile THROUGHPUT, Mythic raid (not popularity). Rank within role.",
+        names:{ DPS:"95th pct DPS (Mythic)", Tank:null, Healer:"95th pct HPS (Mythic)" } },
+      { key:"simc", label:"SimC", era:"live", tip:"SimulationCraft nightly Patchwerk DPS. DPS specs only — healers and tanks have no sim basis.",
+        names:{ DPS:"SimC nightly Patchwerk DPS", Tank:null, Healer:null } },
+      { key:"ptr", label:"PTR testing", era:"ptr", tip:"12.1 PTR raid testing score, normalized (Warcraft Logs zone 54). All roles.",
+        names:{ DPS:"12.1 PTR raid testing score (normalized)", Tank:"12.1 PTR raid testing score (normalized)", Healer:"12.1 PTR raid testing score (normalized)" } },
+      { key:"dummy", label:"Dummy Dome", era:"ptr", dummy:true, tip:"12.1 PTR Dummy Dome composite across target counts (0–100, coverage-floored). DPS specs only." }
+    ],
+    mplus: [
+      { key:"wcl", label:"WCL median", era:"live", tip:"Warcraft Logs median, M+ all dungeons — rDPS for DPS, tank rDPS for tanks, HPS for healers. Rank within role.",
+        names:{ DPS:"Median rDPS (M+, all dungeons)", Tank:"Median rDPS (M+, all dungeons, tank)", Healer:"Median HPS (M+, all dungeons)" } },
+      { key:"archon", label:"Archon score", era:"live", tip:"Archon M+ SCORE tier basis, 95th percentile. Rank within role.",
+        names:{ DPS:"M+ score (95th pct)", Tank:"M+ score (95th pct)", Healer:"M+ score (95th pct)" } },
+      { key:"murlok", label:"Murlok ceiling", era:"live", tip:"Murlok top-50 CEILING — the average rating of each spec's best 50 players. Not popularity. Rank within role.",
+        names:{ DPS:"Top-50 avg M+ rating (ceiling)", Tank:"Top-50 avg M+ rating (ceiling)", Healer:"Top-50 avg M+ rating (ceiling)" } },
+      { key:"wowmeta", label:"WoWMeta LB", era:"live", tip:"WoWMeta lower-bound 95% CI rating (Blizzard API, population-wide). Rank within role.",
+        names:{ DPS:"M+ lower-bound 95% CI rating (Blizzard API, population-wide)", Tank:"M+ lower-bound 95% CI rating (Blizzard API, population-wide)", Healer:"M+ lower-bound 95% CI rating (Blizzard API, population-wide)" } },
+      { key:"ptr", label:"PTR testing", era:"ptr", tip:"12.1 PTR M+ testing median (Warcraft Logs zone 56), by role. Rank within role.",
+        names:{ DPS:"Median rDPS (12.1 PTR M+ testing)", Tank:"Median rDPS (12.1 PTR M+ testing, tank)", Healer:"Median HPS (12.1 PTR M+ testing)" } }
+    ]
+  };
+
+  const tierCols = () => TIER_SOURCES
+    .filter(src => (src.pages||[]).some(p => p.bracket === A.bracket))
+    .filter(src => eraOk(isPtrSource(src.id) ? "ptr" : "live"));
+  const metricCols = () => COLS[A.bracket].filter(c => eraOk(c.era));
+  const showProjection = () => eraOk("ptr");
+
+  /* One cell's value + how to sort it. Tier cells sort by the scale's numeric score, never
+     alphabetically — "A+" must sit above "A" above "B+", which alphabetical ordering gets
+     wrong in both directions. Absent sorts last in either direction. */
+  function tierCell(s, src){
+    const rated = (s.ratings && s.ratings[A.bracket]) || {};
+    const tier = rated[src.id] ?? null;
+    if(tier == null){
+      const stored = Object.prototype.hasOwnProperty.call(rated, src.id);
+      return { tier:null, score:-1, tip: stored ? src.name+": listed, not yet placed (TBD upstream)" : src.name+": not rated" };
+    }
+    return { tier, score:(SCALES.scales[src.scale].values[tier] ?? 0), tip:src.name+": "+tier };
+  }
+  function rankCell(s, col){
+    if(col.dummy){
+      if(s.role !== "DPS") return { rank:null, score:-1, na:true, tip:"Dummy Dome is DPS-only — no such measurement for a "+s.role.toLowerCase() };
+      const d = s.ptrDummy;
+      if(!d || d.rank == null) return { rank:null, score:-1, tip:"Dummy Dome: pending fetch" };
+      return { rank:d.rank, of:d.of ?? null, score:-d.rank, tip:"Dummy Dome composite "+d.score+"/100 — rank #"+d.rank+(d.of?" of "+d.of:"") };
+    }
+    const name = col.names[s.role];
+    if(!name) return { rank:null, score:-1, na:true, tip:col.label+" is not measured for a "+s.role.toLowerCase() };
+    const m = (s.metrics||[]).find(x => x.bracket === A.bracket && x.name === name);
+    if(!m || m.rank == null) return { rank:null, score:-1, tip:col.label+": pending fetch" };
+    return { rank:m.rank, of:m.of, score:-m.rank, tip:name+" — rank #"+m.rank+" of "+m.of+" ("+m.value.toLocaleString()+" "+(m.unit||"")+")" };
+  }
+  const consCell = s => { const c = s.consensus && s.consensus[A.bracket];
+    return c ? { tier:c.tier, score:c.score, div:c.diverges, tip:"Consensus "+c.tier+" ("+c.score+"/100)" } : { tier:null, score:-1, tip:"No ratings yet" }; };
+  const projCell = s => { const p = s.projection && s.projection[A.bracket];
+    return p ? { tier:p.tier, score:p.score, conf:p.confidence, tip:"Our 12.1 forecast: "+p.tier+" ("+p.score+"/100, confidence "+p.confidence+") — "+p.basis }
+             : { tier:null, score:-1, tip:"No projection — nothing to project from" }; };
+
+  function cellFor(s, key){
+    if(key === "consensus") return consCell(s);
+    if(key === "projection") return projCell(s);
+    if(key.startsWith("m:")) return rankCell(s, metricCols().find(c => c.key === key.slice(2)) || {names:{}});
+    const src = TIER_SOURCES.find(x => x.id === key);
+    return src ? tierCell(s, src) : { score:-1 };
+  }
+
+  function rows(){
+    let list = SPECS.filter(s => A.role === "All" || s.role === A.role);
+    if(A.q){ const q = A.q.toLowerCase();
+      list = list.filter(s => (s.spec+" "+s.class).toLowerCase().includes(q)); }
+    // Per-column filters compose (AND). Tier columns take a minimum score; rank columns a
+    // maximum rank. A row with no value for a filtered column drops out — filtering on a
+    // measurement is an assertion that the measurement exists.
+    for(const [key, val] of Object.entries(A.filt)){
+      if(val === "" || val == null) continue;
+      list = list.filter(s => {
+        const c = cellFor(s, key);
+        if(key.startsWith("m:")) return c.rank != null && c.rank <= Number(val);
+        return c.tier != null && c.score >= Number(val);
+      });
+    }
+    return list.sort((a,b) => {
+      const d = (cellFor(b, A.sortKey).score - cellFor(a, A.sortKey).score) * (A.sortDir < 0 ? 1 : -1);
+      return d || (a.class+a.spec).localeCompare(b.class+b.spec);
+    });
+  }
+
+  function tierHtml(c){
+    if(c.tier == null) return '<span class="all-none" title="'+esc(c.tip)+'">—</span>';
+    return '<span class="tier all-t" data-t="'+esc(c.tier)+'" title="'+esc(c.tip)+'">'+esc(c.tier)+'</span>'
+      + (c.div ? '<span class="divmark" title="Sources diverge">±</span>' : '')
+      + (c.conf ? '<span class="conf" data-c="'+esc(c.conf)+'" title="Evidence strength: '+esc(c.conf)+'">'+(CONF_GLYPH[c.conf]||"")+'</span>' : '');
+  }
+  function rankHtml(c){
+    if(c.rank == null) return '<span class="all-none" title="'+esc(c.tip)+'">'+(c.na ? "·" : "—")+'</span>';
+    return '<span title="'+esc(c.tip)+'">'+(c.rank<=3?'<b>#'+c.rank+'</b>':'#'+c.rank)+'</span>';
+  }
+
+  const ov = document.createElement("div"); ov.className="finder-ov"; ov.id="all-ov"; document.body.appendChild(ov);
+
+  function render(){
+    const tcs = tierCols(), mcs = metricCols(), proj = showProjection();
+    const list = rows();
+    const mk = k => A.sortKey === k ? '<span class="all-sortmk">'+(A.sortDir<0?"▼":"▲")+'</span>' : '';
+    const tierScales = [...new Set(tcs.map(c=>c.scale))];
+    // A tier filter offers the union of every tier in play, ordered by score descending.
+    const tierOpts = [...new Set(tierScales.flatMap(sc => SCALES.scales[sc].tiers))]
+      .map(t => ({ t, v: Math.max(...tierScales.map(sc => SCALES.scales[sc].values[t] ?? -1)) }))
+      .filter(o => o.v >= 0).sort((a,b)=>b.v-a.v);
+    const tierSel = key => '<select class="all-fs" data-f="'+esc(key)+'" aria-label="Minimum tier"><option value="">all</option>'
+      + tierOpts.map(o=>'<option value="'+o.v+'"'+(String(A.filt[key])===String(o.v)?" selected":"")+'>≥'+esc(o.t)+'</option>').join("") + '</select>';
+    const rankSel = key => '<input class="all-fs" type="number" min="1" placeholder="≤#" data-f="'+esc(key)+'" aria-label="Maximum rank" value="'+esc(A.filt[key] ?? "")+'">';
+
+    const head = '<tr>'
+      + '<th class="nm" data-k="consensus">Spec</th>'
+      + tcs.map(c=>'<th data-k="'+esc(c.id)+'" title="'+esc(c.name+(isPtrSource(c.id)?" — a 12.1 PTR list, excluded from the live consensus":""))+'">'+esc(c.shortName||c.name)+mk(c.id)+'</th>').join("")
+      + '<th data-k="consensus" title="Mean of the live-era tier lists, on a shared 0–100 axis">Consensus'+mk("consensus")+'</th>'
+      + (proj ? '<th class="all-ours" data-k="projection" title="Our own 12.1 forecast — a projection, never a source">Ours: 12.1 ✦'+mk("projection")+'</th>' : '')
+      + mcs.map(c=>'<th data-k="m:'+esc(c.key)+'" title="'+esc(c.tip)+'">'+esc(c.label)+mk("m:"+c.key)+'</th>').join("")
+      + '</tr><tr class="filt"><th class="nm"><input class="all-fs" id="all-q" type="search" placeholder="filter specs…" value="'+esc(A.q)+'" aria-label="Filter specs by name"></th>'
+      + tcs.map(c=>'<th>'+tierSel(c.id)+'</th>').join("")
+      + '<th>'+tierSel("consensus")+'</th>'
+      + (proj ? '<th class="all-ours">'+tierSel("projection")+'</th>' : '')
+      + mcs.map(c=>'<th>'+rankSel("m:"+c.key)+'</th>').join("")
+      + '</tr>';
+
+    const body = list.map(s => '<tr data-cls="'+esc(s.class)+'" data-spec="'+esc(s.spec)+'">'
+      + '<td class="nm"><span style="color:'+(CLASS_COLOR[s.class]||"#888")+'">'+esc(s.spec)+'</span> '
+        + '<span class="all-role">'+esc(s.class)+' · '+esc(s.role)+'</span></td>'
+      + tcs.map(c=>'<td style="text-align:center">'+tierHtml(tierCell(s,c))+'</td>').join("")
+      + '<td style="text-align:center">'+tierHtml(consCell(s))+'</td>'
+      + (proj ? '<td class="all-ours" style="text-align:center">'+tierHtml(projCell(s))+'</td>' : '')
+      + mcs.map(c=>'<td class="all-rk">'+rankHtml(rankCell(s,c))+'</td>').join("")
+      + '</tr>').join("");
+
+    const bkt = ["raid","mplus"].map(b=>'<button data-bkt="'+b+'" aria-pressed="'+(b===A.bracket)+'">'+(b==="raid"?"Raid":"M+")+'</button>').join("");
+    const roles = ["All","DPS","Healer","Tank"].map(r=>'<button data-ar="'+r+'" aria-pressed="'+(r===A.role)+'">'+r+'</button>').join("");
+
+    ov.innerHTML = '<div class="finder-panel all-panel" role="dialog" aria-modal="true" aria-label="Compare all specs">'
+      + '<div class="finder-head"><div><h2>⊞ Compare all</h2><p>Every spec against every rating and rank, on one screen. Click a column to sort, use the row under it to filter, click a spec to open its card. Letters are tier-list opinions; <b>#numbers are measured ranks within that spec’s role</b> and are never turned into grades. <b>·</b> means no such measurement exists for that role; <b>—</b> means it exists but has not landed.</p></div>'
+      + '<button class="finder-x" id="all-close" aria-label="Close">✕</button></div>'
+      + '<div class="all-hd"><div class="seg" role="group" aria-label="Bracket" id="all-bkt">'+bkt+'</div>'
+      + '<div class="seg" role="group" aria-label="Role" id="all-role">'+roles+'</div>'
+      + '<span class="all-count">'+list.length+' of '+SPECS.length+' specs'
+        + ((A.sortKey.startsWith("m:") && A.role === "All")
+           ? ' · ranks are within-role, so each role has its own #1 — pick a role to read one ladder'
+           : '')+'</span></div>'
+      + '<div class="all-wrap"><table class="alltab"><thead>'+head+'</thead><tbody>'+body+'</tbody></table></div></div>';
+
+    ov.querySelector("#all-close").onclick = close;
+    ov.querySelectorAll("#all-bkt button").forEach(b=>b.onclick=()=>{ A.bracket=b.dataset.bkt; A.filt={}; render(); });
+    ov.querySelectorAll("#all-role button").forEach(b=>b.onclick=()=>{ A.role=b.dataset.ar; render(); });
+    ov.querySelectorAll("thead th[data-k]").forEach(th=>th.onclick=()=>{
+      const k = th.dataset.k;
+      if(A.sortKey === k) A.sortDir = -A.sortDir; else { A.sortKey = k; A.sortDir = -1; }
+      render();
+    });
+    ov.querySelectorAll(".all-fs[data-f]").forEach(el=>el.onchange=()=>{ A.filt[el.dataset.f] = el.value; render(); });
+    const q = ov.querySelector("#all-q");
+    q.oninput = ()=>{ A.q = q.value.trim(); render();
+      const n = ov.querySelector("#all-q"); if(n){ n.focus(); n.setSelectionRange(n.value.length, n.value.length); } };
+  }
+
+  function open(){ opener=document.activeElement; render(); ov.classList.add("open");
+    document.body.style.overflow="hidden"; const c=ov.querySelector("#all-close"); if(c) setTimeout(()=>c.focus(),0); }
+  function close(){ ov.classList.remove("open"); document.body.style.overflow=""; if(opener && opener.focus) opener.focus(); }
+  ov.addEventListener("click", e=>{
+    if(e.target===ov){ close(); return; }
+    const tr = e.target.closest("tbody tr");
+    if(tr) openSpecFromFinder(tr.dataset.cls, tr.dataset.spec);
+  });
+  document.addEventListener("keydown", e=>{ if(e.key==="Escape" && ov.classList.contains("open")) close(); });
+  ov.addEventListener("keydown", e=>{
+    if(e.key==="Tab" && ov.classList.contains("open")){ // focus trap, same as the other overlays
+      const f=[...ov.querySelectorAll('button, input, select, [tabindex="0"]')]; if(!f.length) return;
+      const first=f[0], last=f[f.length-1];
+      if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
+      else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
+    }
+  });
+  document.getElementById("allbtn").addEventListener("click", open);
 })();
 
 /* ---------- ambient starfield (respects reduced motion) ---------- */
