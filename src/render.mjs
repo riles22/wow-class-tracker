@@ -823,7 +823,15 @@ export function projectionFor(spec, bracket, scales, metaNotes = [], sources = [
       + (testing != null ? ` · PTR ${bracket === "raid" ? "raid-testing" : "M+ testing"} pct ${Math.round(testing)}` : "")
       + (dummy != null ? ` · Dummy Dome ${Math.round(dummy)}` : "")
       + (ptrList ? ` · ${ptrList.label} ${ptrList.tiers} (${Math.round(ptrList.score)})` : "")
-      + (dir ? ` · outlook ${dir === "up" ? "+7" : dir === "down" ? "−7" : "0"}` : "")
+      // Report the shift ACTUALLY applied. This read "+7"/"−7" from v1 through v6, which
+      // stopped being true at v5 when the magnitude began scaling with tally strength —
+      // so a spec shifted +3 published a basis claiming +7. A transparency string that
+      // states a number the model did not use is worse than no string (found 2026-08-03
+      // while answering "how are we weighting each factor?").
+      + (dir ? ` · outlook ${shift > 0 ? "+" : shift < 0 ? "−" : ""}${Math.abs(shift)}` +
+          (expertDrives ? ` (expert panel: ${expert.creators} creator${expert.creators === 1 ? "" : "s"}, no writeup)` : "") : "")
+      + (expertAdj ? ` · expert takes ${expertAdj > 0 ? "+" : "−"}${Math.abs(expertAdj)}` +
+          ` (${expert.creators} creator${expert.creators === 1 ? "" : "s"}, within-tier only)` : "")
       + (nudge ? ` · meta read ${nudge > 0 ? "+3" : "−3"} (${nudgeCreators} creators agree, within-tier only)` : "")
   };
 }
