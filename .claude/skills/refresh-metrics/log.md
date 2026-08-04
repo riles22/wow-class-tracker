@@ -3,6 +3,45 @@
 Keep the newest ~20 entries; prune older ones when appending (prose is memory, not state —
 parse counts and baselines the change detectors need live in the entries themselves).
 
+- 2026-08-04 (LOCAL run, ~14:2xZ — Opus 5; scheduled residential catch-up after the 10:37Z
+  nightly). Scope: residential-only — the five WCL rDPS cuts CI recorded `unreachable`, plus
+  the transcript queue (see watch-creators). Nothing CI already refreshed (tiers/archon/
+  murlok/wowmeta/simc/bloodmallet/mythicstats/robydoby) was re-fetched or rewritten.
+  · **ALL FIVE rDPS CUTS RESTORED; the curl finding held for the fourth consecutive run** —
+  `curl` with the XHR header recipe cleared Cloudflare on the FIRST try for all 14 URLs
+  (HTTP 200, no retries, no backoff, no challenge markers). Node `fetch()` was not attempted.
+  The GraphQL `rdps` family is still 500 upstream and was not touched — the statistics table
+  is a separate path and is what served these medians. · **Zone 46 live raid** (diff 5 / size
+  20 / part 3, `amount`, `dpstype=rdps`): DPS 27/27, tank 6/6, healer HPS 7/7, healer DPS 7/7
+  = 47 rows, parses 2,030-37,913 (raid DPS total 373,222). · **Zone 47 live M+** (diff 10 /
+  size 5 / part 1): 27 + 6 + 7 = 40 rows, parses 19,893-352,375. · **Zone 56 PTR M+**:
+  27 + 6 + 7 = 40 rows, parses 22-913 (total 5,669) — small-n as always. · **Zone 52 Dummy
+  Dome** → `spec.ptrDummy`, 27 specs: 1T 27 / 2T 18 / 3T 15 / 5T 27, parses 1-252, coverage
+  histogram {2 counts: 7 specs, 3: 7, 4: 13}. The "each spec appears twice" duplication did
+  NOT occur again (third consecutive clean run); the dedupe-on-first-occurrence guard stayed
+  in anyway. · **Zone 54 PTR raid still EMPTY upstream** (4 probes: Heroic 4/10 DPS + tank +
+  healer, Mythic 5/20 DPS — all 9.14 KB fragments, headers render, zero data rows). Per the
+  standing rule nothing was ingested and **the stored 34 rows AND that page's `snapshot` were
+  both left at 2026-07-28.** · Integer rounding applied before merge per the 08-02 precision
+  gotcha (fragment serves 2-decimal, stored convention is integer) — verified every stored
+  value is an integer post-merge. · **VERIFICATION WORTH KEEPING: the two zone-46 healer cuts
+  return identical parse counts (7,709-19,513, total 92,991) because they filter the same
+  Healers population** — that is expected, NOT evidence of fetching one table twice. The check
+  that settles it is the VALUES: HPS 160k-184k against healer-DPS 5k-33k. Confirm values, not
+  parse counts, when sanity-checking those two. · Bumped `sources.json` snapshots to 2026-08-04
+  for zones 46/47/56/52 ONLY. · 127 metric rows + 27 ptrDummy specs via apply-metrics.mjs,
+  **0 unmatched**; diff verified scoped by source — `warcraftlogs` 127 moved / 192 untouched,
+  and archon 160 / murlok 40 / mythicstats 40 / wowmeta 40 / simc 26 / robydoby 33 ALL
+  byte-identical, with metric row count 658→658 and roster 40→40. npm test 229 (210/19/0),
+  build OK 1107.4 KB, snapshot written, rebuilt after the snapshot. · **Manifest deliberately
+  NOT touched** — partial run, so its five WCL rows still read the previous night's
+  `unreachable` while the stored data is now fresh; the bounded one-day drift the local-run
+  skill describes. `check-refresh --manifest` PASSED (exit 0) rather than failing its usual
+  single line, because the nightly's `startedAt` was only ~1.9h old and inside the 12h window.
+  · **wowmeta escalation still open and now one day closer**: upstream `snapshotDate` has been
+  frozen at 2026-07-28 for eight days; its `maxAgeDays` is 8, so it breaches 2026-08-06 absent
+  an upstream run. Untouched by this run — flagged for a human, not agent-fixable.
+
 - 2026-08-02 (LOCAL run, ~14:2xZ — Opus 5; scheduled residential catch-up after the 10:37Z
   nightly, which itself was the second run of the day). Scope: residential-only — the five
   WCL rDPS cuts CI recorded `unreachable`. Nothing CI already refreshed (tiers/archon/

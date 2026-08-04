@@ -4,6 +4,74 @@ Keep the newest ~20 entries; prune older ones when appending. Machine state the 
 detectors rely on (parse counts, seen video IDs) must stay in the NEWEST entries or a
 dedicated section — narrative prose older than that is prunable memory.
 
+- 2026-08-04 (LOCAL run, ~14:2xZ — Opus 5; scheduled residential catch-up after the 10:37Z
+  nightly). **Queue drain only — no re-discovery pass**, same reasoning as the 08-01 entry:
+  the nightly had polled all 25 feeds at 12:3xZ and queued its five unresolved outputs, so
+  re-discovering ~2h later would only surface uploads too fresh for auto-captions. Queue
+  **5 → 0**; `skipped[]` unchanged at 8 — **all five distilled, none verified-skipped**.
+  yt-dlp at the pinned 2026.07.04, json3 auto-subs, 5/5 clean on the first attempt from this
+  residential IP (the impersonation warning printed on every one and is noise — subtitles
+  downloaded regardless). **8 takes + 11 metaNotes added.**
+  · **`oocq_kuo-pk`** (MadSkillzzTV, "12.1 TOP 3 Favorite & Strong Healers", 08-04, ~19 min)
+  — his testing-based top three. **4 takes**: Resto Shaman (raid lens — the S2 mini-rework:
+  Unleash Life/Earth Shield buffs, substantial Riptide buff, Healing Rain 5→6 targets, plus
+  Farseer buffs; reads it as finally worth bringing to raid, with the proc-driven tier set as
+  the downside), Pres Evoker (M+ — "most undervalued", bonkers healer DPS, gated on
+  difficulty), Holy Paladin (M+ — "absolute blaster", Holy Shock buffed + cheaper, 4-set
+  double Infusion, with his own OP-at-start-invites-nerfs caveat), Disc Priest (mixed —
+  fun and less RNG but atonement transfer under-rewards in M+; conditional on a Blizzard fix).
+  · **`Li-b-g6sXIE`** (MadSkillzzTV, "Holy Paladin Gearing for S2 & UI Setup", 08-03, 225 min)
+  — **queued as a suspected gearing-PSA; it is NOT one, do not re-triage it that way.** It is
+  a livestream VOD, but unlike the Tettles `aqe2LKeMIqQ` / Kalamazi `tfIcqmIi2o8` precedent its
+  spec content is a *sustained* segment, not one-line chat replies: an explicit speculative S2
+  M+ healer power tier list (~t=8042) plus a Holy Priest defence (~t=8400). **2 takes**, both
+  chosen precisely because they are the parts the 08-04 structured video does NOT carry:
+  Holy Priest (underrated, more than good enough after the latest 5% buff — his own reason for
+  skipping it is build preference, not power) and Resto Shaman M+ (more likely to end up meta
+  than Holy Paladin — not stronger today, but the physical melee comp looks strong and the
+  early-season OP spec eats the nerf). The rest of the stream duplicates the structured video
+  and was deliberately left undistilled.
+  · **`VQnGFOstlgU`** (Whispyr, "Atrophic is a Real Raid Buff", 08-03, ~9 min) — **1 take**,
+  Assassination Rogue (his only scoped spec). A log A/B analysis rebutting a circulating claim:
+  the 5% reduction DOES apply to environmental damage on Twin Fangs and Sszorak because that
+  damage is quietly attributed back to the boss; it fails only on named untargetable NPCs (The
+  Lost Explorers worst at ~40% unreducible); concludes Atrophic beats Devotion Aura for the
+  tier. Coda folded into the same claim: Rogue low-target cleave stays bad and the recent 10%
+  Assassination aura buff does not address it. **He also states the Subtlety/Outlaw aura
+  numbers — NOT attributed, both are outside his declared scope.**
+  · **`15eTmWfKrLc`** (YoDaTV, "General Guide for Protection Paladin in 12.1! (Mythic+)",
+  08-03, ~22 min) — **1 take**, Protection Paladin. Places it below Blood DK on current tuning
+  and significantly worse on survivability/external healing; root cause is losing Sanctified
+  Wrath plus the Reflection of Radiance nerf, so Sentinel covers ~20-25s/min against S1's
+  30-40s windows, leaving ~15s/min with no cooldown. Says it is defensively worse than S1
+  despite +10% DR. What keeps it playable is utility — near-solo interrupt coverage and the
+  one-minute Sacrifice external. His one-line "Blood DK is the strongest tank" aside was NOT
+  logged: it duplicates his own 08-02 Blood DK take.
+  · **`EqgjDKVwYow`** (izen, "12.1 PTR - Season 2 | Rumors & Chats on Popular Specs &
+  Potential Meta Picks", 08-03, ~16 min) — generalCreators, so **metaNotes only, 11 added**,
+  all `Season 2 PTR — M+ outlook`: Windwalker +(rising physical-damage melee pick, tier set
+  pushes SCK over RSK 120/60, but squishiest DPS and flat AoE), Mistweaver −(folding under
+  repeated nerfs as Holy Pal/Resto Sham are buffed), Holy Paladin +(all-purpose meta-comp
+  healer), Resto Shaman +(melee-comp healer of choice for mastery/windfury), Blood DK +(tank
+  meta settled; the paladin pairing supplies its missing DR), Balance +(wins the last
+  caster slot ~80/20 on versatility + a second combat res), Elemental ~(slightly higher raw
+  damage but its raid buffs are dead weight in a caster comp), Marksmanship −(>10% nerf and
+  no caster-comp synergy), Arcane +(locked in), Devourer +(second locked-in caster pick),
+  Brewmaster −(fallen off). **Arms Warrior deliberately NOT logged** — his only mention is
+  the "filthy melee" joke excluding it from caster comps, which is too light to overwrite the
+  substantive 08-01 positive read.
+  · **Supersede pass**: 7 takes + 11 metaNotes retired, all same-creator/same-spec/same-lens.
+  Note the two-lens split on MadSkillzz Resto Shaman — the new 08-04 raid take retired his
+  07-29 raid take, and the new 08-03 M+ take retired his 08-01 M+ take; they coexist because
+  they are different lenses, exactly as the guardrail intends.
+  · **Whispyr NOT superseded, on purpose** — his 07-21/07-22 takes are Apex-talent/build reads
+  from the 07-21 tuning pass; the new one is raid utility + cleave profile. Different subject,
+  so retiring them would be over-superseding. That does leave **3 live Whispyr Assassination
+  takes** — flagging for a human in case the drawer feels crowded.
+  · **Specialist `latest` fields left alone** (YoDaTV's still reads 07-30). Only izen's is
+  routinely maintained and the nightly already advanced it to `EqgjDKVwYow`; changing registry
+  fields on an ungated local run is not worth the drift. npm test 229 (210/19/0), build OK.
+
 - 2026-08-01 (LOCAL run, ~14:1xZ — Opus 5; scheduled residential catch-up after the 10:37Z
   nightly). **Queue drain only — no re-discovery pass.** The nightly had already polled all
   25 transcribable feeds today (25/25) and its sole unresolved output was one queued video;
