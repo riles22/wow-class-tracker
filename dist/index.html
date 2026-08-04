@@ -15,9 +15,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="riles22">
 <title>Curse of Ula'tek — 12.1 PTR Spec Tracker</title>
-<!-- Favicon as an inline data URI: the site is one self-contained file, so the icon
-     ships inside it — nothing extra to host on Pages, works from file:// too. -->
-<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="88">⚔️</text></svg>'>
+<!-- The brand mark, as favicon: Ula'tek's serpent coiled into an S — the patch's
+     villain drawn as the letter that means "top tier". Site gold on the site's dark
+     violet, so the tab matches the page. Shipped as an inline data URI because the site
+     is one self-contained file: nothing extra to host on Pages, works from file:// too.
+     The same artwork renders inline in the masthead (.brandmark). -->
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22><rect x=%222%22 y=%222%22 width=%2260%22 height=%2260%22 rx=%2214%22 fill=%22%23130B22%22 stroke=%22%23B57BEE%22 stroke-opacity=%22.45%22 stroke-width=%222.5%22/><path d=%22M44.5 18.5 C42 12.5 36.5 10.5 31.5 10.5 C23.5 10.5 18 14.8 18 20.5 C18 26.6 24.5 29 32 32 C39.5 35 46 37.4 46 43.5 C46 49.5 40.5 53.5 32.5 53.5 C26.8 53.5 21.5 51.4 19.5 46.5%22 fill=%22none%22 stroke=%22%23F0C24B%22 stroke-width=%228.6%22 stroke-linecap=%22round%22/><circle cx=%2244.8%22 cy=%2217.6%22 r=%225.7%22 fill=%22%23F0C24B%22/><circle cx=%2246.6%22 cy=%2216.2%22 r=%221.5%22 fill=%22%23130B22%22/></svg>'>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- Fonts load async from the main script (CSP-safe, no inline handler) so first paint
@@ -60,6 +63,8 @@
   /* ---------- header ---------- */
   .masthead{position:relative; overflow:hidden; border-bottom:1px solid var(--edge)}
   .starfield{position:absolute; inset:0; pointer-events:none; opacity:.7}
+  .brandmark{width:34px; height:34px; vertical-align:-5px; margin-right:11px}
+  @media(max-width:560px){ .brandmark{width:26px; height:26px; vertical-align:-4px; margin-right:8px} }
   .masthead-inner{position:relative; max-width:1120px; margin:0 auto; padding:34px 20px 26px}
   .eyebrow{
     font-family:var(--mono); font-size:11px; letter-spacing:.28em; text-transform:uppercase;
@@ -643,7 +648,7 @@
   <canvas class="starfield" id="stars" aria-hidden="true"></canvas>
   <div class="masthead-inner">
     <p class="eyebrow">WoW Midnight · Patch 12.1 PTR</p>
-    <h1 class="title"><span class="curse">Curse of Ula'tek</span> — Spec Tracker</h1>
+    <h1 class="title"><svg class="brandmark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#130B22" stroke="#B57BEE" stroke-opacity=".45" stroke-width="2.5"/><path d="M44.5 18.5 C42 12.5 36.5 10.5 31.5 10.5 C23.5 10.5 18 14.8 18 20.5 C18 26.6 24.5 29 32 32 C39.5 35 46 37.4 46 43.5 C46 49.5 40.5 53.5 32.5 53.5 C26.8 53.5 21.5 51.4 19.5 46.5" fill="none" stroke="#F0C24B" stroke-width="8.6" stroke-linecap="round"/><circle cx="44.8" cy="17.6" r="5.7" fill="#F0C24B"/><circle cx="46.6" cy="16.2" r="1.5" fill="#130B22"/></svg><span class="curse">Curse of Ula'tek</span> — Spec Tracker</h1>
     <div class="rule"></div>
     <!-- One sentence of lede; the mental model folds. This paragraph ran five lines and
          was ~40% of a 329px masthead sitting directly above a page people check daily. -->
