@@ -98,6 +98,17 @@ const ui = (name, fn, hash = "") => test(name, skipOpts, async t => {
 
 test.after(async () => { if (browser) await browser.close(); });
 
+/* Drive the View control for any source id. The rebrand replaced the per-source
+   buttons with a select (consensus and projection keep buttons), so tests select tier
+   sources the way a user now does — through the dropdown, firing the same change event. */
+const pickSource = (page, id) => page.evaluate(id => {
+  const btn = document.querySelector(`#srcseg button[data-source="${id}"]`);
+  if (btn) { btn.click(); return; }
+  const sel = document.getElementById("srcsel");
+  sel.value = id;
+  sel.dispatchEvent(new Event("change", { bubbles: true }));
+}, id);
+
 /* Read the two tier letters of one spec's row, by spec name + class (names repeat:
    there are two Frosts). */
 const tiersOf = (page, cls, spec) => page.evaluate(([cls, spec]) => {
@@ -115,7 +126,7 @@ ui("every source view renders that source's OWN ratings", async page => {
 
   let checked = 0;
   for (const id of sources) {
-    await page.evaluate(id => document.querySelector(`#srcseg button[data-source="${id}"]`).click(), id);
+    await pickSource(page, id);
     await page.waitForTimeout(120);
     // Assert PER SOURCE, PER BRACKET, against whatever that source actually rates.
     // Sources legitimately differ in coverage — WoWMeta ranks M+ only (its raid pages
@@ -546,7 +557,7 @@ ui("an era-gated PTR tier list shows its own 12.1 letters and is unreachable in 
   assert.ok(subject, "expected at least one spec rated by the PTR list");
 
   // 1. In the default (Both) era it behaves like any other source view: its OWN letters.
-  await page.evaluate(id => document.querySelector(`#srcseg button[data-source="${id}"]`).click(), ptr.id);
+  await pickSource(page, ptr.id);
   await page.waitForTimeout(120);
   const [raid, mplus] = await tiersOf(page, subject.class, subject.spec);
   assert.equal(mplus, subject.ratings.mplus[ptr.id], "M+ column shows the PTR list's letter");
@@ -567,11 +578,13 @@ ui("an era-gated PTR tier list shows its own 12.1 letters and is unreachable in 
   await page.evaluate(() => document.querySelector('#eraseg button[data-era="live"]').click());
   await page.waitForTimeout(150);
   const gate = await page.evaluate(id => ({
-    disabled: document.querySelector(`#srcseg button[data-source="${id}"]`).disabled,
-    pressedSource: document.querySelector('#srcseg button[aria-pressed="true"]')?.dataset.source ?? null
+    disabled: document.querySelector(`#srcsel option[value="${id}"]`).disabled,
+    pressedSource: document.querySelector('#srcseg button[aria-pressed="true"]')?.dataset.source ?? null,
+    selValue: document.getElementById("srcsel").value
   }), ptr.id);
-  assert.equal(gate.disabled, true, "the PTR source button is disabled in the 12.0.7 view");
+  assert.equal(gate.disabled, true, "the PTR source OPTION is disabled in the 12.0.7 view");
   assert.equal(gate.pressedSource, "consensus", "the view falls back to consensus, not a blank grid");
+  assert.equal(gate.selValue, "", "…and the select resets to its placeholder");
   const [, backToConsensus] = await tiersOf(page, subject.class, subject.spec);
   assert.equal(backToConsensus, subject.consensus.mplus.tier, "the grid now shows the live consensus");
 
@@ -615,7 +628,7 @@ ui("the 12.1 forecast column shows its evidence strength, and only there", async
   assert.ok(weak > 0, "expected some thinly-evidenced forecasts to be marked");
 
   // A fetched source's letters are NOT ours to caveat — no marker outside the forecast.
-  await page.evaluate(() => document.querySelector('#srcseg button[data-source="icyveins"]').click());
+  await pickSource(page, "icyveins");
   await page.waitForTimeout(150);
   assert.equal(await page.evaluate(() => document.querySelectorAll("#matrix .conf").length), 0,
     "confidence must not appear over a source's own ratings");
