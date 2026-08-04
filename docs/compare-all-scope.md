@@ -108,8 +108,10 @@ the existing `applyHash`/`writeHash` state like every other view.
   role=All interleaves three separate within-role ladders, so three rows legitimately
   read "#1". That is correct (ranks never crossed a role boundary) but reads as a bug, so
   the count line says so and points at the role filter.
-- **Deep-linking deferred.** The overlay does not yet write hash state; opening it is not
-  shareable. Not required for v1 and the other two overlays behave the same way.
+- **Deep-linking: SHIPPED in the UI/UX pass** (2026-08-03, v2 below) for all three
+  overlays at once — `view=all|ladder|finder` plus short per-overlay params (bracket,
+  role, sort for this view). Exploration state (search text, per-column filters) stays
+  out of the URL deliberately: a link is a destination, not a session recording.
 
 ## v2 (2026-08-03, Riley's field report)
 

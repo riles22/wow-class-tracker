@@ -11,7 +11,7 @@
 -->
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-bjuAXLWVkWK6nIWeICpPNNRC3DdbzJMVa6PlyzmCZQA='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-tSTlWbP5T1aPnWoBFR4DVv3iaPfQLZkdlx1FYT3Htg8='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="riles22">
 <title>Curse of Ula'tek — 12.1 PTR Spec Tracker</title>
@@ -890,6 +890,20 @@ const STARS = (() => {
 const saveStars = () => { try { localStorage.setItem("wct-stars", JSON.stringify([...STARS])); } catch {} };
 const slugOf = s => `${s.class} ${s.spec}`.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 let hashSpec = null;   // slug of the most recently opened drawer — mirrored into the URL
+/* Overlay deep-linking (UI/UX pass, 2026-08-03). The three overlays — Finder, Ladder,
+   Compare all — kept their state private, so an open overlay was unshareable: the one
+   thing a "look at this table" link needs. Each overlay registers here with
+   { isOpen, params, openFromHash }; writeHash serializes the open one into `view` (+ its
+   own short params), and a shared link restores it. Registration happens AFTER the boot
+   block runs (the IIFEs sit later in the file), so boot stashes the pending view and each
+   IIFE claims it on registration — ordering solved by handshake, not by moving code. */
+const OV_REG = {};
+let PENDING_VIEW = null, PENDING_PARAMS = null;
+function claimPendingView(name){
+  if(PENDING_VIEW !== name || !OV_REG[name]) return;
+  const params = PENDING_PARAMS; PENDING_VIEW = null; PENDING_PARAMS = null;
+  OV_REG[name].openFromHash(params);
+}
 let applyingHash = false;
 const HASH_KEYS = { src:"source", era:"era", role:"role", ptr:"ptrOnly", star:"starOnly", sort:"sort", q:"q", fight:"fight" };
 function writeHash(){
@@ -900,6 +914,13 @@ function writeHash(){
     if(v !== STATE_DEFAULTS[sk]) p.set(k, typeof v === "boolean" ? "1" : v);
   }
   if(hashSpec) p.set("spec", hashSpec);
+  for(const [name, o] of Object.entries(OV_REG)){
+    if(!o.isOpen()) continue;
+    p.set("view", name);
+    const extra = o.params ? o.params() : null;
+    if(extra) for(const [k, v] of Object.entries(extra)) if(v != null && v !== "") p.set(k, String(v));
+    break; // overlays are modal — at most one is open
+  }
   // Pinned compare set travels in the URL too, so a comparison is shareable (L14).
   if(typeof COMPARE !== "undefined" && COMPARE.size){
     const slugs = [...COMPARE].map(k=>{ const s = SPECS.find(x=>`${x.class}|${x.spec}`===k); return s?slugOf(s):null; }).filter(Boolean);
@@ -924,6 +945,7 @@ function applyHash(){
     cmp.split(",").forEach(slug=>{ const s = SPECS.find(x=>slugOf(x)===slug);
       if(s && COMPARE.size < 3) COMPARE.add(`${s.class}|${s.spec}`); });
   }
+  if(p.get("view")){ PENDING_VIEW = p.get("view"); PENDING_PARAMS = p; }
   return p.get("spec"); // slug to open after first render (null if none)
 }
 
@@ -1225,9 +1247,19 @@ function drawerHTML(s){
        <p class="d-summary">${p.theme?`<span class="theme">${esc(p.theme)}</span><br>`:""}${esc(p.summary)}${draftSrcHTML(p)}</p>
        ${signalHTML}<p class="d-h">Key changes</p>
        <ul class="d-list">${(p.changes||[]).map(c=>`<li>${esc(c)}</li>`).join("")}</ul>` : showPtr ? `
-       <p class="d-summary"><span class="theme">No 12.1 PTR writeup yet</span><br>${state.era==="ptr"
-         ? "Only PTR-era numbers are shown in this view — switch Era to Both for the 12.0.7 baseline alongside."
-         : "Current-season baseline below — the PTR read gets added to data/specs.json when this spec's pass lands."}</p>${signalHTML}` : `
+       <p class="d-summary"><span class="theme">No 12.1 PTR writeup yet</span><br>${(()=>{
+         // "Pending fetch" implied nothing was known, which was false for every one of
+         // these specs: they all carry cited creator takes, and since v7 the takes'
+         // corroboration-weighted aggregate steers the 12.1 outlook above. Say what IS
+         // known and where it sits instead of apologising for what isn't.
+         const tk = CREATOR_TAKES.filter(t=>t.class===s.class && t.spec===s.spec && !t.superseded && takeEra(t)==="ptr").length;
+         const takesNote = tk
+           ? `No theorycrafter has published a distilled 12.1 read for this spec — but ${tk} cited creator take${tk===1?"":"s"} cover${tk===1?"s":""} it (right column), and their corroboration-weighted aggregate steers the 12.1 outlook above.`
+           : "No 12.1 analysis has surfaced for this spec yet — no writeup, no creator takes.";
+         return state.era==="ptr"
+           ? takesNote + " Only PTR-era numbers are shown in this view — switch Era to Both for the 12.0.7 baseline alongside."
+           : takesNote;
+       })()}</p>${signalHTML}` : `
        <p class="d-summary"><span class="theme">12.0.7 baseline view</span><br>Live-season data only — switch Era to 12.1 PTR (or Both) for the change read.</p>${signalHTML}`;
   const tierset = showPtr ? tierSetHTML(s) : "";
   // Inner content only — the .drawer shell is emitted empty by rowHTML and filled lazily
@@ -2429,8 +2461,8 @@ function openSpecFromFinder(cls, spec){
     if(scroll) box.scrollIntoView({ behavior:"smooth", block:"nearest" });
   }
   let opener=null;
-  function open(){ opener=document.activeElement; renderPanel(); ov.classList.add("open"); document.body.style.overflow="hidden"; const c=ov.querySelector("#finder-close"); if(c) setTimeout(()=>c.focus(),0); }
-  function close(){ ov.classList.remove("open"); document.body.style.overflow=""; if(opener && opener.focus) opener.focus(); }
+  function open(){ opener=document.activeElement; renderPanel(); ov.classList.add("open"); document.body.style.overflow="hidden"; writeHash(); const c=ov.querySelector("#finder-close"); if(c) setTimeout(()=>c.focus(),0); }
+  function close(){ ov.classList.remove("open"); document.body.style.overflow=""; writeHash(); if(opener && opener.focus) opener.focus(); }
   ov.addEventListener("click", e => { if(e.target===ov) close(); });
   ov.addEventListener("keydown", e => { // focus trap — keep Tab inside the modal
     if(e.key!=="Tab" || !ov.classList.contains("open")) return;
@@ -2441,6 +2473,9 @@ function openSpecFromFinder(cls, spec){
   });
   document.addEventListener("keydown", e => { if(e.key==="Escape" && ov.classList.contains("open")) close(); });
   document.getElementById("finderbtn").addEventListener("click", open);
+  OV_REG.finder = { isOpen: ()=>ov.classList.contains("open"),
+    openFromHash: ()=>{ open(); writeHash(); } };
+  claimPendingView("finder");
 })();
 
 /* ================================================================
@@ -2622,9 +2657,9 @@ function openSpecFromFinder(cls, spec){
       <div id="ladder-chart">${cur?caption(cur)+drawLadder(cur):`<p class="ladder-cap">No series for this scope.</p>`}</div>
     </div>`;
     ov.querySelector("#ladder-close").onclick = close;
-    ov.querySelectorAll("#ladder-bkt button").forEach(b=>b.onclick=()=>{ L.bracket=b.dataset.bkt; renderPanel("bkt"); });
-    ov.querySelectorAll("#ladder-role button").forEach(b=>b.onclick=()=>{ L.role=b.dataset.lr; renderPanel("role"); });
-    ov.querySelectorAll(".lgrp .fopt").forEach(b=>b.onclick=()=>{ L.seriesKey=b.dataset.key; renderPanel("series"); });
+    ov.querySelectorAll("#ladder-bkt button").forEach(b=>b.onclick=()=>{ L.bracket=b.dataset.bkt; renderPanel("bkt"); writeHash(); });
+    ov.querySelectorAll("#ladder-role button").forEach(b=>b.onclick=()=>{ L.role=b.dataset.lr; renderPanel("role"); writeHash(); });
+    ov.querySelectorAll(".lgrp .fopt").forEach(b=>b.onclick=()=>{ L.seriesKey=b.dataset.key; renderPanel("series"); writeHash(); });
     const sb = ov.querySelector("#ladder-search");
     sb.oninput = ()=>{ L.query = sb.value.trim(); applyDim(); };
     applyDim(); // re-apply a persisted highlight to the freshly drawn chart
@@ -2633,8 +2668,8 @@ function openSpecFromFinder(cls, spec){
   }
 
   const ov = document.createElement("div"); ov.className="finder-ov"; ov.id="ladder-ov"; document.body.appendChild(ov);
-  function open(){ opener=document.activeElement; L.role = (state.role==="All"?"DPS":state.role); renderPanel(); ov.classList.add("open"); document.body.style.overflow="hidden"; const c=ov.querySelector("#ladder-close"); if(c) setTimeout(()=>c.focus(),0); }
-  function close(){ ov.classList.remove("open"); document.body.style.overflow=""; if(opener && opener.focus) opener.focus(); }
+  function open(){ opener=document.activeElement; L.role = (state.role==="All"?"DPS":state.role); renderPanel(); ov.classList.add("open"); document.body.style.overflow="hidden"; writeHash(); const c=ov.querySelector("#ladder-close"); if(c) setTimeout(()=>c.focus(),0); }
+  function close(){ ov.classList.remove("open"); document.body.style.overflow=""; writeHash(); if(opener && opener.focus) opener.focus(); }
   ov.addEventListener("click", e=>{ const g=e.target.closest(".ladderrow"); if(g){ openSpecFromFinder(g.dataset.cls,g.dataset.spec); return; } if(e.target===ov) close(); });
   ov.addEventListener("keydown", e=>{
     if(e.key==="Enter"||e.key===" "){ const g=e.target.closest&&e.target.closest(".ladderrow"); if(g){ e.preventDefault(); openSpecFromFinder(g.dataset.cls,g.dataset.spec); return; } }
@@ -2647,6 +2682,21 @@ function openSpecFromFinder(cls, spec){
   });
   document.addEventListener("keydown", e=>{ if(e.key==="Escape" && ov.classList.contains("open")) close(); });
   document.getElementById("ladderbtn").addEventListener("click", open);
+  OV_REG.ladder = {
+    isOpen: ()=>ov.classList.contains("open"),
+    params: ()=>({ lb: L.bracket, lr: L.role, ls: L.seriesKey }),
+    openFromHash: p => {
+      open();
+      if(p){
+        if(["raid","mplus"].includes(p.get("lb"))) L.bracket = p.get("lb");
+        if(["DPS","Healer","Tank"].includes(p.get("lr"))) L.role = p.get("lr");
+        if(p.get("ls")) L.seriesKey = p.get("ls"); // renderPanel falls back if unknown
+        renderPanel();
+      }
+      writeHash();
+    }
+  };
+  claimPendingView("ladder");
   // Geometry is measured at draw time, so an open panel must redraw when the width
   // changes (rotation, window drag) or it keeps the previous width's layout.
   let rz = 0;
@@ -2892,11 +2942,14 @@ function openSpecFromFinder(cls, spec){
     const q = ov.querySelector("#all-q");
     q.oninput = ()=>{ A.q = q.value.trim(); render();
       const n = ov.querySelector("#all-q"); if(n){ n.focus(); n.setSelectionRange(n.value.length, n.value.length); } };
+    // Mirror bracket/role/sort into the URL while open (q and per-column filters are
+    // deliberately not link state — they are exploration, not a destination).
+    if(ov.classList.contains("open")) writeHash();
   }
 
   function open(){ opener=document.activeElement; render(); ov.classList.add("open");
-    document.body.style.overflow="hidden"; const c=ov.querySelector("#all-close"); if(c) setTimeout(()=>c.focus(),0); }
-  function close(){ ov.classList.remove("open"); document.body.style.overflow=""; if(opener && opener.focus) opener.focus(); }
+    document.body.style.overflow="hidden"; writeHash(); const c=ov.querySelector("#all-close"); if(c) setTimeout(()=>c.focus(),0); }
+  function close(){ ov.classList.remove("open"); document.body.style.overflow=""; writeHash(); if(opener && opener.focus) opener.focus(); }
   ov.addEventListener("click", e=>{
     if(e.target===ov){ close(); return; }
     const tr = e.target.closest("tbody tr");
@@ -2912,6 +2965,31 @@ function openSpecFromFinder(cls, spec){
     }
   });
   document.getElementById("allbtn").addEventListener("click", open);
+  OV_REG.all = {
+    isOpen: ()=>ov.classList.contains("open"),
+    // Only non-defaults travel, so a plain open stays a short URL.
+    params: ()=>({
+      ab: A.bracket !== "raid" ? A.bracket : null,
+      ar: A.role !== "All" ? A.role : null,
+      ak: A.sortKey !== "consensus" ? A.sortKey : null,
+      ad: A.sortDir !== -1 ? "1" : null
+    }),
+    openFromHash: p => {
+      if(p){
+        if(["raid","mplus"].includes(p.get("ab"))) A.bracket = p.get("ab");
+        if(["All","DPS","Healer","Tank"].includes(p.get("ar"))) A.role = p.get("ar");
+        const ak = p.get("ak");
+        // A sort key must resolve to a real column in the restored bracket, else the
+        // default — a link must never restore a sort the table cannot draw.
+        if(ak && (ak === "consensus" || ak === "projection"
+            || TIER_SOURCES.some(x => x.id === ak)
+            || (ak.startsWith("m:") && COLS[A.bracket].some(c => "m:"+c.key === ak)))) A.sortKey = ak;
+        if(p.get("ad") === "1") A.sortDir = 1;
+      }
+      open(); writeHash();
+    }
+  };
+  claimPendingView("all");
 })();
 
 /* ---------- ambient starfield (respects reduced motion) ---------- */
