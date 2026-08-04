@@ -15,12 +15,20 @@
      as its own artifact BEFORE the agent runs; WCL manifest rows are cross-checked
      against it, so the agent can neither fabricate a WCL "success" nor tamper with
      the evidence the gate reads.
+   - published-evidence/evidence.json — written by the deterministic published-date
+     step (src/fetch-published.mjs, docs/published-gate-scope.md) BEFORE the agent
+     runs: what each published-bearing registry page says about its own update date.
+     Stored `published` values are cross-checked against it, so a stale re-read can
+     no longer claim success unchallenged (the 08-02 icyveins-ptr incident).
 
    Modes (CLI):
      node src/check-refresh.mjs --manifest [--now=ISO] [--ack=REASON] [--wcl-evidence=PATH]
+                                [--published-evidence=PATH]
          Nightly publish gate. Fails (exit 1) on: missing/duplicate manifest rows,
          missing/implausible startedAt, unexplained skips, "success" claims the stored
-         data dates or the WCL fetch evidence contradict, row-count floor breaches, a
+         data dates or the WCL fetch evidence contradict, a stored `published` that
+         contradicts the published-date evidence or regresses vs HEAD,
+         row-count floor breaches, a
          >maxRowDropPct row loss vs the last committed state (HEAD), or
          mass tier movement without a TRUSTED ack. The trusted ack comes ONLY from
          --ack= or the ANOMALY_ACK env var (in CI: a human-supplied workflow_dispatch
@@ -33,7 +41,9 @@
          (full-timestamp precision via manifest.startedAt; date-grain fallback for
          date-only signals) or any required source's stored data exceeds its
          maxAgeDays — regardless of whether the staleness was explained (an alert,
-         not blame). Prints a stable `fingerprint=` line (sorted violation keys) so
+         not blame) — or a page's own published date exceeds its published.maxAgeDays
+         (lag-class half of the published gate; the dishonesty-class half lives in
+         --manifest). Prints a stable `fingerprint=` line (sorted violation keys) so
          the heartbeat workflow can comment only on state transitions. */
 
 import { readFile } from "node:fs/promises";
@@ -243,6 +253,69 @@ export function checkManifest(config, manifest, data, now, evidence = null) {
   return { errors, degraded, notes };
 }
 
+/* --- page self-date integrity gate (docs/published-gate-scope.md, 2026-08-04) ------
+   `snapshot` (when WE fetched) is cross-checked by checkManifest; `published` (what the
+   PAGE states about itself) was gated by nothing — which is how the 08-02 icyveins-ptr
+   rebuild went unseen for two days while the manifest claimed success and repeated a
+   stale published date. Severity split by class (owner decision, in the scope doc):
+     · MISMATCH — stored published ≠ what the deterministic pre-agent fetch saw on the
+       page — is dishonesty-class RED, both directions: stored-older is the incident,
+       stored-newer is an overclaim or the practically empty mid-run race (upstream
+       rebuilds Sundays ~12:00 UTC, the nightly runs 10:37), which self-heals next night.
+     · REGRESSION — a published date moving backwards vs the last committed state — is
+       dishonesty-class RED needing no evidence (a page cannot un-publish).
+     · STALENESS past published.maxAgeDays is lag-class and lives in checkFreshness (the
+       heartbeat), not here.
+   Our own fetch failing is never red: an unresolved evidence entry degrades the
+   cross-check to ratchet + threshold, stated aloud — the same rule the WCL evidence
+   follows. Missing evidence entirely (local runs) is a printed note. */
+export function checkPublished(config, data, prevSources = null, evidence = null, now = null) {
+  const errors = [], degraded = [], notes = [];
+  const reqs = (config.requirements ?? []).filter(r => r.published);
+  if (!reqs.length) return { errors, degraded, notes };
+  let evidenceOk = false;
+  if (evidence) {
+    const eDate = dateOf(evidence.attemptedAt);
+    if (!ISO_DATE.test(eDate) || (now != null && Math.abs(ageDays(dateOf(now), eDate)) > 1)) {
+      errors.push(`published evidence: attemptedAt ${JSON.stringify(evidence.attemptedAt ?? null)} is not from this run — stale or malformed evidence must not vouch for anything`);
+    } else evidenceOk = true;
+    for (const p of evidence.problems ?? []) errors.push(`published evidence: config problem recorded by the fetch step — ${p}`);
+  } else {
+    notes.push("no published-date evidence — cross-check skipped (expected for local runs); the regression ratchet and staleness threshold still apply");
+  }
+  for (const req of reqs) {
+    if (req.date?.type !== "pages") {
+      errors.push(`published gate: "${req.key}" has a published block but its date probe is not pages-typed — the gate has no pages to read (config bug)`);
+      continue;
+    }
+    const pages = matchPages(req.date, data.sources);
+    const withPub = pages.filter(p => p.published);
+    if (!withPub.length) {
+      errors.push(`published gate: "${req.key}" has a published block but none of its ${pages.length} registry pages carries a published field — a gate pointed at nothing is a config bug`);
+      continue;
+    }
+    const prevPages = prevSources ? matchPages(req.date, prevSources) : null;
+    for (const page of withPub) {
+      const label = `"${req.key}" page ${page.url ?? `${page.bracket ?? "?"}/${page.role ?? "?"}`}`;
+      const prev = prevPages?.find(q => q.url === page.url);
+      if (prev?.published && page.published < prev.published) {
+        errors.push(`published gate: ${label} regressed ${prev.published} → ${page.published} — a page cannot un-publish; a stale re-read must not overwrite a newer stored date`);
+      }
+      if (!evidenceOk) continue;
+      const e = (evidence.pages ?? []).find(x => x.url === page.url);
+      if (!e) { notes.push(`published evidence: no entry for ${label} — cross-check skipped for this page`); continue; }
+      if (e.resolved == null) {
+        degraded.push(`published evidence: ${label} unresolved (${e.note ?? `http ${e.httpStatus ?? "?"}`}) — cross-check degraded to the regression ratchet + staleness threshold`);
+      } else if (page.published !== e.resolved) {
+        errors.push(`published gate: ${label} stores published ${page.published} but the page itself says ${e.resolved} (deterministic pre-agent fetch) — re-read the page and store what it states`);
+      } else if (e.note) {
+        notes.push(`published evidence: ${label} — ${e.note}`);
+      }
+    }
+  }
+  return { errors, degraded, notes };
+}
+
 /* Baseline-relative shrink guard (re-audit 2026-07-14): the absolute floors (rows.min,
    ~60-65% of real counts) catch catastrophic collapse but tolerate a ~35-40% silent
    loss. Comparing against the last COMMITTED state (HEAD — by construction a state
@@ -415,6 +488,25 @@ export function checkFreshness(config, manifest, data, now) {
     if (date == null) { violations.push(`${req.key}: no dated state at all`); keys.push(req.key); }
     else if (age > req.maxAgeDays) { violations.push(`${req.key} (${req.label}) is ${age} days stale — max ${req.maxAgeDays}d`); keys.push(req.key); }
   }
+  /* Page self-date staleness (docs/published-gate-scope.md): lag-class — the page's own
+     published date exceeding its threshold means an upstream cycle was likely missed
+     unseen (the incident shape) or upstream has genuinely gone quiet; either way a
+     human look is due. The maxAgeDays sweep above measures OUR fetch cadence via
+     snapshot; this one measures the PAGE's claim about itself. Distinct fingerprint
+     key so the alert issue reads which of the two it is. Oldest page, matching
+     probeDate's pages rule: a lagging page is the finding. */
+  for (const req of config.requirements) {
+    if (req.published?.maxAgeDays == null || req.date?.type !== "pages") continue;
+    const pubs = matchPages(req.date, data.sources).map(p => p.published).filter(Boolean).sort();
+    const oldest = pubs[0] ?? null;
+    const age = oldest ? ageDays(nowDate, oldest) : null;
+    report.push(`${req.key} published: ${oldest ?? "no published state"}${age != null ? ` (${age}d, max ${req.published.maxAgeDays}d)` : ""}`);
+    if (oldest == null) { violations.push(`${req.key}: a published gate is configured but no page carries a published date`); keys.push(`${req.key}-published`); }
+    else if (age > req.published.maxAgeDays) {
+      violations.push(`${req.key} (${req.label}) page self-date ${oldest} is ${age} days old (max ${req.published.maxAgeDays}d) — the page has likely rebuilt unseen, or upstream went quiet; check it`);
+      keys.push(`${req.key}-published`);
+    }
+  }
   return { violations, report, fingerprint: [...new Set(keys)].sort().join(",") };
 }
 
@@ -504,12 +596,22 @@ if (isMain) {
     const gitShow = f => new Promise(res =>
       execFile("git", ["-C", root, "show", `HEAD:${f}`], { maxBuffer: 64 * 1024 * 1024 },
         (err, out) => res(err ? null : out)));
-    let prevData = null;
+    let prevData = null, prevSources = null;
     try {
-      const [prevSpecs, prevEnc] = await Promise.all([gitShow("data/specs.json"), gitShow("data/encounter-tiers.json")]);
+      const [prevSpecs, prevEnc, prevSrc] = await Promise.all(
+        [gitShow("data/specs.json"), gitShow("data/encounter-tiers.json"), gitShow("data/sources.json")]);
       if (prevSpecs) prevData = { specs: JSON.parse(prevSpecs), encounterTiers: prevEnc ? JSON.parse(prevEnc) : null };
+      if (prevSrc) { const s = JSON.parse(prevSrc); prevSources = s.sources ?? s; }
     } catch { prevData = null; }
     if (!prevData) console.log("  note: no HEAD baseline readable — row-drop and value-move guards skipped");
+    // Published-date evidence: written by src/fetch-published.mjs pre-agent; in CI the
+    // publish job downloads the artifact to published-evidence/. Absent for local runs.
+    const pubEvidencePath = args.find(a => a.startsWith("--published-evidence="))?.slice(21)
+      ?? process.env.PUBLISHED_EVIDENCE ?? "published-evidence/evidence.json";
+    const pubEvidence = await readJson(pubEvidencePath).catch(() => null);
+    const pub = checkPublished(config, data, prevSources, pubEvidence, now);
+    for (const d of pub.degraded) console.log("  degraded: " + d);
+    for (const n of pub.notes) console.log("  note: " + n);
     const drop = checkRowDrop(config, data, prevData);
     // Human-only ack, distinct from the tier one: a reviewed recipe change (e.g. the
     // 2026-07-23 Archon fix, which rescaled two whole families the next night) is exactly
@@ -519,7 +621,7 @@ if (isMain) {
     // Show what was waived. An ack that prints only a count asks a human to approve a set
     // they were never shown — `acked` was computed and then dropped on the floor.
     for (const f of vals.acked ?? []) console.log("    waived by value ack: " + f);
-    failures.push(...m.errors, ...a.errors, ...drop.errors, ...vals.errors);
+    failures.push(...m.errors, ...a.errors, ...pub.errors, ...drop.errors, ...vals.errors);
     for (const d of m.degraded) console.log("  degraded: " + d);
     for (const n of [...m.notes, ...a.notes]) console.log("  note: " + n);
     if (!m.errors.length) console.log(`  movement vs ${baseline?.date ?? "—"}: ${a.total} tier moves (${a.twoBand} of ≥2 bands)`);

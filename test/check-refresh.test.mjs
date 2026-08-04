@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
-import { checkManifest, checkFreshness, checkAnomaly, checkRowDrop, checkValueMove, probeDate, probeRows, ageDays } from "../src/check-refresh.mjs";
+import { checkManifest, checkFreshness, checkAnomaly, checkRowDrop, checkValueMove, checkPublished, probeDate, probeRows, ageDays } from "../src/check-refresh.mjs";
 
 /* Small synthetic world: one tier-list source (two pages), one metrics source, one
    probe-less feed requirement — enough to exercise every gate rule without the repo's
@@ -582,4 +582,88 @@ test("age gate: once flipped, the check goes quiet forever", async () => {
   const src = await readFile(new URL("../src/check-refresh.mjs", import.meta.url), "utf8");
   assert.match(src, /SNAPSHOT_PHASE === "12\.1-ptr" && dateOf\(nowDate\) > PHASE_FLIP_DUE/,
     "the gate must test the phase VALUE, so flipping it silences the check permanently");
+});
+
+/* ---------- the published-date gate (docs/published-gate-scope.md, 2026-08-04) ---------- */
+
+const pubConfig = { requirements: [
+  { key: "gated", label: "Gated tiers", maxAgeDays: 4,
+    published: { maxAgeDays: 9 },
+    date: { type: "pages", sourceId: "gated" } }
+] };
+const pubData = (published = "2026-08-02", snapshot = "2026-08-04") => ({
+  sources: [{ id: "gated", pages: [
+    { bracket: "mplus", role: "DPS", url: "https://example.com/dps", snapshot, published }
+  ] }],
+  specs: [], encounterTiers: null
+});
+const pubEvidence = (resolved = "2026-08-02", extra = {}) => ({
+  attemptedAt: "2026-08-04T10:38:00Z",
+  pages: [{ key: "gated", url: "https://example.com/dps", httpStatus: 200,
+    dateModified: resolved, lastUpdated: resolved, resolved, ...extra }]
+});
+
+test("published gate: a stored date the page contradicts fails red, both directions", () => {
+  // The incident direction: stored stale, page moved on.
+  const stale = checkPublished(pubConfig, pubData("2026-07-26"), null, pubEvidence("2026-08-02"), "2026-08-04");
+  assert.equal(stale.errors.length, 1);
+  assert.match(stale.errors[0], /stores published 2026-07-26 but the page itself says 2026-08-02/);
+  // The other direction is an overclaim (or the practically-empty mid-run race) — also red.
+  const over = checkPublished(pubConfig, pubData("2026-08-03"), null, pubEvidence("2026-08-02"), "2026-08-04");
+  assert.equal(over.errors.length, 1);
+  // Agreement is clean.
+  const ok = checkPublished(pubConfig, pubData("2026-08-02"), null, pubEvidence("2026-08-02"), "2026-08-04");
+  assert.deepEqual(ok.errors, []);
+});
+
+test("published gate: a date regressing vs the committed state is red with no evidence needed", () => {
+  const prevSources = pubData("2026-08-02").sources;
+  const r = checkPublished(pubConfig, pubData("2026-07-26"), prevSources, null, "2026-08-04");
+  assert.equal(r.errors.length, 1);
+  assert.match(r.errors[0], /regressed 2026-08-02 → 2026-07-26/);
+  // Advancing (or holding) against the committed state is fine without evidence.
+  const fwd = checkPublished(pubConfig, pubData("2026-08-02"), pubData("2026-07-26").sources, null, "2026-08-04");
+  assert.deepEqual(fwd.errors, []);
+  assert.ok(fwd.notes.some(n => n.includes("no published-date evidence")), "the skipped cross-check is stated");
+});
+
+test("published gate: our own fetch failing degrades, never red — and stale evidence vouches for nothing", () => {
+  const unresolved = checkPublished(pubConfig, pubData("2026-07-26"), null,
+    pubEvidence(null, { resolved: null, note: "http 503" }), "2026-08-04");
+  assert.deepEqual(unresolved.errors, [], "an unreachable page must not fail the night");
+  assert.equal(unresolved.degraded.length, 1);
+  assert.match(unresolved.degraded[0], /degraded to the regression ratchet/);
+  // Evidence from another day cannot vouch — that IS an error (mirrors the WCL rule).
+  const old = checkPublished(pubConfig, pubData("2026-08-02"), null,
+    { ...pubEvidence("2026-08-02"), attemptedAt: "2026-07-30T10:38:00Z" }, "2026-08-04");
+  assert.ok(old.errors.some(e => e.includes("not from this run")));
+});
+
+test("published gate: a gate pointed at nothing is a config bug, not a silent pass", () => {
+  const noPub = { sources: [{ id: "gated", pages: [{ bracket: "mplus", url: "https://example.com/dps", snapshot: "2026-08-04" }] }], specs: [], encounterTiers: null };
+  const r = checkPublished(pubConfig, noPub, null, null, "2026-08-04");
+  assert.equal(r.errors.length, 1);
+  assert.match(r.errors[0], /none of its 1 registry pages carries a published field/);
+  const badProbe = { requirements: [{ key: "x", published: { maxAgeDays: 9 }, date: { type: "metrics", source: "x" } }] };
+  assert.match(checkPublished(badProbe, noPub, null, null, "2026-08-04").errors[0], /not pages-typed/);
+  // Config problems recorded by the fetch step itself surface as errors too.
+  const withProblems = checkPublished(pubConfig, pubData(), null,
+    { ...pubEvidence(), problems: ["\"x\" page has no url to fetch"] }, "2026-08-04");
+  assert.ok(withProblems.errors.some(e => e.includes("config problem recorded by the fetch step")));
+});
+
+test("published staleness is the heartbeat's half, with its own fingerprint key", () => {
+  const cfg = { ...config, requirements: [...config.requirements, pubConfig.requirements[0]] };
+  const data = (published) => ({ ...freshData(), sources: [...freshData().sources, pubData(published).sources[0]] });
+  // 2 days old at a 9-day threshold: quiet.
+  const quiet = checkFreshness(cfg, goodManifest(), data("2026-07-12"), "2026-07-14");
+  assert.ok(!quiet.violations.some(v => v.includes("page self-date")));
+  assert.ok(quiet.report.some(r => r.includes("gated published: 2026-07-12 (2d, max 9d)")), "the sweep reports even when quiet");
+  // 10 days old: alarm, keyed distinctly from the snapshot-based age.
+  const stale = checkFreshness(cfg, goodManifest(), data("2026-07-04"), "2026-07-14");
+  assert.ok(stale.violations.some(v => v.includes("page self-date 2026-07-04 is 10 days old")));
+  assert.ok(stale.fingerprint.split(",").includes("gated-published"));
+  // A configured gate with no published field anywhere is a violation here too.
+  const none = checkFreshness(cfg, goodManifest(), data(null), "2026-07-14");
+  assert.ok(none.violations.some(v => v.includes("no page carries a published date")));
 });

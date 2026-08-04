@@ -25,7 +25,7 @@ and hidden entirely in the 12.0.7-only era view.
 
 | Source | Scale | Lens | Cadence | Notes |
 |---|---|---|---|---|
-| **Icy Veins (12.1 PTR)** | S/A+/A/B+/B/C | Forward PTR read — throughput + group-added value (utility, survivability, mobility, sustain) | rebuilt weekly on stream (Sun 14:00 CEST), then published | **M+ only** — no PTR raid list exists, so the raid column is an honest dash. Full 40-spec coverage; specs the authors have not placed are **TBD upstream → stored as explicit `null`**, never guessed. |
+| **Icy Veins (12.1 PTR)** | S+/S/A+/A/B+/B/C (S+ added upstream 2026-08-02) | Forward PTR read — throughput + group-added value (utility, survivability, mobility, sustain) | rebuilt weekly on stream (Sun 14:00 CEST), then published | **M+ only** — no PTR raid list exists, so the raid column is an honest dash. Full 40-spec coverage; specs the authors have not placed are **TBD upstream → stored as explicit `null`**, never guessed. |
 
 Three things about it are load-bearing:
 
@@ -43,12 +43,16 @@ Three things about it are load-bearing:
   not landed. It enters the projection at the lightest weight for the same reason it is
   valuable: it is one outlet's subjective forward read.
 
-**Known gap:** the refresh contract's `pages` date probe reads the agent-written
-`snapshot`, not the page's own `published` date. Because this list rebuilds only weekly,
-`published` legitimately trails `snapshot` by up to 7 days — so a nightly that keeps
-fetching successfully after Icy Veins *stops* updating the list would look fresh
-indefinitely. That is the WoWMeta failure mode in a new key; `page.published` is recorded
-on every page so a future probe can close it.
+**Gap CLOSED (2026-08-04, docs/published-gate-scope.md):** the refresh contract's
+`pages` date probe reads the agent-written `snapshot`, not the page's own `published`
+date — and the predicted failure happened in reverse: the nightly kept *claiming* a
+stale `published` for four runs while the page had rebuilt (02 Aug "Update #4", missed
+for two days). The gate now has two halves: a deterministic pre-agent step
+(`src/fetch-published.mjs`) records what each published-bearing page says about itself
+and the publish gate fails red the same night a stored `published` contradicts it or
+regresses; and the heartbeat alarms once `published` exceeds the contract's
+`published.maxAgeDays` (9 for this list — one weekly cycle + slack), which covers the
+original "upstream goes quiet while fetches stay green" shape too.
 
 ### Not a source: the "Ours: 12.1" projection
 The tracker also renders its OWN computed 12.1 forecast (projection lane). It is deliberately absent from this inventory: it fetches nothing, feeds nothing — it derives from the sources above (live consensus + WCL PTR testing + Dummy Dome + the era-gated PTR tier list + outlook + cited meta reads) and is labeled, styled, and era-gated as a projection everywhere it appears. See CLAUDE.md → "Computed at build time."
