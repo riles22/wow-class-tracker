@@ -1,6 +1,28 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
-  "videos": [],
+  "videos": [
+    {
+      "id": "SQyKJx6FEVA",
+      "creator": "AutomaticJak",
+      "title": "Season 2 PTR RAID Healer Tier List",
+      "published": "2026-08-04",
+      "queuedAt": "2026-08-04"
+    },
+    {
+      "id": "0D5cRjmmfqM",
+      "creator": "Obli",
+      "title": "Rider Frost DK PUMPS! / Den of Nalorakk +15 / Midnight Season 2 PTR",
+      "published": "2026-08-04",
+      "queuedAt": "2026-08-04"
+    },
+    {
+      "id": "e7V3tCBr6as",
+      "creator": "Shadarek",
+      "title": "Havoc & Devourer DH | Season 2 Bonus Roll Information",
+      "published": "2026-08-04",
+      "queuedAt": "2026-08-04"
+    }
+  ],
   "skipped": [
     {
       "id": "DnYoCpImTZw",
