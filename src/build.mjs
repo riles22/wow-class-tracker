@@ -49,6 +49,13 @@ export async function build(root = ROOT) {
   await mkdir(path.join(root, "dist"), { recursive: true });
   const outPath = path.join(root, "dist", "index.html");
   await writeFile(outPath, html);
+  // The gearing subproject builds its own self-contained page (gearing/README.md);
+  // publishing means copying that artifact alongside index.html so Pages serves it at
+  // /gearing.html. Copy-if-present: a checkout without gearing/ still builds the tracker.
+  try {
+    const gearing = await readFile(path.join(root, "gearing", "wow-s2-gearing.html"));
+    await writeFile(path.join(root, "dist", "gearing.html"), gearing);
+  } catch { /* no gearing artifact in this tree — tracker-only build */ }
   return {
     outPath,
     specCount: payload.meta.specCount,

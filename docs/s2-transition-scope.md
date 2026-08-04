@@ -115,14 +115,43 @@ stay in specs.json as history either way — this is a rendering sunset, not a d
 - **Writeups age into context**: `ptr` writeups described the S1→S2 change; they stay
   in the drawer as "the 12.1 read" history until creators' S2 content replaces the
   qualitative layer take-by-take (watch-creators keeps running; takes now live-era).
-- **The gearing lane** ⚑ **DECISION 4 (Riley, 2026-08-04): stubbed in scope, built
-  after the report card.** The direction is locked now; nothing is built during the
-  transition. The stub: a per-spec "Gearing" drawer section is the landing surface;
-  candidate sources are the sim lane we already hold (Bloodmallet — target-count sims
-  exist per spec) extended toward trinket/BiS data (Raidbots-style published sims,
-  Wowhead BiS guide pages — both already on or adjacent to the host allowlist), under
-  the same honesty rules as everything else: sims are numbers with provenance, never
-  editorial "best" claims of ours. Design doc comes after S2 settles.
+- **The gearing lane** ⚑ **DECISION 4, superseded same day.** The original decision
+  ("stub it, build after the report card") was made before Riley revealed the gearing
+  project already EXISTS — a standalone Season 2 gear & loot explorer imported as the
+  `s2-gearing` branch and merged into `gearing/` (2026-08-04, audited below). The stub
+  became an integration plan:
+
+  **Audit verdict (2026-08-04, pre-merge review): healthy.** Pipeline green end to end —
+  its validator (134 checked failure modes, pinned SimC commit + sha256-verified sim
+  artifacts, source URLs on every catalyst fact), 10/10 tests including a client-boot
+  test, and a 1.6MB fully-offline build with zero external requests at runtime. Its
+  ground rules are the tracker's own culture arrived at independently: nothing inferred,
+  curated-vs-scraped separation with provenance headers, refuse-on-unexplained-changes
+  harvest gates, provisional data labeled as such in the UI. Coupling is read-only in
+  the right direction (its harvest-specs reads the tracker's specs.json, never writes).
+
+  **Known gaps, tracked not blocking:** (a) stat priorities are 12.0.7 proxies until
+  12.1 guides publish — the UI discloses it; (b) harvests are manual and Wowhead is
+  unreachable from CI, so data freshness is a LOCAL-RUN duty with no gate yet —
+  post-launch it needs a re-harvest (items get tuned at launch) and eventually a
+  required-sources-style freshness row; (c) no CSP in its HTML (the tracker build
+  injects one — parity is Phase B); (d) gearing/data/specs.json is generated from the
+  tracker's and committed — drift is possible if the tracker's roster data changes
+  without a re-harvest.
+
+  **Phased integration:**
+  - **A (with the merge, DONE):** `gearing/` lands in-repo; `npm run build` copies its
+    artifact to `dist/gearing.html` (copy-if-present), Pages serves it at /gearing.html;
+    the tracker's CTA row links to it (⚙ S2 Gearing); its tests join `npm test`
+    (`node --test` discovers them — suite went 229 → 239). The nightly cannot touch it:
+    publish stages explicit paths and the agent artifact never included gearing/.
+  - **B (transition window):** brand alignment (the tier-bars mark, shared palette),
+    CSP parity, a per-spec Gearing drawer link from the tracker into the explorer's
+    anchors, and the launch re-harvest (owner/local-run).
+  - **C (after the report card):** deeper data integration per the original stub —
+    whether gearing signals (sim deltas, BiS availability) inform any tracker surface,
+    a freshness contract row, possible nightly participation if a CI-reachable harvest
+    path exists. Design doc then.
 
 ## Phase 3 — the 12.2 cycle (repeatability)
 
