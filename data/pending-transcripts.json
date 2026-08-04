@@ -1,6 +1,42 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
-  "videos": [],
+  "videos": [
+    {
+      "id": "oocq_kuo-pk",
+      "creator": "MadSkillzzTV",
+      "title": "12.1 TOP 3 Favorite & Strong Healers | *NEW* Main? | Midnight Season 2",
+      "published": "2026-08-04",
+      "queuedAt": "2026-08-04"
+    },
+    {
+      "id": "EqgjDKVwYow",
+      "creator": "izen (Izenhart)",
+      "title": "12.1 PTR - Season 2 | Rumors & Chats on Popular Specs & Potential Meta Picks",
+      "published": "2026-08-03",
+      "queuedAt": "2026-08-04"
+    },
+    {
+      "id": "15eTmWfKrLc",
+      "creator": "YoDaTV",
+      "title": "General Guide for Protection Paladin in 12.1! (Mythic+)",
+      "published": "2026-08-03",
+      "queuedAt": "2026-08-04"
+    },
+    {
+      "id": "Li-b-g6sXIE",
+      "creator": "MadSkillzzTV",
+      "title": "Holy Paladin Gearing for S2 & UI Setup | *NEW* !UI",
+      "published": "2026-08-03",
+      "queuedAt": "2026-08-04"
+    },
+    {
+      "id": "VQnGFOstlgU",
+      "creator": "Whispyr",
+      "title": "Atrophic is a Real Raid Buff (Sorry Zorthas)",
+      "published": "2026-08-03",
+      "queuedAt": "2026-08-04"
+    }
+  ],
   "skipped": [
     {
       "id": "DnYoCpImTZw",
