@@ -132,19 +132,6 @@ export function dummyDomeScores(specs) {
   const dps = specs.filter(s => dummyMeasurable(s) && s.ptrDummy?.targets && Object.keys(s.ptrDummy.targets).length);
   if (!dps.length) return specs;
   const allCounts = [...new Set(dps.flatMap(s => Object.keys(s.ptrDummy.targets)))].sort((a, b) => a - b);
-  const fieldByCount = new Map(
-    allCounts.map(c => [c, dps.map(s => s.ptrDummy.targets[c]).filter(v => typeof v === "number")])
-  );
-  /* Tie-aware MIDRANK (2026-08-03, external audit). The old form counted only strictly
-     lower values, so an all-tied field mapped every spec to 0 — the bottom of the scale —
-     while ranking them all #1. Half credit for ties puts a fully tied field at 0.5
-     (everyone at the median, which is what a tie means) and leaves an untied field alone. */
-  const pct = (arr, v) => {
-    if (arr.length < 2 || typeof v !== "number") return null;
-    const below = arr.filter(x => x < v).length;
-    const tied = arr.filter(x => x === v).length - 1; // exclude self
-    return (below + 0.5 * Math.max(0, tied)) / (arr.length - 1);
-  };
   /* SAMPLE-SIZE FLOOR (2026-08-03, external audit). Every ordinary metric loses its rank
      below MIN_RANK_N parses, but this composite had no such guard: it gated only on how
      many target COUNTS a spec logged, so a count backed by two parses counted the same as
@@ -161,6 +148,32 @@ export function dummyDomeScores(specs) {
       x.name === `Median raw DPS (12.1 PTR Dummy Dome, ${count}T)`);
     return m?.n == null || m.n >= MIN_RANK_N; // unknown n stays in; a KNOWN thin cut drops out
   };
+  /* The REFERENCE FIELD contains only cuts that clear the floor (rank v3, 2026-08-04
+     external audit). The floor above kept a thin cut out of its OWN composite but left
+     its value in everyone else's denominator, so a two-parse median still depressed or
+     inflated every other spec's percentile — removing the thin observations moved all 10
+     scored composites. A thin cut is now judged against the clean field but is not part
+     of it; a spec with an unknown n stays in, same as the floor itself. */
+  const fieldByCount = new Map(
+    allCounts.map(c => [c, dps.filter(s => enoughParses(s, c))
+      .map(s => s.ptrDummy.targets[c]).filter(v => typeof v === "number")])
+  );
+  /* Tie-aware MIDRANK (2026-08-03, external audit). The old form counted only strictly
+     lower values, so an all-tied field mapped every spec to 0 — the bottom of the scale —
+     while ranking them all #1. Half credit for ties puts a fully tied field at 0.5
+     (everyone at the median, which is what a tie means) and leaves an untied field alone.
+     `ownIncluded` says whether v is a member of arr: a clean cut compares against the
+     other n−1 values (self excluded from below/tied), while a thin cut compares against
+     all n clean values it is not among — without the flag a thin value above the whole
+     field would score n/(n−1) > 100%. */
+  const pct = (arr, v, ownIncluded = true) => {
+    if (arr.length < 2 || typeof v !== "number") return null;
+    const others = arr.length - (ownIncluded ? 1 : 0);
+    if (others < 1) return null;
+    const below = arr.filter(x => x < v).length;
+    const tied = arr.filter(x => x === v).length - (ownIncluded ? 1 : 0);
+    return (below + 0.5 * Math.max(0, tied)) / others;
+  };
   // Coverage floor: a spec earns a headline composite + rank only if it logged all but at
   // most one target count. Specs log dummies non-randomly (their favorable counts), so
   // averaging over only-logged counts lets omission inflate a spec — a spec that logged just
@@ -174,12 +187,13 @@ export function dummyDomeScores(specs) {
     const ps = [];
     const thin = [];
     for (const c of allCounts) {
-      const p = pct(fieldByCount.get(c), s.ptrDummy.targets[c]);
+      const clean = enoughParses(s, c);
+      const p = pct(fieldByCount.get(c), s.ptrDummy.targets[c], clean);
       if (p == null) continue;
       perCount[c] = Math.round(p * 100);
-      // A thin cut still DISPLAYS — it is honest against its own field — but does not vote
-      // in the headline composite.
-      if (enoughParses(s, c)) ps.push(p); else thin.push(Number(c));
+      // A thin cut still DISPLAYS — judged against the clean field — but does not vote
+      // in the headline composite and is not part of anyone's denominator.
+      if (clean) ps.push(p); else thin.push(Number(c));
     }
     const coverage = { have: ps.length, of: allCounts.length,
       ...(thin.length ? { thin } : {}) };
@@ -405,13 +419,33 @@ export function specBuildChanges(spec, ptrBuilds) {
 export const EXPERT_SHRINK = 2;
 export const EXPERT_MIN = 0.15; // below this the read is too weak/split to set a direction
 
-export function expertRead(spec, takes = []) {
+/* Bracket scope for one take (v8, 2026-08-04 external audit). A creator ranking healers
+   for M+ keys is not commenting on raid — yet the v7 read pooled every take into both
+   brackets, so Mistweaver's raid forecast was moved by three M+-tier-list nerf reads
+   (33 of the 99 live PTR takes are M+-scoped, 7 raid-scoped). Same precedence as the
+   metaNotes nudge, same regexes, same field: an explicit `bracket` on the take wins;
+   otherwise the patchContext text decides; a context naming neither applies to both
+   (a "Season 2 review" is a whole-spec read). Scoping reads patchContext — where the
+   take CAME from — not the claim text, which can name a bracket incidentally. */
+const takeInBracket = (t, bracket) => {
+  if (bracket == null) return true; // unscoped call: the whole-spec arrow
+  if (t.bracket === "raid" || t.bracket === "mplus") return t.bracket === bracket;
+  if (t.bracket === "both") return true;
+  const pc = String(t.patchContext ?? "");
+  const mentionsRaid = /\braid\b/i.test(pc);
+  const mentionsMplus = /m\+|mythic\s*plus|dungeon|keystone|\bkeys?\b/i.test(pc);
+  if (!mentionsRaid && !mentionsMplus) return true;
+  return bracket === "raid" ? mentionsRaid : mentionsMplus;
+};
+
+export function expertRead(spec, takes = [], bracket = null) {
   const mine = (takes ?? []).filter(t =>
     t.class === spec.class && t.spec === spec.spec && !t.superseded &&
     // Same era test the drawer uses: keyed on the CURRENT phase's marker (PHASES.ptr),
     // never a bare "PTR" substring — after launch, "12.1 PTR" takes describe the live
     // season, and only the NEXT cycle's marker reads as future-era again.
-    PHASES.ptr != null && String(t.patchContext ?? "").includes(PHASES.ptr.marker));
+    PHASES.ptr != null && String(t.patchContext ?? "").includes(PHASES.ptr.marker) &&
+    takeInBracket(t, bracket));
   if (!mine.length) return null;
   const byCreator = new Map();
   for (const t of mine) {
@@ -529,7 +563,7 @@ export function outlookFor(spec, ptrBuilds, takes = []) {
      nudge = newest general-creator meta note for the spec: positive +3 · negative −3
      score = clamp(base + shift + nudge, 0, 100) → tier via the same consensus bands.
    Confidence = independent PTR signals present (testing, dummy, external PTR tier list,
-   writeup/tuning outlook) as a RATIO of the signals OBTAINABLE for that spec and bracket:
+   writeup/tuning outlook, specialist takes) as a RATIO of the signals OBTAINABLE for that spec and bracket:
    all → high · more than half → medium · any → low · none → prior-only (live baseline, no
    PTR evidence). Obtainable is not four for everyone — Dummy Dome is DPS-only and no PTR
    raid tier list exists — which is the whole reason it is a ratio; see the block at the
@@ -609,14 +643,36 @@ export function outlookFor(spec, ptrBuilds, takes = []) {
           · writeup present → the expert consensus ADJUSTS the score within its band
             (±4 at the cap), like the meta nudge and bounded for the same reason.
         Prior/empirical/PTR-list weights, the verdict's ±7 and the meta nudge's ±3 are
-        all unchanged. Not one series with v6. */
+        all unchanged. Not one series with v6.
+   v8 — 2026-08-04 (external audit of v7). Three input corrections, no new weights:
+          · the expert read is BRACKET-SCOPED in the projection (explicit take.bracket
+            wins, else the same patchContext heuristic the meta nudge uses; a context
+            naming neither bracket applies to both). 33 of the 99 live PTR takes are
+            M+-scoped and were moving raid forecasts — Mistweaver's raid score carried
+            a −2 built from three M+-tier-list reads. The whole-spec ARROW (outlookFor)
+            stays unscoped; the per-bracket ladder is re-derived in projectionFor.
+          · the Dummy Dome reference field excludes sub-MIN_RANK_N cuts (rank v3) — a
+            thin cut was already refused a vote in its own composite but still sat in
+            every other spec's percentile denominator. The dummy INPUT to the empirical
+            term changes value for every scored spec.
+          · the specialist-take lane counts in the confidence signals (numerator AND
+            denominator). v7 let the expert adjustment move a score while "prior-only"
+            claimed no PTR evidence existed — 5 cells published exactly that
+            contradiction. When the panel drives the direction it fills the outlook
+            slot's place instead (never counted twice).
+        Not one series with v7. */
 export { PHASES };
-export const PROJECTION_VERSION = 7;
+export const PROJECTION_VERSION = 8;
 
 /* Rank-map version, stamped beside it. `snapshotStateOf().ranks` feeds movement
    comparison, and its meaning changed in the same commit as PROJECTION_VERSION v2:
    ties now share a rank, and rows below MIN_RANK_N carry no rank at all (so they are
    absent from the map rather than present with a misleading number).
+   v3 — 2026-08-04: the Dummy Dome composite recomputed against a reference field that
+   excludes sub-MIN_RANK_N cuts (see dummyDomeScores), so every dummy score/rank moved
+   definitionally at once. Metric ranks themselves are unchanged, but the marker covers
+   the ranks+dummy section as one unit — one boundary refresh loses metric-rank arrows
+   too, the documented degrade-don't-reject cost.
 
    These markers are LOAD-BEARING, not documentation. A diff across a version boundary
    narrates definitional change as if it were real movement, so the readers below refuse
@@ -630,7 +686,7 @@ export const PROJECTION_VERSION = 7;
    baseline at all and silence real consensus movement — the opposite failure, and worse,
    because it is silent. So a cross-version baseline is still chosen and still narrates
    consensus; only the rank, dummy and projection arrows fall away. */
-export const RANK_VERSION = 2;
+export const RANK_VERSION = 3;
 
 /* Consensus-composition version. Consensus SCORES are source-derived, not formula-derived
    (see historySeries), so this is deliberately NOT a formula marker like the two above and
@@ -708,7 +764,7 @@ export function ptrTierRead(spec, bracket, sources, scales) {
     label: parts.length === 1 ? parts[0].label : `${parts.length} PTR lists`
   };
 }
-export function projectionFor(spec, bracket, scales, metaNotes = [], sources = []) {
+export function projectionFor(spec, bracket, scales, metaNotes = [], sources = [], takes = []) {
   const prior = spec.consensus?.[bracket]?.score ?? null;
   const testing = bracket === "raid"
     ? rankPct(spec, "raid", "12.1 PTR raid testing score (normalized)")
@@ -733,7 +789,27 @@ export function projectionFor(spec, bracket, scales, metaNotes = [], sources = [
   const sharedPublisherPct = (twin && ptrList && prior != null && ratedLive)
     ? Math.round(((0.55 / totalW) / ratedLive + (0.25 / totalW)) * 100)
     : null;
-  const dir = spec.outlook?.direction ?? null;
+  const outlook = spec.outlook ?? null;
+  const verdict = spec.ptr?.verdict ?? null;
+  /* (v8) The expert read is BRACKET-SCOPED here (2026-08-04 external audit): the outlook
+     ARROW stays a whole-spec read (outlookFor, unscoped — one arrow per spec is the
+     display contract), but the projection is a per-bracket forecast, and pooling every
+     take into both brackets let three M+-tier-list nerf reads move Mistweaver's RAID
+     score. The per-bracket ladder below mirrors outlookFor's — verdict > expert > tally —
+     re-derived with the scoped panel, so a spec whose takes are all M+-scoped can be
+     expert-driven in one bracket and tally-driven in the other. */
+  const expert = outlook ? expertRead(spec, takes, bracket) : null;
+  const expertDrives = !verdict && expert != null && Math.abs(expert.shrunk) >= EXPERT_MIN;
+  const bal = (outlook?.buffs ?? 0) - (outlook?.nerfs ?? 0);
+  let dir = null;
+  if (verdict) dir = outlook?.direction ?? null; // the verdict won the ladder; same both brackets
+  else if (expertDrives) dir = expert.shrunk > 0 ? "up" : "down";
+  // The whole-spec arrow is only re-derived when it came from the lane being re-scoped:
+  // an expert-driven arrow whose scoped panel is too weak for THIS bracket falls back to
+  // the tally, exactly as outlookFor's ladder would have without the panel.
+  else if (outlook && outlook.source !== "expert") dir = outlook.direction;
+  else if (outlook) dir = bal > 0 ? "up" : bal < 0 ? "down"
+    : (outlook.buffs || outlook.nerfs || outlook.builds) ? "flat" : null;
   /* Outlook shift, v5. Two defects the 2026-08-02 audit measured, both fixed here.
 
      (C) An UNDATED verdict may not drive the shift. Validation already requires
@@ -755,16 +831,13 @@ export function projectionFor(spec, bracket, scales, metaNotes = [], sources = [
      one line or five: Elemental Shaman lost a full band on a single nerf line while
      Guardian's 4/0 was worth exactly the same. A dated verdict still earns the full 7 —
      it is a theorycrafter's whole-spec read, not a line count. */
-  const bal = (spec.outlook?.buffs ?? 0) - (spec.outlook?.nerfs ?? 0);
-  const datedVerdict = !!spec.ptr?.verdict && !!spec.ptr?.asOf;
-  const shiftDir = datedVerdict || !spec.ptr?.verdict ? dir : null; // undated verdict → no shift
+  const datedVerdict = !!verdict && !!spec.ptr?.asOf;
+  const shiftDir = datedVerdict || !verdict ? dir : null; // undated verdict → no shift
   /* (v7) When the expert panel set the direction, it also sets the magnitude — scaled by
      the same corroboration-shrunk strength, so one take moves less than five agreeing
      ones. The ceiling is deliberately below a dated verdict's flat 7: a realistic maximum
      panel (8 unanimous creators → shrunk .80) reaches 6, so no amount of take volume ever
      outranks a theorycrafter who sat down and wrote the spec up. */
-  const expert = spec.outlook?.expert ?? null;
-  const expertDrives = spec.outlook?.source === "expert";
   const mag = datedVerdict ? 7
     : expertDrives ? Math.min(7, Math.round(2 + 5 * Math.abs(expert.shrunk)))
     : Math.min(7, 3 + 2 * Math.max(0, Math.abs(bal) - 1));
@@ -870,9 +943,19 @@ export function projectionFor(spec, bracket, scales, metaNotes = [], sources = [
      tallied as a present signal — the model declining to trust a read while simultaneously
      citing it as evidence of being well-evidenced. Using shiftDir keeps a DATED "flat"
      verdict as evidence (a real read that happens to point nowhere) and drops only the
-     ones the model itself rejected. 38 of 80 cells fall one confidence band. */
-  const signals = (testing != null ? 1 : 0) + (dummy != null ? 1 : 0) + (shiftDir != null ? 1 : 0)
-    + (ptrList ? 1 : 0);
+     ones the model itself rejected. 38 of 80 cells fall one confidence band.
+
+     The EXPERT lane is its own signal type (v8, 2026-08-04 external audit). v7 let the
+     expert adjustment move the score while omitting it from this tally, so 5 cells
+     published "prior-only" — defined as "the live consensus, no PTR evidence" — with a
+     score that differed from the prior (Mistweaver raid among them). A signal that moves
+     the number is evidence and must say so. When the expert panel DRIVES the direction
+     the outlook slot stays empty (!expertDrives) — the same evidence must not count
+     twice under two names; a verdict-driven cell with a panel present counts both,
+     because those are two different sources actually consulted. */
+  const outlookSignal = shiftDir != null && !expertDrives;
+  const signals = (testing != null ? 1 : 0) + (dummy != null ? 1 : 0) + (outlookSignal ? 1 : 0)
+    + (ptrList ? 1 : 0) + (expert != null ? 1 : 0);
   /* Confidence is a ratio against the signal types that COULD exist for this spec+bracket,
      not a raw count. Two reasons, one new and one long-standing:
 
@@ -890,11 +973,13 @@ export function projectionFor(spec, bracket, scales, metaNotes = [], sources = [
      prior-only. Strictly more than half, not at least: with two obtainable signals a
      single one is thin evidence and must keep reading "low" — the tag's real job is the
      warning at the bottom, and an "at least half" band silently promoted every one-signal
-     healer and tank to medium. A DPS spec's raid bracket is unchanged from v2 (3 of 3
-     high, 2 medium, 1 low), which is what every existing snapshot was written under. */
+     healer and tank to medium. The denominators grew by one at v8 (the specialist-take
+     lane became a counted signal type), so confidence tags are one series with v8
+     snapshots onward, not with v7's — which the PROJECTION_VERSION boundary already
+     enforces for the whole projection object. */
   const ptrListPossible = ptrTierSources(sources).some(s =>
     (s.pages ?? []).some(p => p.bracket === bracket && (p.role === spec.role || p.role === "All" || p.role == null)));
-  const available = 2 // PTR testing + tuning outlook: obtainable for every spec and bracket
+  const available = 3 // PTR testing + tuning outlook + specialist takes: obtainable everywhere
     + (spec.role === "DPS" ? 1 : 0) // Dummy Dome: DPS-only
     + (ptrListPossible ? 1 : 0);    // an era:"ptr" tier list covering this bracket+role
   const confidence = signals === 0 ? "prior-only"
@@ -914,6 +999,8 @@ export function projectionFor(spec, bracket, scales, metaNotes = [], sources = [
       dummy: dummy != null ? Math.round(dummy) : null,
       ptrList: ptrList ? Math.round(ptrList.score) : null,
       shift, shiftEligible: shiftDir != null,
+      expertShrunk: expert ? expert.shrunk : null,
+      expertCreators: expert ? expert.creators : null,
       expertAdjRequested: expertAdj, nudgeRequested: nudge,
       withinApplied: appliedWithin, evidenceScore,
       signals, obtainable: available
@@ -945,9 +1032,10 @@ export function projectionFor(spec, bracket, scales, metaNotes = [], sources = [
 }
 export function projections(specs, scales, creatorTakes, sources = []) {
   const metaNotes = creatorTakes?.metaNotes ?? [];
+  const takes = creatorTakes?.takes ?? [];
   for (const spec of specs) {
-    const raid = projectionFor(spec, "raid", scales, metaNotes, sources);
-    const mplus = projectionFor(spec, "mplus", scales, metaNotes, sources);
+    const raid = projectionFor(spec, "raid", scales, metaNotes, sources, takes);
+    const mplus = projectionFor(spec, "mplus", scales, metaNotes, sources, takes);
     if (raid || mplus) spec.projection = { raid, mplus };
   }
   return specs;

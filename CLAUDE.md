@@ -100,9 +100,14 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   the whole point. Writing one take's sentiment into `ptr.verdict` would hand a single
   YouTube video the full ±7 outlook shift — Feral has exactly one take — which is the
   "weakest evidence steers" inversion already rejected on the meta nudge. Instead
-  `expertRead()` (render.mjs, PROJECTION_VERSION 7) aggregates the whole non-superseded
+  `expertRead()` (render.mjs, PROJECTION_VERSION 8) aggregates the whole non-superseded
   PTR-era take set, one vote per creator, shrunk by corroboration. Nine specs still have
-  no writeup; the aggregate now supplies their outlook direction. **Do not** hand-write a
+  no writeup; the aggregate now supplies their outlook direction. Since v8 the PROJECTION's
+  read is **bracket-scoped** (an explicit `bracket: "raid"|"mplus"|"both"` on the take wins;
+  else the patchContext text decides via the same regexes as the meta nudge; naming neither
+  → both) — a creator's M+ tier-list read no longer moves raid forecasts. The whole-spec
+  outlook ARROW stays unscoped. Take `sentiment` (buff|nerf|neutral|mixed), `patchContext`
+  and `date` are validation-enforced model inputs. **Do not** hand-write a
   `ptr` writeup from a creator take to "fill the gap" — the model already reads them, and
   a fabricated writeup would double-count.
 

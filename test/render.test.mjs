@@ -404,11 +404,15 @@ test("projectionFor: full-signal math is exact and transparent", () => {
     { class: "X", spec: "Full", creator: "solo", sentiment: "negative", date: "2026-07-01" },
     { class: "X", spec: "Full", creator: "solo", sentiment: "positive", date: "2026-07-08" }
   ];
-  const p = projectionFor(spec, "raid", PROJ_SCALES, notes);
+  // A neutral take: the expert lane is PRESENT (a signal since v8) but directionless,
+  // so the full-signal math below stays exactly the pre-take arithmetic.
+  const takes = [{ class: "X", spec: "Full", creator: "watcher", sentiment: "neutral",
+    date: "2026-07-20", patchContext: "12.1 PTR" }];
+  const p = projectionFor(spec, "raid", PROJ_SCALES, notes, [], takes);
   // emp = (100*2 + 90*1)/3 = 96.67; base = .55*80 + .45*96.67 = 87.5; +7 up, no nudge → 95
   assert.equal(p.score, 95);
   assert.equal(p.tier, "S");
-  assert.equal(p.confidence, "high"); // testing + dummy + outlook = 3 signals
+  assert.equal(p.confidence, "high"); // testing + dummy + outlook + expert = 4 of 4 signals
   assert.match(p.basis, /live baseline 80/);
   assert.match(p.basis, /raid-testing pct 100/);
   assert.match(p.basis, /Dummy Dome 90/);
@@ -997,27 +1001,29 @@ test("projectionFor: the bracket with no PTR list keeps its v2 math exactly", ()
 
 test("confidence is a ratio against obtainable signals, not a raw count", () => {
   const base = { class: "X", spec: "C", consensus: { mplus: { score: 60 }, raid: { score: 60 } } };
-  // Healer M+: obtainable = testing + outlook + PTR list = 3 (no Dummy Dome for healers).
+  const tk = { class: "X", spec: "C", creator: "w", sentiment: "neutral",
+    date: "2026-07-20", patchContext: "12.1 PTR" };
+  // Healer M+: obtainable = testing + outlook + takes + PTR list = 4 (no Dummy Dome for healers).
   const healerAll = projectionFor({
     ...base, role: "Healer",
     metrics: [{ bracket: "mplus", name: "Median HPS (12.1 PTR M+ testing)", rank: 1, of: 7 }],
     outlook: { direction: "up" },
     ratings: { mplus: { "icyveins-ptr": "A" } }
-  }, "mplus", PTR_PROJ_SCALES, [], PTR_SRC);
+  }, "mplus", PTR_PROJ_SCALES, [], PTR_SRC, [tk]);
   assert.equal(healerAll.confidence, "high", "everything obtainable for a healer → high");
 
-  // One signal of two obtainable must stay "low" — strictly more than half for medium.
+  // One signal of three obtainable must stay "low" — strictly more than half for medium.
   const thin = projectionFor({ ...base, role: "Healer", outlook: { direction: "up" } },
     "raid", PTR_PROJ_SCALES, [], PTR_SRC);
-  assert.equal(thin.confidence, "low", "1 of 2 obtainable is thin evidence, not medium");
+  assert.equal(thin.confidence, "low", "1 of 3 obtainable is thin evidence, not medium");
 
-  // Regression guard: a DPS spec's RAID bracket is unchanged from v2 (3 obtainable).
+  // DPS raid: obtainable = testing + outlook + takes + dummy = 4 (no PTR raid list exists).
   const dpsRaid = projectionFor({
     ...base, role: "DPS",
     metrics: [{ bracket: "raid", name: "12.1 PTR raid testing score (normalized)", rank: 1, of: 27 }],
     ptrDummy: { score: 90 }, outlook: { direction: "up" }
-  }, "raid", PTR_PROJ_SCALES, [], PTR_SRC);
-  assert.equal(dpsRaid.confidence, "high"); // 3 of 3
+  }, "raid", PTR_PROJ_SCALES, [], PTR_SRC, [tk]);
+  assert.equal(dpsRaid.confidence, "high"); // 4 of 4
 });
 
 /* ---- classifyHighlight unanimity (PROJECTION_VERSION 4) ---- */
@@ -1233,16 +1239,21 @@ test("projectionFor: the expert read either decides or adjusts, never both", () 
     ptrDummy: { score: 90 }
   };
   // Expert-driven: magnitude scales with the shrunk strength instead of the line count,
-  // and stays under a dated verdict's flat 7 no matter how large the panel.
+  // and stays under a dated verdict's flat 7 no matter how large the panel. Since v8 the
+  // panel is computed from the TAKES themselves (bracket-scoped), never read off outlook.
+  // Two creators, each averaging +0.5 → raw .5, shrunk .5·(2/4) = .25.
+  const panel = [TK("a", "buff"), TK("a", "neutral"), TK("b", "buff"), TK("b", "neutral")];
   const decided = projectionFor(
-    { ...base, ptr: null, outlook: { direction: "up", source: "expert", buffs: 5, nerfs: 0,
-      expert: { shrunk: 0.25, creators: 2, takes: 2, raw: 0.5 } } }, "raid", PROJ_SCALES);
+    { ...base, ptr: null, outlook: { direction: "up", source: "expert", buffs: 5, nerfs: 0 } },
+    "raid", PROJ_SCALES, [], [], panel);
   assert.equal(decided.score, 91, "base 87.5 + round(2 + 5*.25) = +3");
-  // Writeup present: the same read now only adjusts, and cannot move the letter.
+  // Writeup present: the same lane now only adjusts, and cannot move the letter.
+  // Nine unanimous nerf creators → shrunk −(9/11) = −.818 → adj round(4·−.818) = −3.
+  const bearish = ["a","b","c","d","e","f","g","h","i"].map(c => TK(c, "nerf"));
   const adjusted = projectionFor(
     { ...base, ptr: { verdict: "Positive", asOf: "2026-07-01" },
-      outlook: { direction: "up", source: "verdict", buffs: 5, nerfs: 0,
-        expert: { shrunk: -1, creators: 9, takes: 9, raw: -1 } } }, "raid", PROJ_SCALES);
+      outlook: { direction: "up", source: "verdict", buffs: 5, nerfs: 0 } },
+    "raid", PROJ_SCALES, [], [], bearish);
   assert.equal(adjusted.tier, "S", "the published letter is decided without the takes");
   assert.ok(adjusted.score < 95, "…but the score still moves, so ordering stays informative");
   assert.ok(adjusted.score >= PROJ_SCALES.consensus.bands.find(b => b.tier === "S").min,
@@ -1284,11 +1295,15 @@ test("projectionFor: an outlook the model refused to apply is not counted as evi
   };
   // An UNDATED verdict contributes no shift (v5) — so it must not count toward confidence
   // either. The model cannot decline to trust a read and cite it as evidence at once.
-  const undated = projectionFor({ ...base, ptr: { verdict: "Negative" } }, "raid", PROJ_SCALES);
-  const dated = projectionFor({ ...base, ptr: { verdict: "Negative", asOf: "2026-07-01" } }, "raid", PROJ_SCALES);
-  assert.ok(["low", "medium"].includes(undated.confidence));
-  assert.notEqual(undated.confidence, dated.confidence,
+  // A neutral take fills the expert slot so the band boundary still separates the two.
+  const tk = [{ class: "X", spec: "C", creator: "w", sentiment: "neutral",
+    date: "2026-07-20", patchContext: "12.1 PTR" }];
+  const undated = projectionFor({ ...base, ptr: { verdict: "Negative" } }, "raid", PROJ_SCALES, [], [], tk);
+  const dated = projectionFor({ ...base, ptr: { verdict: "Negative", asOf: "2026-07-01" } }, "raid", PROJ_SCALES, [], [], tk);
+  assert.equal(undated.parts.signals, dated.parts.signals - 1,
     "the dated verdict is evidence; the undated one the model ignored is not");
+  assert.ok(["low", "medium"].includes(undated.confidence));
+  assert.notEqual(undated.confidence, dated.confidence);
   assert.match(undated.basis, /outlook 0/, "and it applied nothing, as v5 requires");
 });
 
@@ -1343,4 +1358,106 @@ test("dummyDomeScores: tie-aware midranks, and thin cuts do not vote", () => {
   assert.equal(field[0].ptrDummy.coverage.have, 2, "…and excluded from the voting set");
   assert.ok(field[0].ptrDummy.perCount["1"] != null, "but still shown");
   assert.equal(field[1].ptrDummy.coverage.thin, undefined, "well-sampled specs are untouched");
+});
+
+/* ---------- v8 (2026-08-04 external audit): bracket scope, clean field, honest tags ---------- */
+
+test("expertRead: takes are bracket-scoped — explicit field first, then patchContext", () => {
+  const all = [
+    TK("a", "nerf", "2026-07-20", { patchContext: "12.1 PTR — Season 2 M+ healer tier list" }),
+    TK("b", "buff", "2026-07-20", { patchContext: "12.1 PTR — heroic raid week impressions" }),
+    TK("c", "buff", "2026-07-20", { patchContext: "12.1 PTR — Season 2 main-choice review" })
+  ];
+  // Unscoped call (the whole-spec arrow): everyone is heard, as before.
+  assert.equal(expertRead(ESPEC, all).creators, 3);
+  // Bracket calls: the M+ tier-list read never reaches raid, and vice versa. A context
+  // naming neither bracket is a whole-spec read and applies to both.
+  const raid = expertRead(ESPEC, all, "raid");
+  assert.equal(raid.creators, 2, "raid = raid-scoped + unscoped");
+  assert.ok(raid.shrunk > 0, "without the M+ nerf the raid read is positive");
+  assert.equal(expertRead(ESPEC, all, "mplus").creators, 2, "mplus = M+-scoped + unscoped");
+  // An explicit bracket field beats the text heuristic outright.
+  const explicit = TK("d", "nerf", "2026-07-20", { patchContext: "12.1 PTR — M+ tier list", bracket: "raid" });
+  assert.equal(expertRead(ESPEC, [explicit], "raid").creators, 1);
+  assert.equal(expertRead(ESPEC, [explicit], "mplus"), null);
+  const both = TK("e", "buff", "2026-07-20", { patchContext: "12.1 PTR — M+ rankings", bracket: "both" });
+  assert.equal(expertRead(ESPEC, [both], "raid").creators, 1, '"both" applies everywhere');
+});
+
+test("projectionFor: an M+ tier-list read no longer moves the raid forecast", () => {
+  // The Mistweaver shape from the audit: a dated Mixed writeup, and every directional
+  // take scoped to M+ tier lists. v7 pooled them into both brackets; the raid cell must
+  // now stay on its own evidence.
+  const spec = {
+    class: "X", spec: "E", role: "Healer",
+    consensus: { raid: { score: 90 }, mplus: { score: 90 } },
+    ptr: { verdict: "Mixed", asOf: "2026-07-01" },
+    outlook: { direction: "flat", source: "verdict", buffs: 0, nerfs: 0, builds: 1 }
+  };
+  const takes = [
+    TK("a", "nerf", "2026-07-20", { patchContext: "12.1 PTR — Season 2 M+ healer tier list" }),
+    TK("b", "nerf", "2026-07-21", { patchContext: "12.1 PTR — M+ healer rankings" }),
+    TK("c", "nerf", "2026-07-22", { patchContext: "12.1 PTR — dungeon tier list" })
+  ];
+  const raid = projectionFor(spec, "raid", PROJ_SCALES, [], [], takes);
+  const mplus = projectionFor(spec, "mplus", PROJ_SCALES, [], [], takes);
+  assert.equal(raid.parts.expertShrunk, null, "no raid-scoped takes → no raid panel");
+  assert.equal(raid.score, 90, "the raid score stays on its evidence");
+  assert.ok(mplus.parts.expertShrunk < 0, "the M+ cell still hears them");
+  assert.ok(mplus.score < 90);
+});
+
+test("projectionFor: a cell the expert lane moved can never read prior-only", () => {
+  // The exact v7 defect: no testing, no dummy, no PTR list, an UNDATED verdict — and an
+  // expert adjustment applied anyway. Five real cells published "prior-only" (defined as
+  // "no PTR evidence") with a score that differed from the prior. The lane that moved
+  // the number counts as the evidence it is.
+  const spec = {
+    class: "X", spec: "E", role: "Healer",
+    consensus: { raid: { score: 90 } },
+    ptr: { verdict: "Positive" }, // undated → no shift; present → the adjust path
+    outlook: { direction: "up", source: "verdict", buffs: 0, nerfs: 0, builds: 1 }
+  };
+  const p = projectionFor(spec, "raid", PROJ_SCALES, [], [], [TK("a", "nerf"), TK("b", "nerf")]);
+  assert.notEqual(p.score, p.parts.prior, "the panel moved the score");
+  assert.equal(p.confidence, "low", "…so the tag says evidence exists, not prior-only");
+  assert.equal(p.parts.signals, 1);
+});
+
+test("projectionFor: when the expert panel drives, it is one signal, not two", () => {
+  // The panel filling the direction must not count under both the outlook slot and the
+  // expert slot — that would let one lane vouch for itself twice.
+  const spec = {
+    class: "X", spec: "E", role: "Healer",
+    consensus: { raid: { score: 60 } },
+    outlook: { direction: "up", source: "expert", buffs: 0, nerfs: 0, builds: 1 }
+  };
+  const driven = projectionFor(spec, "raid", PROJ_SCALES, [], [],
+    [TK("a", "buff"), TK("b", "buff")]);
+  assert.equal(driven.parts.signals, 1);
+  assert.match(driven.basis, /expert panel/);
+});
+
+test("dummyDomeScores: a thin cut leaves everyone else's denominator", () => {
+  const mk = (spec, targets, thinAt1 = false) => ({ class: "T", spec, role: "DPS",
+    ptrDummy: { targets },
+    metrics: thinAt1 ? [{ name: "Median raw DPS (12.1 PTR Dummy Dome, 1T)", n: 3 }] : [] });
+  const specs = [
+    mk("A", { "1": 300, "2": 300, "3": 300 }),
+    mk("B", { "1": 200, "2": 200, "3": 200 }),
+    mk("C", { "1": 100, "2": 100, "3": 100 }),
+    mk("D", { "1": 50,  "2": 150, "3": 150 }, true), // thin at 1T, far below the field
+    mk("E", { "1": 999, "2": 250, "3": 250 }, true)  // thin at 1T, above the whole field
+  ];
+  dummyDomeScores(specs);
+  const [, , C, D, E] = specs;
+  // v7 kept D's two-parse 50 in the field, so C read 33rd percentile at 1T instead of
+  // last. The clean field's bottom must sit at 0 with no thin outlier beneath it.
+  assert.equal(C.ptrDummy.perCount["1"], 0, "the clean bottom sits at the bottom");
+  // The thin cuts themselves still display, judged against the clean field…
+  assert.equal(D.ptrDummy.perCount["1"], 0);
+  assert.deepEqual(D.ptrDummy.coverage.thin, [1]);
+  // …and a thin value above the whole clean field maps to 100, never past it (it is not
+  // a member of the field it is compared against).
+  assert.equal(E.ptrDummy.perCount["1"], 100);
 });
