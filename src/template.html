@@ -540,6 +540,7 @@
   .toolmark:focus-visible{outline:2px solid var(--accent-2); outline-offset:2px}
   .controls-sub{margin-top:2px}
   .toolstatus{font-family:var(--mono); font-size:11px; color:var(--ink-faint); white-space:normal; text-align:right; min-width:0}
+  .lagchip{font-family:var(--mono); font-size:10px; color:var(--gold); border:1px solid color-mix(in srgb,var(--gold) 40%,transparent); border-radius:5px; padding:1px 6px; margin-left:8px; white-space:nowrap}
   .srcsel{background:var(--bg-3); border:1px solid var(--edge-2); border-radius:7px; color:var(--ink);
     font-family:var(--body); font-size:13px; font-weight:600; padding:5px 8px; cursor:pointer; max-width:170px}
   .srcsel.on{border-color:var(--accent); color:var(--accent)}
@@ -695,8 +696,8 @@
     <div class="seg" id="srcseg" role="group" aria-label="Which ratings the tier columns show"></div>
     <div class="seg" id="eraseg" role="group" aria-label="Era" title="Filters verdicts, writeups, era-tagged numbers and creator takes. It does not change the tier columns — those follow the View picker.">
       <button data-era="both" aria-pressed="true">Both</button>
-      <button data-era="live" aria-pressed="false">12.0.7</button>
-      <button data-era="ptr" aria-pressed="false">12.1 PTR</button>
+      <button data-era="live" aria-pressed="false" id="eralive">12.0.7</button>
+      <button data-era="ptr" aria-pressed="false" id="eraptr">12.1 PTR</button>
     </div>
     <div class="seg" id="roleseg" role="group" aria-label="Filter by role">
       <button data-role="All" aria-pressed="true">All</button>
@@ -975,8 +976,23 @@ function applyHash(){
 
 /* Era tagging: metrics may carry an explicit era; otherwise PTR-labeled names are ptr.
    Creator takes: patchContext mentioning "live" is live-era, everything else 12.1-ish. */
-const metricEra = m => m.era ?? (m.name.includes("12.1 PTR") ? "ptr" : "live");
-const takeEra = t => (t.patchContext||"").includes("PTR") ? "ptr" : "live"; // key on the PTR marker, not a "live" substring
+/* Era classification reads the phase vocabulary the build embedded (META.phases), so a
+   patch cycle never needs a template edit: after launch PHASES.ptr goes null and every
+   "12.1 PTR" metric/take reads as the live season it now describes; when the 12.2 PTR
+   opens, only the new marker reads as future-era. */
+const PHASE = META.phases ?? { liveSeason: "s1", liveLabel: "12.0.7", ptr: null, ptrSunset: false };
+{ // The toggle's labels are data; a one-position toggle is UI lying about a choice, so
+  // between cycles (no PTR era, or post-sunset) the whole segment hides and era pins live.
+  const lv = document.getElementById('eralive'), pt = document.getElementById('eraptr');
+  if (lv) lv.textContent = PHASE.liveLabel;
+  if (pt && PHASE.ptr) pt.textContent = PHASE.ptr.label;
+  if (!PHASE.ptr || PHASE.ptrSunset) {
+    document.getElementById('eraseg')?.setAttribute('hidden', '');
+    state.era = "live";
+  }
+}
+const metricEra = m => m.era ?? (PHASE.ptr && m.name.includes(PHASE.ptr.marker) ? "ptr" : "live");
+const takeEra = t => (PHASE.ptr && (t.patchContext||"").includes(PHASE.ptr.marker)) ? "ptr" : "live";
 const eraOk = era => state.era === "both" || state.era === era;
 const matrix = document.getElementById('matrix');
 
@@ -1563,8 +1579,15 @@ function render(){
   {
     const st = document.getElementById('toolstatus');
     if(st){
-      const live = SOURCES.filter(x=>x.kind==="tier-list" && (x.era ?? "live")==="live").length;
-      st.textContent = `${shown} of ${SPECS.length} specs · consensus of ${live} sources · snapshot ${META.latestSnapshot ?? "—"}`;
+      const liveSrcs = SOURCES.filter(x=>x.kind==="tier-list" && (x.era ?? "live")==="live");
+      // A source counts only when every page it publishes still describes the current
+      // live season — the same rule consensusFor applies (DECISION 1). Mid-transition
+      // this number honestly dips ("consensus of 2") and recovers as outlets update.
+      const seasonOk = x => !(x.pages ?? []).some(pg => pg.seasonVerified != null && pg.seasonVerified !== PHASE.liveSeason);
+      const verified = liveSrcs.filter(seasonOk).length;
+      const lag = liveSrcs.length - verified;
+      st.textContent = `${shown} of ${SPECS.length} specs · consensus of ${verified} source${verified!==1?'s':''}` +
+        (lag ? ` (${lag} updating)` : '') + ` · snapshot ${META.latestSnapshot ?? "—"}`;
     }
   }
   // restore drawers that were open before this re-render (fresh DOM, current-era content)
@@ -1686,7 +1709,10 @@ srcseg.innerHTML =
   `<button data-source="consensus" aria-pressed="true">Consensus</button>` +
   `<select class="srcsel" id="srcsel" aria-label="Show one tier list's own ratings">` +
     `<option value="">Source ▾</option>` +
-    TIER_SOURCES.map(s=>`<option value="${esc(s.id)}">${esc(s.name)}</option>`).join("") +
+    TIER_SOURCES.map(s=>{
+      const lagging = (s.pages ?? []).some(pg => pg.seasonVerified != null && pg.seasonVerified !== (META.phases?.liveSeason ?? "s1"));
+      return `<option value="${esc(s.id)}">${esc(s.name)}${lagging ? " · updating…" : ""}</option>`;
+    }).join("") +
   `</select>` +
   `<button data-source="projection" class="projbtn" aria-pressed="false" title="Our computed 12.1 forecast — live baseline + PTR testing + Dummy Dome + outlook + meta reads. A projection, not a source.">Ours: 12.1 ✦</button>`;
 srcseg.addEventListener('click', e=>{
@@ -1830,7 +1856,9 @@ document.getElementById('srclist').innerHTML = SOURCES.filter(s=>Array.isArray(s
       : src.kind === "community" ? "—"
       : (src.kind === "reference" || p.bracket == null) ? "tool"
       : "pending fetch";
-    return `<div class="srcitem">${link}<span class="when">${when}</span></div>`;
+    const lag = p.seasonVerified != null && p.seasonVerified !== PHASE.liveSeason
+      ? `<span class="lagchip" title="This page still describes the previous season — it is excluded from the consensus until it updates">updating for ${esc(PHASE.liveLabel)}</span>` : "";
+    return `<div class="srcitem">${link}${lag}<span class="when">${when}</span></div>`;
   }).join("");
   const kind = src.kind!=="tier-list" ? ` <span class="mnote">· ${esc(src.kind)}</span>` : "";
   return `<div class="srcgroup"><span>${esc(src.name)}${kind}</span><span class="how">${esc(src.author||"")}</span></div>${pages}`;

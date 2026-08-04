@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { scoreFor, consensusTier, consensusFor, isLiveEra, ptrTierSources } from "../src/normalize.mjs";
+import { scoreFor, consensusTier, consensusFor, isLiveEra, ptrTierSources, PHASES, sourceSeasonOk } from "../src/normalize.mjs";
 
 const scales = {
   scales: {
@@ -123,4 +123,48 @@ test("ptrTierSources returns era-gated tier lists only, in registry order", () =
   assert.deepEqual(ptrTierSources(undefined), []);
   // a metrics-kind source is not a tier list even if it were era-tagged
   assert.deepEqual(ptrTierSources([{ id: "m", kind: "metrics", era: "ptr" }]), []);
+});
+
+/* ---------- S2 transition Phase 1: the season-verified consensus rule ---------- */
+
+test("a page that describes the wrong season drops its source from that bracket's consensus", () => {
+  const scales = { consensus: { bands: [ { tier: "S", min: 88 }, { tier: "A", min: 58 }, { tier: "B", min: 0 } ], spreadThreshold: 40 },
+    scales: { x: { tiers: ["S","A","B"], values: { S: 100, A: 70, B: 40 } } } };
+  const sources = [
+    { id: "one", name: "One", kind: "tier-list", scale: "x", pages: [{ bracket: "mplus", seasonVerified: "s1" }] },
+    { id: "two", name: "Two", kind: "tier-list", scale: "x", pages: [{ bracket: "mplus", seasonVerified: "s2" }] },
+  ];
+  // Live season s2 (post-launch): the un-flipped S1 list is excluded — the consensus
+  // shrinks to the outlets that updated rather than averaging two seasons (DECISION 1).
+  const c = consensusFor({ one: "B", two: "S" }, sources, scales, "mplus", "s2");
+  assert.equal(c.perSource.length, 1, "only the S2-verified source feeds the mean");
+  assert.equal(c.perSource[0].source, "two");
+  assert.equal(c.tier, "S");
+  // The rule cuts BOTH ways: pre-launch (live season s1) an outlet that flipped EARLY
+  // to S2 opinions is equally out — its letters describe a game nobody is playing yet.
+  const pre = consensusFor({ one: "B", two: "S" }, sources, scales, "mplus", "s1");
+  assert.equal(pre.perSource.length, 1);
+  assert.equal(pre.perSource[0].source, "one");
+  // Absent seasonVerified = never checked = assumed current: today nothing changes.
+  const untagged = [{ id: "u", name: "U", kind: "tier-list", scale: "x", pages: [{ bracket: "mplus" }] }];
+  assert.equal(consensusFor({ u: "A" }, untagged, scales, "mplus", "s2").perSource.length, 1);
+});
+
+test("sourceSeasonOk is bracket-scoped — an M+ flip does not vouch for the raid page", () => {
+  const src = { pages: [
+    { bracket: "mplus", seasonVerified: "s2" },
+    { bracket: "raid", seasonVerified: "s1" },
+  ] };
+  assert.equal(sourceSeasonOk(src, "mplus", "s2"), true);
+  assert.equal(sourceSeasonOk(src, "raid", "s2"), false);
+  // No bracket given (registry-level question): any lagging page marks the source.
+  assert.equal(sourceSeasonOk(src, null, "s2"), false);
+});
+
+test("PHASES is the single era vocabulary and carries the current cycle", () => {
+  // Pinning today's values, so the launch flip is a deliberate edit that fails this
+  // test and updates it in the same commit — the same pattern as SNAPSHOT_PHASE.
+  assert.equal(PHASES.liveSeason, "s1");
+  assert.equal(PHASES.ptr?.marker, "12.1 PTR");
+  assert.equal(PHASES.ptrSunset, false);
 });

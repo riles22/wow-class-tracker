@@ -17,6 +17,12 @@ Fetch the current Midnight tier lists live and merge them into `data/specs.json`
    fails, and backgrounding slow work to "wait" for it was the root cause of the
    2026-07-15→17 lost nights. Era-verify as you go (step 2).
 2. Era-verify every page: "Midnight", Season 1 / 12.0.x, or Devourer DH present in DPS
+   — and STORE the observation: write `seasonVerified: "s1" | "s2"` on the page entry in
+   sources.json (whichever season the page actually described). This is not bookkeeping:
+   `consensusFor` drops a source from a bracket's consensus when its page's season does
+   not match the current live season (PHASES.liveSeason, normalize.mjs) — the DECISION-1
+   transition rule. Mis-recording it either keeps a stale list averaged in or silently
+   shrinks the consensus.
    lists. Unverifiable → skip that source, never guess.
    **Except the era-gated sources** (`era: "ptr"` in the registry — `icyveins-ptr` today):
    those must verify as **12.1 / Season 2**. A page that reads Season 1 is the WRONG page

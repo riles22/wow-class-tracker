@@ -3,21 +3,26 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>WoW Midnight Season 2 &mdash; Gearing</title>
+<title>Spec Tracker &mdash; Season 2 Gearing</title>
+<!-- The Spec Tracker brand mark as favicon — same artwork as the tracker page, shipped
+     as a data URI so this file stays fully offline. -->
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22><rect x=%222%22 y=%222%22 width=%2260%22 height=%2260%22 rx=%2214%22 fill=%22%23130B22%22 stroke=%22%23B57BEE%22 stroke-opacity=%22.45%22 stroke-width=%222.5%22/><rect x=%2212%22 y=%2213%22 width=%2240%22 height=%229%22 rx=%224.5%22 fill=%22%23F0C24B%22/><rect x=%2212%22 y=%2227.5%22 width=%2229%22 height=%229%22 rx=%224.5%22 fill=%22%23C77DFF%22/><rect x=%2212%22 y=%2242%22 width=%2219%22 height=%229%22 rx=%224.5%22 fill=%22%236AA8F0%22/></svg>'>
 <style>
 :root{
   color-scheme:dark;   /* makes native controls (dropdown popup, scrollbars) render dark */
   --adv:#4ee06a; --vet:#4aa8ff; --champ:#c07cf5; --hero:#ff9436; --myth:#f2d698;
-  --t1:#f4f7fb; --t2:#c4cfdd; --t3:#9aa9bd; --t4:#7f90a7;
-  --line:#273449; --control-line:#52647d; --panel:#0d131c; --panel-2:#121a26;
-  --bg:#070a0f; --focus:#8dc5ff;
+  /* Chrome palette = the Spec Tracker brand family (rebrand pass 2026-08-04). The
+     upgrade-track colours above are DATA and deliberately unchanged. */
+  --t1:#EDE7F7; --t2:#A99BC7; --t3:#8B7EAE; --t4:#7a6f96;
+  --line:#2A1D45; --control-line:#3B2A5E; --panel:#130B22; --panel-2:#1B1030;
+  --bg:#0B0713; --focus:#7FD8FF; --accent:#B57BEE; --accent-2:#7FD8FF; --gold:#F0C24B;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 .sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;
   margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
 body{background:var(--bg);color:var(--t1);font-family:Inter,"Segoe UI",system-ui,sans-serif;
      -webkit-font-smoothing:antialiased;line-height:1.55;font-size:16px}
-a{color:#a9d1ff;text-underline-offset:3px}
+a{color:var(--accent-2);text-underline-offset:3px}
 code{font-family:ui-monospace,"JetBrains Mono",monospace;font-size:.92em;color:var(--t2);overflow-wrap:anywhere}
 .wrap{max-width:1320px;margin:0 auto;padding:34px 28px 72px}
 .skip-link{position:fixed;left:14px;top:10px;z-index:10000;transform:translateY(-150%);
@@ -26,30 +31,39 @@ code{font-family:ui-monospace,"JetBrains Mono",monospace;font-size:.92em;color:v
 header{display:flex;align-items:center;justify-content:space-between;gap:28px;
        padding-bottom:24px;border-bottom:1px solid var(--line);flex-wrap:wrap}
 .kick{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--t3);font-weight:700}
+.backlink{display:inline-flex;align-items:center;gap:9px;text-decoration:none;color:var(--t2);
+  font-size:12px;letter-spacing:2.5px;text-transform:uppercase;font-weight:700}
+.backlink .brandmark{width:26px;height:26px;flex:none}
+.backlink:hover{color:var(--t1)}
+.backlink .backhint{letter-spacing:.4px;text-transform:none;font-weight:600;color:var(--t3)}
+.backlink:hover .backhint{color:var(--accent-2)}
+.patchchip{font-family:ui-monospace,"JetBrains Mono",monospace;font-size:11px;font-weight:700;
+  letter-spacing:.08em;color:var(--gold);border:1px solid rgba(240,194,75,.4);
+  border-radius:6px;padding:5px 9px;white-space:nowrap}
 h1{font-size:clamp(30px,4vw,42px);font-weight:800;letter-spacing:-1px;margin-top:7px;line-height:1.15;
-    background:linear-gradient(96deg,#fff 10%,#dfe8f5 40%,#f2d698 98%);
+    background:linear-gradient(96deg,#fff 10%,#E4DBF5 40%,#F0C24B 98%);
     -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .sub{font-size:15px;color:var(--t2);margin-top:10px;max-width:72ch}
 .sub b{color:var(--t1)}
 
 .controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:20px 0 6px}
 select,button,textarea,input{font-family:inherit;font-size:15px;color:var(--t1);min-height:44px;
-  background:#141d2a;border:1px solid var(--control-line);border-radius:9px;padding:10px 13px}
+  background:var(--panel-2);border:1px solid var(--control-line);border-radius:9px;padding:10px 13px}
 /* The native dropdown popup is drawn by the OS, so a translucent background renders it
    near-white with light text. It needs opaque colours and an explicit dark colour-scheme. */
-select{min-width:0;width:100%;cursor:pointer;background-color:#141d2a;color:var(--t1);
+select{min-width:0;width:100%;cursor:pointer;background-color:var(--panel-2);color:var(--t1);
        appearance:none;-webkit-appearance:none;padding-right:34px;
        background-image:linear-gradient(45deg,transparent 50%,var(--t2) 50%),
                         linear-gradient(135deg,var(--t2) 50%,transparent 50%);
        background-position:calc(100% - 18px) 52%,calc(100% - 13px) 52%;
        background-size:5px 5px,5px 5px;background-repeat:no-repeat}
-select:hover{border-color:#7186a3}
-select option{background-color:#0e131b;color:var(--t1);padding:6px}
-select optgroup{background-color:#0a0e14;color:var(--myth);font-style:normal;font-weight:700}
+select:hover{border-color:var(--accent)}
+select option{background-color:var(--panel);color:var(--t1);padding:6px}
+select optgroup{background-color:var(--bg);color:var(--myth);font-style:normal;font-weight:700}
 button{cursor:pointer;font-weight:700}
-button:hover{background:#1b2737}
-.primary-button{background:#d9b968;color:#101722;border-color:#f2d698;padding-inline:20px}
-.primary-button:hover{background:#f2d698}
+button:hover{background:#241740}
+.primary-button{background:var(--gold);color:#160a24;border-color:var(--gold);padding-inline:20px}
+.primary-button:hover{filter:brightness(1.08)}
 :where(a,button,select,textarea,input,summary,[tabindex]):focus-visible{
   outline:3px solid var(--focus);outline-offset:3px}
 .pill{font-size:12.5px;color:var(--t2);background:var(--panel);border:1px solid var(--line);
@@ -142,6 +156,7 @@ table.src-tbl tr:last-child td{border-bottom:none}
 .badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;
        padding:2px 7px;border-radius:5px;background:rgba(242,214,152,.14);color:var(--myth);margin-left:7px}
 textarea{width:100%;min-height:160px;font-family:ui-monospace,monospace;font-size:13px;resize:vertical;line-height:1.5}
+.footfam{margin-bottom:10px;color:var(--t2)}
 footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);
        font-size:12.5px;color:var(--t3);line-height:1.65}
 
@@ -237,15 +252,15 @@ table.paths tr:hover td{background:rgba(255,255,255,.03)}
 <div class="wrap">
   <header>
     <div>
-      <div class="kick">World of Warcraft &middot; Midnight &middot; Patch 12.1</div>
-      <h1>Season 2 Gearing &mdash; The Curse of Ula'tek</h1>
+      <a class="backlink" href="index.html" title="Back to the Spec Tracker — tier consensus, rankings and the 12.1 forecast"><svg class="brandmark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#130B22" stroke="#B57BEE" stroke-opacity=".45" stroke-width="2.5"/><rect x="12" y="13" width="40" height="9" rx="4.5" fill="#F0C24B"/><rect x="12" y="27.5" width="29" height="9" rx="4.5" fill="#C77DFF"/><rect x="12" y="42" width="19" height="9" rx="4.5" fill="#6AA8F0"/></svg><span>Spec Tracker</span><span class="backhint">&larr; tiers &amp; rankings</span></a>
+      <h1>Season 2 Gearing</h1>
       <div class="sub">Pick your spec to see what to chase and where it drops
         &middot; season max <b>344</b> &middot; season opens <b>Aug 18, 2026</b></div>
     </div>
-    <div style="display:flex;gap:8px;flex-wrap:wrap">
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:flex-start">
+      <span class="patchchip">12.1 PTR &mdash; CURSE OF ULA'TEK</span>
       <span class="pill"><b id="p-items">0</b> items</span>
       <span class="pill"><b id="p-specs">0</b> specs</span>
-      <span class="pill">PTR <b>12.1.0</b></span>
     </div>
   </header>
 
@@ -1370,7 +1385,8 @@ function renderFooter() {
   const simcSource = SIMC_WEIGHTS.source
     ? '<a href="' + esc(SIMC_WEIGHTS.source) + '" target="_blank" rel="noopener noreferrer">official MID2 profiles</a>'
     : 'no reference source embedded';
-  $('#foot').innerHTML = scoring
+  $('#foot').innerHTML = '<p class="footfam">Part of <a href="index.html"><b>Spec Tracker</b></a> — tier consensus, rankings and the 12.1 forecast for every spec. Made by <a href="https://github.com/riles22" target="_blank" rel="noopener noreferrer"><b>riles22</b></a>.</p>'
+    + scoring
     + '<b>Every score compares equal-item-level secondary-stat fit; it is not an item simulation.</b>'
     + '<details class="disclosure"><summary>Data sources and technical notes</summary><div class="disclosure-body">'
     + 'Item data: ' + esc(RAID.source) + ', harvested ' + esc(RAID.harvestedAt) + '.<br>'
