@@ -37,9 +37,13 @@ export async function build(root = ROOT) {
   // (the page uses inline style attributes throughout); fonts are the only external origin.
   const scriptHashes = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)]
     .map(m => "'sha256-" + createHash("sha256").update(m[1], "utf8").digest("base64") + "'");
+  // img-src data: exists for exactly one image — the brand-mark favicon, a data: URI in
+  // the head (the masthead copy is an inline <svg> element, DOM rather than a fetch, and
+  // needs no CSP grant). Without it default-src 'none' silently blocks the tab icon in
+  // deployment. data: only — network images stay refused.
   const csp = `default-src 'none'; script-src ${scriptHashes.join(" ")}; ` +
     "style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; " +
-    "base-uri 'none'; form-action 'none'";
+    "img-src data:; base-uri 'none'; form-action 'none'";
   html = html.replace('<meta charset="UTF-8">', `<meta charset="UTF-8">\n<meta http-equiv="Content-Security-Policy" content="${csp}">`);
 
   await mkdir(path.join(root, "dist"), { recursive: true });

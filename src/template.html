@@ -107,6 +107,7 @@
   }
   .controls-row + .controls-row{margin-top:9px}
   .ctl{display:flex; align-items:center; gap:8px; flex-wrap:nowrap}
+  .ctl-ctas{flex-wrap:wrap}
   .seg{display:inline-flex; background:var(--bg-2); border:1px solid var(--edge); border-radius:9px; padding:3px; gap:2px}
   .seg button{
     font-family:var(--body); font-size:13px; font-weight:600; color:var(--ink-dim);
@@ -651,7 +652,7 @@
     <div class="rule"></div>
     <!-- One sentence of lede; the mental model folds. This paragraph ran five lines and
          was ~40% of a 329px masthead sitting directly above a page people check daily. -->
-    <div class="sub">Where every spec stands going into <b>12.1 “Curse of Ula'tek”</b> — PTR changes laid over its current <b>12.0.7 / Season 1</b> baseline. <details class="sub-more"><summary>How to read it</summary><span id="tlcount">Several</span> tier lists feed a computed <b>consensus</b>, with a <b>±</b> marker where they disagree — flip between them with <b>View</b>, or pick <b>Ours: 12.1&nbsp;✦</b> for this site's own Season-2 forecast (a projection, never a source). Filter by era or a specific fight, and click <b>any row</b> for the full read: PTR changes, current numbers with ranks, sim fight profile, and community takes.</details></div>
+    <div class="sub">Where every spec stands going into <b>12.1 “Curse of Ula'tek”</b> — PTR changes laid over its current <b>12.0.7 / Season 1</b> baseline. <details class="sub-more"><summary>How to read it</summary><span id="tlcount">Several</span> tier lists feed a computed <b>consensus</b>, with a <b>±</b> marker where they disagree — flip between them with <b>View</b>, or pick <b>Ours: 12.1&nbsp;✦</b> for this site's own Season-2 forecast (a projection, never a source). Filter by era or a specific fight, and click <b>any row</b> for the full read: PTR changes, current numbers with ranks, sim fight profile, and community takes. Three tools up top: <b>🧭 Find my spec</b> ranks all 40 against what you want to play, <b>📊 The Ladder</b> draws any measured ranking as a chart, and <b>⊞ Compare all</b> is the whole roster against every rating and rank on one screen.</details></div>
     <div class="stamp">
       <span><b>Baseline:</b> 12.0.7 / Season 1</span>
       <span><b>PTR:</b> 12.1 “Curse of Ula'tek”</span>
@@ -723,7 +724,8 @@
     </div>
     <input class="search" id="search" type="search" placeholder="Search spec…" aria-label="Search spec or class">
     <span class="grow"></span>
-    <div class="ctl"><!-- no-break pair: the two overlay CTAs always wrap together -->
+    <div class="ctl ctl-ctas"><!-- the overlay CTAs — wrap allowed: with three buttons a
+         no-break rule pushes the last one off a phone screen entirely -->
       <button class="finderbtn" id="finderbtn" type="button">🧭 Find my spec</button>
       <button class="finderbtn" id="ladderbtn" type="button" style="background:linear-gradient(90deg,var(--accent-2),var(--accent))">📊 The Ladder</button>
       <button class="finderbtn" id="allbtn" type="button" style="background:linear-gradient(90deg,var(--accent),var(--accent-2))">⊞ Compare all</button>
@@ -837,8 +839,10 @@ const PTR_BUILDS = DATA.ptrBuilds || { builds: [] };
 const CREATOR_TAKES = (DATA.creatorTakes && DATA.creatorTakes.takes) || [];
 /* Meta-outlook notes: general-creator (news-lane) per-spec season/meta reads — a
    separate lane from specialist CREATOR_TAKES. Never a source-tier/consensus input;
-   the newest bracket-scoped, non-superseded read DOES nudge our own 12.1 projection
-   by ±3 — always disclosed by name in that projection's basis string. */
+   bracket-scoped, non-superseded reads DO nudge our own 12.1 projection by ±3 — but
+   only when two or more creators' newest reads AGREE (v6 corroboration gate; the lane
+   currently has one voice, so the nudge is dormant), only within the evidence-decided
+   tier, and always disclosed in that projection's basis string. */
 const META_NOTES = (DATA.creatorTakes && DATA.creatorTakes.metaNotes) || [];
 const TIER_SOURCES = SOURCES.filter(s => s.kind === "tier-list");
 /* Era-gated tier lists: sources whose LETTERS describe 12.1, not the patch we are on.
@@ -1181,13 +1185,14 @@ function takesHTML(s){
 /* Meta outlook: per-spec season/meta reads from the general PTR-news creators (e.g. izen).
    Deliberately distinct from specialist Creator takes — cross-class opinion, cited.
    Never a source-tier/consensus/movement input; its one disclosed influence is the ±3
-   nudge in our own 12.1 projection (bracket-scoped, non-superseded, named in the basis). */
+   nudge in our own 12.1 projection — gated on >=2 creators' newest reads agreeing (v6),
+   within-tier only, bracket-scoped, non-superseded, named in the basis. */
 function metaNotesHTML(s){
   const notes = META_NOTES.filter(n=>n.class===s.class && n.spec===s.spec && !n.superseded && eraOk(takeEra(n)));
   if(!notes.length) return "";
   const rows = notes.map(n=>
     `<div class="setrow"><span class="pc" data-sent="${esc(n.sentiment||"")}">${esc(n.sentiment||"note")}</span><span class="pct">${esc(n.note)} <span class="mnote">— <a href="${esc(safeHref(n.url))}" target="_blank" rel="noopener">${esc(n.creator)}, ${esc(n.date||"")}</a>${n.patchContext?` · ${esc(n.patchContext)}`:""}</span></span></div>`).join("");
-  return `<div class="srcbreak"><p class="d-h">Meta outlook <span class="mnote">(general PTR-news creators — cross-class opinion, cited; never feeds source tiers or consensus — the newest read nudges our 12.1 projection ±3, disclosed in its basis)</span></p><div class="setbox">${rows}</div></div>`;
+  return `<div class="srcbreak"><p class="d-h">Meta outlook <span class="mnote">(general PTR-news creators — cross-class opinion, cited; never feeds source tiers or consensus — when two or more creators' newest reads agree they nudge our 12.1 projection ±3 within its tier, disclosed in its basis)</span></p><div class="setbox">${rows}</div></div>`;
 }
 
 function communityHTML(s){
@@ -2919,7 +2924,7 @@ function openSpecFromFinder(cls, spec){
     const roles = ["All","DPS","Healer","Tank"].map(r=>'<button data-ar="'+r+'" aria-pressed="'+(r===A.role)+'">'+r+'</button>').join("");
 
     ov.innerHTML = '<div class="finder-panel all-panel" role="dialog" aria-modal="true" aria-label="Compare all specs">'
-      + '<div class="finder-head"><div><h2>⊞ Compare all</h2><p>Every spec against every rating and rank, on one screen. Click a column to sort, use the row under it to filter, click a spec to open its card. Letters are tier-list opinions; <b>#numbers are measured ranks within that spec’s role</b> and are never turned into grades. <b>·</b> means no such measurement exists for that role; <b>—</b> means it exists but has not landed.</p></div>'
+      + '<div class="finder-head"><div><h2>⊞ Compare all</h2><p>Every spec against every rating and rank, on one screen. Click a column to sort, use the row under it to filter, click a spec to open its card. Letters are tier ratings — each source’s own, their computed consensus, and our 12.1 forecast; <b>#numbers are measured ranks within that spec’s role</b> and are never turned into grades. <b>·</b> means no such measurement exists for that role; <b>—</b> means it exists but has not landed.</p></div>'
       + '<button class="finder-x" id="all-close" aria-label="Close">✕</button></div>'
       + '<div class="all-hd"><div class="seg" role="group" aria-label="Bracket" id="all-bkt">'+bkt+'</div>'
       + '<div class="seg" role="group" aria-label="Role" id="all-role">'+roles+'</div>'
