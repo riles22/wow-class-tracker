@@ -14,6 +14,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="riles22">
 <title>Curse of Ula'tek — 12.1 PTR Spec Tracker</title>
+<!-- Favicon as an inline data URI: the site is one self-contained file, so the icon
+     ships inside it — nothing extra to host on Pages, works from file:// too. -->
+<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="88">⚔️</text></svg>'>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- Fonts load async from the main script (CSP-safe, no inline handler) so first paint
@@ -573,7 +576,8 @@
   table.alltab th, table.alltab td{padding:2px 7px; white-space:nowrap; border-bottom:1px solid var(--edge)}
   table.alltab thead th{position:sticky; top:0; z-index:3; background:var(--bg-2); text-align:center;
     font-family:var(--body); font-weight:600; font-size:11px; color:var(--ink-dim); cursor:pointer; user-select:none}
-  table.alltab thead tr.filt th{top:44px; z-index:3; cursor:default; padding:2px 4px; background:var(--bg-3)}
+  table.alltab thead tr.filt th{top:var(--all-h1, 44px); z-index:3; cursor:default; padding:2px 4px; background:var(--bg-3)}
+  .all-val{font-family:var(--mono); font-size:11px; color:var(--ink-faint)}
   table.alltab thead th.grp{cursor:default; font-size:10px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint)}
   table.alltab .nm{position:sticky; left:0; z-index:2; background:var(--bg-2); text-align:left; min-width:158px}
   table.alltab thead .nm{z-index:4}
@@ -2672,29 +2676,54 @@ function openSpecFromFinder(cls, spec){
   // that role; null means the measurement does not exist for the role (a tank has no sim,
   // a healer no Dummy Dome), which is a different fact from "we have not fetched it yet"
   // and must render differently.
+  /* Column roster (expanded 2026-08-03 at Riley's request — popularity, mythicstats, a
+     rankable raid PTR-testing source, more Dummy Dome and WCL cuts). Additions are gated
+     on the same honesty test as v1: a column earns its place only if most of its cells
+     can actually rank. Dummy 2T/3T stay out (7-8 ranked of 26 — a column of dashes), and
+     the zone-54 raid-testing column stays but shows the normalized SCORE as a dimmed
+     number when unranked (`scoreWhenUnranked`): every one of its 34 rows sits below the
+     10-parse rank floor right now, and a column of silent dashes reads as "not fetched"
+     when the truth is "fetched, too thin to rank". Robydoby's 99th-pct testing is the
+     rankable raid PTR column (26/26 DPS + 7/7 healers). */
   const COLS = {
     raid: [
       { key:"wcl", label:"WCL median", era:"live", tip:"Warcraft Logs median, Mythic raid — rDPS for DPS, tank rDPS for tanks, HPS for healers. Rank within role.",
         names:{ DPS:"Median rDPS (Mythic, all bosses)", Tank:"Median rDPS (Mythic, all bosses, tank)", Healer:"Median HPS (Mythic, all bosses)" } },
       { key:"archon", label:"Archon", era:"live", tip:"Archon 95th-percentile THROUGHPUT, Mythic raid (not popularity). Rank within role.",
         names:{ DPS:"95th pct DPS (Mythic)", Tank:null, Healer:"95th pct HPS (Mythic)" } },
+      { key:"pop", label:"Popularity", era:"live", tip:"Archon raid popularity — how many players run the spec, not how well it performs. Rank within role.",
+        names:{ DPS:"Popularity", Tank:"Popularity", Healer:"Popularity" } },
       { key:"simc", label:"SimC", era:"live", tip:"SimulationCraft nightly Patchwerk DPS. DPS specs only — healers and tanks have no sim basis.",
         names:{ DPS:"SimC nightly Patchwerk DPS", Tank:null, Healer:null } },
-      { key:"ptr", label:"PTR testing", era:"ptr", tip:"12.1 PTR raid testing score, normalized (Warcraft Logs zone 54). All roles.",
+      { key:"roby", label:"PTR testing", era:"ptr", tip:"12.1 PTR Mythic raid testing, 99th percentile (Robydoby). DPS and healers — no tank cut published.",
+        names:{ DPS:"99th pct DPS (12.1 PTR Mythic raid testing, Robydoby)", Tank:null, Healer:"99th pct HPS (12.1 PTR Mythic raid testing, Robydoby)" } },
+      { key:"ptr", label:"PTR score", era:"ptr", scoreWhenUnranked:true, tip:"12.1 PTR raid testing score, normalized 0–100 (Warcraft Logs zone 54). All rows are currently below the 10-parse rank floor, so the dimmed number is the score itself, unranked.",
         names:{ DPS:"12.1 PTR raid testing score (normalized)", Tank:"12.1 PTR raid testing score (normalized)", Healer:"12.1 PTR raid testing score (normalized)" } },
-      { key:"dummy", label:"Dummy Dome", era:"ptr", dummy:true, tip:"12.1 PTR Dummy Dome composite across target counts (0–100, coverage-floored). DPS specs only." }
+      { key:"vapool", label:"PTR bosses", era:"ptr", tip:"Median raw DPS on 12.1 PTR Venomous Abyss raid-testing bosses, pooled (Warcraft Logs). DPS specs only.",
+        names:{ DPS:"Median raw DPS (12.1 PTR Venomous Abyss, pooled)", Tank:null, Healer:null } },
+      { key:"dummy", label:"Dummy Dome", era:"ptr", dummy:true, tip:"12.1 PTR Dummy Dome composite across target counts (0–100, coverage- and sample-floored). DPS specs only." },
+      { key:"d1", label:"Dummy 1T", era:"ptr", tip:"Median raw DPS on the single-target 12.1 PTR dummy (Warcraft Logs zone 52). DPS specs only. Rank within role.",
+        names:{ DPS:"Median raw DPS (12.1 PTR Dummy Dome, 1T)", Tank:null, Healer:null } },
+      { key:"d5", label:"Dummy 5T", era:"ptr", tip:"Median raw DPS on the five-target 12.1 PTR dummy (Warcraft Logs zone 52). DPS specs only. Rank within role.",
+        names:{ DPS:"Median raw DPS (12.1 PTR Dummy Dome, 5T)", Tank:null, Healer:null } }
     ],
     mplus: [
       { key:"wcl", label:"WCL median", era:"live", tip:"Warcraft Logs median, M+ all dungeons — rDPS for DPS, tank rDPS for tanks, HPS for healers. Rank within role.",
         names:{ DPS:"Median rDPS (M+, all dungeons)", Tank:"Median rDPS (M+, all dungeons, tank)", Healer:"Median HPS (M+, all dungeons)" } },
       { key:"archon", label:"Archon score", era:"live", tip:"Archon M+ SCORE tier basis, 95th percentile. Rank within role.",
         names:{ DPS:"M+ score (95th pct)", Tank:"M+ score (95th pct)", Healer:"M+ score (95th pct)" } },
+      { key:"pop", label:"Popularity", era:"live", tip:"Archon M+ popularity — how many players run the spec, not how well it performs. Rank within role.",
+        names:{ DPS:"Popularity", Tank:"Popularity", Healer:"Popularity" } },
       { key:"murlok", label:"Murlok ceiling", era:"live", tip:"Murlok top-50 CEILING — the average rating of each spec's best 50 players. Not popularity. Rank within role.",
         names:{ DPS:"Top-50 avg M+ rating (ceiling)", Tank:"Top-50 avg M+ rating (ceiling)", Healer:"Top-50 avg M+ rating (ceiling)" } },
       { key:"wowmeta", label:"WoWMeta LB", era:"live", tip:"WoWMeta lower-bound 95% CI rating (Blizzard API, population-wide). Rank within role.",
         names:{ DPS:"M+ lower-bound 95% CI rating (Blizzard API, population-wide)", Tank:"M+ lower-bound 95% CI rating (Blizzard API, population-wide)", Healer:"M+ lower-bound 95% CI rating (Blizzard API, population-wide)" } },
+      { key:"mstats", label:"Top-2000 keys", era:"live", tip:"Mythicstats representation among the top 2000 keys — a presence measure at the very top end. Rank within role.",
+        names:{ DPS:"Top-2000 keys representation", Tank:"Top-2000 keys representation", Healer:"Top-2000 keys representation" } },
       { key:"ptr", label:"PTR testing", era:"ptr", tip:"12.1 PTR M+ testing median (Warcraft Logs zone 56), by role. Rank within role.",
-        names:{ DPS:"Median rDPS (12.1 PTR M+ testing)", Tank:"Median rDPS (12.1 PTR M+ testing, tank)", Healer:"Median HPS (12.1 PTR M+ testing)" } }
+        names:{ DPS:"Median rDPS (12.1 PTR M+ testing)", Tank:"Median rDPS (12.1 PTR M+ testing, tank)", Healer:"Median HPS (12.1 PTR M+ testing)" } },
+      { key:"keys", label:"PTR keys", era:"ptr", tip:"Median raw DPS in 12.1 PTR M+ keys, pooled across dungeons (Warcraft Logs zone 56). DPS specs only.",
+        names:{ DPS:"Median raw DPS (12.1 PTR M+ keys, pooled)", Tank:null, Healer:null } }
     ]
   };
 
@@ -2712,35 +2741,44 @@ function openSpecFromFinder(cls, spec){
     const tier = rated[src.id] ?? null;
     if(tier == null){
       const stored = Object.prototype.hasOwnProperty.call(rated, src.id);
-      return { tier:null, score:-1, tip: stored ? src.name+": listed, not yet placed (TBD upstream)" : src.name+": not rated" };
+      return { tier:null, score:null, tip: stored ? src.name+": listed, not yet placed (TBD upstream)" : src.name+": not rated" };
     }
     return { tier, score:(SCALES.scales[src.scale].values[tier] ?? 0), tip:src.name+": "+tier };
   }
   function rankCell(s, col){
     if(col.dummy){
-      if(s.role !== "DPS") return { rank:null, score:-1, na:true, tip:"Dummy Dome is DPS-only — no such measurement for a "+s.role.toLowerCase() };
+      if(s.role !== "DPS") return { rank:null, score:null, na:true, tip:"Dummy Dome is DPS-only — no such measurement for a "+s.role.toLowerCase() };
       const d = s.ptrDummy;
-      if(!d || d.rank == null) return { rank:null, score:-1, tip:"Dummy Dome: pending fetch" };
+      if(!d || d.rank == null) return { rank:null, score:null, tip:"Dummy Dome: no composite — unlogged, or its logged cuts are below the coverage/sample floors" };
       return { rank:d.rank, of:d.of ?? null, score:-d.rank, tip:"Dummy Dome composite "+d.score+"/100 — rank #"+d.rank+(d.of?" of "+d.of:"") };
     }
     const name = col.names[s.role];
-    if(!name) return { rank:null, score:-1, na:true, tip:col.label+" is not measured for a "+s.role.toLowerCase() };
+    if(!name) return { rank:null, score:null, na:true, tip:col.label+" is not measured for a "+s.role.toLowerCase() };
     const m = (s.metrics||[]).find(x => x.bracket === A.bracket && x.name === name);
-    if(!m || m.rank == null) return { rank:null, score:-1, tip:col.label+": pending fetch" };
+    if(!m) return { rank:null, score:null, tip:col.label+": pending fetch" };
+    if(m.rank == null){
+      // Fetched but below the rank floor. For a column flagged scoreWhenUnranked the value
+      // itself is a meaningful 0-100 score — show it dimmed with its n, and sort it by
+      // value BELOW every ranked row (ranks are -1..-40; values map far under that).
+      if(col.scoreWhenUnranked && m.value != null)
+        return { rank:null, val:m.value, score:-1000 + m.value,
+                 tip:name+" — score "+m.value+"/100, n="+(m.n ?? "?")+" parses: below the 10-parse rank floor, so shown as a score, not a rank" };
+      return { rank:null, score:null, tip:col.label+": fetched but below the 10-parse rank floor (n="+(m.n ?? "?")+")" };
+    }
     return { rank:m.rank, of:m.of, score:-m.rank, tip:name+" — rank #"+m.rank+" of "+m.of+" ("+m.value.toLocaleString()+" "+(m.unit||"")+")" };
   }
   const consCell = s => { const c = s.consensus && s.consensus[A.bracket];
-    return c ? { tier:c.tier, score:c.score, div:c.diverges, tip:"Consensus "+c.tier+" ("+c.score+"/100)" } : { tier:null, score:-1, tip:"No ratings yet" }; };
+    return c ? { tier:c.tier, score:c.score, div:c.diverges, tip:"Consensus "+c.tier+" ("+c.score+"/100)" } : { tier:null, score:null, tip:"No ratings yet" }; };
   const projCell = s => { const p = s.projection && s.projection[A.bracket];
     return p ? { tier:p.tier, score:p.score, conf:p.confidence, tip:"Our 12.1 forecast: "+p.tier+" ("+p.score+"/100, confidence "+p.confidence+") — "+p.basis }
-             : { tier:null, score:-1, tip:"No projection — nothing to project from" }; };
+             : { tier:null, score:null, tip:"No projection — nothing to project from" }; };
 
   function cellFor(s, key){
     if(key === "consensus") return consCell(s);
     if(key === "projection") return projCell(s);
     if(key.startsWith("m:")) return rankCell(s, metricCols().find(c => c.key === key.slice(2)) || {names:{}});
     const src = TIER_SOURCES.find(x => x.id === key);
-    return src ? tierCell(s, src) : { score:-1 };
+    return src ? tierCell(s, src) : { score:null };
   }
 
   function rows(){
@@ -2759,7 +2797,15 @@ function openSpecFromFinder(cls, spec){
       });
     }
     return list.sort((a,b) => {
-      const d = (cellFor(b, A.sortKey).score - cellFor(a, A.sortKey).score) * (A.sortDir < 0 ? 1 : -1);
+      const sa = cellFor(a, A.sortKey).score, sb = cellFor(b, A.sortKey).score;
+      // A row with no value for the sort column goes LAST in either direction — the
+      // question a sort asks is "who is top by this measure", and a spec the measure
+      // cannot see is not an answer to it. (Before this, a missing rank scored -1 and
+      // TIED with rank #1, burying the actual top spec under a wall of dashes.)
+      if(sa == null && sb == null) return (a.class+a.spec).localeCompare(b.class+b.spec);
+      if(sa == null) return 1;
+      if(sb == null) return -1;
+      const d = (sb - sa) * (A.sortDir < 0 ? 1 : -1);
       return d || (a.class+a.spec).localeCompare(b.class+b.spec);
     });
   }
@@ -2771,6 +2817,8 @@ function openSpecFromFinder(cls, spec){
       + (c.conf ? '<span class="conf" data-c="'+esc(c.conf)+'" title="Evidence strength: '+esc(c.conf)+'">'+(CONF_GLYPH[c.conf]||"")+'</span>' : '');
   }
   function rankHtml(c){
+    if(c.rank == null && c.val != null)
+      return '<span class="all-val" title="'+esc(c.tip)+'">'+esc(c.val)+'</span>';
     if(c.rank == null) return '<span class="all-none" title="'+esc(c.tip)+'">'+(c.na ? "·" : "—")+'</span>';
     return '<span title="'+esc(c.tip)+'">'+(c.rank<=3?'<b>#'+c.rank+'</b>':'#'+c.rank)+'</span>';
   }
@@ -2826,6 +2874,11 @@ function openSpecFromFinder(cls, spec){
            : '')+'</span></div>'
       + '<div class="all-wrap"><table class="alltab"><thead>'+head+'</thead><tbody>'+body+'</tbody></table></div></div>';
 
+    // The filter row's sticky offset must equal the REAL first-header-row height — a
+    // hardcoded value drifts the moment a label wraps, and the drift reads as rows
+    // vanishing under the header.
+    const h1 = ov.querySelector("table.alltab thead tr:first-child");
+    if(h1) ov.querySelector("table.alltab").style.setProperty("--all-h1", h1.offsetHeight + "px");
     ov.querySelector("#all-close").onclick = close;
     ov.querySelectorAll("#all-bkt button").forEach(b=>b.onclick=()=>{ A.bracket=b.dataset.bkt; A.filt={}; render(); });
     ov.querySelectorAll("#all-role button").forEach(b=>b.onclick=()=>{ A.role=b.dataset.ar; render(); });

@@ -506,6 +506,11 @@ test("no agent-writable field can inject markup or a handler into the rendered p
         handlers: [...document.querySelectorAll("*")]
           .filter(e => [...e.attributes].some(a => /^on/i.test(a.name))).length,
         badHrefs: [...document.querySelectorAll("[href]")]
+          // The favicon is the ONE sanctioned data: URI — a hand-authored <link rel="icon">
+          // in the template head, not an agent-writable field. The exemption is that exact
+          // shape, not data: URIs generally: a data: href on an <a> is still a finding.
+          .filter(e => !(e.tagName === "LINK" && e.rel === "icon" &&
+            /^data:image\/svg\+xml,/.test(e.getAttribute("href") ?? "")))
           .filter(e => !/^(https:|#|$)/.test(e.getAttribute("href") ?? "")).length,
         markVisible: document.body.innerText.includes(mark),
         // Count the sinks the probe actually reached. A poisoned field whose section never
