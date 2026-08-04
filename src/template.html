@@ -1064,9 +1064,9 @@ function tierEl(r, mv){
      fetched source's letters would attribute our uncertainty to them. */
   const CONF_GLYPH = { high: "●●●", medium: "●●○", low: "●○○", "prior-only": "○○○" };
   const CONF_TIP = {
-    high: "High confidence — every PTR signal obtainable for this spec and bracket is present",
+    high: "High confidence — every PTR signal obtainable for this spec and bracket is present (testing, tuning outlook, specialist takes, and where they exist Dummy Dome + a PTR tier list)",
     medium: "Medium confidence — more than half the obtainable PTR signals are present",
-    low: "Low confidence — only one obtainable PTR signal is present; this forecast leans on the 12.0.7 baseline",
+    low: "Low confidence — half or fewer of the obtainable PTR signals are present; this forecast leans on the 12.0.7 baseline",
     "prior-only": "No PTR evidence at all — this is the 12.0.7 consensus, not a forecast"
   };
   const conf = (state.source === "projection" && r.conf && CONF_GLYPH[r.conf])

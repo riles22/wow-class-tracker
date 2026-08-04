@@ -19,7 +19,16 @@
    Version handling: `projectionVersion` labels the formula that produced a forecast.
    Grading one frozen forecast against reality is valid at any version — but two forecasts
    from different versions are not one series, so a run refuses to aggregate across them
-   and reports the version it graded. */
+   and reports the version it graded.
+
+   WHAT "ACTUAL" MEANS — a caveat, not a defect (2026-08-04 external audit). The settled
+   endpoint is the tracker's own consensus, i.e. the mean of the PUBLISHER tier lists once
+   they stabilize. The grade therefore measures agreement with expert publisher opinion at
+   settlement, not realized spec strength (log medians would be the other candidate, with
+   their own biases). That is the right target for a tool whose live product IS that
+   consensus — but a perfect score here means "predicted what the publishers would say",
+   and any shared publisher blind spot passes through ungraded. Read every grade with
+   that sentence attached. */
 
 import { readFile, readdir } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
@@ -174,8 +183,13 @@ export function ndcgAtK(rows, k) {
   // dominate the whole number.
   if (rows.length < 2) return null;
   const kk = Math.min(k, rows.length);
-  const byForecast = [...rows].sort((x, y) => y.forecastScore - x.forecastScore);
-  const byActual = [...rows].sort((x, y) => y.actualScore - x.actualScore);
+  // Deterministic spec-name tiebreak (2026-08-04 external audit): with tied scores the
+  // sort order — and therefore DCG and the top-k cut — depended on input order, so the
+  // same data could grade differently across runs. Alphabetical is arbitrary but STABLE,
+  // and it is the same arbitrary choice for forecast and actual, so ties cost or credit
+  // both sides identically.
+  const byForecast = [...rows].sort((x, y) => y.forecastScore - x.forecastScore || String(x.spec).localeCompare(String(y.spec)));
+  const byActual = [...rows].sort((x, y) => y.actualScore - x.actualScore || String(x.spec).localeCompare(String(y.spec)));
   const dcg = list => list.slice(0, kk).reduce((s, r, i) => s + r.actualScore / Math.log2(i + 2), 0);
   const ideal = dcg(byActual);
   return ideal ? +(dcg(byForecast) / ideal).toFixed(3) : null;
@@ -189,9 +203,11 @@ export function rankingFor(rows) {
       const sub = scored.filter(r => r.bracket === bracket && r.role === role);
       if (sub.length < 3) continue;
       const k = role === "DPS" ? 5 : 3;
-      const actualTop = new Set([...sub].sort((x, y) => y.actualScore - x.actualScore)
+      // Same stable tiebreak as ndcgAtK — a tie at the k boundary must not let input
+      // order decide which spec makes the top set.
+      const actualTop = new Set([...sub].sort((x, y) => y.actualScore - x.actualScore || String(x.spec).localeCompare(String(y.spec)))
         .slice(0, k).map(r => r.spec));
-      const forecastTop = new Set([...sub].sort((x, y) => y.forecastScore - x.forecastScore)
+      const forecastTop = new Set([...sub].sort((x, y) => y.forecastScore - x.forecastScore || String(x.spec).localeCompare(String(y.spec)))
         .slice(0, k).map(r => r.spec));
       const overlap = [...forecastTop].filter(x => actualTop.has(x)).length;
       out[`${bracket}/${role}`] = {

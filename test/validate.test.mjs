@@ -502,3 +502,27 @@ test("ptr-builds: entries without an explicit kind are still builds", async () =
   assert.ok(implicit.every(b => b.forumUrl));
   assert.deepEqual(validateData(data, { fullRoster: true }), []);
 });
+
+test("validateData gates the take fields the expert model reads", async () => {
+  // Since PROJECTION_VERSION v7 the take lane feeds the projection, and the 2026-08-04
+  // audit showed a single-field sentiment mutation crossing tier boundaries with nothing
+  // failing red. Every field expertRead() consumes is now schema-gated.
+  const data = await loadData(ROOT);
+  const broken = structuredClone(data);
+  const [t1, t2, t3, t4, t5] = broken.creatorTakes.takes;
+  t1.sentiment = "bullish";
+  delete t2.patchContext;
+  t3.bracket = "arena";
+  t4.superseded = "yes";
+  delete t5.date;
+  const errors = validateData(broken);
+  assert.ok(errors.some(e => e.includes('sentiment "bullish"')), "sentiment enum");
+  assert.ok(errors.some(e => e.includes("needs a patchContext")), "patchContext required");
+  assert.ok(errors.some(e => e.includes('bracket "arena"')), "bracket enum when present");
+  assert.ok(errors.some(e => e.includes("superseded must be a boolean")), "superseded type");
+  assert.ok(errors.some(e => e.includes("needs a date")), "date required");
+  // An explicit, valid bracket scope passes.
+  const ok = structuredClone(data);
+  ok.creatorTakes.takes[0].bracket = "mplus";
+  assert.deepEqual(validateData(ok).filter(e => e.includes("bracket")), []);
+});
