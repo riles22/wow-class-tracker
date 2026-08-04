@@ -188,8 +188,9 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   already computed within (role, bracket, name), so "WCL median" resolves to rDPS / tank
   rDPS / HPS by the row's role. Two absences render differently and must stay that way:
   `·` = no such measurement exists for that role, `—` = it exists but has not landed.
-  Covered by three UI invariants; the overlay does NOT yet write hash state (neither do
-  the Finder or the Ladder — fix all three together in the UI/UX pass).
+  Covered by six UI invariants. All three overlays (Finder / Ladder / Compare all)
+  deep-link via `view=` + short per-overlay params since the 2026-08-03 UI/UX pass;
+  exploration state (search text, column filters) deliberately stays out of the URL.
 - **Fight view**: `data/encounter-tiers.json` holds Archon per-boss (throughput) and
   per-dungeon (score) tiers — single-source by design, labeled as Archon in the UI; the
   Fight selector swaps the matching tier column. Refresh alongside the tier lists.

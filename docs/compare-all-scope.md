@@ -108,8 +108,31 @@ the existing `applyHash`/`writeHash` state like every other view.
   role=All interleaves three separate within-role ladders, so three rows legitimately
   read "#1". That is correct (ranks never crossed a role boundary) but reads as a bug, so
   the count line says so and points at the role filter.
-- **Deep-linking deferred.** The overlay does not yet write hash state; opening it is not
-  shareable. Not required for v1 and the other two overlays behave the same way.
+- **Deep-linking: SHIPPED in the UI/UX pass** (2026-08-03, v2 below) for all three
+  overlays at once — `view=all|ladder|finder` plus short per-overlay params (bracket,
+  role, sort for this view). Exploration state (search text, per-column filters) stays
+  out of the URL deliberately: a link is a destination, not a session recording.
+
+## v2 (2026-08-03, Riley's field report)
+
+- **The sort bug that buried the top spec.** A missing rank scored -1 — the same sort
+  score as rank #1 (-rank). Sorting any rank column with role=All interleaved every
+  no-data row in a tie with #1, then broke the tie alphabetically, so the actual top spec
+  sat below a wall of dashes. Absent values now sort LAST in both directions: the question
+  a sort asks is "who is top by this measure", and a spec the measure cannot see is not an
+  answer to it.
+- **The sticky filter row assumed a 44px header.** The real header is ~22px, so rows slid
+  through a phantom gap while scrolling. The offset is now measured from the rendered
+  header at draw time.
+- **Column roster expanded** on the same honesty gate as v1 (most cells must rank):
+  Popularity (both brackets), Mythicstats Top-2000 keys (M+), Robydoby 99th-pct as the
+  rankable raid PTR-testing column (26/26 DPS + 7/7 healers), Venomous Abyss pooled and
+  Dummy 1T/5T (raid), PTR keys pooled (M+). Dummy 2T/3T stay out — 7-8 ranked of 26
+  would be a column of dashes.
+- **The zone-54 column shows scores, not dashes.** Every one of its 34 rows is below the
+  10-parse rank floor, so the rank column was all "—", which reads as "not fetched" when
+  the truth is "fetched, too thin to rank". It now shows the normalized score as a dimmed
+  NUMBER (never a rank) with n in the tooltip, and sorts below every ranked row.
 
 ## Tests
 

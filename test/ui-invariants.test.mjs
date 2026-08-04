@@ -506,6 +506,11 @@ test("no agent-writable field can inject markup or a handler into the rendered p
         handlers: [...document.querySelectorAll("*")]
           .filter(e => [...e.attributes].some(a => /^on/i.test(a.name))).length,
         badHrefs: [...document.querySelectorAll("[href]")]
+          // The favicon is the ONE sanctioned data: URI — a hand-authored <link rel="icon">
+          // in the template head, not an agent-writable field. The exemption is that exact
+          // shape, not data: URIs generally: a data: href on an <a> is still a finding.
+          .filter(e => !(e.tagName === "LINK" && e.rel === "icon" &&
+            /^data:image\/svg\+xml,/.test(e.getAttribute("href") ?? "")))
           .filter(e => !/^(https:|#|$)/.test(e.getAttribute("href") ?? "")).length,
         markVisible: document.body.innerText.includes(mark),
         // Count the sinks the probe actually reached. A poisoned field whose section never
@@ -723,4 +728,47 @@ ui("Compare all sorts tiers by scale score, not alphabetically", async page => {
   for (let i = 1; i < seen.length; i++) {
     assert.ok(seen[i] >= seen[i - 1], `tier order must follow the scale, not the alphabet (position ${i})`);
   }
+});
+
+/* ---------- overlay deep-linking (UI/UX pass) ---------- */
+
+ui("an overlay deep link restores the view and its state; open state round-trips the URL", async page => {
+  // Opening an overlay and changing its state must mirror into the hash…
+  await page.click("#allbtn");
+  await page.waitForSelector("#all-ov.open");
+  await page.click('#all-bkt button[data-bkt="mplus"]');
+  let hash = await page.evaluate(() => location.hash);
+  assert.match(hash, /view=all/, "the open overlay is in the URL");
+  assert.match(hash, /ab=mplus/, "…with its non-default state");
+  // …and closing must clear it, or every later link silently reopens a dead overlay.
+  await page.click("#all-close");
+  hash = await page.evaluate(() => location.hash || "");
+  assert.ok(!/view=/.test(hash), "closing removes the view from the URL");
+}, "");
+
+ui("a shared overlay link opens on the linked bracket, role and sort", async page => {
+  await page.waitForSelector("#all-ov.open table.alltab tbody tr");
+  assert.equal(await page.$eval('#all-bkt button[aria-pressed="true"]', e => e.dataset.bkt), "mplus");
+  assert.equal(await page.$eval('#all-role button[aria-pressed="true"]', e => e.dataset.ar), "Healer");
+  const rows = await page.$$eval("table.alltab tbody tr", r => r.length);
+  assert.equal(rows, 7, "seven healers");
+  // An invalid sort key in a link must fall back, never draw a sort the table lacks.
+}, "#view=all&ab=mplus&ar=Healer&ak=m:nonsense");
+
+ui("a spec with takes but no writeup says what IS known, not 'pending'", async page => {
+  const data = payload();
+  const takes = data.creatorTakes?.takes ?? [];
+  const bare = data.specs.find(s => !s.ptr &&
+    takes.some(t => t.class === s.class && t.spec === s.spec && !t.superseded &&
+      (t.patchContext || "").includes("PTR")));
+  assert.ok(bare, "expected a writeup-less spec that carries takes");
+  const text = await page.evaluate(([cls, spec]) => {
+    const row = [...document.querySelectorAll(".row.clickable")].find(r =>
+      r.querySelector(".spec-txt")?.textContent.trim() === spec &&
+      r.querySelector(".cls")?.textContent.trim() === cls);
+    row.click();
+    return row.querySelector(".d-summary")?.textContent ?? "";
+  }, [bare.class, bare.spec]);
+  assert.match(text, /cited creator take/, "the slot points at the takes");
+  assert.doesNotMatch(text, /pending/i, "and never implies nothing is known");
 });

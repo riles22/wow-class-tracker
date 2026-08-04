@@ -11,10 +11,16 @@
 -->
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-KWGzG53cu4eEx+23avIlwfnPjraH0wc2l+/6Um/fdtk='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-tSTlWbP5T1aPnWoBFR4DVv3iaPfQLZkdlx1FYT3Htg8='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="riles22">
 <title>Curse of Ula'tek — 12.1 PTR Spec Tracker</title>
+<!-- The brand mark, as favicon: Ula'tek's serpent coiled into an S — the patch's
+     villain drawn as the letter that means "top tier". Site gold on the site's dark
+     violet, so the tab matches the page. Shipped as an inline data URI because the site
+     is one self-contained file: nothing extra to host on Pages, works from file:// too.
+     The same artwork renders inline in the masthead (.brandmark). -->
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22><rect x=%222%22 y=%222%22 width=%2260%22 height=%2260%22 rx=%2214%22 fill=%22%23130B22%22 stroke=%22%23B57BEE%22 stroke-opacity=%22.45%22 stroke-width=%222.5%22/><path d=%22M44.5 18.5 C42 12.5 36.5 10.5 31.5 10.5 C23.5 10.5 18 14.8 18 20.5 C18 26.6 24.5 29 32 32 C39.5 35 46 37.4 46 43.5 C46 49.5 40.5 53.5 32.5 53.5 C26.8 53.5 21.5 51.4 19.5 46.5%22 fill=%22none%22 stroke=%22%23F0C24B%22 stroke-width=%228.6%22 stroke-linecap=%22round%22/><circle cx=%2244.8%22 cy=%2217.6%22 r=%225.7%22 fill=%22%23F0C24B%22/><circle cx=%2246.6%22 cy=%2216.2%22 r=%221.5%22 fill=%22%23130B22%22/></svg>'>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- Fonts load async from the main script (CSP-safe, no inline handler) so first paint
@@ -57,6 +63,8 @@
   /* ---------- header ---------- */
   .masthead{position:relative; overflow:hidden; border-bottom:1px solid var(--edge)}
   .starfield{position:absolute; inset:0; pointer-events:none; opacity:.7}
+  .brandmark{width:34px; height:34px; vertical-align:-5px; margin-right:11px}
+  @media(max-width:560px){ .brandmark{width:26px; height:26px; vertical-align:-4px; margin-right:8px} }
   .masthead-inner{position:relative; max-width:1120px; margin:0 auto; padding:34px 20px 26px}
   .eyebrow{
     font-family:var(--mono); font-size:11px; letter-spacing:.28em; text-transform:uppercase;
@@ -574,7 +582,8 @@
   table.alltab th, table.alltab td{padding:2px 7px; white-space:nowrap; border-bottom:1px solid var(--edge)}
   table.alltab thead th{position:sticky; top:0; z-index:3; background:var(--bg-2); text-align:center;
     font-family:var(--body); font-weight:600; font-size:11px; color:var(--ink-dim); cursor:pointer; user-select:none}
-  table.alltab thead tr.filt th{top:44px; z-index:3; cursor:default; padding:2px 4px; background:var(--bg-3)}
+  table.alltab thead tr.filt th{top:var(--all-h1, 44px); z-index:3; cursor:default; padding:2px 4px; background:var(--bg-3)}
+  .all-val{font-family:var(--mono); font-size:11px; color:var(--ink-faint)}
   table.alltab thead th.grp{cursor:default; font-size:10px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint)}
   table.alltab .nm{position:sticky; left:0; z-index:2; background:var(--bg-2); text-align:left; min-width:158px}
   table.alltab thead .nm{z-index:4}
@@ -639,7 +648,7 @@
   <canvas class="starfield" id="stars" aria-hidden="true"></canvas>
   <div class="masthead-inner">
     <p class="eyebrow">WoW Midnight · Patch 12.1 PTR</p>
-    <h1 class="title"><span class="curse">Curse of Ula'tek</span> — Spec Tracker</h1>
+    <h1 class="title"><svg class="brandmark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#130B22" stroke="#B57BEE" stroke-opacity=".45" stroke-width="2.5"/><path d="M44.5 18.5 C42 12.5 36.5 10.5 31.5 10.5 C23.5 10.5 18 14.8 18 20.5 C18 26.6 24.5 29 32 32 C39.5 35 46 37.4 46 43.5 C46 49.5 40.5 53.5 32.5 53.5 C26.8 53.5 21.5 51.4 19.5 46.5" fill="none" stroke="#F0C24B" stroke-width="8.6" stroke-linecap="round"/><circle cx="44.8" cy="17.6" r="5.7" fill="#F0C24B"/><circle cx="46.6" cy="16.2" r="1.5" fill="#130B22"/></svg><span class="curse">Curse of Ula'tek</span> — Spec Tracker</h1>
     <div class="rule"></div>
     <!-- One sentence of lede; the mental model folds. This paragraph ran five lines and
          was ~40% of a 329px masthead sitting directly above a page people check daily. -->
@@ -886,6 +895,20 @@ const STARS = (() => {
 const saveStars = () => { try { localStorage.setItem("wct-stars", JSON.stringify([...STARS])); } catch {} };
 const slugOf = s => `${s.class} ${s.spec}`.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 let hashSpec = null;   // slug of the most recently opened drawer — mirrored into the URL
+/* Overlay deep-linking (UI/UX pass, 2026-08-03). The three overlays — Finder, Ladder,
+   Compare all — kept their state private, so an open overlay was unshareable: the one
+   thing a "look at this table" link needs. Each overlay registers here with
+   { isOpen, params, openFromHash }; writeHash serializes the open one into `view` (+ its
+   own short params), and a shared link restores it. Registration happens AFTER the boot
+   block runs (the IIFEs sit later in the file), so boot stashes the pending view and each
+   IIFE claims it on registration — ordering solved by handshake, not by moving code. */
+const OV_REG = {};
+let PENDING_VIEW = null, PENDING_PARAMS = null;
+function claimPendingView(name){
+  if(PENDING_VIEW !== name || !OV_REG[name]) return;
+  const params = PENDING_PARAMS; PENDING_VIEW = null; PENDING_PARAMS = null;
+  OV_REG[name].openFromHash(params);
+}
 let applyingHash = false;
 const HASH_KEYS = { src:"source", era:"era", role:"role", ptr:"ptrOnly", star:"starOnly", sort:"sort", q:"q", fight:"fight" };
 function writeHash(){
@@ -896,6 +919,13 @@ function writeHash(){
     if(v !== STATE_DEFAULTS[sk]) p.set(k, typeof v === "boolean" ? "1" : v);
   }
   if(hashSpec) p.set("spec", hashSpec);
+  for(const [name, o] of Object.entries(OV_REG)){
+    if(!o.isOpen()) continue;
+    p.set("view", name);
+    const extra = o.params ? o.params() : null;
+    if(extra) for(const [k, v] of Object.entries(extra)) if(v != null && v !== "") p.set(k, String(v));
+    break; // overlays are modal — at most one is open
+  }
   // Pinned compare set travels in the URL too, so a comparison is shareable (L14).
   if(typeof COMPARE !== "undefined" && COMPARE.size){
     const slugs = [...COMPARE].map(k=>{ const s = SPECS.find(x=>`${x.class}|${x.spec}`===k); return s?slugOf(s):null; }).filter(Boolean);
@@ -920,6 +950,7 @@ function applyHash(){
     cmp.split(",").forEach(slug=>{ const s = SPECS.find(x=>slugOf(x)===slug);
       if(s && COMPARE.size < 3) COMPARE.add(`${s.class}|${s.spec}`); });
   }
+  if(p.get("view")){ PENDING_VIEW = p.get("view"); PENDING_PARAMS = p; }
   return p.get("spec"); // slug to open after first render (null if none)
 }
 
@@ -1221,9 +1252,19 @@ function drawerHTML(s){
        <p class="d-summary">${p.theme?`<span class="theme">${esc(p.theme)}</span><br>`:""}${esc(p.summary)}${draftSrcHTML(p)}</p>
        ${signalHTML}<p class="d-h">Key changes</p>
        <ul class="d-list">${(p.changes||[]).map(c=>`<li>${esc(c)}</li>`).join("")}</ul>` : showPtr ? `
-       <p class="d-summary"><span class="theme">No 12.1 PTR writeup yet</span><br>${state.era==="ptr"
-         ? "Only PTR-era numbers are shown in this view — switch Era to Both for the 12.0.7 baseline alongside."
-         : "Current-season baseline below — the PTR read gets added to data/specs.json when this spec's pass lands."}</p>${signalHTML}` : `
+       <p class="d-summary"><span class="theme">No 12.1 PTR writeup yet</span><br>${(()=>{
+         // "Pending fetch" implied nothing was known, which was false for every one of
+         // these specs: they all carry cited creator takes, and since v7 the takes'
+         // corroboration-weighted aggregate steers the 12.1 outlook above. Say what IS
+         // known and where it sits instead of apologising for what isn't.
+         const tk = CREATOR_TAKES.filter(t=>t.class===s.class && t.spec===s.spec && !t.superseded && takeEra(t)==="ptr").length;
+         const takesNote = tk
+           ? `No theorycrafter has published a distilled 12.1 read for this spec — but ${tk} cited creator take${tk===1?"":"s"} cover${tk===1?"s":""} it (right column), and their corroboration-weighted aggregate steers the 12.1 outlook above.`
+           : "No 12.1 analysis has surfaced for this spec yet — no writeup, no creator takes.";
+         return state.era==="ptr"
+           ? takesNote + " Only PTR-era numbers are shown in this view — switch Era to Both for the 12.0.7 baseline alongside."
+           : takesNote;
+       })()}</p>${signalHTML}` : `
        <p class="d-summary"><span class="theme">12.0.7 baseline view</span><br>Live-season data only — switch Era to 12.1 PTR (or Both) for the change read.</p>${signalHTML}`;
   const tierset = showPtr ? tierSetHTML(s) : "";
   // Inner content only — the .drawer shell is emitted empty by rowHTML and filled lazily
@@ -2425,8 +2466,8 @@ function openSpecFromFinder(cls, spec){
     if(scroll) box.scrollIntoView({ behavior:"smooth", block:"nearest" });
   }
   let opener=null;
-  function open(){ opener=document.activeElement; renderPanel(); ov.classList.add("open"); document.body.style.overflow="hidden"; const c=ov.querySelector("#finder-close"); if(c) setTimeout(()=>c.focus(),0); }
-  function close(){ ov.classList.remove("open"); document.body.style.overflow=""; if(opener && opener.focus) opener.focus(); }
+  function open(){ opener=document.activeElement; renderPanel(); ov.classList.add("open"); document.body.style.overflow="hidden"; writeHash(); const c=ov.querySelector("#finder-close"); if(c) setTimeout(()=>c.focus(),0); }
+  function close(){ ov.classList.remove("open"); document.body.style.overflow=""; writeHash(); if(opener && opener.focus) opener.focus(); }
   ov.addEventListener("click", e => { if(e.target===ov) close(); });
   ov.addEventListener("keydown", e => { // focus trap — keep Tab inside the modal
     if(e.key!=="Tab" || !ov.classList.contains("open")) return;
@@ -2437,6 +2478,9 @@ function openSpecFromFinder(cls, spec){
   });
   document.addEventListener("keydown", e => { if(e.key==="Escape" && ov.classList.contains("open")) close(); });
   document.getElementById("finderbtn").addEventListener("click", open);
+  OV_REG.finder = { isOpen: ()=>ov.classList.contains("open"),
+    openFromHash: ()=>{ open(); writeHash(); } };
+  claimPendingView("finder");
 })();
 
 /* ================================================================
@@ -2618,9 +2662,9 @@ function openSpecFromFinder(cls, spec){
       <div id="ladder-chart">${cur?caption(cur)+drawLadder(cur):`<p class="ladder-cap">No series for this scope.</p>`}</div>
     </div>`;
     ov.querySelector("#ladder-close").onclick = close;
-    ov.querySelectorAll("#ladder-bkt button").forEach(b=>b.onclick=()=>{ L.bracket=b.dataset.bkt; renderPanel("bkt"); });
-    ov.querySelectorAll("#ladder-role button").forEach(b=>b.onclick=()=>{ L.role=b.dataset.lr; renderPanel("role"); });
-    ov.querySelectorAll(".lgrp .fopt").forEach(b=>b.onclick=()=>{ L.seriesKey=b.dataset.key; renderPanel("series"); });
+    ov.querySelectorAll("#ladder-bkt button").forEach(b=>b.onclick=()=>{ L.bracket=b.dataset.bkt; renderPanel("bkt"); writeHash(); });
+    ov.querySelectorAll("#ladder-role button").forEach(b=>b.onclick=()=>{ L.role=b.dataset.lr; renderPanel("role"); writeHash(); });
+    ov.querySelectorAll(".lgrp .fopt").forEach(b=>b.onclick=()=>{ L.seriesKey=b.dataset.key; renderPanel("series"); writeHash(); });
     const sb = ov.querySelector("#ladder-search");
     sb.oninput = ()=>{ L.query = sb.value.trim(); applyDim(); };
     applyDim(); // re-apply a persisted highlight to the freshly drawn chart
@@ -2629,8 +2673,8 @@ function openSpecFromFinder(cls, spec){
   }
 
   const ov = document.createElement("div"); ov.className="finder-ov"; ov.id="ladder-ov"; document.body.appendChild(ov);
-  function open(){ opener=document.activeElement; L.role = (state.role==="All"?"DPS":state.role); renderPanel(); ov.classList.add("open"); document.body.style.overflow="hidden"; const c=ov.querySelector("#ladder-close"); if(c) setTimeout(()=>c.focus(),0); }
-  function close(){ ov.classList.remove("open"); document.body.style.overflow=""; if(opener && opener.focus) opener.focus(); }
+  function open(){ opener=document.activeElement; L.role = (state.role==="All"?"DPS":state.role); renderPanel(); ov.classList.add("open"); document.body.style.overflow="hidden"; writeHash(); const c=ov.querySelector("#ladder-close"); if(c) setTimeout(()=>c.focus(),0); }
+  function close(){ ov.classList.remove("open"); document.body.style.overflow=""; writeHash(); if(opener && opener.focus) opener.focus(); }
   ov.addEventListener("click", e=>{ const g=e.target.closest(".ladderrow"); if(g){ openSpecFromFinder(g.dataset.cls,g.dataset.spec); return; } if(e.target===ov) close(); });
   ov.addEventListener("keydown", e=>{
     if(e.key==="Enter"||e.key===" "){ const g=e.target.closest&&e.target.closest(".ladderrow"); if(g){ e.preventDefault(); openSpecFromFinder(g.dataset.cls,g.dataset.spec); return; } }
@@ -2643,6 +2687,21 @@ function openSpecFromFinder(cls, spec){
   });
   document.addEventListener("keydown", e=>{ if(e.key==="Escape" && ov.classList.contains("open")) close(); });
   document.getElementById("ladderbtn").addEventListener("click", open);
+  OV_REG.ladder = {
+    isOpen: ()=>ov.classList.contains("open"),
+    params: ()=>({ lb: L.bracket, lr: L.role, ls: L.seriesKey }),
+    openFromHash: p => {
+      open();
+      if(p){
+        if(["raid","mplus"].includes(p.get("lb"))) L.bracket = p.get("lb");
+        if(["DPS","Healer","Tank"].includes(p.get("lr"))) L.role = p.get("lr");
+        if(p.get("ls")) L.seriesKey = p.get("ls"); // renderPanel falls back if unknown
+        renderPanel();
+      }
+      writeHash();
+    }
+  };
+  claimPendingView("ladder");
   // Geometry is measured at draw time, so an open panel must redraw when the width
   // changes (rotation, window drag) or it keeps the previous width's layout.
   let rz = 0;
@@ -2673,29 +2732,54 @@ function openSpecFromFinder(cls, spec){
   // that role; null means the measurement does not exist for the role (a tank has no sim,
   // a healer no Dummy Dome), which is a different fact from "we have not fetched it yet"
   // and must render differently.
+  /* Column roster (expanded 2026-08-03 at Riley's request — popularity, mythicstats, a
+     rankable raid PTR-testing source, more Dummy Dome and WCL cuts). Additions are gated
+     on the same honesty test as v1: a column earns its place only if most of its cells
+     can actually rank. Dummy 2T/3T stay out (7-8 ranked of 26 — a column of dashes), and
+     the zone-54 raid-testing column stays but shows the normalized SCORE as a dimmed
+     number when unranked (`scoreWhenUnranked`): every one of its 34 rows sits below the
+     10-parse rank floor right now, and a column of silent dashes reads as "not fetched"
+     when the truth is "fetched, too thin to rank". Robydoby's 99th-pct testing is the
+     rankable raid PTR column (26/26 DPS + 7/7 healers). */
   const COLS = {
     raid: [
       { key:"wcl", label:"WCL median", era:"live", tip:"Warcraft Logs median, Mythic raid — rDPS for DPS, tank rDPS for tanks, HPS for healers. Rank within role.",
         names:{ DPS:"Median rDPS (Mythic, all bosses)", Tank:"Median rDPS (Mythic, all bosses, tank)", Healer:"Median HPS (Mythic, all bosses)" } },
       { key:"archon", label:"Archon", era:"live", tip:"Archon 95th-percentile THROUGHPUT, Mythic raid (not popularity). Rank within role.",
         names:{ DPS:"95th pct DPS (Mythic)", Tank:null, Healer:"95th pct HPS (Mythic)" } },
+      { key:"pop", label:"Popularity", era:"live", tip:"Archon raid popularity — how many players run the spec, not how well it performs. Rank within role.",
+        names:{ DPS:"Popularity", Tank:"Popularity", Healer:"Popularity" } },
       { key:"simc", label:"SimC", era:"live", tip:"SimulationCraft nightly Patchwerk DPS. DPS specs only — healers and tanks have no sim basis.",
         names:{ DPS:"SimC nightly Patchwerk DPS", Tank:null, Healer:null } },
-      { key:"ptr", label:"PTR testing", era:"ptr", tip:"12.1 PTR raid testing score, normalized (Warcraft Logs zone 54). All roles.",
+      { key:"roby", label:"PTR testing", era:"ptr", tip:"12.1 PTR Mythic raid testing, 99th percentile (Robydoby). DPS and healers — no tank cut published.",
+        names:{ DPS:"99th pct DPS (12.1 PTR Mythic raid testing, Robydoby)", Tank:null, Healer:"99th pct HPS (12.1 PTR Mythic raid testing, Robydoby)" } },
+      { key:"ptr", label:"PTR score", era:"ptr", scoreWhenUnranked:true, tip:"12.1 PTR raid testing score, normalized 0–100 (Warcraft Logs zone 54). All rows are currently below the 10-parse rank floor, so the dimmed number is the score itself, unranked.",
         names:{ DPS:"12.1 PTR raid testing score (normalized)", Tank:"12.1 PTR raid testing score (normalized)", Healer:"12.1 PTR raid testing score (normalized)" } },
-      { key:"dummy", label:"Dummy Dome", era:"ptr", dummy:true, tip:"12.1 PTR Dummy Dome composite across target counts (0–100, coverage-floored). DPS specs only." }
+      { key:"vapool", label:"PTR bosses", era:"ptr", tip:"Median raw DPS on 12.1 PTR Venomous Abyss raid-testing bosses, pooled (Warcraft Logs). DPS specs only.",
+        names:{ DPS:"Median raw DPS (12.1 PTR Venomous Abyss, pooled)", Tank:null, Healer:null } },
+      { key:"dummy", label:"Dummy Dome", era:"ptr", dummy:true, tip:"12.1 PTR Dummy Dome composite across target counts (0–100, coverage- and sample-floored). DPS specs only." },
+      { key:"d1", label:"Dummy 1T", era:"ptr", tip:"Median raw DPS on the single-target 12.1 PTR dummy (Warcraft Logs zone 52). DPS specs only. Rank within role.",
+        names:{ DPS:"Median raw DPS (12.1 PTR Dummy Dome, 1T)", Tank:null, Healer:null } },
+      { key:"d5", label:"Dummy 5T", era:"ptr", tip:"Median raw DPS on the five-target 12.1 PTR dummy (Warcraft Logs zone 52). DPS specs only. Rank within role.",
+        names:{ DPS:"Median raw DPS (12.1 PTR Dummy Dome, 5T)", Tank:null, Healer:null } }
     ],
     mplus: [
       { key:"wcl", label:"WCL median", era:"live", tip:"Warcraft Logs median, M+ all dungeons — rDPS for DPS, tank rDPS for tanks, HPS for healers. Rank within role.",
         names:{ DPS:"Median rDPS (M+, all dungeons)", Tank:"Median rDPS (M+, all dungeons, tank)", Healer:"Median HPS (M+, all dungeons)" } },
       { key:"archon", label:"Archon score", era:"live", tip:"Archon M+ SCORE tier basis, 95th percentile. Rank within role.",
         names:{ DPS:"M+ score (95th pct)", Tank:"M+ score (95th pct)", Healer:"M+ score (95th pct)" } },
+      { key:"pop", label:"Popularity", era:"live", tip:"Archon M+ popularity — how many players run the spec, not how well it performs. Rank within role.",
+        names:{ DPS:"Popularity", Tank:"Popularity", Healer:"Popularity" } },
       { key:"murlok", label:"Murlok ceiling", era:"live", tip:"Murlok top-50 CEILING — the average rating of each spec's best 50 players. Not popularity. Rank within role.",
         names:{ DPS:"Top-50 avg M+ rating (ceiling)", Tank:"Top-50 avg M+ rating (ceiling)", Healer:"Top-50 avg M+ rating (ceiling)" } },
       { key:"wowmeta", label:"WoWMeta LB", era:"live", tip:"WoWMeta lower-bound 95% CI rating (Blizzard API, population-wide). Rank within role.",
         names:{ DPS:"M+ lower-bound 95% CI rating (Blizzard API, population-wide)", Tank:"M+ lower-bound 95% CI rating (Blizzard API, population-wide)", Healer:"M+ lower-bound 95% CI rating (Blizzard API, population-wide)" } },
+      { key:"mstats", label:"Top-2000 keys", era:"live", tip:"Mythicstats representation among the top 2000 keys — a presence measure at the very top end. Rank within role.",
+        names:{ DPS:"Top-2000 keys representation", Tank:"Top-2000 keys representation", Healer:"Top-2000 keys representation" } },
       { key:"ptr", label:"PTR testing", era:"ptr", tip:"12.1 PTR M+ testing median (Warcraft Logs zone 56), by role. Rank within role.",
-        names:{ DPS:"Median rDPS (12.1 PTR M+ testing)", Tank:"Median rDPS (12.1 PTR M+ testing, tank)", Healer:"Median HPS (12.1 PTR M+ testing)" } }
+        names:{ DPS:"Median rDPS (12.1 PTR M+ testing)", Tank:"Median rDPS (12.1 PTR M+ testing, tank)", Healer:"Median HPS (12.1 PTR M+ testing)" } },
+      { key:"keys", label:"PTR keys", era:"ptr", tip:"Median raw DPS in 12.1 PTR M+ keys, pooled across dungeons (Warcraft Logs zone 56). DPS specs only.",
+        names:{ DPS:"Median raw DPS (12.1 PTR M+ keys, pooled)", Tank:null, Healer:null } }
     ]
   };
 
@@ -2713,35 +2797,44 @@ function openSpecFromFinder(cls, spec){
     const tier = rated[src.id] ?? null;
     if(tier == null){
       const stored = Object.prototype.hasOwnProperty.call(rated, src.id);
-      return { tier:null, score:-1, tip: stored ? src.name+": listed, not yet placed (TBD upstream)" : src.name+": not rated" };
+      return { tier:null, score:null, tip: stored ? src.name+": listed, not yet placed (TBD upstream)" : src.name+": not rated" };
     }
     return { tier, score:(SCALES.scales[src.scale].values[tier] ?? 0), tip:src.name+": "+tier };
   }
   function rankCell(s, col){
     if(col.dummy){
-      if(s.role !== "DPS") return { rank:null, score:-1, na:true, tip:"Dummy Dome is DPS-only — no such measurement for a "+s.role.toLowerCase() };
+      if(s.role !== "DPS") return { rank:null, score:null, na:true, tip:"Dummy Dome is DPS-only — no such measurement for a "+s.role.toLowerCase() };
       const d = s.ptrDummy;
-      if(!d || d.rank == null) return { rank:null, score:-1, tip:"Dummy Dome: pending fetch" };
+      if(!d || d.rank == null) return { rank:null, score:null, tip:"Dummy Dome: no composite — unlogged, or its logged cuts are below the coverage/sample floors" };
       return { rank:d.rank, of:d.of ?? null, score:-d.rank, tip:"Dummy Dome composite "+d.score+"/100 — rank #"+d.rank+(d.of?" of "+d.of:"") };
     }
     const name = col.names[s.role];
-    if(!name) return { rank:null, score:-1, na:true, tip:col.label+" is not measured for a "+s.role.toLowerCase() };
+    if(!name) return { rank:null, score:null, na:true, tip:col.label+" is not measured for a "+s.role.toLowerCase() };
     const m = (s.metrics||[]).find(x => x.bracket === A.bracket && x.name === name);
-    if(!m || m.rank == null) return { rank:null, score:-1, tip:col.label+": pending fetch" };
+    if(!m) return { rank:null, score:null, tip:col.label+": pending fetch" };
+    if(m.rank == null){
+      // Fetched but below the rank floor. For a column flagged scoreWhenUnranked the value
+      // itself is a meaningful 0-100 score — show it dimmed with its n, and sort it by
+      // value BELOW every ranked row (ranks are -1..-40; values map far under that).
+      if(col.scoreWhenUnranked && m.value != null)
+        return { rank:null, val:m.value, score:-1000 + m.value,
+                 tip:name+" — score "+m.value+"/100, n="+(m.n ?? "?")+" parses: below the 10-parse rank floor, so shown as a score, not a rank" };
+      return { rank:null, score:null, tip:col.label+": fetched but below the 10-parse rank floor (n="+(m.n ?? "?")+")" };
+    }
     return { rank:m.rank, of:m.of, score:-m.rank, tip:name+" — rank #"+m.rank+" of "+m.of+" ("+m.value.toLocaleString()+" "+(m.unit||"")+")" };
   }
   const consCell = s => { const c = s.consensus && s.consensus[A.bracket];
-    return c ? { tier:c.tier, score:c.score, div:c.diverges, tip:"Consensus "+c.tier+" ("+c.score+"/100)" } : { tier:null, score:-1, tip:"No ratings yet" }; };
+    return c ? { tier:c.tier, score:c.score, div:c.diverges, tip:"Consensus "+c.tier+" ("+c.score+"/100)" } : { tier:null, score:null, tip:"No ratings yet" }; };
   const projCell = s => { const p = s.projection && s.projection[A.bracket];
     return p ? { tier:p.tier, score:p.score, conf:p.confidence, tip:"Our 12.1 forecast: "+p.tier+" ("+p.score+"/100, confidence "+p.confidence+") — "+p.basis }
-             : { tier:null, score:-1, tip:"No projection — nothing to project from" }; };
+             : { tier:null, score:null, tip:"No projection — nothing to project from" }; };
 
   function cellFor(s, key){
     if(key === "consensus") return consCell(s);
     if(key === "projection") return projCell(s);
     if(key.startsWith("m:")) return rankCell(s, metricCols().find(c => c.key === key.slice(2)) || {names:{}});
     const src = TIER_SOURCES.find(x => x.id === key);
-    return src ? tierCell(s, src) : { score:-1 };
+    return src ? tierCell(s, src) : { score:null };
   }
 
   function rows(){
@@ -2760,7 +2853,15 @@ function openSpecFromFinder(cls, spec){
       });
     }
     return list.sort((a,b) => {
-      const d = (cellFor(b, A.sortKey).score - cellFor(a, A.sortKey).score) * (A.sortDir < 0 ? 1 : -1);
+      const sa = cellFor(a, A.sortKey).score, sb = cellFor(b, A.sortKey).score;
+      // A row with no value for the sort column goes LAST in either direction — the
+      // question a sort asks is "who is top by this measure", and a spec the measure
+      // cannot see is not an answer to it. (Before this, a missing rank scored -1 and
+      // TIED with rank #1, burying the actual top spec under a wall of dashes.)
+      if(sa == null && sb == null) return (a.class+a.spec).localeCompare(b.class+b.spec);
+      if(sa == null) return 1;
+      if(sb == null) return -1;
+      const d = (sb - sa) * (A.sortDir < 0 ? 1 : -1);
       return d || (a.class+a.spec).localeCompare(b.class+b.spec);
     });
   }
@@ -2772,6 +2873,8 @@ function openSpecFromFinder(cls, spec){
       + (c.conf ? '<span class="conf" data-c="'+esc(c.conf)+'" title="Evidence strength: '+esc(c.conf)+'">'+(CONF_GLYPH[c.conf]||"")+'</span>' : '');
   }
   function rankHtml(c){
+    if(c.rank == null && c.val != null)
+      return '<span class="all-val" title="'+esc(c.tip)+'">'+esc(c.val)+'</span>';
     if(c.rank == null) return '<span class="all-none" title="'+esc(c.tip)+'">'+(c.na ? "·" : "—")+'</span>';
     return '<span title="'+esc(c.tip)+'">'+(c.rank<=3?'<b>#'+c.rank+'</b>':'#'+c.rank)+'</span>';
   }
@@ -2827,6 +2930,11 @@ function openSpecFromFinder(cls, spec){
            : '')+'</span></div>'
       + '<div class="all-wrap"><table class="alltab"><thead>'+head+'</thead><tbody>'+body+'</tbody></table></div></div>';
 
+    // The filter row's sticky offset must equal the REAL first-header-row height — a
+    // hardcoded value drifts the moment a label wraps, and the drift reads as rows
+    // vanishing under the header.
+    const h1 = ov.querySelector("table.alltab thead tr:first-child");
+    if(h1) ov.querySelector("table.alltab").style.setProperty("--all-h1", h1.offsetHeight + "px");
     ov.querySelector("#all-close").onclick = close;
     ov.querySelectorAll("#all-bkt button").forEach(b=>b.onclick=()=>{ A.bracket=b.dataset.bkt; A.filt={}; render(); });
     ov.querySelectorAll("#all-role button").forEach(b=>b.onclick=()=>{ A.role=b.dataset.ar; render(); });
@@ -2839,11 +2947,14 @@ function openSpecFromFinder(cls, spec){
     const q = ov.querySelector("#all-q");
     q.oninput = ()=>{ A.q = q.value.trim(); render();
       const n = ov.querySelector("#all-q"); if(n){ n.focus(); n.setSelectionRange(n.value.length, n.value.length); } };
+    // Mirror bracket/role/sort into the URL while open (q and per-column filters are
+    // deliberately not link state — they are exploration, not a destination).
+    if(ov.classList.contains("open")) writeHash();
   }
 
   function open(){ opener=document.activeElement; render(); ov.classList.add("open");
-    document.body.style.overflow="hidden"; const c=ov.querySelector("#all-close"); if(c) setTimeout(()=>c.focus(),0); }
-  function close(){ ov.classList.remove("open"); document.body.style.overflow=""; if(opener && opener.focus) opener.focus(); }
+    document.body.style.overflow="hidden"; writeHash(); const c=ov.querySelector("#all-close"); if(c) setTimeout(()=>c.focus(),0); }
+  function close(){ ov.classList.remove("open"); document.body.style.overflow=""; writeHash(); if(opener && opener.focus) opener.focus(); }
   ov.addEventListener("click", e=>{
     if(e.target===ov){ close(); return; }
     const tr = e.target.closest("tbody tr");
@@ -2859,6 +2970,31 @@ function openSpecFromFinder(cls, spec){
     }
   });
   document.getElementById("allbtn").addEventListener("click", open);
+  OV_REG.all = {
+    isOpen: ()=>ov.classList.contains("open"),
+    // Only non-defaults travel, so a plain open stays a short URL.
+    params: ()=>({
+      ab: A.bracket !== "raid" ? A.bracket : null,
+      ar: A.role !== "All" ? A.role : null,
+      ak: A.sortKey !== "consensus" ? A.sortKey : null,
+      ad: A.sortDir !== -1 ? "1" : null
+    }),
+    openFromHash: p => {
+      if(p){
+        if(["raid","mplus"].includes(p.get("ab"))) A.bracket = p.get("ab");
+        if(["All","DPS","Healer","Tank"].includes(p.get("ar"))) A.role = p.get("ar");
+        const ak = p.get("ak");
+        // A sort key must resolve to a real column in the restored bracket, else the
+        // default — a link must never restore a sort the table cannot draw.
+        if(ak && (ak === "consensus" || ak === "projection"
+            || TIER_SOURCES.some(x => x.id === ak)
+            || (ak.startsWith("m:") && COLS[A.bracket].some(c => "m:"+c.key === ak)))) A.sortKey = ak;
+        if(p.get("ad") === "1") A.sortDir = 1;
+      }
+      open(); writeHash();
+    }
+  };
+  claimPendingView("all");
 })();
 
 /* ---------- ambient starfield (respects reduced motion) ---------- */
