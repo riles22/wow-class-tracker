@@ -412,7 +412,12 @@ docs/     working notes (finder-audit.md · security-audit-2026-07.md ·
           transition-window consensus rule (S2-verified sources only + count chip),
           the frozen forecast's on-page grading, the +14 PTR-surface sunset, the
           12.2-cycle generalization (PHASES constant), and the gearing-lane stub.
-          Phase-1 machinery must land before PHASE_FLIP_DUE (Aug 20).)
+          Phase-1 machinery must land before PHASE_FLIP_DUE (Aug 20).
+          published-gate-scope.md — the SCOPED page-self-date integrity gate
+          (2026-08-04, both owner decisions locked): deterministic published-evidence
+          step + staleness threshold, severity split dishonesty-red/lag-heartbeat.
+          NEXT WORK ITEM — closes the gap that let the 08-02 icyveins-ptr rebuild go
+          unseen for two days while the manifest claimed success.)
 gearing/  the Season 2 gear & loot explorer — a SELF-CONTAINED subproject (own data/,
           harvesters, validator, tests, build → gearing/wow-s2-gearing.html; see
           gearing/README.md). Imported 2026-08-04 from the standalone project; audited

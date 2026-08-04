@@ -286,3 +286,15 @@ representation n; verified against the page, NOT a Blizzard retune); survivabili
   · **ONE TEST EDIT, DISCLOSED:** `test/validate.test.mjs` asserted `tbd === 2` — a fixture assumption about upstream state, not a behaviour, so an ordinary upstream update turned the suite red. Rewritten to assert the guarantee that actually matters: every roster spec carries the `icyveins-ptr` key, and an unplaced spec is stored as an **explicit null rather than omitted**. `src/validate.mjs` and every gate are untouched; `test/` is outside the CODEOWNERS boundary. Same class of fix, same precedent, as the 2026-08-02 `kind === undefined` edit.
   · **⚠ REPO ANOMALY, NOT CAUSED BY THIS WORK AND DELIBERATELY LEFT ALONE.** Partway through, `git status` showed the whole `gearing/` SimC-pipeline changeset **staged on master**, though a clean-tree check immediately after `git reset --hard origin/master` had passed and nothing in this run ran `git add` on those paths. No git hooks are installed. Two of the files (`gearing/src/app.template.html`, `gearing/wow-s2-gearing.html`) are **genuinely different from both HEAD and the `s2-gearing` commit 9bc95bd**, i.e. real unpushed work that discarding would destroy — so nothing was reset, restored or stashed. This run committed **explicit paths only** (`data/scales.json`, `data/sources.json`, `data/specs.json`, `data/history/2026-08-04.json`, `test/validate.test.mjs`, `dist/index.html`), the same discipline the nightly publish job uses, and the gearing state was verified byte-identical before and after the commit. **Left for the owner to resolve.**
   · `npm test` **260 (241 pass / 19 skipped / 0 fail)**, `npm run build` OK, `node src/snapshot.mjs` written (data changed) and rebuilt after. Manifest deliberately **NOT** rewritten — single-source partial refresh, not a full one. Commit `0102bcf`, **not pushed**.
+  · **BOTH OPEN ITEMS RESOLVED (owner, 2026-08-04, later same day):** (1) the S+
+    re-spacing gets **NO `PROJECTION_VERSION` bump** — the formula ("mean of era:ptr
+    tier lists through their own scale") is unchanged; the source's vocabulary moved and
+    the scale config followed it, the same category as upstream data movement. The
+    re-anchoring shifts an unchanged-S spec's forecast by ≤~2 points at the .25 weight,
+    dwarfed by the 22 real moves in the same commit; bumping would sever the two-day-old
+    v8 series to avoid a calibration artifact smaller than its noise floor. Disclosed
+    here and in the scales `_comment` — disclose-don't-version, matching the
+    CONSENSUS_VERSION precedent for era-gated sources. (2) the `published` gate is
+    **scoped as the next work item** — `docs/published-gate-scope.md` (deterministic
+    evidence step + 9d staleness threshold; mismatch/ratchet red at the publish gate,
+    staleness to the heartbeat — both decisions Riley's, in-session).
