@@ -393,8 +393,13 @@ docs/     working notes (finder-audit.md · security-audit-2026-07.md ·
           already been decided, and re-litigating them wastes a run.
           projection-audit-2026-08.md — the 12.1 model audit, with the frozen-weights
           recommendation. compare-all-scope.md — the design record for ⊞ Compare all
-          (BUILT 2026-08-03), including the deltas between scope and build. Next in the
-          queue: the UI/UX pass, then the S2 transition scope.)
+          (BUILT 2026-08-03), including the deltas between scope and build.
+          s2-transition-scope.md — the SCOPED Season-2 transition plan (2026-08-04,
+          all four owner decisions locked inline): launch-week machinery, the
+          transition-window consensus rule (S2-verified sources only + count chip),
+          the frozen forecast's on-page grading, the +14 PTR-surface sunset, the
+          12.2-cycle generalization (PHASES constant), and the gearing-lane stub.
+          Phase-1 machinery must land before PHASE_FLIP_DUE (Aug 20).)
 legacy/   original single-file tracker (pre-conversion reference)
 .github/  workflows/deploy.yml (build+deploy Pages on push) · workflows/ci.yml (tests on
           every push) · workflows/freshness.yml (daily staleness heartbeat → alert issue) ·
