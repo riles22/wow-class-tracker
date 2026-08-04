@@ -1,4 +1,6 @@
-# Midnight 12.1 PTR Spec Tracker
+# Spec Tracker
+
+Currently covering: 12.0.7 / Season 1 → **12.1 PTR "Curse of Ula'tek"**.
 
 [![Deploy](https://github.com/riles22/wow-class-tracker/actions/workflows/deploy.yml/badge.svg)](https://github.com/riles22/wow-class-tracker/actions/workflows/deploy.yml)
 

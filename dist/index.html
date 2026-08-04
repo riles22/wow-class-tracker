@@ -11,18 +11,17 @@
 -->
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-WSRQuC6FR3lgyxrJNNvutMQMhyT7Ll8oGcp34ZQSBEE='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src data:; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-eUsCSSkS2/A6DZ33qg/JyA1/FhaXAmZ/ax02XiSRcEc='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src data:; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="riles22">
-<title>Curse of Ula'tek — 12.1 PTR Spec Tracker</title>
+<title>Spec Tracker — WoW multi-source spec consensus</title>
 <!-- The brand mark, as favicon: three tier bars in the grid's own band colours —
-     S gold, A+ violet, A blue — with a rise arrow through them. The product drawn as
-     itself: rankings you climb. Deliberately patch-agnostic, so the mark survives 12.1
-     into Season 2 and the gearing guide. Shipped as an inline data URI because the site
-     is one self-contained file (the CSP grants img-src data: for exactly this).
-     The same artwork renders inline in the masthead (.brandmark), where it is also the
-     home button. -->
-<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22><rect x=%222%22 y=%222%22 width=%2260%22 height=%2260%22 rx=%2214%22 fill=%22%23130B22%22 stroke=%22%23B57BEE%22 stroke-opacity=%22.45%22 stroke-width=%222.5%22/><rect x=%2212%22 y=%2213%22 width=%2240%22 height=%229%22 rx=%224.5%22 fill=%22%23F0C24B%22/><rect x=%2212%22 y=%2227.5%22 width=%2229%22 height=%229%22 rx=%224.5%22 fill=%22%23C77DFF%22/><rect x=%2212%22 y=%2242%22 width=%2219%22 height=%229%22 rx=%224.5%22 fill=%22%236AA8F0%22/><path d=%22M21 51 L44 24%22 fill=%22none%22 stroke=%22%23EFEAF9%22 stroke-width=%224.6%22 stroke-linecap=%22round%22/><path d=%22M34.5 21.5 L46 22.5 L44 33.5%22 fill=%22none%22 stroke=%22%23EFEAF9%22 stroke-width=%224.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/></svg>'>
+     S gold, A+ violet, A blue. The product drawn as itself. Patch-agnostic, so the mark
+     survives every season (approved rebrand option 1a, 2026-08-04 — the earlier rise
+     arrow is gone). Shipped as an inline data URI because the site is one self-contained
+     file (the CSP grants img-src data: for exactly this). The same artwork renders
+     inline in the masthead (.brandmark), where it is also the home button. -->
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22><rect x=%222%22 y=%222%22 width=%2260%22 height=%2260%22 rx=%2214%22 fill=%22%23130B22%22 stroke=%22%23B57BEE%22 stroke-opacity=%22.45%22 stroke-width=%222.5%22/><rect x=%2212%22 y=%2213%22 width=%2240%22 height=%229%22 rx=%224.5%22 fill=%22%23F0C24B%22/><rect x=%2212%22 y=%2227.5%22 width=%2229%22 height=%229%22 rx=%224.5%22 fill=%22%23C77DFF%22/><rect x=%2212%22 y=%2242%22 width=%2219%22 height=%229%22 rx=%224.5%22 fill=%22%236AA8F0%22/></svg>'>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- Fonts load async from the main script (CSP-safe, no inline handler) so first paint
@@ -65,11 +64,15 @@
   /* ---------- header ---------- */
   .masthead{position:relative; overflow:hidden; border-bottom:1px solid var(--edge)}
   .starfield{position:absolute; inset:0; pointer-events:none; opacity:.7}
-  .brandmark{width:34px; height:34px; vertical-align:-5px; margin-right:11px}
+  .brandmark{width:48px; height:48px; vertical-align:-9px; margin-right:13px}
+  .titlerow{display:flex; align-items:center; gap:16px; flex-wrap:wrap}
+  .patchchip{font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:.08em;
+    color:var(--gold); border:1px solid color-mix(in srgb,var(--gold) 40%,transparent);
+    border-radius:6px; padding:4px 9px; white-space:nowrap}
   .brandlink{display:inline-block; line-height:0; border-radius:10px}
   .brandlink:hover .brandmark rect:first-child{stroke-opacity:.9}
   .brandlink:focus-visible{outline:2px solid var(--accent-2); outline-offset:2px}
-  @media(max-width:560px){ .brandmark{width:26px; height:26px; vertical-align:-4px; margin-right:8px} }
+  @media(max-width:560px){ .brandmark{width:32px; height:32px; vertical-align:-6px; margin-right:9px} }
   .masthead-inner{position:relative; max-width:1120px; margin:0 auto; padding:34px 20px 26px}
   .eyebrow{
     font-family:var(--mono); font-size:11px; letter-spacing:.28em; text-transform:uppercase;
@@ -352,9 +355,15 @@
   .matrix{margin-top:6px; border:1px solid var(--edge); border-radius:12px; overflow:clip; background:var(--bg-2)}
   .head, .row{
     display:grid;
-    grid-template-columns:minmax(150px,1.6fr) 72px 72px minmax(104px,.85fr) minmax(118px,.72fr) minmax(110px,1.15fr) 26px;
-    align-items:center; gap:12px; padding:12px 16px
+    grid-template-columns:34px minmax(200px,1.4fr) minmax(170px,1fr) 56px 56px 26px;
+    align-items:center; gap:12px; padding:9px 14px
   }
+  .rank{font-family:var(--mono); font-size:11px; font-weight:700; color:var(--accent-2)}
+  .ovcell{display:flex; align-items:center; gap:8px; min-width:0}
+  .ovtrack{flex:1; height:8px; min-width:60px; background:var(--bg-3); border-radius:8px; overflow:hidden}
+  .ovtrack i{display:block; height:100%; border-radius:8px; background:linear-gradient(90deg,var(--accent),var(--accent-2))}
+  .ovnum{font-family:var(--mono); font-size:12px; color:var(--ink)}
+  .row .tier{height:20px; font-size:11px; min-width:26px; padding:0 5px; border-radius:5px}
   .head{
     font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase;
     color:var(--ink-faint); background:var(--bg-3); border-bottom:1px solid var(--edge);
@@ -386,7 +395,7 @@
      pixel-identical output (audit 2026-07-24, P1). contain-intrinsic-size holds the
      scrollbar steady at the measured row heights (67px desktop / 182px card layout). */
   .row{border-bottom:1px solid var(--edge); transition:background .12s;
-       content-visibility:auto; contain-intrinsic-size:auto 67px}
+       content-visibility:auto; contain-intrinsic-size:auto 44px}
   .row:last-child{border-bottom:0}
   .row.clickable{cursor:pointer}
   .row.clickable:hover{background:var(--bg-3)}
@@ -395,9 +404,8 @@
   .cbar{width:4px; height:20px; border-radius:3px; flex:none}
   .spec-txt{font-weight:600; color:var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
   .newbadge{font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:.09em; color:#160a24; background:var(--gold); border-radius:4px; padding:2px 5px; margin-left:-2px; flex:none; cursor:help; align-self:center}
-  .cls{font-family:var(--mono); font-size:12px; color:var(--ink-dim); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0}
-  .role{font-size:12px; color:var(--ink-faint); min-width:0; display:flex; align-items:center; gap:6px}
-  .role .rolechip{font-family:var(--mono); font-size:11px; letter-spacing:.08em; padding:2px 7px; border-radius:5px; border:1px solid var(--edge-2); color:var(--ink-dim)}
+  .cls{font-family:var(--mono); font-size:11px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0; flex:none}
+  .rolechip{font-family:var(--mono); font-size:10px; letter-spacing:.08em; text-transform:uppercase; padding:1px 6px; border-radius:5px; border:1px solid var(--edge-2); color:var(--ink-faint); flex:none}
   .chev{justify-self:end; color:var(--ink-dim); transition:transform .18s,color .15s; font-size:13px}
   .row.open .chev{transform:rotate(90deg); color:var(--accent)}
   .row.clickable:hover .chev{color:var(--accent)}
@@ -466,6 +474,11 @@
 
   /* ---------- footer ---------- */
   footer{margin-top:30px; border-top:1px solid var(--edge); padding-top:22px; color:var(--ink-faint); font-size:13px}
+  .footbrand{display:flex; gap:14px; align-items:flex-start; margin-bottom:22px}
+  .footmark{width:40px; height:40px; flex:none}
+  .footword{font-family:var(--disp); font-weight:700; font-size:19px; color:#fff}
+  .foottag{margin:4px 0 6px; font-size:12.5px; color:var(--ink-faint); max-width:44ch}
+  .footcover{margin:0; font-family:var(--mono); font-size:11px; color:var(--ink-faint)}
   .foot-grid{display:grid; grid-template-columns:1fr; gap:22px}
   @media(min-width:720px){ .foot-grid{grid-template-columns:1.1fr .9fr} }
   .foot-h{font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); margin:0 0 11px}
@@ -491,16 +504,15 @@
   @media(max-width:759px){
     .head{display:none}
     .row{
-      grid-template-columns:1fr auto; grid-auto-rows:min-content;
+      grid-template-columns:auto 1fr auto; grid-auto-rows:min-content;
       row-gap:9px; padding:13px 15px;
-      contain-intrinsic-size:auto 182px /* card layout is taller — measured at 390px */
+      contain-intrinsic-size:auto 150px /* card layout: rank+name / overall bar / chips */
     }
-    .spec-name{grid-column:1; grid-row:1}
-    .chev{grid-column:2; grid-row:1; align-self:center}
-    .cls{grid-column:1/-1; grid-row:2; font-size:12px}
-    .cls::before{content:"Class · "; color:var(--ink-faint)}
-    .role{grid-column:1/-1; grid-row:3; order:0}
-    .metaline{grid-column:1/-1; grid-row:4; display:flex; gap:8px; align-items:center; flex-wrap:wrap}
+    .rank{grid-column:1; grid-row:1; align-self:center}
+    .spec-name{grid-column:2; grid-row:1; flex-wrap:wrap}
+    .chev{grid-column:3; grid-row:1; align-self:center}
+    .ovcell{grid-column:1/-1; grid-row:2}
+    .metaline{grid-column:1/-1; grid-row:3; display:flex; gap:8px; align-items:center; flex-wrap:wrap}
     .metaline .mtag{display:inline; font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-faint)}
   }
   /* Desktop: the header row already labels the two tier columns, so the inline
@@ -517,12 +529,22 @@
 
   /* ---------- spec finder ---------- */
   .finderbtn{
-    font-family:var(--body); font-size:13px; font-weight:700; cursor:pointer;
-    color:#160a24; background:linear-gradient(90deg,var(--accent),var(--accent-2));
-    border:0; border-radius:9px; padding:8px 15px; white-space:nowrap;
-    display:inline-flex; align-items:center; gap:7px
+    font-family:var(--body); font-size:13px; font-weight:600; cursor:pointer;
+    color:var(--ink); background:var(--bg-2);
+    border:1px solid color-mix(in srgb,var(--accent) 50%,transparent);
+    border-radius:9px; padding:7px 13px; white-space:nowrap;
+    display:inline-flex; align-items:center; gap:7px; text-decoration:none
   }
-  .finderbtn:hover{filter:brightness(1.08)}
+  .finderbtn:hover{border-color:var(--accent); filter:none}
+  .toolmark{display:inline-flex; line-height:0; border-radius:6px; flex:none}
+  .toolmark svg{width:22px; height:22px}
+  .toolmark:focus-visible{outline:2px solid var(--accent-2); outline-offset:2px}
+  .controls-sub{margin-top:2px}
+  .toolstatus{font-family:var(--mono); font-size:11px; color:var(--ink-faint); white-space:normal; text-align:right; min-width:0}
+  .srcsel{background:var(--bg-3); border:1px solid var(--edge-2); border-radius:7px; color:var(--ink);
+    font-family:var(--body); font-size:13px; font-weight:600; padding:5px 8px; cursor:pointer; max-width:170px}
+  .srcsel.on{border-color:var(--accent); color:var(--accent)}
+  .srcsel:disabled{opacity:.45; cursor:default}
   .finderbtn:focus-visible{outline:2px solid var(--accent-2); outline-offset:2px}
   .finder-ov{position:fixed; inset:0; z-index:60; display:none; background:rgba(6,4,12,.72); backdrop-filter:blur(6px); overflow-y:auto}
   .finder-ov.open{display:block}
@@ -653,12 +675,12 @@
 <header class="masthead">
   <canvas class="starfield" id="stars" aria-hidden="true"></canvas>
   <div class="masthead-inner">
-    <p class="eyebrow">WoW Midnight · Patch 12.1 PTR</p>
-    <h1 class="title"><a id="brandhome" class="brandlink" href="#" title="Back to the default view"><svg class="brandmark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#130B22" stroke="#B57BEE" stroke-opacity=".45" stroke-width="2.5"/><rect x="12" y="13" width="40" height="9" rx="4.5" fill="#F0C24B"/><rect x="12" y="27.5" width="29" height="9" rx="4.5" fill="#C77DFF"/><rect x="12" y="42" width="19" height="9" rx="4.5" fill="#6AA8F0"/><path d="M21 51 L44 24" fill="none" stroke="#EFEAF9" stroke-width="4.6" stroke-linecap="round"/><path d="M34.5 21.5 L46 22.5 L44 33.5" fill="none" stroke="#EFEAF9" stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a><span class="curse">Curse of Ula'tek</span> — Spec Tracker</h1>
+    <p class="eyebrow">Multi-source class &amp; spec consensus · updated nightly</p>
+    <div class="titlerow"><h1 class="title"><a id="brandhome" class="brandlink" href="#" title="Back to the default view"><svg class="brandmark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#130B22" stroke="#B57BEE" stroke-opacity=".45" stroke-width="2.5"/><rect x="12" y="13" width="40" height="9" rx="4.5" fill="#F0C24B"/><rect x="12" y="27.5" width="29" height="9" rx="4.5" fill="#C77DFF"/><rect x="12" y="42" width="19" height="9" rx="4.5" fill="#6AA8F0"/></svg></a>Spec Tracker</h1><span class="patchchip">12.1 PTR — CURSE OF ULA'TEK</span></div>
     <div class="rule"></div>
     <!-- One sentence of lede; the mental model folds. This paragraph ran five lines and
          was ~40% of a 329px masthead sitting directly above a page people check daily. -->
-    <div class="sub">Where every spec stands going into <b>12.1 “Curse of Ula'tek”</b> — PTR changes laid over its current <b>12.0.7 / Season 1</b> baseline. <details class="sub-more"><summary>How to read it</summary><span id="tlcount">Several</span> tier lists feed a computed <b>consensus</b>, with a <b>±</b> marker where they disagree — flip between them with <b>View</b>, or pick <b>Ours: 12.1&nbsp;✦</b> for this site's own Season-2 forecast (a projection, never a source). Filter by era or a specific fight, and click <b>any row</b> for the full read: PTR changes, current numbers with ranks, sim fight profile, and community takes. Three tools up top: <b>🧭 Find my spec</b> ranks all 40 against what you want to play, <b>📊 The Ladder</b> draws any measured ranking as a chart, and <b>⊞ Compare all</b> is the whole roster against every rating and rank on one screen.</details></div>
+    <div class="sub">Where every spec of <b>WoW: Midnight</b> stands — every major tier list distilled into one consensus, layered with live numbers, sim profiles, and per-spec PTR reads. <details class="sub-more"><summary>How to read it</summary><span id="tlcount">Several</span> tier lists feed a computed <b>consensus</b>, with a <b>±</b> marker where they disagree — flip between them with <b>View</b>, or pick <b>Ours: 12.1&nbsp;✦</b> for this site's own Season-2 forecast (a projection, never a source). Filter by era or a specific fight, and click <b>any row</b> for the full read: PTR changes, current numbers with ranks, sim fight profile, and community takes. Three tools up top: <b>🧭 Find my spec</b> ranks all 40 against what you want to play, <b>📊 The Ladder</b> draws any measured ranking as a chart, and <b>⊞ Compare all</b> is the whole roster against every rating and rank on one screen.</details></div>
     <div class="stamp">
       <span><b>Baseline:</b> 12.0.7 / Season 1</span>
       <span><b>PTR:</b> 12.1 “Curse of Ula'tek”</span>
@@ -670,50 +692,26 @@
 
 <div class="controls">
   <div class="controls-row">
-    <div class="ctl">
-      <span class="lbl">View</span>
-      <div class="seg" id="srcseg" role="group" aria-label="Which ratings the tier columns show"></div>
+    <a class="toolmark" id="brandhome2" href="#" title="Back to the default view" aria-label="Home"><svg viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#130B22" stroke="#B57BEE" stroke-opacity=".45" stroke-width="2.5"/><rect x="12" y="13" width="40" height="9" rx="4.5" fill="#F0C24B"/><rect x="12" y="27.5" width="29" height="9" rx="4.5" fill="#C77DFF"/><rect x="12" y="42" width="19" height="9" rx="4.5" fill="#6AA8F0"/></svg></a>
+    <div class="seg" id="srcseg" role="group" aria-label="Which ratings the tier columns show"></div>
+    <div class="seg" id="eraseg" role="group" aria-label="Era" title="Filters verdicts, writeups, era-tagged numbers and creator takes. It does not change the tier columns — those follow the View picker.">
+      <button data-era="both" aria-pressed="true">Both</button>
+      <button data-era="live" aria-pressed="false">12.0.7</button>
+      <button data-era="ptr" aria-pressed="false">12.1 PTR</button>
     </div>
-    <div class="ctl">
-      <span class="lbl">Era</span>
-      <div class="seg" id="eraseg" role="group" aria-label="Era" title="Filters verdicts, writeups, era-tagged numbers and creator takes. It does not change the tier columns — those follow the View picker.">
-        <button data-era="both" aria-pressed="true">Both</button>
-        <button data-era="live" aria-pressed="false">12.0.7</button>
-        <button data-era="ptr" aria-pressed="false">12.1 PTR</button>
-      </div>
+    <div class="seg" id="roleseg" role="group" aria-label="Filter by role">
+      <button data-role="All" aria-pressed="true">All</button>
+      <button data-role="DPS" aria-pressed="false">DPS</button>
+      <button data-role="Healer" aria-pressed="false">Healer</button>
+      <button data-role="Tank" aria-pressed="false">Tank</button>
     </div>
-  </div>
-  <div class="controls-row">
-    <div class="ctl">
-      <span class="lbl">Role</span>
-      <div class="seg" id="roleseg" role="group" aria-label="Filter by role">
-        <button data-role="All" aria-pressed="true">All</button>
-        <button data-role="DPS" aria-pressed="false">DPS</button>
-        <button data-role="Healer" aria-pressed="false">Healer</button>
-        <button data-role="Tank" aria-pressed="false">Tank</button>
-      </div>
-    </div>
-    <label class="toggle">
-      <input type="checkbox" id="ptronly">
-      <span class="switch"></span>
-      <span>PTR-tracked only</span>
-    </label>
-    <label class="toggle" title="Only specs you've starred (saved in this browser)">
-      <input type="checkbox" id="staronly">
-      <span class="switch"></span>
-      <span>★ Starred</span>
-    </label>
-    <span class="grow"></span>
     <div class="ctl" id="fightctl">
       <label class="lbl" for="fightsel" id="fightlbl">Fight</label>
       <select class="sortsel" id="fightsel" aria-label="Per-fight view"></select>
     </div>
-    <div class="ctl">
-      <span class="lbl">Layout</span>
-      <div class="seg" id="groupseg" role="group" aria-label="Group or rank the list">
-        <button data-g="class" aria-pressed="false">Group by class</button>
-        <button data-g="rank" aria-pressed="true">Rank all</button>
-      </div>
+    <div class="seg" id="groupseg" role="group" aria-label="Group or rank the list" title="Group by class, or rank all 40 in one list">
+      <button data-g="class" aria-pressed="false">Group by class</button>
+      <button data-g="rank" aria-pressed="true">Rank all</button>
     </div>
     <div class="ctl">
       <label class="lbl" for="sortsel">Sort</label>
@@ -730,13 +728,27 @@
     </div>
     <input class="search" id="search" type="search" placeholder="Search spec…" aria-label="Search spec or class">
     <span class="grow"></span>
-    <div class="ctl ctl-ctas"><!-- the overlay CTAs — wrap allowed: with three buttons a
-         no-break rule pushes the last one off a phone screen entirely -->
+    <div class="ctl ctl-ctas"><!-- the overlay CTAs — wrap allowed: a no-break rule
+         pushes the last one off a phone screen entirely -->
       <button class="finderbtn" id="finderbtn" type="button">🧭 Find my spec</button>
-      <button class="finderbtn" id="ladderbtn" type="button" style="background:linear-gradient(90deg,var(--accent-2),var(--accent))">📊 The Ladder</button>
-      <button class="finderbtn" id="allbtn" type="button" style="background:linear-gradient(90deg,var(--accent),var(--accent-2))">⊞ Compare all</button>
-      <a class="finderbtn" href="gearing.html" style="background:linear-gradient(90deg,var(--gold),var(--accent))" title="Season 2 gearing — best-per-slot, loot sources, item-level ladder, SimC upgrade check">⚙ S2 Gearing</a>
+      <button class="finderbtn" id="ladderbtn" type="button">📊 The Ladder</button>
+      <button class="finderbtn" id="allbtn" type="button">⊞ Compare all</button>
+      <a class="finderbtn" href="gearing.html" title="Season 2 gearing — best-per-slot, loot sources, item-level ladder, SimC upgrade check">⚙ S2 Gearing</a>
     </div>
+  </div>
+  <div class="controls-row controls-sub">
+    <label class="toggle">
+      <input type="checkbox" id="ptronly">
+      <span class="switch"></span>
+      <span>PTR-tracked only</span>
+    </label>
+    <label class="toggle" title="Only specs you've starred (saved in this browser)">
+      <input type="checkbox" id="staronly">
+      <span class="switch"></span>
+      <span>★ Starred</span>
+    </label>
+    <span class="grow"></span>
+    <span class="toolstatus" id="toolstatus"></span>
   </div>
 </div>
 
@@ -793,6 +805,7 @@
   <div class="matrix" id="matrix"></div>
 
   <footer>
+    <div class="footbrand"><svg class="footmark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#130B22" stroke="#B57BEE" stroke-opacity=".45" stroke-width="2.5"/><rect x="12" y="13" width="40" height="9" rx="4.5" fill="#F0C24B"/><rect x="12" y="27.5" width="29" height="9" rx="4.5" fill="#C77DFF"/><rect x="12" y="42" width="19" height="9" rx="4.5" fill="#6AA8F0"/></svg><div><div class="footword">Spec Tracker</div><p class="foottag">A multi-source class &amp; spec consensus for World of Warcraft — live numbers, PTR reads, and a forecast that shows its math. Updated nightly.</p><p class="footcover">Now covering: 12.0.7 / Season 1 → 12.1 PTR “Curse of Ula'tek”</p></div></div>
     <div class="foot-grid">
       <div>
         <p class="foot-h">Sources &amp; snapshot dates</p>
@@ -819,7 +832,7 @@
       <div class="creditlist" id="creatorcredits"></div>
       <p class="fine" style="margin-top:13px">Tier &amp; performance data from <a href="https://www.icy-veins.com/" target="_blank" rel="noopener">Icy&nbsp;Veins</a> · <a href="https://www.method.gg/" target="_blank" rel="noopener">Method</a> · <a href="https://www.wowhead.com/" target="_blank" rel="noopener">Wowhead</a> · <a href="https://www.archon.gg/wow" target="_blank" rel="noopener">Archon</a> · <a href="https://www.warcraftlogs.com/" target="_blank" rel="noopener">Warcraft&nbsp;Logs</a> · <a href="https://murlok.io/" target="_blank" rel="noopener">Murlok.io</a> · <a href="https://bloodmallet.com/" target="_blank" rel="noopener">Bloodmallet</a>. This project aggregates and links back to them — it doesn't replace them.</p>
     </div>
-    <p class="credit">Made by <a href="https://github.com/riles22" target="_blank" rel="noopener" style="text-decoration:none"><b>riles22</b></a> &nbsp;·&nbsp; Midnight 12.1 PTR Spec Tracker &nbsp;·&nbsp; © 2026
+    <p class="credit">Made by <a href="https://github.com/riles22" target="_blank" rel="noopener" style="text-decoration:none"><b>riles22</b></a> &nbsp;·&nbsp; Spec Tracker &nbsp;·&nbsp; © 2026
       <span class="keep">An original project — if you share or fork it, please keep the credit.</span>
     </p>
   </footer>
@@ -1044,15 +1057,6 @@ function tierEl(r, mv){
   const conf = (state.source === "projection" && r.conf && CONF_GLYPH[r.conf])
     ? `<span class="conf" data-c="${esc(r.conf)}" title="${esc(CONF_TIP[r.conf])}" aria-label="${esc(r.conf)} confidence">${CONF_GLYPH[r.conf]}</span>` : '';
   return `<span class="tiercell${r.overall?' isoverall':''}"><span class="tcol"><span class="tier" data-t="${esc(r.tier)}" title="${esc(r.tip)}">${esc(r.tier)}</span>${meter}</span><span class="tind">${arrow}${dot}${conf}</span></span>`;
-}
-function verdictEl(s){
-  const v = s.ptr ? s.ptr.verdict : "—";
-  const o = s.outlook;
-  const arrow = o ? `<span class="olk" data-d="${esc(o.direction)}" title="${esc(`12.1 outlook: ${o.direction} — ${o.basis}`)}">${o.direction==="up"?"↗":o.direction==="down"?"↘":"→"}</span>` : "";
-  // A verdict that disagrees with the spec's own later official tuning is disclosed on the
-  // scan row, not just inside the drawer — it is the reason the arrow points where it does.
-  const contra = o?.contradicted ? `<span class="contra" title="${esc(`This verdict disagrees with the official tuning since: +${o.buffs}/−${o.nerfs}. Writeups carry no date yet, so read it as possibly superseded.`)}">⚠</span>` : "";
-  return `<span class="verdict" data-v="${esc(v)}"><span class="dot"></span>${esc(v)}${arrow}${contra}</span>`;
 }
 
 const MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
@@ -1323,7 +1327,14 @@ function newBadgeHTML(s){
   return ni ? `<span class="newbadge" title="New — ${esc(ni.label)} · ${esc(ni.date)}" aria-label="New info for this spec: ${esc(ni.label)} ${esc(ni.date)}">NEW</span>` : "";
 }
 
-function rowHTML(s, idx, simBar){
+/* Overall = the mean of the bracket scores that exist UNDER THE ACTIVE LENS — the same
+   number the "Overall" sort has always ordered by, now visible as a bar (rebrand 2d).
+   A spec rated in only one bracket ranks by that bracket. */
+function overallOf(s){
+  const parts = [ratingFor(s,"raid").score, ratingFor(s,"mplus").score].filter(v => v >= 0);
+  return parts.length ? parts.reduce((x,y)=>x+y,0)/parts.length : null;
+}
+function rowHTML(s, idx, simBar, rank){
   const color = CLASS_COLOR[s.class] || "#888";
   const hasPtr = !!s.ptr;
   // The projection moved MORE than the consensus on 07-23->07-24 (13 tier moves vs 9)
@@ -1331,25 +1342,31 @@ function rowHTML(s, idx, simBar){
   const projView = state.source==="projection" && state.era!=="live";
   const showMv = !state.fight && (state.source==="consensus" || projView);
   const mvOf = (s,b) => showMv ? (projView ? s.projMovement?.[b] : s.movement?.[b]) : null;
-  const ptag = s.fightProfile && s.fightProfile.tag
-    ? `<span class="ptag" title="Sim-based fight profile — expand for details">${esc(s.fightProfile.tag)}</span>` : "";
+  const ov = overallOf(s);
+  // The Class / Role / verdict COLUMNS folded into the spec cell and the drawer
+  // (rebrand 2d): class name inline in class colour, role as a small chip; the verdict
+  // and the sim profile chip were already in the drawer, which is their real home.
   return `
    <div class="row clickable ${hasPtr?'has-ptr':''}" data-idx="${idx}"
         role="button" tabindex="0" aria-expanded="false">
+     <span class="rank" aria-hidden="true">${rank!=null?String(rank).padStart(2,'0'):''}</span>
      <div class="spec-name">
        <span class="cbar" style="background:${color}"></span>
        <button class="starbtn${STARS.has(`${s.class}|${s.spec}`)?' on':''}" type="button" data-key="${esc(`${s.class}|${s.spec}`)}"
                title="${STARS.has(`${s.class}|${s.spec}`)?'Remove from':'Add to'} watchlist" aria-label="${STARS.has(`${s.class}|${s.spec}`)?'Unstar':'Star'} ${esc(s.spec)} ${esc(s.class)}"
                aria-pressed="${STARS.has(`${s.class}|${s.spec}`)?'true':'false'}">${STARS.has(`${s.class}|${s.spec}`)?'★':'☆'}</button>
        <span class="spec-txt">${esc(s.spec)}</span>${newBadgeHTML(s)}
+       <span class="cls" style="color:${color}" title="${esc(s.class)}">${esc(s.class)}</span>
+       <span class="rolechip">${esc(s.role)}</span>
      </div>
+     <div class="ovcell" title="Overall — mean of the Raid and M+ scores under the current view (the number the Overall sort orders by)">${
+       ov!=null
+        ? `<span class="ovtrack" aria-hidden="true"><i style="width:${Math.round(ov)}%"></i></span><span class="ovnum">${Math.round(ov)}</span>`
+        : `<span class="ovnum" style="color:var(--ink-faint)">—</span>`}</div>
      <div class="metaline">
        <span class="mtag">Raid</span>${tierEl(ratingFor(s,"raid"), mvOf(s,"raid"))}
        <span class="mtag">M+</span>${tierEl(ratingFor(s,"mplus"), mvOf(s,"mplus"))}
      </div>
-     <div class="cls" style="color:${color}" title="${esc(s.class)}">${esc(s.class)}</div>
-     <div class="role"><span class="rolechip">${esc(s.role)}</span>${ptag}</div>
-     ${state.era!=="live"?verdictEl(s):`<div class="verdict verdict-empty" aria-hidden="true"></div>`}
      <span class="chev">▸</span>
      ${simBar && typeof s.fightProfile?.metricsUsed?.[simBar.key]==="number" ? `<div class="rowbar" aria-hidden="true" title="Sim ${simBar.label} DPS ${Math.round(s.fightProfile.metricsUsed[simBar.key]).toLocaleString('en-US')}"><i style="width:${(s.fightProfile.metricsUsed[simBar.key]/simBar.max*100).toFixed(1)}%;background:${color}"></i></div>` : ""}
      <div class="drawer" inert></div>
@@ -1380,10 +1397,7 @@ function sortList(list){
     // Combined Raid+M+ ordering under the ACTIVE lens (consensus / one source / our
     // projection): mean of the bracket scores that exist, so a spec rated in only one
     // bracket ranks by that bracket instead of being punished for a missing column.
-    const ov = new Map(arr.map(s => {
-      const parts = [ratingFor(s,"raid").score, ratingFor(s,"mplus").score].filter(v => v >= 0);
-      return [s, parts.length ? parts.reduce((x,y)=>x+y,0)/parts.length : -1];
-    }));
+    const ov = new Map(arr.map(s => [s, overallOf(s) ?? -1]));
     arr.sort((a,b)=> ov.get(b)-ov.get(a) || a.class.localeCompare(b.class) || a.spec.localeCompare(b.spec));
   } else if(by==="ptr"){
     arr.sort((a,b)=> VERDICT_RANK[a.ptr?a.ptr.verdict:"—"]-VERDICT_RANK[b.ptr?b.ptr.verdict:"—"] || a.class.localeCompare(b.class) || a.spec.localeCompare(b.spec));
@@ -1418,10 +1432,12 @@ function render(){
     srcseg.classList.toggle('overridden', onFight);
     srcseg.querySelectorAll('button').forEach(x=>{
       x.disabled = onFight;
-      // Restore the lit button on the way out — state.source survives the fight view,
+      // Restore the lit control on the way out — state.source survives the fight view,
       // so the segment has to come back showing which source it is about to use again.
       x.setAttribute('aria-pressed', (!onFight && x.dataset.source === state.source) ? 'true' : 'false');
     });
+    const srcselEl = document.getElementById('srcsel');
+    if(srcselEl){ srcselEl.disabled = onFight; if(!onFight) syncSrcControls(); }
     let chip = srcseg.querySelector('.segoverride');
     if(onFight && !chip){
       chip = document.createElement('span');
@@ -1473,18 +1489,20 @@ function render(){
       pb.title = state.era === "live" ? "Our 12.1 forecast needs the PTR layer — switch Era to Both or 12.1 PTR"
         : "Our computed 12.1 forecast — live baseline + PTR testing + Dummy Dome + outlook + meta reads. A projection, not a source.";
     }
-    srcseg.querySelectorAll('button[data-source]').forEach(b=>{
-      if(!isPtrSource(b.dataset.source)) return;
-      b.disabled = state.era === "live" || !!state.fight;
-      b.title = state.era === "live"
+    // Era-gating moved from per-source buttons to the select's OPTIONS: a 12.1 PTR list
+    // must be unpickable in the 12.0.7-only view, same rule as before the select existed.
+    document.querySelectorAll('#srcsel option').forEach(o=>{
+      if(!o.value || !isPtrSource(o.value)) return;
+      o.disabled = state.era === "live" || !!state.fight;
+      o.title = state.era === "live"
         ? "A 12.1 PTR tier list — switch Era to Both or 12.1 PTR to view it"
         : "A 12.1 PTR tier list. Shown as its own column; it never feeds the 12.0.7 consensus.";
     });
     // One fallback for both gated view kinds, after the disabling above so the pressed
-    // state below can never light a button the user cannot click.
+    // state below can never light a control the user cannot use.
     if(state.era === "live" && (state.source === "projection" || isPtrSource(state.source))){
       state.source = "consensus";
-      srcseg.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed', x.dataset.source==="consensus"?'true':'false'));
+      syncSrcControls();
     }
   }
   const filtered = SPECS.filter(passFilters);
@@ -1518,19 +1536,20 @@ function render(){
   };
   const rh = fightHead('raid','Raid'), mh = fightHead('mplus','M+');
   let html = `<div class="head">
-      ${hcell('spec','Spec')}${hcell('raid',rh.label,rh.aria)}${hcell('mplus',mh.label,mh.aria)}${hcell('class','Class')}<div>Role</div>${hcell('ptr','12.1 PTR')}<div></div>
+      <div>#</div>${hcell('spec','Spec')}${hcell('overall','Overall')}${hcell('raid',rh.label,rh.aria)}${hcell('mplus',mh.label,mh.aria)}<div></div>
     </div>`;
 
   if(ordered.length===0){
     html += `<div class="empty">No specs match these filters.</div>`;
   } else if(state.sort==="class"){
-    let cur=null;
+    // Grouped by class the global rank is meaningless — number within the class instead.
+    let cur=null, n=0;
     ordered.forEach(s=>{
-      if(s.class!==cur){ cur=s.class; html += `<div class="grouphdr">${esc(cur)}</div>`; }
-      html += rowHTML(s, idxOf.get(s), simBar);
+      if(s.class!==cur){ cur=s.class; n=0; html += `<div class="grouphdr">${esc(cur)}</div>`; }
+      html += rowHTML(s, idxOf.get(s), simBar, ++n);
     });
   } else {
-    ordered.forEach(s=> html += rowHTML(s, idxOf.get(s), simBar) );
+    ordered.forEach((s,i)=> html += rowHTML(s, idxOf.get(s), simBar, i+1) );
   }
 
   matrix.innerHTML = html;
@@ -1542,6 +1561,13 @@ function render(){
   if(ptrLeg) ptrLeg.style.display = state.era === "live" ? "none" : "";
   const shown = ordered.length, ptrShown = ordered.filter(s=>s.ptr).length;
   document.getElementById('count').textContent = `${shown} spec${shown!==1?'s':''}${state.ptrOnly?'':` · ${ptrShown} tracked`}`;
+  {
+    const st = document.getElementById('toolstatus');
+    if(st){
+      const live = SOURCES.filter(x=>x.kind==="tier-list" && (x.era ?? "live")==="live").length;
+      st.textContent = `${shown} of ${SPECS.length} specs · consensus of ${live} sources · snapshot ${META.latestSnapshot ?? "—"}`;
+    }
+  }
   // restore drawers that were open before this re-render (fresh DOM, current-era content)
   if(openRows.size) matrix.querySelectorAll('.row.clickable').forEach(row=>{
     const s = SPECS[+row.dataset.idx];
@@ -1653,18 +1679,39 @@ matrix.addEventListener('keydown', e=>{
 
 /* ---------- source toggle (Consensus + one button per tier-list source) ---------- */
 const srcseg = document.getElementById('srcseg');
+/* The View segment (rebrand option 2b): eight buttons became three items — Consensus,
+   a Source select of the tier lists, and Ours. The select is an ALTERNATE INPUT for the
+   same state.source field the buttons wrote, so deep links (#src=) round-trip unchanged;
+   picking a source lights the select, picking consensus/projection resets it. */
 srcseg.innerHTML =
   `<button data-source="consensus" aria-pressed="true">Consensus</button>` +
-  TIER_SOURCES.map(s=>`<button data-source="${esc(s.id)}" aria-pressed="false">${esc(s.name)}</button>`).join("") +
-  // The tracker's OWN computed 12.1 forecast — deliberately last + visually distinct
-  // (dashed border) so it can't be mistaken for one of the fetched sources.
+  `<select class="srcsel" id="srcsel" aria-label="Show one tier list's own ratings">` +
+    `<option value="">Source ▾</option>` +
+    TIER_SOURCES.map(s=>`<option value="${esc(s.id)}">${esc(s.name)}</option>`).join("") +
+  `</select>` +
   `<button data-source="projection" class="projbtn" aria-pressed="false" title="Our computed 12.1 forecast — live baseline + PTR testing + Dummy Dome + outlook + meta reads. A projection, not a source.">Ours: 12.1 ✦</button>`;
 srcseg.addEventListener('click', e=>{
   const b = e.target.closest('button'); if(!b || b.disabled) return;
   state.source = b.dataset.source;
-  srcseg.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed', x===b?'true':'false'));
+  syncSrcControls();
   render();
 });
+// The Source select is an alternate input for the same field: choosing a source sets
+// state.source exactly as the old buttons did; choosing the placeholder returns to
+// consensus. Deep links (#src=) keep working because nothing about the state changed.
+document.getElementById('srcsel').addEventListener('change', e=>{
+  state.source = e.target.value || "consensus";
+  syncSrcControls();
+  render();
+});
+/* One place lights the View segment: consensus/projection press their button and reset
+   the select; a tier source lights the select (.on) and shows its name. */
+function syncSrcControls(){
+  const sel = document.getElementById('srcsel');
+  const isTierSrc = TIER_SOURCES.some(x=>x.id===state.source);
+  srcseg.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed', x.dataset.source===state.source?'true':'false'));
+  if(sel){ sel.value = isTierSrc ? state.source : ""; sel.classList.toggle('on', isTierSrc); }
+}
 
 /* ---------- tier legend (union of consensus + scale tiers, best→worst) ---------- */
 (function(){
@@ -2161,7 +2208,7 @@ document.addEventListener("click", e => {
 function syncControls(){
   document.querySelectorAll('#eraseg button').forEach(x=>x.setAttribute('aria-pressed', x.dataset.era===state.era?'true':'false'));
   document.querySelectorAll('#roleseg button').forEach(x=>x.setAttribute('aria-pressed', x.dataset.role===state.role?'true':'false'));
-  srcseg.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed', x.dataset.source===state.source?'true':'false'));
+  syncSrcControls();
   document.querySelectorAll('#groupseg button').forEach(x=>x.setAttribute('aria-pressed', (x.dataset.g==='class')===(state.sort==='class')?'true':'false'));
   document.getElementById('ptronly').checked = state.ptrOnly;
   document.getElementById('staronly').checked = state.starOnly;
@@ -2181,10 +2228,12 @@ function openRowFor(cls, spec){
 // with the hash stripped resets every lane of state at once (filters, era, overlays,
 // drawers) — one honest reload rather than chasing each store by hand. href="#" is only
 // the no-JS fallback; the CSP forbids inline handlers, so the listener attaches here.
-document.getElementById("brandhome").addEventListener("click", e => {
-  e.preventDefault();
-  location.href = location.pathname + location.search;
-});
+for (const id of ["brandhome", "brandhome2"]) {
+  document.getElementById(id)?.addEventListener("click", e => {
+    e.preventDefault();
+    location.href = location.pathname + location.search;
+  });
+}
 {
   applyingHash = true;
   const pendingSpec = applyHash();
