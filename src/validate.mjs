@@ -370,6 +370,11 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
   for (const entry of community?.classes ?? [])
     for (const creator of entry.creators ?? [])
       creatorScope.set(`${entry.class}|${creator.name}`, creator.specs ?? null);
+  // Since PROJECTION_VERSION v7 the take lane FEEDS THE MODEL (expertRead), so the fields
+  // the estimator reads are gated like every other model input (2026-08-04 external audit:
+  // a single-field sentiment mutation crossed tier boundaries with nothing failing red).
+  const TAKE_SENTIMENTS = new Set(["buff", "nerf", "neutral", "mixed"]);
+  const TAKE_BRACKETS = new Set(["raid", "mplus", "both"]);
   for (const take of creatorTakes?.takes ?? []) {
     if (!specKeys.has(`${take.class}|${take.spec}`)) errors.push(`creator-takes.json: take references unknown spec ${take.class} / ${take.spec}`);
     if (!take.creator || !take.claim || !take.url) errors.push(`creator-takes.json: take for ${take.spec} needs creator + claim + url`);
@@ -378,6 +383,13 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
       if (!creatorScope.has(scopeKey)) errors.push(`creator-takes.json: "${take.creator}" has a ${take.class} take but no ${take.class} entry in community.json`);
       else { const scope = creatorScope.get(scopeKey); if (scope && !scope.includes(take.spec)) errors.push(`creator-takes.json: "${take.creator}" take for ${take.class}/${take.spec} is outside their declared specs scope [${scope.join(", ")}]`); }
     }
+    if (!TAKE_SENTIMENTS.has(take.sentiment)) errors.push(`creator-takes.json: take for ${take.spec} sentiment "${take.sentiment}" invalid (buff|nerf|neutral|mixed) — it is a model input since v7`);
+    // patchContext carries BOTH the era gate (PHASES.ptr.marker match) and the bracket
+    // scope heuristic; a take without one would silently vanish from the expert read.
+    if (!take.patchContext || typeof take.patchContext !== "string") errors.push(`creator-takes.json: take for ${take.spec} needs a patchContext string (era-gates and bracket-scopes the expert read)`);
+    if (take.bracket != null && !TAKE_BRACKETS.has(take.bracket)) errors.push(`creator-takes.json: take for ${take.spec} bracket "${take.bracket}" invalid (raid|mplus|both, or omit for the patchContext heuristic)`);
+    if (take.superseded != null && typeof take.superseded !== "boolean") errors.push(`creator-takes.json: take for ${take.spec} superseded must be a boolean when present`);
+    if (!take.date) errors.push(`creator-takes.json: take for ${take.spec} needs a date (orders the panel's newest read)`);
     isoOk(take.date, `creator-takes.json: take for ${take.spec} date`);
     if (take.url != null) {
       // Take URLs flow from untrusted transcripts through the nightly LLM into clickable

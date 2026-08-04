@@ -390,3 +390,33 @@ than coherence.
 - Changing the consensus bands (they govern the consensus column too, not just projections).
 - Adding new data sources to the blend.
 - Anything touching `SNAPSHOT_PHASE` or the launch transition — separate workstream.
+
+---
+
+## Addendum — second external audit (of v7), 2026-08-04
+
+A second outside audit reviewed v7 (the expert-take integration). Bottom line accepted:
+v7 is materially safer than v6, but three correctness issues had to land before freezing
+any forecast. All were verified against the data before acting — every count reproduced —
+and all shipped as **PROJECTION_VERSION 8** (+ RANK_VERSION 3) the same day.
+
+| # | Finding | Verified | Disposition |
+|---|---------|----------|-------------|
+| 1 | Specialist takes leak between brackets — `expertRead()` had no bracket input; 33 of 99 live PTR takes are M+-scoped, 7 raid-scoped; Mistweaver raid carried a −2 built from three M+ tier-list reads | ✓ (33/7 measured; MW takes listed) | **Fixed.** The projection's read is bracket-scoped (explicit `take.bracket` wins, else the same patchContext heuristic the meta nudge uses; neither → both). The whole-spec arrow stays unscoped. MW raid: S/98 → S/100 ("live S-tier prior; exact 12.1 rank unresolved" — the audit's requested reading). |
+| 2 | Thin Dummy Dome observations remained in the reference field — excluded from their own composite but still in everyone's denominator | ✓ (structural) | **Fixed.** `fieldByCount` now holds only cuts clearing MIN_RANK_N; thin cuts display against the clean field (member-aware midrank so a thin outlier can't read >100%). All 10 scored composites moved, 5 dummy ranks — RANK_VERSION 3. |
+| 3 | Take `sentiment`/`patchContext` unvalidated — a single-field mutation crossed tier boundaries with nothing failing red | ✓ (validate.mjs takes loop had no such gates) | **Fixed.** sentiment enum (buff\|nerf\|neutral\|mixed), patchContext + date required, optional bracket enum, superseded boolean — all fail validation red. |
+| 4 | Confidence inconsistent — the expert adjustment moved scores while omitted from the signal count; 5 cells read "prior-only" with a score ≠ prior; the UI tooltip claimed "No PTR evidence" | ✓ (exactly 5 cells reproduced, MW raid among them) | **Fixed.** The take lane is a counted signal type (numerator and denominator; never double-counted when it drives the direction). Zero prior-only cells with a moved score remain. |
+| 5 | Report card: top-k/NDCG order-dependent on ties; grade measures agreement with settled publisher consensus, not realized strength | ✓ (bare score sorts) | **Fixed / documented.** Deterministic spec-name tiebreak on every ranking sort (pinned by a permutation test); the publisher-consensus caveat now leads the module header. |
+
+Net v7→v8 effect at ship: 25 of 80 projection scores moved, 5 tiers
+(Guardian raid A+→S, Resto Druid raid A+→S, Arcane raid A→B, Frost Mage raid A+→A,
+Marksmanship M+ A+→A), 30 confidence tags.
+
+**Deferred, deliberately** (the audit's own "coefficient tuning can wait"): the v8
+statistical redesign it sketches — explicit per-take scope at distillation time,
+continuous sample-size shrinkage, WCL+Robydoby as one correlated family, partial pooling
+toward role means, rank intervals / top-three probabilities, confidence as posterior
+uncertainty. These change the model's *shape*, not its honesty, and belong after the
+report card grades the frozen forecast — the harness that can tell whether they help.
+The explicit `bracket` field on takes is already supported end-to-end, so distillation
+can start writing it now.

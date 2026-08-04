@@ -187,3 +187,25 @@ test("carryForward graded against its own source is perfect — that is the poin
   assert.equal(g.overall.exactPct, 100);
   assert.equal(g.overall.meanAbsScore, 0);
 });
+
+test("ranking metrics are stable under input order when scores tie", () => {
+  // 2026-08-04 external audit: with tied scores the sort order — and therefore DCG and
+  // the top-k cut — depended on input order, so the same data could grade differently
+  // across runs. The spec-name tiebreak makes every ordering deterministic.
+  const mk = (spec, f, a) => ({ spec, role: "DPS", bracket: "raid",
+    forecastScore: f, actualScore: a, forecastTier: "A", actualTier: "A" });
+  const rows = [
+    mk("alpha", 80, 90), mk("bravo", 80, 70), mk("charlie", 80, 50),
+    mk("delta", 60, 80), mk("echo", 60, 60), mk("foxtrot", 40, 40)
+  ];
+  const reversed = [...rows].reverse();
+  const shuffled = [rows[3], rows[0], rows[5], rows[2], rows[4], rows[1]];
+  const base = rankingFor(rows)["raid/DPS"];
+  for (const perm of [reversed, shuffled]) {
+    const r = rankingFor(perm)["raid/DPS"];
+    assert.equal(r.ndcg, base.ndcg, "NDCG must not depend on input order");
+    assert.equal(r.topK.overlap, base.topK.overlap, "…nor the top-k overlap");
+    assert.equal(r.spearman, base.spearman);
+  }
+  assert.equal(ndcgAtK(rows, 3), ndcgAtK(reversed, 3));
+});

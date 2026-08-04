@@ -1,8 +1,8 @@
 {
   "date": "2026-08-04",
   "phase": "12.1-ptr",
-  "projectionVersion": 7,
-  "rankVersion": 2,
+  "projectionVersion": 8,
+  "rankVersion": 3,
   "consensusVersion": 2,
   "specs": {
     "Death Knight|Blood": {
@@ -30,7 +30,7 @@
         "raid": {
           "tier": "B",
           "score": 50,
-          "confidence": "low"
+          "confidence": "medium"
         },
         "mplus": {
           "tier": "A",
@@ -104,8 +104,8 @@
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 2
       },
       "dummy": {
-        "rank": 6,
-        "score": 69
+        "rank": 5,
+        "score": 62
       },
       "scores": {
         "raid": 62,
@@ -114,7 +114,7 @@
       "projection": {
         "raid": {
           "tier": "A",
-          "score": 66,
+          "score": 63,
           "confidence": "low"
         },
         "mplus": {
@@ -189,8 +189,8 @@
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 3
       },
       "dummy": {
-        "rank": 6,
-        "score": 69
+        "rank": 8,
+        "score": 56
       },
       "scores": {
         "raid": 88,
@@ -199,12 +199,12 @@
       "projection": {
         "raid": {
           "tier": "A+",
-          "score": 78,
+          "score": 74,
           "confidence": "low"
         },
         "mplus": {
           "tier": "A+",
-          "score": 81,
+          "score": 80,
           "confidence": "medium"
         }
       }
@@ -269,8 +269,8 @@
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 22
       },
       "dummy": {
-        "rank": 4,
-        "score": 74
+        "rank": 6,
+        "score": 61
       },
       "scores": {
         "raid": 57,
@@ -279,12 +279,12 @@
       "projection": {
         "raid": {
           "tier": "A",
-          "score": 64,
+          "score": 58,
           "confidence": "medium"
         },
         "mplus": {
           "tier": "A",
-          "score": 64,
+          "score": 62,
           "confidence": "high"
         }
       }
@@ -351,14 +351,14 @@
       },
       "projection": {
         "raid": {
-          "tier": "A+",
-          "score": 84,
-          "confidence": "low"
+          "tier": "S",
+          "score": 88,
+          "confidence": "medium"
         },
         "mplus": {
           "tier": "A",
           "score": 65,
-          "confidence": "high"
+          "confidence": "medium"
         }
       }
     },
@@ -387,14 +387,14 @@
       },
       "projection": {
         "raid": {
-          "tier": "A+",
-          "score": 83,
+          "tier": "S",
+          "score": 89,
           "confidence": "low"
         },
         "mplus": {
           "tier": "C",
           "score": 33,
-          "confidence": "high"
+          "confidence": "medium"
         }
       }
     },
@@ -461,7 +461,7 @@
       },
       "dummy": {
         "rank": 9,
-        "score": 52
+        "score": 43
       },
       "scores": {
         "raid": 55,
@@ -470,12 +470,12 @@
       "projection": {
         "raid": {
           "tier": "B",
-          "score": 53,
+          "score": 49,
           "confidence": "medium"
         },
         "mplus": {
           "tier": "C",
-          "score": 33,
+          "score": 32,
           "confidence": "high"
         }
       }
@@ -506,8 +506,8 @@
       "projection": {
         "raid": {
           "tier": "A+",
-          "score": 86,
-          "confidence": "low"
+          "score": 85,
+          "confidence": "medium"
         },
         "mplus": {
           "tier": "A",
@@ -546,12 +546,12 @@
         "raid": {
           "tier": "C",
           "score": 34,
-          "confidence": "prior-only"
+          "confidence": "low"
         },
         "mplus": {
           "tier": "B",
           "score": 54,
-          "confidence": "low"
+          "confidence": "medium"
         }
       }
     },
@@ -581,7 +581,7 @@
       },
       "dummy": {
         "rank": 2,
-        "score": 91
+        "score": 86
       },
       "scores": {
         "raid": 81,
@@ -590,12 +590,12 @@
       "projection": {
         "raid": {
           "tier": "A+",
-          "score": 86,
+          "score": 83,
           "confidence": "low"
         },
         "mplus": {
           "tier": "A",
-          "score": 69,
+          "score": 68,
           "confidence": "medium"
         }
       }
@@ -631,12 +631,12 @@
         "raid": {
           "tier": "A",
           "score": 69,
-          "confidence": "prior-only"
+          "confidence": "low"
         },
         "mplus": {
           "tier": "B",
           "score": 53,
-          "confidence": "low"
+          "confidence": "medium"
         }
       }
     },
@@ -666,7 +666,7 @@
       },
       "dummy": {
         "rank": 3,
-        "score": 88
+        "score": 81
       },
       "scores": {
         "raid": 33,
@@ -674,13 +674,13 @@
       },
       "projection": {
         "raid": {
-          "tier": "A",
-          "score": 59,
+          "tier": "B",
+          "score": 56,
           "confidence": "low"
         },
         "mplus": {
           "tier": "A",
-          "score": 71,
+          "score": 70,
           "confidence": "medium"
         }
       }
@@ -715,12 +715,12 @@
         "raid": {
           "tier": "C",
           "score": 39,
-          "confidence": "prior-only"
+          "confidence": "low"
         },
         "mplus": {
           "tier": "C",
           "score": 35,
-          "confidence": "low"
+          "confidence": "medium"
         }
       }
     },
@@ -749,8 +749,8 @@
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 20
       },
       "dummy": {
-        "rank": 8,
-        "score": 67
+        "rank": 6,
+        "score": 61
       },
       "scores": {
         "raid": 81,
@@ -758,13 +758,13 @@
       },
       "projection": {
         "raid": {
-          "tier": "A+",
-          "score": 75,
+          "tier": "A",
+          "score": 72,
           "confidence": "low"
         },
         "mplus": {
           "tier": "B",
-          "score": 48,
+          "score": 47,
           "confidence": "medium"
         }
       }
@@ -829,8 +829,8 @@
       "projection": {
         "raid": {
           "tier": "S",
-          "score": 98,
-          "confidence": "prior-only"
+          "score": 100,
+          "confidence": "low"
         },
         "mplus": {
           "tier": "S",
@@ -870,12 +870,12 @@
         "raid": {
           "tier": "A",
           "score": 70,
-          "confidence": "prior-only"
+          "confidence": "low"
         },
         "mplus": {
           "tier": "A+",
           "score": 75,
-          "confidence": "low"
+          "confidence": "medium"
         }
       }
     },
@@ -906,7 +906,7 @@
         "raid": {
           "tier": "B",
           "score": 57,
-          "confidence": "low"
+          "confidence": "medium"
         },
         "mplus": {
           "tier": "A",
@@ -939,7 +939,7 @@
       "projection": {
         "raid": {
           "tier": "C",
-          "score": 32,
+          "score": 33,
           "confidence": "low"
         },
         "mplus": {
@@ -985,7 +985,7 @@
         "mplus": {
           "tier": "A",
           "score": 59,
-          "confidence": "low"
+          "confidence": "medium"
         }
       }
     },
@@ -1016,7 +1016,7 @@
         "raid": {
           "tier": "A+",
           "score": 86,
-          "confidence": "prior-only"
+          "confidence": "low"
         },
         "mplus": {
           "tier": "B",
@@ -1051,13 +1051,13 @@
       "projection": {
         "raid": {
           "tier": "B",
-          "score": 46,
-          "confidence": "low"
+          "score": 50,
+          "confidence": "medium"
         },
         "mplus": {
           "tier": "C",
           "score": 35,
-          "confidence": "high"
+          "confidence": "medium"
         }
       }
     },
@@ -1088,7 +1088,7 @@
       },
       "dummy": {
         "rank": 10,
-        "score": 30
+        "score": 20
       },
       "scores": {
         "raid": 58,
@@ -1097,12 +1097,12 @@
       "projection": {
         "raid": {
           "tier": "B",
-          "score": 46,
+          "score": 42,
           "confidence": "low"
         },
         "mplus": {
           "tier": "B",
-          "score": 55,
+          "score": 54,
           "confidence": "medium"
         }
       }
@@ -1136,12 +1136,12 @@
         "raid": {
           "tier": "C",
           "score": 37,
-          "confidence": "prior-only"
+          "confidence": "low"
         },
         "mplus": {
           "tier": "A",
-          "score": 64,
-          "confidence": "low"
+          "score": 65,
+          "confidence": "medium"
         }
       }
     },
@@ -1175,12 +1175,12 @@
         "raid": {
           "tier": "B",
           "score": 43,
-          "confidence": "prior-only"
+          "confidence": "low"
         },
         "mplus": {
           "tier": "A",
           "score": 73,
-          "confidence": "low"
+          "confidence": "medium"
         }
       }
     },
@@ -1214,12 +1214,12 @@
         "raid": {
           "tier": "B",
           "score": 54,
-          "confidence": "prior-only"
+          "confidence": "low"
         },
         "mplus": {
           "tier": "B",
           "score": 43,
-          "confidence": "low"
+          "confidence": "medium"
         }
       }
     },
@@ -1248,8 +1248,8 @@
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 16
       },
       "dummy": {
-        "rank": 5,
-        "score": 73
+        "rank": 4,
+        "score": 70
       },
       "scores": {
         "raid": 49,
@@ -1258,7 +1258,7 @@
       "projection": {
         "raid": {
           "tier": "B",
-          "score": 57,
+          "score": 56,
           "confidence": "medium"
         },
         "mplus": {
@@ -1299,12 +1299,12 @@
         "raid": {
           "tier": "B",
           "score": 50,
-          "confidence": "prior-only"
+          "confidence": "low"
         },
         "mplus": {
           "tier": "B",
           "score": 53,
-          "confidence": "low"
+          "confidence": "medium"
         }
       }
     },
@@ -1335,7 +1335,7 @@
         "raid": {
           "tier": "B",
           "score": 46,
-          "confidence": "low"
+          "confidence": "medium"
         },
         "mplus": {
           "tier": "A+",
@@ -1419,7 +1419,7 @@
         },
         "mplus": {
           "tier": "A",
-          "score": 68,
+          "score": 69,
           "confidence": "medium"
         }
       }
@@ -1491,7 +1491,7 @@
       },
       "dummy": {
         "rank": 1,
-        "score": 95
+        "score": 94
       },
       "scores": {
         "raid": 43,
@@ -1500,7 +1500,7 @@
       "projection": {
         "raid": {
           "tier": "A",
-          "score": 68,
+          "score": 67,
           "confidence": "medium"
         },
         "mplus": {
@@ -1574,7 +1574,7 @@
         "raid": {
           "tier": "A+",
           "score": 87,
-          "confidence": "prior-only"
+          "confidence": "low"
         },
         "mplus": {
           "tier": "B",
