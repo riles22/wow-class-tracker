@@ -1,0 +1,3936 @@
+{
+  "source": "WoW Class Tracker data/specs.json (class, spec, role, tier set, ratings) + Icy Veins stat-priority pages",
+  "harvestedAt": "2026-08-02",
+  "caveat": "Icy Veins publishes LIVE-patch stat priorities. Season 2 (12.1) priorities are not published yet; treat ordering as a proxy.",
+  "weaponProficiencyProvenance": "Compiled from Blizzard's official class pages and official Midnight patch notes. Class pages establish class-wide proficiencies and preferred weapons; specLoadouts adds the hand, core-ability, and patch restrictions needed for item eligibility. See officialSources and each spec's sourceUrls.",
+  "armorByClass": {
+    "Priest": "Cloth",
+    "Mage": "Cloth",
+    "Warlock": "Cloth",
+    "Rogue": "Leather",
+    "Monk": "Leather",
+    "Druid": "Leather",
+    "Demon Hunter": "Leather",
+    "Hunter": "Mail",
+    "Shaman": "Mail",
+    "Evoker": "Mail",
+    "Warrior": "Plate",
+    "Paladin": "Plate",
+    "Death Knight": "Plate"
+  },
+  "counts": {
+    "specs": 40,
+    "withPriority": 40,
+    "withArmor": 40,
+    "withWeaponLoadouts": 40
+  },
+  "specs": [
+    {
+      "class": "Death Knight",
+      "spec": "Blood",
+      "role": "Tank",
+      "armor": "Plate",
+      "weaponLoadouts": [
+        {
+          "id": "two-hand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "occupiesBothHands": true,
+              "inventorySlots": [
+                "Two-Hand"
+              ],
+              "itemTypes": [
+                "Axe",
+                "Mace",
+                "Sword",
+                "Polearm"
+              ]
+            },
+            "offHand": {
+              "mustBeEmpty": true
+            }
+          }
+        }
+      ],
+      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutSources": [
+        "https://worldofwarcraft.blizzard.com/en-us/game/classes/death-knight"
+      ],
+      "weaponLoadoutNote": null,
+      "weaponPrimaryStatExceptions": {
+        "itemTypes": [],
+        "inventorySlots": [
+          "Held In Off-hand"
+        ],
+        "reason": "Held-in-off-hand items are already constrained to valid Intellect specs by exact loadouts and currently have type null. Shields retain both Strength and Intellect through tooltip parsing and are not exempt."
+      },
+      "statPriority": {
+        "primary": "Strength",
+        "secondaries": [
+          "Crit",
+          "Vers",
+          "Mast",
+          "Haste"
+        ]
+      },
+      "statPriorityVariants": [
+        {
+          "name": "Deathbringer (general)",
+          "secondaries": [
+            "Crit",
+            "Vers",
+            "Mast",
+            "Haste"
+          ],
+          "patch": "12.0.7",
+          "source": "https://www.icy-veins.com/wow/blood-death-knight-pve-tank-stat-priority"
+        },
+        {
+          "name": "San'layn (general)",
+          "secondaries": [
+            "Haste",
+            "Crit",
+            "Vers",
+            "Mast"
+          ],
+          "patch": "12.0.7",
+          "source": "https://www.icy-veins.com/wow/blood-death-knight-pve-tank-stat-priority"
+        }
+      ],
+      "statPriorityNote": "Default profile: Deathbringer. Use the matching Hero Talent variant when playing San'layn. Item level, Armor, Strength, and Stamina generally outweigh small secondary-stat differences, and all four secondaries are close. DPS simulations do not measure defensive value on their own.",
+      "statPriorityPatch": "12.0.7",
+      "statPrioritySource": "https://www.icy-veins.com/wow/blood-death-knight-pve-tank-stat-priority",
+      "tierSet": {
+        "set2": "When you Death Strike, gain a stack of Blood Debt, increasing Strength by 0.5%, up to 5%. When Blood Debt reaches 10 stacks, your next Marrowrend consumes it granting 10% Strength for 10 seconds.",
+        "set4": "When consuming Blood Debt, your next Marrowrend generates 3 additional Bone Shield charges and deals Shadow damage to your target and nearby enemies.",
+        "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/11",
+        "asOf": "2026-07-08"
+      },
+      "ratings": {
+        "raid": {
+          "icyveins": "B",
+          "method": "B",
+          "wowhead": "B",
+          "archon": "B"
+        },
+        "mplus": {
+          "icyveins": "C",
+          "method": "C",
+          "wowhead": "B",
+          "archon": "C",
+          "icyveins-ptr": "A+"
+        }
+      }
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Frost",
+      "role": "DPS",
+      "armor": "Plate",
+      "weaponLoadouts": [
+        {
+          "id": "two-hand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "occupiesBothHands": true,
+              "inventorySlots": [
+                "Two-Hand"
+              ],
+              "itemTypes": [
+                "Axe",
+                "Mace",
+                "Sword",
+                "Polearm"
+              ]
+            },
+            "offHand": {
+              "mustBeEmpty": true
+            }
+          }
+        },
+        {
+          "id": "dual-one-hand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "inventorySlots": [
+                "One-Hand",
+                "Main Hand"
+              ],
+              "itemTypes": [
+                "Axe",
+                "Mace",
+                "Sword"
+              ]
+            },
+            "offHand": {
+              "required": true,
+              "inventorySlots": [
+                "One-Hand",
+                "Off Hand"
+              ],
+              "itemTypes": [
+                "Axe",
+                "Mace",
+                "Sword"
+              ]
+            }
+          }
+        }
+      ],
+      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutSources": [
+        "https://worldofwarcraft.blizzard.com/en-us/game/classes/death-knight",
+        "https://worldofwarcraft.blizzard.com/en-us/news/24244455/midnight-pre-expansion-content-update-notes"
+      ],
+      "weaponLoadoutNote": "Midnight Obliterate explicitly supports both two-handed and dual-wield configurations.",
+      "weaponPrimaryStatExceptions": {
+        "itemTypes": [],
+        "inventorySlots": [
+          "Held In Off-hand"
+        ],
+        "reason": "Held-in-off-hand items are already constrained to valid Intellect specs by exact loadouts and currently have type null. Shields retain both Strength and Intellect through tooltip parsing and are not exempt."
+      },
+      "statPriority": {
+        "primary": "Strength",
+        "secondaries": [
+          "Mast",
+          "Crit",
+          "Haste",
+          "Vers"
+        ]
+      },
+      "statPriorityVariants": null,
+      "statPriorityNote": null,
+      "statPriorityPatch": "12.0.7",
+      "statPrioritySource": "https://www.icy-veins.com/wow/frost-death-knight-pve-dps-stat-priority",
+      "tierSet": {
+        "set2": "Each time Remorseless Winter damages at least 1 enemy, gain Freezing Tempest which grants 2% attack speed and 4% increased Icy Death Torrent damage for 5 sec, stacking.",
+        "set4": "Remorseless Winter deals damage 25% more frequently, and Freezing Tempest lasts 5 seconds longer.",
+        "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+        "asOf": "2026-06-18"
+      },
+      "ratings": {
+        "raid": {
+          "icyveins": "S",
+          "method": "C",
+          "wowhead": "C",
+          "archon": "A"
+        },
+        "mplus": {
+          "icyveins": "A",
+          "method": "B",
+          "wowhead": "B",
+          "archon": "C",
+          "icyveins-ptr": "A+"
+        }
+      }
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "role": "DPS",
+      "armor": "Plate",
+      "weaponLoadouts": [
+        {
+          "id": "two-hand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "occupiesBothHands": true,
+              "inventorySlots": [
+                "Two-Hand"
+              ],
+              "itemTypes": [
+                "Axe",
+                "Mace",
+                "Sword",
+                "Polearm"
+              ]
+            },
+            "offHand": {
+              "mustBeEmpty": true
+            }
+          }
+        }
+      ],
+      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutSources": [
+        "https://worldofwarcraft.blizzard.com/en-us/game/classes/death-knight"
+      ],
+      "weaponLoadoutNote": null,
+      "weaponPrimaryStatExceptions": {
+        "itemTypes": [],
+        "inventorySlots": [
+          "Held In Off-hand"
+        ],
+        "reason": "Held-in-off-hand items are already constrained to valid Intellect specs by exact loadouts and currently have type null. Shields retain both Strength and Intellect through tooltip parsing and are not exempt."
+      },
+      "statPriority": {
+        "primary": "Strength",
+        "secondaries": [
+          "Mast",
+          "Crit",
+          "Haste",
+          "Vers"
+        ]
+      },
+      "statPriorityVariants": null,
+      "statPriorityNote": null,
+      "statPriorityPatch": "12.0.7",
+      "statPrioritySource": "https://www.icy-veins.com/wow/unholy-death-knight-pve-dps-stat-priority",
+      "tierSet": {
+        "set2": "Your Magus of the Dead and Lord of the Dead cast a more powerful Necrotic Bolt instead of Frostbolt, and Withering Grasp instead of Shadow Bolt. (2026-07-31 build: Necrotic Bolt and Withering Grasp damage increased by 25% — the notes credit \"The Venomous Abyss set bonus\" without naming which piece, so the buff is recorded here alongside the bonus that grants both spells rather than split across the two.)",
+        "set4": "Necrotic Bolt's damage is increased by 130%, and Withering Grasp's damage is increased by 130%, against enemies below 35% health.",
+        "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/18",
+        "asOf": "2026-07-31"
+      },
+      "ratings": {
+        "raid": {
+          "icyveins": "A+",
+          "method": "B",
+          "wowhead": "A",
+          "archon": "B"
+        },
+        "mplus": {
+          "icyveins": "S",
+          "method": "A",
+          "wowhead": "A+",
+          "archon": "S",
+          "icyveins-ptr": "S"
+        }
+      }
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Havoc",
+      "role": "DPS",
+      "armor": "Leather",
+      "weaponLoadouts": [
+        {
+          "id": "dual-one-hand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "inventorySlots": [
+                "One-Hand",
+                "Main Hand"
+              ],
+              "itemTypes": [
+                "Warglaive",
+                "Fist Weapon",
+                "Axe",
+                "Sword"
+              ]
+            },
+            "offHand": {
+              "required": true,
+              "inventorySlots": [
+                "One-Hand",
+                "Off Hand"
+              ],
+              "itemTypes": [
+                "Warglaive",
+                "Fist Weapon",
+                "Axe",
+                "Sword"
+              ]
+            }
+          }
+        }
+      ],
+      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutSources": [
+        "https://worldofwarcraft.blizzard.com/en-us/game/classes/demon-hunter",
+        "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811"
+      ],
+      "weaponLoadoutNote": "Daggers are excluded in both contexts. On the 12.1 PTR, Demon Blades, Blade Dance, and Chaos Strike explicitly require warglaives, axes, swords, or fist weapons.",
+      "weaponPrimaryStatExceptions": {
+        "itemTypes": [],
+        "inventorySlots": [
+          "Held In Off-hand"
+        ],
+        "reason": "Held-in-off-hand items are already constrained to valid Intellect specs by exact loadouts and currently have type null. Shields retain both Strength and Intellect through tooltip parsing and are not exempt."
+      },
+      "statPriority": {
+        "primary": "Agility",
+        "secondaries": [
+          "Crit",
+          "Mast",
+          "Haste",
+          "Vers"
+        ]
+      },
+      "statPriorityVariants": null,
+      "statPriorityNote": null,
+      "statPriorityPatch": "12.0.7",
+      "statPrioritySource": "https://www.icy-veins.com/wow/havoc-demon-hunter-pve-dps-stat-priority",
+      "tierSet": {
+        "set2": "Blade Dance, Chaos Strike, and Essence Break deal 12% increased damage.",
+        "set4": "Essence Break now applies and benefits from the effects of Cycle of Hatred, has 35% increased initial strike damage, and has 2 seconds of increased duration.",
+        "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/16",
+        "asOf": "2026-07-21"
+      },
+      "ratings": {
+        "raid": {
+          "icyveins": "B",
+          "method": "B",
+          "wowhead": "B",
+          "archon": "A"
+        },
+        "mplus": {
+          "icyveins": "A+",
+          "method": "B",
+          "wowhead": "B",
+          "archon": "B",
+          "icyveins-ptr": "A+"
+        }
+      }
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "role": "DPS",
+      "armor": "Leather",
+      "weaponLoadouts": [
+        {
+          "id": "dual-one-hand-ptr-12.1",
+          "patchContexts": [
+            "ptr-12.1.0"
+          ],
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "inventorySlots": [
+                "One-Hand",
+                "Main Hand"
+              ],
+              "itemTypes": [
+                "Warglaive",
+                "Fist Weapon",
+                "Axe",
+                "Sword",
+                "Dagger"
+              ]
+            },
+            "offHand": {
+              "required": true,
+              "inventorySlots": [
+                "One-Hand",
+                "Off Hand"
+              ],
+              "itemTypes": [
+                "Warglaive",
+                "Fist Weapon",
+                "Axe",
+                "Sword",
+                "Dagger"
+              ]
+            }
+          }
+        }
+      ],
+      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutSources": [
+        "https://worldofwarcraft.blizzard.com/en-us/game/classes/demon-hunter",
+        "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811"
+      ],
+      "weaponLoadoutNote": "Dagger eligibility is Devourer-only and begins on the 12.1 PTR; the live 12.0.7 loadout intentionally excludes daggers.",
+      "weaponPrimaryStatExceptions": {
+        "itemTypes": [],
+        "inventorySlots": [
+          "Held In Off-hand"
+        ],
+        "reason": "Held-in-off-hand items are already constrained to valid Intellect specs by exact loadouts and currently have type null. Shields retain both Strength and Intellect through tooltip parsing and are not exempt."
+      },
+      "statPriority": {
+        "primary": "Intellect",
+        "secondaries": [
+          "Haste",
+          "Mast",
+          "Crit",
+          "Vers"
+        ]
+      },
+      "statPriorityVariants": [
+        {
+          "name": "Annihilator (single-target / general)",
+          "secondaries": [
+            "Haste",
+            "Mast",
+            "Crit",
+            "Vers"
+          ],
+          "patch": "12.0.7",
+          "source": "https://www.icy-veins.com/wow/devourer-demon-hunter-pve-dps-stat-priority"
+        },
+        {
+          "name": "Annihilator (AoE)",
+          "secondaries": [
+            "Mast",
+            "Haste",
+            "Crit",
+            "Vers"
+          ],
+          "patch": "12.0.7",
+          "source": "https://www.icy-veins.com/wow/devourer-demon-hunter-pve-dps-stat-priority"
+        },
+        {
+          "name": "Void-Scarred (general)",
+          "secondaries": [
+            "Mast",
+            "Haste",
+            "Crit",
+            "Vers"
+          ],
+          "patch": "12.0.7",
+          "source": "https://www.icy-veins.com/wow/devourer-demon-hunter-pve-dps-stat-priority"
+        }
+      ],
+      "statPriorityNote": "Default profile: Annihilator single-target/general. Annihilator swaps Mastery ahead of Haste in AoE; Void-Scarred also prioritizes Mastery. Item level and Intellect remain extremely important, and the Hero Talent profiles are close enough that separate gear sets are unnecessary. Simulate close upgrades rather than treating the order as fixed weights.",
+      "statPriorityPatch": "12.0.7",
+      "statPrioritySource": "https://www.icy-veins.com/wow/devourer-demon-hunter-pve-dps-stat-priority",
+      "tierSet": {
+        "set2": "Harvesting 4 or more Soul Fragments with Reap has a 20% chance to cause your next Consume to be instant cast and explode in a Soulburst, dealing Cosmic damage to nearby enemies.",
+        "set4": "Soulburst generates 8 Soul Fragments and grants Moment of Craving. Reap deals 20% increased damage.",
+        "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+        "asOf": "2026-06-18"
+      },
+      "ratings": {
+        "raid": {
+          "icyveins": "A+",
+          "method": "S",
+          "wowhead": "A",
+          "archon": "S"
+        },
+        "mplus": {
+          "icyveins": "S",
+          "method": "A",
+          "wowhead": "A+",
+          "archon": "S",
+          "icyveins-ptr": "A+"
+        }
+      }
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Vengeance",
+      "role": "Tank",
+      "armor": "Leather",
+      "weaponLoadouts": [
+        {
+          "id": "dual-one-hand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "inventorySlots": [
+                "One-Hand",
+                "Main Hand"
+              ],
+              "itemTypes": [
+                "Warglaive",
+                "Fist Weapon",
+                "Axe",
+                "Sword"
+              ]
+            },
+            "offHand": {
+              "required": true,
+              "inventorySlots": [
+                "One-Hand",
+                "Off Hand"
+              ],
+              "itemTypes": [
+                "Warglaive",
+                "Fist Weapon",
+                "Axe",
+                "Sword"
+              ]
+            }
+          }
+        }
+      ],
+      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutSources": [
+        "https://worldofwarcraft.blizzard.com/en-us/game/classes/demon-hunter",
+        "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811"
+      ],
+      "weaponLoadoutNote": "Daggers are excluded in both contexts. On the 12.1 PTR, Fracture and Soul Cleave explicitly require warglaives, axes, swords, or fist weapons.",
+      "weaponPrimaryStatExceptions": {
+        "itemTypes": [],
+        "inventorySlots": [
+          "Held In Off-hand"
+        ],
+        "reason": "Held-in-off-hand items are already constrained to valid Intellect specs by exact loadouts and currently have type null. Shields retain both Strength and Intellect through tooltip parsing and are not exempt."
+      },
+      "statPriority": {
+        "primary": "Agility",
+        "secondaries": [
+          "Haste",
+          "Vers",
+          "Crit",
+          "Mast"
+        ]
+      },
+      "statPriorityVariants": null,
+      "statPriorityNote": null,
+      "statPriorityPatch": "12.0.7",
+      "statPrioritySource": "https://www.icy-veins.com/wow/vengeance-demon-hunter-pve-tank-stat-priority",
+      "tierSet": {
+        "set2": "Sigil of Flame's damage over time is increased by 50%. Soul Cleave increases the duration of Sigil of Flame on your primary target by 2 seconds.",
+        "set4": "Immolation Aura and Sigil of Spite deal 100% increased damage against targets affected by your Sigil of Flame.",
+        "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+        "asOf": "2026-06-18"
+      },
+      "ratings": {
+        "raid": {
+          "icyveins": "C",
+          "wowhead": "C",
+          "archon": "C"
+        },
+        "mplus": {
+          "icyveins": "A",
+          "method": "A",
+          "wowhead": "A",
+          "archon": "C",
+          "icyveins-ptr": null
+        }
+      }
+    },
+    {
+      "class": "Druid",
+      "spec": "Balance",
+      "role": "DPS",
+      "armor": "Leather",
+      "weaponLoadouts": [
+        {
+          "id": "two-hand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "occupiesBothHands": true,
+              "inventorySlots": [
+                "Two-Hand"
+              ],
+              "itemTypes": [
+                "Mace",
+                "Polearm",
+                "Staff"
+              ]
+            },
+            "offHand": {
+              "mustBeEmpty": true
+            }
+          }
+        },
+        {
+          "id": "one-hand-held-offhand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "inventorySlots": [
+                "One-Hand",
+                "Main Hand"
+              ],
+              "itemTypes": [
+                "Dagger",
+                "Fist Weapon",
+                "Mace"
+              ]
+            },
+            "offHand": {
+              "required": true,
+              "inventorySlots": [
+                "Held In Off-hand"
+              ],
+              "itemTypes": [
+                null
+              ]
+            }
+          }
+        }
+      ],
+      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutSources": [
+        "https://worldofwarcraft.blizzard.com/en-us/game/classes/druid"
+      ],
+      "weaponLoadoutNote": null,
+      "weaponPrimaryStatExceptions": {
+        "itemTypes": [],
+        "inventorySlots": [
+          "Held In Off-hand"
+        ],
+        "reason": "Held-in-off-hand items are already constrained to valid Intellect specs by exact loadouts and currently have type null. Shields retain both Strength and Intellect through tooltip parsing and are not exempt."
+      },
+      "statPriority": {
+        "primary": "Intellect",
+        "secondaries": [
+          "Crit",
+          "Mast",
+          "Haste",
+          "Vers"
+        ]
+      },
+      "statPriorityVariants": null,
+      "statPriorityNote": null,
+      "statPriorityPatch": "12.0.7",
+      "statPrioritySource": "https://www.icy-veins.com/wow/balance-druid-pve-dps-stat-priority",
+      "tierSet": {
+        "set2": "Starsurge damage increased by 20%. Starfall also deals Astral damage instantly to all valid enemies in range when cast (instant Starfall damage increased by 15% on 07-08).",
+        "set4": "Your damage is increased by 10% while in any Eclipse. This bonus wanes to 2% at the midpoint of the Eclipse, then waxes back to 10% at the end.",
+        "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/11",
+        "asOf": "2026-07-08"
+      },
+      "ratings": {
+        "raid": {
+          "icyveins": "B",
+          "method": "A",
+          "wowhead": "C",
+          "archon": "A"
+        },
+        "mplus": {
+          "icyveins": "A",
+          "method": "B",
+          "wowhead": "A",
+          "archon": "C",
+          "icyveins-ptr": "S"
+        }
+      }
+    },
+    {
+      "class": "Druid",
+      "spec": "Feral",
+      "role": "DPS",
+      "armor": "Leather",
+      "weaponLoadouts": [
+        {
+          "id": "two-hand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "occupiesBothHands": true,
+              "inventorySlots": [
+                "Two-Hand"
+              ],
+              "itemTypes": [
+                "Mace",
+                "Polearm",
+                "Staff"
+              ]
+            },
+            "offHand": {
+              "mustBeEmpty": true
+            }
+          }
+        }
+      ],
+      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutSources": [
+        "https://worldofwarcraft.blizzard.com/en-us/game/classes/druid"
+      ],
+      "weaponLoadoutNote": null,
+      "weaponPrimaryStatExceptions": {
+        "itemTypes": [],
+        "inventorySlots": [
+          "Held In Off-hand"
+        ],
+        "reason": "Held-in-off-hand items are already constrained to valid Intellect specs by exact loadouts and currently have type null. Shields retain both Strength and Intellect through tooltip parsing and are not exempt."
+      },
+      "statPriority": {
+        "primary": "Agility",
+        "secondaries": [
+          "Mast",
+          "Haste",
+          "Crit",
+          "Vers"
+        ]
+      },
+      "statPriorityVariants": null,
+      "statPriorityNote": null,
+      "statPriorityPatch": "12.0.7",
+      "statPrioritySource": "https://www.icy-veins.com/wow/feral-druid-pve-dps-stat-priority",
+      "tierSet": {
+        "set2": "When Berserk or Incarnation: Avatar of Ashamane ends, you deal 10% increased damage for 1 second for each combo point spent during Berserk or Incarnation: Avatar of Ashamane.",
+        "set4": "Berserk and Incarnation: Avatar of Ashamane last 10 seconds longer.",
+        "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+        "asOf": "2026-06-18"
+      },
+      "ratings": {
+        "raid": {
+          "icyveins": "C",
+          "method": "B",
+          "wowhead": "B",
+          "archon": "B"
+        },
+        "mplus": {
+          "icyveins": "A+",
+          "method": "A",
+          "wowhead": "B",
+          "archon": "A",
+          "icyveins-ptr": "A"
+        }
+      }
+    },
+    {
+      "class": "Druid",
+      "spec": "Guardian",
+      "role": "Tank",
+      "armor": "Leather",
+      "weaponLoadouts": [
+        {
+          "id": "two-hand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "occupiesBothHands": true,
+              "inventorySlots": [
+                "Two-Hand"
+              ],
+              "itemTypes": [
+                "Mace",
+                "Polearm",
+                "Staff"
+              ]
+            },
+            "offHand": {
+              "mustBeEmpty": true
+            }
+          }
+        }
+      ],
+      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutSources": [
+        "https://worldofwarcraft.blizzard.com/en-us/game/classes/druid"
+      ],
+      "weaponLoadoutNote": null,
+      "weaponPrimaryStatExceptions": {
+        "itemTypes": [],
+        "inventorySlots": [
+          "Held In Off-hand"
+        ],
+        "reason": "Held-in-off-hand items are already constrained to valid Intellect specs by exact loadouts and currently have type null. Shields retain both Strength and Intellect through tooltip parsing and are not exempt."
+      },
+      "statPriority": {
+        "primary": "Agility",
+        "secondaries": [
+          "Haste",
+          "Vers",
+          "Mast",
+          "Crit"
+        ]
+      },
+      "statPriorityVariants": [
+        {
+          "name": "Survivability",
+          "secondaries": [
+            "Haste",
+            "Vers",
+            "Mast",
+            "Crit"
+          ],
+          "patch": "12.0.7",
+          "source": "https://www.icy-veins.com/wow/guardian-druid-pve-tank-stat-priority"
+        },
+        {
+          "name": "Damage",
+          "secondaries": [
+            "Haste",
+            "Vers",
+            "Crit",
+            "Mast"
+          ],
+          "patch": "12.0.7",
+          "source": "https://www.icy-veins.com/wow/guardian-druid-pve-tank-stat-priority"
+        }
+      ],
+      "statPriorityNote": "Default profile: survivability. Select the damage profile when ranking gear for offense. Guardian secondaries are close, and an item around 10 or more item levels higher will usually be better. Simulate the damage profile for offensive comparisons.",
+      "statPriorityPatch": "12.0.7",
+      "statPrioritySource": "https://www.icy-veins.com/wow/guardian-druid-pve-tank-stat-priority",
+      "tierSet": {
+        "set2": "Thrash has a 20% chance to make your next Mangle deal 100% increased damage.",
+        "set4": "Thrash calls up 3 thorns, each impaling a target for Nature damage and dealing additional Nature damage to up to 5 nearby enemies, and extends the duration of Berserk by 0.5 seconds, up to 5 seconds.",
+        "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+        "asOf": "2026-06-18"
+      },
+      "ratings": {
+        "raid": {
+          "icyveins": "S",
+          "method": "A",
+          "wowhead": "B",
+          "archon": "S"
+        },
+        "mplus": {
+          "icyveins": "S",
+          "method": "B",
+          "wowhead": "S",
+          "archon": "S",
+          "icyveins-ptr": "B+"
+        }
+      }
+    },
+    {
+      "class": "Druid",
+      "spec": "Restoration",
+      "role": "Healer",
+      "armor": "Leather",
+      "weaponLoadouts": [
+        {
+          "id": "two-hand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "occupiesBothHands": true,
+              "inventorySlots": [
+                "Two-Hand"
+              ],
+              "itemTypes": [
+                "Mace",
+                "Polearm",
+                "Staff"
+              ]
+            },
+            "offHand": {
+              "mustBeEmpty": true
+            }
+          }
+        },
+        {
+          "id": "one-hand-held-offhand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "inventorySlots": [
+                "One-Hand",
+                "Main Hand"
+              ],
+              "itemTypes": [
+                "Dagger",
+                "Fist Weapon",
+                "Mace"
+              ]
+            },
+            "offHand": {
+              "required": true,
+              "inventorySlots": [
+                "Held In Off-hand"
+              ],
+              "itemTypes": [
+                null
+              ]
+            }
+          }
+        }
+      ],
+      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutSources": [
+        "https://worldofwarcraft.blizzard.com/en-us/game/classes/druid"
+      ],
+      "weaponLoadoutNote": null,
+      "weaponPrimaryStatExceptions": {
+        "itemTypes": [],
+        "inventorySlots": [
+          "Held In Off-hand"
+        ],
+        "reason": "Held-in-off-hand items are already constrained to valid Intellect specs by exact loadouts and currently have type null. Shields retain both Strength and Intellect through tooltip parsing and are not exempt."
+      },
+      "statPriority": {
+        "primary": "Intellect",
+        "secondaries": [
+          "Haste",
+          "Mast",
+          "Vers",
+          "Crit"
+        ]
+      },
+      "statPriorityVariants": [
+        {
+          "name": "Raid healing",
+          "secondaries": [
+            "Haste",
+            "Mast",
+            "Vers",
+            "Crit"
+          ],
+          "patch": "12.0.7",
+          "source": "https://www.icy-veins.com/wow/restoration-druid-pve-healing-stat-priority"
+        },
+        {
+          "name": "Dungeon healing",
+          "secondaries": [
+            "Mast",
+            "Haste",
+            "Vers",
+            "Crit"
+          ],
+          "patch": "12.0.7",
+          "source": "https://www.icy-veins.com/wow/restoration-druid-pve-healing-stat-priority"
+        },
+        {
+          "name": "Dungeon damage",
+          "secondaries": [
+            "Haste",
+            "Vers",
+            "Crit",
+            "Mast"
+          ],
+          "patch": "12.0.7",
+          "source": "https://www.icy-veins.com/wow/restoration-druid-pve-healing-stat-priority"
+        }
+      ],
+      "statPriorityNote": "Default profile: raid healing. Dungeon healing and dungeon damage use distinct secondary-stat orders. Restoration Druid has no universal stat weights: values change with content, spell distribution, and current gear. Use a healer gear-analysis tool for close healing upgrades.",
+      "statPriorityPatch": "12.0.7",
+      "statPrioritySource": "https://www.icy-veins.com/wow/restoration-druid-pve-healing-stat-priority",
+      "tierSet": {
+        "set2": "Rejuvenation has a 15% chance and Nature's Swiftness has a 100% chance to grant Genesis, causing all your heal over time effects to heal for 15% more for 8 seconds. Multiple applications may overlap.",
+        "set4": "Nature's Swiftness, Tranquility, and Incarnation: Tree of Life or Convoke the Spirits have a 100% chance to grant Genesis, and its duration is increased by 4 seconds.",
+        "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/14",
+        "asOf": "2026-07-14"
+      },
+      "ratings": {
+        "raid": {
+          "icyveins": "S",
+          "method": "A",
+          "wowhead": "S",
+          "archon": "A"
+        },
+        "mplus": {
+          "icyveins": "B",
+          "method": "A",
+          "wowhead": "S",
+          "archon": "C",
+          "icyveins-ptr": "A"
+        }
+      }
+    },
+    {
+      "class": "Evoker",
+      "spec": "Augmentation",
+      "role": "DPS",
+      "armor": "Mail",
+      "weaponLoadouts": [
+        {
+          "id": "two-hand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "occupiesBothHands": true,
+              "inventorySlots": [
+                "Two-Hand"
+              ],
+              "itemTypes": [
+                "Staff"
+              ]
+            },
+            "offHand": {
+              "mustBeEmpty": true
+            }
+          }
+        },
+        {
+          "id": "one-hand-held-offhand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "inventorySlots": [
+                "One-Hand",
+                "Main Hand"
+              ],
+              "itemTypes": [
+                "Dagger",
+                "Fist Weapon",
+                "Axe",
+                "Mace",
+                "Sword"
+              ]
+            },
+            "offHand": {
+              "required": true,
+              "inventorySlots": [
+                "Held In Off-hand"
+              ],
+              "itemTypes": [
+                null
+              ]
+            }
+          }
+        }
+      ],
+      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutSources": [
+        "https://worldofwarcraft.blizzard.com/en-us/game/classes/evoker"
+      ],
+      "weaponLoadoutNote": null,
+      "weaponPrimaryStatExceptions": {
+        "itemTypes": [],
+        "inventorySlots": [
+          "Held In Off-hand"
+        ],
+        "reason": "Held-in-off-hand items are already constrained to valid Intellect specs by exact loadouts and currently have type null. Shields retain both Strength and Intellect through tooltip parsing and are not exempt."
+      },
+      "statPriority": {
+        "primary": "Intellect",
+        "secondaries": [
+          "Crit",
+          "Haste",
+          "Mast",
+          "Vers"
+        ]
+      },
+      "statPriorityVariants": null,
+      "statPriorityNote": null,
+      "statPriorityPatch": "12.0.7",
+      "statPrioritySource": "https://www.icy-veins.com/wow/augmentation-evoker-pve-dps-stat-priority",
+      "tierSet": {
+        "set2": "Upheaval's cooldown is reduced by 10 seconds.",
+        "set4": "Upheaval magnifies your Fate Mirror effects for 8 seconds, increasing the amount of damage echoed to 45%.",
+        "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+        "asOf": "2026-07-21"
+      },
+      "ratings": {
+        "raid": {
+          "icyveins": "A",
+          "method": "B",
+          "wowhead": "A",
+          "archon": "S"
+        },
+        "mplus": {
+          "icyveins": "S",
+          "method": "A",
+          "wowhead": "A+",
+          "archon": "S",
+          "icyveins-ptr": null
+        }
+      }
+    },
+    {
+      "class": "Evoker",
+      "spec": "Devastation",
+      "role": "DPS",
+      "armor": "Mail",
+      "weaponLoadouts": [
+        {
+          "id": "two-hand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "occupiesBothHands": true,
+              "inventorySlots": [
+                "Two-Hand"
+              ],
+              "itemTypes": [
+                "Staff"
+              ]
+            },
+            "offHand": {
+              "mustBeEmpty": true
+            }
+          }
+        },
+        {
+          "id": "one-hand-held-offhand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "inventorySlots": [
+                "One-Hand",
+                "Main Hand"
+              ],
+              "itemTypes": [
+                "Dagger",
+                "Fist Weapon",
+                "Axe",
+                "Mace",
+                "Sword"
+              ]
+            },
+            "offHand": {
+              "required": true,
+              "inventorySlots": [
+                "Held In Off-hand"
+              ],
+              "itemTypes": [
+                null
+              ]
+            }
+          }
+        }
+      ],
+      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutSources": [
+        "https://worldofwarcraft.blizzard.com/en-us/game/classes/evoker"
+      ],
+      "weaponLoadoutNote": null,
+      "weaponPrimaryStatExceptions": {
+        "itemTypes": [],
+        "inventorySlots": [
+          "Held In Off-hand"
+        ],
+        "reason": "Held-in-off-hand items are already constrained to valid Intellect specs by exact loadouts and currently have type null. Shields retain both Strength and Intellect through tooltip parsing and are not exempt."
+      },
+      "statPriority": {
+        "primary": "Intellect",
+        "secondaries": [
+          "Haste",
+          "Crit",
+          "Mast",
+          "Vers"
+        ]
+      },
+      "statPriorityVariants": null,
+      "statPriorityNote": null,
+      "statPriorityPatch": "12.0.7",
+      "statPrioritySource": "https://www.icy-veins.com/wow/devastation-evoker-pve-dps-stat-priority",
+      "tierSet": {
+        "set2": "Shattering Star's damage is increased by 50%, and it always casts as if you had reached maximum empower level.",
+        "set4": "Causality reduces the remaining cooldown of your empower spells by an additional 0.1 seconds each time the effect occurs. Eternity Surge deals 10% increased damage.",
+        "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/18",
+        "asOf": "2026-07-31"
+      },
+      "ratings": {
+        "raid": {
+          "icyveins": "B",
+          "method": "A",
+          "wowhead": "B",
+          "archon": "B"
+        },
+        "mplus": {
+          "icyveins": "C",
+          "method": "B",
+          "wowhead": "B",
+          "archon": "C",
+          "icyveins-ptr": "B"
+        }
+      }
+    },
+    {
+      "class": "Evoker",
+      "spec": "Preservation",
+      "role": "Healer",
+      "armor": "Mail",
+      "weaponLoadouts": [
+        {
+          "id": "two-hand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "occupiesBothHands": true,
+              "inventorySlots": [
+                "Two-Hand"
+              ],
+              "itemTypes": [
+                "Staff"
+              ]
+            },
+            "offHand": {
+              "mustBeEmpty": true
+            }
+          }
+        },
+        {
+          "id": "one-hand-held-offhand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "inventorySlots": [
+                "One-Hand",
+                "Main Hand"
+              ],
+              "itemTypes": [
+                "Dagger",
+                "Fist Weapon",
+                "Axe",
+                "Mace",
+                "Sword"
+              ]
+            },
+            "offHand": {
+              "required": true,
+              "inventorySlots": [
+                "Held In Off-hand"
+              ],
+              "itemTypes": [
+                null
+              ]
+            }
+          }
+        }
+      ],
+      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutSources": [
+        "https://worldofwarcraft.blizzard.com/en-us/game/classes/evoker"
+      ],
+      "weaponLoadoutNote": null,
+      "weaponPrimaryStatExceptions": {
+        "itemTypes": [],
+        "inventorySlots": [
+          "Held In Off-hand"
+        ],
+        "reason": "Held-in-off-hand items are already constrained to valid Intellect specs by exact loadouts and currently have type null. Shields retain both Strength and Intellect through tooltip parsing and are not exempt."
+      },
+      "statPriority": {
+        "primary": "Intellect",
+        "secondaries": [
+          "Mast",
+          "Crit",
+          "Haste",
+          "Vers"
+        ]
+      },
+      "statPriorityVariants": null,
+      "statPriorityNote": null,
+      "statPriorityPatch": "12.0.7",
+      "statPrioritySource": "https://www.icy-veins.com/wow/preservation-evoker-pve-healing-stat-priority",
+      "tierSet": {
+        "set2": "Consuming Essence Burst sends forth a Living Flame at your target at 150% effectiveness, or at a nearby injured target if your primary target is at full health.",
+        "set4": "Green spells restore 5% more health, and Verdant Embrace has a 100% chance to grant Essence Burst.",
+        "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+        "asOf": "2026-06-18"
+      },
+      "ratings": {
+        "raid": {
+          "icyveins": "A",
+          "method": "S",
+          "wowhead": "A",
+          "archon": "A"
+        },
+        "mplus": {
+          "icyveins": "C",
+          "method": "B",
+          "wowhead": "B",
+          "archon": "C",
+          "icyveins-ptr": "B+"
+        }
+      }
+    },
+    {
+      "class": "Hunter",
+      "spec": "Beast Mastery",
+      "role": "DPS",
+      "armor": "Mail",
+      "weaponLoadouts": [
+        {
+          "id": "ranged",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "occupiesBothHands": true,
+              "inventorySlots": [
+                "Ranged"
+              ],
+              "itemTypes": [
+                "Bow",
+                "Crossbow",
+                "Gun"
+              ]
+            },
+            "offHand": {
+              "mustBeEmpty": true
+            }
+          }
+        }
+      ],
+      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutSources": [
+        "https://worldofwarcraft.blizzard.com/en-us/game/classes/hunter"
+      ],
+      "weaponLoadoutNote": null,
+      "weaponPrimaryStatExceptions": {
+        "itemTypes": [],
+        "inventorySlots": [
+          "Held In Off-hand"
+        ],
+        "reason": "Held-in-off-hand items are already constrained to valid Intellect specs by exact loadouts and currently have type null. Shields retain both Strength and Intellect through tooltip parsing and are not exempt."
+      },
+      "statPriority": {
+        "primary": "Agility",
+        "secondaries": [
+          "Mast",
+          "Crit",
+          "Haste",
+          "Vers"
+        ]
+      },
+      "statPriorityVariants": null,
+      "statPriorityNote": "General all-build, all-content order. On pure single-target, Haste is slightly better than Crit; Crit is preferred over Haste for all-around play. Haste adds essentially no AoE value for Beast Mastery, and each stat becomes more valuable when underrepresented. Keep the published flat order as a rule of thumb and simulate close upgrades.",
+      "statPriorityPatch": "12.0.7",
+      "statPrioritySource": "https://www.icy-veins.com/wow/beast-mastery-hunter-pve-dps-stat-priority",
+      "tierSet": {
+        "set2": "Barbed Shot causes your pets to Stomp 1 additional time at 50% effectiveness.",
+        "set4": "Stomp causes your next Cobra Shot to either benefit from Beast Cleave at 20% effectiveness, or strike your primary target for 15% additional damage, stacking up to 4 times.",
+        "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/11",
+        "asOf": "2026-07-08"
+      },
+      "ratings": {
+        "raid": {
+          "icyveins": "B",
+          "method": "C",
+          "wowhead": "C",
+          "archon": "C"
+        },
+        "mplus": {
+          "icyveins": "A+",
+          "method": "B",
+          "wowhead": "B",
+          "archon": "B",
+          "icyveins-ptr": "A"
+        }
+      }
+    },
+    {
+      "class": "Hunter",
+      "spec": "Marksmanship",
+      "role": "DPS",
+      "armor": "Mail",
+      "weaponLoadouts": [
+        {
+          "id": "ranged",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "occupiesBothHands": true,
+              "inventorySlots": [
+                "Ranged"
+              ],
+              "itemTypes": [
+                "Bow",
+                "Crossbow",
+                "Gun"
+              ]
+            },
+            "offHand": {
+              "mustBeEmpty": true
+            }
+          }
+        }
+      ],
+      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutSources": [
+        "https://worldofwarcraft.blizzard.com/en-us/game/classes/hunter"
+      ],
+      "weaponLoadoutNote": null,
+      "weaponPrimaryStatExceptions": {
+        "itemTypes": [],
+        "inventorySlots": [
+          "Held In Off-hand"
+        ],
+        "reason": "Held-in-off-hand items are already constrained to valid Intellect specs by exact loadouts and currently have type null. Shields retain both Strength and Intellect through tooltip parsing and are not exempt."
+      },
+      "statPriority": {
+        "primary": "Agility",
+        "secondaries": [
+          "Crit",
+          "Mast",
+          "Vers",
+          "Haste"
+        ]
+      },
+      "statPriorityVariants": null,
+      "statPriorityNote": null,
+      "statPriorityPatch": "12.0.7",
+      "statPrioritySource": "https://www.icy-veins.com/wow/marksmanship-hunter-pve-dps-stat-priority",
+      "tierSet": {
+        "set2": "Explosive Shot lasts 1 second longer and deals 5% increased damage.",
+        "set4": "Aimed Shot and Rapid Fire damage increased by 5%. Each time Explosive Shot causes a burst of damage, the cooldown of Aimed Shot and Rapid Fire is reduced by 0.5 seconds.",
+        "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/10",
+        "asOf": "2026-06-30"
+      },
+      "ratings": {
+        "raid": {
+          "icyveins": "A+",
+          "method": "S",
+          "wowhead": "A",
+          "archon": "A"
+        },
+        "mplus": {
+          "icyveins": "C",
+          "method": "A",
+          "wowhead": "B",
+          "archon": "B",
+          "icyveins-ptr": "A+"
+        }
+      }
+    },
+    {
+      "class": "Hunter",
+      "spec": "Survival",
+      "role": "DPS",
+      "armor": "Mail",
+      "weaponLoadouts": [
+        {
+          "id": "two-hand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "occupiesBothHands": true,
+              "inventorySlots": [
+                "Two-Hand"
+              ],
+              "itemTypes": [
+                "Axe",
+                "Sword",
+                "Polearm",
+                "Staff"
+              ]
+            },
+            "offHand": {
+              "mustBeEmpty": true
+            }
+          }
+        },
+        {
+          "id": "dual-one-hand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "inventorySlots": [
+                "One-Hand",
+                "Main Hand"
+              ],
+              "itemTypes": [
+                "Axe",
+                "Sword",
+                "Dagger"
+              ]
+            },
+            "offHand": {
+              "required": true,
+              "inventorySlots": [
+                "One-Hand",
+                "Off Hand"
+              ],
+              "itemTypes": [
+                "Axe",
+                "Sword",
+                "Dagger"
+              ]
+            }
+          }
+        }
+      ],
+      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutSources": [
+        "https://worldofwarcraft.blizzard.com/en-us/game/classes/hunter",
+        "https://worldofwarcraft.blizzard.com/en-us/news/24244455/midnight-pre-expansion-content-update-notes"
+      ],
+      "weaponLoadoutNote": "Midnight added dual wielding only for one-handed axes, swords, and daggers. Fist weapons are intentionally excluded.",
+      "weaponPrimaryStatExceptions": {
+        "itemTypes": [],
+        "inventorySlots": [
+          "Held In Off-hand"
+        ],
+        "reason": "Held-in-off-hand items are already constrained to valid Intellect specs by exact loadouts and currently have type null. Shields retain both Strength and Intellect through tooltip parsing and are not exempt."
+      },
+      "statPriority": {
+        "primary": "Agility",
+        "secondaries": [
+          "Mast",
+          "Crit",
+          "Haste",
+          "Vers"
+        ]
+      },
+      "statPriorityVariants": null,
+      "statPriorityNote": "General all-build order. For Pack Leader, Crit and Haste are effectively interchangeable; focus more on maximizing Mastery than on their exact ratio. The flat priority is a starting point rather than a numerical weighting. Secondary values change with the amount already equipped, so simulate close upgrades.",
+      "statPriorityPatch": "12.0.7",
+      "statPrioritySource": "https://www.icy-veins.com/wow/survival-hunter-pve-dps-stat-priority",
+      "tierSet": {
+        "set2": "Mongoose Fury increases the damage of Wildfire Bomb by 10%.",
+        "set4": "Each blast of Boomstick increases the duration of Mongoose Fury by 1 second. Mongoose Fury effects are increased by 10%.",
+        "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/14",
+        "asOf": "2026-07-14"
+      },
+      "ratings": {
+        "raid": {
+          "icyveins": "S",
+          "method": "B",
+          "wowhead": "B",
+          "archon": "A"
+        },
+        "mplus": {
+          "icyveins": "A+",
+          "method": "A",
+          "wowhead": "B",
+          "archon": "A",
+          "icyveins-ptr": "A"
+        }
+      }
+    },
+    {
+      "class": "Mage",
+      "spec": "Arcane",
+      "role": "DPS",
+      "armor": "Cloth",
+      "weaponLoadouts": [
+        {
+          "id": "two-hand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "occupiesBothHands": true,
+              "inventorySlots": [
+                "Two-Hand"
+              ],
+              "itemTypes": [
+                "Staff"
+              ]
+            },
+            "offHand": {
+              "mustBeEmpty": true
+            }
+          }
+        },
+        {
+          "id": "one-hand-held-offhand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "inventorySlots": [
+                "One-Hand",
+                "Main Hand",
+                "Ranged"
+              ],
+              "itemTypes": [
+                "Dagger",
+                "Sword",
+                "Wand"
+              ]
+            },
+            "offHand": {
+              "required": true,
+              "inventorySlots": [
+                "Held In Off-hand"
+              ],
+              "itemTypes": [
+                null
+              ]
+            }
+          }
+        }
+      ],
+      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutSources": [
+        "https://worldofwarcraft.blizzard.com/en-us/game/classes/mage"
+      ],
+      "weaponLoadoutNote": null,
+      "weaponPrimaryStatExceptions": {
+        "itemTypes": [],
+        "inventorySlots": [
+          "Held In Off-hand"
+        ],
+        "reason": "Held-in-off-hand items are already constrained to valid Intellect specs by exact loadouts and currently have type null. Shields retain both Strength and Intellect through tooltip parsing and are not exempt."
+      },
+      "statPriority": {
+        "primary": "Intellect",
+        "secondaries": [
+          "Mast",
+          "Vers",
+          "Crit",
+          "Haste"
+        ]
+      },
+      "statPriorityVariants": null,
+      "statPriorityNote": null,
+      "statPriorityPatch": "12.0.7",
+      "statPrioritySource": "https://www.icy-veins.com/wow/arcane-mage-pve-dps-stat-priority",
+      "tierSet": {
+        "set2": "Arcane Missiles fires 1 additional missile and deals 20% increased damage.",
+        "set4": "Each wave of Arcane Missiles increases the damage of your next Arcane Blast, Arcane Pulse, or Prismatic Bolt by 5%, up to 40%.",
+        "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+        "asOf": "2026-06-18"
+      },
+      "ratings": {
+        "raid": {
+          "icyveins": "C",
+          "method": "C",
+          "wowhead": "B",
+          "archon": "C"
+        },
+        "mplus": {
+          "icyveins": "B",
+          "method": "B",
+          "wowhead": "B",
+          "archon": "C",
+          "icyveins-ptr": "S"
+        }
+      }
+    },
+    {
+      "class": "Mage",
+      "spec": "Fire",
+      "role": "DPS",
+      "armor": "Cloth",
+      "weaponLoadouts": [
+        {
+          "id": "two-hand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "occupiesBothHands": true,
+              "inventorySlots": [
+                "Two-Hand"
+              ],
+              "itemTypes": [
+                "Staff"
+              ]
+            },
+            "offHand": {
+              "mustBeEmpty": true
+            }
+          }
+        },
+        {
+          "id": "one-hand-held-offhand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "inventorySlots": [
+                "One-Hand",
+                "Main Hand",
+                "Ranged"
+              ],
+              "itemTypes": [
+                "Dagger",
+                "Sword",
+                "Wand"
+              ]
+            },
+            "offHand": {
+              "required": true,
+              "inventorySlots": [
+                "Held In Off-hand"
+              ],
+              "itemTypes": [
+                null
+              ]
+            }
+          }
+        }
+      ],
+      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutSources": [
+        "https://worldofwarcraft.blizzard.com/en-us/game/classes/mage"
+      ],
+      "weaponLoadoutNote": null,
+      "weaponPrimaryStatExceptions": {
+        "itemTypes": [],
+        "inventorySlots": [
+          "Held In Off-hand"
+        ],
+        "reason": "Held-in-off-hand items are already constrained to valid Intellect specs by exact loadouts and currently have type null. Shields retain both Strength and Intellect through tooltip parsing and are not exempt."
+      },
+      "statPriority": {
+        "primary": "Intellect",
+        "secondaries": [
+          "Haste",
+          "Mast",
+          "Vers",
+          "Crit"
+        ]
+      },
+      "statPriorityVariants": null,
+      "statPriorityNote": null,
+      "statPriorityPatch": "12.0.7",
+      "statPrioritySource": "https://www.icy-veins.com/wow/fire-mage-pve-dps-stat-priority",
+      "tierSet": {
+        "set2": "Pyroclasm causes Flamestrike and Pyroblast to always critically strike.",
+        "set4": "Pyroclasm reduces the cast time of Flamestrike and Pyroblast by 20% and its damage bonus is increased by 20%.",
+        "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+        "asOf": "2026-07-14"
+      },
+      "ratings": {
+        "raid": {
+          "icyveins": "C",
+          "method": "C",
+          "wowhead": "B",
+          "archon": "B"
+        },
+        "mplus": {
+          "icyveins": "C",
+          "method": "C",
+          "wowhead": "B",
+          "archon": "B",
+          "icyveins-ptr": "B+"
+        }
+      }
+    },
+    {
+      "class": "Mage",
+      "spec": "Frost",
+      "role": "DPS",
+      "armor": "Cloth",
+      "weaponLoadouts": [
+        {
+          "id": "two-hand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "occupiesBothHands": true,
+              "inventorySlots": [
+                "Two-Hand"
+              ],
+              "itemTypes": [
+                "Staff"
+              ]
+            },
+            "offHand": {
+              "mustBeEmpty": true
+            }
+          }
+        },
+        {
+          "id": "one-hand-held-offhand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "inventorySlots": [
+                "One-Hand",
+                "Main Hand",
+                "Ranged"
+              ],
+              "itemTypes": [
+                "Dagger",
+                "Sword",
+                "Wand"
+              ]
+            },
+            "offHand": {
+              "required": true,
+              "inventorySlots": [
+                "Held In Off-hand"
+              ],
+              "itemTypes": [
+                null
+              ]
+            }
+          }
+        }
+      ],
+      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutSources": [
+        "https://worldofwarcraft.blizzard.com/en-us/game/classes/mage"
+      ],
+      "weaponLoadoutNote": null,
+      "weaponPrimaryStatExceptions": {
+        "itemTypes": [],
+        "inventorySlots": [
+          "Held In Off-hand"
+        ],
+        "reason": "Held-in-off-hand items are already constrained to valid Intellect specs by exact loadouts and currently have type null. Shields retain both Strength and Intellect through tooltip parsing and are not exempt."
+      },
+      "statPriority": {
+        "primary": "Intellect",
+        "secondaries": [
+          "Mast",
+          "Crit",
+          "Haste",
+          "Vers"
+        ]
+      },
+      "statPriorityVariants": null,
+      "statPriorityNote": null,
+      "statPriorityPatch": "12.0.7",
+      "statPrioritySource": "https://www.icy-veins.com/wow/frost-mage-pve-dps-stat-priority",
+      "tierSet": {
+        "set2": "Each stack of Freezing Shattered has a 4% chance to generate an Icicle (was 5%). Glacial Spike damage increased by 20% (was 25%).",
+        "set4": "Consuming Glacial Spike has a small chance to generate 5 Icicles over 1 second (was: immediately granting the Glacial Spike! effect; proc rate doubled to 2.00 RPPM). Shatter damage increased by 5% (was 10%).",
+        "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/18",
+        "asOf": "2026-07-31"
+      },
+      "ratings": {
+        "raid": {
+          "icyveins": "A+",
+          "method": "S",
+          "wowhead": "A",
+          "archon": "A"
+        },
+        "mplus": {
+          "icyveins": "A",
+          "method": "A",
+          "wowhead": "A",
+          "archon": "B",
+          "icyveins-ptr": "B+"
+        }
+      }
+    },
+    {
+      "class": "Monk",
+      "spec": "Brewmaster",
+      "role": "Tank",
+      "armor": "Leather",
+      "weaponLoadouts": [
+        {
+          "id": "two-hand-staff-polearm",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "occupiesBothHands": true,
+              "inventorySlots": [
+                "Two-Hand"
+              ],
+              "itemTypes": [
+                "Staff",
+                "Polearm"
+              ]
+            },
+            "offHand": {
+              "mustBeEmpty": true
+            }
+          }
+        },
+        {
+          "id": "dual-one-hand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "inventorySlots": [
+                "One-Hand",
+                "Main Hand"
+              ],
+              "itemTypes": [
+                "Fist Weapon",
+                "Axe",
+                "Mace",
+                "Sword"
+              ]
+            },
+            "offHand": {
+              "required": true,
+              "inventorySlots": [
+                "One-Hand",
+                "Off Hand"
+              ],
+              "itemTypes": [
+                "Fist Weapon",
+                "Axe",
+                "Mace",
+                "Sword"
+              ]
+            }
+          }
+        }
+      ],
+      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutSources": [
+        "https://worldofwarcraft.blizzard.com/en-us/game/classes/monk"
+      ],
+      "weaponLoadoutNote": "One-handed configurations are dual wield; two-handed configurations are restricted to staves and polearms.",
+      "weaponPrimaryStatExceptions": {
+        "itemTypes": [],
+        "inventorySlots": [
+          "Held In Off-hand"
+        ],
+        "reason": "Held-in-off-hand items are already constrained to valid Intellect specs by exact loadouts and currently have type null. Shields retain both Strength and Intellect through tooltip parsing and are not exempt."
+      },
+      "statPriority": {
+        "primary": "Agility",
+        "secondaries": [
+          "Crit",
+          "Vers",
+          "Mast",
+          "Haste"
+        ]
+      },
+      "statPriorityVariants": [
+        {
+          "name": "Defensive / survivability",
+          "secondaries": [
+            "Crit",
+            "Vers",
+            "Mast",
+            "Haste"
+          ],
+          "patch": "12.0.7",
+          "source": "https://www.icy-veins.com/wow/brewmaster-monk-pve-tank-stat-priority"
+        },
+        {
+          "name": "Offensive / damage",
+          "secondaries": [
+            "Crit",
+            "Mast",
+            "Vers",
+            "Haste"
+          ],
+          "patch": "12.0.7",
+          "source": "https://www.icy-veins.com/wow/brewmaster-monk-pve-tank-stat-priority"
+        }
+      ],
+      "statPriorityNote": "Default profile: defensive. Select the damage profile when ranking gear for offense. Brewmaster secondary stats are close enough that item level is usually the first consideration. Use the profile that matches whether survival or damage is the goal.",
+      "statPriorityPatch": "12.0.7",
+      "statPrioritySource": "https://www.icy-veins.com/wow/brewmaster-monk-pve-tank-stat-priority",
+      "tierSet": {
+        "set2": "Breath of Fire ignites your next Keg Smash, causing it to explode on contact, dealing additional Flamestrike damage to its primary target and reduced damage to additional targets.",
+        "set4": "Ignited Keg Smashes cause enemies struck to take 8% increased damage from your Physical abilities, and leave a patch of flames on the ground, dealing Fire damage each second for 5 seconds. (07-23 PTR: bug fixed — Flurry Strikes' Physical damage is now correctly increased by this 4-set bonus.)",
+        "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/17",
+        "asOf": "2026-07-23"
+      },
+      "ratings": {
+        "raid": {
+          "icyveins": "A",
+          "method": "A",
+          "wowhead": "B",
+          "archon": "C"
+        },
+        "mplus": {
+          "icyveins": "A+",
+          "method": "A",
+          "wowhead": "A",
+          "archon": "A",
+          "icyveins-ptr": "B"
+        }
+      }
+    },
+    {
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "role": "Healer",
+      "armor": "Leather",
+      "weaponLoadouts": [
+        {
+          "id": "two-hand-staff-polearm",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "occupiesBothHands": true,
+              "inventorySlots": [
+                "Two-Hand"
+              ],
+              "itemTypes": [
+                "Staff",
+                "Polearm"
+              ]
+            },
+            "offHand": {
+              "mustBeEmpty": true
+            }
+          }
+        },
+        {
+          "id": "one-hand-held-offhand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "inventorySlots": [
+                "One-Hand",
+                "Main Hand"
+              ],
+              "itemTypes": [
+                "Fist Weapon",
+                "Axe",
+                "Mace",
+                "Sword"
+              ]
+            },
+            "offHand": {
+              "required": true,
+              "inventorySlots": [
+                "Held In Off-hand"
+              ],
+              "itemTypes": [
+                null
+              ]
+            }
+          }
+        }
+      ],
+      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutSources": [
+        "https://worldofwarcraft.blizzard.com/en-us/game/classes/monk"
+      ],
+      "weaponLoadoutNote": "Mistweaver pairs a one-handed weapon with a held-in-off-hand item; it does not dual wield weapons.",
+      "weaponPrimaryStatExceptions": {
+        "itemTypes": [],
+        "inventorySlots": [
+          "Held In Off-hand"
+        ],
+        "reason": "Held-in-off-hand items are already constrained to valid Intellect specs by exact loadouts and currently have type null. Shields retain both Strength and Intellect through tooltip parsing and are not exempt."
+      },
+      "statPriority": {
+        "primary": "Intellect",
+        "secondaries": [
+          "Haste",
+          "Crit",
+          "Vers",
+          "Mast"
+        ]
+      },
+      "statPriorityVariants": null,
+      "statPriorityNote": null,
+      "statPriorityPatch": "12.0.7",
+      "statPrioritySource": "https://www.icy-veins.com/wow/mistweaver-monk-pve-healing-stat-priority",
+      "tierSet": {
+        "set2": "Rising Sun Kick deals 30% increased damage and Rushing Wind Kick's healing is increased by 100%.",
+        "set4": "Rising Sun Kick and Rushing Wind Kick have a chance to cause their next cast to ignore their cooldown and have their mana cost reduced by 100%.",
+        "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+        "asOf": "2026-06-18"
+      },
+      "ratings": {
+        "raid": {
+          "icyveins": "S",
+          "method": "S",
+          "wowhead": "S",
+          "archon": "S"
+        },
+        "mplus": {
+          "icyveins": "S",
+          "method": "A",
+          "wowhead": "S",
+          "archon": "S",
+          "icyveins-ptr": "A+"
+        }
+      }
+    },
+    {
+      "class": "Monk",
+      "spec": "Windwalker",
+      "role": "DPS",
+      "armor": "Leather",
+      "weaponLoadouts": [
+        {
+          "id": "two-hand-staff-polearm",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "occupiesBothHands": true,
+              "inventorySlots": [
+                "Two-Hand"
+              ],
+              "itemTypes": [
+                "Staff",
+                "Polearm"
+              ]
+            },
+            "offHand": {
+              "mustBeEmpty": true
+            }
+          }
+        },
+        {
+          "id": "dual-one-hand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "inventorySlots": [
+                "One-Hand",
+                "Main Hand"
+              ],
+              "itemTypes": [
+                "Fist Weapon",
+                "Axe",
+                "Mace",
+                "Sword"
+              ]
+            },
+            "offHand": {
+              "required": true,
+              "inventorySlots": [
+                "One-Hand",
+                "Off Hand"
+              ],
+              "itemTypes": [
+                "Fist Weapon",
+                "Axe",
+                "Mace",
+                "Sword"
+              ]
+            }
+          }
+        }
+      ],
+      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutSources": [
+        "https://worldofwarcraft.blizzard.com/en-us/game/classes/monk"
+      ],
+      "weaponLoadoutNote": "One-handed configurations are dual wield; two-handed configurations are restricted to staves and polearms.",
+      "weaponPrimaryStatExceptions": {
+        "itemTypes": [],
+        "inventorySlots": [
+          "Held In Off-hand"
+        ],
+        "reason": "Held-in-off-hand items are already constrained to valid Intellect specs by exact loadouts and currently have type null. Shields retain both Strength and Intellect through tooltip parsing and are not exempt."
+      },
+      "statPriority": {
+        "primary": "Agility",
+        "secondaries": [
+          "Haste",
+          "Crit",
+          "Mast",
+          "Vers"
+        ]
+      },
+      "statPriorityVariants": null,
+      "statPriorityNote": null,
+      "statPriorityPatch": "12.0.7",
+      "statPrioritySource": "https://www.icy-veins.com/wow/windwalker-monk-pve-dps-stat-priority",
+      "tierSet": {
+        "set2": "Fists of Fury strikes an additional time at the start of its channel at 50% effectiveness.",
+        "set4": "Fists of Fury increases the damage of your next Rising Sun Kick by 10% or Spinning Crane Kick by 20% each time it strikes, stacking up to 6 times.",
+        "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+        "asOf": "2026-06-18"
+      },
+      "ratings": {
+        "raid": {
+          "icyveins": "A+",
+          "method": "A",
+          "wowhead": "B",
+          "archon": "A"
+        },
+        "mplus": {
+          "icyveins": "A",
+          "method": "B",
+          "wowhead": "C",
+          "archon": "B",
+          "icyveins-ptr": "B+"
+        }
+      }
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "role": "Healer",
+      "armor": "Plate",
+      "weaponLoadouts": [
+        {
+          "id": "one-hand-shield",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "inventorySlots": [
+                "One-Hand",
+                "Main Hand"
+              ],
+              "itemTypes": [
+                "Axe",
+                "Mace",
+                "Sword"
+              ]
+            },
+            "offHand": {
+              "required": true,
+              "inventorySlots": [
+                "Off Hand"
+              ],
+              "itemTypes": [
+                "Shield"
+              ]
+            }
+          }
+        }
+      ],
+      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutSources": [
+        "https://worldofwarcraft.blizzard.com/en-us/game/classes/paladin"
+      ],
+      "weaponLoadoutNote": null,
+      "weaponPrimaryStatExceptions": {
+        "itemTypes": [],
+        "inventorySlots": [
+          "Held In Off-hand"
+        ],
+        "reason": "Held-in-off-hand items are already constrained to valid Intellect specs by exact loadouts and currently have type null. Shields retain both Strength and Intellect through tooltip parsing and are not exempt."
+      },
+      "statPriority": {
+        "primary": "Intellect",
+        "secondaries": [
+          "Mast",
+          "Haste",
+          "Crit",
+          "Vers"
+        ]
+      },
+      "statPriorityVariants": [
+        {
+          "name": "Herald of the Sun (raid healing)",
+          "secondaries": [
+            "Mast",
+            "Haste",
+            "Crit",
+            "Vers"
+          ],
+          "patch": "12.0.7",
+          "source": "https://www.icy-veins.com/wow/holy-paladin-pve-healing-stat-priority"
+        },
+        {
+          "name": "Lightsmith (raid healing)",
+          "secondaries": [
+            "Mast",
+            "Crit",
+            "Haste",
+            "Vers"
+          ],
+          "patch": "12.0.7",
+          "source": "https://www.icy-veins.com/wow/holy-paladin-pve-healing-stat-priority"
+        },
+        {
+          "name": "Mythic+ healing",
+          "secondaries": [
+            "Mast",
+            "Haste",
+            "Crit",
+            "Vers"
+          ],
+          "patch": "12.0.7",
+          "source": "https://www.icy-veins.com/wow/holy-paladin-pve-healing-stat-priority"
+        }
+      ],
+      "statPriorityNote": "Default profile: Herald of the Sun raid healing; the published Mythic+ order is the same. Lightsmith uses a distinct order. Use the matching Hero Talent/content profile. In Mythic+, Mastery can be deprioritized once healing is comfortable and damage matters, but the guide does not publish a fixed alternative order. Intellect and item level can outweigh small secondary differences.",
+      "statPriorityPatch": "12.0.7",
+      "statPrioritySource": "https://www.icy-veins.com/wow/holy-paladin-pve-healing-stat-priority",
+      "tierSet": {
+        "set2": "Infusion of Light increases the healing of Flash of Light by an additional 100% and the absorb from Greater Judgment by an additional 100%.",
+        "set4": "Judgment now has a 20% chance to grant Infusion of Light. Holy Light now has a 100% chance to grant Infusion of Light, but its mana cost is increased by 50%. (07-23 amendment: the mana-cost clause was added to curb the set's over-efficiency, alongside a 5% increase to all Holy Paladin healing. Note the discrepancy — the official notes announced 60%, while the datamined spell that shipped in the build carries 50%; the datamined build value is what is quoted above.)",
+        "source": "https://www.wowhead.com/news=382254/patch-12-1-ptr-datamined-class-tuning-and-tier-set-changes-sub-rogue-holy",
+        "asOf": "2026-07-23"
+      },
+      "ratings": {
+        "raid": {
+          "icyveins": "B",
+          "method": "A",
+          "wowhead": "B",
+          "archon": "C"
+        },
+        "mplus": {
+          "icyveins": "B",
+          "method": "B",
+          "wowhead": "A",
+          "archon": "C",
+          "icyveins-ptr": "S"
+        }
+      }
+    },
+    {
+      "class": "Paladin",
+      "spec": "Protection",
+      "role": "Tank",
+      "armor": "Plate",
+      "weaponLoadouts": [
+        {
+          "id": "one-hand-shield",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "inventorySlots": [
+                "One-Hand",
+                "Main Hand"
+              ],
+              "itemTypes": [
+                "Axe",
+                "Mace",
+                "Sword"
+              ]
+            },
+            "offHand": {
+              "required": true,
+              "inventorySlots": [
+                "Off Hand"
+              ],
+              "itemTypes": [
+                "Shield"
+              ]
+            }
+          }
+        }
+      ],
+      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutSources": [
+        "https://worldofwarcraft.blizzard.com/en-us/game/classes/paladin"
+      ],
+      "weaponLoadoutNote": null,
+      "weaponPrimaryStatExceptions": {
+        "itemTypes": [],
+        "inventorySlots": [
+          "Held In Off-hand"
+        ],
+        "reason": "Held-in-off-hand items are already constrained to valid Intellect specs by exact loadouts and currently have type null. Shields retain both Strength and Intellect through tooltip parsing and are not exempt."
+      },
+      "statPriority": {
+        "primary": "Strength",
+        "secondaries": [
+          "Haste",
+          "Vers",
+          "Mast",
+          "Crit"
+        ]
+      },
+      "statPriorityVariants": [
+        {
+          "name": "Defensive / survivability",
+          "secondaries": [
+            "Haste",
+            "Vers",
+            "Mast",
+            "Crit"
+          ],
+          "patch": "12.0.7",
+          "source": "https://www.icy-veins.com/wow/protection-paladin-pve-tank-stat-priority"
+        },
+        {
+          "name": "Offensive / damage",
+          "secondaries": [
+            "Haste",
+            "Crit",
+            "Vers",
+            "Mast"
+          ],
+          "patch": "12.0.7",
+          "source": "https://www.icy-veins.com/wow/protection-paladin-pve-tank-stat-priority"
+        }
+      ],
+      "statPriorityNote": "Default profile: defensive. Select the offensive profile when ranking for damage. Haste's relative value shifts around the roughly 20-30% range, and item level is generally more important than perfect secondary distribution. Simulate close offensive upgrades.",
+      "statPriorityPatch": "12.0.7",
+      "statPrioritySource": "https://www.icy-veins.com/wow/protection-paladin-pve-tank-stat-priority",
+      "tierSet": {
+        "set2": "Consecration is 30% larger and enemies within your Consecration are illuminated, increasing the chance for your abilities to critically strike them by 5%.",
+        "set4": "Enemies struck by Judgment or Crusader Strike take 20% additional Holy damage. If they are struck by a critical strike, the additional damage is increased by 100%.",
+        "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/14",
+        "asOf": "2026-07-14"
+      },
+      "ratings": {
+        "raid": {
+          "icyveins": "B",
+          "method": "C",
+          "wowhead": "C",
+          "archon": "C"
+        },
+        "mplus": {
+          "icyveins": "A",
+          "method": "B",
+          "wowhead": "A",
+          "archon": "C",
+          "icyveins-ptr": "A+"
+        }
+      }
+    },
+    {
+      "class": "Paladin",
+      "spec": "Retribution",
+      "role": "DPS",
+      "armor": "Plate",
+      "weaponLoadouts": [
+        {
+          "id": "two-hand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "occupiesBothHands": true,
+              "inventorySlots": [
+                "Two-Hand"
+              ],
+              "itemTypes": [
+                "Axe",
+                "Mace",
+                "Sword",
+                "Polearm"
+              ]
+            },
+            "offHand": {
+              "mustBeEmpty": true
+            }
+          }
+        }
+      ],
+      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutSources": [
+        "https://worldofwarcraft.blizzard.com/en-us/game/classes/paladin"
+      ],
+      "weaponLoadoutNote": null,
+      "weaponPrimaryStatExceptions": {
+        "itemTypes": [],
+        "inventorySlots": [
+          "Held In Off-hand"
+        ],
+        "reason": "Held-in-off-hand items are already constrained to valid Intellect specs by exact loadouts and currently have type null. Shields retain both Strength and Intellect through tooltip parsing and are not exempt."
+      },
+      "statPriority": {
+        "primary": "Strength",
+        "secondaries": [
+          "Mast",
+          "Crit",
+          "Haste",
+          "Vers"
+        ]
+      },
+      "statPriorityVariants": null,
+      "statPriorityNote": null,
+      "statPriorityPatch": "12.0.7",
+      "statPrioritySource": "https://www.icy-veins.com/wow/retribution-paladin-pve-dps-stat-priority",
+      "tierSet": {
+        "set2": "Divine Purpose has an additional 10% chance to activate and consuming it grants Divine Power, increasing Holy damage done by 10% for 12 seconds.",
+        "set4": "Consuming Divine Purpose grants Divine Arbiter, empowering your other Holy Power spenders to unleash an arbiter of light at their primary target, dealing Holy damage and Holy damage to enemies within 8 yards. Cannot occur while Divine Arbiter is active. Divine Arbiter damage increased by 35% (07-08).",
+        "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/11",
+        "asOf": "2026-07-08"
+      },
+      "ratings": {
+        "raid": {
+          "icyveins": "B",
+          "method": "A",
+          "wowhead": "A",
+          "archon": "B"
+        },
+        "mplus": {
+          "icyveins": "A+",
+          "method": "B",
+          "wowhead": "A",
+          "archon": "A",
+          "icyveins-ptr": "A+"
+        }
+      }
+    },
+    {
+      "class": "Priest",
+      "spec": "Discipline",
+      "role": "Healer",
+      "armor": "Cloth",
+      "weaponLoadouts": [
+        {
+          "id": "two-hand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "occupiesBothHands": true,
+              "inventorySlots": [
+                "Two-Hand"
+              ],
+              "itemTypes": [
+                "Staff"
+              ]
+            },
+            "offHand": {
+              "mustBeEmpty": true
+            }
+          }
+        },
+        {
+          "id": "one-hand-held-offhand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "inventorySlots": [
+                "One-Hand",
+                "Main Hand",
+                "Ranged"
+              ],
+              "itemTypes": [
+                "Dagger",
+                "Mace",
+                "Wand"
+              ]
+            },
+            "offHand": {
+              "required": true,
+              "inventorySlots": [
+                "Held In Off-hand"
+              ],
+              "itemTypes": [
+                null
+              ]
+            }
+          }
+        }
+      ],
+      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutSources": [
+        "https://worldofwarcraft.blizzard.com/en-us/game/classes/priest"
+      ],
+      "weaponLoadoutNote": null,
+      "weaponPrimaryStatExceptions": {
+        "itemTypes": [],
+        "inventorySlots": [
+          "Held In Off-hand"
+        ],
+        "reason": "Held-in-off-hand items are already constrained to valid Intellect specs by exact loadouts and currently have type null. Shields retain both Strength and Intellect through tooltip parsing and are not exempt."
+      },
+      "statPriority": {
+        "primary": "Intellect",
+        "secondaries": [
+          "Haste",
+          "Mast",
+          "Crit",
+          "Vers"
+        ]
+      },
+      "statPriorityVariants": [
+        {
+          "name": "Oracle (healing)",
+          "secondaries": [
+            "Haste",
+            "Mast",
+            "Crit",
+            "Vers"
+          ],
+          "patch": "12.0.7",
+          "source": "https://www.icy-veins.com/wow/discipline-priest-pve-healing-stat-priority"
+        },
+        {
+          "name": "Voidweaver (healing)",
+          "secondaries": [
+            "Haste",
+            "Crit",
+            "Mast",
+            "Vers"
+          ],
+          "patch": "12.0.7",
+          "source": "https://www.icy-veins.com/wow/discipline-priest-pve-healing-stat-priority"
+        }
+      ],
+      "statPriorityNote": "Default profile: Oracle. Voidweaver uses a distinct order. All four secondary stats are relatively close for Discipline, so higher item-level gear will often win. Use the matching Hero Talent profile and evaluate close healing upgrades with an appropriate tool.",
+      "statPriorityPatch": "12.0.7",
+      "statPrioritySource": "https://www.icy-veins.com/wow/discipline-priest-pve-healing-stat-priority",
+      "tierSet": {
+        "set2": "Penance damage and healing increased by 20%. Casting Penance reduces the cooldown of Mind Blast by 2 seconds.",
+        "set4": "After casting Mind Blast, your next Power Word: Shield or Void Shield absorbs 25% more damage.",
+        "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+        "asOf": "2026-06-18"
+      },
+      "ratings": {
+        "raid": {
+          "icyveins": "S",
+          "method": "A",
+          "wowhead": "A",
+          "archon": "S"
+        },
+        "mplus": {
+          "icyveins": "A",
+          "method": "B",
+          "wowhead": "B",
+          "archon": "B",
+          "icyveins-ptr": "B+"
+        }
+      }
+    },
+    {
+      "class": "Priest",
+      "spec": "Holy",
+      "role": "Healer",
+      "armor": "Cloth",
+      "weaponLoadouts": [
+        {
+          "id": "two-hand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "occupiesBothHands": true,
+              "inventorySlots": [
+                "Two-Hand"
+              ],
+              "itemTypes": [
+                "Staff"
+              ]
+            },
+            "offHand": {
+              "mustBeEmpty": true
+            }
+          }
+        },
+        {
+          "id": "one-hand-held-offhand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "inventorySlots": [
+                "One-Hand",
+                "Main Hand",
+                "Ranged"
+              ],
+              "itemTypes": [
+                "Dagger",
+                "Mace",
+                "Wand"
+              ]
+            },
+            "offHand": {
+              "required": true,
+              "inventorySlots": [
+                "Held In Off-hand"
+              ],
+              "itemTypes": [
+                null
+              ]
+            }
+          }
+        }
+      ],
+      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutSources": [
+        "https://worldofwarcraft.blizzard.com/en-us/game/classes/priest"
+      ],
+      "weaponLoadoutNote": null,
+      "weaponPrimaryStatExceptions": {
+        "itemTypes": [],
+        "inventorySlots": [
+          "Held In Off-hand"
+        ],
+        "reason": "Held-in-off-hand items are already constrained to valid Intellect specs by exact loadouts and currently have type null. Shields retain both Strength and Intellect through tooltip parsing and are not exempt."
+      },
+      "statPriority": {
+        "primary": "Intellect",
+        "secondaries": [
+          "Crit",
+          "Vers",
+          "Mast",
+          "Haste"
+        ]
+      },
+      "statPriorityVariants": [
+        {
+          "name": "Raid healing",
+          "secondaries": [
+            "Crit",
+            "Vers",
+            "Mast",
+            "Haste"
+          ],
+          "patch": "12.0.7",
+          "source": "https://www.icy-veins.com/wow/holy-priest-pve-healing-stat-priority"
+        },
+        {
+          "name": "Dungeon healing",
+          "secondaries": [
+            "Crit",
+            "Vers",
+            "Haste",
+            "Mast"
+          ],
+          "patch": "12.0.7",
+          "source": "https://www.icy-veins.com/wow/holy-priest-pve-healing-stat-priority"
+        }
+      ],
+      "statPriorityNote": "Default profile: raid healing. Dungeon healing swaps Haste and Mastery. The listed priorities are general profiles, and higher item-level gear will often be preferable. Use a healer gear-analysis tool for close choices.",
+      "statPriorityPatch": "12.0.7",
+      "statPrioritySource": "https://www.icy-veins.com/wow/holy-priest-pve-healing-stat-priority",
+      "tierSet": {
+        "set2": "Each target affected by your Renew increases your Critical Strike chance by 2%, up to 6%.",
+        "set4": "Renew healing increased by 10%. Light's Resurgence now has a 100% chance to leave a Renew on the first target Prayer of Mending heals.",
+        "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/10",
+        "asOf": "2026-06-30"
+      },
+      "ratings": {
+        "raid": {
+          "icyveins": "B",
+          "method": "C",
+          "wowhead": "B",
+          "archon": "B"
+        },
+        "mplus": {
+          "icyveins": "C",
+          "method": "C",
+          "wowhead": "B",
+          "archon": "C",
+          "icyveins-ptr": "B"
+        }
+      }
+    },
+    {
+      "class": "Priest",
+      "spec": "Shadow",
+      "role": "DPS",
+      "armor": "Cloth",
+      "weaponLoadouts": [
+        {
+          "id": "two-hand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "occupiesBothHands": true,
+              "inventorySlots": [
+                "Two-Hand"
+              ],
+              "itemTypes": [
+                "Staff"
+              ]
+            },
+            "offHand": {
+              "mustBeEmpty": true
+            }
+          }
+        },
+        {
+          "id": "one-hand-held-offhand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "inventorySlots": [
+                "One-Hand",
+                "Main Hand",
+                "Ranged"
+              ],
+              "itemTypes": [
+                "Dagger",
+                "Mace",
+                "Wand"
+              ]
+            },
+            "offHand": {
+              "required": true,
+              "inventorySlots": [
+                "Held In Off-hand"
+              ],
+              "itemTypes": [
+                null
+              ]
+            }
+          }
+        }
+      ],
+      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutSources": [
+        "https://worldofwarcraft.blizzard.com/en-us/game/classes/priest"
+      ],
+      "weaponLoadoutNote": null,
+      "weaponPrimaryStatExceptions": {
+        "itemTypes": [],
+        "inventorySlots": [
+          "Held In Off-hand"
+        ],
+        "reason": "Held-in-off-hand items are already constrained to valid Intellect specs by exact loadouts and currently have type null. Shields retain both Strength and Intellect through tooltip parsing and are not exempt."
+      },
+      "statPriority": {
+        "primary": "Intellect",
+        "secondaries": [
+          "Haste",
+          "Mast",
+          "Crit",
+          "Vers"
+        ]
+      },
+      "statPriorityVariants": [
+        {
+          "name": "Voidweaver (single- and multi-target)",
+          "secondaries": [
+            "Haste",
+            "Mast",
+            "Crit",
+            "Vers"
+          ],
+          "patch": "12.0.7",
+          "source": "https://www.icy-veins.com/wow/shadow-priest-pve-dps-stat-priority"
+        },
+        {
+          "name": "Archon (single- and multi-target)",
+          "secondaries": [
+            "Mast",
+            "Crit",
+            "Haste",
+            "Vers"
+          ],
+          "patch": "12.0.7",
+          "source": "https://www.icy-veins.com/wow/shadow-priest-pve-dps-stat-priority"
+        }
+      ],
+      "statPriorityNote": "Default profile: Voidweaver. Both single-target and multi-target use the same order within each Hero Talent profile. The preferred amounts differ by Hero Talent and target count even where the order is unchanged. Item level and Intellect come first; avoid over-stacking Versatility and simulate close upgrades.",
+      "statPriorityPatch": "12.0.7",
+      "statPrioritySource": "https://www.icy-veins.com/wow/shadow-priest-pve-dps-stat-priority",
+      "tierSet": {
+        "set2": "Tentacle Slam cooldown reduced by 3 seconds and its damage is increased by 100%.",
+        "set4": "Tentacle Slam has a 100% chance to grant a free use of Void Volley at 100% effectiveness (was 125%).",
+        "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/18",
+        "asOf": "2026-07-31"
+      },
+      "ratings": {
+        "raid": {
+          "icyveins": "A+",
+          "method": "B",
+          "wowhead": "B",
+          "archon": "B"
+        },
+        "mplus": {
+          "icyveins": "A+",
+          "method": "B",
+          "wowhead": "C",
+          "archon": "A",
+          "icyveins-ptr": "A+"
+        }
+      }
+    },
+    {
+      "class": "Rogue",
+      "spec": "Assassination",
+      "role": "DPS",
+      "armor": "Leather",
+      "weaponLoadouts": [
+        {
+          "id": "dual-dagger",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "inventorySlots": [
+                "One-Hand",
+                "Main Hand"
+              ],
+              "itemTypes": [
+                "Dagger"
+              ]
+            },
+            "offHand": {
+              "required": true,
+              "inventorySlots": [
+                "One-Hand",
+                "Off Hand"
+              ],
+              "itemTypes": [
+                "Dagger"
+              ]
+            }
+          }
+        }
+      ],
+      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutSources": [
+        "https://worldofwarcraft.blizzard.com/en-us/game/classes/rogue"
+      ],
+      "weaponLoadoutNote": "Both hands require daggers.",
+      "weaponPrimaryStatExceptions": {
+        "itemTypes": [],
+        "inventorySlots": [
+          "Held In Off-hand"
+        ],
+        "reason": "Held-in-off-hand items are already constrained to valid Intellect specs by exact loadouts and currently have type null. Shields retain both Strength and Intellect through tooltip parsing and are not exempt."
+      },
+      "statPriority": {
+        "primary": "Agility",
+        "secondaries": [
+          "Crit",
+          "Haste",
+          "Mast",
+          "Vers"
+        ]
+      },
+      "statPriorityVariants": null,
+      "statPriorityNote": null,
+      "statPriorityPatch": "12.0.7",
+      "statPrioritySource": "https://www.icy-veins.com/wow/assassination-rogue-pve-dps-stat-priority",
+      "tierSet": {
+        "set2": "Envenom damage increased by 10% and it increases your damage dealt by 3%.",
+        "set4": "Deadly Poison increases your bleed damage on the target by 10%. Auto-attacks against targets with your Amplifying Poison deal 3% increased damage per stack. Wound Poison hits a second time.",
+        "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/16",
+        "asOf": "2026-07-21"
+      },
+      "ratings": {
+        "raid": {
+          "icyveins": "B",
+          "method": "C",
+          "wowhead": "B",
+          "archon": "C"
+        },
+        "mplus": {
+          "icyveins": "A",
+          "method": "B",
+          "wowhead": "B",
+          "archon": "A",
+          "icyveins-ptr": "A"
+        }
+      }
+    },
+    {
+      "class": "Rogue",
+      "spec": "Outlaw",
+      "role": "DPS",
+      "armor": "Leather",
+      "weaponLoadouts": [
+        {
+          "id": "dual-one-hand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "inventorySlots": [
+                "One-Hand",
+                "Main Hand"
+              ],
+              "itemTypes": [
+                "Axe",
+                "Mace",
+                "Sword",
+                "Fist Weapon"
+              ]
+            },
+            "offHand": {
+              "required": true,
+              "inventorySlots": [
+                "One-Hand",
+                "Off Hand"
+              ],
+              "itemTypes": [
+                "Axe",
+                "Mace",
+                "Sword",
+                "Fist Weapon",
+                "Dagger"
+              ]
+            }
+          }
+        }
+      ],
+      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutSources": [
+        "https://worldofwarcraft.blizzard.com/en-us/game/classes/rogue",
+        "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811"
+      ],
+      "weaponLoadoutNote": "The main hand excludes daggers; the off hand may be any Rogue one-handed weapon, including a dagger.",
+      "weaponPrimaryStatExceptions": {
+        "itemTypes": [],
+        "inventorySlots": [
+          "Held In Off-hand"
+        ],
+        "reason": "Held-in-off-hand items are already constrained to valid Intellect specs by exact loadouts and currently have type null. Shields retain both Strength and Intellect through tooltip parsing and are not exempt."
+      },
+      "statPriority": {
+        "primary": "Agility",
+        "secondaries": [
+          "Crit",
+          "Haste",
+          "Vers",
+          "Mast"
+        ]
+      },
+      "statPriorityVariants": null,
+      "statPriorityNote": "General raid and Mythic+ order. Crit begins losing value near 40%, while Haste drops sharply after reaching roughly 20-25% and the 0.8-second Adrenaline Rush GCD breakpoint. Do not read the flat order as a reason to stack Crit or Haste indefinitely. Avoid sacrificing item level merely to reach a breakpoint, and simulate close upgrades once near the thresholds.",
+      "statPriorityPatch": "12.0.7",
+      "statPrioritySource": "https://www.icy-veins.com/wow/outlaw-rogue-pve-dps-stat-priority",
+      "tierSet": {
+        "set2": "Dispatch damage increased by 15%.",
+        "set4": "Sinister Strike and Ambush have a 20% chance to cause your next Dispatch to be free and deal damage as if you spent the maximum combo points. Cannot activate from Sinister Strike's additional Opportunity hits.",
+        "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/10",
+        "asOf": "2026-06-30"
+      },
+      "ratings": {
+        "raid": {
+          "icyveins": "A",
+          "method": "C",
+          "wowhead": "C",
+          "archon": "B"
+        },
+        "mplus": {
+          "icyveins": "A+",
+          "method": "C",
+          "wowhead": "B",
+          "archon": "A",
+          "icyveins-ptr": "A"
+        }
+      }
+    },
+    {
+      "class": "Rogue",
+      "spec": "Subtlety",
+      "role": "DPS",
+      "armor": "Leather",
+      "weaponLoadouts": [
+        {
+          "id": "dagger-main-dual-one-hand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "inventorySlots": [
+                "One-Hand",
+                "Main Hand"
+              ],
+              "itemTypes": [
+                "Dagger"
+              ]
+            },
+            "offHand": {
+              "required": true,
+              "inventorySlots": [
+                "One-Hand",
+                "Off Hand"
+              ],
+              "itemTypes": [
+                "Dagger",
+                "Axe",
+                "Mace",
+                "Sword",
+                "Fist Weapon"
+              ]
+            }
+          }
+        }
+      ],
+      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutSources": [
+        "https://worldofwarcraft.blizzard.com/en-us/game/classes/rogue"
+      ],
+      "weaponLoadoutNote": "The main hand requires a dagger; the off hand may be any Rogue one-handed weapon.",
+      "weaponPrimaryStatExceptions": {
+        "itemTypes": [],
+        "inventorySlots": [
+          "Held In Off-hand"
+        ],
+        "reason": "Held-in-off-hand items are already constrained to valid Intellect specs by exact loadouts and currently have type null. Shields retain both Strength and Intellect through tooltip parsing and are not exempt."
+      },
+      "statPriority": {
+        "primary": "Agility",
+        "secondaries": [
+          "Haste",
+          "Mast",
+          "Crit",
+          "Vers"
+        ]
+      },
+      "statPriorityVariants": null,
+      "statPriorityNote": "General order. Trickster targets roughly 700 Haste, while Deathstalker targets roughly 1100 Haste; Haste becomes much less valuable when it does not add another global inside Shadow Dance. Mastery gains value in multi-target situations. Treat the Haste targets as Hero Talent breakpoints rather than an instruction to stack Haste without limit, and simulate close upgrades.",
+      "statPriorityPatch": "12.0.7",
+      "statPrioritySource": "https://www.icy-veins.com/wow/subtlety-rogue-pve-dps-stat-priority",
+      "tierSet": {
+        "set2": "Backstab costs 10 less Energy and deals 100% increased damage. Shuriken Storm costs 5 less Energy and deals 60% increased damage.",
+        "set4": "Lingering Shadow now also benefits Eviscerate and Black Powder at 100% effectiveness.",
+        "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+        "asOf": "2026-06-18"
+      },
+      "ratings": {
+        "raid": {
+          "icyveins": "A",
+          "method": "B",
+          "wowhead": "B",
+          "archon": "B"
+        },
+        "mplus": {
+          "icyveins": "A",
+          "method": "A",
+          "wowhead": "B",
+          "archon": "A",
+          "icyveins-ptr": "C"
+        }
+      }
+    },
+    {
+      "class": "Shaman",
+      "spec": "Elemental",
+      "role": "DPS",
+      "armor": "Mail",
+      "weaponLoadouts": [
+        {
+          "id": "two-hand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "occupiesBothHands": true,
+              "inventorySlots": [
+                "Two-Hand"
+              ],
+              "itemTypes": [
+                "Staff"
+              ]
+            },
+            "offHand": {
+              "mustBeEmpty": true
+            }
+          }
+        },
+        {
+          "id": "one-hand-shield",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "inventorySlots": [
+                "One-Hand",
+                "Main Hand"
+              ],
+              "itemTypes": [
+                "Dagger",
+                "Fist Weapon",
+                "Axe",
+                "Mace"
+              ]
+            },
+            "offHand": {
+              "required": true,
+              "inventorySlots": [
+                "Off Hand"
+              ],
+              "itemTypes": [
+                "Shield"
+              ]
+            }
+          }
+        }
+      ],
+      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutSources": [
+        "https://worldofwarcraft.blizzard.com/en-us/game/classes/shaman"
+      ],
+      "weaponLoadoutNote": null,
+      "weaponPrimaryStatExceptions": {
+        "itemTypes": [],
+        "inventorySlots": [
+          "Held In Off-hand"
+        ],
+        "reason": "Held-in-off-hand items are already constrained to valid Intellect specs by exact loadouts and currently have type null. Shields retain both Strength and Intellect through tooltip parsing and are not exempt."
+      },
+      "statPriority": {
+        "primary": "Intellect",
+        "secondaries": [
+          "Mast",
+          "Haste",
+          "Crit",
+          "Vers"
+        ]
+      },
+      "statPriorityVariants": null,
+      "statPriorityNote": null,
+      "statPriorityPatch": "12.0.7",
+      "statPrioritySource": "https://www.icy-veins.com/wow/elemental-shaman-pve-dps-stat-priority",
+      "tierSet": {
+        "set2": "Earth Shock, Elemental Blast, and Earthquake damage increased by 25%.",
+        "set4": "When Stormkeeper or Ascendance fade, your next 2 Lightning Bolts, Chain Lightnings, or Lava Bursts deal 25% increased damage and cause your next Earthquake, Earth Shock, or Elemental Blast to cost 100% less Maelstrom.",
+        "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+        "asOf": "2026-06-18"
+      },
+      "ratings": {
+        "raid": {
+          "icyveins": "B",
+          "method": "B",
+          "wowhead": "B",
+          "archon": "B"
+        },
+        "mplus": {
+          "icyveins": "A+",
+          "method": "A",
+          "wowhead": "A",
+          "archon": "A",
+          "icyveins-ptr": "A+"
+        }
+      }
+    },
+    {
+      "class": "Shaman",
+      "spec": "Enhancement",
+      "role": "DPS",
+      "armor": "Mail",
+      "weaponLoadouts": [
+        {
+          "id": "dual-one-hand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "inventorySlots": [
+                "One-Hand",
+                "Main Hand"
+              ],
+              "itemTypes": [
+                "Axe",
+                "Mace",
+                "Fist Weapon"
+              ]
+            },
+            "offHand": {
+              "required": true,
+              "inventorySlots": [
+                "One-Hand",
+                "Off Hand"
+              ],
+              "itemTypes": [
+                "Axe",
+                "Mace",
+                "Fist Weapon"
+              ]
+            }
+          }
+        }
+      ],
+      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutSources": [
+        "https://worldofwarcraft.blizzard.com/en-us/game/classes/shaman"
+      ],
+      "weaponLoadoutNote": "Enhancement requires dual one-handed axes, maces, or fist weapons. Daggers are intentionally excluded because core attacks cannot use them.",
+      "weaponPrimaryStatExceptions": {
+        "itemTypes": [],
+        "inventorySlots": [
+          "Held In Off-hand"
+        ],
+        "reason": "Held-in-off-hand items are already constrained to valid Intellect specs by exact loadouts and currently have type null. Shields retain both Strength and Intellect through tooltip parsing and are not exempt."
+      },
+      "statPriority": {
+        "primary": "Agility",
+        "secondaries": [
+          "Mast",
+          "Haste",
+          "Crit",
+          "Vers"
+        ]
+      },
+      "statPriorityVariants": [
+        {
+          "name": "Totemic (single-target and AoE)",
+          "secondaries": [
+            "Mast",
+            "Haste",
+            "Crit",
+            "Vers"
+          ],
+          "patch": "12.0.7",
+          "source": "https://www.icy-veins.com/wow/enhancement-shaman-pve-dps-stat-priority"
+        },
+        {
+          "name": "Stormbringer (single-target and AoE)",
+          "secondaries": [
+            "Haste",
+            "Mast",
+            "Crit",
+            "Vers"
+          ],
+          "patch": "12.0.7",
+          "source": "https://www.icy-veins.com/wow/enhancement-shaman-pve-dps-stat-priority"
+        }
+      ],
+      "statPriorityNote": "Default profile: Totemic. Stormbringer uses a distinct order; each profile applies to both single-target and AoE. The profiles are general priorities rather than fixed weights. One gear set can serve both Hero Talent builds, but item level, Agility, and current stat balance still matter; simulate close upgrades.",
+      "statPriorityPatch": "12.0.7",
+      "statPrioritySource": "https://www.icy-veins.com/wow/enhancement-shaman-pve-dps-stat-priority",
+      "tierSet": {
+        "set2": "Voltaic Blaze causes your primary target to erupt in a Fire Nova every 2 seconds for 6 seconds. Fire Nova deals 200% increased damage to the primary target of your Voltaic Blaze.",
+        "set4": "Fire Nova reduces the cooldown of Crash Lightning by 2 seconds and increases the damage of your next Crash Lightning by 8%, stacking up to 5 times (07-08: the Short Circuit aura now also boosts the Crash Lightning weapon-enhancement effect, averaged across stacks).",
+        "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/10",
+        "asOf": "2026-07-08"
+      },
+      "ratings": {
+        "raid": {
+          "icyveins": "A",
+          "method": "B",
+          "wowhead": "C",
+          "archon": "B"
+        },
+        "mplus": {
+          "icyveins": "A+",
+          "method": "B",
+          "wowhead": "B",
+          "archon": "A",
+          "icyveins-ptr": "A"
+        }
+      }
+    },
+    {
+      "class": "Shaman",
+      "spec": "Restoration",
+      "role": "Healer",
+      "armor": "Mail",
+      "weaponLoadouts": [
+        {
+          "id": "two-hand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "occupiesBothHands": true,
+              "inventorySlots": [
+                "Two-Hand"
+              ],
+              "itemTypes": [
+                "Staff"
+              ]
+            },
+            "offHand": {
+              "mustBeEmpty": true
+            }
+          }
+        },
+        {
+          "id": "one-hand-shield",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "inventorySlots": [
+                "One-Hand",
+                "Main Hand"
+              ],
+              "itemTypes": [
+                "Dagger",
+                "Fist Weapon",
+                "Axe",
+                "Mace"
+              ]
+            },
+            "offHand": {
+              "required": true,
+              "inventorySlots": [
+                "Off Hand"
+              ],
+              "itemTypes": [
+                "Shield"
+              ]
+            }
+          }
+        }
+      ],
+      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutSources": [
+        "https://worldofwarcraft.blizzard.com/en-us/game/classes/shaman"
+      ],
+      "weaponLoadoutNote": null,
+      "weaponPrimaryStatExceptions": {
+        "itemTypes": [],
+        "inventorySlots": [
+          "Held In Off-hand"
+        ],
+        "reason": "Held-in-off-hand items are already constrained to valid Intellect specs by exact loadouts and currently have type null. Shields retain both Strength and Intellect through tooltip parsing and are not exempt."
+      },
+      "statPriority": {
+        "primary": "Intellect",
+        "secondaries": [
+          "Crit",
+          "Vers",
+          "Haste",
+          "Mast"
+        ]
+      },
+      "statPriorityVariants": null,
+      "statPriorityNote": null,
+      "statPriorityPatch": "12.0.7",
+      "statPrioritySource": "https://www.icy-veins.com/wow/restoration-shaman-pve-healing-stat-priority",
+      "tierSet": {
+        "set2": "Healing Wave and Chain Heal have a chance to create a Healing Rain at the target's location for 8 seconds (was 10 seconds; reduced 07-21).",
+        "set4": "Every 1 second, 1 ally inside of Healing Rain gains a watery shield that absorbs damage for 10 seconds (absorb value increased by 300% on 06-30, then reduced by 30% on 07-21).",
+        "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/16",
+        "asOf": "2026-07-21"
+      },
+      "ratings": {
+        "raid": {
+          "icyveins": "B",
+          "method": "C",
+          "wowhead": "B",
+          "archon": "C"
+        },
+        "mplus": {
+          "icyveins": "A+",
+          "method": "A",
+          "wowhead": "S",
+          "archon": "A",
+          "icyveins-ptr": "S"
+        }
+      }
+    },
+    {
+      "class": "Warlock",
+      "spec": "Affliction",
+      "role": "DPS",
+      "armor": "Cloth",
+      "weaponLoadouts": [
+        {
+          "id": "two-hand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "occupiesBothHands": true,
+              "inventorySlots": [
+                "Two-Hand"
+              ],
+              "itemTypes": [
+                "Staff"
+              ]
+            },
+            "offHand": {
+              "mustBeEmpty": true
+            }
+          }
+        },
+        {
+          "id": "one-hand-held-offhand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "inventorySlots": [
+                "One-Hand",
+                "Main Hand",
+                "Ranged"
+              ],
+              "itemTypes": [
+                "Dagger",
+                "Sword",
+                "Wand"
+              ]
+            },
+            "offHand": {
+              "required": true,
+              "inventorySlots": [
+                "Held In Off-hand"
+              ],
+              "itemTypes": [
+                null
+              ]
+            }
+          }
+        }
+      ],
+      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutSources": [
+        "https://worldofwarcraft.blizzard.com/en-us/game/classes/warlock"
+      ],
+      "weaponLoadoutNote": null,
+      "weaponPrimaryStatExceptions": {
+        "itemTypes": [],
+        "inventorySlots": [
+          "Held In Off-hand"
+        ],
+        "reason": "Held-in-off-hand items are already constrained to valid Intellect specs by exact loadouts and currently have type null. Shields retain both Strength and Intellect through tooltip parsing and are not exempt."
+      },
+      "statPriority": {
+        "primary": "Intellect",
+        "secondaries": [
+          "Haste",
+          "Crit",
+          "Mast",
+          "Vers"
+        ]
+      },
+      "statPriorityVariants": null,
+      "statPriorityNote": null,
+      "statPriorityPatch": "12.0.7",
+      "statPrioritySource": "https://www.icy-veins.com/wow/affliction-warlock-pve-dps-stat-priority",
+      "tierSet": {
+        "set2": "Agony damage increased by 15%. Corruption damage increased by 25%. Seed of Corruption applies Unstable Affliction at 20% effectiveness to your target.",
+        "set4": "Each active Unstable Affliction increases your damage dealt by your spells and abilities by 2%, up to 6%.",
+        "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/11",
+        "asOf": "2026-07-08"
+      },
+      "ratings": {
+        "raid": {
+          "icyveins": "A",
+          "method": "A",
+          "wowhead": "C",
+          "archon": "C"
+        },
+        "mplus": {
+          "icyveins": "B",
+          "method": "C",
+          "wowhead": "B",
+          "archon": "B",
+          "icyveins-ptr": "A"
+        }
+      }
+    },
+    {
+      "class": "Warlock",
+      "spec": "Demonology",
+      "role": "DPS",
+      "armor": "Cloth",
+      "weaponLoadouts": [
+        {
+          "id": "two-hand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "occupiesBothHands": true,
+              "inventorySlots": [
+                "Two-Hand"
+              ],
+              "itemTypes": [
+                "Staff"
+              ]
+            },
+            "offHand": {
+              "mustBeEmpty": true
+            }
+          }
+        },
+        {
+          "id": "one-hand-held-offhand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "inventorySlots": [
+                "One-Hand",
+                "Main Hand",
+                "Ranged"
+              ],
+              "itemTypes": [
+                "Dagger",
+                "Sword",
+                "Wand"
+              ]
+            },
+            "offHand": {
+              "required": true,
+              "inventorySlots": [
+                "Held In Off-hand"
+              ],
+              "itemTypes": [
+                null
+              ]
+            }
+          }
+        }
+      ],
+      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutSources": [
+        "https://worldofwarcraft.blizzard.com/en-us/game/classes/warlock"
+      ],
+      "weaponLoadoutNote": null,
+      "weaponPrimaryStatExceptions": {
+        "itemTypes": [],
+        "inventorySlots": [
+          "Held In Off-hand"
+        ],
+        "reason": "Held-in-off-hand items are already constrained to valid Intellect specs by exact loadouts and currently have type null. Shields retain both Strength and Intellect through tooltip parsing and are not exempt."
+      },
+      "statPriority": {
+        "primary": "Intellect",
+        "secondaries": [
+          "Crit",
+          "Haste",
+          "Mast",
+          "Vers"
+        ]
+      },
+      "statPriorityVariants": null,
+      "statPriorityNote": null,
+      "statPriorityPatch": "12.0.7",
+      "statPrioritySource": "https://www.icy-veins.com/wow/demonology-warlock-pve-dps-stat-priority",
+      "tierSet": {
+        "set2": "Wild Imp damage increased by 10%. Implosion damage increased by 20%.",
+        "set4": "When their energy depletes, Wild Imps have a 20% chance to fling themselves at their target and Implode at 250% effectiveness to their main target and 225% effectiveness to other targets. (2026-07-31 build: a tooltip fix — the bonus had displayed 150% / 125%, which is what was recorded here; the intended values are 250% / 225%. The effect itself did not change.)",
+        "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/18",
+        "asOf": "2026-07-31"
+      },
+      "ratings": {
+        "raid": {
+          "icyveins": "S",
+          "method": "S",
+          "wowhead": "A",
+          "archon": "B"
+        },
+        "mplus": {
+          "icyveins": "A",
+          "method": "A",
+          "wowhead": "A+",
+          "archon": "A",
+          "icyveins-ptr": "A"
+        }
+      }
+    },
+    {
+      "class": "Warlock",
+      "spec": "Destruction",
+      "role": "DPS",
+      "armor": "Cloth",
+      "weaponLoadouts": [
+        {
+          "id": "two-hand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "occupiesBothHands": true,
+              "inventorySlots": [
+                "Two-Hand"
+              ],
+              "itemTypes": [
+                "Staff"
+              ]
+            },
+            "offHand": {
+              "mustBeEmpty": true
+            }
+          }
+        },
+        {
+          "id": "one-hand-held-offhand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "inventorySlots": [
+                "One-Hand",
+                "Main Hand",
+                "Ranged"
+              ],
+              "itemTypes": [
+                "Dagger",
+                "Sword",
+                "Wand"
+              ]
+            },
+            "offHand": {
+              "required": true,
+              "inventorySlots": [
+                "Held In Off-hand"
+              ],
+              "itemTypes": [
+                null
+              ]
+            }
+          }
+        }
+      ],
+      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutSources": [
+        "https://worldofwarcraft.blizzard.com/en-us/game/classes/warlock"
+      ],
+      "weaponLoadoutNote": null,
+      "weaponPrimaryStatExceptions": {
+        "itemTypes": [],
+        "inventorySlots": [
+          "Held In Off-hand"
+        ],
+        "reason": "Held-in-off-hand items are already constrained to valid Intellect specs by exact loadouts and currently have type null. Shields retain both Strength and Intellect through tooltip parsing and are not exempt."
+      },
+      "statPriority": {
+        "primary": "Intellect",
+        "secondaries": [
+          "Crit",
+          "Haste",
+          "Mast",
+          "Vers"
+        ]
+      },
+      "statPriorityVariants": null,
+      "statPriorityNote": null,
+      "statPriorityPatch": "12.0.7",
+      "statPrioritySource": "https://www.icy-veins.com/wow/destruction-warlock-pve-dps-stat-priority",
+      "tierSet": {
+        "set2": "Incinerate damage increased by 25% and Incinerate has a 10% increased chance to evoke an Echo of Sargeras.",
+        "set4": "Targets damaged by Echo of Sargeras take 6% increased damage from your spells and abilities for 6 seconds.",
+        "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/14",
+        "asOf": "2026-07-14"
+      },
+      "ratings": {
+        "raid": {
+          "icyveins": "A+",
+          "method": "A",
+          "wowhead": "A",
+          "archon": "B"
+        },
+        "mplus": {
+          "icyveins": "B",
+          "method": "B",
+          "wowhead": "B",
+          "archon": "C",
+          "icyveins-ptr": "A"
+        }
+      }
+    },
+    {
+      "class": "Warrior",
+      "spec": "Arms",
+      "role": "DPS",
+      "armor": "Plate",
+      "weaponLoadouts": [
+        {
+          "id": "two-hand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "occupiesBothHands": true,
+              "inventorySlots": [
+                "Two-Hand"
+              ],
+              "itemTypes": [
+                "Axe",
+                "Mace",
+                "Sword",
+                "Polearm",
+                "Staff"
+              ]
+            },
+            "offHand": {
+              "mustBeEmpty": true
+            }
+          }
+        }
+      ],
+      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutSources": [
+        "https://worldofwarcraft.blizzard.com/en-us/game/classes/warrior"
+      ],
+      "weaponLoadoutNote": null,
+      "weaponPrimaryStatExceptions": {
+        "itemTypes": [],
+        "inventorySlots": [
+          "Held In Off-hand"
+        ],
+        "reason": "Held-in-off-hand items are already constrained to valid Intellect specs by exact loadouts and currently have type null. Shields retain both Strength and Intellect through tooltip parsing and are not exempt."
+      },
+      "statPriority": {
+        "primary": "Strength",
+        "secondaries": [
+          "Crit",
+          "Haste",
+          "Mast",
+          "Vers"
+        ]
+      },
+      "statPriorityVariants": null,
+      "statPriorityNote": null,
+      "statPriorityPatch": "12.0.7",
+      "statPrioritySource": "https://www.icy-veins.com/wow/arms-warrior-pve-dps-stat-priority",
+      "tierSet": {
+        "set2": "Mortal Strike and Execute damage increased by 10% and when you Slam a target, Slam also deals damage to enemies within 8 yards of it. Deals reduced damage beyond 5 targets.",
+        "set4": "Overpower damage increased by 15%. Mortal Strike and Overpower increase the damage of your next Slam by 20% (was 10%), stacking up to 5 times (was 3).",
+        "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/18",
+        "asOf": "2026-07-31"
+      },
+      "ratings": {
+        "raid": {
+          "icyveins": "A",
+          "method": "C",
+          "wowhead": "C",
+          "archon": "B"
+        },
+        "mplus": {
+          "icyveins": "A+",
+          "method": "C",
+          "wowhead": "A",
+          "archon": "S",
+          "icyveins-ptr": "S"
+        }
+      }
+    },
+    {
+      "class": "Warrior",
+      "spec": "Fury",
+      "role": "DPS",
+      "armor": "Plate",
+      "weaponLoadouts": [
+        {
+          "id": "dual-two-hand",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "inventorySlots": [
+                "Two-Hand"
+              ],
+              "itemTypes": [
+                "Axe",
+                "Mace",
+                "Sword"
+              ]
+            },
+            "offHand": {
+              "required": true,
+              "inventorySlots": [
+                "Two-Hand"
+              ],
+              "itemTypes": [
+                "Axe",
+                "Mace",
+                "Sword"
+              ]
+            }
+          }
+        }
+      ],
+      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutSources": [
+        "https://worldofwarcraft.blizzard.com/en-us/game/classes/warrior"
+      ],
+      "weaponLoadoutNote": null,
+      "weaponPrimaryStatExceptions": {
+        "itemTypes": [],
+        "inventorySlots": [
+          "Held In Off-hand"
+        ],
+        "reason": "Held-in-off-hand items are already constrained to valid Intellect specs by exact loadouts and currently have type null. Shields retain both Strength and Intellect through tooltip parsing and are not exempt."
+      },
+      "statPriority": {
+        "primary": "Strength",
+        "secondaries": [
+          "Mast",
+          "Haste",
+          "Vers",
+          "Crit"
+        ]
+      },
+      "statPriorityVariants": null,
+      "statPriorityNote": null,
+      "statPriorityPatch": "12.0.7",
+      "statPrioritySource": "https://www.icy-veins.com/wow/fury-warrior-pve-dps-stat-priority",
+      "tierSet": {
+        "set2": "Raging Blow damage increased by 15% and during Recklessness, Raging Blow extends the duration of Recklessness by 2 seconds, up to 6 seconds.",
+        "set4": "Bloodthirst damage increased by 10% and during Recklessness, Bloodthirst increases the critical strike bonus of Recklessness by 5%, up to 10%.",
+        "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
+        "asOf": "2026-06-18"
+      },
+      "ratings": {
+        "raid": {
+          "icyveins": "A",
+          "method": "A",
+          "wowhead": "B",
+          "archon": "B"
+        },
+        "mplus": {
+          "icyveins": "A",
+          "method": "B",
+          "wowhead": "B",
+          "archon": "A",
+          "icyveins-ptr": "B+"
+        }
+      }
+    },
+    {
+      "class": "Warrior",
+      "spec": "Protection",
+      "role": "Tank",
+      "armor": "Plate",
+      "weaponLoadouts": [
+        {
+          "id": "one-hand-shield",
+          "hands": {
+            "mainHand": {
+              "required": true,
+              "inventorySlots": [
+                "One-Hand",
+                "Main Hand"
+              ],
+              "itemTypes": [
+                "Axe",
+                "Mace",
+                "Sword",
+                "Dagger",
+                "Fist Weapon"
+              ]
+            },
+            "offHand": {
+              "required": true,
+              "inventorySlots": [
+                "Off Hand"
+              ],
+              "itemTypes": [
+                "Shield"
+              ]
+            }
+          }
+        }
+      ],
+      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutSources": [
+        "https://worldofwarcraft.blizzard.com/en-us/game/classes/warrior"
+      ],
+      "weaponLoadoutNote": null,
+      "weaponPrimaryStatExceptions": {
+        "itemTypes": [],
+        "inventorySlots": [
+          "Held In Off-hand"
+        ],
+        "reason": "Held-in-off-hand items are already constrained to valid Intellect specs by exact loadouts and currently have type null. Shields retain both Strength and Intellect through tooltip parsing and are not exempt."
+      },
+      "statPriority": {
+        "primary": "Strength",
+        "secondaries": [
+          "Haste",
+          "Vers",
+          "Crit",
+          "Mast"
+        ]
+      },
+      "statPriorityVariants": null,
+      "statPriorityNote": null,
+      "statPriorityPatch": "12.0.7",
+      "statPrioritySource": "https://www.icy-veins.com/wow/protection-warrior-pve-tank-stat-priority",
+      "tierSet": {
+        "set2": "Free Revenges deal 15% additional damage and cause your next Shield Slam to deal 20% additional damage.",
+        "set4": "Ravager and your free Revenges cause all targets to bleed for damage over 12 sec (Bloody Rebuke bleed damage increased by 100% on 07-08). Ravager's cooldown is reduced by 30 seconds.",
+        "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/11",
+        "asOf": "2026-07-08"
+      },
+      "ratings": {
+        "raid": {
+          "icyveins": "S",
+          "method": "S",
+          "wowhead": "A",
+          "archon": "A"
+        },
+        "mplus": {
+          "icyveins": "B",
+          "method": "B",
+          "wowhead": "B",
+          "archon": "C",
+          "icyveins-ptr": "A"
+        }
+      }
+    }
+  ]
+}

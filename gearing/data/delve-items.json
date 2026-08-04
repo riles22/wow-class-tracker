@@ -1,0 +1,8 @@
+{
+  "status": "retired",
+  "retiredAt": "2026-08-02",
+  "consumedByBuild": false,
+  "items": [],
+  "reason": "The current guide has no authoritative scoped per-item loot table. Page-wide item-link scanning mixed incidental links with rewards, so this dataset is intentionally unavailable rather than inferred.",
+  "replacement": "Delve item-level reward paths are represented provisionally in data/sheet-rewards.json."
+}

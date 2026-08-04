@@ -1,0 +1,868 @@
+{
+  "_schemaVersion": 2,
+  "_provenance": "Compiled from Blizzard's official class pages and official Midnight patch notes. Class pages establish class-wide proficiencies and preferred weapons; specLoadouts adds the hand, core-ability, and patch restrictions needed for item eligibility. See officialSources and each spec's sourceUrls.",
+  "_types": "itemTypes and inventorySlots match the type and slot fields produced by src/lib-wowhead.mjs. Held In Off-hand items currently have type null, so those loadout slots explicitly use itemTypes: [null].",
+  "_loadoutSchema": {
+    "selection": "For a selected patch context, choose exactly one loadout for the spec. Loadouts within a spec are mutually exclusive complete weapon configurations.",
+    "patchContexts": "A spec-level patchContexts array applies to all its loadouts unless a loadout supplies its own patchContexts array.",
+    "hands": "mainHand and offHand are exact equipment positions. required means the position must be filled; mustBeEmpty means no item can be equipped there. occupiesBothHands is explicit because the harvested Ranged slot can mean either a two-handed Hunter weapon or a one-handed wand.",
+    "matching": "An item matches a hand only when both its slot is in inventorySlots and its type is in itemTypes. Main-hand candidates accept One-Hand or Main Hand; off-hand weapons accept One-Hand or Off Hand.",
+    "primaryStat": "Filter equippable weapons to the spec's primary stat after loadout matching. Honor primaryStatExceptions for explicitly gated non-weapon offhands. Items whose primary stat is absent still require an explicit consumer policy; do not treat absence as an automatic match."
+  },
+  "primaryStatExceptions": {
+    "itemTypes": [],
+    "inventorySlots": ["Held In Off-hand"],
+    "reason": "Held-in-off-hand items are already constrained to valid Intellect specs by exact loadouts and currently have type null. Shields retain both Strength and Intellect through tooltip parsing and are not exempt."
+  },
+  "patchContexts": {
+    "live-12.0.7": {
+      "patch": "12.0.7",
+      "channel": "live",
+      "asOf": "2026-08-02",
+      "sourceUrl": "https://worldofwarcraft.blizzard.com/en-us/news/24244888"
+    },
+    "ptr-12.1.0": {
+      "patch": "12.1.0",
+      "channel": "ptr",
+      "asOf": "2026-08-02",
+      "sourceUrl": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811"
+    }
+  },
+  "officialSources": {
+    "midnightPreExpansion": "https://worldofwarcraft.blizzard.com/en-us/news/24244455/midnight-pre-expansion-content-update-notes",
+    "midnight1207": "https://worldofwarcraft.blizzard.com/en-us/news/24244888",
+    "midnight121Ptr": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811",
+    "classPages": {
+      "Warrior": "https://worldofwarcraft.blizzard.com/en-us/game/classes/warrior",
+      "Paladin": "https://worldofwarcraft.blizzard.com/en-us/game/classes/paladin",
+      "Hunter": "https://worldofwarcraft.blizzard.com/en-us/game/classes/hunter",
+      "Rogue": "https://worldofwarcraft.blizzard.com/en-us/game/classes/rogue",
+      "Priest": "https://worldofwarcraft.blizzard.com/en-us/game/classes/priest",
+      "Death Knight": "https://worldofwarcraft.blizzard.com/en-us/game/classes/death-knight",
+      "Shaman": "https://worldofwarcraft.blizzard.com/en-us/game/classes/shaman",
+      "Mage": "https://worldofwarcraft.blizzard.com/en-us/game/classes/mage",
+      "Warlock": "https://worldofwarcraft.blizzard.com/en-us/game/classes/warlock",
+      "Monk": "https://worldofwarcraft.blizzard.com/en-us/game/classes/monk",
+      "Druid": "https://worldofwarcraft.blizzard.com/en-us/game/classes/druid",
+      "Demon Hunter": "https://worldofwarcraft.blizzard.com/en-us/game/classes/demon-hunter",
+      "Evoker": "https://worldofwarcraft.blizzard.com/en-us/game/classes/evoker"
+    }
+  },
+
+  "byClass": {
+    "Warrior":      ["Axe", "Mace", "Sword", "Dagger", "Fist Weapon", "Polearm", "Staff", "Shield"],
+    "Paladin":      ["Axe", "Mace", "Sword", "Polearm", "Shield"],
+    "Hunter":       ["Axe", "Bow", "Crossbow", "Dagger", "Fist Weapon", "Gun", "Polearm", "Staff", "Sword"],
+    "Rogue":        ["Dagger", "Fist Weapon", "Axe", "Mace", "Sword"],
+    "Priest":       ["Dagger", "Mace", "Staff", "Wand", "Held In Off-hand"],
+    "Death Knight": ["Axe", "Mace", "Sword", "Polearm"],
+    "Shaman":       ["Dagger", "Fist Weapon", "Axe", "Mace", "Staff", "Shield"],
+    "Mage":         ["Wand", "Dagger", "Sword", "Staff", "Held In Off-hand"],
+    "Warlock":      ["Dagger", "Sword", "Staff", "Wand", "Held In Off-hand"],
+    "Monk":         ["Fist Weapon", "Axe", "Mace", "Sword", "Polearm", "Staff", "Held In Off-hand"],
+    "Druid":        ["Dagger", "Fist Weapon", "Mace", "Polearm", "Staff", "Held In Off-hand"],
+    "Demon Hunter": ["Warglaive", "Warglaives", "Fist Weapon", "Axe", "Sword", "Dagger"],
+    "Evoker":       ["Dagger", "Fist Weapon", "Axe", "Mace", "Sword", "Staff", "Held In Off-hand"]
+  },
+  "_byClassPatchNote": "Deprecated compatibility union only. Demon Hunter Dagger is a 12.1 PTR proficiency and must not be applied class-wide for spec eligibility; use specLoadouts. Monk Held In Off-hand is included for Mistweaver.",
+  "_dhDagger": "Daggers are new to Demon Hunter on the 12.1 PTR for Devourer's Intellect weapons. Havoc and Vengeance core attacks explicitly require warglaives, axes, swords, or fist weapons, so their loadouts never include daggers.",
+
+  "shieldSpecs": [
+    "Protection Warrior", "Protection Paladin", "Holy Paladin",
+    "Restoration Shaman", "Elemental Shaman"
+  ],
+  "_shieldNote": "Deprecated compatibility allowlist. specLoadouts is authoritative and binds each shield to a one-handed main-hand configuration.",
+
+  "_setupNote": "Deprecated compatibility union of acceptable inventory slots. It cannot express mutually exclusive configurations or hand-specific weapon types; use specLoadouts.",
+  "specSetup": {
+    "Arms Warrior":            ["Two-Hand"],
+    "Fury Warrior":            ["Two-Hand"],
+    "Protection Warrior":      ["One-Hand", "Main Hand", "Off Hand"],
+    "Retribution Paladin":     ["Two-Hand"],
+    "Holy Paladin":            ["One-Hand", "Main Hand", "Off Hand"],
+    "Protection Paladin":      ["One-Hand", "Main Hand", "Off Hand"],
+    "Blood Death Knight":      ["Two-Hand"],
+    "Unholy Death Knight":     ["Two-Hand"],
+    "Frost Death Knight":      ["One-Hand", "Two-Hand", "Main Hand", "Off Hand"],
+    "Beast Mastery Hunter":    ["Ranged"],
+    "Marksmanship Hunter":     ["Ranged"],
+    "Survival Hunter":         ["One-Hand", "Two-Hand", "Main Hand", "Off Hand"],
+    "Assassination Rogue":     ["One-Hand", "Main Hand", "Off Hand"],
+    "Outlaw Rogue":            ["One-Hand", "Main Hand", "Off Hand"],
+    "Subtlety Rogue":          ["One-Hand", "Main Hand", "Off Hand"],
+    "Havoc Demon Hunter":      ["One-Hand", "Main Hand", "Off Hand"],
+    "Vengeance Demon Hunter":  ["One-Hand", "Main Hand", "Off Hand"],
+    "Devourer Demon Hunter":   ["One-Hand", "Main Hand", "Off Hand"],
+    "Enhancement Shaman":      ["One-Hand", "Main Hand", "Off Hand"],
+    "Elemental Shaman":        ["One-Hand", "Two-Hand", "Main Hand", "Off Hand"],
+    "Restoration Shaman":      ["One-Hand", "Two-Hand", "Main Hand", "Off Hand"],
+    "Feral Druid":             ["Two-Hand"],
+    "Guardian Druid":          ["Two-Hand"],
+    "Brewmaster Monk":         ["One-Hand", "Two-Hand", "Main Hand", "Off Hand"],
+    "Mistweaver Monk":         ["One-Hand", "Two-Hand", "Main Hand", "Held In Off-hand"],
+    "Windwalker Monk":         ["One-Hand", "Two-Hand", "Main Hand", "Off Hand"]
+  },
+
+  "specLoadouts": {
+    "Arms Warrior": {
+      "primaryStat": "Strength",
+      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/warrior"],
+      "loadouts": [
+        {
+          "id": "two-hand",
+          "hands": {
+            "mainHand": {"required": true, "occupiesBothHands": true, "inventorySlots": ["Two-Hand"], "itemTypes": ["Axe", "Mace", "Sword", "Polearm", "Staff"]},
+            "offHand": {"mustBeEmpty": true}
+          }
+        }
+      ]
+    },
+    "Fury Warrior": {
+      "primaryStat": "Strength",
+      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/warrior"],
+      "loadouts": [
+        {
+          "id": "dual-two-hand",
+          "hands": {
+            "mainHand": {"required": true, "inventorySlots": ["Two-Hand"], "itemTypes": ["Axe", "Mace", "Sword"]},
+            "offHand": {"required": true, "inventorySlots": ["Two-Hand"], "itemTypes": ["Axe", "Mace", "Sword"]}
+          }
+        }
+      ]
+    },
+    "Protection Warrior": {
+      "primaryStat": "Strength",
+      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/warrior"],
+      "loadouts": [
+        {
+          "id": "one-hand-shield",
+          "hands": {
+            "mainHand": {"required": true, "inventorySlots": ["One-Hand", "Main Hand"], "itemTypes": ["Axe", "Mace", "Sword", "Dagger", "Fist Weapon"]},
+            "offHand": {"required": true, "inventorySlots": ["Off Hand"], "itemTypes": ["Shield"]}
+          }
+        }
+      ]
+    },
+
+    "Holy Paladin": {
+      "primaryStat": "Intellect",
+      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/paladin"],
+      "loadouts": [
+        {
+          "id": "one-hand-shield",
+          "hands": {
+            "mainHand": {"required": true, "inventorySlots": ["One-Hand", "Main Hand"], "itemTypes": ["Axe", "Mace", "Sword"]},
+            "offHand": {"required": true, "inventorySlots": ["Off Hand"], "itemTypes": ["Shield"]}
+          }
+        }
+      ]
+    },
+    "Protection Paladin": {
+      "primaryStat": "Strength",
+      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/paladin"],
+      "loadouts": [
+        {
+          "id": "one-hand-shield",
+          "hands": {
+            "mainHand": {"required": true, "inventorySlots": ["One-Hand", "Main Hand"], "itemTypes": ["Axe", "Mace", "Sword"]},
+            "offHand": {"required": true, "inventorySlots": ["Off Hand"], "itemTypes": ["Shield"]}
+          }
+        }
+      ]
+    },
+    "Retribution Paladin": {
+      "primaryStat": "Strength",
+      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/paladin"],
+      "loadouts": [
+        {
+          "id": "two-hand",
+          "hands": {
+            "mainHand": {"required": true, "occupiesBothHands": true, "inventorySlots": ["Two-Hand"], "itemTypes": ["Axe", "Mace", "Sword", "Polearm"]},
+            "offHand": {"mustBeEmpty": true}
+          }
+        }
+      ]
+    },
+
+    "Beast Mastery Hunter": {
+      "primaryStat": "Agility",
+      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/hunter"],
+      "loadouts": [
+        {
+          "id": "ranged",
+          "hands": {
+            "mainHand": {"required": true, "occupiesBothHands": true, "inventorySlots": ["Ranged"], "itemTypes": ["Bow", "Crossbow", "Gun"]},
+            "offHand": {"mustBeEmpty": true}
+          }
+        }
+      ]
+    },
+    "Marksmanship Hunter": {
+      "primaryStat": "Agility",
+      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/hunter"],
+      "loadouts": [
+        {
+          "id": "ranged",
+          "hands": {
+            "mainHand": {"required": true, "occupiesBothHands": true, "inventorySlots": ["Ranged"], "itemTypes": ["Bow", "Crossbow", "Gun"]},
+            "offHand": {"mustBeEmpty": true}
+          }
+        }
+      ]
+    },
+    "Survival Hunter": {
+      "primaryStat": "Agility",
+      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "sourceUrls": [
+        "https://worldofwarcraft.blizzard.com/en-us/game/classes/hunter",
+        "https://worldofwarcraft.blizzard.com/en-us/news/24244455/midnight-pre-expansion-content-update-notes"
+      ],
+      "notes": "Midnight added dual wielding only for one-handed axes, swords, and daggers. Fist weapons are intentionally excluded.",
+      "loadouts": [
+        {
+          "id": "two-hand",
+          "hands": {
+            "mainHand": {"required": true, "occupiesBothHands": true, "inventorySlots": ["Two-Hand"], "itemTypes": ["Axe", "Sword", "Polearm", "Staff"]},
+            "offHand": {"mustBeEmpty": true}
+          }
+        },
+        {
+          "id": "dual-one-hand",
+          "hands": {
+            "mainHand": {"required": true, "inventorySlots": ["One-Hand", "Main Hand"], "itemTypes": ["Axe", "Sword", "Dagger"]},
+            "offHand": {"required": true, "inventorySlots": ["One-Hand", "Off Hand"], "itemTypes": ["Axe", "Sword", "Dagger"]}
+          }
+        }
+      ]
+    },
+
+    "Assassination Rogue": {
+      "primaryStat": "Agility",
+      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/rogue"],
+      "notes": "Both hands require daggers.",
+      "loadouts": [
+        {
+          "id": "dual-dagger",
+          "hands": {
+            "mainHand": {"required": true, "inventorySlots": ["One-Hand", "Main Hand"], "itemTypes": ["Dagger"]},
+            "offHand": {"required": true, "inventorySlots": ["One-Hand", "Off Hand"], "itemTypes": ["Dagger"]}
+          }
+        }
+      ]
+    },
+    "Outlaw Rogue": {
+      "primaryStat": "Agility",
+      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "sourceUrls": [
+        "https://worldofwarcraft.blizzard.com/en-us/game/classes/rogue",
+        "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811"
+      ],
+      "notes": "The main hand excludes daggers; the off hand may be any Rogue one-handed weapon, including a dagger.",
+      "loadouts": [
+        {
+          "id": "dual-one-hand",
+          "hands": {
+            "mainHand": {"required": true, "inventorySlots": ["One-Hand", "Main Hand"], "itemTypes": ["Axe", "Mace", "Sword", "Fist Weapon"]},
+            "offHand": {"required": true, "inventorySlots": ["One-Hand", "Off Hand"], "itemTypes": ["Axe", "Mace", "Sword", "Fist Weapon", "Dagger"]}
+          }
+        }
+      ]
+    },
+    "Subtlety Rogue": {
+      "primaryStat": "Agility",
+      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/rogue"],
+      "notes": "The main hand requires a dagger; the off hand may be any Rogue one-handed weapon.",
+      "loadouts": [
+        {
+          "id": "dagger-main-dual-one-hand",
+          "hands": {
+            "mainHand": {"required": true, "inventorySlots": ["One-Hand", "Main Hand"], "itemTypes": ["Dagger"]},
+            "offHand": {"required": true, "inventorySlots": ["One-Hand", "Off Hand"], "itemTypes": ["Dagger", "Axe", "Mace", "Sword", "Fist Weapon"]}
+          }
+        }
+      ]
+    },
+
+    "Discipline Priest": {
+      "primaryStat": "Intellect",
+      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/priest"],
+      "loadouts": [
+        {
+          "id": "two-hand",
+          "hands": {
+            "mainHand": {"required": true, "occupiesBothHands": true, "inventorySlots": ["Two-Hand"], "itemTypes": ["Staff"]},
+            "offHand": {"mustBeEmpty": true}
+          }
+        },
+        {
+          "id": "one-hand-held-offhand",
+          "hands": {
+            "mainHand": {"required": true, "inventorySlots": ["One-Hand", "Main Hand", "Ranged"], "itemTypes": ["Dagger", "Mace", "Wand"]},
+            "offHand": {"required": true, "inventorySlots": ["Held In Off-hand"], "itemTypes": [null]}
+          }
+        }
+      ]
+    },
+    "Holy Priest": {
+      "primaryStat": "Intellect",
+      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/priest"],
+      "loadouts": [
+        {
+          "id": "two-hand",
+          "hands": {
+            "mainHand": {"required": true, "occupiesBothHands": true, "inventorySlots": ["Two-Hand"], "itemTypes": ["Staff"]},
+            "offHand": {"mustBeEmpty": true}
+          }
+        },
+        {
+          "id": "one-hand-held-offhand",
+          "hands": {
+            "mainHand": {"required": true, "inventorySlots": ["One-Hand", "Main Hand", "Ranged"], "itemTypes": ["Dagger", "Mace", "Wand"]},
+            "offHand": {"required": true, "inventorySlots": ["Held In Off-hand"], "itemTypes": [null]}
+          }
+        }
+      ]
+    },
+    "Shadow Priest": {
+      "primaryStat": "Intellect",
+      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/priest"],
+      "loadouts": [
+        {
+          "id": "two-hand",
+          "hands": {
+            "mainHand": {"required": true, "occupiesBothHands": true, "inventorySlots": ["Two-Hand"], "itemTypes": ["Staff"]},
+            "offHand": {"mustBeEmpty": true}
+          }
+        },
+        {
+          "id": "one-hand-held-offhand",
+          "hands": {
+            "mainHand": {"required": true, "inventorySlots": ["One-Hand", "Main Hand", "Ranged"], "itemTypes": ["Dagger", "Mace", "Wand"]},
+            "offHand": {"required": true, "inventorySlots": ["Held In Off-hand"], "itemTypes": [null]}
+          }
+        }
+      ]
+    },
+
+    "Blood Death Knight": {
+      "primaryStat": "Strength",
+      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/death-knight"],
+      "loadouts": [
+        {
+          "id": "two-hand",
+          "hands": {
+            "mainHand": {"required": true, "occupiesBothHands": true, "inventorySlots": ["Two-Hand"], "itemTypes": ["Axe", "Mace", "Sword", "Polearm"]},
+            "offHand": {"mustBeEmpty": true}
+          }
+        }
+      ]
+    },
+    "Frost Death Knight": {
+      "primaryStat": "Strength",
+      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "sourceUrls": [
+        "https://worldofwarcraft.blizzard.com/en-us/game/classes/death-knight",
+        "https://worldofwarcraft.blizzard.com/en-us/news/24244455/midnight-pre-expansion-content-update-notes"
+      ],
+      "notes": "Midnight Obliterate explicitly supports both two-handed and dual-wield configurations.",
+      "loadouts": [
+        {
+          "id": "two-hand",
+          "hands": {
+            "mainHand": {"required": true, "occupiesBothHands": true, "inventorySlots": ["Two-Hand"], "itemTypes": ["Axe", "Mace", "Sword", "Polearm"]},
+            "offHand": {"mustBeEmpty": true}
+          }
+        },
+        {
+          "id": "dual-one-hand",
+          "hands": {
+            "mainHand": {"required": true, "inventorySlots": ["One-Hand", "Main Hand"], "itemTypes": ["Axe", "Mace", "Sword"]},
+            "offHand": {"required": true, "inventorySlots": ["One-Hand", "Off Hand"], "itemTypes": ["Axe", "Mace", "Sword"]}
+          }
+        }
+      ]
+    },
+    "Unholy Death Knight": {
+      "primaryStat": "Strength",
+      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/death-knight"],
+      "loadouts": [
+        {
+          "id": "two-hand",
+          "hands": {
+            "mainHand": {"required": true, "occupiesBothHands": true, "inventorySlots": ["Two-Hand"], "itemTypes": ["Axe", "Mace", "Sword", "Polearm"]},
+            "offHand": {"mustBeEmpty": true}
+          }
+        }
+      ]
+    },
+
+    "Elemental Shaman": {
+      "primaryStat": "Intellect",
+      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/shaman"],
+      "loadouts": [
+        {
+          "id": "two-hand",
+          "hands": {
+            "mainHand": {"required": true, "occupiesBothHands": true, "inventorySlots": ["Two-Hand"], "itemTypes": ["Staff"]},
+            "offHand": {"mustBeEmpty": true}
+          }
+        },
+        {
+          "id": "one-hand-shield",
+          "hands": {
+            "mainHand": {"required": true, "inventorySlots": ["One-Hand", "Main Hand"], "itemTypes": ["Dagger", "Fist Weapon", "Axe", "Mace"]},
+            "offHand": {"required": true, "inventorySlots": ["Off Hand"], "itemTypes": ["Shield"]}
+          }
+        }
+      ]
+    },
+    "Enhancement Shaman": {
+      "primaryStat": "Agility",
+      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/shaman"],
+      "notes": "Enhancement requires dual one-handed axes, maces, or fist weapons. Daggers are intentionally excluded because core attacks cannot use them.",
+      "loadouts": [
+        {
+          "id": "dual-one-hand",
+          "hands": {
+            "mainHand": {"required": true, "inventorySlots": ["One-Hand", "Main Hand"], "itemTypes": ["Axe", "Mace", "Fist Weapon"]},
+            "offHand": {"required": true, "inventorySlots": ["One-Hand", "Off Hand"], "itemTypes": ["Axe", "Mace", "Fist Weapon"]}
+          }
+        }
+      ]
+    },
+    "Restoration Shaman": {
+      "primaryStat": "Intellect",
+      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/shaman"],
+      "loadouts": [
+        {
+          "id": "two-hand",
+          "hands": {
+            "mainHand": {"required": true, "occupiesBothHands": true, "inventorySlots": ["Two-Hand"], "itemTypes": ["Staff"]},
+            "offHand": {"mustBeEmpty": true}
+          }
+        },
+        {
+          "id": "one-hand-shield",
+          "hands": {
+            "mainHand": {"required": true, "inventorySlots": ["One-Hand", "Main Hand"], "itemTypes": ["Dagger", "Fist Weapon", "Axe", "Mace"]},
+            "offHand": {"required": true, "inventorySlots": ["Off Hand"], "itemTypes": ["Shield"]}
+          }
+        }
+      ]
+    },
+
+    "Arcane Mage": {
+      "primaryStat": "Intellect",
+      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/mage"],
+      "loadouts": [
+        {
+          "id": "two-hand",
+          "hands": {
+            "mainHand": {"required": true, "occupiesBothHands": true, "inventorySlots": ["Two-Hand"], "itemTypes": ["Staff"]},
+            "offHand": {"mustBeEmpty": true}
+          }
+        },
+        {
+          "id": "one-hand-held-offhand",
+          "hands": {
+            "mainHand": {"required": true, "inventorySlots": ["One-Hand", "Main Hand", "Ranged"], "itemTypes": ["Dagger", "Sword", "Wand"]},
+            "offHand": {"required": true, "inventorySlots": ["Held In Off-hand"], "itemTypes": [null]}
+          }
+        }
+      ]
+    },
+    "Fire Mage": {
+      "primaryStat": "Intellect",
+      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/mage"],
+      "loadouts": [
+        {
+          "id": "two-hand",
+          "hands": {
+            "mainHand": {"required": true, "occupiesBothHands": true, "inventorySlots": ["Two-Hand"], "itemTypes": ["Staff"]},
+            "offHand": {"mustBeEmpty": true}
+          }
+        },
+        {
+          "id": "one-hand-held-offhand",
+          "hands": {
+            "mainHand": {"required": true, "inventorySlots": ["One-Hand", "Main Hand", "Ranged"], "itemTypes": ["Dagger", "Sword", "Wand"]},
+            "offHand": {"required": true, "inventorySlots": ["Held In Off-hand"], "itemTypes": [null]}
+          }
+        }
+      ]
+    },
+    "Frost Mage": {
+      "primaryStat": "Intellect",
+      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/mage"],
+      "loadouts": [
+        {
+          "id": "two-hand",
+          "hands": {
+            "mainHand": {"required": true, "occupiesBothHands": true, "inventorySlots": ["Two-Hand"], "itemTypes": ["Staff"]},
+            "offHand": {"mustBeEmpty": true}
+          }
+        },
+        {
+          "id": "one-hand-held-offhand",
+          "hands": {
+            "mainHand": {"required": true, "inventorySlots": ["One-Hand", "Main Hand", "Ranged"], "itemTypes": ["Dagger", "Sword", "Wand"]},
+            "offHand": {"required": true, "inventorySlots": ["Held In Off-hand"], "itemTypes": [null]}
+          }
+        }
+      ]
+    },
+
+    "Affliction Warlock": {
+      "primaryStat": "Intellect",
+      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/warlock"],
+      "loadouts": [
+        {
+          "id": "two-hand",
+          "hands": {
+            "mainHand": {"required": true, "occupiesBothHands": true, "inventorySlots": ["Two-Hand"], "itemTypes": ["Staff"]},
+            "offHand": {"mustBeEmpty": true}
+          }
+        },
+        {
+          "id": "one-hand-held-offhand",
+          "hands": {
+            "mainHand": {"required": true, "inventorySlots": ["One-Hand", "Main Hand", "Ranged"], "itemTypes": ["Dagger", "Sword", "Wand"]},
+            "offHand": {"required": true, "inventorySlots": ["Held In Off-hand"], "itemTypes": [null]}
+          }
+        }
+      ]
+    },
+    "Demonology Warlock": {
+      "primaryStat": "Intellect",
+      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/warlock"],
+      "loadouts": [
+        {
+          "id": "two-hand",
+          "hands": {
+            "mainHand": {"required": true, "occupiesBothHands": true, "inventorySlots": ["Two-Hand"], "itemTypes": ["Staff"]},
+            "offHand": {"mustBeEmpty": true}
+          }
+        },
+        {
+          "id": "one-hand-held-offhand",
+          "hands": {
+            "mainHand": {"required": true, "inventorySlots": ["One-Hand", "Main Hand", "Ranged"], "itemTypes": ["Dagger", "Sword", "Wand"]},
+            "offHand": {"required": true, "inventorySlots": ["Held In Off-hand"], "itemTypes": [null]}
+          }
+        }
+      ]
+    },
+    "Destruction Warlock": {
+      "primaryStat": "Intellect",
+      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/warlock"],
+      "loadouts": [
+        {
+          "id": "two-hand",
+          "hands": {
+            "mainHand": {"required": true, "occupiesBothHands": true, "inventorySlots": ["Two-Hand"], "itemTypes": ["Staff"]},
+            "offHand": {"mustBeEmpty": true}
+          }
+        },
+        {
+          "id": "one-hand-held-offhand",
+          "hands": {
+            "mainHand": {"required": true, "inventorySlots": ["One-Hand", "Main Hand", "Ranged"], "itemTypes": ["Dagger", "Sword", "Wand"]},
+            "offHand": {"required": true, "inventorySlots": ["Held In Off-hand"], "itemTypes": [null]}
+          }
+        }
+      ]
+    },
+
+    "Brewmaster Monk": {
+      "primaryStat": "Agility",
+      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/monk"],
+      "notes": "One-handed configurations are dual wield; two-handed configurations are restricted to staves and polearms.",
+      "loadouts": [
+        {
+          "id": "two-hand-staff-polearm",
+          "hands": {
+            "mainHand": {"required": true, "occupiesBothHands": true, "inventorySlots": ["Two-Hand"], "itemTypes": ["Staff", "Polearm"]},
+            "offHand": {"mustBeEmpty": true}
+          }
+        },
+        {
+          "id": "dual-one-hand",
+          "hands": {
+            "mainHand": {"required": true, "inventorySlots": ["One-Hand", "Main Hand"], "itemTypes": ["Fist Weapon", "Axe", "Mace", "Sword"]},
+            "offHand": {"required": true, "inventorySlots": ["One-Hand", "Off Hand"], "itemTypes": ["Fist Weapon", "Axe", "Mace", "Sword"]}
+          }
+        }
+      ]
+    },
+    "Mistweaver Monk": {
+      "primaryStat": "Intellect",
+      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/monk"],
+      "notes": "Mistweaver pairs a one-handed weapon with a held-in-off-hand item; it does not dual wield weapons.",
+      "loadouts": [
+        {
+          "id": "two-hand-staff-polearm",
+          "hands": {
+            "mainHand": {"required": true, "occupiesBothHands": true, "inventorySlots": ["Two-Hand"], "itemTypes": ["Staff", "Polearm"]},
+            "offHand": {"mustBeEmpty": true}
+          }
+        },
+        {
+          "id": "one-hand-held-offhand",
+          "hands": {
+            "mainHand": {"required": true, "inventorySlots": ["One-Hand", "Main Hand"], "itemTypes": ["Fist Weapon", "Axe", "Mace", "Sword"]},
+            "offHand": {"required": true, "inventorySlots": ["Held In Off-hand"], "itemTypes": [null]}
+          }
+        }
+      ]
+    },
+    "Windwalker Monk": {
+      "primaryStat": "Agility",
+      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/monk"],
+      "notes": "One-handed configurations are dual wield; two-handed configurations are restricted to staves and polearms.",
+      "loadouts": [
+        {
+          "id": "two-hand-staff-polearm",
+          "hands": {
+            "mainHand": {"required": true, "occupiesBothHands": true, "inventorySlots": ["Two-Hand"], "itemTypes": ["Staff", "Polearm"]},
+            "offHand": {"mustBeEmpty": true}
+          }
+        },
+        {
+          "id": "dual-one-hand",
+          "hands": {
+            "mainHand": {"required": true, "inventorySlots": ["One-Hand", "Main Hand"], "itemTypes": ["Fist Weapon", "Axe", "Mace", "Sword"]},
+            "offHand": {"required": true, "inventorySlots": ["One-Hand", "Off Hand"], "itemTypes": ["Fist Weapon", "Axe", "Mace", "Sword"]}
+          }
+        }
+      ]
+    },
+
+    "Balance Druid": {
+      "primaryStat": "Intellect",
+      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/druid"],
+      "loadouts": [
+        {
+          "id": "two-hand",
+          "hands": {
+            "mainHand": {"required": true, "occupiesBothHands": true, "inventorySlots": ["Two-Hand"], "itemTypes": ["Mace", "Polearm", "Staff"]},
+            "offHand": {"mustBeEmpty": true}
+          }
+        },
+        {
+          "id": "one-hand-held-offhand",
+          "hands": {
+            "mainHand": {"required": true, "inventorySlots": ["One-Hand", "Main Hand"], "itemTypes": ["Dagger", "Fist Weapon", "Mace"]},
+            "offHand": {"required": true, "inventorySlots": ["Held In Off-hand"], "itemTypes": [null]}
+          }
+        }
+      ]
+    },
+    "Feral Druid": {
+      "primaryStat": "Agility",
+      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/druid"],
+      "loadouts": [
+        {
+          "id": "two-hand",
+          "hands": {
+            "mainHand": {"required": true, "occupiesBothHands": true, "inventorySlots": ["Two-Hand"], "itemTypes": ["Mace", "Polearm", "Staff"]},
+            "offHand": {"mustBeEmpty": true}
+          }
+        }
+      ]
+    },
+    "Guardian Druid": {
+      "primaryStat": "Agility",
+      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/druid"],
+      "loadouts": [
+        {
+          "id": "two-hand",
+          "hands": {
+            "mainHand": {"required": true, "occupiesBothHands": true, "inventorySlots": ["Two-Hand"], "itemTypes": ["Mace", "Polearm", "Staff"]},
+            "offHand": {"mustBeEmpty": true}
+          }
+        }
+      ]
+    },
+    "Restoration Druid": {
+      "primaryStat": "Intellect",
+      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/druid"],
+      "loadouts": [
+        {
+          "id": "two-hand",
+          "hands": {
+            "mainHand": {"required": true, "occupiesBothHands": true, "inventorySlots": ["Two-Hand"], "itemTypes": ["Mace", "Polearm", "Staff"]},
+            "offHand": {"mustBeEmpty": true}
+          }
+        },
+        {
+          "id": "one-hand-held-offhand",
+          "hands": {
+            "mainHand": {"required": true, "inventorySlots": ["One-Hand", "Main Hand"], "itemTypes": ["Dagger", "Fist Weapon", "Mace"]},
+            "offHand": {"required": true, "inventorySlots": ["Held In Off-hand"], "itemTypes": [null]}
+          }
+        }
+      ]
+    },
+
+    "Havoc Demon Hunter": {
+      "primaryStat": "Agility",
+      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "sourceUrls": [
+        "https://worldofwarcraft.blizzard.com/en-us/game/classes/demon-hunter",
+        "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811"
+      ],
+      "notes": "Daggers are excluded in both contexts. On the 12.1 PTR, Demon Blades, Blade Dance, and Chaos Strike explicitly require warglaives, axes, swords, or fist weapons.",
+      "loadouts": [
+        {
+          "id": "dual-one-hand",
+          "hands": {
+            "mainHand": {"required": true, "inventorySlots": ["One-Hand", "Main Hand"], "itemTypes": ["Warglaive", "Fist Weapon", "Axe", "Sword"]},
+            "offHand": {"required": true, "inventorySlots": ["One-Hand", "Off Hand"], "itemTypes": ["Warglaive", "Fist Weapon", "Axe", "Sword"]}
+          }
+        }
+      ]
+    },
+    "Vengeance Demon Hunter": {
+      "primaryStat": "Agility",
+      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "sourceUrls": [
+        "https://worldofwarcraft.blizzard.com/en-us/game/classes/demon-hunter",
+        "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811"
+      ],
+      "notes": "Daggers are excluded in both contexts. On the 12.1 PTR, Fracture and Soul Cleave explicitly require warglaives, axes, swords, or fist weapons.",
+      "loadouts": [
+        {
+          "id": "dual-one-hand",
+          "hands": {
+            "mainHand": {"required": true, "inventorySlots": ["One-Hand", "Main Hand"], "itemTypes": ["Warglaive", "Fist Weapon", "Axe", "Sword"]},
+            "offHand": {"required": true, "inventorySlots": ["One-Hand", "Off Hand"], "itemTypes": ["Warglaive", "Fist Weapon", "Axe", "Sword"]}
+          }
+        }
+      ]
+    },
+    "Devourer Demon Hunter": {
+      "primaryStat": "Intellect",
+      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "sourceUrls": [
+        "https://worldofwarcraft.blizzard.com/en-us/game/classes/demon-hunter",
+        "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811"
+      ],
+      "notes": "Dagger eligibility is Devourer-only and begins on the 12.1 PTR; the live 12.0.7 loadout intentionally excludes daggers.",
+      "loadouts": [
+        {
+          "id": "dual-one-hand-live",
+          "patchContexts": ["live-12.0.7"],
+          "hands": {
+            "mainHand": {"required": true, "inventorySlots": ["One-Hand", "Main Hand"], "itemTypes": ["Warglaive", "Fist Weapon", "Axe", "Sword"]},
+            "offHand": {"required": true, "inventorySlots": ["One-Hand", "Off Hand"], "itemTypes": ["Warglaive", "Fist Weapon", "Axe", "Sword"]}
+          }
+        },
+        {
+          "id": "dual-one-hand-ptr-12.1",
+          "patchContexts": ["ptr-12.1.0"],
+          "hands": {
+            "mainHand": {"required": true, "inventorySlots": ["One-Hand", "Main Hand"], "itemTypes": ["Warglaive", "Fist Weapon", "Axe", "Sword", "Dagger"]},
+            "offHand": {"required": true, "inventorySlots": ["One-Hand", "Off Hand"], "itemTypes": ["Warglaive", "Fist Weapon", "Axe", "Sword", "Dagger"]}
+          }
+        }
+      ]
+    },
+
+    "Augmentation Evoker": {
+      "primaryStat": "Intellect",
+      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/evoker"],
+      "loadouts": [
+        {
+          "id": "two-hand",
+          "hands": {
+            "mainHand": {"required": true, "occupiesBothHands": true, "inventorySlots": ["Two-Hand"], "itemTypes": ["Staff"]},
+            "offHand": {"mustBeEmpty": true}
+          }
+        },
+        {
+          "id": "one-hand-held-offhand",
+          "hands": {
+            "mainHand": {"required": true, "inventorySlots": ["One-Hand", "Main Hand"], "itemTypes": ["Dagger", "Fist Weapon", "Axe", "Mace", "Sword"]},
+            "offHand": {"required": true, "inventorySlots": ["Held In Off-hand"], "itemTypes": [null]}
+          }
+        }
+      ]
+    },
+    "Devastation Evoker": {
+      "primaryStat": "Intellect",
+      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/evoker"],
+      "loadouts": [
+        {
+          "id": "two-hand",
+          "hands": {
+            "mainHand": {"required": true, "occupiesBothHands": true, "inventorySlots": ["Two-Hand"], "itemTypes": ["Staff"]},
+            "offHand": {"mustBeEmpty": true}
+          }
+        },
+        {
+          "id": "one-hand-held-offhand",
+          "hands": {
+            "mainHand": {"required": true, "inventorySlots": ["One-Hand", "Main Hand"], "itemTypes": ["Dagger", "Fist Weapon", "Axe", "Mace", "Sword"]},
+            "offHand": {"required": true, "inventorySlots": ["Held In Off-hand"], "itemTypes": [null]}
+          }
+        }
+      ]
+    },
+    "Preservation Evoker": {
+      "primaryStat": "Intellect",
+      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/evoker"],
+      "loadouts": [
+        {
+          "id": "two-hand",
+          "hands": {
+            "mainHand": {"required": true, "occupiesBothHands": true, "inventorySlots": ["Two-Hand"], "itemTypes": ["Staff"]},
+            "offHand": {"mustBeEmpty": true}
+          }
+        },
+        {
+          "id": "one-hand-held-offhand",
+          "hands": {
+            "mainHand": {"required": true, "inventorySlots": ["One-Hand", "Main Hand"], "itemTypes": ["Dagger", "Fist Weapon", "Axe", "Mace", "Sword"]},
+            "offHand": {"required": true, "inventorySlots": ["Held In Off-hand"], "itemTypes": [null]}
+          }
+        }
+      ]
+    }
+  },
+
+  "_survivalNote": "Survival Hunter is the only Hunter spec that uses melee weapons. Its two-handed and dual-wield configurations are separate loadouts; the dual-wield type list deliberately omits fist weapons."
+}

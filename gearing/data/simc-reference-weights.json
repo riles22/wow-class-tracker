@@ -1,0 +1,278 @@
+{
+  "schemaVersion": 1,
+  "patchContext": "ptr-12.1.0",
+  "generatedAt": "2026-08-03T04:08:00Z",
+  "source": "https://github.com/simulationcraft/simc/tree/midnight/profiles/MID2",
+  "methodology": {
+    "objective": "General reference DPS scale factors from the official SimulationCraft Midnight Season 2 profiles.",
+    "weightBasis": "Each published weight is the arithmetic mean of two independent SimulationCraft runs for the same profile and scenario.",
+    "normalization": "Intellect is 1.000000; only secondary-stat coefficients are used for equal-item-level secondary-fit scoring.",
+    "simulator": {
+      "version": "1205-01",
+      "revision": "229259b",
+      "commit": "229259b575bbb55bf0d1cfc70bd2d4a7920e2dff",
+      "gameBuild": "12.1.0.68914 PTR",
+      "artifactSource": "https://github.com/simulationcraft/simc-publish/actions/runs/30730407933",
+      "artifactSha256": "d6f2aa29ffbcdd879b94db2045b0f14f723c2be0e4e5cdfee95ec984b32f0a4c",
+      "simcExeSha256": "046b0d1f18302be11df41f1ade6e480abe197ee915754035952036920795caa0"
+    },
+    "profileGeneration": {
+      "source": "https://github.com/simulationcraft/simc/blob/229259b575bbb55bf0d1cfc70bd2d4a7920e2dff/profiles/generators/MID2/MID2_Generate_Priest.simc",
+      "note": "Profiles were regenerated from the packaged current generator because the committed MID2 profile outputs predated its Catalyst redirected_base_stats corrections.",
+      "redirectedBaseStatsPerProfile": 3,
+      "tertiaryStatsModeled": false
+    },
+    "auditArtifacts": {
+      "directory": "data/simc-audit/229259b",
+      "compression": "gzip",
+      "profiles": 2,
+      "reports": 8,
+      "note": "The two generated profiles and all eight accepted JSON reports are retained. Validation decompresses them and verifies the original-byte SHA-256 values recorded below."
+    },
+    "settings": {
+      "ptr": true,
+      "optimalRaid": true,
+      "fightStyle": "Patchwerk",
+      "fixedTime": true,
+      "maxTimeSeconds": 300,
+      "varyCombatLength": 0.2,
+      "requestedIterationsPerRun": 25000,
+      "calculateScaleFactors": true,
+      "normalizeScaleFactors": true,
+      "scaleOnly": ["intellect", "crit", "haste", "mastery", "versatility"]
+    },
+    "scenarios": {
+      "raid-st": { "fightStyle": "Patchwerk", "targets": 1 },
+      "aoe-5t": { "fightStyle": "Patchwerk", "targets": 5 }
+    },
+    "acceptedRunCount": 2,
+    "maximumRelativeDrift": 0.05,
+    "caveat": "These are reference-profile weights, not character-specific item simulations. Direct gear simulations remain the stronger test for final BiS, effects, sockets, unequal item levels, and personal stat totals."
+  },
+  "records": [
+    {
+      "specKey": "Shadow Priest",
+      "profile": "Voidweaver (single- and multi-target)",
+      "scenario": "raid-st",
+      "targets": 1,
+      "status": "accepted",
+      "weights": {
+        "Crit": 0.652812,
+        "Haste": 0.645461,
+        "Mast": 0.620270,
+        "Vers": 0.484402
+      },
+      "maxRelativeDrift": 0.012611,
+      "baselineDpsRelativeDrift": 0.000152,
+      "simcVersion": "1205-01",
+      "simcRevision": "229259b",
+      "gameBuild": "12.1.0.68914 PTR",
+      "simulatedAt": "2026-08-03T03:38:10Z",
+      "profileSource": "https://github.com/simulationcraft/simc/blob/229259b575bbb55bf0d1cfc70bd2d4a7920e2dff/profiles/generators/MID2/MID2_Generate_Priest.simc",
+      "profileFile": "MID2_Priest_Shadow.simc",
+      "profileSha256": "67db4443ae539ceab8ffcfef600e830ca54b2d6733c076d55f56a2ba81a6749a",
+      "runs": [
+        {
+          "reportId": "vw_t1_r1",
+          "seed": "14515570576136992206",
+          "iterations": 25007,
+          "threads": 8,
+          "baselineDps": 210008.0328,
+          "baselineDpsError": 51.8151,
+          "weights": {
+            "Crit": 0.652940,
+            "Haste": 0.644379,
+            "Mast": 0.620054,
+            "Vers": 0.481347
+          },
+          "resultSha256": "737b769fbc0ae41cd889aa891052b2acce5f7a3b520ab22e342bff551045c6b1",
+          "timestamp": "2026-08-03T03:36:10Z"
+        },
+        {
+          "reportId": "vw_t1_r2",
+          "seed": "16046968347123314136",
+          "iterations": 25007,
+          "threads": 8,
+          "baselineDps": 210039.9314,
+          "baselineDpsError": 51.5897,
+          "weights": {
+            "Crit": 0.652684,
+            "Haste": 0.646543,
+            "Mast": 0.620486,
+            "Vers": 0.487456
+          },
+          "resultSha256": "f7abe1bace137f02a2ec89f3692dcf7170eaa8cfc93816c372c4a7f006eacebc",
+          "timestamp": "2026-08-03T03:38:10Z"
+        }
+      ]
+    },
+    {
+      "specKey": "Shadow Priest",
+      "profile": "Voidweaver (single- and multi-target)",
+      "scenario": "aoe-5t",
+      "targets": 5,
+      "status": "accepted",
+      "weights": {
+        "Crit": 0.724079,
+        "Haste": 0.755555,
+        "Mast": 0.582524,
+        "Vers": 0.484859
+      },
+      "maxRelativeDrift": 0.009728,
+      "baselineDpsRelativeDrift": 0.000114,
+      "simcVersion": "1205-01",
+      "simcRevision": "229259b",
+      "gameBuild": "12.1.0.68914 PTR",
+      "simulatedAt": "2026-08-03T03:51:24Z",
+      "profileSource": "https://github.com/simulationcraft/simc/blob/229259b575bbb55bf0d1cfc70bd2d4a7920e2dff/profiles/generators/MID2/MID2_Generate_Priest.simc",
+      "profileFile": "MID2_Priest_Shadow.simc",
+      "profileSha256": "67db4443ae539ceab8ffcfef600e830ca54b2d6733c076d55f56a2ba81a6749a",
+      "runs": [
+        {
+          "reportId": "vw_t5_r1",
+          "seed": "809571350640032174",
+          "iterations": 25007,
+          "threads": 8,
+          "baselineDps": 618612.3484,
+          "baselineDpsError": 143.4349,
+          "weights": {
+            "Crit": 0.720557,
+            "Haste": 0.756661,
+            "Mast": 0.583809,
+            "Vers": 0.483148
+          },
+          "resultSha256": "faa6b58dcf262a6b1d59fb94d016e2aa5655dfabcf5d247358629f7c32600f6b",
+          "timestamp": "2026-08-03T03:44:02Z"
+        },
+        {
+          "reportId": "vw_t5_r2",
+          "seed": "4298683097757419159",
+          "iterations": 25007,
+          "threads": 8,
+          "baselineDps": 618683.0553,
+          "baselineDpsError": 142.8473,
+          "weights": {
+            "Crit": 0.727601,
+            "Haste": 0.754449,
+            "Mast": 0.581239,
+            "Vers": 0.486570
+          },
+          "resultSha256": "0c6e6c2c9ea45104427efead6db52d396a6a1ebf9833be9ce145f97f6f0836ff",
+          "timestamp": "2026-08-03T03:51:24Z"
+        }
+      ]
+    },
+    {
+      "specKey": "Shadow Priest",
+      "profile": "Archon (single- and multi-target)",
+      "scenario": "raid-st",
+      "targets": 1,
+      "status": "accepted",
+      "weights": {
+        "Crit": 0.622817,
+        "Haste": 0.605815,
+        "Mast": 0.628948,
+        "Vers": 0.484319
+      },
+      "maxRelativeDrift": 0.010036,
+      "baselineDpsRelativeDrift": 0.000030,
+      "simcVersion": "1205-01",
+      "simcRevision": "229259b",
+      "gameBuild": "12.1.0.68914 PTR",
+      "simulatedAt": "2026-08-03T04:03:16Z",
+      "profileSource": "https://github.com/simulationcraft/simc/blob/229259b575bbb55bf0d1cfc70bd2d4a7920e2dff/profiles/generators/MID2/MID2_Generate_Priest.simc",
+      "profileFile": "MID2_Priest_Shadow_Archon.simc",
+      "profileSha256": "1a98d4b0ad86a23e2671b8022867dea90898b513610af5025bf18537f8824b08",
+      "runs": [
+        {
+          "reportId": "archonp_t1_r1",
+          "seed": "1631150927411814559",
+          "iterations": 25003,
+          "threads": 4,
+          "baselineDps": 215823.1865,
+          "baselineDpsError": 58.3886,
+          "weights": {
+            "Crit": 0.623486,
+            "Haste": 0.602775,
+            "Mast": 0.628772,
+            "Vers": 0.485425
+          },
+          "resultSha256": "f3780faff913aa894e98b5b4998cb1c51dcb20a8746be7a59a51afeb43d90782",
+          "timestamp": "2026-08-03T03:57:07Z"
+        },
+        {
+          "reportId": "archonp_t1_r2",
+          "seed": "14374597846494418084",
+          "iterations": 25003,
+          "threads": 4,
+          "baselineDps": 215829.5725,
+          "baselineDpsError": 58.7973,
+          "weights": {
+            "Crit": 0.622148,
+            "Haste": 0.608855,
+            "Mast": 0.629125,
+            "Vers": 0.483213
+          },
+          "resultSha256": "05b9f85a1c800d078a980cecabf9e5fd04eadfc8604a3b2423fb99b72a46d361",
+          "timestamp": "2026-08-03T04:03:16Z"
+        }
+      ]
+    },
+    {
+      "specKey": "Shadow Priest",
+      "profile": "Archon (single- and multi-target)",
+      "scenario": "aoe-5t",
+      "targets": 5,
+      "status": "accepted",
+      "weights": {
+        "Crit": 0.648994,
+        "Haste": 0.587126,
+        "Mast": 0.591598,
+        "Vers": 0.482082
+      },
+      "maxRelativeDrift": 0.010826,
+      "baselineDpsRelativeDrift": 0.000076,
+      "simcVersion": "1205-01",
+      "simcRevision": "229259b",
+      "gameBuild": "12.1.0.68914 PTR",
+      "simulatedAt": "2026-08-03T04:08:00Z",
+      "profileSource": "https://github.com/simulationcraft/simc/blob/229259b575bbb55bf0d1cfc70bd2d4a7920e2dff/profiles/generators/MID2/MID2_Generate_Priest.simc",
+      "profileFile": "MID2_Priest_Shadow_Archon.simc",
+      "profileSha256": "1a98d4b0ad86a23e2671b8022867dea90898b513610af5025bf18537f8824b08",
+      "runs": [
+        {
+          "reportId": "archonp_t5_r1",
+          "seed": "7994140411143670775",
+          "iterations": 25003,
+          "threads": 4,
+          "baselineDps": 601537.3599,
+          "baselineDpsError": 164.8111,
+          "weights": {
+            "Crit": 0.649864,
+            "Haste": 0.585486,
+            "Mast": 0.589043,
+            "Vers": 0.479473
+          },
+          "resultSha256": "99882817cc6a1aead0edd1b7be320263427648f2ca2d286d1eb1d058abb4d505",
+          "timestamp": "2026-08-03T04:07:12Z"
+        },
+        {
+          "reportId": "archonq_t5_r2",
+          "seed": "5209068470611076817",
+          "iterations": 25003,
+          "threads": 4,
+          "baselineDps": 601491.8470,
+          "baselineDpsError": 165.4095,
+          "weights": {
+            "Crit": 0.648125,
+            "Haste": 0.588767,
+            "Mast": 0.594152,
+            "Vers": 0.484692
+          },
+          "resultSha256": "ca955850c633ac99efece68fa8a92d4e264a948f217343f68c00cc977c80ef4c",
+          "timestamp": "2026-08-03T04:08:00Z"
+        }
+      ]
+    }
+  ]
+}

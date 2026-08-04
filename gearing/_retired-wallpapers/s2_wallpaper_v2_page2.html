@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>WoW Midnight Season 2 - Tier Sets, Lairs, Prey and Crafting (sheet 2)</title>
+<style>
+  :root{
+    --adv:#4ee06a; --vet:#4aa8ff; --champ:#c07cf5; --hero:#ff9436; --myth:#f2d698;
+    --t1:#e9eef7; --t2:#96a4b8; --t3:#697990; --t4:#4f5d72;
+    --line:rgba(255,255,255,.075);
+    --panel:rgba(255,255,255,.021);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:2560px;height:1440px;overflow:hidden}
+  body{
+    background:#05070a;
+    font-family:"Inter","Inter Display",sans-serif;
+    color:var(--t1);
+    -webkit-font-smoothing:antialiased;
+    position:relative;
+  }
+  /* ---------- background ---------- */
+  .bg{position:absolute;inset:0;z-index:0}
+  .bg .glow{position:absolute;border-radius:50%;filter:blur(140px)}
+  .g1{width:1500px;height:900px;left:-320px;top:-380px;background:radial-gradient(circle,rgba(60,110,180,.16),transparent 66%)}
+  .g2{width:1400px;height:900px;right:-300px;top:-300px;background:radial-gradient(circle,rgba(150,110,220,.13),transparent 66%)}
+  .g3{width:1900px;height:700px;left:640px;bottom:-420px;background:radial-gradient(circle,rgba(230,200,130,.075),transparent 68%)}
+  .grid{position:absolute;inset:0;
+    background-image:linear-gradient(rgba(255,255,255,.016) 1px,transparent 1px),
+                     linear-gradient(90deg,rgba(255,255,255,.016) 1px,transparent 1px);
+    background-size:64px 64px;
+    -webkit-mask-image:radial-gradient(ellipse 78% 68% at 50% 42%,#000 32%,transparent 100%);
+  }
+  .vig{position:absolute;inset:0;background:radial-gradient(ellipse 100% 84% at 50% 46%,transparent 44%,rgba(0,0,0,.6) 100%)}
+  /* track-source rows */
+  .src-row{display:flex;align-items:flex-start;gap:13px;padding:9px 0 9.5px;border-bottom:1px solid rgba(255,255,255,.035)}
+  .src-row:last-child{border-bottom:none}
+  .src-row .band{width:3px;align-self:stretch;border-radius:2px;flex:none}
+  .src-row .nm{width:118px;flex:none}
+  .src-row .nm b{display:block;font-size:13.5px;font-weight:700;letter-spacing:.2px}
+  .src-row .nm i{display:block;font-style:normal;font-family:"JetBrains Mono","DejaVu Sans Mono",monospace;
+                 font-size:11.5px;color:var(--t3);font-weight:600;margin-top:2px}
+  .src-row .ws{flex:1;font-size:12.2px;color:var(--t2);line-height:1.5}
+  .src-row .ws b{color:var(--t1);font-weight:600}
+
+  /* calendar */
+  .cal{display:flex;flex-direction:column}
+  .cal .r{display:flex;gap:14px;padding:8.5px 0 9px;border-bottom:1px solid rgba(255,255,255,.035)}
+  .cal .r:last-child{border-bottom:none}
+  .cal .d{width:86px;flex:none;font-family:"JetBrains Mono","DejaVu Sans Mono",monospace;font-size:12.5px;
+          font-weight:700;color:var(--t2);letter-spacing:.2px;padding-top:1px}
+  .cal .r.key .d{color:var(--myth)}
+  .cal .r.key .e{color:var(--t1)}
+  .cal .e{flex:1;font-size:12.2px;color:var(--t2);line-height:1.5}
+  .cal .e b{color:var(--t1);font-weight:600}
+  .cal .e em{font-style:italic;color:var(--t3)}
+
+  .page{position:relative;z-index:2;height:1440px;padding:38px 74px 56px 104px;display:flex;flex-direction:column}
+
+  /* ---------- header ---------- */
+  header{display:flex;align-items:flex-end;justify-content:space-between;padding-bottom:20px;
+         border-bottom:1px solid var(--line);margin-bottom:22px}
+  .kicker{font-size:13px;letter-spacing:5.4px;text-transform:uppercase;color:var(--t3);font-weight:600;margin-bottom:9px}
+  h1{font-family:"Inter Display",sans-serif;font-size:60px;font-weight:800;letter-spacing:-1.6px;line-height:1;
+     background:linear-gradient(96deg,#ffffff 8%,#dfe8f5 34%,#f2d698 96%);
+     -webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  .sub{margin-top:11px;font-size:16.5px;color:var(--t2);letter-spacing:.35px}
+  .sub b{color:var(--t1);font-weight:600}
+  .sub .dot{color:var(--t4);margin:0 11px}
+
+  .chips{display:flex;gap:13px}
+  .chip{border:1px solid var(--line);background:var(--panel);border-radius:11px;padding:13px 20px 14px;min-width:150px}
+  .chip .lab{font-size:10.5px;letter-spacing:2.5px;text-transform:uppercase;color:var(--t3);font-weight:600}
+  .chip .val{font-family:"JetBrains Mono","DejaVu Sans Mono",monospace;font-size:27px;font-weight:700;margin-top:6px;letter-spacing:-.6px}
+  .chip.max{border-color:rgba(242,214,152,.34);background:linear-gradient(180deg,rgba(242,214,152,.085),rgba(242,214,152,.015))}
+  .chip.max .val{color:var(--myth);text-shadow:0 0 26px rgba(242,214,152,.42)}
+  .chip .val small{font-size:13px;font-weight:600;color:var(--t2);letter-spacing:0;margin-left:3px}
+
+  /* ---------- layout ---------- */
+  .cols{flex:1;display:grid;grid-template-columns:600px 588px 596px 1fr;gap:26px;min-height:0}
+  .col{display:flex;flex-direction:column;gap:19px;min-height:0}
+
+  .card{border:1px solid var(--line);background:var(--panel);border-radius:13px;padding:17px 19px 18px;position:relative;overflow:hidden}
+  .card::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;
+                background:linear-gradient(90deg,transparent,rgba(255,255,255,.13),transparent)}
+  .card.grow{flex:1;display:flex;flex-direction:column;min-height:0}
+
+  .ch{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:13px}
+  .ch h2{font-size:16px;font-weight:700;letter-spacing:2.6px;text-transform:uppercase;color:var(--t1)}
+  .ch .note{font-size:11.5px;color:var(--t3);letter-spacing:.5px;text-align:right}
+  .ch .note b{color:var(--t2);font-weight:600}
+
+  table{width:100%;border-collapse:collapse;font-family:"JetBrains Mono","DejaVu Sans Mono",monospace;font-variant-numeric:tabular-nums}
+  th{font-family:"Inter",sans-serif;font-size:10px;letter-spacing:1.9px;text-transform:uppercase;color:var(--t3);
+     font-weight:600;text-align:center;padding:0 0 8px;border-bottom:1px solid var(--line)}
+  th.l{text-align:left}
+  td{font-size:15.5px;font-weight:600;text-align:center;padding:6.5px 0;border-bottom:1px solid rgba(255,255,255,.035)}
+  tr:last-child td{border-bottom:none}
+  td.l{text-align:left;font-family:"Inter",sans-serif;font-size:14px;font-weight:600;letter-spacing:.1px}
+  td.dim{color:var(--t3)}
+
+  /* track table */
+  .trk td.l{padding-left:11px;border-left:3px solid}
+  .trk .r6{font-weight:800}
+  .trk tr.adv td.l{border-color:var(--adv);color:var(--adv)}
+  .trk tr.vet td.l{border-color:var(--vet);color:var(--vet)}
+  .trk tr.champ td.l{border-color:var(--champ);color:var(--champ)}
+  .trk tr.hero td.l{border-color:var(--hero);color:var(--hero)}
+  .trk tr.myth td.l{border-color:var(--myth);color:var(--myth)}
+  .trk tr.myth td{color:var(--myth)}
+  .trk tr.hero td{color:#ffd7ad}
+  .trk tr.champ td{color:#e2c7fb}
+  .trk tr.vet td{color:#bfdcff}
+  .trk tr.adv td{color:#bff0c9}
+  .trk td.cap{position:relative}
+  .trk tr.myth td.cap{background:rgba(242,214,152,.085)}
+  .trk tr.hero td.cap{background:rgba(255,148,54,.06)}
+
+  .over{margin-top:11px;padding-top:12px;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px}
+  .ov{border:1px solid rgba(242,214,152,.2);border-radius:9px;padding:9px 10px;background:rgba(242,214,152,.035)}
+  .ov .n{font-family:"JetBrains Mono","DejaVu Sans Mono",monospace;font-size:22px;font-weight:800;color:var(--myth);letter-spacing:-.5px}
+  .ov .k{font-size:9.5px;letter-spacing:1.6px;text-transform:uppercase;color:var(--t3);font-weight:600;margin-bottom:3px}
+  .ov .d{font-size:11px;color:var(--t2);margin-top:4px;line-height:1.35}
+
+  /* crest strip */
+  .crests{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:12px}
+  .cr{border:1px solid var(--line);border-radius:8px;padding:8px 6px;text-align:center;background:rgba(255,255,255,.014)}
+  .cr .nm{font-size:10.5px;font-weight:700;letter-spacing:1.1px;text-transform:uppercase}
+  .cr .src{font-size:10px;color:var(--t3);margin-top:4px;font-family:"JetBrains Mono","DejaVu Sans Mono",monospace;font-weight:600}
+  .cr.a{border-color:rgba(78,224,106,.3)} .cr.a .nm{color:var(--adv)}
+  .cr.v{border-color:rgba(74,168,255,.3)} .cr.v .nm{color:var(--vet)}
+  .cr.c{border-color:rgba(192,124,245,.3)} .cr.c .nm{color:var(--champ)}
+  .cr.h{border-color:rgba(255,148,54,.3)} .cr.h .nm{color:var(--hero)}
+  .cr.m{border-color:rgba(242,214,152,.3)} .cr.m .nm{color:var(--myth)}
+  .costline{display:flex;gap:9px}
+  .cost{flex:1;border:1px solid var(--line);border-radius:9px;padding:9px 11px;background:rgba(255,255,255,.014)}
+  .cost .k{font-size:9.5px;letter-spacing:1.6px;text-transform:uppercase;color:var(--t3);font-weight:600}
+  .cost .v{font-family:"JetBrains Mono","DejaVu Sans Mono",monospace;font-size:17px;font-weight:700;margin-top:4px;color:var(--t1)}
+  .cost .v em{font-style:normal;font-size:11.5px;color:var(--t2);font-weight:600;font-family:"Inter",sans-serif}
+
+  /* raid */
+  .bosses{display:grid;grid-template-columns:1fr 1fr;gap:4px 16px;margin-bottom:13px}
+  .bo{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--t2);padding:2.5px 0}
+  .bo i{font-family:"JetBrains Mono","DejaVu Sans Mono",monospace;font-style:normal;font-size:10.5px;color:var(--t4);width:15px;font-weight:700}
+  .bo.fin{color:var(--myth);font-weight:700}
+  .bo.fin i{color:var(--myth)}
+  .rd td.l{padding-left:11px;border-left:3px solid}
+  .rd tr.lfr td.l{border-color:#7f8c9e;color:#b6c2d1}
+  .rd tr.nor td.l{border-color:var(--vet);color:#8ec6ff}
+  .rd tr.hc td.l{border-color:var(--champ);color:#d3b0fb}
+  .rd tr.myt td.l{border-color:var(--myth);color:var(--myth)}
+  .rd td.vr{color:var(--t2)}
+  .rd tr.myt td.pk{color:var(--myth);font-weight:800;background:rgba(242,214,152,.09)}
+
+  /* dungeons */
+  .dg{display:flex;justify-content:space-between;align-items:center;font-size:13px;padding:4.2px 0;
+      border-bottom:1px solid rgba(255,255,255,.035)}
+  .dg:last-child{border-bottom:none}
+  .dg .n{color:var(--t1);font-weight:600}
+  .dg .n em{font-style:normal;font-size:9.5px;font-weight:700;letter-spacing:1.2px;color:#0a0d12;
+            background:var(--myth);padding:1.5px 5px;border-radius:4px;margin-left:7px;vertical-align:1.5px}
+  .dg .x{font-family:"JetBrains Mono","DejaVu Sans Mono",monospace;font-size:12px;color:var(--t3);font-weight:600}
+  .dg .x b{color:var(--t2);font-weight:600;margin-left:9px}
+
+  .mp tr.hl td{background:rgba(242,214,152,.08)}
+  .mp tr.hl td:first-child{color:var(--myth);font-weight:800}
+  .mp tr.cap td{color:var(--t3)}
+
+  /* vault */
+  .vt{display:grid;grid-template-columns:1fr;gap:7px}
+  .vrow{display:flex;align-items:center;justify-content:space-between;border:1px solid var(--line);
+        border-radius:8px;padding:8px 12px;background:rgba(255,255,255,.014)}
+  .vrow .k{font-size:12.5px;font-weight:600;color:var(--t1)}
+  .vrow .k span{color:var(--t3);font-size:11px;font-weight:500;margin-left:7px}
+  .vrow .n{font-family:"JetBrains Mono","DejaVu Sans Mono",monospace;font-size:13px;font-weight:700;color:var(--t2);letter-spacing:.4px}
+
+  /* changes */
+  .ch3 li{list-style:none;font-size:12.5px;color:var(--t2);line-height:1.45;padding:5px 0 5px 15px;position:relative}
+  .ch3 li::before{content:"";position:absolute;left:0;top:11px;width:5px;height:5px;border-radius:50%;background:var(--hero);opacity:.85}
+  .ch3 li b{color:var(--t1);font-weight:600}
+  .ch3 li span{color:var(--myth);font-family:"JetBrains Mono","DejaVu Sans Mono",monospace;font-weight:700}
+  .ch3.wk li{padding-left:24px;font-size:12.8px;padding-top:6.5px;padding-bottom:6.5px}
+  .ch3.wk li::before{content:"";left:0;top:9px;width:12px;height:12px;border-radius:3px;background:none;
+                     border:1.5px solid rgba(255,148,54,.55);opacity:1}
+
+  /* footer */
+  footer{display:flex;align-items:center;justify-content:space-between;padding:15px 0 18px;margin-top:19px;
+         border-top:1px solid var(--line);font-size:11.5px;color:var(--t3);letter-spacing:.3px}
+  footer .lg{display:flex;gap:22px;align-items:center}
+  footer .lg i{font-style:normal}
+  footer sup{color:var(--hero);font-weight:700}
+  footer .rt{color:var(--t2);text-align:right;line-height:1.5}
+  sup.d{color:var(--t4);font-size:9px;font-weight:700;margin-left:1px}
+  sup.s{color:var(--hero);font-size:9px;font-weight:700;margin-left:1px;opacity:.8}
+</style>
+</head>
+<body>
+<style>
+  /* sheet 2 carries less data than sheet 1, so it runs 3 wider columns
+     with larger type rather than stretching four sparse ones */
+  .cols{grid-template-columns:1fr 1fr 1fr !important;gap:30px}
+  .card{padding:20px 23px 21px}
+  .col{gap:22px}
+  .src-row{padding:12px 0 12.5px}
+  .src-row .ws{font-size:13.2px}
+  .src-row .nm{width:132px}
+  .src-row .nm b{font-size:14.5px}
+  .src-row .nm i{font-size:12px}
+  td{font-size:16.5px;padding:8.5px 0}
+  th{font-size:10.5px;padding-bottom:9px}
+  td.l{font-size:14.8px}
+  .ch h2{font-size:16.5px}
+  .cal .e{font-size:13px}
+  .cal .r{padding:10px 0 10.5px}
+  .ch3 li{font-size:13.4px;padding:7px 0 7px 16px}
+  .cost .v{font-size:19px}
+</style>
+
+<div class="bg">
+  <div class="glow g1"></div><div class="glow g2"></div><div class="glow g3"></div>
+  <div class="grid"></div><div class="vig"></div>
+</div>
+
+<div class="page">
+  <header>
+    <div>
+      <div class="kicker">World of Warcraft &nbsp;&middot;&nbsp; Midnight &nbsp;&middot;&nbsp; Patch 12.1 &nbsp;&middot;&nbsp; Sheet 2 of 2</div>
+      <h1>TIER SETS, LAIRS, PREY &amp; CRAFTING</h1>
+      <div class="sub">
+        What the gearing sheet leaves out
+        <span class="dot">&middot;</span> Season opens <b>Aug 18, 2026</b>
+        <span class="dot">&middot;</span> pairs with <b>Season 2 &mdash; The Curse of Ula'tek</b>
+      </div>
+    </div>
+    <div class="chips">
+      <div class="chip"><div class="lab">Lair</div><div class="val" style="color:#8ec6ff">4<small>difficulties</small></div></div>
+      <div class="chip"><div class="lab">Tier</div><div class="val" style="color:#d3b0fb">36<small>13 classes</small></div></div>
+      <div class="chip max"><div class="lab">Season Max ilvl</div><div class="val">344</div></div>
+    </div>
+  </header>
+
+  <div class="cols">
+
+    <!-- ============ COLUMN 1 ============ -->
+    <div class="col">
+      <div class="card">
+        <div class="ch"><h2>Reading a Token Name</h2><div class="note">Prefix = armor &nbsp;&middot;&nbsp; suffix = slot</div></div>
+        <div style="font-size:12.6px;color:var(--t2);line-height:1.55;margin-bottom:10px">
+          Prefix = armor, suffix = slot &mdash; so <b style="color:var(--myth)">Venomcast Relic</b> is mail legs.<br>
+          <span style="color:var(--vet)">Venomwoven</span> cloth &middot;
+          <span style="color:var(--adv)">Venomcured</span> leather &middot;
+          <span style="color:var(--champ)">Venomcast</span> mail &middot;
+          <span style="color:var(--hero)">Venomforged</span> plate
+        </div>
+        <table>
+          <tr><th class="l">Suffix</th><th class="l" style="padding-left:14px">Slot</th><th>Boss</th></tr>
+          <tr><td class="l">Effigy</td><td class="l" style="padding-left:14px">Head</td><td class="dim">6</td></tr>
+          <tr><td class="l">Remnant</td><td class="l" style="padding-left:14px">Shoulders</td><td class="dim">3&ndash;4<sup class="s">&dagger;</sup></td></tr>
+          <tr><td class="l">Icon</td><td class="l" style="padding-left:14px">Chest</td><td class="dim">3&ndash;4<sup class="s">&dagger;</sup></td></tr>
+          <tr><td class="l">Idol</td><td class="l" style="padding-left:14px">Hands</td><td class="dim">2</td></tr>
+          <tr><td class="l">Relic</td><td class="l" style="padding-left:14px">Legs</td><td class="dim">5</td></tr>
+        </table>
+        <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-size:12.2px;color:var(--t3);line-height:1.55">
+          Ula'tek instead drops <b style="color:var(--myth)">Slumbering Coil Curio</b>, a single omni-token that
+          trades for <b style="color:var(--t2)">any</b> slot.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="ch"><h2>Crafting</h2><div class="note">Spark of Tides</div></div>
+        <div class="costline">
+          <div class="cost"><div class="k">Per piece</div><div class="v">2&ndash;4<em> Sparks</em></div></div>
+          <div class="cost"><div class="k">Onto a track</div><div class="v">80<em> Mistcrests</em></div></div>
+        </div>
+        <div style="margin-top:13px;font-size:13.2px;color:var(--t2);line-height:1.6">
+          A craft costs <b style="color:var(--t1)">2&ndash;4 Sparks of Tides</b>. Adding
+          <b style="color:var(--t1)">80 Mistcrests</b> of a given tier places the finished item on that
+          track &mdash; Hero Mistcrests for a Hero-track craft, Myth for Myth.
+        </div>
+        <div style="margin-top:11px;font-size:12.2px;color:var(--t3);line-height:1.55">
+          Max-quality crafted gear tops out at <b style="color:var(--t2)">331</b><sup class="s">&dagger;</sup>
+          (Myth rank 5, not 6) and qualifies for Ascendant Venomstones, which carry it to
+          <b style="color:var(--myth)">341</b>.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="ch"><h2>Catch-Up &amp; Caches</h2><div class="note">Field Accolades</div></div>
+        <table>
+          <tr><th class="l">Cost</th><th class="l" style="padding-left:14px">Void-Touched Cache gives</th></tr>
+          <tr><td class="l">200</td><td class="l" style="padding-left:14px;color:var(--adv)">A Warbound Adventurer piece</td></tr>
+          <tr><td class="l">500</td><td class="l" style="padding-left:14px;color:var(--vet)">A random Veteran slot</td></tr>
+          <tr><td class="l">750</td><td class="l" style="padding-left:14px;color:var(--vet)">A Veteran slot <b>you choose</b></td></tr>
+        </table>
+        <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-size:12.2px;color:var(--t3);line-height:1.55">
+          Field Accolades come from Coiled Isle world content. <b style="color:var(--t2)">Season 1 caches are retired</b> &mdash;
+          old currency will not buy Season 2 gear. Pinnacle Caches out in the world pay Veteran-track pieces.
+        </div>
+      </div>
+
+      <div class="card grow">
+        <div class="ch"><h2>Coiled Isle Renown</h2><div class="note">Zul'Jarra's Forces</div></div>
+        <div style="font-size:13.2px;color:var(--t2);line-height:1.6">
+          A <b style="color:var(--t1)">20-level</b> renown track fed by Coiled Isle quests, rares and weeklies.
+          Pays out gear, profession goods, three mounts, transmog, decor and a title.
+        </div>
+        <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-size:12.2px;color:var(--t3);line-height:1.55">
+          Reward item levels are <b style="color:var(--t2)">not published</b> on the PTR. Any chart quoting exact
+          renown item levels today is guessing.
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ COLUMN 2 ============ -->
+    <div class="col">
+      <div class="card">
+        <div class="ch"><h2>Tier 36 &mdash; Set Tokens</h2><div class="note">The Venomous Abyss</div></div>
+        <table>
+          <tr><th class="l">Slot</th><th class="l" style="padding-left:14px">Token boss</th><th>Boss</th></tr>
+          <tr><td class="l">Head</td><td class="l" style="padding-left:14px">The Twin Fangs</td><td class="dim">6</td></tr>
+          <tr><td class="l">Shoulders</td><td class="l" style="padding-left:14px">The Lost Explorers</td><td class="dim">3&ndash;4<sup class="s">&dagger;</sup></td></tr>
+          <tr><td class="l">Chest</td><td class="l" style="padding-left:14px">Vashnik the Malignant</td><td class="dim">3&ndash;4<sup class="s">&dagger;</sup></td></tr>
+          <tr><td class="l">Hands</td><td class="l" style="padding-left:14px">Entombed Sentinels</td><td class="dim">2</td></tr>
+          <tr><td class="l">Legs</td><td class="l" style="padding-left:14px">Sszorak</td><td class="dim">5</td></tr>
+          <tr class="hl"><td class="l" style="color:var(--myth)">Any slot</td><td class="l" style="padding-left:14px;color:var(--myth)">Ula'tek &mdash; omni-token</td><td class="dim">8</td></tr>
+        </table>
+        <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-size:12.2px;color:var(--t3);line-height:1.55">
+          <b style="color:var(--t2)">Nek'zali</b> (1) and <b style="color:var(--t2)">The Coiled Altar</b> (7) drop no token.
+          Token item levels follow the raid table on sheet 1 &mdash; <b style="color:var(--t2)">279</b> Raid Finder up to
+          <b style="color:var(--myth)">344</b> from Mythic bosses 7&ndash;8.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="ch"><h2>Armor Token Groups</h2><div class="note">4 groups &nbsp;&middot;&nbsp; 13 classes</div></div>
+        <div class="src-row">
+          <div class="band" style="background:var(--vet)"></div>
+          <div class="nm"><b style="color:var(--vet)">Woven</b></div>
+          <div class="ws">Mage &middot; Priest &middot; Warlock</div>
+        </div>
+        <div class="src-row">
+          <div class="band" style="background:var(--adv)"></div>
+          <div class="nm"><b style="color:var(--adv)">Cured</b></div>
+          <div class="ws">Demon Hunter &middot; Druid &middot; Monk &middot; Rogue</div>
+        </div>
+        <div class="src-row">
+          <div class="band" style="background:var(--champ)"></div>
+          <div class="nm"><b style="color:var(--champ)">Cast</b></div>
+          <div class="ws">Evoker &middot; Hunter &middot; Shaman</div>
+        </div>
+        <div class="src-row">
+          <div class="band" style="background:var(--hero)"></div>
+          <div class="nm"><b style="color:var(--hero)">Forged</b></div>
+          <div class="ws">Death Knight &middot; Paladin &middot; Warrior</div>
+        </div>
+        <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-size:12.2px;color:var(--t3);line-height:1.55">
+          <b style="color:var(--t2)">The Catalyst</b> converts eligible non-raid gear into a tier piece, and now carries
+          the original item's secondary stats <i>and</i> cantrip effects across.
+        </div>
+      </div>
+
+      <div class="card grow">
+        <div class="ch"><h2>What This Sheet Adds</h2><div class="note">vs. sheet 1</div></div>
+        <ul class="ch3">
+          <li><b>Lairs and Training Grounds</b> were named in the Aug 11 row and never explained.</li>
+          <li><b>Prey</b> appeared in three track rows with no numbers at all. All nine values are here.</li>
+          <li><b>Tier sets</b> were never sourced &mdash; sheet 1 says "the tier piece" once, without saying which boss drops what.</li>
+          <li><b>Crafting</b> was three scattered fragments. The Spark and Mistcrest costs are here.</li>
+          <li><b>The three Delves</b> were never named, though every raid boss and dungeon is listed.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ============ COLUMN 3 ============ -->
+    <div class="col">
+      <div class="card">
+        <div class="ch"><h2>Prey Hunts</h2><div class="note">Outdoor &middot; the Coiled Isle</div></div>
+        <table>
+          <tr><th class="l">Hunt</th><th>Loot</th><th>Vault</th><th class="l" style="padding-left:14px">Crests</th></tr>
+          <tr><td class="l">Normal</td><td style="color:#bff0c9">266</td><td style="color:#bfdcff">279</td><td class="l" style="padding-left:14px;color:var(--adv)">10 Adventurer</td></tr>
+          <tr><td class="l">Hard</td><td style="color:#bfdcff">279</td><td style="color:#e2c7fb">292</td><td class="l" style="padding-left:14px;color:var(--vet)">10 Veteran</td></tr>
+          <tr><td class="l">Nightmare</td><td style="color:#e2c7fb">292</td><td style="color:#ffd7ad">305</td><td class="l" style="padding-left:14px;color:var(--champ)">10 Champion</td></tr>
+        </table>
+        <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-size:12.2px;color:var(--t3);line-height:1.55">
+          Loot lands on the <b style="color:var(--t2)">first rank</b> of a track; the vault reward is one track higher.
+          Nightmare Prey Champion boxes also drop <b style="color:var(--t2)">Ascendant Venomstones</b>.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="ch"><h2>Lairs &amp; Training Grounds</h2><div class="note">New in 12.1</div></div>
+        <div style="font-size:13.2px;color:var(--t2);line-height:1.6;margin-bottom:11px">
+          The Season 2 Lair is <b style="color:var(--t1)">The Tidebound Grotto</b>, on the Coiled Isle.
+        </div>
+        <div class="cal">
+          <div class="r"><div class="d">Aug 11</div><div class="e"><b>World difficulty</b> opens with the pre-season week.</div></div>
+          <div class="r key"><div class="d">Aug 18</div><div class="e"><b>Normal, Heroic and Mythic</b> open &mdash; all flexible-scaling.</div></div>
+        </div>
+        <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-size:12.2px;color:var(--t3);line-height:1.55">
+          <b style="color:var(--hero)">Item levels are not published yet.</b> Blizzard has confirmed the Lair and its four
+          difficulties, but no reward item levels as of Aug 1 &mdash; and nothing at all about Training Grounds rewards.
+          Treat any site quoting exact Lair item levels today as invented.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="ch"><h2>Ritual Sites</h2><div class="note">Coiled Isle &middot; tiers 1&ndash;6</div></div>
+        <div style="font-size:13.2px;color:var(--t2);line-height:1.6">
+          New in Season 2: Ritual Sites tiers <b style="color:var(--t1)">1&ndash;6</b> pay out vault credit and crests
+          <b style="color:var(--t1)">identical to the matching Delve tier</b> &mdash; a Tier 5 Ritual Site is worth the
+          same as a Tier 5 Delve.
+        </div>
+        <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-size:12.2px;color:var(--t3);line-height:1.55">
+          They feed the <b style="color:var(--t2)">World row</b> of the Great Vault alongside Delves and Prey, so they
+          are interchangeable filler for the 2 / 4 / 8 thresholds on sheet 1.
+        </div>
+      </div>
+
+      <div class="card grow">
+        <div class="ch"><h2>Season 2 Delves</h2><div class="note">Tier table on sheet 1</div></div>
+        <div class="src-row">
+          <div class="band" style="background:var(--vet)"></div>
+          <div class="nm"><b style="color:var(--t1)">Ring of Glory</b></div>
+          <div class="ws">Standard Delve, tiers 1&ndash;11.</div>
+        </div>
+        <div class="src-row">
+          <div class="band" style="background:var(--vet)"></div>
+          <div class="nm"><b style="color:var(--t1)">Gnarldor Isle</b></div>
+          <div class="ws">Standard Delve, tiers 1&ndash;11.</div>
+        </div>
+        <div class="src-row">
+          <div class="band" style="background:var(--myth)"></div>
+          <div class="nm"><b style="color:var(--myth)">Venomfall Deeps</b></div>
+          <div class="ws">The <b>Nemesis</b> Delve &mdash; Season 2's challenge variant, on the island's north end.</div>
+        </div>
+        <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-size:12.2px;color:var(--t3);line-height:1.55">
+          Gear caps at <b style="color:var(--t2)">Tier 8</b>. Tier 11 Bountiful Delves drop Ascendant Venomstones, and
+          Bountiful Coffers can roll Hero gear once Delver's Journey reaches rank 9.
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="lg">
+      <i><sup class="s">&dagger;</sup> single source, or sources disagree &mdash; treat as provisional</i>
+      <i style="color:var(--t4)">everything else cross-confirmed by two or more independent sources</i>
+    </div>
+    <div class="rt">
+      Compiled Aug 1, 2026 from Blizzard PTR notes &amp; developer posts, Warcraft Wiki, Wowhead and Icy&nbsp;Veins &mdash;
+      <b style="color:var(--t3)">pre-launch PTR data, subject to change before Aug 18</b>.<br>
+      Sheet 1 remains the reference for upgrade tracks, the raid, Mythic+, Delve tiers and the Great Vault.
+    </div>
+  </footer>
+</div>
+
+</body>
+</html>
