@@ -11,16 +11,18 @@
 -->
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-YM4EgqtR6sb4A/8cdohno6jv4mGv3GOwKQGV6rSCEIg='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src data:; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-xMfp7cG2pr3dLCHZh1wMurVTVc+pXX5wmUmCiOIibJ0='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src data:; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="riles22">
 <title>Curse of Ula'tek — 12.1 PTR Spec Tracker</title>
-<!-- The brand mark, as favicon: Ula'tek's serpent coiled into an S — the patch's
-     villain drawn as the letter that means "top tier". Site gold on the site's dark
-     violet, so the tab matches the page. Shipped as an inline data URI because the site
-     is one self-contained file: nothing extra to host on Pages, works from file:// too.
-     The same artwork renders inline in the masthead (.brandmark). -->
-<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22><rect x=%222%22 y=%222%22 width=%2260%22 height=%2260%22 rx=%2214%22 fill=%22%23130B22%22 stroke=%22%23B57BEE%22 stroke-opacity=%22.45%22 stroke-width=%222.5%22/><path d=%22M44.5 18.5 C42 12.5 36.5 10.5 31.5 10.5 C23.5 10.5 18 14.8 18 20.5 C18 26.6 24.5 29 32 32 C39.5 35 46 37.4 46 43.5 C46 49.5 40.5 53.5 32.5 53.5 C26.8 53.5 21.5 51.4 19.5 46.5%22 fill=%22none%22 stroke=%22%23F0C24B%22 stroke-width=%228.6%22 stroke-linecap=%22round%22/><circle cx=%2244.8%22 cy=%2217.6%22 r=%225.7%22 fill=%22%23F0C24B%22/><circle cx=%2246.6%22 cy=%2216.2%22 r=%221.5%22 fill=%22%23130B22%22/></svg>'>
+<!-- The brand mark, as favicon: three tier bars in the grid's own band colours —
+     S gold, A+ violet, A blue — with a rise arrow through them. The product drawn as
+     itself: rankings you climb. Deliberately patch-agnostic, so the mark survives 12.1
+     into Season 2 and the gearing guide. Shipped as an inline data URI because the site
+     is one self-contained file (the CSP grants img-src data: for exactly this).
+     The same artwork renders inline in the masthead (.brandmark), where it is also the
+     home button. -->
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22><rect x=%222%22 y=%222%22 width=%2260%22 height=%2260%22 rx=%2214%22 fill=%22%23130B22%22 stroke=%22%23B57BEE%22 stroke-opacity=%22.45%22 stroke-width=%222.5%22/><rect x=%2212%22 y=%2213%22 width=%2240%22 height=%229%22 rx=%224.5%22 fill=%22%23F0C24B%22/><rect x=%2212%22 y=%2227.5%22 width=%2229%22 height=%229%22 rx=%224.5%22 fill=%22%23C77DFF%22/><rect x=%2212%22 y=%2242%22 width=%2219%22 height=%229%22 rx=%224.5%22 fill=%22%236AA8F0%22/><path d=%22M21 51 L44 24%22 fill=%22none%22 stroke=%22%23EFEAF9%22 stroke-width=%224.6%22 stroke-linecap=%22round%22/><path d=%22M34.5 21.5 L46 22.5 L44 33.5%22 fill=%22none%22 stroke=%22%23EFEAF9%22 stroke-width=%224.6%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/></svg>'>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- Fonts load async from the main script (CSP-safe, no inline handler) so first paint
@@ -64,6 +66,9 @@
   .masthead{position:relative; overflow:hidden; border-bottom:1px solid var(--edge)}
   .starfield{position:absolute; inset:0; pointer-events:none; opacity:.7}
   .brandmark{width:34px; height:34px; vertical-align:-5px; margin-right:11px}
+  .brandlink{display:inline-block; line-height:0; border-radius:10px}
+  .brandlink:hover .brandmark rect:first-child{stroke-opacity:.9}
+  .brandlink:focus-visible{outline:2px solid var(--accent-2); outline-offset:2px}
   @media(max-width:560px){ .brandmark{width:26px; height:26px; vertical-align:-4px; margin-right:8px} }
   .masthead-inner{position:relative; max-width:1120px; margin:0 auto; padding:34px 20px 26px}
   .eyebrow{
@@ -649,7 +654,7 @@
   <canvas class="starfield" id="stars" aria-hidden="true"></canvas>
   <div class="masthead-inner">
     <p class="eyebrow">WoW Midnight · Patch 12.1 PTR</p>
-    <h1 class="title"><svg class="brandmark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#130B22" stroke="#B57BEE" stroke-opacity=".45" stroke-width="2.5"/><path d="M44.5 18.5 C42 12.5 36.5 10.5 31.5 10.5 C23.5 10.5 18 14.8 18 20.5 C18 26.6 24.5 29 32 32 C39.5 35 46 37.4 46 43.5 C46 49.5 40.5 53.5 32.5 53.5 C26.8 53.5 21.5 51.4 19.5 46.5" fill="none" stroke="#F0C24B" stroke-width="8.6" stroke-linecap="round"/><circle cx="44.8" cy="17.6" r="5.7" fill="#F0C24B"/><circle cx="46.6" cy="16.2" r="1.5" fill="#130B22"/></svg><span class="curse">Curse of Ula'tek</span> — Spec Tracker</h1>
+    <h1 class="title"><a id="brandhome" class="brandlink" href="#" title="Back to the default view"><svg class="brandmark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#130B22" stroke="#B57BEE" stroke-opacity=".45" stroke-width="2.5"/><rect x="12" y="13" width="40" height="9" rx="4.5" fill="#F0C24B"/><rect x="12" y="27.5" width="29" height="9" rx="4.5" fill="#C77DFF"/><rect x="12" y="42" width="19" height="9" rx="4.5" fill="#6AA8F0"/><path d="M21 51 L44 24" fill="none" stroke="#EFEAF9" stroke-width="4.6" stroke-linecap="round"/><path d="M34.5 21.5 L46 22.5 L44 33.5" fill="none" stroke="#EFEAF9" stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a><span class="curse">Curse of Ula'tek</span> — Spec Tracker</h1>
     <div class="rule"></div>
     <!-- One sentence of lede; the mental model folds. This paragraph ran five lines and
          was ~40% of a 329px masthead sitting directly above a page people check daily. -->
@@ -813,9 +818,6 @@
       <div class="creditlist" id="creatorcredits"></div>
       <p class="fine" style="margin-top:13px">Tier &amp; performance data from <a href="https://www.icy-veins.com/" target="_blank" rel="noopener">Icy&nbsp;Veins</a> · <a href="https://www.method.gg/" target="_blank" rel="noopener">Method</a> · <a href="https://www.wowhead.com/" target="_blank" rel="noopener">Wowhead</a> · <a href="https://www.archon.gg/wow" target="_blank" rel="noopener">Archon</a> · <a href="https://www.warcraftlogs.com/" target="_blank" rel="noopener">Warcraft&nbsp;Logs</a> · <a href="https://murlok.io/" target="_blank" rel="noopener">Murlok.io</a> · <a href="https://bloodmallet.com/" target="_blank" rel="noopener">Bloodmallet</a>. This project aggregates and links back to them — it doesn't replace them.</p>
     </div>
-    <p class="fine">
-      <b style="color:var(--ink-dim)">Maintaining this:</b> this file is <b>built</b> — the data lives in <code>data/specs.json</code>, <code>data/sources.json</code> and <code>data/scales.json</code> in the project repo. Edit the JSON (or let Claude Code run the refresh workflow in <code>CLAUDE.md</code>), then <code>npm test &amp;&amp; npm run build</code> regenerates this file. Self-contained, no external dependencies beyond the web fonts — just open the file in a browser.
-    </p>
     <p class="credit">Made by <a href="https://github.com/riles22" target="_blank" rel="noopener" style="text-decoration:none"><b>riles22</b></a> &nbsp;·&nbsp; Midnight 12.1 PTR Spec Tracker &nbsp;·&nbsp; © 2026
       <span class="keep">An original project — if you share or fork it, please keep the credit.</span>
     </p>
@@ -2174,6 +2176,14 @@ function openRowFor(cls, spec){
   if(row){ if(!row.classList.contains('open')) row.click(); row.scrollIntoView({ behavior:"smooth", block:"center" }); }
   return !!row;
 }
+// The masthead mark is the home button: back to the default view. A same-URL navigation
+// with the hash stripped resets every lane of state at once (filters, era, overlays,
+// drawers) — one honest reload rather than chasing each store by hand. href="#" is only
+// the no-JS fallback; the CSP forbids inline handlers, so the listener attaches here.
+document.getElementById("brandhome").addEventListener("click", e => {
+  e.preventDefault();
+  location.href = location.pathname + location.search;
+});
 {
   applyingHash = true;
   const pendingSpec = applyHash();
