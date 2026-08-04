@@ -115,6 +115,23 @@ jobs:
           TRANSCRIPT_API_KEY: ${{ secrets.TRANSCRIPT_API_KEY }}
         run: node src/fetch-transcripts.mjs
 
+      # Deterministic published-date evidence (docs/published-gate-scope.md): reads each
+      # published-bearing registry page and records what the page says about its OWN
+      # update date, BEFORE any agent runs — the publish gate cross-checks stored
+      # `published` values against this copy, so a stale re-read can no longer claim
+      # success unchallenged (the 08-02 icyveins-ptr incident). No credentials; always
+      # exits 0 once evidence is written — an unreachable page is a recorded
+      # degradation the gate works around, never a red night caused by our own fetch.
+      - name: Deterministic published-date evidence
+        run: node src/fetch-published.mjs
+
+      - name: Publish published-date evidence (pre-agent, tamper-evident)
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: published-evidence
+          retention-days: 7
+          path: published-evidence/
+
       # First-party action pinned to the v1-tag commit (unpinned mutable tags are a
       # supply-chain risk in an unattended secret-bearing job); Dependabot proposes
       # reviewed bumps. NOTE: no WCL_* env on either agent step — their only secret
@@ -424,6 +441,16 @@ jobs:
         with:
           name: wcl-evidence
           path: wcl-fetch
+
+      # Same trust construction as the WCL evidence: the gate reads the pre-agent copy,
+      # not the working tree the agents could edit. A missing artifact fails the publish
+      # by design — the fetch step always writes evidence, so absence means the step
+      # itself was skipped or broke.
+      - name: Download published-date evidence (pre-agent artifact)
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: published-evidence
+          path: published-evidence
 
       # Gate 0 (2026-07-18 portfolio audit): the refresh artifact may deliver VALUES,
       # never the rules that judge them. Before this guard, the agent-overlaid working

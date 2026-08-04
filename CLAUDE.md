@@ -395,9 +395,12 @@ src/      build.mjs · template.html · render.mjs · normalize.mjs · validate.
           check-refresh.mjs (manifest/freshness/anomaly gates) ·
           fetch-wcl.mjs + fetch-transcripts.mjs (deterministic pre-agent stages —
           the only WCL / transcript-API credential holders) ·
+          fetch-published.mjs (deterministic pre-agent page-self-date evidence —
+          no credentials; feeds check-refresh's published gate) ·
           wcl-probe.mjs (dispatch-only WCL/diagnostic probe, no standing role)
 test/     normalize · validate · render · build · apply-metrics · apply-ratings ·
-          check-refresh · community-overrides · digest · fetch-transcripts · fetch-wcl
+          check-refresh · community-overrides · digest · fetch-transcripts · fetch-wcl ·
+          fetch-published
 dist/     index.html  (generated — open directly in a browser)
 docs/     working notes (finder-audit.md · security-audit-2026-07.md ·
           cloud-routine.md · portfolio-audit-2026-07-18.md · audit-2026-07-23.md ·
@@ -413,11 +416,11 @@ docs/     working notes (finder-audit.md · security-audit-2026-07.md ·
           the frozen forecast's on-page grading, the +14 PTR-surface sunset, the
           12.2-cycle generalization (PHASES constant), and the gearing-lane stub.
           Phase-1 machinery must land before PHASE_FLIP_DUE (Aug 20).
-          published-gate-scope.md — the SCOPED page-self-date integrity gate
-          (2026-08-04, both owner decisions locked): deterministic published-evidence
+          published-gate-scope.md — the page-self-date integrity gate (2026-08-04,
+          both owner decisions locked; BUILT same day): deterministic published-evidence
           step + staleness threshold, severity split dishonesty-red/lag-heartbeat.
-          NEXT WORK ITEM — closes the gap that let the 08-02 icyveins-ptr rebuild go
-          unseen for two days while the manifest claimed success.)
+          Closes the gap that let the 08-02 icyveins-ptr rebuild go unseen for two
+          days while the manifest claimed success.)
 gearing/  the Season 2 gear & loot explorer — a SELF-CONTAINED subproject (own data/,
           harvesters, validator, tests, build → gearing/wow-s2-gearing.html; see
           gearing/README.md). Imported 2026-08-04 from the standalone project; audited
@@ -450,7 +453,13 @@ OPTIONAL `TRANSCRIPT_API_KEY`) drains the agent-maintained
 (`mode=native` — YouTube's own auto-captions; offsets in ms) into
 `transcript-fetch/` for the agents to distill; a missing key is a clean
 "no-credentials" skip (datacenter IPs can't reach YouTube directly — 2026-07
-bot-wall, android-client workaround failed 2026-07-17). Then the **refresh** job runs a PRIMARY agent and — when a deterministic
+bot-wall, android-client workaround failed 2026-07-17). A third deterministic stage
+(`src/fetch-published.mjs`, no credentials) records what each published-bearing
+registry page says about its own update date into `published-evidence/evidence.json`
+(artifact, pre-agent) — the publish gate cross-checks stored `published` values
+against it and the heartbeat alarms past `published.maxAgeDays`
+(docs/published-gate-scope.md; an unreachable page degrades the cross-check, never
+red). Then the **refresh** job runs a PRIMARY agent and — when a deterministic
 completion check finds the manifest unwritten or failing (the recurring 07-15→07-17
 early-stop failure) — a RECOVERY agent, both Claude
 Code headless with a READ-ONLY token (no push/dispatch scopes, checkout credentials

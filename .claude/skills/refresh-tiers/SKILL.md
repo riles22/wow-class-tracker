@@ -83,16 +83,24 @@ Fetch the current Midnight tier lists live and merge them into `data/specs.json`
   · **M+ only** — three pages (`mythic-ptr-{dps,healer,tank}-tier-list`). Icy Veins
     publishes no PTR raid list. If one ever appears, it needs a registry page + a
     `required-sources` review, not an improvised row.
-  · **Six bands, including `B+`** (S/A+/A/B+/B/C) on its own `icyveins-ptr` scale. The live
-    `icyveins` scale has five and does NOT include B+ — applying a PTR row under the live
-    source id will fail validation, which is the intended backstop.
+  · **Seven bands since 2026-08-02** (S+/S/A+/A/B+/B/C) on its own `icyveins-ptr` scale —
+    upstream added `S+` in its "Update #4" rebuild (owner-set anchors: S+ 100, S 92). The
+    live `icyveins` scale has five and includes neither S+ nor B+ — applying a PTR row
+    under the live source id will fail validation, which is the intended backstop. A NEW
+    band appearing upstream is an owner escalation, never a silent collapse into a
+    neighbor (`scales.json` is CODEOWNERS-owned).
   · **`TBD` is a real upstream state**, not a parse miss. Write it as an explicit `null`
-    (Augmentation Evoker and Vengeance DH were TBD at adoption). Omitting the row instead
-    loses the distinction between "unplaced by the authors" and "we never checked".
+    (Augmentation Evoker and Vengeance DH were TBD at adoption; both placed 2026-08-02).
+    Omitting the row instead loses the distinction between "unplaced by the authors" and
+    "we never checked".
   · **Weekly cadence** — rebuilt Sundays 14:00 CEST on stream, then published. Its
-    `published` date trailing `snapshot` by up to a week is NORMAL and not a finding; a
-    `published` date that stops advancing for more than ~2 weeks IS one (nothing gates it —
-    see the known gap in SOURCES.md).
+    `published` date trailing `snapshot` by up to a week is NORMAL and not a finding.
+    **Re-read `published` from the page EVERY run — never carry the stored value
+    forward.** Since 2026-08-04 it is gated (docs/published-gate-scope.md): a
+    deterministic pre-agent step records what the page itself says, and the publish gate
+    goes red the same night a stored `published` contradicts it; past 9 days the
+    heartbeat alarms. The gate exists because a carried-forward stale value hid the
+    08-02 rebuild for two days.
 - **murlok-style numbers are NOT tiers.** Only the four LIVE tier-list sources feed
   consensus; era-gated lists are shown and feed the projection, never the mean.
 - A new source first needs a scale in `data/scales.json` (check each tier round-trips

@@ -1,9 +1,21 @@
 # Published-date gate — scope
 
 *2026-08-04. Both owner decisions locked in-session (Riley): deterministic evidence step +
-staleness threshold; severity split by violation class. Next work item after Projection v8
-(#41). Implementation is a CODEOWNERS-boundary change (gate contract + gatekeeper code +
-workflow), so it lands as an owner-merged interactive PR, not nightly-agent work.*
+staleness threshold; severity split by violation class. Implementation is a
+CODEOWNERS-boundary change (gate contract + gatekeeper code + workflow), so it lands as
+an owner-merged interactive PR, not nightly-agent work.*
+
+**STATUS: BUILT, same day, same PR** (owner direction: "put implementation in the same
+one"). Everything in §Design shipped as specced — `src/fetch-published.mjs` +
+`checkPublished()` / the freshness sweep in `check-refresh.mjs`, the contract block,
+nightly.yml wiring, skill + SOURCES.md notes, 10 new tests. Two verifications beyond the
+suite: the real manifest/age gates ran green against the committed data, and the fetcher
+ran against the live pages from the dev sandbox (whose egress proxy 403s icyveins —
+which exercised the degradation path end to end: unresolved evidence → degraded notice,
+never red). One deliberate delta from §3: evidence `problems[]` recorded by the fetch
+step (a published block with no pages probe / a page with no URL) also fail `--manifest`
+red — the fetch step sees config bugs the gate's own self-check can't, and both are the
+same "gate pointed at nothing" class.
 
 ## The incident this closes
 
