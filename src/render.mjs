@@ -2,14 +2,14 @@
    sim-derived fight-profile labels, collect metadata. Pure functions — no
    filesystem access. */
 
-import { consensusFor, isLiveEra, ptrTierSources, scoreFor } from "./normalize.mjs";
+import { consensusFor, isLiveEra, PHASES, ptrTierSources, scoreFor } from "./normalize.mjs";
 
 export function decorateSpecs(specs, sources, scales) {
   return specs.map(spec => ({
     ...spec,
     consensus: {
-      raid: consensusFor(spec.ratings?.raid, sources, scales),
-      mplus: consensusFor(spec.ratings?.mplus, sources, scales)
+      raid: consensusFor(spec.ratings?.raid, sources, scales, "raid"),
+      mplus: consensusFor(spec.ratings?.mplus, sources, scales, "mplus")
     }
   }));
 }
@@ -408,8 +408,10 @@ export const EXPERT_MIN = 0.15; // below this the read is too weak/split to set 
 export function expertRead(spec, takes = []) {
   const mine = (takes ?? []).filter(t =>
     t.class === spec.class && t.spec === spec.spec && !t.superseded &&
-    // Same era test the drawer uses: keyed on the PTR marker, never a "live" substring.
-    String(t.patchContext ?? "").includes("PTR"));
+    // Same era test the drawer uses: keyed on the CURRENT phase's marker (PHASES.ptr),
+    // never a bare "PTR" substring — after launch, "12.1 PTR" takes describe the live
+    // season, and only the NEXT cycle's marker reads as future-era again.
+    PHASES.ptr != null && String(t.patchContext ?? "").includes(PHASES.ptr.marker));
   if (!mine.length) return null;
   const byCreator = new Map();
   for (const t of mine) {
@@ -608,6 +610,7 @@ export function outlookFor(spec, ptrBuilds, takes = []) {
             (±4 at the cap), like the meta nudge and bounded for the same reason.
         Prior/empirical/PTR-list weights, the verdict's ±7 and the meta nudge's ±3 are
         all unchanged. Not one series with v6. */
+export { PHASES };
 export const PROJECTION_VERSION = 7;
 
 /* Rank-map version, stamped beside it. `snapshotStateOf().ranks` feeds movement
@@ -675,11 +678,12 @@ export const SNAPSHOT_PHASE = "12.1-ptr";
    undone, turning the one silent failure into a loud one. */
 export const PHASE_FLIP_DUE = "2026-08-20";
 
-const PTR_MPLUS_SERIES = {
-  DPS: "Median rDPS (12.1 PTR M+ testing)",
-  Tank: "Median rDPS (12.1 PTR M+ testing, tank)",
-  Healer: "Median HPS (12.1 PTR M+ testing)"
-};
+// Derived from the phase marker so the 12.2 cycle re-points these by config.
+const PTR_MPLUS_SERIES = PHASES.ptr ? {
+  DPS: `Median rDPS (${PHASES.ptr.marker} M+ testing)`,
+  Tank: `Median rDPS (${PHASES.ptr.marker} M+ testing, tank)`,
+  Healer: `Median HPS (${PHASES.ptr.marker} M+ testing)`
+} : {};
 function rankPct(spec, bracket, name) {
   const m = (spec.metrics ?? []).find(x => x.bracket === bracket && x.name === name);
   if (!m || m.rank == null || !m.of || m.of < 2) return null;
@@ -1316,6 +1320,7 @@ export function buildPayload({ specs, sources, scales, community, ptrBuilds, cre
       latestSnapshot: latestSnapshot(sources),
       latestPtrBuild: latestBuild,
       movementSince: baseline?.date ?? null,
+      phases: PHASES,
       projectionVersion: PROJECTION_VERSION,
       rankVersion: RANK_VERSION,
       consensusVersion: CONSENSUS_VERSION

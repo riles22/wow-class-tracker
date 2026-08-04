@@ -4,7 +4,7 @@
 import { readFile, readdir } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
-import { isLiveEra } from "./normalize.mjs";
+import { isLiveEra, PHASES } from "./normalize.mjs";
 import { specBuildChanges } from "./render.mjs";
 
 const ROLES = new Set(["DPS", "Healer", "Tank"]);
@@ -149,6 +149,13 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
       if (page.published && page.snapshot && page.published > page.snapshot) {
         errors.push(`sources.json: source "${source.id}" page published ${page.published} is newer than its snapshot ${page.snapshot} — a page cannot publish after it was fetched`);
       }
+      // `seasonVerified` records which SEASON the page described at refresh — the
+      // era-verify observation, stored (S2 transition, DECISION 1). A page whose season
+      // does not match PHASES.liveSeason drops its source from that bracket's consensus,
+      // so a typo here must fail red rather than silently keep a stale list averaged in.
+      if (page.seasonVerified != null && !["s1", "s2"].includes(page.seasonVerified)) {
+        errors.push(`sources.json: source "${source.id}" page seasonVerified must be "s1" or "s2", got "${page.seasonVerified}"`);
+      }
     }
     // `era` marks a source whose ratings describe a patch we are not running. Only "ptr"
     // is gated today; the default (absent) is "live". A typo'd value must fail loudly
@@ -208,7 +215,7 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
       if (metric.era != null && !["live", "ptr"].includes(metric.era)) errors.push(`specs.json: ${key} metric "${metric.name}" era must be "live" or "ptr"`);
       // Era gating (hard rule 3) must agree with the display-name convention both ways:
       // a "12.1 PTR"-named series may not claim live, and an era:"ptr" series must say PTR in its name.
-      if (metric.name?.includes("12.1 PTR") && metric.era === "live") errors.push(`specs.json: ${key} metric "${metric.name}" is named 12.1 PTR but tagged era "live"`);
+      if (PHASES.ptr && metric.name?.includes(PHASES.ptr.marker) && metric.era === "live") errors.push(`specs.json: ${key} metric "${metric.name}" is named ${PHASES.ptr.marker} but tagged era "live"`);
       if (metric.era === "ptr" && !/PTR/.test(metric.name ?? "")) errors.push(`specs.json: ${key} metric "${metric.name}" is era "ptr" but its name carries no PTR label`);
       isoOk(metric.asOf, `specs.json: ${key} metric "${metric.name}" asOf`);
       const mkey = `${metric.source}|${metric.bracket}|${metric.name}`;

@@ -105,6 +105,27 @@ all/Ladder, and the icyveins-ptr column stay up through the grading window as th
 forecast's receipts, then leave the UI once the report card lands. The underlying rows
 stay in specs.json as history either way — this is a rendering sunset, not a deletion.
 
+## Phase-1 machinery — LANDED 2026-08-04 (deltas from scope)
+
+Shipped before PHASE_FLIP_DUE, as planned: `PHASES` in normalize.mjs is the single era
+vocabulary (liveSeason / liveLabel / ptr.marker / ptrSunset) — consumed by consensusFor,
+metric-name era inference, takeEra/expertRead, the Era toggle (labels from the payload;
+the segment hides entirely when no PTR era exists or after sunset), PTR_MPLUS_SERIES
+naming, and validate's name/era honesty gate. `seasonVerified` ships end to end:
+validated ("s1"|"s2" or red), stored by refresh-tiers' era-verify step, enforced
+per-bracket in consensusFor (the rule cuts both ways — an outlet that flips EARLY is
+excluded from the pre-launch consensus too), surfaced as the toolbar's "consensus of N
+(K updating)" count, an "updating…" suffix in the Source select, and an "updating for
+<season>" chip in the footer registry. Launch is now the documented config edit:
+PHASES + SNAPSHOT_PHASE in one commit (a pinned test fails on the flip so the edit is
+deliberate), then agents write seasonVerified as outlets update.
+
+**Deferred to the grading window, deliberately:** the sunset RENDERING (DECISION 3) and
+the frozen-forecast column with its grade chip (DECISION 2). Both depend on artifacts
+that only exist after the freeze/flip, and untestable launch-critical UI shipped early
+is worse than scheduled work — the `ptrSunset` flag and the frozen artifact loader are
+in place for them to build on, and there are two full weeks between launch and +14.
+
 ## Phase 2 — settled S2 (day +14 onward)
 
 - **Report card runs** (day +14, again +28) — machinery shipped 2026-08-03: coverage

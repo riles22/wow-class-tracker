@@ -218,6 +218,14 @@ drawers), `notes-feed` (PTR build feed), `reference` (footer link only), `commun
 (community-layer registry entries). Each has `pages[]` with `bracket`, `role`,
 optional `label`, `url`, `snapshot` (ISO date) and optional `published` (the date the PAGE
 states about itself — never later than `snapshot`).
+Optional **`seasonVerified`** (`"s1"|"s2"`, per page — written by refresh-tiers'
+era-verify step) records which SEASON the page actually described at refresh. The
+permanent rule (S2 transition, DECISION 1): a list feeds a bracket's consensus only when
+its page for that bracket describes the current live season (`PHASES.liveSeason`,
+normalize.mjs — the single era vocabulary; the 12.1 launch and every later cycle is a
+config edit there + SNAPSHOT_PHASE, pinned by a test so the flip is deliberate).
+Mid-transition the consensus honestly shrinks ("consensus of 2") and recovers as pages
+update; the toolbar count, Source select and footer registry all say who is lagging.
 Optional **`era`** (`"live"` default | `"ptr"`) marks a source whose ratings describe a
 patch we are not running: an `era: "ptr"` tier list keeps its toggle button, its column,
 its drawer row and its projection input, but `consensusFor` skips it and the 12.0.7-only
