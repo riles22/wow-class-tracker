@@ -409,11 +409,18 @@ test("the PTR tier list is registered as era-gated and M+ only", async () => {
   // Icy Veins publishes no PTR raid list; claiming one would invent a source.
   assert.deepEqual([...new Set(ptr.pages.map(p => p.bracket))], ["mplus"]);
   assert.equal(specs.filter(s => s.ratings?.raid?.["icyveins-ptr"] !== undefined).length, 0);
-  // Full roster coverage, with the two upstream TBDs stored as explicit nulls.
+  // Full roster coverage, with any upstream TBD stored as an EXPLICIT null. The guarantee
+  // being tested is the shape — a spec the authors have not placed is written as null and
+  // never omitted and never guessed — not the tally of how many are currently unplaced.
+  // The COUNT is upstream state that legitimately moves: the 02 Aug. 2026 rebuild
+  // ("Update #4") placed both of the two specs that had been TBD since this source was
+  // added, taking the count 2 -> 0. Asserting a fixed count turns an ordinary upstream
+  // update into a red suite, so assert presence-of-key instead.
+  const present = specs.filter(s => s.ratings?.mplus && "icyveins-ptr" in s.ratings.mplus);
+  assert.equal(present.length, 40, "every roster spec carries an icyveins-ptr M+ key");
   const rated = specs.filter(s => s.ratings?.mplus?.["icyveins-ptr"] != null).length;
   const tbd = specs.filter(s => s.ratings?.mplus?.["icyveins-ptr"] === null).length;
   assert.equal(rated + tbd, 40);
-  assert.equal(tbd, 2);
 });
 
 test("build coverage gate: a spec in specsAffected with no line that reaches it fails", async () => {
