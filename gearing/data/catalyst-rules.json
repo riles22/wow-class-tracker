@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "patchContext": "ptr-12.1.0",
+  "season": 2,
+  "reviewedAt": "2026-08-02",
+  "setBonusSlots": [
+    "Head",
+    "Shoulder",
+    "Chest",
+    "Hands",
+    "Legs"
+  ],
+  "appearanceOnlySlots": [
+    "Back",
+    "Wrist",
+    "Waist",
+    "Feet"
+  ],
+  "eligibility": {
+    "pveMinimumTrack": "Veteran",
+    "seasonalPvpEligible": true,
+    "professionCraftedEligible": false,
+    "chargeCost": 1,
+    "modeledSources": [
+      "raid",
+      "mplus"
+    ],
+    "note": "The app enumerates current Season 2 raid and Mythic+ bases. Other eligible Season 2 armor, including eligible seasonal PvP gear and PvE Veteran-or-higher items, can also be converted, but their complete per-item pools are not available here."
+  },
+  "preservation": {
+    "secondaryStats": "confirmed",
+    "tertiaryStats": "confirmed",
+    "specialEffects": "certain-effects-confirmed",
+    "itemLevel": "established-current-behavior",
+    "upgradeTrack": "established-current-behavior",
+    "sockets": "expected-preview-required"
+  },
+  "mappedVenomcursedItemIds": [
+    "271874",
+    "271875",
+    "271876",
+    "271878"
+  ],
+  "chargeSystem": {
+    "currency": "Venomblight Manaflux",
+    "passiveCadenceWeeks": 2,
+    "cap": 8,
+    "bonusDropsAfterCatalystUnbound": [
+      "Mythic+",
+      "Season 2 raid bosses",
+      "Bountiful Delves",
+      "Rated PvP"
+    ],
+    "catalystUnbound": {
+      "requirement": "first 4-piece class-set bonus",
+      "scope": "character",
+      "unlocksBonusDrops": true
+    },
+    "serpentScion": {
+      "bonusCharges": 1,
+      "scope": "current character",
+      "criteriaAnyOf": [
+        "2,000+ Mythic+ rating",
+        "1,600+ Rated PvP rating",
+        "Defeat Ula'tek on Heroic or Mythic"
+      ]
+    },
+    "confidence": "current-ptr-tooltips-not-final"
+  },
+  "sources": {
+    "blizzardPatchNotes": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/1",
+    "blizzardRewardChanges": "https://us.forums.blizzard.com/en/wow/t/curse-of-ulatek-endgame-reward-changes/2317450/1",
+    "catalystGuide": "https://www.wowhead.com/ptr/guide/midnight/matrix-catalyst-crafting-tier-set",
+    "chargeTooltip": "https://www.wowhead.com/ptr/currency=3465/venomblight-manaflux",
+    "chargeUpdate": "https://www.wowhead.com/news/catalyst-tooltips-updated-acquisition-now-works-similar-to-midnight-season-1-382051",
+    "serpentScionAchievement": "https://www.wowhead.com/ptr/achievement=62872/midnight-season-2-serpent-scion"
+  },
+  "caveat": "Patch 12.1 and Season 2 are still on PTR. Compare item level alongside retained stats and effects, confirm the result in the Catalyst preview, and simulate unequal-level or cantrip choices."
+}

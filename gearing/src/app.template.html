@@ -1,0 +1,1502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WoW Midnight Season 2 &mdash; Gearing</title>
+<style>
+:root{
+  color-scheme:dark;   /* makes native controls (dropdown popup, scrollbars) render dark */
+  --adv:#4ee06a; --vet:#4aa8ff; --champ:#c07cf5; --hero:#ff9436; --myth:#f2d698;
+  --t1:#f4f7fb; --t2:#c4cfdd; --t3:#9aa9bd; --t4:#7f90a7;
+  --line:#273449; --control-line:#52647d; --panel:#0d131c; --panel-2:#121a26;
+  --bg:#070a0f; --focus:#8dc5ff;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;
+  margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+body{background:var(--bg);color:var(--t1);font-family:Inter,"Segoe UI",system-ui,sans-serif;
+     -webkit-font-smoothing:antialiased;line-height:1.55;font-size:16px}
+a{color:#a9d1ff;text-underline-offset:3px}
+code{font-family:ui-monospace,"JetBrains Mono",monospace;font-size:.92em;color:var(--t2);overflow-wrap:anywhere}
+.wrap{max-width:1320px;margin:0 auto;padding:34px 28px 72px}
+.skip-link{position:fixed;left:14px;top:10px;z-index:10000;transform:translateY(-150%);
+  background:#fff;color:#07101a;padding:10px 14px;border-radius:8px;font-weight:800}
+.skip-link:focus{transform:none}
+header{display:flex;align-items:center;justify-content:space-between;gap:28px;
+       padding-bottom:24px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.kick{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--t3);font-weight:700}
+h1{font-size:clamp(30px,4vw,42px);font-weight:800;letter-spacing:-1px;margin-top:7px;line-height:1.15;
+    background:linear-gradient(96deg,#fff 10%,#dfe8f5 40%,#f2d698 98%);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.sub{font-size:15px;color:var(--t2);margin-top:10px;max-width:72ch}
+.sub b{color:var(--t1)}
+
+.controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:20px 0 6px}
+select,button,textarea,input{font-family:inherit;font-size:15px;color:var(--t1);min-height:44px;
+  background:#141d2a;border:1px solid var(--control-line);border-radius:9px;padding:10px 13px}
+/* The native dropdown popup is drawn by the OS, so a translucent background renders it
+   near-white with light text. It needs opaque colours and an explicit dark colour-scheme. */
+select{min-width:0;width:100%;cursor:pointer;background-color:#141d2a;color:var(--t1);
+       appearance:none;-webkit-appearance:none;padding-right:34px;
+       background-image:linear-gradient(45deg,transparent 50%,var(--t2) 50%),
+                        linear-gradient(135deg,var(--t2) 50%,transparent 50%);
+       background-position:calc(100% - 18px) 52%,calc(100% - 13px) 52%;
+       background-size:5px 5px,5px 5px;background-repeat:no-repeat}
+select:hover{border-color:#7186a3}
+select option{background-color:#0e131b;color:var(--t1);padding:6px}
+select optgroup{background-color:#0a0e14;color:var(--myth);font-style:normal;font-weight:700}
+button{cursor:pointer;font-weight:700}
+button:hover{background:#1b2737}
+.primary-button{background:#d9b968;color:#101722;border-color:#f2d698;padding-inline:20px}
+.primary-button:hover{background:#f2d698}
+:where(a,button,select,textarea,input,summary,[tabindex]):focus-visible{
+  outline:3px solid var(--focus);outline-offset:3px}
+.pill{font-size:12.5px;color:var(--t2);background:var(--panel);border:1px solid var(--line);
+      border-radius:999px;padding:6px 12px}
+.pill b{color:var(--t1)}
+
+.setup-card{margin-top:22px;background:linear-gradient(135deg,var(--panel-2),var(--panel));
+  border:1px solid var(--line);border-radius:14px;padding:18px}
+.setup-grid{display:grid;grid-template-columns:minmax(220px,1.2fr) repeat(3,minmax(190px,1fr));
+  gap:14px;align-items:end}
+.field{min-width:0}
+.field label,.field-label{display:block;font-size:12px;font-weight:800;letter-spacing:.9px;
+  text-transform:uppercase;color:var(--t2);margin-bottom:7px}
+.spec-summary{margin-top:14px;padding-top:14px;border-top:1px solid var(--line);font-size:14px;color:var(--t2)}
+.spec-summary b{color:var(--t1)}
+.scoring-summary{margin-top:12px;font-size:13.5px;color:var(--t2);max-width:90ch}
+.scoring-summary strong{color:var(--myth)}
+.scoring-summary .warning{color:#ffc58e}
+.weight-editor{margin-top:14px;padding:14px;border:1px solid var(--line);border-radius:10px;background:#0b1119}
+.weight-editor[hidden]{display:none}
+.weight-editor p{font-size:13px;color:var(--t2);max-width:80ch}
+.weight-grid{display:grid;grid-template-columns:repeat(4,minmax(110px,1fr)) auto;gap:10px;margin-top:12px;align-items:end}
+.weight-grid label{font-size:12px;color:var(--t2);font-weight:700}
+.weight-grid input{display:block;width:100%;margin-top:5px}
+
+.tabs{display:flex;gap:4px;margin:22px 0 20px;border-bottom:1px solid var(--line);overflow-x:auto}
+.tab{min-height:46px;padding:10px 16px;font-size:14px;font-weight:750;color:var(--t3);cursor:pointer;
+     border:0;border-bottom:3px solid transparent;border-radius:8px 8px 0 0;background:transparent;
+     user-select:none;white-space:nowrap}
+.tab:hover{color:var(--t1);background:#101824}
+.tab.on{color:var(--t1);border-bottom-color:var(--myth);background:#101722}
+.panel{display:none}
+.panel.on{display:block}
+.panel[hidden]{display:none}
+.panel>h2{font-size:clamp(22px,3vw,28px);line-height:1.25;margin-bottom:12px}
+
+.note{font-size:14px;color:var(--t2);background:var(--panel);border:1px solid var(--line);
+      border-left:4px solid var(--hero);border-radius:10px;padding:14px 16px;margin-bottom:20px;line-height:1.6;
+      max-width:100%}
+.note b{color:var(--t1)}
+.note a{color:var(--myth);text-decoration:none}
+.note a:hover{text-decoration:underline}
+
+.grid,.card-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;align-items:start}
+.card{min-width:0;border:1px solid var(--line);background:var(--panel);border-radius:13px;padding:18px 19px}
+.card h3{font-size:14px;letter-spacing:1.25px;text-transform:uppercase;color:var(--t2);
+         margin-bottom:13px;display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.card h3 span{font-size:12px;letter-spacing:.2px;text-transform:none;color:var(--t3);font-weight:600}
+.hand-group+.hand-group{margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+.hand-title{display:flex;justify-content:space-between;gap:10px;margin-bottom:3px;
+             font-size:12.5px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--t2)}
+.hand-title span{font-size:12px;letter-spacing:.1px;text-transform:none;color:var(--t3);font-weight:600}
+
+.row{display:grid;grid-template-columns:52px 32px minmax(0,1fr) auto;column-gap:10px;row-gap:2px;
+     align-items:start;padding:10px 4px;border-bottom:1px solid var(--line);font-size:14px;border-radius:6px}
+.row:last-child{border-bottom:none}
+.rank{grid-column:1;font-family:ui-monospace,"JetBrains Mono",monospace;font-size:11.5px;color:var(--t3);
+      min-width:0;font-weight:800;padding-top:4px}
+.row.best .rank{color:var(--myth)}
+.row.best{box-shadow:inset 3px 0 0 var(--myth);background:rgba(242,214,152,.035)}
+.row>.ico{grid-column:2}
+.nm{grid-column:3;min-width:0;color:var(--t1);font-weight:650}
+.row.tier .nm{color:var(--myth);font-weight:600}
+.meta{grid-column:4;font-family:ui-monospace,"JetBrains Mono",monospace;font-size:12px;color:var(--t2);
+      white-space:nowrap;text-align:right}
+.src{grid-column:3/5;font-size:12px;color:var(--t3);white-space:normal}
+.fit{display:inline-block;margin-left:7px;color:var(--myth);font-weight:800}
+.fx{display:block;font-size:12.5px;color:var(--t3);margin-top:5px;line-height:1.5;font-weight:450}
+.fx b{color:var(--hero);font-weight:600}
+.empty{font-size:14px;color:var(--t3);padding:10px 0}
+.item-details,.more-items,.disclosure{margin-top:7px}
+.item-details summary,.more-items summary,.disclosure summary{display:flex;align-items:center;min-height:40px;
+  color:#b8d8ff;font-size:12.5px;font-weight:750;cursor:pointer}
+.more-items{border-top:1px solid var(--line);margin-top:5px;padding-top:3px}
+.item-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px}
+.tag{display:inline-flex;align-items:center;min-height:25px;padding:3px 7px;border-radius:999px;
+  font-size:11px;font-weight:800;color:var(--t2);border:1px solid var(--line);background:#111a27}
+.tag.effect{color:#ffd1a8;border-color:#7c4c27}
+.quick-facts{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.quick-facts span{font-size:12.5px;font-weight:750;padding:5px 9px;border-radius:7px;background:#121c29;
+  border:1px solid var(--line);color:var(--t2)}
+.disclosure-body{padding:4px 0 8px;max-width:90ch}
+.token-route{margin-top:8px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:#0a1018}
+
+table.src-tbl{width:100%;border-collapse:collapse;font-size:13px}
+table.src-tbl th{text-align:left;font-size:12px;letter-spacing:.8px;text-transform:uppercase;
+   color:var(--t2);font-weight:750;padding:9px 10px;border-bottom:1px solid var(--line)}
+table.src-tbl td{padding:10px;border-bottom:1px solid var(--line);vertical-align:top}
+table.src-tbl tr:last-child td{border-bottom:none}
+.badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;
+       padding:2px 7px;border-radius:5px;background:rgba(242,214,152,.14);color:var(--myth);margin-left:7px}
+textarea{width:100%;min-height:160px;font-family:ui-monospace,monospace;font-size:13px;resize:vertical;line-height:1.5}
+footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);
+       font-size:12.5px;color:var(--t3);line-height:1.65}
+
+/* ---- icons, wide cards, ceiling strip ---- */
+.ico{width:30px;height:30px;border-radius:5px;border:1px solid #66768d;
+     box-shadow:0 0 0 1px rgba(255,255,255,.06);vertical-align:middle}
+.ico.noico{background:rgba(255,255,255,.05)}
+.card.wide{grid-column:1/-1}
+.sub-note{font-size:13px;color:var(--t3);line-height:1.6;margin:-2px 0 11px;max-width:90ch}
+.sub-note b{color:var(--t2)}
+.ceils{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px}
+.ceil{border:1px solid var(--line);border-radius:9px;padding:9px 11px;background:rgba(255,255,255,.015)}
+.ceil-h{font-size:11.5px;letter-spacing:1px;text-transform:uppercase;color:var(--t2);font-weight:700}
+.ceil-v{font-family:ui-monospace,"JetBrains Mono",monospace;font-size:23px;font-weight:700;
+        color:var(--myth);margin-top:3px;letter-spacing:-.5px}
+.ceil-s{font-size:12px;color:var(--t3);margin-top:2px;line-height:1.4}
+
+/* ---- upgrade-check ladder: which difficulty / key beats what you wear ---- */
+.ladder{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px}
+.step{font-family:ui-monospace,"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:.1px;
+      border-radius:5px;padding:3px 7px;border:1px solid transparent;white-space:nowrap}
+.step.down{color:var(--t4);background:rgba(255,255,255,.02)}
+.step.up{color:var(--adv);background:rgba(78,224,106,.07);border-color:rgba(78,224,106,.22)}
+.step.firstup{border-color:rgba(78,224,106,.6);color:#a9f5bb}
+.step b{font-weight:700}
+
+/* ---- all gearing paths matrix ---- */
+table.paths td,table.paths th{padding:8px 12px;white-space:nowrap;font-size:13px}
+table.paths td.ilvl{font-family:ui-monospace,"JetBrains Mono",monospace;font-weight:700;color:var(--t1)}
+table.paths .dash{color:var(--t4)}
+table.paths td.provcell{color:var(--t2)}
+table.paths tr.tr-adv td.ilvl{color:var(--adv)}
+table.paths tr.tr-vet td.ilvl{color:var(--vet)}
+table.paths tr.tr-champ td.ilvl{color:var(--champ)}
+table.paths tr.tr-hero td.ilvl{color:var(--hero)}
+table.paths tr.tr-myth td.ilvl{color:var(--myth)}
+table.paths tr:hover td{background:rgba(255,255,255,.03)}
+.prov{display:inline-block;margin-left:6px;font-size:10.5px;font-weight:700;letter-spacing:.6px;
+      text-transform:uppercase;color:var(--hero);border:1px solid rgba(255,148,54,.4);
+      border-radius:4px;padding:1px 4px;vertical-align:1px}
+
+/* ---- item tooltip: Wowhead's own markup, captured at harvest time and rendered here ---- */
+.row[data-id]{cursor:help}
+.row[data-id]:hover{background:rgba(255,255,255,.035)}
+.row[data-id]:focus-visible{background:#142033}
+.src.mplus{color:var(--vet);opacity:.8}
+#tip{position:fixed;z-index:9999;display:none;max-width:430px;pointer-events:none;
+     background:#0b0e14;border:1px solid #2b3444;border-radius:8px;padding:11px 13px;
+     box-shadow:0 14px 40px rgba(0,0,0,.75);font-size:12.6px;line-height:1.45;color:#e9eef7}
+#tip table{border-collapse:collapse}
+#tip td,#tip th{padding:0;text-align:left;font-weight:400}
+#tip b{font-weight:600}
+#tip .q1{color:#fff}#tip .q2{color:#55f43f}#tip .q3{color:#62afff}
+#tip .q4{color:#c98cff}#tip .q5{color:#ff9b3f}
+#tip .q,#tip .q0{color:#9d9d9d}
+#tip .whtt-sellprice,#tip .whtt-extra{color:var(--t3);font-size:11.5px}
+#tip a{color:#ffd100;text-decoration:none}
+#tip-src{margin-top:8px;padding-top:7px;border-top:1px solid #222a36;
+         color:var(--t3);font-size:11.4px}
+.table-scroll{max-width:100%;overflow-x:auto}
+
+@media (max-width:900px){
+  .setup-grid{grid-template-columns:1fr 1fr}
+  .setup-grid .field:last-child{grid-column:auto}
+  .grid,.card-grid{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:640px){
+  .wrap{padding:22px 14px 56px}
+  header{align-items:flex-start;gap:18px;padding-bottom:20px}
+  .kick{font-size:10.5px;letter-spacing:1.8px}
+  h1{font-size:30px}
+  .sub{font-size:14px}
+  .setup-card{padding:14px}
+  .setup-grid,.weight-grid{grid-template-columns:minmax(0,1fr)}
+  .setup-grid .field:last-child{grid-column:auto}
+  .tabs{position:sticky;top:0;z-index:50;margin-inline:-14px;padding-inline:14px;background:rgba(7,10,15,.96)}
+  .tab{padding-inline:13px}
+  .card{padding:15px 14px}
+  .card h3{align-items:flex-start;flex-direction:column;gap:3px}
+  .row{grid-template-columns:42px 30px minmax(0,1fr);column-gap:8px}
+  .rank{grid-column:1}
+  .row>.ico{grid-column:2}
+  .nm{grid-column:3}
+  .meta,.src{grid-column:3;text-align:left;justify-self:start;white-space:normal}
+  .meta{margin-top:4px}
+  .ceils{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #tip{max-width:calc(100vw - 24px)}
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to recommendations</a>
+<div class="wrap">
+  <header>
+    <div>
+      <div class="kick">World of Warcraft &middot; Midnight &middot; Patch 12.1</div>
+      <h1>Season 2 Gearing &mdash; The Curse of Ula'tek</h1>
+      <div class="sub">Pick your spec to see what to chase and where it drops
+        &middot; season max <b>344</b> &middot; season opens <b>Aug 18, 2026</b></div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <span class="pill"><b id="p-items">0</b> items</span>
+      <span class="pill"><b id="p-specs">0</b> specs</span>
+      <span class="pill">PTR <b>12.1.0</b></span>
+    </div>
+  </header>
+
+  <section class="setup-card" aria-label="Character and scoring setup">
+    <div class="setup-grid">
+      <div class="field">
+        <label for="spec">Specialization</label>
+        <select id="spec"></select>
+      </div>
+      <div class="field">
+        <label for="profile">Ranking profile</label>
+        <select id="profile"></select>
+      </div>
+      <div class="field">
+        <label for="scenario">Encounter</label>
+        <select id="scenario"></select>
+      </div>
+      <div class="field">
+        <label for="scoring-mode">Scoring method</label>
+        <select id="scoring-mode">
+          <option value="reference">SimC reference (when available)</option>
+          <option value="priority">Guide order (rough)</option>
+          <option value="custom">Custom decimal weights</option>
+        </select>
+      </div>
+    </div>
+    <div class="spec-summary" id="spec-info">&mdash;</div>
+    <div class="scoring-summary" id="scoring-summary" role="status" aria-live="polite"></div>
+    <div class="weight-editor" id="weight-editor" hidden>
+      <p>Enter weights from a simulation of your current character, build, and encounter. A
+        <code>/simc</code> gear paste does not contain scale factors, so these fields stay blank until you provide them.</p>
+      <div class="weight-grid">
+        <label for="weight-crit">Critical Strike<input id="weight-crit" type="number" min="0" step="0.01" inputmode="decimal" placeholder="Enter weight"></label>
+        <label for="weight-haste">Haste<input id="weight-haste" type="number" min="0" step="0.01" inputmode="decimal" placeholder="Enter weight"></label>
+        <label for="weight-mast">Mastery<input id="weight-mast" type="number" min="0" step="0.01" inputmode="decimal" placeholder="Enter weight"></label>
+        <label for="weight-vers">Versatility<input id="weight-vers" type="number" min="0" step="0.01" inputmode="decimal" placeholder="Enter weight"></label>
+        <button id="weight-reset" type="button">Clear weights</button>
+      </div>
+    </div>
+  </section>
+
+  <nav class="tabs" role="tablist" aria-label="Gearing views">
+    <button class="tab on" id="tab-bis" type="button" role="tab" aria-selected="true" aria-controls="p-bis" data-p="bis">Gear recommendations</button>
+    <button class="tab" id="tab-tier" type="button" role="tab" aria-selected="false" aria-controls="p-tier" data-p="tier" tabindex="-1">Tier &amp; Catalyst</button>
+    <button class="tab" id="tab-up" type="button" role="tab" aria-selected="false" aria-controls="p-up" data-p="up" tabindex="-1">Upgrade checker</button>
+    <button class="tab" id="tab-src" type="button" role="tab" aria-selected="false" aria-controls="p-src" data-p="src" tabindex="-1">Loot sources</button>
+    <button class="tab" id="tab-paths" type="button" role="tab" aria-selected="false" aria-controls="p-paths" data-p="paths" tabindex="-1">Item levels</button>
+  </nav>
+
+  <main id="main-content">
+    <section class="panel on" id="p-bis" role="tabpanel" aria-labelledby="tab-bis" tabindex="0">
+      <h2>Gear recommendations</h2>
+      <div class="note" id="bis-note"></div>
+      <div class="grid" id="bis"></div>
+    </section>
+
+    <section class="panel" id="p-tier" role="tabpanel" aria-labelledby="tab-tier" tabindex="0" hidden>
+      <h2>Tier &amp; Catalyst</h2>
+      <div class="note" id="tier-note"></div>
+      <div class="grid" id="tier"></div>
+    </section>
+
+    <section class="panel" id="p-up" role="tabpanel" aria-labelledby="tab-up" tabindex="0" hidden>
+      <h2>Upgrade checker</h2>
+      <div class="note" id="upgrade-help">Paste your <b>SimulationCraft addon</b> output (in-game: <code>/simc</code>).
+        Nothing leaves this page. This reads equipped item IDs and levels for source comparisons; it does not run a damage simulation or import stat weights.</div>
+      <label class="field-label" for="simc">SimulationCraft addon gear export</label>
+      <textarea id="simc" aria-describedby="upgrade-help" placeholder="Paste /simc output here..."></textarea>
+      <div class="controls" style="margin:12px 0 0">
+        <button class="primary-button" id="parse" type="button">Read my gear</button>
+        <label class="pill" style="display:flex;align-items:center;gap:8px">
+          Fallback item level
+          <input id="curilvl" type="number" min="200" max="360" step="1" value="292"
+                 style="width:88px;font-family:ui-monospace,monospace">
+        </label>
+        <span class="pill" id="up-hint" role="status" aria-live="polite">No gear read yet</span>
+      </div>
+      <div id="up" style="margin-top:20px"></div>
+    </section>
+
+    <section class="panel" id="p-src" role="tabpanel" aria-labelledby="tab-src" tabindex="0" hidden>
+      <h2>Loot sources</h2>
+      <div class="note">See every raid boss and dungeon, plus how many drops your selected spec can use.
+        Tier-token bosses are clearly marked.
+        <details class="disclosure"><summary>Why the item lists differ by activity</summary>
+          <div class="disclosure-body">The raid has a fixed, enumerable loot table. Mythic+ reuses dungeon items and sets their item level from the key, so the key-level table is the useful comparison. Delves award from a shared pool rather than a fixed per-activity item list. Verified Aug 1, 2026.</div>
+        </details>
+      </div>
+      <div id="src"></div>
+    </section>
+
+    <section class="panel" id="p-paths" role="tabpanel" aria-labelledby="tab-paths" tabindex="0" hidden>
+      <h2>Item levels by source</h2>
+      <div class="note" id="paths-note"></div>
+      <div id="paths"></div>
+    </section>
+  </main>
+
+  <footer id="foot"></footer>
+</div>
+
+<script id="data" type="application/json">__DATA__</script>
+<script>
+const DB = JSON.parse(document.getElementById('data').textContent);
+const RAID = DB.raid, SPECS = DB.specs, DUNG = DB.dungeons, SHEET = DB.sheet;
+const TIER = DB.tier || {sets:[]}, CATALYST = DB.catalyst || {setBonusSlots:[]};
+const STAT_ALLOCATIONS = DB.catalystAllocations || {items:{}};
+const SIMC_WEIGHTS = DB.simcWeights || {records:[]};
+const ITEM_ELIGIBILITY = DB.itemEligibility || {items:{}};
+const ICONS = DB.icons || {};
+const icoTag = it => it.icon && ICONS[it.icon]
+  ? '<img class="ico" alt="" src="data:image/jpeg;base64,' + ICONS[it.icon] + '">'
+  : '<span class="ico noico"></span>';
+
+const ARMOR_TYPES = new Set(['Cloth', 'Leather', 'Mail', 'Plate']);
+const SLOT_ORDER = ['Head','Neck','Shoulder','Back','Chest','Wrist','Hands','Waist','Legs','Feet',
+  'Finger','Trinket','Main Hand','One-Hand','Two-Hand','Off Hand','Held In Off-hand','Ranged'];
+const TIER_SET_SLOTS = new Set(CATALYST.setBonusSlots || []);
+const MAPPED_VENOMCURSED_ITEMS = new Set(CATALYST.mappedVenomcursedItemIds || []);
+
+const ITEMS = [];
+for (const b of RAID.bosses)
+  for (const it of b.items)
+    ITEMS.push(Object.assign({}, it, {
+      boss: b.boss, bossName: b.name, tokenSlot: b.tokenSlot,
+      kind: 'raid', where: 'boss ' + b.boss, whereFull: b.name
+    }));
+
+// Mythic+ items carry no fixed item level -- it is set by key level on drop, so the
+// key-level table supplies it rather than the tooltip.
+for (const d of (DUNG ? DUNG.dungeons : []))
+  for (const it of d.items)
+    ITEMS.push(Object.assign({}, it, {
+      ilvl: null, kind: 'mplus', dungeon: d.name,
+      where: 'M+', whereFull: d.name + (d.isNew ? ' (new)' : '')
+    }));
+
+const DIRECT_TIER = [];
+for (const set of (TIER.sets || []))
+  for (const it of (set.items || []))
+    DIRECT_TIER.push(Object.assign({}, it, {
+      kind: 'direct-tier', tierClass: set.class, tierSetName: set.name,
+      where: 'direct tier', whereFull: 'Venomous Abyss token, Great Vault, or PvP'
+    }));
+const ALL_KNOWN_ITEMS = ITEMS.concat(DIRECT_TIER);
+
+// raid gear needs a real item level; M+ gear is judged on its stats alone
+const GEAR = ITEMS.filter(i => i.slot && (i.kind === 'mplus' || (i.ilvl && i.ilvl > 100)));
+const TOKENS = ITEMS.filter(i => (i.classes && i.classes.length)
+  || (i.tokenSlot === 'omni' && !i.slot && i.ilvl > 100));
+const MPLUS_KEYS = DUNG ? DUNG.keyLevels : [];
+
+/* ---------- scoring -------------------------------------------------------
+   Accepted SimC reference weights are the default when an exact profile and
+   scenario match exists. Guide order is the explicit fallback. Custom weights
+   come from the user; /simc gear text does not contain scale factors. Every
+   mode compares secondary allocation only.                                  */
+const WEAPON_SLOTS = new Set(['Main Hand','One-Hand','Two-Hand','Off Hand','Held In Off-hand','Ranged']);
+const PRIMARY_NEUTRAL_SLOTS = new Set(['Neck','Finger','Back','Trinket']);
+const GUIDE_MULTIPLIERS = [1, 0.75, 0.5, 0.25];
+const SECONDARY_STATS = ['Crit', 'Haste', 'Mast', 'Vers'];
+const STAT_LABELS = {Crit:'Crit', Haste:'Haste', Mast:'Mastery', Vers:'Versatility'};
+
+function isWeaponItem(it) {
+  return WEAPON_SLOTS.has(it.slot);
+}
+
+function handMatches(hand, it) {
+  if (!hand || hand.mustBeEmpty) return false;
+  return (hand.inventorySlots || []).indexOf(it.slot) >= 0
+    && (hand.itemTypes || []).some(type => type === (it.type == null ? null : it.type));
+}
+
+function matchingWeaponHands(spec, it) {
+  const matches = [];
+  for (const loadout of (spec.weaponLoadouts || [])) {
+    for (const hand of ['mainHand', 'offHand']) {
+      if (handMatches(loadout.hands && loadout.hands[hand], it))
+        matches.push({loadout: loadout, hand: hand});
+    }
+  }
+  return matches;
+}
+
+function primaryMatches(spec, it) {
+  const primary = spec.statPriority && spec.statPriority.primary;
+  if (!primary) return false;
+  if (!it.primary) {
+    if (PRIMARY_NEUTRAL_SLOTS.has(it.slot)) return true;
+    const exceptions = spec.weaponPrimaryStatExceptions || {};
+    return (exceptions.itemTypes || []).indexOf(it.type) >= 0
+      || (exceptions.inventorySlots || []).indexOf(it.slot) >= 0;
+  }
+  if (it.primary === 'Any') return true;
+  return it.primary.split('/').indexOf(primary.slice(0, 3)) >= 0;
+}
+
+function recommendationMatches(spec, it) {
+  const rule = ITEM_ELIGIBILITY.items && ITEM_ELIGIBILITY.items[String(it.id)];
+  return !rule || (rule.eligibleSpecs || []).indexOf(spec.spec + ' ' + spec.class) >= 0;
+}
+
+function canUse(spec, it) {
+  // armour type is a hard gate, and comes from our own harvested tier-token class lists
+  if (ARMOR_TYPES.has(it.type) && spec.armor && it.type !== spec.armor) return false;
+  if (isWeaponItem(it) && !matchingWeaponHands(spec, it).length) return false;
+  return primaryMatches(spec, it) && recommendationMatches(spec, it);
+}
+function isCatalystBase(it) {
+  return !!it && (it.kind === 'raid' || it.kind === 'mplus')
+    && TIER_SET_SLOTS.has(it.slot) && ARMOR_TYPES.has(it.type);
+}
+
+function guideWeights(spec) {
+  const selected = spec === CUR ? activePriority() : spec.statPriority;
+  const weights = {Crit:0, Haste:0, Mast:0, Vers:0};
+  ((selected && selected.secondaries) || []).forEach((stat, index) => {
+    weights[stat] = GUIDE_MULTIPLIERS[index] || 0;
+  });
+  return weights;
+}
+
+function customWeights() {
+  const weights = {};
+  for (const stat of SECONDARY_STATS) {
+    const input = $('#weight-' + stat.toLowerCase());
+    const raw = input ? String(input.value).trim() : '';
+    const value = raw === '' ? NaN : Number(raw);
+    if (!Number.isFinite(value) || value < 0) return null;
+    weights[stat] = value;
+  }
+  return SECONDARY_STATS.some(stat => weights[stat] > 0) ? weights : null;
+}
+
+function customModeSelected() {
+  return $('#scoring-mode').value === 'custom';
+}
+
+function referenceModeSelected() {
+  return $('#scoring-mode').value === 'reference';
+}
+
+function referenceRecordsFor(spec, profile) {
+  if (!spec || !profile) return [];
+  const specKey = spec.spec + ' ' + spec.class;
+  return (SIMC_WEIGHTS.records || []).filter(record => record.status === 'accepted'
+    && record.specKey === specKey && record.profile === profile.name);
+}
+
+function activeReferenceRecord() {
+  const scenario = $('#scenario');
+  if (!referenceModeSelected() || !scenario) return null;
+  return referenceRecordsFor(CUR, activeProfile()).filter(record => record.scenario === scenario.value)[0] || null;
+}
+
+function activeWeights(spec) {
+  if (spec === CUR && customModeSelected()) return customWeights() || guideWeights(spec);
+  if (spec === CUR && referenceModeSelected()) {
+    const reference = activeReferenceRecord();
+    if (reference) return reference.weights;
+  }
+  return guideWeights(spec);
+}
+
+function scoreItem(spec, it) {
+  const weights = activeWeights(spec);
+  const ratings = STAT_ALLOCATIONS.items[String(it.id)]?.allocations || it.secondaryRatings || {};
+  const ratingTotal = Object.values(ratings).reduce((sum, value) => sum + value, 0);
+  if (ratingTotal)
+    return (it.secondaries || []).reduce((sum, stat) =>
+      sum + (ratings[stat] || 0) * (weights[stat] || 0) / ratingTotal, 0);
+  const stats = it.secondaries || [];
+  return stats.length ? stats.reduce((sum, stat) => sum + (weights[stat] || 0), 0) / stats.length : 0;
+}
+
+function allocationText(it) {
+  const ratings = STAT_ALLOCATIONS.items[String(it.id)]?.allocations || it.secondaryRatings || {};
+  const total = Object.values(ratings).reduce((sum, value) => sum + value, 0);
+  if (!total) return (it.secondaries || []).join('/');
+  let used = 0;
+  return (it.secondaries || []).map((s, index, stats) => {
+    const percent = index === stats.length - 1 ? 100 - used
+      : Math.round((ratings[s] || 0) * 100 / total);
+    used += percent;
+    return s + ' ' + percent + '%';
+  }).join('/');
+}
+
+function instanceStatText(it) {
+  const ratings = it.tertiaryRatings || {};
+  const tertiaries = (it.tertiaries || []).map(s => ratings[s] ? s + ' ' + ratings[s] : s);
+  return tertiaries.concat(it.sockets || []).join(' / ');
+}
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s == null ? '' : s).replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const norm = s => String(s).replace(/\s+/g, '').toLowerCase();
+let CUR = null, MYGEAR = {};
+
+const find = v => SPECS.specs.filter(s => s.class + '|' + s.spec === v)[0];
+
+function profilesFor(spec) {
+  const variants = (spec && spec.statPriorityVariants) || [];
+  if (variants.length) return variants;
+  return spec && spec.statPriority
+    ? [{name: 'General', secondaries: spec.statPriority.secondaries}]
+    : [];
+}
+
+function activeProfile() {
+  const profiles = profilesFor(CUR);
+  const selected = $('#profile').value;
+  return profiles.filter(p => p.name === selected)[0] || profiles[0] || null;
+}
+
+function activePriority() {
+  const profile = activeProfile();
+  return CUR && CUR.statPriority && profile
+    ? {primary: CUR.statPriority.primary, secondaries: profile.secondaries}
+    : CUR && CUR.statPriority;
+}
+
+function scenarioLabel(scenario) {
+  return scenario === 'raid-st' ? 'Raid single target'
+    : scenario === 'aoe-5t' ? '5-target sustained AoE' : scenario;
+}
+
+function initScenarios() {
+  const sel = $('#scenario');
+  if (!sel) return;
+  const previous = sel.value;
+  const records = referenceRecordsFor(CUR, activeProfile()).slice().sort((a, b) =>
+    ['raid-st', 'aoe-5t'].indexOf(a.scenario) - ['raid-st', 'aoe-5t'].indexOf(b.scenario));
+  sel.innerHTML = '';
+  records.forEach(record => {
+    const option = document.createElement('option');
+    option.value = record.scenario;
+    option.textContent = scenarioLabel(record.scenario);
+    sel.appendChild(option);
+  });
+  if (!records.length) {
+    const option = document.createElement('option');
+    option.value = '';
+    option.textContent = 'No SimC reference available';
+    sel.appendChild(option);
+  } else if (records.some(record => record.scenario === previous)) {
+    sel.value = previous;
+  }
+  sel.disabled = !referenceModeSelected() || records.length < 2;
+}
+
+function initProfiles() {
+  const sel = $('#profile');
+  sel.innerHTML = '';
+  const profiles = profilesFor(CUR);
+  profiles.forEach(p => {
+    const o = document.createElement('option');
+    o.value = p.name;
+    o.textContent = p.name;
+    sel.appendChild(o);
+  });
+  if (!profiles.length) {
+    const o = document.createElement('option');
+    o.textContent = 'No sourced profile';
+    sel.appendChild(o);
+  }
+  sel.disabled = profiles.length < 2;
+}
+
+function initSpecs() {
+  const sel = $('#spec'), byClass = {};
+  for (const s of SPECS.specs) (byClass[s.class] = byClass[s.class] || []).push(s);
+  Object.keys(byClass).sort().forEach(cls => {
+    const og = document.createElement('optgroup');
+    og.label = cls;
+    byClass[cls].forEach(s => {
+      const o = document.createElement('option');
+      o.value = s.class + '|' + s.spec;
+      o.textContent = s.spec + ' ' + s.class;
+      og.appendChild(o);
+    });
+    sel.appendChild(og);
+  });
+  sel.addEventListener('change', () => {
+    CUR = find(sel.value);
+    initProfiles();
+    $('#scoring-mode').value = referenceRecordsFor(CUR, activeProfile()).length ? 'reference' : 'priority';
+    clearCustomWeights(false);
+    initScenarios();
+    render();
+  });
+  $('#profile').addEventListener('change', () => { initScenarios(); render(); });
+  $('#scoring-mode').addEventListener('change', () => { initScenarios(); render(); });
+  if ($('#scenario')) $('#scenario').addEventListener('change', render);
+  SECONDARY_STATS.forEach(stat => $('#weight-' + stat.toLowerCase()).addEventListener('input', render));
+  $('#weight-reset').addEventListener('click', () => clearCustomWeights(true));
+  if (find('Mage|Frost')) sel.value = 'Mage|Frost';
+  CUR = find(sel.value) || SPECS.specs[0];
+  initProfiles();
+  $('#scoring-mode').value = referenceRecordsFor(CUR, activeProfile()).length ? 'reference' : 'priority';
+  initScenarios();
+}
+
+function specLine() {
+  const p = activePriority();
+  const bits = ['<b>' + esc(CUR.spec + ' ' + CUR.class) + '</b>'];
+  if (CUR.armor) bits.push('<b>' + esc(CUR.armor) + '</b>');
+  bits.push(esc(CUR.role));
+  bits.push(p ? 'Primary: <b>' + esc(p.primary) + '</b> &middot; Guide order: ' + p.secondaries.map(esc).join(' &gt; ')
+              : 'no stat priority sourced');
+  $('#spec-info').innerHTML = bits.join(' &middot; ');
+}
+
+function weightList(weights) {
+  return SECONDARY_STATS.map(stat => STAT_LABELS[stat] + ' <strong>'
+    + Number(weights[stat] || 0).toFixed(3) + '</strong>').join(' &middot; ');
+}
+
+function referenceMetadata(record) {
+  const drift = (Number(record.maxRelativeDrift) * 100).toFixed(2).replace(/\.00$/, '');
+  const date = String(record.simulatedAt || '').slice(0, 10);
+  const profile = record.profileSource
+    ? '<a href="' + esc(record.profileSource) + '" target="_blank" rel="noopener noreferrer">'
+      + esc(record.profile) + '</a>' : '<b>' + esc(record.profile) + '</b>';
+  return 'Profile ' + profile + ' &middot; encounter <b>' + esc(scenarioLabel(record.scenario))
+    + '</b> &middot; SimC revision <code>' + esc(record.simcRevision) + '</code> &middot; game build <b>'
+    + esc(record.gameBuild) + '</b> &middot; simulated <b>' + esc(date)
+    + '</b> &middot; stability <b>' + drift + '% max drift across ' + record.runs.length + ' runs</b>';
+}
+
+function renderScoringControls() {
+  const editor = $('#weight-editor');
+  editor.hidden = !customModeSelected();
+  $('#profile').disabled = profilesFor(CUR).length < 2;
+  const scenario = $('#scenario');
+  const referenceRecords = referenceRecordsFor(CUR, activeProfile());
+  if (scenario) scenario.disabled = !referenceModeSelected() || referenceRecords.length < 2;
+  const custom = customWeights();
+  if (customModeSelected() && custom) {
+    $('#scoring-summary').innerHTML = '<strong>Custom weights supplied by you:</strong> ' + weightList(custom)
+      + '. Each item score uses its full secondary-stat allocation. This still compares secondary fit at equal item level; '
+      + 'primary stat, effects, sockets, and your current stat totals require a full item simulation.';
+    return;
+  }
+  const reference = activeReferenceRecord();
+  if (reference) {
+    $('#scoring-summary').innerHTML = '<strong>Accepted SimulationCraft reference weights:</strong> '
+      + weightList(reference.weights) + '. ' + referenceMetadata(reference)
+      + '. These rank equal-item-level secondary-stat fit only; primary stat, current stat totals, effects, sockets, '
+      + 'and unequal item levels still require a full item simulation.';
+    return;
+  }
+  const guide = guideWeights(CUR);
+  $('#scoring-summary').innerHTML = (referenceModeSelected()
+      ? '<span class="warning"><strong>No accepted SimC reference matches this specialization, profile, and encounter.</strong> '
+        + 'Guide-order fallback is active.</span> '
+      : customModeSelected()
+      ? '<span class="warning"><strong>Custom mode is waiting for all four non-negative weights.</strong> '
+        + 'Guide-order fallback is active until then.</span> '
+      : '<strong>Rough guide-order coefficients:</strong> ')
+    + weightList(guide) + '. These are fixed spacing for sorting, not character-specific stat weights or a simulation.';
+}
+
+function clearCustomWeights(shouldRender) {
+  SECONDARY_STATS.forEach(stat => { $('#weight-' + stat.toLowerCase()).value = ''; });
+  if (shouldRender) render();
+}
+
+function fitText(it) {
+  const weights = activeWeights(CUR);
+  const maximum = Math.max.apply(null, Object.values(weights));
+  return maximum > 0 ? '<span class="fit">Fit ' + Math.round(scoreItem(CUR, it) * 100 / maximum) + '</span>' : '';
+}
+
+function myTokens() {
+  return TOKENS.filter(t => t.tokenSlot === 'omni' || (t.classes || []).some(c =>
+    norm(c) === norm(CUR.class) ||
+    (CUR.class === 'Demon Hunter' && /demonhunter|^dh$/.test(norm(c))) ||
+    (CUR.class === 'Death Knight' && /deathknight|^dk$/.test(norm(c)))));
+}
+
+function directTierFor(slot) {
+  return DIRECT_TIER.filter(it => it.tierClass === CUR.class && it.slot === slot)[0] || null;
+}
+
+function itemDetails(it) {
+  const effects = (it.effects && it.effects.length) ? it.effects
+    : (it.effect ? [{kind: it.effectKind, text: it.effect}] : []);
+  const body = (it.uniqueEquipped
+      ? '<span class="fx"><b>Unique-Equipped:</b> only one copy can be worn.</span>' : '')
+    + effects.map(effect => '<span class="fx"><b>' + esc(effect.kind) + ':</b> '
+      + esc(effect.text) + '</span>').join('');
+  return body ? '<details class="item-details"><summary>Item effect details</summary>'
+    + '<div class="disclosure-body">' + body + '</div></details>' : '';
+}
+
+function catalystDetails(it) {
+  if (!isCatalystBase(it)) return '';
+  const instanceStats = instanceStatText(it);
+  return '<span class="item-tags"><span class="tag">Catalyst base</span>'
+    + (MAPPED_VENOMCURSED_ITEMS.has(String(it.id)) ? '<span class="tag effect">Mapped cantrip</span>' : '')
+    + '</span><details class="item-details"><summary>Catalyst conversion details</summary>'
+    + '<div class="disclosure-body"><span class="fx"><b>Catalyst tier base:</b> conversion adds the class-set identity while retaining '
+    + esc(allocationText(it) || 'its secondary allocation') + ' allocation and any tertiary roll on your item.'
+    + (instanceStats ? ' This tooltip also has ' + esc(instanceStats) + '.' : '') + '</span>'
+    + (MAPPED_VENOMCURSED_ITEMS.has(String(it.id))
+      ? '<span class="fx"><b>Mapped Venomcursed item:</b> Blizzard names this Ula\'tek cantrip family as a supported example; confirm the exact result in the Catalyst preview.</span>'
+      : it.effect ? '<span class="fx"><b>Effect check:</b> only effects explicitly supported by the Catalyst carry; confirm this result in the preview.</span>' : '')
+    + '</div></details>';
+}
+
+function visibleCandidates(list, limit) {
+  const sorted = list.slice().sort((a, b) => scoreItem(CUR, b) - scoreItem(CUR, a));
+  const ranked = sorted.slice(0, limit);
+  const rankedIds = new Set(ranked.map(it => String(it.id)));
+  return ranked.map((it, index) => ({it: it, marker: String(index + 1), special: false}))
+    .concat(sorted.filter(it => it.effect && !rankedIds.has(String(it.id)))
+      .map(it => ({it: it, marker: 'S', special: true})));
+}
+
+function catalystPlanCard(usable) {
+  const modeled = usable.filter(isCatalystBase).length;
+  const set = CUR.tierSet || {};
+  const source = CATALYST.sources && CATALYST.sources.blizzardRewardChanges;
+  const charges = CATALYST.chargeSystem || {};
+  const unbound = charges.catalystUnbound || {};
+  const scion = charges.serpentScion || {};
+  const scionSource = CATALYST.sources && CATALYST.sources.serpentScionAchievement;
+  return '<div class="card wide"><h3>Season 2 Catalyst tier plan<span>' + modeled
+    + ' modeled bases &middot; 5 set slots</span></h3>'
+    + '<div class="quick-facts"><span>4 distinct slots = 4-piece</span><span>Stats carry over</span>'
+    + '<span>Tertiaries carry over</span><span>Compare at equal item level</span></div>'
+    + '<div class="sub-note"><b>Start with your highest-level bases that have the best secondary fit.</b> Direct tier can save a charge. '
+    + 'No global four-slot winner is claimed without a character simulation.</div>'
+    + '<details class="disclosure"><summary>How Catalyst ranking and stat carryover work</summary><div class="disclosure-body">'
+    + '<span class="fx">In 12.1, a converted Head, Shoulder, Chest, Hands, or Legs item keeps its secondary and tertiary stats; certain supported special effects also carry, with Blizzard naming Ula\'tek\'s Venomcursed armor cantrip as an example. Back, Wrist, Waist, and Feet conversions are appearance-only and do not grant 2-piece/4-piece credit.</span>'
+    + '<span class="fx">The five slot cards compare the fixed direct-tier item (<b>Direct</b>) with every modeled raid/M+ Catalyst base (<b>C</b>) at equal item level. Compare actual item level alongside retained stats and effects; simulate unequal-item-level or cantrip choices.</span>'
+    + (source ? '<span class="fx"><a href="' + esc(source) + '" target="_blank" rel="noopener noreferrer">Read the Blizzard rule</a>.</span>' : '')
+    + '<span class="fx"><b>Planning:</b> random tertiaries are item-instance rolls and are not invented here. Sockets are expected to persist under established behavior, but were not explicitly reconfirmed in the 12.1 announcement; check the preview.</span>'
+    + '</div></details>'
+    + '<details class="disclosure"><summary>Set bonuses and charge rules</summary><div class="disclosure-body">'
+    + (set.set2 ? '<span class="fx"><b>2-piece:</b> ' + esc(set.set2) + '</span>' : '')
+    + (set.set4 ? '<span class="fx"><b>4-piece:</b> ' + esc(set.set4) + '</span>' : '')
+    + (charges.passiveCadenceWeeks && charges.cap && unbound.requirement
+      ? '<span class="fx"><b>Charge planning (PTR):</b> each conversion costs one Catalyst charge; charges passively accumulate every '
+        + esc(charges.passiveCadenceWeeks) + ' weeks to a cap of ' + esc(charges.cap) + '. Earning the '
+        + esc(unbound.requirement) + ' unlocks bonus drops from ' + esc((charges.bonusDropsAfterCatalystUnbound || []).join(', '))
+        + ' on that ' + esc(unbound.scope) + '. Serpent Scion grants ' + esc(scion.bonusCharges || 1)
+        + ' bonus charge on the ' + esc(scion.scope || 'current character') + ' for any one of: '
+        + esc((scion.criteriaAnyOf || []).join('; ')) + '. These PTR details may change.'
+        + (scionSource ? ' <a href="' + esc(scionSource) + '" target="_blank" rel="noopener noreferrer">PTR achievement</a>.' : '')
+        + '</span>' : '')
+    + '</div></details></div>';
+}
+
+function tierSlotRows(slot, bases, token) {
+  const direct = directTierFor(slot);
+  const sorted = bases.slice().sort((a, b) => scoreItem(CUR, b) - scoreItem(CUR, a));
+  const scored = (direct ? [direct] : []).concat(sorted);
+  const topScore = scored.length ? Math.max.apply(null, scored.map(it => scoreItem(CUR, it))) : null;
+  const rows = [];
+  if (direct) {
+    const best = scoreItem(CUR, direct) === topScore;
+    rows.push('<div class="row tier' + (best ? ' best' : '') + '" data-id="' + direct.id
+      + '" data-direct-tier="true"><span class="rank" title="Direct tier fixed-stat comparison">Direct</span>'
+      + icoTag(direct) + '<span class="nm">' + esc(direct.name)
+      + '<span class="fx"><b>Direct tier:</b> fixed stat allocation; no Catalyst conversion required.'
+      + (token ? ' Created by ' + esc(token.name) + '.' : '') + '</span></span>'
+      + '<span class="meta">' + esc(direct.primary || '—')
+      + (direct.secondaries.length ? ' ' + esc(allocationText(direct)) : '') + fitText(direct) + '</span>'
+      + '<span class="src">' + esc(token ? token.where : direct.where) + '</span></div>');
+  }
+  sorted.forEach((it, index) => {
+    const best = scoreItem(CUR, it) === topScore;
+    rows.push('<div class="row' + (best ? ' best' : '') + '" data-id="' + it.id
+      + '" data-catalyst-base="true"><span class="rank" title="Equal-item-level Catalyst stat-fit position">C'
+      + (index + 1) + '</span>' + icoTag(it) + '<span class="nm">' + esc(it.name) + itemDetails(it)
+      + catalystDetails(it) + '</span><span class="meta">' + esc(it.primary || '—')
+      + (it.secondaries.length ? ' ' + esc(allocationText(it)) : '') + fitText(it) + '</span><span class="src'
+      + (it.kind === 'mplus' ? ' mplus' : '') + '">' + esc(it.kind === 'mplus' ? it.dungeon : it.where)
+      + '</span></div>');
+  });
+  const visibleCount = direct ? 4 : 3;
+  const remaining = rows.slice(visibleCount);
+  return '<div class="sub-note"><b>Direct</b> = fixed tier; <b>C</b> = Catalyst base. Gold marks every tied best '
+    + 'equal-item-level secondary fit. The top three Catalyst bases are open by default.</div>'
+    + rows.slice(0, visibleCount).join('')
+    + (remaining.length ? '<details class="more-items"><summary>Show ' + remaining.length
+      + ' more Catalyst bases</summary>' + remaining.join('') + '</details>' : '');
+}
+
+function omniTokenCard(token) {
+  if (!token) return '';
+  return '<div class="card wide"><h3>Omni-tier token<span>usable by every class</span></h3>'
+    + '<div class="sub-note">This creates an appropriate Season 2 tier-set piece for your class. It is shown '
+    + 'separately because it has no fixed armour slot until redeemed; compare the direct-tier stat lines in the five slot cards.</div>'
+    + '<div class="row tier" data-id="' + token.id + '"><span class="rank">T</span>'
+    + icoTag(token) + '<span class="nm">' + esc(token.name) + itemDetails(token)
+    + '</span><span class="src">' + esc(token.whereFull) + '</span></div></div>';
+}
+
+function renderBis() {
+  const priority = activePriority();
+  const profile = activeProfile();
+  const prioritySource = profile?.source || CUR.statPrioritySource;
+  const priorityPatch = profile?.patch || CUR.statPriorityPatch;
+  const usingCustom = customModeSelected() && !!customWeights();
+  const reference = activeReferenceRecord();
+  const usingGuide = !usingCustom && !reference;
+  $('#bis-note').innerHTML = priority
+    ? (usingCustom
+      ? '<b>Using your custom decimal weights.</b> Candidates are ordered by their full secondary-stat allocation. '
+      : reference
+        ? '<b>Using accepted SimulationCraft reference weights:</b> ' + weightList(reference.weights) + '. '
+          + referenceMetadata(reference) + '. '
+        : (referenceModeSelected()
+          ? '<b>No accepted SimC reference matches this selection; guide fallback is active.</b> ' : '')
+          + 'Using the <b>' + esc(profile ? profile.name : 'General') + '</b> guide profile and the rough order <b>'
+          + esc(priority.secondaries.join(' > ')) + '</b>. ')
+      + '<b>This is an equal-item-level secondary-fit shortlist, not a definitive BiS list.</b> Item level, primary stat, current stat totals, '
+      + 'sockets, and item effects can change the winner; effects are shown but never assigned invented values. '
+      + (usingGuide ? 'The guide profile comes from Icy Veins <b>patch ' + esc(priorityPatch || '?')
+        + '</b> (live) while 12.1 priorities remain provisional.' : '')
+      + (usingGuide && prioritySource ? ' <a href="' + esc(prioritySource)
+        + '" target="_blank" rel="noopener noreferrer">View the source</a>.' : '')
+      + (usingGuide && CUR.statPriorityNote ? ' ' + esc(CUR.statPriorityNote) : '')
+    : '<b>No stat priority could be sourced for this spec</b>, so items are filtered to what you can equip, but not ranked.';
+
+  const usable = GEAR.filter(it => canUse(CUR, it));
+  const weaponItems = usable.filter(isWeaponItem);
+  const bySlot = {};
+  usable.filter(it => !isWeaponItem(it) && !TIER_SET_SLOTS.has(it.slot))
+    .forEach(it => (bySlot[it.slot] = bySlot[it.slot] || []).push(it));
+
+  // Trinket is pulled out of the normal grid and handled on its own below
+  const slots = Object.keys(bySlot).filter(s => s !== 'Trinket').sort((a, b) => {
+    const i = SLOT_ORDER.indexOf(a), j = SLOT_ORDER.indexOf(b);
+    return (i < 0 ? 99 : i) - (j < 0 ? 99 : j);
+  });
+
+  const cards = slots.map(slot => {
+    const entries = visibleCandidates(bySlot[slot], 5);
+    const topScore = entries.length ? Math.max.apply(null, entries.filter(entry => !entry.special)
+      .map(entry => scoreItem(CUR, entry.it))) : null;
+    const rows = [];
+    entries.forEach(entry => {
+      const it = entry.it;
+      rows.push('<div class="row' + (!entry.special && scoreItem(CUR, it) === topScore ? ' best' : '')
+      + '" data-id="' + it.id + '">'
+      + '<span class="rank"' + (entry.special ? ' title="Special-effect item shown outside the secondary-stat top five"' : '')
+      + '>' + entry.marker + '</span>' + icoTag(it) + '<span class="nm">' + esc(it.name) + itemDetails(it)
+      + '</span><span class="meta">' + esc(it.primary || '—')
+      + (it.secondaries.length ? ' ' + esc(allocationText(it)) + fitText(it) : '')
+      + '</span><span class="src' + (it.kind === 'mplus' ? ' mplus' : '') + '">'
+      + esc(it.kind === 'mplus' ? it.dungeon : it.where) + '</span></div>');
+    });
+    return '<div class="card"><h3>' + esc(slot) + '<span>' + bySlot[slot].length + ' usable</span></h3>'
+      + (rows.join('') || '<div class="empty">nothing here</div>') + '</div>';
+  }).join('');
+
+  $('#bis').innerHTML = weaponLoadoutCards(weaponItems) + cards
+    + trinketCard(bySlot['Trinket'] || [])
+    || '<div class="empty">No usable items found for this spec.</div>';
+}
+
+function renderTier() {
+  const usable = GEAR.filter(it => canUse(CUR, it));
+  const bySlot = {};
+  usable.filter(isCatalystBase).forEach(it => (bySlot[it.slot] = bySlot[it.slot] || []).push(it));
+  const tokenBySlot = {};
+  myTokens().forEach(token => { if (token.tokenSlot) tokenBySlot[token.tokenSlot] = token; });
+  const usingCustom = customModeSelected() && !!customWeights();
+  const reference = activeReferenceRecord();
+  const scoringText = usingCustom ? '<b>your custom weights</b>'
+    : reference ? '<b>accepted SimulationCraft reference weights</b> (' + weightList(reference.weights)
+      + '; ' + referenceMetadata(reference) + ')'
+    : (referenceModeSelected() ? '<b>the guide-order fallback because no accepted SimC record matches</b>'
+      : '<b>the rough guide-order coefficients</b>');
+  $('#tier-note').innerHTML = '<b>Catalyst conversions keep the original item\'s secondary and tertiary stats.</b> '
+    + 'That means the best converted base can beat the fixed direct-tier stat line at the same item level. '
+    + 'The comparisons below use ' + scoringText + ' for <b>equal-item-level secondary fit only</b>; item level, sockets, '
+    + 'and supported special effects still need an item simulation or Catalyst preview.';
+  const cards = Array.from(TIER_SET_SLOTS).map(slot => {
+    const token = tokenBySlot[slot === 'Shoulder' ? 'Shoulders' : slot];
+    const bases = bySlot[slot] || [];
+    return '<div class="card"><h3>' + esc(slot) + '<span>' + bases.length
+      + ' Catalyst bases</span></h3>' + tierSlotRows(slot, bases, token) + '</div>';
+  }).join('');
+  $('#tier').innerHTML = catalystPlanCard(usable) + cards + omniTokenCard(tokenBySlot.omni);
+}
+
+function loadoutLabel(id) {
+  return String(id).replace(/-ptr-12\.1$/, '').replace(/-/g, ' ')
+    .replace(/\b\w/g, c => c.toUpperCase());
+}
+
+function weaponRows(list, reservedUniqueId) {
+  const available = reservedUniqueId == null ? list
+    : list.filter(it => String(it.id) !== String(reservedUniqueId));
+  const entries = visibleCandidates(available, 5);
+  const reserved = reservedUniqueId == null ? null
+    : list.filter(it => String(it.id) === String(reservedUniqueId))[0];
+  if (reserved) entries.push({it: reserved, marker: 'U', special: true, reserved: true});
+  const topScore = entries.length ? Math.max.apply(null, entries.filter(entry => !entry.reserved && !entry.special)
+    .map(entry => scoreItem(CUR, entry.it))) : null;
+  return entries.map(entry => {
+    const it = entry.it;
+    return '<div class="row' + (!entry.reserved && !entry.special && scoreItem(CUR, it) === topScore ? ' best' : '')
+    + '" data-id="' + it.id + '"><span class="rank" title="'
+    + (entry.reserved ? 'Alternative hand position; do not pair with the same unique-equipped item'
+      : entry.special ? 'Special-effect item shown outside the secondary-stat top five' : 'Priority position')
+    + '">' + entry.marker + '</span>' + icoTag(it)
+    + '<span class="nm">' + esc(it.name) + itemDetails(it)
+    + (entry.reserved ? '<span class="fx"><b>Alternative hand only:</b> the main-hand recommendation already uses this unique item.</span>' : '')
+    + '</span><span class="meta">' + esc(it.primary || '—')
+    + (it.secondaries.length ? ' ' + esc(allocationText(it)) + fitText(it) : '')
+    + '</span><span class="src' + (it.kind === 'mplus' ? ' mplus' : '') + '">'
+    + esc(it.kind === 'mplus' ? it.dungeon : it.where) + '</span></div>';
+  }).join('');
+}
+
+function weaponLoadoutCards(items) {
+  return (CUR.weaponLoadouts || []).map(loadout => {
+    const sections = [];
+    let mainUnique = null;
+    for (const handName of ['mainHand', 'offHand']) {
+      const hand = loadout.hands && loadout.hands[handName];
+      if (!hand) continue;
+      if (hand.mustBeEmpty) {
+        sections.push('<div class="hand-group"><div class="hand-title">Off hand<span>must be empty</span></div>'
+          + '<div class="sub-note">The main-hand weapon occupies both hands in this setup.</div></div>');
+        continue;
+      }
+      const list = items.filter(it => handMatches(hand, it));
+      const first = list.slice().sort((a, b) => scoreItem(CUR, b) - scoreItem(CUR, a))[0];
+      if (handName === 'mainHand' && first && first.uniqueEquipped) mainUnique = first.id;
+      const title = (hand.inventorySlots || []).indexOf('Ranged') >= 0 ? 'Ranged weapon'
+        : hand.occupiesBothHands ? 'Two-hand weapon'
+        : handName === 'mainHand' ? 'Main hand' : 'Off hand';
+      sections.push('<div class="hand-group"><div class="hand-title">' + title
+        + '<span>' + list.length + ' usable</span></div>'
+        + '<div class="sub-note"><b>Allowed types:</b> '
+        + esc((hand.itemTypes || []).map(type => type == null ? 'held off-hand focus' : type).join(', '))
+        + ' &middot; <b>item slots:</b> ' + esc((hand.inventorySlots || []).join(', ')) + '</div>'
+        + (weaponRows(list, handName === 'offHand' ? mainUnique : null)
+          || '<div class="empty">No matching Season 2 items found.</div>') + '</div>');
+    }
+    const sources = (CUR.weaponLoadoutSources || []).map((url, index) => '<a href="' + esc(url)
+      + '" target="_blank" rel="noopener noreferrer">official source ' + (index + 1) + '</a>').join(' &middot; ');
+    return '<div class="card"><h3>Weapon setup: ' + esc(loadoutLabel(loadout.id))
+      + '<span>choose as one complete setup</span></h3>'
+      + '<div class="sub-note">' + ((CUR.weaponLoadouts || []).length > 1
+        ? 'This setup is mutually exclusive with the other weapon cards.'
+        : 'This is the complete weapon setup for this specialization.')
+      + (CUR.weaponLoadoutNote ? ' ' + esc(CUR.weaponLoadoutNote) : '') + '</div>'
+      + (sources ? '<div class="sub-note"><b>Proficiency sources:</b> ' + sources + '</div>' : '')
+      + sections.join('') + '</div>';
+  }).join('');
+}
+
+/* Trinkets are picked on their effect, not on secondary stats -- most of them carry no
+   secondaries at all. Ranking them by stat priority would be theatre, so they get listed
+   in full with their effect text and an explicit note instead of a fake ordering. */
+function trinketCard(list) {
+  if (!list.length) return '';
+  const rows = list.slice().sort((a, b) => (b.effect ? 1 : 0) - (a.effect ? 1 : 0)).map(it =>
+    '<div class="row" data-id="' + it.id + '">' + icoTag(it) + '<span class="nm">' + esc(it.name)
+    + itemDetails(it)
+    + (!it.effect ? '<span class="fx">no on-use or proc effect listed</span>' : '')
+    + '</span><span class="meta">' + esc(it.primary || '—')
+    + (it.secondaries.length ? ' ' + esc(allocationText(it)) : '')
+    + '</span><span class="src' + (it.kind === 'mplus' ? ' mplus' : '') + '">'
+    + esc(it.kind === 'mplus' ? it.dungeon : it.where) + '</span></div>').join('');
+  return '<div class="card wide"><h3>Trinkets<span>' + list.length + ' usable &middot; not ranked</span></h3>'
+    + '<div class="sub-note">Trinket value comes from the effect, not from secondaries &mdash; most of these have '
+    + 'no secondary stats at all. Ordering them by stat priority would be meaningless, so every usable trinket is '
+    + 'listed with its full effect. Role- or primary-specific effects are filtered using explicit recommendation '
+    + 'eligibility; excluded specs may still be able to equip the item technically. '
+    + '<b>This is the slot where a full item simulation matters most.</b></div>'
+    + '<details class="more-items"><summary>Show all ' + list.length + ' trinkets</summary>' + rows
+    + '</details></div>';
+}
+
+/* What is the highest item level each gearing path can reach? Uses the validated
+   community-sheet ladder, so it covers paths with no per-item data (Delves, world). */
+function ceilingCard() {
+  if (!SHEET) return '';
+  const only = SHEET.sheetOnlyKeys || [];
+  const paths = [
+    {k: 'raidVault', h: 'Raid', extra: 'raidDrop'}, {k: 'dungeonVault', h: 'Mythic+', extra: 'dungeonDrop'},
+    {k: 'delveVault', h: 'Delves', extra: 'delveCoffer'}, {k: 'preyVault', h: 'Prey', extra: 'preyHunt'},
+    {k: 'world', h: 'World'}, {k: 'crafted', h: 'Crafted'}, {k: 'venomstone', h: 'Venomstone'}
+  ];
+  const cells = paths.map(p => {
+    const rows = (SHEET.rewards[p.k] || []).concat(p.extra ? (SHEET.rewards[p.extra] || []) : []);
+    if (!rows.length) return '';
+    const top = rows.reduce((a, b) => (b.ilvl > a.ilvl ? b : a));
+    return '<div class="ceil"><div class="ceil-h">' + esc(p.h)
+      + (only.indexOf(p.k) >= 0 ? '<span class="prov">prov</span>' : '') + '</div>'
+      + '<div class="ceil-v">' + top.ilvl + '</div>'
+      + '<div class="ceil-s">' + esc(top.label) + '</div></div>';
+  }).join('');
+  return '<div class="card wide"><h3>Item level ceiling by path<span>how high each route goes</span></h3>'
+    + '<div class="ceils">' + cells + '</div></div>';
+}
+
+function slotsOf(list) {
+  return Object.keys(list.reduce((a, i) => {
+    const label = i.slot || (i.tokenSlot === 'omni' ? 'omni tier token'
+      : i.tokenSlot ? i.tokenSlot + ' tier token' : null);
+    if (label) a[label] = 1;
+    return a;
+  }, {})).sort().join(', ') || '&mdash;';
+}
+
+function renderSrc() {
+  const myTokenIds = new Set(myTokens().map(token => String(token.id)));
+  const raidRows = RAID.bosses.map(b => {
+    const available = ITEMS.filter(it => it.kind === 'raid' && it.boss === b.boss && it.ilvl > 100
+      && (it.slot || TOKENS.some(token => String(token.id) === String(it.id))));
+    const mine = available.filter(it => it.slot ? canUse(CUR, it) : myTokenIds.has(String(it.id)));
+    const all = available.length;
+    return '<tr><td><b>' + b.boss + '</b></td><td>' + esc(b.name)
+      + (b.tokenSlot ? '<span class="badge">' + esc(b.tokenSlot) + ' token</span>' : '')
+      + (b.orderDisputed ? '<span class="src"> &nbsp;order disputed</span>' : '')
+      + '</td><td><b>' + mine.length + '</b> / ' + all + '</td><td class="src">' + slotsOf(mine) + '</td></tr>';
+  }).join('');
+
+  const dRows = (DUNG ? DUNG.dungeons : []).map(d => {
+    const mine = d.items.filter(it => it.slot && canUse(CUR, it));
+    return '<tr><td class="src">' + esc(d.expansion.replace('Battle for Azeroth', 'BfA')) + '</td><td>'
+      + esc(d.name) + (d.isNew ? '<span class="badge">new</span>' : '')
+      + '</td><td><b>' + mine.length + '</b> / ' + d.items.length
+      + '</td><td class="src">' + slotsOf(mine) + '</td></tr>';
+  }).join('');
+
+  const keys = MPLUS_KEYS.map(k => '<tr><td>' + esc(k.key) + '</td><td><b>' + k.end
+    + '</b></td><td><b>' + k.vault + '</b></td></tr>').join('');
+
+  $('#src').innerHTML =
+    '<div class="card"><h3>The Venomous Abyss<span>raid</span></h3><table class="src-tbl">'
+    + '<tr><th>#</th><th>Boss</th><th>For you</th><th>Slots it can fill</th></tr>' + raidRows + '</table></div>'
+    + '<div style="height:16px"></div>'
+    + '<div class="card"><h3>Mythic+ dungeon pool<span>8 dungeons</span></h3><table class="src-tbl">'
+    + '<tr><th>Expansion</th><th>Dungeon</th><th>For you</th><th>Slots it can fill</th></tr>' + dRows + '</table>'
+    + '<div class="note" style="margin:16px 0 0"><b>Mythic+ item levels are set by key level, not by the item.</b> '
+    + 'The same drop is worth more from a higher key, which is why no item level is shown next to M+ items above.</div>'
+    + '<table class="src-tbl" style="margin-top:14px"><tr><th>Key</th><th>End of dungeon</th><th>Great Vault</th></tr>'
+    + keys + '</table></div>';
+}
+
+const SIMC_SLOT = {head:'Head',neck:'Neck',shoulder:'Shoulder',shoulders:'Shoulder',back:'Back',
+  chest:'Chest',wrist:'Wrist',hands:'Hands',waist:'Waist',legs:'Legs',feet:'Feet',
+  finger1:'Finger',finger2:'Finger',trinket1:'Trinket',trinket2:'Trinket',
+  main_hand:'@mainHand',off_hand:'@offHand'};
+
+/* What difficulty / key level does a given item have to come from to beat what you
+   already wear? Raid difficulties and M+ key levels both come from the validated ladder. */
+function raidLadder(boss) {
+  const row = RAID.bosses.filter(entry => entry.boss === boss)[0];
+  return row ? row.dropLevels : [];
+}
+function mplusLadder() {
+  const drops = MPLUS_KEYS.map(k => ({need: k.key, ilvl: k.end}));
+  const topVault = MPLUS_KEYS.reduce((best, row) => !best || row.vault > best.vault ? row : best, null);
+  return drops.concat(topVault ? [{need: 'vault ' + topVault.key, ilvl: topVault.vault}] : []);
+}
+
+function maxAttainable(it) {
+  const steps = it.kind === 'mplus' ? mplusLadder() : raidLadder(it.boss);
+  return steps.reduce((max, step) => Math.max(max, step.ilvl || 0), 0);
+}
+
+function ladderHtml(it, cur) {
+  const steps = it.kind === 'mplus' ? mplusLadder() : raidLadder(it.boss);
+  const first = steps.filter(s => s.ilvl > cur)[0];
+  return '<div class="ladder">' + steps.map(s =>
+    '<span class="step' + (s.ilvl > cur ? ' up' : ' down')
+    + (first && s.need === first.need ? ' firstup' : '') + '">'
+    + '<span class="sr-only">' + (s.ilvl > cur ? 'Upgrade: ' : 'Does not exceed current item: ') + '</span>'
+    + esc(s.need) + ' <b>' + s.ilvl + '</b></span>').join('') + '</div>';
+}
+
+function candidatesForEquipped(simcSlot, equipped, bySlot) {
+  if (equipped.slotLabel !== '@mainHand' && equipped.slotLabel !== '@offHand')
+    return (bySlot[equipped.slotLabel] || []).slice();
+
+  const handName = equipped.slotLabel === '@mainHand' ? 'mainHand' : 'offHand';
+  let loadouts = CUR.weaponLoadouts || [];
+  if (equipped.item) {
+    const ids = matchingWeaponHands(CUR, equipped.item)
+      .filter(match => match.hand === handName).map(match => match.loadout.id);
+    if (ids.length) loadouts = loadouts.filter(loadout => ids.indexOf(loadout.id) >= 0);
+  } else {
+    const hasOffHand = !!MYGEAR.off_hand;
+    const inferred = loadouts.filter(loadout => {
+      const off = loadout.hands && loadout.hands.offHand;
+      return hasOffHand ? off && off.required : off && off.mustBeEmpty;
+    });
+    if (inferred.length) loadouts = inferred;
+  }
+
+  return GEAR.filter(it => isWeaponItem(it) && canUse(CUR, it)
+    && loadouts.some(loadout => handMatches(loadout.hands && loadout.hands[handName], it)));
+}
+
+function catalystActionHtml(equipped) {
+  if (!TIER_SET_SLOTS.has(equipped.slotLabel)) return '';
+  const it = equipped.item;
+  if (it && it.kind === 'direct-tier') {
+    if (it.tierClass !== CUR.class)
+      return '<div class="sub-note" data-catalyst-action="spec-mismatch"><b>Selected-spec mismatch:</b> this '
+        + 'class-set item belongs to ' + esc(it.tierClass) + ', not ' + esc(CUR.class) + '.</div>';
+    return '<div class="sub-note" data-catalyst-action="already-tier"><b>Already class-set tier:</b> this slot '
+      + 'contributes to the set bonus. Its item ID does not reveal whether it came directly or from the Catalyst.</div>';
+  }
+  if (isCatalystBase(it) && !canUse(CUR, it))
+    return '<div class="sub-note" data-catalyst-action="spec-mismatch"><b>Selected-spec mismatch:</b> this '
+      + 'base item is not usable by ' + esc(CUR.spec + ' ' + CUR.class) + '.</div>';
+  if (isCatalystBase(it) && canUse(CUR, it)) {
+    const mustVerify = it.kind === 'mplus';
+    return '<div class="sub-note" data-catalyst-action="' + (mustVerify ? 'verify' : 'eligible') + '"><b>'
+      + (mustVerify ? 'Possible Catalyst conversion — verify this instance:' : 'Catalyst conversion option:')
+      + '</b> convert ' + esc(it.name) + ' into this slot\'s class-set piece while retaining its '
+      + esc(allocationText(it)) + ' secondary allocation and any tertiary roll. Under established Catalyst '
+      + 'behavior, item level and upgrade track also remain; confirm the PTR preview.'
+      + (mustVerify ? ' The item ID alone does not prove that this is a current-season Veteran+ instance.' : '')
+      + (MAPPED_VENOMCURSED_ITEMS.has(String(it.id))
+        ? ' Blizzard identifies the Ula\'tek Venomcursed cantrip family as a supported example; this item is mapped to that family.' : '')
+      + '</div>';
+  }
+  return '<div class="sub-note" data-catalyst-action="verify"><b>Possible Catalyst option:</b> the item ID '
+    + 'is not in the modeled raid/M+ pool. Check that it is eligible current Season 2 armor (PvE Veteran+ or '
+    + 'eligible seasonal PvP) and not profession-crafted, then confirm the preview.</div>';
+}
+
+function directTierUpgradeHtml(equipped, threshold) {
+  if (!TIER_SET_SLOTS.has(equipped.slotLabel)
+    || (equipped.item?.kind === 'direct-tier' && equipped.item.tierClass === CUR.class)) return '';
+  const direct = directTierFor(equipped.slotLabel);
+  const tokenSlot = equipped.slotLabel === 'Shoulder' ? 'Shoulders' : equipped.slotLabel;
+  const tokens = myTokens();
+  const token = tokens.filter(candidate => candidate.tokenSlot === tokenSlot)[0];
+  const omni = tokens.filter(candidate => candidate.tokenSlot === 'omni')[0];
+  if (!direct) return '';
+  const tokenRoutes = (token
+      ? '<div class="token-route" data-tier-route="standard" data-max-ilvl="' + maxAttainable(token) + '">'
+        + '<span class="fx"><b>Standard slot token — ' + esc(token.whereFull) + ':</b></span>'
+        + ladderHtml(token, threshold) + '</div>' : '')
+    + (omni
+      ? '<div class="token-route" data-tier-route="omni" data-max-ilvl="' + maxAttainable(omni) + '">'
+        + '<span class="fx"><b>Omni-tier token — ' + esc(omni.whereFull) + ':</b></span>'
+        + ladderHtml(omni, threshold) + '</div>' : '');
+  return '<div class="row tier" data-id="' + direct.id + '" data-direct-tier-acquisition="true">'
+    + '<span class="rank">D</span>' + icoTag(direct) + '<span class="nm">' + esc(direct.name)
+    + '<span class="fx"><b>Direct class-set route:</b> fixed ' + esc(allocationText(direct))
+    + ' allocation. This is a set acquisition option, not automatically an item-level upgrade.'
+    + ' Great Vault and PvP may also award direct tier, but no static ladder is modeled for those routes.</span>'
+    + tokenRoutes + '</span><span class="src">tier tokens</span></div>';
+}
+
+function renderUp() {
+  const keys = Object.keys(MYGEAR);
+  const cur = Math.max(0, parseInt($('#curilvl').value, 10) || 0);
+  if (!keys.length) {
+    $('#up').innerHTML = '<div class="empty">Paste your <code>/simc</code> output above and press '
+      + '<b>Read my gear</b>. Until then, the <b>Gear recommendations</b> tab shows the same ordering '
+      + 'without needing your character.</div>';
+    $('#up-hint').textContent = 'No gear read yet';
+    return;
+  }
+  const bySlot = {};
+  GEAR.filter(it => canUse(CUR, it)).forEach(it => (bySlot[it.slot] = bySlot[it.slot] || []).push(it));
+  const slotPosition = key => {
+    const label = MYGEAR[key].slotLabel;
+    if (label === '@mainHand') return SLOT_ORDER.indexOf('Main Hand');
+    if (label === '@offHand') return SLOT_ORDER.indexOf('Off Hand');
+    const index = SLOT_ORDER.indexOf(label);
+    return index < 0 ? 99 : index;
+  };
+
+  $('#up').innerHTML = '<div class="grid">' + keys.sort((a, b) => slotPosition(a) - slotPosition(b)
+    || a.localeCompare(b)).map(k => {
+    const eq = MYGEAR[k];
+    const threshold = eq.ilvl || cur;
+    const actual = candidatesForEquipped(k, eq, bySlot)
+      .filter(it => maxAttainable(it) > threshold);
+    const unranked = eq.slotLabel === 'Trinket';
+    let entries;
+    if (unranked) {
+      entries = actual.slice().sort((a, b) => a.name.localeCompare(b.name))
+        .map(it => ({it: it, marker: '—'}));
+    } else {
+      const ordinary = actual.filter(it => !it.effect)
+        .sort((a, b) => scoreItem(CUR, b) - scoreItem(CUR, a)).slice(0, 3)
+        .map((it, index) => ({it: it, marker: String(index + 1)}));
+      const ordinaryIds = new Set(ordinary.map(entry => String(entry.it.id)));
+      entries = ordinary.concat(actual.filter(it => it.effect && !ordinaryIds.has(String(it.id)))
+        .sort((a, b) => a.name.localeCompare(b.name)).map(it => ({it: it, marker: 'S'})));
+    }
+    const worn = eq.ilvl ? ' &middot; ' + eq.ilvl : '';
+    const slotName = eq.slotLabel === '@mainHand' ? 'Main hand' : eq.slotLabel === '@offHand' ? 'Off hand'
+      : (eq.slotLabel === 'Finger' || eq.slotLabel === 'Trinket') ? eq.slotLabel + ' ' + (k.match(/\d+$/)?.[0] || '')
+      : eq.slotLabel;
+    return '<div class="card"><h3>' + esc(slotName) + '<span>' + esc(eq.name || eq.id) + worn + '</span></h3>'
+      + (unranked && entries.length ? '<div class="sub-note"><b>Trinkets are unranked:</b> simulate their effects; '
+          + 'every eligible source that can exceed your current item level is listed.</div>' : '')
+      + catalystActionHtml(eq)
+      + directTierUpgradeHtml(eq, threshold)
+      + (entries.length ? entries.map(entry => {
+          const it = entry.it;
+          return '<div class="row" data-id="' + it.id + '"><span class="rank">' + entry.marker + '</span>'
+          + icoTag(it) + '<span class="nm">' + esc(it.name) + itemDetails(it) + catalystDetails(it)
+          + ladderHtml(it, threshold)
+          + '</span><span class="meta">' + esc(allocationText(it)) + fitText(it) + '</span><span class="src'
+          + (it.kind === 'mplus' ? ' mplus' : '') + '">'
+          + esc(it.kind === 'mplus' ? it.dungeon : it.where) + '</span></div>';
+        }).join('')
+        : '<div class="empty">no Season 2 source exceeds item level ' + threshold + ' for this slot</div>') + '</div>';
+  }).join('') + '</div>';
+  const knownLevels = keys.filter(key => MYGEAR[key].ilvl).length;
+  $('#up-hint').innerHTML = '<b>' + keys.length + '</b> slots read &middot; <b>' + knownLevels
+    + '</b> with item levels &middot; steps announced as “Upgrade” exceed that slot';
+}
+
+$('#parse').addEventListener('click', () => {
+  MYGEAR = {};
+  const ilvls = [];
+  $('#simc').value.split(/\r?\n/).forEach(line => {
+    const m = line.match(/^\s*([a-z_0-9]+)\s*=\s*([^,]*),?.*?\bid=(\d+)/i);
+    if (!m) return;
+    const simcSlot = m[1].toLowerCase();
+    const label = SIMC_SLOT[simcSlot];
+    if (!label) return;
+    // some addon versions emit ilevel= in the item string; use it when present
+    const lv = line.match(/\bilevel=(\d{3})\b/);
+    const known = ALL_KNOWN_ITEMS.filter(x => String(x.id) === String(m[3]))[0];
+    if (lv) ilvls.push(+lv[1]);
+    MYGEAR[simcSlot] = {
+      id: m[3], name: known ? known.name : (m[2] || '').trim(),
+      slotLabel: label, ilvl: lv ? +lv[1] : null, item: known || null
+    };
+  });
+  if (ilvls.length) {
+    $('#curilvl').value = Math.round(ilvls.reduce((a, b) => a + b, 0) / ilvls.length);
+  }
+  renderUp();
+});
+$('#curilvl').addEventListener('input', renderUp);
+
+/* ---- all gearing paths ---------------------------------------------------
+   The full item-level ladder against every source that awards gear. Values
+   corroborated by our own harvest render plain; values only this sheet has are
+   marked provisional, because its author flags inferred cells in red text and
+   the CSV export we read strips colour.                                      */
+const PATH_COLS = [
+  {k: 'raidDrop', h: 'Raid drop'}, {k: 'raidVault', h: 'Raid vault'},
+  {k: 'dungeonDrop', h: 'Dungeon drop'}, {k: 'dungeonVault', h: 'Dungeon vault'},
+  {k: 'delveCoffer', h: 'Delve coffer'}, {k: 'delveTrove', h: "Trovehunter's"},
+  {k: 'delveVault', h: 'Delve vault'},
+  {k: 'preyHunt', h: 'Prey hunt'}, {k: 'preyVault', h: 'Prey vault'},
+  {k: 'world', h: 'World'}, {k: 'crafted', h: 'Crafted'}, {k: 'venomstone', h: 'Venomstone'}
+];
+const TRACK_OF = {266:'adv',269:'adv',272:'adv',276:'adv',279:'vet',282:'vet',285:'vet',289:'vet',
+  292:'champ',295:'champ',298:'champ',302:'champ',305:'hero',308:'hero',311:'hero',315:'hero',
+  318:'myth',321:'myth',324:'myth',328:'myth',331:'myth',334:'myth',337:'myth',341:'myth',344:'myth'};
+
+function renderPaths() {
+  if (!SHEET) { $('#paths').innerHTML = '<div class="empty">no sheet data</div>'; return; }
+  const only = SHEET.sheetOnlyKeys || [];
+  const v = SHEET.validation || {};
+  $('#paths-note').innerHTML =
+    'Compare the maximum item level and full reward ladder for each Season 2 gearing path. Cells marked '
+    + '<span class="prov">provisional</span> rely on the community sheet and should be treated as early-season guidance.'
+    + '<details class="disclosure"><summary>Validation and source details</summary><div class="disclosure-body">'
+    + '<b>' + (v.confirmed || 0) + ' of ' + (v.total || 0) + '</b> independent anchor checks agree with data '
+    + 'harvested from game guides and loot tables. Unmarked columns have corroborated anchor points, but not every individual cell was independently verified. '
+    + 'The sheet author flags inferred cells in red text that the CSV export strips, so sheet-only values are corroboration rather than confirmation. '
+    + 'Source: <b>' + esc(SHEET.source) + '</b></div></details>';
+
+  const idx = {};
+  for (const c of PATH_COLS) {
+    idx[c.k] = {};
+    for (const row of (SHEET.rewards[c.k] || [])) (idx[c.k][row.ilvl] = idx[c.k][row.ilvl] || []).push(row.label);
+  }
+  const used = PATH_COLS.filter(c => (SHEET.rewards[c.k] || []).length);
+
+  const head = '<tr><th>ilvl</th>' + used.map(c =>
+    '<th>' + esc(c.h) + (only.indexOf(c.k) >= 0 ? '<span class="prov">prov</span>' : '') + '</th>').join('') + '</tr>';
+
+  const body = SHEET.ladder.map(l => {
+    const cells = used.map(c => {
+      const val = idx[c.k][l];
+      return '<td class="' + (only.indexOf(c.k) >= 0 ? 'provcell' : '') + '">'
+        + (val ? esc(val.join(' / ')) : '<span class="dash">&middot;</span>') + '</td>';
+    }).join('');
+    const tr = TRACK_OF[l];
+    return '<tr class="' + (tr ? 'tr-' + tr : '') + '"><td class="ilvl">' + l + '</td>' + cells + '</tr>';
+  }).join('');
+
+  $('#paths').innerHTML = ceilingCard() + '<div class="card wide table-scroll" style="margin-top:18px">'
+    + '<table class="src-tbl paths">' + head + body + '</table></div>';
+}
+
+function enhanceInteractiveRows() {
+  Array.prototype.forEach.call(document.querySelectorAll('.row[data-id]'), row => {
+    row.setAttribute('tabindex', '0');
+  });
+}
+
+function renderFooter() {
+  const custom = customModeSelected() && customWeights();
+  const reference = activeReferenceRecord();
+  const scoring = custom
+    ? '<b>Current rankings use your custom weights:</b> ' + weightList(custom) + '. '
+    : reference
+      ? '<b>Current rankings use accepted SimulationCraft reference weights:</b> '
+        + weightList(reference.weights) + '. ' + referenceMetadata(reference) + '. '
+      : referenceModeSelected()
+        ? '<b>No accepted SimC reference matches this selection; current rankings use the guide-order fallback.</b> '
+        : '<b>Current rankings use the rough guide-order coefficients.</b> ';
+  const simcSource = SIMC_WEIGHTS.source
+    ? '<a href="' + esc(SIMC_WEIGHTS.source) + '" target="_blank" rel="noopener noreferrer">official MID2 profiles</a>'
+    : 'no reference source embedded';
+  $('#foot').innerHTML = scoring
+    + '<b>Every score compares equal-item-level secondary-stat fit; it is not an item simulation.</b>'
+    + '<details class="disclosure"><summary>Data sources and technical notes</summary><div class="disclosure-body">'
+    + 'Item data: ' + esc(RAID.source) + ', harvested ' + esc(RAID.harvestedAt) + '.<br>'
+    + 'Dungeon data: ' + esc(DUNG.source) + ', harvested ' + esc(DUNG.harvestedAt) + '.<br>'
+    + 'Direct tier data: ' + esc(TIER.source) + ', harvested ' + esc(TIER.harvestedAt) + '.<br>'
+    + 'Catalyst policy: Blizzard 12.1 PTR notes, reviewed ' + esc(CATALYST.reviewedAt) + '.<br>'
+    + 'Spec data: ' + esc(SPECS.source) + ', harvested ' + esc(SPECS.harvestedAt) + '.<br>'
+    + 'SimC reference source: ' + simcSource + '; generated '
+    + esc(SIMC_WEIGHTS.generatedAt || 'not yet generated') + '.<br><b>'
+    + esc(RAID.caveat) + '</b> ' + esc(SPECS.caveat) + '<br>'
+    + '<b>Weapon loadouts are explicit, mutually exclusive configurations</b> curated from official Blizzard class pages and patch notes. '
+    + 'Allowed types and direct official source links are shown inside each weapon card.<br>'
+    + 'Rebuild with <code>node src/harvest-raid.mjs &amp;&amp; node src/harvest-dungeons.mjs &amp;&amp; node src/harvest-tier.mjs &amp;&amp; '
+    + 'node src/harvest-catalyst-allocations.mjs &amp;&amp; node src/harvest-specs.mjs &amp;&amp; '
+    + 'node src/harvest-sheet.mjs &amp;&amp; node src/build.mjs</code>.</div></details>';
+}
+
+function render() {
+  specLine();
+  renderScoringControls();
+  renderBis();
+  renderTier();
+  renderSrc();
+  renderPaths();
+  renderUp();
+  renderFooter();
+  enhanceInteractiveRows();
+}
+
+const TAB_ELEMENTS = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+function activateTab(tab, shouldFocus) {
+  TAB_ELEMENTS.forEach(candidate => {
+    const selected = candidate === tab;
+    candidate.classList[selected ? 'add' : 'remove']('on');
+    candidate.setAttribute('aria-selected', selected ? 'true' : 'false');
+    candidate.tabIndex = selected ? 0 : -1;
+    const panel = $('#p-' + candidate.dataset.p);
+    if (panel) {
+      panel.classList[selected ? 'add' : 'remove']('on');
+      panel.hidden = !selected;
+    }
+  });
+  if (shouldFocus) tab.focus();
+}
+TAB_ELEMENTS.forEach((tab, index) => {
+  tab.addEventListener('click', () => activateTab(tab, false));
+  tab.addEventListener('keydown', event => {
+    let next = null;
+    if (event.key === 'ArrowRight') next = (index + 1) % TAB_ELEMENTS.length;
+    if (event.key === 'ArrowLeft') next = (index - 1 + TAB_ELEMENTS.length) % TAB_ELEMENTS.length;
+    if (event.key === 'Home') next = 0;
+    if (event.key === 'End') next = TAB_ELEMENTS.length - 1;
+    if (next == null) return;
+    event.preventDefault();
+    activateTab(TAB_ELEMENTS[next], true);
+  });
+});
+
+$('#p-items').textContent = GEAR.length + DIRECT_TIER.length;
+$('#p-specs').textContent = SPECS.specs.length;
+
+/* ---- tooltips ------------------------------------------------------------
+   The markup is Wowhead's own, captured during harvest, so this works offline
+   with no call out to their tooltip script at view time.                     */
+const BY_ID = {};
+ALL_KNOWN_ITEMS.forEach(i => { BY_ID[i.id] = i; });
+
+const tip = document.createElement('div');
+tip.id = 'tip';
+tip.setAttribute('role', 'tooltip');
+tip.setAttribute('aria-hidden', 'true');
+document.body.appendChild(tip);
+
+function placeTip(e) {
+  const pad = 16, w = tip.offsetWidth, h = tip.offsetHeight;
+  let x = e.clientX + pad, y = e.clientY + pad;
+  if (x + w > innerWidth - 8) x = e.clientX - w - pad;
+  if (y + h > innerHeight - 8) y = Math.max(8, innerHeight - h - 8);
+  tip.style.left = x + 'px';
+  tip.style.top = y + 'px';
+}
+
+function showTip(row, event) {
+  const it = BY_ID[row.getAttribute('data-id')];
+  if (!it || !it.html) return;
+  let extra = it.kind === 'mplus'
+    ? 'Mythic+ &middot; ' + esc(it.dungeon) + ' &mdash; item level is set by key level'
+    : it.kind === 'direct-tier'
+      ? 'Direct class-set item &middot; fixed stat allocation; actual item level depends on its source'
+      : 'The Venomous Abyss &middot; ' + esc(it.whereFull);
+  tip.innerHTML = it.html + '<div id="tip-src">' + extra + '</div>';
+  tip.style.display = 'block';
+  tip.setAttribute('aria-hidden', 'false');
+  if (event && Number.isFinite(event.clientX)) placeTip(event);
+  else {
+    const rect = row.getBoundingClientRect();
+    placeTip({clientX: Math.min(rect.right, innerWidth - 24), clientY: rect.bottom});
+  }
+}
+
+function hideTip() {
+  tip.style.display = 'none';
+  tip.setAttribute('aria-hidden', 'true');
+}
+
+document.addEventListener('mouseover', e => {
+  const row = e.target.closest ? e.target.closest('.row[data-id]') : null;
+  if (row) showTip(row, e);
+});
+document.addEventListener('mousemove', e => { if (tip.style.display === 'block') placeTip(e); });
+document.addEventListener('mouseout', e => {
+  const row = e.target.closest ? e.target.closest('.row[data-id]') : null;
+  if (row && (!e.relatedTarget || !row.contains(e.relatedTarget))) hideTip();
+});
+document.addEventListener('focusin', e => {
+  const row = e.target.closest ? e.target.closest('.row[data-id]') : null;
+  if (row) showTip(row, null);
+});
+document.addEventListener('focusout', e => {
+  const row = e.target.closest ? e.target.closest('.row[data-id]') : null;
+  if (row && (!e.relatedTarget || !row.contains(e.relatedTarget))) hideTip();
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') hideTip(); });
+
+initSpecs();
+render();
+</script>
+</body>
+</html>
