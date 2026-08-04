@@ -511,6 +511,10 @@ test("no agent-writable field can inject markup or a handler into the rendered p
           // shape, not data: URIs generally: a data: href on an <a> is still a finding.
           .filter(e => !(e.tagName === "LINK" && e.rel === "icon" &&
             /^data:image\/svg\+xml,/.test(e.getAttribute("href") ?? "")))
+          // gearing.html is the ONE sanctioned relative href — the sibling page this
+          // build publishes next to index.html. Exact match; any other relative href
+          // (or a path prefix smuggled around it) is still a finding.
+          .filter(e => e.getAttribute("href") !== "gearing.html")
           .filter(e => !/^(https:|#|$)/.test(e.getAttribute("href") ?? "")).length,
         markVisible: document.body.innerText.includes(mark),
         // Count the sinks the probe actually reached. A poisoned field whose section never

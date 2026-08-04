@@ -1,0 +1,430 @@
+{
+  "source": "Community Season 2 item-level sheet by Norumu (featured by Icy Veins)",
+  "sourceUrl": "https://docs.google.com/spreadsheets/d/1BCDWQvv_HFRO97s8UCQr_7vwz0pFXQw6gbTBgM1VeOg/edit#gid=1935597385",
+  "harvestedAt": "2026-08-02",
+  "policy": "Corroboration only. Values unique to this sheet are marked provisional because the author flags inferred cells in red text, which CSV export strips.",
+  "authorCaveats": [
+    "Red text is inferred information and needs confirmation",
+    "Still need Vaults of Atal'Utek info"
+  ],
+  "tabs": {
+    "season2": "1935597385",
+    "season1": "1360188519"
+  },
+  "ladder": [
+    256,
+    259,
+    263,
+    266,
+    269,
+    272,
+    276,
+    279,
+    282,
+    285,
+    289,
+    292,
+    295,
+    298,
+    302,
+    305,
+    308,
+    311,
+    315,
+    318,
+    321,
+    324,
+    328,
+    331,
+    334,
+    337,
+    341,
+    344
+  ],
+  "trackStart": {
+    "Adventurer": 266,
+    "Veteran": 279,
+    "Champion": 292,
+    "Hero": 305,
+    "Myth": 318
+  },
+  "seasonShift": {
+    "season1Ladder": [
+      207,
+      210,
+      214,
+      217,
+      220,
+      224,
+      227,
+      230,
+      233,
+      237,
+      240,
+      243,
+      246,
+      250,
+      253,
+      256,
+      259,
+      263,
+      266,
+      269,
+      272,
+      276,
+      279,
+      282,
+      285,
+      289,
+      292,
+      295,
+      298
+    ],
+    "season1TrackStart": {
+      "Unranked and Not Upgradeable": 207,
+      "Adventurer": 220,
+      "Veteran": 233,
+      "Champion": 246,
+      "Hero": 259,
+      "Myth": 272
+    },
+    "mythSeason1": [
+      272,
+      276,
+      279,
+      282,
+      285,
+      289
+    ],
+    "mythSeason2": [
+      318,
+      321,
+      324,
+      328,
+      331,
+      334
+    ],
+    "perRankDelta": [
+      46,
+      45,
+      45,
+      46,
+      46,
+      45
+    ],
+    "headline": 46,
+    "explanation": "Blizzard's headline shift is +46, but per-rank deltas are 45/46 because both ladders snap to the discrete item-level grid. Neither figure is an error."
+  },
+  "validation": {
+    "total": 21,
+    "confirmed": 21,
+    "conflicts": []
+  },
+  "sheetOnlyKeys": [
+    "world",
+    "crafted",
+    "venomstone",
+    "delveCoffer",
+    "delveTrove",
+    "delveVault",
+    "raidVault"
+  ],
+  "rewards": {
+    "world": [
+      {
+        "ilvl": 256,
+        "label": "12.1 Campaign"
+      },
+      {
+        "ilvl": 266,
+        "label": "World Quests"
+      },
+      {
+        "ilvl": 279,
+        "label": "World Boss / Vault"
+      },
+      {
+        "ilvl": 285,
+        "label": "Pinnacle Cache"
+      },
+      {
+        "ilvl": 292,
+        "label": "World Boss (Normal)"
+      },
+      {
+        "ilvl": 305,
+        "label": "World Boss (Heroic)"
+      },
+      {
+        "ilvl": 318,
+        "label": "World Boss (Mythic)"
+      }
+    ],
+    "crafted": [
+      {
+        "ilvl": 292,
+        "label": "Spark of Tides"
+      },
+      {
+        "ilvl": 308,
+        "label": "Add 80 Hero Crests"
+      },
+      {
+        "ilvl": 321,
+        "label": "Add 80 Myth Crests"
+      }
+    ],
+    "venomstone": [
+      {
+        "ilvl": 324,
+        "label": "Ascended Hero Craft"
+      },
+      {
+        "ilvl": 328,
+        "label": "Ascended Hero"
+      },
+      {
+        "ilvl": 337,
+        "label": "Ascended Myth Craft"
+      },
+      {
+        "ilvl": 341,
+        "label": "Ascended Myth"
+      }
+    ],
+    "preyHunt": [
+      {
+        "ilvl": 266,
+        "label": "Normal"
+      },
+      {
+        "ilvl": 279,
+        "label": "Hard"
+      },
+      {
+        "ilvl": 292,
+        "label": "Nightmare"
+      }
+    ],
+    "preyVault": [
+      {
+        "ilvl": 279,
+        "label": "Normal"
+      },
+      {
+        "ilvl": 292,
+        "label": "Hard"
+      },
+      {
+        "ilvl": 305,
+        "label": "Nightmare"
+      }
+    ],
+    "delveCoffer": [
+      {
+        "ilvl": 266,
+        "label": "Tier 1"
+      },
+      {
+        "ilvl": 269,
+        "label": "Tier 2"
+      },
+      {
+        "ilvl": 272,
+        "label": "Tier 3"
+      },
+      {
+        "ilvl": 276,
+        "label": "Tier 4"
+      },
+      {
+        "ilvl": 279,
+        "label": "Tier 5"
+      },
+      {
+        "ilvl": 282,
+        "label": "Tier 6"
+      },
+      {
+        "ilvl": 292,
+        "label": "Tier 7"
+      },
+      {
+        "ilvl": 295,
+        "label": "Tier 8-11"
+      },
+      {
+        "ilvl": 305,
+        "label": "T11 (Journey 9)"
+      }
+    ],
+    "delveTrove": [
+      {
+        "ilvl": 282,
+        "label": "Tier 4"
+      },
+      {
+        "ilvl": 289,
+        "label": "Tier 5"
+      },
+      {
+        "ilvl": 292,
+        "label": "Tier 6"
+      },
+      {
+        "ilvl": 295,
+        "label": "Tier 7"
+      },
+      {
+        "ilvl": 305,
+        "label": "Tier 8-11"
+      }
+    ],
+    "delveVault": [
+      {
+        "ilvl": 279,
+        "label": "Tier 1"
+      },
+      {
+        "ilvl": 282,
+        "label": "Tier 2"
+      },
+      {
+        "ilvl": 285,
+        "label": "Tier 3"
+      },
+      {
+        "ilvl": 289,
+        "label": "Tier 4"
+      },
+      {
+        "ilvl": 292,
+        "label": "Tier 5"
+      },
+      {
+        "ilvl": 298,
+        "label": "Tier 6"
+      },
+      {
+        "ilvl": 302,
+        "label": "Tier 7"
+      },
+      {
+        "ilvl": 305,
+        "label": "Tier 8-11"
+      }
+    ],
+    "dungeonDrop": [
+      {
+        "ilvl": 259,
+        "label": "Normal / Follower"
+      },
+      {
+        "ilvl": 276,
+        "label": "Heroic"
+      },
+      {
+        "ilvl": 292,
+        "label": "Mythic / M0"
+      },
+      {
+        "ilvl": 295,
+        "label": "M +2-3"
+      },
+      {
+        "ilvl": 298,
+        "label": "M +4"
+      },
+      {
+        "ilvl": 302,
+        "label": "M +5"
+      },
+      {
+        "ilvl": 305,
+        "label": "M +6-7"
+      },
+      {
+        "ilvl": 308,
+        "label": "M +8-9"
+      },
+      {
+        "ilvl": 311,
+        "label": "M +10 or higher"
+      }
+    ],
+    "dungeonVault": [
+      {
+        "ilvl": 289,
+        "label": "Heroic"
+      },
+      {
+        "ilvl": 302,
+        "label": "Mythic"
+      },
+      {
+        "ilvl": 305,
+        "label": "M +2-3"
+      },
+      {
+        "ilvl": 308,
+        "label": "M +4-5"
+      },
+      {
+        "ilvl": 311,
+        "label": "M +6"
+      },
+      {
+        "ilvl": 315,
+        "label": "M +7-9"
+      },
+      {
+        "ilvl": 318,
+        "label": "M +10 or higher"
+      }
+    ],
+    "raidDrop": [
+      {
+        "ilvl": 279,
+        "label": "Raid Finder / LFR"
+      },
+      {
+        "ilvl": 292,
+        "label": "Normal"
+      },
+      {
+        "ilvl": 305,
+        "label": "Heroic"
+      },
+      {
+        "ilvl": 318,
+        "label": "(Most) Mythic"
+      },
+      {
+        "ilvl": 344,
+        "label": "Last 2 Mythic Bosses"
+      }
+    ],
+    "raidVault": [
+      {
+        "ilvl": 292,
+        "label": "Raid Finder / LFR"
+      },
+      {
+        "ilvl": 305,
+        "label": "Normal"
+      },
+      {
+        "ilvl": 318,
+        "label": "Heroic"
+      },
+      {
+        "ilvl": 334,
+        "label": "(Most) Mythic"
+      },
+      {
+        "ilvl": 344,
+        "label": "Last 2 Mythic Bosses"
+      }
+    ]
+  }
+}

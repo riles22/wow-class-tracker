@@ -1,0 +1,214 @@
+{
+  "schemaVersion": 1,
+  "patch": "12.0.7",
+  "reviewedAt": "2026-08-02",
+  "provenance": "Reviewed snapshot of all 40 generated specialization stat priorities in data/specs.json, preserving the exact primary stat, ordered secondary stats, and source URL used by the project on 2026-08-02.",
+  "contextualProfileSpecs": [
+    "Blood Death Knight", "Devourer Demon Hunter", "Guardian Druid", "Restoration Druid",
+    "Beast Mastery Hunter", "Survival Hunter", "Brewmaster Monk", "Holy Paladin",
+    "Protection Paladin", "Discipline Priest", "Holy Priest", "Shadow Priest", "Outlaw Rogue",
+    "Subtlety Rogue", "Enhancement Shaman"
+  ],
+  "priorities": {
+    "Blood Death Knight": {
+      "primary": "Strength",
+      "secondaries": ["Crit", "Vers", "Mast", "Haste"],
+      "source": "https://www.icy-veins.com/wow/blood-death-knight-pve-tank-stat-priority"
+    },
+    "Frost Death Knight": {
+      "primary": "Strength",
+      "secondaries": ["Mast", "Crit", "Haste", "Vers"],
+      "source": "https://www.icy-veins.com/wow/frost-death-knight-pve-dps-stat-priority"
+    },
+    "Unholy Death Knight": {
+      "primary": "Strength",
+      "secondaries": ["Mast", "Crit", "Haste", "Vers"],
+      "source": "https://www.icy-veins.com/wow/unholy-death-knight-pve-dps-stat-priority"
+    },
+    "Havoc Demon Hunter": {
+      "primary": "Agility",
+      "secondaries": ["Crit", "Mast", "Haste", "Vers"],
+      "source": "https://www.icy-veins.com/wow/havoc-demon-hunter-pve-dps-stat-priority"
+    },
+    "Devourer Demon Hunter": {
+      "primary": "Intellect",
+      "secondaries": ["Haste", "Mast", "Crit", "Vers"],
+      "source": "https://www.icy-veins.com/wow/devourer-demon-hunter-pve-dps-stat-priority"
+    },
+    "Vengeance Demon Hunter": {
+      "primary": "Agility",
+      "secondaries": ["Haste", "Vers", "Crit", "Mast"],
+      "source": "https://www.icy-veins.com/wow/vengeance-demon-hunter-pve-tank-stat-priority"
+    },
+    "Balance Druid": {
+      "primary": "Intellect",
+      "secondaries": ["Crit", "Mast", "Haste", "Vers"],
+      "source": "https://www.icy-veins.com/wow/balance-druid-pve-dps-stat-priority"
+    },
+    "Feral Druid": {
+      "primary": "Agility",
+      "secondaries": ["Mast", "Haste", "Crit", "Vers"],
+      "source": "https://www.icy-veins.com/wow/feral-druid-pve-dps-stat-priority"
+    },
+    "Guardian Druid": {
+      "primary": "Agility",
+      "secondaries": ["Haste", "Vers", "Mast", "Crit"],
+      "source": "https://www.icy-veins.com/wow/guardian-druid-pve-tank-stat-priority"
+    },
+    "Restoration Druid": {
+      "primary": "Intellect",
+      "secondaries": ["Haste", "Mast", "Vers", "Crit"],
+      "source": "https://www.icy-veins.com/wow/restoration-druid-pve-healing-stat-priority"
+    },
+    "Augmentation Evoker": {
+      "primary": "Intellect",
+      "secondaries": ["Crit", "Haste", "Mast", "Vers"],
+      "source": "https://www.icy-veins.com/wow/augmentation-evoker-pve-dps-stat-priority"
+    },
+    "Devastation Evoker": {
+      "primary": "Intellect",
+      "secondaries": ["Haste", "Crit", "Mast", "Vers"],
+      "source": "https://www.icy-veins.com/wow/devastation-evoker-pve-dps-stat-priority"
+    },
+    "Preservation Evoker": {
+      "primary": "Intellect",
+      "secondaries": ["Mast", "Crit", "Haste", "Vers"],
+      "source": "https://www.icy-veins.com/wow/preservation-evoker-pve-healing-stat-priority"
+    },
+    "Beast Mastery Hunter": {
+      "primary": "Agility",
+      "secondaries": ["Mast", "Crit", "Haste", "Vers"],
+      "source": "https://www.icy-veins.com/wow/beast-mastery-hunter-pve-dps-stat-priority"
+    },
+    "Marksmanship Hunter": {
+      "primary": "Agility",
+      "secondaries": ["Crit", "Mast", "Vers", "Haste"],
+      "source": "https://www.icy-veins.com/wow/marksmanship-hunter-pve-dps-stat-priority"
+    },
+    "Survival Hunter": {
+      "primary": "Agility",
+      "secondaries": ["Mast", "Crit", "Haste", "Vers"],
+      "source": "https://www.icy-veins.com/wow/survival-hunter-pve-dps-stat-priority"
+    },
+    "Arcane Mage": {
+      "primary": "Intellect",
+      "secondaries": ["Mast", "Vers", "Crit", "Haste"],
+      "source": "https://www.icy-veins.com/wow/arcane-mage-pve-dps-stat-priority"
+    },
+    "Fire Mage": {
+      "primary": "Intellect",
+      "secondaries": ["Haste", "Mast", "Vers", "Crit"],
+      "source": "https://www.icy-veins.com/wow/fire-mage-pve-dps-stat-priority"
+    },
+    "Frost Mage": {
+      "primary": "Intellect",
+      "secondaries": ["Mast", "Crit", "Haste", "Vers"],
+      "source": "https://www.icy-veins.com/wow/frost-mage-pve-dps-stat-priority"
+    },
+    "Brewmaster Monk": {
+      "primary": "Agility",
+      "secondaries": ["Crit", "Vers", "Mast", "Haste"],
+      "source": "https://www.icy-veins.com/wow/brewmaster-monk-pve-tank-stat-priority"
+    },
+    "Mistweaver Monk": {
+      "primary": "Intellect",
+      "secondaries": ["Haste", "Crit", "Vers", "Mast"],
+      "source": "https://www.icy-veins.com/wow/mistweaver-monk-pve-healing-stat-priority"
+    },
+    "Windwalker Monk": {
+      "primary": "Agility",
+      "secondaries": ["Haste", "Crit", "Mast", "Vers"],
+      "source": "https://www.icy-veins.com/wow/windwalker-monk-pve-dps-stat-priority"
+    },
+    "Holy Paladin": {
+      "primary": "Intellect",
+      "secondaries": ["Mast", "Haste", "Crit", "Vers"],
+      "source": "https://www.icy-veins.com/wow/holy-paladin-pve-healing-stat-priority"
+    },
+    "Protection Paladin": {
+      "primary": "Strength",
+      "secondaries": ["Haste", "Vers", "Mast", "Crit"],
+      "source": "https://www.icy-veins.com/wow/protection-paladin-pve-tank-stat-priority"
+    },
+    "Retribution Paladin": {
+      "primary": "Strength",
+      "secondaries": ["Mast", "Crit", "Haste", "Vers"],
+      "source": "https://www.icy-veins.com/wow/retribution-paladin-pve-dps-stat-priority"
+    },
+    "Discipline Priest": {
+      "primary": "Intellect",
+      "secondaries": ["Haste", "Mast", "Crit", "Vers"],
+      "source": "https://www.icy-veins.com/wow/discipline-priest-pve-healing-stat-priority"
+    },
+    "Holy Priest": {
+      "primary": "Intellect",
+      "secondaries": ["Crit", "Vers", "Mast", "Haste"],
+      "source": "https://www.icy-veins.com/wow/holy-priest-pve-healing-stat-priority"
+    },
+    "Shadow Priest": {
+      "primary": "Intellect",
+      "secondaries": ["Haste", "Mast", "Crit", "Vers"],
+      "source": "https://www.icy-veins.com/wow/shadow-priest-pve-dps-stat-priority"
+    },
+    "Assassination Rogue": {
+      "primary": "Agility",
+      "secondaries": ["Crit", "Haste", "Mast", "Vers"],
+      "source": "https://www.icy-veins.com/wow/assassination-rogue-pve-dps-stat-priority"
+    },
+    "Outlaw Rogue": {
+      "primary": "Agility",
+      "secondaries": ["Crit", "Haste", "Vers", "Mast"],
+      "source": "https://www.icy-veins.com/wow/outlaw-rogue-pve-dps-stat-priority"
+    },
+    "Subtlety Rogue": {
+      "primary": "Agility",
+      "secondaries": ["Haste", "Mast", "Crit", "Vers"],
+      "source": "https://www.icy-veins.com/wow/subtlety-rogue-pve-dps-stat-priority"
+    },
+    "Elemental Shaman": {
+      "primary": "Intellect",
+      "secondaries": ["Mast", "Haste", "Crit", "Vers"],
+      "source": "https://www.icy-veins.com/wow/elemental-shaman-pve-dps-stat-priority"
+    },
+    "Enhancement Shaman": {
+      "primary": "Agility",
+      "secondaries": ["Mast", "Haste", "Crit", "Vers"],
+      "source": "https://www.icy-veins.com/wow/enhancement-shaman-pve-dps-stat-priority"
+    },
+    "Restoration Shaman": {
+      "primary": "Intellect",
+      "secondaries": ["Crit", "Vers", "Haste", "Mast"],
+      "source": "https://www.icy-veins.com/wow/restoration-shaman-pve-healing-stat-priority"
+    },
+    "Affliction Warlock": {
+      "primary": "Intellect",
+      "secondaries": ["Haste", "Crit", "Mast", "Vers"],
+      "source": "https://www.icy-veins.com/wow/affliction-warlock-pve-dps-stat-priority"
+    },
+    "Demonology Warlock": {
+      "primary": "Intellect",
+      "secondaries": ["Crit", "Haste", "Mast", "Vers"],
+      "source": "https://www.icy-veins.com/wow/demonology-warlock-pve-dps-stat-priority"
+    },
+    "Destruction Warlock": {
+      "primary": "Intellect",
+      "secondaries": ["Crit", "Haste", "Mast", "Vers"],
+      "source": "https://www.icy-veins.com/wow/destruction-warlock-pve-dps-stat-priority"
+    },
+    "Arms Warrior": {
+      "primary": "Strength",
+      "secondaries": ["Crit", "Haste", "Mast", "Vers"],
+      "source": "https://www.icy-veins.com/wow/arms-warrior-pve-dps-stat-priority"
+    },
+    "Fury Warrior": {
+      "primary": "Strength",
+      "secondaries": ["Mast", "Haste", "Vers", "Crit"],
+      "source": "https://www.icy-veins.com/wow/fury-warrior-pve-dps-stat-priority"
+    },
+    "Protection Warrior": {
+      "primary": "Strength",
+      "secondaries": ["Haste", "Vers", "Crit", "Mast"],
+      "source": "https://www.icy-veins.com/wow/protection-warrior-pve-tank-stat-priority"
+    }
+  }
+}

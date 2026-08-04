@@ -1,0 +1,158 @@
+{
+  "_provenance": "Curated from the live Icy Veins Patch 12.0.7 stat-priority pages. These overrides preserve build- and content-specific profiles or important threshold caveats that a single flat-list scraper cannot represent. The orders are general priorities, not fixed numerical stat weights; simulate close gear choices where the guide recommends it.",
+  "_patch": "12.0.7",
+  "overrides": {
+    "Blood Death Knight": {
+      "primary": "Strength",
+      "secondaries": ["Crit", "Vers", "Mast", "Haste"],
+      "note": "Default profile: Deathbringer. Use the matching Hero Talent variant when playing San'layn.",
+      "variants": [
+        { "name": "Deathbringer (general)", "secondaries": ["Crit", "Vers", "Mast", "Haste"] },
+        { "name": "San'layn (general)", "secondaries": ["Haste", "Crit", "Vers", "Mast"] }
+      ],
+      "caveat": "Item level, Armor, Strength, and Stamina generally outweigh small secondary-stat differences, and all four secondaries are close. DPS simulations do not measure defensive value on their own.",
+      "source": "https://www.icy-veins.com/wow/blood-death-knight-pve-tank-stat-priority"
+    },
+    "Devourer Demon Hunter": {
+      "primary": "Intellect",
+      "secondaries": ["Haste", "Mast", "Crit", "Vers"],
+      "note": "Default profile: Annihilator single-target/general. Annihilator swaps Mastery ahead of Haste in AoE; Void-Scarred also prioritizes Mastery.",
+      "variants": [
+        { "name": "Annihilator (single-target / general)", "secondaries": ["Haste", "Mast", "Crit", "Vers"] },
+        { "name": "Annihilator (AoE)", "secondaries": ["Mast", "Haste", "Crit", "Vers"] },
+        { "name": "Void-Scarred (general)", "secondaries": ["Mast", "Haste", "Crit", "Vers"] }
+      ],
+      "caveat": "Item level and Intellect remain extremely important, and the Hero Talent profiles are close enough that separate gear sets are unnecessary. Simulate close upgrades rather than treating the order as fixed weights.",
+      "source": "https://www.icy-veins.com/wow/devourer-demon-hunter-pve-dps-stat-priority"
+    },
+    "Guardian Druid": {
+      "primary": "Agility",
+      "secondaries": ["Haste", "Vers", "Mast", "Crit"],
+      "note": "Default profile: survivability. Select the damage profile when ranking gear for offense.",
+      "variants": [
+        { "name": "Survivability", "secondaries": ["Haste", "Vers", "Mast", "Crit"] },
+        { "name": "Damage", "secondaries": ["Haste", "Vers", "Crit", "Mast"] }
+      ],
+      "caveat": "Guardian secondaries are close, and an item around 10 or more item levels higher will usually be better. Simulate the damage profile for offensive comparisons.",
+      "source": "https://www.icy-veins.com/wow/guardian-druid-pve-tank-stat-priority"
+    },
+    "Restoration Druid": {
+      "primary": "Intellect",
+      "secondaries": ["Haste", "Mast", "Vers", "Crit"],
+      "note": "Default profile: raid healing. Dungeon healing and dungeon damage use distinct secondary-stat orders.",
+      "variants": [
+        { "name": "Raid healing", "secondaries": ["Haste", "Mast", "Vers", "Crit"] },
+        { "name": "Dungeon healing", "secondaries": ["Mast", "Haste", "Vers", "Crit"] },
+        { "name": "Dungeon damage", "secondaries": ["Haste", "Vers", "Crit", "Mast"] }
+      ],
+      "caveat": "Restoration Druid has no universal stat weights: values change with content, spell distribution, and current gear. Use a healer gear-analysis tool for close healing upgrades.",
+      "source": "https://www.icy-veins.com/wow/restoration-druid-pve-healing-stat-priority"
+    },
+    "Beast Mastery Hunter": {
+      "primary": "Agility",
+      "secondaries": ["Mast", "Crit", "Haste", "Vers"],
+      "note": "General all-build, all-content order. On pure single-target, Haste is slightly better than Crit; Crit is preferred over Haste for all-around play.",
+      "caveat": "Haste adds essentially no AoE value for Beast Mastery, and each stat becomes more valuable when underrepresented. Keep the published flat order as a rule of thumb and simulate close upgrades.",
+      "source": "https://www.icy-veins.com/wow/beast-mastery-hunter-pve-dps-stat-priority"
+    },
+    "Survival Hunter": {
+      "primary": "Agility",
+      "secondaries": ["Mast", "Crit", "Haste", "Vers"],
+      "note": "General all-build order. For Pack Leader, Crit and Haste are effectively interchangeable; focus more on maximizing Mastery than on their exact ratio.",
+      "caveat": "The flat priority is a starting point rather than a numerical weighting. Secondary values change with the amount already equipped, so simulate close upgrades.",
+      "source": "https://www.icy-veins.com/wow/survival-hunter-pve-dps-stat-priority"
+    },
+    "Brewmaster Monk": {
+      "primary": "Agility",
+      "secondaries": ["Crit", "Vers", "Mast", "Haste"],
+      "note": "Default profile: defensive. Select the damage profile when ranking gear for offense.",
+      "variants": [
+        { "name": "Defensive / survivability", "secondaries": ["Crit", "Vers", "Mast", "Haste"] },
+        { "name": "Offensive / damage", "secondaries": ["Crit", "Mast", "Vers", "Haste"] }
+      ],
+      "caveat": "Brewmaster secondary stats are close enough that item level is usually the first consideration. Use the profile that matches whether survival or damage is the goal.",
+      "source": "https://www.icy-veins.com/wow/brewmaster-monk-pve-tank-stat-priority"
+    },
+    "Holy Paladin": {
+      "primary": "Intellect",
+      "secondaries": ["Mast", "Haste", "Crit", "Vers"],
+      "note": "Default profile: Herald of the Sun raid healing; the published Mythic+ order is the same. Lightsmith uses a distinct order.",
+      "variants": [
+        { "name": "Herald of the Sun (raid healing)", "secondaries": ["Mast", "Haste", "Crit", "Vers"] },
+        { "name": "Lightsmith (raid healing)", "secondaries": ["Mast", "Crit", "Haste", "Vers"] },
+        { "name": "Mythic+ healing", "secondaries": ["Mast", "Haste", "Crit", "Vers"] }
+      ],
+      "caveat": "Use the matching Hero Talent/content profile. In Mythic+, Mastery can be deprioritized once healing is comfortable and damage matters, but the guide does not publish a fixed alternative order. Intellect and item level can outweigh small secondary differences.",
+      "source": "https://www.icy-veins.com/wow/holy-paladin-pve-healing-stat-priority"
+    },
+    "Protection Paladin": {
+      "primary": "Strength",
+      "secondaries": ["Haste", "Vers", "Mast", "Crit"],
+      "note": "Default profile: defensive. Select the offensive profile when ranking for damage.",
+      "variants": [
+        { "name": "Defensive / survivability", "secondaries": ["Haste", "Vers", "Mast", "Crit"] },
+        { "name": "Offensive / damage", "secondaries": ["Haste", "Crit", "Vers", "Mast"] }
+      ],
+      "caveat": "Haste's relative value shifts around the roughly 20-30% range, and item level is generally more important than perfect secondary distribution. Simulate close offensive upgrades.",
+      "source": "https://www.icy-veins.com/wow/protection-paladin-pve-tank-stat-priority"
+    },
+    "Discipline Priest": {
+      "primary": "Intellect",
+      "secondaries": ["Haste", "Mast", "Crit", "Vers"],
+      "note": "Default profile: Oracle. Voidweaver uses a distinct order.",
+      "variants": [
+        { "name": "Oracle (healing)", "secondaries": ["Haste", "Mast", "Crit", "Vers"] },
+        { "name": "Voidweaver (healing)", "secondaries": ["Haste", "Crit", "Mast", "Vers"] }
+      ],
+      "caveat": "All four secondary stats are relatively close for Discipline, so higher item-level gear will often win. Use the matching Hero Talent profile and evaluate close healing upgrades with an appropriate tool.",
+      "source": "https://www.icy-veins.com/wow/discipline-priest-pve-healing-stat-priority"
+    },
+    "Holy Priest": {
+      "primary": "Intellect",
+      "secondaries": ["Crit", "Vers", "Mast", "Haste"],
+      "note": "Default profile: raid healing. Dungeon healing swaps Haste and Mastery.",
+      "variants": [
+        { "name": "Raid healing", "secondaries": ["Crit", "Vers", "Mast", "Haste"] },
+        { "name": "Dungeon healing", "secondaries": ["Crit", "Vers", "Haste", "Mast"] }
+      ],
+      "caveat": "The listed priorities are general profiles, and higher item-level gear will often be preferable. Use a healer gear-analysis tool for close choices.",
+      "source": "https://www.icy-veins.com/wow/holy-priest-pve-healing-stat-priority"
+    },
+    "Shadow Priest": {
+      "primary": "Intellect",
+      "secondaries": ["Haste", "Mast", "Crit", "Vers"],
+      "note": "Default profile: Voidweaver. Both single-target and multi-target use the same order within each Hero Talent profile.",
+      "variants": [
+        { "name": "Voidweaver (single- and multi-target)", "secondaries": ["Haste", "Mast", "Crit", "Vers"] },
+        { "name": "Archon (single- and multi-target)", "secondaries": ["Mast", "Crit", "Haste", "Vers"] }
+      ],
+      "caveat": "The preferred amounts differ by Hero Talent and target count even where the order is unchanged. Item level and Intellect come first; avoid over-stacking Versatility and simulate close upgrades.",
+      "source": "https://www.icy-veins.com/wow/shadow-priest-pve-dps-stat-priority"
+    },
+    "Outlaw Rogue": {
+      "primary": "Agility",
+      "secondaries": ["Crit", "Haste", "Vers", "Mast"],
+      "note": "General raid and Mythic+ order. Crit begins losing value near 40%, while Haste drops sharply after reaching roughly 20-25% and the 0.8-second Adrenaline Rush GCD breakpoint.",
+      "caveat": "Do not read the flat order as a reason to stack Crit or Haste indefinitely. Avoid sacrificing item level merely to reach a breakpoint, and simulate close upgrades once near the thresholds.",
+      "source": "https://www.icy-veins.com/wow/outlaw-rogue-pve-dps-stat-priority"
+    },
+    "Subtlety Rogue": {
+      "primary": "Agility",
+      "secondaries": ["Haste", "Mast", "Crit", "Vers"],
+      "note": "General order. Trickster targets roughly 700 Haste, while Deathstalker targets roughly 1100 Haste; Haste becomes much less valuable when it does not add another global inside Shadow Dance.",
+      "caveat": "Mastery gains value in multi-target situations. Treat the Haste targets as Hero Talent breakpoints rather than an instruction to stack Haste without limit, and simulate close upgrades.",
+      "source": "https://www.icy-veins.com/wow/subtlety-rogue-pve-dps-stat-priority"
+    },
+    "Enhancement Shaman": {
+      "primary": "Agility",
+      "secondaries": ["Mast", "Haste", "Crit", "Vers"],
+      "note": "Default profile: Totemic. Stormbringer uses a distinct order; each profile applies to both single-target and AoE.",
+      "variants": [
+        { "name": "Totemic (single-target and AoE)", "secondaries": ["Mast", "Haste", "Crit", "Vers"] },
+        { "name": "Stormbringer (single-target and AoE)", "secondaries": ["Haste", "Mast", "Crit", "Vers"] }
+      ],
+      "caveat": "The profiles are general priorities rather than fixed weights. One gear set can serve both Hero Talent builds, but item level, Agility, and current stat balance still matter; simulate close upgrades.",
+      "source": "https://www.icy-veins.com/wow/enhancement-shaman-pve-dps-stat-priority"
+    }
+  }
+}

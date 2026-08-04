@@ -400,6 +400,15 @@ docs/     working notes (finder-audit.md · security-audit-2026-07.md ·
           the frozen forecast's on-page grading, the +14 PTR-surface sunset, the
           12.2-cycle generalization (PHASES constant), and the gearing-lane stub.
           Phase-1 machinery must land before PHASE_FLIP_DUE (Aug 20).)
+gearing/  the Season 2 gear & loot explorer — a SELF-CONTAINED subproject (own data/,
+          harvesters, validator, tests, build → gearing/wow-s2-gearing.html; see
+          gearing/README.md). Imported 2026-08-04 from the standalone project; audited
+          in docs/s2-transition-scope.md (Decision 4). The tracker build copies its
+          artifact to dist/gearing.html (copy-if-present) and the CTA row links to it.
+          Harvests are MANUAL (Wowhead unreachable from CI) — data freshness is a
+          local-run duty. Its tests run under the root `npm test` (node --test discovers
+          them). Read-only coupling: its harvest-specs reads the tracker's specs.json;
+          nothing in gearing/ writes outside gearing/, and the nightly never touches it.
 legacy/   original single-file tracker (pre-conversion reference)
 .github/  workflows/deploy.yml (build+deploy Pages on push) · workflows/ci.yml (tests on
           every push) · workflows/freshness.yml (daily staleness heartbeat → alert issue) ·

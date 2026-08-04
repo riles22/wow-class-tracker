@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>WoW Midnight Season 2 - The Venomous Abyss, Every Drop (sheet 3)</title>
+<style>
+  :root{
+    --adv:#4ee06a; --vet:#4aa8ff; --champ:#c07cf5; --hero:#ff9436; --myth:#f2d698;
+    --t1:#e9eef7; --t2:#96a4b8; --t3:#697990; --t4:#4f5d72;
+    --line:rgba(255,255,255,.075);
+    --panel:rgba(255,255,255,.021);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:2560px;height:1440px;overflow:hidden}
+  body{
+    background:#05070a;
+    font-family:"Inter","Inter Display",sans-serif;
+    color:var(--t1);
+    -webkit-font-smoothing:antialiased;
+    position:relative;
+  }
+  /* ---------- background ---------- */
+  .bg{position:absolute;inset:0;z-index:0}
+  .bg .glow{position:absolute;border-radius:50%;filter:blur(140px)}
+  .g1{width:1500px;height:900px;left:-320px;top:-380px;background:radial-gradient(circle,rgba(60,110,180,.16),transparent 66%)}
+  .g2{width:1400px;height:900px;right:-300px;top:-300px;background:radial-gradient(circle,rgba(150,110,220,.13),transparent 66%)}
+  .g3{width:1900px;height:700px;left:640px;bottom:-420px;background:radial-gradient(circle,rgba(230,200,130,.075),transparent 68%)}
+  .grid{position:absolute;inset:0;
+    background-image:linear-gradient(rgba(255,255,255,.016) 1px,transparent 1px),
+                     linear-gradient(90deg,rgba(255,255,255,.016) 1px,transparent 1px);
+    background-size:64px 64px;
+    -webkit-mask-image:radial-gradient(ellipse 78% 68% at 50% 42%,#000 32%,transparent 100%);
+  }
+  .vig{position:absolute;inset:0;background:radial-gradient(ellipse 100% 84% at 50% 46%,transparent 44%,rgba(0,0,0,.6) 100%)}
+  /* track-source rows */
+  .src-row{display:flex;align-items:flex-start;gap:13px;padding:9px 0 9.5px;border-bottom:1px solid rgba(255,255,255,.035)}
+  .src-row:last-child{border-bottom:none}
+  .src-row .band{width:3px;align-self:stretch;border-radius:2px;flex:none}
+  .src-row .nm{width:118px;flex:none}
+  .src-row .nm b{display:block;font-size:13.5px;font-weight:700;letter-spacing:.2px}
+  .src-row .nm i{display:block;font-style:normal;font-family:"JetBrains Mono","DejaVu Sans Mono",monospace;
+                 font-size:11.5px;color:var(--t3);font-weight:600;margin-top:2px}
+  .src-row .ws{flex:1;font-size:12.2px;color:var(--t2);line-height:1.5}
+  .src-row .ws b{color:var(--t1);font-weight:600}
+
+  /* calendar */
+  .cal{display:flex;flex-direction:column}
+  .cal .r{display:flex;gap:14px;padding:8.5px 0 9px;border-bottom:1px solid rgba(255,255,255,.035)}
+  .cal .r:last-child{border-bottom:none}
+  .cal .d{width:86px;flex:none;font-family:"JetBrains Mono","DejaVu Sans Mono",monospace;font-size:12.5px;
+          font-weight:700;color:var(--t2);letter-spacing:.2px;padding-top:1px}
+  .cal .r.key .d{color:var(--myth)}
+  .cal .r.key .e{color:var(--t1)}
+  .cal .e{flex:1;font-size:12.2px;color:var(--t2);line-height:1.5}
+  .cal .e b{color:var(--t1);font-weight:600}
+  .cal .e em{font-style:italic;color:var(--t3)}
+
+  .page{position:relative;z-index:2;height:1440px;padding:38px 74px 56px 104px;display:flex;flex-direction:column}
+
+  /* ---------- header ---------- */
+  header{display:flex;align-items:flex-end;justify-content:space-between;padding-bottom:20px;
+         border-bottom:1px solid var(--line);margin-bottom:22px}
+  .kicker{font-size:13px;letter-spacing:5.4px;text-transform:uppercase;color:var(--t3);font-weight:600;margin-bottom:9px}
+  h1{font-family:"Inter Display",sans-serif;font-size:60px;font-weight:800;letter-spacing:-1.6px;line-height:1;
+     background:linear-gradient(96deg,#ffffff 8%,#dfe8f5 34%,#f2d698 96%);
+     -webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  .sub{margin-top:11px;font-size:16.5px;color:var(--t2);letter-spacing:.35px}
+  .sub b{color:var(--t1);font-weight:600}
+  .sub .dot{color:var(--t4);margin:0 11px}
+
+  .chips{display:flex;gap:13px}
+  .chip{border:1px solid var(--line);background:var(--panel);border-radius:11px;padding:13px 20px 14px;min-width:150px}
+  .chip .lab{font-size:10.5px;letter-spacing:2.5px;text-transform:uppercase;color:var(--t3);font-weight:600}
+  .chip .val{font-family:"JetBrains Mono","DejaVu Sans Mono",monospace;font-size:27px;font-weight:700;margin-top:6px;letter-spacing:-.6px}
+  .chip.max{border-color:rgba(242,214,152,.34);background:linear-gradient(180deg,rgba(242,214,152,.085),rgba(242,214,152,.015))}
+  .chip.max .val{color:var(--myth);text-shadow:0 0 26px rgba(242,214,152,.42)}
+  .chip .val small{font-size:13px;font-weight:600;color:var(--t2);letter-spacing:0;margin-left:3px}
+
+  /* ---------- layout ---------- */
+  .cols{flex:1;display:grid;grid-template-columns:600px 588px 596px 1fr;gap:26px;min-height:0}
+  .col{display:flex;flex-direction:column;gap:19px;min-height:0}
+
+  .card{border:1px solid var(--line);background:var(--panel);border-radius:13px;padding:17px 19px 18px;position:relative;overflow:hidden}
+  .card::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;
+                background:linear-gradient(90deg,transparent,rgba(255,255,255,.13),transparent)}
+  .card.grow{flex:1;display:flex;flex-direction:column;min-height:0}
+
+  .ch{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:13px}
+  .ch h2{font-size:16px;font-weight:700;letter-spacing:2.6px;text-transform:uppercase;color:var(--t1)}
+  .ch .note{font-size:11.5px;color:var(--t3);letter-spacing:.5px;text-align:right}
+  .ch .note b{color:var(--t2);font-weight:600}
+
+  table{width:100%;border-collapse:collapse;font-family:"JetBrains Mono","DejaVu Sans Mono",monospace;font-variant-numeric:tabular-nums}
+  th{font-family:"Inter",sans-serif;font-size:10px;letter-spacing:1.9px;text-transform:uppercase;color:var(--t3);
+     font-weight:600;text-align:center;padding:0 0 8px;border-bottom:1px solid var(--line)}
+  th.l{text-align:left}
+  td{font-size:15.5px;font-weight:600;text-align:center;padding:6.5px 0;border-bottom:1px solid rgba(255,255,255,.035)}
+  tr:last-child td{border-bottom:none}
+  td.l{text-align:left;font-family:"Inter",sans-serif;font-size:14px;font-weight:600;letter-spacing:.1px}
+  td.dim{color:var(--t3)}
+
+  /* track table */
+  .trk td.l{padding-left:11px;border-left:3px solid}
+  .trk .r6{font-weight:800}
+  .trk tr.adv td.l{border-color:var(--adv);color:var(--adv)}
+  .trk tr.vet td.l{border-color:var(--vet);color:var(--vet)}
+  .trk tr.champ td.l{border-color:var(--champ);color:var(--champ)}
+  .trk tr.hero td.l{border-color:var(--hero);color:var(--hero)}
+  .trk tr.myth td.l{border-color:var(--myth);color:var(--myth)}
+  .trk tr.myth td{color:var(--myth)}
+  .trk tr.hero td{color:#ffd7ad}
+  .trk tr.champ td{color:#e2c7fb}
+  .trk tr.vet td{color:#bfdcff}
+  .trk tr.adv td{color:#bff0c9}
+  .trk td.cap{position:relative}
+  .trk tr.myth td.cap{background:rgba(242,214,152,.085)}
+  .trk tr.hero td.cap{background:rgba(255,148,54,.06)}
+
+  .over{margin-top:11px;padding-top:12px;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px}
+  .ov{border:1px solid rgba(242,214,152,.2);border-radius:9px;padding:9px 10px;background:rgba(242,214,152,.035)}
+  .ov .n{font-family:"JetBrains Mono","DejaVu Sans Mono",monospace;font-size:22px;font-weight:800;color:var(--myth);letter-spacing:-.5px}
+  .ov .k{font-size:9.5px;letter-spacing:1.6px;text-transform:uppercase;color:var(--t3);font-weight:600;margin-bottom:3px}
+  .ov .d{font-size:11px;color:var(--t2);margin-top:4px;line-height:1.35}
+
+  /* crest strip */
+  .crests{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:12px}
+  .cr{border:1px solid var(--line);border-radius:8px;padding:8px 6px;text-align:center;background:rgba(255,255,255,.014)}
+  .cr .nm{font-size:10.5px;font-weight:700;letter-spacing:1.1px;text-transform:uppercase}
+  .cr .src{font-size:10px;color:var(--t3);margin-top:4px;font-family:"JetBrains Mono","DejaVu Sans Mono",monospace;font-weight:600}
+  .cr.a{border-color:rgba(78,224,106,.3)} .cr.a .nm{color:var(--adv)}
+  .cr.v{border-color:rgba(74,168,255,.3)} .cr.v .nm{color:var(--vet)}
+  .cr.c{border-color:rgba(192,124,245,.3)} .cr.c .nm{color:var(--champ)}
+  .cr.h{border-color:rgba(255,148,54,.3)} .cr.h .nm{color:var(--hero)}
+  .cr.m{border-color:rgba(242,214,152,.3)} .cr.m .nm{color:var(--myth)}
+  .costline{display:flex;gap:9px}
+  .cost{flex:1;border:1px solid var(--line);border-radius:9px;padding:9px 11px;background:rgba(255,255,255,.014)}
+  .cost .k{font-size:9.5px;letter-spacing:1.6px;text-transform:uppercase;color:var(--t3);font-weight:600}
+  .cost .v{font-family:"JetBrains Mono","DejaVu Sans Mono",monospace;font-size:17px;font-weight:700;margin-top:4px;color:var(--t1)}
+  .cost .v em{font-style:normal;font-size:11.5px;color:var(--t2);font-weight:600;font-family:"Inter",sans-serif}
+
+  /* raid */
+  .bosses{display:grid;grid-template-columns:1fr 1fr;gap:4px 16px;margin-bottom:13px}
+  .bo{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--t2);padding:2.5px 0}
+  .bo i{font-family:"JetBrains Mono","DejaVu Sans Mono",monospace;font-style:normal;font-size:10.5px;color:var(--t4);width:15px;font-weight:700}
+  .bo.fin{color:var(--myth);font-weight:700}
+  .bo.fin i{color:var(--myth)}
+  .rd td.l{padding-left:11px;border-left:3px solid}
+  .rd tr.lfr td.l{border-color:#7f8c9e;color:#b6c2d1}
+  .rd tr.nor td.l{border-color:var(--vet);color:#8ec6ff}
+  .rd tr.hc td.l{border-color:var(--champ);color:#d3b0fb}
+  .rd tr.myt td.l{border-color:var(--myth);color:var(--myth)}
+  .rd td.vr{color:var(--t2)}
+  .rd tr.myt td.pk{color:var(--myth);font-weight:800;background:rgba(242,214,152,.09)}
+
+  /* dungeons */
+  .dg{display:flex;justify-content:space-between;align-items:center;font-size:13px;padding:4.2px 0;
+      border-bottom:1px solid rgba(255,255,255,.035)}
+  .dg:last-child{border-bottom:none}
+  .dg .n{color:var(--t1);font-weight:600}
+  .dg .n em{font-style:normal;font-size:9.5px;font-weight:700;letter-spacing:1.2px;color:#0a0d12;
+            background:var(--myth);padding:1.5px 5px;border-radius:4px;margin-left:7px;vertical-align:1.5px}
+  .dg .x{font-family:"JetBrains Mono","DejaVu Sans Mono",monospace;font-size:12px;color:var(--t3);font-weight:600}
+  .dg .x b{color:var(--t2);font-weight:600;margin-left:9px}
+
+  .mp tr.hl td{background:rgba(242,214,152,.08)}
+  .mp tr.hl td:first-child{color:var(--myth);font-weight:800}
+  .mp tr.cap td{color:var(--t3)}
+
+  /* vault */
+  .vt{display:grid;grid-template-columns:1fr;gap:7px}
+  .vrow{display:flex;align-items:center;justify-content:space-between;border:1px solid var(--line);
+        border-radius:8px;padding:8px 12px;background:rgba(255,255,255,.014)}
+  .vrow .k{font-size:12.5px;font-weight:600;color:var(--t1)}
+  .vrow .k span{color:var(--t3);font-size:11px;font-weight:500;margin-left:7px}
+  .vrow .n{font-family:"JetBrains Mono","DejaVu Sans Mono",monospace;font-size:13px;font-weight:700;color:var(--t2);letter-spacing:.4px}
+
+  /* changes */
+  .ch3 li{list-style:none;font-size:12.5px;color:var(--t2);line-height:1.45;padding:5px 0 5px 15px;position:relative}
+  .ch3 li::before{content:"";position:absolute;left:0;top:11px;width:5px;height:5px;border-radius:50%;background:var(--hero);opacity:.85}
+  .ch3 li b{color:var(--t1);font-weight:600}
+  .ch3 li span{color:var(--myth);font-family:"JetBrains Mono","DejaVu Sans Mono",monospace;font-weight:700}
+  .ch3.wk li{padding-left:24px;font-size:12.8px;padding-top:6.5px;padding-bottom:6.5px}
+  .ch3.wk li::before{content:"";left:0;top:9px;width:12px;height:12px;border-radius:3px;background:none;
+                     border:1.5px solid rgba(255,148,54,.55);opacity:1}
+
+  /* footer */
+  footer{display:flex;align-items:center;justify-content:space-between;padding:15px 0 18px;margin-top:19px;
+         border-top:1px solid var(--line);font-size:11.5px;color:var(--t3);letter-spacing:.3px}
+  footer .lg{display:flex;gap:22px;align-items:center}
+  footer .lg i{font-style:normal}
+  footer sup{color:var(--hero);font-weight:700}
+  footer .rt{color:var(--t2);text-align:right;line-height:1.5}
+  sup.d{color:var(--t4);font-size:9px;font-weight:700;margin-left:1px}
+  sup.s{color:var(--hero);font-size:9px;font-weight:700;margin-left:1px;opacity:.8}
+</style>
+</head>
+<body>
+<style>
+  .cols{grid-template-columns:1fr 1fr 1fr 1fr !important;gap:24px}
+  .card{padding:17px 19px 18px}
+  .col{gap:18px}
+  .ch{margin-bottom:11px}
+  .ch h2{font-size:15px;letter-spacing:1.5px}
+  .ch .note{font-size:11px}
+  table.loot td{font-size:13.4px;padding:5.4px 0;font-family:"Inter",sans-serif;
+                font-weight:500;letter-spacing:0}
+  table.loot th{font-size:10px;letter-spacing:1.5px;padding-bottom:8px}
+  table.loot td.l{font-size:13.4px;font-weight:500}
+  table.loot td:nth-child(1){width:44%;color:var(--t1);padding-right:8px}
+  table.loot td:nth-child(2){width:16%}
+  table.loot td:nth-child(3){width:16%}
+  table.loot td:nth-child(4){width:24%}
+  .dim2{color:var(--t3)}
+  .st{font-family:"JetBrains Mono","DejaVu Sans Mono",monospace;font-size:10.6px;font-weight:600}
+  .sec{color:var(--t3)}
+  .fx{font-style:normal;color:var(--hero);opacity:.85}
+  tr.tok td{color:var(--myth)!important}
+  tr.tok td.st{color:rgba(242,214,152,.7)!important;font-family:"Inter",sans-serif;font-size:10.2px}
+  .bossnum{font-family:"JetBrains Mono","DejaVu Sans Mono",monospace;color:var(--t4);
+           font-size:11.5px;font-weight:700;margin-right:6px}
+  .warn{border:1px solid rgba(78,224,106,.26);background:rgba(78,224,106,.045);border-radius:11px;
+        padding:10px 18px;margin-bottom:16px;font-size:12.4px;color:var(--t2);line-height:1.5}
+  .warn b{color:var(--adv)}
+</style>
+
+<div class="bg">
+  <div class="glow g1"></div><div class="glow g2"></div><div class="glow g3"></div>
+  <div class="grid"></div><div class="vig"></div>
+</div>
+
+<div class="page">
+  <header>
+    <div>
+      <div class="kicker">World of Warcraft &nbsp;&middot;&nbsp; Midnight &nbsp;&middot;&nbsp; Patch 12.1 &nbsp;&middot;&nbsp; Sheet 3 of 3</div>
+      <h1>THE VENOMOUS ABYSS &mdash; EVERY DROP</h1>
+      <div class="sub">
+        All 8 bosses <span class="dot">&middot;</span> <b>105</b> items with stats
+        <span class="dot">&middot;</span> tier tokens in gold
+        <span class="dot">&middot;</span> item levels by difficulty on <b>sheet 1</b>
+      </div>
+    </div>
+    <div class="chips">
+      <div class="chip"><div class="lab">Bosses</div><div class="val" style="color:#d3b0fb">8</div></div>
+      <div class="chip"><div class="lab">Items</div><div class="val" style="color:#8ec6ff">105</div></div>
+      <div class="chip max"><div class="lab">Season Max ilvl</div><div class="val">344</div></div>
+    </div>
+  </header>
+
+  <div class="warn">
+    <b>Every row read from the item's own Wowhead PTR tooltip</b> &mdash; slot, armor or weapon type, primary
+    stat and secondaries are quoted, not inferred. <b>Str/Int</b> and <b>Agi/Int</b> mean the item adapts to your
+    spec; <b>Any</b> means it adapts across all three. <i class="fx">Use</i> / <i class="fx">Equip</i> marks an
+    on-use or passive effect. Verified Aug 1, 2026 on the 12.1.0 PTR &mdash; stats may still be tuned before Aug 18.
+  </div>
+
+  <div class="cols">
+
+    <div class="col">
+      <div class="card">
+        <div class="ch"><h2><span class="bossnum">1</span>Nek'zali the Soulcoiler</h2><div class="note">17 drops &middot; <b>no tier token</b></div></div>
+        <table class="loot">
+          <tr><th class="l">Item</th><th class="l">Slot</th><th class="l">Type</th><th class="l">Stats</th></tr>
+          <tr><td class="l">Skullguard of the Risen Sacrifice</td><td class="l dim2">Head</td><td class="l dim2">Plate</td><td class="l st"><span style="color:#ffe0c2">Str/Int</span> <span class="sec">Crit/Mast</span></td></tr>
+          <tr><td class="l">Crown of the Eternal Fang</td><td class="l dim2">Head</td><td class="l dim2">Mail</td><td class="l st"><span style="color:#c9e7ff">Agi/Int</span> <span class="sec">Crit/Mast</span></td></tr>
+          <tr><td class="l">Soulslither Spaulders</td><td class="l dim2">Shoulder</td><td class="l dim2">Mail</td><td class="l st"><span style="color:#c9e7ff">Agi/Int</span> <span class="sec">Crit/Mast</span></td></tr>
+          <tr><td class="l">Vestment of the Awakening</td><td class="l dim2">Chest</td><td class="l dim2">Leather</td><td class="l st"><span style="color:#c9e7ff">Agi/Int</span> <span class="sec">Haste/Mast</span></td></tr>
+          <tr><td class="l">Restless Spirit Shackles</td><td class="l dim2">Wrist</td><td class="l dim2">Leather</td><td class="l st"><span style="color:#c9e7ff">Agi/Int</span> <span class="sec">Crit/Haste</span></td></tr>
+          <tr><td class="l">Cursed Reliquary Cincture</td><td class="l dim2">Waist</td><td class="l dim2">Mail</td><td class="l st"><span style="color:#c9e7ff">Agi/Int</span> <span class="sec">Crit/Vers</span></td></tr>
+          <tr><td class="l">Initiate's Sacrificial Tights</td><td class="l dim2">Legs</td><td class="l dim2">Cloth</td><td class="l st"><span style="color:#8ec6ff">Int</span> <span class="sec">Vers/Mast</span></td></tr>
+          <tr><td class="l">Nek'zali's Spiritwalkers</td><td class="l dim2">Feet</td><td class="l dim2">Cloth</td><td class="l st"><span style="color:#8ec6ff">Int</span> <span class="sec">Crit/Mast</span></td></tr>
+          <tr><td class="l">Entombed Cultist's Sabatons</td><td class="l dim2">Feet</td><td class="l dim2">Plate</td><td class="l st"><span style="color:#ffe0c2">Str/Int</span> <span class="sec">Crit/Haste</span></td></tr>
+          <tr><td class="l">Amani Summoning Shawl</td><td class="l dim2">Back</td><td class="l dim2">Cloak</td><td class="l st"><span style="color:#e2c7fb">Any</span> <span class="sec">Crit/Vers</span></td></tr>
+          <tr><td class="l">Alluring Bubbleband</td><td class="l dim2">Finger</td><td class="l dim2">Ring</td><td class="l st">&mdash; <span class="sec">Haste/Vers</span></td></tr>
+          <tr><td class="l">Soulcoiler Ritual Vessel</td><td class="l dim2">Trinket</td><td class="l dim2">Trinket</td><td class="l st"><span style="color:#8ec6ff">Int</span> <i class="fx">Use</i></td></tr>
+          <tr><td class="l">Hexing Spiritrender</td><td class="l dim2">One-Hand</td><td class="l dim2">Dagger</td><td class="l st"><span style="color:#8ec6ff">Int</span> <span class="sec">Crit/Mast</span></td></tr>
+          <tr><td class="l">Strongblood's Ceremonial Cleaver</td><td class="l dim2">One-Hand</td><td class="l dim2">Axe</td><td class="l st"><span style="color:#ffd7ad">Str</span> <span class="sec">Crit/Mast</span></td></tr>
+          <tr><td class="l">Tomb-Creeper's Claw</td><td class="l dim2">One-Hand</td><td class="l dim2">Fist</td><td class="l st"><span style="color:#bff0c9">Agi</span> <span class="sec">Crit/Haste</span></td></tr>
+          <tr><td class="l">Bubblefin Splash Guard</td><td class="l dim2">Off Hand</td><td class="l dim2">Shield</td><td class="l st"><span style="color:#8ec6ff">Int</span> <span class="sec">Haste/Mast</span></td></tr>
+          <tr><td class="l">Frostscale's Mystic Frond</td><td class="l dim2">Off-hand</td><td class="l dim2">Held</td><td class="l st"><span style="color:#8ec6ff">Int</span> <span class="sec">Crit/Mast</span></td></tr>
+        </table>
+      </div>
+      <div class="card grow">
+        <div class="ch"><h2><span class="bossnum">2</span>Entombed Sentinels</h2><div class="note">12 drops &middot; <b>Hands</b> token</div></div>
+        <table class="loot">
+          <tr><th class="l">Item</th><th class="l">Slot</th><th class="l">Type</th><th class="l">Stats</th></tr>
+          <tr class="tok"><td class="l">Venomwoven Idol</td><td class="l">Token</td><td class="l">Cloth</td><td class="l st">Priest / Mage / Warlock</td></tr>
+          <tr class="tok"><td class="l">Venomcured Idol</td><td class="l">Token</td><td class="l">Leather</td><td class="l st">Rogue / Monk / Druid / DH</td></tr>
+          <tr class="tok"><td class="l">Venomcast Idol</td><td class="l">Token</td><td class="l">Mail</td><td class="l st">Hunter / Shaman / Evoker</td></tr>
+          <tr class="tok"><td class="l">Venomforged Idol</td><td class="l">Token</td><td class="l">Plate</td><td class="l st">Warrior / Paladin / DK</td></tr>
+          <tr><td class="l">Shadow Hunter's Warmask</td><td class="l dim2">Head</td><td class="l dim2">Leather</td><td class="l st"><span style="color:#c9e7ff">Agi/Int</span> <span class="sec">Vers/Mast</span></td></tr>
+          <tr><td class="l">Venom-Singed Cuffs</td><td class="l dim2">Wrist</td><td class="l dim2">Cloth</td><td class="l st"><span style="color:#8ec6ff">Int</span> <span class="sec">Crit/Mast</span></td></tr>
+          <tr><td class="l">Venom Warden's Greaves</td><td class="l dim2">Legs</td><td class="l dim2">Plate</td><td class="l st"><span style="color:#ffe0c2">Str/Int</span> <span class="sec">Haste/Mast</span></td></tr>
+          <tr><td class="l">Sentinel's Vitriolic Chain</td><td class="l dim2">Neck</td><td class="l dim2">Neck</td><td class="l st">&mdash; <span class="sec">Crit/Haste</span></td></tr>
+          <tr><td class="l">Keeper's Seething Core</td><td class="l dim2">Trinket</td><td class="l dim2">Trinket</td><td class="l st"><span style="color:#e6f0c9">Agi/Str</span> <i class="fx">Equip</i></td></tr>
+          <tr><td class="l">Ancient Construct's Venomshiv</td><td class="l dim2">One-Hand</td><td class="l dim2">Dagger</td><td class="l st"><span style="color:#bff0c9">Agi</span> <span class="sec">Haste/Vers</span></td></tr>
+          <tr><td class="l">Caustic Keeper-Crusher</td><td class="l dim2">Two-Hand</td><td class="l dim2">Mace</td><td class="l st"><span style="color:#ffd7ad">Str</span> <span class="sec">Crit/Haste</span></td></tr>
+          <tr><td class="l">Spine of the Hissing Abyss</td><td class="l dim2">Off-hand</td><td class="l dim2">Held</td><td class="l st"><span style="color:#8ec6ff">Int</span> <span class="sec">Haste/Mast</span></td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="card">
+        <div class="ch"><h2><span class="bossnum">3</span>The Lost Explorers</h2><div class="note">13 drops &middot; <b>Shoulders</b> token</div></div>
+        <table class="loot">
+          <tr><th class="l">Item</th><th class="l">Slot</th><th class="l">Type</th><th class="l">Stats</th></tr>
+          <tr class="tok"><td class="l">Venomwoven Remnant</td><td class="l">Token</td><td class="l">Cloth</td><td class="l st">Priest / Mage / Warlock</td></tr>
+          <tr class="tok"><td class="l">Venomcured Remnant</td><td class="l">Token</td><td class="l">Leather</td><td class="l st">Rogue / Monk / Druid / DH</td></tr>
+          <tr class="tok"><td class="l">Venomcast Remnant</td><td class="l">Token</td><td class="l">Mail</td><td class="l st">Hunter / Shaman / Evoker</td></tr>
+          <tr class="tok"><td class="l">Venomforged Remnant</td><td class="l">Token</td><td class="l">Plate</td><td class="l st">Warrior / Paladin / DK</td></tr>
+          <tr><td class="l">Errant Scrollsage's Hood</td><td class="l dim2">Head</td><td class="l dim2">Cloth</td><td class="l st"><span style="color:#8ec6ff">Int</span> <span class="sec">Crit/Haste</span></td></tr>
+          <tr><td class="l">Unpossessed Skullsash</td><td class="l dim2">Waist</td><td class="l dim2">Leather</td><td class="l st"><span style="color:#c9e7ff">Agi/Int</span> <span class="sec">Crit/Mast</span></td></tr>
+          <tr><td class="l">Boots of the Reckless Wayfarer</td><td class="l dim2">Feet</td><td class="l dim2">Mail</td><td class="l st"><span style="color:#c9e7ff">Agi/Int</span> <span class="sec">Crit/Mast</span></td></tr>
+          <tr><td class="l">Shellbound Bracers</td><td class="l dim2">Wrist</td><td class="l dim2">Plate</td><td class="l st"><span style="color:#ffe0c2">Str/Int</span> <span class="sec">Crit/Mast</span></td></tr>
+          <tr><td class="l">First Mate's Shellward</td><td class="l dim2">Trinket</td><td class="l dim2">Trinket</td><td class="l st"><span style="color:#e6f0c9">Agi/Str</span> <i class="fx">Use</i></td></tr>
+          <tr><td class="l">Gebbo's Bottomless Bag</td><td class="l dim2">Trinket</td><td class="l dim2">Trinket</td><td class="l st"><span style="color:#e2c7fb">Any</span> <i class="fx">Equip</i></td></tr>
+          <tr><td class="l">Malevolent Spiritcudgel</td><td class="l dim2">One-Hand</td><td class="l dim2">Mace</td><td class="l st"><span style="color:#8ec6ff">Int</span> <span class="sec">Crit/Mast</span></td></tr>
+          <tr><td class="l">Gebbo's Backup Blaster</td><td class="l dim2">Ranged</td><td class="l dim2">Gun</td><td class="l st"><span style="color:#bff0c9">Agi</span> <span class="sec">Haste/Mast</span></td></tr>
+          <tr><td class="l">Venom-Slashed Scuteward</td><td class="l dim2">Off Hand</td><td class="l dim2">Shield</td><td class="l st"><span style="color:#8ec6ff">Int</span> <span class="sec">Crit/Haste</span></td></tr>
+        </table>
+      </div>
+      <div class="card grow">
+        <div class="ch"><h2><span class="bossnum">4</span>Vashnik the Malignant</h2><div class="note">12 drops &middot; <b>Chest</b> token</div></div>
+        <table class="loot">
+          <tr><th class="l">Item</th><th class="l">Slot</th><th class="l">Type</th><th class="l">Stats</th></tr>
+          <tr class="tok"><td class="l">Venomwoven Icon</td><td class="l">Token</td><td class="l">Cloth</td><td class="l st">Priest / Mage / Warlock</td></tr>
+          <tr class="tok"><td class="l">Venomcured Icon</td><td class="l">Token</td><td class="l">Leather</td><td class="l st">Rogue / Monk / Druid / DH</td></tr>
+          <tr class="tok"><td class="l">Venomcast Icon</td><td class="l">Token</td><td class="l">Mail</td><td class="l st">Hunter / Shaman / Evoker</td></tr>
+          <tr class="tok"><td class="l">Venomforged Icon</td><td class="l">Token</td><td class="l">Plate</td><td class="l st">Warrior / Paladin / DK</td></tr>
+          <tr><td class="l">Frothing Venom Spaulders</td><td class="l dim2">Shoulder</td><td class="l dim2">Leather</td><td class="l st"><span style="color:#c9e7ff">Agi/Int</span> <span class="sec">Crit/Mast</span></td></tr>
+          <tr><td class="l">Serpentine Mixing Belt</td><td class="l dim2">Waist</td><td class="l dim2">Mail</td><td class="l st"><span style="color:#c9e7ff">Agi/Int</span> <span class="sec">Haste/Mast</span></td></tr>
+          <tr><td class="l">Scaled Fiend's Warboots</td><td class="l dim2">Feet</td><td class="l dim2">Plate</td><td class="l st"><span style="color:#ffe0c2">Str/Int</span> <span class="sec">Haste/Mast</span></td></tr>
+          <tr><td class="l">Vile Alchemist's Band</td><td class="l dim2">Finger</td><td class="l dim2">Ring</td><td class="l st">&mdash; <span class="sec">Crit/Mast</span></td></tr>
+          <tr><td class="l">Vashnik's Sanguine Rancor</td><td class="l dim2">Trinket</td><td class="l dim2">Trinket</td><td class="l st"><span style="color:#bff0c9">Agi</span> <i class="fx">Equip</i></td></tr>
+          <tr><td class="l">Fang of Umbral Malignance</td><td class="l dim2">Trinket</td><td class="l dim2">Trinket</td><td class="l st"><span style="color:#8ec6ff">Int</span> <i class="fx">Equip</i></td></tr>
+          <tr><td class="l">Venomancer's Winged Channeler</td><td class="l dim2">Two-Hand</td><td class="l dim2">Staff</td><td class="l st"><span style="color:#8ec6ff">Int</span> <span class="sec">Haste/Mast</span></td></tr>
+          <tr><td class="l">Malignant Toothed Edge</td><td class="l dim2">Two-Hand</td><td class="l dim2">Sword</td><td class="l st"><span style="color:#ffd7ad">Str</span> <span class="sec">Haste/Mast</span></td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="card">
+        <div class="ch"><h2><span class="bossnum">5</span>Sszorak</h2><div class="note">12 drops &middot; <b>Legs</b> token</div></div>
+        <table class="loot">
+          <tr><th class="l">Item</th><th class="l">Slot</th><th class="l">Type</th><th class="l">Stats</th></tr>
+          <tr class="tok"><td class="l">Venomwoven Relic</td><td class="l">Token</td><td class="l">Cloth</td><td class="l st">Priest / Mage / Warlock</td></tr>
+          <tr class="tok"><td class="l">Venomcured Relic</td><td class="l">Token</td><td class="l">Leather</td><td class="l st">Rogue / Monk / Druid / DH</td></tr>
+          <tr class="tok"><td class="l">Venomcast Relic</td><td class="l">Token</td><td class="l">Mail</td><td class="l st">Hunter / Shaman / Evoker</td></tr>
+          <tr class="tok"><td class="l">Venomforged Relic</td><td class="l">Token</td><td class="l">Plate</td><td class="l st">Warrior / Paladin / DK</td></tr>
+          <tr><td class="l">Ruthless Slaughtergrips</td><td class="l dim2">Hands</td><td class="l dim2">Leather</td><td class="l st"><span style="color:#c9e7ff">Agi/Int</span> <span class="sec">Crit/Mast</span></td></tr>
+          <tr><td class="l">Caustic Chain-Wrapped Sash</td><td class="l dim2">Waist</td><td class="l dim2">Cloth</td><td class="l st"><span style="color:#8ec6ff">Int</span> <span class="sec">Haste/Mast</span></td></tr>
+          <tr><td class="l">Ferocious Scaleboots</td><td class="l dim2">Feet</td><td class="l dim2">Mail</td><td class="l st"><span style="color:#c9e7ff">Agi/Int</span> <span class="sec">Haste/Mast</span></td></tr>
+          <tr><td class="l">Apex Brute's Claw Ring</td><td class="l dim2">Finger</td><td class="l dim2">Ring</td><td class="l st">&mdash; <span class="sec">Crit/Haste</span></td></tr>
+          <tr><td class="l">Sszorak's Ferocity</td><td class="l dim2">Trinket</td><td class="l dim2">Trinket</td><td class="l st"><span style="color:#ffd7ad">Str</span> <i class="fx">Equip</i></td></tr>
+          <tr><td class="l">Idol of the Howling Nexus</td><td class="l dim2">Trinket</td><td class="l dim2">Trinket</td><td class="l st">&mdash; <span class="sec">Mast</span></td></tr>
+          <tr><td class="l">Venomous Boneglaive</td><td class="l dim2">One-Hand</td><td class="l dim2">Warglaive</td><td class="l st"><span style="color:#c9e7ff">Agi/Int</span> <span class="sec">Crit/Mast</span></td></tr>
+          <tr><td class="l">Slithering Savage's Gavel</td><td class="l dim2">One-Hand</td><td class="l dim2">Mace</td><td class="l st"><span style="color:#bff0c9">Agi</span> <span class="sec">Crit/Mast</span></td></tr>
+        </table>
+      </div>
+      <div class="card grow">
+        <div class="ch"><h2><span class="bossnum">6</span>The Twin Fangs</h2><div class="note">12 drops &middot; <b>Head</b> token</div></div>
+        <table class="loot">
+          <tr><th class="l">Item</th><th class="l">Slot</th><th class="l">Type</th><th class="l">Stats</th></tr>
+          <tr class="tok"><td class="l">Venomwoven Effigy</td><td class="l">Token</td><td class="l">Cloth</td><td class="l st">Priest / Mage / Warlock</td></tr>
+          <tr class="tok"><td class="l">Venomcured Effigy</td><td class="l">Token</td><td class="l">Leather</td><td class="l st">Rogue / Monk / Druid / DH</td></tr>
+          <tr class="tok"><td class="l">Venomcast Effigy</td><td class="l">Token</td><td class="l">Mail</td><td class="l st">Hunter / Shaman / Evoker</td></tr>
+          <tr class="tok"><td class="l">Venomforged Effigy</td><td class="l">Token</td><td class="l">Plate</td><td class="l st">Warrior / Paladin / DK</td></tr>
+          <tr><td class="l">Ornaments of the Eternal Coil</td><td class="l dim2">Shoulder</td><td class="l dim2">Cloth</td><td class="l st"><span style="color:#8ec6ff">Int</span> <span class="sec">Haste/Vers</span></td></tr>
+          <tr><td class="l">Ophidian Fangmail</td><td class="l dim2">Chest</td><td class="l dim2">Mail</td><td class="l st"><span style="color:#c9e7ff">Agi/Int</span> <span class="sec">Crit/Haste</span></td></tr>
+          <tr><td class="l">Scaleplate Strangulators</td><td class="l dim2">Hands</td><td class="l dim2">Plate</td><td class="l st"><span style="color:#ffe0c2">Str/Int</span> <span class="sec">Crit/Haste</span></td></tr>
+          <tr><td class="l">Bespittled Slitherslippers</td><td class="l dim2">Feet</td><td class="l dim2">Leather</td><td class="l st"><span style="color:#c9e7ff">Agi/Int</span> <span class="sec">Crit/Haste</span></td></tr>
+          <tr><td class="l">Amulet of the Twin Fangs</td><td class="l dim2">Neck</td><td class="l dim2">Neck</td><td class="l st">&mdash; <span class="sec">Haste/Mast</span></td></tr>
+          <tr><td class="l">Preternatural Antivenom</td><td class="l dim2">Trinket</td><td class="l dim2">Trinket</td><td class="l st">&mdash; <span class="sec">Crit</span></td></tr>
+          <tr><td class="l">Vexhul's Everflowing Gland</td><td class="l dim2">Trinket</td><td class="l dim2">Trinket</td><td class="l st"><span style="color:#8ec6ff">Int</span> <i class="fx">Use</i></td></tr>
+          <tr><td class="l">Ravenous Feaster's Fang</td><td class="l dim2">One-Hand</td><td class="l dim2">Dagger</td><td class="l st"><span style="color:#bff0c9">Agi</span> <span class="sec">Crit/Mast</span></td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="card">
+        <div class="ch"><h2><span class="bossnum">7</span>The Coiled Altar</h2><div class="note">14 drops &middot; <b>no tier token</b></div></div>
+        <table class="loot">
+          <tr><th class="l">Item</th><th class="l">Slot</th><th class="l">Type</th><th class="l">Stats</th></tr>
+          <tr><td class="l">Soulslither Spaulders</td><td class="l dim2">Shoulder</td><td class="l dim2">Mail</td><td class="l st"><span style="color:#c9e7ff">Agi/Int</span> <span class="sec">Crit/Mast</span></td></tr>
+          <tr><td class="l">Reckless Spirit Breastplate</td><td class="l dim2">Chest</td><td class="l dim2">Plate</td><td class="l st"><span style="color:#ffe0c2">Str/Int</span> <span class="sec">Haste/Mast</span></td></tr>
+          <tr><td class="l">Grasps of the Eternal Shadow</td><td class="l dim2">Hands</td><td class="l dim2">Cloth</td><td class="l st"><span style="color:#8ec6ff">Int</span> <span class="sec">Crit/Haste</span></td></tr>
+          <tr><td class="l">Sash of the Forlorn Vessel</td><td class="l dim2">Waist</td><td class="l dim2">Leather</td><td class="l st"><span style="color:#c9e7ff">Agi/Int</span> <span class="sec">Haste/Mast</span></td></tr>
+          <tr><td class="l">Girdle of Toxic Regret</td><td class="l dim2">Waist</td><td class="l dim2">Plate</td><td class="l st"><span style="color:#ffe0c2">Str/Int</span> <span class="sec">Crit/Mast</span></td></tr>
+          <tr><td class="l">Coiled Hex Legguards</td><td class="l dim2">Legs</td><td class="l dim2">Leather</td><td class="l st"><span style="color:#c9e7ff">Agi/Int</span> <span class="sec">Haste/Mast</span></td></tr>
+          <tr><td class="l">Cuisses of the Uncoiled Union</td><td class="l dim2">Legs</td><td class="l dim2">Mail</td><td class="l st"><span style="color:#c9e7ff">Agi/Int</span> <span class="sec">Haste/Mast</span></td></tr>
+          <tr><td class="l">Cackling Soultreads</td><td class="l dim2">Feet</td><td class="l dim2">Cloth</td><td class="l st"><span style="color:#8ec6ff">Int</span> <span class="sec">Haste/Mast</span></td></tr>
+          <tr><td class="l">Silken Voodoo Drape</td><td class="l dim2">Back</td><td class="l dim2">Cloak</td><td class="l st"><span style="color:#e2c7fb">Any</span> <span class="sec">Haste/Mast</span></td></tr>
+          <tr><td class="l">Hex Lord's Dooming Idol</td><td class="l dim2">Trinket</td><td class="l dim2">Trinket</td><td class="l st">&mdash; <span class="sec">Haste</span></td></tr>
+          <tr><td class="l">Zul'jin's Guillotine Technique</td><td class="l dim2">Trinket</td><td class="l dim2">Trinket</td><td class="l st"><span style="color:#e6f0c9">Agi/Str</span> <i class="fx">Equip</i></td></tr>
+          <tr><td class="l">Maze-roa, Warlord's Fury</td><td class="l dim2">Two-Hand</td><td class="l dim2">Axe</td><td class="l st"><span style="color:#e6f0c9">Agi/Str</span> <span class="sec">Crit/Mast</span></td></tr>
+          <tr><td class="l">Aman'muso, Warlord's Vengeance</td><td class="l dim2">Main Hand</td><td class="l dim2">Axe</td><td class="l st"><span style="color:#e6f0c9">Agi/Str</span> <span class="sec">Haste/Mast</span></td></tr>
+          <tr><td class="l">Baleful Hexblade</td><td class="l dim2">One-Hand</td><td class="l dim2">Sword</td><td class="l st"><span style="color:#8ec6ff">Int</span> <span class="sec">Haste/Mast</span></td></tr>
+        </table>
+      </div>
+      <div class="card grow">
+        <div class="ch"><h2><span class="bossnum">8</span>Ula'tek</h2><div class="note">13 drops &middot; <b>omni-token</b></div></div>
+        <table class="loot">
+          <tr><th class="l">Item</th><th class="l">Slot</th><th class="l">Type</th><th class="l">Stats</th></tr>
+          <tr class="tok"><td class="l">Slumbering Coil Curio</td><td class="l">Token</td><td class="l">Any slot</td><td class="l st">all 13 classes</td></tr>
+          <tr><td class="l">Venomkeeper's Horrific Cowl</td><td class="l dim2">Head</td><td class="l dim2">Cloth</td><td class="l st"><span style="color:#8ec6ff">Int</span> <span class="sec">Mast</span></td></tr>
+          <tr><td class="l">Gaze of the Coiled Watcher</td><td class="l dim2">Head</td><td class="l dim2">Leather</td><td class="l st"><span style="color:#c9e7ff">Agi/Int</span> <span class="sec">Haste</span></td></tr>
+          <tr><td class="l">Awoken Dreadfang Cuirass</td><td class="l dim2">Chest</td><td class="l dim2">Mail</td><td class="l st"><span style="color:#c9e7ff">Agi/Int</span> <span class="sec">Crit</span></td></tr>
+          <tr><td class="l">Chausses of Unbound Rancor</td><td class="l dim2">Legs</td><td class="l dim2">Plate</td><td class="l st"><span style="color:#ffe0c2">Str/Int</span> <span class="sec">Mast</span></td></tr>
+          <tr><td class="l">Aqirbane Reliquary</td><td class="l dim2">Neck</td><td class="l dim2">Neck</td><td class="l st">&mdash; <span class="sec">Crit</span></td></tr>
+          <tr><td class="l">Font of Venomous Rage</td><td class="l dim2">Trinket</td><td class="l dim2">Trinket</td><td class="l st">&mdash; <i class="fx">Use</i></td></tr>
+          <tr><td class="l">Voracious Heart of Ula'tek</td><td class="l dim2">Trinket</td><td class="l dim2">Trinket</td><td class="l st">&mdash; <i class="fx">Use</i></td></tr>
+          <tr><td class="l">Zatha'tek, Breath of Corruption</td><td class="l dim2">Main Hand</td><td class="l dim2">Dagger</td><td class="l st"><span style="color:#bff0c9">Agi</span> <span class="sec">Crit</span></td></tr>
+          <tr><td class="l">Jan'thrazet, the Soul Fang</td><td class="l dim2">One-Hand</td><td class="l dim2">Dagger</td><td class="l st"><span style="color:#8ec6ff">Int</span> <span class="sec">Haste</span></td></tr>
+          <tr><td class="l">Jaw of the Shackled Goddess</td><td class="l dim2">One-Hand</td><td class="l dim2">Sword</td><td class="l st"><span style="color:#ffd7ad">Str</span> <span class="sec">Haste</span></td></tr>
+          <tr><td class="l">Abyssal Broodfiend's Bardiche</td><td class="l dim2">Two-Hand</td><td class="l dim2">Polearm</td><td class="l st"><span style="color:#bff0c9">Agi</span> <span class="sec">Mast</span></td></tr>
+          <tr><td class="l">Caustic Repose Greatbow</td><td class="l dim2">Ranged</td><td class="l dim2">Bow</td><td class="l st"><span style="color:#bff0c9">Agi</span> <span class="sec">Crit</span></td></tr>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="lg">
+      <i><span style="color:var(--myth)">&#9679;</span> tier set token</i>
+      <i><sup class="s">&dagger;</sup> Soulslither Spaulders is listed under both boss 1 and boss 7 on Wowhead</i>
+    </div>
+    <div class="rt">
+      Item data from Wowhead 12.1.0 PTR item tooltips, read Aug 1, 2026 &mdash;
+      <b style="color:var(--t3)">pre-launch PTR data, subject to change before Aug 18</b>.<br>
+      Mounts, trophies and housing decor are omitted. Item levels by raid difficulty are on sheet 1.
+    </div>
+  </footer>
+</div>
+
+</body>
+</html>
