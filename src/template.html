@@ -548,6 +548,33 @@
   .finderbtn:focus-visible{outline:2px solid var(--accent-2); outline-offset:2px}
   .finder-ov{position:fixed; inset:0; z-index:60; display:none; background:rgba(6,4,12,.72); backdrop-filter:blur(6px); overflow-y:auto}
   .finder-ov.open{display:block}
+  /* ---------- motion (2026-08-05, Riley: "cool menu animations") ----------
+     One vocabulary for every opening surface, all compositor-friendly (opacity/
+     transform only, except the details fold), all killed by prefers-reduced-motion.
+     display:none → .open re-triggers keyframes natively, so the three overlay menus
+     (Finder / Ladder / Compare all share .finder-ov) animate with zero JS. */
+  @keyframes ov-fade{from{opacity:0}}
+  @keyframes ov-rise{from{opacity:0; transform:translateY(16px) scale(.98)}}
+  @keyframes d-rise{from{opacity:0; transform:translateY(6px)}}
+  .finder-ov.open{animation:ov-fade .16s ease-out}
+  .finder-ov.open .finder-panel{animation:ov-rise .26s cubic-bezier(.22,1,.36,1)}
+  /* drawer CONTENT rises with the shell's existing max-height ease */
+  .row.open .drawer-in{animation:d-rise .24s ease-out}
+  /* tactile buttons: hover lift on the CTAs, press squish everywhere */
+  .finderbtn{transition:border-color .15s,box-shadow .2s,transform .15s}
+  .finderbtn:hover{transform:translateY(-1px); box-shadow:0 4px 18px color-mix(in srgb,var(--accent) 28%,transparent)}
+  .finderbtn:active{transform:translateY(0) scale(.97); box-shadow:none}
+  .seg button{transition:background .15s,color .15s,transform .09s}
+  .seg button:active{transform:scale(.94)}
+  .fopt:active,.fres:active,.toggle:active{transform:scale(.98)}
+  /* the legend (and "How to read it") folds smoothly where ::details-content +
+     interpolate-size exist (Chromium 129+); everywhere else it snaps exactly as before */
+  .legend-wrap,.sub-more{interpolate-size:allow-keywords}
+  .legend-wrap::details-content,.sub-more::details-content{
+    block-size:0; overflow:clip; opacity:0;
+    transition:block-size .28s ease, opacity .22s ease, content-visibility .28s allow-discrete
+  }
+  .legend-wrap[open]::details-content,.sub-more[open]::details-content{block-size:auto; opacity:1}
   .finder-panel{
     max-width:760px; margin:38px auto; background:var(--bg-2); border:1px solid var(--edge-2);
     border-radius:16px; padding:24px 26px 28px; box-shadow:0 20px 80px rgba(0,0,0,.5)
@@ -667,6 +694,10 @@
     .drawer,.chev,.row{transition:none}
     .ladderbar{transition:none}
     .starfield{display:none}
+    .finder-ov.open,.finder-ov.open .finder-panel,.row.open .drawer-in{animation:none}
+    .legend-wrap::details-content,.sub-more::details-content{transition:none}
+    .seg button,.finderbtn,.fopt,.fres,.toggle{transition:none; transform:none}
+    .finderbtn:hover,.finderbtn:active,.seg button:active,.fopt:active,.fres:active,.toggle:active{transform:none; box-shadow:none}
   }
 </style>
 </head>
@@ -2223,12 +2254,24 @@ document.addEventListener("click", e => {
   if(!openRowFor(cls, spec)) openSpecFromFinder(cls, spec);
 });
 
-/* The legend starts open on wide screens (the space is free there) and closed on phones,
-   where it cost ~330px directly above the first spec. Only the initial state is set —
-   after that it is the user's toggle to own, so a resize never reopens what they closed. */
+/* The legend REMEMBERS the user's toggle (localStorage, like the watchlist). The width
+   heuristic — open on wide screens, closed on phones where it cost ~330px above the
+   first spec — now applies only to first-time visitors with nothing stored. Persist
+   only real changes from the boot state, so the default itself is never written and a
+   first phone visit doesn't freeze "closed" onto a later maximized window. */
 (function(){
   const lw = document.getElementById('legendwrap');
-  if(lw) lw.open = window.matchMedia('(min-width:760px)').matches;
+  if(!lw) return;
+  let stored = null;
+  try { stored = localStorage.getItem('wct-legend'); } catch {}
+  lw.open = stored != null ? stored === 'open'
+    : window.matchMedia('(min-width:760px)').matches;
+  let last = lw.open; // boot state — the toggle handler persists only real changes
+  lw.addEventListener('toggle', () => {
+    if (lw.open === last) return;
+    last = lw.open;
+    try { localStorage.setItem('wct-legend', lw.open ? 'open' : 'closed'); } catch {}
+  });
 })();
 
 /* ---------- boot: apply the deep link, sync widgets to state, first render ---------- */

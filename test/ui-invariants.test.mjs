@@ -789,3 +789,24 @@ ui("a spec with takes but no writeup says what IS known, not 'pending'", async p
   assert.match(text, /cited creator take/, "the slot points at the takes");
   assert.doesNotMatch(text, /pending/i, "and never implies nothing is known");
 });
+
+ui("the legend remembers the user's toggle across reloads — and only the user's", async page => {
+  // Hermetic start: clear any leaked state and reload so this IS a first visit.
+  await page.evaluate(() => localStorage.removeItem("wct-legend"));
+  await page.reload();
+  await page.waitForFunction(() => document.querySelectorAll(".row").length > 0);
+  // Wide viewport (harness default): the width heuristic opens it, and the DEFAULT is
+  // never written to storage — only a real user toggle is.
+  assert.equal(await page.$eval("#legendwrap", el => el.open), true, "wide first visit starts open");
+  assert.equal(await page.evaluate(() => localStorage.getItem("wct-legend")), null,
+    "the width default must not freeze itself into storage");
+  await page.click("#legendwrap > summary");
+  assert.equal(await page.evaluate(() => localStorage.getItem("wct-legend")), "closed");
+  await page.reload();
+  await page.waitForFunction(() => document.querySelectorAll(".row").length > 0);
+  assert.equal(await page.$eval("#legendwrap", el => el.open), false, "closed survives a reload");
+  await page.click("#legendwrap > summary");
+  await page.reload();
+  await page.waitForFunction(() => document.querySelectorAll(".row").length > 0);
+  assert.equal(await page.$eval("#legendwrap", el => el.open), true, "…and reopened survives too");
+});
