@@ -1,4 +1,5 @@
 import { createHash } from "node:crypto";
+import { verifyCurationSourceFiles } from "./validate-curation-sources.mjs";
 
 const SECONDARIES = new Set(["Crit", "Haste", "Mast", "Vers"]);
 const PRIMARIES = new Set(["Agility", "Intellect", "Strength"]);
@@ -41,28 +42,18 @@ const WEAPON_TYPES = new Set(["Dagger", "Sword", "Axe", "Mace", "Staff", "Bow", 
 const WEAPON_SLOTS = new Set(["Main Hand", "One-Hand", "Two-Hand", "Off Hand", "Held In Off-hand", "Ranged"]);
 const PRIMARY_NEUTRAL_SLOTS = new Set(["Neck", "Finger", "Back", "Trinket"]);
 const WEAPON_PATCH_CONTEXT = "ptr-12.1.0";
-const SIMC_SOURCE = "https://github.com/simulationcraft/simc/tree/midnight/profiles/MID2";
-const SIMC_REVISION = "229259b";
-const SIMC_COMMIT = "229259b575bbb55bf0d1cfc70bd2d4a7920e2dff";
-const SIMC_GAME_BUILD = "12.1.0.68914 PTR";
-const SIMC_GENERATOR_SOURCE = `https://github.com/simulationcraft/simc/blob/${SIMC_COMMIT}/profiles/generators/MID2/MID2_Generate_Priest.simc`;
-const SIMC_ARTIFACT_SOURCE = "https://github.com/simulationcraft/simc-publish/actions/runs/30730407933";
-const SIMC_ARTIFACT_SHA256 = "d6f2aa29ffbcdd879b94db2045b0f14f723c2be0e4e5cdfee95ec984b32f0a4c";
-const SIMC_EXE_SHA256 = "046b0d1f18302be11df41f1ade6e480abe197ee915754035952036920795caa0";
-const SIMC_AUDIT_DIRECTORY = "data/simc-audit/229259b";
-const SIMC_PROFILE_HASHES = new Map([
-  ["Voidweaver (single- and multi-target)", "67db4443ae539ceab8ffcfef600e830ca54b2d6733c076d55f56a2ba81a6749a"],
-  ["Archon (single- and multi-target)", "1a98d4b0ad86a23e2671b8022867dea90898b513610af5025bf18537f8824b08"],
-]);
-const SIMC_PROFILE_FILES = new Map([
-  ["Voidweaver (single- and multi-target)", "MID2_Priest_Shadow.simc"],
-  ["Archon (single- and multi-target)", "MID2_Priest_Shadow_Archon.simc"],
-]);
-const EXPECTED_SIMC_MATRIX = new Set([
-  "Shadow Priest\u0000Voidweaver (single- and multi-target)\u0000raid-st",
-  "Shadow Priest\u0000Voidweaver (single- and multi-target)\u0000aoe-5t",
-  "Shadow Priest\u0000Archon (single- and multi-target)\u0000raid-st",
-  "Shadow Priest\u0000Archon (single- and multi-target)\u0000aoe-5t",
+const SIMC_ID = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+const SIMC_BUILD_SOURCE = "https://github.com/simulationcraft/simc/tree/midnight/profiles/MID2";
+const SIMC_ARTIFACT_PREFIX = "https://github.com/simulationcraft/simc-publish/actions/runs/";
+const SIMC_GENERATOR_PREFIX = "https://github.com/simulationcraft/simc/blob/";
+const SIMC_SPEC_STATUSES = new Set(["accepted", "pending", "deferred", "unsupported"]);
+const SIMC_ELIGIBILITY = new Set(["eligible", "deferred", "unsupported"]);
+const SIMC_PROFILE_STATUSES = new Set(["accepted", "ready", "pending", "rejected"]);
+const SIMC_SOURCE_MODES = new Set(["official-output", "curated-same-gear"]);
+const SIMC_SELECTION_MODES = new Set(["single-actor", "same-gear-dps"]);
+const CURATION_GEAR_DATA_FILES = new Set([
+  "data/raid-items.json", "data/dungeon-items.json", "data/tier-items.json",
+  "data/catalyst-stat-allocations.json",
 ]);
 const EXPECTED_STAT_OVERRIDE_KEYS = new Set([
   "Blood Death Knight", "Devourer Demon Hunter", "Guardian Druid", "Restoration Druid",
@@ -392,75 +383,533 @@ function validateItemEligibility(itemEligibility, allItems, rows, errors) {
   }
 }
 
-function validateSimcReferenceWeights(simcWeights, rows, errors) {
-  if (simcWeights?.schemaVersion !== 1 || simcWeights?.patchContext !== WEAPON_PATCH_CONTEXT
-    || !Array.isArray(simcWeights?.records)) {
+const isoTimestamp = (value) => typeof value === "string"
+  && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{3})?Z$/.test(value)
+  && Number.isFinite(Date.parse(value));
+const isoDate = (value) => typeof value === "string" && /^\d{4}-\d{2}-\d{2}$/.test(value)
+  && Number.isFinite(Date.parse(`${value}T00:00:00Z`));
+const hexDigest = (value) => /^[a-f0-9]{64}$/i.test(value || "");
+const uniqueStrings = (values) => Array.isArray(values) && values.every((value) => typeof value === "string")
+  && new Set(values).size === values.length;
+const uniqueNumericStrings = (values) => uniqueStrings(values)
+  && values.every((value) => /^\d+$/.test(value));
+
+function simcProfileInput(profile, scenarioId) {
+  return Array.isArray(profile?.scenarioInputs)
+    ? profile.scenarioInputs.find((input) => input.scenarioId === scenarioId) || null : null;
+}
+
+function validSimcProfileInput(input, build, specKey, context) {
+  const generatorPrefix = build
+    ? `${SIMC_GENERATOR_PREFIX}${build.commit}/profiles/generators/MID2/` : "";
+  if (!input || !build || !(typeof input.sourceProfileName === "string" && input.sourceProfileName.trim())
+    || !SIMC_SOURCE_MODES.has(input.sourceMode)
+    || !String(input.generatorSource || "").startsWith(generatorPrefix)
+    || !String(input.talentSource || "").startsWith("https://")
+    || !/^[A-Za-z0-9_.-]+\.simc$/.test(input.profileFile || "") || !hexDigest(input.profileSha256)
+    || (input.itemDbSource !== undefined && !/^[a-z0-9_-]+$/.test(input.itemDbSource || ""))
+    || !uniqueNumericStrings(input.redirectedBaseItemIds)
+    || typeof input.tertiaryRatingsPresent !== "boolean") return false;
+
+  if (input.sourceMode === "official-output")
+    return input.talentSource === input.generatorSource
+      && input.generatorActorName === undefined
+      && input.generatorSha256 === undefined && input.gearPlanSha256 === undefined
+      && (input.talentSourceAsOf === undefined || isoDate(input.talentSourceAsOf))
+      && input.curationReviewedAt === undefined && input.curationPolicyId === undefined
+      && input.gearSetId === undefined;
+
+  const policy = context.curationPoliciesById.get(input.curationPolicyId);
+  const gearSet = policy?.gearSetsById.get(input.gearSetId);
+  const generatorFile = String(input.generatorSource || "").split("/").at(-1);
+  return typeof input.generatorActorName === "string" && input.generatorActorName.trim()
+    && hexDigest(input.generatorSha256) && hexDigest(input.gearPlanSha256)
+    && isoDate(input.talentSourceAsOf) && isoDate(input.curationReviewedAt)
+    && !!policy && input.curationReviewedAt === policy.reviewedAt
+    && !!gearSet && gearSet.specKey === specKey
+    && gearSet.gearPlanSha256 === input.gearPlanSha256
+    && policy.generatorFileSha256?.[generatorFile] === input.generatorSha256;
+}
+
+function sameSimcInputProvenance(left, right) {
+  return !!left && !!right && left.sourceProfileName === right.sourceProfileName
+    && (left.generatorActorName ?? undefined) === (right.generatorActorName ?? undefined)
+    && (left.generatorSha256 ?? undefined) === (right.generatorSha256 ?? undefined)
+    && left.sourceMode === right.sourceMode && left.generatorSource === right.generatorSource
+    && left.talentSource === right.talentSource
+    && (left.talentSourceAsOf ?? undefined) === (right.talentSourceAsOf ?? undefined)
+    && (left.curationReviewedAt ?? undefined) === (right.curationReviewedAt ?? undefined)
+    && (left.curationPolicyId ?? undefined) === (right.curationPolicyId ?? undefined)
+    && (left.gearSetId ?? undefined) === (right.gearSetId ?? undefined)
+    && (left.gearPlanSha256 ?? undefined) === (right.gearPlanSha256 ?? undefined)
+    && left.profileFile === right.profileFile && left.profileSha256 === right.profileSha256
+    && (left.itemDbSource ?? undefined) === (right.itemDbSource ?? undefined)
+    && sameSet(new Set(left.redirectedBaseItemIds || []), new Set(right.redirectedBaseItemIds || []))
+    && left.tertiaryRatingsPresent === right.tertiaryRatingsPresent;
+}
+
+function validateSimcRunManifest(simcManifest, rows, errors) {
+  const context = {
+    objectivesById: new Map(), scenariosById: new Map(), buildsById: new Map(),
+    profilesById: new Map(), profileInputsByMatrix: new Map(), specsByKey: new Map(), acceptedMatrix: new Set(),
+    selectionArtifactsByKey: new Map(), curationPoliciesById: new Map(),
+    expectedProfileCount: 0, expectedReportCount: 0,
+  };
+  if (simcManifest?.schemaVersion !== 2 || simcManifest?.manifestId !== "midnight-s2-reference-weights"
+    || simcManifest?.patchContext !== WEAPON_PATCH_CONTEXT || !Array.isArray(simcManifest?.specs)
+    || !Array.isArray(simcManifest?.profiles) || !Array.isArray(simcManifest?.builds)
+    || !Array.isArray(simcManifest?.objectives) || !Array.isArray(simcManifest?.scenarios)
+    || !Array.isArray(simcManifest?.curationPolicies)) {
+    errors.push("SimC run manifest is missing or has the wrong patch/schema");
+    return context;
+  }
+  if (simcManifest.source !== SIMC_BUILD_SOURCE || !isoDate(simcManifest.reviewedAt))
+    errors.push("SimC run manifest lacks its reviewed source or date");
+
+  for (const policy of simcManifest.curationPolicies) {
+    const hashes = policy?.gearDataHashes;
+    const generatorHashes = policy?.generatorFileSha256;
+    const gearSets = Array.isArray(policy?.gearSets) ? policy.gearSets : [];
+    const gearSetsById = new Map();
+    let valid = SIMC_ID.test(policy?.curationPolicyId || "") && isoDate(policy?.reviewedAt)
+      && !context.curationPoliciesById.has(policy?.curationPolicyId)
+      && !!hashes && !Array.isArray(hashes) && typeof hashes === "object"
+      && [...CURATION_GEAR_DATA_FILES].every((file) => hexDigest(hashes[file]))
+      && Object.entries(hashes).every(([file, digest]) =>
+        /^data\/[a-z0-9][a-z0-9-]*\.json$/.test(file) && hexDigest(digest))
+      && !!generatorHashes && !Array.isArray(generatorHashes)
+      && Object.keys(generatorHashes).length > 0
+      && Object.entries(generatorHashes).every(([file, digest]) =>
+        /^MID2_Generate_[A-Za-z]+\.simc$/.test(file) && hexDigest(digest))
+      && gearSets.length > 0;
+    for (const gearSet of gearSets) {
+      if (!SIMC_ID.test(gearSet?.gearSetId || "") || gearSetsById.has(gearSet.gearSetId)
+        || !(typeof gearSet?.specKey === "string" && gearSet.specKey.trim())
+        || !hexDigest(gearSet.gearPlanSha256)) valid = false;
+      else gearSetsById.set(gearSet.gearSetId, gearSet);
+    }
+    if (!valid) errors.push(`SimC manifest has invalid curation policy ${policy?.curationPolicyId || "unknown"}`);
+    else context.curationPoliciesById.set(policy.curationPolicyId, { ...policy, gearSetsById });
+  }
+
+  const acceptance = simcManifest.acceptancePolicy || {};
+  if (!Number.isInteger(acceptance.runsPerRecord) || acceptance.runsPerRecord !== 2
+    || !Number.isInteger(acceptance.requestedIterationsPerRun) || acceptance.requestedIterationsPerRun !== 25000
+    || acceptance.maximumRelativeDrift !== 0.05 || acceptance.normalizeToPrimaryStat !== true
+    || !sameJson(acceptance.secondaryStats, [...SECONDARIES]))
+    errors.push("SimC acceptance policy changed without review");
+
+  const expectedObjectives = new Map([
+    ["damage", "supported"], ["tank-composite", "deferred"],
+    ["healing", "deferred"], ["support-contribution", "unsupported"],
+  ]);
+  for (const objective of simcManifest.objectives) {
+    if (!SIMC_ID.test(objective?.objectiveId || "") || context.objectivesById.has(objective.objectiveId)
+      || !objective.label || !["supported", "deferred", "unsupported"].includes(objective.status))
+      errors.push(`SimC manifest has invalid objective ${objective?.objectiveId || "unknown"}`);
+    else context.objectivesById.set(objective.objectiveId, objective);
+  }
+  if (context.objectivesById.size !== expectedObjectives.size
+    || [...expectedObjectives].some(([id, status]) => context.objectivesById.get(id)?.status !== status))
+    errors.push("SimC manifest objective catalog changed without review");
+
+  for (const scenario of simcManifest.scenarios) {
+    if (!SIMC_ID.test(scenario?.scenarioId || "") || context.scenariosById.has(scenario.scenarioId)
+      || !context.objectivesById.has(scenario.objective) || !scenario.label || !scenario.fightStyle
+      || !Number.isInteger(scenario.targets) || scenario.targets <= 0)
+      errors.push(`SimC manifest has invalid scenario ${scenario?.scenarioId || "unknown"}`);
+    else context.scenariosById.set(scenario.scenarioId, scenario);
+  }
+  if (!context.scenariosById.size) errors.push("SimC manifest has no runnable scenarios");
+
+  for (const build of simcManifest.builds) {
+    if (!SIMC_ID.test(build?.buildId || "") || context.buildsById.has(build.buildId)
+      || build.status !== "accepted" || !build.version || !/^[a-f0-9]{7,12}$/.test(build.revision || "")
+      || !/^[a-f0-9]{40}$/.test(build.commit || "") || !build.commit.startsWith(build.revision)
+      || !build.gameBuild || build.platform !== "win32" || build.arch !== "x64"
+      || build.profileTreeSource !== simcManifest.source
+      || !String(build.artifactSource || "").startsWith(SIMC_ARTIFACT_PREFIX)
+      || !hexDigest(build.artifactSha256) || !hexDigest(build.simcExeSha256)
+      || build.auditDirectory !== `data/simc-audit/${build.revision}` || build.compression !== "gzip")
+      errors.push(`SimC manifest has invalid build ${build?.buildId || "unknown"}`);
+    else context.buildsById.set(build.buildId, build);
+  }
+  if (context.buildsById.get(simcManifest.activeBuildId)?.status !== "accepted")
+    errors.push("SimC manifest active build is missing or unaccepted");
+
+  const generatedByKey = new Map(rows.map((row) => [`${row.spec} ${row.class}`, row]));
+  for (const spec of simcManifest.specs) {
+    const generated = generatedByKey.get(spec?.specKey);
+    const profileIds = Array.isArray(spec?.profileIds) ? spec.profileIds : [];
+    const plannedScenarioIds = Array.isArray(spec?.plannedScenarioIds) ? spec.plannedScenarioIds : [];
+    if (!generated || spec.specKey !== `${spec.spec} ${spec.class}` || context.specsByKey.has(spec.specKey)
+      || spec.class !== generated.class || spec.spec !== generated.spec || spec.role !== generated.role
+      || spec.primaryStat !== generated.statPriority?.primary || !PRIMARIES.has(spec.primaryStat)
+      || !context.objectivesById.has(spec.objective) || !SIMC_ELIGIBILITY.has(spec.eligibility)
+      || !SIMC_SPEC_STATUSES.has(spec.status) || !uniqueStrings(spec.profileIds)
+      || !uniqueStrings(spec.plannedScenarioIds)
+      || spec.plannedScenarioIds.some((id) => !context.scenariosById.has(id)))
+      errors.push(`SimC manifest has invalid specialization ${spec?.specKey || "unknown"}`);
+    else context.specsByKey.set(spec.specKey, spec);
+    if (spec?.status !== "accepted" && !(typeof spec?.reason === "string" && spec.reason.trim()))
+      errors.push(`SimC ${spec?.specKey || "unknown spec"}: non-accepted status lacks a reason`);
+
+    const isAugmentation = spec?.specKey === "Augmentation Evoker";
+    if (isAugmentation) {
+      if (spec.role !== "DPS" || spec.eligibility !== "unsupported" || spec.status !== "unsupported"
+        || spec.objective !== "support-contribution" || profileIds.length || plannedScenarioIds.length)
+        errors.push("SimC Augmentation Evoker must remain explicitly unsupported");
+    } else if (spec?.role === "DPS") {
+      if (spec.eligibility !== "eligible" || !["accepted", "pending"].includes(spec.status)
+        || spec.objective !== "damage" || !plannedScenarioIds.length)
+        errors.push(`SimC ${spec.specKey}: conventional DPS disposition is invalid`);
+    } else if (spec?.role === "Tank") {
+      if (spec.eligibility !== "deferred" || spec.status !== "deferred"
+        || spec.objective !== "tank-composite" || profileIds.length || plannedScenarioIds.length)
+        errors.push(`SimC ${spec.specKey}: tank disposition is invalid`);
+    } else if (spec?.role === "Healer") {
+      if (spec.eligibility !== "deferred" || spec.status !== "deferred"
+        || spec.objective !== "healing" || profileIds.length || plannedScenarioIds.length)
+        errors.push(`SimC ${spec.specKey}: healer disposition is invalid`);
+    }
+  }
+  if (!sameSet(new Set(context.specsByKey.keys()), new Set(generatedByKey.keys())))
+    errors.push("SimC manifest does not account for the complete 40-spec roster");
+
+  const profileNamesBySpec = new Map(rows.map((row) => [
+    `${row.spec} ${row.class}`,
+    new Set((row.statPriorityVariants || []).length
+      ? row.statPriorityVariants.map((profile) => profile.name) : ["General"]),
+  ]));
+  const artifactHashes = new Map();
+  for (const profile of simcManifest.profiles) {
+    const spec = context.specsByKey.get(profile?.specKey);
+    const scenarioIds = Array.isArray(profile?.scenarioIds) ? profile.scenarioIds : [];
+    const scenarioInputMode = Array.isArray(profile?.scenarioInputs);
+    let profileValid = SIMC_ID.test(profile?.profileId || "")
+      && !context.profilesById.has(profile.profileId)
+      && SIMC_PROFILE_STATUSES.has(profile.status) && !!spec
+      && profile.objective === spec.objective && profile.primaryStat === spec.primaryStat
+      && !!profile.name && profileNamesBySpec.get(profile.specKey)?.has(profile.guideProfileName)
+      && SIMC_SELECTION_MODES.has(profile.selectionMode)
+      && (profile.selectionMode === "same-gear-dps"
+        ? profile.selectionEvidence !== undefined : profile.selectionEvidence === undefined)
+      && uniqueStrings(profile.scenarioIds) && !!profile.scenarioIds.length
+      && !profile.scenarioIds.some((id) => {
+        const scenario = context.scenariosById.get(id);
+        return !scenario || scenario.objective !== profile.objective;
+      }) && scenarioInputMode;
+
+    const inputs = scenarioInputMode ? profile.scenarioInputs : [];
+    if (scenarioInputMode && (!uniqueStrings(inputs.map((input) => input?.scenarioId))
+      || !sameSet(new Set(inputs.map((input) => input.scenarioId)), new Set(scenarioIds))))
+      profileValid = false;
+    const localArtifactHashes = new Map();
+    for (const input of inputs) {
+      const build = context.buildsById.get(input?.buildId);
+      if (!input || !build || !scenarioIds.includes(input.scenarioId)
+        || !validSimcProfileInput(input, build, profile.specKey, context)) {
+        profileValid = false;
+        continue;
+      }
+      const artifactKey = `${input.buildId}\u0000${input.profileFile}`;
+      const priorHash = localArtifactHashes.get(artifactKey) || artifactHashes.get(artifactKey);
+      if (priorHash && priorHash !== input.profileSha256) profileValid = false;
+      else localArtifactHashes.set(artifactKey, input.profileSha256);
+    }
+    const localSelectionArtifacts = new Map();
+    const selectionEvidence = profile?.selectionEvidence;
+    if (selectionEvidence !== undefined) {
+      const selectionSettings = selectionEvidence?.settings || {};
+      const selectionScenarios = Array.isArray(selectionEvidence?.scenarios)
+        ? selectionEvidence.scenarios : [];
+      const selectionScenarioIds = selectionScenarios.map((entry) => entry?.scenarioId);
+      if (profile.selectionMode !== "same-gear-dps" || !["accepted", "ready"].includes(profile.status)
+        || selectionEvidence?.metric !== "DPS"
+        || selectionEvidence?.requestedIterationsPerCandidate !== 5000
+        || !sameSet(new Set(Object.keys(selectionSettings)), new Set([
+          "threads", "fixedTime", "maxTimeSeconds", "varyCombatLength", "optimalRaid",
+          "fightStyle", "calculateScaleFactors",
+        ]))
+        || selectionSettings.threads !== 2 || selectionSettings.fixedTime !== true
+        || selectionSettings.maxTimeSeconds !== 300 || selectionSettings.varyCombatLength !== 0.2
+        || selectionSettings.optimalRaid !== true || selectionSettings.fightStyle !== "Patchwerk"
+        || selectionSettings.calculateScaleFactors !== false
+        || !uniqueStrings(selectionScenarioIds)
+        || !sameSet(new Set(selectionScenarioIds), new Set(scenarioIds)))
+        profileValid = false;
+
+      for (const selectionScenario of selectionScenarios) {
+        const scenarioId = selectionScenario?.scenarioId;
+        const scenario = context.scenariosById.get(scenarioId);
+        const selectedInput = simcProfileInput(profile, scenarioId);
+        const candidates = Array.isArray(selectionScenario?.candidates)
+          ? selectionScenario.candidates : [];
+        const candidateNames = candidates.map((candidate) => candidate?.sourceProfileName);
+        const candidateBuildIds = new Set(candidates.map((candidate) => candidate?.buildId));
+        if (!scenario || !selectedInput || scenario.fightStyle !== selectionSettings.fightStyle
+          || !/^[1-9]\d*$/.test(selectionScenario?.seed || "")
+          || !(typeof selectionScenario?.selectedSourceProfileName === "string"
+            && selectionScenario.selectedSourceProfileName.trim())
+          || candidates.length < 2 || !uniqueStrings(candidateNames) || candidateBuildIds.size !== 1) {
+          profileValid = false;
+          continue;
+        }
+
+        for (const candidate of candidates) {
+          const build = context.buildsById.get(candidate?.buildId);
+          if (!validSimcProfileInput(candidate, build, profile.specKey, context)
+            || !Number.isInteger(candidate.iterations)
+            || candidate.iterations < selectionEvidence.requestedIterationsPerCandidate
+            || candidate.iterations >= selectionEvidence.requestedIterationsPerCandidate
+              + selectionSettings.threads
+            || !Number.isFinite(candidate.baselineDps) || candidate.baselineDps <= 0
+            || !Number.isFinite(candidate.baselineDpsError) || candidate.baselineDpsError <= 0
+            || !/^[a-z0-9][a-z0-9_-]*$/.test(candidate.reportId || "")
+            || !hexDigest(candidate.resultSha256)
+            || (candidate.seed !== undefined && candidate.seed !== selectionScenario.seed)) {
+            profileValid = false;
+            continue;
+          }
+          const artifactKey = `${candidate.buildId}\u0000${candidate.profileFile}`;
+          const priorArtifactHash = localArtifactHashes.get(artifactKey) || artifactHashes.get(artifactKey);
+          if (priorArtifactHash && priorArtifactHash !== candidate.profileSha256) profileValid = false;
+          else localArtifactHashes.set(artifactKey, candidate.profileSha256);
+
+          const selectionKey = `${candidate.buildId}\u0000${candidate.reportId}`;
+          if (localSelectionArtifacts.has(selectionKey)
+            || context.selectionArtifactsByKey.has(selectionKey)) profileValid = false;
+          else localSelectionArtifacts.set(selectionKey, candidate);
+        }
+
+        const maximumDps = Math.max(...candidates.map((candidate) => candidate?.baselineDps));
+        const winners = candidates.filter((candidate) => candidate?.baselineDps === maximumDps);
+        const winner = winners.length === 1 ? winners[0] : null;
+        if (!winner || selectionScenario.selectedSourceProfileName !== winner.sourceProfileName
+          || winner.buildId !== selectedInput.buildId || !sameSimcInputProvenance(winner, selectedInput))
+          profileValid = false;
+        const shared = candidates[0];
+        if (candidates.some((candidate) => candidate.sourceMode !== shared?.sourceMode
+          || candidate.generatorSha256 !== shared?.generatorSha256
+          || (candidate.itemDbSource ?? undefined) !== (shared?.itemDbSource ?? undefined)
+          || !sameSet(new Set(candidate.redirectedBaseItemIds || []),
+            new Set(shared?.redirectedBaseItemIds || []))
+          || candidate.tertiaryRatingsPresent !== shared?.tertiaryRatingsPresent
+          || (candidate.curationPolicyId ?? undefined) !== (shared?.curationPolicyId ?? undefined)
+          || (candidate.gearSetId ?? undefined) !== (shared?.gearSetId ?? undefined)
+          || (candidate.gearPlanSha256 ?? undefined) !== (shared?.gearPlanSha256 ?? undefined)))
+          profileValid = false;
+      }
+    }
+    if (!profileValid) errors.push(`SimC manifest has invalid profile ${profile?.profileId || "unknown"}`);
+    else {
+      for (const [artifactKey, profileSha256] of localArtifactHashes)
+        artifactHashes.set(artifactKey, profileSha256);
+      for (const [selectionKey, candidate] of localSelectionArtifacts)
+        context.selectionArtifactsByKey.set(selectionKey, candidate);
+      context.profilesById.set(profile.profileId, profile);
+      for (const scenarioId of scenarioIds)
+        context.profileInputsByMatrix.set(`${profile.profileId}\u0000${scenarioId}`,
+          simcProfileInput(profile, scenarioId));
+    }
+  }
+  for (const spec of context.specsByKey.values()) {
+    const declared = new Set(spec.profileIds);
+    const catalog = new Set([...context.profilesById.values()]
+      .filter((profile) => profile.specKey === spec.specKey).map((profile) => profile.profileId));
+    if (!sameSet(declared, catalog)) errors.push(`SimC ${spec.specKey}: profile catalog linkage is incomplete`);
+    const visibleProfiles = [...declared].map((id) => context.profilesById.get(id))
+      .filter((profile) => profile && profile.status !== "rejected");
+    const acceptedGuideNames = new Set(visibleProfiles.filter((profile) => profile.status === "accepted")
+      .map((profile) => profile.guideProfileName));
+    const expectedGuideNames = profileNamesBySpec.get(spec.specKey) || new Set();
+    const completeGuideCoverage = visibleProfiles.length > 0
+      && visibleProfiles.every((profile) => profile.status === "accepted")
+      && sameSet(acceptedGuideNames, expectedGuideNames);
+    const readyDeclared = [...declared].filter((id) => context.profilesById.get(id)?.status === "ready");
+    if (spec.status === "accepted" && !completeGuideCoverage)
+      errors.push(`SimC ${spec.specKey}: accepted status lacks every visible guide profile mapping`);
+    if (spec.status === "pending" && completeGuideCoverage)
+      errors.push(`SimC ${spec.specKey}: pending status conflicts with complete guide profile coverage`);
+    if (readyDeclared.length && !["pending", "accepted"].includes(spec.status))
+      errors.push(`SimC ${spec.specKey}: ready profiles require a pending or accepted spec`);
+    const guideProfileNames = new Set();
+    for (const profile of [...context.profilesById.values()]
+      .filter((entry) => entry.specKey === spec.specKey && entry.status !== "rejected")) {
+      if (guideProfileNames.has(profile.guideProfileName))
+        errors.push(`SimC ${spec.specKey}: non-rejected profiles have an ambiguous guide mapping`);
+      guideProfileNames.add(profile.guideProfileName);
+    }
+    for (const profileId of declared) {
+      const profile = context.profilesById.get(profileId);
+      if (profile && profile.scenarioIds.some((id) => !spec.plannedScenarioIds.includes(id)))
+        errors.push(`SimC ${spec.specKey}: profile scenarios exceed the spec plan`);
+    }
+  }
+
+  const acceptedProfiles = [...context.profilesById.values()].filter((profile) => profile.status === "accepted");
+  for (const profile of acceptedProfiles)
+    for (const scenarioId of profile.scenarioIds)
+      context.acceptedMatrix.add(`${profile.profileId}\u0000${scenarioId}`);
+  context.expectedProfileCount = acceptedProfiles.length;
+  context.expectedReportCount = context.acceptedMatrix.size * (acceptance.runsPerRecord || 0);
+  const specs = [...context.specsByKey.values()];
+  const expectedCoverage = {
+    totalSpecs: specs.length,
+    eligibleConventionalDps: specs.filter((spec) => spec.role === "DPS" && spec.eligibility === "eligible").length,
+    acceptedEligibleSpecs: specs.filter((spec) => spec.eligibility === "eligible" && spec.status === "accepted").length,
+    pendingEligibleSpecs: specs.filter((spec) => spec.eligibility === "eligible" && spec.status === "pending").length,
+    deferredTanks: specs.filter((spec) => spec.role === "Tank" && spec.status === "deferred").length,
+    deferredHealers: specs.filter((spec) => spec.role === "Healer" && spec.status === "deferred").length,
+    unsupportedSpecs: specs.filter((spec) => spec.status === "unsupported").length,
+    acceptedProfiles: context.expectedProfileCount,
+    acceptedRecords: context.acceptedMatrix.size,
+    acceptedReports: context.expectedReportCount,
+  };
+  if (!sameJson(simcManifest.coverage, expectedCoverage))
+    errors.push("SimC manifest coverage summary is stale");
+  return context;
+}
+
+function validateSimcReferenceWeights(simcWeights, simcManifest, manifest, errors) {
+  if (simcWeights?.schemaVersion !== 3 || simcWeights?.runManifest !== "simc-run-manifest.json"
+    || simcWeights?.patchContext !== WEAPON_PATCH_CONTEXT || !Array.isArray(simcWeights?.records)) {
     errors.push("SimC reference weights are missing or have the wrong patch/schema");
     return;
   }
 
-  const isoTimestamp = (value) => typeof value === "string"
-    && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{3})?Z$/.test(value)
-    && Number.isFinite(Date.parse(value));
-  const hexDigest = (value) => /^[a-f0-9]{64}$/i.test(value || "");
   const methodology = simcWeights.methodology || {};
-  const simulator = methodology.simulator || {};
+  const simulator = methodology.simulator;
   const settings = methodology.settings || {};
   const profileGeneration = methodology.profileGeneration || {};
   const auditArtifacts = methodology.auditArtifacts || {};
-  if (simcWeights.source !== SIMC_SOURCE || !isoTimestamp(simcWeights.generatedAt))
+  const acceptedProfiles = [...manifest.profilesById.values()].filter((profile) => profile.status === "accepted");
+  const acceptedEvidence = simcWeights.records.filter((record) => record?.status === "accepted");
+  const evidenceBuildIds = new Set(acceptedEvidence.map((record) => record.buildId));
+  for (const profile of acceptedProfiles)
+    for (const scenarioId of profile.scenarioIds) {
+      const input = manifest.profileInputsByMatrix.get(`${profile.profileId}\u0000${scenarioId}`);
+      if (input?.buildId) evidenceBuildIds.add(input.buildId);
+    }
+  for (const candidate of manifest.selectionArtifactsByKey.values())
+    evidenceBuildIds.add(candidate.buildId);
+  if (simcWeights.source !== simcManifest?.source || !isoTimestamp(simcWeights.generatedAt))
     errors.push("SimC reference weights lack the reviewed source or generation timestamp");
-  if (simulator.version !== "1205-01" || simulator.revision !== SIMC_REVISION
-    || simulator.commit !== SIMC_COMMIT || simulator.gameBuild !== SIMC_GAME_BUILD
-    || simulator.artifactSource !== SIMC_ARTIFACT_SOURCE
-    || simulator.artifactSha256 !== SIMC_ARTIFACT_SHA256 || simulator.simcExeSha256 !== SIMC_EXE_SHA256)
-    errors.push("SimC simulator provenance changed without review");
-  if (profileGeneration.source !== SIMC_GENERATOR_SOURCE
-      || profileGeneration.redirectedBaseStatsPerProfile !== 3
-      || profileGeneration.tertiaryStatsModeled !== false)
-    errors.push("SimC generated-profile Catalyst policy changed without review");
-  if (auditArtifacts.directory !== SIMC_AUDIT_DIRECTORY || auditArtifacts.compression !== "gzip"
-    || auditArtifacts.profiles !== 2 || auditArtifacts.reports !== 8)
-    errors.push("SimC audit-artifact policy changed without review");
+  const simulatorMatchesBuild = (declared, build) => !!declared && !!build
+    && declared.version === build.version && declared.revision === build.revision
+    && declared.commit === build.commit && declared.gameBuild === build.gameBuild
+    && declared.platform === build.platform && declared.arch === build.arch
+    && declared.artifactSource === build.artifactSource
+    && declared.artifactSha256 === build.artifactSha256
+    && declared.simcExeSha256 === build.simcExeSha256;
+  const simulators = methodology.simulators;
+  let simulatorPolicyValid;
+  if (simulators === undefined) {
+    const onlyBuild = evidenceBuildIds.size === 1
+      ? manifest.buildsById.get([...evidenceBuildIds][0]) : null;
+    simulatorPolicyValid = simulatorMatchesBuild(simulator, onlyBuild);
+  } else {
+    simulatorPolicyValid = simulator === undefined && !!simulators && !Array.isArray(simulators)
+      && typeof simulators === "object"
+      && sameSet(new Set(Object.keys(simulators)), evidenceBuildIds)
+      && [...evidenceBuildIds].every((buildId) =>
+        simulatorMatchesBuild(simulators[buildId], manifest.buildsById.get(buildId)));
+  }
+  if (!simulatorPolicyValid)
+    errors.push("SimC simulator provenance does not match the run manifest");
+  if (profileGeneration.sourcePolicy !== "manifest-scenario-input"
+      || !sameSet(new Set(profileGeneration.sourceModes || []), SIMC_SOURCE_MODES)
+      || !(typeof profileGeneration.generatorSourceMeaning === "string"
+        && profileGeneration.generatorSourceMeaning.trim())
+      || profileGeneration.talentSourcePolicy !== "manifest-scenario-input"
+      || profileGeneration.talentSourceAsOfPolicy !== "required-for-curated-same-gear"
+      || profileGeneration.curationPolicy !== "manifest-curationPolicies"
+      || profileGeneration.redirectedBaseItemIdsPolicy !== "manifest-scenario-input"
+      || profileGeneration.tertiaryRatingsPolicy !== "manifest-scenario-input-and-retained-report")
+    errors.push("SimC generated-profile policy does not match the run manifest");
+  const auditDirectories = auditArtifacts.directories;
+  let auditPolicyValid = evidenceBuildIds.size > 0;
+  if (auditDirectories === undefined) {
+    const evidenceBuild = evidenceBuildIds.size === 1
+      ? manifest.buildsById.get([...evidenceBuildIds][0]) : null;
+    auditPolicyValid = auditPolicyValid && !!evidenceBuild
+      && auditArtifacts.directory === evidenceBuild.auditDirectory
+      && auditArtifacts.compression === evidenceBuild.compression;
+  } else if (!auditDirectories || Array.isArray(auditDirectories)
+    || typeof auditDirectories !== "object"
+    || !sameSet(new Set(Object.keys(auditDirectories)), evidenceBuildIds)) {
+    auditPolicyValid = false;
+  } else {
+    for (const buildId of evidenceBuildIds) {
+      const build = manifest.buildsById.get(buildId);
+      const declared = auditDirectories[buildId];
+      const directory = typeof declared === "string" ? declared : declared?.directory;
+      const compression = typeof declared === "object" && declared?.compression
+        ? declared.compression : auditArtifacts.compression;
+      if (!build || directory !== build.auditDirectory || compression !== build.compression)
+        auditPolicyValid = false;
+    }
+  }
+  if (!auditPolicyValid)
+    errors.push("SimC audit-artifact policy does not match the run manifest");
+  const expectedScenarios = Object.fromEntries([...manifest.scenariosById.values()].map((scenario) => [
+    scenario.scenarioId, { fightStyle: scenario.fightStyle, targets: scenario.targets },
+  ]));
   if (settings.ptr !== true || settings.optimalRaid !== true || settings.fightStyle !== "Patchwerk"
     || settings.fixedTime !== true || settings.maxTimeSeconds !== 300 || settings.varyCombatLength !== 0.2
-    || settings.requestedIterationsPerRun !== 25000 || settings.calculateScaleFactors !== true
-    || settings.normalizeScaleFactors !== true
-    || !sameJson(settings.scaleOnly, ["intellect", "crit", "haste", "mastery", "versatility"])
-    || methodology.acceptedRunCount !== 2 || methodology.maximumRelativeDrift !== 0.05
-    || !sameJson(methodology.scenarios, {
-      "raid-st": { fightStyle: "Patchwerk", targets: 1 },
-      "aoe-5t": { fightStyle: "Patchwerk", targets: 5 },
-    }))
-    errors.push("SimC reference methodology changed without review");
+    || settings.requestedIterationsPerRun !== simcManifest?.acceptancePolicy?.requestedIterationsPerRun
+    || settings.calculateScaleFactors !== true || settings.normalizeScaleFactors !== true
+    || settings.scaleOnly !== undefined || settings.scaleOnlyScope !== undefined
+    || settings.scaleOnlyPolicy?.primaryStatField !== "primaryStat"
+    || !sameJson(settings.scaleOnlyPolicy?.secondaries, ["crit", "haste", "mastery", "versatility"])
+    || methodology.acceptedRunCount !== simcManifest?.acceptancePolicy?.runsPerRecord
+    || methodology.maximumRelativeDrift !== simcManifest?.acceptancePolicy?.maximumRelativeDrift
+    || !sameJson(methodology.scenarios, expectedScenarios))
+    errors.push("SimC reference methodology does not match the run manifest");
 
-  const profilesBySpec = new Map(rows.map((row) => [
-    `${row.spec} ${row.class}`,
-    new Set((row.statPriorityVariants || []).length
-      ? row.statPriorityVariants.map((profile) => profile.name)
-      : ["General"]),
-  ]));
   const seen = new Set();
-  const acceptedMatrix = new Set();
+  const recordIds = new Set();
+  const publishedMatrix = new Set();
+  const acceptedArtifactProfiles = new Set();
+  let acceptedArtifactReports = 0;
   const reportIds = new Set();
   const seeds = new Set();
   const acceptedTimestamps = [];
-  const expectedTargets = { "raid-st": 1, "aoe-5t": 5 };
   const validStatuses = new Set(["accepted", "provisional", "rejected"]);
   const exactWeights = (weights, nonNegative) => weights && sameSet(new Set(Object.keys(weights)), SECONDARIES)
     && Object.values(weights).every((value) => Number.isFinite(value) && (!nonNegative || value >= 0));
-  const roundSix = (value) => Math.round(value * 1e6) / 1e6;
+  // The retained ledger was produced with round-half-even semantics. Preserve that
+  // convention explicitly so a binary floating-point .5 tie cannot move evidence by
+  // one millionth when regenerated by JavaScript instead of Python.
+  const roundSix = (value) => {
+    const scaled = value * 1e6;
+    const lower = Math.floor(scaled);
+    const fraction = scaled - lower;
+    if (Math.abs(fraction - 0.5) < 1e-9) return (lower + (lower % 2 ? 1 : 0)) / 1e6;
+    return Math.round(scaled) / 1e6;
+  };
+  const iterations = simcManifest?.acceptancePolicy?.requestedIterationsPerRun;
+  const runsPerRecord = simcManifest?.acceptancePolicy?.runsPerRecord;
 
   for (const record of simcWeights.records) {
     const where = `SimC ${record?.specKey || "unknown spec"}/${record?.profile || "unknown profile"}`;
-    const profiles = profilesBySpec.get(record?.specKey);
-    if (!profiles || !profiles.has(record?.profile))
-      errors.push(`${where}: spec/profile does not match the generated spec roster`);
-
-    const expectedTarget = expectedTargets[record?.scenario];
-    if (!expectedTarget || record.targets !== expectedTarget)
-      errors.push(`${where}: scenario must be raid-st/1 target or aoe-5t/5 targets`);
-    const key = `${record?.specKey}\u0000${record?.profile}\u0000${record?.scenario}`;
+    const profile = manifest.profilesById.get(record?.profileId);
+    const scenario = manifest.scenariosById.get(record?.scenario);
+    const input = profile && scenario
+      ? manifest.profileInputsByMatrix.get(`${profile.profileId}\u0000${scenario.scenarioId}`) : null;
+    const build = manifest.buildsById.get(record?.buildId);
+    const expectedRecordId = profile && scenario ? `${profile.profileId}-${scenario.scenarioId}` : null;
+    if (!profile || !build || !scenario || record.specKey !== profile.specKey || record.profile !== profile.name
+      || !input || record.buildId !== input.buildId || record.objective !== profile.objective
+      || record.primaryStat !== profile.primaryStat || !profile.scenarioIds.includes(record.scenario))
+      errors.push(`${where}: spec/profile does not match the run manifest`);
+    if (!SIMC_ID.test(record?.recordId || "") || record.recordId !== expectedRecordId)
+      errors.push(`${where}: invalid stable record id`);
+    if (recordIds.has(record?.recordId)) errors.push(`${where}: duplicate record id`);
+    recordIds.add(record?.recordId);
+    if (!scenario || record.targets !== scenario.targets)
+      errors.push(`${where}: scenario target count does not match the run manifest`);
+    const key = `${record?.profileId}\u0000${record?.scenario}`;
     if (seen.has(key)) errors.push(`${where}: duplicate scenario record`);
     seen.add(key);
 
@@ -470,25 +919,36 @@ function validateSimcReferenceWeights(simcWeights, rows, errors) {
       if (!record?.reason) errors.push(`${where}: non-accepted record lacks a reason`);
       continue;
     }
-    acceptedMatrix.add(key);
+    if (!profile || !["accepted", "ready"].includes(profile.status))
+      errors.push(`${where}: accepted evidence requires an accepted or ready profile`);
+    if (profile?.status === "accepted") publishedMatrix.add(key);
+    acceptedArtifactProfiles.add(`${record?.buildId}\u0000${record?.profileFile}`);
+    acceptedArtifactReports += Array.isArray(record?.runs) ? record.runs.length : 0;
     acceptedTimestamps.push(record.simulatedAt);
 
-    if (!Array.isArray(record.runs) || record.runs.length !== 2)
-      errors.push(`${where}: accepted record must contain exactly two runs`);
+    const hasIterationOverride = record.requestedIterationsPerRun !== undefined;
+    const recordIterations = hasIterationOverride
+      ? record.requestedIterationsPerRun : iterations;
+    if (hasIterationOverride && (!Number.isSafeInteger(recordIterations) || recordIterations <= iterations))
+      errors.push(`${where}: invalid requested iteration override`);
+    if (!Array.isArray(record.runs) || record.runs.length !== runsPerRecord)
+      errors.push(`${where}: accepted record must contain exactly ${runsPerRecord} runs`);
     else for (const run of record.runs) {
-      if (!Number.isInteger(run?.iterations) || run.iterations < 25000 || run.iterations > 25008
+      if (!Number.isInteger(run?.threads) || run.threads <= 0
+        || !Number.isSafeInteger(run?.iterations) || run.iterations < recordIterations
+        || run.iterations >= recordIterations + run.threads
         || !Number.isFinite(run?.baselineDps) || run.baselineDps <= 0
         || !Number.isFinite(run?.baselineDpsError) || run.baselineDpsError <= 0
-        || !Number.isInteger(run?.threads) || run.threads <= 0
         || !exactWeights(run?.weights, false) || !/^\d+$/.test(run?.seed || "")
-        || !run?.reportId || !hexDigest(run?.resultSha256) || !isoTimestamp(run?.timestamp))
+        || !/^[a-z0-9][a-z0-9_-]*$/.test(run?.reportId || "")
+        || !hexDigest(run?.resultSha256) || !isoTimestamp(run?.timestamp))
         errors.push(`${where}: invalid accepted run`);
       if (reportIds.has(run?.reportId)) errors.push(`${where}: duplicate report id`);
       if (seeds.has(run?.seed)) errors.push(`${where}: repeated RNG seed`);
       reportIds.add(run?.reportId);
       seeds.add(run?.seed);
     }
-    if (exactWeights(record.weights, true) && Array.isArray(record.runs) && record.runs.length === 2
+    if (exactWeights(record.weights, true) && Array.isArray(record.runs) && record.runs.length === runsPerRecord
       && record.runs.every((run) => exactWeights(run?.weights, false))) {
       let derivedMaxDrift = 0;
       for (const stat of SECONDARIES) {
@@ -498,41 +958,48 @@ function validateSimcReferenceWeights(simcWeights, rows, errors) {
         const denominator = (Math.abs(left) + Math.abs(right)) / 2;
         const drift = denominator ? Math.abs(left - right) / denominator : 0;
         derivedMaxDrift = Math.max(derivedMaxDrift, drift);
-        if (Math.abs(record.weights[stat] - derivedMean) > 1e-6)
+        if (record.weights[stat] !== roundSix(derivedMean))
           errors.push(`${where}: published ${stat} weight does not match its runs`);
       }
       const derivedDpsDrift = Math.abs(record.runs[0].baselineDps - record.runs[1].baselineDps)
         / ((record.runs[0].baselineDps + record.runs[1].baselineDps) / 2);
-      if (Math.abs(record.maxRelativeDrift - roundSix(derivedMaxDrift)) > 1e-6
-        || Math.abs(record.baselineDpsRelativeDrift - roundSix(derivedDpsDrift)) > 1e-6)
+      if (record.maxRelativeDrift !== roundSix(derivedMaxDrift)
+        || record.baselineDpsRelativeDrift !== roundSix(derivedDpsDrift))
         errors.push(`${where}: published stability does not match its runs`);
     }
     if (!Number.isFinite(record.maxRelativeDrift) || record.maxRelativeDrift < 0
-      || record.maxRelativeDrift > methodology.maximumRelativeDrift)
+      || record.maxRelativeDrift > simcManifest?.acceptancePolicy?.maximumRelativeDrift)
       errors.push(`${where}: accepted record exceeds the stability threshold`);
     if (!Number.isFinite(record.baselineDpsRelativeDrift) || record.baselineDpsRelativeDrift < 0)
       errors.push(`${where}: invalid baseline DPS stability`);
-    const runTimestamps = Array.isArray(record.runs) && record.runs.length === 2
+    const runTimestamps = Array.isArray(record.runs) && record.runs.length === runsPerRecord
       && record.runs.every((run) => isoTimestamp(run?.timestamp))
       ? record.runs.map((run) => run.timestamp).sort() : [];
-    if (record.profileSource !== SIMC_GENERATOR_SOURCE
-      || record.profileFile !== SIMC_PROFILE_FILES.get(record.profile)
-      || record.profileSha256 !== SIMC_PROFILE_HASHES.get(record.profile)
-      || record.simcVersion !== simulator.version || record.simcRevision !== SIMC_REVISION
-      || record.gameBuild !== SIMC_GAME_BUILD || !isoTimestamp(record.simulatedAt)
-      || (runTimestamps.length === 2 && record.simulatedAt !== runTimestamps.at(-1)))
+    if (!profile || !input || !build || !sameSimcInputProvenance(record, input)
+      || record.simcVersion !== build.version || record.simcRevision !== build.revision
+      || record.gameBuild !== build.gameBuild || !isoTimestamp(record.simulatedAt)
+      || (runTimestamps.length === runsPerRecord && record.simulatedAt !== runTimestamps.at(-1)))
       errors.push(`${where}: accepted record lacks valid simulation provenance`);
   }
-  if (!sameSet(acceptedMatrix, EXPECTED_SIMC_MATRIX))
-    errors.push("SimC accepted Shadow Priest reference matrix is incomplete or unexpected");
+  if (!sameSet(publishedMatrix, manifest.acceptedMatrix))
+    errors.push("SimC accepted reference matrix is incomplete or unexpected");
+  for (const candidate of manifest.selectionArtifactsByKey.values())
+    acceptedArtifactProfiles.add(`${candidate.buildId}\u0000${candidate.profileFile}`);
+  if (auditArtifacts.profiles !== acceptedArtifactProfiles.size
+    || auditArtifacts.reports !== acceptedArtifactReports)
+    errors.push("SimC audit-artifact counts do not match the accepted evidence ledger");
+  if ((auditArtifacts.selections ?? 0) !== manifest.selectionArtifactsByKey.size)
+    errors.push("SimC selection-artifact count does not match the run manifest");
   if (acceptedTimestamps.length && simcWeights.generatedAt !== acceptedTimestamps.sort().at(-1))
     errors.push("SimC generation timestamp does not match the latest accepted record");
 }
 
 export function validateData({ raid, specs, dungeons, sheet, statOverrides, statBaseline,
-  weaponProficiency, itemEligibility, tier, catalyst, catalystAllocations, simcWeights },
-  { expectedPatch = "12.0.7" } = {}) {
+  weaponProficiency, itemEligibility, tier, catalyst, catalystAllocations, simcManifest, simcWeights },
+  { expectedPatch = "12.0.7", gearingRoot } = {}) {
   const errors = [];
+  try { verifyCurationSourceFiles(simcManifest, gearingRoot); }
+  catch (error) { errors.push(error.message); }
   const rows = specs?.specs || [];
   if (rows.length !== 40) errors.push(`expected 40 specs, found ${rows.length}`);
   const keys = rows.map((s) => `${s.spec} ${s.class}`);
@@ -542,7 +1009,8 @@ export function validateData({ raid, specs, dungeons, sheet, statOverrides, stat
     errors.push("spec summary counts are stale");
 
   validateGeneratedSources(rows, statOverrides, statBaseline, weaponProficiency, expectedPatch, errors);
-  validateSimcReferenceWeights(simcWeights, rows, errors);
+  const simcContext = validateSimcRunManifest(simcManifest, rows, errors);
+  validateSimcReferenceWeights(simcWeights, simcManifest, simcContext, errors);
 
   for (const s of rows) {
     const key = `${s.spec} ${s.class}`;
