@@ -95,6 +95,12 @@ export function videoActivity(oldPending, newPending, newTakes, newNotes) {
     skipped: cleared.filter(v => !citedIds.has(v.id)),
     queued,
     waiting: newVids.filter(v => !queued.some(q => q.id === v.id)),
+    // Videos rejected from title + description without a fetch (triaged[], added
+    // 2026-08-05). They never enter videos[], so the queue diff above cannot see them —
+    // yet they ARE the run's largest discovery decision most nights (12 on 08-04, 6 on
+    // 08-05). Reporting them keeps the digest an honest account of what was passed over,
+    // not just of what was processed.
+    triaged: newEntries(oldPending?.triaged ?? [], newPending?.triaged ?? [], v => v.id),
   };
 }
 
@@ -138,12 +144,18 @@ export function digestMarkdown({ oldPayload, newPayload, manifest, runUrl, oldPe
   if (verdicts.length) lines.push(`**Writeup verdicts:**`, ...verdicts.map(v => `- ${v}`), "");
   const vids = videoActivity(oldPending, newPending, takesAll, notesAll);
   const watch = v => `[watch](https://youtu.be/${v.id})`;
-  if (vids.distilled.length || vids.skipped.length || vids.queued.length || vids.waiting.length) {
+  if (vids.distilled.length || vids.skipped.length || vids.queued.length || vids.waiting.length || vids.triaged.length) {
     lines.push(`**Creator videos:**`);
     lines.push(...vids.distilled.map(v => `- Distilled — takes below: **${md(v.creator)}** — “${md(v.title)}” (${watch(v)})`));
     lines.push(...vids.skipped.map(v => `- Checked & skipped — transcript verified out of scope, no PvE tier/meta content: **${md(v.creator)}** — “${md(v.title)}” (${watch(v)})`));
     lines.push(...vids.queued.map(v => `- Queued for the next transcript run: **${md(v.creator)}** — “${md(v.title)}” (${v.published ? `published ${v.published}, ` : ""}${watch(v)})`));
     if (vids.waiting.length) lines.push(`- Still waiting in the queue: ${vids.waiting.map(v => `**${md(v.creator)}** “${md(v.title)}”`).join(" · ")}`);
+    // Compact by design: triage is high-volume and low-information per row — the count
+    // plus who and why is the useful signal, not a paragraph each.
+    if (vids.triaged.length) {
+      lines.push(`- Triaged out on title + description, no transcript fetched (${vids.triaged.length}): `
+        + vids.triaged.map(v => `**${md(v.creator)}**${v.title ? ` “${md(v.title)}”` : ""} (${watch(v)})`).join(" · "));
+    }
     lines.push("");
   }
   if (takes.length) {
@@ -154,7 +166,7 @@ export function digestMarkdown({ oldPayload, newPayload, manifest, runUrl, oldPe
     lines.push(`**New meta-outlook notes (${notes.length}):**`);
     lines.push(...cap(notes, 8, n => `- **${md(n.creator)}** on ${md(n.spec)} ${md(n.class)} (${md(n.sentiment)}, ${md(n.patchContext)}): ${md(n.note).slice(0, 120)}`), "");
   }
-  const videoChange = vids.distilled.length || vids.skipped.length || vids.queued.length;
+  const videoChange = vids.distilled.length || vids.skipped.length || vids.queued.length || vids.triaged.length;
   const degraded = (manifest?.sources ?? []).filter(r => r.result && r.result !== "success");
   if (!moves.length && !takes.length && !notes.length && !builds.length && !verdicts.length && !videoChange) {
     // "Every source re-verified fresh" was emitted on ANY no-change run, including one

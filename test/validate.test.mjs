@@ -533,3 +533,62 @@ test("validateData gates the take fields the expert model reads", async () => {
   ok.creatorTakes.takes[0].bracket = "mplus";
   assert.deepEqual(validateData(ok).filter(e => e.includes("bracket")), []);
 });
+
+test("pending transcript queue: triaged[] is a separate durable lane, never confusable with skipped[]", async () => {
+  const data = await loadData(ROOT);
+  const broken = structuredClone(data);
+  broken.pendingTranscripts = {
+    triagedFrom: "2026-07-14",
+    videos: [{ id: "Rmkxzb1QQSQ", creator: "AutomaticJak", title: "t", published: "2026-07-17", queuedAt: "2026-07-17" }],
+    skipped: [{ id: "Z8Jygl_NpF4", creator: "Shadarek", title: "t", reason: "transcript read, comedy tier list", verifiedAt: "2026-07-17" }],
+    triaged: [
+      // queued AND triaged — the video cannot be both awaiting a fetch and rejected without one
+      { id: "Rmkxzb1QQSQ", creator: "AutomaticJak", reason: "a sufficiently long reason", triagedAt: "2026-07-17" },
+      // already transcript-verified in skipped[] — a title judgment must not overwrite a read
+      { id: "Z8Jygl_NpF4", creator: "Shadarek", reason: "a sufficiently long reason", triagedAt: "2026-07-17" },
+      { id: "vK-qyvXOVYM", creator: "izen", reason: "short", triagedAt: "2026-07-17" },
+      { id: "M-QRkzkQ-X0", creator: "", reason: "a sufficiently long reason", triagedAt: "2026-07-17" },
+      { id: "not-an-id", creator: "izen", reason: "a sufficiently long reason", triagedAt: "2026-07-17" },
+      { id: "qkqwSJtmD88", creator: "Critcake", reason: "a sufficiently long reason", triagedAt: "2099-01-01" },
+      { id: "W1vqQebN9UU", creator: "MadSkillzzTV", reason: "a sufficiently long reason", triagedAt: "2026-07-17" },
+      { id: "W1vqQebN9UU", creator: "MadSkillzzTV", reason: "duplicate inside the lane", triagedAt: "2026-07-17" },
+    ],
+  };
+  const errors = validateData(broken, { now: "2026-07-17" });
+  assert.ok(errors.some(e => e.includes("both queued and triaged")), "an id both queued and triaged is rejected");
+  assert.ok(errors.some(e => e.includes("already in skipped[]")), "a transcript-verified id cannot be re-filed as a title triage");
+  assert.ok(errors.some(e => e.includes('triaged "vK-qyvXOVYM"') && e.includes("needs a reason")), "a short reason is rejected");
+  assert.ok(errors.some(e => e.includes('triaged "M-QRkzkQ-X0"') && e.includes("needs a creator")), "a missing creator is rejected");
+  assert.ok(errors.some(e => e.includes('"not-an-id"') && e.includes("11-char")), "a malformed id is rejected");
+  assert.ok(errors.some(e => e.includes("future-dated")), "a future triagedAt is rejected");
+  assert.ok(errors.some(e => e.includes("listed twice")), "a duplicate inside the lane is rejected");
+  // Optional lane + validated floor; the committed file must itself be clean.
+  const noLane = structuredClone(data);
+  delete noLane.pendingTranscripts.triaged;
+  delete noLane.pendingTranscripts.triagedFrom;
+  assert.ok(!validateData(noLane, { now: "2026-07-17" }).some(e => e.includes("triaged")));
+  const badFloor = structuredClone(data);
+  badFloor.pendingTranscripts.triagedFrom = "2026-13-99";
+  assert.ok(validateData(badFloor, { now: "2026-08-05" }).some(e => e.includes("triagedFrom")),
+    "a malformed discovery floor would silently widen or close discovery");
+  assert.deepEqual(validateData(data).filter(e => e.includes("triaged")), []);
+});
+
+test("pending transcript queue: neither rejection lane may hold a video a take cites", async () => {
+  // The real contradiction this caught on the committed data (2026-08-05): Tettles'
+  // aqe2LKeMIqQ was distilled 07-26 (one chat-reply take at t=10036) and then filed as
+  // "yielded nothing" on 07-30 by a run that re-derived its seen-set from log prose.
+  const data = await loadData(ROOT);
+  const cited = data.creatorTakes.takes.find(t => /youtu\.be\/[\w-]{11}/.test(t.url ?? ""));
+  const id = cited.url.match(/youtu\.be\/([\w-]{11})/)[1];
+  for (const [lane, dateField] of [["skipped", "verifiedAt"], ["triaged", "triagedAt"]]) {
+    const broken = structuredClone(data);
+    broken.pendingTranscripts = {
+      videos: [],
+      [lane]: [{ id, creator: cited.creator, reason: "claimed to yield nothing", [dateField]: "2026-08-01" }],
+    };
+    const errors = validateData(broken, { now: "2026-08-05" });
+    assert.ok(errors.some(e => e.includes(id) && e.includes("cited by a take")),
+      `${lane}[] holding a distilled video must fail`);
+  }
+});

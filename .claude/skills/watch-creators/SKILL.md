@@ -18,9 +18,35 @@ locally, and distill them into cited per-spec takes in `data/creator-takes.json`
 1. **Discovery**: for each transcribable creator with a YouTube channel, fetch
    `https://www.youtube.com/feeds/videos.xml?channel_id=<id>` (no auth). Resolve an
    unknown channel_id once by grepping `"channelId"` from the raw watch-page HTML
-   (browser UA) and cache it on the creator entry as `channelId`. Diff videoIds
-   against `log.md`'s seen-set. **Title-filter before fetching** — creators post
-   off-topic content; require class/spec/Midnight/12.1/Season keywords.
+   (browser UA) and cache it on the creator entry as `channelId`.
+
+   **The seen-set is MECHANICAL — derive it from data, never from this log's prose**
+   (2026-08-05). A feed videoId is already seen when ANY of these holds:
+   - a `creator-takes.json` take or metaNote cites it (`youtu.be/<id>` or `?v=<id>`) — distilled;
+   - it is in `pending-transcripts.json` `videos[]` — queued, waiting on a fetch;
+   - it is in `skipped[]` — transcript read, nothing to distil;
+   - it is in `triaged[]` — rejected on title + description, no fetch spent;
+   - **its `published` date is before `triagedFrom`** in that file (2026-07-14) — the
+     discovery floor: the 2026-07 seeding pass already harvested that backlog (184 of the
+     takes/metaNotes on file predate it, citing 118 distinct videos), so those feed
+     entries are out of scope rather than unexamined.
+
+   Substring-scanning `log.md` was the old method and it was the single biggest waste in
+   this skill: ~178 ageing feed entries re-read as "unseen" every single run, and the
+   triage narrative had to be re-derived from prose nightly. It also produced a real
+   contradiction — Tettles' `aqe2LKeMIqQ` was distilled 07-26 (one chat-reply Moonkin
+   take at t=10036) and then filed as "yielded nothing" on 07-30 by a run that could not
+   see the earlier decision. `log.md` remains the human trail; it is no longer an input.
+
+   **Title-filter before fetching** — creators post off-topic content; require
+   class/spec/Midnight/12.1/Season keywords, and read `media:description` from the feed:
+   it costs nothing extra and routinely settles borderline titles without a fetch.
+   **Every video you reject at this step goes in `triaged[]`** —
+   `{id, creator, title?, reason, triagedAt}` — so tomorrow's run inherits the decision
+   instead of re-making it. The `reason` is mandatory and should be one line (what the
+   video actually is, and which precedent applies). Retention: entries older than ~120
+   days may be pruned — a video that has fallen out of every RSS feed cannot resurface,
+   and re-triaging one stray title is cheap by construction.
 2. **Transcript** (videos ≥2–6h old — auto-captions lag upload). Sources in order:
    (a) **Nightly runner:** `transcript-fetch/<videoId>.json` — pre-fetched by the
    deterministic step (`src/fetch-transcripts.mjs`, Supadata captions API,
@@ -37,14 +63,25 @@ locally, and distill them into cited per-spec takes in `data/creator-takes.json`
    transcript-verified-skipped.
    **When you transcript-verify a video and distil NOTHING from it, move it to the
    `skipped[]` lane in the same file** — `{id, creator, title, reason, verifiedAt}`, where
-   `reason` says what the transcript actually turned out to be. Validation enforces the
-   shape and refuses to let an id sit in both lanes. This lane is DURABLE: before it
-   existed (added 2026-07-31), "verified-skipped" lived only in log.md prose, every run
-   re-derived its seen-set by regex over that prose, and Shadarek's comedy tier list
-   `Z8Jygl_NpF4` came back three separate times — each costing a transcript fetch and a
-   re-read. **Step 1 discovery must treat `skipped[]` ids as already-seen**, exactly like
-   distilled ones. Only re-open one if you have a positive reason (e.g. the creator
-   re-uploaded different content under the same id), and say so in the log.
+   `reason` says what the transcript actually turned out to be. This lane is DURABLE:
+   before it existed (added 2026-07-31), "verified-skipped" lived only in log.md prose,
+   every run re-derived its seen-set by regex over that prose, and Shadarek's comedy tier
+   list `Z8Jygl_NpF4` came back three separate times — each costing a transcript fetch and
+   a re-read.
+
+   **`skipped[]` and `triaged[]` are NOT interchangeable.** `skipped[]` means the
+   transcript was read and yielded nothing — a claim that cost a fetch to establish.
+   `triaged[]` means the title and description put it out of scope with no fetch spent.
+   Filing a title judgment as a verified skip would let the cheap claim wear the
+   expensive one's authority, which is the same line the tier/metrics source typing
+   draws. Validation enforces the shape of both, refuses an id in two lanes at once, and
+   refuses either lane to hold a video some take or metaNote cites (if you re-open a
+   video and distil from it, REMOVE its lane entry in the same edit).
+
+   Re-opening is legitimate for `triaged[]` — that is what makes a cheap title call safe
+   — but do it on a positive reason (the description turned out to promise analysis, the
+   creator re-uploaded different content), and say so in the log. Re-opening a
+   `skipped[]` entry should be rare: its transcript was already read end to end.
 3. **Distill**: one summarization pass per video with a WoW-vocab-primed prompt:
    map mentions to exact roster spec names; emit discrete claims, each with creator,
    video title, date, patch context (announced / PTR / live), sentiment

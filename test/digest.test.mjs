@@ -98,7 +98,25 @@ test("videoActivity classifies cleared queue entries by whether new takes/notes 
 test("videoActivity tolerates missing queue files (revs predating the lane)", () => {
   const act = videoActivity(null, { videos: [{ id: "x", creator: "C", title: "T" }] }, [], []);
   assert.deepEqual(act.queued.map(v => v.id), ["x"]);
-  assert.deepEqual(videoActivity(null, null, [], []), { distilled: [], skipped: [], queued: [], waiting: [] });
+  assert.deepEqual(videoActivity(null, null, [], []), { distilled: [], skipped: [], queued: [], waiting: [], triaged: [] });
+});
+
+test("videoActivity reports title-triaged videos, which never touch the queue at all", () => {
+  // triaged[] videos are rejected before they are ever queued, so the videos[] diff is
+  // blind to them — yet they are most nights' biggest discovery decision (12 on 08-04).
+  const oldPending = { videos: [], triaged: [{ id: "old111aaaaa", creator: "Supatease", reason: "clip short" }] };
+  const newPending = { videos: [], triaged: [
+    { id: "old111aaaaa", creator: "Supatease", reason: "clip short" },
+    { id: "new222bbbbb", creator: "Shindigg", title: "Stream VOD", reason: "stream VOD, description is a Twitch link" },
+  ]};
+  const act = videoActivity(oldPending, newPending, [], []);
+  assert.deepEqual(act.triaged.map(v => v.id), ["new222bbbbb"], "only newly triaged entries are the run's news");
+  assert.deepEqual(act.queued, [], "and they never appear as queue activity");
+  const p = payload([]);
+  const md = digestMarkdown({ oldPayload: p, newPayload: p, manifest: null, runUrl: null, oldPending, newPending });
+  assert.match(md, /Triaged out on title \+ description, no transcript fetched \(1\)/);
+  assert.match(md, /\*\*Shindigg\*\* “Stream VOD”/);
+  assert.doesNotMatch(md, /re-verified fresh|nothing arrived/, "a triage-only run is not a quiet run");
 });
 
 test("digestMarkdown renders the Creator videos section and it suppresses the quiet-run line", () => {

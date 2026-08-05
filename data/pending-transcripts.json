@@ -1,5 +1,6 @@
 {
-  "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
+  "note": "Machine-readable transcript queue AND the discovery seen-set. Maintained by the watch-creators skill (agents). videos[] = queued for transcript fetch (append in-scope videos whose transcript could not be read this run; remove ONLY after distilled or verified-skipped), drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). skipped[] = transcript WAS read and yielded nothing (durable, costs a fetch to establish). triaged[] = rejected from title + RSS description with NO transcript fetched (cheaper, reversible — reopen only with a positive reason and say so in the log). The three lanes are mutually exclusive and none may contain a video cited by a take or metaNote. triagedFrom is the discovery floor: videos published before it are out of scope for the nightly poll because the 2026-07 seeding pass already harvested that backlog (184 of the takes/metaNotes on file are dated before it, citing 118 distinct videos) — without the floor every run re-derived ~178 old feed entries as unseen. Seeded 2026-07-17 from the watch-creators log; triaged[] added 2026-08-05.",
+  "triagedFrom": "2026-07-14",
   "videos": [
     {
       "id": "02rLfzEKLq4",
@@ -60,13 +61,6 @@
       "verifiedAt": "2026-07-30"
     },
     {
-      "id": "aqe2LKeMIqQ",
-      "creator": "Tettles",
-      "title": "Stream VOD",
-      "reason": "Livestream VOD whose only spec reads are one-line replies to chat — no sustained analysis to distil. Transcript verified 2026-07-30 (local run).",
-      "verifiedAt": "2026-07-30"
-    },
-    {
       "id": "IJPVqbfI1w4",
       "creator": "AutomaticJak",
       "title": "Top 2 Healer Trinkets in Season 2?",
@@ -100,6 +94,107 @@
       "title": "People Told Me Healing Was Hard, So I Proved Them Wrong | World of Warcraft",
       "reason": "Transcript verified in full (155 min): his annual zero-to-hero challenge series — a freshly levelled Holy Priest taken solo through LFG to the 3,400 Keystone Master bracket, filmed during a subathon. It is SEASON 1 content end to end: zero mentions of 12.1, Season 2 or the PTR anywhere in the transcript. The eight 'tier set' mentions are his own Season 1 gearing narrative (catalyst charges, the Benediction/divine-image bonus) and he explicitly says he never noticed how good it was — a gearing anecdote, not a spec-strength read. Spec choice is justified as a challenge premise (Holy is the least represented healer in the top 2000 keys, so 'quote unquote bad' makes it interesting), which is representation framing, not an outlook call. 0 takes, 0 metaNotes. Same disposition as his stream VOD aqe2LKeMIqQ.",
       "verifiedAt": "2026-08-05"
+    }
+  ],
+  "triaged": [
+    {
+      "id": "vwY2ZbIwFkE",
+      "creator": "Tettles",
+      "reason": "Meme title naming a spec; RSS description is just \"Enjoy the stream\" — a VOD, no analysis promise.",
+      "triagedAt": "2026-08-04"
+    },
+    {
+      "id": "rjQyrbKaYLQ",
+      "creator": "Dalaran Gaming",
+      "reason": "12.1 UI/QoL video — systems content, no per-spec strength or tuning read.",
+      "triagedAt": "2026-08-04"
+    },
+    {
+      "id": "TKHXjOYABBE",
+      "creator": "Dalaran Gaming",
+      "reason": "5v5/1v1 PvP duels — PvP is out of scope for a PvE tracker.",
+      "triagedAt": "2026-08-04"
+    },
+    {
+      "id": "IvYq9roNc9Y",
+      "creator": "Critcake",
+      "reason": "+24 key-run VOD; the standing key-run precedent triages POV runs with no build-analysis promise.",
+      "triagedAt": "2026-08-04"
+    },
+    {
+      "id": "v6ky1gYjQWU",
+      "creator": "izen",
+      "reason": "Buff/debuff aura-tracking UI change — a systems video with no per-spec season read, so nothing for the metaNotes lane either.",
+      "triagedAt": "2026-08-04"
+    },
+    {
+      "id": "RbQj88QCbfs",
+      "creator": "Shadarek",
+      "reason": "+15 King's Rest POV; description is a WCL link plus boilerplate guide links, no analysis promise — standing key-run precedent applies.",
+      "triagedAt": "2026-08-05"
+    },
+    {
+      "id": "Ggj-grcxaQg",
+      "creator": "Shadarek",
+      "reason": "Heroes of Hammerwatch 2 stream — off-topic, not a WoW video.",
+      "triagedAt": "2026-08-05"
+    },
+    {
+      "id": "eoWuDTtY-50",
+      "creator": "Preheat",
+      "reason": "Stream VOD; RSS description is coaching links, no per-spec analysis.",
+      "triagedAt": "2026-08-05"
+    },
+    {
+      "id": "B9qKaeqYkPU",
+      "creator": "Supatease",
+      "title": "Rank 1 WORLD Multiclasser",
+      "reason": "Hashtag clip short whose media:description is a verbatim copy of the title — the documented Supatease short shape.",
+      "triagedAt": "2026-08-05"
+    },
+    {
+      "id": "BhXcWVF3NkQ",
+      "creator": "Shindigg",
+      "reason": "Stream VOD; RSS description is a Twitch link.",
+      "triagedAt": "2026-08-05"
+    },
+    {
+      "id": "SO6pJYPI7l0",
+      "creator": "Supatease",
+      "title": "Supatease Sax Vibes",
+      "reason": "Off-topic — music, not WoW content.",
+      "triagedAt": "2026-08-05"
+    },
+    {
+      "id": "NyfCoA2QhdE",
+      "creator": "Supatease",
+      "title": "Final PVP Data Analysis Season 1",
+      "reason": "PvP data analysis — out of scope for a PvE tracker.",
+      "triagedAt": "2026-08-05"
+    },
+    {
+      "id": "pSZn7QF7QAw",
+      "creator": "Supatease",
+      "reason": "Clickbait clip short whose media:description merely copies the title — the documented Supatease short shape.",
+      "triagedAt": "2026-08-05"
+    },
+    {
+      "id": "wpoMbE2MQ_k",
+      "creator": "Supatease",
+      "reason": "Clickbait clip short whose media:description merely copies the title — the documented Supatease short shape.",
+      "triagedAt": "2026-08-05"
+    },
+    {
+      "id": "nH-b1QYaS8w",
+      "creator": "Tettles",
+      "reason": "Stream VOD; duplicate title of the already-triaged vwY2ZbIwFkE.",
+      "triagedAt": "2026-08-05"
+    },
+    {
+      "id": "-bZHpvG9P38",
+      "creator": "Dalaran Gaming",
+      "reason": "5v5 PvP duels — PvP is out of scope for a PvE tracker.",
+      "triagedAt": "2026-08-05"
     }
   ]
 }

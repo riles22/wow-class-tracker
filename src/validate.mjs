@@ -560,29 +560,72 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
       }
     }
 
-    // skipped[] is the durable record of videos whose transcript WAS read and which were
-    // deliberately not distilled. Before it existed, "verified-skipped" lived only in
-    // log.md prose, so every run re-derived its seen-set by regex and any miss re-queued
-    // the video — Shadarek's comedy tier list came back three times (2026-07-31 fix).
-    const skipped = pendingTranscripts.skipped;
-    if (skipped != null) {
-      if (!Array.isArray(skipped)) {
-        errors.push("pending-transcripts.json: skipped must be an array");
-      } else {
-        const seenSkip = new Set();
-        const queued = new Set(Array.isArray(vids) ? vids.map(v => v?.id) : []);
-        for (const s of skipped) {
-          const label = `pending-transcripts.json: skipped "${s?.id ?? "?"}"`;
-          if (typeof s?.id !== "string" || !/^[A-Za-z0-9_-]{11}$/.test(s.id)) errors.push(`${label} needs an 11-char YouTube id`);
-          else if (seenSkip.has(s.id)) errors.push(`${label} is listed twice`);
-          else seenSkip.add(s.id);
-          if (queued.has(s.id)) errors.push(`${label} is both queued and skipped — it must be one or the other`);
-          if (typeof s?.creator !== "string" || !s.creator) errors.push(`${label} needs a creator`);
-          // the reason is the whole point: a bare id would be indistinguishable from a bug
-          if (typeof s?.reason !== "string" || s.reason.length < 10) errors.push(`${label} needs a reason (why the transcript yielded nothing)`);
-          isoOk(s?.verifiedAt, `${label} verifiedAt`);
-        }
+    /* Two DURABLE rejection lanes, deliberately separate because they record different
+       epistemic states and cost different amounts to establish:
+
+         skipped[]  — the transcript WAS read and yielded nothing. High confidence, cost
+                      one API fetch. Added 2026-07-31, after "verified-skipped" lived only
+                      in log.md prose and Shadarek's comedy tier list came back three
+                      separate times, each costing another fetch and another read.
+         triaged[]  — rejected from the title + RSS description with NO transcript fetched.
+                      Cheaper and reversible. Added 2026-08-05 for the same reason one step
+                      earlier in the funnel: title-triage decisions also lived only in
+                      prose, so ~178 old feed entries re-derived as "unseen" every run and
+                      the agent re-triaged them from log narrative every night.
+
+       Merging them would let a cheap title judgment masquerade as a verified read, which
+       is the same honesty line the tier/metrics source typing draws. Both share the id
+       shape, the mandatory reason, and mutual exclusion with every other lane. */
+    const queuedIds = new Set(Array.isArray(vids) ? vids.map(v => v?.id) : []);
+    const laneOf = new Map(); // id -> lane that already claimed it
+    for (const [lane, rows, dateField, why] of [
+      ["skipped", pendingTranscripts.skipped, "verifiedAt", "why the transcript yielded nothing"],
+      ["triaged", pendingTranscripts.triaged, "triagedAt", "why the title/description put it out of scope"]
+    ]) {
+      if (rows == null) continue;
+      if (!Array.isArray(rows)) { errors.push(`pending-transcripts.json: ${lane} must be an array`); continue; }
+      for (const s of rows) {
+        const label = `pending-transcripts.json: ${lane} "${s?.id ?? "?"}"`;
+        if (typeof s?.id !== "string" || !/^[A-Za-z0-9_-]{11}$/.test(s.id)) errors.push(`${label} needs an 11-char YouTube id`);
+        // Two distinct bugs, two distinct messages: a repeat inside one lane is
+        // bookkeeping drift; the same id in skipped[] AND triaged[] is a contradiction
+        // about whether a transcript was ever read.
+        else if (laneOf.get(s.id) === lane) errors.push(`${label} is listed twice`);
+        else if (laneOf.has(s.id)) errors.push(`${label} is already in ${laneOf.get(s.id)}[] — a video belongs to exactly one lane, and the two lanes claim different things`);
+        else laneOf.set(s.id, lane);
+        if (queuedIds.has(s.id)) errors.push(`${label} is both queued and ${lane} — it must be one or the other`);
+        if (typeof s?.creator !== "string" || !s.creator) errors.push(`${label} needs a creator`);
+        // the reason is the whole point: a bare id would be indistinguishable from a bug
+        if (typeof s?.reason !== "string" || s.reason.length < 10) errors.push(`${label} needs a reason (${why})`);
+        isoOk(s?.[dateField], `${label} ${dateField}`);
       }
+    }
+
+    /* A rejection lane may never hold a video the take layer cites. Both lanes assert
+       "nothing was distilled from this"; a take carrying its id says the opposite, and
+       the contradiction would be invisible — the drawer would show the take while the
+       queue said the video was passed over. Re-opening a triaged video is legitimate
+       (that is the lane's whole point), but the agent must REMOVE the entry when it
+       does, and this is what makes that non-optional. */
+    const citedVideoIds = new Set();
+    for (const e of [...(creatorTakes?.takes ?? []), ...(creatorTakes?.metaNotes ?? [])]) {
+      const m = String(e?.url ?? "").match(/youtu\.be\/([\w-]+)/)
+        ?? String(e?.url ?? "").match(/[?&]v=([\w-]+)/)
+        ?? String(e?.url ?? "").match(/\/(?:embed|shorts|live)\/([\w-]+)/);
+      if (m) citedVideoIds.add(m[1]);
+    }
+    for (const [id, lane] of laneOf) {
+      if (citedVideoIds.has(id)) {
+        errors.push(`pending-transcripts.json: ${lane} "${id}" is cited by a take or metaNote — a video something was distilled from cannot also be recorded as yielding nothing; remove it from ${lane}[]`);
+      }
+    }
+
+    /* The discovery floor. Videos published before it are out of scope for the nightly
+       poll (the 2026-07 seeding pass harvested that backlog), which is what stops ~178
+       ageing feed entries from re-reading as "unseen" every run. A malformed date here
+       would silently widen or close discovery, so it is validated like any other. */
+    if (pendingTranscripts.triagedFrom != null) {
+      isoOk(pendingTranscripts.triagedFrom, "pending-transcripts.json: triagedFrom");
     }
   }
 

@@ -391,8 +391,13 @@ data/     specs.json · sources.json · scales.json · ptr-builds.json · commun
           required-sources.json (refresh contract: required sources, staleness thresholds,
           row floors, anomaly limits) · run-manifest.json (per-run status file — see
           "Run manifest + integrity gates") ·
-          pending-transcripts.json (machine transcript queue: agents append/remove,
-          the deterministic fetch step drains) ·
+          pending-transcripts.json (machine transcript queue AND the discovery seen-set:
+          `videos[]` queued for the deterministic fetch step, `skipped[]` transcript-read-
+          yielded-nothing, `triaged[]` rejected on title+description with no fetch spent,
+          `triagedFrom` the published-date floor below which the 2026-07 seeding pass
+          already harvested. The three lanes are mutually exclusive and none may hold a
+          video a take cites — validation enforces both, which is what stopped ~178 old
+          feed entries re-reading as "unseen" every run) ·
           history/ (enriched movement/timeline snapshots written by snapshot.mjs)
 src/      build.mjs · template.html · render.mjs · normalize.mjs · validate.mjs ·
           apply-ratings.mjs · apply-metrics.mjs · apply-community-overrides.mjs
