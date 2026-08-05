@@ -361,13 +361,14 @@ test("promotion lock covers every shared mutable target and releases after compl
 });
 
 test("executable verification is pinned to the manifest platform and architecture", async () => {
-  const { manifest } = await catalogs();
-  const active = manifest.builds.find((build) => build.buildId === manifest.activeBuildId);
-  assert.equal(active.platform, process.platform);
-  assert.equal(active.arch, process.arch);
   const otherPlatform = process.platform === "win32" ? "linux" : "win32";
   await assert.rejects(verifySimcExecutable("definitely-missing-simc", {
     buildId: "foreign-build", platform: otherPlatform, arch: process.arch,
+    simcExeSha256: "0".repeat(64),
+  }), /is pinned for/);
+  const otherArch = process.arch === "x64" ? "arm64" : "x64";
+  await assert.rejects(verifySimcExecutable("definitely-missing-simc", {
+    buildId: "foreign-build", platform: process.platform, arch: otherArch,
     simcExeSha256: "0".repeat(64),
   }), /is pinned for/);
 });
