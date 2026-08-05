@@ -232,7 +232,8 @@
     {
       "key": "wcl-ptr-raid",
       "label": "Warcraft Logs 12.1 PTR raid testing (zone 54, all roles)",
-      "maxAgeDays": 10,
+      "maxAgeDays": 40,
+      "note": "maxAgeDays raised 10 -> 40 on 2026-08-05, deliberately and temporarily. Zone 54's table is EMPTY upstream, not unreachable: WCL's 14-day rolling window aged out the mid-July testing parses around 07-31, and residential-IP local runs confirm HTTP 200 with a header-only fragment and zero rows. The stored 34 rows therefore stand at 2026-07-28 and would have breached the old 10 on 2026-08-08. Nothing can refill them on our side — PTR raid testing windows are Blizzard's to schedule, 12.1 goes live 08-11 and the Venomous Abyss opens 08-19, after which zone 54 stops mattering and the PTR surfaces sunset (Season 2 + 14 = ~09-02, age ~36 days). 40 covers through that sunset with a few days of slack. The honest signal is NOT lost meanwhile: the manifest still records this key every single night with its real status and reason, which is what the publish gate reads. THE COST, stated plainly: while this is 40, a genuine post-refill freeze would go unalarmed for up to 40 days. RETIGHTEN TO 10 the moment zone 54 serves rows again, or retire the requirement when the PTR surfaces sunset — whichever comes first.",
       "evidence": "wcl",
       "date": {
         "type": "metrics",

@@ -489,7 +489,17 @@ jobs:
               return JSON.stringify(strip(head)) !== JSON.stringify(strip(now));
             };
             const bad = [];
-            if (changedBeyond("data/sources.json", ["snapshot"])) bad.push("data/sources.json (beyond page snapshot dates)");
+            // Page OBSERVATIONS the refresh is supposed to record, vs registry STRUCTURE it is not.
+            // `snapshot` = when we fetched. `published` = the date the page states about itself
+            // (docs/published-gate-scope.md). `seasonVerified` = which season the page described at
+            // refresh, the era-verify observation (S2 transition, DECISION 1). All three are written
+            // by the era-verify/fetch steps, validated in src/validate.mjs (published: ISO and never
+            // newer than snapshot; seasonVerified: "s1"|"s2", a typo fails red), and none of them can
+            // add or remove a source. Membership, urls, kind, scale and era stay owner-only.
+            // Added 2026-08-05: seasonVerified was unwritable, so 0 of 55 pages carried it and the
+            // transition-window consensus rule (sourceSeasonOk) had no data to act on — it would have
+            // silently no-opped at the S2 flip, exactly the failure it exists to prevent.
+            if (changedBeyond("data/sources.json", ["snapshot", "published", "seasonVerified"])) bad.push("data/sources.json (beyond page snapshot/published/seasonVerified)");
             if (changedBeyond("data/community.json", ["latest", "verifiedDate"])) bad.push("data/community.json (membership/links, beyond latest+verifiedDate)");
             if (bad.length) { console.error(`::error::refresh artifact changed ${bad.join(" and ")} — registry edits ship only via reviewed commits to master`); process.exit(1); }
           '
