@@ -409,14 +409,15 @@ test("projectionFor: full-signal math is exact and transparent", () => {
   const takes = [{ class: "X", spec: "Full", creator: "watcher", sentiment: "neutral",
     date: "2026-07-20", patchContext: "12.1 PTR" }];
   const p = projectionFor(spec, "raid", PROJ_SCALES, notes, [], takes);
-  // emp = (100*2 + 90*1)/3 = 96.67; base = .55*80 + .45*96.67 = 87.5; +7 up, no nudge → 95
-  assert.equal(p.score, 95);
+  // emp = (100*2 + 90*1)/3 = 96.67; base = (.35*80 + .45*96.67)/.80 = 89.375;
+  // tally balance 3 → +10 (v9 scale), no nudge → 99.375 → 99
+  assert.equal(p.score, 99);
   assert.equal(p.tier, "S");
   assert.equal(p.confidence, "high"); // testing + dummy + outlook + expert = 4 of 4 signals
   assert.match(p.basis, /live baseline 80/);
   assert.match(p.basis, /raid-testing pct 100/);
   assert.match(p.basis, /Dummy Dome 90/);
-  assert.match(p.basis, /outlook \+7/);
+  assert.match(p.basis, /outlook \+10/);
   assert.doesNotMatch(p.basis, /meta read/, "one creator is not corroboration");
 });
 
@@ -964,15 +965,15 @@ test("ptrTierRead: reads era-gated lists only, and TBD stays absent rather than 
   assert.equal(ptrTierRead(spec, "raid", PTR_SRC, PTR_PROJ_SCALES), null);
 });
 
-test("projectionFor: the PTR tier list enters the base at w=0.25 and is named in the basis", () => {
+test("projectionFor: the PTR tier list enters the base at w=0.30 and is named in the basis", () => {
   const spec = {
     class: "X", spec: "P", role: "Healer",
     consensus: { mplus: { score: 60 } },
     ratings: { mplus: { "icyveins-ptr": "S" } }
   };
   const p = projectionFor(spec, "mplus", PTR_PROJ_SCALES, [], PTR_SRC);
-  // base = (.55*60 + .25*100) / .80 = 72.5 → 73 (no empirical, no outlook, no note)
-  assert.equal(p.score, 73);
+  // base = (.35*60 + .30*100) / .65 = 78.46 → 78 (no empirical, no outlook, no note)
+  assert.equal(p.score, 78);
   assert.match(p.basis, /Icy Veins \(12\.1 PTR\) S \(100\)/);
   // Same spec with the PTR source withheld: prior only.
   const bare = projectionFor(spec, "mplus", PTR_PROJ_SCALES, [], []);
@@ -1062,13 +1063,13 @@ const shiftOf = spec => projectionFor(spec, "raid", PTR_PROJ_SCALES, [], []).sco
 
 test("shift scales with tally strength: one line is not worth five", () => {
   const t = (b, n) => shiftSpec({ outlook: { direction: b > n ? "up" : "down", buffs: b, nerfs: n } });
-  assert.equal(shiftOf(t(1, 0)), 3, "a single buff line earns +3, not the full +7");
-  assert.equal(shiftOf(t(2, 0)), 5);
-  assert.equal(shiftOf(t(3, 0)), 7, "three or more saturates at +7");
-  assert.equal(shiftOf(t(5, 0)), 7);
-  assert.equal(shiftOf(t(0, 1)), -3, "and symmetrically downward");
-  assert.equal(shiftOf(t(4, 1)), 7, "balance 3 saturates");
-  // The defect this fixes: before v5 every one of the above was ±7.
+  assert.equal(shiftOf(t(1, 0)), 4, "a single buff line earns +4 (v9 scale), not the cap");
+  assert.equal(shiftOf(t(2, 0)), 7);
+  assert.equal(shiftOf(t(3, 0)), 10, "three or more saturates at +10");
+  assert.equal(shiftOf(t(5, 0)), 10);
+  assert.equal(shiftOf(t(0, 1)), -4, "and symmetrically downward");
+  assert.equal(shiftOf(t(4, 1)), 10, "balance 3 saturates");
+  // The defect v5 fixed: a flat cap whatever the balance. v9 rescaled 3/5/7 → 4/7/10.
 });
 
 test("a DATED verdict still earns the full shift regardless of line count", () => {
@@ -1076,7 +1077,7 @@ test("a DATED verdict still earns the full shift regardless of line count", () =
     outlook: { direction: "up", buffs: 1, nerfs: 0 },
     ptr: { verdict: "Positive", asOf: "2026-07-30", source: "https://www.wowhead.com/news=1" }
   });
-  assert.equal(shiftOf(s), 7, "a whole-spec read is not a line count");
+  assert.equal(shiftOf(s), 10, "a whole-spec read is not a line count");
 });
 
 test("an UNDATED verdict contributes no shift at all", () => {
@@ -1097,7 +1098,7 @@ test("an UNDATED verdict contributes no shift at all", () => {
 
 test("v5 leaves the verdict-less path driven purely by its own tally", () => {
   const none = shiftSpec({ outlook: { direction: "up", buffs: 2, nerfs: 0 } });
-  assert.equal(shiftOf(none), 5);
+  assert.equal(shiftOf(none), 7);
   const flat = shiftSpec({ outlook: { direction: "flat", buffs: 1, nerfs: 1 } });
   assert.equal(shiftOf(flat), 0, "a balanced tally is flat, and flat is zero at any magnitude");
 });
@@ -1239,25 +1240,25 @@ test("projectionFor: the expert read either decides or adjusts, never both", () 
     ptrDummy: { score: 90 }
   };
   // Expert-driven: magnitude scales with the shrunk strength instead of the line count,
-  // and stays under a dated verdict's flat 7 no matter how large the panel. Since v8 the
+  // and stays under a dated verdict's flat 10 no matter how large the panel. Since v8 the
   // panel is computed from the TAKES themselves (bracket-scoped), never read off outlook.
   // Two creators, each averaging +0.5 → raw .5, shrunk .5·(2/4) = .25.
   const panel = [TK("a", "buff"), TK("a", "neutral"), TK("b", "buff"), TK("b", "neutral")];
   const decided = projectionFor(
     { ...base, ptr: null, outlook: { direction: "up", source: "expert", buffs: 5, nerfs: 0 } },
     "raid", PROJ_SCALES, [], [], panel);
-  assert.equal(decided.score, 91, "base 87.5 + round(2 + 5*.25) = +3");
-  // Writeup present: the same lane now only adjusts, and cannot move the letter.
-  // Nine unanimous nerf creators → shrunk −(9/11) = −.818 → adj round(4·−.818) = −3.
+  assert.equal(decided.score, 93, "base 89.375 + round(2 + 7*.25) = +4 → 93");
+  // Writeup present: the same lane only adjusts. Nine unanimous nerf creators →
+  // shrunk −(9/11) = −.818 → adj round(6·−.818) = −5; evidence 99 (S) − 5 = 94, still S —
+  // quorum permits ONE band crossing but the S floor is not breached here.
   const bearish = ["a","b","c","d","e","f","g","h","i"].map(c => TK(c, "nerf"));
   const adjusted = projectionFor(
     { ...base, ptr: { verdict: "Positive", asOf: "2026-07-01" },
       outlook: { direction: "up", source: "verdict", buffs: 5, nerfs: 0 } },
     "raid", PROJ_SCALES, [], [], bearish);
-  assert.equal(adjusted.tier, "S", "the published letter is decided without the takes");
-  assert.ok(adjusted.score < 95, "…but the score still moves, so ordering stays informative");
-  assert.ok(adjusted.score >= PROJ_SCALES.consensus.bands.find(b => b.tier === "S").min,
-    "clamped to the band floor rather than dropping out of it");
+  assert.equal(adjusted.tier, "S", "the letter holds when the adjustment stays inside the band");
+  assert.equal(adjusted.score, 94);
+  assert.ok(adjusted.score < 99, "…but the score still moves, so ordering stays informative");
 });
 
 /* ---------- 2026-08-03 external audit: input validity, confidence, quorum ---------- */
@@ -1405,6 +1406,11 @@ test("projectionFor: an M+ tier-list read no longer moves the raid forecast", ()
   assert.equal(raid.score, 90, "the raid score stays on its evidence");
   assert.ok(mplus.parts.expertShrunk < 0, "the M+ cell still hears them");
   assert.ok(mplus.score < 90);
+  // v9: three shrunk creators are a QUORUM — adj −4 takes 90 (S, floor 88) to 86, and
+  // the letter is allowed to follow, disclosed by name.
+  assert.equal(mplus.tier, "A", "a ≥3-creator panel may move the letter one band");
+  assert.equal(mplus.score, 86);
+  assert.match(mplus.basis, /expert quorum \(3 creators\) moved the letter S→A/);
 });
 
 test("projectionFor: a cell the expert lane moved can never read prior-only", () => {
@@ -1460,4 +1466,48 @@ test("dummyDomeScores: a thin cut leaves everyone else's denominator", () => {
   // …and a thin value above the whole clean field maps to 100, never past it (it is not
   // a member of the field it is compared against).
   assert.equal(E.ptrDummy.perCount["1"], 100);
+});
+
+/* ---------- v9 (owner reweight): quorum band-crossing boundaries ---------- */
+
+test("expert quorum: three shrunk creators may cross ONE band edge — never two, and two creators never cross", () => {
+  // NUDGE_SCALES bands: S 88 / A+ 74 / A 58 / B 40 / C 0. Evidence 86 sits in A+.
+  const spec = { class: "X", spec: "E", role: "Healer", consensus: { raid: { score: 86 } },
+    outlook: { direction: "flat", source: "verdict", buffs: 0, nerfs: 0, builds: 1 },
+    ptr: { verdict: "Mixed", asOf: "2026-07-01" } };
+  // Two creators, unanimous: shrunk −.5 → adj −3 → 83, inside A+ — no quorum, floor 74 anyway.
+  const duo = projectionFor(spec, "raid", NUDGE_SCALES, [], [], [TK("a", "nerf"), TK("b", "nerf")]);
+  assert.equal(duo.tier, "A+", "two voices stay within-tier by construction");
+  assert.equal(duo.score, 83);
+  // Eight unanimous nerf creators: shrunk −.8 → adj −5 → 81… still A+. Force a crossing
+  // with a lower evidence score: 75 (A+ floor 74) − 5 = 70 → A. One edge, disclosed.
+  const low = { ...spec, consensus: { raid: { score: 75 } } };
+  const octet = ["a","b","c","d","e","f","g","h"].map(c => TK(c, "nerf"));
+  const crossed = projectionFor(low, "raid", NUDGE_SCALES, [], [], octet);
+  assert.equal(crossed.tier, "A", "quorum crosses the A+/A edge");
+  assert.equal(crossed.score, 70);
+  assert.match(crossed.basis, /expert quorum \(8 creators\) moved the letter A\+→A/);
+  // The SAME panel from a score just above a floor cannot skip TWO bands: 74 − 5 = 69
+  // would land in A regardless, but a hypothetical bigger adj is clamped at the band
+  // below's floor (58), never into B.
+  const floorSpec = { ...spec, consensus: { raid: { score: 74 } } };
+  const clamped = projectionFor(floorSpec, "raid", NUDGE_SCALES, [], [], octet);
+  assert.equal(clamped.tier, "A", "one edge at most");
+  assert.ok(clamped.score >= 58, "clamped inside the adjacent band, never beyond it");
+});
+
+test("expert quorum: the meta nudge stays inside the band the expert term chose", () => {
+  // Evidence 75 (A+), quorum panel drags to 70 (A, ceiling 73). A corroborated +3 nudge
+  // then applies WITHIN A: 73, not back across the edge into A+.
+  const spec = { class: "X", spec: "E", role: "Healer", consensus: { raid: { score: 75 } },
+    outlook: { direction: "flat", source: "verdict", buffs: 0, nerfs: 0, builds: 1 },
+    ptr: { verdict: "Mixed", asOf: "2026-07-01" } };
+  const octet = ["a","b","c","d","e","f","g","h"].map(c => TK(c, "nerf"));
+  const notes = [
+    { class: "X", spec: "E", creator: "gc1", sentiment: "positive", date: "2026-07-30", bracket: "both" },
+    { class: "X", spec: "E", creator: "gc2", sentiment: "positive", date: "2026-07-29", bracket: "both" }
+  ];
+  const p = projectionFor(spec, "raid", NUDGE_SCALES, notes, [], octet);
+  assert.equal(p.tier, "A");
+  assert.equal(p.score, 73, "nudge climbs to the ceiling of A, never re-crosses the edge");
 });
