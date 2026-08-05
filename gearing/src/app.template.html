@@ -369,6 +369,7 @@ const RAID = DB.raid, SPECS = DB.specs, DUNG = DB.dungeons, SHEET = DB.sheet;
 const TIER = DB.tier || {sets:[]}, CATALYST = DB.catalyst || {setBonusSlots:[]};
 const STAT_ALLOCATIONS = DB.catalystAllocations || {items:{}};
 const SIMC_WEIGHTS = DB.simcWeights || {records:[]};
+const SIMC_MANIFEST = DB.simcManifest || {scenarios:[], builds:[], profiles:[], specs:[]};
 const ITEM_ELIGIBILITY = DB.itemEligibility || {items:{}};
 const ICONS = DB.icons || {};
 const icoTag = it => it.icon && ICONS[it.icon]
@@ -503,11 +504,47 @@ function referenceModeSelected() {
   return $('#scoring-mode').value === 'reference';
 }
 
+function specKeyFor(spec) {
+  return spec ? spec.spec + ' ' + spec.class : '';
+}
+
+function manifestSpecFor(spec) {
+  const specKey = specKeyFor(spec);
+  return (SIMC_MANIFEST.specs || []).filter(entry => entry.specKey === specKey)[0] || null;
+}
+
+function manifestProfileFor(spec, profile) {
+  if (!spec || !profile) return null;
+  const coverage = manifestSpecFor(spec);
+  const profileIds = coverage ? coverage.profileIds || [] : [];
+  return (SIMC_MANIFEST.profiles || []).filter(entry => entry.specKey === specKeyFor(spec)
+    && entry.guideProfileName === profile.name && entry.status !== 'rejected'
+    && profileIds.indexOf(entry.profileId) >= 0)[0] || null;
+}
+
+function manifestProfileById(profileId) {
+  return (SIMC_MANIFEST.profiles || []).filter(profile => profile.profileId === profileId)[0] || null;
+}
+
+function manifestBuildById(buildId) {
+  return (SIMC_MANIFEST.builds || []).filter(build => build.buildId === buildId)[0] || null;
+}
+
+function manifestInputFor(profile, scenarioId) {
+  if (!profile) return null;
+  if (!Array.isArray(profile.scenarioInputs)) return profile;
+  return profile.scenarioInputs.filter(input => input.scenarioId === scenarioId)[0] || null;
+}
+
 function referenceRecordsFor(spec, profile) {
-  if (!spec || !profile) return [];
-  const specKey = spec.spec + ' ' + spec.class;
+  const manifestProfile = manifestProfileFor(spec, profile);
+  if (!manifestProfile || manifestProfile.status !== 'accepted') return [];
   return (SIMC_WEIGHTS.records || []).filter(record => record.status === 'accepted'
-    && record.specKey === specKey && record.profile === profile.name);
+    && record.profileId === manifestProfile.profileId
+    && record.specKey === manifestProfile.specKey
+    && record.buildId === manifestInputFor(manifestProfile, record.scenario)?.buildId
+    && record.objective === manifestProfile.objective
+    && record.primaryStat === manifestProfile.primaryStat);
 }
 
 function activeReferenceRecord() {
@@ -584,32 +621,39 @@ function activePriority() {
 }
 
 function scenarioLabel(scenario) {
-  return scenario === 'raid-st' ? 'Raid single target'
-    : scenario === 'aoe-5t' ? '5-target sustained AoE' : scenario;
+  const definition = (SIMC_MANIFEST.scenarios || [])
+    .filter(entry => entry.scenarioId === scenario)[0];
+  return definition ? definition.label : scenario;
+}
+
+function scenarioIdsFor(spec, profile) {
+  const manifestProfile = manifestProfileFor(spec, profile);
+  if (manifestProfile) return manifestProfile.scenarioIds || [];
+  const coverage = manifestSpecFor(spec);
+  return coverage ? coverage.plannedScenarioIds || [] : [];
 }
 
 function initScenarios() {
   const sel = $('#scenario');
   if (!sel) return;
   const previous = sel.value;
-  const records = referenceRecordsFor(CUR, activeProfile()).slice().sort((a, b) =>
-    ['raid-st', 'aoe-5t'].indexOf(a.scenario) - ['raid-st', 'aoe-5t'].indexOf(b.scenario));
+  const scenarioIds = scenarioIdsFor(CUR, activeProfile());
   sel.innerHTML = '';
-  records.forEach(record => {
+  scenarioIds.forEach(scenarioId => {
     const option = document.createElement('option');
-    option.value = record.scenario;
-    option.textContent = scenarioLabel(record.scenario);
+    option.value = scenarioId;
+    option.textContent = scenarioLabel(scenarioId);
     sel.appendChild(option);
   });
-  if (!records.length) {
+  if (!scenarioIds.length) {
     const option = document.createElement('option');
     option.value = '';
     option.textContent = 'No SimC reference available';
     sel.appendChild(option);
-  } else if (records.some(record => record.scenario === previous)) {
+  } else if (scenarioIds.indexOf(previous) >= 0) {
     sel.value = previous;
   }
-  sel.disabled = !referenceModeSelected() || records.length < 2;
+  sel.disabled = !referenceModeSelected() || scenarioIds.length < 2;
 }
 
 function initProfiles() {
@@ -679,16 +723,63 @@ function weightList(weights) {
     + Number(weights[stat] || 0).toFixed(3) + '</strong>').join(' &middot; ');
 }
 
+function sourceModeLabel(sourceMode) {
+  if (sourceMode === 'official-output') return 'Official SimC output';
+  if (sourceMode === 'curated-same-gear') return 'Curated same-gear profile';
+  return 'Unlabeled SimC input';
+}
+
 function referenceMetadata(record) {
   const drift = (Number(record.maxRelativeDrift) * 100).toFixed(2).replace(/\.00$/, '');
   const date = String(record.simulatedAt || '').slice(0, 10);
-  const profile = record.profileSource
-    ? '<a href="' + esc(record.profileSource) + '" target="_blank" rel="noopener noreferrer">'
-      + esc(record.profile) + '</a>' : '<b>' + esc(record.profile) + '</b>';
-  return 'Profile ' + profile + ' &middot; encounter <b>' + esc(scenarioLabel(record.scenario))
-    + '</b> &middot; SimC revision <code>' + esc(record.simcRevision) + '</code> &middot; game build <b>'
-    + esc(record.gameBuild) + '</b> &middot; simulated <b>' + esc(date)
+  const profileEntry = manifestProfileById(record.profileId);
+  const input = manifestInputFor(profileEntry, record.scenario);
+  const build = manifestBuildById(record.buildId);
+  const profileName = profileEntry ? profileEntry.name : record.profileId;
+  const sourceMode = record.sourceMode || (input && input.sourceMode);
+  const generatorSource = record.generatorSource || (input && input.generatorSource);
+  const talentSource = record.talentSource || (input && input.talentSource);
+  const talentAsOf = record.talentSourceAsOf || (input && input.talentSourceAsOf);
+  const generator = generatorSource
+    ? '<a href="' + esc(generatorSource) + '" target="_blank" rel="noopener noreferrer">upstream actor/APL generator</a>'
+    : 'unlinked upstream actor/APL generator';
+  const talent = sourceMode === 'curated-same-gear' && talentSource
+    ? ' &middot; <a href="' + esc(talentSource) + '" target="_blank" rel="noopener noreferrer">talent source</a>'
+      + (talentAsOf ? ' as of <b>' + esc(talentAsOf) + '</b>' : '') : '';
+  const generatorActorName = record.generatorActorName || (input && input.generatorActorName);
+  const sourceActorName = generatorActorName || record.sourceProfileName;
+  const sourceActor = sourceActorName
+    ? ' &middot; upstream actor <code>' + esc(sourceActorName) + '</code>' : '';
+  const retainedActor = generatorActorName && record.sourceProfileName
+    ? ' &middot; retained actor <code>' + esc(record.sourceProfileName) + '</code>' : '';
+  return '<span class="badge">' + esc(sourceModeLabel(sourceMode)) + '</span> &middot; Profile <b>'
+    + esc(profileName) + '</b>' + sourceActor + retainedActor + ' &middot; ' + generator + talent
+    + ' &middot; encounter <b>' + esc(scenarioLabel(record.scenario))
+    + '</b> &middot; SimC revision <code>' + esc(build ? build.revision : record.buildId)
+    + '</code> &middot; game build <b>' + esc(build ? build.gameBuild : 'unmatched build')
+    + '</b> &middot; simulated <b>' + esc(date)
     + '</b> &middot; stability <b>' + drift + '% max drift across ' + record.runs.length + ' runs</b>';
+}
+
+function coverageNotice(spec, profile) {
+  const manifestProfile = manifestProfileFor(spec, profile);
+  if (manifestProfile && manifestProfile.status === 'ready') {
+    return '<span class="warning"><strong>This reviewed SimulationCraft profile is ready for its planned runs.</strong> '
+      + 'Coefficients stay unpublished until its complete encounter matrix passes validation and is promoted. '
+      + 'Guide-order fallback is active.</span>';
+  }
+  const coverage = manifestSpecFor(spec);
+  if (!coverage) return '<span class="warning"><strong>SimulationCraft coverage is untracked.</strong> '
+    + 'Guide-order fallback is active.</span>';
+  if (coverage.status === 'pending') return '<span class="warning"><strong>SimulationCraft reference pending.</strong> '
+    + esc(coverage.reason || 'This specialization is eligible for the planned damage runs; no coefficients are published yet.') + ' '
+    + 'Guide-order fallback is active.</span>';
+  if (coverage.status === 'deferred') return '<span class="warning"><strong>SimulationCraft reference deferred.</strong> '
+    + esc(coverage.reason || 'A separate simulation objective is required.') + ' Guide-order fallback is active.</span>';
+  if (coverage.status === 'unsupported') return '<span class="warning"><strong>SimulationCraft reference unsupported.</strong> '
+    + esc(coverage.reason || 'No defensible reference model is available.') + ' Guide-order fallback is active.</span>';
+  return '<span class="warning"><strong>Accepted SimulationCraft coverage exists, but no ID-exact record matches '
+    + 'this profile and encounter.</strong> Guide-order fallback is active.</span>';
 }
 
 function renderScoringControls() {
@@ -696,8 +787,8 @@ function renderScoringControls() {
   editor.hidden = !customModeSelected();
   $('#profile').disabled = profilesFor(CUR).length < 2;
   const scenario = $('#scenario');
-  const referenceRecords = referenceRecordsFor(CUR, activeProfile());
-  if (scenario) scenario.disabled = !referenceModeSelected() || referenceRecords.length < 2;
+  const scenarioIds = scenarioIdsFor(CUR, activeProfile());
+  if (scenario) scenario.disabled = !referenceModeSelected() || scenarioIds.length < 2;
   const custom = customWeights();
   if (customModeSelected() && custom) {
     $('#scoring-summary').innerHTML = '<strong>Custom weights supplied by you:</strong> ' + weightList(custom)
@@ -715,12 +806,12 @@ function renderScoringControls() {
   }
   const guide = guideWeights(CUR);
   $('#scoring-summary').innerHTML = (referenceModeSelected()
-      ? '<span class="warning"><strong>No accepted SimC reference matches this specialization, profile, and encounter.</strong> '
-        + 'Guide-order fallback is active.</span> '
+      ? coverageNotice(CUR, activeProfile()) + ' '
       : customModeSelected()
       ? '<span class="warning"><strong>Custom mode is waiting for all four non-negative weights.</strong> '
         + 'Guide-order fallback is active until then.</span> '
-      : '<strong>Rough guide-order coefficients:</strong> ')
+      : (referenceRecordsFor(CUR, activeProfile()).length ? '' : coverageNotice(CUR, activeProfile()) + ' ')
+        + '<strong>Rough guide-order coefficients:</strong> ')
     + weightList(guide) + '. These are fixed spacing for sorting, not character-specific stat weights or a simulation.';
 }
 
@@ -1380,10 +1471,12 @@ function renderFooter() {
       ? '<b>Current rankings use accepted SimulationCraft reference weights:</b> '
         + weightList(reference.weights) + '. ' + referenceMetadata(reference) + '. '
       : referenceModeSelected()
-        ? '<b>No accepted SimC reference matches this selection; current rankings use the guide-order fallback.</b> '
-        : '<b>Current rankings use the rough guide-order coefficients.</b> ';
-  const simcSource = SIMC_WEIGHTS.source
-    ? '<a href="' + esc(SIMC_WEIGHTS.source) + '" target="_blank" rel="noopener noreferrer">official MID2 profiles</a>'
+        ? coverageNotice(CUR, activeProfile()) + ' '
+        : (referenceRecordsFor(CUR, activeProfile()).length ? '' : coverageNotice(CUR, activeProfile()) + ' ')
+          + '<b>Current rankings use the rough guide-order coefficients.</b> ';
+  const simcSourceUrl = SIMC_MANIFEST.source || SIMC_WEIGHTS.source;
+  const simcSource = simcSourceUrl
+    ? '<a href="' + esc(simcSourceUrl) + '" target="_blank" rel="noopener noreferrer">upstream official MID2 generator/APL tree</a>'
     : 'no reference source embedded';
   $('#foot').innerHTML = '<p class="footfam">Part of <a href="index.html"><b>Spec Tracker</b></a> — tier consensus, rankings and the 12.1 forecast for every spec. Made by <a href="https://github.com/riles22" target="_blank" rel="noopener noreferrer"><b>riles22</b></a>.</p>'
     + scoring
@@ -1394,7 +1487,7 @@ function renderFooter() {
     + 'Direct tier data: ' + esc(TIER.source) + ', harvested ' + esc(TIER.harvestedAt) + '.<br>'
     + 'Catalyst policy: Blizzard 12.1 PTR notes, reviewed ' + esc(CATALYST.reviewedAt) + '.<br>'
     + 'Spec data: ' + esc(SPECS.source) + ', harvested ' + esc(SPECS.harvestedAt) + '.<br>'
-    + 'SimC reference source: ' + simcSource + '; generated '
+    + 'SimC upstream source: ' + simcSource + '; each retained input is labeled as an official output or curated same-gear profile; generated '
     + esc(SIMC_WEIGHTS.generatedAt || 'not yet generated') + '.<br><b>'
     + esc(RAID.caveat) + '</b> ' + esc(SPECS.caveat) + '<br>'
     + '<b>Weapon loadouts are explicit, mutually exclusive configurations</b> curated from official Blizzard class pages and patch notes. '

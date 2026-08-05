@@ -16,3 +16,7 @@ AGENTS.md
 
 # deterministic pre-agent transcript stage output (consumed in-run, never committed)
 transcript-fetch/
+
+# resumable local SimulationCraft runs; accepted evidence is promoted to gearing/data/simc-audit/
+gearing/.simc-work/
+gearing/data/simc-reference-weights.json.promotion.lock
