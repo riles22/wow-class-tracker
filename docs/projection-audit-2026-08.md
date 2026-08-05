@@ -420,3 +420,26 @@ uncertainty. These change the model's *shape*, not its honesty, and belong after
 report card grades the frozen forecast — the harness that can tell whether they help.
 The explicit `bracket` field on takes is already supported end-to-end, so distillation
 can start writing it now.
+
+### v9 — the owner reweight (2026-08-04, same day, after v8 shipped)
+
+Distinct from everything above: **not an audit finding — an editorial prior, recorded as
+such.** Riley: "we are giving a little too much weight to the baseline… shift some more
+weight into the actual creator / expert takes and maybe the math of ptr changes and
+reviews." All three decisions clicked in-session: prior .55→.35 and PTR list .25→.30 in
+the base blend; outlook shift cap ±7→±10 (dated verdict 10, tally 4/7/10, expert-driven
+≤9); expert adjustment ±4→±6 with a **quorum rule** — a ≥3-creator corroboration-shrunk
+panel may move the published letter by ONE band, disclosed in the basis. The quorum rule
+is the single deliberate loosening of the v6 "sentiment never moves a letter" bound; the
+bound's objection was single-source authority, and a ≥3-creator shrunk panel is its
+opposite. The meta nudge stays within-tier (one contributor).
+
+The justification is the honest kind v5 established (coherence/priors, never fitting the
+drift number): the prior is the 12.0.7 consensus — evidence about a meta that dies at
+launch — and renormalization confines the reweight to cells holding real PTR evidence
+(prior-only cells: measured 0 moved). Measured v8→v9: 61 of 80 scores, 13 tiers, exactly
+3 quorum crossings (Mistweaver M+ S→A+ on three healer specialists' nerf reads; Arms
+raid A→A+ and Arms M+ A+→S on its five-creator bullish panel). v9 is what `--frozen`
+will grade — deliberately: the frozen forecast should encode the owner's actual
+pre-launch read, and the carry-forward baseline it must beat still copies the frozen
+live consensus forward, so the report card can say whether the conviction was earned.

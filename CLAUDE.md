@@ -98,16 +98,18 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   `ptr.verdict`** (Riley, 2026-08-03, superseding the 08-02 note that kept them out
   entirely: "we picked these experts for a reason: they are experts"). The distinction is
   the whole point. Writing one take's sentiment into `ptr.verdict` would hand a single
-  YouTube video the full ±7 outlook shift — Feral has exactly one take — which is the
-  "weakest evidence steers" inversion already rejected on the meta nudge. Instead
-  `expertRead()` (render.mjs, PROJECTION_VERSION 8) aggregates the whole non-superseded
+  YouTube video the full dated-verdict outlook shift — Feral has exactly one take — which
+  is the "weakest evidence steers" inversion already rejected on the meta nudge. Instead
+  `expertRead()` (render.mjs, PROJECTION_VERSION 9) aggregates the whole non-superseded
   PTR-era take set, one vote per creator, shrunk by corroboration. Nine specs still have
   no writeup; the aggregate now supplies their outlook direction. Since v8 the PROJECTION's
   read is **bracket-scoped** (an explicit `bracket: "raid"|"mplus"|"both"` on the take wins;
   else the patchContext text decides via the same regexes as the meta nudge; naming neither
   → both) — a creator's M+ tier-list read no longer moves raid forecasts. The whole-spec
   outlook ARROW stays unscoped. Take `sentiment` (buff|nerf|neutral|mixed), `patchContext`
-  and `date` are validation-enforced model inputs. **Do not** hand-write a
+  and `date` are validation-enforced model inputs. Since v9 a **quorum panel**
+  (≥`EXPERT_QUORUM` = 3 shrunk creators) may move a projection letter by ONE band —
+  disclosed in the basis — while smaller panels stay within-tier. **Do not** hand-write a
   `ptr` writeup from a creator take to "fill the gap" — the model already reads them, and
   a fabricated writeup would double-count.
 
@@ -128,12 +130,16 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   be written first. The zone-54 raid-testing rank is
   named in the basis string for context but never drives the direction.
 - **12.1 projection ("Ours: 12.1")**: the tracker's OWN forecast tier list for raid+M+,
-  computed in `projectionFor` (render.mjs) — live consensus baseline (w .55) blended
-  with PTR empiricals (zone-54/56 testing percentile w 2 : Dummy Dome w 1; total .45)
-  and the external era-gated PTR tier list (w .25, `ptrTierRead`), all renormalized when
-  absent, shifted by outlook direction (±7) and the newest
-  general-creator meta read (±3), clamped and mapped through the consensus bands, with
-  a confidence tag. **A projection is
+  computed in `projectionFor` (render.mjs) — live consensus baseline (w .35 since the v9
+  owner reweight, 2026-08-04 — the 12.0.7 prior deliberately takes a minority stake)
+  blended with PTR empiricals (zone-54/56 testing percentile w 2 : Dummy Dome w 1;
+  total .45) and the external era-gated PTR tier list (w .30, `ptrTierRead`), all
+  renormalized when absent (a cell with no PTR evidence still reads 100% prior), shifted
+  by outlook direction (±10 at the cap: dated verdict 10 · tally 4/7/10 by line balance ·
+  expert-driven ≤9), adjusted by the bracket-scoped expert panel (±6; a ≥3-creator quorum
+  may cross one band) and the newest
+  general-creator meta read (±3, within-tier), clamped and mapped through the consensus
+  bands, with a confidence tag. **A projection is
   NOT a source**: it never feeds consensus (it derives from it), is era-gated out of
   12.0.7-only views, and every surface carries its component basis string. Tune weights
   in code only — never hand-write `spec.projection`.

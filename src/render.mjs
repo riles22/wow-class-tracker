@@ -418,6 +418,7 @@ export function specBuildChanges(spec, ptrBuilds) {
    the mechanical tally, rather than becoming a competing base term. */
 export const EXPERT_SHRINK = 2;
 export const EXPERT_MIN = 0.15; // below this the read is too weak/split to set a direction
+export const EXPERT_QUORUM = 3; // creators needed before the adjustment may cross a band edge (v9)
 
 /* Bracket scope for one take (v8, 2026-08-04 external audit). A creator ranking healers
    for M+ keys is not commenting on raid — yet the v7 read pooled every take into both
@@ -541,10 +542,12 @@ export function outlookFor(spec, ptrBuilds, takes = []) {
    is era-gated to PTR views, and carries its full component breakdown for transparency.
 
    Formula per spec+bracket, everything on one 0–100 axis:
-     base  = weighted mean of { live consensus score (w=0.55) ,
+     base  = weighted mean of { live consensus score (w=0.35, v9 — was .55) ,
                                 PTR empirical (w=0.45) ,
-                                external PTR tier list (w=0.25) } — renormalized when
-             any are absent (so a spec with all three gives the PTR list ~20% of base).
+                                external PTR tier list (w=0.30, v9 — was .25) } —
+             renormalized when any are absent (so a spec with all three gives the PTR
+             list ~27% of base, and a spec with NOTHING but the prior reads 100% prior:
+             the reweight only moves cells that hold real PTR evidence).
        PTR empirical (per bracket, within-role percentiles ×100):
          raid  = mean of { zone-54 testing-score percentile (w=2),
                            Dummy Dome composite (w=1, DPS only) }
@@ -558,8 +561,10 @@ export function outlookFor(spec, ptrBuilds, takes = []) {
          only EXTERNAL 12.1 opinion in the formula — everything else is our own reading of
          raw data — so it is the one term that can catch a spec the empiricals cannot yet
          see (a rework whose logs have not landed).
-     shift = 12.1 outlook direction: up +7 · down −7 · flat 0  (verdict-driven, see
-             outlookFor — tiny-n testing never drives direction, only the empirical term)
+     shift = 12.1 outlook direction (±10 at the cap since v9): a dated verdict earns the
+             full 10, the tally scales 4/7/10 with line balance, an expert-driven
+             direction reaches at most 9 (verdict-driven, see outlookFor — tiny-n
+             testing never drives direction, only the empirical term)
      nudge = newest general-creator meta note for the spec: positive +3 · negative −3
      score = clamp(base + shift + nudge, 0, 100) → tier via the same consensus bands.
    Confidence = independent PTR signals present (testing, dummy, external PTR tier list,
@@ -660,9 +665,31 @@ export function outlookFor(spec, ptrBuilds, takes = []) {
             claimed no PTR evidence existed — 5 cells published exactly that
             contradiction. When the panel drives the direction it fills the outlook
             slot's place instead (never counted twice).
-        Not one series with v7. */
+        Not one series with v7.
+   v9 — 2026-08-04, OWNER REWEIGHT (Riley, in-session — all three decisions clicked;
+        the one version whose justification is an explicit editorial prior rather than
+        an audit finding, recorded as such): "we are giving a little too much weight to
+        the baseline… shift some more weight into the actual creator / expert takes and
+        maybe the math of ptr changes and reviews." The prior is the 12.0.7 consensus —
+        evidence about a meta that dies at launch (Aug 11) — so measured PTR data and
+        the qualitative 12.1 reads now lead wherever they exist:
+          · base weights: prior .55→.35, PTR list .25→.30 (empirical .45 unchanged).
+            Renormalization keeps prior-only cells at 100% prior — untouched.
+          · outlook shift cap ±7→±10: dated verdict 10, tally 4/7/10 by line balance,
+            expert-driven ≤9 (still strictly under a written verdict).
+          · expert adjustment ±4→±6, and with QUORUM (≥EXPERT_QUORUM=3 shrunk creators)
+            it may cross ONE band edge — the single deliberate loosening of the v6
+            "sentiment never moves a letter" bound: that bound guarded against
+            single-source authority, and a ≥3-creator corroboration-shrunk panel is its
+            opposite. One edge max; the meta nudge stays within-tier (lane still has
+            one contributor). Crossings are named in the basis.
+        Same-day sensitivity vs v8 measured and recorded in the PR. This is the version
+        the frozen forecast will carry into the report card — deliberately: the freeze
+        should encode the owner's actual pre-launch read, and the carry-forward baseline
+        it must beat still copies the frozen live consensus forward. Not one series
+        with v8. */
 export { PHASES };
-export const PROJECTION_VERSION = 8;
+export const PROJECTION_VERSION = 9;
 
 /* Rank-map version, stamped beside it. `snapshotStateOf().ranks` feeds movement
    comparison, and its meaning changed in the same commit as PROJECTION_VERSION v2:
@@ -781,13 +808,19 @@ export function projectionFor(spec, bracket, scales, metaNotes = [], sources = [
   const livePublishers = (sources ?? []).filter(x => x.kind === "tier-list" && isLiveEra(x));
   const ptrSrc = ptrTierSources(sources ?? []).find(x => spec.ratings?.[bracket]?.[x.id] != null);
   const twin = ptrSrc ? livePublishers.find(x => ptrSrc.id.startsWith(x.id + "-")) : null;
-  const baseParts = [[prior, 0.55], [emp, 0.45], [ptrList?.score ?? null, 0.25]].filter(([v]) => v != null);
+  /* (v9, owner reweight 2026-08-04) prior .55→.35, PTR list .25→.30. The prior is the
+     12.0.7 consensus — evidence about a meta that dies at launch — and Riley's call was
+     that measured PTR performance and the qualitative 12.1 reads should lead wherever
+     they exist. Renormalization is what makes the cut safe: a cell with NO PTR evidence
+     still reads 100% prior, so thin-evidence specs are untouched and the reweight moves
+     exactly the cells that have something better to say. */
+  const baseParts = [[prior, 0.35], [emp, 0.45], [ptrList?.score ?? null, 0.30]].filter(([v]) => v != null);
   if (!baseParts.length) return null; // nothing to project from — honest "—"
   const base = baseParts.reduce((s, [v, w]) => s + v * w, 0) / baseParts.reduce((s, [, w]) => s + w, 0);
   const totalW = baseParts.reduce((s, [, w]) => s + w, 0);
   const ratedLive = livePublishers.filter(x => spec.ratings?.[bracket]?.[x.id] != null).length;
   const sharedPublisherPct = (twin && ptrList && prior != null && ratedLive)
-    ? Math.round(((0.55 / totalW) / ratedLive + (0.25 / totalW)) * 100)
+    ? Math.round(((0.35 / totalW) / ratedLive + (0.30 / totalW)) * 100)
     : null;
   const outlook = spec.outlook ?? null;
   const verdict = spec.ptr?.verdict ?? null;
@@ -838,9 +871,14 @@ export function projectionFor(spec, bracket, scales, metaNotes = [], sources = [
      ones. The ceiling is deliberately below a dated verdict's flat 7: a realistic maximum
      panel (8 unanimous creators → shrunk .80) reaches 6, so no amount of take volume ever
      outranks a theorycrafter who sat down and wrote the spec up. */
-  const mag = datedVerdict ? 7
-    : expertDrives ? Math.min(7, Math.round(2 + 5 * Math.abs(expert.shrunk)))
-    : Math.min(7, 3 + 2 * Math.max(0, Math.abs(bal) - 1));
+  /* (v9) Headroom raised across the ladder — owner reweight: the tuning math and the
+     qualitative reads were capped at half a band (±7 since v1) while the stale prior
+     kept majority weight. A dated verdict now earns 10, the tally scales 4/7/10 by
+     line balance, and an expert-driven direction reaches at most 9 — the "no amount of
+     take volume outranks a written verdict" invariant holds at the new ceiling. */
+  const mag = datedVerdict ? 10
+    : expertDrives ? Math.min(9, Math.round(2 + 7 * Math.abs(expert.shrunk)))
+    : Math.min(10, 4 + 3 * Math.max(0, Math.abs(bal) - 1));
   const shift = shiftDir === "up" ? mag : shiftDir === "down" ? -mag : 0;
   // Bracket-scoped + supersession-aware note selection: a creator's raid read must
   // never color the M+ projection under their name (izen's reads genuinely differ per
@@ -907,36 +945,60 @@ export function projectionFor(spec, bracket, scales, metaNotes = [], sources = [
   const note = corroborated ? notes[0] : null;
   const nudgeCreators = corroborated ? votes.length : 0;
 
-  /* Expert ADJUSTMENT (v7). The expert read either decides the outlook or adjusts the
-     score — never both, which is what keeps it from being counted twice. It decided
-     above only when no writeup exists; here it applies in the other case, so a spec WITH
-     a writeup still has its specialists heard rather than ignored ("include them in our
-     calculations", Riley 2026-08-02). Bounded like the meta nudge and for the same
-     reason: it moves the meter, the ordering and the basis string, but the published
-     letter stays decided by the writeup and the measurements. ±4 at the cap, and
-     realistically ±1 to ±3 once shrinkage is applied. */
-  const expertAdj = !expertDrives && expert ? Math.round(4 * expert.shrunk) : 0;
-  // Tier is decided WITHOUT the nudge or the expert adjustment; both then move the score
-  // only within that band. Clamping rather than discarding keeps the meter informative.
+  /* Expert ADJUSTMENT (v7; recalibrated v9). The expert read either decides the outlook
+     or adjusts the score — never both, which is what keeps it from being counted twice.
+     It decided above only when no writeup exists; here it applies in the other case, so
+     a spec WITH a writeup still has its specialists heard rather than ignored ("include
+     them in our calculations", Riley 2026-08-02). ±6 at the cap since v9 (was ±4),
+     realistically ±2 to ±5 once shrinkage is applied. */
+  const expertAdj = !expertDrives && expert ? Math.round(6 * expert.shrunk) : 0;
+  /* Band application, v9. The evidence terms (base + shift) pick the EVIDENCE band;
+     the qualitative terms then apply in sequence, each with its own bound:
+
+     · The expert adjustment is within-tier UNLESS the panel has QUORUM — at least
+       EXPERT_QUORUM distinct creators, corroboration-shrunk — in which case it may
+       cross ONE band edge ("several specialists agreeing can move a letter; one voice
+       still can't", owner decision 2026-08-04). This deliberately loosens the v6/v7
+       "sentiment never moves a published letter" bound in exactly one place: the v6
+       objection was single-source authority, and a ≥3-creator shrunk panel is the
+       opposite of a single source. One edge, never two — the panel refines the
+       evidence's letter, it does not overrule the whole scale.
+     · The meta nudge stays strictly within the RESULTING band (its lane still has one
+       contributor; the v6 bound is untouched).
+
+     Sequential application (expert first, then nudge inside the final band) is what
+     makes "only the expert term may cross" enforceable rather than apportioned. */
   const evidenceScore = Math.round(Math.min(100, Math.max(0, base + shift)));
-  const band = scales.consensus.bands.find(b => evidenceScore >= b.min);
-  const bandIdx = scales.consensus.bands.indexOf(band);
-  const ceiling = bandIdx <= 0 ? 100 : scales.consensus.bands[bandIdx - 1].min - 1;
-  const within = nudge + expertAdj;
-  const score = within
-    ? Math.min(ceiling, Math.max(band.min, Math.round(evidenceScore + within)))
+  const bands = scales.consensus.bands;
+  const band = bands.find(b => evidenceScore >= b.min);
+  const bandIdx = bands.indexOf(band);
+  const expertQuorum = expertAdj !== 0 && expert.creators >= EXPERT_QUORUM;
+  const adjFloor = expertQuorum ? (bands[bandIdx + 1]?.min ?? band.min) : band.min;
+  const adjCeil = expertQuorum
+    ? (bandIdx <= 1 ? 100 : bands[bandIdx - 2].min - 1)
+    : (bandIdx <= 0 ? 100 : bands[bandIdx - 1].min - 1);
+  const afterExpert = expertAdj
+    ? Math.min(adjCeil, Math.max(adjFloor, evidenceScore + expertAdj))
     : evidenceScore;
-  /* The within-band terms are printed at their REQUESTED size, but the tier edge can eat
-     part or all of them — and 5 of 80 cells silently advertised a number the score never
-     received (3 of them printed "+1" and applied 0). That is the same defect the outlook
-     term was fixed for one commit earlier, reintroduced by the expert term added in the
-     same commit; the "within-tier only" label discloses that the LETTER is bounded, not
-     that the printed number was discarded. Apportioning a partial clamp between two terms
-     would be arbitrary, so state the applied total instead and let the per-term numbers
-     stand as what was asked for. */
+  const tierBand = bands.find(b => afterExpert >= b.min) ?? band;
+  const tierIdx = bands.indexOf(tierBand);
+  const tierCeil = tierIdx <= 0 ? 100 : bands[tierIdx - 1].min - 1;
+  const score = nudge
+    ? Math.min(tierCeil, Math.max(tierBand.min, Math.round(afterExpert + nudge)))
+    : afterExpert;
+  /* The bounded terms are printed at their REQUESTED size, but a band edge can eat part
+     or all of them — and 5 of 80 cells once silently advertised a number the score never
+     received (3 of them printed "+1" and applied 0). The disclosure states the applied
+     total and lets the per-term numbers stand as what was asked for; apportioning a
+     partial clamp between two terms would be arbitrary. A quorum crossing is disclosed
+     by name — a letter that moved on takes must say so. */
+  const within = nudge + expertAdj;
   const appliedWithin = score - evidenceScore;
   const clampNote = within && appliedWithin !== within
-    ? ` · within-tier terms capped at ${appliedWithin > 0 ? "+" : ""}${appliedWithin} by the ${band ? band.tier : "tier"} edge`
+    ? ` · bounded terms capped at ${appliedWithin > 0 ? "+" : ""}${appliedWithin} by the ${tierBand ? tierBand.tier : "tier"} edge`
+    : "";
+  const quorumNote = tierBand !== band
+    ? ` · expert quorum (${expert.creators} creators) moved the letter ${band.tier}→${tierBand.tier}`
     : "";
   /* The outlook counts as evidence only when it was ELIGIBLE to act (2026-08-03, external
      audit). An undated verdict is refused a shift by the v5 rule above, yet was still
@@ -987,7 +1049,7 @@ export function projectionFor(spec, bracket, scales, metaNotes = [], sources = [
     : signals > available / 2 ? "medium"
     : "low";
   return {
-    tier: band ? band.tier : null, score, confidence,
+    tier: tierBand ? tierBand.tier : null, score, confidence,
     /* `parts` is the basis string AS DATA (2026-08-03, external audit — the freeze
        artifact). Every number a post-launch audit needs was previously recoverable only
        by parsing prose, which is how the ±7 misreport survived two versions unnoticed.
@@ -1002,6 +1064,7 @@ export function projectionFor(spec, bracket, scales, metaNotes = [], sources = [
       expertShrunk: expert ? expert.shrunk : null,
       expertCreators: expert ? expert.creators : null,
       expertAdjRequested: expertAdj, nudgeRequested: nudge,
+      expertQuorum, evidenceTier: band ? band.tier : null,
       withinApplied: appliedWithin, evidenceScore,
       signals, obtainable: available
     },
@@ -1025,8 +1088,9 @@ export function projectionFor(spec, bracket, scales, metaNotes = [], sources = [
       + (dir ? ` · outlook ${shift > 0 ? "+" : shift < 0 ? "−" : ""}${Math.abs(shift)}` +
           (expertDrives ? ` (expert panel: ${expert.creators} creator${expert.creators === 1 ? "" : "s"}, no writeup)` : "") : "")
       + (expertAdj ? ` · expert takes ${expertAdj > 0 ? "+" : "−"}${Math.abs(expertAdj)}` +
-          ` (${expert.creators} creator${expert.creators === 1 ? "" : "s"}, within-tier only)` : "")
+          ` (${expert.creators} creator${expert.creators === 1 ? "" : "s"}, ${expertQuorum ? "quorum — may move one band" : "within-tier only"})` : "")
       + (nudge ? ` · meta read ${nudge > 0 ? "+3" : "−3"} (${nudgeCreators} creators agree, within-tier only)` : "")
+      + quorumNote
       + clampNote
   };
 }
