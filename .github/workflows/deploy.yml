@@ -16,6 +16,12 @@ on:
       - "test/**"
       - "package.json"
       - ".github/workflows/deploy.yml"
+      # The gearing subproject is part of the deployed site (its artifact ships as
+      # dist/gearing.html), but this filter predated the 2026-08-04 merge — so a
+      # gearing-only change (e.g. the 08-05 trinket disclaimer, PR #46) silently never
+      # redeployed and had to be dispatched by hand. Found 2026-08-05 while verifying
+      # that deploy on the live site.
+      - "gearing/**"
   workflow_dispatch:
 
 # One deploy at a time; per GitHub's Pages guidance, let in-flight deploys finish
