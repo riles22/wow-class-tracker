@@ -2272,8 +2272,7 @@
       "sentiment": "buff",
       "patchContext": "12.1 PTR — Season 2 M+ build dummy testing",
       "claim": "Kalamazi's own M+-build dummy tests put Demonology ahead of the other two locks: roughly 130k sustained single target versus Affliction's ~110k, with near-identical baseline AoE (~380k) that climbs to 410-420k in Tyrant/implosion windows — the biggest cooldown swing of the three. He says the 20% Diabolist pet nerf still left the spec's Ruination, big-imp and axe-demon damage intact, and that \"demo's not OP, it's just like aff is that bad\". His ranking for 12.1 Mythic+ if it launched today: Demonology, then Affliction, then Destruction.",
-      "url": "https://youtu.be/ZOVnfoXjuoc?t=1774",
-      "superseded": false
+      "url": "https://youtu.be/ZOVnfoXjuoc?t=1774"
     },
     {
       "class": "Warlock",
@@ -2283,8 +2282,7 @@
       "sentiment": "nerf",
       "patchContext": "12.1 PTR — Season 2 M+ build dummy testing",
       "claim": "Kalamazi measures Affliction's M+-build single target at ~110k and calls the sustain outside cooldowns \"abysmal … diabolically bad\", pinning it on Unstable Affliction being undertuned — he wants roughly a 30% UA buff, which would also lift the tier set since it scales off baseline UA. AoE holds up at ~380k on Seed spam, and he credits the apex-talent and Dark Harvest bug fixes for a small AoE gain, but the Nocturnal Yield removal means Nightfall procs no longer give free instant Seeds, so shard economy and Agony upkeep now genuinely constrain the rotation. He ranks it second of the three for keys and says a UA buff is all it needs to be the pick.",
-      "url": "https://youtu.be/ZOVnfoXjuoc?t=229",
-      "superseded": false
+      "url": "https://youtu.be/ZOVnfoXjuoc?t=229"
     },
     {
       "class": "Warlock",
@@ -2810,7 +2808,7 @@
       "patchContext": "12.1 PTR (2026-07-31 build)",
       "claim": "Calls the Eradicate secondary-target cut overdue and correct: he argues Eradicate should never have dealt full damage to off-targets, and notes Blizzard separated the main- and secondary-target values back in the .5 patch specifically so they could be tuned apart and then left them identical. He reads the 15% cut as a very significant nerf to Devourer in cleave and AoE, landing hardest on the Void's Guard build. The paired Annihilator change — Final Hour's Voidfall bonuses persisting 6 seconds instead of 8 — he did not expect and cannot account for, noting it costs uptime on both the 3% haste and the damage reduction, so the build comes out weaker and squishier at once. He still places Devourer a bit above 250k in sims, ahead of the freshly buffed Havoc builds.",
       "url": "https://youtu.be/mV7NM-Vh90I?t=58",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Warlock",
@@ -2853,8 +2851,7 @@
       "sentiment": "buff",
       "patchContext": "12.1 PTR (2026-07-31 build) — Season 2 M+ outlook",
       "claim": "Playing keys after the tuning pass, Kalamazi puts all three Warlock specs close together in Mythic+ but leans Destruction as the pick, since its single target should stay somewhat ahead even in keys and it is \"really impressive in mass AoE\" with the Diabolist package. He is explicit that the gap is small and that where Warlock lands depends on the several specs nerfed in the same build, so he will not commit harder than \"it could lowkey be Destro\".",
-      "url": "https://youtu.be/Hn9upmp8ywc?t=8857",
-      "superseded": false
+      "url": "https://youtu.be/Hn9upmp8ywc?t=8857"
     },
     {
       "class": "Paladin",
@@ -3260,7 +3257,8 @@
       "sentiment": "buff",
       "patchContext": "12.1 PTR — Venomous Abyss per-boss raid outlook",
       "url": "https://youtu.be/ReWs_ZnYtO8?t=845",
-      "claim": "Reads Venomous Abyss as overwhelmingly a Destruction raid: every boss except the opener looks like a Destro fight to him, and he calls it the best Warlock spec for the tier in both single target and spread cleave, with Hellcaller the build throughout and the Mayhem-vs-Havoc choice close on the multi-target bosses. He tempers it at class level though — he does not think Warlock single target is in a phenomenal spot and says there are definitely classes ahead of them, so Destro is best-of-three rather than strong outright. Expects further tuning around the week the raid opens."
+      "claim": "Reads Venomous Abyss as overwhelmingly a Destruction raid: every boss except the opener looks like a Destro fight to him, and he calls it the best Warlock spec for the tier in both single target and spread cleave, with Hellcaller the build throughout and the Mayhem-vs-Havoc choice close on the multi-target bosses. He tempers it at class level though — he does not think Warlock single target is in a phenomenal spot and says there are definitely classes ahead of them, so Destro is best-of-three rather than strong outright. Expects further tuning around the week the raid opens.",
+      "superseded": true
     },
     {
       "class": "Warlock",
@@ -3270,7 +3268,8 @@
       "sentiment": "nerf",
       "patchContext": "12.1 PTR — Venomous Abyss per-boss raid outlook",
       "url": "https://youtu.be/ReWs_ZnYtO8?t=806",
-      "claim": "Calls Affliction undertuned for the tier. After the tier-set nerf and bug fixes plus the removal of Patient Zero and Nocturnal Yield it no longer brings the single target the old full-value Unstable Affliction set did, and what is left is narrow: it works where you can spam Seed of Corruption into stacked adds (he floats it for the opening boss) rather than because dots are good, which he frames as playing the spec for the seed gimmick. Also notes it no longer has the cooldown reduction to get Dark Harvest onto the Twin Fangs back-room adds."
+      "claim": "Calls Affliction undertuned for the tier. After the tier-set nerf and bug fixes plus the removal of Patient Zero and Nocturnal Yield it no longer brings the single target the old full-value Unstable Affliction set did, and what is left is narrow: it works where you can spam Seed of Corruption into stacked adds (he floats it for the opening boss) rather than because dots are good, which he frames as playing the spec for the seed gimmick. Also notes it no longer has the cooldown reduction to get Dark Harvest onto the Twin Fangs back-room adds.",
+      "superseded": true
     },
     {
       "class": "Warlock",
@@ -3280,7 +3279,8 @@
       "sentiment": "mixed",
       "patchContext": "12.1 PTR — Venomous Abyss per-boss raid outlook",
       "url": "https://youtu.be/ReWs_ZnYtO8?t=920",
-      "claim": "Places Demonology as a situational middle option: single target sims about level with Affliction (a bit either side depending on Apex RNG) and it is good at stack cleave, but pet travel time makes it awkward on the add-chasing fights, he found it clunky on Coiled Altar, and demo nerfs are landing. He floats it as a possibility on a couple of bosses without it displacing Destruction anywhere."
+      "claim": "Places Demonology as a situational middle option: single target sims about level with Affliction (a bit either side depending on Apex RNG) and it is good at stack cleave, but pet travel time makes it awkward on the add-chasing fights, he found it clunky on Coiled Altar, and demo nerfs are landing. He floats it as a possibility on a couple of bosses without it displacing Destruction anywhere.",
+      "superseded": true
     },
     {
       "class": "Monk",
@@ -3519,6 +3519,50 @@
       "patchContext": "12.1 PTR — Mythic+ (hands-on Rider Frost DK, Den of Nalorakk +15)",
       "url": "https://youtu.be/0D5cRjmmfqM?t=1178",
       "claim": "Playing the Rider build through a PTR +15, Obli reads Frost as \"doing pretty decent\" and capable of a lot. He is enthusiastic about the Season 2 tier set — the stacking Remorseless Winter buff feeding Icy Death Torrent, which he expects to be the main damage source and which pushes crit hard while raising haste and mastery to equal secondary value — and about Rider's mobility (horse uptime) covering a long-standing Frost weakness. Build space narrowed: Icy Death Torrent and Obliteration are locked, so it is Breath or Frostbane, and he recommends Breath for consistency over Frostbane's RNG. His reservation is the hype: despite sims and DK-community talk that Frost will be much better than Unholy, he says single target \"hasn't been anything outstanding\" and there are better single-target options. Where he does back it is low-target cleave, which he expects Frost to be king of while Unholy lags."
+    },
+    {
+      "class": "Warlock",
+      "spec": "Destruction",
+      "creator": "Kalamazi",
+      "date": "2026-08-05",
+      "sentiment": "buff",
+      "bracket": "raid",
+      "patchContext": "12.1 PTR — Warlock single-target sims (Warlock Discord APLs), raid lens",
+      "url": "https://youtu.be/x1iLDzjKVvI?t=833",
+      "claim": "Destruction is the highest-simming Warlock spec in single target — roughly 222k on Hellcaller against 215k on Diabolist — and he expects it to be the most-played Warlock spec in the raid this tier. He is careful that 222k is not a high number in absolute terms (he points to specs simming 250-270k), so the case for Destro is its toolkit rather than its raw sim: he calls Warlock one of the best spread-cleave classes in the game and reads five of the seven tested Venomous Abyss bosses as Destro fights — four good Havoc/Mayhem cleave fights plus Sszorak, where Destro is the best Warlock single-target option. Soul Fire's 45% buff last week locks in the build; the Destruction capstones went untouched this patch and he still calls that pathing a mess."
+    },
+    {
+      "class": "Warlock",
+      "spec": "Demonology",
+      "creator": "Kalamazi",
+      "date": "2026-08-05",
+      "sentiment": "mixed",
+      "bracket": "raid",
+      "patchContext": "12.1 PTR — Warlock single-target sims (Warlock Discord APLs), raid lens",
+      "url": "https://youtu.be/x1iLDzjKVvI?t=316",
+      "claim": "After the ~20% Diabolist pet-damage nerf and the following Shadow Bolt / Demon Bolt / Gloomhound buffs, Soul Harvester now sims about 7k above Diabolist in pure single target (~211k). He still expects Diabolist to be the spec played in the raid: he ran a five-target one-minute comparison and Diabolist came out far ahead (765k vs 548k) on an Implosion / Hell back build, and he reads Venomous Abyss as a cleave meat grinder where the single-target edge rarely pays. His overall class-level read is that Demonology has been 'exceptionally mid' this cycle and that other classes power-crept past Warlock."
+    },
+    {
+      "class": "Warlock",
+      "spec": "Affliction",
+      "creator": "Kalamazi",
+      "date": "2026-08-05",
+      "sentiment": "nerf",
+      "bracket": "raid",
+      "patchContext": "12.1 PTR — Warlock single-target sims (Warlock Discord APLs), raid lens",
+      "url": "https://youtu.be/x1iLDzjKVvI?t=493",
+      "claim": "His bluntest read of the three: Affliction 'is not good'. Last week's 4% Haunt modifier buff helped a little and he agrees Haunt is the right lever (it scales every damage source, not just Unstable Affliction), but it was nowhere near enough — Soul Harvester sims ~205-206k and Hellcaller ~200k, which he calls a disaster when other specs are at 250k+ and some as high as 270k, a 20-30% gap. He wants a Hellcaller fix along the lines of the Flamevine/Malevolence intervention Destro got days before last tier's raid opened. Talent structure is a second complaint: the tree forces a pure single-target or pure AoE build with no middle, and Ashen Curse being played on both builds papers over that rather than fixing it."
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "creator": "Shadarek",
+      "date": "2026-08-05",
+      "sentiment": "buff",
+      "bracket": "both",
+      "patchContext": "12.1 PTR — Devourer sims corrected after a double-haste GCD bug was found",
+      "url": "https://youtu.be/XPhaAJiAyD8?t=543",
+      "claim": "Explains the long-standing gap between Devourer sims and live play: because many Devourer abilities are ports of Havoc ones, haste was being applied to the GCD twice, so Devour (a 1.25s cast with Improved Consume) effectively lost its post-cast gap and the spec got extra casts at high haste. With the interaction modelled and no other changes, Annihilator single target went 214k to 245k — from 15% behind Void-Scarred to 10% — and with early APL optimisation to about 250k single target and 231k on an AoE/dungeon build, cutting the dungeon-route gap to roughly two-thirds of what it was. He concludes both Devourer builds now sim flat out ahead of Havoc in every way and ahead of most specs in the game, and reads it as explaining why Annihilator was already overperforming its sims on PTR logs. Two caveats he states himself: this is a live game bug he thinks Blizzard should fix before the tier starts, so the strength is contingent on it surviving; and it raises haste's value sharply up to a breakpoint where the GCD bottoms out."
     }
   ],
   "metaNotes": [

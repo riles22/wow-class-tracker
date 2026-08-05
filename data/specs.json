@@ -77,19 +77,19 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses, tank)",
-        "value": 81309,
+        "value": 81324,
         "unit": "rDPS",
-        "n": 15775,
-        "asOf": "2026-08-04"
+        "n": 15288,
+        "asOf": "2026-08-05"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons, tank)",
-        "value": 86441,
+        "value": 86225,
         "unit": "rDPS",
-        "n": 164314,
-        "asOf": "2026-08-04"
+        "n": 171834,
+        "asOf": "2026-08-05"
       },
       {
         "source": "murlok",
@@ -111,10 +111,10 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (12.1 PTR M+ testing, tank)",
-        "value": 197419,
+        "value": 198954,
         "unit": "rDPS",
-        "n": 853,
-        "asOf": "2026-08-04",
+        "n": 908,
+        "asOf": "2026-08-05",
         "era": "ptr"
       },
       {
@@ -219,19 +219,19 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 159029,
+        "value": 159014,
         "unit": "rDPS",
-        "n": 8334,
-        "asOf": "2026-08-04"
+        "n": 7950,
+        "asOf": "2026-08-05"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 127957,
+        "value": 127239,
         "unit": "rDPS",
-        "n": 59485,
-        "asOf": "2026-08-04"
+        "n": 58835,
+        "asOf": "2026-08-05"
       },
       {
         "source": "murlok",
@@ -271,10 +271,10 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (12.1 PTR M+ testing)",
-        "value": 278999,
+        "value": 277564,
         "unit": "rDPS",
-        "n": 102,
-        "asOf": "2026-08-04",
+        "n": 103,
+        "asOf": "2026-08-05",
         "era": "ptr"
       },
       {
@@ -389,9 +389,9 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-08-04",
+      "asOf": "2026-08-05",
       "targets": {
-        "1": 150240,
+        "1": 149005,
         "2": 248241,
         "3": 319454,
         "5": 449565
@@ -475,19 +475,19 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 156298,
+        "value": 156362,
         "unit": "rDPS",
-        "n": 36455,
-        "asOf": "2026-08-04"
+        "n": 34539,
+        "asOf": "2026-08-05"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 212209,
+        "value": 212108,
         "unit": "rDPS",
-        "n": 307651,
-        "asOf": "2026-08-04"
+        "n": 304576,
+        "asOf": "2026-08-05"
       },
       {
         "source": "murlok",
@@ -527,10 +527,10 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (12.1 PTR M+ testing)",
-        "value": 300632,
+        "value": 302087,
         "unit": "rDPS",
-        "n": 255,
-        "asOf": "2026-08-04",
+        "n": 254,
+        "asOf": "2026-08-05",
         "era": "ptr"
       },
       {
@@ -645,11 +645,11 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-08-04",
+      "asOf": "2026-08-05",
       "targets": {
         "1": 167626,
         "2": 267330,
-        "5": 538115
+        "5": 533237
       }
     }
   },
@@ -728,19 +728,19 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 158392,
+        "value": 158529,
         "unit": "rDPS",
-        "n": 9209,
-        "asOf": "2026-08-04"
+        "n": 8785,
+        "asOf": "2026-08-05"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 145535,
+        "value": 145519,
         "unit": "rDPS",
-        "n": 106755,
-        "asOf": "2026-08-04"
+        "n": 107012,
+        "asOf": "2026-08-05"
       },
       {
         "source": "murlok",
@@ -780,10 +780,10 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (12.1 PTR M+ testing)",
-        "value": 251856,
+        "value": 258209,
         "unit": "rDPS",
-        "n": 99,
-        "asOf": "2026-08-04",
+        "n": 108,
+        "asOf": "2026-08-05",
         "era": "ptr"
       },
       {
@@ -888,10 +888,10 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-08-04",
+      "asOf": "2026-08-05",
       "targets": {
-        "1": 150929,
-        "5": 416429
+        "1": 153686,
+        "5": 421256
       }
     }
   },
@@ -973,19 +973,19 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 160913,
+        "value": 160865,
         "unit": "rDPS",
-        "n": 27813,
-        "asOf": "2026-08-04"
+        "n": 26410,
+        "asOf": "2026-08-05"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 210594,
+        "value": 210616,
         "unit": "rDPS",
-        "n": 198237,
-        "asOf": "2026-08-04"
+        "n": 196078,
+        "asOf": "2026-08-05"
       },
       {
         "source": "murlok",
@@ -1025,10 +1025,10 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (12.1 PTR M+ testing)",
-        "value": 301790,
+        "value": 300754,
         "unit": "rDPS",
-        "n": 542,
-        "asOf": "2026-08-04",
+        "n": 554,
+        "asOf": "2026-08-05",
         "era": "ptr"
       },
       {
@@ -1143,11 +1143,11 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-08-04",
+      "asOf": "2026-08-05",
       "targets": {
-        "1": 176782,
+        "1": 173298,
         "3": 328885,
-        "5": 506285
+        "5": 509979
       }
     }
   },
@@ -1224,19 +1224,19 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses, tank)",
-        "value": 76256,
+        "value": 76560,
         "unit": "rDPS",
-        "n": 3597,
-        "asOf": "2026-08-04"
+        "n": 3454,
+        "asOf": "2026-08-05"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons, tank)",
-        "value": 82929,
+        "value": 83049,
         "unit": "rDPS",
-        "n": 81047,
-        "asOf": "2026-08-04"
+        "n": 80523,
+        "asOf": "2026-08-05"
       },
       {
         "source": "murlok",
@@ -1258,10 +1258,10 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (12.1 PTR M+ testing, tank)",
-        "value": 167174,
+        "value": 167617,
         "unit": "rDPS",
-        "n": 120,
-        "asOf": "2026-08-04",
+        "n": 127,
+        "asOf": "2026-08-05",
         "era": "ptr"
       },
       {
@@ -1381,19 +1381,19 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 158487,
+        "value": 158716,
         "unit": "rDPS",
-        "n": 17632,
-        "asOf": "2026-08-04"
+        "n": 16931,
+        "asOf": "2026-08-05"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 125608,
+        "value": 125559,
         "unit": "rDPS",
-        "n": 105936,
-        "asOf": "2026-08-04"
+        "n": 107238,
+        "asOf": "2026-08-05"
       },
       {
         "source": "murlok",
@@ -1433,10 +1433,10 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (12.1 PTR M+ testing)",
-        "value": 298756,
+        "value": 295774,
         "unit": "rDPS",
-        "n": 493,
-        "asOf": "2026-08-04",
+        "n": 495,
+        "asOf": "2026-08-05",
         "era": "ptr"
       },
       {
@@ -1551,12 +1551,12 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-08-04",
+      "asOf": "2026-08-05",
       "targets": {
-        "1": 188656,
+        "1": 187847,
         "2": 262524,
-        "3": 333943,
-        "5": 490247
+        "3": 274657,
+        "5": 500505
       }
     }
   },
@@ -1621,19 +1621,19 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 154816,
+        "value": 154734,
         "unit": "rDPS",
-        "n": 4462,
-        "asOf": "2026-08-04"
+        "n": 4228,
+        "asOf": "2026-08-05"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 171586,
+        "value": 171178,
         "unit": "rDPS",
-        "n": 57523,
-        "asOf": "2026-08-04"
+        "n": 56670,
+        "asOf": "2026-08-05"
       },
       {
         "source": "murlok",
@@ -1663,10 +1663,10 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (12.1 PTR M+ testing)",
-        "value": 289324,
+        "value": 293220,
         "unit": "rDPS",
-        "n": 49,
-        "asOf": "2026-08-04",
+        "n": 52,
+        "asOf": "2026-08-05",
         "era": "ptr"
       },
       {
@@ -1781,9 +1781,9 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-08-04",
+      "asOf": "2026-08-05",
       "targets": {
-        "1": 183246,
+        "1": 183470,
         "5": 496027
       }
     }
@@ -1849,19 +1849,19 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses, tank)",
-        "value": 88534,
+        "value": 88684,
         "unit": "rDPS",
-        "n": 9245,
-        "asOf": "2026-08-04"
+        "n": 8635,
+        "asOf": "2026-08-05"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons, tank)",
-        "value": 117266,
+        "value": 117393,
         "unit": "rDPS",
-        "n": 361741,
-        "asOf": "2026-08-04"
+        "n": 356325,
+        "asOf": "2026-08-05"
       },
       {
         "source": "murlok",
@@ -1883,10 +1883,10 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (12.1 PTR M+ testing, tank)",
-        "value": 150755,
+        "value": 156895,
         "unit": "rDPS",
-        "n": 76,
-        "asOf": "2026-08-04",
+        "n": 81,
+        "asOf": "2026-08-05",
         "era": "ptr"
       },
       {
@@ -1981,19 +1981,19 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median HPS (Mythic, all bosses)",
-        "value": 175522,
+        "value": 175518,
         "unit": "HPS",
-        "n": 12614,
-        "asOf": "2026-08-04"
+        "n": 11970,
+        "asOf": "2026-08-05"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median HPS (M+, all dungeons)",
-        "value": 63664,
+        "value": 63781,
         "unit": "HPS",
-        "n": 80036,
-        "asOf": "2026-08-04"
+        "n": 78811,
+        "asOf": "2026-08-05"
       },
       {
         "source": "murlok",
@@ -2015,19 +2015,19 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median DPS (Mythic, healer)",
-        "value": 5125,
+        "value": 5094,
         "unit": "DPS",
-        "n": 12614,
-        "asOf": "2026-08-04"
+        "n": 11970,
+        "asOf": "2026-08-05"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median HPS (12.1 PTR M+ testing)",
-        "value": 147454,
+        "value": 150891,
         "unit": "HPS",
-        "n": 49,
-        "asOf": "2026-08-04",
+        "n": 52,
+        "asOf": "2026-08-05",
         "era": "ptr"
       },
       {
@@ -2155,19 +2155,19 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 161884,
+        "value": 162289,
         "unit": "rDPS",
-        "n": 19339,
-        "asOf": "2026-08-04"
+        "n": 18357,
+        "asOf": "2026-08-05"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 208630,
+        "value": 208827,
         "unit": "rDPS",
-        "n": 98038,
-        "asOf": "2026-08-04"
+        "n": 95963,
+        "asOf": "2026-08-05"
       },
       {
         "source": "murlok",
@@ -2199,10 +2199,10 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (12.1 PTR M+ testing)",
-        "value": 248597,
+        "value": 249441,
         "unit": "rDPS",
-        "n": 71,
-        "asOf": "2026-08-04",
+        "n": 72,
+        "asOf": "2026-08-05",
         "era": "ptr"
       },
       {
@@ -2295,7 +2295,7 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-08-04",
+      "asOf": "2026-08-05",
       "targets": {
         "1": 79755,
         "2": 136483,
@@ -2379,19 +2379,19 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 154514,
+        "value": 154674,
         "unit": "rDPS",
-        "n": 2731,
-        "asOf": "2026-08-04"
+        "n": 2670,
+        "asOf": "2026-08-05"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 129453,
+        "value": 128785,
         "unit": "rDPS",
-        "n": 20081,
-        "asOf": "2026-08-04"
+        "n": 20074,
+        "asOf": "2026-08-05"
       },
       {
         "source": "murlok",
@@ -2431,10 +2431,10 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (12.1 PTR M+ testing)",
-        "value": 253033,
+        "value": 255957,
         "unit": "rDPS",
-        "n": 58,
-        "asOf": "2026-08-04",
+        "n": 66,
+        "asOf": "2026-08-05",
         "era": "ptr"
       },
       {
@@ -2549,12 +2549,12 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-08-04",
+      "asOf": "2026-08-05",
       "targets": {
-        "1": 174630,
+        "1": 178316,
         "2": 289099,
         "3": 299727,
-        "5": 488256
+        "5": 485017
       }
     }
   },
@@ -2633,19 +2633,19 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median HPS (Mythic, all bosses)",
-        "value": 177494,
+        "value": 178190,
         "unit": "HPS",
-        "n": 7709,
-        "asOf": "2026-08-04"
+        "n": 7489,
+        "asOf": "2026-08-05"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median HPS (M+, all dungeons)",
-        "value": 60712,
+        "value": 60691,
         "unit": "HPS",
-        "n": 37609,
-        "asOf": "2026-08-04"
+        "n": 37936,
+        "asOf": "2026-08-05"
       },
       {
         "source": "murlok",
@@ -2667,19 +2667,19 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median DPS (Mythic, healer)",
-        "value": 10346,
+        "value": 10366,
         "unit": "DPS",
-        "n": 7709,
-        "asOf": "2026-08-04"
+        "n": 7489,
+        "asOf": "2026-08-05"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median HPS (12.1 PTR M+ testing)",
-        "value": 171019,
+        "value": 172360,
         "unit": "HPS",
-        "n": 138,
-        "asOf": "2026-08-04",
+        "n": 156,
+        "asOf": "2026-08-05",
         "era": "ptr"
       },
       {
@@ -2808,19 +2808,19 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 148992,
+        "value": 149180,
         "unit": "rDPS",
-        "n": 30876,
-        "asOf": "2026-08-04"
+        "n": 29485,
+        "asOf": "2026-08-05"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 147440,
+        "value": 147233,
         "unit": "rDPS",
-        "n": 302528,
-        "asOf": "2026-08-04"
+        "n": 299446,
+        "asOf": "2026-08-05"
       },
       {
         "source": "murlok",
@@ -2860,10 +2860,10 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (12.1 PTR M+ testing)",
-        "value": 282830,
+        "value": 276248,
         "unit": "rDPS",
-        "n": 41,
-        "asOf": "2026-08-04",
+        "n": 42,
+        "asOf": "2026-08-05",
         "era": "ptr"
       },
       {
@@ -2978,12 +2978,12 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-08-04",
+      "asOf": "2026-08-05",
       "targets": {
         "1": 156879,
         "2": 185688,
         "3": 231574,
-        "5": 441371
+        "5": 449900
       }
     }
   },
@@ -3064,19 +3064,19 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 160948,
+        "value": 161198,
         "unit": "rDPS",
-        "n": 7265,
-        "asOf": "2026-08-04"
+        "n": 6949,
+        "asOf": "2026-08-05"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 137132,
+        "value": 136791,
         "unit": "rDPS",
-        "n": 58884,
-        "asOf": "2026-08-04"
+        "n": 59551,
+        "asOf": "2026-08-05"
       },
       {
         "source": "murlok",
@@ -3116,10 +3116,10 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (12.1 PTR M+ testing)",
-        "value": 325352,
+        "value": 324710,
         "unit": "rDPS",
-        "n": 485,
-        "asOf": "2026-08-04",
+        "n": 467,
+        "asOf": "2026-08-05",
         "era": "ptr"
       },
       {
@@ -3226,12 +3226,12 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-08-04",
+      "asOf": "2026-08-05",
       "targets": {
-        "1": 211173,
+        "1": 209254,
         "2": 297186,
-        "3": 388246,
-        "5": 517206
+        "3": 387505,
+        "5": 516163
       }
     }
   },
@@ -3310,19 +3310,19 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 162039,
+        "value": 162102,
         "unit": "rDPS",
-        "n": 6486,
-        "asOf": "2026-08-04"
+        "n": 6139,
+        "asOf": "2026-08-05"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 167171,
+        "value": 167584,
         "unit": "rDPS",
-        "n": 51588,
-        "asOf": "2026-08-04"
+        "n": 50904,
+        "asOf": "2026-08-05"
       },
       {
         "source": "murlok",
@@ -3362,10 +3362,10 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (12.1 PTR M+ testing)",
-        "value": 268883,
+        "value": 272080,
         "unit": "rDPS",
-        "n": 36,
-        "asOf": "2026-08-04",
+        "n": 35,
+        "asOf": "2026-08-05",
         "era": "ptr"
       },
       {
@@ -3460,10 +3460,10 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-08-04",
+      "asOf": "2026-08-05",
       "targets": {
-        "1": 160560,
-        "5": 399717
+        "1": 156924,
+        "5": 398736
       }
     }
   },
@@ -3544,19 +3544,19 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 138963,
+        "value": 139434,
         "unit": "rDPS",
-        "n": 2947,
-        "asOf": "2026-08-04"
+        "n": 2907,
+        "asOf": "2026-08-05"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 138573,
+        "value": 137790,
         "unit": "rDPS",
-        "n": 113099,
-        "asOf": "2026-08-04"
+        "n": 116855,
+        "asOf": "2026-08-05"
       },
       {
         "source": "murlok",
@@ -3596,10 +3596,10 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (12.1 PTR M+ testing)",
-        "value": 306745,
+        "value": 309984,
         "unit": "rDPS",
-        "n": 913,
-        "asOf": "2026-08-04",
+        "n": 988,
+        "asOf": "2026-08-05",
         "era": "ptr"
       },
       {
@@ -3714,11 +3714,12 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-08-04",
+      "asOf": "2026-08-05",
       "targets": {
-        "1": 184368,
-        "3": 366783,
-        "5": 600863
+        "1": 185964,
+        "2": 224333,
+        "3": 369506,
+        "5": 607439
       }
     }
   },
@@ -3797,19 +3798,19 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 153776,
+        "value": 153644,
         "unit": "rDPS",
-        "n": 2548,
-        "asOf": "2026-08-04"
+        "n": 2434,
+        "asOf": "2026-08-05"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 126733,
+        "value": 125992,
         "unit": "rDPS",
-        "n": 19893,
-        "asOf": "2026-08-04"
+        "n": 19505,
+        "asOf": "2026-08-05"
       },
       {
         "source": "murlok",
@@ -3839,10 +3840,10 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (12.1 PTR M+ testing)",
-        "value": 250646,
+        "value": 252981,
         "unit": "rDPS",
-        "n": 22,
-        "asOf": "2026-08-04",
+        "n": 19,
+        "asOf": "2026-08-05",
         "era": "ptr"
       },
       {
@@ -3957,7 +3958,7 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-08-04",
+      "asOf": "2026-08-05",
       "targets": {
         "1": 171483,
         "5": 474576
@@ -4041,19 +4042,19 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 160830,
+        "value": 160928,
         "unit": "rDPS",
-        "n": 37913,
-        "asOf": "2026-08-04"
+        "n": 36217,
+        "asOf": "2026-08-05"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 133875,
+        "value": 133455,
         "unit": "rDPS",
-        "n": 200952,
-        "asOf": "2026-08-04"
+        "n": 199683,
+        "asOf": "2026-08-05"
       },
       {
         "source": "murlok",
@@ -4093,10 +4094,10 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (12.1 PTR M+ testing)",
-        "value": 238339,
+        "value": 239969,
         "unit": "rDPS",
-        "n": 33,
-        "asOf": "2026-08-04",
+        "n": 34,
+        "asOf": "2026-08-05",
         "era": "ptr"
       },
       {
@@ -4211,9 +4212,9 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-08-04",
+      "asOf": "2026-08-05",
       "targets": {
-        "1": 169561,
+        "1": 169093,
         "2": 282445,
         "3": 326825,
         "5": 509035
@@ -4296,19 +4297,19 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses, tank)",
-        "value": 80189,
+        "value": 80135,
         "unit": "rDPS",
-        "n": 8326,
-        "asOf": "2026-08-04"
+        "n": 7890,
+        "asOf": "2026-08-05"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons, tank)",
-        "value": 100983,
+        "value": 100912,
         "unit": "rDPS",
-        "n": 87818,
-        "asOf": "2026-08-04"
+        "n": 86369,
+        "asOf": "2026-08-05"
       },
       {
         "source": "murlok",
@@ -4330,10 +4331,10 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (12.1 PTR M+ testing, tank)",
-        "value": 149891,
+        "value": 146383,
         "unit": "rDPS",
-        "n": 58,
-        "asOf": "2026-08-04",
+        "n": 53,
+        "asOf": "2026-08-05",
         "era": "ptr"
       },
       {
@@ -4455,19 +4456,19 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median HPS (Mythic, all bosses)",
-        "value": 183379,
+        "value": 183759,
         "unit": "HPS",
-        "n": 19513,
-        "asOf": "2026-08-04"
+        "n": 18450,
+        "asOf": "2026-08-05"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median HPS (M+, all dungeons)",
-        "value": 110196,
+        "value": 110291,
         "unit": "HPS",
-        "n": 261508,
-        "asOf": "2026-08-04"
+        "n": 257026,
+        "asOf": "2026-08-05"
       },
       {
         "source": "murlok",
@@ -4489,19 +4490,19 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median DPS (Mythic, healer)",
-        "value": 16989,
+        "value": 17010,
         "unit": "DPS",
-        "n": 19513,
-        "asOf": "2026-08-04"
+        "n": 18450,
+        "asOf": "2026-08-05"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median HPS (12.1 PTR M+ testing)",
-        "value": 181759,
+        "value": 180570,
         "unit": "HPS",
-        "n": 310,
-        "asOf": "2026-08-04",
+        "n": 288,
+        "asOf": "2026-08-05",
         "era": "ptr"
       },
       {
@@ -4630,19 +4631,19 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 157840,
+        "value": 157783,
         "unit": "rDPS",
-        "n": 8847,
-        "asOf": "2026-08-04"
+        "n": 8538,
+        "asOf": "2026-08-05"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 142927,
+        "value": 142202,
         "unit": "rDPS",
-        "n": 59391,
-        "asOf": "2026-08-04"
+        "n": 60823,
+        "asOf": "2026-08-05"
       },
       {
         "source": "murlok",
@@ -4682,10 +4683,10 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (12.1 PTR M+ testing)",
-        "value": 324162,
+        "value": 326929,
         "unit": "rDPS",
-        "n": 199,
-        "asOf": "2026-08-04",
+        "n": 214,
+        "asOf": "2026-08-05",
         "era": "ptr"
       },
       {
@@ -4800,11 +4801,12 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-08-04",
+      "asOf": "2026-08-05",
       "targets": {
-        "1": 161575,
-        "2": 254203,
-        "5": 526630
+        "1": 165114,
+        "2": 258761,
+        "3": 372138,
+        "5": 536818
       }
     }
   },
@@ -4890,19 +4892,19 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median HPS (Mythic, all bosses)",
-        "value": 161424,
+        "value": 161510,
         "unit": "HPS",
-        "n": 11822,
-        "asOf": "2026-08-04"
+        "n": 11550,
+        "asOf": "2026-08-05"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median HPS (M+, all dungeons)",
-        "value": 63561,
+        "value": 63154,
         "unit": "HPS",
-        "n": 126236,
-        "asOf": "2026-08-04"
+        "n": 131604,
+        "asOf": "2026-08-05"
       },
       {
         "source": "murlok",
@@ -4924,19 +4926,19 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median DPS (Mythic, healer)",
-        "value": 6771,
+        "value": 6791,
         "unit": "DPS",
-        "n": 11822,
-        "asOf": "2026-08-04"
+        "n": 11550,
+        "asOf": "2026-08-05"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median HPS (12.1 PTR M+ testing)",
-        "value": 167768,
+        "value": 167184,
         "unit": "HPS",
-        "n": 643,
-        "asOf": "2026-08-04",
+        "n": 686,
+        "asOf": "2026-08-05",
         "era": "ptr"
       },
       {
@@ -5066,19 +5068,19 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses, tank)",
-        "value": 78638,
+        "value": 79034,
         "unit": "rDPS",
-        "n": 5605,
-        "asOf": "2026-08-04"
+        "n": 5403,
+        "asOf": "2026-08-05"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons, tank)",
-        "value": 79770,
+        "value": 79709,
         "unit": "rDPS",
-        "n": 238443,
-        "asOf": "2026-08-04"
+        "n": 236753,
+        "asOf": "2026-08-05"
       },
       {
         "source": "murlok",
@@ -5100,10 +5102,10 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (12.1 PTR M+ testing, tank)",
-        "value": 163114,
+        "value": 161913,
         "unit": "rDPS",
-        "n": 692,
-        "asOf": "2026-08-04",
+        "n": 687,
+        "asOf": "2026-08-05",
         "era": "ptr"
       },
       {
@@ -5224,19 +5226,19 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 151184,
+        "value": 151342,
         "unit": "rDPS",
-        "n": 28274,
-        "asOf": "2026-08-04"
+        "n": 26704,
+        "asOf": "2026-08-05"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 165459,
+        "value": 164917,
         "unit": "rDPS",
-        "n": 352375,
-        "asOf": "2026-08-04"
+        "n": 351041,
+        "asOf": "2026-08-05"
       },
       {
         "source": "murlok",
@@ -5276,10 +5278,10 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (12.1 PTR M+ testing)",
-        "value": 271697,
+        "value": 277770,
         "unit": "rDPS",
-        "n": 189,
-        "asOf": "2026-08-04",
+        "n": 188,
+        "asOf": "2026-08-05",
         "era": "ptr"
       },
       {
@@ -5394,10 +5396,10 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-08-04",
+      "asOf": "2026-08-05",
       "targets": {
-        "1": 155724,
-        "5": 472638
+        "1": 164094,
+        "5": 465320
       }
     }
   },
@@ -5478,19 +5480,19 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median HPS (Mythic, all bosses)",
-        "value": 184146,
+        "value": 184419,
         "unit": "HPS",
-        "n": 14263,
-        "asOf": "2026-08-04"
+        "n": 13670,
+        "asOf": "2026-08-05"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median HPS (M+, all dungeons)",
-        "value": 82084,
+        "value": 81896,
         "unit": "HPS",
-        "n": 171088,
-        "asOf": "2026-08-04"
+        "n": 168469,
+        "asOf": "2026-08-05"
       },
       {
         "source": "murlok",
@@ -5512,19 +5514,19 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median DPS (Mythic, healer)",
-        "value": 33018,
+        "value": 33007,
         "unit": "DPS",
-        "n": 14263,
-        "asOf": "2026-08-04"
+        "n": 13670,
+        "asOf": "2026-08-05"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median HPS (12.1 PTR M+ testing)",
-        "value": 161904,
+        "value": 163987,
         "unit": "HPS",
-        "n": 201,
-        "asOf": "2026-08-04",
+        "n": 202,
+        "asOf": "2026-08-05",
         "era": "ptr"
       },
       {
@@ -5637,19 +5639,19 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median HPS (Mythic, all bosses)",
-        "value": 165996,
+        "value": 166528,
         "unit": "HPS",
-        "n": 8026,
-        "asOf": "2026-08-04"
+        "n": 7629,
+        "asOf": "2026-08-05"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median HPS (M+, all dungeons)",
-        "value": 65290,
+        "value": 65257,
         "unit": "HPS",
-        "n": 64665,
-        "asOf": "2026-08-04"
+        "n": 64216,
+        "asOf": "2026-08-05"
       },
       {
         "source": "murlok",
@@ -5671,19 +5673,19 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median DPS (Mythic, healer)",
-        "value": 11792,
+        "value": 11784,
         "unit": "DPS",
-        "n": 8026,
-        "asOf": "2026-08-04"
+        "n": 7629,
+        "asOf": "2026-08-05"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median HPS (12.1 PTR M+ testing)",
-        "value": 161588,
+        "value": 159551,
         "unit": "HPS",
         "n": 62,
-        "asOf": "2026-08-04",
+        "asOf": "2026-08-05",
         "era": "ptr"
       },
       {
@@ -5810,19 +5812,19 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 153714,
+        "value": 153645,
         "unit": "rDPS",
-        "n": 14494,
-        "asOf": "2026-08-04"
+        "n": 14010,
+        "asOf": "2026-08-05"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 142676,
+        "value": 142135,
         "unit": "rDPS",
-        "n": 114564,
-        "asOf": "2026-08-04"
+        "n": 114424,
+        "asOf": "2026-08-05"
       },
       {
         "source": "murlok",
@@ -5862,10 +5864,10 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (12.1 PTR M+ testing)",
-        "value": 281288,
+        "value": 284557,
         "unit": "rDPS",
-        "n": 184,
-        "asOf": "2026-08-04",
+        "n": 187,
+        "asOf": "2026-08-05",
         "era": "ptr"
       },
       {
@@ -5980,12 +5982,12 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-08-04",
+      "asOf": "2026-08-05",
       "targets": {
         "1": 172294,
         "2": 215362,
         "3": 278756,
-        "5": 415611
+        "5": 417161
       }
     }
   },
@@ -6067,19 +6069,19 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 151235,
+        "value": 151531,
         "unit": "rDPS",
-        "n": 2139,
-        "asOf": "2026-08-04"
+        "n": 2061,
+        "asOf": "2026-08-05"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 149462,
+        "value": 148976,
         "unit": "rDPS",
-        "n": 29831,
-        "asOf": "2026-08-04"
+        "n": 30003,
+        "asOf": "2026-08-05"
       },
       {
         "source": "murlok",
@@ -6109,10 +6111,10 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (12.1 PTR M+ testing)",
-        "value": 284538,
+        "value": 301797,
         "unit": "rDPS",
-        "n": 65,
-        "asOf": "2026-08-04",
+        "n": 66,
+        "asOf": "2026-08-05",
         "era": "ptr"
       },
       {
@@ -6227,12 +6229,12 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-08-04",
+      "asOf": "2026-08-05",
       "targets": {
-        "1": 154666,
+        "1": 154664,
         "2": 210771,
         "3": 330664,
-        "5": 467928
+        "5": 460135
       }
     }
   },
@@ -6314,19 +6316,19 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 152149,
+        "value": 152085,
         "unit": "rDPS",
-        "n": 2030,
-        "asOf": "2026-08-04"
+        "n": 1991,
+        "asOf": "2026-08-05"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 162727,
+        "value": 161994,
         "unit": "rDPS",
-        "n": 33620,
-        "asOf": "2026-08-04"
+        "n": 34161,
+        "asOf": "2026-08-05"
       },
       {
         "source": "murlok",
@@ -6356,10 +6358,10 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (12.1 PTR M+ testing)",
-        "value": 306462,
+        "value": 309885,
         "unit": "rDPS",
-        "n": 122,
-        "asOf": "2026-08-04",
+        "n": 128,
+        "asOf": "2026-08-05",
         "era": "ptr"
       },
       {
@@ -6474,9 +6476,9 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-08-04",
+      "asOf": "2026-08-05",
       "targets": {
-        "1": 174642,
+        "1": 173413,
         "2": 242053,
         "3": 298681,
         "5": 434971
@@ -6562,19 +6564,19 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 158555,
+        "value": 158663,
         "unit": "rDPS",
-        "n": 14194,
-        "asOf": "2026-08-04"
+        "n": 13500,
+        "asOf": "2026-08-05"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 160364,
+        "value": 160181,
         "unit": "rDPS",
-        "n": 57763,
-        "asOf": "2026-08-04"
+        "n": 57122,
+        "asOf": "2026-08-05"
       },
       {
         "source": "murlok",
@@ -6614,10 +6616,10 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (12.1 PTR M+ testing)",
-        "value": 249448,
+        "value": 250081,
         "unit": "rDPS",
         "n": 27,
-        "asOf": "2026-08-04",
+        "asOf": "2026-08-05",
         "era": "ptr"
       },
       {
@@ -6732,9 +6734,9 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-08-04",
+      "asOf": "2026-08-05",
       "targets": {
-        "1": 164023,
+        "1": 171077,
         "2": 183686,
         "3": 230854,
         "5": 344048
@@ -6802,19 +6804,19 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 154397,
+        "value": 154370,
         "unit": "rDPS",
-        "n": 19422,
-        "asOf": "2026-08-04"
+        "n": 18680,
+        "asOf": "2026-08-05"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 137740,
+        "value": 137096,
         "unit": "rDPS",
-        "n": 152366,
-        "asOf": "2026-08-04"
+        "n": 153315,
+        "asOf": "2026-08-05"
       },
       {
         "source": "murlok",
@@ -6854,10 +6856,10 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (12.1 PTR M+ testing)",
-        "value": 312421,
+        "value": 312832,
         "unit": "rDPS",
-        "n": 469,
-        "asOf": "2026-08-04",
+        "n": 498,
+        "asOf": "2026-08-05",
         "era": "ptr"
       },
       {
@@ -6972,12 +6974,12 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-08-04",
+      "asOf": "2026-08-05",
       "targets": {
-        "1": 184434,
-        "2": 230516,
-        "3": 314077,
-        "5": 639629
+        "1": 190309,
+        "2": 236359,
+        "3": 356069,
+        "5": 633721
       }
     }
   },
@@ -7058,19 +7060,19 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 154075,
+        "value": 153852,
         "unit": "rDPS",
-        "n": 6115,
-        "asOf": "2026-08-04"
+        "n": 5806,
+        "asOf": "2026-08-05"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 156599,
+        "value": 156493,
         "unit": "rDPS",
-        "n": 103888,
-        "asOf": "2026-08-04"
+        "n": 102351,
+        "asOf": "2026-08-05"
       },
       {
         "source": "murlok",
@@ -7110,10 +7112,10 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (12.1 PTR M+ testing)",
-        "value": 270186,
+        "value": 263070,
         "unit": "rDPS",
-        "n": 87,
-        "asOf": "2026-08-04",
+        "n": 91,
+        "asOf": "2026-08-05",
         "era": "ptr"
       },
       {
@@ -7228,9 +7230,10 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-08-04",
+      "asOf": "2026-08-05",
       "targets": {
-        "1": 171514,
+        "1": 176033,
+        "2": 280325,
         "5": 556741
       }
     }
@@ -7314,19 +7317,19 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median HPS (Mythic, all bosses)",
-        "value": 160224,
+        "value": 160243,
         "unit": "HPS",
-        "n": 19044,
-        "asOf": "2026-08-04"
+        "n": 18098,
+        "asOf": "2026-08-05"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median HPS (M+, all dungeons)",
-        "value": 84827,
+        "value": 84706,
         "unit": "HPS",
-        "n": 302049,
-        "asOf": "2026-08-04"
+        "n": 302306,
+        "asOf": "2026-08-05"
       },
       {
         "source": "murlok",
@@ -7348,19 +7351,19 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median DPS (Mythic, healer)",
-        "value": 7698,
+        "value": 7604,
         "unit": "DPS",
-        "n": 19044,
-        "asOf": "2026-08-04"
+        "n": 18098,
+        "asOf": "2026-08-05"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median HPS (12.1 PTR M+ testing)",
-        "value": 162658,
+        "value": 163953,
         "unit": "HPS",
-        "n": 488,
-        "asOf": "2026-08-04",
+        "n": 495,
+        "asOf": "2026-08-05",
         "era": "ptr"
       },
       {
@@ -7473,19 +7476,19 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 151338,
+        "value": 151682,
         "unit": "rDPS",
-        "n": 4463,
-        "asOf": "2026-08-04"
+        "n": 4268,
+        "asOf": "2026-08-05"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 148879,
+        "value": 148587,
         "unit": "rDPS",
-        "n": 64123,
-        "asOf": "2026-08-04"
+        "n": 63621,
+        "asOf": "2026-08-05"
       },
       {
         "source": "murlok",
@@ -7525,10 +7528,10 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (12.1 PTR M+ testing)",
-        "value": 285534,
+        "value": 284046,
         "unit": "rDPS",
-        "n": 137,
-        "asOf": "2026-08-04",
+        "n": 135,
+        "asOf": "2026-08-05",
         "era": "ptr"
       },
       {
@@ -7643,11 +7646,11 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-08-04",
+      "asOf": "2026-08-05",
       "targets": {
-        "1": 143205,
+        "1": 149358,
         "2": 214423,
-        "5": 401370
+        "5": 415508
       }
     }
   },
@@ -7712,19 +7715,19 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 154835,
+        "value": 154960,
         "unit": "rDPS",
-        "n": 28865,
-        "asOf": "2026-08-04"
+        "n": 27630,
+        "asOf": "2026-08-05"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 164020,
+        "value": 163988,
         "unit": "rDPS",
-        "n": 155319,
-        "asOf": "2026-08-04"
+        "n": 153621,
+        "asOf": "2026-08-05"
       },
       {
         "source": "murlok",
@@ -7764,10 +7767,10 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (12.1 PTR M+ testing)",
-        "value": 283485,
+        "value": 284653,
         "unit": "rDPS",
-        "n": 87,
-        "asOf": "2026-08-04",
+        "n": 85,
+        "asOf": "2026-08-05",
         "era": "ptr"
       },
       {
@@ -7882,11 +7885,11 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-08-04",
+      "asOf": "2026-08-05",
       "targets": {
-        "1": 161749,
-        "2": 246102,
-        "5": 442059
+        "1": 162642,
+        "2": 250722,
+        "5": 423856
       }
     }
   },
@@ -7951,19 +7954,19 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 155451,
+        "value": 155973,
         "unit": "rDPS",
-        "n": 4578,
-        "asOf": "2026-08-04"
+        "n": 4441,
+        "asOf": "2026-08-05"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 118434,
+        "value": 118051,
         "unit": "rDPS",
-        "n": 40691,
-        "asOf": "2026-08-04"
+        "n": 40850,
+        "asOf": "2026-08-05"
       },
       {
         "source": "murlok",
@@ -8003,10 +8006,10 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (12.1 PTR M+ testing)",
-        "value": 275190,
+        "value": 275293,
         "unit": "rDPS",
         "n": 97,
-        "asOf": "2026-08-04",
+        "asOf": "2026-08-05",
         "era": "ptr"
       },
       {
@@ -8121,10 +8124,10 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-08-04",
+      "asOf": "2026-08-05",
       "targets": {
-        "1": 170004,
-        "2": 261662,
+        "1": 173422,
+        "2": 296073,
         "5": 414720
       }
     }
@@ -8213,19 +8216,19 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 153825,
+        "value": 153519,
         "unit": "rDPS",
-        "n": 10324,
-        "asOf": "2026-08-04"
+        "n": 9996,
+        "asOf": "2026-08-05"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 163371,
+        "value": 161895,
         "unit": "rDPS",
-        "n": 133174,
-        "asOf": "2026-08-04"
+        "n": 136282,
+        "asOf": "2026-08-05"
       },
       {
         "source": "murlok",
@@ -8265,10 +8268,10 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (12.1 PTR M+ testing)",
-        "value": 307125,
+        "value": 309663,
         "unit": "rDPS",
-        "n": 765,
-        "asOf": "2026-08-04",
+        "n": 779,
+        "asOf": "2026-08-05",
         "era": "ptr"
       },
       {
@@ -8383,12 +8386,12 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-08-04",
+      "asOf": "2026-08-05",
       "targets": {
-        "1": 196198,
-        "2": 338943,
-        "3": 422201,
-        "5": 528707
+        "1": 197306,
+        "2": 336774,
+        "3": 424491,
+        "5": 533167
       }
     }
   },
@@ -8476,19 +8479,19 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses)",
-        "value": 151466,
+        "value": 151612,
         "unit": "rDPS",
-        "n": 15467,
-        "asOf": "2026-08-04"
+        "n": 14805,
+        "asOf": "2026-08-05"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons)",
-        "value": 154702,
+        "value": 154307,
         "unit": "rDPS",
-        "n": 103783,
-        "asOf": "2026-08-04"
+        "n": 102347,
+        "asOf": "2026-08-05"
       },
       {
         "source": "murlok",
@@ -8528,10 +8531,10 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (12.1 PTR M+ testing)",
-        "value": 254367,
+        "value": 262243,
         "unit": "rDPS",
-        "n": 42,
-        "asOf": "2026-08-04",
+        "n": 35,
+        "asOf": "2026-08-05",
         "era": "ptr"
       },
       {
@@ -8646,10 +8649,12 @@
     },
     "ptrDummy": {
       "source": "warcraftlogs",
-      "asOf": "2026-08-04",
+      "asOf": "2026-08-05",
       "targets": {
-        "1": 151068,
-        "5": 477617
+        "1": 169867,
+        "2": 270687,
+        "3": 390266,
+        "5": 482430
       }
     }
   },
@@ -8731,19 +8736,19 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median rDPS (Mythic, all bosses, tank)",
-        "value": 86705,
+        "value": 86753,
         "unit": "rDPS",
-        "n": 10918,
-        "asOf": "2026-08-04"
+        "n": 10380,
+        "asOf": "2026-08-05"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (M+, all dungeons, tank)",
-        "value": 82585,
+        "value": 82447,
         "unit": "rDPS",
-        "n": 112096,
-        "asOf": "2026-08-04"
+        "n": 110840,
+        "asOf": "2026-08-05"
       },
       {
         "source": "murlok",
@@ -8765,10 +8770,10 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (12.1 PTR M+ testing, tank)",
-        "value": 157311,
+        "value": 164554,
         "unit": "rDPS",
-        "n": 91,
-        "asOf": "2026-08-04",
+        "n": 84,
+        "asOf": "2026-08-05",
         "era": "ptr"
       },
       {

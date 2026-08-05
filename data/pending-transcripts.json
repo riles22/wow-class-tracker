@@ -1,28 +1,6 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
-  "videos": [
-    {
-      "id": "x1iLDzjKVvI",
-      "creator": "Kalamazi",
-      "title": "12.1 Warlock SIMS Are Here! We May Need Help...",
-      "published": "2026-08-05",
-      "queuedAt": "2026-08-05"
-    },
-    {
-      "id": "XPhaAJiAyD8",
-      "creator": "Shadarek",
-      "title": "Large Devourer Bug Found | Sims Fixed to Reflect!",
-      "published": "2026-08-05",
-      "queuedAt": "2026-08-05"
-    },
-    {
-      "id": "_5fnAi89SGw",
-      "creator": "LBNinja7",
-      "title": "Season 1 Will NOT Be Missed (By me, Here's Why...)",
-      "published": "2026-08-05",
-      "queuedAt": "2026-08-05"
-    }
-  ],
+  "videos": [],
   "skipped": [
     {
       "id": "DnYoCpImTZw",
@@ -85,6 +63,20 @@
       "creator": "Shadarek",
       "title": "Havoc & Devourer DH | Season 2 Bonus Roll Information",
       "reason": "Transcript verified: a Season 2 bonus-roll / loot-strategy PSA (which bosses to reroll, vault vs bonus-roll math, which items Havoc and Devourer want). It carries item-level and stat-weight detail but no spec strength, tuning or outlook read, so there is nothing for takes[] — same shape as the already-skipped izen gearing PSA Kwugqa7HFao.",
+      "verifiedAt": "2026-08-05"
+    },
+    {
+      "id": "_5fnAi89SGw",
+      "creator": "LBNinja7",
+      "title": "Season 1 Will NOT Be Missed (By me, Here's Why...)",
+      "reason": "Transcript verified in full: a Midnight Season 1 systems retrospective, not spec analysis. Its topics are the four-raid-instance structure diluting raid night, repair costs, the top-1% M+ mount as the season's best addition, the May mana-food nerf that also swapped which foods gave mana vs health, and reroll tokens removing the gearing grind (which he blames for his own burnout at 292 ilvl). No spec strength, tuning or outlook read anywhere — his only PTR remark is that tuning is 'a crapshoot right now', a general comment naming no spec. He is a healer specialist in classes[].creators, not a generalCreators entry, so the metaNotes lane is closed to him by validation regardless. 0 takes, 0 metaNotes.",
+      "verifiedAt": "2026-08-05"
+    },
+    {
+      "id": "TU9yAvkkIJ4",
+      "creator": "Tettles",
+      "title": "People Told Me Healing Was Hard, So I Proved Them Wrong | World of Warcraft",
+      "reason": "Transcript verified in full (155 min): his annual zero-to-hero challenge series — a freshly levelled Holy Priest taken solo through LFG to the 3,400 Keystone Master bracket, filmed during a subathon. It is SEASON 1 content end to end: zero mentions of 12.1, Season 2 or the PTR anywhere in the transcript. The eight 'tier set' mentions are his own Season 1 gearing narrative (catalyst charges, the Benediction/divine-image bonus) and he explicitly says he never noticed how good it was — a gearing anecdote, not a spec-strength read. Spec choice is justified as a challenge premise (Holy is the least represented healer in the top 2000 keys, so 'quote unquote bad' makes it interesting), which is representation framing, not an outlook call. 0 takes, 0 metaNotes. Same disposition as his stream VOD aqe2LKeMIqQ.",
       "verifiedAt": "2026-08-05"
     }
   ]
