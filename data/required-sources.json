@@ -14,10 +14,14 @@
     {
       "key": "icyveins",
       "label": "Icy Veins tier lists (raid + M+, all roles)",
+      "comment": "published block added 2026-08-05 (owner-directed, after the seasonVerified/published Gate 0 widening in e65332a made the field agent-writable): the dishonesty-class cross-check against published-evidence/evidence.json is the real point — it catches a rebuilt page behind a repeated stale claim the same night (the 08-02 icyveins-ptr incident shape). maxAgeDays 45 is deliberately loose: these LIVE pages rebuild on patch cadence, not weekly (observed gap ~35 days, oldest page 2026-06-30 at seeding), so a tight number would fire immediately and permanently. 45 stays quiet now and fires ~08-15 only if Icy Veins has not rebuilt its live lists days after 12.1 ships — a genuinely alarm-worthy state. RETIGHTEN once the Season 2 rebuild cadence has been observed (wowmeta-note precedent).",
       "maxAgeDays": 4,
       "date": {
         "type": "pages",
         "sourceId": "icyveins"
+      },
+      "published": {
+        "maxAgeDays": 45
       },
       "rows": {
         "type": "ratings",
@@ -60,10 +64,14 @@
     {
       "key": "wowhead",
       "label": "Wowhead tier lists (raid + M+, all roles)",
+      "comment": "published block added 2026-08-05 alongside icyveins' (same rationale — the cross-check is the point; requires the full-browser-header transport in fetch-published.mjs, since wowhead 403s a UA-only fetch and would otherwise sit permanently unresolved). maxAgeDays 120 looks absurd and is honest: Wowhead's live tier-list pages self-date 2026-04-19..2026-06-25 at seeding — the oldest is already 108 days — so any tighter number is a permanently-red alarm nobody reads. 120 stays quiet now and fires ~08-18 only if the 04-19 page still has not rebuilt a week into 12.1. RETIGHTEN after the Season 2 rebuild lands and a real cadence is observable; if these pages simply never re-date outside season boundaries, ~40 (one season phase + slack) is the likely resting value.",
       "maxAgeDays": 4,
       "date": {
         "type": "pages",
         "sourceId": "wowhead"
+      },
+      "published": {
+        "maxAgeDays": 120
       },
       "rows": {
         "type": "ratings",
