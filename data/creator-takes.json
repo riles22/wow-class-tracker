@@ -2130,7 +2130,7 @@
       "patchContext": "12.1 PTR — Mythic+ / raid spec comparison",
       "claim": "Obli reads Frost as the DK spec with the better multi-target profile in 12.1: Howling Blast, Icy Touch, Frozen Pulse and Remorseless Winter all give it decent two- and three-target cleave, and it is 'particularly good' at burst add waves where San'layn Unholy is only moderately better than Rider. His practical advice is to swap to Frost for council-style progression fights, and he confirms it will be a dual-wield season for Frost.",
       "url": "https://youtu.be/UJxhJRYxe9s?t=306",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Paladin",
@@ -3431,6 +3431,94 @@
       "patchContext": "12.1 PTR — Season 2 Protection Paladin M+ guide",
       "url": "https://youtu.be/15eTmWfKrLc?t=0",
       "claim": "His S2 guide opens by placing Prot Paladin below Blood DK on current PTR tuning, and says it is significantly worse on total survivability and external healing required. Root cause he gives is the rework losing Sanctified Wrath plus the heavy Reflection of Radiance nerf: Sentinel now covers roughly 20-25 seconds a minute instead of the 30-40 second windows of S1, leaving about 15 seconds a minute uncovered by any cooldown. His verdict is that it is defensively worse than in Season 1 despite gaining 10% DR, crit wings during Sentinel and a better damage profile. What keeps it playable is utility: near-solo interrupt coverage off Avengers Shield and Divine Toll resonance, and a one-minute Sacrifice external he calls OP for M+ since no other tank has one — a strong pug-carrying pick rather than a strong tank."
+    },
+    {
+      "class": "Priest",
+      "spec": "Discipline",
+      "creator": "AutomaticJak",
+      "date": "2026-08-04",
+      "sentiment": "buff",
+      "bracket": "raid",
+      "patchContext": "12.1 PTR — Season 2 RAID healer tier list (Dummy Dome group testing)",
+      "url": "https://youtu.be/SQyKJx6FEVA?t=112",
+      "claim": "His top healer for Season 2 raid. Disc puts out huge healing AND roughly 70k+ single-target damage through progression, which he calls enormously helpful for a race-to-world-first environment, and he notes there is no penalty for stacking two of them (Power Infusion on top). Mana is fantastic, especially on Voidweaver. He airs Klanden's caveat with it: numbers and damage are good — arguably too high — but Voidweaver play style is \"ignore your Disc fundamentals and press good buttons on cooldown\", Oracle is falling behind, and heavy movement hurts because Void Blast cannot be cast while moving."
+    },
+    {
+      "class": "Evoker",
+      "spec": "Preservation",
+      "creator": "AutomaticJak",
+      "date": "2026-08-04",
+      "sentiment": "buff",
+      "bracket": "raid",
+      "patchContext": "12.1 PTR — Season 2 RAID healer tier list (Dummy Dome group testing)",
+      "url": "https://youtu.be/SQyKJx6FEVA?t=228",
+      "claim": "A tier. Pres \"blasted tons of healing\" in the testing, with the Flameshaper setup putting better emphasis on Dream Breath and Consume Flame working with both fluttering seedlings and Verdant Embrace. It looked best when the raid was hard-stacked but still did a fantastic job on a light spread, and its mana economy read as being in a good spot. He cites UT's hands-on impression of being flooded with Essence Burst procs and going well over a million HPS inside a Stasis window."
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "creator": "AutomaticJak",
+      "date": "2026-08-04",
+      "sentiment": "buff",
+      "bracket": "raid",
+      "patchContext": "12.1 PTR — Season 2 RAID healer tier list (Dummy Dome group testing)",
+      "url": "https://youtu.be/SQyKJx6FEVA?t=299",
+      "claim": "A tier. He argues an underrated effect of the PTR's ~30% health-pool inflation is that Holy Light and Lay on Hands are no longer overweight, so the whole kit is appropriately sized to the new health bars. Output was \"incredibly, incredibly high\", especially on-demand spot healing. Caveat from Clarius after testing: it feels really strong when overhealing is low, hard to get value out of Virtue when other healers snipe it, and mana is a bit tight (though that should ease on a real fight where Virtue is not pressed on cooldown). He is unsure which Paladin spec ends up the race-to-world-first pick."
+    },
+    {
+      "class": "Shaman",
+      "spec": "Restoration",
+      "creator": "AutomaticJak",
+      "date": "2026-08-04",
+      "sentiment": "neutral",
+      "bracket": "raid",
+      "patchContext": "12.1 PTR — Season 2 RAID healer tier list (Dummy Dome group testing)",
+      "url": "https://youtu.be/SQyKJx6FEVA?t=359",
+      "claim": "B tier and the only spec there — he calls Resto Shaman the dark horse, \"a tier away\" from the world-first conversation. Strong when the raid can stack, and he flags Coiled Altar as a fight that should suit it (pulsing AoE plus stacking healing absorbs). The blocker is comp value rather than throughput: Harik's read, which he endorses, is that the numbers are genuinely good and mana is workable, but there is no reason to bring a Shaman as the fourth healer over a second Disc Priest unless you specifically want the Skyfury buff. One healer nerf above it would move it."
+    },
+    {
+      "class": "Priest",
+      "spec": "Holy",
+      "creator": "AutomaticJak",
+      "date": "2026-08-04",
+      "sentiment": "nerf",
+      "bracket": "raid",
+      "patchContext": "12.1 PTR — Season 2 RAID healer tier list (Dummy Dome group testing)",
+      "url": "https://youtu.be/SQyKJx6FEVA?t=471",
+      "claim": "C tier. He tried both Oracle and Archon and says Holy Priest simply needs its passive healing to be stronger to succeed. Oracle should be favoured by a raid full of ticking rot damage and Prompt Prophecy buffs, but it was not — Archon was still stronger and is enormously bursty (Halo plus Apotheosis smashes health bars), while the gaps between cooldowns are boring and mana-starved. Every single test run ended near or at zero mana. His diagnosis: Blizzard keeps cutting Flash Heal and Prayer of Healing mana costs while removing the free casts (Surge of Light, Apotheosis Holy Words), so full-price casting still drains the bar."
+    },
+    {
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "creator": "AutomaticJak",
+      "date": "2026-08-04",
+      "sentiment": "nerf",
+      "bracket": "raid",
+      "patchContext": "12.1 PTR — Season 2 RAID healer tier list (Dummy Dome group testing)",
+      "url": "https://youtu.be/SQyKJx6FEVA?t=624",
+      "claim": "C tier. Meg tested mastery-heavy Ancient Teachings and caster Mistweaver variants across multiple cooldown and comp setups and Mistweaver struggled throughout — not out of mana, but not producing much healing either. Her read, which he presents: the caster spells do nothing, the 8% aura nerf was unneeded given the state of the other healers, and Ancient Teachings only looks better because it is damage-based and therefore untouched by the healing-aura nerf. Her conclusion is that you would not bring a Monk in any competitive situation right now."
+    },
+    {
+      "class": "Druid",
+      "spec": "Restoration",
+      "creator": "AutomaticJak",
+      "date": "2026-08-04",
+      "sentiment": "nerf",
+      "bracket": "raid",
+      "patchContext": "12.1 PTR — Season 2 RAID healer tier list (Dummy Dome group testing)",
+      "url": "https://youtu.be/SQyKJx6FEVA?t=680",
+      "claim": "Bottom of the list. He says Resto Druid has been struggling through all of Season 2 PTR testing and that the quality-of-life additions have left the spec feeling worse overall. Even in the environment that should suit it — stacked raid, constant rot and ticking damage — it consistently landed at the bottom of the group's raw output, with the testing splitting into a clear winners group and losers group. Viteman's asks, which he relays: buff HoTs, rework the 4-piece (the old one that granted Clearcasting synergised better), and rebuff Regrowth."
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Frost",
+      "creator": "Obli",
+      "date": "2026-08-04",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "12.1 PTR — Mythic+ (hands-on Rider Frost DK, Den of Nalorakk +15)",
+      "url": "https://youtu.be/0D5cRjmmfqM?t=1178",
+      "claim": "Playing the Rider build through a PTR +15, Obli reads Frost as \"doing pretty decent\" and capable of a lot. He is enthusiastic about the Season 2 tier set — the stacking Remorseless Winter buff feeding Icy Death Torrent, which he expects to be the main damage source and which pushes crit hard while raising haste and mastery to equal secondary value — and about Rider's mobility (horse uptime) covering a long-standing Frost weakness. Build space narrowed: Icy Death Torrent and Obliteration are locked, so it is Breath or Frostbane, and he recommends Breath for consistency over Frostbane's RNG. His reservation is the hype: despite sims and DK-community talk that Frost will be much better than Unholy, he says single target \"hasn't been anything outstanding\" and there are better single-target options. Where he does back it is low-target cleave, which he expects Frost to be king of while Unholy lags."
     }
   ],
   "metaNotes": [

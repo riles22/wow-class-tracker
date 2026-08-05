@@ -2,25 +2,25 @@
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
   "videos": [
     {
-      "id": "SQyKJx6FEVA",
-      "creator": "AutomaticJak",
-      "title": "Season 2 PTR RAID Healer Tier List",
-      "published": "2026-08-04",
-      "queuedAt": "2026-08-04"
+      "id": "x1iLDzjKVvI",
+      "creator": "Kalamazi",
+      "title": "12.1 Warlock SIMS Are Here! We May Need Help...",
+      "published": "2026-08-05",
+      "queuedAt": "2026-08-05"
     },
     {
-      "id": "0D5cRjmmfqM",
-      "creator": "Obli",
-      "title": "Rider Frost DK PUMPS! / Den of Nalorakk +15 / Midnight Season 2 PTR",
-      "published": "2026-08-04",
-      "queuedAt": "2026-08-04"
-    },
-    {
-      "id": "e7V3tCBr6as",
+      "id": "XPhaAJiAyD8",
       "creator": "Shadarek",
-      "title": "Havoc & Devourer DH | Season 2 Bonus Roll Information",
-      "published": "2026-08-04",
-      "queuedAt": "2026-08-04"
+      "title": "Large Devourer Bug Found | Sims Fixed to Reflect!",
+      "published": "2026-08-05",
+      "queuedAt": "2026-08-05"
+    },
+    {
+      "id": "_5fnAi89SGw",
+      "creator": "LBNinja7",
+      "title": "Season 1 Will NOT Be Missed (By me, Here's Why...)",
+      "published": "2026-08-05",
+      "queuedAt": "2026-08-05"
     }
   ],
   "skipped": [
@@ -79,6 +79,13 @@
       "title": "Short Lil PTR/Retail Slam",
       "reason": "A 4h17m livestream VOD of key runs and chat banter. Its spec content is one-line replies during pulls (Haunt buff grumbling, Arcane dodging a nerf, 'all three locks are close in M+ but none are meta') and it duplicates the reads in his structured same-day video ReWs_ZnYtO8, which was distilled instead. Matches the Tettles aqe2LKeMIqQ livestream precedent. 0 takes. Transcript verified in full 2026-08-03 (local run).",
       "verifiedAt": "2026-08-03"
+    },
+    {
+      "id": "e7V3tCBr6as",
+      "creator": "Shadarek",
+      "title": "Havoc & Devourer DH | Season 2 Bonus Roll Information",
+      "reason": "Transcript verified: a Season 2 bonus-roll / loot-strategy PSA (which bosses to reroll, vault vs bonus-roll math, which items Havoc and Devourer want). It carries item-level and stat-weight detail but no spec strength, tuning or outlook read, so there is nothing for takes[] — same shape as the already-skipped izen gearing PSA Kwugqa7HFao.",
+      "verifiedAt": "2026-08-05"
     }
   ]
 }
