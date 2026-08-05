@@ -1416,6 +1416,13 @@ test("client app switches scenario-specific SimC profiles and labels their prove
   document.ids.get("simc").value = "trinket1=current_trinket,id=999997,ilevel=292";
   document.ids.get("parse").listeners.click();
   assert.match(document.ids.get("up").innerHTML, /Trinkets are unranked/);
+  assert.match(document.ids.get("up").innerHTML, /still waiting on trinket sims/i,
+    "the planner note leads with the sims-pending message (owner direction 2026-08-05)");
+  // The Fit chip is a stat-priority score: effect-only trinkets would read "Fit 0" and
+  // stat-sticks "Fit 100" — the inverse of real trinket value — directly under a note
+  // calling such ranking meaningless. Unranked trinket rows must never carry it.
+  assert.doesNotMatch(document.ids.get("up").innerHTML, /class="fit"/,
+    "no stat-priority Fit chip on unranked trinket rows (audit 2026-08-05)");
   assert.doesNotMatch(document.ids.get("up").innerHTML,
     /Blazebinder's Hoof|Preternatural Antivenom|Idol of the Howling Nexus/);
 
