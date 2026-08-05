@@ -107,12 +107,31 @@ export function evidenceTargets(config, sources) {
   return { targets, problems };
 }
 
+/* The full browser header set, not UA-only: wowhead.com answers a UA-only fetch with
+   403 (the same recipe every wowhead fetch in this repo uses — see refresh-tiers), and
+   with icyveins/wowhead now under the published gate a UA-only fetcher would record
+   every wowhead page as permanently unresolved, silently reducing its cross-check to
+   the ratchet + threshold. Icy Veins accepts both forms (verified 2026-08-05). */
+export const HEADERS = {
+  "User-Agent": UA,
+  Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+  "Accept-Language": "en-US,en;q=0.9",
+  "sec-ch-ua": '"Chromium";v="126", "Not;A=Brand";v="24"',
+  "sec-ch-ua-mobile": "?0",
+  "sec-ch-ua-platform": '"Windows"',
+  "Sec-Fetch-Dest": "document",
+  "Sec-Fetch-Mode": "navigate",
+  "Sec-Fetch-Site": "none",
+  "Sec-Fetch-User": "?1",
+  "Upgrade-Insecure-Requests": "1",
+};
+
 async function fetchPage(url) {
   for (let attempt = 0; attempt < 2; attempt++) {
     try {
       const ctl = new AbortController();
       const timer = setTimeout(() => ctl.abort(), 20000);
-      const res = await fetch(url, { headers: { "User-Agent": UA, Accept: "text/html" }, signal: ctl.signal });
+      const res = await fetch(url, { headers: HEADERS, signal: ctl.signal });
       clearTimeout(timer);
       const body = res.ok ? await res.text() : null;
       if (res.ok) return { httpStatus: res.status, body };

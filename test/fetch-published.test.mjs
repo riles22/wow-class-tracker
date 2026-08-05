@@ -69,12 +69,20 @@ test("evidenceTargets: published-gated requirements resolve to fetchable pages; 
   assert.match(problems[1], /no url/);
 });
 
-test("the repo's real contract yields exactly the icyveins-ptr pages as evidence targets", async () => {
+test("the repo's real contract yields exactly the published-gated pages as evidence targets", async () => {
+  // Pins the real contract's evidence-target set so a published block appearing or
+  // vanishing is always a deliberate, reviewed change. icyveins-ptr since the gate
+  // landed (2026-08-04); icyveins + wowhead added 2026-08-05 (owner-directed) with
+  // their stored `published` seeded in the same commit — the gate treats a block
+  // whose pages carry no published field as a config bug.
   const { readFile } = await import("node:fs/promises");
   const config = JSON.parse(await readFile(new URL("../data/required-sources.json", import.meta.url), "utf8"));
   const raw = JSON.parse(await readFile(new URL("../data/sources.json", import.meta.url), "utf8"));
   const { targets, problems } = evidenceTargets(config, raw.sources ?? raw);
   assert.deepEqual(problems, [], "the committed contract must not carry published-gate config problems");
-  assert.equal(targets.length, 3, "the three icyveins-ptr role pages");
-  assert.ok(targets.every(t => t.key === "icyveins-ptr" && t.url.startsWith("https://")));
+  const byKey = {};
+  for (const t of targets) byKey[t.key] = (byKey[t.key] ?? 0) + 1;
+  assert.deepEqual(byKey, { icyveins: 6, "icyveins-ptr": 3, wowhead: 6 },
+    "published-gated pages: icyveins 6 + icyveins-ptr 3 + wowhead 6");
+  assert.ok(targets.every(t => t.url.startsWith("https://")));
 });

@@ -17,6 +17,12 @@ AGENTS.md
 # deterministic pre-agent transcript stage output (consumed in-run, never committed)
 transcript-fetch/
 
+# deterministic pre-agent page-self-date evidence (src/fetch-published.mjs) — travels
+# between nightly jobs as an artifact, never committed. Ignored for the same local-run
+# hygiene reason as wcl-fetch/: an untracked leftover trips the scheduled local run's
+# clean-tree precheck, and a stale one reds the --manifest freshness guard.
+published-evidence/
+
 # resumable local SimulationCraft runs; accepted evidence is promoted to gearing/data/simc-audit/
 gearing/.simc-work/
 # withPromotionLock creates <path>.promotion.lock beside EVERY target it locks — the run
