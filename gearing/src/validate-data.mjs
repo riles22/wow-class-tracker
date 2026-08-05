@@ -1161,6 +1161,13 @@ export function validateData({ raid, specs, dungeons, sheet, statOverrides, stat
       if (!Array.isArray(item.effects)
         || item.effects.some((effect) => !["Use", "Equip"].includes(effect.kind) || !effect.text))
         errors.push(`${group.name}: ${item.id} ${item.name} has malformed effect metadata`);
+      // Fail-closed floor (audit 2026-08-05): the trinket UI presents the effect text as the
+      // trinket's ENTIRE value, and 33 of 41 trinkets carry no secondaries to fingerprint —
+      // so a Wowhead tooltip-format break that nulled the extraction would previously ship
+      // green while every trinket row went blank. All current trinkets carry an effect;
+      // one arriving without one is a harvest failure, not a valid item.
+      else if (item.slot === "Trinket" && item.effects.length === 0)
+        errors.push(`${group.name}: ${item.id} ${item.name} is a trinket with no effect text — the UI presents the effect as the trinket's whole value; a tooltip-parse break must fail red here rather than render blank rows`);
       else if (item.effects.length) {
         if (item.effectKind !== item.effects[0].kind || item.effect !== item.effects[0].text)
           errors.push(`${group.name}: ${item.id} ${item.name} legacy effect fields do not match the first effect`);

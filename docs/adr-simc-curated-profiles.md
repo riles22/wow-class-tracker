@@ -114,3 +114,26 @@ artifact rebuild, and repository verification. The accepted matrix contains 30 p
 26 curated profiles with 52 records. 13 tank and healer specs remain deferred, and
 Augmentation remains the 1 unsupported spec. Future work is refresh maintenance plus
 separately designed tank and healer objectives.
+
+## Trinket conditioning of the published scale factors (disclosed 2026-08-05, audit)
+
+Curated actors do not sim in a trinket vacuum: the curation policy pins **two fixed,
+effect-bearing trinkets per primary stat** on every curated actor
+(`trinketIdsByPrimary`, gearing/data/simc-curation-catalog.json — Strength: 270163
+Sszorak's Ferocity + 270175 Voracious Heart of Ula'tek; Agility: 270166 Vashnik's
+Sanguine Rancor + 270173 Zul'jin's Guillotine Technique; Intellect: 270161 Fang of
+Umbral Malignance + 270170 Vexhul's Everflowing Gland). All six carry damage procs or
+on-use effects that the APLs actively use, so the published secondary scale factors are
+**conditioned on those active trinket effects** — they measure how secondaries trade
+around that fixed baseline, not in isolation from trinket behavior. This is deliberate
+(a realistic actor needs realistic trinkets, and pinning them keeps the baseline
+constant across specs sharing a primary) but it was previously discoverable only by
+gunzipping the profile artifacts, which is not a disclosure. Two consequences worth
+stating plainly:
+
+- The scale factors remain valid as *within-actor secondary comparisons*; they say
+  nothing about the pinned trinkets' own value, and nothing on the page ranks trinkets
+  with them (the trinket surfaces are explicitly unranked).
+- If the pinned trinkets change in a future curation round, the factors recompute under
+  a different conditioning — treat the pin as part of the recipe, and record any change
+  here alongside the catalog edit.

@@ -1114,7 +1114,12 @@ function weaponLoadoutCards(items) {
 
 /* Trinkets are picked on their effect, not on secondary stats -- most of them carry no
    secondaries at all. Ranking them by stat priority would be theatre, so they get listed
-   in full with their effect text and an explicit note instead of a fake ordering. */
+   in full with their effect text and an explicit note instead of a fake ordering. The
+   note leads with WHY there is no ranking (owner direction 2026-08-05): trinket sims for
+   Season 2 have not landed yet, and the stat model here deliberately does not score
+   effects -- so the honest offer is the complete usable list, ordered by where items
+   drop and never by strength. Wording carefully avoids claiming sims exist or naming a
+   date; "still waiting" describes this site's state, which is verifiable. */
 function trinketCard(list) {
   if (!list.length) return '';
   const rows = list.slice().sort((a, b) => (b.effect ? 1 : 0) - (a.effect ? 1 : 0)).map(it =>
@@ -1126,11 +1131,12 @@ function trinketCard(list) {
     + '</span><span class="src' + (it.kind === 'mplus' ? ' mplus' : '') + '">'
     + esc(it.kind === 'mplus' ? it.dungeon : it.where) + '</span></div>').join('');
   return '<div class="card wide"><h3>Trinkets<span>' + list.length + ' usable &middot; not ranked</span></h3>'
-    + '<div class="sub-note">Trinket value comes from the effect, not from secondaries &mdash; most of these have '
-    + 'no secondary stats at all. Ordering them by stat priority would be meaningless, so every usable trinket is '
-    + 'listed with its full effect. Role- or primary-specific effects are filtered using explicit recommendation '
-    + 'eligibility; excluded specs may still be able to equip the item technically. '
-    + '<b>This is the slot where a full item simulation matters most.</b></div>'
+    + '<div class="sub-note"><b>Still waiting on trinket sims for Season 2.</b> Trinket value lives in the '
+    + 'effect, not in secondary stats &mdash; most of these carry no secondaries at all &mdash; and the stat model '
+    + 'on this page deliberately does not score effects. Until trinket sims land, here is every usable trinket '
+    + 'with its full effect, listed by where it drops and never by how good it is. Role- or primary-specific '
+    + 'effects are filtered using explicit recommendation eligibility; excluded specs may still be able to equip '
+    + 'the item technically. <b>This is the slot where a full item simulation matters most.</b></div>'
     + '<details class="more-items"><summary>Show all ' + list.length + ' trinkets</summary>' + rows
     + '</details></div>';
 }
@@ -1357,16 +1363,21 @@ function renderUp() {
       : (eq.slotLabel === 'Finger' || eq.slotLabel === 'Trinket') ? eq.slotLabel + ' ' + (k.match(/\d+$/)?.[0] || '')
       : eq.slotLabel;
     return '<div class="card"><h3>' + esc(slotName) + '<span>' + esc(eq.name || eq.id) + worn + '</span></h3>'
-      + (unranked && entries.length ? '<div class="sub-note"><b>Trinkets are unranked:</b> simulate their effects; '
-          + 'every eligible source that can exceed your current item level is listed.</div>' : '')
+      + (unranked && entries.length ? '<div class="sub-note"><b>Trinkets are unranked &mdash; still waiting on '
+          + 'trinket sims:</b> simulate their effects; every eligible source that can exceed your current item '
+          + 'level is listed, alphabetically.</div>' : '')
       + catalystActionHtml(eq)
       + directTierUpgradeHtml(eq, threshold)
       + (entries.length ? entries.map(entry => {
           const it = entry.it;
+          // No Fit chip on unranked trinket rows (audit 2026-08-05): fitText is a stat-priority
+          // score, so effect-only trinkets read "Fit 0" while stat-sticks read up to "Fit 100" --
+          // the inverse of real trinket value, printed under a note saying ranking them is
+          // meaningless. The chip stays on every ranked slot, where secondaries ARE the value.
           return '<div class="row" data-id="' + it.id + '"><span class="rank">' + entry.marker + '</span>'
           + icoTag(it) + '<span class="nm">' + esc(it.name) + itemDetails(it) + catalystDetails(it)
           + ladderHtml(it, threshold)
-          + '</span><span class="meta">' + esc(allocationText(it)) + fitText(it) + '</span><span class="src'
+          + '</span><span class="meta">' + esc(allocationText(it)) + (unranked ? '' : fitText(it)) + '</span><span class="src'
           + (it.kind === 'mplus' ? ' mplus' : '') + '">'
           + esc(it.kind === 'mplus' ? it.dungeon : it.where) + '</span></div>';
         }).join('')
