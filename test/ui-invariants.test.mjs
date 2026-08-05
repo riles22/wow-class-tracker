@@ -801,11 +801,13 @@ ui("the legend remembers the user's toggle across reloads — and only the user'
   assert.equal(await page.evaluate(() => localStorage.getItem("wct-legend")), null,
     "the width default must not freeze itself into storage");
   await page.click("#legendwrap > summary");
+  await page.waitForFunction(() => localStorage.getItem("wct-legend") === "closed");
   assert.equal(await page.evaluate(() => localStorage.getItem("wct-legend")), "closed");
   await page.reload();
   await page.waitForFunction(() => document.querySelectorAll(".row").length > 0);
   assert.equal(await page.$eval("#legendwrap", el => el.open), false, "closed survives a reload");
   await page.click("#legendwrap > summary");
+  await page.waitForFunction(() => localStorage.getItem("wct-legend") === "open");
   await page.reload();
   await page.waitForFunction(() => document.querySelectorAll(".row").length > 0);
   assert.equal(await page.$eval("#legendwrap", el => el.open), true, "…and reopened survives too");
