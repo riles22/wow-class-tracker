@@ -97,6 +97,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4026,
         "unit": "rating",
+        "n": 50,
         "asOf": "2026-08-05"
       },
       {
@@ -237,8 +238,9 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3997,
+        "value": 4024,
         "unit": "rating",
+        "n": 50,
         "asOf": "2026-08-05"
       },
       {
@@ -247,6 +249,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.1,
         "unit": "%",
+        "n": 2000,
         "asOf": "2026-08-05"
       },
       {
@@ -265,6 +268,7 @@
         "name": "SimC nightly Patchwerk DPS",
         "value": 137665,
         "unit": "DPS",
+        "n": 7500,
         "asOf": "2026-08-05"
       },
       {
@@ -289,9 +293,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 166586,
+        "value": 167689,
         "unit": "DPS",
-        "n": 18,
+        "n": 16,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -319,9 +323,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 551553,
+        "value": 552120,
         "unit": "DPS",
-        "n": 59,
+        "n": 58,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -339,9 +343,9 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 268964,
+        "value": 269028,
         "unit": "DPS",
-        "n": 557,
+        "n": 560,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -493,8 +497,9 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4356,
+        "value": 4357,
         "unit": "rating",
+        "n": 50,
         "asOf": "2026-08-05"
       },
       {
@@ -503,6 +508,7 @@
         "name": "Top-2000 keys representation",
         "value": 17.4,
         "unit": "%",
+        "n": 2000,
         "asOf": "2026-08-05"
       },
       {
@@ -521,6 +527,7 @@
         "name": "SimC nightly Patchwerk DPS",
         "value": 135192,
         "unit": "DPS",
+        "n": 7500,
         "asOf": "2026-08-05"
       },
       {
@@ -545,9 +552,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 175177,
+        "value": 176054,
         "unit": "DPS",
-        "n": 90,
+        "n": 89,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -595,9 +602,9 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 268094,
+        "value": 268370,
         "unit": "DPS",
-        "n": 341,
+        "n": 344,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -746,8 +753,9 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4090,
+        "value": 4099,
         "unit": "rating",
+        "n": 50,
         "asOf": "2026-08-05"
       },
       {
@@ -756,6 +764,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.1,
         "unit": "%",
+        "n": 2000,
         "asOf": "2026-08-05"
       },
       {
@@ -774,6 +783,7 @@
         "name": "SimC nightly Patchwerk DPS",
         "value": 116636,
         "unit": "DPS",
+        "n": 7500,
         "asOf": "2026-08-05"
       },
       {
@@ -798,9 +808,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 164802,
+        "value": 165577,
         "unit": "DPS",
-        "n": 14,
+        "n": 18,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -818,9 +828,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 443918,
+        "value": 445791,
         "unit": "DPS",
-        "n": 8,
+        "n": 7,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -838,9 +848,9 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 232107,
+        "value": 239474,
         "unit": "DPS",
-        "n": 149,
+        "n": 151,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -991,8 +1001,9 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4358,
+        "value": 4359,
         "unit": "rating",
+        "n": 50,
         "asOf": "2026-08-05"
       },
       {
@@ -1001,6 +1012,7 @@
         "name": "Top-2000 keys representation",
         "value": 15.2,
         "unit": "%",
+        "n": 2000,
         "asOf": "2026-08-05"
       },
       {
@@ -1019,6 +1031,7 @@
         "name": "SimC nightly Patchwerk DPS",
         "value": 118379,
         "unit": "DPS",
+        "n": 7500,
         "asOf": "2026-08-05"
       },
       {
@@ -1043,9 +1056,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 195661,
+        "value": 195745,
         "unit": "DPS",
-        "n": 311,
+        "n": 309,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -1073,9 +1086,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 535755,
+        "value": 535924,
         "unit": "DPS",
-        "n": 239,
+        "n": 238,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -1093,9 +1106,9 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 274566,
+        "value": 275985,
         "unit": "DPS",
-        "n": 825,
+        "n": 823,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -1244,6 +1257,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3986,
         "unit": "rating",
+        "n": 50,
         "asOf": "2026-08-05"
       },
       {
@@ -1399,8 +1413,9 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4050,
+        "value": 4044,
         "unit": "rating",
+        "n": 50,
         "asOf": "2026-08-05"
       },
       {
@@ -1409,6 +1424,7 @@
         "name": "Top-2000 keys representation",
         "value": 0,
         "unit": "%",
+        "n": 2000,
         "asOf": "2026-08-05"
       },
       {
@@ -1427,6 +1443,7 @@
         "name": "SimC nightly Patchwerk DPS",
         "value": 116105,
         "unit": "DPS",
+        "n": 7500,
         "asOf": "2026-08-05"
       },
       {
@@ -1451,9 +1468,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 187846,
+        "value": 188114,
         "unit": "DPS",
-        "n": 196,
+        "n": 194,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -1501,9 +1518,9 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 261445,
+        "value": 262020,
         "unit": "DPS",
-        "n": 795,
+        "n": 793,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -1639,8 +1656,9 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4222,
+        "value": 4235,
         "unit": "rating",
+        "n": 50,
         "asOf": "2026-08-05"
       },
       {
@@ -1649,6 +1667,7 @@
         "name": "Top-2000 keys representation",
         "value": 1.5,
         "unit": "%",
+        "n": 2000,
         "asOf": "2026-08-05"
       },
       {
@@ -1657,6 +1676,7 @@
         "name": "SimC nightly Patchwerk DPS",
         "value": 133660,
         "unit": "DPS",
+        "n": 7500,
         "asOf": "2026-08-05"
       },
       {
@@ -1681,9 +1701,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 180162,
+        "value": 180198,
         "unit": "DPS",
-        "n": 39,
+        "n": 38,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -1869,6 +1889,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4358,
         "unit": "rating",
+        "n": 50,
         "asOf": "2026-08-05"
       },
       {
@@ -1877,6 +1898,7 @@
         "name": "Top-2000 keys representation",
         "value": 18.1,
         "unit": "%",
+        "n": 2000,
         "asOf": "2026-08-05"
       },
       {
@@ -2001,6 +2023,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3926,
         "unit": "rating",
+        "n": 50,
         "asOf": "2026-08-05"
       },
       {
@@ -2173,8 +2196,9 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4352,
+        "value": 4355,
         "unit": "rating",
+        "n": 50,
         "asOf": "2026-08-05"
       },
       {
@@ -2183,6 +2207,7 @@
         "name": "Top-2000 keys representation",
         "value": 16,
         "unit": "%",
+        "n": 2000,
         "asOf": "2026-08-05"
       },
       {
@@ -2257,9 +2282,9 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 225423,
+        "value": 225176,
         "unit": "DPS",
-        "n": 196,
+        "n": 194,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -2397,8 +2422,9 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4021,
+        "value": 4043,
         "unit": "rating",
+        "n": 50,
         "asOf": "2026-08-05"
       },
       {
@@ -2407,6 +2433,7 @@
         "name": "Top-2000 keys representation",
         "value": 0,
         "unit": "%",
+        "n": 2000,
         "asOf": "2026-08-05"
       },
       {
@@ -2425,6 +2452,7 @@
         "name": "SimC nightly Patchwerk DPS",
         "value": 115095,
         "unit": "DPS",
+        "n": 7500,
         "asOf": "2026-08-05"
       },
       {
@@ -2449,9 +2477,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 181305,
+        "value": 181676,
         "unit": "DPS",
-        "n": 50,
+        "n": 63,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -2499,9 +2527,9 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 215641,
+        "value": 215010,
         "unit": "DPS",
-        "n": 81,
+        "n": 80,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -2653,6 +2681,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3987,
         "unit": "rating",
+        "n": 50,
         "asOf": "2026-08-05"
       },
       {
@@ -2661,6 +2690,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.1,
         "unit": "%",
+        "n": 2000,
         "asOf": "2026-08-05"
       },
       {
@@ -2826,8 +2856,9 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4121,
+        "value": 4135,
         "unit": "rating",
+        "n": 50,
         "asOf": "2026-08-05"
       },
       {
@@ -2836,6 +2867,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.4,
         "unit": "%",
+        "n": 2000,
         "asOf": "2026-08-05"
       },
       {
@@ -2854,6 +2886,7 @@
         "name": "SimC nightly Patchwerk DPS",
         "value": 121502,
         "unit": "DPS",
+        "n": 7500,
         "asOf": "2026-08-05"
       },
       {
@@ -2928,9 +2961,9 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 226964,
+        "value": 227825,
         "unit": "DPS",
-        "n": 164,
+        "n": 167,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -3082,8 +3115,9 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4041,
+        "value": 4035,
         "unit": "rating",
+        "n": 50,
         "asOf": "2026-08-05"
       },
       {
@@ -3092,6 +3126,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.1,
         "unit": "%",
+        "n": 2000,
         "asOf": "2026-08-05"
       },
       {
@@ -3110,6 +3145,7 @@
         "name": "SimC nightly Patchwerk DPS",
         "value": 128010,
         "unit": "DPS",
+        "n": 7500,
         "asOf": "2026-08-05"
       },
       {
@@ -3126,9 +3162,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 206671,
+        "value": 206763,
         "unit": "DPS",
-        "n": 267,
+        "n": 264,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -3176,7 +3212,7 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 288079,
+        "value": 288302,
         "unit": "DPS",
         "n": 637,
         "asOf": "2026-08-05",
@@ -3328,8 +3364,9 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4138,
+        "value": 4137,
         "unit": "rating",
+        "n": 50,
         "asOf": "2026-08-05"
       },
       {
@@ -3338,6 +3375,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.2,
         "unit": "%",
+        "n": 2000,
         "asOf": "2026-08-05"
       },
       {
@@ -3356,6 +3394,7 @@
         "name": "SimC nightly Patchwerk DPS",
         "value": 118749,
         "unit": "DPS",
+        "n": 7500,
         "asOf": "2026-08-05"
       },
       {
@@ -3380,9 +3419,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 182681,
+        "value": 182920,
         "unit": "DPS",
-        "n": 47,
+        "n": 46,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -3390,9 +3429,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 514252,
+        "value": 515099,
         "unit": "DPS",
-        "n": 63,
+        "n": 61,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -3410,7 +3449,7 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 241181,
+        "value": 243548,
         "unit": "DPS",
         "n": 131,
         "asOf": "2026-08-05",
@@ -3562,8 +3601,9 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3992,
+        "value": 4016,
         "unit": "rating",
+        "n": 50,
         "asOf": "2026-08-05"
       },
       {
@@ -3572,6 +3612,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.1,
         "unit": "%",
+        "n": 2000,
         "asOf": "2026-08-05"
       },
       {
@@ -3590,6 +3631,7 @@
         "name": "SimC nightly Patchwerk DPS",
         "value": 117612,
         "unit": "DPS",
+        "n": 7500,
         "asOf": "2026-08-05"
       },
       {
@@ -3614,9 +3656,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 192828,
+        "value": 192936,
         "unit": "DPS",
-        "n": 248,
+        "n": 244,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -3644,9 +3686,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 589116,
+        "value": 589889,
         "unit": "DPS",
-        "n": 461,
+        "n": 465,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -3664,9 +3706,9 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 267979,
+        "value": 268976,
         "unit": "DPS",
-        "n": 1747,
+        "n": 1751,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -3816,8 +3858,9 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3908,
+        "value": 3910,
         "unit": "rating",
+        "n": 50,
         "asOf": "2026-08-05"
       },
       {
@@ -3826,6 +3869,7 @@
         "name": "Top-2000 keys representation",
         "value": 0,
         "unit": "%",
+        "n": 2000,
         "asOf": "2026-08-05"
       },
       {
@@ -3834,6 +3878,7 @@
         "name": "SimC nightly Patchwerk DPS",
         "value": 120550,
         "unit": "DPS",
+        "n": 7500,
         "asOf": "2026-08-05"
       },
       {
@@ -3858,9 +3903,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 170772,
+        "value": 171228,
         "unit": "DPS",
-        "n": 69,
+        "n": 65,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -3888,9 +3933,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 464385,
+        "value": 464896,
         "unit": "DPS",
-        "n": 66,
+        "n": 65,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -4060,8 +4105,9 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4076,
+        "value": 4077,
         "unit": "rating",
+        "n": 50,
         "asOf": "2026-08-05"
       },
       {
@@ -4070,6 +4116,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.1,
         "unit": "%",
+        "n": 2000,
         "asOf": "2026-08-05"
       },
       {
@@ -4088,6 +4135,7 @@
         "name": "SimC nightly Patchwerk DPS",
         "value": 121652,
         "unit": "DPS",
+        "n": 7500,
         "asOf": "2026-08-05"
       },
       {
@@ -4112,9 +4160,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 171702,
+        "value": 172258,
         "unit": "DPS",
-        "n": 75,
+        "n": 72,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -4142,9 +4190,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 507478,
+        "value": 507544,
         "unit": "DPS",
-        "n": 121,
+        "n": 120,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -4162,9 +4210,9 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 214368,
+        "value": 211576,
         "unit": "DPS",
-        "n": 51,
+        "n": 50,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -4317,6 +4365,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4235,
         "unit": "rating",
+        "n": 50,
         "asOf": "2026-08-05"
       },
       {
@@ -4325,6 +4374,7 @@
         "name": "Top-2000 keys representation",
         "value": 1.9,
         "unit": "%",
+        "n": 2000,
         "asOf": "2026-08-05"
       },
       {
@@ -4358,7 +4408,7 @@
       }
     ],
     "survivability": {
-      "tier": "C",
+      "tier": "B",
       "source": "archon",
       "asOf": "2026-08-05"
     },
@@ -4476,6 +4526,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4354,
         "unit": "rating",
+        "n": 50,
         "asOf": "2026-08-05"
       },
       {
@@ -4484,6 +4535,7 @@
         "name": "Top-2000 keys representation",
         "value": 16.3,
         "unit": "%",
+        "n": 2000,
         "asOf": "2026-08-05"
       },
       {
@@ -4649,8 +4701,9 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4059,
+        "value": 4075,
         "unit": "rating",
+        "n": 50,
         "asOf": "2026-08-05"
       },
       {
@@ -4659,6 +4712,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.1,
         "unit": "%",
+        "n": 2000,
         "asOf": "2026-08-05"
       },
       {
@@ -4677,6 +4731,7 @@
         "name": "SimC nightly Patchwerk DPS",
         "value": 118266,
         "unit": "DPS",
+        "n": 7500,
         "asOf": "2026-08-05"
       },
       {
@@ -4701,9 +4756,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 170977,
+        "value": 171194,
         "unit": "DPS",
-        "n": 43,
+        "n": 45,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -4711,9 +4766,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 2T)",
-        "value": 228149,
+        "value": 249408,
         "unit": "DPS",
-        "n": 11,
+        "n": 16,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -4731,9 +4786,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 543652,
+        "value": 543872,
         "unit": "DPS",
-        "n": 67,
+        "n": 66,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -4751,7 +4806,7 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 290442,
+        "value": 290569,
         "unit": "DPS",
         "n": 233,
         "asOf": "2026-08-05",
@@ -4912,6 +4967,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4038,
         "unit": "rating",
+        "n": 50,
         "asOf": "2026-08-05"
       },
       {
@@ -4920,6 +4976,7 @@
         "name": "Top-2000 keys representation",
         "value": 0,
         "unit": "%",
+        "n": 2000,
         "asOf": "2026-08-05"
       },
       {
@@ -5088,6 +5145,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3983,
         "unit": "rating",
+        "n": 50,
         "asOf": "2026-08-05"
       },
       {
@@ -5244,8 +5302,9 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4227,
+        "value": 4232,
         "unit": "rating",
+        "n": 50,
         "asOf": "2026-08-05"
       },
       {
@@ -5254,6 +5313,7 @@
         "name": "Top-2000 keys representation",
         "value": 2,
         "unit": "%",
+        "n": 2000,
         "asOf": "2026-08-05"
       },
       {
@@ -5272,6 +5332,7 @@
         "name": "SimC nightly Patchwerk DPS",
         "value": 112288,
         "unit": "DPS",
+        "n": 7500,
         "asOf": "2026-08-05"
       },
       {
@@ -5296,9 +5357,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 166736,
+        "value": 168262,
         "unit": "DPS",
-        "n": 10,
+        "n": 2,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -5346,9 +5407,9 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 240655,
+        "value": 240418,
         "unit": "DPS",
-        "n": 338,
+        "n": 336,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -5500,6 +5561,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4141,
         "unit": "rating",
+        "n": 50,
         "asOf": "2026-08-05"
       },
       {
@@ -5508,6 +5570,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.6,
         "unit": "%",
+        "n": 2000,
         "asOf": "2026-08-05"
       },
       {
@@ -5659,6 +5722,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3954,
         "unit": "rating",
+        "n": 50,
         "asOf": "2026-08-05"
       },
       {
@@ -5667,6 +5731,7 @@
         "name": "Top-2000 keys representation",
         "value": 0,
         "unit": "%",
+        "n": 2000,
         "asOf": "2026-08-05"
       },
       {
@@ -5830,8 +5895,9 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4149,
+        "value": 4156,
         "unit": "rating",
+        "n": 50,
         "asOf": "2026-08-05"
       },
       {
@@ -5840,6 +5906,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.6,
         "unit": "%",
+        "n": 2000,
         "asOf": "2026-08-05"
       },
       {
@@ -5858,6 +5925,7 @@
         "name": "SimC nightly Patchwerk DPS",
         "value": 117055,
         "unit": "DPS",
+        "n": 7500,
         "asOf": "2026-08-05"
       },
       {
@@ -5882,9 +5950,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 173114,
+        "value": 173641,
         "unit": "DPS",
-        "n": 86,
+        "n": 84,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -5932,9 +6000,9 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 260214,
+        "value": 260637,
         "unit": "DPS",
-        "n": 352,
+        "n": 349,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -6087,8 +6155,9 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4067,
+        "value": 4079,
         "unit": "rating",
+        "n": 50,
         "asOf": "2026-08-05"
       },
       {
@@ -6097,6 +6166,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.2,
         "unit": "%",
+        "n": 2000,
         "asOf": "2026-08-05"
       },
       {
@@ -6105,6 +6175,7 @@
         "name": "SimC nightly Patchwerk DPS",
         "value": 107641,
         "unit": "DPS",
+        "n": 7500,
         "asOf": "2026-08-05"
       },
       {
@@ -6334,8 +6405,9 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4220,
+        "value": 4221,
         "unit": "rating",
+        "n": 50,
         "asOf": "2026-08-05"
       },
       {
@@ -6344,6 +6416,7 @@
         "name": "Top-2000 keys representation",
         "value": 1.5,
         "unit": "%",
+        "n": 2000,
         "asOf": "2026-08-05"
       },
       {
@@ -6352,6 +6425,7 @@
         "name": "SimC nightly Patchwerk DPS",
         "value": 128158,
         "unit": "DPS",
+        "n": 7500,
         "asOf": "2026-08-05"
       },
       {
@@ -6376,9 +6450,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 172179,
+        "value": 176362,
         "unit": "DPS",
-        "n": 25,
+        "n": 29,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -6582,8 +6656,9 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4071,
+        "value": 4070,
         "unit": "rating",
+        "n": 50,
         "asOf": "2026-08-05"
       },
       {
@@ -6592,6 +6667,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.1,
         "unit": "%",
+        "n": 2000,
         "asOf": "2026-08-05"
       },
       {
@@ -6610,6 +6686,7 @@
         "name": "SimC nightly Patchwerk DPS",
         "value": 123529,
         "unit": "DPS",
+        "n": 7500,
         "asOf": "2026-08-05"
       },
       {
@@ -6634,9 +6711,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 174346,
+        "value": 174405,
         "unit": "DPS",
-        "n": 94,
+        "n": 103,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -6822,8 +6899,9 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4108,
+        "value": 4121,
         "unit": "rating",
+        "n": 50,
         "asOf": "2026-08-05"
       },
       {
@@ -6832,6 +6910,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.4,
         "unit": "%",
+        "n": 2000,
         "asOf": "2026-08-05"
       },
       {
@@ -6850,6 +6929,7 @@
         "name": "SimC nightly Patchwerk DPS",
         "value": 126842,
         "unit": "DPS",
+        "n": 7500,
         "asOf": "2026-08-05"
       },
       {
@@ -6874,9 +6954,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 191651,
+        "value": 192627,
         "unit": "DPS",
-        "n": 75,
+        "n": 73,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -6904,9 +6984,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 628486,
+        "value": 624963,
         "unit": "DPS",
-        "n": 123,
+        "n": 129,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -6924,9 +7004,9 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 277584,
+        "value": 278191,
         "unit": "DPS",
-        "n": 800,
+        "n": 797,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -7078,8 +7158,9 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4130,
+        "value": 4131,
         "unit": "rating",
+        "n": 50,
         "asOf": "2026-08-05"
       },
       {
@@ -7088,6 +7169,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.4,
         "unit": "%",
+        "n": 2000,
         "asOf": "2026-08-05"
       },
       {
@@ -7106,6 +7188,7 @@
         "name": "SimC nightly Patchwerk DPS",
         "value": 114790,
         "unit": "DPS",
+        "n": 7500,
         "asOf": "2026-08-05"
       },
       {
@@ -7130,9 +7213,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 176033,
+        "value": 178637,
         "unit": "DPS",
-        "n": 12,
+        "n": 11,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -7160,9 +7243,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 503817,
+        "value": 517111,
         "unit": "DPS",
-        "n": 20,
+        "n": 19,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -7180,9 +7263,9 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 241022,
+        "value": 241255,
         "unit": "DPS",
-        "n": 250,
+        "n": 251,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -7337,6 +7420,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4256,
         "unit": "rating",
+        "n": 50,
         "asOf": "2026-08-05"
       },
       {
@@ -7345,6 +7429,7 @@
         "name": "Top-2000 keys representation",
         "value": 3.1,
         "unit": "%",
+        "n": 2000,
         "asOf": "2026-08-05"
       },
       {
@@ -7494,8 +7579,9 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4027,
+        "value": 4021,
         "unit": "rating",
+        "n": 50,
         "asOf": "2026-08-05"
       },
       {
@@ -7504,6 +7590,7 @@
         "name": "Top-2000 keys representation",
         "value": 0,
         "unit": "%",
+        "n": 2000,
         "asOf": "2026-08-05"
       },
       {
@@ -7522,6 +7609,7 @@
         "name": "SimC nightly Patchwerk DPS",
         "value": 114360,
         "unit": "DPS",
+        "n": 7500,
         "asOf": "2026-08-05"
       },
       {
@@ -7596,9 +7684,9 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 268707,
+        "value": 269081,
         "unit": "DPS",
-        "n": 324,
+        "n": 326,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -7733,8 +7821,9 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4128,
+        "value": 4133,
         "unit": "rating",
+        "n": 50,
         "asOf": "2026-08-05"
       },
       {
@@ -7743,6 +7832,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.5,
         "unit": "%",
+        "n": 2000,
         "asOf": "2026-08-05"
       },
       {
@@ -7761,6 +7851,7 @@
         "name": "SimC nightly Patchwerk DPS",
         "value": 115703,
         "unit": "DPS",
+        "n": 7500,
         "asOf": "2026-08-05"
       },
       {
@@ -7785,9 +7876,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 168984,
+        "value": 169059,
         "unit": "DPS",
-        "n": 24,
+        "n": 23,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -7815,9 +7906,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 488623,
+        "value": 491611,
         "unit": "DPS",
-        "n": 33,
+        "n": 31,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -7835,9 +7926,9 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 251165,
+        "value": 250849,
         "unit": "DPS",
-        "n": 147,
+        "n": 150,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -7972,8 +8063,9 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3903,
+        "value": 3906,
         "unit": "rating",
+        "n": 50,
         "asOf": "2026-08-05"
       },
       {
@@ -7982,6 +8074,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.1,
         "unit": "%",
+        "n": 2000,
         "asOf": "2026-08-05"
       },
       {
@@ -8000,6 +8093,7 @@
         "name": "SimC nightly Patchwerk DPS",
         "value": 114670,
         "unit": "DPS",
+        "n": 7500,
         "asOf": "2026-08-05"
       },
       {
@@ -8074,7 +8168,7 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 258036,
+        "value": 258228,
         "unit": "DPS",
         "n": 159,
         "asOf": "2026-08-05",
@@ -8234,8 +8328,9 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4248,
+        "value": 4254,
         "unit": "rating",
+        "n": 50,
         "asOf": "2026-08-05"
       },
       {
@@ -8244,6 +8339,7 @@
         "name": "Top-2000 keys representation",
         "value": 2.7,
         "unit": "%",
+        "n": 2000,
         "asOf": "2026-08-05"
       },
       {
@@ -8262,6 +8358,7 @@
         "name": "SimC nightly Patchwerk DPS",
         "value": 107448,
         "unit": "DPS",
+        "n": 7500,
         "asOf": "2026-08-05"
       },
       {
@@ -8286,9 +8383,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 193325,
+        "value": 192183,
         "unit": "DPS",
-        "n": 118,
+        "n": 123,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -8316,9 +8413,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 535260,
+        "value": 535809,
         "unit": "DPS",
-        "n": 256,
+        "n": 257,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -8336,7 +8433,7 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 280046,
+        "value": 280469,
         "unit": "DPS",
         "n": 1155,
         "asOf": "2026-08-05",
@@ -8497,8 +8594,9 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4121,
+        "value": 4107,
         "unit": "rating",
+        "n": 50,
         "asOf": "2026-08-05"
       },
       {
@@ -8507,6 +8605,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.1,
         "unit": "%",
+        "n": 2000,
         "asOf": "2026-08-05"
       },
       {
@@ -8525,6 +8624,7 @@
         "name": "SimC nightly Patchwerk DPS",
         "value": 114191,
         "unit": "DPS",
+        "n": 7500,
         "asOf": "2026-08-05"
       },
       {
@@ -8599,9 +8699,9 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 214741,
+        "value": 213814,
         "unit": "DPS",
-        "n": 80,
+        "n": 76,
         "asOf": "2026-08-05",
         "era": "ptr"
       },
@@ -8756,6 +8856,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4000,
         "unit": "rating",
+        "n": 50,
         "asOf": "2026-08-05"
       },
       {
@@ -8764,6 +8865,7 @@
         "name": "Top-2000 keys representation",
         "value": 0,
         "unit": "%",
+        "n": 2000,
         "asOf": "2026-08-05"
       },
       {
