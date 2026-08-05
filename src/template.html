@@ -2223,12 +2223,24 @@ document.addEventListener("click", e => {
   if(!openRowFor(cls, spec)) openSpecFromFinder(cls, spec);
 });
 
-/* The legend starts open on wide screens (the space is free there) and closed on phones,
-   where it cost ~330px directly above the first spec. Only the initial state is set —
-   after that it is the user's toggle to own, so a resize never reopens what they closed. */
+/* The legend REMEMBERS the user's toggle (localStorage, like the watchlist). The width
+   heuristic — open on wide screens, closed on phones where it cost ~330px above the
+   first spec — now applies only to first-time visitors with nothing stored. Persist
+   only real changes from the boot state, so the default itself is never written and a
+   first phone visit doesn't freeze "closed" onto a later maximized window. */
 (function(){
   const lw = document.getElementById('legendwrap');
-  if(lw) lw.open = window.matchMedia('(min-width:760px)').matches;
+  if(!lw) return;
+  let stored = null;
+  try { stored = localStorage.getItem('wct-legend'); } catch {}
+  lw.open = stored != null ? stored === 'open'
+    : window.matchMedia('(min-width:760px)').matches;
+  let last = lw.open; // boot state — the toggle handler persists only real changes
+  lw.addEventListener('toggle', () => {
+    if (lw.open === last) return;
+    last = lw.open;
+    try { localStorage.setItem('wct-legend', lw.open ? 'open' : 'closed'); } catch {}
+  });
 })();
 
 /* ---------- boot: apply the deep link, sync widgets to state, first render ---------- */
