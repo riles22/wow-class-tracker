@@ -11,7 +11,8 @@ on push to `master`; the file also still opens directly in a browser.
 - `npm test` — schema validation + unit tests + build smoke test
 - `npm run build` — data + template → `dist/index.html`
 - `npm run validate` — data checks only
-- `npm run serve` — preview `dist/index.html` at http://localhost:8317
+- `npm run serve` — preview `dist/` at http://localhost:8317 (serves both published
+  pages: `/` → index.html, `/gearing.html` → the gearing explorer)
 - `node src/check-refresh.mjs --manifest|--age` — refresh integrity gates (nightly
   publish contract / staleness heartbeat) against `data/required-sources.json`
 
@@ -199,9 +200,31 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   already computed within (role, bracket, name), so "WCL median" resolves to rDPS / tank
   rDPS / HPS by the row's role. Two absences render differently and must stay that way:
   `·` = no such measurement exists for that role, `—` = it exists but has not landed.
-  Covered by six UI invariants. All three overlays (Finder / Ladder / Compare all)
+  Covered by six UI invariants. The overlays (Ladder / Compare / Compare all)
   deep-link via `view=` + short per-overlay params since the 2026-08-03 UI/UX pass;
   exploration state (search text, column filters) deliberately stays out of the URL.
+  A `view=` naming an overlay that no longer exists is an inert no-op — the param is
+  dropped and the rest of the link still applies (verified when the Finder was removed).
+- **Touch legibility** (2026-08-05, from external mobile feedback): `title` does not
+  exist on a phone, and **262 of the page's 288 tooltips sit inside the grid** — so every
+  hover-only explanation is invisible on touch. Two consequences were fixed and both must
+  be preserved: (a) the 0–100 Overall score is explained in VISIBLE text directly above
+  the grid (a tester read the column as arbitrary; the honest answer is that 100 = every
+  source's top tier and the consensus letter turns S at 88, so "100 = S" is wrong); and
+  (b) `.head` is `display:none` under 760px, which meant the column qualifiers ("12.0.7" /
+  "12.1 forecast" / "<boss> · Archon") — added precisely so a screenshot cannot
+  misattribute the letters — were invisible on mobile. `fightHead` now also returns a bare
+  `qual`, threaded into `rowHTML` as `quals` and rendered in the mobile-only `.mtag`.
+  **Any new explanatory `title=` in the grid needs a visible counterpart or it does not
+  exist for half the audience.**
+- **Site tabs** (2026-08-05): the masthead ends in a two-tab strip — **Spec Tracker**
+  (`index.html`) and **⚙ S2 Gearing** (`gearing.html`) — mirrored at the head of the
+  gearing page, which lost its old one-way `.backlink`. Gearing used to be a fourth CTA
+  button in the controls row, which read as a tool *inside* the tracker rather than the
+  separate page it is. Consequences to keep in mind: `src/serve.mjs` now routes an
+  allowlisted page set instead of always serving `index.html` (otherwise the tab is a
+  local no-op), and the injection UI invariant's relative-href allowlist is exactly
+  `index.html` + `gearing.html` — any other relative href is still a finding.
 - **Fight view**: `data/encounter-tiers.json` holds Archon per-boss (throughput) and
   per-dungeon (score) tiers — single-source by design, labeled as Archon in the UI; the
   Fight selector swaps the matching tier column. Refresh alongside the tier lists.
@@ -216,12 +239,14 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   `survivability` key) — shown in the drawer's Source ratings box.
 - `spec.playstyle` = `{ range: "Melee"|"Ranged", mobility: 1-5, utility: 1-5, complexity: 1-5, notes }`,
   guide-sourced (Icy Veins strengths/weaknesses + difficulty ratings); merge via
-  apply-metrics.mjs `playstyle` key (or `complexity` key to merge just that field). Feeds
-  the **Spec Finder** — a client-side weighted-scoring quiz (template.html,
-  presentation-only, no build step) that ranks all 40 specs against user preferences
-  (role, content, meta-vs-vibes, fight type, melee/ranged, mobility/survivability/
-  utility/12.1-outlook) using existing data + playstyle. Criteria with no data are
-  skipped and weights renormalized, so it degrades gracefully.
+  apply-metrics.mjs `playstyle` key (or `complexity` key to merge just that field).
+  Surfaced in the **Compare** overlay's Mobility / Utility / Complexity rows.
+  It used to feed the **Spec Finder**, a weighted-scoring quiz over the whole roster —
+  **removed 2026-08-05** (Riley) along with its CSS, its 281-line IIFE and its
+  `view=finder` deep link. `.fopt`/`.fopts` and the `.finder-*` overlay shell survive it:
+  The Ladder's series picker uses the former, every modal on the page uses the latter, so
+  the names are legacy rather than dead code. Keep harvesting playstyle — Compare reads
+  it — but there is no longer a quiz to feed, and `docs/finder-audit.md` is history now.
 
 ### `data/sources.json` — source registry
 Kinds: `tier-list` (toggle button + consensus; needs `scale`), `metrics` (numbers in
@@ -252,6 +277,11 @@ legitimate host fails the run red and is added there as a reviewed code edit).
 Each scale maps tiers onto one 0–100 axis; consensus = mean of available tier-list scores
 mapped through `consensus.bands`, divergence dot when spread ≥ `spreadThreshold`.
 Adding a tier-list source = config edit here + registry entry + backfill. No code changes.
+**`consensus.bands` is mirrored in prose in two places in `template.html`** (2026-08-05):
+the always-visible note above the grid ("S from 88 up") and the legend's full band line.
+Editing the bands means editing both — a visitor reading a stale threshold off the page
+is the same misattribution problem the column qualifiers exist to prevent. Adding a
+*source* still needs no code change; only moving the BANDS does.
 
 ### `data/ptr-builds.json` — 12.1 PTR build feed (newest first)
 Per build: `{ date, label, forumPostNumber, forumUrl, wowheadUrl, icyveinsUrl,
@@ -406,9 +436,15 @@ src/      build.mjs · template.html · render.mjs · normalize.mjs · validate.
           wcl-probe.mjs (dispatch-only WCL/diagnostic probe, no standing role)
 test/     normalize · validate · render · build · apply-metrics · apply-ratings ·
           check-refresh · community-overrides · digest · fetch-transcripts · fetch-wcl ·
-          fetch-published
-dist/     index.html  (generated — open directly in a browser)
-docs/     working notes (finder-audit.md · security-audit-2026-07.md ·
+          fetch-published · ui-invariants (the ONLY tests that execute template.html's
+          client JS — they need Playwright, which is deliberately not a dependency, so
+          `npm test` SKIPS all 21 locally and CI runs them in its own job. After any
+          template.html change, run them for real:
+          `npm i --no-save playwright@1.61.1 && npx playwright install chromium && npm test`)
+dist/     index.html + gearing.html  (generated — open directly in a browser; the two
+          pages the site publishes, linked to each other by the masthead tab strip)
+docs/     working notes (finder-audit.md — HISTORY, the Spec Finder was removed
+          2026-08-05 · security-audit-2026-07.md ·
           cloud-routine.md · portfolio-audit-2026-07-18.md · audit-2026-07-23.md ·
           audit-2026-07-24.md — audit dispositions. Read the NEWEST audit before
           proposing work: its "Still open" and "Leave alone" sections record what has

@@ -29,14 +29,23 @@ code{font-family:ui-monospace,"JetBrains Mono",monospace;font-size:.92em;color:v
   background:#fff;color:#07101a;padding:10px 14px;border-radius:8px;font-weight:800}
 .skip-link:focus{transform:none}
 header{display:flex;align-items:center;justify-content:space-between;gap:28px;
-       padding-bottom:24px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+       padding-bottom:20px;flex-wrap:wrap}
 .kick{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--t3);font-weight:700}
-.backlink{display:inline-flex;align-items:center;gap:9px;text-decoration:none;color:var(--t2);
-  font-size:12px;letter-spacing:2.5px;text-transform:uppercase;font-weight:700}
-.backlink .brandmark{width:26px;height:26px;flex:none}
-.backlink:hover{color:var(--t1)}
-.backlink .backhint{letter-spacing:.4px;text-transform:none;font-weight:600;color:var(--t3)}
-.backlink:hover .backhint{color:var(--accent-2)}
+/* Top-level tabs between the two pages this project publishes. Mirrors the Spec
+   Tracker's .sitetabs strip (2026-08-05) so the pair reads as one site with two tabs
+   rather than a tracker with a gearing link bolted into its toolbar. The strip carries
+   the header's old border-bottom — it IS the boundary between chrome and content. */
+.sitetabs{display:flex;gap:4px;margin:0 0 26px;border-bottom:1px solid var(--line)}
+.sitetab{font-size:13.5px;font-weight:600;text-decoration:none;color:var(--t3);
+  border:1px solid transparent;border-bottom:0;border-radius:9px 9px 0 0;
+  padding:9px 16px 10px;display:inline-flex;align-items:center;gap:7px;white-space:nowrap;
+  transition:color .15s,background .15s}
+.sitetab:hover{color:var(--t1);background:rgba(181,123,238,.10)}
+.sitetab[aria-current="page"]{color:var(--t1);background:var(--panel);
+  border-color:var(--line);box-shadow:inset 0 2px 0 var(--accent)}
+.sitetab:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+@media(pointer:coarse){.sitetab{min-height:44px}}
+@media(max-width:560px){.sitetab{font-size:12.5px;padding:9px 12px 10px}}
 .patchchip{font-family:ui-monospace,"JetBrains Mono",monospace;font-size:11px;font-weight:700;
   letter-spacing:.08em;color:var(--gold);border:1px solid rgba(240,194,75,.4);
   border-radius:6px;padding:5px 9px;white-space:nowrap}
@@ -252,7 +261,6 @@ table.paths tr:hover td{background:rgba(255,255,255,.03)}
 <div class="wrap">
   <header>
     <div>
-      <a class="backlink" href="index.html" title="Back to the Spec Tracker — tier consensus, rankings and the 12.1 forecast"><svg class="brandmark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#130B22" stroke="#B57BEE" stroke-opacity=".45" stroke-width="2.5"/><rect x="12" y="13" width="40" height="9" rx="4.5" fill="#F0C24B"/><rect x="12" y="27.5" width="29" height="9" rx="4.5" fill="#C77DFF"/><rect x="12" y="42" width="19" height="9" rx="4.5" fill="#6AA8F0"/></svg><span>Spec Tracker</span><span class="backhint">&larr; tiers &amp; rankings</span></a>
       <h1>Season 2 Gearing</h1>
       <div class="sub">Pick your spec to see what to chase and where it drops
         &middot; season max <b>344</b> &middot; season opens <b>Aug 18, 2026</b></div>
@@ -263,6 +271,11 @@ table.paths tr:hover td{background:rgba(255,255,255,.03)}
       <span class="pill"><b id="p-specs">0</b> specs</span>
     </div>
   </header>
+
+  <nav class="sitetabs" aria-label="Sections">
+    <a class="sitetab" href="index.html" title="Spec Tracker — tier consensus, rankings and the 12.1 forecast">📊 Spec Tracker</a>
+    <a class="sitetab" href="gearing.html" aria-current="page">⚙ S2 Gearing</a>
+  </nav>
 
   <section class="setup-card" aria-label="Character and scoring setup">
     <div class="setup-grid">

@@ -522,10 +522,13 @@ test("no agent-writable field can inject markup or a handler into the rendered p
           // shape, not data: URIs generally: a data: href on an <a> is still a finding.
           .filter(e => !(e.tagName === "LINK" && e.rel === "icon" &&
             /^data:image\/svg\+xml,/.test(e.getAttribute("href") ?? "")))
-          // gearing.html is the ONE sanctioned relative href — the sibling page this
-          // build publishes next to index.html. Exact match; any other relative href
-          // (or a path prefix smuggled around it) is still a finding.
-          .filter(e => e.getAttribute("href") !== "gearing.html")
+          // The pages this build publishes are the ONLY sanctioned relative hrefs. Both
+          // appear because the masthead tab strip links the pair in both directions
+          // (2026-08-05) — index.html is the tracker's own tab, gearing.html its sibling.
+          // Hand-authored template markup, never an agent-writable field. EXACT match on
+          // the full attribute; any other relative href, or a path prefix smuggled around
+          // one of these, is still a finding.
+          .filter(e => !["index.html", "gearing.html"].includes(e.getAttribute("href")))
           .filter(e => !/^(https:|#|$)/.test(e.getAttribute("href") ?? "")).length,
         markVisible: document.body.innerText.includes(mark),
         // Count the sinks the probe actually reached. A poisoned field whose section never
@@ -811,4 +814,53 @@ ui("the legend remembers the user's toggle across reloads — and only the user'
   await page.reload();
   await page.waitForFunction(() => document.querySelectorAll(".row").length > 0);
   assert.equal(await page.$eval("#legendwrap", el => el.open), true, "…and reopened survives too");
+});
+
+ui("motion marks real entrances, not persistent open state, and respects reduced motion", async page => {
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  await page.reload();
+  await page.waitForFunction(() => document.querySelectorAll(".row").length > 0);
+
+  // Opening the Ladder animates its shell and its bars together.
+  await page.evaluate(() => document.getElementById("ladderbtn").click());
+  const opening = await page.evaluate(() => ({
+    overlayClass: document.getElementById("ladder-ov").classList.contains("motion-enter"),
+    chartClass: document.getElementById("ladder-chart").classList.contains("motion-enter"),
+    panelAnimation: getComputedStyle(document.querySelector("#ladder-ov .finder-panel")).animationName,
+    barAnimation: getComputedStyle(document.querySelector("#ladder-chart .ladderbar")).animationName,
+  }));
+  assert.deepEqual(opening, {
+    overlayClass: true, chartClass: true, panelAnimation: "ov-rise", barAnimation: "bar-grow",
+  });
+
+  // A series swap should animate the new chart, never replay the whole open panel.
+  await page.waitForTimeout(500);
+  await page.click('.lgrp .fopt[aria-pressed="false"]');
+  const swapped = await page.evaluate(() => ({
+    overlayClass: document.getElementById("ladder-ov").classList.contains("motion-enter"),
+    chartClass: document.getElementById("ladder-chart").classList.contains("motion-enter"),
+    panelAnimation: getComputedStyle(document.querySelector("#ladder-ov .finder-panel")).animationName,
+    barAnimation: getComputedStyle(document.querySelector("#ladder-chart .ladderbar")).animationName,
+  }));
+  assert.deepEqual(swapped, {
+    overlayClass: false, chartClass: true, panelAnimation: "none", barAnimation: "bar-grow",
+  });
+
+  // The same interactions become immediate when the OS asks for less motion.
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.reload();
+  await page.waitForFunction(() => document.querySelectorAll(".row").length > 0);
+  await page.evaluate(() => document.getElementById("ladderbtn").click());
+  const reduced = await page.evaluate(() => ({
+    overlayClass: document.getElementById("ladder-ov").classList.contains("motion-enter"),
+    chartClass: document.getElementById("ladder-chart").classList.contains("motion-enter"),
+    panelAnimation: getComputedStyle(document.querySelector("#ladder-ov .finder-panel")).animationName,
+    barAnimation: getComputedStyle(document.querySelector("#ladder-chart .ladderbar")).animationName,
+    switchTransition: getComputedStyle(document.querySelector(".switch")).transitionDuration,
+    starfield: getComputedStyle(document.getElementById("stars")).display,
+  }));
+  assert.deepEqual(reduced, {
+    overlayClass: false, chartClass: false, panelAnimation: "none", barAnimation: "none",
+    switchTransition: "0s", starfield: "none",
+  });
 });

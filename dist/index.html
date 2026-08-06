@@ -11,7 +11,7 @@
 -->
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-mowJJp3fH5ufdLSvXCfUSKvijrZJkep3h67FZLfEpZw='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src data:; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-9/wHGKlxNByOl8k+P2xBdCFfecuTXvovGJfZtOUejr0='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src data:; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="riles22">
 <title>Spec Tracker — WoW multi-source spec consensus</title>
@@ -46,6 +46,8 @@
     --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
     --disp:'Cinzel',Georgia,'Times New Roman',serif;
     --body:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+    --motion-fast:.12s; --motion-ui:.18s; --motion-surface:.26s;
+    --ease-out:cubic-bezier(.22,1,.36,1);
   }
 
   *{box-sizing:border-box}
@@ -103,6 +105,34 @@
     margin-top:14px; display:flex; gap:8px 18px; flex-wrap:wrap
   }
   .stamp b{color:var(--ink-dim); font-weight:500}
+
+  /* ---------- site tabs ----------
+     Top-level navigation between the two artifacts this project publishes: the Spec
+     Tracker (index.html) and the Season 2 gearing explorer (gearing.html). Gearing used
+     to sit in the controls row as a fourth CTA button, which read as a tool INSIDE the
+     tracker rather than the separate page it is. Sits at the foot of the masthead so the
+     strip is the boundary between site chrome and the panel it selects, tab-style.
+     Two pages, so these are links, not buttons — the current one is aria-current. */
+  .sitetabs{
+    display:flex; gap:4px; margin:18px 0 -26px; padding:0;
+    border-bottom:1px solid var(--edge); position:relative; z-index:1
+  }
+  .sitetab{
+    font-family:var(--body); font-size:13.5px; font-weight:600; text-decoration:none;
+    color:var(--ink-faint); background:transparent;
+    border:1px solid transparent; border-bottom:0;
+    border-radius:9px 9px 0 0; padding:9px 16px 10px;
+    display:inline-flex; align-items:center; gap:7px; white-space:nowrap;
+    transition:color .15s, background .15s
+  }
+  .sitetab:hover{color:var(--ink); background:color-mix(in srgb,var(--accent) 10%,transparent)}
+  .sitetab[aria-current="page"]{
+    color:var(--ink); background:var(--bg-2);
+    border-color:var(--edge); box-shadow:inset 0 2px 0 var(--accent)
+  }
+  .sitetab:focus-visible{outline:2px solid var(--accent-2); outline-offset:2px}
+  @media(pointer:coarse){ .sitetab{min-height:44px} }
+  @media(max-width:560px){ .sitetab{font-size:12.5px; padding:9px 12px 10px} }
 
   /* ---------- controls ---------- */
   .controls{
@@ -393,9 +423,22 @@
      40 rows and re-parses each open drawer; measured at 4x CPU throttle this took it from
      125ms -> 33ms with nothing open and 1,580ms -> 421ms with all 40 drawers open, with
      pixel-identical output (audit 2026-07-24, P1). contain-intrinsic-size holds the
-     scrollbar steady at the measured row heights (67px desktop / 182px card layout). */
+     scrollbar steady at the measured row heights.
+     contain-intrinsic-size sets the CONTENT box, so the on-screen row is this + 19px
+     desktop / 27px card of padding+border. Measure it by forcing content-visibility:
+     visible on every .row — an unpainted row reports the placeholder back at you, which
+     is how the old values survived a spot check.
+     Re-measured 2026-08-05 (mobile report of specs missing under the DPS filter): rows
+     are really 38px desktop / 93px card (mobile range 93-122px as the spec name wraps),
+     against placeholders of 44px and 150px. The card figure over-estimated by ~56px per
+     row: a 27-spec DPS filter claimed 4,779px of list against 3,371px of real content,
+     so ~1,408px — about 12 rows — of the scroll range was phantom. Over-estimating is
+     the harmful direction here: rows paint as you scroll, the document SHRINKS under
+     you, and the browser clamps scrollY to the new smaller maximum, skipping rows the
+     reader never saw. Under-estimating just grows the page, which scroll anchoring
+     absorbs. Track the real heights; if in doubt, err low. */
   .row{border-bottom:1px solid var(--edge); transition:background .12s;
-       content-visibility:auto; contain-intrinsic-size:auto 44px}
+       content-visibility:auto; contain-intrinsic-size:auto 38px}
   .row:last-child{border-bottom:0}
   .row.clickable{cursor:pointer}
   .row.clickable:hover{background:var(--bg-3)}
@@ -506,7 +549,7 @@
     .row{
       grid-template-columns:auto 1fr auto; grid-auto-rows:min-content;
       row-gap:9px; padding:13px 15px;
-      contain-intrinsic-size:auto 150px /* card layout: rank+name / overall bar / chips */
+      contain-intrinsic-size:auto 93px /* card layout: rank+name / overall bar / chips — measured, see .row above */
     }
     .rank{grid-column:1; grid-row:1; align-self:center}
     .spec-name{grid-column:2; grid-row:1; flex-wrap:wrap}
@@ -514,6 +557,8 @@
     .ovcell{grid-column:1/-1; grid-row:2}
     .metaline{grid-column:1/-1; grid-row:3; display:flex; gap:8px; align-items:center; flex-wrap:wrap}
     .metaline .mtag{display:inline; font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-faint)}
+    /* the patch/fight attribution the hidden .head would otherwise have carried */
+    .metaline .mqual{font-style:normal; letter-spacing:.02em; text-transform:none; opacity:.75}
   }
   /* Desktop: the header row already labels the two tier columns, so the inline
      Raid/M+ labels are hidden — with display:contents the row must contribute
@@ -536,9 +581,6 @@
     display:inline-flex; align-items:center; gap:7px; text-decoration:none
   }
   .finderbtn:hover{border-color:var(--accent); filter:none}
-  .toolmark{display:inline-flex; line-height:0; border-radius:6px; flex:none}
-  .toolmark svg{width:22px; height:22px}
-  .toolmark:focus-visible{outline:2px solid var(--accent-2); outline-offset:2px}
   .controls-sub{margin-top:2px}
   .toolstatus{font-family:var(--mono); font-size:11px; color:var(--ink-faint); white-space:normal; text-align:right; min-width:0}
   .lagchip{font-family:var(--mono); font-size:10px; color:var(--gold); border:1px solid color-mix(in srgb,var(--gold) 40%,transparent); border-radius:5px; padding:1px 6px; margin-left:8px; white-space:nowrap}
@@ -552,22 +594,28 @@
   /* ---------- motion (2026-08-05, Riley: "cool menu animations") ----------
      One vocabulary for every opening surface, all compositor-friendly (opacity/
      transform only, except the details fold), all killed by prefers-reduced-motion.
-     display:none → .open re-triggers keyframes natively, so the three overlay menus
-     (Finder / Ladder / Compare all share .finder-ov) animate with zero JS. */
+     A transient .motion-enter class scopes entrances to real opens/content swaps. The
+     Ladder / Compare / Compare all overlays share .finder-ov, and the
+     .finder-* names are the Spec Finder's legacy — it was removed 2026-08-05, but the
+     overlay shell it introduced still dresses every modal on the page. */
   @keyframes ov-fade{from{opacity:0}}
-  @keyframes ov-rise{from{opacity:0; transform:translateY(16px) scale(.98)}}
+  @keyframes ov-rise{from{opacity:0; transform:translateY(12px) scale(.985)}}
   @keyframes d-rise{from{opacity:0; transform:translateY(6px)}}
-  .finder-ov.open{animation:ov-fade .16s ease-out}
-  .finder-ov.open .finder-panel{animation:ov-rise .26s cubic-bezier(.22,1,.36,1)}
+  @keyframes bar-grow{from{opacity:.4; transform:scaleX(0)}}
+  /* .open is persistent state; .motion-enter is a short-lived cue added only when a
+     surface actually opens. Keeping them separate prevents a panel/drawer entrance from
+     replaying when its live contents are rebuilt by a filter or sort. */
+  .finder-ov.open.motion-enter{animation:ov-fade var(--motion-ui) ease-out}
+  .finder-ov.open.motion-enter .finder-panel{animation:ov-rise var(--motion-surface) var(--ease-out)}
   /* drawer CONTENT rises with the shell's existing max-height ease */
-  .row.open .drawer-in{animation:d-rise .24s ease-out}
+  .row.open.motion-enter .drawer-in{animation:d-rise var(--motion-surface) ease-out}
   /* tactile buttons: hover lift on the CTAs, press squish everywhere */
   .finderbtn{transition:border-color .15s,box-shadow .2s,transform .15s}
   .finderbtn:hover{transform:translateY(-1px); box-shadow:0 4px 18px color-mix(in srgb,var(--accent) 28%,transparent)}
   .finderbtn:active{transform:translateY(0) scale(.97); box-shadow:none}
   .seg button{transition:background .15s,color .15s,transform .09s}
   .seg button:active{transform:scale(.94)}
-  .fopt:active,.fres:active,.toggle:active{transform:scale(.98)}
+  .fopt:active,.toggle:active{transform:scale(.98)}
   /* the legend (and "How to read it") folds smoothly where ::details-content +
      interpolate-size exist (Chromium 129+); everywhere else it snaps exactly as before */
   .legend-wrap,.sub-more{interpolate-size:allow-keywords}
@@ -585,20 +633,20 @@
   .finder-head p{margin:5px 0 0; color:var(--ink-dim); font-size:13px; max-width:56ch}
   .finder-x{background:var(--bg-3); border:1px solid var(--edge-2); color:var(--ink-dim); border-radius:8px; width:32px; height:32px; cursor:pointer; font-size:16px; flex:none}
   .finder-x:hover{color:var(--ink)}
-  .fq{margin-top:18px}
-  .fq > .lbl{margin:0 0 8px; display:block}
-  .fq .hint{color:var(--ink-faint); text-transform:none; letter-spacing:0; font-family:var(--body); font-size:11px}
+  /* .fopts/.fopt outlived the Spec Finder they were built for — The Ladder's series
+     picker uses them. Everything else finder-shaped was removed with it (2026-08-05). */
   .fopts{display:flex; gap:8px; flex-wrap:wrap}
   .fopt{
     font-family:var(--body); font-size:13px; color:var(--ink-dim); cursor:pointer;
-    background:var(--bg-3); border:1px solid var(--edge-2); border-radius:9px; padding:8px 13px; transition:.12s
+    background:var(--bg-3); border:1px solid var(--edge-2); border-radius:9px; padding:8px 13px;
+    transition:background var(--motion-fast),border-color var(--motion-fast),color var(--motion-fast),transform var(--motion-fast)
   }
   .fopt:hover{color:var(--ink); border-color:var(--accent)}
   .fopt[aria-pressed="true"]{background:color-mix(in srgb,var(--accent) 22%,transparent); border-color:var(--accent); color:#fff}
   .fopt:disabled{opacity:.6; cursor:not-allowed; color:var(--ink-dim)}
   .fopt:disabled:hover{color:var(--ink-dim); border-color:var(--edge-2)}
   /* focus-visible coverage on every interactive element */
-  .search:focus-visible, .sortsel:focus-visible, .fopt:focus-visible, .finder-x:focus-visible, .fres:focus-visible{outline:2px solid var(--accent-2); outline-offset:2px}
+  .search:focus-visible, .sortsel:focus-visible, .fopt:focus-visible, .finder-x:focus-visible{outline:2px solid var(--accent-2); outline-offset:2px}
   /* active (non-default) filter/sort cue on selects + search */
   .sortsel.engaged, .search.engaged{border-color:var(--accent); box-shadow:inset 3px 0 0 var(--accent)}
   /* coarse-pointer (touch) targets — desktop density unchanged */
@@ -607,24 +655,6 @@
     .toggle{min-height:44px}
     .finder-x{width:40px; height:40px}
   }
-  .finder-go{margin-top:22px; display:flex; gap:12px; align-items:center; flex-wrap:wrap}
-  .finder-note{color:var(--ink-faint); font-size:11px; max-width:44ch}
-  .fresults{margin-top:20px; display:flex; flex-direction:column; gap:10px}
-  .fres{
-    display:grid; grid-template-columns:26px 1fr auto; gap:12px; align-items:center;
-    background:var(--bg); border:1px solid var(--edge); border-radius:11px; padding:11px 14px; cursor:pointer; transition:.12s
-  }
-  .fres:hover{border-color:var(--accent-2)}
-  .fres .frank{font-family:var(--disp); font-size:19px; color:var(--ink-faint); text-align:center}
-  .fres .fname{font-weight:700; color:var(--ink)}
-  .fres .fname .fcls{font-family:var(--mono); font-size:12px; margin-left:8px}
-  .fres .frole{font-family:var(--mono); font-size:11px; letter-spacing:.08em; color:var(--ink-faint)}
-  .fwhy{display:flex; gap:6px; flex-wrap:wrap; margin-top:6px}
-  .fwhy .wchip{font-family:var(--mono); font-size:11px; padding:2px 7px; border-radius:5px; border:1px solid var(--edge-2); color:var(--accent-2)}
-  .fscore{text-align:right; min-width:74px}
-  .fscore .fpct{font-family:var(--mono); font-weight:700; font-size:15px; color:var(--accent)}
-  .fmeter{height:5px; border-radius:5px; background:var(--bg-3); overflow:hidden; margin-top:4px}
-  .fmeter > span{display:block; height:100%; background:linear-gradient(90deg,var(--accent),var(--accent-2))}
 
   /* Compare all — the full-roster matrix (overlay reuses the Spec Finder shell).
      Wider than the other overlays by necessity: ~12 columns against 40 rows. Rows are
@@ -681,6 +711,13 @@
   .laddernum{font-family:var(--mono); font-size:10px; fill:var(--accent-2)}
   .ladderval{font-family:var(--mono); font-size:12px; fill:var(--ink)}
   .ladderbar{transition:width .4s ease}
+  /* The reference menu staggers its items for almost a second. Ladder bars borrow that
+     hierarchy cue at tracker speed: 20ms steps, capped after the first eight rows. */
+  #ladder-chart.motion-enter .ladderbar{
+    transform-box:fill-box; transform-origin:left center;
+    animation:bar-grow .32s var(--ease-out) both;
+    animation-delay:calc(var(--enter-i) * 20ms)
+  }
   .ladderrow{cursor:pointer}
   .ladderrow:hover .ladderbar{filter:brightness(1.18)}
   .ladderrow:focus-visible{outline:none}
@@ -692,13 +729,14 @@
 
   @media(prefers-reduced-motion:reduce){
     .rule{animation:none}
-    .drawer,.chev,.row{transition:none}
-    .ladderbar{transition:none}
+    .drawer,.chev,.row,.ladderbar,.switch,.switch::after,.search,
+    .legend-wrap > summary::before,.rowbar > i,.starbtn,.utilbar button{transition:none}
     .starfield{display:none}
-    .finder-ov.open,.finder-ov.open .finder-panel,.row.open .drawer-in{animation:none}
+    .finder-ov.open.motion-enter,.finder-ov.open.motion-enter .finder-panel,
+    .row.open.motion-enter .drawer-in,#ladder-chart.motion-enter .ladderbar{animation:none}
     .legend-wrap::details-content,.sub-more::details-content{transition:none}
-    .seg button,.finderbtn,.fopt,.fres,.toggle{transition:none; transform:none}
-    .finderbtn:hover,.finderbtn:active,.seg button:active,.fopt:active,.fres:active,.toggle:active{transform:none; box-shadow:none}
+    .seg button,.finderbtn,.fopt,.toggle,.sitetab{transition:none; transform:none}
+    .finderbtn:hover,.finderbtn:active,.seg button:active,.fopt:active,.toggle:active{transform:none; box-shadow:none}
   }
 </style>
 </head>
@@ -712,19 +750,22 @@
     <div class="rule"></div>
     <!-- One sentence of lede; the mental model folds. This paragraph ran five lines and
          was ~40% of a 329px masthead sitting directly above a page people check daily. -->
-    <div class="sub">Where every spec of <b>WoW: Midnight</b> stands — every major tier list distilled into one consensus, layered with live numbers, sim profiles, and per-spec PTR reads. <details class="sub-more"><summary>How to read it</summary><span id="tlcount">Several</span> tier lists feed a computed <b>consensus</b>, with a <b>±</b> marker where they disagree — flip between them with <b>View</b>, or pick <b>Ours: 12.1&nbsp;✦</b> for this site's own Season-2 forecast (a projection, never a source). Filter by era or a specific fight, and click <b>any row</b> for the full read: PTR changes, current numbers with ranks, sim fight profile, and community takes. Three tools up top: <b>🧭 Find my spec</b> ranks all 40 against what you want to play, <b>📊 The Ladder</b> draws any measured ranking as a chart, and <b>⊞ Compare all</b> is the whole roster against every rating and rank on one screen.</details></div>
+    <div class="sub">Where every spec of <b>WoW: Midnight</b> stands — <b>not one site's opinion</b>, but every major tier list distilled into a single consensus with a <b>±</b> wherever they disagree, layered with live numbers, sim profiles, and per-spec PTR reads. <details class="sub-more"><summary>How to read it</summary><span id="tlcount">Several</span> tier lists feed a computed <b>consensus</b>, with a <b>±</b> marker where they disagree — flip between them with <b>View</b>, or pick <b>Ours: 12.1&nbsp;✦</b> for this site's own Season-2 forecast (a projection, never a source). Filter by era or a specific fight, and click <b>any row</b> for the full read: PTR changes, current numbers with ranks, sim fight profile, and community takes. Two tools up top: <b>📊 The Ladder</b> draws any measured ranking as a chart, and <b>⊞ Compare all</b> is the whole roster against every rating and rank on one screen. The <b>⚙ S2 Gearing</b> tab is a separate explorer for Season-2 gear and loot sources.</details></div>
     <div class="stamp">
       <span><b>Baseline:</b> 12.0.7 / Season 1</span>
       <span><b>PTR:</b> 12.1 “Curse of Ula'tek”</span>
       <span id="stamp-snapshot"></span>
     </div>
+    <nav class="sitetabs" aria-label="Sections">
+      <a class="sitetab" href="index.html" aria-current="page">📊 Spec Tracker</a>
+      <a class="sitetab" href="gearing.html" title="Season 2 gearing — best-per-slot, loot sources, item-level ladder, SimC upgrade check">⚙ S2 Gearing</a>
+    </nav>
   </div>
 </header>
 <div id="datahealth" class="datahealth" hidden></div>
 
 <div class="controls">
   <div class="controls-row">
-    <a class="toolmark" id="brandhome2" href="#" title="Back to the default view" aria-label="Home"><svg viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#130B22" stroke="#B57BEE" stroke-opacity=".45" stroke-width="2.5"/><rect x="12" y="13" width="40" height="9" rx="4.5" fill="#F0C24B"/><rect x="12" y="27.5" width="29" height="9" rx="4.5" fill="#C77DFF"/><rect x="12" y="42" width="19" height="9" rx="4.5" fill="#6AA8F0"/></svg></a>
     <div class="seg" id="srcseg" role="group" aria-label="Which ratings the tier columns show"></div>
     <div class="seg" id="eraseg" role="group" aria-label="Era" title="Filters verdicts, writeups, era-tagged numbers and creator takes. It does not change the tier columns — those follow the View picker.">
       <button data-era="both" aria-pressed="true">Both</button>
@@ -762,10 +803,8 @@
     <span class="grow"></span>
     <div class="ctl ctl-ctas"><!-- the overlay CTAs — wrap allowed: a no-break rule
          pushes the last one off a phone screen entirely -->
-      <button class="finderbtn" id="finderbtn" type="button">🧭 Find my spec</button>
       <button class="finderbtn" id="ladderbtn" type="button">📊 The Ladder</button>
       <button class="finderbtn" id="allbtn" type="button">⊞ Compare all</button>
-      <a class="finderbtn" href="gearing.html" title="Season 2 gearing — best-per-slot, loot sources, item-level ladder, SimC upgrade check">⚙ S2 Gearing</a>
     </div>
   </div>
   <div class="controls-row controls-sub">
@@ -800,6 +839,8 @@
       <span class="lbl" style="margin:0">Tiers</span>
       <span class="grp" id="tierlegend" style="gap:6px"></span>
       <span class="li"><span class="divmark">±</span><span>sources diverge (consensus)</span></span>
+      <!-- the bands the always-visible note above the grid deliberately omits -->
+      <span class="li"><span>consensus score → letter: <b>S</b> 88+ · <b>A+</b> 74 · <b>A</b> 58 · <b>B</b> 40 · <b>C</b> below</span></span>
       <span class="li"><span class="conf" data-c="high" style="margin:0">●●●</span><span class="conf" data-c="low" style="margin:0">●○○</span><span>evidence behind our 12.1 forecast — three dots means every obtainable PTR signal is present, one means it mostly reflects the 12.0.7 baseline</span></span>
       <span class="lsep" aria-hidden="true"></span>
       <span class="li"><span class="mv" data-d="up" style="margin:0">▲</span><span class="mv" data-d="down" style="margin:0">▼</span><span>tier / rank moved since the last data change (hover for from-when)</span></span>
@@ -820,7 +861,16 @@
   </div>
   </details>
 
-  <span class="note standalone"><span class="count" id="count"></span> · Tiers are <b>within role</b> — a healer's S is best among healers, not across the whole game.</span>
+  <!-- What the 0–100 column means, in VISIBLE text. It was explained only in a `title` on
+       the cell, and `title` does not exist on touch: 262 of this page's 288 tooltips sit
+       inside the grid, and the sole visible "0–100" caption was ~3,900px further down.
+       A tester read the column as arbitrary and guessed 100 = S — close but wrong, S
+       starts at 88 (mobile feedback, 2026-08-05). Kept to ONE block with the within-role
+       note: this sits directly above the grid on a page that already spends two phone
+       screens before the first spec, so the explanation has to earn every line. The full
+       band table lives in the legend; the number a reader is staring at lives here.
+       Keep 88 in sync with data/scales.json `consensus.bands`. -->
+  <span class="note standalone"><span class="count" id="count"></span> · <b>Overall</b> is a 0–100 score, not a letter — 100 means every source gave its top tier, and the consensus reads <b>S from 88 up</b>. Tiers are <b>within role</b>: a healer's S is best among healers, not across the whole game. Open any row for its per-source breakdown.</span>
 
   <!-- Deliberately NOT a disclosure: template history records that hiding this buried the
        honesty disclaimer from first-time visitors. Condensed in place instead — the claim
@@ -1027,6 +1077,19 @@ const metricEra = m => m.era ?? (PHASE.ptr && m.name.includes(PHASE.ptr.marker) 
 const takeEra = t => (PHASE.ptr && (t.patchContext||"").includes(PHASE.ptr.marker)) ? "ptr" : "live";
 const eraOk = era => state.era === "both" || state.era === era;
 const matrix = document.getElementById('matrix');
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+const motionTimers = new WeakMap();
+function replayEntrance(el, cleanupMs = 420){
+  if(!el || reducedMotion.matches) return;
+  const prior = motionTimers.get(el); if(prior) clearTimeout(prior);
+  el.classList.remove('motion-enter');
+  void el.offsetWidth; // restart only when this helper explicitly marks a real entrance
+  el.classList.add('motion-enter');
+  motionTimers.set(el, setTimeout(()=>{
+    el.classList.remove('motion-enter'); motionTimers.delete(el);
+  }, cleanupMs));
+}
+const motionScrollBehavior = () => reducedMotion.matches ? 'auto' : 'smooth';
 
 /* Resolve what the active view shows for one spec + bracket.
    Returns { tier, score, div, tip } — score is used for tier sorting. */
@@ -1381,7 +1444,7 @@ function overallOf(s){
   const parts = [ratingFor(s,"raid").score, ratingFor(s,"mplus").score].filter(v => v >= 0);
   return parts.length ? parts.reduce((x,y)=>x+y,0)/parts.length : null;
 }
-function rowHTML(s, idx, simBar, rank){
+function rowHTML(s, idx, simBar, rank, quals){
   const color = CLASS_COLOR[s.class] || "#888";
   const hasPtr = !!s.ptr;
   // The projection moved MORE than the consensus on 07-23->07-24 (13 tier moves vs 9)
@@ -1411,8 +1474,8 @@ function rowHTML(s, idx, simBar, rank){
         ? `<span class="ovtrack" aria-hidden="true"><i style="width:${Math.round(ov)}%"></i></span><span class="ovnum">${Math.round(ov)}</span>`
         : `<span class="ovnum" style="color:var(--ink-faint)">—</span>`}</div>
      <div class="metaline">
-       <span class="mtag">Raid</span>${tierEl(ratingFor(s,"raid"), mvOf(s,"raid"))}
-       <span class="mtag">M+</span>${tierEl(ratingFor(s,"mplus"), mvOf(s,"mplus"))}
+       <span class="mtag">Raid${quals?.raid ? ` <i class="mqual">${esc(quals.raid)}</i>` : ""}</span>${tierEl(ratingFor(s,"raid"), mvOf(s,"raid"))}
+       <span class="mtag">M+${quals?.mplus ? ` <i class="mqual">${esc(quals.mplus)}</i>` : ""}</span>${tierEl(ratingFor(s,"mplus"), mvOf(s,"mplus"))}
      </div>
      <span class="chev">▸</span>
      ${simBar && typeof s.fightProfile?.metricsUsed?.[simBar.key]==="number" ? `<div class="rowbar" aria-hidden="true" title="Sim ${simBar.label} DPS ${Math.round(s.fightProfile.metricsUsed[simBar.key]).toLocaleString('en-US')}"><i style="width:${(s.fightProfile.metricsUsed[simBar.key]/simBar.max*100).toFixed(1)}%;background:${color}"></i></div>` : ""}
@@ -1568,20 +1631,26 @@ function render(){
   // In the per-fight view the two tier columns hold different things — one is this
   // encounter's Archon tier, the other is that bracket's overall consensus. Say so in
   // the header rather than relying on a hover tooltip (audit 2026-07-24, N1).
+  // `qual` is the bare attribution string. It is returned separately because the card
+  // layout needs it too: .head is display:none under 760px, so on a phone the header was
+  // the ONLY thing saying which patch the letters describe — i.e. the attribution added
+  // for exactly this reason was invisible on the devices most likely to screenshot it
+  // (mobile feedback, 2026-08-05). The row's .mtag labels carry it there.
   const fightHead = (bracket, label) => {
     if(state.fight){
       const [fb, slug] = state.fight.split("|");
-      if(bracket !== fb) return { label: `${label} <span class="hqual">overall</span>`, aria: `${label}, overall consensus` };
+      if(bracket !== fb) return { label: `${label} <span class="hqual">overall</span>`, aria: `${label}, overall consensus`, qual: "overall" };
       const name = (DATA.encounterTiers?.[fb] || {})[slug]?.name ?? slug;
-      return { label: `${label} <span class="hqual">${esc(name)} · Archon</span>`, aria: `${label}, ${name}, Archon tier` };
+      return { label: `${label} <span class="hqual">${esc(name)} · Archon</span>`, aria: `${label}, ${name}, Archon tier`, qual: `${name} · Archon` };
     }
     // A column of letters is unattributed unless it says so. Selecting Era = 12.1 PTR
     // changes ZERO tier letters (era gates verdicts, writeups and era-tagged metrics, not
     // the tier columns), so without this a visitor reasonably reads them as 12.1 tiers.
     const qual = state.source === "projection" ? "12.1 forecast" : "12.0.7";
-    return { label: `${label} <span class="hqual">${qual}</span>`, aria: `${label}, ${qual}` };
+    return { label: `${label} <span class="hqual">${qual}</span>`, aria: `${label}, ${qual}`, qual };
   };
   const rh = fightHead('raid','Raid'), mh = fightHead('mplus','M+');
+  const quals = { raid: rh.qual, mplus: mh.qual };
   let html = `<div class="head">
       <div>#</div>${hcell('spec','Spec')}${hcell('overall','Overall')}${hcell('raid',rh.label,rh.aria)}${hcell('mplus',mh.label,mh.aria)}<div></div>
     </div>`;
@@ -1593,10 +1662,10 @@ function render(){
     let cur=null, n=0;
     ordered.forEach(s=>{
       if(s.class!==cur){ cur=s.class; n=0; html += `<div class="grouphdr">${esc(cur)}</div>`; }
-      html += rowHTML(s, idxOf.get(s), simBar, ++n);
+      html += rowHTML(s, idxOf.get(s), simBar, ++n, quals);
     });
   } else {
-    ordered.forEach((s,i)=> html += rowHTML(s, idxOf.get(s), simBar, i+1) );
+    ordered.forEach((s,i)=> html += rowHTML(s, idxOf.get(s), simBar, i+1, quals) );
   }
 
   matrix.innerHTML = html;
@@ -1607,7 +1676,11 @@ function render(){
   const ptrLeg = document.getElementById('ptrlegend');
   if(ptrLeg) ptrLeg.style.display = state.era === "live" ? "none" : "";
   const shown = ordered.length, ptrShown = ordered.filter(s=>s.ptr).length;
-  document.getElementById('count').textContent = `${shown} spec${shown!==1?'s':''}${state.ptrOnly?'':` · ${ptrShown} tracked`}`;
+  // "X of 40" whenever a filter narrows the roster. A bare "27 specs" reads as "27 is all
+  // there is" — which is how a phone tester read the DPS filter and reported specs missing
+  // (feedback 2026-08-05). Matches the #toolstatus phrasing below; unfiltered stays plain.
+  document.getElementById('count').textContent =
+    `${shown}${shown < SPECS.length ? ` of ${SPECS.length}` : ''} spec${shown!==1?'s':''}${state.ptrOnly?'':` · ${ptrShown} tracked`}`;
   {
     const st = document.getElementById('toolstatus');
     if(st){
@@ -1682,6 +1755,7 @@ function toggleRow(row){
     hashSpec = slugOf(s); writeHash(); // deep link mirrors the most recently opened drawer
     drawer.inert = false;
     if(!drawer.firstChild) fillDrawer(row);
+    replayEntrance(row);
     drawer.style.maxHeight = (drawer.scrollHeight + 40)+'px';
     // Unlock to 'none' once the transition lands so late layout changes (fonts, viewport
     // resize across the 760px breakpoint) can never clip the open drawer.
@@ -2125,7 +2199,7 @@ function openCompare(){
   </div>`;
   cmpOv.querySelector("#cmp-close").onclick = closeCompare;
   cmpOpener = document.activeElement;
-  cmpOv.classList.add("open"); document.body.style.overflow = "hidden";
+  cmpOv.classList.add("open"); replayEntrance(cmpOv); document.body.style.overflow = "hidden";
   setTimeout(()=>cmpOv.querySelector("#cmp-close").focus(), 0);
 }
 
@@ -2133,7 +2207,7 @@ function openCompare(){
 const utilBar = document.createElement('div'); utilBar.className = 'utilbar'; document.body.appendChild(utilBar);
 utilBar.innerHTML = `<button id="toTop" type="button" aria-label="Back to top">↑ Top</button><button id="closeAll" type="button" aria-label="Close all open drawers">Close all</button>`;
 const toTopBtn = utilBar.querySelector('#toTop'), closeAllBtn = utilBar.querySelector('#closeAll');
-toTopBtn.onclick = () => window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+toTopBtn.onclick = () => window.scrollTo({ top: 0, behavior: motionScrollBehavior() });
 function closeAllDrawers(){
   matrix.querySelectorAll('.row.open').forEach(row=>{
     row.classList.remove('open'); row.setAttribute('aria-expanded','false');
@@ -2248,11 +2322,11 @@ function renderMovers(){
 /* Delegated jump: a change row is a lead, and a lead that cannot be followed is decoration.
    openRowFor only searches the CURRENT view and returns false when a filter hides the row
    (verified: with Role=Healer, openRowFor("Hunter","Beast Mastery") === false and nothing
-   happens), so fall back to the finder's opener, which clears filters first. */
+   happens), so fall back to the overlay opener, which clears filters first. */
 document.addEventListener("click", e => {
   const b = e.target.closest(".chjump"); if(!b) return;
   const { cls, spec } = b.dataset;
-  if(!openRowFor(cls, spec)) openSpecFromFinder(cls, spec);
+  if(!openRowFor(cls, spec)) openSpecFromOverlay(cls, spec);
 });
 
 /* The legend REMEMBERS the user's toggle (localStorage, like the watchlist). The width
@@ -2292,19 +2366,19 @@ function syncControls(){
 function openRowFor(cls, spec){
   const row = [...matrix.querySelectorAll('.row')].find(r =>
     r.querySelector('.spec-txt')?.textContent===spec && r.querySelector('.cls')?.textContent===cls);
-  if(row){ if(!row.classList.contains('open')) row.click(); row.scrollIntoView({ behavior:"smooth", block:"center" }); }
+  if(row){ if(!row.classList.contains('open')) row.click(); row.scrollIntoView({ behavior:motionScrollBehavior(), block:"center" }); }
   return !!row;
 }
 // The masthead mark is the home button: back to the default view. A same-URL navigation
 // with the hash stripped resets every lane of state at once (filters, era, overlays,
 // drawers) — one honest reload rather than chasing each store by hand. href="#" is only
 // the no-JS fallback; the CSP forbids inline handlers, so the listener attaches here.
-for (const id of ["brandhome", "brandhome2"]) {
-  document.getElementById(id)?.addEventListener("click", e => {
-    e.preventDefault();
-    location.href = location.pathname + location.search;
-  });
-}
+// (A second copy of the mark used to sit in the controls row beside "Consensus"; removed
+//  2026-08-05 — one brand mark, in the masthead, is enough.)
+document.getElementById("brandhome")?.addEventListener("click", e => {
+  e.preventDefault();
+  location.href = location.pathname + location.search;
+});
 {
   applyingHash = true;
   const pendingSpec = applyHash();
@@ -2324,9 +2398,10 @@ for (const id of ["brandhome", "brandhome2"]) {
   }
 }
 
-/* Jump from an overlay (Spec Finder / The Ladder) to a spec's matrix row + drawer.
-   Module scope so both overlays share one implementation; closes any open overlay first. */
-function openSpecFromFinder(cls, spec){
+/* Jump from an overlay (The Ladder / Compare all) or a "What changed" lead to a spec's
+   matrix row + drawer. Module scope so every caller shares one implementation; closes any
+   open overlay first, and clears filters so the target row can never be hidden. */
+function openSpecFromOverlay(cls, spec){
   document.querySelectorAll(".finder-ov.open").forEach(o=>o.classList.remove("open"));
   document.body.style.overflow="";
   state.role="All"; state.ptrOnly=false; state.starOnly=false; state.era="both"; state.fight=""; state.q="";
@@ -2338,286 +2413,6 @@ function openSpecFromFinder(cls, spec){
   render();
   openRowFor(cls, spec);
 }
-
-/* ================================================================
-   SPEC FINDER — weighted-scoring quiz over the whole dataset.
-   Hard filters: role, melee/ranged. Soft weighted criteria: tier,
-   throughput, meta representation, fight-type fit, mobility,
-   survivability, group utility, 12.1 outlook. Criteria with no data
-   for a spec are skipped and the remaining weights renormalized, so
-   it works before playstyle data lands (just fewer signals).
-   ================================================================ */
-(function(){
-  const Q = [
-    { id:"role", label:"Role", type:"single", def:"any",
-      opts:[["any","Any"],["DPS","DPS"],["Healer","Healer"],["Tank","Tank"]] },
-    { id:"content", label:"Main content", type:"single", def:"both",
-      opts:[["both","Both"],["raid","Raid"],["mplus","Mythic+"]] },
-    { id:"priority", label:"Rank by power, or by how it plays?", hint:"“Strongest” = tier ranking · “Most fun” = ranks by your fight/depth/mobility answers, mostly ignoring power", type:"single", def:"balanced",
-      opts:[["meta","Strongest (tier)"],["balanced","Balanced"],["vibes","Most fun to play"]] },
-    { id:"fight", label:"Favorite fight type", hint:"shapes DPS picks", type:"single", def:"any",
-      opts:[["any","Any"],["st","Single-target"],["cleave","Cleave"],["aoe","Big AoE"]] },
-    { id:"range", label:"Melee or ranged", type:"single", def:"any",
-      opts:[["any","Either"],["Melee","Melee"],["Ranged","Ranged"]] },
-    { id:"complexity", label:"Rotation depth", hint:"how much to juggle", type:"single", def:"any",
-      opts:[["any","Any"],["simple","Simple & forgiving"],["deep","Deep & complex"]] },
-    { id:"traits", label:"Extra priorities", hint:"distinct signals — pick any", type:"multi", def:[],
-      opts:[["output","Highest raw output"],["widely","Widely played"],["topmeta","Top-key meta"],["mobility","High mobility"],["survivability","Survivability"],["utility","Group utility"],["outlook","Rising in 12.1"]] }
-  ];
-  const answers = {}; Q.forEach(q => answers[q.id] = Array.isArray(q.def) ? q.def.slice() : q.def);
-  const anyPlaystyle = SPECS.some(s => s.playstyle);
-
-  // "strong" defaults to TIER (the holistic consensus). Raw throughput and meta-share
-  // are kept low here — they're distinct signals the user opts into via extra priorities,
-  // not baked into "strength" (tier ≠ raw numbers ≠ what's actually played).
-  // weights() renormalizes, so these are relative. complexity is a fit criterion like
-  // fight/mobility (only active when the user picks simple/deep AND the spec has data).
-  const BASE = {
-    meta:     { tier:.46, throughput:.07, pop:.04, fight:.13, mobility:.05, surv:.07, utility:.06, outlook:.12, complexity:.05 },
-    balanced: { tier:.22, throughput:.05, pop:.03, fight:.20, mobility:.11, surv:.11, utility:.10, outlook:.18, complexity:.12 },
-    vibes:    { tier:.06, throughput:.02, pop:.01, fight:.30, mobility:.22, surv:.16, utility:.15, outlook:.08, complexity:.14 }
-  };
-  const TRAIT_CRIT = { output:"throughput", widely:"pop", topmeta:"topmeta", mobility:"mobility", survivability:"surv", utility:"utility", outlook:"outlook" };
-  const TRAIT_BOOST = { output:0.30, widely:0.28, topmeta:0.28, mobility:0.20, survivability:0.20, utility:0.20, outlook:0.20 };
-  // Deliberate hand curve, roughly aligned to the consensus band centers so an "A" here
-  // means about what an "A" tier means. Archon survivability only emits S/A/B/C.
-  const SURV_MAP = { S:1, A:0.72, B:0.5, C:0.3 };
-
-  const brackets = () => answers.content === "both" ? ["raid","mplus"] : [answers.content];
-  const avg = a => { const v = a.filter(x => x != null); return v.length ? v.reduce((s,x)=>s+x,0)/v.length : null; };
-  // Era-aware strength signal: in the 12.1 PTR view, "tier" means OUR projection (the
-  // forecast of next season's tiers) instead of the live consensus — disclosed in the
-  // results header so the ranking's basis is never ambiguous.
-  const tierScore = (s,b) => {
-    if(state.era === "ptr"){ const p = s.projection?.[b]; return p ? p.score/100 : null; }
-    const c = s.consensus?.[b]; return c ? c.score/100 : null;
-  };
-  const nOk = m => m.n == null || m.n >= 200; // ignore freak thin-sample metrics
-  // The rank (0-1, higher=better) of the best median metric matching rx for bracket b.
-  const rankOf = (s,b,rx) => {
-    const cand = (s.metrics||[]).filter(m => m.bracket===b && m.rank && m.of>1 && nOk(m) && rx.test(m.name));
-    if(!cand.length) return null;
-    const m = cand.find(x => /median/i.test(x.name)) || cand.slice().sort((a,b)=>a.rank-b.rank)[0];
-    return 1 - (m.rank-1)/(m.of-1);
-  };
-  // Best (rank,of,bracket) across the brackets in play — used for unambiguous, bracket-
-  // labeled chips (two specs both "#1" are now distinguished by their bracket).
-  function bestMetric(s, rx){
-    let best = null;
-    for(const b of brackets()){
-      const cand = (s.metrics||[]).filter(m => m.bracket===b && m.rank && m.of>1 && nOk(m) && rx.test(m.name));
-      if(!cand.length) continue;
-      const m = cand.find(x => /median/i.test(x.name)) || cand.slice().sort((a,b)=>a.rank-b.rank)[0];
-      if(!best || m.rank < best.rank) best = { rank:m.rank, of:m.of, bracket:b };
-    }
-    return best;
-  }
-  const HPS = /HPS/i, DPS = /rDPS|DPS/i, TANKDMG = /tank/i, HEALDMG = /median dps.*healer/i;
-  // Primary output: DPS damage, Healer healing (HPS). Tanks have no throughput "primary".
-  const throughput = (s,b) => s.role==="Tank" ? null : rankOf(s, b, s.role==="Healer" ? HPS : DPS);
-  // Damage dealt by off-DPS roles (tank / healer) — valued only when the user opts into
-  // raw output, so tanks/healers aren't ranked by damage by default (DPS use throughput).
-  const damageRank = (s,b) => s.role==="DPS" ? null : rankOf(s, b, s.role==="Tank" ? TANKDMG : HEALDMG);
-  // Two DISTINCT representation signals (they answer different questions):
-  //  pop = "widely played" — Archon Popularity: share of ALL logged players (raid = Mythic
-  //        logs; M+ = broad +7–24 keys). Adoption, not performance.
-  //  topMeta = "top-key meta" — what the best run: Mythicstats top-2000 M+ keys; for raid
-  //        we only have Mythic-raid popularity (already high-end), so it reuses that.
-  function popRank(s,b){
-    const m = (s.metrics||[]).find(x => x.bracket===b && x.rank && x.of>1 && nOk(x) && /popularity/i.test(x.name));
-    return m ? 1 - (m.rank-1)/(m.of-1) : null;
-  }
-  function topMetaRank(s,b){
-    const rx = b==="mplus" ? /representation/i : /popularity/i;
-    const m = (s.metrics||[]).find(x => x.bracket===b && x.rank && x.of>1 && nOk(x) && rx.test(x.name));
-    return m ? 1 - (m.rank-1)/(m.of-1) : null;
-  }
-  function fightFit(s){
-    if(answers.fight==="any") return null;
-    // Selected-but-not-a-DPS (or no profile): neutral, so tank/healer match scores stay on
-    // the same denominator as DPS instead of dropping the criterion for them only.
-    if(s.role!=="DPS" || !s.fightProfile?.labels) return 0.5;
-    const lab = s.fightProfile.labels[answers.fight];
-    return lab==="strong"?1 : lab==="mid"?0.55 : lab==="weak"?0.15 : 0.5;
-  }
-  function complexityFit(s){
-    if(answers.complexity==="any" || !s.playstyle?.complexity) return null;
-    const c = (s.playstyle.complexity - 1) / 4; // 0 (simplest) … 1 (most complex)
-    return answers.complexity==="deep" ? c : 1 - c;
-  }
-  const mobility = s => s.playstyle ? s.playstyle.mobility/5 : null;
-  const utility  = s => s.playstyle ? s.playstyle.utility/5 : null;
-  const survScore = s => s.survivability ? (SURV_MAP[s.survivability.tier] ?? null) : null;
-  // "No outlook signal" scores the same neutral as "flat" instead of being skipped —
-  // skip-and-renormalize would otherwise make missing data BEAT a known-declining spec
-  // (the one criterion that's still commonly null now that all 40 have playstyle data).
-  const outlookScore = s => { const d = s.outlook?.direction; return d==="up"?1 : d==="down"?0.15 : 0.55; };
-
-  function weights(){
-    const w = { ...BASE[answers.priority] };
-    // (w[k]||0): a trait may key a criterion absent from this priority's base — without the
-    // guard, undefined + boost = NaN poisons the whole normalized vector (every score 0).
-    for(const t of answers.traits){ const k = TRAIT_CRIT[t]; if(k) w[k] = (w[k]||0) + (TRAIT_BOOST[t] ?? 0.20); }
-    // Opting into raw output also values tank/healer DAMAGE (their off-role contribution).
-    if(answers.traits.includes("output")) w.damage = (w.damage||0) + TRAIT_BOOST.output;
-    const sum = Object.values(w).reduce((s,x)=>s+x,0);
-    if(!Number.isFinite(sum) || sum <= 0) throw new Error("Finder weights degenerate: " + JSON.stringify(w));
-    for(const k in w) w[k] /= sum;
-    return w;
-  }
-  function scoreSpec(s, w){
-    const bs = brackets();
-    const crit = {
-      tier: avg(bs.map(b=>tierScore(s,b))), throughput: avg(bs.map(b=>throughput(s,b))),
-      pop: avg(bs.map(b=>popRank(s,b))), topmeta: avg(bs.map(b=>topMetaRank(s,b))), fight: fightFit(s),
-      mobility: mobility(s), surv: survScore(s), utility: utility(s), outlook: outlookScore(s),
-      complexity: complexityFit(s), damage: avg(bs.map(b=>damageRank(s,b)))
-    };
-    let num=0, den=0;
-    for(const k in w){ if(crit[k]!=null){ num += w[k]*crit[k]; den += w[k]; } }
-    return { score: den ? num/den : 0, crit };
-  }
-  function whyChips(s, crit){
-    const chips = [];
-    const primary = brackets()[0];
-    // chip label follows the same era-aware signal tierScore ranks by
-    const t = state.era === "ptr" ? s.projection?.[primary]?.tier : s.consensus?.[primary]?.tier;
-    const tierWord = state.era === "ptr" ? "projected " : "";
-    // Preference-relative chips first (fight type + complexity only appear when the user
-    // asked for them) — they confirm the tool honored the explicit ask, so never slice them.
-    if(crit.fight != null && crit.fight >= 0.9) chips.push(`fits your ${answers.fight==="st"?"single-target":answers.fight} ask`);
-    if(crit.complexity != null && crit.complexity >= 0.7) chips.push(answers.complexity==="deep"?"deep rotation":"simple rotation");
-    if(crit.tier != null && crit.tier >= 0.6 && t) chips.push(`${tierWord}${t}-tier ${primary==="raid"?"raid":"M+"}`);
-    const bLbl = b => b==="raid" ? "raid" : "M+";
-    if(crit.throughput != null && crit.throughput >= 0.66){
-      const bm = bestMetric(s, s.role==="Healer" ? HPS : DPS);
-      if(bm) chips.push(`#${bm.rank}/${bm.of} ${s.role==="Healer"?"healing":"raw output"} (${bLbl(bm.bracket)})`);
-    }
-    if(crit.damage != null && crit.damage >= 0.66){ // tank/healer damage (only when raw output opted in)
-      const bm = bestMetric(s, s.role==="Tank" ? TANKDMG : HEALDMG);
-      if(bm) chips.push(`#${bm.rank}/${bm.of} ${s.role==="Tank"?"tank damage":"healer damage"} (${bLbl(bm.bracket)})`);
-    }
-    if(crit.pop != null && crit.pop >= 0.75) chips.push("widely played");
-    if(crit.topmeta != null && crit.topmeta >= 0.75) chips.push("top-key meta");
-    if(crit.mobility != null && crit.mobility >= 0.8) chips.push("very mobile");
-    if(crit.surv != null && crit.surv >= 0.7) chips.push(`${s.survivability.tier} survivability`);
-    if(crit.utility != null && crit.utility >= 0.8) chips.push("loaded utility");
-    if(crit.outlook != null && crit.outlook === 1) chips.push("rising in 12.1 (PTR)");
-    return chips.slice(0,4);
-  }
-  // A spec is "melee" if it's melee-primary OR viable in melee (fistweaving MW, weaving
-  // Holy Paladin, etc. — meleeCapable). Ranged means ranged-primary.
-  const supportsRange = (s, r) => {
-    if(r==="any" || !s.playstyle) return true;
-    return r==="Melee" ? (s.playstyle.range==="Melee" || s.playstyle.meleeCapable === true)
-                       : s.playstyle.range==="Ranged";
-  };
-  function results(){
-    const w = weights();
-    let pool = SPECS.filter(s => answers.role==="any" || s.role===answers.role);
-    if(answers.range!=="any" && anyPlaystyle) pool = pool.filter(s => supportsRange(s, answers.range));
-    return pool.map(s => ({ s, ...scoreSpec(s, w) }))
-      // deterministic tiebreak: equal scores order by tier, then name — never insertion order
-      .sort((a,b)=> b.score - a.score
-        || (b.crit.tier ?? 0) - (a.crit.tier ?? 0)
-        || a.s.spec.localeCompare(b.s.spec) || a.s.class.localeCompare(b.s.class))
-      .slice(0,12);
-  }
-
-  /* ---- overlay UI ---- */
-  const ov = document.createElement("div");
-  ov.className = "finder-ov"; ov.id = "finder-ov";
-  document.body.appendChild(ov);
-  function optHTML(q){
-    const val = answers[q.id];
-    return q.opts.map(([v,label])=>{
-      const on = q.type==="multi" ? val.includes(v) : val===v;
-      // All tanks are melee — lock the range question to Melee when Tank is chosen.
-      const off = q.id==="range" && answers.role==="Tank" && v!=="Melee";
-      return `<button class="fopt" data-q="${esc(q.id)}" data-v="${esc(v)}" aria-pressed="${on}"${off?' disabled title="all tanks are melee"':''}>${esc(label)}</button>`;
-    }).join("");
-  }
-  let resultsShown = false;
-  function renderPanel(focusQ, focusV){
-    ov.innerHTML = `<div class="finder-panel" role="dialog" aria-modal="true" aria-label="Spec finder">
-      <div class="finder-head">
-        <div><h2>Find your spec</h2><p>Every spec is scored against your preferences using the tracker's live data. Note that <b>tier</b> (holistic consensus rating), <b>raw output</b> (damage/healing numbers), and <b>meta</b> (what's actually played) are different things — “Chase the strongest” ranks by <b>tier</b>; opt into raw output, <b>Widely played</b> (broad adoption — all logged players), or <b>Top-key meta</b> (what the best run — top-2000 M+ keys) separately under Extra priorities. <span style="color:var(--ink-faint)">Every spec clears normal/heroic and low–mid keys; below title-range M+ and Cutting Edge, <b style="color:var(--ink-dim)">the player matters more than the spec</b> — treat these as a shortlist to try, not a verdict.</span></p></div>
-        <button class="finder-x" id="finder-close" aria-label="Close">✕</button>
-      </div>
-      ${Q.map(q=>`<div class="fq"><span class="lbl">${esc(q.label)}${q.hint?` <span class="hint">· ${esc(q.hint)}</span>`:""}</span><div class="fopts">${optHTML(q)}</div></div>`).join("")}
-      <div class="finder-go">
-        <button class="finderbtn" id="finder-run" type="button">Show my matches</button>
-        <span class="finder-note">${anyPlaystyle?"":"Mobility / utility / melee-ranged fill in once that data is fetched."}</span>
-      </div>
-      <div class="fresults" id="fresults"></div>
-    </div>`;
-    ov.querySelector("#finder-close").onclick = close;
-    ov.querySelector("#finder-run").onclick = () => showResults();
-    ov.querySelectorAll(".fopt").forEach(b => b.onclick = () => {
-      const q = Q.find(x=>x.id===b.dataset.q), v = b.dataset.v;
-      if(q.type==="multi"){ const i = answers[q.id].indexOf(v); i>=0 ? answers[q.id].splice(i,1) : answers[q.id].push(v); }
-      else answers[q.id] = v;
-      if(q.id==="role" && v==="Tank" && answers.range!=="Melee") answers.range = "Melee"; // tanks are all melee
-      renderPanel(q.id, v);
-    });
-    // keep focus on the option the user just clicked (the rebuild would drop it to <body>),
-    // and keep visible results in sync with the changed answers instead of vanishing.
-    if(focusQ != null){
-      const b = ov.querySelector(`.fopt[data-q="${CSS.escape(focusQ)}"][data-v="${CSS.escape(focusV)}"]`);
-      if(b) b.focus();
-    }
-    if(resultsShown) showResults(false);
-  }
-  function showResults(scroll = true){
-    resultsShown = true;
-    const box = ov.querySelector("#fresults");
-    const list = results();
-    const signalNote = state.era === "ptr"
-      ? `<div class="mnote" style="margin:0 0 8px">Strength signal: <b style="color:var(--gold)">our 12.1 projection</b> (Era is set to 12.1 PTR) — a forecast, not a source.</div>`
-      : "";
-    const cmpTop = list.length >= 2
-      ? `<div style="margin:0 0 10px"><button class="cmpbtn" id="finder-cmp-top" type="button">⚖ Compare my top ${Math.min(3, list.length)}</button></div>`
-      : "";
-    box.innerHTML = signalNote + cmpTop + list.map((r,i)=>{
-      const color = CLASS_COLOR[r.s.class] || "#888";
-      const chips = whyChips(r.s, r.crit).map(c=>`<span class="wchip">${esc(c)}</span>`).join("");
-      return `<div class="fres" role="button" tabindex="0" data-cls="${esc(r.s.class)}" data-spec="${esc(r.s.spec)}" aria-label="Open ${esc(r.s.spec)} ${esc(r.s.class)} in the tracker">
-        <div class="frank">${i+1}</div>
-        <div><div class="fname"><span class="cbar" style="display:inline-block;width:3px;height:13px;vertical-align:middle;margin-right:7px;background:${color}"></span>${esc(r.s.spec)}<span class="fcls" style="color:${color}">${esc(r.s.class)}</span> <span class="frole">${esc(r.s.role)}</span></div><div class="fwhy">${chips}</div></div>
-        <div class="fscore"><div class="fpct">${Math.round(r.score*100)}</div><div class="fmeter"><span style="width:${Math.round(r.score*100)}%"></span></div></div>
-      </div>`;
-    }).join("");
-    const cmpTopBtn = box.querySelector("#finder-cmp-top");
-    if(cmpTopBtn) cmpTopBtn.onclick = () => {
-      COMPARE.clear();
-      list.slice(0, 3).forEach(r => COMPARE.add(`${r.s.class}|${r.s.spec}`));
-      document.querySelectorAll(".finder-ov.open").forEach(o=>o.classList.remove("open"));
-      document.body.style.overflow = "";
-      updateTray(); syncCmpButtons(); openCompare();
-    };
-    box.querySelectorAll(".fres").forEach(el => {
-      el.onclick = () => openSpecFromFinder(el.dataset.cls, el.dataset.spec);
-      el.onkeydown = e => { if(e.key==="Enter"||e.key===" "){ e.preventDefault(); openSpecFromFinder(el.dataset.cls, el.dataset.spec); } };
-    });
-    if(scroll) box.scrollIntoView({ behavior:"smooth", block:"nearest" });
-  }
-  let opener=null;
-  function open(){ opener=document.activeElement; renderPanel(); ov.classList.add("open"); document.body.style.overflow="hidden"; writeHash(); const c=ov.querySelector("#finder-close"); if(c) setTimeout(()=>c.focus(),0); }
-  function close(){ ov.classList.remove("open"); document.body.style.overflow=""; writeHash(); if(opener && opener.focus) opener.focus(); }
-  ov.addEventListener("click", e => { if(e.target===ov) close(); });
-  ov.addEventListener("keydown", e => { // focus trap — keep Tab inside the modal
-    if(e.key!=="Tab" || !ov.classList.contains("open")) return;
-    const f=[...ov.querySelectorAll('button, input, [tabindex="0"]')]; if(!f.length) return;
-    const first=f[0], last=f[f.length-1];
-    if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
-    else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
-  });
-  document.addEventListener("keydown", e => { if(e.key==="Escape" && ov.classList.contains("open")) close(); });
-  document.getElementById("finderbtn").addEventListener("click", open);
-  OV_REG.finder = { isOpen: ()=>ov.classList.contains("open"),
-    openFromHash: ()=>{ open(); writeHash(); } };
-  claimPendingView("finder");
-})();
 
 /* ================================================================
    THE LADDER — visual ranked bar charts for every quantitative metric.
@@ -2753,9 +2548,9 @@ function openSpecFromFinder(cls, spec){
       const body = stacked
         ? `<text x="${valX}" y="${mid}" class="ladderval" text-anchor="end" dominant-baseline="central">${esc(disp)}${mv}</text>`
           + `<rect x="${barX}" y="${mid+12}" width="${barW}" height="9" rx="3" fill="var(--edge)" opacity="0.32"/>`
-          + `<rect class="ladderbar" x="${barX}" y="${mid+12}" width="${w.toFixed(1)}" height="9" rx="3" fill="${col}"/>`
+          + `<rect class="ladderbar" style="--enter-i:${Math.min(i,8)}" x="${barX}" y="${mid+12}" width="${w.toFixed(1)}" height="9" rx="3" fill="${col}"/>`
         : `<rect x="${barX}" y="${mid-5}" width="${barW}" height="10" rx="3" fill="var(--edge)" opacity="0.32"/>`
-          + `<rect class="ladderbar" x="${barX}" y="${mid-5}" width="${w.toFixed(1)}" height="10" rx="3" fill="${col}"/>`
+          + `<rect class="ladderbar" style="--enter-i:${Math.min(i,8)}" x="${barX}" y="${mid-5}" width="${w.toFixed(1)}" height="10" rx="3" fill="${col}"/>`
           + `<text x="${valX}" y="${mid}" class="ladderval" text-anchor="end" dominant-baseline="central">${esc(disp)}${mv}</text>`;
       return `<g class="ladderrow${e.era==='ptr'?' ladder-ptr':''}" data-spec="${esc(r.spec)}" data-cls="${esc(r.cls)}" data-n="${esc(r.spec.toLowerCase())}" role="button" tabindex="0" aria-label="${esc(aria)}"><title>${esc(tip)}</title>`
         + head + body + `</g>`;
@@ -2797,6 +2592,7 @@ function openSpecFromFinder(cls, spec){
       <div class="ladder-groups">${groups}</div>
       <div id="ladder-chart">${cur?caption(cur)+drawLadder(cur):`<p class="ladder-cap">No series for this scope.</p>`}</div>
     </div>`;
+    replayEntrance(ov.querySelector("#ladder-chart"), 520);
     ov.querySelector("#ladder-close").onclick = close;
     ov.querySelectorAll("#ladder-bkt button").forEach(b=>b.onclick=()=>{ L.bracket=b.dataset.bkt; renderPanel("bkt"); writeHash(); });
     ov.querySelectorAll("#ladder-role button").forEach(b=>b.onclick=()=>{ L.role=b.dataset.lr; renderPanel("role"); writeHash(); });
@@ -2809,11 +2605,11 @@ function openSpecFromFinder(cls, spec){
   }
 
   const ov = document.createElement("div"); ov.className="finder-ov"; ov.id="ladder-ov"; document.body.appendChild(ov);
-  function open(){ opener=document.activeElement; L.role = (state.role==="All"?"DPS":state.role); renderPanel(); ov.classList.add("open"); document.body.style.overflow="hidden"; writeHash(); const c=ov.querySelector("#ladder-close"); if(c) setTimeout(()=>c.focus(),0); }
+  function open(){ opener=document.activeElement; L.role = (state.role==="All"?"DPS":state.role); renderPanel(); ov.classList.add("open"); replayEntrance(ov); document.body.style.overflow="hidden"; writeHash(); const c=ov.querySelector("#ladder-close"); if(c) setTimeout(()=>c.focus(),0); }
   function close(){ ov.classList.remove("open"); document.body.style.overflow=""; writeHash(); if(opener && opener.focus) opener.focus(); }
-  ov.addEventListener("click", e=>{ const g=e.target.closest(".ladderrow"); if(g){ openSpecFromFinder(g.dataset.cls,g.dataset.spec); return; } if(e.target===ov) close(); });
+  ov.addEventListener("click", e=>{ const g=e.target.closest(".ladderrow"); if(g){ openSpecFromOverlay(g.dataset.cls,g.dataset.spec); return; } if(e.target===ov) close(); });
   ov.addEventListener("keydown", e=>{
-    if(e.key==="Enter"||e.key===" "){ const g=e.target.closest&&e.target.closest(".ladderrow"); if(g){ e.preventDefault(); openSpecFromFinder(g.dataset.cls,g.dataset.spec); return; } }
+    if(e.key==="Enter"||e.key===" "){ const g=e.target.closest&&e.target.closest(".ladderrow"); if(g){ e.preventDefault(); openSpecFromOverlay(g.dataset.cls,g.dataset.spec); return; } }
     if(e.key==="Tab" && ov.classList.contains("open")){ // focus trap — keep Tab inside the modal
       const f=[...ov.querySelectorAll('button, input, [tabindex="0"]')]; if(!f.length) return;
       const first=f[0], last=f[f.length-1];
@@ -3088,13 +2884,13 @@ function openSpecFromFinder(cls, spec){
     if(ov.classList.contains("open")) writeHash();
   }
 
-  function open(){ opener=document.activeElement; render(); ov.classList.add("open");
+  function open(){ opener=document.activeElement; render(); ov.classList.add("open"); replayEntrance(ov);
     document.body.style.overflow="hidden"; writeHash(); const c=ov.querySelector("#all-close"); if(c) setTimeout(()=>c.focus(),0); }
   function close(){ ov.classList.remove("open"); document.body.style.overflow=""; writeHash(); if(opener && opener.focus) opener.focus(); }
   ov.addEventListener("click", e=>{
     if(e.target===ov){ close(); return; }
     const tr = e.target.closest("tbody tr");
-    if(tr) openSpecFromFinder(tr.dataset.cls, tr.dataset.spec);
+    if(tr) openSpecFromOverlay(tr.dataset.cls, tr.dataset.spec);
   });
   document.addEventListener("keydown", e=>{ if(e.key==="Escape" && ov.classList.contains("open")) close(); });
   ov.addEventListener("keydown", e=>{
@@ -3136,9 +2932,9 @@ function openSpecFromFinder(cls, spec){
 /* ---------- ambient starfield (respects reduced motion) ---------- */
 (function(){
   const c = document.getElementById('stars');
-  if(!c || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if(!c || reducedMotion.matches) return;
   const ctx = c.getContext('2d');
-  let stars = [], raf;
+  let stars = [], raf, inView = true;
   function size(){
     const r = c.parentElement.getBoundingClientRect();
     c.width = r.width; c.height = r.height;
@@ -3163,13 +2959,15 @@ function openSpecFromFinder(cls, spec){
   // the viewport and re-arm when it returns. `raf = 0` is the "stopped" sentinel so a
   // re-entry can never stack two loops. The reduced-motion bail above still means this
   // never starts at all for those users, which is the correct behaviour and is untouched.
-  function start(){ if(!raf) draw(); }
+  function start(){ if(inView && !document.hidden && !reducedMotion.matches && !raf) draw(); }
   function stop(){ if(raf){ cancelAnimationFrame(raf); raf = 0; } }
   size(); start();
   if(window.IntersectionObserver){
-    new IntersectionObserver(es => { es[0].isIntersecting ? start() : stop(); }).observe(c);
+    new IntersectionObserver(es => { inView = es[0].isIntersecting; inView ? start() : stop(); }).observe(c);
   }
   window.addEventListener('resize', ()=>{ stop(); size(); start(); });
+  document.addEventListener('visibilitychange', ()=>{ document.hidden ? stop() : start(); });
+  reducedMotion.addEventListener?.('change', e=>{ e.matches ? stop() : start(); });
 })();
 </script>
 </body>
