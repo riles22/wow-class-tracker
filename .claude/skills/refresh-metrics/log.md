@@ -521,3 +521,46 @@ numbers (95th pct DPS / popularity / M+ score — ungated, not in required-sourc
   valid-but-empty fragment at both Heroic and Mythic. The Venomous Abyss opens 08-18/19; a
   new testing window is the only thing that clears it. The heartbeat firing is correct
   visibility, not a fixable miss.
+
+## 2026-08-06 (LOCAL run, Opus 5 — scheduled residential catch-up, ~14:3xZ, after the 12:49Z nightly)
+- **Scope: residential-only. The five rDPS cuts the nightly recorded `unreachable` were all
+  re-fetched and landed; nothing CI already refreshed was regenerated.** Archon, Murlok,
+  Mythicstats, SimC, Bloodmallet, WoWMeta and every tier list were left exactly as the
+  nightly produced them (verify-not-rewrite — independently regenerating them is what made
+  the 07-30/07-31 pushes unmergeable).
+- **The rDPS split held again, and this is the whole reason the local run exists.** The
+  nightly's `wcl-fetch/evidence.json` verdict was `rdps-broken` (`characterRankings(metric:
+  rdps)` on encounter 3176 = HTTP 200 + bare "Internal server error"), so CI froze all five
+  cuts at 2026-08-05. From this residential IP the **HTML statistics table served rDPS
+  fine on every cut** — 17 fetches, all HTTP 200, **0 unmatched roster rows anywhere**.
+  "rdps-broken" remains an API-transport fact, not a statement that rDPS is unavailable.
+- **Transport, unchanged and worth not re-deriving:** `curl` only. Node's global `fetch()`
+  is still Cloudflare-403'd on warcraftlogs.com even residentially; curl with the identical
+  XHR + browser-UA + Referer headers passes clean.
+- **120 metric rows + 27 ptrDummy specs applied, asOf → 2026-08-06:**
+  · zone 46 Mythic raid (5/20/p3): DPS 27 / 334,385 parses · tank 6 / 47,838 · HPS 7 / 83,189
+  · zone 47 M+ (10/5/p1): DPS 27 / 3,084,131 · tank 6 / 1,040,250 · HPS 7 / 1,037,955
+  · zone 56 PTR M+ (10/5/p1): DPS 27 / 5,894 · tank 6 / 1,965 · HPS 7 / 1,966
+  · zone 52 Dummy Dome: 1T 27 specs / 1,563 parses · 2T 21 / 263 · 3T 19 / 79 · 5T 27 / 1,221
+- **Value-move check (the guard CI's anomaly gate would have applied): 0 moves >50%.** The
+  live series are the honest tell that the parse is right — max |Δ| 0.2–1.0% and median
+  |Δ| 0.1–0.3% across all six live cuts, on parse counts that drifted −6% (raid, the 14-day
+  rolling window) and ~0% (M+). PTR M+ moved more (max 10.9%, median ~1%) on its ~5,900-parse
+  population, which is expected at that n, not a misparse.
+- ⚠ **Dummy Dome 3T is very thin and it moved a raid forecast band.** 79 parses across 19
+  specs (~4 each) produced the run's two largest moves — Assassination Rogue −42.9% and
+  Marksmanship Hunter −26.8% — and Marksmanship's dummy composite fell rank 2→5 (score
+  87→62), which alone took its **raid projection A+/84 → A/70**. The cell is tagged
+  `confidence: low` and the composite is coverage-floored, so the machinery disclosed it
+  correctly; recording it here because a band change off ~4 parses per spec is worth a
+  human eye, not because anything is wrong.
+- **Zone-52 duplicate-row gotcha did NOT apply this run** — raw row count equalled deduped
+  count on all four dummies (27/21/19/27). Keep deduping by (class, spec); never blind-halve.
+- **Registry snapshots** bumped to 2026-08-06 for zones 46 / 47 / 56 / 52; **zone 54 left at
+  2026-07-28** (see ptr-watch log — empty upstream, so the staleness stays visible).
+- `npm test` **332 pass / 0 fail**; `npm run build` OK (1130.0 KB); `node src/snapshot.mjs`
+  written, then rebuilt (step-6 ordering). `check-refresh --manifest` — see the note in the
+  run report: its single failure is a **stale gitignored `wcl-fetch/evidence.json` from
+  2026-08-03**, the exact local-hygiene case `.gitignore:20-24` documents; with that
+  leftover moved aside the gate exits **0**. Manifest deliberately NOT rewritten (partial
+  run — local-run skill step 3).

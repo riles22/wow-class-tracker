@@ -469,3 +469,32 @@ catch-up path.
   five rDPS/normalized cuts recorded `unreachable` with data untouched. Zone-54's stored
   2026-07-28 breaches `maxAgeDays` 10 tomorrow — expected, and only a new testing window
   clears it.
+
+- 2026-08-06 (LOCAL run, Opus 5 — scheduled residential catch-up, ~14:3xZ, after the 12:49Z nightly)
+  · **No new build hunt this run** — the nightly polled the official forum thread and the
+  Wowhead news RSS ~2h earlier and found no new PTR build post and no new standalone blue
+  post; per the residential-only scope this run verified rather than re-polled, and nothing
+  was logged to the feed. No tier-set upkeep due.
+  · **zone 52 Dummy Dome: INGESTED, 27 specs** (the nightly could not — rDPS API broken).
+  1T 27 specs / 1,563 parses · 2T 21 / 263 · 3T 19 / 79 · 5T 27 / 1,221. Target coverage
+  across the 27: 17 specs have all four counts, 4 have 1/2/5, 2 have 1/3/5, 4 have 1/5 only.
+  ⚠ **3T is thin enough to matter** — 79 parses over 19 specs drove the run's two biggest
+  swings (Assassination −42.9%, Marksmanship −26.8%) and Marksmanship's composite rank 2→5
+  moved its **raid projection A+ → A**. Correctly tagged low-confidence; flagged for a human.
+  · **zone 56 PTR M+: INGESTED, 40 rows** — DPS 27 / 5,894 parses · tank 6 / 1,965 ·
+  healer 7 / 1,966. Largest movers Fury Warrior −10.9% and Frost DK +9.2% (the latter
+  rank 16→7, taking its M+ projection B → A).
+  · ⚠ **zone 54 (PTR raid, normalized): STILL EMPTY upstream, re-confirmed residentially.**
+  Heroic 4/10 and Mythic 5/20 both HTTP 200 returning the familiar **9,140-byte header-only
+  fragment with zero `actor-sprite-` rows** — a valid-but-empty table, not the 114-byte
+  "No statistics" stub. Unchanged since 07-31. Per the skill: nothing ingested, the 34
+  stored rows and the zone-54 registry `snapshot` both **left at 2026-07-28** while the
+  other four WCL pages were bumped, so the staleness stays visible rather than papered over.
+  **It breaches `maxAgeDays` 10 tomorrow (2026-08-07)** — expected and not fixable here;
+  the Venomous Abyss opens 08-18/19 and only a new testing window clears it.
+  · **zone 57 (Tidebound Grotto): STILL EMPTY** — Normal 3/10 and Heroic 4/10 each returned
+  the literal 114-byte "No statistics have been collected" stub. Unchanged since 07-28.
+  · **NO SEASON FLIP** — 12.1 launches Aug 11, Season 2 Aug 18; `SNAPSHOT_PHASE` stays
+  `12.1-ptr`. → **OWNER: the one-shot flip is still pending, `PHASE_FLIP_DUE` Aug 20.**
+  · `npm test` 332 pass / 0 fail, build OK, snapshot written then rebuilt. Manifest
+  deliberately NOT rewritten (partial run — local-run skill step 3).

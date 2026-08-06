@@ -3115,7 +3115,7 @@
       "patchContext": "12.1 PTR (2026-07-31 build) — Season 2 M+ tier list update",
       "url": "https://youtu.be/9cnTo1yK3C8?t=614",
       "claim": "He rates Vengeance's damage as very close to Blood DK's after the Blood nerf, before Chaos Brand, but holds it out of the meta on survivability: Annihilator's cooldowns are RNG enough to make mitigation inconsistent, and Aldrachi Reaver is steadier but unplayable on damage. His read is that one defensive buff could make it meta, and it is not there yet.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Monk",
@@ -3563,6 +3563,17 @@
       "patchContext": "12.1 PTR — Devourer sims corrected after a double-haste GCD bug was found",
       "url": "https://youtu.be/XPhaAJiAyD8?t=543",
       "claim": "Explains the long-standing gap between Devourer sims and live play: because many Devourer abilities are ports of Havoc ones, haste was being applied to the GCD twice, so Devour (a 1.25s cast with Improved Consume) effectively lost its post-cast gap and the spec got extra casts at high haste. With the interaction modelled and no other changes, Annihilator single target went 214k to 245k — from 15% behind Void-Scarred to 10% — and with early APL optimisation to about 250k single target and 231k on an AoE/dungeon build, cutting the dungeon-route gap to roughly two-thirds of what it was. He concludes both Devourer builds now sim flat out ahead of Havoc in every way and ahead of most specs in the game, and reads it as explaining why Annihilator was already overperforming its sims on PTR logs. Two caveats he states himself: this is a live game bug he thinks Blizzard should fix before the tier starts, so the strength is contingent on it surviving; and it raises haste's value sharply up to a breakpoint where the GCD bottoms out."
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Vengeance",
+      "creator": "YoDaTV",
+      "date": "2026-08-05",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "12.1 PTR — Season 2 Vengeance DH Mythic+ guide",
+      "url": "https://youtu.be/duIjLdAU3HQ?t=5",
+      "claim": "Opening his Season 2 Vengeance guide he calls the spec 'looking really strong going into next season' on the strength of its damage and its raid buff, but explicitly declines to call it the meta tank because its defensives are RNG-dependent. The damage read rests on Annihilator, which he recommends outright over Aldrachi: he rates the two about equal defensively and close on Metamorphosis uptime, so Annihilator's higher damage decides it. He flags that the current Annihilator rotation runs on a bug — holding Spirit Bomb and casting it into Soul Cleave on the same Voidfall proc fires six meteors instead of three — which makes Spirit Bomb otherwise unused, and he notes nobody has pushed high keys as VDH yet so the build is unsettled. His two practical Season 2 warnings are that Fiery Brand and Metamorphosis are both offensive and defensive buttons that cannot be spent purely for damage in keys, and that the Sigil-of-Flame-centred tier set makes trash gathering awkward because a partial-hit sigil is a large damage loss."
     }
   ],
   "metaNotes": [

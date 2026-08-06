@@ -644,3 +644,41 @@ queue + a 2026-07-28 publish-date cutoff rather than from the log. No creator op
   substring scan over this log (171 of 375 entries read as "unseen", nearly all pre-pipeline
   backlog). A persisted seen-set file, or a `triaged` reason lane alongside `skipped[]`,
   remains the highest-value cleanup in this skill.
+
+## 2026-08-06 (LOCAL run, Opus 5 — scheduled residential catch-up, ~14:3xZ)
+- **The queue is the reason this run exists, and it is now EMPTY: 2 → 0.** Both videos the
+  12:49Z nightly queued were fetched with yt-dlp from this residential IP and read in full.
+  No discovery pass — the nightly polled all 25 feeds 25/25 HTTP 200 ~2h earlier, and the
+  residential-only scope says verify rather than re-poll.
+- ⚠ **yt-dlp transport note:** `MdvcFzV0tmI` failed the first attempt with **HTTP 429 Too
+  Many Requests** on the subtitle download (the video info fetch succeeded — only the
+  caption request was throttled). It landed clean on a retry moments later **without** the
+  `youtube:player_client=android` extractor-arg. 429 here is transient throttling, not the
+  datacenter bot-wall; retry before queueing anything back.
+- **1 take added.** `duIjLdAU3HQ` — YoDaTV, *"General Guide for Vengeance DH in 12.1!
+  (Mythic+)"*, published 2026-08-05, 9 min. In scope: his Demon Hunter entry is scoped to
+  `["Vengeance"]` and the video is wholly Vengeance. Distilled as **mixed**, `bracket:
+  mplus` — he opens by calling the spec "looking really strong going into next season" on
+  damage plus its raid buff, then explicitly **declines to call it the meta tank because
+  its defensives are RNG-dependent**, which is both halves of a genuinely two-sided read
+  and the reason it is not filed as a buff. Also captured: Annihilator recommended over
+  Aldrachi (near-equal defensively, damage decides it), the Voidfall Spirit-Bomb-into-Soul-
+  Cleave **six-meteor bug** the current rotation leans on, and his warning that the
+  Sigil-of-Flame tier set makes trash gathering awkward.
+  **Superseded** his 2026-08-01 Vengeance take (same creator, same spec, same M+ lens —
+  a tier-list update the guide replaces). Same-lens rule honoured; no raid take touched.
+- **1 verified-skip → `skipped[]` (durable lane).** `MdvcFzV0tmI` — Shadarek, *"Season 2
+  Embellishment Tuning & Demon Hunter new BiS"*, 8 min, transcript read end to end. It is
+  an **embellishment/itemization** video, not a spec read: the four new S2 crafted
+  embellishments and the tuning pass that gutted them (Polished Amalgamate and Snakeskin
+  Lining >90%, Adorned Fang 70% with a compensating proc-rate bump, the new versatility
+  potion 52%), then BiS ranking for Havoc (unnerfed Hunter's Ritual Stone ~2% DPS) and
+  Devourer (double Adorned Fang; the crafted offhand costs 69 intellect). **His negative
+  sentiment is aimed at the embellishment tuning itself, never at Havoc or Devourer** —
+  there is no spec-strength, spec-tuning or S2 outlook claim in it. Writing a nerf take for
+  either spec from a crafted-gear nerf that lands on every spec equally would invent a read
+  the video does not make. 0 takes, 0 metaNotes.
+- **0 metaNotes** — neither creator is a `generalCreators` entry, so the firewall was never
+  in play this run.
+- `latest` refreshed on both entries (YoDaTV/Demon Hunter, Shadarek). `npm test` 332 pass /
+  0 fail; build OK; snapshot written then rebuilt.
