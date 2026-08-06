@@ -517,7 +517,11 @@
 
   /* ---------- footer ---------- */
   footer{margin-top:30px; border-top:1px solid var(--edge); padding-top:22px; color:var(--ink-faint); font-size:13px}
-  .footbrand{display:flex; gap:14px; align-items:flex-start; margin-bottom:22px}
+  /* Sits BELOW the source list (Riley, 2026-08-05): the footer now opens with the thing
+     a reader came down here for — who the sources are and when they were snapshotted —
+     and closes with identity. Needs its own top margin now that it is no longer the
+     footer's first child sitting under the border. */
+  .footbrand{display:flex; gap:14px; align-items:flex-start; margin:26px 0 22px}
   .footmark{width:40px; height:40px; flex:none}
   .footword{font-family:var(--disp); font-weight:700; font-size:19px; color:#fff}
   .foottag{margin:4px 0 6px; font-size:12.5px; color:var(--ink-faint); max-width:44ch}
@@ -887,7 +891,6 @@
   <div class="matrix" id="matrix"></div>
 
   <footer>
-    <div class="footbrand"><svg class="footmark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#130B22" stroke="#B57BEE" stroke-opacity=".45" stroke-width="2.5"/><rect x="12" y="13" width="40" height="9" rx="4.5" fill="#F0C24B"/><rect x="12" y="27.5" width="29" height="9" rx="4.5" fill="#C77DFF"/><rect x="12" y="42" width="19" height="9" rx="4.5" fill="#6AA8F0"/></svg><div><div class="footword">Spec Tracker</div><p class="foottag">A multi-source class &amp; spec consensus for World of Warcraft — live numbers, PTR reads, and a forecast that shows its math. Updated nightly.</p><p class="footcover">Now covering: 12.0.7 / Season 1 → 12.1 PTR “Curse of Ula'tek”</p></div></div>
     <div class="foot-grid">
       <div>
         <p class="foot-h">Sources &amp; snapshot dates</p>
@@ -908,6 +911,7 @@
         </p>
       </div>
     </div>
+    <div class="footbrand"><svg class="footmark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#130B22" stroke="#B57BEE" stroke-opacity=".45" stroke-width="2.5"/><rect x="12" y="13" width="40" height="9" rx="4.5" fill="#F0C24B"/><rect x="12" y="27.5" width="29" height="9" rx="4.5" fill="#C77DFF"/><rect x="12" y="42" width="19" height="9" rx="4.5" fill="#6AA8F0"/></svg><div><div class="footword">Spec Tracker</div><p class="foottag">A multi-source class &amp; spec consensus for World of Warcraft — live numbers, PTR reads, and a forecast that shows its math. Updated nightly.</p><p class="footcover">Now covering: 12.0.7 / Season 1 → 12.1 PTR “Curse of Ula'tek”</p></div></div>
     <div class="credits-block">
       <p class="foot-h">Creators &amp; theorycrafters</p>
       <p class="fine" style="margin-top:0">The tiers, sims, and takes here are the work of the WoW community. <b style="color:var(--ink-dim)">Creator takes are cited opinions — quoted, linked, and dated; never altered or presented as our own.</b> Full credit and thanks to everyone whose analysis this aggregates:</p>

@@ -8,6 +8,20 @@ Imported 2026-08-04 from the standalone "World of Warcraft" project. It has no n
 dependencies and does not participate in the tracker's nightly pipeline (yet); harvests
 are run manually.
 
+**"Offline" is load-bearing, and fonts are the easy way to break it.** The page shares the
+Spec Tracker's masthead vocabulary (2026-08-05), including its Cinzel/Inter/JetBrains Mono
+typography — but those faces are **embedded as base64 woff2 data URIs**, never linked from
+Google Fonts, so the built file still issues zero network requests. Regenerating them means
+re-fetching the latin subsets and re-embedding; all three are OFL-licensed, so shipping
+them inside the artifact is permitted. Verify after any change with:
+
+```
+node -e "const h=require('fs').readFileSync('wow-s2-gearing.html','utf8');console.log((h.match(/url\(\s*[\"']?https?:/gi)||[]).length)"
+```
+
+Zero is the only passing answer. (An external `<a href>` is fine — it is a link, not a
+fetch; it is `url(http…)` in CSS and external `src=` that would break the guarantee.)
+
 ## Pipeline
 
 ```

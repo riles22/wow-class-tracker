@@ -217,6 +217,21 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   `qual`, threaded into `rowHTML` as `quals` and rendered in the mobile-only `.mtag`.
   **Any new explanatory `title=` in the grid needs a visible counterpart or it does not
   exist for half the audience.**
+- **Shared brand across both pages** (2026-08-05): the gearing page reads as the same
+  site as the tracker, not a different product. The palette already matched (rebrand
+  2026-08-04); the VOICE did not, which is what made the tab jarring. Gearing now uses the
+  tracker's masthead vocabulary — mono eyebrow, brand mark, Cinzel title at the same size /
+  letter-spacing / text-shadow, the animated `.rule` (with a reduced-motion guard it
+  previously lacked). **Its three webfonts are EMBEDDED as base64 woff2, not linked**
+  (Cinzel 700 + Inter and JetBrains Mono as variable latin subsets, ~124KB base64 total):
+  `gearing/README.md` promises a fully offline single file, so a Google Fonts link would
+  silently break that guarantee. All three are OFL-licensed. Two traps if you touch this:
+  the mono stack must list `'JetBrains Mono'` FIRST (it was `ui-monospace,"JetBrains
+  Mono"`, so the system face won and the embed did nothing), and the check that matters is
+  `url(http…)` count in the built HTML — an external *anchor* href is fine, an external
+  font/style URL is not.
+- **Footer order** (2026-08-05, Riley): the footer opens with **Sources & snapshot dates**
+  and the build feed; the `.footbrand` identity block sits BELOW them, above the credits.
 - **Site tabs** (2026-08-05): the masthead ends in a two-tab strip — **Spec Tracker**
   (`index.html`) and **⚙ S2 Gearing** (`gearing.html`) — mirrored at the head of the
   gearing page, which lost its old one-way `.backlink`. Gearing used to be a fourth CTA
