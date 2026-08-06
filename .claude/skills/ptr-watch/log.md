@@ -435,3 +435,37 @@ catch-up path.
 - **NO SEASON FLIP — and it is now DURABLY RECORDED.** All 26 live tier-list pages carry `seasonVerified: "s1"` and the three `icyveins-ptr` pages `"s2"`, written for the first time this run (Gate 0 widened in e65332a). **Regional date split worth noting:** US blue posts read "Season 2 Begins **August 18**" / "Venomous Abyss Raid Goes Live **August 18**" while EU reads **19 August**; launch is 11 August (US) / 12 August (EU). Earlier logs recorded only the 19th. **STANDING OWNER ACTIONS, two different events:** `node src/snapshot.mjs --frozen` on the LAST pre-launch refresh (~Aug 10-11), then the `SNAPSHOT_PHASE` flip in render.mjs at launch. `PHASE_FLIP_DUE` 2026-08-20 keeps margin against **either** date.
 - **Watch items:** carried forward unchanged — Fury Warrior's `ptr.asOf` reads 2026-07-31 while its `sourceLabel` dates the Archimtiros review to 2026-07-25. · **NEW, for a human:** Supatease is publishing 12.1 damage tests on Demonology/Destruction Warlock and Devastation Evoker, all outside his registered `specs` scope — see the watch-creators log.
 - `npm test` 311 pass / 0 fail / 20 skipped; `npm run build` OK; snapshot written; `check-refresh --manifest` passes.
+
+## 2026-08-06 (nightly CI, Opus 5 — single-shot)
+- **NO NEW BUILD, from any of the three channels.** Nothing logged to `ptr-builds.json`, no
+  tier-set upkeep due, coverage/pairing gates quiet.
+  1. **Official thread** `2317811.json`: `highest_post_number` still **19** (Linxy,
+     2026-07-31T23:42Z) — already logged as the 07-31 follow-up.
+  2. **Wowhead news RSS** (40 items back to 07-30): the only 12.1-PTR posts since the 07-31
+     build are **Embellishment and Potion Tuning** (news=382361 — Polished Ammolite crit
+     −90%, Snakeskin Lining damage −90% / 3PPM, Adorned Fang haste −70% / 4PPM, Liquid
+     Luster versatility −52%), **Altar of Fangs M+ changes** (382360), **datamined M+ /
+     raid / delve hotfixes** (382350) and **Season 2 M+ dungeon tuning notes** (382325).
+     All four are item or encounter tuning with **no per-spec class line**, so none becomes
+     a build highlight — logging an embellishment nerf as a spec change would let item
+     tuning vote in the outlook tally.
+  3. **Blue-tracker index** swept (needs the full browser header set; a UA-only fetch is
+     403): newest entries are 08-04 M+ score cutoffs and 08-03 housing/UI. **No standalone
+     class-tuning blue post since the 07-16 healer one already in the feed.**
+- **12.1 IS NOT LIVE YET, and the date is now on the record: Blizzard announced Curse of
+  Ula'tek for Aug 11 (US) / Aug 12 (EU), Venomous Abyss raid Aug 18/19.** Every live
+  tier-list page still era-verifies as 12.0.7 / Season 1. `SNAPSHOT_PHASE` and
+  `PHASES.liveSeason` stay put; `PHASE_FLIP_DUE` (Aug 20) still bounds it.
+- **The 9 uncovered specs stay `ptr: null`** (Frost DK, Feral/Guardian/Resto Druid, Holy
+  Priest, Elemental Shaman, all three Warlocks). Discovery lanes worked from CI this run:
+  Wowhead RSS window — nothing per-spec; **Wowhead site search is JS-hydrated** (200, 32 KB,
+  zero result hrefs in the HTML) and **`/guides/rss` is 403 even with the full header set**,
+  so neither is a usable discovery lane from a datacenter IP. The remaining lanes (class
+  Discords, HackMD, community sites) are paste-in or residential. Nothing was manufactured.
+- **WCL zone 54 / 52 / 56 / 57 are evidence-only on this runner** — no credentials held, no
+  warcraftlogs.com fetch of any kind. `wcl-fetch/evidence.json` (12:28:34Z) verdict
+  `rdps-broken`; the raw-DPS frozen recipes landed (dummy 102 rows, Venomous Abyss pooled 27
+  with Coiled Altar + Ula'tek at 0 players, M+ keys pooled 27 across all 8 dungeons), the
+  five rDPS/normalized cuts recorded `unreachable` with data untouched. Zone-54's stored
+  2026-07-28 breaches `maxAgeDays` 10 tomorrow — expected, and only a new testing window
+  clears it.

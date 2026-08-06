@@ -2,28 +2,42 @@
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
   "videos": [
     {
+      "id": "MdvcFzV0tmI",
+      "creator": "Shadarek",
+      "title": "Season 2 Embellishment Tuning & Demon Hunter new BiS",
+      "published": "2026-08-06",
+      "queuedAt": "2026-08-06"
+    },
+    {
+      "id": "duIjLdAU3HQ",
+      "creator": "YoDaTV",
+      "title": "General Guide for Vengeance DH in 12.1! (Mythic+)",
+      "published": "2026-08-05",
+      "queuedAt": "2026-08-06"
+    }
+  ],
+  "skipped": [
+    {
       "id": "02rLfzEKLq4",
       "creator": "Supatease",
       "title": "Affliction Lock 12.1 Damage Test",
-      "published": "2026-08-05",
-      "queuedAt": "2026-08-05"
+      "reason": "Transcript verified in full 2026-08-06 (nightly CI): a 20-second dummy clip, 7 caption chunks end to end. He narrates one Affliction opener (dots, Haunt, Malevolence, Dark Glare, Soul Harvest) and closes with \"that does not come close to taking him down, but it is what it is\" — no number, no comparison, no tuning or outlook read. Nothing for takes[]; writing a sentiment from \"it is what it is\" would be inventing the read. Affliction is one of the 9 uncovered specs, which is exactly when the temptation to over-read a clip is highest.",
+      "verifiedAt": "2026-08-06"
     },
     {
       "id": "089Gp0xV7Iw",
       "creator": "Supatease",
       "title": "Elemental Shaman UNREAL",
-      "published": "2026-08-04",
-      "queuedAt": "2026-08-05"
+      "reason": "Transcript verified in full 2026-08-06 (nightly CI): ONE caption chunk, \"Boom. Shaga laga baby.\" A hashtag clip short whose media:description copies the title — the documented Supatease short shape. 0 takes, 0 metaNotes.",
+      "verifiedAt": "2026-08-06"
     },
     {
       "id": "aOSWljAYUnw",
       "creator": "Supatease",
       "title": "Elemental Shaman GODLIKE",
-      "published": "2026-08-04",
-      "queuedAt": "2026-08-05"
-    }
-  ],
-  "skipped": [
+      "reason": "Transcript verified in full 2026-08-06 (nightly CI): 5 caption chunks of loading-in reaction (\"time to load up\", \"this guy is going to get zapped\", \"what is this? 2500\") — a burst-crit clip short, no spec strength, tuning or outlook read. Same shape as its sibling 089Gp0xV7Iw. 0 takes, 0 metaNotes.",
+      "verifiedAt": "2026-08-06"
+    },
     {
       "id": "DnYoCpImTZw",
       "creator": "Kalamazi",

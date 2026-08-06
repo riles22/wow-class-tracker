@@ -452,3 +452,72 @@ numbers (95th pct DPS / popularity / M+ score — ungated, not in required-sourc
 - **WCL is evidence-only on the runner; nothing was fetched from warcraftlogs.com.** `wcl-fetch/evidence.json` (this run's, attempted 15:33:19Z) verdict **`rdps-broken`** — `characterRankings(metric: rdps)` on encounter 3176 returns HTTP 200 with a bare "Internal server error" and 0 rankings while OAuth and GraphQL transport both report ok (3600/h, 1 point spent). So the five rDPS/normalized cuts are `unreachable` and untouched, while the three **raw-DPS** frozen-recipe series landed and genuinely re-medianed: dummy **102 rows** (1T 2000 / 2T 391 / 3T 216 / 5T 2000 ranked players, complete pagination) with **21 of 26 1T** and **12 of 27 5T** values moving; Venomous Abyss pooled **27 rows**, values unchanged (The Coiled Altar and Ula'tek returned ok/0 players — between testing windows, not an error); M+ keys pooled **27 rows**, **22 of 27** moved.
 - **The stale-`wcl-fetch/` watch item from the 08-04 local run is MOOT here** — CI writes a fresh evidence file every night, and this run's is 4 minutes old. The open human question it raised (should local runs skip the cross-check, or not produce an evidence file?) is unchanged and still owner-side.
 - `npm test` **311 pass / 0 fail / 20 skipped**; `npm run build` OK (1137.7 KB); `node src/snapshot.mjs` written; `check-refresh --manifest` **passes** (21 success / 5 degraded-unreachable, 0 tier moves vs baseline).
+
+## 2026-08-06 (nightly CI, Opus 5 — single-shot)
+- **Two real movers this run: MYTHICSTATS finally rolled to period 1075, and SimC shipped a
+  new nightly.** Everything else re-fetched live and reproduced its stored values, which is
+  the honest reading rather than a stalled fetch — see each entry for why.
+- **MYTHICSTATS: the half-landed period roll has COMPLETED.** The last two runs found
+  `/period/latest` 302-ing to `/period/1075` while 1075 itself 404'd, and ingested 1074
+  instead. 1075 now renders: *"Period 1075 MID1 (Lindormi's Guidance, Xal'atath's Bargain:
+  Pulsar, Tyrannical, Fortified, Xal'atath's Guile)"*, top 2000 keys / 10000 characters
+  (6313 unique) / 19.8 avg key, flagged **"just started and still in progress"**. **40/40
+  roster specs** parsed from the "Spec representation in top keys" section — the four 1074
+  absences (Blood DK, Vengeance DH, Resto Druid, Prot Paladin) are all back — 0 unmatched,
+  all 40 values new. Fetched via r.jina.ai (the site is JS-heavy). Alt labels stay
+  hyphenated (`beast-mastery hunter`, `unholy death-knight`); normalise before matching.
+- **SimC: NEW nightly.** Header `12.0.7.68974 Live (hotfix 2026-08-06/68974, git build HEAD
+  c5b695436c)`; previous run had hotfix 2026-08-03 / HEAD f4719d79e8. 26/26 DPS-roster specs
+  re-parsed from the plain-text `DPS Ranking` block (best hero/talent variant per spec). All
+  26 values moved and **every move is sub-0.15%** — largest is Retribution Paladin 112,288 →
+  112,146 — i.e. iteration noise on a rebuilt nightly with no reordering of the field. Last
+  run's Devourer +10.5% jump therefore stands and was not re-derived. Augmentation absent by
+  design.
+- **MURLOK — parse fix worth pinning, it silently lost 5 specs.** Splitting on the literal
+  `<a class="vi-box meta-item ` returns only **35** rows because murlok emits **both**
+  attribute orders: `<a class="vi-box meta-item …">` AND `<a href="/mage/frost/m+"
+  class="vi-box meta-item …">`. Marksmanship Hunter, Fire Mage, Frost Mage, Protection
+  Paladin and Destruction Warlock were the casualties, and `apply-metrics` would have
+  upserted the other 35 while leaving those five carrying a stale `asOf` — a silently mixed
+  cut that passes every gate (floor is 25). **Split on `class="vi-box meta-item ` instead**;
+  the correct per-page item counts are **27 / 7 / 6**, and a short count is the tell.
+  40/40 landed, 27 values moved (all DPS, max +0.67%).
+- **Archon** — all four numeric series re-read from `__NEXT_DATA__`
+  `specRankingsSection.table.data[]` (never `tierList`): 33 × "95th pct DPS (Mythic)", 7 ×
+  HPS, 40 × "M+ score (95th pct)", 80 × Popularity = **160 rows, 0 unmatched, 0 values
+  moved**. That is correct, not a stall: `page.lastUpdated` still reads
+  **2026-08-05T12:00:00Z** at 12:49Z, so their daily 12:00Z cut had not yet published for
+  08-06 and this is the same upstream data the last run read. Max relative move across all
+  160 rows: 0.0% (checked, not assumed).
+- **WoWMeta** — JSON API only (never the stale HTML prerender). 44 blocks →
+  whitelist `categoryType ∈ {dps,hps,tank}` + `sortField lowerBound` + `keyRange undefined`
+  = 27 + 7 + 6 = **40 rows**, class/spec byte-identical to the roster. **0 of 40 values
+  moved at the stored 2-decimal precision.** ⚠ **Round to 2 dp, not to integer** — a naive
+  `round()` reports all 40 as "changed" (394.32 → 394) and would rewrite the file for
+  nothing. `snapshotDate` still **2026-08-05**, so recorded **`partial`**: the source's own
+  date did not advance, and `asOf` is the source's date, never ours.
+- **Bloodmallet** 26/26, `simc_settings.tier == "MID1"` confirmed on every chart, **0 target
+  values moved** — every chart's own `timestamp` is still 2026-07-08 02:52–02:55 (Elemental
+  Shaman 2026-07-15 02:25), i.e. nothing has been re-simmed upstream; only our verification
+  date advanced. Augmentation returns `{status: "error"}` by design.
+- **Robydoby (best-effort, outside the contract): VERIFIED, NOT re-ingested — no new week.**
+  26 tabs mapped from the htmlview `items.push` blocks; newest **Mythic** week is still
+  **24/7** (Sszorak #5 gid=16354462, Twin Fangs #6 gid=1886150557). Both CSVs re-fetched
+  with `curl -sL` (the export URL 307s) and re-parsed with a **quote-aware** reader locating
+  the block by `lastIndexOf('Class')` in the header row (index **18** this week): **24
+  in-roster DPS specs, 0 value diffs**, so nothing merged and `asOf` stays 2026-07-24. The
+  12 tank/healer rows the DPS sheet carries are tank-DPS and correctly not ingested.
+- **WCL is evidence-only on the runner; nothing was fetched from warcraftlogs.com by any
+  means.** `wcl-fetch/evidence.json` (this run's, 2026-08-06T12:28:34Z) verdict
+  **`rdps-broken`** — `characterRankings(metric: rdps)` on encounter 3176 returns HTTP 200
+  with a bare "Internal server error" and 0 rankings while OAuth + GraphQL transport both
+  report ok (3600/h, 1 point). The five rDPS/normalized cuts recorded `unreachable`, stored
+  rows untouched. The three frozen-recipe **raw-DPS** series landed via the deterministic
+  step: dummy **102 rows** (1T 2000 / 2T 488 / 3T 228 / 5T 2000 ranked players, complete
+  pagination), Venomous Abyss pooled **27** (Coiled Altar + Ula'tek `ok` with 0 players —
+  between windows), M+ keys pooled **27** across all 8 S2 PTR dungeons.
+- ⚠ **`wcl-ptr-raid` (zone 54) breaches `maxAgeDays` 10 TOMORROW (2026-08-07)** — stored at
+  2026-07-28, and the last residential run confirmed the zone itself returns the
+  valid-but-empty fragment at both Heroic and Mythic. The Venomous Abyss opens 08-18/19; a
+  new testing window is the only thing that clears it. The heartbeat firing is correct
+  visibility, not a fixable miss.

@@ -331,3 +331,46 @@ representation n; verified against the page, NOT a Blizzard retune); survivabili
   · The 15:37Z nightly stored `seasonVerified` on all 26 tier-list pages. Because a WRONG value here fails **silently and permanently** — `sourceSeasonOk` drops a source from a bracket's consensus the moment `PHASES.liveSeason` flips, with no gate to catch it — all 26 were re-derived from scratch: pages re-fetched live from a residential IP, in a separate process, with an independently-written parser. **26/26 agree with what the nightly stored, 0 disagreements** (icyveins 6 · method 2 · wowhead 6 · archon 9 = `s1`; icyveins-ptr 3 = `s2`). Confirmed too that no non-tier-list page carries the field.
   · **Method and Archon are the two that cannot be verified by title** and are worth knowing about before anyone "fixes" them: neither page states a season anywhere. Method was settled structurally — "Midnight" x20 (M+) / x16 (raid) and "Season 1" x3, **zero** "Season 2" / "12.1" / "PTR", all 8 Season-1 dungeons present with zero Season-2 dungeons, Devourer in both lists. Archon likewise, from its own pools.
   · ⚠ **A body-text check would have mis-verified twelve pages.** Every Icy Veins and Wowhead page matches "Season 2" **in its body** (they link PTR content), while the TITLE says Season 1. Title is the authority for those two sources; only fall back to structure where there is no season string at all, as with Method and Archon.
+
+## 2026-08-06 (nightly CI, Opus 5 — single-shot)
+- **All 5 tier-list sources fetched live; 359 rating rows applied; exactly ONE tier moved anywhere.**
+  Transports used, all direct `curl` (no proxy): Icy Veins browser-UA; Method browser-UA;
+  Wowhead the FULL browser header set (a UA-only fetch is 403 + 919-byte stub); Archon
+  browser-UA + `__NEXT_DATA__` from raw HTML.
+- **THE ONE MOVE — Wowhead M+ Healer: Restoration Druid S → A**, and the page's own
+  `dateModified` moved with it (**2026-05-06 → 2026-08-05**), i.e. Wowhead rebuilt that
+  single page yesterday. Its `published` was updated to match; the other five Wowhead
+  pages re-read unchanged. This is the whole consensus movement for the run (Resto Druid
+  M+ consensus A → B).
+- **Icy Veins** 80 rows (40 raid + 40 M+), 0 unmatched, 0 moves. Era: raid DPS title
+  "Midnight (12.0.7)", raid tank "Patch 12.0.7 / Season 1", other four "Patch 12.0.7 /
+  Midnight" → `seasonVerified: "s1"` on all six. `dateModified` unchanged (healer 08-04,
+  tank 06-30, rest 07-01) and matches the pre-agent published evidence 6/6.
+- **`icyveins-ptr`** 40 rows, **0 TBD this run** (was 38 rated at adoption — Augmentation
+  and Vengeance placed on 08-02 and have stayed placed). Band spread S+ 2 / S 5 / A+ 11 /
+  A 10 / B+ 6 / B 5 / C 1. All three titles read "PTR Tier List for Midnight (Patch 12.1 /
+  Season 2)" → `seasonVerified: "s2"`. `published` **re-read, never carried forward**:
+  JSON-LD 2026-08-02T10:53Z and the in-body "Last UPDATED - 2nd of August" agree, so the
+  stored value stands; 4 days behind on a Sunday-rebuild cadence is normal.
+- **Method** 79 rows (40 M+ + 39 raid), 0 moves. Two things worth pinning:
+  · **Era-verify from the BODY, not `og:description`** — that meta tag still says "The War
+    Within Season 3" (stale boilerplate). The page header says "Midnight Season 1 Raids:
+    The Voidspire, The Dreamrift and March on Quel'Danas". Reading the meta tag would have
+    produced a false season-flip alarm.
+  · **The M+ page carries TWO tier lists** — the spec list, then a "Mythic+ Dungeon
+    Difficulty Tier List". The 8 dungeon names come through the same `tier__icon` markup
+    and must be dropped as unmatched. And the M+ **spec S tier is genuinely EMPTY upstream**
+    (raw markup: `<div class="tier__entries">` immediately closed), so all 40 M+ specs sit
+    in A/B/C. Verify that in the markup before treating a missing S tier as a parse bug.
+  · Vengeance DH still absent from the raid list (documented upstream omission).
+- **Archon** 80 aggregate rows (raid = `throughput` tierList, M+ = `score`), 40
+  survivability rows, and **51/51 per-encounter pages** (9 bosses + 8 dungeons × 3 roles)
+  → 680 tier rows, 45 of which moved. Aggregates moved zero. `page.lastUpdated` read
+  **2026-08-05T12:00:00Z** at 12:49Z fetch time — their daily 12:00Z cut had not yet
+  published for 08-06 — so identical aggregate values are the correct reading of the same
+  upstream cut, not a stalled fetch. Era from `page.description`: raid "in 12.0.7", M+ "in
+  Season 1" → s1.
+- **No season flip.** Blizzard has announced Curse of Ula'tek for **Aug 11 (US) / Aug 12
+  (EU)** with the Venomous Abyss raid Aug 18/19; every live source still self-identifies as
+  12.0.7 / Season 1, so `PHASES.liveSeason` and `SNAPSHOT_PHASE` stay as they are. The flip
+  window opens in five days.

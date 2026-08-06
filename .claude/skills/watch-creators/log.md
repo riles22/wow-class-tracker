@@ -594,3 +594,53 @@ queue + a 2026-07-28 publish-date cutoff rather than from the log. No creator op
 - **TRIAGED OUT BY TITLE + `media:description`, no transcript fetched** (not added to `skipped[]` — that lane is for transcript-VERIFIED skips): Supatease `SO6pJYPI7l0` ("Supatease Sax Vibes"), `NyfCoA2QhdE` ("Final PVP Data Analysis Season 1" — **PvP, out of scope for a PvE tracker**), `pSZn7QF7QAw` + `wpoMbE2MQ_k` (clickbait clip shorts whose `media:description` merely copies the title — the documented Supatease short shape, same as the already-triaged `B9qKaeqYkPU`); Tettles `nH-b1QYaS8w` (stream VOD, duplicate title of the already-seen `vwY2ZbIwFkE`); Dalaran Gaming `-bZHpvG9P38` (5v5 PvP duels).
 - **No `latest` field advanced** — nothing was distilled to point one at, and `latest` is a factual pointer to processed content, not a freshness stamp. **No creator opinion touched any rating.**
 - **Standing recommendation, now seven entries old and unchanged:** the seen-set is still re-derived by substring scan over this log, so pre-pipeline entries read as "unseen" every run. A persisted seen-set file, or a `triaged` reason lane alongside `skipped[]`, remains the highest-value cleanup here — this run again had to hand-separate "log-mentioned" from "durably seen" across 120 videos.
+
+## 2026-08-06 (nightly CI, Opus 5 — single-shot)
+- **25/25 feeds polled live, HTTP 200 first attempt, no retries; 375 entries parsed.** yt-dlp
+  not invoked, installed or upgraded; no transcript API and no YouTube page fetched by this
+  agent. (Kyrasis, Gamz, Azortharion and Voulk still carry no `channelId`, so they have no
+  feed to poll.)
+- **`transcript-fetch/summary.json` verdict `ok`, requested 3 / fetched 3 — the whole queue
+  drained. 3 videos processed → 0 takes, 0 metaNotes, 0 superseded, 3 durable skips
+  (`skipped[]` 11 → 14).** All three queued Supatease items turned out to be clip shorts
+  with no analytical content, and the transcripts say so unambiguously:
+  · `02rLfzEKLq4` "Affliction Lock 12.1 Damage Test" — **7 caption chunks, ~20 s**. One
+    dummy opener narrated (dots, Haunt, Malevolence, Dark Glare, Soul Harvest) and a closing
+    *"that does not come close to taking him down, but it is what it is"*. **No number, no
+    comparison, no tuning or outlook read.**
+  · `089Gp0xV7Iw` "Elemental Shaman UNREAL" — **ONE chunk: "Boom. Shaga laga baby."**
+  · `aOSWljAYUnw` "Elemental Shaman GODLIKE" — 5 chunks of loading-in reaction ("this guy's
+    going to get zapped", "what is this? 2500").
+  **Affliction and Elemental are both among the 9 specs at `ptr: null`**, which is exactly
+  when over-reading a 20-second clip is most tempting. Nothing was written; the durable
+  `skipped[]` lane now stops all three from being re-queued.
+- **QUEUED 2** (queue 3 → 2):
+  · **Shadarek `MdvcFzV0tmI`** "Season 2 Embellishment Tuning & Demon Hunter new BiS"
+    (08-06 04:32Z) — description links the Wowhead embellishment-tuning post; the "new BiS"
+    half may carry a DH itemisation read. Queued rather than triaged so the outcome lands
+    durably either way.
+  · **YoDaTV `duIjLdAU3HQ`** "General Guide for Vengeance DH in 12.1! (Mythic+)"
+    (08-05 16:00Z) — squarely inside his registered Vengeance scope, and his 12.1 Prot
+    Paladin guide of exactly this shape (`15eTmWfKrLc`) produced a take, so the format is
+    proven productive.
+- **TRIAGED OUT by title + `media:description`, no transcript fetched (5)** — not added to
+  `skipped[]`, which is for transcript-VERIFIED skips: Supatease `mTV27AX1oIU` ("Rank 1
+  WORLD Multiclasser MAIN TIME" — description copies the title, the documented Supatease
+  short shape) and `7d4FVxcHwY8` ("MM Hunter 12.1 PVP Looks Insane" — **PvP, out of scope
+  for a PvE tracker**, and MM Hunter is outside his registered scope anyway); YoDaTV
+  `KVbS_yWPUDY` ("yodatv on twitch", stream VOD); Dalaran Gaming `0tnlu2XgYts` (5v5/1v1 PvP
+  duels) and `AlPW1VTafMg` (Season 1 rewards PSA, no spec read).
+- **The Supatease out-of-scope flag from the 08-05 run is still open for a human** and this
+  run adds to it: `3fW7j8Ssa0o` (Demonology), `oNZJviGSxc0` (Destruction), `DaLXBrvxpjY`
+  (Devastation Evoker) and now `7d4FVxcHwY8` (MM Hunter) are all outside his registered
+  scope (Shaman class-wide, Warlock/**Affliction**, Warrior/Arms+Protection). Given the
+  three transcripts read this run, the shape is now clearer: these are **seconds-long clip
+  shorts**, so widening his scope would likely buy little — worth weighing before anyone
+  edits the registry.
+- **No `latest` field advanced** — nothing was distilled to point one at, and `latest` is a
+  pointer to processed content, not a freshness stamp. **No creator opinion touched any
+  rating.**
+- **Standing recommendation, now eight entries old:** the seen-set is still re-derived by
+  substring scan over this log (171 of 375 entries read as "unseen", nearly all pre-pipeline
+  backlog). A persisted seen-set file, or a `triaged` reason lane alongside `skipped[]`,
+  remains the highest-value cleanup in this skill.
