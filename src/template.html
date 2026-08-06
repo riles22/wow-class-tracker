@@ -26,6 +26,15 @@
 <!-- Fonts load async from the main script (CSP-safe, no inline handler) so first paint
      never blocks on Google Fonts; display=swap covers the swap-in. -->
 <noscript><link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
+<!-- Motion is on by default, matching the reference site. Apply a saved site-specific
+     reduction before CSS is parsed so returning users never see a one-frame flash. -->
+<script>
+try {
+  if (localStorage.getItem("wct-reduce-motion") === "reduce") {
+    document.documentElement.dataset.reduceMotion = "true";
+  }
+} catch {}
+</script>
 <style>
   /* ============================================================
      PRESENTATION ONLY — all data lives in data/*.json and is
@@ -596,7 +605,7 @@
   .finder-ov.open{display:block}
   /* ---------- motion (2026-08-05, Riley: "cool menu animations") ----------
      One vocabulary for every opening surface, all compositor-friendly (opacity/
-     transform only, except the details fold), all killed by prefers-reduced-motion.
+     transform only, except the details fold), all stopped by the site Reduce motion control.
      A transient .motion-enter class scopes entrances to real opens/content swaps. The
      Ladder / Compare / Compare all overlays share .finder-ov, and the
      .finder-* names are the Spec Finder's legacy — it was removed 2026-08-05, but the
@@ -730,17 +739,37 @@
   .ladder-ptr rect.ladderbar{stroke:var(--ink-faint); stroke-dasharray:4 3; stroke-width:1}
   @media(max-width:560px){ .ladder-panel{margin:0; border-radius:0; min-height:100vh; padding:18px 14px 26px} .laddersearch{width:100%} }
 
-  @media(prefers-reduced-motion:reduce){
-    .rule{animation:none}
-    .drawer,.chev,.row,.ladderbar,.switch,.switch::after,.search,
-    .legend-wrap > summary::before,.rowbar > i,.starbtn,.utilbar button{transition:none}
-    .starfield{display:none}
-    .finder-ov.open.motion-enter,.finder-ov.open.motion-enter .finder-panel,
-    .row.open.motion-enter .drawer-in,#ladder-chart.motion-enter .ladderbar{animation:none}
-    .legend-wrap::details-content,.sub-more::details-content{transition:none}
-    .seg button,.finderbtn,.fopt,.toggle,.sitetab{transition:none; transform:none}
-    .finderbtn:hover,.finderbtn:active,.seg button:active,.fopt:active,.toggle:active{transform:none; box-shadow:none}
-  }
+  /* The reference site animates regardless of the OS hint. This tracker now matches that
+     default while keeping a persistent, explicit Reduce motion control in the toolbar. */
+  html[data-reduce-motion="true"] .rule{animation:none}
+  html[data-reduce-motion="true"] .drawer,
+  html[data-reduce-motion="true"] .chev,
+  html[data-reduce-motion="true"] .row,
+  html[data-reduce-motion="true"] .ladderbar,
+  html[data-reduce-motion="true"] .switch,
+  html[data-reduce-motion="true"] .switch::after,
+  html[data-reduce-motion="true"] .search,
+  html[data-reduce-motion="true"] .legend-wrap > summary::before,
+  html[data-reduce-motion="true"] .rowbar > i,
+  html[data-reduce-motion="true"] .starbtn,
+  html[data-reduce-motion="true"] .utilbar button{transition:none}
+  html[data-reduce-motion="true"] .starfield{display:none}
+  html[data-reduce-motion="true"] .finder-ov.open.motion-enter,
+  html[data-reduce-motion="true"] .finder-ov.open.motion-enter .finder-panel,
+  html[data-reduce-motion="true"] .row.open.motion-enter .drawer-in,
+  html[data-reduce-motion="true"] #ladder-chart.motion-enter .ladderbar{animation:none}
+  html[data-reduce-motion="true"] .legend-wrap::details-content,
+  html[data-reduce-motion="true"] .sub-more::details-content{transition:none}
+  html[data-reduce-motion="true"] .seg button,
+  html[data-reduce-motion="true"] .finderbtn,
+  html[data-reduce-motion="true"] .fopt,
+  html[data-reduce-motion="true"] .toggle,
+  html[data-reduce-motion="true"] .sitetab{transition:none; transform:none}
+  html[data-reduce-motion="true"] .finderbtn:hover,
+  html[data-reduce-motion="true"] .finderbtn:active,
+  html[data-reduce-motion="true"] .seg button:active,
+  html[data-reduce-motion="true"] .fopt:active,
+  html[data-reduce-motion="true"] .toggle:active{transform:none; box-shadow:none}
 </style>
 </head>
 <body>
@@ -820,6 +849,11 @@
       <input type="checkbox" id="staronly">
       <span class="switch"></span>
       <span>★ Starred</span>
+    </label>
+    <label class="toggle" title="Stops background, menu, drawer, chart, and smooth-scroll animations. Saved in this browser.">
+      <input type="checkbox" id="reduce-motion">
+      <span class="switch"></span>
+      <span>Reduce motion</span>
     </label>
     <span class="grow"></span>
     <span class="toolstatus" id="toolstatus"></span>
@@ -1080,10 +1114,23 @@ const metricEra = m => m.era ?? (PHASE.ptr && m.name.includes(PHASE.ptr.marker) 
 const takeEra = t => (PHASE.ptr && (t.patchContext||"").includes(PHASE.ptr.marker)) ? "ptr" : "live";
 const eraOk = era => state.era === "both" || state.era === era;
 const matrix = document.getElementById('matrix');
-const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+const reduceMotionControl = document.getElementById('reduce-motion');
+const motionReduced = () => document.documentElement.dataset.reduceMotion === 'true';
 const motionTimers = new WeakMap();
+function setMotionReduced(reduced, persist = true){
+  if(reduced) document.documentElement.dataset.reduceMotion = 'true';
+  else delete document.documentElement.dataset.reduceMotion;
+  reduceMotionControl.checked = reduced;
+  if(persist){
+    try { reduced ? localStorage.setItem('wct-reduce-motion','reduce') : localStorage.removeItem('wct-reduce-motion'); } catch {}
+  }
+  if(reduced) document.querySelectorAll('.motion-enter').forEach(el=>el.classList.remove('motion-enter'));
+  document.dispatchEvent(new CustomEvent('wct-motion-change', { detail:{ reduced } }));
+}
+reduceMotionControl.checked = motionReduced();
+reduceMotionControl.addEventListener('change', ()=>setMotionReduced(reduceMotionControl.checked));
 function replayEntrance(el, cleanupMs = 420){
-  if(!el || reducedMotion.matches) return;
+  if(!el || motionReduced()) return;
   const prior = motionTimers.get(el); if(prior) clearTimeout(prior);
   el.classList.remove('motion-enter');
   void el.offsetWidth; // restart only when this helper explicitly marks a real entrance
@@ -1092,7 +1139,7 @@ function replayEntrance(el, cleanupMs = 420){
     el.classList.remove('motion-enter'); motionTimers.delete(el);
   }, cleanupMs));
 }
-const motionScrollBehavior = () => reducedMotion.matches ? 'auto' : 'smooth';
+const motionScrollBehavior = () => motionReduced() ? 'auto' : 'smooth';
 
 /* Resolve what the active view shows for one spec + bracket.
    Returns { tier, score, div, tip } — score is used for tier sorting. */
@@ -2932,10 +2979,10 @@ function openSpecFromOverlay(cls, spec){
   claimPendingView("all");
 })();
 
-/* ---------- ambient starfield (respects reduced motion) ---------- */
+/* ---------- ambient starfield (respects the site Reduce motion control) ---------- */
 (function(){
   const c = document.getElementById('stars');
-  if(!c || reducedMotion.matches) return;
+  if(!c) return;
   const ctx = c.getContext('2d');
   let stars = [], raf, inView = true;
   function size(){
@@ -2960,9 +3007,9 @@ function openSpecFromOverlay(cls, spec){
   // The loop used to run forever, repainting at 60fps with the masthead scrolled
   // thousands of pixels off-screen (audit 2026-07-24, P3). Pause when the canvas leaves
   // the viewport and re-arm when it returns. `raf = 0` is the "stopped" sentinel so a
-  // re-entry can never stack two loops. The reduced-motion bail above still means this
-  // never starts at all for those users, which is the correct behaviour and is untouched.
-  function start(){ if(inView && !document.hidden && !reducedMotion.matches && !raf) draw(); }
+  // re-entry can never stack two loops. The site control can stop and restart this loop
+  // without a reload, so opting back into motion takes effect immediately.
+  function start(){ if(inView && !document.hidden && !motionReduced() && !raf) draw(); }
   function stop(){ if(raf){ cancelAnimationFrame(raf); raf = 0; } }
   size(); start();
   if(window.IntersectionObserver){
@@ -2970,7 +3017,10 @@ function openSpecFromOverlay(cls, spec){
   }
   window.addEventListener('resize', ()=>{ stop(); size(); start(); });
   document.addEventListener('visibilitychange', ()=>{ document.hidden ? stop() : start(); });
-  reducedMotion.addEventListener?.('change', e=>{ e.matches ? stop() : start(); });
+  document.addEventListener('wct-motion-change', e=>{
+    if(e.detail?.reduced){ stop(); ctx.clearRect(0,0,c.width,c.height); }
+    else { size(); start(); }
+  });
 })();
 </script>
 </body>

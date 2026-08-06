@@ -816,10 +816,39 @@ ui("the legend remembers the user's toggle across reloads — and only the user'
   assert.equal(await page.$eval("#legendwrap", el => el.open), true, "…and reopened survives too");
 });
 
-ui("motion marks real entrances, not persistent open state, and respects reduced motion", async page => {
-  await page.emulateMedia({ reducedMotion: "no-preference" });
+ui("motion defaults on, marks real entrances, and persists the site reduction control", async page => {
+  // The reference site animates even when the OS asks for less motion. This site now does
+  // the same by default, with an explicit persisted control for people who want it quiet.
+  await page.evaluate(() => localStorage.removeItem("wct-reduce-motion"));
+  await page.emulateMedia({ reducedMotion: "reduce" });
   await page.reload();
   await page.waitForFunction(() => document.querySelectorAll(".row").length > 0);
+  const starfieldHasPaint = () => page.$eval("#stars", canvas => {
+    const pixels = canvas.getContext("2d").getImageData(0, 0, canvas.width, canvas.height).data;
+    for(let i = 3; i < pixels.length; i += 4) if(pixels[i]) return true;
+    return false;
+  });
+
+  const defaultOn = await page.evaluate(() => ({
+    rootReduced: document.documentElement.dataset.reduceMotion ?? null,
+    stored: localStorage.getItem("wct-reduce-motion"),
+    checked: document.getElementById("reduce-motion").checked,
+    ruleAnimation: getComputedStyle(document.querySelector(".rule")).animationName,
+    starfieldVisible: getComputedStyle(document.getElementById("stars")).display !== "none",
+    topScroll: (() => {
+      let behavior = null;
+      const prior = window.scrollTo;
+      window.scrollTo = opts => { behavior = opts.behavior; };
+      document.getElementById("toTop").click();
+      window.scrollTo = prior;
+      return behavior;
+    })(),
+  }));
+  defaultOn.starfieldPainted = await starfieldHasPaint();
+  assert.deepEqual(defaultOn, {
+    rootReduced: null, stored: null, checked: false,
+    ruleAnimation: "sweep", starfieldVisible: true, topScroll: "smooth", starfieldPainted: true,
+  });
 
   // Opening the Ladder animates its shell and its bars together.
   await page.evaluate(() => document.getElementById("ladderbtn").click());
@@ -846,21 +875,73 @@ ui("motion marks real entrances, not persistent open state, and respects reduced
     overlayClass: false, chartClass: true, panelAnimation: "none", barAnimation: "bar-grow",
   });
 
-  // The same interactions become immediate when the OS asks for less motion.
-  await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.reload();
-  await page.waitForFunction(() => document.querySelectorAll(".row").length > 0);
-  await page.evaluate(() => document.getElementById("ladderbtn").click());
-  const reduced = await page.evaluate(() => ({
+  // The site control stops an in-flight entrance immediately and persists across reloads.
+  await page.evaluate(() => document.getElementById("reduce-motion").click());
+  await page.waitForTimeout(80);
+  const reducedNow = await page.evaluate(() => ({
+    rootReduced: document.documentElement.dataset.reduceMotion,
+    stored: localStorage.getItem("wct-reduce-motion"),
+    checked: document.getElementById("reduce-motion").checked,
     overlayClass: document.getElementById("ladder-ov").classList.contains("motion-enter"),
     chartClass: document.getElementById("ladder-chart").classList.contains("motion-enter"),
     panelAnimation: getComputedStyle(document.querySelector("#ladder-ov .finder-panel")).animationName,
     barAnimation: getComputedStyle(document.querySelector("#ladder-chart .ladderbar")).animationName,
     switchTransition: getComputedStyle(document.querySelector(".switch")).transitionDuration,
-    starfield: getComputedStyle(document.getElementById("stars")).display,
+    starfieldVisible: getComputedStyle(document.getElementById("stars")).display !== "none",
+    topScroll: (() => {
+      let behavior = null;
+      const prior = window.scrollTo;
+      window.scrollTo = opts => { behavior = opts.behavior; };
+      document.getElementById("toTop").click();
+      window.scrollTo = prior;
+      return behavior;
+    })(),
   }));
-  assert.deepEqual(reduced, {
+  reducedNow.starfieldPainted = await starfieldHasPaint();
+  assert.deepEqual(reducedNow, {
+    rootReduced: "true", stored: "reduce", checked: true,
     overlayClass: false, chartClass: false, panelAnimation: "none", barAnimation: "none",
-    switchTransition: "0s", starfield: "none",
+    switchTransition: "0s", starfieldVisible: false, topScroll: "auto", starfieldPainted: false,
+  });
+
+  await page.reload();
+  await page.waitForFunction(() => document.querySelectorAll(".row").length > 0);
+  const persisted = await page.evaluate(() => ({
+    rootReduced: document.documentElement.dataset.reduceMotion,
+    stored: localStorage.getItem("wct-reduce-motion"),
+    checked: document.getElementById("reduce-motion").checked,
+    ruleAnimation: getComputedStyle(document.querySelector(".rule")).animationName,
+    starfieldVisible: getComputedStyle(document.getElementById("stars")).display !== "none",
+  }));
+  persisted.starfieldPainted = await starfieldHasPaint();
+  assert.deepEqual(persisted, {
+    rootReduced: "true", stored: "reduce", checked: true,
+    ruleAnimation: "none", starfieldVisible: false, starfieldPainted: false,
+  });
+
+  // Re-enabling motion starts the ambient layer and future entrances without a reload.
+  await page.evaluate(() => document.getElementById("reduce-motion").click());
+  await page.evaluate(() => document.getElementById("ladderbtn").click());
+  await page.waitForFunction(() => {
+    const canvas = document.getElementById("stars");
+    const pixels = canvas.getContext("2d").getImageData(0, 0, canvas.width, canvas.height).data;
+    for(let i = 3; i < pixels.length; i += 4) if(pixels[i]) return true;
+    return false;
+  });
+  const resumed = await page.evaluate(() => ({
+    rootReduced: document.documentElement.dataset.reduceMotion ?? null,
+    stored: localStorage.getItem("wct-reduce-motion"),
+    checked: document.getElementById("reduce-motion").checked,
+    overlayClass: document.getElementById("ladder-ov").classList.contains("motion-enter"),
+    chartClass: document.getElementById("ladder-chart").classList.contains("motion-enter"),
+    panelAnimation: getComputedStyle(document.querySelector("#ladder-ov .finder-panel")).animationName,
+    barAnimation: getComputedStyle(document.querySelector("#ladder-chart .ladderbar")).animationName,
+    starfieldVisible: getComputedStyle(document.getElementById("stars")).display !== "none",
+  }));
+  resumed.starfieldPainted = await starfieldHasPaint();
+  assert.deepEqual(resumed, {
+    rootReduced: null, stored: null, checked: false,
+    overlayClass: true, chartClass: true, panelAnimation: "ov-rise", barAnimation: "bar-grow",
+    starfieldVisible: true, starfieldPainted: true,
   });
 });
