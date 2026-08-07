@@ -28,19 +28,20 @@ const catalyst = await readData("catalyst-rules.json");
 const catalystAllocations = await readData("catalyst-stat-allocations.json");
 const simcManifest = await readData("simc-run-manifest.json");
 const simcWeights = await readData("simc-reference-weights.json");
+const healerReferences = await readData("healer-reference-rankings.json");
 let icons = { icons: {} };
 try { icons = await readData("icons.json"); }
 catch { console.warn("  (no data/icons.json -- run node src/harvest-icons.mjs for item icons)"); }
 const template = await readFile(join(ROOT, "src", "app.template.html"), "utf8");
 
 validateData({ raid, specs, dungeons, sheet, statOverrides, statBaseline, weaponProficiency,
-  itemEligibility, tier, catalyst, catalystAllocations, simcManifest, simcWeights },
+  itemEligibility, tier, catalyst, catalystAllocations, simcManifest, simcWeights, healerReferences },
 { gearingRoot: ROOT });
 const simcAudit = await validateSimcAuditArtifacts(simcWeights, simcManifest, ROOT);
 
 // </script> inside the JSON would close the host <script> tag early
 const blob = JSON.stringify({ raid, specs, dungeons, sheet, itemEligibility, tier, catalyst,
-  catalystAllocations, simcManifest, simcWeights, icons: icons.icons })
+  catalystAllocations, simcManifest, simcWeights, healerReferences, icons: icons.icons })
   .replace(/<\/script>/gi, "<\\/script>");
 
 if (!template.includes("__DATA__")) throw new Error("template is missing the __DATA__ placeholder");
@@ -82,3 +83,4 @@ console.log(`  ${specs.counts.specs} specs · ${specs.counts.withPriority} with 
 console.log(`  ${tier.counts.items} direct tier items · catalyst rules ${catalyst.patchContext}`);
 console.log(`  SimC coverage: ${simcManifest.coverage.acceptedEligibleSpecs} accepted · ${simcManifest.coverage.pendingEligibleSpecs} pending DPS · ${simcManifest.coverage.deferredTanks + simcManifest.coverage.deferredHealers} deferred · ${simcManifest.coverage.unsupportedSpecs} unsupported`);
 console.log(`  SimC audit: ${simcAudit.profiles} profiles · ${simcAudit.reports} accepted reports verified`);
+console.log(`  Healer reference coverage: ${healerReferences.coverage.filter((entry) => entry.status === "accepted").length} accepted · ${healerReferences.coverage.filter((entry) => entry.status === "pending").length} pending · ${healerReferences.coverage.filter((entry) => entry.status === "rejected").length} rejected · ${healerReferences.records.length} records (${healerReferences.provider.status})`);

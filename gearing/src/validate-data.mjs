@@ -51,6 +51,27 @@ const SIMC_ELIGIBILITY = new Set(["eligible", "deferred", "unsupported"]);
 const SIMC_PROFILE_STATUSES = new Set(["accepted", "ready", "pending", "rejected"]);
 const SIMC_SOURCE_MODES = new Set(["official-output", "curated-same-gear"]);
 const SIMC_SELECTION_MODES = new Set(["single-actor", "same-gear-dps"]);
+const HEALER_REFERENCE_OBJECTIVE = "healing-throughput";
+const HEALER_REFERENCE_SCENARIOS = new Set(["raid", "mplus"]);
+const HEALER_REFERENCE_STATUSES = new Set(["accepted", "pending", "rejected"]);
+const HEALER_PROVIDER_STATUSES = new Set(["permission-required-pending", "approved", "rejected"]);
+const HEALER_CATALYST_STATUSES = new Set(["validation-required", "validated"]);
+const HEALER_SCORING_BASIS_KINDS = new Set(["secondary-weights", "item-scores"]);
+// A "complete" pool cannot be trusted until the validator can derive its exact
+// spec/scenario candidate set. Partial, explicit item IDs are the only admitted v1 shape.
+const HEALER_ITEM_COVERAGE = new Set(["listed-items-only"]);
+const HEALER_ITEM_SCORE_CONTEXT = {
+  comparison: "equal-item-level",
+  gearSet: "fixed-reference-set",
+  catalyst: "retained-item-contribution",
+};
+const HEALER_PROVIDER = {
+  id: "questionably-epic",
+  name: "Questionably Epic",
+  sourceUrl: "https://questionablyepic.com/live/",
+  repositoryUrl: "https://github.com/Voulk/QuestionablyEpic",
+  stagingPrUrl: "https://github.com/Voulk/QuestionablyEpic/pull/1748",
+};
 const CURATION_GEAR_DATA_FILES = new Set([
   "data/raid-items.json", "data/dungeon-items.json", "data/tier-items.json",
   "data/catalyst-stat-allocations.json",
@@ -393,6 +414,166 @@ const uniqueStrings = (values) => Array.isArray(values) && values.every((value) 
   && new Set(values).size === values.length;
 const uniqueNumericStrings = (values) => uniqueStrings(values)
   && values.every((value) => /^\d+$/.test(value));
+
+function validateHealerScoringBasis(basis, knownItemIds, where, errors) {
+  if (!basis || !HEALER_SCORING_BASIS_KINDS.has(basis.kind)
+    || !(typeof basis.normalization === "string" && basis.normalization.trim())) {
+    errors.push(`${where}: invalid healer scoring basis`);
+    return;
+  }
+
+  if (basis.kind === "secondary-weights") {
+    const weights = basis.weights;
+    if (!sameSet(new Set(Object.keys(basis)), new Set(["kind", "normalization", "weights"]))
+      || !weights || !sameSet(new Set(Object.keys(weights)), SECONDARIES)
+      || Object.values(weights).some((value) => !Number.isFinite(value) || value < 0)
+      || !Object.values(weights).some((value) => value > 0))
+      errors.push(`${where}: invalid healer secondary weights`);
+    return;
+  }
+
+  const items = Array.isArray(basis.items) ? basis.items : [];
+  const itemIds = items.map((item) => String(item?.itemId || ""));
+  if (!sameSet(new Set(Object.keys(basis)),
+    new Set(["kind", "normalization", "itemCoverage", "context", "items"]))
+    || !HEALER_ITEM_COVERAGE.has(basis.itemCoverage)
+    || !basis.context
+    || !sameSet(new Set(Object.keys(basis.context)), new Set(Object.keys(HEALER_ITEM_SCORE_CONTEXT)))
+    || Object.entries(HEALER_ITEM_SCORE_CONTEXT).some(([key, value]) => basis.context[key] !== value)
+    || !items.length || !uniqueNumericStrings(itemIds)
+    || items.some((item) => !sameSet(new Set(Object.keys(item || {})), new Set(["itemId", "score"]))
+      || !knownItemIds.has(String(item?.itemId))
+      || !Number.isFinite(item?.score) || item.score < 0))
+    errors.push(`${where}: invalid healer item scores or item coverage`);
+}
+
+function validateHealerReferences(healerReferences, rows, knownItemIds, errors) {
+  const healerRows = rows.filter((row) => row.role === "Healer");
+  const healerKeys = new Set(healerRows.map((row) => `${row.spec} ${row.class}`));
+  const profilesBySpec = new Map(healerRows.map((row) => [
+    `${row.spec} ${row.class}`,
+    new Set((row.statPriorityVariants || []).length
+      ? row.statPriorityVariants.map((profile) => profile.name) : ["General"]),
+  ]));
+  const provider = healerReferences?.provider;
+  const catalyst = healerReferences?.catalyst;
+  const coverage = Array.isArray(healerReferences?.coverage) ? healerReferences.coverage : [];
+  const records = Array.isArray(healerReferences?.records) ? healerReferences.records : [];
+
+  if (healerReferences?.schemaVersion !== 1
+    || healerReferences?.patchContext !== WEAPON_PATCH_CONTEXT
+    || healerReferences?.objective !== HEALER_REFERENCE_OBJECTIVE
+    || !Array.isArray(healerReferences?.scenarios)
+    || !Array.isArray(healerReferences?.coverage) || !Array.isArray(healerReferences?.records)
+    || !sameSet(new Set(healerReferences.scenarios), HEALER_REFERENCE_SCENARIOS)
+    || healerReferences.scenarios.length !== HEALER_REFERENCE_SCENARIOS.size)
+    errors.push("healer reference dataset is missing or has the wrong patch/schema");
+
+  if (!provider || provider.id !== HEALER_PROVIDER.id || provider.name !== HEALER_PROVIDER.name
+    || provider.sourceUrl !== HEALER_PROVIDER.sourceUrl
+    || provider.repositoryUrl !== HEALER_PROVIDER.repositoryUrl
+    || provider.stagingPrUrl !== HEALER_PROVIDER.stagingPrUrl
+    || !HEALER_PROVIDER_STATUSES.has(provider.status)
+    || !(provider.version === null
+      || (typeof provider.version === "string" && provider.version.trim()))
+    || (provider.status === "approved" && !provider.version))
+    errors.push("healer reference provider metadata is missing or unreviewed");
+
+  if (!catalyst || !HEALER_CATALYST_STATUSES.has(catalyst.status)
+    || !(typeof catalyst.caveat === "string" && catalyst.caveat.trim()))
+    errors.push("healer reference catalyst validation caveat is missing");
+
+  const coverageKeys = coverage.map((entry) => entry?.specKey);
+  if (!uniqueStrings(coverageKeys) || !sameSet(new Set(coverageKeys), healerKeys)
+    || coverage.length !== healerKeys.size)
+    errors.push("healer reference coverage must account for all and only healer specs");
+
+  const coverageBySpec = new Map();
+  for (const entry of coverage) {
+    const where = `healer coverage ${entry?.specKey || "unknown"}`;
+    const generated = rows.find((row) => `${row.spec} ${row.class}` === entry?.specKey);
+    const plannedScenarios = Array.isArray(entry?.plannedScenarios) ? entry.plannedScenarios : [];
+    if (!generated || generated.role !== "Healer" || !HEALER_REFERENCE_STATUSES.has(entry?.status)
+      || entry?.objective !== HEALER_REFERENCE_OBJECTIVE || !uniqueStrings(plannedScenarios)
+      || !sameSet(new Set(plannedScenarios), HEALER_REFERENCE_SCENARIOS)
+      || plannedScenarios.length !== HEALER_REFERENCE_SCENARIOS.size)
+      errors.push(`${where}: invalid role, objective, status, or scenario plan`);
+    if (entry?.status !== "accepted" && !(typeof entry?.reason === "string" && entry.reason.trim()))
+      errors.push(`${where}: non-accepted status lacks a reason`);
+    if (typeof entry?.specKey === "string" && !coverageBySpec.has(entry.specKey))
+      coverageBySpec.set(entry.specKey, entry);
+  }
+
+  const recordIds = new Set();
+  const recordMatrices = new Set();
+  const acceptedBySpecScenario = new Set();
+  for (const record of records) {
+    const where = `healer reference ${record?.recordId || "unknown"}`;
+    const generated = rows.find((row) => `${row.spec} ${row.class}` === record?.specKey);
+    const matrix = `${record?.specKey || ""}\u0000${record?.profile || ""}\u0000${record?.scenario || ""}`;
+    if (!SIMC_ID.test(record?.recordId || "") || recordIds.has(record?.recordId))
+      errors.push(`${where}: invalid or duplicate record id`);
+    else recordIds.add(record.recordId);
+    if (recordMatrices.has(matrix)) errors.push(`${where}: duplicate spec/profile/scenario record`);
+    else recordMatrices.add(matrix);
+
+    if (!generated || generated.role !== "Healer" || !healerKeys.has(record?.specKey)
+      || !HEALER_REFERENCE_STATUSES.has(record?.status)
+      || record?.objective !== HEALER_REFERENCE_OBJECTIVE
+      || !HEALER_REFERENCE_SCENARIOS.has(record?.scenario)
+      || !(typeof record?.profile === "string" && record.profile.trim())
+      || !profilesBySpec.get(record?.specKey)?.has(record?.profile))
+      errors.push(`${where}: invalid healer roster, objective, status, profile, or scenario`);
+    if (record?.status !== "accepted" && !(typeof record?.reason === "string" && record.reason.trim()))
+      errors.push(`${where}: non-accepted status lacks a reason`);
+
+    const recordProvider = record?.provider;
+    if (!recordProvider || recordProvider.id !== HEALER_PROVIDER.id
+      || !sameSet(new Set(Object.keys(recordProvider)), new Set(["id", "version"]))
+      || !(recordProvider.version === null
+        || (typeof recordProvider.version === "string" && recordProvider.version.trim())))
+      errors.push(`${where}: invalid provider or version`);
+
+    const model = record?.model;
+    if (!model || !sameSet(new Set(Object.keys(model)), new Set(["name", "version"]))
+      || !(typeof model.name === "string" && model.name.trim())
+      || !(typeof model.version === "string" && model.version.trim()))
+      errors.push(`${where}: invalid model identity`);
+
+    const provenance = record?.provenance;
+    if (!provenance || !/^https:\/\//.test(provenance.sourceUrl || "")
+      || !(typeof provenance.method === "string" && provenance.method.trim())
+      || typeof provenance.verified !== "boolean"
+      || !(provenance.capturedAt === null || isoTimestamp(provenance.capturedAt))
+      || !(provenance.artifactSha256 === null || hexDigest(provenance.artifactSha256)))
+      errors.push(`${where}: invalid provenance`);
+    if (!uniqueStrings(record?.assumptions) || !record.assumptions.length
+      || record.assumptions.some((assumption) => !assumption.trim()))
+      errors.push(`${where}: assumptions must be explicit and nonempty`);
+    if (!uniqueStrings(record?.limitations) || !record.limitations.length
+      || record.limitations.some((limitation) => !limitation.trim()))
+      errors.push(`${where}: limitations must be explicit and nonempty`);
+    validateHealerScoringBasis(record?.scoringBasis, knownItemIds, where, errors);
+
+    if (record?.status === "accepted") {
+      if (provider?.status !== "approved" || !provider.version
+        || catalyst?.status !== "validated" || recordProvider?.version !== provider.version
+        || provenance?.verified !== true || !isoTimestamp(provenance?.capturedAt)
+        || !hexDigest(provenance?.artifactSha256))
+        errors.push(`${where}: accepted ranking lacks permission or verified provenance`);
+      if (coverageBySpec.get(record.specKey)?.status !== "accepted")
+        errors.push(`${where}: accepted ranking requires accepted healer coverage`);
+      acceptedBySpecScenario.add(`${record.specKey}\u0000${record.scenario}`);
+    }
+  }
+
+  for (const entry of coverage.filter((candidate) => candidate?.status === "accepted")) {
+    for (const scenario of entry.plannedScenarios || []) {
+      if (!acceptedBySpecScenario.has(`${entry.specKey}\u0000${scenario}`))
+        errors.push(`healer coverage ${entry.specKey}: accepted status lacks an accepted ${scenario} record`);
+    }
+  }
+}
 
 function simcProfileInput(profile, scenarioId) {
   return Array.isArray(profile?.scenarioInputs)
@@ -995,7 +1176,8 @@ function validateSimcReferenceWeights(simcWeights, simcManifest, manifest, error
 }
 
 export function validateData({ raid, specs, dungeons, sheet, statOverrides, statBaseline,
-  weaponProficiency, itemEligibility, tier, catalyst, catalystAllocations, simcManifest, simcWeights },
+  weaponProficiency, itemEligibility, tier, catalyst, catalystAllocations, simcManifest, simcWeights,
+  healerReferences },
   { expectedPatch = "12.0.7", gearingRoot } = {}) {
   const errors = [];
   try { verifyCurationSourceFiles(simcManifest, gearingRoot); }
@@ -1009,6 +1191,12 @@ export function validateData({ raid, specs, dungeons, sheet, statOverrides, stat
     errors.push("spec summary counts are stale");
 
   validateGeneratedSources(rows, statOverrides, statBaseline, weaponProficiency, expectedPatch, errors);
+  const knownHealerItemIds = new Set([
+    ...(raid?.bosses || []).flatMap((boss) => boss.items || []),
+    ...(dungeons?.dungeons || []).flatMap((dungeon) => dungeon.items || []),
+    ...(tier?.sets || []).flatMap((set) => set.items || []),
+  ].map((item) => String(item.id)));
+  validateHealerReferences(healerReferences, rows, knownHealerItemIds, errors);
   const simcContext = validateSimcRunManifest(simcManifest, rows, errors);
   validateSimcReferenceWeights(simcWeights, simcManifest, simcContext, errors);
 

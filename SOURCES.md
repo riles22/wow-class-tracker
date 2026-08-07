@@ -93,6 +93,13 @@ campaign, but coefficient records are accepted only after repeated scale runs pa
 Tanks and healers remain deferred to role-appropriate objectives, and Augmentation remains
 unsupported for personal-DPS scale factors.
 
+Healer gearing has a separate provider-neutral ledger under `gearing/data/`. Questionably
+Epic is the first candidate model, but it currently contributes no accepted production
+records: provider permission, a versioned export contract, and 12.1 Catalyst carry-over
+fixtures are required first. Any future admitted results remain local gearing guidance,
+never a spec-strength metric or tier input, and the tracker item catalog stays authoritative
+for inherited secondaries, tertiaries, sockets, bonus IDs, and cantrip effects.
+
 ## 3 · Per-fight tiers → the Fight selector
 
 **Archon per-encounter pages** — 9 raid bosses (throughput) + 8 dungeons (M+ score),
@@ -153,10 +160,13 @@ shown in each drawer's Source ratings box.
   not a spec-strength axis — deliberately not a tier column.
 - **Raidbots** — run-your-own-sims tool; no public per-spec aggregates (re-verified).
   Linked as a Tools row in every spec drawer.
-- **QE Live** — Voulk's healer gear evaluator; client-side SPA, no fetchable data,
-  Midnight-current per its GitHub repo. Tools row on healer specs; its blog publishes
-  dated Midnight healer articles (S1 embellishment tier list, Feb 2026). Voulk himself
-  is a creator entry (Wowhead Healing Expert — Prevoker/Resto Druid).
+- **QE Live** — Voulk's client-side healer gear evaluator and the candidate provider for
+  the gearing app's separate healer-reference ledger. Its public source and undocumented
+  shared-report endpoints are inspectable, but the repository has no detected reuse license
+  or supported integration contract; no automated ingestion or bundled engine is active.
+  The ledger stays pending until permission, versioning, and 12.1 Catalyst fixtures pass.
+  Its blog also publishes dated Midnight healer articles. Voulk himself is a creator entry
+  (Wowhead Healing Expert — Prevoker/Resto Druid).
 - **u.gg/wow** — mirror of Archon.
 
 ## Audited and skipped (re-check later)
