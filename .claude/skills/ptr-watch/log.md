@@ -547,3 +547,36 @@ catch-up path.
   Aug 20.**
 - `npm test` 332 pass / 0 fail, build OK, snapshot written, manifest rewritten and both
   `check-refresh` gates pass.
+
+## 2026-08-07 (LOCAL run, Opus 5 — scheduled residential catch-up, ~15:0xZ)
+
+- **No new builds sought or logged.** CI had already swept both channels this morning and
+  landed the OFFICIAL 12.1 patch notes as build #15 (all 40 specs). Re-fetching the RSS and
+  the forum thread would be regenerating what CI produced, which is what the local-run skill
+  forbids. Feed left untouched at 15 entries.
+- **Zone 54 (PTR raid, normalized) — STILL EMPTY, and the shape is unchanged.** Four probes
+  from a residential IP (Heroic 4/10 DPS + tank + healer, Mythic 5/20 DPS): all HTTP 200,
+  all **9.1 KB header-only fragments with 0 spec rows**. Per the standing rule nothing was
+  ingested and **both the 34 stored rows and that page's `snapshot` stay at 2026-07-28** —
+  the staleness stays visible rather than being papered over. Now 10 days old against the
+  deliberately-raised `maxAgeDays: 40`. Only a new Blizzard testing window or the raid
+  opening (Venomous Abyss 08-18/19) can refill it.
+- **Zone 52 (Dummy Dome) — ingested, all four DPS dummies.** 1T 3591: 27 specs / 1,733 parses ·
+  2T 3590: 23 / 275 · 3T 3592: 19 / 83 · 5T 3593: 27 / 1,234. Merged via apply-metrics
+  `ptrdummy`, asOf 2026-08-07. Duplicate-row gotcha did not apply (dupes 0 on all four).
+- **Zone 56 (PTR M+) — ingested, all three cuts.** DPS 27 / 5,939 · tank 6 / 1,980 ·
+  healer 7 / 1,981. Total zone-56 parse count 9,900.
+- **Zone 57 (Tidebound Grotto) — STILL EMPTY, and it answers differently from zone 54.**
+  Probed Normal 3/10, Heroic 4/10 and Mythic 5/25: each returns a **114-byte** body carrying
+  WCL's explicit *"No statistics have been collected for this zone, difficulty, size and
+  region yet."* — versus zone 54's 9.1 KB table shell with no rows. Worth keeping straight:
+  zone 54 is a real aggregated table whose rolling window emptied, zone 57 has never
+  aggregated at all. Unchanged since the 2026-07-28 34-combo sweep.
+- **9 specs still `ptr: null`, and Guardian Druid deliberately stays one of them.** YoDaTV's
+  12.1 Guardian guide was transcribed and distilled this run — but as a creator TAKE, not a
+  writeup. CLAUDE.md is explicit that creator takes are the writeup fallback only as an
+  aggregate through `expertRead()`, never hand-promoted into a `ptr` writeup, because that
+  would double-count the same video. The gap is honest; the outlook arrow is already fed.
+- **NO SEASON FLIP.** 12.1 ships 08-11 US / 08-12 EU and every live tier-list page still
+  era-verifies as 12.0.7 / Season 1. → **OWNER: the one-shot `SNAPSHOT_PHASE` flip is still
+  pending; `PHASE_FLIP_DUE` is Aug 20 and the Phase-1 S2 machinery is due before it.**

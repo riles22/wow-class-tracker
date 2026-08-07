@@ -603,3 +603,45 @@ numbers (95th pct DPS / popularity / M+ score — ungated, not in required-sourc
   coverage dates anyway.
 - `npm test` **332 pass / 0 fail**, build OK, snapshot written; `check-refresh --manifest`
   and `--age` both pass.
+
+## 2026-08-07 (LOCAL run, Opus 5 — scheduled residential catch-up, ~15:0xZ, after the 11:31Z nightly)
+
+- **Scope: residential-only.** The five cuts the nightly recorded `unreachable` were re-fetched
+  and landed; Archon, Murlok, Mythicstats, SimC, Bloodmallet, WoWMeta and every tier list were
+  left exactly as CI produced them (verify-not-rewrite). WoWMeta stays untouched under the
+  standing 07-31 review hold as well as the no-regenerate rule.
+- **The rDPS split held for the third night running.** CI's `wcl-fetch/evidence.json`
+  (2026-08-07T11:27:10Z) verdict was `rdps-broken` — `characterRankings(metric: rdps)` on
+  encounter 3176 still 200s with a bare "Internal server error" while OAuth and GraphQL are
+  healthy. From this residential IP the **HTML statistics table served rDPS on every cut**:
+  21 fetches, all HTTP 200, **0 unmatched roster rows anywhere**. `rdps-broken` remains an
+  API-transport fact, not a claim that rDPS is unavailable.
+- **Transport unchanged:** curl only, with the XHR + browser-UA + Referer header set. Not
+  re-derived; see the 08-06 entry.
+- **127 metric rows + 27 ptrDummy specs applied, asOf → 2026-08-07:**
+  · zone 46 Mythic raid (5/20/p3): DPS 27 / 310,093 parses · tank 6 / 44,340 · HPS 7 / 76,845
+    · **healer-DPS 7 / 76,845**
+  · zone 47 M+ (10/5/p1): DPS 27 / 3,062,512 · tank 6 / 1,033,136 · HPS 7 / 1,030,993
+  · zone 56 PTR M+ (10/5/p1): DPS 27 / 5,939 · tank 6 / 1,980 · HPS 7 / 1,981
+  · zone 52 Dummy Dome: 1T 27 specs / 1,733 parses · 2T 23 / 275 · 3T 19 / 83 · 5T 27 / 1,234
+- ⚠ **`Median DPS (Mythic, healer)` had silently fallen a day behind** — it sat at 2026-08-05
+  because the 08-06 local run fetched only three of zone 46's four cuts. It is a real tracked
+  series (rDPS-family despite the name — see docs/audit-2026-07-25-premerge.md row 2) and it is
+  inside `wcl-live-raid`'s `^Median .*\(Mythic` pattern, so it was hidden by coverage dating
+  rather than alarmed on. **Zone 46 is FOUR cuts, not three.** Re-verified genuinely distinct
+  from the HPS cut before merging: HPS 161k–186k vs healer-DPS 5.1k–33.1k, on identical parse
+  counts — which is exactly what makes an accidental same-column merge easy to miss.
+- **Value-move check (the guard CI's anomaly gate would have applied): 0 moves >50%.** Live
+  cuts max |Δ| 0.27–2.08%, median 0.12–0.64%, on parse counts drifting −7% (raid, the 14-day
+  rolling window) and ~−1% (M+). PTR M+ max 4.19%, median ~1% on ~5,900 parses. Dummy Dome
+  largest were Feral 5T −15.4% and Fury 1T +12.8% — far calmer than 08-06's −42.9% on the 3T
+  cut, whose population grew 79 → 83 parses.
+- **Zone-52 duplicate-row gotcha did NOT apply again** — raw row count equalled deduped count
+  on all four dummies (27/23/19/27). Deduped by (class, spec); never blind-halve.
+- **Registry snapshots** bumped to 2026-08-07 for zones 46 / 47 / 56 / 52; **zone 54 left at
+  2026-07-28** (empty upstream — the staleness stays visible).
+- `npm test` **332 pass / 0 fail**; `npm run build` OK (1226.9 KB); `node src/snapshot.mjs`
+  written, then rebuilt (step-6 ordering). `check-refresh --manifest` failed on exactly one
+  line — the **stale gitignored `wcl-fetch/evidence.json` from 2026-08-03**, the same
+  local-hygiene leftover as 08-06 (`.gitignore:11`); with it moved aside the gate exits **0**.
+  Manifest deliberately NOT rewritten (partial run — local-run skill step 3).

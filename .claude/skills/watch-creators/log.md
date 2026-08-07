@@ -715,3 +715,65 @@ queue + a 2026-07-28 publish-date cutoff rather than from the log. No creator op
   entry) and the same 5-to-7-chunk short shape already verified-skipped for Affliction.
 - `latest` fields untouched — nothing was distilled to point one at.
 - **No creator opinion touched any rating.** `npm test` 332 pass / 0 fail, build OK.
+
+## 2026-08-07 (LOCAL run, Opus 5 — scheduled residential catch-up, ~15:0xZ)
+
+- **Queue drained 3 → 0.** All three videos the nightly queued were fetched with the pinned
+  yt-dlp (2026.07.04, `player_client=android`, json3 auto-subs), flattened preserving
+  `tStartMs`, and distilled. No discovery pass was run — CI polled all 25 feeds this morning
+  and re-polling would regenerate its work.
+- **3 takes added, 3 superseded** (same creator + same spec + same lens in every case):
+  · **Druid Guardian — YoDaTV** (`uGLPbkECmko`, bracket mplus, `mixed`). His S2 bear guide:
+    tankiest tank with real utility, but damage a little low especially in the M+ build, which
+    is why he does not call it the meta tank. Supersedes his 08-01 M+ tier-list take.
+  · **Priest Discipline — AutomaticJak ×2** (`rX3X-I_4lCA`, with Clandon of WarcraftPriests).
+    Deliberately split by lens, because the video's read genuinely splits: **raid `mixed`**
+    (one of the strongest healers doing absurd damage, but atonement scaling falls off a cliff
+    past five targets so high counts buy coverage not throughput) and **mplus `nerf`** (his own
+    Voidweaver key testing feels awful; always-maxed output means no lever left once key level
+    outruns gear). Supersede the 08-04 raid take and the 08-01 M+ take respectively — the
+    same-lens rule kept them from cross-retiring each other.
+- **21 metaNotes added for izen, 19 superseded** (generalCreators firewall intact — 0 takes
+  attributed to him). His "2nd Chat on Rumors" is a full meta rundown: the death of
+  Augmentation and the fall of Mistweaver as the two headline calls, Holy Paladin and Resto
+  Shaman inheriting the healer slots, Outlaw legitimised by buffs, and the caster/melee comp
+  picture. Five carry the raid lens on explicitly raid-specific sentences; the rest are M+.
+- **A read-only verification pass over every new entry caught four real defects, all fixed
+  before commit.** Recording them because each is a repeatable failure mode:
+  · **A number attached to the wrong referent.** Clandon's "still triple every other healer,
+    four times every other healer" describes the **halved 38-40k hypothetical**, not the
+    measured 78-80k. The first distillation bolted it onto the measured figure — which also
+    *understated* the real gap by half while sounding like a quote.
+  · **An inverted causal clause.** izen says you took Mistweaver for its damage debuff and,
+    with Enhancement too weak to be played, never got mastery/Windfury *at all*; the note had
+    it as "had to accept a weak Enhancement to make it work", destroying the logic. The
+    mislabel "magic debuff" had also bled in from an unrelated Vengeance line 8 minutes earlier.
+  · **ASR pseudo-names and mangled samples.** "Ullhon" (from ASR "ulon") was written as if it
+    were a name — removed in favour of "the Renewing Mist caster build", which is how izen
+    names it himself two clauses later. "80 healers in these top 10" had become "the top 80
+    M+ healer logs", which describes a different sample.
+  · **A clause imported from a DIFFERENT video.** "Void Blast cannot be cast while moving"
+    is not in this transcript at all — it came from the 08-04 AutomaticJak entry. True or not,
+    a take must rest on the source it deep-links, so it was replaced with this video's own
+    movement discussion.
+- **3 proposed metaNotes DROPPED as inflated list-mentions** — Death Knight Frost, Beast
+  Mastery Hunter, Fury Warrior. Each rested solely on membership in one list ("like BM, like
+  Fury, like Devastation, like subtlety"), and **Frost is never even named** — the only
+  reference is "both of the DK specs". Two of the three would have flipped a substantive prior
+  read (Frost 07-14 positive → neutral; BM 07-06 positive → negative) on the thinnest possible
+  evidence, which is the weakest-evidence-steers inversion the project rejects elsewhere. Both
+  predecessors were **restored to live**. The retention line held evenly: every kept
+  bubble-clump note has a second spec-specific mention (Havoc t=648, Unholy t=666/892,
+  Subtlety t=777).
+- **Devourer's sentiment was corrected `mixed` → `positive`** — izen names zero downsides for
+  it and treats it as a caster-comp anchor; "perhaps a bit less [of a lock than Arcane]" is a
+  remark about how settled the pick is, not a knock on the spec.
+- **FOR A HUMAN, two small things.** (a) The guest is "Clandon" in today's entries but
+  "Klanden" in the 08-04 one (ASR gives "Clanton"/"Clanin"); worth normalising. (b) izen's
+  08-03 Elemental/Balance read was the more differentiated "nominally 50/50 but really more
+  like 80/20 in Balance' favour"; this video restates a flat 50/50, so superseding is faithful
+  to what he just said but the tracker now shows an even coin flip where his last reasoned
+  lean was Balance.
+- `latest` refreshed on YoDaTV/Druid, AutomaticJak/Priest and the izen generalCreators entry.
+- **No creator opinion touched any rating.** `npm test` 332 pass / 0 fail, build OK, snapshot
+  written then rebuilt.
