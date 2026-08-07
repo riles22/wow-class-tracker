@@ -682,3 +682,36 @@ queue + a 2026-07-28 publish-date cutoff rather than from the log. No creator op
   in play this run.
 - `latest` refreshed on both entries (YoDaTV/Demon Hunter, Shadarek). `npm test` 332 pass /
   0 fail; build OK; snapshot written then rebuilt.
+
+## 2026-08-07 — nightly CI (headless)
+
+- **25/25 feeds polled live**, all HTTP 200 first attempt, 375 entries scanned. No yt-dlp
+  invocation, no transcript API call, no YouTube page fetch by this agent.
+- **`transcript-fetch/summary.json` verdict `ok`, requested 0 / fetched 0** — the queue was
+  already empty, because the local run that followed the 08-06 nightly drained and
+  distilled both videos that night had queued. So **0 takes, 0 metaNotes, 0 superseded,
+  0 new durable skips**: there was nothing to distil, which is a real outcome, not a miss.
+- **Queued 3 (queue 0 → 3)** for the next deterministic fetch:
+  · `uGLPbkECmko` — YoDaTV, *"General Guide for Guardian Druid in 12.1! (Mythic+)"* (08-06).
+    Squarely inside his registered `["Guardian"]` Druid scope, same shape as the Vengeance
+    guide that yielded a take, **and Guardian Druid is one of the 9 specs with no writeup.**
+  · `g0adl6lXPQM` — izen, *"Season 2 - 12.1 PTR | 2nd Chat on Rumors of Meta Picks &
+    Popular Specs in S2"* (08-06) — the `metaNotes[]` lane, general-creator firewall intact.
+  · `rX3X-I_4lCA` — AutomaticJak, *"Atonement Has A Problem"* (08-06, with Clandon of
+    WarcraftPriests). Discipline is in his registered scope and the 12.1 notes move
+    Atonement to 32% of damage done, so the timing is not coincidental.
+- **FOR A HUMAN — scope question, deliberately not resolved here:** Obli published
+  `gIgTCFhLyig` *"BLOOD DK is META next season?"* (08-06), an interview with Awootank that
+  is a substantive Blood DK read. **Obli's registered specs are `["Frost","Unholy"]`**, so
+  per the skill this run did not stretch his scope and did not queue it. Widening his
+  `community.json` `specs` is an owner call; note that Reholy and YoDaTV already cover Blood.
+- **Triaged out by title + `media:description`, no fetch:** PvP content (Supatease
+  `XC-87cBXOD8`, the Dalaran Gaming 5v5/1v1 duel series), stream VODs (YoDaTV "yodatv on
+  twitch" ×3, Shindigg, Critcake, Preheat), clip shorts (Supatease ×3, MadSkillzzTV
+  `zoIliTYkpZc`), PTR key-run footage whose description is a bare twitch plug (YoDaTV ×4,
+  Shadarek), and gearing/UI/PSA videos (MadSkillzzTV `Ca4eDpIlNDM`, Dalaran Gaming
+  `W2nQ41jDxNI`). The three Supatease "12.1 Damage Test" clips (Demo/Destro/Dev Evoker) are
+  both **outside his registered scope** (`["Affliction"]` for Warlock; he has no Evoker
+  entry) and the same 5-to-7-chunk short shape already verified-skipped for Affliction.
+- `latest` fields untouched — nothing was distilled to point one at.
+- **No creator opinion touched any rating.** `npm test` 332 pass / 0 fail, build OK.

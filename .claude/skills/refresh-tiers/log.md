@@ -374,3 +374,31 @@ representation n; verified against the page, NOT a Blizzard retune); survivabili
   (EU)** with the Venomous Abyss raid Aug 18/19; every live source still self-identifies as
   12.0.7 / Season 1, so `PHASES.liveSeason` and `SNAPSHOT_PHASE` stay as they are. The flip
   window opens in five days.
+
+## 2026-08-07 — nightly CI (headless)
+
+- **All five tier-list sources refreshed live; ZERO tier moves anywhere.** 80 Icy Veins
+  rows, 40 Icy Veins PTR rows, 79 Method rows, 80 Wowhead rows, 80 Archon aggregate rows
+  — 0 unmatched, 0 moves. A quiet night for letters is the honest reading, not a broken
+  fetch: three of the four live sources also re-published unchanged page dates.
+- **Icy Veins** 6 live pages + 3 PTR pages, browser-UA curl, all 200. Era: live titles
+  read 12.0.7 / Midnight / Season 1 (s1); PTR titles read "Patch 12.1 / Season 2" (s2).
+  PTR band spread unchanged: S+ 2, S 5, A+ 11, A 10, B+ 6, B 5, C 1 — no upstream TBDs,
+  so no explicit nulls were needed. `published` re-read from every page (never carried
+  forward) and unchanged; agrees with `published-evidence/evidence.json` 9/9.
+- **Method** raid S tier carried **7 specs** this run while the **M+ spec S tier is still
+  genuinely empty upstream** — both re-verified in the raw markup. The two lists differ;
+  don't assume an empty S on one means a parse bug on the other.
+- **Wowhead** needs the FULL browser header set (UA-only is 403). The M+ healer page's
+  `dateModified` stays 2026-08-05 — that is the rebuild whose Resto Druid S→A move landed
+  on the 08-06 run, not a new one.
+- **Archon** — this WAS a new upstream cut: `page.lastUpdated` advanced 2026-08-05T12:00Z →
+  **2026-08-06T12:00:00Z** (the 08-07 12:00Z publish had not landed at 11:31Z fetch time).
+  Aggregate letters still moved zero, 55 of 680 per-encounter tiers moved, and
+  **survivability moved 18 of 40 — every one by exactly one band, 17 of them upward**
+  (11 C→B, 6 B→A, Enhancement A→S; only Brewmaster B→C). That is a re-clustered
+  distribution on a new cut, not a spec-by-spec re-rating; it feeds no consensus.
+- **No season flip.** 12.1 ships **Aug 11 (US) / Aug 12 (EU)**; the official patch notes
+  published 08-06 (see ptr-watch log) are pre-launch. Every live page still self-identifies
+  as 12.0.7 / Season 1, so `PHASES.liveSeason` and `SNAPSHOT_PHASE` stay as they are.
+  **The flip window opens in four days.**

@@ -498,3 +498,52 @@ catch-up path.
   `12.1-ptr`. → **OWNER: the one-shot flip is still pending, `PHASE_FLIP_DUE` Aug 20.**
   · `npm test` 332 pass / 0 fail, build OK, snapshot written then rebuilt. Manifest
   deliberately NOT rewritten (partial run — local-run skill step 3).
+
+## 2026-08-07 — nightly CI (headless)
+
+- **THE OFFICIAL PATCH 12.1 NOTES LANDED (2026-08-06) AND ARE NOW IN THE FEED** — builds
+  14 → 15, and it is the largest single entry the feed has ever carried: **all 40 specs**
+  plus 9 class-wide lines.
+  · **It is NOT a reply in the tracked dev-notes thread.** `2317811.json` is still at
+    `highest_post_number` 19 (Linxy, 07-31). The notes are a standalone Blizzard post,
+    found by sweeping the **Wowhead blue-tracker index** (full browser header set — a
+    UA-only fetch is 403) → `curse-of-ulatek-content-update-notes-2333514`. That forum post
+    is a two-sentence stub linking `worldofwarcraft.blizzard.com/en-us/news/24293281`.
+  · **Transport trap worth keeping:** `worldofwarcraft.com/en-us/news/<id>` 301s to
+    `worldofwarcraft.blizzard.com` and curl without `-L` returns a 134-byte nginx stub that
+    looks like a fetch failure. Follow the redirect (or use the `.blizzard.com` host).
+  · **Read from the ARTICLE's HTML, never the RSS `content:encoded`.** Wowhead's RSS body
+    flattens the whole thing to `<p>`/`<br>` — no headings, no nesting — which is exactly
+    the attribution-destroying shape the skill warns about. The article keeps `<details>`
+    per class with `<strong>` spec headings and nested `<ul>`; a recursive `<li>`/`<ul>`
+    walk yields **773 outline lines** with intact `CLASS > Spec > Hero Talents > Tree`
+    paths. Every per-spec line in the entry came from that outline.
+  · Logged as a **build** (not a hotfix) with `forumUrl` = the blue post, `forumPostNumber`
+    null, `wowheadUrl` = news=382367. **Do not file a standalone blue post as `kind:
+    "hotfix"` when it is the newest entry**: `test/validate.test.mjs` mutates
+    `ptrBuilds.builds[0].forumUrl` and a hotfix rejects that field, so the suite goes red —
+    and a test edit is not in the nightly's staged paths, so it cannot be fixed from CI.
+- **Tier-set upkeep.** The only **Season 2** set change in the notes is Retribution
+  Paladin's *Divine Arbiter now benefits from Divine Purpose and Greater Judgment*
+  (its dev note names the tier set) → `tierSet.set4` amended, `asOf` 2026-08-06, `source`
+  = the blue post. The Augmentation Evoker / Restoration Shaman / Arms Warrior lines touch
+  **Midnight Season 1** set bonuses — a different set from the one the card shows — so all
+  three Season 2 bonuses were **re-verified unchanged** against their own cited sources
+  (thread posts 16 and 18; Wowhead news 381911) and only `asOf` was bumped. The upkeep gate
+  cannot tell S1 from S2 wording, so expect it to fire on any S1 set line; the honest fix is
+  a re-verify against the ORIGINAL source, never re-pointing the card at the new post.
+- **9 specs stay `ptr: null`.** No per-spec 12.1 analysis for any of them appeared in the
+  RSS window, and the other discovery lanes are closed from CI: Wowhead search is
+  JS-hydrated, the Icy Veins news index is JS-hydrated with a 404 RSS, and a DuckDuckGo
+  HTML query returned **zero** results from this IP. Guardian Druid may close next run —
+  YoDaTV published a 12.1 Guardian guide, now queued for transcript (see watch-creators).
+- **WCL is evidence-only on this runner.** `wcl-fetch/evidence.json` verdict
+  `rdps-broken`; zone 54 (PTR raid, normalized), zone 52 `ptrDummy` and zone 56 medians all
+  stay frozen. The three `*-raw` keys landed pre-agent. Zone 57 not probed (agent holds no
+  WCL access at all).
+- **NO SEASON FLIP** — the patch notes are pre-launch (12.1 ships **Aug 11 US / Aug 12 EU**,
+  Venomous Abyss **Aug 18/19**) and every live tier-list page still era-verifies as 12.0.7 /
+  Season 1. → **OWNER: the one-shot `SNAPSHOT_PHASE` flip is still pending, `PHASE_FLIP_DUE`
+  Aug 20.**
+- `npm test` 332 pass / 0 fail, build OK, snapshot written, manifest rewritten and both
+  `check-refresh` gates pass.

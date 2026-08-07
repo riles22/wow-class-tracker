@@ -564,3 +564,42 @@ numbers (95th pct DPS / popularity / M+ score — ungated, not in required-sourc
   2026-08-03**, the exact local-hygiene case `.gitignore:20-24` documents; with that
   leftover moved aside the gate exits **0**. Manifest deliberately NOT rewritten (partial
   run — local-run skill step 3).
+
+## 2026-08-07 — nightly CI (headless)
+
+- **Archon** (new 2026-08-06T12:00:00Z cut): 160 numbers re-read from
+  `specRankingsSection.table.data[]` — 95th-pct DPS 33, 95th-pct HPS 7, M+ score 40,
+  Popularity 80. 61 of 160 values moved; largest relative move 12.5% (a small popularity
+  figure), well inside `maxValueMovePct` 0.6.
+- **Murlok** 40/40 (27/7/6). Split on `class="vi-box meta-item ` — the documented fix; the
+  narrower `<a class="vi-box meta-item ` literal still silently drops 5 specs. 27 values
+  moved, all DPS, max +0.68%.
+- **WoWMeta** JSON API only (manifest + `/rankings/midnight/mplus/all/0.json`, plain curl,
+  no headers). 40 rows, **0 values moved and every `n` identical** because
+  `snapshotDate` is STILL **2026-08-05** — two days behind. Recorded `partial`, not
+  success: `asOf` is the source's date, never today. `maxAgeDays` 8 not breached.
+- **SimulationCraft** — new nightly: `git build HEAD fee98c101c` (was `c5b695436c`) at the
+  same `hotfix 2026-08-06/68974`. 26/26 specs, all moved, all sub-1% (largest Shadow Priest
+  +0.95%). No reordering.
+- **Bloodmallet** 26/26 charts, `tier == "MID1"` on every one, **zero target values moved**:
+  chart timestamps are still 2026-07-08 (Elemental 2026-07-15). Only our verification date
+  advanced — say that plainly rather than calling it fresh sims.
+- **Mythicstats** still period **1075**, but the in-progress week moved: 4650 unique
+  characters (was 6313) at 21.5 average key level (was 19.8), so 38 of 40 values moved.
+  All values are percentages, below the anomaly gate's `minValueMagnitude` 100.
+- **Robydoby** (best-effort, outside the contract): both sheets fetched, tab map parsed —
+  the newest **Mythic** week is still `24/7`, the week already stored at `asOf 2026-07-24`.
+  Nothing new upstream, so nothing merged; the 17/7 Tidebound Grotto tabs stay skipped
+  (zone 57, not tracked).
+- **WCL: agent holds no credentials and fetched nothing from warcraftlogs.com.**
+  `wcl-fetch/evidence.json` (2026-08-07T11:27:10Z) verdict **`rdps-broken`** — rdps on
+  encounter 3176 still 500s with OAuth and GraphQL both healthy. The three `*-raw` keys
+  landed via the frozen recipe before the agent started (dummy 103 rows: 1T 2000 / 2T 505 /
+  3T 232 / 5T 2000; PTR raid 27 pooled; PTR M+ 27 pooled); the five rDPS/normalized cuts
+  stay frozen and untouched.
+- **Registry snapshots** bumped to 2026-08-07 for murlok / mythicstats / bloodmallet /
+  simulationcraft / robydoby. **The five warcraftlogs page entries were deliberately NOT
+  bumped** — this agent fetched none of those pages, and the gates read the data's own
+  coverage dates anyway.
+- `npm test` **332 pass / 0 fail**, build OK, snapshot written; `check-refresh --manifest`
+  and `--age` both pass.
