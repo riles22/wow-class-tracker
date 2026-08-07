@@ -1,7 +1,7 @@
 {
   "date": "2026-08-07",
   "phase": "12.1-ptr",
-  "projectionVersion": 9,
+  "projectionVersion": 10,
   "rankVersion": 3,
   "consensusVersion": 2,
   "specs": {
@@ -29,8 +29,8 @@
       "projection": {
         "raid": {
           "tier": "B",
-          "score": 51,
-          "confidence": "medium"
+          "score": 53,
+          "confidence": "low"
         },
         "mplus": {
           "tier": "A+",
@@ -151,7 +151,7 @@
       "projection": {
         "raid": {
           "tier": "A",
-          "score": 66,
+          "score": 67,
           "confidence": "low"
         },
         "mplus": {
@@ -350,7 +350,7 @@
         "raid": {
           "tier": "S",
           "score": 91,
-          "confidence": "medium"
+          "confidence": "low"
         },
         "mplus": {
           "tier": "A+",
@@ -386,7 +386,7 @@
         "raid": {
           "tier": "A+",
           "score": 83,
-          "confidence": "medium"
+          "confidence": "low"
         },
         "mplus": {
           "tier": "C",
@@ -422,7 +422,7 @@
       "projection": {
         "raid": {
           "tier": "A",
-          "score": 63,
+          "score": 65,
           "confidence": "low"
         },
         "mplus": {
@@ -504,8 +504,8 @@
       "projection": {
         "raid": {
           "tier": "S",
-          "score": 99,
-          "confidence": "medium"
+          "score": 100,
+          "confidence": "low"
         },
         "mplus": {
           "tier": "A",
@@ -543,7 +543,7 @@
       "projection": {
         "raid": {
           "tier": "C",
-          "score": 35,
+          "score": 36,
           "confidence": "low"
         },
         "mplus": {
@@ -628,7 +628,7 @@
       "projection": {
         "raid": {
           "tier": "A",
-          "score": 70,
+          "score": 71,
           "confidence": "low"
         },
         "mplus": {
@@ -909,7 +909,7 @@
         "raid": {
           "tier": "A",
           "score": 73,
-          "confidence": "medium"
+          "confidence": "low"
         },
         "mplus": {
           "tier": "A+",
@@ -1137,7 +1137,7 @@
       "projection": {
         "raid": {
           "tier": "C",
-          "score": 37,
+          "score": 38,
           "confidence": "low"
         },
         "mplus": {
@@ -1347,8 +1347,8 @@
       "projection": {
         "raid": {
           "tier": "B",
-          "score": 55,
-          "confidence": "medium"
+          "score": 57,
+          "confidence": "low"
         },
         "mplus": {
           "tier": "A+",
@@ -1552,7 +1552,7 @@
       "projection": {
         "raid": {
           "tier": "A",
-          "score": 63,
+          "score": 66,
           "confidence": "low"
         },
         "mplus": {

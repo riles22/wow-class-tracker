@@ -706,9 +706,38 @@ export function outlookFor(spec, ptrBuilds, takes = []) {
         the frozen forecast will carry into the report card — deliberately: the freeze
         should encode the owner's actual pre-launch read, and the carry-forward baseline
         it must beat still copies the frozen live consensus forward. Not one series
-        with v8. */
+        with v8.
+   v10 — 2026-08-07 (Riley: creators, especially on healers and tanks, were not lining
+        up with our forecasts). Diagnosis first: this was NOT a mis-set prior weight.
+        The .35 never applied in raid, because renormalization gives the prior 100% once
+        the other terms are absent — so lowering it would have changed nothing. Measured
+        before the change: healers 7/7 and tanks 6/6 raid cells were 100% prior, along
+        with 14 of 27 DPS. Two fixes shipped and one was tried and rejected:
+          (A) REJECTED — filling raid coverage with Robydoby's PTR raid cut. It looked
+              ideal (already ranked, 26 DPS + all 7 healers) and measured badly: r = −0.43
+              against Dummy Dome, no sample size on any row, and 21 raid forecasts moved
+              including 40-point swings. Full reasoning at the testing lookup in
+              projectionFor. The raid gap therefore REMAINS; what changed is that we now
+              say so instead of dressing a stale prior as a forecast.
+          (B) CONFIDENCE HONESTY. A cell with no PTR empirical term and no PTR list now
+              caps at "low" — six healer/tank raid cells were publishing "medium" over a
+              forecast containing no 12.1 measurement at all. It caps at "low" and not
+              "prior-only" because the v8 audit rightly holds that a signal which MOVES
+              the number is evidence and must say so; "prior-only" keeps meaning "nothing
+              touched it".
+          (C) EXPERT HEADROOM. The ±6 ceiling was calibrated for a blend led by measured
+              PTR evidence; on a 100%-prior cell it pinned the forecast to last patch —
+              measured at 1.7–3.0 points against ~15-point bands, so one creator moved a
+              forecast 2 points. It doubles to ±12 ONLY where there is no PTR empirical
+              term and no PTR list, i.e. exactly the cells where specialists are the only
+              12.1-aware evidence we hold. Band discipline is untouched: the
+              adjFloor/adjCeil clamp still holds a non-quorum panel inside its band and
+              lets a quorum panel cross exactly one edge.
+        Weights themselves are unchanged, so the 2026-08-02 "weights frozen until the
+        report card" line is not crossed: (B) is a labelling fix and (C) is a bound that
+        only binds where the blend is empty. Not one series with v9. */
 export { PHASES };
-export const PROJECTION_VERSION = 9;
+export const PROJECTION_VERSION = 10;
 
 /* Rank-map version, stamped beside it. `snapshotStateOf().ranks` feeds movement
    comparison, and its meaning changed in the same commit as PROJECTION_VERSION v2:
@@ -812,6 +841,29 @@ export function ptrTierRead(spec, bracket, sources, scales) {
 }
 export function projectionFor(spec, bracket, scales, metaNotes = [], sources = [], takes = []) {
   const prior = spec.consensus?.[bracket]?.score ?? null;
+  /* RAID EMPIRICAL COVERAGE (v10, 2026-08-07). The zone-54 series was the only raid
+     empirical input and it reaches the projection for NOBODY: MIN_RANK_N is 10 and every
+     one of its 34 rows has n between 1 and 9 (ten specs sit at n=3), so metricRanks
+     strips rank/of from all of them and rankPct returns null. The floor is right — 3 logs
+     is not a ranking — but the consequence was silent and severe: with no PTR raid tier
+     list (icyveins-ptr is M+ only, by design) and Dummy Dome being DPS-only, EVERY healer
+     and tank raid forecast renormalized to 100% of the 12.0.7 prior, i.e. last patch's
+     letter with an outlook nudge. That is what creators kept disagreeing with.
+     The obvious candidate to fill it was Robydoby's 12.1 PTR raid-testing cut — already
+     in the metrics layer, already ranked, covering 26 DPS and all 7 healers. It was tried
+     and REJECTED on measurement, 2026-08-07; do not re-add it without new evidence:
+       · it correlates NEGATIVELY with Dummy Dome, the other PTR raid empirical, at
+         r = −0.43 across the 12 DPS specs holding both. Two measurements of the same
+         question pointing opposite ways means at least one is noise, and we cannot tell
+         which. Per-spec gaps reached 67 percentile points (Shadow Priest 80 vs 13);
+       · every one of its 33 rows carries NO sample size, which is the only reason it
+         clears MIN_RANK_N at all — it evades the floor by omission, not by being
+         well-sampled;
+       · admitting it at the .45 empirical weight moved 21 raid forecasts, including
+         40-point swings (Mistweaver A+→B, Demonology A+→B).
+     So raid empirical coverage stays as it is: Dummy Dome for DPS, nothing for healers
+     and tanks. That gap is real and is now stated honestly by the confidence tag below
+     rather than papered over with a signal we cannot vouch for. */
   const testing = bracket === "raid"
     ? rankPct(spec, "raid", "12.1 PTR raid testing score (normalized)")
     : rankPct(spec, "mplus", PTR_MPLUS_SERIES[spec.role]);
@@ -821,6 +873,11 @@ export function projectionFor(spec, bracket, scales, metaNotes = [], sources = [
     ? empParts.reduce((s, [v, w]) => s + v * w, 0) / empParts.reduce((s, [, w]) => s + w, 0)
     : null;
   const ptrList = ptrTierRead(spec, bracket, sources, scales);
+  /* No measured PTR term and no PTR tier list ⇒ renormalization hands the 12.0.7 prior
+     100% of the base weight, so the forecast IS last patch's letter. Used twice below:
+     it raises the expert ceiling (they are then the only 12.1-aware evidence available)
+     and it forces the honest "prior-only" confidence tag. */
+  const noPtrEvidence = emp == null && !ptrList;
   /* A PTR list whose id extends a live source's id ("icyveins-ptr" over "icyveins") is the
      same outlet publishing twice. Compute that outlet's combined effective share so the
      basis can state it rather than leaving a reader to derive it from the weights. */
@@ -969,8 +1026,22 @@ export function projectionFor(spec, bracket, scales, metaNotes = [], sources = [
      It decided above only when no writeup exists; here it applies in the other case, so
      a spec WITH a writeup still has its specialists heard rather than ignored ("include
      them in our calculations", Riley 2026-08-02). ±6 at the cap since v9 (was ±4),
-     realistically ±2 to ±5 once shrinkage is applied. */
-  const expertAdj = !expertDrives && expert ? Math.round(6 * expert.shrunk) : 0;
+     realistically ±2 to ±5 once shrinkage is applied.
+
+     (v10, 2026-08-07) The ceiling DOUBLES to ±12 when the cell has no PTR empirical term
+     and no PTR list. ±6 was calibrated for a blend where measured PTR evidence leads;
+     applied to a cell that is 100% the 12.0.7 prior it guaranteed the forecast stayed
+     within a couple of points of last patch no matter how loudly specialists disagreed —
+     measured: where the adjustment fired at all it averaged 1.7–3.0 points against band
+     widths of ~15, so one creator moved a forecast 2 points and three unanimous ones
+     moved it 4. That is why creators kept reading as out of step with us on healers and
+     tanks specifically: those are the cells with nothing else in the blend.
+     This does NOT loosen the band discipline — adjFloor/adjCeil below still clamp a
+     non-quorum panel inside its own band and let a ≥EXPERT_QUORUM panel cross exactly one
+     edge. The bigger cap only lets the term REACH those bounds instead of dying short of
+     them; shrinkage still means a lone creator asks for ±4, not ±12. */
+  const expertCap = noPtrEvidence ? 12 : 6;
+  const expertAdj = !expertDrives && expert ? Math.round(expertCap * expert.shrunk) : 0;
   /* Band application, v9. The evidence terms (base + shift) pick the EVIDENCE band;
      the qualitative terms then apply in sequence, each with its own bound:
 
@@ -1063,7 +1134,21 @@ export function projectionFor(spec, bracket, scales, metaNotes = [], sources = [
   const available = 3 // PTR testing + tuning outlook + specialist takes: obtainable everywhere
     + (spec.role === "DPS" ? 1 : 0) // Dummy Dome: DPS-only
     + (ptrListPossible ? 1 : 0);    // an era:"ptr" tier list covering this bracket+role
+  /* (v10, 2026-08-07) A cell with NO measured PTR term and no PTR tier list is the 12.0.7
+     consensus with a nudge, whatever the ratio says — the score IS the prior, because
+     renormalization hands it 100% of the weight once the other two terms are absent.
+     Before this, four healer and two tank raid cells published "medium" on exactly that:
+     outlook + takes scored 2 of 3 obtainable, and the badge read "reasonably evidenced"
+     over a forecast carrying no 12.1 measurement at all. The ratio is still right about
+     what was CONSULTED; it was wrong about what the number rests on.
+
+     It caps at "low", NOT at "prior-only", and that distinction is load-bearing: the v8
+     audit established that a signal which MOVES the number is evidence and must say so,
+     so a cell the expert lane shifted must not claim nothing touched it. "prior-only"
+     therefore keeps its original meaning — no signal of any kind — while "low" carries
+     the new one: signals were consulted, but none of them measured 12.1. */
   const confidence = signals === 0 ? "prior-only"
+    : noPtrEvidence ? "low"
     : signals >= available ? "high"
     : signals > available / 2 ? "medium"
     : "low";

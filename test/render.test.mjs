@@ -1406,10 +1406,13 @@ test("projectionFor: an M+ tier-list read no longer moves the raid forecast", ()
   assert.equal(raid.score, 90, "the raid score stays on its evidence");
   assert.ok(mplus.parts.expertShrunk < 0, "the M+ cell still hears them");
   assert.ok(mplus.score < 90);
-  // v9: three shrunk creators are a QUORUM — adj −4 takes 90 (S, floor 88) to 86, and
-  // the letter is allowed to follow, disclosed by name.
+  // v9: three shrunk creators are a QUORUM and the letter is allowed to follow, disclosed
+  // by name. v10: this fixture carries no metrics and no sources, so it has no PTR
+  // empirical term and no PTR list — the case where the expert ceiling doubles to ±12.
+  // shrunk −.6 → adj −7 (was −4), so 90 (S, floor 88) lands at 83 rather than 86. Still
+  // exactly ONE band edge: the quorum floor is the next band down, not two.
   assert.equal(mplus.tier, "A", "a ≥3-creator panel may move the letter one band");
-  assert.equal(mplus.score, 86);
+  assert.equal(mplus.score, 83);
   assert.match(mplus.basis, /expert quorum \(3 creators\) moved the letter S→A/);
 });
 
@@ -1475,17 +1478,20 @@ test("expert quorum: three shrunk creators may cross ONE band edge — never two
   const spec = { class: "X", spec: "E", role: "Healer", consensus: { raid: { score: 86 } },
     outlook: { direction: "flat", source: "verdict", buffs: 0, nerfs: 0, builds: 1 },
     ptr: { verdict: "Mixed", asOf: "2026-07-01" } };
-  // Two creators, unanimous: shrunk −.5 → adj −3 → 83, inside A+ — no quorum, floor 74 anyway.
+  // These fixtures are healer-raid with no metrics and no sources, i.e. no PTR empirical
+  // term and no PTR list — the v10 case where the expert ceiling doubles to ±12. The
+  // band discipline asserted below is unchanged; only the reach of the term grew.
+  // Two creators, unanimous: shrunk −.5 → adj −6 → 80, inside A+ — no quorum, floor 74 anyway.
   const duo = projectionFor(spec, "raid", NUDGE_SCALES, [], [], [TK("a", "nerf"), TK("b", "nerf")]);
   assert.equal(duo.tier, "A+", "two voices stay within-tier by construction");
-  assert.equal(duo.score, 83);
-  // Eight unanimous nerf creators: shrunk −.8 → adj −5 → 81… still A+. Force a crossing
-  // with a lower evidence score: 75 (A+ floor 74) − 5 = 70 → A. One edge, disclosed.
+  assert.equal(duo.score, 80);
+  // Eight unanimous nerf creators: shrunk −.8 → adj −10. From 75 (A+ floor 74) that is
+  // 65 → A. One edge, disclosed.
   const low = { ...spec, consensus: { raid: { score: 75 } } };
   const octet = ["a","b","c","d","e","f","g","h"].map(c => TK(c, "nerf"));
   const crossed = projectionFor(low, "raid", NUDGE_SCALES, [], [], octet);
   assert.equal(crossed.tier, "A", "quorum crosses the A+/A edge");
-  assert.equal(crossed.score, 70);
+  assert.equal(crossed.score, 65);
   assert.match(crossed.basis, /expert quorum \(8 creators\) moved the letter A\+→A/);
   // The SAME panel from a score just above a floor cannot skip TWO bands: 74 − 5 = 69
   // would land in A regardless, but a hypothetical bigger adj is clamped at the band
@@ -1497,8 +1503,8 @@ test("expert quorum: three shrunk creators may cross ONE band edge — never two
 });
 
 test("expert quorum: the meta nudge stays inside the band the expert term chose", () => {
-  // Evidence 75 (A+), quorum panel drags to 70 (A, ceiling 73). A corroborated +3 nudge
-  // then applies WITHIN A: 73, not back across the edge into A+.
+  // Evidence 75 (A+), quorum panel drags to 65 (A, ceiling 73 — v10 cap ±12, see above).
+  // A corroborated +3 nudge then applies WITHIN A: 68, not back across the edge into A+.
   const spec = { class: "X", spec: "E", role: "Healer", consensus: { raid: { score: 75 } },
     outlook: { direction: "flat", source: "verdict", buffs: 0, nerfs: 0, builds: 1 },
     ptr: { verdict: "Mixed", asOf: "2026-07-01" } };
@@ -1509,5 +1515,5 @@ test("expert quorum: the meta nudge stays inside the band the expert term chose"
   ];
   const p = projectionFor(spec, "raid", NUDGE_SCALES, notes, [], octet);
   assert.equal(p.tier, "A");
-  assert.equal(p.score, 73, "nudge climbs to the ceiling of A, never re-crosses the edge");
+  assert.equal(p.score, 68, "nudge applies inside A, never re-crosses the edge");
 });

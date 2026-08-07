@@ -150,6 +150,24 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   coverage (the PTR tier list rates 38 of 40, and counting it moved 39 of 40 M+ specs to
   "high"), and it permanently capped healers/tanks below "high" for lacking a DPS-only
   Dummy Dome signal they can never have.
+  **The raid bracket has almost no PTR empirical evidence, and that is the real reason
+  creators read as out of step with us on healers and tanks** (v10, 2026-08-07). Measured:
+  M+ is healthy (32% prior for every role), but in RAID the zone-54 series reaches NOBODY
+  — `MIN_RANK_N` is 10 and all 34 rows carry n of 1..9 — there is no PTR raid tier list by
+  design, and Dummy Dome is DPS-only. So healers 7/7, tanks 6/6 and 14 of 27 DPS raid
+  cells renormalize to **100% of the 12.0.7 prior**. Two consequences to keep in mind:
+  (a) **lowering the prior weight cannot fix this** — with the other terms absent,
+  renormalization gives the prior 100% whatever its weight is, so `.35`→`.20` changes
+  nothing; (b) Robydoby's PTR raid cut was tried as the fix and **rejected on measurement**
+  (r = −0.43 against Dummy Dome, no sample size on any row, 21 forecasts moved with
+  40-point swings) — reasoning is inline at `projectionFor`'s testing lookup, and it must
+  not be re-added without new evidence. What shipped instead: confidence caps at "low"
+  (never "prior-only", which keeps its v8 meaning of "nothing moved it") whenever a cell
+  has no PTR empirical term and no PTR list, and the expert ceiling doubles to ±12 on
+  exactly those cells, since specialists are then the only 12.1-aware evidence we hold.
+  Band discipline is unchanged. **Still open:** tanks have no PTR raid signal of any kind,
+  and the ±12 headroom moves scores but rarely letters, because crossing a band still
+  needs a ≥3-creator quorum and most panels are 1–2 creators.
 - **History snapshots are ENRICHED** (2026-07-09): `snapshotStateOf` stores exact
   consensus scores + the projection (tier/score/confidence, no basis strings) alongside
   the classic tiers/ranks. Movement/baseline comparison stays tier/rank-grained — the
