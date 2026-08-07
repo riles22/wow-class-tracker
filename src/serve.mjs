@@ -8,24 +8,25 @@ import path from "node:path";
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const PORT = Number(process.env.PORT || 8317);
 
-/* The site publishes two pages and the masthead tab strip links between them, so the
-   preview has to honour the path — serving index.html for every request made clicking
-   "S2 Gearing" locally look like a no-op. Allowlisted names only: this is a dev server,
-   and a path taken from the request must never reach the filesystem unfiltered. */
-const PAGES = new Map([
-  ["/", "index.html"],
-  ["/index.html", "index.html"],
-  ["/gearing.html", "gearing.html"],
+/* The site publishes two pages plus fetchable launcher icons. Allowlisted names only:
+   a path taken from the request must never reach the filesystem unfiltered. Unknown
+   paths keep the historical index.html fallback used by the preview. */
+const FILES = new Map([
+  ["/", { name: "index.html", type: "text/html; charset=utf-8" }],
+  ["/index.html", { name: "index.html", type: "text/html; charset=utf-8" }],
+  ["/gearing.html", { name: "gearing.html", type: "text/html; charset=utf-8" }],
+  ["/favicon-192.png", { name: "favicon-192.png", type: "image/png" }],
+  ["/apple-touch-icon.png", { name: "apple-touch-icon.png", type: "image/png" }],
 ]);
 
 createServer(async (req, res) => {
-  const name = PAGES.get(new URL(req.url, "http://localhost").pathname) ?? "index.html";
+  const file = FILES.get(new URL(req.url, "http://localhost").pathname) ?? FILES.get("/");
   try {
-    const html = await readFile(path.join(ROOT, "dist", name));
-    res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
-    res.end(html);
+    const body = await readFile(path.join(ROOT, "dist", file.name));
+    res.writeHead(200, { "Content-Type": file.type });
+    res.end(body);
   } catch {
     res.writeHead(404, { "Content-Type": "text/plain" });
-    res.end(`dist/${name} not found — run \`npm run build\` first`);
+    res.end(`dist/${file.name} not found — run \`npm run build\` first`);
   }
 }).listen(PORT, () => console.log(`serving dist/ at http://localhost:${PORT}`));

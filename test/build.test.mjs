@@ -9,7 +9,7 @@ import { loadData } from "../src/validate.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
-test("build produces a self-contained dist/index.html", async () => {
+test("build produces the tracker and fetchable launcher icons", async () => {
   const result = await build(ROOT);
   const html = await readFile(result.outPath, "utf8");
 
@@ -24,6 +24,28 @@ test("build produces a self-contained dist/index.html", async () => {
   const payloadLine = html.split("\n").find(l => l.includes("const DATA ="));
   assert.ok(payloadLine, "DATA constant missing");
   assert.ok(!payloadLine.slice(payloadLine.indexOf("=")).includes("</"), "payload must escape < characters");
+
+  const icons = [
+    { name: "favicon-192.png", rel: "icon", width: 192, height: 192 },
+    { name: "apple-touch-icon.png", rel: "apple-touch-icon", width: 180, height: 180 },
+  ];
+  for (const icon of icons) {
+    const link = `<link rel="${icon.rel}" type="image/png" sizes="${icon.width}x${icon.height}" href="${icon.name}">`;
+    assert.ok(html.includes(link), `missing exact ${icon.name} link`);
+    const liveUrl = new URL(icon.name, "https://riles22.github.io/wow-class-tracker/index.html");
+    assert.equal(liveUrl.pathname, `/wow-class-tracker/${icon.name}`, `${icon.name} must stay under the Pages project path`);
+
+    const source = await readFile(path.join(ROOT, "src", "assets", icon.name));
+    const built = await readFile(path.join(ROOT, "dist", icon.name));
+    assert.deepEqual(built, source, `${icon.name} must be copied byte-for-byte`);
+    assert.deepEqual([...built.subarray(0, 8)], [137, 80, 78, 71, 13, 10, 26, 10], `${icon.name} must be a PNG`);
+    assert.equal(built.readUInt32BE(16), icon.width, `${icon.name} width mismatch`);
+    assert.equal(built.readUInt32BE(20), icon.height, `${icon.name} height mismatch`);
+  }
+
+  const csp = /<meta[^>]+Content-Security-Policy[^>]+content="([^"]*)"/i.exec(html)?.[1] ?? "";
+  assert.match(csp, /(?:^|;)\s*default-src 'none'\s*(?:;|$)/, "CSP must retain default-src 'none'");
+  assert.match(csp, /(?:^|;)\s*img-src 'self' data:\s*(?:;|$)/, "CSP must allow only same-origin and inline icons");
 });
 
 test("payload decorates every spec with consensus for both brackets", async () => {
