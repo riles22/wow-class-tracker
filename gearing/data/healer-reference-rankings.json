@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "patchContext": "ptr-12.1.0",
+  "objective": "healing-throughput",
+  "scenarios": [
+    "raid",
+    "mplus"
+  ],
+  "provider": {
+    "id": "questionably-epic",
+    "name": "Questionably Epic",
+    "status": "permission-required-pending",
+    "version": null,
+    "sourceUrl": "https://questionablyepic.com/live/",
+    "repositoryUrl": "https://github.com/Voulk/QuestionablyEpic",
+    "stagingPrUrl": "https://github.com/Voulk/QuestionablyEpic/pull/1748"
+  },
+  "catalyst": {
+    "status": "validation-required",
+    "caveat": "Questionably Epic's staging conversion work models inherited stats and catalyst identity, but exact preservation of bonus IDs, special effects, gems, Speed, and other tertiary data has not been accepted for this tracker. Catalyst-derived rankings must remain pending until versioned fixtures verify the converted item identity and every carried stat or effect."
+  },
+  "coverage": [
+    {
+      "specKey": "Restoration Druid",
+      "status": "pending",
+      "objective": "healing-throughput",
+      "plannedScenarios": [
+        "raid",
+        "mplus"
+      ],
+      "reason": "Provider permission and a versioned export contract are pending; exact catalyst conversion behavior must also pass validation before rankings can be accepted."
+    },
+    {
+      "specKey": "Preservation Evoker",
+      "status": "pending",
+      "objective": "healing-throughput",
+      "plannedScenarios": [
+        "raid",
+        "mplus"
+      ],
+      "reason": "Provider permission and a versioned export contract are pending; exact catalyst conversion behavior must also pass validation before rankings can be accepted."
+    },
+    {
+      "specKey": "Mistweaver Monk",
+      "status": "pending",
+      "objective": "healing-throughput",
+      "plannedScenarios": [
+        "raid",
+        "mplus"
+      ],
+      "reason": "Provider permission and a versioned export contract are pending; exact catalyst conversion behavior must also pass validation before rankings can be accepted."
+    },
+    {
+      "specKey": "Holy Paladin",
+      "status": "pending",
+      "objective": "healing-throughput",
+      "plannedScenarios": [
+        "raid",
+        "mplus"
+      ],
+      "reason": "Provider permission and a versioned export contract are pending; exact catalyst conversion behavior must also pass validation before rankings can be accepted."
+    },
+    {
+      "specKey": "Discipline Priest",
+      "status": "pending",
+      "objective": "healing-throughput",
+      "plannedScenarios": [
+        "raid",
+        "mplus"
+      ],
+      "reason": "Provider permission and a versioned export contract are pending; exact catalyst conversion behavior must also pass validation before rankings can be accepted."
+    },
+    {
+      "specKey": "Holy Priest",
+      "status": "pending",
+      "objective": "healing-throughput",
+      "plannedScenarios": [
+        "raid",
+        "mplus"
+      ],
+      "reason": "Provider permission and a versioned export contract are pending; exact catalyst conversion behavior must also pass validation before rankings can be accepted."
+    },
+    {
+      "specKey": "Restoration Shaman",
+      "status": "pending",
+      "objective": "healing-throughput",
+      "plannedScenarios": [
+        "raid",
+        "mplus"
+      ],
+      "reason": "Provider permission and a versioned export contract are pending; exact catalyst conversion behavior must also pass validation before rankings can be accepted."
+    }
+  ],
+  "records": []
+}

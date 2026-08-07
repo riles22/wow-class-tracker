@@ -133,6 +133,30 @@ actual modeled tertiaries. 13 tank and healer specs remain deferred to role-appr
 objectives, and Augmentation remains the 1 unsupported spec for personal-DPS scale factors.
 See `../docs/adr-simc-curated-profiles.md` for the provenance decision and its boundaries.
 
+## Healer reference rankings
+
+`data/healer-reference-rankings.json` is a provider-neutral evidence ledger for healer
+throughput gearing. It is deliberately separate from SimulationCraft: healer entries can
+remain honestly SimC-deferred while a role-appropriate model supplies Raid or Mythic+
+reference rankings through the same in-app gear cards and Catalyst comparison views.
+
+Questionably Epic is the first candidate provider, but no model result is accepted yet.
+The ledger records all seven healer specs as pending while provider permission, a versioned
+export contract, and 12.1 Catalyst fixtures are unresolved. The public app therefore keeps
+using its dated guide-order fallback; it does not call QE Live at runtime, scrape undocumented
+report endpoints, or bundle the provider's unlicensed source.
+
+Future accepted records must pin their provider/model version, profile, scenario, assumptions,
+provenance, and exactly one scoring basis. Secondary-weight records remain equal-item-level
+fit heuristics. Item-score records may represent nonlinear effects, but v1 admits only an
+explicit list of known item IDs; it rejects unverified claims that the candidate pool is
+complete. It also pins item scores to an equal-item-level, fixed-reference-set comparison and
+describes Catalyst use as retained item contribution rather than reusing an unexplained
+character snapshot. Exact model scores and guide-fallback values are displayed and sorted
+separately, never compared as though they share a numeric scale. In every case the tracker's
+own item catalog remains authoritative for inherited Catalyst secondaries, tertiaries,
+sockets, bonus IDs, and cantrip effects.
+
 Before running a newly curated profile, run `npm run gearing:test` from the repository root.
 Long SimC batches are intentionally not part of the nightly tracker pipeline.
 
@@ -145,8 +169,9 @@ Long SimC batches are intentionally not part of the nightly tracker pipeline.
 - Harvesters refuse to overwrite data on unexplained loot-set changes
   (`WOW_ACCEPT_LOOT_CHANGES=1` after review).
 - Guide-order priorities remain dated fallback metadata and are labeled as such. All 26
-  conventional DPS specs have accepted 12.1 PTR SimC reference coefficients; tanks and
-  healers retain their deferred, role-specific fallback states.
+  conventional DPS specs have accepted 12.1 PTR SimC reference coefficients; tanks retain
+  their deferred role-specific fallback states, while healers also have a separate pending
+  throughput-model ledger that publishes no coefficients until its admission gates pass.
 - SimC reference coverage is separate from the root MID1 nightly DPS metric and never feeds
   tracker tier grades or the 12.1 projection model.
 - `_retired-wallpapers/` holds the superseded static wallpaper deliverables this project

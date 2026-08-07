@@ -49,19 +49,79 @@ function ensureAcceptedSimcRecord(data) {
   return record;
 }
 
+function installAcceptedDisciplineFixture(data) {
+  const version = "fixture-healer-v1";
+  Object.assign(data.healerReferences.provider, { status: "approved", version });
+  data.healerReferences.catalyst.status = "validated";
+  const coverage = data.healerReferences.coverage.find((entry) => entry.specKey === "Discipline Priest");
+  coverage.status = "accepted";
+  delete coverage.reason;
+  data.healerReferences.records = data.healerReferences.records.filter((record) =>
+    record.specKey !== "Discipline Priest" || record.profile !== "Oracle (healing)");
+  const common = {
+    specKey: "Discipline Priest",
+    profile: "Oracle (healing)",
+    objective: "healing-throughput",
+    status: "accepted",
+    provider: { id: "questionably-epic", version },
+    provenance: {
+      sourceUrl: "https://questionablyepic.com/live/",
+      method: "versioned fixture export",
+      verified: true,
+      capturedAt: "2026-08-06T12:00:00Z",
+      artifactSha256: "b".repeat(64),
+    },
+    model: { name: "Discipline throughput fixture", version },
+    assumptions: ["Equal item level and the fixture's documented encounter assumptions."],
+    limitations: ["Regression fixture only; not a live gearing recommendation."],
+  };
+  const raid = {
+    ...clone(common),
+    recordId: "discipline-priest-oracle-healing-raid",
+    scenario: "raid",
+    scoringBasis: {
+      kind: "secondary-weights",
+      normalization: "relative healing throughput",
+      weights: { Crit: 0.8, Haste: 1.4, Mast: 1.1, Vers: 0.5 },
+    },
+  };
+  const mplus = {
+    ...clone(common),
+    recordId: "discipline-priest-oracle-healing-mplus",
+    scenario: "mplus",
+    scoringBasis: {
+      kind: "item-scores",
+      normalization: "relative healing throughput",
+      itemCoverage: "listed-items-only",
+      context: {
+        comparison: "equal-item-level",
+        gearSet: "fixed-reference-set",
+        catalyst: "retained-item-contribution",
+      },
+      items: [
+        { itemId: "271874", score: 2.75 },
+        { itemId: "270162", score: 9.5 },
+        { itemId: "270171", score: 7.25 },
+      ],
+    },
+  };
+  data.healerReferences.records.push(raid, mplus);
+  return { raid, mplus };
+}
+
 async function allValidatedData() {
   const [raid, specs, dungeons, sheet, statOverrides, statBaseline, weaponProficiency, itemEligibility,
-    tier, catalyst, catalystAllocations, simcManifest, simcWeights] = await Promise.all([
+    tier, catalyst, catalystAllocations, simcManifest, simcWeights, healerReferences] = await Promise.all([
     json("data/raid-items.json"), json("data/specs.json"), json("data/dungeon-items.json"),
     json("data/sheet-rewards.json"), json("data/stat-priority-overrides.json"),
     json("data/stat-priority-baseline.json"), json("data/weapon-proficiency.json"),
     json("data/item-eligibility-overrides.json"),
     json("data/tier-items.json"), json("data/catalyst-rules.json"),
     json("data/catalyst-stat-allocations.json"), json("data/simc-run-manifest.json"),
-    json("data/simc-reference-weights.json"),
+    json("data/simc-reference-weights.json"), json("data/healer-reference-rankings.json"),
   ]);
   return { raid, specs, dungeons, sheet, statOverrides, statBaseline, weaponProficiency,
-    itemEligibility, tier, catalyst, catalystAllocations, simcManifest, simcWeights };
+    itemEligibility, tier, catalyst, catalystAllocations, simcManifest, simcWeights, healerReferences };
 }
 
 async function copyCurationSources(manifest, root) {
@@ -302,6 +362,22 @@ test("generated datasets satisfy all build invariants", async () => {
     .every((record) => evidenceProfileIds.has(record.profileId)));
   assert.match(data.simcWeights.methodology.normalization, /selected profile's primary stat/);
   assert.doesNotMatch(data.simcWeights.methodology.normalization, /^Intellect\b/);
+  const healerKeys = data.specs.specs.filter((spec) => spec.role === "Healer")
+    .map((spec) => `${spec.spec} ${spec.class}`).sort();
+  assert.deepEqual(data.healerReferences.coverage.map((entry) => entry.specKey).sort(), healerKeys);
+  assert.deepEqual(data.healerReferences.scenarios, ["raid", "mplus"]);
+  assert.equal(data.healerReferences.provider.status, "permission-required-pending");
+  assert.equal(data.healerReferences.catalyst.status, "validation-required");
+  assert.ok(data.healerReferences.coverage.every((entry) => entry.status === "pending"
+    && entry.objective === "healing-throughput"
+    && entry.plannedScenarios.join("|") === "raid|mplus" && entry.reason));
+  assert.deepEqual(data.healerReferences.records, []);
+  const deferredHealers = data.simcManifest.specs.filter((spec) => spec.role === "Healer");
+  assert.equal(deferredHealers.length, 7);
+  assert.ok(deferredHealers.every((spec) => spec.eligibility === "deferred"
+    && spec.status === "deferred" && spec.objective === "healing"
+    && !spec.profileIds.length && !spec.plannedScenarioIds.length));
+  assert.equal(data.simcManifest.coverage.deferredHealers, 7);
 });
 
 test("ready-profile evidence is recoverable without publishing partial coverage", async () => {
@@ -756,6 +832,17 @@ test("SimC audit validation follows scenario inputs across build directories", a
     /profile artifact does not match the run manifest/);
 });
 
+test("validation accepts provider-neutral healer weights and exact item scores", async () => {
+  const data = clone(await allValidatedData());
+  const fixture = installAcceptedDisciplineFixture(data);
+  assert.doesNotThrow(() => validateData(data));
+  assert.deepEqual(fixture.raid.scoringBasis.weights,
+    { Crit: 0.8, Haste: 1.4, Mast: 1.1, Vers: 0.5 });
+  assert.deepEqual(fixture.mplus.scoringBasis.items.map((item) => [item.itemId, item.score]), [
+    ["271874", 2.75], ["270162", 9.5], ["270171", 7.25],
+  ]);
+});
+
 test("validation rejects incomplete data and curated-source drift", async () => {
   const valid = await allValidatedData();
   const mutations = [
@@ -859,6 +946,82 @@ test("validation rejects incomplete data and curated-source drift", async () => 
       entry.allocations.Crit += 100;
       entry.allocations.Mast -= 100;
     }],
+    ["missing healer reference ledger", /healer reference dataset/, (data) => {
+      delete data.healerReferences;
+    }],
+    ["missing healer coverage", /coverage must account for all and only healer specs/, (data) => {
+      data.healerReferences.coverage.pop();
+    }],
+    ["healer scenario-plan drift", /invalid role, objective, status, or scenario plan/, (data) => {
+      data.healerReferences.coverage[0].plannedScenarios.pop();
+    }],
+    ["healer provider source substitution", /provider metadata is missing or unreviewed/, (data) => {
+      data.healerReferences.provider.sourceUrl = "https://example.com/healer-model";
+    }],
+    ["pending healer coverage without reason", /non-accepted status lacks a reason/, (data) => {
+      delete data.healerReferences.coverage[0].reason;
+    }],
+    ["accepted healer ranking without provider approval",
+      /accepted ranking lacks permission or verified provenance/, (data) => {
+        installAcceptedDisciplineFixture(data);
+        data.healerReferences.provider.status = "permission-required-pending";
+      }],
+    ["accepted healer ranking before Catalyst validation",
+      /accepted ranking lacks permission or verified provenance/, (data) => {
+        installAcceptedDisciplineFixture(data);
+        data.healerReferences.catalyst.status = "validation-required";
+      }],
+    ["healer profile typo", /invalid healer roster, objective, status, profile, or scenario/, (data) => {
+      installAcceptedDisciplineFixture(data).raid.profile = "Oracle";
+    }],
+    ["healer provider-version mismatch", /accepted ranking lacks permission or verified provenance/, (data) => {
+      installAcceptedDisciplineFixture(data).raid.provider.version = "fixture-healer-v0";
+    }],
+    ["accepted healer ranking without verified timestamp",
+      /accepted ranking lacks permission or verified provenance/, (data) => {
+        installAcceptedDisciplineFixture(data).raid.provenance.capturedAt = null;
+      }],
+    ["accepted healer ranking without an artifact hash",
+      /accepted ranking lacks permission or verified provenance/, (data) => {
+        installAcceptedDisciplineFixture(data).raid.provenance.artifactSha256 = null;
+      }],
+    ["healer record attempts to override provider metadata", /invalid provider or version/, (data) => {
+      installAcceptedDisciplineFixture(data).raid.provider.name = "Spoofed provider";
+    }],
+    ["healer weights omit a secondary", /invalid healer secondary weights/, (data) => {
+      delete installAcceptedDisciplineFixture(data).raid.scoringBasis.weights.Vers;
+    }],
+    ["healer item scores missing a coverage declaration", /invalid healer item scores or item coverage/, (data) => {
+      delete installAcceptedDisciplineFixture(data).mplus.scoringBasis.itemCoverage;
+    }],
+    ["healer item scores omit their comparison context", /invalid healer item scores or item coverage/, (data) => {
+      delete installAcceptedDisciplineFixture(data).mplus.scoringBasis.context;
+    }],
+    ["healer item scores reference an unknown item", /invalid healer item scores or item coverage/, (data) => {
+      installAcceptedDisciplineFixture(data).mplus.scoringBasis.items[0].itemId = "999999";
+    }],
+    ["healer item scores repeat an item", /invalid healer item scores or item coverage/, (data) => {
+      const { mplus } = installAcceptedDisciplineFixture(data);
+      mplus.scoringBasis.items.push(clone(mplus.scoringBasis.items[0]));
+    }],
+    ["healer item scores expose an unvalidated map", /invalid healer item scores or item coverage/, (data) => {
+      installAcceptedDisciplineFixture(data).mplus.scoringBasis.itemScores = { "999999": 100 };
+    }],
+    ["healer item scores claim an unverified complete pool", /invalid healer item scores or item coverage/, (data) => {
+      installAcceptedDisciplineFixture(data).mplus.scoringBasis.itemCoverage = "complete-candidate-pool";
+    }],
+    ["healer records duplicate a profile encounter", /duplicate spec\/profile\/scenario record/, (data) => {
+      const { raid } = installAcceptedDisciplineFixture(data);
+      data.healerReferences.records.push({ ...clone(raid), recordId: "discipline-priest-oracle-healing-raid-copy" });
+    }],
+    ["healer record omits assumptions", /assumptions must be explicit and nonempty/, (data) => {
+      installAcceptedDisciplineFixture(data).raid.assumptions = [];
+    }],
+    ["accepted healer coverage missing an encounter",
+      /accepted status lacks an accepted mplus record/, (data) => {
+        const { mplus } = installAcceptedDisciplineFixture(data);
+        data.healerReferences.records = data.healerReferences.records.filter((record) => record !== mplus);
+      }],
     ["SimC stale manifest coverage", /coverage summary is stale/, (data) => {
       data.simcManifest.coverage.acceptedEligibleSpecs += 1;
     }],
@@ -1061,21 +1224,21 @@ test("stat profiles and explicit weapon edge cases remain correct", async () => 
 
 test("self-contained output embeds current data and valid browser JavaScript", async () => {
   const [html, template, raid, specs, dungeons, sheet, itemEligibility, tier, catalyst,
-    catalystAllocations, simcManifest, simcWeights, icons] = await Promise.all([
+    catalystAllocations, simcManifest, simcWeights, healerReferences, icons] = await Promise.all([
     readFile(fromRoot("wow-s2-gearing.html"), "utf8"),
     readFile(fromRoot("src/app.template.html"), "utf8"),
     json("data/raid-items.json"), json("data/specs.json"), json("data/dungeon-items.json"),
     json("data/sheet-rewards.json"), json("data/item-eligibility-overrides.json"),
     json("data/tier-items.json"), json("data/catalyst-rules.json"),
     json("data/catalyst-stat-allocations.json"), json("data/simc-run-manifest.json"),
-    json("data/simc-reference-weights.json"),
+    json("data/simc-reference-weights.json"), json("data/healer-reference-rankings.json"),
     json("data/icons.json"),
   ]);
   const embedded = html.match(/<script id="data" type="application\/json">([\s\S]*?)<\/script>/);
   assert.ok(embedded);
   assert.deepEqual(JSON.parse(embedded[1]), {
     raid, specs, dungeons, sheet, itemEligibility, tier, catalyst, catalystAllocations,
-    simcManifest, simcWeights, icons: icons.icons,
+    simcManifest, simcWeights, healerReferences, icons: icons.icons,
   });
 
   const scripts = [...template.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)];
@@ -1086,27 +1249,28 @@ test("self-contained output embeds current data and valid browser JavaScript", a
   assert.match(template, /<label for="spec">Specialization<\/label>/);
   assert.match(template, /<label for="scenario">Encounter<\/label>/);
   assert.match(template, /class="skip-link" href="#main-content"/);
-  assert.match(template, /SimC reference \(when available\)/);
+  assert.match(template, /Validated reference model \(when available\)/);
   assert.match(template, /Custom decimal weights/);
+  assert.doesNotMatch(template, /Questionably Epic|questionablyepic\.com/);
   assert.match(template, /@media \(max-width:640px\)/);
   assert.doesNotMatch(template, /main_hand:'One-Hand'/);
 });
 
 test("client app switches scenario-specific SimC profiles and labels their provenance", async () => {
   const [template, raid, specs, dungeons, sheet, itemEligibility, tier, catalyst,
-    catalystAllocations, simcManifest, simcWeights, icons] = await Promise.all([
+    catalystAllocations, simcManifest, simcWeights, healerReferences, icons] = await Promise.all([
     readFile(fromRoot("src/app.template.html"), "utf8"),
     json("data/raid-items.json"), json("data/specs.json"), json("data/dungeon-items.json"),
     json("data/sheet-rewards.json"), json("data/item-eligibility-overrides.json"),
     json("data/tier-items.json"), json("data/catalyst-rules.json"),
     json("data/catalyst-stat-allocations.json"), json("data/simc-run-manifest.json"),
-    json("data/simc-reference-weights.json"),
+    json("data/simc-reference-weights.json"), json("data/healer-reference-rankings.json"),
     json("data/icons.json"),
   ]);
   const data = { raid, specs, dungeons, sheet, itemEligibility, tier, catalyst,
-    catalystAllocations, simcManifest, simcWeights, icons: icons.icons };
+    catalystAllocations, simcManifest, simcWeights, healerReferences, icons: icons.icons };
   const scripts = [...template.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)];
-  const appSource = `${scripts.at(-1)[1]}\nreturn { current: () => CUR, scoreFor: id => scoreItem(CUR, BY_ID[id]), weights: () => activeWeights(CUR), reference: () => activeReferenceRecord(), coverage: () => manifestSpecFor(CUR) };`;
+  const appSource = `${scripts.at(-1)[1]}\nreturn { current: () => CUR, scoreFor: id => scoreItem(CUR, BY_ID[id]), weights: () => activeWeights(CUR), reference: () => activeReferenceRecord(), coverage: () => manifestSpecFor(CUR), healerCoverage: () => healerCoverageFor(CUR) };`;
   const startClient = (clientData) => {
     const document = fakeDocument(clientData);
     const app = new Function("document", "innerWidth", "innerHeight", appSource)(document, 1600, 900);
@@ -1355,8 +1519,106 @@ test("client app switches scenario-specific SimC profiles and labels their prove
   specSelect.value = "Priest|Discipline";
   specSelect.listeners.change();
   assert.equal(app.coverage().status, "deferred");
-  assert.match(document.ids.get("scoring-summary").innerHTML, /SimulationCraft reference deferred/);
-  assert.match(document.ids.get("scoring-summary").innerHTML, /healing-output reference methodology/);
+  assert.equal(app.healerCoverage().status, "pending");
+  assert.equal(scoringMode.value, "priority");
+  assert.deepEqual(scenarioSelect.children.map((option) => option.value), ["raid", "mplus"]);
+  assert.deepEqual(scenarioSelect.children.map((option) => option.textContent),
+    ["Raid healing", "Mythic+ healing"]);
+  assert.match(document.ids.get("scoring-summary").innerHTML,
+    /In-app healer throughput model pending validation/);
+  assert.match(document.ids.get("scoring-summary").innerHTML, /Provider permission and a versioned export contract/);
+  assert.doesNotMatch(document.ids.get("scoring-summary").innerHTML, /SimulationCraft reference deferred/);
+
+  const missingHealerData = clone(data);
+  delete missingHealerData.healerReferences;
+  const missingHealerClient = startClient(missingHealerData);
+  missingHealerClient.document.ids.get("spec").value = "Priest|Discipline";
+  missingHealerClient.document.ids.get("spec").listeners.change();
+  assert.equal(missingHealerClient.app.healerCoverage(), null);
+  assert.match(missingHealerClient.document.ids.get("scoring-summary").innerHTML,
+    /SimulationCraft reference deferred/);
+  assert.match(missingHealerClient.document.ids.get("scoring-summary").innerHTML,
+    /healing-output reference methodology/);
+
+  const acceptedHealerData = clone(data);
+  const acceptedHealerFixture = installAcceptedDisciplineFixture(acceptedHealerData);
+  Object.assign(acceptedHealerData.healerReferences.provider, {
+    id: "fixture-healer-lab",
+    name: "Fixture Healer Lab",
+    sourceUrl: "https://healer.example/reference",
+  });
+  acceptedHealerData.healerReferences.records.forEach((record) => {
+    record.provider.id = "fixture-healer-lab";
+  });
+  const acceptedHealerClient = startClient(acceptedHealerData);
+  const healerDocument = acceptedHealerClient.document;
+  const healerApp = acceptedHealerClient.app;
+  healerDocument.ids.get("spec").value = "Priest|Discipline";
+  healerDocument.ids.get("spec").listeners.change();
+  const healerScoringMode = healerDocument.ids.get("scoring-mode");
+  const healerScenario = healerDocument.ids.get("scenario");
+  assert.equal(healerDocument.ids.get("profile").value, "Oracle (healing)");
+  assert.equal(healerScoringMode.value, "reference");
+  assert.equal(healerApp.healerCoverage().status, "accepted");
+  assert.deepEqual(healerApp.reference(), acceptedHealerFixture.raid);
+  assert.deepEqual(healerApp.weights(), { Crit: 0.8, Haste: 1.4, Mast: 1.1, Vers: 0.5 });
+  assert.ok(Math.abs(healerApp.scoreFor("271874") - 1.1) < 1e-12);
+  assert.match(healerDocument.ids.get("scoring-summary").innerHTML,
+    /Accepted in-app healer throughput reference weights/);
+  assert.match(healerDocument.ids.get("scoring-summary").innerHTML, /Fixture Healer Lab/);
+  assert.match(healerDocument.ids.get("scoring-summary").innerHTML, /fixture-healer-v1/);
+  assert.match(healerDocument.ids.get("scoring-summary").innerHTML, /assumptions/);
+  assert.doesNotMatch(healerDocument.ids.get("scoring-summary").innerHTML, /Questionably Epic/);
+
+  healerScoringMode.value = "custom";
+  healerScoringMode.listeners.change();
+  healerDocument.ids.get("weight-crit").value = "1.2";
+  healerDocument.ids.get("weight-haste").value = "1.3";
+  healerDocument.ids.get("weight-mast").value = "2.4";
+  healerDocument.ids.get("weight-vers").value = "0.6";
+  healerDocument.ids.get("weight-mast").listeners.input();
+  assert.deepEqual(healerApp.weights(), { Crit: 1.2, Haste: 1.3, Mast: 2.4, Vers: 0.6 });
+  assert.ok(Math.abs(healerApp.scoreFor("271874") - 2.4) < 1e-12);
+  assert.match(healerDocument.ids.get("scoring-summary").innerHTML, /Custom weights supplied by you/);
+
+  healerScoringMode.value = "reference";
+  healerScoringMode.listeners.change();
+  healerScenario.value = "mplus";
+  healerScenario.listeners.change();
+  assert.deepEqual(healerApp.reference(), acceptedHealerFixture.mplus);
+  assert.equal(healerApp.scoreFor("271874"), 2.75);
+  assert.equal(healerApp.scoreFor("270162"), 9.5);
+  assert.equal(healerApp.scoreFor("270171"), 7.25);
+  assert.match(healerDocument.ids.get("scoring-summary").innerHTML,
+    /Accepted in-app healer throughput item scores/);
+  assert.match(healerDocument.ids.get("scoring-summary").innerHTML, /normalization/);
+  assert.match(healerDocument.ids.get("scoring-summary").innerHTML, /item coverage <b>listed items only/);
+  assert.match(healerDocument.ids.get("scoring-summary").innerHTML, /source artifact/);
+  const healerBis = healerDocument.ids.get("bis").innerHTML;
+  assert.match(healerBis, /2 model-ranked/);
+  assert.ok(healerBis.indexOf('data-id="270162"') < healerBis.indexOf('data-id="270171"'));
+  assert.match(healerBis, /Model score 9\.5/);
+  assert.match(healerBis, /Unranked:.*active healer model has no exact score/);
+
+  healerDocument.ids.get("simc").value = "trinket1=current_trinket,id=999997,ilevel=292";
+  healerDocument.ids.get("parse").listeners.click();
+  const healerUpgradeHtml = healerDocument.ids.get("up").innerHTML;
+  assert.match(healerUpgradeHtml, /Exact embedded healer item scores rank matching trinkets/);
+  assert.ok(healerUpgradeHtml.indexOf('data-id="270162"')
+    < healerUpgradeHtml.indexOf('data-id="270171"'));
+  assert.match(healerUpgradeHtml, /Model score 9\.5/);
+  assert.match(healerUpgradeHtml, /Unranked/);
+
+  acceptedHealerFixture.mplus.scoringBasis.items.find((item) => item.itemId === "271874").score = 0.01;
+  healerScenario.value = "raid";
+  healerScenario.listeners.change();
+  healerScenario.value = "mplus";
+  healerScenario.listeners.change();
+  const partitionedTier = healerDocument.ids.get("tier").innerHTML;
+  assert.ok(partitionedTier.indexOf('data-id="271874"') < partitionedTier.indexOf('data-id="268242"'),
+    "an exact model score must stay ahead of the separately sorted guide fallback regardless of numeric scale");
+  assert.match(partitionedTier, /class="row best" data-id="271874"/);
+  assert.match(partitionedTier, /two scales are never mixed/);
 
   specSelect.value = "Warrior|Arms";
   specSelect.listeners.change();
