@@ -17,10 +17,12 @@
 <!-- The brand mark, as favicon: three tier bars in the grid's own band colours —
      S gold, A+ violet, A blue. The product drawn as itself. Patch-agnostic, so the mark
      survives every season (approved rebrand option 1a, 2026-08-04 — the earlier rise
-     arrow is gone). Shipped as an inline data URI because the site is one self-contained
-     file (the CSP grants img-src data: for exactly this). The same artwork renders
-     inline in the masthead (.brandmark), where it is also the home button. -->
+     arrow is gone). The inline SVG keeps the self-contained file's tab icon working;
+     the sized, fetchable PNGs let Firefox New Tab and touch launchers cache the same
+     artwork. The masthead copy is an inline .brandmark SVG and also the home button. -->
 <link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22><rect x=%222%22 y=%222%22 width=%2260%22 height=%2260%22 rx=%2214%22 fill=%22%23130B22%22 stroke=%22%23B57BEE%22 stroke-opacity=%22.45%22 stroke-width=%222.5%22/><rect x=%2212%22 y=%2213%22 width=%2240%22 height=%229%22 rx=%224.5%22 fill=%22%23F0C24B%22/><rect x=%2212%22 y=%2227.5%22 width=%2229%22 height=%229%22 rx=%224.5%22 fill=%22%23C77DFF%22/><rect x=%2212%22 y=%2242%22 width=%2219%22 height=%229%22 rx=%224.5%22 fill=%22%236AA8F0%22/></svg>'>
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- Fonts load async from the main script (CSP-safe, no inline handler) so first paint
