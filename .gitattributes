@@ -1,1 +1,11 @@
 gearing/data/*.json text eol=lf
+
+# Built HTML must stay LF in the WORKING TREE, not just in the blob. Both artifacts carry
+# a Content-Security-Policy whose script-src is a sha256 of their inline script, and the
+# build hashes LF because the HTML parser normalizes newlines before the browser hashes.
+# With core.autocrlf=true (the default on Windows) a fresh checkout would rewrite these to
+# CRLF, the hash would no longer match, and the browser would silently refuse to run the
+# app — a blank page from `git clone` alone, with nothing in the diff to explain it. That
+# also protects gearing/README.md's promise that the single file can just be opened.
+dist/*.html                 text eol=lf
+gearing/wow-s2-gearing.html text eol=lf
