@@ -168,6 +168,17 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   Band discipline is unchanged. **Still open:** tanks have no PTR raid signal of any kind,
   and the ±12 headroom moves scores but rarely letters, because crossing a band still
   needs a ≥3-creator quorum and most panels are 1–2 creators.
+  **Quorum REMOVED for healers and tanks** (v11, 2026-08-07, Riley — decided against a
+  stated objection): one creator may now cross a band edge for those two roles; DPS still
+  needs `EXPERT_QUORUM`. Coverage was attempted first and came up empty — a sweep of all
+  14 transcribable tank/healer creators found no raid-scoped 12.1 content to distil, and
+  all six tanks together hold 8 takes with ZERO raid-scoped. What this knowingly trades is
+  the v6 bound against single-source authority: a lone creator can move a published healer
+  or tank letter, and for tanks that creator is often the only take on file. Shrinkage
+  (1 creator ⇒ ×.33) and the one-edge clamp still apply, so the failure mode is a letter
+  one band off on one person's read, not a runaway. It moved two cells on landing — Holy
+  Paladin raid A→A+ (2 creators) and **Protection Warrior raid A+→S on ONE creator**,
+  which is the cost of the decision made visible. Revisit if take coverage improves.
 - **History snapshots are ENRICHED** (2026-07-09): `snapshotStateOf` stores exact
   consensus scores + the projection (tier/score/confidence, no basis strings) alongside
   the classic tiers/ranks. Movement/baseline comparison stays tier/rank-grained — the

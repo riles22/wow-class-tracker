@@ -1481,6 +1481,10 @@ test("expert quorum: three shrunk creators may cross ONE band edge — never two
   // These fixtures are healer-raid with no metrics and no sources, i.e. no PTR empirical
   // term and no PTR list — the v10 case where the expert ceiling doubles to ±12. The
   // band discipline asserted below is unchanged; only the reach of the term grew.
+  // NOTE (v11): healers and tanks no longer need a quorum to cross an edge, so the
+  // "two creators stay within-tier" property below holds for them only because the
+  // arithmetic does not reach the edge. The rule itself is asserted per-role in
+  // "expert quorum is role-scoped" further down; do not read this block as the guarantee.
   // Two creators, unanimous: shrunk −.5 → adj −6 → 80, inside A+ — no quorum, floor 74 anyway.
   const duo = projectionFor(spec, "raid", NUDGE_SCALES, [], [], [TK("a", "nerf"), TK("b", "nerf")]);
   assert.equal(duo.tier, "A+", "two voices stay within-tier by construction");
@@ -1516,4 +1520,33 @@ test("expert quorum: the meta nudge stays inside the band the expert term chose"
   const p = projectionFor(spec, "raid", NUDGE_SCALES, notes, [], octet);
   assert.equal(p.tier, "A");
   assert.equal(p.score, 68, "nudge applies inside A, never re-crosses the edge");
+});
+
+/* v11 (2026-08-07, Riley): the quorum requirement is REMOVED for healers and tanks, so a
+   single creator may move their published letter; DPS still needs EXPERT_QUORUM. This is a
+   deliberate reversal of the v6 single-source bound in that scope — the roles whose raid
+   cells hold no PTR empirical evidence at all, where specialists are the only 12.1-aware
+   input and the quorum bound meant it could never reach the letter. Pinned per-role here
+   because the older quorum test uses healer fixtures and can no longer carry the rule. */
+test("expert quorum is role-scoped: one creator moves a healer/tank letter, never a DPS one", () => {
+  // Evidence 75 sits just above the A+ floor (74). A single creator shrinks to ±.333,
+  // so the v10 ceiling asks for round(12 × .333) = 4 — enough to cross into A at 71.
+  const base = { class: "X", spec: "E", consensus: { raid: { score: 75 } },
+    outlook: { direction: "flat", source: "verdict", buffs: 0, nerfs: 0, builds: 1 },
+    ptr: { verdict: "Mixed", asOf: "2026-07-01" } };
+  const solo = [TK("only-voice", "nerf")];
+
+  for (const role of ["Healer", "Tank"]) {
+    const p = projectionFor({ ...base, role }, "raid", NUDGE_SCALES, [], [], solo);
+    assert.equal(p.parts.expertCreators, 1);
+    assert.equal(p.parts.expertQuorum, true, `${role}: one creator now counts as quorum`);
+    assert.equal(p.tier, "A", `${role}: a lone specialist may move the letter`);
+    assert.ok(p.score >= 58, `${role}: still clamped inside the ADJACENT band, never two`);
+  }
+
+  // DPS is untouched: same panel, same numbers, but the letter must hold.
+  const dps = projectionFor({ ...base, role: "DPS" }, "raid", NUDGE_SCALES, [], [], solo);
+  assert.equal(dps.parts.expertCreators, 1);
+  assert.equal(dps.parts.expertQuorum, false, "DPS still requires EXPERT_QUORUM creators");
+  assert.equal(dps.tier, "A+", "one DPS voice cannot move a published letter");
 });

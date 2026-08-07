@@ -777,3 +777,35 @@ queue + a 2026-07-28 publish-date cutoff rather than from the log. No creator op
 - `latest` refreshed on YoDaTV/Druid, AutomaticJak/Priest and the izen generalCreators entry.
 - **No creator opinion touched any rating.** `npm test` 332 pass / 0 fail, build OK, snapshot
   written then rebuilt.
+
+## 2026-08-07 — targeted sweep: tank + healer RAID takes (local run)
+
+**Why:** projection work found healer 7/7 and tank 6/6 raid cells sitting at 100% of the
+12.0.7 prior, with the expert lane the only 12.1-aware input available to them. Riley
+asked for coverage first, then a quorum change. This run went looking specifically for
+**raid-scoped** tank/healer takes.
+
+**Discovery:** RSS polled for the 14 transcribable creators whose scope covers a tank or
+healer spec (Reholy, YoDaTV, Shadarek, Tettles, LBNinja7, Dalaran Gaming, MadSkillzzTV,
+AutomaticJak, Kesslive, Pkpawner, Clandon, Supatease, Critcake, Baze — Kyrasis, Gamz and
+Voulk still carry no `channelId`). 37 unseen titles passed a deliberately loose keyword
+filter; almost all were 12.0.7-era gameplay POVs. Genuinely 12.1/Season-2 and tank/healer:
+four YoDaTV videos (San'layn Blood DK ×2, Bear Druid ×2) — every one a **+19/+20 key run**,
+i.e. M+, which is the bracket already over-represented in `takes[]`.
+
+**Transcript-verified:** `FCv62odOpew` (YoDaTV, King's Rest +20, San'layn Blood DK, S2 PTR).
+2,244 words, 369 caption events. Ten lines carry analytical vocabulary and the single
+"raid" cluster (~760–1000s) is the creator answering chat about whether **raid buffs**
+belong in Mythic+ comp design — a game-design opinion, not a read on Blood DK. No
+sentiment, no comparison, no 12.1 outlook for the spec. Moved to `skipped[]` with that
+reason rather than distilled: writing a raid-scoped Blood DK take out of it would have
+manufactured exactly the signal this run went looking for, which is the failure mode the
+procedure warns about hardest when a spec is uncovered.
+
+**Takes added: 0. metaNotes added: 0. Skipped lane: 15 → 16.**
+
+**Finding for the next run:** the tank/healer raid gap is NOT a distillation backlog. The
+creators we track are not publishing 12.1 raid analysis for these roles right now — during
+PTR they are running keys. All six tanks together hold 8 takes, none raid-scoped. If raid
+coverage matters before launch, it needs either new creators who cover tank/healer raid,
+or waiting for raid-testing content once 12.1 ships.

@@ -1,7 +1,7 @@
 {
   "date": "2026-08-07",
   "phase": "12.1-ptr",
-  "projectionVersion": 10,
+  "projectionVersion": 11,
   "rankVersion": 3,
   "consensusVersion": 2,
   "specs": {
@@ -907,8 +907,8 @@
       },
       "projection": {
         "raid": {
-          "tier": "A",
-          "score": 73,
+          "tier": "A+",
+          "score": 78,
           "confidence": "low"
         },
         "mplus": {
@@ -1585,8 +1585,8 @@
       },
       "projection": {
         "raid": {
-          "tier": "A+",
-          "score": 87,
+          "tier": "S",
+          "score": 90,
           "confidence": "low"
         },
         "mplus": {

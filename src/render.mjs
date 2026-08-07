@@ -735,9 +735,21 @@ export function outlookFor(spec, ptrBuilds, takes = []) {
               lets a quorum panel cross exactly one edge.
         Weights themselves are unchanged, so the 2026-08-02 "weights frozen until the
         report card" line is not crossed: (B) is a labelling fix and (C) is a bound that
-        only binds where the blend is empty. Not one series with v9. */
+        only binds where the blend is empty. Not one series with v9.
+   v11 — 2026-08-07 (Riley, deciding against a stated objection). The expert QUORUM is
+        removed for healers and tanks: one creator may now cross a band edge for those
+        roles, DPS unchanged. Rationale and the coverage numbers that forced the choice
+        are at the expertQuorum site. Coverage was attempted FIRST, as asked, and came up
+        empty: a sweep of all 14 transcribable tank/healer creators found no raid-scoped
+        12.1 content to distil (the one candidate transcript-verified in full turned out
+        to be a key-run POV whose "raid" passage is chat banter about raid buffs in M+),
+        so the quorum change ships without the coverage improvement that would have made
+        it safer. Effect: 2 tier moves, Holy Paladin raid A→A+ on 2 creators and
+        Protection Warrior raid A+→S on ONE. That single-creator S is the cost of the
+        decision, working exactly as specified — flag it if it looks wrong on the page.
+        Not one series with v10. */
 export { PHASES };
-export const PROJECTION_VERSION = 10;
+export const PROJECTION_VERSION = 11;
 
 /* Rank-map version, stamped beside it. `snapshotStateOf().ranks` feeds movement
    comparison, and its meaning changed in the same commit as PROJECTION_VERSION v2:
@@ -1062,7 +1074,27 @@ export function projectionFor(spec, bracket, scales, metaNotes = [], sources = [
   const bands = scales.consensus.bands;
   const band = bands.find(b => evidenceScore >= b.min);
   const bandIdx = bands.indexOf(band);
-  const expertQuorum = expertAdj !== 0 && expert.creators >= EXPERT_QUORUM;
+  /* (v11, 2026-08-07 — Riley's call, made against a stated objection.) The quorum
+     requirement is REMOVED for healers and tanks: any non-zero expert adjustment may
+     cross a band edge for those roles, with no creator minimum. DPS keeps EXPERT_QUORUM.
+
+     Why the exception is scoped this way: healer and tank raid cells are the ones with no
+     PTR empirical term and no PTR list, so specialists are the only 12.1-aware evidence
+     we hold for them, and the quorum bound meant that evidence could never reach the
+     published letter. Measured at the time: all six tanks together held 8 takes with
+     ZERO raid-scoped, no tank raid cell had more than 1 creator, and healers ran 2–5.
+     So a threshold of 2 would have been inert for tanks and only 1 changes anything.
+
+     What this knowingly gives up: the v6 bound against single-source authority. A lone
+     creator can now move a published healer or tank letter, and for tanks that creator
+     is often the only take on file for the spec. Shrinkage still applies (1 creator
+     ⇒ ×0.33, so ±4 of the ±12 ceiling) and the one-edge clamp still holds, so the
+     failure mode is a letter that is one band off on one person's read — not a runaway.
+     Revisit when take coverage improves; a 2026-08-07 sweep of all 14 transcribable
+     tank/healer creators found no raid-scoped 12.1 content to distil, so the coverage
+     fix could not be done first. */
+  const quorumNeeded = (spec.role === "Healer" || spec.role === "Tank") ? 1 : EXPERT_QUORUM;
+  const expertQuorum = expertAdj !== 0 && expert.creators >= quorumNeeded;
   const adjFloor = expertQuorum ? (bands[bandIdx + 1]?.min ?? band.min) : band.min;
   const adjCeil = expertQuorum
     ? (bandIdx <= 1 ? 100 : bands[bandIdx - 2].min - 1)
