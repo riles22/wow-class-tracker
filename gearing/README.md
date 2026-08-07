@@ -22,6 +22,24 @@ node -e "const h=require('fs').readFileSync('wow-s2-gearing.html','utf8');consol
 Zero is the only passing answer. (An external `<a href>` is fine — it is a link, not a
 fetch; it is `url(http…)` in CSS and external `src=` that would break the guarantee.)
 
+**CSP.** The build injects a Content-Security-Policy whose `script-src` is a sha256 hash
+of the one inline app script, so only the exact script this build produced can run. It is
+stricter than the tracker's — `default-src 'none'` with no external origin, since the
+fonts and every item icon are data: URIs. Two things will silently break it: the build
+must normalize CRLF→LF *before* hashing (the HTML parser normalizes newlines, so a Windows
+checkout would otherwise produce an unmatchable hash), and any new inline `on*=` handler
+or second bare `<script>` would be refused — the build hard-fails if it does not find
+exactly one script to hash.
+
+**Deep link.** `gearing.html#spec=<slug>` preselects a spec, where `<slug>` is the
+tracker's `slugOf()` (`"<class> <spec>"` lowercased, non-alphanumerics → `-`). The tracker's
+spec drawers link here. Unknown slugs fall back to the default spec rather than erroring.
+
+**Client code must not assume a browser.** `test/project.test.mjs` boots the app through
+`new Function("document","innerWidth","innerHeight", …)` to get a fast check without
+Playwright. There is no `location`, `history` or `window` in that scope, so guard any use
+of them with `typeof x === 'undefined'` or that test fails with a bare ReferenceError.
+
 ## Pipeline
 
 ```

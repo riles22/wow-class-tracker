@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-nw8oOTriBsCe+cnpX9Fv7xalfDm3rcFbTQcTbncNKjQ='; style-src 'unsafe-inline'; font-src data:; img-src data:; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Spec Tracker &mdash; Season 2 Gearing</title>
 <!-- The Spec Tracker brand mark as favicon — same artwork as the tracker page, shipped
@@ -722,6 +723,34 @@ function initProfiles() {
   sel.disabled = profiles.length < 2;
 }
 
+/* Deep link: gearing.html#spec=<slug>. The slug is the SAME identifier the tracker's
+   slugOf() produces (`"<class> <spec>"` lowercased, non-alphanumerics -> "-"), so the two
+   pages share one vocabulary and the tracker can link straight to a spec's gearing without
+   translating ids. Safe because gearing/data/specs.json is GENERATED from the tracker's
+   specs.json, so the 40 specs correspond exactly -- but the lookup still fails soft: an
+   unknown slug falls through to the normal default rather than rendering a broken page.
+   Written back with replaceState on change only, so a URL nobody has touched stays clean
+   and creates no history entries (same posture as the tracker's writeHash).
+   The client-boot test (gearing/test/project.test.mjs) evaluates this script through
+   `new Function("document","innerWidth","innerHeight", ...)` -- there is no location and
+   no history in that scope -- so every URL touch below is typeof-guarded and no-ops
+   there rather than throwing. Keep it that way: that test is the cheap boot check that
+   runs without Playwright. */
+const specSlug = s => (s.class + ' ' + s.spec).toLowerCase().replace(/[^a-z0-9]+/g, '-');
+const hashParams = () =>
+  new URLSearchParams(typeof location === 'undefined' ? '' : location.hash.replace(/^#/, ''));
+function specFromHash() {
+  if (typeof location === 'undefined') return null;
+  const want = hashParams().get('spec');
+  return want ? (SPECS.specs.find(s => specSlug(s) === want) || null) : null;
+}
+function writeSpecHash() {
+  if (!CUR || typeof location === 'undefined' || typeof history === 'undefined') return;
+  const p = hashParams();
+  p.set('spec', specSlug(CUR));
+  history.replaceState(null, '', '#' + p.toString());
+}
+
 function initSpecs() {
   const sel = $('#spec'), byClass = {};
   for (const s of SPECS.specs) (byClass[s.class] = byClass[s.class] || []).push(s);
@@ -738,6 +767,7 @@ function initSpecs() {
   });
   sel.addEventListener('change', () => {
     CUR = find(sel.value);
+    writeSpecHash();
     initProfiles();
     $('#scoring-mode').value = referenceRecordsFor(CUR, activeProfile()).length ? 'reference' : 'priority';
     clearCustomWeights(false);
@@ -749,7 +779,10 @@ function initSpecs() {
   if ($('#scenario')) $('#scenario').addEventListener('change', render);
   SECONDARY_STATS.forEach(stat => $('#weight-' + stat.toLowerCase()).addEventListener('input', render));
   $('#weight-reset').addEventListener('click', () => clearCustomWeights(true));
-  if (find('Mage|Frost')) sel.value = 'Mage|Frost';
+  // A deep-linked spec wins over the built-in default; an unknown slug is ignored.
+  const linked = specFromHash();
+  if (linked) sel.value = linked.class + '|' + linked.spec;
+  else if (find('Mage|Frost')) sel.value = 'Mage|Frost';
   CUR = find(sel.value) || SPECS.specs[0];
   initProfiles();
   $('#scoring-mode').value = referenceRecordsFor(CUR, activeProfile()).length ? 'reference' : 'priority';

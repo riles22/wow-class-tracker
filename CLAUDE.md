@@ -230,6 +230,24 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   Mono"`, so the system face won and the embed did nothing), and the check that matters is
   `url(http…)` count in the built HTML — an external *anchor* href is fine, an external
   font/style URL is not.
+- **Gearing deep link + CSP** (2026-08-07, the last two Phase-B items). Each spec drawer
+  carries a **⚙ Gearing** link to `gearing.html#spec=<slug>`, where `<slug>` is the
+  tracker's own `slugOf()` — **one identifier vocabulary across both pages**, verified
+  1:1 for all 40 specs in both directions with no collisions (safe because
+  `gearing/data/specs.json` is generated from the tracker's, and the lookup still fails
+  soft: an unknown slug falls back to gearing's default rather than breaking the page).
+  Gearing reads it in `specFromHash()` and writes it back with `replaceState` on change
+  only, so an untouched URL stays clean. **Gearing now ships its own hashed CSP**, built
+  the same way as the tracker's but STRICTER — `default-src 'none'` with no external
+  origin at all, because its fonts and item icons are data: URIs. Three traps here:
+  (a) `gearing/src/build.mjs` must normalize CRLF→LF *before* hashing or the hash is
+  unmatchable from a Windows checkout; (b) the gearing client-boot test evaluates the app
+  through `new Function("document","innerWidth","innerHeight", …)` — there is **no
+  `location` and no `history`** in that scope, so every URL touch in gearing's client code
+  must be `typeof`-guarded or that test dies; (c) the injection UI invariant's relative-href
+  allowlist is now a pinned regex accepting `index.html`/`gearing.html` with an optional
+  `[a-z0-9=&-]` fragment — `slugOf` can only emit that charset, so no roster value can
+  widen it.
 - **Footer order** (2026-08-05, Riley): the footer opens with **Sources & snapshot dates**
   and the build feed; the `.footbrand` identity block sits BELOW them, above the credits.
 - **Site tabs** (2026-08-05): the masthead ends in a two-tab strip — **Spec Tracker**
