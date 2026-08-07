@@ -470,10 +470,29 @@ export function outlookFor(spec, ptrBuilds, takes = []) {
   // hero talents)") — anchored with startsWith so "Demon Hunter (class-wide)" can never
   // match Hunter, nor "Death Knight (…)" match a Knight-less class via substring.
   const classLevel = `${spec.class} (`;
-  const mentioned = builds.filter(b => (b.specsAffected ?? []).some(e =>
+  /* The consolidated launch patch notes (kind: "patch-notes") are the AUTHORITY on what
+     ships — and precisely for that reason they are excluded from this tally, which is a
+     line-COUNTING heuristic and cannot read them (Riley + audit, 2026-08-07).
+
+     Their format is one paragraph per spec restating the entire patch, so:
+       · 34 of the 49 lines classify as null — a paragraph carrying both buffs and nerfs
+         fails the unanimity rule by construction, so 28 of 40 specs would go silent if
+         this were the tally's only input;
+       · the ones that do classify can be flatly wrong — Holy Priest's line ("All healing
+         +16% … mana cost -30% … healing +15%") reads as a NERF to the classifier.
+     Counting them alongside the incremental builds also double-counts every change,
+     because each launch line restates builds already tallied: verified that all 40 specs
+     appearing here also appear in earlier builds and NONE relies on this entry as its
+     only source, so excluding it loses no signal and removes a live phantom nerf.
+
+     The consequence to be honest about: this tally measures the DIRECTION OF TUNING
+     ACROSS THE PTR, not the shipping delta. The shipping delta lives in the patch notes,
+     which the drawer now presents on their own terms. */
+  const scored = builds.filter(b => (b.kind ?? "build") !== "patch-notes");
+  const mentioned = scored.filter(b => (b.specsAffected ?? []).some(e =>
     e === full || e.startsWith(classLevel))).length;
   let buffs = 0, nerfs = 0;
-  for (const b of builds) {
+  for (const b of scored) {
     for (const h of b.highlights ?? []) {
       // Count only lines genuinely ABOUT this spec ("Arms Warrior — …"), not class-wide
       // lines that merely name it in prose ("Warrior (class-wide) — … exclusive to Arms …").
@@ -529,7 +548,7 @@ export function outlookFor(spec, ptrBuilds, takes = []) {
   return {
     direction, source, expert: expert ?? undefined, builds: mentioned, buffs, nerfs,
     contradicted: contradicts || undefined,
-    basis: `${verdict ? `PTR read: ${verdict}` : "no writeup yet"} · touched in ${mentioned} of ${builds.length} PTR builds` +
+    basis: `${verdict ? `PTR read: ${verdict}` : "no writeup yet"} · touched in ${mentioned} of ${scored.length} PTR builds` +
       expertPhrase +
       (buffs || nerfs ? ` · highlighted tuning lines +${buffs}/−${nerfs}` : "") +
       (contradicts ? ` (the writeup predates this tuning — its ${verdict.toLowerCase()} read disagrees with the official lines since)` : "") +

@@ -332,6 +332,29 @@ posts; drawer coverage went 118 → 190 spec-build entries.
 Dense builds use ONE consolidated line per spec (see #16) — which is why
 `classifyHighlight` requires clause unanimity; see PROJECTION_VERSION v4.
 
+**`kind: "patch-notes"` is the consolidated LAUNCH notes and is a different animal**
+(2026-08-07). Kinds are `build` (default) | `hotfix` | `patch-notes`. The patch notes are
+the **authority on what actually ships** — where they differ from a PTR build, they win,
+and the drawer says so: they render in their own gold "Shipping in 12.1" block above a
+"How it got here — PTR development notes" list, because stacking them as one undated pile
+read as redundant AND implied the superseded incremental figures were still live (Holy
+Priest's +10% then +5% are superseded by the notes' +16%).
+**They are excluded from the outlook tally, and being authoritative is exactly why.**
+The tally counts LINES; the notes are one paragraph per spec restating the whole patch, so
+mechanically they are unreadable to it: 34 of 49 lines classify null (a paragraph holding
+both buffs and nerfs fails the unanimity rule), which would silence 28 of 40 specs if they
+were the only input, and the ones that do classify can be flat wrong — Holy Priest's line
+("All healing +16% … mana cost -30%") scored as a **nerf**. Counting them *alongside* the
+builds also double-counts, since every launch line restates builds already tallied.
+Verified before the change: all 40 specs present in the notes also appear in earlier
+builds and none relies on them as its only source, so excluding them loses no signal;
+0 outlook directions moved, 12 specs' stated line counts were corrected, and a phantom
+nerf disappeared from Holy Priest. `PROJECTION_VERSION` deliberately NOT bumped — outputs
+are numerically identical, so the snapshot series stays comparable.
+**The honest limitation this leaves:** the tally measures the direction of tuning ACROSS
+THE PTR, not the shipping delta. Revisit after the forecast report card, with the weights
+unfrozen.
+
 ### `data/community.json` — curated community links
 Per class: verified Discord (name + invite from wowhead.com/discord-servers, render via
 r.jina.ai) and creators `{ name, credential, url, latest, verifiedDate, specs? }`. Add

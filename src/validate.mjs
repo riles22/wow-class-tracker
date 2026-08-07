@@ -438,11 +438,19 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
        so their absence was a coverage hole every gate reported as green. A hotfix cites
        the Wowhead round-up instead; each kind must carry the citation it actually has,
        and neither may be cited to a source it does not come from. */
+    /* "patch-notes" (2026-08-07) is the consolidated launch notes — the authoritative
+       statement of what actually ships, published as a standalone blue post rather than a
+       reply in the PTR thread, so it legitimately has no forumPostNumber. It is NOT a
+       build: its lines restate the whole patch as one paragraph per spec, which is why
+       outlookFor excludes it from the tally (see the comment there). */
     const kind = build.kind ?? "build";
-    if (kind !== "build" && kind !== "hotfix") {
-      errors.push(`ptr-builds.json: entry ${build.date} has unknown kind "${build.kind}" (expected "build" or "hotfix")`);
+    if (kind !== "build" && kind !== "hotfix" && kind !== "patch-notes") {
+      errors.push(`ptr-builds.json: entry ${build.date} has unknown kind "${build.kind}" (expected "build", "hotfix" or "patch-notes")`);
     }
     if (kind === "build" && !build.forumUrl) errors.push(`ptr-builds.json: build ${build.date} missing forumUrl`);
+    if (kind === "patch-notes" && !build.forumUrl && !build.wowheadUrl) {
+      errors.push(`ptr-builds.json: patch-notes ${build.date} needs a forumUrl or wowheadUrl — the notes are a published post and must be citable`);
+    }
     if (kind === "hotfix") {
       if (!build.wowheadUrl) errors.push(`ptr-builds.json: hotfix ${build.date} missing wowheadUrl — a hotfix has no forum post, so the Wowhead round-up is its citation`);
       if (build.forumUrl) errors.push(`ptr-builds.json: hotfix ${build.date} carries a forumUrl — hotfixes are not forum build posts and must not be cited as one`);

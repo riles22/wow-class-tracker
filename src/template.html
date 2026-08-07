@@ -736,6 +736,13 @@ try {
   .contra{color:var(--v-mix); font-size:11px; margin-left:3px; cursor:help}
   .cwchip{font-family:var(--mono); font-size:9px; letter-spacing:.08em; text-transform:uppercase;
     color:var(--ink-faint); border:1px solid var(--edge-2); border-radius:4px; padding:1px 5px; margin-right:6px; white-space:nowrap}
+  /* The shipping/authoritative block: gold, the palette's "this is fact" colour, so the
+     launch notes read as a different KIND of thing from the PTR history below them. */
+  .shipchip{font-family:var(--mono); font-size:9px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--gold); border:1px solid color-mix(in srgb,var(--gold) 40%,transparent);
+    border-radius:4px; padding:1px 5px; margin-left:7px; white-space:nowrap}
+  .shipsec{border-left:2px solid color-mix(in srgb,var(--gold) 55%,transparent); padding-left:11px}
+  .shipsec > .d-h:first-child{color:var(--gold)}
   .laddername{font-family:var(--body); font-weight:600; font-size:12px; fill:var(--ink)}
   .laddernum{font-family:var(--mono); font-size:10px; fill:var(--accent-2)}
   .ladderval{font-family:var(--mono); font-size:12px; fill:var(--ink)}
@@ -1464,16 +1471,34 @@ function drawerHTML(s){
    </div></div>`;
 }
 
-/* Official PTR tuning, per build (build-time derived spec.buildChanges — verbatim
-   Blizzard forum lines attributed by the same rule as the outlook arrow). The FACTS
-   lane, distinct from the writeup's cited distillation and the creators' opinions. */
+/* Official Blizzard tuning (build-time derived spec.buildChanges — verbatim forum lines
+   attributed by the same rule as the outlook arrow). The FACTS lane, distinct from the
+   writeup's cited distillation and the creators' opinions.
+   Split into two blocks (Riley, 2026-08-07). The consolidated launch patch notes are the
+   authoritative statement of what SHIPS; every PTR build below them is the development
+   path, and its numbers are intermediate — Holy Priest's incremental +10% and +5% are
+   superseded by the notes' +16%. Stacking them as one undifferentiated date list read as
+   redundant and, worse, implied the older figures were still live. */
+function buildEntryHTML(b){
+  return `<p class="d-h" style="margin:10px 0 4px;text-transform:none;letter-spacing:0">${esc(fmtDate(b.date))}${b.kind==="hotfix"?` · <span class="cwchip">hotfix</span>`:""}${b.forumUrl?` · <a href="${esc(safeHref(b.forumUrl))}" target="_blank" rel="noopener">${b.kind==="patch-notes"?"patch notes":`forum post${b.forumPostNumber!=null?` #${esc(String(b.forumPostNumber))}`:""}`}</a>`:b.wowheadUrl?` · <a href="${esc(safeHref(b.wowheadUrl))}" target="_blank" rel="noopener">${b.kind==="patch-notes"?"patch notes":"hotfix round-up"}</a>`:""}</p>
+    <ul class="d-list">${b.lines.map(l=>`<li${l.classWide?' class="cw"':''}>${l.classWide?'<span class="cwchip">class-wide</span>':''}${esc(l.text)}</li>`).join("")}</ul>`;
+}
 function buildChangesHTML(s){
   const bc = s.buildChanges || [];
   if(!bc.length) return "";
-  return `<div class="d-sec"><p class="d-h">Official PTR tuning — Blizzard notes, by build</p>${bc.map(b=>`
-    <p class="d-h" style="margin:10px 0 4px;text-transform:none;letter-spacing:0">${esc(fmtDate(b.date))}${b.kind==="hotfix"?` · <span class="cwchip">hotfix</span>`:""}${b.forumUrl?` · <a href="${esc(safeHref(b.forumUrl))}" target="_blank" rel="noopener">forum post${b.forumPostNumber!=null?` #${esc(String(b.forumPostNumber))}`:""}</a>`:b.wowheadUrl?` · <a href="${esc(safeHref(b.wowheadUrl))}" target="_blank" rel="noopener">hotfix round-up</a>`:""}</p>
-    <ul class="d-list">${b.lines.map(l=>`<li${l.classWide?' class="cw"':''}>${l.classWide?'<span class="cwchip">class-wide</span>':''}${esc(l.text)}</li>`).join("")}</ul>`).join("")}
-    <p class="mnote">Verbatim from the official PTR development notes — the 12.1 writeup above is a cited distillation, and creator takes are opinion.</p></div>`;
+  const ships = bc.filter(b=>b.kind==="patch-notes");
+  const history = bc.filter(b=>b.kind!=="patch-notes");
+  const shipBlock = ships.length ? `<div class="d-sec shipsec">
+      <p class="d-h">Shipping in 12.1 <span class="shipchip">official patch notes</span></p>
+      ${ships.map(buildEntryHTML).join("")}
+      <p class="mnote">Blizzard's consolidated launch notes — the authoritative statement of what goes live. Where these differ from a PTR build below, these are what ships.</p>
+    </div>` : "";
+  const histBlock = history.length ? `<div class="d-sec">
+      <p class="d-h">How it got here — PTR development notes, by build</p>
+      ${history.map(buildEntryHTML).join("")}
+      <p class="mnote">Verbatim PTR notes in date order. These are the development path${ships.length?", and their figures are intermediate — superseded by the patch notes above":", not a statement of final values"}. The 12.1 outlook tally counts these lines, not the consolidated notes.</p>
+    </div>` : "";
+  return shipBlock + histBlock;
 }
 
 /* "New" freshness cue — is there fresh info for this spec within the last few days of the
