@@ -1,5 +1,16 @@
 gearing/data/*.json text eol=lf
 
+# The tracker's own data files, for the same reason gearing/data already had it — and
+# because the mismatch actively blocks work. Every writer here emits LF
+# (JSON.stringify(...) + "\n"), while core.autocrlf=true checks the files out as CRLF, so
+# git reported a phantom modification the moment any script touched one: `git status`
+# showed M while `git diff` was empty. That is not cosmetic — the local-run skill refuses
+# to bootstrap on a dirty tree, so a refresh could be blocked by a file whose content had
+# not changed at all (2026-08-08). Pinning eol=lf makes the working tree agree with both
+# the index and the writers.
+data/*.json         text eol=lf
+data/history/*.json text eol=lf
+
 # Built HTML must stay LF in the WORKING TREE, not just in the blob. Both artifacts carry
 # a Content-Security-Policy whose script-src is a sha256 of their inline script, and the
 # build hashes LF because the HTML parser normalizes newlines before the browser hashes.
