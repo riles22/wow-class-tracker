@@ -989,3 +989,118 @@ those, so they need a different discovery route.
   Maximum and Dratnos are registered generalCreators but have produced no metaNotes yet; the
   lane stays inert until one of them publishes per-spec season reads. Worth knowing before
   anyone reads a healer note and expects the forecast to answer it.
+
+## 2026-08-08 (LOCAL run, Opus 5 — scheduled catch-up, ~04:2xZ / 21:2x PDT 08-07) — FIRST unfiltered date-bounded sweep
+
+- **Scope: creator lane only**, same reasoning as the run 45 minutes earlier — every tier list,
+  metric series and WCL cut is stamped 2026-08-07 (the current local calendar date), so nothing
+  in the tier/metric layer could have aged and nothing was re-fetched. The manifest was
+  deliberately NOT touched (partial-run rule).
+- **This is the first run under the 2026-08-08 no-title-filter policy** (commits 31f5306 /
+  c9db25a, landed ~20 minutes before this run, so the previous creator lane never exercised it).
+  42 unique channels polled (74 creator entries deduped), zero feed errors, 630 videos in feed.
+  Seen-set 142 → **544 unseen, 325 of them on/after the 2026-06-18 cycle bound.** The bound did
+  its job: 219 videos were dropped as pre-cycle without a fetch.
+- **325 is larger than the ~253 the policy anticipated**, so the sweep was tightened the way the
+  skill prescribes — **newest-first**, cutting at 2026-08-04 (the post-patch-notes window) = 72
+  videos. **61 transcripts fetched with yt-dlp** (pinned 2026.07.04, not upgraded; no bot wall;
+  queue 0 before and 0 after — nothing was handed to Supadata, per fetch-broadly/queue-narrowly).
+  11 had no transcript: 5 genuinely have no auto-captions yet, 4 are Twitch-restream placeholders
+  ("yodatv on twitch"), 1 was mid-premiere, 1 is SME-blocked.
+- **Takes added (7), from 4 videos:**
+  · **J-Funk → Windwalker, `buff`, TWO bracket-scoped takes** (`nnvlZIENi84`, 2026-08-04) — a
+    dedicated "should you play Windwalker in 12.1" overview. RAID (t=67): an underdog, fine but
+    not exceptional in testing until a late undocumented hotfix buffed Spinning Crane Kick ~40%,
+    which makes two-target damage substantial — weak on early spread cleave, strong later (he
+    calls it flat-out overpowered on Twin Fangs), so "a pretty decent option". M+ (t=121): much
+    stronger — first relevance since Shadowlands S3, possibly the highest AoE burst in the game,
+    slightly better survivability, single target "a little suspect" but playable around. **This
+    is the first J-Funk take on file**, and Windwalker went 1 → 2 creators.
+  · **Musguete → Outlaw and Assassination, both `buff`, both `mplus`** (`HDqRItIXGmE`,
+    2026-08-04) — PTR M+ log review after the Rogue buffs. Outlaw ~550k overall on the first
+    page and "S tier in a physical comp" if unnerfed, with RNG/jackpot dependence as the honest
+    limit; Assassination took the largest buff (~16% overall), >1M burst with sustain that keeps
+    ramping, and is the spec he would currently pick. He expects both to be nerfed. He supplies
+    his own caveats — WCL's own "testing data is not live data" warning, and a walkthrough of how
+    pull count (7 vs 11 vs 15) drives the overalls he is quoting. **Subtlety was NOT attributed**
+    — he analyses it at length and rates it behind the other two, but his entry is scoped
+    Outlaw/Assassination. Flagged below for a human scope decision.
+  · **Obli → Frost and Unholy, both `nerf`, both `mplus`** (`gIgTCFhLyig`, 2026-08-06) — a Blood
+    DK discussion, but the in-scope content is his read on what Blood's strength does to the DPS
+    specs: Blood brings no raid buff so its only utility is grip, which means a Frost or Unholy
+    DK in a group that already has Blood loses a lot of value to grip redundancy, and "no matter
+    how good Frost or Unholy looks" Blood is strong enough on both axes that placing a DPS DK is
+    hard. His RWF line (one DPS DK at most) is recorded inside the claim rather than minted as a
+    separate raid take — it is a world-first roster observation, not a general raid verdict.
+  · **AutomaticJak → Restoration Shaman, `buff`, `raid`** (`v3Zqosa4gGc`, 2026-08-07) — an
+    explicit upward revision of his own published tier list: he says he underrated Resto Shaman
+    because he had overlooked Elemental Resistance (Healing Stream Totem also cutting Fire/Frost/
+    Nature damage taken by 6%), which against an all-Nature raid is effectively a second Devotion
+    Aura on top of the stamina. "Resto Shaman's going to be real good."
+- **Supersede pass: 2 retired**, both same creator + spec + lens — Obli's 08-04 Frost `mplus`
+  `mixed`, and AutomaticJak's 08-04 Resto Shaman `raid` `neutral`. **Obli's 08-01 Unholy take was
+  deliberately NOT superseded**: it carries no bracket (general lens) and the new one is M+, and
+  the guardrail is same-lens only — a general read and a bracket read are complementary.
+- **Forecast impact measured before pushing: 1 letter moved.**
+  · **Restoration Shaman raid B → A (57→59)** — and this is NOT the v11 single-creator healer
+    path. The basis reads "expert takes +7 (5 creators, quorum — may move one band)": the panel is
+    five creators and already mostly buff, and AutomaticJak flipping neutral → buff tipped it over
+    the band edge. Confidence stays **low**, correctly — raid has no PTR empirical term, so the
+    cell renormalizes to 100% of the 12.0.7 prior exactly as v10 documents.
+  · Score-only: Unholy M+ 80→78, Windwalker M+ 75→76, Assassination M+ 70→72.
+  · **Outlaw M+ did not move** — its basis says "bounded terms capped at 0 by the A edge", so
+    Musguete's buff had nowhere to go.
+  · **Frost M+ did not move at all** (A 59 before and after). Worth recording because it looks
+    wrong and is not: the outlook was ALREADY −4 from the tuning tally, and the take going
+    `mixed` → `nerf` only changed WHO supplies that −4. The basis gained "(expert panel: 1
+    creator, no writeup)" while the number stayed identical.
+- **Verified-skipped: 30 new entries, `skipped[]` 18 → 48.** Grouped: 7 dungeon/boss guides
+  (Tactyks ×4, Sha ×2, J-Funk ×1), 6 PvP duel/testing videos (out of scope by the standing PvE
+  rule), 6 UI/addon/gearing pieces, 8 sub-two-minute clips, 1 non-WoW stream, plus the two below.
+- ⚠ **The premise behind the policy change did not hold in this batch, and that is worth
+  recording honestly.** The rationale was that "a Method guide author's dungeon guide routinely
+  carries spec analysis". Transcribed in full, **none of the seven dungeon/boss guides carries a
+  spec read** — they are route, trash and boss-ability walkthroughs. Their apparent spec mentions
+  are ability names (Bound by Shadow, Shadowborne Champion, Shadow Whirlwind, unholy mending,
+  bloodsworn, blood drain), which is also a warning about any spec-name-frequency heuristic.
+  Separately, **all four videos that yielded takes would have passed a keyword filter anyway**
+  (titles carrying "12.1", "Buffs", "META next season", "PTR M+ Healer Testing"). So the real
+  constraint this run cleared was the **backlog** — 325 unseen in-cycle videos from creators
+  whose feeds had never been polled — not the filter. The policy is Riley's call and stands; this
+  is data for the next time it is weighed, not a re-litigation.
+- **Jedith's Devourer roundtable (`OFsc6LxpEek`) was read in full and skipped.** It is a
+  mechanics/theorycrafting panel, not a state-of-the-spec verdict: sim methodology, Devourer's
+  ~100k DPS min-max sim spread (so a single log is an inconsequential data point), Eradicate
+  being untrackable on Warcraft Logs because of a game-side data gap, and closing play tips. No
+  comparative read. Attribution would also have been unsafe — the clearest authority in the room,
+  VooDooSaurus, is a guest and already has a newer self-published Devourer take (08-07).
+- **Maximum's standing re-check discharged.** His registry note said "no settled pre-Season-2 tier
+  list yet as of 2026-08-04 — re-check 2026-08-08..18". His only in-window upload is a pug-drama
+  reaction video with no 12.1 content across 20k words, so he still has not published one; the
+  entry is left as-is rather than overwritten with a worse `latest`. izen and Zorthas `latest`
+  fields are already current.
+- **Two scope observations for a human, neither acted on:**
+  · **Musguete on Subtlety** — he opens the video with a full Subtlety analysis (Goremaw's Bite
+    damage still split and not empowering enough, only 2-3 logs above 300k and those in the two
+    pool-heavy dungeons, "better than it was but not enough"). That is competent coverage of a
+    spec outside his `["Outlaw","Assassination"]` scope. Widening is a registry decision.
+  · **Obli on Blood — do NOT widen.** He says so himself at t=644: "this is a blood video and I
+    never post blood videos on my channel… for me blood is still like a new field." His
+    `["Frost","Unholy"]` scope is correct, and this is positive evidence for keeping it.
+- **27 videos transcribed but only grep-triaged — deliberately left UNSEEN, not skip-listed.**
+  These are the long stream VODs and key-run PoVs where a targeted grep found no verdict language
+  but no full read was done, so calling them verified would be dishonest. They will re-surface in
+  the next sweep and cost nothing but a free local fetch. Bare ids (deliberately not written as
+  URLs, so the seen-set regex does not swallow them): 3STJjc4zVB4, Ca4eDpIlNDM, 7O6Ri1vo0rc,
+  CJDlFku1ubM, v3KU4yAad4Q, u-FoVTcxEMo, mthoGTKGQvw, 2Fwocjbt5qM, zMvg6wwgKuk, k41d2I9BNIU,
+  vinyMVm4oV0, CjU5SrG0rLE, m1ImR68pJy4, PlIkwLUHlOs, mTV27AX1oIU, bVuPua2J444, RbQj88QCbfs,
+  nH-b1QYaS8w, aYQprKVzN50, XU8I0Nfl8HU, f5JljxC31YU, eoWuDTtY-50, BhXcWVF3NkQ, vwY2ZbIwFkE,
+  FEI1YAmGaNQ, 9pm0HZWhxd0, IvYq9roNc9Y. **MadSkillzzTV `Ca4eDpIlNDM` (31k words, healer prep)
+  and Preheat `eoWuDTtY-50` (Fire:56/Arcane:29) are the two most likely to repay a full read.**
+- **One attribution deliberately declined.** AutomaticJak's stream also contains a Resto Druid M+
+  read ("okay for M plus, but probably like fourth best healer… middle of the pack", plus mana
+  "miles worse" than it used to be). It is NOT logged: the Resto Shaman claim is anchored to the
+  host by self-reference ("my tier list", "it's in the description"), the Druid lines are not,
+  and the stream has guests. ASR speaker diarization is not evidence enough to mint a take.
+- **~253 in-cycle videos remain unswept** (325 minus this batch's 72). The next local run should
+  continue newest-first from 2026-08-03 backwards.
