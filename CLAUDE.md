@@ -493,7 +493,16 @@ per DPS spec; take best-build DPS at target counts 1/2/3/5/8/15; confirm
 Title-filtering before a transcript fetch is **run-mode dependent**, because the two
 transcript sources cost wildly different amounts. A **local run uses yt-dlp and must NOT
 keyword-filter** — fetch every unseen video from a tracked creator and let the transcript
-decide. The title is a bad predictor: the 2026-08-08 local run filtered 42 of 47 videos on
+decide, bounded by DATE instead of title: only videos published on or after the **first
+entry in `data/ptr-builds.json`** (the cycle's opening build, 2026-06-18 for 12.1), since a
+video predating the cycle cannot discuss it. That bound is load-bearing. Dropping the title
+filter alone exposes **435 unseen videos**, not the ~42 the change was reasoning about,
+because every newly-added creator has their ENTIRE 15-entry RSS feed unseen (Tactyks 15/15,
+J-Funk 15/15, Dorki 15/15, and eleven more) and RSS reaches back years; 182 of those predate
+the 12.1 cycle outright. The cycle bound cuts the sweep to ~253 and reads from the build
+feed, so it moves with the cycle automatically at 12.2. If a sweep is still too large take
+newest-first — never re-introduce keyword filtering as the limiter.
+The title is a bad predictor: the 2026-08-08 local run filtered 42 of 47 videos on
 titles and thereby skipped **Tactyks and J-Funk entirely**, the two creators added days
 earlier to close Protection Paladin and Windwalker, because their uploads read "dungeon
 guide" — and a Method guide author's dungeon guide routinely carries spec analysis. The
