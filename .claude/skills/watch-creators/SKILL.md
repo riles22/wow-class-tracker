@@ -21,9 +21,17 @@ locally, and distill them into cited per-spec takes in `data/creator-takes.json`
    (browser UA) and cache it on the creator entry as `channelId`. Diff videoIds
    against `log.md`'s seen-set. **Title-filtering is RUN-MODE dependent** (Riley,
    2026-08-08) — the two transcript sources have wildly different costs:
-   · **LOCAL run (yt-dlp): DO NOT keyword-filter.** Fetch a transcript for every unseen
-     video from a tracked creator and let the transcript decide whether anything material
-     is in it. Transcripts are free here, and the title is a bad predictor: the 2026-08-08
+   · **LOCAL run (yt-dlp): replace the keyword filter with a DATE bound.** Do not judge on
+     the title — judge on whether the video could possibly contain current-cycle content.
+     Fetch every unseen video **published on or after the FIRST entry in
+     `data/ptr-builds.json`** (the current PTR cycle's opening build — 2026-06-18 for
+     12.1); ignore anything older, because a video that predates the cycle cannot discuss
+     it. This bound matters: measured 2026-08-08, dropping the title filter alone exposed
+     **435 unseen videos**, because every newly-added creator has their whole 15-entry feed
+     unseen and RSS reaches back years. The cycle bound cuts that to ~253, and it is a hard
+     fact rather than a guess — unlike a title. If a sweep is still too large, tighten by
+     taking the newest first; never re-introduce keyword filtering as the limiter.
+     Transcripts are free here, and the title is a bad predictor: the 2026-08-08
      run filtered out **42 of 47** videos on titles and, in doing so, skipped **Tactyks and
      J-Funk entirely** — the two creators added days earlier specifically to close
      Protection Paladin and Windwalker — because their uploads were labelled "dungeon
