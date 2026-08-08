@@ -1104,3 +1104,113 @@ those, so they need a different discovery route.
   and the stream has guests. ASR speaker diarization is not evidence enough to mint a take.
 - **~253 in-cycle videos remain unswept** (325 minus this batch's 72). The next local run should
   continue newest-first from 2026-08-03 backwards.
+
+## 2026-08-08 (LOCAL run, Opus 5 — scheduled, ~05:3xZ; second unfiltered sweep, continuing the backlog)
+
+- **Scope: creator lane only.** This run fired ~9 MINUTES after the interactive session that
+  did the first unfiltered sweep, and ~5h BEFORE the 08-08 nightly. ptr-watch had just swept
+  both discovery channels and the WCL cuts were fetched 14h earlier, so the only lane with
+  real open work was the one the previous run handed off: *"~253 in-cycle videos remain
+  unswept; continue newest-first from 2026-08-03 backwards."*
+- **PTR re-confirmed cheaply rather than trusted.** Blizzard's Discourse group feed
+  (`/groups/blizzard-tracker/posts.json`) re-pulled live: newest Linxy post in thread 2317811
+  is still **#19 (2026-07-31)**, and the only newer blue posts are SpeedyRogue's dungeon
+  tuning (t2330956 #8), housing bugs and promo. **No new build; the feed stays at 15 entries.**
+  WCL zones deliberately not re-probed — all four were probed from this IP 14h earlier and
+  every stored row already carries its current date.
+- **Discovery: 42 feeds polled (39 transcribable class creators + 3 general), 1 transient
+  failure (Tettles — the documented 404 burst).** 615 entries, 186 already seen.
+  **429 unseen → 211 in-cycle (>= 2026-06-18), 218 pre-cycle.** The previous run's "~253"
+  estimate was high by ~40; 211 is the measured figure.
+- **Batch: newest 60 in-cycle, back to 2026-07-25. 52 transcripts landed** (~800k words);
+  **8 had no English auto-captions** (2 YoDaTV key PoVs, Bansherz and Supatease streams, Sha,
+  2 twitch-mirror uploads). Per *fetch broadly, queue narrowly* they were NOT queued — every
+  one is a stream or key PoV, and the queue is drained by Supadata against a 100-request
+  MONTHLY budget. They went to `seen[]`.
+- **Method, stated plainly because it is weaker than a full read on the long VODs.** Two
+  mechanical passes over every full transcript: a wide one (verdict stem or token within +/-5
+  lines of any spec/class name) and a tight one (standing-verdict language with a spec name
+  in the SAME or adjacent line). Everything the tight pass surfaced was read in context;
+  the short analysis videos (<9k words) were read end to end. The first extractor scored
+  **zero hits on all 52 files** — a trailing `\b` in the alternation killed every prefix
+  form ("underperform**ing**", "nerf**ed**"). Worth recording: an extractor that returns
+  nothing looks exactly like a batch with nothing in it.
+- **7 takes + 5 metaNotes added; 47 verified skips; `skipped[]` 48 -> 95, `seen[]` 206 -> 432.**
+  - **Megasett — Monk Mistweaver, the first Mistweaver specialist take on file.** Two,
+    bracket-split from one video (`CJNPj7p71B8`, 08-02): **raid `nerf`** — his own Dummy Dome
+    healer-dummy testing under agreed vendor gear puts Mistweaver ~40% below the strongest
+    healers, which he attributes to stacked 3%+7% aura nerfs, the 60% Morning Breeze cut and
+    the ~15% HPS loss of the S1 four-piece; Revival does ~675k total on a 3-min cooldown and
+    is outhealed by class-tree passives. He will not bring it to the raid. And **M+ `neutral`**
+    — he keeps the Monk for keys and calls it "pretty mid-pack" there, with no numbers behind
+    that half, which is why the two are logged separately rather than as one whole-spec read.
+  - **Musguete — Rogue Outlaw + Assassination `buff` (07-31)**, reacting to that day's aura
+    pass (Assassination +10%, Outlaw +6%, Subtlety +10%). Logged **unbracketed** and **live**
+    beside his 08-04 M+ takes: the supersede guardrail is same-lens, and a whole-patch tuning
+    reaction is a different lens from a PTR-M+ log review. Direction matches his current read,
+    so it cannot mislead. **Subtlety deliberately not attributed** — he reads the tuning line
+    but gives no analysis, and it is outside his declared scope.
+  - **Bansherz — Hunter BM / MM / Survival, M+ `neutral` (08-07)**: all three around B tier,
+    "solid but not meta", Survival highest of the three; a Hunter main should stay, someone
+    chasing the best spec should not swap. **His four older streams carrying earlier versions
+    of this read were skipped, not logged** — one creator, one spec, one lens gets one live
+    take, and 08-01's "MM strongest / SV best in keys worst in raid" predates the 08-03 nerfs
+    he himself discusses on 08-03.
+  - **Zorthas is now the SECOND general creator in `metaNotes[]`** (izen was the only one).
+    From `gbGrLErnjxE` (07-30): **Blood DK `positive`** (strongest-looking tank for damage and,
+    he says surprisingly, survivability) and **Holy Paladin `positive`** (simply out-heals every
+    other healer), both M+ lens. From `JMnU-WUeOuk` (07-26): **Subtlety and Assassination
+    `negative`, Outlaw `mixed`**, raid lens — rogue in the bottom five on nearly every boss in
+    collated PTR raid logs, structurally weak on the 2-3 target cleave the new raid is built
+    around, and Atrophic Poison delivering under 3% effective DR because so much new-raid
+    damage is environmental or untargetable. Tagged in `patchContext` as recorded **before**
+    the 07-31 rogue buffs, which is exactly why they move nothing (see below).
+- **Model effect: 7 projection cells moved on SCORE, ZERO letter moves.** Measured against
+  `git show HEAD:dist/index.html`, not against the working dist — `npm test` runs a build
+  smoke test, so the local dist is already post-change by the time you think to copy it.
+  - Blood DK M+ 78->81 and Holy Paladin M+ 82->85: the meta nudge **switched on**, basis now
+    "meta read +3 (2 creators agree, within-tier only)". A second general creator is what
+    unlocked corroboration — the single-voice izen reads were not firing it.
+  - Mistweaver raid 87->85, Assassination raid 37->39, Outlaw raid 41->43: existing expert
+    panels tipped from a net zero to a signed value by the third creator.
+  - Hunter BM M+ 56->55, Survival 46->45; **MM did not move at all.**
+  - Zorthas' rogue metaNotes moved nothing — izen's 08-01 raid reads are newer, so the
+    newest-read nudge never reaches them. Correct, and worth knowing before wondering why.
+- **The most substantive take of the run barely registers, and the reason is structural.**
+  Megasett's raid read is detailed, first-hand and strongly negative, and it moves Mistweaver
+  raid **two points inside A+**. Mistweaver raid has no PTR empirical term and no PTR raid tier
+  list, so it renormalizes to **100% of the 12.0.7 prior (87)** — precisely the v10 limitation
+  in CLAUDE.md. v11 removed the quorum requirement for healers so one creator *may* cross a
+  band, but the +/-12 headroom applies to a panel average, and a 3-creator panel averaging to
+  -2 has nowhere near enough to cross the A+ edge. Not a bug; recording it because "we finally
+  got a Mistweaver specialist and the forecast still says A+" is the obvious next question.
+- **Scope observations for a human — none acted on:**
+  - **Tactyks still yields nothing on Protection Paladin.** He was added to close that spec;
+    across four streams and four guides this batch (~95k words) there is no Protection Paladin
+    standing read at all. He talks fluently about Guardian Druid, Blood DK, Prot Warrior and
+    Warlock instead — all outside his declared scope.
+  - **Sha (Brewmaster) likewise**: a real tank comparison in `7WMmhf92sNI` (Prot Warrior really
+    good with unique advantages, BDK "too good to be true", Prot Paladin still good but no
+    longer broken) covering every tank *except* the one he is scoped to.
+  - **Bansherz** is emphatic that Arms is "the singular best spec next patch" and Arms+Arcane
+    are the M+ dynamic duo. That is meta chatter from a Hunter main, not Warrior coverage —
+    noted, not a widening case.
+- **Maximum `ahFknNijxh4` is a watch-along**: the tier-list commentary in that transcript is
+  Zorthas' script being read aloud. Attributing it to Maximum would have misattributed another
+  creator's words to him. His registry entry left as-is, as the 08-07 run decided.
+- **Shindigg declined to give a read** when asked directly which rogue spec is best on PTR
+  ("not really sure... haven't played much"). Logged as a verified skip rather than squeezed
+  into a take.
+- **218 pre-cycle videos moved to `seen[]`** — a hard date-bound dismissal per the skill, and
+  the single biggest reduction in future sweep noise available. **The ~151 in-cycle videos
+  below this batch's cut were deliberately left UNSEEN**, not retired: they are a work queue,
+  and marking a newest-first cut as seen would silently abandon a backlog the previous run
+  explicitly handed forward. Next local run continues newest-first from **2026-07-25** back.
+- **Still unread from the 08-07 batch**, and still worth it: MadSkillzzTV `Ca4eDpIlNDM`
+  (31k words, healer prep) and Preheat `eoWuDTtY-50` (Fire:56/Arcane:29). Neither fell inside
+  this run's newest-60 window.
+- `npm test` **334 pass / 0 fail** (the 21 Playwright UI invariants skip locally; template.html
+  untouched). `npm run build` OK (1273.3 KB), `node src/snapshot.mjs`, then rebuilt.
+  `check-refresh --manifest` failed on **exactly one line** — `startedAt ... is 18h old` — which
+  is the expected partial-run result. **Manifest deliberately NOT rewritten** (local-run skill
+  step 3: this run re-attempted nothing outside the creator lane).

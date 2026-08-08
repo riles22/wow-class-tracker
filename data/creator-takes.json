@@ -3743,6 +3743,88 @@
    "url": "https://youtu.be/v3Zqosa4gGc?t=1122",
    "claim": "He states plainly that he thinks Restoration Shaman will be strong in raid and that he underrated it in his own latest tier list. The reason he gives is a class talent he says he had overlooked: Elemental Resistance, which makes Healing Stream Totem's healing also reduce Fire, Frost and Nature damage taken by 6%. Because so much of Restoration Shaman's healing comes through totems the effect is close to permanently applied, and because the incoming raid is almost entirely Nature damage he describes it as effectively a Devotion Aura for Resto Shamans — roughly as much mitigation as Devotion grants, stacked on top of the Skyfury/vigor stamina the spec already brings. His conclusion is that Resto Shaman is going to be real good in the new raid and that his published tier list placement was too low.",
    "superseded": false
+  },
+  {
+   "class": "Monk",
+   "spec": "Mistweaver",
+   "creator": "Megasett",
+   "date": "2026-08-02",
+   "sentiment": "nerf",
+   "bracket": "raid",
+   "patchContext": "12.1 PTR — his own Dummy Dome healer-dummy testing under vendor gear, no over-tuned trinkets/embellishments by agreement",
+   "url": "https://youtu.be/CJNPj7p71B8?t=105",
+   "claim": "He reports Mistweaver doing roughly 40% less healing than the strongest healers on the PTR healer dummy and calls it an insane fall-off from an excellent Season 1. He attributes it to a stack of losses rather than one change: a 3% aura nerf one week and a 7% aura nerf the next, a 60% cut to Morning Breeze that left the mastery rework not paying off, and the loss of the Season 1 four-piece he estimates at about 15% of the spec's HPS. He tested three builds — high-mastery Chi-Ji, normal-stat Chi-Ji and Yulon — and got essentially the same numbers from all of them, with Chi-Ji collapsing into fishing for Rising Sun Kick resets because Renewing Mist, Vivify and Enveloping Mist were all HPS losses; he notes the dummy gave 100% melee uptime that the Venomous Abyss bosses will not. He is harshest on the cooldowns: Revival does about 675,000 total healing on a three-minute cooldown and is outhealed by class-tree passives, Yulon does not feel like a cooldown at all, and Celestial Conduit contributes under 3% of healing. Because Mistweaver brings little beyond throughput, he argues it needs to be among the highest healers to justify a slot, and his conclusion is that he will not bring it to the raid — he plans Restoration Shaman and Holy Paladin instead, with the Monk as a late farm character. He frames it as a tuning problem rather than the bugs that held the spec back in early Midnight, and notes there is no heroic week this time to absorb it.",
+   "superseded": false
+  },
+  {
+   "class": "Monk",
+   "spec": "Mistweaver",
+   "creator": "Megasett",
+   "date": "2026-08-02",
+   "sentiment": "neutral",
+   "bracket": "mplus",
+   "patchContext": "12.1 PTR — Mythic+ aside in his Dummy Dome raid-testing review",
+   "url": "https://youtu.be/CJNPj7p71B8?t=366",
+   "claim": "Separating keys from raid, he is markedly less negative: he says he will still have his Mistweaver for keys and reads it as pretty mid-pack there rather than unplayable, adding that a mid-pack placement has not stopped him playing it before. He gives no supporting numbers for the Mythic+ read — his testing was the raid healer dummy — so it stands as a plain placement call alongside the detailed raid case.",
+   "superseded": false
+  },
+  {
+   "class": "Rogue",
+   "spec": "Outlaw",
+   "creator": "Musguete",
+   "date": "2026-07-31",
+   "sentiment": "buff",
+   "patchContext": "12.1 PTR (2026-07-31 build) — reaction to the rogue aura buffs in that day's class tuning",
+   "url": "https://youtu.be/2SXGV5NoeVg?t=25",
+   "claim": "Reading the 2026-07-31 rogue tuning, he reports Outlaw receiving a 6% all-damage increase (PvP excluded) alongside Assassination's 10% and Subtlety's 10%, and reads the pass as clearly positive — his words are that things are looking much better for rogues now and that Blizzard is finally hearing the community. He credits Zartar's analysis video with driving the change. He gives no placement or comparison against other classes and says he still has to see how it performs on the PTR, so this is a read on the direction of the tuning rather than on where Outlaw lands.",
+   "superseded": false
+  },
+  {
+   "class": "Rogue",
+   "spec": "Assassination",
+   "creator": "Musguete",
+   "date": "2026-07-31",
+   "sentiment": "buff",
+   "patchContext": "12.1 PTR (2026-07-31 build) — reaction to the rogue aura buffs in that day's class tuning",
+   "url": "https://youtu.be/2SXGV5NoeVg?t=13",
+   "claim": "He singles out Assassination's 10% damage buff as the headline of the 2026-07-31 rogue tuning and says it is very good and needed — the spec wanted damage and got it. As with his Outlaw read he stops short of a placement call, saying he will test on the PTR and report back, so the claim is about the direction of the change rather than the resulting standing.",
+   "superseded": false
+  },
+  {
+   "class": "Hunter",
+   "spec": "Marksmanship",
+   "creator": "Bansherz",
+   "date": "2026-08-07",
+   "sentiment": "neutral",
+   "bracket": "mplus",
+   "patchContext": "12.1 PTR — Season 2 key testing stream; answering directly on where Hunter lands in keys",
+   "url": "https://youtu.be/7O6Ri1vo0rc?t=17244",
+   "claim": "Asked to rank Marksmanship, he puts it at roughly B tier and says he would place all three Hunter specs around B. His framing is that Hunter is solid and in a pretty good spot but simply not meta — his advice is that a Hunter main or one-trick will be completely fine, while someone chasing the best spec in the game should not swap to Hunter. He also says that with no Hunter spec overtuned the right approach is to flex between at least the two ranged specs rather than commit to one, and he confirms he is staying on Hunter himself. He caveats that a buff could land any day and change the placement.",
+   "superseded": false
+  },
+  {
+   "class": "Hunter",
+   "spec": "Beast Mastery",
+   "creator": "Bansherz",
+   "date": "2026-08-07",
+   "sentiment": "neutral",
+   "bracket": "mplus",
+   "patchContext": "12.1 PTR — Season 2 key testing stream; answering directly on where Hunter lands in keys",
+   "url": "https://youtu.be/7O6Ri1vo0rc?t=17252",
+   "claim": "He groups Beast Mastery with the rest of the class at around B tier for keys — solid, in a pretty good spot, but not meta. The same advice follows: fine for a Hunter main, not the pick for someone chasing the strongest spec, and worth flexing between the ranged specs rather than committing. He flags that tuning could still move it.",
+   "superseded": false
+  },
+  {
+   "class": "Hunter",
+   "spec": "Survival",
+   "creator": "Bansherz",
+   "date": "2026-08-07",
+   "sentiment": "neutral",
+   "bracket": "mplus",
+   "patchContext": "12.1 PTR — Season 2 key testing stream; answering directly on where Hunter lands in keys",
+   "url": "https://youtu.be/7O6Ri1vo0rc?t=17253",
+   "claim": "Within a class he places around B tier for keys, he singles out Survival as probably the highest of the three — higher B tier — while keeping it inside the same 'solid but not meta' band as Marksmanship and Beast Mastery. He adds the same caveat that Hunter could be buffed at any point before launch.",
+   "superseded": false
   }
  ],
  "metaNotes": [
@@ -5493,6 +5575,61 @@
    "note": "He walks back the alarm about Restoration Druid from the same community Dummy Dome healer test, where it and Mistweaver trailed the other four by dozens of percentage points. Unlike the Monk case he argues the Druid result is largely an artefact of how it was played and geared: the tested Druid started around 325 item level and deliberately ran little or no tier set out of a conviction that the new set was bad, even crafting 292-318 blue pieces; more importantly it skipped Rampant Growth, which doubles Regrowth's heal-over-time and is worth roughly 50% more value per Regrowth cast, and it played the Season 1 pattern of heavy Rejuvenation instead of the Season 2 pattern of spreading Regrowth wide (about 10 Regrowth casts per minute where he says you want 25+, and far too few casts per minute overall for a stationary dummy fight). His conclusion is a correction rather than an endorsement: Resto Druid is nowhere near as weak as the test made it look and the panic was a knee-jerk reaction, though he allows it might still need some buff.",
    "patchContext": "Season 2 PTR — raid testing outlook (community Dummy Dome healer test)",
    "url": "https://youtu.be/_joFJoQl8Ec?t=811",
+   "superseded": false
+  },
+  {
+   "class": "Death Knight",
+   "spec": "Blood",
+   "creator": "Zorthas",
+   "date": "2026-07-30",
+   "sentiment": "positive",
+   "note": "Closing a video about misleading auto-generated PTR tier lists with what he thinks actually looks promising, he names Blood Death Knight as the strongest-looking tank — for damage and, he says surprisingly, for survivability as well. He immediately hedges that it would be crazy to assume Blood DK actually ends up meta, since a few changes to other specs in the coming weeks will change everything.",
+   "patchContext": "Season 2 PTR — M+ outlook",
+   "url": "https://youtu.be/gbGrLErnjxE?t=330",
+   "superseded": false
+  },
+  {
+   "class": "Paladin",
+   "spec": "Holy",
+   "creator": "Zorthas",
+   "date": "2026-07-30",
+   "sentiment": "positive",
+   "note": "In the same closing segment he says Holy Paladin simply does more healing than any other healer on the PTR right now. He applies the same hedge he gives Blood DK — that assuming either actually ends up meta is unwise with tuning still to come.",
+   "patchContext": "Season 2 PTR — M+ outlook",
+   "url": "https://youtu.be/gbGrLErnjxE?t=334",
+   "superseded": false
+  },
+  {
+   "class": "Rogue",
+   "spec": "Subtlety",
+   "creator": "Zorthas",
+   "date": "2026-07-26",
+   "sentiment": "negative",
+   "note": "Working from a sheet collating PTR raid-testing logs, he says Subtlety sits among the bottom five specs on essentially every boss, and that rogue occupies three of the bottom four on Lightbinded Vanguard. He argues this is not only tuning: Midnight's class design stripped the spec's low-target cleave — Subtlety lost most of its Nimble Flurry damage — and much of the new raid is two- and three-target cleave, so the spec will do low damage on those fights unless heavily overtuned elsewhere. He also notes Subtlety took an 8% nerf a few weeks earlier that surprised people.",
+   "patchContext": "Season 2 PTR — raid outlook (recorded before the 2026-07-31 rogue aura buffs)",
+   "url": "https://youtu.be/JMnU-WUeOuk?t=203",
+   "superseded": false
+  },
+  {
+   "class": "Rogue",
+   "spec": "Assassination",
+   "creator": "Zorthas",
+   "date": "2026-07-26",
+   "sentiment": "negative",
+   "note": "He places Assassination alongside Subtlety among the bottom five specs on nearly every boss in the collated PTR raid-testing logs, and gives the same structural reason — rogue's low-target cleave was removed or reworked in the Midnight transition while much of the new raid is two- and three-target. He adds that the buffed Atrophic Poison raid buff does not rescue the class: environmental and untargetable damage means it delivers under 3% effective mitigation on most of the new bosses, so rogue DPS itself would have to rise significantly.",
+   "patchContext": "Season 2 PTR — raid outlook (recorded before the 2026-07-31 rogue aura buffs)",
+   "url": "https://youtu.be/JMnU-WUeOuk?t=205",
+   "superseded": false
+  },
+  {
+   "class": "Rogue",
+   "spec": "Outlaw",
+   "creator": "Zorthas",
+   "date": "2026-07-26",
+   "sentiment": "mixed",
+   "note": "He reads Outlaw as the strongest rogue spec in public PTR raid-testing logs but frames that as faint praise — probably still a middle-of-the-pack spec at best, with a damage profile he calls undesirable for raiding, and a real commitment to gear and craft a weapon toward. He notes Outlaw has not been the raid rogue spec in modern times, the last instance being early Dragonflight on Kurog.",
+   "patchContext": "Season 2 PTR — raid outlook (recorded before the 2026-07-31 rogue aura buffs)",
+   "url": "https://youtu.be/JMnU-WUeOuk?t=294",
    "superseded": false
   }
  ]

@@ -627,3 +627,20 @@ catch-up path.
 - **NO SEASON FLIP.** → **OWNER: the one-shot `SNAPSHOT_PHASE` flip is still pending;
   `PHASE_FLIP_DUE` is Aug 20, launch is Aug 11, and the Phase-1 S2 machinery is due before it.**
   `check-refresh --age` passes today (`fingerprint=clean`), so the gate is not yet nagging.
+
+## 2026-08-08 (LOCAL, ~05:3xZ — confirmation only, no ingest)
+
+- Fired ~9 minutes after the 08-07 evening sweep, so this was a re-confirmation rather than a
+  fresh investigation. **Blizzard Discourse group feed** (`/groups/blizzard-tracker/posts.json`,
+  the transport the last run recommended over the Cloudflare-403 Wowhead blue-tracker) pulled
+  live: newest Linxy post in thread 2317811 is still **#19, 2026-07-31**. Newer blue posts are
+  SpeedyRogue's Season 2 dungeon tuning (t2330956 #8, no per-spec class lines), a housing
+  blueprint bug, and promo. **No new build or hotfix; feed stays at 15 entries.**
+- **WCL zones 54 / 52 / 56 / 57 not re-probed.** Fetched from this same residential IP 14h
+  earlier; every stored row carries its current date and nothing is near a staleness threshold
+  (live cuts 1d against 10; zone 54 visibly frozen at 2026-07-28, 11d against 40).
+- 9 specs still `ptr: null`, unchanged. The creator lane added a first-hand Mistweaver raid
+  read this run (Megasett) — deliberately NOT promoted into a `ptr` writeup; CLAUDE.md is
+  explicit that creator takes reach the writeup gap only as an aggregate via `expertRead()`.
+- **NO SEASON FLIP** — the one-shot `SNAPSHOT_PHASE` action remains pending; `PHASE_FLIP_DUE`
+  is Aug 20 and launch is Aug 11. `check-refresh --age` still passes (`fingerprint=clean`).
