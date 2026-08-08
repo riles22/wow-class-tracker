@@ -489,6 +489,22 @@ per DPS spec; take best-build DPS at target counts 1/2/3/5/8/15; confirm
 2. Add the build entry to `data/ptr-builds.json` (newest first), update affected specs'
    `ptr` writeups if their pass landed, rebuild.
 
+### Creator transcript breadth — local vs nightly (2026-08-08, Riley)
+Title-filtering before a transcript fetch is **run-mode dependent**, because the two
+transcript sources cost wildly different amounts. A **local run uses yt-dlp and must NOT
+keyword-filter** — fetch every unseen video from a tracked creator and let the transcript
+decide. The title is a bad predictor: the 2026-08-08 local run filtered 42 of 47 videos on
+titles and thereby skipped **Tactyks and J-Funk entirely**, the two creators added days
+earlier to close Protection Paladin and Windwalker, because their uploads read "dungeon
+guide" — and a Method guide author's dungeon guide routinely carries spec analysis. The
+**nightly keeps the filter**: Supadata's free tier is **100 requests per MONTH**
+(`PER_RUN_CAP = 25` is only the per-run guard), so an unfiltered nightly would exhaust the
+month in two runs. Corollary that is easy to get wrong: **fetch broadly, queue narrowly** —
+`pending-transcripts.json` is drained by the paid API, so a local run must not queue the
+title-irrelevant videos it happened to fail on. Expect `skipped[]` to grow; that is the
+point, since a verified skip costs one fetch once while a title guess costs the take
+forever.
+
 ### Community link health (occasional)
 Re-render the Wowhead Discord index via r.jina.ai; check creator links via YouTube oEmbed
 (`youtube.com/oembed?url=...&format=json`). Flag dead invites for manual review — never

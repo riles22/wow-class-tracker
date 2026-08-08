@@ -19,8 +19,23 @@ locally, and distill them into cited per-spec takes in `data/creator-takes.json`
    `https://www.youtube.com/feeds/videos.xml?channel_id=<id>` (no auth). Resolve an
    unknown channel_id once by grepping `"channelId"` from the raw watch-page HTML
    (browser UA) and cache it on the creator entry as `channelId`. Diff videoIds
-   against `log.md`'s seen-set. **Title-filter before fetching** — creators post
-   off-topic content; require class/spec/Midnight/12.1/Season keywords.
+   against `log.md`'s seen-set. **Title-filtering is RUN-MODE dependent** (Riley,
+   2026-08-08) — the two transcript sources have wildly different costs:
+   · **LOCAL run (yt-dlp): DO NOT keyword-filter.** Fetch a transcript for every unseen
+     video from a tracked creator and let the transcript decide whether anything material
+     is in it. Transcripts are free here, and the title is a bad predictor: the 2026-08-08
+     run filtered out **42 of 47** videos on titles and, in doing so, skipped **Tactyks and
+     J-Funk entirely** — the two creators added days earlier specifically to close
+     Protection Paladin and Windwalker — because their uploads were labelled "dungeon
+     guide". A Method guide author's dungeon guide routinely carries spec analysis; a
+     title cannot tell you that. Skip only what is obviously not WoW at all.
+     Expect this to grow the `skipped[]` lane fast, which is the point: a verified skip is
+     a durable record that costs one fetch once, whereas a title guess costs the take
+     forever.
+   · **NIGHTLY (Supadata): KEEP the keyword filter** — class/spec/Midnight/12.1/Season.
+     The free tier is **100 requests per MONTH** (`PER_RUN_CAP = 25` per run is only the
+     per-run guard), so an unfiltered nightly would burn the monthly budget in two runs.
+     Breadth belongs in local runs, which have no quota.
 2. **Transcript** (videos ≥2–6h old — auto-captions lag upload). Sources in order:
    (a) **Nightly runner:** `transcript-fetch/<videoId>.json` — pre-fetched by the
    deterministic step (`src/fetch-transcripts.mjs`, Supadata captions API,
@@ -35,6 +50,13 @@ locally, and distill them into cited per-spec takes in `data/creator-takes.json`
    step drains, 25 fetches/run inside the free-tier budget); log.md keeps the
    human-readable trail. Remove a video from the queue ONLY once distilled or
    transcript-verified-skipped.
+   **The QUEUE stays keyword-filtered even on a local run.** The unfiltered sweep above
+   applies to what you fetch YOURSELF with yt-dlp, which is free. Anything you hand to the
+   queue is drained by Supadata against a 100-request MONTHLY budget, so queueing every
+   title-irrelevant video a local run happened to fail on would spend the nightly's quota
+   on exactly the content the nightly filter exists to avoid. Locally: fetch broadly, queue
+   narrowly — if yt-dlp fails on a video whose title carries no class/spec/12.1/Season
+   signal, record it in log.md and move on rather than queueing it.
    **When you transcript-verify a video and distil NOTHING from it, move it to the
    `skipped[]` lane in the same file** — `{id, creator, title, reason, verifiedAt}`, where
    `reason` says what the transcript actually turned out to be. Validation enforces the
