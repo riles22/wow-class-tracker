@@ -62,6 +62,40 @@
           "url": "https://www.youtube.com/channel/UCyIuz1C5jul5q7aAHvEIwJQ",
           "credential": "Blood DK theorycrafter since Legion (Death's Advance); Advanced Blood DK Guide author, high-M+ player",
           "verifiedDate": "2026-07-31"
+        },
+        {
+          "name": "Sam",
+          "credential": "Dedicated Frost Death Knight channel; self-published, no guide byline",
+          "url": "https://www.youtube.com/channel/UCunLEu3SK2agDu1r10nLnvw",
+          "specs": [
+            "Frost"
+          ],
+          "channelId": "UCunLEu3SK2agDu1r10nLnvw",
+          "latest": "The current state of Frost DK in Midnight S2 for M+ (2026-07-20) plus S2 PTR dungeon testing. M+ only — his raid uploads are S1 kill POV with no read.",
+          "verifiedDate": "2026-08-07"
+        },
+        {
+          "name": "Taeznak",
+          "credential": "Method Death Knight analyst; #6 all-time SimulationCraft contributor (GitHub nyterage)",
+          "url": "https://www.method.gg/guides/unholy-death-knight",
+          "specs": [
+            "Frost",
+            "Unholy"
+          ],
+          "transcribable": false,
+          "latest": "SimC commits 2026-08-02..06 titled [Unholy] Season 2 Profile update and [DK] multi-cost dk abilities — active 12.1 work, but as code rather than a distillable take",
+          "verifiedDate": "2026-08-07"
+        },
+        {
+          "name": "Mandl",
+          "credential": "Icy Veins Blood Death Knight co-author; Acherus theorycrafter",
+          "url": "https://www.icy-veins.com/wow/blood-death-knight-pve-tank-guide",
+          "specs": [
+            "Blood"
+          ],
+          "transcribable": false,
+          "latest": "Icy Veins Blood DK guide, 2026-06-15 (12.0.7)",
+          "verifiedDate": "2026-08-07"
         }
       ],
       "altDiscords": [
@@ -91,7 +125,12 @@
           "url": "https://www.youtube.com/watch?v=CNzoPSzyEeQ",
           "channelId": "UC91kD45lyV3SOUnfarx5Mbw",
           "latest": "Season 2 Embellishment Tuning & Demon Hunter new BiS — three new embellishments nerfed 70-90%, unnerfed Hunter's Ritual Stone now best for Havoc (2026-08-06)",
-          "verifiedDate": "2026-05-22"
+          "verifiedDate": "2026-05-22",
+          "specs": [
+            "Havoc",
+            "Devourer"
+          ],
+          "scopeNote": "Scoped 2026-08-07: RSS: Havoc 9, Devourer 6, Vengeance 0; takes match"
         },
         {
           "name": "VooDooSaurus",
@@ -137,6 +176,18 @@
             "Vengeance"
           ],
           "latest": "General Guide for Vengeance DH in 12.1! (Mythic+) — strong damage + raid buff, RNG defensives keep it off the meta-tank call (2026-08-05)"
+        },
+        {
+          "name": "Hype",
+          "credential": "Method Havoc and Devourer Demon Hunter guide author",
+          "url": "https://www.method.gg/guides/havoc-demon-hunter",
+          "specs": [
+            "Havoc",
+            "Devourer"
+          ],
+          "transcribable": false,
+          "latest": "Method Havoc and Devourer guides, 2026-06-16/17 (12.0.7) — the only credible Devourer voice the sweep found anywhere",
+          "verifiedDate": "2026-08-07"
         }
       ],
       "altDiscords": [],
@@ -161,14 +212,22 @@
           "url": "https://www.youtube.com/@Tettles",
           "channelId": "UCQxhna2XRWA_Pts6abbpEIg",
           "latest": "Balance — Moonkin is back; best raid DPS in Season 2 testing (2026-07-15)",
-          "verifiedDate": "2026-06-21"
+          "verifiedDate": "2026-06-21",
+          "specs": [
+            "Balance"
+          ],
+          "scopeNote": "Scoped 2026-08-07: RSS: Balance 7 hits, Feral/Guardian/Restoration 0; credential is Balance Druid theorycrafter, host of Moonkin Monthly; all live takes Balance"
         },
         {
           "name": "Gamz",
           "credential": "Wowhead Balance Druid guide writer (12.0.7) and Method Balance Druid guide writer; appears on Moonkin Monthly video analysis",
           "url": "https://www.wowhead.com/guide/classes/druid/balance/overview-pve-dps",
           "latest": "Balance Druid DPS Guide - Midnight (Wowhead, Patch 12.0.7)",
-          "verifiedDate": "2026-06-14"
+          "verifiedDate": "2026-06-14",
+          "specs": [
+            "Balance"
+          ],
+          "scopeNote": "Scoped 2026-08-07: credential is Wowhead + Method BALANCE Druid guide writer; all live takes Balance"
         },
         {
           "name": "Borabank",
@@ -289,14 +348,23 @@
           "url": "https://www.youtube.com/@Kesslive",
           "channelId": "UCdV_qBLDNA4wIBFbdFUvhRA",
           "latest": "12.1 Devastation/Augmentation Evoker First Impressions! Tier Sets + Changes",
-          "verifiedDate": "2026-06-20"
+          "verifiedDate": "2026-06-20",
+          "specs": [
+            "Devastation",
+            "Augmentation"
+          ],
+          "scopeNote": "Scoped 2026-08-07: RSS: Augmentation 7, Devastation 4, Preservation 0; takes match"
         },
         {
           "name": "Voulk",
           "credential": "Wowhead Retail/Classic Healing Expert (Preservation Evoker + Resto Druid); creator of QE Live",
           "url": "https://questionablyepic.com/blog/",
           "latest": "Best Preservation Evoker Talent Builds - Midnight (Wowhead, updated 2026-05-20, 12.0.7)",
-          "verifiedDate": "2026-05-20"
+          "verifiedDate": "2026-05-20",
+          "specs": [
+            "Preservation"
+          ],
+          "scopeNote": "Scoped 2026-08-07: credential is Wowhead Retail/Classic Healing Expert (Preservation Evoker)"
         },
         {
           "name": "Saeldur",
@@ -410,6 +478,17 @@
             "Marksmanship",
             "Survival"
           ]
+        },
+        {
+          "name": "leak",
+          "credential": "Survival Hunter theorycrafter (Trueshot Lodge)",
+          "url": "https://www.youtube.com/channel/UCfV0Onn-ygnq_mL-eZN4ftg",
+          "specs": [
+            "Survival"
+          ],
+          "channelId": "UCfV0Onn-ygnq_mL-eZN4ftg",
+          "latest": "Survival Hunter Guide for Midnight Season 2 (Builds, Rotation) — uploaded 2026-08-07",
+          "verifiedDate": "2026-08-07"
         }
       ],
       "altDiscords": [
@@ -490,7 +569,12 @@
           "url": "https://www.youtube.com/@Pkpawner",
           "channelId": "UC8HjmV_ber1Y9g7R1uc-vyg",
           "latest": "Mythic Rotmire Windwalker Monk Guide! | Sporefall Raid 12.0.7",
-          "verifiedDate": "2026-06-17"
+          "verifiedDate": "2026-06-17",
+          "specs": [
+            "Windwalker",
+            "Mistweaver"
+          ],
+          "scopeNote": "Scoped 2026-08-07: RSS: Windwalker 11, Mistweaver 1, Brewmaster 0"
         },
         {
           "name": "LBNinja7",
@@ -556,6 +640,39 @@
             "Mistweaver"
           ],
           "managedBy": "overrides"
+        },
+        {
+          "name": "J-Funk",
+          "credential": "Method Windwalker Monk guide author; WW theorycrafter for ~a decade, Humble (World 30th S1)",
+          "url": "https://www.youtube.com/channel/UC2ogNXt7YTQ2r1nUDM0kQ-A",
+          "specs": [
+            "Windwalker"
+          ],
+          "channelId": "UC2ogNXt7YTQ2r1nUDM0kQ-A",
+          "latest": "Should You Play Windwalker Monk in Patch 12.1? (2026-08-04) — chapters Sims/Tier Set, Raid, Mythic Plus, Overall",
+          "verifiedDate": "2026-08-07"
+        },
+        {
+          "name": "Sha",
+          "credential": "Brewmaster Monk specialist; numbered week-by-week 12.1 PTR series",
+          "url": "https://www.youtube.com/channel/UCPeQmTQuib1DYFmkaTThSoQ",
+          "specs": [
+            "Brewmaster"
+          ],
+          "channelId": "UCPeQmTQuib1DYFmkaTThSoQ",
+          "latest": "Weekly 12.1 PTR Brewmaster series, newest 2026-08-06; also a dedicated Vengeance DH 12.1 first-impressions video if that scope is ever wanted",
+          "verifiedDate": "2026-08-07"
+        },
+        {
+          "name": "Megasett",
+          "credential": "Mistweaver Monk specialist; runs the Way of the Crane community resource",
+          "url": "https://www.youtube.com/channel/UCtLS9GKVyTdYNNYbGvHlqBw",
+          "specs": [
+            "Mistweaver"
+          ],
+          "channelId": "UCtLS9GKVyTdYNNYbGvHlqBw",
+          "latest": "Is Mistweaver Dummy Doomed for 12.1 Raids? — one of the very few healer RAID reads this sweep found",
+          "verifiedDate": "2026-08-07"
         }
       ],
       "sites": [
@@ -659,6 +776,28 @@
           "credential": "Wings Is Up author (wingsisup.com — registered under Paladin sites); Method-profiled M+ Holy Paladin streamer",
           "transcribable": false,
           "verifiedDate": "2026-07-31"
+        },
+        {
+          "name": "NeekapHere",
+          "credential": "Retribution Paladin specialist; successive 12.1 tier-set tracking videos",
+          "url": "https://www.youtube.com/channel/UC-rUq_tiyDp_gJJtQdFK8nQ",
+          "specs": [
+            "Retribution"
+          ],
+          "channelId": "UC-rUq_tiyDp_gJJtQdFK8nQ",
+          "latest": "12.1 OFFICIAL Patch Notes, plus three Ret tier-set videos through 2026-07-09; channel active 2026-08-06. Also posts cross-class news weeklies — those must never be distilled as Paladin takes.",
+          "verifiedDate": "2026-08-07"
+        },
+        {
+          "name": "Tactyks",
+          "credential": "Method Protection Paladin guide author; top-100 world raid tank, 0.1% M+ title x2. RAID SCOPE ONLY — he authors the Method M+ tier list already registered in sources.json, so logging his M+ takes would double-count him into both the consensus and the expert lane.",
+          "url": "https://www.youtube.com/channel/UC_0qsnA6yJ_DzEvKsm-XdvQ",
+          "specs": [
+            "Protection"
+          ],
+          "channelId": "UC_0qsnA6yJ_DzEvKsm-XdvQ",
+          "latest": "The State of Tanks in Midnight S2 (12.1 PTR Update) and State of Raiding in 12.1; uploads daily through 2026-08-07",
+          "verifiedDate": "2026-08-07"
         }
       ],
       "sites": [
@@ -753,6 +892,28 @@
             "Holy"
           ],
           "managedBy": "overrides"
+        },
+        {
+          "name": "Elli",
+          "credential": "Wowhead's designated Shadow Priest Expert",
+          "url": "https://www.wowhead.com/author/EllipsisPriest",
+          "specs": [
+            "Shadow"
+          ],
+          "transcribable": false,
+          "latest": "Signed Wowhead 12.1 article 2026-06-29: A Small Step in the Right Direction (Shadow Priest Class Changes and Tier Set Review) — mixed: positive on the changes, strongly negative on the tier set",
+          "verifiedDate": "2026-08-07"
+        },
+        {
+          "name": "Jaerv",
+          "credential": "Method Shadow Priest guide author; former Method main, world rank 2, APL/SimC work at Warcraft Priests",
+          "url": "https://www.method.gg/player/jaerv",
+          "specs": [
+            "Shadow"
+          ],
+          "transcribable": false,
+          "latest": "Method Shadow Priest guide, 2026-06-16 (12.0.7)",
+          "verifiedDate": "2026-08-07"
         }
       ],
       "sites": [
@@ -849,6 +1010,18 @@
           "credential": "Wowhead Rogue class expert; lead Subtlety theorycrafter since Legion; maintains Fuu's Simulation Sheet (registered under Rogue sites)",
           "transcribable": false,
           "verifiedDate": "2026-07-31"
+        },
+        {
+          "name": "Musguete",
+          "credential": "Rogue creator; all-three-spec 12.1 breakdowns, strongest on Outlaw and Assassination",
+          "url": "https://www.youtube.com/@MusgueteTheRogue",
+          "specs": [
+            "Outlaw",
+            "Assassination"
+          ],
+          "channelId": "UCdgkIUZiySx2hL7edWPD_Gw",
+          "latest": "All-three-spec 12.1 Rogue breakdown (2026-06-27). No dedicated Subtlety content exists, so Subtlety is deliberately out of scope.",
+          "verifiedDate": "2026-08-07"
         }
       ],
       "sites": [
@@ -997,6 +1170,28 @@
           "specs": [
             "Affliction"
           ]
+        },
+        {
+          "name": "Sjeletyven",
+          "credential": "Method Demonology Warlock guide author; former Method raider, now DPS analyst",
+          "url": "https://www.method.gg/guides/demonology-warlock",
+          "specs": [
+            "Demonology"
+          ],
+          "transcribable": false,
+          "latest": "Method Demonology guide, 2026-06-29 (12.0.7)",
+          "verifiedDate": "2026-08-07"
+        },
+        {
+          "name": "Jensen",
+          "credential": "Method Destruction Warlock guide author; CE raider, Hall of Fame x2",
+          "url": "https://www.method.gg/guides/destruction-warlock",
+          "specs": [
+            "Destruction"
+          ],
+          "transcribable": false,
+          "latest": "Method Destruction guide, 2026-06-16 (12.0.7)",
+          "verifiedDate": "2026-08-07"
         }
       ],
       "sites": [
@@ -1020,7 +1215,12 @@
           "url": "https://www.youtube.com/@Critcake",
           "channelId": "UCfC80iaA3kaKZ4wk9OQqtgw",
           "latest": "Patch 12.1 Arms & Fury Warrior Changes - My Thoughts (Midnight Season 2 PTR)",
-          "verifiedDate": "2026-06-25"
+          "verifiedDate": "2026-06-25",
+          "specs": [
+            "Arms",
+            "Fury"
+          ],
+          "scopeNote": "Scoped 2026-08-07: RSS: Arms 4, Protection 0; live takes on Arms and Fury"
         },
         {
           "name": "Baze",
@@ -1028,7 +1228,12 @@
           "url": "https://www.youtube.com/@Bazeface",
           "channelId": "UC4vCeSQ24u_yWLuv1vc7P3A",
           "latest": "12.1 Warrior Changes, Tier sets and more! / Week 1",
-          "verifiedDate": "2026-06-18"
+          "verifiedDate": "2026-06-18",
+          "specs": [
+            "Arms",
+            "Fury"
+          ],
+          "scopeNote": "Scoped 2026-08-07: RSS: Fury 8, Arms 4, Protection 0; takes match"
         },
         {
           "name": "Archimtiros",
@@ -1110,6 +1315,14 @@
       "channelId": "UC61jJGpguAJ5MFQttkyzERQ",
       "latest": "Season 2 - 12.1 PTR | 2nd Chat on Rumors of Meta Picks & Popular Specs in S2 — the death of Augmentation and the fall of Mistweaver; Holy Paladin and Resto Shaman inherit the healer slots (2026-08-06)",
       "verifiedDate": "2026-08-02"
+    },
+    {
+      "name": "Maximum",
+      "credential": "Team Liquid raid leader (Race to World First); class and tier-set roundups framed around raid impact",
+      "url": "https://www.youtube.com/channel/UCW7BPvFaeiqMCYcNkOAhkxQ",
+      "channelId": "UCW7BPvFaeiqMCYcNkOAhkxQ",
+      "latest": "Major Changes Are Coming in 12.1! - Reacting to Blue Post Changes (2026-06-23): Tuning Changes, then 12 of 13 classes individually (Warrior absent), then Tier sets and Tier set bonuses. No settled pre-Season-2 tier list yet as of 2026-08-04 — re-check 2026-08-08..18.",
+      "verifiedDate": "2026-08-07"
     }
   ]
 }

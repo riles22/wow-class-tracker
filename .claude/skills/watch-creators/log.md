@@ -809,3 +809,54 @@ creators we track are not publishing 12.1 raid analysis for these roles right no
 PTR they are running keys. All six tanks together hold 8 takes, none raid-scoped. If raid
 coverage matters before launch, it needs either new creators who cover tank/healer raid,
 or waiting for raid-testing content once 12.1 ships.
+
+## 2026-08-07 — creator DISCOVERY sweep (75-agent orchestrated search) + scope audit
+
+**Ask (Riley):** wide search for trusted creators across all specs, starting from the lead
+that Maximum (Liquid) posts a pre-season tier-set/class roundup. Plus: audit existing
+entries for the same two defects found on Kalamazi and Publik.
+
+**Maximum — confirmed.** "Major Changes Are Coming in 12.1! - Reacting to Blue Post Changes"
+(2026-06-23, `plBDfk0wE-Y`): Tuning Changes, then 12 of 13 classes individually (Warrior
+absent), then Tier sets and Tier set bonuses. No settled pre-Season-2 tier list yet as of
+his 2026-08-04 upload — **re-check 2026-08-08..18**. Added to `generalCreators` (class-level
+claims, not spec-level). Liquid publishes no written class guides (verified 3 ways).
+
+**Scope audit — both original findings were partly WRONG, and checking mattered:**
+- **Publik** has no `transcribable:false` flag and is already scoped `["Shadow"]`. Nothing
+  to fix. The valid half — he is a single point of failure on Shadow — is addressed by
+  adding Elli and Jaerv as written sources.
+- **Kalamazi** genuinely covers all three Warlock specs (live takes on each, newest video
+  reads all three). Scoping him to his Affliction byline would have DELETED real Demo and
+  Destro coverage. Left unscoped deliberately.
+- 8 entries genuinely were over-broad and are now scoped from live RSS + take history:
+  Tettles/Gamz -> Balance, Shadarek -> Havoc+Devourer, Kesslive -> Devastation+Augmentation,
+  Voulk -> Preservation, Pkpawner -> Windwalker+Mistweaver, Critcake/Baze -> Arms+Fury.
+
+**Added:** 8 transcribable (J-Funk WW, Sha BrM, Megasett MW, NeekapHere Ret, Tactyks PPal,
+Sam FDK, leak SV, Musguete Outlaw+Assa), 7 reference-only (Elli, Jaerv, Sjeletyven, Jensen,
+Taeznak, Mandl, Hype), Maximum to generalCreators. 50 -> 65 creators.
+
+**Tactyks carries a conflict note: RAID SCOPE ONLY.** He authors the Method M+ tier list
+already registered in `sources.json`; logging his M+ takes would double-count him into both
+the consensus and the expert lane.
+
+**Rejected, do not re-research:** Samiccus and Geezax both recap Icy Veins/Wowhead/Archon on
+screen (double-counting our own sources into the meta nudge); Salty Clams has no caption
+track on any video, so the transcript pipeline can never return anything. The verifier stage
+also caught FOUR fabricated or wrong video ids in the discovery output — evidence that the
+adversarial pass is load-bearing, not decoration.
+
+**Structural finding:** almost nothing found is a 12.1 source. Every Method, Maxroll, Icy
+Veins and Wowhead guide checked reads 12.0.7; only ~14 of ~45 confirmed candidates carry a
+dated 12.1-era read. Most additions are "who to read" links that become useful when 12.1
+guides land. Wowhead's `/ptr/guides/classes/` tree was NOT byline-swept — obvious next stop.
+
+**Blocked:** the Maxroll-byline candidates (Wolfdisco, Xerwo, Soda, Miniaug, fraggo, revves,
+Nicememes) cannot be added — `maxroll.gg` is not in `CREATOR_HOSTS` in validate.mjs, and
+widening that list is a reviewed code edit by design.
+
+**Still thin after all this (1 video creator):** Vengeance DH, Feral Druid, Devastation
+Evoker, Shadow Priest, Subtlety Rogue, Demonology and Destruction Warlock. Feral and
+Vengeance are NEW to that list — the scoping revealed they were only ever covered by
+phantom whole-class entries. That is a truer number, not a regression.
