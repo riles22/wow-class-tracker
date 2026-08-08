@@ -860,3 +860,59 @@ widening that list is a reviewed code edit by design.
 Evoker, Shadow Priest, Subtlety Rogue, Demonology and Destruction Warlock. Feral and
 Vengeance are NEW to that list — the scoping revealed they were only ever covered by
 phantom whole-class entries. That is a truer number, not a regression.
+
+## 2026-08-08 — Maximum panel-guest sweep (Riley supplied four video URLs)
+
+**Source:** four Maximum "rank every spec w/ The WoW Community" panels — `v7g8zUPBk9M`
+(Midnight spec tier list, 2026-02-22, 4h44m), `GJLB85qs1Fo` (Midnight all class changes,
+2025-10-17), `rvjPMLDDRWk` (11.2 every spec, 2025-08-10, 5h39m), `y0yxBZd7aEI` (11.1 tier
+list, 2025-02-24).
+
+**Why these are unusually good sources:** the descriptions credit every guest with a link,
+AND the chapter markers name which spec each guest was brought on to rank — 40 guest links
+and 82 chapter attributions. Maximum invites the recognised authority per spec, so the
+chapter line IS the scoping evidence. Extraction is deterministic (yt-dlp `--print
+"%(description)s"`, parse the link block and the `HH:MM Topic w/ Guest` lines); no
+transcript fetch was needed for any of it.
+
+**Independent confirmation of 2026-08-07's scoping decisions** — worth recording because
+it validates judgement calls made without this data:
+- **Kalamazi is "Warlock" in all four panels**, never a single spec. Confirms leaving his
+  entry unscoped was right and that narrowing him to his Affliction byline would have been
+  a mistake.
+- Megasett -> Mistweaver (3 panels), J-Funk -> Windwalker (2), Taeznak -> Death Knight (3),
+  Shadarek -> Havoc, VooDooSaurus -> Devourer, Tettles -> Balance (3) + Augmentation in
+  11.1. Every one matches the scope written yesterday.
+
+**Added (verified live, channelIds resolved against the RSS endpoint with author match):**
+Dorki (whole-role tank — one entry per tank class, 6 total), Bansherz (all 3 Hunter specs,
+daily uploads, already on 12.1), Jedith (Havoc + Devourer), Hopeful (Arcane + Frost; Fire
+EXCLUDED, its only evidence is 11.2-era), Psybear (Feral — first transcribable Feral voice).
+Reference-only: HawkCorrigan (Ele; 237 SimC commits to 2026-08-06), ForeverGuy a.k.a.
+Wowhead's "JustGuy" (Outlaw), Porom (Arcane), YouTee (Pres), Jdotb (Resto Druid),
+Sanghelios (Dev/Aug). generalCreators: Zorthas, plus Dratnos.
+
+**Two registry defects found and fixed:**
+- **Porom was cited as the Arcane 12.1 writeup source in specs.json but had no
+  community.json entry at all.** A writeup attributed to a creator the registry did not know.
+- **Voulk had no `channelId`**, so RSS discovery silently skipped him despite him being
+  transcribable. QuestionablyEpic (`UCU9wT3isnq82muSbxmyNM0g`) is his channel — his own
+  credential says "creator of QE Live". Verified live and added.
+
+**Dratnos** was filed only under Warrior scoped Arms/Fury, but his credential says "general
+M+", his newest video covers Mages and Blood DK, and the 11.2 panel lists him on TANKS. Now
+also a generalCreator; the Warrior entry stays, because the two lanes feed different
+surfaces (per-spec `takes[]` vs cross-class `metaNotes[]`).
+
+**Skip — do not re-research:** PiTyy (one panel not two; no YouTube; 51 followers), Goop (no
+YouTube exists), Atlas (Maximum himself replaced him with Taeznak in later panels), Rook
+(the published link is a 107k-member server invite naming no individual), MissMarvel
+(dormant since 2025-12), **Touchpadwarrior — premise failed outright: nothing ties him to
+Arms or any spec, "warrior" refers to the touchpad, and 15/15 uploads are comedy Shorts.**
+
+**Honest outcome:** thin specs went 7 -> 5, and the TANK GAP DOES NOT CLOSE. Dorki is the
+only tank candidate that exists, he is genuinely the role authority, but he has published
+nothing on 12.1 and his newest upload is 2026-05-23 — so six tank specs gained a feed that
+may produce zero takes this cycle. Still at one video creator: Devastation Evoker, Shadow
+Priest, Subtlety Rogue, Demonology and Destruction Warlock — Maximum's panels do not cover
+those, so they need a different discovery route.

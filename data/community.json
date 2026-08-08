@@ -96,6 +96,17 @@
           "transcribable": false,
           "latest": "Icy Veins Blood DK guide, 2026-06-15 (12.0.7)",
           "verifiedDate": "2026-08-07"
+        },
+        {
+          "name": "Dorki",
+          "credential": "Tank authority on all four Maximum community tier-list panels (2025-02..2026-02); whole-role tank tier lists, Wowhead byline, Tanknotes contributor",
+          "url": "https://www.youtube.com/channel/UC_XwQjQkSEzp_m55-D2eJqA",
+          "specs": [
+            "Blood"
+          ],
+          "channelId": "UC_XwQjQkSEzp_m55-D2eJqA",
+          "latest": "Newest upload 'What I've Learned Healing High M+ Keys' (2026-05-23); his last TANK content predates 12.1 entirely, so this feed may yield no takes this cycle — added for the tank lane prospectively, not for current signal",
+          "verifiedDate": "2026-08-08"
         }
       ],
       "altDiscords": [
@@ -188,6 +199,29 @@
           "transcribable": false,
           "latest": "Method Havoc and Devourer guides, 2026-06-16/17 (12.0.7) — the only credible Devourer voice the sweep found anywhere",
           "verifiedDate": "2026-08-07"
+        },
+        {
+          "name": "Jedith",
+          "credential": "Havoc and Devourer authority on three Maximum panels",
+          "url": "https://www.youtube.com/channel/UC377S4oRxMACoA6Z9UTPv3A",
+          "specs": [
+            "Havoc",
+            "Devourer"
+          ],
+          "channelId": "UC377S4oRxMACoA6Z9UTPv3A",
+          "latest": "'Devourer Demon Hunter Roundtable | State of the Spec' (2026-08-04), with VooDooSaurus — corroborates the Devourer lane rather than duplicating it. About half the feed is raw VOD dumps.",
+          "verifiedDate": "2026-08-08"
+        },
+        {
+          "name": "Dorki",
+          "credential": "Tank authority on all four Maximum community tier-list panels (2025-02..2026-02); whole-role tank tier lists, Wowhead byline, Tanknotes contributor",
+          "url": "https://www.youtube.com/channel/UC_XwQjQkSEzp_m55-D2eJqA",
+          "channelId": "UC_XwQjQkSEzp_m55-D2eJqA",
+          "latest": "Newest upload 'What I've Learned Healing High M+ Keys' (2026-05-23); his last TANK content predates 12.1 entirely, so this feed may yield no takes this cycle — added for the tank lane prospectively, not for current signal",
+          "verifiedDate": "2026-08-08",
+          "specs": [
+            "Vengeance"
+          ]
         }
       ],
       "altDiscords": [],
@@ -314,6 +348,39 @@
           "specs": [
             "Restoration"
           ]
+        },
+        {
+          "name": "Psybear",
+          "credential": "Feral Druid authority on two Maximum panels",
+          "url": "https://www.youtube.com/channel/UCZwI6BhjFyKlA_cjDOXqlsQ",
+          "specs": [
+            "Feral"
+          ],
+          "channelId": "UCZwI6BhjFyKlA_cjDOXqlsQ",
+          "latest": "'Midnight 12.1 Curse Of Ula'Tek Developer Interview' (2026-07-01). First TRANSCRIBABLE Feral authority on the roster — Wordup is reference-only. Caveat: ~5-week gap and a 2026-05-25 'next steps' upload hint at a cadence change.",
+          "verifiedDate": "2026-08-08"
+        },
+        {
+          "name": "Jdotb",
+          "credential": "Restoration Druid M+ healing authority (Forbes-cited); ranked Resto Druid on two Maximum panels",
+          "url": "https://www.twitch.tv/jdotb",
+          "specs": [
+            "Restoration"
+          ],
+          "transcribable": false,
+          "latest": "Streams daily including 12.1 sessions, but his YouTube has been dead since 2025-10-17 — Twitch-first, so no transcript lane exists.",
+          "verifiedDate": "2026-08-08"
+        },
+        {
+          "name": "Dorki",
+          "credential": "Tank authority on all four Maximum community tier-list panels (2025-02..2026-02); whole-role tank tier lists, Wowhead byline, Tanknotes contributor",
+          "url": "https://www.youtube.com/channel/UC_XwQjQkSEzp_m55-D2eJqA",
+          "channelId": "UC_XwQjQkSEzp_m55-D2eJqA",
+          "latest": "Newest upload 'What I've Learned Healing High M+ Keys' (2026-05-23); his last TANK content predates 12.1 entirely, so this feed may yield no takes this cycle — added for the tank lane prospectively, not for current signal",
+          "verifiedDate": "2026-08-08",
+          "specs": [
+            "Guardian"
+          ]
         }
       ],
       "sites": [
@@ -364,7 +431,9 @@
           "specs": [
             "Preservation"
           ],
-          "scopeNote": "Scoped 2026-08-07: credential is Wowhead Retail/Classic Healing Expert (Preservation Evoker)"
+          "scopeNote": "Scoped 2026-08-07: credential is Wowhead Retail/Classic Healing Expert (Preservation Evoker)",
+          "channelId": "UCU9wT3isnq82muSbxmyNM0g",
+          "channelNote": "channelId added 2026-08-08: QuestionablyEpic, verified live. Without it RSS discovery skipped him despite him being transcribable."
         },
         {
           "name": "Saeldur",
@@ -439,6 +508,29 @@
             "Preservation"
           ],
           "managedBy": "overrides"
+        },
+        {
+          "name": "YouTee",
+          "credential": "Spiritbloom.pro raid-section byline; ranked Preservation Evoker on Maximum's Midnight panel",
+          "url": "https://www.twitch.tv/youteeut",
+          "specs": [
+            "Preservation"
+          ],
+          "transcribable": false,
+          "latest": "Reference-only on purpose: his 12.1 panel content already reaches the tracker through AutomaticJak's takes from the same panel, so a video lane would count one voice twice.",
+          "verifiedDate": "2026-08-08"
+        },
+        {
+          "name": "Sanghelios",
+          "credential": "Team Liquid RWF Evoker; world-first Evoker legendary. Ranked Augmentation and Devastation on Maximum's Midnight panel",
+          "url": "https://www.twitch.tv/sanghelioswow",
+          "specs": [
+            "Devastation",
+            "Augmentation"
+          ],
+          "transcribable": false,
+          "latest": "WEAK ARTIFACT: his only WoW channel has not uploaded since 2020 and never covered Evoker; newest citable dated artifact is 2024-01, so this verifiedDate is stale by construction. Kept as a who-to-read link only.",
+          "verifiedDate": "2026-08-08"
         }
       ],
       "sites": [
@@ -489,6 +581,19 @@
           "channelId": "UCfV0Onn-ygnq_mL-eZN4ftg",
           "latest": "Survival Hunter Guide for Midnight Season 2 (Builds, Rotation) — uploaded 2026-08-07",
           "verifiedDate": "2026-08-07"
+        },
+        {
+          "name": "Bansherz",
+          "credential": "Hunter player authority across all three specs (4340 io, 10/10M); ranked Hunter on Maximum's Midnight panel",
+          "url": "https://www.youtube.com/channel/UCwLb0cqFxjX0fsZzLpXpwKA",
+          "specs": [
+            "Beast Mastery",
+            "Marksmanship",
+            "Survival"
+          ],
+          "channelId": "UCwLb0cqFxjX0fsZzLpXpwKA",
+          "latest": "Daily uploads through 2026-08-07, already publishing 12.1 PTR raid and key content in all three specs; captions present. Player authority rather than theorycraft.",
+          "verifiedDate": "2026-08-08"
         }
       ],
       "altDiscords": [
@@ -546,6 +651,29 @@
             "Fire",
             "Frost"
           ]
+        },
+        {
+          "name": "Hopeful",
+          "credential": "Team Liquid raid Mage; ranked Mage on Maximum's Midnight class-changes panel",
+          "url": "https://www.youtube.com/channel/UCuB-vgh4HQyvVFVYAmO7SrQ",
+          "specs": [
+            "Arcane",
+            "Frost"
+          ],
+          "channelId": "UCuB-vgh4HQyvVFVYAmO7SrQ",
+          "latest": "'SUNFURY ARCANE MAGE! Midnight S2 Testing' (2026-07-08) — real S2 PTR testing content. Fire deliberately EXCLUDED: the only Fire evidence found is 11.2-era.",
+          "verifiedDate": "2026-08-08"
+        },
+        {
+          "name": "Porom",
+          "credential": "Wowhead Arcane Mage author; ranked Arcane on three Maximum panels",
+          "url": "https://www.wowhead.com/author/Porom",
+          "specs": [
+            "Arcane"
+          ],
+          "transcribable": false,
+          "latest": "REGISTRY GAP CLOSED: Porom was already the cited source of the Arcane 12.1 writeup in specs.json but had no community.json entry. His channel is a personal VOD dump (15 videos in 8 years, zero 12.1), hence reference-only.",
+          "verifiedDate": "2026-08-08"
         }
       ],
       "sites": [
@@ -673,6 +801,17 @@
           "channelId": "UCtLS9GKVyTdYNNYbGvHlqBw",
           "latest": "Is Mistweaver Dummy Doomed for 12.1 Raids? — one of the very few healer RAID reads this sweep found",
           "verifiedDate": "2026-08-07"
+        },
+        {
+          "name": "Dorki",
+          "credential": "Tank authority on all four Maximum community tier-list panels (2025-02..2026-02); whole-role tank tier lists, Wowhead byline, Tanknotes contributor",
+          "url": "https://www.youtube.com/channel/UC_XwQjQkSEzp_m55-D2eJqA",
+          "channelId": "UC_XwQjQkSEzp_m55-D2eJqA",
+          "latest": "Newest upload 'What I've Learned Healing High M+ Keys' (2026-05-23); his last TANK content predates 12.1 entirely, so this feed may yield no takes this cycle — added for the tank lane prospectively, not for current signal",
+          "verifiedDate": "2026-08-08",
+          "specs": [
+            "Brewmaster"
+          ]
         }
       ],
       "sites": [
@@ -798,6 +937,17 @@
           "channelId": "UC_0qsnA6yJ_DzEvKsm-XdvQ",
           "latest": "The State of Tanks in Midnight S2 (12.1 PTR Update) and State of Raiding in 12.1; uploads daily through 2026-08-07",
           "verifiedDate": "2026-08-07"
+        },
+        {
+          "name": "Dorki",
+          "credential": "Tank authority on all four Maximum community tier-list panels (2025-02..2026-02); whole-role tank tier lists, Wowhead byline, Tanknotes contributor",
+          "url": "https://www.youtube.com/channel/UC_XwQjQkSEzp_m55-D2eJqA",
+          "channelId": "UC_XwQjQkSEzp_m55-D2eJqA",
+          "latest": "Newest upload 'What I've Learned Healing High M+ Keys' (2026-05-23); his last TANK content predates 12.1 entirely, so this feed may yield no takes this cycle — added for the tank lane prospectively, not for current signal",
+          "verifiedDate": "2026-08-08",
+          "specs": [
+            "Protection"
+          ]
         }
       ],
       "sites": [
@@ -1022,6 +1172,17 @@
           "channelId": "UCdgkIUZiySx2hL7edWPD_Gw",
           "latest": "All-three-spec 12.1 Rogue breakdown (2026-06-27). No dedicated Subtlety content exists, so Subtlety is deliberately out of scope.",
           "verifiedDate": "2026-08-07"
+        },
+        {
+          "name": "ForeverGuy",
+          "credential": "Wowhead (as 'JustGuy') and Method Outlaw Rogue guide author; ranked Rogue on two Maximum panels",
+          "url": "https://www.wowhead.com/author/JustGuy",
+          "specs": [
+            "Outlaw"
+          ],
+          "transcribable": false,
+          "latest": "Wowhead Outlaw article 2026-06-30 — citable as an Outlaw writeup source now. No YouTube (@ForeverGuy5 404s). NOTE the alias: he publishes as 'JustGuy', so guard against a future duplicate entry.",
+          "verifiedDate": "2026-08-08"
         }
       ],
       "sites": [
@@ -1124,6 +1285,17 @@
           "specs": [
             "Restoration"
           ]
+        },
+        {
+          "name": "HawkCorrigan",
+          "credential": "Wowhead Elemental Shaman guide author; 237 SimulationCraft [ele] commits, latest 2026-08-06 including 12.1 work",
+          "url": "https://www.wowhead.com/author/HawkCorrigan",
+          "specs": [
+            "Elemental"
+          ],
+          "transcribable": false,
+          "latest": "SimC [ele] commits through 2026-08-06 — the strongest live 12.1 credential in this sweep, but as code, not a distillable take. Deliberately a SECOND Elemental voice alongside Stormy (Wowhead vs Icy Veins; independent).",
+          "verifiedDate": "2026-08-08"
         }
       ],
       "sites": [
@@ -1290,6 +1462,17 @@
             "Arms"
           ],
           "latest": "Blood DK Meta CONFIRMED? Mythic+ tier list update — Blood DK S+, Prot Paladin gutted (2026-07-30)"
+        },
+        {
+          "name": "Dorki",
+          "credential": "Tank authority on all four Maximum community tier-list panels (2025-02..2026-02); whole-role tank tier lists, Wowhead byline, Tanknotes contributor",
+          "url": "https://www.youtube.com/channel/UC_XwQjQkSEzp_m55-D2eJqA",
+          "channelId": "UC_XwQjQkSEzp_m55-D2eJqA",
+          "latest": "Newest upload 'What I've Learned Healing High M+ Keys' (2026-05-23); his last TANK content predates 12.1 entirely, so this feed may yield no takes this cycle — added for the tank lane prospectively, not for current signal",
+          "verifiedDate": "2026-08-08",
+          "specs": [
+            "Protection"
+          ]
         }
       ],
       "altDiscords": [
@@ -1323,6 +1506,23 @@
       "channelId": "UCW7BPvFaeiqMCYcNkOAhkxQ",
       "latest": "Major Changes Are Coming in 12.1! - Reacting to Blue Post Changes (2026-06-23): Tuning Changes, then 12 of 13 classes individually (Warrior absent), then Tier sets and Tier set bonuses. No settled pre-Season-2 tier list yet as of 2026-08-04 — re-check 2026-08-08..18.",
       "verifiedDate": "2026-08-07"
+    },
+    {
+      "name": "Zorthas",
+      "credential": "Cross-class WoW systems and meta commentary; audit-panel guest on Maximum's 11.2 community tier list",
+      "url": "https://www.youtube.com/channel/UCcex_X_PE_64DZNkx7toPiQ",
+      "channelId": "UCcex_X_PE_64DZNkx7toPiQ",
+      "latest": "'AI Slop Tier Lists are getting out of hand' (2026-07-30) — cross-class meta commentary, not per-spec theorycraft",
+      "verifiedDate": "2026-08-08"
+    },
+    {
+      "name": "Dratnos",
+      "credential": "WoW Mythic+ analyst and caster; cross-class 12.1 PTR class-change coverage",
+      "url": "https://www.youtube.com/@dratnos",
+      "channelId": "UCI-FRT31iq5_xoFG6ngNcpw",
+      "latest": "All Mages get 2x Barrier! Blood DK Tier Reworked! Patch 12.1 PTR Update (2026-07-01)",
+      "verifiedDate": "2026-08-08",
+      "note": "Also retained as a Warrior creator scoped to Arms/Fury. The lanes are different surfaces: per-spec takes[] there, cross-class metaNotes[] here. Maximum's 11.2 panel lists him on Tanks alongside Dorki, and his own videos range across every class."
     }
   ]
 }
