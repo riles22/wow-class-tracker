@@ -689,3 +689,46 @@ catch-up path.
 - **NO SEASON FLIP** — 12.1 ships **Aug 11**, every live tier page still reads 12.0.7 /
   Season 1. `SNAPSHOT_PHASE` remains the pending one-shot owner action; `PHASE_FLIP_DUE`
   is Aug 20.
+
+## 2026-08-08 — LOCAL run (~14:1xZ, Opus 5; scheduled residential catch-up, ~3h after the nightly)
+
+- **NO NEW BUILD. Feed stays at 15 entries; `ptr-builds.json` untouched.**
+- **Channel 1 — official thread.** `2317811.json` pulled in full by curl (408 KB):
+  `highest_post_number` still **19**, `last_posted_at` 2026-07-31T23:42Z. Unchanged from
+  the nightly.
+- **Channel 2 — Wowhead news RSS**, 40 items back to 2026-07-31, parsed per `<item>`.
+  Exactly **one** item newer than the nightly's window: "Things to Do to Prepare for Patch
+  12.1" (08-08 13:10Z). Read its `content:encoded` — a pre-patch checklist (campaign chapter,
+  Omnium Folio, Coiled Isle unlock) with **zero** tuning verbs. Not logged.
+- **Channel 3 — blue tracker** via the r.jina.ai render (the direct page is still
+  JS-hydrated). Newest topics are the S2 dungeon-test feedback thread, M+ Umbral cutoffs,
+  a housing blueprint bug, launch/Twitch-drop promo. **No standalone class-tuning blue post.**
+- **The 08-07 LEAD is still outstanding**: the Blizzard interview said a Season 2
+  class-tuning roadmap "should release in the next couple days". As of this run it has not
+  appeared in any of the three channels. Carry it forward — 12.1 ships **Aug 11**.
+- **WCL: the residential HTML transport is DOWN too, and this is new.** Prior runs relied on
+  "the HTML statistics endpoint works from a residential IP" (refresh-metrics, ptr-watch
+  step 5). Today all five cuts return **HTTP 403 "Just a moment…" with `server: cloudflare`**
+  — and so does `warcraftlogs.com/` itself, so it is a whole-origin challenge from this IP,
+  not an endpoint or header problem. Ruled out by probe: the documented minimal XHR recipe,
+  a full browser header set (sec-ch-ua / sec-fetch-* / Origin), and a plain document-mode
+  navigation all get the same challenge with a `cf-ray`. **Nothing was ingested and no
+  `snapshot`/`asOf` was touched** — the staleness stays visible, per the standing rule.
+- **The sanctioned API path was also re-checked** (the documented ONE cheap retry, run
+  locally with the config.json credentials): OAuth **ok**, `characterRankings(metric: dps)`
+  on encounter 3176 returns 100 rankings, `metric: rdps` still returns a bare **"Internal
+  server error"**. So the rDPS family remains broken upstream exactly as the nightly's
+  `wcl-fetch/evidence.json` verdict `rdps-broken` recorded at 11:03Z — the five WCL rows are
+  honestly unreachable from here too, for the same upstream reason rather than an IP one.
+  Zones 54 / 52 / 56 / 57 therefore not ingested; zone 54 remains frozen at 2026-07-28
+  (11d against the deliberately-raised maxAgeDays 40).
+- **Doc nit found while doing this**: refresh-metrics SKILL.md says config.json carries
+  "the same two fields (`clientId`, `clientSecret`)". The actual keys — per
+  `config.json.example` and the live file — are **`wclClientId` / `wclClientSecret`**.
+  Reading the skill literally yields a silent OAuth 401. Not fixed in this data run.
+- **9 specs still `ptr: null`**, unchanged (Frost DK · Feral/Guardian/Restoration Druid ·
+  Holy Priest · Elemental Shaman · all three Warlocks). No writeup was manufactured from
+  this run's creator takes — Frost DK, Holy Priest and Mistweaver all gained takes, and
+  CLAUDE.md is explicit they reach the writeup gap only as an aggregate via `expertRead()`.
+- **NO SEASON FLIP** — 12.1 ships Aug 11; `SNAPSHOT_PHASE` remains the pending one-shot
+  owner action, `PHASE_FLIP_DUE` Aug 20.

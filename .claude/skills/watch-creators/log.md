@@ -1254,3 +1254,58 @@ those, so they need a different discovery route.
   remain Frost + Unholy, so `opCP90Ep-1k` (Frost DK 12.1) is in scope while his 08-06
   Blood DK interview still is not — unchanged from the 08-07 note.
 - No creator opinion touched any rating.
+
+## 2026-08-08 — LOCAL run (~14:1xZ, Opus 5; scheduled residential catch-up after the 10:37Z nightly)
+
+- **Queue drain only, no re-discovery pass** — the nightly polled all 42 feeds at 11:26Z
+  three hours earlier and queued its 25 (the `PER_RUN_CAP`); re-discovering now would only
+  surface uploads too fresh for auto-captions. **Queue 25 → 0.**
+- **yt-dlp 25/25 on the first attempt** from this residential IP, pinned 2026.07.04, json3
+  auto-subs, ~149,270 words total. No Supadata call — the free monthly budget is untouched
+  by this run, which is the whole point of draining locally.
+- **+25 takes (9 live, 16 superseded-on-arrival), +5 metaNotes, +4 verified skips.**
+  `skipped[]` 95 → 99, takes 349 → 374, metaNotes 164 → 169.
+- **Five creators went from zero takes to their first**: Tactyks, Jedith, NeekapHere, leak,
+  Sam. Hopeful stayed at zero (see the skip below), so `audit:creators` still lists him.
+- **The raid-scoped tank gap is no longer empty.** CLAUDE.md records all six tanks holding
+  8 takes with ZERO raid-scoped; Tactyks `nbQTDpjcCEY` answers a direct question about the
+  12.1 raid tank comp — "definitely prot paladin still… prot pal's looking very good" —
+  which is a genuine raid-lens Protection Paladin read, plus a separate M+ read from the
+  same stream. His 07-18 raid-preview take is superseded by it (same creator, spec, lens).
+  **This is exactly the v11 single-creator tank case**, so it was measured rather than
+  assumed: Prot Paladin raid moved **33.0 → 37.0 and stayed C**; no band was crossed. The
+  cell is prior-only (no PTR raid empirical), one creator shrinks ×.33, so the ±12 ceiling
+  yielded +4.
+- **Projection effect measured through `buildPayload`, before committing: 7 cells moved,
+  ZERO letters, zero consensus cells.** Havoc raid 71→70 / M+ 66→65, Devourer raid 66→65 /
+  M+ 81→80 (a `mixed` take abstains at 0 and dilutes Jedith's single-creator average),
+  Prot Paladin raid 33→37 / M+ 53→55, Arms Warrior raid 74→77 (the Zorthas metaNote's ±3
+  general-creator nudge). Frost Mage got the same metaNote but did not move — a newer
+  bracket-scoped read already holds that cell.
+- **Verified skips, with what the transcript actually turned out to be:**
+  · Hopeful `uDUrC9cuvn4` — titled "SUNFURY ARCANE MAGE!" but 4,162 words of a key run with
+    friends; **zero** occurrences of Arcane, Sunfury or Spellslinger, and every buff/nerf
+    word refers to a mob debuff. A clean example of why the local lane judges transcripts
+    rather than titles — in both directions.
+  · Maximum `RTBdqMQHJhA` — boss-by-boss mechanics walkthrough narrated over Kalamazi's
+    raid-test VOD. No per-spec outlook, so nothing qualifies for metaNotes.
+  · Jedith `IHQzORo98WU` — drunk co-op M+ stream; the only spec content is a passing
+    "Devourer feels pretty good / Eradicate rips", said properly in his 07-22 tuning video.
+  · Whispyr `1Akuq5NpWoI` — Season 2 **gearing** walkthrough. Its one "pretty strong"
+    judgment is about a main-hand dagger's until-death scaling, and he explicitly notes the
+    effect is not buffed by Assassination's mastery or talents. An item claim, not a spec
+    claim — distilling it as a take would have been the "weakest evidence steers" error.
+- **Scope observations for a human — none acted on:**
+  · **Tactyks now yields on Protection Paladin**, reversing the 08-07 note. It took a
+    direct viewer question in a 29k-word stream; the same stream mentions Paladin 13 times
+    total and Warrior 40, so he remains far more talkative about specs outside his scope
+    (Prot Warrior "still a brick wall" — logged nowhere, out of scope).
+  · **Sha `GgedcPsnbfQ` is a controlled tank comparison** — same gear, same trinkets, same
+    pull — covering all eight tank specs. Only the Brewmaster portion was distilled. His
+    ranking (Annihilator DH and both DK trees well ahead; Brewmaster and Warrior mid at
+    ~410-450k) would be valuable if any of those creators were scoped to those specs.
+  · **MadSkillzzTV `QimwxPWKd_s` is 24k words and mostly addon talk**; the healer verdict
+    is a single line at t=1569.
+- `npm test` **334 pass / 0 fail** (template.html untouched, so the 21 Playwright UI
+  invariants skip locally as designed). `npm run validate` clean, `npm run audit:creators`
+  **HIGH 0 · MED 0 · INFO 18**.
