@@ -402,3 +402,39 @@ representation n; verified against the page, NOT a Blizzard retune); survivabili
   published 08-06 (see ptr-watch log) are pre-launch. Every live page still self-identifies
   as 12.0.7 / Season 1, so `PHASES.liveSeason` and `SNAPSHOT_PHASE` stay as they are.
   **The flip window opens in four days.**
+
+## 2026-08-08 — nightly CI (headless, Opus 5, single-shot; started 11:26Z)
+
+- **All 5 tier-list sources refreshed, ZERO tier moves anywhere** (80 icyveins + 40
+  icyveins-ptr + 79 method + 80 wowhead + 80 archon = 359 assignments, 0 unmatched).
+- **Transports, for the record** — Icy Veins: plain urllib + browser UA, 200 on all 6
+  (parse `<table class="tier-list">`, tier from the row's first `<td>`, spec from each
+  entry's summary `img alt`). Method: curl + UA, 200 on both (`.tier__tier` blocks;
+  the M+ page's second tier list is Dungeon Difficulty — its 8 dungeon names are
+  correctly unmatched). Wowhead: FULL browser header set (UA-only is 403), tiers from
+  the `WH.markup` `[tier-list=rows]` payload. Archon: `__NEXT_DATA__` from raw HTML,
+  `specTierListSection.tierLists[].tiers[].entries[][]` — note the shape is
+  `tier`/`entries` (entries is an array **of arrays**), not `label`/`items`; a parser
+  keyed on the latter returns 0 rows and looks exactly like an empty tier list.
+- **Era-verify (all stored as `seasonVerified`)**: Icy Veins live 6/6 read
+  "Patch 12.0.7 / Midnight" or "/ Season 1" → **s1**; Icy Veins PTR 3/3 read
+  "PTR Tier List for Midnight (Patch 12.1 / Season 2)" → **s2**; Method both pages
+  "Midnight Season 1"; Wowhead 6/6 "for Midnight Season 1"; Archon `page.description`
+  "in 12.0.7" (raid) / "in Season 1" (M+). Devourer DH present in every DPS list.
+- **Page-own dates re-read every run, never carried forward.** Icy Veins live
+  2026-07-01 ×4 / 2026-08-04 (raid healer) / 2026-06-30 (raid tank); Icy Veins PTR
+  2026-08-02 ×3 (JSON-LD **and** the "Last UPDATED - 2nd of August." line agree —
+  6 days behind, normal for its Sunday rebuild, `published.maxAgeDays` 9); Wowhead
+  2026-06-25 / 2026-04-21 / 2026-06-25 / **2026-04-19** / 2026-08-05 / 2026-05-28.
+  All 15 agree with `published-evidence/evidence.json` 15/15. The 04-19 Wowhead M+ DPS
+  page is now **111 days** old against its deliberately-loose 120 — it is the page the
+  contract comment says to watch, and it has still not rebuilt for Season 2.
+- **Archon WAS a new upstream cut**: `page.lastUpdated` 2026-08-06T12:00Z →
+  **2026-08-07T12:00:00Z** (the 08-08 12:00Z publish had not landed at 11:26Z).
+  Aggregate letters moved zero; 25 of 680 per-encounter tiers moved; **survivability
+  moved 21 of 40, every one by exactly one band and 20 of them DOWNWARD** (Enhancement
+  S→A, six A→B, thirteen B→C; only Brewmaster C→B up). That is the exact mirror of
+  yesterday's 18-mostly-upward set — the same death-rate re-clustering oscillating back,
+  not a spec-by-spec re-rating. It feeds no consensus.
+- **No season flip.** 12.1 ships **Aug 11**; every live page still self-identifies as
+  12.0.7 / Season 1, so `PHASES.liveSeason` and `SNAPSHOT_PHASE` stay put. Three days left.

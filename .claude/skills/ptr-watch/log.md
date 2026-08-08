@@ -644,3 +644,48 @@ catch-up path.
   explicit that creator takes reach the writeup gap only as an aggregate via `expertRead()`.
 - **NO SEASON FLIP** — the one-shot `SNAPSHOT_PHASE` action remains pending; `PHASE_FLIP_DUE`
   is Aug 20 and launch is Aug 11. `check-refresh --age` still passes (`fingerprint=clean`).
+
+## 2026-08-08 — nightly CI (headless, Opus 5, single-shot; started 11:26Z)
+
+- **NO NEW BUILD. Feed stays at 15 entries; nothing in `ptr-builds.json` changed.**
+- **Channel 1 — official thread.** `2317811.json` pulled in full by curl (408 KB):
+  `highest_post_number` still **19**, newest Linxy post **2026-07-31** (builds #18/#19,
+  already logged).
+- **Channel 2 — Wowhead news RSS**, 40 items back to 2026-07-31, parsed per `<item>`.
+  A new PTR build **did** land 08-07, but its only reported content is a datamined
+  cosmetic (**"Jimothy Added in Latest Patch 12.1 PTR Build"**) — no class tuning.
+  Deliberately NOT logged, with reasons: Season 2 **M+ dungeon encounter** tuning
+  (08-07 Ruby Life Pools / Temple of Sethraliss; 08-05 Altar of Fangs), **embellishment
+  + potion** tuning (08-05: Polished Ammolite −90% crit, Snakeskin Lining −90%, Adorned
+  Fang −70% haste, Liquid Luster −52% vers), and **datamined ability-flag hotfixes**
+  (08-04: dungeon/raid/delve immunity + reflect + AoE-DR flags). None carries a
+  spec-attributable line; a highlight with no `Spec Class ` prefix reaches no drawer and
+  could only pollute the outlook tally.
+- **Channel 3 — blue tracker.** The direct page is **JS-hydrated: 200, 69 KB, ZERO
+  `/blue-tracker/topic/` hrefs** even with the full browser header set — use the
+  **r.jina.ai** render, which lists topics cleanly. Newest US/EU topics: M+ Umbral score
+  cutoffs (07 Aug), the S2 dungeon-test feedback thread, Coiled Isle / Discord-link /
+  Twitch-drop promo, and the already-logged Content Update Notes. **No standalone
+  class-tuning blue post** of the 2026-07-16 "Healer Tuning" shape.
+- **LEAD for the next run:** the 08-07 Blizzard interview (Wowhead / Icy Veins / Raider.IO,
+  Paul Kubit + Rachel Vought) says a Season 2 **class-tuning roadmap "should release in the
+  next couple days"** — verify against the forum before logging anything.
+- **Tier sets:** no build highlight touched a set bonus, so no `tierSet.asOf` bump.
+- **9 specs still `ptr: null`** (Frost DK · Feral/Guardian/Restoration Druid · Holy Priest ·
+  Elemental Shaman · all three Warlocks). Lanes worked this run and what they cost:
+  (a) Wowhead site search is JS-hydrated — `?search=` through r.jina.ai returns ad-consent
+  chrome and no articles; (b) Icy Veins news index likewise, RSS 404s; (d) **community
+  sites checked directly for the first time in a while** — `dreamgrove.gg`'s Feral,
+  Guardian and Resto compendiums are explicit **12.0.7** documents (Feral and Guardian
+  mention "12.1" **zero** times; Resto only inside an addons caution), and the
+  DK / Priest / Shaman / Warlock `sites[]` entries are SimC APL and sim-profile **repos**,
+  not analysis. So the Dreamgrove lane is genuinely dry for 12.1 today — worth re-checking
+  after launch, when the compendiums rebuild for Season 2.
+- **WCL zones 54 / 52 / 56 are evidence-only on this runner.** `wcl-fetch/evidence.json`
+  verdict `rdps-broken`; the three RAW keys landed (zone-54 pooled shows **Coiled Altar
+  and Ula'tek at 0 ranked players**, i.e. between testing windows), the five rDPS/normalized
+  cuts did not. Zone 57 (Tidebound Grotto) is not in the deterministic step and was not
+  probed from here.
+- **NO SEASON FLIP** — 12.1 ships **Aug 11**, every live tier page still reads 12.0.7 /
+  Season 1. `SNAPSHOT_PHASE` remains the pending one-shot owner action; `PHASE_FLIP_DUE`
+  is Aug 20.

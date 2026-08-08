@@ -1214,3 +1214,43 @@ those, so they need a different discovery route.
   `check-refresh --manifest` failed on **exactly one line** — `startedAt ... is 18h old` — which
   is the expected partial-run result. **Manifest deliberately NOT rewritten** (local-run skill
   step 3: this run re-attempted nothing outside the creator lane).
+
+## 2026-08-08 — nightly CI (headless, Opus 5, single-shot; started 11:26Z)
+
+- **42 unique feeds polled, 42/42 HTTP 200 first try, 630 RSS entries.** The roster grew
+  25 → 42 transcribable channels since the last nightly, so a lot of feed history is new.
+  yt-dlp was NOT invoked; no YouTube or transcript-API call was made by this agent.
+- **Nothing to distil: 0 takes, 0 metaNotes, 0 superseded.** `transcript-fetch/summary.json`
+  verdict `ok`, requested 0 / fetched 0 — the queue was **empty at step start** because the
+  three videos the 08-07 nightly queued (`uGLPbkECmko`, `g0adl6lXPQM`, `rX3X-I_4lCA`) were
+  drained and distilled by the local run that followed; all three now appear as `youtu.be`
+  urls in `creator-takes.json`.
+- **Seen-set 660** = `seen[]` 432 + `skipped[]` 95 + `videos[]` 0 + every `youtu.be` id in
+  `creator-takes.json`. No log.md regex. **153 unseen**, every one of them on or after the
+  cycle's opening build (2026-06-18), so the date bound dismissed none.
+- **QUEUED 25** (0 → 25, the `PER_RUN_CAP`), keyword-filtered as a nightly must be
+  (Supadata free tier is **100/MONTH**), prioritised by scarcity then recency:
+  · uncovered specs a creator actually covers — **Sam `_ln5tegGc0c`** + **Obli `opCP90Ep-1k`**
+    (Frost DK), **LBNinja7 `Y6dW5dWoKGo`** (Oracle Holy Priest);
+  · the tank/raid lane CLAUDE.md records as having **zero raid-scoped tank takes** —
+    **Tactyks `Ogw6ZR-YSbQ`** ("The State of Raiding in Patch 12.1") + `nbQTDpjcCEY`,
+    **Sha `7Hr6sxcy4wA`** + `GgedcPsnbfQ` (tank comparisons, 12.1 PTR week 6);
+  · healers — MadSkillzzTV `faDcvghS7ao` / `QimwxPWKd_s` / `YczUs2OcaJQ`, Megasett `EHvx9lFifno`;
+  · then Jedith ×2, NeekapHere, Musguete ×2, leak ×2, Kesslive, Pkpawner, Whispyr, Hopeful,
+    Bansherz `QeM2nB_qK00` (08-08, Season 2 Survival Hunter guide), and two generalCreator
+    videos for the **metaNotes** lane (Zorthas `NG6Jepgl3js`, Maximum `RTBdqMQHJhA`).
+  25 of a 100/month budget in one run is a deliberate spend: this content is worth most in
+  the three days before 12.1 ships and near-worthless a fortnight after.
+- **Only 8 ids added to `seen[]`**, all Maximum's Path of Exile Season 3 stream VODs
+  ("SSF Sorc", "trying to loot new lego", "Season 3 release | day 2…") — obviously not WoW
+  at all, which is the one thing the skill says to skip outright. **The other ~120 in-cycle
+  videos were deliberately left UNSEEN.** This nightly's keyword filter passed over them for
+  budget reasons, and marking a budget-driven cut as `seen` would also hide them from the
+  next LOCAL run — whose free yt-dlp sweep is supposed to judge them on transcripts rather
+  than titles. That is precisely the failure the 2026-08-08 rule was written about
+  (Tactyks and J-Funk skipped on "dungeon guide" titles).
+- **Scope notes for a human:** MadSkillzzTV and LBNinja7 both carry Holy Paladin / Holy
+  Priest scope entries, so their healer videos queued in scope. Obli's registered specs
+  remain Frost + Unholy, so `opCP90Ep-1k` (Frost DK 12.1) is in scope while his 08-06
+  Blood DK interview still is not — unchanged from the 08-07 note.
+- No creator opinion touched any rating.

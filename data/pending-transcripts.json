@@ -1,6 +1,182 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
-  "videos": [],
+  "videos": [
+    {
+      "id": "QeM2nB_qK00",
+      "creator": "Bansherz",
+      "title": "Midnight Season 2 Survival Hunter Guide --Talents & Rotation",
+      "published": "2026-08-08",
+      "queuedAt": "2026-08-08"
+    },
+    {
+      "id": "Ogw6ZR-YSbQ",
+      "creator": "Tactyks",
+      "title": "The State of Raiding in Patch 12.1 | Venomous Abyss Raid Preview",
+      "published": "2026-07-18",
+      "queuedAt": "2026-08-08"
+    },
+    {
+      "id": "nbQTDpjcCEY",
+      "creator": "Tactyks",
+      "title": "12.1 PTR tank testing, title push keys later",
+      "published": "2026-07-21",
+      "queuedAt": "2026-08-08"
+    },
+    {
+      "id": "7Hr6sxcy4wA",
+      "creator": "Sha",
+      "title": "Major Tank Damage Buffs | 12.1 PTR Week 6",
+      "published": "2026-07-22",
+      "queuedAt": "2026-08-08"
+    },
+    {
+      "id": "GgedcPsnbfQ",
+      "creator": "Sha",
+      "title": "How Are Tanks Doing? Casually Comparing Tanks in 12.1",
+      "published": "2026-07-21",
+      "queuedAt": "2026-08-08"
+    },
+    {
+      "id": "_ln5tegGc0c",
+      "creator": "Sam",
+      "title": "The current state of Frost DK in Midnight Season 2 for M+",
+      "published": "2026-07-20",
+      "queuedAt": "2026-08-08"
+    },
+    {
+      "id": "opCP90Ep-1k",
+      "creator": "Obli",
+      "title": "BUFFS AND NERFS EVERYWHERE?! / Frost DK 12.1 Update / Midnight Season 2 PTR",
+      "published": "2026-06-24",
+      "queuedAt": "2026-08-08"
+    },
+    {
+      "id": "Y6dW5dWoKGo",
+      "creator": "LBNinja7",
+      "title": "Another Day, Another BUFF | Midnight 12.1 PTR Oracle Holy Priest",
+      "published": "2026-07-12",
+      "queuedAt": "2026-08-08"
+    },
+    {
+      "id": "faDcvghS7ao",
+      "creator": "MadSkillzzTV",
+      "title": "12.1 Holy Paladin is REALLY GOOD (But for How Long?) | Midnight M+ Testing (Season 2 PTR)",
+      "published": "2026-07-13",
+      "queuedAt": "2026-08-08"
+    },
+    {
+      "id": "QimwxPWKd_s",
+      "creator": "MadSkillzzTV",
+      "title": "12.1 Finding Best M+ Healer (Re-testing Holy Paladin & Priest)",
+      "published": "2026-07-13",
+      "queuedAt": "2026-08-08"
+    },
+    {
+      "id": "YczUs2OcaJQ",
+      "creator": "MadSkillzzTV",
+      "title": "One of the Best Healers in Season 2? | Mistweaver Monk M+ Testing | Midnight 12.1",
+      "published": "2026-07-12",
+      "queuedAt": "2026-08-08"
+    },
+    {
+      "id": "EHvx9lFifno",
+      "creator": "Megasett",
+      "title": "New Mastery Build for Mistweaver • 12.1 PTR",
+      "published": "2026-07-20",
+      "queuedAt": "2026-08-08"
+    },
+    {
+      "id": "xoim8U1pVrg",
+      "creator": "Jedith",
+      "title": "THESE CHANGES ARE...Confusing? Havoc & Devourer 12.1 Tuning",
+      "published": "2026-07-22",
+      "queuedAt": "2026-08-08"
+    },
+    {
+      "id": "IHQzORo98WU",
+      "creator": "Jedith",
+      "title": "Devourer DH Melee Build ACTUALLY Blasts | Season 2 PTR",
+      "published": "2026-07-18",
+      "queuedAt": "2026-08-08"
+    },
+    {
+      "id": "L_P_pRw4Kmk",
+      "creator": "NeekapHere",
+      "title": "Retribution Paladin SMALL AoE Buff + Some Concerns for 12.1",
+      "published": "2026-07-22",
+      "queuedAt": "2026-08-08"
+    },
+    {
+      "id": "6iCspz0HiKs",
+      "creator": "Musguete",
+      "title": "BIG Rogue BUFFS for Season 2!? 12.1 PTR Patch Update",
+      "published": "2026-07-22",
+      "queuedAt": "2026-08-08"
+    },
+    {
+      "id": "QVwK9_Kcjcs",
+      "creator": "Musguete",
+      "title": "Blizzard just BUFFED OUTLAW!! 12.1 PTR Patch Changes",
+      "published": "2026-07-15",
+      "queuedAt": "2026-08-08"
+    },
+    {
+      "id": "rmgB8DVU6B4",
+      "creator": "leak",
+      "title": "MORE Survival Hunter Changes! Bug Fixes, Bomb Changes, and Hunter's  Mark",
+      "published": "2026-07-24",
+      "queuedAt": "2026-08-08"
+    },
+    {
+      "id": "RUYin4EG1vI",
+      "creator": "leak",
+      "title": "Bomb Survival Hunter is BACK! Midnight 12.1 Survival Hunter Changes and Sentinel Buffs",
+      "published": "2026-07-16",
+      "queuedAt": "2026-08-08"
+    },
+    {
+      "id": "cDsYViHOYBY",
+      "creator": "Kesslive",
+      "title": "MASSIVE Wingleader Nerfs 12.1 PTR Update for Dev/Aug Evoker",
+      "published": "2026-07-09",
+      "queuedAt": "2026-08-08"
+    },
+    {
+      "id": "3-EZelRhzxA",
+      "creator": "Pkpawner",
+      "title": "Testing New Windwalker Builds, Talents & Rotation | 12.1 PTR M+",
+      "published": "2026-06-26",
+      "queuedAt": "2026-08-08"
+    },
+    {
+      "id": "1Akuq5NpWoI",
+      "creator": "Whispyr",
+      "title": "Huge Assassination Changes In Season 2",
+      "published": "2026-06-19",
+      "queuedAt": "2026-08-08"
+    },
+    {
+      "id": "uDUrC9cuvn4",
+      "creator": "Hopeful",
+      "title": "SUNFURY ARCANE MAGE! | Midnight S2 Testing | Liquid Hopeful",
+      "published": "2026-07-08",
+      "queuedAt": "2026-08-08"
+    },
+    {
+      "id": "NG6Jepgl3js",
+      "creator": "Zorthas",
+      "title": "First Look at The Venomous Abyss Raid",
+      "published": "2026-07-20",
+      "queuedAt": "2026-08-08"
+    },
+    {
+      "id": "RTBdqMQHJhA",
+      "creator": "Maximum",
+      "title": "First Impressions of The Venomous Abyss",
+      "published": "2026-07-07",
+      "queuedAt": "2026-08-08"
+    }
+  ],
   "skipped": [
     {
       "id": "02rLfzEKLq4",
@@ -1100,7 +1276,15 @@
     "N8qBIlJvU9A",
     "iTx9NX47SYA",
     "r6KUE8ifeFU",
-    "1woxmQBvJQ0"
+    "1woxmQBvJQ0",
+    "OADzTiw7Hf4",
+    "3nl0M31KtA0",
+    "lU5sWKQh1Vc",
+    "xjjNLRA1A-c",
+    "HwzKoYnJHqI",
+    "6KemlBr_YPM",
+    "R7P0Y-UvvRE",
+    "Q9jqR4bab0g"
   ],
   "seenNote": "Video ids already considered by an earlier run that carry no richer record — migrated 2026-08-08 from backticked ids in watch-creators/log.md when the seen-set stopped being derived from prose. Distilled videos are cited by their take's url, transcript-verified rejects live in skipped[], and queued ones in videos[]; this lane is only for the remainder. Append here when a run dismisses a video at DISCOVERY (pre-cycle date, already-processed) without fetching a transcript."
 }

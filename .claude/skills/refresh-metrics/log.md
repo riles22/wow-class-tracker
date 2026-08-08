@@ -645,3 +645,54 @@ numbers (95th pct DPS / popularity / M+ score — ungated, not in required-sourc
   line — the **stale gitignored `wcl-fetch/evidence.json` from 2026-08-03**, the same
   local-hygiene leftover as 08-06 (`.gitignore:11`); with it moved aside the gate exits **0**.
   Manifest deliberately NOT rewritten (partial run — local-run skill step 3).
+
+## 2026-08-08 — nightly CI (headless, Opus 5, single-shot; started 11:26Z)
+
+- **WCL: agent holds no credentials, fetched nothing from warcraftlogs.com.** Sole input
+  `wcl-fetch/evidence.json` (11:03:50Z), verdict **`rdps-broken`** — `characterRankings
+  (metric: rdps)` on encounter 3176 still 200-with-"Internal server error", 0 rankings,
+  while OAuth + GraphQL transport report ok (3600/h, 1 point). So the five rDPS/normalized
+  cuts (`wcl-live-raid`, `wcl-live-mplus`, `wcl-ptr-raid`, `wcl-ptr-mplus`,
+  `wcl-dummy-dome`) are `unreachable` and their data was **left untouched**; the three
+  deterministic RAW keys landed before the agent started and advanced to 2026-08-08:
+  dummy 102 rows (1T 2000 / 2T 549 / 3T 250 / 5T 2000 ranked players), zone-54 pooled 27,
+  zone-56 pooled 27. Corroboration for zone 54's emptiness: its raw cut reports **The
+  Coiled Altar and Ula'tek at 0 ranked players** — between testing windows.
+- **Archon numbers** — 160 rows from `specRankingsSection.table.data[]` (never `tierList`):
+  95th-pct DPS 33, 95th-pct HPS 7, M+ score 40, popularity 80. New cut (lastUpdated
+  08-07T12:00Z), all moves well inside `maxValueMovePct`.
+- **WoWMeta `partial`** — JSON API only (`manifest.json` + `rankings/midnight/mplus/all/0.json`,
+  plain curl, 161 KB). 40 rows via the dps|hps|tank **whitelist** (melee/ranged are subsets
+  of dps). `snapshotDate` still **2026-08-05**, byte-identical to yesterday's cut: 0 of 40
+  values and every `n` unchanged. **Two consecutive nights with no upstream pipeline run** —
+  `maxAgeDays` 8 not breached, but worth watching.
+- **Murlok** 40/40, plain GET (r.jina.ai does not work on it), split on
+  `class="vi-box meta-item ` — 27/7/6 items is the correct count. 27 values moved, all
+  DOWN by 1–13 rating (largest Feral 4235→4222).
+- **SimC — NEW nightly build**, HEAD `678e66d384` (was `fee98c101c`) at the same
+  12.0.7.68974 / hotfix 2026-08-06. 26/26 DPS specs. **Bound the parse strictly between
+  `DPS Ranking:` and `HPS Ranking:`** — a fixed-size window past the block also swallows
+  the HPS section (49 real profiles vs 60 lines in an 8 KB window); it happened to be
+  harmless here only because healer profiles can't match a DPS-role spec. 25 of 26 moves
+  are sub-1%; the exception is **Fury Warrior 114,165 → 109,256 (−4.3%)**, no reordering.
+- **Bloodmallet** 26/26, `simc_settings.tier == "MID1"` on every chart, **zero target
+  values moved** — chart timestamps are still 2026-07-08 02:5x (Elemental 07-15), i.e.
+  nothing re-simmed upstream; only our verification date advanced. Augmentation returns
+  `{status: "error"}` by design.
+- **Mythicstats** — fetch **`/period/latest`**, not the site root (the root's 9 KB markdown
+  has no representation section; the period page's 19 KB does). Period 1075 still, week
+  progressed: 3949 unique characters (was 4650) at 21.8 avg key (was 21.5). **39 of 40
+  parsed — Devastation Evoker has dropped out of the top-2000 cut entirely** and appears
+  nowhere on the page. Legitimate upstream absence: its stored row was left alone rather
+  than written as a fabricated 0.0. The coverage probe (25th-freshest of 40) is unaffected.
+- **Robydoby (best-effort, outside the contract)** — `htmlview` tab map fetched, 26 tabs,
+  newest **Mythic** week is still **24/7** (Sszorak + Twin Fangs), which is already
+  ingested at `asOf 2026-07-24`. One CSV re-fetched to confirm reachability (200, 776
+  lines). Nothing new upstream, so nothing merged.
+- **Registry snapshots** bumped to 2026-08-08 for murlok / bloodmallet / simulationcraft /
+  mythicstats / robydoby and WCL zones **52 and 56** (their raw series landed today).
+  **Zones 46/47 left at 2026-08-07 and zone 54 at 2026-07-28** — this agent observed
+  neither, and bumping a snapshot for a cut that did not refresh is the "a 200 is not
+  freshness" trap in reverse.
+- `npm test` **313 pass / 0 fail / 21 skipped** (Playwright UI invariants skip in this job);
+  `npm run build` OK (1272.8 KB); `node src/snapshot.mjs`; `check-refresh --manifest` **passes**.
