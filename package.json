@@ -15,6 +15,7 @@
     "test": "node --test",
     "prevalidate": "node src/apply-community-overrides.mjs",
     "validate": "node src/validate.mjs",
+    "audit:creators": "node src/audit-creators.mjs",
     "serve": "node src/serve.mjs"
   },
   "engines": {

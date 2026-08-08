@@ -11,6 +11,8 @@ on push to `master`; the file also still opens directly in a browser.
 - `npm test` — schema validation + unit tests + build smoke test
 - `npm run build` — data + template → `dist/index.html`
 - `npm run validate` — data checks only
+- `npm run audit:creators` — creator/expert-layer audit (scope, firewall, supersession,
+  discovery reachability). A REPORT, not a gate; `--strict` exits 1 on any HIGH finding.
 - `npm run serve` — preview `dist/` at http://localhost:8317 (serves both published
   pages: `/` → index.html, `/gearing.html` → the gearing explorer)
 - `node src/check-refresh.mjs --manifest|--age` — refresh integrity gates (nightly
@@ -548,6 +550,33 @@ docs/     working notes (finder-audit.md — HISTORY, the Spec Finder was remove
           step + staleness threshold, severity split dishonesty-red/lag-heartbeat.
           Closes the gap that let the 08-02 icyveins-ptr rebuild go unseen for two
           days while the manifest claimed success.)
+**Creator-layer invariants** (audit 2026-08-08, `npm run audit:creators`). The qualitative
+layer spans three surfaces — `classes[].creators`, `generalCreators[]`, and
+`takes[]`/`metaNotes[]` — with rules that lived only in prose until an audit found FOUR
+HIGH defects that all passed `npm run validate`:
+1. **A transcribable creator MUST carry a `channelId`.** Without one, RSS discovery skips
+   it every run while the flag advertises a video lane that is never polled. Azortharion
+   and Gamz sat that way for weeks; both turned out to be WRITTEN authorities (their takes
+   cite hackmd and Wowhead) and are now `transcribable: false`. Kyrasis' id was sitting
+   unparsed inside his own url.
+2. **The firewall runs BOTH directions.** A creator may hold specialist `takes[]` OR sit in
+   `generalCreators[]`, never both — otherwise `projectionFor` counts one voice twice, in
+   the expert lane (up to ±12 on a prior-only cell) and again as the ±3 meta nudge. Only
+   the metaNotes direction was enforced; validate.mjs now blocks both. Dratnos tripped it
+   the day it landed and stayed a Warrior specialist.
+3. **Supersede only across DIFFERENT dates.** Several live takes sharing one date are one
+   video yielding several discrete claims, which is allowed. Different-dated live takes for
+   one (creator, spec, lens) are a real defect — `expertRead` averages a creator's live
+   takes, so a stale one dilutes the current read.
+4. **An unscoped entry is not automatically wrong** — Kalamazi genuinely covers all three
+   Warlock specs, confirmed by four Maximum panels. The defect is an entry implying breadth
+   the content does not show; the audit reports those as phantom authority rather than
+   narrowing anything by itself.
+**Twitch VODs cannot feed the take pipeline** (tested 2026-08-08): enumeration works with
+no auth (`yt-dlp --flat-playlist twitch.tv/<user>/videos`, titles are informative), but
+Twitch serves NO captions — `--list-subs` returns "has no subtitles". The distiller runs on
+captions, so Twitch is a manual LEADS signal at best, never an automated take source.
+
 gearing/  the Season 2 gear & loot explorer — a SELF-CONTAINED subproject (own data/,
           harvesters, validator, tests, build → gearing/wow-s2-gearing.html; see
           gearing/README.md). Imported 2026-08-04 from the standalone project; audited

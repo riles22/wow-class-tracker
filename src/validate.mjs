@@ -407,6 +407,18 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
   // labeled lane. A specialist take belongs in takes[] (class-scoped creator); a broad
   // "this spec looks good/bad for the season" read belongs here.
   const generalCreatorNames = new Set((community?.generalCreators ?? []).map(g => g.name));
+  /* The firewall was only enforced in ONE direction (metaNotes must come FROM a general
+     creator); nothing stopped a general creator from also holding specialist takes[].
+     Found 2026-08-08 by a creator audit, after Dratnos was added to generalCreators while
+     his Warrior takes stayed live — and `npm run validate` passed. That state double-counts
+     one voice: once in the expert lane (up to ±12 on a prior-only cell) and again as the
+     ±3 meta nudge. CLAUDE.md states the separation is "by construction"; this is the
+     construction. Dual membership is now red in both directions. */
+  for (const take of creatorTakes?.takes ?? []) {
+    if (take.creator && generalCreatorNames.has(take.creator)) {
+      errors.push(`creator-takes.json: take for ${take.spec} ${take.class} is attributed to "${take.creator}", who is a generalCreators entry — a creator may hold specialist takes[] OR cross-class metaNotes[], never both, or the projection counts one voice twice`);
+    }
+  }
   const META_SENTIMENTS = new Set(["positive", "negative", "neutral", "mixed"]);
   for (const note of creatorTakes?.metaNotes ?? []) {
     if (!specKeys.has(`${note.class}|${note.spec}`)) errors.push(`creator-takes.json: metaNote references unknown spec ${note.class} / ${note.spec}`);

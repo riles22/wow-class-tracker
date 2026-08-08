@@ -61,7 +61,9 @@
           ],
           "url": "https://www.youtube.com/channel/UCyIuz1C5jul5q7aAHvEIwJQ",
           "credential": "Blood DK theorycrafter since Legion (Death's Advance); Advanced Blood DK Guide author, high-M+ player",
-          "verifiedDate": "2026-07-31"
+          "verifiedDate": "2026-07-31",
+          "channelId": "UCyIuz1C5jul5q7aAHvEIwJQ",
+          "channelNote": "2026-08-08: channelId extracted from his own url and verified live (newest upload 2025-06-30, so expect low yield)."
         },
         {
           "name": "Sam",
@@ -261,7 +263,9 @@
           "specs": [
             "Balance"
           ],
-          "scopeNote": "Scoped 2026-08-07: credential is Wowhead + Method BALANCE Druid guide writer; all live takes Balance"
+          "scopeNote": "Scoped 2026-08-07: credential is Wowhead + Method BALANCE Druid guide writer; all live takes Balance",
+          "transcribable": false,
+          "flagNote": "2026-08-08: set transcribable:false — all live takes cite his Wowhead Balance guide — a written guide author. Previously transcribable with no channelId, so RSS discovery silently skipped him every run while the flag implied a video lane existed."
         },
         {
           "name": "Borabank",
@@ -558,7 +562,9 @@
           "credential": "Icy Veins Hunter writer",
           "url": "https://hackmd.io/@Azortharion/HunterPatch121-1",
           "latest": "Patch 12.1 / Initial Changes Breakdown (HackMD)",
-          "verifiedDate": "2026-07-01"
+          "verifiedDate": "2026-07-01",
+          "transcribable": false,
+          "flagNote": "2026-08-08: set transcribable:false — all live takes cite hackmd.io (Trueshot Lodge) — a written theorycrafter, not a video creator. Previously transcribable with no channelId, so RSS discovery silently skipped him every run while the flag implied a video lane existed."
         },
         {
           "name": "Dalaran Gaming",
@@ -1440,7 +1446,8 @@
           ],
           "channelId": "UCI-FRT31iq5_xoFG6ngNcpw",
           "latest": "All Mages get 2x Barrier! Blood DK Tier Reworked! Patch 12.1 PTR Update (2026-07-01)",
-          "verifiedDate": "2026-07-01"
+          "verifiedDate": "2026-07-01",
+          "laneNote": "2026-08-08: also does cross-class M+ analysis (Maximum's 11.2 panel lists him on Tanks), but he stays a SPECIALIST here — he holds live Warrior takes, and takes[] + generalCreators together would double-count him. Enforced by validate.mjs."
         },
         {
           "name": "Supatease",
@@ -1514,15 +1521,6 @@
       "channelId": "UCcex_X_PE_64DZNkx7toPiQ",
       "latest": "'AI Slop Tier Lists are getting out of hand' (2026-07-30) — cross-class meta commentary, not per-spec theorycraft",
       "verifiedDate": "2026-08-08"
-    },
-    {
-      "name": "Dratnos",
-      "credential": "WoW Mythic+ analyst and caster; cross-class 12.1 PTR class-change coverage",
-      "url": "https://www.youtube.com/@dratnos",
-      "channelId": "UCI-FRT31iq5_xoFG6ngNcpw",
-      "latest": "All Mages get 2x Barrier! Blood DK Tier Reworked! Patch 12.1 PTR Update (2026-07-01)",
-      "verifiedDate": "2026-08-08",
-      "note": "Also retained as a Warrior creator scoped to Arms/Fury. The lanes are different surfaces: per-spec takes[] there, cross-class metaNotes[] here. Maximum's 11.2 panel lists him on Tanks alongside Dorki, and his own videos range across every class."
     }
   ]
 }
