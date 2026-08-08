@@ -1836,7 +1836,7 @@
       "patchContext": "12.1 PTR (2026-07-21 build)",
       "claim": "In his Season 2 Devourer sims, VooDoo finds the Void's Guard melee build about 14% ahead of Annihilator in pure single target (Annihilator was heavily nerfed and the new tier set favors Void's Guard), so the melee Void's Guard build is the one to play this tier while the Collapsing Star half of the spec sits idle. He describes Devourer as effectively two specs stapled together and is genuinely optimistic and excited about it for next season.",
       "url": "https://youtu.be/1-5RVwgA6KM?t=60",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Warlock",
@@ -3621,6 +3621,42 @@
       "url": "https://youtu.be/rX3X-I_4lCA?t=1017",
       "claim": "On the Mythic+ side he is blunt: his own Voidweaver testing in keys feels awful right now — a moderate level of healing all the time, with no way to push health bars up quickly the way a rift-up Voidweaver could last expansion. Clandon supplies the structural reason: because Atonement output is effectively always maxed, Disc has no lever left to pull, so the season starts fine through the low keys and then hits the level where gear stops keeping up with key scaling and Atonement is simply no longer enough — with Shadow Mend significantly weaker than the previous proc version (more consistent, but no longer the emergency punch), Void Shield's power shifted out of raw absorb into Atonement application, and nothing beyond Shadow Mend spam and a couple of Pain Suppression charges to fall back on. Clandon's proposed fix is a hybrid rather than scrapping the scaling: soften the curve and restore a reduced version of the retired out-of-raid Atonement bonus — he floats 30-40%, where it was 100% historically and then 75% before being cut — so keys can be tuned without breaking raid. Jak endorses the shape of it, saying a single front-end number would make a huge difference for Disc in keys.",
       "superseded": false
+    },
+    {
+      "class": "Monk",
+      "spec": "Brewmaster",
+      "creator": "Sha",
+      "date": "2026-08-06",
+      "sentiment": "nerf",
+      "bracket": "mplus",
+      "patchContext": "12.1 PTR — review of the official 12.1 patch notes; Season 2 Mythic+ outlook",
+      "url": "https://youtu.be/LuD55m-cypE?t=1113",
+      "claim": "Reviewing the official 12.1 notes as the final word barring minor tuning, he reads Brewmaster as ending the PTR cycle in a rough spot. His central objection is Celestial Brew/Celestial Infusion: absorb up 50% but cooldown up 100%, a change datamined weeks earlier and never given a dev note. He reads the intent as making Infusion a real tank-buster answer (a fair goal, since he felt Brewmaster was at its weakest in raid all of Season 1 after losing Zen Meditation, Diffuse Magic and its larger absorbs), but the cost is the Apex 'Bring Me Another' feedback loop: Infusion had become the rotational catalyst, and halving its frequency leaves a resource deficit gated on a 20% Purifying Brew proc, so unlucky streaks leave you with no brews, no energy and nothing to press for several seconds. He says it pushes you toward Black Ox Brew and Master of Harmony as a resource safety net and leaves Shadowpan clunky. On the tier set he is blunter: measured over a four-minute Altar of the Storm test the four-piece is 10% of his damage and the two-piece 1%, and the four-piece damage requires mobs to stand in a small ground patch — unrealistic in keys with kiting and gathering, unlike every other tank set which keys off abilities. If Brewmaster is tuned around a sim assuming full uptime on that patch, he expects it to underperform. He also flags that Vivify was left to scale poorly against the +25% max-level health, at roughly 2% of his own health bar, removing the tank's ability to help keep a group member alive. Bottom line for players asking whether to main it: defensively it is fine (he had no trouble on PTR 18s and 19s), but it will not do much damage and does not bring much, so anyone on the fence should swap back to another tank; Brewmaster stays viable specifically as the physical-composition filler alongside the likes of Arms, Outlaw, Feral and Resto Shaman.",
+      "superseded": false
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "creator": "VooDooSaurus",
+      "date": "2026-08-07",
+      "sentiment": "mixed",
+      "bracket": "both",
+      "patchContext": "12.1 PTR — Devourer and Havoc sim pass after a haste/GCD double-apply bug was found and corrected in the sims",
+      "url": "https://youtu.be/JBpc1cPXWWg?t=164",
+      "claim": "He reports what he calls the strangest find of his theorycrafting career: since Devourer's alpha release, haste has been double-applying to the GCD of Reap, Cull, Consume and Devour in game, so those GCDs reached the 0.75s floor at 50% haste rather than 100%. The sims never modelled it, which is why sim output had persistently undershot in-game results. With the behaviour now reproduced, Void Scourge sims around 275k single target and he says plainly that Devour is broken and insanely busted — Void Scourge stays the raid build with roughly a 20k single-target gap over Annihilator, and even Void Scourge's dungeon/cleave build out-single-targets Annihilator's pure single-target build. The read is explicitly provisional in both directions: he has reported the bug and says it either gets fixed, in which case the older sims were right, or Blizzard aura-nerfs the spec, which is what he hopes for; his stated fear is an aura nerf applied without the bug fix being compensated. He also notes Annihilator gained more from the correction than Void Scourge (about 7% across scenarios) because Metamorphosis uptime yields more Collapsing Stars, so a bug fix would hit Annihilator hardest — while Collapsing Star itself is weak enough that building around extra stars is no longer worth it.",
+      "superseded": false
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Havoc",
+      "creator": "VooDooSaurus",
+      "date": "2026-08-07",
+      "sentiment": "buff",
+      "bracket": "both",
+      "patchContext": "12.1 PTR — Havoc sim pass ahead of Season 2 (sims run with Shadarek, Azortharion and Sailor)",
+      "url": "https://youtu.be/JBpc1cPXWWg?t=576",
+      "claim": "Alongside the Devourer numbers he puts Havoc in a strong spot for 12.1. Aldrachi is the raid build and now posts what he calls a genuinely good single-target number — he is careful to say it reads well on its own terms even next to Devourer's inflated figures — and the same build carries into AoE. The Felscarred single-target build he dismisses as an atrocity you will rarely play: it gives up the Blade Dance shield, a meaningful Apex defensive, and lacks cleave. Havoc's defining strength in his read is funnel: roughly 11% of its damage on single target and 14-15% once you scale to five and eight targets comes from funnel, and he expects priority and funnel damage to be valuable in this season's dungeons. The honest limit he states is raw AoE, where Havoc is clearly behind Devourer (about 700k at eight targets against Devourer's 700k at five), so the case for Havoc rests on priority damage and funnel rather than pack throughput.",
+      "superseded": false
     }
   ],
   "metaNotes": [
@@ -4656,7 +4692,7 @@
       "note": "Restoration Druid is the one healer izen flags across BOTH raid and Mythic+. He says it was never near the top of any raid test dating back to 2026-07-16, sitting middling-to-poor, and takes the Abundance nerf as the main cause — from 96% down to 50%, recently raised to 60%, still far short of the original. He rates its tier set genuinely powerful but mostly in raid, where the extra one-minute timing pairs with Convoke; in keys that timing matters much less. It is his top healer candidate for buffs before launch.",
       "patchContext": "Season 2 PTR — raid testing outlook",
       "url": "https://youtu.be/m81w4xTnRrs?t=465",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Priest",
@@ -5184,7 +5220,7 @@
       "note": "He extends the Mistweaver problem to raid: the other build — the Renewing Mist caster build — is also much poorer there, both from the accumulated nerfs and because the Season 2 tier set only buffs Rising Sun Kick and drops what the Season 1 set gives, namely three bonus Renewing Mist casts per minute and a 20% Renewing Mist healing buff. He sums it up as Mistweaver being currently poor in both the raid and Mythic+.",
       "patchContext": "Season 2 PTR — raid testing outlook",
       "url": "https://youtu.be/g0adl6lXPQM?t=554",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Paladin",
@@ -5349,6 +5385,28 @@
       "note": "In the same on-the-bubble melee group; earlier he notes Unholy is a spec you might squeeze into the melee comp but that it benefits less than others from the physical/melee buff package.",
       "patchContext": "Season 2 PTR — M+ outlook",
       "url": "https://youtu.be/g0adl6lXPQM?t=966",
+      "superseded": false
+    },
+    {
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-07",
+      "sentiment": "negative",
+      "note": "Reviewing the community 'Dummy Dome' healer test that a group of theorycrafters and streamers ran on the PTR raid healing dummy, he confirms Mistweaver as the genuine bottom of the six. He lists the accumulated causes: mastery buffed over several weeks and then reverted, a 3% aura nerf followed by a 7% aura nerf, and a Season 1 tier set worth about 15% healing being replaced by a Season 2 set worth six or seven. He does supply an asterisk — the Monk in the test showed up in markedly worse shape than the others (about 329 item level, no gems, missing enchants, gladiator gear with 700 versatility), which he estimates cost 10-15% healing — but he is explicit that correcting for it would not move the needle enough: Mistweaver was still doing badly enough that it needs buffs to be remotely competitive.",
+      "patchContext": "Season 2 PTR — raid testing outlook (community Dummy Dome healer test)",
+      "url": "https://youtu.be/_joFJoQl8Ec?t=873",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Restoration",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-07",
+      "sentiment": "mixed",
+      "note": "He walks back the alarm about Restoration Druid from the same community Dummy Dome healer test, where it and Mistweaver trailed the other four by dozens of percentage points. Unlike the Monk case he argues the Druid result is largely an artefact of how it was played and geared: the tested Druid started around 325 item level and deliberately ran little or no tier set out of a conviction that the new set was bad, even crafting 292-318 blue pieces; more importantly it skipped Rampant Growth, which doubles Regrowth's heal-over-time and is worth roughly 50% more value per Regrowth cast, and it played the Season 1 pattern of heavy Rejuvenation instead of the Season 2 pattern of spreading Regrowth wide (about 10 Regrowth casts per minute where he says you want 25+, and far too few casts per minute overall for a stationary dummy fight). His conclusion is a correction rather than an endorsement: Resto Druid is nowhere near as weak as the test made it look and the panic was a knee-jerk reaction, though he allows it might still need some buff.",
+      "patchContext": "Season 2 PTR — raid testing outlook (community Dummy Dome healer test)",
+      "url": "https://youtu.be/_joFJoQl8Ec?t=811",
       "superseded": false
     }
   ]

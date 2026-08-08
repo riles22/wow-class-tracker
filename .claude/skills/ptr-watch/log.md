@@ -580,3 +580,50 @@ catch-up path.
 - **NO SEASON FLIP.** 12.1 ships 08-11 US / 08-12 EU and every live tier-list page still
   era-verifies as 12.0.7 / Season 1. → **OWNER: the one-shot `SNAPSHOT_PHASE` flip is still
   pending; `PHASE_FLIP_DUE` is Aug 20 and the Phase-1 S2 machinery is due before it.**
+
+## 2026-08-08 (LOCAL run, Opus 5 — scheduled residential catch-up, ~03:3xZ / 20:3x PDT 08-07)
+
+- **Both discovery channels swept live; NO new builds, and the feed stays at 15 entries.**
+  This run fired ~12.5h after the 08-07 local catch-up and ~16h after the nightly, so the
+  sweep was done fresh rather than trusting either — the window between them is exactly where
+  a launch-week build could land unseen (12.1 ships 08-11 US / 08-12 EU, four days out).
+- **A new PTR build WAS deployed in that window and it carries no class tuning.** Wowhead
+  news 382381 (2026-08-08T00:34Z) — "Jimothy Added in Latest Patch 12.1 PTR Build" — confirms a
+  build went up, but the article is a datamined cosmetic NPC model (a raccoon) and nothing else.
+  Logged here so the next run does not re-investigate it as a missing tuning post.
+- **Official forum thread 2317811: unchanged, newest post still #19 (2026-07-31).** Full
+  Discourse `.json` pulled by curl (406 KB, 17 posts); no new Linxy reply.
+- **Blue-tracker lane swept a different way, and the new way is worth keeping.** Wowhead's
+  `/blue-tracker` index is **Cloudflare 403 to plain curl** (919-byte challenge, both the bare
+  index and `?bt-forum=wow-us`) — the same wall the skill records for `wowhead.com/guide/*`.
+  The canonical substitute is the Blizzard forums' own Discourse group feed:
+  `us.forums.blizzard.com/en/wow/groups/blizzard-tracker/posts.json?limit=40` — HTTP 200 on
+  plain curl, 20 posts with `created_at`, `username`, `topic_title`, `topic_id`, `post_number`.
+  That is a direct read of the same source Wowhead mirrors, so it closes the 3b lane without
+  depending on Wowhead rendering. **Use this first next time.**
+- **Two Blizzard posts in the window, both out of per-spec scope, neither logged:**
+  · SpeedyRogue, topic 2330956 #8 (08-07 21:32Z) — "More Season 2 Mythic+ Dungeon Tuning",
+    large Ruby Life Pools / Temple of Sethraliss / Altar of Fangs / Den of Nalorakk / Blinding
+    Vale encounter changes. **Dungeon tuning, zero per-spec class lines.** It is also not a
+    reply in the tracked dev-notes thread, so `forumUrl` could not cite it; build #19's
+    precedent (a no-class-tuning entry) does not extend here because that one WAS a thread post.
+    An entry would carry 0 specs and reach no drawer.
+  · Kaivax, housing blueprint bug; BlizzardEntertainment WoW Weekly / Twitch drop / Discord
+    linking — all systems and promo.
+- **Also seen and deliberately not treated as tuning data:** Wowhead's two 08-07 Blizzard
+  interview write-ups, one titled "Class Tuning, Myth 9/6". Dev commentary in an interview is
+  not a tuning note and has no verbatim spec lines; it never enters the feed or the tally.
+- **WCL zones NOT re-probed this run, and that is the honest call.** All four were probed from
+  this same residential IP 12.5h earlier (zone 54 empty 9.1 KB shell, zone 52 and 56 ingested,
+  zone 57 still the 114-byte "no statistics collected" body) and every stored row already
+  carries `asOf 2026-08-07` — the current local calendar date, so a re-fetch could not advance
+  a single date and would only churn 127 rows with sub-percent drift. Nothing is stale: the
+  live cuts are 1 day against `maxAgeDays` 10, and zone 54 stays visibly frozen at 2026-07-28
+  (11 days, `maxAgeDays` 40) as intended.
+- **9 specs still `ptr: null`, unchanged.** Three of this run's five transcripts were per-spec
+  12.1 analysis, but none of it was promoted into a writeup — CLAUDE.md is explicit that creator
+  takes feed the writeup gap only as an aggregate through `expertRead()`. Sha's Brewmaster video
+  is the tempting case and was left alone for exactly that reason.
+- **NO SEASON FLIP.** → **OWNER: the one-shot `SNAPSHOT_PHASE` flip is still pending;
+  `PHASE_FLIP_DUE` is Aug 20, launch is Aug 11, and the Phase-1 S2 machinery is due before it.**
+  `check-refresh --age` passes today (`fingerprint=clean`), so the gate is not yet nagging.

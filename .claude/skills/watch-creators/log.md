@@ -916,3 +916,76 @@ nothing on 12.1 and his newest upload is 2026-05-23 — so six tank specs gained
 may produce zero takes this cycle. Still at one video creator: Devastation Evoker, Shadow
 Priest, Subtlety Rogue, Demonology and Destruction Warlock — Maximum's panels do not cover
 those, so they need a different discovery route.
+
+## 2026-08-08 (LOCAL run, Opus 5 — scheduled residential catch-up, ~03:3xZ / 20:3x PDT 08-07)
+
+- **Scope: creator lane only.** This run fired ~12.5h after the 08-07 local catch-up (15:0xZ)
+  and ~16h after the 11:31Z nightly, so nothing in the tier/metric layer had aged: every WCL
+  cut, tier list and metric series was already stamped 2026-08-07, i.e. the local calendar
+  day. Nothing was re-fetched or regenerated — see the ptr-watch log for the same reasoning.
+- **74 pollable channels swept** (all `transcribable` creators with a `channelId`, spec lane +
+  generalCreators, deduped by channel). Zero feed errors, no 404 burst. Queue was **0 before
+  and 0 after** — nothing was waiting; every video below was fetched locally with yt-dlp
+  (pinned 2026.07.04, not upgraded).
+- **47 videos published since the last run's window; 5 transcribed, 3 distilled, 2
+  verified-skipped.** The other 42 were title-filtered: dungeon/boss guides (Tactyks, Sha,
+  J-Funk), key-run and stream VODs (Bansherz, Supatease, Shindigg, YoDaTV, Critcake), PvP duel
+  series (Dalaran Gaming), UI/addon and gearing content, and Tettles' encounter-designer
+  interview.
+- **Takes added (3):**
+  · **Sha → Brewmaster, `nerf`, bracket `mplus`** (`LuD55m-cypE`, 2026-08-06). His review of the
+    official 12.1 notes as the final word. Celestial Brew/Infusion absorb +50% / cooldown +100%
+    breaks the Apex "Bring Me Another" loop; the tier set measures 10% (4pc) vs 1% (2pc) of his
+    damage over a 4-minute test and its 4pc damage needs mobs standing in a small ground patch
+    that keys do not provide; Vivify left at ~2% of his health bar after the +25% health change.
+    Verdict: defensively fine on PTR 18s/19s, but low damage and brings little — swap tanks if
+    on the fence; viable specifically as physical-comp filler.
+    **This is the FIRST non-YoDaTV Brewmaster voice** — the spec went 1 → 2 creators.
+  · **VooDooSaurus → Devourer, `mixed`, bracket `both`** (`JBpc1cPXWWg`, 2026-08-07). The
+    haste/GCD double-apply bug present since Devourer's alpha is now modelled in the sims:
+    Void Scourge ~275k single target, "insanely busted", still a Void Scourge raid season.
+    `mixed` is deliberate and is the whole point of the take — he has REPORTED the bug and
+    expects it fixed or aura-nerfed, so a `buff` would forecast strength his own source says
+    is likely to be removed. Corroborates Shadarek's 08-05 take on the same bug (kept live,
+    different creator).
+  · **VooDooSaurus → Havoc, `buff`, bracket `both`** (same video, t=576). Aldrachi is the raid
+    build with a genuinely good single-target number; funnel is the niche (11% single target,
+    14-15% at 5-8 targets) and should suit this season's dungeons; raw AoE clearly behind
+    Devourer. Second Havoc creator alongside Shadarek.
+- **metaNotes added (2), both izen, both raid-lens** (`_joFJoQl8Ec`, 2026-08-07) — his review of
+  the community "Dummy Dome" raid-healing dummy test:
+  · **Mistweaver `negative`** — genuinely bottom; mastery buffed then reverted, 3% then 7% aura
+    nerfs, S1 set worth ~15% healing replaced by an S2 set worth 6-7. He supplies the asterisk
+    that the tested Monk was ~329 ilvl with no gems and missing enchants (worth 10-15%) and is
+    explicit it would not close the gap.
+  · **Restoration Druid `mixed`** — an explicit walk-back, and the reason it is `mixed` not
+    `negative`: the Druid result was largely artefact (325 ilvl start, deliberately no tier set
+    from a conviction the set was bad, Rampant Growth skipped — worth ~50% more per Regrowth —
+    and a Season 1 Rejuvenation-heavy rotation at ~10 Regrowth CPM where he wants 25+). "Nowhere
+    near as weak as this is being pointed out", though it may still need some buff.
+  This **flips his stored Resto Druid raid read from `negative` (07-26) to `mixed`.**
+- **Verified-skipped (2), both durable in `skipped[]`:** Kalamazi's Affliction guide
+  (`smX1F93s8hI`) and leak's Survival guide (`EJq1vFBp1WE`). Both are full how-to guides —
+  talents, rotations, stat weights, hero-tree choice — with no read on where the spec lands
+  against others. **Deliberately NOT logged as `neutral` takes:** `expertRead` abstains on
+  neutral but still counts the creator in the panel denominator, so a neutral take would
+  assert a directional view they never expressed AND dilute the specs' real reads. leak's
+  numbers (S2 set ~11% ST / ~19% AoE, Sentinel 2-3% ahead) are within-spec build choices;
+  reading "new set beats old set" as a spec buff would fire for every spec with a guide video.
+- **Supersede pass:** 3 retired, all same creator + same spec + same lens — VooDooSaurus'
+  2026-07-21 Devourer take, izen's 2026-08-06 Mistweaver **raid** note (his 08-06 **M+** note
+  stays live — different lens, complementary), and izen's 2026-07-26 Resto Druid raid note.
+- **Scope discipline held in two places worth recording:** Sha talks warmly about BDK and Prot
+  Warrior looking strong next season, but his entry is scoped `["Brewmaster"]`, so neither was
+  attributed. VooDooSaurus names Shadarek, Azortharion and Sailor as sim collaborators — credit,
+  not authorship, so no takes were attributed to them.
+- **Forecast impact measured before pushing: 0 letters moved anywhere.** Three score shifts
+  only — Havoc raid 69→71 and M+ 65→66 (Shadarek+VooDoo now 2 unanimous creators, so shrinkage
+  eases), Brewmaster M+ 37→36 (YoDaTV neutral + Sha nerf). Devourer did not move at all, which
+  is `mixed` abstaining exactly as designed.
+- ⚠ **The two metaNotes are display-only and cannot move a number — by design, not by
+  accident.** The meta nudge is v6-gated on **≥2 creators, unanimous**, and every one of the
+  159 metaNotes on file is izen's, so the nudge has never fired and did not fire here. Zorthas,
+  Maximum and Dratnos are registered generalCreators but have produced no metaNotes yet; the
+  lane stays inert until one of them publishes per-spec season reads. Worth knowing before
+  anyone reads a healer note and expects the forecast to answer it.
