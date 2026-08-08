@@ -580,6 +580,35 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
       }
     }
 
+    /* seen[] closes the OTHER half of the same problem (2026-08-08). skipped[] made
+       "transcript read, nothing to distil" durable, but DISCOVERY still re-derived its
+       seen-set by regex over log.md prose — which matched any 11-char token and had
+       accumulated 231 ordinary English words ("residential", "substantial",
+       "speculative") among 950 entries, making the set impossible to reconcile against
+       anything. seen[] is the structured remainder: ids considered by an earlier run that
+       carry no richer record. A distilled video is cited by its take's url, a verified
+       reject lives in skipped[], a waiting one in videos[] — everything else belongs here,
+       and the seen-set is now the union of those four with no prose involved. */
+    const seenLane = pendingTranscripts.seen;
+    if (seenLane != null) {
+      if (!Array.isArray(seenLane)) {
+        errors.push("pending-transcripts.json: seen must be an array of video ids");
+      } else {
+        const dupe = new Set();
+        const queuedIds = new Set(Array.isArray(vids) ? vids.map(v => v?.id) : []);
+        for (const id of seenLane) {
+          if (typeof id !== "string" || !/^[A-Za-z0-9_-]{11}$/.test(id)) {
+            errors.push(`pending-transcripts.json: seen entry ${JSON.stringify(id)} is not an 11-char YouTube id`);
+            continue;
+          }
+          if (dupe.has(id)) errors.push(`pending-transcripts.json: seen id "${id}" listed twice`);
+          dupe.add(id);
+          // A queued video is NOT done; listing it as seen would strand it in the queue.
+          if (queuedIds.has(id)) errors.push(`pending-transcripts.json: "${id}" is both queued in videos[] and marked seen[]`);
+        }
+      }
+    }
+
     // skipped[] is the durable record of videos whose transcript WAS read and which were
     // deliberately not distilled. Before it existed, "verified-skipped" lived only in
     // log.md prose, so every run re-derived its seen-set by regex and any miss re-queued

@@ -1,342 +1,551 @@
 {
- "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
- "videos": [],
- "skipped": [
-  {
-   "id": "02rLfzEKLq4",
-   "creator": "Supatease",
-   "title": "Affliction Lock 12.1 Damage Test",
-   "reason": "Transcript verified in full 2026-08-06 (nightly CI): a 20-second dummy clip, 7 caption chunks end to end. He narrates one Affliction opener (dots, Haunt, Malevolence, Dark Glare, Soul Harvest) and closes with \"that does not come close to taking him down, but it is what it is\" — no number, no comparison, no tuning or outlook read. Nothing for takes[]; writing a sentiment from \"it is what it is\" would be inventing the read. Affliction is one of the 9 uncovered specs, which is exactly when the temptation to over-read a clip is highest.",
-   "verifiedAt": "2026-08-06"
-  },
-  {
-   "id": "089Gp0xV7Iw",
-   "creator": "Supatease",
-   "title": "Elemental Shaman UNREAL",
-   "reason": "Transcript verified in full 2026-08-06 (nightly CI): ONE caption chunk, \"Boom. Shaga laga baby.\" A hashtag clip short whose media:description copies the title — the documented Supatease short shape. 0 takes, 0 metaNotes.",
-   "verifiedAt": "2026-08-06"
-  },
-  {
-   "id": "aOSWljAYUnw",
-   "creator": "Supatease",
-   "title": "Elemental Shaman GODLIKE",
-   "reason": "Transcript verified in full 2026-08-06 (nightly CI): 5 caption chunks of loading-in reaction (\"time to load up\", \"this guy is going to get zapped\", \"what is this? 2500\") — a burst-crit clip short, no spec strength, tuning or outlook read. Same shape as its sibling 089Gp0xV7Iw. 0 takes, 0 metaNotes.",
-   "verifiedAt": "2026-08-06"
-  },
-  {
-   "id": "DnYoCpImTZw",
-   "creator": "Kalamazi",
-   "title": "BIG Warlock Buffs Announced For 12.1! Is It Enough?",
-   "reason": "Edited re-cut of the same 2026-08-01 session already distilled from the 4h stream Hn9upmp8ywc: identical 07-31-build walkthrough and identical dummy tests (Destruction ~156k, Demonology ~146k, Affliction ~144k single target), the same Haunt-instead-of-Unstable-Affliction complaint and the same 'Destro ahead by ~10k' conclusion. His three live 08-01 Warlock takes already carry those numbers, so distilling it again would only duplicate them; his closing per-boss guesses are explicitly provisional and he defers the ranking to a later tier-list video. Transcript verified in full 2026-08-02 (nightly CI).",
-   "verifiedAt": "2026-08-02"
-  },
-  {
-   "id": "YOnGHSUZ4A0",
-   "creator": "Kalamazi",
-   "title": "Do These 5 Things NOW To Prep For Patch 12.1!",
-   "reason": "A pre-patch character-prep PSA end to end — finish the Omnium Folio, farm Sporfall 298s to pre-fill slots before Mythic-zero week, craft embellished and socketed Season 1 bracers/belt/cloak while the crests still exist, spend expiring currencies, level the Valera delve companion. Its only spec mention is listing which slots the Warlock set leaves open, a loot-targeting example the skill says not to inflate into a take. 0 takes, 0 metaNotes. Same shape as izen Kwugqa7HFao. Transcript verified in full 2026-07-31 (local run).",
-   "verifiedAt": "2026-07-31"
-  },
-  {
-   "id": "hvxrLgUQk1w",
-   "creator": "Supatease",
-   "title": "12.1 Class Tuning BIG BUFFS Incoming",
-   "reason": "A straight read-through of the 2026-07-31 PTR notes across every class, with brief PvP-lens asides — the class-tuning-roundup shape the skill explicitly says not to stretch into per-spec takes. His own class lane is Shaman and the Elemental Farseer lines get one sentence of narration with no analysis. He is not a generalCreators entry, so the metaNotes lane is closed to him by validation. 0 takes, 0 metaNotes. Transcript verified in full 2026-07-31 (local run). NOTE FOR A HUMAN: this cross-class PTR-news format is generalCreators-lane behaviour — worth considering whether he belongs there, but registry scope is not an agent's call.",
-   "verifiedAt": "2026-07-31"
-  },
-  {
-   "id": "Z8Jygl_NpF4",
-   "creator": "Shadarek",
-   "title": "TIERLIST | WoW: Midnight Season 2 (Important)",
-   "reason": "Comedy video, not analysis — specs are ranked by whether they are Demon Hunters, Rogues are \"always down at D tier\", and Augmentation goes in a \"fake humans\" tier. No genuine spec-strength read. Transcript verified in full twice (2026-07-30 nightly and 2026-07-30 local); it kept returning to the queue because verified-skipped had no durable record.",
-   "verifiedAt": "2026-07-30"
-  },
-  {
-   "id": "Kwugqa7HFao",
-   "creator": "izen (Izenhart)",
-   "title": "Season 2's BIGGEST Gearing Changes & Tips For Season 2",
-   "reason": "A gearing / bonus-roll / great-vault PSA end to end (heroic bonus rolls to mythic track, 1:1 vault conversion, crest surplus, stockpiling tokens). Its only spec mentions are loot-targeting examples, which the skill explicitly says not to inflate into meta notes. 0 metaNotes, no build or tuning lead. Transcript verified in full twice (2026-07-30).",
-   "verifiedAt": "2026-07-30"
-  },
-  {
-   "id": "aqe2LKeMIqQ",
-   "creator": "Tettles",
-   "title": "Stream VOD",
-   "reason": "Livestream VOD whose only spec reads are one-line replies to chat — no sustained analysis to distil. Transcript verified 2026-07-30 (local run).",
-   "verifiedAt": "2026-07-30"
-  },
-  {
-   "id": "IJPVqbfI1w4",
-   "creator": "AutomaticJak",
-   "title": "Top 2 Healer Trinkets in Season 2?",
-   "reason": "A 41-second Short about two Season 2 healer trinkets (Soul Coiler Ritual Vessel off the Venomous Abyss opener, Wavecaller Seashell off Tidebound Grotto flex) and where they drop. Pure loot-targeting with no spec-strength read — the same shape the skill says not to inflate into a take, and trinkets are not part of the data model. 0 takes. Transcript verified in full 2026-08-03 (local run).",
-   "verifiedAt": "2026-08-03"
-  },
-  {
-   "id": "tfIcqmIi2o8",
-   "creator": "Kalamazi",
-   "title": "Short Lil PTR/Retail Slam",
-   "reason": "A 4h17m livestream VOD of key runs and chat banter. Its spec content is one-line replies during pulls (Haunt buff grumbling, Arcane dodging a nerf, 'all three locks are close in M+ but none are meta') and it duplicates the reads in his structured same-day video ReWs_ZnYtO8, which was distilled instead. Matches the Tettles aqe2LKeMIqQ livestream precedent. 0 takes. Transcript verified in full 2026-08-03 (local run).",
-   "verifiedAt": "2026-08-03"
-  },
-  {
-   "id": "e7V3tCBr6as",
-   "creator": "Shadarek",
-   "title": "Havoc & Devourer DH | Season 2 Bonus Roll Information",
-   "reason": "Transcript verified: a Season 2 bonus-roll / loot-strategy PSA (which bosses to reroll, vault vs bonus-roll math, which items Havoc and Devourer want). It carries item-level and stat-weight detail but no spec strength, tuning or outlook read, so there is nothing for takes[] — same shape as the already-skipped izen gearing PSA Kwugqa7HFao.",
-   "verifiedAt": "2026-08-05"
-  },
-  {
-   "id": "_5fnAi89SGw",
-   "creator": "LBNinja7",
-   "title": "Season 1 Will NOT Be Missed (By me, Here's Why...)",
-   "reason": "Transcript verified in full: a Midnight Season 1 systems retrospective, not spec analysis. Its topics are the four-raid-instance structure diluting raid night, repair costs, the top-1% M+ mount as the season's best addition, the May mana-food nerf that also swapped which foods gave mana vs health, and reroll tokens removing the gearing grind (which he blames for his own burnout at 292 ilvl). No spec strength, tuning or outlook read anywhere — his only PTR remark is that tuning is 'a crapshoot right now', a general comment naming no spec. He is a healer specialist in classes[].creators, not a generalCreators entry, so the metaNotes lane is closed to him by validation regardless. 0 takes, 0 metaNotes.",
-   "verifiedAt": "2026-08-05"
-  },
-  {
-   "id": "TU9yAvkkIJ4",
-   "creator": "Tettles",
-   "title": "People Told Me Healing Was Hard, So I Proved Them Wrong | World of Warcraft",
-   "reason": "Transcript verified in full (155 min): his annual zero-to-hero challenge series — a freshly levelled Holy Priest taken solo through LFG to the 3,400 Keystone Master bracket, filmed during a subathon. It is SEASON 1 content end to end: zero mentions of 12.1, Season 2 or the PTR anywhere in the transcript. The eight 'tier set' mentions are his own Season 1 gearing narrative (catalyst charges, the Benediction/divine-image bonus) and he explicitly says he never noticed how good it was — a gearing anecdote, not a spec-strength read. Spec choice is justified as a challenge premise (Holy is the least represented healer in the top 2000 keys, so 'quote unquote bad' makes it interesting), which is representation framing, not an outlook call. 0 takes, 0 metaNotes. Same disposition as his stream VOD aqe2LKeMIqQ.",
-   "verifiedAt": "2026-08-05"
-  },
-  {
-   "id": "MdvcFzV0tmI",
-   "creator": "Shadarek",
-   "title": "Season 2 Embellishment Tuning & Demon Hunter new BiS",
-   "reason": "Transcript verified in full 2026-08-06 (local residential run): an 8-minute EMBELLISHMENT-TUNING and BiS video, not a spec read. He walks the four new Season 2 crafted embellishments and the tuning pass that hit them (Polished Amalgamate and Snakeskin Lining cut by over 90%, Adorned Fang by 70% with a compensating proc-rate increase, the new versatility potion by 52%), then ranks the survivors for Havoc (unnerfed Hunter's Ritual Stone ~2% DPS, Adorned Fang 0.8%) and for Devourer (double Adorned Fang, because the crafted offhand costs 69 intellect). His negative sentiment is aimed squarely at the embellishment tuning itself ('terrible tuning'), never at Havoc or Devourer — there is no spec-strength, spec-tuning or Season 2 outlook claim anywhere in it. Distilling a nerf take for either spec from a crafted-gear nerf that lands on everyone would invent a spec read the video does not make. 0 takes, 0 metaNotes.",
-   "verifiedAt": "2026-08-06"
-  },
-  {
-   "id": "FCv62odOpew",
-   "creator": "YoDaTV",
-   "title": "Is THIS the New Phys Comp? King's Rest +20 | San'layn Blood DK | Midnight Season 2 PTR",
-   "reason": "Transcript verified in full 2026-08-07 (local run, targeted search for tank RAID takes): a 2,244-word +20 key-run POV. Only 10 lines carry analytical vocabulary and the one raid cluster (~760-1000s) is the creator answering chat about whether RAID BUFFS belong in Mythic+ comp design — a game-design opinion, not a read on Blood DK. No sentiment, no comparison, no 12.1 outlook for the spec. Distilling a raid-scoped Blood DK take from this would be manufacturing the signal we went looking for, which is exactly the failure mode to avoid when a spec is uncovered.",
-   "verifiedAt": "2026-08-07"
-  },
-  {
-   "id": "smX1F93s8hI",
-   "creator": "Kalamazi",
-   "title": "12.1 Midnight Affliction Warlock Guide! Talents, Rotations and More!",
-   "reason": "Transcript verified in full 2026-08-08 (local run): a 16-minute how-to guide — tier set mechanics, stat weights, Hellcaller vs Soul Harvester build comparison, and single-target/AoE rotation walkthroughs. It carries no read on Affliction's power level against other specs; the only outlook-adjacent line is that 12.1 Affliction plays much as 12.0 did and he hopes for more changes in 12.2. Logging that as a neutral take would assert he has no directional view on the spec, when in fact he never addressed it — and a neutral take still counts toward the expert panel's creator denominator, so it would dilute the read rather than inform it.",
-   "verifiedAt": "2026-08-08"
-  },
-  {
-   "id": "EJq1vFBp1WE",
-   "creator": "leak",
-   "title": "Survival Hunter Guide for Midnight Season 2 | Builds, Rotations, and More!",
-   "reason": "Transcript verified in full 2026-08-08 (local run): a 14-minute Season 2 how-to guide — talent changes, tier set mechanics, Sentinel vs Pack Leader, two-hand vs dual wield, rotations and racials. Real numbers, but all of them within-spec build choices (S2 set worth ~11% single target / ~19% AoE against the spec's own S1 set; Sentinel 2-3% ahead on single target, ~7% in AoE; the Pack Leader boar mastery double-dip fix costing 3-4%). He gives no verdict on where Survival lands against other specs. Reading 'your new tier set beats your old tier set' as a spec buff would fire for every spec that gets a guide video, so it stays out of the take lane.",
-   "verifiedAt": "2026-08-08"
-  },
-  {
-   "id": "OFsc6LxpEek",
-   "creator": "Jedith",
-   "title": "Devourer Demon Hunter Roundtable | State of the Spec Before 12.1 @VooDooSaurus @NinternDH Jom",
-   "reason": "Transcript verified in full 2026-08-08 (local unfiltered sweep): a four-person Devourer roundtable, but a mechanics and theorycrafting panel rather than a state-of-the-spec verdict. Content is sim methodology (how the simulated environment and APL conditionals can be wrong, and why), Devourer's damage variance (a ~100k DPS min-max spread in sims from soul generation and tier-set procs, so a single log is an inconsequential data point), Eradicate not being trackable on Warcraft Logs because of a game-side data gap, and closing play tips on cycling Void Meta. No comparative read on where Devourer lands against other specs. Attribution would also be unsafe: the clearest authority present, VooDooSaurus, is a guest, and he already has a newer self-published Devourer take (2026-08-07) on file.",
-   "verifiedAt": "2026-08-08"
-  },
-  {
-   "id": "pT8A8RW9QTc",
-   "creator": "Tactyks",
-   "title": "KINGS REST Mythic+ Dungeon Guide | Midnight Season 2",
-   "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): a dungeon/boss mechanics guide — route, trash and boss abilities, dungeon changes — with no read on any spec's power level. Worth recording explicitly because this batch tested the premise that a guide author's dungeon guide \"routinely carries spec analysis\": in this creator's Season 2 guide series it does not. The apparent spec mentions are ability names (Bound by Shadow, Shadowborne Champion, Shadow Whirlwind, unholy mending, bloodsworn, blood drain), not spec discussion.",
-   "verifiedAt": "2026-08-08"
-  },
-  {
-   "id": "u-TVxNPFMZs",
-   "creator": "Tactyks",
-   "title": "RUBY LIFE POOLS Mythic+ Dungeon Guide | Midnight Season 2",
-   "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): a dungeon/boss mechanics guide — route, trash and boss abilities, dungeon changes — with no read on any spec's power level. Worth recording explicitly because this batch tested the premise that a guide author's dungeon guide \"routinely carries spec analysis\": in this creator's Season 2 guide series it does not. The apparent spec mentions are ability names (Bound by Shadow, Shadowborne Champion, Shadow Whirlwind, unholy mending, bloodsworn, blood drain), not spec discussion.",
-   "verifiedAt": "2026-08-08"
-  },
-  {
-   "id": "gNJ-3-6k75A",
-   "creator": "Tactyks",
-   "title": "DEN OF NALORAKK Mythic+ Dungeon Guide | Midnight Season 2",
-   "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): a dungeon/boss mechanics guide — route, trash and boss abilities, dungeon changes — with no read on any spec's power level. Worth recording explicitly because this batch tested the premise that a guide author's dungeon guide \"routinely carries spec analysis\": in this creator's Season 2 guide series it does not. The apparent spec mentions are ability names (Bound by Shadow, Shadowborne Champion, Shadow Whirlwind, unholy mending, bloodsworn, blood drain), not spec discussion.",
-   "verifiedAt": "2026-08-08"
-  },
-  {
-   "id": "Da9hWBW_6JE",
-   "creator": "Tactyks",
-   "title": "VOIDSCAR ARENA Mythic+ Dungeon Guide | Midnight Season 2",
-   "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): a dungeon/boss mechanics guide — route, trash and boss abilities, dungeon changes — with no read on any spec's power level. Worth recording explicitly because this batch tested the premise that a guide author's dungeon guide \"routinely carries spec analysis\": in this creator's Season 2 guide series it does not. The apparent spec mentions are ability names (Bound by Shadow, Shadowborne Champion, Shadow Whirlwind, unholy mending, bloodsworn, blood drain), not spec discussion.",
-   "verifiedAt": "2026-08-08"
-  },
-  {
-   "id": "xFBWuY24vH8",
-   "creator": "Sha",
-   "title": "Den of Nalorakk Quick Boss Guides | Midnight Season 2",
-   "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): a dungeon/boss mechanics guide — route, trash and boss abilities, dungeon changes — with no read on any spec's power level. Worth recording explicitly because this batch tested the premise that a guide author's dungeon guide \"routinely carries spec analysis\": in this creator's Season 2 guide series it does not. The apparent spec mentions are ability names (Bound by Shadow, Shadowborne Champion, Shadow Whirlwind, unholy mending, bloodsworn, blood drain), not spec discussion.",
-   "verifiedAt": "2026-08-08"
-  },
-  {
-   "id": "WBoH0cdKKRc",
-   "creator": "Sha",
-   "title": "Murder Row Quick Boss Guides | Midnight Season 2",
-   "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): a dungeon/boss mechanics guide — route, trash and boss abilities, dungeon changes — with no read on any spec's power level. Worth recording explicitly because this batch tested the premise that a guide author's dungeon guide \"routinely carries spec analysis\": in this creator's Season 2 guide series it does not. The apparent spec mentions are ability names (Bound by Shadow, Shadowborne Champion, Shadow Whirlwind, unholy mending, bloodsworn, blood drain), not spec discussion.",
-   "verifiedAt": "2026-08-08"
-  },
-  {
-   "id": "ROFGW7s8MN8",
-   "creator": "J-Funk",
-   "title": "Mythic Nymrissa Wavecaller Boss Guide | Mythic Tidebound Grotto 12.1",
-   "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): a dungeon/boss mechanics guide — route, trash and boss abilities, dungeon changes — with no read on any spec's power level. Worth recording explicitly because this batch tested the premise that a guide author's dungeon guide \"routinely carries spec analysis\": in this creator's Season 2 guide series it does not. The apparent spec mentions are ability names (Bound by Shadow, Shadowborne Champion, Shadow Whirlwind, unholy mending, bloodsworn, blood drain), not spec discussion.",
-   "verifiedAt": "2026-08-08"
-  },
-  {
-   "id": "uuoE10M745E",
-   "creator": "Supatease",
-   "title": "Elemental Shaman DAMAGE",
-   "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): a short clip with no analysis — commentary over footage only, no comparative or directional read on any spec.",
-   "verifiedAt": "2026-08-08"
-  },
-  {
-   "id": "MpfD-Flyq7w",
-   "creator": "Supatease",
-   "title": "Love This Bug",
-   "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): a short clip with no analysis — commentary over footage only, no comparative or directional read on any spec.",
-   "verifiedAt": "2026-08-08"
-  },
-  {
-   "id": "XRLsUGmpJao",
-   "creator": "Supatease",
-   "title": "Goku Transmog",
-   "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): a short clip with no analysis — commentary over footage only, no comparative or directional read on any spec.",
-   "verifiedAt": "2026-08-08"
-  },
-  {
-   "id": "5DvdGFrx5bw",
-   "creator": "Supatease",
-   "title": "20 Years He Tried To Do This",
-   "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): a short clip with no analysis — commentary over footage only, no comparative or directional read on any spec.",
-   "verifiedAt": "2026-08-08"
-  },
-  {
-   "id": "uB4Xx1Mxmeg",
-   "creator": "Bansherz",
-   "title": "can't believe we almost had to spam 5 hunter's marks in 12.1 | #bansherz on #Twitch",
-   "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): a short clip with no analysis — commentary over footage only, no comparative or directional read on any spec.",
-   "verifiedAt": "2026-08-08"
-  },
-  {
-   "id": "DaLXBrvxpjY",
-   "creator": "Supatease",
-   "title": "Dev Evoker 12.1 Damage Test",
-   "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): a short clip with no analysis — commentary over footage only, no comparative or directional read on any spec. Titled as a 12.1 damage test, but it is the creator taking hits on a dummy and narrating, with no output figures or comparison.",
-   "verifiedAt": "2026-08-08"
-  },
-  {
-   "id": "oNZJviGSxc0",
-   "creator": "Supatease",
-   "title": "Destro Lock 12.1 Damage Test",
-   "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): a short clip with no analysis — commentary over footage only, no comparative or directional read on any spec. Titled as a 12.1 damage test; the only evaluative line is an offhand \"that's a decent output\" about his own burst, which is not a spec read.",
-   "verifiedAt": "2026-08-08"
-  },
-  {
-   "id": "3fW7j8Ssa0o",
-   "creator": "Supatease",
-   "title": "Demo Warlock 12.1 Damage Test",
-   "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): a short clip with no analysis — commentary over footage only, no comparative or directional read on any spec. Titled as a 12.1 damage test; footage and narration only.",
-   "verifiedAt": "2026-08-08"
-  },
-  {
-   "id": "1WZkbTUSO-I",
-   "creator": "AutomaticJak",
-   "title": "Exploring Ragnarok Rebirth on Release!",
-   "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): not World of Warcraft at all — the creator playing a different game on release day.",
-   "verifiedAt": "2026-08-08"
-  },
-  {
-   "id": "zoIliTYkpZc",
-   "creator": "MadSkillzzTV",
-   "title": "12.1 Addon Changes | Midnight Season 2 #worldofwarcraft",
-   "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): UI / addon / gearing-logistics content for 12.1 — no per-spec performance read of any kind.",
-   "verifiedAt": "2026-08-08"
-  },
-  {
-   "id": "V4osP5VNebA",
-   "creator": "Dalaran Gaming",
-   "title": "Blizzard Is Finally Fixing the WoW UI in Patch 12.1!",
-   "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): UI / addon / gearing-logistics content for 12.1 — no per-spec performance read of any kind.",
-   "verifiedAt": "2026-08-08"
-  },
-  {
-   "id": "rjQyrbKaYLQ",
-   "creator": "Dalaran Gaming",
-   "title": "Wow 12.1 Features: 9 Big UI & Quality of Life Updates Next Week",
-   "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): UI / addon / gearing-logistics content for 12.1 — no per-spec performance read of any kind.",
-   "verifiedAt": "2026-08-08"
-  },
-  {
-   "id": "W2nQ41jDxNI",
-   "creator": "Dalaran Gaming",
-   "title": "How Solo Players Are Going To Gear and Get Player Power in Patch 12.1",
-   "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): UI / addon / gearing-logistics content for 12.1 — no per-spec performance read of any kind.",
-   "verifiedAt": "2026-08-08"
-  },
-  {
-   "id": "AlPW1VTafMg",
-   "creator": "Dalaran Gaming",
-   "title": "What You Need to Finish This Week Before the Patch 12.1 Update",
-   "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): UI / addon / gearing-logistics content for 12.1 — no per-spec performance read of any kind.",
-   "verifiedAt": "2026-08-08"
-  },
-  {
-   "id": "v6ky1gYjQWU",
-   "creator": "izen (Izenhart)",
-   "title": "Season 2's MASSIVE Change In Your Buffs/Debuffs Tracking | It's (Almost) Saved!",
-   "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): UI / addon / gearing-logistics content for 12.1 — no per-spec performance read of any kind. From a generalCreators entry, so it was assessed for the metaNotes lane rather than takes; it is a Season 2 buff/debuff tracking change, not a per-spec season outlook, so it yields no meta note either.",
-   "verifiedAt": "2026-08-08"
-  },
-  {
-   "id": "TKHXjOYABBE",
-   "creator": "Dalaran Gaming",
-   "title": "Sub Rogue's Burst Damage Continues To Impress! (5v5 1v1 Duels) - PvP WoW: Midnight 12.0.7",
-   "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): PvP content (duel series / PvP testing). PvP-only material is out of scope for this tracker by standing rule — it rates PvE, and a PvP read must never vote in a PvE outlook.",
-   "verifiedAt": "2026-08-08"
-  },
-  {
-   "id": "j_e7tmiEH-s",
-   "creator": "Dalaran Gaming",
-   "title": "A Single Paladin Is Actually A One Man Army! (5v5 1v1 Duels) - PvP WoW: Midnight 12.0.7",
-   "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): PvP content (duel series / PvP testing). PvP-only material is out of scope for this tracker by standing rule — it rates PvE, and a PvP read must never vote in a PvE outlook.",
-   "verifiedAt": "2026-08-08"
-  },
-  {
-   "id": "0tnlu2XgYts",
-   "creator": "Dalaran Gaming",
-   "title": "This Warrior Was NOT Supposed To Win That! (5v5 1v1 Duels) - PvP WoW: Midnight",
-   "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): PvP content (duel series / PvP testing). PvP-only material is out of scope for this tracker by standing rule — it rates PvE, and a PvP read must never vote in a PvE outlook.",
-   "verifiedAt": "2026-08-08"
-  },
-  {
-   "id": "jmq1--_RGqk",
-   "creator": "Dalaran Gaming",
-   "title": "Demo Hunter Is Truly The DEADLIEST Class In Midnight! (5v5 1v1 Duels) - PvP WoW: Midnight",
-   "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): PvP content (duel series / PvP testing). PvP-only material is out of scope for this tracker by standing rule — it rates PvE, and a PvP read must never vote in a PvE outlook.",
-   "verifiedAt": "2026-08-08"
-  },
-  {
-   "id": "XC-87cBXOD8",
-   "creator": "Supatease",
-   "title": "12.1 PVP Testing",
-   "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): PvP content (duel series / PvP testing). PvP-only material is out of scope for this tracker by standing rule — it rates PvE, and a PvP read must never vote in a PvE outlook.",
-   "verifiedAt": "2026-08-08"
-  },
-  {
-   "id": "7d4FVxcHwY8",
-   "creator": "Supatease",
-   "title": "MM Hunter 12.1 PVP Looks Insane",
-   "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): PvP content (duel series / PvP testing). PvP-only material is out of scope for this tracker by standing rule — it rates PvE, and a PvP read must never vote in a PvE outlook.",
-   "verifiedAt": "2026-08-08"
-  },
-  {
-   "id": "0TB7hwi7Xyc",
-   "creator": "Maximum",
-   "title": "Reacting to an Insane Mythic Pug Raid Crashout",
-   "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): a pug-raid drama reaction video, not analysis. A generalCreators entry, so it was assessed for the metaNotes lane; across 20k words of transcript there is no per-spec season or meta read and no tier-list content — the only forward-looking line is an incidental mention of a guild next season. This also discharges the standing re-check note on his registry entry (\"no settled pre-Season-2 tier list yet as of 2026-08-04 — re-check 2026-08-08..18\"): as of 2026-08-08 he still has not published one, so the entry is left as-is.",
-   "verifiedAt": "2026-08-08"
-  }
- ]
+  "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
+  "videos": [],
+  "skipped": [
+    {
+      "id": "02rLfzEKLq4",
+      "creator": "Supatease",
+      "title": "Affliction Lock 12.1 Damage Test",
+      "reason": "Transcript verified in full 2026-08-06 (nightly CI): a 20-second dummy clip, 7 caption chunks end to end. He narrates one Affliction opener (dots, Haunt, Malevolence, Dark Glare, Soul Harvest) and closes with \"that does not come close to taking him down, but it is what it is\" — no number, no comparison, no tuning or outlook read. Nothing for takes[]; writing a sentiment from \"it is what it is\" would be inventing the read. Affliction is one of the 9 uncovered specs, which is exactly when the temptation to over-read a clip is highest.",
+      "verifiedAt": "2026-08-06"
+    },
+    {
+      "id": "089Gp0xV7Iw",
+      "creator": "Supatease",
+      "title": "Elemental Shaman UNREAL",
+      "reason": "Transcript verified in full 2026-08-06 (nightly CI): ONE caption chunk, \"Boom. Shaga laga baby.\" A hashtag clip short whose media:description copies the title — the documented Supatease short shape. 0 takes, 0 metaNotes.",
+      "verifiedAt": "2026-08-06"
+    },
+    {
+      "id": "aOSWljAYUnw",
+      "creator": "Supatease",
+      "title": "Elemental Shaman GODLIKE",
+      "reason": "Transcript verified in full 2026-08-06 (nightly CI): 5 caption chunks of loading-in reaction (\"time to load up\", \"this guy is going to get zapped\", \"what is this? 2500\") — a burst-crit clip short, no spec strength, tuning or outlook read. Same shape as its sibling 089Gp0xV7Iw. 0 takes, 0 metaNotes.",
+      "verifiedAt": "2026-08-06"
+    },
+    {
+      "id": "DnYoCpImTZw",
+      "creator": "Kalamazi",
+      "title": "BIG Warlock Buffs Announced For 12.1! Is It Enough?",
+      "reason": "Edited re-cut of the same 2026-08-01 session already distilled from the 4h stream Hn9upmp8ywc: identical 07-31-build walkthrough and identical dummy tests (Destruction ~156k, Demonology ~146k, Affliction ~144k single target), the same Haunt-instead-of-Unstable-Affliction complaint and the same 'Destro ahead by ~10k' conclusion. His three live 08-01 Warlock takes already carry those numbers, so distilling it again would only duplicate them; his closing per-boss guesses are explicitly provisional and he defers the ranking to a later tier-list video. Transcript verified in full 2026-08-02 (nightly CI).",
+      "verifiedAt": "2026-08-02"
+    },
+    {
+      "id": "YOnGHSUZ4A0",
+      "creator": "Kalamazi",
+      "title": "Do These 5 Things NOW To Prep For Patch 12.1!",
+      "reason": "A pre-patch character-prep PSA end to end — finish the Omnium Folio, farm Sporfall 298s to pre-fill slots before Mythic-zero week, craft embellished and socketed Season 1 bracers/belt/cloak while the crests still exist, spend expiring currencies, level the Valera delve companion. Its only spec mention is listing which slots the Warlock set leaves open, a loot-targeting example the skill says not to inflate into a take. 0 takes, 0 metaNotes. Same shape as izen Kwugqa7HFao. Transcript verified in full 2026-07-31 (local run).",
+      "verifiedAt": "2026-07-31"
+    },
+    {
+      "id": "hvxrLgUQk1w",
+      "creator": "Supatease",
+      "title": "12.1 Class Tuning BIG BUFFS Incoming",
+      "reason": "A straight read-through of the 2026-07-31 PTR notes across every class, with brief PvP-lens asides — the class-tuning-roundup shape the skill explicitly says not to stretch into per-spec takes. His own class lane is Shaman and the Elemental Farseer lines get one sentence of narration with no analysis. He is not a generalCreators entry, so the metaNotes lane is closed to him by validation. 0 takes, 0 metaNotes. Transcript verified in full 2026-07-31 (local run). NOTE FOR A HUMAN: this cross-class PTR-news format is generalCreators-lane behaviour — worth considering whether he belongs there, but registry scope is not an agent's call.",
+      "verifiedAt": "2026-07-31"
+    },
+    {
+      "id": "Z8Jygl_NpF4",
+      "creator": "Shadarek",
+      "title": "TIERLIST | WoW: Midnight Season 2 (Important)",
+      "reason": "Comedy video, not analysis — specs are ranked by whether they are Demon Hunters, Rogues are \"always down at D tier\", and Augmentation goes in a \"fake humans\" tier. No genuine spec-strength read. Transcript verified in full twice (2026-07-30 nightly and 2026-07-30 local); it kept returning to the queue because verified-skipped had no durable record.",
+      "verifiedAt": "2026-07-30"
+    },
+    {
+      "id": "Kwugqa7HFao",
+      "creator": "izen (Izenhart)",
+      "title": "Season 2's BIGGEST Gearing Changes & Tips For Season 2",
+      "reason": "A gearing / bonus-roll / great-vault PSA end to end (heroic bonus rolls to mythic track, 1:1 vault conversion, crest surplus, stockpiling tokens). Its only spec mentions are loot-targeting examples, which the skill explicitly says not to inflate into meta notes. 0 metaNotes, no build or tuning lead. Transcript verified in full twice (2026-07-30).",
+      "verifiedAt": "2026-07-30"
+    },
+    {
+      "id": "aqe2LKeMIqQ",
+      "creator": "Tettles",
+      "title": "Stream VOD",
+      "reason": "Livestream VOD whose only spec reads are one-line replies to chat — no sustained analysis to distil. Transcript verified 2026-07-30 (local run).",
+      "verifiedAt": "2026-07-30"
+    },
+    {
+      "id": "IJPVqbfI1w4",
+      "creator": "AutomaticJak",
+      "title": "Top 2 Healer Trinkets in Season 2?",
+      "reason": "A 41-second Short about two Season 2 healer trinkets (Soul Coiler Ritual Vessel off the Venomous Abyss opener, Wavecaller Seashell off Tidebound Grotto flex) and where they drop. Pure loot-targeting with no spec-strength read — the same shape the skill says not to inflate into a take, and trinkets are not part of the data model. 0 takes. Transcript verified in full 2026-08-03 (local run).",
+      "verifiedAt": "2026-08-03"
+    },
+    {
+      "id": "tfIcqmIi2o8",
+      "creator": "Kalamazi",
+      "title": "Short Lil PTR/Retail Slam",
+      "reason": "A 4h17m livestream VOD of key runs and chat banter. Its spec content is one-line replies during pulls (Haunt buff grumbling, Arcane dodging a nerf, 'all three locks are close in M+ but none are meta') and it duplicates the reads in his structured same-day video ReWs_ZnYtO8, which was distilled instead. Matches the Tettles aqe2LKeMIqQ livestream precedent. 0 takes. Transcript verified in full 2026-08-03 (local run).",
+      "verifiedAt": "2026-08-03"
+    },
+    {
+      "id": "e7V3tCBr6as",
+      "creator": "Shadarek",
+      "title": "Havoc & Devourer DH | Season 2 Bonus Roll Information",
+      "reason": "Transcript verified: a Season 2 bonus-roll / loot-strategy PSA (which bosses to reroll, vault vs bonus-roll math, which items Havoc and Devourer want). It carries item-level and stat-weight detail but no spec strength, tuning or outlook read, so there is nothing for takes[] — same shape as the already-skipped izen gearing PSA Kwugqa7HFao.",
+      "verifiedAt": "2026-08-05"
+    },
+    {
+      "id": "_5fnAi89SGw",
+      "creator": "LBNinja7",
+      "title": "Season 1 Will NOT Be Missed (By me, Here's Why...)",
+      "reason": "Transcript verified in full: a Midnight Season 1 systems retrospective, not spec analysis. Its topics are the four-raid-instance structure diluting raid night, repair costs, the top-1% M+ mount as the season's best addition, the May mana-food nerf that also swapped which foods gave mana vs health, and reroll tokens removing the gearing grind (which he blames for his own burnout at 292 ilvl). No spec strength, tuning or outlook read anywhere — his only PTR remark is that tuning is 'a crapshoot right now', a general comment naming no spec. He is a healer specialist in classes[].creators, not a generalCreators entry, so the metaNotes lane is closed to him by validation regardless. 0 takes, 0 metaNotes.",
+      "verifiedAt": "2026-08-05"
+    },
+    {
+      "id": "TU9yAvkkIJ4",
+      "creator": "Tettles",
+      "title": "People Told Me Healing Was Hard, So I Proved Them Wrong | World of Warcraft",
+      "reason": "Transcript verified in full (155 min): his annual zero-to-hero challenge series — a freshly levelled Holy Priest taken solo through LFG to the 3,400 Keystone Master bracket, filmed during a subathon. It is SEASON 1 content end to end: zero mentions of 12.1, Season 2 or the PTR anywhere in the transcript. The eight 'tier set' mentions are his own Season 1 gearing narrative (catalyst charges, the Benediction/divine-image bonus) and he explicitly says he never noticed how good it was — a gearing anecdote, not a spec-strength read. Spec choice is justified as a challenge premise (Holy is the least represented healer in the top 2000 keys, so 'quote unquote bad' makes it interesting), which is representation framing, not an outlook call. 0 takes, 0 metaNotes. Same disposition as his stream VOD aqe2LKeMIqQ.",
+      "verifiedAt": "2026-08-05"
+    },
+    {
+      "id": "MdvcFzV0tmI",
+      "creator": "Shadarek",
+      "title": "Season 2 Embellishment Tuning & Demon Hunter new BiS",
+      "reason": "Transcript verified in full 2026-08-06 (local residential run): an 8-minute EMBELLISHMENT-TUNING and BiS video, not a spec read. He walks the four new Season 2 crafted embellishments and the tuning pass that hit them (Polished Amalgamate and Snakeskin Lining cut by over 90%, Adorned Fang by 70% with a compensating proc-rate increase, the new versatility potion by 52%), then ranks the survivors for Havoc (unnerfed Hunter's Ritual Stone ~2% DPS, Adorned Fang 0.8%) and for Devourer (double Adorned Fang, because the crafted offhand costs 69 intellect). His negative sentiment is aimed squarely at the embellishment tuning itself ('terrible tuning'), never at Havoc or Devourer — there is no spec-strength, spec-tuning or Season 2 outlook claim anywhere in it. Distilling a nerf take for either spec from a crafted-gear nerf that lands on everyone would invent a spec read the video does not make. 0 takes, 0 metaNotes.",
+      "verifiedAt": "2026-08-06"
+    },
+    {
+      "id": "FCv62odOpew",
+      "creator": "YoDaTV",
+      "title": "Is THIS the New Phys Comp? King's Rest +20 | San'layn Blood DK | Midnight Season 2 PTR",
+      "reason": "Transcript verified in full 2026-08-07 (local run, targeted search for tank RAID takes): a 2,244-word +20 key-run POV. Only 10 lines carry analytical vocabulary and the one raid cluster (~760-1000s) is the creator answering chat about whether RAID BUFFS belong in Mythic+ comp design — a game-design opinion, not a read on Blood DK. No sentiment, no comparison, no 12.1 outlook for the spec. Distilling a raid-scoped Blood DK take from this would be manufacturing the signal we went looking for, which is exactly the failure mode to avoid when a spec is uncovered.",
+      "verifiedAt": "2026-08-07"
+    },
+    {
+      "id": "smX1F93s8hI",
+      "creator": "Kalamazi",
+      "title": "12.1 Midnight Affliction Warlock Guide! Talents, Rotations and More!",
+      "reason": "Transcript verified in full 2026-08-08 (local run): a 16-minute how-to guide — tier set mechanics, stat weights, Hellcaller vs Soul Harvester build comparison, and single-target/AoE rotation walkthroughs. It carries no read on Affliction's power level against other specs; the only outlook-adjacent line is that 12.1 Affliction plays much as 12.0 did and he hopes for more changes in 12.2. Logging that as a neutral take would assert he has no directional view on the spec, when in fact he never addressed it — and a neutral take still counts toward the expert panel's creator denominator, so it would dilute the read rather than inform it.",
+      "verifiedAt": "2026-08-08"
+    },
+    {
+      "id": "EJq1vFBp1WE",
+      "creator": "leak",
+      "title": "Survival Hunter Guide for Midnight Season 2 | Builds, Rotations, and More!",
+      "reason": "Transcript verified in full 2026-08-08 (local run): a 14-minute Season 2 how-to guide — talent changes, tier set mechanics, Sentinel vs Pack Leader, two-hand vs dual wield, rotations and racials. Real numbers, but all of them within-spec build choices (S2 set worth ~11% single target / ~19% AoE against the spec's own S1 set; Sentinel 2-3% ahead on single target, ~7% in AoE; the Pack Leader boar mastery double-dip fix costing 3-4%). He gives no verdict on where Survival lands against other specs. Reading 'your new tier set beats your old tier set' as a spec buff would fire for every spec that gets a guide video, so it stays out of the take lane.",
+      "verifiedAt": "2026-08-08"
+    },
+    {
+      "id": "OFsc6LxpEek",
+      "creator": "Jedith",
+      "title": "Devourer Demon Hunter Roundtable | State of the Spec Before 12.1 @VooDooSaurus @NinternDH Jom",
+      "reason": "Transcript verified in full 2026-08-08 (local unfiltered sweep): a four-person Devourer roundtable, but a mechanics and theorycrafting panel rather than a state-of-the-spec verdict. Content is sim methodology (how the simulated environment and APL conditionals can be wrong, and why), Devourer's damage variance (a ~100k DPS min-max spread in sims from soul generation and tier-set procs, so a single log is an inconsequential data point), Eradicate not being trackable on Warcraft Logs because of a game-side data gap, and closing play tips on cycling Void Meta. No comparative read on where Devourer lands against other specs. Attribution would also be unsafe: the clearest authority present, VooDooSaurus, is a guest, and he already has a newer self-published Devourer take (2026-08-07) on file.",
+      "verifiedAt": "2026-08-08"
+    },
+    {
+      "id": "pT8A8RW9QTc",
+      "creator": "Tactyks",
+      "title": "KINGS REST Mythic+ Dungeon Guide | Midnight Season 2",
+      "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): a dungeon/boss mechanics guide — route, trash and boss abilities, dungeon changes — with no read on any spec's power level. Worth recording explicitly because this batch tested the premise that a guide author's dungeon guide \"routinely carries spec analysis\": in this creator's Season 2 guide series it does not. The apparent spec mentions are ability names (Bound by Shadow, Shadowborne Champion, Shadow Whirlwind, unholy mending, bloodsworn, blood drain), not spec discussion.",
+      "verifiedAt": "2026-08-08"
+    },
+    {
+      "id": "u-TVxNPFMZs",
+      "creator": "Tactyks",
+      "title": "RUBY LIFE POOLS Mythic+ Dungeon Guide | Midnight Season 2",
+      "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): a dungeon/boss mechanics guide — route, trash and boss abilities, dungeon changes — with no read on any spec's power level. Worth recording explicitly because this batch tested the premise that a guide author's dungeon guide \"routinely carries spec analysis\": in this creator's Season 2 guide series it does not. The apparent spec mentions are ability names (Bound by Shadow, Shadowborne Champion, Shadow Whirlwind, unholy mending, bloodsworn, blood drain), not spec discussion.",
+      "verifiedAt": "2026-08-08"
+    },
+    {
+      "id": "gNJ-3-6k75A",
+      "creator": "Tactyks",
+      "title": "DEN OF NALORAKK Mythic+ Dungeon Guide | Midnight Season 2",
+      "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): a dungeon/boss mechanics guide — route, trash and boss abilities, dungeon changes — with no read on any spec's power level. Worth recording explicitly because this batch tested the premise that a guide author's dungeon guide \"routinely carries spec analysis\": in this creator's Season 2 guide series it does not. The apparent spec mentions are ability names (Bound by Shadow, Shadowborne Champion, Shadow Whirlwind, unholy mending, bloodsworn, blood drain), not spec discussion.",
+      "verifiedAt": "2026-08-08"
+    },
+    {
+      "id": "Da9hWBW_6JE",
+      "creator": "Tactyks",
+      "title": "VOIDSCAR ARENA Mythic+ Dungeon Guide | Midnight Season 2",
+      "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): a dungeon/boss mechanics guide — route, trash and boss abilities, dungeon changes — with no read on any spec's power level. Worth recording explicitly because this batch tested the premise that a guide author's dungeon guide \"routinely carries spec analysis\": in this creator's Season 2 guide series it does not. The apparent spec mentions are ability names (Bound by Shadow, Shadowborne Champion, Shadow Whirlwind, unholy mending, bloodsworn, blood drain), not spec discussion.",
+      "verifiedAt": "2026-08-08"
+    },
+    {
+      "id": "xFBWuY24vH8",
+      "creator": "Sha",
+      "title": "Den of Nalorakk Quick Boss Guides | Midnight Season 2",
+      "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): a dungeon/boss mechanics guide — route, trash and boss abilities, dungeon changes — with no read on any spec's power level. Worth recording explicitly because this batch tested the premise that a guide author's dungeon guide \"routinely carries spec analysis\": in this creator's Season 2 guide series it does not. The apparent spec mentions are ability names (Bound by Shadow, Shadowborne Champion, Shadow Whirlwind, unholy mending, bloodsworn, blood drain), not spec discussion.",
+      "verifiedAt": "2026-08-08"
+    },
+    {
+      "id": "WBoH0cdKKRc",
+      "creator": "Sha",
+      "title": "Murder Row Quick Boss Guides | Midnight Season 2",
+      "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): a dungeon/boss mechanics guide — route, trash and boss abilities, dungeon changes — with no read on any spec's power level. Worth recording explicitly because this batch tested the premise that a guide author's dungeon guide \"routinely carries spec analysis\": in this creator's Season 2 guide series it does not. The apparent spec mentions are ability names (Bound by Shadow, Shadowborne Champion, Shadow Whirlwind, unholy mending, bloodsworn, blood drain), not spec discussion.",
+      "verifiedAt": "2026-08-08"
+    },
+    {
+      "id": "ROFGW7s8MN8",
+      "creator": "J-Funk",
+      "title": "Mythic Nymrissa Wavecaller Boss Guide | Mythic Tidebound Grotto 12.1",
+      "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): a dungeon/boss mechanics guide — route, trash and boss abilities, dungeon changes — with no read on any spec's power level. Worth recording explicitly because this batch tested the premise that a guide author's dungeon guide \"routinely carries spec analysis\": in this creator's Season 2 guide series it does not. The apparent spec mentions are ability names (Bound by Shadow, Shadowborne Champion, Shadow Whirlwind, unholy mending, bloodsworn, blood drain), not spec discussion.",
+      "verifiedAt": "2026-08-08"
+    },
+    {
+      "id": "uuoE10M745E",
+      "creator": "Supatease",
+      "title": "Elemental Shaman DAMAGE",
+      "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): a short clip with no analysis — commentary over footage only, no comparative or directional read on any spec.",
+      "verifiedAt": "2026-08-08"
+    },
+    {
+      "id": "MpfD-Flyq7w",
+      "creator": "Supatease",
+      "title": "Love This Bug",
+      "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): a short clip with no analysis — commentary over footage only, no comparative or directional read on any spec.",
+      "verifiedAt": "2026-08-08"
+    },
+    {
+      "id": "XRLsUGmpJao",
+      "creator": "Supatease",
+      "title": "Goku Transmog",
+      "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): a short clip with no analysis — commentary over footage only, no comparative or directional read on any spec.",
+      "verifiedAt": "2026-08-08"
+    },
+    {
+      "id": "5DvdGFrx5bw",
+      "creator": "Supatease",
+      "title": "20 Years He Tried To Do This",
+      "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): a short clip with no analysis — commentary over footage only, no comparative or directional read on any spec.",
+      "verifiedAt": "2026-08-08"
+    },
+    {
+      "id": "uB4Xx1Mxmeg",
+      "creator": "Bansherz",
+      "title": "can't believe we almost had to spam 5 hunter's marks in 12.1 | #bansherz on #Twitch",
+      "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): a short clip with no analysis — commentary over footage only, no comparative or directional read on any spec.",
+      "verifiedAt": "2026-08-08"
+    },
+    {
+      "id": "DaLXBrvxpjY",
+      "creator": "Supatease",
+      "title": "Dev Evoker 12.1 Damage Test",
+      "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): a short clip with no analysis — commentary over footage only, no comparative or directional read on any spec. Titled as a 12.1 damage test, but it is the creator taking hits on a dummy and narrating, with no output figures or comparison.",
+      "verifiedAt": "2026-08-08"
+    },
+    {
+      "id": "oNZJviGSxc0",
+      "creator": "Supatease",
+      "title": "Destro Lock 12.1 Damage Test",
+      "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): a short clip with no analysis — commentary over footage only, no comparative or directional read on any spec. Titled as a 12.1 damage test; the only evaluative line is an offhand \"that's a decent output\" about his own burst, which is not a spec read.",
+      "verifiedAt": "2026-08-08"
+    },
+    {
+      "id": "3fW7j8Ssa0o",
+      "creator": "Supatease",
+      "title": "Demo Warlock 12.1 Damage Test",
+      "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): a short clip with no analysis — commentary over footage only, no comparative or directional read on any spec. Titled as a 12.1 damage test; footage and narration only.",
+      "verifiedAt": "2026-08-08"
+    },
+    {
+      "id": "1WZkbTUSO-I",
+      "creator": "AutomaticJak",
+      "title": "Exploring Ragnarok Rebirth on Release!",
+      "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): not World of Warcraft at all — the creator playing a different game on release day.",
+      "verifiedAt": "2026-08-08"
+    },
+    {
+      "id": "zoIliTYkpZc",
+      "creator": "MadSkillzzTV",
+      "title": "12.1 Addon Changes | Midnight Season 2 #worldofwarcraft",
+      "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): UI / addon / gearing-logistics content for 12.1 — no per-spec performance read of any kind.",
+      "verifiedAt": "2026-08-08"
+    },
+    {
+      "id": "V4osP5VNebA",
+      "creator": "Dalaran Gaming",
+      "title": "Blizzard Is Finally Fixing the WoW UI in Patch 12.1!",
+      "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): UI / addon / gearing-logistics content for 12.1 — no per-spec performance read of any kind.",
+      "verifiedAt": "2026-08-08"
+    },
+    {
+      "id": "rjQyrbKaYLQ",
+      "creator": "Dalaran Gaming",
+      "title": "Wow 12.1 Features: 9 Big UI & Quality of Life Updates Next Week",
+      "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): UI / addon / gearing-logistics content for 12.1 — no per-spec performance read of any kind.",
+      "verifiedAt": "2026-08-08"
+    },
+    {
+      "id": "W2nQ41jDxNI",
+      "creator": "Dalaran Gaming",
+      "title": "How Solo Players Are Going To Gear and Get Player Power in Patch 12.1",
+      "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): UI / addon / gearing-logistics content for 12.1 — no per-spec performance read of any kind.",
+      "verifiedAt": "2026-08-08"
+    },
+    {
+      "id": "AlPW1VTafMg",
+      "creator": "Dalaran Gaming",
+      "title": "What You Need to Finish This Week Before the Patch 12.1 Update",
+      "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): UI / addon / gearing-logistics content for 12.1 — no per-spec performance read of any kind.",
+      "verifiedAt": "2026-08-08"
+    },
+    {
+      "id": "v6ky1gYjQWU",
+      "creator": "izen (Izenhart)",
+      "title": "Season 2's MASSIVE Change In Your Buffs/Debuffs Tracking | It's (Almost) Saved!",
+      "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): UI / addon / gearing-logistics content for 12.1 — no per-spec performance read of any kind. From a generalCreators entry, so it was assessed for the metaNotes lane rather than takes; it is a Season 2 buff/debuff tracking change, not a per-spec season outlook, so it yields no meta note either.",
+      "verifiedAt": "2026-08-08"
+    },
+    {
+      "id": "TKHXjOYABBE",
+      "creator": "Dalaran Gaming",
+      "title": "Sub Rogue's Burst Damage Continues To Impress! (5v5 1v1 Duels) - PvP WoW: Midnight 12.0.7",
+      "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): PvP content (duel series / PvP testing). PvP-only material is out of scope for this tracker by standing rule — it rates PvE, and a PvP read must never vote in a PvE outlook.",
+      "verifiedAt": "2026-08-08"
+    },
+    {
+      "id": "j_e7tmiEH-s",
+      "creator": "Dalaran Gaming",
+      "title": "A Single Paladin Is Actually A One Man Army! (5v5 1v1 Duels) - PvP WoW: Midnight 12.0.7",
+      "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): PvP content (duel series / PvP testing). PvP-only material is out of scope for this tracker by standing rule — it rates PvE, and a PvP read must never vote in a PvE outlook.",
+      "verifiedAt": "2026-08-08"
+    },
+    {
+      "id": "0tnlu2XgYts",
+      "creator": "Dalaran Gaming",
+      "title": "This Warrior Was NOT Supposed To Win That! (5v5 1v1 Duels) - PvP WoW: Midnight",
+      "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): PvP content (duel series / PvP testing). PvP-only material is out of scope for this tracker by standing rule — it rates PvE, and a PvP read must never vote in a PvE outlook.",
+      "verifiedAt": "2026-08-08"
+    },
+    {
+      "id": "jmq1--_RGqk",
+      "creator": "Dalaran Gaming",
+      "title": "Demo Hunter Is Truly The DEADLIEST Class In Midnight! (5v5 1v1 Duels) - PvP WoW: Midnight",
+      "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): PvP content (duel series / PvP testing). PvP-only material is out of scope for this tracker by standing rule — it rates PvE, and a PvP read must never vote in a PvE outlook.",
+      "verifiedAt": "2026-08-08"
+    },
+    {
+      "id": "XC-87cBXOD8",
+      "creator": "Supatease",
+      "title": "12.1 PVP Testing",
+      "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): PvP content (duel series / PvP testing). PvP-only material is out of scope for this tracker by standing rule — it rates PvE, and a PvP read must never vote in a PvE outlook.",
+      "verifiedAt": "2026-08-08"
+    },
+    {
+      "id": "7d4FVxcHwY8",
+      "creator": "Supatease",
+      "title": "MM Hunter 12.1 PVP Looks Insane",
+      "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): PvP content (duel series / PvP testing). PvP-only material is out of scope for this tracker by standing rule — it rates PvE, and a PvP read must never vote in a PvE outlook.",
+      "verifiedAt": "2026-08-08"
+    },
+    {
+      "id": "0TB7hwi7Xyc",
+      "creator": "Maximum",
+      "title": "Reacting to an Insane Mythic Pug Raid Crashout",
+      "reason": "Transcript verified 2026-08-08 (local unfiltered sweep): a pug-raid drama reaction video, not analysis. A generalCreators entry, so it was assessed for the metaNotes lane; across 20k words of transcript there is no per-spec season or meta read and no tier-list content — the only forward-looking line is an incidental mention of a guild next season. This also discharges the standing re-check note on his registry entry (\"no settled pre-Season-2 tier list yet as of 2026-08-04 — re-check 2026-08-08..18\"): as of 2026-08-08 he still has not published one, so the entry is left as-is.",
+      "verifiedAt": "2026-08-08"
+    }
+  ],
+  "seen": [
+    "-LIZghTxXqI",
+    "-bZHpvG9P38",
+    "0vsuqy99F2A",
+    "1UKu8qGszVc",
+    "25oNFzR-_qU",
+    "2BYD8y-xjvQ",
+    "2vnJQzY5gE4",
+    "31IkN0ugTDM",
+    "3RtKJIppzdc",
+    "3YV04t9Wm-8",
+    "3cnzXhiS2QQ",
+    "3j-rUSeizyg",
+    "44aw6EIT-n8",
+    "4GG1seubsZ8",
+    "4TADJ-f8jec",
+    "50axk7g7dfg",
+    "5MSplMq9N8Y",
+    "5wntDvx3wmo",
+    "611TXOVEUAw",
+    "6G_Sg4xJol4",
+    "6yF4Q7SUimE",
+    "7hpQnrKrKiY",
+    "7lkIia0eVwg",
+    "7rIorwjv4_0",
+    "8EeooCtkoik",
+    "8X_v98oi5k4",
+    "9UT5iwBhW4s",
+    "9XVHns6dRuY",
+    "9f2ndS5v4I4",
+    "AAm0W2V4xLE",
+    "AaYp5wzWVjI",
+    "AnCDyD2UM7E",
+    "ArFPvXrU79Y",
+    "B2iGuHL_iPI",
+    "B9qKaeqYkPU",
+    "BHiCxGXH1B0",
+    "BaoSEn7sJt4",
+    "BhXcWVF3NkQ",
+    "BvJ3o0_Tt3Q",
+    "CAfXTn7nejQ",
+    "CL7PkChRq3E",
+    "CRvqJHkfG7g",
+    "CTByGtlOgkc",
+    "Ca4eDpIlNDM",
+    "D_vBGnneXj4",
+    "EUa6nHm81X0",
+    "EakXflo16CA",
+    "FIEboW-px8k",
+    "FmcXJz3ab5k",
+    "G5eImVklf7c",
+    "GJLB85qs1Fo",
+    "GQizrfwBXwc",
+    "Ggj-grcxaQg",
+    "Gk-AT8rktWE",
+    "HOszuJbXO3w",
+    "HeHi9Y5aYX8",
+    "Hi9qmlkLZZo",
+    "HuRjN73exFk",
+    "IIV5udR1Ano",
+    "IKVfX3GY42M",
+    "ISJb_lOf9-0",
+    "InJYLpo1VXA",
+    "ItSboOGdXOY",
+    "IvYq9roNc9Y",
+    "IwBMIrhG9rw",
+    "J4e3QMpeS6g",
+    "J96hzCwjjVA",
+    "JM3Uz_fGDP8",
+    "Jbg9kIg9EJ0",
+    "K8PRMSVfkXI",
+    "KVbS_yWPUDY",
+    "KXCoeyc6cws",
+    "KizxeX0BBck",
+    "L-Y9k2YL34M",
+    "LJ94XJVXPL8",
+    "LcWIPLhak0E",
+    "Lrn7cOwCIgE",
+    "M-QRkzkQ-X0",
+    "MmT3uQQy3u0",
+    "NOa9SvuyzMs",
+    "NVbuuILEUGo",
+    "NffkOLMuuIk",
+    "NyfCoA2QhdE",
+    "OEGN0VXhUhg",
+    "OKadtduMIns",
+    "OPN27kd-7K8",
+    "ORoHOEUh_80",
+    "OrwA8lAuK-g",
+    "PlkEs_A1xQw",
+    "PxrN6L8lYAA",
+    "Q0DXJzjCqL8",
+    "QADGvYl5GCw",
+    "QBGm9cgEjLE",
+    "Qzys9RKWpPo",
+    "R6pPLdrv7as",
+    "RJnOHSK5nFk",
+    "RbQj88QCbfs",
+    "S8UQh8VaPWA",
+    "SO6pJYPI7l0",
+    "TCWyNP7f18E",
+    "TFgO-q1S4Vw",
+    "TezuOhnrIp0",
+    "Ud8-YiXvm9M",
+    "UnoZnAX_Alo",
+    "Uu3t2siWgbQ",
+    "VNyFSQir2hE",
+    "W1vqQebN9UU",
+    "WILd2ljY8NQ",
+    "WYSpp2BeY0w",
+    "WeO7_4AARmU",
+    "WfYBgOgnfi8",
+    "WrO_2ES59qk",
+    "X1R8EvIlmXc",
+    "XYZUWEdEgpk",
+    "XZFA6VJJOUA",
+    "Xiy0gotKMRE",
+    "XnhSoy695cg",
+    "YCWnj2QxrW4",
+    "YLpjECBfyLg",
+    "YXtGRYOPRKU",
+    "Y_aGr-34u8M",
+    "YpM6DIOInEA",
+    "ZAjeE9_d79E",
+    "_AKwKIp4RPM",
+    "_G9hsKtI_Fc",
+    "_qJcyZP-TRw",
+    "a5XOTi-9ZbI",
+    "aSNos5zVTp4",
+    "abSbWlojhpc",
+    "brqDW3dtVJc",
+    "btNeQrcDcaI",
+    "c0HjG3hASUQ",
+    "cDoPzWhqGDc",
+    "cNAYduWx_8c",
+    "cdJX8LuRG3Q",
+    "chLJ-HXwGBs",
+    "cupVmrJOUmU",
+    "dnHUc0cFOOk",
+    "e8DKW4wHWa0",
+    "eax1FFPB6QI",
+    "eoWuDTtY-50",
+    "f39cPNDLxLA",
+    "fPJ9Iw2B5Vk",
+    "fy1ojTpwNyo",
+    "g0NmG9sVQ-Q",
+    "g95zUhNNtYU",
+    "gX15kwrmLrY",
+    "gXAECoUAb2s",
+    "gaZGPSZLEg0",
+    "gbWzRIfSL7c",
+    "haVxf1T4XKw",
+    "ie-AZrposyc",
+    "iw5JtBk0Wbo",
+    "jPsni-izY8A",
+    "jW_eJF3F0Dc",
+    "jXQ9wyt9VYM",
+    "jmwvWSYlNno",
+    "k1ec99zOI28",
+    "kINGIlRORo4",
+    "kZ1K_ynyq0E",
+    "l9wa0BNmYPg",
+    "lWJ_0wxGn1s",
+    "laCDMF4Wy_s",
+    "lsQr_Efa0pA",
+    "mFjc6dvbTrU",
+    "mTV27AX1oIU",
+    "mVmrqa1Hslc",
+    "nH-b1QYaS8w",
+    "nsSEqadIPnE",
+    "nsqND5BS-C4",
+    "pSZn7QF7QAw",
+    "pZohT7rRJy8",
+    "plBDfk0wE-Y",
+    "qCQcwRN75A8",
+    "qkqwSJtmD88",
+    "r86Zz1u0vQA",
+    "rvjPMLDDRWk",
+    "s97eN2P7FoA",
+    "sZwBwfkcuZ0",
+    "svrjfd3_ebk",
+    "tLxl5mlWNpU",
+    "uB9txDWrlXk",
+    "uBvZ4Abj57M",
+    "uhRsc6vpRu8",
+    "v7g8zUPBk9M",
+    "vHv9Ixzoquc",
+    "vKxE89T9chU",
+    "vWY4_2KpAxk",
+    "vblPETORg-I",
+    "vwY2ZbIwFkE",
+    "vyLUvBw3Kcs",
+    "wgpJsZKVyYs",
+    "wpoMbE2MQ_k",
+    "xEjKXJYTW8o",
+    "xHd_VBC_Avk",
+    "xRk0mNKX6OE",
+    "xTa2r7-Tm-M",
+    "xdjL13tqUIs",
+    "xmQgtBDGN_Q",
+    "xmWAy62IcAk",
+    "y0yxBZd7aEI",
+    "yFf4a0pax-I",
+    "yd6v1ih-aWw",
+    "yxRmKx5Q1WA",
+    "zahcyy0SQN8",
+    "zzHKjkTYv-w"
+  ],
+  "seenNote": "Video ids already considered by an earlier run that carry no richer record — migrated 2026-08-08 from backticked ids in watch-creators/log.md when the seen-set stopped being derived from prose. Distilled videos are cited by their take's url, transcript-verified rejects live in skipped[], and queued ones in videos[]; this lane is only for the remainder. Append here when a run dismisses a video at DISCOVERY (pre-cycle date, already-processed) without fetching a transcript."
 }

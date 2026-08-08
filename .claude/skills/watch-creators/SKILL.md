@@ -19,7 +19,20 @@ locally, and distill them into cited per-spec takes in `data/creator-takes.json`
    `https://www.youtube.com/feeds/videos.xml?channel_id=<id>` (no auth). Resolve an
    unknown channel_id once by grepping `"channelId"` from the raw watch-page HTML
    (browser UA) and cache it on the creator entry as `channelId`. Diff videoIds
-   against `log.md`'s seen-set. **Title-filtering is RUN-MODE dependent** (Riley,
+   against the seen-set. **The seen-set is STRUCTURED DATA, never log prose** (2026-08-08).
+   It is the union of four lanes, all machine-readable:
+     · `data/pending-transcripts.json` → `seen[]` (considered, no richer record)
+     · `data/pending-transcripts.json` → `skipped[]` (transcript read, nothing to distil)
+     · `data/pending-transcripts.json` → `videos[]` (queued, still waiting)
+     · `data/creator-takes.json` → every `youtu.be/<id>` in a take or metaNote url
+   Do NOT regex log.md for ids. That was the old method and it matched any 11-character
+   token, so it had silently absorbed **231 ordinary English words** ("residential",
+   "substantial", "speculative") into a 950-entry set that could not be reconciled against
+   anything. The real set is 383. **When a run dismisses a video at DISCOVERY without
+   fetching a transcript — pre-cycle date, or a newest-first cut — append its id to
+   `seen[]`.** That is what makes the next run's accounting auditable: anything not in one
+   of the four lanes is genuinely unexamined and will be reconsidered.
+   **Title-filtering is RUN-MODE dependent** (Riley,
    2026-08-08) — the two transcript sources have wildly different costs:
    · **LOCAL run (yt-dlp): replace the keyword filter with a DATE bound.** Do not judge on
      the title — judge on whether the video could possibly contain current-cycle content.
