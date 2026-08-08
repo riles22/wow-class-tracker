@@ -30,10 +30,11 @@ test("build produces the tracker and fetchable launcher icons", async () => {
     { name: "apple-touch-icon.png", rel: "apple-touch-icon", width: 180, height: 180 },
   ];
   for (const icon of icons) {
-    const link = `<link rel="${icon.rel}" type="image/png" sizes="${icon.width}x${icon.height}" href="${icon.name}">`;
+    const href = `/wow-class-tracker/${icon.name}`;
+    const link = `<link rel="${icon.rel}" type="image/png" sizes="${icon.width}x${icon.height}" href="${href}">`;
     assert.ok(html.includes(link), `missing exact ${icon.name} link`);
-    const liveUrl = new URL(icon.name, "https://riles22.github.io/wow-class-tracker/index.html");
-    assert.equal(liveUrl.pathname, `/wow-class-tracker/${icon.name}`, `${icon.name} must stay under the Pages project path`);
+    const liveUrl = new URL(href, "https://riles22.github.io/wow-class-tracker/index.html");
+    assert.equal(liveUrl.pathname, href, `${icon.name} must use the Pages project path explicitly`);
 
     const source = await readFile(path.join(ROOT, "src", "assets", icon.name));
     const built = await readFile(path.join(ROOT, "dist", icon.name));

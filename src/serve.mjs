@@ -17,6 +17,8 @@ const FILES = new Map([
   ["/gearing.html", { name: "gearing.html", type: "text/html; charset=utf-8" }],
   ["/favicon-192.png", { name: "favicon-192.png", type: "image/png" }],
   ["/apple-touch-icon.png", { name: "apple-touch-icon.png", type: "image/png" }],
+  ["/wow-class-tracker/favicon-192.png", { name: "favicon-192.png", type: "image/png" }],
+  ["/wow-class-tracker/apple-touch-icon.png", { name: "apple-touch-icon.png", type: "image/png" }],
 ]);
 
 createServer(async (req, res) => {

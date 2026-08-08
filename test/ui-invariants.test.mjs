@@ -523,8 +523,8 @@ test("no agent-writable field can inject markup or a handler into the rendered p
             if(e.tagName !== "LINK") return true;
             const href = e.getAttribute("href") ?? "";
             if(e.rel === "icon" && /^data:image\/svg\+xml,/.test(href)) return false;
-            if(e.rel === "icon" && e.type === "image/png" && e.sizes.value === "192x192" && href === "favicon-192.png") return false;
-            if(e.rel === "apple-touch-icon" && e.type === "image/png" && e.sizes.value === "180x180" && href === "apple-touch-icon.png") return false;
+            if(e.rel === "icon" && e.type === "image/png" && e.sizes.value === "192x192" && href === "/wow-class-tracker/favicon-192.png") return false;
+            if(e.rel === "apple-touch-icon" && e.type === "image/png" && e.sizes.value === "180x180" && href === "/wow-class-tracker/apple-touch-icon.png") return false;
             return true;
           })
           // The pages this build publishes are the ONLY sanctioned relative hrefs. Both
