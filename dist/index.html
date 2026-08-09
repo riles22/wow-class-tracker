@@ -11,7 +11,7 @@
 -->
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-/3NTl1fh6tUK+XrWgiteHJOzsAHDEvuRt06lxXbXBeQ=' 'sha256-l2DMIrVLMoRgI02sja5RT4FXl8QR6TDW1F6gmLDFQIU='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-/3NTl1fh6tUK+XrWgiteHJOzsAHDEvuRt06lxXbXBeQ=' 'sha256-S7mkGosf45+Ux1tYpyWVURbsGJWSaAGCr45lUnAarhU='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="riles22">
 <title>Spec Tracker — WoW multi-source spec consensus</title>
@@ -1998,7 +1998,21 @@ if(META.latestSnapshot){
     return dh.all.filter(s => gap(s.asOf, ref) > limit(s));
   })();
   if(!stale.length){ el.hidden = true; return; }
-  const oldest = stale[0]?.asOf ?? dh.oldest;
+  /* MISATTRIBUTION FIX (2026-08-08). This was `stale[0]?.asOf` — the oldest stale source of
+     ANY kind — and the sentence below then blamed it on the PTR-EMPIRICAL term. `dh.all` sorts
+     ascending, so stale[0] is currently the Wowhead TIER LIST (2026-04-19), which is not part
+     of that term at all: the page was telling readers the forecast's PTR empiricals were four
+     months old because an unrelated tier-list page had not rebuilt. Exactly the class of error
+     the 2026-07-24 D1 audit fixed one function below, reintroduced by a different route.
+     Scope it to the series the projection's empirical term ACTUALLY consumes — the zone-54/56
+     testing cuts and the Dummy Dome composite — read from the authoritative name map the build
+     now ships (meta.ptrMetricNames), not from a hand-typed list that could drift from it. */
+  const PTR_EMPIRICAL_LABELS = new Set([
+    ...Object.values(PTRNAMES.raidTestingScore || {}).filter(Boolean),
+    ...Object.values(PTRNAMES.mplusTesting || {}).filter(Boolean),
+    "Dummy Dome rDPS (real-player medians)"
+  ]);
+  const oldest = stale.filter(x => PTR_EMPIRICAL_LABELS.has(x.label))[0]?.asOf ?? null;
   const n = stale.length;
   const names = stale.map(s=>s.label).join(" · ");
   // One clause per stalled SOURCE, each with its own date. A single "N Warcraft Logs
@@ -2042,7 +2056,7 @@ if(META.latestSnapshot){
     // tier-list page dates, so a frozen tier list is no longer invisible — but a tier
     // date is only as good as its attestation, which the clause states.
     + `Freshest data we hold is ${esc(dh.latest)}; each row shows its own date. `
-    + `Our 12.1 projection is recomputed nightly, but its PTR-empirical term still comes from the frozen ${esc(oldest)} cuts. `
+    + (oldest ? `Our 12.1 projection is recomputed nightly, but its PTR-empirical term still comes from the frozen ${esc(oldest)} cuts. ` : "")
     + `<details class="dh-series"><summary>Affected: ${n} series</summary>${esc(names)}.</details>`;
   el.hidden = false;
 })();
@@ -2551,7 +2565,7 @@ function openSpecFromOverlay(cls, spec){
     const key = `${s.role}|${m.bracket}|${m.name}`;
     let e = catalog.get(key);
     if(!e){ e = { key, role:s.role, bracket:m.bracket, name:m.name, source:m.source, unit:m.unit||"", era:metricEra(m), rows:[] }; catalog.set(key, e); }
-    e.rows.push({ spec:s.spec, cls:s.class, value:m.value, rank:m.rank, of:m.of, n:m.n, asOf:m.asOf, rankDelta:m.rankDelta });
+    e.rows.push({ spec:s.spec, cls:s.class, value:m.value, rank:m.rank, of:m.of, n:m.n, asOf:m.asOf, rankDelta:m.rankDelta, thin:!!m.thin });
   }
   // Dummy Dome composite — a genuine build-computed 0–100 ranked score → a ladder series.
   {
@@ -2601,7 +2615,11 @@ function openSpecFromOverlay(cls, spec){
     const roleN = SPECS.filter(s=>s.role===e.role).length;
     const have = e.rows.filter(r=>typeof r.value==="number").length;
     const pre = [];
-    if(e.era==="ptr") pre.push('<b style="color:var(--v-mix)">12.1 PTR</b> — directional, tiny samples (n often &lt;100), not empirical');
+    // Was a blanket "n often <100", which simultaneously over-warned on the dense rows and
+    // under-warned on the thin ones. Count them instead, and key the dagger here.
+    const thinN = e.rows.filter(r=>r.thin).length;
+    if(e.era==="ptr") pre.push('<b style="color:var(--v-mix)">12.1 PTR</b> — directional, not empirical'
+      + (thinN ? ` · <b class="thin-n">&dagger;</b> marks the ${thinN} row${thinN===1?"":"s"} built on fewer than 100 parses` : ""));
     if(e.source==="bloodmallet"||e.source==="simulationcraft") pre.push('<b>Sim</b> — theoretical (SimulationCraft), not logged play');
     if(e.source==="murlok") pre.push("Top-50 <b>ceiling</b> — mean of each spec's best 50 players, <b>not</b> popularity");
     const unitLabel = e.unit==="%" ? "percent" : e.unit==="/100" ? "0–100 score" : (e.unit||"value");
@@ -2656,6 +2674,9 @@ function openSpecFromOverlay(cls, spec){
       const disp = fmt(r.value)+(e.unit==="%"?"%":"");
       const rk = r.rank||i+1, of = r.of||N;
       const mv = r.rankDelta ? `<tspan dx="4" fill="${r.rankDelta>0?'var(--v-pos)':'var(--v-neg)'}" font-size="9">${r.rankDelta>0?'▲':'▼'}${Math.abs(r.rankDelta)}</tspan>` : "";
+      // A thin sample is marked on the FACE of the chart, not in the SVG <title>: a bar
+      // drawn from 21 parses sits beside one drawn from 1,085 and looks just as solid.
+      const thinMark = r.thin ? `<tspan dx="3" fill="var(--v-mix)" font-size="10" font-weight="700">†</tspan>` : "";
       const aria = `${r.spec} ${r.cls}, ${disp}${e.unit&&e.unit!=='%'?' '+e.unit:''}, rank ${rk} of ${of} ${e.role}`;
       const tip = `${r.spec} · ${r.cls} — ${disp} · #${rk} of ${of} ${e.role}${r.n?' · n='+r.n:''}${r.asOf?' · '+r.asOf:''}`;
       const head = `<circle cx="18" cy="${mid}" r="10" fill="var(--bg-3)" stroke="var(--edge-2)"/><text x="18" y="${mid}" class="laddernum" text-anchor="middle" dominant-baseline="central">${rk}</text>`
@@ -2666,12 +2687,12 @@ function openSpecFromOverlay(cls, spec){
       // the bar runs full width beneath it. Putting the value at the bar's right edge
       // collided with it — this field is tight, so most bars fill ~95% of the track.
       const body = stacked
-        ? `<text x="${valX}" y="${mid}" class="ladderval" text-anchor="end" dominant-baseline="central">${esc(disp)}${mv}</text>`
+        ? `<text x="${valX}" y="${mid}" class="ladderval" text-anchor="end" dominant-baseline="central">${esc(disp)}${mv}${thinMark}</text>`
           + `<rect x="${barX}" y="${mid+12}" width="${barW}" height="9" rx="3" fill="var(--edge)" opacity="0.32"/>`
           + `<rect class="ladderbar" style="--enter-i:${Math.min(i,8)}" x="${barX}" y="${mid+12}" width="${w.toFixed(1)}" height="9" rx="3" fill="${col}"/>`
         : `<rect x="${barX}" y="${mid-5}" width="${barW}" height="10" rx="3" fill="var(--edge)" opacity="0.32"/>`
           + `<rect class="ladderbar" style="--enter-i:${Math.min(i,8)}" x="${barX}" y="${mid-5}" width="${w.toFixed(1)}" height="10" rx="3" fill="${col}"/>`
-          + `<text x="${valX}" y="${mid}" class="ladderval" text-anchor="end" dominant-baseline="central">${esc(disp)}${mv}</text>`;
+          + `<text x="${valX}" y="${mid}" class="ladderval" text-anchor="end" dominant-baseline="central">${esc(disp)}${mv}${thinMark}</text>`;
       return `<g class="ladderrow${e.era==='ptr'?' ladder-ptr':''}" data-spec="${esc(r.spec)}" data-cls="${esc(r.cls)}" data-n="${esc(r.spec.toLowerCase())}" role="button" tabindex="0" aria-label="${esc(aria)}"><title>${esc(tip)}</title>`
         + head + body + `</g>`;
     }).join("");
