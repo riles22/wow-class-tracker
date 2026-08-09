@@ -1416,3 +1416,37 @@ those, so they need a different discovery route.
 - `npm test` **338 pass / 0 fail**, `npm run validate` clean, `npm run audit:creators`
   **HIGH 0 · MED 0 · INFO 19** (up one: Shindigg now shows "transcribable, zero takes
   ever" — correct, this run read him and found nothing in scope).
+
+## 2026-08-09 (nightly, CI runner)
+
+- **42/42 channels polled**, zero RSS failures (39 specialist + 3 general; 71 class entries
+  collapse to 42 distinct channels because 8 creators are registered under more than one
+  class). Seen-set rebuilt from the four structured lanes = **714 ids**; **119 unseen**.
+- **1 transcript available** (`transcript-fetch/summary.json` verdict `ok`, 1/1 fetched):
+  **Preheat — "12.1 Mage Roundtable ft. Porom, Forgy, Khaelt, Azuna"** (`vK9ttexGFVg`,
+  2026-08-09, 4488 caption chunks). Distilled **4 takes**, attributed to Preheat with the
+  panel named in the claim (the AutomaticJak Pres-panel precedent):
+  · Arcane **buff / raid** — the panel's de-facto Season 2 raid pick; reasons are
+    defensive (Prismatic Barrier window + refractive Mirror Image) plus no mana constraint.
+  · Frost **nerf / raid** — Splitting Ice + Fractured Frost cuts gut the two-target cleave
+    that was ~doubling its damage on PTR; Glacial Spike does not smart-target like Ice
+    Lance, so spread two-target loses most; Frost drops to the stacked-two-target bosses.
+  · Frost **neutral / M+** — the uncapped-AoE hole is unaddressed (a Spellslinger can lose
+    a first pull to a tank); what improved is feel, via the Frostfire set's proc rate.
+  · Fire **mixed / both** — a second Blazing Barrier charge and flat aura percentages
+    instead of attention; defensive budget still locked in Cauterize; nobody on the panel
+    expects it competitive at Season 2 start.
+  Superseded Preheat's three 2026-05-23 12.0.7-live takes for the same specs in the same
+  edit; removed the video from the queue.
+- **20 videos queued** for the deterministic transcript step — keyword-filtered, which the
+  NIGHTLY must stay (100 Supadata requests/month): Jedith ×4, leak ×2, Bansherz, Pkpawner,
+  NeekapHere ×2, Musguete ×3, Megasett, Sha, Dratnos ×2, Obli, Zorthas, Maximum.
+- **The other ~99 unseen videos were deliberately NOT written to `seen[]`.** They are
+  mostly key/raid POV uploads and stream VODs that a title cannot adjudicate; leaving them
+  unrecorded keeps them reconsiderable by a local yt-dlp run under the cycle date bound,
+  which is where breadth belongs. `seen[]` is for videos this run actually dismissed.
+- **community.json left untouched.** The `latest` fields hold curated per-creator notes
+  from earlier runs (scope caveats, "his last tank content predates 12.1", izen's read
+  summary); overwriting them with the bare newest RSS title — which is what a mechanical
+  refresh does — destroys more than it updates, and no general creator posted anything new
+  since the last run anyway.

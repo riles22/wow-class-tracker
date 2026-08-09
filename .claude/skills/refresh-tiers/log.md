@@ -438,3 +438,34 @@ representation n; verified against the page, NOT a Blizzard retune); survivabili
   not a spec-by-spec re-rating. It feeds no consensus.
 - **No season flip.** 12.1 ships **Aug 11**; every live page still self-identifies as
   12.0.7 / Season 1, so `PHASES.liveSeason` and `SNAPSHOT_PHASE` stay put. Three days left.
+
+## 2026-08-09 (nightly, CI runner)
+
+- **WOWHEAD FLIPPED TO SEASON 2 — the headline of the run.** All six pages rebuilt
+  upstream on 2026-08-08 (JSON-LD `dateModified` 2026-08-08 on every one, previously
+  2026-04-19 … 2026-08-05, and the independent pre-agent `published-evidence` probe saw
+  the same). Every `<title>` now reads "… for Midnight Season 2" and the body is
+  explicit: "Wowhead's DPS Tier List for the Venomous Abyss in Midnight Season 2 …
+  damage output in **Patch 12.1**", with per-spec notes referring to the 12.1 PTR cycle.
+  **This is NOT the patch going live** (12.1 ships Aug 11; these are pre-launch Season-2
+  predictions) — it is a LIVE-era source publishing next-season lists early, which is
+  exactly the case DECISION 1 spells out. Stored `seasonVerified: "s2"` on all six pages,
+  so `consensusFor` drops Wowhead from both brackets; its column, letters, drawer row and
+  projection input all remain. Consequences, measured: the live consensus is now a
+  **consensus of 3** (Icy Veins · Method · Archon) and **16 consensus letters moved, all
+  by exactly one band** (0 two-band, 0 coverage losses), so the anomaly gate is not
+  breached and no ack is needed. The 12.1-forecast column moves with it, since the live
+  consensus is the projection's prior.
+- The Wowhead rebuild itself moved **49 of 80 letters** (raid 29, M+ 20) — a NEW list, not
+  a retune, which is why the letters are stored as fetched rather than held at their S1
+  values. Biggest: Arms C→S and Blood DK B→S raid, Ret A→C, Aug A→C raid / A+→C M+,
+  Guardian S→B M+, Disc + Pres A→S raid.
+- Everything else: **zero tier moves anywhere.** Icy Veins 80/80 (s1, published dates
+  unchanged), Icy Veins PTR 40/40 (s2, published 2026-08-02, its 7-band scale intact),
+  Method 79 (39 raid — Vengeance still absent upstream — + 40 M+, s1, M+ S tier still
+  genuinely empty), Archon 80 on a fresh cut (`lastUpdated` 08-07T12:00Z → 08-08T12:00Z),
+  Archon per-encounter 51/51 pages with 680 complete tier rows (22 moved), survivability
+  17 of 40 moved (the same daily death-rate re-clustering; feeds no consensus).
+- **No season flip in the tracker.** Icy Veins, Method and Archon all still self-identify
+  as 12.0.7 / Season 1, so `PHASES.liveSeason` and `SNAPSHOT_PHASE` stay put — but Wowhead
+  going first is the first real exercise of the transition rule. Two days to launch.

@@ -696,3 +696,44 @@ numbers (95th pct DPS / popularity / M+ score — ungated, not in required-sourc
   freshness" trap in reverse.
 - `npm test` **313 pass / 0 fail / 21 skipped** (Playwright UI invariants skip in this job);
   `npm run build` OK (1272.8 KB); `node src/snapshot.mjs`; `check-refresh --manifest` **passes**.
+
+## 2026-08-09 (nightly, CI runner)
+
+- **Archon** — new upstream cut (08-07T12:00Z → 08-08T12:00Z): 95th-pct DPS 33, HPS 7,
+  M+ score 40, popularity 80 = 160 rows at asOf 2026-08-09; 59 values changed, all far
+  inside `maxValueMovePct`. Read from `specRankingsSection.table.data[]`, never `tierList`.
+- **Murlok** 40/40 at 2026-08-09; **0 of 40 values moved**. Not a stale fetch: the pages
+  self-report "Updated 7 hours ago" and refresh every 8h — the top-50 ceiling is simply
+  near-static this late in Season 1. Plain GET only (r.jina.ai still does not work there).
+- **Mythicstats** — `r.jina.ai` returned **403 this run**; fetched the site DIRECTLY
+  instead (index 200, and `/period/latest` is server-rendered, 206 KB). Period **1075**,
+  week 20 of MID1, top 2000 keys / 10000 characters / 21.8 avg key. 39 of 40 specs at
+  2026-08-09; Devastation Evoker is absent from the bars entirely (as last run — its
+  stored value is 0.0%), so its row keeps the older date rather than being invented.
+- **WoWMeta** partial: JSON API 200 but `manifest.snapshotDate` is **still 2026-08-05**,
+  the third consecutive night with no upstream pipeline run. 40 rows re-merged unchanged;
+  the coverage date stays 08-05 (4 days, maxAgeDays 8).
+- **Bloodmallet** partial: 26/27 charts (Augmentation still errors on all 3 retries — the
+  documented genuine absence), MID1 confirmed, and the per-spec chart timestamps are
+  **unchanged at 2026-07-08 (Elemental 07-15)** with 0 of 26 profiles moving a value.
+  32 days without a re-sim against `maxAgeDays 5` — the heartbeat SHOULD go red here; that
+  red is the signal (the 08-08 honest-date correction), not something to paper over.
+- **SimulationCraft** partial: the fetched `MID1_Raid.html` is the SAME report as
+  yesterday — Timestamp **2026-08-08 07:28:33+0000**, SimC 1205-01, WoW 12.0.7.68974.
+  Re-verified the reduction rule while re-parsing: best build per spec (max matched all 26
+  stored values exactly, min matched none), tanks excluded. asOf stays the report's own
+  date, so the row is partial.
+- **Robydoby** (best-effort, outside the contract): both sheet indexes fetched; the newest
+  **Mythic** week is still **24/7**, i.e. the week already stored at asOf 2026-07-24. Nothing
+  new to ingest, so nothing was merged — and a probe of the 24/7 CSV tabs made clear the
+  right-hand percentile block does not sit at a fixed column offset, so re-deriving the
+  parse for a week that has not changed would have risked writing wrong values for no gain.
+- **WCL**: this agent holds no credentials and fetched nothing from warcraftlogs.com. Per
+  `wcl-fetch/evidence.json` (11:04:54Z, verdict **rdps-broken** — `characterRankings(rdps)`
+  on 3176 still a bare Internal server error while OAuth/GraphQL transport is fine), the
+  five rDPS/normalized cuts stay frozen (zones 46/47 at 08-07, zone 54 at 07-28, ptrDummy
+  at 08-07) and only the three deterministic RAW series landed, by the fetch step itself:
+  dummy 104 rows (1T 2000 / 2T 593 / 3T 274 / 5T 2000 ranked players), Venomous Abyss
+  pooled 27, M+ keys pooled 27 — all at 2026-08-09.
+- `npm test` 317 pass / 0 fail / 21 skipped; `npm run build` OK; `check-refresh --manifest`
+  passes (16 consensus tier moves vs the committed baseline, 0 of ≥2 bands).

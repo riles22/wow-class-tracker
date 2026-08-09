@@ -2,10 +2,143 @@
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
   "videos": [
     {
-      "id": "vK9ttexGFVg",
-      "creator": "Preheat",
-      "title": "12.1 Mage Roundtable ft. Porom, Forgy, Khaelt, Azuna",
+      "id": "67DPiF5MD40",
+      "creator": "Bansherz",
+      "title": "Midnight Season 2 BM Hunter Guide Talents & Rotation",
       "published": "2026-08-09",
+      "queuedAt": "2026-08-09"
+    },
+    {
+      "id": "2_Y9InoKm2E",
+      "creator": "Jedith",
+      "title": "Devourer Demon Hunter: Everything Changed in 12.1",
+      "published": "2026-07-07",
+      "queuedAt": "2026-08-09"
+    },
+    {
+      "id": "2Y_fZQb7Yls",
+      "creator": "Jedith",
+      "title": "12.1 Devourer DH is Insanely Good (But There's a Catch)",
+      "published": "2026-06-30",
+      "queuedAt": "2026-08-09"
+    },
+    {
+      "id": "slYmsyKqLRo",
+      "creator": "Jedith",
+      "title": "Havoc DH Gets Buffed...But Is It Enough?",
+      "published": "2026-06-24",
+      "queuedAt": "2026-08-09"
+    },
+    {
+      "id": "1KskZ3QXD38",
+      "creator": "Jedith",
+      "title": "DEMON HUNTERS GETTING BUFFED | Tier Sets & Tuning 12.1",
+      "published": "2026-06-19",
+      "queuedAt": "2026-08-09"
+    },
+    {
+      "id": "TELYhJ55qSc",
+      "creator": "leak",
+      "title": "Flamefang Pitch REMOVED and New Tier! HUGE Survival Hunter 12.1 Changes",
+      "published": "2026-07-14",
+      "queuedAt": "2026-08-09"
+    },
+    {
+      "id": "DJxknBqUD24",
+      "creator": "leak",
+      "title": "12.1 Survival Hunter Changes! Tier Set, Special 1H Weapons, Feedback, and More!",
+      "published": "2026-06-20",
+      "queuedAt": "2026-08-09"
+    },
+    {
+      "id": "lQ3wyHOACe0",
+      "creator": "Pkpawner",
+      "title": "Windwalker 12.1 | Fist of Fury Problem Just Got Worse",
+      "published": "2026-06-20",
+      "queuedAt": "2026-08-09"
+    },
+    {
+      "id": "lqWDqGVZzjc",
+      "creator": "NeekapHere",
+      "title": "Retribution Paladin Tier Set REWORKED AGAIN! | 12.1 PTR",
+      "published": "2026-07-09",
+      "queuedAt": "2026-08-09"
+    },
+    {
+      "id": "m55q-eUQ9us",
+      "creator": "NeekapHere",
+      "title": "Retribution Paladin's Tier Set Just Got MUCH Better | Patch 12.1 PTR",
+      "published": "2026-07-01",
+      "queuedAt": "2026-08-09"
+    },
+    {
+      "id": "k6dxaoUqKGA",
+      "creator": "Musguete",
+      "title": "Blizzard NEEDS to BUFF Rogues on 12.1 PTR NOW!!",
+      "published": "2026-07-14",
+      "queuedAt": "2026-08-09"
+    },
+    {
+      "id": "b_yyDxBT_FQ",
+      "creator": "Musguete",
+      "title": "Outlaw Rogue is BLASTING AFTER the Buffs! #rogue #worldofwarcraft #wowgear #midnights2",
+      "published": "2026-07-24",
+      "queuedAt": "2026-08-09"
+    },
+    {
+      "id": "5UjnyOvtRes",
+      "creator": "Musguete",
+      "title": "Can Rogues compete in Season 2? Mythic Sszorak Encounter Rogue POV 12.1 PTR",
+      "published": "2026-07-11",
+      "queuedAt": "2026-08-09"
+    },
+    {
+      "id": "yDIpJmEkI9U",
+      "creator": "Megasett",
+      "title": "Mistweaver Week 1 PTR & Altar of Fangs First Impressions",
+      "published": "2026-06-29",
+      "queuedAt": "2026-08-09"
+    },
+    {
+      "id": "jsKr8ehGXOg",
+      "creator": "Sha",
+      "title": "tank buffs yay (rip brewmaster)",
+      "published": "2026-07-22",
+      "queuedAt": "2026-08-09"
+    },
+    {
+      "id": "IYq5bWKuOiU",
+      "creator": "Dratnos",
+      "title": "PTR Update: Class Tuning & Corrosive Powers",
+      "published": "2026-07-14",
+      "queuedAt": "2026-08-09"
+    },
+    {
+      "id": "fUcTHqnixVo",
+      "creator": "Dratnos",
+      "title": "PTR Class Tuning from Raid Testing Data!",
+      "published": "2026-07-08",
+      "queuedAt": "2026-08-09"
+    },
+    {
+      "id": "hHaF6LlYyu0",
+      "creator": "Zorthas",
+      "title": "Every Change to Returning Dungeons in Season 2",
+      "published": "2026-07-09",
+      "queuedAt": "2026-08-09"
+    },
+    {
+      "id": "hvW80uwOmFg",
+      "creator": "Maximum",
+      "title": "Reacting to the Ion Hazzikostas 12.1 Interview",
+      "published": "2026-07-06",
+      "queuedAt": "2026-08-09"
+    },
+    {
+      "id": "_zGku2p5vS4",
+      "creator": "Obli",
+      "title": "The Lost Explorers HC PTR Testing / Frost DK POV / Midnight Season 2 12.1",
+      "published": "2026-06-28",
       "queuedAt": "2026-08-09"
     }
   ],

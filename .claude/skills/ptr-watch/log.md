@@ -790,3 +790,33 @@ catch-up path.
   would double-count.
 - **NO SEASON FLIP** — 12.1 ships Aug 11; `SNAPSHOT_PHASE` remains the pending one-shot
   owner action, `PHASE_FLIP_DUE` Aug 20.
+
+## 2026-08-09 (nightly, CI runner)
+
+- **No new build.** Official thread `2317811.json`: `highest_post_number` still **19**
+  (Linxy, 2026-07-31T23:42Z) — already logged. Feed unchanged at 15 entries, newest the
+  2026-08-06 launch patch notes.
+- **Wowhead RSS** (40 items, 08-01 → 08-08, read from `content:encoded`): the 12.1 items
+  are Jimothy datamined in the latest PTR build (cosmetic), More Season 2 M+ Dungeon
+  Tuning (Ruby Life Pools / Temple of Sethraliss — encounter, no spec lines), Datamined
+  Hotfixes (M+/raid/delve ability FLAGS — e.g. Void Toxin no longer reflectable, which is
+  encounter-side and NOT a Warrior change), Embellishment + Potion tuning (items), and the
+  Blizzard × Icy Veins × Raider.IO interview. **Nothing with a per-spec tuning line, so
+  nothing was written.** Lead worth watching: that interview says a Season 2 **class-tuning
+  roadmap** ships "in the next couple of days".
+- **Blue-post channel**: the Wowhead blue-tracker index is JS-hydrated (0 topic links in
+  raw HTML) and 403s through r.jina.ai. Swept the forum's own Discourse **search.json**
+  instead (`q=@Kaivax after:2026-07-31`, same for @Linxy) — season/housing/M+-score topics
+  only, no class tuning. Recording the transport because the 08-02 gotcha assumes the
+  Wowhead index is reachable; it was not tonight, and Discourse search covers it.
+- **WCL is evidence-only on the runner** (verdict `rdps-broken`): zone 54 normalized stays
+  at 2026-07-28 (12 days; window raised to 40 for exactly this), zone 52 `ptrDummy` and
+  zone 56 medians stay at 08-07. The three deterministic RAW series landed at 2026-08-09
+  — and the zone-54 raw cut reporting **0 ranked players on The Coiled Altar and Ula'tek**
+  independently corroborates that zone 54 is empty upstream, not just unreachable.
+- **9 specs still `ptr: null`** (Frost DK · Feral/Guardian/Restoration Druid · Holy Priest ·
+  Elemental Shaman · all three Warlocks). No spec-review article for any of them in the RSS
+  window, and no Discord paste-in on a nightly, so they honestly stay null.
+- **NO SEASON FLIP in the game** — but Wowhead's tier lists flipped to Season 2 ahead of it
+  (see refresh-tiers log). `SNAPSHOT_PHASE` remains the pending one-shot owner action,
+  `PHASE_FLIP_DUE` Aug 20, launch Aug 11.
