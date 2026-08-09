@@ -426,7 +426,7 @@ export function checkValueMove(config, data, prevData, ack = null) {
 
 /* --- the heartbeat ----------------------------------------------------------------- */
 
-export function checkFreshness(config, manifest, data, now) {
+export function checkFreshness(config, manifest, data, now, gearing = null) {
   const violations = [], report = [], keys = [];
   const nowDate = dateOf(now);
   const nowMs = ISO_INSTANT.test(String(now)) ? Date.parse(now) : utc(nowDate);
@@ -507,6 +507,43 @@ export function checkFreshness(config, manifest, data, now) {
       keys.push(`${req.key}-published`);
     }
   }
+  /* GEARING FRESHNESS (2026-08-08). The gearing subproject had no staleness surface of any
+     kind: nothing in required-sources.json, check-refresh, freshness.yml, validate.mjs or
+     snapshot.mjs mentioned it, and its own validator's seven "stale" strings are all COUNT
+     assertions, never date comparisons. The nightly redeployed an 08-02 page every night and
+     nothing anywhere would have noticed it rotting.
+     Deliberately HEARTBEAT-ONLY, and deliberately a sibling of `requirements[]` rather than an
+     entry in it. requirements[] is consumed by checkManifest as well as this function, so a row
+     there would make the nightly publish gate demand a run-manifest entry for a subproject the
+     nightly cannot refresh — gearing harvests are MANUAL because Wowhead is unreachable from CI.
+     A sibling key is read only by the loop that iterates it. That is structural, not a
+     convention. It is also NOT in gearing/src/validate-data.mjs, so `npm test` (nightly Gate 1)
+     can never go red on a date the nightly has no way to fix.
+     Thresholds are loose because there is no observed re-harvest cadence to calibrate against;
+     the point is to make rot VISIBLE, not to nag about lag. */
+  if (config.gearing?.datasets?.length) {
+    if (!gearing?.present) {
+      report.push("gearing: not present in this checkout — freshness not evaluated");
+    } else {
+      for (const ds of config.gearing.datasets) {
+        const date = gearing.dates?.[ds.file] ?? null;
+        const age = date ? ageDays(nowDate, date) : null;
+        report.push(`${ds.key}: ${date ?? "no dated state"}${age != null ? ` (${age}d, max ${ds.maxAgeDays}d)` : ""}`);
+        if (date == null) { violations.push(`${ds.key}: gearing/data/${ds.file} carries no ${ds.dateField} date`); keys.push(ds.key); }
+        else if (age > ds.maxAgeDays) {
+          violations.push(`${ds.key} (gearing/data/${ds.file}) is ${age} days stale — max ${ds.maxAgeDays}d. Gearing harvests are manual; see gearing/README.md`);
+          keys.push(ds.key);
+        }
+      }
+      /* The check that actually earns its keep. Age only says a harvest is old; THIS says the
+         page is publishing something the tracker has already corrected — which is what
+         happened with a superseded Preservation Evoker set bonus. Cheap, exact, no clock. */
+      if (gearing.tierSetDrift > 0) {
+        violations.push(`gearing-tierset-sync: ${gearing.tierSetDrift} spec(s) carry tier-set text the tracker has since corrected — run \`node gearing/src/sync-tracker-fields.mjs\``);
+        keys.push("gearing-tierset-sync");
+      }
+    }
+  }
   return { violations, report, fingerprint: [...new Set(keys)].sort().join(",") };
 }
 
@@ -576,9 +613,32 @@ if (isMain) {
   const manifest = await readJson("data/run-manifest.json").catch(() => null);
   const data = await loadData(root);
 
+  /* Read gearing's dates SOFT — mirroring src/build.mjs's copy-if-present treatment of the
+     subproject. A checkout without gearing/ must not fail the heartbeat, but it also must not
+     pass in silence, so absence is reported rather than skipped. Only the heartbeat reads this;
+     checkManifest never sees it. */
+  const readGearing = async () => {
+    if (!config.gearing?.datasets?.length) return null;
+    const dates = {};
+    let present = false;
+    for (const ds of config.gearing.datasets) {
+      try {
+        const doc = JSON.parse(await readFile(path.join(root, "gearing", "data", ds.file), "utf8"));
+        present = true;
+        dates[ds.file] = doc?.[ds.dateField] ?? null;
+      } catch { dates[ds.file] = null; }
+    }
+    let tierSetDrift = 0;
+    try {
+      const { syncTrackerFields } = await import("../gearing/src/sync-tracker-fields.mjs");
+      tierSetDrift = (await syncTrackerFields({ check: true })).filter(c => c.textChanged).length;
+    } catch { /* subproject absent or unreadable — the per-file report above already says so */ }
+    return { present, dates, tierSetDrift };
+  };
+
   let failures = [];
   if (mode === "age") {
-    const { violations, report, fingerprint } = checkFreshness(config, manifest, data, now);
+    const { violations, report, fingerprint } = checkFreshness(config, manifest, data, now, await readGearing());
     for (const line of report) console.log("  " + line);
     console.log(`fingerprint=${fingerprint || "clean"}`);
     failures = violations;

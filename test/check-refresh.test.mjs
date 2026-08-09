@@ -375,6 +375,43 @@ test("freshness heartbeat flags an old manifest run and per-source staleness (da
   assert.equal(fresh.fingerprint, "");
 });
 
+test("gearing freshness is heartbeat-only and reports absence rather than passing silently (2026-08-08)", () => {
+  /* The gearing subproject had no staleness surface anywhere: not required-sources, not
+     check-refresh, not freshness.yml, and its own validator's "stale" strings are all count
+     assertions. The nightly redeployed an 08-02 page nightly and nothing would have noticed.
+     Three properties matter and each is asserted below: it lives OUTSIDE requirements[] so the
+     publish gate can never demand a manifest row for a subproject the nightly cannot refresh;
+     a checkout without gearing/ is reported, not skipped; and the tier-set sync check measures
+     WRONGNESS (the page publishing text the tracker already corrected) rather than mere age. */
+  const cfg = { ...config, gearing: { datasets: [
+    { key: "gearing-raid", file: "raid-items.json", dateField: "harvestedAt", maxAgeDays: 30 }
+  ] } };
+  const data = freshData();
+
+  const stale = checkFreshness(cfg, goodManifest(), data, "2026-09-20",
+    { present: true, dates: { "raid-items.json": "2026-08-02" }, tierSetDrift: 0 });
+  assert.ok(stale.violations.some(v => v.includes("gearing-raid") && v.includes("stale")),
+    JSON.stringify(stale.violations));
+
+  const ok = checkFreshness(cfg, goodManifest(), data, "2026-08-14",
+    { present: true, dates: { "raid-items.json": "2026-08-02" }, tierSetDrift: 0 });
+  assert.ok(!ok.violations.some(v => v.includes("gearing-raid")), "12 days is inside a 30-day threshold");
+
+  // Absence is REPORTED, never silent — a missing subproject must not read as a clean bill.
+  const absent = checkFreshness(cfg, goodManifest(), data, "2026-08-14", { present: false, dates: {}, tierSetDrift: 0 });
+  assert.ok(absent.report.some(l => l.includes("gearing: not present")), JSON.stringify(absent.report));
+  assert.ok(!absent.violations.some(v => v.includes("gearing")), "a checkout without gearing/ must not fail the heartbeat");
+
+  // Drift fires regardless of age — this is the Preservation Evoker shape.
+  const drift = checkFreshness(cfg, goodManifest(), data, "2026-08-14",
+    { present: true, dates: { "raid-items.json": "2026-08-02" }, tierSetDrift: 2 });
+  assert.ok(drift.violations.some(v => v.includes("gearing-tierset-sync") && v.includes("sync-tracker-fields")),
+    JSON.stringify(drift.violations));
+
+  // And it stays out of requirements[], so checkManifest can never demand a gearing row.
+  assert.ok(!(config.requirements ?? []).some(r => String(r.key).startsWith("gearing")));
+});
+
 test("freshness heartbeat uses startedAt at full-timestamp precision — 36h means 36h, not whole days", () => {
   const m = { ...goodManifest(), startedAt: "2026-07-14T02:00:00Z" };
   const stale = checkFreshness(config, m, freshData(), "2026-07-15T20:00:00Z"); // 42h after startedAt

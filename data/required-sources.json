@@ -10,6 +10,20 @@
     "maxTwoBandMoves": 6,
     "maxTotalMoves": 25
   },
+  "gearing": {
+    "comment": "Freshness for the gearing subproject (gearing/README.md), added 2026-08-08. Deliberately a SIBLING of requirements[] rather than an entry in it: requirements[] is consumed by checkManifest as well as checkFreshness, so a row there would make the nightly publish gate demand a run-manifest entry for a subproject the nightly cannot refresh — gearing harvests are MANUAL because Wowhead is unreachable from CI. A sibling key is read only by the loop that iterates it, which is a structural guarantee rather than a convention. It is also deliberately NOT in gearing/src/validate-data.mjs, so npm test (nightly Gate 1) can never go red on a date the nightly has no way to fix. Thresholds are loose on purpose: there is no observed re-harvest cadence to calibrate against (zero re-harvests since the 2026-08-04 import), so the job here is to make rot visible, not to nag about lag. The check that actually earns its keep is tierSetSync, which measures WRONGNESS rather than age — it fires when the page is publishing tier-set text the tracker has already corrected, which is exactly the Preservation Evoker failure of 2026-08-08. Brings forward the freshness contract row listed as Phase C in docs/s2-transition-scope.md.",
+    "datasets": [
+      { "key": "gearing-raid", "file": "raid-items.json", "dateField": "harvestedAt", "maxAgeDays": 30 },
+      { "key": "gearing-dungeons", "file": "dungeon-items.json", "dateField": "harvestedAt", "maxAgeDays": 30 },
+      { "key": "gearing-tier", "file": "tier-items.json", "dateField": "harvestedAt", "maxAgeDays": 30 },
+      { "key": "gearing-catalyst-alloc", "file": "catalyst-stat-allocations.json", "dateField": "harvestedAt", "maxAgeDays": 30 },
+      { "key": "gearing-sheet", "file": "sheet-rewards.json", "dateField": "harvestedAt", "maxAgeDays": 30 },
+      { "key": "gearing-specs", "file": "specs.json", "dateField": "harvestedAt", "maxAgeDays": 30 },
+      { "key": "gearing-icons", "file": "icons.json", "dateField": "harvestedAt", "maxAgeDays": 60 },
+      { "key": "gearing-catalyst-rules", "file": "catalyst-rules.json", "dateField": "reviewedAt", "maxAgeDays": 45 },
+      { "key": "gearing-stat-baseline", "file": "stat-priority-baseline.json", "dateField": "reviewedAt", "maxAgeDays": 45 }
+    ]
+  },
   "requirements": [
     {
       "key": "icyveins",
