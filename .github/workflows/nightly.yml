@@ -474,9 +474,15 @@ jobs:
           # (audit 2026-07-24, A2). On a normal night this is a no-op: the committed
           # community.json already has the owner's reviewed overrides applied.
           node src/apply-community-overrides.mjs
-          if ! git diff --quiet HEAD -- data/required-sources.json data/scales.json; then
-            git --no-pager diff HEAD -- data/required-sources.json data/scales.json
-            echo "::error::refresh artifact modified the gate contract or tier scales — these ship only via reviewed commits to master"
+          # data/season-final.json is a DERIVED, APPEND-ONLY record: each source's last
+          # letters about the live season, lifted from the commit that still described it.
+          # It feeds the published consensus directly (normalize.mjs's frozen lane), so an
+          # agent able to write it could change any published letter while every other gate
+          # stayed green. It is produced by the deterministic freeze step BELOW this gate,
+          # never by the refresh agent — so at this point it must be byte-identical to HEAD.
+          if ! git diff --quiet HEAD -- data/required-sources.json data/scales.json data/season-final.json; then
+            git --no-pager diff HEAD -- data/required-sources.json data/scales.json data/season-final.json
+            echo "::error::refresh artifact modified the gate contract, tier scales or the frozen-season archive — these ship only via reviewed commits or the deterministic freeze step"
             exit 1
           fi
           node -e '
@@ -516,6 +522,34 @@ jobs:
             git status --porcelain -- data/history/
             git checkout HEAD -- data/history/
             git clean -fdq -- data/history/
+          fi
+
+      # Freeze any outlet that moved to the next season TONIGHT, before the build reads it.
+      # Runs after Gate 0 (so the seasonVerified observations it keys on have already
+      # cleared the boundary check) and before Gate 1 (so the tests and the build see the
+      # frozen letters, not a consensus that has silently lost a contributor).
+      #
+      # Deterministic and append-only: it derives the freeze point from git history — the
+      # newest commit whose own data/sources.json still verified that page at the live
+      # season — and never rewrites an existing record. Without it, an outlet flipping
+      # mid-window drops out of the mean, which publishes as spec movement nobody wrote
+      # (16 cells the night Wowhead flipped) and, if every outlet flips before the phase
+      # flip, blanks the column entirely (measured: 80 of 80 cells null).
+      #
+      # This needs real history, which is why it lives in publish (fetch-depth 0) and not
+      # in the refresh job (fetch-depth 1). A shallow checkout cannot answer the question
+      # at all, so fail loudly rather than write a wrong or empty record.
+      - name: Freeze final-season letters for any outlet that moved ahead
+        run: |
+          set -euo pipefail
+          if [ "$(git rev-list --count HEAD)" -le 5 ]; then
+            echo "::error::shallow checkout — freeze-season needs full history to derive a freeze point"
+            exit 1
+          fi
+          node src/freeze-season.mjs
+          if ! git diff --quiet -- data/season-final.json; then
+            echo "::notice::froze final-season letters for an outlet that moved ahead this run"
+            git --no-pager diff --stat -- data/season-final.json
           fi
 
       - name: Show what the refresh changed

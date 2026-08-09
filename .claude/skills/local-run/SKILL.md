@@ -45,7 +45,24 @@ runs (2026-07-31), which were sound but left drift the next nightly had to absor
      this leaves — manifest rows saying "unreachable" while the stored data is fresh —
      is bounded at one day, because the next nightly re-attempts everything and rewrites
      the file. That bound is the design, not an accident.
-4. **Verify like the publish job would**:
+4. **Freeze any outlet that moved to the next season** — run this BEFORE the verify
+   below, so the build and tests see the frozen letters:
+   ```
+   node src/freeze-season.mjs
+   ```
+   Deterministic and append-only: it walks git history for the newest commit whose own
+   `data/sources.json` still verified each page at `PHASES.liveSeason` and lifts that
+   commit's letters into `data/season-final.json`, never overwriting an existing record.
+   Normally a no-op that prints "nothing to freeze". It matters on exactly the run where
+   an era-verify step records a `seasonVerified` flip: without it that outlet drops out of
+   the consensus, which publishes as spec movement nobody wrote (16 cells the night
+   Wowhead flipped), and if every outlet flips before the phase flip the 12.0.7 column
+   blanks entirely (measured: 80 of 80 cells null). **The nightly runs this too** — in its
+   publish job, between Gate 0 and Gate 1 — so a local run that skips it and pushes leaves
+   the flip for the nightly to catch, which means a day of published phantom movement.
+   It needs real git history; a shallow clone cannot answer the question and it errors
+   rather than writing an empty record.
+5. **Verify like the publish job would**:
    ```
    npm test && npm run build
    node src/check-refresh.mjs --manifest   # informational — see below
@@ -54,15 +71,15 @@ runs (2026-07-31), which were sound but left drift the next nightly had to absor
    old — not a fresh write from this run`. That failure is expected and correct (you
    did not do a full refresh). **Anything else it prints is real** and must be either
    fixed or explainable before pushing; it is the same output the nightly gate reads.
-5. **Snapshot**: `node src/snapshot.mjs` whenever data changed — this is both the
+6. **Snapshot**: `node src/snapshot.mjs` whenever data changed — this is both the
    movement baseline and the freshness heartbeat's proof-of-life for runs that skip
    the manifest (a snapshot only counts if strictly newer than the manifest date, so a
    local run on the same calendar day as a completed nightly does not extend the
    heartbeat — fine, the nightly already did).
-6. **Rebuild after the snapshot** (`npm run build`) so the drawer Timeline includes
+7. **Rebuild after the snapshot** (`npm run build`) so the drawer Timeline includes
    the point you just wrote — the same ordering the nightly publish learned on 07-31.
-7. **Commit with the run's story, push master directly.** Deploy fires on the push.
-8. **Digest gap, known and accepted**: only the nightly publish posts to the pinned
+8. **Commit with the run's story, push master directly.** Deploy fires on the push.
+9. **Digest gap, known and accepted**: only the nightly publish posts to the pinned
    digest issue. A local run's changes appear in the NEXT nightly digest as part of its
    HEAD^..HEAD diff only if nothing else lands first — in practice they are documented
    by the local commit message instead. If a local run's changes are big enough that
@@ -113,10 +130,10 @@ no-staleness-gate policy still holds *within* whichever scope you pick.
   (parse verification, era-verification, `log.md` precedent lookups, checking a
   distillation against its cited source). Cap ~4 concurrent.
 - **Single-threaded, main agent only:** every `apply-*.mjs` merge and direct `data/*.json`
-  write; `npm test && npm run build`; `snapshot.mjs`; the final rebuild; the manifest
+  write; `npm test && npm run build`; `freeze-season.mjs`; `snapshot.mjs`; the final rebuild; the manifest
   rewrite; all git staging, commit and push. (This list is a CONCURRENCY policy, not a
   running order — read it as "none of these may be delegated", not as a sequence. The
-  order is steps 1-7 above, and step 6's rebuild-AFTER-snapshot is the part this list
+  order is steps 1-8 above, and step 7's rebuild-AFTER-snapshot is the part this list
   looks like it contradicts. On 2026-08-02 a local run followed this line's apparent
   ordering, shipped a dist whose Timeline ended on a null point for all 40 specs, and
   needed a follow-up commit to fix it.)

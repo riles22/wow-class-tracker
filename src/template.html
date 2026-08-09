@@ -1842,10 +1842,29 @@ function render(){
       const name = (DATA.encounterTiers?.[fb] || {})[slug]?.name ?? slug;
       return { label: `${label} <span class="hqual">${esc(name)} · Archon</span>`, aria: `${label}, ${name}, Archon tier`, qual: `${name} · Archon` };
     }
-    // A column of letters is unattributed unless it says so. Selecting Era = 12.1 PTR
-    // changes ZERO tier letters (era gates verdicts, writeups and era-tagged metrics, not
-    // the tier columns), so without this a visitor reasonably reads them as 12.1 tiers.
-    const qual = state.source === "projection" ? "12.1 forecast" : "12.0.7";
+    /* A column of letters is unattributed unless it says so. Selecting Era = 12.1 PTR
+       changes ZERO tier letters (era gates verdicts, writeups and era-tagged metrics, not
+       the tier columns), so without this a visitor reasonably reads them as 12.1 tiers.
+
+       The qualifier must name the season the SELECTED source's letters actually describe
+       (2026-08-09). It was a flat "12.0.7" for every source view, which stamped the live
+       patch on Wowhead's Season-2 column — in the default view and, because `.head` is
+       display:none under 760px, on the mobile `.mtag` too. That is the exact
+       misattribution this qualifier exists to prevent, performed by the qualifier itself.
+       Derived from PHASES, never a literal: rule 4 keeps patch strings out of this file. */
+    const selected = state.source && state.source !== "consensus" && state.source !== "projection"
+      ? SOURCES.find(x => x.id === state.source) : null;
+    const seasonOfSelected = selected
+      ? [...new Set((selected.pages ?? []).filter(p => p.bracket === bracket).map(p => p.seasonVerified).filter(Boolean))]
+      : [];
+    const qual = state.source === "projection" ? `${seasonLabelOf(SEASON_ORDER[SEASON_ORDER.indexOf(PHASE.liveSeason) + 1]) ?? "12.1"} forecast`
+      // One season, and not the live one: label the column with ITS patch. A frozen source
+      // is the interesting case — its letters in the consensus are the live-season ones, but
+      // in ITS OWN column the page is showing what that outlet publishes now, which is next
+      // season. Mixed or unlabelled falls back to the live label, as before.
+      : seasonOfSelected.length === 1 && seasonOfSelected[0] !== PHASE.liveSeason
+        ? seasonLabelOf(seasonOfSelected[0])
+        : PHASE.liveLabel;
     return { label: `${label} <span class="hqual">${qual}</span>`, aria: `${label}, ${qual}`, qual };
   };
   const rh = fightHead('raid','Raid'), mh = fightHead('mplus','M+');

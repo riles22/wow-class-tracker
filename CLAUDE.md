@@ -352,12 +352,51 @@ normalize.mjs — the single era vocabulary; the 12.1 launch and every later cyc
 config edit there + SNAPSHOT_PHASE, pinned by a test so the flip is deliberate).
 Mid-transition the consensus honestly shrinks ("consensus of 2") and recovers as pages
 update; the toolbar count, Source select and footer registry all say who is lagging.
+**The rule cuts BOTH ways, and until 2026-08-09 only one direction existed.** Seasons were
+compared for equality alone, so "behind" and "ahead" were the same fact — then Wowhead
+published its Season-2 lists early and every surface said it was *lagging*. `PHASES` now
+carries **`seasonOrder`** (oldest first, declared — never string-compared, or "s10" sorts
+below "s2") and **`seasonLabels`**; `aheadSeasonFor(source, bracket, liveSeason)` returns
+the season an outlet has moved ahead to, or null. Two refusals are deliberate: a bracket
+whose pages are split across seasons (mid-rebuild) returns null and the source goes DARK
+for that bracket — out of the consensus and out of the forecast, never mixing two seasons
+in one term; and a bracket carrying `seasonVerified` on some pages but not others THROWS,
+because the field is agent-writable and an unwritten one would silently switch 27-46% of
+a raid forecast.
+
+**Two things consume "ahead", and they are different lanes:**
+- **`nextPatchTierSources`** (= `era: "ptr"` OR season-ahead) is the 12.1 forecast's
+  external-letter input — see `ptrTierRead` under the projection. Keying on SEASON rather
+  than `era` is what makes the flip free: the outlet leaves the forecast and re-enters the
+  consensus with no owner action. **Do not "fix" this by retyping a live source to
+  `era: "ptr"`** — measured, that nulls 80 of 80 consensus cells at the phase flip, because
+  `consensusFor` drops non-live era BEFORE the season test.
+- **The FROZEN LANE** (`data/season-final.json`, `frozenLettersFor`) supplies that outlet's
+  LAST letters about the live season, so the mean keeps its composition. Contributors are
+  tagged `lane: "frozen"` with `frozenAsOf`. Without it, an outlet flipping recomposes the
+  mean and the ▲▼ engine narrates a registry decision as spec movement (16 cells the night
+  Wowhead flipped, the largest on record); if all four flip before the phase flip the column
+  blanks entirely (measured: 80 of 80 null). Restoration is exact — 0/80 tier, score, spread
+  and perSource-set diffs against the pre-flip commit. Staleness cost at Wowhead's own
+  observed rate of S1 change: **0.24 letters of 80** over nine days.
+  The archive is **derived and append-only**: `node src/freeze-season.mjs` walks git history
+  for the newest commit whose own `sources.json` still verified that page at the live season
+  and lifts that commit's letters, never overwriting an existing record, erroring rather than
+  guessing. **Never hand-write it.** It runs in the nightly's publish job between Gate 0 and
+  Gate 1 (publish has `fetch-depth: 0`; the refresh job's shallow checkout cannot answer the
+  question, which is why it is not agent-side) and as step 4 of a local run. Gate 0 treats it
+  as immutable alongside `required-sources.json`/`scales.json`, so an agent that writes it
+  fails the night red. The lookup is keyed by season, so at the flip `seasonFinal[liveSeason]`
+  is simply absent and the lane goes cold by itself — measured, consulted in 0 of 80 cells.
 Optional **`era`** (`"live"` default | `"ptr"`) marks a source whose ratings describe a
 patch we are not running: an `era: "ptr"` tier list keeps its toggle button, its column,
 its drawer row and its projection input, but `consensusFor` skips it and the 12.0.7-only
 view disables it. A typo'd era fails validation rather than defaulting to live, and a
 registry with no live-era tier list fails too (the consensus would have nothing to
-average). Currently one: `icyveins-ptr` (M+ only). All URLs must be https:// —
+average). Currently one: `icyveins-ptr` (M+ only) — and note it does NOT self-repair at
+the flip: at `liveSeason: "s2"` it still occupies the next-patch slot on all 40 M+ cells
+while describing the season we are running. Retyping or merging it is an 08-18 one-shot
+(pinned by a test so the behaviour cannot be inherited silently). All URLs must be https:// —
 validation enforces it, plus host allowlists on every agent-writable URL field
 (creator-take/metaNote citations, writeup + tier-set sources, community discord/creator
 links, PTR build-feed links — the approved-host sets live in `src/validate.mjs`; a new
@@ -568,10 +607,14 @@ data/     specs.json · sources.json · scales.json · ptr-builds.json · commun
           "Run manifest + integrity gates") ·
           pending-transcripts.json (machine transcript queue: agents append/remove,
           the deterministic fetch step drains) ·
+          season-final.json (each source's FINAL letters about the live season —
+          derived + append-only, written ONLY by src/freeze-season.mjs, immutable to
+          the nightly agent via Gate 0; feeds consensusFor's frozen lane) ·
           history/ (enriched movement/timeline snapshots written by snapshot.mjs)
 src/      build.mjs · template.html · render.mjs · normalize.mjs · validate.mjs ·
           apply-ratings.mjs · apply-metrics.mjs · apply-community-overrides.mjs
           (prebuild/prevalidate — hard-fails if absent) · snapshot.mjs · serve.mjs ·
+          freeze-season.mjs (deterministic season freeze — publish job + local-run step 4) ·
           digest.mjs (per-run change digest) ·
           check-refresh.mjs (manifest/freshness/anomaly gates) ·
           fetch-wcl.mjs + fetch-transcripts.mjs (deterministic pre-agent stages —
@@ -581,10 +624,13 @@ src/      build.mjs · template.html · render.mjs · normalize.mjs · validate.
           wcl-probe.mjs (dispatch-only WCL/diagnostic probe, no standing role)
 test/     normalize · validate · render · build · apply-metrics · apply-ratings ·
           check-refresh · community-overrides · digest · fetch-transcripts · fetch-wcl ·
-          fetch-published · ui-invariants (the ONLY tests that execute template.html's
+          fetch-published · freeze-season · ui-invariants (the ONLY tests that execute template.html's
           client JS — they need Playwright, which is deliberately not a dependency, so
-          `npm test` SKIPS all 21 locally and CI runs them in its own job. After any
-          template.html change, run them for real:
+          `npm test` SKIPS all 23 on a machine without it and CI runs them in its own job.
+          NOTE: Riley's local checkout HAS playwright + chromium resolved, so `npm test`
+          there reports 363 pass / 0 skipped and really does execute them — do not read a
+          green local run as "the UI invariants were skipped". After any template.html
+          change, run them for real:
           `npm i --no-save playwright@1.61.1 && npx playwright install chromium && npm test`)
 dist/     index.html + gearing.html  (generated — open directly in a browser; the two
           pages the site publishes, linked to each other by the masthead tab strip)
@@ -698,8 +744,13 @@ trigger it), via `gh workflow run` as github-actions[bot] —
 boundary guard ("Gate 0", 2026-07-18 portfolio audit: the artifact may not alter the
 gate contract `required-sources.json`, `scales.json`, or registry structure in
 `sources.json`/`community.json` beyond their agent-updatable fields — those fail the
-night red; agent-shipped `data/history/` snapshots are reset so movement/anomaly
-baselines always come from committed history) → `npm test` →
+night red; `data/season-final.json` is immutable to the agent for the same reason and by
+the same gate; agent-shipped `data/history/` snapshots are reset so movement/anomaly
+baselines always come from committed history) → **`node src/freeze-season.mjs`** (the
+deterministic season freeze: any outlet whose pages flipped season tonight has its final
+live-season letters lifted from git history, so the consensus keeps its composition
+instead of publishing a recomposition as spec movement — needs publish's `fetch-depth: 0`,
+which is why it cannot run agent-side) → `npm test` →
 `npm run build` → `node src/check-refresh.mjs --manifest` (which cross-checks WCL rows
 against the pre-agent evidence artifact and takes its anomaly ack ONLY from the
 human `anomaly_ack` workflow input), then snapshots, stages

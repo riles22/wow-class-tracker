@@ -1027,3 +1027,52 @@ ui("every visible consensus count equals the number of sources the cells actuall
     }
   }
 });
+
+/* THE COLUMN QUALIFIER NAMES THE SEASON ITS LETTERS DESCRIBE (2026-08-09).
+   The qualifier exists so a screenshot cannot misattribute a column, and it was a flat
+   "12.0.7" for every source view — which stamped the live patch on Wowhead's Season-2
+   letters, in the default view and on the mobile .mtag where .head is display:none.
+   Generalises the era:"ptr" check: ANY source whose pages describe a season other than
+   the live one must be labelled with ITS patch, not the live one. */
+ui("a source's column qualifier names the season that source's letters describe", async page => {
+  const data = payload();
+  const phases = data.meta.phases;
+  const order = phases.seasonOrder ?? ["s1", "s2"];
+  const labelOf = s => phases.seasonLabels?.[s] ?? phases.liveLabel;
+
+  const qualsFor = async id => page.evaluate(sourceId => {
+    const sel = document.getElementById("srcsel");
+    sel.value = sourceId;
+    sel.dispatchEvent(new Event("change", { bubbles: true }));
+    return [...document.querySelectorAll(".head .hqual")].map(e => e.textContent);
+  }, id);
+
+  for (const src of data.sources.filter(s => s.kind === "tier-list")) {
+    const quals = await qualsFor(src.id);
+    assert.equal(quals.length, 2, `${src.id}: expected a raid and an M+ qualifier`);
+    for (const [i, bracket] of ["raid", "mplus"].entries()) {
+      const seasons = [...new Set((src.pages ?? []).filter(p => p.bracket === bracket)
+        .map(p => p.seasonVerified).filter(Boolean))];
+      // Only assert where the source unambiguously describes ONE season for this bracket.
+      if (seasons.length !== 1) continue;
+      const expected = labelOf(seasons[0]);
+      assert.equal(quals[i], expected,
+        `${src.id} ${bracket}: column shows ${seasons[0]} letters but is labelled "${quals[i]}", expected "${expected}"`);
+      if (seasons[0] !== phases.liveSeason) {
+        assert.notEqual(quals[i], phases.liveLabel,
+          `${src.id} ${bracket}: letters describing ${seasons[0]} must never carry the live patch label`);
+      }
+    }
+  }
+
+  // The forecast column names the patch it forecasts, not the live one.
+  const projQuals = await page.evaluate(() => {
+    document.querySelector('#srcseg button[data-source="projection"]').click();
+    return [...document.querySelectorAll(".head .hqual")].map(e => e.textContent);
+  });
+  const nextLabel = labelOf(order[order.indexOf(phases.liveSeason) + 1]);
+  for (const q of projQuals) {
+    assert.match(q, /forecast$/, `the forecast column must say so, got "${q}"`);
+    assert.ok(q.startsWith(nextLabel), `the forecast column names ${nextLabel}, got "${q}"`);
+  }
+});
