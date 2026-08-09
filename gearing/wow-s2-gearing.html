@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-2jDMTHDclH1ftYjfXo2OmcOs7aWYn8u3U61W/shsmRk='; style-src 'unsafe-inline'; font-src data:; img-src data:; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-DUQ0xHP3qZ+izjJauPgNuzRqv5dqialRbORLZcLY0Aw='; style-src 'unsafe-inline'; font-src data:; img-src data:; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Spec Tracker &mdash; Season 2 Gearing</title>
 <!-- The Spec Tracker brand mark as favicon — same artwork as the tracker page, shipped
@@ -1206,6 +1206,18 @@ function catalystPlanCard(usable) {
     + '<details class="disclosure"><summary>Set bonuses and charge rules</summary><div class="disclosure-body">'
     + (set.set2 ? '<span class="fx"><b>2-piece:</b> ' + esc(set.set2) + '</span>' : '')
     + (set.set4 ? '<span class="fx"><b>4-piece:</b> ' + esc(set.set4) + '</span>' : '')
+    /* PROVENANCE (2026-08-08). These two strings are copied from the tracker and are the
+       only numbers on this page with no date and no citation beside them — which is how a
+       superseded Preservation Evoker figure ("150% effectiveness", corrected upstream on
+       2026-07-16) stayed published here for weeks with nothing on the page to betray it.
+       The tracker's own drawer shows tierSet with its asOf and source; this is the same
+       line. Deliberately era-neutral wording — no "PTR" — so it does not become another
+       unpinned literal for the 08-11 pass (docs/era-prose-scope.md). */
+    + ((set.set2 || set.set4) && set.asOf
+      ? '<span class="fx tierset-prov">Set bonuses as of <b>' + esc(set.asOf) + '</b>'
+        + (set.source ? ' &middot; <a href="' + esc(set.source) + '" target="_blank" rel="noopener noreferrer">source</a>' : '')
+        + ' &middot; copied from the Spec Tracker, which is where these are maintained.</span>'
+      : '')
     + (charges.passiveCadenceWeeks && charges.cap && unbound.requirement
       ? '<span class="fx"><b>Charge planning (PTR):</b> each conversion costs one Catalyst charge; charges passively accumulate every '
         + esc(charges.passiveCadenceWeeks) + ' weeks to a cap of ' + esc(charges.cap) + '. Earning the '

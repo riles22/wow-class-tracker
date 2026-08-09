@@ -229,7 +229,10 @@ for (const s of tracker) {
     statPriorityPatch: patch,
     statPrioritySource: priority ? statSource : null,
     tierSet: s.tierSet ?? null,
-    ratings: s.ratings ?? null,
+    // `ratings` is deliberately NOT copied (2026-08-08). Nothing in gearing reads it — not
+    // the app, not validate-data, not a test — and 27 of 40 copies had drifted from the
+    // tracker. A payload field that is silently wrong and rendered nowhere is a lie waiting
+    // for a future surface to start believing it. Read ratings from the tracker.
   });
   process.stdout.write(priority ? "." : "x");
 }
@@ -240,7 +243,7 @@ if (failed.length) {
 }
 
 const doc = {
-  source: "WoW Class Tracker data/specs.json (class, spec, role, tier set, ratings) + Icy Veins stat-priority pages",
+  source: "WoW Class Tracker data/specs.json (class, spec, role, tier set) + Icy Veins stat-priority pages",
   harvestedAt: new Date().toISOString().slice(0, 10),
   caveat: "Icy Veins publishes LIVE-patch stat priorities. Season 2 (12.1) priorities are not published yet; treat ordering as a proxy.",
   weaponProficiencyProvenance: PROF._provenance,
