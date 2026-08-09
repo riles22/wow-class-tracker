@@ -747,9 +747,23 @@ export function outlookFor(spec, ptrBuilds, takes = []) {
         it safer. Effect: 2 tier moves, Holy Paladin raid A→A+ on 2 creators and
         Protection Warrior raid A+→S on ONE. That single-creator S is the cost of the
         decision, working exactly as specified — flag it if it looks wrong on the page.
-        Not one series with v10. */
+        Not one series with v10.
+     v12 (2026-08-08, owner-approved): UNITS FIX, not a weight change. The PTR empirical
+        percentile is recentred from its by-construction mean of 50 onto the bracket's live
+        consensus mean — location only, spread and ordering untouched. Full reasoning at the
+        UNITS note in projectionFor. Measured: out-of-sample level gap vs the external 12.1
+        read -15.2 → -10.2 (33% recovered), Spearman 0.552 → 0.541 (noise), sd unchanged.
+        11 of 80 published letters move, ALL M+, ALL one band, ALL upward; raid identical
+        (the zone-54 series reaches nobody, so there is no percentile to recentre there);
+        0 consensus letters. Diagnosis note for the record: the divergence from the expert
+        community that prompted this was measured as a LEVEL problem, not an ordering one —
+        held out, this model predicts the external 12.1 M+ ordering at Spearman 0.549 against
+        0.053 for the carry-forward baseline and 0.207 for the best single tier list we hold.
+        The source-generosity hypothesis was tested and REFUTED (mean-centring every source
+        moves 0 of 40 consensus scores — it is algebraically a no-op when all sources rate
+        all specs); do not re-open it. */
 export { PHASES };
-export const PROJECTION_VERSION = 11;
+export const PROJECTION_VERSION = 12;
 
 /* Rank-map version, stamped beside it. `snapshotStateOf().ranks` feeds movement
    comparison, and its meaning changed in the same commit as PROJECTION_VERSION v2:
@@ -851,7 +865,7 @@ export function ptrTierRead(spec, bracket, sources, scales) {
     label: parts.length === 1 ? parts[0].label : `${parts.length} PTR lists`
   };
 }
-export function projectionFor(spec, bracket, scales, metaNotes = [], sources = [], takes = []) {
+export function projectionFor(spec, bracket, scales, metaNotes = [], sources = [], takes = [], empiricalAnchor = null) {
   const prior = spec.consensus?.[bracket]?.score ?? null;
   /* RAID EMPIRICAL COVERAGE (v10, 2026-08-07). The zone-54 series was the only raid
      empirical input and it reaches the projection for NOBODY: MIN_RANK_N is 10 and every
@@ -876,9 +890,31 @@ export function projectionFor(spec, bracket, scales, metaNotes = [], sources = [
      So raid empirical coverage stays as it is: Dummy Dome for DPS, nothing for healers
      and tanks. That gap is real and is now stated honestly by the confidence tag below
      rather than papered over with a signal we cannot vouch for. */
-  const testing = bracket === "raid"
+  /* UNITS (v12, 2026-08-08). rankPct returns a within-(role,bracket) percentile — a uniform
+     grid whose mean is EXACTLY 50 by construction (verified: DPS/Tank/Healer all 50.00). It
+     transports ORDER and carries no LEVEL. But it is then averaged against two quantities that
+     live on the letter axis: the 12.0.7 consensus (M+ mean 59.9) and the PTR tier list (70.9).
+     At .45 of the base weight — ~41% effective — that mean-50 grid drags every M+ cell toward
+     50 for a reason that is arithmetic, not an opinion about any spec: it accounted for -8.9
+     of the measured -10.5 gap against the external 12.1 read.
+     The fix is a LOCATION shift only — recentre the percentile on the axis it is blended
+     against. Spread and ordering are untouched (out-of-sample Spearman 0.552 → 0.541, noise),
+     so this is not a re-weighting and does not lift the frozen-weights rule; it corrects the
+     units of an existing term. Deliberately NOT a full z-remap: matching the prior's sd too
+     looked better in-sample but the gain was circular and it crushed sd 18.5 → 12.3, pushing
+     against the M+ extreme-compression question that docs/projection-audit-2026-08.md:350-360
+     reserves for the post-launch grade. The mean-50 property is a provable bug; the spread
+     is not provably wrong.
+     `empiricalAnchor` is a property of the DATASET (where its letter axis sits), supplied by
+     projections() from the live consensus. A caller with no dataset — a unit test on a
+     synthetic spec — has no meaningful axis, so the identity anchor (no shift) is correct
+     there and is the default. */
+  const rawTesting = bracket === "raid"
     ? rankPct(spec, "raid", "12.1 PTR raid testing score (normalized)")
     : rankPct(spec, "mplus", PTR_MPLUS_SERIES[spec.role]);
+  const testing = rawTesting == null || empiricalAnchor == null
+    ? rawTesting
+    : rawTesting - 50 + empiricalAnchor;
   const dummy = spec.ptrDummy?.score ?? null; // DPS-only composite, already 0–100
   const empParts = [[testing, 2], [dummy, 1]].filter(([v]) => v != null);
   const emp = empParts.length
@@ -1230,12 +1266,28 @@ export function projectionFor(spec, bracket, scales, metaNotes = [], sources = [
       + clampNote
   };
 }
+/* Where each bracket's letter axis actually sits, measured from the live consensus this
+   build is working with. This is the anchor the mean-50 PTR percentile is recentred onto
+   (see the UNITS note in projectionFor). Derived, never hand-written: it moves with the
+   data, so no constant can go stale. Null when a bracket has no consensus at all — e.g.
+   the S2 transition window before any outlet re-verifies — in which case the percentile
+   is left unshifted rather than anchored to a number we do not have. */
+export function empiricalAnchors(specs) {
+  const out = {};
+  for (const bracket of ["raid", "mplus"]) {
+    const scores = specs.map(s => s.consensus?.[bracket]?.score).filter(v => v != null);
+    out[bracket] = scores.length ? scores.reduce((a, c) => a + c, 0) / scores.length : null;
+  }
+  return out;
+}
+
 export function projections(specs, scales, creatorTakes, sources = []) {
   const metaNotes = creatorTakes?.metaNotes ?? [];
   const takes = creatorTakes?.takes ?? [];
+  const anchors = empiricalAnchors(specs);
   for (const spec of specs) {
-    const raid = projectionFor(spec, "raid", scales, metaNotes, sources, takes);
-    const mplus = projectionFor(spec, "mplus", scales, metaNotes, sources, takes);
+    const raid = projectionFor(spec, "raid", scales, metaNotes, sources, takes, anchors.raid);
+    const mplus = projectionFor(spec, "mplus", scales, metaNotes, sources, takes, anchors.mplus);
     if (raid || mplus) spec.projection = { raid, mplus };
   }
   return specs;
