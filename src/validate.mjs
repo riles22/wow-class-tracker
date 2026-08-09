@@ -137,6 +137,22 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
     allSources.add(source.id);
     if (!KINDS.has(source.kind)) errors.push(`sources.json: source "${source.id}" has unknown kind "${source.kind}"`);
     urlOk(source.url, `sources.json: source "${source.id}" url`);
+    /* `summary` is READER copy and `methodology` is not (2026-08-08). Seventeen methodology
+       strings totalling ~5,900 chars existed and only FOUR ever reached even a tooltip; the
+       other thirteen — every tier list, plus Warcraft Logs, Murlok, Robydoby, WoWMeta,
+       Mythicstats and SimulationCraft — reached no surface at all. They could not simply be
+       shown either: they have accreted maintenance narrative (the warcraftlogs one carries
+       "an earlier note here claiming PTR zones are HTML-only was wrong and is corrected"),
+       which is exactly right for a maintainer and useless to a visitor.
+       So: every source states, in one short sentence a reader can act on, what its number or
+       letter MEANS. Required, because a source whose meaning is not stated is a source the
+       page is asking people to trust blindly. Length-capped so it cannot drift back into a
+       changelog. */
+    if (typeof source.summary !== "string" || !source.summary.trim()) {
+      errors.push(`sources.json: source "${source.id}" needs a short reader-facing summary — one sentence on what its number or letter MEANS (methodology is maintainer prose and is not shown)`);
+    } else if (source.summary.length > 260) {
+      errors.push(`sources.json: source "${source.id}" summary is ${source.summary.length} chars — cap is 260; the long-form belongs in methodology`);
+    }
     for (const page of source.pages ?? []) {
       urlOk(page.url, `sources.json: source "${source.id}" page url`);
       isoOk(page.snapshot, `sources.json: source "${source.id}" page snapshot`);

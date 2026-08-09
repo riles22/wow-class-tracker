@@ -386,6 +386,9 @@ try {
   .fchip[data-l="strong"]{color:var(--v-pos); border-color:color-mix(in srgb,var(--v-pos) 42%,transparent); background:color-mix(in srgb,var(--v-pos) 9%,transparent)}
   .fchip[data-l="weak"]{color:var(--v-neg); border-color:color-mix(in srgb,var(--v-neg) 42%,transparent); background:color-mix(in srgb,var(--v-neg) 9%,transparent)}
   .mnote{color:var(--ink-faint); font-size:11px}
+  /* One sentence on what a source actually measures, under its letters. Visible text
+     rather than a tooltip — see the touch-legibility note in CLAUDE.md. */
+  .srcwhy{color:var(--ink-faint); font-size:11.5px; line-height:1.45; margin-top:3px; max-width:62ch}
   /* A thin sample is stated in WORDS, not signalled by colour alone: colour is not an
      accessible sole cue, and `title` does not exist on touch (see the touch-legibility
      note in CLAUDE.md). The colour is reinforcement for the text, never the message. */
@@ -1352,7 +1355,14 @@ function sourceBreakdownHTML(s){
     const tag = isPtrSource(src.id)
       ? ` <span class="mnote" title="A 12.1 PTR read. Excluded from the 12.0.7 consensus; feeds our 12.1 forecast instead.">12.1 PTR · not in consensus</span>`
       : "";
-    return `<div class="setrow"><span class="pc">${esc(src.name)}</span><span class="pct">Raid ${esc(raid)}${rd?` <span class="mnote">${esc(rd)}</span>`:""} · M+ ${esc(mplus)}${md?` <span class="mnote">${esc(md)}</span>`:""}${tag}</span></div>`;
+    /* WHAT THIS SOURCE'S LETTER MEANS, in visible text (2026-08-08). Seventeen `methodology`
+       strings existed in sources.json and only four ever reached even a tooltip — every tier
+       list reached nothing. So the page showed five publishers' letters side by side and never
+       said that one is editorial judgement, one is computed from logged play, and one cannot
+       express an S at all. That is the difference the consensus is made of. Visible, not a
+       title=: this is the touch-legibility rule, and it is the whole reason for the new field. */
+    const why = src.summary ? `<div class="srcwhy">${esc(src.summary)}</div>` : "";
+    return `<div class="setrow"><span class="pc">${esc(src.name)}</span><span class="pct">Raid ${esc(raid)}${rd?` <span class="mnote">${esc(rd)}</span>`:""} · M+ ${esc(mplus)}${md?` <span class="mnote">${esc(md)}</span>`:""}${tag}${why}</span></div>`;
   }).filter(Boolean).join("");
   const surv = s.survivability
     ? `<div class="setrow"><span class="pc">Survive</span><span class="pct">Archon raid survivability tier: <b>${esc(s.survivability.tier)}</b>${s.survivability.asOf?` <span class="mnote">· ${esc(s.survivability.asOf)}</span>`:""}</span></div>`

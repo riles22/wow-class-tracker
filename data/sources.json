@@ -55,7 +55,8 @@
         "published": "2026-07-01",
         "seasonVerified": "s1"
       }
-    ]
+    ],
+    "summary": "A guide site's own letter grades for the live patch, written by its spec authors. Editorial judgement, not measured play."
   },
   {
     "id": "icyveins-ptr",
@@ -91,7 +92,8 @@
         "published": "2026-08-02",
         "seasonVerified": "s2"
       }
-    ]
+    ],
+    "summary": "The same guide site's FORECAST for 12.1, written before the patch ships. An opinion about a patch nobody has played at scale — never averaged into the live consensus."
   },
   {
     "id": "method",
@@ -116,7 +118,8 @@
         "seasonVerified": "s1"
       }
     ],
-    "notes": "Raid list omits Vengeance DH (not ranked on the page). Method's list content is unchanged since its 2026-03-31 revision; re-verified live and era-confirmed (Devourer present) 2026-07-09."
+    "notes": "Raid list omits Vengeance DH (not ranked on the page). Method's list content is unchanged since its 2026-03-31 revision; re-verified live and era-confirmed (Devourer present) 2026-07-09.",
+    "summary": "Letter grades from a world-first raiding guild's guide team. Its M+ list currently publishes no S tier at all, so its ceiling is a grade lower than everyone else's."
   },
   {
     "id": "wowhead",
@@ -174,7 +177,8 @@
         "published": "2026-05-28",
         "seasonVerified": "s1"
       }
-    ]
+    ],
+    "summary": "Letter grades from a large guide site, written per role and bracket by its guide authors."
   },
   {
     "id": "archon",
@@ -251,7 +255,8 @@
         "seasonVerified": "s1"
       }
     ],
-    "notes": "Fetch recipe: parse the __NEXT_DATA__ JSON script tag from raw HTML (WebFetch markdown drops it). Raid pages carry three tierLists (popularity/throughput/survivability) — use metric \"throughput\"; M+ pages use metric \"score\". Mirrored at u.gg/wow."
+    "notes": "Fetch recipe: parse the __NEXT_DATA__ JSON script tag from raw HTML (WebFetch markdown drops it). Raid pages carry three tierLists (popularity/throughput/survivability) — use metric \"throughput\"; M+ pages use metric \"score\". Mirrored at u.gg/wow.",
+    "summary": "Letter grades computed from logged play. Raid tiers come from its THROUGHPUT list and M+ tiers from its SCORE list — never the default popularity grouping, which ranks how often a spec is played rather than how it performs."
   },
   {
     "id": "wowmeta",
@@ -300,7 +305,8 @@
         "snapshot": null
       }
     ],
-    "notes": "Fetch the JSON API directly, NOT the web page: https://data.wowmeta.com/rankings/midnight/mplus/all/0.json (one file backs all three M+ pages) plus https://data.wowmeta.com/manifest.json for snapshotDate (= the page's \"Last updated\", and the honest asOf). Plain curl, no headers, no proxy. Select blocks by categoryType in {dps,hps,tank} + sortField \"lowerBound\" + keyRange undefined — WHITELIST those three, since \"melee\"/\"ranged\" are subsets of dps and would double-count. The wowmeta.com HTML is a STALE S3 prerender (dateModified 2026-03-23) and r.jina.ai is non-deterministic about executing the page JS — neither is a trustworthy transport. The raid endpoint (/rankings/midnight/raid/all-bosses/5.json) is live but its lowerBound is DPS THROUGHPUT (~180k), a different quantity on a different scale — do not merge it under the M+ rating name."
+    "notes": "Fetch the JSON API directly, NOT the web page: https://data.wowmeta.com/rankings/midnight/mplus/all/0.json (one file backs all three M+ pages) plus https://data.wowmeta.com/manifest.json for snapshotDate (= the page's \"Last updated\", and the honest asOf). Plain curl, no headers, no proxy. Select blocks by categoryType in {dps,hps,tank} + sortField \"lowerBound\" + keyRange undefined — WHITELIST those three, since \"melee\"/\"ranged\" are subsets of dps and would double-count. The wowmeta.com HTML is a STALE S3 prerender (dateModified 2026-03-23) and r.jina.ai is non-deterministic about executing the page JS — neither is a trustworthy transport. The raid endpoint (/rankings/midnight/raid/all-bosses/5.json) is live but its lowerBound is DPS THROUGHPUT (~180k), a different quantity on a different scale — do not merge it under the M+ rating name.",
+    "summary": "The lower bound of a 95% confidence interval on a spec's MEAN Blizzard M+ rating across every logged player. A sample-size-penalised population average — not a ceiling, and not what the top of the ladder is doing."
   },
   {
     "id": "warcraftlogs",
@@ -344,7 +350,8 @@
         "url": "https://www.warcraftlogs.com/zone/statistics/52",
         "snapshot": "2026-08-08"
       }
-    ]
+    ],
+    "summary": "Median damage or healing across every logged pull, by role and bracket. rDPS strips out damage credited to external buffs, so it measures a player's own contribution rather than what their raid lent them."
   },
   {
     "id": "murlok",
@@ -371,7 +378,8 @@
         "url": "https://murlok.io/meta/tank/m+",
         "snapshot": "2026-08-08"
       }
-    ]
+    ],
+    "summary": "The average rating of each spec's best FIFTY players — a ceiling, showing what the spec achieves in expert hands. It says nothing about how popular a spec is or how it plays for everyone else."
   },
   {
     "id": "bloodmallet",
@@ -394,7 +402,8 @@
         "url": "https://www.simulationcraft.org/reports/MID1_Raid.html",
         "snapshot": "2026-08-08"
       }
-    ]
+    ],
+    "summary": "SimulationCraft damage against a fixed target dummy at several target counts. Theoretical output under perfect play with pre-set gear — a shape, not a prediction of your parse."
   },
   {
     "id": "mythicstats",
@@ -410,7 +419,8 @@
         "url": "https://mythicstats.com/",
         "snapshot": "2026-08-08"
       }
-    ]
+    ],
+    "summary": "How often each spec appears among the highest Mythic+ keys of the week. A presence measure at the very top end, so it reflects what the best groups choose as much as what performs."
   },
   {
     "id": "blizzard-ptr",
@@ -434,7 +444,8 @@
         "url": "https://www.wowhead.com/news/rss/all",
         "snapshot": null
       }
-    ]
+    ],
+    "summary": "Blizzard's own PTR build notes and patch notes — the primary record of what changed. Where the shipping notes disagree with an earlier PTR build, the notes win."
   },
   {
     "id": "community",
@@ -457,7 +468,8 @@
         "url": null,
         "snapshot": "2026-07-01"
       }
-    ]
+    ],
+    "summary": "Class Discords, community sites and creators, verified by hand. Opinion and analysis, kept firmly out of the tier consensus."
   },
   {
     "id": "simulationcraft",
@@ -482,7 +494,8 @@
         "snapshot": "2026-08-08"
       }
     ],
-    "notes": "Parse the .txt variant (plain text ranking of ~49 MID1_{Class}_{Spec}_{HeroVariant} profiles). Filter to DPS-role roster specs (tanks appear at low DPS; healers absent; Augmentation has no profile — unsimmable support spec)."
+    "notes": "Parse the .txt variant (plain text ranking of ~49 MID1_{Class}_{Spec}_{HeroVariant} profiles). Filter to DPS-role roster specs (tanks appear at low DPS; healers absent; Augmentation has no profile — unsimmable support spec).",
+    "summary": "The SimulationCraft project's own nightly raid report. Theoretical damage under a standard profile — the same caveat as any sim: perfect play, fixed gear."
   },
   {
     "id": "raidbots",
@@ -498,7 +511,8 @@
         "url": "https://www.raidbots.com/simbot",
         "snapshot": null
       }
-    ]
+    ],
+    "summary": "A tool for simulating YOUR character rather than an average one. Linked as a next step; nothing here is ingested from it."
   },
   {
     "id": "qelive",
@@ -521,7 +535,8 @@
         "url": "https://questionablyepic.com/blog/",
         "snapshot": null
       }
-    ]
+    ],
+    "summary": "A healer-focused gear and stat tool. Linked as a next step; nothing here is ingested from it."
   },
   {
     "id": "liquid",
@@ -537,7 +552,8 @@
         "url": "https://liquidarmory.com/",
         "snapshot": null
       }
-    ]
+    ],
+    "summary": "A raiding guild's armory and guide hub. Linked as a next step; nothing here is ingested from it."
   },
   {
     "id": "robydoby",
@@ -560,6 +576,7 @@
         "url": "https://docs.google.com/spreadsheets/d/1MBadxaZWpwj7h_3HcOtteypK3WSgp6o9sUIqvTryju4/edit",
         "snapshot": "2026-08-08"
       }
-    ]
+    ],
+    "summary": "A community-maintained cut of 12.1 PTR raid-testing logs. Displayed as numbers only — it was tested as a projection input and rejected on measurement."
   }
 ]
