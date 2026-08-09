@@ -77,7 +77,30 @@ is not a label swap — several strings need a different SHAPE when there is no 
 
 ## Sequencing
 
-Land **on 08-11**, with `PHASES` flipped in the same commit — the prose and the config must move
-together or the page contradicts itself in whichever direction they diverge. Item 3 (metric-name
-deduplication) can and probably should land earlier, since it fixes a present-tense drift risk and
-is invisible to the reader.
+**Superseded by DECISION 5 (2026-08-08): the labels and the season logic move on DIFFERENT DATES.**
+This section originally said "land on 08-11 with `PHASES` flipped in the same commit". That was
+written assuming one flip. The owner has since set `SNAPSHOT_PHASE` / `liveSeason` to flip at
+**S2 open (08-18)**, while patch 12.1 itself lands **08-11** — which opens a seven-day window
+where the page would call a LIVE patch "PTR" if the prose waited for the flip.
+
+The resolution is already in the data model: `PHASES` carries the two concerns separately.
+
+| field | what it governs | moves on |
+|---|---|---|
+| `liveLabel`, `ptr` | what the page CALLS each era | **08-11** — 12.1 stops being PTR the day it ships |
+| `liveSeason` | which sources feed the consensus (`sourceSeasonOk`) | **08-18** — S1 is genuinely live until then |
+
+So: on **08-11** set `liveLabel: "12.1"` and `ptr: null` and land the prose work below. On **08-18**
+set `liveSeason: "s2"` and `SNAPSHOT_PHASE`, and expect the consensus to blank until outlets
+re-verify (the anomaly gate now catches that as coverage loss and needs one human ack).
+
+Two consequences to get right:
+- **The Era toggle should hide on 08-11**, not 08-18 — once `ptr` is null there is one meaningful
+  position, and a one-option toggle is UI lying about having a choice.
+- **Do not couple the prose to `liveSeason`.** Anything that reads `liveSeason` to decide a LABEL
+  will be wrong for those seven days. Labels read `liveLabel` / `ptr`; only source eligibility
+  reads `liveSeason`.
+
+**Item 3 (metric-name deduplication) is DONE** — landed 2026-08-08 as `PTR_METRIC_NAMES` in
+render.mjs, shipped via `meta.ptrMetricNames`, with a test in build.test.mjs that resolves every
+key against real data. The template no longer hand-types any of them.
