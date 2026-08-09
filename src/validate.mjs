@@ -4,7 +4,7 @@
 import { readFile, readdir } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
-import { isLiveEra, PHASES } from "./normalize.mjs";
+import { isLiveEra, PHASES, scoreFor } from "./normalize.mjs";
 import { specBuildChanges } from "./render.mjs";
 
 const ROLES = new Set(["DPS", "Healer", "Tank"]);
@@ -75,7 +75,7 @@ const isRealDate = v => {
 /* opts.fullRoster: enforce the real 40-spec Midnight roster — used by the CLI, the build,
    and the apply-* merge scripts (which operate on the repo's real data), but not by unit
    fixtures, which validate small synthetic datasets. */
-export function validateData({ specs, sources, scales, community, ptrBuilds, creatorTakes, encounterTiers, historySnapshots, pendingTranscripts }, opts = {}) {
+export function validateData({ specs, sources, scales, community, ptrBuilds, creatorTakes, encounterTiers, historySnapshots, pendingTranscripts, seasonFinal }, opts = {}) {
   const errors = [];
   // Every date in the data is a claim about when something was fetched or published —
   // none may sit in the future. +1 day of skew allowed: a nightly UTC run can honestly
@@ -194,6 +194,64 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
   // while the toggles still promise one, so this is an error, not a quiet empty column.
   if (tierSources.size > 0 && liveTierSources.size === 0) {
     errors.push("sources.json: no LIVE-era tier-list sources defined — the consensus would have nothing to average");
+  }
+
+  /* --- season-final.json: the frozen final-season letters (2026-08-09) ---
+     These letters go straight into the published consensus for any outlet that has moved
+     ahead of the live season, so they need the same gates the live ratings get: a real
+     roster spec, a tier that resolves through that source's own scale, and a source that
+     could legitimately have been in the consensus. A bad record here is invisible on the
+     page — it renders as an ordinary letter — which is exactly why it is validated. */
+  if (seasonFinal != null) {
+    if (typeof seasonFinal !== "object" || Array.isArray(seasonFinal)) {
+      errors.push("season-final.json: must be an object keyed by season");
+    } else {
+      const roster = new Set((specs ?? []).map(s => `${s.class}|${s.spec}`));
+      const order = PHASES.seasonOrder ?? [];
+      for (const [season, bySource] of Object.entries(seasonFinal)) {
+        if (!order.includes(season)) {
+          errors.push(`season-final.json: unknown season "${season}" — add it to PHASES.seasonOrder`);
+          continue;
+        }
+        for (const [sourceId, brackets] of Object.entries(bySource ?? {})) {
+          const source = tierSources.get(sourceId);
+          if (!source) {
+            errors.push(`season-final.json: "${sourceId}" is not a tier-list source — only a consensus contributor can be frozen`);
+            continue;
+          }
+          // An era:"ptr" list describes a patch we do not run BY DEFINITION; it was never
+          // in the consensus, so it has no final-season letters to freeze.
+          if (!isLiveEra(source)) {
+            errors.push(`season-final.json: "${sourceId}" is era:"ptr" — a PTR list never fed the live consensus, so freezing it would inject letters that were never there`);
+            continue;
+          }
+          for (const [bracket, rec] of Object.entries(brackets ?? {})) {
+            const at = `season-final.json: ${season}/${sourceId}/${bracket}`;
+            if (!rec || typeof rec !== "object") { errors.push(`${at}: record must be an object`); continue; }
+            if (!/^[0-9a-f]{40}$/.test(rec.fromCommit ?? "")) {
+              errors.push(`${at}: fromCommit must be a full 40-hex commit sha (it is the record's own receipt)`);
+            }
+            if (rec.frozenAt && rec.lastSeasonVerifiedSnapshot && rec.lastSeasonVerifiedSnapshot > rec.frozenAt) {
+              errors.push(`${at}: lastSeasonVerifiedSnapshot ${rec.lastSeasonVerifiedSnapshot} is after frozenAt ${rec.frozenAt} — a source cannot be frozen before the letters it froze`);
+            }
+            const letters = rec.letters ?? {};
+            if (!Object.keys(letters).length) errors.push(`${at}: has no letters — an empty freeze silently drops the source from the consensus`);
+            for (const [specKey, tier] of Object.entries(letters)) {
+              if (!roster.has(specKey)) { errors.push(`${at}: "${specKey}" is not a roster spec`); continue; }
+              if (tier === null) continue;   // explicitly unrated, as in the live ratings
+              // Narrow catch: scoreFor throws only for an unknown scale or an undefined
+              // tier. A bare `catch` here once swallowed a missing import and reported it
+              // as 80 bad tiers, so re-throw anything that is not that.
+              try { scoreFor(scales, source.scale, tier); }
+              catch (error) {
+                if (!/^(Unknown scale|Tier )/.test(error.message)) throw error;
+                errors.push(`${at}: tier "${tier}" for ${specKey} is not in scale "${source.scale}"`);
+              }
+            }
+          }
+        }
+      }
+    }
   }
 
   // --- specs ---
@@ -685,8 +743,19 @@ export async function loadData(root) {
   } catch (error) {
     if (error?.code !== "ENOENT") throw error;
   }
+  // Frozen final-season letters (data/season-final.json). Optional — absent means no
+  // outlet has moved ahead of the live season yet, which reproduces the pre-2026-08-09
+  // consensus exactly. Corrupt JSON must error rather than silently un-freeze a source,
+  // because the silent failure mode is a consensus that quietly loses a contributor.
+  let seasonFinal = null;
+  try {
+    seasonFinal = await read("season-final.json");
+  } catch (error) {
+    if (error?.code !== "ENOENT") throw error;
+  }
   return { specs, sources, scales, community, ptrBuilds, creatorTakes, encounterTiers,
-           historySnapshot: historySnapshots[0] ?? null, historySnapshots, pendingTranscripts };
+           historySnapshot: historySnapshots[0] ?? null, historySnapshots, pendingTranscripts,
+           seasonFinal };
 }
 
 const isMain = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);

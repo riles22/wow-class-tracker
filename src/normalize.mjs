@@ -38,6 +38,17 @@ export function consensusTier(score, scales) {
                      key takeEra/expertRead classify creator takes by
      · ptrSunset   — flips true at settlement (+14): PTR surfaces leave the UI while
                      the frozen forecast stays (DECISION 2/3, s2-transition-scope.md)
+     · seasonOrder — the seasons this project knows, OLDEST FIRST. Until 2026-08-09 the
+                     pipeline only ever tested seasons for EQUALITY, which cannot express
+                     "ahead"; when Wowhead published its Season-2 lists early we needed to
+                     tell "this outlet is lagging" from "this outlet is already on the next
+                     patch", and those are opposite facts with opposite handling. Declared,
+                     never string-compared: "s10" must not sort below "s2". The 12.2 cycle
+                     appends "s3" HERE and nowhere else.
+     · seasonLabels — season id -> the patch label a visitor reads. `liveLabel` must equal
+                     seasonLabels[liveSeason] (pinned by test); this map exists so a column
+                     of NEXT-season letters can be labelled with its own patch instead of
+                     inheriting the live one.
    At 12.1 launch: liveSeason -> "s2", liveLabel -> "12.1", ptr -> null (until the 12.2
    thread appears), alongside the SNAPSHOT_PHASE flip in render.mjs. */
 export const PHASES = {
@@ -45,13 +56,68 @@ export const PHASES = {
   liveLabel: "12.0.7",
   ptr: { marker: "12.1 PTR", label: "12.1 PTR" },
   ptrSunset: false,
+  seasonOrder: ["s1", "s2"],
+  seasonLabels: { s1: "12.0.7", s2: "12.1" },
 };
 
 export const isLiveEra = source => (source.era ?? "live") === "live";
-/* The PTR-era tier lists, in registry order — the external 12.1 letter opinions that
-   projectionFor consumes and the 12.0.7-only view hides. */
+/* Position of a season on the declared timeline; null when the id is unknown. */
+export const seasonRank = (season, order = PHASES.seasonOrder) => {
+  const i = (order ?? []).indexOf(season);
+  return i === -1 ? null : i;
+};
+
+/* The PTR-era tier lists, in registry order.
+   NOTE (2026-08-09): this is NO LONGER the projection's input set — use
+   nextPatchTierSources below, which also admits a LIVE-era outlet that has published the
+   next season early. Kept because "which sources carry era:ptr" is still a real question
+   (the 12.0.7-only view, the registry's own bookkeeping). */
 export const ptrTierSources = sources =>
   (sources ?? []).filter(s => s.kind === "tier-list" && !isLiveEra(s));
+
+/* The season a LIVE-era source has moved ahead to for this bracket, or null.
+   This is the mechanism that let Wowhead's early Season-2 lists reach the 12.1 forecast
+   without the `era: "ptr"` retype — which was measured to null 80 of 80 consensus cells
+   at the phase flip, because consensusFor drops non-live era BEFORE the season test.
+   Keying on the SEASON instead means the same source re-enters the consensus and leaves
+   the forecast term automatically when liveSeason advances: no owner action, no
+   oscillating registry field.
+
+   Three deliberate refusals:
+   · a bracket whose pages carry seasonVerified on SOME pages and not others THROWS.
+     `seasonVerified` is agent-writable (nightly.yml's Gate 0 allowlist), and treating a
+     half-labelled bracket as "not ahead" would make one unwritten field a silent switch
+     over 27-46% of every raid forecast. Absent on ALL pages is different and fine — it
+     means "never checked", which the consensus rule already reads as current.
+   · a bracket split ACROSS seasons (some pages s1, some s2 — an outlet mid-rebuild)
+     returns null, so the source goes dark for that bracket: out of the consensus by
+     sourceSeasonOk and out of the forecast by this. Never mix two seasons in one term.
+   · an unknown season id throws rather than sorting last. */
+export function aheadSeasonFor(source, bracket = null, liveSeason = PHASES.liveSeason, order = PHASES.seasonOrder) {
+  if (source?.kind !== "tier-list" || !isLiveEra(source)) return null;
+  const pages = (source.pages ?? []).filter(pg => bracket == null || pg.bracket === bracket);
+  if (!pages.length) return null;
+  const labelled = pages.filter(pg => pg.seasonVerified != null);
+  if (!labelled.length) return null;
+  if (labelled.length !== pages.length) {
+    throw new Error(`sources.json: source "${source.id}" bracket "${bracket ?? "*"}" mixes season-verified and unverified pages — record seasonVerified on every page of a bracket, or none`);
+  }
+  const seasons = [...new Set(labelled.map(pg => pg.seasonVerified))];
+  if (seasons.length !== 1) return null;
+  const rank = seasonRank(seasons[0], order), live = seasonRank(liveSeason, order);
+  if (rank == null) throw new Error(`sources.json: source "${source.id}" verifies unknown season "${seasons[0]}" — add it to PHASES.seasonOrder`);
+  if (live == null) throw new Error(`PHASES.liveSeason "${liveSeason}" is not in PHASES.seasonOrder`);
+  return rank > live ? seasons[0] : null;
+}
+
+/* Every external NEXT-PATCH letter opinion for this bracket: a dedicated era:"ptr" list,
+   or a live outlet that has already published the next season. This is projectionFor's
+   input set. Mutual exclusion with the consensus is structural, not enforced:
+   aheadSeasonFor can only return a season when every page of the bracket verifies
+   something other than liveSeason, which is exactly what makes sourceSeasonOk false. */
+export const nextPatchTierSources = (sources, bracket = null, liveSeason = PHASES.liveSeason) =>
+  (sources ?? []).filter(s => s.kind === "tier-list" &&
+    (!isLiveEra(s) || aheadSeasonFor(s, bracket, liveSeason) != null));
 
 /* ratingsBySource: e.g. { icyveins: "A", method: "S" }
    sources: the registry from data/sources.json (only LIVE-era kind === "tier-list"
@@ -70,14 +136,56 @@ export const sourceSeasonOk = (source, bracket, liveSeason = PHASES.liveSeason) 
     (bracket == null || pg.bracket === bracket) &&
     pg.seasonVerified != null && pg.seasonVerified !== liveSeason);
 
-export function consensusFor(ratingsBySource, sources, scales, bracket = null, liveSeason = PHASES.liveSeason) {
+/* The final letters a source published about the CURRENT live season, for one spec+bracket,
+   read out of data/season-final.json. Shape: { [sourceId]: { tier, frozenAt } }.
+   Keyed by season on purpose — see the frozen lane in consensusFor. */
+export function frozenLettersFor(seasonFinal, specKey, bracket, liveSeason = PHASES.liveSeason) {
+  const bySource = seasonFinal?.[liveSeason];
+  if (!bySource) return null;
+  const out = {};
+  for (const [sourceId, brackets] of Object.entries(bySource)) {
+    const rec = brackets?.[bracket];
+    const tier = rec?.letters?.[specKey];
+    if (tier === undefined) continue;
+    out[sourceId] = { tier, frozenAt: rec.frozenAt ?? null };
+  }
+  return Object.keys(out).length ? out : null;
+}
+
+export function consensusFor(ratingsBySource, sources, scales, bracket = null, liveSeason = PHASES.liveSeason, frozenBySource = null) {
   const perSource = [];
+  let frozenCount = 0;
   for (const source of sources) {
     if (source.kind !== "tier-list" || !isLiveEra(source)) continue;
-    if (!sourceSeasonOk(source, bracket, liveSeason)) continue;
-    const tier = ratingsBySource?.[source.id] ?? null;
+    /* THE FROZEN LANE (2026-08-09, owner decision). A live outlet that has moved to the
+       next season stops describing the patch we are running, so its CURRENT letters must
+       not be averaged in — that rule is unchanged. But dropping it outright shrinks the
+       mean's composition, which publishes as spec movement nobody wrote (16 cells the
+       night Wowhead flipped) and, if every outlet flips before the phase flip, blanks the
+       column entirely (measured: 80 of 80 cells null). So we substitute the last letters
+       that outlet DID publish about this season, tagged so no surface can imply it
+       re-rated anything. Cost measured at Wowhead's own rate of S1 change: 0.24 letters
+       of 80 over the nine days to the flip.
+       The lookup is keyed by season, which is what makes the cutover free: advance
+       liveSeason and seasonFinal[liveSeason] is simply absent, so the lane goes cold with
+       no flag, no date and no owner action. */
+    const live = sourceSeasonOk(source, bracket, liveSeason);
+    let tier = null, frozenAt = null;
+    if (live) {
+      tier = ratingsBySource?.[source.id] ?? null;
+    } else {
+      const frozen = frozenBySource?.[source.id];
+      if (!frozen) continue;
+      tier = frozen.tier ?? null;
+      frozenAt = frozen.frozenAt ?? null;
+    }
     const score = scoreFor(scales, source.scale, tier);
-    if (score !== null) perSource.push({ source: source.id, label: source.name, tier, score });
+    if (score === null) continue;
+    if (!live) frozenCount++;
+    perSource.push({
+      source: source.id, label: source.name, tier, score,
+      ...(live ? {} : { lane: "frozen", frozenAsOf: frozenAt })
+    });
   }
   if (perSource.length === 0) return null;
 
@@ -88,6 +196,7 @@ export function consensusFor(ratingsBySource, sources, scales, bracket = null, l
     score: Math.round(mean),
     spread,
     diverges: perSource.length > 1 && spread >= scales.consensus.spreadThreshold,
+    frozenCount,
     perSource
   };
 }

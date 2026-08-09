@@ -1323,18 +1323,74 @@ test("projectionFor: the meta nudge counts only the creators that actually agree
     "the count describes the agreeing set, not the whole lane");
 });
 
-test("projectionFor: a publisher publishing twice has its combined share disclosed", () => {
-  const spec = { class: "X", spec: "P", role: "DPS", consensus: { mplus: { score: 60 } },
-    ratings: { mplus: { icyveins: "A", "icyveins-ptr": "S" } } };
+/* REPLACES "a publisher publishing twice has its combined share disclosed" (2026-08-09).
+   The old clause only fired when a PTR list's id EXTENDED a live list's id, so it could
+   only ever catch icyveins/icyveins-ptr — it said nothing on raid, and nothing at all once
+   Wowhead began feeding the next-patch term under its own id. It was also wrong where it
+   did speak: 35% claimed for Icy Veins on every M+ cell against a measured 22%. The share
+   is now derived from what the consensus ACTUALLY averaged and stated on every cell. */
+test("projectionFor: the biggest single publisher's effective share is disclosed in the basis", () => {
+  const spec = { class: "X", spec: "P", role: "DPS",
+    consensus: { mplus: { score: 60, perSource: [{ source: "icyveins" }, { source: "method" }] } },
+    ratings: { mplus: { icyveins: "A", "icyveins-ptr": "S", method: "A" } } };
   const sources = [
-    { id: "icyveins", kind: "tier-list", name: "Icy Veins", scale: "icyveins",
-      pages: [{ bracket: "mplus" }] },
+    { id: "icyveins", kind: "tier-list", name: "Icy Veins", scale: "icyveins", pages: [{ bracket: "mplus" }] },
+    { id: "method", kind: "tier-list", name: "Method", scale: "icyveins", pages: [{ bracket: "mplus" }] },
     { id: "icyveins-ptr", kind: "tier-list", era: "ptr", name: "Icy Veins (12.1 PTR)",
       scale: "icyveins-ptr", pages: [{ bracket: "mplus" }] }
   ];
   const p = projectionFor(spec, "mplus", PTR_PROJ_SCALES, [], sources);
-  assert.match(p.basis, /same publisher as one of the live lists/,
-    "a third of a forecast tracing to one outlet is disclosed, not left to be derived");
+  assert.match(p.basis, /biggest single input: Icy Veins ~\d/,
+    "a forecast's dominant outlet is named, not left to be derived from the weights");
+  assert.equal(p.parts.topPublisher, "icyveins");
+  // Icy Veins holds half the prior slice AND the whole next-patch term; Method holds half
+  // the prior slice only. The outlet name, not the source id, is what a reader sees.
+  const method = p.parts.publisherShares.find(s => s.publisher === "method");
+  assert.ok(p.parts.topPublisherPct > method.pct * 2, "the twin publisher outweighs the single-product one");
+});
+
+test("projectionFor: the prior slice's divisor is the consensus perSource count, frozen contributors included", () => {
+  // THE A x B COMPOSITION REGRESSION. Deriving eligibility from the registry instead of
+  // from perSource divides the prior by the number of season-current sources, which
+  // undercounts whenever a FROZEN contributor is in the mean — measured at Wowhead 46%
+  // where the truth was 59.6%. The frozen contributor is invisible to any registry filter,
+  // so this must read the consensus itself.
+  const mkSpec = perSource => ({ class: "X", spec: "P", role: "DPS",
+    consensus: { raid: { score: 60, perSource } },
+    ratings: { raid: { wowhead: "S", icyveins: "A" } } });
+  const sources = [
+    { id: "icyveins", kind: "tier-list", name: "Icy Veins", scale: "icyveins", pages: [{ bracket: "raid", seasonVerified: "s1" }] },
+    { id: "wowhead", kind: "tier-list", name: "Wowhead", scale: "icyveins", pages: [{ bracket: "raid", seasonVerified: "s2" }] }
+  ];
+  // Two contributors, one of them frozen: Wowhead takes half the prior slice AND all of
+  // the next-patch term.
+  const both = projectionFor(mkSpec([{ source: "icyveins" }, { source: "wowhead", lane: "frozen" }]),
+    "raid", PTR_PROJ_SCALES, [], sources);
+  // One contributor: Wowhead takes the WHOLE prior slice, so its share must be strictly higher.
+  const solo = projectionFor(mkSpec([{ source: "wowhead", lane: "frozen" }]),
+    "raid", PTR_PROJ_SCALES, [], sources);
+  assert.equal(both.parts.topPublisher, "wowhead");
+  assert.ok(solo.parts.topPublisherPct > both.parts.topPublisherPct,
+    "a smaller consensus concentrates the prior slice, and the disclosure must track it");
+  const shares = both.parts.publisherShares.reduce((n, s) => n + s.pct, 0);
+  assert.ok(Math.abs(shares - 100) < 0.5, `publisher shares must account for the whole forecast, got ${shares}`);
+});
+
+test("projectionFor: the next-patch term is divided by PUBLISHER, not by source id", () => {
+  // When Icy Veins' own live pages flip, the set becomes [icyveins, icyveins-ptr, wowhead]
+  // and a naive per-source mean hands Icy Veins two of three votes while it disagrees with
+  // itself (its live list says A, its PTR list says S).
+  const spec = { class: "X", spec: "P", role: "DPS",
+    consensus: { mplus: { score: 60, perSource: [] } },
+    ratings: { mplus: { icyveins: "A", "icyveins-ptr": "S", wowhead: "A" } } };
+  const sources = [
+    { id: "icyveins", kind: "tier-list", name: "Icy Veins", scale: "icyveins", pages: [{ bracket: "mplus", seasonVerified: "s2" }] },
+    { id: "icyveins-ptr", kind: "tier-list", era: "ptr", name: "Icy Veins (12.1 PTR)", scale: "icyveins-ptr", pages: [{ bracket: "mplus" }] },
+    { id: "wowhead", kind: "tier-list", name: "Wowhead", scale: "icyveins", pages: [{ bracket: "mplus", seasonVerified: "s2" }] }
+  ];
+  const p = projectionFor(spec, "mplus", PTR_PROJ_SCALES, [], sources);
+  assert.equal(p.parts.ptrListCount, 2, "two publishers, not three sources");
+  assert.deepEqual([...p.parts.ptrListPublishers].sort(), ["icyveins", "wowhead"]);
 });
 
 test("dummyDomeScores: tie-aware midranks, and thin cuts do not vote", () => {

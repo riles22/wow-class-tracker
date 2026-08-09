@@ -2,16 +2,27 @@
    sim-derived fight-profile labels, collect metadata. Pure functions — no
    filesystem access. */
 
-import { consensusFor, isLiveEra, PHASES, ptrTierSources, scoreFor } from "./normalize.mjs";
+import {
+  aheadSeasonFor, consensusFor, frozenLettersFor, isLiveEra, nextPatchTierSources,
+  PHASES, scoreFor
+} from "./normalize.mjs";
 
-export function decorateSpecs(specs, sources, scales) {
-  return specs.map(spec => ({
-    ...spec,
-    consensus: {
-      raid: consensusFor(spec.ratings?.raid, sources, scales, "raid"),
-      mplus: consensusFor(spec.ratings?.mplus, sources, scales, "mplus")
-    }
-  }));
+/* `seasonFinal` is data/season-final.json — each source's LAST letters about the live
+   season, used only where an outlet has already moved on. Absent (null) reproduces the
+   pre-2026-08-09 behaviour exactly. */
+export function decorateSpecs(specs, sources, scales, seasonFinal = null) {
+  return specs.map(spec => {
+    const key = `${spec.class}|${spec.spec}`;
+    return {
+      ...spec,
+      consensus: {
+        raid: consensusFor(spec.ratings?.raid, sources, scales, "raid", PHASES.liveSeason,
+          frozenLettersFor(seasonFinal, key, "raid")),
+        mplus: consensusFor(spec.ratings?.mplus, sources, scales, "mplus", PHASES.liveSeason,
+          frozenLettersFor(seasonFinal, key, "mplus"))
+      }
+    };
+  });
 }
 
 /* Fight-profile labeling: within-role percentile of sim DPS at representative
@@ -781,8 +792,19 @@ export function outlookFor(spec, ptrBuilds, takes = []) {
         The source-generosity hypothesis was tested and REFUTED (mean-centring every source
         moves 0 of 40 consensus scores — it is algebraically a no-op when all sources rate
         all specs); do not re-open it. */
+/* v13 — 2026-08-09 (owner decision). Wowhead published its Season-2 lists early and is now
+   admitted to the next-patch term: `ptrTierRead` reads `nextPatchTierSources`, which takes
+   an era:"ptr" list OR a live outlet whose pages verify a season ahead of liveSeason. This
+   is a new INPUT on unchanged .35/.45/.30 weights — the v3 precedent, not a reweight — but
+   outputs are not identical, so the marker moves. Measured on landing: 28 projection letters
+   moved (raid 21 / M+ 7), 75 scores, 21 confidence tags (19 low→medium, 2 prior-only→low,
+   all raid, all up), max |Δ| 24 (Blood DK raid 48→72).
+   The side effect to know: `noPtrEvidence` cells go 28→0, so the v10 doubled ±12 expert
+   ceiling reverts to ±6 on all of them, and on 12 cells the expert adjustment SHRANK. That
+   is why 19 of the 28 letter moves are downward — a raid cell that was the 12.0.7 prior
+   plus a large specialist nudge is now the prior blended with a real 12.1 letter opinion. */
 export { PHASES };
-export const PROJECTION_VERSION = 12;
+export const PROJECTION_VERSION = 13;
 
 /* Rank-map version, stamped beside it. `snapshotStateOf().ranks` feeds movement
    comparison, and its meaning changed in the same commit as PROJECTION_VERSION v2:
@@ -827,8 +849,21 @@ export const RANK_VERSION = 3;
    did not bump this). Only a live source arriving, leaving, or being retyped does.
    Degrade-don't-reject, as with ranks: a cross-version baseline is still chosen and still
    narrates ranks, dummy and projection; only the consensus arrows fall away. Every
-   snapshot on disk is rankVersion 2, so baseline selection survives the boundary. */
-export const CONSENSUS_VERSION = 2;
+   snapshot on disk is rankVersion 2, so baseline selection survives the boundary.
+
+   v3 — 2026-08-09: the frozen lane. The doctrine above enumerated only "a live source
+   arriving, leaving, or being retyped", which predates `seasonVerified` (the field landed
+   2026-08-04) — so a SEASON flip silently recomposed the mean with no registry edit at all.
+   It happened the night Wowhead moved to Season 2: 0 of 80 letters changed at any outlet,
+   yet 16 consensus cells moved and published as spec movement, the largest such night on
+   record (33-night median 2, p90 9). Restoring Wowhead's final Season-1 letters through the
+   frozen lane recomposes it a second time, back to exactly the pre-flip state. Both
+   recompositions are registry decisions, not movement, so the boundary lands here.
+   Read the rule as: bump when the set of sources the mean AVERAGES changes for any reason —
+   a source arriving, leaving, being retyped, crossing a season, or entering the frozen lane.
+   Measured on landing: 0 consensus arrows published, while 64 metric rankDeltas and 4 dummy
+   rankDeltas survive — degrade-don't-reject working as documented. */
+export const CONSENSUS_VERSION = 3;
 const versionOf = (snap, field) => snap?.[field] ?? 1;
 const ranksComparableWith = snap => versionOf(snap, "rankVersion") === RANK_VERSION;
 const projComparableWith = snap => versionOf(snap, "projectionVersion") === PROJECTION_VERSION;
@@ -903,23 +938,43 @@ function rankPct(spec, bracket, name) {
   if (!m || m.rank == null || !m.of || m.of < 2) return null;
   return (1 - (m.rank - 1) / (m.of - 1)) * 100;
 }
-/* External PTR tier-list opinion for one spec+bracket, on the shared 0–100 axis.
-   Mean across every era:"ptr" tier-list source that rates it (one today). Returns null
-   when none does — including the upstream "TBD" case, which is stored as an explicit
-   null rating and must stay ABSENT from the formula rather than scoring 0: "not yet
-   placed" is missing evidence, not a bottom-tier verdict. */
+/* The PUBLISHER behind a source id: "icyveins-ptr" and "icyveins" are one outlet with two
+   products. Used to stop a single publisher casting several votes in one averaged term. */
+export const publisherOf = sourceId => String(sourceId).replace(/-(ptr|s\d+)$/, "");
+
+/* External NEXT-PATCH tier-list opinion for one spec+bracket, on the shared 0–100 axis.
+   Returns null when nothing rates it — including the upstream "TBD" case, which is stored
+   as an explicit null rating and must stay ABSENT from the formula rather than scoring 0:
+   "not yet placed" is missing evidence, not a bottom-tier verdict.
+
+   Averaged BY PUBLISHER, not by source id (2026-08-09). The set is currently one outlet
+   per bracket, so this is a no-op today — but the moment Icy Veins' own live pages verify
+   the next season the M+ set becomes [icyveins, icyveins-ptr, wowhead], and a naive mean
+   would hand Icy Veins two of three votes while it disagrees with itself by four bands. */
 export function ptrTierRead(spec, bracket, sources, scales) {
-  const parts = [];
-  for (const source of ptrTierSources(sources)) {
+  const byPublisher = new Map();
+  for (const source of nextPatchTierSources(sources, bracket)) {
     const tier = spec.ratings?.[bracket]?.[source.id] ?? null;
     const score = scoreFor(scales, source.scale, tier);
-    if (score !== null) parts.push({ label: source.name, tier, score });
+    if (score === null) continue;
+    const pub = publisherOf(source.id);
+    if (!byPublisher.has(pub)) byPublisher.set(pub, []);
+    byPublisher.get(pub).push({ label: source.name, tier, score });
   }
-  if (!parts.length) return null;
+  if (!byPublisher.size) return null;
+  const publishers = [...byPublisher.entries()].map(([pub, rows]) => ({
+    publisher: pub,
+    label: rows.length === 1 ? rows[0].label : `${rows[0].label} (${rows.length} lists)`,
+    tiers: rows.map(r => r.tier).join("/"),
+    score: rows.reduce((s, r) => s + r.score, 0) / rows.length
+  }));
   return {
-    score: parts.reduce((sum, p) => sum + p.score, 0) / parts.length,
-    tiers: parts.map(p => p.tier).join("/"),
-    label: parts.length === 1 ? parts[0].label : `${parts.length} PTR lists`
+    score: publishers.reduce((s, p) => s + p.score, 0) / publishers.length,
+    count: publishers.length,
+    publishers: publishers.map(p => p.publisher),
+    tiers: publishers.map(p => p.tiers).join("/"),
+    detail: publishers.map(p => `${p.label} ${p.tiers}`).join(" · "),
+    label: publishers.length === 1 ? publishers[0].label : `${publishers.length} next-patch lists`
   };
 }
 export function projectionFor(spec, bracket, scales, metaNotes = [], sources = [], takes = [], empiricalAnchor = null) {
@@ -983,12 +1038,6 @@ export function projectionFor(spec, bracket, scales, metaNotes = [], sources = [
      it raises the expert ceiling (they are then the only 12.1-aware evidence available)
      and it forces the honest "prior-only" confidence tag. */
   const noPtrEvidence = emp == null && !ptrList;
-  /* A PTR list whose id extends a live source's id ("icyveins-ptr" over "icyveins") is the
-     same outlet publishing twice. Compute that outlet's combined effective share so the
-     basis can state it rather than leaving a reader to derive it from the weights. */
-  const livePublishers = (sources ?? []).filter(x => x.kind === "tier-list" && isLiveEra(x));
-  const ptrSrc = ptrTierSources(sources ?? []).find(x => spec.ratings?.[bracket]?.[x.id] != null);
-  const twin = ptrSrc ? livePublishers.find(x => ptrSrc.id.startsWith(x.id + "-")) : null;
   /* (v9, owner reweight 2026-08-04) prior .55→.35, PTR list .25→.30. The prior is the
      12.0.7 consensus — evidence about a meta that dies at launch — and Riley's call was
      that measured PTR performance and the qualitative 12.1 reads should lead wherever
@@ -999,10 +1048,39 @@ export function projectionFor(spec, bracket, scales, metaNotes = [], sources = [
   if (!baseParts.length) return null; // nothing to project from — honest "—"
   const base = baseParts.reduce((s, [v, w]) => s + v * w, 0) / baseParts.reduce((s, [, w]) => s + w, 0);
   const totalW = baseParts.reduce((s, [, w]) => s + w, 0);
-  const ratedLive = livePublishers.filter(x => spec.ratings?.[bracket]?.[x.id] != null).length;
-  const sharedPublisherPct = (twin && ptrList && prior != null && ratedLive)
-    ? Math.round(((0.35 / totalW) / ratedLive + (0.30 / totalW)) * 100)
-    : null;
+  /* PUBLISHER CONCENTRATION (rewritten 2026-08-09). This used to look for a PTR source
+     whose id EXTENDED a live source's id, which could only ever catch the icyveins /
+     icyveins-ptr pair. Two things broke it at once: Wowhead now feeds the next-patch term
+     under its own id, so the prefix test cannot see it against itself; and the frozen lane
+     means a contributor to the prior may not appear in a registry filter at all.
+     Both are fixed by deriving from what the consensus ACTUALLY averaged — perSource is
+     the ground truth for the prior slice, frozen contributors included — rather than
+     re-deriving eligibility from the registry. Measured: the registry form reports Wowhead
+     at 46% of a healer raid cell where the truth is 59.6%, and states 35% for Icy Veins on
+     all 40 M+ cells where the truth is 22%. */
+  const consensusIds = (spec.consensus?.[bracket]?.perSource ?? []).map(p => p.source);
+  const ratedLive = consensusIds.length;
+  const shares = new Map();
+  const add = (pub, pct) => shares.set(pub, (shares.get(pub) ?? 0) + pct);
+  if (prior != null && ratedLive) {
+    const each = (0.35 / totalW) / ratedLive;
+    for (const id of consensusIds) add(publisherOf(id), each);
+  }
+  if (ptrList) {
+    const each = (0.30 / totalW) / ptrList.count;
+    for (const pub of ptrList.publishers) add(pub, each);
+  }
+  /* Publisher id -> the outlet name a reader recognises. Prefer the LIVE-era source's name
+     ("Icy Veins" over "Icy Veins (12.1 PTR)") so the basis names the outlet, not a product. */
+  const publisherName = pub => {
+    const owned = (sources ?? []).filter(x => x.kind === "tier-list" && publisherOf(x.id) === pub);
+    return (owned.find(isLiveEra) ?? owned[0])?.name ?? pub;
+  };
+  const publisherShares = [...shares.entries()]
+    .map(([publisher, share]) => ({ publisher, name: publisherName(publisher), pct: Math.round(share * 1000) / 10 }))
+    .sort((a, b) => b.pct - a.pct);
+  const topPublisher = publisherShares[0] ?? null;
+  const sharedPublisherPct = topPublisher ? Math.round(topPublisher.pct) : null;
   const outlook = spec.outlook ?? null;
   const verdict = spec.ptr?.verdict ?? null;
   /* (v8) The expert read is BRACKET-SCOPED here (2026-08-04 external audit): the outlook
@@ -1254,11 +1332,11 @@ export function projectionFor(spec, bracket, scales, metaNotes = [], sources = [
      lane became a counted signal type), so confidence tags are one series with v8
      snapshots onward, not with v7's — which the PROJECTION_VERSION boundary already
      enforces for the whole projection object. */
-  const ptrListPossible = ptrTierSources(sources).some(s =>
+  const ptrListPossible = nextPatchTierSources(sources, bracket).some(s =>
     (s.pages ?? []).some(p => p.bracket === bracket && (p.role === spec.role || p.role === "All" || p.role == null)));
   const available = 3 // PTR testing + tuning outlook + specialist takes: obtainable everywhere
     + (spec.role === "DPS" ? 1 : 0) // Dummy Dome: DPS-only
-    + (ptrListPossible ? 1 : 0);    // an era:"ptr" tier list covering this bracket+role
+    + (ptrListPossible ? 1 : 0);    // a next-patch tier list covering this bracket+role
   /* (v10, 2026-08-07) A cell with NO measured PTR term and no PTR tier list is the 12.0.7
      consensus with a nudge, whatever the ratio says — the score IS the prior, because
      renormalization hands it 100% of the weight once the other two terms are absent.
@@ -1289,6 +1367,17 @@ export function projectionFor(spec, bracket, scales, metaNotes = [], sources = [
       testing: testing != null ? Math.round(testing) : null,
       dummy: dummy != null ? Math.round(dummy) : null,
       ptrList: ptrList ? Math.round(ptrList.score) : null,
+      /* Provenance of the two letter-opinion terms, recorded so a post-launch auditor can
+         reconstruct how much of this forecast came from an outlet that later helped
+         compose the answer key. snapshot.mjs copies `parts` wholesale into the immutable
+         frozen artifact, and basis strings are prose — this is the machine-readable half.
+         Without it, forecast/answer-key overlap is unrecoverable after settlement. */
+      ptrListCount: ptrList ? ptrList.count : null,
+      ptrListPublishers: ptrList ? ptrList.publishers : null,
+      consensusSources: consensusIds.length ? consensusIds : null,
+      topPublisher: topPublisher ? topPublisher.publisher : null,
+      topPublisherPct: topPublisher ? topPublisher.pct : null,
+      publisherShares: publisherShares.length ? publisherShares : null,
       shift, shiftEligible: shiftDir != null,
       expertShrunk: expert ? expert.shrunk : null,
       expertCreators: expert ? expert.creators : null,
@@ -1300,15 +1389,19 @@ export function projectionFor(spec, bracket, scales, metaNotes = [], sources = [
     basis: `live baseline ${prior != null ? Math.round(prior) : "—"}`
       + (testing != null ? ` · PTR ${bracket === "raid" ? "raid-testing" : "M+ testing"} pct ${Math.round(testing)}` : "")
       + (dummy != null ? ` · Dummy Dome ${Math.round(dummy)}` : "")
-      /* Publisher concentration, disclosed (2026-08-03, external audit). When the era:"ptr"
-         list comes from a publisher that ALSO has a live tier list, that publisher's
-         combined share of this forecast is roughly triple any other's — measured at 31%
-         for Icy Veins in M+ against 11% each for Method, Wowhead and Archon. No formula
-         defect: a second PTR list would halve the 20% term automatically, and the two
-         lists are not a duplicate vote. But no surface said it, and a third of a forecast
-         tracing to one outlet is something a reader should be told, not have to derive. */
-      + (ptrList ? ` · ${ptrList.label} ${ptrList.tiers} (${Math.round(ptrList.score)})` +
-          (sharedPublisherPct != null ? ` — same publisher as one of the live lists, ~${sharedPublisherPct}% of this forecast combined` : "") : "")
+      /* Publisher concentration, disclosed (2026-08-03, external audit; rewritten
+         2026-08-09). The original clause only fired when a PTR list's id extended a live
+         list's id, so it spoke on 40 of 80 cells and said nothing on raid. Two changes made
+         that untenable: Wowhead now feeds the next-patch term under its own id (invisible
+         to a prefix test against itself) and, with the frozen lane, a prior contributor may
+         not be in the live registry at all. Measured, the old clause was also wrong where
+         it did speak — 35% claimed for Icy Veins on every M+ cell against a true 22%.
+         So the share is now derived from what the consensus actually averaged and stated
+         on EVERY cell. It matters here more than it did in August: with Wowhead admitted
+         and its Season-1 letters frozen into the prior, one outlet reaches 59.6% of a
+         healer raid forecast and up to 64% of a tank raid forecast. */
+      + (ptrList ? ` · next-patch list${ptrList.count > 1 ? "s" : ""}: ${ptrList.detail} (${Math.round(ptrList.score)})` : "")
+      + (topPublisher ? ` · biggest single input: ${topPublisher.name} ~${topPublisher.pct}% of this forecast` : "")
       // Report the shift ACTUALLY applied. This read "+7"/"−7" from v1 through v6, which
       // stopped being true at v5 when the magnitude began scaling with tally strength —
       // so a spec shifted +3 published a basis claiming +7. A transparency string that
@@ -1374,6 +1467,17 @@ export function snapshotStateOf(specs) {
     entry.scores = {
       raid: s.consensus?.raid?.score ?? null,
       mplus: s.consensus?.mplus?.score ?? null
+    };
+    /* WHICH sources composed each mean (2026-08-09). CONSENSUS_VERSION is a hand-bumped
+       integer and cannot track a rolling per-source season policy — from here to the phase
+       flip the composition changes whenever an outlet flips, on its own schedule. Recording
+       the set makes composition comparability DERIVABLE instead of asserted, which is what
+       the forecast report card needs: without it, "Wowhead was 1 of 1 Season-2 lists in the
+       answer key" is unrecoverable after settlement. Deliberately ignored by
+       baselineDiffers/movementFor — movement semantics stay tier/rank-grained. */
+    entry.consensusSources = {
+      raid: (s.consensus?.raid?.perSource ?? []).map(p => p.source),
+      mplus: (s.consensus?.mplus?.perSource ?? []).map(p => p.source)
     };
     if (s.projection) {
       const slim = p => p ? { tier: p.tier, score: p.score, confidence: p.confidence } : null;
@@ -1679,8 +1783,26 @@ export function dataHealth(specs, sources = null) {
     staleDays: STALE_DAYS, tierStaleDays: TIER_STALE_DAYS };
 }
 
-export function buildPayload({ specs, sources, scales, community, ptrBuilds, creatorTakes, encounterTiers, historySnapshot, historySnapshots, now = null }) {
-  const scored = dummyDomeScores(metricRanks(fightLabels(decorateSpecs(specs, sources, scales))));
+/* The frozen archive's PROVENANCE, minus the letters — what the page needs to say
+   "Wowhead: final Season 1 letters, 08 Aug" without carrying 320 tiers it already has. */
+export function seasonFinalMeta(seasonFinal, liveSeason = PHASES.liveSeason) {
+  const bySource = seasonFinal?.[liveSeason];
+  if (!bySource || !Object.keys(bySource).length) return null;
+  const sources = {};
+  for (const [id, brackets] of Object.entries(bySource)) {
+    sources[id] = Object.fromEntries(Object.entries(brackets ?? {}).map(([bracket, rec]) => [bracket, {
+      frozenAt: rec?.frozenAt ?? null,
+      fromCommit: rec?.fromCommit ?? null,
+      lastSeasonVerifiedSnapshot: rec?.lastSeasonVerifiedSnapshot ?? null,
+      publishedRange: rec?.publishedRange ?? null,
+      letterCount: Object.keys(rec?.letters ?? {}).length
+    }]));
+  }
+  return { season: liveSeason, sources };
+}
+
+export function buildPayload({ specs, sources, scales, community, ptrBuilds, creatorTakes, encounterTiers, historySnapshot, historySnapshots, seasonFinal = null, now = null }) {
+  const scored = dummyDomeScores(metricRanks(fightLabels(decorateSpecs(specs, sources, scales, seasonFinal))));
   // Prefer the full history (skip snapshots identical to the present state); fall back to
   // the single-snapshot param for callers/tests that pass one directly.
   const baseline = historySnapshots ? pickBaseline(scored, historySnapshots) : (historySnapshot ?? null);
@@ -1718,6 +1840,10 @@ export function buildPayload({ specs, sources, scales, community, ptrBuilds, cre
       latestPtrBuild: latestBuild,
       movementSince: baseline?.date ?? null,
       phases: PHASES,
+      /* Frozen-lane provenance for the current live season, so the template never re-reads
+         data/season-final.json (and so the letters themselves stay out of the payload —
+         they are already in spec.consensus[].perSource). Null when nothing is frozen. */
+      seasonFinal: seasonFinalMeta(seasonFinal),
       // The single source of truth for PTR series lookup keys — see PTR_METRIC_NAMES.
       // The template reads these instead of hand-typing a second copy that can drift.
       ptrMetricNames: PTR_METRIC_NAMES,

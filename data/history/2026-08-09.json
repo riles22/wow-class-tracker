@@ -1,9 +1,9 @@
 {
   "date": "2026-08-09",
   "phase": "12.1-ptr",
-  "projectionVersion": 12,
+  "projectionVersion": 13,
   "rankVersion": 3,
-  "consensusVersion": 2,
+  "consensusVersion": 3,
   "specs": {
     "Death Knight|Blood": {
       "consensus": {
@@ -23,25 +23,39 @@
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 3
       },
       "scores": {
-        "raid": 48,
-        "mplus": 26
+        "raid": 49,
+        "mplus": 33
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
       },
       "projection": {
         "raid": {
-          "tier": "B",
-          "score": 48,
+          "tier": "A",
+          "score": 73,
           "confidence": "low"
         },
         "mplus": {
           "tier": "A+",
-          "score": 83,
+          "score": 87,
           "confidence": "high"
         }
       }
     },
     "Death Knight|Frost": {
       "consensus": {
-        "raid": "A",
+        "raid": "B",
         "mplus": "B"
       },
       "ranks": {
@@ -62,18 +76,32 @@
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 24
       },
       "scores": {
-        "raid": 65,
-        "mplus": 46
+        "raid": 58,
+        "mplus": 48
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
       },
       "projection": {
         "raid": {
           "tier": "A",
-          "score": 61,
+          "score": 60,
           "confidence": "low"
         },
         "mplus": {
           "tier": "A",
-          "score": 62,
+          "score": 61,
           "confidence": "medium"
         }
       }
@@ -107,18 +135,32 @@
         "score": 52
       },
       "scores": {
-        "raid": 59,
-        "mplus": 91
+        "raid": 62,
+        "mplus": 89
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
       },
       "projection": {
         "raid": {
           "tier": "B",
           "score": 57,
-          "confidence": "low"
+          "confidence": "medium"
         },
         "mplus": {
           "tier": "A+",
-          "score": 81,
+          "score": 76,
           "confidence": "medium"
         }
       }
@@ -126,7 +168,7 @@
     "Demon Hunter|Havoc": {
       "consensus": {
         "raid": "B",
-        "mplus": "A"
+        "mplus": "B"
       },
       "ranks": {
         "archon|raid|95th pct DPS (Mythic)": 5,
@@ -145,18 +187,32 @@
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 17
       },
       "scores": {
-        "raid": 56,
-        "mplus": 59
+        "raid": 55,
+        "mplus": 58
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
       },
       "projection": {
         "raid": {
           "tier": "A",
-          "score": 71,
-          "confidence": "low"
+          "score": 66,
+          "confidence": "medium"
         },
         "mplus": {
           "tier": "A",
-          "score": 69,
+          "score": 65,
           "confidence": "medium"
         }
       }
@@ -190,18 +246,32 @@
         "score": 49
       },
       "scores": {
-        "raid": 85,
-        "mplus": 91
+        "raid": 81,
+        "mplus": 89
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
       },
       "projection": {
         "raid": {
           "tier": "A",
           "score": 66,
-          "confidence": "low"
+          "confidence": "medium"
         },
         "mplus": {
           "tier": "A+",
-          "score": 82,
+          "score": 80,
           "confidence": "medium"
         }
       }
@@ -209,7 +279,7 @@
     "Demon Hunter|Vengeance": {
       "consensus": {
         "raid": "C",
-        "mplus": "B"
+        "mplus": "A"
       },
       "ranks": {
         "archon|raid|95th pct DPS (Mythic)": 5,
@@ -224,25 +294,38 @@
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 4
       },
       "scores": {
-        "raid": 27,
-        "mplus": 54
+        "raid": 29,
+        "mplus": 58
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
       },
       "projection": {
         "raid": {
-          "tier": "C",
-          "score": 27,
-          "confidence": "prior-only"
+          "tier": "B",
+          "score": 40,
+          "confidence": "low"
         },
         "mplus": {
-          "tier": "A",
-          "score": 71,
+          "tier": "A+",
+          "score": 74,
           "confidence": "medium"
         }
       }
     },
     "Druid|Balance": {
       "consensus": {
-        "raid": "A",
+        "raid": "B",
         "mplus": "B"
       },
       "ranks": {
@@ -270,18 +353,32 @@
         "score": 42
       },
       "scores": {
-        "raid": 64,
-        "mplus": 46
+        "raid": 57,
+        "mplus": 52
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
       },
       "projection": {
         "raid": {
           "tier": "B",
-          "score": 51,
+          "score": 53,
           "confidence": "medium"
         },
         "mplus": {
           "tier": "A",
-          "score": 62,
+          "score": 63,
           "confidence": "high"
         }
       }
@@ -289,7 +386,7 @@
     "Druid|Feral": {
       "consensus": {
         "raid": "B",
-        "mplus": "A+"
+        "mplus": "A"
       },
       "ranks": {
         "archon|raid|95th pct DPS (Mythic)": 18,
@@ -309,25 +406,39 @@
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 9
       },
       "scores": {
-        "raid": 42,
-        "mplus": 75
+        "raid": 45,
+        "mplus": 70
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
       },
       "projection": {
         "raid": {
           "tier": "B",
-          "score": 46,
-          "confidence": "low"
+          "score": 44,
+          "confidence": "medium"
         },
         "mplus": {
           "tier": "A",
-          "score": 73,
+          "score": 70,
           "confidence": "medium"
         }
       }
     },
     "Druid|Guardian": {
       "consensus": {
-        "raid": "S",
+        "raid": "A+",
         "mplus": "A+"
       },
       "ranks": {
@@ -343,18 +454,32 @@
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 1
       },
       "scores": {
-        "raid": 91,
-        "mplus": 83
+        "raid": 81,
+        "mplus": 87
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
       },
       "projection": {
         "raid": {
-          "tier": "S",
-          "score": 100,
-          "confidence": "low"
+          "tier": "A+",
+          "score": 78,
+          "confidence": "medium"
         },
         "mplus": {
           "tier": "A",
-          "score": 73,
+          "score": 71,
           "confidence": "medium"
         }
       }
@@ -379,14 +504,28 @@
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 7
       },
       "scores": {
-        "raid": 64,
-        "mplus": 48
+        "raid": 73,
+        "mplus": 54
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
       },
       "projection": {
         "raid": {
-          "tier": "A+",
-          "score": 74,
-          "confidence": "low"
+          "tier": "A",
+          "score": 73,
+          "confidence": "medium"
         },
         "mplus": {
           "tier": "C",
@@ -417,17 +556,31 @@
       },
       "scores": {
         "raid": 71,
-        "mplus": 91
+        "mplus": 89
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
       },
       "projection": {
         "raid": {
-          "tier": "A",
-          "score": 65,
-          "confidence": "low"
+          "tier": "B",
+          "score": 46,
+          "confidence": "medium"
         },
         "mplus": {
-          "tier": "B",
-          "score": 42,
+          "tier": "C",
+          "score": 38,
           "confidence": "medium"
         }
       }
@@ -462,25 +615,39 @@
         "score": 61
       },
       "scores": {
-        "raid": 56,
-        "mplus": 34
+        "raid": 55,
+        "mplus": 39
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
       },
       "projection": {
         "raid": {
           "tier": "A",
-          "score": 58,
+          "score": 60,
           "confidence": "medium"
         },
         "mplus": {
-          "tier": "C",
-          "score": 34,
+          "tier": "B",
+          "score": 40,
           "confidence": "high"
         }
       }
     },
     "Evoker|Preservation": {
       "consensus": {
-        "raid": "S",
+        "raid": "A+",
         "mplus": "C"
       },
       "ranks": {
@@ -498,14 +665,28 @@
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 6
       },
       "scores": {
-        "raid": 91,
-        "mplus": 34
+        "raid": 86,
+        "mplus": 39
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
       },
       "projection": {
         "raid": {
           "tier": "S",
           "score": 100,
-          "confidence": "low"
+          "confidence": "medium"
         },
         "mplus": {
           "tier": "A+",
@@ -517,7 +698,7 @@
     "Hunter|Beast Mastery": {
       "consensus": {
         "raid": "C",
-        "mplus": "A"
+        "mplus": "B"
       },
       "ranks": {
         "archon|raid|95th pct DPS (Mythic)": 26,
@@ -537,18 +718,32 @@
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 12
       },
       "scores": {
-        "raid": 32,
-        "mplus": 59
+        "raid": 33,
+        "mplus": 58
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
       },
       "projection": {
         "raid": {
-          "tier": "C",
-          "score": 37,
+          "tier": "B",
+          "score": 44,
           "confidence": "low"
         },
         "mplus": {
           "tier": "A",
-          "score": 59,
+          "score": 60,
           "confidence": "medium"
         }
       }
@@ -582,14 +777,28 @@
         "score": 65
       },
       "scores": {
-        "raid": 85,
-        "mplus": 50
+        "raid": 81,
+        "mplus": 51
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
       },
       "projection": {
         "raid": {
-          "tier": "A+",
-          "score": 74,
-          "confidence": "low"
+          "tier": "A",
+          "score": 71,
+          "confidence": "medium"
         },
         "mplus": {
           "tier": "A",
@@ -601,7 +810,7 @@
     "Hunter|Survival": {
       "consensus": {
         "raid": "A",
-        "mplus": "A+"
+        "mplus": "A"
       },
       "ranks": {
         "archon|raid|95th pct DPS (Mythic)": 7,
@@ -622,18 +831,32 @@
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 4
       },
       "scores": {
-        "raid": 73,
-        "mplus": 75
+        "raid": 68,
+        "mplus": 70
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
       },
       "projection": {
         "raid": {
-          "tier": "A+",
-          "score": 76,
+          "tier": "B",
+          "score": 54,
           "confidence": "low"
         },
         "mplus": {
           "tier": "B",
-          "score": 50,
+          "score": 48,
           "confidence": "medium"
         }
       }
@@ -667,18 +890,32 @@
         "score": 83
       },
       "scores": {
-        "raid": 26,
-        "mplus": 40
+        "raid": 33,
+        "mplus": 43
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
       },
       "projection": {
         "raid": {
           "tier": "A",
-          "score": 61,
-          "confidence": "low"
+          "score": 67,
+          "confidence": "medium"
         },
         "mplus": {
           "tier": "A+",
-          "score": 79,
+          "score": 78,
           "confidence": "medium"
         }
       }
@@ -706,13 +943,27 @@
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 25
       },
       "scores": {
-        "raid": 34,
-        "mplus": 34
+        "raid": 39,
+        "mplus": 39
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
       },
       "projection": {
         "raid": {
           "tier": "C",
-          "score": 34,
+          "score": 37,
           "confidence": "low"
         },
         "mplus": {
@@ -751,18 +1002,32 @@
         "score": 35
       },
       "scores": {
-        "raid": 85,
-        "mplus": 62
+        "raid": 81,
+        "mplus": 64
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
       },
       "projection": {
         "raid": {
           "tier": "B",
-          "score": 56,
-          "confidence": "low"
+          "score": 53,
+          "confidence": "medium"
         },
         "mplus": {
           "tier": "B",
-          "score": 42,
+          "score": 43,
           "confidence": "medium"
         }
       }
@@ -786,17 +1051,31 @@
       },
       "scores": {
         "raid": 54,
-        "mplus": 75
+        "mplus": 74
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
       },
       "projection": {
         "raid": {
-          "tier": "B",
-          "score": 54,
+          "tier": "A",
+          "score": 61,
           "confidence": "low"
         },
         "mplus": {
           "tier": "B",
-          "score": 40,
+          "score": 43,
           "confidence": "high"
         }
       }
@@ -821,13 +1100,27 @@
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 1
       },
       "scores": {
-        "raid": 83,
-        "mplus": 91
+        "raid": 87,
+        "mplus": 93
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
       },
       "projection": {
         "raid": {
-          "tier": "A+",
-          "score": 82,
+          "tier": "A",
+          "score": 70,
           "confidence": "low"
         },
         "mplus": {
@@ -839,7 +1132,7 @@
     },
     "Monk|Windwalker": {
       "consensus": {
-        "raid": "A+",
+        "raid": "A",
         "mplus": "B"
       },
       "ranks": {
@@ -861,18 +1154,32 @@
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 18
       },
       "scores": {
-        "raid": 75,
-        "mplus": 54
+        "raid": 70,
+        "mplus": 49
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
       },
       "projection": {
         "raid": {
-          "tier": "A+",
-          "score": 79,
+          "tier": "A",
+          "score": 64,
           "confidence": "low"
         },
         "mplus": {
           "tier": "A+",
-          "score": 87,
+          "score": 85,
           "confidence": "medium"
         }
       }
@@ -897,18 +1204,32 @@
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 4
       },
       "scores": {
-        "raid": 65,
-        "mplus": 40
+        "raid": 62,
+        "mplus": 48
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
       },
       "projection": {
         "raid": {
           "tier": "A+",
-          "score": 81,
-          "confidence": "low"
+          "score": 79,
+          "confidence": "medium"
         },
         "mplus": {
           "tier": "A+",
-          "score": 86,
+          "score": 87,
           "confidence": "high"
         }
       }
@@ -931,25 +1252,39 @@
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 5
       },
       "scores": {
-        "raid": 32,
-        "mplus": 46
+        "raid": 33,
+        "mplus": 52
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
       },
       "projection": {
         "raid": {
-          "tier": "C",
-          "score": 32,
-          "confidence": "low"
+          "tier": "B",
+          "score": 42,
+          "confidence": "medium"
         },
         "mplus": {
           "tier": "B",
-          "score": 56,
+          "score": 57,
           "confidence": "high"
         }
       }
     },
     "Paladin|Retribution": {
       "consensus": {
-        "raid": "B",
+        "raid": "A",
         "mplus": "A"
       },
       "ranks": {
@@ -972,25 +1307,39 @@
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 5
       },
       "scores": {
-        "raid": 56,
-        "mplus": 67
+        "raid": 60,
+        "mplus": 68
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
       },
       "projection": {
         "raid": {
           "tier": "B",
-          "score": 56,
-          "confidence": "prior-only"
+          "score": 48,
+          "confidence": "low"
         },
         "mplus": {
           "tier": "A",
-          "score": 64,
+          "score": 60,
           "confidence": "medium"
         }
       }
     },
     "Priest|Discipline": {
       "consensus": {
-        "raid": "S",
+        "raid": "A+",
         "mplus": "B"
       },
       "ranks": {
@@ -1008,8 +1357,22 @@
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 3
       },
       "scores": {
-        "raid": 91,
+        "raid": 86,
         "mplus": 54
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
       },
       "projection": {
         "raid": {
@@ -1044,13 +1407,27 @@
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 5
       },
       "scores": {
-        "raid": 46,
-        "mplus": 26
+        "raid": 48,
+        "mplus": 33
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
       },
       "projection": {
         "raid": {
           "tier": "B",
-          "score": 42,
+          "score": 54,
           "confidence": "low"
         },
         "mplus": {
@@ -1062,7 +1439,7 @@
     },
     "Priest|Shadow": {
       "consensus": {
-        "raid": "A",
+        "raid": "B",
         "mplus": "A"
       },
       "ranks": {
@@ -1090,18 +1467,32 @@
         "score": 12
       },
       "scores": {
-        "raid": 59,
-        "mplus": 67
+        "raid": 58,
+        "mplus": 59
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
       },
       "projection": {
         "raid": {
-          "tier": "C",
-          "score": 34,
-          "confidence": "low"
+          "tier": "B",
+          "score": 43,
+          "confidence": "medium"
         },
         "mplus": {
           "tier": "B",
-          "score": 55,
+          "score": 48,
           "confidence": "medium"
         }
       }
@@ -1128,18 +1519,32 @@
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 22
       },
       "scores": {
-        "raid": 32,
-        "mplus": 62
+        "raid": 37,
+        "mplus": 60
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
       },
       "projection": {
         "raid": {
-          "tier": "C",
-          "score": 34,
+          "tier": "B",
+          "score": 45,
           "confidence": "low"
         },
         "mplus": {
-          "tier": "A+",
-          "score": 76,
+          "tier": "A",
+          "score": 72,
           "confidence": "medium"
         }
       }
@@ -1147,7 +1552,7 @@
     "Rogue|Outlaw": {
       "consensus": {
         "raid": "B",
-        "mplus": "A"
+        "mplus": "B"
       },
       "ranks": {
         "archon|raid|95th pct DPS (Mythic)": 23,
@@ -1172,18 +1577,32 @@
         "score": 39
       },
       "scores": {
-        "raid": 46,
-        "mplus": 59
+        "raid": 43,
+        "mplus": 58
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
       },
       "projection": {
         "raid": {
-          "tier": "B",
-          "score": 44,
-          "confidence": "low"
+          "tier": "C",
+          "score": 39,
+          "confidence": "medium"
         },
         "mplus": {
-          "tier": "A+",
-          "score": 78,
+          "tier": "A",
+          "score": 73,
           "confidence": "medium"
         }
       }
@@ -1213,17 +1632,31 @@
       },
       "scores": {
         "raid": 54,
-        "mplus": 70
+        "mplus": 66
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
       },
       "projection": {
         "raid": {
-          "tier": "B",
-          "score": 54,
+          "tier": "A",
+          "score": 61,
           "confidence": "low"
         },
         "mplus": {
           "tier": "B",
-          "score": 49,
+          "score": 48,
           "confidence": "medium"
         }
       }
@@ -1258,18 +1691,32 @@
         "score": 76
       },
       "scores": {
-        "raid": 48,
-        "mplus": 75
+        "raid": 49,
+        "mplus": 74
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
       },
       "projection": {
         "raid": {
-          "tier": "A",
-          "score": 61,
+          "tier": "B",
+          "score": 57,
           "confidence": "medium"
         },
         "mplus": {
           "tier": "A+",
-          "score": 81,
+          "score": 80,
           "confidence": "high"
         }
       }
@@ -1303,25 +1750,39 @@
         "score": 74
       },
       "scores": {
-        "raid": 54,
-        "mplus": 67
+        "raid": 49,
+        "mplus": 64
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
       },
       "projection": {
         "raid": {
-          "tier": "A",
-          "score": 67,
-          "confidence": "low"
+          "tier": "B",
+          "score": 57,
+          "confidence": "medium"
         },
         "mplus": {
-          "tier": "A",
-          "score": 61,
+          "tier": "B",
+          "score": 57,
           "confidence": "medium"
         }
       }
     },
     "Shaman|Restoration": {
       "consensus": {
-        "raid": "C",
+        "raid": "B",
         "mplus": "A+"
       },
       "ranks": {
@@ -1339,14 +1800,28 @@
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 2
       },
       "scores": {
-        "raid": 38,
-        "mplus": 75
+        "raid": 42,
+        "mplus": 82
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
       },
       "projection": {
         "raid": {
-          "tier": "B",
-          "score": 55,
-          "confidence": "low"
+          "tier": "A",
+          "score": 68,
+          "confidence": "medium"
         },
         "mplus": {
           "tier": "A+",
@@ -1379,14 +1854,28 @@
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 14
       },
       "scores": {
-        "raid": 54,
-        "mplus": 40
+        "raid": 49,
+        "mplus": 43
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
       },
       "projection": {
         "raid": {
           "tier": "B",
-          "score": 54,
-          "confidence": "low"
+          "score": 50,
+          "confidence": "medium"
         },
         "mplus": {
           "tier": "B",
@@ -1418,13 +1907,27 @@
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 7
       },
       "scores": {
-        "raid": 83,
-        "mplus": 70
+        "raid": 80,
+        "mplus": 74
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
       },
       "projection": {
         "raid": {
-          "tier": "A+",
-          "score": 80,
+          "tier": "A",
+          "score": 64,
           "confidence": "low"
         },
         "mplus": {
@@ -1458,18 +1961,32 @@
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 27
       },
       "scores": {
-        "raid": 67,
-        "mplus": 40
+        "raid": 68,
+        "mplus": 43
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
       },
       "projection": {
         "raid": {
           "tier": "A",
-          "score": 71,
+          "score": 73,
           "confidence": "low"
         },
         "mplus": {
           "tier": "A",
-          "score": 63,
+          "score": 60,
           "confidence": "medium"
         }
       }
@@ -1504,18 +2021,32 @@
         "score": 94
       },
       "scores": {
-        "raid": 46,
+        "raid": 43,
         "mplus": 69
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
       },
       "projection": {
         "raid": {
-          "tier": "A",
-          "score": 73,
+          "tier": "A+",
+          "score": 84,
           "confidence": "medium"
         },
         "mplus": {
           "tier": "S",
-          "score": 89,
+          "score": 88,
           "confidence": "high"
         }
       }
@@ -1544,25 +2075,39 @@
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 11
       },
       "scores": {
-        "raid": 62,
-        "mplus": 62
+        "raid": 60,
+        "mplus": 60
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
       },
       "projection": {
         "raid": {
-          "tier": "A",
-          "score": 68,
-          "confidence": "low"
+          "tier": "B",
+          "score": 57,
+          "confidence": "medium"
         },
         "mplus": {
-          "tier": "B",
-          "score": 43,
+          "tier": "C",
+          "score": 39,
           "confidence": "medium"
         }
       }
     },
     "Warrior|Protection": {
       "consensus": {
-        "raid": "S",
+        "raid": "A+",
         "mplus": "B"
       },
       "ranks": {
@@ -1578,13 +2123,27 @@
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 6
       },
       "scores": {
-        "raid": 91,
-        "mplus": 40
+        "raid": 86,
+        "mplus": 43
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
       },
       "projection": {
         "raid": {
-          "tier": "S",
-          "score": 95,
+          "tier": "A",
+          "score": 72,
           "confidence": "low"
         },
         "mplus": {

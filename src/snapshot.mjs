@@ -59,6 +59,22 @@ export async function snapshot(root = ROOT, date = new Date().toISOString().slic
         role: sp.role,
         raid: sp.projection?.raid ?? null,
         mplus: sp.projection?.mplus ?? null,
+        /* The consensus this forecast was built on, cell by cell, INCLUDING which
+           contributors were frozen (2026-08-09). `sourceDates` below records each source's
+           NEWEST page snapshot, which for an outlet that has moved to the next season is
+           the date it published the season we are NOT running — so on its own it states a
+           provenance the letters do not have. Without this block a post-launch auditor
+           cannot tell which sources composed the prior, nor that Wowhead contributed its
+           final Season-1 letters rather than the Season-2 ones sitting in the same file. */
+        consensus: Object.fromEntries(["raid", "mplus"].map(b => {
+          const c = sp.consensus?.[b];
+          return [b, c ? {
+            tier: c.tier, score: c.score, spread: c.spread,
+            sourceCount: c.perSource.length, frozenCount: c.frozenCount ?? 0,
+            perSource: c.perSource.map(p => ({ source: p.source, tier: p.tier, score: p.score,
+              lane: p.lane ?? "live", ...(p.frozenAsOf ? { frozenAsOf: p.frozenAsOf } : {}) }))
+          } : null];
+        })),
         outlook: sp.outlook ? { direction: sp.outlook.direction, source: sp.outlook.source ?? null,
           buffs: sp.outlook.buffs, nerfs: sp.outlook.nerfs } : null
       };
@@ -68,6 +84,25 @@ export async function snapshot(root = ROOT, date = new Date().toISOString().slic
       projectionVersion: PROJECTION_VERSION, rankVersion: RANK_VERSION,
       consensusVersion: CONSENSUS_VERSION,
       gitSha: sha, dataSha256: hash.digest("hex"),
+      /* Registry-level composition at freeze time: who was live, who was frozen, and what
+         season each page actually described. The per-cell block above answers "what fed
+         this letter"; this answers "what state was the registry in when we froze". */
+      consensus: {
+        liveSeason: payload.meta?.phases?.liveSeason ?? null,
+        consensusVersion: CONSENSUS_VERSION,
+        seasonFinal: payload.meta?.seasonFinal ?? null,
+        sources: (sources ?? []).filter(x => x.kind === "tier-list").map(x => ({
+          id: x.id, era: x.era ?? "live",
+          brackets: Object.fromEntries([...new Set((x.pages ?? []).map(p => p.bracket))].filter(Boolean).map(b => {
+            const pages = (x.pages ?? []).filter(p => p.bracket === b);
+            return [b, {
+              seasonVerified: [...new Set(pages.map(p => p.seasonVerified ?? null))],
+              snapshot: pages.map(p => p.snapshot).filter(Boolean).sort().at(-1) ?? null,
+              published: pages.map(p => p.published).filter(Boolean).sort()
+            }];
+          }))
+        }))
+      },
       sourceDates: Object.fromEntries((sources ?? [])
         .filter(x => x.pages?.length)
         .map(x => [x.id, x.pages.map(pg => pg.snapshot).sort().at(-1) ?? null])),

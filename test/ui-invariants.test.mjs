@@ -953,3 +953,77 @@ ui("motion defaults on, marks real entrances, and persists the site reduction co
     starfieldVisible: true, starfieldPainted: true,
   });
 });
+
+/* THE INVARIANT WHOSE ABSENCE LET A CONTRADICTION SHIP GREEN (2026-08-09).
+   The toolbar used to re-derive "which sources count" client-side from the registry —
+   a second copy of consensusFor's eligibility rule. The frozen lane broke that copy
+   silently: an outlet that has moved to the next season still contributes its final
+   live-season letters, so every cell averaged 4 sources while the page said 3, on 79 of
+   80 rows, with all 338 tests passing. Nothing compared the sentence to the cells.
+   So: assert the visible counts against what the payload's cells actually averaged. */
+ui("every visible consensus count equals the number of sources the cells actually averaged", async page => {
+  const data = payload();
+  const counts = data.specs
+    .flatMap(s => ["raid", "mplus"].map(b => (s.consensus?.[b]?.perSource ?? []).length))
+    .filter(n => n > 0);
+  const averaged = Math.max(...counts);
+
+  const shown = await page.evaluate(() => ({
+    toolstatus: document.getElementById("toolstatus")?.textContent ?? "",
+    notestamp: document.getElementById("notestamp")?.textContent ?? "",
+    tlcount: document.getElementById("tlcount")?.textContent ?? ""
+  }));
+
+  const words = ["No", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"];
+  assert.match(shown.toolstatus, new RegExp(`consensus of ${averaged} sources?\\b`),
+    `#toolstatus must state the ${averaged} sources the cells averaged, got "${shown.toolstatus}"`);
+  assert.match(shown.notestamp, new RegExp(`\\b${averaged}-source consensus`),
+    `#notestamp must agree with #toolstatus, got "${shown.notestamp}"`);
+  assert.equal(shown.tlcount, words[averaged],
+    `the "N tier lists feed a computed consensus" blurb must agree too, got "${shown.tlcount}"`);
+
+  /* DIRECTION. A frozen source is AHEAD — it has already published the next season — so
+     it must never be described with the lag vocabulary ("updating"), which asserts the
+     opposite of what happened. Nine such chips shipped reading "updating for 12.0.7" on
+     pages that were all ahead and none behind. */
+  const frozen = new Set();
+  for (const s of data.specs) for (const b of ["raid", "mplus"])
+    for (const p of (s.consensus?.[b]?.perSource ?? [])) if (p.lane === "frozen") frozen.add(p.source);
+  if (frozen.size) {
+    const names = [...frozen].map(id => data.sources.find(x => x.id === id)?.name ?? id);
+    for (const name of names) {
+      assert.ok(shown.toolstatus.includes(name),
+        `a frozen contributor must be named where the count is stated, got "${shown.toolstatus}"`);
+    }
+    assert.doesNotMatch(shown.toolstatus, /updating/i,
+      "a source that is AHEAD of the live season must never be described as 'updating'");
+    assert.doesNotMatch(shown.notestamp, /updating/i,
+      "…and the same in the always-visible note above the grid");
+  }
+
+  /* The footer chips, both directions. Expected: one chip per page of a live-era source
+     that is out of step, none at all for an era:"ptr" list (describing the next patch is
+     what it IS), and no lag vocabulary on a page that is ahead. */
+  const liveSources = data.sources.filter(s => s.kind === "tier-list" && (s.era ?? "live") === "live");
+  const liveSeason = data.meta.phases.liveSeason;
+  const order = data.meta.phases.seasonOrder ?? ["s1", "s2"];
+  const expectedChips = liveSources.reduce((n, s) => n + (s.pages ?? [])
+    .filter(p => p.seasonVerified != null && p.seasonVerified !== liveSeason).length, 0);
+  const chips = await page.evaluate(() => [...document.querySelectorAll(".lagchip")]
+    .map(c => ({ text: c.textContent, title: c.getAttribute("title") ?? "" })));
+  assert.equal(chips.length, expectedChips,
+    "one season chip per out-of-step page of a LIVE-era source, and none for an era:'ptr' list");
+  for (const chip of chips) {
+    const ahead = liveSources.some(s => (s.pages ?? []).some(p =>
+      p.seasonVerified != null && order.indexOf(p.seasonVerified) > order.indexOf(liveSeason)));
+    if (!ahead) continue;
+    assert.doesNotMatch(chip.text, /updating/i,
+      `a page that is AHEAD must not read as behind — got "${chip.text}"`);
+    assert.doesNotMatch(chip.title, /previous season/i,
+      `…nor claim it describes the PREVIOUS season — got "${chip.title}"`);
+    if (frozen.size) {
+      assert.doesNotMatch(chip.title, /excluded from the consensus/i,
+        "a frozen source's letters ARE in the consensus — saying otherwise contradicts the toolbar on the same page");
+    }
+  }
+});

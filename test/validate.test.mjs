@@ -533,3 +533,70 @@ test("validateData gates the take fields the expert model reads", async () => {
   ok.creatorTakes.takes[0].bracket = "mplus";
   assert.deepEqual(validateData(ok).filter(e => e.includes("bracket")), []);
 });
+
+/* ---- season-final.json: the frozen final-season letters (2026-08-09) ----------------
+   These letters go straight into the published consensus, rendering as ordinary tiers, so
+   a bad record here is invisible on the page. Same gates the live ratings get. */
+
+test("validateData gates the frozen final-season archive", async () => {
+  const data = await loadData(ROOT);
+  const rec = () => structuredClone(data.seasonFinal.s1.wowhead.raid);
+
+  const badSpec = structuredClone(data);
+  badSpec.seasonFinal.s1.wowhead.raid.letters["Not A|Spec"] = "A";
+  assert.ok(validateData(badSpec).some(e => /"Not A\|Spec" is not a roster spec/.test(e)));
+
+  const badTier = structuredClone(data);
+  badTier.seasonFinal.s1.wowhead.raid.letters["Death Knight|Blood"] = "ZZ";
+  assert.ok(validateData(badTier).some(e => /tier "ZZ"/.test(e)));
+
+  const badSource = structuredClone(data);
+  badSource.seasonFinal.s1["not-a-source"] = { raid: rec() };
+  assert.ok(validateData(badSource).some(e => /is not a tier-list source/.test(e)));
+
+  // A PTR list never fed the live consensus, so it has no final-season letters to freeze;
+  // admitting one would inject contributors that were never in the mean.
+  const ptrFrozen = structuredClone(data);
+  ptrFrozen.seasonFinal.s1["icyveins-ptr"] = { mplus: rec() };
+  assert.ok(validateData(ptrFrozen).some(e => /era:"ptr"/.test(e)));
+
+  const badSeason = structuredClone(data);
+  badSeason.seasonFinal.s9 = { wowhead: { raid: rec() } };
+  assert.ok(validateData(badSeason).some(e => /unknown season "s9"/.test(e)));
+
+  const noCommit = structuredClone(data);
+  noCommit.seasonFinal.s1.wowhead.raid.fromCommit = "abc123";
+  assert.ok(validateData(noCommit).some(e => /fromCommit must be a full 40-hex/.test(e)));
+
+  // An empty freeze is the dangerous one: it looks successful and silently drops the
+  // source from the consensus.
+  const empty = structuredClone(data);
+  empty.seasonFinal.s1.wowhead.raid.letters = {};
+  assert.ok(validateData(empty).some(e => /has no letters/.test(e)));
+
+  // A record cannot be frozen before the letters it froze were published.
+  const backwards = structuredClone(data);
+  backwards.seasonFinal.s1.wowhead.raid.lastSeasonVerifiedSnapshot = "2099-01-01";
+  assert.ok(validateData(backwards).some(e => /is after frozenAt/.test(e)));
+
+  // Absent archive is valid — it is the pre-2026-08-09 state.
+  const none = structuredClone(data);
+  none.seasonFinal = null;
+  assert.deepEqual(validateData(none), []);
+});
+
+test("the committed archive only holds sources that have actually moved ahead", async () => {
+  const data = await loadData(ROOT);
+  if (!data.seasonFinal) return;
+  const { sourceSeasonOk, PHASES } = await import("../src/normalize.mjs");
+  for (const [season, bySource] of Object.entries(data.seasonFinal)) {
+    if (season !== PHASES.liveSeason) continue;
+    for (const [id, brackets] of Object.entries(bySource)) {
+      const source = data.sources.find(s => s.id === id);
+      for (const bracket of Object.keys(brackets)) {
+        assert.equal(sourceSeasonOk(source, bracket, season), false,
+          `${id}/${bracket} still describes the live season — freezing it would outrank its own live letters`);
+      }
+    }
+  }
+});
