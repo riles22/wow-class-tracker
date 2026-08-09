@@ -37,7 +37,8 @@ const sourceFilePaths = {
   catalystRules: "gearing/data/catalyst-rules.json",
   catalystStatAllocations: "gearing/data/catalyst-stat-allocations.json",
   itemEligibilityOverrides: "gearing/data/item-eligibility-overrides.json",
-  specDefinitions: "gearing/data/specs.json",
+  // specDefinitions removed 2026-08-08 alongside SOURCE_FILES — specs.json is not a curation
+  // input and fingerprinting it blocked both display fixes and the sanctioned harvest.
 };
 const sourceFiles = Object.values(sourceFilePaths).map((value) => value.split("/").at(-1));
 

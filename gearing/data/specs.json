@@ -1,5 +1,5 @@
 {
-  "source": "WoW Class Tracker data/specs.json (class, spec, role, tier set, ratings) + Icy Veins stat-priority pages",
+  "source": "WoW Class Tracker data/specs.json (class, spec, role, tier set) + Icy Veins stat-priority pages",
   "harvestedAt": "2026-08-02",
   "caveat": "Icy Veins publishes LIVE-patch stat priorities. Season 2 (12.1) priorities are not published yet; treat ordering as a proxy.",
   "weaponProficiencyProvenance": "Compiled from Blizzard's official class pages and official Midnight patch notes. Class pages establish class-wide proficiencies and preferred weapons; specLoadouts adds the hand, core-ability, and patch restrictions needed for item eligibility. See officialSources and each spec's sourceUrls.",
@@ -106,21 +106,6 @@
         "set4": "When consuming Blood Debt, your next Marrowrend generates 3 additional Bone Shield charges and deals Shadow damage to your target and nearby enemies.",
         "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/11",
         "asOf": "2026-07-08"
-      },
-      "ratings": {
-        "raid": {
-          "icyveins": "B",
-          "method": "B",
-          "wowhead": "B",
-          "archon": "B"
-        },
-        "mplus": {
-          "icyveins": "C",
-          "method": "C",
-          "wowhead": "B",
-          "archon": "C",
-          "icyveins-ptr": "A+"
-        }
       }
     },
     {
@@ -211,21 +196,6 @@
         "set4": "Remorseless Winter deals damage 25% more frequently, and Freezing Tempest lasts 5 seconds longer.",
         "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
         "asOf": "2026-06-18"
-      },
-      "ratings": {
-        "raid": {
-          "icyveins": "S",
-          "method": "C",
-          "wowhead": "C",
-          "archon": "A"
-        },
-        "mplus": {
-          "icyveins": "A",
-          "method": "B",
-          "wowhead": "B",
-          "archon": "C",
-          "icyveins-ptr": "A+"
-        }
       }
     },
     {
@@ -286,21 +256,6 @@
         "set4": "Necrotic Bolt's damage is increased by 130%, and Withering Grasp's damage is increased by 130%, against enemies below 35% health.",
         "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/18",
         "asOf": "2026-07-31"
-      },
-      "ratings": {
-        "raid": {
-          "icyveins": "A+",
-          "method": "B",
-          "wowhead": "A",
-          "archon": "B"
-        },
-        "mplus": {
-          "icyveins": "S",
-          "method": "A",
-          "wowhead": "A+",
-          "archon": "S",
-          "icyveins-ptr": "S"
-        }
       }
     },
     {
@@ -372,21 +327,6 @@
         "set4": "Essence Break now applies and benefits from the effects of Cycle of Hatred, has 35% increased initial strike damage, and has 2 seconds of increased duration.",
         "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/16",
         "asOf": "2026-07-21"
-      },
-      "ratings": {
-        "raid": {
-          "icyveins": "B",
-          "method": "B",
-          "wowhead": "B",
-          "archon": "A"
-        },
-        "mplus": {
-          "icyveins": "A+",
-          "method": "B",
-          "wowhead": "B",
-          "archon": "B",
-          "icyveins-ptr": "A+"
-        }
       }
     },
     {
@@ -497,21 +437,6 @@
         "set4": "Soulburst generates 8 Soul Fragments and grants Moment of Craving. Reap deals 20% increased damage.",
         "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
         "asOf": "2026-06-18"
-      },
-      "ratings": {
-        "raid": {
-          "icyveins": "A+",
-          "method": "S",
-          "wowhead": "A",
-          "archon": "S"
-        },
-        "mplus": {
-          "icyveins": "S",
-          "method": "A",
-          "wowhead": "A+",
-          "archon": "S",
-          "icyveins-ptr": "A+"
-        }
       }
     },
     {
@@ -583,20 +508,6 @@
         "set4": "Immolation Aura and Sigil of Spite deal 100% increased damage against targets affected by your Sigil of Flame.",
         "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
         "asOf": "2026-06-18"
-      },
-      "ratings": {
-        "raid": {
-          "icyveins": "C",
-          "wowhead": "C",
-          "archon": "C"
-        },
-        "mplus": {
-          "icyveins": "A",
-          "method": "A",
-          "wowhead": "A",
-          "archon": "C",
-          "icyveins-ptr": null
-        }
       }
     },
     {
@@ -682,21 +593,6 @@
         "set4": "Your damage is increased by 10% while in any Eclipse. This bonus wanes to 2% at the midpoint of the Eclipse, then waxes back to 10% at the end.",
         "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/11",
         "asOf": "2026-07-08"
-      },
-      "ratings": {
-        "raid": {
-          "icyveins": "B",
-          "method": "A",
-          "wowhead": "C",
-          "archon": "A"
-        },
-        "mplus": {
-          "icyveins": "A",
-          "method": "B",
-          "wowhead": "A",
-          "archon": "C",
-          "icyveins-ptr": "S"
-        }
       }
     },
     {
@@ -756,21 +652,6 @@
         "set4": "Berserk and Incarnation: Avatar of Ashamane last 10 seconds longer.",
         "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
         "asOf": "2026-06-18"
-      },
-      "ratings": {
-        "raid": {
-          "icyveins": "C",
-          "method": "B",
-          "wowhead": "B",
-          "archon": "B"
-        },
-        "mplus": {
-          "icyveins": "A+",
-          "method": "A",
-          "wowhead": "B",
-          "archon": "A",
-          "icyveins-ptr": "A"
-        }
       }
     },
     {
@@ -853,21 +734,6 @@
         "set4": "Thrash calls up 3 thorns, each impaling a target for Nature damage and dealing additional Nature damage to up to 5 nearby enemies, and extends the duration of Berserk by 0.5 seconds, up to 5 seconds.",
         "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
         "asOf": "2026-06-18"
-      },
-      "ratings": {
-        "raid": {
-          "icyveins": "S",
-          "method": "A",
-          "wowhead": "B",
-          "archon": "S"
-        },
-        "mplus": {
-          "icyveins": "S",
-          "method": "B",
-          "wowhead": "S",
-          "archon": "S",
-          "icyveins-ptr": "B+"
-        }
       }
     },
     {
@@ -987,21 +853,6 @@
         "set4": "Nature's Swiftness, Tranquility, and Incarnation: Tree of Life or Convoke the Spirits have a 100% chance to grant Genesis, and its duration is increased by 4 seconds.",
         "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/14",
         "asOf": "2026-07-14"
-      },
-      "ratings": {
-        "raid": {
-          "icyveins": "S",
-          "method": "A",
-          "wowhead": "S",
-          "archon": "A"
-        },
-        "mplus": {
-          "icyveins": "B",
-          "method": "A",
-          "wowhead": "S",
-          "archon": "C",
-          "icyveins-ptr": "A"
-        }
       }
     },
     {
@@ -1086,22 +937,7 @@
         "set2": "Upheaval's cooldown is reduced by 10 seconds.",
         "set4": "Upheaval magnifies your Fate Mirror effects for 8 seconds, increasing the amount of damage echoed to 45%.",
         "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
-        "asOf": "2026-07-21"
-      },
-      "ratings": {
-        "raid": {
-          "icyveins": "A",
-          "method": "B",
-          "wowhead": "A",
-          "archon": "S"
-        },
-        "mplus": {
-          "icyveins": "S",
-          "method": "A",
-          "wowhead": "A+",
-          "archon": "S",
-          "icyveins-ptr": null
-        }
+        "asOf": "2026-08-07"
       }
     },
     {
@@ -1187,21 +1023,6 @@
         "set4": "Causality reduces the remaining cooldown of your empower spells by an additional 0.1 seconds each time the effect occurs. Eternity Surge deals 10% increased damage.",
         "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/18",
         "asOf": "2026-07-31"
-      },
-      "ratings": {
-        "raid": {
-          "icyveins": "B",
-          "method": "A",
-          "wowhead": "B",
-          "archon": "B"
-        },
-        "mplus": {
-          "icyveins": "C",
-          "method": "B",
-          "wowhead": "B",
-          "archon": "C",
-          "icyveins-ptr": "B"
-        }
       }
     },
     {
@@ -1283,25 +1104,10 @@
       "statPriorityPatch": "12.0.7",
       "statPrioritySource": "https://www.icy-veins.com/wow/preservation-evoker-pve-healing-stat-priority",
       "tierSet": {
-        "set2": "Consuming Essence Burst sends forth a Living Flame at your target at 150% effectiveness, or at a nearby injured target if your primary target is at full health.",
+        "set2": "Consuming Essence Burst sends forth a Living Flame at your target at 100% effectiveness, or at a nearby injured target if your primary target is at full health.",
         "set4": "Green spells restore 5% more health, and Verdant Embrace has a 100% chance to grant Essence Burst.",
-        "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
-        "asOf": "2026-06-18"
-      },
-      "ratings": {
-        "raid": {
-          "icyveins": "A",
-          "method": "S",
-          "wowhead": "A",
-          "archon": "A"
-        },
-        "mplus": {
-          "icyveins": "C",
-          "method": "B",
-          "wowhead": "B",
-          "archon": "C",
-          "icyveins-ptr": "B+"
-        }
+        "source": "https://www.wowhead.com/blue-tracker/topic/us/healer-tuning-july-16-2327376",
+        "asOf": "2026-07-16"
       }
     },
     {
@@ -1361,21 +1167,6 @@
         "set4": "Stomp causes your next Cobra Shot to either benefit from Beast Cleave at 20% effectiveness, or strike your primary target for 15% additional damage, stacking up to 4 times.",
         "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/11",
         "asOf": "2026-07-08"
-      },
-      "ratings": {
-        "raid": {
-          "icyveins": "B",
-          "method": "C",
-          "wowhead": "C",
-          "archon": "C"
-        },
-        "mplus": {
-          "icyveins": "A+",
-          "method": "B",
-          "wowhead": "B",
-          "archon": "B",
-          "icyveins-ptr": "A"
-        }
       }
     },
     {
@@ -1435,21 +1226,6 @@
         "set4": "Aimed Shot and Rapid Fire damage increased by 5%. Each time Explosive Shot causes a burst of damage, the cooldown of Aimed Shot and Rapid Fire is reduced by 0.5 seconds.",
         "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/10",
         "asOf": "2026-06-30"
-      },
-      "ratings": {
-        "raid": {
-          "icyveins": "A+",
-          "method": "S",
-          "wowhead": "A",
-          "archon": "A"
-        },
-        "mplus": {
-          "icyveins": "C",
-          "method": "A",
-          "wowhead": "B",
-          "archon": "B",
-          "icyveins-ptr": "A+"
-        }
       }
     },
     {
@@ -1540,21 +1316,6 @@
         "set4": "Each blast of Boomstick increases the duration of Mongoose Fury by 1 second. Mongoose Fury effects are increased by 10%.",
         "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/14",
         "asOf": "2026-07-14"
-      },
-      "ratings": {
-        "raid": {
-          "icyveins": "S",
-          "method": "B",
-          "wowhead": "B",
-          "archon": "A"
-        },
-        "mplus": {
-          "icyveins": "A+",
-          "method": "A",
-          "wowhead": "B",
-          "archon": "A",
-          "icyveins-ptr": "A"
-        }
       }
     },
     {
@@ -1639,21 +1400,6 @@
         "set4": "Each wave of Arcane Missiles increases the damage of your next Arcane Blast, Arcane Pulse, or Prismatic Bolt by 5%, up to 40%.",
         "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
         "asOf": "2026-06-18"
-      },
-      "ratings": {
-        "raid": {
-          "icyveins": "C",
-          "method": "C",
-          "wowhead": "B",
-          "archon": "C"
-        },
-        "mplus": {
-          "icyveins": "B",
-          "method": "B",
-          "wowhead": "B",
-          "archon": "C",
-          "icyveins-ptr": "S"
-        }
       }
     },
     {
@@ -1738,21 +1484,6 @@
         "set4": "Pyroclasm reduces the cast time of Flamestrike and Pyroblast by 20% and its damage bonus is increased by 20%.",
         "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
         "asOf": "2026-07-14"
-      },
-      "ratings": {
-        "raid": {
-          "icyveins": "C",
-          "method": "C",
-          "wowhead": "B",
-          "archon": "B"
-        },
-        "mplus": {
-          "icyveins": "C",
-          "method": "C",
-          "wowhead": "B",
-          "archon": "B",
-          "icyveins-ptr": "B+"
-        }
       }
     },
     {
@@ -1837,21 +1568,6 @@
         "set4": "Consuming Glacial Spike has a small chance to generate 5 Icicles over 1 second (was: immediately granting the Glacial Spike! effect; proc rate doubled to 2.00 RPPM). Shatter damage increased by 5% (was 10%).",
         "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/18",
         "asOf": "2026-07-31"
-      },
-      "ratings": {
-        "raid": {
-          "icyveins": "A+",
-          "method": "S",
-          "wowhead": "A",
-          "archon": "A"
-        },
-        "mplus": {
-          "icyveins": "A",
-          "method": "A",
-          "wowhead": "A",
-          "archon": "B",
-          "icyveins-ptr": "B+"
-        }
       }
     },
     {
@@ -1964,21 +1680,6 @@
         "set4": "Ignited Keg Smashes cause enemies struck to take 8% increased damage from your Physical abilities, and leave a patch of flames on the ground, dealing Fire damage each second for 5 seconds. (07-23 PTR: bug fixed — Flurry Strikes' Physical damage is now correctly increased by this 4-set bonus.)",
         "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/17",
         "asOf": "2026-07-23"
-      },
-      "ratings": {
-        "raid": {
-          "icyveins": "A",
-          "method": "A",
-          "wowhead": "B",
-          "archon": "C"
-        },
-        "mplus": {
-          "icyveins": "A+",
-          "method": "A",
-          "wowhead": "A",
-          "archon": "A",
-          "icyveins-ptr": "B"
-        }
       }
     },
     {
@@ -2064,21 +1765,6 @@
         "set4": "Rising Sun Kick and Rushing Wind Kick have a chance to cause their next cast to ignore their cooldown and have their mana cost reduced by 100%.",
         "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
         "asOf": "2026-06-18"
-      },
-      "ratings": {
-        "raid": {
-          "icyveins": "S",
-          "method": "S",
-          "wowhead": "S",
-          "archon": "S"
-        },
-        "mplus": {
-          "icyveins": "S",
-          "method": "A",
-          "wowhead": "S",
-          "archon": "S",
-          "icyveins-ptr": "A+"
-        }
       }
     },
     {
@@ -2168,21 +1854,6 @@
         "set4": "Fists of Fury increases the damage of your next Rising Sun Kick by 10% or Spinning Crane Kick by 20% each time it strikes, stacking up to 6 times.",
         "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
         "asOf": "2026-06-18"
-      },
-      "ratings": {
-        "raid": {
-          "icyveins": "A+",
-          "method": "A",
-          "wowhead": "B",
-          "archon": "A"
-        },
-        "mplus": {
-          "icyveins": "A",
-          "method": "B",
-          "wowhead": "C",
-          "archon": "B",
-          "icyveins-ptr": "B+"
-        }
       }
     },
     {
@@ -2282,21 +1953,6 @@
         "set4": "Judgment now has a 20% chance to grant Infusion of Light. Holy Light now has a 100% chance to grant Infusion of Light, but its mana cost is increased by 50%. (07-23 amendment: the mana-cost clause was added to curb the set's over-efficiency, alongside a 5% increase to all Holy Paladin healing. Note the discrepancy — the official notes announced 60%, while the datamined spell that shipped in the build carries 50%; the datamined build value is what is quoted above.)",
         "source": "https://www.wowhead.com/news=382254/patch-12-1-ptr-datamined-class-tuning-and-tier-set-changes-sub-rogue-holy",
         "asOf": "2026-07-23"
-      },
-      "ratings": {
-        "raid": {
-          "icyveins": "B",
-          "method": "A",
-          "wowhead": "B",
-          "archon": "C"
-        },
-        "mplus": {
-          "icyveins": "B",
-          "method": "B",
-          "wowhead": "A",
-          "archon": "C",
-          "icyveins-ptr": "S"
-        }
       }
     },
     {
@@ -2385,21 +2041,6 @@
         "set4": "Enemies struck by Judgment or Crusader Strike take 20% additional Holy damage. If they are struck by a critical strike, the additional damage is increased by 100%.",
         "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/14",
         "asOf": "2026-07-14"
-      },
-      "ratings": {
-        "raid": {
-          "icyveins": "B",
-          "method": "C",
-          "wowhead": "C",
-          "archon": "C"
-        },
-        "mplus": {
-          "icyveins": "A",
-          "method": "B",
-          "wowhead": "A",
-          "archon": "C",
-          "icyveins-ptr": "A+"
-        }
       }
     },
     {
@@ -2457,24 +2098,9 @@
       "statPrioritySource": "https://www.icy-veins.com/wow/retribution-paladin-pve-dps-stat-priority",
       "tierSet": {
         "set2": "Divine Purpose has an additional 10% chance to activate and consuming it grants Divine Power, increasing Holy damage done by 10% for 12 seconds.",
-        "set4": "Consuming Divine Purpose grants Divine Arbiter, empowering your other Holy Power spenders to unleash an arbiter of light at their primary target, dealing Holy damage and Holy damage to enemies within 8 yards. Cannot occur while Divine Arbiter is active. Divine Arbiter damage increased by 35% (07-08).",
-        "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/11",
-        "asOf": "2026-07-08"
-      },
-      "ratings": {
-        "raid": {
-          "icyveins": "B",
-          "method": "A",
-          "wowhead": "A",
-          "archon": "B"
-        },
-        "mplus": {
-          "icyveins": "A+",
-          "method": "B",
-          "wowhead": "A",
-          "archon": "A",
-          "icyveins-ptr": "A+"
-        }
+        "set4": "Consuming Divine Purpose grants Divine Arbiter, empowering your other Holy Power spenders to unleash an arbiter of light at their primary target, dealing Holy damage and Holy damage to enemies within 8 yards. Cannot occur while Divine Arbiter is active. Divine Arbiter damage increased by 35% (07-08). Divine Arbiter damage benefits from Divine Purpose and Greater Judgment (08-06).",
+        "source": "https://us.forums.blizzard.com/en/wow/t/curse-of-ulatek-content-update-notes/2333514",
+        "asOf": "2026-08-06"
       }
     },
     {
@@ -2582,21 +2208,6 @@
         "set4": "After casting Mind Blast, your next Power Word: Shield or Void Shield absorbs 25% more damage.",
         "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
         "asOf": "2026-06-18"
-      },
-      "ratings": {
-        "raid": {
-          "icyveins": "S",
-          "method": "A",
-          "wowhead": "A",
-          "archon": "S"
-        },
-        "mplus": {
-          "icyveins": "A",
-          "method": "B",
-          "wowhead": "B",
-          "archon": "B",
-          "icyveins-ptr": "B+"
-        }
       }
     },
     {
@@ -2704,21 +2315,6 @@
         "set4": "Renew healing increased by 10%. Light's Resurgence now has a 100% chance to leave a Renew on the first target Prayer of Mending heals.",
         "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/10",
         "asOf": "2026-06-30"
-      },
-      "ratings": {
-        "raid": {
-          "icyveins": "B",
-          "method": "C",
-          "wowhead": "B",
-          "archon": "B"
-        },
-        "mplus": {
-          "icyveins": "C",
-          "method": "C",
-          "wowhead": "B",
-          "archon": "C",
-          "icyveins-ptr": "B"
-        }
       }
     },
     {
@@ -2826,21 +2422,6 @@
         "set4": "Tentacle Slam has a 100% chance to grant a free use of Void Volley at 100% effectiveness (was 125%).",
         "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/18",
         "asOf": "2026-07-31"
-      },
-      "ratings": {
-        "raid": {
-          "icyveins": "A+",
-          "method": "B",
-          "wowhead": "B",
-          "archon": "B"
-        },
-        "mplus": {
-          "icyveins": "A+",
-          "method": "B",
-          "wowhead": "C",
-          "archon": "A",
-          "icyveins-ptr": "A+"
-        }
       }
     },
     {
@@ -2905,21 +2486,6 @@
         "set4": "Deadly Poison increases your bleed damage on the target by 10%. Auto-attacks against targets with your Amplifying Poison deal 3% increased damage per stack. Wound Poison hits a second time.",
         "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/16",
         "asOf": "2026-07-21"
-      },
-      "ratings": {
-        "raid": {
-          "icyveins": "B",
-          "method": "C",
-          "wowhead": "B",
-          "archon": "C"
-        },
-        "mplus": {
-          "icyveins": "A",
-          "method": "B",
-          "wowhead": "B",
-          "archon": "A",
-          "icyveins-ptr": "A"
-        }
       }
     },
     {
@@ -2992,21 +2558,6 @@
         "set4": "Sinister Strike and Ambush have a 20% chance to cause your next Dispatch to be free and deal damage as if you spent the maximum combo points. Cannot activate from Sinister Strike's additional Opportunity hits.",
         "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/10",
         "asOf": "2026-06-30"
-      },
-      "ratings": {
-        "raid": {
-          "icyveins": "A",
-          "method": "C",
-          "wowhead": "C",
-          "archon": "B"
-        },
-        "mplus": {
-          "icyveins": "A+",
-          "method": "C",
-          "wowhead": "B",
-          "archon": "A",
-          "icyveins-ptr": "A"
-        }
       }
     },
     {
@@ -3075,21 +2626,6 @@
         "set4": "Lingering Shadow now also benefits Eviscerate and Black Powder at 100% effectiveness.",
         "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
         "asOf": "2026-06-18"
-      },
-      "ratings": {
-        "raid": {
-          "icyveins": "A",
-          "method": "B",
-          "wowhead": "B",
-          "archon": "B"
-        },
-        "mplus": {
-          "icyveins": "A",
-          "method": "A",
-          "wowhead": "B",
-          "archon": "A",
-          "icyveins-ptr": "C"
-        }
       }
     },
     {
@@ -3174,21 +2710,6 @@
         "set4": "When Stormkeeper or Ascendance fade, your next 2 Lightning Bolts, Chain Lightnings, or Lava Bursts deal 25% increased damage and cause your next Earthquake, Earth Shock, or Elemental Blast to cost 100% less Maelstrom.",
         "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
         "asOf": "2026-06-18"
-      },
-      "ratings": {
-        "raid": {
-          "icyveins": "B",
-          "method": "B",
-          "wowhead": "B",
-          "archon": "B"
-        },
-        "mplus": {
-          "icyveins": "A+",
-          "method": "A",
-          "wowhead": "A",
-          "archon": "A",
-          "icyveins-ptr": "A+"
-        }
       }
     },
     {
@@ -3280,21 +2801,6 @@
         "set4": "Fire Nova reduces the cooldown of Crash Lightning by 2 seconds and increases the damage of your next Crash Lightning by 8%, stacking up to 5 times (07-08: the Short Circuit aura now also boosts the Crash Lightning weapon-enhancement effect, averaged across stacks).",
         "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/10",
         "asOf": "2026-07-08"
-      },
-      "ratings": {
-        "raid": {
-          "icyveins": "A",
-          "method": "B",
-          "wowhead": "C",
-          "archon": "B"
-        },
-        "mplus": {
-          "icyveins": "A+",
-          "method": "B",
-          "wowhead": "B",
-          "archon": "A",
-          "icyveins-ptr": "A"
-        }
       }
     },
     {
@@ -3378,22 +2884,7 @@
         "set2": "Healing Wave and Chain Heal have a chance to create a Healing Rain at the target's location for 8 seconds (was 10 seconds; reduced 07-21).",
         "set4": "Every 1 second, 1 ally inside of Healing Rain gains a watery shield that absorbs damage for 10 seconds (absorb value increased by 300% on 06-30, then reduced by 30% on 07-21).",
         "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/16",
-        "asOf": "2026-07-21"
-      },
-      "ratings": {
-        "raid": {
-          "icyveins": "B",
-          "method": "C",
-          "wowhead": "B",
-          "archon": "C"
-        },
-        "mplus": {
-          "icyveins": "A+",
-          "method": "A",
-          "wowhead": "S",
-          "archon": "A",
-          "icyveins-ptr": "S"
-        }
+        "asOf": "2026-08-07"
       }
     },
     {
@@ -3478,21 +2969,6 @@
         "set4": "Each active Unstable Affliction increases your damage dealt by your spells and abilities by 2%, up to 6%.",
         "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/11",
         "asOf": "2026-07-08"
-      },
-      "ratings": {
-        "raid": {
-          "icyveins": "A",
-          "method": "A",
-          "wowhead": "C",
-          "archon": "C"
-        },
-        "mplus": {
-          "icyveins": "B",
-          "method": "C",
-          "wowhead": "B",
-          "archon": "B",
-          "icyveins-ptr": "A"
-        }
       }
     },
     {
@@ -3577,21 +3053,6 @@
         "set4": "When their energy depletes, Wild Imps have a 20% chance to fling themselves at their target and Implode at 250% effectiveness to their main target and 225% effectiveness to other targets. (2026-07-31 build: a tooltip fix — the bonus had displayed 150% / 125%, which is what was recorded here; the intended values are 250% / 225%. The effect itself did not change.)",
         "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/18",
         "asOf": "2026-07-31"
-      },
-      "ratings": {
-        "raid": {
-          "icyveins": "S",
-          "method": "S",
-          "wowhead": "A",
-          "archon": "B"
-        },
-        "mplus": {
-          "icyveins": "A",
-          "method": "A",
-          "wowhead": "A+",
-          "archon": "A",
-          "icyveins-ptr": "A"
-        }
       }
     },
     {
@@ -3676,21 +3137,6 @@
         "set4": "Targets damaged by Echo of Sargeras take 6% increased damage from your spells and abilities for 6 seconds.",
         "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/14",
         "asOf": "2026-07-14"
-      },
-      "ratings": {
-        "raid": {
-          "icyveins": "A+",
-          "method": "A",
-          "wowhead": "A",
-          "archon": "B"
-        },
-        "mplus": {
-          "icyveins": "B",
-          "method": "B",
-          "wowhead": "B",
-          "archon": "C",
-          "icyveins-ptr": "A"
-        }
       }
     },
     {
@@ -3751,22 +3197,7 @@
         "set2": "Mortal Strike and Execute damage increased by 10% and when you Slam a target, Slam also deals damage to enemies within 8 yards of it. Deals reduced damage beyond 5 targets.",
         "set4": "Overpower damage increased by 15%. Mortal Strike and Overpower increase the damage of your next Slam by 20% (was 10%), stacking up to 5 times (was 3).",
         "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/18",
-        "asOf": "2026-07-31"
-      },
-      "ratings": {
-        "raid": {
-          "icyveins": "A",
-          "method": "C",
-          "wowhead": "C",
-          "archon": "B"
-        },
-        "mplus": {
-          "icyveins": "A+",
-          "method": "C",
-          "wowhead": "A",
-          "archon": "S",
-          "icyveins-ptr": "S"
-        }
+        "asOf": "2026-08-07"
       }
     },
     {
@@ -3833,21 +3264,6 @@
         "set4": "Bloodthirst damage increased by 10% and during Recklessness, Bloodthirst increases the critical strike bonus of Recklessness by 5%, up to 10%.",
         "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
         "asOf": "2026-06-18"
-      },
-      "ratings": {
-        "raid": {
-          "icyveins": "A",
-          "method": "A",
-          "wowhead": "B",
-          "archon": "B"
-        },
-        "mplus": {
-          "icyveins": "A",
-          "method": "B",
-          "wowhead": "B",
-          "archon": "A",
-          "icyveins-ptr": "B+"
-        }
       }
     },
     {
@@ -3915,22 +3331,8 @@
         "set4": "Ravager and your free Revenges cause all targets to bleed for damage over 12 sec (Bloody Rebuke bleed damage increased by 100% on 07-08). Ravager's cooldown is reduced by 30 seconds.",
         "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/11",
         "asOf": "2026-07-08"
-      },
-      "ratings": {
-        "raid": {
-          "icyveins": "S",
-          "method": "S",
-          "wowhead": "A",
-          "archon": "A"
-        },
-        "mplus": {
-          "icyveins": "B",
-          "method": "B",
-          "wowhead": "B",
-          "archon": "C",
-          "icyveins-ptr": "A"
-        }
       }
     }
-  ]
+  ],
+  "trackerFieldsSyncedAt": "2026-08-09"
 }

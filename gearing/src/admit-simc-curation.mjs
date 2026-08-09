@@ -52,7 +52,21 @@ const SOURCE_FILES = {
   catalystRules: "catalyst-rules.json",
   catalystStatAllocations: "catalyst-stat-allocations.json",
   itemEligibilityOverrides: "item-eligibility-overrides.json",
-  specDefinitions: "specs.json",
+  /* data/specs.json was listed here until 2026-08-08 and should not have been. SOURCE_FILES is
+     the set of REVIEWED CURATION INPUTS — every other entry is read by the pipeline and shapes
+     an admission decision. specs.json never was: `specDefinitions` appeared exactly once in all
+     of gearing/src, in this map, and the map is used only to assert the hash set is complete
+     (:665), to build the name map (:767) and to hash the bytes (:781). Not one field of that
+     file ever reached a curation decision.
+     Fingerprinting it anyway had a real cost. Any byte change to specs.json failed
+     validate-curation-sources and the whole gearing build, so a display-only field copied from
+     the tracker — the tier-set bonus text — could not be corrected without re-running curation
+     admission. That is how the page kept publishing a superseded Preservation Evoker 2-piece
+     ("150% effectiveness", corrected upstream 2026-07-16) for weeks. It also blocked the
+     SANCTIONED path: harvest-specs.mjs rewrites specs.json and never re-stamped the hash, so an
+     ordinary harvest broke this gate by itself.
+     Removing it narrows the guarantee to exactly what it was actually guaranteeing, and is a
+     smaller change than teaching something to rewrite a hash. Owner decision, 2026-08-08. */
 };
 
 const gzip = promisify(gzipCallback);
