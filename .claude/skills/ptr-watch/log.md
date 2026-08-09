@@ -820,3 +820,23 @@ catch-up path.
 - **NO SEASON FLIP in the game** — but Wowhead's tier lists flipped to Season 2 ahead of it
   (see refresh-tiers log). `SNAPSHOT_PHASE` remains the pending one-shot owner action,
   `PHASE_FLIP_DUE` Aug 20, launch Aug 11.
+
+- 2026-08-09 (LOCAL run, ~14:2xZ — Opus 5; scheduled residential catch-up after the 10:37Z
+  nightly) · **No new PTR build.** Official forum thread fetched live via Discourse `.json`:
+  `highest_post_number` still **19** (Linxy, 2026-07-31), unchanged since the last run —
+  posts #18/#19 are already logged. Wowhead news RSS fetched live (40 items, HTTP 200): the
+  **newest item is dated 08 Aug**, so there is nothing at all from today and nothing the
+  nightly had not already seen. The 08-06 consolidated launch patch notes remain the newest
+  entry in `data/ptr-builds.json` (15 entries). Nothing ingested, nothing stamped.
+- **WCL zones 54/52/56/57 could not be checked** — the whole Warcraft Logs GraphQL API is
+  returning HTTP 500 on every query from here, including `rateLimitData`; see the
+  refresh-metrics log for the evidence. Stored rows and snapshots left alone, so the
+  staleness stays visible rather than being papered over.
+- ⚠ **OWNER ACTION DUE TOMORROW.** `render.mjs` states the freeze belongs on **2026-08-10,
+  after the nightly publishes** — `node src/snapshot.mjs --frozen`, which declares which
+  forecast the report card grades and writes the immutable
+  `data/forecasts/frozen-<date>.json`. 12.1 lands **08-11**. This is an owner one-shot
+  (committed once, never regenerated) so an unattended run must not do it; flagged in the
+  run report. The SEPARATE `SNAPSHOT_PHASE` flip is NOT due yet — owner decision 2026-08-08
+  moved it to **Season 2 open, 08-18**, not patch launch, with `PHASE_FLIP_DUE` 08-20 as the
+  red-gate backstop. Both still pending; `SNAPSHOT_PHASE` correctly still reads `12.1-ptr`.

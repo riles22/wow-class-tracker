@@ -1,147 +1,6 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
-  "videos": [
-    {
-      "id": "67DPiF5MD40",
-      "creator": "Bansherz",
-      "title": "Midnight Season 2 BM Hunter Guide Talents & Rotation",
-      "published": "2026-08-09",
-      "queuedAt": "2026-08-09"
-    },
-    {
-      "id": "2_Y9InoKm2E",
-      "creator": "Jedith",
-      "title": "Devourer Demon Hunter: Everything Changed in 12.1",
-      "published": "2026-07-07",
-      "queuedAt": "2026-08-09"
-    },
-    {
-      "id": "2Y_fZQb7Yls",
-      "creator": "Jedith",
-      "title": "12.1 Devourer DH is Insanely Good (But There's a Catch)",
-      "published": "2026-06-30",
-      "queuedAt": "2026-08-09"
-    },
-    {
-      "id": "slYmsyKqLRo",
-      "creator": "Jedith",
-      "title": "Havoc DH Gets Buffed...But Is It Enough?",
-      "published": "2026-06-24",
-      "queuedAt": "2026-08-09"
-    },
-    {
-      "id": "1KskZ3QXD38",
-      "creator": "Jedith",
-      "title": "DEMON HUNTERS GETTING BUFFED | Tier Sets & Tuning 12.1",
-      "published": "2026-06-19",
-      "queuedAt": "2026-08-09"
-    },
-    {
-      "id": "TELYhJ55qSc",
-      "creator": "leak",
-      "title": "Flamefang Pitch REMOVED and New Tier! HUGE Survival Hunter 12.1 Changes",
-      "published": "2026-07-14",
-      "queuedAt": "2026-08-09"
-    },
-    {
-      "id": "DJxknBqUD24",
-      "creator": "leak",
-      "title": "12.1 Survival Hunter Changes! Tier Set, Special 1H Weapons, Feedback, and More!",
-      "published": "2026-06-20",
-      "queuedAt": "2026-08-09"
-    },
-    {
-      "id": "lQ3wyHOACe0",
-      "creator": "Pkpawner",
-      "title": "Windwalker 12.1 | Fist of Fury Problem Just Got Worse",
-      "published": "2026-06-20",
-      "queuedAt": "2026-08-09"
-    },
-    {
-      "id": "lqWDqGVZzjc",
-      "creator": "NeekapHere",
-      "title": "Retribution Paladin Tier Set REWORKED AGAIN! | 12.1 PTR",
-      "published": "2026-07-09",
-      "queuedAt": "2026-08-09"
-    },
-    {
-      "id": "m55q-eUQ9us",
-      "creator": "NeekapHere",
-      "title": "Retribution Paladin's Tier Set Just Got MUCH Better | Patch 12.1 PTR",
-      "published": "2026-07-01",
-      "queuedAt": "2026-08-09"
-    },
-    {
-      "id": "k6dxaoUqKGA",
-      "creator": "Musguete",
-      "title": "Blizzard NEEDS to BUFF Rogues on 12.1 PTR NOW!!",
-      "published": "2026-07-14",
-      "queuedAt": "2026-08-09"
-    },
-    {
-      "id": "b_yyDxBT_FQ",
-      "creator": "Musguete",
-      "title": "Outlaw Rogue is BLASTING AFTER the Buffs! #rogue #worldofwarcraft #wowgear #midnights2",
-      "published": "2026-07-24",
-      "queuedAt": "2026-08-09"
-    },
-    {
-      "id": "5UjnyOvtRes",
-      "creator": "Musguete",
-      "title": "Can Rogues compete in Season 2? Mythic Sszorak Encounter Rogue POV 12.1 PTR",
-      "published": "2026-07-11",
-      "queuedAt": "2026-08-09"
-    },
-    {
-      "id": "yDIpJmEkI9U",
-      "creator": "Megasett",
-      "title": "Mistweaver Week 1 PTR & Altar of Fangs First Impressions",
-      "published": "2026-06-29",
-      "queuedAt": "2026-08-09"
-    },
-    {
-      "id": "jsKr8ehGXOg",
-      "creator": "Sha",
-      "title": "tank buffs yay (rip brewmaster)",
-      "published": "2026-07-22",
-      "queuedAt": "2026-08-09"
-    },
-    {
-      "id": "IYq5bWKuOiU",
-      "creator": "Dratnos",
-      "title": "PTR Update: Class Tuning & Corrosive Powers",
-      "published": "2026-07-14",
-      "queuedAt": "2026-08-09"
-    },
-    {
-      "id": "fUcTHqnixVo",
-      "creator": "Dratnos",
-      "title": "PTR Class Tuning from Raid Testing Data!",
-      "published": "2026-07-08",
-      "queuedAt": "2026-08-09"
-    },
-    {
-      "id": "hHaF6LlYyu0",
-      "creator": "Zorthas",
-      "title": "Every Change to Returning Dungeons in Season 2",
-      "published": "2026-07-09",
-      "queuedAt": "2026-08-09"
-    },
-    {
-      "id": "hvW80uwOmFg",
-      "creator": "Maximum",
-      "title": "Reacting to the Ion Hazzikostas 12.1 Interview",
-      "published": "2026-07-06",
-      "queuedAt": "2026-08-09"
-    },
-    {
-      "id": "_zGku2p5vS4",
-      "creator": "Obli",
-      "title": "The Lost Explorers HC PTR Testing / Frost DK POV / Midnight Season 2 12.1",
-      "published": "2026-06-28",
-      "queuedAt": "2026-08-09"
-    }
-  ],
+  "videos": [],
   "skipped": [
     {
       "id": "02rLfzEKLq4",
@@ -925,6 +784,153 @@
       "creator": "Supatease",
       "title": "Cool Offhand Transmog",
       "reason": "A 27-word transmog short. No spec content.",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "id": "k6dxaoUqKGA",
+      "creator": "Musguete",
+      "title": "Blizzard NEEDS to BUFF Rogues on 12.1 PTR NOW!!",
+      "reason": "Local run 2026-08-09 (yt-dlp, residential): YouTube serves NO captions for this video — --list-subs reports both \"has no automatic captions\" and \"has no subtitles\". The queue's drain path is Supadata mode=native, which returns YouTube's OWN auto-captions, so it can never produce a transcript for this id either; leaving it queued would spend the 100-request monthly free tier on a fetch that cannot succeed. Skipped as UNOBTAINABLE rather than unexamined — re-open only if the creator adds captions.",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "id": "b_yyDxBT_FQ",
+      "creator": "Musguete",
+      "title": "Outlaw Rogue is BLASTING AFTER the Buffs! #rogue #worldofwarcraft #wowgear #midnights2",
+      "reason": "Local run 2026-08-09 (yt-dlp, residential): YouTube serves NO captions for this video — --list-subs reports both \"has no automatic captions\" and \"has no subtitles\". The queue's drain path is Supadata mode=native, which returns YouTube's OWN auto-captions, so it can never produce a transcript for this id either; leaving it queued would spend the 100-request monthly free tier on a fetch that cannot succeed. Skipped as UNOBTAINABLE rather than unexamined — re-open only if the creator adds captions.",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "id": "_zGku2p5vS4",
+      "creator": "Obli",
+      "title": "The Lost Explorers HC PTR Testing / Frost DK POV / Midnight Season 2 12.1",
+      "reason": "Local run 2026-08-09 (yt-dlp, residential): YouTube serves NO captions for this video — --list-subs reports both \"has no automatic captions\" and \"has no subtitles\". The queue's drain path is Supadata mode=native, which returns YouTube's OWN auto-captions, so it can never produce a transcript for this id either; leaving it queued would spend the 100-request monthly free tier on a fetch that cannot succeed. Skipped as UNOBTAINABLE rather than unexamined — re-open only if the creator adds captions.",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "id": "2_Y9InoKm2E",
+      "creator": "Jedith",
+      "title": "Devourer Demon Hunter: Everything Changed in 12.1",
+      "reason": "Transcript read in full (local run 2026-08-09). A retrospective on Devourer's identity plus a positive read on 12.1 redistributing damage out of the Void meta / Collapsing Star windows into the rest of the kit. Real content, but Jedith already holds a LIVE both-lens Devourer take dated 2026-07-22 (the 07-21/22 tuning pass) — distilling this 07-07 read as live would create a second live take for the same (creator, spec, lens) on an earlier date, the defect creator-invariant #3 names, and expertRead averages a creator's live takes so the older read would dilute the current one.",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "id": "2Y_fZQb7Yls",
+      "creator": "Jedith",
+      "title": "12.1 Devourer DH is Insanely Good (But There's a Catch)",
+      "reason": "Transcript read in full (local run 2026-08-09). A Devourer tier-set deep dive (Abyssal Doom Hound 2pc/4pc, the Eradicate non-proc bug, the Void's Guard melee-combo build). Superseded in substance and in date by Jedith's live both-lens Devourer take of 2026-07-22; same (creator, spec, lens) as that take, so distilling it live would dilute the current read rather than add a lens.",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "id": "slYmsyKqLRo",
+      "creator": "Jedith",
+      "title": "Havoc DH Gets Buffed...But Is It Enough?",
+      "reason": "Transcript read in full (local run 2026-08-09). Early-PTR Havoc changes walkthrough (Trail of Ruin made instant, plus what he still wants changed to make Havoc competitive with Devourer). Predates and is superseded by Jedith's live both-lens Havoc take of 2026-07-22; same creator, spec and lens, so it adds no lens and would only dilute.",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "id": "1KskZ3QXD38",
+      "creator": "Jedith",
+      "title": "DEMON HUNTERS GETTING BUFFED | Tier Sets & Tuning 12.1",
+      "reason": "Transcript read in full (local run 2026-08-09). The first-look Demon Hunter 12.1 video — class changes, Havoc and Devourer spec changes, tier-set appearance and bonuses read off the initial patch notes. Notes-walkthrough content, and both DH specs are covered by Jedith's newer live both-lens takes of 2026-07-22.",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "id": "TELYhJ55qSc",
+      "creator": "leak",
+      "title": "Flamefang Pitch REMOVED and New Tier! HUGE Survival Hunter 12.1 Changes",
+      "reason": "Transcript read in full (local run 2026-08-09). Reaction to the 07-14 Survival Hunter changes (Flamefang Pitch removal, tier set), read as strongly positive. leak holds two LIVE both-lens Survival takes dated 2026-07-24 covering the later 07-23/24 builds, which supersede this read on the same creator, spec and lens.",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "id": "DJxknBqUD24",
+      "creator": "leak",
+      "title": "12.1 Survival Hunter Changes! Tier Set, Special 1H Weapons, Feedback, and More!",
+      "reason": "Transcript read in full (local run 2026-08-09). First-look Survival Hunter walkthrough of the opening 12.1 blue post (Hunter's Mark to five targets, and his objection that it still needs five casts). Superseded on the same creator, spec and lens by leak's live 2026-07-24 both-lens takes.",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "id": "lQ3wyHOACe0",
+      "creator": "Pkpawner",
+      "title": "Windwalker 12.1 | Fist of Fury Problem Just Got Worse",
+      "reason": "Transcript read in full (local run 2026-08-09). Early-PTR Windwalker reaction to the damage-profile adjustment, concluding Windwalker would be even more Fist of Fury-dominated if it shipped as-is. Pkpawner holds three LIVE raid-scoped Windwalker takes dated 2026-06-27 — a week later, same lens — and this video is likewise raid-framed, so it adds no lens and would dilute the newer read.",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "id": "lqWDqGVZzjc",
+      "creator": "NeekapHere",
+      "title": "Retribution Paladin Tier Set REWORKED AGAIN! | 12.1 PTR",
+      "reason": "Transcript read in full (local run 2026-08-09). The 07-09 Retribution tier-set rework video (the Divine Arbiter four-piece), plus his intuition that Blizzard wants Ret well above average in M+ and merely solid in raid. Not distilled: NeekapHere's live 2026-07-22 take is explicitly M+-scoped and newer, so the M+ lens is covered; and the single passing raid clause is a read of design INTENT, not a performance call. Ret raid is a prior-only projection cell where the expert ceiling is +/-12, so stretching one clause into the only raid-scoped Ret take would move a published letter on almost no evidence — exactly the over-reading the skill forbids.",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "id": "m55q-eUQ9us",
+      "creator": "NeekapHere",
+      "title": "Retribution Paladin's Tier Set Just Got MUCH Better | Patch 12.1 PTR",
+      "reason": "Transcript read in full (local run 2026-08-09). The 07-01 Retribution tier-set update (Greater Judgment debuff extended to 18s), positive but incremental. Superseded twice over: by the 07-09 rework video (itself skipped this run) and by NeekapHere's live M+-scoped take of 2026-07-22.",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "id": "yDIpJmEkI9U",
+      "creator": "Megasett",
+      "title": "Mistweaver Week 1 PTR & Altar of Fangs First Impressions",
+      "reason": "Transcript read in full (local run 2026-08-09). Mistweaver week-one PTR impressions and an Altar of Fangs first look — reassurance that Way of the Crane survives (spinning crane kick healing eight targets instead of four) and a keys-leaning read of the dungeon. Megasett holds LIVE Mistweaver takes for BOTH lenses dated 2026-08-02 (raid and M+), so this 06-29 read adds no lens and is superseded on date.",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "id": "jsKr8ehGXOg",
+      "creator": "Sha",
+      "title": "tank buffs yay (rip brewmaster)",
+      "reason": "Transcript read in full (local run 2026-08-09) — a 32k-word PTR key-running stream. The substantive Brewmaster read is M+-scoped: Master of Harmony damage is among the higher tank outputs but survivability is weak relative to other tanks, its kit is thin for the next dungeon pool, and the Celestial Infusion cooldown change collaterally nerfed the Apex talent and hurt rotational feel. Sha's live Brewmaster take of 2026-08-06 (official patch-notes review, M+-scoped) is newer on the same lens. Checked specifically for a RAID-scoped tank read to fill the known tank-raid coverage gap — there is none. His remarks on BDK, VDH, Prot Warrior and Prot Paladin tuning are out of scope: community.json scopes Sha to Brewmaster.",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "id": "5UjnyOvtRes",
+      "creator": "Musguete",
+      "title": "Can Rogues compete in Season 2? Mythic Sszorak Encounter Rogue POV 12.1 PTR",
+      "reason": "Transcript read in full (local run 2026-08-09). Mythic Sszorak PTR raid POV with a raid/single-target Rogue read: Assassination's burst is acceptable but falls off fast after the Deathmark and Kingsbane nerfs, Unstable Toxin is unusable because of the Venom Rush drop, and Deathstalker out-damages Fate's Bound for single target; Outlaw untested on this boss but said to be performing well on the others. Not distilled despite being raid-framed: Musguete's live 2026-07-31 takes for both Outlaw and Assassination name no bracket in patchContext, so takeInBracket resolves them to BOTH brackets and the raid lens is already covered. This 07-11 read also PREDATES the 07-31 rogue buff pass he himself called a major improvement, so landing it live would dilute the current post-buff read with a pre-buff opinion. Subtlety content in the video is out of scope: community.json scopes Musguete to Outlaw and Assassination.",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "id": "IYq5bWKuOiU",
+      "creator": "Dratnos",
+      "title": "PTR Update: Class Tuning & Corrosive Powers",
+      "reason": "Transcript read in full (local run 2026-08-09). A cross-class PTR tuning roundup (Corrosive Powers plus the 07-14 class notes). Contains NO Warrior content at all — the apparent 'Fury' matches are Mongoose Fury, i.e. Hunter — and community.json scopes Dratnos to Arms and Fury, so nothing in this video is attributable to him as a specialist take.",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "id": "fUcTHqnixVo",
+      "creator": "Dratnos",
+      "title": "PTR Class Tuning from Raid Testing Data!",
+      "reason": "Transcript read in full (local run 2026-08-09). Dratnos reads Blizzard's raid-testing tuning notes aloud with light commentary; the Warrior segment covers the Colossus damage-reduction increase, Arms single-target buffs leaning into Slayer, and the Fury bleed redistribution. Not distilled: the substance is Blizzard's dev notes, which belong to data/ptr-builds.json and are already tracked, and the one Fury line is him relaying that the change is supposed to be net neutral — attributing that to Dratnos as his own outlook would credit Blizzard's claim to the creator. The skill warns specifically against stretching class-tuning roundups into per-spec takes. His live Arms take of 2026-07-22 is newer.",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "id": "hHaF6LlYyu0",
+      "creator": "Zorthas",
+      "title": "Every Change to Returning Dungeons in Season 2",
+      "reason": "Transcript read in full (local run 2026-08-09). Zorthas is a generalCreators entry, so this could only ever yield metaNotes[]. The video is purely dungeon-mechanics deltas for the returning Season 2 dungeons (timers, RP reductions, boss ability changes) and contains ZERO per-spec player reads — the apparent 'shaman' and 'warriors' matches are enemy mob names. Nothing for the meta-outlook lane.",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "id": "hvW80uwOmFg",
+      "creator": "Maximum",
+      "title": "Reacting to the Ion Hazzikostas 12.1 Interview",
+      "reason": "Transcript read in full (local run 2026-08-09) — 17.6k words. Maximum is a generalCreators entry, so this could only ever yield metaNotes[]. It is a reaction to the Ion Hazzikostas 12.1 interview and stays on systems and design questions (content cadence, player power, the developer-player arms race); it carries no per-spec season or meta read. Every class/spec keyword match in the transcript is a false positive ('balance', 'arms race', 'rapid fire'). Nothing for the meta-outlook lane.",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "id": "OszDeuxtjys",
+      "creator": "Kalamazi",
+      "title": "12.1 Midnight Destruction Warlock Guide! Talents, Rotations and More!",
+      "reason": "Transcript read in full (local run 2026-08-09, discovered by the unfiltered cycle-bounded sweep rather than the queue). A pure how-to-play guide: Destruction's 12.1 tier set mechanics (Incinerate +25% and the Echo of Sargeras proc chain), single-target and AoE talent builds, rotations for both tier sets, and stat weights. It carries no standing performance or outlook read — the closest thing is a build recommendation, and the sign-off only frames the video as explaining how the spec plays heading into Venomous Abyss. Kalamazi already holds a LIVE raid-scoped Destruction take of 2026-08-05, so there is no lens to add and nothing here that a take would honestly capture.",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "id": "Ro5ND6mlgSI",
+      "creator": "Obli",
+      "title": "How to play UNHOLY DK in MIDNIGHT SEASON 2 / Rider + Sanlayn / Rotation, Talents",
+      "reason": "Transcript read in full (local run 2026-08-09, discovered by the unfiltered cycle-bounded sweep rather than the queue). A Season 2 Unholy how-to-play guide: the Reanimation rework that sacrifices three magi to summon a lich, tier-set interactions, gear and stat priorities, and rotation. Mechanics throughout with no standing performance or outlook claim; the only comparative line is a rotational one, that Unholy's burst comes roughly every 90 seconds against Frost's 45. Obli already holds live Unholy takes (2026-08-01 unscoped, 2026-08-06 M+-scoped), so this adds no lens and no new read. In scope for him — community.json scopes Obli to Frost and Unholy.",
       "verifiedAt": "2026-08-09"
     }
   ],

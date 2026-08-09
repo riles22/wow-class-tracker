@@ -3851,7 +3851,7 @@
       "claim": "He rates the Season 2 two-piece highly: Mongoose Fury now also amplifies the bomb for roughly 10% more damage, which he calls very big and strong in both single target and AoE, and wants equipped as soon as possible. The four-piece he reads as slightly weaker in single target and good in AoE, extending Mongoose Fury while channelling Boomstick. He also expects Sentinel to be the build in both raid and keys rather than the Pack Leader build played on live, and says haste gains value this season while crit loses some, because bombs recharge with haste."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Paladin",
       "spec": "Protection",
       "creator": "Tactyks",
@@ -4346,6 +4346,39 @@
       "patchContext": "12.1 PTR — Mage roundtable (Porom, Forgy, Khaelt, Azuna), Season 2 outlook",
       "url": "https://youtu.be/vK9ttexGFVg?t=3748",
       "claim": "The panel's read on Fire is that 12.1 gave it numbers instead of attention: a second Blazing Barrier charge plus flat aura percentages, while Arcane and Frost received real defensive tools (Arcane's Prismatic Barrier window, Frost's short Ice Cold) and Fire's defensive budget stays locked in Cauterize, which the player never controls. They also dislike the Season 2 set steering Fire onto Pyroclasm, a talent nobody has played. Nobody on the panel expects Fire to be competitive at the start of Season 2 — Preheat signs off saying 'make Fire great again, but not this tier', and plans to play Sunfury Arcane."
+    },
+    {
+      "class": "Hunter",
+      "spec": "Beast Mastery",
+      "creator": "Bansherz",
+      "date": "2026-08-09",
+      "bracket": "both",
+      "sentiment": "buff",
+      "patchContext": "12.1 PTR — Season 2 Beast Mastery guide (talent, tier-set and hero-tree read; complements, not replaces, his 08-07 M+ tier placement)",
+      "claim": "In his Season 2 Beast Mastery guide he reads the 12.1 changes as a net gain. Beast Cleave going to a 10-second duration against an unchanged 8-second Wild Thrash cooldown gives 100% Beast Cleave uptime without holding globals, which he calls a massive quality-of-life change, and Beast Cleave's own damage is up; Kill Command is buffed while Kill Cleave is nerfed, which he reads as trading a little AoE for more single target. On the tier set, the two-piece adds a second pet stomp at 50% effectiveness and the four-piece makes stomp empower the next Cobra Shot, giving Cobra Shot a real rotational role rather than being pure filler. His clearest structural call is that Dark Ranger has little reason to be played next season in either bracket: the tier set rewards Cobra Shot, which Pack Leader spams as its only filler while Dark Ranger splits its filler between Cobra Shot and Black Arrow, and he reads the talent changes as favouring Pack Leader too — so he expects to play Pack Leader in both raid and keys, keeping Dark Ranger only where its defensives are needed. He also splits stat priorities by bracket: mastery then crit with very low haste in keys, mastery then roughly even crit and haste in raid, and effectively zero versatility in both.",
+      "url": "https://youtu.be/67DPiF5MD40?t=7"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Protection",
+      "creator": "Tactyks",
+      "date": "2026-08-09",
+      "bracket": "raid",
+      "sentiment": "mixed",
+      "patchContext": "12.1 PTR — his Season 2 tank rankings and tier list, raid section (supersedes his 07-21 raid-comp read)",
+      "claim": "Two days before launch he reads Protection Paladin as one of the stronger raid tanks after the PTR reworks: really solid, noticeably tankier than Season 1, with output he rates as pretty good, and he places it high in his raid tier — discussed immediately below Blood Death Knight, which he puts on top. The tempering factor is roster composition rather than the spec's own power: Holy Paladin is looking strong and a group already bringing one may not want a second Paladin buff, though he notes Holy Paladin looks stronger in M+ than in raid. Even then he sees a real case for Protection Paladin on immunity and Spell Warding shenanigans that are unique to the spec, and singles out Twin Fangs as a fight with obvious Prot Paladin interactions via both the immunities and Avenger's Shield interrupts. His conclusion is explicitly two-sided: he would not be surprised if one of the two raid tanks were a Protection Paladin, and equally would not be surprised if there were none, because of Holy Paladin's perceived dominance.",
+      "url": "https://youtu.be/TaJvkmzeJ_8?t=1180"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Protection",
+      "creator": "Tactyks",
+      "date": "2026-08-09",
+      "bracket": "mplus",
+      "sentiment": "mixed",
+      "patchContext": "12.1 PTR — his Season 2 tank rankings and tier list, Mythic+ section",
+      "claim": "In keys he places Protection Paladin just below the top tanks — a decent spot, not the best but a little below that — after a PTR arc in which two talent-tree reworks left it briefly overtuned and then trimmed back over subsequent weeks. He characterises the net change as less power in Wings and more in the baseline: a flat 10% damage reduction on Blessed Hammer, Word of Glory able to overheal into a shield, and access to both crit Wings and Sentinel, against a shorter Wings duration that lowers uptime noticeably at launch until stats catch up, plus a toned-down Apex node. He reads the spec as net more defensive than in Season 1, which he calls its major Season 1 weakness. His caveat is again composition: Holy Paladin is strong enough that groups are unlikely to run two Paladins, which can cost Protection Paladin a slot, though it regains value alongside a non-Paladin healer. He notes several tuning passes are still to come.",
+      "url": "https://youtu.be/TaJvkmzeJ_8?t=538"
     }
   ],
   "metaNotes": [

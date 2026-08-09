@@ -737,3 +737,31 @@ numbers (95th pct DPS / popularity / M+ score — ungated, not in required-sourc
   pooled 27, M+ keys pooled 27 — all at 2026-08-09.
 - `npm test` 317 pass / 0 fail / 21 skipped; `npm run build` OK; `check-refresh --manifest`
   passes (16 consensus tier moves vs the committed baseline, 0 of ≥2 bands).
+
+- 2026-08-09 (LOCAL run, ~14:2xZ — Opus 5; scheduled residential catch-up after the 10:37Z
+  nightly). **Scope: residential-only catch-up. No metric source was re-fetched or
+  re-stamped** — CI had already refreshed Archon/Murlok/Mythicstats/WoWMeta/Bloodmallet/SimC
+  this morning, and independently regenerating what CI produced is what makes a local push
+  unmergeable. `data/run-manifest.json` deliberately NOT touched (partial run — it remains
+  the nightly's honest record; a fresh `startedAt` would claim a full refresh happened).
+- **WCL is in a FULL API OUTAGE from here, wider than the standing rdps breakage.** The
+  mandated cheap retry was run against the canonical probe (`characterRankings(metric: rdps,
+  page: 1)` on encounter 3176, the exact query `fetch-wcl.mjs` uses): **HTTP 500**. So was
+  plain `dps`. So was `{ worldData { encounter(id: 3176) { id name } } }`. So was
+  **`rateLimitData`** — the simplest query the API accepts — all returning a 500 with an
+  HTML "An error has occurred" page rather than a GraphQL error body. OAuth still issues a
+  token fine, so this is not credentials and not our transport. That is a strictly broader
+  fault than the documented `rdps-broken` state (where `dps`/`hps` work), and it began
+  AFTER the nightly's 11:04:54Z fetch step, which did land its three raw-DPS series.
+- **The HTML statistics endpoint no longer clears Cloudflare from a residential IP with
+  node `fetch`** — worth recording, because the skill currently says it does. Both
+  `zone/statistics/table/46/...?dpstype=rdps` and the zone-54 normalized cut returned
+  **HTTP 403 with a "Just a moment..." interstitial** (6.2 KB, spriteRows=0), sent with the
+  full documented header set (XHR + browser UA + Referer). Residential IP is evidently no
+  longer sufficient on its own — Cloudflare is fingerprinting the client, not just the
+  address. A real browser might still render it, but that is a scrape path against WCL's
+  stated API-only policy and was not attempted.
+- **Net: no WCL data obtainable by either transport this run; all five frozen series left
+  untouched** (zones 46/47 at 08-07, zone 54 at 07-28, ptrDummy at 08-07). Nothing papered
+  over. Re-check next run — if `rateLimitData` answers again the outage has cleared, and the
+  separate question of whether `rdps` itself is fixed is back to the standing one-retry rule.

@@ -1450,3 +1450,69 @@ those, so they need a different discovery route.
   summary); overwriting them with the bare newest RSS title — which is what a mechanical
   refresh does — destroys more than it updates, and no general creator posted anything new
   since the last run anyway.
+
+## 2026-08-09 (LOCAL run, ~14:1xZ — Opus 5; scheduled residential catch-up after the 10:37Z nightly)
+
+- **Queue fully drained: 20 → 0.** yt-dlp at the `requirements.txt` pin (2026.07.04), no
+  install/upgrade. 17 of 20 returned captions; **3 have none at all** — `k6dxaoUqKGA`
+  (Musguete), `b_yyDxBT_FQ` (Musguete short), `_zGku2p5vS4` (Obli stream VOD) — confirmed
+  with `--list-subs` ("has no automatic captions", "has no subtitles"). Since the queue's
+  drain path is Supadata `mode=native`, which serves YouTube's OWN auto-captions, those
+  three could never have drained; they would have burned 3 requests/run of a 100/month
+  budget forever. Moved to `skipped[]` as UNOBTAINABLE with that reason stated — a slightly
+  wider use of the lane than "transcript read", and deliberate.
+- **Only 1 of the 20 queued videos could move published output.** Measured before
+  distilling: every other queued video is OLDER than the same creator's existing live take
+  for that spec+lens, so distilling it would have created the different-dated same-lens
+  live take that creator-invariant #3 names, and `expertRead` averages a creator's live
+  takes — the stale read would have diluted the current one. The queue was a backlog of
+  June/July videos exposed by the 08-08 unfiltered sweep, not new material.
+- **1 take added from the queue** — Bansherz / **Beast Mastery** / 08-09 / `both` / buff,
+  his Season 2 BM guide (Beast Cleave to 10s giving free 100% uptime, the tier set giving
+  Cobra Shot a real rotational role, and a structural call that Dark Ranger has little
+  reason to be played in either bracket because the set rewards Pack Leader's only filler).
+  Follows the 08-08 Survival precedent exactly: recorded as COMPLEMENTARY to his 08-07 M+
+  tier placement, not superseding it, and said so in `patchContext`.
+- **Lens-gap hunt came up mostly empty, and that is the useful finding.** Checked every
+  queued video for a bracket its creator lacks: Musguete's Mythic Sszorak raid POV looked
+  like the one raid-scoped Rogue read, but his live 07-31 takes name no bracket in
+  `patchContext`, so `takeInBracket` already resolves them to BOTH brackets — and the video
+  predates the 07-31 rogue buff pass he himself called a major improvement, so landing it
+  live would have dragged the current post-buff read backwards. Sha's 32k-word stream was
+  read specifically for a RAID-scoped tank read to close the known tank gap: there is none.
+- **Declined to stretch a passing mention into a raid take** (NeekapHere). His 07-09 video
+  says in one clause that Blizzard wants Ret "solid in raid" — a read of design INTENT, not
+  performance. Ret raid is a prior-only projection cell where the expert ceiling is ±12, so
+  one stretched clause would have moved a published letter on almost nothing.
+- **Unfiltered cycle-bounded discovery sweep run** (the breadth job the 08-08 nightly
+  explicitly left for a local run): 21 creators polled, **101 in-cycle unseen** (bound =
+  2026-06-18, the oldest entry in `ptr-builds.json`), 0 pre-cycle, 0 RSS failures.
+  Took a **newest-first cut of 3**, all uploaded TODAY and all in scope:
+  · **Tactyks — "Season 2 Tank Rankings and Tierlist for Raid and Mythic+"** → 2 takes.
+    Scoped to Protection Paladin ONLY (community.json), so the rest of his tank list is
+    firewalled out. RAID (mixed): reworked spec reads really solid and noticeably tankier
+    with good output, placed just below Blood DK, but he is explicitly two-sided on whether
+    a Prot Paladin gets a raid slot given Holy Paladin's strength — he would not be
+    surprised either way; he flags Twin Fangs as full of Prot-Paladin immunity and
+    Avenger's Shield shenanigans. M+ (mixed): just below the top tanks, net more defensive
+    than S1 (flat 10% DR on Blessed Hammer, Word of Glory overshield, both crit Wings and
+    Sentinel) against shorter Wings uptime at launch and a toned-down Apex node, with the
+    same two-Paladins caveat. **Superseded his 07-21 raid take** (same creator/spec/lens,
+    different date); his 07-21 M+ take was already superseded with nothing live replacing
+    it, so the M+ take restores a live read. ASR hazard worth recording: this transcript
+    renders prot warrior as "prompt/prop warrior" and prot paladin as "prop paladin"
+    inconsistently, and "protar"/"prar" at [1076] is prot WARRIOR, not paladin — attribute
+    off the surrounding section, not the token.
+  · Kalamazi Destruction guide and Obli Unholy guide → **skipped[]**: both pure
+    build/rotation/stat guides with no standing outlook read, and both creators already
+    hold live takes for those specs.
+- **The remaining ~98 in-cycle unseen videos were deliberately NOT written to `seen[]`.**
+  The skill says a newest-first cut should record its dismissals, but these were not
+  adjudicated — they are mostly key/raid POVs and stream VODs — and the 08-08 nightly left
+  them unrecorded for exactly this reason. Writing them to `seen[]` would close off the
+  breadth permanently on a cut made for time, not judgment. They stay reconsiderable; the
+  backlog is the main outstanding item from this run.
+- Effect on published output: **0 tier letters moved.** Projection scores moved 4 cells —
+  Beast Mastery raid 35→37 and M+ 58→59; Protection Paladin raid 36→32 (the 19-day-old
+  "buff" read replaced by a launch-eve "mixed" one) and M+ 55→56. `audit:creators` stays
+  HIGH 0 / MED 0.
