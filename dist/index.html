@@ -11,7 +11,7 @@
 -->
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-/3NTl1fh6tUK+XrWgiteHJOzsAHDEvuRt06lxXbXBeQ=' 'sha256-s5VWfaTrn9Vxdp4t1rS1U+6YvVtp58yXda6saZxCBck='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-/3NTl1fh6tUK+XrWgiteHJOzsAHDEvuRt06lxXbXBeQ=' 'sha256-/OvSYXjR2Q9ZQqNNfdx25xgFIVd+ibO3Pv74UOZzSIU='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="riles22">
 <title>Spec Tracker — WoW multi-source spec consensus</title>
@@ -539,10 +539,17 @@ try {
   }
   .datahealth b{color:#e8a13a; font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase}
   /* the enumeration is 200+px of the phone banner; the honest headline above it is not */
-  .datahealth .dh-series{color:var(--ink-faint); font-size:11.5px; margin-top:4px}
-  .datahealth .dh-series > summary{cursor:pointer; color:var(--ink-faint); text-decoration:underline dotted; text-underline-offset:3px; list-style:none; display:inline-block}
-  .datahealth .dh-series > summary::-webkit-details-marker{display:none}
-  .datahealth .dh-series > summary:focus-visible{outline:2px solid var(--accent-2); outline-offset:2px; border-radius:3px}
+  .datahealth .dh-series,
+  .datahealth .dh-why{color:var(--ink-faint); font-size:11.5px; margin-top:4px}
+  /* Deliberately NOT .count: that carries white-space:nowrap, and appending the source
+     count + snapshot to it overflowed the page horizontally at every phone width. */
+  .notestamp{color:var(--ink-faint)}
+  .datahealth .dh-series > summary,
+  .datahealth .dh-why > summary{cursor:pointer; color:var(--ink-faint); text-decoration:underline dotted; text-underline-offset:3px; list-style:none; display:inline-block}
+  .datahealth .dh-series > summary::-webkit-details-marker,
+  .datahealth .dh-why > summary::-webkit-details-marker{display:none}
+  .datahealth .dh-series > summary:focus-visible,
+  .datahealth .dh-why > summary:focus-visible{outline:2px solid var(--accent-2); outline-offset:2px; border-radius:3px}
   /* Stale metric row in drawers (audit suggestion #1): a row whose asOf trails its box's
      freshest by the frozen threshold reads muted + amber-dated, so a 07-09 median next to
      07-22 siblings is visibly, not silently, old. */
@@ -608,6 +615,30 @@ try {
     .metaline .mtag{display:inline} /* must be re-shown HERE — the rule inside the card block above loses the cascade to the display:none default */
     .controls{position:static} /* sticky controls ate ~55% of a phone viewport */
     .seg{flex-wrap:wrap} /* the source segment is ~500px unwrapped — wrap instead of forcing horizontal pan */
+    /* PHONE READING ORDER (2026-08-08). Measured: the first spec row sat at y=1543 on a
+       390x844 phone — 1.83 screens of preamble — so the three things that make this site
+       different (the multi-source consensus, the 71 ± disagreement marks, and the forecast)
+       all sat below the fold while masthead, controls and banners owned the opening. Visual
+       order only; DOM order is untouched, so the movers-after-caveat UI invariant still holds.
+       What stays ABOVE the grid is exactly the honesty surfaces plus the one-line explanation
+       of a column a tester already misread. */
+    .wrap{display:flex; flex-direction:column}
+    #viewnote{order:1} .note.standalone{order:2} #ptrcaveat{order:3} #matrix{order:4}
+    #movers{order:5} #changes{order:6} #legendwrap{order:7} footer{order:8}
+    /* The date strip scrolls rather than wrapping to three lines. Nothing is lost: the
+       snapshot date is also in the always-visible note directly above the grid. */
+    .eyebrow{font-size:10.5px; line-height:1.4}
+    .stamp{flex-wrap:nowrap; overflow-x:auto; white-space:nowrap; gap:14px}
+  }
+  .ctlsum{display:none}
+  @media(max-width:759px){
+    .ctlsum{display:flex; flex-wrap:wrap; gap:6px 10px; align-items:center; cursor:pointer;
+      list-style:none; padding:2px 0; min-height:44px}
+    .ctlsum::-webkit-details-marker{display:none}
+    .ctlsum > span:first-child{font-family:var(--mono); font-size:11px; letter-spacing:.14em;
+      text-transform:uppercase; color:var(--ink-dim)}
+    .ctlsum-h{color:var(--ink-faint); font-size:11.5px}
+    .ctlsum:focus-visible{outline:2px solid var(--accent-2); outline-offset:2px; border-radius:4px}
   }
 
   /* ---------- spec finder ---------- */
@@ -830,6 +861,12 @@ try {
 <div id="datahealth" class="datahealth" hidden></div>
 
 <div class="controls">
+  <!-- Folded on phones only: the summary is display:none at >=760px and the details ships
+       `open`, so desktop is untouched. .controls was 509px of an 844px viewport. The resize
+       guard in the script is load-bearing — widening past 760px MUST force it open, or the
+       summary disappears while open=false and the entire toolbar becomes unreachable. -->
+  <details class="ctlfold" id="ctlfold" open>
+    <summary class="ctlsum"><span>⚙ Filters &amp; view</span><span class="ctlsum-h">Ratings · Era · Role · Fight · Sort · Search · The Ladder · Compare all</span></summary>
   <div class="controls-row">
     <div class="seg" id="srcseg" role="group" aria-label="Which ratings the tier columns show"></div>
     <div class="seg" id="eraseg" role="group" aria-label="Era" title="Filters verdicts, writeups, era-tagged numbers and creator takes. It does not change the tier columns — those follow the View picker.">
@@ -891,6 +928,7 @@ try {
     <span class="grow"></span>
     <span class="toolstatus" id="toolstatus"></span>
   </div>
+  </details>
 </div>
 
 <div class="wrap">
@@ -940,7 +978,7 @@ try {
        screens before the first spec, so the explanation has to earn every line. The full
        band table lives in the legend; the number a reader is staring at lives here.
        Keep 88 in sync with data/scales.json `consensus.bands`. -->
-  <span class="note standalone"><span class="count" id="count"></span> · <b>Overall</b> is a 0–100 score, not a letter — 100 means every source gave its top tier, and the consensus reads <b>S from 88 up</b>. Tiers are <b>within role</b>: a healer's S is best among healers, not across the whole game. Open any row for its per-source breakdown.</span>
+  <span class="note standalone"><span class="count" id="count"></span> · <b>Overall</b> is a 0–100 score, not a letter — 100 means every source gave its top tier, and the consensus reads <b>S from 88 up</b>. Tiers are <b>within role</b>: a healer's S is best among healers, not across the whole game. Open any row for its per-source breakdown. A <span class="divmark">±</span> marks a rating the sources <b>disagree</b> on.<span class="notestamp" id="notestamp"></span></span>
 
   <!-- Deliberately NOT a disclosure: template history records that hiding this buried the
        honesty disclaimer from first-time visitors. Condensed in place instead — the claim
@@ -1133,6 +1171,26 @@ function applyHash(){
    "12.1 PTR" metric/take reads as the live season it now describes; when the 12.2 PTR
    opens, only the new marker reads as future-era. */
 const PHASE = META.phases ?? { liveSeason: "s1", liveLabel: "12.0.7", ptr: null, ptrSunset: false };
+
+/* Controls fold: re-open on widening. The summary that reopens it is display:none at
+   >=760px, so a fold left closed while the viewport grows past that breakpoint strips every
+   filter, the search, the Era/View pickers and both overlay CTAs off the page with no
+   pointer or keyboard route back — rotating a phone to landscape is enough to trigger it.
+   Measured before this guard: .controls 25px tall, search unfocusable, Ladder click times
+   out. It throws nothing and logs nothing, and no UI invariant runs below 1440px, so
+   nothing else would have caught it. Guarded in JS because `open` is DOM state no media
+   query can reach. */
+(() => {
+  const f = document.getElementById("ctlfold");
+  if (!f) return;
+  const mq = window.matchMedia("(max-width:759px)");
+  /* Ships `open` in markup so the no-JS and desktop cases are correct by default; JS folds it
+     only once we know we are on a phone. Never persisted — a fresh phone load starts folded,
+     and opening it lasts the session. */
+  const sync = e => { f.open = !e.matches; };
+  sync(mq);
+  mq.addEventListener("change", sync);
+})();
  /* PTR series lookup keys, shipped by render.mjs (meta.ptrMetricNames) so this file never
     hand-types a second copy of a contract that must match data/specs.json byte for byte.
     A drift here does not throw — it renders an empty series — so the duplication was the
@@ -1803,6 +1861,15 @@ function render(){
       const lag = liveSrcs.length - verified;
       st.textContent = `${shown} of ${SPECS.length} specs · consensus of ${verified} source${verified!==1?'s':''}` +
         (lag ? ` (${lag} updating)` : '') + ` · snapshot ${META.latestSnapshot ?? "—"}`;
+      /* Mirror the two facts that must survive the phone controls fold — how many sources the
+         consensus actually averaged, and the snapshot date — into the always-visible note
+         directly above the grid. #toolstatus lives inside the fold, and .stamp scrolls out of
+         view on a phone, so without this both disappear from the first screen.
+         A SEPARATE span, never appended to #count: .count carries white-space:nowrap, and
+         hanging this off it overflowed the page horizontally at every phone width. */
+      const ns = document.getElementById('notestamp');
+      if(ns) ns.textContent = ` ${verified}-source consensus` +
+        (lag ? ` (${lag} updating)` : '') + ` · snapshot ${META.latestSnapshot ?? "—"}.`;
     }
   }
   // restore drawers that were open before this re-render (fresh DOM, current-era content)
@@ -2051,13 +2118,27 @@ if(META.latestSnapshot){
       : `${noun} last updated ${bold(g.oldest)}`;
   };
   const groups = [...bySource.values()].sort((a,b)=> b.n-a.n || a.key.localeCompare(b.key));
-  el.innerHTML = `<b>Heads up</b> ${groups.map(clause).join("; ")}. `
-    // Only claim what this function can see. It reads metric dates AND (since 2026-07-31)
-    // tier-list page dates, so a frozen tier list is no longer invisible — but a tier
-    // date is only as good as its attestation, which the clause states.
-    + `Freshest data we hold is ${esc(dh.latest)}; each row shows its own date. `
+  // Only claim what this function can see. It reads metric dates AND (since 2026-07-31)
+  // tier-list page dates, so a frozen tier list is no longer invisible — but a tier
+  // date is only as good as its attestation, which the clause states.
+  const tail = `Freshest data we hold is ${esc(dh.latest)}; each row shows its own date. `
     + (oldest ? `Our 12.1 projection is recomputed nightly, but its PTR-empirical term still comes from the frozen ${esc(oldest)} cuts. ` : "")
     + `<details class="dh-series"><summary>Affected: ${n} series</summary>${esc(names)}.</details>`;
+  /* On a phone the clause enumeration was 200+px of a 212px banner — the honest headline
+     above it is a fraction of that (the CSS comment beside .dh-series has said so since it
+     was written). Fold the enumeration, never the claim.
+     TWO THINGS THIS DELIBERATELY DOES NOT DO. It does not call the folded items "series":
+     `n` counts tier-list PAGES too, and the clause builder is explicit that a tier list is
+     not a series. And it keeps every TIER-LIST clause visible rather than folding it, because
+     those name pages that feed the letter consensus — a 111-day-old Wowhead list is exactly
+     what a reader needs on the first screen, not behind a tap. */
+  const tierClauses = groups.filter(g => g.kind === "tier-list").map(clause);
+  const rest = groups.filter(g => g.kind !== "tier-list").map(clause);
+  const phone = window.matchMedia("(max-width:759px)").matches;
+  el.innerHTML = (!phone || !rest.length)
+    ? `<b>Heads up</b> ${groups.map(clause).join("; ")}. ` + tail
+    : `<b>Heads up</b> ${[...tierClauses, `${rest.length} more data ${rest.length === 1 ? "feed is" : "feeds are"} stale or frozen`].join("; ")}. `
+      + `<details class="dh-why"><summary>Which feeds, and since when</summary>${rest.join("; ")}. ${tail}</details>`;
   el.hidden = false;
 })();
 
