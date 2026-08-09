@@ -1309,3 +1309,110 @@ those, so they need a different discovery route.
 - `npm test` **334 pass / 0 fail** (template.html untouched, so the 21 Playwright UI
   invariants skip locally as designed). `npm run validate` clean, `npm run audit:creators`
   **HIGH 0 · MED 0 · INFO 18**.
+
+## 2026-08-09 (~05:0xZ) — LOCAL run (Opus 5; evening of 08-08 local, ~13h after the morning sweep)
+
+- **Discovery**: 42 transcribable feeds polled, 42/42 OK, 630 videos in feed. Seen-set
+  built from the four structured lanes = **693**; unseen **139**, all of them in-cycle
+  (cycle bound = first `ptr-builds.json` entry, 2026-06-18; **0** pre-cycle this time).
+- **Scope taken: the 23 videos published on or after 08-07** — the window the morning run
+  could not have seen. The remaining **116 unseen are the older tail (07-24 and back)**
+  and were deliberately NOT written into `seen[]`: they are a newest-first budget cut, not
+  a durable judgment, and leaving them out of the lanes is what keeps them reconsiderable.
+  There is a clean gap between 07-25 and 08-06 in the unseen set, which is the morning
+  run's coverage showing through.
+- **Transcripts**: yt-dlp at the `requirements.txt` pin (2026.07.04), no title filtering.
+  **18 of 23 fetched.** The 5 misses, and what each actually was:
+  · `J6ynDbhl9mA` (Shindigg) and `QwbvLPZTh1U` (Bansherz) are **live right now**
+    (`live_status: is_live`) — no captions can exist yet. Left UNSEEN so the VOD is picked
+    up next run; queueing a live stream would spend Supadata budget on nothing.
+  · `vK9ttexGFVg` (Preheat, **12.1 Mage Roundtable**, 8,978s, published 00:56Z) — real
+    video, auto-captions simply not generated yet. Keyword-relevant, so **QUEUED**.
+  · `0nBSXCbM1AY` — the ended live VOD of that same roundtable ("This live event has
+    ended"). Duplicate content, so `seen[]` rather than a second queue slot.
+  · `5BLQ3yzH8JM` (Supatease, "Only Elemental Can Do This") — a **20-second** clip. The
+    duration is a durable fact that rules out spec analysis, so `seen[]`, not the queue.
+- **14 takes added, 10 superseded, 13 verified skips.** takes 374 to 388, skipped 99 to
+  112, queue 0 to 1, seen 440 to 442. No metaNotes: the only general creator with a new
+  video was Maximum, and it was Season 1 content (see skips).
+  · **Tettles** (scope Balance/Augmentation) — his final pre-launch M+ DPS tier list.
+    Balance M+ `mixed` (a "really good comp filler", good boss damage, behind on overall,
+    carried by Mark of the Wild); Augmentation M+ `nerf` (dropped to C on the Wing Leader
+    nerf killing double duplicates). His considered Arcane/Arms/Elemental/Rogue reads are
+    OUT of scope and were not taken, which is most of the video's content.
+  · **YoDaTV** (Blood DK · Vengeance · Guardian · Brewmaster · Paladin whole · Prot/Arms
+    Warrior) — final pre-launch tier list, 6 takes: Blood DK `buff` (S+ "even after the
+    most recent nerf"), Holy Paladin `buff` (S+), Arms `buff` (best melee), Prot Warrior
+    `nerf` (only good where Spell Reflection is), Guardian `nerf` (all Druids not good
+    enough even counting Mark of the Wild), Ret Paladin `nerf` (significantly worse than
+    last season). **Brewmaster and Vengeance were deliberately skipped** — his only
+    statement covering them is "everything that's not blood DK is on a similar level",
+    a group remark with no spec-specific analysis.
+  · **Kalamazi** (Warlock whole) — Demonology `nerf`, bracket `both`, from the closing
+    assessment of his published 12.1 guide: not much changed vs 12.0, feels like less
+    damage, which he calls a tuning issue that may be buffed. The hedge is carried in the
+    claim text rather than softened into `mixed`, because it is a one-directional read on
+    where the spec sits and he is the tracked Warlock authority.
+  · **AutomaticJak** (all six healers) — 5 takes across two videos: Holy Priest raid
+    `nerf` ("still really undertuned for the raid"), Disc raid `buff` ("a very powerful
+    position"; his raid tier list the same day keeps it S with stackability as the
+    criterion), Holy Priest **M+** `mixed` (dungeon healing and mana much better, but
+    survivability still really bad — he burns extra globals on himself), Mistweaver `both`
+    `mixed` (bouncing through tuning, expects a strong landing), Holy Paladin `both` `buff`
+    (mechanism, not just "it heals a lot": the +30% health-pool/creature-damage change
+    makes Holy Light efficient where S1 was overweight Holy Light spam, and the S2 set
+    guarantees Infusion of Light).
+  · One AutomaticJak line was **left undistilled on purpose**: "about average in keys …
+    a good position but not a great position" is said of "priest" without naming the spec,
+    and guessing between Disc and Holy would have been fabricated attribution.
+- **PROJECTION EFFECT, measured through `buildPayload` BEFORE committing: 10 cells moved,
+  3 letters, 0 consensus letters.** All three letters trace to the documented
+  writeup-gap fallback (`verdict > expert > tally`), and all three specs have `ptr: null`:
+  · **Guardian Druid M+ S/89/high to A+/75/medium.** Before, the M+ panel was too weak to
+    drive (Dalaran neutral + YoDaTV `mixed`) so the outlook fell back to the tuning tally
+    at +10; YoDaTV's `nerf` gives a usable panel at −4. A 14-point swing that is a lane
+    change, not a ±6 adjustment. RAID is untouched (still tally +10) — v8 bracket-scoping
+    working exactly as designed. Confidence drops because the tally stops counting once
+    the expert lane drives; arguably more truthful, but it is a code question and a data
+    run does not touch it.
+  · **Discipline Priest raid A+/86 to S/89** — 2-creator quorum, healer, one band.
+  · **Demonology Warlock M+ A/64 to B/56** (and raid 84 to 77) — sign flip of a panel that
+    was already 1-creator expert-driven at +4, because Kalamazi's newest read replaced his
+    07-27 one. Note the tension for a human: Tettles calls Demo "the best Warlock spec by
+    far" and YoDaTV reads Warlock as "pretty good", but **neither is scoped to Warlock**,
+    so by construction only Kalamazi's read enters. That is the design (the specialist
+    wins), and it is the case to look at first if the forecast reads wrong post-launch.
+- **Verified skips, with what the transcript actually turned out to be** — three of these
+  are titles that would have passed a keyword filter and still had nothing:
+  · `R5jz5YjVEC8` Obli "How to play Frost DK in MIDNIGHT SEASON 2" — a talents/rotation/
+    gear guide end to end. Frost DK is one of the nine writeup-less specs, so the
+    temptation to extract something was real; the only forward-looking line is "interested
+    to see what Frost DK would be like", which is anticipation, not a read.
+  · `qBM_N6qBcEc` Tactyks Temple of Sethraliss guide — pure route and mechanics. This is
+    the creator whose "dungeon guide" title cost the 08-08 run a take, so it was read
+    rather than filtered. This time the title was honest.
+  · `Ywx2jEiYsA4` Maximum "blowing up" — 23k words of Season 1 raid-progression
+    watch-along; 2 references to Season 2 in the whole transcript.
+  · `VRadRMvV6sg` Supatease and `tB4eRnAqpC0` / `ZPFPKeT3NqA` — a PvP arena stream and two
+    PvP-only pieces. Supatease's is the interesting one: he DOES answer "top classes for
+    next season", but reasons it from DR categories, snares and the stamina increase, so
+    it is a PvP read and must not vote in PvE ratings.
+  · `gOpjpjBuRI4` Shindigg levelling stream — its only 12.1 content is the Subtlety bug
+    description, and he is scoped to Outlaw/Assassination.
+  · `3STJjc4zVB4` Tettles dev interview, `5A5VuzMcgb8` Dalaran prep checklist (17 patch
+    mentions, zero spec words), `QG70vZG8b9Y` Tettles 30k-word stream (chat-answer
+    fragments of the tier list already taken — recording both dilutes one creator's read),
+    and three Supatease transmog shorts of 27-66 words.
+- **Registry**: `Maximum`'s `latest` updated. It carried a standing note "no settled
+  pre-Season-2 tier list yet as of 2026-08-04 — re-check 2026-08-08..18", and this run
+  answers it: asked directly on stream he says he does not want the regular tier-list
+  format because it runs too long and has not found a replacement. Still no Maximum tier
+  list with 12.1 three days out.
+- **Scope observation for a human — not acted on**: Tettles' tier list contains
+  substantial, clearly-reasoned reads on Arcane Mage, Arms Warrior, Elemental Shaman and
+  all three Rogue specs (he has 100+ PTR runs behind them), all unusable because his entry
+  is scoped to Balance. That is the scoping rule working, but he may be under-scoped for
+  an M+ meta lens specifically.
+- `npm test` **338 pass / 0 fail**, `npm run validate` clean, `npm run audit:creators`
+  **HIGH 0 · MED 0 · INFO 19** (up one: Shindigg now shows "transcribable, zero takes
+  ever" — correct, this run read him and found nothing in scope).

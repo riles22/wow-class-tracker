@@ -732,3 +732,61 @@ catch-up path.
   CLAUDE.md is explicit they reach the writeup gap only as an aggregate via `expertRead()`.
 - **NO SEASON FLIP** — 12.1 ships Aug 11; `SNAPSHOT_PHASE` remains the pending one-shot
   owner action, `PHASE_FLIP_DUE` Aug 20.
+
+## 2026-08-09 (~05:0xZ) — LOCAL run (Opus 5; scheduled residential catch-up, evening of 08-08 local)
+
+- **NO NEW BUILD. Feed stays at 15 entries; `ptr-builds.json` untouched.**
+- **Channel 1 — official thread.** `2317811.json` pulled in full by curl (408 KB):
+  `highest_post_number` still **19**, `last_posted_at` 2026-07-31T23:42Z. Unchanged since
+  the 07-31 build; Linxy's forum activity feed corroborates (newest post 2026-07-31).
+- **Channel 2 — Wowhead news RSS**, 40 items back to 2026-08-01, parsed per `<item>`.
+  Two items newer than the 08-08 morning run's window, neither loggable: "From Narrative
+  to End-Game Content" (Inven Global interviews — narrative and endgame systems, no
+  tuning) and "The Very Boring Optimal Strategy for the Great Vault in Season 2" (a Bonus
+  Roll gearing strategy piece). A keyword sweep of ALL 40 article bodies for tuning verbs
+  found nothing new: the only dense hit is the 08-06 patch notes already in the feed.
+- **A new PTR build DID deploy on 08-07/08 — and it carries no class tuning.** "Jimothy
+  Added in Latest Patch 12.1 PTR Build" (08-08 00:34Z) confirms a build went up, but the
+  article is a model/animation datamine of one NPC. No tuning article accompanied it and
+  the forum thread got no post, so nothing enters the feed. Worth recording because the
+  phrase "latest PTR build" in a headline is not by itself a feed event.
+- **Channel 3 — blue tracker: the documented transport is DOWN from here.** Both
+  `wowhead.com/blue-tracker` direct and via r.jina.ai return Cloudflare **403
+  "Just a moment…"** (the news RSS on the same host is fine — it is the page, not the
+  host). Substituted the Blizzard forum's own Discourse endpoints, which work with a
+  plain browser UA and are the upstream anyway: `user_actions.json?username=<poster>`
+  and `search.json`. Kaivax's newest 8 posts (to 08-07) are housing bugs, server
+  status, M+ Umbral cutoffs and live-realm hotfixes — **no class-tuning blue post**.
+  Two transport facts worth keeping: `user_actions.json` 404s for Kaivax specifically
+  (profile resolves 200, activity feed does not), so use `search.json?q=%40<user>` for
+  that poster; and `groups.json` is 403, so the tracker group cannot be enumerated.
+- **The 08-07 LEAD is STILL outstanding and now overdue**: the Wowhead/Icy Veins/Raider.IO
+  interview quoted Blizzard saying a Season 2 class-tuning roadmap "should release in the
+  next couple days". Two days on it has not appeared in any of the three channels
+  (forum search for "Class Tuning"/"roadmap" after 08-04 returns only player threads).
+  12.1 ships **Aug 11**.
+- **An UNVERIFIED PTR hotfix is corroborated by three independent creators and is
+  deliberately NOT logged.** Tettles, YoDaTV and Shindigg each describe, from their own
+  play, a Subtlety Rogue hotfix "one or two days ago" that fixed shadow damage failing to
+  apply and overshot — YoDaTV and Shindigg both say it now double-dips on abilities that
+  already worked, and expect it to be reverted. Tettles separately describes an Arcane
+  Mage bug fix in the same window. Neither has an official source: no forum post, and no
+  Wowhead hotfix round-up since 08-04. The rule is that a creator video is the tip-off and
+  never the source of record, so nothing was written. **Re-check this first next run** —
+  if a round-up appears it is a `hotfix` entry, and if the changes ship it lands in the
+  launch notes instead.
+- **WCL: unchanged, and the cause is still upstream, not us.** The one sanctioned cheap
+  retry (local `config.json` credentials — note the keys are `wclClientId` /
+  `wclClientSecret`, as the 08-08 run's doc nit records): OAuth **ok**,
+  `characterRankings(metric: dps)` on encounter 3176 returns 100 rankings,
+  `metric: rdps` still returns a bare **"Internal server error"**. The residential HTML
+  statistics transport is **also still Cloudflare-403** (`server: cloudflare`, `cf-ray`
+  present) exactly as on 08-08, so that regression has not lifted either. Zones
+  54 / 52 / 56 / 57 not ingested; **no `snapshot` or `asOf` was touched**, so zone 54
+  stays visibly frozen at 2026-07-28 (12d against the deliberately-raised maxAgeDays 40).
+- **9 specs still `ptr: null`**, unchanged. Frost DK, Guardian Druid, Holy Priest and
+  Demonology Warlock all gained or updated creator takes this run and none was promoted
+  into a writeup — the expert aggregate is the sanctioned path and a hand-written writeup
+  would double-count.
+- **NO SEASON FLIP** — 12.1 ships Aug 11; `SNAPSHOT_PHASE` remains the pending one-shot
+  owner action, `PHASE_FLIP_DUE` Aug 20.

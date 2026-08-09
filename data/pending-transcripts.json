@@ -1,6 +1,14 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
-  "videos": [],
+  "videos": [
+    {
+      "id": "vK9ttexGFVg",
+      "creator": "Preheat",
+      "title": "12.1 Mage Roundtable ft. Porom, Forgy, Khaelt, Azuna",
+      "published": "2026-08-09",
+      "queuedAt": "2026-08-09"
+    }
+  ],
   "skipped": [
     {
       "id": "02rLfzEKLq4",
@@ -694,6 +702,97 @@
       "title": "Huge Assassination Changes In Season 2",
       "reason": "Season 2 gearing and itemization walkthrough rather than a spec-standing read: a main-hand-only dagger off the last boss, the crafted off-hand it forces, bonus-roll paths from heroic. The one 'pretty strong' judgment in it is about that weapon's until-death scaling in long raid fights, explicitly noting the effect is not buffed by Assassination's mastery or talents — an item claim, not a claim about the spec.",
       "verifiedAt": "2026-08-08"
+    },
+    {
+      "id": "R5jz5YjVEC8",
+      "creator": "Obli",
+      "title": "How to play Frost DK in MIDNIGHT SEASON 2 / Rider + Deathbringer / Rotation, Talents, Gear",
+      "reason": "A build-and-gear guide: talents, rotation, trinkets, embellishments, macros. It carries no judgment about where Frost DK stands for Season 2 — the closest thing is him saying he is curious whether a Rider meta materialises, which is anticipation rather than a read. Distilling a take from it would have invented an opinion he did not give.",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "id": "3STJjc4zVB4",
+      "creator": "Tettles",
+      "title": "I Asked Lead Encounter Designers About Mythic+ and the New Raid!!",
+      "reason": "A design-philosophy interview with the encounter team about key velocity, moving goalposts and how evenly the tier is split. No per-spec content and no tuning figures, so nothing qualifies for a take.",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "id": "qBM_N6qBcEc",
+      "creator": "Tactyks",
+      "title": "TEMPLE OF SETHRALISS Mythic+ Dungeon Guide | Midnight Season 2",
+      "reason": "A route and mechanics walkthrough of the dungeon. Three spec words in 2,953 and none attached to a claim about a spec. The 2026-08-08 lesson was that a Method guide author’s dungeon guide CAN carry spec analysis, so this was transcript-read rather than title-filtered; this one does not.",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "id": "Ywx2jEiYsA4",
+      "creator": "Maximum",
+      "title": "blowing up",
+      "reason": "A 23,000-word watch-along of a Season 1 raid-progression video (the Outlaw-for-L’ura story) plus guild-prep talk. Two passing references to Season 2 in the whole transcript and no per-spec outlook, so nothing qualifies for the metaNotes lane.",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "id": "VRadRMvV6sg",
+      "creator": "Supatease",
+      "title": "RANK 1 OR NOTHING",
+      "reason": "A PvP arena stream. It does contain a \"top classes for next season\" answer, but he reasons it explicitly from PvP systems — diminishing-return categories, snares and the stamina increase — so it is a PvP read and must not vote in this tracker’s PvE ratings.",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "id": "tB4eRnAqpC0",
+      "creator": "Supatease",
+      "title": "Final PVP Changes 12.1",
+      "reason": "A walkthrough of the 12.1 PvP-only tuning. Out of scope by the same rule the build feed applies to PvP-only highlights: this tracker rates PvE, so a PvP change must never reach a spec take.",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "id": "ZPFPKeT3NqA",
+      "creator": "Dalaran Gaming",
+      "title": "Demonology Warlock Is PERFECTLY In Control! (5v5 1v1 Duels) - PvP WoW: Midnight",
+      "reason": "A PvP duel showcase with zero references to Season 2 or 12.1 anywhere in the transcript. No PvE spec read.",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "id": "5A5VuzMcgb8",
+      "creator": "Dalaran Gaming",
+      "title": "5 Steps to Get AHEAD on Day 1 of Patch 12.1",
+      "reason": "A launch-day preparation checklist — 17 mentions of the patch and not one spec or class word in 2,039. Gearing and prep advice, no spec standing.",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "id": "gOpjpjBuRI4",
+      "creator": "Shindigg",
+      "title": "Some late night leveling to fall asleep to | NEW MYTHIC RAID VIDEO OUT",
+      "reason": "A levelling stream. Its only 12.1 content is a description of the Subtlety bug-fix overshoot, and Shindigg is scoped to Outlaw and Assassination, so it cannot be attributed to him as a take. His own spec plans get no further than \"for raid probably rogue, for keys whatever is good\".",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "id": "QG70vZG8b9Y",
+      "creator": "Tettles",
+      "title": "IN THE SHADOW OF 10,000 MAGES STANDS ONE LOWLY MOONKIN. I AM THAT MOONKIN.",
+      "reason": "A 30,000-word gameplay stream from the same day as his M+ tier list. The Balance remarks in it are chat-answer fragments of the considered read he gives in that tier list, which is where this run took the take from — recording both would have diluted one creator’s single read.",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "id": "wdNhnqwusC8",
+      "creator": "Supatease",
+      "title": "12.1 INSANE NEW TRANSMOG",
+      "reason": "A 66-word transmog short. No spec content.",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "id": "sePDYCZeTw8",
+      "creator": "Supatease",
+      "title": "Cool Priest Transmog",
+      "reason": "A 58-word transmog short. No spec content.",
+      "verifiedAt": "2026-08-09"
+    },
+    {
+      "id": "ypSAf6cYa4Q",
+      "creator": "Supatease",
+      "title": "Cool Offhand Transmog",
+      "reason": "A 27-word transmog short. No spec content.",
+      "verifiedAt": "2026-08-09"
     }
   ],
   "seen": [
@@ -1136,7 +1235,9 @@
     "HwzKoYnJHqI",
     "6KemlBr_YPM",
     "R7P0Y-UvvRE",
-    "Q9jqR4bab0g"
+    "Q9jqR4bab0g",
+    "0nBSXCbM1AY",
+    "5BLQ3yzH8JM"
   ],
   "seenNote": "Video ids already considered by an earlier run that carry no richer record — migrated 2026-08-08 from backticked ids in watch-creators/log.md when the seen-set stopped being derived from prose. Distilled videos are cited by their take's url, transcript-verified rejects live in skipped[], and queued ones in videos[]; this lane is only for the remainder. Append here when a run dismisses a video at DISCOVERY (pre-cycle date, already-processed) without fetching a transcript."
 }
