@@ -386,6 +386,10 @@ try {
   .fchip[data-l="strong"]{color:var(--v-pos); border-color:color-mix(in srgb,var(--v-pos) 42%,transparent); background:color-mix(in srgb,var(--v-pos) 9%,transparent)}
   .fchip[data-l="weak"]{color:var(--v-neg); border-color:color-mix(in srgb,var(--v-neg) 42%,transparent); background:color-mix(in srgb,var(--v-neg) 9%,transparent)}
   .mnote{color:var(--ink-faint); font-size:11px}
+  /* A thin sample is stated in WORDS, not signalled by colour alone: colour is not an
+     accessible sole cue, and `title` does not exist on touch (see the touch-legibility
+     note in CLAUDE.md). The colour is reinforcement for the text, never the message. */
+  .mnote.thin-n{color:var(--v-mix); font-weight:600}
   .olk{margin-left:5px; font-weight:700; cursor:help}
   .olk[data-d="up"]{color:var(--v-pos)}
   .olk[data-d="down"]{color:var(--v-neg)}
@@ -1128,6 +1132,15 @@ function applyHash(){
    "12.1 PTR" metric/take reads as the live season it now describes; when the 12.2 PTR
    opens, only the new marker reads as future-era. */
 const PHASE = META.phases ?? { liveSeason: "s1", liveLabel: "12.0.7", ptr: null, ptrSunset: false };
+ /* PTR series lookup keys, shipped by render.mjs (meta.ptrMetricNames) so this file never
+    hand-types a second copy of a contract that must match data/specs.json byte for byte.
+    A drift here does not throw — it renders an empty series — so the duplication was the
+    dangerous kind. Falls back to an all-null shape when there is no PTR phase; the series
+    pickers already treat a null name as "no such measurement for this role". */
+ const NO_PTR_NAMES = { DPS:null, Tank:null, Healer:null };
+ const PTRNAMES = META.ptrMetricNames ?? { mplusTesting:NO_PTR_NAMES, raidTestingScore:NO_PTR_NAMES,
+   robydoby:NO_PTR_NAMES, venomousAbyssPool:NO_PTR_NAMES, dummy1T:NO_PTR_NAMES, dummy5T:NO_PTR_NAMES,
+   mplusKeysPool:NO_PTR_NAMES };
 { // The toggle's labels are data; a one-position toggle is UI lying about a choice, so
   // between cycles (no PTR era, or post-sunset) the whole segment hides and era pins live.
   const lv = document.getElementById('eralive'), pt = document.getElementById('eraptr');
@@ -1329,7 +1342,7 @@ function metricsHTML(s){
         ? ` title="frozen — upstream rDPS outage since ${esc(m.asOf)}"`
         : ` title="frozen — last refreshed ${esc(m.asOf)}"`;
     const asof = m.asOf ? ` <span class="mnote">· <span class="asof"${staleTip}>${esc(m.asOf)}</span></span>` : "";
-    return `<div class="setrow${stale?" stale":""}"><span class="pc">${esc(src?src.name:m.source)}</span><span class="pct"${rdpsTip}>${esc(m.name)}: <b>${val}</b>${m.unit?` ${esc(m.unit)}`:""}${rank}${m.n?` <span class="mnote">(n=${Number(m.n).toLocaleString("en-US")})</span>`:""}${asof}</span></div>`;
+    return `<div class="setrow${stale?" stale":""}"><span class="pc">${esc(src?src.name:m.source)}</span><span class="pct"${rdpsTip}>${esc(m.name)}: <b>${val}</b>${m.unit?` ${esc(m.unit)}`:""}${rank}${m.n?` <span class="mnote${m.thin?" thin-n":""}">(n=${Number(m.n).toLocaleString("en-US")}${m.thin?" · thin sample":""})</span>`:""}${asof}</span></div>`;
   };
   const section = (label, items) => items.length ? `<p class="d-h">${label}</p><div class="setbox">${items.map(row).join("")}</div>` : "";
   const live = m => metricEra(m)==="live", ptr = m => metricEra(m)==="ptr";
@@ -2284,7 +2297,7 @@ function openCompare(){
     ["Live M+ median", s=>cmpLiveMedian(s,"mplus")],
     // Zone-54 PTR raid testing covers ALL roles (unlike the DPS-only Dummy Dome) — give
     // healers/tanks a measured PTR row too, not just a gap (L13).
-    ...(state.era !== "live" ? [["PTR raid testing", s=>{ const m=(s.metrics||[]).find(m=>m.name==="12.1 PTR raid testing score (normalized)");
+    ...(state.era !== "live" ? [["PTR raid testing", s=>{ const m=(s.metrics||[]).find(m=>m.name===PTRNAMES.raidTestingScore.DPS);
       return m ? `${Math.round(m.value)}/100${m.rank?` <span class="mnote">#${m.rank}/${m.of}</span>`:""}` : "—"; }]] : []),
     ...(state.era !== "live" ? [["Dummy Dome (PTR, DPS)", s=>s.ptrDummy?.score!=null?`${s.ptrDummy.score}/100 <span class="mnote">#${s.ptrDummy.rank}/${s.ptrDummy.of}</span>`:"—"]] : []),
     ["Fight profile", s=>s.fightProfile?.tag ? esc(s.fightProfile.tag) : "—"],
@@ -2790,16 +2803,16 @@ function openSpecFromOverlay(cls, spec){
       { key:"simc", label:"SimC", era:"live", tip:"SimulationCraft nightly Patchwerk DPS. DPS specs only — healers and tanks have no sim basis.",
         names:{ DPS:"SimC nightly Patchwerk DPS", Tank:null, Healer:null } },
       { key:"roby", label:"PTR testing", era:"ptr", tip:"12.1 PTR Mythic raid testing, 99th percentile (Robydoby). DPS and healers — no tank cut published.",
-        names:{ DPS:"99th pct DPS (12.1 PTR Mythic raid testing, Robydoby)", Tank:null, Healer:"99th pct HPS (12.1 PTR Mythic raid testing, Robydoby)" } },
+        names:PTRNAMES.robydoby },
       { key:"ptr", label:"PTR score", era:"ptr", scoreWhenUnranked:true, tip:"12.1 PTR raid testing score, normalized 0–100 (Warcraft Logs zone 54). All rows are currently below the 10-parse rank floor, so the dimmed number is the score itself, unranked.",
-        names:{ DPS:"12.1 PTR raid testing score (normalized)", Tank:"12.1 PTR raid testing score (normalized)", Healer:"12.1 PTR raid testing score (normalized)" } },
+        names:PTRNAMES.raidTestingScore },
       { key:"vapool", label:"PTR bosses", era:"ptr", tip:"Median raw DPS on 12.1 PTR Venomous Abyss raid-testing bosses, pooled (Warcraft Logs). DPS specs only.",
-        names:{ DPS:"Median raw DPS (12.1 PTR Venomous Abyss, pooled)", Tank:null, Healer:null } },
+        names:PTRNAMES.venomousAbyssPool },
       { key:"dummy", label:"Dummy Dome", era:"ptr", dummy:true, tip:"12.1 PTR Dummy Dome composite across target counts (0–100, coverage- and sample-floored). DPS specs only." },
       { key:"d1", label:"Dummy 1T", era:"ptr", tip:"Median raw DPS on the single-target 12.1 PTR dummy (Warcraft Logs zone 52). DPS specs only. Rank within role.",
-        names:{ DPS:"Median raw DPS (12.1 PTR Dummy Dome, 1T)", Tank:null, Healer:null } },
+        names:PTRNAMES.dummy1T },
       { key:"d5", label:"Dummy 5T", era:"ptr", tip:"Median raw DPS on the five-target 12.1 PTR dummy (Warcraft Logs zone 52). DPS specs only. Rank within role.",
-        names:{ DPS:"Median raw DPS (12.1 PTR Dummy Dome, 5T)", Tank:null, Healer:null } }
+        names:PTRNAMES.dummy5T }
     ],
     mplus: [
       { key:"wcl", label:"WCL median", era:"live", tip:"Warcraft Logs median, M+ all dungeons — rDPS for DPS, tank rDPS for tanks, HPS for healers. Rank within role.",
@@ -2815,9 +2828,9 @@ function openSpecFromOverlay(cls, spec){
       { key:"mstats", label:"Top-2000 keys", era:"live", tip:"Mythicstats representation among the top 2000 keys — a presence measure at the very top end. Rank within role.",
         names:{ DPS:"Top-2000 keys representation", Tank:"Top-2000 keys representation", Healer:"Top-2000 keys representation" } },
       { key:"ptr", label:"PTR testing", era:"ptr", tip:"12.1 PTR M+ testing median (Warcraft Logs zone 56), by role. Rank within role.",
-        names:{ DPS:"Median rDPS (12.1 PTR M+ testing)", Tank:"Median rDPS (12.1 PTR M+ testing, tank)", Healer:"Median HPS (12.1 PTR M+ testing)" } },
+        names:PTRNAMES.mplusTesting },
       { key:"keys", label:"PTR keys", era:"ptr", tip:"Median raw DPS in 12.1 PTR M+ keys, pooled across dungeons (Warcraft Logs zone 56). DPS specs only.",
-        names:{ DPS:"Median raw DPS (12.1 PTR M+ keys, pooled)", Tank:null, Healer:null } }
+        names:PTRNAMES.mplusKeysPool }
     ]
   };
 
@@ -2859,7 +2872,11 @@ function openSpecFromOverlay(cls, spec){
                  tip:name+" — score "+m.value+"/100, n="+(m.n ?? "?")+" parses: below the 10-parse rank floor, so shown as a score, not a rank" };
       return { rank:null, score:null, tip:col.label+": fetched but below the 10-parse rank floor (n="+(m.n ?? "?")+")" };
     }
-    return { rank:m.rank, of:m.of, score:-m.rank, tip:name+" — rank #"+m.rank+" of "+m.of+" ("+m.value.toLocaleString()+" "+(m.unit||"")+")" };
+    // A rank clears MIN_RANK_N but may still rest on very few parses; carry that through so
+    // the cell can SAY so in text. Colour/tooltip alone would be invisible on touch.
+    return { rank:m.rank, of:m.of, score:-m.rank, thin:!!m.thin, n:m.n ?? null,
+             tip:name+" — rank #"+m.rank+" of "+m.of+" ("+m.value.toLocaleString()+" "+(m.unit||"")+")"
+                 +(m.thin?" · THIN SAMPLE: only "+Number(m.n).toLocaleString()+" parses":"") };
   }
   const consCell = s => { const c = s.consensus && s.consensus[A.bracket];
     return c ? { tier:c.tier, score:c.score, div:c.diverges, tip:"Consensus "+c.tier+" ("+c.score+"/100)" } : { tier:null, score:null, tip:"No ratings yet" }; };
@@ -2914,7 +2931,11 @@ function openSpecFromOverlay(cls, spec){
     if(c.rank == null && c.val != null)
       return '<span class="all-val" title="'+esc(c.tip)+'">'+esc(c.val)+'</span>';
     if(c.rank == null) return '<span class="all-none" title="'+esc(c.tip)+'">'+(c.na ? "·" : "—")+'</span>';
-    return '<span title="'+esc(c.tip)+'">'+(c.rank<=3?'<b>#'+c.rank+'</b>':'#'+c.rank)+'</span>';
+    // A thin-sample rank carries a visible dagger, not just a tooltip — see the legend
+    // under the matrix. Two ranks of equal position built on 21 vs 1,107 parses are not
+    // equally meaningful, and the page has to say which is which without a hover.
+    return '<span title="'+esc(c.tip)+'">'+(c.rank<=3?'<b>#'+c.rank+'</b>':'#'+c.rank)
+      +(c.thin?'<span class="thin-n" aria-label="thin sample">†</span>':'')+'</span>';
   }
 
   const ov = document.createElement("div"); ov.className="finder-ov"; ov.id="all-ov"; document.body.appendChild(ov);
@@ -2958,7 +2979,7 @@ function openSpecFromOverlay(cls, spec){
     const roles = ["All","DPS","Healer","Tank"].map(r=>'<button data-ar="'+r+'" aria-pressed="'+(r===A.role)+'">'+r+'</button>').join("");
 
     ov.innerHTML = '<div class="finder-panel all-panel" role="dialog" aria-modal="true" aria-label="Compare all specs">'
-      + '<div class="finder-head"><div><h2>⊞ Compare all</h2><p>Every spec against every rating and rank, on one screen. Click a column to sort, use the row under it to filter, click a spec to open its card. Letters are tier ratings — each source’s own, their computed consensus, and our 12.1 forecast; <b>#numbers are measured ranks within that spec’s role</b> and are never turned into grades. <b>·</b> means no such measurement exists for that role; <b>—</b> means it exists but has not landed.</p></div>'
+      + '<div class="finder-head"><div><h2>⊞ Compare all</h2><p>Every spec against every rating and rank, on one screen. Click a column to sort, use the row under it to filter, click a spec to open its card. Letters are tier ratings — each source’s own, their computed consensus, and our 12.1 forecast; <b>#numbers are measured ranks within that spec’s role</b> and are never turned into grades. <b>·</b> means no such measurement exists for that role; <b>—</b> means it exists but has not landed; <b class="thin-n">†</b> marks a rank built on fewer than 100 logged parses — real, but thin enough that it should not be read like the dense cuts beside it.</p></div>'
       + '<button class="finder-x" id="all-close" aria-label="Close">✕</button></div>'
       + '<div class="all-hd"><div class="seg" role="group" aria-label="Bracket" id="all-bkt">'+bkt+'</div>'
       + '<div class="seg" role="group" aria-label="Role" id="all-role">'+roles+'</div>'

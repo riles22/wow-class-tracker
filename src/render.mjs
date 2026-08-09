@@ -76,6 +76,13 @@ export function fightLabels(specs) {
    coverage floor, which already refuses a headline number on thin evidence. */
 export const MIN_RANK_N = 10;
 
+/* The sample size below which a rank is real but THIN, and says so on the page. Distinct from
+   MIN_RANK_N, which withholds a rank entirely: between the two, a spec gets its number and a
+   visible qualifier rather than silence. 100 because that is where the current PTR cuts stop
+   being comparable to the dense live cuts beside them — zone 56 runs from 21 parses (Fire Mage)
+   to 1,107 (Arcane), a 50x spread rendered identically today. See metricRanks. */
+export const LOW_SAMPLE_N = 100;
+
 export function metricRanks(specs) {
   const groups = new Map();
   for (const spec of specs) {
@@ -98,6 +105,18 @@ export function metricRanks(specs) {
     arr.forEach((metric, i) => {
       metric.rank = (i > 0 && arr[i - 1].value === metric.value) ? arr[i - 1].rank : i + 1;
       metric.of = arr.length;
+      /* THIN SAMPLE (2026-08-08). MIN_RANK_N is a floor, not a quality bar: clearing 10 logs
+         buys a rank, and from then on a #24/27 built on 21 parses renders exactly like one
+         built on 1,085. Measured on the zone-56 PTR M+ cut, which is ~41% of the effective M+
+         projection weight: 13 of 27 specs sit under 100 parses and five under 50. The number
+         is not wrong, but showing it with no visible qualifier invites a reader to weigh it
+         like the dense rows beside it — and per the touch-legibility rule a tooltip does not
+         count, because `title` does not exist on a phone.
+         LOW_SAMPLE_N is deliberately a flat, stated threshold rather than a percentile of the
+         field: a within-field rule would mark a fixed fraction of rows every run even when the
+         whole cut is healthy, which trains readers to ignore it. */
+      if (metric.n != null && metric.n < LOW_SAMPLE_N) metric.thin = true;
+      else if ("thin" in metric) delete metric.thin; // upsert-in-place: never leave a stale flag
     });
   }
   return specs;
@@ -823,6 +842,17 @@ export const SNAPSHOT_PHASE = "12.1-ptr";
    2026-08-18 (12.1 itself lands 08-11); a couple of days of slack absorbs a delayed
    launch without nagging.
 
+   FLIP ON 2026-08-18, NOT AT PATCH LAUNCH (owner decision, 2026-08-08). The two dates are
+   different events and the repo previously carried both readings — docs/s2-transition-scope.md
+   said "launch day", the ptr-watch log said flip ~Aug 18. Settled on S2 open, for two reasons.
+   (a) SETTLE_DAYS is [14, 28] from the flip: flip on 08-11 and the +14 grade lands on S2 day 7,
+   squarely inside the week-one tier-list churn those windows exist to avoid; flip on 08-18 and
+   it lands 09-01, on a settled season. (b) `sourceSeasonOk` keys on what a page says about the
+   SEASON, and Season 1 is still live until 08-18 — flipping liveSeason to "s2" while the outlets
+   are honestly still describing S1 blanks the consensus for no gain. The FREEZE is the separate
+   one-shot and still belongs before 12.1 lands (08-10, after the nightly publishes): freeze what
+   we predicted while it is still a prediction, flip when the season it predicts actually starts.
+
    This exists because the flip is the one action in the whole system that NOTHING can
    detect after the fact. Miss it and every post-launch snapshot is still stamped
    "12.1-ptr", so the forecast report card can never find the boundary it grades the
@@ -836,11 +866,38 @@ export const SNAPSHOT_PHASE = "12.1-ptr";
 export const PHASE_FLIP_DUE = "2026-08-20";
 
 // Derived from the phase marker so the 12.2 cycle re-points these by config.
-const PTR_MPLUS_SERIES = PHASES.ptr ? {
-  DPS: `Median rDPS (${PHASES.ptr.marker} M+ testing)`,
-  Tank: `Median rDPS (${PHASES.ptr.marker} M+ testing, tank)`,
-  Healer: `Median HPS (${PHASES.ptr.marker} M+ testing)`
-} : {};
+/* THE PTR METRIC-NAME CONTRACT, in one place (2026-08-08).
+   These strings are LOOKUP KEYS: they must match data/specs.json byte for byte, or the series
+   silently resolves to nothing — no error, no empty state, just a row that never appears. The
+   template used to hand-type its own second copy of all eight (the Ladder series pickers), so
+   the contract lived in two files that no test compared. Renaming a metric, or flipping
+   PHASES.ptr at 12.1 launch, would have updated one and quietly broken the other.
+   Now derived once from PHASES.ptr.marker and shipped in the payload as meta.ptrMetricNames,
+   which is what the template reads. Null when there is no PTR phase — the callers already
+   treat an absent series as "no such measurement", which is the honest rendering. */
+export const PTR_METRIC_NAMES = PHASES.ptr ? (m => ({
+  mplusTesting: {
+    DPS: `Median rDPS (${m} M+ testing)`,
+    Tank: `Median rDPS (${m} M+ testing, tank)`,
+    Healer: `Median HPS (${m} M+ testing)`
+  },
+  raidTestingScore: {
+    DPS: `${m} raid testing score (normalized)`,
+    Tank: `${m} raid testing score (normalized)`,
+    Healer: `${m} raid testing score (normalized)`
+  },
+  robydoby: {
+    DPS: `99th pct DPS (${m} Mythic raid testing, Robydoby)`,
+    Tank: null,
+    Healer: `99th pct HPS (${m} Mythic raid testing, Robydoby)`
+  },
+  venomousAbyssPool: { DPS: `Median raw DPS (${m} Venomous Abyss, pooled)`, Tank: null, Healer: null },
+  dummy1T: { DPS: `Median raw DPS (${m} Dummy Dome, 1T)`, Tank: null, Healer: null },
+  dummy5T: { DPS: `Median raw DPS (${m} Dummy Dome, 5T)`, Tank: null, Healer: null },
+  mplusKeysPool: { DPS: `Median raw DPS (${m} M+ keys, pooled)`, Tank: null, Healer: null }
+}))(PHASES.ptr.marker) : null;
+
+const PTR_MPLUS_SERIES = PTR_METRIC_NAMES?.mplusTesting ?? {};
 function rankPct(spec, bracket, name) {
   const m = (spec.metrics ?? []).find(x => x.bracket === bracket && x.name === name);
   if (!m || m.rank == null || !m.of || m.of < 2) return null;
@@ -1661,6 +1718,9 @@ export function buildPayload({ specs, sources, scales, community, ptrBuilds, cre
       latestPtrBuild: latestBuild,
       movementSince: baseline?.date ?? null,
       phases: PHASES,
+      // The single source of truth for PTR series lookup keys — see PTR_METRIC_NAMES.
+      // The template reads these instead of hand-typing a second copy that can drift.
+      ptrMetricNames: PTR_METRIC_NAMES,
       projectionVersion: PROJECTION_VERSION,
       rankVersion: RANK_VERSION,
       consensusVersion: CONSENSUS_VERSION

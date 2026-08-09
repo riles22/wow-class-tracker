@@ -49,6 +49,42 @@ test("build produces the tracker and fetchable launcher icons", async () => {
   assert.match(csp, /(?:^|;)\s*img-src 'self' data:\s*(?:;|$)/, "CSP must allow only same-origin and inline icons");
 });
 
+test("every PTR metric-name key resolves against real data (2026-08-08)", async () => {
+  /* These strings are LOOKUP KEYS, not labels: a mismatch against data/specs.json renders an
+     empty series with no error, no empty state, nothing. The template used to hand-type its own
+     second copy of all eight, so the contract lived in two files nothing compared — renaming a
+     metric, or flipping PHASES.ptr at launch, would update one and quietly break the other.
+     They are derived in one place now (PTR_METRIC_NAMES) and shipped as meta.ptrMetricNames;
+     this test is what makes the drift loud instead of silent. */
+  const data = await loadData(ROOT);
+  const payload = buildPayload(data);
+  const names = payload.meta.ptrMetricNames;
+  assert.ok(names, "meta.ptrMetricNames must ship while a PTR phase exists");
+
+  const known = new Set();
+  for (const spec of data.specs) for (const m of spec.metrics ?? []) known.add(m.name);
+
+  // Every non-null key must name a series that actually exists in the data.
+  const unresolved = [];
+  for (const [series, byRole] of Object.entries(names)) {
+    for (const [role, name] of Object.entries(byRole)) {
+      if (name == null) continue;
+      if (!known.has(name)) unresolved.push(`${series}.${role} → ${JSON.stringify(name)}`);
+    }
+  }
+  assert.deepEqual(unresolved, [], "PTR series keys that match no metric in data/specs.json");
+
+  // And they must carry the current phase's marker — the launch flip has to move them.
+  const marker = payload.meta.phases?.ptr?.marker;
+  if (marker) {
+    for (const byRole of Object.values(names)) {
+      for (const name of Object.values(byRole)) {
+        if (name != null) assert.ok(name.includes(marker), `${name} does not carry the phase marker ${marker}`);
+      }
+    }
+  }
+});
+
 test("payload decorates every spec with consensus for both brackets", async () => {
   const data = await loadData(ROOT);
   const payload = buildPayload(data);

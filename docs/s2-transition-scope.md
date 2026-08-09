@@ -205,5 +205,15 @@ The point of generalizing: next PTR is a config change, not a rebuild.
   consensus-transition behaviour per DECISION 1, sunset wiring per DECISION 3) so
   launch week is config + owner commands, not development.
 - **PHASE_FLIP_DUE is Aug 20** — the heartbeat goes red past it if the flip is undone.
-- **Launch day**: freeze → flip → contract swap → WCL probe dispatch.
-- **+14 / +28**: report card; sunset completes per DECISION 3.
+- **DECISION 5 (owner, 2026-08-08): the freeze and the flip are on DIFFERENT DATES.**
+  This line used to read "Launch day: freeze → flip → contract swap → WCL probe dispatch",
+  which bundled two one-shot actions that belong at two different moments:
+  - **Aug 10, after the nightly publishes — FREEZE.** `node src/snapshot.mjs --frozen`.
+    Freeze what we predicted while it is still a prediction, i.e. before 12.1 lands on 08-11.
+  - **Aug 18 (S2 open) — FLIP**, then contract swap → WCL probe dispatch. Not launch day.
+    `SETTLE_DAYS` is [14, 28] measured from the flip: flipping 08-11 puts the +14 grade on
+    S2 day 7, inside exactly the week-one churn those windows exist to dodge (08-18 puts it
+    on 09-01, a settled season). And `sourceSeasonOk` keys on the SEASON a page describes —
+    Season 1 is live until 08-18, so flipping earlier blanks the consensus while the outlets
+    are still honestly describing S1. Measured: flipping today nulls 80 of 80 cells.
+- **+14 / +28 from the FLIP**: report card; sunset completes per DECISION 3.
