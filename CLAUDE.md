@@ -136,7 +136,8 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   computed in `projectionFor` (render.mjs) — live consensus baseline (w .35 since the v9
   owner reweight, 2026-08-04 — the 12.0.7 prior deliberately takes a minority stake)
   blended with PTR empiricals (zone-54/56 testing percentile w 2 : Dummy Dome w 1;
-  total .45) and the external era-gated PTR tier list (w .30, `ptrTierRead`), all
+  total .45 — the percentile is **recentred onto the bracket's live consensus mean** since
+  v12, see below) and the external era-gated PTR tier list (w .30, `ptrTierRead`), all
   renormalized when absent (a cell with no PTR evidence still reads 100% prior), shifted
   by outlook direction (±10 at the cap: dated verdict 10 · tally 4/7/10 by line balance ·
   expert-driven ≤9), adjusted by the bracket-scoped expert panel (±6; a ≥3-creator quorum
@@ -170,6 +171,31 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   Band discipline is unchanged. **Still open:** tanks have no PTR raid signal of any kind,
   and the ±12 headroom moves scores but rarely letters, because crossing a band still
   needs a ≥3-creator quorum and most panels are 1–2 creators.
+  **The percentile term had a UNITS bug and it was the main reason our letters read low**
+  (v12, 2026-08-08). `rankPct` returns a within-(role,bracket) percentile — a uniform grid whose
+  mean is **exactly 50 by construction** (verified: DPS/Tank/Healer all 50.00). It carries ORDER
+  and no LEVEL, yet it was averaged at ~41% effective weight against two quantities living on the
+  letter axis (12.0.7 consensus mean 59.9; the PTR tier list 70.9), dragging every M+ cell toward
+  50. It accounted for **−8.9 of the measured −10.5** gap against the external 12.1 read. Fix is a
+  LOCATION shift only — `raw − 50 + empiricalAnchor`, the anchor being that bracket's live
+  consensus mean, derived per build by `empiricalAnchors()` so no constant can go stale (null when
+  a bracket has no consensus, e.g. the S2 window, in which case nothing is shifted). Spread and
+  ordering untouched, so this is **not a reweight and does not lift the frozen-weights rule**.
+  Measured: out-of-sample level gap −15.2 → −10.2, Spearman 0.552 → 0.541 (noise), sd unchanged;
+  **10 published letters moved, all M+, all one band, all upward; raid identical** (the zone-54
+  series reaches nobody, so there is no percentile to recentre) and **0 consensus letters**.
+  **Two dead ends recorded so they are not re-run.** (a) *Source generosity* — the four live lists
+  have mean mapped scores 17 points apart (method 53.4 … icyveins 67.0) and Method's M+ list has no
+  S tier at all, so it looks like a stingy source drags the consensus down. It does not:
+  mean-centring every source moves **0 of 40** consensus scores, max delta 0.000000, because
+  `consensusFor` is an unweighted mean over an identical source set and the offsets cancel
+  algebraically. (b) *Rank/Borda aggregation* — agrees with the current consensus at rho 0.985;
+  there is nothing to extract. **And the premise to check before any future "our ranks are wrong"
+  pass:** held out (icyveins-ptr stripped so it cannot feed our own forecast), this model predicts
+  the external 12.1 M+ ordering at Spearman **0.549**, against **0.053** for the carry-forward
+  baseline the report card demands we beat, 0.207 for the best single list we hold, and **−0.279**
+  for Method. The ordering is the part that works; when the tracker looks out of step, measure
+  LEVEL before touching rank.
   **Quorum REMOVED for healers and tanks** (v11, 2026-08-07, Riley — decided against a
   stated objection): one creator may now cross a band edge for those two roles; DPS still
   needs `EXPERT_QUORUM`. Coverage was attempted first and came up empty — a sweep of all
@@ -482,6 +508,13 @@ its own row in `required-sources.json`, so a run that skips it fails the publish
 `GET https://bloodmallet.com/chart/get/talent_target_scaling/castingpatchwerk/{snake_case_class}/{spec}`
 per DPS spec; take best-build DPS at target counts 1/2/3/5/8/15; confirm
 `simc_settings.tier == "MID1"`. Merge via `apply-metrics.mjs` (`profiles` key).
+**`fightProfile.asOf` is the CHART's own timestamp, per spec — never the run date.** It is in
+the payload (`timestamp` / `metadata.timestamp`), and the specs genuinely differ. Stamping today
+defeats the staleness gate exactly, because `required-sources.json` measures bloodmallet off
+`fightProfile.asOf` itself — for a month that hid 31-day-old sims behind a 5-day threshold
+(corrected 2026-08-08). Honest dates mean the manifest row is `partial` whenever upstream has not
+re-simmed, and the heartbeat goes red; that red IS the signal. Recipe and the transient-error
+gotcha live in the refresh-metrics skill.
 
 ### Log a new PTR build
 1. Watch Wowhead news RSS (`/news/rss/all`) for "12.1 PTR" + Development Notes/Class

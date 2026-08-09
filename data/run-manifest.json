@@ -152,10 +152,10 @@
     },
     {
       "source": "bloodmallet",
-      "result": "success",
-      "previousAsOf": "2026-08-07",
-      "newAsOf": "2026-08-08",
-      "detail": "26/26 non-Augmentation DPS fight profiles re-fetched via talent_target_scaling/castingpatchwerk, all HTTP 200, and simc_settings.tier == \"MID1\" confirmed on every chart. ZERO target values moved: every chart's own metadata timestamp is still 2026-07-08 02:52-02:55 (Elemental Shaman 2026-07-15 02:25), i.e. nothing has been re-simmed upstream — only our verification date advanced, stated plainly rather than dressed up as fresh sims. Augmentation returns {status: \"error\"} with no data key, by design."
+      "result": "partial",
+      "previousAsOf": "2026-07-08",
+      "newAsOf": "2026-07-08",
+      "detail": "26/26 non-Augmentation DPS fight profiles re-fetched via talent_target_scaling/castingpatchwerk, all HTTP 200, simc_settings.tier == \"MID1\" confirmed on every chart, and ZERO target values moved. PARTIAL, not success, and the stored dates were CORRECTED on 2026-08-08 (owner commit, out of band): asOf had been stamped with the RUN date on every run since 2026-07-09 while the sim values sat byte-identical, which defeated the staleness alarm exactly — required-sources.json measures bloodmallet off fightProfile.asOf itself, so a true age of 31 days never breached maxAgeDays 5. asOf is now each chart's own metadata.timestamp, per spec: 2026-07-08 for 25 specs, 2026-07-15 for Elemental Shaman (re-fetched live and confirmed twice). Upstream has not re-simmed since 2026-07-08, so the age gate now reads red at 32d. That red is the true state of the source, not a regression. Augmentation returns {status: \"error\"} with no data key; note that same 76-byte body is a TRANSIENT (Beast Mastery returned it once and succeeded on retry), so retry before concluding a spec is absent."
     },
     {
       "source": "simulationcraft",

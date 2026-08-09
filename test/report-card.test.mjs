@@ -21,6 +21,33 @@ test("bandsOff sign: positive means the model was too OPTIMISTIC", () => {
   assert.equal(r.overall.biasScore, 45); // 90 forecast vs 45 actual
 });
 
+test("a grade across a changed consensus definition is flagged NOT COMPARABLE (2026-08-08)", () => {
+  // The freeze protects the forecast side — it is on disk. The ANSWER KEY has no such
+  // protection: `actual.consensus` is written by whatever consensusFor is live at settlement,
+  // while carryForward copies the frozen snapshot's old-definition consensus forward as the
+  // baseline. Change the consensus between freeze and settlement and the model is graded
+  // against a moved goalpost, in a measurement that has no second attempt.
+  const cells = { "Druid|Balance": { projection: { raid: { tier: "A", score: 60 } } } };
+  const actual = { "Druid|Balance": { consensus: { raid: "A" }, scores: { raid: 60 } } };
+
+  const same = gradeSnapshot(
+    snap("2026-08-10", cells, { consensusVersion: 2 }),
+    snap("2026-09-01", actual, { consensusVersion: 2 }), SCALES);
+  assert.equal(same.consensusVersion.comparable, true);
+  assert.deepEqual(same.warnings, [], "matching definitions grade cleanly");
+
+  const moved = gradeSnapshot(
+    snap("2026-08-10", cells, { consensusVersion: 2 }),
+    snap("2026-09-01", actual, { consensusVersion: 3 }), SCALES);
+  assert.equal(moved.consensusVersion.comparable, false);
+  assert.equal(moved.warnings.length, 1);
+  assert.match(moved.warnings[0], /not on the same scale/);
+
+  // An UNVERSIONED side cannot vouch for comparability either — absence is not agreement.
+  const unknown = gradeSnapshot(snap("2026-08-10", cells), snap("2026-09-01", actual), SCALES);
+  assert.equal(unknown.consensusVersion.comparable, false);
+});
+
 test("a declined forecast is not scored as a miss", () => {
   const f = snap("2026-07-01", {
     "A|X": { projection: { raid: null, mplus: { tier: "A", score: 60 } } },

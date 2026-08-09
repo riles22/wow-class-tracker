@@ -439,7 +439,8 @@
    "patchContext": "12.1 PTR",
    "sentiment": "neutral",
    "claim": "After playing every Venomous Abyss PTR boss, Pkpawner thinks the raid broadly suits Windwalker — heavy-movement fights favor its mobility and several encounters fit its damage profile — though a couple are stinkers, with the triple-boss Lost Explorers arguably its worst fight due to lost melee uptime.",
-   "url": "https://youtu.be/rXk-axP9lSU?t=449"
+   "url": "https://youtu.be/rXk-axP9lSU?t=449",
+   "bracket": "raid"
   },
   {
    "class": "Monk",
@@ -449,7 +450,8 @@
    "patchContext": "12.1 PTR",
    "sentiment": "neutral",
    "claim": "He reads Shado-Pan as the stronger hero build across most of the new raid's add-heavy fights thanks to its flexible one-minute cooldowns and stomp burst for clearing add clumps, while Conduit's rigid cooldown timings force awkward delays and only shine on single-target or lineup-friendly bosses.",
-   "url": "https://youtu.be/rXk-axP9lSU?t=61"
+   "url": "https://youtu.be/rXk-axP9lSU?t=61",
+   "bracket": "raid"
   },
   {
    "class": "Monk",
@@ -459,7 +461,8 @@
    "patchContext": "12.1 PTR",
    "sentiment": "buff",
    "claim": "He sees So'leah's recurring 30% damage-amp windows as a chance for Conduit Windwalker to be an exceptional pick that demolishes the boss with disciplined cooldown holding — potentially a prime Windwalker fight if spec tuning lands, reinforced by strong Detox and Transcendence utility.",
-   "url": "https://youtu.be/rXk-axP9lSU?t=309"
+   "url": "https://youtu.be/rXk-axP9lSU?t=309",
+   "bracket": "raid"
   },
   {
    "class": "Warrior",
@@ -1175,7 +1178,8 @@
    "patchContext": "12.1 PTR",
    "claim": "The Arms Colossus bleed build is back on the 12.1 PTR: the Season 2 tier set has a bleed-focused bonus and Ravager was reworked to buff bleed damage. The rotation shifts substantially — Cleave stays top priority and now applies Rend to every target it hits (so Rend is only pressed manually on single target), and he thinks Arterial Bleed (bleeds deal more damage per Colossal Might stack) is now likely worth taking over the Season 1 pick One Against Many.",
    "url": "https://youtu.be/jFAIFhhP7xw?t=4",
-   "superseded": false
+   "superseded": false,
+   "bracket": "mplus"
   },
   {
    "class": "Warrior",
@@ -1186,7 +1190,8 @@
    "patchContext": "12.1 PTR",
    "claim": "On how the bleed build plays in Season 2 keys: he prioritizes Mortal Strike until 10 Colossal Might stacks, then Slam over Mortal Strike because the tier set makes Slam apply AoE Deep Wounds. Spamming Slam in AoE feels strange — he calls it stupid-feeling and has to actively concentrate without the muscle memory — but he concedes it works, with Deep Wounds topping his damage breakdown in the dungeon runs.",
    "url": "https://youtu.be/jFAIFhhP7xw?t=452",
-   "superseded": false
+   "superseded": false,
+   "bracket": "mplus"
   },
   {
    "class": "Warrior",
@@ -1197,7 +1202,8 @@
    "patchContext": "12.1 PTR",
    "claim": "His broader Season 2 PTR read on Arms: pure single-target output is nothing impressive but feels less bad than in the current season. He thinks 12.1 is still a funnel-oriented season — funnel is slightly less effective than before but still clearly worth doing to speed keys up. One sore spot: Sweeping Strikes uptime is noticeably lower than in Season 1, which feels bad.",
    "url": "https://youtu.be/jFAIFhhP7xw?t=3022",
-   "superseded": false
+   "superseded": false,
+   "bracket": "mplus"
   },
   {
    "class": "Evoker",
@@ -3219,6 +3225,7 @@
    "creator": "YoDaTV",
    "date": "2026-08-02",
    "sentiment": "buff",
+   "bracket": "mplus",
    "patchContext": "12.1 PTR — his Season 2 Blood DK Mythic+ guide",
    "url": "https://youtu.be/vgBQJjfT20g?t=4",
    "claim": "Opens his Season 2 M+ guide by calling Blood DK the best tank for Mythic+ at the start of the season on current PTR testing: the most damage of any tank (especially AoE), the best self-healing, and the steadiest health bar he has seen in high keys. He credits the buffs plus the Apex-talent hotfix that flipped the talent from INCREASING damage taken by 4% to reducing it by 6% per stack — roughly a 10% swing with one weapon active and up to ~20% with two. He recommends San'layn over Deathbringer (Blood Soaked Ground now 8% physical reduction, was 5%) for damage, calling survivability between the two close and saying theorycraft may even favour Deathbringer slightly. Versatility/Haste for M+ because defensive stats beat damage stats in keys. He rates the Season 2 tier set 'very good' but says his HPL testing shows no reason to consume the 4-set at 10 stacks off cooldown — Marrowrend when you would anyway and take the strength then.",
@@ -3851,7 +3858,7 @@
    "claim": "Asked directly what the 12.1 raid tank comp might look like, he answers that at current tuning it is definitely still Protection Paladin, and that Prot Paladin is looking very good. He frames the rest of the raid tank picture as largely unchanged from Season 1 to Season 2 apart from that Protection Paladin shift, and separately calls Protection Warrior still a brick wall."
   },
   {
-   "superseded": false,
+   "superseded": true,
    "class": "Paladin",
    "spec": "Protection",
    "creator": "Tactyks",

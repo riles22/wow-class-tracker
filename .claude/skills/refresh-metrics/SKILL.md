@@ -127,6 +127,26 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
 - **Bloodmallet** (fight profiles, DPS specs only):
   `GET bloodmallet.com/chart/get/talent_target_scaling/castingpatchwerk/{class}/{spec}`
   — take BEST build DPS per target count (1/2/3/5/8/15) into `profiles[].targets`.
+  - **`asOf` is the CHART's own timestamp, never today** — same rule as WoWMeta above, and it
+    is easier to get right here because the date is sitting in the payload: every chart carries
+    `timestamp` ("2026-07-08 02:52") and `metadata.timestamp` (microsecond precision), and the
+    `subtitle` restates it as `UTC <ts> | SimC build: <hash>`. Take the DATE PART, **per spec** —
+    they genuinely differ (on 2026-08-08: 25 specs at 2026-07-08, Elemental Shaman alone at
+    2026-07-15). Confirm `simc_settings.tier == "MID1"`.
+  - Why this is written down (2026-08-08): for a month every run stamped `asOf` with the RUN
+    date while the sim values sat byte-identical. That defeats the staleness alarm *precisely* —
+    `required-sources.json` measures bloodmallet via `date.type "fightProfiles"`, i.e. off
+    `fightProfile.asOf`, the very field being overwritten, so `maxAgeDays: 5` never fired against
+    a true age of 31 days. The gotcha below ("the gate reads the data's own coverage date, not a
+    hand-written snapshot") does NOT protect sims, because for sims the coverage date IS
+    hand-written. The incentive to get this wrong is real: `check-refresh.mjs:218` rejects a
+    `success` row unless the stored date is within 1 day of the run, so honest dates mean the
+    manifest row is **`partial`** on any day Bloodmallet has not re-simmed. Record it as partial
+    and let the age gate go red — a red heartbeat is the true signal that upstream has stalled.
+  - **The 76-byte `{"status": "error", ...}` body is a TRANSIENT, not a structural signal.**
+    Augmentation genuinely has no standard chart (8/8 retries error), but Beast Mastery returned
+    the identical body once and then succeeded on retry with real data. Retry before concluding a
+    spec is absent — treating the error body as "by design" would silently drop a live spec.
 
 ## Gotchas
 

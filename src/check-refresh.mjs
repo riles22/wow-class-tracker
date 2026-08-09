@@ -521,12 +521,23 @@ export function checkFreshness(config, manifest, data, now) {
 
 export function checkAnomaly(nowState, baselineSpecs, bands, limits, ack) {
   const idx = new Map(bands.map((b, i) => [b.tier, i]));
-  let twoBand = 0, total = 0;
+  let twoBand = 0, total = 0, vanished = 0;
   for (const [key, cur] of Object.entries(nowState)) {
     const prev = baselineSpecs?.[key];
     if (!prev) continue;
     for (const bracket of ["raid", "mplus"]) {
       const a = cur.consensus?.[bracket], b = prev.consensus?.[bracket];
+      /* COVERAGE LOSS (2026-08-08). The null skip below used to swallow the single largest
+         movement this gate can face: a cell that HAD a letter and now has none. That is not a
+         quiet non-event, it is total loss of consensus coverage for that cell — and it is the
+         exact shape of the Season-2 flip, where setting PHASES.liveSeason to "s2" while all four
+         live lists still read seasonVerified "s1" blanks 80 of 80 cells. Measured on the
+         committed data: every cell goes null, and because letter↔null pairs were skipped the
+         gate reported ZERO movement and passed green. A total blackout must never be the one
+         thing this gate cannot see. Counted separately from `total` because it is a different
+         event with a different cause — coverage, not retuning — and the message must say so,
+         otherwise a human reads "80 tier moves" and goes looking for a parse bug. */
+      if (b != null && a == null && idx.has(b)) { vanished++; continue; }
       if (a == null || b == null || a === b || !idx.has(a) || !idx.has(b)) continue;
       total++;
       if (Math.abs(idx.get(a) - idx.get(b)) >= 2) twoBand++;
@@ -539,7 +550,15 @@ export function checkAnomaly(nowState, baselineSpecs, bands, limits, ack) {
     if (typeof ack === "string" && ack.trim()) notes.push(`${what} — acknowledged by trusted input: ${ack.trim()}`);
     else errors.push(`${what} — parse-bug shape; if this is a real mass retune, a human re-runs the nightly with the anomaly_ack workflow input (reason + citation)`);
   }
-  return { errors, notes, twoBand, total };
+  /* Any vanished cell breaches, with no numeric budget: losing every source for a bracket is
+     rare and always worth a human look, and the deliberate case (the S2 flip) is precisely the
+     one that should be acknowledged out loud rather than shipped silently. */
+  if (vanished > 0) {
+    const what = `consensus COVERAGE LOSS vs last snapshot: ${vanished} cell${vanished === 1 ? "" : "s"} went from a letter to no letter at all (every rating source for that spec+bracket dropped out)`;
+    if (typeof ack === "string" && ack.trim()) notes.push(`${what} — acknowledged by trusted input: ${ack.trim()}`);
+    else errors.push(`${what} — if this is the Season-2 transition (liveSeason flipped while the live lists still verify as the old season), re-run with the anomaly_ack workflow input naming the flip; otherwise a source parse has failed silently`);
+  }
+  return { errors, notes, twoBand, total, vanished };
 }
 
 /* --- CLI --------------------------------------------------------------------------- */

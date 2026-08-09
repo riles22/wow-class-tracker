@@ -446,6 +446,29 @@ test("anomaly gate: ordinary single-band drift passes untouched", () => {
   assert.equal(r.total, 2);
 });
 
+test("anomaly gate: a consensus BLACKOUT is movement, not silence (2026-08-08)", () => {
+  // The Season-2 flip shape: liveSeason moves to "s2" while every live list still verifies
+  // as "s1", so consensusFor returns null for every cell. Before this guard, letter↔null
+  // pairs were skipped, so total loss of coverage counted as ZERO moves and passed green —
+  // the one event the gate most needs to see was the one it structurally could not.
+  const before = state({ "X|One": ["S", "A"], "X|Two": ["A", "B"] });
+  const after = state({ "X|One": [null, null], "X|Two": [null, null] });
+  const bare = checkAnomaly(after, before, BANDS, config.anomaly, null);
+  assert.equal(bare.total, 0, "no letter→letter move happened, and the gate should not invent one");
+  assert.equal(bare.vanished, 4, "every cell lost its letter entirely");
+  assert.ok(bare.errors.some(e => e.includes("COVERAGE LOSS")), "a blackout must fail red");
+
+  // The deliberate case is acknowledged out loud, through the same human-only token.
+  const acked = checkAnomaly(after, before, BANDS, config.anomaly, "S2 transition: liveSeason flipped 2026-08-18");
+  assert.deepEqual(acked.errors, []);
+  assert.ok(acked.notes.some(n => n.includes("acknowledged by trusted input")));
+
+  // A cell ARRIVING (null → letter) is coverage recovering and must not be penalised.
+  const recovering = checkAnomaly(before, after, BANDS, config.anomaly, null);
+  assert.equal(recovering.vanished, 0);
+  assert.deepEqual(recovering.errors, []);
+});
+
 test("checkValueMove catches units/column-parse shapes, not normal churn (audit 2026-07-24, A3)", () => {
   const cfg = { ...config, maxValueMovePct: 0.60, maxFamilyMedianMovePct: 0.35, minValueMagnitude: 100 };
   const mk = vals => ({ specs: vals.map((v, i) => ({

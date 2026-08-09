@@ -127,11 +127,29 @@ export function gradeSnapshot(forecast, actual, scales, { mode = "drift", specs 
     sufficient: obtainable > 0 && rows.length / obtainable >= 0.8
   };
 
+  /* CONSENSUS COMPARABILITY (2026-08-08). The forecast side is frozen on disk, so a change to
+     the PROJECTION after the freeze cannot corrupt this grade — projectionVersion is recorded
+     below and printed, so a reader knows which formula was graded. The CONSENSUS side has no
+     such protection and is the real hazard: `actual.consensus` is written by whatever
+     consensusFor was live at settlement, while carryForward() copies the frozen snapshot's
+     old-definition consensus forward as the baseline. Change the consensus definition between
+     freeze and settlement and the answer key and the baseline are on different scales — the
+     model would be graded against a moved goalpost, silently, in a measurement that has no
+     second attempt. Surface it rather than trusting a future reader to notice the version
+     fields disagree. Not thrown: a mismatched grade is still worth seeing, but it must never
+     be reported as clean. */
+  const fCV = forecast.consensusVersion ?? null, aCV = actual.consensusVersion ?? null;
+  const consensusComparable = fCV != null && aCV != null && fCV === aCV;
+
   return {
     mode, coverage, ranking: rankingFor(rows),
     forecastDate: forecast.date, actualDate: actual.date,
     forecastPhase: forecast.phase ?? null, actualPhase: actual.phase ?? null,
     projectionVersion: forecast.projectionVersion ?? 1,
+    consensusVersion: { forecast: fCV, actual: aCV, comparable: consensusComparable },
+    warnings: consensusComparable ? [] : [
+      `consensus definition changed between the frozen forecast (consensusVersion ${JSON.stringify(fCV)}) and the settled actual (${JSON.stringify(aCV)}) — the answer key and the carry-forward baseline are not on the same scale, so this grade is NOT comparable. Re-derive from data/forecasts/frozen-<date>.json before reporting any accuracy number.`
+    ],
     overall: agg(rows),
     byBracket: by(r => r.bracket),
     byConfidence: by(r => r.confidence ?? "none"),
@@ -329,6 +347,8 @@ if (isMain) {
     console.log("  Read the bias line only — it says which way the model leans.");
   }
   console.log(`  forecast ${r.forecastDate} (phase ${r.forecastPhase}, projection v${r.projectionVersion}) → actual ${r.actualDate} (phase ${r.actualPhase})`);
+  // Loudly, and BEFORE any number: a grade against a moved consensus definition is not a grade.
+  for (const w of r.warnings ?? []) console.log(`  ⚠ NOT COMPARABLE: ${w}`);
   // Coverage before accuracy, always: a percentage without its denominator is the most
   // misleading thing this tool could print, and this is a one-shot measurement.
   const c = r.coverage;
