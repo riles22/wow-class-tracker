@@ -12,6 +12,51 @@ import { buildPayload } from "./render.mjs";
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const ICON_ASSETS = ["favicon-192.png", "apple-touch-icon.png"];
 
+/* ERA TEXT, resolved at build time from PHASES (2026-08-08, for the 12.1 launch).
+ *
+ * src/template.html hardcoded 36 occurrences of "12.1 PTR" and 30 of "12.0.7". The Era toggle
+ * was already data-driven; the PROSE around it was not, so from the moment 12.1 ships the
+ * masthead, footer and legend would all tell every visitor that 12.1 is on the PTR while the
+ * control beside them said otherwise. CLAUDE.md rule 4 also says the template is presentation
+ * only with zero data in it — an era literal IS data, so this closes a standing violation too.
+ *
+ * Build-time rather than client-side for two reasons: no flash of wrong content, and the
+ * strings land in the artifact so a `grep` of dist/ tells you what the page actually says.
+ *
+ * The hard part is not the labels, it is that `PHASES.ptr` goes NULL at launch. Several of
+ * these need a different SHAPE, not a different word — an arrow with nothing on its right,
+ * advice to "switch Era to 12.1 PTR" when the toggle has been hidden. Each placeholder below
+ * therefore resolves through the phase object rather than through a string swap.
+ */
+export function applyEraText(html, phases) {
+  const live = phases?.liveLabel ?? "12.0.7";
+  const ptr = phases?.ptr?.label ?? null;
+  const season = phases?.liveSeason === "s2" ? "Season 2" : "Season 1";
+  const sub = {
+    LIVE_LABEL: live,
+    PTR_LABEL: ptr ?? "",
+    LIVE_SEASON: season,
+    // The masthead chip: "12.1 PTR — CURSE OF ULA'TEK" while a PTR exists, the live patch after.
+    PATCH_CHIP: ptr ? `${ptr} — CURSE OF ULA'TEK` : `${live} — CURSE OF ULA'TEK`,
+    // "12.0.7 / Season 1 → 12.1 PTR" collapses to just the live era once there is no PTR.
+    COVERAGE_LINE: ptr
+      ? `Now covering: ${live} / ${season} → ${ptr} “Curse of Ula'tek”`
+      : `Now covering: ${live} / ${season} “Curse of Ula'tek”`,
+    // Build feed heading, and the "switch Era to X" advice that is unreachable with no toggle.
+    BUILD_FEED_HEAD: ptr ? `${ptr} build feed` : `${live} patch notes`,
+    ERA_SWITCH_HINT: ptr ? ` — switch Era to Both or ${ptr}` : "",
+  };
+  const unresolved = [];
+  html = html.replace(/__ERA_([A-Z_]+)__/g, (m, key) => {
+    if (!(key in sub)) { unresolved.push(m); return m; }
+    return sub[key];
+  });
+  if (unresolved.length) {
+    throw new Error(`template uses unknown era placeholders: ${[...new Set(unresolved)].join(", ")}`);
+  }
+  return html;
+}
+
 export async function build(root = ROOT) {
   const data = await loadData(root);
   const errors = validateData(data, { fullRoster: true });
@@ -28,6 +73,7 @@ export async function build(root = ROOT) {
   // Escape "<" so the payload can never terminate the surrounding <script> block.
   const json = JSON.stringify(payload).replace(/</g, "\\u003c");
   let html = template.replace("__DATA_JSON__", () => json);
+  html = applyEraText(html, payload.meta.phases);
   // Normalize to LF: the HTML parser normalizes CRLF→LF before the browser hashes inline
   // scripts (a CRLF artifact from a Windows checkout would make the CSP hash unmatchable),
   // and it keeps local (Windows) and CI (Linux) builds byte-identical.

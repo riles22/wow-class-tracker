@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
-import { build } from "../src/build.mjs";
+import { build, applyEraText } from "../src/build.mjs";
 import { buildPayload } from "../src/render.mjs";
 import { loadData } from "../src/validate.mjs";
 
@@ -47,6 +47,36 @@ test("build produces the tracker and fetchable launcher icons", async () => {
   const csp = /<meta[^>]+Content-Security-Policy[^>]+content="([^"]*)"/i.exec(html)?.[1] ?? "";
   assert.match(csp, /(?:^|;)\s*default-src 'none'\s*(?:;|$)/, "CSP must retain default-src 'none'");
   assert.match(csp, /(?:^|;)\s*img-src 'self' data:\s*(?:;|$)/, "CSP must allow only same-origin and inline icons");
+});
+
+test("era prose follows PHASES, including when the PTR goes away (2026-08-08)", () => {
+  /* The template hardcoded 36 "12.1 PTR" and 30 "12.0.7" literals, so on the day 12.1 shipped
+     the masthead and footer would have told every visitor it was still on the PTR while the
+     Era toggle beside them said otherwise. The hard part is not the labels: PHASES.ptr goes
+     NULL at launch, so several strings need a different SHAPE — an arrow with nothing on its
+     right, advice to switch to an era whose toggle has been hidden. */
+  const tpl = "[__ERA_PATCH_CHIP__][__ERA_LIVE_LABEL__ / __ERA_LIVE_SEASON__][__ERA_BUILD_FEED_HEAD__][__ERA_COVERAGE_LINE__][__ERA_ERA_SWITCH_HINT__]";
+  const ptrNow = applyEraText(tpl, { liveSeason: "s1", liveLabel: "12.0.7", ptr: { marker: "12.1 PTR", label: "12.1 PTR" } });
+  assert.match(ptrNow, /12\.1 PTR — CURSE OF ULA'TEK/);
+  assert.match(ptrNow, /12\.0\.7 \/ Season 1/);
+  assert.match(ptrNow, /→ 12\.1 PTR/, "while a PTR exists the coverage line points at it");
+  assert.match(ptrNow, /switch Era to Both or 12\.1 PTR/);
+
+  const launched = applyEraText(tpl, { liveSeason: "s1", liveLabel: "12.1", ptr: null });
+  assert.doesNotMatch(launched, /PTR/, "with no PTR phase the word must not appear anywhere");
+  assert.doesNotMatch(launched, /→/, "the coverage arrow has nothing on its right and must collapse");
+  assert.match(launched, /12\.1 patch notes/, "the build feed becomes the patch notes");
+
+  const s2 = applyEraText(tpl, { liveSeason: "s2", liveLabel: "12.1", ptr: null });
+  assert.match(s2, /12\.1 \/ Season 2/, "the season moves independently of the label");
+
+  // The 12.2 cycle must need no code change — only a PHASES edit.
+  const next = applyEraText(tpl, { liveSeason: "s2", liveLabel: "12.1", ptr: { marker: "12.2 PTR", label: "12.2 PTR" } });
+  assert.match(next, /12\.2 PTR build feed/);
+  assert.match(next, /12\.1 \/ Season 2 → 12\.2 PTR/);
+
+  // A typo'd placeholder must fail the BUILD, not ship as literal text on the page.
+  assert.throws(() => applyEraText("__ERA_NOPE__", { liveLabel: "12.1", ptr: null }), /unknown era placeholders/);
 });
 
 test("every PTR metric-name key resolves against real data (2026-08-08)", async () => {

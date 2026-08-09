@@ -844,13 +844,13 @@ try {
   <canvas class="starfield" id="stars" aria-hidden="true"></canvas>
   <div class="masthead-inner">
     <p class="eyebrow">Multi-source class &amp; spec consensus · updated nightly</p>
-    <div class="titlerow"><h1 class="title"><a id="brandhome" class="brandlink" href="#" title="Back to the default view"><svg class="brandmark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#130B22" stroke="#B57BEE" stroke-opacity=".45" stroke-width="2.5"/><rect x="12" y="13" width="40" height="9" rx="4.5" fill="#F0C24B"/><rect x="12" y="27.5" width="29" height="9" rx="4.5" fill="#C77DFF"/><rect x="12" y="42" width="19" height="9" rx="4.5" fill="#6AA8F0"/></svg></a>Spec Tracker</h1><span class="patchchip">12.1 PTR — CURSE OF ULA'TEK</span></div>
+    <div class="titlerow"><h1 class="title"><a id="brandhome" class="brandlink" href="#" title="Back to the default view"><svg class="brandmark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#130B22" stroke="#B57BEE" stroke-opacity=".45" stroke-width="2.5"/><rect x="12" y="13" width="40" height="9" rx="4.5" fill="#F0C24B"/><rect x="12" y="27.5" width="29" height="9" rx="4.5" fill="#C77DFF"/><rect x="12" y="42" width="19" height="9" rx="4.5" fill="#6AA8F0"/></svg></a>Spec Tracker</h1><span class="patchchip">__ERA_PATCH_CHIP__</span></div>
     <div class="rule"></div>
     <!-- One sentence of lede; the mental model folds. This paragraph ran five lines and
          was ~40% of a 329px masthead sitting directly above a page people check daily. -->
     <div class="sub">Where every spec of <b>WoW: Midnight</b> stands — <b>not one site's opinion</b>, but every major tier list distilled into a single consensus with a <b>±</b> wherever they disagree, layered with live numbers, sim profiles, and per-spec PTR reads. <details class="sub-more"><summary>How to read it</summary><span id="tlcount">Several</span> tier lists feed a computed <b>consensus</b>, with a <b>±</b> marker where they disagree — flip between them with <b>View</b>, or pick <b>Ours: 12.1&nbsp;✦</b> for this site's own Season-2 forecast (a projection, never a source). Filter by era or a specific fight, and click <b>any row</b> for the full read: PTR changes, current numbers with ranks, sim fight profile, and community takes. Two tools up top: <b>📊 The Ladder</b> draws any measured ranking as a chart, and <b>⊞ Compare all</b> is the whole roster against every rating and rank on one screen. The <b>⚙ S2 Gearing</b> tab is a separate explorer for Season-2 gear and loot sources.</details></div>
     <div class="stamp">
-      <span><b>Baseline:</b> 12.0.7 / Season 1</span>
+      <span><b>Baseline:</b> __ERA_LIVE_LABEL__ / __ERA_LIVE_SEASON__</span>
       <span><b>PTR:</b> 12.1 “Curse of Ula'tek”</span>
       <span id="stamp-snapshot"></span>
     </div>
@@ -873,8 +873,8 @@ try {
     <div class="seg" id="srcseg" role="group" aria-label="Which ratings the tier columns show"></div>
     <div class="seg" id="eraseg" role="group" aria-label="Era" title="Filters verdicts, writeups, era-tagged numbers and creator takes. It does not change the tier columns — those follow the View picker.">
       <button data-era="both" aria-pressed="true">Both</button>
-      <button data-era="live" aria-pressed="false" id="eralive">12.0.7</button>
-      <button data-era="ptr" aria-pressed="false" id="eraptr">12.1 PTR</button>
+      <button data-era="live" aria-pressed="false" id="eralive">__ERA_LIVE_LABEL__</button>
+      <button data-era="ptr" aria-pressed="false" id="eraptr">__ERA_PTR_LABEL__</button>
     </div>
     <div class="seg" id="roleseg" role="group" aria-label="Filter by role">
       <button data-role="All" aria-pressed="true">All</button>
@@ -1003,7 +1003,7 @@ try {
         <div class="srclist" id="srclist"></div>
       </div>
       <div>
-        <p class="foot-h">12.1 PTR build feed</p>
+        <p class="foot-h">__ERA_BUILD_FEED_HEAD__</p>
         <div class="srclist" id="buildfeed"></div>
         <p class="foot-h">Refresh with live logs</p>
         <div class="live" id="livelinks">
@@ -1017,7 +1017,7 @@ try {
         </p>
       </div>
     </div>
-    <div class="footbrand"><svg class="footmark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#130B22" stroke="#B57BEE" stroke-opacity=".45" stroke-width="2.5"/><rect x="12" y="13" width="40" height="9" rx="4.5" fill="#F0C24B"/><rect x="12" y="27.5" width="29" height="9" rx="4.5" fill="#C77DFF"/><rect x="12" y="42" width="19" height="9" rx="4.5" fill="#6AA8F0"/></svg><div><div class="footword">Spec Tracker</div><p class="foottag">A multi-source class &amp; spec consensus for World of Warcraft — live numbers, PTR reads, and a forecast that shows its math. Updated nightly.</p><p class="footcover">Now covering: 12.0.7 / Season 1 → 12.1 PTR “Curse of Ula'tek”</p></div></div>
+    <div class="footbrand"><svg class="footmark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#130B22" stroke="#B57BEE" stroke-opacity=".45" stroke-width="2.5"/><rect x="12" y="13" width="40" height="9" rx="4.5" fill="#F0C24B"/><rect x="12" y="27.5" width="29" height="9" rx="4.5" fill="#C77DFF"/><rect x="12" y="42" width="19" height="9" rx="4.5" fill="#6AA8F0"/></svg><div><div class="footword">Spec Tracker</div><p class="foottag">A multi-source class &amp; spec consensus for World of Warcraft — live numbers, PTR reads, and a forecast that shows its math. Updated nightly.</p><p class="footcover">__ERA_COVERAGE_LINE__</p></div></div>
     <div class="credits-block">
       <p class="foot-h">Creators &amp; theorycrafters</p>
       <p class="fine" style="margin-top:0">The tiers, sims, and takes here are the work of the WoW community. <b style="color:var(--ink-dim)">Creator takes are cited opinions — quoted, linked, and dated; never altered or presented as our own.</b> Full credit and thanks to everyone whose analysis this aggregates:</p>
