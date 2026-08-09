@@ -2889,9 +2889,15 @@ function openSpecFromOverlay(cls, spec){
       // itself is a meaningful 0-100 score — show it dimmed with its n, and sort it by
       // value BELOW every ranked row (ranks are -1..-40; values map far under that).
       if(col.scoreWhenUnranked && m.value != null)
-        return { rank:null, val:m.value, score:-1000 + m.value,
+        return { rank:null, val:m.value, belowFloor:m.n != null, n:m.n ?? null, score:-1000 + m.value,
                  tip:name+" — score "+m.value+"/100, n="+(m.n ?? "?")+" parses: below the 10-parse rank floor, so shown as a score, not a rank" };
-      return { rank:null, score:null, tip:col.label+": fetched but below the 10-parse rank floor (n="+(m.n ?? "?")+")" };
+      // LANDED BUT TOO THIN TO RANK (2026-08-08). This used to fall through to the same "—"
+      // the legend defines as "it exists but has not landed" — the wrong meaning for a row we
+      // fetched successfully and then declined to rank. 77 rows are in this state today, all
+      // PTR series, n from 1 to 9. Carry n so the cell can state it instead of a glyph the
+      // reader has to look up (and which, here, would be a lie).
+      return { rank:null, score:null, belowFloor:m.n != null, n:m.n ?? null,
+               tip:col.label+": fetched but below the 10-parse rank floor (n="+(m.n ?? "?")+")" };
     }
     // A rank clears MIN_RANK_N but may still rest on very few parses; carry that through so
     // the cell can SAY so in text. Colour/tooltip alone would be invisible on touch.
@@ -2951,6 +2957,8 @@ function openSpecFromOverlay(cls, spec){
   function rankHtml(c){
     if(c.rank == null && c.val != null)
       return '<span class="all-val" title="'+esc(c.tip)+'">'+esc(c.val)+'</span>';
+    if(c.rank == null && c.belowFloor)
+      return '<span class="all-none thin-n" title="'+esc(c.tip)+'">n='+esc(String(c.n))+'</span>';
     if(c.rank == null) return '<span class="all-none" title="'+esc(c.tip)+'">'+(c.na ? "·" : "—")+'</span>';
     // A thin-sample rank carries a visible dagger, not just a tooltip — see the legend
     // under the matrix. Two ranks of equal position built on 21 vs 1,107 parses are not
@@ -3000,7 +3008,7 @@ function openSpecFromOverlay(cls, spec){
     const roles = ["All","DPS","Healer","Tank"].map(r=>'<button data-ar="'+r+'" aria-pressed="'+(r===A.role)+'">'+r+'</button>').join("");
 
     ov.innerHTML = '<div class="finder-panel all-panel" role="dialog" aria-modal="true" aria-label="Compare all specs">'
-      + '<div class="finder-head"><div><h2>⊞ Compare all</h2><p>Every spec against every rating and rank, on one screen. Click a column to sort, use the row under it to filter, click a spec to open its card. Letters are tier ratings — each source’s own, their computed consensus, and our 12.1 forecast; <b>#numbers are measured ranks within that spec’s role</b> and are never turned into grades. <b>·</b> means no such measurement exists for that role; <b>—</b> means it exists but has not landed; <b class="thin-n">†</b> marks a rank built on fewer than 100 logged parses — real, but thin enough that it should not be read like the dense cuts beside it.</p></div>'
+      + '<div class="finder-head"><div><h2>⊞ Compare all</h2><p>Every spec against every rating and rank, on one screen. Click a column to sort, use the row under it to filter, click a spec to open its card. Letters are tier ratings — each source’s own, their computed consensus, and our 12.1 forecast; <b>#numbers are measured ranks within that spec’s role</b> and are never turned into grades. <b>·</b> means no such measurement exists for that role; <b>—</b> means it exists but has not landed; <b class="thin-n">n=…</b> means it DID land but on too few logs to rank (under 10); <b class="thin-n">†</b> marks a rank built on fewer than 100 logged parses — real, but thin enough that it should not be read like the dense cuts beside it.</p></div>'
       + '<button class="finder-x" id="all-close" aria-label="Close">✕</button></div>'
       + '<div class="all-hd"><div class="seg" role="group" aria-label="Bracket" id="all-bkt">'+bkt+'</div>'
       + '<div class="seg" role="group" aria-label="Role" id="all-role">'+roles+'</div>'
