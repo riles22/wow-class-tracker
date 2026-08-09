@@ -3,6 +3,29 @@
 **Status:** SCOPED 2026-08-08. Not built. Must land **on 12.1 launch (2026-08-11)**, not before —
 today the page is telling the truth, and these literals only become lies at launch.
 
+## Scope gap closed 2026-08-08: this covers BOTH pages
+
+The original inventory covered `src/template.html` only. But since 2026-08-05 the tracker and the
+gearing explorer share a masthead and a tab strip and deliberately read as one site, and
+`gearing/src/app.template.html` carries its own era literals with no `PHASES` equivalent — so they
+are a hand-edit that will be missed unless listed here. A visitor tabbing from a correctly
+relabelled tracker to a gearing page still branded "12.1 PTR" sees the site contradict itself.
+
+Gearing literals that invert on **08-11** (verified against HEAD; note the base64 woff2 blobs make a
+naive grep unusable — filter to short lines):
+- `:301` the masthead `patchchip` — **"12.1 PTR — CURSE OF ULA'TEK"**, the first thing a visitor
+  reads, and ungated.
+- `:1209` "Charge planning (PTR)" · `:1214` "These PTR details may change" · `:1215` "PTR achievement"
+- `:1636` "confirm the PTR preview" · `:1866` "Catalyst policy: Blizzard 12.1 PTR notes"
+- `:1297-1298` "…patch 12.0.7 **(live)** while 12.1 priorities remain provisional" — here the
+  "12.0.7" is interpolated (`esc(priorityPatch)`) and correctly stays; the literals that invert are
+  the word **(live)** and **"while 12.1 priorities remain provisional"**. Gated by `usingGuide`
+  (`:1277`), so it shows only for guide-fallback specs.
+- `:307` "season opens Aug 18, 2026" and `:397` "Verified Aug 1, 2026" — dates that go stale rather
+  than invert, but belong in the same pass.
+
+No test pins any of these strings, so nothing will catch a miss.
+
 ## The problem in one line
 
 `src/template.html` hardcodes **36 occurrences of "12.1 PTR" and 30 of "12.0.7"**. The Era toggle
