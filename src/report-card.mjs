@@ -336,7 +336,23 @@ if (isMain) {
     // launchPair now returns a REASON rather than a bare null, because "launch has not
     // happened" and "the season has not settled" call for different waiting.
     if (pair.reason) console.log(`\n(no grade yet: ${pair.reason})`);
-    forecast = snapshots[0]; actual = snapshots.at(-1); mode = "drift";
+    /* DEFAULT BASELINE (2026-08-08). This used to be snapshots[0] — the OLDEST snapshot,
+       which predates the 2026-07-09 enrichment and therefore carries no projections at all.
+       A bare `npm run report-card` printed "coverage 0/80 · 80 declined": a real reading of
+       a useless pair, and indistinguishable from the tool being broken. Since this is the
+       command someone runs when they want to know whether the forecast is any good — and
+       the one they will reach for around launch — the default must be a pair that can
+       actually say something. Prefer an explicit freeze if one exists, else the earliest
+       snapshot that carries a forecast, and name the choice so it is never mistaken for
+       a declaration about which snapshot is THE frozen one. */
+    const graded = snapshots.filter(s =>
+      Object.values(s.specs ?? {}).some(v => v.projection?.raid?.tier || v.projection?.mplus?.tier));
+    const frozen = snapshots.find(s => s.frozen);
+    forecast = frozen ?? graded[0] ?? snapshots[0];
+    actual = snapshots.at(-1);
+    mode = "drift";
+    if (forecast === actual && graded.length > 1) forecast = graded[graded.length - 2];
+    console.log(`  baseline: ${frozen ? "the declared FROZEN snapshot" : graded.length ? "earliest snapshot carrying a forecast" : "oldest snapshot (none carry a forecast — expect 0 coverage)"} — ${forecast.date}`);
   }
 
   const r = gradeSnapshot(forecast, actual, scales, { mode, specs });

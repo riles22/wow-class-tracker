@@ -16,6 +16,7 @@
     "prevalidate": "node src/apply-community-overrides.mjs",
     "validate": "node src/validate.mjs",
     "audit:creators": "node src/audit-creators.mjs",
+    "report-card": "node src/report-card.mjs",
     "serve": "node src/serve.mjs"
   },
   "engines": {
