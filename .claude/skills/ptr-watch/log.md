@@ -840,3 +840,35 @@ catch-up path.
   run report. The SEPARATE `SNAPSHOT_PHASE` flip is NOT due yet — owner decision 2026-08-08
   moved it to **Season 2 open, 08-18**, not patch launch, with `PHASE_FLIP_DUE` 08-20 as the
   red-gate backstop. Both still pending; `SNAPSHOT_PHASE` correctly still reads `12.1-ptr`.
+
+## 2026-08-09 (nightly CI, ~19:5xZ — second scheduled run of the day)
+
+- **No new build. Three channels checked, all clean.** (1) Thread `2317811.json`:
+  `highest_post_number` still **19** (Linxy, 2026-07-31) — nothing since. (2) Wowhead news
+  RSS, 40 items 08-02→08-09, bodies read from `content:encoded`: the 12.1 items are Jimothy
+  (cosmetic model in the newest PTR build), More Season 2 M+ Dungeon Tuning (Ruby Life
+  Pools / Temple of Sethraliss encounter numbers), Datamined Hotfixes (ability FLAGS —
+  immunity/reflect/LoS), Embellishment + Potion tuning (items) and the Atrophic Poison deep
+  dive (a **community** finding about how the existing Rogue raid buff interacts with
+  environmental damage — analysis, not a Blizzard change, so nothing to log). (3) Blue
+  posts: Discourse search over @Kaivax / @Linxy since 08-01 → season-end, housing, server
+  and M+ score topics only.
+- **LEAD WORTH WATCHING: Blizzard has promised a Season 2 CLASS TUNING ROADMAP** "in the
+  next couple of days" (Wowhead/Icy Veins/Raider.IO interview with Paul Kubit, news=382375,
+  2026-08-07). That is exactly the kind of post that lands as a standalone blue topic
+  rather than a reply in 2317811 — sweep the blue tracker for it, not just the thread.
+- **The 9 uncovered specs stay `ptr: null`** (Frost DK, Feral/Guardian/Resto Druid, Holy
+  Priest, Elemental Shaman, all three Warlocks). No spec-review article for any of them in
+  the RSS window, and Wowhead's own `/news/search` is **Cloudflare-403 to this runner**, so
+  lane (a) of the uncovered-spec procedure is not available from CI — it needs a local run
+  or a search engine. Nothing was manufactured from tuning lines.
+- **WCL: evidence-only, verdict `rdps-broken`** (`attemptedAt 2026-08-09T19:46:17Z`) — the
+  five rDPS/normalized cuts stay frozen (zones 46/47 at 08-07, zone 54 at 07-28, ptrDummy at
+  08-07); the three deterministic RAW series landed pre-agent: dummy 104 rows (1T 2000 /
+  2T 623 / 3T 284 / 5T 2000), Venomous Abyss 27 (6 of 8 bosses populated — Coiled Altar and
+  Ula'tek at 0 players, an untested window), M+ keys 27 (all 8 dungeons at the 2000 ceiling).
+- ⚠ **The two owner one-shots are still pending and still not ours to do**: the frozen
+  forecast (`node src/snapshot.mjs --frozen`, due 2026-08-10 after the nightly publishes;
+  12.1 lands 08-11) and the SEPARATE `SNAPSHOT_PHASE` flip (owner-set for Season 2 open,
+  08-18, backstopped by `PHASE_FLIP_DUE` 08-20). `SNAPSHOT_PHASE` correctly still reads
+  `12.1-ptr`.

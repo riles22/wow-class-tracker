@@ -1,6 +1,35 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
-  "videos": [],
+  "videos": [
+    {
+      "id": "_gt1uHQrh1s",
+      "creator": "izen (Izenhart)",
+      "title": "Season 2 Mythic+ DPS Meta | The Quintessential Quintet",
+      "published": "2026-08-09",
+      "queuedAt": "2026-08-09"
+    },
+    {
+      "id": "bqVHzvKJCuA",
+      "creator": "Sha",
+      "title": "ptr and chill",
+      "published": "2026-08-09",
+      "queuedAt": "2026-08-09"
+    },
+    {
+      "id": "u869GspePck",
+      "creator": "MadSkillzzTV",
+      "title": "12.1 Healer Prep/Alt Gearing & UI Setup | *NEW* UI",
+      "published": "2026-08-09",
+      "queuedAt": "2026-08-09"
+    },
+    {
+      "id": "Py_y0dRZBVQ",
+      "creator": "leak",
+      "title": "Survival Hunter UI for Midnight 12.1 | Ellesmere UI + Import Codes in Description",
+      "published": "2026-08-09",
+      "queuedAt": "2026-08-09"
+    }
+  ],
   "skipped": [
     {
       "id": "02rLfzEKLq4",

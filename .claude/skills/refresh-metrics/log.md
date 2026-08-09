@@ -765,3 +765,46 @@ numbers (95th pct DPS / popularity / M+ score — ungated, not in required-sourc
   untouched** (zones 46/47 at 08-07, zone 54 at 07-28, ptrDummy at 08-07). Nothing papered
   over. Re-check next run — if `rateLimitData` answers again the outage has cleared, and the
   separate question of whether `rdps` itself is fixed is back to the standing one-retry rule.
+
+## 2026-08-09 (nightly CI, ~19:5x-20:0xZ — second scheduled run of the day)
+
+- **SIMC PARSE GOTCHA, and it was silently wrong until this run.** Hero-talent profile names
+  can carry a **HYPHEN** — `MID1_Demon_Hunter_Havoc_Fel-Scarred`, `..._Devourer_Void-Scarred`
+  — so a profile-name character class of `[A-Za-z_'0-9]` **drops Havoc entirely** (it has no
+  hyphen-free variant) and reads Devourer off its lesser build: 115175 instead of the correct
+  **118341**, a 2.7% error that looks exactly like a real sim move. Include `-` in the pattern.
+  With it fixed, all 26 stored DPS values reproduced EXACTLY. Report unchanged from the last
+  two runs (SimC 1205-01, WoW 12.0.7.68974, git **678e66d384**, Timestamp 2026-08-08
+  07:28:33+0000) → `partial`, asOf stays 08-08. `MID1_Raid.txt` is a live in-progress log of
+  a NEWER run (git e5e7634a61, 4 of 49 profiles) with no ranking block — not ingestible.
+- **MURLOK PARSE GOTCHA:** the meta-item anchor emits its attributes in **either order**
+  (`<a class="vi-box meta-item…"` and `<a href="…" class="vi-box meta-item…"`), so a regex
+  anchored on `<a class=` drops 5 of 40 specs (Frost/Fire Mage, Marksmanship, Destruction
+  Warlock, one tank) — and it drops them *silently*, since the page still parses. Match
+  `<a [^>]*class="[^"]*meta-item`. 40/40 at 2026-08-09, **0 values moved** (second run of the
+  day; the pages refresh ~8-hourly).
+- **Archon** all four numeric series re-read from `specRankingsSection.table.data[]` at
+  `lastUpdated` 2026-08-09T12:00:00Z: 33 DPS / 7 HPS / 40 M+ score / 80 popularity, plus 40
+  survivability. Values identical to this morning's ingest (same daily aggregate); the
+  survivability BANDS moved on 16 of 40 — clustering, not throughput.
+- **Bloodmallet** `partial`: 26/27 charts (Augmentation still errors on all 3 retries), MID1
+  confirmed on every one, chart timestamps **still 2026-07-08 (Elemental 07-15)** and 0 of 26
+  target sets moved — 32 days without a re-sim against `maxAgeDays 5`. The heartbeat red is
+  the signal; do not paper it over by stamping the run date.
+- **WoWMeta** `partial`: JSON API only, 40 rows, `manifest.snapshotDate` **still 2026-08-05**
+  for the fourth consecutive night.
+- **Mythicstats** `success`: r.jina.ai still 403s, fetched directly; `/period/latest` is
+  server-rendered. Period **1075** (week 20; 2000 keys / 10000 chars, 3949 unique, 21.8 avg —
+  the unique-character count moved, so the sample rolled within the period), 39 rows, 0 values
+  moved. Devastation Evoker absent from the figure again (0 slug hits in raw HTML).
+- **Robydoby** (best-effort, outside the contract): both sheet indexes fetched; newest
+  **Mythic** week is still **24/7** (Sszorak + Twin Fangs). Unlike the last run the parse WAS
+  re-derived and verified — locate the 4-column `Class | 90th | 95th | 99th` header with a
+  real CSV reader (it sits at col 18 on both sheets, but do not hardcode that), strip
+  thousands separators, take the max 99th across the week's bosses: **31 rows, all 31
+  byte-identical to stored**, so nothing was merged and the two 07-16 leftovers were left
+  alone. Six cells oscillated between the 08-01 and 08-02 runs; they are stable now.
+- **WCL**: evidence-only (`rdps-broken`, 19:46:17Z). Five cuts frozen, three raw series
+  landed pre-agent (dummy 104 / Venomous Abyss 27 / M+ keys 27). No warcraftlogs.com fetch.
+- `npm test` 336 pass / 0 fail / 27 skipped; `npm run build` OK; `check-refresh --manifest`
+  passes (0 tier moves vs the committed baseline).

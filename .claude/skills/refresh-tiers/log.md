@@ -469,3 +469,29 @@ representation n; verified against the page, NOT a Blizzard retune); survivabili
 - **No season flip in the tracker.** Icy Veins, Method and Archon all still self-identify
   as 12.0.7 / Season 1, so `PHASES.liveSeason` and `SNAPSHOT_PHASE` stay put — but Wowhead
   going first is the first real exercise of the transition rule. Two days to launch.
+
+## 2026-08-09 (nightly CI, ~19:50-20:0xZ — the SECOND scheduled run of this UTC day)
+
+- **All four live sources + the era-gated PTR list re-fetched from scratch; 0 letters moved
+  anywhere except two Wowhead M+ healer cells.** Icy Veins 80 (6 pages, 207-362 KB),
+  icyveins-ptr 40 (3 pages, all placed, no TBD), Method 79 (Vengeance DH still absent from
+  the raid list — the documented omission), Wowhead 80, Archon 80 from the `throughput` /
+  `score` tierLists at `lastUpdated` 2026-08-09T12:00:00Z.
+- **WOWHEAD REBUILT ITS M+ HEALER PAGE TODAY** — `dateModified` 2026-08-08 → **2026-08-09**,
+  confirmed independently by `published-evidence/evidence.json`, and the page's own stored
+  `published` was advanced to match (the other five stay 08-08). Two moves, both upward:
+  **Preservation Evoker C→B and Restoration Druid C→B**. Because Wowhead is season-AHEAD
+  (s2), this touched no consensus letter — it reached the forecast through `ptrTierRead`,
+  moving Resto Druid M+ 36→39 and Preservation M+ 74→76 in score, 0 projection letters.
+- **Season state unchanged in both directions.** Icy Veins ("Patch 12.0.7 / Midnight",
+  "Season 1"), Method ("Midnight Season 1 Raids…") and Archon (12.0.7, S1 boss/dungeon set)
+  are still s1; Wowhead is still s2 on all six pages; icyveins-ptr still verifies the OTHER
+  way as "Patch 12.1 / Season 2". No `seasonVerified` value changed, so the frozen lane and
+  the consensus-of-3 composition are exactly as the morning run left them.
+- **Archon per-encounter: 51/51 pages, 680 tier rows, ZERO changes** — so
+  `data/encounter-tiers.json` was deliberately left untouched rather than rewritten with an
+  identical payload. Note for whoever rewrites it next: `json.dump` defaults escape the
+  em-dash in `_comment` and drop the trailing newline, which shows up as a 4-line diff on a
+  file whose data did not change (`ensure_ascii=False` + a trailing `\n`).
+- **Survivability re-cut again**: 16 of 40 moved one band (six A→B, eight B→C, Resto Shaman
+  B→A, Preservation C→B). Daily re-clustering of Archon's own window; feeds no consensus.

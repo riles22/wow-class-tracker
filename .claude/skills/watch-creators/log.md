@@ -1516,3 +1516,31 @@ those, so they need a different discovery route.
   Beast Mastery raid 35→37 and M+ 58→59; Protection Paladin raid 36→32 (the 19-day-old
   "buff" read replaced by a launch-eve "mixed" one) and M+ 55→56. `audit:creators` stays
   HIGH 0 / MED 0.
+
+## 2026-08-09 (nightly CI, ~20:0xZ — second scheduled run of the day)
+
+- **42/42 channels polled, 0 RSS failures. Nothing distilled, and that is the honest
+  outcome:** `transcript-fetch/summary.json` reads verdict `ok` with **0 requested / 0
+  fetched**, because today's local run had already drained the queue — the deterministic step
+  had nothing to work from, so no take or metaNote was added, changed or superseded.
+- Seen-set from the four structured lanes = **737** ids; **113 unseen** videos at or after the
+  cycle bound 2026-06-18 (0 pre-cycle). Most of that is the backlog the 08-08/08-09 runs
+  deliberately left reconsiderable, plus ~18 uploaded today.
+- **4 queued** (nightly = keyword-filtered, and chosen for where a take could actually move
+  something rather than for title relevance alone): izen `_gt1uHQrh1s` "Season 2 Mythic+ DPS
+  Meta" (general lane → metaNotes; his stored notes are 07-20/07-26), Sha `bqVHzvKJCuA`
+  "ptr and chill" (Brewmaster — the standing **raid-scoped tank gap**), MadSkillzzTV
+  `u869GspePck` 12.1 healer prep, leak `Py_y0dRZBVQ` 12.1 Survival (his Survival takes are
+  07-24, i.e. BEFORE the 07-31 tuning pass).
+- **Deliberately not queued, with reasons, because the Supadata budget is 100/MONTH:**
+  YoDaTV's **eight** "Everything You Need to Know about <dungeon> in Midnight Season 2" guides
+  (route/mechanics content, and his M+ tank takes are already 08-08 — eight requests for
+  probably zero outlook reads), Supatease's BG Blitz PvP tier list and his two Rank-1 arena
+  streams (**PvP is out of scope for a PvE tracker**), Bansherz' and Critcake's key/stream
+  VODs, and the June/July backlog (Musguete's raid POVs, Dratnos' PTR roundups, Whispyr's
+  testing series) whose videos **predate their creators' current live takes** — landing them
+  would create the different-dated same-lens live take that creator-invariant #3 names, and
+  `expertRead` averages a creator's live takes, so it would drag the current read backwards.
+- Per the 08-08/08-09 precedent, none of the dismissed-by-filter videos were written to
+  `seen[]`: they were not adjudicated on their transcripts, only on cost, so a local yt-dlp
+  run can still sweep them for free.

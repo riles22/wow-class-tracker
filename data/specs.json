@@ -131,7 +131,7 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 339.79,
+        "value": 339.8,
         "unit": "rating",
         "n": 47979,
         "asOf": "2026-08-05"
@@ -319,9 +319,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 556116,
+        "value": 556862,
         "unit": "DPS",
-        "n": 52,
+        "n": 51,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -339,9 +339,9 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 271211,
+        "value": 270109,
         "unit": "DPS",
-        "n": 541,
+        "n": 538,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -349,7 +349,7 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 332.99,
+        "value": 333,
         "unit": "rating",
         "n": 12668,
         "asOf": "2026-08-05"
@@ -545,9 +545,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 184724,
+        "value": 184916,
         "unit": "DPS",
-        "n": 55,
+        "n": 51,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -575,9 +575,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 540777,
+        "value": 540886,
         "unit": "DPS",
-        "n": 111,
+        "n": 110,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -595,9 +595,9 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 271353,
+        "value": 271365,
         "unit": "DPS",
-        "n": 329,
+        "n": 326,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -605,7 +605,7 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 395.34,
+        "value": 395.3,
         "unit": "rating",
         "n": 71188,
         "asOf": "2026-08-05"
@@ -798,9 +798,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 177459,
+        "value": 180028,
         "unit": "DPS",
-        "n": 8,
+        "n": 6,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -808,9 +808,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 2T)",
-        "value": 189661,
+        "value": 190590,
         "unit": "DPS",
-        "n": 2,
+        "n": 3,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -818,9 +818,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 472447,
+        "value": 484001,
         "unit": "DPS",
-        "n": 2,
+        "n": 1,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -838,9 +838,9 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 251801,
+        "value": 252878,
         "unit": "DPS",
-        "n": 151,
+        "n": 153,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -848,7 +848,7 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 344.83,
+        "value": 344.8,
         "unit": "rating",
         "n": 24990,
         "asOf": "2026-08-05"
@@ -1053,9 +1053,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 200117,
+        "value": 201285,
         "unit": "DPS",
-        "n": 332,
+        "n": 333,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -1063,9 +1063,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 2T)",
-        "value": 242542,
+        "value": 274645,
         "unit": "DPS",
-        "n": 6,
+        "n": 11,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -1073,9 +1073,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 3T)",
-        "value": 290098,
+        "value": 322793,
         "unit": "DPS",
-        "n": 12,
+        "n": 14,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -1083,9 +1083,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 539692,
+        "value": 540209,
         "unit": "DPS",
-        "n": 225,
+        "n": 221,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -1103,9 +1103,9 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 279344,
+        "value": 279261,
         "unit": "DPS",
-        "n": 844,
+        "n": 845,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -1113,7 +1113,7 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 395.57,
+        "value": 395.6,
         "unit": "rating",
         "n": 48888,
         "asOf": "2026-08-05"
@@ -1288,7 +1288,7 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 338.21,
+        "value": 338.2,
         "unit": "rating",
         "n": 18393,
         "asOf": "2026-08-05"
@@ -1461,9 +1461,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 189012,
+        "value": 189120,
         "unit": "DPS",
-        "n": 181,
+        "n": 178,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -1471,9 +1471,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 2T)",
-        "value": 260051,
+        "value": 257766,
         "unit": "DPS",
-        "n": 55,
+        "n": 59,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -1491,9 +1491,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 509209,
+        "value": 509765,
         "unit": "DPS",
-        "n": 47,
+        "n": 46,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -1511,9 +1511,9 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 263821,
+        "value": 264855,
         "unit": "DPS",
-        "n": 803,
+        "n": 799,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -1540,7 +1540,7 @@
       }
     },
     "survivability": {
-      "tier": "B",
+      "tier": "C",
       "source": "archon",
       "asOf": "2026-08-09"
     },
@@ -1691,9 +1691,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 183237,
+        "value": 183259,
         "unit": "DPS",
-        "n": 28,
+        "n": 27,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -1721,9 +1721,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 470038,
+        "value": 476585,
         "unit": "DPS",
-        "n": 38,
+        "n": 35,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -1741,9 +1741,9 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 269443,
+        "value": 265984,
         "unit": "DPS",
-        "n": 101,
+        "n": 104,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -1751,7 +1751,7 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 356.32,
+        "value": 356.3,
         "unit": "rating",
         "n": 14609,
         "asOf": "2026-08-05"
@@ -1770,7 +1770,7 @@
       }
     },
     "survivability": {
-      "tier": "B",
+      "tier": "C",
       "source": "archon",
       "asOf": "2026-08-09"
     },
@@ -1904,7 +1904,7 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 394.32,
+        "value": 394.3,
         "unit": "rating",
         "n": 83423,
         "asOf": "2026-08-05"
@@ -1945,7 +1945,7 @@
       "mplus": {
         "icyveins": "B",
         "method": "A",
-        "wowhead": "C",
+        "wowhead": "B",
         "archon": "C",
         "icyveins-ptr": "B"
       }
@@ -2063,7 +2063,7 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 324.28,
+        "value": 324.3,
         "unit": "rating",
         "n": 19048,
         "asOf": "2026-08-05"
@@ -2268,9 +2268,9 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 236417,
+        "value": 236676,
         "unit": "DPS",
-        "n": 156,
+        "n": 155,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -2278,14 +2278,14 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 413.51,
+        "value": 413.5,
         "unit": "rating",
         "n": 22667,
         "asOf": "2026-08-05"
       }
     ],
     "survivability": {
-      "tier": "A",
+      "tier": "B",
       "source": "archon",
       "asOf": "2026-08-09"
     },
@@ -2460,9 +2460,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 186320,
+        "value": 186716,
         "unit": "DPS",
-        "n": 106,
+        "n": 100,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -2510,9 +2510,9 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 236368,
+        "value": 237544,
         "unit": "DPS",
-        "n": 86,
+        "n": 83,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -2520,7 +2520,7 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 329.89,
+        "value": 329.9,
         "unit": "rating",
         "n": 4895,
         "asOf": "2026-08-05"
@@ -2539,7 +2539,7 @@
       }
     },
     "survivability": {
-      "tier": "B",
+      "tier": "C",
       "source": "archon",
       "asOf": "2026-08-09"
     },
@@ -2583,7 +2583,7 @@
       "mplus": {
         "icyveins": "C",
         "method": "B",
-        "wowhead": "C",
+        "wowhead": "B",
         "archon": "C",
         "icyveins-ptr": "B"
       }
@@ -2715,14 +2715,14 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 330.05,
+        "value": 330,
         "unit": "rating",
         "n": 8724,
         "asOf": "2026-08-05"
       }
     ],
     "survivability": {
-      "tier": "C",
+      "tier": "B",
       "source": "archon",
       "asOf": "2026-08-09"
     },
@@ -2889,9 +2889,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 178768,
+        "value": 179849,
         "unit": "DPS",
-        "n": 15,
+        "n": 13,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -2939,9 +2939,9 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 231440,
+        "value": 230740,
         "unit": "DPS",
-        "n": 157,
+        "n": 154,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -2949,7 +2949,7 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 350.04,
+        "value": 350,
         "unit": "rating",
         "n": 67220,
         "asOf": "2026-08-05"
@@ -3137,9 +3137,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 206714,
+        "value": 206816,
         "unit": "DPS",
-        "n": 269,
+        "n": 266,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -3167,7 +3167,7 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 519739,
+        "value": 520352,
         "unit": "DPS",
         "n": 174,
         "asOf": "2026-08-09",
@@ -3187,9 +3187,9 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 292358,
+        "value": 292189,
         "unit": "DPS",
-        "n": 595,
+        "n": 594,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -3197,7 +3197,7 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 335.53,
+        "value": 335.5,
         "unit": "rating",
         "n": 16019,
         "asOf": "2026-08-05"
@@ -3401,9 +3401,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 517173,
+        "value": 517908,
         "unit": "DPS",
-        "n": 53,
+        "n": 52,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -3431,7 +3431,7 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 369.04,
+        "value": 369,
         "unit": "rating",
         "n": 13619,
         "asOf": "2026-08-05"
@@ -3460,7 +3460,7 @@
       }
     },
     "survivability": {
-      "tier": "A",
+      "tier": "B",
       "source": "archon",
       "asOf": "2026-08-09"
     },
@@ -3636,9 +3636,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 193331,
+        "value": 193575,
         "unit": "DPS",
-        "n": 257,
+        "n": 261,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -3656,9 +3656,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 3T)",
-        "value": 318645,
+        "value": 323979,
         "unit": "DPS",
-        "n": 19,
+        "n": 20,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -3666,9 +3666,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 591657,
+        "value": 590062,
         "unit": "DPS",
-        "n": 515,
+        "n": 550,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -3686,9 +3686,9 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 276287,
+        "value": 277692,
         "unit": "DPS",
-        "n": 1895,
+        "n": 1913,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -3696,7 +3696,7 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 341.61,
+        "value": 341.6,
         "unit": "rating",
         "n": 27519,
         "asOf": "2026-08-05"
@@ -3715,7 +3715,7 @@
       }
     },
     "survivability": {
-      "tier": "B",
+      "tier": "C",
       "source": "archon",
       "asOf": "2026-08-09"
     },
@@ -3880,9 +3880,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 179016,
+        "value": 180763,
         "unit": "DPS",
-        "n": 24,
+        "n": 31,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -3910,7 +3910,7 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 477651,
+        "value": 491539,
         "unit": "DPS",
         "n": 42,
         "asOf": "2026-08-09",
@@ -3940,7 +3940,7 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 330.71,
+        "value": 330.7,
         "unit": "rating",
         "n": 4677,
         "asOf": "2026-08-05"
@@ -3959,7 +3959,7 @@
       }
     },
     "survivability": {
-      "tier": "A",
+      "tier": "B",
       "source": "archon",
       "asOf": "2026-08-09"
     },
@@ -4134,9 +4134,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 177985,
+        "value": 178357,
         "unit": "DPS",
-        "n": 32,
+        "n": 28,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -4164,9 +4164,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 520517,
+        "value": 525044,
         "unit": "DPS",
-        "n": 91,
+        "n": 86,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -4184,9 +4184,9 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 219454,
+        "value": 219762,
         "unit": "DPS",
-        "n": 42,
+        "n": 41,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -4194,7 +4194,7 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 342.48,
+        "value": 342.5,
         "unit": "rating",
         "n": 45958,
         "asOf": "2026-08-05"
@@ -4373,7 +4373,7 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 366.04,
+        "value": 366,
         "unit": "rating",
         "n": 21661,
         "asOf": "2026-08-05"
@@ -4549,7 +4549,7 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 384.87,
+        "value": 384.9,
         "unit": "rating",
         "n": 58222,
         "asOf": "2026-08-05"
@@ -4723,9 +4723,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 180608,
+        "value": 181651,
         "unit": "DPS",
-        "n": 8,
+        "n": 7,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -4753,9 +4753,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 544091,
+        "value": 544120,
         "unit": "DPS",
-        "n": 77,
+        "n": 76,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -4783,7 +4783,7 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 344.64,
+        "value": 344.6,
         "unit": "rating",
         "n": 15606,
         "asOf": "2026-08-05"
@@ -4802,7 +4802,7 @@
       }
     },
     "survivability": {
-      "tier": "B",
+      "tier": "C",
       "source": "archon",
       "asOf": "2026-08-09"
     },
@@ -5144,7 +5144,7 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 337.42,
+        "value": 337.4,
         "unit": "rating",
         "n": 53981,
         "asOf": "2026-08-05"
@@ -5348,9 +5348,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 480144,
+        "value": 490741,
         "unit": "DPS",
-        "n": 17,
+        "n": 13,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -5368,9 +5368,9 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 246357,
+        "value": 246869,
         "unit": "DPS",
-        "n": 304,
+        "n": 301,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -5378,7 +5378,7 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 361.99,
+        "value": 362,
         "unit": "rating",
         "n": 81525,
         "asOf": "2026-08-05"
@@ -5397,7 +5397,7 @@
       }
     },
     "survivability": {
-      "tier": "B",
+      "tier": "C",
       "source": "archon",
       "asOf": "2026-08-09"
     },
@@ -5574,7 +5574,7 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 350.06,
+        "value": 350.1,
         "unit": "rating",
         "n": 35996,
         "asOf": "2026-08-05"
@@ -5733,7 +5733,7 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 333.72,
+        "value": 333.7,
         "unit": "rating",
         "n": 15614,
         "asOf": "2026-08-05"
@@ -5905,9 +5905,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 181049,
+        "value": 182418,
         "unit": "DPS",
-        "n": 41,
+        "n": 36,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -5935,9 +5935,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 494536,
+        "value": 494798,
         "unit": "DPS",
-        "n": 25,
+        "n": 23,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -5955,9 +5955,9 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 261867,
+        "value": 261464,
         "unit": "DPS",
-        "n": 335,
+        "n": 332,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -5965,7 +5965,7 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 348.29,
+        "value": 348.3,
         "unit": "rating",
         "n": 29962,
         "asOf": "2026-08-05"
@@ -5984,7 +5984,7 @@
       }
     },
     "survivability": {
-      "tier": "B",
+      "tier": "C",
       "source": "archon",
       "asOf": "2026-08-09"
     },
@@ -6182,9 +6182,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 495177,
+        "value": 496519,
         "unit": "DPS",
-        "n": 6,
+        "n": 5,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -6202,9 +6202,9 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 260206,
+        "value": 259006,
         "unit": "DPS",
-        "n": 106,
+        "n": 105,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -6212,7 +6212,7 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 341.45,
+        "value": 341.5,
         "unit": "rating",
         "n": 8270,
         "asOf": "2026-08-05"
@@ -6449,9 +6449,9 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 257860,
+        "value": 259024,
         "unit": "DPS",
-        "n": 217,
+        "n": 218,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -6459,7 +6459,7 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 346.35,
+        "value": 346.4,
         "unit": "rating",
         "n": 8579,
         "asOf": "2026-08-05"
@@ -6478,7 +6478,7 @@
       }
     },
     "survivability": {
-      "tier": "A",
+      "tier": "B",
       "source": "archon",
       "asOf": "2026-08-09"
     },
@@ -6657,9 +6657,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 184086,
+        "value": 185588,
         "unit": "DPS",
-        "n": 186,
+        "n": 187,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -6687,9 +6687,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 471506,
+        "value": 473695,
         "unit": "DPS",
-        "n": 9,
+        "n": 8,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -6707,9 +6707,9 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 241942,
+        "value": 245144,
         "unit": "DPS",
-        "n": 65,
+        "n": 68,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -6717,7 +6717,7 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 356.92,
+        "value": 356.9,
         "unit": "rating",
         "n": 13132,
         "asOf": "2026-08-05"
@@ -6897,9 +6897,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 199903,
+        "value": 199957,
         "unit": "DPS",
-        "n": 99,
+        "n": 102,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -6907,9 +6907,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 2T)",
-        "value": 237799,
+        "value": 234407,
         "unit": "DPS",
-        "n": 28,
+        "n": 31,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -6917,9 +6917,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 3T)",
-        "value": 354325,
+        "value": 347201,
         "unit": "DPS",
-        "n": 13,
+        "n": 16,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -6927,9 +6927,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 629521,
+        "value": 630155,
         "unit": "DPS",
-        "n": 130,
+        "n": 133,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -6947,9 +6947,9 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 286572,
+        "value": 289047,
         "unit": "DPS",
-        "n": 871,
+        "n": 891,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -6957,7 +6957,7 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 346.52,
+        "value": 346.5,
         "unit": "rating",
         "n": 36875,
         "asOf": "2026-08-05"
@@ -7183,9 +7183,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 531814,
+        "value": 546137,
         "unit": "DPS",
-        "n": 21,
+        "n": 19,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -7203,9 +7203,9 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 245118,
+        "value": 245258,
         "unit": "DPS",
-        "n": 216,
+        "n": 209,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -7213,7 +7213,7 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 357.79,
+        "value": 357.8,
         "unit": "rating",
         "n": 26144,
         "asOf": "2026-08-05"
@@ -7412,14 +7412,14 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 370.62,
+        "value": 370.6,
         "unit": "rating",
         "n": 75341,
         "asOf": "2026-08-05"
       }
     ],
     "survivability": {
-      "tier": "B",
+      "tier": "A",
       "source": "archon",
       "asOf": "2026-08-09"
     },
@@ -7600,9 +7600,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 484981,
+        "value": 493658,
         "unit": "DPS",
-        "n": 13,
+        "n": 11,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -7620,9 +7620,9 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 274095,
+        "value": 274657,
         "unit": "DPS",
-        "n": 294,
+        "n": 291,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -7649,7 +7649,7 @@
       }
     },
     "survivability": {
-      "tier": "A",
+      "tier": "B",
       "source": "archon",
       "asOf": "2026-08-09"
     },
@@ -7809,9 +7809,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 177968,
+        "value": 178115,
         "unit": "DPS",
-        "n": 8,
+        "n": 6,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -7859,9 +7859,9 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 264365,
+        "value": 264562,
         "unit": "DPS",
-        "n": 134,
+        "n": 133,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -7869,7 +7869,7 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 357.36,
+        "value": 357.4,
         "unit": "rating",
         "n": 37433,
         "asOf": "2026-08-05"
@@ -7888,7 +7888,7 @@
       }
     },
     "survivability": {
-      "tier": "B",
+      "tier": "C",
       "source": "archon",
       "asOf": "2026-08-09"
     },
@@ -8048,9 +8048,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 182129,
+        "value": 182756,
         "unit": "DPS",
-        "n": 50,
+        "n": 58,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -8058,9 +8058,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 2T)",
-        "value": 290317,
+        "value": 297226,
         "unit": "DPS",
-        "n": 56,
+        "n": 65,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -8098,7 +8098,7 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 261822,
+        "value": 262329,
         "unit": "DPS",
         "n": 165,
         "asOf": "2026-08-09",
@@ -8108,7 +8108,7 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 321.14,
+        "value": 321.1,
         "unit": "rating",
         "n": 10623,
         "asOf": "2026-08-05"
@@ -8310,9 +8310,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 198322,
+        "value": 198987,
         "unit": "DPS",
-        "n": 206,
+        "n": 216,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -8320,9 +8320,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 2T)",
-        "value": 334523,
+        "value": 334890,
         "unit": "DPS",
-        "n": 145,
+        "n": 153,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -8330,9 +8330,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 3T)",
-        "value": 410634,
+        "value": 420314,
         "unit": "DPS",
-        "n": 36,
+        "n": 40,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -8340,9 +8340,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 538273,
+        "value": 543874,
         "unit": "DPS",
-        "n": 271,
+        "n": 263,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -8360,9 +8360,9 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 285120,
+        "value": 287274,
         "unit": "DPS",
-        "n": 1258,
+        "n": 1275,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -8370,7 +8370,7 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 354.36,
+        "value": 354.4,
         "unit": "rating",
         "n": 33494,
         "asOf": "2026-08-05"
@@ -8389,7 +8389,7 @@
       }
     },
     "survivability": {
-      "tier": "A",
+      "tier": "B",
       "source": "archon",
       "asOf": "2026-08-09"
     },
@@ -8573,9 +8573,9 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 192402,
+        "value": 192679,
         "unit": "DPS",
-        "n": 19,
+        "n": 18,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -8623,9 +8623,9 @@
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 213814,
+        "value": 214741,
         "unit": "DPS",
-        "n": 70,
+        "n": 68,
         "asOf": "2026-08-09",
         "era": "ptr"
       },
@@ -8633,7 +8633,7 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 353.67,
+        "value": 353.7,
         "unit": "rating",
         "n": 23417,
         "asOf": "2026-08-05"
@@ -8804,7 +8804,7 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 334.69,
+        "value": 334.7,
         "unit": "rating",
         "n": 24542,
         "asOf": "2026-08-05"
