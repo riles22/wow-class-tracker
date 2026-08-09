@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-DUQ0xHP3qZ+izjJauPgNuzRqv5dqialRbORLZcLY0Aw='; style-src 'unsafe-inline'; font-src data:; img-src data:; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-n9VWHAWFclk8GY0BaUwGi6J0fSN+bcMUgndJUYaRpXE='; style-src 'unsafe-inline'; font-src data:; img-src data:; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Spec Tracker &mdash; Season 2 Gearing</title>
 <!-- The Spec Tracker brand mark as favicon — same artwork as the tracker page, shipped
@@ -202,6 +202,10 @@ table.src-tbl tr:last-child td{border-bottom:none}
        padding:2px 7px;border-radius:5px;background:rgba(242,214,152,.14);color:var(--myth);margin-left:7px}
 textarea{width:100%;min-height:160px;font-family:var(--mono);font-size:13px;resize:vertical;line-height:1.5}
 .footfam{margin-bottom:10px;color:var(--t2)}
+/* Always visible, never a disclosure: the harvest dates were the one thing a reader
+   needed to judge this page and the only thing hidden behind a tap. */
+.footfresh{margin:0 0 10px;color:var(--t2)}
+.footfresh b{color:var(--t1)}
 footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);
        font-size:12.5px;color:var(--t3);line-height:1.65}
 
@@ -1867,7 +1871,24 @@ function renderFooter() {
         : '; status <b>' + esc(String(healerProvider.status || 'pending').replace(/-/g, ' '))
           + '</b>. No healer rankings are embedded yet.') + '<br>'
     : '';
+  /* HOW OLD IS THIS PAGE (2026-08-08). Every harvest date lived inside the collapsed
+     "Data sources and technical notes" disclosure, so a visitor had no way to tell whether
+     they were reading last night's data or last month's without opening it — and these
+     harvests are MANUAL (Wowhead is unreachable from CI), so they genuinely do lag. The
+     tracker states its freshness in an always-visible banner; this is the same promise kept
+     on this page. Clock-free like the tracker's dataHealth: it states the oldest date it
+     holds rather than computing an age against the reader's clock, so it cannot lie when a
+     snapshot date is wrong. The enumeration stays in the disclosure below. */
+  const harvestDates = [RAID.harvestedAt, DUNG.harvestedAt, TIER.harvestedAt, SPECS.harvestedAt,
+    CATALYST.reviewedAt].filter(Boolean).sort();
+  const freshness = harvestDates.length
+    ? '<p class="footfresh">Gear and item data on this page was last harvested <b>' + esc(harvestDates[harvestDates.length - 1])
+      + '</b>' + (harvestDates[0] !== harvestDates[harvestDates.length - 1]
+        ? '; the oldest dataset here dates from <b>' + esc(harvestDates[0]) + '</b>' : '')
+      + '. Harvests are manual, so this page can lag the game — see the source notes below for each dataset.</p>'
+    : '';
   $('#foot').innerHTML = '<p class="footfam">Part of <a href="index.html"><b>Spec Tracker</b></a> — tier consensus, rankings and the 12.1 forecast for every spec. Made by <a href="https://github.com/riles22" target="_blank" rel="noopener noreferrer"><b>riles22</b></a>.</p>'
+    + freshness
     + scoring
     + (healerUsesItemScores(reference)
       ? '<b>Exact embedded healer item scores are used where available; unscored items use a separately sorted, visible guide-order fallback. The two scales are never compared. This is not a full character simulation.</b>'
