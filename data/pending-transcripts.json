@@ -2,46 +2,11 @@
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
   "videos": [
     {
-      "id": "_gt1uHQrh1s",
-      "creator": "izen (Izenhart)",
-      "title": "Season 2 Mythic+ DPS Meta | The Quintessential Quintet",
-      "published": "2026-08-09",
-      "queuedAt": "2026-08-09"
-    },
-    {
       "id": "bqVHzvKJCuA",
       "creator": "Sha",
       "title": "ptr and chill",
       "published": "2026-08-09",
       "queuedAt": "2026-08-09"
-    },
-    {
-      "id": "u869GspePck",
-      "creator": "MadSkillzzTV",
-      "title": "12.1 Healer Prep/Alt Gearing & UI Setup | *NEW* UI",
-      "published": "2026-08-09",
-      "queuedAt": "2026-08-09"
-    },
-    {
-      "id": "Py_y0dRZBVQ",
-      "creator": "leak",
-      "title": "Survival Hunter UI for Midnight 12.1 | Ellesmere UI + Import Codes in Description",
-      "published": "2026-08-09",
-      "queuedAt": "2026-08-09"
-    },
-    {
-      "id": "SV3Snl21XC8",
-      "creator": "Zorthas",
-      "title": "FINAL TIER LIST for Season 2 M+ Midnight",
-      "published": "2026-08-09",
-      "queuedAt": "2026-08-10"
-    },
-    {
-      "id": "V_60b0SN10o",
-      "creator": "Kalamazi",
-      "title": "I'm Back! Sunday PTR Slammin",
-      "published": "2026-08-10",
-      "queuedAt": "2026-08-10"
     }
   ],
   "skipped": [
@@ -975,6 +940,762 @@
       "title": "How to play UNHOLY DK in MIDNIGHT SEASON 2 / Rider + Sanlayn / Rotation, Talents",
       "reason": "Transcript read in full (local run 2026-08-09, discovered by the unfiltered cycle-bounded sweep rather than the queue). A Season 2 Unholy how-to-play guide: the Reanimation rework that sacrifices three magi to summon a lich, tier-set interactions, gear and stat priorities, and rotation. Mechanics throughout with no standing performance or outlook claim; the only comparative line is a rotational one, that Unholy's burst comes roughly every 90 seconds against Frost's 45. Obli already holds live Unholy takes (2026-08-01 unscoped, 2026-08-06 M+-scoped), so this adds no lens and no new read. In scope for him — community.json scopes Obli to Frost and Unholy.",
       "verifiedAt": "2026-08-09"
+    },
+    {
+      "id": "Py_y0dRZBVQ",
+      "creator": "leak",
+      "title": "Survival Hunter UI for Midnight 12.1 | Ellesmere UI + Import Codes in Description",
+      "reason": "Transcript read: a UI/addon import walkthrough (nameplate buff filtering, WeakAura setup). Names Survival only as the UI’s target audience — no spec performance or tuning content.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "V_60b0SN10o",
+      "creator": "Kalamazi",
+      "title": "I'm Back! Sunday PTR Slammin",
+      "reason": "Transcript read: PTR stream. Kalamazi’s substantive 12.1 Warlock work lives in an external community spreadsheet he links on stream (now expanded to cover M+); the stream itself carries only a passing \"Demo is good and consistent\" remark, too incidental to attribute as a take. Spreadsheet flagged in log.md as a manual-source lead.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "dI4E9S12Uy4",
+      "creator": "Nintern",
+      "title": "Midnight Season 2 Havoc Demon Hunter Guide | Talents, Rotation, Gearing, and More!",
+      "reason": "Transcript read: a genuine Season 2 Havoc Demon Hunter guide (talents, rotation, hero talents). NOT distilled because Nintern’s community.json scope is Demon Hunter [Devourer] only — flagged in log.md as a candidate scope widening for Riley rather than silently overridden.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "hUrdWl4RowM",
+      "creator": "Tettles",
+      "title": "Sweaty Gearing Minmaxes for Season 2 of Midnight",
+      "reason": "Transcript read: live-stream VOD (gameplay and chat). Spec mentions are incidental play-by-play, not Season 2 / 12.1 performance analysis.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "YymNj47LbhA",
+      "creator": "Tettles",
+      "title": "My Meta Prediction for This Season #worldofwarcraft #gaming",
+      "reason": "Transcript read: caption track is near-empty (music/no commentary), nothing to distil.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "AypjF-0iQD4",
+      "creator": "Tettles",
+      "title": "I hired casters for my Mythic+ key.....  #worldofwarcraft #gaming",
+      "reason": "Transcript read: caption track is near-empty (music/no commentary), nothing to distil.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "VEkFHSmuTG0",
+      "creator": "MadSkillzzTV",
+      "title": "Best Addons for Season 2? | EllesmereUI &amp; More | *NEW* Addon Changes in 12.1 Midnight",
+      "reason": "Transcript read: no distillable per-spec Season 2 / 12.1 performance claim within the creator’s scoped specs.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "5meb5eGN4tE",
+      "creator": "Sha",
+      "title": "Kings' Rest Quick Boss Guides | Midnight Season 2",
+      "reason": "Transcript read: live-stream VOD (gameplay and chat). Spec mentions are incidental play-by-play, not Season 2 / 12.1 performance analysis.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "X2ClP4LeRqo",
+      "creator": "Sha",
+      "title": "The Blinding Vale Quick Boss Guides | Midnight Season 2",
+      "reason": "Transcript read: no distillable per-spec Season 2 / 12.1 performance claim within the creator’s scoped specs.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "E_jfesQLCZU",
+      "creator": "Supatease",
+      "title": "Rank 1 World Multiclasser GO TIME 2 DAYS LEFT",
+      "reason": "Transcript read: live-stream VOD (gameplay and chat). Spec mentions are incidental play-by-play, not Season 2 / 12.1 performance analysis.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "5UqJSAB-Bqc",
+      "creator": "Maximum",
+      "title": "whats good",
+      "reason": "Transcript read: live-stream VOD (gameplay and chat). Spec mentions are incidental play-by-play, not Season 2 / 12.1 performance analysis.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "BdWbj_32Ob8",
+      "creator": "YoDaTV",
+      "title": "Everything YOU Need to Know About The Blinding Vale in Midnight Season 2...",
+      "reason": "Transcript read: no distillable per-spec Season 2 / 12.1 performance claim within the creator’s scoped specs.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "fx2wKASwVm0",
+      "creator": "YoDaTV",
+      "title": "Everything YOU Need to Know About Murder Row in Midnight Season 2...",
+      "reason": "Transcript read: live-stream VOD (gameplay and chat). Spec mentions are incidental play-by-play, not Season 2 / 12.1 performance analysis.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "t0krcSIAQ-k",
+      "creator": "YoDaTV",
+      "title": "Everything YOU Need to Know About Voidscar Arena in Midnight Season 2...",
+      "reason": "Transcript read: no distillable per-spec Season 2 / 12.1 performance claim within the creator’s scoped specs.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "Aau0sRo5NzU",
+      "creator": "YoDaTV",
+      "title": "Everything YOU Need to Know About Ruby Life Pools in Midnight Season 2...",
+      "reason": "Transcript read: structured video, but its subject sits outside the tracker’s per-spec raid/M+ layer (dungeon route, gearing or systems content).",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "0dsIWNCE4LA",
+      "creator": "YoDaTV",
+      "title": "Everything YOU Need to Know About Altar of Fangs in Midnight Season 2...",
+      "reason": "Transcript read: live-stream VOD (gameplay and chat). Spec mentions are incidental play-by-play, not Season 2 / 12.1 performance analysis.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "yMwy1TNEmdw",
+      "creator": "YoDaTV",
+      "title": "Everything YOU Need to Know About Temple of Sethraliss in Midnight Season 2...",
+      "reason": "Transcript read: no distillable per-spec Season 2 / 12.1 performance claim within the creator’s scoped specs.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "ZDZ-8v-SCyw",
+      "creator": "YoDaTV",
+      "title": "Everything YOU Need to Know About Den of Nalorakk in Midnight Season 2...",
+      "reason": "Transcript read: no distillable per-spec Season 2 / 12.1 performance claim within the creator’s scoped specs.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "3kE0i41UKsM",
+      "creator": "YoDaTV",
+      "title": "Everything YOU Need to Know About King's Rest in Midnight Season 2...",
+      "reason": "Transcript read: no distillable per-spec Season 2 / 12.1 performance claim within the creator’s scoped specs.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "GbS41sBOj3U",
+      "creator": "Dalaran Gaming",
+      "title": "Paladin's Survivability Is UNMATCHED! (5v5 1v1 Duels) - PvP WoW: Midnight 12.0.7",
+      "reason": "Transcript read: no distillable per-spec Season 2 / 12.1 performance claim within the creator’s scoped specs.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "QwbvLPZTh1U",
+      "creator": "Bansherz",
+      "title": "chilling new surv !guide out (4340 io, 10/10M Hunter) !talents !folio !craft !spec !ptr !guide",
+      "reason": "Transcript read: live-stream VOD (gameplay and chat). Spec mentions are incidental play-by-play, not Season 2 / 12.1 performance analysis.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "B2cqar6YA38",
+      "creator": "NeekapHere",
+      "title": "12.1 PRESEASON — Everything You Can Do in Week 1",
+      "reason": "Transcript read: no distillable per-spec Season 2 / 12.1 performance claim within the creator’s scoped specs.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "wEaJMOHJpEg",
+      "creator": "Supatease",
+      "title": "12.1 BG Blitz PVP Tier List (Prediction)",
+      "reason": "Transcript read: a 12.1 Battleground Blitz PvP tier list. PvP is outside the tracker’s raid/M+ brackets, so none of its letters or reads are in scope.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "pAEHKlaQZ5Q",
+      "creator": "Supatease",
+      "title": "Road to Rank 1 Boomkin",
+      "reason": "Transcript read: caption track is near-empty (music/no commentary), nothing to distil.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "Xbl1o6psw-M",
+      "creator": "Critcake",
+      "title": "Keys (7/8 +24s done, missing AA) - 4354io DPS Warrior",
+      "reason": "Transcript read: live-stream VOD (gameplay and chat). Spec mentions are incidental play-by-play, not Season 2 / 12.1 performance analysis.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "smRXl0QL3nA",
+      "creator": "Megasett",
+      "title": "DMG we test the raid",
+      "reason": "Transcript read: live-stream VOD (gameplay and chat). Spec mentions are incidental play-by-play, not Season 2 / 12.1 performance analysis.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "xFMUDPjrg5o",
+      "creator": "Megasett",
+      "title": "Mistweaver's Midnight Season 1 Timeline",
+      "reason": "Transcript read: no distillable per-spec Season 2 / 12.1 performance claim within the creator’s scoped specs.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "kBPEOFUArAQ",
+      "creator": "Sha",
+      "title": "ptr and chill",
+      "reason": "Transcript read: live-stream VOD (gameplay and chat). Spec mentions are incidental play-by-play, not Season 2 / 12.1 performance analysis.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "nBkg4dUSKXw",
+      "creator": "Maximum",
+      "title": "LF GM with anti euro bias",
+      "reason": "Transcript read: live-stream VOD (gameplay and chat). Spec mentions are incidental play-by-play, not Season 2 / 12.1 performance analysis.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "rPI3H5cGUm8",
+      "creator": "Nintern",
+      "title": "...Sure? | 12.1 PTR Devourer Changes 7/21",
+      "reason": "Transcript read: no distillable per-spec Season 2 / 12.1 performance claim within the creator’s scoped specs.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "hLvWxWS4alA",
+      "creator": "Megasett",
+      "title": "Skyreach Skip with Monk Only • #midnight #worldofwarcraft #monk #mistweaver",
+      "reason": "Transcript read: caption track is near-empty (music/no commentary), nothing to distil.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "I2tMsLhcSX8",
+      "creator": "Kesslive",
+      "title": "Warmode Trolling | #kesslive on #Twitch",
+      "reason": "Transcript read: caption track is near-empty (music/no commentary), nothing to distil.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "wdvEImCrM4U",
+      "creator": "Hopeful",
+      "title": "Gaming | Liquid Hopeful",
+      "reason": "Transcript read: live-stream VOD (gameplay and chat). Spec mentions are incidental play-by-play, not Season 2 / 12.1 performance analysis.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "zKok3iaJud4",
+      "creator": "NeekapHere",
+      "title": "This Week In WoW July 21st",
+      "reason": "Transcript read: no distillable per-spec Season 2 / 12.1 performance claim within the creator’s scoped specs.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "Po44tj5ZV00",
+      "creator": "LBNinja7",
+      "title": "Admitting Why I'm Bad at WoW",
+      "reason": "Transcript read: caption track is near-empty (music/no commentary), nothing to distil.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "fsZw_LlsxEQ",
+      "creator": "Hopeful",
+      "title": "Gaming | Liquid Hopeful",
+      "reason": "Transcript read: live-stream VOD (gameplay and chat). Spec mentions are incidental play-by-play, not Season 2 / 12.1 performance analysis.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "7Ta7gtyP_xY",
+      "creator": "Shindigg",
+      "title": "Stick to WoW buddy...",
+      "reason": "Transcript read: live-stream VOD (gameplay and chat). Spec mentions are incidental play-by-play, not Season 2 / 12.1 performance analysis.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "18v8Z_w1jjA",
+      "creator": "Shindigg",
+      "title": "DH KEYS",
+      "reason": "Transcript read: live-stream VOD (gameplay and chat). Spec mentions are incidental play-by-play, not Season 2 / 12.1 performance analysis.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "1M48UYOEzMg",
+      "creator": "Maximum",
+      "title": "world of warcraft",
+      "reason": "Transcript read: live-stream VOD (gameplay and chat). Spec mentions are incidental play-by-play, not Season 2 / 12.1 performance analysis.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "9AayAMn_Sfo",
+      "creator": "NeekapHere",
+      "title": "12.1 NEW Delves First Look -- Are They Any Good?",
+      "reason": "Transcript read: no distillable per-spec Season 2 / 12.1 performance claim within the creator’s scoped specs.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "ImFLuYEIG_Y",
+      "creator": "Megasett",
+      "title": "mw ptr keys",
+      "reason": "Transcript read: live-stream VOD (gameplay and chat). Spec mentions are incidental play-by-play, not Season 2 / 12.1 performance analysis.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "4U4edRAcKXQ",
+      "creator": "NeekapHere",
+      "title": "Battle for Azeroth Still Has Lessons for Modern WoW",
+      "reason": "Transcript read: structured video, but its subject sits outside the tracker’s per-spec raid/M+ layer (dungeon route, gearing or systems content).",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "n2ga6kdiGVQ",
+      "creator": "LBNinja7",
+      "title": "How to Heal a Demon Hunter Tank",
+      "reason": "Transcript read: caption track is near-empty (music/no commentary), nothing to distil.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "Ah1J0ggDJ2w",
+      "creator": "Megasett",
+      "title": "DMG raid test",
+      "reason": "Transcript read: live-stream VOD (gameplay and chat). Spec mentions are incidental play-by-play, not Season 2 / 12.1 performance analysis.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "oWLz9ZyV9Ko",
+      "creator": "LBNinja7",
+      "title": "The Cursed Slip-Up",
+      "reason": "Transcript read: caption track is near-empty (music/no commentary), nothing to distil.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "k4EWWydzaag",
+      "creator": "Hopeful",
+      "title": "20 MAGES VS SPOREFALL | Liquid Hopefull",
+      "reason": "Transcript read: no distillable per-spec Season 2 / 12.1 performance claim within the creator’s scoped specs.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "od5SXdhYlII",
+      "creator": "Hopeful",
+      "title": "Gaming | Liquid Hopeful",
+      "reason": "Transcript read: live-stream VOD (gameplay and chat). Spec mentions are incidental play-by-play, not Season 2 / 12.1 performance analysis.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "zJtyLN3DIKs",
+      "creator": "LBNinja7",
+      "title": "Mistweaver PUSH! Shaking Off Rust!! ~~~  !gfuel !discord !yt !youtube",
+      "reason": "Transcript read: live-stream VOD (gameplay and chat). Spec mentions are incidental play-by-play, not Season 2 / 12.1 performance analysis.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "9fnAgnOG8Ps",
+      "creator": "Hopeful",
+      "title": "Gaming | Liquid Hopeful",
+      "reason": "Transcript read: live-stream VOD (gameplay and chat). Spec mentions are incidental play-by-play, not Season 2 / 12.1 performance analysis.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "xcaX3R9ZVVo",
+      "creator": "NeekapHere",
+      "title": "This Week In WoW July 14th",
+      "reason": "Transcript read: live-stream VOD (gameplay and chat). Spec mentions are incidental play-by-play, not Season 2 / 12.1 performance analysis.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "InjY6ZP4YRg",
+      "creator": "Sam",
+      "title": "How to optimize Frost DK - How to avoid wasting Killing Machines Procs",
+      "reason": "Transcript read: no distillable per-spec Season 2 / 12.1 performance claim within the creator’s scoped specs.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "vDjj3xzcqcY",
+      "creator": "Megasett",
+      "title": "ptr normal raid test if my pc doesnt explode",
+      "reason": "Transcript read: live-stream VOD (gameplay and chat). Spec mentions are incidental play-by-play, not Season 2 / 12.1 performance analysis.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "qsCTpF_eYoY",
+      "creator": "Musguete",
+      "title": "Rogues are GOOD in this Fight? - 12.1 PTR Mythic Raid Testing",
+      "reason": "Transcript read: no distillable per-spec Season 2 / 12.1 performance claim within the creator’s scoped specs.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "UWlf_SqatPg",
+      "creator": "Megasett",
+      "title": "friend keys, alt prep, ptr normal raid test",
+      "reason": "Transcript read: live-stream VOD (gameplay and chat). Spec mentions are incidental play-by-play, not Season 2 / 12.1 performance analysis.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "YCyxU0uQCWc",
+      "creator": "Musguete",
+      "title": "Can Rogues Handle The Mythic Twin Fangs? - 12.1 PTR Mythic Raid Testing",
+      "reason": "Transcript read: no distillable per-spec Season 2 / 12.1 performance claim within the creator’s scoped specs.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "AMBl_vwF7o4",
+      "creator": "Nintern",
+      "title": "call me solo the way i be smuggling | 12.1 PTR Rotation Update",
+      "reason": "Transcript read: no distillable per-spec Season 2 / 12.1 performance claim within the creator’s scoped specs.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "wVJv0LEvOlg",
+      "creator": "Megasett",
+      "title": "team keys then friend keys",
+      "reason": "Transcript read: live-stream VOD (gameplay and chat). Spec mentions are incidental play-by-play, not Season 2 / 12.1 performance analysis.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "F_fWti_cRP8",
+      "creator": "Musguete",
+      "title": "Outlaw Rogue ST is PUMPING!! - 12.1 PTR Mythic Entombed Sentinels Raid Testing",
+      "reason": "Transcript read: no distillable per-spec Season 2 / 12.1 performance claim within the creator’s scoped specs.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "He5JuDCNJO0",
+      "creator": "Dratnos",
+      "title": "Mythic Coiled Altar (2nd to last boss) PTR Testing &amp; Commentary",
+      "reason": "Transcript read: no distillable per-spec Season 2 / 12.1 performance claim within the creator’s scoped specs.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "T5v5KSToMTg",
+      "creator": "Dratnos",
+      "title": "Mythic Twin Fangs PTR Testing &amp; Commentary",
+      "reason": "Transcript read: no distillable per-spec Season 2 / 12.1 performance claim within the creator’s scoped specs.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "LoEsxfdc3AQ",
+      "creator": "Megasett",
+      "title": "DMG mythic raid test, keys after",
+      "reason": "Transcript read: live-stream VOD (gameplay and chat). Spec mentions are incidental play-by-play, not Season 2 / 12.1 performance analysis.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "_NvJjBK65ME",
+      "creator": "Musguete",
+      "title": "Rogue are good in 2 Target Cleave? 12.1 PTR Mythic The Lost Explorers Raid Testing",
+      "reason": "Transcript read: no distillable per-spec Season 2 / 12.1 performance claim within the creator’s scoped specs.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "QClJlaGPcks",
+      "creator": "Dratnos",
+      "title": "Mythic Sszorak PTR Testing &amp; Commentary",
+      "reason": "Transcript read: no distillable per-spec Season 2 / 12.1 performance claim within the creator’s scoped specs.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "7oOsn3PHli0",
+      "creator": "Dratnos",
+      "title": "Mythic Vashnik the Malignant PTR Testing Commentary",
+      "reason": "Transcript read: no distillable per-spec Season 2 / 12.1 performance claim within the creator’s scoped specs.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "qntT8FdP3k8",
+      "creator": "Dratnos",
+      "title": "Mythic Lost Explorers PTR Testing Commentary",
+      "reason": "Transcript read: no distillable per-spec Season 2 / 12.1 performance claim within the creator’s scoped specs.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "8hoMmH6QHR8",
+      "creator": "Dratnos",
+      "title": "Mythic Entombed Sentinels PTR Testing Commentary",
+      "reason": "Transcript read: no distillable per-spec Season 2 / 12.1 performance claim within the creator’s scoped specs.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "P3Ye7clfeF0",
+      "creator": "Hopeful",
+      "title": "ARE THESE ANY GOOD?! | Arcane Mage | Liquid Hopeful",
+      "reason": "Transcript read: live-stream VOD (gameplay and chat). Spec mentions are incidental play-by-play, not Season 2 / 12.1 performance analysis.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "bKYmO-ci6ZY",
+      "creator": "Megasett",
+      "title": "PTR and live keys",
+      "reason": "Transcript read: live-stream VOD (gameplay and chat). Spec mentions are incidental play-by-play, not Season 2 / 12.1 performance analysis.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "pqAH9DPyDPs",
+      "creator": "Musguete",
+      "title": "How are Rogues in 12.1 Mythic Raids? Vashnik the Malignant 12.1 PTR Mythic Raid Testing Rogue POV",
+      "reason": "Transcript read: no distillable per-spec Season 2 / 12.1 performance claim within the creator’s scoped specs.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "_nzQxqrfq80",
+      "creator": "Preheat",
+      "title": "LIVE: Reclear! Frost and Fire Mage",
+      "reason": "Transcript read: live-stream VOD (gameplay and chat). Spec mentions are incidental play-by-play, not Season 2 / 12.1 performance analysis.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "mizAxRkeAcQ",
+      "creator": "Woxtoxic",
+      "title": "+23 Academy Outlaw POV",
+      "reason": "Transcript read: live-stream VOD (gameplay and chat). Spec mentions are incidental play-by-play, not Season 2 / 12.1 performance analysis.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "pcAk60L3zF8",
+      "creator": "NeekapHere",
+      "title": "This Week In WoW July 7th",
+      "reason": "Transcript read: no distillable per-spec Season 2 / 12.1 performance claim within the creator’s scoped specs.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "AiQc_Ag6lt0",
+      "creator": "Hopeful",
+      "title": "Gaming | Liquid Hopeful",
+      "reason": "Transcript read: live-stream VOD (gameplay and chat). Spec mentions are incidental play-by-play, not Season 2 / 12.1 performance analysis.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "RxfD5boViJs",
+      "creator": "Hopeful",
+      "title": "Gaming | Liquid Hopeful",
+      "reason": "Transcript read: live-stream VOD (gameplay and chat). Spec mentions are incidental play-by-play, not Season 2 / 12.1 performance analysis.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "zlj3pPdSySw",
+      "creator": "Woxtoxic",
+      "title": "23 Skyreach",
+      "reason": "Transcript read: live-stream VOD (gameplay and chat). Spec mentions are incidental play-by-play, not Season 2 / 12.1 performance analysis.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "Mh0cr8AyLUw",
+      "creator": "Woxtoxic",
+      "title": "23 Pit",
+      "reason": "Transcript read: live-stream VOD (gameplay and chat). Spec mentions are incidental play-by-play, not Season 2 / 12.1 performance analysis.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "HfK98Cnr-1o",
+      "creator": "Hopeful",
+      "title": "Gaming | Liquid Hopeful",
+      "reason": "Transcript read: live-stream VOD (gameplay and chat). Spec mentions are incidental play-by-play, not Season 2 / 12.1 performance analysis.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "0Eygql-_PHs",
+      "creator": "Megasett",
+      "title": "mw ptr",
+      "reason": "Transcript read: live-stream VOD (gameplay and chat). Spec mentions are incidental play-by-play, not Season 2 / 12.1 performance analysis.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "X_NSXLSUihc",
+      "creator": "Nintern",
+      "title": "My Prayers Have Been Answered! | 12.1 Devourer Update",
+      "reason": "Transcript read: in-scope Devourer build/rotation update (Mastery nerf pushes Student of Suffering out for Flamebound, Hungering Slash folded in via Reaper’s Toll, crit ≥ haste > mastery). Build construction rather than a power-level verdict, and it predates Nintern’s live 2026-08-09 Devourer take, so distilling it would only add a take that arrives already superseded.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "8mv3-sSqkyI",
+      "creator": "Obli",
+      "title": "Do you NEED to MYTHIC raid in Season 2 to be competitive in M+?",
+      "reason": "Transcript read: no distillable per-spec Season 2 / 12.1 performance claim within the creator’s scoped specs.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "vFTFiDeXIMo",
+      "creator": "Psybear",
+      "title": "Midnight 12.1 Curse Of Ula'Tek Developer Interview With Ion Hazzikostas",
+      "reason": "Transcript read: live-stream VOD (gameplay and chat). Spec mentions are incidental play-by-play, not Season 2 / 12.1 performance analysis.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "bIfCY63R_l0",
+      "creator": "Preheat",
+      "title": "LIVE: Reclear! Frost and Fire Mage",
+      "reason": "Transcript read: live-stream VOD (gameplay and chat). Spec mentions are incidental play-by-play, not Season 2 / 12.1 performance analysis.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "C4N5J0vll3Q",
+      "creator": "Dratnos",
+      "title": "All Mages get 2x Barrier! Blood DK Tier Reworked! Patch 12.1 PTR Update",
+      "reason": "Transcript read: a 12.1 PTR patch-notes roundup. He reads Blizzard’s own tuning text across many classes with brief commentary; his in-scope specs (Arms/Fury) get no independent analysis, and the roundup rule forbids stretching a class-tuning recap into takes for specs mentioned in passing.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "cETzmNVnX0Y",
+      "creator": "Sam",
+      "title": "Mythic L'ura Kill - Frost DK POV",
+      "reason": "Transcript read: caption track is near-empty (music/no commentary), nothing to distil.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "7rfJkUfL--k",
+      "creator": "Hopeful",
+      "title": "Gaming | Liquid Hopeful",
+      "reason": "Transcript read: live-stream VOD (gameplay and chat). Spec mentions are incidental play-by-play, not Season 2 / 12.1 performance analysis.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "UrdJfhBEFZU",
+      "creator": "NeekapHere",
+      "title": "This Week In WoW June 30th",
+      "reason": "Transcript read: no distillable per-spec Season 2 / 12.1 performance claim within the creator’s scoped specs.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "OaTtf2vOgHM",
+      "creator": "Hopeful",
+      "title": "Gaming | Liquid Hopeful",
+      "reason": "Transcript read: live-stream VOD (gameplay and chat). Spec mentions are incidental play-by-play, not Season 2 / 12.1 performance analysis.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "ynMMxrSko7g",
+      "creator": "Zorthas",
+      "title": "&quot;We're happy with Enhancement Shaman's gameplay&quot;",
+      "reason": "Transcript read: no distillable per-spec Season 2 / 12.1 performance claim within the creator’s scoped specs.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "tnY738whgcw",
+      "creator": "Obli",
+      "title": "Everything you can Anti-Magic Shell in Altar of Fangs / Midnight Season 2",
+      "reason": "Transcript read: no distillable per-spec Season 2 / 12.1 performance claim within the creator’s scoped specs.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "bUqmxVU5nkQ",
+      "creator": "Reholy",
+      "title": "PTR Altar of Fangs | BDK POV",
+      "reason": "Transcript read: no distillable per-spec Season 2 / 12.1 performance claim within the creator’s scoped specs.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "-6bKDUwy9aw",
+      "creator": "Obli",
+      "title": "Nek'zali the Soulcoiler HC PTR Testing / Frost &amp; Unholy DK POV / Midnight Season 2 12.1",
+      "reason": "Transcript read: no distillable per-spec Season 2 / 12.1 performance claim within the creator’s scoped specs.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "VgLjrapXvy0",
+      "creator": "Nintern",
+      "title": "Trinkets GALORE! | Midnight Season 2 Gear Overview | Devourer Demon Hunter",
+      "reason": "Transcript read: no distillable per-spec Season 2 / 12.1 performance claim within the creator’s scoped specs.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "iBeL2KsVG5M",
+      "creator": "Whispyr",
+      "title": "12.1 PTR Testing - The Twin Fangs",
+      "reason": "Transcript read: no distillable per-spec Season 2 / 12.1 performance claim within the creator’s scoped specs.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "_8zha1EXhp4",
+      "creator": "Whispyr",
+      "title": "12.1 PTR Testing - The Coiled Altar",
+      "reason": "Transcript read: no distillable per-spec Season 2 / 12.1 performance claim within the creator’s scoped specs.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "HxwmPXo6tWE",
+      "creator": "Whispyr",
+      "title": "12.1 PTR Testing - Vashnik the Malignant",
+      "reason": "Transcript read: no distillable per-spec Season 2 / 12.1 performance claim within the creator’s scoped specs.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "pjsyQeEktg4",
+      "creator": "Whispyr",
+      "title": "12.1 PTR Testing - Sszorak",
+      "reason": "Transcript read: no distillable per-spec Season 2 / 12.1 performance claim within the creator’s scoped specs.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "8ClYVbNTKPs",
+      "creator": "Whispyr",
+      "title": "12.1 PTR Testing - The Lost Explorers",
+      "reason": "Transcript read: live-stream VOD (gameplay and chat). Spec mentions are incidental play-by-play, not Season 2 / 12.1 performance analysis.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "QNyZG877_jU",
+      "creator": "Whispyr",
+      "title": "12.1 PTR Testing - Entombed Sentinels",
+      "reason": "Transcript read: no distillable per-spec Season 2 / 12.1 performance claim within the creator’s scoped specs.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "AzMkl7CfMlY",
+      "creator": "Whispyr",
+      "title": "12.1 PTR Testing - Nek'zali the Soulcoiler",
+      "reason": "Transcript read: no distillable per-spec Season 2 / 12.1 performance claim within the creator’s scoped specs.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "qd5pDEnzbx0",
+      "creator": "Reholy",
+      "title": "+20 Skyreach | Deathbringer Blood DK | Midnight M+",
+      "reason": "Transcript read: no distillable per-spec Season 2 / 12.1 performance claim within the creator’s scoped specs.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "88G7zOK9GO8",
+      "creator": "Sam",
+      "title": "+22 Algeth'ar Academy - Frost Death Knight - Midnight Season 1",
+      "reason": "Transcript read: no distillable per-spec Season 2 / 12.1 performance claim within the creator’s scoped specs.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "wk5nxevqT7s",
+      "creator": "Dratnos",
+      "title": "New Graphics, DPS Matters More! 12.1 M+ Dungeon Update",
+      "reason": "Transcript read: 12.1 M+ dungeon/system update (graphics, affix and DPS-weighting changes). Dungeon-pool content, no per-spec analysis in his Arms/Fury scope.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "jjwPf165mUM",
+      "creator": "Dratnos",
+      "title": "12.1 PTR Update - More Class Changes, Crests Clarified, and more!",
+      "reason": "Transcript read: 12.1 PTR news recap (class change list, crest clarifications). Blizzard-notes recap with no independent analysis of his in-scope Warrior specs.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "XfZDrZToEgY",
+      "creator": "Dratnos",
+      "title": "Patch 12.1 Updates - Crests, Catalysts, Pings, &amp; more info from the PTR",
+      "reason": "Transcript read: live-stream VOD (gameplay and chat). Spec mentions are incidental play-by-play, not Season 2 / 12.1 performance analysis.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "RAIXB4z5gkA",
+      "creator": "Zorthas",
+      "title": "First Look At 12.1 In Detail",
+      "reason": "Transcript read: no distillable per-spec Season 2 / 12.1 performance claim within the creator’s scoped specs.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "N8vo4rtOaeY",
+      "creator": "Hopeful",
+      "title": "Gaming | Liquid Hopeful",
+      "reason": "Transcript read: live-stream VOD (gameplay and chat). Spec mentions are incidental play-by-play, not Season 2 / 12.1 performance analysis.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "IOu6CHtB9EA",
+      "creator": "Nintern",
+      "title": "blow up | 12.1 PTR Devourer Changes",
+      "reason": "Transcript read: live-stream VOD (gameplay and chat). Spec mentions are incidental play-by-play, not Season 2 / 12.1 performance analysis.",
+      "verifiedAt": "2026-08-10"
+    },
+    {
+      "id": "H1aajfB_svA",
+      "creator": "Preheat",
+      "title": "LIVE: Reclear on Fire Mage",
+      "reason": "Transcript read: live-stream VOD (gameplay and chat). Spec mentions are incidental play-by-play, not Season 2 / 12.1 performance analysis.",
+      "verifiedAt": "2026-08-10"
     }
   ],
   "seen": [
@@ -1429,7 +2150,25 @@
     "OV48CFm26CE",
     "v2LP4H06WQU",
     "zfqABvSZFcY",
-    "vEcfwxffMdQ"
+    "vEcfwxffMdQ",
+    "DPmgXDoBJf8",
+    "ohlGpvJSwxs",
+    "J6ynDbhl9mA",
+    "_hXX7NDo2MU",
+    "BYw916n6fDo",
+    "Wv1CnmUu7Go",
+    "KnAyr9wwLBg",
+    "oQYIe6mE5UE",
+    "wRjk3OqCb3o",
+    "920FUodRQ1U",
+    "xuBle8eAIxM",
+    "y2OUiA01Mbs",
+    "g1bELOP4lvk",
+    "Z9jB1GEomtk",
+    "aS-wI80jeoI",
+    "JBS9m6HACYg",
+    "SoJ7IVCXwnY",
+    "FAQLChMkf9Y"
   ],
   "seenNote": "Video ids already considered by an earlier run that carry no richer record — migrated 2026-08-08 from backticked ids in watch-creators/log.md when the seen-set stopped being derived from prose. Distilled videos are cited by their take's url, transcript-verified rejects live in skipped[], and queued ones in videos[]; this lane is only for the remainder. Append here when a run dismisses a video at DISCOVERY (pre-cycle date, already-processed) without fetching a transcript."
 }

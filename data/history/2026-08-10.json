@@ -101,7 +101,7 @@
         },
         "mplus": {
           "tier": "A",
-          "score": 61,
+          "score": 64,
           "confidence": "medium"
         }
       }
@@ -234,7 +234,7 @@
         "simulationcraft|raid|SimC nightly Patchwerk DPS": 12,
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 7,
         "robydoby|raid|99th pct DPS (12.1 PTR Mythic raid testing, Robydoby)": 10,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 2,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 3,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 4,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 5,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 8,
@@ -346,7 +346,7 @@
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 7,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 13,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 14,
-        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 13,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 14,
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 21
       },
       "dummy": {
@@ -401,8 +401,8 @@
         "simulationcraft|raid|SimC nightly Patchwerk DPS": 3,
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 12,
         "robydoby|raid|99th pct DPS (12.1 PTR Mythic raid testing, Robydoby)": 15,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 13,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 21,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 14,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 18,
         "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 10,
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 9
       },
@@ -770,7 +770,7 @@
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 2,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 10,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 23,
-        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 1,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 2,
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 23
       },
       "dummy": {
@@ -828,7 +828,7 @@
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 10,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 11,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 22,
-        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 21,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 20,
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 4
       },
       "scores": {
@@ -916,7 +916,7 @@
         },
         "mplus": {
           "tier": "A+",
-          "score": 78,
+          "score": 81,
           "confidence": "medium"
         }
       }
@@ -939,8 +939,8 @@
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 24,
         "robydoby|raid|99th pct DPS (12.1 PTR Mythic raid testing, Robydoby)": 20,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 18,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 19,
-        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 14,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 20,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 13,
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 25
       },
       "scores": {
@@ -969,7 +969,7 @@
         },
         "mplus": {
           "tier": "C",
-          "score": 37,
+          "score": 34,
           "confidence": "medium"
         }
       }
@@ -1028,7 +1028,7 @@
         },
         "mplus": {
           "tier": "B",
-          "score": 43,
+          "score": 40,
           "confidence": "medium"
         }
       }
@@ -1076,7 +1076,7 @@
         },
         "mplus": {
           "tier": "B",
-          "score": 43,
+          "score": 40,
           "confidence": "high"
         }
       }
@@ -1126,7 +1126,7 @@
         },
         "mplus": {
           "tier": "S",
-          "score": 90,
+          "score": 88,
           "confidence": "medium"
         }
       }
@@ -1151,7 +1151,7 @@
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 12,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 6,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 9,
-        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 2,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 1,
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 18
       },
       "scores": {
@@ -1302,9 +1302,9 @@
         "robydoby|raid|99th pct DPS (12.1 PTR Mythic raid testing, Robydoby)": 17,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 14,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 8,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 20,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 21,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 15,
-        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 20,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 21,
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 5
       },
       "scores": {
@@ -1433,7 +1433,7 @@
         },
         "mplus": {
           "tier": "C",
-          "score": 30,
+          "score": 24,
           "confidence": "medium"
         }
       }
@@ -1455,7 +1455,7 @@
         "simulationcraft|raid|SimC nightly Patchwerk DPS": 14,
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 17,
         "robydoby|raid|99th pct DPS (12.1 PTR Mythic raid testing, Robydoby)": 6,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 14,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 15,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 13,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 9,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 17,
@@ -1493,7 +1493,7 @@
         },
         "mplus": {
           "tier": "B",
-          "score": 49,
+          "score": 46,
           "confidence": "medium"
         }
       }
@@ -1567,7 +1567,7 @@
         "simulationcraft|raid|SimC nightly Patchwerk DPS": 4,
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 4,
         "robydoby|raid|99th pct DPS (12.1 PTR Mythic raid testing, Robydoby)": 9,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 15,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 13,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 9,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 14,
         "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 17,
@@ -1684,7 +1684,7 @@
         "simulationcraft|raid|SimC nightly Patchwerk DPS": 6,
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 3,
         "robydoby|raid|99th pct DPS (12.1 PTR Mythic raid testing, Robydoby)": 8,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 3,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 2,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 10,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 3,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 1,
@@ -1722,7 +1722,7 @@
         },
         "mplus": {
           "tier": "A+",
-          "score": 80,
+          "score": 83,
           "confidence": "high"
         }
       }
@@ -1831,7 +1831,7 @@
         },
         "mplus": {
           "tier": "A+",
-          "score": 78,
+          "score": 82,
           "confidence": "high"
         }
       }
@@ -1854,7 +1854,7 @@
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 15,
         "robydoby|raid|99th pct DPS (12.1 PTR Mythic raid testing, Robydoby)": 22,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 17,
-        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 18,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 19,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 3,
         "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 7,
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 14
@@ -2052,7 +2052,7 @@
         },
         "mplus": {
           "tier": "S",
-          "score": 88,
+          "score": 91,
           "confidence": "high"
         }
       }

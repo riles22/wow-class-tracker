@@ -1582,3 +1582,56 @@ those, so they need a different discovery route.
 - Reminder to the next run: the monthly Supadata window resets before the queue does. When
   it does, `_gt1uHQrh1s` (izen, Season 2 M+ DPS meta) and `SV3Snl21XC8` (Zorthas) are the two
   that most change what the page says.
+
+## 2026-08-10 (local run — residential yt-dlp sweep; the nightly's transcript budget was exhausted)
+
+The run the previous entry asked for. The nightly hit Supadata `limit-exceeded` on the first
+queued video and distilled nothing; this run fetched transcripts itself with yt-dlp, which is
+free, so the date-bounded unfiltered sweep was affordable.
+
+- **Discovery**: 75 pollable creators (transcribable + `channelId`), 75/75 RSS HTTP 200 after
+  retry, zero feed failures. Seen-set **753** from the four structured lanes. **204 unseen
+  in-scope** videos (≥ the cycle bound 2026-06-18) — but only **130 unique**: creators listed
+  under several classes (YoDaTV and MadSkillzzTV under six each) are polled once per listing,
+  so the raw count triple-counts. Worth remembering before anyone panics at a big sweep number.
+- **Transcripts fetched: 111 of 130.** No title filtering, per the local-run rule. 19 had no
+  caption track at all and 1 livestream had not finished.
+- **Distilled 3 videos → 49 metaNotes + 4 takes:**
+  · **Zorthas — "FINAL TIER LIST for Season 2 M+ Midnight" (2026-08-09) → 40 metaNotes**, one
+    per spec: a complete pre-launch M+ read with explicit tiers for all 40. Superseded his two
+    live M+-lens notes (Blood DK, Holy Paladin, both 07-30); his 07-20/07-26 **raid**-lens notes
+    were left live as complementary.
+  · **izen — "Season 2 Mythic+ DPS Meta" (2026-08-09) → 9 metaNotes.** Superseded 8 of his
+    08-03/08-06 M+-lens notes. His `latest` was refreshed to the distilled read.
+  · **MadSkillzzTV — "12.1 Healer Prep" (2026-08-09) → 4 takes** (Holy Paladin, Resto Shaman,
+    Holy Priest, Mistweaver). His live 08-04 **raid**-lens Resto Shaman take was correctly left
+    alone; three M+-lens takes were superseded.
+- **ASR decoding worth recording**: Zorthas' captions render **Devourer** as "Devastator"/
+  "Devara"/"devour" and **Assassination** as "Azshara". Devourer is not missing from his tier
+  list — it is at the **top of A+**, found only by chasing the mangling. Grep for the spec name
+  alone and you will wrongly conclude a 39-spec list.
+- **108 videos → `skipped[]`** with per-video reasons drawn from the transcript, not the title.
+  The bulk are stream VODs; the substantive ones are recorded individually (Dratnos' patch-notes
+  roundups read out Blizzard's text with no independent analysis of his Arms/Fury scope;
+  Supatease's 12.1 tier list is PvP, outside our brackets; YoDaTV's dungeon guides are routes).
+- **18 videos → `seen[]`: no caption track exists**, so no transcript lane can ever reach them
+  (mostly silent gameplay POV clips — Sam's Frost DK and Woxtoxic's Bear runs). **Not queued on
+  purpose**: Supadata's `mode=native` serves YouTube's own auto-captions, the same thing yt-dlp
+  found absent, so queueing them would spend the monthly budget on a guaranteed miss. Two of
+  them do carry real signal — Musguete's "Outlaw Rogue is looking Good in Season 2 Raids!" and
+  "ARE ROGUES BACK in 12.1?!" — and are unreachable for the same reason. Flagged, not queued.
+- **Queue 6 → 1.** The survivor is `bqVHzvKJCuA` (Sha, "ptr and chill"), a livestream yt-dlp
+  reports as not yet begun; it keeps its slot because captions can still appear.
+
+### For Riley — two judgement calls left open rather than taken
+
+- **Nintern published a full Season 2 *Havoc* Demon Hunter guide** (`dI4E9S12Uy4`, 2026-08-10:
+  talents, rotation, hero talents). His `community.json` scope is Demon Hunter **[Devourer]**,
+  so no take was written. This is the "creator demonstrably covers a spec outside their listed
+  specs" case the skill says to surface rather than silently override — widening him to
+  `["Devourer", "Havoc"]` would make it distillable next run.
+- **Kalamazi maintains a 12.1 Warlock spreadsheet** he links on stream and says he has now
+  expanded to cover M+. The stream transcript itself carries only a passing "Demo is good and
+  consistent", too incidental to attribute; the spreadsheet is where his actual analysis lives
+  and would be a `paste-discord` / manual-source candidate. All three Warlock specs are still
+  among those without a writeup.
