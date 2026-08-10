@@ -495,3 +495,40 @@ representation n; verified against the page, NOT a Blizzard retune); survivabili
   file whose data did not change (`ensure_ascii=False` + a trailing `\n`).
 - **Survivability re-cut again**: 16 of 40 moved one band (six A→B, eight B→C, Resto Shaman
   B→A, Preservation C→B). Daily re-clustering of Archon's own window; feeds no consensus.
+
+## 2026-08-10 (nightly CI, headless Opus 5, single-shot; started 11:32Z)
+
+- **All five tier sources fetched live, 26 pages, 26/26 HTTP 200.** icyveins 6 (212-371 KB),
+  icyveins-ptr 3 (220-357 KB), method 2 (153/165 KB), wowhead 6 (73-322 KB), archon 6
+  aggregate + 51 encounter. 359 rating assignments applied, 0 unmatched.
+- **Transport note for Wowhead:** `/guide/*` is Cloudflare-403 to a bare UA but 200 with the
+  full browser header set (Accept / Accept-Language / Sec-Fetch-* / sec-ch-ua). No proxy
+  needed this run.
+- **Wowhead parse trap, cost one silent row:** keying on `[tier-label]…[/tier-label]\r\n
+  [tier-content]` by tag adjacency drops any tier whose block carries an extra newline —
+  Holy Priest's C on the M+ healer list went missing exactly that way (6 rows instead of 7,
+  and the miss is invisible because `apply-ratings` never nulls an absent row). Split the
+  `[tier-list=rows]` payload on `[tier]` and read label + badges **inside each block**.
+- **Tier movement: 2, both Archon raid, both one band.** Frost DK A→B and Outlaw Rogue B→C.
+  Both sit on the A/B and B/C cluster edges (Frost DK 175.1k against an A tier bottoming at
+  177.2k). Re-fetched twice — byte-identical, so not a transport flake. Archon's
+  `lastUpdated` label still reads 2026-08-09T12:00:00Z (its daily 12:00Z rebuild lands
+  *after* the 10:37Z nightly), so this is its own reclustering, not a Blizzard retune.
+  Net effect on the page: **1 consensus letter** (Outlaw raid B→C) and 2 forecast letters
+  (Frost DK raid A→B, Subtlety raid A→B). icyveins / icyveins-ptr / method / wowhead: 0 moves.
+- **Encounter tiers**: 51/51 pages, 40/40 specs each = 680 tier rows, 32 one-band moves
+  (Vaelgor & Ezzorak 12, Imperator 5). Rewritten this time — heed the note above: `indent=2`
+  + `ensure_ascii=False` + trailing newline keeps the diff to the rows that actually moved.
+  Stored encounter NAMES kept; Archon's selector labels are short forms ("Imperator" vs
+  "Imperator Averzian") and overwriting them would degrade the UI.
+- **Season state unchanged.** icyveins/method/archon self-identify Season 1 (`s1`); wowhead
+  is still AHEAD at Season 2 on all 6 pages (`s2`, frozen lane); icyveins-ptr verifies the
+  other way at "Patch 12.1 / Season 2" (`s2`). No season flip — and the 12.1 launch date is
+  now confirmed as **2026-08-11**, Season 2 opening **08-18**, so the flip is imminent.
+- **published re-read from the pages themselves every run, never carried forward**:
+  icyveins raid healer 2026-08-04 / raid tank 2026-06-30 / other four 2026-07-01;
+  icyveins-ptr 2026-08-02 ×3; wowhead M+ healer 2026-08-09, other five 2026-08-08. Agrees
+  15/15 with `published-evidence/evidence.json`.
+- **Method still omits Vengeance DH from the raid list** (39 raid / 40 M+) and still has an
+  empty S tier in M+. Both upstream facts, neither invented around.
+- **icyveins-ptr had no TBD this week** — 40/40 placed, so no explicit nulls were written.

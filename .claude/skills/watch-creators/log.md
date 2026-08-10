@@ -1544,3 +1544,41 @@ those, so they need a different discovery route.
 - Per the 08-08/08-09 precedent, none of the dismissed-by-filter videos were written to
   `seen[]`: they were not adjudicated on their transcripts, only on cost, so a local yt-dlp
   run can still sweep them for free.
+
+## 2026-08-10 (nightly CI, headless Opus 5, single-shot; started 11:32Z)
+
+- ⚠ **TRANSCRIPT BUDGET EXHAUSTED.** `transcript-fetch/summary.json` verdict
+  **`limit-exceeded`** on the first queued video (`_gt1uHQrh1s`, izen) — 1 requested, 0
+  fetched, "stopped early … remaining queue untouched". The free Supadata tier is 100
+  requests/MONTH and it is spent. Consequence: **0 takes and 0 metaNotes added or changed
+  this run**, and nothing in `videos[]` could be drained. Surfaced at the top of the manifest
+  summary. The four videos queued on 08-09 are still queued.
+- **Discovery ran in full anyway** — 43/43 transcribable channels polled via
+  `youtube.com/feeds/videos.xml`, HTTP 200 on every one, zero retries needed, and no direct
+  YouTube or transcript-API access by this agent.
+- **Seen-set = 742** from the four structured lanes (443 seen + 133 skipped + 4 queued +
+  the youtu.be ids in takes/metaNotes), against 645 videos across the feeds. **122 unseen on
+  or after the cycle bound 2026-06-18; 9 unseen before it.**
+- **The 9 pre-cycle videos were appended to `seen[]`** (all Nintern, 2026-03-20 → 2026-06-15:
+  12.0.x Devourer guides, a Sporefall loot overview, addon and Great Vault videos). A video
+  that predates the 12.1 opening build cannot discuss the cycle, so that dismissal is durable
+  and belongs in the lane — unlike a title-cost dismissal.
+- **Two videos queued** (queue now 6), keyword-filtered as the nightly must be:
+  · **Zorthas — "FINAL TIER LIST for Season 2 M+ Midnight" (2026-08-09)**. The highest-value
+    item on the board: he is a `generalCreators` entry, so this is the `metaNotes` archetype,
+    and every live Zorthas metaNote is 2026-07-30 or older — a *final* S2 M+ read two days
+    before launch is exactly what that lane is for.
+  · **Kalamazi — "I'm Back! Sunday PTR Slammin" (2026-08-10)**. Warlock, launch eve; he holds
+    all three Warlock specs and all three are among the nine without a writeup.
+  His `latest` field was refreshed to name the queued video and to say plainly that it is
+  **not yet distilled** — a `latest` that implied a distilled read we do not hold would be
+  worse than a stale one.
+- **Deliberately NOT queued and deliberately NOT written to `seen[]`** (08-08/08-09
+  precedent — dismissed on cost, not on a transcript, so a local yt-dlp run can still sweep
+  them for free): YoDaTV's 8 "Everything You Need to Know About <dungeon>" Season 2 guides,
+  Supatease's PvP tier list and Road-to-Rank-1 arena streams (PvP is out of scope for a PvE
+  tracker), Tettles' two 2026-08-10 shorts, and the July stream-VOD backlog whose creators
+  already hold newer live takes.
+- Reminder to the next run: the monthly Supadata window resets before the queue does. When
+  it does, `_gt1uHQrh1s` (izen, Season 2 M+ DPS meta) and `SV3Snl21XC8` (Zorthas) are the two
+  that most change what the page says.

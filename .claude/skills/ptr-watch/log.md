@@ -872,3 +872,46 @@ catch-up path.
   12.1 lands 08-11) and the SEPARATE `SNAPSHOT_PHASE` flip (owner-set for Season 2 open,
   08-18, backstopped by `PHASE_FLIP_DUE` 08-20). `SNAPSHOT_PHASE` correctly still reads
   `12.1-ptr`.
+
+## 2026-08-10 (nightly CI, headless Opus 5, single-shot; started 11:32Z)
+
+- **No new build. Feed unchanged at 15 entries**, newest still the 2026-08-06 launch patch
+  notes. All three channels swept:
+  1. **Official thread** `2317811.json` — `highest_post_number` still **19** (Linxy,
+     2026-07-31), 17 posts, all logged.
+  2. **Wowhead news RSS** — 40 items, 2026-08-02 → 2026-08-09, bodies read from
+     `content:encoded`. The 12.1 items are Jimothy (cosmetic model), More Season 2 M+ Dungeon
+     Tuning (Ruby Life Pools / Temple *encounter* tuning), Datamined Hotfixes (M+/raid/delve
+     ability **flags** — e.g. Stir the Depths gains "Treat as Area of Effect", Void Toxin no
+     longer reflectable), Embellishment/Potion tuning (items), Altar of Fangs dungeon
+     changes, and the Blizzard × Icy Veins / Raider.IO / Wowhead interview. **None carries a
+     per-spec tuning line.**
+  3. **Standalone blue posts** — Discourse search `@Kaivax after:2026-08-04` returns only
+     season-end, housing, server and M+-score topics; `@Linxy` none. Wowhead's
+     `/blue-tracker` HTML is JS-hydrated (0 topic hrefs) but **`/blue-tracker?rss` works with
+     the browser header set** — 50 items, newest 2026-08-08, no class tuning. Worth
+     remembering: the RSS variant needs `Accept: application/rss+xml`, a plain UA 403s.
+- **Standing lead, now dated**: in the 08-07 interview Blizzard says the Season 2 class-tuning
+  **roadmap** ships "in the next couple of days". Still not published as of this run. That is
+  the next thing to catch.
+- **Launch dates confirmed from the same sweep**: 12.1 goes live **2026-08-11**, Season 2
+  opens **2026-08-18** (blue tracker "Curse of Ula'tek Goes Live August 11", plus the
+  Season-1-ends-Aug-17 topic).
+  ⚠ **The two owner one-shots are now imminent and still not ours to do**: the frozen
+  forecast (`node src/snapshot.mjs --frozen`) must land on the LAST pre-launch refresh —
+  which, with 12.1 live tomorrow, is effectively tonight's publish — and the SEPARATE
+  `SNAPSHOT_PHASE` flip belongs at the Season-2 open (08-18, backstopped by
+  `PHASE_FLIP_DUE` 08-20). `SNAPSHOT_PHASE` correctly still reads `12.1-ptr`.
+- **WCL zones 52/54/56/57: evidence-only this run** (`wcl-fetch/evidence.json`, verdict
+  `rdps-broken`). No zone-54 normalized cut and no zone-52 `ptrDummy` could land; the raw
+  DPS series landed pre-agent — Dummy Dome 104 rows (1T 2000 players / 2T 635 / 3T 288 /
+  5T 2000), Venomous Abyss 27 rows over the 6 encounters that have parses (Coiled Altar and
+  Ula'tek at 0 players — untested window, not an error), M+ keys 27 (all 8 dungeons at the
+  2000 ceiling).
+- **The 9 specs at `ptr: null` stay null** (Frost DK, Feral/Guardian/Restoration Druid, Holy
+  Priest, Elemental Shaman, all three Warlocks). No spec-review article for any of them is in
+  the RSS window. New negative result worth recording so it is not re-attempted blind:
+  **Wowhead's site search is not a discovery lane from CI** — `/search?q=…` returns 200 with
+  zero `/news/` hrefs (JS-hydrated), and `/search/suggestions-template?q=…` *does* answer 200
+  with JSON but only returns items and spells, never news. The remaining lanes for these nine
+  are Discord paste-ins and community/HackMD guides, i.e. local-run work.

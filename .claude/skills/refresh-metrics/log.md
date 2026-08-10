@@ -808,3 +808,46 @@ numbers (95th pct DPS / popularity / M+ score — ungated, not in required-sourc
   landed pre-agent (dummy 104 / Venomous Abyss 27 / M+ keys 27). No warcraftlogs.com fetch.
 - `npm test` 336 pass / 0 fail / 27 skipped; `npm run build` OK; `check-refresh --manifest`
   passes (0 tier moves vs the committed baseline).
+
+## 2026-08-10 (nightly CI, headless Opus 5, single-shot; started 11:32Z)
+
+- **Archon numbers: all four series re-read and merged** from
+  `specRankingsSection.table.data[]` (never `tierList`) — 95th pct DPS 33 rows, 95th pct HPS
+  7, M+ score 40, Popularity 80, plus survivability 40. 160 metric rows applied.
+  · Raid DPS moved on 33/33 (Frost Mage 177031→177235), HPS on 7/7, popularity on 74/80 —
+    so the raid aggregate genuinely rolled forward and `asOf` advances.
+  · **M+ score moved on 0/40.** It is a slow weekly-scale number; popularity on the *same
+    rows* did move, which is what proves the page was live rather than cached. Don't read a
+    static score column as a stale fetch.
+  · **Round popularity to 1 decimal** — the stored series is 1dp, and `round(x*100, 2)` fakes
+    a 39-row diff (10 → 9.98) out of nothing.
+- **Three sources were unchanged upstream and were deliberately NOT restamped.** All three
+  were *verified* unchanged rather than assumed:
+  · **bloodmallet** — 26/27 charts (Augmentation errors on all 4 retries, the documented
+    genuine absence). Every chart timestamp identical (25 @ 2026-07-08, Elemental Shaman @
+    2026-07-15) and all 26 target maps byte-identical. Now **33 days** old against
+    `maxAgeDays: 5`; the red heartbeat is the correct signal, per the 08-08 correction.
+  · **simulationcraft** — same report (`Timestamp: 2026-08-08 07:28:33+0000`, git build
+    2026-08-06/68974). All 26 stored values reproduce exactly. **Parse gotcha:** bracket-match
+    the FIRST `"data":[` after `"__data"` (later charts in the same file are different
+    quantities and will silently give you ~2.5x numbers), and use a hyphen-tolerant name
+    regex — Havoc's profile is `MID1_Demon_Hunter_Havoc_Fel-Scarred`, so `[A-Za-z_]+` drops
+    it and only it.
+  · **wowmeta** — JSON API only. `manifest.snapshotDate` still 2026-08-05, all 40
+    `lowerBound` values byte-identical. **Round to 1 decimal** here too (stored 394.3, not
+    394) or you manufacture 34 phantom moves.
+- **murlok**: 39/40. **Protection Paladin is absent from the tank page upstream** — it lists
+  only five tanks. Its stored row keeps its old value and date; not deleted, not invented.
+  27 of the 39 values moved.
+- **mythicstats**: still **period 1075, week 20 of MID1** (10000 characters / 3949 unique,
+  21.8 avg key). All 39 parsed values byte-identical → nothing merged, `asOf` held at
+  2026-08-09. Devastation Evoker is still absent from the top-2000 chart (stored row stays
+  2026-08-07, value 0).
+- **robydoby (best-effort, outside the contract)**: tab map re-read; the newest Mythic week
+  is still **24/7** (Sszorak #5, Twin Fangs #6). Nothing new since the stored 2026-07-24 cut,
+  so nothing merged. Do not promote it into `required-sources.json`.
+- **WCL**: evidence-only (`rdps-broken`, 11:32:01Z, OAuth+GraphQL healthy, 1 point spent).
+  Five rDPS/normalized cuts stay frozen; the three raw series landed pre-agent (dummy 104
+  rows / Venomous Abyss 27 / M+ keys 27). No warcraftlogs.com fetch of any kind by the agent.
+- `npm test` 336 pass / 0 fail / 27 skipped; `npm run build` OK; `check-refresh --manifest`
+  passes (1 tier move vs the committed baseline, 0 of ≥2 bands).
