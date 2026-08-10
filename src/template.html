@@ -1090,7 +1090,15 @@ function srcHostLabel(url){
    requirement carry no date and simply show none — never a guessed one. */
 function draftSrcHTML(p){
   const when = p.asOf ? ` <span class="mnote" title="when the source said it">· ${esc(p.asOf)}</span>` : "";
-  if(p.source) return ` <span class="mnote">— distilled from <a href="${esc(safeHref(p.source))}" target="_blank" rel="noopener">${esc(srcHostLabel(p.source))}</a></span>${when}`;
+  /* Prefer the human-readable label whenever we have one, and link it. A bare hostname
+     throws away the very thing the attribution exists to show — the person: six writeups
+     carry both fields, and every one of them was rendering its outlet ("Wowhead") over a
+     named theorycrafter (Archimtiros, Porom, Dorovon, Harreks, Kyrasis). The label already
+     names the outlet where it matters, so nothing is lost by preferring it. (2026-08-09) */
+  if(p.source){
+    const who = p.sourceLabel || srcHostLabel(p.source);
+    return ` <span class="mnote">— distilled from <a href="${esc(safeHref(p.source))}" target="_blank" rel="noopener">${esc(who)}</a></span>${when}`;
+  }
   if(p.sourceLabel) return ` <span class="mnote">— distilled from ${esc(p.sourceLabel)}</span>${when}`;
   return "";
 }

@@ -45,6 +45,12 @@ const WRITEUP_HOSTS = new Set([...TAKE_HOSTS, ...BLIZZARD_FORUM_HOSTS,
   "liquidarmory.com", "www.liquidarmory.com", "archon.gg", "www.archon.gg",
   "raider.io", "murlok.io", "mythicstats.com", "wowmeta.com",
   "warcraftlogs.com", "www.warcraftlogs.com",
+  /* Long-form theorycrafter guides published as public Google Docs rather than on a guide
+     site — e.g. Kyrasis' "[12.1] Advanced Blood DK Guide for M+" (Death's Advance), which is
+     the linkable form of an author we otherwise cite only as an unlinkable Discord post.
+     Reviewed + approved by Riley 2026-08-09. Writeup/creator provenance ONLY: deliberately
+     not added to TAKE_HOSTS, so the nightly's transcript pipeline cannot cite a doc. */
+  "docs.google.com",
 ]);
 const DISCORD_HOSTS = new Set(["discord.gg", "discord.com", "www.discord.com"]);
 // Creator channel/author pages: video platforms + guide sites that carry bylines.
