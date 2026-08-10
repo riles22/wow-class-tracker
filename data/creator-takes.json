@@ -3379,7 +3379,8 @@
       "sentiment": "buff",
       "patchContext": "12.1 PTR — Season 2 raid outlook",
       "url": "https://youtu.be/oocq_kuo-pk?t=360",
-      "claim": "Reads the S2 pass as the raid-facing mini-rework competitive Resto Shamans have been waiting on: buffs to Unleash Life and Earth Shield, a substantial Riptide buff, Healing Rain now hitting up to six targets instead of five, and a new talent he says fits raid specifically. His framing is that Resto Shaman has trailed in raid for several seasons — he re-rolled off it for S1 progression — and this should finally make it worth bringing rather than a detriment to the healing comp, though he stops short of calling it race-to-world-first material. Flags the tier set as a downside: the proc-driven healing makes the spec feel like a gamble."
+      "claim": "Reads the S2 pass as the raid-facing mini-rework competitive Resto Shamans have been waiting on: buffs to Unleash Life and Earth Shield, a substantial Riptide buff, Healing Rain now hitting up to six targets instead of five, and a new talent he says fits raid specifically. His framing is that Resto Shaman has trailed in raid for several seasons — he re-rolled off it for S1 progression — and this should finally make it worth bringing rather than a detriment to the healing comp, though he stops short of calling it race-to-world-first material. Flags the tier set as a downside: the proc-driven healing makes the spec feel like a gamble.",
+      "bracket": "raid"
     },
     {
       "class": "Evoker",
@@ -4403,7 +4404,8 @@
       "patchContext": "12.1 PTR — Season 2 M+ outlook (healer prep stream)",
       "url": "https://youtu.be/u869GspePck?t=3236",
       "superseded": false,
-      "claim": "His strongest Holy Paladin read yet: he calls it a blaster for next season and, unusually, argues it is not cooldown-reliant — he rates Wings as unimpressive and says the spec simply does consistently insane healing through Holy Light, Virtues and consumed Infusions, with very strong spot healing that converts into Virtue AoE healing. He also stresses accessibility, repeatedly saying it is easy to play while looking really strong, and lists it among the three healers he intends to main. His caveat is hoping it does not get nerfed before launch."
+      "claim": "His strongest Holy Paladin read yet: he calls it a blaster for next season and, unusually, argues it is not cooldown-reliant — he rates Wings as unimpressive and says the spec simply does consistently insane healing through Holy Light, Virtues and consumed Infusions, with very strong spot healing that converts into Virtue AoE healing. He also stresses accessibility, repeatedly saying it is easy to play while looking really strong, and lists it among the three healers he intends to main. His caveat is hoping it does not get nerfed before launch.",
+      "bracket": "mplus"
     },
     {
       "class": "Shaman",
@@ -4414,7 +4416,8 @@
       "patchContext": "12.1 PTR — Season 2 M+ outlook (healer prep stream)",
       "url": "https://youtu.be/u869GspePck?t=1201",
       "superseded": false,
-      "claim": "He recommends it as the easy-and-good healer and explains the mechanism: totems give constant \"buffer\" healing so a slow or imprecise player is punished far less than on healers where every heal is a discrete press. He names it his main for the season. The M+ caveat he is explicit about is that its tier set wants the group stacked — with two ranged in a pug who will not stack, he says the tier set is partly wasted and far-field play drives you nuts."
+      "claim": "He recommends it as the easy-and-good healer and explains the mechanism: totems give constant \"buffer\" healing so a slow or imprecise player is punished far less than on healers where every heal is a discrete press. He names it his main for the season. The M+ caveat he is explicit about is that its tier set wants the group stacked — with two ranged in a pug who will not stack, he says the tier set is partly wasted and far-field play drives you nuts.",
+      "bracket": "mplus"
     },
     {
       "class": "Priest",
@@ -4425,7 +4428,8 @@
       "patchContext": "12.1 PTR — Season 2 M+ outlook (healer prep stream)",
       "url": "https://youtu.be/u869GspePck?t=1094",
       "superseded": false,
-      "claim": "A clear step down from his early-August read. He calls it chill and easy to pick up but says plainly he does not think it will be perceived as good next season. His specific complaints are mobility and button availability: no Renew, Shadow Word: Pain replaced on the talent, so the only things to press while moving are Chastise, Serenity and Holy Word cooldowns, none of them spammable — something he says took him a while to adjust to."
+      "claim": "A clear step down from his early-August read. He calls it chill and easy to pick up but says plainly he does not think it will be perceived as good next season. His specific complaints are mobility and button availability: no Renew, Shadow Word: Pain replaced on the talent, so the only things to press while moving are Chastise, Serenity and Holy Word cooldowns, none of them spammable — something he says took him a while to adjust to.",
+      "bracket": "mplus"
     },
     {
       "class": "Monk",
@@ -4436,7 +4440,20 @@
       "patchContext": "12.1 PTR — Season 2 M+ outlook (healer prep stream)",
       "url": "https://youtu.be/u869GspePck?t=16260",
       "superseded": false,
-      "claim": "A more balanced read than his late-July write-off. He reports Mistweaver actually has decent numbers, can put out reasonable damage while still healing enough for high keys, and that the new talent makes the Apex build work better. But he identifies the core problem as Vivify and Sheilun’s Gift being very weak, which he calls the biggest issue with the spec on the Season 2 PTR, and says he is near-certain it is getting buffs while pointing out none have arrived yet."
+      "claim": "A more balanced read than his late-July write-off. He reports Mistweaver actually has decent numbers, can put out reasonable damage while still healing enough for high keys, and that the new talent makes the Apex build work better. But he identifies the core problem as Vivify and Sheilun’s Gift being very weak, which he calls the biggest issue with the spec on the Season 2 PTR, and says he is near-certain it is getting buffs while pointing out none have arrived yet.",
+      "bracket": "mplus"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Havoc",
+      "creator": "Nintern",
+      "date": "2026-08-10",
+      "sentiment": "neutral",
+      "bracket": "both",
+      "patchContext": "12.1 PTR — Season 2 Havoc guide (talents, tier set, stats, trinkets, rotation; raid and M+)",
+      "url": "https://youtu.be/dI4E9S12Uy4?t=275",
+      "superseded": false,
+      "claim": "His read is continuity rather than a power swing: the builds are largely unchanged and he describes nothing earth-shattering in the rotation. The concrete 12.1 changes he names are that Inertia was nerfed on the PTR to 12%, so Exergy is now the pick and the rotation gets simpler, and that the Season 1 tier set’s 6% haste is gone, so gearing leans slightly more into haste while the priority stays crit > mastery > haste > versatility. On the Season 2 set — 2-piece giving Blade Dance, Chaos Strike and Essence Break +12%, 4-piece making Essence Break benefit from Cycle of Hatred with +35% initial strike damage and +2s duration — he is explicit that it is not a huge damage gain, contrasting it directly with Devourer’s, which he puts at around 25%. Every Havoc build takes Essence Break because of it, and it is strong enough to be used on cooldown rather than held to line up. On hero talents: Aldrachi Reaver runs one build for everything, which he counts an advantage, but is lower raw AoE than Fel-Scarred — so raid is generally Aldrachi Reaver throughout, while M+ is Fel-Scarred unless the comp specifically needs its funnel and physical damage."
     }
   ],
   "metaNotes": [

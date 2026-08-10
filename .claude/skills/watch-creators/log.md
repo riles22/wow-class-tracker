@@ -1635,3 +1635,33 @@ free, so the date-bounded unfiltered sweep was affordable.
   consistent", too incidental to attribute; the spreadsheet is where his actual analysis lives
   and would be a `paste-discord` / manual-source candidate. All three Warlock specs are still
   among those without a writeup.
+
+### 2026-08-10 follow-up — Riley resolved both open calls
+
+- **Nintern widened to `["Devourer", "Havoc"]`** (Riley, this session). Not a judgement call in
+  the end but a correction: his `credential` string has read *"Fel Hammer FAQ/guide writer for
+  Devourer **and Havoc**"* the whole time — only `specs` never caught up, and the guide itself
+  opens with him naming that exact role. Safe to edit `community.json` directly because he is
+  hand-curated; `apply-community-overrides.mjs` only rewrites entries marked
+  `managedBy: "overrides"` (today just MadSkillzzTV).
+- **His Season 2 Havoc guide `dI4E9S12Uy4` was distilled** and left `skipped[]` (241 → 240), since
+  a take now cites it. Sentiment **neutral**, and that is the whole point of the entry: he reports
+  continuity, not a power swing. The substantive claims are the PTR Inertia nerf to 12% making
+  Exergy the pick, the lost 6% haste from the S1 set, and — the one comparative worth having on
+  file — that the S2 Havoc set is **not** a big gain, which he contrasts directly with Devourer's
+  at roughly 25%. Hero talents split by bracket: Aldrachi Reaver everywhere in raid, Fel-Scarred
+  in M+ unless the comp needs funnel.
+- **Measured: 0 consensus letters, 0 forecast letters, 0 forecast scores.** Correct — a `neutral`
+  take carries no direction. It changes the Havoc drawer, not the forecast.
+- **`npm run audit:creators` surfaced a MED the moment the take landed**: MadSkillzzTV held live
+  Resto Shaman takes on 08-04 and 08-09 and the audit read them as un-superseded duplicates. They
+  are genuinely complementary — 08-04 is raid-lens, 08-09 is M+-lens — but neither carried an
+  explicit `bracket`, so only the prose said so. Added `bracket` to those five takes to match each
+  take's own `patchContext`. Verified it was a labelling fix and not a semantic one: **0 scores
+  moved**, because the patchContext regex already resolved both the same way. Audit is now
+  HIGH 0 · MED 0.
+- **Kalamazi's 12.1 Warlock spreadsheet is NOT publicly reachable** — checked and exhausted:
+  it is not in the video description (which links only socials and three **12.0** Warlock guides
+  from February, correctly pre-cycle), it is served on stream by a `!spreadsheet` chat command,
+  and `kalamazi.gg`'s only non-social outbound link is a Discord invite — which hard rule 6 forbids
+  fetching. Riley is supplying the link.
