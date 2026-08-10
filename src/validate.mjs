@@ -31,7 +31,16 @@ const KINDS = new Set(["tier-list", "metrics", "notes-feed", "reference", "commu
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
 // Creator-take URLs come from an autonomous nightly pipeline over untrusted transcripts —
 // beyond https-only they must point at a host the pipeline actually cites.
-const TAKE_HOSTS = new Set(["youtube.com", "www.youtube.com", "m.youtube.com", "youtu.be", "hackmd.io", "wowhead.com", "www.wowhead.com"]);
+/* kalamazi.gg: a specialist creator's own written guide site, the linkable form of an
+   author already tracked as a Warlock video authority. Added to TAKE_HOSTS rather than
+   WRITEUP_HOSTS only — its pages are guides (tier sets, hero-talent choice, per-boss spec
+   recommendations), not patch verdicts, so they may source a take but must not be turned
+   into a `ptr` writeup. Reviewed + approved by Riley 2026-08-10, who pointed at the site.
+   Currency was verified rather than assumed: all three Warlock tier-set texts on the site
+   match this repo's stored Season 2 sets exactly, including Demonology's corrected
+   250%/225% from the 2026-07-31 build, and JSON-LD dateModified was same-day. */
+const TAKE_HOSTS = new Set(["youtube.com", "www.youtube.com", "m.youtube.com", "youtu.be", "hackmd.io", "wowhead.com", "www.wowhead.com",
+  "kalamazi.gg", "www.kalamazi.gg"]);
 // Same principle extended repo-wide (2026-07-18 portfolio audit): every URL field the
 // nightly agent can write is pinned to hosts a human approved here. validate.mjs is
 // code — the nightly cannot publish changes to it — so widening a list is inherently
