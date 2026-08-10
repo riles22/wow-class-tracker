@@ -1665,3 +1665,44 @@ free, so the date-bounded unfiltered sweep was affordable.
   from February, correctly pre-cycle), it is served on stream by a `!spreadsheet` chat command,
   and `kalamazi.gg`'s only non-social outbound link is a Discord invite — which hard rule 6 forbids
   fetching. Riley is supplying the link.
+
+### 2026-08-10 — kalamazi.gg, and a supersession I had to walk back
+
+Riley pointed at kalamazi.gg after the spreadsheet hunt failed. **My first check of the site
+was wrong in method**: I grepped its links with a filter that excluded `kalamazi`, which threw
+away every internal page and left only a Discord invite, so I reported "nothing there". The site
+in fact carries `/guides/{affliction,demonology,destruction}`, `/guides/mythic-plus` and a
+Season 2 `/guides/Midnight` raid guide. Enumerate internal hrefs before concluding a site is bare.
+
+- **The spreadsheet is still not on it.** No `docs.google`/`sheets` link on any of the five pages.
+  It is served on stream by a `!spreadsheet` command and lives in his Discord. Still needs Riley.
+- **Currency was verified, not assumed**: all three Warlock tier-set texts on the site reproduce
+  this repo's stored **Season 2** sets exactly — including Demonology's corrected 250%/225% from
+  the 2026-07-31 build, which dates the pages after it. JSON-LD `dateModified` was same-day. The
+  "check the Season 1 section" line on the Destruction page is a pointer to an archive, not a sign
+  the page is stale.
+- **Three Warlock takes added** (his first site-sourced takes; every prior Kalamazi take is
+  YouTube). Two are `neutral` **on purpose**: the site's Destruction and Affliction content is
+  hero-talent choice and per-boss spec assignment, which is an *intra-Warlock* recommendation
+  about which of the three to bring — not a claim about their standing against other classes.
+  Filing those as `buff` would feed the projection a strength signal the source never makes.
+  Demonology is `mixed` and carries the one genuine comparative: most consistent of the three in
+  keys, arguably better in low-to-mid keys, may not be as strong at the high end.
+
+**The walk-back, recorded because the failure mode is instructive.** `audit:creators` flagged MED
+on Demonology — two live `both`-lens takes — so I superseded his 2026-08-08 [nerf]. That was
+wrong, and the build said so: **it moved a published forecast letter, Demonology M+ B → A**, by
+*deleting* his negative power read rather than by adding evidence. The 08-08 take is a tuning
+assessment ("feels like doing less damage"); the site is a build/consistency guide. Different
+axes, so the guardrail applies — a still-valid take stays live — and `audit:creators` is a REPORT,
+not a gate, so a MED must not be paid for with a public letter move.
+
+The right fix was to make the new take's scope honest instead: it is an **M+** comparative, so
+`bracket: "mplus"`, claim trimmed to match, 08-08 restored live. That cleared the MED *and* kept
+the power read. **Result: 0 consensus letters, 0 forecast letters, 5 score moves of ±1** — the
+proportionate footprint for build guidance. Lesson: when an audit finding and a published letter
+disagree, re-scope the new evidence before retiring the old.
+
+- **`sites[]`**: his guide hub is now linked from Warlock, alongside the SimC APL entry. Needed
+  its own `SITE_HOSTS` entry — a separate allowlist from `TAKE_HOSTS`, so two reviewed code edits,
+  both committed apart from the data.
