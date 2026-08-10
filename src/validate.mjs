@@ -39,8 +39,18 @@ const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
    Currency was verified rather than assumed: all three Warlock tier-set texts on the site
    match this repo's stored Season 2 sets exactly, including Demonology's corrected
    250%/225% from the 2026-07-31 build, and JSON-LD dateModified was same-day. */
+/* wingsisup.com: same shape as kalamazi.gg above and added for the same reason — the written
+   guide site of an already-registered specialist (Ellesmere, Holy Paladin), whose /quickview
+   page moved from the 12.0.5 build to a Midnight Season 2 one. TAKE_HOSTS only, NOT
+   WRITEUP_HOSTS: it is a build/rotation guide, not a patch verdict. It was already trusted in
+   SITE_HOSTS as a Paladin community link. Reviewed + approved by Riley 2026-08-10, who pointed
+   at the page. Currency verified rather than assumed: the page carries no date of any kind (no
+   Last-Modified, no JSON-LD), so it was cross-checked instead — its build images are named
+   quickview-build-12_1-{mplus,raid}.png, and its tier-set commentary (Infusion of Light on
+   Flash of Light inside Virtue windows; Holy Light weaving to regenerate procs) is coherent
+   only against this repo's stored Season 2 Holy Paladin set. */
 const TAKE_HOSTS = new Set(["youtube.com", "www.youtube.com", "m.youtube.com", "youtu.be", "hackmd.io", "wowhead.com", "www.wowhead.com",
-  "kalamazi.gg", "www.kalamazi.gg"]);
+  "kalamazi.gg", "www.kalamazi.gg", "wingsisup.com"]);
 // Same principle extended repo-wide (2026-07-18 portfolio audit): every URL field the
 // nightly agent can write is pinned to hosts a human approved here. validate.mjs is
 // code — the nightly cannot publish changes to it — so widening a list is inherently
