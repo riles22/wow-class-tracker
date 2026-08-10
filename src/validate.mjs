@@ -73,7 +73,11 @@ const SITE_HOSTS = new Set([
   // azortharion.com added 2026-07-31: the Hunter sims site, requested by the owner while
   // pasting Trueshot Lodge content. Azortharion is already a registered whole-class Hunter
   // creator (community.json) and his HackMD is already a site here.
-  "azortharion.com", "docs.google.com", "github.com", "hackmd.io", "spiritbloom.pro",
+  // kalamazi.gg added 2026-08-10: the Warlock guide site of an already-registered
+  // whole-class Warlock creator, pointed at by the owner. Same shape as azortharion.com
+  // above — a tracked creator's own written guide hub.
+  "azortharion.com", "docs.google.com", "github.com", "hackmd.io", "kalamazi.gg",
+  "www.kalamazi.gg", "spiritbloom.pro",
   "warcraftpriests.github.io", "wingsisup.com", "www.dreamgrove.gg", "www.peakofserenity.com"
 ]);
 const WOWHEAD_HOSTS = new Set(["wowhead.com", "www.wowhead.com"]);
