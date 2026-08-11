@@ -7,7 +7,7 @@ import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { validateData, loadData } from "./validate.mjs";
-import { buildPayload } from "./render.mjs";
+import { buildPayload, PHASES } from "./render.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const ICON_ASSETS = ["favicon-192.png", "apple-touch-icon.png"];
@@ -28,6 +28,32 @@ export async function build(root = ROOT) {
   // Escape "<" so the payload can never terminate the surrounding <script> block.
   const json = JSON.stringify(payload).replace(/</g, "\\u003c");
   let html = template.replace("__DATA_JSON__", () => json);
+
+  /* ERA TOKENS (2026-08-11, docs/era-prose-scope.md item 1). The static masthead/footer
+     prose used to hardcode "12.1 PTR" and "12.0.7 / Season 1" — era literals, which are
+     DATA, in a template CLAUDE.md rule 4 says holds none. Substituting them at build time
+     from PHASES means the 22:00 UTC launch flip is one edit to `ptr.label` and the 08-18
+     season flip needs no template edit at all. Client-side JS prose reads PHASE directly;
+     these tokens exist for the static HTML that renders before boot. */
+  const seasonName = s => `Season ${PHASES.seasonOrder.indexOf(s) + 1}`;
+  const eraDisplay = PHASES.ptr ? PHASES.ptr.label : PHASES.liveLabel;
+  const eraTokens = {
+    // masthead chip: "12.1 PTR — CURSE OF ULA'TEK" now, "12.1 — …" once the patch ships,
+    // and identical off liveLabel after the ptr lane sunsets.
+    __ERA_CHIP__: `${eraDisplay} — ${PHASES.patchName.toUpperCase()}`,
+    __ERA_BASELINE__: `${PHASES.liveLabel} / ${seasonName(PHASES.liveSeason)}`,
+    // static fallback only — boot overwrites it from PHASE.ptr.label (template ~:1239)
+    __ERA_PTR_BTN__: PHASES.ptr?.label ?? "",
+    __ERA_FEED_HEADING__: `${eraDisplay} build feed`,
+    __ERA_FOOTCOVER__: PHASES.ptr
+      ? `Now covering: ${PHASES.liveLabel} / ${seasonName(PHASES.liveSeason)} → ${PHASES.ptr.label} “${PHASES.patchName}”`
+      : `Now covering: ${PHASES.liveLabel} / ${seasonName(PHASES.liveSeason)} “${PHASES.patchName}”`,
+    __ERA_LIVE_LABEL__: PHASES.liveLabel,
+  };
+  for (const [token, value] of Object.entries(eraTokens)) {
+    if (!html.includes(token)) throw new Error(`src/template.html is missing the ${token} placeholder`);
+    html = html.replaceAll(token, value);
+  }
   // Normalize to LF: the HTML parser normalizes CRLF→LF before the browser hashes inline
   // scripts (a CRLF artifact from a Windows checkout would make the CSP hash unmatchable),
   // and it keeps local (Windows) and CI (Linux) builds byte-identical.

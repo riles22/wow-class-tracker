@@ -167,6 +167,12 @@ test("PHASES is the single era vocabulary and carries the current cycle", () => 
   // test and updates it in the same commit — the same pattern as SNAPSHOT_PHASE.
   assert.equal(PHASES.liveSeason, "s1");
   assert.equal(PHASES.ptr?.marker, "12.1 PTR");
+  /* label ≠ marker is the launch-day split: `label` (display) drops " PTR" the moment the
+     patch ships (2026-08-11 ~22:00 UTC) while `marker` (data key — metric names, takeEra,
+     PTR_METRIC_NAMES) is frozen for the cycle. This pin makes the label flip a deliberate
+     one-line edit and guards the marker against being flipped along with it. */
+  assert.equal(PHASES.ptr?.label, "12.1 PTR");
+  assert.equal(PHASES.patchName, "Curse of Ula'tek");
   assert.equal(PHASES.ptrSunset, false);
 });
 

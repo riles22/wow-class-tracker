@@ -47,6 +47,20 @@ test("build produces the tracker and fetchable launcher icons", async () => {
   const csp = /<meta[^>]+Content-Security-Policy[^>]+content="([^"]*)"/i.exec(html)?.[1] ?? "";
   assert.match(csp, /(?:^|;)\s*default-src 'none'\s*(?:;|$)/, "CSP must retain default-src 'none'");
   assert.match(csp, /(?:^|;)\s*img-src 'self' data:\s*(?:;|$)/, "CSP must allow only same-origin and inline icons");
+
+  /* Era tokens (2026-08-11): the masthead/footer era prose is substituted at build time
+     from PHASES, so the launch-day label flip and the season flip need no template edits.
+     Expectations are COMPUTED from PHASES rather than written as literals, so this test
+     follows every flip instead of going stale — what it pins is the WIRING: each token
+     replaced (build throws on a missing one), none left unsubstituted, and the era the
+     page announces always matching the era vocabulary that governs the data. */
+  const { PHASES } = await import("../src/normalize.mjs");
+  const seasonName = s => `Season ${PHASES.seasonOrder.indexOf(s) + 1}`;
+  const eraDisplay = PHASES.ptr ? PHASES.ptr.label : PHASES.liveLabel;
+  assert.ok(html.includes(`class="patchchip">${eraDisplay} — ${PHASES.patchName.toUpperCase()}<`), "masthead chip must carry the PHASES-derived era");
+  assert.ok(html.includes(`${PHASES.liveLabel} / ${seasonName(PHASES.liveSeason)}`), "baseline line must carry liveLabel + season");
+  assert.ok(html.includes(`>${eraDisplay} build feed<`), "build-feed heading must carry the era display label");
+  assert.ok(!/__ERA_[A-Z_]+__/.test(html), "no era token may survive substitution");
 });
 
 test("every PTR metric-name key resolves against real data (2026-08-08)", async () => {
