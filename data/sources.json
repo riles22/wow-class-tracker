@@ -320,21 +320,21 @@
         "role": "All",
         "label": "Raid statistics (zone 46, Mythic)",
         "url": "https://www.warcraftlogs.com/zone/statistics/46",
-        "snapshot": "2026-08-07"
+        "snapshot": "2026-08-10"
       },
       {
         "bracket": "mplus",
         "role": "All",
         "label": "M+ statistics (zone 47)",
         "url": "https://www.warcraftlogs.com/zone/statistics/47",
-        "snapshot": "2026-08-07"
+        "snapshot": "2026-08-10"
       },
       {
         "bracket": "mplus",
         "role": "All",
         "label": "12.1 PTR M+ testing (zone 56, Mythic+ Season 2 PTR)",
         "url": "https://www.warcraftlogs.com/zone/statistics/56",
-        "snapshot": "2026-08-08"
+        "snapshot": "2026-08-10"
       },
       {
         "bracket": "raid",
@@ -348,7 +348,7 @@
         "role": "DPS",
         "label": "12.1 PTR Dummy Dome (zone 52, fixed target counts)",
         "url": "https://www.warcraftlogs.com/zone/statistics/52",
-        "snapshot": "2026-08-08"
+        "snapshot": "2026-08-10"
       }
     ],
     "summary": "Median damage or healing across every logged pull, by role and bracket. rDPS strips out damage credited to external buffs, so it measures a player's own contribution rather than what their raid lent them."

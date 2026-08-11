@@ -3,6 +3,37 @@
 Keep the newest ~20 entries; prune older ones when appending (prose is memory, not state —
 parse counts and baselines the change detectors need live in the entries themselves).
 
+- 2026-08-10 (LOCAL evening run, ~21:4xZ — Opus 5; owner-requested pre-freeze catch-up after
+  the 12:03Z nightly, which had TRANSCRIPT API limit-exceeded + the standing rdps-500). Scope:
+  WCL only — nothing CI refreshed today was re-fetched.
+  · **TRANSPORT CHANGE — the 08-04 curl finding is DEAD.** curl + XHR headers now 302s to
+  /human-challenge on EVERY statistics URL (tested twice). Tonight's transport: the OWNER
+  cleared the challenge in the in-app browser (one click), then all 16 fetches ran as in-page
+  fetch() with the XHR header through that session — HTTP 200 first try, every URL. Next run:
+  expect curl to fail; either repeat the owner-click path or wait for the nightly evidence file.
+  · **Zone 46 live raid** (5/20/3): 27+6+7+7 = 47 rows, parses 1,567-27,023; healer-DPS sanity
+  check — values 5.4k-33k vs HPS 163k-187k ✓ (per this log 08-04: check VALUES, not parse counts).
+  · **Zone 47 live M+** (10/5/1): 40 rows, parses 17,322-328,103.
+  · **Zone 56 PTR M+**: 40 rows, parses 21-1,311 (Arcane 1,311 / HPal 871 — the healer testing
+  wave landed; MW n dropped 199→148 as the 14-day window aged out early parses).
+  · **Zone 52 Dummy Dome** → ptrDummy 27 specs: 1T 27 / 2T 26 / 3T 21 / 5T 27 = 101 cells,
+  parses 1-409. Spec-appears-twice duplication did NOT occur (4th consecutive clean run).
+  · **Zone 54 still EMPTY** (probe Heroic 4/10 DPS: 9.1 KB fragment, 0 data rows) — stored 34
+  rows AND that page snapshot left at 2026-07-28.
+  · **HEALER DUMMY (zone 52 boss 3594, hps cut): AGGREGATES BUT WAS REJECTED — DO NOT INGEST
+  THE MEDIAN.** 7/7 specs, n 33-73, but medians span 2,246 (HPriest) → 338,168 (Disc), a 150x
+  spread, while maxes sit 442k-621k (1.4x). The median is idle-parse-contaminated: a healer
+  alone at the dummy has nobody to heal, so it measures what fraction of a spec's parses came
+  from organized full-raid sessions, not healing output. Publishing it would claim RDruid
+  heals 3% of Disc. Revisit only with a per-player-best or session-filtered statistic.
+  · Integer rounding: first merge landed 222 two-decimal values (this log's 08-02 gotcha caught
+  it on read-back); re-merged, 386/386 integers verified.
+  · sources.json snapshots → 2026-08-10 for 46/47/56/52 ONLY. 127 rows + 27 ptrDummy via
+  apply-metrics, 0 unmatched. **11 forecast letters moved (10 M+, 1 raid), 0 consensus** —
+  healer/tank zone-56 medians sit in a ±7% band, so modest honest moves reorder the
+  within-role percentile wholesale (the v12 ORDER-not-LEVEL property, named in the commit).
+  Manifest deliberately untouched (partial run; nightly startedAt 11:59Z stands).
+
 - 2026-08-04 (LOCAL run, ~14:2xZ — Opus 5; scheduled residential catch-up after the 10:37Z
   nightly). Scope: residential-only — the five WCL rDPS cuts CI recorded `unreachable`, plus
   the transcript queue (see watch-creators). Nothing CI already refreshed (tiers/archon/

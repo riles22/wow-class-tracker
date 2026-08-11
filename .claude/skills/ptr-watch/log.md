@@ -4,6 +4,13 @@ Keep the newest ~20 entries; prune older ones when appending. Machine state the 
 detectors rely on (parse counts, seen video IDs) must stay in the NEWEST entries or a
 dedicated section — narrative prose older than that is prunable memory.
 
+- 2026-08-10 (LOCAL evening run, ~21:4xZ — Opus 5; pre-freeze WCL catch-up only). Zone 54
+  probed once (Heroic 4/10 DPS): still EMPTY upstream, rows + snapshot stay 2026-07-28. Zones 52
+  and 56 refreshed via the owner-cleared browser session (see refresh-metrics log 2026-08-10:
+  curl is now human-challenged; the healer dummy 3594 aggregates but its median was REJECTED
+  as idle-parse-contaminated — full reasoning there). Forum thread + Wowhead RSS NOT
+  re-checked tonight — the 12:03Z nightly covered them; build feed current at 12 builds.
+
 - 2026-08-02 (LOCAL run, ~14:2xZ — Opus 5; residential catch-up after the 10:37Z nightly).
   **No new PTR build.** Official thread `.json` fetched live (HTTP 200, 406 KB):
   `highest_post_number` is still **19**, and post #19 (Linxy, 2026-07-31) is already the
