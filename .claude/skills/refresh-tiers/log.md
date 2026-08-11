@@ -532,3 +532,73 @@ representation n; verified against the page, NOT a Blizzard retune); survivabili
 - **Method still omits Vengeance DH from the raid list** (39 raid / 40 M+) and still has an
   empty S tier in M+. Both upstream facts, neither invented around.
 - **icyveins-ptr had no TBD this week** — 40/40 placed, so no explicit nulls were written.
+
+## 2026-08-11 (nightly, CI) — THE SEASON FLIP: Icy Veins moved its LIVE lists to Season 2
+
+- **Icy Veins flipped, on the morning Patch 12.1 goes live.** All six live pages fetched
+  (HTTP 200, 200-295 KB) and all six now describe **Midnight Season 2 / Patch 12.1**:
+  five titles say so outright ("Midnight (12.1)", "Season 2 Tier List (Patch 12.1 /
+  Season 2)", "A Tier List for Midnight (Patch 12.1 / Midnight)"). The sixth — raid
+  healer — still carries a **stale "Patch 12.0.7" title over a Season-2 body**
+  ("Midnight Healer Tier List for Season 2", "Midnight Season Two Launch Update",
+  in-body "LAST UPDATED - 10th of August"). Trust the BODY, not the title: same trap as
+  the blue tracker's patch tag. `seasonVerified` s1 -> **s2 on all six**, so Icy Veins
+  leaves the live consensus (frozen lane) and enters the next-patch forecast.
+- **The M+ letters could NOT be applied, and that is the designed backstop.** Icy Veins'
+  live M+ pages now publish the **seven-band PTR scale** — S+ (Arcane Mage, Arms Warrior),
+  B+ (healer page), and a TBD (Subtlety Rogue) — while the `icyveins` scale has five bands
+  and neither S+ nor B+. 19 of 27 M+ DPS letters are identical to the stored
+  `icyveins-ptr` list, i.e. **they promoted the PTR list onto the live URLs**. Left
+  unmerged; `scales.json` is CODEOWNERS/gate contract, so this is an owner escalation, not
+  a collapse into a neighbouring band. While it stands, the M+ forecast's Icy Veins
+  publisher read averages stale S1 live letters with the current PTR letters.
+- **Raid letters WERE applied** (scale-clean: S/A+/A/B/C): 40 rows, **22 moved** — the S2
+  list genuinely replaced the S1 one (Balance Druid B->S, Survival Hunter S->C, Unholy DK
+  A+->C, Blood DK B->S). None of it touches the consensus, which no longer counts Icy Veins.
+- **Consensus is down to two live-season sources** (Method + Archon) plus two frozen lanes
+  (Wowhead since 08-09, Icy Veins from tonight). Measured consequence in the agent tree:
+  **26 consensus tier moves**, which breaches the anomaly gate's 25 — but simulating the
+  frozen lane from HEAD's icyveins letters (what `freeze-season.mjs` does in publish)
+  gives **0 moves**. The 26 is a missing frozen lane, not movement.
+- **icyveins-ptr rebuilt** (dateModified 08-02 -> **08-09**, its Sunday cadence): 11 tier
+  moves, and Subtlety Rogue is **TBD upstream** this week -> stored as an explicit null.
+- Method: unchanged, still self-dated 31 March 2026, still Season 1 -> stays s1, stays in
+  the consensus. Wowhead: unchanged, still Season 2. Archon: 0 tier moves, still S1 content
+  (a separate `beta-mythic-plus` "PTR M+" zone exists upstream — deliberately not ingested).
+- Transport note for Wowhead: the BBCode tier label carries an attribute
+  (`[tier-label bg=q5]S[/tier-label]`), so a bare `\[tier-label\]` regex matches **zero**
+  rows and looks like an empty page. Split on `[tier]`, then match `\[tier-label[^\]]*\]`.
+
+### Recovery pass (same night, 12:00Z) — the flip verified, and a gate that cannot pass agent-side
+
+The primary agent exited on the anomaly gate. Recovery re-derived its biggest claim from
+scratch rather than trusting the log, and everything held:
+
+- **The flip is real.** Re-fetched the three live pages independently: raid-DPS title
+  "Midnight (12.1)", M+ DPS "(Patch 12.1 / Midnight)", raid-healer stale "Patch 12.0.7"
+  title over a body reading "Midnight Season Two Launch Update". The residual `Season 1`
+  string hits (17-18 per page) are **navigation chrome** — the S1 raid/dungeon guide menu —
+  not list content, which is worth knowing before someone "corrects" a future era-verify.
+- **The applied letters are exact**: all 34 stored icyveins raid DPS+healer letters
+  reproduce from the live tables, 0 mismatches, 0 unmatched. The M+ refusal is right too —
+  the live M+ tables really do publish S+ / A+ / B / TBD against a 5-band scale.
+- **The 26-move breach is the missing frozen lane, measured.** Ran `freeze-season.mjs` in a
+  scratch COPY of the tree (never in the repo — `season-final.json` is Gate-0 immutable):
+  it froze icyveins raid+mplus at 40 letters each from 9ed717d, and after a rebuild
+  `check-refresh --manifest` in that copy reported **0 tier moves and PASSED**.
+
+**The structural finding, for the owner.** On a season-flip night the refresh job's
+completion gate **cannot pass, by construction, no matter what the agent does**: the frozen
+lane that neutralizes the movement is written by `freeze-season.mjs` in the PUBLISH job
+(between Gate 0 and Gate 1), while the refresh job runs `check-refresh --manifest` with no
+frozen lane and no trusted ack. The agent's only levers would be dishonest — reverting
+`seasonVerified` to s1, or writing `season-final.json` / `anomalyAck` (both rejected by
+design). So the night reads RED on refresh and GREEN on publish (publish is
+`needs: refresh` + `if: !cancelled()`, so it still runs, and Gate 3 sees 0 moves).
+
+Two ways to close it if it recurs, both owner calls: run `freeze-season.mjs` before the
+refresh job's completion gate, or teach the gate to discount movement attributable to a
+source entering the frozen lane. **A related assumption in CLAUDE.md is wrong**: the
+shallow checkout is NOT why freeze-season is publish-side — it resolved the freeze point
+fine at depth 1, because HEAD is the newest commit whose `sources.json` still verified
+icyveins at s1. The real reason is the Gate-0 boundary, which is a better reason anyway.

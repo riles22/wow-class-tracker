@@ -922,3 +922,39 @@ catch-up path.
   zero `/news/` hrefs (JS-hydrated), and `/search/suggestions-template?q=…` *does* answer 200
   with JSON but only returns items and spells, never news. The remaining lanes for these nine
   are Discord paste-ins and community/HackMD guides, i.e. local-run work.
+
+## 2026-08-11 (nightly, CI) — launch day; nine null writeups became one
+
+- **PATCH 12.1 GOES LIVE TODAY.** Wowhead: 8 hours of NA maintenance ending 15:00 PT on
+  2026-08-11; the week of 08-11 is a **PRE-SEASON**, and **Midnight Season 2 formally opens
+  2026-08-18**. So "12.1 live" and "Season 2 live" are a week apart — worth saying out loud,
+  because the tracker's era vocabulary has one `liveSeason` for both. The owner's frozen
+  forecast is already declared (`data/forecasts/frozen-2026-08-11.json` at HEAD);
+  `SNAPSHOT_PHASE` is still "12.1-ptr" against PHASE_FLIP_DUE 2026-08-20.
+- **No new build.** Thread 2317811.json highest_post_number still 19 (Linxy, 07-31). Wowhead
+  RSS (40 items, 08-04..08-10) carries launch trailer / maintenance / pre-season details /
+  background downloader / housing — no per-spec tuning line. Blue-post sweep: Discourse
+  search for @Kaivax and @Linxy since 08-05 returns housing, an outage and TBC Classic PTR
+  notes only. **Transport note: the Wowhead blue-tracker index is JS-hydrated and every RSS
+  path tried 404s** (`/blue-tracker/rss`, `/blue-tracker/rss/all`, `/blue-posts/rss`,
+  `/news/rss/blue-tracker`) — use the forum's own `search.json` instead.
+- **The writeup gap closed from 9 specs to 1, and the lane that did it was new.** Icy Veins'
+  rebuilt LIVE tier-list pages now carry per-spec **Season 2 analysis paragraphs** — exactly
+  the material the skill's lane (b) said would not exist "until launch". Today is launch.
+  Eight writeups distilled with `source` + `asOf` (page dateModified): Frost DK **Positive**
+  (burst redistributed into sustain, good raid testing), Feral Druid **Mixed** (talent buffs
+  + Apex nerfs, energy fixed, single target still weak), Guardian Druid **Mixed** (Apex
+  rework = steadier damage, but Balance Druid may take the Mark of the Wild slot),
+  Restoration Druid **Negative** (Abundance rework + Verdant Infusion no longer extending
+  HoTs "significantly lower Druid's throughput potential"), Holy Priest **Positive** (S2 mana
+  buffs ease its one stated weakness), Elemental Shaman **Positive** (damage out of
+  Ascendance into baseline; Stormbringer nerf opens Farseer), Affliction Warlock
+  **Positive** (new set + Nightfall rework, Seed applying UA at 20%), Destruction Warlock
+  **Positive** (damage buff + Conflagration of Chaos redesign).
+- **Demonology Warlock stays `ptr: null` on purpose.** Its blurb says the spec received *no*
+  changes beyond the tier set. "Nothing changed" is not one of Positive/Mixed/Negative, and
+  rule (c) is explicit: no clear verdict from the source, no writeup.
+- Worth flagging for the owner: these eight verdicts come from the SAME publisher whose
+  letters feed the next-patch forecast term. Different components, but one voice.
+- WCL zones are evidence-only from CI: zone 54/52/56 raw series landed pre-agent; the
+  rDPS/normalized cuts stay frozen under the standing `rdps-broken` verdict.

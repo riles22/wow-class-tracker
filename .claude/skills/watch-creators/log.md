@@ -1706,3 +1706,27 @@ disagree, re-scope the new evidence before retiring the old.
 - **`sites[]`**: his guide hub is now linked from Warlock, alongside the SimC APL entry. Needed
   its own `SITE_HOSTS` entry — a separate allowlist from `TAKE_HOSTS`, so two reviewed code edits,
   both committed apart from the data.
+
+## 2026-08-11 (nightly, CI) — full discovery, zero transcripts
+
+- **Transcript budget is gone.** `transcript-fetch/summary.json` verdict **limit-exceeded**
+  on the one video it tried (`bqVHzvKJCuA`), 1 requested / 0 fetched. **Zero takes, zero
+  metaNotes** added or changed; no YouTube or transcript-API fetch by the agent.
+- **Discovery ran in full: 76 feeds, 76/76 HTTP 200, zero failures**, 1140 entries. Seen-set
+  rebuilt from the four structured lanes = **878 ids**. 30 unique unseen videos on or after
+  the cycle bound 2026-06-18; 8 unseen before it.
+- **Harrek had never been polled.** His entire feed came back unseen — 8 pre-cycle videos
+  (2026-05-16..06-17, appended to `seen[]`) and 6 in-cycle, including two directly on the
+  **Restoration Shaman rework** for 12.1. Worth an owner look at how he was added without
+  ever entering the seen-set.
+- **Nine queued** (launch-eve spec analysis, keyword-filtered as the nightly must be against
+  the 100/month Supadata budget): Bansherz MM Hunter S2 guide; VooDooSaurus + Jedith
+  Devourer DH 12.1; LBNinja7 Mistweaver M+ S2; **Tactyks Protection Paladin 12.1** (the spec
+  he was added to close); Publik Shadow Priest S2; Obli DK tier list S2; two Harrek
+  Restoration Shaman videos. Queue now holds 10 against a spent budget — it drains when the
+  month rolls, or in a local yt-dlp run.
+- **Deliberately not queued and NOT written to `seen[]`**, so a local run can sweep them
+  free: Supatease and Dalaran Gaming PvP videos (out of scope for a PvE tracker), YoDaTV's
+  Twitch re-uploads, misc stream VODs.
+- `latest` refreshed on the queued creators' entries, each saying plainly that the video is
+  **not yet distilled** — the field is display copy, not evidence of a take.

@@ -882,3 +882,37 @@ numbers (95th pct DPS / popularity / M+ score — ungated, not in required-sourc
   rows / Venomous Abyss 27 / M+ keys 27). No warcraftlogs.com fetch of any kind by the agent.
 - `npm test` 336 pass / 0 fail / 27 skipped; `npm run build` OK; `check-refresh --manifest`
   passes (1 tier move vs the committed baseline, 0 of ≥2 bands).
+
+## 2026-08-11 (nightly, CI)
+
+- **Archon split cleanly in two this run.** RAID re-cut (33 "95th pct DPS" rows and all 7
+  HPS rows moved; 14 of 40 raid popularity values moved) and was merged at today's date.
+  **M+ did not**: all 40 "M+ score (95th pct)" values AND all 40 M+ popularity values are
+  byte-identical to 08-10, with Archon's own `lastUpdated` unchanged at 2026-08-10T12:00:00Z.
+  Nothing M+ was merged and neither date was restamped -> `archon-mplus-score` and
+  `archon-popularity` are honest **partials**. (Last run had M+ popularity moving, which is
+  what made a same-label fetch defensible then; that evidence is absent today.)
+- **Murlok: 40/40 values byte-identical to 08-10, and re-merged anyway.** The page states
+  "Updated 4 hours ago" on an 8-hour cadence, so this is a **static Season-1 ladder on the
+  last day of the season**, not a stalled feed — the distinction the wowmeta/bloodmallet
+  rule turns on is whether the SOURCE has a date, and murlok's says fresh. Protection
+  Paladin is back on the tank page after vanishing last run, so no row had to be held over.
+- **Mythicstats re-cut inside the same period id**: still period 1075 / week 20, but
+  3247 unique characters and 22.5 avg key level (vs 3949 / 21.8 last night) and 25 values
+  moved. Period id alone is NOT a change detector — compare the population line too.
+  36 of 40 specs on the chart; Vengeance DH, Restoration Druid, Devastation Evoker and
+  Protection Paladin are absent upstream and keep their stored rows.
+- **Bloodmallet still frozen at 2026-07-08** (Elemental alone 07-15) — 26 charts fetched,
+  all MID1, all target maps byte-identical, Augmentation still the 76-byte error body.
+  34 days stale against maxAgeDays 5: the red heartbeat is the correct signal.
+- **SimulationCraft is mid-run.** MID1_Raid.html is the same completed report
+  (Last-Modified 2026-08-08 07:28:34 GMT, in-report Timestamp 07:28:33+0000, stored values
+  reproduce exactly), while `MID1_Raid.txt` is currently a **272-byte stub** — header plus
+  "Simulating..." — i.e. a new nightly is running and has not published results. Useful
+  cheap probe: the .txt tells you the run state without pulling the 37 MB HTML.
+- **WoWMeta** unchanged (snapshotDate 2026-08-05, 40/40 identical) -> partial, not restamped.
+- **Robydoby** (best-effort, outside the contract): newest Mythic week on the sheet is still
+  24/7 with two boss tabs, which is exactly what is stored -> nothing to merge.
+- **WCL**: evidence-only (`rdps-broken`, 11:25:06Z, OAuth + GraphQL healthy, 1 point spent).
+  The five rDPS/normalized cuts stay frozen; the three raw series landed pre-agent (Dummy
+  Dome 102 rows / Venomous Abyss 27 / M+ keys 27). No warcraftlogs.com fetch by the agent.
