@@ -127,10 +127,15 @@ test("re-freezing a date whose artifact would DIFFER is refused", async () => {
   } finally { await rm(dir, { recursive: true, force: true }); }
 });
 
-test("an ordinary re-snapshot REFUSES to overwrite a freeze declaration whose state has moved", async () => {
-  /* The counterpart to the carry-forward: preserving the flag while replacing the state
-     underneath it would keep the declaration pointing at a forecast nobody declared. The
-     declaration is irreplaceable and the daily state is not, so the write is refused. */
+test("an ordinary re-snapshot SKIPS (exit clean) when a freeze declaration's state has moved", async () => {
+  /* The counterpart to the carry-forward. All three write options are wrong on a frozen
+     date: overwrite destroys the declaration, re-stamp mis-declares, and a hard error was
+     tried first and killed the very next publish (the 2026-08-11 auto-kicked nightly died
+     red at its snapshot step — the freeze date and launch day are the same UTC day by
+     construction, so the collision is guaranteed, not exotic). The correct behaviour is a
+     clean SKIP: nothing written, no error, the declaration untouched, and the moved state
+     left for the next UTC date's snapshot. pickBaseline compares against the newest
+     DIFFERING snapshot, so the frozen file still serves as that night's baseline. */
   const dir = await sandbox();
   try {
     await snapshot(dir, "2026-08-11", { frozen: true });
@@ -142,11 +147,10 @@ test("an ordinary re-snapshot REFUSES to overwrite a freeze declaration whose st
     victim.ptr.verdict = victim.ptr.verdict === "Positive" ? "Negative" : "Positive";
     await writeFile(specsPath, JSON.stringify(specs, null, 2) + "\n");
 
-    await assert.rejects(
-      () => snapshot(dir, "2026-08-11"),
-      /carries frozen: true/,
-      "a plain snapshot must not silently re-point a freeze declaration at different state");
+    const res = await snapshot(dir, "2026-08-11");     // must NOT throw — publish runs this
+    assert.equal(res.skippedFrozenDate, true, "the collision must be reported as a skip");
+    assert.equal(res.outPath, null, "a skipped snapshot must write nothing");
     assert.equal(await readFile(path.join(dir, "data", "history", "2026-08-11.json"), "utf8"), before,
-      "the declared snapshot must survive the refused write untouched");
+      "the declared snapshot must survive the skipped write untouched");
   } finally { await rm(dir, { recursive: true, force: true }); }
 });

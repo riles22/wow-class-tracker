@@ -34,18 +34,26 @@ export async function snapshot(root = ROOT, date = new Date().toISOString().slic
      onto a freshly-read state would be worse than dropping it: the declaration would survive
      while silently pointing at a different forecast, and the report card would then grade
      post-launch data as the pre-launch answer with no "INFERRED" warning to give it away.
-     When the state has moved we refuse the write instead — the daily state can be
-     regenerated at any time, the one-shot declaration cannot, so the declaration wins. */
+
+     When the state HAS moved, the write is SKIPPED — not refused with an error. All three
+     write options are wrong on a frozen date (overwrite destroys the declaration, re-stamp
+     mis-declares, and a hard error was tried first and killed the very next publish: the
+     2026-08-11 auto-kicked nightly died red at its snapshot step, because the freeze date
+     and launch day are the same UTC day by construction). Skipping loses nothing that
+     matters: pickBaseline compares against the newest DIFFERING snapshot, so the frozen
+     snapshot is tonight's baseline either way, and the moved state lands in the next UTC
+     date's file. The declaration is irreplaceable; the daily state is not. */
   const outPathEarly = path.join(root, "data", "history", `${date}.json`);
   const prior = await readFile(outPathEarly, "utf8").then(JSON.parse).catch(() => null);
   const nextState = snapshotStateOf(payload.specs);
   const stateMoved = prior != null && JSON.stringify(prior.specs) !== JSON.stringify(nextState);
   const carriedFrozen = prior?.frozen === true;
   if (carriedFrozen && stateMoved && !frozen) {
-    throw new Error(
-      `snapshot: data/history/${date}.json carries frozen: true — it is the declared pre-launch forecast the report card grades — ` +
-      `and this run's state differs from it. Refusing to overwrite the declaration with a different forecast. ` +
-      `Snapshot under a different date, or delete the declaration deliberately if the freeze is being redone.`);
+    console.warn(
+      `! skipped: data/history/${date}.json is the declared pre-launch forecast the report card grades, ` +
+      `and this run's state differs from it. The declaration is preserved untouched; ` +
+      `tonight's state will land in the next UTC date's snapshot.`);
+    return { outPath: null, frozenPath: null, skippedFrozenDate: true, specs: Object.keys(nextState).length };
   }
   if (carriedFrozen && !frozen) {
     console.warn(`! ${date}.json already carries frozen: true and the state is unchanged — preserving the freeze declaration`);
@@ -182,9 +190,13 @@ if (isMain) {
     const frozen = process.argv.includes("--frozen");
     const dateArg = process.argv.slice(2).find(a => !a.startsWith("--"));
     const result = await snapshot(ROOT, dateArg || undefined, { frozen });
-    console.log(`✓ snapshot → ${result.outPath} (${result.specs} specs)` +
-      (frozen ? " — FROZEN: this is the forecast the report card will grade" : ""));
-    if (result.frozenPath) console.log(`✓ immutable forecast artifact → ${result.frozenPath}`);
+    if (result.skippedFrozenDate) {
+      console.log("· no snapshot written (frozen-date collision — see the notice above); exit 0, the run is not at fault");
+    } else {
+      console.log(`✓ snapshot → ${result.outPath} (${result.specs} specs)` +
+        (frozen ? " — FROZEN: this is the forecast the report card will grade" : ""));
+      if (result.frozenPath) console.log(`✓ immutable forecast artifact → ${result.frozenPath}`);
+    }
   } catch (error) {
     console.error("✗ " + error.message);
     process.exit(1);
