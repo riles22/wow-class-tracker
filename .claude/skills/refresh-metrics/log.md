@@ -916,3 +916,27 @@ numbers (95th pct DPS / popularity / M+ score — ungated, not in required-sourc
 - **WCL**: evidence-only (`rdps-broken`, 11:25:06Z, OAuth + GraphQL healthy, 1 point spent).
   The five rDPS/normalized cuts stay frozen; the three raw series landed pre-agent (Dummy
   Dome 102 rows / Venomous Abyss 27 / M+ keys 27). No warcraftlogs.com fetch by the agent.
+
+- 2026-08-11 (LOCAL run, ~14:2xZ — Opus 5; scheduled residential catch-up after the 10:37Z
+  nightly). **No metric source re-fetched or re-stamped** — CI refreshed Archon / Murlok /
+  Mythicstats / WoWMeta / Bloodmallet / SimC this morning, and independently regenerating
+  what CI produced is what makes a local push unmergeable. `data/run-manifest.json`
+  deliberately untouched (partial run).
+- **WCL: the standing `rdps-broken` state is confirmed from a residential IP, and the
+  08-09 FULL outage has CLEARED.** OAuth issues a token, `rateLimitData` answers
+  (3600/h, 1 point spent), and `characterRankings` returns **100 rankings for `dps` and for
+  `hps`** on encounter 3176. The redistributed-credit family is still dead: `rdps`, `ndps`
+  and `playerscore` each return a bare "Internal server error" GraphQL body at HTTP 200.
+  So this is byte-for-byte the verdict the nightly's pre-agent evidence recorded — the
+  breakage is **API-side, not IP-side**, and residential access buys nothing here.
+- **The HTML statistics endpoint is still behind the human challenge.** `zone/statistics/46`
+  and `zone/statistics/47`, sent with the full documented header set (XHR + browser UA +
+  Referer), both return **HTTP 302 → `/human-challenge`**. This is the same wall the 08-10
+  run hit; that run only got through because **Riley cleared the challenge himself in the
+  in-app browser** and the fetches ran as in-page XHR through his session. Completing a bot
+  check is not the agent's to do, and this run is unattended, so it was not attempted.
+- **Net: all five WCL cuts left exactly as they were** (zones 46/47 and ptrDummy at 08-10,
+  zone 54 at 07-28, zone 56 at 08-10). Nothing papered over, nothing substituted — in
+  particular the healthy `dps`/`hps` numbers were NOT dressed up under the rDPS-labeled
+  series. Re-check next run: if `rdps` answers, the standing one-retry rule applies; if it
+  still 500s, the restore needs an owner-cleared browser session as on 08-10.

@@ -972,7 +972,7 @@
       "sentiment": "buff",
       "claim": "He's hyped about Shadow's 12.1 direction as 'stuff we've been asking for': new Shade Burst gives passive AoE exploding apparitions (currently only ~2-3% of damage and bugged to not proc off tormented-spirit or Void Apparition apparitions), Void Form now grants charges of Void Volley (removing haste breakpoints and smoothing the rotation), and a reworked Ancient Madness (stacking haste plus Void Form extension with a decaying tail) looks like the dominant choice — leaving fun and tuning as the open questions.",
       "url": "https://youtu.be/RQtPwhxlug4?t=1097",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Priest",
@@ -983,7 +983,7 @@
       "sentiment": "buff",
       "claim": "He flags the Archon hero tree as wildly overtuned on the PTR — the redesigned Focused Outburst (Shadow Word: Madness during Void Form unleashes a full Void Volley) is 'insanely broken,' worth more than the entire Void Weaver tree, and he fully expects it to be nerfed before ship; separately the Resonant Energy rework (now a can't-miss flat player buff instead of a Halo-hit debuff) works around Halo's radius/dead-zone bugs for roughly a 1% Archon gain.",
       "url": "https://youtu.be/RQtPwhxlug4?t=579",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Priest",
@@ -994,7 +994,7 @@
       "sentiment": "neutral",
       "claim": "On the not-yet-testable tier set (2-set: Tentacle Slam cooldown -3s and damage +100%; 4-set: post-Tentacle-Slam instant Vampiric Touch that conjures 200%-damage apparitions) he's lukewarm — it leans hard into Tentacle-Slam-as-a-damage-button, which he wouldn't have chosen, and he shares the mixed community reaction especially to the 4-set, wanting something more unified; verdict pending hands-on testing.",
       "url": "https://youtu.be/RQtPwhxlug4?t=963",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Priest",
@@ -1205,7 +1205,7 @@
       "patchContext": "12.1 PTR",
       "claim": "His broader Season 2 PTR read on Arms: pure single-target output is nothing impressive but feels less bad than in the current season. He thinks 12.1 is still a funnel-oriented season — funnel is slightly less effective than before but still clearly worth doing to speed keys up. One sore spot: Sweeping Strikes uptime is noticeably lower than in Season 1, which feels bad.",
       "url": "https://youtu.be/jFAIFhhP7xw?t=3022",
-      "superseded": false,
+      "superseded": true,
       "bracket": "mplus"
     },
     {
@@ -2671,7 +2671,8 @@
       "sentiment": "neutral",
       "patchContext": "12.1 PTR (2026-06-18 build)",
       "claim": "Early PTR numbers: the Venomous Abyss set is worth about 6% total (5% from the 2-piece, only 1% from the 4-piece), and Archon sits roughly 15%+ ahead of Voidweaver in all forms of content — mostly on the back of Focused Outburst.",
-      "url": "https://www.youtube.com/watch?v=RQtPwhxlug4"
+      "url": "https://www.youtube.com/watch?v=RQtPwhxlug4",
+      "superseded": true
     },
     {
       "class": "Rogue",
@@ -2793,7 +2794,7 @@
       "patchContext": "12.1 PTR (2026-08-01 tuning pass)",
       "claim": "Reading the 08-01 tuning pass, Obli argues that what looks on paper like an AoE nerf is in practice a single-target buff. The listed cuts are real but modest — Virulent Plague -10% (he measures it as roughly 24m down to about 2.5m lost), graveyard -15% and Epidemic -12% — while auto-attack damage doubling only moves melee from about 2% to 4.4% of his damage on a dummy and stays near 2% in a key, which he reads as a deliberate nudge to stop playing Unholy as a pseudo-ranged spec. The change he credits for the real gain is Corrupted Blood / withering grasp +25%, which also helps AoE. He points to the single-target dummy leaderboard now filling with 07-31 and 08-01 parses where it had been stale June logs, says his own keys feel slightly better than before, and calls the net effect a buff — while explicitly rejecting the S-tier framing some are giving it and placing the spec at 'A plus'. He notes Blood's San'layn nerfs do not touch Unholy's San'layn, and that Frost was left unchanged.",
       "url": "https://youtu.be/okDLvLGMFzs?t=300",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Warrior",
@@ -3001,7 +3002,7 @@
       "patchContext": "12.1 PTR — Season 2 main-choice review (pros/cons)",
       "url": "https://youtu.be/Elr2gfyCFsE?t=833",
       "claim": "As a Mistweaver main he calls the dynamic rotation genuinely back — Spinning Crane Kick nerfed, Rising Sun Kick, Ancient Teachings and Jade Fire Teachings buffed — which he rates as great for the player even if it is not what makes the spec strong. On placement he is explicit that after the PTR nerfs he still has Mistweaver in S tier, moving from what he considered S+ down to S, now contested by Holy Paladin (which he says he would also raise to S having tested it more), and argues the spec is criminally underrated by the community post-nerf. The trade-off he names: it is no longer the one-button pack-healer of Season 1.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Priest",
@@ -3661,7 +3662,7 @@
       "patchContext": "12.1 PTR — Devourer and Havoc sim pass after a haste/GCD double-apply bug was found and corrected in the sims",
       "url": "https://youtu.be/JBpc1cPXWWg?t=164",
       "claim": "He reports what he calls the strangest find of his theorycrafting career: since Devourer's alpha release, haste has been double-applying to the GCD of Reap, Cull, Consume and Devour in game, so those GCDs reached the 0.75s floor at 50% haste rather than 100%. The sims never modelled it, which is why sim output had persistently undershot in-game results. With the behaviour now reproduced, Void Scourge sims around 275k single target and he says plainly that Devour is broken and insanely busted — Void Scourge stays the raid build with roughly a 20k single-target gap over Annihilator, and even Void Scourge's dungeon/cleave build out-single-targets Annihilator's pure single-target build. The read is explicitly provisional in both directions: he has reported the bug and says it either gets fixed, in which case the older sims were right, or Blizzard aura-nerfs the spec, which is what he hopes for; his stated fear is an aura nerf applied without the bug fix being compensated. He also notes Annihilator gained more from the correction than Void Scourge (about 7% across scenarios) because Metamorphosis uptime yields more Collapsing Stars, so a bug fix would hit Annihilator hardest — while Collapsing Star itself is weak enough that building around extra stars is no longer worth it.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Demon Hunter",
@@ -3890,7 +3891,7 @@
       "claim": "He reads the pass as a partial walk-back rather than a real gain: all damage up 5%, but that only restores the previous build's across-the-board nerf, with Immolation Aura's damage and Fury generation cut and moved into active abilities and Demon Blades. Essence Break's initial hit is up 35% and should give good burst. His overall verdict is still negative — Havoc remains pretty low on DPS compared with the rest of the field — and he flags that the Venomous Abyss four-piece is bugged, buffing the Chaos Strike / Blade Dance proc inside the window rather than Essence Break's initial hit as the tooltip says."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Demon Hunter",
       "spec": "Devourer",
       "creator": "Jedith",
@@ -4514,6 +4515,198 @@
       "patchContext": "12.1 PTR — his analysis of the healer Dummy Dome testing session (a raid-style five-minute damage ramp)",
       "url": "https://youtu.be/Li67ghcCJo4?t=30",
       "claim": "From the 12.1 PTR healer Dummy Dome session — a full raid of high-level healers on a dummy that ramps damage over five minutes — he reads Restoration Shaman as gaining substantially in Season 2, with haste as the change that matters: Riptide's heal-over-time is doubled and extendable through the new Swelling Tides, Healing Rain is buffed, the tier set randomly spawns extra Healing Rains (more of them the more haste you carry) and the 4-piece shields on every Healing Rain tick rather than the tooltip's stated one second, while the higher crit reachable in Season 2 feeds Resurgence and eases the mana ceiling that made haste unattractive in Season 1. He settles on mostly crit and then heavy haste, with Versatility as the fallback if mana is a real problem, and adds that 12.1's Innervate is \"probably better than it has ever been\" for the spec. On hero talents he recommends Totemic: Farseer beat his expectations and can match or exceed its healing, but is far more punishing under movement and overlapping cooldown resets, where Totemic \"practically plays itself\". He makes no comparison against other healers."
+    },
+    {
+      "superseded": false,
+      "class": "Death Knight",
+      "spec": "Frost",
+      "creator": "Obli",
+      "date": "2026-08-10",
+      "sentiment": "buff",
+      "bracket": "both",
+      "patchContext": "12.1 PTR — his Season 2 DPS Death Knight tier list, ranking the spec/hero-tree combinations against each other",
+      "url": "https://youtu.be/HjnR3eeGsKI?t=449",
+      "claim": "He ranks Rider Frost the best Death Knight specialisation for Season 2 by a clear margin, putting it alone at the top of his list. His case is that it is doing very well on the PTR, carries good damage with significant burst roughly every 90 seconds, and — unlike Deathbringer — keeps more consistent damage outside its cooldown windows, while playing far more simply: the opener is straightforward, there is no Exterminate buff to track, and the rotation does not change whether or not the Riders are out. He rates Deathbringer Frost third and explicitly not bad, praising its 45-second burst window as handy for a lot of content but arguing it loses power on longer fights and is punishing if the second window does not arrive. The one hard condition he attaches: Rider Frost needs the new raid two-piece and one-handed weapons, so he tells viewers not to play Frost without it and to switch to it only once they have it. He rates only the DPS specs and states outright that he is not covering Blood."
+    },
+    {
+      "superseded": false,
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "creator": "Obli",
+      "date": "2026-08-10",
+      "sentiment": "buff",
+      "bracket": "both",
+      "patchContext": "12.1 PTR — his Season 2 DPS Death Knight tier list, ranking the spec/hero-tree combinations against each other",
+      "url": "https://youtu.be/HjnR3eeGsKI?t=462",
+      "claim": "He places Rider Unholy second, in A tier, and makes it his explicit patch-day recommendation: because Rider Frost depends on the new raid two-piece, he tells viewers to play Unholy at launch and switch once they have the set and one-handed weapons. On the spec itself he is positive — great damage, a simpler rotation than the Sandlane build because there is no Essence of the Blood Queen buff to maintain, more mobility, and damage he rates as equal to or better than Sandlane for an easier time. He is markedly negative on Sandlane Unholy specifically, not on the spec: it demands tank coordination to hold the Blood Queen buff, is hard to rebuild once dropped, and is not worth forcing yourself into a harder version of the spec for minimal or no gain when Rider Unholy does comparable damage in keys. He allows Sandlane could see raid play, where constant combat makes the buff easier to hold, and could do very well if there are execute damage amplifiers."
+    },
+    {
+      "superseded": false,
+      "class": "Hunter",
+      "spec": "Marksmanship",
+      "creator": "Bansherz",
+      "date": "2026-08-11",
+      "sentiment": "mixed",
+      "bracket": "both",
+      "patchContext": "12.1 PTR — Season 2 Marksmanship Hunter guide (rework, tier set and hero-tree read; complements, not replaces, his 08-07 M+ tier read)",
+      "url": "https://youtu.be/foRnDiuAC7E?t=1",
+      "claim": "He describes 12.1 as another soft rework for Marksmanship, centred on Explosive Shot: it now detonates every second it is on the target rather than once at the end, with two new talents beneath it — one allowing a second cast, which he calls really strong, and one adding a second of duration and therefore another explosion. Bullet Storm now buffs the next Aimed Shot after Rapid Fire instead of extending a duration, Wind's Quiver is redesigned around Rapid Fire, Aspect of the Hydra no longer affects Arcane Shot, and Double Tap is gone entirely, which he reads as too hard to balance. He rates the two-piece pretty good (a further second on Explosive Shot plus 5% more damage) and the four-piece nice, with flat Aimed and Rapid Fire damage and Explosive Shot reducing both cooldowns. Against that he calls the relocation of Tenacious and Cunning bad for the spec — previously taken automatically on the way to True Shot, it is now a real choice between losing damage and being too squishy, which he characterises as a loss either way. On hero trees he judges Dark Ranger too far behind numerically to touch: the talent and tier-set changes push you toward Sentinel, which is also tanky enough that Dark Ranger's defensives no longer justify it, though he notes the Black Arrow proc is now telegraphed by a buff rather than random, which he rates a nice quality-of-life gain."
+    },
+    {
+      "superseded": false,
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "creator": "VooDooSaurus",
+      "date": "2026-08-10",
+      "sentiment": "mixed",
+      "bracket": "both",
+      "patchContext": "12.1 PTR — his Season 2 Devourer guide as the Wowhead and Icy Veins Devourer guide writer (recorded 2026-08-09)",
+      "url": "https://youtu.be/9Y_5o66--2k?t=39",
+      "claim": "He calls Devourer pretty different in 12.1 and makes Void Scourge his recommended build for every situation — single target, party damage and overall damage profile all favour it, and he says it is significantly better than Annihilator in raid and in every situation once a live bug is fixed. That bug is the same haste/GCD double-apply he reported earlier, still present in game at recording: Cull, Reap, Devour and Consume take double the intended haste effect, which he says is pushing Annihilator higher than intended and is the only reason it is close in Mythic+. He tells viewers they can play Annihilator meanwhile, particularly on large pulls, and puts its crossover at roughly ten to twelve targets and above. He is clearly negative on Collapsing Star after its nerfs — very poorly tuned, poor synergy with the Void Scourge tree, no longer top damage, and a button he instructs Void Scourge players never to press. Against that he rates the tier set super powerful, saying it drives a lot of Reap damage and genuinely changes the rotation. He also flags that the optimal AoE pattern involves dropping Unrestrained Fury to cycle Void Metamorphosis windows faster and deliberately pressing nothing at the end of each window, and notes Blizzard has said they dislike this and intend to fix it in a future patch."
+    },
+    {
+      "superseded": false,
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "creator": "Jedith",
+      "date": "2026-08-10",
+      "sentiment": "buff",
+      "bracket": "both",
+      "patchContext": "12.1 PTR — his Season 2 Annihilator Devourer guide, deliberately covering the caster build ahead of the Void Scourge guides",
+      "url": "https://youtu.be/KS5BJbMJfFA?t=25",
+      "claim": "He argues the Annihilator caster build is more viable than the community initially concluded: after recent discoveries it is behind by only a couple of percent in AoE, which he calls not much in the grand scheme, and he tells viewers the playstyle is totally viable and still very competitive, especially in Mythic+, where he expects a lot of people to keep playing it. He reads the 12.1 changes as an improvement to the spec's feel: some damage has been moved out of the Void Metamorphosis windows into the out-of-meta windows for more even and reliable output, though he is careful to say a lot of damage still sits inside meta and centres on Collapsing Star. He rates the tier set very highly — the two-piece gives harvesting four or more fragments with Reap a 20% chance to make the next Consume instant and explode, and the four-piece grants eight fragments plus 20% increased Reap damage — and says the practical effect is pressing Reap almost as often as Consume, so that Consume spam is a thing of the past. He confirms Collapsing Star was nerfed but, unlike the Void Scourge build, still calls it the main bread and butter at high target counts. This is a different lens from VooDooSaurus's same-week read, which puts Annihilator behind Void Scourge in all situations."
+    },
+    {
+      "superseded": false,
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "creator": "LBNinja7",
+      "date": "2026-08-10",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "12.1 PTR — his Season 2 Mythic+ Mistweaver guide, tracing the full PTR tuning arc (complements his 08-02 M+ healer tier-list placement)",
+      "url": "https://youtu.be/UOSfwF00VSE?t=35",
+      "claim": "Walking through the whole PTR tuning arc for keys he describes a spec pulled in two directions. On the gain side, mastery — the spot heals that proc from applying a mist or kicking up an ally — was buffed twice, the second time by a further 50%, which he calls much more healing than Season 1 and later a gigabuff; Jadefire Teachings was buffed, deliberately incentivising the single-target rotation over Spinning Crane Kick spam. On the loss side he lists a 3% cut followed by a further 8% nerf to everything outside damage-conversion healing, a Spinning Crane Kick nerf to both its damage and its healing component, and a 60% cut to Morning Breeze, which took Rising Sun Kick's mastery scaling from 20% to 8% and pulled the spec back off the mastery path it had been driven down for most of the PTR. He says those active-healing nerfs hit Shaolin's Gift hard enough that the third point is no longer affordable, with Spirit Font stepping in for spot healing. The tier set pivots from Renewing Mist to Rising Sun Kick — 30% more damage plus a chance to reset its own cooldown — and he says the practical consequence is that the rotation is genuinely target-count dependent again rather than Spinning Crane Kick dominating. Stats are haste, then crit, then mastery, then versatility. He ends positive on how it plays, saying he is excited for the single-target rotation and more healing on boss fights, and keeps a high-mastery build on the fringe as viable if gear supplies the stat."
+    },
+    {
+      "superseded": false,
+      "class": "Paladin",
+      "spec": "Protection",
+      "creator": "Tactyks",
+      "date": "2026-08-10",
+      "sentiment": "mixed",
+      "bracket": "raid",
+      "patchContext": "12.1 PTR — his Season 2 Protection Paladin guide, raid build and tier-set section (complements, not replaces, his 08-09 raid tank tier-list placement)",
+      "url": "https://youtu.be/C0HuvxhvNnA?t=687",
+      "claim": "He reads the Season 2 spec-tree rework as a deliberate move of power out of the Avenging Wrath window and into the baseline spec, and is explicit that it cuts both ways for raid. The cost: Avenging Wrath's damage, healing and crit bonus are halved from 20% to 10%, and Sanctified Wrath is removed entirely, so wings run shorter and Judgment gives one Holy Power instead of two inside them — a hit he calls fairly significant and says will be felt hardest at launch before item level partly compensates. He also flags a more than 50% cut to Reflection of Radiance's proc rate as a very large nerf that brings Lightsmith's wings uptime down toward Templar's, and notes Word of Glory did not receive the compensation healing other abilities got for the patch-wide 25% health increase, leaving it relatively weaker than in Season 1. Against that he rates the baseline spec stronger defensively: the new Seal of Reprisal gives a 10% damage reduction on anything hit by Blessed Hammer, the reworked Word of Glory no longer crits but scales with crit chance and converts 80% of overhealing into an absorb, Bulwark and Undying Embers are buffed, and Paladin double-dips the compensation healing because those heals scale off the buffed Avenger's Shield and Consecration damage. On the tier set he is positive but measured — a 30% larger Consecration granting 5% increased crit chance against enemies standing in it, and 20% additional Holy damage from Judgment and Blessed Hammer that doubles on a critical strike — calling it a pretty substantial throughput boost and a solid set, though not the best, and purely offensive. He rates stats haste first, then crit, then versatility, with mastery last and still unreliable after no rework."
+    },
+    {
+      "superseded": false,
+      "class": "Paladin",
+      "spec": "Protection",
+      "creator": "Tactyks",
+      "date": "2026-08-10",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "12.1 PTR — his Season 2 Protection Paladin guide, Mythic+ build section (complements, not replaces, his 08-09 M+ tank tier-list placement)",
+      "url": "https://youtu.be/C0HuvxhvNnA?t=404",
+      "claim": "For keys he generally recommends Lightsmith but is emphatic that Templar is equally viable — he says there is no problem playing it and that you can have just as much success, partly because there is a lot of empty space in this season's dungeons, which hurts Shake the Heavens uptime. He stresses the left side of the tree is unchanged from Season 1, so the familiar flex points remain, and singles out Righteous Protection as a niche pick this season because of the number of poison dispels in the dungeon pool. The rework's practical effect on keys is that Instrument of the Divine moves out of the capstone into the middle of the tree, which he says makes it a mainstay of essentially every build since the capstone was always too tight to afford it in Mythic+; it lets Shield of the Righteous consume five Holy Power for extra damage, with the caveat that fishing for five risks losing the defensive uptime. He gives two specific new-tool instructions for pulls: use Blessed Hammer early to get the 10% Seal of Reprisal damage reduction rolling before grouping, and spend spare Word of Glory procs on yourself for the overheal absorb to smooth the initial grouping. He expects key-pushing Protection Paladins to favour the haste-proc sword from the final boss over the higher-damage axe and trinket set combo, because the single-target damage procs matter far less in keys and the set eats a trinket slot for no defensive value. He notes the rotation itself is essentially unchanged from Season 1."
+    },
+    {
+      "superseded": false,
+      "class": "Priest",
+      "spec": "Shadow",
+      "creator": "Publik",
+      "date": "2026-08-10",
+      "sentiment": "buff",
+      "bracket": "both",
+      "patchContext": "12.1 PTR — his Season 2 Shadow Priest guide (supersedes his 06-21 initial-build reads, several of whose numbers he revises here)",
+      "url": "https://youtu.be/2OS9e2aMAlw?t=60",
+      "claim": "He is strongly positive on Shadow's Season 2 direction, saying the changes are focused and targeted and cover a lot of what the community has asked for, and calling it possibly the most fun Shadow playstyle in a while. He revises his own June figure for the new Shade Burst talent upward: rather than the 2-3% he measured on the initial build, it is now doing roughly 5-6% of damage in single target and more in AoE, giving the spec a stable AoE anchor so Psychic Link no longer has to absorb constant tuning, and letting Shadow damage small adds without dotting them. Void Form is reworked so Void Volley has three uses per window instead of a cooldown, which he says removes the rigid pressure to fire the first one immediately and makes the playstyle much more forgiving. Ancient Madness is redesigned to stack 2% haste and 1.5 seconds of Void Form duration per Shadow Word: Madness up to five times, with the haste lingering and decaying over ten seconds afterwards, giving back a ramping feel — and he notes the consequence that pure single-target haste value falls slightly while crit rises. He also revises his June read of the tier set from lukewarm to excited: the two-piece takes three seconds off Tentacle Slam and doubles its damage, and the four-piece grants a free full-effectiveness Void Volley from every Tentacle Slam, which changes the opener (open Mind Blast rather than Tentacle Slam) and makes Tentacle Slam a genuine damage button rather than an afterthought. He cautions that trinkets are undertuned and expects further tuning after release."
+    },
+    {
+      "superseded": false,
+      "class": "Priest",
+      "spec": "Shadow",
+      "creator": "Publik",
+      "date": "2026-08-10",
+      "sentiment": "neutral",
+      "bracket": "both",
+      "patchContext": "12.1 PTR — his Season 2 Shadow Priest guide, hero-tree comparison (supersedes his 06-21 read that Archon was 15%+ ahead)",
+      "url": "https://youtu.be/2OS9e2aMAlw?t=518",
+      "claim": "On hero trees he keeps Archon ahead of Voidweaver but in far more measured terms than his June read, which had put Archon roughly 15% or more ahead in all content on the back of Focused Outburst. Here he says Voidweaver is still looking a little under Archon in single target and that he does not expect it to see a lot of raid play, while providing a Voidweaver build for anyone who wants it and noting the Mythic+ gap is small enough that the build differs from Archon's by essentially one talent. He describes the Archon changes as consolidating rather than inflating: Focused Outburst is redesigned so Void Volley deals a flat 15% more damage and Shadow Word: Madness during Void Form unleashes a reduced-effectiveness Void Volley, which he explicitly identifies as a tuning knob; and Resonant Energy is reworked from a Halo-applied debuff into a stacking self-buff, which he welcomes mainly as a consistency fix because Halo sometimes missed targets. He is candid that he expects post-release tuning to move these rankings."
+    },
+    {
+      "superseded": true,
+      "class": "Shaman",
+      "spec": "Restoration",
+      "creator": "Harrek",
+      "date": "2026-07-22",
+      "sentiment": "buff",
+      "bracket": "both",
+      "patchContext": "12.1 PTR — live read-through of the Restoration Shaman rework patch notes (superseded by his 08-08 Dummy Dome read)",
+      "url": "https://youtu.be/NNPdcVOzPVU?t=484",
+      "claim": "Reading the Restoration Shaman rework notes unrehearsed, he is emphatically positive, saying he has no idea where the spec lands on balance but thinks it is absurdly strong, expects incredible buffs to show on the following PTR builds, and closes with zero complaints, zero notes. The specifics he singles out: Riptide's direct healing up 25% and its periodic healing doubled, fixing what he calls a centrepiece talent that was weak at actually healing and only existed to proc other effects; a new Swirling Tides talent letting Healing Stream and Storm Stream Totem extend active Riptides by three seconds, which he rates highly because more Riptide uptime compounds into Tidal Waters and Undercurrent; Healing Rain now hitting six targets, which he reads as a deliberately raid-targeted change because Shaman was struggling in raid but not in Mythic+; Earthen Accord becoming an additive 20% so Unleash Life's bonus goes from 25% to 45% rather than 30%; and Unleash Life's baseline healing doubled to cover the loss of the Season 1 tier set. On Farseer he says the ancestors' Chain Heal now bouncing to five targets instead of three and losing 10% per jump instead of 30%, on top of a 50% baseline Chain Heal increase, roughly triples ancestor Chain Heal output and is exactly what the tree needed. He is content with the tier set being nerfed, on the grounds that power moving from random procs to spells the player chooses to press is where he wants it."
+    },
+    {
+      "superseded": true,
+      "class": "Shaman",
+      "spec": "Restoration",
+      "creator": "Harrek",
+      "date": "2026-06-19",
+      "sentiment": "nerf",
+      "bracket": "raid",
+      "patchContext": "12.1 PTR — his read of the first 12.1 PTR patch notes, before the July rework (superseded by his 07-22 and 08-08 reads, which reverse this verdict)",
+      "url": "https://youtu.be/jdJxVHRe3Rc?t=821",
+      "claim": "On the first 12.1 PTR notes he is downbeat about Restoration Shaman in raid, expecting it to be just okay: not a troll pick, since it brings the Shaman buff, Spirit Link and an appropriate amount of healing, but with no real reason to bring one over another healer unless the buff is needed. He says he expects the spec to remain roughly bottom of the barrel in pure healing throughput and that the new tier set does not fix that. He is disappointed that the only class-specific line in the notes is Healing Rain gaining a 12-second cooldown and 18-second duration — a change he had specifically asked for and likes for Farseer flexibility, but which he says should have arrived mid-Season 1 rather than as the sole change going into a new season. On the tier set he measures the two-piece proc rate as very low in early testing, roughly one extra Healing Rain a minute, and calls the four-piece shield very weak at around 2,000 HPS against 800,000 player health. His one positive note is that the extra Healing Rain can be abused for double Downpour and extra Tidal Waters procs, which he rates as strong in raid but niche and RNG-dependent, and he says making the set work properly would be a large boon to Shaman in raid without affecting Mythic+ much. This read is entirely reversed by his 07-22 reaction to the July rework."
+    },
+    {
+      "superseded": false,
+      "class": "Priest",
+      "spec": "Holy",
+      "creator": "AutomaticJak",
+      "date": "2026-08-11",
+      "sentiment": "mixed",
+      "bracket": "raid",
+      "patchContext": "12.1 PTR — his Season 2 Holy Priest guide, raid section (complements, not replaces, his 08-08 raid spec-choice read)",
+      "url": "https://youtu.be/Sn_-UIyLnhY?t=1138",
+      "claim": "For raid he recommends Archon over Oracle without qualification, saying that across all their raid testing, Dummy Dome testing and other testing Archon was still pulling ahead by a sizable margin even though Oracle's passive healing is quite strong, and he rates the burst potential extremely valuable. The 12.1 changes he identifies are gains: Apotheosis now cuts Holy Word mana cost by 70% rather than 50%, Divine Hymn has been upgraded to grant Guardian Spirit for its channel — a cheat death he rates as a way to immune mechanics outright — and the rank-three Apex talent is made reliable, with Serenity now giving a guaranteed Benediction upgrade on the next Flash Heal rather than a chance. The two-piece grants up to 6% crit from targets carrying your Renew and the four-piece adds 10% Renew healing plus a guaranteed Renew from Light's Resurgence, which he characterises as more passive output. His stated constraint throughout is mana: Prayer of Healing is expensive enough that Archon's whole game is weaving Smites to fish Surge of Light procs, helped by Everlasting Light raising that chance as mana drops, and he warns that overcapping Benediction stacks inside an Apotheosis window is an easy way to drain mana. Raid stats are crit first, then versatility and mastery equally, then haste."
+    },
+    {
+      "superseded": false,
+      "class": "Priest",
+      "spec": "Holy",
+      "creator": "AutomaticJak",
+      "date": "2026-08-11",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "12.1 PTR — his Season 2 Holy Priest guide, Mythic+ section (complements, not replaces, his 08-08 M+ healer testing read)",
+      "url": "https://youtu.be/Sn_-UIyLnhY?t=284",
+      "claim": "For keys he recommends Oracle at time of recording, saying PTR testing showed it much more mana efficient and consistent across the heal checks they met, and that Oracle specifically can exceed expectations in heavy rot damage because its passive healing and constant output are very strong. The build is a Renew engine: Ultimate Serenity drops Sanctify to make Serenity cleave, Lasting Words then applies six seconds of Renew to every ally it heals, Light's Resurgence plus the four-piece keeps Renew rolling from Prayer of Mending, and Renewed Faith adds 10% healing to anyone carrying it — so the two-piece crit bonus is close to permanently active. He also credits Oracle-specific buffs to Prompt Prognosis and to Prayer of Mending's efficiency in five-player content. Against that he is direct about the spec's standing weaknesses in dungeons rather than any 12.1 change: he calls lack of survivability one of Holy Priest's biggest downsides, says its utility is usually not as strong in a dungeon environment as many other specs, and names two-to-three target cleave as one of the toughest areas for the spec to succeed in — advising Guardian Spirit be used to deprioritise one target when cleave healing outstrips throughput. Key stats are crit, then versatility and haste, then mastery, with versatility gaining value at high keys for the survivability."
+    },
+    {
+      "superseded": false,
+      "class": "Warrior",
+      "spec": "Arms",
+      "creator": "Critcake",
+      "date": "2026-08-10",
+      "sentiment": "buff",
+      "bracket": "both",
+      "patchContext": "12.1 PTR — launch-eve stream, reading the completed Season 2 Arms tuning arc (Slayer build; supersedes his 07-09 broader Arms read)",
+      "url": "https://youtu.be/Xyqc9xLvczQ?t=5304",
+      "claim": "Walking through the finished tuning arc he concludes Arms is actually really strong now and that it is a good time to play Slayer Arms, saying it feels amazing on the PTR. He traces how it got there: large buffs first — auto attack damage increased by 100%, a much higher Slayer Strike proc chance, a buffed two-piece, a stronger Opportunist and a substantially stronger Dreadnought on multi-target though not single target — after which the sims came back showing execute damage and overall damage both very high, so Blizzard trimmed execute and Powerful Momentum and buffed Forethought partly to offset the execute cut. The gameplay consequence he emphasises is proc density: the higher Slayer Strike rate feeds many more Sudden Death procs, and Tactical Edge was reworked to guarantee a Sudden Death proc on every Colossal Smash. This is a launch-eve stream rather than a guide, and he says plainly that he has deliberately not studied the season in depth yet and is only now reading through a written guide on stream."
+    },
+    {
+      "superseded": false,
+      "class": "Warrior",
+      "spec": "Fury",
+      "creator": "Critcake",
+      "date": "2026-08-10",
+      "sentiment": "neutral",
+      "bracket": "both",
+      "patchContext": "12.1 PTR — launch-eve stream, answering a viewer directly on whether Fury is bad in Season 2",
+      "url": "https://youtu.be/Xyqc9xLvczQ?t=1861",
+      "claim": "Asked directly by a viewer whether Fury is bad next season, he says he does not think it is bad and that people are underestimating it precisely because Arms is totally in the spotlight. He treats the perception gap as the story rather than the numbers, joking that it is better not to talk Fury up — if the community keeps believing it is weak, it is more likely to be buffed, and he says he would not mind ending up in a Fury season either. He offers no throughput figures or testing to support the read, so this is a contrarian perception call from a Warrior main rather than a measured comparison, recorded as neutral for that reason."
     }
   ],
   "metaNotes": [

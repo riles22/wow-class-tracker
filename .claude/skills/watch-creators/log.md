@@ -1730,3 +1730,51 @@ disagree, re-scope the new evidence before retiring the old.
   Twitch re-uploads, misc stream VODs.
 - `latest` refreshed on the queued creators' entries, each saying plainly that the video is
   **not yet distilled** — the field is display copy, not evidence of a take.
+
+## 2026-08-11 (LOCAL run, ~14:2xZ — Opus 5; scheduled residential catch-up after the 10:37Z nightly)
+
+- **Queue drained: 10 → 1.** yt-dlp fetched **9 of the 10** queued videos first try
+  (`youtube:player_client=android`, json3 auto-captions, residential IP — no bot wall).
+  The tenth, `bqVHzvKJCuA` (Sha, "ptr and chill"), is an **unstarted live event** and stays
+  queued: neither distilled nor transcript-verified, so it does not qualify for `skipped[]`.
+- **16 takes added, 9 prior takes superseded, 0 metaNotes.** Specs closed: Frost + Unholy DK
+  (Obli), Marksmanship (Bansherz), Devourer (VooDooSaurus **and** Jedith — they disagree,
+  both recorded), Mistweaver (LBNinja7), Protection Paladin raid + M+ (Tactyks, the spec he
+  was added to close), Shadow (Publik ×2), Holy Priest raid + M+ (AutomaticJak), Arms + Fury
+  (Critcake), Restoration Shaman ×2 (Harrek, both archive-only — see below).
+- **The unfiltered sweep paid for itself again, exactly as the 08-08 lesson predicts.**
+  Discovery: 44 feeds, **44/44 HTTP 200**, 660 entries, seen-set 895 → **25 unseen, all
+  in-cycle**. Fetched **20 of 25**. Two of the takes above came from videos a keyword filter
+  would have thrown away: **Critcake's Arms and Fury reads are inside a stream VOD titled
+  "Season 2 waiting room - 4354io DPS Warrior"** — he says plainly that Arms is really strong
+  after the final tuning pass and that Fury is underrated because Arms has the spotlight.
+  **AutomaticJak's Holy Priest guide** was likewise never queued.
+- **18 verified skips** recorded with reasons, the notable one being `CB24zMaVZLg` (Dalaran
+  Gaming, "12.1 Full Class Changes"): it is a **full patch-notes roundup narrated spec by
+  spec**, i.e. the class-tuning-roundup case the scoping rule names. Distilling it would
+  double-count the official notes — already in `ptr-builds.json` and already feeding the
+  outlook tally — as an independent creator vote. Left undistilled deliberately.
+- **4 ids to `seen[]`**: no auto-captions exist for them at all (`jNVEgIv52hU`,
+  `wa2gOzDNW_o`, `fWlOFoqepww`) or the video is blocked (`XpHP0vk2nAg`). The nightly's
+  Supadata drain reads `mode=native` — YouTube's own auto-captions — so queueing a
+  captionless video would spend metered budget on a guaranteed miss. Fetch broadly, queue
+  narrowly.
+- **`S2EmWMIcMkw` (Kalamazi) deliberately left UNSEEN** — it had not started airing at fetch
+  time, so it is genuinely unexamined and must be reconsidered, not recorded as dismissed.
+- **Harrek's two videos are backfill, and both land `superseded: true`.** His 06-19 read is
+  downbeat ("bottom of the barrel in pure HPS", raid "just okay"); his 07-22 reaction to the
+  rework is the opposite ("absurdly strong", "zero notes"). But his **08-08 take was already
+  live and is newer than both**, so publishing either as live would put a stale read in front
+  of the current one. Archived for the record — the flip itself is the useful artifact — and
+  **0 forecast movement** results from them.
+- **FOR AN OWNER LOOK — scope widening.** Harrek's 06-19 video analyses **Preservation
+  Evoker** in real depth (he works the Dream Breath rank-split numbers to a ~30% per-cast
+  buff and assesses Temporal Barrier and the tier set). He is scoped `Shaman: ["Restoration"]`
+  only, so **no Evoker take was written**. Not overridden silently; flagged here per the
+  spec-scoping rule.
+- **Live-take accumulation to watch** (`npm run audit:creators` territory): Obli now carries
+  2 live Frost and 2 live Unholy takes, because his 08-06 M+ read is a group-composition
+  claim about Blood DK grip redundancy rather than a spec-power read — a different lens, so
+  not superseded. Bansherz, Tactyks and AutomaticJak keep their tier-list placements live
+  alongside the new guide takes, following the precedent set by Bansherz's own 08-08/08-09
+  guide entries ("complements, not replaces").
