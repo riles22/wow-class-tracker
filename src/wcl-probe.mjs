@@ -177,4 +177,23 @@ const dome = results["3591:dps"];
 if (dome?.ok) {
   console.log(`◎ zone52 1T unfiltered leaderboard count=${dome.count} (statistics table showed ~782 total parses on 2026-07-09) — ${dome.count != null && dome.count > 400 ? "full-population median looks computable from rankings pages" : "leaderboard appears truncated vs the statistics population"}`);
 }
+
+/* ---- Zone enumeration (2026-08-11, for the S2 contract swap) ----
+   docs/s2-transition-scope.md's WCL step said "dispatch wcl-probe.yml to get the S2 zone
+   ids" — but nothing in src/ carried a zone-listing query, so the plan as written could
+   not work: this probe tested hardcoded encounters and fetch-wcl.mjs takes zoneIds as
+   INPUT (hardcoded 46/47/52/54/56). This section closes that gap. Once the Season 2
+   content is live and logged (raid opens 2026-08-18 US), dispatch the probe and read the
+   S2 raid + M+ zone ids off this list, then re-point required-sources.json and
+   fetch-wcl.mjs in a reviewed owner edit — never guess ids from a pattern. */
+try {
+  const zq = await gql(t, `{ worldData { zones { id name frozen brackets { min max } expansion { id name } } } }`);
+  const zones = zq.data?.worldData?.zones ?? [];
+  const current = zones.filter(z => z?.expansion?.name?.includes("Midnight") || z?.id >= 44);
+  console.log(`▣ zone enumeration: ${zones.length} total; Midnight-era candidates:`);
+  for (const z of current) console.log(`   ${String(z.id).padStart(3)}  ${z.name}${z.frozen ? "  (frozen)" : ""}  [${z.expansion?.name ?? "?"}]`);
+  if (!current.length) console.log("   (none matched — read the full list above the filter, or the expansion name changed)");
+} catch (e) {
+  console.log(`▣ zone enumeration FAILED — ${String(e).slice(0, 200)}`);
+}
 console.log("probe complete");

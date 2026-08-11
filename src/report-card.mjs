@@ -139,7 +139,50 @@ export function gradeSnapshot(forecast, actual, scales, { mode = "drift", specs 
      fields disagree. Not thrown: a mismatched grade is still worth seeing, but it must never
      be reported as clean. */
   const fCV = forecast.consensusVersion ?? null, aCV = actual.consensusVersion ?? null;
-  const consensusComparable = fCV != null && aCV != null && fCV === aCV;
+
+  /* Comparability is derived from COMPOSITION, not asserted by the integer (2026-08-11).
+     The version-equality check above was written before snapshots recorded which sources
+     composed each consensus. It had a guaranteed false alarm baked in: the S2 transition
+     MANDATES a CONSENSUS_VERSION bump at the boundary (docs/s2-transition-scope.md), so the
+     one grade this file will ever guard would always have stamped ⚠ NOT COMPARABLE — for a
+     recomposition that is expected, disclosed, and exactly what the transition plan says
+     happens. Since 2026-08-09 every snapshot carries per-spec `consensusSources`, which
+     render.mjs:1471-1478 recorded precisely so comparability could be DERIVED. So:
+     · both sides carry compositions → comparable; a composition CHANGE is disclosed as a
+       warning (coverage before accuracy — the reader must know the answer key is a
+       consensus of 2 against a 4-source prior), never as a refusal;
+     · either side predates the field → fall back to the version integers, the only signal
+       those snapshots have. The integer stays in the output as a secondary note. */
+  const compositionOf = snap => {
+    const out = {};
+    for (const spec of Object.values(snap.specs ?? {})) {
+      for (const [bracket, ids] of Object.entries(spec.consensusSources ?? {})) {
+        if (Array.isArray(ids)) (out[bracket] ??= new Set()), ids.forEach(id => out[bracket].add(id));
+      }
+    }
+    return Object.keys(out).length
+      ? Object.fromEntries(Object.entries(out).map(([b, s]) => [b, [...s].sort()])) : null;
+  };
+  const fComp = compositionOf(forecast), aComp = compositionOf(actual);
+  const compositionKnown = fComp != null && aComp != null;
+  const compositionDelta = compositionKnown
+    ? Object.keys({ ...fComp, ...aComp }).filter(b => JSON.stringify(fComp[b] ?? []) !== JSON.stringify(aComp[b] ?? []))
+    : [];
+  const consensusComparable = compositionKnown ? true : (fCV != null && aCV != null && fCV === aCV);
+  const warnings = [];
+  if (compositionKnown && compositionDelta.length) {
+    warnings.push(`the consensus recomposed between freeze and settlement — ${compositionDelta.map(b =>
+      `${b}: [${(fComp[b] ?? []).join(", ")}] → [${(aComp[b] ?? []).join(", ")}]`).join("; ")}. ` +
+      `The grade stands, but read coverage before accuracy: the answer key is a consensus of ` +
+      `${compositionDelta.map(b => (aComp[b] ?? []).length).join("/")} where the frozen prior averaged ` +
+      `${compositionDelta.map(b => (fComp[b] ?? []).length).join("/")}.`);
+  }
+  if (compositionKnown && fCV !== aCV) {
+    warnings.push(`consensusVersion moved ${JSON.stringify(fCV)} → ${JSON.stringify(aCV)} between freeze and settlement — expected at a season boundary; composition above is the authoritative comparability signal.`);
+  }
+  if (!consensusComparable) {
+    warnings.push(`consensus definition changed between the frozen forecast (consensusVersion ${JSON.stringify(fCV)}) and the settled actual (${JSON.stringify(aCV)}), and these snapshots predate recorded compositions — the answer key and the carry-forward baseline are not on the same scale, so this grade is NOT comparable. Re-derive from data/forecasts/frozen-<date>.json before reporting any accuracy number.`);
+  }
 
   return {
     mode, coverage, ranking: rankingFor(rows),
@@ -147,9 +190,8 @@ export function gradeSnapshot(forecast, actual, scales, { mode = "drift", specs 
     forecastPhase: forecast.phase ?? null, actualPhase: actual.phase ?? null,
     projectionVersion: forecast.projectionVersion ?? 1,
     consensusVersion: { forecast: fCV, actual: aCV, comparable: consensusComparable },
-    warnings: consensusComparable ? [] : [
-      `consensus definition changed between the frozen forecast (consensusVersion ${JSON.stringify(fCV)}) and the settled actual (${JSON.stringify(aCV)}) — the answer key and the carry-forward baseline are not on the same scale, so this grade is NOT comparable. Re-derive from data/forecasts/frozen-<date>.json before reporting any accuracy number.`
-    ],
+    consensusComposition: { forecast: fComp, actual: aComp, changedBrackets: compositionDelta },
+    warnings,
     overall: agg(rows),
     byBracket: by(r => r.bracket),
     byConfidence: by(r => r.confidence ?? "none"),
@@ -351,8 +393,11 @@ if (isMain) {
     forecast = frozen ?? graded[0] ?? snapshots[0];
     actual = snapshots.at(-1);
     mode = "drift";
+    /* When the frozen snapshot IS the newest (true on freeze day itself), drift needs a
+       different baseline — and the label must follow the reassignment, or it claims the
+       FROZEN snapshot while printing another date. */
     if (forecast === actual && graded.length > 1) forecast = graded[graded.length - 2];
-    console.log(`  baseline: ${frozen ? "the declared FROZEN snapshot" : graded.length ? "earliest snapshot carrying a forecast" : "oldest snapshot (none carry a forecast — expect 0 coverage)"} — ${forecast.date}`);
+    console.log(`  baseline: ${forecast === frozen ? "the declared FROZEN snapshot" : frozen ? "second-newest forecast snapshot (the FROZEN one is today's, so it IS the current state)" : graded.length ? "earliest snapshot carrying a forecast" : "oldest snapshot (none carry a forecast — expect 0 coverage)"} — ${forecast.date}`);
   }
 
   const r = gradeSnapshot(forecast, actual, scales, { mode, specs });

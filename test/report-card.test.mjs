@@ -48,6 +48,42 @@ test("a grade across a changed consensus definition is flagged NOT COMPARABLE (2
   assert.equal(unknown.consensusVersion.comparable, false);
 });
 
+test("recorded compositions outrank the version integer — the S2 boundary bump must not void the grade (2026-08-11)", () => {
+  /* The version-equality check had a guaranteed false alarm: the S2 transition MANDATES a
+     CONSENSUS_VERSION bump at the boundary, so the one grade this file exists to produce
+     would always have stamped ⚠ NOT COMPARABLE. Snapshots carry per-spec consensusSources
+     since 2026-08-09 precisely so comparability can be DERIVED: a recomposition is disclosed
+     as a warning (coverage before accuracy), never a refusal. */
+  const cells = { "Druid|Balance": {
+    projection: { raid: { tier: "A", score: 60 } },
+    consensusSources: { raid: ["icyveins", "method", "wowhead", "archon"] } } };
+  const actual = { "Druid|Balance": {
+    consensus: { raid: "A" }, scores: { raid: 60 },
+    consensusSources: { raid: ["icyveins", "wowhead"] } } };
+
+  const graded = gradeSnapshot(
+    snap("2026-08-11", cells, { consensusVersion: 3 }),
+    snap("2026-09-01", actual, { consensusVersion: 4 }), SCALES);
+
+  assert.equal(graded.consensusVersion.comparable, true,
+    "a version bump with known compositions must not void the grade");
+  assert.deepEqual(graded.consensusComposition.changedBrackets, ["raid"]);
+  assert.ok(graded.warnings.some(w => /recomposed/.test(w) && /consensus of 2/.test(w)),
+    "the recomposition must be disclosed with the answer key's source count");
+  assert.ok(graded.warnings.some(w => /consensusVersion moved/.test(w)),
+    "the version move stays visible as a secondary note");
+  assert.ok(!graded.warnings.some(w => /NOT comparable/.test(w)),
+    "disclosure, not refusal");
+
+  // Same compositions on both sides: clean, even across a version bump — nothing recomposed.
+  const same = gradeSnapshot(
+    snap("2026-08-11", cells, { consensusVersion: 3 }),
+    snap("2026-09-01", { "Druid|Balance": { ...actual["Druid|Balance"],
+      consensusSources: { raid: ["icyveins", "method", "wowhead", "archon"] } } }, { consensusVersion: 4 }), SCALES);
+  assert.equal(same.consensusVersion.comparable, true);
+  assert.deepEqual(same.consensusComposition.changedBrackets, []);
+});
+
 test("a declined forecast is not scored as a miss", () => {
   const f = snap("2026-07-01", {
     "A|X": { projection: { raid: null, mplus: { tier: "A", score: 60 } } },
