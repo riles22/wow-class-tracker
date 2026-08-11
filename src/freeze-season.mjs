@@ -26,7 +26,7 @@ import { execFileSync } from "node:child_process";
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { PHASES, isLiveEra, sourceSeasonOk } from "./normalize.mjs";
+import { PHASES, isLiveEra, sourceSeasonOk, aheadSeasonFor, seasonRank } from "./normalize.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 export const ARCHIVE = "data/season-final.json";
@@ -45,8 +45,23 @@ const gitShow = (sha, file, cwd) => {
   catch { return null; }   // file absent at that commit
 };
 
-/* The newest commit whose data/sources.json still describes `liveSeason` for this
-   source+bracket. Returns null when HEAD itself still does — i.e. nothing to freeze. */
+/* EXPLICITLY verified at `liveSeason`: every page of the bracket carries
+   seasonVerified === liveSeason. Deliberately stricter than `sourceSeasonOk`, which is
+   vacuously TRUE wherever the field is absent — "never checked" reads as current, which is
+   the right call for the consensus but the wrong one for a freeze point. `seasonVerified`
+   only entered the registry on 2026-08-05 (e65332a), so the loose test matches every commit
+   before that date for every source; a walk using it lands on the commit that ADDED the
+   field and lifts letters from a tree that never made the claim. Measured at liveSeason
+   "s2": method/archon resolve to e65332a, whose sources.json holds zero seasonVerified
+   entries. Requiring the explicit label makes the walk throw "Refusing to guess" instead —
+   and the archive is append-only, so a wrong record there is permanent. */
+const explicitlyVerifiedAt = (source, bracket, liveSeason) => {
+  const pages = (source.pages ?? []).filter(p => p.bracket === bracket);
+  return pages.length > 0 && pages.every(p => p.seasonVerified === liveSeason);
+};
+
+/* The newest commit whose data/sources.json explicitly verifies `liveSeason` for this
+   source+bracket. Returns HEAD when HEAD itself still does — i.e. nothing to freeze. */
 export function lastSeasonVerifiedCommit(sourceId, bracket, { cwd = ROOT, liveSeason = PHASES.liveSeason, max = MAX_WALK } = {}) {
   const shas = git(["rev-list", `--max-count=${max}`, "HEAD"], cwd).trim().split("\n").filter(Boolean);
   for (const sha of shas) {
@@ -56,7 +71,7 @@ export function lastSeasonVerifiedCommit(sourceId, bracket, { cwd = ROOT, liveSe
     try { registry = JSON.parse(raw); } catch { continue; }
     const source = registry.find(s => s.id === sourceId);
     if (!source) continue;
-    if (sourceSeasonOk(source, bracket, liveSeason)) return { sha, source };
+    if (explicitlyVerifiedAt(source, bracket, liveSeason)) return { sha, source };
   }
   throw new Error(
     `freeze-season: no commit in the last ${max} still verifies "${sourceId}" bracket "${bracket}" at season "${liveSeason}". ` +
@@ -87,11 +102,46 @@ export async function freezeSeason(root = ROOT, { liveSeason = PHASES.liveSeason
   try { archive = JSON.parse(await readFile(archivePath, "utf8")); } catch { /* first run */ }
   archive[liveSeason] ??= {};
 
-  const added = [], kept = [], live = [];
+  const added = [], kept = [], live = [], behind = [], split = [];
   for (const source of registry) {
     if (source.kind !== "tier-list" || !isLiveEra(source)) continue;
     for (const bracket of [...new Set((source.pages ?? []).map(p => p.bracket))].filter(Boolean)) {
       if (sourceSeasonOk(source, bracket, liveSeason)) { live.push(`${source.id}/${bracket}`); continue; }
+      /* Not describing the live season — and the REASON decides everything, because
+         `sourceSeasonOk` is a bare inequality that is equally false in three different
+         situations. Only the outlet that is LEAVING has final letters worth preserving.
+
+         · AHEAD — every page has moved to a later season. Freeze: these are its last words
+           about the season we are running.
+         · SPLIT — the bracket's pages disagree, some already on the later season (an outlet
+           mid-rebuild). `aheadSeasonFor` returns null here by design, because mixing two
+           seasons in one FORECAST term is never allowed. But that is a different question
+           from whether to preserve the outlet's last single-season letters, and the answer
+           there is yes: consensusFor has already dropped it (sourceSeasonOk is false), so
+           without a frozen record the mean silently recomposes. Measured on a staged Archon
+           raid flip: 40 cells lose a contributor and 9 published letters move with no spec
+           data change — the exact "registry decision narrated as spec movement" this lane
+           exists to prevent.
+         · BEHIND — every page is on an EARLIER season (a lagging outlet at a flip). Do NOT
+           freeze: its newest letters are still its live opinion, and DECISION 1 already says
+           the consensus should honestly shrink until it catches up. Freezing it resurrects
+           stale letters permanently — measured at the 12.1 flip, method and archon would each
+           gain raid+mplus records lifted from e65332a (a commit where no page carried
+           `seasonVerified` at all): 159 letters, moving 36 of 80 consensus letters, into an
+           append-only archive that can never be corrected.
+
+         Splitting ahead from behind is the same fix `aheadSeasonFor` brought to the consensus
+         and forecast lanes on 2026-08-09; freeze-season was written the same day and never
+         consulted it. Keep the `aheadSeasonFor` call: its throw on a half-LABELLED bracket
+         (some pages carrying seasonVerified, some not) is a guard we want to propagate. */
+      const ahead = aheadSeasonFor(source, bracket, liveSeason);
+      if (ahead == null) {
+        const liveRank = seasonRank(liveSeason);
+        const seasons = pagesFor(source, bracket).map(p => p.seasonVerified).filter(Boolean);
+        const leaving = seasons.some(s => { const r = seasonRank(s); return r != null && liveRank != null && r > liveRank; });
+        if (!leaving) { behind.push(`${source.id}/${bracket}`); continue; }
+        split.push(`${source.id}/${bracket}`);
+      }
       if (archive[liveSeason]?.[source.id]?.[bracket]) { kept.push(`${source.id}/${bracket}`); continue; }
 
       const { sha, source: atFreeze } = lastSeasonVerifiedCommit(source.id, bracket, { cwd: root, liveSeason });
@@ -112,22 +162,34 @@ export async function freezeSeason(root = ROOT, { liveSeason = PHASES.liveSeason
     }
   }
 
-  // Stable key order so a re-run is a no-op diff.
+  /* Stable key order so a re-run is a no-op diff. Empty season objects are dropped: the
+     `archive[liveSeason] ??= {}` above creates one on every run, so at the flip an untouched
+     archive would gain a bare `"s2": {}` and the publish notice — which reads the git diff —
+     would announce a freeze that never happened. */
   const sorted = {};
   for (const season of Object.keys(archive).sort()) {
+    if (!Object.keys(archive[season] ?? {}).length) continue;
     sorted[season] = {};
     for (const id of Object.keys(archive[season]).sort()) {
       sorted[season][id] = {};
       for (const bracket of Object.keys(archive[season][id]).sort()) sorted[season][id][bracket] = archive[season][id][bracket];
     }
   }
-  await writeFile(archivePath, JSON.stringify(sorted, null, 2) + "\n");
-  return { added, kept, live, archive: sorted };
+  /* Only touch the file when the archive actually changed. A no-op run that still rewrites
+     it makes `git diff` claim a freeze happened on every nightly — and the publish job's
+     notice reads that diff. */
+  const body = JSON.stringify(sorted, null, 2) + "\n";
+  const before = await readFile(archivePath, "utf8").catch(() => null);
+  if (before !== body) await writeFile(archivePath, body);
+  return { added, kept, live, behind, split, archive: sorted, wrote: before !== body };
 }
 
 if (import.meta.url === `file://${process.argv[1]}` || process.argv[1]?.endsWith("freeze-season.mjs")) {
   const result = await freezeSeason();
   for (const a of result.added) console.log(`✓ froze ${a.source}/${a.bracket} — ${a.letters} letters from ${a.sha.slice(0, 7)}`);
   for (const k of result.kept) console.log(`· ${k} already frozen (append-only, left alone)`);
+  for (const s of result.split) console.log(`⚠ ${s} is MID-FLIP (pages split across seasons) — frozen so the consensus keeps its composition while it rebuilds`);
+  for (const b of result.behind) console.log(`· ${b} is BEHIND the live season, not ahead — it stays out of the consensus until it catches up, and is deliberately NOT frozen`);
   console.log(`${result.live.length} source/bracket pairs still describe the live season — nothing to freeze there.`);
+  if (!result.wrote) console.log("· archive unchanged — file not rewritten");
 }

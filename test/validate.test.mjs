@@ -588,14 +588,24 @@ test("validateData gates the frozen final-season archive", async () => {
 test("the committed archive only holds sources that have actually moved ahead", async () => {
   const data = await loadData(ROOT);
   if (!data.seasonFinal) return;
-  const { sourceSeasonOk, PHASES } = await import("../src/normalize.mjs");
+  const { sourceSeasonOk, seasonRank, PHASES } = await import("../src/normalize.mjs");
   for (const [season, bySource] of Object.entries(data.seasonFinal)) {
     if (season !== PHASES.liveSeason) continue;
+    const liveRank = seasonRank(season);
     for (const [id, brackets] of Object.entries(bySource)) {
       const source = data.sources.find(s => s.id === id);
       for (const bracket of Object.keys(brackets)) {
         assert.equal(sourceSeasonOk(source, bracket, season), false,
           `${id}/${bracket} still describes the live season — freezing it would outrank its own live letters`);
+        /* The other direction, which asserting only the line above missed: `sourceSeasonOk`
+           is false for a LAGGING outlet too, and freezing one writes stale letters into an
+           append-only archive permanently. A frozen record is only legitimate when a page
+           has moved PAST the live season. */
+        const moved = (source?.pages ?? [])
+          .filter(p => p.bracket === bracket)
+          .some(p => { const r = seasonRank(p.seasonVerified); return r != null && r > liveRank; });
+        assert.ok(moved,
+          `${id}/${bracket} is frozen but no page has moved past ${season} — a lagging outlet must drop out of the consensus, never be frozen`);
       }
     }
   }

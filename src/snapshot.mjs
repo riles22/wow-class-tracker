@@ -15,6 +15,41 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 export async function snapshot(root = ROOT, date = new Date().toISOString().slice(0, 10), { frozen = false } = {}) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) throw new Error(`snapshot date must be YYYY-MM-DD, got "${date}"`);
   const payload = buildPayload(await loadData(root));
+
+  /* CARRY AN EXISTING FREEZE DECLARATION FORWARD (2026-08-11).
+     Snapshots are named by UTC date and rewritten in place, so every run on the same UTC
+     day overwrites the last. That is fine for the state — it is a fresh read either way —
+     but `frozen` is not state, it is a one-shot DECLARATION of which forecast the report
+     card grades, and it was being silently dropped by the next writer.
+     It actually happened: `--frozen` ran 2026-08-10 19:52 PT = 2026-08-11T02:52Z and wrote
+     2026-08-11.json; that day's nightly (10:37Z) then overwrote the same path and the flag
+     was gone from all 36 history files, with `launchPair` quietly falling back to inferring
+     the freeze point from recency. The flag is cheap to preserve and impossible to
+     reconstruct later, so preserve it.
+     Deliberately NOT a blanket hard error on same-date rewrite: routine re-snapshots are
+     legitimate (a local run after a nightly, a rebuild), and erroring on those would turn a
+     publishable night red at the snapshot step for no data reason.
+
+     But the flag is carried ONLY when the state is unchanged. Re-stamping `frozen: true`
+     onto a freshly-read state would be worse than dropping it: the declaration would survive
+     while silently pointing at a different forecast, and the report card would then grade
+     post-launch data as the pre-launch answer with no "INFERRED" warning to give it away.
+     When the state has moved we refuse the write instead — the daily state can be
+     regenerated at any time, the one-shot declaration cannot, so the declaration wins. */
+  const outPathEarly = path.join(root, "data", "history", `${date}.json`);
+  const prior = await readFile(outPathEarly, "utf8").then(JSON.parse).catch(() => null);
+  const nextState = snapshotStateOf(payload.specs);
+  const stateMoved = prior != null && JSON.stringify(prior.specs) !== JSON.stringify(nextState);
+  const carriedFrozen = prior?.frozen === true;
+  if (carriedFrozen && stateMoved && !frozen) {
+    throw new Error(
+      `snapshot: data/history/${date}.json carries frozen: true — it is the declared pre-launch forecast the report card grades — ` +
+      `and this run's state differs from it. Refusing to overwrite the declaration with a different forecast. ` +
+      `Snapshot under a different date, or delete the declaration deliberately if the freeze is being redone.`);
+  }
+  if (carriedFrozen && !frozen) {
+    console.warn(`! ${date}.json already carries frozen: true and the state is unchanged — preserving the freeze declaration`);
+  }
   // snapshotStateOf is shared with the movement reader (render.mjs pickBaseline/movementFor)
   // so the stored key format can never drift from the lookup. projectionVersion pins which
   // formula produced the stored projections — the report card must never grade a v1
@@ -30,12 +65,11 @@ export async function snapshot(root = ROOT, date = new Date().toISOString().slic
      last snapshot before 12.1 goes live. */
   const snap = { date, phase: SNAPSHOT_PHASE, projectionVersion: PROJECTION_VERSION,
     rankVersion: RANK_VERSION, consensusVersion: CONSENSUS_VERSION,
-    ...(frozen ? { frozen: true } : {}),
-    specs: snapshotStateOf(payload.specs) };
+    ...(frozen || carriedFrozen ? { frozen: true } : {}),
+    specs: nextState };
   const dir = path.join(root, "data", "history");
   await mkdir(dir, { recursive: true });
   const outPath = path.join(dir, `${date}.json`);
-  await writeFile(outPath, JSON.stringify(snap, null, 2) + "\n");
 
   /* The IMMUTABLE FORECAST ARTIFACT (2026-08-03, external audit). The history snapshot
      above is deliberately slim — movement and timelines read it daily. This file is the
@@ -44,7 +78,7 @@ export async function snapshot(root = ROOT, date = new Date().toISOString().slic
      (projection.parts), the exact code identity (git SHA + versions), a hash of the data
      that produced it, and each source's own snapshot date. Nothing downstream reads it on
      a schedule; its only consumer is the report card and whoever argues with it. */
-  let frozenPath = null;
+  let frozenPath = null, frozenBody = null;
   if (frozen) {
     const sha = (() => { try { return execSync("git rev-parse HEAD", { cwd: root }).toString().trim(); } catch { return null; } })();
     const dataDir = path.join(root, "data");
@@ -111,8 +145,34 @@ export async function snapshot(root = ROOT, date = new Date().toISOString().slic
     const fDir = path.join(root, "data", "forecasts");
     await mkdir(fDir, { recursive: true });
     frozenPath = path.join(fDir, `frozen-${date}.json`);
-    await writeFile(frozenPath, JSON.stringify(artifact, null, 2) + "\n");
+    frozenBody = JSON.stringify(artifact, null, 2) + "\n";
+    /* The artifact is the record a post-launch audit re-derives the grade from, so a second
+       `--frozen` over the same date must never silently redefine it.
+
+       Compare on SUBSTANCE, not bytes. `gitSha` moves on any commit and `dataSha256` covers
+       every data/*.json — including run-manifest.json, which every run rewrites — so a byte
+       comparison would fire on benign re-runs and train the operator to ignore it. What makes
+       two freezes the same forecast is the cells and the code identity that produced them.
+
+       This check runs BEFORE the history file is written, further down, so a refusal is a
+       genuine no-op on disk. Throwing after that write would clobber the very declaration the
+       guard exists to protect — the exact failure this change set was written to repair. */
+    const substanceOf = a => JSON.stringify({
+      kind: a.kind, date: a.date, phase: a.phase,
+      projectionVersion: a.projectionVersion, rankVersion: a.rankVersion,
+      consensusVersion: a.consensusVersion, cells: a.cells });
+    const existing = await readFile(frozenPath, "utf8").then(JSON.parse).catch(() => null);
+    if (existing != null && substanceOf(existing) !== substanceOf(artifact)) {
+      throw new Error(
+        `snapshot --frozen: data/forecasts/frozen-${date}.json already exists and describes a DIFFERENT forecast. ` +
+        `That file is the immutable record the report card grades — refusing to redefine it. ` +
+        `Freeze under a different date, or delete it deliberately if the freeze is genuinely being redone.`);
+    }
   }
+  /* Both writes happen only after every guard above has passed, so a refused freeze leaves
+     the disk exactly as it was. */
+  await writeFile(outPath, JSON.stringify(snap, null, 2) + "\n");
+  if (frozenPath) await writeFile(frozenPath, frozenBody);
   return { outPath, frozenPath, specs: Object.keys(snap.specs).length };
 }
 

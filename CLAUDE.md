@@ -386,8 +386,20 @@ a raid forecast.
   Gate 1 (publish has `fetch-depth: 0`; the refresh job's shallow checkout cannot answer the
   question, which is why it is not agent-side) and as step 4 of a local run. Gate 0 treats it
   as immutable alongside `required-sources.json`/`scales.json`, so an agent that writes it
-  fails the night red. The lookup is keyed by season, so at the flip `seasonFinal[liveSeason]`
-  is simply absent and the lane goes cold by itself — measured, consulted in 0 of 80 cells.
+  fails the night red. The READ side goes cold by itself at the flip: the lookup is keyed by
+  season, so `seasonFinal[liveSeason]` is simply absent — measured, consulted in 0 of 80 cells.
+  **The WRITE side does not, and that asymmetry was a real defect** (fixed 2026-08-11).
+  `sourceSeasonOk` is a bare inequality: it is equally false for an outlet that has moved
+  AHEAD and one lagging BEHIND, so freeze-season froze both. Simulated at the flip, method and
+  archon — both still s1 — each gained raid+mplus records lifted from `e65332a`, the commit
+  that *added* `seasonVerified` and where no page carried it, because the loose test matches
+  vacuously wherever the field is absent. That is 159 letters of stale opinion written as a
+  permanent record (the archive is append-only), moving 36 of 80 consensus letters, with no
+  self-repair and nothing in validation to catch it — `validate.mjs` checks membership, era,
+  roster and scale, never direction. The gate is now `aheadSeasonFor(...) != null`, and the
+  history walk requires an **explicit** `seasonVerified === liveSeason` so it throws "Refusing
+  to guess" rather than landing on a pre-2026-08-05 commit. A lagging outlet simply drops out
+  of the consensus, which is what DECISION 1 already specifies.
 Optional **`era`** (`"live"` default | `"ptr"`) marks a source whose ratings describe a
 patch we are not running: an `era: "ptr"` tier list keeps its toggle button, its column,
 its drawer row and its projection input, but `consensusFor` skips it and the 12.0.7-only
