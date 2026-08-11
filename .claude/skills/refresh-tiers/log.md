@@ -610,3 +610,57 @@ strongest reason and the one that settles it**: `data/season-final.json` is immu
 agent, so its writer cannot run in the agent's job. The third is that the archive is
 append-only, so a wrong write is permanent and belongs behind the deterministic gates.
 Do not relocate freeze-season on the strength of this entry.
+
+## 2026-08-11 (nightly, CI — the SECOND scheduled run of this UTC day; started ~17:5xZ)
+
+All four tier sources plus `icyveins-ptr` re-fetched from scratch by urllib with the full
+browser header set. **Zero letters moved anywhere** — 279 assignments re-verified against
+stored, 0 diffs. This is ~6h after the 12:00Z run, so an unchanged night is the expected
+outcome, not a parse failure; every source was still pulled fresh per the no-staleness-gate
+policy.
+
+- **icyveins — `partial`, and for the SAME reason as this morning.** Six live pages, HTTP
+  200, 210-357 KB. Era: five titles read "Patch 12.1 / Midnight" or "Season 2 / Patch 12.1";
+  the raid-HEALER page still carries the stale "Patch 12.0.7" title over a Season-2 body
+  (20 "Season 2" hits, 2 "12.1"), so body-over-title per the blue-tracker precedent.
+  `seasonVerified` stays **s2** on all six. RAID re-parsed to 40/40 with **0 moves** against
+  stored, so the letters this morning applied are confirmed by an independent fetch.
+  **M+ is still blocked and the blockage got sharper**: the live M+ pages publish
+  S+ / S / A+ / A / B / C / TBD, and the `icyveins` scale has five bands with neither S+ nor
+  B+. New measurement worth recording — the live M+ letters are now **byte-identical to the
+  `icyveins-ptr` list on all 40 specs** (this morning it was 19 of 27 DPS). Icy Veins has not
+  merely promoted its PTR list onto the live URLs, it has replaced them with it. 34 of 40
+  stored M+ letters would move if the scale allowed the merge. Still an OWNER escalation
+  (`scales.json` is CODEOWNERS-owned); collapsing S+ into S would fabricate a placement the
+  source is explicitly distinguishing.
+- **icyveins-ptr — `success`.** Three PTR M+ pages, HTTP 200, era-verified the other way
+  (every title "PTR Tier List for Midnight (Patch 12.1 / Season 2)"). 40/40 placed, **0
+  moves**; Subtlety Rogue is still TBD upstream and stays an explicit `null` (39 rated rows,
+  floor 24). `published` re-read from the page rather than carried forward: JSON-LD
+  `dateModified` **2026-08-09** on all three, agreeing 3/3 with `published-evidence`. (The
+  in-body "Last UPDATED - 2nd of August" line disagrees; dateModified wins by the documented
+  precedence, and the weekly Sunday cadence makes a 2-day-old rebuild normal.)
+- **method — `success`.** Both pages, HTTP 200 (153 / 165 KB), parsed from `.tier__tier`.
+  79 assignments (39 raid — Vengeance DH still absent upstream — and 40 M+), 0 unmatched,
+  **0 moves**. Still self-dates "Last Updated 31st March 2026", still zero "12.1"/"Season 2"
+  strings anywhere in either page, so `seasonVerified` stays **s1** and Method remains one of
+  only two live-season letter sources (with Archon). M+ still publishes no S tier.
+- **wowhead — `success`.** Six pages, HTTP 200, 73-324 KB. Parse note for the next run:
+  the `[tier-list=rows]` block sits inside a JS string, so the closing tag is `[\/tier-list]`
+  and every inner tag is escaped — a regex written against the unescaped BBCode finds the
+  opening marker and then matches nothing. 80 assignments, 0 unmatched, **0 moves**. All six
+  titles read "Midnight Season 2", so `seasonVerified` stays **s2** (season-AHEAD: out of the
+  live consensus via the frozen lane, into the next-patch forecast). JSON-LD dateModified:
+  M+ healer 2026-08-09, the other five 2026-08-08 — agreeing 6/6 with published-evidence.
+- **archon-tiers / -encounters / -survivability — `success`, all three.** 6 aggregate + 51
+  per-encounter pages = 57 fetches, 57/57 HTTP 200, all parsed from `__NEXT_DATA__`
+  (`specTierListSection.tierLists[]`, metric `throughput` for raid and `score` for M+, never
+  the default popularity grouping). 80 aggregate assignments + **680** per-encounter rows
+  (40/40 specs on every one of the 9 bosses and 8 dungeons, floor 440) + 40 survivability
+  tiers. **0 moves on all three surfaces**, so `data/encounter-tiers.json` was not rewritten
+  at all. Era: the pages still describe Season 1 (raid selector "VS / DR / MQD", the nine S1
+  bosses, the eight S1 dungeons) — `seasonVerified` stays **s1**.
+  Archon's own `lastUpdated` label is **2026-08-10T12:00:00Z on 5 of 6 aggregate pages** and
+  2026-08-11T12:00:00Z on the raid-tank page alone, ~6h after that rebuild should have
+  landed. Uneven per-page labels are worth watching but are not ours to fix; the identical
+  values across two fetches 6h apart confirm no rebuild reached the data.

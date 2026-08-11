@@ -1778,3 +1778,30 @@ disagree, re-scope the new evidence before retiring the old.
   not superseded. Bansherz, Tactyks and AutomaticJak keep their tier-list placements live
   alongside the new guide takes, following the precedent set by Bansherz's own 08-08/08-09
   guide entries ("complements, not replaces").
+
+## 2026-08-11 (nightly, CI — second run of the day) — full discovery, still zero transcripts
+
+- **Discovery complete: 44/44 unique channels polled, 0 RSS failures, 660 videos seen.**
+  (73 transcribable creator entries collapse to 41 distinct channels — many creators cover
+  several classes — plus the 3 `generalCreators`.)
+- **Seen-set 919 ids**, built from structured data only, never log prose: `seen[]` +
+  `skipped[]` + `videos[]` in `pending-transcripts.json`, union the `youtu.be/<id>` ids in
+  every take and metaNote.
+- **6 new in-scope videos, all queued** (nightly keyword filter kept, per the free-tier
+  budget rule — breadth belongs in local runs):
+  `t0xJ5hq7D0M` YoDaTV "Everything YOU Need to Know About Azta'rec, the NEW Delve Boss, in
+  Midnight Season 2" · `RcL-aP8j6eg` Jedith "Devourer Demon Hunter SIMPLIFIED Void-Scarred
+  Guide for 12.1" · `dtfGf1jfRXY` MadSkillzzTV "12.1 Healer Prep & UI Setup" ·
+  `VucwChHTTUk` Sha "Voidscar Arena Quick Boss Guides | Midnight Season 2" · `4dgWpFJ4sv0`
+  Megasett "patch day" · `S2EmWMIcMkw` Kalamazi "Patch 12.1 Is HERE! Gearing and Slammin".
+  Queue is now **7** (the 08-09 Sha "ptr and chill" is still waiting).
+  Nothing was dismissed at discovery this run, so `seen[]` is unchanged — every unseen video
+  in the window was either already known or is now queued.
+- **TRANSCRIPT BUDGET STILL EXHAUSTED.** `transcript-fetch/summary.json` verdict
+  **`limit-exceeded`** on the one video it tried (`bqVHzvKJCuA`), 1 requested / 0 fetched,
+  "stopped early … remaining queue untouched". No transcript was readable, so **0 takes and
+  0 metaNotes** were added, changed or superseded. This agent fetched nothing from YouTube
+  or any transcript API by any means. Supadata's free tier is 100 requests/MONTH, so the
+  queue will drain when the month rolls or in a local yt-dlp run — whichever comes first.
+- The queue is now 7 deep with the two newest cycle-relevant specialist videos in it
+  (Jedith on Devourer DH, Kalamazi on Warlock gearing). Worth a local catch-up run.

@@ -958,3 +958,38 @@ catch-up path.
   letters feed the next-patch forecast term. Different components, but one voice.
 - WCL zones are evidence-only from CI: zone 54/52/56 raw series landed pre-agent; the
   rDPS/normalized cuts stay frozen under the standing `rdps-broken` verdict.
+
+## 2026-08-11 (nightly, CI — second run of the day) — no new build; all three channels clean
+
+- **Official thread `2317811.json`** — `highest_post_number` still **19** (Linxy,
+  2026-07-31), `posts_count` 17. Nothing after the two 07-31 posts already logged as builds
+  #18 and #19.
+- **Wowhead news RSS** — 40 items spanning 2026-08-05..2026-08-11, bodies read out of
+  `content:encoded` (one fetch, all 40 articles). Only ONE carries real class-tuning text and
+  it is the **2026-08-06 launch patch notes, already logged** as the `patch-notes` entry. The
+  four other change-verb hits are out of scope by construction: an Icy Veins/Raider.IO
+  interview *about* a class-tuning roadmap (talk, not notes), embellishment/potion tuning,
+  Altar of Fangs dungeon tuning, and a Delve-boss addon hotfix. "Jimothy Added in Latest
+  Patch 12.1 PTR Build" (08-07) is a real build article with **zero** class-tuning lines —
+  worth recording so the next run does not re-open it.
+- **Wowhead blue tracker** — the index page is JS-hydrated and yields zero hrefs to a plain
+  fetch (do not bother with it); **`/blue-tracker?rss` is server-rendered and works**, 50
+  items back to 2026-08-06. No standalone class-tuning blue post of the Kaivax
+  "Healer Tuning - July 16" shape. The launch-adjacent posts are all non-tuning: "Curse of
+  Ula'tek Goes Live August 11" (NA; EU reads 12 August), Pre-Season Details, housing,
+  Twitch drops, and a re-post of the same Content Update Notes at 2026-08-11 12:32.
+- **Feed unchanged at 15 entries**, newest still the 2026-08-06 patch notes. No tier-set
+  line landed, so no `spec.tierSet` upkeep was due.
+- **Writeup coverage unchanged at 39/40.** Demonology Warlock remains the single `ptr: null`
+  and remains deliberate — its source reported no changes beyond the tier set, and "nothing
+  changed" is not one of Positive/Mixed/Negative.
+- **WCL zones are evidence-only from CI.** Zone 52/54/56 raw series landed pre-agent (see
+  refresh-metrics log); zone 54 normalized, zone 56 rDPS/HPS and `ptrDummy` stay frozen under
+  the standing `rdps-broken` verdict. Zone 57 (Tidebound Grotto) is not in the deterministic
+  recipe and was not probed — unchanged since 2026-07-28's empty result.
+- **Launch status, for the record.** Blizzard's own blue post says Curse of Ula'tek goes live
+  **August 11 (NA) / 12 August (EU)**, and Season 2 formally opens Aug 18. Icy Veins and
+  Wowhead have already rebuilt their lists as Season 2; Method and Archon have not. The
+  tracker itself is still configured pre-flip (`PHASES.liveSeason` "s1", `SNAPSHOT_PHASE`
+  "12.1-ptr", `PHASE_FLIP_DUE` 2026-08-20) — the migration is an owner one-shot and was not
+  attempted here.
