@@ -100,6 +100,14 @@ refreshes count) exceeds 36h, or any required source exceeds its max age. Note: 
 2026-07-13 and 07-14 nightlies did not run as of this remediation — expect the first
 heartbeat to go red honestly.
 
+> **Annotation 2026-08-11 (record left as written; the threshold moved after this audit):**
+> the 36h figure here and in the "freshness uses dates rather than startedAt" item below is
+> the value at the time of the July audit. It was lowered to **28h** on 2026-07-25.
+> `data/required-sources.json` → `maxRunAgeHours` is the single source of truth; treat any
+> number quoted in a dated audit as historical, not current. The tightened margin is thin by
+> design — a healthy night reads ~5h, a single miss ~28.6h — so a nightly landing after
+> ~13:23 UTC re-opens the gap (see CLAUDE.md).
+
 ### 7. Validation improvements — **addressed**
 
 `src/validate.mjs` now also rejects: duplicate source ids; duplicate class entries,

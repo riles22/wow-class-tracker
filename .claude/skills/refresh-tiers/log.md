@@ -598,7 +598,15 @@ design). So the night reads RED on refresh and GREEN on publish (publish is
 
 Two ways to close it if it recurs, both owner calls: run `freeze-season.mjs` before the
 refresh job's completion gate, or teach the gate to discount movement attributable to a
-source entering the frozen lane. **A related assumption in CLAUDE.md is wrong**: the
-shallow checkout is NOT why freeze-season is publish-side — it resolved the freeze point
-fine at depth 1, because HEAD is the newest commit whose `sources.json` still verified
-icyveins at s1. The real reason is the Gate-0 boundary, which is a better reason anyway.
+source entering the frozen lane. **A narrower correction to CLAUDE.md than first written
+here** (revised 2026-08-11): the original wording — "a related assumption in CLAUDE.md is
+wrong" — was over-general and reads as a licence to move freeze-season agent-side. It is
+not. Shallow checkout is ONE of three reasons freeze-season lives in publish, and it was
+merely not the binding one *that night*: at depth 1 the walk happened to resolve, because
+HEAD was itself the newest commit whose `sources.json` still verified icyveins at s1. That
+is luck about where the freeze point sat, not a property of shallow clones — a walk that
+must reach further back cannot answer at depth 1 at all. **The Gate-0 boundary is the
+strongest reason and the one that settles it**: `data/season-final.json` is immutable to the
+agent, so its writer cannot run in the agent's job. The third is that the archive is
+append-only, so a wrong write is permanent and belongs behind the deterministic gates.
+Do not relocate freeze-season on the strength of this entry.

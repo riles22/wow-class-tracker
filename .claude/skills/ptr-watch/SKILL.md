@@ -116,9 +116,15 @@ say so and change nothing.
 
    a. **Wowhead directly** — search the site for the spec's 12.1 article rather than
       waiting for it to appear in the RSS window; older articles have scrolled out.
-   b. **Icy Veins NEWS** (`icy-veins.com/wow/news/...`) — their PTR lane is news posts,
-      not the spec guides. The guides self-identify as **12.0.7** and will not carry 12.1
-      analysis until launch, so do not burn a run diffing them expecting Season-2 content.
+   b. **Icy Veins NEWS** (`icy-veins.com/wow/news/...`) — their PTR lane is news posts.
+      **The GUIDES are now a live lane too, as of 12.1 launch (2026-08-11).** This entry used
+      to say the guides self-identify as 12.0.7 and "will not carry 12.1 analysis until
+      launch, so do not burn a run diffing them" — true before launch, and actively wrong
+      after it: the 08-11 nightly closed **8 of 9** remaining writeup gaps from exactly those
+      pages once they rebuilt as Season-2 content. A "do not look here" pointing at a lane
+      that now works is worse than no note. Check the guides' own era before diffing (title
+      or body self-identification), and treat a stale title over a Season-2 body as Season 2 —
+      the blue-tracker precedent, body over title.
    c. **Class Discords** via `paste-discord` — already the source of 7 writeups. Dreamgrove
       (Druid), Council of the Black Harvest (Warlock), Earthshrine (Shaman), Warcraft
       Priests, Death's Advance (DK). Not fetchable; Riley pastes.

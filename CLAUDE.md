@@ -104,8 +104,14 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   YouTube video the full dated-verdict outlook shift — Feral has exactly one take — which
   is the "weakest evidence steers" inversion already rejected on the meta nudge. Instead
   `expertRead()` (render.mjs, PROJECTION_VERSION 9) aggregates the whole non-superseded
-  PTR-era take set, one vote per creator, shrunk by corroboration. Nine specs still have
-  no writeup; the aggregate now supplies their outlook direction. Since v8 the PROJECTION's
+  PTR-era take set, one vote per creator, shrunk by corroboration. Coverage as of 2026-08-11:
+  **one** spec has no writeup (Demonology Warlock, whose null is deliberate — the source
+  reported no changes, and "nothing changed" is not a verdict), down from nine; every spec
+  now carries at least one live take, and **three** have no RAID-scoped one (Blood DK,
+  Vengeance DH, Retribution Paladin), which is the number that matters because raid is the
+  bracket with almost no PTR empirical evidence. These counts are hand-maintained and go
+  stale — the durable fix is a computed digest coverage line (`audit-2026-07-24.md`, D12),
+  still unbuilt. Since v8 the PROJECTION's
   read is **bracket-scoped** (an explicit `bracket: "raid"|"mplus"|"both"` on the take wins;
   else the patchContext text decides via the same regexes as the meta nudge; naming neither
   → both) — a creator's M+ tier-list read no longer moves raid forecasts. The whole-spec

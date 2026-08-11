@@ -480,9 +480,17 @@ jobs:
           # agent able to write it could change any published letter while every other gate
           # stayed green. It is produced by the deterministic freeze step BELOW this gate,
           # never by the refresh agent — so at this point it must be byte-identical to HEAD.
-          if ! git diff --quiet HEAD -- data/required-sources.json data/scales.json data/season-final.json; then
-            git --no-pager diff HEAD -- data/required-sources.json data/scales.json data/season-final.json
-            echo "::error::refresh artifact modified the gate contract, tier scales or the frozen-season archive — these ship only via reviewed commits or the deterministic freeze step"
+          # data/forecasts/ holds the IMMUTABLE frozen-forecast artifacts — the record a
+          # post-launch audit re-derives the grade from (git SHA, data hash, all 80 cells with
+          # their component values). Written once by `snapshot.mjs --frozen`, an owner action,
+          # and read by the report card. Publish stages `git add data/` wholesale, so without
+          # this line an agent-written file under data/forecasts/ would be committed silently
+          # and the graded forecast could be rewritten after the fact — the one corruption
+          # nothing downstream can detect. No automated path writes it today; this is the
+          # boundary made explicit rather than an observed defect.
+          if ! git diff --quiet HEAD -- data/required-sources.json data/scales.json data/season-final.json data/forecasts/; then
+            git --no-pager diff HEAD -- data/required-sources.json data/scales.json data/season-final.json data/forecasts/
+            echo "::error::refresh artifact modified the gate contract, tier scales, the frozen-season archive or a frozen forecast — these ship only via reviewed commits or the deterministic freeze step"
             exit 1
           fi
           node -e '

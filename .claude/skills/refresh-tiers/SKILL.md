@@ -46,8 +46,13 @@ Fetch the current Midnight tier lists live and merge them into `data/specs.json`
   raw HTML; WebFetch's markdown conversion silently drops it.
 - **Wowhead guide URLs move.** The tier lists live under
   `/guide/classes/tier-lists/{role}-rankings-{raids|mythic-plus}`; older URL shapes 404.
-  Body is JS-rendered: use the r.jina.ai proxy or parse the embedded WH.markup from raw
-  HTML. Wowhead's M+ DPS scale includes **A+**; role pages can have empty tiers.
+  Body is JS-rendered. **Transport, in this order — the r.jina.ai proxy is DEAD on
+  `wowhead.com/guide/*` (IP-403 since 2026-08-03) and must not be tried first:** fetch with
+  the FULL browser header set (a UA-only request is Cloudflare-403), then parse the embedded
+  `WH.markup [tier-list=rows]` block out of the raw HTML. **Keep the WH.markup instruction** —
+  it is the current working parse, and the zero-row incidents on record were parser-anchoring
+  bugs, not transport drift, so "the parse is broken" is the wrong first conclusion.
+  Wowhead's M+ DPS scale includes **A+**; role pages can have empty tiers.
 - **Method's raid list URL is `/guides/tier-list/raiding`** (not `/raid`), and it may
   omit specs entirely (Vengeance DH was absent 2026-03) — omit, don't invent.
 - ✅ **WoWMeta is NO LONGER a tier-list source — do not fetch it here** (retyped to

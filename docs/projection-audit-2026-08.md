@@ -439,7 +439,17 @@ drift number): the prior is the 12.0.7 consensus — evidence about a meta that 
 launch — and renormalization confines the reweight to cells holding real PTR evidence
 (prior-only cells: measured 0 moved). Measured v8→v9: 61 of 80 scores, 13 tiers, exactly
 3 quorum crossings (Mistweaver M+ S→A+ on three healer specialists' nerf reads; Arms
-raid A→A+ and Arms M+ A+→S on its five-creator bullish panel). v9 is what `--frozen`
-will grade — deliberately: the frozen forecast should encode the owner's actual
+raid A→A+ and Arms M+ A+→S on its five-creator bullish panel).
+
+> **CORRECTION (2026-08-11): the freeze landed at `PROJECTION_VERSION` 13, not v9.** The line
+> below was written when v9 was current and was never updated as v10–v13 shipped (the raid
+> prior-only reweight, the healer/tank quorum removal, the percentile units fix). The
+> immutable artifact `data/forecasts/frozen-2026-08-11.json` records `projectionVersion: 13`,
+> and that is what the report card grades. The authoritative version log is the inline
+> commentary at `src/render.mjs:640-806`, not this document — read it there first. This
+> document's "Freeze at v6" heading is likewise superseded by its own v9 addendum and now by
+> this note.
+
+The intent below still holds, with v13 substituted for v9: the frozen forecast should encode the owner's actual
 pre-launch read, and the carry-forward baseline it must beat still copies the frozen
 live consensus forward, so the report card can say whether the conviction was earned.
