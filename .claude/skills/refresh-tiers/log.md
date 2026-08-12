@@ -664,3 +664,49 @@ policy.
   2026-08-11T12:00:00Z on the raid-tank page alone, ~6h after that rebuild should have
   landed. Uneven per-page labels are worth watching but are not ours to fix; the identical
   values across two fetches 6h apart confirm no rebuild reached the data.
+
+## 2026-08-12 (nightly CI, headless Opus 5, single-shot; started 11:31Z)
+
+**All four tier-list sources + the era-gated PTR list fetched live; ONE tier moved on the
+whole roster.** Transports, per the standing rule: icyveins 6 pages + icyveins-ptr 3 pages
+direct curl with a browser UA (200, 210–357 KB); method 2 pages direct curl (150/162 KB);
+wowhead 6 pages direct curl with the FULL browser header set (73–326 KB — r.jina.ai is dead
+on `/guide/*` and was not tried); archon 6 aggregate + 51 encounter pages direct curl →
+`__NEXT_DATA__`. No proxy anywhere. 359 rating rows parsed, 0 unmatched.
+
+- **wowhead — the one move: Guardian Druid M+ B → A.** It is not noise: the M+ TANK page's
+  JSON-LD `dateModified` advanced **2026-08-08 → 2026-08-11** (the other five pages are
+  unchanged at 08-08, M+ healer 08-09), and the stored `published` was updated to match.
+  All six titles read "Midnight Season 2", so `seasonVerified` stays **s2** — Wowhead is
+  season-AHEAD, i.e. out of the live consensus via the frozen lane and INTO the 12.1
+  forecast, so this move lands on `ptrTierRead`, not on a published consensus letter.
+- **icyveins — RAID applied (0 moves), M+ STILL BLOCKED, same escalation as 08-11.** All 6
+  live pages parsed from `<table class="tier-list">`. Raid re-parsed 40/40 with zero moves
+  against stored, an independent confirmation of yesterday's letters. The M+ pages again
+  publish **S+ / A+ / B+ / TBD** — bands the five-band `icyveins` scale does not carry — and
+  their letters are byte-identical to the `icyveins-ptr` list on **all 40** specs for the
+  second day running: Icy Veins has *replaced* its live M+ lists with its PTR list. 34 of 40
+  stored M+ letters would move if a merge were allowed (Arcane Mage B→S+, Blood DK C→S,
+  Beast Mastery A+→C). `scales.json` is the gate contract, so this stays an **owner
+  escalation**; stored M+ letters untouched. Era: five of six titles read 12.1/Season 2 and
+  the raid-healer page keeps a stale 12.0.7 title over a Season-2 body — body over title,
+  `seasonVerified` stays s2 on all six.
+- **icyveins-ptr — 40/40 placed, 0 moves.** All three titles read "PTR Tier List for
+  Midnight (Patch 12.1 / Season 2)" — the opposite era check, as required. Subtlety Rogue is
+  still upstream **TBD** and stays an explicit `null` (39 rated, floor 24). `published`
+  RE-READ per page rather than carried forward: JSON-LD `dateModified` 2026-08-09 on all
+  three (the in-body "2nd of August" line loses by the documented precedence).
+- **method — 79 rows, 0 moves, still Season 1.** Both pages still self-date "Last Updated
+  31st March 2026" and contain **zero** occurrences of "12.1" or "Season 2", so
+  `seasonVerified` stays **s1**. With Archon, it is one of only two sources still feeding the
+  live consensus. Vengeance DH still absent from the raid list (39 raid / 40 M+).
+- **archon — 80 aggregate rows, 0 tier moves; 26 PER-ENCOUNTER moves.** `lastUpdated` is now
+  **2026-08-11T12:00:00Z on all six** aggregate pages (yesterday: 08-10 on five, 08-11 on the
+  raid-tank page alone), and the raid aggregate genuinely re-cut — every raid parse count
+  moved (see refresh-metrics). Despite that, not one aggregate letter moved. The per-encounter
+  sweep (9 bosses + 8 dungeons × 3 roles = 51 pages, 51/51 200, 40/40 specs each = 680 rows)
+  produced **26 tier moves, ALL on raid bosses** (Vorasius alone accounts for 9; the M+
+  per-dungeon cut is unchanged, matching its unchanged aggregate). Written to
+  `encounter-tiers.json` with the stored encounter NAMES preserved; `asOf` 2026-08-11 =
+  Archon's own cut date. Era: pages still describe Season 1 content (VS/DR/MQD selector, the
+  nine S1 bosses, eight S1 dungeons) → `seasonVerified` stays **s1**.

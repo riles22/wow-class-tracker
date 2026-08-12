@@ -993,3 +993,38 @@ catch-up path.
   tracker itself is still configured pre-flip (`PHASES.liveSeason` "s1", `SNAPSHOT_PHASE`
   "12.1-ptr", `PHASE_FLIP_DUE` 2026-08-20) — the migration is an owner one-shot and was not
   attempted here.
+
+## 2026-08-12 (nightly CI, headless Opus 5, single-shot; started 11:31Z)
+
+**No new build. Feed unchanged at 15 entries, newest still the 2026-08-06 launch patch
+notes.** All three channels checked, plus the WCL zones by evidence only.
+
+1. **Official thread `2317811.json`** — `posts_count` 17, `highest_post_number` **19**,
+   newest Linxy post still 2026-07-31. Nothing after the two 07-31 posts already logged as
+   builds #18/#19.
+2. **Wowhead news RSS** — 40 items spanning 2026-08-06 → 2026-08-12, bodies read out of
+   `content:encoded` in the single fetch. **Zero class-tuning lines anywhere in the window**:
+   every item published since yesterday's run (14 of them, 08-11 17:17Z onward) scores 0
+   change-verb hits — launch cinematic, Coiled Isle, known-issues, Lairs, Season 2 dungeon
+   guides, "Class Guides Now Updated for Midnight Season 2" (a Wowhead guide-refresh
+   announcement, not tuning), Battle.net sale, sparks/trophies/lair-queue fixes.
+3. **Wowhead blue tracker** — `?rss` needs the FULL browser header set (a UA-only fetch is
+   CloudFront-403; recorded because the plain-UA attempt looks exactly like an empty feed).
+   50 items back to 08-06: **no standalone class-tuning blue post** of the Kaivax "Healer
+   Tuning" shape. Launch-adjacent posts are all non-tuning (Curse of Ula'tek now live, known
+   issues, Umbral title score finalisation, Lairs, pre-season, Twitch drops, sale).
+   **Dated fact worth having: "The Shadows Deepen: Midnight Season 2 Begins August 18"
+   (US) / 19 August (EU)** — Season 2 opens 08-18, which is inside `PHASE_FLIP_DUE`
+   2026-08-20.
+- **Tier sets:** no set-touching line landed, so no `spec.tierSet` upkeep was due.
+- **Writeups:** coverage unchanged at 39/40. Demonology Warlock stays `ptr: null`
+  deliberately — the source reported no changes, and "nothing changed" is not a verdict.
+- **WCL zones are evidence-only on the runner and none of them could land.**
+  `wcl-fetch/evidence.json` verdict "rdps-broken": zone 54 (PTR raid testing score), zone 52
+  (`ptrDummy` median rDPS) and zone 56 (PTR M+ rDPS/HPS medians) are all rDPS-family and stay
+  frozen at 2026-07-28 / 2026-08-10 / 2026-08-10. Their RAW-DPS counterparts DID land via the
+  deterministic step (see refresh-metrics) and are deliberately different statistics. Zone 57
+  (Tidebound Grotto) is not probed by the fetch step and was not fetched here.
+- **Migration status, unchanged and NOT attempted here:** 12.1 is live, Season 2 opens 08-18,
+  and the tracker is still configured pre-flip (`PHASES.liveSeason` "s1", `SNAPSHOT_PHASE`
+  "12.1-ptr", `PHASE_FLIP_DUE` 2026-08-20). Owner one-shot.

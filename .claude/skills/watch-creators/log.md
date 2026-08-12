@@ -1805,3 +1805,38 @@ disagree, re-scope the new evidence before retiring the old.
   queue will drain when the month rolls or in a local yt-dlp run — whichever comes first.
 - The queue is now 7 deep with the two newest cycle-relevant specialist videos in it
   (Jedith on Devourer DH, Kalamazi on Warlock gearing). Worth a local catch-up run.
+
+## 2026-08-12 (nightly CI, headless Opus 5, single-shot; started 11:31Z)
+
+**TRANSCRIPT API KEY problem: limit-exceeded — zero takes, zero metaNotes, discovery
+complete.** `transcript-fetch/summary.json` (11:29:29Z) reports verdict **limit-exceeded**
+on the one video it attempted (`bqVHzvKJCuA`), 1 requested / 0 fetched, "stopped early …
+remaining queue untouched". Supadata's free tier is 100 requests per MONTH and the budget is
+spent, so no transcript was readable. This agent fetched nothing from YouTube or any
+transcript API by any means, and **no take or metaNote was added, changed or superseded.**
+
+- **Discovery ran in full:** all **44 unique channels** polled (73 transcribable creator
+  entries collapse to 41 distinct channels plus the 3 generalCreators), **44/44 HTTP 200, 0
+  RSS failures**, 660 videos enumerated, diffed against a **925-id seen-set built from
+  structured data only** (pending `seen[]` + `skipped[]` + `videos[]`, union every
+  `youtu.be` id in a take or metaNote — never log prose).
+- **17 unseen videos, all published inside the 12.1 cycle** (none predate the 2026-06-18
+  opening build). The nightly keyword filter was KEPT, per the monthly-budget rule; **13 were
+  queued** to `data/pending-transcripts.json`, taking the queue to **20**:
+  `c5QQHhL34f0` YoDaTV (Blood DK +20 Blinding Vale) · `o-n2WU1Y-4M` and `MIOc2oeUuGk`
+  Shadarek (pre-season) · `U-Xl6VINTLw` LBNinja7 (Holy Paladin S2 M+ guide) · `NsiXhBpKwaU`
+  Dalaran Gaming (release-day class changes) · `f2ytEOVE0fY` Bansherz · `4zRXrqXdppg` and
+  `tPzhRxJ-0Tk` Sha (S2 dungeon guides) · `nvhE2iC6pBk` Shindigg · `yxZeT9h_jyE` Kalamazi
+  (12.1 day-1 gearing) · `FPJHlprfCik` Critcake · **`1GfuhNQSZvI` izen — "Season 2 Mythic+
+  Meta Specs", the archetypal metaNote source and the one most worth draining first** ·
+  `EBu0U1mB4oE` Maximum.
+- **4 not queued, and none of them is in `seen[]` on purpose.** Three failed the nightly
+  keyword filter (`M-W-g71zfIM` Shadarek boss kill, `Ifj_93twYJc` Shadarek mount PSA,
+  `TgjusfTTyv0` Tettles parsing short); one PASSED the keyword filter but is **PvP-only**
+  (`FyzXK8_AMQ8` Dalaran Gaming, "5v5 1v1 Duels — PvP"), and this tracker rates PvE, so
+  queueing it would spend a scarce paid fetch on out-of-scope content. Keyword/scope
+  dismissals are a NIGHTLY budget measure, not a durable verdict — writing them into `seen[]`
+  would hide them from the local unfiltered, date-bounded sweep that is supposed to
+  reconsider them. `seen[]` therefore stays at 483.
+- A local yt-dlp catch-up run would clear all 20 queued videos for free; that is the standing
+  recommendation while the Supadata month is spent.
