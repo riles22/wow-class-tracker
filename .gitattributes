@@ -20,3 +20,10 @@ data/history/*.json text eol=lf
 # also protects gearing/README.md's promise that the single file can just be opened.
 dist/*.html                 text eol=lf
 gearing/wow-s2-gearing.html text eol=lf
+
+# The pre-staged flip-day test patch must apply byte-exact with `git apply` on the day —
+# an autocrlf rewrite at checkout would make its hunks whitespace-mismatch the LF test
+# files it targets. Same LF pin for the season-archive records: data/*.json does not
+# reach subdirectories (which is why data/history/ is listed explicitly above).
+docs/s2-flip-test-patch.diff text eol=lf
+data/season-archive/*.json   text eol=lf
