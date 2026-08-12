@@ -5,6 +5,29 @@ detectors rely on (parse counts, seen video IDs) must stay in the NEWEST entries
 dedicated section — narrative prose older than that is prunable memory.
 
 
+
+- 2026-08-12 (interactive, Riley — follow-up to the morning local run's scope-gap flag).
+  **Owner decision: Tactyks added to Druid with Guardian scope**; the `v6A6ntuu8t4` skip is
+  re-opened (positive reason: the skip WAS the scope gap) and distilled as **one raid-bracket
+  take** (mixed — the apex rework he is a fan of and Mangle "back in the conversation" vs the
+  significant Lunation/Lunar Beam nerf; Alune's Chosen still the raid build, with a plea to
+  buff Druid of the Claw). skipped[] 276 → 275, takes 428 → 429. Measured through the
+  snapshot diff: **0 consensus, 0 forecast letters, 0 within-band scores moved** — a mixed
+  take abstains from panel direction, so only the drawer changes. `audit:creators` HIGH 0.
+  **The RAID SCOPE ONLY firewall travels to the Druid entry, and it was re-verified rather
+  than assumed**: method.gg/guides/tier-list/mythic-plus still opens "my name is Tactyks"
+  (fetched today, 4 mentions), while the raid tier-list page has ZERO Tactyks mentions — so
+  raid-lens takes are clean and M+ takes double-count him into consensus + expert lane. His
+  Guardian guide's whole M+ section (iron-fur rage dump, 90s Incarn feasibility, M+ build) is
+  therefore deliberately NOT in the take.
+  ⚠ **DRIFT FLAGGED TO RILEY, not acted on: two live `bracket: "mplus"` Protection Paladin
+  takes (08-09 tier-list placement, 08-10 guide M+ section) violate the recorded RAID SCOPE
+  ONLY constraint.** Three runs (07-21, 08-09, 08-10) logged M+ takes without mentioning the
+  constraint — missed, not overridden (the 08-09 entry even quotes community.json's scope but
+  only the specs half). The 07-21 M+ take is already superseded; the two live ones nudge the
+  Prot Paladin M+ forecast under his name while his Method M+ list feeds the same cell's
+  consensus. Riley to decide: retire them, or record a deliberate exception in the credential.
+
 - 2026-08-12 (LOCAL run, ~14:3xZ — Opus 5; scheduled residential catch-up after the 10:37Z
   nightly, which had TRANSCRIPT API limit-exceeded and queued 13). **Queue drained + a full
   unfiltered discovery sweep.** yt-dlp (pinned 2026.07.04) fetched **14 of the 20** queued:
