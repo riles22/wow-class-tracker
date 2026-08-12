@@ -63,7 +63,14 @@ const explicitlyVerifiedAt = (source, bracket, liveSeason) => {
 /* The newest commit whose data/sources.json explicitly verifies `liveSeason` for this
    source+bracket. Returns HEAD when HEAD itself still does — i.e. nothing to freeze. */
 export function lastSeasonVerifiedCommit(sourceId, bracket, { cwd = ROOT, liveSeason = PHASES.liveSeason, max = MAX_WALK } = {}) {
-  const shas = git(["rev-list", `--max-count=${max}`, "HEAD"], cwd).trim().split("\n").filter(Boolean);
+  /* --first-parent: walk the MAINLINE only. rev-list orders by commit date across all
+     parents, so merging a PR branch cut from an older master injects a recent-DATED
+     commit carrying a stale data snapshot — measured 2026-08-12, when merging
+     Dependabot #54 made this walk resolve icyveins/mplus to the bump commit (its base
+     predated Icy Veins' s2 flip, so its sources.json still said s1) instead of the
+     mainline freeze point. The freeze must lift letters from states the site actually
+     published, and those live on first-parent master. */
+  const shas = git(["rev-list", "--first-parent", `--max-count=${max}`, "HEAD"], cwd).trim().split("\n").filter(Boolean);
   for (const sha of shas) {
     const raw = gitShow(sha, "data/sources.json", cwd);
     if (!raw) continue;
