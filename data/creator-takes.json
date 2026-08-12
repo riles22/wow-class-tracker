@@ -2816,7 +2816,7 @@
       "patchContext": "12.1 PTR (2026-07-31 build)",
       "claim": "Sims the 07-31 Havoc pass at roughly +3.6% for Aldrachi Reaver (about 235.6k to 244k) and +4.8% for a Fel-Scarred build that drops Deflecting Dance (about 230k to 241k), narrowing the gap between the two hero trees from almost 6k DPS to about 3k. He builds those numbers from the 6% added to Blade Dance, Death Sweep, Chaos Strike and Annihilation — roughly 32% of Aldrachi's damage against about 49% of that Fel-Scarred build's — plus the 12% Hunt buff and the Essence Break increases. He deliberately discounts the Essence Break gain because the sims still model the 4-set amplifying the damage-over-time portion rather than the initial strike, and he reads the unusually large secondary-damage buff as a sign Blizzard is about to fix that bug. His conclusion is that Havoc now lands in a genuinely good spot and comes within striking range of Devourer, while his standing playstyle complaint is unchanged: Eternal Hunt's 12-second window is never worth holding The Hunt for, so roughly 40% of Hunt casts buff no Eye Beam at all.",
       "url": "https://youtu.be/mV7NM-Vh90I?t=166",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Demon Hunter",
@@ -3245,7 +3245,7 @@
       "patchContext": "12.1 PTR — walkthrough of the 2026-07-31 class tuning notes",
       "url": "https://youtu.be/9l7sbfFnwSE?t=842",
       "claim": "Calls the 10% damage buff 'very solid, big numbers, kind of what assassination really needed', but says it does not fix the spec's actual problem: good single target, decent AoE, yet it falls behind specifically at two and three targets, where it used to have good tools and no longer does. He groups this with Outlaw and Subtlety as the same unaddressed class-wide weakness and says a lot of players were hoping Blizzard would address it in this pass and it did not.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Rogue",
@@ -3256,7 +3256,7 @@
       "patchContext": "12.1 PTR — walkthrough of the 2026-07-31 class tuning notes",
       "url": "https://youtu.be/9l7sbfFnwSE?t=867",
       "claim": "Reads the 6% buff as smaller than the other two Rogue specs but still needed and welcome. Same structural caveat as the rest of the class: Blade Flurry handles wide AoE fine, but Outlaw is much weaker at two and three targets than in past expansions, and this pass did nothing about that dead zone.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Rogue",
@@ -3267,7 +3267,7 @@
       "patchContext": "12.1 PTR — walkthrough of the 2026-07-31 class tuning notes",
       "url": "https://youtu.be/9l7sbfFnwSE?t=894",
       "claim": "Says Subtlety needed the buff and the 10% is good, but is unconvinced by the new reward talent Warfiend's Bite — the returning Legion artifact ability, meant to be decent at both single target and cleave, which in his view 'just doesn't accomplish that goal', leaving the spec still on the weaker side there. Shares the class-wide two-to-three-target dead zone he says Blizzard did not address in this pass.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Warlock",
@@ -3591,7 +3591,8 @@
       "bracket": "both",
       "patchContext": "12.1 PTR — Devourer sims corrected after a double-haste GCD bug was found",
       "url": "https://youtu.be/XPhaAJiAyD8?t=543",
-      "claim": "Explains the long-standing gap between Devourer sims and live play: because many Devourer abilities are ports of Havoc ones, haste was being applied to the GCD twice, so Devour (a 1.25s cast with Improved Consume) effectively lost its post-cast gap and the spec got extra casts at high haste. With the interaction modelled and no other changes, Annihilator single target went 214k to 245k — from 15% behind Void-Scarred to 10% — and with early APL optimisation to about 250k single target and 231k on an AoE/dungeon build, cutting the dungeon-route gap to roughly two-thirds of what it was. He concludes both Devourer builds now sim flat out ahead of Havoc in every way and ahead of most specs in the game, and reads it as explaining why Annihilator was already overperforming its sims on PTR logs. Two caveats he states himself: this is a live game bug he thinks Blizzard should fix before the tier starts, so the strength is contingent on it surviving; and it raises haste's value sharply up to a breakpoint where the GCD bottoms out."
+      "claim": "Explains the long-standing gap between Devourer sims and live play: because many Devourer abilities are ports of Havoc ones, haste was being applied to the GCD twice, so Devour (a 1.25s cast with Improved Consume) effectively lost its post-cast gap and the spec got extra casts at high haste. With the interaction modelled and no other changes, Annihilator single target went 214k to 245k — from 15% behind Void-Scarred to 10% — and with early APL optimisation to about 250k single target and 231k on an AoE/dungeon build, cutting the dungeon-route gap to roughly two-thirds of what it was. He concludes both Devourer builds now sim flat out ahead of Havoc in every way and ahead of most specs in the game, and reads it as explaining why Annihilator was already overperforming its sims on PTR logs. Two caveats he states himself: this is a live game bug he thinks Blizzard should fix before the tier starts, so the strength is contingent on it surviving; and it raises haste's value sharply up to a breakpoint where the GCD bottoms out.",
+      "superseded": true
     },
     {
       "class": "Demon Hunter",
@@ -4440,7 +4441,7 @@
       "sentiment": "mixed",
       "patchContext": "12.1 PTR — Season 2 M+ outlook (healer prep stream)",
       "url": "https://youtu.be/u869GspePck?t=16260",
-      "superseded": false,
+      "superseded": true,
       "claim": "A more balanced read than his late-July write-off. He reports Mistweaver actually has decent numbers, can put out reasonable damage while still healing enough for high keys, and that the new talent makes the Apex build work better. But he identifies the core problem as Vivify and Sheilun’s Gift being very weak, which he calls the biggest issue with the spec on the Season 2 PTR, and says he is near-certain it is getting buffs while pointing out none have arrived yet.",
       "bracket": "mplus"
     },
@@ -4707,6 +4708,78 @@
       "patchContext": "12.1 PTR — launch-eve stream, answering a viewer directly on whether Fury is bad in Season 2",
       "url": "https://youtu.be/Xyqc9xLvczQ?t=1861",
       "claim": "Asked directly by a viewer whether Fury is bad next season, he says he does not think it is bad and that people are underestimating it precisely because Arms is totally in the spotlight. He treats the perception gap as the story rather than the numbers, joking that it is better not to talk Fury up — if the community keeps believing it is weak, it is more likely to be buffed, and he says he would not mind ending up in a Fury season either. He offers no throughput figures or testing to support the read, so this is a contrarian perception call from a Warrior main rather than a measured comparison, recorded as neutral for that reason."
+    },
+    {
+      "superseded": false,
+      "class": "Rogue",
+      "spec": "Outlaw",
+      "creator": "Dalaran Gaming",
+      "date": "2026-08-12",
+      "sentiment": "buff",
+      "bracket": "both",
+      "patchContext": "12.1 PTR — patch-day release stream, playing the Season 2 rebuild of the spec",
+      "url": "https://youtu.be/NsiXhBpKwaU?t=8796",
+      "claim": "He is unreservedly positive on the Season 2 rebuild: Killing Spree was buffed heavily and, combined with routing it through the drone-rush supercharger, Outlaw finally has a real burst window instead of purely sustained damage. He also notes the talent tree gained connectors that make builds easier to path. Levelling a rogue on the spec, he repeatedly calls the new flow the most fun part of the patch for him and expects viewers to enjoy it, though he ties none of this to throughput numbers."
+    },
+    {
+      "superseded": false,
+      "class": "Rogue",
+      "spec": "Subtlety",
+      "creator": "Dalaran Gaming",
+      "date": "2026-08-12",
+      "sentiment": "mixed",
+      "bracket": "both",
+      "patchContext": "12.1 PTR — patch-day release stream, answering viewers on Subtlety's Season 2 standing",
+      "url": "https://youtu.be/NsiXhBpKwaU?t=278",
+      "claim": "A two-sided read. He says long-standing Subtlety bugs went unfixed in Season 1 and were compensated with buffs, whereas this time the spec was nerfed instead — and that it is now locked into the Deathstalker hero tree, which he thinks plays poorly in M+ and leaves the rotation unchanged and boring. Against that he still expects it to be good on paper and notes rogues carried few structural changes from Season 1, so he does not call it weak, only unappealing and worse-treated than before."
+    },
+    {
+      "superseded": false,
+      "class": "Rogue",
+      "spec": "Assassination",
+      "creator": "Dalaran Gaming",
+      "date": "2026-08-12",
+      "sentiment": "neutral",
+      "bracket": "both",
+      "patchContext": "12.1 PTR — patch-day release stream, advising viewers picking one rogue spec for the season",
+      "url": "https://youtu.be/NsiXhBpKwaU?t=8979",
+      "claim": "Asked what to pick, he offers Assassination as the safe default rather than the strongest choice, reasoning that a spec built around cooldowns tends to survive tuning better. He is explicit that tuning is not final and that nobody knows the meta pick yet, and he hedges his own PTR/raid-testing read with 'should not be terrible, if it is not bugged'. He also says Deathstalker is significantly ahead of Fadebound for the spec. Recorded neutral because he declines to make a strength claim."
+    },
+    {
+      "superseded": false,
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "creator": "MadSkillzzTV",
+      "date": "2026-08-11",
+      "sentiment": "mixed",
+      "bracket": "both",
+      "patchContext": "12.1 PTR — Season 2 healer prep stream, revisiting his own healer tier list",
+      "url": "https://youtu.be/dtfGf1jfRXY?t=1816",
+      "claim": "He walks back his own placement from roughly eleven days earlier, saying he put too much emphasis on Mistweaver and would now put it around B tier. Pressed on whether it is genuinely bad, he separates the brackets: not that bad in M+, where he argues a lot of healers sit at similar power, but possibly weak in raid. He had expected buffs to the spec's Sheilun's/Vivify line before launch, says they have not arrived, and still expects them before the raid opens — so the read is a downgrade held open pending tuning rather than a settled negative."
+    },
+    {
+      "superseded": false,
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "creator": "Shadarek",
+      "date": "2026-08-11",
+      "sentiment": "neutral",
+      "bracket": "both",
+      "patchContext": "12.1 PTR — pre-season video on what he is playing, with an explicit refusal to forecast the meta",
+      "url": "https://youtu.be/MIOc2oeUuGk?t=64",
+      "claim": "Under current tuning he says Devourer is ahead of Havoc, while stressing he cannot say what will be meta and that weekly tuning is expected for three or four more weeks — he explicitly declines to guess. On hero trees, Void's Guard is significantly ahead in pure single target and roughly level with Annihilator once cleave is involved, so near-identical for M+; he is nonetheless playing Annihilator because Void's Guard forces a ranged spec into melee and he finds it uncomfortable and exposed to range mechanics. He also notes the carried-over tier set keys off Collapsing Star and so does nothing for Void's Guard."
+    },
+    {
+      "superseded": false,
+      "class": "Demon Hunter",
+      "spec": "Havoc",
+      "creator": "Shadarek",
+      "date": "2026-08-11",
+      "sentiment": "neutral",
+      "bracket": "both",
+      "patchContext": "12.1 PTR — pre-season video on what he is playing, with an explicit refusal to forecast the meta",
+      "url": "https://youtu.be/MIOc2oeUuGk?t=167",
+      "claim": "He places Havoc behind Devourer under current tuning but is careful to say it is not unviable and remains good, with Season 1 builds still fine to carry into pre-season. He sees no reason to chase Essence Break until the tier set lands. His broader advice for the week is to play what you enjoy rather than the optimal pick, since M0 is trivial content and tuning will move repeatedly before it matters."
     }
   ],
   "metaNotes": [
@@ -6138,7 +6211,7 @@
       "note": "Calls the tank meta settled and not worth debating further, with Blood DK fitting extremely well alongside Holy Paladin. His reasoning is that Blood historically fails at high keys because it can only self-heal rather than mitigate, and the paladin pairing supplies exactly the missing damage reduction — Devotion Aura, Beacon spread and the armament stacking on the tank.",
       "patchContext": "Season 2 PTR — M+ outlook",
       "url": "https://youtu.be/EqgjDKVwYow?t=480",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Druid",
@@ -6281,7 +6354,7 @@
       "note": "He has Holy Paladin establishing itself as the main healer of the season for generic all-purpose comps regardless of the DPS layout, on the back of repeated buffs across successive PTR passes and very chunky single-target healing across the board — the direct beneficiary, with Resto Shaman, of Mistweaver's collapse.",
       "patchContext": "Season 2 PTR — M+ outlook",
       "url": "https://youtu.be/g0adl6lXPQM?t=609",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Paladin",
@@ -7017,7 +7090,7 @@
       "sentiment": "positive",
       "patchContext": "Season 2 PTR — M+ outlook (which DPS specs take the comp slots)",
       "url": "https://youtu.be/_gt1uHQrh1s?t=35",
-      "superseded": false,
+      "superseded": true,
       "note": "He treats Arcane as settled and above the discussion — the strongest caster for the whole PTR through every tuning pass, a guaranteed slot in caster comps, and the one spec that stays very high on both trash and boss damage. His entire comp analysis is about who takes the remaining slots after Arcane."
     },
     {
@@ -7028,7 +7101,7 @@
       "sentiment": "positive",
       "patchContext": "Season 2 PTR — M+ outlook (which DPS specs take the comp slots)",
       "url": "https://youtu.be/_gt1uHQrh1s?t=162",
-      "superseded": false,
+      "superseded": true,
       "note": "The strongest melee spec and a lock for melee comps, but his new argument is that Arms is good enough that groups may want it even in traditional caster comps. He rates its balance between single-target and AoE as second only to Arcane, and notes it also brings Battle Shout."
     },
     {
@@ -7039,7 +7112,7 @@
       "sentiment": "positive",
       "patchContext": "Season 2 PTR — M+ outlook (which DPS specs take the comp slots)",
       "url": "https://youtu.be/_gt1uHQrh1s?t=437",
-      "superseded": false,
+      "superseded": true,
       "note": "His current front-runner for the contested third slot. The heavily buffed Farseer version is consistent across trash and boss damage with no real profile weakness, and its damage is slightly ahead of Devourer and clearly ahead of Balance. Crucially it can buff an Arms Warrior (mastery, and Windfury even nerfed), which Devourer cannot. Caveats he names: weaker on low-pull-count dungeons like King’s Rest, nothing unique beyond raw damage, lost burst to the Ascendance nerf, and possible squishiness once key levels and item levels rise."
     },
     {
@@ -7050,7 +7123,7 @@
       "sentiment": "mixed",
       "patchContext": "Season 2 PTR — M+ outlook (which DPS specs take the comp slots)",
       "url": "https://youtu.be/_gt1uHQrh1s?t=596",
-      "superseded": false,
+      "superseded": true,
       "note": "He rates Mark of the Wild arguably the strongest raid buff in the game — 3% damage to everything plus 1.5% damage reduction, which he likens to a Battle Shout and Chaos Brand combined plus half a Devotion Aura — and its mass AoE in very large pulls as potentially top of the table. The weakness is boss damage: on the AoE build M+ pushes it toward, single-target is poor, which he calls more problematic than Elemental’s equivalent gap, and there are not many pulls big enough to pay off its ceiling."
     },
     {
@@ -7072,7 +7145,7 @@
       "sentiment": "mixed",
       "patchContext": "Season 2 PTR — M+ outlook (which DPS specs take the comp slots)",
       "url": "https://youtu.be/_gt1uHQrh1s?t=98",
-      "superseded": false,
+      "superseded": true,
       "note": "He reports Windwalker doing top damage with rising popularity, helped by Resto Shaman displacing Mistweaver in melee comps and wanting the physical damage debuff. The asterisk he repeats is survivability: still \"made of paper\" this patch, so the question at higher keys is staying alive rather than whether the damage is there."
     },
     {
@@ -7107,6 +7180,90 @@
       "url": "https://youtu.be/_gt1uHQrh1s?t=64",
       "superseded": false,
       "note": "He has it taking the healer slot Mistweaver vacated, and specifically because it is strong in melee comps — which in turn props up Windwalker, since a melee comp wants the physical damage debuff alongside it."
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Blood",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-11",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 PTR — M+ outlook (the risk case: what could stop each meta-candidate spec from actually being meta)",
+      "url": "https://youtu.be/1GfuhNQSZvI?t=83",
+      "superseded": false,
+      "note": "He treats Blood as the settled staple tank of the season after its buffs overtook Protection Paladin, and calls it one of the best versions of the spec in several expansions. The named risk is the old one: its mitigation is self-healing rather than avoidance or absorbs, so very high keys where auto-attack damage outpaces the self-heal remain the ceiling. He deliberately deflates the popular version of that worry, pointing at logs where the tank drops below half health only a handful of times in a 28 and never below 29%, and notes a Holy Paladin pairing would patch it further with flat damage reduction rather than more healing."
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-11",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 PTR — M+ outlook (the risk case: what could stop each meta-candidate spec from actually being meta)",
+      "url": "https://youtu.be/1GfuhNQSZvI?t=311",
+      "superseded": false,
+      "note": "The most-played keystone healer, with what he considers the strongest single-target healing toolkit of any healer bar a Holy Priest's Serenity, plus real utility for this season — poison dispel in a poison season, Freedom against snares, and Sacrifice/Blessing of Protection as externals — and good personal survivability. The weakness he singles out is even AoE healing: the kit is single-target by construction, so spread rot damage is only partly covered through beacons. He compares the failure mode to Discipline Priest in an earlier season, where excellent spot saves still capped the key level the healer could sustain."
+    },
+    {
+      "class": "Mage",
+      "spec": "Arcane",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-11",
+      "sentiment": "positive",
+      "bracket": "mplus",
+      "patchContext": "Season 2 PTR — M+ outlook (the risk case: what could stop each meta-candidate spec from actually being meta)",
+      "url": "https://youtu.be/1GfuhNQSZvI?t=498",
+      "superseded": false,
+      "note": "The clearest positive read in the video — he says there is no real danger of Arcane falling out of the meta. It is strong on both trash and single target rather than trading one for the other, brings Arcane Intellect and Bloodlust, and gained meaningful durability from the change that spreads a portion of damage taken over time and restores Mirror Image's role as a defensive, which he rates highly against one-shots and small burst windows."
+    },
+    {
+      "class": "Warrior",
+      "spec": "Arms",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-11",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 PTR — M+ outlook (the risk case: what could stop each meta-candidate spec from actually being meta)",
+      "url": "https://youtu.be/1GfuhNQSZvI?t=561",
+      "superseded": false,
+      "note": "He is positive on the spec in isolation — tanky enough, Rallying Cry plus single-target and AoE stuns, better boss damage than the other contenders even if not matching Arcane — and locates the entire risk in composition rather than power. In a caster/intellect group Arcane Intellect is wasted on Arms and a Devourer would instead buff two casters by 3% each, so Arms can lose the slot without being outclassed. He notes the fallback is solid: in a melee composition he sees no danger of it being displaced."
+    },
+    {
+      "class": "Monk",
+      "spec": "Windwalker",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-11",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 PTR — M+ outlook (the risk case: what could stop each meta-candidate spec from actually being meta)",
+      "url": "https://youtu.be/1GfuhNQSZvI?t=726",
+      "superseded": false,
+      "note": "Damage is not the concern — the tier set's heavily buffed Spinning Crane Kick keeps its trash damage strong and he considers it fine on bosses too, so unlike other specs it does not fall off when target count drops. Survivability is the risk. He calls Windwalker traditionally among the squishiest specs and points out that where other historically fragile specs were given baseline durability over the years, monks lost tools instead, leaving Fortifying Brew and Touch of Karma as thin cover for a melee spec at the key levels the season will reach."
+    },
+    {
+      "class": "Druid",
+      "spec": "Balance",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-11",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 PTR — M+ outlook (the risk case: what could stop each meta-candidate spec from actually being meta)",
+      "url": "https://youtu.be/1GfuhNQSZvI?t=849",
+      "superseded": false,
+      "note": "He puts Balance at the edge of the contender group: its large-pull AoE is among the best in keys and enough on its own to argue an S-tier slot, but single-target and boss damage are much weaker, and the AoE itself is conditional on pull size. His worked example is the dot-application ramp — several global cooldowns spent seeding Moonfire and Sunfire before the spec starts actually doing damage — which pays off on big pulls and is wasted on small, split ones. Playing the AoE-focused hero build to get that ceiling costs single-target damage in turn."
+    },
+    {
+      "class": "Shaman",
+      "spec": "Elemental",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-11",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 PTR — M+ outlook (the risk case: what could stop each meta-candidate spec from actually being meta)",
+      "url": "https://youtu.be/1GfuhNQSZvI?t=996",
+      "superseded": false,
+      "note": "He rates Elemental the caster that most consistently gets closest to Arcane, with its AoE significantly buffed into the default choice and its real strength being consistency across single target, cleave and AoE alike. Two things could cost it the slot: it has no short-window burst — he contrasts it with Arcane or Arms lining up cooldowns on a spawn wave, where Elemental can only place Earthquake and chain-cast — and it is squishy, with a single 40% mitigation on a 90-second cooldown as its main defensive. He adds that much of its group value is contingent, since Windfury and Mastery matter far less if an Arms Warrior is not in the composition."
     }
   ]
 }

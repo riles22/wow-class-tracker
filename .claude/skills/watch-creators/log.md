@@ -4,6 +4,41 @@ Keep the newest ~20 entries; prune older ones when appending. Machine state the 
 detectors rely on (parse counts, seen video IDs) must stay in the NEWEST entries or a
 dedicated section — narrative prose older than that is prunable memory.
 
+
+- 2026-08-12 (LOCAL run, ~14:3xZ — Opus 5; scheduled residential catch-up after the 10:37Z
+  nightly, which had TRANSCRIPT API limit-exceeded and queued 13). **Queue drained + a full
+  unfiltered discovery sweep.** yt-dlp (pinned 2026.07.04) fetched **14 of the 20** queued:
+  4 distilled, 10 transcript-verified-skipped. Not fetchable: 4 have no auto-captions yet
+  (S2EmWMIcMkw Kalamazi, c5QQHhL34f0 YoDaTV, f2ytEOVE0fY Bansherz, nvhE2iC6pBk Shindigg) and
+  2 are livestreams (bqVHzvKJCuA still live, FPJHlprfCik VOD unprocessed) — all six carry
+  12.1/S2 title signal so they STAY queued per the keyword rule; queue 20 → **6**.
+  **Takes +6 / metaNotes +7, each superseding exactly one same-lens predecessor (6 + 7
+  retired, all matched 1:1 — no over-supersession).** izen's "Season 2 M+ Meta Specs" risk
+  video yielded 7 M+ metaNotes (Blood DK, Holy Paladin, Arcane, Arms, Windwalker, Balance,
+  Elemental); note it is the deliberate companion to his 08-09 comp-slots video, so the
+  sentiments read as caveats, not downgrades — Arcane stays **positive** ("no real danger of
+  falling out of the meta"), the rest mixed with the named risk in each note. Specialist takes:
+  Dalaran Gaming on Outlaw (**buff** — Killing Spree buffed into a real burst window),
+  Subtlety (mixed — nerfed this time and locked into Deathstalker, still "good on paper") and
+  Assassination (neutral — offered as the safe pick with tuning explicitly not final);
+  MadSkillzzTV on Mistweaver (mixed — walks his own tier list back to ~B, splits raid/M+,
+  still waiting on buffs); Shadarek on Devourer and Havoc (both **neutral** — Devourer ahead
+  under current tuning but he explicitly refuses to forecast meta).
+  **DISCOVERY: 44 channels, 0 RSS failures, seen-set 938 across the four structured lanes**;
+  local rule applied — no title filter, DATE-bounded at the cycle's opening build 2026-06-18.
+  8 unseen in-cycle videos, all fetched and transcript-read, **all 8 skipped** (boss guides,
+  week-1 gearing routing, a PvP duel cast, a comedy short). skipped[] 258 → **276**.
+  ⚠ **SCOPE GAP for a human: `v6A6ntuu8t4` — Tactyks, "12.1 GUARDIAN DRUID M+ and Raid
+  Guide".** Substantive 12.1 analysis from a Method guide author (apex rework, the significant
+  Lunation cooldown nerf, tier bonus putting Mangle back, Incarn uptime offsetting the lost
+  Lunar Beam) — but Tactyks has **no Druid entry at all** in community.json (declared scope:
+  Protection Paladin), so validation would reject the take and the skill says flag rather than
+  silently widen. He opens with "another tank guide", i.e. he is running a multi-tank series;
+  worth a scope decision. Not attributed this run. · npm test 377/377 pass (UI invariants
+  really ran, 0 skipped), build OK. **0 consensus letters and 0 forecast letters moved**;
+  7 forecast scores moved within band (Blood DK M+ −3, Elemental M+ −3, Havoc/Devourer
+  raid+M+ −1 each, Outlaw raid +1), each traceable to one supersession.
+
 - 2026-08-04 (LOCAL run, ~14:2xZ — Opus 5; scheduled residential catch-up after the 10:37Z
   nightly). **Queue drain only — no re-discovery pass**, same reasoning as the 08-01 entry:
   the nightly had polled all 25 feeds at 12:3xZ and queued its five unresolved outputs, so

@@ -3,6 +3,33 @@
 Keep the newest ~20 entries; prune older ones when appending (prose is memory, not state —
 parse counts and baselines the change detectors need live in the entries themselves).
 
+
+- 2026-08-12 (LOCAL run, ~14:3xZ — Opus 5; scheduled residential catch-up after the 10:37Z
+  nightly). **No metric source re-fetched or re-stamped** — CI refreshed Archon / Murlok /
+  Mythicstats / WoWMeta / Bloodmallet / SimC this morning, and independently regenerating what
+  CI produced is what makes a local push unmergeable. `data/run-manifest.json` deliberately
+  untouched (partial run).
+- **WCL: the standing `rdps-broken` verdict is re-confirmed from a residential IP, and the
+  HTML endpoint is STILL behind the human challenge — so residential access bought nothing
+  this run either.** One cheap retry per the standing rule: OAuth issues a token (1081 chars),
+  `characterRankings(metric: rdps)` on encounter 3176 returns a bare "Internal server error"
+  GraphQL body at HTTP 200, while plain `dps` on the same encounter answers normally
+  (count 80, "Imperator Averzian") — i.e. breakage is API-side, not IP-side, unchanged since
+  07-14. The statistics-table fallback for zones 46 and 47, sent by **curl** with the full
+  documented header set (XHR + browser UA + Referer), returns **HTTP 302 → `/human-challenge`**
+  on both — the same wall as 08-10/08-11. Completing a bot check is not the agent's to do and
+  this run is unattended, so it was not attempted. **Net: all five WCL cuts left exactly as
+  stored** (zones 46/47 and ptrDummy at 08-10, zone 54 at 07-28, zone 56 at 08-10); the healthy
+  `dps` numbers were NOT substituted under the rDPS-labeled series.
+- ⚠ **Local-only gate artifact, worth knowing before it is re-diagnosed:** `check-refresh
+  --manifest` failed on one line here — *"wcl evidence: attemptedAt 2026-08-10T14:36:31.636Z
+  is not from this run"*. That is a **gitignored leftover** `wcl-fetch/evidence.json` from the
+  08-10 local run; the nightly's real evidence lives in a CI artifact that a local checkout
+  never has. Moving the stale file aside makes the gate print **✓ check-refresh manifest
+  passed**, and nothing about it is committed. Note this is NOT the `startedAt is Nh old`
+  failure the local-run skill predicts — that check passed, because the nightly's own
+  `startedAt` (11:31Z) was ~3h old at gate time.
+
 - 2026-08-10 (LOCAL evening run, ~21:4xZ — Opus 5; owner-requested pre-freeze catch-up after
   the 12:03Z nightly, which had TRANSCRIPT API limit-exceeded + the standing rdps-500). Scope:
   WCL only — nothing CI refreshed today was re-fetched.

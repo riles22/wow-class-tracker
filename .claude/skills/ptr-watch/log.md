@@ -4,6 +4,20 @@ Keep the newest ~20 entries; prune older ones when appending. Machine state the 
 detectors rely on (parse counts, seen video IDs) must stay in the NEWEST entries or a
 dedicated section — narrative prose older than that is prunable memory.
 
+
+- 2026-08-12 (LOCAL run, ~14:3xZ — Opus 5; scheduled residential catch-up after the 10:37Z
+  nightly). **0 new builds, verified independently rather than inherited from the nightly.**
+  Forum thread 2317811 fetched fresh (`.json`, HTTP 200, 407 KB): posts_count 17,
+  highest_post_number **19**, last_posted_at **2026-07-31** — post #19 is already logged, and
+  the development-notes thread is effectively closed now that 12.1 shipped on 08-06. Wowhead
+  news RSS (40 items) carries **no class-tuning or hotfix article since launch**; the only
+  tuning item in range is 08-07 "More Season 2 Mythic+ Dungeon Tuning — Ruby Life Pools and
+  Temple Changes", which is dungeon-side and outside this feed's per-spec scope. Feed stays at
+  **15 entries**, newest still the 08-06 launch patch notes. No set-bonus-touching highlight
+  landed, so no `tierSet.asOf` upkeep was owed. · **Zones 54/52/56/57: not re-fetched — the
+  WCL statistics-table endpoint is behind the human challenge** (see refresh-metrics entry
+  same date); stored rows and snapshots left exactly as they were.
+
 - 2026-08-10 (LOCAL evening run, ~21:4xZ — Opus 5; pre-freeze WCL catch-up only). Zone 54
   probed once (Heroic 4/10 DPS): still EMPTY upstream, rows + snapshot stay 2026-07-28. Zones 52
   and 56 refreshed via the owner-cleared browser session (see refresh-metrics log 2026-08-10:
