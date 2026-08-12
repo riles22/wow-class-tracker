@@ -8,13 +8,16 @@ import path from "node:path";
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const PORT = Number(process.env.PORT || 8317);
 
-/* The site publishes two pages plus fetchable launcher icons. Allowlisted names only:
+/* The site publishes its pages plus fetchable launcher icons. Allowlisted names only:
    a path taken from the request must never reach the filesystem unfiltered. Unknown
-   paths keep the historical index.html fallback used by the preview. */
+   paths keep the historical index.html fallback used by the preview. s1.html is the
+   frozen Season-1 archive (emitted only once its record exists — a 404 before then is
+   honest). */
 const FILES = new Map([
   ["/", { name: "index.html", type: "text/html; charset=utf-8" }],
   ["/index.html", { name: "index.html", type: "text/html; charset=utf-8" }],
   ["/gearing.html", { name: "gearing.html", type: "text/html; charset=utf-8" }],
+  ["/s1.html", { name: "s1.html", type: "text/html; charset=utf-8" }],
   ["/favicon-192.png", { name: "favicon-192.png", type: "image/png" }],
   ["/apple-touch-icon.png", { name: "apple-touch-icon.png", type: "image/png" }],
   ["/wow-class-tracker/favicon-192.png", { name: "favicon-192.png", type: "image/png" }],

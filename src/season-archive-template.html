@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+  ══════════════════════════════════════════════════════════════════════
+   Spec Tracker — __SEASON_NAME__ final standings (archive)  —  Made by riles22
+   A frozen record generated once by src/freeze-season-archive.mjs.
+   github.com/riles22/wow-class-tracker
+   If you share, fork, or repost this file, please keep the credit.
+  ══════════════════════════════════════════════════════════════════════
+
+  PRESENTATION ONLY — every letter, score and date on this page comes from
+  data/season-archive/__SEASON_ID__.json, injected at build time. This page carries
+  ZERO JavaScript on purpose: it is an archive, it never changes, and a page that
+  cannot run script cannot misreport its record.
+-->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="riles22">
+<meta name="robots" content="index,follow">
+<title>__SEASON_NAME__ final standings (__SEASON_LABEL__) — Spec Tracker archive</title>
+<link rel="icon" href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22><rect x=%222%22 y=%222%22 width=%2260%22 height=%2260%22 rx=%2214%22 fill=%22%23130B22%22 stroke=%22%23B57BEE%22 stroke-opacity=%22.45%22 stroke-width=%222.5%22/><rect x=%2212%22 y=%2213%22 width=%2240%22 height=%229%22 rx=%224.5%22 fill=%22%23F0C24B%22/><rect x=%2212%22 y=%2227.5%22 width=%2229%22 height=%229%22 rx=%224.5%22 fill=%22%23C77DFF%22/><rect x=%2212%22 y=%2242%22 width=%2219%22 height=%229%22 rx=%224.5%22 fill=%22%236AA8F0%22/></svg>'>
+<link rel="icon" type="image/png" sizes="192x192" href="/wow-class-tracker/favicon-192.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="/wow-class-tracker/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- No JS on this page, so fonts load via a plain stylesheet link (the tracker's
+     noscript path); display=swap covers the swap-in. -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* Palette and masthead vocabulary mirror src/template.html (shared brand,
+     2026-08-05) — same tokens, same type stack, same rule sweep. */
+  :root{
+    --bg:#0B0713; --bg-2:#130B22; --bg-3:#1B1030;
+    --edge:#2A1D45; --edge-2:#3B2A5E;
+    --ink:#EDE7F7; --ink-dim:#A99BC7; --ink-faint:#8B7EAE;
+    --accent:#B57BEE; --accent-2:#7FD8FF; --gold:#F0C24B;
+    --t-s:#F0C24B; --t-aplus:#C77DFF; --t-a:#6AA8F0; --t-bplus:#4FBCBB; --t-b:#45C4A8; --t-c:#8A93A8; --t-d:#D2887A; --t-f:#D27575;
+    --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
+    --disp:'Cinzel',Georgia,'Times New Roman',serif;
+    --body:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0; background:var(--bg); color:var(--ink); font-family:var(--body);
+    font-size:15px; line-height:1.5; -webkit-font-smoothing:antialiased;
+    font-variant-numeric:tabular-nums; font-feature-settings:'tnum' 1}
+  a{color:var(--accent-2); text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 20px 72px}
+
+  .masthead{position:relative; overflow:hidden; border-bottom:1px solid var(--edge)}
+  .masthead-inner{position:relative; max-width:1120px; margin:0 auto; padding:34px 20px 26px}
+  .eyebrow{font-family:var(--mono); font-size:11px; letter-spacing:.28em; text-transform:uppercase;
+    color:var(--accent); margin:0 0 12px}
+  .brandmark{width:48px; height:48px; vertical-align:-9px; margin-right:13px}
+  @media(max-width:560px){ .brandmark{width:32px; height:32px; vertical-align:-6px; margin-right:9px} }
+  .titlerow{display:flex; align-items:center; gap:16px; flex-wrap:wrap}
+  .title{font-family:var(--disp); font-weight:700; letter-spacing:.01em;
+    font-size:clamp(28px,5vw,46px); line-height:1.02; margin:0; color:#fff;
+    text-shadow:0 0 34px rgba(181,123,238,.35)}
+  .patchchip{font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:.08em;
+    color:var(--gold); border:1px solid color-mix(in srgb,var(--gold) 40%,transparent);
+    border-radius:6px; padding:4px 9px; white-space:nowrap}
+  .rule{height:2px; margin:20px 0 14px; border-radius:2px;
+    background:linear-gradient(90deg,transparent,var(--accent) 22%,var(--accent-2) 55%,transparent);
+    background-size:220% 100%; animation:sweep 7s linear infinite}
+  @keyframes sweep{to{background-position:220% 0}}
+  @media(prefers-reduced-motion:reduce){ .rule{animation:none} }
+  .sub{color:var(--ink-dim); max-width:70ch; margin:0; font-size:14px}
+  .sub b{color:var(--ink); font-weight:600}
+  .sitetabs{display:flex; gap:4px; margin:18px 0 -26px; padding:0;
+    border-bottom:1px solid var(--edge); position:relative; z-index:1}
+  .sitetab{font-family:var(--body); font-size:13.5px; font-weight:600; text-decoration:none;
+    color:var(--ink-faint); background:transparent; border:1px solid transparent; border-bottom:0;
+    border-radius:9px 9px 0 0; padding:9px 16px 10px;
+    display:inline-flex; align-items:center; gap:7px; white-space:nowrap}
+  .sitetab:hover{color:var(--ink); background:color-mix(in srgb,var(--accent) 10%,transparent); text-decoration:none}
+  .sitetab[aria-current="page"]{color:var(--ink); background:var(--bg-2);
+    border-color:var(--edge); box-shadow:inset 0 2px 0 var(--accent)}
+  @media(pointer:coarse){ .sitetab{min-height:44px} }
+  @media(max-width:560px){ .sitetab{font-size:12.5px; padding:9px 12px 10px} }
+
+  /* The archive banner — the one thing this page must say before anything else. */
+  .frozen-note{margin:34px 0 8px; border:1px solid color-mix(in srgb,var(--gold) 38%,transparent);
+    background:color-mix(in srgb,var(--gold) 7%,var(--bg-2)); border-radius:12px; padding:14px 18px;
+    color:var(--ink-dim); font-size:14px}
+  .frozen-note b{color:var(--gold)}
+  .frozen-note a{white-space:nowrap}
+
+  h2{font-family:var(--disp); font-weight:600; font-size:22px; color:#fff; margin:38px 0 6px}
+  .bracket-note{color:var(--ink-faint); font-size:13px; margin:0 0 14px}
+  .tablewrap{overflow-x:auto; border:1px solid var(--edge); border-radius:12px; background:var(--bg-2)}
+  table{border-collapse:collapse; width:100%; min-width:680px; font-size:13.5px}
+  th{font-family:var(--mono); font-size:10.5px; font-weight:500; letter-spacing:.06em;
+    text-transform:uppercase; color:var(--ink-faint); text-align:left;
+    padding:10px 12px; border-bottom:1px solid var(--edge-2); white-space:nowrap}
+  th .qual{display:block; text-transform:none; letter-spacing:0; color:var(--ink-faint); opacity:.8; font-size:10px}
+  td{padding:8px 12px; border-bottom:1px solid var(--edge); vertical-align:middle}
+  tr:last-child td{border-bottom:0}
+  td.rank{font-family:var(--mono); color:var(--ink-faint); font-size:12px; width:34px}
+  td.specname b{color:var(--ink); font-weight:600}
+  td.specname .cls{color:var(--ink-faint); font-size:12px}
+  td.role{font-family:var(--mono); font-size:11px; color:var(--ink-faint); white-space:nowrap}
+  .tier{display:inline-block; min-width:30px; text-align:center; font-family:var(--mono);
+    font-weight:700; font-size:12.5px; border-radius:6px; padding:2px 7px;
+    background:color-mix(in srgb,var(--tc,#8A93A8) 16%,transparent); color:var(--tc,#8A93A8)}
+  .t-s{--tc:var(--t-s)} .t-aplus{--tc:var(--t-aplus)} .t-a{--tc:var(--t-a)}
+  .t-bplus{--tc:var(--t-bplus)} .t-b{--tc:var(--t-b)} .t-c{--tc:var(--t-c)}
+  .t-d{--tc:var(--t-d)} .t-f{--tc:var(--t-f)}
+  .none{color:var(--ink-faint)}
+  td.cons .score{font-family:var(--mono); font-size:11.5px; color:var(--ink-faint); margin-left:7px}
+  td.cons .div{color:var(--gold); font-weight:700; margin-left:3px; cursor:help}
+  .legend{color:var(--ink-faint); font-size:12.5px; margin:12px 2px 0}
+  .legend b{color:var(--ink-dim); font-weight:600}
+
+  footer{margin-top:44px; border-top:1px solid var(--edge); padding-top:22px;
+    color:var(--ink-faint); font-size:13px}
+  .foot-h{font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--ink-dim); margin:0 0 9px}
+  .prov{margin:0 0 4px}
+  .prov b{color:var(--ink-dim); font-weight:600}
+  .fine{font-size:12.5px; color:var(--ink-faint)}
+  .credit{margin-top:26px; font-size:12.5px}
+  .credit .keep{display:block; margin-top:3px; color:var(--ink-faint)}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <p class="eyebrow">Multi-source class &amp; spec consensus · season archive</p>
+    <div class="titlerow"><h1 class="title"><svg class="brandmark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#130B22" stroke="#B57BEE" stroke-opacity=".45" stroke-width="2.5"/><rect x="12" y="13" width="40" height="9" rx="4.5" fill="#F0C24B"/><rect x="12" y="27.5" width="29" height="9" rx="4.5" fill="#C77DFF"/><rect x="12" y="42" width="19" height="9" rx="4.5" fill="#6AA8F0"/></svg>Spec Tracker</h1><span class="patchchip">__SEASON_NAME_UPPER__ — FINAL RECORD</span></div>
+    <div class="rule"></div>
+    <p class="sub">The final multi-source consensus for <b>__SEASON_NAME__ (Patch __SEASON_LABEL__)</b> of WoW: Midnight — every major tier list distilled into one standing, exactly as the tracker last published it.</p>
+    <nav class="sitetabs" aria-label="Sections">
+      <a class="sitetab" href="index.html">📊 Spec Tracker</a>
+      <a class="sitetab" href="gearing.html">⚙ S2 Gearing</a>
+      <a class="sitetab" href="__SEASON_ID__.html" aria-current="page">🗄 __SEASON_NAME__ archive</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="frozen-note"><b>This is a frozen record.</b> __SEASON_NAME__ ended and these standings were
+    archived on <b>__FROZEN_AT__</b> — they will never update again. The live tracker has moved on:
+    <a href="index.html">current season →</a></div>
+
+  __BODY__
+
+  <footer>
+    <p class="foot-h">Provenance</p>
+    __PROVENANCE__
+    <p class="fine" style="margin-top:14px">Tier data from <a href="https://www.icy-veins.com/" target="_blank" rel="noopener">Icy&nbsp;Veins</a> · <a href="https://www.method.gg/" target="_blank" rel="noopener">Method</a> · <a href="https://www.wowhead.com/" target="_blank" rel="noopener">Wowhead</a> · <a href="https://www.archon.gg/wow" target="_blank" rel="noopener">Archon</a>. This archive aggregates and links back to them — it doesn't replace them.</p>
+    <p class="credit">Made by <a href="https://github.com/riles22" target="_blank" rel="noopener" style="text-decoration:none"><b>riles22</b></a> &nbsp;·&nbsp; Spec Tracker &nbsp;·&nbsp; © 2026
+      <span class="keep">An original project — if you share or fork it, please keep the credit.</span>
+    </p>
+  </footer>
+</div>
+
+</body>
+</html>

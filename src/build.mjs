@@ -2,12 +2,13 @@
    The application remains self-contained; companion icons give shortcut launchers a
    fetchable image while the inline SVG keeps a standalone file's tab icon working. */
 
-import { readFile, writeFile, mkdir } from "node:fs/promises";
+import { readFile, writeFile, mkdir, readdir } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { validateData, loadData } from "./validate.mjs";
 import { buildPayload, PHASES } from "./render.mjs";
+import { renderSeasonArchive } from "./render-season-archive.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const ICON_ASSETS = ["favicon-192.png", "apple-touch-icon.png"];
@@ -61,6 +62,33 @@ export async function build(root = ROOT) {
     if (!html.includes(token)) throw new Error(`src/template.html is missing the ${token} placeholder`);
     html = html.replaceAll(token, value);
   }
+
+  /* SEASON ARCHIVES (2026-08-12, Riley — the S1 historical record). Each
+     data/season-archive/<season>.json (written once by src/freeze-season-archive.mjs,
+     Gate-0 immutable) becomes its own static page at dist/<season>.html, and the footer
+     gains one "Past seasons" line linking them. Absent directory → no pages, no link,
+     and the token renders empty — which is every build until the first freeze, and every
+     fixture root the tests synthesize. */
+  const archivePages = [];
+  let archiveLinks = "";
+  try {
+    const archiveDir = path.join(root, "data", "season-archive");
+    const archiveFiles = (await readdir(archiveDir)).filter(f => /^s\d+\.json$/.test(f)).sort();
+    const links = [];
+    for (const file of archiveFiles) {
+      const archive = JSON.parse(await readFile(path.join(archiveDir, file), "utf8"));
+      const page = await renderSeasonArchive(archive, { root });
+      archivePages.push({ name: file.replace(/\.json$/, ".html"), page });
+      links.push(`<a href="${archive.season}.html">${archive.seasonName} (${archive.label}) — final standings</a>`);
+    }
+    if (links.length) {
+      archiveLinks = `<p class="fine" style="margin-top:10px">Past seasons: ${links.join(" · ")} <span style="opacity:.75">(frozen records — no longer updated)</span></p>`;
+    }
+  } catch (error) {
+    if (error?.code !== "ENOENT") throw error;
+  }
+  if (!html.includes("__ARCHIVE_LINKS__")) throw new Error("src/template.html is missing the __ARCHIVE_LINKS__ placeholder");
+  html = html.replaceAll("__ARCHIVE_LINKS__", () => archiveLinks);
   // Normalize to LF: the HTML parser normalizes CRLF→LF before the browser hashes inline
   // scripts (a CRLF artifact from a Windows checkout would make the CSP hash unmatchable),
   // and it keeps local (Windows) and CI (Linux) builds byte-identical.
@@ -93,6 +121,10 @@ export async function build(root = ROOT) {
     const gearing = await readFile(path.join(root, "gearing", "wow-s2-gearing.html"));
     await writeFile(path.join(root, "dist", "gearing.html"), gearing);
   } catch { /* no gearing artifact in this tree — tracker-only build */ }
+  // Season-archive pages, regenerated from their frozen records every build.
+  for (const { name, page } of archivePages) {
+    await writeFile(path.join(root, "dist", name), page);
+  }
   return {
     outPath,
     specCount: payload.meta.specCount,

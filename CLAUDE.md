@@ -628,11 +628,20 @@ data/     specs.json · sources.json · scales.json · ptr-builds.json · commun
           season-final.json (each source's FINAL letters about the live season —
           derived + append-only, written ONLY by src/freeze-season.mjs, immutable to
           the nightly agent via Gate 0; feeds consensusFor's frozen lane) ·
+          season-archive/ (frozen per-season FINAL STANDINGS records — written ONLY by
+          src/freeze-season-archive.mjs, a one-shot owner action in flip week BEFORE the
+          flip commit touches PHASES; append-only, Gate-0 immutable. Each <season>.json
+          renders as the static archive page dist/<season>.html + a footer "Past
+          seasons" link — DECISION 6, s2-transition-scope.md) ·
           history/ (enriched movement/timeline snapshots written by snapshot.mjs)
 src/      build.mjs · template.html · render.mjs · normalize.mjs · validate.mjs ·
           apply-ratings.mjs · apply-metrics.mjs · apply-community-overrides.mjs
           (prebuild/prevalidate — hard-fails if absent) · snapshot.mjs · serve.mjs ·
           freeze-season.mjs (deterministic season freeze — publish job + local-run step 4) ·
+          freeze-season-archive.mjs + render-season-archive.mjs +
+          season-archive-template.html (the season-archive lane: one-shot freeze →
+          script-free static page with its own default-src 'none' CSP; refuses
+          non-current seasons and overwrites) ·
           digest.mjs (per-run change digest) ·
           check-refresh.mjs (manifest/freshness/anomaly gates) ·
           fetch-wcl.mjs + fetch-transcripts.mjs (deterministic pre-agent stages —
@@ -642,7 +651,7 @@ src/      build.mjs · template.html · render.mjs · normalize.mjs · validate.
           wcl-probe.mjs (dispatch-only WCL/diagnostic probe, no standing role)
 test/     normalize · validate · render · build · apply-metrics · apply-ratings ·
           check-refresh · community-overrides · digest · fetch-transcripts · fetch-wcl ·
-          fetch-published · freeze-season · ui-invariants (the ONLY tests that execute template.html's
+          fetch-published · freeze-season · season-archive · ui-invariants (the ONLY tests that execute template.html's
           client JS — they need Playwright, which is deliberately not a dependency, so
           `npm test` SKIPS all 23 on a machine without it and CI runs them in its own job.
           NOTE: Riley's local checkout HAS playwright + chromium resolved, so `npm test`
@@ -652,6 +661,9 @@ test/     normalize · validate · render · build · apply-metrics · apply-rat
           `npm i --no-save playwright@1.61.1 && npx playwright install chromium && npm test`)
 dist/     index.html + gearing.html  (generated — open directly in a browser; the two
           pages the site publishes, linked to each other by the masthead tab strip)
+          + <season>.html per season-archive record once one exists (footer-linked
+          frozen archive pages, e.g. s1.html — serve.mjs and the injection invariant's
+          href allowlist name each one explicitly)
 docs/     working notes (finder-audit.md — HISTORY, the Spec Finder was removed
           2026-08-05 · security-audit-2026-07.md ·
           cloud-routine.md · portfolio-audit-2026-07-18.md · audit-2026-07-23.md ·
@@ -662,11 +674,15 @@ docs/     working notes (finder-audit.md — HISTORY, the Spec Finder was remove
           recommendation. compare-all-scope.md — the design record for ⊞ Compare all
           (BUILT 2026-08-03), including the deltas between scope and build.
           s2-transition-scope.md — the SCOPED Season-2 transition plan (2026-08-04,
-          all four owner decisions locked inline): launch-week machinery, the
+          owner decisions locked inline): launch-week machinery, the
           transition-window consensus rule (S2-verified sources only + count chip),
-          the frozen forecast's on-page grading, the +14 PTR-surface sunset, the
+          the frozen forecast's on-page grading, the PTR-surface sunset (AMENDED
+          2026-08-12: happens AT the flip, not +14 — ptrSunset is deleted in the flip
+          commit), the Season-1 archive page (DECISION 6, 2026-08-12), the
           12.2-cycle generalization (PHASES constant), and the gearing-lane stub.
           Phase-1 machinery must land before PHASE_FLIP_DUE (Aug 20).
+          s2-flip-runbook.md — the operational 08-18 flip checklist (execution mode:
+          LOCAL RUN, chosen 2026-08-12); read it before touching anything flip-related.
           published-gate-scope.md — the page-self-date integrity gate (2026-08-04,
           both owner decisions locked; BUILT same day): deterministic published-evidence
           step + staleness threshold, severity split dishonesty-red/lag-heartbeat.

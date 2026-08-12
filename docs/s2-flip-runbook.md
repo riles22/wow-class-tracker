@@ -19,9 +19,20 @@ numbers that matter on the day, they move with the data.
 
 ## The flip commit — one reviewed owner commit, in this order
 
+0. **Freeze the Season-1 archive** — `node src/freeze-season-archive.mjs --season s1`,
+   BEFORE anything touches PHASES (the script refuses any season that is not the tree's
+   current liveSeason, so running it after step 1 errors instead of archiving a season
+   that never happened). Writes `data/season-archive/s1.json` — append-only, Gate-0
+   immutable; the next build emits `dist/s1.html` and the footer "Past seasons" link by
+   itself (DECISION 6, s2-transition-scope.md). Commit it with the flip. If a late data
+   refresh lands the same week before the flip, redo with `--force` — after the flip it
+   is permanent.
 1. **`src/normalize.mjs`**: `PHASES.liveSeason` → `"s2"`, `liveLabel` → `"12.1"`
-   (the pin `liveLabel === seasonLabels[liveSeason]` holds), `ptr` → `null`,
-   `PHASES.ptrSunset` stays false until the +14 sunset (DECISION 3).
+   (the pin `liveLabel === seasonLabels[liveSeason]` holds), `ptr` → `null`, and
+   **delete `ptrSunset`** — dead since DECISION 3's amendment (2026-08-12): the
+   ptr-null pin IS the sunset now. (normalize.test.mjs:176 pins the field and the
+   template boot reads it with a falsy-safe guard; both covered by the pre-staged
+   flip-day test patch.)
 2. **`src/render.mjs`**: `SNAPSHOT_PHASE` `"12.1-ptr"` → the live S2 id (pick the id in the
    commit; the check-refresh phase gate silences itself on any non-`"12.1-ptr"` value).
    Bump **`CONSENSUS_VERSION` 3 → 4** — the transition plan (s2-transition-scope.md:50)
@@ -45,11 +56,13 @@ numbers that matter on the day, they move with the data.
 5. **Retire `icyveins-ptr` from the forecast** (B3): stop it feeding
    `nextPatchTierSources` — post-flip it would be the ONLY next-patch source on 39 M+
    cells while describing the season we are running, and Icy Veins has already promoted the
-   PTR list onto its live URLs (19/27 identical). **Keep the column** — DECISION 3
-   (s2-transition-scope.md:102-105) keeps it visible through the grading window as the
-   forecast's receipts. Retire = era/registry change that removes it from the forecast
-   term only; the exact mechanism is the owner's call in review (the "retype to live" path
-   is ruled out — it would hand Icy Veins 2 of 3 consensus votes).
+   PTR list onto its live URLs (19/27 identical). Note `nextPatchTierSources` keys on
+   `era`, not `PHASES.ptr`, so the flip alone does NOT retire it — this step is still
+   real work. The COLUMN needs no keeping: per DECISION 3 as amended (2026-08-12) it
+   leaves the UI at the flip with the rest of the PTR receipts. Retire = era/registry
+   change that removes it from the forecast term; the exact mechanism is the owner's
+   call in review (the "retype to live" path is ruled out — it would hand Icy Veins
+   2 of 3 consensus votes).
 6. **Era prose residue**: with `ptr: null` the Era toggle hides (template boot, ~:1240) and
    the era tokens derive from `liveLabel` automatically. The remaining hand strings that
    still say "12.0.7" in JS tooltips (template ~:1740/:1763/:1787/:1791/:3166) read
@@ -82,10 +95,11 @@ numbers that matter on the day, they move with the data.
 Gate 3 measures ~31 moves against `maxTotalMoves` 25 on today's data (re-measure on the
 day — it moves if method/archon flip their pages first), and a **scheduled** run can never
 carry an anomaly ack. Worse, publish snapshots only after Gate 3, so the baseline never
-advances and every subsequent night fails identically — a stuck pipeline. So: do the flip
-as a **local run**, or `workflow_dispatch` the nightly with
-`anomaly_ack: "S2 transition: liveSeason flipped 2026-08-18"` (the shape
-test/check-refresh.test.mjs:499 pins). Expect the REFRESH job's completion gate to red on a
+advances and every subsequent night fails identically — a stuck pipeline.
+**Chosen (Riley, 2026-08-12): LOCAL RUN** — the flip commit + step-9 verification happen
+here and are pushed directly; no anomaly-ack plumbing. (The dispatch alternative —
+`workflow_dispatch` with `anomaly_ack: "S2 transition: liveSeason flipped 2026-08-18"`,
+shape pinned by test/check-refresh.test.mjs:499 — remains the documented fallback.) Expect the REFRESH job's completion gate to red on a
 flip night regardless (the frozen lane that neutralizes movement is publish-side) — noise,
 not a data problem; the refresh agents escalated correctly through the 08-11 flip.
 
@@ -101,21 +115,22 @@ not a data problem; the refresh agents escalated correctly through the 08-11 fli
   artifact's projectionVersion while frozen. Covered by a doctored-payload Playwright
   invariant. The grade chip still waits for settlement (~09-01).
 
-- **OWNER DECISION, before 08-18 — DECISION 3's receipts vs the ptr-null era pin.**
-  The review's structural finding: DECISION 3 (s2-transition-scope.md:102-105) keeps the
-  PTR receipts (Dummy Dome box, zone-54/56 metric rows, Compare-all/Ladder PTR columns,
-  the icyveins-ptr column) up through the grading window, leaving at +14 via `ptrSunset`.
-  But the flip sets `PHASES.ptr` to null, which pins `state.era` to "live" and hides ALL
-  of them at the flip — a 14-days-early sunset nobody decided, and it makes `ptrSunset`
-  dead weight. The collision predates B6 (normalize.mjs's own comments disagree with each
-  other) but B6's activation condition (`!PHASES.ptr`) cements the ptr-null branch.
-  Options: (a) extend the FROZEN_FC exemption to the receipt surfaces so they stay
-  reachable while `meta.frozenForecast` is set and leave at `ptrSunset` — honours
-  DECISION 3 as written, costs a template pass over the receipt gates; or (b) amend
-  DECISION 3: the sunset happens AT the flip, receipts live on only in the drawer's
-  frozen basis strings and the immutable artifact — cheaper, but a decision reversal that
-  should be recorded, not inherited. Either way the choice must be explicit in
-  s2-transition-scope.md before the flip commit.
+- ✅ **DECIDED 2026-08-12 — option (b), the sunset happens AT the flip** (Riley, choosing
+  against the recommended (a); recorded as DECISION 3's amendment in
+  s2-transition-scope.md). No template pass; `ptrSunset` is deleted in the flip commit
+  (step 1); the receipts live on in the drawer's frozen basis strings and the immutable
+  artifact. The original collision write-up is preserved in git history if the trade
+  ever needs re-examining.
+
+- ✅ **S1 ARCHIVE MACHINERY — BUILT 2026-08-12** (DECISION 6, s2-transition-scope.md):
+  `src/freeze-season-archive.mjs` (one-shot freeze → `data/season-archive/s1.json`,
+  refuses non-current seasons and overwrites), `src/render-season-archive.mjs` +
+  `season-archive-template.html` (script-free static page, own `default-src 'none'`
+  CSP), build.mjs emits `dist/<season>.html` + the footer "Past seasons" link only when
+  a record exists, serve.mjs allowlists `s1.html`, the injection invariant's pinned
+  href regex admits exactly `s1.html`, covered by test/season-archive.test.mjs
+  (escape/CSP/allowlist, freeze-equals-published-consensus, append-only refusal, build
+  wiring). Flip-day duty is step 0 above only.
 
 - **Pre-stage the flip-day TEST PATCH** (review finding #1: the runbook's own step 9 is
   currently unsatisfiable). Simulated at the exact flip state, `npm test` reds ~30 tests
@@ -128,15 +143,17 @@ not a data problem; the refresh agents escalated correctly through the 08-11 fli
   `payload().meta.frozenForecast`) so the flip commit lands green rather than being
   rewritten under time pressure. Verification logs from the review live in the session
   scratchpad (`runA-flip-b6.log`: 346/31 with B6, `runC-flip-nob6.log`: 340/33 without).
-- **nightly.yml refresh-agent prompt line** (~:321): "do not finish until check-refresh
-  --manifest passes" is unsatisfiable on a flip night and points at the one dishonest
-  lever no gate catches (reverting `seasonVerified`). Soften to: record honestly and
-  escalate; the frozen lane neutralizes it publish-side. Bundle with the next
-  nightly.yml edit — each such push auto-kicks a ~40-min agent run, so don't spend one on
-  a prompt tweak alone.
-- **Dependabot #54** (claude-code-action bump): safe to merge since `77bd0a3`; it touches
-  nightly.yml so it auto-kicks a nightly — merge it WITH the prompt-line edit above to
-  spend one kick, not two.
+- ✅ **nightly.yml prompt softening — PREPARED 2026-08-12** (chosen with the Dependabot
+  bundle): BOTH agent prompts (the primary's COMPLETION CONTRACT and the recovery's
+  "do not finish until" line) now carry the same one-exception rule — a mass-movement
+  gate failure the agent did not cause is recorded in `anomalyAckProposal` and the agent
+  finishes honestly; buying a green gate by editing observations (the `seasonVerified`
+  revert) is named and forbidden. Same edit adds `data/season-archive/` to Gate 0's
+  immutable set. Lands together with Dependabot #54 in ONE push so the auto-kicked
+  nightly is spent once (merge #54 into the local branch carrying the prompt edit, push
+  both as one).
+- **Dependabot #54** (claude-code-action bump): safe to merge since `77bd0a3`; merge
+  WITH the prompt-line edit above per the one-kick plan.
 
 ## 12.2-cycle note (review finding #7 — record it now, act at the next cycle)
 
@@ -155,8 +172,8 @@ it with the 12.2 transition scope, not now.
 - First real `npm run report-card` grade. Composition comparability landed (`2cb40f5`);
   remaining ergonomics: an artifact loader for the grade side (part of B6), a
   `--settle-days 28` flag (reachable today via `--settled <date>`), a markdown writer.
-- DECISION 3's +14 PTR-surface sunset (`ptrSunset: true`) — separate one-shot, not the
-  flip.
+- ~~DECISION 3's +14 PTR-surface sunset~~ — no longer a +14 action: the sunset happened
+  AT the flip (DECISION 3 amended 2026-08-12) and `ptrSunset` no longer exists.
 - Gearing re-harvest (C5): a reviewed code+data task, NOT a date edit — harvests are
   PTR-pinned in code (harvest-*.mjs, lib-wowhead.mjs) and gearing's validator pins the PTR
   URLs + item-count fingerprints, so a live re-harvest fails until the pins are

@@ -105,6 +105,30 @@ all/Ladder, and the icyveins-ptr column stay up through the grading window as th
 forecast's receipts, then leave the UI once the report card lands. The underlying rows
 stay in specs.json as history either way — this is a rendering sunset, not a deletion.
 
+⚑ **DECISION 3 AMENDED (Riley, 2026-08-12): the sunset happens AT the flip.** The B6
+review surfaced the collision this decision had with the flip mechanics: the flip sets
+`PHASES.ptr` to null, which hides every receipt surface on flip day — honouring the
+original +14 date would have cost a template pass extending the frozen-forecast
+exemption to each receipt gate. Riley chose the flip-day sunset as a recorded reversal
+(the keep-until-+14 option was presented and recommended; this is the deliberate
+cheaper path, not an inherited accident). The receipts live on in the drawer's frozen
+basis strings and the immutable forecast artifact; the underlying rows still stay in
+specs.json as history. Consequence: `PHASES.ptrSunset` never flips true and is
+REMOVED in the flip commit — the ptr-null pin IS the sunset now.
+
+**Season-1 archive page.** ⚑ **DECISION 6 (Riley, 2026-08-12): footer-linked frozen
+archive.** This scope retained S1 DATA everywhere but scoped no visitor-facing surface
+— after the flip, Season 1 would have been readable only in raw JSON and git history
+(confirmed gap, 2026-08-12 review). Now: `node src/freeze-season-archive.mjs` (one-shot,
+flip week, BEFORE the flip commit touches PHASES — the script refuses any season that is
+not the tree's current liveSeason) freezes the tracker's final published S1 consensus —
+frozen lane included, excluded sources disclosed — into `data/season-archive/s1.json`
+(append-only, Gate-0 immutable). Every build then renders it as the static, script-free
+`dist/s1.html` (own CSP, `default-src 'none'`), linked from the footer's source column
+("Past seasons"), deliberately NOT a masthead tab — the tab strip stays the two live
+products. The page regenerates from the record verbatim on every build and never
+refreshes; the 12.2 cycle gets s2 archival for free by the same mechanism.
+
 ## Phase-1 machinery — LANDED 2026-08-04 (deltas from scope)
 
 Shipped before PHASE_FLIP_DUE, as planned: `PHASES` in normalize.mjs is the single era

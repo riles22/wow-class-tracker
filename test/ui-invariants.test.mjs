@@ -534,9 +534,11 @@ test("no agent-writable field can inject markup or a handler into the rendered p
           // explorer as gearing.html#spec=<slug> (2026-08-07). The fragment charset is
           // pinned to [a-z0-9=&-] because slugOf() lowercases and collapses everything
           // else to "-", so no roster value can widen it — a scheme or path cannot be
-          // smuggled through. Anchored both ends; any other relative href, or a path
-          // prefix wrapped around one of these, is still a finding.
-          .filter(e => !/^(?:index|gearing)\.html(?:#[a-z0-9=&-]*)?$/.test(e.getAttribute("href") ?? ""))
+          // smuggled through. s1.html is the frozen Season-1 archive's footer link
+          // (2026-08-12) — a deliberate one-name addition, not a pattern; the 12.2 cycle
+          // adds s2 here as its own reviewed edit. Anchored both ends; any other relative
+          // href, or a path prefix wrapped around one of these, is still a finding.
+          .filter(e => !/^(?:index|gearing|s1)\.html(?:#[a-z0-9=&-]*)?$/.test(e.getAttribute("href") ?? ""))
           .filter(e => !/^(https:|#|$)/.test(e.getAttribute("href") ?? "")).length,
         markVisible: document.body.innerText.includes(mark),
         // Count the sinks the probe actually reached. A poisoned field whose section never
