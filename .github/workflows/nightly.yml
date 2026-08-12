@@ -246,7 +246,14 @@ jobs:
 
             COMPLETION CONTRACT: the run is NOT COMPLETE until data/run-manifest.json is
             REWRITTEN with this run's outcomes and `node src/check-refresh.mjs --manifest`
-            passes. Before ending, run `git diff --stat -- data/run-manifest.json` and
+            passes — with ONE exception: if the gate fails ONLY on its mass-movement
+            anomaly check for movement you did not cause (a season transition recomposing
+            the consensus is the known case), record the evidence in "anomalyAckProposal",
+            leave every observation exactly as you verified it, and finish — the
+            publish-side gates and the human ack decide from there. NEVER buy a green
+            gate by editing observations (e.g. reverting a seasonVerified value you
+            verified tonight): that is the one dishonest lever no gate catches, and it
+            corrupts the season machinery. Before ending, run `git diff --stat -- data/run-manifest.json` and
             confirm it shows a change. If you must stop early for ANY reason — degraded
             sources, nothing new anywhere, errors you cannot fix — write the manifest FIRST,
             with honest rows for exactly what you attempted and what you did not get to,
@@ -319,7 +326,13 @@ jobs:
             stored data. NEVER write an "anomalyAck" field (the gate rejects it); a real mass
             retune goes in "anomalyAckProposal" with a citation, for human review. Run npm test
             and npm run build, repair or narrowly revert invalid source edits, and do not finish
-            until both commands and `node src/check-refresh.mjs --manifest` pass.
+            until both commands pass and `node src/check-refresh.mjs --manifest` either passes
+            or fails ONLY on its mass-movement anomaly check for movement you did not cause (a
+            season transition recomposing the consensus is the known case) — in that one case
+            record the evidence in "anomalyAckProposal", leave every observation exactly as you
+            verified it, and finish; the publish-side gates and the human ack decide from there.
+            NEVER buy a green gate by editing observations (e.g. reverting a seasonVerified
+            value you verified tonight) — the one dishonest lever no gate catches.
 
             SINGLE-SHOT SESSION — the proven cause of every lost night: the moment you end
             your turn, this session is over and you are NEVER woken again. Do NOT run
@@ -327,7 +340,8 @@ jobs:
             notifications, deferred polls) — that is exactly how the previous runs died,
             finishing every source and then yielding while a creators poll ran in the
             background. Subagent tools are disabled; do ALL work inline in the foreground,
-            and never end your turn until the manifest is rewritten and the gate passes.
+            and never end your turn until the manifest is rewritten and the completion
+            contract above is met.
 
       - name: Final deterministic completion gate
         if: always() && !cancelled()
@@ -488,9 +502,13 @@ jobs:
           # and the graded forecast could be rewritten after the fact — the one corruption
           # nothing downstream can detect. No automated path writes it today; this is the
           # boundary made explicit rather than an observed defect.
-          if ! git diff --quiet HEAD -- data/required-sources.json data/scales.json data/season-final.json data/forecasts/; then
-            git --no-pager diff HEAD -- data/required-sources.json data/scales.json data/season-final.json data/forecasts/
-            echo "::error::refresh artifact modified the gate contract, tier scales, the frozen-season archive or a frozen forecast — these ship only via reviewed commits or the deterministic freeze step"
+          # data/season-archive/ holds the frozen per-season FINAL STANDINGS records
+          # (src/freeze-season-archive.mjs, one-shot owner action; DECISION 6) — each is
+          # rendered verbatim as a public archive page every build, so an agent able to
+          # write one could rewrite a finished season's published record.
+          if ! git diff --quiet HEAD -- data/required-sources.json data/scales.json data/season-final.json data/forecasts/ data/season-archive/; then
+            git --no-pager diff HEAD -- data/required-sources.json data/scales.json data/season-final.json data/forecasts/ data/season-archive/
+            echo "::error::refresh artifact modified the gate contract, tier scales, the frozen-season archive, a frozen forecast or a season-archive record — these ship only via reviewed commits or the deterministic freeze step"
             exit 1
           fi
           node -e '
