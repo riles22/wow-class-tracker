@@ -61,7 +61,7 @@ export const PHASES = {
      " PTR" suffix the moment the patch ships (12.1 launches 2026-08-11 ~22:00 UTC, seven
      days before liveSeason flips at S2 open) — during that window "12.1 PTR" is a lie on
      every surface that says it, while the data keys must not move a byte. */
-  ptr: { marker: "12.1 PTR", label: "12.1 PTR" },
+  ptr: { marker: "12.1 PTR", label: "12.1" },
   /* The tracked patch's display name — the masthead chip and footer read it via the
      build-time era tokens (build.mjs). It outlives `ptr` (the branding stays after the
      ptr lane sunsets), which is why it does not live inside it. */
