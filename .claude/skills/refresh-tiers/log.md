@@ -710,3 +710,56 @@ on `/guide/*` and was not tried); archon 6 aggregate + 51 encounter pages direct
   `encounter-tiers.json` with the stored encounter NAMES preserved; `asOf` 2026-08-11 =
   Archon's own cut date. Era: pages still describe Season 1 content (VS/DR/MQD selector, the
   nine S1 bosses, eight S1 dungeons) → `seasonVerified` stays **s1**.
+
+## 2026-08-12 (nightly CI, headless Opus 5, single-shot; started 20:35Z — SECOND run of this UTC day)
+
+All four live tier sources + the era-gated PTR list re-fetched from scratch, 20 pages, 20/20
+HTTP 200. **319 assignments applied, ZERO tier moves anywhere** — every letter on every source
+reproduces the state the 11:31Z run left, which is an independent confirmation rather than a
+skipped fetch.
+
+- **icyveins — raid landed (40/40, 0 moves), M+ STILL BLOCKED, third day.** Parsed from
+  `<table class="tier-list">` (first `<td>` = tier, `tier-list-entry` img `alt` = "Spec Class").
+  The live M+ pages still publish **S+ / B+ / TBD**, bands the 5-band `icyveins` scale does not
+  carry, and the live M+ letters are **byte-identical to `icyveins-ptr` on all 39 placed specs**
+  (verified row by row this run) — Icy Veins has replaced its live M+ lists with its PTR list.
+  21 DPS + 6 healer + 6 tank stored letters would move if a merge were allowed (Augmentation
+  Evoker S→B, Beast Mastery A+→C, Blood DK C→S). `scales.json` is the gate contract, so this
+  stays an **owner escalation** and the stored M+ letters were not touched.
+  Era: five of six titles read "Patch 12.1 / Season 2"; the raid-HEALER page keeps a stale
+  "(Patch 12.0.7 / Midnight)" title over an unambiguously Season-2 body — changelog "11 Aug.
+  2026: Updated for Midnight Season 2 launch", "Midnight Season Two Launch Update", per-spec
+  text about S2 nerfs/buffs. **Body over title** (blue-tracker precedent) → `seasonVerified`
+  stays **s2** on all six. `published` re-read per page, never carried forward: raid DPS/tank +
+  all three M+ **2026-08-08**, raid healer **2026-08-06** (JSON-LD `dateModified`; the in-body
+  "LAST UPDATED - 10th of August" disagrees and loses by the documented precedence) — agrees
+  6/6 with `published-evidence/evidence.json`.
+- **icyveins-ptr — 39 rated rows, 0 moves.** All three PTR M+ pages 200; titles read "PTR Tier
+  List for Midnight (Patch 12.1 / Season 2)". Subtlety Rogue is **still TBD upstream** (the
+  literal `<td>TBD</td>` row) and stays an explicit `null`. `published` re-read: JSON-LD
+  `dateModified` **2026-08-09** on all three (unchanged — its Sunday-rebuild cadence), agreeing
+  3/3 with the published-evidence artifact.
+- **method — 79 rows, 0 moves, still s1.** Both pages 200; `.tier__tier` blocks. The pages still
+  self-date "Last Updated 31st March 2026" and contain **zero** occurrences of "12.1" or
+  "Season 2", so `seasonVerified` stays **s1** — with Archon it is one of only two sources still
+  inside the live consensus. Vengeance DH still absent from the raid list (39 raid / 40 M+):
+  omitted, not invented.
+- **wowhead — 80 rows, 0 moves.** Full browser header set (UA-only is Cloudflare-403 on
+  `/guide/*`; r.jina.ai is dead on that path and was not tried). **Parser note worth keeping:**
+  the `[tier-list=rows]` block sits inside a JS string, so the *closing* tag is `[\/tier-list]`
+  — a regex anchored on `[/tier-list]` matches nothing and looks exactly like a missing block.
+  Spec comes from `spec-badge=<slug>`. JSON-LD `dateModified`: raid ×3 + M+ DPS 2026-08-08, M+
+  healer 08-09, M+ tank 08-11 — identical to stored `published`, 6/6 with published-evidence.
+  All six titles read "Midnight Season 2" → `seasonVerified` **s2** (season-AHEAD: frozen lane
+  for the consensus, live input to the 12.1 forecast).
+- **archon — 80 aggregate rows + 680 per-encounter rows, 0 moves on both.** `__NEXT_DATA__`
+  parsed from raw HTML, `metric: "throughput"` for raid and `"score"` for M+. All 51
+  per-encounter pages (9 bosses + 8 dungeons × 3 roles) 200 with 40/40 specs each; not one tier
+  moved, so `encounter-tiers.json` was left byte-identical at `asOf` 2026-08-11.
+  **`lastUpdated` advanced to 2026-08-12T12:00:00Z on all six aggregate pages while every
+  number behind it held** (all 40 raid and all 40 M+ parse counts byte-identical — see
+  refresh-metrics). That is the reverse of last night and re-confirms the standing rule: on
+  Archon the **parse-count column is the re-cut detector, the `lastUpdated` label is not.**
+  Era: still Season-1 content (raid selector "VS / DR / MQD" + the nine S1 bosses; the eight S1
+  dungeons) → `seasonVerified` stays **s1**. New this run: the zone-type selector now offers a
+  third option, **"PTR M+"**, alongside Mythic+ and VS/DR/MQD — noted for the flip, not ingested.

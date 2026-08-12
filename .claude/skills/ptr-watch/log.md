@@ -1042,3 +1042,42 @@ notes.** All three channels checked, plus the WCL zones by evidence only.
 - **Migration status, unchanged and NOT attempted here:** 12.1 is live, Season 2 opens 08-18,
   and the tracker is still configured pre-flip (`PHASES.liveSeason` "s1", `SNAPSHOT_PHASE`
   "12.1-ptr", `PHASE_FLIP_DUE` 2026-08-20). Owner one-shot.
+
+## 2026-08-12 (nightly CI, headless Opus 5, single-shot; started 20:35Z — SECOND run of this UTC day)
+
+**No new build; all three Blizzard channels checked and clean.** Feed unchanged at 15 entries,
+newest still the 2026-08-06 launch patch notes.
+
+1. **Official thread** `2317811.json`: `posts_count` 17, `highest_post_number` still **19**
+   (Linxy, 2026-07-31T23:42Z). Nothing after the two 07-31 posts already logged as #18/#19.
+   With 12.1 shipped on 08-11 this thread is effectively closed for the cycle.
+2. **Wowhead news RSS**: 40 items spanning 2026-08-07..2026-08-12, bodies read out of
+   `content:encoded` in the single feed fetch. Scanned every body for change verbs
+   ("increased by / reduced by / (was / Developers' note" …): **zero hits across all 40 items**.
+   The six items new since the 11:31Z run are all live-service (Blinding Vale / Temple scenario
+   bugs, a bugged Zul'jarra contract, hero-gear and Renown-reward explainers, Vaults of
+   Atal'Utek, sparks).
+3. **Wowhead blue tracker** (`/blue-tracker?rss`, FULL browser header set — a UA-only fetch is
+   CloudFront-403 and reads as an empty feed): 50 items back to 08-06. The only two carrying
+   "hotfix" are Bob the Bartender and lair-queue grouping. **No standalone class-tuning blue
+   post** of the Kaivax "Healer Tuning" shape.
+
+No set-touching highlight landed, so no `spec.tierSet` upkeep was due.
+
+**Writeup coverage stays 39/40 and Demonology Warlock's `ptr: null` is re-confirmed, not
+inherited.** Icy Veins' Season-2 raid DPS page — now a live lane since the guides rebuilt —
+says in its own words: *"Demonology Warlock received no changes going to Season 2, with the
+only new feature added being their tier-set."* "Nothing changed" is not a verdict, so no
+writeup was manufactured.
+
+**WCL (evidence-only on the runner):** `wcl-fetch/evidence.json` verdict **"rdps-broken"** —
+zone 54 (PTR raid testing score, 34 rows), zone 52 (`ptrDummy` median rDPS, 27 specs) and zone
+56 (PTR M+ rDPS/HPS medians, 40 rows) are all rDPS-family and stay frozen at 2026-07-28 /
+2026-08-10 / 2026-08-10. Their raw-DPS counterparts landed via the deterministic step (see
+refresh-metrics). Zone 57 (Tidebound Grotto) is not covered by the fetch step and was not
+fetched here.
+
+**Migration status, unchanged and NOT attempted:** 12.1 is live, Blizzard's own post puts
+Season 2 at **August 18 (NA) / 19 August (EU)**, and the tracker is still configured pre-flip
+(`PHASES.liveSeason` "s1", `SNAPSHOT_PHASE` "12.1-ptr", `PHASE_FLIP_DUE` 2026-08-20). Owner
+one-shot; see docs/s2-flip-runbook.md.

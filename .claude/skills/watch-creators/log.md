@@ -1898,3 +1898,34 @@ transcript API by any means, and **no take or metaNote was added, changed or sup
   reconsider them. `seen[]` therefore stays at 483.
 - A local yt-dlp catch-up run would clear all 20 queued videos for free; that is the standing
   recommendation while the Supadata month is spent.
+
+## 2026-08-12 (nightly CI, headless Opus 5, single-shot; started 20:35Z — SECOND run of this UTC day)
+
+**Discovery complete, zero transcripts — the Supadata month is spent.**
+`transcript-fetch/summary.json` (2026-08-12T20:35:12Z) reports verdict **"limit-exceeded"** on
+the single video it attempted (`bqVHzvKJCuA`), 1 requested / 0 fetched, "stopped early …
+remaining queue untouched". No transcript was readable, so **0 takes, 0 metaNotes** were added,
+changed or superseded; this agent fetched nothing from YouTube or any transcript API.
+
+- **44/44 channels polled, 44/44 HTTP 200, 0 RSS failures**, 660 videos enumerated (the 74
+  transcribable creator entries collapse to 41 distinct channels + 3 generalCreators).
+- Seen-set built from structured data only — `seen[]` 483 + `skipped[]` 275 + `videos[]` 6 +
+  185 distinct `youtu.be` ids across takes/metaNotes = **946**.
+- **10 unseen videos, all published today, all inside the 12.1 cycle.** The nightly keyword
+  filter was KEPT (monthly-budget rule) and **9 were queued**, taking the queue to **15**:
+  `u3XBRu8FNUU` + `0461YCGqWws` (YoDaTV, San'layn Blood DK S2 keys), `AIRolVGPD9o` (Tettles,
+  12.1 launch), `48CShH2iiIk` (LBNinja7, Mistweaver S2), `xytqWggnImo` (Dalaran Gaming, "class
+  changes"), `Iu_h1QuAgOc` (MadSkillzzTV, healer gearing), `KIUqoNuwSEA` (Bansherz, S2 day 2),
+  `U_bAsRSY5Y4` (Megasett, 12.1 achievements) and — the one worth draining first —
+  **`V0KmC4qmOio` (NeekapHere, "Retribution Paladin DPS Guide (PvE) Midnight 12.1")**, since
+  Retribution Paladin is one of the three specs with no raid-scoped take at all.
+- The one video not queued, `j1VG7ZgUZ9A` (Critcake, "Patch day! Short afternoon stream :)"),
+  carries no class/spec/12.1/Season signal in its title. As on 08-12 (11:31Z), a nightly
+  keyword dismissal was **not** written into `seen[]` — that is a budget measure, not a durable
+  verdict, and hiding it would keep it out of the local unfiltered, date-bounded sweep that is
+  supposed to reconsider it. `seen[]` stays at 483.
+- `generalCreators[].latest` was left alone on purpose: those three fields hold *distilled*
+  one-line reads, not bare titles (izen's is a full meta summary), and with no transcript
+  readable, overwriting them with a new title would trade information for recency.
+- Standing recommendation, unchanged: a local yt-dlp catch-up run clears all 15 queued videos
+  for free.

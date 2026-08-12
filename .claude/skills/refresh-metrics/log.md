@@ -1093,3 +1093,69 @@ WoWMeta**, which is the honest headline: this run sits ~6h behind the 12:00Z one
 - **Robydoby (best-effort, outside the contract) — nothing new.** Tab map re-read from the
   `htmlview` script blocks: 26 tabs, newest **Mythic** week still **24/7** (Sszorak #5, Twin
   Fangs #6), already stored at 2026-07-24. No CSV export was needed.
+
+## 2026-08-12 (nightly CI, headless Opus 5, single-shot; started 20:35Z — SECOND run of this UTC day)
+
+**BLOODMALLET HAS RE-SIMMED FOR SEASON 2 (`MID2`) AND THE NEW CHARTS WERE DELIBERATELY NOT
+INGESTED.** All 27 DPS specs requested from `talent_target_scaling/castingpatchwerk` with up to
+4 retries each; 26 charts returned (Augmentation Evoker still the documented genuine absence —
+the 76-byte `{"status": "error"}` body on all 4 tries). Of those 26:
+- **14 now carry `simc_settings.tier == "MID2"`** with their own timestamp **2026-08-12**
+  (Frost/Unholy DK, all three Hunters, all three Mages, Shadow Priest, Subtlety Rogue,
+  Elemental/Enhancement Shaman, Affliction/Destruction Warlock);
+- **12 are still `MID1`**, byte-identical to stored at 2026-07-08 (Elemental's stored 07-15 row
+  is one of the flipped ones).
+
+The MID2 numbers are on a different footing entirely — Frost DK 1T 133,933 → 219,211, 8T
+391,980 → 1,001,606; roughly 1.7–2.3× across the board. `fightProfile` labels (ST/cleave/AoE,
+row tags) are **within-role percentiles across DPS specs**, so merging 14 MID2 vectors into a
+pool of 12 MID1 vectors would make every label an artifact of *which specs Bloodmallet has
+re-simmed so far*, not of spec strength. The skill's "confirm `tier == MID1`" check is exactly
+this era gate, so nothing was written and the stored sims stay whole at 26 profiles /
+2026-07-08 coverage (35 days, `maxAgeDays` 5 — the red heartbeat is the honest signal).
+**When the tracker takes its 12.1-live migration, the MID2 set is ready and this is a
+one-shot re-harvest, not a per-spec drip.**
+
+- **archon (all four numeric requirements) — parsed clean, NOTHING re-merged.** 160 rows read
+  from `specRankingsSection.table.data[]` (never `tierList`). All 40 raid values, all 40 M+
+  values, all 40 raid parse counts and all 40 M+ parse counts are **byte-identical to stored**
+  even though `lastUpdated` advanced to 2026-08-12T12:00:00Z on all six pages. Re-stamping an
+  unchanged cut with a fresher date is precisely the failure the asOf rule exists to prevent,
+  so the families keep their real coverage dates: 95th-pct DPS and HPS **2026-08-11**, M+ score
+  and Popularity **2026-08-10**. All four rows are `partial` for that reason.
+- **wowmeta — re-fetched, unchanged.** JSON API only (manifest + `rankings/midnight/mplus/all/0`),
+  plain curl, 200, 161 KB. Whitelist `categoryType ∈ {dps,hps,tank}` + `sortField == lowerBound`
+  + `keyRange undefined` → exactly 27+7+6 = 40 rows. `manifest.snapshotDate` still **2026-08-11**
+  (pipeline completedAt 2026-08-11T22:52:39Z) and all 40 `lowerBound` values + all 40
+  `numberOfCharacters` byte-identical → nothing merged, `partial`.
+- **murlok — 40/40 re-parsed, 0 value moves.** Plain GET on the three meta pages (200,
+  41–71 KB; never r.jina.ai). **Parser gotcha found and worth keeping: the `<a>` attribute order
+  is not stable.** Most cards are `<a class="… meta-item …" href=…>` but some are
+  `<a href=… class="… meta-item …">`, so a regex anchored on `class="[^"]*meta-item` silently
+  dropped 4 specs (DPS ranks 4/14/17 — Subtlety Rogue, Elemental Shaman, Arms Warrior — and
+  healer rank 3, Discipline Priest) while looking like a clean 36-row parse. Match
+  `<a [^>]*meta-item[^>]*>` instead, and **check the rank column for gaps** — 1,2,3,5,6… is the
+  tell. Yesterday's 40-row parse is confirmed correct; the values have not moved since the
+  season-boundary drop this morning.
+- **mythicstats — 35 rows, 0 value moves.** Direct fetch (200, 187 KB), still period **1075**,
+  MID1, 10000 characters / 3247 unique. **Beast Mastery Hunter has now dropped off the page**
+  (absent set is Vengeance DH, Restoration Druid, Devastation Evoker, Protection Paladin,
+  Beast Mastery Hunter — 35 published, was 36): a legitimate upstream zero-representation
+  absence in the last week of Season 1, not a parse miss. Its stored row keeps its older date.
+- **simulationcraft — same report, verified value-by-value.** MID1_Raid.html re-fetched (200,
+  37.2 MB); header still "Timestamp: 2026-08-08 07:28:33+0000", SimulationCraft 1205-01 for
+  12.0.7.68974. **26 of 26** stored "SimC nightly Patchwerk DPS" values reproduce **exactly**
+  out of the report's own chart data. Method note for future runs: take the `"data":[…]` array
+  that **encloses the first big-value `"name":"MID1_…","y":…` hit**; a max over every series in
+  the file picks up the later "Damage per Second (Click title for burst)" charts instead and
+  disagrees with every stored value.
+- **Robydoby (best-effort, outside the contract) — nothing new.** Tab map re-read from the
+  `htmlview` script blocks: 26 tabs, newest **Mythic** week still **24/7** (Sszorak #5, Twin
+  Fangs #6), already stored at 2026-07-24. Stored rows untouched.
+- **WCL — no fetch of any kind by this agent.** `wcl-fetch/evidence.json` (attemptedAt
+  2026-08-12T20:31:35Z) verdict **"rdps-broken"**; OAuth + GraphQL transport healthy (3600/h,
+  1 point spent). The three raw-DPS keys landed via the deterministic step itself —
+  `wcl-dummy-raw` 102 rows (1T 2000 / 2T 658 / 3T 297 / 5T 2000 ranked players),
+  `wcl-ptr-raid-raw` 27 rows (six Venomous Abyss encounters with parses; The Coiled Altar and
+  Ula'tek both 0), `wcl-ptr-mplus-raw` 27 rows (all 8 S2 PTR dungeons at 2000). The five
+  rDPS-family cuts stay frozen and unchanged.
