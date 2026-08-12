@@ -172,12 +172,27 @@ export function digestMarkdown({ oldPayload, newPayload, manifest, runUrl, oldPe
 
 const showJson = (rev, file) => JSON.parse(execFileSync("git", ["show", `${rev}:data/${file}`], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 }));
 
+/* The newest frozen forecast artifact AT THAT REV, mirroring loadData's selection. Without
+   it the digest builds payloads whose forecast column is the LIVE recomputation, and every
+   post-flip digest would narrate "our 12.1" moves on a lane the published page no longer
+   renders (measured: 0/80 divergence once the artifact is passed; the whole gap was this).
+   Absent dir/file → null, exactly like loadData. */
+const frozenForecastAt = rev => {
+  try {
+    const names = execFileSync("git", ["ls-tree", "--name-only", rev, "data/forecasts/"], { encoding: "utf8" })
+      .split("\n").map(l => l.trim()).filter(l => /frozen-\d{4}-\d{2}-\d{2}\.json$/.test(l)).sort();
+    const newest = names.at(-1);
+    return newest ? JSON.parse(execFileSync("git", ["show", `${rev}:${newest}`], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 })) : null;
+  } catch { return null; }
+};
+
 export function payloadAt(rev) {
   const data = {
     specs: showJson(rev, "specs.json"), sources: showJson(rev, "sources.json"),
     scales: showJson(rev, "scales.json"), community: null,
     ptrBuilds: showJson(rev, "ptr-builds.json"), creatorTakes: showJson(rev, "creator-takes.json"),
     encounterTiers: null, historySnapshot: null, historySnapshots: [],
+    frozenForecast: frozenForecastAt(rev),
   };
   return buildPayload(data);
 }

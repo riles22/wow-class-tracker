@@ -104,7 +104,7 @@ const isRealDate = v => {
 /* opts.fullRoster: enforce the real 40-spec Midnight roster — used by the CLI, the build,
    and the apply-* merge scripts (which operate on the repo's real data), but not by unit
    fixtures, which validate small synthetic datasets. */
-export function validateData({ specs, sources, scales, community, ptrBuilds, creatorTakes, encounterTiers, historySnapshots, pendingTranscripts, seasonFinal }, opts = {}) {
+export function validateData({ specs, sources, scales, community, ptrBuilds, creatorTakes, encounterTiers, historySnapshots, pendingTranscripts, seasonFinal, frozenForecast }, opts = {}) {
   const errors = [];
   // Every date in the data is a claim about when something was fetched or published —
   // none may sit in the future. +1 day of skew allowed: a nightly UTC run can honestly
@@ -320,6 +320,13 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
       // a "12.1 PTR"-named series may not claim live, and an era:"ptr" series must say PTR in its name.
       if (PHASES.ptr && metric.name?.includes(PHASES.ptr.marker) && metric.era === "live") errors.push(`specs.json: ${key} metric "${metric.name}" is named ${PHASES.ptr.marker} but tagged era "live"`);
       if (metric.era === "ptr" && !/PTR/.test(metric.name ?? "")) errors.push(`specs.json: ${key} metric "${metric.name}" is era "ptr" but its name carries no PTR label`);
+      /* A PTR-NAMED row must be era-EXPLICIT, not inference-reliant (2026-08-12). metricEra's
+         fallback infers "ptr" from the name via PHASES.ptr.marker — and PHASES.ptr goes NULL
+         at the phase flip, at which point every inference-reliant row silently leaks into the
+         live view while its explicitly-tagged siblings stay gated (measured: 5 of 12 PTR
+         metric families rode the inference). The marker guard above dies with PHASES.ptr for
+         the same reason, so this rule matches the NAME, which survives the flip. */
+      if (/\bPTR\b/.test(metric.name ?? "") && metric.era == null) errors.push(`specs.json: ${key} metric "${metric.name}" is PTR-named but carries no explicit era — name inference dies at the phase flip, so PTR rows must be tagged era: "ptr" (apply-metrics preserves it)`);
       isoOk(metric.asOf, `specs.json: ${key} metric "${metric.name}" asOf`);
       const mkey = `${metric.source}|${metric.bracket}|${metric.name}`;
       if (metricKeys.has(mkey)) errors.push(`specs.json: ${key} duplicate metric (${mkey}) — the upsert key must be unique per spec`);
@@ -738,6 +745,35 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
     }
   }
 
+  /* --- the frozen forecast artifact (DECISION 2's render source) ---
+     `frozenForecastActive` treats a wrong `kind` as "not a frozen forecast" — a gate, not
+     an error — so a valid-JSON-but-wrong-shape artifact would silently disable the frozen
+     lane post-flip and the column would quietly recompute off the settled consensus, the
+     exact substitution this lane forbids. Shape errors must therefore be RED here, before
+     any build can render from (or silently ignore) the file. Absent artifact stays valid:
+     that is the whole pre-freeze history of the project. */
+  if (frozenForecast != null) {
+    const ff = frozenForecast, where = "data/forecasts/frozen-*.json";
+    if (ff.kind !== "frozen-forecast") errors.push(`${where}: kind must be "frozen-forecast" (got ${JSON.stringify(ff.kind)}) — a mis-kinded artifact silently disables the frozen render lane`);
+    isoOk(ff.date, `${where} date`);
+    if (typeof ff.phase !== "string" || !ff.phase) errors.push(`${where}: needs a non-empty phase string — activation compares it against SNAPSHOT_PHASE`);
+    if (!ff.cells || typeof ff.cells !== "object" || Array.isArray(ff.cells)) {
+      errors.push(`${where}: needs a cells object keyed by "Class|Spec"`);
+    } else {
+      const specKeySet = new Set((specs ?? []).map(s => `${s.class}|${s.spec}`));
+      for (const [key, cell] of Object.entries(ff.cells)) {
+        if (!specKeySet.has(key)) errors.push(`${where}: cell "${key}" is not a roster spec`);
+        for (const bracket of ["raid", "mplus"]) {
+          const c = cell?.[bracket];
+          if (c == null) continue;   // a declined bracket is an honest null
+          if (typeof c.tier !== "string" || typeof c.score !== "number" || !Number.isFinite(c.score)) {
+            errors.push(`${where}: cell "${key}" ${bracket} must carry {tier: string, score: finite number} or null`);
+          }
+        }
+      }
+    }
+  }
+
   return errors;
 }
 
@@ -782,9 +818,28 @@ export async function loadData(root) {
   } catch (error) {
     if (error?.code !== "ENOENT") throw error;
   }
+  /* The frozen pre-launch forecast artifact (data/forecasts/frozen-<date>.json, written
+     once by `snapshot.mjs --frozen`; Gate-0 immutable). DECISION 2: after the phase flip
+     this file — not the live projection machinery — is the render source for the forecast
+     column, so the page keeps showing the forecast that was actually declared instead of
+     recomputing one off the settled consensus (measured: 37 of 80 letters would silently
+     differ — a forecast that already knows the answer). buildPayload decides WHEN it
+     applies (artifact phase vs SNAPSHOT_PHASE); this only loads it. Newest artifact wins
+     if several exist. Absent dir/file → null (the whole pre-freeze history of the
+     project); corrupt JSON throws — silently dropping the record would silently switch
+     the column back to live recomputation, which is the exact failure this lane exists
+     to prevent. */
+  let frozenForecast = null;
+  try {
+    const fDir = path.join(root, "data", "forecasts");
+    const newest = (await readdir(fDir)).filter(f => /^frozen-\d{4}-\d{2}-\d{2}\.json$/.test(f)).sort().at(-1);
+    if (newest) frozenForecast = JSON.parse(await readFile(path.join(fDir, newest), "utf8"));
+  } catch (error) {
+    if (error?.code !== "ENOENT") throw error;
+  }
   return { specs, sources, scales, community, ptrBuilds, creatorTakes, encounterTiers,
            historySnapshot: historySnapshots[0] ?? null, historySnapshots, pendingTranscripts,
-           seasonFinal };
+           seasonFinal, frozenForecast };
 }
 
 const isMain = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);

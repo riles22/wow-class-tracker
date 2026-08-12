@@ -91,15 +91,43 @@ not a data problem; the refresh agents escalated correctly through the 08-11 fli
 
 ## Still to BUILD before 08-18 (not flip-day work)
 
-- **B6 — the frozen-forecast render path** (DECISION 2's missing half, deadline 08-18).
-  `data/forecasts/frozen-2026-08-11.json` is written by snapshot.mjs and read by nothing;
-  at the flip the "Ours: 12.1" column would silently recompute off the settled S2
-  consensus — 37 of 80 letters different from the frozen record, a forecast that already
-  knows the answer. Minimum slice: an artifact loader in build/render gated on
-  `SNAPSHOT_PHASE !== artifact.phase` (self-activating at the flip commit, inert before
-  it), rendering the frozen cells with a basis string naming the declaration date; the
-  grade chip waits for settlement (~09-01). Build it in its own session with adversarial
-  review — render-pipeline surgery on flip day itself is how mistakes ship.
+- ✅ **B6 — the frozen-forecast render path** — BUILT 2026-08-12, adversarially reviewed
+  (13 findings, all folded in or recorded below). Loader in loadData, substitution in
+  buildPayload (`frozenForecastActive`: inert while phases match, active in the grading
+  window, stands down when a 12.2 PTR cycle opens), `projAvailable()` un-gates the
+  projection surfaces under `META.frozenForecast`, every visible surface names the record
+  (viewnote, drawer, qualifier, movers, data-health), validateData red-flags a wrong-shape
+  artifact, digest.mjs diffs the same lane the page renders, snapshots stamp the
+  artifact's projectionVersion while frozen. Covered by a doctored-payload Playwright
+  invariant. The grade chip still waits for settlement (~09-01).
+
+- **OWNER DECISION, before 08-18 — DECISION 3's receipts vs the ptr-null era pin.**
+  The review's structural finding: DECISION 3 (s2-transition-scope.md:102-105) keeps the
+  PTR receipts (Dummy Dome box, zone-54/56 metric rows, Compare-all/Ladder PTR columns,
+  the icyveins-ptr column) up through the grading window, leaving at +14 via `ptrSunset`.
+  But the flip sets `PHASES.ptr` to null, which pins `state.era` to "live" and hides ALL
+  of them at the flip — a 14-days-early sunset nobody decided, and it makes `ptrSunset`
+  dead weight. The collision predates B6 (normalize.mjs's own comments disagree with each
+  other) but B6's activation condition (`!PHASES.ptr`) cements the ptr-null branch.
+  Options: (a) extend the FROZEN_FC exemption to the receipt surfaces so they stay
+  reachable while `meta.frozenForecast` is set and leave at `ptrSunset` — honours
+  DECISION 3 as written, costs a template pass over the receipt gates; or (b) amend
+  DECISION 3: the sunset happens AT the flip, receipts live on only in the drawer's
+  frozen basis strings and the immutable artifact — cheaper, but a decision reversal that
+  should be recorded, not inherited. Either way the choice must be explicit in
+  s2-transition-scope.md before the flip commit.
+
+- **Pre-stage the flip-day TEST PATCH** (review finding #1: the runbook's own step 9 is
+  currently unsatisfiable). Simulated at the exact flip state, `npm test` reds ~30 tests
+  across six files: ~19 render.test fixtures hardcode the "12.1 PTR" marker or assume
+  `PHASES.ptr` non-null, build.test's ptrMetricNames assert, four UI invariants that pin
+  the OLD era-gating behavior B6 deliberately changes (movers/Compare-all era-gated out of
+  the live view, the forecast qualifier text, the icyveins-ptr option redirect), plus the
+  deliberate vocabulary pins. Prepare a reviewed patch (parameterize fixtures on a passed
+  phase, guard ptrMetricNames on `PHASES.ptr`, make the era-pin invariants branch on
+  `payload().meta.frozenForecast`) so the flip commit lands green rather than being
+  rewritten under time pressure. Verification logs from the review live in the session
+  scratchpad (`runA-flip-b6.log`: 346/31 with B6, `runC-flip-nob6.log`: 340/33 without).
 - **nightly.yml refresh-agent prompt line** (~:321): "do not finish until check-refresh
   --manifest passes" is unsatisfiable on a flip night and points at the one dishonest
   lever no gate catches (reverting `seasonVerified`). Soften to: record honestly and
@@ -109,6 +137,18 @@ not a data problem; the refresh agents escalated correctly through the 08-11 fli
 - **Dependabot #54** (claude-code-action bump): safe to merge since `77bd0a3`; it touches
   nightly.yml so it auto-kicks a nightly — merge it WITH the prompt-line edit above to
   spend one kick, not two.
+
+## 12.2-cycle note (review finding #7 — record it now, act at the next cycle)
+
+A missed 12.2 `--frozen` would silently re-activate the stale 12.1 artifact as the
+rendered forecast the moment the 12.2 flip lands. The lane's stand-down (`!PHASES.ptr`)
+covers the window while a 12.2 PTR cycle is OPEN, not the gap after the 12.2 flip if no
+new freeze was declared. A staleness guard is the durable fix, but the obvious predicate
+("artifact must not predate the newest snapshot of its own phase") is WRONG — DECISION 5
+freezes days before the flip while nightlies keep writing same-phase snapshots, so it
+would refuse the legitimate 08-18 activation. A working variant needs the artifact's phase
+to equal the phase of the newest snapshot whose phase differs from the current one — build
+it with the 12.2 transition scope, not now.
 
 ## After settlement (~09-01, +14 days; second checkpoint +28)
 

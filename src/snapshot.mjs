@@ -71,7 +71,13 @@ export async function snapshot(root = ROOT, date = new Date().toISOString().slic
      to infer the freeze point from recency, so a late pre-launch refresh silently moves
      the forecast being graded. Set with `node src/snapshot.mjs --frozen`, once, on the
      last snapshot before 12.1 goes live. */
-  const snap = { date, phase: SNAPSHOT_PHASE, projectionVersion: PROJECTION_VERSION,
+  /* While the frozen render lane is active, the projections in this snapshot ARE the
+     artifact's cells — so the version stamp must be the artifact's, not the code
+     constant. Otherwise a PROJECTION_VERSION bump during the grading window would stamp
+     v14 onto stored v13 cells, and the report card's version accounting would lie about
+     which formula produced them. */
+  const projVersion = payload.meta?.frozenForecast?.projectionVersion ?? PROJECTION_VERSION;
+  const snap = { date, phase: SNAPSHOT_PHASE, projectionVersion: projVersion,
     rankVersion: RANK_VERSION, consensusVersion: CONSENSUS_VERSION,
     ...(frozen || carriedFrozen ? { frozen: true } : {}),
     specs: nextState };

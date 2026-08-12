@@ -1801,7 +1801,45 @@ export function seasonFinalMeta(seasonFinal, liveSeason = PHASES.liveSeason) {
   return { season: liveSeason, sources };
 }
 
-export function buildPayload({ specs, sources, scales, community, ptrBuilds, creatorTakes, encounterTiers, historySnapshot, historySnapshots, seasonFinal = null, now = null }) {
+/* THE FROZEN LANE FOR THE FORECAST COLUMN (DECISION 2, built 2026-08-12).
+   `--frozen` declares the pre-launch forecast; the phase flip says 12.1 is live. Between
+   the flip and the report card, the forecast column must keep showing the DECLARED
+   forecast — the receipts the report card grades — not a recomputation off the settled
+   Season-2 consensus, which by then is a forecast that already knows the answer
+   (measured at the flip: 37 of 80 letters silently differ).
+
+   Three-state lifecycle, all from existing signals — no new flag to forget:
+   · pre-flip: artifact phase === SNAPSHOT_PHASE → inert, live machinery renders (which is
+     why every pre-flip build and test is unaffected);
+   · post-flip grading window: phases differ and no NEW PTR cycle exists → the artifact is
+     the column, self-activating the moment the flip commit moves SNAPSHOT_PHASE;
+   · next cycle opens (PHASES.ptr non-null again, e.g. 12.2): the artifact stands down —
+     without this, the 12.2 `--frozen` would freeze the OLD artifact's cells instead of
+     the live 12.2 projections, because snapshot.mjs reads payload projections.
+   The overrides exist for tests (module constants cannot be moved from a test); callers
+   never pass them. */
+export function frozenForecastActive(artifact, { snapshotPhase = SNAPSHOT_PHASE, ptr = PHASES.ptr } = {}) {
+  return artifact?.kind === "frozen-forecast" && artifact.phase !== snapshotPhase && !ptr;
+}
+
+/* Wholesale and honest substitution: a spec absent from the artifact renders no forecast
+   rather than a freshly computed one, and each substituted cell's basis names the
+   declaration so no surface can imply the number was computed today. projMovement is
+   deleted, not recomputed — movement of a frozen record is a category error (and the flip
+   commit's mandatory CONSENSUS_VERSION bump makes pickBaseline refuse cross-version
+   comparison, so the strip reads "baseline established", not 21 phantom arrows). */
+export function applyFrozenForecast(specs, artifact) {
+  const stamp = p => p ? { ...p, frozen: true,
+    basis: `Frozen pre-launch forecast, declared ${artifact.date} — ${p.basis ?? ""}` } : null;
+  for (const spec of specs) {
+    const cell = artifact.cells?.[`${spec.class}|${spec.spec}`] ?? null;
+    spec.projection = cell ? { raid: stamp(cell.raid), mplus: stamp(cell.mplus) } : null;
+    delete spec.projMovement;
+  }
+  return specs;
+}
+
+export function buildPayload({ specs, sources, scales, community, ptrBuilds, creatorTakes, encounterTiers, historySnapshot, historySnapshots, seasonFinal = null, frozenForecast = null, now = null }) {
   const scored = dummyDomeScores(metricRanks(fightLabels(decorateSpecs(specs, sources, scales, seasonFinal))));
   // Prefer the full history (skip snapshots identical to the present state); fall back to
   // the single-snapshot param for callers/tests that pass one directly.
@@ -1817,6 +1855,9 @@ export function buildPayload({ specs, sources, scales, community, ptrBuilds, cre
   // lists it reads straight off spec.ratings via the registry
   projections(decorated, scales, creatorTakes, sources);
   projectionMovementFor(decorated, scales, baseline); // MUST follow projections() — see its comment
+
+  const frozenActive = frozenForecastActive(frozenForecast);
+  if (frozenActive) applyFrozenForecast(decorated, frozenForecast);
   const latestBuild = ptrBuilds?.builds?.[0]?.date ?? null;
   // notes-feed pages track build posts, not page snapshots — stamp them from the feed
   const stampedSources = sources.map(source => source.kind !== "notes-feed" ? source : {
@@ -1840,6 +1881,15 @@ export function buildPayload({ specs, sources, scales, community, ptrBuilds, cre
       latestPtrBuild: latestBuild,
       movementSince: baseline?.date ?? null,
       phases: PHASES,
+      /* Present ONLY while the frozen artifact is the forecast column's render source
+         (post-flip, pre-sunset). The template keys every frozen-mode surface change on
+         this — null means the live projection machinery is authoritative, which is every
+         pre-flip build. */
+      frozenForecast: frozenActive ? {
+        date: frozenForecast.date, declaredPhase: frozenForecast.phase,
+        projectionVersion: frozenForecast.projectionVersion ?? null,
+        gitSha: frozenForecast.gitSha ?? null
+      } : null,
       /* Frozen-lane provenance for the current live season, so the template never re-reads
          data/season-final.json (and so the letters themselves stay out of the payload —
          they are already in spec.consensus[].perSource). Null when nothing is frozen. */

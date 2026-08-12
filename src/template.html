@@ -851,7 +851,7 @@ try {
     <div class="sub">Where every spec of <b>WoW: Midnight</b> stands — <b>not one site's opinion</b>, but every major tier list distilled into a single consensus with a <b>±</b> wherever they disagree, layered with live numbers, sim profiles, and per-spec PTR reads. <details class="sub-more"><summary>How to read it</summary><span id="tlcount">Several</span> tier lists feed a computed <b>consensus</b>, with a <b>±</b> marker where they disagree — flip between them with <b>View</b>, or pick <b>Ours: 12.1&nbsp;✦</b> for this site's own Season-2 forecast (a projection, never a source). Filter by era or a specific fight, and click <b>any row</b> for the full read: PTR changes, current numbers with ranks, sim fight profile, and community takes. Two tools up top: <b>📊 The Ladder</b> draws any measured ranking as a chart, and <b>⊞ Compare all</b> is the whole roster against every rating and rank on one screen. The <b>⚙ S2 Gearing</b> tab is a separate explorer for Season-2 gear and loot sources.</details></div>
     <div class="stamp">
       <span><b>Baseline:</b> __ERA_BASELINE__</span>
-      <span><b>PTR:</b> 12.1 “Curse of Ula'tek”</span>
+      <span>__ERA_TRACKED_STAMP__</span>
       <span id="stamp-snapshot"></span>
     </div>
     <nav class="sitetabs" aria-label="Sections">
@@ -1163,7 +1163,11 @@ function applyHash(){
   }
   // sanity: unknown source/era values fall back to defaults rather than blank views
   if(state.source !== "consensus" && state.source !== "projection" && !TIER_SOURCES.some(s=>s.id===state.source)) state.source = "consensus";
-  if(!["both","live","ptr"].includes(state.era)) state.era = "both";
+  // The accepted era set follows the phase: post-flip (no PTR era, or post-sunset) the
+  // only era is "live", and a stale era=ptr deep link — or an unknown value falling to
+  // "both" — must not resurrect retired PTR surfaces with the toggle hidden and no way back.
+  const ERAS = (PHASE.ptr && !PHASE.ptrSunset) ? ["both","live","ptr"] : ["live"];
+  if(!ERAS.includes(state.era)) state.era = ERAS.includes("both") ? "both" : "live";
   // Restore a shared compare set (L14): resolve slugs → keys, cap at 3.
   const cmp = p.get("cmp");
   if(cmp && typeof COMPARE !== "undefined"){
@@ -1245,6 +1249,14 @@ const FROZEN_SOURCES = (() => {
 const metricEra = m => m.era ?? (PHASE.ptr && m.name.includes(PHASE.ptr.marker) ? "ptr" : "live");
 const takeEra = t => (PHASE.ptr && (t.patchContext||"").includes(PHASE.ptr.marker)) ? "ptr" : "live";
 const eraOk = era => state.era === "both" || state.era === era;
+/* Non-null ONLY while the frozen pre-launch forecast is the column's render source (the
+   post-flip grading window — DECISION 2). The projection surfaces then show a RECORD, not
+   a live computation, so they are exempt from the "no forecast in a live-only view" era
+   gate: post-flip the era toggle is gone, everything is the live view, and the record is
+   exactly what the report card grades. projAvailable is the single predicate every
+   projection surface consults — before the flip it is the old era gate unchanged. */
+const FROZEN_FC = META.frozenForecast ?? null;
+const projAvailable = () => state.era !== "live" || !!FROZEN_FC;
 const matrix = document.getElementById('matrix');
 const reduceMotionControl = document.getElementById('reduce-motion');
 const motionReduced = () => document.documentElement.dataset.reduceMotion === 'true';
@@ -1400,8 +1412,8 @@ function sourceBreakdownHTML(s){
   // Our computed 12.1 forecast, PTR views only — full component math shown so the
   // number is auditable, never oracular. Not a source; never feeds consensus.
   const projLine = p => p ? `<b>${esc(p.tier)}</b> (${p.score}/100, confidence ${esc(p.confidence)}) <span class="mnote">— ${esc(p.basis)}</span>` : "—";
-  const proj = (s.projection && state.era !== "live")
-    ? `<div class="srcbreak projbreak"><p class="d-h">Our 12.1 forecast <span class="mnote">computed by this site from the sources above plus PTR data — not a source, and it never feeds the consensus</span></p><div class="setbox">
+  const proj = (s.projection && projAvailable())
+    ? `<div class="srcbreak projbreak"><p class="d-h">Our 12.1 forecast ${FROZEN_FC ? `<span class="mnote">FROZEN pre-launch record, declared ${esc(FROZEN_FC.date)} — what the report card grades, not a live computation</span>` : `<span class="mnote">computed by this site from the sources above plus PTR data — not a source, and it never feeds the consensus</span>`}</p><div class="setbox">
         <div class="setrow"><span class="pc" style="color:var(--gold)">Raid</span><span class="pct">${projLine(s.projection.raid)}</span></div>
         <div class="setrow"><span class="pc" style="color:var(--gold)">M+</span><span class="pct">${projLine(s.projection.mplus)}</span></div>
       </div></div>`
@@ -1576,7 +1588,9 @@ function drawerHTML(s){
            ? takesNote + ` Only PTR-era numbers are shown in this view — switch Era to Both for the ${PHASE.liveLabel} baseline alongside.`
            : takesNote;
        })()}</p>${signalHTML}` : `
-       <p class="d-summary"><span class="theme">${PHASE.liveLabel} baseline view</span><br>Live-season data only — switch Era to ${PHASE.ptr?.label ?? "the change era"} (or Both) for the change read.</p>${signalHTML}`;
+       <p class="d-summary"><span class="theme">${PHASE.liveLabel} baseline view</span><br>${PHASE.ptr
+         ? `Live-season data only — switch Era to ${PHASE.ptr.label} (or Both) for the change read.`
+         : `Live-season data.`}</p>${signalHTML}`;
   const tierset = showPtr ? tierSetHTML(s) : "";
   // Inner content only — the .drawer shell is emitted empty by rowHTML and filled lazily
   // on open, so render() rebuilds ~1.3K visible nodes instead of ~9.3K (85% was drawers).
@@ -1772,7 +1786,7 @@ function render(){
   {
     const note = document.getElementById('viewnote');
     if(note){
-      const projView = state.source === "projection" && state.era !== "live" && !state.fight;
+      const projView = state.source === "projection" && projAvailable() && !state.fight;
       // A selected PTR tier list is its own case. Without this the eraPtr branch below
       // would announce "the tier columns still show Icy Veins (12.1 PTR)'s 12.0.7 tiers —
       // for a Season-2 read pick Ours: 12.1" over a column that is already a Season-2
@@ -1786,7 +1800,11 @@ function render(){
       const srcName = TIER_SOURCES.find(s => s.id === state.source)?.name;
       const letters = srcName ? `<b>${esc(srcName)}'s 12.0.7 tiers</b>` : `the <b>12.0.7 consensus</b>`;
       note.innerHTML = projView
-        ? `<b>Our own forecast</b> — live consensus blended with PTR raid/M+ testing, Dummy Dome data and the external 12.1 tier list, shifted by the tuning outlook. A projection, not a source: it never feeds the consensus.`
+        ? (FROZEN_FC
+          // The one always-visible projection disclosure (title attributes do not exist on
+          // touch) — it must never describe the frozen record as a live computation.
+          ? `<b>Our FROZEN pre-launch 12.1 forecast</b>, declared ${esc(FROZEN_FC.date)} — the record the report card grades, not a live computation. A projection, never a source: it never feeds the consensus.`
+          : `<b>Our own forecast</b> — live consensus blended with PTR raid/M+ testing, Dummy Dome data and the external 12.1 tier list, shifted by the tuning outlook. A projection, not a source: it never feeds the consensus.`)
         : ptrListView
           ? `<b>${esc(srcName)}</b> — someone else's <b>12.1 PTR</b> letters, shown as their own column (M+ only; the raid column has no such list). Never averaged into the 12.0.7 consensus; one weighted input to <b>Ours: 12.1 ✦</b>.`
         : eraPtr
@@ -1802,8 +1820,10 @@ function render(){
     const pb = srcseg.querySelector('.projbtn');
     if(pb){
       // …but don't re-enable it when the fight view has just disabled the whole segment.
-      pb.disabled = state.era === "live" || !!state.fight;
-      pb.title = state.era === "live" ? `Our 12.1 forecast needs the PTR layer — switch Era to Both or ${PHASE.ptr?.label ?? "12.1"}`
+      pb.disabled = !projAvailable() || !!state.fight;
+      pb.title = FROZEN_FC
+        ? `Our FROZEN pre-launch 12.1 forecast, declared ${FROZEN_FC.date} — the record the report card grades. A projection, never a source.`
+        : state.era === "live" ? `Our 12.1 forecast needs the PTR layer — switch Era to Both or ${PHASE.ptr?.label ?? "12.1"}`
         : "Our computed 12.1 forecast — live baseline + PTR testing + Dummy Dome + outlook + meta reads. A projection, not a source.";
     }
     // Era-gating moved from per-source buttons to the select's OPTIONS: a 12.1 PTR list
@@ -1817,7 +1837,7 @@ function render(){
     });
     // One fallback for both gated view kinds, after the disabling above so the pressed
     // state below can never light a control the user cannot use.
-    if(state.era === "live" && (state.source === "projection" || isPtrSource(state.source))){
+    if(state.era === "live" && ((state.source === "projection" && !FROZEN_FC) || isPtrSource(state.source))){
       state.source = "consensus";
       syncSrcControls();
     }
@@ -1865,7 +1885,11 @@ function render(){
     const seasonOfSelected = selected
       ? [...new Set((selected.pages ?? []).filter(p => p.bracket === bracket).map(p => p.seasonVerified).filter(Boolean))]
       : [];
-    const qual = state.source === "projection" ? `${seasonLabelOf(SEASON_ORDER[SEASON_ORDER.indexOf(PHASE.liveSeason) + 1]) ?? "12.1"} forecast`
+    const qual = state.source === "projection" ? (FROZEN_FC
+        // The record, not a recomputation: the qualifier is the anti-misattribution surface
+        // (a screenshot must not read a frozen forecast as a live opinion).
+        ? `12.1 forecast — frozen ${FROZEN_FC.date}`
+        : `${seasonLabelOf(SEASON_ORDER[SEASON_ORDER.indexOf(PHASE.liveSeason) + 1]) ?? "12.1"} forecast`)
       // One season, and not the live one: label the column with ITS patch. A frozen source
       // is the interesting case — its letters in the consensus are the live-season ones, but
       // in ITS OWN column the page is showing what that outlet publishes now, which is next
@@ -2206,7 +2230,9 @@ if(META.latestSnapshot){
   // tier-list page dates, so a frozen tier list is no longer invisible — but a tier
   // date is only as good as its attestation, which the clause states.
   const tail = `Freshest data we hold is ${esc(dh.latest)}; each row shows its own date. `
-    + (oldest ? `Our 12.1 projection is recomputed nightly, but its PTR-empirical term still comes from the frozen ${esc(oldest)} cuts. ` : "")
+    + (oldest ? (FROZEN_FC
+        ? `Our 12.1 forecast is the FROZEN pre-launch record (declared ${esc(FROZEN_FC.date)}), not recomputed; its PTR-empirical term came from the ${esc(oldest)} cuts. `
+        : `Our 12.1 projection is recomputed nightly, but its PTR-empirical term still comes from the frozen ${esc(oldest)} cuts. `) : "")
     + `<details class="dh-series"><summary>Affected: ${n} series</summary>${esc(names)}.</details>`;
   /* On a phone the clause enumeration was 200+px of a 212px banner — the honest headline
      above it is a fraction of that (the CSS comment beside .dh-series has said so since it
@@ -2236,7 +2262,8 @@ if(META.latestSnapshot){
   // LIVE tier lists only — the sentence says these "feed a computed consensus", and an
   // era-gated PTR list does not. Counting it would restate the WoWMeta bug in a new key:
   // a number on the page that its own toggles contradict.
-  const n = SOURCES.filter(s => s.kind === "tier-list" && (s.era ?? "live") === "live").length;
+  const n = Math.max(0, ...SPECS.map(sp => Math.max(
+    sp.consensus?.raid?.perSource?.length ?? 0, sp.consensus?.mplus?.perSource?.length ?? 0)));
   const words = ["No","One","Two","Three","Four","Five","Six","Seven","Eight","Nine"];
   el.textContent = words[n] ?? String(n);
 })();
@@ -2393,7 +2420,7 @@ function sparkSVG(cons, proj){
 function timelineHTML(s){
   if(!HIST) return "";
   const h = HIST.specs[`${s.class}|${s.spec}`]; if(!h) return "";
-  const showProj = state.era !== "live";
+  const showProj = projAvailable();
   const projShown = showProj && (h.projRaid.some(v=>v!=null) || h.projMplus.some(v=>v!=null));
   const hasRecon = HIST.enriched && HIST.enriched.indexOf(true) !== 0;
   const raid = sparkSVG(h.raid, showProj ? h.projRaid : null);
@@ -2481,8 +2508,9 @@ function openCompare(){
     ["Role", s=>esc(s.role)],
     ["Consensus · Raid", s=>tierCell(s,"raid")],
     ["Consensus · M+", s=>tierCell(s,"mplus")],
-    // era-gated like everywhere else: the projection never appears in a 12.0.7-only view
-    ...(state.era !== "live" ? [
+    // era-gated like everywhere else — except the FROZEN record, which is exempt (it is
+    // what the report card grades, and post-flip there is no other era to switch to)
+    ...(projAvailable() ? [
       ["Ours: 12.1 · Raid", s=>projCell(s,"raid")],
       ["Ours: 12.1 · M+", s=>projCell(s,"mplus")]
     ] : []),
@@ -2554,7 +2582,7 @@ function renderChanges(){
   if(!host) return;
   // Narrate the lane the grid is actually drawing. The projection lane is era-gated out
   // of a 12.0.7-only view exactly like every other projection surface.
-  const onProj = state.source === "projection" && state.era !== "live";
+  const onProj = state.source === "projection" && projAvailable();
   const key    = onProj ? "projMovement" : "movement";
   const label  = onProj ? "Ours: 12.1" : "Consensus";
   const tierNow = (s, b) => (onProj ? s.projection?.[b]?.tier : s.consensus?.[b]?.tier) ?? "—";
@@ -2601,8 +2629,8 @@ function renderChanges(){
 function renderMovers(){
   const host = document.getElementById('movers');
   if(!host) return;
-  // Era-gated like every other projection surface: a 12.0.7-only view has no forecast.
-  if(state.era === "live"){ host.hidden = true; host.innerHTML = ""; return; }
+  // Era-gated like every other projection surface — the FROZEN record is exempt.
+  if(!projAvailable()){ host.hidden = true; host.innerHTML = ""; return; }
   const rows = [];
   for(const s of SPECS) for(const b of ["raid","mplus"]){
     const p = s.projection?.[b], c = s.consensus?.[b];
@@ -2614,7 +2642,7 @@ function renderMovers(){
   rows.sort((a,z)=> z.delta - a.delta);
   const risers = rows.filter(r=>r.delta>0).slice(0,5);
   const fallers = rows.filter(r=>r.delta<0).slice(-5).reverse();
-  const cell = r => `<button type="button" class="chjump mvr" data-cls="${esc(r.s.class)}" data-spec="${esc(r.s.spec)}" title="${esc(`${r.s.spec} ${r.s.class} — live ${r.b==="raid"?"raid":"M+"} consensus ${r.from}, our 12.1 forecast ${r.to} (${r.conf} confidence). A forecast, not a source.`)}">
+  const cell = r => `<button type="button" class="chjump mvr" data-cls="${esc(r.s.class)}" data-spec="${esc(r.s.spec)}" title="${esc(`${r.s.spec} ${r.s.class} — live ${r.b==="raid"?"raid":"M+"} consensus ${r.from}, our ${FROZEN_FC ? `frozen ${FROZEN_FC.date}` : "12.1"} forecast ${r.to} (${r.conf} confidence). A forecast, not a source.`)}">
       <b>${esc(r.s.spec)}</b> <span class="mnote">${esc(r.s.class)} · ${r.b==="raid"?"Raid":"M+"}</span>
       <span class="mvr-t">${esc(r.from)} → ${esc(r.to)}</span>
       <span class="mvr-d" data-d="${r.delta>0?'up':'down'}">${r.delta>0?"+":""}${r.delta} pts</span>
@@ -2623,7 +2651,7 @@ function renderMovers(){
   // Count SPECS, not (spec, bracket) pairs — a spec moving in both brackets is one spec.
   // The naive rows.length published "43 specs change tier" on a 40-spec roster.
   const movedSpecs = new Set(rows.map(r => `${r.s.class}|${r.s.spec}`)).size;
-  host.innerHTML = `<details class="movers"><summary><b>Into 12.1 — biggest movers</b> <span class="mnote">our forecast vs the live consensus · ${movedSpecs} of ${SPECS.length} specs change tier</span></summary>
+  host.innerHTML = `<details class="movers"><summary><b>Into 12.1 — biggest movers</b> <span class="mnote">${FROZEN_FC ? `our frozen ${esc(FROZEN_FC.date)} forecast vs the live consensus` : `our forecast vs the live consensus`} · ${movedSpecs} of ${SPECS.length} specs change tier</span></summary>
     <p class="mnote mvr-note">This is <b>our own 12.1 projection</b>, not a source — live consensus blended with PTR testing and Dummy Dome data, shifted by the tuning outlook. Points are forecast-score deltas. Open a spec for its full basis.</p>
     <div class="mvr-cols">
       <div><p class="d-h">Rising into 12.1</p><div class="chlist">${risers.map(cell).join("") || "<span class='mnote'>None.</span>"}</div></div>
@@ -2716,7 +2744,7 @@ document.getElementById("brandhome")?.addEventListener("click", e => {
 function openSpecFromOverlay(cls, spec){
   document.querySelectorAll(".finder-ov.open").forEach(o=>o.classList.remove("open"));
   document.body.style.overflow="";
-  state.role="All"; state.ptrOnly=false; state.starOnly=false; state.era="both"; state.fight=""; state.q="";
+  state.role="All"; state.ptrOnly=false; state.starOnly=false; state.era=(PHASE.ptr && !PHASE.ptrSunset)?"both":"live"; state.fight=""; state.q="";
   document.getElementById('staronly').checked=false;
   document.querySelectorAll('#roleseg button').forEach(x=>x.setAttribute('aria-pressed', x.dataset.role==="All"?'true':'false'));
   document.querySelectorAll('#eraseg button').forEach(x=>x.setAttribute('aria-pressed', x.dataset.era==="both"?'true':'false'));
@@ -3038,7 +3066,7 @@ function openSpecFromOverlay(cls, spec){
     .filter(src => (src.pages||[]).some(p => p.bracket === A.bracket))
     .filter(src => eraOk(isPtrSource(src.id) ? "ptr" : "live"));
   const metricCols = () => COLS[A.bracket].filter(c => eraOk(c.era));
-  const showProjection = () => eraOk("ptr");
+  const showProjection = () => eraOk("ptr") || !!FROZEN_FC;
 
   /* One cell's value + how to sort it. Tier cells sort by the scale's numeric score, never
      alphabetically — "A+" must sit above "A" above "B+", which alphabetical ordering gets

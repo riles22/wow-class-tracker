@@ -63,6 +63,38 @@ test("build produces the tracker and fetchable launcher icons", async () => {
   assert.ok(!/__ERA_[A-Z_]+__/.test(html), "no era token may survive substitution");
 });
 
+test("the frozen forecast artifact loads, and a phase-MATCHED artifact is INERT", async () => {
+  /* The inertness guarantee, stated so it holds at EVERY phase — the first version of this
+     test asserted the ON-DISK artifact is inert, which is only true before the flip: the
+     moment SNAPSHOT_PHASE moves, that assertion becomes 08-18's first red test (the review
+     measured 31 flip-state failures, and this was the only one B6 itself added). What the
+     lane actually guarantees is conditional: an artifact whose phase IS the running phase
+     changes nothing. Synthesize that state instead of borrowing it from the calendar. */
+  const { SNAPSHOT_PHASE } = await import("../src/render.mjs");
+  const data = await loadData(ROOT);
+  assert.ok(data.frozenForecast, "the 2026-08-11 artifact should load (data/forecasts/)");
+  assert.equal(data.frozenForecast.kind, "frozen-forecast");
+
+  const matched = { ...data.frozenForecast, phase: SNAPSHOT_PHASE };   // "pre-flip", whatever today is
+  const withArtifact = buildPayload({ ...data, frozenForecast: matched });
+  const without = buildPayload({ ...data, frozenForecast: null });
+  assert.equal(withArtifact.meta.frozenForecast, null, "a phase-matched artifact must send no frozen-mode signal to the page");
+  assert.equal(JSON.stringify(withArtifact.specs), JSON.stringify(without.specs),
+    "a phase-matched artifact must not alter a single spec");
+
+  /* And the activation side, same synthesis: a phase-MISMATCHED artifact (with no PTR
+     cycle open) substitutes every covered cell. Guarded on PHASES.ptr because activation
+     requires no open cycle — pre-flip (ptr non-null) this leg would be vacuously inert. */
+  const { PHASES } = await import("../src/normalize.mjs");
+  if (!PHASES.ptr) {
+    const moved = { ...data.frozenForecast, phase: `${SNAPSHOT_PHASE}-ended` };
+    const active = buildPayload({ ...data, frozenForecast: moved });
+    assert.ok(active.meta.frozenForecast, "a phase-mismatched artifact must activate the frozen lane");
+    const covered = active.specs.find(s => moved.cells[`${s.class}|${s.spec}`]?.raid);
+    assert.match(covered.projection.raid.basis, /^Frozen pre-launch forecast/);
+  }
+});
+
 test("every PTR metric-name key resolves against real data (2026-08-08)", async () => {
   /* These strings are LOOKUP KEYS, not labels: a mismatch against data/specs.json renders an
      empty series with no error, no empty state, nothing. The template used to hand-type its own

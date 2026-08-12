@@ -49,6 +49,13 @@ export async function build(root = ROOT) {
       ? `Now covering: ${PHASES.liveLabel} / ${seasonName(PHASES.liveSeason)} → ${PHASES.ptr.label} “${PHASES.patchName}”`
       : `Now covering: ${PHASES.liveLabel} / ${seasonName(PHASES.liveSeason)} “${PHASES.patchName}”`,
     __ERA_LIVE_LABEL__: PHASES.liveLabel,
+    // the masthead stamp: which patch this tracker is ABOUT and whether it has shipped.
+    // The label itself is the tell — it carries " PTR" only while the patch is on the PTR.
+    __ERA_TRACKED_STAMP__: PHASES.ptr
+      ? (PHASES.ptr.label.includes("PTR")
+        ? `<b>PTR:</b> ${PHASES.ptr.label.replace(/\s*PTR$/, "")} “${PHASES.patchName}”`
+        : `<b>Live:</b> ${PHASES.ptr.label} “${PHASES.patchName}”`)
+      : `<b>Live:</b> ${PHASES.liveLabel} “${PHASES.patchName}”`,
   };
   for (const [token, value] of Object.entries(eraTokens)) {
     if (!html.includes(token)) throw new Error(`src/template.html is missing the ${token} placeholder`);

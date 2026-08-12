@@ -1076,3 +1076,83 @@ ui("a source's column qualifier names the season that source's letters describe"
     assert.ok(q.startsWith(nextLabel), `the forecast column names ${nextLabel}, got "${q}"`);
   }
 });
+
+/* ---- the frozen-forecast mode (DECISION 2, 2026-08-12) -------------------------------
+   Post-flip the era toggle is gone (ptr null pins era "live"), and before this lane the
+   live view hid every projection surface — so the flip would have silently removed the
+   forecast column exactly when it becomes the record the report card grades. This fixture
+   doctors the built page's payload into the post-flip state (META.frozenForecast set,
+   phases.ptr null) and asserts the frozen record renders, labelled as a record. The CSP
+   meta is stripped from the fixture: the doctored inline script no longer matches the
+   built hash, and a page whose script cannot run would assert nothing. */
+test("the FROZEN forecast column renders in the post-flip live view, labelled as a record", skipOpts, async () => {
+  const { mkdtemp, rm, writeFile } = await import("node:fs/promises");
+  const { tmpdir } = await import("node:os");
+  const dir = await mkdtemp(path.join(tmpdir(), "tracker-frozen-"));
+  try {
+    const html = readFileSync(DIST, "utf8");
+    const i = html.indexOf("const DATA = ");
+    const j = html.indexOf("\n", i);
+    const data = JSON.parse(html.slice(i + 13, j).replace(/;\s*$/, ""));
+
+    data.meta.frozenForecast = { date: "2026-08-11", declaredPhase: "12.1-ptr", projectionVersion: 13, gitSha: null };
+    data.meta.phases = { ...data.meta.phases, ptr: null };   // post-flip: no PTR era exists
+
+    const json = JSON.stringify(data).replace(/</g, "\u003c");
+    const doctored = (html.slice(0, i) + "const DATA = " + json + ";" + html.slice(j))
+      .replace(/<meta http-equiv="Content-Security-Policy"[^>]*>\n?/, "");
+    const fixture = path.join(dir, "frozen.html");
+    await writeFile(fixture, doctored);
+
+    await ensureBrowser();
+    const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+    const errors = [];
+    page.on("pageerror", e => errors.push(String(e.message)));
+    try {
+      await page.goto("file://" + fixture);
+      await page.waitForFunction(() => document.querySelectorAll(".row").length > 0, { timeout: 15000 });
+
+      // the era toggle is gone and the view pinned live — the post-flip reality
+      assert.equal(await page.evaluate(() => document.getElementById("eraseg")?.hidden ?? true), true,
+        "post-flip there is no era toggle");
+
+      // the forecast button is USABLE in the live view — the whole point of the lane —
+      // and says it is a record, not a computation
+      const pb = await page.evaluate(() => {
+        const b = document.querySelector(".projbtn");
+        return { disabled: b?.disabled, title: b?.title ?? "" };
+      });
+      assert.equal(pb.disabled, false, "the frozen forecast must be viewable in the live view");
+      assert.match(pb.title, /FROZEN pre-launch/, "the button must say it is the frozen record");
+
+      // select it: the column qualifier (.hqual — the anti-misattribution surface) must
+      // date the freeze, so a screenshot cannot read the record as a live opinion
+      await page.evaluate(() => { document.querySelector(".projbtn").click(); });
+      await page.waitForTimeout(200);
+      const qual = await page.evaluate(() =>
+        [...document.querySelectorAll(".head .hqual")].map(e => e.textContent).join(" | "));
+      assert.match(qual, /frozen 2026-08-11/, `the projection column must be dated as frozen, got: ${qual}`);
+
+      // the movers strip — a projection surface — is visible in the live view under FROZEN_FC
+      const movers = await page.evaluate(() => document.getElementById("movers")?.hidden ?? null);
+      if (movers != null) assert.equal(movers, false, "the movers strip must render for the frozen record");
+
+      // the ALWAYS-VISIBLE viewnote (the touch-legibility surface — title attributes do
+      // not exist on a phone) must describe the record as a record, never as a live
+      // computation. This was the review's finding #2: every other relabel landed, and
+      // the one surface everyone can see still said "live consensus blended with…".
+      const viewnote = await page.evaluate(() => document.getElementById("viewnote")?.textContent ?? "");
+      assert.match(viewnote, /FROZEN pre-launch 12\.1 forecast/, "the visible caption must name the record");
+      assert.doesNotMatch(viewnote, /live consensus blended/, "the visible caption must not describe a live computation");
+
+      // a drawer shows the frozen provenance line
+      await page.evaluate(() => document.querySelectorAll(".row.clickable")[0].click());
+      await page.waitForTimeout(400);
+      const drawer = await page.evaluate(() => document.querySelector(".row.open .projbreak")?.textContent ?? "");
+      assert.match(drawer, /FROZEN pre-launch record, declared 2026-08-11/,
+        "the drawer's forecast block must carry the declaration");
+
+      assert.deepEqual(errors, [], `page errors: ${errors.join(" | ")}`);
+    } finally { await page.close(); }
+  } finally { await rm(dir, { recursive: true, force: true }); }
+});

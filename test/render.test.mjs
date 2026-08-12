@@ -1606,3 +1606,52 @@ test("expert quorum is role-scoped: one creator moves a healer/tank letter, neve
   assert.equal(dps.parts.expertQuorum, false, "DPS still requires EXPERT_QUORUM creators");
   assert.equal(dps.tier, "A+", "one DPS voice cannot move a published letter");
 });
+
+/* ---- the frozen-forecast render lane (DECISION 2, 2026-08-12) --------------------- */
+
+test("frozenForecastActive: inert pre-flip, active in the grading window, stands down for the next cycle", async () => {
+  const { frozenForecastActive } = await import("../src/render.mjs");
+  const artifact = { kind: "frozen-forecast", phase: "12.1-ptr", date: "2026-08-11", cells: {} };
+
+  // pre-flip: the running phase is still the artifact's phase — live machinery renders
+  assert.equal(frozenForecastActive(artifact, { snapshotPhase: "12.1-ptr", ptr: { marker: "12.1 PTR", label: "12.1" } }), false);
+  // post-flip grading window: phase moved on, no new PTR cycle — the artifact IS the column
+  assert.equal(frozenForecastActive(artifact, { snapshotPhase: "12.1-s2", ptr: null }), true);
+  // next cycle opens: a 12.2 PTR exists, so live projections return — without this the
+  // 12.2 freeze would capture the OLD artifact's cells instead of the live forecasts
+  assert.equal(frozenForecastActive(artifact, { snapshotPhase: "12.1-s2", ptr: { marker: "12.2 PTR", label: "12.2 PTR" } }), false);
+  // never on garbage
+  assert.equal(frozenForecastActive(null, { snapshotPhase: "12.1-s2", ptr: null }), false);
+  assert.equal(frozenForecastActive({ kind: "snapshot", phase: "12.1-ptr" }, { snapshotPhase: "12.1-s2", ptr: null }), false);
+});
+
+test("applyFrozenForecast substitutes wholesale, stamps provenance, and never invents a forecast", async () => {
+  const { applyFrozenForecast } = await import("../src/render.mjs");
+  const artifact = { kind: "frozen-forecast", phase: "12.1-ptr", date: "2026-08-11", cells: {
+    "Rogue|Outlaw": {
+      raid: { tier: "A", score: 70, confidence: "medium", basis: "prior .55 · testing .45" },
+      mplus: null
+    }
+  } };
+  const specs = [
+    { class: "Rogue", spec: "Outlaw",
+      projection: { raid: { tier: "S", score: 95, basis: "live recomputation" }, mplus: { tier: "S", score: 95 } },
+      projMovement: { raid: { dir: 1 } } },
+    { class: "Mage", spec: "Fire",
+      projection: { raid: { tier: "B", score: 50 }, mplus: { tier: "B", score: 50 } } },
+  ];
+  applyFrozenForecast(specs, artifact);
+
+  // the covered spec renders the DECLARED cell, not the recomputation
+  assert.equal(specs[0].projection.raid.tier, "A");
+  assert.equal(specs[0].projection.raid.score, 70);
+  assert.equal(specs[0].projection.raid.frozen, true);
+  assert.match(specs[0].projection.raid.basis, /^Frozen pre-launch forecast, declared 2026-08-11 — /);
+  assert.match(specs[0].projection.raid.basis, /prior \.55/); // the original basis survives as the tail
+  // a bracket the artifact declined stays declined — no fresh number invented
+  assert.equal(specs[0].projection.mplus, null);
+  // a spec absent from the artifact loses its forecast entirely rather than showing a live one
+  assert.equal(specs[1].projection, null);
+  // movement of a frozen record is a category error
+  assert.equal("projMovement" in specs[0], false);
+});
