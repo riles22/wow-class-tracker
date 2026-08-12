@@ -1,0 +1,710 @@
+diff --git a/test/build.test.mjs b/test/build.test.mjs
+index a0bfd8b..f631c1b 100644
+--- a/test/build.test.mjs
++++ b/test/build.test.mjs
+@@ -105,6 +105,15 @@ test("every PTR metric-name key resolves against real data (2026-08-08)", async
+   const data = await loadData(ROOT);
+   const payload = buildPayload(data);
+   const names = payload.meta.ptrMetricNames;
++  /* Between cycles (PHASES.ptr null — post-flip, pre-12.2-thread) there is no marker to
++     derive keys from, and the honest payload value is null: the page has no PTR series
++     to look up, and shipping stale keys would be the exact drift this test exists to
++     catch. The resolution walk below reactivates by itself when the next cycle opens. */
++  const { PHASES } = await import("../src/normalize.mjs");
++  if (!PHASES.ptr) {
++    assert.equal(names, null, "no PTR phase → meta.ptrMetricNames must be null, not stale keys");
++    return;
++  }
+   assert.ok(names, "meta.ptrMetricNames must ship while a PTR phase exists");
+ 
+   const known = new Set();
+diff --git a/test/check-refresh.test.mjs b/test/check-refresh.test.mjs
+index 8a03413..4c2e7ec 100644
+--- a/test/check-refresh.test.mjs
++++ b/test/check-refresh.test.mjs
+@@ -620,10 +620,14 @@ test("checkValueMove covers sims and Dummy Dome, not just spec.metrics", () => {
+ 
+ /* ---- the one-shot launch flip (2026-08-02) ---- */
+ 
+-test("age gate: SNAPSHOT_PHASE still pre-launch past its due date is a violation", () => {
++test("age gate: the flip landed, so no SNAPSHOT_PHASE nag even past the due date", () => {
++  // Pre-flip this asserted the OPPOSITE: "12.1-ptr" past PHASE_FLIP_DUE was a violation.
++  // The 08-18 flip commit moved SNAPSHOT_PHASE off "12.1-ptr", and the gate tests the
++  // phase VALUE (pinned by regex below), so it is silent at any date from here on —
++  // flipping is the one action that may silence it, and it did.
+   const after = checkFreshness(config, goodManifest(), freshData(), "2026-08-25");
+-  assert.ok(after.violations.some(v => v.includes("SNAPSHOT_PHASE")), after.violations.join("\n"));
+-  assert.ok(after.fingerprint.includes("snapshot-phase"));
++  assert.ok(!after.violations.some(v => v.includes("SNAPSHOT_PHASE")), after.violations.join("\n"));
++  assert.ok(!after.fingerprint.includes("snapshot-phase"));
+ });
+ 
+ test("age gate: the flip is NOT nagged before its due date", () => {
+diff --git a/test/normalize.test.mjs b/test/normalize.test.mjs
+index 91329b1..3962c42 100644
+--- a/test/normalize.test.mjs
++++ b/test/normalize.test.mjs
+@@ -165,15 +165,17 @@ test("sourceSeasonOk is bracket-scoped — an M+ flip does not vouch for the rai
+ test("PHASES is the single era vocabulary and carries the current cycle", () => {
+   // Pinning today's values, so the launch flip is a deliberate edit that fails this
+   // test and updates it in the same commit — the same pattern as SNAPSHOT_PHASE.
+-  assert.equal(PHASES.liveSeason, "s1");
+-  assert.equal(PHASES.ptr?.marker, "12.1 PTR");
+-  /* label ≠ marker is the launch-day split: `label` (display) drops " PTR" the moment the
+-     patch ships (2026-08-11 ~22:00 UTC) while `marker` (data key — metric names, takeEra,
+-     PTR_METRIC_NAMES) is frozen for the cycle. This pin makes the label flip a deliberate
+-     one-line edit and guards the marker against being flipped along with it. */
+-  assert.equal(PHASES.ptr?.label, "12.1");   // flipped 2026-08-11 22:00 UTC — 12.1 shipped
++  assert.equal(PHASES.liveSeason, "s2");     // flipped 2026-08-18 — Season 2 is live
++  assert.equal(PHASES.liveLabel, "12.1");
++  /* Between cycles the ptr lane is NULL — no marker, no label — until the 12.2 thread
++     appears. The take/era machinery reads as closed (expertRead null, PTR_METRIC_NAMES
++     null) and the frozen forecast (B6) carries the pre-launch read through the window. */
++  assert.equal(PHASES.ptr, null);
+   assert.equal(PHASES.patchName, "Curse of Ula'tek");
+-  assert.equal(PHASES.ptrSunset, false);
++  /* DECISION 3 as amended 2026-08-12: the sunset happens AT the flip, so ptrSunset is
++     dead weight — the FIELD is deleted, not set false. Assert absence, so resurrecting
++     it is a deliberate edit that fails here first. */
++  assert.ok(!("ptrSunset" in PHASES), "ptrSunset was deleted at the flip (DECISION 3 amendment) — do not resurrect it");
+ });
+ 
+ /* ---- the season-ahead predicate + the frozen lane (2026-08-09) ---------------------
+diff --git a/test/render.test.mjs b/test/render.test.mjs
+index 0fb6089..77adc08 100644
+--- a/test/render.test.mjs
++++ b/test/render.test.mjs
+@@ -2,6 +2,19 @@ import { test } from "node:test";
+ import assert from "node:assert/strict";
+ import { readFile } from "node:fs/promises";
+ import { expertRead, EXPERT_MIN, dataHealth, fightLabels, metricRanks, outlookFor, movementFor, projectionMovementFor, snapshotStateOf, pickBaseline, dummyDomeScores, classifyHighlight, projectionFor, ptrTierRead, historySeries, specBuildChanges, PROJECTION_VERSION, RANK_VERSION, CONSENSUS_VERSION } from "../src/render.mjs";
++import { PHASES } from "../src/normalize.mjs";
++
++/* The specialist-take lane is keyed on the CURRENT cycle's marker (PHASES.ptr) and is
++   CLOSED between cycles: post-flip, ptr is null until the 12.2 thread appears, no take
++   can read as future-era, and expertRead returns null for ANY input — the frozen
++   forecast (B6) carries the pre-launch read through that window. The zone-56 M+ lookup
++   dies with it (PTR_METRIC_NAMES derives from the marker); the raid testing key is a
++   frozen data key and survives. Fixtures below derive their marker from PHASES so they
++   exercise the full machinery whenever a cycle is open, and pin the documented
++   closed-lane behaviour when it is not — the full assertions come back by themselves
++   the day a 12.2 marker lands in PHASES.ptr. */
++const CYCLE_OPEN = PHASES.ptr != null;
++const MARKER = PHASES.ptr?.marker ?? "12.1 PTR"; // fixture text; matches nothing while closed
+ 
+ /* Stamp a fixture snapshot as current-version. An UNSTAMPED snapshot means version 1 —
+    every snapshot written before the markers existed came from the v1 formulas — so a
+@@ -407,13 +420,15 @@ test("projectionFor: full-signal math is exact and transparent", () => {
+   // A neutral take: the expert lane is PRESENT (a signal since v8) but directionless,
+   // so the full-signal math below stays exactly the pre-take arithmetic.
+   const takes = [{ class: "X", spec: "Full", creator: "watcher", sentiment: "neutral",
+-    date: "2026-07-20", patchContext: "12.1 PTR" }];
++    date: "2026-07-20", patchContext: MARKER }];
+   const p = projectionFor(spec, "raid", PROJ_SCALES, notes, [], takes);
+   // emp = (100*2 + 90*1)/3 = 96.67; base = (.35*80 + .45*96.67)/.80 = 89.375;
+   // tally balance 3 → +10 (v9 scale), no nudge → 99.375 → 99
+   assert.equal(p.score, 99);
+   assert.equal(p.tier, "S");
+-  assert.equal(p.confidence, "high"); // testing + dummy + outlook + expert = 4 of 4 signals
++  // Cycle open: testing + dummy + outlook + expert = 4 of 4 signals. Closed: the take
++  // lane cannot be consulted, so the same fixture honestly reads 3 of 4.
++  assert.equal(p.confidence, CYCLE_OPEN ? "high" : "medium");
+   assert.match(p.basis, /live baseline 80/);
+   assert.match(p.basis, /raid-testing pct 100/);
+   assert.match(p.basis, /Dummy Dome 90/);
+@@ -484,7 +499,13 @@ test("projectionFor: M+ uses the role's own zone-56 series; shifts clamp to 0–
+     class:"X", spec:"T", role:"Tank",
+     metrics: [{ bracket:"mplus", name:"Median rDPS (12.1 PTR M+ testing, tank)", rank: 1, of: 6 }]
+   };
+-  assert.equal(projectionFor(tank, "mplus", PROJ_SCALES).score, 100); // top of the tank field
++  if (CYCLE_OPEN) {
++    assert.equal(projectionFor(tank, "mplus", PROJ_SCALES).score, 100); // top of the tank field
++  } else {
++    // Between cycles PTR_METRIC_NAMES is null, so no zone-56 series can be looked up: a
++    // spec whose ONLY input is a PTR M+ cut has nothing to project from — null, not a guess.
++    assert.equal(projectionFor(tank, "mplus", PROJ_SCALES), null);
++  }
+ });
+ 
+ const dd = (spec, targets, role = "DPS") => ({ class: "X", spec, role, ptrDummy: { source: "warcraftlogs", targets } });
+@@ -1003,28 +1024,33 @@ test("projectionFor: the bracket with no PTR list keeps its v2 math exactly", ()
+ test("confidence is a ratio against obtainable signals, not a raw count", () => {
+   const base = { class: "X", spec: "C", consensus: { mplus: { score: 60 }, raid: { score: 60 } } };
+   const tk = { class: "X", spec: "C", creator: "w", sentiment: "neutral",
+-    date: "2026-07-20", patchContext: "12.1 PTR" };
+-  // Healer M+: obtainable = testing + outlook + takes + PTR list = 4 (no Dummy Dome for healers).
++    date: "2026-07-20", patchContext: MARKER };
++  // Healer M+: obtainable = testing + outlook + takes + PTR list = 4 (no Dummy Dome for
++  // healers). Closed cycle: the zone-56 lookup and the take lane are both unreachable,
++  // so the same fixture presents outlook + PTR list = 2 of 4 — honestly "low".
+   const healerAll = projectionFor({
+     ...base, role: "Healer",
+     metrics: [{ bracket: "mplus", name: "Median HPS (12.1 PTR M+ testing)", rank: 1, of: 7 }],
+     outlook: { direction: "up" },
+     ratings: { mplus: { "icyveins-ptr": "A" } }
+   }, "mplus", PTR_PROJ_SCALES, [], PTR_SRC, [tk]);
+-  assert.equal(healerAll.confidence, "high", "everything obtainable for a healer → high");
++  assert.equal(healerAll.confidence, CYCLE_OPEN ? "high" : "low",
++    "everything obtainable for a healer → high (2 of 4 → low while the cycle is closed)");
+ 
+   // One signal of three obtainable must stay "low" — strictly more than half for medium.
+   const thin = projectionFor({ ...base, role: "Healer", outlook: { direction: "up" } },
+     "raid", PTR_PROJ_SCALES, [], PTR_SRC);
+   assert.equal(thin.confidence, "low", "1 of 3 obtainable is thin evidence, not medium");
+ 
+-  // DPS raid: obtainable = testing + outlook + takes + dummy = 4 (no PTR raid list exists).
++  // DPS raid: obtainable = testing + outlook + takes + dummy = 4 (no PTR raid list
++  // exists). The raid testing key is a frozen data key and survives the flip, so a
++  // closed cycle loses only the take slot: 3 of 4 → medium.
+   const dpsRaid = projectionFor({
+     ...base, role: "DPS",
+     metrics: [{ bracket: "raid", name: "12.1 PTR raid testing score (normalized)", rank: 1, of: 27 }],
+     ptrDummy: { score: 90 }, outlook: { direction: "up" }
+   }, "raid", PTR_PROJ_SCALES, [], PTR_SRC, [tk]);
+-  assert.equal(dpsRaid.confidence, "high"); // 4 of 4
++  assert.equal(dpsRaid.confidence, CYCLE_OPEN ? "high" : "medium"); // 4 of 4 (3 of 4 closed)
+ });
+ 
+ /* ---- classifyHighlight unanimity (PROJECTION_VERSION 4) ---- */
+@@ -1169,7 +1195,7 @@ test("nudge: a superseded or off-bracket read does not count toward the quorum",
+ /* ---------- v7: the specialist creator takes enter the model ---------- */
+ 
+ const TK = (creator, sentiment, date = "2026-07-20", extra = {}) =>
+-  ({ class: "X", spec: "E", creator, sentiment, date, patchContext: "12.1 PTR", ...extra });
++  ({ class: "X", spec: "E", creator, sentiment, date, patchContext: MARKER, ...extra });
+ const ESPEC = { class: "X", spec: "E" };
+ 
+ test("expertRead: corroboration outranks a single loud voice", () => {
+@@ -1180,6 +1206,12 @@ test("expertRead: corroboration outranks a single loud voice", () => {
+   const panel = expertRead(ESPEC, [
+     TK("a", "buff"), TK("b", "buff"), TK("c", "buff"), TK("d", "buff"), TK("e", "neutral")
+   ]);
++  if (!CYCLE_OPEN) {
++    // Closed lane: no take is future-era, so NO panel exists — not a weaker one.
++    assert.equal(lone, null);
++    assert.equal(panel, null);
++    return;
++  }
+   assert.equal(lone.raw, 1, "raw sentiment rates the lone voice highest");
+   assert.ok(panel.raw < lone.raw, "…and the panel lower, because one member abstained");
+   assert.ok(panel.shrunk > lone.shrunk, "shrunk, five creators outweigh one");
+@@ -1190,6 +1222,12 @@ test("expertRead: corroboration outranks a single loud voice", () => {
+ test("expertRead: one prolific creator is one vote, not eight", () => {
+   const prolific = expertRead(ESPEC, Array.from({ length: 8 }, () => TK("loud", "buff")));
+   const single = expertRead(ESPEC, [TK("loud", "buff")]);
++  if (!CYCLE_OPEN) {
++    // Closed lane: eight in-cycle takes are as inert as one — nothing is future-era.
++    assert.equal(prolific, null);
++    assert.equal(single, null);
++    return;
++  }
+   assert.equal(prolific.shrunk, single.shrunk, "averaging within creator first");
+   assert.equal(prolific.creators, 1);
+   assert.equal(prolific.takes, 8, "take count is still reported honestly");
+@@ -1201,7 +1239,9 @@ test("expertRead: superseded and live-era takes are excluded", () => {
+   assert.equal(expertRead(ESPEC, []), null, "no takes → no read, never a zero");
+   // A creator holding two opposing claims averages to zero rather than the newer winning:
+   // `superseded` is the curator's tool for retraction and code must not second-guess it.
+-  assert.equal(expertRead(ESPEC, [TK("k", "nerf", "2026-07-27"), TK("k", "buff", "2026-08-01")]).shrunk, 0);
++  const opposed = expertRead(ESPEC, [TK("k", "nerf", "2026-07-27"), TK("k", "buff", "2026-08-01")]);
++  if (CYCLE_OPEN) assert.equal(opposed.shrunk, 0);
++  else assert.equal(opposed, null); // closed lane: the pair is not read at all
+ });
+ 
+ test("outlookFor: experts set the direction only when no writeup exists", () => {
+@@ -1209,9 +1249,15 @@ test("outlookFor: experts set the direction only when no writeup exists", () =>
+     highlights: ["E X — All damage increased by 10%."] }] };     // tally says up
+   const bearish = [TK("a", "nerf"), TK("b", "nerf"), TK("c", "nerf")];
+   const noWriteup = outlookFor({ ...ESPEC, ptr: null }, builds, bearish);
+-  assert.equal(noWriteup.direction, "down", "the expert panel overrides a positive tally");
+-  assert.equal(noWriteup.source, "expert");
+-  assert.match(noWriteup.basis, /expert takes/);
++  if (CYCLE_OPEN) {
++    assert.equal(noWriteup.direction, "down", "the expert panel overrides a positive tally");
++    assert.equal(noWriteup.source, "expert");
++    assert.match(noWriteup.basis, /expert takes/);
++  } else {
++    // Closed lane: the panel is unreadable, so the ladder falls through to the tally.
++    assert.equal(noWriteup.direction, "up");
++    assert.equal(noWriteup.source, "tally");
++  }
+   const withWriteup = outlookFor({ ...ESPEC, ptr: { verdict: "Positive" } }, builds, bearish);
+   assert.equal(withWriteup.direction, "up", "a writeup still outranks the takes");
+   assert.equal(withWriteup.source, "verdict");
+@@ -1224,11 +1270,14 @@ test("outlookFor: a split or barely-there panel falls through to the tally", ()
+   assert.equal(split.source, "tally", "net zero is not a direction");
+   assert.equal(split.direction, "up");
+   // One creator, one buff → shrunk .33, comfortably over the floor; one creator whose own
+-  // claims mostly abstain lands under it and must not steer.
++  // claims mostly abstain lands under it and must not steer. (Closed lane: no read at
++  // all — the same fall-through, for the stronger reason.)
++  const weakRead = expertRead(ESPEC, [TK("a", "buff"), TK("a", "neutral"),
++    TK("a", "neutral"), TK("a", "neutral")]);
++  if (CYCLE_OPEN) assert.ok(Math.abs(weakRead.shrunk) < EXPERT_MIN);
++  else assert.equal(weakRead, null);
+   const weak = outlookFor({ ...ESPEC, ptr: null }, builds,
+     [TK("a", "buff"), TK("a", "neutral"), TK("a", "neutral"), TK("a", "neutral")]);
+-  assert.ok(Math.abs(expertRead(ESPEC, [TK("a", "buff"), TK("a", "neutral"),
+-    TK("a", "neutral"), TK("a", "neutral")]).shrunk) < EXPERT_MIN);
+   assert.equal(weak.source, "tally");
+ });
+ 
+@@ -1247,7 +1296,10 @@ test("projectionFor: the expert read either decides or adjusts, never both", ()
+   const decided = projectionFor(
+     { ...base, ptr: null, outlook: { direction: "up", source: "expert", buffs: 5, nerfs: 0 } },
+     "raid", PROJ_SCALES, [], [], panel);
+-  assert.equal(decided.score, 93, "base 89.375 + round(2 + 7*.25) = +4 → 93");
++  // Closed lane: the panel is silent, so the direction falls to the tally and its
++  // balance-5 magnitude (+10) applies instead of the panel-scaled +4.
++  assert.equal(decided.score, CYCLE_OPEN ? 93 : 99,
++    CYCLE_OPEN ? "base 89.375 + round(2 + 7*.25) = +4 → 93" : "base 89.375 + tally +10 → 99");
+   // Writeup present: the same lane only adjusts. Nine unanimous nerf creators →
+   // shrunk −(9/11) = −.818 → adj round(6·−.818) = −5; evidence 99 (S) − 5 = 94, still S —
+   // quorum permits ONE band crossing but the S floor is not breached here.
+@@ -1257,8 +1309,12 @@ test("projectionFor: the expert read either decides or adjusts, never both", ()
+       outlook: { direction: "up", source: "verdict", buffs: 5, nerfs: 0 } },
+     "raid", PROJ_SCALES, [], [], bearish);
+   assert.equal(adjusted.tier, "S", "the letter holds when the adjustment stays inside the band");
+-  assert.equal(adjusted.score, 94);
+-  assert.ok(adjusted.score < 99, "…but the score still moves, so ordering stays informative");
++  if (CYCLE_OPEN) {
++    assert.equal(adjusted.score, 94);
++    assert.ok(adjusted.score < 99, "…but the score still moves, so ordering stays informative");
++  } else {
++    assert.equal(adjusted.score, 99, "closed lane: nine nerf takes adjust nothing");
++  }
+ });
+ 
+ /* ---------- 2026-08-03 external audit: input validity, confidence, quorum ---------- */
+@@ -1298,13 +1354,17 @@ test("projectionFor: an outlook the model refused to apply is not counted as evi
+   // either. The model cannot decline to trust a read and cite it as evidence at once.
+   // A neutral take fills the expert slot so the band boundary still separates the two.
+   const tk = [{ class: "X", spec: "C", creator: "w", sentiment: "neutral",
+-    date: "2026-07-20", patchContext: "12.1 PTR" }];
++    date: "2026-07-20", patchContext: MARKER }];
+   const undated = projectionFor({ ...base, ptr: { verdict: "Negative" } }, "raid", PROJ_SCALES, [], [], tk);
+   const dated = projectionFor({ ...base, ptr: { verdict: "Negative", asOf: "2026-07-01" } }, "raid", PROJ_SCALES, [], [], tk);
+   assert.equal(undated.parts.signals, dated.parts.signals - 1,
+     "the dated verdict is evidence; the undated one the model ignored is not");
+   assert.ok(["low", "medium"].includes(undated.confidence));
+-  assert.notEqual(undated.confidence, dated.confidence);
++  if (CYCLE_OPEN) assert.notEqual(undated.confidence, dated.confidence);
++  // Closed lane: the neutral take cannot fill the expert slot, so both cells sit a
++  // signal lower and read "low" — the signals-off-by-one assertion above still carries
++  // the invariant; the band boundary just no longer separates the two tags.
++  else assert.equal(dated.confidence, "low");
+   assert.match(undated.basis, /outlook 0/, "and it applied nothing, as v5 requires");
+ });
+ 
+@@ -1349,6 +1409,13 @@ test("projectionFor: the biggest single publisher's effective share is disclosed
+   assert.ok(p.parts.topPublisherPct > method.pct * 2, "the twin publisher outweighs the single-product one");
+ });
+ 
++/* An "s2" page is AHEAD only while the live season sits below it on the declared
++   timeline — after the flip nothing outranks s2, so no live outlet can feed the
++   next-patch term at all (only era:"ptr" products can, until their 08-18 retirement).
++   The two fixtures below use this to keep exercising the perSource/publisher mechanics
++   in both states while asserting the term composition each state honestly has. */
++const S2_IS_AHEAD = PHASES.seasonOrder.indexOf("s2") > PHASES.seasonOrder.indexOf(PHASES.liveSeason);
++
+ test("projectionFor: the prior slice's divisor is the consensus perSource count, frozen contributors included", () => {
+   // THE A x B COMPOSITION REGRESSION. Deriving eligibility from the registry instead of
+   // from perSource divides the prior by the number of season-current sources, which
+@@ -1362,16 +1429,26 @@ test("projectionFor: the prior slice's divisor is the consensus perSource count,
+     { id: "icyveins", kind: "tier-list", name: "Icy Veins", scale: "icyveins", pages: [{ bracket: "raid", seasonVerified: "s1" }] },
+     { id: "wowhead", kind: "tier-list", name: "Wowhead", scale: "icyveins", pages: [{ bracket: "raid", seasonVerified: "s2" }] }
+   ];
+-  // Two contributors, one of them frozen: Wowhead takes half the prior slice AND all of
+-  // the next-patch term.
++  // Two contributors, one of them frozen: Wowhead takes half the prior slice AND (while
++  // its s2 pages are still ahead of the live season) all of the next-patch term.
+   const both = projectionFor(mkSpec([{ source: "icyveins" }, { source: "wowhead", lane: "frozen" }]),
+     "raid", PTR_PROJ_SCALES, [], sources);
+   // One contributor: Wowhead takes the WHOLE prior slice, so its share must be strictly higher.
+   const solo = projectionFor(mkSpec([{ source: "wowhead", lane: "frozen" }]),
+     "raid", PTR_PROJ_SCALES, [], sources);
+-  assert.equal(both.parts.topPublisher, "wowhead");
++  if (S2_IS_AHEAD) {
++    assert.equal(both.parts.topPublisher, "wowhead");
++  } else {
++    // Post-flip the s2 pages ARE the live season: no next-patch term exists, so the
++    // forecast is the prior slice alone and the two contributors split it evenly.
++    assert.equal(both.parts.ptrListCount, null, "nothing is ahead of the live season");
++    const w = both.parts.publisherShares.find(s => s.publisher === "wowhead");
++    const i = both.parts.publisherShares.find(s => s.publisher === "icyveins");
++    assert.equal(w.pct, i.pct, "an even perSource split divides the prior slice evenly");
++  }
+   assert.ok(solo.parts.topPublisherPct > both.parts.topPublisherPct,
+     "a smaller consensus concentrates the prior slice, and the disclosure must track it");
++  assert.equal(solo.parts.topPublisher, "wowhead", "the sole contributor holds the whole prior slice");
+   const shares = both.parts.publisherShares.reduce((n, s) => n + s.pct, 0);
+   assert.ok(Math.abs(shares - 100) < 0.5, `publisher shares must account for the whole forecast, got ${shares}`);
+ });
+@@ -1389,8 +1466,17 @@ test("projectionFor: the next-patch term is divided by PUBLISHER, not by source
+     { id: "wowhead", kind: "tier-list", name: "Wowhead", scale: "icyveins", pages: [{ bracket: "mplus", seasonVerified: "s2" }] }
+   ];
+   const p = projectionFor(spec, "mplus", PTR_PROJ_SCALES, [], sources);
+-  assert.equal(p.parts.ptrListCount, 2, "two publishers, not three sources");
+-  assert.deepEqual([...p.parts.ptrListPublishers].sort(), ["icyveins", "wowhead"]);
++  if (S2_IS_AHEAD) {
++    assert.equal(p.parts.ptrListCount, 2, "two publishers, not three sources");
++    assert.deepEqual([...p.parts.ptrListPublishers].sort(), ["icyveins", "wowhead"]);
++  } else {
++    // Post-flip the two live outlets' s2 pages describe the RUNNING season and re-enter
++    // the consensus; only the era:"ptr" product still occupies the next-patch term (its
++    // retirement is a separate 08-18 one-shot — see the runbook, B3). Still divided by
++    // publisher: one publisher, however many products.
++    assert.equal(p.parts.ptrListCount, 1, "only the era:'ptr' product remains next-patch");
++    assert.deepEqual(p.parts.ptrListPublishers, ["icyveins"]);
++  }
+ });
+ 
+ test("dummyDomeScores: tie-aware midranks, and thin cuts do not vote", () => {
+@@ -1421,10 +1507,21 @@ test("dummyDomeScores: tie-aware midranks, and thin cuts do not vote", () => {
+ 
+ test("expertRead: takes are bracket-scoped — explicit field first, then patchContext", () => {
+   const all = [
+-    TK("a", "nerf", "2026-07-20", { patchContext: "12.1 PTR — Season 2 M+ healer tier list" }),
+-    TK("b", "buff", "2026-07-20", { patchContext: "12.1 PTR — heroic raid week impressions" }),
+-    TK("c", "buff", "2026-07-20", { patchContext: "12.1 PTR — Season 2 main-choice review" })
++    TK("a", "nerf", "2026-07-20", { patchContext: `${MARKER} — Season 2 M+ healer tier list` }),
++    TK("b", "buff", "2026-07-20", { patchContext: `${MARKER} — heroic raid week impressions` }),
++    TK("c", "buff", "2026-07-20", { patchContext: `${MARKER} — Season 2 main-choice review` })
+   ];
++  const explicit = TK("d", "nerf", "2026-07-20", { patchContext: `${MARKER} — M+ tier list`, bracket: "raid" });
++  const both = TK("e", "buff", "2026-07-20", { patchContext: `${MARKER} — M+ rankings`, bracket: "both" });
++  if (!CYCLE_OPEN) {
++    // Closed lane: the era gate sits BEFORE bracket scoping, so no call reads anything —
++    // an explicit bracket field cannot resurrect an off-cycle take.
++    assert.equal(expertRead(ESPEC, all), null);
++    assert.equal(expertRead(ESPEC, all, "raid"), null);
++    assert.equal(expertRead(ESPEC, [explicit], "raid"), null);
++    assert.equal(expertRead(ESPEC, [both], "raid"), null);
++    return;
++  }
+   // Unscoped call (the whole-spec arrow): everyone is heard, as before.
+   assert.equal(expertRead(ESPEC, all).creators, 3);
+   // Bracket calls: the M+ tier-list read never reaches raid, and vice versa. A context
+@@ -1434,10 +1531,8 @@ test("expertRead: takes are bracket-scoped — explicit field first, then patchC
+   assert.ok(raid.shrunk > 0, "without the M+ nerf the raid read is positive");
+   assert.equal(expertRead(ESPEC, all, "mplus").creators, 2, "mplus = M+-scoped + unscoped");
+   // An explicit bracket field beats the text heuristic outright.
+-  const explicit = TK("d", "nerf", "2026-07-20", { patchContext: "12.1 PTR — M+ tier list", bracket: "raid" });
+   assert.equal(expertRead(ESPEC, [explicit], "raid").creators, 1);
+   assert.equal(expertRead(ESPEC, [explicit], "mplus"), null);
+-  const both = TK("e", "buff", "2026-07-20", { patchContext: "12.1 PTR — M+ rankings", bracket: "both" });
+   assert.equal(expertRead(ESPEC, [both], "raid").creators, 1, '"both" applies everywhere');
+ });
+ 
+@@ -1452,14 +1547,21 @@ test("projectionFor: an M+ tier-list read no longer moves the raid forecast", ()
+     outlook: { direction: "flat", source: "verdict", buffs: 0, nerfs: 0, builds: 1 }
+   };
+   const takes = [
+-    TK("a", "nerf", "2026-07-20", { patchContext: "12.1 PTR — Season 2 M+ healer tier list" }),
+-    TK("b", "nerf", "2026-07-21", { patchContext: "12.1 PTR — M+ healer rankings" }),
+-    TK("c", "nerf", "2026-07-22", { patchContext: "12.1 PTR — dungeon tier list" })
++    TK("a", "nerf", "2026-07-20", { patchContext: `${MARKER} — Season 2 M+ healer tier list` }),
++    TK("b", "nerf", "2026-07-21", { patchContext: `${MARKER} — M+ healer rankings` }),
++    TK("c", "nerf", "2026-07-22", { patchContext: `${MARKER} — dungeon tier list` })
+   ];
+   const raid = projectionFor(spec, "raid", PROJ_SCALES, [], [], takes);
+   const mplus = projectionFor(spec, "mplus", PROJ_SCALES, [], [], takes);
+   assert.equal(raid.parts.expertShrunk, null, "no raid-scoped takes → no raid panel");
+   assert.equal(raid.score, 90, "the raid score stays on its evidence");
++  if (!CYCLE_OPEN) {
++    // Closed lane: the M+ cell cannot hear them either — both brackets sit on evidence.
++    assert.equal(mplus.parts.expertShrunk, null);
++    assert.equal(mplus.score, 90);
++    assert.equal(mplus.tier, "S");
++    return;
++  }
+   assert.ok(mplus.parts.expertShrunk < 0, "the M+ cell still hears them");
+   assert.ok(mplus.score < 90);
+   // v9: three shrunk creators are a QUORUM and the letter is allowed to follow, disclosed
+@@ -1484,6 +1586,14 @@ test("projectionFor: a cell the expert lane moved can never read prior-only", ()
+     outlook: { direction: "up", source: "verdict", buffs: 0, nerfs: 0, builds: 1 }
+   };
+   const p = projectionFor(spec, "raid", PROJ_SCALES, [], [], [TK("a", "nerf"), TK("b", "nerf")]);
++  if (!CYCLE_OPEN) {
++    // Closed lane: NOTHING was consulted (the undated verdict is refused, the takes are
++    // unreadable), so this really is the prior — and "prior-only" is then the honest tag.
++    assert.equal(p.score, p.parts.prior);
++    assert.equal(p.confidence, "prior-only");
++    assert.equal(p.parts.signals, 0);
++    return;
++  }
+   assert.notEqual(p.score, p.parts.prior, "the panel moved the score");
+   assert.equal(p.confidence, "low", "…so the tag says evidence exists, not prior-only");
+   assert.equal(p.parts.signals, 1);
+@@ -1500,7 +1610,13 @@ test("projectionFor: when the expert panel drives, it is one signal, not two", (
+   const driven = projectionFor(spec, "raid", PROJ_SCALES, [], [],
+     [TK("a", "buff"), TK("b", "buff")]);
+   assert.equal(driven.parts.signals, 1);
+-  assert.match(driven.basis, /expert panel/);
++  if (CYCLE_OPEN) assert.match(driven.basis, /expert panel/);
++  else {
++    // Closed lane: the one signal is the (flat) tally outlook, not a panel — the panel
++    // cannot drive, and the basis must not claim it did.
++    assert.match(driven.basis, /outlook 0/);
++    assert.doesNotMatch(driven.basis, /expert panel/);
++  }
+ });
+ 
+ test("dummyDomeScores: a thin cut leaves everyone else's denominator", () => {
+@@ -1543,21 +1659,32 @@ test("expert quorum: three shrunk creators may cross ONE band edge — never two
+   // "expert quorum is role-scoped" further down; do not read this block as the guarantee.
+   // Two creators, unanimous: shrunk −.5 → adj −6 → 80, inside A+ — no quorum, floor 74 anyway.
+   const duo = projectionFor(spec, "raid", NUDGE_SCALES, [], [], [TK("a", "nerf"), TK("b", "nerf")]);
++  const low = { ...spec, consensus: { raid: { score: 75 } } };
++  const octet = ["a","b","c","d","e","f","g","h"].map(c => TK(c, "nerf"));
++  const crossed = projectionFor(low, "raid", NUDGE_SCALES, [], [], octet);
++  const floorSpec = { ...spec, consensus: { raid: { score: 74 } } };
++  const clamped = projectionFor(floorSpec, "raid", NUDGE_SCALES, [], [], octet);
++  if (!CYCLE_OPEN) {
++    // Closed lane: no panel of any size exists, so no adjustment and no crossing —
++    // every score IS its evidence score and every letter holds.
++    assert.equal(duo.score, 86);
++    assert.equal(duo.tier, "A+");
++    assert.equal(crossed.score, 75);
++    assert.equal(crossed.tier, "A+");
++    assert.doesNotMatch(crossed.basis, /expert quorum/);
++    assert.equal(clamped.score, 74);
++    return;
++  }
+   assert.equal(duo.tier, "A+", "two voices stay within-tier by construction");
+   assert.equal(duo.score, 80);
+   // Eight unanimous nerf creators: shrunk −.8 → adj −10. From 75 (A+ floor 74) that is
+   // 65 → A. One edge, disclosed.
+-  const low = { ...spec, consensus: { raid: { score: 75 } } };
+-  const octet = ["a","b","c","d","e","f","g","h"].map(c => TK(c, "nerf"));
+-  const crossed = projectionFor(low, "raid", NUDGE_SCALES, [], [], octet);
+   assert.equal(crossed.tier, "A", "quorum crosses the A+/A edge");
+   assert.equal(crossed.score, 65);
+   assert.match(crossed.basis, /expert quorum \(8 creators\) moved the letter A\+→A/);
+   // The SAME panel from a score just above a floor cannot skip TWO bands: 74 − 5 = 69
+   // would land in A regardless, but a hypothetical bigger adj is clamped at the band
+   // below's floor (58), never into B.
+-  const floorSpec = { ...spec, consensus: { raid: { score: 74 } } };
+-  const clamped = projectionFor(floorSpec, "raid", NUDGE_SCALES, [], [], octet);
+   assert.equal(clamped.tier, "A", "one edge at most");
+   assert.ok(clamped.score >= 58, "clamped inside the adjacent band, never beyond it");
+ });
+@@ -1574,8 +1701,16 @@ test("expert quorum: the meta nudge stays inside the band the expert term chose"
+     { class: "X", spec: "E", creator: "gc2", sentiment: "positive", date: "2026-07-29", bracket: "both" }
+   ];
+   const p = projectionFor(spec, "raid", NUDGE_SCALES, notes, [], octet);
+-  assert.equal(p.tier, "A");
+-  assert.equal(p.score, 68, "nudge applies inside A, never re-crosses the edge");
++  if (CYCLE_OPEN) {
++    assert.equal(p.tier, "A");
++    assert.equal(p.score, 68, "nudge applies inside A, never re-crosses the edge");
++  } else {
++    // Closed lane: no panel drags the score, so the evidence stays in A+ and the same
++    // corroborated nudge applies inside THAT band instead — the sequencing rule holds
++    // whichever band the expert term did (or could not) choose.
++    assert.equal(p.tier, "A+");
++    assert.equal(p.score, 78, "nudge applies inside the evidence band when no panel moved it");
++  }
+ });
+ 
+ /* v11 (2026-08-07, Riley): the quorum requirement is REMOVED for healers and tanks, so a
+@@ -1592,6 +1727,20 @@ test("expert quorum is role-scoped: one creator moves a healer/tank letter, neve
+     ptr: { verdict: "Mixed", asOf: "2026-07-01" } };
+   const solo = [TK("only-voice", "nerf")];
+ 
++  if (!CYCLE_OPEN) {
++    // Closed lane: the v11 exception has nothing to except — no role hears a take, so
++    // every letter holds on its evidence. The per-role rule is dormant, not repealed;
++    // it re-arms with the 12.2 marker.
++    for (const role of ["Healer", "Tank", "DPS"]) {
++      const p = projectionFor({ ...base, role }, "raid", NUDGE_SCALES, [], [], solo);
++      assert.equal(p.parts.expertCreators, null, `${role}: no readable take, no panel`);
++      assert.equal(p.parts.expertQuorum, false);
++      assert.equal(p.tier, "A+", `${role}: the evidence letter holds`);
++      assert.equal(p.score, 75);
++    }
++    return;
++  }
++
+   for (const role of ["Healer", "Tank"]) {
+     const p = projectionFor({ ...base, role }, "raid", NUDGE_SCALES, [], [], solo);
+     assert.equal(p.parts.expertCreators, 1);
+diff --git a/test/ui-invariants.test.mjs b/test/ui-invariants.test.mjs
+index 4cf9ec3..07ab178 100644
+--- a/test/ui-invariants.test.mjs
++++ b/test/ui-invariants.test.mjs
+@@ -121,7 +121,12 @@ const tiersOf = (page, cls, spec) => page.evaluate(([cls, spec]) => {
+ 
+ ui("every source view renders that source's OWN ratings", async page => {
+   const data = payload();
+-  const sources = data.sources.filter(s => s.kind === "tier-list").map(s => s.id);
++  // Post-flip (phases.ptr null) the era pin makes an era:"ptr" product unreachable by
++  // design — its option is disabled and any selection falls back to consensus, which is
++  // asserted in the PTR-list invariant below — so its own-letters check only applies
++  // while a PTR cycle is open.
++  const sources = data.sources.filter(s => s.kind === "tier-list" &&
++    (data.meta.phases.ptr || (s.era ?? "live") === "live")).map(s => s.id);
+   assert.ok(sources.length >= 3, "expected several tier-list sources");
+ 
+   let checked = 0;
+@@ -276,7 +281,11 @@ ui("a deep link restores view state and the named drawer", async page => {
+     inert: [...document.querySelectorAll(".row.open .drawer")].every(d => d.inert === false),
+   }));
+   assert.equal(s.src, "projection");
+-  assert.equal(s.era, "ptr");
++  // Post-flip there is no PTR era: the era param is an inert no-op (dropped, the rest
++  // of the link still applies — the same rule as a removed overlay's view=) and the
++  // view is pinned live; the projection view itself stays reachable through the
++  // frozen-forecast lane (B6), which is what keeps src=projection restorable at all.
++  assert.equal(s.era, payload().meta.phases.ptr ? "ptr" : "live");
+   assert.deepEqual(s.open, ["Destruction"]);
+   assert.ok(s.inert, "an open drawer must not be inert");
+ }, "#src=projection&era=ptr&role=DPS&spec=warlock-destruction");
+@@ -347,11 +356,18 @@ ui("the Into-12.1 movers strip is era-gated, ranked, and drills through", async
+   assert.equal(claimed, realSpecs, `summary says ${claimed} specs, real count is ${realSpecs}: "${summary.trim()}"`);
+   assert.ok(claimed <= data.specs.length, "a spec count can never exceed the roster");
+ 
+-  // a 12.0.7-only view has no forecast, so the strip must disappear
+-  await page.evaluate(() => document.querySelector('#eraseg button[data-era="live"]').click());
+-  await page.waitForTimeout(200);
+-  assert.equal(await page.evaluate(() => document.getElementById("movers").hidden), true,
+-    "the movers strip must be era-gated out of a 12.0.7-only view");
++  if (data.meta.frozenForecast) {
++    // B6: post-flip everything IS the live view and the frozen record renders in it —
++    // hiding the strip would hide exactly the record the report card grades.
++    assert.equal(await page.evaluate(() => document.getElementById("movers").hidden), false,
++      "the movers strip stays visible for the frozen record");
++  } else {
++    // a 12.0.7-only view has no forecast, so the strip must disappear
++    await page.evaluate(() => document.querySelector('#eraseg button[data-era="live"]').click());
++    await page.waitForTimeout(200);
++    assert.equal(await page.evaluate(() => document.getElementById("movers").hidden), true,
++      "the movers strip must be era-gated out of a 12.0.7-only view");
++  }
+ });
+ 
+ ui("a change-strip row drills through even when a filter is hiding that spec", async page => {
+@@ -567,6 +583,34 @@ ui("an era-gated PTR tier list shows its own 12.1 letters and is unreachable in
+   const subject = data.specs.find(s => s.ratings?.mplus?.[ptr.id] != null);
+   assert.ok(subject, "expected at least one spec rated by the PTR list");
+ 
++  if (!data.meta.phases.ptr) {
++    // Post-flip the era pin makes the PTR product unreachable EVERYWHERE (DECISION 3 as
++    // amended 2026-08-12: the sunset happens AT the flip — the receipts live on in the
++    // frozen basis strings and the immutable artifact, not as a pickable column).
++    // Selecting it must land somewhere honest, exactly like the old 12.0.7-only gate.
++    await pickSource(page, ptr.id);
++    await page.waitForTimeout(150);
++    const gate = await page.evaluate(id => ({
++      disabled: document.querySelector(`#srcsel option[value="${id}"]`).disabled,
++      pressedSource: document.querySelector('#srcseg button[aria-pressed="true"]')?.dataset.source ?? null,
++      selValue: document.getElementById("srcsel").value
++    }), ptr.id);
++    assert.equal(gate.disabled, true, "the PTR source OPTION is disabled post-flip");
++    assert.equal(gate.pressedSource, "consensus", "the view falls back to consensus, not a blank grid");
++    assert.equal(gate.selValue, "", "…and the select resets to its placeholder");
++    const [, mplusTier] = await tiersOf(page, subject.class, subject.spec);
++    assert.equal(mplusTier, subject.consensus.mplus.tier, "the grid shows the live consensus");
++    // The "N tier lists feed a computed consensus" blurb counts what ACTUALLY feeds it —
++    // mid-transition that is the season-current outlets only (DECISION 1: the consensus
++    // honestly shrinks), so derive the expectation from perSource, same as the page does.
++    const feeding = Math.max(0, ...data.specs.map(sp => Math.max(
++      sp.consensus?.raid?.perSource?.length ?? 0, sp.consensus?.mplus?.perSource?.length ?? 0)));
++    const words = ["No","One","Two","Three","Four","Five","Six","Seven","Eight","Nine"];
++    const shown = await page.evaluate(() => document.getElementById("tlcount")?.textContent ?? "");
++    assert.equal(shown, words[feeding], "the derived tier-list count matches the consensus composition");
++    return;
++  }
++
+   // 1. In the default (Both) era it behaves like any other source view: its OWN letters.
+   await pickSource(page, ptr.id);
+   await page.waitForTimeout(120);
+@@ -725,6 +769,18 @@ ui("Compare all distinguishes 'no such measurement' from 'not fetched', and era-
+   // 12.0.7-only view, not merely blank — same rule every other surface follows.
+   const cols = () => page.$$eval("table.alltab thead tr:first-child th", th => th.map(x => x.dataset.k || "nm"));
+   assert.ok((await cols()).includes("projection"), "the forecast column shows in the default (both) era");
++  const meta = payload().meta;
++  if (meta.frozenForecast) {
++    // B6: post-flip the default (and only) view IS live. The frozen forecast is the one
++    // projection surface exempt from the era gate — the PTR receipts still sunset with
++    // the flip (DECISION 3 as amended), so their columns must stay absent.
++    const live = await cols();
++    assert.ok(live.includes("projection"), "the FROZEN forecast column survives in the live view");
++    assert.ok(!live.includes("m:ptr"), "PTR testing ranks are sunset at the flip");
++    assert.ok(!live.some(k => k === "icyveins-ptr"), "the PTR tier list is sunset at the flip");
++    assert.ok(live.includes("consensus") && live.includes("icyveins"), "live-era columns remain");
++    return;
++  }
+   await page.click("#all-close");
+   await page.evaluate(() => document.querySelector('#eraseg button[data-era="live"]').click());
+   await page.click("#allbtn");
+@@ -797,7 +853,17 @@ ui("a spec with takes but no writeup says what IS known, not 'pending'", async p
+     row.click();
+     return row.querySelector(".d-summary")?.textContent ?? "";
+   }, [bare.class, bare.spec]);
+-  assert.match(text, /cited creator take/, "the slot points at the takes");
++  if (data.meta.phases.ptr) {
++    assert.match(text, /cited creator take/, "the slot points at the takes");
++  } else {
++    // Post-flip the writeup lane sunsets with the rest of the PTR surfaces (DECISION 3
++    // as amended): the drawer shows the live-season baseline slot instead. It must
++    // still never apologise with "pending" — that claim was false pre-flip and would
++    // be meaningless now.
++    assert.match(text, new RegExp(`${data.meta.phases.liveLabel.replace(/\./g, "\\.")} baseline view`),
++      "the slot names the live-season baseline");
++    assert.match(text, /Live-season data\./);
++  }
+   assert.doesNotMatch(text, /pending/i, "and never implies nothing is known");
+ });
+ 
+@@ -1048,6 +1114,10 @@ ui("a source's column qualifier names the season that source's letters describe"
+   }, id);
+ 
+   for (const src of data.sources.filter(s => s.kind === "tier-list")) {
++    // Post-flip an era:"ptr" product's option redirects to consensus (its column is
++    // sunset), so the qualifiers on screen would not be ITS column's — skip it here;
++    // the redirect itself is pinned in the PTR-list invariant.
++    if (!phases.ptr && (src.era ?? "live") !== "live") continue;
+     const quals = await qualsFor(src.id);
+     assert.equal(quals.length, 2, `${src.id}: expected a raid and an M+ qualifier`);
+     for (const [i, bracket] of ["raid", "mplus"].entries()) {
+@@ -1071,9 +1141,17 @@ ui("a source's column qualifier names the season that source's letters describe"
+     return [...document.querySelectorAll(".head .hqual")].map(e => e.textContent);
+   });
+   const nextLabel = labelOf(order[order.indexOf(phases.liveSeason) + 1]);
++  const ff = data.meta.frozenForecast;
+   for (const q of projQuals) {
+-    assert.match(q, /forecast$/, `the forecast column must say so, got "${q}"`);
+-    assert.ok(q.startsWith(nextLabel), `the forecast column names ${nextLabel}, got "${q}"`);
++    if (ff) {
++      // B6: the column is a RECORD, and the qualifier — the anti-misattribution
++      // surface — must date the freeze so a screenshot cannot read it as a live opinion.
++      assert.equal(q, `12.1 forecast — frozen ${ff.date}`,
++        `the frozen forecast column must be dated, got "${q}"`);
++    } else {
++      assert.match(q, /forecast$/, `the forecast column must say so, got "${q}"`);
++      assert.ok(q.startsWith(nextLabel), `the forecast column names ${nextLabel}, got "${q}"`);
++    }
+   }
+ });
+ 
+diff --git a/test/validate.test.mjs b/test/validate.test.mjs
+index 8fd38de..dcb1dc1 100644
+--- a/test/validate.test.mjs
++++ b/test/validate.test.mjs
+@@ -127,7 +127,14 @@ test("validateData enforces era↔name consistency, finite values, and metric un
+   assert.ok(errors.some(e => e.includes("finite non-negative")));
+   assert.ok(errors.some(e => e.includes("no PTR label")));
+   assert.ok(errors.some(e => e.includes("duplicate metric")));
+-  assert.ok(errors.some(e => e.includes('named 12.1 PTR but tagged era "live"')));
++  /* The marker→era check is keyed on PHASES.ptr.marker and dies with PHASES.ptr at the
++     phase flip — by design, documented at the guard in validate.mjs; the surviving
++     name-based rule ("PTR-named but carries no explicit era") covers the flip window.
++     Assert the marker check only while a cycle is open, with the marker it derives from. */
++  const { PHASES } = await import("../src/normalize.mjs");
++  if (PHASES.ptr) {
++    assert.ok(errors.some(e => e.includes(`named ${PHASES.ptr.marker} but tagged era "live"`)));
++  }
+ });
+ 
+ test("validateData checks encounter-tiers, specsAffected, draft provenance, and full roster", async () => {

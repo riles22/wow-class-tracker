@@ -132,17 +132,19 @@ not a data problem; the refresh agents escalated correctly through the 08-11 fli
   (escape/CSP/allowlist, freeze-equals-published-consensus, append-only refusal, build
   wiring). Flip-day duty is step 0 above only.
 
-- **Pre-stage the flip-day TEST PATCH** (review finding #1: the runbook's own step 9 is
-  currently unsatisfiable). Simulated at the exact flip state, `npm test` reds ~30 tests
-  across six files: ~19 render.test fixtures hardcode the "12.1 PTR" marker or assume
-  `PHASES.ptr` non-null, build.test's ptrMetricNames assert, four UI invariants that pin
-  the OLD era-gating behavior B6 deliberately changes (movers/Compare-all era-gated out of
-  the live view, the forecast qualifier text, the icyveins-ptr option redirect), plus the
-  deliberate vocabulary pins. Prepare a reviewed patch (parameterize fixtures on a passed
-  phase, guard ptrMetricNames on `PHASES.ptr`, make the era-pin invariants branch on
-  `payload().meta.frozenForecast`) so the flip commit lands green rather than being
-  rewritten under time pressure. Verification logs from the review live in the session
-  scratchpad (`runA-flip-b6.log`: 346/31 with B6, `runC-flip-nob6.log`: 340/33 without).
+- ✅ **Flip-day TEST PATCH — PRE-STAGED 2026-08-12** (`docs/s2-flip-test-patch.diff`;
+  verification log `docs/s2-flip-test-patch-verify.md`). Simulated at the exact flip
+  state (liveSeason "s2" · ptr null · `ptrSunset` deleted · SNAPSHOT_PHASE "12.1-live" ·
+  CONSENSUS_VERSION 4) the suite reds 30 tests across the six expected files
+  (render 19 · ui-invariants 7 — three more than predicted, same two root causes ·
+  build/check-refresh/normalize/validate 1 each). With the patch: **382 pass / 0 fail /
+  0 skipped** at the flip state, re-verified against HEAD after the season-archive lane
+  landed. Applied to the CURRENT tree it reds exactly the 2 deliberate flip-only pins
+  (normalize.test's PHASES vocabulary; check-refresh's age-gate) — every other change is
+  both-state-safe (fixtures derive their era markers from PHASES, so the 12.2 cycle
+  re-arms automatically), which is what keeps the pins making the flip deliberate.
+  Flip-day usage: `git apply docs/s2-flip-test-patch.diff` inside the flip commit; step
+  9's `npm test` then lands green.
 - ✅ **nightly.yml prompt softening — PREPARED 2026-08-12** (chosen with the Dependabot
   bundle): BOTH agent prompts (the primary's COMPLETION CONTRACT and the recovery's
   "do not finish until" line) now carry the same one-exception rule — a mass-movement
@@ -179,6 +181,9 @@ it with the 12.2 transition scope, not now.
   URLs + item-count fingerprints, so a live re-harvest fails until the pins are
   re-reviewed. Check the stat-priority guide pages' own season state at the source first.
   Soft window opens 08-18/19.
+  **Riley (2026-08-12): significant gearing updates are planned BEYOND the re-harvest** —
+  treat the gearing lane as a first-class pipeline item once the flip lands; scope to be
+  defined with Riley at kickoff rather than inferred.
 
 ## Deliberately left alone (checked 08-11, do not re-open without new evidence)
 

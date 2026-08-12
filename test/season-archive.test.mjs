@@ -121,9 +121,11 @@ test("freeze derives exactly what the live page publishes, and refuses to overwr
     // Append-only: a second run against the same path refuses.
     await assert.rejects(() => freezeSeasonArchive(ROOT, { out, today: "2026-08-12" }), /already exists/);
 
-    // The record renders — the full end-to-end lane the build will take.
+    // The record renders — the full end-to-end lane the build will take. Assert the
+    // archive's OWN season name, not a literal: this test must pass on both sides of
+    // a season flip (the freeze honestly derives whatever season the tree describes).
     const html = await renderSeasonArchive(archive, { root: ROOT });
-    assert.ok(html.includes("Season 1"), "rendered archive must name its season");
+    assert.ok(html.includes(archive.seasonName), "rendered archive must name its season");
   } finally {
     await rm(dir, { recursive: true, force: true });
   }
