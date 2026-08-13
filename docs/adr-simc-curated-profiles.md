@@ -1,6 +1,6 @@
 # ADR: Curated same-gear SimC profiles
 
-- Status: Accepted
+- Status: SUPERSEDED 2026-08-12 by `gearing-s2-scope.md` DECISION G3 — the curated-profile pipeline was removed from `gearing/` in Phase A. HISTORY: the body below is left byte-untouched on purpose (label externally, do not excise), because it holds the reproducibility record and the 2026-08-05 trinket-conditioning audit disclosure.
 - Date: 2026-08-04
 - Scope: `gearing/` conventional DPS reference weights
 

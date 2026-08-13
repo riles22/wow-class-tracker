@@ -182,10 +182,12 @@ it with the 12.2 transition scope, not now.
   re-reviewed. Check the stat-priority guide pages' own season state at the source first.
   Soft window opens 08-18/19.
   **SCOPED 2026-08-12 — see `docs/gearing-s2-scope.md`.** The re-harvest is now Phase E of
-  a four-decision overhaul, and Phase A (removing the SimC reference pipeline) is what
-  UN-PINS the six gear data files whose SHA-256 hashes currently make any re-harvest fail
-  the gearing build. Nothing gearing-side lands before the flip: gearing's tests run under
-  the root `npm test`, so a broken gearing breaks the nightly publish gate.
+  an EIGHT-decision overhaul (G1–G8), and Phase A (removing the SimC reference pipeline) is
+  what UN-PINS the six gear data files whose SHA-256 hashes made any re-harvest fail the
+  gearing build. Phase A is BUILT — authored 2026-08-12 on branch `gearing-phase-a`, where
+  the pin is gone — and deliberately NOT merged. Nothing gearing-side lands before the flip:
+  gearing's tests run under the root `npm test`, so a broken gearing breaks the nightly
+  publish gate.
 
 ## Deliberately left alone (checked 08-11, do not re-open without new evidence)
 

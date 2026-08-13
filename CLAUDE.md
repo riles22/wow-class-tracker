@@ -655,7 +655,7 @@ test/     normalize · validate · render · build · apply-metrics · apply-rat
           client JS — they need Playwright, which is deliberately not a dependency, so
           `npm test` SKIPS all 23 on a machine without it and CI runs them in its own job.
           NOTE: Riley's local checkout HAS playwright + chromium resolved, so `npm test`
-          there reports 363 pass / 0 skipped and really does execute them — do not read a
+          there reports 0 skipped and really does execute them — do not read a
           green local run as "the UI invariants were skipped". After any template.html
           change, run them for real:
           `npm i --no-save playwright@1.61.1 && npx playwright install chromium && npm test`)
@@ -684,20 +684,31 @@ docs/     working notes (finder-audit.md — HISTORY, the Spec Finder was remove
           s2-flip-runbook.md — the operational 08-18 flip checklist (execution mode:
           LOCAL RUN, chosen 2026-08-12); read it before touching anything flip-related.
           gearing-s2-scope.md — the SCOPED gearing overhaul (2026-08-12, eight owner
-          decisions G1-G8 locked): guide-consensus ranking replaces sim-derived weights, the
-          SimC reference pipeline is REMOVED from gearing (it also un-pins the six gear
-          data files blocking the re-harvest), three guide sources (Icy Veins + Wowhead
-          + Method) are harvested with SCOPED stat priorities (hero talent × bracket ×
-          fight profile), and the per-boss/dungeon "game plan" joins the ranked
-          candidates to the `droppedBy` field the client already carries and never
-          reads. Also: the healer model lane retires with SimC, `custom` weights survive
-          as a full override that must ANNOUNCE itself on ranked surfaces, one "Build"
-          selector replaces the two SimC-fed ones (the guides' scoping axes are ragged —
-          1 to 3 published priorities per spec — so a 2-axis grid would invent cells),
-          and trinket letter tiers stay per-source, which keeps trinkets deliberately
-          OUTSIDE the top-5 ranking. Phase A must not land before the 08-18 flip —
-          gearing's tests run under the root `npm test`, so a broken gearing breaks the
-          nightly publish gate.
+          decisions G1-G8 locked). PHASE A IS BUILT (2026-08-12, branch
+          `gearing-phase-a` — authored, NOT merged): the SimC reference pipeline and the
+          healer model lane are GONE from gearing (383 files / ~30 MB removed,
+          validate-data.mjs 1413 -> 595 lines, artifact 2,119,303 -> 1,725,125 bytes,
+          18.6% smaller), which also un-pinned the six gear data files that blocked the
+          re-harvest; the setup card collapsed to Specialization · Build · Scoring method,
+          and the `reference` scoring mode and the Encounter selector no longer exist.
+          `custom` weights survived as a full override that ANNOUNCES itself on ranked
+          surfaces. Still unbuilt (Phases B-E): guide-consensus ranking replacing the
+          sim-derived weights, three guide sources (Icy Veins + Wowhead + Method)
+          harvested with SCOPED stat priorities (hero talent × bracket × fight profile),
+          the per-boss/dungeon "game plan" joining the ranked candidates to the
+          `droppedBy` field the client already carries and never reads, and per-source
+          trinket letter tiers (the guides' scoping axes are ragged — 1 to 3 published
+          priorities per spec — so a 2-axis grid would invent cells; trinkets stay
+          deliberately OUTSIDE the top-5 ranking). Phase A must still not MERGE before
+          the 08-18 flip — gearing's tests run under the root `npm test`, so a broken
+          gearing breaks the nightly publish gate.
+          adr-simc-reference-pipeline.md + adr-simc-curated-profiles.md — HISTORY, both
+          SUPERSEDED 2026-08-12 by gearing-s2-scope.md G3 when Phase A removed the
+          pipeline. Their bodies are deliberately byte-untouched (same convention as
+          finder-audit.md — label externally, do not excise): they are the only surviving
+          account of how the deleted evidence was produced and bounded, including the
+          2026-08-05 trinket-conditioning audit disclosure. Read them for history only;
+          nothing they describe still runs.
           published-gate-scope.md — the page-self-date integrity gate (2026-08-04,
           both owner decisions locked; BUILT same day): deterministic published-evidence
           step + staleness threshold, severity split dishonesty-red/lag-heartbeat.

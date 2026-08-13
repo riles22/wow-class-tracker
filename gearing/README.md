@@ -2,7 +2,8 @@
 
 A self-contained subproject that builds `wow-s2-gearing.html`: an offline, single-file app
 for Midnight Season 2 (Curse of Ula'tek) gearing — best-per-slot rankings, loot sources,
-the full item-level ladder, and a SimC-paste upgrade check.
+the full item-level ladder, and a gear-export paste upgrade check (the `/simc` addon's
+gear export, parsed — it never runs a simulation or imports stat weights).
 
 Imported 2026-08-04 from the standalone "World of Warcraft" project. It has no npm
 dependencies and does not participate in the tracker's nightly pipeline (yet); harvests
@@ -50,115 +51,46 @@ node src/harvest-specs.mjs       # spec capabilities + stat priorities (reads ..
 node src/harvest-sheet.mjs       # Norumu community sheet, corroboration only
 node src/harvest-icons.mjs       # item icons, inlined base64
 node src/harvest-catalyst-allocations.mjs
-node src/run-simc-reference.mjs plan # read-only SimC coverage/run plan
 node src/validate-data.mjs       # cross-source validation gates
 node src/build.mjs               # -> wow-s2-gearing.html (fully offline)
-node --test test/project.test.mjs test/simc-runner.test.mjs test/simc-curator.test.mjs test/simc-curation-admission.test.mjs test/simc-unholy-admission.test.mjs
+node --test test/project.test.mjs
 ```
 
-From the repository root, the equivalent convenience commands are
-`npm run gearing:simc:plan`, `npm run gearing:simc:curate -- <prepare|seal> ...`,
-`npm run gearing:test`, and `npm run gearing:build`.
+From the repository root, the equivalent convenience commands are `npm run gearing:test`
+and `npm run gearing:build`. Run the tests after any harvest or data edit — gearing's
+tests also run under the root `npm test`, so a broken gearing breaks the tracker's
+nightly publish gate.
 
-## SimulationCraft reference weights
+## What ranks items (2026-08-12 — the SimC lane is gone)
 
-`data/simc-run-manifest.json` is the operational allowlist: it accounts for all 40 specs,
-owns profile/build/scenario IDs, and records accepted, pending, deferred, and unsupported
-coverage. `data/simc-reference-weights.json` is the accepted evidence ledger. Generic
-coefficients are normalized to the profile's primary stat and are only an equal-item-level
-secondary-fit heuristic; direct character and item simulations remain the stronger final
-gearing test.
+Phase A of `../docs/gearing-s2-scope.md` (owner decisions G1–G8) removed the
+SimulationCraft reference-weight pipeline and the dormant healer-model ledger from this
+subproject: 7 `src/` modules, 4 test files, 4 `data/` files and the 368-file
+`data/simc-audit/` tree — **383 files and ~30 MB** — are gone, `validate-data.mjs` went
+1,413 → 595 lines, and the built artifact shrank 2,119,303 → 1,725,125 bytes (**18.6%
+smaller**). Git history keeps every byte, and `../docs/adr-simc-reference-pipeline.md` +
+`../docs/adr-simc-curated-profiles.md` survive as the superseded design record — labeled
+HISTORY rather than excised, because they hold the reproducibility account and the
+2026-08-05 trinket-conditioning audit disclosure.
 
-The runner is manual, plan-first, and resumable. It never starts a simulation without an
-explicit `run`, and only `promote` can update committed evidence:
+Nothing here runs, imports or stores a simulation any more. Two ranking inputs survive:
 
-```text
-node src/run-simc-reference.mjs plan
-node src/run-simc-reference.mjs run --profile <profile-id> --scenario <scenario-id> --simc <path-to-simc> --profile-file <reviewed-profile.simc> [--iterations <n>]
-node src/run-simc-reference.mjs promote --profile <profile-id> --scenario <scenario-id>
-```
+- **Guide stat priorities** (`data/specs.json` `statPriority` / `statPriorityVariants`,
+  dated by `statPriorityPatch`, curated in `data/stat-priority-overrides.json`) — the
+  primary signal, and the only one that covers all 40 specs uniformly.
+  `GUIDE_MULTIPLIERS = [1, 0.75, 0.5, 0.25]` turns that published ORDER into fixed spacing
+  for sorting, and the UI says so in visible text.
+- **Custom decimal weights** — the reader's own numbers, and under G6 a FULL override:
+  whenever they are active every ranked surface says so in visible text
+  (`customOverrideNote()`), because switching modes silently changes what "rank 1" means.
 
-Curated same-gear profiles have a separate, auditable preparation and admission boundary:
+So `Scoring method` offers exactly two options — `Guide consensus` and `Custom decimal
+weights`. The old model-weight (`reference`) mode and the SimC-fed `Encounter` selector
+no longer exist; the setup card is **Specialization · Build · Scoring method**. Multi-source
+guide *consensus* itself (G1) is Phase C and is not built yet.
 
-```text
-node src/curate-simc-profiles.mjs prepare --simc <path> [--profile <profile-id>] [--work-dir <path>]
-node src/curate-simc-profiles.mjs seal --bundle <bundle.json>
-node src/admit-simc-curation.mjs admit --bundle <bundle.json> [--bundle <bundle.json>]
-node src/admit-unholy-evidence.mjs admit --evidence-root <reviewed-evidence-dir>
-```
-
-`SIMC_EXE` may replace `--simc`. The runner verifies the pinned executable and profile
-SHA-256 values, uses two deterministic independent seeds, checks the report build/settings,
-and rejects coefficient drift above the manifest threshold. Work stays in ignored
-`.simc-work/`; promotion retains gzip-compressed original reports in `data/simc-audit/`.
-The current verified simulator executable is explicitly pinned to Windows x64; the data
-and generated offline app remain portable, while unsupported runner platforms fail visibly.
-`--profile-file` supplies the reviewed input for a new profile and can be omitted when an
-accepted profile already has a retained audit copy.
-`--iterations` is a run-only resampling override. It must be at least the manifest minimum;
-when it is higher, that exact request is bound into the checkpoint and accepted record while
-the existing drift threshold remains unchanged. Use a fresh work directory to preserve an
-earlier sample campaign.
-For a new `ready` profile, each scenario promotion is staged until the full reviewed matrix
-exists; only then are its manifest status and visible coverage changed to `accepted`.
-Existing accepted evidence cannot be replaced unless `promote --force` is explicit.
-
-A logical guide profile may use `scenarioInputs[]` when the highest-DPS reviewed source
-build differs by encounter. These are exact manifest inputs, not generic target-count
-descriptions: each entry pins its materialized and upstream actors, generator and gear-plan
-hashes, talent provenance, profile bytes, simulator build, item database, Catalyst redirects,
-and whether actual tertiary ratings are present.
-The runner must place `ptr=1` and `item_db_source=local` before the profile path because
-SimC resolves imported items in command-line order.
-
-The first completed pilot adds Destruction Warlock. A 5,001-iteration same-gear comparison
-selected Hellcaller for raid single target (+3.80% over Diabolist) and Diabolist for sustained
-five-target AoE (+16.60% over Hellcaller). Both published coefficient records then passed
-two 25,000-iteration runs with maximum secondary-weight drift below 1.53%. The selected
-profiles model two Catalyst conversions through `redirected_base_stats`; their actual
-tertiary ratings are also retained, modeled, and audited.
-
-The 2026-08-04 conventional-DPS expansion now covers all 26 conventional DPS specs across
-30 accepted logical profiles and 60 accepted scenario records. 4 `official-output`
-profiles (8 records) cover Shadow Priest's two guide profiles, Destruction Warlock, and
-Unholy Death Knight. The remaining 23 specs use 26 explicitly labeled `curated-same-gear`
-profiles (52 records).
-
-The production curated cohort uses `midnight-s2-raid-catalyst-v2`: 44 reviewed candidate
-actor/APL pins, collision-free v2 profile and report IDs, exact SHA-pinned generator-derived
-gems and enchants, and deterministic Catalyst-aware gear plans. The earlier unenhanced v1
-artifacts were withdrawn and are not accepted production evidence. All 52 curated scenario
-inputs honestly declare no positive tertiary ratings; Destruction and Unholy retain their
-actual modeled tertiaries. 13 tank and healer specs remain deferred to role-appropriate
-objectives, and Augmentation remains the 1 unsupported spec for personal-DPS scale factors.
-See `../docs/adr-simc-curated-profiles.md` for the provenance decision and its boundaries.
-
-## Healer reference rankings
-
-`data/healer-reference-rankings.json` is a provider-neutral evidence ledger for healer
-throughput gearing. It is deliberately separate from SimulationCraft: healer entries can
-remain honestly SimC-deferred while a role-appropriate model supplies Raid or Mythic+
-reference rankings through the same in-app gear cards and Catalyst comparison views.
-
-Questionably Epic is the first candidate provider, but no model result is accepted yet.
-The ledger records all seven healer specs as pending while provider permission, a versioned
-export contract, and 12.1 Catalyst fixtures are unresolved. The public app therefore keeps
-using its dated guide-order fallback; it does not call QE Live at runtime, scrape undocumented
-report endpoints, or bundle the provider's unlicensed source.
-
-Future accepted records must pin their provider/model version, profile, scenario, assumptions,
-provenance, and exactly one scoring basis. Secondary-weight records remain equal-item-level
-fit heuristics. Item-score records may represent nonlinear effects, but v1 admits only an
-explicit list of known item IDs; it rejects unverified claims that the candidate pool is
-complete. It also pins item scores to an equal-item-level, fixed-reference-set comparison and
-describes Catalyst use as retained item contribution rather than reusing an unexplained
-character snapshot. Exact model scores and guide-fallback values are displayed and sorted
-separately, never compared as though they share a numeric scale. In every case the tracker's
-own item catalog remains authoritative for inherited Catalyst secondaries, tertiaries,
-sockets, bonus IDs, and cantrip effects.
-
-Before running a newly curated profile, run `npm run gearing:test` from the repository root.
-Long SimC batches are intentionally not part of the nightly tracker pipeline.
+The `/simc` **addon paste** in the Upgrade checker is untouched and stays — it is a
+gear-export parser, not a simulator.
 
 ## Ground rules (carried over from the standalone project)
 
@@ -168,12 +100,19 @@ Long SimC batches are intentionally not part of the nightly tracker pipeline.
   not scraped** — their provenance headers say exactly where each fact came from.
 - Harvesters refuse to overwrite data on unexplained loot-set changes
   (`WOW_ACCEPT_LOOT_CHANGES=1` after review).
-- Guide-order priorities remain dated fallback metadata and are labeled as such. All 26
-  conventional DPS specs have accepted 12.1 PTR SimC reference coefficients; tanks retain
-  their deferred role-specific fallback states, while healers also have a separate pending
-  throughput-model ledger that publishes no coefficients until its admission gates pass.
-- SimC reference coverage is separate from the root MID1 nightly DPS metric and never feeds
-  tracker tier grades or the 12.1 projection model.
+- **Guide priorities are the PRIMARY ranking signal, not a fallback** (reworded 2026-08-12
+  under G1, when the model lane they used to fall back *from* was removed). They stay dated,
+  they name the guide they came from, and they stay an ORDER: any spacing used to sort
+  within one is a labeled sorting device, never a numeric stat weight — the guides
+  deliberately publish no weights, so inventing one would be inventing a fact.
+- **Different quantities never share a scale.** Consensus count, equal-item-level secondary
+  fit and item-level delta are three different things: display and sort them as three
+  things, never summed into one number and never compared as though they share a numeric
+  axis. (Generalized 2026-08-12 from the same rule about model scores vs guide values.)
+- **The gearing lane is firewalled from the tracker's own layers.** Nothing under
+  `gearing/` feeds tracker tier grades, the source consensus or the 12.1 projection model,
+  and the tracker's own MID1 sim metrics (Bloodmallet, the SimC nightly) are a separate
+  lane that never feeds gearing.
 - `_retired-wallpapers/` holds the superseded static wallpaper deliverables this project
   grew out of.
 

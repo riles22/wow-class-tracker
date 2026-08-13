@@ -1,6 +1,6 @@
 # ADR: SimC reference-weight pipeline
 
-- Status: Accepted
+- Status: SUPERSEDED 2026-08-12 by `gearing-s2-scope.md` DECISION G3 — the pipeline was removed from `gearing/` in Phase A. HISTORY: the body below is left byte-untouched on purpose (the repo's convention for a superseded decision is to label externally, not excise), because it is the only remaining account of how the deleted evidence was produced and bounded.
 - Date: 2026-08-04
 - Scope: `gearing/` only
 

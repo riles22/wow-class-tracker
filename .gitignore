@@ -23,9 +23,8 @@ transcript-fetch/
 # clean-tree precheck, and a stale one reds the --manifest freshness guard.
 published-evidence/
 
-# resumable local SimulationCraft runs; accepted evidence is promoted to gearing/data/simc-audit/
+# Legacy scratch from the SimulationCraft reference pipeline, removed 2026-08-12
+# (docs/gearing-s2-scope.md G3). The directory is local-only and can be deleted by hand;
+# it stays ignored so a 205MB leftover cannot trip the local run's clean-tree precheck
+# or be committed by accident.
 gearing/.simc-work/
-# withPromotionLock creates <path>.promotion.lock beside EVERY target it locks — the run
-# manifest as well as the weights file (run-simc-reference.mjs) — and a hard crash can
-# leave either behind; ignore the pattern, not one instance.
-gearing/data/*.promotion.lock

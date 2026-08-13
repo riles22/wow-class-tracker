@@ -1,6 +1,9 @@
 # Gearing Season-2 overhaul — scope
 
-**Status:** SCOPED 2026-08-12. Eight owner decisions locked inline (⚑ G1–G8). Nothing built yet.
+**Status:** SCOPED 2026-08-12; eight owner decisions locked inline (⚑ G1–G8). **Phase A is
+BUILT** — authored the same day on branch `gearing-phase-a`, NOT merged (nothing gearing-side
+lands before the 08-18 flip). Phases B–E unbuilt. The "What exists today" section below is the
+PRE-Phase-A baseline, pinned to commit `427d869`, and is deliberately left as measured.
 Supersedes the gearing bullets in `docs/s2-transition-scope.md` (DECISION 4's phase C) as the
 authoritative plan for the gearing lane; that document remains authoritative for the tracker's
 own Season-2 transition.
@@ -111,7 +114,9 @@ silently summed into one score.
 Deleted: 7 modules in `gearing/src` (~4,553 lines), 4 test files (~2,027 lines), ~600 lines of
 `validate-data.mjs`, and `gearing/data/simc-audit/` (**30 MB, 368 committed files**, ~94% of
 `gearing/data/`). The built page loses 363,767 inlined JSON bytes — **17.2% of the 2,119,303-byte
-artifact**. Git history keeps every byte.
+artifact**. Git history keeps every byte. *(Measured on landing: 383 files and ~30 MB removed,
+`validate-data.mjs` 1,413 → 595 lines, artifact 2,119,303 → 1,725,125 bytes = 394,178 bytes and
+18.6%, slightly more than projected because the inlined blob was not the only shrinkage.)*
 
 Three consequences to handle deliberately:
 1. **It unblocks the re-harvest.** `validate-curation-sources.mjs:38-70` SHA-256-pins the raw bytes
@@ -123,6 +128,14 @@ Three consequences to handle deliberately:
 3. **`test/project.test.mjs` imports the SimC modules at top level** (`:12-13`), so removing them
    without editing it kills that whole file (18 further tests), and its hard coverage asserts
    (`:331-395`, e.g. `deferredHealers === 7`) must go with it.
+
+**One consequence that supersedes an earlier owner direction** (recorded 2026-08-12, during
+Phase A): both trinket surfaces used to lead with *"still waiting on trinket sims"* (owner
+direction 2026-08-05). Removing the sim lane makes that a promise the project can no longer keep —
+you cannot wait for a sim you have deleted the machinery to run. Both surfaces now lead with the
+reason that stays true and needs no future sim: the value is in the effect, and this page does not
+score effects. Pinned on both surfaces by test so they cannot drift apart; the G8 per-source letter
+tiers that will eventually rank trinkets are Phase C work.
 
 **Out of scope of this removal, deliberately:** the `/simc` **addon paste** in the Upgrade checker
 is a gear-export parser, not a simulator ("it does not run a damage simulation or import stat
@@ -149,11 +162,20 @@ Sequencing constraint: **gearing's tests run under the root `npm test`**, so a b
 breaks the nightly publish gate. Phase A may be authored now but **must not land before the
 08-18 flip** — keep flip week quiet.
 
-**Phase A — SimC removal and unblock** (land after the flip). Delete the pipeline per G3 and the
-healer lane per G5; collapse the setup card to Specialization · Build · Scoring method per G7;
-excise the six-file hash pin; repair `project.test.mjs`; delete both ADRs' operative sections
-(keep them as history) and the ~15 README references. Verify: root `npm test` green, gearing
-builds, artifact shrinks ~17%, `url(http…)` count in the built HTML still zero.
+**Phase A — SimC removal and unblock** (BUILT 2026-08-12 on `gearing-phase-a`; merges after the
+flip). Delete the pipeline per G3 and the healer lane per G5; collapse the setup card to
+Specialization · Build · Scoring method per G7; excise the six-file hash pin; repair
+`project.test.mjs`; rewrite the ~15 README references. Verify: root `npm test` green, gearing
+builds, artifact shrinks (measured 18.6%), `url(http…)` count in the built HTML still zero.
+
+**Amended in execution — the two ADRs were NOT excised.** Deleting the operative sections of
+`adr-simc-reference-pipeline.md` and `adr-simc-curated-profiles.md` would have destroyed the
+reproducibility record and the 2026-08-05 **trinket-conditioning audit disclosure** — the only
+surviving account of what the deleted evidence actually measured and what it was conditioned on.
+This repo's convention for a superseded document is to **label externally, not excise**
+(precedent: `finder-audit.md`, whose body was never edited — its HISTORY status lives in
+CLAUDE.md's docs inventory). So each ADR's `Status:` line now records the supersession by G3 and
+both bodies are byte-untouched, with both files listed as HISTORY in CLAUDE.md's docs inventory.
 
 **Phase B — the guide harvest layer.** Three new harvesters (Icy Veins / Wowhead / Method)
 producing a per-spec, per-slot candidate set with source attribution and per-source dates. Harvest

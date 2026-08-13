@@ -66,39 +66,11 @@ The tracker also renders its OWN computed 12.1 forecast (projection lane). It is
 | **Murlok.io** | Avg M+ rating of each spec's top-50 players | "top-50 ceiling" — NOT popularity, NOT a tier |
 | **Bloodmallet (SimC, tier MID1)** | Best-build DPS at 1/2/3/5/8/15 targets | powers ST/Cleave/AoE fight profiles (DPS only; Augmentation unsimmable) |
 | **SimulationCraft nightly** | Best hero-variant Patchwerk DPS per DPS spec from the engine-official MID1_Raid report (daily) | pure ST, fixed profile — a sim baseline next to Bloodmallet, never a tier |
-| **SimulationCraft MID2 reference profiles** (`gearing/` only) | Repeated-run secondary-stat scale factors for the highest-DPS reviewed source build in each supported encounter | local gearing heuristic, never a tier or cross-spec DPS metric; scenario-specific actors, Catalyst stat redirects, reports, and hashes are retained |
 | **Robydoby PTR raid sheets** (Google Sheets, public CSV) | Per-spec 99th-pct raw DPS + HPS from curated WCL zone-54 testing parses, newest Venomous Abyss week (separate DPS & Healer sheets) | community-curated top-end percentile; DPS + healer specs; **best-effort — deliberately NOT in the refresh contract** (`required-sources.json`), so a volunteer sheet going quiet never reddens a night; **credit Robydoby with a visible link wherever used** (the sheets ask for it) |
 | **WoWMeta** | `lowerBound` — the 95% CI lower bound of a spec's MEAN official Blizzard M+ rating across ALL logged players | population-wide MEAN, sample-size-penalised — **not a ceiling** (Murlok is the ceiling) and not popularity. Fetch the JSON API (`data.wowmeta.com`), never the HTML: the page is a stale prerender and its letters cluster on player count. |
 | **Mythicstats** | Representation % in the top 2000 keys per weekly period | true meta-share (the axis Murlok's fixed-50 sample can't measure); JS-heavy → r.jina.ai |
 
 Every metric gets a computed within-role **rank** (#n/of) at build time.
-
-The MID2 scale-factor ledger and its curated run manifest live under `gearing/data/` and
-do not participate in the root nightly refresh. Scale factors are local derivatives around
-a reference character, so the gearing app falls back visibly when no accepted matching
-record exists and still recommends direct character/item simulations for final decisions.
-When official profiles expose multiple hero builds, a bounded same-gear baseline comparison
-selects the source actor separately for single target and five-target AoE before scale factors
-are run. Each `scenarioInputs[]` entry is the exact reviewed scenario input, not a generic
-target-count description. Selection does not compare specs and does not feed tracker tier
-grades.
-
-Provenance is explicit. Existing Shadow and Destruction evidence, plus the resolved Unholy
-admission, use `official-output`. The other 23 conventional DPS specs use 26
-`curated-same-gear` profiles derived from pinned official actors and APL generators with
-reviewed talents and a deterministic, Catalyst-aware gear plan. Retained profiles, selection
-reports, gear/generator hashes, Catalyst redirects, and actual tertiary ratings are audited;
-commented drafts are never mislabeled as official outputs. Curated admission prepares the
-campaign, but coefficient records are accepted only after repeated scale runs pass promotion.
-Tanks and healers remain deferred to role-appropriate objectives, and Augmentation remains
-unsupported for personal-DPS scale factors.
-
-Healer gearing has a separate provider-neutral ledger under `gearing/data/`. Questionably
-Epic is the first candidate model, but it currently contributes no accepted production
-records: provider permission, a versioned export contract, and 12.1 Catalyst carry-over
-fixtures are required first. Any future admitted results remain local gearing guidance,
-never a spec-strength metric or tier input, and the tracker item catalog stays authoritative
-for inherited secondaries, tertiaries, sockets, bonus IDs, and cantrip effects.
 
 ## 3 · Per-fight tiers → the Fight selector
 
@@ -160,12 +132,13 @@ shown in each drawer's Source ratings box.
   not a spec-strength axis — deliberately not a tier column.
 - **Raidbots** — run-your-own-sims tool; no public per-spec aggregates (re-verified).
   Linked as a Tools row in every spec drawer.
-- **QE Live** — Voulk's client-side healer gear evaluator and the candidate provider for
-  the gearing app's separate healer-reference ledger. Its public source and undocumented
-  shared-report endpoints are inspectable, but the repository has no detected reuse license
-  or supported integration contract; no automated ingestion or bundled engine is active.
-  The ledger stays pending until permission, versioning, and 12.1 Catalyst fixtures pass.
-  Its blog also publishes dated Midnight healer articles. Voulk himself is a creator entry
+- **QE Live** — Voulk's client-side healer gear evaluator. Its public source and
+  undocumented shared-report endpoints are inspectable, but the repository has no detected
+  reuse license or supported integration contract; no automated ingestion or bundled engine
+  is active, and none is planned: the gearing app's separate healer-reference ledger that
+  would have consumed it was retired 2026-08-12 with the rest of the gearing sim lane
+  (`docs/gearing-s2-scope.md` G5), so this is a reference link only. Its blog also
+  publishes dated Midnight healer articles. Voulk himself is a creator entry
   (Wowhead Healing Expert — Prevoker/Resto Druid).
 - **u.gg/wow** — mirror of Archon.
 
