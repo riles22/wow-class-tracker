@@ -2030,3 +2030,75 @@ NOT re-fetched (CI did them today); the manifest was deliberately left alone (pa
   retrying videos that likely have nothing to fetch. Worth a rule (`noCaptionsAt` marker, or a
   cap on retries per id) if the pattern holds — not changed here, since queue policy is not a
   data run's call.
+## 2026-08-13 (b) — Tactyks scope widened to Blood DK + Vengeance (owner-approved)
+
+Riley approved widening Tactyks' scope after the 08-13 local run flagged him as a
+multi-tank authority registered on only two tank specs.
+
+- **The justification changed on inspection, and the log should record why.** The local run
+  cited a passage in `r4VxP_NNBFM` (mythic dungeon world tour) as "Tactyks giving a real read
+  on Blood DK and Vengeance". Re-checked: that stretch is a **two-way co-stream conversation**
+  and the caption track does not reliably mark speaker turns, so the Blood DK / Vengeance
+  proc-rate analysis cannot be attributed to him rather than his guest. **It was not used.**
+  The real basis is `TaJvkmzeJ_8` — "SEASON 2 TANK RANKINGS AND TIERLIST FOR RAID AND MYTHIC+"
+  (2026-08-09), a 24-minute solo tier list that ranks **every** tank spec in both brackets.
+  Single speaker, no attribution ambiguity.
+- **That video was deliberately RE-OPENED.** It is already in the seen-set (cited by his 08-09
+  Protection Paladin takes) — on 08-09 only Prot Paladin could be distilled from it, because
+  that was his entire scope at the time. The positive reason to re-open is the scope change
+  itself, per the skill's re-open rule.
+- **Two raid takes added, both firewalled to raid** (he authors the Method M+ list registered
+  in `sources.json`, so his M+ half stays out):
+  - **Blood DK** (buff, raid) — top of his raid list, and the placement he says he is most
+    willing to stand behind. Immortal and gained only DR/durability into S2; the S1 "pitiful"
+    single-target damage is fixed; unique grips (Gorefiend's, Abomination's Limb) plus AMZ.
+    Expects at least one in most top S2 raid comps, possibly two purely for grips.
+  - **Vengeance DH** (nerf, raid) — bottom of his raid list, B tier with Brewmaster, defined
+    as "only bring these if you need the raid buff". Structural reason: its damage is tied to
+    its defensives, so output and survival trade against each other, worst early in the tier.
+    Havoc and Devourer both competitive, so the DH buff need not cost the tank slot.
+- **Measured effect before landing (real `buildPayload` pipeline), 2 cells:**
+  - `Death Knight|Blood|raid` **A/73/low → A+/75/medium — a published LETTER moves.**
+  - `Demon Hunter|Vengeance|raid` C/39/low → C/37/low.
+  The letter move is the **v11 tank exception working as designed**: `quorumNeeded` is 1 for
+  Healer/Tank, so a single creator's shrunk read (×0.33) may cross exactly one band edge. This
+  is the documented cost of that decision — Blood DK's published raid letter now rests on one
+  creator — so it is recorded here explicitly rather than landing quietly.
+
+### ⚠ Finding raised for a human, NOT acted on
+
+**The M+ firewall is being violated for Protection Paladin.** His Paladin credential says
+RAID SCOPE ONLY because he authors the Method M+ tier list already in the consensus — yet two
+**live** M+ Prot Paladin takes exist (`TaJvkmzeJ_8?t=538` 08-09, `C0HuvxhvNnA?t=404` 08-10),
+so he is counted once in the consensus and again in the expert lane. Measured: honouring the
+firewall moves `Paladin|Protection|mplus` from B/56/high to B/55/high — 1 cell, no letter
+change, so the double-count is small but real and currently understates nothing dramatic.
+Separately, `npm run audit:creators` flags a supersede defect on the same creator: his 08-09
+and 08-10 Prot Paladin takes are both live in **both** brackets, where the newer should have
+retired the older. Both are curation calls, left for Riley.
+
+### Correction to the 2026-08-13 (a) entry — a measurement error of mine
+
+The (a) entry's closing note claimed the specialist take lane "appears inert", citing 0 of 80
+cells changing when all takes are removed. **That was wrong, and it was my test harness, not
+the tracker.** I called `projectionFor` directly on raw `data/specs.json`; but `spec.outlook`
+is attached by `buildPayload` (render.mjs ~1849, `outlookFor`) *before* `projections()` runs,
+and line 1093 reads `const expert = outlook ? expertRead(spec, takes, bracket) : null` — with
+no `outlook` on the object, `expert` is null, `expertAdj` is 0, and the whole expert lane is
+silently disabled. Undecorated specs therefore make the lane look dead.
+
+Measured correctly through `buildPayload`: **removing all specialist takes changes 69 of 80
+cells**, including letter moves (Holy Paladin M+ A+→S, Assassination raid C→B) and many
+confidence downgrades. The lane is load-bearing.
+
+Two consequences for the (a) entry as written:
+- **"Closes the raid gap" was right, and understated.** `Paladin|Retribution|raid` went
+  B/43/**low** → B/41/**medium** — the confidence upgrade is precisely the new raid panel
+  being counted as a signal. The run moved **6 cells**, not the 1 reported: Havoc raid and
+  M+ (+1 each), Marksmanship raid (+1), Retribution raid and M+, Discipline M+ (−1).
+- **The Arcane Mage metaNote flagged as a "judgment call with a measurable published effect"
+  had NO published effect.** Real numbers: A/73/medium with and without it — identical tier,
+  score and confidence. The only change is the basis string losing its `meta read +3` clause,
+  because the bounded terms were already capped at the A band edge. The reported "82.0 → 79.0"
+  came from the same broken harness. The curation judgment still stands on its merits; the
+  alarm about it moving a published number does not.
