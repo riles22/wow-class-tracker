@@ -175,6 +175,27 @@ button:hover{background:#241740}
       white-space:nowrap;text-align:right}
 .src{grid-column:3/5;font-size:12px;color:var(--t3);white-space:normal}
 .fit{display:inline-block;margin-left:7px;color:var(--myth);font-weight:800}
+/* ---- the columns that ride under a ranked row and never reorder it ----
+   Guide picks (G9), attainable item level (G16) and Archon usage (G13) are three DIFFERENT
+   quantities, so they get three cells and never one blended number. Each cell carries its
+   own visible micro-label: this project measured that 262 of its parent page's 288 tooltips
+   sit where a touch reader can never reach them, so a title= is not an explanation. The
+   strip is a fixed-template grid, so the cells line up down a card and read as columns. */
+.rowcols{grid-column:3/5;display:grid;grid-template-columns:minmax(0,150px) minmax(0,168px) minmax(0,1fr);
+  gap:5px 16px;margin-top:6px;align-items:start}
+.rowcol{min-width:0}
+.rowcol .lab{display:block;font-size:10px;letter-spacing:.7px;text-transform:uppercase;
+  color:var(--t4);font-weight:800}
+.rowcol .val{display:block;font-size:12.5px;color:var(--t2);line-height:1.45}
+.rowcol .val b{font-family:var(--mono);color:var(--t1)}
+.rowcol .who{color:var(--t3);font-size:11.5px}
+.rowcol .pend{color:var(--t4);font-style:italic}
+.rowcol.picks .val b{color:var(--myth)}
+/* G8: per-source letter tiers, side by side, never merged into one grade. */
+.letters{display:flex;flex-wrap:wrap;gap:6px;margin-top:5px}
+.letter{font-size:11.5px;color:var(--t3);border:1px solid var(--line);border-radius:6px;padding:2px 7px}
+.letter b{font-family:var(--mono);font-size:12.5px;color:var(--myth);margin-left:3px}
+.cap{color:var(--hero);font-size:.92em;white-space:nowrap}
 .fx{display:block;font-size:12.5px;color:var(--t3);margin-top:5px;line-height:1.5;font-weight:450}
 .fx b{color:var(--hero);font-weight:600}
 .empty{font-size:14px;color:var(--t3);padding:10px 0}
@@ -288,8 +309,9 @@ table.paths tr:hover td{background:rgba(255,255,255,.03)}
   .rank{grid-column:1}
   .row>.ico{grid-column:2}
   .nm{grid-column:3}
-  .meta,.src{grid-column:3;text-align:left;justify-self:start;white-space:normal}
+  .meta,.src,.rowcols{grid-column:3;text-align:left;justify-self:start;white-space:normal}
   .meta{margin-top:4px}
+  .rowcols{grid-template-columns:repeat(2,minmax(0,1fr));gap:5px 12px}
   .ceils{grid-template-columns:repeat(2,minmax(0,1fr))}
   #tip{max-width:calc(100vw - 24px)}
 }
@@ -423,6 +445,18 @@ const TIER = DB.tier || {sets:[]}, CATALYST = DB.catalyst || {setBonusSlots:[]};
 const STAT_ALLOCATIONS = DB.catalystAllocations || {items:{}};
 const ITEM_ELIGIBILITY = DB.itemEligibility || {items:{}};
 const ICONS = DB.icons || {};
+/* ---------- the guide layer (Phase C — docs/gearing-s2-scope.md G8–G17) ----------
+   Three harvested datasets ride alongside the item data, and ALL THREE SHIP EMPTY.
+   THE PENDING STATE IS THE SHIPPING STATE, not a test convenience: no guide can honestly be
+   harvested until Season 2 opens on 2026-08-18, because every source is mid-transition and a
+   harvest now would capture PTR-era picks wearing a Season-2 label. So every surface below
+   has to be correct AND honest with `status: "pending"`, and has to fill itself when a
+   harvest lands without a further code change. Hydrated defensively, exactly like the reads
+   above: a missing key reads as pending rather than throwing. */
+const GUIDE_PICKS = DB.guidePicks || {status: 'pending'};
+const GUIDE_PRIORITIES = DB.guidePriorities || {status: 'pending'};
+const ARCHON_USAGE = DB.archonUsage || {status: 'pending'};
+const isPending = doc => !doc || doc.status === 'pending';
 const icoTag = it => it.icon && ICONS[it.icon]
   ? '<img class="ico" alt="" src="data:image/jpeg;base64,' + ICONS[it.icon] + '">'
   : '<span class="ico noico"></span>';
@@ -464,6 +498,87 @@ const GEAR = ITEMS.filter(i => i.slot && (i.kind === 'mplus' || (i.ilvl && i.ilv
 const TOKENS = ITEMS.filter(i => (i.classes && i.classes.length)
   || (i.tokenSlot === 'omni' && !i.slot && i.ilvl > 100));
 const MPLUS_KEYS = DUNG ? DUNG.keyLevels : [];
+
+/* ---------- the Phase-C contract, mirrored from src/lib-guides.mjs ----------
+   These functions decide what "rank 1" means, and there must be exactly ONE opinion about
+   that. They are tested against recorded fixtures on the harvest side, so the client must
+   not grow a second copy of the rules — but this page is a single self-contained file with
+   no module loader, so the only way to run them here is to carry them.
+
+   MIRROR RULE: everything between the BEGIN/END markers is byte-identical to
+   src/lib-guides.mjs, with the `export` keyword removed and nothing else changed.
+   gearing/test/ranking-client.test.mjs re-extracts the same spans from the library and fails
+   if a single character drifts. So: fix a bug in lib-guides.mjs and re-copy. Never here.  */
+/* THE SHARED GUIDE CONTRACT, injected verbatim from src/lib-guides.mjs at build time
+   (src/inline-guides.mjs). Not a copy: the placeholder below is substituted, so the ordering
+   rules G15, the consensus counting G9/G10 and the default-build choice G17 have exactly one
+   definition and cannot drift. Edit lib-guides.mjs, never this. */
+__LIB_GUIDES__
+
+/* ---------- reading the guide layer ----------
+   Which record belongs to the selected spec. The three files are written by different
+   harvesters and key their specs differently — the guide layer by a "<Spec> <Class>" map,
+   Archon by an array of {class, spec} records — so the lookup accepts both shapes rather
+   than asserting one. A shape mismatch would otherwise read as "no data", which is the one
+   failure this layer must never fake: silence has to mean nothing was harvested. */
+function recordForSpec(container, spec) {
+  if (!container || !spec) return null;
+  if (Array.isArray(container))
+    return container.filter(r => r && r.spec === spec.spec && r.class === spec.class)[0] || null;
+  for (const key of [spec.spec + ' ' + spec.class, spec.class + '|' + spec.spec, spec.class + ' ' + spec.spec])
+    if (container[key]) return container[key];
+  return null;
+}
+
+/* An outlet's display name comes from the file that named it; an unknown id prints as
+   itself rather than as a guess. */
+const guideSourceLabel = (doc, id) => (doc && doc.sources && doc.sources[id]
+  && (doc.sources[id].label || doc.sources[id].name)) || String(id);
+const guideSourceLabels = (doc, ids) =>
+  (ids || []).map(id => guideSourceLabel(doc, id)).join(' · ');
+
+/* G9/G10 inputs: every endorsement this spec's guides published, as
+   {source, bracket, slot, itemId, endorsement}. Empty while pending — which makes
+   consensusForItem return two zero counts and leaves rankCandidates ordering on stat fit
+   alone, so the pending state needs no special case anywhere downstream. */
+function guidePicksFor(spec) {
+  if (isPending(GUIDE_PICKS)) return [];
+  const record = recordForSpec(GUIDE_PICKS.specs, spec);
+  return (record && record.picks) || [];
+}
+function consensusFor(it) {
+  return consensusForItem(guidePicksFor(CUR), it);
+}
+const anyGuidePicks = () => !isPending(GUIDE_PICKS) && guidePicksFor(CUR).length > 0;
+
+/* G8: the letter tiers the two outlets publish for trinkets. Returned per source and never
+   merged — the scales are not the same scale — which is also why trinkets stay outside the
+   ranking entirely. */
+function trinketTiersFor(it) {
+  if (isPending(GUIDE_PICKS)) return [];
+  const record = recordForSpec(GUIDE_PICKS.specs, CUR);
+  return ((record && record.trinketTiers) || [])
+    .filter(row => String(row.itemId) === String(it.id) && row.tier)
+    .map(row => ({source: row.source, label: guideSourceLabel(GUIDE_PICKS, row.source), tier: row.tier}))
+    .sort((a, b) => String(a.label).localeCompare(String(b.label)));
+}
+
+/* G13: usage is a different QUANTITY from a recommendation — what top logged players wear,
+   contaminated by drop rates, catch-up gear and week-one availability. It is read here,
+   displayed in its own labeled column, and reaches no comparator on this page. The lookup is
+   keyed by the item's own bracket, the same rule G10 uses for votes, because Archon publishes
+   a raid cut and an M+ cut and they disagree. */
+function usageFor(it) {
+  if (isPending(ARCHON_USAGE)) return null;
+  const record = recordForSpec(ARCHON_USAGE.specs, CUR);
+  const cut = record && record.brackets && record.brackets[bracketOfItem(it)];
+  if (!cut) return null;
+  for (const slot of (cut.slots || []))
+    for (const row of (slot.items || []))
+      if (String(row.itemId) === String(it.id) && row.usagePct > 0)
+        return {pct: row.usagePct, sample: cut.sampleDescription || null, asOf: cut.lastUpdated || null};
+  return null;
+}
 
 /* ---------- scoring -------------------------------------------------------
    Two inputs only, since the SimC reference lane was removed 2026-08-12
@@ -568,9 +683,24 @@ function scoreItem(spec, it) {
   return stats.length ? stats.reduce((sum, stat) => sum + (weights[stat] || 0), 0) / stats.length : 0;
 }
 
-function compareItems(spec, a, b) {
-  return scoreItem(spec, b) - scoreItem(spec, a) || a.name.localeCompare(b.name);
+/* ---------- ordering (G15) ----------
+   Every ranked list on this page goes through rankCandidates above, and supplies it exactly
+   two things: the item's guide consensus and its stat fit. `fit` is whatever the ACTIVE
+   scoring method produced, which is how custom weights stay a full override (G6) without the
+   ordering rules knowing they exist. Item level is deliberately absent: G16 makes it a
+   column, never an ordering term. Archon usage is absent for the same reason under G13.
+   While the harvest is pending every consensus is two zeros, so this reduces exactly to the
+   equal-item-level stat-fit sort this page has always done. */
+function rankedCandidates(list) {
+  return rankCandidates(list.map(it =>
+    ({item: it, consensus: consensusFor(it), fit: scoreItem(CUR, it)})));
 }
+
+/* The gold "best" marker means TIED BEST SECONDARY FIT and says so on the page, so it stays
+   a fit question even when consensus moves an item above it. Under G15 rank 1 and best fit
+   are no longer always the same row, and conflating them would silently relabel the marker. */
+const bestByFit = list => (list || []).reduce((best, it) =>
+  !best || scoreItem(CUR, it) > scoreItem(CUR, best) ? it : best, null);
 
 function sameRecommendationScore(spec, a, b) {
   if (!a || !b) return false;
@@ -603,25 +733,102 @@ let CUR = null, MYGEAR = {};
 
 const find = v => SPECS.specs.filter(s => s.class + '|' + s.spec === v)[0];
 
+/* ---------- the Build list (G12 / G17) ----------
+   The four secondary stats are the only ones this page can score, but a guide's published
+   order often leads with Item Level or a primary stat and that is REAL published information.
+   So the order is kept whole for display and filtered only where it feeds the scorer. */
+const GUIDE_STAT_KEYS = {crit: 'Crit', haste: 'Haste', mastery: 'Mast', versatility: 'Vers'};
+/* A soft cap names its stat the way the guide wrote it ("Critical Strike to 40%"), so it is
+   matched onto our key by substring rather than by table lookup. A cap that matches nothing
+   is NOT dropped — it is published data — it is printed verbatim after the order. */
+const CAP_STAT_KEYS = [['crit', 'Crit'], ['haste', 'Haste'], ['master', 'Mast'], ['vers', 'Vers']];
+const capStatKey = cap => {
+  const stat = String((cap && cap.stat) || '').toLowerCase();
+  for (const [needle, key] of CAP_STAT_KEYS) if (stat.indexOf(needle) >= 0) return key;
+  return null;
+};
+
+function normalizeGuideBuild(build, fallbackSource) {
+  const source = build.source || fallbackSource || 'guide';
+  const caps = build.softCaps || [];
+  const published = build.stats || build.order || [];
+  const order = published.length
+    // The harvester's own shape, where the cap already rides on its stat.
+    ? published.map(stat => ({
+        key: GUIDE_STAT_KEYS[String(stat.key).toLowerCase()] || null,
+        label: stat.label || stat.key, softCap: stat.softCap || null}))
+    : (build.secondaries || []).map(key => ({key: key, label: STAT_LABELS[key] || key,
+        softCap: caps.filter(cap => capStatKey(cap) === key)[0] || null}));
+  const placed = new Set(order.map(entry => entry.softCap).filter(Boolean));
+  const label = build.label || build.name || 'General';
+  const hero = build.heroTalent;
+  return {
+    // G12's implementation note: two outlets can publish the same variant NAME, so the option
+    // is keyed by a synthetic id and never by the label.
+    id: build.id || buildId(source, label),
+    source: source, sourceLabel: guideSourceLabel(GUIDE_PRIORITIES, source),
+    name: label,
+    heroTalent: hero && typeof hero === 'object' ? (hero.name || hero.slug || null) : (hero || null),
+    bracket: build.bracket || null, fightProfile: build.fightProfile || null,
+    note: build.note || null, patch: build.patch || null, published: build.published || null,
+    order: order,
+    unplacedCaps: caps.filter(cap => !placed.has(cap)),
+    secondaries: order.map(entry => entry.key).filter(Boolean)
+  };
+}
+
+function guideBuildsFor(spec) {
+  if (isPending(GUIDE_PRIORITIES)) return [];
+  const record = recordForSpec(GUIDE_PRIORITIES.specs, spec);
+  return ((record && record.builds) || []).map(build => normalizeGuideBuild(build, record.source));
+}
+
 function buildsFor(spec) {
+  // Harvested: the UNION across sources, every published variant kept and labeled (G12).
+  const guides = guideBuildsFor(spec);
+  if (guides.length) return guides;
+  /* Pending: exactly today's behaviour off specs.json's own variants. `id` mirrors `name`
+     so the selector speaks one vocabulary in both states and activeBuild needs no branch. */
   const variants = (spec && spec.statPriorityVariants) || [];
-  if (variants.length) return variants;
+  if (variants.length) return variants.map(v => Object.assign({id: v.name}, v));
   return spec && spec.statPriority
-    ? [{name: 'General', secondaries: spec.statPriority.secondaries}]
+    ? [{id: 'General', name: 'General', secondaries: spec.statPriority.secondaries}]
     : [];
 }
+
+const buildOptionLabel = p => p.sourceLabel ? p.name + ' — ' + p.sourceLabel : p.name;
 
 function activeBuild() {
   const profiles = buildsFor(CUR);
   const selected = $('#build').value;
-  return profiles.filter(p => p.name === selected)[0] || profiles[0] || null;
+  return profiles.filter(p => p.id === selected)[0] || defaultBuildFor(profiles) || null;
 }
 
 function activePriority() {
   const profile = activeBuild();
   return CUR && CUR.statPriority && profile
-    ? {primary: CUR.statPriority.primary, secondaries: profile.secondaries}
+    ? {primary: CUR.statPriority.primary, secondaries: profile.secondaries,
+       order: profile.order || null, unplacedCaps: profile.unplacedCaps || []}
     : CUR && CUR.statPriority;
+}
+
+/* The published order exactly as published — a leading Item Level survives, and so does any
+   soft cap the guide stated. A percentage cap and a RATING cap are different quantities, so
+   the unit the harvester parsed is printed rather than assumed. */
+const capText = cap => '<span class="cap">to ' + esc(cap.value)
+  + (cap.unit === '%' ? '%' : ' ' + esc(cap.unit || 'rating')) + '</span>';
+
+function priorityText(priority) {
+  const order = (priority && priority.order) || null;
+  if (!order || !order.length)
+    return ((priority && priority.secondaries) || []).map(esc).join(' &gt; ');
+  const unplaced = (priority.unplacedCaps || []).map(cap =>
+    ' &middot; <span class="cap">' + esc(cap.text || (cap.stat + ' ' + cap.value)) + '</span>').join('');
+  return order.map(entry => {
+    const cap = entry.softCap;
+    const name = cap && cap.stat ? cap.stat : (STAT_LABELS[entry.key] || entry.label);
+    return esc(name) + (cap ? ' ' + capText(cap) : '');
+  }).join(' &gt; ') + unplaced;
 }
 
 function initBuilds() {
@@ -630,8 +837,8 @@ function initBuilds() {
   const profiles = buildsFor(CUR);
   profiles.forEach(p => {
     const o = document.createElement('option');
-    o.value = p.name;
-    o.textContent = p.name;
+    o.value = p.id;
+    o.textContent = buildOptionLabel(p);
     sel.appendChild(o);
   });
   if (!profiles.length) {
@@ -639,6 +846,9 @@ function initBuilds() {
     o.textContent = 'No sourced profile';
     sel.appendChild(o);
   }
+  // G17: default to a scoping more than one source publishes, else the first published one.
+  const preferred = defaultBuildFor(profiles);
+  if (preferred) sel.value = preferred.id;
   sel.disabled = profiles.length < 2;
 }
 
@@ -716,7 +926,7 @@ function specLine() {
      it is still the spec's sourced order, just not in use. */
   const overridden = customModeSelected() && !!customWeights();
   bits.push(p ? 'Primary: <b>' + esc(p.primary) + '</b> &middot; Guide order'
-              + (overridden ? ' (not in use)' : '') + ': ' + p.secondaries.map(esc).join(' &gt; ')
+              + (overridden ? ' (not in use)' : '') + ': ' + priorityText(p)
               : 'no stat priority sourced');
   $('#spec-info').innerHTML = bits.join(' &middot; ');
 }
@@ -755,9 +965,101 @@ function renderScoringControls() {
    surfaces themselves — a reader who lands on a card must see WHY it is ordered the way it
    is. Visible text, never a title= (a tooltip does not exist on touch). */
 function customOverrideNote() {
-  return customModeSelected() && customWeights()
-    ? '<div class="sub-note"><b>Ordered by your custom weights</b>, not by the guide stat order.</div>'
-    : '';
+  if (!(customModeSelected() && customWeights())) return '';
+  /* The second clause only appears once a harvest has landed, because only then is there a
+     guide-pick band for the custom numbers to sort WITHIN. Saying it while pending would
+     describe machinery the reader cannot see working. */
+  return '<div class="sub-note"><b>Ordered by your custom weights</b>, not by the guide stat order.'
+    + (anyGuidePicks() ? ' Items a guide picked still sit above the rest; your numbers order everything else '
+      + 'and decide the order inside each group.' : '') + '</div>';
+}
+
+/* ---------- the columns that never reorder anything ----------
+   Attainable item level (G16), Archon usage (G13) and the two guide counts (G9) are three
+   different quantities and get three cells; none of them is reachable from rankCandidates.
+   Each cell carries its own visible label rather than a title=, because a tooltip does not
+   exist on a phone — the rule this project adopted after measuring that 262 of its parent
+   page's 288 tooltips sat inside a grid no touch reader can hover. */
+function ilvlCell(it) {
+  const steps = it.kind === 'mplus' ? mplusLadder() : raidLadder(it.boss);
+  const top = steps.reduce((best, step) =>
+    !best || (step.ilvl || 0) > (best.ilvl || 0) ? step : best, null);
+  /* Two absences render the same way and both are honest: M+ items carry no item level of
+     their own (the key sets it, so the key ladder answers instead), and a direct-tier item
+     reaches no modeled ladder at all. Neither prints a number the data does not hold. */
+  return '<span class="rowcol"><span class="lab">Max item level</span><span class="val">'
+    + (top && top.ilvl
+      ? '<b>' + top.ilvl + '</b> <span class="who">' + esc(top.need) + '</span>'
+      : '<span class="pend">not modeled for this source</span>')
+    + '</span></span>';
+}
+
+function usageCell(it) {
+  const usage = usageFor(it);
+  if (usage) return '<span class="rowcol"><span class="lab">Worn by (Archon)</span><span class="val"><b>'
+    + esc(usage.pct) + '%</b>' + (usage.sample ? '<span class="who">' + esc(usage.sample) + '</span>' : '')
+    + '</span></span>';
+  /* G14: while the lane is pending the column says PENDING rather than going blank or
+     disappearing — a blank cell reads as "nobody wears this", and a hidden column cannot be
+     asked why it is missing. The recorded reason is printed verbatim once per panel by
+     archonColumnNote(); this is the per-row half of the same statement. */
+  return '<span class="rowcol"><span class="lab">Worn by (Archon)</span>'
+    + '<span class="val pend">pending &mdash; see note</span></span>';
+}
+
+/* G9: two counts that never sum and never average, each naming who cast it. There are at
+   most three guides, so the names fit — and "2 guides pick this" without saying which two is
+   most of the way to a number with no provenance. */
+function consensusCell(it, consensus) {
+  const cons = consensus || consensusFor(it);
+  const parts = [];
+  if (cons.picks) parts.push('<span class="val"><b>' + cons.picks + '</b> '
+    + (cons.picks === 1 ? 'guide picks this' : 'guides pick this')
+    + '<span class="who">' + esc(guideSourceLabels(GUIDE_PICKS, cons.picksBy)) + '</span></span>');
+  if (cons.alternatives) parts.push('<span class="val"><b>' + cons.alternatives + '</b> '
+    + (cons.alternatives === 1 ? 'guide lists it' : 'guides list it') + ' as an option'
+    + '<span class="who">' + esc(guideSourceLabels(GUIDE_PICKS, cons.alternativesBy)) + '</span></span>');
+  /* No endorsement is no text. Once a harvest exists the empty cell still occupies its grid
+     column, so a card whose rows disagree stays aligned; while the whole lane is pending
+     there is nothing to align to and the cell is dropped entirely. */
+  if (!parts.length) return isPending(GUIDE_PICKS) ? '' : '<span class="rowcol picks"></span>';
+  return '<span class="rowcol picks"><span class="lab">Guide picks</span>' + parts.join('') + '</span>';
+}
+
+function rowFacts(it, entry, options) {
+  const showIlvl = !options || options.ilvl !== false;
+  return '<span class="rowcols">' + (showIlvl ? ilvlCell(it) : '')
+    + usageCell(it) + consensusCell(it, entry && entry.consensus) + '</span>';
+}
+
+/* The panel-level half of the two non-ordering columns. Both are VISIBLE text: the pending
+   state is the shipping state, so "why is this empty" has to be answerable on the page. */
+function guideRankingNote() {
+  if (isPending(GUIDE_PICKS)) {
+    const pending = GUIDE_PICKS.pending || {};
+    return '<div class="sub-note" data-guide-state="pending"><b>No guide harvest has run yet, so every list '
+      + 'below is ordered by equal-item-level secondary-stat fit alone.</b> No guide picks are counted and no '
+      + 'row carries a guide count. ' + esc(pending.gate || '') + '</div>';
+  }
+  const sources = Object.keys(GUIDE_PICKS.sources || {});
+  return '<div class="sub-note" data-guide-state="harvested"><b>Ordered by how many guides pick each item, '
+    + 'then by secondary-stat fit.</b> An item some guide picked outranks every unnamed item; a weaker '
+    + '&ldquo;also an option&rdquo; endorsement breaks ties but never promotes. The two counts are shown '
+    + 'separately and are never added together.'
+    + (sources.length ? ' Harvested from ' + esc(guideSourceLabels(GUIDE_PICKS, sources))
+      + (GUIDE_PICKS.harvestedAt ? ' on <b>' + esc(GUIDE_PICKS.harvestedAt) + '</b>' : '') + '.' : '')
+    + '</div>';
+}
+
+function archonColumnNote() {
+  const pending = ARCHON_USAGE.pending || {};
+  return '<div class="sub-note" data-archon-state="' + (isPending(ARCHON_USAGE) ? 'pending' : 'harvested') + '">'
+    + '<b>The Worn by (Archon) column is log-derived usage &mdash; what top logged players wear, not a '
+    + 'recommendation.</b> It never votes, never ranks and never breaks a tie. '
+    + (isPending(ARCHON_USAGE)
+      ? 'It is <b>pending</b>: ' + esc(pending.reason || 'no reason recorded') + '. ' + esc(pending.gate || '')
+      : 'Season ' + esc(ARCHON_USAGE.season || '?') + ', harvested <b>' + esc(ARCHON_USAGE.harvestedAt || '?') + '</b>.')
+    + '</div>';
 }
 
 function clearCustomWeights(shouldRender) {
@@ -810,12 +1112,14 @@ function catalystDetails(it) {
 }
 
 function visibleCandidates(list, limit) {
-  const sorted = list.slice().sort((a, b) => compareItems(CUR, a, b));
+  const sorted = rankedCandidates(list);
   const ranked = sorted.slice(0, limit);
-  const rankedIds = new Set(ranked.map(it => String(it.id)));
-  return ranked.map((it, index) => ({it: it, marker: String(index + 1), special: false}))
-    .concat(sorted.filter(it => it.effect && !rankedIds.has(String(it.id)))
-      .map(it => ({it: it, marker: 'S', special: true})));
+  const rankedIds = new Set(ranked.map(entry => String(entry.item.id)));
+  // Special-effect items keep their existing outside-the-ranking S marker (G15's third band).
+  return ranked.map((entry, index) =>
+      ({it: entry.item, consensus: entry.consensus, marker: String(index + 1), special: false}))
+    .concat(sorted.filter(entry => entry.item.effect && !rankedIds.has(String(entry.item.id)))
+      .map(entry => ({it: entry.item, consensus: entry.consensus, marker: 'S', special: true})));
 }
 
 function catalystPlanCard(usable) {
@@ -867,9 +1171,9 @@ function catalystPlanCard(usable) {
 
 function tierSlotRows(slot, bases, token) {
   const direct = directTierFor(slot);
-  const sorted = bases.slice().sort((a, b) => compareItems(CUR, a, b));
-  const scored = (direct ? [direct] : []).concat(sorted);
-  const topItem = scored.slice().sort((a, b) => compareItems(CUR, a, b))[0] || null;
+  const ranked = rankedCandidates(bases);
+  const sorted = ranked.map(entry => entry.item);
+  const topItem = bestByFit((direct ? [direct] : []).concat(sorted));
   const rows = [];
   if (direct) {
     const best = sameRecommendationScore(CUR, direct, topItem);
@@ -880,15 +1184,18 @@ function tierSlotRows(slot, bases, token) {
       + (token ? ' Created by ' + esc(token.name) + '.' : '') + '</span></span>'
       + '<span class="meta">' + esc(direct.primary || '—')
       + (direct.secondaries.length ? ' ' + esc(allocationText(direct)) : '') + fitText(direct) + '</span>'
+      + rowFacts(direct, null)
       + '<span class="src">' + esc(token ? token.where : direct.where) + '</span></div>');
   }
-  sorted.forEach((it, index) => {
+  ranked.forEach((entry, index) => {
+    const it = entry.item;
     const best = sameRecommendationScore(CUR, it, topItem);
     rows.push('<div class="row' + (best ? ' best' : '') + '" data-id="' + it.id
       + '" data-catalyst-base="true"><span class="rank" title="Equal-item-level Catalyst stat-fit position">C'
       + (index + 1) + '</span>' + icoTag(it) + '<span class="nm">' + esc(it.name) + itemDetails(it)
       + catalystDetails(it) + '</span><span class="meta">' + esc(it.primary || '—')
-      + (it.secondaries.length ? ' ' + esc(allocationText(it)) : '') + fitText(it) + '</span><span class="src'
+      + (it.secondaries.length ? ' ' + esc(allocationText(it)) : '') + fitText(it) + '</span>'
+      + rowFacts(it, entry) + '<span class="src'
       + (it.kind === 'mplus' ? ' mplus' : '') + '">' + esc(it.kind === 'mplus' ? it.dungeon : it.where)
       + '</span></div>');
   });
@@ -919,21 +1226,30 @@ function renderBis() {
   const priorityPatch = profile?.patch || CUR.statPriorityPatch;
   const usingCustom = customModeSelected() && !!customWeights();
   const usingGuide = !usingCustom;
-  $('#bis-note').innerHTML = priority
+  $('#bis-note').innerHTML = (priority
     ? (usingCustom
       ? '<b>Using your custom decimal weights instead of guide order.</b> Candidates are ordered by their full secondary-stat allocation. '
-      : 'Using the <b>' + esc(profile ? profile.name : 'General') + '</b> build and the guide order <b>'
-          + esc(priority.secondaries.join(' > ')) + '</b>. ')
+      : 'Using the <b>' + esc(profile ? buildOptionLabel(profile) : 'General') + '</b> build and the guide order <b>'
+          + priorityText(priority) + '</b>. ')
       + '<b>This is an equal-item-level secondary-fit shortlist, not a definitive BiS list.</b> '
       + 'Item level, primary stat, current stat totals, '
       + 'sockets, and item effects can change the winner; '
       + 'effects are shown but never assigned invented values. '
-      + (usingGuide ? 'The guide profile comes from Icy Veins <b>patch ' + esc(priorityPatch || '?')
-        + '</b> (the prior patch) while 12.1 priorities remain provisional.' : '')
-      + (usingGuide && prioritySource ? ' <a href="' + esc(prioritySource)
+      /* Which outlet published the order, and when. While the guide harvest is pending this
+         is still the single Icy Veins profile stamped with the PRIOR patch, and it keeps
+         saying so; a harvested build names its own source and date instead. */
+      + (usingGuide ? (profile && profile.sourceLabel
+        ? 'This stat order was published by <b>' + esc(profile.sourceLabel) + '</b>'
+          + (profile.published ? ', last updated <b>' + esc(profile.published) + '</b>' : '')
+          + (profile.patch ? ', for patch <b>' + esc(profile.patch) + '</b>' : '') + '.'
+          + (profile.note ? ' ' + esc(profile.note) : '')
+        : 'The guide profile comes from Icy Veins <b>patch ' + esc(priorityPatch || '?')
+          + '</b> (the prior patch) while 12.1 priorities remain provisional.') : '')
+      + (usingGuide && !(profile && profile.sourceLabel) && prioritySource ? ' <a href="' + esc(prioritySource)
         + '" target="_blank" rel="noopener noreferrer">View the source</a>.' : '')
-      + (usingGuide && CUR.statPriorityNote ? ' ' + esc(CUR.statPriorityNote) : '')
-    : '<b>No stat priority could be sourced for this spec</b>, so items are filtered to what you can equip, but not ranked.';
+      + (usingGuide && !(profile && profile.sourceLabel) && CUR.statPriorityNote ? ' ' + esc(CUR.statPriorityNote) : '')
+    : '<b>No stat priority could be sourced for this spec</b>, so items are filtered to what you can equip, but not ranked.')
+    + guideRankingNote() + archonColumnNote();
 
   const usable = GEAR.filter(it => canUse(CUR, it));
   const weaponItems = usable.filter(isWeaponItem);
@@ -949,7 +1265,7 @@ function renderBis() {
 
   const cards = slots.map(slot => {
     const entries = visibleCandidates(bySlot[slot], 5);
-    const topItem = entries.filter(entry => !entry.special)[0]?.it || null;
+    const topItem = bestByFit(entries.filter(entry => !entry.special).map(entry => entry.it));
     const rows = [];
     entries.forEach(entry => {
       const it = entry.it;
@@ -959,7 +1275,8 @@ function renderBis() {
       + '>' + entry.marker + '</span>' + icoTag(it) + '<span class="nm">' + esc(it.name) + itemDetails(it)
       + '</span><span class="meta">' + esc(it.primary || '—')
       + (it.secondaries.length ? ' ' + esc(allocationText(it)) + fitText(it) : '')
-      + '</span><span class="src' + (it.kind === 'mplus' ? ' mplus' : '') + '">'
+      + '</span>' + rowFacts(it, entry)
+      + '<span class="src' + (it.kind === 'mplus' ? ' mplus' : '') + '">'
       + esc(it.kind === 'mplus' ? it.dungeon : it.where) + '</span></div>');
     });
     return '<div class="card"><h3>' + esc(slot) + '<span>' + bySlot[slot].length + ' usable</span></h3>'
@@ -984,7 +1301,8 @@ function renderTier() {
     + 'That means the best converted base can beat the fixed direct-tier stat line at the same item level. '
     + 'The comparisons below use ' + scoringText
     + ' for <b>equal-item-level secondary fit only</b>; item level, sockets, '
-    + 'and supported special effects still need an item simulation or Catalyst preview.';
+    + 'and supported special effects still need an item simulation or Catalyst preview.'
+    + guideRankingNote() + archonColumnNote();
   const cards = Array.from(TIER_SET_SLOTS).map(slot => {
     const token = tokenBySlot[slot === 'Shoulder' ? 'Shoulders' : slot];
     const bases = bySlot[slot] || [];
@@ -1006,7 +1324,8 @@ function weaponRows(list, reservedUniqueId) {
   const reserved = reservedUniqueId == null ? null
     : list.filter(it => String(it.id) === String(reservedUniqueId))[0];
   if (reserved) entries.push({it: reserved, marker: 'U', special: true, reserved: true});
-  const topItem = entries.filter(entry => !entry.reserved && !entry.special)[0]?.it || null;
+  const topItem = bestByFit(entries.filter(entry => !entry.reserved && !entry.special)
+    .map(entry => entry.it));
   return entries.map(entry => {
     const it = entry.it;
     return '<div class="row' + (!entry.reserved && !entry.special
@@ -1019,7 +1338,8 @@ function weaponRows(list, reservedUniqueId) {
     + (entry.reserved ? '<span class="fx"><b>Alternative hand only:</b> the main-hand recommendation already uses this unique item.</span>' : '')
     + '</span><span class="meta">' + esc(it.primary || '—')
     + (it.secondaries.length ? ' ' + esc(allocationText(it)) + fitText(it) : '')
-    + '</span><span class="src' + (it.kind === 'mplus' ? ' mplus' : '') + '">'
+    + '</span>' + rowFacts(it, entry)
+    + '<span class="src' + (it.kind === 'mplus' ? ' mplus' : '') + '">'
     + esc(it.kind === 'mplus' ? it.dungeon : it.where) + '</span></div>';
   }).join('');
 }
@@ -1037,7 +1357,9 @@ function weaponLoadoutCards(items) {
         continue;
       }
       const list = items.filter(it => handMatches(hand, it));
-      const first = list.slice().sort((a, b) => compareItems(CUR, a, b))[0];
+      // The unique-equipped reservation follows what is actually recommended first, so it
+      // reads the ranked order rather than a second opinion about it.
+      const first = (rankedCandidates(list)[0] || {}).item;
       if (handName === 'mainHand' && first && first.uniqueEquipped) mainUnique = first.id;
       const title = (hand.inventorySlots || []).indexOf('Ranged') >= 0 ? 'Ranged weapon'
         : hand.occupiesBothHands ? 'Two-hand weapon'
@@ -1065,15 +1387,26 @@ function weaponLoadoutCards(items) {
 
 /* Trinkets bypass the secondary-stat scorer entirely because their effects dominate, and
    this page does not value effects. There is no exception any more — the healer item-score
-   lane that used to provide one was removed with the SimC pipeline (G5). G8 will show the
-   guides' own per-source letter tiers here in Phase C; until then, unranked is the honest
-   presentation, not a placeholder. */
+   lane that used to provide one was removed with the SimC pipeline (G5).
+   G8, landed in Phase C: where a guide published a letter tier it is shown PER SOURCE, side
+   by side, never merged into one grade and never used to order this card. The cost of that
+   is accepted and stated — the one slot where guides publish real depth is the one slot this
+   page will not rank, because two letter scales are not one scale. */
+function trinketLetters(it) {
+  const tiers = trinketTiersFor(it);
+  if (!tiers.length) return '';
+  return '<span class="letters">' + tiers.map(row => '<span class="letter"><span class="who">'
+    + esc(row.label) + '</span><b>' + esc(row.tier) + '</b></span>').join('') + '</span>';
+}
+
 function trinketCard(list) {
   if (!list.length) return '';
+  const lettered = list.filter(it => trinketTiersFor(it).length).length;
   const rows = list.slice().sort((a, b) => (b.effect ? 1 : 0) - (a.effect ? 1 : 0)).map(it =>
     '<div class="row" data-id="' + it.id + '">' + icoTag(it) + '<span class="nm">' + esc(it.name)
     + itemDetails(it)
     + (!it.effect ? '<span class="fx">no on-use or proc effect listed</span>' : '')
+    + trinketLetters(it)
     + '</span><span class="meta">' + esc(it.primary || '—')
     + (it.secondaries.length ? ' ' + esc(allocationText(it)) : '')
     + '</span><span class="src' + (it.kind === 'mplus' ? ' mplus' : '') + '">'
@@ -1085,6 +1418,10 @@ function trinketCard(list) {
     + 'with its full effect, listed by where it drops and never by how good it is. Role- or primary-specific '
     + 'effects are filtered using explicit recommendation eligibility; excluded specs may still be able to equip '
     + 'the item technically. <b>This is the slot where the stat model tells you least.</b></div>'
+    + (lettered ? '<div class="sub-note"><b>' + lettered + ' of these carry a guide letter tier</b>, shown per '
+      + 'source. Two outlets\' letters are two different scales, so they are printed side by side and never '
+      + 'merged into one grade &mdash; and they do not order this card. The order below is a presentation '
+      + 'convention (items with an effect first), not a ranking claim.</div>' : '')
     + '<details class="more-items"><summary>Show all ' + list.length + ' trinkets</summary>' + rows
     + '</details></div>';
 }
@@ -1287,7 +1624,8 @@ function renderUp() {
     return index < 0 ? 99 : index;
   };
 
-  $('#up').innerHTML = '<div class="grid">' + keys.sort((a, b) => slotPosition(a) - slotPosition(b)
+  $('#up').innerHTML = '<div class="note">' + guideRankingNote() + archonColumnNote() + '</div>'
+    + '<div class="grid">' + keys.sort((a, b) => slotPosition(a) - slotPosition(b)
     || a.localeCompare(b)).map(k => {
     const eq = MYGEAR[k];
     const threshold = eq.ilvl || cur;
@@ -1307,7 +1645,10 @@ function renderUp() {
     return '<div class="card"><h3>' + esc(slotName) + '<span>' + esc(eq.name || eq.id) + worn + '</span></h3>'
       + (trinketSlot && entries.length ? '<div class="sub-note"><b>Trinkets are not ranked here:</b> their value '
           + 'lives in the effect, not in secondary stats, and this page does not score effects. Every eligible '
-          + 'source that can exceed your current item level is listed, alphabetically.</div>' : '')
+          + 'source that can exceed your current item level is listed, alphabetically.'
+          + (entries.some(entry => trinketTiersFor(entry.it).length)
+            ? ' Where a guide published a letter tier it is shown per source and never merged into one grade '
+              + '&mdash; the letters do not order this list.' : '') + '</div>' : '')
       + (trinketSlot || !entries.length ? '' : customOverrideNote())
       + catalystActionHtml(eq)
       + directTierUpgradeHtml(eq, threshold)
@@ -1315,9 +1656,15 @@ function renderUp() {
           const it = entry.it;
           return '<div class="row" data-id="' + it.id + '"><span class="rank">' + entry.marker + '</span>'
           + icoTag(it) + '<span class="nm">' + esc(it.name) + itemDetails(it) + catalystDetails(it)
+          + (trinketSlot ? trinketLetters(it) : '')
           + ladderHtml(it, threshold)
           + '</span><span class="meta">' + esc(allocationText(it))
-          + (trinketSlot ? '<span class="tag">Unranked</span>' : fitText(it)) + '</span><span class="src'
+          + (trinketSlot ? '<span class="tag">Unranked</span>' : fitText(it)) + '</span>'
+          /* The item-level column is omitted HERE and only here: these rows already carry the
+             full difficulty/key ladder, which is strictly more than the ladder's maximum. The
+             two non-ordering signals that are not otherwise present still ride along. */
+          + (trinketSlot ? '' : rowFacts(it, entry, {ilvl: false}))
+          + '<span class="src'
           + (it.kind === 'mplus' ? ' mplus' : '') + '">'
           + esc(it.kind === 'mplus' ? it.dungeon : it.where) + '</span></div>';
         }).join('')
@@ -1444,6 +1791,14 @@ function renderFooter() {
     + 'Direct tier data: ' + esc(TIER.source) + ', harvested ' + esc(TIER.harvestedAt) + '.<br>'
     + 'Catalyst policy: Blizzard 12.1 PTR notes, reviewed ' + esc(CATALYST.reviewedAt) + '.<br>'
     + 'Spec data: ' + esc(SPECS.source) + ', harvested ' + esc(SPECS.harvestedAt) + '.<br>'
+    /* The guide layer states its own status here as well as on the panels, because "which
+       datasets does this page actually hold" is the question this disclosure answers. */
+    + 'Guide picks: ' + esc(GUIDE_PICKS.source || 'guide harvest') + ' &mdash; <b>'
+    + (isPending(GUIDE_PICKS) ? 'pending, not yet harvested' : 'harvested ' + esc(GUIDE_PICKS.harvestedAt || '?')) + '</b>.<br>'
+    + 'Guide stat priorities: ' + esc(GUIDE_PRIORITIES.source || 'guide harvest') + ' &mdash; <b>'
+    + (isPending(GUIDE_PRIORITIES) ? 'pending, not yet harvested' : 'harvested ' + esc(GUIDE_PRIORITIES.harvestedAt || '?')) + '</b>.<br>'
+    + 'Gear usage (display only, never ranks): ' + esc(ARCHON_USAGE.source || 'Archon') + ' &mdash; <b>'
+    + (isPending(ARCHON_USAGE) ? 'pending, not yet harvested' : 'harvested ' + esc(ARCHON_USAGE.harvestedAt || '?')) + '</b>.<br>'
     + '<b>' + esc(RAID.caveat) + '</b> ' + esc(SPECS.caveat) + '<br>'
     + '<b>Weapon loadouts are explicit, mutually exclusive configurations</b> curated from official Blizzard class pages and patch notes. '
     + 'Allowed types and direct official source links are shown inside each weapon card.<br>'

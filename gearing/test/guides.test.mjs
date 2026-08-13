@@ -1,7 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
-import { BRACKETS, buildId, bracketOfItem, consensusForItem, consensusRank, normalizeBracket,
+import { BAND, BRACKETS, bandOf, buildId, bracketOfItem, consensusForItem, consensusRank,
+  defaultBuildFor, normalizeBracket, rankCandidates, scopeKey,
   normalizeSlot, normalizeText, parseSoftCap, resolveDropSource, rosterFrom, slugify,
   SLOTS } from "../src/lib-guides.mjs";
 
@@ -245,4 +246,100 @@ test("soft caps parse the RATING idiom as well as the percentage one", () => {
   assert.deepEqual(parseSoftCap("Haste (to 1100)"),
     { stat: "Haste", value: 1100, unit: "rating", text: "Haste (to 1100)" });
   assert.equal(parseSoftCap("Haste to 18%").unit, "%");
+});
+
+/* ---------- Phase C: the ordering rules (G15) and the default build (G17) ---------- */
+
+const entry = (name, fit, consensus = {}) =>
+  ({ item: { name }, fit, consensus: { picks: 0, alternatives: 0, ...consensus } });
+
+test("G15: a BiS pick outranks every unnamed item, whatever their stat fit", () => {
+  const ranked = rankCandidates([
+    entry("unnamed-great", 0.99),
+    entry("picked-poor", 0.10, { picks: 1 }),
+  ]);
+  assert.deepEqual(ranked.map((e) => e.item.name), ["picked-poor", "unnamed-great"]);
+});
+
+test("G15: an ALTERNATIVE does NOT outrank a better-statted unnamed item", () => {
+  // The rejected 'strict' rule would put alt-poor first. The measured reason this matters:
+  // a slot holds 1-3 named candidates against 5-15 unnamed ones, so strict gating would let
+  // one passing mention decide most of the visible list.
+  const ranked = rankCandidates([
+    entry("alt-poor", 0.10, { alternatives: 2 }),
+    entry("unnamed-great", 0.99),
+  ]);
+  assert.deepEqual(ranked.map((e) => e.item.name), ["unnamed-great", "alt-poor"]);
+});
+
+test("G15: an alternative BREAKS TIES against an unnamed item at equal fit", () => {
+  const ranked = rankCandidates([
+    entry("unnamed", 0.5),
+    entry("alt", 0.5, { alternatives: 1 }),
+  ]);
+  assert.deepEqual(ranked.map((e) => e.item.name), ["alt", "unnamed"]);
+});
+
+test("G15: within the pick band, more picks wins, then more alternatives, then fit", () => {
+  const ranked = rankCandidates([
+    entry("one-pick-high-fit", 0.90, { picks: 1 }),
+    entry("three-picks", 0.10, { picks: 3 }),
+    entry("two-picks-no-alts", 0.80, { picks: 2 }),
+    entry("two-picks-one-alt", 0.20, { picks: 2, alternatives: 1 }),
+  ]);
+  assert.deepEqual(ranked.map((e) => e.item.name),
+    ["three-picks", "two-picks-one-alt", "two-picks-no-alts", "one-pick-high-fit"]);
+});
+
+test("G16: item level is absent from the ordering entirely", () => {
+  // Passing an ilvl must change nothing — it is a column, never a term.
+  const withIlvl = rankCandidates([
+    { item: { name: "low-ilvl", ilvl: 200 }, fit: 0.9, consensus: { picks: 0, alternatives: 0 } },
+    { item: { name: "high-ilvl", ilvl: 344 }, fit: 0.1, consensus: { picks: 0, alternatives: 0 } },
+  ]);
+  assert.deepEqual(withIlvl.map((e) => e.item.name), ["low-ilvl", "high-ilvl"]);
+});
+
+test("ranking is stable and does not mutate its input", () => {
+  const input = [entry("b", 0.5), entry("a", 0.5)];
+  const copy = JSON.parse(JSON.stringify(input));
+  const ranked = rankCandidates(input);
+  assert.deepEqual(JSON.parse(JSON.stringify(input)), copy, "input array must not be reordered");
+  assert.deepEqual(ranked.map((e) => e.item.name), ["a", "b"], "equal entries fall back to name");
+  assert.equal(bandOf({ picks: 1 }), BAND.PICK);
+  assert.equal(bandOf({ picks: 0, alternatives: 5 }), BAND.PLAIN);
+  assert.equal(bandOf(null), BAND.PLAIN);
+});
+
+test("G17: the default build is the scoping more than one source publishes", () => {
+  const builds = [
+    { source: "icyveins", label: "Herald of the Sun (raid healing)", heroTalent: "Herald of the Sun", bracket: "raid" },
+    { source: "icyveins", label: "Mythic+ healing", heroTalent: null, bracket: "mplus" },
+    { source: "wowhead", label: "Herald of the Sun, Raid", heroTalent: "Herald of the Sun", bracket: "raid" },
+  ];
+  // Two sources publish Herald-of-the-Sun/raid; nobody corroborates the M+ variant.
+  assert.equal(defaultBuildFor(builds).heroTalent, "Herald of the Sun");
+  assert.equal(scopeKey(builds[0]), scopeKey(builds[2]), "scoping is keyed on the axes, not the label text");
+  assert.notEqual(builds[0].label, builds[2].label, "…and the outlets word it differently");
+});
+
+test("G17: with nothing corroborated, the first published variant wins", () => {
+  const builds = [
+    { source: "icyveins", label: "Deathbringer", heroTalent: "Deathbringer", bracket: null },
+    { source: "wowhead", label: "San'layn", heroTalent: "San'layn", bracket: null },
+  ];
+  assert.equal(defaultBuildFor(builds).heroTalent, "Deathbringer");
+  assert.equal(defaultBuildFor([]), null);
+  assert.equal(defaultBuildFor(null), null);
+});
+
+test("G17: wholly unscoped variants never corroborate each other", () => {
+  // Three sources each publishing one unscoped "General" priority is not agreement about
+  // scoping — it is three outlets declining to scope. The first still wins, by fallback.
+  const builds = [
+    { source: "icyveins", label: "General", heroTalent: null, bracket: null },
+    { source: "wowhead", label: "General", heroTalent: null, bracket: null },
+    { source: "method", label: "Raid", heroTalent: null, bracket: "raid" },
+  ];
+  assert.equal(defaultBuildFor(builds).source, "icyveins");
 });

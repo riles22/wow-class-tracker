@@ -9,10 +9,27 @@ import { createHash } from "node:crypto";
 import { readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { validateData } from "./validate-data.mjs";
+import { absentFileStub, validateData } from "./validate-data.mjs";
+import { injectGuideLib } from "./inline-guides.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const readData = async (f) => JSON.parse(await readFile(join(ROOT, "data", f), "utf8"));
+
+/* The Phase-C guide layer. All three files ship PENDING and stay that way until the first
+   post-flip harvest (docs/gearing-s2-scope.md, Phase B "machinery, not a harvest"), so this
+   build must be correct with empty data and fill in when a harvest lands, with no code change.
+   A MISSING file behaves exactly like a pending one: a checkout without a harvest still builds,
+   and the page says the signal is absent rather than rendering an empty surface. Only ENOENT
+   degrades — malformed JSON still fails the build red, because that is a broken harvest rather
+   than an un-run one. */
+const readPendable = async (file) => {
+  try { return await readData(file); }
+  catch (error) {
+    if (error?.code !== "ENOENT") throw error;
+    console.warn(`  (no data/${file} -- treating it as pending; run its harvester after the flip)`);
+    return absentFileStub(file);
+  }
+};
 
 const raid = await readData("raid-items.json");
 const specs = await readData("specs.json");
@@ -25,21 +42,28 @@ const itemEligibility = await readData("item-eligibility-overrides.json");
 const tier = await readData("tier-items.json");
 const catalyst = await readData("catalyst-rules.json");
 const catalystAllocations = await readData("catalyst-stat-allocations.json");
+const guidePicks = await readPendable("guide-picks.json");
+const guidePriorities = await readPendable("guide-priorities.json");
+const archonUsage = await readPendable("archon-usage.json");
 let icons = { icons: {} };
 try { icons = await readData("icons.json"); }
 catch { console.warn("  (no data/icons.json -- run node src/harvest-icons.mjs for item icons)"); }
 const template = await readFile(join(ROOT, "src", "app.template.html"), "utf8");
 
 validateData({ raid, specs, dungeons, sheet, statOverrides, statBaseline, weaponProficiency,
-  itemEligibility, tier, catalyst, catalystAllocations });
+  itemEligibility, tier, catalyst, catalystAllocations, guidePicks, guidePriorities, archonUsage });
 
 // </script> inside the JSON would close the host <script> tag early
 const blob = JSON.stringify({ raid, specs, dungeons, sheet, itemEligibility, tier, catalyst,
-  catalystAllocations, icons: icons.icons })
+  catalystAllocations, guidePicks, guidePriorities, archonUsage, icons: icons.icons })
   .replace(/<\/script>/gi, "<\\/script>");
 
 if (!template.includes("__DATA__")) throw new Error("template is missing the __DATA__ placeholder");
-let out = template.replace("__DATA__", blob);
+// The shared guide contract is INJECTED from src/lib-guides.mjs, never copied into the
+// template — one definition of the ordering rules, and drift is impossible rather than
+// merely detected (src/inline-guides.mjs).
+let out = await injectGuideLib(template, ROOT);
+out = out.replace("__DATA__", () => blob);
 
 // Normalize to LF before hashing. The HTML parser normalizes CRLF->LF before the browser
 // hashes an inline script, so a CRLF artifact from a Windows checkout would make the CSP
@@ -75,3 +99,24 @@ console.log(`  raid: ${raid.counts.gear} gear · ${raid.counts.withEffect} items
 console.log(`  m+:   ${dungeons.counts.gear} items across ${dungeons.counts.dungeonsHarvested}/${dungeons.counts.dungeonsInPool} dungeons`);
 console.log(`  ${specs.counts.specs} specs · ${specs.counts.withPriority} with stat priority · ${specs.counts.withArmor} with armour type · ${specs.counts.withWeaponLoadouts} with weapon loadouts`);
 console.log(`  ${tier.counts.items} direct tier items · catalyst rules ${catalyst.patchContext}`);
+
+/* Say what the guide layer actually holds. A pending file reports pending AND WHY — a build log
+   that printed "0 picks" for a lane nobody has harvested yet reads as breakage, and one that
+   printed nothing at all would let a silently-emptied harvest ship unnoticed. */
+const oneLine = (text) => String(text ?? "").replace(/\s+/g, " ").trim();
+const rowsIn = (doc, key) => Object.values(doc.specs ?? {})
+  .reduce((sum, entry) => sum + (entry?.[key]?.length ?? 0), 0);
+
+function guideSummary(doc, key, noun) {
+  if (doc.status !== "harvested")
+    return `pending — ${oneLine(doc.pending?.reason) || "no reason recorded"}`;
+  const sources = Object.keys(doc.sources ?? {}).sort().join(", ") || "no sources declared";
+  return `harvested ${doc.harvestedAt} (${doc.season}) · ${Object.keys(doc.specs ?? {}).length} specs`
+    + ` · ${rowsIn(doc, key)} ${noun} · ${sources}`;
+}
+
+console.log(`  guide picks:      ${guideSummary(guidePicks, "picks", "picks")}`);
+console.log(`  guide priorities: ${guideSummary(guidePriorities, "builds", "builds")}`);
+console.log(`  archon usage:     ${archonUsage.status === "harvested"
+  ? `harvested ${archonUsage.harvestedAt} (${archonUsage.season}) · ${(archonUsage.specs ?? []).length} specs`
+  : `pending — ${oneLine(archonUsage.pending?.reason) || "no reason recorded"}`}`);

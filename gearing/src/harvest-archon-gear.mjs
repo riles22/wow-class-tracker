@@ -395,7 +395,11 @@ export function archonUsageIssues(doc) {
       walk(value, `${path}.${key}`);
     }
   };
-  walk(doc.specs, "specs");
+  /* The whole document, not just its spec data. A vote smuggled into the envelope — a
+     top-level `picks` count, a `consensus` block beside the note — is the same finding wherever
+     it sits, and both the README and the Phase-C validator have always described this guard as
+     document-wide. It walked `doc.specs` alone until 2026-08-13, which left the envelope open. */
+  walk(doc, "doc");
 
   if (doc.status === "pending") {
     if (doc.specs?.length) issues.push("a pending file must carry no spec data");

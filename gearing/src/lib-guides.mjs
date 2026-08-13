@@ -331,3 +331,63 @@ export function consensusForItem(picks, item, { sources = null } = {}) {
    so Phase C keeps ownership of what "stat fit" means. */
 export const consensusRank = (consensus) =>
   (consensus?.picks ?? 0) * 1000 + (consensus?.alternatives ?? 0);
+
+/* ---------- ranking (G15) and the default build (G17) ----------
+   Phase C's ordering, kept here as pure functions so the rules are testable without a DOM
+   and so the client cannot quietly grow a second opinion about what "rank 1" means. */
+
+/* Which band a candidate sits in. THE MEASURED SHAPE THAT DRIVES THIS: guides name roughly
+   one item per slot per list, so a slot holds 1-3 named candidates against 5-15 that no
+   guide mentions. Strict gating would let a single passing "alternative" mention bury a
+   materially better-statted item across that unnamed majority, so only a BiS PICK is
+   promoted outright; an alternative competes on stat fit and merely breaks ties. */
+export const BAND = { PICK: 2, PLAIN: 1 };
+
+export const bandOf = (consensus) => ((consensus?.picks ?? 0) > 0 ? BAND.PICK : BAND.PLAIN);
+
+/* Order candidates for one slot. `entries` are { item, consensus, fit } where `fit` is
+   whatever the caller's stat model produced (higher is better) — this function deliberately
+   does NOT know how fit is computed, so custom weights (G6) flow through unchanged.
+   Item level is absent on purpose: G16 makes it a column, never an ordering term. */
+export function rankCandidates(entries) {
+  return entries.slice().sort((a, b) => {
+    const band = bandOf(b.consensus) - bandOf(a.consensus);
+    if (band) return band;
+    if (bandOf(a.consensus) === BAND.PICK) {
+      const picks = (b.consensus?.picks ?? 0) - (a.consensus?.picks ?? 0);
+      if (picks) return picks;
+      const alts = (b.consensus?.alternatives ?? 0) - (a.consensus?.alternatives ?? 0);
+      if (alts) return alts;
+    }
+    const fit = (b.fit ?? 0) - (a.fit ?? 0);
+    if (fit) return fit;
+    // Within the plain band an alternative endorsement is the TIEBREAK, never a promotion.
+    const alts = (b.consensus?.alternatives ?? 0) - (a.consensus?.alternatives ?? 0);
+    if (alts) return alts;
+    return String(a.item?.name ?? "").localeCompare(String(b.item?.name ?? ""));
+  });
+}
+
+/* G17: default to a build whose scoping more than one SOURCE publishes, else the first
+   published variant. Corroboration is keyed on the scoping axes the guides actually state
+   (hero talent + bracket), never on the label text, which each outlet words differently. */
+export const scopeKey = (build) =>
+  [slugify(build?.heroTalent ?? ""), slugify(build?.bracket ?? "")].join("|");
+
+export function defaultBuildFor(builds) {
+  const list = builds ?? [];
+  if (!list.length) return null;
+  const sourcesByScope = new Map();
+  for (const build of list) {
+    const key = scopeKey(build);
+    if (!key.replace("|", "")) continue;   // wholly unscoped variants cannot corroborate
+    if (!sourcesByScope.has(key)) sourcesByScope.set(key, new Set());
+    sourcesByScope.get(key).add(build.source);
+  }
+  let best = null;
+  for (const build of list) {
+    const backers = sourcesByScope.get(scopeKey(build))?.size ?? 0;
+    if (backers > 1 && (!best || backers > best.backers)) best = { build, backers };
+  }
+  return best?.build ?? list[0];
+}

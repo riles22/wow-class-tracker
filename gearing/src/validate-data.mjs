@@ -1,4 +1,6 @@
 import { createHash } from "node:crypto";
+import { BRACKETS, SLOTS, normalizeSlot } from "./lib-guides.mjs";
+import { LANE_NOTE, archonUsageIssues } from "./harvest-archon-gear.mjs";
 
 const SECONDARIES = new Set(["Crit", "Haste", "Mast", "Vers"]);
 const PRIMARIES = new Set(["Agility", "Intellect", "Strength"]);
@@ -368,8 +370,194 @@ function validateItemEligibility(itemEligibility, allItems, rows, errors) {
       errors.push(`trinket ${item.id} ${item.name} lacks explicit eligibility`);
   }
 }
+
+/* ---------- the guide layer (docs/gearing-s2-scope.md G4, G9-G15) ----------
+   Three files feed Phase C's scoring model: guide-picks (who endorsed what), guide-priorities
+   (the published stat orders behind the Build control) and archon-usage (the log-derived
+   column that never orders anything, G13).
+
+   ALL THREE SHIP PENDING, AND THE PENDING STATE IS THE SHIPPING STATE. No harvest can honestly
+   run before the 2026-08-18 flip — every guide is mid-season-transition, and a harvest now
+   captures PTR-era picks wearing a Season-2 label. So a pending file is FULLY VALID here, and
+   the real schema below engages the moment `status` flips to "harvested", with no further code
+   change. That is the whole test of this validator: it must be correct on empty data and
+   correct on a harvest, without an edit in between.
+
+   The source vocabulary is closed on purpose — G4 names exactly three human-authored guides,
+   and one vote per source (G10) is only meaningful if the set of sources is reviewed. A fourth
+   outlet is a deliberate edit here, the same convention the tracker uses for its agent-writable
+   URL host allowlists. */
+export const GUIDE_SOURCE_IDS = new Set(["icyveins", "wowhead", "method"]);
+const ENDORSEMENTS = new Set(["bis", "alternative"]);
+const CANONICAL_SLOTS = new Set(SLOTS);
+
+/* An ABSENT file is not the same object as a pending RECORD, and the difference is load-bearing
+   for exactly one field. A pending record the Archon harvester wrote must carry the probe it
+   refused (`checkedAt` + the evidence); a file that is not in this checkout has no probe to
+   carry, and the only way to satisfy that demand would be for the build to invent a date and an
+   evidence row — inventing provenance to pass a provenance check. So the build hands validation
+   THIS stub, marked `pending.absent`, and it is held to the smaller contract that is actually
+   true of it: pending, seasonless, dateless, dataless and self-explaining. It lives here rather
+   than in build.mjs so the stub and the contract it must satisfy cannot drift apart. */
+export function absentFileStub(file) {
+  const reason = `data/${file} is absent from this checkout, so nothing has been harvested or `
+    + "probed here. An absent file and a pending one mean the same thing to the page — no signal "
+    + "of this kind — and both say so rather than showing an empty surface.";
+  const gate = "Fills when the file is harvested; the harvest is a local-run duty after the "
+    + "2026-08-18 season flip (docs/gearing-s2-scope.md, Phase E).";
+  const pending = { absent: true, since: null, reason, gate };
+  if (file === "archon-usage.json") {
+    return { source: "Archon (archon.gg) — Warcraft Logs-derived gear usage", lane: "usage",
+      quantity: "share of logged players wearing the item", note: LANE_NOTE,
+      status: "pending", season: null, harvestedAt: null, pending, specs: [] };
+  }
+  if (file !== "guide-picks.json" && file !== "guide-priorities.json")
+    throw new Error(`absentFileStub: no stub defined for ${file}`);
+  return {
+    source: "Icy Veins + Wowhead + Method (docs/gearing-s2-scope.md G4)",
+    quantity: file === "guide-picks.json" ? "picks" : "priorities",
+    note: file === "guide-picks.json"
+      ? "Guide-authored endorsements. BiS picks and weaker alternatives are TWO counts that "
+        + "never sum (G9); each source votes at most once per item (G10)."
+      : "Ordered stat priorities exactly as published. Guides publish ORDERS, never numeric "
+        + "weights (G1); the Build list is the union across sources on synthetic ids (G12).",
+    status: "pending", season: null, harvestedAt: null, sources: {}, specs: {}, pending,
+  };
+}
+
+const isAbsentStub = (doc) => doc?.status === "pending" && doc?.pending?.absent === true;
+
+function validatePendingRecord(doc, where, errors) {
+  if (doc.season !== null || doc.harvestedAt !== null)
+    errors.push(`${where}: a pending file must be undated and seasonless`);
+  if (Object.keys(doc.specs ?? {}).length) errors.push(`${where}: a pending file must carry no spec data`);
+  if (Object.keys(doc.sources ?? {}).length) errors.push(`${where}: a pending file must declare no sources`);
+  if (!doc.pending?.reason) errors.push(`${where}: a pending file must record why it is pending`);
+  if (!doc.pending?.gate) errors.push(`${where}: a pending file must record what would end the pending state`);
+}
+
+/* Shared envelope for the two guide files. Returns the harvested body to check, or null when
+   there is nothing further to check (pending, or malformed past the point of reading). */
+function guideBody(doc, where, errors) {
+  if (!doc || typeof doc !== "object") {
+    errors.push(`${where}: file is missing or malformed`);
+    return null;
+  }
+  if (doc.status !== "pending" && doc.status !== "harvested") {
+    errors.push(`${where}: unknown status "${doc.status ?? "none"}" — the only states are `
+      + "pending and harvested; a half-harvested file is the cross-season mixing this lane forbids");
+    return null;
+  }
+  if (doc.status === "pending") { validatePendingRecord(doc, where, errors); return null; }
+
+  if (doc.pending != null) errors.push(`${where}: a harvested file must clear the pending record`);
+  if (!doc.season) errors.push(`${where}: a harvested file must name the season it describes`);
+  if (!doc.harvestedAt) errors.push(`${where}: a harvested file must carry a harvest date`);
+  const declared = doc.sources && typeof doc.sources === "object" && !Array.isArray(doc.sources)
+    ? doc.sources : null;
+  if (!declared || !Object.keys(declared).length) {
+    errors.push(`${where}: a harvested file must declare the sources it harvested`);
+    return null;
+  }
+  for (const id of Object.keys(declared)) {
+    if (!GUIDE_SOURCE_IDS.has(id))
+      errors.push(`${where}: unknown guide source "${id}" — a new outlet is a reviewed edit to `
+        + "GUIDE_SOURCE_IDS, never a silent fourth vote");
+  }
+  const specs = doc.specs && typeof doc.specs === "object" && !Array.isArray(doc.specs)
+    ? doc.specs : null;
+  if (!specs || !Object.keys(specs).length) {
+    errors.push(`${where}: a harvested file must carry spec data`);
+    return null;
+  }
+  return { sources: new Set(Object.keys(declared)), specs };
+}
+
+/* G9/G10/G15's inputs. Every field checked here is one the ranking reads: an unknown source is
+   a vote from nobody, an unplaceable slot is a candidate in no list, a bracket outside the
+   vocabulary silently loses the bracket-matched vote, and an endorsement that is neither "bis"
+   nor "alternative" would land in neither of the two counts that never sum. */
+function validateGuidePicks(doc, specKeys, itemIds, errors) {
+  const body = guideBody(doc, "guide picks", errors);
+  if (!body) return;
+  for (const [key, entry] of Object.entries(body.specs)) {
+    if (!specKeys.has(key))
+      errors.push(`guide picks: "${key}" is not a roster spec`);
+    const picks = entry?.picks;
+    if (!Array.isArray(picks)) {
+      errors.push(`guide picks: ${key} carries no picks array`);
+      continue;
+    }
+    for (const pick of picks) {
+      const at = `guide picks/${key}/${pick?.itemId ?? "unknown item"}`;
+      if (!body.sources.has(pick?.source))
+        errors.push(`${at}: endorsement from undeclared source "${pick?.source ?? "none"}"`);
+      let canonical;
+      try { canonical = normalizeSlot(pick?.slot ?? "", { where: at }); }
+      catch { canonical = undefined; }
+      if (canonical !== pick?.slot || !CANONICAL_SLOTS.has(pick?.slot))
+        errors.push(`${at}: slot "${pick?.slot ?? "none"}" is not a canonical slot — the merge `
+          + "step normalizes through normalizeSlot, so a raw guide label here means it did not");
+      if (!BRACKETS.includes(pick?.bracket))
+        errors.push(`${at}: bracket "${pick?.bracket ?? "none"}" is outside ${BRACKETS.join("/")}`);
+      if (!ENDORSEMENTS.has(pick?.endorsement))
+        errors.push(`${at}: endorsement "${pick?.endorsement ?? "none"}" is neither bis nor alternative`);
+      /* A pick whose item we do not carry cannot be shown, ranked or counted — it would be a
+         consensus vote for a row that never renders. That is a JOIN FAILURE in the harvest, not
+         a row to keep: the honest fix is upstream (our item data, or the guide citing another
+         season's item), which is exactly what rosterMatchRate exists to surface. */
+      if (!itemIds.has(String(pick?.itemId)))
+        errors.push(`${at}: endorses an item that is not in the harvested item data — a pick we `
+          + "cannot join is a join failure, not a row to keep");
+    }
+  }
+}
+
+/* G12/G17's inputs. `id` is the SYNTHETIC id the union needs (two outlets publish the same
+   variant name, and the client matched builds by name alone before Phase B), and `secondaries`
+   is the published ORDER — never a weight. Length is deliberately not fixed at four: guides
+   publish as few as two stats, and padding the tail would invent an ordering nobody wrote. */
+function validateGuidePriorities(doc, specKeys, errors) {
+  const body = guideBody(doc, "guide priorities", errors);
+  if (!body) return;
+  for (const [key, entry] of Object.entries(body.specs)) {
+    if (!specKeys.has(key))
+      errors.push(`guide priorities: "${key}" is not a roster spec`);
+    const builds = entry?.builds;
+    if (!Array.isArray(builds) || !builds.length) {
+      errors.push(`guide priorities: ${key} carries no builds array`);
+      continue;
+    }
+    const seen = new Set();
+    for (const build of builds) {
+      const at = `guide priorities/${key}/${build?.id ?? "unnamed build"}`;
+      if (!body.sources.has(build?.source))
+        errors.push(`${at}: build from undeclared source "${build?.source ?? "none"}"`);
+      if (typeof build?.id !== "string" || !build.id)
+        errors.push(`${at}: build carries no synthetic id (G12 — two outlets publish the same variant name)`);
+      else if (seen.has(build.id)) errors.push(`${at}: duplicate build id`);
+      else seen.add(build.id);
+      const secondaries = build?.secondaries;
+      if (!Array.isArray(secondaries) || !secondaries.length
+        || secondaries.some((stat) => !SECONDARIES.has(stat))
+        || new Set(secondaries).size !== secondaries.length)
+        errors.push(`${at}: invalid secondary order — an ordered run of distinct ${[...SECONDARIES].join("/")}`);
+    }
+  }
+}
+
+/* G13's structural guard already exists, in the harvester that owns the file, with its own
+   tests: `archonUsageIssues` refuses a usage document that carries a guide-pick field anywhere
+   in its spec data. This reuses that one implementation rather than growing a second opinion
+   about what a usage file may contain. */
+function validateArchonUsage(doc, errors) {
+  if (isAbsentStub(doc)) { validatePendingRecord(doc, "archon usage", errors); return; }
+  for (const issue of archonUsageIssues(doc)) errors.push(`archon usage: ${issue}`);
+}
+
 export function validateData({ raid, specs, dungeons, sheet, statOverrides, statBaseline,
-  weaponProficiency, itemEligibility, tier, catalyst, catalystAllocations },
+  weaponProficiency, itemEligibility, tier, catalyst, catalystAllocations,
+  guidePicks, guidePriorities, archonUsage },
   { expectedPatch = "12.0.7" } = {}) {
   const errors = [];
   const rows = specs?.specs || [];
@@ -512,6 +700,16 @@ export function validateData({ raid, specs, dungeons, sheet, statOverrides, stat
   const allItems = [...raidItems, ...dungeonGroups.flatMap((dungeon) => dungeon.items || [])];
   validateItemEligibility(itemEligibility, allItems, rows, errors);
   validateCatalystAndTier(catalyst, tier, catalystAllocations, raidGroups, dungeonGroups, errors);
+
+  /* The join set is every item the page can actually render — raid drops, dungeon drops and
+     the direct-tier pieces — i.e. the client's own ALL_KNOWN_ITEMS. A guide legitimately picks
+     a tier piece, so excluding direct tier here would fail honest picks. */
+  const knownItemIds = new Set([...allItems, ...(tier?.sets || []).flatMap((set) => set.items || [])]
+    .map((item) => String(item.id)));
+  const specKeys = new Set(keys);
+  validateGuidePicks(guidePicks, specKeys, knownItemIds, errors);
+  validateGuidePriorities(guidePriorities, specKeys, errors);
+  validateArchonUsage(archonUsage, errors);
 
   for (const boss of raidGroups)
     for (const item of boss.items || []) {

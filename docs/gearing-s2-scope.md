@@ -419,6 +419,43 @@ Archon's page verifying as Season 2 — the same season-verification the tracker
 fills itself on the first harvest that passes. Phase B does not wait for it. Showing Season-1 usage
 next to Season-2 guide picks was rejected as the cross-season mixing every other rule here forbids.
 
+## Phase-C decisions (Riley, 2026-08-13)
+
+### ⚑ DECISION G15: tiered consensus — BiS picks always top, alternatives compete
+
+The measured shape: guides name roughly ONE item per slot per list, so a typical slot holds 1–3
+named candidates against 5–15 that no guide mentions at all. So "consensus first" needs to say what
+happens to the unnamed majority, and the answer is three bands:
+
+1. **Any source's BiS pick** — always above everything else, ordered among themselves by pick count,
+   then alternative count, then stat fit.
+2. **Everything else** — items carrying only *alternative* endorsements compete with unnamed items
+   **on stat fit**, with the endorsement breaking ties.
+3. Special-effect items keep their existing outside-the-ranking `S` marker.
+
+Rejected: strict gating (any endorsement beats any unnamed item), because a single passing mention
+would then bury a materially better-statted item across the 5–15 unnamed candidates that make up
+most of a slot. Also rejected: consensus as a numeric boost, which needs a number saying what an
+endorsement is worth in stat-fit units — the invented quantity G1 exists to avoid.
+
+### ⚑ DECISION G16: item level is a column, never an ordering term
+
+The top-5 stays consensus → stat fit. Attainable item level renders as its own named column
+beside it and **never reorders anything**. Two reasons beyond G2's separate-quantities rule: an
+item's ilvl depends on the difficulty or key level you actually play, so "higher ilvl" is a
+question the ranking cannot answer for an unknown reader; and ordering by it would make the list
+shuffle whenever a difficulty selector moves. The upgrade-delta ordering stays where G2 put it —
+in the Phase-D game plan, where a `/simc` paste makes it answerable.
+
+### ⚑ DECISION G17: the default Build is the most-corroborated scoping
+
+With three sources publishing up to three scoped variants each, a spec's Build list can hold 5–6
+options (G12 keeps them all, labeled). The default is a build whose scoping — hero talent plus
+bracket — **more than one source publishes**, falling back to the first published variant when
+nothing is corroborated. Rejected: a fixed source preference, which would quietly make one outlet
+the default voice on all 40 specs; and newest-updated, which makes the default flip around as
+outlets publish and treats recency as authority.
+
 ## Open questions for kickoff
 
-None outstanding. Fourteen decisions (G1–G14) are locked.
+None outstanding. Seventeen decisions (G1–G17) are locked.

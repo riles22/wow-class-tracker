@@ -1,26 +1,38 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
+import { fileURLToPath } from "node:url";
+import { injectGuideLib } from "../src/inline-guides.mjs";
 import { dungeonLootIdsFrom, parseItem, parsedItemIssues, raidBossLootIdsFrom } from "../src/lib-wowhead.mjs";
 import { extractPriority } from "../src/lib-icy-veins.mjs";
-import { validateData } from "../src/validate-data.mjs";
+import { absentFileStub, validateData } from "../src/validate-data.mjs";
+import { harvestedFile } from "../src/harvest-archon-gear.mjs";
 
 const fromRoot = (path) => new URL(`../${path}`, import.meta.url);
+const GEARING_ROOT = fileURLToPath(new URL("../", import.meta.url));
+/* The template carries a __LIB_GUIDES__ placeholder the build substitutes with
+   src/lib-guides.mjs (src/inline-guides.mjs). Booting the raw template would run a page
+   the browser never sees, so the tests assemble it exactly the way the build does. */
+const appTemplate = async () =>
+  injectGuideLib(await readFile(fromRoot("src/app.template.html"), "utf8"), GEARING_ROOT);
 const json = async (path) => JSON.parse(await readFile(fromRoot(path), "utf8"));
 const clone = (value) => JSON.parse(JSON.stringify(value));
 
 async function allValidatedData() {
   const [raid, specs, dungeons, sheet, statOverrides, statBaseline, weaponProficiency, itemEligibility,
-    tier, catalyst, catalystAllocations] = await Promise.all([
+    tier, catalyst, catalystAllocations, guidePicks, guidePriorities, archonUsage] = await Promise.all([
     json("data/raid-items.json"), json("data/specs.json"), json("data/dungeon-items.json"),
     json("data/sheet-rewards.json"), json("data/stat-priority-overrides.json"),
     json("data/stat-priority-baseline.json"), json("data/weapon-proficiency.json"),
     json("data/item-eligibility-overrides.json"),
     json("data/tier-items.json"), json("data/catalyst-rules.json"),
     json("data/catalyst-stat-allocations.json"),
+    // The Phase-C guide layer. All three ship PENDING until the first post-flip harvest, and
+    // that state is the shipping state — so every test here runs against empty guide data.
+    json("data/guide-picks.json"), json("data/guide-priorities.json"), json("data/archon-usage.json"),
   ]);
   return { raid, specs, dungeons, sheet, statOverrides, statBaseline, weaponProficiency,
-    itemEligibility, tier, catalyst, catalystAllocations };
+    itemEligibility, tier, catalyst, catalystAllocations, guidePicks, guidePriorities, archonUsage };
 }
 
 /* The client harness. Every client test boots the real app script out of
@@ -30,15 +42,17 @@ async function allValidatedData() {
    typeof-guarded (see the deep-link comment in app.template.html). */
 async function clientFixture() {
   const [template, raid, specs, dungeons, sheet, itemEligibility, tier, catalyst,
-    catalystAllocations, icons] = await Promise.all([
-    readFile(fromRoot("src/app.template.html"), "utf8"),
+    catalystAllocations, guidePicks, guidePriorities, archonUsage, icons] = await Promise.all([
+    appTemplate(),
     json("data/raid-items.json"), json("data/specs.json"), json("data/dungeon-items.json"),
     json("data/sheet-rewards.json"), json("data/item-eligibility-overrides.json"),
     json("data/tier-items.json"), json("data/catalyst-rules.json"),
-    json("data/catalyst-stat-allocations.json"), json("data/icons.json"),
+    json("data/catalyst-stat-allocations.json"),
+    json("data/guide-picks.json"), json("data/guide-priorities.json"), json("data/archon-usage.json"),
+    json("data/icons.json"),
   ]);
   const data = { raid, specs, dungeons, sheet, itemEligibility, tier, catalyst,
-    catalystAllocations, icons: icons.icons };
+    catalystAllocations, guidePicks, guidePriorities, archonUsage, icons: icons.icons };
   const scripts = [...template.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)];
   const appSource = `${scripts.at(-1)[1]}\nreturn { current: () => CUR, `
     + "scoreFor: id => scoreItem(CUR, BY_ID[id]), weights: () => activeWeights(CUR), "
@@ -424,20 +438,24 @@ test("stat profiles and explicit weapon edge cases remain correct", async () => 
 
 test("self-contained output embeds current data and valid browser JavaScript", async () => {
   const [html, template, raid, specs, dungeons, sheet, itemEligibility, tier, catalyst,
-    catalystAllocations, icons] = await Promise.all([
+    catalystAllocations, guidePicks, guidePriorities, archonUsage, icons] = await Promise.all([
     readFile(fromRoot("wow-s2-gearing.html"), "utf8"),
-    readFile(fromRoot("src/app.template.html"), "utf8"),
+    appTemplate(),
     json("data/raid-items.json"), json("data/specs.json"), json("data/dungeon-items.json"),
     json("data/sheet-rewards.json"), json("data/item-eligibility-overrides.json"),
     json("data/tier-items.json"), json("data/catalyst-rules.json"),
-    json("data/catalyst-stat-allocations.json"), json("data/icons.json"),
+    json("data/catalyst-stat-allocations.json"),
+    json("data/guide-picks.json"), json("data/guide-priorities.json"), json("data/archon-usage.json"),
+    json("data/icons.json"),
   ]);
   const embedded = html.match(/<script id="data" type="application\/json">([\s\S]*?)<\/script>/);
   assert.ok(embedded);
-  // The inlined blob is exactly what build.mjs writes: nine keys, no SimC/healer ledgers.
+  // The inlined blob is exactly what build.mjs writes: twelve keys, no SimC/healer ledgers.
+  // The three guide-layer files are inlined in whatever state they are in — pending today —
+  // so the page carries the reason it has no consensus rather than an empty surface.
   assert.deepEqual(JSON.parse(embedded[1]), {
     raid, specs, dungeons, sheet, itemEligibility, tier, catalyst, catalystAllocations,
-    icons: icons.icons,
+    guidePicks, guidePriorities, archonUsage, icons: icons.icons,
   });
 
   const scripts = [...template.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)];
@@ -460,7 +478,7 @@ test("self-contained output embeds current data and valid browser JavaScript", a
    were four. The Encounter selector was fed by the SimC scenario manifest and has no source
    left to enumerate it, so its absence is the assertion, not just the Build rename. */
 test("the setup card offers exactly three controls and no Encounter selector", async () => {
-  const template = await readFile(fromRoot("src/app.template.html"), "utf8");
+  const template = await appTemplate();
   const card = template.match(/<section class="setup-card"[\s\S]*?<\/section>/);
   assert.ok(card, "expected a setup card section");
   assert.deepEqual([...card[0].matchAll(/<select id="([a-z-]+)"/g)].map((match) => match[1]),
@@ -473,7 +491,7 @@ test("the setup card offers exactly three controls and no Encounter selector", a
    the guide stat order and the user's own numbers. A third option would mean a third ranking
    model nothing in the data can back. */
 test("the scoring-mode options are exactly guide order and custom weights", async () => {
-  const template = await readFile(fromRoot("src/app.template.html"), "utf8");
+  const template = await appTemplate();
   const select = template.match(/<select id="scoring-mode">([\s\S]*?)<\/select>/);
   assert.ok(select);
   assert.deepEqual([...select[1].matchAll(/<option value="([a-z]+)">([^<]+)<\/option>/g)]
@@ -695,5 +713,203 @@ test("the /simc addon paste maps equipped gear to Season 2 upgrade sources", asy
     "no stat-priority Fit chip on unranked trinket rows (audit 2026-08-05)");
   assert.doesNotMatch(document.ids.get("up").innerHTML,
     /Blazebinder's Hoof|Preternatural Antivenom|Idol of the Howling Nexus/);
+});
+
+/* ---------- the Phase-C guide layer (docs/gearing-s2-scope.md G4, G9-G15) ----------
+   Two states have to be right at once, and only one of them exists in the repo today. The
+   PENDING state is what ships — no harvest can honestly run before the 2026-08-18 flip — so it
+   must validate as cleanly as a harvest. The HARVESTED state has no committed instance to test
+   against, so it is exercised through fixtures built out of REAL item ids and REAL roster keys:
+   a fixture that invented its own item ids could not catch the join failure that matters most. */
+
+const GUIDE_SOURCES = {
+  icyveins: { label: "Icy Veins", published: "2026-08-18" },
+  wowhead: { label: "Wowhead class guides", published: "2026-08-18" },
+  method: { label: "Method", published: "2026-08-17" },
+};
+
+function harvestedGuideLayer(data) {
+  const raidItem = data.raid.bosses.flatMap((boss) => boss.items).find((item) => item.slot === "Head");
+  const dungeonItem = data.dungeons.dungeons.flatMap((dungeon) => dungeon.items)
+    .find((item) => item.slot === "Back");
+  const tierItem = data.tier.sets[0].items[0];
+  const guidePicks = {
+    source: "Icy Veins + Wowhead + Method (docs/gearing-s2-scope.md G4)",
+    quantity: "picks", note: "Guide-authored endorsements (G9/G10).",
+    status: "harvested", season: "s2", harvestedAt: "2026-08-19",
+    sources: clone(GUIDE_SOURCES), pending: null,
+    specs: {
+      "Shadow Priest": { picks: [
+        { source: "icyveins", bracket: "raid", slot: raidItem.slot, itemId: raidItem.id,
+          endorsement: "bis" },
+        // A direct-tier piece: guides pick them, so the join set is the client's ALL_KNOWN_ITEMS.
+        { source: "wowhead", bracket: "overall", slot: tierItem.slot, itemId: tierItem.id,
+          endorsement: "bis" },
+        { source: "method", bracket: "mplus", slot: dungeonItem.slot, itemId: dungeonItem.id,
+          endorsement: "alternative" },
+      ] },
+    },
+  };
+  const guidePriorities = {
+    source: "Icy Veins + Wowhead + Method (docs/gearing-s2-scope.md G4)",
+    quantity: "priorities", note: "Published stat orders, never weights (G1/G12).",
+    status: "harvested", season: "s2", harvestedAt: "2026-08-19",
+    sources: clone(GUIDE_SOURCES), pending: null,
+    specs: {
+      "Shadow Priest": { builds: [
+        { id: "icyveins:voidweaver", source: "icyveins", label: "Voidweaver",
+          heroTalent: "Voidweaver", bracket: null, fightProfile: null,
+          secondaries: ["Haste", "Mast", "Crit", "Vers"] },
+        // Two outlets, same variant name, different synthetic ids — the reason G12 needs one.
+        { id: "wowhead:voidweaver-single-target", source: "wowhead", label: "Voidweaver, Single-Target",
+          heroTalent: "Voidweaver", bracket: null, fightProfile: "Single-Target",
+          // Guides publish as few as two stats; padding the tail would invent an order.
+          secondaries: ["Haste", "Crit"] },
+      ] },
+    },
+  };
+  const archonUsage = harvestedFile({
+    season: "s2", harvestedAt: "2026-08-20",
+    specs: [{ class: "Priest", spec: "Shadow", brackets: { raid: {
+      url: "https://www.archon.gg/wow/builds/shadow/priest/raid/gear-and-tier-set/mythic/all-bosses",
+      lastUpdated: "2026-08-20T12:00:00Z", totalParses: 4210,
+      sampleDescription: "Top 100 Mythic parses per boss",
+      slots: [{ slot: raidItem.slot, sourceLabel: "Head",
+        items: [{ itemId: raidItem.id, name: raidItem.name, usagePct: 29.6 }] }],
+      crafted: [], missives: [], embellishments: [],
+    } } }],
+  });
+  return { guidePicks, guidePriorities, archonUsage };
+}
+
+test("the guide layer ships pending, and the pending state validates as-is", async () => {
+  const data = await allValidatedData();
+  assert.doesNotThrow(() => validateData(data));
+  for (const [key, file] of [["guidePicks", "guide-picks.json"],
+    ["guidePriorities", "guide-priorities.json"], ["archonUsage", "archon-usage.json"]]) {
+    const doc = data[key];
+    assert.equal(doc.status, "pending", `${file} must still be pending before the flip`);
+    assert.equal(doc.season, null);
+    assert.equal(doc.harvestedAt, null);
+    assert.ok(doc.pending?.reason, `${file} must record why it is pending`);
+    assert.ok(doc.pending?.gate, `${file} must record what would end the pending state`);
+    assert.equal(Object.keys(doc.specs ?? {}).length, 0, `${file} must carry no spec data`);
+  }
+});
+
+/* A checkout without a harvest still has to build. An ABSENT file is treated exactly like a
+   pending one — same status, same self-explanation — because to the page they mean the same
+   thing: no signal of this kind. The stub is checked HERE rather than only inside build.mjs so
+   that "missing behaves like pending" is a property under test, not a hope about a script. */
+test("a missing guide file validates exactly like a pending one", async () => {
+  const valid = await allValidatedData();
+  for (const [key, file] of [["guidePicks", "guide-picks.json"],
+    ["guidePriorities", "guide-priorities.json"], ["archonUsage", "archon-usage.json"]]) {
+    const stub = absentFileStub(file);
+    assert.equal(stub.status, "pending");
+    assert.equal(stub.pending.absent, true);
+    assert.match(stub.pending.reason, /absent from this checkout/);
+    assert.ok(stub.pending.gate);
+    assert.doesNotThrow(() => validateData({ ...clone(valid), [key]: stub }), file);
+  }
+  assert.throws(() => absentFileStub("raid-items.json"), /no stub defined/);
+});
+
+test("a harvested guide layer validates against the real roster and item data", async () => {
+  const valid = await allValidatedData();
+  const harvested = { ...clone(valid), ...harvestedGuideLayer(valid) };
+  assert.doesNotThrow(() => validateData(harvested));
+  assert.deepEqual(validateData(harvested), { specs: 40, raidBosses: 8, dungeons: 8 });
+});
+
+test("validation rejects malformed guide picks, priorities and usage", async () => {
+  const valid = await allValidatedData();
+  const base = { ...clone(valid), ...harvestedGuideLayer(valid) };
+  const shadowPicks = (data) => data.guidePicks.specs["Shadow Priest"].picks;
+  const shadowBuilds = (data) => data.guidePriorities.specs["Shadow Priest"].builds;
+  const usageItem = (data) => data.archonUsage.specs[0].brackets.raid.slots[0].items[0];
+  const mutations = [
+    // --- envelope, both guide files
+    ["unknown status", /unknown status "draft"/, (data) => { data.guidePicks.status = "draft"; }],
+    ["harvested file that kept its pending record", /must clear the pending record/, (data) => {
+      data.guidePicks.pending = { reason: "still waiting" };
+    }],
+    ["harvested file with no season", /must name the season/, (data) => { data.guidePicks.season = null; }],
+    ["harvested file with no harvest date", /must carry a harvest date/, (data) => {
+      data.guidePriorities.harvestedAt = null;
+    }],
+    ["harvested file declaring no sources", /must declare the sources/, (data) => {
+      data.guidePicks.sources = {};
+    }],
+    ["a fourth outlet nobody reviewed", /unknown guide source "simc"/, (data) => {
+      data.guidePicks.sources.simc = { label: "SimulationCraft" };
+    }],
+    ["pending file that grew spec data", /must carry no spec data/, (data) => {
+      data.guidePicks = { ...clone(valid.guidePicks), specs: { "Shadow Priest": { picks: [] } } };
+    }],
+    ["pending file with no stated reason", /must record why it is pending/, (data) => {
+      data.guidePriorities = { ...clone(valid.guidePriorities),
+        pending: { ...valid.guidePriorities.pending, reason: "" } };
+    }],
+    // --- picks (G9/G10/G15 inputs)
+    ["pick from an undeclared source", /undeclared source "method"/, (data) => {
+      delete data.guidePicks.sources.method;
+    }],
+    ["raw guide slot label", /is not a canonical slot/, (data) => { shadowPicks(data)[0].slot = "Helm"; }],
+    ["a slot the model deliberately ignores", /is not a canonical slot/, (data) => {
+      shadowPicks(data)[0].slot = "Tabard";
+    }],
+    ["bracket outside the vocabulary", /bracket "pvp" is outside/, (data) => {
+      shadowPicks(data)[0].bracket = "pvp";
+    }],
+    ["invented endorsement strength", /neither bis nor alternative/, (data) => {
+      shadowPicks(data)[2].endorsement = "recommended";
+    }],
+    ["pick for an item we do not carry", /not in the harvested item data/, (data) => {
+      shadowPicks(data)[0].itemId = "999999";
+    }],
+    ["pick for a spec outside the roster", /"Shadow Priestess" is not a roster spec/, (data) => {
+      data.guidePicks.specs["Shadow Priestess"] = data.guidePicks.specs["Shadow Priest"];
+      delete data.guidePicks.specs["Shadow Priest"];
+    }],
+    // --- priorities (G12/G17 inputs)
+    ["build with no source", /undeclared source "none"/, (data) => { delete shadowBuilds(data)[0].source; }],
+    ["build with no synthetic id", /carries no synthetic id/, (data) => { delete shadowBuilds(data)[1].id; }],
+    ["two builds sharing one id", /duplicate build id/, (data) => {
+      shadowBuilds(data)[1].id = shadowBuilds(data)[0].id;
+    }],
+    ["stat outside the secondary vocabulary", /invalid secondary order/, (data) => {
+      shadowBuilds(data)[0].secondaries = ["Haste", "Spirit", "Crit", "Vers"];
+    }],
+    ["a stat repeated in one order", /invalid secondary order/, (data) => {
+      shadowBuilds(data)[1].secondaries = ["Haste", "Haste"];
+    }],
+    ["priority build with no stat order at all", /invalid secondary order/, (data) => {
+      shadowBuilds(data)[0].secondaries = [];
+    }],
+    // --- archon usage (G13: it may never impersonate a guide pick)
+    ["usage row smuggling an endorsement", /guide-pick field/, (data) => {
+      usageItem(data).endorsement = "bis";
+    }],
+    ["usage row smuggling a pick count", /guide-pick field/, (data) => { usageItem(data).picks = 2; }],
+    /* The envelope is walked too, not only the spec data. Before 2026-08-13 the guard walked
+       `doc.specs` alone, so a vote parked beside the note passed — which the README already
+       described as impossible. */
+    ["usage envelope smuggling a consensus block", /guide-pick field/, (data) => {
+      data.archonUsage.consensus = { icyveins: 3 };
+    }],
+    ["usage share nobody measured", /has no usage share/, (data) => { usageItem(data).usagePct = null; }],
+    ["usage cut with no sample behind it", /parse count/, (data) => {
+      data.archonUsage.specs[0].brackets.raid.totalParses = null;
+    }],
+    ["usage file that lost its endorsement disclaimer", /disclaim endorsement/, (data) => {
+      data.archonUsage.note = "Gear usage data.";
+    }],
+  ];
+  for (const [label, expected, mutate] of mutations) {
+    const data = clone(base);
+    mutate(data);
+    assert.throws(() => validateData(data), expected, label);
+  }
 });
 
