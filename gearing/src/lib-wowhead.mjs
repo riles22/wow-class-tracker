@@ -40,13 +40,17 @@ export function itemIdsFrom(html) {
 // class-specific bonus-roll tables, and Gatherer metadata. Scanning every link therefore
 // assigns unrelated items to the guide's boss or dungeon. Read the JSON-encoded guide body
 // and select only the semantic loot tables instead.
-function guideMarkupFrom(html) {
+// Exported since the guide-harvest layer (Phase B) parses the SAME markup for a different
+// purpose: the class BiS pages are rendered client-side from this payload, so the server HTML
+// carries no BiS table at all. These four are Wowhead-markup primitives, not loot-table logic,
+// which is why they live here rather than being re-implemented per harvester.
+export function guideMarkupFrom(html) {
   const match = /WH\.markup\.printHtml\(\s*("(?:\\.|[^"\\])*")\s*,\s*"guide-body"/.exec(html);
   if (!match) throw new Error("guide-body markup not found");
   return JSON.parse(match[1]);
 }
 
-function markupBlocks(source, tag) {
+export function markupBlocks(source, tag) {
   const token = new RegExp(`\\[(/?)${tag}(?:\\s[^\\]]*)?\\]`, "gi");
   const out = [];
   let depth = 0;
@@ -61,14 +65,18 @@ function markupBlocks(source, tag) {
   return out;
 }
 
-const plainMarkup = (value) => value.replace(/\[\/?[^\]]+\]/g, " ").replace(/\s+/g, " ").trim();
+export const plainMarkup = (value) => value.replace(/\[\/?[^\]]+\]/g, " ").replace(/\s+/g, " ").trim();
 const markupItemIds = (value) => [...new Set(
   [...value.matchAll(/\[item=(\d+)(?=[\s\]])/gi)].map((m) => m[1]),
 )];
 
-function markupHeadings(markup) {
-  return [...markup.matchAll(/\[h([1-6])(?:\s[^\]]*)?\]([\s\S]*?)\[\/h\1\]/gi)]
-    .map((m) => ({ start: m.index, text: plainMarkup(m[2]) }));
+// `start`/`text` are the original contract; `end`, `level` and `attrs` were added for the
+// guide harvest, which needs the heading's own `toc=` attribute (see harvest-guide-wowhead:
+// "Best Gear from Raids" defeats a \braid\b test, while toc="Raid Drops" does not).
+export function markupHeadings(markup) {
+  return [...markup.matchAll(/\[h([1-6])((?:\s[^\]]*)?)\]([\s\S]*?)\[\/h\1\]/gi)]
+    .map((m) => ({ start: m.index, end: m.index + m[0].length, level: Number(m[1]),
+      attrs: m[2].trim(), text: plainMarkup(m[3]) }));
 }
 
 function tableHeaderRows(table) {

@@ -692,16 +692,28 @@ docs/     working notes (finder-audit.md — HISTORY, the Spec Finder was remove
           re-harvest; the setup card collapsed to Specialization · Build · Scoring method,
           and the `reference` scoring mode and the Encounter selector no longer exist.
           `custom` weights survived as a full override that ANNOUNCES itself on ranked
-          surfaces. Still unbuilt (Phases B-E): guide-consensus ranking replacing the
-          sim-derived weights, three guide sources (Icy Veins + Wowhead + Method)
-          harvested with SCOPED stat priorities (hero talent × bracket × fight profile),
-          the per-boss/dungeon "game plan" joining the ranked candidates to the
-          `droppedBy` field the client already carries and never reads, and per-source
-          trinket letter tiers (the guides' scoping axes are ragged — 1 to 3 published
-          priorities per spec — so a 2-axis grid would invent cells; trinkets stay
-          deliberately OUTSIDE the top-5 ranking). Phase A must still not MERGE before
-          the 08-18 flip — gearing's tests run under the root `npm test`, so a broken
-          gearing breaks the nightly publish gate.
+          surfaces. **PHASE B IS BUILT TOO** (2026-08-13, branch `gearing-phase-b` off
+          phase-a, also NOT merged; decisions G9-G14): `gearing/src/lib-guides.mjs` is the
+          shared contract (slot/bracket/drop-source normalization + the consensus math),
+          with four harvesters against recorded page fixtures — harvest-guide-icyveins /
+          -wowhead / -method and harvest-archon-gear. Phase B ships MACHINERY, NOT A
+          HARVEST: no picks file is committed, because every source is mid-season and a
+          harvest now would capture PTR-era picks Phase E replaces. The counting rules:
+          BiS picks and weaker alternatives are TWO counts that never sum; ONE vote per
+          source, cast by the list matching the ITEM's own bracket (so Icy Veins' three
+          lists cannot outvote the other two outlets); the Build selector is the UNION
+          across sources keyed by a SYNTHETIC id (two outlets publish the same variant
+          name); and **Archon is a log-derived USAGE lane that never votes and never
+          reorders** — the WoWMeta error (letters clustering on player count) already
+          reversed once on 2026-07-31 — shipping `status: "pending"` behind a five-check
+          season gate, because Archon's gear pages are still Season 1 and its
+          `beta-mythic-plus` lane serves the full S2 roster off 16 parses.
+          Still unbuilt (Phases C-E): the ranking model itself, the per-boss/dungeon
+          "game plan" joining ranked candidates to the `droppedBy` field the client
+          already carries and never reads, per-source trinket letter tiers (trinkets stay
+          deliberately OUTSIDE the top-5 ranking), and the launch re-harvest.
+          Neither branch may MERGE before the 08-18 flip — gearing's tests run under the
+          root `npm test`, so a broken gearing breaks the nightly publish gate.
           adr-simc-reference-pipeline.md + adr-simc-curated-profiles.md — HISTORY, both
           SUPERSEDED 2026-08-12 by gearing-s2-scope.md G3 when Phase A removed the
           pipeline. Their bodies are deliberately byte-untouched (same convention as

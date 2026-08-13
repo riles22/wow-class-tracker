@@ -1,0 +1,65 @@
+{
+  "source": "Archon (archon.gg) — Warcraft Logs-derived gear usage",
+  "lane": "usage",
+  "quantity": "share of logged players wearing the item",
+  "note": "Log-derived usage popularity — the share of logged players wearing the item. This is NOT a guide recommendation and never orders, ranks or breaks ties between candidates (docs/gearing-s2-scope.md, DECISION G13).",
+  "status": "pending",
+  "season": null,
+  "harvestedAt": null,
+  "pending": {
+    "since": "2026-08-13",
+    "checkedAt": "2026-08-13",
+    "reason": "roster: 0/9 encounters join our harvested roster; unmatched: Imperator, Vorasius, Salhadaar, Vaelgor & Ezzorak, Vanguard, Crown, Chimaerus, Belo'ren, Midnight Falls",
+    "gate": "Fills itself on the first run where Archon's gear pages pass all five season checks (live lane · no beta warning · the live season in the page's own prose · its encounter list joins our harvested roster · a sample above the floor). Archon's gear data is log-derived, so a meaningful Mythic sample is days-to-weeks after a season opens; until then this column shows the reason below rather than last season's usage.",
+    "evidence": [
+      {
+        "url": "https://www.archon.gg/wow/builds/frost/mage/raid/gear-and-tier-set/mythic/all-bosses",
+        "season": "s1",
+        "lastUpdated": "2026-08-12T12:00:00Z",
+        "totalParses": 10345,
+        "failed": [
+          "roster"
+        ],
+        "encounters": [
+          "Imperator",
+          "Vorasius",
+          "Salhadaar",
+          "Vaelgor & Ezzorak",
+          "Vanguard",
+          "Crown",
+          "Chimaerus",
+          "Belo'ren",
+          "Midnight Falls"
+        ],
+        "checks": [
+          {
+            "name": "lane",
+            "ok": true,
+            "detail": "selectedZoneType=raid (live lanes: raid, mythic-plus)"
+          },
+          {
+            "name": "noBetaWarning",
+            "ok": true,
+            "detail": "page carries no warning"
+          },
+          {
+            "name": "season",
+            "ok": true,
+            "detail": "page reads s1 (\"12.0.7\"), live season is s1"
+          },
+          {
+            "name": "roster",
+            "ok": false,
+            "detail": "0/9 encounters join our harvested roster; unmatched: Imperator, Vorasius, Salhadaar, Vaelgor & Ezzorak, Vanguard, Crown, Chimaerus, Belo'ren, Midnight Falls"
+          },
+          {
+            "name": "sample",
+            "ok": true,
+            "detail": "totalParses=10345 (floor 500)"
+          }
+        ]
+      }
+    ]
+  },
+  "specs": []
+}

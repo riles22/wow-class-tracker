@@ -1,0 +1,403 @@
+<!doctype html>
+<!-- RECORDED FIXTURE - real bytes from the live page, trimmed.
+     source : https://www.method.gg/guides/holy-paladin/gearing
+     fetched: 2026-08-13 (plain https GET + browser UA, no proxy; valid UTF-8)
+     trimmed: the masthead block (title, patch label, guide-update-date) plus the
+              guide body from the first guide-section-title div to the footer.
+              The removed span is inline CSS and site nav only - measured to hold
+              zero table elements and zero wowhead item links - so nothing this
+              parser reads was cut. Verified: parsing this fixture yields byte-
+              identical output to parsing the untrimmed page.
+     HEALER. Three brackets (Overall / Raid / Mythic+). Drop sources carry the
+     &rsquo; ENTITY - King&rsquo;s Rest, Nek&rsquo;zali, Ula&rsquo;tek - which is the apostrophe
+     trap in its real form: there is no apostrophe CHARACTER here for normalizeText to
+     fold until the entity is decoded. Also (Tier Set) vs (Tier set) case variance,
+     (Catalyst) and (Tier Token) source annotations, and a Trinkets section grouped by
+     bold paragraphs Method wrote itself (Recommended Trinkets / Alternatives) rather
+     than by letter tier - so it must stay UNRANKED.
+-->
+<html lang="en"><head><meta charset="utf-8"><title>holy-paladin gearing</title></head>
+<body>
+<div class="guides-titles">
+                <div class="row">
+                  <div class="col-lg-8">
+                    <h1 class="main-title">Holy Paladin <span class="title-break">Midnight Gearing Guide</span></h1>
+                  </div>
+                                    <div class="col-lg-4 text-right">
+                    <span class="guide-author">Patch 12.1</span>
+                    <span class="guide-update-date"><strong>Last Updated: </strong>11th Aug, 2026</span>
+</div>
+</div>
+</div>
+<div class="guide-section-title" id="tier-sets"><h2>Tier Sets</h2></div>
+                                    <p><b>Midnight Season 1 Tier Set Bonuses:</b></p>
+<ul>
+<li aria-level="1">(2) Set Bonus: <a href="https://www.wowhead.com/ptr/spell=53576/infusion-of-light" target="_blank" rel="noopener">Infusion Of Light</a> increases the healing of <a href="https://www.wowhead.com/ptr/spell=19750/flash-of-light" target="_blank" rel="noopener">Flash Of Light</a> by an additional 100% and absorb from Greater Judgement by an additional 100%</li>
+<li aria-level="1">(4) Set Bonus: Judgement now has a 20% chance to grant <a href="https://www.wowhead.com/ptr/spell=53576/infusion-of-light" target="_blank" rel="noopener">Infusion Of Light</a>. <a href="https://www.wowhead.com/ptr/spell=82326/holy-light" target="_blank" rel="noopener">Holy Light</a> now has a 100% chance to grant <a href="https://www.wowhead.com/ptr/spell=53576/infusion-of-light" target="_blank" rel="noopener">Infusion Of Light</a>, but its mana cost is increased by 50%.</li>
+</ul>
+<p>The 2p set bonus is pretty simple and self explanatory. It&rsquo;ll just buff the effects of <a href="https://www.wowhead.com/ptr/spell=53576/infusion-of-light" target="_blank" rel="noopener">Infusion Of Light</a>.</p>
+<p>The 4-piece set bonus is the biggest gameplay change this season. Once you have it, <a href="https://www.wowhead.com/ptr/spell=20271/judgment" target="_blank" rel="noopener">Judgment</a> becomes a higher priority than <a href="https://www.wowhead.com/ptr/spell=19750/flash-of-light" target="_blank" rel="noopener">Flash Of Light</a> whenever you don't have an Infusion of Light proc. It will also severely limit the number of <a href="https://www.wowhead.com/ptr/spell=82326/holy-light" target="_blank" rel="noopener">Holy Light</a> casts you can afford before running out of mana.</p>
+<p>The increased mana cost is an intentional drawback. During PTR testing, the set bonus made it too easy to generate <a href="https://www.wowhead.com/ptr/spell=53576/infusion-of-light" target="_blank" rel="noopener">Infusion Of Light</a> without relying on <a href="https://www.wowhead.com/ptr/spell=20473/holy-shock" target="_blank" rel="noopener">Holy Shock</a>, leading to a playstyle where players could entirely ignore Holy Shock in favor of simply casting <a href="https://www.wowhead.com/ptr/spell=82326/holy-light" target="_blank" rel="noopener">Holy Light</a> whenever they needed <a href="https://www.wowhead.com/ptr/spell=53576/infusion-of-light" target="_blank" rel="noopener">Infusion Of Light</a> procs.</p>
+<p>Blizzard added the mana penalty to discourage that strategy and keep <a href="https://www.wowhead.com/ptr/spell=20473/holy-shock" target="_blank" rel="noopener">Holy Shock</a> at the center of the rotation. While it's unusual for a tier set to effectively weaken one of your abilities, it's a better outcome than permanently nerfing <a href="https://www.wowhead.com/ptr/spell=82326/holy-light" target="_blank" rel="noopener">Holy Light</a>, since the drawback disappears when the tier set is replaced.</p>                                  
+
+                                                                      <div class="guide-section-title" id="best-gear"><h2>holy paladin Best in Slot Gear</h2></div>
+                                    <p>You should still prioritise the gear you use by running a sim for your character, but the lists below will give you a good idea of what items are considered good for <b>Holy Paladin</b>, and help you target the right content for each piece of loot.</p>									                                    <ul class="nav nav-pills nav-tables nav-justified" role="tablist">
+									                                      <li role="presentation" class="active"><a href="#overall_table" aria-controls="overall_table" role="tab" data-toggle="tab">Overall</a></li>
+																												<li role="presentation" class=""><a href="#raid_table" aria-controls="raid_table" role="tab" data-toggle="tab">Raiding</a></li>
+																												<li role="presentation" class=""><a href="#dungeon_table" aria-controls="dungeon_table" role="tab" data-toggle="tab">Mythic+</a></li>
+																		</ul>
+																		  <div class="tab-content">
+									                                        <div role="tabpanel" class="tab-pane active" id="overall_table">
+									  <div class="gear-table-inner">
+									  <h3>Overall Best Gear for Holy Paladin</h3>
+<table class="table table-bordered table-article">
+<tbody>
+<tr>
+<td><b>Slot</b></td>
+<td><b>Item</b></td>
+<td><b>Source</b></td>
+</tr>
+<tr>
+<td>Head</td>
+<td><a href="https://www.wowhead.com/ptr/item=251126/greathelm-of-temptation?bonus=13440:12854" target="_blank" rel="noopener">Greathelm Of Temptation</a> (Tier Set)</td>
+<td>Murder Row (Catalyst)</td>
+</tr>
+<tr>
+<td>Neck</td>
+<td><a href="https://www.wowhead.com/ptr/item=268251/amulet-of-the-twin-fangs" target="_blank" rel="noopener">Amulet Of The Twin Fangs</a></td>
+<td>The Twin Fangs</td>
+</tr>
+<tr>
+<td>Shoulders</td>
+<td><a href="https://www.wowhead.com/ptr/item=251138/cinderfury-shoulderguards?bonus=13440:12854" target="_blank" rel="noopener">Cinderfury Shoulderguards</a> (Tier Set)</td>
+<td>Murder Row (Catalyst)</td>
+</tr>
+<tr>
+<td>Cloak</td>
+<td><a href="https://www.wowhead.com/ptr/item=268253/silken-voodoo-drape" target="_blank" rel="noopener">Silken Voodoo Drape</a></td>
+<td>The Coiled Altar</td>
+</tr>
+<tr>
+<td>Chest</td>
+<td><a href="https://www.wowhead.com/ptr/item=271468/bulwark-of-the-consecrated-flame" target="_blank" rel="noopener">Bulwark Of The Consecrated Flame</a> (Tier Set)</td>
+<td>Vashnik the Malignant (Tier Token)</td>
+</tr>
+<tr>
+<td>Wrist</td>
+<td><a href="https://www.wowhead.com/ptr/item=268239/shellbound-bracers" target="_blank" rel="noopener">Shellbound Bracers</a></td>
+<td>The Lost Explorers</td>
+</tr>
+<tr>
+<td>Gloves</td>
+<td><a href="https://www.wowhead.com/ptr/item=159413/gauntlets-of-the-avian-sentinel?bonus=13440:12854" target="_blank" rel="noopener">Gauntlets Of The Avian Sentinel</a> (Tier set)</td>
+<td>King&rsquo;s Rest (Catalyst)</td>
+</tr>
+<tr>
+<td>Belt</td>
+<td><a href="https://www.wowhead.com/ptr/item=159418/girdle-of-pestilent-purification?bonus=13440:12854" target="_blank" rel="noopener">Girdle Of Pestilent Purification</a></td>
+<td>King&rsquo;s Rest</td>
+</tr>
+<tr>
+<td>Legs</td>
+<td><a href="https://www.wowhead.com/ptr/item=271878/chausses-of-unbound-rancor" target="_blank" rel="noopener">Chausses Of Unbound Rancor</a></td>
+<td>Ula&rsquo;tek</td>
+</tr>
+<tr>
+<td>Boots</td>
+<td><a href="https://www.wowhead.com/ptr/item=268260/scaled-fiends-warboots" target="_blank" rel="noopener">Scaled Fiend's Warboots</a></td>
+<td>Vashnik the Malignant</td>
+</tr>
+<tr>
+<td>Ring</td>
+<td><a href="https://www.wowhead.com/ptr/item=268249/vile-alchemists-band" target="_blank" rel="noopener">Vile Alchemist's Band</a></td>
+<td>Vashnik the Malignant</td>
+</tr>
+<tr>
+<td>Ring</td>
+<td><a href="https://www.wowhead.com/ptr/item=252258/sickening-signet-of-atroxus?bonus=13440:12854" target="_blank" rel="noopener">Sickening Signet Of Atroxus</a></td>
+<td>Voidscar Arena</td>
+</tr>
+<tr>
+<td>Trinket</td>
+<td><a href="https://www.wowhead.com/ptr/item=270162/soulcoiler-ritual-vessel" target="_blank" rel="noopener">Soulcoiler Ritual Vessel</a></td>
+<td>Nek&rsquo;zali the Soulcoiler</td>
+</tr>
+<tr>
+<td>Trinket</td>
+<td><a href="https://www.wowhead.com/ptr/item=270167/wavecallers-seastone?bonus=13440:12854" target="_blank" rel="noopener">Wavecaller's Seastone</a></td>
+<td>The Tidebound Grotto</td>
+</tr>
+<tr>
+<td>Main Hand</td>
+<td><a href="https://www.wowhead.com/ptr/item=268211/baleful-hexblade" target="_blank" rel="noopener">Baleful Hexblade</a></td>
+<td>The Coiled Altar</td>
+</tr>
+<tr>
+<td>Off Hand</td>
+<td><a href="https://www.wowhead.com/ptr/item=268262/bubblefin-splash-guard" target="_blank" rel="noopener">Bubblefin Splash Guard</a></td>
+<td>The Tidebound Grotto</td>
+</tr>
+</tbody>
+</table>
+<p></p>									  </div>
+                                      </div>
+									                                        										<div role="tabpanel" class="tab-pane " id="raid_table">
+                                        <div class="gear-table-inner">
+                                        <h3>Best Gear from the Raid for Holy Paladin</h3>
+<table class="table table-bordered table-article">
+<tbody>
+<tr>
+<td><b>Slot</b></td>
+<td><b>Item</b></td>
+<td><b>Source</b></td>
+</tr>
+<tr>
+<td>Head</td>
+<td><a href="https://www.wowhead.com/ptr/item=268229/skullguard-of-the-risen-sacrifice" target="_blank" rel="noopener">Skullguard Of The Risen Sacrifice</a> (Tier Set)</td>
+<td>Nek&rsquo;zali the Soulcoiler/Catalyst</td>
+</tr>
+<tr>
+<td>Neck</td>
+<td><a href="https://www.wowhead.com/ptr/item=268251/amulet-of-the-twin-fangs" target="_blank" rel="noopener">Amulet Of The Twin Fangs</a></td>
+<td>The Twin Fangs</td>
+</tr>
+<tr>
+<td>Shoulders</td>
+<td><a href="https://www.wowhead.com/ptr/item=271463/pauldrons-of-the-consecrated-flame" target="_blank" rel="noopener">Pauldrons Of The Consecrated Flame</a> (Tier Set)</td>
+<td>The Lost Explorers (Tier Token)</td>
+</tr>
+<tr>
+<td>Cloak</td>
+<td><a href="https://www.wowhead.com/ptr/item=268253/silken-voodoo-drape" target="_blank" rel="noopener">Silken Voodoo Drape</a></td>
+<td>The Coiled Altar</td>
+</tr>
+<tr>
+<td>Chest</td>
+<td><a href="https://www.wowhead.com/ptr/item=271468/bulwark-of-the-consecrated-flame" target="_blank" rel="noopener">Bulwark Of The Consecrated Flame</a> (Tier Set)</td>
+<td>Vashnik the Malignant (Tier Token)</td>
+</tr>
+<tr>
+<td>Wrist</td>
+<td><a href="https://www.wowhead.com/ptr/item=268239/shellbound-bracers" target="_blank" rel="noopener">Shellbound Bracers</a></td>
+<td>The Lost Explorers</td>
+</tr>
+<tr>
+<td>Gloves</td>
+<td><a href="https://www.wowhead.com/ptr/item=271466/gauntlets-of-the-consecrated-flame" target="_blank" rel="noopener">Gauntlets Of The Consecrated Flame</a> (Tier Set)</td>
+<td>Entombed Sentinels (Tier Token)</td>
+</tr>
+<tr>
+<td>Belt</td>
+<td><a href="https://www.wowhead.com/ptr/item=268259/girdle-of-toxic-regret" target="_blank" rel="noopener">Girdle Of Toxic Regret</a></td>
+<td>The Coiled Altar</td>
+</tr>
+<tr>
+<td>Legs</td>
+<td><a href="https://www.wowhead.com/ptr/item=271878/chausses-of-unbound-rancor" target="_blank" rel="noopener">Chausses Of Unbound Rancor</a></td>
+<td>Ula&rsquo;tek</td>
+</tr>
+<tr>
+<td>Boots</td>
+<td><a href="https://www.wowhead.com/ptr/item=268260/scaled-fiends-warboots" target="_blank" rel="noopener">Scaled Fiend's Warboots</a></td>
+<td>Vashnik the Malignant</td>
+</tr>
+<tr>
+<td>Ring</td>
+<td><a href="https://www.wowhead.com/ptr/item=268249/vile-alchemists-band" target="_blank" rel="noopener">Vile Alchemist's Band</a></td>
+<td>Vashnik the Malignant</td>
+</tr>
+<tr>
+<td>Ring</td>
+<td><a href="https://www.wowhead.com/ptr/item=268252/apex-brutes-claw-ring" target="_blank" rel="noopener">Apex Brute's Claw Ring</a></td>
+<td>Sszorak</td>
+</tr>
+<tr>
+<td>Trinket</td>
+<td><a href="https://www.wowhead.com/ptr/item=270162/soulcoiler-ritual-vessel" target="_blank" rel="noopener">Soulcoiler Ritual Vessel</a></td>
+<td>Nek&rsquo;zali the Soulcoiler</td>
+</tr>
+<tr>
+<td>Trinket</td>
+<td><a href="https://www.wowhead.com/ptr/item=270167/wavecallers-seastone" target="_blank" rel="noopener">Wavecaller's Seastone</a></td>
+<td>The Tidebound Grotto</td>
+</tr>
+<tr>
+<td>Main Hand</td>
+<td><a href="https://www.wowhead.com/ptr/item=268211/baleful-hexblade" target="_blank" rel="noopener">Baleful Hexblade</a></td>
+<td>The Coiled Altar</td>
+</tr>
+<tr>
+<td>Off Hand</td>
+<td><a href="https://www.wowhead.com/ptr/item=268262/bubblefin-splash-guard" target="_blank" rel="noopener">Bubblefin Splash Guard</a></td>
+<td>The Tidebound Grotto</td>
+</tr>
+</tbody>
+</table>
+<p></p>                                        </div>
+										</div>
+																												<div role="tabpanel" class="tab-pane " id="dungeon_table">
+											<div class="gear-table-inner">
+												<h3>Best Gear from Mythic+ for Holy Paladin</h3>
+<table class="table table-bordered table-article">
+<tbody>
+<tr>
+<td><b>Slot</b></td>
+<td><b>Item</b></td>
+<td><b>Source</b></td>
+</tr>
+<tr>
+<td>Head</td>
+<td><a href="https://www.wowhead.com/ptr/item=251126/greathelm-of-temptation?bonus=13440:12854" target="_blank" rel="noopener">Greathelm Of Temptation</a> (Tier Set)</td>
+<td>Murder Row (Catalyst)</td>
+</tr>
+<tr>
+<td>Neck</td>
+<td><a href="https://www.wowhead.com/ptr/item=251142/pendant-of-malefic-fury?bonus=13440:12854" target="_blank" rel="noopener">Pendant Of Malefic Fury</a></td>
+<td>Murder Row</td>
+</tr>
+<tr>
+<td>Shoulders</td>
+<td><a href="https://www.wowhead.com/ptr/item=251138/cinderfury-shoulderguards?bonus=13440:12854" target="_blank" rel="noopener">Cinderfury Shoulderguards</a> (Tier Set)</td>
+<td>Murder Row (Catalyst)</td>
+</tr>
+<tr>
+<td>Cloak</td>
+<td><a href="https://www.wowhead.com/ptr/item=251190/bloodthorn-burnous?bonus=13440:12854" target="_blank" rel="noopener">Bloodthorn Burnous</a></td>
+<td>The Blinding Vale</td>
+</tr>
+<tr>
+<td>Chest</td>
+<td><a href="https://www.wowhead.com/ptr/item=193753/breastplate-of-soaring-terror?bonus=13440:12854" target="_blank" rel="noopener">Breastplate Of Soaring Terror</a> (Tier set)</td>
+<td>Ruby Life Pools (Catalyst)</td>
+</tr>
+<tr>
+<td>Wrist</td>
+<td><a href="https://www.wowhead.com/ptr/item=251133/overseers-vambraces?bonus=13440:12854" target="_blank" rel="noopener">Overseer's Vambraces</a></td>
+<td>Murder Row</td>
+</tr>
+<tr>
+<td>Gloves</td>
+<td><a href="https://www.wowhead.com/ptr/item=159413/gauntlets-of-the-avian-sentinel?bonus=13440:12854" target="_blank" rel="noopener">Gauntlets Of The Avian Sentinel</a> (Tier set)</td>
+<td>King&rsquo;s Rest (Catalyst)</td>
+</tr>
+<tr>
+<td>Belt</td>
+<td><a href="https://www.wowhead.com/ptr/item=159418/girdle-of-pestilent-purification?bonus=13440:12854" target="_blank" rel="noopener">Girdle Of Pestilent Purification</a></td>
+<td>King&rsquo;s rest</td>
+</tr>
+<tr>
+<td>Legs</td>
+<td><a href="https://www.wowhead.com/ptr/item=273776/ancient-generals-obsidian-pillars?bonus=13440:12854" target="_blank" rel="noopener">Ancient General's Obsidian Pillars</a></td>
+<td>Altar of Fangs</td>
+</tr>
+<tr>
+<td>Boots</td>
+<td><a href="https://www.wowhead.com/ptr/item=193728/scaleguards-stalwart-greatboots?bonus=13440:12854" target="_blank" rel="noopener">Scaleguard's Stalwart Greatboots</a></td>
+<td>Ruby Life Pools</td>
+</tr>
+<tr>
+<td>Ring</td>
+<td><a href="https://www.wowhead.com/ptr/item=252258/sickening-signet-of-atroxus?bonus=13440:12854" target="_blank" rel="noopener">Sickening Signet Of Atroxus</a></td>
+<td>Voidscar Arena</td>
+</tr>
+<tr>
+<td>Ring</td>
+<td><a href="https://www.wowhead.com/ptr/item=158366/charged-sandstone-band?bonus=13440:12854" target="_blank" rel="noopener">Charged Sandstone Band</a></td>
+<td>Temple of Sethraliss</td>
+</tr>
+<tr>
+<td>Trinket</td>
+<td><a href="https://www.wowhead.com/ptr/item=273649/stormbound-emblem-of-dazar?bonus=13440:12854" target="_blank" rel="noopener">Stormbound Emblem Of Dazar</a></td>
+<td>King&rsquo;s Rest</td>
+</tr>
+<tr>
+<td>Trinket</td>
+<td><a href="https://www.wowhead.com/ptr/item=250214/lightspire-core?bonus=13440:12854" target="_blank" rel="noopener">Lightspire Core</a></td>
+<td>The Blinding Vale</td>
+</tr>
+<tr>
+<td>Main Hand</td>
+<td><a href="https://www.wowhead.com/ptr/item=268211/baleful-hexblade" target="_blank" rel="noopener">Baleful Hexblade</a></td>
+<td>The Coiled Altar</td>
+</tr>
+<tr>
+<td>Off Hand</td>
+<td><a href="https://www.wowhead.com/ptr/item=251150/tempests-shelter" target="_blank" rel="noopener">Tempest's Shelter</a></td>
+<td>Den of Nalorakk</td>
+</tr>
+</tbody>
+</table>											</div>
+										</div>
+																		</div>
+								
+
+
+								
+                                                                      <div class="guide-section-title" id="trinkets"><h2>Trinkets</h2></div>
+                                    <p><b>Recommended Trinkets:</b></p>
+<p><a href="https://www.wowhead.com/ptr/item=270162/soulcoiler-ritual-vessel" target="_blank" rel="noopener">Soulcoiler Ritual Vessel</a> &ndash; A powerful on-use trinket that's excellent in both Raid and Mythic+. It's also one of the easiest trinkets to obtain, dropping from the first boss of the raid. At the time of writing, it significantly outperforms every other healing trinket and is the clear best-in-slot option. Because of how far ahead it is, there's a good chance it will be nerfed before the patch goes live.</p>
+<p><a href="https://www.wowhead.com/ptr/item=270167/wavecallers-seastone" target="_blank" rel="noopener">Wavecaller's Seastone</a> &ndash; A simple statstick trinket that gradually increases intellect, up to 6 times and then diminishing before starting the cycle anew</p>
+<p><b>Alternatives</b></p>
+<p><a href="https://www.wowhead.com/ptr/item=273649/stormbound-emblem-of-dazar" target="_blank" rel="noopener">Stormbound Emblem Of Dazar</a> &ndash; An Intellect trinket with an on-use effect that grants a large Haste bonus after a 2-second channel. Its 2-minute cooldown lines up perfectly with <a href="https://www.wowhead.com/ptr/spell=31884/avenging-wrath" target="_blank" rel="noopener">Avenging Wrath</a>.</p>
+<p><b><a href="https://www.wowhead.com/ptr/item=250214/lightspire-core" target="_blank" rel="noopener">Lightspire Core</a> &ndash; </b>An Intellect trinket that provides a flat passive Mastery bonus and occasionally spawns beams of light that grant additional Mastery while you're standing in them. The passive Mastery alone makes this trinket a fine choice, so don't go out of your way to chase the beams if it means sacrificing positioning or mechanics.</p>
+<p><a href="https://www.wowhead.com/ptr/item=249343/gaze-of-the-alnseer" target="_blank" rel="noopener">Gaze Of The Alnseer</a> <b>- </b>As of the time of writing this guide, this trinket is still highly competitive with Season 2 trinkets.</p>                                                                                                        <div class="guide-section-title" id="embellishments"><h2>Embellishments</h2></div>
+                                    <p>The biggest power spike you can get at the start of a new Tier/Season is from equipping a new weapon. This is a very competitive slot, and it&rsquo;s unlikely that a weapon dropping in a raid will be given to a Healer over a DPS. For these reasons, it&rsquo;s recommended that your first Spark be used on crafting a weapon with <a href="https://www.wowhead.com/item=245875/darkmoon-sigil-hunt" target="_blank" rel="noopener">Darkmoon Sigil: Hunt</a> as it&rsquo;s the best embellishment for throughput.</p>
+<p>Subsequent Sparks should be used to replace low ilvl pieces of gear and you can craft them with <a href="https://www.wowhead.com/item=240166/arcanoweave-lining" target="_blank" rel="noopener">Arcanoweave Lining</a> as it is the second best embellishment for throughput.</p>
+<p>The optimal slots for crafted gear are bracers and cloak, but if you have other low ilvl pieces just make sure you&rsquo;re not crafting gear that&rsquo;s going to take up a slot you need for a tier piece.</p>                                                                    <h2  id="nebulous-voidcores-bonus-rolls">Nebulous Voidcores (Bonus Rolls)</h2>
+<p>The Midnight Season 2 Bonus Rolls (<a href="https://www.wowhead.com/ptr/currency=3418/nebulous-voidcore" target="_blank" rel="noopener">Nebulous Voidcore</a>) will be available from the start of the season as an alternative reward from your Great Vault. More sources for the bonus rolls will become available later into the Season.</p>
+<p><a href="https://www.wowhead.com/ptr/currency=3418/nebulous-voidcore" target="_blank" rel="noopener">Nebulous Voidcore</a> Bonus Rolls let you target specific loot from a Raid Boss or Mythic+ Dungeon; once an item is received via <b>Bonus Loot, </b>that item is <b>removed </b>from the Bonus Loot Pool.</p>
+<p>Below are the High Priority bonus roll target items and where they drop from:</p>
+<table class="table table-bordered table-article">
+<tbody>
+<tr>
+<td><b>Source / Drop</b></td>
+<td><b>Difficulty</b></td>
+<td><b>Target Item</b></td>
+</tr>
+<tr>
+<td>The Coiled Altar</td>
+<td>Mythic*</td>
+<td><a href="https://www.wowhead.com/ptr/item=268211/baleful-hexblade" target="_blank" rel="noopener">Baleful Hexblade</a></td>
+</tr>
+<tr>
+<td>Ula&rsquo;tek</td>
+<td>Mythic*</td>
+<td><a href="https://www.wowhead.com/ptr/item=271878/chausses-of-unbound-rancor" target="_blank" rel="noopener">Chausses Of Unbound Rancor</a></td>
+</tr>
+</tbody>
+</table>
+<p>Ula&rsquo;tek and Coiled Altar are the last 2 bosses of the Raid, but if you bonus roll their loot on a Heroic kill, any loot gained will be 1/6 Myth track.</p>
+<h2  id="omnium-folio">Omnium Folio</h2>
+<p>The Omnium Folio is a new player power system, released in Midnight Patch 12.0.7 and active for the duration of the Midnight WoW Expansion. By completing a weekly quest, you will unlock more of the Omnium Folio upgrade Tree and can choose from a number of player power enhancements.</p>
+<p>Recommended Omnium Folio Powers for Holy Paladin:</p>
+<ul>
+<li aria-level="1"><a href="https://www.wowhead.com/ptr-2/spell=1279599/rune-of-unleashed-fire" target="_blank" rel="noopener">Rune Of Unleashed Fire</a></li>
+<li aria-level="1"><a href="https://www.wowhead.com/ptr-2/spell=1279604/rune-of-voidtainted-shell" target="_blank" rel="noopener">Rune Of Void-Tainted Shell</a></li>
+<li aria-level="1"><a href="https://www.wowhead.com/ptr-2/spell=1287663/rune-of-lingering" target="_blank" rel="noopener">Rune Of Lingering</a></li>
+<li aria-level="1"><a href="https://www.wowhead.com/ptr-2/spell=1287771/rune-of-masterful-cunning" target="_blank" rel="noopener">Rune Of Masterful Cunning</a></li>
+<li aria-level="1"><a href="https://www.wowhead.com/ptr-2/spell=1279614/rune-of-overload" target="_blank" rel="noopener">Rune Of Overload</a></li>
+</ul>
+<p>For more information on this system, check out <a href="https://www.method.gg/guides/how-to-unlock-and-upgrade-the-omnium-folio-in-midnight-wow" target="_blank" rel="noopener">Method&rsquo;s Omnium Folio Overview Guide</a>.</p>                                  
+                                                      </article>
+                                                        <div class="row guide-next-block">
+                                      <div class="col-md-10">
+										<a href="/guides/holy-paladin/stats-races-and-consumables" class="btn-guide-next">Stat Priorities, Races &amp; Consumables</a>
+                                      </div>
+                                      <div class="col-md-2">
+                                        <a href="#page-top" class="page-scroll btn-guide-top"><i class="fa fa-arrow-up" aria-hidden="true"></i></a>
+                                      </div>
+                                    </div>
+                                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+  </div>
+</div>
+	    <div class="flex-center-banner bottomBannerMin">
+      <!--  [Desktop/Tablet]leaderboard_btf --><div data-pw-desk="leaderboard_btf" id="pwDeskLbBtf1"></div><script type="text/javascript">window.ramp.que.push(function () { window.ramp.addTag("pwDeskLbBtf1"); })</script>    </div>
+	    <section class="footer-section">
+        
+</body></html>

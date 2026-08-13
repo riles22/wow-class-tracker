@@ -65,7 +65,7 @@ record):
 | BiS | 18 slots × 3 lists (Overall / M+ / Raid), **one item per slot** | `Slot \| Item \| Source` table + catalyze/raid/M+ sections | 3 × `Slot \| Item \| Source` |
 | Per-item source | `bis_item_drop`, free text, **unnormalized** | Linked to the boss's own guide | Boss-level |
 | Item IDs | Yes, with `bonus=` and `original-item=` | Yes, with `?original-item=` | Yes |
-| Self-dated | Yes — JSON-LD `dateModified` + dated changelog | Yes — `Updated:` + named author | **No date found** |
+| Self-dated | Yes — JSON-LD `dateModified` + dated changelog | Yes — `Updated:` + named author | Yes — `guide-update-date` (**corrected 2026-08-13**; the original recon looked only for JSON-LD) |
 | Season | **Season 2 / 12.1** | **Season 2 / 12.1** | Season 2 / 12.1 |
 
 Soft caps appear inside priority labels (`Haste to 18%`, `Critical Strike to 40%`) and are not
@@ -148,11 +148,15 @@ profiles) is a separate lane that never feeds gearing and is **untouched**.
 Three independent human-authored sources, each publishing per-slot items with boss-level sources
 and item IDs — enough for real consensus rather than agree/disagree.
 
-Two costs accepted and to be disclosed in the UI: **Method's gearing pages carry no update date**,
-so its contribution cannot be dated the way the tracker normally requires — it must be labeled
-undated rather than silently assumed fresh; and **Method uses typographic apostrophes**
-(`Nek’zali`, `Ula’tek`, `Kings’ Rest`) where Wowhead uses straight ones, so every boss-name join
-needs Unicode normalization.
+One cost accepted: **Method uses typographic apostrophes** (`Nek’zali`, `Ula’tek`, `Kings’ Rest`)
+where Wowhead uses straight ones, so every boss-name join needs Unicode normalization. Phase B
+found this is worse than recorded — Method ships the *entity* `Nek&rsquo;zali`, so decoding must
+happen before any character fold, or `matchKey` reduces "King&rsquo;s Rest" to `kingrsquos rest`
+and every one of its joins fails silently. Handled in `lib-guides.mjs`'s `decodeEntities`.
+
+**A second cost recorded here was WITHDRAWN 2026-08-13** — "Method's gearing pages carry no update
+date" is false; they carry a per-spec `guide-update-date`. See G11 for the correction and how the
+error arose.
 
 ---
 
@@ -177,13 +181,20 @@ This repo's convention for a superseded document is to **label externally, not e
 CLAUDE.md's docs inventory). So each ADR's `Status:` line now records the supersession by G3 and
 both bodies are byte-untouched, with both files listed as HISTORY in CLAUDE.md's docs inventory.
 
-**Phase B — the guide harvest layer.** Three new harvesters (Icy Veins / Wowhead / Method)
+**Phase B — the guide harvest layer** (decisions G9–G14). Four harvesters — Icy Veins / Wowhead /
+Method for human-authored picks, plus Archon for log-derived usage (G13, pending per G14) —
 producing a per-spec, per-slot candidate set with source attribution and per-source dates. Harvest
 **scoped** stat priorities (hero talent × bracket × fight profile), not one ordered list per spec —
 this is strictly more information than today's model holds, and it is the honest answer to "new
 stat weights for all classes". Capture the soft caps (`Haste to 18%`) as data even if v1 only
 displays them. Normalize boss names to the canonical roster from our own harvested raid/dungeon
 data, and treat an unmatchable name as a hard error rather than a dropped row.
+
+**Phase B ships MACHINERY, not a harvest.** Parsers, schema, validation and tests land against
+recorded page fixtures; the live harvest itself is a local-run duty that happens after the 08-18
+flip, because every source is mid-season-transition until then and a harvest now would capture
+PTR-era picks that Phase E replaces. A committed harvest before the flip would be pre-launch data
+wearing a Season-2 label.
 
 **Phase C — scoring model v2.** Consensus-first ordering per G1; stat fit as tiebreak from the
 scoped priorities selected by the Build control (G7); item level admitted as a *separate, named*
@@ -196,12 +207,47 @@ the field we already have and never read — and to the difficulty/key ladders, 
 "where your upgrades live" view over bosses and dungeons, with both G2 components shown. Fill the
 `droppedBy` gaps (39 of 104 raid items, 25 of 204 dungeon items) from Wowhead's guide tables.
 
+**Data gaps the Phase-B dry runs exposed, for Phase E to close** (measured 2026-08-13 against all
+40 specs per source, live, no writes):
+- **`Tidebound Grotto` resolves against nothing we hold** and failed 5 Icy Veins BiS pages. It is
+  the Nymrissa Wavecaller *lair boss*, which Wowhead publishes on its own page — our
+  `dungeon-items.json` harvest never included it. A real S2 source missing from our data.
+- **`Nexus King Salhadaar` is a Season-1 boss** still cited by an Icy Veins page — independently
+  confirmed by Archon, whose S1 raid roster names it. A guide carrying stale cross-season picks is
+  exactly what `rosterMatchRate` is for.
+- Method cites whole **Season-1 dungeons** (Skyreach, Pit of Saron, Magisters' Terrace) on four
+  specs, and misspells shared bosses ("The Colled Altar", "Den of Narolakk", "Szorak", "Ula tek").
+- Icy Veins' BiS pages carried a **0.734 ptr-domain share** pre-launch, so roughly three quarters
+  of its item links were PTR-only — expected before the flip, and a useful post-flip check.
+
 **Phase E — launch re-harvest (C5).** Re-point the PTR-pinned harvest URLs and item-count
 fingerprints, drop the `domain=ptr` / `wowhead.com/ptr/` handling to live, replace the pre-launch
 `caveat`, and update the hardcoded "season max 344 · season opens Aug 18, 2026" subhead. Soft
 window opens 08-18/19; the raid opens the week of Aug 18 per Blizzard.
 
 ---
+
+## How a harvest fails (settled 2026-08-13, during Phase B)
+
+The scope originally said an unmatchable boss name is "a hard error rather than a dropped row".
+Three harvester authors independently landed on something better and the rule is now:
+
+**A row never disappears, and the RUN refuses.** An unresolvable drop source keeps its raw text,
+the pick survives (it is identified by item id, and the bracket comes from *our* data, not the
+guide's prose), every miss is collected, and the harvester refuses to write unless an explicit
+env escape is set. Slots still throw, because a slot we cannot place means the parser has lost
+its footing.
+
+Why this beats throwing: Wowhead's 40 pages are written by 40 authors who misspell shared bosses
+("The Coiled Alter", "Entomed Sentinels", "Alter of Fangs"), and Method's have their own typos
+plus whole Season-1 dungeons. Throwing surfaces ONE typo per run and loses the entire spec that
+carried it; collecting surfaces all of them at once and loses nothing. Both satisfy the original
+intent — nothing is silently dropped — but only one is enumerable.
+
+**`rosterMatchRate` is the season-currency signal that fell out of this.** Every page claims
+"Patch 12.1"; the share of its drop sources that resolve against our Season-2 roster is evidence.
+They already disagree — which is the measured confirmation that Phase B was right to ship
+machinery rather than a harvest.
 
 ## Honesty rules for this lane
 
@@ -300,8 +346,79 @@ Note this leaves today's real defect unfixed in ranking terms: 5 of 14 raid trin
 secondaries and the rest score 0 and tie. Showing both sources' letters replaces a meaningless
 ranked order with honest unranked information, which is the improvement — not a ranked trinket list.
 
+## Phase-B decisions (Riley, 2026-08-13)
+
+These six answer G1's "how many guides name this item" precisely enough to write parsers against.
+
+### ⚑ DECISION G9: BiS picks and alternatives are TWO signals, never merged
+
+Guides publish one BiS pick per slot, plus weaker endorsements — Icy Veins' prose alternatives for
+the five catalyzable slots, Wowhead's separate raid/M+ gear sections, both sites' trinket letter
+tiers. Harvest both, and carry them as **two counts that never sum**: "3 guides pick this" and
+"2 guides list this as an option". This is what gives consensus any reach below rank 1, which G1
+recorded as its known weakness. Weighting them into one number was rejected — the weight would be
+a quantity no guide published, the same invention G1 exists to avoid.
+
+### ⚑ DECISION G10: one vote per source, matched to the item's own bracket
+
+A source votes **at most once** per item. Which of its lists decides that vote is chosen by the
+item's own source: a raid drop is judged by the outlet's raid list, an M+ drop by its M+ list,
+with the Overall list as fallback when an outlet publishes no bracket-specific list. This needs no
+new bracket control — every item already carries its source — and it stops Icy Veins' three lists
+(Overall / M+ / Raid) from outvoting Wowhead and Method combined.
+
+### ⚑ DECISION G11: Method votes — ~~disclosed as undated~~ **PREMISE CORRECTED 2026-08-13**
+
+**The decision stands; the reason it was needed does not.** Riley chose "Method votes, disclosed as
+undated" over abstention, on the stated fact that Method publishes no update date. **That fact was
+wrong.** Every Method gearing page carries
+`<span class="guide-update-date"><strong>Last Updated: </strong>11th Aug, 2026</span>` beside a
+`Patch 12.1` label, and the dates are genuinely per-spec (9th–13th Aug 2026), tracking edits. The
+2026-08-12 recon looked for a JSON-LD `dateModified` — which Method does not publish — and reported
+the absence as "no date on page". Confirmed by direct fetch of two spec pages, 2026-08-13.
+
+So Method is a **self-dated source like the other two**, its harvester parses the real date, and
+there is no undated-source disclosure to build and no "stale Method ages silently" cost to accept.
+The alternative Riley weighed (abstention, to keep every counted vote dated) was answering a
+problem that does not exist.
+
+**What survives from G11:** the undated path is still modelled honestly rather than deleted — a page
+that ever ships without a date yields `published: null`, `selfDated: false`, and the harvester
+**never substitutes the fetch date for a publication date**. Recording "we fetched it on X" is
+honest; recording "they published it on X" is not. G4's cost note ("Method's gearing pages carry no
+update date") is corrected by the same finding.
+
+### ⚑ DECISION G12: the Build list is the UNION, each option labeled by its source
+
+Every published variant from every source appears as its own option, tagged with who published it.
+The sources scope differently — Icy Veins by hero talent AND bracket ("Herald of the Sun (raid
+healing)"), Wowhead by hero talent × fight profile ("Pack Leader, Single-Target") — and merging on
+a normalized key would assert those mean the same thing. They may not. Cost accepted: a longer
+dropdown (5–6 builds for some specs) and visible near-duplicates where two outlets scope alike.
+
+**Implementation note carried from the Phase-A recon:** `activeBuild()` matches variants by `name`
+alone. A union across sources needs a **synthetic id** (source + variant), because two outlets can
+publish the same variant name. Do not deepen name-matching.
+
+### ⚑ DECISION G13: Archon is a separate signal that never affects order
+
+Archon's gear data is **log-derived usage popularity** — what top players wear — which is a
+different quantity from what a guide recommends. It gets its own displayed column ("worn by 12.1%
+of Mythic raiders"), never summed with the consensus and never reordering anything, not even as a
+tiebreak. Counting it as a fourth vote was rejected on precedent: WoWMeta was retyped from
+`tier-list` to `metrics` on 2026-07-31 for exactly this — letters that clustered on player count
+rather than performance — and the tracker already reads Archon's *throughput* list rather than its
+popularity grouping. Popularity is also contaminated by drop rates, catch-up gear and week-one
+availability. Its value is precisely that it can DISAGREE with the guides visibly.
+
+### ⚑ DECISION G14: the Archon lane ships pending and backfills itself
+
+Archon's gear pages describe Season 1 today and the data is log-derived, so a meaningful Mythic
+sample is days-to-weeks after 08-18. The column ships in Phase B in a **pending** state, gated on
+Archon's page verifying as Season 2 — the same season-verification the tracker already runs — and
+fills itself on the first harvest that passes. Phase B does not wait for it. Showing Season-1 usage
+next to Season-2 guide picks was rejected as the cross-season mixing every other rule here forbids.
+
 ## Open questions for kickoff
 
-None outstanding. Eight decisions (G1–G8) are locked; the next open choices arrive with Phase A
-implementation (chiefly: how much of `validate-data.mjs` survives the SimC excision as reusable
-schema checking).
+None outstanding. Fourteen decisions (G1–G14) are locked.
