@@ -470,19 +470,24 @@ test("the setup card offers exactly three controls and no Encounter selector", a
 });
 
 /* G3 + G6: the reference lane is gone, so the scoring method is a two-way choice between
-   guide consensus and the user's own numbers. A third option would mean a third ranking
+   the guide stat order and the user's own numbers. A third option would mean a third ranking
    model nothing in the data can back. */
-test("the scoring-mode options are exactly guide consensus and custom weights", async () => {
+test("the scoring-mode options are exactly guide order and custom weights", async () => {
   const template = await readFile(fromRoot("src/app.template.html"), "utf8");
   const select = template.match(/<select id="scoring-mode">([\s\S]*?)<\/select>/);
   assert.ok(select);
   assert.deepEqual([...select[1].matchAll(/<option value="([a-z]+)">([^<]+)<\/option>/g)]
     .map((match) => [match[1], match[2]]),
-  [["consensus", "Guide consensus"], ["custom", "Custom decimal weights"]]);
+  /* The VALUE is the mode id G7 records and the Phase-C end state; the LABEL must say what
+     ships today. Phase A harvests ONE guide (all 40 statPrioritySource values are icy-veins.com),
+     and SOURCES.md forbids calling anything consensus without 2+ independent sources — so the
+     page may not say "consensus" until G1's multi-source harvest lands in Phase B/C. */
+  [["consensus", "Guide order"], ["custom", "Custom decimal weights"]]);
+  assert.doesNotMatch(template, /Guide consensus/);
   assert.doesNotMatch(template, /value="reference"|value="priority"/);
 });
 
-test("client app ranks by guide consensus and honours custom weights as a full override", async () => {
+test("client app ranks by the guide stat order and honours custom weights as a full override", async () => {
   const { data, specs, startClient } = await clientFixture();
   const { document, app } = startClient();
   const specSelect = document.ids.get("spec");
@@ -560,7 +565,7 @@ test("client app ranks by guide consensus and honours custom weights as a full o
 
   specSelect.value = "Demon Hunter|Devourer";
   specSelect.listeners.change();
-  // Switching spec drops back to guide consensus and clears the custom fields.
+  // Switching spec drops back to the guide stat order and clears the custom fields.
   assert.equal(scoringMode.value, "consensus");
   assert.equal(document.ids.get("weight-crit").value, "");
   assert.match(document.ids.get("bis").innerHTML, /Allowed types:/);
@@ -600,7 +605,7 @@ test("custom mode announces itself in visible text on the ranked surfaces", asyn
     document.ids.get(`weight-${stat}`).value = value;
   document.ids.get("weight-mast").listeners.input();
 
-  const note = "<b>Ordered by your custom weights</b>, not by guide consensus.";
+  const note = "<b>Ordered by your custom weights</b>, not by the guide stat order.";
   const upgrade = document.ids.get("up").innerHTML;
   assert.ok(upgrade.includes(note), "the upgrade checker must carry the visible override note");
   assert.doesNotMatch(upgrade, /title="[^"]*custom weights/i);

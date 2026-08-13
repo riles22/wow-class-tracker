@@ -115,8 +115,8 @@ Deleted: 7 modules in `gearing/src` (~4,553 lines), 4 test files (~2,027 lines),
 `validate-data.mjs`, and `gearing/data/simc-audit/` (**30 MB, 368 committed files**, ~94% of
 `gearing/data/`). The built page loses 363,767 inlined JSON bytes — **17.2% of the 2,119,303-byte
 artifact**. Git history keeps every byte. *(Measured on landing: 383 files and ~30 MB removed,
-`validate-data.mjs` 1,413 → 595 lines, artifact 2,119,303 → 1,725,125 bytes = 394,178 bytes and
-18.6%, slightly more than projected because the inlined blob was not the only shrinkage.)*
+`validate-data.mjs` 1,413 → 595 lines, artifact 2,119,303 → 1,726,547 bytes = 392,756 bytes and
+18.5%, slightly more than projected because the inlined blob was not the only shrinkage.)*
 
 Three consequences to handle deliberately:
 1. **It unblocks the re-harvest.** `validate-curation-sources.mjs:38-70` SHA-256-pins the raw bytes
@@ -166,7 +166,7 @@ breaks the nightly publish gate. Phase A may be authored now but **must not land
 flip). Delete the pipeline per G3 and the healer lane per G5; collapse the setup card to
 Specialization · Build · Scoring method per G7; excise the six-file hash pin; repair
 `project.test.mjs`; rewrite the ~15 README references. Verify: root `npm test` green, gearing
-builds, artifact shrinks (measured 18.6%), `url(http…)` count in the built HTML still zero.
+builds, artifact shrinks (measured 18.5%), `url(http…)` count in the built HTML still zero.
 
 **Amended in execution — the two ADRs were NOT excised.** Deleting the operative sections of
 `adr-simc-reference-pipeline.md` and `adr-simc-curated-profiles.md` would have destroyed the

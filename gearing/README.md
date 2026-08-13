@@ -67,7 +67,7 @@ Phase A of `../docs/gearing-s2-scope.md` (owner decisions G1–G8) removed the
 SimulationCraft reference-weight pipeline and the dormant healer-model ledger from this
 subproject: 7 `src/` modules, 4 test files, 4 `data/` files and the 368-file
 `data/simc-audit/` tree — **383 files and ~30 MB** — are gone, `validate-data.mjs` went
-1,413 → 595 lines, and the built artifact shrank 2,119,303 → 1,725,125 bytes (**18.6%
+1,413 → 595 lines, and the built artifact shrank 2,119,303 → 1,726,547 bytes (**18.5%
 smaller**). Git history keeps every byte, and `../docs/adr-simc-reference-pipeline.md` +
 `../docs/adr-simc-curated-profiles.md` survive as the superseded design record — labeled
 HISTORY rather than excised, because they hold the reproducibility account and the
@@ -80,14 +80,23 @@ Nothing here runs, imports or stores a simulation any more. Two ranking inputs s
   primary signal, and the only one that covers all 40 specs uniformly.
   `GUIDE_MULTIPLIERS = [1, 0.75, 0.5, 0.25]` turns that published ORDER into fixed spacing
   for sorting, and the UI says so in visible text.
-- **Custom decimal weights** — the reader's own numbers, and under G6 a FULL override:
-  whenever they are active every ranked surface says so in visible text
-  (`customOverrideNote()`), because switching modes silently changes what "rank 1" means.
+- **Custom decimal weights** — the reader's own numbers, and under G6 a FULL override.
+  Because switching modes silently changes what "rank 1" means, every ranked surface says
+  so in visible text — but through **three** different sites, not one helper:
+  `renderBis`'s `#bis-note`, `renderTier`'s `#tier-note`, and `customOverrideNote()` on the
+  Upgrade checker's cards, with `renderFooter` and `#scoring-summary` bracketing all tabs.
+  A fourth ranked surface must add its own disclosure; grepping `customOverrideNote` alone
+  will not tell you that.
 
-So `Scoring method` offers exactly two options — `Guide consensus` and `Custom decimal
+So `Scoring method` offers exactly two options — `Guide order` and `Custom decimal
 weights`. The old model-weight (`reference`) mode and the SimC-fed `Encounter` selector
-no longer exist; the setup card is **Specialization · Build · Scoring method**. Multi-source
-guide *consensus* itself (G1) is Phase C and is not built yet.
+no longer exist; the setup card is **Specialization · Build · Scoring method**.
+**The option is labeled `Guide order`, not "consensus", on purpose:** Phase A harvests ONE
+guide (all 40 `statPrioritySource` values are icy-veins.com), and `SOURCES.md` forbids
+calling anything consensus without 2+ independent sources. The stored mode *value* is
+`consensus` because that is the G7-recorded id and the end state; the label flips when
+G1's multi-source harvest lands in Phase B/C. A test pins both the label and the absence
+of the word "consensus" on the page.
 
 The `/simc` **addon paste** in the Upgrade checker is untouched and stays — it is a
 gear-export parser, not a simulator.

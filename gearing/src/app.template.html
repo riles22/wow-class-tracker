@@ -329,7 +329,10 @@ table.paths tr:hover td{background:rgba(255,255,255,.03)}
       <div class="field">
         <label for="scoring-mode">Scoring method</label>
         <select id="scoring-mode">
-          <option value="consensus">Guide consensus</option>
+          <!-- The VALUE is the mode id G7 records and is the Phase-C end state; the LABEL
+               says what Phase A actually ships. Multi-source consensus (G1) needs the Phase-B
+               harvest of Icy Veins + Wowhead + Method — today all 40 specs are one source. -->
+          <option value="consensus">Guide order</option>
           <option value="custom">Custom decimal weights</option>
         </select>
       </div>
@@ -337,10 +340,11 @@ table.paths tr:hover td{background:rgba(255,255,255,.03)}
     <div class="spec-summary" id="spec-info">&mdash;</div>
     <div class="scoring-summary" id="scoring-summary" role="status" aria-live="polite"></div>
     <div class="weight-editor" id="weight-editor" hidden>
-      <p>Enter your own secondary-stat emphasis for this character and encounter. These are
+      <p>Enter your own secondary-stat emphasis for this character. They apply to every tab and
+        every slot &mdash; there is no per-encounter scoping. These are
         <b>your</b> numbers &mdash; this page runs no simulation and derives no weights of its own, and a
         <code>/simc</code> gear paste carries no scale factors, so these fields stay blank until you fill them.
-        While they are in use every ranked list is ordered by them <b>instead of</b> by guide consensus.</p>
+        While they are in use every ranked list is ordered by them <b>instead of</b> by the guide stat order.</p>
       <div class="weight-grid">
         <label for="weight-crit">Critical Strike<input id="weight-crit" type="number" min="0" step="0.01" inputmode="decimal" placeholder="Enter weight"></label>
         <label for="weight-haste">Haste<input id="weight-haste" type="number" min="0" step="0.01" inputmode="decimal" placeholder="Enter weight"></label>
@@ -462,10 +466,11 @@ const TOKENS = ITEMS.filter(i => (i.classes && i.classes.length)
 const MPLUS_KEYS = DUNG ? DUNG.keyLevels : [];
 
 /* ---------- scoring -------------------------------------------------------
-   Accepted reference data is the default when an exact profile and scenario
-   match exists. DPS records come from SimC; healer records use the embedded,
-   provider-neutral throughput adapter. Guide order is the explicit fallback.
-   Custom weights come from the user; /simc text has no scale factors.         */
+   Two inputs only, since the SimC reference lane was removed 2026-08-12
+   (docs/gearing-s2-scope.md G3): the guide stat ORDER for the selected Build,
+   mapped through GUIDE_MULTIPLIERS as fixed spacing for sorting, and — when the
+   user supplies all four — their own weights, which override it entirely (G6).
+   Neither is a simulation, and /simc text carries no scale factors.           */
 const WEAPON_SLOTS = new Set(['Main Hand','One-Hand','Two-Hand','Off Hand','Held In Off-hand','Ranged']);
 const PRIMARY_NEUTRAL_SLOTS = new Set(['Neck','Finger','Back','Trinket']);
 const GUIDE_MULTIPLIERS = [1, 0.75, 0.5, 0.25];
@@ -705,7 +710,13 @@ function specLine() {
   const bits = ['<b>' + esc(CUR.spec + ' ' + CUR.class) + '</b>'];
   if (CUR.armor) bits.push('<b>' + esc(CUR.armor) + '</b>');
   bits.push(esc(CUR.role));
-  bits.push(p ? 'Primary: <b>' + esc(p.primary) + '</b> &middot; Guide order: ' + p.secondaries.map(esc).join(' &gt; ')
+  /* Under a live custom override the guide order is NOT what ranks anything, so saying
+     it plainly here (between the Build and Scoring-method selectors) invited the reading
+     that switching Build changes the ranking. Mark it as inactive instead of hiding it —
+     it is still the spec's sourced order, just not in use. */
+  const overridden = customModeSelected() && !!customWeights();
+  bits.push(p ? 'Primary: <b>' + esc(p.primary) + '</b> &middot; Guide order'
+              + (overridden ? ' (not in use)' : '') + ': ' + p.secondaries.map(esc).join(' &gt; ')
               : 'no stat priority sourced');
   $('#spec-info').innerHTML = bits.join(' &middot; ');
 }
@@ -719,11 +730,15 @@ function weightList(weights) {
 function renderScoringControls() {
   const editor = $('#weight-editor');
   editor.hidden = !customModeSelected();
-  $('#build').disabled = buildsFor(CUR).length < 2;
+  /* Build feeds activePriority() and nothing else, so under a live custom override it is
+     inert — leaving it enabled let a user toggle it, watch the summary line move, and
+     conclude the ranking followed. It does not. (The deleted reference lane gated its own
+     dependent selector on the active mode the same way.) */
+  $('#build').disabled = buildsFor(CUR).length < 2 || (customModeSelected() && !!customWeights());
   const custom = customWeights();
   if (customModeSelected() && custom) {
     $('#scoring-summary').innerHTML = '<strong>Custom weights supplied by you:</strong> ' + weightList(custom)
-      + '. Every ranked list below is ordered by these numbers instead of by guide consensus. '
+      + '. Every ranked list below is ordered by these numbers instead of by the guide stat order. '
       + 'Each item score uses its full secondary-stat allocation. This still compares secondary fit at equal item level; '
       + 'primary stat, effects, sockets, and your current stat totals require a full item simulation.';
     return;
@@ -741,7 +756,7 @@ function renderScoringControls() {
    is. Visible text, never a title= (a tooltip does not exist on touch). */
 function customOverrideNote() {
   return customModeSelected() && customWeights()
-    ? '<div class="sub-note"><b>Ordered by your custom weights</b>, not by guide consensus.</div>'
+    ? '<div class="sub-note"><b>Ordered by your custom weights</b>, not by the guide stat order.</div>'
     : '';
 }
 
@@ -1048,9 +1063,11 @@ function weaponLoadoutCards(items) {
   }).join('');
 }
 
-/* Trinkets normally bypass the secondary-stat scorer because their effects dominate.
-   An accepted healer item-score record is the one exception: exact matching item IDs can
-   be ranked, while every uncovered trinket stays visibly unranked. */
+/* Trinkets bypass the secondary-stat scorer entirely because their effects dominate, and
+   this page does not value effects. There is no exception any more — the healer item-score
+   lane that used to provide one was removed with the SimC pipeline (G5). G8 will show the
+   guides' own per-source letter tiers here in Phase C; until then, unranked is the honest
+   presentation, not a placeholder. */
 function trinketCard(list) {
   if (!list.length) return '';
   const rows = list.slice().sort((a, b) => (b.effect ? 1 : 0) - (a.effect ? 1 : 0)).map(it =>
@@ -1281,7 +1298,7 @@ function renderUp() {
     // letter scales are shown per-source rather than merged into one ordering.
     const entries = trinketSlot
       ? actual.slice().sort((a, b) => a.name.localeCompare(b.name))
-        .map(it => ({it: it, marker: '—', modelScore: null}))
+        .map(it => ({it: it, marker: '—'}))
       : visibleCandidates(actual, 3);
     const worn = eq.ilvl ? ' &middot; ' + eq.ilvl : '';
     const slotName = eq.slotLabel === '@mainHand' ? 'Main hand' : eq.slotLabel === '@offHand' ? 'Off hand'
@@ -1291,7 +1308,7 @@ function renderUp() {
       + (trinketSlot && entries.length ? '<div class="sub-note"><b>Trinkets are not ranked here:</b> their value '
           + 'lives in the effect, not in secondary stats, and this page does not score effects. Every eligible '
           + 'source that can exceed your current item level is listed, alphabetically.</div>' : '')
-      + (trinketSlot ? '' : customOverrideNote())
+      + (trinketSlot || !entries.length ? '' : customOverrideNote())
       + catalystActionHtml(eq)
       + directTierUpgradeHtml(eq, threshold)
       + (entries.length ? entries.map(entry => {

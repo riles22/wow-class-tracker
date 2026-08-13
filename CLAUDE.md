@@ -687,8 +687,8 @@ docs/     working notes (finder-audit.md — HISTORY, the Spec Finder was remove
           decisions G1-G8 locked). PHASE A IS BUILT (2026-08-12, branch
           `gearing-phase-a` — authored, NOT merged): the SimC reference pipeline and the
           healer model lane are GONE from gearing (383 files / ~30 MB removed,
-          validate-data.mjs 1413 -> 595 lines, artifact 2,119,303 -> 1,725,125 bytes,
-          18.6% smaller), which also un-pinned the six gear data files that blocked the
+          validate-data.mjs 1413 -> 595 lines, artifact 2,119,303 -> 1,726,547 bytes,
+          18.5% smaller), which also un-pinned the six gear data files that blocked the
           re-harvest; the setup card collapsed to Specialization · Build · Scoring method,
           and the `reference` scoring mode and the Encounter selector no longer exist.
           `custom` weights survived as a full override that ANNOUNCES itself on ranked
