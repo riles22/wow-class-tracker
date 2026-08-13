@@ -1961,3 +1961,72 @@ changed or superseded; this agent fetched nothing from YouTube or any transcript
 - Standing recommendation, unchanged and now worth more: a local yt-dlp catch-up run clears all
   **20** queued videos for free, and the queue now contains the first real per-spec 12.1 guides
   (Shadarek Havoc DH, NeekapHere Retribution Paladin).
+
+## 2026-08-13 — LOCAL run (scheduled 07:10 task), residential yt-dlp catch-up
+
+Ran after the CI nightly (`e87054d`) had already pushed. Scope: residential-only catch-up —
+transcripts, which is the one lane a datacenter runner cannot do. Tier lists and metrics were
+NOT re-fetched (CI did them today); the manifest was deliberately left alone (partial run).
+
+- **The queue drained for free.** 30 candidates: the 20 queued videos plus 10 newly discovered.
+  yt-dlp (pinned 2026.07.04, `player_client=android`) got **22 of 30** transcripts. The other 8
+  are not IP-blocked — YouTube has published **no auto-captions** for them (6 livestream VODs)
+  or the id is still an upcoming-live placeholder (`bqVHzvKJCuA`, `U_bAsRSY5Y4`). Nothing about
+  a residential IP fixes those, which is worth knowing: **they are not catch-up work, they are
+  videos that may never be captioned.**
+- **Discovery, unfiltered + date-bounded** as the local rule requires: 44 channels, 44/44 HTTP
+  200, 0 RSS failures, 660 entries, seen-set 960 (structured lanes only). **10 unseen, all
+  inside the 12.1 cycle** (≥2026-06-18, the first `ptr-builds.json` entry). All 10 are now
+  accounted for — none left dangling.
+- **6 takes + 1 metaNote added, 3 superseded.** Queue **20 → 8**, `skipped[]` **275 → 292**.
+  - `NeekapHere` **Retribution Paladin** (nerf, both) — his full Season 2 guide. **This closes
+    one of the three documented raid-scoped gaps.** His verdict is explicit: Ret is fun but "a
+    little bit weak right now". The mechanism is the tier set — Divine Arbiter's damage never
+    beats Final Verdict, so on Templar single target you never press Divine Storm and therefore
+    **never use the four-piece at all**; same on Templar AoE and Herald AoE, leaving Herald
+    single target as the only case it works. He says the shipped fix (Divine Arbiter benefiting
+    from Divine Purpose and Greater Judgment) is not good enough and expects to re-cut the video
+    if it is retuned. Supersedes his 07-22 M+ take.
+  - `Shadarek` **Havoc DH** (buff, both) — "pretty good for raid", built around an Essence Break
+    that gained ~50% on its initial hit plus 12%/35% from the tier set and 40s→30s cooldown.
+    Offsetting nerfs recorded too (Immolation Aura fury 40→30, Blind Fury, Inertia bugged to
+    unplayable, leech worth ~80% of its old value after the global 25% HP buff). Supersedes his
+    08-11 neutral read.
+  - `MadSkillzzTV` **Discipline Priest** — split by bracket because his read is: **raid** buff
+    ("insane in raid", expects a nerf), **M+** nerf (not in a good state, and the raid strength
+    is what blocks a key-facing buff). Plus **Holy Paladin** (buff, M+) from live 12.1 rather
+    than PTR — "moves bars like no other", "the latest hotness"; supersedes his 08-09 take.
+  - `Bansherz` **Marksmanship** (buff, **raid**) — boss-by-boss, "king in the raid". Kept
+    complementary to his 08-11 guide take rather than superseding it (different lens). His M+
+    ordering is the opposite way round (Survival ≳ BM ≳ MM, all within a couple of percent) and
+    is recorded inside the claim.
+- **⚠ One judgment call with a measurable published effect.** `Zorthas` **Arcane Mage** metaNote
+  (mixed): a 45-second short observing that he had Arcane at S before three of the last four
+  seasons and C before the fourth — and the C season was the only one Arcane was actually meta —
+  then calling its current high placement "a very risky spot". **The clip ends mid-sentence
+  before he names the tier.** Recorded `mixed` (a hedge on his own call, not a weakness claim)
+  and NOT superseding his substantive 08-09 M+ tier-list read. Effect, measured: because the
+  nudge takes the newest note per creator, his positive Arcane vote is withdrawn, corroboration
+  drops from 2 creators to 1, and the +3 meta nudge switches off — **Arcane Mage M+ forecast
+  82.0 → 79.0, tier unchanged at A+**, 1 cell of 80. Defensible (he is explicitly cautioning
+  against his own placement, which is exactly what an abstention encodes) but it is a truncated
+  45-second clip moving a published score, so it is flagged here rather than buried.
+- **17 videos transcript-verified and skipped** — the durable lane, so they never cost a fetch
+  again. Dispositions worth keeping: the two Kalamazi launch streams and the Dalaran/Critcake/
+  Tettles/Shindigg/Bansherz VODs restate reads their live takes already carry; Tactyks' raid
+  guide says on camera it avoids spec-specific material; Dalaran's "COMPLETE Season 2 M+ Guide"
+  turns out to name no player spec at all (its spec-sounding words are mob names).
+- **Scope-widening candidate for a human** (not acted on): `r4VxP_NNBFM` has Tactyks giving a
+  real read on **Blood DK and Vengeance DH** apex-talent random defensive procs — Vengeance in
+  particular, where he says you can go a long time without a proc and it feels bad. Both sit
+  outside his declared Guardian/Protection scope so nothing was attributed. Vengeance DH is one
+  of the remaining raid-scoped gaps, so widening Tactyks' scope would be worth considering.
+- **The title filter would have missed the best of this run again.** Under the nightly's keyword
+  rule the two highest-value items were not the obvious ones: NeekapHere's Ret Paladin guide was
+  already queued, but `Iu_h1QuAgOc` — titled "12.1 is HERE (Healer Gearing) | *NEW* !UI !main
+  !tierlist" — carried the Discipline and Holy Paladin reads 8 hours into a 509-minute stream.
+- **Standing note for the queue:** 6 of the 8 remaining entries are livestream VODs with no
+  published captions. The nightly's Supadata drain will spend its 100-request monthly budget
+  retrying videos that likely have nothing to fetch. Worth a rule (`noCaptionsAt` marker, or a
+  cap on retries per id) if the pattern holds — not changed here, since queue policy is not a
+  data run's call.

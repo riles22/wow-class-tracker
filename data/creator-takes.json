@@ -3904,7 +3904,7 @@
       "claim": "On the tuning itself he is unimpressed — Collapsing Star up 12% is not enough to make it worth pressing outside the Apex-talent builds, and Eradicate is down 6% — but his standing read on the spec is positive: he places Devourer up there, says it feels pretty good after the previous build's aura buff, and expects the Void Scourge melee-combo build to be the one played into the patch, with Annihilator still viable and some players doing very good damage on it."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Paladin",
       "spec": "Retribution",
       "creator": "NeekapHere",
@@ -4405,7 +4405,7 @@
       "sentiment": "buff",
       "patchContext": "12.1 PTR — Season 2 M+ outlook (healer prep stream)",
       "url": "https://youtu.be/u869GspePck?t=3236",
-      "superseded": false,
+      "superseded": true,
       "claim": "His strongest Holy Paladin read yet: he calls it a blaster for next season and, unusually, argues it is not cooldown-reliant — he rates Wings as unimpressive and says the spec simply does consistently insane healing through Holy Light, Virtues and consumed Infusions, with very strong spot healing that converts into Virtue AoE healing. He also stresses accessibility, repeatedly saying it is easy to play while looking really strong, and lists it among the three healers he intends to main. His caveat is hoping it does not get nerfed before launch.",
       "bracket": "mplus"
     },
@@ -4770,7 +4770,7 @@
       "claim": "Under current tuning he says Devourer is ahead of Havoc, while stressing he cannot say what will be meta and that weekly tuning is expected for three or four more weeks — he explicitly declines to guess. On hero trees, Void's Guard is significantly ahead in pure single target and roughly level with Annihilator once cleave is involved, so near-identical for M+; he is nonetheless playing Annihilator because Void's Guard forces a ranged spec into melee and he finds it uncomfortable and exposed to range mechanics. He also notes the carried-over tier set keys off Collapsing Star and so does nothing for Void's Guard."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Demon Hunter",
       "spec": "Havoc",
       "creator": "Shadarek",
@@ -4792,6 +4792,78 @@
       "patchContext": "12.1 PTR — his Season 2 Guardian Druid guide: patch changes, tier set and raid build (M+ section firewalled out — he authors the Method M+ tier list already in the consensus)",
       "url": "https://youtu.be/v6A6ntuu8t4?t=62",
       "claim": "His first Guardian read under the widened scope, from a guide rather than a tier list — a changes assessment, not a placement. He reads the patch's blanket percentage tuning as net neutral (compensation for the global 25% health increase) and locates the real movement in three places. The apex talent's full rework from burst toward sustain is a redesign he says he is a fan of: its passives add 6% mastery and Mangle damage, and its final rank resets Thrash and Mangle, amps both by 30% while a spirit is active, and refunds rage — so Mangle is, in his words, definitely back in the conversation after the never-hitting-Mangle end of Season 1. Against that sits the one significant nerf he flags: Lunation becomes a flat 20-second cooldown reduction on Lunar Beam (40 seconds flat, versus sub-30 before), a meaningful uptime loss he calls a pain point but not the end of the world, partly shored up by the tier set's four-piece extending Incarnation toward 35 seconds. For raid specifically he still runs Alune's Chosen — with an explicit on-camera plea for Blizzard to buff Druid of the Claw's damage, which he says otherwise feels bad to play — describes the raid build as a damage/defense hybrid little changed from Season 1, keeps Maul in the raid rotation (unlike keys), and calls out the Ula'tek weapon, a two-socket crit neck and, oddly, the Feral set-bonus trinket off the guillotine boss as standout raid loot, the last being Guardian's best-in-slot damage trinket even though Guardian cannot complete its set. He also notes Maul, Raze and Ravage remain undertuned after the old apex's compensation nerfs and hopes that gets addressed."
+    },
+    {
+      "superseded": false,
+      "class": "Paladin",
+      "spec": "Retribution",
+      "creator": "NeekapHere",
+      "date": "2026-08-12",
+      "sentiment": "nerf",
+      "bracket": "both",
+      "patchContext": "12.1 PTR — his full Season 2 Retribution Paladin PvE guide (stats, both hero-talent builds, ability priority, tier set and best-in-slot)",
+      "url": "https://youtu.be/V0KmC4qmOio?t=2865",
+      "claim": "He ends the guide with an explicit verdict — Retribution is fun to play but 'a little bit weak right now', hoping tuning fixes it — and the reason he gives is the Season 2 tier set. The four-piece grants Divine Arbiter when you spend a different spender than the one Divine Purpose procced on, but he says simulations are now in and the arbiter's damage is not high enough to justify the swap: on Templar single target the arbiter never beats Final Verdict, so you simply never press Divine Storm and never use the set at all, which he calls a huge issue. He reports the same problem on Templar AoE and Herald AoE, leaving Herald single target as the only case where the set works the way it is meant to. He had raised this on the PTR and says the fix that shipped — Divine Arbiter benefiting from Divine Purpose and Greater Judgment — was not close to his proposed solution and is not good enough. In Mythic+ the set is partially usable: on two to four targets spending Final Verdict off the proc is a real damage gain, and on larger packs you can still route it into a priority target, but on true mass AoE you go back to spamming Divine Storm and drop the set again. On builds he rates Templar slightly ahead of Herald in both single target and keys, but inside margin of error and close enough to play either. Stats are strength, then mastery, with crit and haste roughly equal (crit favoured in keys and on Templar, haste on single-target Herald) and versatility last. He says he expects to publish an update video if the tier set is retuned."
+    },
+    {
+      "superseded": false,
+      "class": "Demon Hunter",
+      "spec": "Havoc",
+      "creator": "Shadarek",
+      "date": "2026-08-13",
+      "sentiment": "buff",
+      "bracket": "both",
+      "patchContext": "12.1 PTR — his Season 2 Havoc Demon Hunter raiding and Mythic+ guide (changes, hero-talent builds, tier set, gearing and rotation)",
+      "url": "https://youtu.be/sh7XxGz4DD8?t=11",
+      "claim": "He opens by saying Havoc is looking to be pretty good for raid coming into 12.1, and good for Mythic+ too with the caveat that Devourer may simply overshadow it there. The centrepiece is Essence Break: its initial hit was buffed by almost 50%, the tier set adds 12% from the two-piece and another 35% to the initial hit on the four-piece, extends its duration from four to six seconds and cuts the cooldown from 40 to 30 seconds — over double the old initial damage — which is why he now presses it on cooldown and why the whole season's build is arranged around it. Other gains: the dead Dash of Chaos talent was replaced with Never Say Die (3% damage above 50% health, leech below it, in practice a damage increase), Trail of Ruin became flat damage rather than a dot, Serrated Glaive moved from an enemy debuff to a self-buff that is permanently up, and Blade Dance, Death Sweep, Chaos Strike and Annihilation all took small buffs. Against that he flags real losses: Immolation Aura's fury generation dropped from 40 to 30 and Blind Fury was nerfed again, so Havoc is now noticeably more reliant on a shaman's fury economy; Inertia was cut to 12% for five seconds because the compensating duration increase was never applied, which he calls a massive nerf that makes it unplayable; and the global 25% player health increase indirectly devalues leech to roughly 80% of its old power, so the spec feels less tanky even though he still rates it incredibly tanky overall. On builds he says the pure single-target Fel-Scarred build sims best for that hero tree but still sims slightly below Aldrachi Reaver and is only worth considering on the raid's one true single-target fight, so he expects cleave-oriented builds in practice; Aldrachi Reaver's Mythic+ build is identical to its raid build bar one talent swap, and Trail of Ruin is dropped in both."
+    },
+    {
+      "superseded": false,
+      "class": "Priest",
+      "spec": "Discipline",
+      "creator": "MadSkillzzTV",
+      "date": "2026-08-12",
+      "sentiment": "buff",
+      "bracket": "raid",
+      "patchContext": "12.1 PTR — Season 2 launch-day healer stream, answering a viewer comparing Discipline and Holy Priest (raid half of the read)",
+      "url": "https://youtu.be/Iu_h1QuAgOc?t=29717",
+      "claim": "Asked to compare the two Priest healers, he reads Discipline as very strong in raid — his words are that Disc is 'insane in raid' — and draws the forward-looking conclusion that it is more likely to be nerfed than buffed. He frames this as a standing design problem rather than a passing tuning state: Blizzard has struggled to buff Discipline for Mythic+ without also buffing it in raid, so the raid strength is what blocks help arriving for keys. Recorded as a strength read on the raid bracket, with the nerf expectation as his own hedge rather than an observed change."
+    },
+    {
+      "superseded": false,
+      "class": "Priest",
+      "spec": "Discipline",
+      "creator": "MadSkillzzTV",
+      "date": "2026-08-12",
+      "sentiment": "nerf",
+      "bracket": "mplus",
+      "patchContext": "12.1 PTR — Season 2 launch-day healer stream, answering a viewer comparing Discipline and Holy Priest (Mythic+ half of the read)",
+      "url": "https://youtu.be/Iu_h1QuAgOc?t=29708",
+      "claim": "For keys specifically he says he does not think Discipline is in a good state, and advises a viewer who plays only Mythic+ not to put their eggs in the Disc basket. His reasoning is that the spec's raid strength makes a Mythic+ buff unlikely — Blizzard cannot lift it for keys without lifting it in raid, where he thinks it could use a nerf — so he expects the key-facing weakness to persist rather than be tuned away. He explicitly contrasts it with Holy Priest, which he says he would pick over Disc for keys in the specs' current state."
+    },
+    {
+      "superseded": false,
+      "class": "Paladin",
+      "spec": "Holy",
+      "creator": "MadSkillzzTV",
+      "date": "2026-08-12",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "12.1 PTR — Season 2 launch-day healer stream, on Holy Paladin's Mythic+ standing at patch launch",
+      "url": "https://youtu.be/Iu_h1QuAgOc?t=8139",
+      "claim": "His first read from live 12.1 rather than the PTR, and it is strongly positive: he calls Holy Paladin very strong in Mythic+, saying it moves health bars like no other healer. He also describes the wider reaction — that the spec is 'the latest hotness' and the subject of an enormous volume of meta coverage, that people are already afraid it will be nerfed, and that he expects everyone to level one. His own position is that he hopes the nerf does not come and that Holy Paladin deserves its time in the sun after a long stretch out of favour; later in the stream he reacts to the possibility of a 10% healing nerf with dismay. Recorded as a strength read; the nerf talk is anticipation of tuning, not an observed change."
+    },
+    {
+      "superseded": false,
+      "class": "Hunter",
+      "spec": "Marksmanship",
+      "creator": "Bansherz",
+      "date": "2026-08-12",
+      "sentiment": "buff",
+      "bracket": "raid",
+      "patchContext": "12.1 PTR — Season 2 day-two stream, a boss-by-boss raid read on the three Hunter specs (complements, not replaces, his 08-11 Marksmanship guide)",
+      "url": "https://youtu.be/KIUqoNuwSEA?t=8940",
+      "claim": "Going through the new raid boss by boss he concludes that Marksmanship is, in his words, king in the raid — 'pretty insane on all the fights' so far — with the two-target cleave profile of several encounters suiting it particularly well. He is careful about the fights he has not tested: on the last boss he could see any of the three Hunter specs being the pick, guessing Beast Mastery may be poor there because platform movement will hurt pet AI, that Survival may fit because the fight rewards priority damage and add killing, and that Marksmanship may benefit for the same pet-AI reason. He separates this from keys explicitly, where he ranks the three the other way and very close together: Survival slightly best by fractions of a percent, Beast Mastery a couple of percent ahead of Marksmanship, and Survival becoming really strong in keys once the tier set is online. Recorded on the raid bracket only, since his Mythic+ ordering puts Marksmanship last of the three."
     }
   ],
   "metaNotes": [
@@ -7276,6 +7348,17 @@
       "url": "https://youtu.be/1GfuhNQSZvI?t=996",
       "superseded": false,
       "note": "He rates Elemental the caster that most consistently gets closest to Arcane, with its AoE significantly buffed into the default choice and its real strength being consistency across single target, cleave and AoE alike. Two things could cost it the slot: it has no short-window burst — he contrasts it with Arcane or Arms lining up cooldowns on a spawn wave, where Elemental can only place Earthquake and chain-cast — and it is squishy, with a single 40% mitigation on a 90-second cooldown as its main defensive. He adds that much of its group value is contingent, since Windfury and Mastery matter far less if an Arms Warrior is not in the composition."
+    },
+    {
+      "superseded": false,
+      "class": "Mage",
+      "spec": "Arcane",
+      "creator": "Zorthas",
+      "date": "2026-08-13",
+      "sentiment": "mixed",
+      "patchContext": "12.1 PTR — Season 2 outlook: a reliability caution about his own current Arcane placement, not a new placement (complements, not replaces, his 08-09 M+ tier-list read)",
+      "url": "https://youtu.be/jVY55nODV2g?t=39",
+      "note": "He reviews his own past Arcane Mage placements and finds an uncomfortable pattern: he had it S tier before three of the last four seasons and C tier before the fourth — and the C-tier season was the only one in which Arcane was actually meta. He draws the general lesson that early tier lists are usually wrong because tuning and strategy development move a spec's perception after the season opens, then applies it to now, calling Arcane Mage's current position a very risky spot given that he and every other tier-list maker have again placed it high. The clip ends mid-sentence before he names the tier, so the placement itself is not on the record here. Recorded mixed: this is a caution about the confidence of the high consensus placement, not a claim that the spec is weak."
     }
   ]
 }
