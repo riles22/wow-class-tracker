@@ -683,15 +683,21 @@ docs/     working notes (finder-audit.md — HISTORY, the Spec Finder was remove
           Phase-1 machinery must land before PHASE_FLIP_DUE (Aug 20).
           s2-flip-runbook.md — the operational 08-18 flip checklist (execution mode:
           LOCAL RUN, chosen 2026-08-12); read it before touching anything flip-related.
-          gearing-s2-scope.md — the SCOPED gearing overhaul (2026-08-12, four owner
-          decisions locked): guide-consensus ranking replaces sim-derived weights, the
+          gearing-s2-scope.md — the SCOPED gearing overhaul (2026-08-12, eight owner
+          decisions G1-G8 locked): guide-consensus ranking replaces sim-derived weights, the
           SimC reference pipeline is REMOVED from gearing (it also un-pins the six gear
           data files blocking the re-harvest), three guide sources (Icy Veins + Wowhead
           + Method) are harvested with SCOPED stat priorities (hero talent × bracket ×
           fight profile), and the per-boss/dungeon "game plan" joins the ranked
           candidates to the `droppedBy` field the client already carries and never
-          reads. Phase A must not land before the 08-18 flip — gearing's tests run under
-          the root `npm test`, so a broken gearing breaks the nightly publish gate.
+          reads. Also: the healer model lane retires with SimC, `custom` weights survive
+          as a full override that must ANNOUNCE itself on ranked surfaces, one "Build"
+          selector replaces the two SimC-fed ones (the guides' scoping axes are ragged —
+          1 to 3 published priorities per spec — so a 2-axis grid would invent cells),
+          and trinket letter tiers stay per-source, which keeps trinkets deliberately
+          OUTSIDE the top-5 ranking. Phase A must not land before the 08-18 flip —
+          gearing's tests run under the root `npm test`, so a broken gearing breaks the
+          nightly publish gate.
           published-gate-scope.md — the page-self-date integrity gate (2026-08-04,
           both owner decisions locked; BUILT same day): deterministic published-evidence
           step + staleness threshold, severity split dishonesty-red/lag-heartbeat.

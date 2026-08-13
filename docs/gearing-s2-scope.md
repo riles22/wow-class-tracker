@@ -1,6 +1,6 @@
 # Gearing Season-2 overhaul — scope
 
-**Status:** SCOPED 2026-08-12. Four owner decisions locked inline (⚑). Nothing built yet.
+**Status:** SCOPED 2026-08-12. Eight owner decisions locked inline (⚑ G1–G8). Nothing built yet.
 Supersedes the gearing bullets in `docs/s2-transition-scope.md` (DECISION 4's phase C) as the
 authoritative plan for the gearing lane; that document remains authoritative for the tracker's
 own Season-2 transition.
@@ -149,8 +149,8 @@ Sequencing constraint: **gearing's tests run under the root `npm test`**, so a b
 breaks the nightly publish gate. Phase A may be authored now but **must not land before the
 08-18 flip** — keep flip week quiet.
 
-**Phase A — SimC removal and unblock** (land after the flip). Delete the pipeline per G3; rework
-the scoring-mode selector so guide-derived ranking is the only built-in mode alongside `custom`;
+**Phase A — SimC removal and unblock** (land after the flip). Delete the pipeline per G3 and the
+healer lane per G5; collapse the setup card to Specialization · Build · Scoring method per G7;
 excise the six-file hash pin; repair `project.test.mjs`; delete both ADRs' operative sections
 (keep them as history) and the ~15 README references. Verify: root `npm test` green, gearing
 builds, artifact shrinks ~17%, `url(http…)` count in the built HTML still zero.
@@ -164,8 +164,10 @@ displays them. Normalize boss names to the canonical roster from our own harvest
 data, and treat an unmatchable name as a hard error rather than a dropped row.
 
 **Phase C — scoring model v2.** Consensus-first ordering per G1; stat fit as tiebreak from the
-scoped priorities; trinkets ranked from the guides' own letter tiers instead of scoring 0; item
-level admitted as a *separate, named* term per G2, never silently merged with secondary fit.
+scoped priorities selected by the Build control (G7); item level admitted as a *separate, named*
+term per G2, never silently merged with secondary fit; custom weights as a full override that
+announces itself on every ranked surface (G6). Trinkets get the per-source letter comparison of G8
+and stay outside the ranking.
 
 **Phase D — the game plan** (the differentiator). Join the ranked candidates to `droppedBy` —
 the field we already have and never read — and to the difficulty/key ladders, producing a ranked
@@ -221,17 +223,63 @@ catalyst-charge budgeting, diminishing-returns and breakpoint modeling — all r
 page should keep saying so rather than implying a solver it does not have. Running any simulator
 ourselves.
 
+### ⚑ DECISION G5 (Riley, 2026-08-12): retire the healer model lane with SimC
+
+Delete `healer-reference-rankings.json` and the dormant `healerItemScore` path. It holds zero
+records, its provider is permission-pending, and — the load-bearing reason — the dormant code is
+written for the reference-mode-first architecture G1 replaces, so a future licensed healer model
+would need it rewritten regardless. Under G1 healers rank by consensus like every other spec, so
+retiring this closes no coverage gap. The README/ADR account stays as history.
+
+### ⚑ DECISION G6 (Riley, 2026-08-12): `custom` weights survive as a FULL override
+
+Decided against the recommended tiebreak-only demotion. Picking custom weights drives the entire
+ordering and consensus is ignored — the power-user escape hatch stays exactly as powerful as it is
+today.
+
+**The cost, accepted, and the requirement it creates:** the page then has *two* ranking models, and
+switching between them silently changes what "rank 1" means. So the custom mode must **announce
+itself on the ranked surfaces**, not just in the selector — every ranked list rendered under custom
+weights says it is ordered by your own numbers rather than by guide consensus, in visible text (not
+a `title=`, per the tracker's own touch-legibility rule). Keeping the word "weights" here is
+acceptable precisely *because* these are the user's own numbers; it must not borrow the vocabulary
+of a simulated stat weight.
+
+### ⚑ DECISION G7 (Riley, 2026-08-12): one "Build" selector listing real published combinations
+
+The two selectors orphaned by G3 (`Ranking profile`, `Encounter` — both fed by the SimC manifest)
+collapse into a single **Build** control whose options are exactly the combinations a source
+actually published, e.g. `Herald of the Sun · Raid healing`.
+
+This is chosen over two independent dropdowns because the scoping axes are **ragged and
+spec-dependent**: Fire Mage / Windwalker / Outlaw / Balance / Prot Warrior publish 1 unscoped
+priority, Rest Druid and Devourer DH publish 2 (by bracket), Holy Paladin publishes 3 (hero talent
+AND bracket), and Wowhead scopes BM Hunter by hero-talent tree × fight profile. A 2-axis grid would
+offer cells no source ever wrote. A spec whose sources disagree on scoping shape gets the union of
+their published combinations, each labeled with the source that published it.
+
+Resulting setup card: **Specialization · Build · Scoring method** (consensus | custom) — three
+controls where there are four today.
+
+### ⚑ DECISION G8 (Riley, 2026-08-12): trinket letter tiers stay per-source, never merged
+
+Decided against normalizing the two letter scales onto a shared axis. A trinket shows
+`Icy Veins: S · Wowhead: A` side by side and the reader judges.
+
+**The cost, accepted:** trinkets have no single ordering, so they remain **outside the G1 top-5
+ranking that every other slot gets** — the one slot where guides publish real depth is also the one
+slot the page will not rank. This is a deliberate honesty-over-completeness trade, consistent with
+the rule that different quantities never share a scale. Display order inside the trinket card is
+then a presentation convention, not a ranking claim, and must be labeled as one; settle it at build
+time (a stable, obviously-arbitrary order such as by first source's letter is fine — an order that
+*looks* computed is not).
+
+Note this leaves today's real defect unfixed in ranking terms: 5 of 14 raid trinkets carry any
+secondaries and the rest score 0 and tie. Showing both sources' letters replaces a meaningless
+ranked order with honest unranked information, which is the improvement — not a ranked trinket list.
+
 ## Open questions for kickoff
 
-1. **The healer model lane.** `healer-reference-rankings.json` is provider-neutral, empty, and
-   permission-pending. Retire it with the SimC lane, or keep the (dormant) ledger and
-   `healerItemScore` path for a future licensed integration? Note that under G1 healers stop being
-   second-class regardless — consensus covers them like everyone else.
-2. **Does `custom` weights survive?** User-supplied numbers are honest (the user chose them), and it
-   is the natural power-user escape hatch under a consensus-first model — but it is the last
-   remaining "weights" surface.
-3. **Hero-talent selection UI.** Scoped priorities need a hero-talent control the page does not have
-   today; where it lives (and whether it defaults from the tracker's own data) is undesigned.
-4. **Trinket letter tiers across three sources** — two publish them, and their scales are not
-   identical. Consensus over letter tiers needs the same normalization discipline the tracker's
-   `scales.json` applies, or it needs to stay per-source.
+None outstanding. Eight decisions (G1–G8) are locked; the next open choices arrive with Phase A
+implementation (chiefly: how much of `validate-data.mjs` survives the SimC excision as reusable
+schema checking).
