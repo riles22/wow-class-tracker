@@ -42,7 +42,17 @@
 
    NOTE (Phase B): this ships MACHINERY. The live harvest is a local-run duty AFTER the
    2026-08-18 season flip — every source is mid-transition until then and a harvest now would
-   record PTR-era picks under a Season-2 label. */
+   record PTR-era picks under a Season-2 label.
+
+   PHASE E (G24 / G25). Two additions, both about the season boundary:
+     · `dropStalePicks` removes picks naming content the season does not hold, and discloses
+       the count. It runs AFTER `repairGuideSources` and the ordering is load-bearing — see
+       the comment there, it is the difference between dropping a stale pick and deleting a
+       real one over a typo.
+     · The namespace segment in the rendered-anchor patterns accepts ANY namespace or none,
+       independently of SEASON.wowheadNamespace, because a `/ptr/` link outlives the flip.
+       `acceptsNamespace` pins that. Launch day is a config edit in src/season.mjs; the
+       operational order is docs/gearing-launch-runbook.md. */
 
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { dirname, join } from "node:path";
@@ -50,9 +60,14 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 import { guideMarkupFrom, markupBlocks, markupHeadings, plainMarkup } from "./lib-wowhead.mjs";
 import { buildId, normalizeBracket, normalizeSlot, normalizeText, parseSoftCap,
   resolveDropSource, rosterFrom, slugify } from "./lib-guides.mjs";
+import { SEASON, dataPredatesSeason, partitionStalePicks, staleDisclosure } from "./season.mjs";
 
 export const SOURCE = "wowhead";
 export const SOURCE_LABEL = "Wowhead class guides";
+
+/* The season number Wowhead states in its own prose ("Midnight Season 2"), derived from the
+   season config rather than hardcoded in the CLI — one field to edit at the next cycle. */
+export const SEASON_NUMBER = Number(String(SEASON.id).replace(/^s/, "")) || null;
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DEFAULT_OUT = join(ROOT, "data", "guide-picks-wowhead.json");
@@ -172,18 +187,31 @@ export function parseSeason(markup) {
 
 /* Profession and NPC names come from the page's own rendered `/skill=<id>/` and `/npc=<id>/`
    anchors — the guide markup carries only the numeric id, and inventing a name from the number
-   is exactly the kind of guess this project forbids. The `(?:ptr/)?` is the measured trap: a
-   dungeon-guide link sits in the PTR namespace while a raid link does not, and the id is the
-   same either way. */
+   is exactly the kind of guess this project forbids. The namespace segment is the measured
+   trap: a dungeon-guide link sits in the PTR namespace while a raid link does not, and the id
+   is the same either way.
+
+   PHASE E: the segment was written `(?:ptr/)?` and is now `(?:[a-z0-9-]+/)?` — ANY namespace,
+   or none. Two reasons. The literal `ptr` was the one spelling this file knew, while Method's
+   pages alone carry four (`ptr`, none, `beta`, `ptr-2`, measured 2026-08-13) and nothing stops
+   a Wowhead anchor doing the same. And it must not depend on SEASON.wowheadNamespace: a
+   `/ptr/` link outlives the flip, and losing a boss NAME to a URL spelling would silently
+   unsource a pick. One optional segment is what has ever been observed; a deeper path is not
+   accepted, because that would start matching link shapes nobody has seen. */
+const NAMESPACE = "(?:[a-z0-9-]+/)?";
 const linkNames = (html, kind) => {
   const names = new Map();
   for (const m of String(html).matchAll(
-    new RegExp(`href="/(?:ptr/)?${kind}=(\\d+)/[^"]*"[^>]*>([^<]+)`, "g")))
+    new RegExp(`href="/${NAMESPACE}${kind}=(\\d+)/[^"]*"[^>]*>([^<]+)`, "g")))
     names.set(m[1], normalizeText(m[2]));
   return names;
 };
 export const parseSkillNames = (html) => linkNames(html, "skill");
 export const parseNpcNames = (html) => linkNames(html, "npc");
+
+/* Exercises the real pattern rather than restating it. `null` is the live namespace. */
+export const acceptsNamespace = (namespace) =>
+  parseNpcNames(`<a href="/${namespace ? `${namespace}/` : ""}npc=1/boss">Boss</a>`).get("1") === "Boss";
 
 /* ---------- slots ---------- */
 
@@ -781,6 +809,55 @@ export function repairGuideSources(specs) {
   return { repaired, categorised, stillMissing };
 }
 
+/* ---------- G24: out-of-season picks ----------
+
+   ORDERING IS THE WHOLE POINT HERE, AND IT IS THE OPPOSITE OF OBVIOUS. This must run AFTER
+   `repairGuideSources`, never before. Wowhead's 40 pages are written by 40 authors who
+   misspell shared bosses — "The Coiled Alter", "Entomed Sentinels", "Nymrissa Wavebinder" —
+   and every one of those is a CURRENT-season boss whose name simply does not resolve as
+   typed. Run the season drop first and all of them read as out-of-season content and get
+   deleted: a typo would silently cost a real vote, which is the exact damage this file spends
+   two hundred lines preventing. After the repair, a pick that still has no source is one no
+   guide id, no category and no roster entry can place, and THAT is what G24 is about.
+
+   So the candidate set is `!pick.source`, and among those only the ones that state something.
+   A strip alternative carries no source text at all and is never dropped (its slot and its
+   endorsement are real regardless of where the item comes from); nor is a category like
+   "The Great Vault", which resolves through the contract and names a lane, not stale content. */
+export function dropStalePicks(specs, roster) {
+  const bySource = {}, bySpec = {}, byEndorsement = { bis: 0, alternative: 0 };
+  let dropped = 0, kept = 0;
+  if (!roster?.length)
+    return { source: SOURCE, dropped: 0, kept: 0, byDropSource: [], bySpec: [], byEndorsement };
+
+  const resolve = (text) => resolveDropSource(text, roster, { soft: true });
+  for (const spec of specs ?? []) {
+    const specName = `${spec.class} ${spec.spec}`;
+    const candidates = (spec.picks ?? []).filter((pick) => !pick.source);
+    const split = partitionStalePicks(candidates, resolve);
+    const gone = new Set(split.dropped);
+    spec.picks = (spec.picks ?? []).filter((pick) => !gone.has(pick));
+    kept += spec.picks.length;
+    for (const pick of gone) {
+      dropped++;
+      bySource[pick.sourceText] = (bySource[pick.sourceText] ?? 0) + 1;
+      bySpec[specName] = (bySpec[specName] ?? 0) + 1;
+      byEndorsement[pick.endorsement] = (byEndorsement[pick.endorsement] ?? 0) + 1;
+    }
+    spec.staleDrops = {
+      dropped: gone.size,
+      removed: [...gone].map((pick) => ({ slot: pick.slot, itemId: pick.itemId,
+        label: pick.sourceText, section: pick.section })),
+    };
+  }
+  return {
+    source: SOURCE, dropped, kept,
+    byDropSource: staleDisclosure(bySource),
+    bySpec: staleDisclosure(bySpec).map(({ source, dropped: n }) => ({ spec: source, dropped: n })),
+    byEndorsement,
+  };
+}
+
 export function parseStatPage(html, { url = null } = {}) {
   const markup = guideMarkupFrom(html);
   return {
@@ -846,7 +923,7 @@ export function pickSetChanges(previous, next) {
 }
 
 async function main(argv) {
-  const args = { specs: [], out: DEFAULT_OUT, dryRun: false, season: 2 };
+  const args = { specs: [], out: DEFAULT_OUT, dryRun: false, season: SEASON_NUMBER };
   for (let i = 0; i < argv.length; i++) {
     if (argv[i] === "--spec") args.specs.push(argv[++i]);
     else if (argv[i] === "--out") args.out = argv[++i];
@@ -958,16 +1035,31 @@ async function main(argv) {
   if (unresolved.length)
     throw new Error(`refusing to write ${args.out}: ${unresolved.join("; ")}`);
 
+  /* G24, AFTER the repair pass above and after the refusal — a misspelt in-season boss must
+     have had its chance to be repaired from the page's own guide id before anything decides
+     it is out of season. */
+  const stale = dropStalePicks(specs, roster);
+  if (stale.dropped) {
+    console.log(`\n  G24: dropped ${stale.dropped} pick(s) naming content ${SEASON.label} does not `
+      + `hold, kept ${stale.kept} (bis ${stale.byEndorsement.bis} · alternative ${stale.byEndorsement.alternative})`);
+    for (const row of stale.byDropSource) console.log(`    ${row.source}: ${row.dropped}`);
+    for (const row of stale.bySpec) console.log(`    ${row.spec}: ${row.dropped}`);
+  }
+
   const changes = pickSetChanges(previous, specs);
   if (changes.length && process.env.WOW_ACCEPT_GUIDE_CHANGES !== "1")
     throw new Error(`refusing to overwrite ${args.out}: pick set changed; audit the guides and `
       + `rerun with WOW_ACCEPT_GUIDE_CHANGES=1 if intentional:\n  ${changes.join("\n  ")}`);
   if (changes.length) console.warn(`  accepted reviewed guide changes: ${changes.join("; ")}`);
 
+  const harvestedAt = new Date().toISOString().slice(0, 10);
   const out = {
     source: SOURCE,
     sourceLabel: SOURCE_LABEL,
-    harvestedAt: new Date().toISOString().slice(0, 10),
+    harvestedAt,
+    season: { id: SEASON.id, label: SEASON.label, patch: SEASON.patch, opensAt: SEASON.opensAt,
+      number: SEASON_NUMBER, predatesSeason: dataPredatesSeason(harvestedAt) },
+    staleDrops: stale,
     note: "Guide picks only. Consensus counting lives in src/lib-guides.mjs; this file states "
       + "what each page published, never a ranking.",
     counts: {
@@ -980,6 +1072,7 @@ async function main(argv) {
       sourcesFromGuideId: repaired.length,
       sourcesByCategory: categorised.length,
       unnamedSources: stillMissing.length,
+      staleDropped: stale.dropped,
     },
     unnamedSources: stillMissing,
     specs,

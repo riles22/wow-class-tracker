@@ -13,10 +13,12 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { consensusForItem, rosterFrom, SLOTS } from "../src/lib-guides.mjs";
-import { AMBIGUOUS_SLOT_LABELS, badgeIdsIn, bisColumns, guideSourceMap, harvestSpec, itemRefsIn,
-  parseBisPage, parseByline, parseNpcNames, parseSeason, parseSkillNames, parseStatPage,
-  parseStatPriorities, pickSetChanges, readSlotCell, repairGuideSources, ROLE_SUFFIX,
-  statPriorityUrlFrom, statsIn, statUrl } from "../src/harvest-guide-wowhead.mjs";
+import { SEASON } from "../src/season.mjs";
+import { acceptsNamespace, AMBIGUOUS_SLOT_LABELS, badgeIdsIn, bisColumns, dropStalePicks,
+  guideSourceMap, harvestSpec, itemRefsIn, parseBisPage, parseByline, parseNpcNames, parseSeason,
+  parseSkillNames, parseStatPage, parseStatPriorities, pickSetChanges, readSlotCell,
+  repairGuideSources, ROLE_SUFFIX, SEASON_NUMBER, statPriorityUrlFrom, statsIn,
+  statUrl } from "../src/harvest-guide-wowhead.mjs";
 
 const fromRoot = (path) => new URL(`../${path}`, import.meta.url);
 const read = (path) => readFile(fromRoot(path), "utf8");
@@ -698,4 +700,116 @@ test("a lane lib-guides knows and this page has never published fails the run, n
   assert.match(stillMissing[0], /World Drop/);
   assert.match(stillMissing[0], /lib-guides reads this as "boe"/);
   assert.equal(specs[0].picks[0].source, null, "and nothing is invented for it");
+});
+
+/* ---------- G24: out-of-season picks ---------- */
+
+test("G24 runs AFTER the guide-id repair, and running it before would delete real votes", async () => {
+  /* THE ORDERING IS THE FINDING. Wowhead's 40 pages are written by 40 authors who misspell the
+     shared bosses — "The Coiled Alter", "Entomed Sentinels", "Nymrissa Wavebinder" — and every
+     one of those names a CURRENT-season boss that simply does not resolve as typed. A season
+     drop cannot tell that apart from a genuinely Season-1 name, so run it first and a typo
+     costs a real vote silently.
+
+     Both orders are exercised here on the same rows, so the difference is measured rather than
+     asserted: unrepaired, the misspelt rows are dropped; repaired, none of them is. */
+  const html = await fixture("hunter-beast-mastery-bis-gear");
+  const broken = parseBisPage(html.replace(/Ula'tek/g, "Ula'tekk"), { roster });
+  const misspelt = broken.picks.filter((pick) => /Ula'tekk/.test(pick.sourceText ?? "")).length;
+  assert.equal(misspelt, 5, "five rows on this page name the boss the typo hides");
+
+  // Two pages, as a run always has: one author spells the boss correctly, another does not.
+  // The repair is cross-page by construction, so a single page in isolation cannot show this.
+  const run = () => [
+    { class: "Hunter", spec: "Beast Mastery", picks: [...parseBisPage(html, { roster }).picks] },
+    { class: "Hunter", spec: "Marksmanship", picks: [...broken.picks] },
+  ];
+
+  // WRONG ORDER: the season drop first.
+  const early = run();
+  assert.equal(dropStalePicks(early, roster).dropped, misspelt,
+    "every misspelt CURRENT-season row would be deleted as though it were Season-1 content");
+
+  // RIGHT ORDER: repair from the pages' own guide ids, then drop what is still unplaceable.
+  const late = run();
+  const { repaired } = repairGuideSources(late);
+  assert.equal(repaired.length, misspelt, "the id on the page names the boss its text misspells");
+  const stale = dropStalePicks(late, roster);
+  assert.equal(stale.dropped, 0, "nothing is stale once the pages' own ids have had their turn");
+  assert.equal(late[1].picks.length, broken.picks.length);
+});
+
+test("G24 drops a pick whose source no id, category or roster entry can place", async () => {
+  /* Season-1 content, which is what the decision is actually about: a name that resolves
+     against nothing, on a page whose own guide ids cannot rescue it either. Synthesised into a
+     real fixture by renaming a boss to one Archon's Season-1 roster carries. */
+  const page = parseBisPage((await fixture("hunter-beast-mastery-bis-gear"))
+    .replace(/Ula'tek/g, "Nexus King Salhadaar"), { roster });
+  const specs = [{ class: "Hunter", spec: "Beast Mastery", picks: [...page.picks] }];
+  const before = specs[0].picks.length;
+  const { repaired } = repairGuideSources(specs);
+  assert.equal(repaired.length, 0, "no other page in this run resolves that id, so nothing repairs");
+
+  const stale = dropStalePicks(specs, roster);
+  assert.ok(stale.dropped > 0);
+  assert.equal(specs[0].picks.length, before - stale.dropped);
+  assert.equal(stale.source, "wowhead", "the key the page merges the three harvests on");
+  assert.deepEqual(stale.byDropSource, [{ source: "Nexus King Salhadaar", dropped: stale.dropped }]);
+  assert.deepEqual(stale.bySpec, [{ spec: "Hunter Beast Mastery", dropped: stale.dropped }]);
+  assert.equal(stale.byEndorsement.bis + stale.byEndorsement.alternative, stale.dropped);
+  assert.equal(specs[0].staleDrops.dropped, stale.dropped, "the removed rows stay enumerable");
+  for (const row of specs[0].staleDrops.removed) assert.equal(row.label, "Nexus King Salhadaar");
+});
+
+test("a sourceless strip alternative and a category lane are not stale content", () => {
+  /* Two things that look like misses and are not. A Raid / Mythic+ strip badge carries no
+     source text at all — its endorsement is real regardless of where the item drops — and a
+     category like "The Great Vault" names a lane, which the contract resolves. Dropping either
+     would lose an endorsement over a question G24 never asked. */
+  const specs = [{ class: "X", spec: "X", picks: [
+    { itemId: "1", endorsement: "alternative", sourceText: null, source: null, section: "Raid Drops" },
+    { itemId: "2", endorsement: "bis", sourceText: "The Great Vault", source: null },
+    { itemId: "3", endorsement: "bis", sourceText: "Ula'tek", source: { kind: "raid", canonical: "Ula'tek" } },
+  ] }];
+  const stale = dropStalePicks(specs, roster);
+  assert.equal(stale.dropped, 0);
+  assert.equal(specs[0].picks.length, 3);
+});
+
+test("with no roster to judge against, nothing is dropped", () => {
+  const specs = [{ class: "X", spec: "X", picks: [
+    { itemId: "1", endorsement: "bis", sourceText: "Nexus King Salhadaar", source: null }] }];
+  assert.equal(dropStalePicks(specs, []).dropped, 0);
+  assert.equal(dropStalePicks(specs, null).dropped, 0);
+  assert.equal(specs[0].picks.length, 1);
+});
+
+/* ---------- namespace acceptance ---------- */
+
+test("any Wowhead namespace parses in a rendered anchor, whatever the season config says", () => {
+  /* The pattern used to know exactly one spelling, `ptr/`. Method's pages alone carry four
+     (ptr · none · beta · ptr-2, measured 2026-08-13) and nothing stops a Wowhead anchor doing
+     the same. SEASON.wowheadNamespace decides what we EMIT, never what we ACCEPT: a `/ptr/`
+     link outlives the flip, and losing a boss NAME to a URL spelling silently unsources a
+     pick — which on this source is the difference between a vote and a refusal. */
+  for (const namespace of ["ptr", "ptr-2", "beta", null])
+    assert.equal(acceptsNamespace(namespace), true, `/${namespace ?? ""}/npc= must still parse`);
+
+  assert.equal(parseNpcNames('<a href="/ptr-2/npc=253563/x">Nek\'zali the Soulcoiler</a>').get("253563"),
+    "Nek'zali the Soulcoiler");
+  assert.equal(parseSkillNames('<a href="/beta/skill=165/leatherworking">Leatherworking</a>').get("165"),
+    "Leatherworking");
+  // One optional segment is what has ever been observed; a deeper path is not accepted, because
+  // that would start matching link shapes nobody has seen.
+  assert.equal(parseNpcNames('<a href="/a/b/npc=1/x">Boss</a>').size, 0);
+
+  assert.equal(SEASON.wowheadNamespace, "ptr", "still pre-launch as of this commit");
+});
+
+test("the season the pages must claim comes from the config, not a literal in the CLI", () => {
+  // `--season 2` used to be a hardcoded default here. Launch day is a config edit in
+  // src/season.mjs; this is one of the fields that used to need finding by hand.
+  assert.equal(SEASON_NUMBER, 2);
+  assert.equal(SEASON_NUMBER, Number(SEASON.id.replace(/^s/, "")));
+  for (const page of Object.values(BIS)) assert.equal(page.page.season, SEASON_NUMBER);
 });

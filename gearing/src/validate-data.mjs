@@ -113,7 +113,11 @@ function validateInstanceStats(item, where, errors) {
     errors.push(`${where}: ${item.id} ${item.name} has invalid socket metadata`);
 }
 
-function validateCatalystAndTier(catalyst, tier, catalystAllocations, raidGroups, dungeonGroups, errors) {
+function validateCatalystAndTier(catalyst, tier, catalystAllocations, raidGroups, dungeonGroups, errors, lairGroups = []) {
+  /* Lair items are enumerated alongside raid items here on purpose (G22): they are a
+     separate SOURCE, not a separate roster. Both invariants below pin the set of items this
+     page can rank, and a lair drop is rankable. */
+  const raidItemGroups = [...raidGroups, ...lairGroups];
   if (catalyst?.schemaVersion !== 1 || catalyst?.patchContext !== WEAPON_PATCH_CONTEXT
     || catalyst?.season !== 2)
     errors.push("catalyst rules are missing or have the wrong patch/schema");
@@ -205,10 +209,10 @@ function validateCatalystAndTier(catalyst, tier, catalystAllocations, raidGroups
   }
 
   const rankedSourceFingerprints = [
-    ...raidGroups.flatMap((boss) => (boss.items || []).map((item) => ({
+    ...raidItemGroups.flatMap((boss) => (boss.items || []).map((item) => ({
       item,
       category: TIER_SLOTS.has(item.slot) && ARMOR_TYPES.has(item.type) ? "base" : "ranked-item",
-      sourceKind: "raid", sourceKey: String(boss.boss), tierClass: null,
+      sourceKind: "raid", sourceKey: String(boss.boss ?? boss.key), tierClass: null,
     }))),
     ...dungeonGroups.flatMap((dungeon) => (dungeon.items || []).map((item) => ({
       item,
@@ -658,6 +662,28 @@ export function validateData({ raid, specs, dungeons, sheet, statOverrides, stat
 
   const raidGroups = raid?.bosses || [];
   if (raidGroups.length !== 8) errors.push(`expected 8 raid bosses, found ${raidGroups.length}`);
+
+  /* LAIR BOSSES ARE A SEPARATE SOURCE, NOT A NINTH RAID BOSS (G22). They sit on their own
+     instance and lockout, so the 8-boss identity checks above must not see them — but their
+     items are real, rankable Season-2 drops and MUST stay in every roster that enumerates
+     what this page can recommend. Splitting them out without this line silently deleted
+     four items from the ranked pool and from the reviewed stat-allocation fingerprint. */
+  const lairGroups = raid?.lairs || [];
+  for (const lair of lairGroups) {
+    if (!lair.key || !lair.name || !lair.instance)
+      errors.push(`lair boss is missing key/name/instance: ${JSON.stringify(lair.key ?? lair.name ?? "?")}`);
+    if (lair.lockout !== "separate")
+      errors.push(`lair "${lair.name}" must declare lockout "separate" — that is the whole reason it is not a raid boss`);
+  }
+  /* And the arrangement this replaced must not come back: a lair declared as a raid boss's
+     dropAlias is mechanically indistinguishable from a legitimate sub-NPC, which is exactly
+     why it went unnoticed. The game plan would send a reader to the wrong instance. */
+  const lairNames = new Set(lairGroups.flatMap((lair) => [lair.name, ...(lair.dropAliases || [])]));
+  for (const boss of raidGroups)
+    for (const alias of boss.dropAliases || [])
+      if (lairNames.has(alias))
+        errors.push(`raid boss "${boss.name}" claims lair boss "${alias}" as a drop alias — `
+          + "a lair is its own source (docs/gearing-s2-scope.md G22), never an alias");
   if (new Set(raidGroups.map((boss) => boss.name)).size !== raidGroups.length
     || new Set(raidGroups.map((boss) => boss.boss)).size !== raidGroups.length)
     errors.push("raid boss identities are not unique");
@@ -699,7 +725,7 @@ export function validateData({ raid, specs, dungeons, sheet, statOverrides, stat
 
   const allItems = [...raidItems, ...dungeonGroups.flatMap((dungeon) => dungeon.items || [])];
   validateItemEligibility(itemEligibility, allItems, rows, errors);
-  validateCatalystAndTier(catalyst, tier, catalystAllocations, raidGroups, dungeonGroups, errors);
+  validateCatalystAndTier(catalyst, tier, catalystAllocations, raidGroups, dungeonGroups, errors, lairGroups);
 
   /* The join set is every item the page can actually render — raid drops, dungeon drops and
      the direct-tier pieces — i.e. the client's own ALL_KNOWN_ITEMS. A guide legitimately picks

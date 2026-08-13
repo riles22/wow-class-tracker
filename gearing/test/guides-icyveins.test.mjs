@@ -12,8 +12,10 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { consensusForItem, rosterFrom, SLOTS } from "../src/lib-guides.mjs";
-import { articleMeta, bisUrl, changelogTop, EXPECTED_PATCH, parseBisPage,
-  parseStatPriorityPage, parseTrinketTiers, SOURCE, statPriorityUrl } from "../src/harvest-guide-icyveins.mjs";
+import { SEASON } from "../src/season.mjs";
+import { acceptsNamespace, articleMeta, bisUrl, changelogTop, dropStalePicks, EXPECTED_PATCH,
+  itemLinkFields, parseBisPage, parseStatPriorityPage, parseTrinketTiers, SOURCE,
+  statPriorityUrl } from "../src/harvest-guide-icyveins.mjs";
 
 const fromRoot = (path) => new URL(`../${path}`, import.meta.url);
 const json = async (path) => JSON.parse(await readFile(fromRoot(path), "utf8"));
@@ -422,6 +424,114 @@ test("an unknown stat key stops the parse rather than dropping the stat", async 
   const html = (await fixture("fire-mage-stat-priority")).replace('stat-container versatility', "stat-container corruption");
   assert.throws(() => parseStatPriorityPage(html, { specName: "Fire Mage", where: "new stat" }),
     /unknown stat key/);
+});
+
+/* ---------------------------------------------------------------- G24: out-of-season picks
+
+   The measured case, from the full-roster dry run of 2026-08-13: an Icy Veins BiS page still
+   names Nexus King Salhadaar — a Season-1 raid boss, independently confirmed by Archon's own
+   S1 roster. It is synthesised into a real fixture below (the same technique the soft-cap test
+   above uses) so the whole parse path runs against a real page rather than a hand-built one. */
+
+const S1_BOSS = "Nexus King Salhadaar";
+const withS1Boss = async (name) => (await fixture(name)).replace(/Ula'tek/g, S1_BOSS);
+
+test("a stale drop label no longer costs the whole spec — it is collected, not thrown", async () => {
+  /* Before Phase E the BiS drop resolved HARD, so one Season-1 boss name threw out of
+     parseBisPage and the spec's 48 picks, 14 alternatives, trinket letters and lists all
+     vanished with it. That is the failure mode the scope settled against in "How a harvest
+     fails": throwing surfaces ONE typo per run and loses everything that carried it.
+     G24 cannot even function on such a page, because there are no picks left to partition. */
+  const page = parseBisPage(await withS1Boss("fire-mage-gear-best-in-slot"),
+    { where: "Fire Mage", roster });
+  assert.equal(page.picks.length, 48, "every row the page published still parsed");
+  assert.equal(page.diagnostics.picksWithUnresolvedDrop, 4);
+  assert.deepEqual([...new Set(page.unresolvedDrops.map((miss) => miss.label))], [S1_BOSS],
+    "and the run has the whole list to refuse on, in one pass");
+  for (const miss of page.unresolvedDrops) assert.ok(miss.itemId && miss.slot);
+});
+
+test("G24: a pick naming Season-1 content is dropped from the run and the loss is disclosed", async () => {
+  const page = parseBisPage(await withS1Boss("fire-mage-gear-best-in-slot"),
+    { where: "Fire Mage", roster });
+  const entry = { class: "Mage", spec: "Fire", bis: page };
+  const stale = dropStalePicks([entry], roster);
+
+  assert.equal(stale.dropped, 4, "the four Ula'tek rows now name a boss Season 2 does not hold");
+  assert.equal(entry.bis.picks.length, 44);
+  assert.equal(stale.kept, 44 + entry.bis.alternatives.length);
+  assert.equal(entry.bis.picks.some((pick) => pick.dropRaw === S1_BOSS), false);
+  // The disclosure the page renders: who lost what, worst first.
+  assert.deepEqual(stale.byDropSource, [{ source: S1_BOSS, dropped: 4 }]);
+  assert.deepEqual(stale.bySpec, [{ spec: "Fire Mage", dropped: 4 }]);
+  assert.deepEqual(stale.byEndorsement, { bis: 4, alternative: 0 });
+  assert.equal(stale.source, SOURCE, "the key the page merges the three harvests on");
+  // Nothing vanishes without trace: the removed rows are still enumerable on the record.
+  assert.equal(entry.bis.staleDrops.dropped, 4);
+  assert.deepEqual([...new Set(entry.bis.staleDrops.removed.map((row) => row.label))], [S1_BOSS]);
+  // And the per-list counts must describe the arrays beside them, or the file lies about itself.
+  for (const list of entry.bis.lists)
+    assert.equal(list.picks, entry.bis.picks.filter((pick) => pick.list === list.id).length);
+});
+
+test("a pick the parser DID source is never re-tested, and an unlabelled one is never dropped", async () => {
+  /* Two refusals, both load-bearing. Re-deriving a sourced pick from its text alone would be a
+     second opinion that could disagree with the parser's. And an unlabelled pick is not
+     evidence of staleness — the harvester already refuses a run that cannot name its sources,
+     so dropping here would punish the same condition twice and lose a vote that the item id
+     identifies perfectly well. */
+  const html = (await fixture("fire-mage-gear-best-in-slot"))
+    .replace(/<span class="bis_item_drop">[\s\S]*?<\/span>/, "");
+  const page = parseBisPage(html, { where: "Fire Mage", roster });
+  assert.equal(page.diagnostics.picksWithoutDrop, 1, "one cell now states no source at all");
+  assert.equal(page.diagnostics.picksWithUnresolvedDrop, 0);
+
+  const before = page.picks.length;
+  const entry = { class: "Mage", spec: "Fire", bis: page };
+  const stale = dropStalePicks([entry], roster);
+  assert.equal(stale.dropped, 0);
+  assert.equal(entry.bis.picks.length, before);
+});
+
+test("with no roster to judge against, nothing is dropped", async () => {
+  // A caller that cannot resolve anything must not conclude that everything is stale.
+  const page = parseBisPage(await withS1Boss("fire-mage-gear-best-in-slot"), { where: "Fire Mage" });
+  const entry = { class: "Mage", spec: "Fire", bis: page };
+  assert.equal(dropStalePicks([entry], []).dropped, 0);
+  assert.equal(dropStalePicks([entry], null).dropped, 0);
+  assert.equal(entry.bis.picks.length, 48);
+});
+
+/* ---------------------------------------------------------------- namespace acceptance */
+
+test("both Wowhead namespaces parse, whatever the season config says", async () => {
+  /* Icy Veins spells the namespace as a query parameter (`&domain=ptr`) rather than a path
+     segment, but the rule is the shared one: SEASON.wowheadNamespace decides what we EMIT and
+     never what we ACCEPT. A link written before the flip keeps saying domain=ptr for as long
+     as it takes Icy Veins to rewrite it, and a URL spelling is not a reason to delete a pick. */
+  for (const namespace of ["ptr", "ptr-2", "beta", null])
+    assert.equal(acceptsNamespace(namespace), true, `domain=${namespace} must still parse`);
+
+  assert.equal(itemLinkFields("item=1")?.domain, null, "no domain= is the live namespace");
+  assert.equal(itemLinkFields("item=1")?.ptrDomain, false);
+  assert.equal(itemLinkFields("item=1&domain=ptr")?.domain, "ptr");
+  assert.equal(itemLinkFields("item=1&domain=ptr")?.ptrDomain, true);
+
+  // Measured on the three recorded BiS fixtures: 0.756 / 0.688 / 0.813 of picks still link the
+  // ptr domain, against 0.734 across the whole roster in the 2026-08-13 dry run. The share is a
+  // pre-launch READING, not a gate — the picks parse either way.
+  const page = await bis("retribution-paladin-gear-best-in-slot", "Retribution Paladin");
+  const ptr = page.picks.filter((pick) => pick.ptrDomain).length;
+  assert.equal(ptr, 34);
+  assert.equal(page.picks.length, 45);
+  assert.equal(SEASON.wowheadNamespace, "ptr", "still pre-launch as of this commit");
+});
+
+test("the patch gate is the season config, not a second copy of the number", () => {
+  // Launch day is a config edit in src/season.mjs; this is one of the fields that used to
+  // require finding and editing a harvester by hand.
+  assert.equal(EXPECTED_PATCH, SEASON.patch);
+  assert.equal(EXPECTED_PATCH, "12.1");
 });
 
 /* ---------------------------------------------------------------- feeding the contract */

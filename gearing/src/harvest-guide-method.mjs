@@ -85,13 +85,19 @@
    why `rosterMatchRate` is reported per spec: the page's self-declared "Patch 12.1" label
    says what Method believes it updated, while the share of drop sources that resolve
    against OUR Season-2 roster says what the page actually still describes. They disagree,
-   and only the second one is evidence. */
+   and only the second one is evidence.
+
+   PHASE E (G24) CHANGES WHAT HAPPENS AFTER THE REFUSAL, NOT THE REFUSAL. Once a reviewer has
+   read the list and accepted it, the unresolvable picks are DROPPED rather than written with
+   a null source — see `dropStalePicks` below for why that lives at the run level and why
+   `rosterMatchRate` must keep measuring the published set. */
 
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { buildId, normalizeBracket, normalizeSlot, normalizeText,
   resolveDropSource, rosterFrom } from "./lib-guides.mjs";
+import { SEASON, dataPredatesSeason, partitionStalePicks, staleDisclosure } from "./season.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DATA_PATH = join(ROOT, "data", "guide-method.json");
@@ -99,7 +105,11 @@ export const SOURCE_ID = "method";
 export const SOURCE_LABEL = "Method";
 
 /* Trap 4: the namespace segment is optional and open. Anchoring on the host is also what
-   keeps `original-item=` out (trap 2) — a query parameter has no `wowhead.com/` before it. */
+   keeps `original-item=` out (trap 2) — a query parameter has no `wowhead.com/` before it.
+   PHASE E: the openness is now a RULE, not an accident of how the regex was written. What we
+   accept must never depend on SEASON.wowheadNamespace, because a `/ptr/` link outlives the
+   flip by however long it takes Method to rewrite it, and a link spelling is not a reason to
+   delete a pick. `acceptsNamespace` below pins that. */
 const ITEM_LINK = /wowhead\.com\/(?:([a-z0-9-]+)\/)?item=(\d+)/gi;
 const UA = { "user-agent": "Mozilla/5.0 (wow-s2-gearing harvester)" };
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -204,6 +214,11 @@ export function itemLinksIn(html) {
   }
   return out;
 }
+
+/* Exercises the real regex rather than restating it. `null` is the live namespace (no segment). */
+export const acceptsNamespace = (namespace) =>
+  itemLinksIn(`<a href="https://www.wowhead.com/${namespace ? `${namespace}/` : ""}item=1/x">x</a>`)
+    .length === 1;
 
 const anchorTexts = (html) =>
   [...String(html ?? "").matchAll(/<a\b[^>]*>([\s\S]*?)<\/a>/gi)].map((m) => cellText(m[1]));
@@ -507,6 +522,66 @@ export function parseMethodGearingPage(source, { spec, className, role = null, u
   };
 }
 
+/* ---------- G24: out-of-season picks ----------
+
+   Method is the source this decision was measured on: four spec pages cite whole Season-1
+   dungeons (Skyreach, Pit of Saron, Magisters' Terrace) while labelling themselves Patch
+   12.1. Once Season 2 is live those name content the season does not hold, and a pick you
+   cannot act on has no business in a list whose whole job is telling you what to go and get.
+   So it is dropped, and the count is disclosed per source rather than absorbed.
+
+   THIS RUNS AT THE RUN LEVEL, NOT IN THE PARSER, and that is deliberate. Two Phase-B
+   guarantees depend on `parseMethodGearingPage` staying LOSSLESS: `issues.unresolvedSources`
+   is what the run refuses on, and `counts.rosterMatchRate` — the honest season-currency
+   signal, since every page CLAIMS its patch — is a share of what the page PUBLISHED. Drop
+   inside the parser and the rate is 1.000 on every page by construction, which would delete
+   the only evidence that disagrees with the page's own label.
+
+   It supersedes the Phase-B reading that an unresolvable source always keeps its pick
+   ("the vote is the item"). That reasoning still holds for a MISSPELT in-season boss — which
+   is why the run still refuses by default and a human has to look; accepting is now what says
+   "these really are out of season", and the drop is what that acceptance means. */
+export function dropStalePicks(records, roster) {
+  const bySource = {}, bySpec = {};
+  let dropped = 0, kept = 0;
+  if (!roster?.length)
+    return { source: SOURCE_ID, dropped: 0, kept: 0, byDropSource: [], bySpec: [] };
+
+  const resolve = (text) => resolveDropSource(text, roster, { soft: true });
+  for (const record of records ?? []) {
+    const specName = `${record.spec} ${record.class}`;
+    // Only picks the parser could NOT source are candidates. Re-testing a sourced pick from
+    // its text alone would be a second opinion, and the two could disagree.
+    const candidates = (record.picks ?? []).filter((pick) => !pick.dropSource);
+    const split = partitionStalePicks(candidates, resolve);
+    const gone = new Set(split.dropped);
+    record.picks = (record.picks ?? []).filter((pick) => !gone.has(pick));
+    kept += record.picks.length;
+    for (const pick of gone) {
+      dropped++;
+      bySource[pick.sourceText] = (bySource[pick.sourceText] ?? 0) + 1;
+      bySpec[specName] = (bySpec[specName] ?? 0) + 1;
+    }
+    record.staleDrops = {
+      dropped: gone.size,
+      removed: [...gone].map((pick) => ({ slot: pick.slot, itemId: pick.itemId, label: pick.sourceText })),
+    };
+    // `counts.picks` must describe the array beside it; `picksPublished` keeps the page's own
+    // total, which is what rosterMatchRate was measured over and must stay comparable to.
+    if (record.counts) {
+      // `??=`, not `=`: a second pass must not overwrite the published total with an already
+      // reduced one, which would quietly make rosterMatchRate's denominator unrecoverable.
+      record.counts.picksPublished ??= record.counts.picks;
+      record.counts.picks = record.picks.length;
+    }
+  }
+  return {
+    source: SOURCE_ID, dropped, kept,
+    byDropSource: staleDisclosure(bySource),
+    bySpec: staleDisclosure(bySpec).map(({ source, dropped: n }) => ({ spec: source, dropped: n })),
+  };
+}
+
 /* ---------- CLI ---------- */
 
 const slugPart = (value) => normalizeText(value).toLowerCase()
@@ -579,20 +654,54 @@ async function main(argv) {
   if (failed.length && !accept) {
     throw new Error(`refusing to overwrite data/guide-method.json:\n  ${failed.join("\n  ")}\n`
       + "  Fix the roster join or add the slot alias. Rerun with METHOD_ACCEPT_PARTIAL=1 only "
-      + "after reviewing every line above — each one is a vote that would otherwise vanish.");
+      + "after reviewing every line above — each one is a vote that would otherwise vanish, "
+      + "and accepting now DROPS the unresolvable ones as out-of-season (G24).");
   }
   if (failed.length) console.warn(`  accepted reviewed gaps:\n    ${failed.join("\n    ")}`);
 
+  // G24, after the refusal: nothing is dropped until a reviewer has seen the list.
+  const stale = dropStalePicks(records, roster);
+  if (stale.dropped) {
+    console.log(`\n  G24: dropped ${stale.dropped} pick(s) naming content ${SEASON.label} does not `
+      + `hold, kept ${stale.kept}`);
+    for (const row of stale.byDropSource) console.log(`    ${row.source}: ${row.dropped}`);
+    for (const row of stale.bySpec) console.log(`    ${row.spec}: ${row.dropped}`);
+  }
+
+  const namespaces = {};
+  for (const record of records) for (const pick of record.picks)
+    namespaces[pick.namespace ?? "live"] = (namespaces[pick.namespace ?? "live"] ?? 0) + 1;
+  const offNamespace = Object.entries(namespaces).filter(([key]) => key !== "live")
+    .reduce((sum, [, n]) => sum + n, 0);
+  /* Both spellings always parse; the config only decides what a high count MEANS. Once
+     SEASON.wowheadNamespace is null the season is live and these are links Method has not
+     rewritten — worth saying, never worth refusing over. */
+  if (offNamespace && !SEASON.wowheadNamespace)
+    console.warn(`  ! ${offNamespace} item link(s) still sit off the live namespace `
+      + `(${JSON.stringify(namespaces)}) — stale URLs, parsed anyway`);
+
+  const harvestedAt = new Date().toISOString().slice(0, 10);
+  const predates = dataPredatesSeason(harvestedAt);
   const doc = {
     source: `${SOURCE_LABEL} per-spec gearing guides`,
     sourceId: SOURCE_ID,
-    harvestedAt: new Date().toISOString().slice(0, 10),
+    harvestedAt,
     selfDated: true,
-    caveat: "Pre-launch data. Method's Season-2 pages are ragged in currency: some still cite "
-      + "Season-1 dungeons. Read counts.rosterMatchRate per spec, not the page's patch label.",
+    /* Derived, not hand-written: before Phase E this said "Pre-launch data." unconditionally,
+       which would have gone on claiming that about a season already three weeks old. */
+    season: { id: SEASON.id, label: SEASON.label, patch: SEASON.patch, opensAt: SEASON.opensAt,
+      predatesSeason: predates },
+    caveat: (predates ? `Harvested ${harvestedAt}, before ${SEASON.label} opened ${SEASON.opensAt} `
+      + "— pre-launch data. " : "")
+      + "Method's Season-2 pages are ragged in currency: some still cite Season-1 dungeons. "
+      + "Read counts.rosterMatchRate per spec, not the page's patch label.",
+    staleDrops: stale,
+    namespaces,
     counts: {
       specs: records.length,
       picks: records.reduce((a, r) => a + r.counts.picks, 0),
+      picksPublished: records.reduce((a, r) => a + (r.counts.picksPublished ?? r.counts.picks), 0),
+      staleDropped: stale.dropped,
       undated: records.filter((r) => !r.selfDated).length,
     },
     issues: failed,

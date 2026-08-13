@@ -90,6 +90,18 @@ h1{font-family:var(--disp);font-weight:700;letter-spacing:.01em;font-size:clamp(
 .sub{font-size:14px;color:var(--t2);margin:0;max-width:70ch}
 .sub b{color:var(--t1)}
 
+/* The G23 staleness banner. Deliberately the tracker's own .datahealth strip — same amber,
+   same size, same position under the masthead — because a reader tabbing between the two
+   pages should recognise a freshness warning as the same object, not learn a second one.
+   Colours are gearing's tokens; the amber is the tracker's literal, which is not a token
+   on either page. */
+.datahealth{margin:14px 0 0;padding:10px 14px;font-size:12.5px;line-height:1.5;
+  color:var(--t2);border-radius:8px;background:rgba(232,161,58,.12);
+  border:1px solid rgba(232,161,58,.42)}
+.datahealth b{color:#e8a13a;font-family:var(--mono);font-size:11px;letter-spacing:.1em;
+  text-transform:uppercase}
+.datahealth .dh-series{color:var(--t3);font-size:11.5px;margin-top:4px}
+
 .controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:20px 0 6px}
 select,button,textarea,input{font-family:inherit;font-size:15px;color:var(--t1);min-height:44px;
   background:var(--panel-2);border:1px solid var(--control-line);border-radius:9px;padding:10px 13px}
@@ -357,14 +369,23 @@ table.paths tr:hover td{background:rgba(255,255,255,.03)}
       <span class="pill"><b id="p-specs">0</b> specs</span>
     </div>
     <div class="rule"></div>
-    <div class="sub">Pick your spec to see what to chase and where it drops
-      &middot; season max <b>344</b> &middot; season opens <b>Aug 18, 2026</b></div>
+    <!-- The two season facts that used to be typed here ("season max 344 · season opens
+         Aug 18, 2026") now come from src/season.mjs via renderSeasonFacts(). Launch day is a
+         config edit there; this markup never moves again. -->
+    <div class="sub">Pick your spec to see what to chase and where it drops<span id="seasonfacts"></span></div>
   </header>
 
   <nav class="sitetabs" aria-label="Sections">
     <a class="sitetab" href="index.html" title="Spec Tracker — tier consensus, rankings and the 12.1 forecast">📊 Spec Tracker</a>
     <a class="sitetab" href="gearing.html" aria-current="page">⚙ S2 Gearing</a>
   </nav>
+
+  <!-- G23. Visible text, not a tooltip: 262 of the sibling tracker's 288 tooltips proved
+       invisible on touch, and this is the one disclosure a reader must not be able to miss.
+       Rendered by renderStaleness() and hidden whenever season.mjs says there is nothing to
+       disclose, which is every day before the season opens and every day after the data has
+       caught up with it. -->
+  <div id="staleness" class="datahealth" role="status" hidden></div>
 
   <section class="setup-card" aria-label="Character and scoring setup">
     <div class="setup-grid">
@@ -482,6 +503,38 @@ table.paths tr:hover td{background:rgba(255,255,255,.03)}
 
 <script id="data" type="application/json">__DATA__</script>
 <script>
+/* ---------- the season vocabulary (Phase E — docs/gearing-s2-scope.md G23, G25) ----------
+   src/season.mjs is the ONE place a human states which season this is, when it opens and
+   where its item-level ceiling sits. src/build.mjs substitutes the marker below with that
+   module's source, so this page reads the same constants and runs the same staleness rule as
+   the harvesters and the validator — no second copy of the rule, and launch day is a config
+   edit in season.mjs rather than an edit here.
+
+   A COMMENT MARKER, NOT A BARE TOKEN, and the difference is load-bearing. The data-blob and
+   guide-library placeholders are bare identifiers because the page is meaningless without
+   them. This page IS meaningful without the season block — it just cannot disclose staleness —
+   and three existing client harnesses (test/project.test.mjs, ranking-client, gameplan-client)
+   assemble the template with injectGuideLib alone and then EXECUTE it. A bare token would be a
+   ReferenceError the moment any of them booted. So the unsubstituted template stays valid,
+   executable JavaScript, every read below is typeof-guarded, and build.mjs refuses to write an
+   artifact whose marker was never substituted — the guards cannot silently ship.
+
+   NEVER WRITE THE OTHER TWO PLACEHOLDER TOKENS ANYWHERE BUT AT THEIR REAL POSITION — not in
+   prose, not in a comment. Both injectors substitute the FIRST occurrence, so a mention that
+   sits earlier in the file captures the substitution and injects a library into the middle of
+   a sentence. Cost of learning that: one build that wrote a syntactically broken page and
+   reported success. build.mjs now refuses a residual token and parses the assembled script,
+   so the same mistake is a red build rather than a dead page. */
+//__SEASON__
+
+const SEASON_CFG = typeof SEASON === 'object' && SEASON ? SEASON : null;
+const staleNoticeFor = (harvestedAt, today) =>
+  typeof stalenessNotice === 'function' ? stalenessNotice(harvestedAt, today) : null;
+const predatesSeason = at =>
+  typeof dataPredatesSeason === 'function' ? dataPredatesSeason(at) : false;
+const openedBy = today =>
+  typeof seasonHasOpened === 'function' ? seasonHasOpened(today) : false;
+
 const DB = JSON.parse(document.getElementById('data').textContent);
 const RAID = DB.raid, SPECS = DB.specs, DUNG = DB.dungeons, SHEET = DB.sheet;
 const TIER = DB.tier || {sets:[]}, CATALYST = DB.catalyst || {setBonusSlots:[]};
@@ -2104,6 +2157,104 @@ function enhanceInteractiveRows() {
   });
 }
 
+/* ---------- season facts and the staleness banner (G23) ---------- */
+
+/* The reader's OWN date, which is the only date that can answer "has the season opened for
+   the person looking at this page" — a build-time answer would freeze on the day the artifact
+   was written, and these artifacts sit for weeks. Guarded and caught: a page that cannot read
+   a clock must render no banner, never an exception that takes the rest of the boot with it.
+   Everything downstream takes `today` as an ARGUMENT, the way season.mjs does, so this is the
+   single place the clock is touched. */
+function todayISO() {
+  try {
+    if (typeof Date !== 'function') return null;
+    const iso = new Date().toISOString();
+    return /^\d{4}-\d{2}-\d{2}/.test(iso) ? iso.slice(0, 10) : null;
+  } catch (error) { return null; }
+}
+const readerToday = today => today === undefined ? todayISO() : today;
+
+const MONTH_ABBR = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+/* "2026-08-18" -> "Aug 18, 2026", by string surgery rather than Date parsing: an ISO date
+   handed to Date is UTC midnight, which renders as the PREVIOUS day everywhere west of
+   Greenwich — the season would appear to open on the 17th for most of the US. */
+function longDate(iso) {
+  const text = String(iso == null ? '' : iso);
+  const parts = /^(\d{4})-(\d{2})-(\d{2})$/.exec(text);
+  return parts ? MONTH_ABBR[Number(parts[2]) - 1] + ' ' + Number(parts[3]) + ', ' + parts[1] : text;
+}
+
+/* Which datasets this page holds a DATE for, labelled. The guide and Archon lanes are
+   `pending` rather than dated and disclose themselves on their own panels, so they are not
+   here. One definition, read by both the banner and the footer freshness line, because the
+   two disagreeing about what "this page's data" means is exactly the confusion G23 removes. */
+function datedHarvests() {
+  return [
+    {label: 'Raid items', at: RAID && RAID.harvestedAt},
+    {label: 'Dungeon items', at: DUNG && DUNG.harvestedAt},
+    {label: 'Direct tier items', at: TIER && TIER.harvestedAt},
+    {label: 'Spec data', at: SPECS && SPECS.harvestedAt},
+    {label: 'Catalyst policy', at: CATALYST && CATALYST.reviewedAt}
+  ].filter(entry => entry.at);
+}
+
+/* G23. Between the season opening and the first post-launch harvest this page holds
+   pre-launch data about a season that has already started, and its own caveat still promises
+   things "may change before" a date that has passed. State it plainly instead.
+
+   THE BASIS IS THE OLDEST HARVEST, NOT THE NEWEST. G25 re-harvests each lane as its source
+   comes back — items on launch day, each guide when its pages verify as Season 2, Archon once
+   it has a real log sample — so for several days some datasets are post-launch and others are
+   not. Keyed to the newest date, the banner would clear itself the moment ONE lane landed
+   while pre-launch item levels were still on screen. So it clears when the whole page has
+   caught up, and until then it names the lanes that have not.
+
+   No branch of this decides anything itself: season.mjs owns the rule and returns null when
+   there is nothing to disclose, which is every day before the season opens. */
+function renderStaleness(today) {
+  const el = $('#staleness');
+  if (!el) return null;   // older client harnesses do not stub it; see the guard note up top
+  const dated = datedHarvests();
+  const oldest = dated.map(entry => entry.at).sort()[0] || null;
+  const notice = staleNoticeFor(oldest, readerToday(today));
+  if (!notice) { el.innerHTML = ''; el.hidden = true; return null; }
+
+  /* Named only while the re-harvest is PARTWAY through. On day one every lane is behind and
+     they all carry the same date the sentence above already quotes, so the list would be five
+     identical dates of noise; the moment one lane lands it becomes the only way to see which
+     numbers on screen are still pre-season. */
+  const stale = notice.state === 'predates-season'
+    ? dated.filter(entry => predatesSeason(entry.at)) : [];
+  const behind = stale.length && stale.length < dated.length ? stale : [];
+  el.hidden = false;
+  /* The label is a short uppercase badge (the tracker's .datahealth b), so it names the
+     FINDING and leaves the dates to the sentence — "Season 2 has already opened" as a heading
+     read as a preamble to "Season 2 opened 2026-08-18", saying the same thing twice. */
+  el.innerHTML = '<b>' + esc(notice.state === 'unharvested'
+      ? 'No harvest yet' : 'Pre-launch data') + '</b> '
+    + esc(notice.detail)
+    + (behind.length
+      ? '<div class="dh-series">Still on pre-season data: '
+        + behind.map(entry => esc(entry.label) + ' (' + esc(entry.at) + ')').join(' &middot; ')
+        + '. This notice clears itself once every dataset has been re-harvested.</div>'
+      : '');
+  return notice;
+}
+
+/* The masthead's two season facts. Both were typed into the markup ("season max 344 · season
+   opens Aug 18, 2026"); both are SEASON's to state now. The tense follows the reader's date
+   for the same reason the banner does — a page read on the 25th should not still say the
+   season "opens" next week — and falls back to the neutral present when there is no clock. */
+function renderSeasonFacts(today) {
+  const el = $('#seasonfacts');
+  if (!el || !SEASON_CFG) return;
+  el.innerHTML = (SEASON_CFG.maxItemLevel
+      ? ' &middot; season max <b>' + esc(SEASON_CFG.maxItemLevel) + '</b>' : '')
+    + (SEASON_CFG.opensAt
+      ? ' &middot; season ' + (openedBy(readerToday(today)) ? 'opened' : 'opens')
+        + ' <b>' + esc(longDate(SEASON_CFG.opensAt)) + '</b>' : '');
+}
+
 function renderFooter() {
   const custom = customModeSelected() && customWeights();
   const scoring = custom
@@ -2116,9 +2267,10 @@ function renderFooter() {
      tracker states its freshness in an always-visible banner; this is the same promise kept
      on this page. Clock-free like the tracker's dataHealth: it states the oldest date it
      holds rather than computing an age against the reader's clock, so it cannot lie when a
-     snapshot date is wrong. The enumeration stays in the disclosure below. */
-  const harvestDates = [RAID.harvestedAt, DUNG.harvestedAt, TIER.harvestedAt, SPECS.harvestedAt,
-    CATALYST.reviewedAt].filter(Boolean).sort();
+     snapshot date is wrong. The enumeration stays in the disclosure below.
+     The dated set comes from datedHarvests() so this line and the G23 banner above the fold
+     can never quote different answers to "how old is this page". */
+  const harvestDates = datedHarvests().map(entry => entry.at).sort();
   const freshness = harvestDates.length
     ? '<p class="footfresh">Gear and item data on this page was last harvested <b>' + esc(harvestDates[harvestDates.length - 1])
       + '</b>' + (harvestDates[0] !== harvestDates[harvestDates.length - 1]
@@ -2194,6 +2346,12 @@ TAB_ELEMENTS.forEach((tab, index) => {
 
 $('#p-items').textContent = GEAR.length + DIRECT_TIER.length;
 $('#p-specs').textContent = SPECS.specs.length;
+
+/* Booted once, not from render(): neither depends on the selected spec, and both answer a
+   question about the PAGE rather than about a build. Called with no argument, so each reads
+   the reader's own clock; the tests pass an explicit date instead of waiting for one. */
+renderSeasonFacts();
+renderStaleness();
 
 /* ---- tooltips ------------------------------------------------------------
    The markup is Wowhead's own, captured during harvest, so this works offline

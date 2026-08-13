@@ -15,9 +15,10 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { BRACKETS, normalizeBracket, resolveDropSource, rosterFrom } from "../src/lib-guides.mjs";
-import { cellText, decodeEntities, headingSubject, itemLinksIn, letterTierOf, methodSlug,
-  methodUrl, pageMeta, parseMethodGearingPage, parsePublishedDate, splitSlotLabel,
-  stripComments } from "../src/harvest-guide-method.mjs";
+import { SEASON } from "../src/season.mjs";
+import { acceptsNamespace, cellText, decodeEntities, dropStalePicks, headingSubject, itemLinksIn,
+  letterTierOf, methodSlug, methodUrl, pageMeta, parseMethodGearingPage, parsePublishedDate,
+  splitSlotLabel, stripComments } from "../src/harvest-guide-method.mjs";
 
 const fromRoot = (path) => new URL(`../${path}`, import.meta.url);
 const json = async (path) => JSON.parse(await readFile(fromRoot(path), "utf8"));
@@ -344,6 +345,108 @@ test("the catalyst idiom keeps the boss behind it, in both forms Method writes",
   const paren = catalysed.find((p) => p.sourceText === "King's Rest (Catalyst)");
   assert.equal(paren.dropSource.base, "Kings' Rest");
   assert.equal(paren.dropSource.baseKind, "mplus");
+});
+
+/* ---------------------------------------------------------------- G24: out-of-season picks */
+
+test("G24: the RUN drops an unresolvable pick, and the parser still does not", async () => {
+  /* THIS SUPERSEDES THE PHASE-B READING DIRECTLY ABOVE, and the layering is the whole point.
+     The parser stays LOSSLESS — the test above still passes unchanged, the pick still survives
+     `parseMethodGearingPage`, and `issues.unresolvedSources` still reports it, which is what
+     the run refuses on. G24 then applies at the RUN level, once a reviewer has read that list:
+     a pick naming content the season does not hold would put an item you cannot go and get
+     into a list whose entire job is telling you what to go and get.
+
+     A FRESH record is parsed here on purpose. dropStalePicks mutates, and the module-level
+     fixtures are shared by every other test in this file. */
+  const record = await parse("holy-paladin", "Holy", "Paladin");
+  assert.equal(record.counts.picks, 48);
+  const stale = dropStalePicks([record], roster);
+
+  assert.equal(stale.dropped, 4);
+  assert.equal(record.picks.length, 44);
+  assert.equal(stale.kept, 44);
+  assert.equal(stale.source, "method", "the key the page merges the three harvests on");
+  assert.deepEqual(stale.byDropSource, [{ source: "The Tidebound Grotto", dropped: 4 }]);
+  assert.deepEqual(stale.bySpec, [{ spec: "Holy Paladin", dropped: 4 }]);
+  assert.equal(record.picks.some((pick) => pick.sourceText === "The Tidebound Grotto"), false);
+
+  // Nothing vanishes without trace: the removed rows stay enumerable on the record itself.
+  assert.equal(record.staleDrops.dropped, 4);
+  for (const row of record.staleDrops.removed) {
+    assert.equal(row.label, "The Tidebound Grotto");
+    assert.ok(row.itemId && row.slot);
+  }
+  // counts.picks describes the array beside it; picksPublished keeps the page's own total.
+  assert.equal(record.counts.picks, 44);
+  assert.equal(record.counts.picksPublished, 48);
+});
+
+test("rosterMatchRate survives the drop — it is the evidence, and the drop must not erase it", async () => {
+  /* The trap this pins. Drop inside the parser and the rate is 1.000 on every page by
+     construction, because the only rows that lowered it are gone. The rate would then agree
+     with the page's own "Patch 12.1" label always, which is exactly the disagreement it exists
+     to measure. So it is computed over what the page PUBLISHED and never recomputed after. */
+  const record = await parse("holy-paladin", "Holy", "Paladin");
+  const before = record.counts.rosterMatchRate;
+  assert.equal(before, 0.917);
+  dropStalePicks([record], roster);
+  assert.equal(record.counts.rosterMatchRate, before, "still 44/48, not 44/44");
+});
+
+test("an unlabelled pick is never dropped, and no roster means no judgement", async () => {
+  // A row that states no source at all is not evidence of staleness; the run already refuses
+  // when it cannot name its sources, and dropping here would punish that twice.
+  const unlabelled = `<h3>Overall Best Gear</h3><table><tbody>
+    <tr><td><b>Slot</b></td><td><b>Item</b></td><td><b>Source</b></td></tr>
+    <tr><td>Head</td><td><a href="https://www.wowhead.com/ptr/item=1/x">X</a></td><td></td></tr></tbody></table>`;
+  const record = parseMethodGearingPage(unlabelled, { spec: "Holy", className: "Paladin", roster });
+  assert.equal(record.picks.length, 1);
+  assert.equal(record.picks[0].sourceText, null);
+  assert.equal(dropStalePicks([record], roster).dropped, 0);
+  assert.equal(record.picks.length, 1);
+
+  const fresh = await parse("holy-paladin", "Holy", "Paladin");
+  assert.equal(dropStalePicks([fresh], []).dropped, 0, "an empty roster judges nothing stale");
+  assert.equal(fresh.picks.length, 48);
+});
+
+test("the Tidebound Grotto drop is OUR gap, not Method's — which is why the run refuses first", () => {
+  /* The four picks dropped above name Nymrissa Wavecaller's lair, a REAL Season-2 source that
+     our own `dungeon-items.json` harvest never included (DECISION G22). So G24's test —
+     "does this resolve against the current roster" — reads an incomplete roster exactly like a
+     stale guide, and the four in-season picks are lost to a gap on our side.
+
+     Two things make that safe rather than silent, and both are pinned here: the label is
+     reported in `issues.unresolvedSources` so the RUN refuses before anything is written, and
+     the launch runbook therefore harvests the ITEM lane before any guide lane. */
+  assert.deepEqual([...new Set(holyPaladin.issues.unresolvedSources.map((miss) => miss.label))],
+    ["The Tidebound Grotto"]);
+  assert.equal(roster.some((entry) => /tidebound/i.test(entry.canonical)), false,
+    "still missing from our harvested roster — closing it is Phase E's item lane, per G22");
+});
+
+/* ---------------------------------------------------------------- namespace acceptance */
+
+test("every Wowhead namespace parses, whatever the season config says", () => {
+  /* Measured across Method's 40 pages, 2026-08-13: ptr 1512 · none 154 · beta 29 · ptr-2 7.
+     SEASON.wowheadNamespace decides what we EMIT and must never decide what we ACCEPT — a
+     `/ptr/` link outlives the flip by however long it takes Method to rewrite it, and losing a
+     pick to a URL spelling is not something any decision here asks for. */
+  for (const namespace of ["ptr", "ptr-2", "beta", null])
+    assert.equal(acceptsNamespace(namespace), true, `/${namespace ?? ""}/item= must still parse`);
+
+  const mixed = itemLinksIn('<a href="https://www.wowhead.com/ptr/item=1/a">a</a>'
+    + '<a href="https://www.wowhead.com/item=2/b">b</a>'
+    + '<a href="https://www.wowhead.com/beta/item=3/c">c</a>');
+  assert.deepEqual(mixed.map((link) => [link.namespace, link.itemId]),
+    [["ptr", "1"], [null, "2"], ["beta", "3"]], "the namespace is recorded, never gated on");
+
+  // The recorded fixtures still sit almost entirely on the PTR namespace, which is what a
+  // pre-launch capture looks like: holy-paladin 48/48, frost-death-knight 48 ptr + 3 live.
+  assert.equal(holyPaladin.picks.every((pick) => pick.namespace === "ptr"), true);
+  assert.equal(frostDK.picks.filter((pick) => pick.namespace === null).length, 3);
+  assert.equal(SEASON.wowheadNamespace, "ptr", "still pre-launch as of this commit");
 });
 
 test("rosterMatchRate measures what a page still describes, not what it claims", () => {

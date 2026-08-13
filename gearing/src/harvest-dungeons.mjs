@@ -38,13 +38,19 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 import { getText, dungeonLootIdsFrom, guideMarkupFrom, markupBlocks, markupHeadings,
   plainMarkup, fetchItems, parsedItemIssues } from "./lib-wowhead.mjs";
 import { normalizeText } from "./lib-guides.mjs";
+import { SEASON } from "./season.mjs";
+import { wowheadCandidates } from "./lib-wowhead-url.mjs";
+import { LAIRS, lairIdentityKeys } from "./harvest-raid.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DATA_PATH = join(ROOT, "data", "dungeon-items.json");
-const M = (s) => `https://www.wowhead.com/ptr/guide/midnight/${s}-dungeon-overview-location-rewards`;
-const MP = (s) => `https://www.wowhead.com/ptr/guide/midnight/${s}-dungeon-overview-mythic-plus`;
-const G = (s) => `https://www.wowhead.com/ptr/guide/${s}-dungeon-strategy-guide`;
-const D = (s) => `https://www.wowhead.com/ptr/guide/dungeons/${s}-strategy`;
+/* Namespace-free paths (Phase E). `SEASON.wowheadNamespace` decides what a fresh run EMITS;
+   `wowheadCandidates` decides what it ACCEPTS, which is every spelling — the committed guide
+   URLs here are all `/ptr/` and a stale link outlives the flip. */
+const M = (s) => `guide/midnight/${s}-dungeon-overview-location-rewards`;
+const MP = (s) => `guide/midnight/${s}-dungeon-overview-mythic-plus`;
+const G = (s) => `guide/${s}-dungeon-strategy-guide`;
+const D = (s) => `guide/dungeons/${s}-strategy`;
 
 // End-of-dungeon and Great Vault item levels by key level (see sheet 1 / Season 2 tables).
 export const KEY_ILVL = [
@@ -95,6 +101,24 @@ export function assertAliasGroups(pool = POOL) {
           throw new Error(`${dungeon.name}: "${name}" appears in more than one alias group`);
         claimed.add(key);
       }
+    }
+  }
+  return true;
+}
+
+/* The other half of G22's refusal. A lair boss is not a dungeon boss — separate instance,
+   separate lockout, no key level — so a pool that named one as an encounter would relocate the
+   misfiling rather than fix it, and it would do so in the file where nobody is looking for it.
+   Tidebound Grotto is the concrete case: it is the one S2 source our data lacked entirely. */
+export function assertNoLairEncounters(pool = POOL, lairs = LAIRS) {
+  const identities = lairIdentityKeys(lairs);
+  for (const dungeon of pool) {
+    for (const name of [dungeon.name, ...(dungeon.encounters ?? [])].filter(Boolean)) {
+      const lair = identities.get(normalizeText(name).toLowerCase());
+      if (lair)
+        throw new Error(`${dungeon.name} names "${name}", which identifies the lair boss `
+          + `${lair.name} (${lair.instance}) — a lair is its own source, not a dungeon `
+          + "encounter (docs/gearing-s2-scope.md G22)");
     }
   }
   return true;
@@ -212,6 +236,7 @@ async function main() {
   const acceptLootChanges = process.env.WOW_ACCEPT_LOOT_CHANGES === "1";
   const acceptConflicts = process.env.WOW_ACCEPT_SOURCE_CONFLICTS === "1";
   assertAliasGroups();
+  assertNoLairEncounters();
   let previous = null;
   let hasPrevious = false;
   try {
@@ -232,14 +257,19 @@ async function main() {
       throw new Error("cannot trust existing dungeon loot baseline: expected eight named, nonempty dungeons");
   }
 
-  console.log("Harvesting Season 2 Mythic+ dungeon loot ...");
+  console.log(`Harvesting ${SEASON.label} Mythic+ dungeon loot `
+    + `(${SEASON.patch}, ${SEASON.wowheadNamespace ? `${SEASON.wowheadNamespace} namespace` : "live"}) ...`);
   const dungeons = [];
   const unresolved = [];
   const audits = [];
 
   for (const d of POOL) {
     let ids = null, used = null, page = null;
-    for (const u of d.urls) {
+    /* Each known path is tried in every namespace spelling, configured first. The URL that
+       ANSWERED is what gets recorded — not the one we expected — so `dungeon.guide` stays a
+       fact about the fetch rather than a restatement of the config. */
+    const candidates = d.urls.flatMap((path) => wowheadCandidates(path));
+    for (const u of [...new Set(candidates)]) {
       const html = await getText(u);
       if (!html) continue;
       try {
@@ -367,10 +397,15 @@ async function main() {
         .map((row) => `${row.dungeon} ${row.id}: tooltip="${row.tooltip}" guide="${row.guide}"`).join("\n  ")}`);
   }
 
+  const prelaunch = !!SEASON.wowheadNamespace;
   const out = {
-    source: "Wowhead 12.1.0 PTR — Midnight dungeon guides + per-item tooltips",
+    // Derived from the season config (Phase E): the patch and the pre-launch state were typed
+    // in by hand here, so the flip had to remember to come and edit them.
+    source: `Wowhead ${SEASON.patch}${prelaunch ? " PTR" : ""} — Midnight dungeon guides `
+      + "+ per-item tooltips",
     harvestedAt: new Date().toISOString().slice(0, 10),
-    caveat: "Pre-launch PTR data. Mythic+ gear is scaled at drop time by key level, so item levels come from the key-level table, not from the item.",
+    caveat: `${prelaunch ? "Pre-launch PTR data. " : ""}Mythic+ gear is scaled at drop time by `
+      + "key level, so item levels come from the key-level table, not from the item.",
     ilvlNote: "Wowhead shows these items at their template item level; the real level is set by key level on drop.",
     keyLevels: KEY_ILVL,
     unresolved,

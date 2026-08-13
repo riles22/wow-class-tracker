@@ -68,7 +68,20 @@
 
    PHASE B SHIPS MACHINERY, NOT A HARVEST. Every source is mid-season-transition until
    2026-08-18 and a harvest before then captures PTR-era picks (the `ptrDomainShare` in the
-   summary measures exactly that). Run this locally AFTER the flip. */
+   summary measures exactly that). Run this locally AFTER the flip.
+
+   PHASE E (G24), 2026-08-13. Two changes, both about surviving the season boundary:
+
+   A. A BiS pick's drop text now resolves SOFT. It used to throw, which meant one stale line
+      cost the whole spec — and Icy Veins ships exactly that line: a page still names Nexus
+      King Salhadaar, a Season-1 raid boss. Throwing there is also the failure mode the scope
+      settled against ("How a harvest fails"): a row never disappears and the RUN refuses, so
+      every miss is enumerable in one run instead of one-per-run. The refusal is unchanged —
+      an unresolved drop still lands in `failed` and still stops the write.
+   B. `dropStalePicks` (run level, below) then removes the picks whose stated source resolves
+      against nothing in the current roster, and discloses the count per source. Parsing stays
+      LOSSLESS: `parseBisPage` still returns every row it read, so the drop is a season-aware
+      act of the run and never a silent parser behaviour. */
 
 import { readFile, writeFile } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
@@ -77,6 +90,7 @@ import { articlePatch } from "./lib-icy-veins.mjs";
 import { getText } from "./lib-wowhead.mjs";
 import { buildId, normalizeBracket, normalizeSlot, normalizeText, parseSoftCap,
   resolveDropSource, rosterFrom, slugify } from "./lib-guides.mjs";
+import { SEASON, dataPredatesSeason, partitionStalePicks, staleDisclosure } from "./season.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -84,9 +98,9 @@ export const SOURCE = "icyveins";
 export const SOURCE_LABEL = "Icy Veins";
 export const SCHEMA_VERSION = 1;
 /* The patch the pages must self-identify as, read from the article heading ("… — 12.1").
-   Icy Veins dates every page; this is the era gate, and it is deliberately a constant an
-   operator has to change rather than something inferred from whatever the page says. */
-export const EXPECTED_PATCH = "12.1";
+   Icy Veins dates every page; this is the era gate, and it now comes from the season config
+   rather than a local constant — same value, one place to edit at the next cycle. */
+export const EXPECTED_PATCH = SEASON.patch;
 
 /* The three list anchors, keyed by the h3 id Icy Veins ships. An unknown id inside a BiS
    panel is a page redesign, not a row to skip. */
@@ -198,17 +212,30 @@ export function changelogTop(html) {
 
 const ITEM_LINK = /data-wowhead="([^"]*item=\d+[^"]*)"/i;
 
-function itemLinkFields(attrValue) {
+/* Icy Veins spells the Wowhead namespace as a QUERY PARAMETER (`&domain=ptr`) rather than a
+   path segment, but the rule is the shared one: what we ACCEPT never depends on
+   SEASON.wowheadNamespace. A link written before the flip keeps saying `domain=ptr` long
+   after the season opens, and refusing it would delete a perfectly good pick over a URL
+   spelling. So the domain is RECORDED, never gated on — `domain` verbatim, `ptrDomain` kept
+   as the pre-launch signal `ptrDomainShare` is built from. */
+export function itemLinkFields(attrValue) {
   const params = new URLSearchParams(decodeEntities(attrValue));
   const id = params.get("item");
   if (!id) return null;
+  const domain = params.get("domain");
   return {
     itemId: id,
     originalItemId: params.get("original-item"),
     bonus: params.get("bonus"),
-    ptrDomain: params.get("domain") === "ptr",
+    domain,
+    ptrDomain: domain === "ptr",
   };
 }
+
+/* The namespace-agnosticism above, as a fact a test can assert rather than a claim in a
+   comment. `null` means the live domain (no `domain=` at all). */
+export const acceptsNamespace = (namespace) =>
+  itemLinkFields(`item=1${namespace ? `&domain=${namespace}` : ""}`)?.itemId === "1";
 
 /* One `div.bis_item` -> a pick, or null for a cell that holds no pick (an empty placeholder,
    or the permanently blank Shirt / Tabard cells that normalizeSlot drops by design). */
@@ -384,8 +411,13 @@ export function parseBisPage(html, { where = "", roster = null } = {}) {
   const lists = [];
   const picks = [];
   const alternatives = [];
-  const diagnostics = { emptyCells: 0, picksWithoutDrop: 0, alternativeBulletsWithoutItem: 0,
+  const diagnostics = { emptyCells: 0, picksWithoutDrop: 0, picksWithUnresolvedDrop: 0,
+    alternativeBulletsWithoutItem: 0,
     alternativeNonSlotBullets: 0, alternativesWithUnresolvedDrop: 0, panelsWithoutAlternativeFaq: 0 };
+  /* Every drop label this page states that our roster cannot place, collected rather than
+     thrown on (Phase E, A). The RUN reads this and refuses; `dropStalePicks` reads the picks
+     themselves. Both need the whole list, which is precisely what throwing could not give. */
+  const unresolvedDrops = [];
 
   const panels = elements(source, /<div class="image_block_content"[^>]*id="bis_\d+_\d+"[^>]*>/gi, "div");
   if (!panels.length) throw new Error(`icyveins BiS: no bis_* list panels found (${where})`);
@@ -421,9 +453,16 @@ export function parseBisPage(html, { where = "", roster = null } = {}) {
         if (!parsed) continue;
         if (parsed.empty) { diagnostics.emptyCells++; continue; }
         if (!parsed.dropRaw) diagnostics.picksWithoutDrop++;
+        /* SOFT since Phase E. A hard throw here lost the entire spec to one stale or misspelt
+           line, and Icy Veins publishes both. The miss is collected instead, the row survives
+           with `drop: null`, and the run refuses on the collected list. */
         const drop = parsed.dropRaw && roster
-          ? resolveDropSource(parsed.dropRaw, roster, { where: `${where} ${anchorId} ${parsed.slot}` })
+          ? resolveDropSource(parsed.dropRaw, roster, { soft: true, where: `${where} ${anchorId} ${parsed.slot}` })
           : null;
+        if (parsed.dropRaw && roster && !drop) {
+          diagnostics.picksWithUnresolvedDrop++;
+          unresolvedDrops.push({ list: anchorId, slot: parsed.slot, itemId: parsed.itemId, label: parsed.dropRaw });
+        }
         listPicks.push({ list: anchorId, bracket, endorsement: "bis", ...parsed, drop });
       }
     }
@@ -440,7 +479,11 @@ export function parseBisPage(html, { where = "", roster = null } = {}) {
       const drop = alternative.dropRaw && roster
         ? resolveDropSource(alternative.dropRaw, roster, { soft: true })
         : null;
-      if (alternative.dropRaw && roster && !drop) diagnostics.alternativesWithUnresolvedDrop++;
+      if (alternative.dropRaw && roster && !drop) {
+        diagnostics.alternativesWithUnresolvedDrop++;
+        unresolvedDrops.push({ list: anchorId, slot: alternative.slot, itemId: alternative.itemId,
+          label: alternative.dropRaw, endorsement: "alternative" });
+      }
       alternatives.push({ list: anchorId, bracket, endorsement: "alternative", ...alternative, drop });
     }
 
@@ -475,6 +518,75 @@ export function parseBisPage(html, { where = "", roster = null } = {}) {
     alternatives,
     trinketTiers: parseTrinketTiers(source, { where }),
     diagnostics,
+    unresolvedDrops,
+  };
+}
+
+/* ---------------------------------------------------------------- G24: out-of-season picks
+
+   A pick whose stated drop source resolves against nothing in the current roster names
+   content this season does not hold. Keeping it puts an item you cannot go and get into a
+   ranked list whose entire job is telling you what to go and get, so it is DROPPED — and
+   counted, because a silent drop is exactly what the rest of this file exists to prevent.
+
+   WHY THIS RUNS AT THE RUN LEVEL AND NOT INSIDE THE PARSER. The parser's contract is that it
+   returns everything the page published; `unresolvedDrops` and the refusal are built on that.
+   Dropping there would make one function both the record of what a page said and a judgement
+   about the season, and the two must be separable — a reviewer has to be able to see the row
+   that was dropped.
+
+   TWO THINGS IT DELIBERATELY DOES NOT DO:
+     · An UNLABELLED pick is never dropped. The harvesters already refuse a run that cannot
+       name its sources, so dropping here would punish the same condition twice and lose a
+       vote that is otherwise perfectly identified by item id.
+     · A pick the parser DID source is never re-tested. Its text already resolved; re-deriving
+       from the text alone would be a second opinion, and the two could disagree.
+
+   AND ONE LIMITATION WORTH STATING: this resolves against OUR harvested roster, so a real
+   Season-2 source our own item harvest is missing reads exactly like a stale one. That is why
+   the launch runbook (docs/gearing-launch-runbook.md) runs the item lane FIRST. */
+export function dropStalePicks(entries, roster) {
+  const bySource = {}, bySpec = {}, byEndorsement = { bis: 0, alternative: 0 };
+  let dropped = 0, kept = 0;
+  if (!roster?.length) return { source: SOURCE, dropped: 0, kept: 0, byDropSource: [], bySpec: [], byEndorsement };
+
+  const resolve = (text) => resolveDropSource(text, roster, { soft: true });
+  for (const entry of entries ?? []) {
+    if (!entry?.bis) continue;
+    const specName = `${entry.spec} ${entry.class}`;
+    const removed = [];
+    for (const field of ["picks", "alternatives"]) {
+      const rows = entry.bis[field] ?? [];
+      /* The shared contract keys on `sourceText`; Icy Veins names that field `dropRaw`. The
+         partition therefore runs over a one-field VIEW and maps back, rather than renaming a
+         field three tests and a Phase-C consumer already read. */
+      const candidates = rows.filter((row) => !row.drop).map((row) => ({ row, sourceText: row.dropRaw }));
+      const split = partitionStalePicks(candidates, resolve);
+      const gone = new Set(split.dropped.map((view) => view.row));
+      if (!gone.size) { kept += rows.length; continue; }
+      entry.bis[field] = rows.filter((row) => !gone.has(row));
+      kept += entry.bis[field].length;
+      for (const row of gone) {
+        dropped++;
+        removed.push({ list: row.list, slot: row.slot, itemId: row.itemId, label: row.dropRaw,
+          endorsement: row.endorsement });
+        bySource[row.dropRaw] = (bySource[row.dropRaw] ?? 0) + 1;
+        bySpec[specName] = (bySpec[specName] ?? 0) + 1;
+        byEndorsement[row.endorsement] = (byEndorsement[row.endorsement] ?? 0) + 1;
+      }
+    }
+    // The per-list counts must describe the arrays beside them, or the file lies about itself.
+    for (const list of entry.bis.lists ?? []) {
+      list.picks = entry.bis.picks.filter((pick) => pick.list === list.id).length;
+      list.alternatives = entry.bis.alternatives.filter((alt) => alt.list === list.id).length;
+    }
+    entry.bis.staleDrops = { dropped: removed.length, removed };
+  }
+  return {
+    source: SOURCE, dropped, kept,
+    byDropSource: staleDisclosure(bySource),
+    bySpec: staleDisclosure(bySpec).map(({ source, dropped: n }) => ({ spec: source, dropped: n })),
+    byEndorsement,
   };
 }
 
@@ -648,6 +760,14 @@ async function main(argv) {
       if (!bisHtml) throw new Error("fetch failed");
       bis = parseBisPage(bisHtml, { where: `${key} BiS`, roster });
       if (bis.patch !== args.patch) throw new Error(`page self-identifies as patch ${bis.patch ?? "none"}, expected ${args.patch}`);
+      /* Phase E: the drop labels that no longer throw still REFUSE. Enumerable now — one run
+         reports every one of them instead of dying on the first. */
+      if (bis.unresolvedDrops.length) {
+        const labels = [...new Set(bis.unresolvedDrops.map((miss) => miss.label))];
+        failed.push(`${key} BiS: ${bis.unresolvedDrops.length} drop source(s) match no harvested `
+          + `boss or dungeon (${labels.join(" · ")}) — fix the roster join, or accept with --force `
+          + "and they are dropped as out-of-season (G24)");
+      }
     } catch (error) { failed.push(`${key} BiS: ${error.message}`); }
 
     try {
@@ -661,21 +781,34 @@ async function main(argv) {
       }
     } catch (error) { failed.push(`${key} stat priority: ${error.message}`); }
 
-    for (const pick of bis?.picks ?? []) { allLinks++; if (pick.ptrDomain) ptrLinks++; }
     out.push({ class: spec.class, spec: spec.spec, role: spec.role, urls, bis, statPriority });
     process.stdout.write(bis && statPriority ? "." : "x");
   }
   console.log("");
 
+  // G24 before the counts, so every number below describes what is actually written.
+  const stale = dropStalePicks(out, roster);
+  for (const entry of out) for (const pick of entry.bis?.picks ?? []) {
+    allLinks++;
+    if (pick.ptrDomain) ptrLinks++;
+  }
+
+  const harvestedAt = new Date().toISOString().slice(0, 10);
   const doc = {
     source: SOURCE,
     sourceLabel: SOURCE_LABEL,
     schemaVersion: SCHEMA_VERSION,
-    harvestedAt: new Date().toISOString().slice(0, 10),
+    harvestedAt,
     expectedPatch: args.patch,
+    /* The season this harvest claims to describe, carried so the page can call
+       stalenessNotice() without re-deriving the rule (G23). */
+    season: { id: SEASON.id, label: SEASON.label, patch: SEASON.patch, opensAt: SEASON.opensAt,
+      predatesSeason: dataPredatesSeason(harvestedAt) },
     // Pre-launch signal: while Season 2 is on the PTR roughly half of Icy Veins' picks link
     // the ptr domain. A post-flip harvest should see this fall towards zero.
     ptrDomainShare: allLinks ? Number((ptrLinks / allLinks).toFixed(3)) : null,
+    // G24's disclosure. `source` is the key the page merges the three harvests on.
+    staleDrops: stale,
     counts: {
       specs: out.length,
       withBis: out.filter((entry) => entry.bis).length,
@@ -692,7 +825,18 @@ async function main(argv) {
     + `${doc.counts.withStatPriority}/${doc.counts.specs} stat priorities`);
   console.log(`  ${doc.counts.picks} picks · ${doc.counts.alternatives} alternatives · `
     + `${doc.counts.trinketTiers} trinket tier rows · ${doc.counts.builds} builds`);
-  console.log(`  ptr-domain links: ${(doc.ptrDomainShare ?? 0) * 100}% (a pre-launch harvest reads high)`);
+  /* SEASON.wowheadNamespace decides what a high share MEANS, not whether the link parses.
+     Pre-flip it is expected; once the config says the namespace is gone, links still on it
+     are stale ones the guides have not rewritten, and that is worth saying out loud. */
+  console.log(`  ptr-domain links: ${((doc.ptrDomainShare ?? 0) * 100).toFixed(1)}% `
+    + (SEASON.wowheadNamespace ? "(a pre-launch harvest reads high)"
+      : `(${SEASON.label} is live — these are stale links the guides have not rewritten)`));
+  if (stale.dropped) {
+    console.log(`  G24: dropped ${stale.dropped} pick(s) naming content ${SEASON.label} does not `
+      + `hold, kept ${stale.kept} (bis ${stale.byEndorsement.bis} · alternative ${stale.byEndorsement.alternative})`);
+    for (const row of stale.byDropSource) console.log(`       ${row.source}: ${row.dropped}`);
+    for (const row of stale.bySpec) console.log(`       ${row.spec}: ${row.dropped}`);
+  }
   for (const warning of warnings) console.log(`  ! ${warning}`);
 
   if (failed.length && !args.force) {

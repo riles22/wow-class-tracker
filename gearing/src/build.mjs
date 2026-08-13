@@ -11,9 +11,66 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { absentFileStub, validateData } from "./validate-data.mjs";
 import { injectGuideLib } from "./inline-guides.mjs";
+import { SEASON, dataPredatesSeason, seasonHasOpened, stalenessNotice } from "./season.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const readData = async (f) => JSON.parse(await readFile(join(ROOT, "data", f), "utf8"));
+
+/* ---------- the season vocabulary, injected into the page (Phase E, G23) ----------
+
+   WHY INJECT AT ALL. The staleness banner has to compare the harvest date against the
+   READER's date, so the rule runs in the browser; and src/season.mjs owns that rule for the
+   harvesters and the validator already. The alternative — a second copy of the same three
+   lines inside app.template.html — is exactly the drift src/inline-guides.mjs exists to make
+   impossible for the guide contract. So the page gets the real thing.
+
+   WHY toString() RATHER THAN A SOURCE REWRITE. inline-guides.mjs strips `export ` off a whole
+   module and wraps it; that is the right shape for a 483-line library the page uses wholesale.
+   Here the page needs three functions and one object, and serializing the LIVE bindings means
+   what ships is definitionally the code this build imported — there is no regex between the
+   module and the artifact that could mis-parse it, and no list of names to keep in step.
+
+   WHAT IT CANNOT SURVIVE, and how that is caught: toString() carries a function's source but
+   not its closure, so a season.mjs function that grew a reference to some new module-scope
+   helper would ship as a ReferenceError in a browser with nothing on screen to say so. The
+   probe below evaluates the exact block about to be written and makes it answer every state
+   stalenessNotice has, so that failure is a red build here instead. */
+const SEASON_MARKER = "//__SEASON__";
+const SEASON_FUNCTIONS = [seasonHasOpened, dataPredatesSeason, stalenessNotice];
+/* Pre-open, post-open-with-stale-data, post-open-with-fresh-data, and never-harvested — one
+   probe per branch of the rule, which is what makes a dropped closure reference certain to
+   show up rather than likely to. */
+const SEASON_PROBES = [["2026-08-02", "2026-08-13"], ["2026-08-02", "2026-08-19"],
+  ["2026-08-19", "2026-08-25"], [null, "2026-08-19"], ["2026-08-02", null]];
+
+function injectSeason(html) {
+  if (!html.includes(SEASON_MARKER)) {
+    throw new Error(`template is missing the ${SEASON_MARKER} marker — the page would build `
+      + "with its season facts and staleness banner silently absent (they are typeof-guarded "
+      + "so three test harnesses can boot the raw template; that guard is not a shipping state)");
+  }
+  const block = [
+    // The JSON gets the same </script> defusing as the data blob: it lands inside the page's
+    // one inline <script>, where a literal closing tag would end the script early.
+    `const SEASON = ${JSON.stringify(SEASON).replace(/<\/script>/gi, "<\\/script>")};`,
+    ...SEASON_FUNCTIONS.map((fn) => `const ${fn.name} = ${fn.toString()};`),
+  ].join("\n");
+
+  const shipped = new Function(`${block}\nreturn { SEASON, stalenessNotice };`)();
+  if (JSON.stringify(shipped.SEASON) !== JSON.stringify(SEASON)) {
+    throw new Error("the injected SEASON does not round-trip src/season.mjs");
+  }
+  for (const [harvestedAt, today] of SEASON_PROBES) {
+    const here = JSON.stringify(stalenessNotice(harvestedAt, today) ?? null);
+    const there = JSON.stringify(shipped.stalenessNotice(harvestedAt, today) ?? null);
+    if (here !== there) {
+      throw new Error("the injected season block disagrees with src/season.mjs for "
+        + `(harvestedAt=${harvestedAt}, today=${today}): ${there} vs ${here}. A function in `
+        + "season.mjs probably gained a reference to a name that is not injected alongside it.");
+    }
+  }
+  return html.replace(SEASON_MARKER, () => block);
+}
 
 /* The Phase-C guide layer. All three files ship PENDING and stay that way until the first
    post-flip harvest (docs/gearing-s2-scope.md, Phase B "machinery, not a harvest"), so this
@@ -63,6 +120,10 @@ if (!template.includes("__DATA__")) throw new Error("template is missing the __D
 // template — one definition of the ordering rules, and drift is impossible rather than
 // merely detected (src/inline-guides.mjs).
 let out = await injectGuideLib(template, ROOT);
+/* After the guide library, never before: injectGuideLib decides which of the library's exports
+   to bind by scanning the template for their names, and season.mjs's own comments mention
+   `resolveDropSource`. Injected first, that prose would read as a page reference. */
+out = injectSeason(out);
 out = out.replace("__DATA__", () => blob);
 
 // Normalize to LF before hashing. The HTML parser normalizes CRLF->LF before the browser
@@ -78,12 +139,42 @@ out = out.replace(/\r\n?/g, "\n");
 // The template carries no inline event handlers and no <form>, so hash-only script-src
 // and form-action 'none' hold. style-src needs 'unsafe-inline' for the <style> block and
 // the inline style= attributes the renderer writes.
-const scriptHashes = [...out.matchAll(/<script>([\s\S]*?)<\/script>/g)]
+const appScripts = [...out.matchAll(/<script>([\s\S]*?)<\/script>/g)];
+const scriptHashes = appScripts
   .map((m) => "'sha256-" + createHash("sha256").update(m[1], "utf8").digest("base64") + "'");
 // The <script id="data" type="application/json"> blob is not executable and is correctly
 // skipped by the bare-<script> match above; exactly one app script should remain.
 if (scriptHashes.length !== 1) {
   throw new Error(`expected exactly 1 inline app script to hash, found ${scriptHashes.length}`);
+}
+
+/* DID THE SUBSTITUTIONS ACTUALLY LAND, AND DOES THE RESULT PARSE (Phase E, 2026-08-13).
+   Three placeholders now feed this one script, and each injector replaces the FIRST match of
+   its token. Writing one of those tokens in a COMMENT above the real placeholder therefore
+   captures the substitution and injects a library into the middle of a sentence — which is a
+   syntax error a thousand lines away from anything that looks wrong, and until this check the
+   build wrote it out and reported success. A residual token is the other half of the same
+   accident: it means a placeholder never got substituted and the page dies at boot.
+   `new Function` parses without executing, so this costs a millisecond and covers every
+   template edit, not just the injected ones.
+   Scoped to the APP SCRIPT rather than the whole document on purpose: harvested item text is
+   arbitrary, and a document-wide search for these tokens would let a boss name red the build.
+   The data blob has its own check below, which is stronger than a token search anyway. */
+for (const token of ["__DATA__", "__LIB_GUIDES__", SEASON_MARKER]) {
+  if (appScripts[0][1].includes(token)) {
+    throw new Error(`the built page still contains ${token} — a placeholder was not substituted `
+      + "(or a comment mentions one, which captures the substitution: see the note in "
+      + "app.template.html's season section)");
+  }
+}
+try { new Function(appScripts[0][1]); }
+catch (error) {
+  throw new Error(`the assembled inline script does not parse: ${error.message}`);
+}
+const dataScript = /<script id="data" type="application\/json">([\s\S]*?)<\/script>/.exec(out);
+try { JSON.parse(dataScript[1]); }
+catch (error) {
+  throw new Error(`the embedded data blob is not valid JSON: ${error?.message ?? "no blob found"}`);
 }
 const csp = `default-src 'none'; script-src ${scriptHashes.join(" ")}; ` +
   "style-src 'unsafe-inline'; font-src data:; img-src data:; base-uri 'none'; form-action 'none'";

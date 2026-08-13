@@ -494,6 +494,74 @@ it, a Mythic-only number reads as a promise about the difficulty the reader actu
 Rejected: a difficulty selector (another control on a card just simplified to three) and
 per-difficulty rows (four-to-ten-fold table growth that buries the headline).
 
+## Phase-E decisions (Riley, 2026-08-13)
+
+### ⚑ DECISION G22: the Nymrissa lair boss becomes its own plannable source
+
+Nymrissa Wavecaller / Tidebound Grotto has its own 13-item table on a **separate instance and
+lockout**, but sits in `raid-items.json` as a `dropAlias` of raid boss 1 — mechanically
+indistinguishable from a legitimate sub-NPC, which is why nothing caught it. Four of its items are
+already misfiled (three under Nek'zali, one under The Coiled Altar) and nine are absent entirely.
+
+Left alone, **the Phase-D game plan would send a reader to Nek'zali for loot that drops somewhere
+else**, which is the specific way this feature can mislead. So: its own source, the four misfiled
+items move, the nine missing ones get harvested, and it appears as its own row in the plan.
+
+**The MACHINERY landed in Phase E; the DATA MOVE is a launch-harvest step** (amended 2026-08-13
+during the build). Validation now refuses a lair declared as a raid boss's `dropAlias` and requires
+every lair to declare `lockout: "separate"`, the harvester can read the lair's own page, and lair
+items are enumerated into the ranked roster and the reviewed fingerprint alongside raid items.
+But the data half turned out to be **three coordinated changes, not one**, and attempting it
+pre-launch surfaced exactly why:
+1. removing the alias alone fails — the alias was **masking** the four misfiled items, whose own
+   `droppedBy: "Nymrissa Wavecaller"` then reads as an unexpected source under Nek'zali;
+2. relocating the items changes each one's `sourceKey` (boss ordinal → lair key), so the reviewed
+   stat-allocation fingerprint drifts for all three that carry allocations;
+3. the raid summary counts go stale.
+
+(2) is a **re-review of harvested data**, which is not something to hand-edit green before the
+harvest that would redo it anyway. So the committed data is unchanged and `raid.lairs` stays
+absent, which leaves the new guard inert against it — and because an inert guard is an untested
+one, `gearing/test/season.test.mjs` exercises the whole sequence against a synthesised lair and
+asserts each obligation in turn. That test is the executable version of this checklist.
+
+### ⚑ DECISION G23: a visible staleness banner, and the page keeps working
+
+Between the 08-18 open and the first post-launch harvest, the data still says "Pre-launch PTR
+data … may change before Aug 18 2026" about a season that has already started. The page now states
+plainly that the season opened, when this data was harvested, and that item levels and drop
+assignments may have moved — the same promise the tracker's freshness banner makes. It clears
+itself when a post-launch harvest lands.
+
+**The test is "does the harvest predate the season", not "how old is it"** — plain age inverts the
+question, making a harvest two days before launch look fresher than one five days after it.
+Rejected: hard-failing the gearing build, which turns a data lag into a broken toolchain in the
+busiest week.
+
+### ⚑ DECISION G24: a pick naming out-of-season content is dropped, and the drop is disclosed
+
+Measured 2026-08-13: Method cites Season-1 dungeons (Skyreach, Pit of Saron, Magisters' Terrace)
+on four specs, and an Icy Veins page still names Nexus King Salhadaar — an S1 raid boss,
+independently confirmed by Archon's own S1 roster. Post-launch those resolve against nothing in the
+S2 pool. Keeping them would put an **unobtainable item in a list whose entire job is telling you
+what to go and get**, so the pick is dropped and each source's row says how many it lost.
+`rosterMatchRate` already measures exactly this. Rejected: refusing the whole source, where one
+stale line would cost that outlet all 40 specs and the consensus a whole vote.
+
+### ⚑ DECISION G25: staggered re-harvest, each lane gating itself
+
+Items and loot harvest as soon as the raid is live (US 08-18, EU 08-19), each guide the moment its
+pages verify as Season 2, and Archon when its five-check gate passes — it needs a real log sample,
+and its own floor is 500 parses. Every lane already carries its own refusal mechanism from
+Phases B–D, so this needs no new coordination: the page fills in progressively and says what is
+still pending. Rejected: one big run on 08-19, which captures guides mid-transition and leaves
+Archon pending anyway.
+
+**Launch day is now a config edit plus a harvest.** `gearing/src/season.mjs` holds the season
+vocabulary that ten harvesters, the validator, the build and the page each used to carry a private
+copy of — patch, open date, item-level ceiling, and the Wowhead `/ptr/` namespace. A pinned test
+fails if gearing and the tracker's own `PHASES` ever disagree about the live season.
+
 ## Open questions for kickoff
 
-None outstanding. Twenty-one decisions (G1–G21) are locked.
+None outstanding. Twenty-five decisions (G1–G25) are locked.
