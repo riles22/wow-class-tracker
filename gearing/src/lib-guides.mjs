@@ -391,3 +391,93 @@ export function defaultBuildFor(builds) {
   }
   return best?.build ?? list[0];
 }
+
+/* ---------- the game plan (G2, G18-G21) ----------
+   "Which bosses and dungeons are worth my week." Pure, so the two value components can be
+   tested without a DOM and so the client cannot grow a second opinion about either.
+
+   THE TWO COMPONENTS NEVER MERGE (G2). `coverage` answers "how many of my ranked slots does
+   this source improve"; `delta` answers "how much item level would I actually gain". They are
+   returned side by side, never summed, and the caller picks ONE as the sort key and says which
+   (G18). */
+
+/* One entry per plannable source. Raid is per BOSS and M+ per DUNGEON (G20) — you kill a boss
+   but you run a dungeon, so that is the unit each reader plans around. The caller supplies the
+   grouping and each item's attainable item level, because both come from data this module
+   deliberately does not read (`boss.dropLevels`, `DUNG.keyLevels`, `maxAttainable`). */
+export function planForSources(entries, { rankedBySlot = new Map(), worn = null } = {}) {
+  const plans = [];
+  for (const entry of entries ?? []) {
+    const bySlot = new Map();
+    for (const item of entry.items ?? []) {
+      const slot = item.slot;
+      if (!slot) continue;
+      const ranked = rankedBySlot.get(slot) ?? [];
+      const position = ranked.findIndex((id) => String(id) === String(item.id));
+      if (position < 0) continue;               // not one of this spec's ranked candidates
+      if (!bySlot.has(slot)) bySlot.set(slot, []);
+      bySlot.get(slot).push({ ...item, position });
+    }
+
+    /* G19: coverage counts SLOTS, depth counts the extra options within them. Three Back
+       items is one slot covered and two depth — you can only wear one. */
+    const coveredSlots = [...bySlot.keys()].sort();
+    const coverage = coveredSlots.length;
+    const depth = [...bySlot.values()].reduce((sum, items) => sum + items.length - 1, 0);
+    const bestPosition = Math.min(...[...bySlot.values()]
+      .flatMap((items) => items.map((item) => item.position)), Infinity);
+
+    /* G21: the delta is measured at each source's HIGHEST attainable, and the basis label
+       travels with the number so it can never read as a promise about the difficulty this
+       reader runs. Without worn gear the delta is null — not zero, which would sort as if
+       measured (G2: the page says so rather than guessing). */
+    let delta = null, deltaBySlot = null, basis = null;
+    if (worn) {
+      deltaBySlot = {};
+      delta = 0;
+      for (const [slot, items] of bySlot) {
+        const best = items.reduce((a, b) =>
+          ((b.attainableIlvl ?? 0) > (a.attainableIlvl ?? 0) ? b : a));
+        /* A slot the caller did not state is UNMEASURABLE, not empty. Reading it as item
+           level 0 reported the candidate's whole item level as gain — a slot the paste
+           simply did not mention would then dominate the plan. The caller decides what an
+           unmentioned slot means (the client fills ranked slots with the same stated
+           fallback the Upgrade checker uses); here it is skipped. */
+        if (worn[slot] == null) continue;
+        const gain = (best.attainableIlvl ?? 0) - Number(worn[slot]);
+        if (gain > 0) { deltaBySlot[slot] = gain; delta += gain; }
+        if (best.basisLabel && !basis) basis = best.basisLabel;
+      }
+    } else {
+      const anyBasis = [...bySlot.values()].flat().find((item) => item.basisLabel);
+      basis = anyBasis?.basisLabel ?? null;
+    }
+
+    plans.push({ source: entry.source, coverage, depth, coveredSlots, delta, deltaBySlot,
+      basis, bestPosition: Number.isFinite(bestPosition) ? bestPosition : null });
+  }
+  return plans;
+}
+
+/* G18: the caller names the key; this only orders. `by` is "coverage" or "delta", and asking
+   for a delta sort when no gear is pasted falls back to coverage rather than ordering by null. */
+export function sortPlans(plans, by = "coverage") {
+  const useDelta = by === "delta" && (plans ?? []).some((plan) => plan.delta != null);
+  return (plans ?? []).slice().sort((a, b) => {
+    if (useDelta) {
+      const delta = (b.delta ?? -1) - (a.delta ?? -1);
+      if (delta) return delta;
+    }
+    const coverage = b.coverage - a.coverage;
+    if (coverage) return coverage;
+    const depth = b.depth - a.depth;
+    if (depth) return depth;
+    // A source holding a higher-ranked item beats one holding more low-ranked ones.
+    const best = (a.bestPosition ?? 99) - (b.bestPosition ?? 99);
+    if (best) return best;
+    return String(a.source?.name ?? "").localeCompare(String(b.source?.name ?? ""));
+  });
+}
+
+export const planSortedBy = (by, plans) =>
+  (by === "delta" && (plans ?? []).some((plan) => plan.delta != null)) ? "delta" : "coverage";

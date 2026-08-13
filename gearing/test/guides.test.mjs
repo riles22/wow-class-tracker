@@ -2,7 +2,8 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { BAND, BRACKETS, bandOf, buildId, bracketOfItem, consensusForItem, consensusRank,
-  defaultBuildFor, normalizeBracket, rankCandidates, scopeKey,
+  defaultBuildFor, normalizeBracket, planForSources, planSortedBy, rankCandidates, scopeKey,
+  sortPlans,
   normalizeSlot, normalizeText, parseSoftCap, resolveDropSource, rosterFrom, slugify,
   SLOTS } from "../src/lib-guides.mjs";
 
@@ -342,4 +343,131 @@ test("G17: wholly unscoped variants never corroborate each other", () => {
     { source: "method", label: "Raid", heroTalent: null, bracket: "raid" },
   ];
   assert.equal(defaultBuildFor(builds).source, "icyveins");
+});
+
+/* ---------- Phase D: the game plan (G2, G18-G21) ---------- */
+
+const ranked = (pairs) => new Map(Object.entries(pairs));
+const src = (name, items) => ({ source: { name, kind: "raid" }, items });
+
+test("G19: coverage counts SLOTS, and the extra options at one slot become depth", () => {
+  // Three Back items is ONE slot covered and two depth — you can only wear one Back.
+  const plans = planForSources(
+    [src("Cloak Boss", [
+      { id: "a", slot: "Back" }, { id: "b", slot: "Back" }, { id: "c", slot: "Back" }])],
+    { rankedBySlot: ranked({ Back: ["a", "b", "c"] }) });
+  assert.equal(plans[0].coverage, 1);
+  assert.equal(plans[0].depth, 2);
+  assert.deepEqual(plans[0].coveredSlots, ["Back"]);
+});
+
+test("G19: a boss improving two slots outranks one dropping three items for a single slot", () => {
+  // The exact inversion the decision exists to prevent.
+  const plans = sortPlans(planForSources([
+    src("Three Cloaks", [{ id: "a", slot: "Back" }, { id: "b", slot: "Back" }, { id: "c", slot: "Back" }]),
+    src("Weapon And Ring", [{ id: "w", slot: "Main Hand" }, { id: "r", slot: "Finger" }]),
+  ], { rankedBySlot: ranked({ Back: ["a", "b", "c"], "Main Hand": ["w"], Finger: ["r"] }) }));
+  assert.deepEqual(plans.map((p) => p.source.name), ["Weapon And Ring", "Three Cloaks"]);
+  assert.equal(plans[0].coverage, 2);
+  assert.equal(plans[1].coverage, 1);
+});
+
+test("items the spec has not ranked contribute nothing at all", () => {
+  const plans = planForSources(
+    [src("Boss", [{ id: "unranked", slot: "Head" }, { id: "ranked", slot: "Legs" }])],
+    { rankedBySlot: ranked({ Legs: ["ranked"] }) });
+  assert.equal(plans[0].coverage, 1);
+  assert.deepEqual(plans[0].coveredSlots, ["Legs"]);
+});
+
+test("G2/G21: with no worn gear the delta is null, never zero", () => {
+  // Zero would sort as though it had been measured; null is the state the page must announce.
+  const plans = planForSources([src("Boss", [{ id: "a", slot: "Back", attainableIlvl: 318 }])],
+    { rankedBySlot: ranked({ Back: ["a"] }) });
+  assert.equal(plans[0].delta, null);
+  assert.equal(plans[0].deltaBySlot, null);
+  assert.equal(plans[0].coverage, 1, "coverage is still computable without a paste");
+});
+
+test("G21: the delta is measured at the highest attainable and carries its basis label", () => {
+  const plans = planForSources(
+    [src("Boss", [
+      { id: "lfr", slot: "Back", attainableIlvl: 279, basisLabel: "at LFR" },
+      { id: "myth", slot: "Back", attainableIlvl: 318, basisLabel: "at Mythic" }])],
+    { rankedBySlot: ranked({ Back: ["myth", "lfr"] }), worn: { Back: 300 } });
+  assert.equal(plans[0].delta, 18, "318 - 300, taking the highest attainable for the slot");
+  assert.deepEqual(plans[0].deltaBySlot, { Back: 18 });
+  assert.equal(plans[0].basis, "at Mythic", "the basis must travel with the number");
+});
+
+test("G21: a slot you already out-gear contributes no delta and never a negative one", () => {
+  const plans = planForSources(
+    [src("Boss", [{ id: "a", slot: "Back", attainableIlvl: 292, basisLabel: "at Normal" },
+      { id: "b", slot: "Legs", attainableIlvl: 318, basisLabel: "at Mythic" }])],
+    { rankedBySlot: ranked({ Back: ["a"], Legs: ["b"] }), worn: { Back: 318, Legs: 300 } });
+  assert.equal(plans[0].delta, 18, "only the Legs gain counts");
+  assert.deepEqual(Object.keys(plans[0].deltaBySlot), ["Legs"]);
+  assert.equal(plans[0].coverage, 2, "…but both slots are still covered");
+});
+
+test("G18: the sort key is the caller's, and a delta sort without gear falls back to coverage", () => {
+  const plans = planForSources([
+    src("Wide", [{ id: "a", slot: "Back" }, { id: "b", slot: "Legs" }]),
+    src("Deep", [{ id: "c", slot: "Head", attainableIlvl: 318 }]),
+  ], { rankedBySlot: ranked({ Back: ["a"], Legs: ["b"], Head: ["c"] }) });
+
+  assert.equal(planSortedBy("delta", plans), "coverage",
+    "asking for a delta sort with no measured delta must report the key it actually used");
+  assert.deepEqual(sortPlans(plans, "delta").map((p) => p.source.name), ["Wide", "Deep"]);
+  assert.deepEqual(sortPlans(plans, "coverage").map((p) => p.source.name), ["Wide", "Deep"]);
+});
+
+test("G18: with gear pasted the two sort keys genuinely disagree", () => {
+  // The case that proves the switch is worth having: broad coverage vs one huge upgrade.
+  const plans = planForSources([
+    src("Broad", [{ id: "a", slot: "Back", attainableIlvl: 302 },
+      { id: "b", slot: "Legs", attainableIlvl: 302 }]),
+    src("Single Big", [{ id: "c", slot: "Main Hand", attainableIlvl: 318 }]),
+  ], { rankedBySlot: ranked({ Back: ["a"], Legs: ["b"], "Main Hand": ["c"] }),
+    worn: { Back: 300, Legs: 300, "Main Hand": 260 } });
+
+  assert.equal(planSortedBy("delta", plans), "delta");
+  assert.deepEqual(sortPlans(plans, "coverage").map((p) => p.source.name), ["Broad", "Single Big"]);
+  assert.deepEqual(sortPlans(plans, "delta").map((p) => p.source.name), ["Single Big", "Broad"]);
+});
+
+test("the two components are returned side by side and never summed", () => {
+  const plans = planForSources([src("Boss", [{ id: "a", slot: "Back", attainableIlvl: 318 }])],
+    { rankedBySlot: ranked({ Back: ["a"] }), worn: { Back: 300 } });
+  const plan = plans[0];
+  assert.equal(plan.coverage, 1);
+  assert.equal(plan.delta, 18);
+  // Nothing in the record combines them — no total, score or rank field.
+  for (const forbidden of ["score", "total", "value", "rank", "combined"]) {
+    assert.ok(!(forbidden in plan), `plan must not carry a merged "${forbidden}" field`);
+  }
+});
+
+test("sorting does not mutate, and an empty plan set is honest rather than throwing", () => {
+  const plans = planForSources([src("A", [{ id: "x", slot: "Back" }])],
+    { rankedBySlot: ranked({ Back: ["x"] }) });
+  const copy = JSON.parse(JSON.stringify(plans));
+  sortPlans(plans, "delta");
+  assert.deepEqual(JSON.parse(JSON.stringify(plans)), copy);
+  assert.deepEqual(planForSources([], {}), []);
+  assert.deepEqual(sortPlans([], "coverage"), []);
+  assert.deepEqual(planForSources(null, {}), []);
+});
+
+test("a worn slot the caller never stated is unmeasurable, not item level zero", () => {
+  // Found in Phase D: reading an unmentioned slot as 0 reported the candidate's ENTIRE
+  // item level as gain, so a slot the paste happened not to mention dominated the plan.
+  const plans = planForSources(
+    [{ source: { name: "Boss" }, items: [
+      { id: "a", slot: "Back", attainableIlvl: 318, basisLabel: "at Mythic" },
+      { id: "b", slot: "Legs", attainableIlvl: 318, basisLabel: "at Mythic" }] }],
+    { rankedBySlot: new Map([["Back", ["a"]], ["Legs", ["b"]]]), worn: { Back: 300 } });
+  assert.equal(plans[0].delta, 18, "only the slot the caller stated is measured");
+  assert.deepEqual(Object.keys(plans[0].deltaBySlot), ["Back"]);
+  assert.equal(plans[0].coverage, 2, "…but both slots are still covered");
 });

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-AxrshCxGF4dwKUOitK/9maYFziIgz+isdAfabGsvugU='; style-src 'unsafe-inline'; font-src data:; img-src data:; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-omm5UURg66+CQByeb2cahyv4Ff9btBrr6Z/MS1TepO0='; style-src 'unsafe-inline'; font-src data:; img-src data:; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Spec Tracker &mdash; Season 2 Gearing</title>
 <!-- The Spec Tracker brand mark as favicon — same artwork as the tracker page, shipped
@@ -221,6 +221,30 @@ table.src-tbl td{padding:10px;border-bottom:1px solid var(--line);vertical-align
 table.src-tbl tr:last-child td{border-bottom:none}
 .badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;
        padding:2px 7px;border-radius:5px;background:rgba(242,214,152,.14);color:var(--myth);margin-left:7px}
+
+/* ---- the game plan (Phase D, G18-G21) ----
+   The two value components live in two columns and are styled differently on purpose: a
+   reader who cannot tell them apart is one step from adding them together, which G2 forbids.
+   `.who` and `.pend` are re-declared for table scope because their originals are scoped to
+   the row-column strip (.rowcol .who / .rowcol .pend) and would not reach a <td>. */
+table.src-tbl td.plan-n{font-family:var(--mono);white-space:nowrap}
+table.src-tbl td.plan-n b{font-size:14px;color:var(--t1)}
+table.src-tbl td.plan-n.gain b{color:var(--adv)}
+table.src-tbl .who{display:block;font-size:11px;color:var(--t3);font-family:Inter,"Segoe UI",system-ui,sans-serif}
+table.src-tbl .pend{font-style:italic;color:var(--t4);font-family:Inter,"Segoe UI",system-ui,sans-serif}
+.plan-slots{margin-top:7px;font-size:12px;color:var(--t3);line-height:1.75}
+.plan-lead{display:block;font-size:10px;letter-spacing:.7px;text-transform:uppercase;
+           color:var(--t4);font-weight:700;margin-bottom:2px}
+/* Boxed rather than space-separated: each chip's own text contains an em dash and a slot
+   name, so two adjacent chips separated only by a margin read as one run. */
+.plan-slot{display:inline-block;margin:3px 6px 0 0;padding:2px 8px;border:1px solid var(--line);
+           border-radius:7px;background:rgba(255,255,255,.02);white-space:normal}
+.plan-slot b{color:var(--t2)}
+.plan-slot .at{color:var(--t4)}
+.plan-slot .up{font-family:var(--mono);color:var(--adv);font-weight:700}
+.plan-sort{display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap;margin:0 0 18px}
+.plan-sort .field{flex:0 1 280px}
+.plan-sort .pill{align-self:center}
 textarea{width:100%;min-height:160px;font-family:var(--mono);font-size:13px;resize:vertical;line-height:1.5}
 .footfam{margin-bottom:10px;color:var(--t2)}
 /* Always visible, never a disclosure: the harvest dates were the one thing a reader
@@ -302,6 +326,10 @@ table.paths tr:hover td{background:rgba(255,255,255,.03)}
   .setup-card{padding:14px}
   .setup-grid,.weight-grid{grid-template-columns:minmax(0,1fr)}
   .setup-grid .field:last-child{grid-column:auto}
+  /* The plan's sort control matches the setup card's fields on a phone: full width, with the
+     key it actually used on its own line under it rather than squeezed beside it. */
+  .plan-sort .field{flex:1 1 100%}
+  .plan-sort .pill{align-self:flex-start}
   .tabs{position:sticky;top:0;z-index:50;margin-inline:-14px;padding-inline:14px;background:rgba(7,10,15,.96)}
   .tab{padding-inline:13px}
   .card{padding:15px 14px}
@@ -419,11 +447,26 @@ table.paths tr:hover td{background:rgba(255,255,255,.03)}
 
     <section class="panel" id="p-src" role="tabpanel" aria-labelledby="tab-src" tabindex="0" hidden>
       <h2>Loot sources</h2>
-      <div class="note">See every raid boss and dungeon, plus how many drops your selected spec can use.
-        Tier-token bosses are clearly marked.
+      <div class="note">Which bosses and dungeons are worth your week &mdash; every raid boss and dungeon,
+        ranked by how much of your gear it can actually improve, with the equippable-drop counts and the
+        key-level table underneath. Tier-token bosses are clearly marked.
         <details class="disclosure"><summary>Why the item lists differ by activity</summary>
           <div class="disclosure-body">The raid has a fixed, enumerable loot table. Mythic+ reuses dungeon items and sets their item level from the key, so the key-level table is the useful comparison. Delves award from a shared pool rather than a fixed per-activity item list. Verified Aug 1, 2026.</div>
         </details>
+      </div>
+      <!-- G18: a ranked list needs ONE sort key, so the key is chosen by the reader and named
+           on screen. Static markup rather than markup this tab re-renders, so the listener is
+           bound once; the plan reads it defensively and falls back to coverage when it is
+           absent, which is also what the two client test harnesses see. -->
+      <div class="plan-sort">
+        <div class="field">
+          <label for="plan-sort">Sort bosses and dungeons by</label>
+          <select id="plan-sort">
+            <option value="coverage">Ranked slots improved</option>
+            <option value="delta">Item levels you would gain</option>
+          </select>
+        </div>
+        <span class="pill" id="plan-sort-state" role="status" aria-live="polite">Sorted by ranked slots improved</span>
       </div>
       <div id="src"></div>
     </section>
@@ -909,9 +952,99 @@ function defaultBuildFor(builds) {
   return best?.build ?? list[0];
 }
 
-return { SLOTS, IGNORED_SLOTS, decodeEntities, normalizeText, normalizeSlot, BRACKETS, normalizeBracket, bracketOfItem, rosterFrom, resolveDropSource, slugify, buildId, parseSoftCap, consensusForItem, consensusRank, BAND, bandOf, rankCandidates, scopeKey, defaultBuildFor };
+/* ---------- the game plan (G2, G18-G21) ----------
+   "Which bosses and dungeons are worth my week." Pure, so the two value components can be
+   tested without a DOM and so the client cannot grow a second opinion about either.
+
+   THE TWO COMPONENTS NEVER MERGE (G2). `coverage` answers "how many of my ranked slots does
+   this source improve"; `delta` answers "how much item level would I actually gain". They are
+   returned side by side, never summed, and the caller picks ONE as the sort key and says which
+   (G18). */
+
+/* One entry per plannable source. Raid is per BOSS and M+ per DUNGEON (G20) — you kill a boss
+   but you run a dungeon, so that is the unit each reader plans around. The caller supplies the
+   grouping and each item's attainable item level, because both come from data this module
+   deliberately does not read (`boss.dropLevels`, `DUNG.keyLevels`, `maxAttainable`). */
+function planForSources(entries, { rankedBySlot = new Map(), worn = null } = {}) {
+  const plans = [];
+  for (const entry of entries ?? []) {
+    const bySlot = new Map();
+    for (const item of entry.items ?? []) {
+      const slot = item.slot;
+      if (!slot) continue;
+      const ranked = rankedBySlot.get(slot) ?? [];
+      const position = ranked.findIndex((id) => String(id) === String(item.id));
+      if (position < 0) continue;               // not one of this spec's ranked candidates
+      if (!bySlot.has(slot)) bySlot.set(slot, []);
+      bySlot.get(slot).push({ ...item, position });
+    }
+
+    /* G19: coverage counts SLOTS, depth counts the extra options within them. Three Back
+       items is one slot covered and two depth — you can only wear one. */
+    const coveredSlots = [...bySlot.keys()].sort();
+    const coverage = coveredSlots.length;
+    const depth = [...bySlot.values()].reduce((sum, items) => sum + items.length - 1, 0);
+    const bestPosition = Math.min(...[...bySlot.values()]
+      .flatMap((items) => items.map((item) => item.position)), Infinity);
+
+    /* G21: the delta is measured at each source's HIGHEST attainable, and the basis label
+       travels with the number so it can never read as a promise about the difficulty this
+       reader runs. Without worn gear the delta is null — not zero, which would sort as if
+       measured (G2: the page says so rather than guessing). */
+    let delta = null, deltaBySlot = null, basis = null;
+    if (worn) {
+      deltaBySlot = {};
+      delta = 0;
+      for (const [slot, items] of bySlot) {
+        const best = items.reduce((a, b) =>
+          ((b.attainableIlvl ?? 0) > (a.attainableIlvl ?? 0) ? b : a));
+        /* A slot the caller did not state is UNMEASURABLE, not empty. Reading it as item
+           level 0 reported the candidate's whole item level as gain — a slot the paste
+           simply did not mention would then dominate the plan. The caller decides what an
+           unmentioned slot means (the client fills ranked slots with the same stated
+           fallback the Upgrade checker uses); here it is skipped. */
+        if (worn[slot] == null) continue;
+        const gain = (best.attainableIlvl ?? 0) - Number(worn[slot]);
+        if (gain > 0) { deltaBySlot[slot] = gain; delta += gain; }
+        if (best.basisLabel && !basis) basis = best.basisLabel;
+      }
+    } else {
+      const anyBasis = [...bySlot.values()].flat().find((item) => item.basisLabel);
+      basis = anyBasis?.basisLabel ?? null;
+    }
+
+    plans.push({ source: entry.source, coverage, depth, coveredSlots, delta, deltaBySlot,
+      basis, bestPosition: Number.isFinite(bestPosition) ? bestPosition : null });
+  }
+  return plans;
+}
+
+/* G18: the caller names the key; this only orders. `by` is "coverage" or "delta", and asking
+   for a delta sort when no gear is pasted falls back to coverage rather than ordering by null. */
+function sortPlans(plans, by = "coverage") {
+  const useDelta = by === "delta" && (plans ?? []).some((plan) => plan.delta != null);
+  return (plans ?? []).slice().sort((a, b) => {
+    if (useDelta) {
+      const delta = (b.delta ?? -1) - (a.delta ?? -1);
+      if (delta) return delta;
+    }
+    const coverage = b.coverage - a.coverage;
+    if (coverage) return coverage;
+    const depth = b.depth - a.depth;
+    if (depth) return depth;
+    // A source holding a higher-ranked item beats one holding more low-ranked ones.
+    const best = (a.bestPosition ?? 99) - (b.bestPosition ?? 99);
+    if (best) return best;
+    return String(a.source?.name ?? "").localeCompare(String(b.source?.name ?? ""));
+  });
+}
+
+const planSortedBy = (by, plans) =>
+  (by === "delta" && (plans ?? []).some((plan) => plan.delta != null)) ? "delta" : "coverage";
+
+return { SLOTS, IGNORED_SLOTS, decodeEntities, normalizeText, normalizeSlot, BRACKETS, normalizeBracket, bracketOfItem, rosterFrom, resolveDropSource, slugify, buildId, parseSoftCap, consensusForItem, consensusRank, BAND, bandOf, rankCandidates, scopeKey, defaultBuildFor, planForSources, sortPlans, planSortedBy };
 })();
-const { bracketOfItem, buildId, consensusForItem, rankCandidates, defaultBuildFor } = __guideLib;
+const { SLOTS, bracketOfItem, buildId, consensusForItem, rankCandidates, defaultBuildFor, planForSources, sortPlans, planSortedBy } = __guideLib;
 
 /* ---------- reading the guide layer ----------
    Which record belongs to the selected spec. The three files are written by different
@@ -1092,6 +1225,51 @@ function scoreItem(spec, it) {
 function rankedCandidates(list) {
   return rankCandidates(list.map(it =>
     ({item: it, consensus: consensusFor(it), fit: scoreItem(CUR, it)})));
+}
+
+/* ---------- what the Gear recommendations tab ranks ----------
+   Both groupings below exist so the game plan on the Loot sources tab can join to EXACTLY the
+   candidate set that tab renders, rather than deriving its own. Two tabs deriving the same
+   ranking separately is how they end up disagreeing about what your top items are, and the
+   disagreement would be invisible — both lists look plausible on their own. */
+
+/* The slot cards: everything you can equip that is neither a weapon (its own cards, below)
+   nor a tier-set slot (ranked on the Tier & Catalyst tab, under Catalyst-base rules). Trinket
+   stays in here because the tab needs the list for its unranked trinket card. */
+function gearSlotGroups() {
+  const bySlot = {};
+  GEAR.filter(it => canUse(CUR, it) && !isWeaponItem(it) && !TIER_SET_SLOTS.has(it.slot))
+    .forEach(it => (bySlot[it.slot] = bySlot[it.slot] || []).push(it));
+  return bySlot;
+}
+
+/* The weapon cards, hand by hand. The unique-equipped reservation lives here rather than in
+   the renderer because it CHANGES the off-hand candidate list — the off hand is ranked
+   without the item the main hand already claimed — and a second implementation of that rule
+   would silently give the plan a different off-hand top five than the page shows. */
+function weaponHandGroups() {
+  const items = GEAR.filter(it => canUse(CUR, it) && isWeaponItem(it));
+  const groups = [];
+  for (const loadout of (CUR.weaponLoadouts || [])) {
+    let mainUnique = null;
+    for (const handName of ['mainHand', 'offHand']) {
+      const hand = loadout.hands && loadout.hands[handName];
+      if (!hand) continue;
+      if (hand.mustBeEmpty) { groups.push({loadout: loadout, handName: handName, hand: hand}); continue; }
+      const list = items.filter(it => handMatches(hand, it));
+      const first = (rankedCandidates(list)[0] || {}).item;
+      if (handName === 'mainHand' && first && first.uniqueEquipped) mainUnique = first.id;
+      const reservedUniqueId = handName === 'offHand' ? mainUnique : null;
+      groups.push({loadout: loadout, handName: handName, hand: hand, list: list,
+        reservedUniqueId: reservedUniqueId,
+        // What this hand is actually ranked over, and the item held back from it.
+        available: reservedUniqueId == null ? list
+          : list.filter(it => String(it.id) !== String(reservedUniqueId)),
+        reserved: reservedUniqueId == null ? null
+          : list.filter(it => String(it.id) === String(reservedUniqueId))[0] || null});
+    }
+  }
+  return groups;
 }
 
 /* The gold "best" marker means TIED BEST SECONDARY FIT and says so on the page, so it stays
@@ -1378,10 +1556,19 @@ function customOverrideNote() {
    Each cell carries its own visible label rather than a title=, because a tooltip does not
    exist on a phone — the rule this project adopted after measuring that 262 of its parent
    page's 288 tooltips sat inside a grid no touch reader can hover. */
-function ilvlCell(it) {
+/* The highest rung this item's own ladder reaches, AND the difficulty or key level that
+   answer is measured at. One definition, because two surfaces need the pair: the item-level
+   column prints it, and the game plan's upgrade delta is measured there and must carry the
+   basis label with it (G21) — a Mythic-only number with no label reads as a promise about
+   the difficulty the reader actually runs. Returns null when no ladder is modeled. */
+function attainableStep(it) {
   const steps = it.kind === 'mplus' ? mplusLadder() : raidLadder(it.boss);
-  const top = steps.reduce((best, step) =>
+  return steps.reduce((best, step) =>
     !best || (step.ilvl || 0) > (best.ilvl || 0) ? step : best, null);
+}
+
+function ilvlCell(it) {
+  const top = attainableStep(it);
   /* Two absences render the same way and both are honest: M+ items carry no item level of
      their own (the key sets it, so the key ladder answers instead), and a direct-tier item
      reaches no modeled ladder at all. Neither prints a number the data does not hold. */
@@ -1508,6 +1695,10 @@ function catalystDetails(it) {
       : it.effect ? '<span class="fx"><b>Effect check:</b> only effects explicitly supported by the Catalyst carry; confirm this result in the preview.</span>' : '')
     + '</div></details>';
 }
+
+/* How many numbered candidates a ranked card shows. Named because the game plan joins to the
+   same set and a plan counting a different depth than the page displays would be lying. */
+const RANKED_TOP_N = 5;
 
 function visibleCandidates(list, limit) {
   const sorted = rankedCandidates(list);
@@ -1649,11 +1840,7 @@ function renderBis() {
     : '<b>No stat priority could be sourced for this spec</b>, so items are filtered to what you can equip, but not ranked.')
     + guideRankingNote() + archonColumnNote();
 
-  const usable = GEAR.filter(it => canUse(CUR, it));
-  const weaponItems = usable.filter(isWeaponItem);
-  const bySlot = {};
-  usable.filter(it => !isWeaponItem(it) && !TIER_SET_SLOTS.has(it.slot))
-    .forEach(it => (bySlot[it.slot] = bySlot[it.slot] || []).push(it));
+  const bySlot = gearSlotGroups();
 
   // Trinket is pulled out of the normal grid and handled on its own below
   const slots = Object.keys(bySlot).filter(s => s !== 'Trinket').sort((a, b) => {
@@ -1662,7 +1849,7 @@ function renderBis() {
   });
 
   const cards = slots.map(slot => {
-    const entries = visibleCandidates(bySlot[slot], 5);
+    const entries = visibleCandidates(bySlot[slot], RANKED_TOP_N);
     const topItem = bestByFit(entries.filter(entry => !entry.special).map(entry => entry.it));
     const rows = [];
     entries.forEach(entry => {
@@ -1681,7 +1868,7 @@ function renderBis() {
       + (rows.join('') || '<div class="empty">nothing here</div>') + '</div>';
   }).join('');
 
-  $('#bis').innerHTML = weaponLoadoutCards(weaponItems) + cards
+  $('#bis').innerHTML = weaponLoadoutCards() + cards
     + trinketCard(bySlot['Trinket'] || [])
     || '<div class="empty">No usable items found for this spec.</div>';
 }
@@ -1715,13 +1902,9 @@ function loadoutLabel(id) {
     .replace(/\b\w/g, c => c.toUpperCase());
 }
 
-function weaponRows(list, reservedUniqueId) {
-  const available = reservedUniqueId == null ? list
-    : list.filter(it => String(it.id) !== String(reservedUniqueId));
-  const entries = visibleCandidates(available, 5);
-  const reserved = reservedUniqueId == null ? null
-    : list.filter(it => String(it.id) === String(reservedUniqueId))[0];
-  if (reserved) entries.push({it: reserved, marker: 'U', special: true, reserved: true});
+function weaponRows(group) {
+  const entries = visibleCandidates(group.available, RANKED_TOP_N);
+  if (group.reserved) entries.push({it: group.reserved, marker: 'U', special: true, reserved: true});
   const topItem = bestByFit(entries.filter(entry => !entry.reserved && !entry.special)
     .map(entry => entry.it));
   return entries.map(entry => {
@@ -1742,23 +1925,20 @@ function weaponRows(list, reservedUniqueId) {
   }).join('');
 }
 
-function weaponLoadoutCards(items) {
+function weaponLoadoutCards() {
+  // The hand-by-hand walk (including the unique-equipped reservation) is shared with the
+  // game plan's ranked set, so both read one ordering rather than two.
+  const groups = weaponHandGroups();
   return (CUR.weaponLoadouts || []).map(loadout => {
     const sections = [];
-    let mainUnique = null;
-    for (const handName of ['mainHand', 'offHand']) {
-      const hand = loadout.hands && loadout.hands[handName];
-      if (!hand) continue;
+    for (const group of groups.filter(candidate => candidate.loadout === loadout)) {
+      const hand = group.hand, handName = group.handName;
       if (hand.mustBeEmpty) {
         sections.push('<div class="hand-group"><div class="hand-title">Off hand<span>must be empty</span></div>'
           + '<div class="sub-note">The main-hand weapon occupies both hands in this setup.</div></div>');
         continue;
       }
-      const list = items.filter(it => handMatches(hand, it));
-      // The unique-equipped reservation follows what is actually recommended first, so it
-      // reads the ranked order rather than a second opinion about it.
-      const first = (rankedCandidates(list)[0] || {}).item;
-      if (handName === 'mainHand' && first && first.uniqueEquipped) mainUnique = first.id;
+      const list = group.list;
       const title = (hand.inventorySlots || []).indexOf('Ranged') >= 0 ? 'Ranged weapon'
         : hand.occupiesBothHands ? 'Two-hand weapon'
         : handName === 'mainHand' ? 'Main hand' : 'Off hand';
@@ -1767,7 +1947,7 @@ function weaponLoadoutCards(items) {
         + '<div class="sub-note"><b>Allowed types:</b> '
         + esc((hand.itemTypes || []).map(type => type == null ? 'held off-hand focus' : type).join(', '))
         + ' &middot; <b>item slots:</b> ' + esc((hand.inventorySlots || []).join(', ')) + '</div>'
-        + (weaponRows(list, handName === 'offHand' ? mainUnique : null)
+        + (weaponRows(group)
           || '<div class="empty">No matching Season 2 items found.</div>') + '</div>');
     }
     const sources = (CUR.weaponLoadoutSources || []).map((url, index) => '<a href="' + esc(url)
@@ -1856,9 +2036,222 @@ function slotsOf(list) {
   }, {})).sort().join(', ') || '&mdash;';
 }
 
+/* ---------- the game plan (Phase D — docs/gearing-s2-scope.md G2, G18-G21) ----------
+   "Which bosses and dungeons are worth my week." The arithmetic is NOT here: it lives in
+   planForSources / sortPlans / planSortedBy in src/lib-guides.mjs, injected above, so the
+   counting rules are tested without a DOM and this page cannot grow a second opinion about
+   them. Everything below is the join — which ranked candidates drop where, what item level
+   they reach, and what you already wear — plus the rendering. */
+
+/* THE ranked candidate set, joined by slot. This reads the SAME two groupings the Gear
+   recommendations tab renders from, so "your ranked slots" here and "rank 1" there are one
+   answer. Two absences are deliberate and both are stated on the page rather than inferred
+   from an empty cell: trinkets are not ranked at all (G8 — their value is in the effect), and
+   the five tier-set slots are ranked on the Tier & Catalyst tab under Catalyst-base rules,
+   which is a different question from "where should I go this week".
+   Special-effect rows are excluded too: they carry the outside-the-ranking S marker (G15
+   band 3) precisely because they are not ranked candidates. */
+function rankedGearBySlot() {
+  const ranked = new Map();
+  const add = (slot, ids) => {
+    const held = ranked.get(slot) || [];
+    for (const id of ids) if (held.indexOf(id) < 0) held.push(id);
+    ranked.set(slot, held);
+  };
+  const rankedIdsOf = list => visibleCandidates(list, RANKED_TOP_N)
+    .filter(entry => !entry.special).map(entry => String(entry.it.id));
+
+  const bySlot = gearSlotGroups();
+  for (const slot of Object.keys(bySlot)) {
+    if (slot === 'Trinket') continue;
+    add(slot, rankedIdsOf(bySlot[slot]));
+  }
+  /* Weapons are ranked per loadout HAND, and one item can be offered in more than one hand
+     or loadout, so the slot's list is the union in the order the page first shows them. */
+  const byId = {};
+  GEAR.forEach(it => { byId[String(it.id)] = it; });
+  for (const group of weaponHandGroups()) {
+    if (!group.available) continue;
+    for (const id of rankedIdsOf(group.available)) {
+      const item = byId[id];
+      if (item) add(item.slot, [id]);
+    }
+  }
+  return ranked;
+}
+
+/* The two fields the planner needs and deliberately does not derive: the item level this drop
+   can actually reach, and the difficulty or key level that answer is measured at (G21). Both
+   come from the ladders this page already holds — boss.dropLevels and DUNG.keyLevels — read
+   through the same attainableStep() the item-level column uses, so the plan and that column
+   can never quote different ceilings for one item. */
+function planItem(it) {
+  const step = attainableStep(it);
+  return Object.assign({}, it, {
+    attainableIlvl: step && step.ilvl ? step.ilvl : null,
+    basisLabel: step && step.need ? 'at ' + step.need : null
+  });
+}
+
+/* G20's asymmetry, and it lives here in the GROUPING and nowhere else: raid is per BOSS
+   because you kill a boss, M+ is per DUNGEON because you run a whole dungeon. Both feed the
+   same planner. */
+function planEntries(kind) {
+  if (kind === 'raid') return RAID.bosses.map(b => ({
+    source: {kind: 'raid', name: b.name, boss: b},
+    items: ITEMS.filter(it => it.kind === 'raid' && it.boss === b.boss && it.slot).map(planItem)
+  }));
+  return (DUNG ? DUNG.dungeons : []).map(d => ({
+    source: {kind: 'mplus', name: d.name, dungeon: d},
+    items: ITEMS.filter(it => it.kind === 'mplus' && it.dungeon === d.name && it.slot).map(planItem)
+  }));
+}
+
+/* What you actually wear, per ITEM slot — the second half of G2's delta, and absent until you
+   paste. Four things here are deliberate:
+   · MYGEAR speaks simc's vocabulary (finger1 / main_hand) while items speak the slot
+     vocabulary, and one worn weapon answers for several item slots — a main hand is what a
+     One-Hand, a Two-Hand or a Ranged candidate has to beat.
+   · Where a slot holds two items (Finger, Trinket) the LOWER item level is the one to beat,
+     because that is the one you would replace.
+   · A slot whose paste carried no item level falls back to the stated fallback item level,
+     which is exactly what the Upgrade checker does with the same number — so the two tabs
+     answer "is this an upgrade" the same way.
+   · And so does any ranked slot the paste never mentioned. Without that last line a partial
+     paste reports the whole of an unmentioned slot as a gain, because "nothing worn" and
+     "item level zero" are the same value to the planner. */
+const WORN_SLOT_ALIASES = {
+  '@mainHand': ['Main Hand', 'One-Hand', 'Two-Hand', 'Ranged'],
+  '@offHand': ['Off Hand', 'Held In Off-hand', 'One-Hand']
+};
+function wornBySlot(ranked) {
+  const keys = Object.keys(MYGEAR);
+  if (!keys.length) return null;
+  const fallback = Math.max(0, parseInt($('#curilvl').value, 10) || 0);
+  const worn = {};
+  const put = (slot, level) => {
+    worn[slot] = worn[slot] == null ? level : Math.min(worn[slot], level);
+  };
+  for (const key of keys) {
+    const level = MYGEAR[key].ilvl || fallback;
+    if (!level) continue;
+    for (const slot of (WORN_SLOT_ALIASES[MYGEAR[key].slotLabel] || [MYGEAR[key].slotLabel]))
+      put(slot, level);
+  }
+  if (!Object.keys(worn).length) return null;
+  /* If the fallback field has been cleared the paste's own LOWEST reported item level answers
+     for the slots it did not mention. Anything is better than leaving them at zero, which
+     reports a bare slot as a whole item level of gain — and understating one unmentioned slot
+     is a bounded error where that is an unbounded one. */
+  const floor = fallback || Math.min.apply(null, Object.values(worn));
+  for (const slot of ranked.keys()) if (worn[slot] == null) worn[slot] = floor;
+  return worn;
+}
+
+/* Guarded because both client test harnesses stub a fixed element list that predates this
+   control: with no control the plan sorts by its default and says so, rather than throwing. */
+function planSortKey() {
+  const control = $('#plan-sort');
+  return control && control.value === 'delta' ? 'delta' : 'coverage';
+}
+
+const PLAN_SORT_LABEL = {coverage: 'ranked slots improved', delta: 'item levels you would gain'};
+
+/* G2/G21 in one cell: the delta always travels with the basis it was measured at, and the
+   absence of a delta is a sentence rather than a blank or a zero. `null` is not `0` — one
+   means "not measured", the other means "measured, and it gains you nothing". */
+function planDeltaCell(plan) {
+  if (plan.delta == null) return '<span class="pend">needs your gear</span>';
+  if (!plan.delta) return '<span class="pend">no gain</span>'
+    + (plan.basis ? '<span class="who">' + esc(plan.basis) + '</span>' : '');
+  return '<b>+' + plan.delta + '</b> ilvl<span class="who">'
+    + esc(plan.basis || 'basis not modeled') + '</span>';
+}
+
+/* G19: coverage counts SLOTS and depth counts the extra options inside them, as two numbers.
+   Three near-identical cloaks is one slot covered and two extra options — it must not outrank
+   a source holding your best weapon. */
+function planCells(plan) {
+  return '<td class="plan-n"><b>' + plan.coverage + '</b><span class="who">'
+    + (plan.coverage === 1 ? 'ranked slot' : 'ranked slots') + '</span></td>'
+    + '<td class="plan-n">' + (plan.depth
+      ? '<b>' + plan.depth + '</b><span class="who">extra option' + (plan.depth === 1 ? '' : 's') + '</span>'
+      : '<span class="pend">&mdash;</span>') + '</td>'
+    + '<td class="plan-n' + (plan.delta ? ' gain' : '') + '">' + planDeltaCell(plan) + '</td>';
+}
+
+/* The words under a row, describing the number beside it. It walks the plan's OWN
+   coveredSlots, so the prose can never name a different set of slots than the count.
+   `droppedBy` — the specific encounter or NPC — is the whole point of this view and is
+   printed wherever the data holds it; where it is absent the row says nothing rather than
+   attributing the drop to the source's headline name, and where it merely repeats that name
+   it is dropped as noise. */
+function planSlotDetail(plan, entry, ranked) {
+  if (!plan.coverage) return '<div class="plan-slots"><span class="pend">None of your ranked '
+    + 'candidates drop here.</span></div>';
+  return '<div class="plan-slots"><span class="plan-lead">Your ranked slots here</span>'
+    + plan.coveredSlots.map(slot => {
+    const ids = ranked.get(slot) || [];
+    const hits = (entry.items || [])
+      .filter(it => it.slot === slot && ids.indexOf(String(it.id)) >= 0)
+      .sort((a, b) => ids.indexOf(String(a.id)) - ids.indexOf(String(b.id)));
+    const best = hits[0];
+    const gain = plan.deltaBySlot ? plan.deltaBySlot[slot] : null;
+    return '<span class="plan-slot"><b>' + esc(slot) + '</b> #'
+      + (ids.indexOf(String(best.id)) + 1) + ' ' + esc(best.name)
+      + (best.droppedBy && best.droppedBy !== plan.source.name
+        ? ' <span class="at">&mdash; ' + esc(best.droppedBy) + '</span>' : '')
+      + (hits.length > 1
+        ? ' <span class="at">+' + (hits.length - 1) + ' more here</span>' : '')
+      + (gain ? ' <span class="up">+' + gain + '</span>' : '') + '</span>';
+  }).join('') + '</div>';
+}
+
+/* Why the upgrade column reads the way it does, in visible text — never a title=, because
+   262 of this project's 288 grid tooltips turned out to be invisible on touch and this is a
+   column whose emptiness is its most likely question. */
+function planDeltaNote(worn) {
+  if (worn) return '<div class="sub-note" data-plan-delta="measured"><b>Upgrade item levels are '
+    + 'measured against the gear you pasted</b>, at each source\'s highest difficulty or key level, '
+    + 'and every figure names that basis beside it. A slot your paste carried no item level for is '
+    + 'compared against the fallback item level on the Upgrade checker, exactly as that tab does.</div>';
+  const pasted = Object.keys(MYGEAR).length > 0;
+  return '<div class="sub-note" data-plan-delta="' + (pasted ? 'no-levels' : 'unread') + '">'
+    + (pasted
+      ? '<b>Your paste carried no item levels, so no upgrade can be computed.</b> Set a fallback '
+        + 'item level on the <b>Upgrade checker</b> tab and it will be used for every slot.'
+      : '<b>The upgrade column is empty because this page has not read your gear yet.</b> Paste your '
+        + '<code>/simc</code> output on the <b>Upgrade checker</b> tab and press <b>Read my gear</b>; '
+        + 'the item levels you would gain appear here immediately. Everything else on this tab '
+        + 'works without your character.')
+    + '</div>';
+}
+
 function renderSrc() {
+  const ranked = rankedGearBySlot();
+  const worn = wornBySlot(ranked);
+  const wanted = planSortKey();
+  const raidEntries = planEntries('raid'), dungeonEntries = planEntries('mplus');
+  // Keyed by kind AND name: boss names and dungeon names are each unique within their own
+  // roster, but nothing guarantees a boss will never share a name with a dungeon.
+  const entryByName = new Map(raidEntries.concat(dungeonEntries)
+    .map(e => [e.source.kind + '|' + e.source.name, e]));
+  const entryFor = plan => entryByName.get(plan.source.kind + '|' + plan.source.name);
+  const raidPlans = planForSources(raidEntries, {rankedBySlot: ranked, worn: worn});
+  const dungeonPlans = planForSources(dungeonEntries, {rankedBySlot: ranked, worn: worn});
+  /* G18: sortPlans falls back to coverage when a delta sort has nothing to sort on, and
+     planSortedBy reports the key it ACTUALLY used — so the page never claims an order it did
+     not apply. Both tables are asked once, together, so they cannot disagree about the key. */
+  const used = planSortedBy(wanted, raidPlans.concat(dungeonPlans));
+  const sortState = 'Sorted by <b>' + PLAN_SORT_LABEL[used] + '</b>'
+    + (used !== wanted ? ' &mdash; you asked for <b>' + PLAN_SORT_LABEL[wanted]
+      + '</b>, and nothing is measured yet' : '');
+  const state = $('#plan-sort-state');
+  if (state) state.innerHTML = sortState;
+
   const myTokenIds = new Set(myTokens().map(token => String(token.id)));
-  const raidRows = RAID.bosses.map(b => {
+  const raidRows = sortPlans(raidPlans, wanted).map(plan => {
+    const b = plan.source.boss;
     const available = ITEMS.filter(it => it.kind === 'raid' && it.boss === b.boss && it.ilvl > 100
       && (it.slot || TOKENS.some(token => String(token.id) === String(it.id))));
     const mine = available.filter(it => it.slot ? canUse(CUR, it) : myTokenIds.has(String(it.id)));
@@ -1866,26 +2259,61 @@ function renderSrc() {
     return '<tr><td><b>' + b.boss + '</b></td><td>' + esc(b.name)
       + (b.tokenSlot ? '<span class="badge">' + esc(b.tokenSlot) + ' token</span>' : '')
       + (b.orderDisputed ? '<span class="src"> &nbsp;order disputed</span>' : '')
-      + '</td><td><b>' + mine.length + '</b> / ' + all + '</td><td class="src">' + slotsOf(mine) + '</td></tr>';
+      + planSlotDetail(plan, entryFor(plan), ranked)
+      + '</td>' + planCells(plan)
+      + '<td><b>' + mine.length + '</b> / ' + all + '</td><td class="src">' + slotsOf(mine) + '</td></tr>';
   }).join('');
 
-  const dRows = (DUNG ? DUNG.dungeons : []).map(d => {
+  const dRows = sortPlans(dungeonPlans, wanted).map(plan => {
+    const d = plan.source.dungeon;
     const mine = d.items.filter(it => it.slot && canUse(CUR, it));
     return '<tr><td class="src">' + esc(d.expansion.replace('Battle for Azeroth', 'BfA')) + '</td><td>'
       + esc(d.name) + (d.isNew ? '<span class="badge">new</span>' : '')
-      + '</td><td><b>' + mine.length + '</b> / ' + d.items.length
+      + planSlotDetail(plan, entryFor(plan), ranked)
+      + '</td>' + planCells(plan)
+      + '<td><b>' + mine.length + '</b> / ' + d.items.length
       + '</td><td class="src">' + slotsOf(mine) + '</td></tr>';
   }).join('');
 
   const keys = MPLUS_KEYS.map(k => '<tr><td>' + esc(k.key) + '</td><td><b>' + k.end
     + '</b></td><td><b>' + k.vault + '</b></td></tr>').join('');
 
+  /* Both components named, neither collapsed (G2). Stated once at the top of the tab because
+     the two columns sit side by side and the reading a summed "source score" would invite is
+     precisely the one this page refuses to offer. */
+  const planNote = '<div class="sub-note" data-plan="components"><b>Two numbers, and they are never '
+    + 'added together.</b> <b>Improves</b> counts how many of your ranked SLOTS a source can fill '
+    + '&mdash; slots, not items, because you can only wear one Back. Further options at a slot it '
+    + 'already covers are real but different value, so they are counted beside it as <b>extra options</b>. '
+    + '<b>Upgrade</b> is the item level you would actually gain over what you wear. There is no combined '
+    + 'score, and no weighting of one slot against another: no guide publishes one.</div>'
+    + '<div class="sub-note" data-plan="scope"><b>&ldquo;Your ranked slots&rdquo; means the numbered '
+    + 'candidates on the Gear recommendations tab</b> &mdash; the same list, read directly, not a second '
+    + 'opinion about it. Two slots cannot be counted here: trinkets are not ranked anywhere on this page, '
+    + 'and the five tier-set slots are ranked on the Tier &amp; Catalyst tab under Catalyst rules. '
+    + 'The equippable-drop counts on the right of each table still cover every slot.</div>'
+    + planDeltaNote(worn)
+    + '<div class="sub-note" data-plan="sortkey">' + sortState + '. Change it with the '
+    + '<b>Sort bosses and dungeons by</b> control above.</div>'
+    + guideRankingNote();
+
+  /* The scroll container wraps the TABLE, not the card: putting it on the card would scroll
+     the explanatory notes off with it on a narrow screen, and those notes are the half of this
+     surface that does not fit in a column header. */
   $('#src').innerHTML =
-    '<div class="card"><h3>The Venomous Abyss<span>raid</span></h3><table class="src-tbl">'
-    + '<tr><th>#</th><th>Boss</th><th>For you</th><th>Slots it can fill</th></tr>' + raidRows + '</table></div>'
+    '<div class="card"><h3>The Venomous Abyss<span>raid &middot; boss by boss</span></h3>'
+    + planNote
+    + '<div class="table-scroll"><table class="src-tbl">'
+    + '<tr><th>#</th><th>Boss</th><th>Improves</th><th>More options</th><th>Upgrade</th>'
+    + '<th>For you</th><th>Slots it can fill</th></tr>' + raidRows + '</table></div></div>'
     + '<div style="height:16px"></div>'
-    + '<div class="card"><h3>Mythic+ dungeon pool<span>8 dungeons</span></h3><table class="src-tbl">'
-    + '<tr><th>Expansion</th><th>Dungeon</th><th>For you</th><th>Slots it can fill</th></tr>' + dRows + '</table>'
+    + '<div class="card"><h3>Mythic+ dungeon pool<span>8 dungeons &middot; whole runs</span></h3>'
+    + '<div class="sub-note" data-plan="unit"><b>Mythic+ is grouped by dungeon, the raid by boss.</b> '
+    + 'You kill an individual boss, but you run a whole dungeon &mdash; so that is the unit each one is '
+    + 'planned around. The encounter inside the dungeon is named on each slot below.</div>'
+    + '<div class="table-scroll"><table class="src-tbl">'
+    + '<tr><th>Expansion</th><th>Dungeon</th><th>Improves</th><th>More options</th><th>Upgrade</th>'
+    + '<th>For you</th><th>Slots it can fill</th></tr>' + dRows + '</table></div>'
     + '<div class="note" style="margin:16px 0 0"><b>Mythic+ item levels are set by key level, not by the item.</b> '
     + 'The same drop is worth more from a higher key, which is why no item level is shown next to M+ items above.</div>'
     + '<table class="src-tbl" style="margin-top:14px"><tr><th>Key</th><th>End of dungeon</th><th>Great Vault</th></tr>'
@@ -2095,8 +2523,14 @@ $('#parse').addEventListener('click', () => {
     $('#curilvl').value = Math.round(ilvls.reduce((a, b) => a + b, 0) / ilvls.length);
   }
   renderUp();
+  // The game plan's upgrade delta is measured against exactly this paste (G2), so reading
+  // gear has to re-render the Loot sources tab too or its column stays empty until the next
+  // full render and the reader concludes the paste did nothing.
+  renderSrc();
 });
-$('#curilvl').addEventListener('input', renderUp);
+$('#curilvl').addEventListener('input', () => { renderUp(); renderSrc(); });
+// Guarded: both client test harnesses stub a fixed element list that predates this control.
+if ($('#plan-sort')) $('#plan-sort').addEventListener('change', renderSrc);
 
 /* ---- all gearing paths ---------------------------------------------------
    The full item-level ladder against every source that awards gear. Values

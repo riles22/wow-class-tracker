@@ -423,8 +423,18 @@ test("the Archon usage column shows a share, and reaches no ordering path", asyn
      may name the usage lane — a tiebreak added later would pass the behavioural test above
      whenever the fit values happen to differ. */
   const template = (await appTemplate()).replace(/\r\n/g, "\n");
-  const ordering = /function rankedCandidates\(list\) \{[\s\S]*?\n\}/.exec(template)[0]
-    + /const __guideLib = \(\(\) => \{[\s\S]*?\n\}\)\(\);/.exec(template)[0];
+  /* Scoped to the COMPARATORS, not the whole injected library, and comments stripped.
+     Two reasons this had to narrow (2026-08-13, Phase D): the library now legitimately
+     houses the game-plan math as well as the ranking, and that math DOES consume item level
+     — that is G2/G21, not a leak. And matching raw source made a PROSE mention of
+     `maxAttainable` inside a comment fail an assertion about code reachability. */
+    const stripComments = (code) => code.replace(/\/\*[\s\S]*?\*\//g, "").replace(/\/\/[^\n]*/g, "");
+  const comparators = ["function rankedCandidates\\(list\\)", "function rankCandidates\\(entries\\)",
+    "function consensusForItem\\(", "const bandOf ="]
+    .map((head) => new RegExp(`${head}[\\s\\S]*?\\n\\}`).exec(template)?.[0] ?? "")
+    .join("\n");
+  assert.ok(comparators.includes("rankCandidates"), "sanity: the comparators must be found");
+  const ordering = stripComments(comparators);
   assert.doesNotMatch(ordering, /ARCHON_USAGE|usageFor|usagePct|usageCell/);
   assert.doesNotMatch(ordering, /maxAttainable|ilvlCell|dropLevels/);
   /* …and usage is read in exactly one place and rendered in exactly one place: the

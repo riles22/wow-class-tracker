@@ -44,7 +44,7 @@ of them with `typeof x === 'undefined'` or that test fails with a bare Reference
 ## Pipeline
 
 ```
-node src/harvest-raid.mjs        # Venomous Abyss loot, per-item Wowhead PTR tooltips
+node src/harvest-raid.mjs        # Venomous Abyss loot, per-item tooltips + rewards-guide panels
 node src/harvest-dungeons.mjs    # M+ pool loot (8 dungeons); ilvl comes from key level
 node src/harvest-tier.mjs        # Tier 36 set items
 node src/harvest-specs.mjs       # spec capabilities + stat priorities (reads ../data/specs.json)
@@ -237,14 +237,47 @@ flip free: no second copy of "which season are we in" to remember.
 parser reads. **Every one of them is Season-1 or PTR data and none of it is shippable** — they
 exist to exercise the parser and the refusal, and each file says so in its own header.
 
+## Which encounter drops it — `droppedBy` (Phase D, G20)
+
+The game plan names the boss or dungeon you run for each item, so `droppedBy` stopped being
+a harvest sanity check and became something the page prints. It was also half empty:
+measured 2026-08-13, **65 of 104 raid items and 179 of 204 dungeon items** carried a source,
+because it came only from the item's own tooltip and the tooltip is often silent — three
+raid bosses were blank end to end.
+
+Two guide tables close it with **no extra request for M+ and one for the raid**. Wowhead's
+rewards guide (`.../raids/the-venomous-abyss-rewards-gear-loot` — the `/raids/` segment is
+load-bearing, the shorter spelling 404s) serves all nine gear-drop panels in one fetch, and
+each dungeon overview guide's scoped table already carries a `Boss Drop` column beside the
+IDs we take. Coverage goes to **104 of 104 and 204 of 204** in the fixture runs.
+
+**The guide is not authoritative and the design says so.** The tooltip wins wherever it
+speaks; the guide only fills silence; every item records which in `droppedBySource`
+(`"tooltip" | "guide" | null`); a guide name that is not a declared encounter of that
+dungeon never fills anything; and a disagreement is recorded, never resolved — the run
+refuses to write unless `WOW_ACCEPT_SOURCE_CONFLICTS=1`, because a wrong attribution is
+worse than a missing one once the client prints it. What that catches, measured on the
+recorded fixtures: Wowhead's Kings' Rest table omits **Aka'ali the Conqueror** and folds his
+8 items into The Council of Tribes; The Blinding Vale's table names **Lightblossom Trinity**,
+which our roster does not hold, on all 7 of Meittik's items; Murder Row's names **Atroxus**,
+a Voidscar Arena boss, on one row and lists another item under two bosses at once.
+
+`encounterAliases` in `harvest-dungeons.mjs` is what keeps those visible: it declares which
+differently-spelled names are ONE kill (`King Dazar` = `Dazar, The First King`), so the 11
+rows that differ only by spelling read as agreement instead of burying the 8 that are a real
+contradiction. Nothing is added to it to make a mismatch go away.
+
 ## Ground rules (carried over from the standalone project)
 
 - **Nothing is inferred.** Item fields come from the item's own tooltip; absent fields stay
-  null. Values only the community sheet has are marked provisional in the UI.
+  null. Values only the community sheet has are marked provisional in the UI. The one field
+  with a second source is `droppedBy`, which is why it carries `droppedBySource` — a guide's
+  attribution never wears the tooltip's authority.
 - **`data/weapon-proficiency.json` and `data/stat-priority-overrides.json` are curated,
   not scraped** — their provenance headers say exactly where each fact came from.
 - Harvesters refuse to overwrite data on unexplained loot-set changes
-  (`WOW_ACCEPT_LOOT_CHANGES=1` after review).
+  (`WOW_ACCEPT_LOOT_CHANGES=1` after review) and on tooltip-vs-guide drop-source conflicts
+  (`WOW_ACCEPT_SOURCE_CONFLICTS=1` after review — the tooltip stands either way).
 - **Guide priorities are the PRIMARY ranking signal, not a fallback** (reworded 2026-08-12
   under G1, when the model lane they used to fall back *from* was removed). They stay dated,
   they name the guide they came from, and they stay an ORDER: any spacing used to sort

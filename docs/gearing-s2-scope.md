@@ -456,6 +456,44 @@ nothing is corroborated. Rejected: a fixed source preference, which would quietl
 the default voice on all 40 specs; and newest-updated, which makes the default flip around as
 outlets publish and treats recency as authority.
 
+## Phase-D decisions (Riley, 2026-08-13)
+
+### ⚑ DECISION G18: coverage sorts by default; the delta sort is a visible switch
+
+G2 forbids merging the two components, but a ranked list still needs one sort key. So the key
+is **named on screen and chosen by the reader**: sorted by coverage by default, with a visible
+control that switches the sort to upgrade delta once a `/simc` paste makes the delta computable.
+Rejected: sorting by delta automatically when gear is pasted — the list would silently reorder
+on paste, and two readers would see different orders with nothing on screen explaining why.
+
+### ⚑ DECISION G19: coverage counts SLOTS, not items; depth is shown separately
+
+A source scores once for each **slot** it can improve, because you can only wear one Back — three
+Back options is one slot covered. The extra options are real but different value, so they render
+as a separate **depth** number rather than inflating coverage. This stops a boss dropping three
+near-identical cloaks from outranking one dropping your best weapon. Rejected: weighting slots by
+importance, which would require a slot-importance number no guide publishes — the fabricated
+quantity G1 and G9 both exist to prevent.
+
+### ⚑ DECISION G20: the game plan extends the Loot sources tab, it does not get its own
+
+The Loot sources tab already asks this exact question in a weaker form — it lists every boss and
+dungeon and counts equippable items per source, but never calls `scoreItem` and never joins to the
+ranking. Phase D upgrades it in place: one tab, no new navigation, and the reader who already goes
+there finds the answer improved rather than moved.
+
+**Raid is per BOSS, M+ is per DUNGEON, and the asymmetry is deliberate** — you kill individual
+bosses but you run a whole dungeon, so that is the unit each reader actually plans around.
+
+### ⚑ DECISION G21: the delta is measured at each source's highest attainable, labeled
+
+Each source shows what it could give you at its top difficulty or key level, with that basis
+named on the row ("at Mythic", "at +10"). Reuses `maxAttainable()`, which already joins
+`boss.dropLevels` and `DUNG.keyLevels`, and adds no control. The label is load-bearing: without
+it, a Mythic-only number reads as a promise about the difficulty the reader actually runs.
+Rejected: a difficulty selector (another control on a card just simplified to three) and
+per-difficulty rows (four-to-ten-fold table growth that buries the headline).
+
 ## Open questions for kickoff
 
-None outstanding. Seventeen decisions (G1–G17) are locked.
+None outstanding. Twenty-one decisions (G1–G21) are locked.
