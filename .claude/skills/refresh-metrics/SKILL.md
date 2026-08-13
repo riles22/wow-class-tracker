@@ -22,7 +22,14 @@ Local credentials come from either source, checked in this order:
 1. **Environment variables** `WCL_CLIENT_ID` + `WCL_CLIENT_SECRET` (also what
    `src/fetch-wcl.mjs` reads — you can run it locally to reproduce the CI evidence).
 2. **`.claude/skills/refresh-metrics/config.json`** (see `config.json.example`) — the
-   local path, same two fields (`clientId`, `clientSecret`).
+   local path. Its keys are **`wclClientId` / `wclClientSecret`**, which are NOT the
+   env-var names above. Nothing under `src/` ever reads this file — `fetch-wcl.mjs` and
+   `wcl-probe.mjs` take `process.env.WCL_CLIENT_ID` / `WCL_CLIENT_SECRET` and nothing
+   else — so if you are driving either script from the file, map the keys across
+   yourself. Reading it as `clientId`/`clientSecret` silently yields `undefined` and the
+   token POST fails with a bare **401** that looks exactly like revoked credentials; that
+   misread cost a local run on 2026-08-13 and was logged as a doc nit on 08-08 before
+   this line was corrected.
 
 If either is present, use the sanctioned v2 GraphQL API instead of HTML scraping: POST
 client-credentials to `https://www.warcraftlogs.com/oauth/token`, then query
