@@ -1929,3 +1929,35 @@ changed or superseded; this agent fetched nothing from YouTube or any transcript
   readable, overwriting them with a new title would trade information for recency.
 - Standing recommendation, unchanged: a local yt-dlp catch-up run clears all 15 queued videos
   for free.
+
+## 2026-08-13 (nightly CI, 11:47Z — Opus 5; single-shot) — discovery complete, transcripts still limit-exceeded
+
+- **TRANSCRIPT API KEY problem: limit-exceeded.** `transcript-fetch/summary.json`
+  (2026-08-13T11:28:23Z): 1 requested / 0 fetched, `bqVHzvKJCuA` → "limit-exceeded", remaining
+  queue untouched. Supadata's free tier is **100 requests per MONTH** and the budget is spent,
+  so **0 takes and 0 metaNotes** were added, changed or superseded. Nothing was fetched from
+  YouTube or any transcript API by this agent.
+- **Discovery ran in full:** 44 distinct channels (114 class-creator entries + 3
+  generalCreators), **44/44 HTTP 200, 0 RSS failures, 660 videos enumerated**, diffed against a
+  **955-id** seen-set built from structured data only (pending `seen[]` + `skipped[]` +
+  `videos[]`, union every `youtu.be` id in a take or metaNote). **11 unseen, all inside the
+  12.1 cycle** (none pre-2026-06-18).
+- **5 queued** (nightly keyword filter KEPT, per the monthly-budget rule), taking the queue to
+  **20**: `sh7XxGz4DD8` Shadarek "Havoc Demon Hunter 12.1 Raiding & Mythic+ Guide" (drain this
+  one first — a real spec guide from a scoped Havoc/Devourer creator), `luzhyXtdocM`
+  MadSkillzzTV "12.1 Targeted Spells CHANGED", `81vn_Aq6k1Q` YoDaTV "A Few Tips for the First
+  Week of 12.1...", `Z9HAi6-QVUs` Kalamazi and `nYatsKq_vVI` Shindigg (both stream VODs whose
+  titles repeat an already-queued entry from 08-10/08-12 — queued because they pass the filter,
+  but they are the low-value end of the queue).
+- **6 not queued and deliberately NOT written into `seen[]`:** `j1VG7ZgUZ9A` + `qf81kWc96Z8`
+  (Critcake stream titles), `hGV_YCJOD3E` (Tettles short), `r4VxP_NNBFM` (Tactyks mount
+  giveaway), `vrFiZ1rlGz4` (Shindigg meme short), `6HWnK5sPxb8` (Dalaran Gaming PvP duels —
+  same format as the already transcript-verified skip `FyzXK8_AMQ8`). A nightly keyword
+  dismissal is a budget measure, not a durable verdict: hiding these would keep them out of the
+  local unfiltered, date-bounded yt-dlp sweep that is supposed to reconsider them. `seen[]`
+  stays at 483, `skipped[]` at 275.
+- `generalCreators[].latest` left alone on purpose — those fields hold *distilled* one-line
+  reads, not bare titles.
+- Standing recommendation, unchanged and now worth more: a local yt-dlp catch-up run clears all
+  **20** queued videos for free, and the queue now contains the first real per-spec 12.1 guides
+  (Shadarek Havoc DH, NeekapHere Retribution Paladin).

@@ -763,3 +763,40 @@ skipped fetch.
   Era: still Season-1 content (raid selector "VS / DR / MQD" + the nine S1 bosses; the eight S1
   dungeons) → `seasonVerified` stays **s1**. New this run: the zone-type selector now offers a
   third option, **"PTR M+"**, alongside Mythic+ and VS/DR/MQD — noted for the flip, not ingested.
+
+## 2026-08-13 (nightly CI, 11:47Z — Opus 5; single-shot) — Archon re-cut: 2 raid tier moves + 23 per-encounter; Icy Veins M+ still scale-blocked
+
+- **Transports, per the standing rule:** icyveins 6 + icyveins-ptr 3 pages by direct curl with
+  a browser UA (200, 210–357 KB); method 2 pages by direct curl; wowhead 6 pages with the FULL
+  browser header set (r.jina.ai is dead on `/guide/*` and was not tried); archon 6 aggregate +
+  51 per-encounter pages by direct curl → `__NEXT_DATA__`. No proxy anywhere.
+- **archon — the only source that moved.** Aggregate: 80 assignments, **2 tier moves, both
+  raid — Discipline Priest S→A, Restoration Druid A→B**; both moved the consensus SCORE only
+  (Disc raid 86→79, Resto Druid raid 73→67), no letter change. Per-encounter: 51/51 pages,
+  40/40 specs each = 680 rows, **23 moves, all raid** — 11 on Salhadaar (Fire Mage A→S, Arms
+  A→B, four healers B→A), 5 Chimaerus, 4 Midnight Falls, singles on Imperator/Crown/Beloren;
+  every M+ per-dungeon tier byte-identical. `encounter-tiers.json` asOf → **2026-08-12**
+  (Archon's own cut date). Survivability re-parsed 40/40, **0 moves**, so not re-merged.
+  `lastUpdated` again 2026-08-12T12:00:00Z — but this time the numbers behind it DID move
+  (raid parse counts −15%), the reverse of last night. The rule stands unchanged: the
+  **parse-count column is the re-cut detector, not the label.** Era: still S1 content →
+  `seasonVerified` s1.
+- **icyveins — raid 40/40, 0 moves; M+ BLOCKED for the fourth day.** The live M+ pages publish
+  S+/A+/B+/TBD, the `icyveins` scale has five bands with neither S+ nor B+, and the live M+
+  letters are still byte-identical to `icyveins-ptr` on all 39 placed specs. 34 of 40 stored M+
+  letters would move if a merge were possible (Arcane Mage B→S+, Beast Mastery A+→C, Blood DK
+  C→S, Subtlety A→TBD). `scales.json` is CODEOWNERS-owned ⇒ **owner escalation**, stored M+
+  untouched. Era detail worth keeping: the raid-HEALER page still titles itself "Patch 12.0.7"
+  while its changelog's top line reads "11 Aug. 2026: Updated for Midnight Season 2 launch" —
+  its other 20 "Season 2" hits are nav chrome, so read the CHANGELOG, not the nav. Body over
+  title ⇒ `seasonVerified` s2 on all six.
+- **icyveins-ptr — 40/40, 0 moves.** No rebuild since 2026-08-09 (Sunday cadence). Subtlety
+  Rogue still a literal `<td>TBD</td>` → explicit null (39 rated, floor 24). `published`
+  re-read: dateModified 2026-08-09 on all three; the in-body "Last UPDATED" still says 08-02
+  and dateModified wins.
+- **method — 79 assignments, 0 moves.** Still "Last Updated 31st March 2026" with **zero**
+  occurrences of "12.1" or "Season 2" → `seasonVerified` s1. Vengeance DH still absent from the
+  raid list; omitted, not invented.
+- **wowhead — 80 assignments, 0 moves, but the M+ DPS page REBUILT TODAY** (JSON-LD
+  dateModified 2026-08-13, was 08-08) without moving a letter; stored `published` advanced for
+  that page only. All six titles read "Midnight Season 2" → `seasonVerified` s2 (season-ahead).

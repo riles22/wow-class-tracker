@@ -1081,3 +1081,32 @@ fetched here.
 Season 2 at **August 18 (NA) / 19 August (EU)**, and the tracker is still configured pre-flip
 (`PHASES.liveSeason` "s1", `SNAPSHOT_PHASE` "12.1-ptr", `PHASE_FLIP_DUE` 2026-08-20). Owner
 one-shot; see docs/s2-flip-runbook.md.
+
+## 2026-08-13 (nightly CI, 11:47Z — Opus 5; single-shot) — no new build; the only new class item is a tuning ROADMAP
+
+- **Feed unchanged at 15 entries**, newest still the 2026-08-06 launch patch notes.
+- **(1) Official thread** `2317811.json`: posts_count 17, highest_post_number still **19**
+  (Linxy, 2026-07-31T23:42Z). With 12.1 shipped the thread is effectively closed for this cycle.
+- **(2) Wowhead news RSS**: 40 items, 2026-08-08 → 08-13, bodies read from `content:encoded` in
+  a single fetch. Exactly one new class-relevant item — **"Class Tuning Roadmap for Midnight
+  Season 2"** (news=382435, 08-12 18:34) — and it is a **schedule, not tuning**: Season 2 opens
+  **August 18** with the first tuning pass that day, then **Aug 25 / Sep 1 / Sep 22**, with
+  roughly four more passes before Season 3 and hotfixes "at any time". No per-spec line ⇒ no
+  feed entry and no outlook vote. Everything else is live-service (scenario bugs, hero gear,
+  Renown rewards, sparks, housing, Coiled Isle).
+- **(3) Wowhead blue tracker** (`/blue-tracker?rss` with the FULL browser header set — a UA-only
+  fetch is CloudFront-403 and reads as an empty feed): 50 items back to 08-07; the only
+  class-relevant entries are the same roadmap mirrored as "Season 2 Class Tuning Plans". **No
+  standalone class-tuning blue post** of the Kaivax "Healer Tuning" shape.
+- No set-touching line landed ⇒ **no `spec.tierSet` upkeep due**. Writeup coverage holds at
+  **39/40**; Demonology Warlock's `ptr: null` stays deliberate ("no changes going to Season 2"
+  is not a verdict) and nothing was manufactured from tuning lines.
+- **WCL (evidence-only on the runner):** `wcl-fetch/evidence.json` verdict **"rdps-broken"** —
+  zone 54 (34 rows, 2026-07-28), zone 52 `ptrDummy` (27 specs, 2026-08-10) and zone 56 (40 rows,
+  2026-08-10) are rDPS-family and stay frozen; their raw-DPS counterparts landed via the
+  deterministic step. Zone 57 (Tidebound Grotto) is not covered by the fetch step and was not
+  fetched here.
+- **Migration status, unchanged and NOT attempted:** 12.1 is live; Blizzard's own roadmap post
+  now re-confirms **Season 2 on August 18**, inside `PHASE_FLIP_DUE` 2026-08-20. Tracker is
+  still pre-flip (`PHASES.liveSeason` "s1", `SNAPSHOT_PHASE` "12.1-ptr"). Owner one-shot; see
+  docs/s2-flip-runbook.md.

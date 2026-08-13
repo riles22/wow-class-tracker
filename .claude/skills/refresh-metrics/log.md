@@ -1159,3 +1159,51 @@ one-shot re-harvest, not a per-spec drip.**
   `wcl-ptr-raid-raw` 27 rows (six Venomous Abyss encounters with parses; The Coiled Altar and
   Ula'tek both 0), `wcl-ptr-mplus-raw` 27 rows (all 8 S2 PTR dungeons at 2000). The five
   rDPS-family cuts stay frozen and unchanged.
+
+## 2026-08-13 (nightly CI, 11:47Z — Opus 5; single-shot) — Bloodmallet retired the MID1 charts; Archon raid re-cut landed
+
+- **BLOODMALLET HAS RETIRED MID1 — this is the finding of the run.** All 27 DPS specs
+  requested, 4 retries each: **14 charts returned and every one is `simc_settings.tier ==
+  "MID2"`** (re-simmed 2026-08-12 19:37–19:45 UTC); the other **13 return the 76-byte
+  `{"status": "error"}` body on all four tries**, and 12 of those served live MID1 charts
+  yesterday (Havoc + Devourer DH, Balance + Feral Druid, Devastation Evoker, Windwalker,
+  Retribution, Assassination + Outlaw, Demonology, Arms + Fury; the 13th is Augmentation
+  Evoker, the documented genuine absence). Consequence to plan around: the stored MID1 pool can
+  no longer be **refreshed or completed**, and a 14-MID2/12-MID1 mix would make every
+  ST/cleave/AoE label an artifact of which specs upstream re-simmed (the labels are within-role
+  percentiles). Nothing written; 26 profiles stay whole at 2026-07-08 coverage (36 days vs
+  maxAgeDays 5 — the red heartbeat is the correct signal). The MID2 re-harvest is an owner
+  one-shot for the 12.1-live migration and is now additionally **blocked on Bloodmallet
+  publishing the remaining 13 specs**.
+- **archon — the raid half re-cut, the M+ half did not.** 95th-pct DPS 33 rows and HPS 7 rows
+  all moved (Frost Mage 177412/22611 → 177498/19239; parse counts −15% as S1 winds down),
+  merged at Archon's own cut date **2026-08-12**. M+ score 40/40 and the M+ popularity half are
+  byte-identical for the third run ⇒ **not** re-stamped, so they stay at 2026-08-10 and both
+  those requirements are honestly `partial`. Reminder the run re-proved: the healer page's
+  table also carries a `dps` column (healer DPS) — excluded, as the stored 33-row shape always
+  has.
+- **murlok — 40/40, every value unchanged** (S1 ladder frozen). Parser note: split on `<a>`
+  tags and test for `meta-item` anywhere in the tag — attribute order is NOT stable — and check
+  that the rank column comes out contiguous (1..27 / 1..7 / 1..6); a gap is the tell that the
+  regex dropped specs. Merged at the run date, which is legitimate here and only here: murlok
+  publishes no date of its own, so `asOf` can only mean "observed live on".
+- **wowmeta — upstream has not re-run.** snapshotDate still 2026-08-11, all 40 `lowerBound` +
+  `numberOfCharacters` identical at the stored 1-decimal precision ⇒ nothing merged, `partial`.
+  (Round to 1 decimal, not to an integer — `Math.round` alone reports 36 phantom moves.)
+- **simulationcraft — same completed report** (Timestamp 2026-08-08 07:28:33+0000, 1205-01 for
+  12.0.7.68974), 26/26 stored values reproduced exactly. **New parse gotcha:** the player-name
+  regex must allow a **hyphen** — `MID1_Demon_Hunter_Devourer_Void-Scarred` is Devourer DH's
+  best variant (118341); `[A-Za-z_]+` silently drops it and scores the 115175 Annihilator
+  profile, which looks exactly like upstream drift.
+- **mythicstats — still period 1075** (MID1, 10000 characters / 3247 unique), 36 bars parsed,
+  2 moved (Unholy DK 17.8→17.7, Subtlety 0.2→0.3): the page recomputes *within* a period.
+  **Beast Mastery is back** after yesterday's absence → absent set back to four (Vengeance DH,
+  Restoration Druid, Devastation Evoker, Protection Paladin).
+- **Robydoby (best-effort, outside the contract) — nothing new.** Newest Mythic week still
+  **24/7** (Sszorak #5, Twin Fangs #6), already stored at 2026-07-24. Untouched.
+- **WCL — no fetch of any kind by this agent.** `wcl-fetch/evidence.json` (attemptedAt
+  2026-08-13T11:28Z) verdict **"rdps-broken"**. The three raw-DPS keys landed via the
+  deterministic step itself: `wcl-dummy-raw` 102 rows (1T 2000 / 2T 658 / 3T 297 / 5T 2000),
+  `wcl-ptr-raid-raw` 27 rows (six Venomous Abyss encounters with parses; Coiled Altar and
+  Ula'tek 0), `wcl-ptr-mplus-raw` 27 rows (all 8 S2 PTR dungeons at 2000). The five rDPS-family
+  cuts stay frozen and unchanged.
