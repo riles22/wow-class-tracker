@@ -181,9 +181,11 @@ it with the 12.2 transition scope, not now.
   URLs + item-count fingerprints, so a live re-harvest fails until the pins are
   re-reviewed. Check the stat-priority guide pages' own season state at the source first.
   Soft window opens 08-18/19.
-  **Riley (2026-08-12): significant gearing updates are planned BEYOND the re-harvest** —
-  treat the gearing lane as a first-class pipeline item once the flip lands; scope to be
-  defined with Riley at kickoff rather than inferred.
+  **SCOPED 2026-08-12 — see `docs/gearing-s2-scope.md`.** The re-harvest is now Phase E of
+  a four-decision overhaul, and Phase A (removing the SimC reference pipeline) is what
+  UN-PINS the six gear data files whose SHA-256 hashes currently make any re-harvest fail
+  the gearing build. Nothing gearing-side lands before the flip: gearing's tests run under
+  the root `npm test`, so a broken gearing breaks the nightly publish gate.
 
 ## Deliberately left alone (checked 08-11, do not re-open without new evidence)
 
