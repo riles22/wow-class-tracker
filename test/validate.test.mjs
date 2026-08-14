@@ -672,11 +672,17 @@ test("seasonLetterWarnings flags a season-ahead source whose letters were never 
       `${id}/${bracket} warned but is not season-ahead`);
   }
 
-  // Positive control: force a split by rewinding one source's letters to its frozen record.
+  /* Positive control: force a split by rewinding one source's letters to its frozen record.
+     Requires a season-ahead source that HAS a frozen record — which is a live-window
+     condition, not a permanent one: the frozen lookup is keyed by season, so at the phase
+     flip `seasonFinal[liveSeason]` is simply absent and the lane goes cold by design. Post-
+     flip there is nothing to build a control from, so return rather than assert. Found in
+     the 2026-08-14 flip dry run, where asserting this was one of five reds at the flip
+     state. The check above still runs in every state; only the control needs a subject. */
   const ahead = data.sources.find(s => s.kind === "tier-list"
     && ["raid", "mplus"].some(b => aheadSeasonFor(s, b, PHASES.liveSeason) != null
       && data.seasonFinal?.[PHASES.liveSeason]?.[s.id]?.[b]?.letters));
-  assert.ok(ahead, "fixture needs at least one season-ahead source with a frozen record");
+  if (!ahead) return;
   const bracket = ["raid", "mplus"].find(b => aheadSeasonFor(ahead, b, PHASES.liveSeason) != null
     && data.seasonFinal[PHASES.liveSeason][ahead.id]?.[b]?.letters);
 

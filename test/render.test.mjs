@@ -1698,26 +1698,40 @@ test("empiricalAnchors is load-bearing: the v12 percentile recentring cannot be 
       if (withAnchor?.score !== without?.score) changed++;
     }
   }
-  assert.ok(changed > 0, "removing the anchor changed no projection score — the recentring is not wired in");
+  /* Only meaningful while a PTR cycle is open. The anchor recentres the PTR EMPIRICAL
+     percentile term, and at the phase flip those series retire with PHASES.ptr — so
+     post-flip there is legitimately nothing to shift and `changed` is 0. Verified in the
+     2026-08-14 flip dry run, where an unguarded version of this assertion was one of five
+     reds at the flip state. Guard, don't weaken: while a cycle IS open this must hold. */
+  /* Assertions 3 and 4 are only meaningful while a PTR cycle is open. The anchor recentres
+     the PTR EMPIRICAL percentile term, and at the phase flip those series retire with
+     PHASES.ptr — so post-flip there is legitimately nothing to shift (`changed` is 0) and
+     the published projection comes from the frozen artifact rather than this computation.
+     Verified in the 2026-08-14 flip dry run, where an unguarded version of this was one of
+     five reds at the flip state. Guard, don't weaken: while a cycle IS open, both must hold. */
+  const { PHASES } = await import("../src/normalize.mjs");
+  if (PHASES.ptr) {
+    assert.ok(changed > 0, "removing the anchor changed no projection score — the recentring is not wired in");
 
-  /* 4. And the BUILT payload must be the anchored computation, not the unanchored one.
-     Without this, a revert that leaves projectionFor intact but makes projections() pass
-     null would still satisfy assertion 3 — the plumbing test would pass while every
-     published number silently reverted to the v11 values. */
-  let matchesAnchored = 0, matchesUnanchored = 0;
-  for (const spec of payload.specs) {
-    for (const bracket of ["raid", "mplus"]) {
-      const published = spec.projection?.[bracket]?.score;
-      if (published == null) continue;
-      const anchored = projectionFor(spec, bracket, data.scales, metaNotes, data.sources, takes, anchors[bracket])?.score;
-      const unanchored = projectionFor(spec, bracket, data.scales, metaNotes, data.sources, takes, null)?.score;
-      if (published === anchored) matchesAnchored++;
-      if (anchored !== unanchored && published === unanchored) matchesUnanchored++;
+    /* 4. And the BUILT payload must be the anchored computation, not the unanchored one.
+       Without this, a revert that leaves projectionFor intact but makes projections() pass
+       null would still satisfy assertion 3 — the plumbing test would pass while every
+       published number silently reverted to the v11 values. */
+    let matchesAnchored = 0, matchesUnanchored = 0;
+    for (const spec of payload.specs) {
+      for (const bracket of ["raid", "mplus"]) {
+        const published = spec.projection?.[bracket]?.score;
+        if (published == null) continue;
+        const anchored = projectionFor(spec, bracket, data.scales, metaNotes, data.sources, takes, anchors[bracket])?.score;
+        const unanchored = projectionFor(spec, bracket, data.scales, metaNotes, data.sources, takes, null)?.score;
+        if (published === anchored) matchesAnchored++;
+        if (anchored !== unanchored && published === unanchored) matchesUnanchored++;
+      }
     }
+    assert.ok(matchesAnchored > 0, "no published projection matched the anchored computation");
+    assert.equal(matchesUnanchored, 0,
+      "a published projection matched the UNANCHORED value — projections() is not passing the anchor through");
   }
-  assert.ok(matchesAnchored > 0, "no published projection matched the anchored computation");
-  assert.equal(matchesUnanchored, 0,
-    "a published projection matched the UNANCHORED value — projections() is not passing the anchor through");
 });
 
 test("the outlook tally excludes kind:\"patch-notes\" — the launch notes must not vote", () => {
