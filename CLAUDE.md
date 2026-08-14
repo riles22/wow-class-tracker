@@ -15,6 +15,15 @@ on push to `master`; the file also still opens directly in a browser.
   discovery reachability). A REPORT, not a gate; `--strict` exits 1 on any HIGH finding.
 - `npm run serve` — preview `dist/` at http://localhost:8317 (serves both published
   pages: `/` → index.html, `/gearing.html` → the gearing explorer)
+- `npm run report-card` — grade the frozen pre-launch projection. Pre-settlement it runs in
+  DRIFT mode against the CURRENT live consensus, which the 12.1 forecast is *designed* to
+  diverge from, so its "misses" and its confidence breakdown are not accuracy measurements.
+  Only GRADE mode (after the settled S2 consensus exists, ~09-01) scores the forecast.
+- `npm run gearing:build` — rebuild `gearing/wow-s2-gearing.html`. **Required after any edit
+  to `gearing/src/app.template.html`**: the artifact is committed, and a template edit
+  without a rebuild publishes nothing (a test pins this since 2026-08-14).
+  `npm run gearing:test` runs gearing's tests alone — though the root `npm test` already
+  discovers them, which is why a broken gearing reds the nightly publish gate.
 - `node src/check-refresh.mjs --manifest|--age` — refresh integrity gates (nightly
   publish contract / staleness heartbeat) against `data/required-sources.json`
 
@@ -103,15 +112,28 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   the whole point. Writing one take's sentiment into `ptr.verdict` would hand a single
   YouTube video the full dated-verdict outlook shift — Feral has exactly one take — which
   is the "weakest evidence steers" inversion already rejected on the meta nudge. Instead
-  `expertRead()` (render.mjs, PROJECTION_VERSION 9) aggregates the whole non-superseded
-  PTR-era take set, one vote per creator, shrunk by corroboration. Coverage as of 2026-08-11:
-  **one** spec has no writeup (Demonology Warlock, whose null is deliberate — the source
-  reported no changes, and "nothing changed" is not a verdict), down from nine; every spec
-  now carries at least one live take, and **three** have no RAID-scoped one (Blood DK,
-  Vengeance DH, Retribution Paladin), which is the number that matters because raid is the
-  bracket with almost no PTR empirical evidence. These counts are hand-maintained and go
-  stale — the durable fix is a computed digest coverage line (`audit-2026-07-24.md`, D12),
-  still unbuilt. Since v8 the PROJECTION's
+  `expertRead()` (render.mjs; the model is at PROJECTION_VERSION 13 — the version log lives
+  beside the constant and is authoritative, this prose is not) aggregates the whole
+  non-superseded PTR-era take set, one vote per creator, shrunk by corroboration.
+  **DO NOT TRUST THE COVERAGE NUMBERS BELOW — RECOMPUTE THEM.** They are hand-maintained,
+  they go stale within days, and on 2026-08-14 an audit found them not merely out of date but
+  wrong in COMPOSITION: they named three raid gaps that were all already closed while missing
+  the one that was actually open. Chasing a closed gap wastes a run; missing an open one is
+  worse. The two-line recomputation, which takes seconds and is always right:
+  ```
+  node -e 'const s=require("./data/specs.json"),t=require("./data/creator-takes.json");
+  import("./src/render.mjs").then(r=>{const g=b=>s.filter(x=>!r.expertRead(x,t.takes,b)).map(x=>x.class+" "+x.spec);
+  console.log("no writeup:",s.filter(x=>!x.ptr).map(x=>x.class+" "+x.spec));
+  console.log("no raid take:",g("raid")); console.log("no mplus take:",g("mplus"));})'
+  ```
+  Coverage as measured 2026-08-14: **one** spec has no writeup (Demonology Warlock, whose null
+  is deliberate — the source reported no changes, and "nothing changed" is not a verdict), down
+  from nine; every spec carries at least one live take; and **one** has no RAID-scoped one
+  (**Brewmaster Monk**). That last count is the one that matters, because raid is the bracket
+  with almost no PTR empirical evidence — and note it is a TANK, the role this file elsewhere
+  records as having no PTR raid signal of any kind. The durable fix is a computed digest
+  coverage line (`audit-2026-07-24.md`, D12), still unbuilt; until it exists, recompute rather
+  than read. Since v8 the PROJECTION's
   read is **bracket-scoped** (an explicit `bracket: "raid"|"mplus"|"both"` on the take wins;
   else the patchContext text decides via the same regexes as the meta nudge; naming neither
   → both) — a creator's M+ tier-list read no longer moves raid forecasts. The whole-spec
@@ -550,7 +572,12 @@ its own row in `required-sources.json`, so a run that skips it fails the publish
    zone **56 is the 12.1 PTR M+** ("Mythic+ Season 2 (PTR)", same recipe as zone 47 →
    metrics "Median rDPS/HPS (12.1 PTR M+ testing[, tank])", see the ptr-watch skill);
    zone **52 is the Dummy Dome** (fixed-target-count PTR dummies → `spec.ptrDummy`, see
-   the ptr-watch skill) — all PTR data era-tagged `"ptr"`. Statistics-table
+   the ptr-watch skill); zone **57 is Tidebound Grotto** (the 12.1 raid, opens 2026-08-18) —
+   probed exhaustively 2026-07-28 and it EXISTS but WCL has never aggregated it, so every
+   statistics table returns "No statistics have been collected…". Empty is not an error:
+   ingest nothing and leave the stored rows and snapshot alone. Reserved metric names and the
+   verified recipe are in the ptr-watch skill, so a run auto-ingests the moment tables
+   populate — all PTR data era-tagged `"ptr"`. Statistics-table
    endpoint needs `X-Requested-With: XMLHttpRequest` + browser UA + Referer; response is
    an HTML fragment with unclosed `<td>` — parse leniently. **Fetch each cut fresh every
    run** — the automation no longer gates fetches on staleness or a once-daily cap (policy
@@ -583,9 +610,12 @@ gotcha live in the refresh-metrics skill.
 Title-filtering before a transcript fetch is **run-mode dependent**, because the two
 transcript sources cost wildly different amounts. A **local run uses yt-dlp and must NOT
 keyword-filter** — fetch every unseen video from a tracked creator and let the transcript
-decide, bounded by DATE instead of title: only videos published on or after the **first
-entry in `data/ptr-builds.json`** (the cycle's opening build, 2026-06-18 for 12.1), since a
-video predating the cycle cannot discuss it. That bound is load-bearing. Dropping the title
+decide, bounded by DATE instead of title: only videos published on or after the **cycle's
+OPENING build — the OLDEST date in `data/ptr-builds.json`**, 2026-06-18 for 12.1, since a
+video predating the cycle cannot discuss it. Take the DATE, never an index: that file is
+stored newest-first, so `builds[0]` is the most RECENT build and reading it as the bound
+would cut the sweep two months short (this sentence said "first entry" until 2026-08-14).
+That bound is load-bearing. Dropping the title
 filter alone exposes **435 unseen videos**, not the ~42 the change was reasoning about,
 because every newly-added creator has their ENTIRE 15-entry RSS feed unseen (Tactyks 15/15,
 J-Funk 15/15, Dorki 15/15, and eleven more) and RSS reaches back years; 182 of those predate
@@ -648,15 +678,25 @@ src/      build.mjs · template.html · render.mjs · normalize.mjs · validate.
           the only WCL / transcript-API credential holders) ·
           fetch-published.mjs (deterministic pre-agent page-self-date evidence —
           no credentials; feeds check-refresh's published gate) ·
-          wcl-probe.mjs (dispatch-only WCL/diagnostic probe, no standing role)
+          report-card.mjs (`npm run report-card` — grades the frozen pre-launch projection
+          against the settled post-launch consensus; pre-settlement it runs in DRIFT mode,
+          where the answer key is the CURRENT live consensus the forecast is designed to
+          diverge from, so "misses" there are expected and only GRADE mode scores accuracy) ·
+          audit-creators.mjs (`npm run audit:creators` — the creator-layer invariants) ·
+          assets/ (favicon + apple-touch icons, copied into dist/ by build.mjs) ·
+          wcl-probe.mjs (dispatch-only WCL/diagnostic probe, no standing role — also carries
+          the S2 zone ENUMERATION the flip's WCL contract swap reads its zone ids from)
 test/     normalize · validate · render · build · apply-metrics · apply-ratings ·
-          check-refresh · community-overrides · digest · fetch-transcripts · fetch-wcl ·
-          fetch-published · freeze-season · season-archive · ui-invariants (the ONLY tests that execute template.html's
+          check-refresh · community-overrides · digest · escaping · fetch-transcripts ·
+          fetch-wcl · fetch-published · freeze-season · report-card · season-archive ·
+          snapshot · ui-invariants (the ONLY tests that execute template.html's
           client JS — they need Playwright, which is deliberately not a dependency, so
-          `npm test` SKIPS all 23 on a machine without it and CI runs them in its own job.
+          `npm test` SKIPS them on a machine without it and CI runs them in its own job.
           NOTE: Riley's local checkout HAS playwright + chromium resolved, so `npm test`
-          there reports 363 pass / 0 skipped and really does execute them — do not read a
-          green local run as "the UI invariants were skipped". After any template.html
+          there runs the whole suite with 0 skipped and really does execute them — do not
+          read a green local run as "the UI invariants were skipped". Treat any pass/skip
+          COUNT written here as stale on sight and read it off the run instead; as of
+          2026-08-14 it is 24 invariants inside 385 total. After any template.html
           change, run them for real:
           `npm i --no-save playwright@1.61.1 && npx playwright install chromium && npm test`)
 dist/     index.html + gearing.html  (generated — open directly in a browser; the two
@@ -667,9 +707,18 @@ dist/     index.html + gearing.html  (generated — open directly in a browser; 
 docs/     working notes (finder-audit.md — HISTORY, the Spec Finder was removed
           2026-08-05 · security-audit-2026-07.md ·
           cloud-routine.md · portfolio-audit-2026-07-18.md · audit-2026-07-23.md ·
-          audit-2026-07-24.md — audit dispositions. Read the NEWEST audit before
-          proposing work: its "Still open" and "Leave alone" sections record what has
-          already been decided, and re-litigating them wastes a run.
+          audit-2026-07-24.md · audit-2026-07-25-premerge.md — audit dispositions.
+          Read the NEWEST audit before proposing work: its "Still open" and "Leave alone"
+          sections record what has already been decided, and re-litigating them wastes a
+          run. **Do not take this list's ordering as the recency ordering** — it is
+          hand-maintained and has already fallen behind once (until 2026-08-14 it stopped
+          at 07-24 while 07-25-premerge existed, so an obedient reader picked the wrong
+          "newest"). `ls docs/` is the authority. ·
+          adr-simc-reference-pipeline.md + adr-simc-curated-profiles.md — the gearing SimC
+          lane's ADRs, which docs/gearing-s2-scope.md Phase A retires ·
+          era-prose-scope.md — the launch-label mechanism (build-time era tokens) ·
+          archive/ — preserved run logs from a retired agent runtime; a RECORD, not
+          instructions, and historically wrong about the project as it now stands.
           projection-audit-2026-08.md — the 12.1 model audit, with the frozen-weights
           recommendation. compare-all-scope.md — the design record for ⊞ Compare all
           (BUILT 2026-08-03), including the deltas between scope and build.
@@ -683,6 +732,13 @@ docs/     working notes (finder-audit.md — HISTORY, the Spec Finder was remove
           Phase-1 machinery must land before PHASE_FLIP_DUE (Aug 20).
           s2-flip-runbook.md — the operational 08-18 flip checklist (execution mode:
           LOCAL RUN, chosen 2026-08-12); read it before touching anything flip-related.
+          s2-flip-test-patch.diff + s2-flip-test-patch-verify.md — the PRE-STAGED flip-day
+          test patch and its verification log. The patch is applied INSIDE the flip commit
+          (`git apply docs/s2-flip-test-patch.diff`) and is what makes `npm test` land green
+          at the flip state; it is LF-pinned in .gitattributes so its hunks stay byte-exact.
+          Re-verified 2026-08-14: applied to the current tree it reds exactly the two
+          deliberate flip-only pins (check-refresh's age gate, normalize's PHASES
+          vocabulary) and nothing else — that is the check to re-run if it is ever edited.
           gearing-s2-scope.md — the SCOPED gearing overhaul (2026-08-12, eight owner
           decisions G1-G8 locked): guide-consensus ranking replaces sim-derived weights, the
           SimC reference pipeline is REMOVED from gearing (it also un-pins the six gear

@@ -1,13 +1,15 @@
 # Spec Tracker
 
-Currently covering: 12.0.7 / Season 1 → **12.1 PTR "Curse of Ula'tek"**.
+Currently covering: 12.0.7 / Season 1 → **12.1 "Curse of Ula'tek"** (patch live since 11 Aug 2026;
+Season 2 opens 18 Aug, when the live-season baseline moves with it).
 
 [![Deploy](https://github.com/riles22/wow-class-tracker/actions/workflows/deploy.yml/badge.svg)](https://github.com/riles22/wow-class-tracker/actions/workflows/deploy.yml)
 
 A multi-source class/spec performance tracker for **World of Warcraft: Midnight** (Patch
-12.1 PTR — *"Curse of Ula'tek"*). All 40 Midnight specs, rated across several tier lists
-into a single consensus, layered with live-season numbers, per-spec 12.1 PTR change reads,
-and a spec-finder quiz — compiled into one self-contained HTML page.
+12.1 — *"Curse of Ula'tek"*). All 40 Midnight specs, rated across several tier lists into a
+single consensus, layered with live-season numbers, per-spec 12.1 change reads, and the
+tracker's own forecast for the coming season — compiled into one self-contained HTML page,
+plus a companion Season 2 gearing explorer.
 
 **▶ Live: https://riles22.github.io/wow-class-tracker/**
 
@@ -16,15 +18,17 @@ Made by **[riles22](https://github.com/riles22)**. A personal project — if you
 ## What it shows
 
 - **Consensus tiers** from every tier-list source in `sources.json` (currently Icy Veins,
-  Method, Wowhead, Archon, and WoWMeta), each mapped onto one
-  0–100 axis and averaged — with a divergence marker where the sources disagree. A toggle
-  switches from the consensus to any single source.
-- **Era toggle** — view the 12.0.7 live season, the 12.1 PTR read, or both at once.
+  Method, Wowhead and Archon — four editorial tier lists), each mapped onto one 0–100 axis and
+  averaged, with a divergence marker where the sources disagree. A toggle switches from the
+  consensus to any single source. Only real tier lists count here: WoWMeta was retyped to a
+  metrics source in July 2026 once its letters were found to cluster on player count rather
+  than performance, and it now contributes a number instead of a grade.
+- **Era toggle** — view the 12.0.7 live season, the 12.1 read, or both at once.
 - **Numbers that stay numbers.** Only real tier lists feed the letter consensus; measured
   data is shown as figures and never converted to grades — Warcraft Logs median rDPS/HPS,
   Archon 95th-percentile throughput and M+ score, Murlok top-50 rating ceilings, and
   Bloodmallet fight profiles (ST / cleave / AoE percentiles).
-- **12.1 PTR layer** — per-spec change writeups, datamined Season 2 tier-set bonuses, the
+- **12.1 layer** — per-spec change writeups, datamined Season 2 tier-set bonuses, the
   official PTR build feed, Warcraft Logs zone-54 raid testing, and **Dummy Dome** (zone-52)
   real-player DPS by target count with a normalized composite score + rank across the field.
 - **"Ours: 12.1" projection** — the tracker's own computed forecast tier list for the
@@ -45,8 +49,13 @@ Made by **[riles22](https://github.com/riles22)**. A personal project — if you
 - **The Ladder** — rank the whole field by any measured series (log medians, sims, 95th
   percentiles, adoption, PTR cuts). Measured numbers stay numbers: it never turns them
   into letter grades, never mixes sims with logs, and never crosses roles.
-- **Spec Finder** — a weighted quiz that ranks all 40 specs against your preferences (role,
-  content, meta-vs-vibes, fight type, melee/ranged, mobility, survivability, utility, outlook).
+- **Compare all** — the full-roster matrix: 40 specs against every source letter, the
+  consensus, the forecast and the metric ranks, sortable and filterable per column. Two kinds
+  of absence render differently on purpose — `·` means no such measurement exists for that
+  role, `—` means it exists but hasn't landed.
+- **Season 2 gearing explorer** — a second self-contained page (`gearing.html`, reachable from
+  the masthead tabs) covering raid, dungeon, catalyst and tier-set loot per spec; every spec
+  drawer deep-links straight into it.
 - **Cited creator takes** — a distilled, linked opinion layer that never feeds tiers — plus
   curated class Discords and creators.
 

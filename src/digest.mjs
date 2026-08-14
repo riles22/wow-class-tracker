@@ -172,6 +172,10 @@ export function digestMarkdown({ oldPayload, newPayload, manifest, runUrl, oldPe
 
 const showJson = (rev, file) => JSON.parse(execFileSync("git", ["show", `${rev}:data/${file}`], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 }));
 
+/* Same read, but tolerant of the file not existing at that rev — for artifacts that entered
+   the tree partway through the history the digest is asked to diff. */
+const showJsonSoft = (rev, file) => { try { return showJson(rev, file); } catch { return null; } };
+
 /* The newest frozen forecast artifact AT THAT REV, mirroring loadData's selection. Without
    it the digest builds payloads whose forecast column is the LIVE recomputation, and every
    post-flip digest would narrate "our 12.1" moves on a lane the published page no longer
@@ -193,6 +197,15 @@ export function payloadAt(rev) {
     ptrBuilds: showJson(rev, "ptr-builds.json"), creatorTakes: showJson(rev, "creator-takes.json"),
     encounterTiers: null, historySnapshot: null, historySnapshots: [],
     frozenForecast: frozenForecastAt(rev),
+    /* The frozen lane, without which this payload's consensus is composed of DIFFERENT
+       sources than the published page's. An outlet that has moved to the next season leaves
+       consensusFor unless its final live-season letters are restored from here — so while
+       any outlet is season-ahead (icyveins and wowhead both are, 2026-08-14) the digest was
+       narrating raid consensus off 1-2 sources where the site publishes 3-4, and every
+       resulting delta was an artifact of the omission. loadData passes this to buildPayload;
+       payloadAt is the one caller that hand-assembles the shape, and it forgot. Soft-read:
+       season-final.json only entered the tree 2026-08-09. (audit 2026-08-14) */
+    seasonFinal: showJsonSoft(rev, "season-final.json"),
   };
   return buildPayload(data);
 }

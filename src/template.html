@@ -1658,6 +1658,11 @@ function newInfoFor(s){
   return best;
 }
 function newBadgeHTML(s){
+  /* Era-gated like every other PTR surface (audit 2026-08-14). Both of newInfoFor's inputs
+     are PTR-layer — creator takes and the PTR build feed — so in a 12.0.7-only view the
+     badge was advertising next-patch activity on a page that has deliberately hidden it.
+     Same rule as the projection, the era-tagged metrics and the writeups. */
+  if(state.era === "live") return "";
   const ni = newInfoFor(s);
   return ni ? `<span class="newbadge" title="New — ${esc(ni.label)} · ${esc(ni.date)}" aria-label="New info for this spec: ${esc(ni.label)} ${esc(ni.date)}">NEW</span>` : "";
 }
@@ -2593,8 +2598,14 @@ function renderChanges(){
 
   const moves = [];
   for(const s of SPECS) for(const b of ["raid","mplus"]) if(s[key]?.[b]) moves.push({ s, b, m: s[key][b] });
-  const dummyMoves = SPECS.filter(s=>s.ptrDummy?.rankDelta);
-  const freshSpecs = SPECS.filter(s=>newInfoFor(s));
+  /* The projection lane above was already era-gated; these three were not (audit
+     2026-08-14). Dummy Dome is zone-52 PTR data, newInfoFor reads creator takes and the PTR
+     build feed, and latestPtrBuild is a PTR date — so a 12.0.7-only view was summarising
+     next-patch activity it had otherwise hidden ("N Dummy Dome shifts · M specs with fresh
+     info · latest PTR build …"). Gate them on the same rule the rest of the page uses. */
+  const ptrOk = state.era !== "live";
+  const dummyMoves = ptrOk ? SPECS.filter(s=>s.ptrDummy?.rankDelta) : [];
+  const freshSpecs = ptrOk ? SPECS.filter(s=>newInfoFor(s)) : [];
   const fresh = freshSpecs.length;
   if(!moves.length && !dummyMoves.length && !fresh){ host.hidden = true; host.innerHTML = ""; return; }
   host.hidden = false;
@@ -2607,7 +2618,7 @@ function renderChanges(){
       ? ` <span class="mnote">(${x.m.scoreDelta>0?"+":""}${x.m.scoreDelta} pts)</span>` : "";
     return `<button type="button" class="chjump" data-cls="${esc(x.s.class)}" data-spec="${esc(x.s.spec)}"><b>${esc(x.s.spec)} ${esc(x.s.class)}</b> <span class="mnote">${esc(label)}</span> ${x.b==="raid"?"Raid":"M+"} ${esc(x.m.was)} → ${esc(tierNow(x.s,x.b))} <span class="mv" data-d="${x.m.delta>0?'up':'down'}" title="${esc(label)} ${x.b==="raid"?"raid":"M+"} tier ${x.m.delta>0?'rose':'fell'} since ${esc(fmtDate(x.m.since))}${x.m.scoreDelta!=null?`, score ${x.m.scoreDelta>0?"+":""}${x.m.scoreDelta}`:""}">${x.m.delta>0?'▲':'▼'}</span>${sd} <span class="mnote">since ${esc(fmtDate(x.m.since))}</span></button>`;
   };
-  host.innerHTML = `<details class="changes"><summary><b>What changed</b> <span class="mnote">${esc(label)}${META.movementSince?` · since ${esc(fmtDate(META.movementSince))}`:""}</span> — <span class="mv" data-d="up">▲${ups}</span> <span class="mv" data-d="down">▼${downs}</span> tier moves · ${dummyMoves.length} Dummy Dome shifts · ${fresh} specs with fresh info${META.latestPtrBuild?` · latest PTR build ${esc(fmtDate(META.latestPtrBuild))}`:""}</summary>
+  host.innerHTML = `<details class="changes"><summary><b>What changed</b> <span class="mnote">${esc(label)}${META.movementSince?` · since ${esc(fmtDate(META.movementSince))}`:""}</span> — <span class="mv" data-d="up">▲${ups}</span> <span class="mv" data-d="down">▼${downs}</span> tier moves${ptrOk?` · ${dummyMoves.length} Dummy Dome shifts · ${fresh} specs with fresh info`:""}${ptrOk&&META.latestPtrBuild?` · latest PTR build ${esc(fmtDate(META.latestPtrBuild))}`:""}</summary>
     <div class="chlist">${moves.map(line).join("") || `<span class='mnote'>No ${esc(label)} tier moves since the baseline.</span>`}
     ${dummyMoves.map(s=>`<button type="button" class="chjump" data-cls="${esc(s.class)}" data-spec="${esc(s.spec)}"><b>${esc(s.spec)} ${esc(s.class)}</b> Dummy Dome rank ${s.ptrDummy.rankDelta>0?'climbed':'fell'} ${Math.abs(s.ptrDummy.rankDelta)} <span class="mnote">(now #${s.ptrDummy.rank}/${s.ptrDummy.of})</span></button>`).join("")}</div>
     ${freshSpecs.length?`<details class="chfresh"><summary>${freshSpecs.length} specs with fresh info</summary><div class="chlist">${freshSpecs.map(s=>`<button type="button" class="chjump" data-cls="${esc(s.class)}" data-spec="${esc(s.spec)}"><b>${esc(s.spec)} ${esc(s.class)}</b> <span class="mnote">new take or tuning in the last ${NEW_WINDOW_DAYS} days</span></button>`).join("")}</div></details>`:""}

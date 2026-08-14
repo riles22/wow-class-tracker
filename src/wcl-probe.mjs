@@ -188,7 +188,10 @@ if (dome?.ok) {
    fetch-wcl.mjs in a reviewed owner edit — never guess ids from a pattern. */
 try {
   const zq = await gql(t, `{ worldData { zones { id name frozen brackets { min max } expansion { id name } } } }`);
-  const zones = zq.data?.worldData?.zones ?? [];
+  // `gql` resolves to { status, json, textHead } — the payload lives under .json, exactly as
+  // the rateLimitData read above does it. Reading zq.data directly always yielded undefined,
+  // so this enumeration silently reported zero zones from the day it landed (audit 2026-08-14).
+  const zones = zq.json?.data?.worldData?.zones ?? [];
   const current = zones.filter(z => z?.expansion?.name?.includes("Midnight") || z?.id >= 44);
   console.log(`▣ zone enumeration: ${zones.length} total; Midnight-era candidates:`);
   for (const z of current) console.log(`   ${String(z.id).padStart(3)}  ${z.name}${z.frozen ? "  (frozen)" : ""}  [${z.expansion?.name ?? "?"}]`);

@@ -46,7 +46,24 @@ numbers that matter on the day, they move with the data.
    silently re-spaces the RAID bracket too — all covered by the version bump; name it in
    the commit message anyway.
 4. **Re-merge Icy Veins' S2 M+ letters** — a fresh `refresh-tiers` fetch of the three live
-   M+ pages on the day (the letters were never preserved; they may also have been retuned).
+   M+ pages on the day (they may have been retuned since).
+   **Correction 2026-08-14: the S2 letters WERE preserved.** This step used to say they were
+   never captured, which would have made a live fetch the only option. The 08-13 refresh log
+   records the live M+ letters as byte-identical to the `icyveins-ptr` list on all 39 placed
+   specs, so `ratings.mplus["icyveins-ptr"]` is a verifiable fallback if the fetch cannot land
+   — strictly better than the "write all 40 as explicit null" fallback below, which drops M+
+   consensus to Wowhead alone. Prefer a fresh fetch, then the preserved letters, then nulls.
+   **Why this step is the riskiest one on the list:** it is the only flip step that changes
+   PUBLISHED data with nothing verifying it, and the data is already wrong in a way the
+   registry hides. Measured 2026-08-14: `spec.ratings.mplus.icyveins` is byte-identical to the
+   frozen Season-1 record on **40 of 40** specs, while raid — which was merged — differs on 22
+   and Wowhead differs on 19. That 40/40 identity is the never-merged signature. Pre-flip
+   those S1 letters already leak into the FORECAST (`ptrTierRead` reads them as a next-patch
+   opinion at weight .30; removing them moves 30 of 40 M+ projection scores and two published
+   letters), and Subtlety Rogue M+ takes them undiluted because its `icyveins-ptr` value is
+   null. Post-flip the same letters become roughly half of every S2 M+ consensus cell.
+   **So verify the merge landed** — re-run the 40/40 identity check afterwards and expect it
+   to break — rather than assuming a green `npm test` covered it. Nothing tests this.
    TBD specs are explicit `null`, never omitted (the `icyveins-ptr` convention). Fallback
    if the fetch cannot land: write all 40 as explicit `null` — post-flip M+ consensus is
    then Wowhead alone, disclosed by the count chip. NEVER: collapse S+ into S (refused as
@@ -74,8 +91,16 @@ numbers that matter on the day, they move with the data.
    contract swap — re-point `wcl-live-raid`/`wcl-live-mplus` to the S2 zone ids and REMOVE
    the six PTR-era WCL rows (per the transition scope: removed, not skipped).
    **Get the ids from the probe, never a pattern**: dispatch `wcl-probe.yml` once the raid
-   is open (08-18 US / 08-19 EU) — the zone enumeration landed in `2cb40f5` and is
-   validated against the live API. As of 08-11 NO S2 zones exist upstream; zone 50
+   is open (08-18 US / 08-19 EU) — the zone enumeration landed in `2cb40f5`.
+   ⚠️ **It was BROKEN from the day it landed and is fixed as of 2026-08-14.** This line used
+   to claim the enumeration was "validated against the live API"; it cannot have been.
+   `wcl-probe.mjs` read `zq.data?.worldData?.zones` while its own `gql()` helper resolves to
+   `{ status, json, textHead }` — the payload is under `.json`, exactly as the rateLimitData
+   read fifty lines above already did it. So `zones` was always `[]` and the probe printed
+   "0 total … (none matched)" every time. Dispatching it on flip day would have returned
+   nothing and left this step with no verified ids. Fixed; still UNVERIFIED against the live
+   API, because no S2 zone existed upstream to enumerate as of 08-14. **Run it once before
+   flip day and confirm it prints a non-empty list** rather than discovering it on the day. As of 08-11 NO S2 zones exist upstream; zone 50
    "Sporefall" appeared in the Midnight list and is untracked — check what it is while
    there. Note the rdps family is still 500 upstream; re-pointing restores the CONTRACT,
    not necessarily data.

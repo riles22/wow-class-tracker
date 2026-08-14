@@ -626,3 +626,101 @@ test("the committed archive only holds sources that have actually moved ahead", 
     }
   }
 });
+
+/* The coverage gate's premise, pinned (audit 2026-08-14). check-refresh dates a metric family
+   by its min-th-freshest row so one fresh row cannot vouch for a stale cut — but probeDate
+   filters undated rows out entirely (`.map(m => m.asOf).filter(Boolean)`), so an undated row
+   is not counted as stale, it simply vanishes from the sample. Dropping asOf on all but a
+   handful of a family therefore dated the whole cut off those few. validateData is the only
+   thing standing between that shape and the sanctioned apply-metrics write path.
+
+   Deliberately at the END of this file: docs/s2-flip-test-patch.diff carries a hunk anchored
+   on the era↔name test at :127, and inserting anything adjacent to it breaks the pre-staged
+   flip patch (caught 2026-08-14 by `git apply --check`). Keep new tests here. */
+test("validateData requires asOf on every metric, so undated rows cannot shrink a coverage sample", async () => {
+  const data = await loadData(ROOT);
+  assert.equal(validateData(data).length, 0, "committed data must already satisfy the rule");
+
+  const broken = structuredClone(data);
+  const family = m => m.source === "warcraftlogs" && /Median raw DPS \(12\.1 PTR Dummy Dome/.test(m.name ?? "");
+  const rows = broken.specs.flatMap(s => (s.metrics ?? []).filter(family));
+  assert.ok(rows.length > 20, "fixture needs a large family to be meaningful");
+  // Keep the newest few dated, strip the rest — the exact shape a partial landing produces.
+  for (const m of rows.slice(5)) delete m.asOf;
+
+  const errors = validateData(broken);
+  assert.ok(errors.some(e => e.includes("needs an asOf date")), "undated metric rows must be rejected");
+  assert.equal(errors.filter(e => e.includes("needs an asOf date")).length, rows.length - 5,
+    "every undated row is named, not just the first");
+});
+
+/* The season-ahead-but-never-re-merged warning (audit 2026-08-14). This is the FORECAST-side
+   counterpart of the frozen lane: consensusFor is protected from a registry/letters split,
+   ptrTierRead is not. Deliberately a warning, not an error — see the note at the function. */
+test("seasonLetterWarnings flags a season-ahead source whose letters were never re-merged", async () => {
+  const { seasonLetterWarnings } = await import("../src/validate.mjs");
+  const { aheadSeasonFor, PHASES } = await import("../src/normalize.mjs");
+  const data = await loadData(ROOT);
+
+  // Every warning names a source that really is ahead for that bracket, and really does
+  // still match its own frozen record — no warning may fire on a re-merged outlet.
+  for (const warning of seasonLetterWarnings(data)) {
+    const [id, bracket] = warning.split(":")[0].split("/");
+    const source = data.sources.find(s => s.id === id);
+    assert.ok(source, `warning names an unknown source "${id}"`);
+    assert.ok(aheadSeasonFor(source, bracket, PHASES.liveSeason) != null,
+      `${id}/${bracket} warned but is not season-ahead`);
+  }
+
+  // Positive control: force a split by rewinding one source's letters to its frozen record.
+  const ahead = data.sources.find(s => s.kind === "tier-list"
+    && ["raid", "mplus"].some(b => aheadSeasonFor(s, b, PHASES.liveSeason) != null
+      && data.seasonFinal?.[PHASES.liveSeason]?.[s.id]?.[b]?.letters));
+  assert.ok(ahead, "fixture needs at least one season-ahead source with a frozen record");
+  const bracket = ["raid", "mplus"].find(b => aheadSeasonFor(ahead, b, PHASES.liveSeason) != null
+    && data.seasonFinal[PHASES.liveSeason][ahead.id]?.[b]?.letters);
+
+  const rewound = structuredClone(data);
+  const frozen = rewound.seasonFinal[PHASES.liveSeason][ahead.id][bracket].letters;
+  for (const spec of rewound.specs) {
+    const was = frozen[`${spec.class}|${spec.spec}`];
+    if (was !== undefined) (spec.ratings[bracket] ??= {})[ahead.id] = was;
+  }
+  assert.ok(seasonLetterWarnings(rewound).some(w => w.startsWith(`${ahead.id}/${bracket}:`)),
+    "a source rewound to its frozen record must warn");
+
+  // Negative control: move a single letter off the frozen value and the warning must clear.
+  const moved = structuredClone(rewound);
+  const victim = moved.specs.find(s => frozen[`${s.class}|${s.spec}`] !== undefined);
+  moved.specs.find(s => s.class === victim.class && s.spec === victim.spec)
+    .ratings[bracket][ahead.id] = frozen[`${victim.class}|${victim.spec}`] === "S" ? "C" : "S";
+  assert.ok(!seasonLetterWarnings(moved).some(w => w.startsWith(`${ahead.id}/${bracket}:`)),
+    "one moved letter is evidence of a re-merge and must clear the warning");
+});
+
+/* The creator firewall runs BOTH ways. Only the metaNotes→generalCreators direction had a
+   test; the takes[]→generalCreators half — the 2026-08-08 HIGH audit fix, which caught
+   Dratnos holding live Warrior takes while sitting in generalCreators — had none, so
+   deleting it passed the suite. A dual-membership creator is counted twice by projectionFor:
+   once in the expert lane (up to ±12 on a prior-only cell) and again as the ±3 meta nudge. */
+test("creator firewall: a generalCreators entry may not also hold specialist takes[]", async () => {
+  const data = await loadData(ROOT);
+  assert.deepEqual(validateData(data).filter(e => e.includes("never both")), [],
+    "committed data must already satisfy the firewall");
+
+  // Promote an existing specialist into generalCreators without removing their takes.
+  const broken = structuredClone(data);
+  const take = broken.creatorTakes.takes.find(t => t.creator && !t.superseded);
+  broken.community.generalCreators.push({
+    name: take.creator, credential: "test", url: "https://youtube.com/@test",
+  });
+  const errors = validateData(broken);
+  assert.ok(errors.some(e => e.includes(take.creator) && e.includes("never both")),
+    "a creator holding both takes[] and a generalCreators entry must be rejected");
+
+  // The other direction still holds: a metaNote author must BE a generalCreators entry.
+  const orphan = structuredClone(data);
+  orphan.creatorTakes.metaNotes[0].creator = "Nobody In The Registry";
+  assert.ok(validateData(orphan).some(e => e.toLowerCase().includes("generalcreators")),
+    "a metaNote from an unregistered author must be rejected");
+});

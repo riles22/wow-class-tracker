@@ -36,10 +36,15 @@ locally, and distill them into cited per-spec takes in `data/creator-takes.json`
    2026-08-08) — the two transcript sources have wildly different costs:
    · **LOCAL run (yt-dlp): replace the keyword filter with a DATE bound.** Do not judge on
      the title — judge on whether the video could possibly contain current-cycle content.
-     Fetch every unseen video **published on or after the FIRST entry in
-     `data/ptr-builds.json`** (the current PTR cycle's opening build — 2026-06-18 for
-     12.1); ignore anything older, because a video that predates the cycle cannot discuss
-     it. This bound matters: measured 2026-08-08, dropping the title filter alone exposed
+     Fetch every unseen video **published on or after the current PTR cycle's OPENING
+     build** — the OLDEST date in `data/ptr-builds.json`, which is 2026-06-18 for 12.1.
+     Ignore anything older, because a video that predates the cycle cannot discuss it.
+     **Take the date, do not take an index.** That file is stored NEWEST-FIRST, so
+     `builds[0]` is the most recent build (2026-08-06 today) and using it would bound the
+     sweep two months too late and silently drop most of the cycle — this line said "the
+     FIRST entry" until 2026-08-14 and meant the opposite of what it read as. Derive it:
+     `Math.min(...builds.map(b => b.date))`, or `builds.at(-1).date` while the file stays
+     sorted. This bound matters: measured 2026-08-08, dropping the title filter alone exposed
      **435 unseen videos**, because every newly-added creator has their whole 15-entry feed
      unseen and RSS reaches back years. The cycle bound cuts that to ~253, and it is a hard
      fact rather than a guess — unlike a title. If a sweep is still too large, tighten by

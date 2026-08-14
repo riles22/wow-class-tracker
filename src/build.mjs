@@ -120,7 +120,15 @@ export async function build(root = ROOT) {
   try {
     const gearing = await readFile(path.join(root, "gearing", "wow-s2-gearing.html"));
     await writeFile(path.join(root, "dist", "gearing.html"), gearing);
-  } catch { /* no gearing artifact in this tree — tracker-only build */ }
+  } catch (error) {
+    /* ENOENT only — a checkout without gearing/ still builds the tracker. Any OTHER error
+       (unreadable, partial write, a directory in its place) must be LOUD: dist/gearing.html is
+       committed, so swallowing it would leave the previous build's page in the tree while the
+       masthead tab links to it unconditionally — a silently stale second published page with
+       nothing anywhere reporting it. Same discipline the season-archive read above already
+       uses. (audit 2026-08-14) */
+    if (error?.code !== "ENOENT") throw error;
+  }
   // Season-archive pages, regenerated from their frozen records every build.
   for (const { name, page } of archivePages) {
     await writeFile(path.join(root, "dist", name), page);

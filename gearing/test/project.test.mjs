@@ -1256,6 +1256,38 @@ test("self-contained output embeds current data and valid browser JavaScript", a
   assert.doesNotMatch(template, /main_hand:'One-Hand'/);
 });
 
+/* The artifact is verified against data/ but was never verified against its own TEMPLATE
+   (audit 2026-08-14). Proven before this test existed: inserting a new element into
+   src/app.template.html and NOT rebuilding left the committed artifact without it while the
+   whole suite stayed green — a template-only edit published nothing and nothing said so.
+   This closes it by reversing the build's two markup transformations (data injection, then
+   CSP insertion) and requiring what is left to be the template byte-for-byte. It therefore
+   also catches a hand-edited artifact, which is the same failure from the other side. */
+test("the built artifact is the current template — a template edit without a rebuild fails", async () => {
+  const [html, templateRaw] = await Promise.all([
+    readFile(fromRoot("wow-s2-gearing.html"), "utf8"),
+    readFile(fromRoot("src/app.template.html"), "utf8"),
+  ]);
+  // build.mjs normalizes CRLF->LF before hashing; do the same so a Windows checkout of the
+  // template cannot fail this on line endings alone.
+  const template = templateRaw.replace(/\r\n?/g, "\n");
+
+  // Undo CSP injection: build.mjs inserts exactly one meta immediately after the charset meta.
+  const withoutCsp = html.replace(
+    /(<meta charset="utf-8">)\n<meta http-equiv="Content-Security-Policy" content="[^"]*">/,
+    "$1");
+  assert.notEqual(withoutCsp, html, "artifact must carry the build-injected CSP meta");
+
+  // Undo data injection: put the placeholder back.
+  const restored = withoutCsp.replace(
+    /(<script id="data" type="application\/json">)[\s\S]*?(<\/script>)/,
+    "$1__DATA__$2");
+  assert.ok(restored.includes("__DATA__"), "artifact must carry the data script block");
+
+  assert.equal(restored, template,
+    "wow-s2-gearing.html does not match src/app.template.html — run `node gearing/src/build.mjs`");
+});
+
 test("client app switches scenario-specific SimC profiles and labels their provenance", async () => {
   const [template, raid, specs, dungeons, sheet, itemEligibility, tier, catalyst,
     catalystAllocations, simcManifest, simcWeights, healerReferences, icons] = await Promise.all([

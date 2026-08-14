@@ -304,11 +304,11 @@
       "label": "Warcraft Logs Dummy Dome raw-DPS medians (zone 52, API best-parses — deterministic fetch recipe)",
       "maxAgeDays": 10,
       "evidence": "wcl",
+      "comment": "minFresh REMOVED 2026-08-14 (audit): it was 15, copied from the two 27-row raw siblings where 15 is ~56% of a 16-row floor. This family carries 106 rows against a floor of 60, so 15 meant a partial landing of 15 rows dated the family fresh while 91 rows stayed stale — measured at 43 days on 2026-08-13 with the row floor, the drop check and the manifest all green. Omitting it falls back to rows.min per probeDate's documented minFresh ?? rows.min ?? 1, which is what the other twelve metric requirements already do.",
       "date": {
         "type": "metrics",
         "source": "warcraftlogs",
-        "namePattern": "Median raw DPS \\(12\\.1 PTR Dummy Dome",
-        "minFresh": 15
+        "namePattern": "Median raw DPS \\(12\\.1 PTR Dummy Dome"
       },
       "rows": {
         "type": "metrics",

@@ -1655,3 +1655,92 @@ test("applyFrozenForecast substitutes wholesale, stamps provenance, and never in
   // movement of a frozen record is a category error
   assert.equal("projMovement" in specs[0], false);
 });
+
+/* ── Invariants that shipped with no test, added by the 2026-08-14 audit ──────────────
+   Both were fixes whose whole point is that they change published numbers, yet reverting
+   either kept the suite green. Appended at the END of this file on purpose: the pre-staged
+   flip patch (docs/s2-flip-test-patch.diff) carries hunks through ~:1598 and inserting near
+   them breaks `git apply`. Keep new tests down here. */
+
+test("empiricalAnchors is load-bearing: the v12 percentile recentring cannot be silently dropped", async () => {
+  const { empiricalAnchors, projectionFor } = await import("../src/render.mjs");
+  const { loadData } = await import("../src/validate.mjs");
+  const { buildPayload } = await import("../src/render.mjs");
+  const path = await import("node:path");
+  const { fileURLToPath } = await import("node:url");
+  const root = path.default.resolve(path.default.dirname(fileURLToPath(import.meta.url)), "..");
+
+  const data = await loadData(root);
+  const payload = buildPayload(data);
+  const anchors = empiricalAnchors(payload.specs);
+
+  // 1. The anchor IS the bracket's live consensus mean — derived per build, never a constant.
+  for (const bracket of ["raid", "mplus"]) {
+    const scores = payload.specs.map(s => s.consensus?.[bracket]?.score).filter(v => v != null);
+    if (!scores.length) { assert.equal(anchors[bracket], null); continue; }
+    const mean = scores.reduce((a, c) => a + c, 0) / scores.length;
+    assert.ok(Math.abs(anchors[bracket] - mean) < 1e-9, `${bracket} anchor must equal the consensus mean`);
+    // 2. Non-vacuity: rankPct's mean is 50 by construction, so an anchor AT 50 would make the
+    //    shift a no-op and this test meaningless. The whole v12 finding was that it is not 50.
+    assert.ok(Math.abs(anchors[bracket] - 50) > 2,
+      `${bracket} anchor is ${anchors[bracket]} — too close to 50 for this test to prove anything`);
+  }
+
+  // 3. The plumbing is real: dropping the anchor must move published scores. This is what
+  //    reverting the fix looks like, and before this test it moved 39 scores in silence.
+  const metaNotes = data.creatorTakes?.metaNotes ?? [];
+  const takes = data.creatorTakes?.takes ?? [];
+  let changed = 0;
+  for (const spec of payload.specs) {
+    for (const bracket of ["raid", "mplus"]) {
+      const withAnchor = projectionFor(spec, bracket, data.scales, metaNotes, data.sources, takes, anchors[bracket]);
+      const without = projectionFor(spec, bracket, data.scales, metaNotes, data.sources, takes, null);
+      if (withAnchor?.score !== without?.score) changed++;
+    }
+  }
+  assert.ok(changed > 0, "removing the anchor changed no projection score — the recentring is not wired in");
+
+  /* 4. And the BUILT payload must be the anchored computation, not the unanchored one.
+     Without this, a revert that leaves projectionFor intact but makes projections() pass
+     null would still satisfy assertion 3 — the plumbing test would pass while every
+     published number silently reverted to the v11 values. */
+  let matchesAnchored = 0, matchesUnanchored = 0;
+  for (const spec of payload.specs) {
+    for (const bracket of ["raid", "mplus"]) {
+      const published = spec.projection?.[bracket]?.score;
+      if (published == null) continue;
+      const anchored = projectionFor(spec, bracket, data.scales, metaNotes, data.sources, takes, anchors[bracket])?.score;
+      const unanchored = projectionFor(spec, bracket, data.scales, metaNotes, data.sources, takes, null)?.score;
+      if (published === anchored) matchesAnchored++;
+      if (anchored !== unanchored && published === unanchored) matchesUnanchored++;
+    }
+  }
+  assert.ok(matchesAnchored > 0, "no published projection matched the anchored computation");
+  assert.equal(matchesUnanchored, 0,
+    "a published projection matched the UNANCHORED value — projections() is not passing the anchor through");
+});
+
+test("the outlook tally excludes kind:\"patch-notes\" — the launch notes must not vote", () => {
+  const spec = { class: "Priest", spec: "Holy", ptr: null };
+  const build = {
+    date: "2026-07-14", forumPostNumber: 14, specsAffected: ["Holy Priest"],
+    highlights: ["Holy Priest Heal healing increased by 20%."],
+  };
+  /* One paragraph restating the patch — the real shape. Counting it would both double-count
+     the build above and, as measured on the real Holy Priest line, classify as a NERF off the
+     mana clause while the spec was buffed. */
+  const notes = {
+    date: "2026-08-11", kind: "patch-notes", forumPostNumber: 20, specsAffected: ["Holy Priest"],
+    highlights: ["Holy Priest All healing increased by 16% and mana costs reduced by 30%."],
+  };
+
+  const buildOnly = outlookFor(spec, { builds: [build] });
+  const withNotes = outlookFor(spec, { builds: [notes, build] });
+  assert.deepEqual(withNotes, buildOnly,
+    "adding a patch-notes entry changed the outlook — it must be excluded from the tally");
+
+  // And a patch-notes entry ALONE leaves the tally with nothing to count.
+  const notesOnly = outlookFor(spec, { builds: [notes] });
+  assert.notEqual(notesOnly?.direction, "up",
+    "patch notes alone must not produce a tuning direction");
+});

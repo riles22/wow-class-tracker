@@ -1168,3 +1168,41 @@ test("the FROZEN forecast column renders in the post-flip live view, labelled as
     } finally { await page.close(); }
   } finally { await rm(dir, { recursive: true, force: true }); }
 });
+
+/* Era-gating of the PTR-derived summary surfaces (audit 2026-08-14). The projection lane was
+   already gated; the NEW badge and three parts of the "What changed" strip were not, so a
+   12.0.7-only view still advertised next-patch activity it had otherwise hidden. Appended at
+   the END of this file: the pre-staged flip patch carries hunks through ~:1080 and inserting
+   near them breaks `git apply`. */
+ui("a 12.0.7-only view hides every PTR-derived summary surface", async page => {
+  // Both-era baseline: at least one of these must actually be present, or the test proves
+  // nothing about gating — it would pass on an empty page.
+  const both = await page.evaluate(() => ({
+    // Scoped OUT of .legend: that block carries a static NEW swatch explaining the badge,
+    // which is legend chrome rather than a claim about any spec.
+    badges: [...document.querySelectorAll(".newbadge")].filter(el => !el.closest(".legend")).length,
+    summary: document.querySelector("#changes summary")?.textContent ?? "",
+  }));
+  const hasSomething = both.badges > 0
+    || /Dummy Dome shifts|specs with fresh info|latest PTR build/.test(both.summary);
+  assert.ok(hasSomething,
+    "fixture has no PTR-derived surfaces in the both-era view — nothing to gate, test is vacuous");
+
+  await page.evaluate(() => document.querySelector('#eraseg button[data-era="live"]').click());
+  await page.waitForTimeout(200);
+
+  const live = await page.evaluate(() => ({
+    // Scoped OUT of .legend: that block carries a static NEW swatch explaining the badge,
+    // which is legend chrome rather than a claim about any spec.
+    badges: [...document.querySelectorAll(".newbadge")].filter(el => !el.closest(".legend")).length,
+    summary: document.querySelector("#changes summary")?.textContent ?? "",
+  }));
+  assert.equal(live.badges, 0,
+    "the NEW badge is fed by creator takes and the PTR build feed — it must not render in a 12.0.7-only view");
+  assert.ok(!/Dummy Dome shifts/.test(live.summary),
+    `"What changed" leaked Dummy Dome (zone-52 PTR data) into the live-only view: "${live.summary.trim()}"`);
+  assert.ok(!/specs with fresh info/.test(live.summary),
+    `"What changed" leaked PTR take/build freshness into the live-only view: "${live.summary.trim()}"`);
+  assert.ok(!/latest PTR build/.test(live.summary),
+    `"What changed" leaked the PTR build date into the live-only view: "${live.summary.trim()}"`);
+});

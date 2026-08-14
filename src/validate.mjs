@@ -4,7 +4,7 @@
 import { readFile, readdir } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
-import { isLiveEra, PHASES, scoreFor } from "./normalize.mjs";
+import { aheadSeasonFor, isLiveEra, PHASES, scoreFor } from "./normalize.mjs";
 import { specBuildChanges } from "./render.mjs";
 
 const ROLES = new Set(["DPS", "Healer", "Tank"]);
@@ -327,6 +327,15 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
          metric families rode the inference). The marker guard above dies with PHASES.ptr for
          the same reason, so this rule matches the NAME, which survives the flip. */
       if (/\bPTR\b/.test(metric.name ?? "") && metric.era == null) errors.push(`specs.json: ${key} metric "${metric.name}" is PTR-named but carries no explicit era — name inference dies at the phase flip, so PTR rows must be tagged era: "ptr" (apply-metrics preserves it)`);
+      /* asOf is REQUIRED, not optional (audit 2026-08-14). check-refresh dates a metric family
+         by its min-th-freshest row precisely so one fresh row cannot vouch for a stale cut —
+         but rows with no asOf were skipped rather than counted as stale, so the whole design
+         was bypassable through the sanctioned write path. Proven: a 47-row wcl-live-raid
+         refresh carrying unchanged stale values, with asOf on exactly ONE row, was accepted by
+         apply-metrics.mjs (which runs validateData internally and refuses on any error) and the
+         family then probed as fresh. No grandfather set is needed — every committed metric row
+         already carries a date. Same shape as the mandatory ptr.source rule. */
+      if (metric.asOf == null) errors.push(`specs.json: ${key} metric "${metric.name}" needs an asOf date — the coverage gate dates a family by its min-th-freshest row, and an undated row cannot be counted as stale`);
       isoOk(metric.asOf, `specs.json: ${key} metric "${metric.name}" asOf`);
       const mkey = `${metric.source}|${metric.bracket}|${metric.name}`;
       if (metricKeys.has(mkey)) errors.push(`specs.json: ${key} duplicate metric (${mkey}) — the upsert key must be unique per spec`);
@@ -842,6 +851,52 @@ export async function loadData(root) {
            seasonFinal, frozenForecast };
 }
 
+/* SEASON-AHEAD BUT NEVER RE-MERGED — a WARNING, deliberately not an error (audit 2026-08-14).
+
+   `seasonVerified` is a statement about the PAGE; the letters live in spec.ratings and are
+   written by a separate merge step. When an outlet moves season, era-verify records the flip
+   immediately — but if the merge cannot land, the registry says "this outlet describes the
+   next season" while the stored letters are still last season's. consensusFor is protected
+   from that split by the frozen lane; the FORECAST is not: nextPatchTierSources admits the
+   outlet on the strength of the page, and ptrTierRead then reads last season's letters as a
+   next-patch opinion at weight .30.
+
+   The signature is exact and cheap to test: an outlet's stored letters being IDENTICAL to its
+   own frozen final-season record on every spec, when a genuine re-merge moves 19-29 of 40.
+   Measured 2026-08-14 across all six ahead source×bracket pairs — method/raid 28 moved,
+   method/mplus 22, wowhead/raid 29, wowhead/mplus 19, icyveins/raid 23, and icyveins/mplus
+   0 of 40. That one is the real thing: its S2 pages publish S+/B+ while the `icyveins` scale
+   has five bands, so the merge is blocked pending an owner edit to scales.json (flip runbook
+   step 3/4).
+
+   WHY A WARNING. The condition is true right now, so an error would fail validate, the build
+   and the nightly publish gate every night until the 08-18 re-merge — buying strictness by
+   breaking the pipeline for four days. Promote it to an error once icyveins/mplus is clean;
+   the check itself does not change, only the caller's reaction to it. */
+const MIN_COMPARED = 10;
+export function seasonLetterWarnings({ specs, sources, seasonFinal }, liveSeason = PHASES.liveSeason) {
+  const warnings = [];
+  for (const source of sources ?? []) {
+    if (source.kind !== "tier-list" || !isLiveEra(source)) continue;
+    for (const bracket of ["raid", "mplus"]) {
+      if (aheadSeasonFor(source, bracket, liveSeason) == null) continue;
+      const frozen = seasonFinal?.[liveSeason]?.[source.id]?.[bracket]?.letters;
+      if (!frozen) continue; // nothing to compare against; the archive test covers absence
+      let compared = 0, identical = 0;
+      for (const spec of specs ?? []) {
+        const was = frozen[`${spec.class}|${spec.spec}`];
+        if (was === undefined) continue;
+        compared++;
+        if ((spec.ratings?.[bracket]?.[source.id] ?? null) === was) identical++;
+      }
+      if (compared >= MIN_COMPARED && identical === compared) {
+        warnings.push(`${source.id}/${bracket}: page verifies as season-ahead, but all ${compared} stored letters are identical to its frozen ${liveSeason} record — the letters were never re-merged, so the 12.1 forecast is reading ${liveSeason} letters as a next-patch opinion`);
+      }
+    }
+  }
+  return warnings;
+}
+
 const isMain = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
 if (isMain) {
   const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -852,5 +907,7 @@ if (isMain) {
     for (const error of errors) console.error("  - " + error);
     process.exit(1);
   }
-  console.log(`✓ data valid — ${data.specs.length} specs, ${data.specs.filter(s => s.ptr).length} PTR-tracked`);
+  const warnings = seasonLetterWarnings(data);
+  for (const warning of warnings) console.warn("⚠ " + warning);
+  console.log(`✓ data valid — ${data.specs.length} specs, ${data.specs.filter(s => s.ptr).length} PTR-tracked${warnings.length ? ` (${warnings.length} warning${warnings.length === 1 ? "" : "s"})` : ""}`);
 }

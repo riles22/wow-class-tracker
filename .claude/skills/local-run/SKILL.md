@@ -88,9 +88,12 @@ runs (2026-07-31), which were sound but left drift the next nightly had to absor
 
 ## Scope — decide this before touching anything
 
-CI runs the full refresh nightly (`.github/workflows/nightly.yml`, 10:37 UTC). The
-scheduled local task now fires at **07:10 local (14:09 UTC)**, i.e. *after* CI, which is
-the correct order for a catch-up run. **Default scope is residential-only catch-up** —
+CI runs the full refresh nightly (`.github/workflows/nightly.yml`, 10:37 UTC). **There is no
+longer a scheduled local task** — it is retired along with the claude.ai cloud routine
+(`docs/cloud-routine.md` records why), verified 2026-08-14 against the machine's actual task
+list. Local runs are started by hand. What survives from the old schedule is only its
+ORDERING lesson: run *after* CI has had its go, so this is a catch-up rather than a race.
+**Default scope is residential-only catch-up** —
 the things a datacenter runner physically cannot do:
 
 - drain `data/pending-transcripts.json` with yt-dlp (datacenter IPs hit YouTube's bot wall);
@@ -149,9 +152,15 @@ manifest was rewritten or deliberately left alone and why; what `check-refresh
 ## What a local run must never do
 
 - Edit `data/community-overrides.json`, `data/required-sources.json`, `data/scales.json`,
-  workflows, or gatekeeper code as part of a DATA run. Those are reviewed code edits
-  with their own paper trail — a data commit that also moves the goalposts is exactly
-  what Gate 0 exists to catch in CI, and locally nothing will catch it.
+  `data/season-final.json`, `data/forecasts/`, `data/season-archive/`, workflows, or
+  gatekeeper code as part of a DATA run. Those are reviewed code edits with their own paper
+  trail — a data commit that also moves the goalposts is exactly what Gate 0 exists to catch
+  in CI, and locally nothing will catch it. **That list is Gate 0's immutable set verbatim**
+  (`nightly.yml`, the `git diff --quiet HEAD --` guard); the last three were missing here
+  until 2026-08-14, which meant the one document telling a local run what CI protects
+  under-reported it. The frozen lanes are the dangerous omission: `season-final.json` is
+  append-only and written ONLY by `freeze-season.mjs`, and `forecasts/` holds the immutable
+  artifact the report card grades — hand-editing either is unrecoverable and silent.
 - Push with `npm test` red or the build broken. The deploy is immediate; there is no
   publish job to save you.
 - Fill anything from model memory. Hard rule 1 applies at home too.
