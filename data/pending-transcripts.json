@@ -9,27 +9,6 @@
       "queuedAt": "2026-08-09"
     },
     {
-      "id": "c5QQHhL34f0",
-      "creator": "YoDaTV",
-      "title": "The Blinding Vale +20 | San'layn Blood DK | Midnight Season 2 M+",
-      "published": "2026-08-12",
-      "queuedAt": "2026-08-12"
-    },
-    {
-      "id": "u3XBRu8FNUU",
-      "creator": "YoDaTV",
-      "title": "Den of Nalorakk +20 | San'layn Blood DK | Midnight Season 2 M+",
-      "published": "2026-08-12",
-      "queuedAt": "2026-08-12"
-    },
-    {
-      "id": "0461YCGqWws",
-      "creator": "YoDaTV",
-      "title": "Murder Row +20 | San'layn Blood DK | Midnight Season 2 M+",
-      "published": "2026-08-12",
-      "queuedAt": "2026-08-12"
-    },
-    {
       "id": "48CShH2iiIk",
       "creator": "LBNinja7",
       "title": "Season 2 is OUT!!! Mistweaver Chill Grinding! ~~~  !gfuel !discord !yt !youtube",
@@ -56,6 +35,62 @@
       "title": "12.1 is HERE (Healer Gearing & M0 Later) | *NEW* !UI !main !tierlist",
       "published": "2026-08-13",
       "queuedAt": "2026-08-13"
+    },
+    {
+      "id": "z0weFwfFuSQ",
+      "creator": "YoDaTV",
+      "title": "One Step Forward, Two Steps Back — Why Prot Paladin Got Worse in Season 2..",
+      "published": "2026-08-13",
+      "queuedAt": "2026-08-14"
+    },
+    {
+      "id": "9SUfTFMcRJk",
+      "creator": "YoDaTV",
+      "title": "Why I Think Moonkin is Not Good in Season 2 M+",
+      "published": "2026-08-13",
+      "queuedAt": "2026-08-14"
+    },
+    {
+      "id": "P-V2_kWBmP8",
+      "creator": "Tactyks",
+      "title": "Venomous Abyss TANK TIPS for Normal and Heroic | Midnight Season 2 Raid Guides",
+      "published": "2026-08-14",
+      "queuedAt": "2026-08-14"
+    },
+    {
+      "id": "3ONMAmgTre8",
+      "creator": "AutomaticJak",
+      "title": "Holy Priest in 60 Seconds Midnight Season 2",
+      "published": "2026-08-14",
+      "queuedAt": "2026-08-14"
+    },
+    {
+      "id": "leHJTQQirT8",
+      "creator": "Supatease",
+      "title": "Best Class 12.1",
+      "published": "2026-08-14",
+      "queuedAt": "2026-08-14"
+    },
+    {
+      "id": "c-YGgqlosyQ",
+      "creator": "Supatease",
+      "title": "12.1 CLASS POWER TESTING",
+      "published": "2026-08-13",
+      "queuedAt": "2026-08-14"
+    },
+    {
+      "id": "wm5l2vtzO2o",
+      "creator": "LBNinja7",
+      "title": "The Real Reason Blizzard Nerfs Mistweaver... (conspiracy)",
+      "published": "2026-08-13",
+      "queuedAt": "2026-08-14"
+    },
+    {
+      "id": "Oeab1J60RfI",
+      "creator": "izen (Izenhart)",
+      "title": "Midnight Season 2 - The Great Vault Loot is a Great Bait | How To Avoid Getting Scammed",
+      "published": "2026-08-13",
+      "queuedAt": "2026-08-14"
     }
   ],
   "skipped": [
@@ -2102,6 +2137,27 @@
       "title": "12.1 IS HERE BIG DAY LOTS TO DO | Blizzcon inbound",
       "reason": "Twelve-hour launch-day stream, scanned throughout. Content is co-stream banter about who is playing what and chat relaying other people's opinions (e.g. \"propaganda about Blood DK not doing high keys\") rather than his own analysis; Blood DK is also outside his declared Outlaw / Assassination scope. No Rogue performance read to distil.",
       "verifiedAt": "2026-08-13"
+    },
+    {
+      "id": "c5QQHhL34f0",
+      "creator": "YoDaTV",
+      "title": "The Blinding Vale +20 | San'layn Blood DK | Midnight Season 2 M+",
+      "reason": "YouTube serves NO captions for this video — neither auto-generated nor manual (verified twice this run: yt-dlp subtitle download, then an independent --list-subs probe, both \"has no automatic captions / has no subtitles\"). A silent +20 key run with no commentary track to transcribe, so there is nothing for any transcript source to return; re-fetching it can only ever fail. Recorded here so the nightly Supadata step stops spending a paid request on it each run.",
+      "verifiedAt": "2026-08-14"
+    },
+    {
+      "id": "u3XBRu8FNUU",
+      "creator": "YoDaTV",
+      "title": "Den of Nalorakk +20 | San'layn Blood DK | Midnight Season 2 M+",
+      "reason": "YouTube serves NO captions for this video — neither auto-generated nor manual (verified twice this run: yt-dlp subtitle download, then an independent --list-subs probe, both \"has no automatic captions / has no subtitles\"). A silent +20 key run with no commentary track to transcribe, so there is nothing for any transcript source to return; re-fetching it can only ever fail. Recorded here so the nightly Supadata step stops spending a paid request on it each run.",
+      "verifiedAt": "2026-08-14"
+    },
+    {
+      "id": "0461YCGqWws",
+      "creator": "YoDaTV",
+      "title": "Murder Row +20 | San'layn Blood DK | Midnight Season 2 M+",
+      "reason": "YouTube serves NO captions for this video — neither auto-generated nor manual (verified twice this run: yt-dlp subtitle download, then an independent --list-subs probe, both \"has no automatic captions / has no subtitles\"). A silent +20 key run with no commentary track to transcribe, so there is nothing for any transcript source to return; re-fetching it can only ever fail. Recorded here so the nightly Supadata step stops spending a paid request on it each run.",
+      "verifiedAt": "2026-08-14"
     }
   ],
   "seen": [

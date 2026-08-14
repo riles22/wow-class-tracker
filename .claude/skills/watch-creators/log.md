@@ -2102,3 +2102,50 @@ Two consequences for the (a) entry as written:
   because the bounded terms were already capped at the A band edge. The reported "82.0 → 79.0"
   came from the same broken harness. The curation judgment still stands on its merits; the
   alarm about it moving a published number does not.
+
+---
+
+## 2026-08-14 — local run: transcript lane BLOCKED by a self-inflicted 429; 0 takes, 0 metaNotes
+
+Discovery was complete and clean: **44/44 channels polled, 0 RSS failures, 34 unseen videos
+all inside the 12.1 cycle** (bound = first `ptr-builds.json` entry, 2026-06-18) against a
+**970-id** seen-set built from structured data only. Zero pre-cycle videos surfaced, so the
+date bound cost nothing this run.
+
+**The transcript fetch failed and it was my own doing — record this so the next run does not
+repeat it.** Following the "fetch broadly, no keyword filter" rule for local runs, I handed
+all 42 candidates (34 discovered + 8 queued) to a SINGLE yt-dlp invocation. YouTube
+rate-limited the timedtext endpoint with **HTTP 429** partway through and it never cleared:
+30/60/90s in-loop backoffs, then a 4-minute cooldown, then a further 7-minute cooldown — all
+still 429. **0 of 42 transcripts retrieved.**
+
+The lesson is about PACING, not about the unfiltered sweep, and the two must not be conflated
+— dropping the keyword filter is correct and stays. What is wrong is bursting the resulting
+list. The 2026-08-13 run drained its queue fine because it was small. A ~40-video sweep is
+now the normal size, so it needs to be paced from the START (single invocation, several
+seconds between videos, and stop on the first 429 rather than retrying into a deeper block) —
+retry-after-burst does not recover, the block outlives the run.
+
+Useful side-finding: **`--list-subs` was never rate-limited**, only the subtitle *download*
+was. So caption AVAILABILITY can be probed cheaply even mid-block, which is how the three
+skips below were confirmed without a second download attempt.
+
+**Queue: 8 → 13** (3 durable skips out, 8 in).
+- **3 verified skips** (YoDaTV `c5QQHhL34f0`, `u3XBRu8FNUU`, `0461YCGqWws` — Season 2 +20 key
+  runs): confirmed twice, by download attempt and by an independent `--list-subs` probe, to
+  have **no captions of any kind**. Silent key runs with no commentary track, so no transcript
+  source can ever return anything. Moved to `skipped[]` to stop the nightly spending a paid
+  Supadata request on each of them every run.
+- **8 queued narrowly** from today's discovery, keyword-filtered as the queue rule requires
+  (it is drained by the PAID lane): the two YoDaTV spec verdicts (`z0weFwfFuSQ` Prot Paladin
+  got worse, `9SUfTFMcRJk` Moonkin not good in S2 M+), **Tactyks `P-V2_kWBmP8` Venomous Abyss
+  TANK TIPS — raid-scoped tank, the documented scarcest signal**, AutomaticJak `3ONMAmgTre8`
+  Holy Priest, Supatease `leHJTQQirT8` / `c-YGgqlosyQ` class-power, LBNinja7 `wm5l2vtzO2o`
+  Mistweaver, and izen `Oeab1J60RfI` for the metaNotes lane.
+- The other **26 discovered videos were deliberately NOT written to `seen[]`** — they were
+  never examined, only failed on transport, so they must stay visible to the next unfiltered
+  local sweep. RSS re-finds them for free.
+
+Supadata remains `limit-exceeded` (free tier, 100/month), so the queue will not drain on the
+nightly until the monthly budget rolls; the free yt-dlp lane in the next local run is the
+realistic drain, once the 429 ages out.
