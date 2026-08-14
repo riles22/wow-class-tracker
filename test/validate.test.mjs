@@ -383,10 +383,26 @@ test("validateData rejects an unknown era rather than defaulting it to live", as
 
 test("validateData accepts the two legal era values", async () => {
   const data = await loadData(ROOT);
+  /* Subject DERIVED, never a literal id — and its frozen records dropped. This read
+     `find(s => s.id === "method")` until 2026-08-14, when Method rebuilt for Season 2 and
+     freeze-season wrote it into season-final.json. Marking a frozen source era:"ptr" then
+     correctly raises `"method" is era:"ptr" — a PTR list never fed the live consensus`, so a
+     test about ERA VALUES went red on the FROZEN LANE, an invariant it is not measuring and
+     which "validateData gates the frozen final-season archive" already covers directly.
+
+     Picking a different literal id would only move the trap to whichever outlet flips next
+     (see the same lesson in test/freeze-season.test.mjs, twice). Selecting an unfrozen source
+     would go vacuous once every outlet has flipped — the S2 transition, which is precisely
+     when this must still work. So take any live-era tier list and strip its frozen records
+     from the copy, isolating era handling from the frozen lane. */
+  const subject = data.sources.find(s => s.kind === "tier-list" && (s.era ?? "live") === "live");
+  assert.ok(subject, "the registry must carry at least one live-era tier list");
   for (const era of ["live", "ptr"]) {
     const copy = structuredClone(data);
-    copy.sources.find(s => s.id === "method").era = era;
-    assert.deepEqual(validateData(copy).filter(e => e.includes("era")), []);
+    copy.sources.find(s => s.id === subject.id).era = era;
+    for (const bySource of Object.values(copy.seasonFinal ?? {})) delete bySource[subject.id];
+    assert.deepEqual(validateData(copy).filter(e => e.includes("era")), [],
+      `era "${era}" must be accepted on ${subject.id}`);
   }
 });
 

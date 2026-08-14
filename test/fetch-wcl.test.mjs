@@ -120,9 +120,18 @@ test("raw series names never match the FROZEN rDPS/normalized requirements' prob
   // fresh rows would refresh the frozen requirement's coverage date and let a manifest
   // row vouch for the stale series.
   const config = JSON.parse(await readFile(path.join(ROOT, "data", "required-sources.json"), "utf8"));
+  /* `req?.` guards the LOOKUP, not just `.date`. Flip-day step 7 removes the six PTR-era WCL
+     rows (wcl-ptr-raid, wcl-ptr-mplus, wcl-dummy-dome and the three *-raw keys) from
+     data/required-sources.json; two of those keys are named in the frozen list below, so with
+     a bare `req.date?.` the helper dies with `TypeError: Cannot read properties of undefined
+     (reading 'date')` — verified 2026-08-14 by filtering those keys out of the real contract.
+     That would red the flip commit's own `npm test` (runbook step 9) on a retired requirement
+     rather than a real defect, and the pre-staged flip test patch does not touch this file.
+     A key that no longer exists simply contributes no patterns; the loop below still proves
+     the raw names miss every requirement that IS still declared. */
   const patternsOf = key => {
     const req = config.requirements.find(r => r.key === key);
-    return [req.date?.namePattern, req.rows?.namePattern].filter(Boolean).map(p => new RegExp(p));
+    return [req?.date?.namePattern, req?.rows?.namePattern].filter(Boolean).map(p => new RegExp(p));
   };
   const rawNames = [
     "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
@@ -135,8 +144,19 @@ test("raw series names never match the FROZEN rDPS/normalized requirements' prob
       }
     }
   }
-  // ...and each raw recipe's own requirement DOES match its series name.
-  assert.ok(patternsOf("wcl-ptr-raid-raw").every(rx => rx.test("Median raw DPS (12.1 PTR Venomous Abyss, pooled)")));
-  assert.ok(patternsOf("wcl-ptr-mplus-raw").every(rx => rx.test("Median raw DPS (12.1 PTR M+ keys, pooled)")));
-  assert.ok(patternsOf("wcl-dummy-raw").every(rx => rx.test("Median raw DPS (12.1 PTR Dummy Dome, 3T)")));
+  /* ...and each raw recipe's own requirement DOES match its series name. Guarded on both
+     sides, because `[].every(…)` is TRUE: softening the lookup above would otherwise turn
+     these three from a loud throw into three silent passes the day those keys retire —
+     trading a spurious red for a vacuous green, which is the worse of the two. So skip a key
+     that is genuinely gone, and demand a non-empty pattern set for one that is still there. */
+  for (const [key, name] of [
+    ["wcl-ptr-raid-raw", "Median raw DPS (12.1 PTR Venomous Abyss, pooled)"],
+    ["wcl-ptr-mplus-raw", "Median raw DPS (12.1 PTR M+ keys, pooled)"],
+    ["wcl-dummy-raw", "Median raw DPS (12.1 PTR Dummy Dome, 3T)"],
+  ]) {
+    if (!config.requirements.some(r => r.key === key)) continue;   // retired with the PTR lane
+    const patterns = patternsOf(key);
+    assert.ok(patterns.length, `${key} is still declared, so it must expose a name pattern to match`);
+    assert.ok(patterns.every(rx => rx.test(name)), `${key}'s own pattern must match its series name "${name}"`);
+  }
 });

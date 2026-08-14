@@ -601,11 +601,21 @@ ui("an era-gated PTR tier list shows its own 12.1 letters and is unreachable in 
   const [, backToConsensus] = await tiersOf(page, subject.class, subject.spec);
   assert.equal(backToConsensus, subject.consensus.mplus.tier, "the grid now shows the live consensus");
 
-  // 4. The "N tier lists feed a computed consensus" blurb must count LIVE lists only.
-  const live = data.sources.filter(s => s.kind === "tier-list" && (s.era ?? "live") === "live").length;
+  /* 4. The "N tier lists feed a computed consensus" blurb must count what ACTUALLY feeds it.
+     Derived from perSource, the same quantity the page uses — not from an era filter. Era is
+     only ONE of the two reasons a tier list leaves the consensus; the other is being
+     season-ahead with no frozen record, which an era filter cannot see. Measured 2026-08-14:
+     with Method's pages on s2 and freeze-season not yet run, the page says "Three" while the
+     era count says "Four", and the suite reds on a state that is entirely correct. The
+     nightly hides this because its publish job runs freeze-season BEFORE Gate 1, restoring
+     the contributor — but freezing is allowed to decline ("Refusing to guess"), and a local
+     run can reach Gate 1 without it. The pre-staged flip patch already adopts exactly this
+     derivation for the post-flip branch; this is the same rule applied to the pre-flip path. */
+  const feeding = Math.max(0, ...data.specs.map(sp => Math.max(
+    sp.consensus?.raid?.perSource?.length ?? 0, sp.consensus?.mplus?.perSource?.length ?? 0)));
   const words = ["No","One","Two","Three","Four","Five","Six","Seven","Eight","Nine"];
   const shown = await page.evaluate(() => document.getElementById("tlcount")?.textContent ?? "");
-  assert.equal(shown, words[live], "the derived tier-list count excludes era-gated lists");
+  assert.equal(shown, words[feeding], "the derived tier-list count matches the consensus composition");
 });
 
 ui("the 12.1 forecast column shows its evidence strength, and only there", async page => {
