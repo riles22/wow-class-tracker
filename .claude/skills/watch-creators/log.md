@@ -2149,3 +2149,27 @@ skips below were confirmed without a second download attempt.
 Supadata remains `limit-exceeded` (free tier, 100/month), so the queue will not drain on the
 nightly until the monthly budget rolls; the free yt-dlp lane in the next local run is the
 realistic drain, once the 429 ages out.
+
+## 2026-08-14 (nightly, CI runner)
+
+**Transcripts: `limit-exceeded` again** — `transcript-fetch/summary.json` (2026-08-14T18:02:09Z)
+attempted 1, fetched 0 on `bqVHzvKJCuA`, "remaining queue untouched". Supadata's free tier is
+100 requests/month and the budget is spent, so **0 takes and 0 metaNotes** were added, changed or
+superseded. No YouTube or transcript-API fetch of any kind was made by this agent.
+
+**Discovery ran in full:** all 44 transcribable channels polled off the public RSS endpoint,
+0 failures, seen-set rebuilt from the four structured lanes (978 ids). **33 unseen videos, every
+one published inside the 12.1 cycle** (first build 2026-06-18).
+
+- **Queued (14, nightly keyword filter):** Pkpawner "The Complete Windwalker Monk Guide For
+  Season 2"; Dratnos "Gear Available Now, Week 1 FAQ"; Kalamazi on 12.1 embellishments; Shadarek
+  Havoc/Devourer M0s; Sha ×2 (Season-2 Kings' Rest route, Season-2 plans); Bansherz ×3 (BM
+  Hunter S2 M0 tour, Venomfall Deeps solo, io grind); Supatease ×2 ("Best 12.1 Change",
+  "Number 1 Elemental Shaman NA"); YoDaTV 12.1 gearing; Dalaran Gaming 12.1 class-changes
+  stream; Tettles 12.1 stream. Queue now **27**.
+- **Appended to `seen[]` (19):** PvP duel/arena streams (Dalaran ×2, Supatease ×4 including
+  "Top 7 Specs PVP Season 2" — PvP-only is out of scope for a PvE tracker), UI-setup videos,
+  and generic first-day livestreams with no class/spec/12.1/Season signal. Recorded at
+  discovery so the next run's accounting stays auditable.
+- No `generalCreators` (izen / Maximum / Zorthas) uploads were unseen this run, so no `latest`
+  fields moved and `community.json` is untouched.

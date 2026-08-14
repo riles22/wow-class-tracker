@@ -1207,3 +1207,35 @@ one-shot re-harvest, not a per-spec drip.**
   `wcl-ptr-raid-raw` 27 rows (six Venomous Abyss encounters with parses; Coiled Altar and
   Ula'tek 0), `wcl-ptr-mplus-raw` 27 rows (all 8 S2 PTR dungeons at 2000). The five rDPS-family
   cuts stay frozen and unchanged.
+
+## 2026-08-14 (nightly, CI runner)
+
+- **archon — a genuine new cut with a collapsed sample.** 33 rows of "95th pct DPS (Mythic)" and
+  7 of "95th pct HPS (Mythic)" merged at Archon's own cut date 2026-08-14; every value moved and
+  every parse count fell with the end of Season 1 (n now in the hundreds, e.g. Unholy DK 17203 →
+  477). Raid "Popularity" merged (39/40 moved); **the M+ half of popularity and all 40 M+ score
+  rows are byte-identical with identical parse counts — the M+ cut has NOT re-run since 08-10**,
+  so nothing was re-stamped (both rows recorded `partial`). Archon's re-cut detector is the
+  parse-count column, never `lastUpdated`, which advanced on pages that did not re-cut.
+- **murlok — 40/40, zero value changes.** Ranks contiguous 1..27 / 1..7 / 1..6. The Season-1 M+
+  ladder is finished, so the top-50 ceilings are frozen; murlok publishes no self-date, so the
+  fresh observation is stamped at the fetch date.
+- **wowmeta — no re-run.** manifest.snapshotDate still 2026-08-11 (completedAt 22:52:39Z
+  unchanged), all 40 lowerBound + numberOfCharacters reproduce stored exactly. Nothing merged.
+- **bloodmallet — MID1 retired, MID2 still incomplete (night 2).** 14 of 27 DPS specs return
+  charts, all `simc_settings.tier == "MID2"` re-simmed 2026-08-12 19:37–19:45; the other 13
+  return the 76-byte error body on 4 retries each. Merging a partial MID2 set beside 12 stored
+  MID1 profiles would mix sim tiers inside the build's within-role percentile labels, so nothing
+  was ingested. **Owner decision pending: adopt MID2 wholesale once the roster re-sims.**
+- **simulationcraft — no re-sim.** MID1_Raid.html re-fetched (37.2 MB), own Timestamp still
+  2026-08-08 07:28:33+0000. All 26 stored values reproduce exactly. **PARSE NOTE:** take the
+  best variant per spec from the **FIRST** `"data":[…]` chart block only — the later blocks are
+  burst/DTPS/priority charts, and matching player names across all blocks reads ~300k values
+  that look like DPS and are not.
+- **mythicstats — period still 1075** (10000 chars / 2863 unique, 22.6 avg key). 34 bars, 15
+  moved. Spec name comes from the bar `<img title=…>`; the visible label carries only the number.
+- **robydoby (best-effort, outside the contract)** — sheet re-read, newest Mythic week is still
+  24/7; nothing new to ingest.
+- **WCL — no fetch of any kind by this agent.** `wcl-fetch/evidence.json` (2026-08-14T17:58:40Z)
+  verdict **"rdps-broken"**. The three raw keys landed via the deterministic step:
+  `wcl-dummy-raw` 103 rows, `wcl-ptr-raid-raw` 27, `wcl-ptr-mplus-raw` 27. Five rDPS cuts frozen.

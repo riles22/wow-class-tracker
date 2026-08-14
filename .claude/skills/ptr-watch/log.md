@@ -1110,3 +1110,29 @@ one-shot; see docs/s2-flip-runbook.md.
   now re-confirms **Season 2 on August 18**, inside `PHASE_FLIP_DUE` 2026-08-20. Tracker is
   still pre-flip (`PHASES.liveSeason` "s1", `SNAPSHOT_PHASE` "12.1-ptr"). Owner one-shot; see
   docs/s2-flip-runbook.md.
+
+## 2026-08-14 (nightly, CI runner)
+
+**No new build — feed unchanged at 15 entries** (newest still the 2026-08-06 launch notes).
+
+- **Official thread 2317811.json:** posts_count 17, highest_post_number still 19 (Linxy,
+  2026-07-31T23:42Z). With 12.1 shipped this thread is closed for the cycle.
+- **Wowhead news RSS** (40 items, 2026-08-11..08-14, bodies read from `content:encoded` in one
+  fetch): no PTR build, no spec tuning. Three items recorded rather than logged —
+  (a) the **Aug-13 live hotfixes** carry a Classes section that is two BUG FIXES (pet Spirit Walk
+  in Vaults of Atal'utek; Affliction's Seed of Corruption not consuming Shard Instability) on
+  LIVE realms, not PTR tuning, so nothing entered the feed — consistent with 08-12 and 08-13;
+  (b) "Season 2 Trinket Tuning Now Live" is item tuning with no spec attribution;
+  (c) **"Patch 12.1.5 PTR Now Listed on Battle.net Launcher" (08-13)** — the next cycle is
+  starting. Per the standing gotcha, a new cycle means a NEW forum thread: re-discover it via
+  Wowhead RSS and re-point the `thread` key when the first 12.1.5 development notes appear.
+  Nothing is datamined yet.
+- **Blue-tracker sweep** (US index, 20 topics, full browser header set — a UA-only GET is 403):
+  no standalone class-tuning blue post. Only "Season 2 Class Tuning Plans" (the 08-12 roadmap
+  already recorded: first pass 08-18, then 08-25 / 09-01 / 09-22) and the hotfix mirror.
+- **WCL zones 54 / 52 / 56 are evidence-only on the runner** — verdict "rdps-broken", nothing
+  ingested, stored data untouched. Zone 57 is not covered by the deterministic step and was not
+  fetched here.
+- **Writeup coverage unchanged: 39 of 40.** Demonology Warlock's null stays deliberate.
+- **Migration status, unchanged and NOT attempted:** 12.1 is live, Season 2 opens 08-18 (inside
+  `PHASE_FLIP_DUE` 2026-08-20); tracker still pre-flip. Owner one-shot, docs/s2-flip-runbook.md.

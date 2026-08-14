@@ -800,3 +800,34 @@ skipped fetch.
 - **wowhead — 80 assignments, 0 moves, but the M+ DPS page REBUILT TODAY** (JSON-LD
   dateModified 2026-08-13, was 08-08) without moving a letter; stored `published` advanced for
   that page only. All six titles read "Midnight Season 2" → `seasonVerified` s2 (season-ahead).
+
+## 2026-08-14 (nightly, CI runner)
+
+All five tier sources fetched live; 320 assignments applied (icyveins raid 40, icyveins-ptr 40,
+method 80, wowhead 80, archon 80).
+
+- **METHOD REBUILT FOR SEASON 2 — `seasonVerified` s1 → s2 on both brackets.** The raid page
+  now self-dates "Last Updated 10th August 2026" and describes "the Midnight Season 2 Raid,
+  The Venomous Abyss"; the M+ page self-dates 13th August (Tactyks byline, "Midnight Season 2").
+  Yesterday both pages carried **zero** occurrences of 12.1/Season 2. 51 tier moves — a wholly
+  new list — including **Vengeance DH, absent from the raid list for months, now rated B**.
+  Consequence is the designed one: a season-ahead outlet leaves the live consensus and becomes
+  a next-patch forecast input, with publish's `freeze-season.mjs` restoring its final s1
+  letters. Archon is now the ONLY source feeding the live consensus in its own right.
+- **archon — 26 tier moves, ALL RAID, zero M+.** Not a retune: Season 1 ended on 08-11 and the
+  raid parse pool collapsed ~97% (per-spec parses sum 219704 → 6435 on the DPS page; Devourer DH
+  13674 → 527). M+ pool untouched at ~2.5M parses with byte-identical per-spec counts. Treat
+  single-night raid moves from Archon as thin-sample noise until S2 refills the pool.
+- **archon per-encounter — 185 moves, all raid; M+ byte-identical.** **Crown and Chimaerus now
+  publish an EMPTY throughput tier list upstream** (142 / 299 parses; their survivability lists
+  still populate), and Vanguard's tank cut is empty. Verified by re-fetching those pages alone,
+  so it is upstream emptiness, not a parse miss → "empty = nothing to ingest": their stored rows
+  were LEFT UNTOUCHED rather than erased. Vaelgor & Ezzorak legitimately lost 2 specs. 678 rows.
+- **icyveins — raid landed (1 move: Restoration Druid B → A), M+ still scale-blocked, day 5.**
+  The raid-healer page republished today (dateModified 2026-08-13T23:44Z, changelog "13 Aug.
+  2026: Further updated for Midnight Season 2 launch after the first few live tests"), so its
+  stored `published` advanced 08-06 → 08-13. Live M+ still publishes S+/B+/TBD and is still
+  byte-identical to the icyveins-ptr list on all 40 rows — owner escalation, unchanged.
+- **wowhead — 80 assignments, 0 moves**, all six `published` dates unchanged and agreeing with
+  published-evidence. **icyveins-ptr — 0 moves**, no rebuild since 08-09 (Sunday cadence),
+  Subtlety Rogue still an explicit TBD null.
