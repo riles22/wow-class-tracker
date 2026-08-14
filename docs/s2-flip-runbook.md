@@ -80,6 +80,25 @@ numbers that matter on the day, they move with the data.
    change that removes it from the forecast term; the exact mechanism is the owner's
    call in review (the "retype to live" path is ruled out — it would hand Icy Veins
    2 of 3 consensus votes).
+   **⚠ THREE TESTS RED ON THIS STEP AND THE PRE-STAGED PATCH DOES NOT COVER THEM.**
+   Measured in a full local dry run, 2026-08-14 — the flip patch handles the PHASES/era
+   changes but nothing in it touches the registry RETIREMENT, so `npm test` inside the flip
+   commit lands 3 red even with the patch applied. All three are working as intended; they
+   are tripwires, and the flip-day action is to update each in the same reviewed commit:
+   - `test/fetch-published.test.mjs` → "the repo's real contract yields exactly the
+     published-gated pages as evidence targets" pins the literal map
+     `{ icyveins: 6, "icyveins-ptr": 3, wowhead: 6 }`. Drop the middle entry. This pin is
+     deliberate ("so a published block appearing or vanishing is always a deliberate,
+     reviewed change") — it is doing its job, not failing.
+   - `test/validate.test.mjs` → "the PTR tier list is registered as era-gated and M+ only"
+     asserts `icyveins-ptr` is in the registry. Retire the test with the source, or rewrite
+     it to derive ("any era:ptr tier list must be M+ only") so it re-arms next cycle.
+   - `test/validate.test.mjs` → "validateData gates the frozen final-season archive" uses
+     `icyveins-ptr` as its era:"ptr" subject and then asserts the error mentions `era:"ptr"`;
+     with the source gone the error becomes "is not a tier-list source" instead. Synthesize
+     an era:"ptr" source in the copy rather than naming a live registry id — the same
+     derive-don't-pin lesson `f02caec` applied to four other fixtures.
+   Step 7's requirement removals also feed the first of these, so do both before re-running.
 6. **Era prose residue**: with `ptr: null` the Era toggle hides (template boot, ~:1240) and
    the era tokens derive from `liveLabel` automatically. The remaining hand strings that
    still say "12.0.7" in JS tooltips (template ~:1740/:1763/:1787/:1791/:3166) read
@@ -111,9 +130,33 @@ numbers that matter on the day, they move with the data.
    MID2 sims are not comparable — whether `fightProfile` gets a `tier` field marking the
    basis change is an open owner call.
 9. **Verify like a local run**: `node src/freeze-season.mjs` (expect: icyveins/wowhead
-   pairs report LIVE again, method/archon report BEHIND and are NOT frozen — the 08-11 fix;
-   the s2 archive stays empty until an outlet leaves s2), `npm test && npm run build`,
+   **and now method** report LIVE again — method rebuilt for S2 on 2026-08-14, after this
+   runbook was written, so only **archon** reports BEHIND and is NOT frozen; the s2 archive
+   stays empty until an outlet leaves s2), `npm test && npm run build`,
    check-refresh `--manifest` informational, snapshot, rebuild, push.
+
+   **Dry-run results, 2026-08-14** (full local simulation of steps 0-7 + the flip patch,
+   against a throwaway clone — re-run it on the day, the numbers move with the data):
+   - Step 0 froze 80 rated cells across 2 brackets; the next build emitted `dist/s1.html`
+     and the footer "Past seasons" link with no further action. ✅
+   - Steps 1-3 applied cleanly; `PHASES` came out
+     `{liveSeason:"s2", liveLabel:"12.1", ptr:null}` with `ptrSunset` gone. ✅
+   - Step 4 via the preserved `icyveins-ptr` letters moved **33 of 40** M+ letters
+     (1 explicit null carried through). ✅
+   - Step 5 as a full registry removal passes `validate` but reds
+     `check-refresh --age` with two failures, because `required-sources.json` still carries
+     an `icyveins-ptr` requirement. **The paired edit is mandatory and was not written down
+     anywhere** — drop that requirement in the same commit. After the pairing, `--age` is
+     back to its single known bloodmallet red.
+   - Steps 5+7 red three tests the flip patch does not cover — see the ⚠ under step 5.
+   - `freeze-season` behaved exactly as this step predicts, and the build was clean.
+   With the three known reds updated, the flip state is green.
+
+   **A Windows gotcha, since this flip is a LOCAL run:** `git clone` of this repo fails
+   with "Filename too long" on the `gearing/data/simc-audit/**` paths unless
+   `git config --global core.longpaths true` is set. A partial clone looks like a working
+   tree and silently fails tests, which cost one wrong measurement during the dry run. If
+   you clone anything on the day, check `git status` is clean before trusting a result.
 
 ## How to run the flip night — NOT a scheduled run
 
