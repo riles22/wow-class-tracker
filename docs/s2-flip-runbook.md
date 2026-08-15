@@ -92,7 +92,9 @@ numbers that matter on the day, they move with the data.
    TBD specs are explicit `null`, never omitted (the `icyveins-ptr` convention). Fallback
    if the fetch cannot land: write all 40 as explicit `null` — post-flip M+ consensus is
    then Wowhead alone, disclosed by the count chip. NEVER: collapse S+ into S (refused as
-   fabrication, refresh-tiers/log.md:284), revert `seasonVerified` (a lie, and corrupts
+   fabrication — grep refresh-tiers/log.md for "Collapsing S+ into S was refused"; this
+   cited a line NUMBER until 2026-08-15, which the log prune would have silently broken),
+   revert `seasonVerified` (a lie, and corrupts
    `aheadSeasonFor`), or hold the flip (the check-refresh gate reds past 08-20 and a missed
    report-card boundary is unrecoverable).
 5. **Retire `icyveins-ptr` from the forecast** (B3): stop it feeding
