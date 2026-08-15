@@ -1279,3 +1279,89 @@ Archon's did not advance its own date, so most rows are honestly `partial`.
   verdict **"rdps-broken"** — rdps@3176 still "Internal server error" while OAuth/GraphQL are
   healthy (3600 pts/h, 36.74 spent). The three raw keys landed via the deterministic step:
   `wcl-dummy-raw` 103 rows, `wcl-ptr-raid-raw` 27, `wcl-ptr-mplus-raw` 27. Five rDPS cuts frozen.
+
+## 2026-08-15 (nightly CI, headless Opus 5, single-shot; started 10:57Z — SECOND run of this UTC day)
+
+Every metric source attempted fresh. **Nothing was merged, because no upstream had re-cut
+since the 05:34Z run** — verified value-by-value rather than assumed, which is the point of
+re-fetching: an unchanged number that has been reproduced from the live source is evidence,
+an unchanged number that was never fetched is a skip.
+
+- **archon-metrics / archon-hps / archon-mplus-score / archon-popularity — all four re-read,
+  all four byte-identical, none merged.** Read from `__NEXT_DATA__`
+  `specRankingsSection.table.data[]` (NOT `tierList`, which carries letters only): 33 raid
+  `dps` rows + 7 raid `hps` rows + 40 M+ `score` rows + 80 `popularity` rows (fraction ×100,
+  1 dp), every `parses` count also identical. Archon's own cut label is still
+  2026-08-14T12:00:00Z. So the stored dates stand where the earlier run left them — raid DPS
+  and HPS at **2026-08-14**, M+ score and M+ popularity at **2026-08-10** — and all four rows
+  are `partial`, never `success`: stamping today would be exactly the re-stamp the
+  bloodmallet/wowmeta `asOf` rule forbids. **archon-mplus-score is now 5 days old against
+  `maxAgeDays: 5`**, so the heartbeat alarms on it from here; that red is the honest signal
+  that Archon has not re-cut its M+ numbers since 08-10, not a defect on our side.
+  The raid healer page's `dps` column (healer DPS) is excluded here exactly as the stored
+  33-row shape has always excluded it.
+- **archon-survivability — 40/40 re-parsed (metric "survivability" specifically), 0 moves.**
+  Same 08-14 cut; nothing merged, stored `asOf` stays 2026-08-14.
+- **wowmeta — JSON API only, never the stale S3 HTML prerender.** `manifest.json` +
+  `rankings/midnight/mplus/all/0.json`, plain curl, 200. Whitelist `categoryType ∈
+  {dps,hps,tank}` **+** `sortField == "lowerBound"` **+** `keyRange === undefined` → exactly
+  27+7+6 = **40 rows** (the whitelist is what stops `melee`/`ranged`, which are subsets of
+  `dps`, from double-counting 27 specs). `manifest.snapshotDate` is **2026-08-11 for the
+  fifth day** (pipeline `completedAt` 2026-08-11T22:52:39.026Z, unchanged) and all 40
+  `lowerBound` values + all 40 `numberOfCharacters` reproduce stored exactly at 1 dp.
+  `asOf` is the source's snapshotDate and never today → nothing merged, stored stays
+  **2026-08-11** (4 days, maxAgeDays 8) → `partial`.
+- **murlok — 40/40 re-read live, 0 value moves.** Three meta pages by plain GET (200, 8–9 KB
+  gzipped / 70 KB inflated); r.jina.ai is not used on murlok. Parsed by splitting on `<a>`
+  tags and testing for `meta-item` anywhere in the tag — murlok's attribute order is NOT
+  stable, and a naive `<a class="vi-box meta-item…` split silently dropped 4 of 40 rows on
+  the first attempt tonight. The tell that it parsed cleanly is the rank column being
+  contiguous 1..27 / 1..7 / 1..6, and it is. Every "Top-50 avg M+ rating (ceiling)" is again
+  unchanged: the Season-1 M+ ladder is finished, so the top-50 ceilings stay frozen until
+  Season 2 opens 08-18. Murlok publishes no self-date and no cut identity ("updated every 8
+  hours with live data"), so the fetch date IS the only honest observation date; stored `asOf`
+  was already 2026-08-15 from the earlier run and remains correct.
+- **mythicstats — still period 1075, 34/34 bars identical.** Fetched directly (200, 185 KB;
+  `/period/latest` 302s to `/period/1075`), no proxy needed. Week 20 of MID1, top 2000 keys /
+  10 000 characters (2863 unique), 22.6 average key level — all unchanged. This source
+  publishes a cut IDENTITY, so an unchanged period + unchanged values IS the same cut:
+  nothing merged, nothing re-stamped, rows stay at **2026-08-14**. Six specs remain absent
+  from the figure upstream and keep their older dates.
+- **simulationcraft — same completed report, verified rather than assumed.** MID1_Raid.html
+  re-fetched (200, 37.2 MB); header still `Timestamp: 2026-08-08 07:28:33+0000`,
+  SimulationCraft 1205-01. All **26** stored "SimC nightly Patchwerk DPS" values reproduce
+  EXACTLY, taking the best variant per spec from the FIRST `"__data":[{"series":[{"data":[`
+  block (later blocks are burst/DTPS/priority charts carrying different quantities — matching
+  on player name across all blocks reads the wrong chart). The block also contains the six
+  tank specs; they are not stored and were not added, matching the long-standing 26-row DPS
+  shape. Rows stay at **2026-08-08** (7 days, maxAgeDays 10) → `partial`. The report is still
+  simming 12.0.7, four days after 12.1 shipped.
+- **bloodmallet — MID1 IS STILL RETIRED AND MID2 IS STILL INCOMPLETE, fourth night; nothing
+  ingestible.** All 27 DPS specs requested from `talent_target_scaling/castingpatchwerk`,
+  4 attempts each: the SAME 14 returned charts, and **they were re-simmed today —
+  `timestamp` 2026-08-15 07:35–07:37, up from 2026-08-12** — while the SAME 13 (Havoc +
+  Devourer DH, Balance + Feral Druid, Augmentation + Devastation Evoker, Windwalker Monk,
+  Retribution Paladin, Assassination + Outlaw Rogue, Demonology Warlock, Arms + Fury Warrior)
+  returned the 76-byte `{"status": "error"}` body on all four tries. Every returned chart is
+  `simc_settings.tier == "MID2"`. Merging 14 MID2 charts alongside 12 stored MID1 profiles
+  would mix two sim tiers inside the within-role percentile labels the build derives from
+  `fightProfile`, so the stored MID1 profiles are untouched at **2026-07-08** (38 days,
+  maxAgeDays 5 — the red heartbeat IS the honest signal). **OWNER DECISION STILL PENDING:**
+  adopt MID2 wholesale once bloodmallet has re-simmed the full DPS roster. The fresh 08-15
+  timestamps say upstream is actively re-simming, so the decision may become actionable soon.
+- **robydoby (best-effort, outside the contract)** — `htmlview` re-read (200), tab map parsed
+  from the `items.push({name: …gid=N` blocks: 26 tabs, newest **Mythic** week is still
+  **24/7** (Sszorak #5, Twin Fangs #6). No new Mythic week → nothing to ingest; the 17/7
+  Tidebound Grotto tabs are zone 57 and are skipped by design.
+- **WCL — no fetch of any kind by this agent, by any means.** `wcl-fetch/evidence.json`
+  (attemptedAt 2026-08-15T10:53:48Z) verdict **"rdps-broken"**: `characterRankings(metric:
+  rdps)` on encounter 3176 still returns a bare "Internal server error" while OAuth and
+  GraphQL are healthy (3600 points/hour, 1 spent). `evidence.landed` carries the three RAW
+  keys only — `wcl-dummy-raw` 103 rows (1T 2000 ranked players / 2T 662 / 3T 297 / 5T 2000),
+  `wcl-ptr-raid-raw` 27 rows pooled over the six Venomous Abyss encounters that carry parses
+  (Vashnik 678, Soulcoiler 370, Sentinels 363, Sszorak 184, Lost Explorers 150, Twin Fangs
+  146; Coiled Altar and Ula'tek both 0 — an unopened testing window, not an error), and
+  `wcl-ptr-mplus-raw` 27 rows over all 8 Season-2 PTR dungeons at 2000 each. Those rows were
+  merged by the deterministic step itself before this agent started and were neither
+  re-fetched nor edited here. The five rDPS/normalized cuts stay frozen: live raid + live M+ +
+  PTR M+ + Dummy Dome rDPS at **2026-08-10**, zone-54 normalized at **2026-07-28**.

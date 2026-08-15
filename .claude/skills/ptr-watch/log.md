@@ -1185,3 +1185,48 @@ the Season 2 launch tuning pass applied with the 08-18 weekly reset.
   `node gearing/src/sync-tracker-fields.mjs` then `npm run gearing:build`, both under
   `gearing/`, which the nightly publish job does not stage — so it was deliberately NOT run
   here. `npm test` and the publish gate are unaffected; only the heartbeat alarms.
+
+## 2026-08-15 (nightly CI, headless Opus 5, single-shot; started 10:57Z — SECOND run of this UTC day)
+
+All three channels checked; **nothing new to log — `data/ptr-builds.json` stays at 16 entries,
+newest 2026-08-15.** No writeup changed, no `tierSet` changed.
+
+1. **Official dev-notes thread** `2317811.json`: `posts_count` 17, `highest_post_number` still
+   **19**, `last_posted_at` 2026-07-31T23:42:09Z. Closed for this cycle, as it has been since
+   the patch shipped.
+2. **Wowhead news RSS**: 40 items spanning 2026-08-11 → 2026-08-15T01:05Z, parsed per `<item>`
+   block (never by tag adjacency). The newest item is 10 hours old, so the window is identical
+   to the 05:34Z run's. Nothing tuning-related is unlogged: "Season 2 Class Tuning Incoming
+   with Weekly Reset - Blood DK Nerf" is the mirror of the Aug-18 post already in the feed.
+3. **Standalone blue posts** — the blue-tracker index is **Cloudflare-403 to this runner**
+   (919-byte challenge body), so discovery was done against the forum's own Discourse search
+   instead (`search.json?q=@<staff>+after:2026-08-12` for Linxy / Kaivax / Aerythlea). Newest
+   Linxy post is still topic **2336820** "Class Tuning Incoming – August 18"
+   (2026-08-15T00:11Z), already logged as feed entry #16. Newest Kaivax class content is the
+   Aug-14 hotfix topic (2336376), below.
+   *Transport note for the next run: the 403 is on `wowhead.com/blue-tracker` specifically,
+   and `search.json` answered every query in one round with no auth. Prefer it.*
+
+**Checked and deliberately NOT logged** — the Aug-14 live hotfix round-up (topic 2336376;
+post 1 was EDITED at 2026-08-15T01:00:47Z and re-posted as post 18, which is why it can look
+new). Its Classes section is **bug fixes only, with no tuning numbers**: Devastation's
+Shattering Star now correctly benefits from Mastery: Giantkiller, Arms/Fury Slayer's
+Executioner no longer double-dips, Warlock pets no longer keep re-learning Soul Leech, and a
+Demonology cooldown-manager display fix. Everything numeric in that post is trinket/item
+tuning (Coiled Fangstone +15%, Gaze of the Alnseer -20% primary stat, …) or reward plumbing.
+This matches the 05:34Z run's disposition of the Aug-13/Aug-14 round-ups; re-litigating it
+would only churn the feed.
+
+**WCL zones 54 / 52 / 56 / 57 are evidence-only for this agent** and are reported under their
+own manifest keys — see the refresh-metrics log for the `rdps-broken` verdict and the three
+RAW keys that landed.
+
+Coverage recomputed rather than read (the two-line recipe in CLAUDE.md): **39/40 writeups**,
+the single null being Demonology Warlock, which is deliberate — the source reported no
+changes, and "nothing changed" is not a verdict.
+
+**Still open from the 05:34Z run, unchanged:** those eight `tierSet` edits still leave
+`check-refresh --age` reporting `gearing-tierset-sync`. The fix is
+`node gearing/src/sync-tracker-fields.mjs` + `npm run gearing:build` under `gearing/`, which
+the nightly publish job does not stage — so it stays a LOCAL-run duty and was again not run
+here. `npm test` and the publish gate are unaffected; only the heartbeat alarms.

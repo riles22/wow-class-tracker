@@ -2207,3 +2207,52 @@ one published inside the 12.1 cycle** (first build 2026-06-18).
   fields moved and `community.json` is untouched.
 - Coverage recomputed: every spec holds at least one live take; **Brewmaster Monk** is still the
   only spec with no RAID-scoped one, and nothing queued tonight is Brewmaster.
+
+## 2026-08-15 (nightly CI, headless Opus 5, single-shot; started 10:57Z — SECOND run of this UTC day)
+
+**ZERO takes and ZERO metaNotes added, changed or superseded — the transcript budget is
+spent.** `transcript-fetch/summary.json` (2026-08-15T10:57:18Z) reports verdict
+**`limit-exceeded`** on the single video it attempted (`bqVHzvKJCuA`), 1 requested / 0
+fetched, "remaining queue untouched": Supadata's free tier is **100 requests per MONTH** and
+the month's budget is gone, third night running. No transcript was readable, and this agent
+fetched none from YouTube or any transcript API by any means.
+
+**RSS IS BACK.** Last night's 404 wall (40 of 44 channels, four rounds of backoff over ~10
+minutes, worked around with yt-dlp) did not recur: `youtube.com/feeds/videos.xml` answered
+**44/44 channels on the first attempt**, 660 videos enumerated, 0 failures. That confirms it
+was the documented transient burst after all, just an unusually long one — yt-dlp stays the
+fallback, not the default.
+
+Seen-set rebuilt from the four STRUCTURED lanes (never a regex over this log): `seen[]` 502 +
+`skipped[]` 295 + `videos[]` 43 + every `youtu.be/<id>` in a take or metaNote = **1027 ids**.
+Against it, **14 unseen videos**, all 14 published on or after the 12.1 cycle's opening build
+(2026-06-18, the OLDEST date in `ptr-builds.json` — taken as a date, never as an index). The
+sweep is this small precisely because RSS dates are exact tonight, so nothing needed the
+approximate-date caution the yt-dlp run had to record.
+
+**8 queued** under the nightly keyword filter (queue 43 → **51**), all 08-14/08-15 uploads:
+Preheat's 12.1 Arcane Mage guide (`ajdnU9EAGtU`, the highest-value item), Supatease "12.1
+CLASS TESTING POWER" (`VdxJLYndJSg`), Bansherz "Friday Tuning" Hunter stream (`tFU5qCIEUF8`),
+MadSkillzzTV on the Resilient key system (`E2YySmAwnuM`), Shadarek with a Havoc-guide stream
+(`nTMq3Y3U14Y`), Shindigg 12.1 launch stream (`kxujYlK8KG8`), and two LBNinja7 Mistweaver
+streams (`Qu5OGUGRZPM`, `FdMtgWW4oIk`). They drain when the monthly budget resets or in a
+local run.
+
+**6 NOT queued, and none of them written to `seen[]`** — this is deliberate. The lane exists
+for videos dismissed on a DATE bound or a newest-first cut; a *keyword* dismissal is a
+nightly-only economy (Supadata's monthly quota), and burning it into `seen[]` would
+permanently retire the video from the unfiltered LOCAL sweep, which is exactly the breadth
+the 08-08 policy bought. Left unexamined for a local run: Kalamazi "Main/Alt Gearing and Prep"
+(`mMPBLggVX3E` — a Warlock authority on S2 gearing; the best of the six), Tettles
+`Nk8WpSLYCVo`, Maximum "live from AWTF test stream" (`x27SdcsuiMU`), NeekapHere on the Coiled
+Isle (`l6KzJBK6vrs`, zone content), Megasett achievement short (`f0DnTRIO3pw`), and Dalaran
+Gaming "Demon Hunters Are BACK With Vengeance In 12.1! (5v5 1v1 Duels)" (`oUjUd8kcWew`) —
+that last one matches the keyword filter but is **PvP duel content, out of scope for this PvE
+tracker**, the same scope line ptr-watch applies to PvP-only tuning lines.
+
+No `generalCreators` (izen / Maximum / Zorthas) upload was in scope this run — Maximum's only
+new video is the AWTF PvP test stream — so no `latest` field moved and `community.json` is
+untouched.
+
+Coverage recomputed: every spec holds at least one live take; **Brewmaster Monk** is still the
+only spec with no RAID-scoped one, and nothing queued tonight is Brewmaster.
