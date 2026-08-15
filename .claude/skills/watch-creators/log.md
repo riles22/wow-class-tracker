@@ -2256,3 +2256,62 @@ untouched.
 
 Coverage recomputed: every spec holds at least one live take; **Brewmaster Monk** is still the
 only spec with no RAID-scoped one, and nothing queued tonight is Brewmaster.
+
+## 2026-08-15 (local run, evening) — the 51-video queue drained with yt-dlp
+
+The reason this run exists. Supadata's free tier has been `limit-exceeded` for three straight
+nights, so the nightly added to `pending-transcripts.json` without ever draining it and the
+queue had grown to **51**. yt-dlp from the residential IP fetched **45 of 51** on the pinned
+2026.7.4 build with no extractor rot.
+
+**6 could not be fetched and stay queued** — not skipped, because none was transcript-verified:
+`bqVHzvKJCuA` (Sha) and `U_bAsRSY5Y4` (Megasett) both return "This live event will begin in a
+few moments", and four have no captions published yet (`vbYnrLDqHoc` Nintern, `tFU5qCIEUF8`
+Bansherz, `nTMq3Y3U14Y` Shadarek — all 08-15 uploads where auto-captions may still be
+processing — plus `JFEqnHV99uk` Musguete from 07-15, which is a month old and probably never
+getting them). Queue **51 → 6**.
+
+**12 takes added, 11 superseded**, from 7 videos. Coverage recomputed after the merge with the
+two-line recomputation, and the headline is that **`no raid take` is now empty**: Sha's Season 2
+plans video (`im6DkjkRDlw`) carries a substantial raid-scoped Brewmaster read — the Celestial
+Brew/Infusion cooldown doubling, argued structurally against the apex-talent proc loop — which
+closes the one RAID-scoped gap this log has been carrying. Brewmaster raid confidence moved
+**low → medium** as a result; it was previously a cell with no PTR-aware evidence at all.
+
+Other takes: YoDaTV's log-based Prot Paladin M+ argument (Sentinel uptime 38% → 25-31%),
+Shadarek on the Devourer tier-set gutting with pre-APL sim overrides, Preheat quantifying the
+Arcane nerf at 4.7% ST / 2.5% AoE, MadSkillzzTV's five-healer walkthrough of the August 18
+tuning (Resto Druid, Mistweaver split raid/M+, Disc raid, Holy Priest), Dratnos on Fury and
+Arms, and Pkpawner on the Windwalker AoE-burst pullback.
+
+**Net effect on published letters: zero.** 16 projection scores moved by 1-3 points in the
+direction of the takes, and **no projection or consensus letter crossed a band** — shrinkage
+plus the one-edge clamp working as designed.
+
+**38 verified-skipped**, which is the point of the unfiltered local sweep: the title is a bad
+predictor in both directions. Notable earned skips — Tactyks' "Venomous Abyss TANK TIPS" is a
+pure encounter-mechanics guide with zero strength language despite reading like tank analysis;
+Kalamazi's "COIN & CRAFT", flagged by last night's nightly as "the best of the six" unexamined,
+turns out to be a gearing/embellishment guide with no spec read; and Preheat's full Arcane guide
+(`ajdnU9EAGtU`) was recorded BEFORE the nerf he reacts to in `ekZp5FfWXfg`, so distilling it
+would have recorded a superseded state. Both Supatease "class testing" streams were skipped on
+measured framing rather than vibe (197 PvP references against 73 PvE in one; 36 against 14 in
+the other) — battleground testing is out of scope for a PvE tracker.
+
+**Three scope-review flags for a human — none acted on, per the skill's "note it, don't
+silently override" rule:**
+1. **YoDaTV competently analyses Balance Druid** (`9SUfTFMcRJk`) — a log-driven argument that
+   Moonkin is weak in Season 2 M+, using a world-class Moonkin's parse. Balance is outside his
+   declared Druid scope (Guardian only), so the take could not be written. This is the single
+   highest-value blocked distillation of the run.
+2. **Sha ranges well beyond Brewmaster** in `im6DkjkRDlw` — competent reads on Windwalker,
+   Blood DK, Prot Warrior and Prot Paladin, including an explicit disagreement with YoDaTV's
+   Wowhead tank list placing Prot Warrior weakest. Only the Brewmaster half was distilled.
+3. **Supatease's authority looks PvP-shaped.** He holds 6 live takes across Shaman, Affliction
+   and Arms/Prot Warrior, but both of his videos this run were PvP-framed by a wide margin and
+   his tuning read-through is a PvP-lens recitation. Worth deciding whether a PvP creator
+   should carry specialist takes in a PvE tracker's expert panel.
+
+Also confirmed while distilling: the **August 18 class tuning** both Shadarek and Preheat react
+to is already logged in `ptr-builds.json` (2026-08-15 entry, 14 specs) — ptr-watch caught it
+this morning, so these takes are commentary on a build already in the feed, not a lead.

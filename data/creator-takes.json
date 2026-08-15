@@ -440,7 +440,8 @@
       "sentiment": "neutral",
       "claim": "After playing every Venomous Abyss PTR boss, Pkpawner thinks the raid broadly suits Windwalker — heavy-movement fights favor its mobility and several encounters fit its damage profile — though a couple are stinkers, with the triple-boss Lost Explorers arguably its worst fight due to lost melee uptime.",
       "url": "https://youtu.be/rXk-axP9lSU?t=449",
-      "bracket": "raid"
+      "bracket": "raid",
+      "superseded": true
     },
     {
       "class": "Monk",
@@ -451,7 +452,8 @@
       "sentiment": "neutral",
       "claim": "He reads Shado-Pan as the stronger hero build across most of the new raid's add-heavy fights thanks to its flexible one-minute cooldowns and stomp burst for clearing add clumps, while Conduit's rigid cooldown timings force awkward delays and only shine on single-target or lineup-friendly bosses.",
       "url": "https://youtu.be/rXk-axP9lSU?t=61",
-      "bracket": "raid"
+      "bracket": "raid",
+      "superseded": true
     },
     {
       "class": "Monk",
@@ -462,7 +464,8 @@
       "sentiment": "buff",
       "claim": "He sees So'leah's recurring 30% damage-amp windows as a chance for Conduit Windwalker to be an exceptional pick that demolishes the boss with disciplined cooldown holding — potentially a prime Windwalker fight if spec tuning lands, reinforced by strong Detox and Transcendence utility.",
       "url": "https://youtu.be/rXk-axP9lSU?t=309",
-      "bracket": "raid"
+      "bracket": "raid",
+      "superseded": true
     },
     {
       "class": "Warrior",
@@ -1878,7 +1881,7 @@
       "patchContext": "12.1 PTR (2026-07-21 build)",
       "claim": "Reading through the PTR notes, Dratnos frames the Arms Dreadnought change as a good move: making Dreadnought purely AoE damage (+100%, no longer hitting the Overpower target) with Cleave -10% spreads Arms' AoE off its Cleave-dominated profile and gives Slayer better options, letting Blizzard tune the AoE rotation on its own.",
       "url": "https://youtu.be/7UTSF0BXbD4?t=1174",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Shaman",
@@ -3090,7 +3093,7 @@
       "patchContext": "12.1 PTR — Season 2 M+ healer tier list (short-form update)",
       "url": "https://youtu.be/3E1yuNcmS2g?t=58",
       "claim": "He says Resto Druid's damage is really not good and he would like to see further healing buffs, reading the spec as caught in Blizzard's difficulty balancing it between raid and Mythic+ at the same time.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Priest",
@@ -3455,7 +3458,8 @@
       "sentiment": "nerf",
       "patchContext": "12.1 PTR — Season 2 Protection Paladin M+ guide",
       "url": "https://youtu.be/15eTmWfKrLc?t=0",
-      "claim": "His S2 guide opens by placing Prot Paladin below Blood DK on current PTR tuning, and says it is significantly worse on total survivability and external healing required. Root cause he gives is the rework losing Sanctified Wrath plus the heavy Reflection of Radiance nerf: Sentinel now covers roughly 20-25 seconds a minute instead of the 30-40 second windows of S1, leaving about 15 seconds a minute uncovered by any cooldown. His verdict is that it is defensively worse than in Season 1 despite gaining 10% DR, crit wings during Sentinel and a better damage profile. What keeps it playable is utility: near-solo interrupt coverage off Avengers Shield and Divine Toll resonance, and a one-minute Sacrifice external he calls OP for M+ since no other tank has one — a strong pug-carrying pick rather than a strong tank."
+      "claim": "His S2 guide opens by placing Prot Paladin below Blood DK on current PTR tuning, and says it is significantly worse on total survivability and external healing required. Root cause he gives is the rework losing Sanctified Wrath plus the heavy Reflection of Radiance nerf: Sentinel now covers roughly 20-25 seconds a minute instead of the 30-40 second windows of S1, leaving about 15 seconds a minute uncovered by any cooldown. His verdict is that it is defensively worse than in Season 1 despite gaining 10% DR, crit wings during Sentinel and a better damage profile. What keeps it playable is utility: near-solo interrupt coverage off Avengers Shield and Divine Toll resonance, and a one-minute Sacrifice external he calls OP for M+ since no other tank has one — a strong pug-carrying pick rather than a strong tank.",
+      "superseded": true
     },
     {
       "class": "Priest",
@@ -4305,7 +4309,7 @@
       "claim": "He reads Holy Paladin as being in a good place for Season 2 and gives a mechanism rather than just the usual 'it does a lot of healing' line: the 30% increases to player health pools and creature damage make Holy Light a more efficient cast, where in Season 1 the spec was overweight on Holy Light spam that cost enormous mana and overhealed. He adds that the Season 2 tier set amplifies this by guaranteeing Infusion of Light procs, and is taking it as an alt."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Mage",
       "spec": "Arcane",
       "creator": "Preheat",
@@ -4431,7 +4435,7 @@
       "sentiment": "nerf",
       "patchContext": "12.1 PTR — Season 2 M+ outlook (healer prep stream)",
       "url": "https://youtu.be/u869GspePck?t=1094",
-      "superseded": false,
+      "superseded": true,
       "claim": "A clear step down from his early-August read. He calls it chill and easy to pick up but says plainly he does not think it will be perceived as good next season. His specific complaints are mobility and button availability: no Renew, Shadow Word: Pain replaced on the talent, so the only things to press while moving are Chastise, Serenity and Holy Word cooldowns, none of them spammable — something he says took him a while to adjust to.",
       "bracket": "mplus"
     },
@@ -4748,7 +4752,7 @@
       "claim": "Asked what to pick, he offers Assassination as the safe default rather than the strongest choice, reasoning that a spec built around cooldowns tends to survive tuning better. He is explicit that tuning is not final and that nobody knows the meta pick yet, and he hedges his own PTR/raid-testing read with 'should not be terrible, if it is not bugged'. He also says Deathstalker is significantly ahead of Fadebound for the spec. Recorded neutral because he declines to make a strength claim."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Monk",
       "spec": "Mistweaver",
       "creator": "MadSkillzzTV",
@@ -4760,7 +4764,7 @@
       "claim": "He walks back his own placement from roughly eleven days earlier, saying he put too much emphasis on Mistweaver and would now put it around B tier. Pressed on whether it is genuinely bad, he separates the brackets: not that bad in M+, where he argues a lot of healers sit at similar power, but possibly weak in raid. He had expected buffs to the spec's Sheilun's/Vivify line before launch, says they have not arrived, and still expects them before the raid opens — so the read is a downgrade held open pending tuning rather than a settled negative."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Demon Hunter",
       "spec": "Devourer",
       "creator": "Shadarek",
@@ -4820,7 +4824,7 @@
       "claim": "He opens by saying Havoc is looking to be pretty good for raid coming into 12.1, and good for Mythic+ too with the caveat that Devourer may simply overshadow it there. The centrepiece is Essence Break: its initial hit was buffed by almost 50%, the tier set adds 12% from the two-piece and another 35% to the initial hit on the four-piece, extends its duration from four to six seconds and cuts the cooldown from 40 to 30 seconds — over double the old initial damage — which is why he now presses it on cooldown and why the whole season's build is arranged around it. Other gains: the dead Dash of Chaos talent was replaced with Never Say Die (3% damage above 50% health, leech below it, in practice a damage increase), Trail of Ruin became flat damage rather than a dot, Serrated Glaive moved from an enemy debuff to a self-buff that is permanently up, and Blade Dance, Death Sweep, Chaos Strike and Annihilation all took small buffs. Against that he flags real losses: Immolation Aura's fury generation dropped from 40 to 30 and Blind Fury was nerfed again, so Havoc is now noticeably more reliant on a shaman's fury economy; Inertia was cut to 12% for five seconds because the compensating duration increase was never applied, which he calls a massive nerf that makes it unplayable; and the global 25% player health increase indirectly devalues leech to roughly 80% of its old power, so the spec feels less tanky even though he still rates it incredibly tanky overall. On builds he says the pure single-target Fel-Scarred build sims best for that hero tree but still sims slightly below Aldrachi Reaver and is only worth considering on the raid's one true single-target fight, so he expects cleave-oriented builds in practice; Aldrachi Reaver's Mythic+ build is identical to its raid build bar one talent swap, and Trail of Ruin is dropped in both."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Priest",
       "spec": "Discipline",
       "creator": "MadSkillzzTV",
@@ -4890,6 +4894,150 @@
       "patchContext": "12.1 PTR — his Season 2 tank rankings and tier list, raid section (distilled 2026-08-13 when his scope was widened to Vengeance; the M+ half of the same video is firewalled out, since he authors the Method M+ list already in the consensus)",
       "url": "https://youtu.be/TaJvkmzeJ_8?t=975",
       "claim": "He places Vengeance at the bottom of his raid rankings, in the B tier alongside Brewmaster, and defines that tier explicitly as a raid-buff question: only bring these if you need the buff, and if you do not, probably do not play them. The structural reason he gives is specific to the spec — Vengeance's damage is tied to its defensives, so pushing for output leaves you less tanky while playing for survival costs a lot of damage, making it less consistent than other tanks. He stresses this bites hardest early in the tier, when bosses are still dangerous. Compounding it, the Demon Hunter raid buff is available from elsewhere: he rates both Havoc and Devourer relatively competitive, with Devourer the better of the two, so a raid wanting the buff need not spend its tank slot on it. Note for context that Method's own raid tier list, which he does not author, omits Vengeance entirely rather than ranking it."
+    },
+    {
+      "class": "Paladin",
+      "spec": "Protection",
+      "creator": "YoDaTV",
+      "date": "2026-08-13",
+      "sentiment": "nerf",
+      "bracket": "mplus",
+      "patchContext": "12.1 PTR - a dedicated argument that Season 2 Protection Paladin is worse than Season 1 for Mythic+, built on live-log Sentinel uptime rather than the notes (supersedes his 08-03 M+ guide read)",
+      "url": "https://youtu.be/z0weFwfFuSQ?t=225",
+      "claim": "He argues against the widespread expectation that Protection Paladin is the M+ meta tank if Blood DK is not, saying flatly that it will not be Paladin and that Season 1 Prot Paladin is actually stronger than Season 2. The evidence he leans on is Sentinel uptime measured off logs rather than tooltips: a Season 1 log of his own shows 38.4% uptime, while Season 2 logs filtered to after August 1 (past the PTR nerfs) show a spread of roughly 25% to low-30s across several different Paladins. He attributes the drop to two stacked changes - losing Sanctified Wrath cuts Sentinel's base duration from 15 to 12 seconds despite the notes describing it as extended, and Reflection of Radiance was significantly reduced, so Holy Bulwark resets extend it less. His framing of why a 6-8 point uptime loss matters more than it looks: Season 1 coverage was roughly 48 of every 60 seconds, leaving only 12 seconds to survive uncovered, so adding two to three uncovered seconds is about a 20% increase in the time you must kite, beg an external, or CC through. He credits the offsetting gains honestly - a baseline 10% cooldown reduction on Blessed Hammer that he says feels very nice inside cooldowns, a Divine Guidance quality-of-life hotfix, and damage moved into Shield of the Righteous - but judges the minor self-healing buffs a wash against the universal 25% tank health increase, and concludes the defensive uptime loss outweighs the package.",
+      "superseded": false
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "creator": "Shadarek",
+      "date": "2026-08-15",
+      "sentiment": "nerf",
+      "bracket": "both",
+      "patchContext": "12.1 PTR - reaction to the Friday August 14 'Class Tuning Incoming - August 18' post, with preliminary sim overrides (supersedes his 08-11 refusal to forecast)",
+      "url": "https://youtu.be/GedxU3Q37a4?t=477",
+      "claim": "He reads the August 18 tuning as a clear net nerf to Devourer while stressing the magnitude is still a question mark. The tier set is the centre of it: the 4-piece now grants 2 soul fragments instead of 8 and buffs Reap damage 10% instead of 20%, which he works through as a drop from roughly 1.6 souls per Reap cast to 0.4 - a fifth as good at generating souls as it was, against a baseline Devour value of 2. Reap, Call and Eradicate take a 12% cut, Eradicate's AoE is slightly raised, and all ability damage is buffed 14%, which he assumes excludes the three nerfed abilities. His preliminary override sims, explicitly before the APL is reworked, put Void Scarred dungeon at 239.5k from 255k and Annihilator dungeon at 222k from 243k (just under a 10% cut); on AoE, Void Scarred falls about 3% to 656k and Annihilator about 5% to 633k, leaving Annihilator around 3% behind where the two were previously close. He is careful that these numbers will recover somewhat once the rotation is rebuilt, since the build can no longer afford to press Call and Reap freely and Collapsing Star was buffed drastically. His guess, offered with an explicit admission he could be wrong, is that the changes end up better for Annihilator than Void Scarred but need more extensive APL work to show it. He closes by saying he no longer knows what he will play into the patch and is holding off until sims and live performance settle.",
+      "superseded": false
+    },
+    {
+      "class": "Mage",
+      "spec": "Arcane",
+      "creator": "Preheat",
+      "date": "2026-08-15",
+      "sentiment": "nerf",
+      "bracket": "both",
+      "patchContext": "12.1 PTR - a measured update on the August 18 Arcane tier-set nerf, cut into his in-progress Season 2 Arcane guide (supersedes his 08-09 roundtable raid read)",
+      "url": "https://youtu.be/ekZp5FfWXfg?t=68",
+      "claim": "He quantifies the August 18 Arcane tier-set nerf with SimC overrides after first checking it by hand. The 2-piece loses its extra missile and drops from 20% to 5% increased missile damage; the 4-piece's Accumulate Power falls from 5% to 3% per stack across eight stacks. Segmented, the 4-piece change alone is a 2.7% loss and the 2-piece alone 4.7%, for 7.4% before the compensating 3% baseline buff - landing at a net 4.7% single-target nerf and about 2.5% in AoE, so the cut hits single target roughly twice as hard. His read on what that changes is deliberately narrow: the relative ordering inside Mage is untouched, with Arcane still the best Mage spec at single target but Fire very close, Frost still ahead at two targets, and Arcane still far ahead in AoE. He expects it to change how many Arcane Mages a raid brings rather than whether it is played at all, saying it is probably not so good that you bring a second unless a fight's add pattern lines up with its cooldowns. For Mythic+ he still calls the damage fine and expects players already on Arcane to stay, while pushing back on the idea that it will be an overpowered must-have meta pick - and he caveats that M+ standing depends on the whole comp rather than the Mage. He characterises the pass overall as cutting the top off the tuning without closing the gap, which he says remains quite large.",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Restoration",
+      "creator": "MadSkillzzTV",
+      "date": "2026-08-15",
+      "sentiment": "buff",
+      "bracket": "both",
+      "patchContext": "12.1 PTR - walkthrough of the August 18 healer tuning, first-week-of-raid pass (supersedes his 08-01 short-form tier-list read)",
+      "url": "https://youtu.be/39tIEQJLJFw?t=28",
+      "claim": "He reports Blizzard buffing Restoration Druid on an explicit developer note that both its healing and damage are underperforming relative to other healers: all healing +4% and all damage +20%. His own read is that the direction is right but the size is conservative - he notes Wildstalker damage was low on the PTR even accounting for the 20%, and says the damage buff could honestly have been a lot higher. On healing he does not think Restoration Druid is all that bad in raid, and frames Blizzard as being very careful because so little data exists before the season opens. He expects Mythic+ Restoration Druids in particular to have wanted a much larger increase and does not think they will be insanely happy, but places the pass in context as first-week tuning with further passes scheduled for the following weeks. He characterises the whole tuning round as soft changes aimed at raid performance rather than big swings.",
+      "superseded": false
+    },
+    {
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "creator": "MadSkillzzTV",
+      "date": "2026-08-15",
+      "sentiment": "nerf",
+      "bracket": "raid",
+      "patchContext": "12.1 PTR - walkthrough of the August 18 healer tuning, raid half (supersedes his 08-11 unsplit read; the M+ half is recorded separately and stays live)",
+      "url": "https://youtu.be/39tIEQJLJFw?t=167",
+      "claim": "On the raid side he judges Mistweaver Monk to be in a genuinely poor place and the August 18 buffs to be nowhere near sufficient to fix it, saying in his own words that Mistweaver was really, really poor in raid and agreeing with players who will read the notes and conclude this is not even close to enough. The changes themselves are an 8% all-healing increase - which he points out is Blizzard reverting an 8% healing cut it made on the PTR rather than new headroom - plus a 33% higher activation rate on the Venomous Abyss 4-piece. He wanted the buffs targeted at Sheilun's and Vivify specifically and says the across-the-board healing increase does reach them but that he wants further changes to those abilities. He softens the outlook only by pointing at the schedule rather than the spec: more data arrives when the season actually launches, further tuning is planned, and he advises players not to reroll off a healer they enjoy on the strength of a first-week pass.",
+      "superseded": false
+    },
+    {
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "creator": "MadSkillzzTV",
+      "date": "2026-08-15",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "12.1 PTR - walkthrough of the August 18 healer tuning, Mythic+ half (complements, not replaces, the raid half recorded from the same video)",
+      "url": "https://youtu.be/39tIEQJLJFw?t=157",
+      "claim": "For Mythic+ he reads the same August 18 package far more positively than he does for raid, calling it nice that Blizzard is walking back some of the nerfs it applied on the PTR - the 8% all-healing increase restores an 8% cut, and the Venomous Abyss 4-piece activation rate rises 33%. He volunteers that he had knowingly placed Mistweaver Monk a little high on his own Mythic+ tier list because he expected exactly these follow-up buffs, and says the changes would not shift that tier list all that much. He attaches one important scoping caveat of his own: Way of the Crane and Ancient Teachings are damage-conversion driven and so are not affected by flat healing increases, which limits how much of the buff actually reaches a Mythic+ Mistweaver's throughput. He also warns generally that this tuning round is calibrated on raid performance and that Mythic+ balance tends to slip through the cracks in such passes.",
+      "superseded": false
+    },
+    {
+      "class": "Priest",
+      "spec": "Discipline",
+      "creator": "MadSkillzzTV",
+      "date": "2026-08-15",
+      "sentiment": "buff",
+      "bracket": "raid",
+      "patchContext": "12.1 PTR - walkthrough of the August 18 healer tuning, raid read on the Discipline damage cut (supersedes his 08-12 raid take; his 08-12 M+ read stays live)",
+      "url": "https://youtu.be/39tIEQJLJFw?t=283",
+      "claim": "He reads the headline 30% Discipline Priest damage cut as a spec that escaped pretty nicely rather than one that was taken down. The offsetting changes are what carry his conclusion: Atonement now transfers 46% of damage into healing instead of 32%, and Entropic Rift damage is up 20%, so he expects HPS to come out slightly ahead - he adds that Void Shield's reflected damage should not be hit by the damage reduction while still benefiting from the higher Atonement transfer. He had considered the nerf fully expected by anyone watching raid logs, describing Voidweaver Discipline damage in raid as absolutely insane and noting the widespread assumption that this would be a double-Discipline season. His verdict after the cut is that Discipline is still most likely one of the best DPS healers in raid, that Voidweaver remains the raid recommendation, and that he could still see double Discipline in the race to world first. He expects Mythic+ Discipline players to stay on Oracle.",
+      "superseded": false
+    },
+    {
+      "class": "Priest",
+      "spec": "Holy",
+      "creator": "MadSkillzzTV",
+      "date": "2026-08-15",
+      "sentiment": "buff",
+      "bracket": "both",
+      "patchContext": "12.1 PTR - walkthrough of the August 18 healer tuning, Holy Priest section (supersedes his 08-09 M+ read)",
+      "url": "https://youtu.be/39tIEQJLJFw?t=308",
+      "claim": "He reads the August 18 Holy Priest changes as a substantial and welcome package on a spec he thinks needed the attention. Two threads: Enlightenment now regenerates mana 25% faster instead of 10%, which he calls very much needed for Holy Priest's mana economy; and a set of Oracle throughput buffs - Words of the Wise raising Holy Word: Serenity and Sanctify healing by 40% instead of 10%, Prompt Prognosis healing up 55%, and Preventative Measures raising Prayer of Mending healing by 40% instead of 15% - which Blizzard frames as making Oracle competitive against Archon. He notes these same abilities were already buffed on the PTR a couple of weeks earlier, so this compounds rather than starts the trend. His read on where it lands: Oracle is already the Mythic+ recommendation and this cements it further, while for raid the previous recommendation was Archon and he expects the build choice to genuinely reopen. He counts Holy Priest among the underperforming raid healers Blizzard set out to lift in this pass, alongside Restoration Druid and Mistweaver.",
+      "superseded": false
+    },
+    {
+      "class": "Monk",
+      "spec": "Brewmaster",
+      "creator": "Sha",
+      "date": "2026-08-14",
+      "sentiment": "nerf",
+      "bracket": "raid",
+      "patchContext": "12.1 PTR - his Season 2 plans video, the Brewmaster raid section (complements, not replaces, his 08-06 Mythic+ read, which stays live)",
+      "url": "https://youtu.be/im6DkjkRDlw?t=341",
+      "claim": "He is openly and self-consciously negative on the Season 2 Brewmaster rework while planning to main the spec anyway. The change he objects to is Celestial Brew and Celestial Infusion having their cooldown doubled to 1.5 minutes with the absorb raised by 150%. He credits the likely intent - Blizzard published no note, but he infers they want Brewmasters to feel tankier against specific raid tank busters - and concedes from his own two-night cutting-edge-casual raiding that this was a real Season 1 problem: after the pruning he felt weak compared to other tanks against tank busters, naming the Light-Blinded Vanguard in the Void Spire raid where he felt very weak, and Bellerin's tank busters. He contrasts that with Brewmaster's historic identity, where Stagger and what he calls insanely overpowered defensives - Dampen Harm, Diffuse Magic, Zen Meditation, Zen State before its nerf - carried the spec, and says that no longer felt true. His objection is structural rather than numerical: the spec is designed around an apex talent driven by RNG and guaranteed Empty Barrel procs, so lengthening the brew cooldown puts the fundamental gameplay loop in jeopardy. He says the class does not feel good to play over a long fight, and that even inside a one- or two-minute pull you hit stretches where you cannot purify or stagger enough, run out of brews and energy, and are left exposed.",
+      "superseded": false
+    },
+    {
+      "class": "Warrior",
+      "spec": "Fury",
+      "creator": "Dratnos",
+      "date": "2026-08-15",
+      "sentiment": "buff",
+      "bracket": "both",
+      "patchContext": "12.1 PTR - his read-through of the final buffs and nerfs before the season, Warrior section",
+      "url": "https://youtu.be/7gUtt03Z-fE?t=810",
+      "claim": "He reads the August 18 Fury Warrior changes as a straightforwardly good outcome. Blizzard's stated framing is that the 4-piece is overperforming but Fury is in a good place overall, so value is moved out of the set and into baseline: the 4-piece Recklessness critical-strike bonus drops from 5% up to 10% down to 3% up to 6%, while all damage rises 6%. He works through the trade and concludes you end up doing slightly more damage inside the Recklessness window and moderately more outside it, which he calls pretty good and quite good for Fury - with one hedge that he is not familiar enough with the set bonus to rule out an unnoted change. His forward-looking read is that Fury might actually be a real contender with Arms this tier, depending on how much the Slayer Executioner bug fix hurt Arms, and he sums up that DPS Warrior definitely looks like a solid option this tier, which he calls exciting.",
+      "superseded": false
+    },
+    {
+      "class": "Warrior",
+      "spec": "Arms",
+      "creator": "Dratnos",
+      "date": "2026-08-15",
+      "sentiment": "nerf",
+      "bracket": "both",
+      "patchContext": "12.1 PTR - his read-through of the final buffs and nerfs before the season, Warrior section (supersedes his 07-22 build-note read)",
+      "url": "https://youtu.be/7gUtt03Z-fE?t=756",
+      "claim": "His Arms Warrior read this pass is a relative downgrade delivered without any new Arms tuning line. The cause is a hotfix rather than the August 18 notes: Slayer had been overperforming for both Warrior specs because of a bug that gave Executioner doubled value, and Blizzard states the fix brought overall Arms performance into its intended range - which he glosses as having otherwise looked super OP. Because Blizzard is happy with where that landed, Arms receives no compensating baseline buff, while Fury does get one to offset both the bug fix and its set-bonus change. His conclusion is that Arms is a little bit worse than it looked the week before the hotfix landed, and that the gap to Fury has closed enough that Fury may now be a real contender with it.",
+      "superseded": false
+    },
+    {
+      "class": "Monk",
+      "spec": "Windwalker",
+      "creator": "Pkpawner",
+      "date": "2026-08-14",
+      "sentiment": "nerf",
+      "bracket": "both",
+      "patchContext": "12.1 PTR - his complete Season 2 Windwalker Monk guide, the changes section (supersedes his three 06-27 pre-launch raid takes)",
+      "url": "https://youtu.be/qqfKXd6GwPI?t=269",
+      "claim": "In his Season 2 guide he characterises the headline Windwalker change as a deliberate pullback of on-demand AoE burst, opening with the observation that since 12.0.5 and the addition of Zenith Stomp, Windwalker was one of the strongest on-demand AoE burst specs in the game, and that Blizzard decided this was too intense. Three cuts land together: Zenith Stomp damage is reduced 30%, Weapon of the Wind's damage increase during Zenith drops from 10% to 5%, and the tier 2/3 apex talent's ability critical-strike damage falls from 10% and 20% to 5% and 10%. He calls these relatively significant and notes they are all tied to the apex talent, so the effect is both a weaker apex-driven burst window and a Zenith Stomp that does substantially less damage in all content - which he says carries through into meaningfully different talent builds for the season. He is lukewarm rather than damning on the compensation, describing the self-healing buffs as not especially impactful but better than nothing.",
+      "superseded": false
     }
   ],
   "metaNotes": [
