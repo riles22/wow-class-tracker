@@ -16,6 +16,47 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-15 (nightly, 21:50 UTC — second run of this UTC day)
+
+Every numeric source re-fetched; **not one value moved**, so nothing was merged and most rows
+are honestly `partial`. Row counts: archon 33 DPS + 7 HPS + 40 M+ score + 80 popularity (all
+byte-identical incl. every parse count), wowmeta 40/40 identical with Last-Modified 11 Aug
+15:25 GMT confirming its own manifest snapshotDate 2026-08-11, murlok 40/40 identical,
+mythicstats 34 rows summing 100.3% (60.2/20.1/20.0 by role) identical, robydoby 24 DPS + 7
+healer identical.
+
+**A parser trap caught tonight, worth keeping: murlok writes the anchor attributes in either
+order.** Some rows are `<a href=... class="...meta-item...">` and others `<a class="...
+meta-item..." href=...>`, so splitting the document on the href form returned **10 of 40 rows
+on three HTTP 200 pages** — the silent-shortfall shape that only a printed row count catches.
+Anchor on the `meta-item` class and read the href out of the tag. Also noted: each murlok page's
+own `<time datetime>` reads 2026-08-12T02:17Z despite the site's "updated every 8 hours" claim,
+and the pages still self-label Season 1 — upstream looks frozen while our fetch is healthy.
+
+**Bloodmallet is the one moving source and it is still held back wholesale.** 14 of 27 DPS
+charts return data after 3 retries each; all 14 are `simc_settings.tier` **MID2** with chart
+timestamps 2026-08-15, against MID1 in stored data. The 13 absent are Augmentation (by design)
+plus Havoc, Devourer, Balance, Feral, Devastation, Windwalker, Retribution, Assassination,
+Outlaw, Demonology, Arms, Fury. Merging the 14 would publish *which specs got re-simmed* as
+spec strength (`fightLabels` pools with no provenance key; MID2 ≈ 1.79× MID1), so the tier
+gate holds and `fightProfile.asOf` stays at the CHART's 2026-07-08 — 38 days, threshold 5,
+heartbeat red on purpose. When the roster completes, that adoption will also need a human
+`value_move_ack` (64 of 156 sim rows move >60%).
+
+SimC: `MID1_Raid.txt` is again a 272-byte in-progress log, header
+`12.1.0.69299 Live (hotfix 2026-08-15/69299, git build HEAD b642585cbf)` — a Season-2 re-sim
+running now. `MID1_Raid.html` is unchanged (1205-01, 12.0.7.68974, git build 678e66d384,
+timestamp 2026-08-08 07:28:33Z), so an unchanged parse is the honest explanation.
+
+Robydoby (best-effort, outside the contract): tab map re-parsed, newest **Mythic** week is
+still 24/7 M (Sszorak + Twin Fangs) — the sheet stopped with the PTR cycle — and re-parsing
+both tabs at that week's own date reproduces all 24 in-scope DPS and all 7 healer values, so
+no in-place recalculation this time. Tank rows in the per-boss DPS lists were not ingested.
+
+WCL: no credentials in this run; five rDPS-family cuts recorded `unreachable` from
+`wcl-fetch/evidence.json` (verdict `rdps-broken`), three raw keys landed by the deterministic
+step (dummy 102 rows, ptr-raid 27, ptr-mplus 27) and were neither re-fetched nor edited here.
+
 ## 2026-08-15 (nightly)
 
 A quiet numbers night: only Archon's raid cut and murlok produced a fresh observation, and

@@ -16,6 +16,42 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-15 (nightly, 21:50 UTC — second run of this UTC day)
+
+All five tier lists re-fetched live and **ZERO tier moves anywhere** — 360 assignments re-read
+(icyveins 80, icyveins-ptr 40, method 80, wowhead 80, archon 80), 0 unmatched, and nothing
+merged because nothing moved.
+The two Wowhead M+ DPS moves from the earlier run of this same day (Assassination B→A, Shadow
+C→B) reproduce exactly, which is the useful confirmation: they were upstream, not parse drift.
+
+Per-page row counts, printed and reconciled against 27 DPS + 7 healer + 6 tank = 40:
+icyveins 27/7/6 + 27/7/6, icyveins-ptr 27/7/6, method 40 + 40, wowhead 27/7/6 + 27/7/6,
+archon 27/7/6 + 27/7/6. Transports: Icy Veins plain browser-UA GET; Wowhead FULL header set
+then unescape `\/` across the whole document BEFORE searching for `[tier-list=rows]` (one
+block per page tonight, so no decoy `printHtml` was in play); Method `.tier__tier` blocks with
+non-roster alts rejected by ROSTER MATCH (the 8 S2 dungeon names + the logo), never by
+position; Archon `__NEXT_DATA__` with every entry resolved from its `icon` "Class-Spec" token.
+
+**Era, unchanged and re-verified from each page's own body:** icyveins s2 (the raid-HEALER
+page again carries a "Patch 12.0.7 / Midnight" title over a changelog reading "13 Aug. 2026:
+Further updated for Midnight Season 2 launch" — body over title, the blue-tracker precedent),
+icyveins-ptr s2, method s2 (raid body names The Venomous Abyss ×3; M+ lists the S2 dungeons),
+wowhead s2, archon **s1** (encounterOptions are still the nine S1 bosses and the eight S1
+dungeons). No `seasonVerified` value changed, so `freeze-season.mjs` had nothing to be run
+for; the nightly publish job runs it regardless.
+
+`published` re-read per page, never carried forward, and agreeing 9/9 with the deterministic
+published-evidence artifact: icyveins raid DPS/tank 08-08, raid healer 08-13, M+ ×3 08-08;
+icyveins-ptr ×3 08-09 (JSON-LD dateModified; the in-body "Last UPDATED" still says 08-02 and
+dateModified wins). Wowhead 08-14/08-08/08-14/08-15/08-09/08-11. Archon `lastUpdated` is still
+2026-08-15T12:00:00Z with unchanged totalParses (4277/1120/600) — it has not re-cut since the
+earlier run, which is why the letters reproduce and the numeric rows stay `partial`.
+
+Encounter tiers: full 51-page re-fetch (9 bosses + 8 dungeons × 3 roles), 51/51 HTTP 200,
+618 rows parsed, 0 diffs. The same six role cuts are empty upstream (Crown ×3, Chimaerus
+healer+tank, Vanguard tank) and three are short; their 59 stored rows were left untouched per
+"empty = nothing to ingest", so the file still holds 677 rows at Archon's own 2026-08-14.
+
 ## 2026-08-15 (nightly)
 
 All four live tier-list sources plus `icyveins-ptr` fetched fresh. **Consensus movement: 3

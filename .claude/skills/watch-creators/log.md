@@ -16,6 +16,42 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-15 (nightly, 21:50 UTC — second run of this UTC day)
+
+**Discovery clean, distillation impossible.** `transcript-fetch/summary.json` reports verdict
+`limit-exceeded` (requested 1, fetched 0, `bqVHzvKJCuA`): the Supadata free-tier monthly budget
+is spent, so there was no transcript to distil and **0 takes / 0 metaNotes** were added. No
+YouTube or transcript-API fetch was made by this agent.
+
+RSS: all **44** unique channel feeds polled with backoff, 44/44 HTTP 200, **660** entries
+scanned against a **1035-id** seen-set built from the four structured lanes (`seen[]`,
+`skipped[]`, `videos[]`, plus every `youtu.be` id in creator-takes.json) — never by regex over
+this log. **17 unseen.**
+
+- **1 retired to `seen[]`** as a durable dismissal: `80dIIds3qPM` (Dalaran Gaming, "What Did
+  Blizzard Do To ROGUES In 12.1? (5v5 1v1 Duels) - PvP"). Explicit PvP frame = permanently out
+  of scope, the same shape as `oUjUd8kcWew` retired earlier today.
+- **0 queued.** The queue already holds 12 against an exhausted monthly budget, and everything
+  else tonight is guide/route-shaped (Tactyks S2 routes, Sha's Temple of Sethraliss route,
+  Megasett's Mistweaver M+ guide, Baze's Fury guide, Dalaran's Assassination guide), stream- or
+  Short-shaped (Tettles ×2, Critcake, Kalamazi, NeekapHere, a Megasett achievement Short,
+  Maximum's live AWTF test stream), raw footage (Harrek's Dummy Dome healer pulls), or a
+  Supatease upload whose channel reads PvP by default.
+- **16 left UNSEEN on purpose.** None of those judgments is durable, so they stay
+  reconsiderable by a local run with yt-dlp rather than being marked off.
+
+The one genuine borderline: `mzjGn70Hf20` (AutomaticJak, "Updating Tier Lists then M0s! | UI in
+description!"). A tier-list update is the highest-value take shape, but this one is
+stream-shaped and the same creator's *dedicated* tier-list video from the same day
+(`c_5u7Jpy-Uo`, "Healer Tuning AND Tier List Updates for M+/Raid Season 2 Launch") is already
+queued — so queueing it would likely spend a second request on duplicate content. Left unseen.
+
+yt-dlp was tried **once**, to settle that video's duration/live status, and hit the expected
+datacenter bot wall ("Sign in to confirm you're not a bot"); not retried, per the standing
+back-off rule. That is also why `bqVHzvKJCuA` — still the suspected live stream first flagged
+on 08-09 — was left queued rather than purged on a guess. No creator `latest` advanced, since
+nothing was distilled.
+
 ## 2026-08-15 (nightly)
 
 **Two independent degradations tonight, both recorded rather than worked around.**

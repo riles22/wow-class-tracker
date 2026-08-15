@@ -16,6 +16,43 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-15 (nightly, 21:50 UTC — second run of this UTC day)
+
+**Nothing new to log on any of the four channels.** (1) Dev-notes thread `2317811.json` via
+curl for the full `post_stream`: 17 posts, `last_posted_at` 2026-07-31T23:42:09Z, newest is
+Linxy #19 — already the feed's 07-31 entry. The thread has been quiet 15 days; the PTR cycle
+ended when 12.1 shipped. (2) Wowhead RSS, parsed per `<item>` block: 40 items, newest
+2026-08-15 15:35 CDT. (3) News INDEX (`data.news.newsData`, brace-balanced from the id
+attribute) polled as well because it leads RSS within a run: 20 posts, top id 382472, nothing
+beyond RSS. (4) Blue tracker (`data.blueTracker.default`): 50 entries → 42 unique topics.
+
+**The two candidate blues were re-read in full and independently confirmed as non-feed
+material** — the same conclusion the earlier run reached, reached again from the source rather
+than inherited: topic **2336376** (Kaivax, Hotfixes August 14) has a Classes section that is
+entirely BUG FIXES with no tuning values (Devastation Shattering Star / Mastery: Giantkiller,
+Warrior Slayer Executioner double-effect, Warlock pet Soul Leech, Demonology cooldown-manager)
+while every numeric change in it is trinkets and items; topic **2335871** (Kaivax, "Season 2
+Class Tuning Plans", 08-12) is a calendar — Aug 18 / Aug 25 / Sep 1 / Sep 22 — with no per-spec
+line. Writing either as a `Spec Class — …` highlight would feed bug-fix or calendar text into
+the outlook tally.
+
+**Lead recorded, not logged:** news 382443 (08-13) — "Patch 12.1.5 PTR Now Listed on Battle.net
+Launcher". A new cycle means a NEW forum thread (the `thread` key would need re-discovery), but
+the article states the patch itself has not been updated and no datamining is possible yet, so
+there is nothing to discover. Re-check when 12.1.5 dev notes appear.
+
+WCL zones were **not fetched by this agent** (no credentials): from `wcl-fetch/evidence.json`,
+verdict `rdps-broken` — zone 54 (PTR raid, normalized) and zone 52 (Dummy Dome rDPS) and zone
+56 (PTR M+ rDPS) all unreachable through the broken metric family, while the three RAW-DPS
+recipes landed (52: 102 rows, 1T/2T/3T/5T = 2000/662/297/2000 ranked players; 54 Heroic: 27
+rows across 8 encounters, Coiled Altar and Ula'tek at 0; 56: 27 rows, all eight dungeons at the
+2000-player pagination ceiling). Zone 57 not probed — no credentials, and it has never
+aggregated.
+
+Writeup coverage recomputed rather than read: **one** spec has no `ptr` writeup (Demonology
+Warlock, the deliberate "source reported no changes" null); **zero** specs lack a raid-scoped
+or an M+-scoped expert read.
+
 ## 2026-08-15 (nightly)
 
 **A new feed entry — the first in nine days.** The dev-notes thread is closed for this cycle
