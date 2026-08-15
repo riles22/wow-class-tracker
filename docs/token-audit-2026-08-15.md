@@ -190,8 +190,20 @@ an agent at the quiet lane cannot move a gate.
 - **CLAUDE.md split** (~24 KB across five moves, each leaving a named pointer) was scoped and
   verified but deliberately **deferred past the 08-18 flip** — it churns the file the flip
   agent reads.
-- The nightly's <50% log-retention check will warn once on watch-creators (42%). It is a
-  `::warning::`, not a gate.
+- ~~The nightly's <50% log-retention check will warn once on watch-creators (42%).~~
+  **RESOLVED 2026-08-15 — and "once" was optimistic.** The 50% was justified with "the logs
+  hold 32-40 entries, so a prune drops near half"; that entry count was wrong (a `^- 20` grep
+  undercounted — they held 64-78), so the rule would have fired on *every* prune, not one, and
+  a rule that fires on the operation it exists to tolerate is noise. Re-measured across all
+  **336** real log transitions in history: the lowest legitimate all-lines retention is this
+  prune's 42%, a wholesale rewrite scores ~0%, so the threshold is now **20%** — verified
+  silent on the real prune, on an append, and on the worst transition in history, and still
+  warning at 0% on a synthetic rewrite.
+  A "newest-K lines" variant was tried first and is **refuted, do not re-propose**: the idea
+  (a prune removes the OLDEST entries, a rewrite alters the NEWEST) is sound, but this prune
+  also RE-SORTED the files — §1 notes `refresh-tiers` was chronologically scrambled — so the
+  old file's leading lines were not its newest and newest-120 retention fell to 1% for
+  `refresh-tiers` and 16% for `ptr-watch`, destroying the separation the idea depended on.
 
 ---
 

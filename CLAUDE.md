@@ -133,13 +133,17 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   console.log("no writeup:",s.filter(x=>!x.ptr).map(x=>x.class+" "+x.spec));
   console.log("no raid take:",g("raid")); console.log("no mplus take:",g("mplus"));})'
   ```
-  Coverage as measured 2026-08-14: **one** spec has no writeup (Demonology Warlock, whose null
+  Coverage as measured 2026-08-15: **one** spec has no writeup (Demonology Warlock, whose null
   is deliberate — the source reported no changes, and "nothing changed" is not a verdict), down
-  from nine; every spec carries at least one live take; and **one** has no RAID-scoped one
-  (**Brewmaster Monk**). That last count is the one that matters, because raid is the bracket
-  with almost no PTR empirical evidence — and note it is a TANK, the role this file elsewhere
-  records as having no PTR raid signal of any kind. The durable fix is a computed digest
-  coverage line (`audit-2026-07-24.md`, D12), still unbuilt; until it exists, recompute rather
+  from nine; every spec carries at least one live take; and **zero** specs have no RAID-scoped
+  take. That last count is the one that matters, because raid is the bracket with almost no PTR
+  empirical evidence — the last gap was Brewmaster Monk, a TANK, in the role this file elsewhere
+  records as having no PTR raid signal of any kind, and the 08-15 local drain (`a97e260`) closed
+  it. **This paragraph is now pinned** by `test/claude-md.test.mjs`, which recomputes the gap
+  sets and reds when the prose and the data disagree — added after this exact sentence went
+  stale for the fourth time, including once in the very commit whose message announced it was
+  closing the gap. The durable fix is still a computed digest coverage line
+  (`audit-2026-07-24.md`, D12); until that exists the test is the backstop, but recompute rather
   than read. Since v8 the PROJECTION's
   read is **bracket-scoped** (an explicit `bracket: "raid"|"mplus"|"both"` on the take wins;
   else the patchContext text decides via the same regexes as the meta nudge; naming neither

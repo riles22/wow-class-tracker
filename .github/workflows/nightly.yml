@@ -551,11 +551,24 @@ jobs:
           # logs legitimately do would each trip a strict gate: entries are inserted NEWEST-FIRST
           # under a header (so "append-only as a prefix" is simply the wrong shape — it fails on
           # 7 of the last 56 real transitions), old entries are PRUNED by design ("keep the newest
-          # ~20 entries", and the logs currently hold 32-40, so a first prune legitimately drops
-          # near half), and entries are occasionally REVISED with a dated correction, which is
-          # honest self-correction and the behaviour we want. Retention across all 56 real
-          # transitions was >= 99.3% (median 100%), so 50% flags a wholesale rewrite with a wide
-          # margin while tolerating the documented prune.
+          # ~20 entries"), and entries are occasionally REVISED with a dated correction, which is
+          # honest self-correction and the behaviour we want.
+          #
+          # THRESHOLD RECALIBRATED 2026-08-15, because the first real prune falsified the first
+          # calibration. The original 50% was justified with "the logs hold 32-40 entries, so a
+          # prune drops near half" — that entry count was simply WRONG (a `^- 20` grep undercounted;
+          # they held 64-78), and the 08-15 prune retained 42% on watch-creators/log.md. So the
+          # rule fired on precisely the operation it was written to tolerate, and it will do so on
+          # every future prune, not once.
+          # Re-measured across all 336 real log transitions in history: the lowest legitimate
+          # all-lines retention is the prune's 42%, while a wholesale rewrite scores ~0%. 20% sits
+          # between with margin on both sides.
+          # A "newest-K lines" variant was tried FIRST and is REFUTED — do not re-propose it. The
+          # idea was sound (a prune removes the OLDEST entries, a rewrite alters the NEWEST) but
+          # the 08-15 prune also RE-SORTED the files (refresh-tiers was chronologically scrambled),
+          # so the old file's leading lines were not its newest: newest-120 retention fell to 1%
+          # for refresh-tiers and 16% for ptr-watch, destroying the separation the whole idea
+          # depended on. Measured, not argued.
           node -e '
             const { execSync } = require("child_process");
             const fs = require("fs");
@@ -570,8 +583,8 @@ jobs:
               if (!was.size) continue;
               let kept = 0; for (const l of was) if (now.has(l)) kept++;
               const pct = Math.round((kept / was.size) * 100);
-              if (pct < 50) {
-                console.log(`::warning::${file} retained only ${pct}% of its previous lines — a prune is legitimate, a rewrite is not; check the diff before trusting this run precedent`);
+              if (pct < 20) {
+                console.log(`::warning::${file} retained only ${pct}% of its previous lines — even a full prune keeps ~42%, so this looks like a rewrite; check the diff before trusting this run precedent`);
               }
             }
           '

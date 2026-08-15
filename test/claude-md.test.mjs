@@ -148,3 +148,47 @@ test("CLAUDE.md: every tier-list scale it names still exists in data/scales.json
     );
   }
 });
+
+test("CLAUDE.md: the take-coverage paragraph matches what expertRead actually returns", async () => {
+  /* The one claim in this file with a track record of going stale — four times, most
+     recently in commit a97e260, whose own message announced "the recomputation now returns
+     an empty 'no raid take' list" while leaving the prose asserting Brewmaster Monk was
+     still a gap. CLAUDE.md warns the reader to recompute, and that warning is doing real
+     work, but a false specific claim is still false. Unlike the test/skip counts this file
+     deliberately leaves unpinned, coverage is NOT volatile noise: it changes only when a
+     writeup or a bracket-scoped take lands, which is exactly when the prose should be
+     edited. Reds only when prose and data disagree; the fix is the prose. */
+  const { expertRead } = await import("../src/render.mjs");
+  const takes = JSON.parse(
+    await readFile(path.join(ROOT, "data/creator-takes.json"), "utf8"),
+  ).takes ?? [];
+
+  const gaps = bracket => specs.filter(s => !expertRead(s, takes, bracket))
+    .map(s => `${s.spec} ${s.class}`);
+  const noWriteup = specs.filter(s => !s.ptr).map(s => `${s.spec} ${s.class}`);
+  const noRaid = gaps("raid");
+
+  /* \s+ rather than a literal space throughout: CLAUDE.md is hard-wrapped, so any of these
+     phrases can straddle a line break — the first draft of this test failed for exactly that
+     reason, which is the claim() helper doing its job rather than passing vacuously. */
+  const writeupClaim = claim(/\*\*(one|zero|two|three|\d+)\*\*\s+spec[s]?\s+(?:has|have)\s+no\s+writeup/, "writeup-coverage");
+  const raidClaim = claim(/\*\*(one|zero|two|three|\d+)\*\*\s+spec[s]?\s+(?:has|have)\s+no\s+RAID-scoped\s+(?:take|one)/, "raid-coverage");
+  const word = { zero: 0, one: 1, two: 2, three: 3 };
+  const num = m => (word[m] !== undefined ? word[m] : Number(m));
+  const stated = t => num((t.text.match(/\*\*(one|zero|two|three|\d+)\*\*/) ?? [])[1]);
+
+  assert.equal(stated(writeupClaim), noWriteup.length,
+    `CLAUDE.md:${writeupClaim.line} says "${writeupClaim.text}" but ${noWriteup.length} spec(s) have no ptr writeup: ${noWriteup.join(", ") || "(none)"}`);
+  assert.equal(stated(raidClaim), noRaid.length,
+    `CLAUDE.md:${raidClaim.line} says "${raidClaim.text}" but ${noRaid.length} spec(s) have no raid-scoped take: ${noRaid.join(", ") || "(none)"}`);
+
+  /* If the prose NAMES a spec as the raid gap, it must actually be one. This is the half
+     that would have caught a97e260 on its own: a count can be corrected while a stale NAME
+     survives in the same sentence. Silent when the prose names nobody, which is the correct
+     shape once the gap set is empty. */
+  const namedAsRaidGap = /no RAID-scoped[^.]*?\(\*\*([^*]+)\*\*\)/.exec(claudeMd);
+  if (namedAsRaidGap) {
+    assert.ok(noRaid.includes(namedAsRaidGap[1].trim()),
+      `CLAUDE.md names "${namedAsRaidGap[1].trim()}" as the raid-scoped gap, but the computed gap set is: ${noRaid.join(", ") || "(empty)"}`);
+  }
+});
