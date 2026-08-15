@@ -125,3 +125,63 @@ Fetch the current Midnight tier lists live and merge them into `data/specs.json`
   consensus; era-gated lists are shown and feed the projection, never the mean.
 - A new source first needs a scale in `data/scales.json` (check each tier round-trips
   through the consensus bands) and a registry entry — config only, no code.
+
+### Parser traps promoted from `log.md` (2026-08-15 context audit)
+
+Every rule below was learned by a run getting it wrong, and each one produced HTTP 200
+with plausible-looking output. They lived only in run-log prose until the log outgrew the
+Read tool and had to be pruned; they are here because losing them risks fabricated
+letters, not just a wasted run.
+
+- **Print per-page row counts every run and reconcile them against the roster shape** —
+  27 DPS + 7 healer + 6 tank = **40** per source-bracket (a 40/40 source only LOOKS partial
+  next to the DPS page). Nothing mechanical catches a per-page shortfall: ratings UPSERT, so
+  a page that parses zero rows leaves the previous letters standing, the stored count never
+  drops, and both `required-sources`' row floor and `maxRowDropPct` stay green on a run that
+  fetched nothing. Every silent parser failure on record returned HTTP 200 and surfaced ONLY
+  because a count was printed — the Wowhead decoy `printHtml` (33/40 raid, 2026-08-01), the
+  Method `findall` that ate the last tier block (29 rows of 39, all ten C-tier specs gone,
+  0 "unmatched" reported, 08-04), the double-space era check (74/80, 07-27), the missing
+  open paren (26/27, 07-30).
+- **Wowhead: unescape first, then find the block — never anchor on the `printHtml` call.**
+  Inside the `WH.markup` payload the BBCode is JSON-escaped (closing tags read
+  `[\/tier-label]`), so a literal search for `[tier-list]` finds *nothing* and the page looks
+  like it changed shape when it has not (2026-07-31). Unescape `\/` → `/` across the whole
+  document, then search it for `[tier-list=rows] … [/tier-list]`. Anchoring on
+  `WH.markup.printHtml(` is what produced the zero-row incidents the transport bullet above
+  alludes to: the raid-HEALER page carries **two** such calls and the first is a 1.2 KB
+  decoy, which returned 0 rows for that page while the other five parsed fine (2026-08-01).
+  Also **match the tier label with tolerant whitespace** — Wowhead writes
+  `[tier-label bg=q3]B [/tier-label]` with a trailing space inside the tag, and a strict
+  regex mis-mapped 16 B-tier M+ DPS specs up to A before a cross-check caught it (07-20).
+  If the prose `N. Spec Class (X Tier)` list is ever used as a fallback it is typo-ridden:
+  normalise `X-Tier` → `X Tier` and match `[SABCDF]\+?` (a `[+-]?` pattern invented 13
+  phantom `S-`/`A-`/`B-` moves, 07-30 / 08-02) and tolerate a missing `\(?`.
+- **Icy Veins: take the FIRST `alt=` after each `class="tier-list-entry"`, and look the
+  `"Spec Class"` string up WHOLE.** The first-alt rule is what excludes the spell-icon alts
+  inside the expandable details blocks without needing an allow-list (2026-07-31). Splitting
+  the alt positionally is the other half: at the LAST space `"Vengeance Demon Hunter"` yields
+  class `Hunter` (2026-08-02). It cannot mislabel a spec — measured against the current
+  roster the six two-word-class specs (Death Knight, Demon Hunter) go UNMATCHED and step 4
+  refuses the whole file — so a positional split costs a run, not the truth. Wowhead's
+  `[spec-badge=<spec>-<class>]` kebab slug (`vengeance-demon-hunter`) sidesteps the question.
+- **Archon: resolve every entry from its `icon` "Class-Spec" token, never the display name**,
+  and note `tiers[].entries` is a list **of lists**. Archon writes display names as
+  `"BeastMastery Hunter"` / `"Blood DeathKnight"`, which match no roster entry; the icon reads
+  `"DemonHunter-Devourer"` (2026-07-26 / 08-01). This matters more now than when it was
+  written — Archon is currently the only source feeding the live consensus in its own right.
+- **Method's M+ page carries more than one tierlist and the extras are dungeon-difficulty
+  blocks.** Reject by ROSTER MATCH — the eight dungeon names and the site logos simply fail
+  to map — never by position: "take the first" and "take container[2]" are both on record and
+  neither survives a page rebuild (2026-07-24 / 07-30 / 08-15).
+- **Era-verify from the page's own title, changelog and ranking body — never a substring
+  count, and never an exact-spacing literal.** The raid-HEALER page once titled itself
+  "Midnight  Season 1" with a DOUBLE space, and a strict `/Midnight Season 1/` check silently
+  dropped that page (74 rows instead of 80, 2026-07-27). Recorded false positives on the
+  other side: editorial `[-- Season 2 --]` markers in Wowhead's markup and Icy Veins changelog
+  rows for Dragonflight / TWW. Step 2 records what a misread costs.
+- **When `data/encounter-tiers.json` is rewritten, keep the COMMITTED encounter `name`
+  values.** `page.title` is the generic page headline ("Midnight DPS Rankings and VS / DR /
+  MQD Tier List"), not the boss name — taking it renames every encounter to the same string
+  and destroys the per-boss attribution (2026-07-27). Single-source by design, so nothing
+  cross-checks it.

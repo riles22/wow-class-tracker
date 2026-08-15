@@ -64,6 +64,13 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
   published rows had neither a date gate nor a row floor and could vanish silently.)
   If a series ever genuinely can't be parsed, mark just that requirement `parse_error`
   with a detail; never leave the others stale by coupling.
+  **`dps`/`hps` are FLOATS** (175006.94183143) — round them, or the diff rewrites every row
+  as a long decimal. Each row's **`parses` IS the series' `n`**: omitting it silently DELETES
+  `n` from all 80 stored rows (it surfaced as 290 deletions against 170 insertions). Before
+  merging **Popularity**, shape-check — every value a plausible percentage, each of the six
+  (role × bracket) groups summing to ~100 (~600 across all 80 rows), and no row equal to that
+  spec's "95th pct DPS (Mythic)". A prior run merged the `dps` column in and 40 rows carried
+  DPS magnitudes under unit `%` (Devourer 178,800%) through **three consecutive nights**.
 - **Murlok** meta pages (plain GET; **r.jina.ai does NOT work on murlok**):
   "Top-50 avg M+ rating (ceiling)" — it is the avg rating of each spec's own top-50
   players, NOT popularity; keep the "(ceiling)" in the name.
@@ -97,10 +104,20 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
   (SKIP Tidebound Grotto tabs — that is zone 57, not tracked; skip Backend/Template/
   Data tabs). The metric name hardcodes "Mythic", so if the newest week is Heroic-only
   (`HC`), either keep the last Mythic week or relabel — never merge HC numbers under the
-  Mythic name. Fetch each `export?format=csv&gid=<gid>`, **split on `\r?\n`** (the CSV is
-  CRLF — a plain `\n` split leaves a trailing `\r` that breaks the last column), read the
-  right-hand percentile block (Class | 90th | 95th | 99th; class-spec is CamelCase like
-  `DeathKnight-Frost`), and merge ONE row per DPS-roster spec: max 99th-pct across that
+  Mythic name. Fetch each `export?format=csv&gid=<gid>` with **`curl -sL`** — the export URL
+  307-redirects, and without `-L` you get a ~429-byte "Temporary Redirect" body and a silent
+  zero-row parse that reads as an empty sheet. **Split on `\r?\n`** (the CSV is
+  CRLF — a plain `\n` split leaves a trailing `\r` that breaks the last column) and use a
+  **real quote-aware reader** (`csv.reader`, never `split(',')`): the numbers are
+  comma-thousands-separated inside quoted cells, so a naive split turns `305,041` into `305`
+  — a 1000× collapse that merges as data. Locate the percentile block by
+  **`lastIndexOf('Class')` in the header row** (Class | 90th | 95th | 99th; class-spec is
+  CamelCase like `DeathKnight-Frost`) — the sheet is row-RAGGED, so the block's column index
+  moves week to week (18 and 21 both observed) and a fixed `cols[n-4]` offset finds nothing.
+  Robydoby also **recalculates in place**: the same six cells moved up on 2026-08-01 and
+  reverted on 08-02 at an unchanged week date, so re-parse and re-merge at the week's own
+  date every run rather than short-circuiting on the tab map.
+  Merge ONE row per DPS-roster spec: max 99th-pct across that
   week's bosses as "99th pct DPS (12.1 PTR Mythic raid testing, Robydoby)" (bracket raid,
   unit DPS, asOf = the week date from the tab names, era auto-ptr from the name). The
   HEALER sheet (id 1MBadxaZWpwj7h_3HcOtteypK3WSgp6o9sUIqvTryju4, same tab layout) merges
@@ -117,6 +134,12 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
   runs, tolerate staleness, and do NOT propose it into required-sources.json. The sheets
   ask for visible credit — the registry entry + drawer label carry it; keep them.
 - **WoWMeta** (population-wide M+ rating — retyped from tier-list to metrics 2026-07-31):
+  **The manifest step and the rankings step run independently — a frozen `snapshotDate` is
+  NOT evidence the data is frozen.** On 2026-08-04 `manifest.json` had been pinned at
+  2026-07-28 for eight days while `rankings/midnight/mplus/all/0.json` carried
+  `Last-Modified: 04 Aug 2026` and **all 40 `lowerBound` values had changed**; a cache-busted
+  re-fetch reproduced them, ruling out CDN variance. Always fetch and diff the rankings file,
+  ingest moved values under the source's own lagging date, and record `partial`.
   fetch the **JSON API**, never the web page. Two plain `curl` calls, no headers, no proxy,
   no auth (AmazonS3 behind CloudFront — no Cloudflare, so it should work from CI too,
   though that is high-confidence-unproven until the first nightly):
@@ -149,7 +172,33 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
   - The raid endpoint (`/rankings/midnight/raid/all-bosses/5.json`) is live, but its
     `lowerBound` is **DPS throughput** (~180k), a different quantity on a different scale —
     do not merge it under the M+ rating name.
+- **SimulationCraft nightly** (`SimC nightly Patchwerk DPS`, 26 DPS specs):
+  - **Transport:** prefer the plain-text `MID1_Raid.txt` `DPS Ranking:` block (~1.5 MB) when
+    it HAS one — it is sometimes a live in-progress log of a newer run with no ranking block,
+    in which case parse `MID1_Raid.html`. In the HTML take the `"data":[…]` array **enclosing
+    the FIRST big-value `"name":"MID1_…","y":…` hit**; a fixed byte window after `"series"`, or
+    a max across all blocks, reads the later burst/DTPS charts — ~2.2–2.5× inflated (Frost DK
+    137,711 → 296,861), which cost a merge-and-revert on 2026-07-26 and was caught only by a
+    pre-merge diff. Skip the leading `Raid` aggregate row; 49 profiles → best hero-variant per
+    DPS spec = **26** (tanks/healers excluded, Augmentation absent by design).
+  - **Map profile names by LONGEST-PREFIX, and allow a hyphen.** `MID1_Death_Knight_Frost_Rider`
+    has underscores in both class and spec, so a `MID1_(w+)_(w+)_(w+)` regex maps nothing at
+    all — a silent zero-row parse on a healthy fetch. A name class without `-` drops
+    `MID1_Demon_Hunter_Havoc_Fel-Scarred` entirely and reads Devourer off its lesser build
+    (115175 instead of 118341), which looks exactly like a real sim move.
+  - **Era-verify off the header build string, not the visible version.** The "12.3.0" on the
+    HTML report is the **Highcharts JS** version, not the WoW build; the real header reads e.g.
+    `12.0.7.68974 Live (hotfix 2026-08-03/68974, git build HEAD f4719d79e8)`. That `HEAD <sha>`
+    is also the freshness detector — f7ed532cb8 → ab7b0b85b0 moved 25 of 26 values, an
+    unchanged 8b483e2e60 moved none — and an unchanged hash is the honest explanation for an
+    unchanged parse, said plainly rather than dressed up as a fresh sim.
 - **Bloodmallet** (fight profiles, DPS specs only):
+  - **`simc_settings.ptr` is the STRING `"0"`**, which is truthy in JS — a naive
+    `if (ptr) reject` throws away all 26 profiles. Compare explicitly. The target map is
+    `data[<simc tier>][<targetCount>]` (read the tier key off `simc_settings.tier`) and is
+    **ALREADY best-build**: treating `data[<targetCount>]` as the top level, or expecting a
+    per-build sub-object to max over, yields **0 profiles from 26 successful HTTP 200s** —
+    which looks exactly like an outage and would be recorded as one.
   `GET bloodmallet.com/chart/get/talent_target_scaling/castingpatchwerk/{class}/{spec}`
   — take BEST build DPS per target count (1/2/3/5/8/15) into `profiles[].targets`.
   - **`asOf` is the CHART's own timestamp, never today** — same rule as WoWMeta above, and it
@@ -274,6 +323,48 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
 - Fight-profile labels are computed at build time (within-role percentiles) — you only
   supply raw `targets`; don't hand-write labels.
 - Healers/tanks get no Bloodmallet profiles (DPS sims only) — that's by design.
+
+
+### Traps promoted from `log.md` (2026-08-15 context audit)
+
+Each was learned by a run merging something wrong on a healthy HTTP 200. They lived only
+in run-log prose until the log outgrew the Read tool and had to be pruned.
+
+- **Match each series' STORED precision — read it off `data/specs.json` before merging.** The
+  convention is per-series and it CHANGES (WoWMeta's `lowerBound` was 2 dp in early August and is
+  1 dp now; Archon Popularity is 1 dp against a 2-dp payload; WCL is integers against a 2-decimal
+  fragment). A mismatch reports the whole series as moved — 39 of 40, 36 of 40 and 127 of 127 have
+  all been seen against byte-identical upstream data — and writes a phantom movement story into
+  history.
+- **A correction big enough to trip `maxValueMovePct` (0.6) must be HELD BACK, not worked
+  around.** Exclude those rows from the apply-metrics input (cleaner than merge-then-revert),
+  leave stored data byte-identical, and record that requirement `partial` with the fix
+  instructions in the detail. The value-move gate has **no agent-writable proposal channel** —
+  unlike `anomalyAckProposal`, only a human `value_move_ack` re-run or a reviewed local run can
+  land it (see the local-run skill: the commit message is the ack record).
+- **A leftover `wcl-fetch/` from an earlier local run will red the manifest gate — move it aside,
+  do not delete it.** `check-refresh --manifest` fails with *"wcl evidence: attemptedAt … is not
+  from this run — a stale or malformed wcl-fetch/evidence.json must not vouch for anything"*
+  (2026-08-05, recurred 08-12). The directory is gitignored and untracked, so it never travelled
+  with any commit. Deleting it makes the check print "expected for local runs" and pass, trading
+  auditability for a green line — and the artifact is the evidence for an open owner question
+  raised 2026-08-03 (should local runs skip the cross-check, or simply not produce an evidence
+  file?). This is NOT the `startedAt is Nh old` line the local-run skill predicts; that check
+  passes independently.
+- **`curl` and Node's global `fetch()` are not interchangeable on warcraftlogs.com.** With the
+  identical documented XHR + browser-UA + Referer header set, `fetch()` drew HTTP 403 +
+  `challenge-platform` on all five URLs while `curl` returned HTTP 200 with full tables — a TLS
+  fingerprint block, not headers and not the IP, so "the HTML endpoint works from residential"
+  was only ever true through curl. Since 2026-08-10 curl itself 302s to `/human-challenge`, so
+  treat this as the recipe to resume from if the endpoint reopens, not a promise that it works
+  today.
+- **"rdps-broken" is a statement about the GraphQL API, not about rDPS data.** The v2
+  `characterRankings(metric: rdps)` 500 and the HTML statistics table serving rDPS fine are
+  independent facts — an evidence-file verdict of `rdps-broken` must not stop an HTML fetch, and
+  a successful HTML fetch must not be read as the API being fixed.
+- **`dpstype=dps` and `dpstype=rdps` return byte-identical tables for the zone-46 healer-DPS
+  cut** (verified 2026-08-01), so "Median DPS (Mythic, healer)" carries no methodology ambiguity
+  — do not rename it and do not re-derive the question.
 
 After merging: `npm run test:quiet && npm run build`, then `node src/snapshot.mjs` (movement
 baseline; loadData skips baselines identical to the current state, so ordering vs the

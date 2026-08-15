@@ -200,8 +200,18 @@ say so and change nothing.
    `warcraftlogs.com/zone/statistics/table/52/dps/{bossId}/3/10/1/50/1/14/0/DPS/Any/All/0/amount/single/0/-1/?keystone=15&dpstype=rdps`
    Boss id → target count: **3591** Sinister Single = 1T · **3590** Diabolical Duo = 2T ·
    **3592** Terrible Trio = 3T · **3593** Fearsome Five = 5T. (3594 Hazardous Healer is a
-   healer dummy — skip it for the DPS ptrDummy.) Each spec row appears **twice** in the raw
-   fragment (54 rows → 27 specs; halve the parse count too). Ingest EVERY run (policy
+   healer dummy — skip it for the DPS ptrDummy.) **The raw fragment SOMETIMES doubles each
+   spec row (54 rows → 27 specs) and sometimes does not — never blind-halve.** Count unique
+   spec sprites and dedupe on first occurrence, every run. Verified 2026-08-05 with zone 46
+   as a control: one `summary-table`, 28 `<tr>`, **27 unique sprites, max duplicate count 1**
+   — halving there would have written every value and every count wrong. The doubling has
+   not recurred in four consecutive clean runs; the dedupe stays because the two cases are
+   indistinguishable without counting. **Two different EMPTY shapes also come back, and both
+   mean "ingest nothing, bump no snapshot":** a ~9,140-byte header-only fragment (the
+   `<th>Class Spec Score Max Parses</th>` row present, zero `actor-sprite-` rows) is
+   valid-but-empty — zone 54's shape between testing windows — while the literal 114-byte
+   "No statistics have been collected for this zone, difficulty, size and region yet." is
+   never-aggregated, zone 57's shape. Neither is a parse failure. Ingest EVERY run (policy
    2026-07-08: no change-detector gate — always re-merge the current medians regardless
    of whether the parse count moved up, down, or held; still log the count). Merge by writing
    `{"ptrdummy":[{"class","spec","source":"warcraftlogs","asOf":<today>,"targets":{"1":dps,"3":dps,…}}]}`
@@ -270,3 +280,73 @@ say so and change nothing.
 - Do not rewrite existing spec `ptr` writeups wholesale on tuning-only changes — append
   to `changes[]` / adjust `watch`, and only flip `verdict` when the picture genuinely
   changed (state why in the diff).
+
+### Transport traps promoted from `log.md` (2026-08-15 context audit)
+
+Learned by runs that got them wrong. Every failure below returned HTTP 200 and looked
+like "the source has nothing new", which is why they are rules and not anecdotes.
+
+- **Prove the transport before believing an empty WCL table** (2026-07-31). Before recording a
+  PTR zone as empty upstream, control-fetch a known-populated zone (live zone 46 returned 54
+  rows). Without it, "empty upstream" and "our fetch is broken" are the same observation — and
+  one of them makes the manifest row a dishonest success.
+- **Confirm an ingest with `Math.round`, a sprite-name normalization, and a rising parse count**
+  (2026-08-03, 2026-08-04). Live values carry two decimals against rounded storage, so a float
+  tolerance reported **54 phantom "diffs"** on a byte-correct cut; rounded, 26 of 27 matched
+  exactly and the 27th was a sprite-name artifact (`Hunter-BeastMastery` vs roster "Beast
+  Mastery") — normalize the CamelCase sprite SPEC token the same way step 5 normalizes the
+  class, before calling a row missing. Parse counts growing while medians hold (z52 1T
+  1,254 → 1,419; z56 DPS 5,348 → 5,669) is how you tell a stable median from a frozen feed.
+- **The zone-54 normalized series and the zone-54 raw-DPS pooled series ride different
+  transports** (2026-08-03) — one being empty says nothing about the other. (The rule against
+  substituting one for the other is in refresh-metrics SKILL.md; don't restate it here.)
+- **Wowhead's blue tracker and news index are JS-hydrated; the payload is a JSON script block**
+  (2026-08-03, 2026-08-05). Parse `<script type="application/json" id="data.blueTracker.default">`
+  → `{entries:[{title,author,posted,url}]}`, and `id="data.news.newsData"` →
+  `{newsPosts[], totalPages}`, paged with `?page=N` (read `newsPosts[]`'s `id`, `postUrl`,
+  `postedFull`, `preview` — not hrefs). Dedupe the tracker by topic: 50 entries is routinely
+  ~30 unique topics. **Anchor on the id attribute and brace-balance from there** (string-aware,
+  or `raw_decode`): more JSON follows on the same line, so a `</div>`-terminated slice and a
+  naive `}` search both fail, and a regex keyed on `blueTracker\s*[:=]` matches the *id
+  attribute* and then finds no assignment. Every wrong form fails in the shape of a **missing
+  payload**, so the mandated step-3b sweep reports "no blue posts" while the channel is healthy.
+- **Never judge "the page looks empty" by curl's `size_download`** (2026-08-03) — with
+  `--compressed` it reports the COMPRESSED size (12,527 against a real 68,883-byte body). These
+  index pages need the same full browser header set every wowhead fetch uses (see refresh-tiers);
+  a UA-only curl is 403.
+- **Wowhead's news SEARCH is reachable as an XHR JSON endpoint** (verified 2026-08-02, not
+  re-exercised since): `GET https://www.wowhead.com/search/news?q=<urlencoded>` with a browser UA
+  **plus** `X-Requested-With: XMLHttpRequest`, `Accept: */*`, `sec-fetch-*: empty/cors/same-origin`
+  and `Referer: https://www.wowhead.com/search?q=<same>` returns a plain JSON array of
+  `{id, topic, subject, date}`, where `topic` is the `news=` id. Without the XHR header it is 403.
+  (Endpoint name from `WH.SearchPage.fetchNewsResults` in `zamimg.com/js/search.js`.) This is the
+  discovery lane the RSS window cannot be — use it before concluding a spec has nothing. The
+  rendered `/search?q=` HTML page is NOT a lane.
+- **The news INDEX leads the RSS feed, so RSS alone is not sufficient within a run**
+  (2026-08-04): `data.news.newsData` page 1 carried news=382350 about three minutes before the
+  check while an RSS fetch taken minutes earlier topped out at 382345. Poll the index as well,
+  or a post landing mid-run is invisible.
+- **Fetching an article that has scrolled OUT of the RSS window** (2026-07-31; in-window bodies
+  come free in `<content:encoded>`, so this is the narrow case): the bare `wowhead.com/news=<id>`
+  form is CloudFront-403 from CI and from a residential IP even with the full header set. Use the
+  RSS `<link>` slug form with `curl -L` (it 301s to the `…-<id>` canonical URL). r.jina.ai worked
+  on `/news=` as of 07-31 but is dead on `/guide/*` since 08-03 — re-verify before relying on it.
+- **Dead discovery lanes — stop re-deriving them** (2026-08-03, 2026-08-06, both from CI):
+  `icy-veins.com/feed.atom` is NOT their WoW news lane (it 301s to a forum RSS carrying Heroes of
+  the Storm topics); Wowhead's site-search HTML is JS-hydrated (200, 32 KB, zero result hrefs);
+  `wowhead.com/guides/rss` is 403 even with the full header set.
+- **Never build a `RegExp` from a string inside `node -e` on this Windows/Git-Bash setup**
+  (2026-08-04, cost three parse attempts). Backslashes in JS *string* literals collapse:
+  `new RegExp("<title>([\s\S]*?)<\/title>")` arrives as `/<title>([sS]*?)<\/title>/` and matches
+  nothing. Regex **literals** survive, which is the trap — the `<item>` block literal still found
+  all 40 RSS items while every constructed field regex returned null, so a healthy feed read as
+  40 undated, untitled entries, indistinguishable from an upstream format change. Write parsers
+  to a `.mjs` file and run the file.
+- **Match on class + spec, never a bare spec token** (2026-08-01). "Frost", "Restoration" and
+  "Holy" are shared across classes, so a bare-token filter produces FALSE POSITIVES from Frost
+  Mage / Restoration Shaman / Holy Paladin — and the failure presents as coverage, not as a bug.
+  (Same class of error as the step-2 nav-index trap, from the opposite direction.)
+- **A forum post with zero class content still gets a feed entry** — `specsAffected: []` plus
+  `Non-class:` highlights, the precedent set by posts #7, #12 and #13 (2026-08-01). Two entries
+  may share a date (#18/#19 on 07-31, as #11/#12 did on 07-08); order them newest-first by
+  PUBLICATION time within the day.

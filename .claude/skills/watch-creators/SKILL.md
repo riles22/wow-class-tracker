@@ -28,10 +28,18 @@ locally, and distill them into cited per-spec takes in `data/creator-takes.json`
    Do NOT regex log.md for ids. That was the old method and it matched any 11-character
    token, so it had silently absorbed **231 ordinary English words** ("residential",
    "substantial", "speculative") into a 950-entry set that could not be reconciled against
-   anything. The real set is 383. **When a run dismisses a video at DISCOVERY without
-   fetching a transcript — pre-cycle date, or a newest-first cut — append its id to
-   `seen[]`.** That is what makes the next run's accounting auditable: anything not in one
-   of the four lanes is genuinely unexamined and will be reconsidered.
+   anything. (Recompute the real size rather than trusting a number written here.)
+   **`seen[]` takes DURABLE dismissals ONLY.** Append an id only for a judgment that cannot
+   change: pre-cycle by an EXACT date, obviously not WoW, or a fact about the video that
+   rules it out (a 20-second duration, no caption track of any kind). **Budget and transport
+   dismissals stay UNSEEN** — the tail below a newest-first window, the nightly's keyword
+   cut, a fetch that failed on transport, and any date that is only approximate (yt-dlp
+   `approximate_date` rounds older uploads to mid-month, so 103 "pre-cycle" videos on
+   2026-08-15 were deliberately NOT retired). Marking a budget cut as seen silently abandons
+   a handed-forward backlog: three runs left 151, ~120 and 116 in-cycle videos out of the
+   lanes on purpose, and it is the same failure that skipped Tactyks and J-Funk on "dungeon
+   guide" titles. That is what makes the next run's accounting auditable: anything not in
+   one of the four lanes is genuinely unexamined and will be reconsidered.
    **Title-filtering is RUN-MODE dependent** (Riley,
    2026-08-08) — the two transcript sources have wildly different costs:
    · **LOCAL run (yt-dlp): replace the keyword filter with a DATE bound.** Do not judge on
@@ -140,8 +148,11 @@ locally, and distill them into cited per-spec takes in `data/creator-takes.json`
    (b) **LEADS** — if a video covers a PTR build, tuning pass, or system change not yet in
    `data/ptr-builds.json`, verify it against the canonical official forum thread before
    logging anything (the video is the tip-off, never the source of record).
-   (c) refresh the entry's `latest` field (title + date) so the site's build-feed link
-   stays current; (d) note processed videoIds in `log.md`'s seen-set like any other creator.
+   (c) **`latest` states what is actually KNOWN, never merely the newest upload** — advance
+   it only to a video this run distilled, or write an explicit non-claim ("queued 2026-08-10,
+   NOT yet distilled"). This is uniform across lanes: the `generalCreators` fields hold
+   distilled one-line reads too (izen's is a full meta summary), so overwriting one with a
+   fresh title trades information for recency; (d) note processed videoIds in `log.md`'s seen-set like any other creator.
 5. `npm run test:quiet && npm run build`; append date · videos processed · takes added · metaNotes added to `log.md`. If any data/ file changed this run, finish with `node src/snapshot.mjs` (movement baseline; loadData skips baselines identical to the current state, so ordering vs the build is safe).
 
 ## Gotchas
@@ -172,3 +183,122 @@ locally, and distill them into cited per-spec takes in `data/creator-takes.json`
 - Framing: label takes "Creator take — <name>, <date>"; require 2+ independent
   creators before describing anything as community consensus; tag patch state
   (announced changes get retuned before ship).
+
+### Distillation rules promoted from `log.md` (2026-08-15 context audit)
+
+These are the honesty rules of this skill — most were learned by a run nearly writing a
+claim the source did not make. They lived only in run-log prose until the log outgrew the
+Read tool (it passed the 262,144-byte gate, so a bare Read returned NOTHING) and had to be
+pruned.
+
+- **Parse `media:description` alongside the title on every discovery pass.** It costs
+  nothing over the RSS fetch already being made and settled five borderline titles in one
+  nightly and six in the next with no transcript spent: a description copying the title is
+  the clip-short shape, a bare Twitch link is a restream. It works the other way too —
+  Obli`s `0D5cRjmmfqM` was queued *against* the key-run precedent because its description
+  was an explicit build breakdown, and it yielded a take.
+- **Verify every distilled claim against its own transcript before committing (2026-08-07).**
+  A read-only pass over each new take and metaNote: every number attached to the referent the
+  creator attached it to; no causal clause inverted; no ASR mangle written as a name; no
+  sentence from another video. **A claim must rest on the source it deep-links.** One pass
+  caught all four at once — a guest's "triple every other healer" bolted onto the measured
+  78-80k instead of the halved 38-40k hypothetical (understating the real gap by half while
+  reading like a quote), izen's Mistweaver logic inverted, the ASR pseudo-name "Ullhon"
+  written as a person, and "Void Blast cannot be cast while moving" imported from the 08-04
+  AutomaticJak entry and absent from the cited transcript.
+- **A list-mention is not a read (2026-08-07).** Never distil a claim whose only evidence is
+  membership in a bare enumeration ("like BM, like Fury, like Devastation"). Require a second,
+  spec-specific mention; if the spec is not named at all there is no claim. Three proposed
+  metaNotes rested solely on list membership and were dropped — **Frost DK was never named**,
+  the only reference being "both of the DK specs" — and two would have flipped a substantive
+  prior read (Frost 07-14 positive → neutral, BM 07-06 positive → negative).
+- **Never mint a `neutral` take to record that you watched something (2026-08-08).** A
+  transcript with no comparative read goes to `skipped[]`. `expertRead` abstains on neutral but
+  still counts that creator in the panel denominator, so a filler neutral asserts a directional
+  view they never expressed AND dilutes the spec's real reads. (A neutral the creator genuinely
+  expressed is fine — the defect is the placeholder.) Same trap in another shape: reading "new
+  set beats old set" as a spec buff would fire for every spec with a guide video.
+- **Guide-shaped content yields no take, and spec-name frequency is not a signal
+  (2026-08-08).** Dungeon/boss guides, spec how-tos, gearing / loot / bonus-roll /
+  embellishment PSAs, trinket guides and UI setups carry no spec-strength read — verify by
+  transcript, then `skipped[]`. All **seven** dungeon/boss guides in the first unfiltered sweep
+  carried zero spec reads, and their apparent spec mentions were ability names (Bound by
+  Shadow, unholy mending, bloodsworn). Never mint a take from an item- or gear-level claim: a
+  crafted-gear nerf lands on every spec equally, and Whispyr's "pretty strong" dagger is
+  explicitly not amplified by Assassination's mastery.
+- **Scarcity is when fabrication is most tempting (2026-08-07).** A spec at `ptr: null`, with
+  one creator, or in a bracket the projection reports as prior-only is never a licence to lower
+  the evidence bar — and anticipation ("interested to see what Frost DK would be like") is not
+  a read. A targeted sweep that finds nothing must report nothing: the tank/healer raid sweep
+  found one key VOD whose only "raid" cluster was a game-design opinion, and distilling it would
+  have manufactured exactly the signal the run went looking for.
+- **ASR gives you no speakers — get identity from metadata, not the caption track
+  (2026-08-07/08).** On any transcript with guests, co-streamers or chat, attribute a claim to
+  the registered creator ONLY where the transcript anchors it to them by self-reference ("my
+  tier list", "it's in the description"); otherwise drop it. A Resto Druid read in
+  AutomaticJak's stream was declined on that test, Maximum's `ahFknNijxh4` is a watch-along
+  whose tier-list commentary is **Zorthas' script read aloud**, and the 08-13 Tactyks widening
+  refused a co-stream passage for the same reason. Where scope or identity matters, harvest it
+  deterministically: `yt-dlp --print "%(description)s"` yields the credited link block and the
+  `HH:MM Topic w/ Guest` chapter lines — four Maximum panels gave 40 guest links and 82 chapter
+  attributions at zero transcript cost, and independently confirmed Kalamazi as "Warlock" in
+  all four.
+- **Verify every id a discovery pass produces against the live RSS endpoint, with an author
+  match, before it enters the registry, a take or the queue (2026-08-07).** The 75-agent
+  discovery sweep's verifier caught **four fabricated or wrong video ids in its own output**.
+  Treat a search result as a lead, never a fact.
+- **A creator who authors one of our registered tier lists is firewalled from that bracket
+  (2026-08-07).** Tactyks writes the Method M+ list, so every one of his entries carries RAID
+  SCOPE ONLY — logging his M+ reads feeds `consensusFor` and `expertRead` from one voice on the
+  same cell. Carry the constraint to any new class entry and re-verify it against the live guide
+  page rather than assuming; three runs missed it and logged M+ takes anyway. **Pre-existing
+  violations are an owner decision, not yours** — two live M+ Prot Paladin takes have been
+  flagged (08-12, 08-13) and still await Riley. Flag, never retire.
+- **Read the lens from `patchContext` when `bracket` is absent, and never treat (creator, spec,
+  date) as a unique key (2026-08-05).** A missing bracket is not "whole spec". Write an explicit
+  `bracket` on every new take, and bracket-split a video whose read genuinely differs. A naive
+  `bracket ?? "both"` pass on Kalamazi's Warlock sims wrongly retired three live M+ reads, and
+  the correction then over-restored a fourth — there are **two** Kalamazi Destruction takes
+  dated 2026-08-01, one raid and one M+.
+- **PvP is out of scope, and a PvP-lens read must never vote in PvE (2026-08-09).** Duels, solo
+  shuffle, BG blitz, arena, PvP tuning roundups and PvP tier lists all triage out. A PvP creator
+  answering "top classes next season" is still a PvP read: Supatease reasons his from DR
+  categories, snares and the stamina increase. Titles are no defence — "The Tides of The Meta
+  Are Shifting", "New Meta Incoming" and "12.1 Class Changes Update Healers" all reached the
+  queue and all turned out PvP-framed, their "tier list" a PvP one.
+- **Detect live streams and clips from metadata, never queue them, and purge one already
+  queued (2026-08-09).** `live_status: is_live` (or `duration=NA` with a timestamped title)
+  means no captions can exist yet — leave it UNSEEN so the VOD is picked up next run. A
+  sub-minute `duration` is a durable fact, so `seen[]`. An ended-live VOD of an already-queued
+  premiere is duplicate content, not a second slot. This is not theoretical: `bqVHzvKJCuA` has
+  sat queued while still live and spent a Supadata request on at least three nights, against a
+  100-per-month budget already reading `limit-exceeded`.
+- **Two different 429s, and confusing them costs a whole run (2026-08-06 / 2026-08-14).** An
+  ISOLATED 429 on one caption download while the info fetch succeeds is transient throttling —
+  `MdvcFzV0tmI` landed clean on a retry moments later, **without** `player_client=android`, so
+  retry once before recording it unreachable. (The bot wall is the "Sign in to confirm you're
+  not a bot" block, a different failure.) A 429 during a BATCH sweep is a rate-limit block that
+  retries DEEPEN: 42 videos through one invocation drew a 429 that survived 30/60/90s backoffs,
+  a 4-minute cooldown and a 7-minute cooldown — **0 of 42 transcripts retrieved**. Pace from the
+  start and stop on the first 429. `--list-subs` is never rate-limited, so caption availability
+  can still be probed mid-block.
+- **Prove any grep/regex triage pass on a known-positive file before trusting it
+  (2026-08-08).** An extractor that returns zero hits looks exactly like a batch with nothing in
+  it. The first extractor in the 52-transcript sweep scored **zero hits on all 52 files** — a
+  trailing `\b` in the alternation killed every prefix form ("underperform**ing**",
+  "nerf**ed**") — and trusted, it would have reported an ~800k-word batch that actually held 7
+  takes and 5 metaNotes as empty.
+- **Measure the run's effect against `git show HEAD:dist/index.html`, never the working
+  `dist/` (2026-08-08).** `npm test` runs a build smoke test that writes the real `dist/`, so by
+  the time you think to copy it the comparison is post-change and reports zero movement whatever
+  happened. Same discipline before claiming a metaNote moved anything: the general-creator nudge
+  is gated on ≥2 creators agreeing, unanimous (render.mjs), so a one-voice lane is display-only.
+- **Rejected creators and blocked hosts — do not re-research (2026-08-07 / 2026-08-08).** The
+  durable rule: never add a creator who recaps our own registered tier lists on screen, which
+  launders our sources back into the meta nudge as an independent voice. The register:
+  **Samiccus** and **Geezax** (both read Icy Veins / Wowhead / Archon aloud); **Salty Clams**
+  (no caption track on any video, so the pipeline can never return anything); PiTyy, Goop,
+  Atlas, Rook, MissMarvel and **Touchpadwarrior** (premise failed — "warrior" refers to the
+  touchpad, 15/15 uploads are comedy Shorts). Maxroll-byline candidates stay blocked until
+  `maxroll.gg` is added to `CREATOR_HOSTS` in `validate.mjs` — still absent, and a reviewed code
+  edit by design.
