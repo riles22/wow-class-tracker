@@ -122,7 +122,17 @@ function formatFailure(failure) {
     error.name && !message.startsWith(error.name) ? `${error.name}: ${message}` : message;
   lines.push(`  ${named.split("\n").join("\n  ")}`);
 
-  if ("actual" in error || "expected" in error) {
+  /* `error` is not always an object. When a PARENT test fails only because a subtest did,
+     node sets the wrapper's cause to the bare string "N subtests failed" — and `in` throws a
+     TypeError on a primitive, which killed the whole reporter mid-stream: it printed the
+     first two failures, then died inside node's event machinery with a stack that reads like
+     a harness bug rather than a test failure, losing every later failure AND the summary
+     counts that are this reporter's entire reason to exist. The repo has subtests in
+     ui-invariants and three gearing files, and both nightly agent prompts run test:quiet, so
+     this was reachable on any red run in the lane the reporter was written for.
+     (Found 2026-08-15 by running it against a deliberately failing fixture; there was no
+     test for this file at all.) */
+  if (error && typeof error === "object" && ("actual" in error || "expected" in error)) {
     lines.push(`    actual:   ${format(error.actual)}`);
     lines.push(`    expected: ${format(error.expected)}`);
   }
