@@ -261,7 +261,12 @@ say so and change nothing.
    and log the first-ingest parse counts.
 8. `npm run test:quiet && npm run build`. If any `data/` file changed this run, also run
    `node src/snapshot.mjs` (movement baseline; loadData skips baselines identical to the
-   current state, so ordering vs the build is safe). Append to `log.md`: date · builds
+   current state, so ordering vs the build is safe). **PREPEND** to `log.md` — insert the new
+   entry directly under the header block, never `cat >>` at the end: the file is NEWEST-FIRST
+   and its own header says so. (Corrected 2026-08-15: this line said "Append", and the very
+   next nightly after the 08-15 prune re-scrambled three of the four logs by obeying it. A
+   mixed-order log is what made `refresh-tiers/log.md` unreadable in the first place — its
+   first page was July while the skill said to read "the last run".) Record: date · builds
    found · zone-54 (PTR raid) state · zone-52 (Dummy Dome) state · zone-56 (PTR M+)
    state · zone-57 (Tidebound Grotto) state.
 

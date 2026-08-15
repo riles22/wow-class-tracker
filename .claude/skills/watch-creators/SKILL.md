@@ -153,7 +153,7 @@ locally, and distill them into cited per-spec takes in `data/creator-takes.json`
    NOT yet distilled"). This is uniform across lanes: the `generalCreators` fields hold
    distilled one-line reads too (izen's is a full meta summary), so overwriting one with a
    fresh title trades information for recency; (d) note processed videoIds in `log.md`'s seen-set like any other creator.
-5. `npm run test:quiet && npm run build`; append date · videos processed · takes added · metaNotes added to `log.md`. If any data/ file changed this run, finish with `node src/snapshot.mjs` (movement baseline; loadData skips baselines identical to the current state, so ordering vs the build is safe).
+5. `npm run test:quiet && npm run build`; **PREPEND** date · videos processed · takes added · metaNotes added to `log.md` — insert directly under the header block, never `cat >>` at the end. The log is NEWEST-FIRST and says so in its own header; this said "append" until 2026-08-15 and the next nightly re-scrambled three of the four logs by obeying it. If any data/ file changed this run, finish with `node src/snapshot.mjs` (movement baseline; loadData skips baselines identical to the current state, so ordering vs the build is safe).
 
 ## Gotchas
 

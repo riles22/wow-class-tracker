@@ -368,4 +368,7 @@ in run-log prose until the log outgrew the Read tool and had to be pruned.
 
 After merging: `npm run test:quiet && npm run build`, then `node src/snapshot.mjs` (movement
 baseline; loadData skips baselines identical to the current state, so ordering vs the
-build is safe); append date + row counts to `.claude/skills/refresh-metrics/log.md`.
+build is safe); **PREPEND** date + row counts to `.claude/skills/refresh-metrics/log.md` —
+insert directly under the header block, never `cat >>` at the end. The log is NEWEST-FIRST
+and says so in its own header; this line said "append" until 2026-08-15, and the first
+nightly after the prune duly re-scrambled it.

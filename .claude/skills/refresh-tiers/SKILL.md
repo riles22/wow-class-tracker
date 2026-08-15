@@ -46,9 +46,12 @@ Fetch the current Midnight tier lists live and merge them into `data/specs.json`
    normally a no-op printing "nothing to freeze". See the local-run skill, step 4.
 6. `npm run test:quiet && npm run build`. If any data/ file changed this run, finish with
    `node src/snapshot.mjs` (movement baseline; loadData skips baselines identical to the
-   current state, so ordering vs the build is safe). Append a line to
+   current state, so ordering vs the build is safe). **PREPEND** a line to
    `.claude/skills/refresh-tiers/log.md` (date · sources refreshed · notable tier
-   movements) so the next run can diff.
+   movements) so the next run can diff — insert directly under the header block, never
+   `cat >>` at the end. The log is NEWEST-FIRST and says so in its own header. This line said
+   "Append" until 2026-08-15; obeying it is what left THIS log chronologically scrambled, so
+   that a Read returned a July first page while this skill said to read "the last run".
 
 ## Gotchas (hard-won — trust these over intuition)
 
