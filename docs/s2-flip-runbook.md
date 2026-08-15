@@ -33,8 +33,14 @@ numbers that matter on the day, they move with the data.
    ptr-null pin IS the sunset now. (normalize.test.mjs:176 pins the field and the
    template boot reads it with a falsy-safe guard; both covered by the pre-staged
    flip-day test patch.)
-2. **`src/render.mjs`**: `SNAPSHOT_PHASE` `"12.1-ptr"` → the live S2 id (pick the id in the
-   commit; the check-refresh phase gate silences itself on any non-`"12.1-ptr"` value).
+2. **`src/render.mjs`**: `SNAPSHOT_PHASE` `"12.1-ptr"` → **`"12.1-live"`** (owner decision,
+   Riley 2026-08-15 — nothing in the code picks the string, and every post-flip snapshot is
+   permanently stamped with it, so it was settled ahead of the day rather than in review.
+   Chosen over `"s2"` because the field has always carried the PATCH phase, not the season:
+   it parallels the outgoing `"12.1-ptr"`, `report-card.mjs`'s `launchPair` defaults
+   `prePhase` to `"12.1-ptr"` so this reads as its successor, and a season can span patches.
+   The check-refresh phase gate silences itself on any non-`"12.1-ptr"` value, so the choice
+   is mechanically free — but changing it later would split the post-flip snapshot series.)
    Bump **`CONSENSUS_VERSION` 4 → 5** — ⚠️ **not 3 → 4; that bump is SPENT.** Step 3's scale
    widening was applied early, on 2026-08-14, and took v4 with it (see the version log beside
    the constant). The flip is a SECOND, independent recomposition — outlets leave the frozen
@@ -42,13 +48,29 @@ numbers that matter on the day, they move with the data.
    plan (s2-transition-scope.md:50) commits to a bump at this point; only the integer moved.
    `pickBaseline` refuses cross-version comparison, so the strip reads "Season 2 baseline
    established" instead of ~40 spurious arrows.
-3. **`data/scales.json`** (CODEOWNERS, owner-reviewed): widen `icyveins` to the seven-band
+3. ✅ **DONE — LANDED 2026-08-15 in commit `521ceaf`. Do not re-do this step on flip day.**
+   It was authored 2026-08-14, held unpushed through two nightlies, then rebased onto master
+   and pushed on 08-15. The `CONSENSUS_VERSION` bump it carried is the v4 that step 2 above
+   calls SPENT. What remains for flip day is only to confirm `data/scales.json` still shows
+   the seven bands. Original instruction, kept for the record:
+   **`data/scales.json`** (CODEOWNERS, owner-reviewed): widen `icyveins` to the seven-band
    S2 scale, mirroring the `icyveins-ptr` anchors — S+ 100 / S 92 / A+ 82 / A 66 / B+ 57 /
    B 48 / C 30. Known collateral, measured 08-11: re-spacing S 100→92 moves 3 consensus
    letters + 13 scores through the frozen archive (re-scored via the current scale), and
    silently re-spaces the RAID bracket too — all covered by the version bump; name it in
    the commit message anyway.
-4. **Re-merge Icy Veins' S2 M+ letters** — a fresh `refresh-tiers` fetch of the three live
+4. ✅ **DONE — LANDED 2026-08-15 in the same commit `521ceaf`, and VERIFIED.** This was
+   "the riskiest step on the list" precisely because it changes published data with nothing
+   testing it; landing it early converted a same-day unverified change into one measured and
+   sitting in history. The mandated identity check was re-run after the merge and BROKE as
+   intended: `ratings.mplus.icyveins` now differs from the frozen Season-1 record on **34 of
+   40** specs (it was 40/40 identical — the never-merged signature), matching the 34 the
+   nightly manifest had predicted for seven consecutive nights. The merged letters are
+   identical to the captured `icyveins-ptr` list on all **39 placed specs**, with the one TBD
+   spec written as an explicit `null`, and S+ / B+ are now in live use.
+   On flip day: confirm the identity check still reads 34/40 rather than re-running the merge.
+   Original instruction, kept for the record:
+   **Re-merge Icy Veins' S2 M+ letters** — a fresh `refresh-tiers` fetch of the three live
    M+ pages on the day (they may have been retuned since).
    **Correction 2026-08-14: the S2 letters WERE preserved.** This step used to say they were
    never captured, which would have made a live fetch the only option. The 08-13 refresh log
@@ -80,9 +102,17 @@ numbers that matter on the day, they move with the data.
    `era`, not `PHASES.ptr`, so the flip alone does NOT retire it — this step is still
    real work. The COLUMN needs no keeping: per DECISION 3 as amended (2026-08-12) it
    leaves the UI at the flip with the rest of the PTR receipts. Retire = era/registry
-   change that removes it from the forecast term; the exact mechanism is the owner's
-   call in review (the "retype to live" path is ruled out — it would hand Icy Veins
-   2 of 3 consensus votes).
+   change that removes it from the forecast term.
+   **MECHANISM DECIDED (owner, Riley 2026-08-15): remove the `icyveins-ptr` entry from
+   `data/sources.json` entirely.** Not a retype. The "retype to live" path stays ruled out
+   (it would hand Icy Veins 2 of 3 consensus votes), and keeping it as a `reference` footer
+   link was considered and declined. Removal costs nothing verifiable: as of 2026-08-15 its
+   letters are identical to the now-merged live M+ list on all 39 placed specs, so the source
+   carries no information the live registry does not already hold. This choice fixes the
+   shape of the paired work below — the three red tests are handled as "retire with the
+   source" (RED #2) and "synthesize an `era:"ptr"` fixture rather than name a live registry
+   id" (RED #3), and the `icyveins-ptr` requirement block comes out of
+   `data/required-sources.json` in the same commit.
    **⚠ THREE TESTS RED ON THIS STEP AND THE PRE-STAGED PATCH DOES NOT COVER THEM.**
    Measured in a full local dry run, 2026-08-14 — the flip patch handles the PHASES/era
    changes but nothing in it touches the registry RETIREMENT, so `npm test` inside the flip
