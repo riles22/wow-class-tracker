@@ -773,6 +773,10 @@ docs/     working notes (finder-audit.md — HISTORY, the Spec Finder was remove
           era-prose-scope.md — the launch-label mechanism (build-time era tokens) ·
           archive/ — preserved run logs from a retired agent runtime; a RECORD, not
           instructions, and historically wrong about the project as it now stands.
+          token-audit-2026-08-15.md — the context/token audit: the Read tool's 262,144-byte
+          hard gate (specs.json and creator-takes.json are still over it), why the skill logs
+          were pruned and why the parser traps had to be promoted into SKILL.md first, and
+          the agent-lane quiet test reporter.
           projection-audit-2026-08.md — the 12.1 model audit, with the frozen-weights
           recommendation. compare-all-scope.md — the design record for ⊞ Compare all
           (BUILT 2026-08-03), including the deltas between scope and build.
