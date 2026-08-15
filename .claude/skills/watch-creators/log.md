@@ -992,3 +992,30 @@ disagree, re-scope the new evidence before retiring the old.
   Beast Mastery raid 35→37 and M+ 58→59; Protection Paladin raid 36→32 (the 19-day-old
   "buff" read replaced by a launch-eve "mixed" one) and M+ 55→56. `audit:creators` stays
   HIGH 0 / MED 0.
+
+## 2026-08-15 (third run of the day — nightly, headless)
+
+- **Transcript budget is exhausted: `transcript-fetch/summary.json` verdict
+  `limit-exceeded`** (requested 1, fetched 0, on `bqVHzvKJCuA`). No transcript existed to
+  distil, so **0 takes and 0 metaNotes** were added and no take moved. This agent fetched no
+  transcript from YouTube or any API.
+- Discovery: **44/44** unique channel feeds polled with backoff, **660 entries** scanned
+  against a **1035-id** seen-set built from the four structured lanes (never from log prose).
+  **25 unseen.**
+- **Queued 6** (nightly keyword filter applies): `shGSOb8YoMQ` YoDaTV *12.1 M+ tierlist
+  update*, `oomrLdyB8YA` Jedith *Devourer hit hard by tuning*, `DMtMmUW5uRE` LBNinja7 *healer
+  tuning*, `c_5u7Jpy-Uo` AutomaticJak *healer tuning + tier list updates*, `lanOZvwWzw0`
+  Musguete *Assa Rogue tuning*, `OdhbpI6Mjsw` izen *final Season-2 buffs & nerfs* (metaNotes
+  lane — izen is a `generalCreators` entry and is firewalled out of `takes[]`).
+- **Retired 3 to `seen[]`** as durable dismissals on an explicit PvP frame: `wzynLjlZJf4`
+  ("Midnight PVP Tier List Season 2"), `Fi5pYpANSQ0` ("WoW PVP Saved"), `oUjUd8kcWew`
+  (Dalaran Gaming, "5v5 1v1 Duels – PvP").
+- **16 left UNSEEN on purpose** — guides/routes (Tactyks, Dalaran Assassination, Megasett
+  Mistweaver, Baze Fury, Sha), stream VODs and Shorts (Tettles ×2, AutomaticJak, Kalamazi,
+  Critcake, NeekapHere), Maximum's live "AWTF test stream", Harrek's raw Dummy Dome pull
+  footage, and the two Supatease uploads whose PvP lens is inferred rather than stated. A
+  budget or title dismissal is not durable and must stay reconsiderable by a local run.
+- `bqVHzvKJCuA` stays queued and stays the **suspected still-live stream** flagged 08-09.
+  `yt-dlp --print` could not settle it from this runner (datacenter bot wall, as expected),
+  so it was left in place rather than purged on a guess — worth one metadata check from a
+  residential IP, since it is at the head of the queue and has now spent several requests.

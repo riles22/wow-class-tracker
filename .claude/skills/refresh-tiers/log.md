@@ -673,3 +673,28 @@ policy.
   · **Era verification, all live sources = Season 1, NO FLIP.** Icy Veins titles: "Midnight (12.0.7)" / "Patch 12.0.7 / Season 1" / "Patch 12.0.7 / Midnight". Wowhead: all six read "Midnight Season 1". Method: "Midnight" present, zero "Season 2" strings. Archon verified structurally rather than by title — its **encounter list** is the S1 raid (Imperator … Midnight Falls, 373,222 parses) and the S1 dungeon pool, not the S2 PTR pool. Devourer DH present in every DPS list. icyveins-ptr verifies the other way: all three titles read "PTR Tier List for Midnight (Patch 12.1 / Season 2)".
   · Transports, all unchanged from the last run: Icy Veins plain curl + UA; Method plain curl + UA (**split on** `<div class="tier__tier`, never match between markers); Wowhead needs the FULL browser header set (UA alone = 403, r.jina.ai dead) and the embedded `WH.markup [tier-list=rows]` block; Archon `__NEXT_DATA__` from raw HTML, raid = **throughput**, M+ = **score**. Archon `lastUpdated` has caught up to **2026-08-04T12:00:00Z**.
   · `npm test` 259 (240 pass / 19 skipped / 0 fail), `npm run build` OK, `src/snapshot.mjs` written, manifest rewritten, `check-refresh --manifest` green.
+
+## 2026-08-15 (third run of the day — nightly, headless)
+
+- All four tier sources re-fetched live; **80 assignments each**, 0 unmatched, per-page
+  counts reconciled (27 DPS + 7 healer + 6 tank = 40 per source-bracket).
+- **Icy Veins M+ is no longer blocked.** `scales.json` now carries seven bands on the LIVE
+  `icyveins` scale (S+ 100 … C 30, owner-widened 08-14), the M+ pages parse S+/S/A+/A/B+/B/C
+  plus one literal `TBD` (Subtlety Rogue → explicit null), and all 40 stored M+ letters
+  already reproduce the live pages — **0 of 40 would move**, so the escalation is closed by
+  agreement rather than by a merge. Live M+ letters remain byte-identical to `icyveins-ptr`
+  40/40: Icy Veins is publishing one Season-2 ranking twice.
+- **Only movement anywhere: Wowhead M+ DPS — Assassination Rogue B→A, Shadow Priest C→B**,
+  with the page's own `dateModified` advancing 08-13 → **2026-08-15T10:38:56-05:00** (stored
+  `published` updated to match; agrees with published-evidence). Wowhead is season-AHEAD, so
+  those letters feed the next-patch forecast, not the consensus: **0 published consensus and
+  0 projection letters moved** measured against `git show HEAD:dist/index.html`.
+- Era: icyveins s2 (raid-healer page still titles itself 12.0.7 over a Season-2 body — body
+  over title), method s2, wowhead s2, **archon still s1** (S1 bosses + S1 dungeons + "VS / DR
+  / MQD" zone label, even though its description now says "in 12.1"). No `seasonVerified`
+  value changed, so `freeze-season.mjs` had nothing to observe.
+- Archon **re-cut**: `lastUpdated` 2026-08-14 → **2026-08-15T12:00:00Z** with page
+  `totalParses` moving (raid DPS 3992→4277) while every per-spec parse count and value held —
+  the letters were reproduced, the numbers had nothing new (see refresh-metrics).
+- `npm run test:quiet` **401 total / 370 pass / 0 fail / 31 skipped**, build OK, snapshot
+  written, manifest rewritten, `check-refresh --manifest` green.

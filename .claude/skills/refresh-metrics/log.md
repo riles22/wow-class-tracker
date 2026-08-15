@@ -927,3 +927,38 @@ WoWMeta**, which is the honest headline: this run sits ~6h behind the 12:00Z one
   2026-08-03**, the exact local-hygiene case `.gitignore:20-24` documents; with that
   leftover moved aside the gate exits **0**. Manifest deliberately NOT rewritten (partial
   run — local-run skill step 3).
+
+## 2026-08-15 (third run of the day — nightly, headless)
+
+- **Bloodmallet has begun its MID2 roll-over and nothing was merged.** 14 of 27 DPS specs
+  return charts, **all `simc_settings.tier` = MID2, all timestamped 2026-08-15**; the other
+  13 return the "No standard chart" body after 3 retries (Augmentation by design, 12 simply
+  not re-simmed). Stored pool is MID1 @ 2026-07-08. This is exactly the mixed-tier case the
+  08-15 gate exists for — adopt wholesale or not at all — so the family stays 38 days stale
+  and `check-refresh --age` reds on it alone. **A wholesale adoption will need a human
+  `value_move_ack`:** MID2 runs ~1.5–2.5× MID1 per spec.
+- **Archon numbers: label moved, data did not.** All six pages re-stamped
+  `lastUpdated` 2026-08-15T12:00:00Z, yet all **160 values and all parse counts are
+  byte-identical** to the stored 08-14/08-10 cuts. Merging on the label would re-date
+  unchanged numbers daily — the precise failure mode the bloodmallet/wowmeta `asOf` rule
+  forbids — so all four archon numeric rows are `partial`. Consequence to expect:
+  `archon-mplus-score` and `archon-popularity` sit at exactly 5d/5d and go red on the
+  heartbeat tomorrow unless Archon re-aggregates. S1 content is dead, so a freeze is the
+  honest reading.
+- **WoWMeta** frozen and proven so: `snapshotDate` 2026-08-11, rankings file diffed anyway
+  (40/40 byte-identical) and its `Last-Modified` header reads *Tue, 11 Aug 2026 15:25:05 GMT*.
+- **SimC**: `MID1_Raid.txt` is a live in-progress log (272 B, no ranking block) headed
+  **12.1.0.69299 / git build b642585cbf** — the Season-2 re-sim is running now. The HTML
+  report is still 12.0.7.68974, build **678e66d384**, timestamp 2026-08-08 07:28 — unchanged
+  hash, unchanged parse, nothing merged. Expect a large legitimate move once 69299 publishes.
+- **Murlok** 40/40 reproduced exactly (Guardian 4268 / Brewmaster 4038 / Blood DK 3990);
+  pages still self-label "Midnight Season 1" while the body says Patch 12.1.
+- **Mythicstats** period **1075 MID1**, section-bounded parse = 34 rows (a whole-page scan
+  returns 59), sum 100.3 with role subtotals 60.2 / 20.0 / 20.1 → the SHARE series, not the
+  `/meta` presence column. All values identical to stored.
+- **Robydoby** (best-effort, outside the contract): newest Mythic week is still **24/7**
+  (Sszorak + Twin Fangs tabs); 24 DPS + 7 healer specs re-parsed with the quote-aware reader
+  and the `lastIndexOf('Class')` header locate (col 18 this week) — 31 rows, all identical to
+  stored, nothing merged.
+- WCL is evidence-only on this runner: verdict `rdps-broken`, the three `*-raw` keys landed
+  pre-agent (102 / 27 / 27 rows), the five rDPS-family cuts stay frozen and untouched.

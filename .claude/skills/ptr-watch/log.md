@@ -713,3 +713,35 @@ one-shot; see docs/s2-flip-runbook.md.
   Aug 20.**
 - `npm test` 332 pass / 0 fail, build OK, snapshot written, manifest rewritten and both
   `check-refresh` gates pass.
+
+## 2026-08-15 (third run of the day — nightly, headless)
+
+- **No new build.** Four channels swept: (1) dev-notes thread `2317811.json` via curl — 17
+  posts, `last_posted_at` **2026-07-31T23:42:09Z**, newest is Linxy #19, already logged; the
+  PTR thread has been quiet 15 days because the cycle ended when 12.1 shipped 08-11. (2)
+  Wowhead news RSS, 40 items, newest 2026-08-15 12:40 CDT. (3) The news INDEX
+  (`data.news.newsData`, brace-balanced from the id attribute) polled as well since it leads
+  RSS — top id 382472, nothing beyond RSS. (4) Blue tracker (`data.blueTracker.default`), 50
+  entries deduped by topic.
+- **Two candidate posts read in full and deliberately NOT logged.** The Aug-13 and Aug-14
+  Kaivax hotfixes each carry a `Classes` section that is **entirely bug fixes** — Devastation
+  Shattering Star/Mastery, Warrior Executioner double-effect, Warlock pet Soul Leech,
+  Demonology cooldown-manager, Affliction Seed of Corruption — with no tuning values; and the
+  Aug-12 "Season 2 Class Tuning Plans" is a **calendar** (Aug 18 / Aug 25 / Sep 1 / Sep 22)
+  with no per-spec lines. Writing either as `Spec Class — …` highlights would feed bug-fix
+  and schedule text into the outlook tally.
+- The feed's newest entry (2026-08-15, Linxy topic **2336820**, "Class Tuning Incoming –
+  August 18") is the Wowhead item `news=382466` and was logged by an earlier run today.
+- **Writeup coverage recomputed, not read:** exactly **one** spec has no `ptr` writeup —
+  Demonology Warlock, the deliberate "source reported no changes" null — and **every** spec
+  now carries both a raid-scoped and an M+-scoped expert read (the Brewmaster raid gap noted
+  on 08-14 is closed).
+- WCL is evidence-only here: `wcl-fetch/evidence.json` verdict `rdps-broken`, so zone 54
+  (normalized), zone 52 `ptrDummy` and zone 56 medians stay frozen; the three `*-raw` keys
+  landed pre-agent (z52 102 rows with 1T/2T/3T/5T at 2000/662/297/2000 players; z54 27 rows,
+  Coiled Altar and Ula'tek at 0 parses; z56 27 rows, all eight dungeons at the 2000 ceiling).
+  Zone 57 not probed — the agent holds no WCL access at all.
+- **SEASON STATE:** 12.1 is live and three of four tier sources self-identify as Season 2;
+  the machinery handles this by design (seasonVerified s2 → season-ahead lane + frozen
+  letters, Archon still s1 and the only live-consensus contributor). **OWNER: the one-shot
+  `SNAPSHOT_PHASE` flip is still pending — runbook date 08-18, `PHASE_FLIP_DUE` Aug 20.**
