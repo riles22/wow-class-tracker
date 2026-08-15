@@ -102,8 +102,11 @@ Fetch the current Midnight tier lists live and merge them into `data/specs.json`
     `required-sources` review, not an improvised row.
   · **Seven bands since 2026-08-02** (S+/S/A+/A/B+/B/C) on its own `icyveins-ptr` scale —
     upstream added `S+` in its "Update #4" rebuild (owner-set anchors: S+ 100, S 92). The
-    live `icyveins` scale has five and includes neither S+ nor B+ — applying a PTR row
-    under the live source id will fail validation, which is the intended backstop. A NEW
+    live `icyveins` scale has had the SAME seven bands since 521ceaf (2026-08-14), so the
+    two scales now differ only in source id and era. The old backstop this line used to
+    claim — "applying a PTR row under the live source id will fail validation" — NO LONGER
+    HOLDS, because there is no longer a band the live scale lacks; the `era` gate and
+    `seasonVerified` are what keep the lanes apart now. A NEW
     band appearing upstream is an owner escalation, never a silent collapse into a
     neighbor (`scales.json` is CODEOWNERS-owned).
   · **`TBD` is a real upstream state**, not a parse miss. Write it as an explicit `null`

@@ -568,7 +568,7 @@ publishes `lowerBound` as a number; recipe in the refresh-metrics skill.)*
 **`icyveins-ptr` is in this loop too** (added 2026-07-31) — same fetch, same
 `apply-ratings.mjs`, but it era-verifies the OTHER way: the page must self-identify as
 **12.1 / Season 2**, not Season 1. M+ only (no PTR raid list exists — do not invent one),
-6-band scale including **B+**, and specs the page marks **TBD are written as explicit
+7-band scale including **B+**, and specs the page marks **TBD are written as explicit
 `null`**, never omitted and never guessed. It also carries `published` (the page's own
 date, from JSON-LD `dateModified` / the "Last UPDATED" line) alongside `snapshot`. It has
 its own row in `required-sources.json`, so a run that skips it fails the publish gate.
@@ -731,10 +731,17 @@ src/      build.mjs · template.html · render.mjs · normalize.mjs · validate.
           diverge from, so "misses" there are expected and only GRADE mode scores accuracy) ·
           audit-creators.mjs (`npm run audit:creators` — the creator-layer invariants) ·
           assets/ (favicon + apple-touch icons, copied into dist/ by build.mjs) ·
+          quiet-reporter.mjs (the AGENT lane's `node --test` reporter — `npm run test:quiet`;
+          counts + full red diagnostics in 63 bytes against TAP's 84KB. No gate uses it and
+          `npm test` is deliberately not redefined) ·
           wcl-probe.mjs (dispatch-only WCL/diagnostic probe, no standing role — also carries
           the S2 zone ENUMERATION the flip's WCL contract swap reads its zone ids from)
 test/     normalize · validate · render · build · apply-metrics · apply-ratings ·
-          check-refresh · community-overrides · digest · escaping · fetch-transcripts ·
+          check-refresh · claude-md (pins THIS file's numeric claims against the code and
+          data that own them — added 2026-08-15 after an audit found nothing checked
+          CLAUDE.md against reality and it had been calling a 7-band scale 6-band since
+          521ceaf; when it reds, fix the prose, never the assertion) ·
+          community-overrides · digest · escaping · fetch-transcripts ·
           fetch-wcl · fetch-published · freeze-season · report-card · season-archive ·
           snapshot · ui-invariants (the ONLY tests that execute template.html's
           client JS — they need Playwright, which is deliberately not a dependency, so
@@ -743,7 +750,7 @@ test/     normalize · validate · render · build · apply-metrics · apply-rat
           there runs the whole suite with 0 skipped and really does execute them — do not
           read a green local run as "the UI invariants were skipped". Treat any pass/skip
           COUNT written here as stale on sight and read it off the run instead; as of
-          2026-08-14 it is 24 invariants inside 385 total. After any template.html
+          2026-08-15 it is 25 invariants inside 401 total. After any template.html
           change, run them for real:
           `npm i --no-save playwright@1.61.1 && npx playwright install chromium && npm test`)
 dist/     index.html + gearing.html  (generated — open directly in a browser; the two
