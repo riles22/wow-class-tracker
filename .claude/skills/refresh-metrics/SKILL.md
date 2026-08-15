@@ -159,7 +159,10 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
     (07-28 on a 07-31 run), so the manifest success cross-check (stored date must be
     within 1 day of the run) will reject a `success` claim on a lagging day. Record
     **`partial`** with the upstream date in the detail — the real staleness alarm is
-    `maxAgeDays: 4` in required-sources.json, not the success claim.
+    wowmeta's `maxAgeDays` in required-sources.json, not the success claim. (This line said
+    `maxAgeDays: 4` until 2026-08-15; the value is **8**. It was wrong when it was promoted
+    out of the run log on 5547e6b — read the number off the contract rather than trusting
+    this sentence, which is why it no longer restates it.)
   - **Never fetch wowmeta.com HTML**: it is a stale S3 prerender (`dateModified`
     2026-03-23) that the tracker unknowingly ingested for a week, and r.jina.ai is
     non-deterministic about executing the page JS. Both are untrustworthy transports.

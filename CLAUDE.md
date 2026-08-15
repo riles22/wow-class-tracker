@@ -192,6 +192,17 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   coverage (the PTR tier list rates 38 of 40, and counting it moved 39 of 40 M+ specs to
   "high"), and it permanently capped healers/tanks below "high" for lacking a DPS-only
   Dummy Dome signal they can never have.
+  ⚠️ **THE v10 BLOCK BELOW IS HISTORY — ITS CENTRAL MEASUREMENT NO LONGER HOLDS** (checked
+  2026-08-15). It says 27 raid cells renormalize to 100% of the 12.0.7 prior. **The real
+  number is now 0 of 40**: v13 admitted Wowhead's season-ahead list to `nextPatchTierSources`,
+  so every raid cell carries a PTR-era letter opinion, and the v13 note beside
+  `PROJECTION_VERSION` records the same thing from the other side ("`noPtrEvidence` cells go
+  28→0"). Two consequences of reading it as current: the "Still open — tanks have no PTR raid
+  signal of any kind" line at the end of the block is **false**, and the v10 remedies it
+  describes (confidence capped at "low", the expert ceiling doubling to ±12) now fire on
+  **nothing**, because both are keyed on `noPtrEvidence`. Kept rather than deleted because the
+  REASONING is still the best account of why the raid bracket is structurally thin and why
+  Robydoby's cut was rejected — but do not quote its numbers, and do not re-open the actions.
   **The raid bracket has almost no PTR empirical evidence, and that is the real reason
   creators read as out of step with us on healers and tanks** (v10, 2026-08-07). Measured:
   M+ is healthy (32% prior for every role), but in RAID the zone-54 series reaches NOBODY
