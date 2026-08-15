@@ -149,6 +149,32 @@ takes **and** metaNotes added; sources refreshed vs verified-unchanged; whether 
 manifest was rewritten or deliberately left alone and why; what `check-refresh
 --manifest` printed; what was rebuilt; whether you pushed.
 
+## Don't push a Gate-0 file while a nightly is in flight
+
+Found the hard way 2026-08-14, and written down because nothing else says it. Publish checks
+out **current master** and then OVERLAYS the refresh artifact's `data/` on top of it
+(`download-artifact … path: .`). So if you push a change to one of Gate 0's immutable files
+— `required-sources.json`, `scales.json`, `season-final.json`, `forecasts/`,
+`season-archive/` — after the refresh job has captured its artifact but before publish runs,
+publish restores the artifact's OLDER copy over your newer one and then diffs it against
+HEAD. Gate 0 sees a difference it attributes to the agent and **fails the night red**, even
+though the agent did nothing wrong and your commit is fine.
+
+The gate cannot tell "the agent edited this" from "master moved under the artifact", and it
+should not try — failing closed is the right default for that file set. The operational rule
+is just timing:
+
+- The nightly starts at **10:37 UTC** and publish lands roughly **60–100 minutes** later.
+  Treat ~10:30–12:30 UTC as the window to avoid.
+- `gh run list --limit 3` before pushing; if a nightly is `in_progress`, hold the commit
+  locally and push once it completes. A local commit is free — only the push races.
+- If you push anyway and the night reds at Gate 0, nothing is lost or corrupted: re-run the
+  nightly and it recomputes against your commit. The cost is a wasted agent run, not data.
+
+This matters most on **flip day**, which is a local run by design: the flip commit touches
+`scales.json` and `required-sources.json` — two of the five — so land it well clear of the
+window, or dispatch the nightly yourself afterwards.
+
 ## What a local run must never do
 
 - Edit `data/community-overrides.json`, `data/required-sources.json`, `data/scales.json`,

@@ -194,6 +194,22 @@ numbers that matter on the day, they move with the data.
    tree and silently fails tests, which cost one wrong measurement during the dry run. If
    you clone anything on the day, check `git status` is clean before trusting a result.
 
+## Timing: land the flip commit clear of the nightly window
+
+⚠️ **Added 2026-08-14 after hitting it.** Publish checks out current master and then overlays
+the refresh artifact's `data/` on top. Push a change to a Gate-0 immutable file
+(`scales.json` and `required-sources.json` are both in the flip commit) after the refresh job
+captured its artifact but before publish runs, and publish restores the artifact's older copy
+over yours, diffs it against HEAD, and **fails the night red** — the agent did nothing wrong
+and neither did you. The gate cannot distinguish "the agent edited this" from "master moved
+under the artifact", and failing closed is correct for that file set.
+
+The nightly starts **10:37 UTC** and publish lands roughly **60–100 minutes** later, so avoid
+~10:30–12:30 UTC. Run `gh run list --limit 3` first; if one is `in_progress`, hold the commit
+locally — a local commit is free, only the push races. Nothing is corrupted if you get it
+wrong: re-run the nightly and it recomputes against your commit. The cost is a wasted agent
+run. (Same note now lives in the local-run skill, which is where a non-flip run will look.)
+
 ## How to run the flip night — NOT a scheduled run
 
 Gate 3 measures ~31 moves against `maxTotalMoves` 25 on today's data (re-measure on the
