@@ -416,6 +416,50 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
     }
   }
 
+  /* --- sim-tier uniformity across a source's fight profiles (2026-08-15) ---
+     `fightLabels` (render.mjs) pools every DPS spec's fightProfile into ONE flat array and
+     derives the ST/cleave/AoE strength labels and the row tag as within-role PERCENTILES.
+     That pool carries no provenance, so it cannot tell one sim tier from another — and the
+     tiers are not comparable: measured 2026-08-15, bloodmallet's Season-2 MID2 charts run a
+     mean 1.79x its MID1 charts (range 1.114-2.563), varying by BOTH spec and target count.
+
+     Merging a partial re-sim is therefore not "slightly stale data", it is a label that
+     reports WHICH SPECS THE SOURCE HAS RE-SIMMED. Measured on the 14-of-27 roster available
+     the day this landed: all 24 "strong" labels would go to the 14 re-simmed specs and none
+     to the other 12, 21 of 26 specs would move a label, and two specs would publish as
+     "Low-sims" purely for not having been re-simmed yet.
+
+     The existing gates do not catch this. check-refresh's value-move guard measures the
+     MAGNITUDE of a change and takes a human `value_move_ack` — so the night that ack is
+     supplied for a legitimate wholesale tier adoption is exactly the night a partial merge
+     would sail through. This check targets the mixing directly and takes no ack.
+
+     Absent counts as its own value on purpose: today's 26 profiles predate the field, so a
+     pool of all-untiered passes, an all-MID2 pool passes, and the mixed state fails. It also
+     fails closed if a source stops publishing its tier mid-adoption. */
+  const tiersBySource = new Map();
+  for (const spec of specs) {
+    const fp = spec.fightProfile;
+    if (fp == null) continue;
+    if (!tiersBySource.has(fp.source)) tiersBySource.set(fp.source, new Map());
+    const seen = tiersBySource.get(fp.source);
+    const tier = fp.tier ?? null;
+    if (!seen.has(tier)) seen.set(tier, []);
+    seen.get(tier).push(`${spec.class} ${spec.spec}`);
+  }
+  for (const [source, seen] of tiersBySource) {
+    if (seen.size <= 1) continue;
+    const groups = [...seen.entries()]
+      .sort((a, b) => b[1].length - a[1].length)
+      .map(([tier, list]) => `${tier ?? "(no tier recorded)"} x${list.length} (e.g. ${list.slice(0, 3).join(", ")})`);
+    errors.push(
+      `specs.json: fightProfile pool for "${source}" mixes ${seen.size} sim tiers — ${groups.join(" | ")}. ` +
+      `The build derives ST/cleave/AoE labels as within-role percentiles over this pool with no provenance key, ` +
+      `so a mixed pool publishes "which specs were re-simmed" as if it were spec strength. ` +
+      `Adopt a new tier WHOLESALE across every spec of this source, or not at all.`
+    );
+  }
+
   // --- community registry ---
   const specsByClass = new Map();
   for (const s of specs) {

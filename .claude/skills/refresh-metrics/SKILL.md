@@ -68,8 +68,26 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
   "Top-50 avg M+ rating (ceiling)" — it is the avg rating of each spec's own top-50
   players, NOT popularity; keep the "(ceiling)" in the name.
 - **Mythicstats** (mythicstats.com): per-spec representation % in the top 2000 keys per
-  weekly period — metric name "Top-2000 keys representation", unit "%". JS-heavy; fetch
-  via r.jina.ai. Note the period id in the refresh log.
+  weekly period — metric name "Top-2000 keys representation", unit "%". **Server-rendered:
+  fetch `https://mythicstats.com/period/latest` directly — r.jina.ai is Cloudflare-403 on
+  this host** (the old "JS-heavy, fetch via r.jina.ai" line here was stale), and the site
+  root has no data table. Note the period id in the refresh log. If `/period/latest` 302s to
+  a period that 404s (a 7.5 KB error body), that is a half-landed weekly roll, not an outage
+  — ingest the newest period that HAS data and record which.
+  · **Bound the parse to the "Spec representation in top keys" section**, ending at the next
+    `## ` heading or the enclosing `<section>`. Scanning the whole page for the spec-image
+    pattern yields **59** rows, because the "Classes and specs" block and the per-dungeon
+    sections repeat it — you then merge the wrong chart under the right series name.
+  · **The column is the representation SHARE and the whole series sums to ≈100%** (role
+    subtotals ≈ 30/30/20/20). The site's `/meta` widget serves a per-key-PRESENCE figure
+    instead — measured 7–10× the historical series (max 87 against ~12) with 16 exact zeros.
+    Sum the ingest and the role subtotals before merging; that sum is the ONLY thing telling
+    the two columns apart under one metric name.
+  · **Labels are lowercase-hyphenated per class and the value is a BARE number** —
+    `devourer demon-hunter`, `unholy death-knight`. Normalise `[-\s]+` on both sides or 7
+    rows silently drop, and allow `\s*` around the number: a whitespace-strict regex returns
+    **0 specs** and would zero the roster. The bar's `height: NN.NNNN%` style PRECEDES the
+    value, so a "first percentage in the block" regex reads the bar height instead.
 - **Robydoby PTR raid sheets** (community Google Sheets, no auth — public CSV export;
   registered 2026-07-23, owner-approved): per-boss tabs of curated WCL zone-54
   testing parses with per-spec 90/95/99th-pct raw DPS. Fetch
@@ -139,7 +157,23 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
     `timestamp` ("2026-07-08 02:52") and `metadata.timestamp` (microsecond precision), and the
     `subtitle` restates it as `UTC <ts> | SimC build: <hash>`. Take the DATE PART, **per spec** —
     they genuinely differ (on 2026-08-08: 25 specs at 2026-07-08, Elemental Shaman alone at
-    2026-07-15). Confirm `simc_settings.tier == "MID1"`.
+    2026-07-15).
+  - **Carry `simc_settings.tier` through into `profiles[].tier`, and never merge a mixed
+    pool** (2026-08-15). Do NOT hard-code the expected tier — it changes each season
+    (`MID1` → `MID2` for Season 2). Read it off each chart and pass it in the profiles row;
+    `apply-metrics.mjs` stores it as `fightProfile.tier` and `validate.mjs` fails the run
+    when one source's fight-profile pool contains more than one tier.
+    Why this is a gate and not advice: `fightLabels` (render.mjs) pools every DPS spec's
+    profile into one flat array with **no provenance key** and derives the ST/cleave/AoE
+    labels and row tag as within-role percentiles over it. Tiers are not comparable —
+    measured 2026-08-15, MID2 runs a mean **1.79×** MID1 (range 1.114–2.563, varying by both
+    spec and target count, so no scale factor reconciles them; percentiles are scale-invariant
+    anyway, so "normalising" is a no-op). With the 14-of-27 roster available that day, merging
+    the re-simmed specs alone would have handed **all 24 "strong" labels to those 14 and none
+    to the other 12**, moved a label on 21 of 26 specs, and published two specs as "Low-sims"
+    purely for not having been re-simmed. **Adopt a new tier wholesale across every spec of
+    the source, or not at all** — a partial upstream roster means you merge nothing and record
+    the row `partial`.
   - Why this is written down (2026-08-08): for a month every run stamped `asOf` with the RUN
     date while the sim values sat byte-identical. That defeats the staleness alarm *precisely* —
     `required-sources.json` measures bloodmallet via `date.type "fightProfiles"`, i.e. off
@@ -168,7 +202,9 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
   gate now measures the thing that matters.
 - Bloodmallet class names are **snake_case** (`demon_hunter`, `beast_mastery`); the
   `targets` chart type and `hecticaddcleave` fight style return errors — use
-  `talent_target_scaling`. Confirm `simc_settings.tier == "MID1"` on every chart.
+  `talent_target_scaling`. Read `simc_settings.tier` off every chart and carry it through
+  (see the tier-uniformity rule above) — do not assert a specific expected value, it moves
+  each season.
 - **WCL fetching**: pull each cut fresh every run — no at-most-daily cap (policy
   2026-07-08: pull everything every run). The server replies "Use the API … instead of
   scraping HTML" without the XHR header, so always send the XHR header + browser UA +

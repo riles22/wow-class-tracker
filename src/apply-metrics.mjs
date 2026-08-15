@@ -41,7 +41,12 @@ export async function applyMetrics(dataPath, root = ROOT) {
   for (const row of input.profiles ?? []) {
     const spec = byKey.get(`${row.class}|${row.spec}`);
     if (!spec) { unmatched.push(`profile: ${row.class} / ${row.spec}`); continue; }
+    /* `tier` is the chart's OWN simc_settings.tier (e.g. "MID1" / "MID2"), carried through
+       so the sim-tier uniformity invariant in validate.mjs can see it. Optional — a source
+       that does not publish a tier simply omits it — but a harvest that HAS the field must
+       not drop it, or a mixed-tier pool becomes invisible to that check. */
     spec.fightProfile = { source: row.source, asOf: row.asOf ?? null, targets: row.targets };
+    if (row.tier != null) spec.fightProfile.tier = row.tier;
     profilesApplied++;
   }
 

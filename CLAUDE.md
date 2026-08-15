@@ -613,8 +613,25 @@ its own row in `required-sources.json`, so a run that skips it fails the publish
 
 ### Fight profiles (Bloodmallet)
 `GET https://bloodmallet.com/chart/get/talent_target_scaling/castingpatchwerk/{snake_case_class}/{spec}`
-per DPS spec; take best-build DPS at target counts 1/2/3/5/8/15; confirm
-`simc_settings.tier == "MID1"`. Merge via `apply-metrics.mjs` (`profiles` key).
+per DPS spec; take best-build DPS at target counts 1/2/3/5/8/15. Merge via
+`apply-metrics.mjs` (`profiles` key).
+**A source's fight-profile pool may only ever hold ONE sim tier** (gated in validate.mjs
+since 2026-08-15). Read `simc_settings.tier` off each chart into `profiles[].tier` — never
+hard-code the expected value, it moves each season (`MID1` → `MID2` for S2). `fightLabels`
+pools every DPS profile into one flat array with **no provenance key** and derives the
+ST/cleave/AoE labels and row tag as within-role percentiles over it, and the tiers are not
+comparable: MID2 measured a mean **1.79×** MID1 (range 1.114–2.563, varying by spec AND
+target count, so no scale factor reconciles them — and percentiles are scale-invariant, so
+"normalising" is a no-op). Merging a partial re-sim therefore publishes *which specs the
+source has re-simmed* as if it were spec strength: on the 14-of-27 roster of 2026-08-15,
+all 24 "strong" labels would have gone to the 14 re-simmed specs and none to the other 12,
+with two specs published as "Low-sims" purely for not being re-simmed yet. **Adopt a new
+tier wholesale or not at all.** This is the only gate aimed at MIXING; `check-refresh`'s
+value-move guard measures MAGNITUDE and takes a human `value_move_ack`, so the night that
+ack is given for a legitimate wholesale adoption is exactly the night a partial merge would
+otherwise sail through. Note a wholesale adoption WILL need that ack (64 of 156 sim rows
+move >60%), and the "adopt what exists, null the rest" shape is separately blocked by the
+row floor (`rows.min` 15) and the row-drop gate (floor 19 of 26, which takes no ack).
 **`fightProfile.asOf` is the CHART's own timestamp, per spec — never the run date.** It is in
 the payload (`timestamp` / `metadata.timestamp`), and the specs genuinely differ. Stamping today
 defeats the staleness gate exactly, because `required-sources.json` measures bloodmallet off

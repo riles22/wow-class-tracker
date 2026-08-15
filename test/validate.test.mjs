@@ -798,3 +798,40 @@ test("specsAffected coverage gate: a same-date sibling cannot cover for another 
   covered.ptrBuilds.builds[0].highlights.push("Arms Warrior Mortal Strike damage increased by 4%.");
   assert.deepEqual(validateData(covered).filter(e => e.includes("specsAffected")), []);
 });
+
+/* The sim-tier mixing guard. This is the ONLY gate that targets mixing rather than
+   magnitude: check-refresh's value-move guard takes a human ack, so the night that ack is
+   supplied for a legitimate wholesale tier adoption is precisely the night a partial merge
+   would otherwise pass. Landed 2026-08-15, when bloodmallet had re-simmed 14 of 27 DPS
+   specs to MID2 at a mean 1.79x its MID1 values. */
+test("sim-tier guard: a partially re-simmed fightProfile pool fails validation", async () => {
+  const data = await loadData(ROOT);
+  const broken = structuredClone(data);
+  const dps = broken.specs.filter(s => s.role === "DPS" && s.fightProfile?.source === "bloodmallet");
+  assert.ok(dps.length >= 4, "fixture needs several bloodmallet profiles to mix");
+  // Re-sim only some of them, exactly as adopting a partial upstream roster would.
+  for (const s of dps.slice(0, 2)) s.fightProfile.tier = "MID2";
+  const errors = validateData(broken);
+  assert.ok(
+    errors.some(e => e.includes("mixes 2 sim tiers") && e.includes("bloodmallet")),
+    `expected a mixed-tier error, got: ${errors.join(" | ")}`
+  );
+});
+
+test("sim-tier guard: a WHOLESALE tier adoption passes, and so does the untiered status quo", async () => {
+  const data = await loadData(ROOT);
+  // Status quo — no profile carries a tier yet.
+  assert.deepEqual(validateData(structuredClone(data)), []);
+  // Wholesale: every bloodmallet profile moves to the new tier together.
+  const adopted = structuredClone(data);
+  for (const s of adopted.specs) {
+    if (s.fightProfile?.source === "bloodmallet") s.fightProfile.tier = "MID2";
+  }
+  assert.deepEqual(validateData(adopted), []);
+});
+
+test("sim-tier guard: apply-metrics carries the chart's own tier through to fightProfile", async () => {
+  const src = await readFile(path.join(ROOT, "src/apply-metrics.mjs"), "utf8");
+  // The profiles branch must not drop `tier`, or the guard above can never see a mixed pool.
+  assert.match(src, /fightProfile\.tier\s*=\s*row\.tier/);
+});
