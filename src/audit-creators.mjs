@@ -18,7 +18,7 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { expertRead, PROJECTION_VERSION, EXPERT_QUORUM } from "./render.mjs";
+import { expertRead, takeInBracket, PHASES, PROJECTION_VERSION, EXPERT_QUORUM } from "./render.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const j = f => JSON.parse(readFileSync(path.join(ROOT, f), "utf8"));
@@ -80,15 +80,36 @@ for (const t of liveTakes) {
    defect: expertRead averages a creator's live takes, so a stale one dilutes the current
    read. Several claims sharing ONE date are a single video legitimately yielding several
    discrete claims, which the procedure explicitly allows — never flagged. */
-const groups = new Map();
-for (const t of liveTakes) {
-  const k = `${t.creator}|${t.class}|${t.spec}|${t.bracket ?? "unscoped"}`;
-  (groups.get(k) ?? groups.set(k, []).get(k)).push(t.date ?? "");
-}
-for (const [k, dates] of groups) {
-  const uniq = [...new Set(dates)];
-  if (uniq.length > 1)
-    add("MED", "supersede", `${k.replace(/\|/g, " · ")}: live takes on ${uniq.sort().join(" and ")} — the newer should have superseded the older`);
+/* GROUPED BY THE RESOLVED LANE, not the raw `bracket` string (fixed 2026-08-15). The old
+   key was `t.bracket ?? "unscoped"`, which is not the lens expertRead applies: "both" feeds
+   BOTH lanes and an unscoped take is routed by its patchContext. So a creator's `both`-tagged
+   take and their later `raid`-tagged one landed in different groups and were never compared,
+   even though expertRead averages them in the raid read — which is precisely the dilution
+   this check exists to find. Measured the day it was fixed: the tool reported 0 while the
+   real lens showed 23, among them a 2026-06-25 Critcake take still averaged into Fury's raid
+   read against one from 08-10. `takeInBracket` is imported from render.mjs rather than
+   restated here, so the audit and the model can never disagree again. */
+/* The ERA filter matters here too, and only here. `liveTakes` is just !superseded, which is
+   right for the scope and firewall checks above — but expertRead additionally requires the
+   take's patchContext to carry PHASES.ptr.marker, so a 12.0.7-era take is never averaged with
+   a 12.1 one and cannot dilute anything. Without this the fix flagged Tettles' 2026-06-23
+   "12.0.7 live" Augmentation take as needing supersession by an 08-08 12.1 take: two reads of
+   two different patches, both legitimately live. Exactly one false positive, removed. */
+const eraScoped = liveTakes.filter(t =>
+  PHASES.ptr != null && String(t.patchContext ?? "").includes(PHASES.ptr.marker));
+for (const bracket of ["raid", "mplus"]) {
+  const groups = new Map();
+  for (const t of eraScoped.filter(t => takeInBracket(t, bracket))) {
+    const k = `${t.creator}|${t.class}|${t.spec}`;
+    (groups.get(k) ?? groups.set(k, []).get(k)).push(t.date ?? "");
+  }
+  for (const [k, dates] of groups) {
+    const uniq = [...new Set(dates)];
+    if (uniq.length > 1) {
+      add("MED", "supersede",
+        `${k.replace(/\|/g, " · ")} · ${bracket}: live takes on ${uniq.sort().join(" and ")} — the newer should have superseded the older`);
+    }
+  }
 }
 
 /* MED — reference-only entries whose link is a video platform: a possibly-lost lane. */

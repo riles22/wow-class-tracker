@@ -458,7 +458,12 @@ export const EXPERT_QUORUM = 3; // creators needed before the adjustment may cro
    otherwise the patchContext text decides; a context naming neither applies to both
    (a "Season 2 review" is a whole-spec read). Scoping reads patchContext — where the
    take CAME from — not the claim text, which can name a bracket incidentally. */
-const takeInBracket = (t, bracket) => {
+/* Exported so `audit-creators` can ask the SAME question expertRead asks (2026-08-15).
+   It used to group takes by the raw `t.bracket` string, which is not the lens the model
+   uses: "both" feeds both lanes and an unscoped take is routed by patchContext. Measured on
+   the live data, that mismatch hid 23 real dilutions while the tool reported zero. A second
+   copy of this rule in the audit script would have drifted the same way, so there is one. */
+export const takeInBracket = (t, bracket) => {
   if (bracket == null) return true; // unscoped call: the whole-spec arrow
   if (t.bracket === "raid" || t.bracket === "mplus") return t.bracket === bracket;
   if (t.bracket === "both") return true;
