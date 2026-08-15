@@ -51,7 +51,7 @@ inspect them directly gets nothing back, and the tracker's data only grows.
 |---|---|
 | Quiet flags on noisy commands | **Adopted** — but not for the stated reason, see §3 |
 | @-mention files instead of naming them | **Does not work.** `@path` in `claude-code-action`'s `prompt:` is passed through as literal text — verified against the action source (`prepare-prompt.ts` writes the prompt verbatim; no expansion step exists anywhere in the chain). The working equivalent is a leading `/skill-name`, which *is* injected pre-first-turn |
-| Trim what loads at startup | **Adopted in part.** CLAUDE.md (72,857 B) auto-loads every session, and both agent prompts then said "Read CLAUDE.md" — a second copy, twice on a recovery night. Removed |
+| Trim what loads at startup | **Adopted, but it bought nothing** — the prompts said "Read CLAUDE.md" and the agent was already ignoring it (§3c). Instruction removed as misleading, saving measured at zero |
 | Subagents for large-output jobs | **Must not adopt.** `--disallowedTools "Agent,Task"` is deliberate: it is the fix for the 07-15→17 lost nights, where agents backgrounded work and ended their turn |
 | `/clear`, `/compact`, `/rewind` | Interactive-only; no headless analogue |
 | Shorter sessions beat one long one | Real, but splitting the nightly per-skill would give the single-shot failure mode four chances instead of one. Not taken |
@@ -62,9 +62,11 @@ skills already write large fetches to scratch files rather than stdout.
 
 ---
 
-## 3. Two corrections to the audit's own first numbers
+## 3. Corrections to the audit's own numbers
 
-Recorded because both were wrong in the direction that would have justified the work.
+Recorded because every one of them was wrong in the direction that would have justified the
+work. §3c and §3d were measured **after** the changes shipped, from four nightly transcripts,
+and they falsify two of the stated justifications outright.
 
 **(a) Verbose `npm test` is not a ~21k-token sink.** The first pass measured TAP output at
 84,423 bytes and assumed it all entered context. It does not: the Bash harness truncates
@@ -76,6 +78,34 @@ economy one, and the commit says so.
 **(b) The logs were not costing ~196k tokens.** The biggest one was costing *zero*, because
 it was unreadable (§1). The others were capped at ~21k each. The prune's real justification
 is restoring readability, not reclaiming tokens.
+
+**(c) FALSIFIED — the nightly agent was never re-reading CLAUDE.md.** The prompts said
+"Read CLAUDE.md and all four refresh skills", and the audit inferred a duplicate 73 KB copy
+per run. Checked against four nightly transcripts (`31905127253`, `31880660204`,
+`31865611337`, `31826460351`): **CLAUDE.md was Read zero times in all four**, before and
+after the change. Every run made exactly the same 4 `Read` calls — the four SKILL.md files.
+The agent was already ignoring the instruction, presumably because it could see the file was
+already in context. Removing it was still right (a misleading instruction is worth deleting),
+but it saved **nothing**, and commit `ea3d170`'s message overstates the case.
+
+**(d) FALSIFIED — the nightly never reads the skill logs, so the prune saves it nothing.**
+Same four transcripts: **zero `Read` calls against any `log.md`**. This run touched them only
+with `cat >>` to append. The prune's beneficiaries are therefore narrower than claimed:
+- the **recovery** agent, whose prompt explicitly says "inspect git diff plus all four skill
+  logs" — that instruction was *unsatisfiable* for watch-creators before the prune, since the
+  file returned zero bytes. This was a real latent bug and the prune fixes it.
+- **local and interactive** runs, which do read them.
+
+**The net effect on the nightly primary is that this work made per-run context BIGGER.**
+All four SKILL.md files are read every run (4/4 transcripts), and they went 66,717 → 98,411
+bytes: **+31,694 bytes, ~+8k tokens, every single run, forever.** Measured per-turn cached
+context rose ~22% (220,078 → 267,730 avg `cache_read` per usage record) — though those two
+runs did different work, so that figure is indicative, not controlled.
+
+That trade is still the right one, but it should be named for what it is: **~8k tokens per
+run bought anti-fabrication guards** that were otherwise one prune away from deletion — the
+hyphenated `(S-Tier)` trap alone had already produced 13 phantom tier moves. This was never
+a token saving for the nightly. It was a correctness fix that costs tokens.
 
 ---
 
@@ -134,6 +164,10 @@ deliberately **not** pinned — they move with every added test (this audit move
 | `5547e6b` | parser traps promoted into the four skills (+31,411 B) |
 | `0b76c43` | logs pruned 789,049 → 275,518 B, sorted newest-first, headers corrected |
 
+**Verified in production** on nightly `31905127253` (success, 26m40s, both jobs): 3 calls to
+`npm run test:quiet`, 0 to bare `npm test`; the four SKILL.md files Read once each; all four
+logs now under the gate. And two justifications falsified in the same check — see §3c/§3d.
+
 Stock `--test-reporter=dot` was rejected on purpose: 412 bytes but **no counts**, and a skip
 renders identically to a pass. The skill logs record exact figures and CLAUDE.md warns
 specifically about misreading the skip count. Hiding those numbers in a project whose
@@ -151,9 +185,8 @@ an agent at the quiet lane cannot move a gate.
   CLI level (Claude Code 2.1.233, both stdin transports) that a leading slash command injects
   the SKILL.md body pre-first-turn; **not** verified through the action's SDK path. One
   `workflow_dispatch` run would settle it.
-- **The duplicate-CLAUDE.md read is inferred, not measured.** Auto-loading makes it
-  near-certain and the instruction is removed either way, but one look at an
-  `agent-transcripts` artifact would confirm it.
+- ~~The duplicate-CLAUDE.md read is inferred, not measured.~~ **RESOLVED 2026-08-15, and it
+  was wrong** — four transcripts show CLAUDE.md was never Read. See §3c.
 - **CLAUDE.md split** (~24 KB across five moves, each leaving a named pointer) was scoped and
   verified but deliberately **deferred past the 08-18 flip** — it churns the file the flip
   agent reads.
