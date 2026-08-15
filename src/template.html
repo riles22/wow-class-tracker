@@ -2607,7 +2607,26 @@ function renderChanges(){
   const dummyMoves = ptrOk ? SPECS.filter(s=>s.ptrDummy?.rankDelta) : [];
   const freshSpecs = ptrOk ? SPECS.filter(s=>newInfoFor(s)) : [];
   const fresh = freshSpecs.length;
-  if(!moves.length && !dummyMoves.length && !fresh){ host.hidden = true; host.innerHTML = ""; return; }
+  /* Nothing to narrate has TWO meanings and they must not look the same (2026-08-15).
+     Either nothing moved — honest stability, and hiding the strip is correct — or the
+     baseline sits on the far side of a VERSION BOUNDARY, so no comparison was possible at
+     all. The season flip is the second case by construction: its mandatory
+     CONSENSUS_VERSION bump makes pickBaseline refuse the comparison, every lane comes back
+     empty, and the strip used to vanish silently on the one day a reader most needs it
+     explained. Three documents already promised this message existed; none of them had
+     built it. `meta.movementScope` is what makes the distinction visible to the client. */
+  const scope = META.movementScope;
+  const boundary = !!scope && !scope.consensus;
+  if(!moves.length && !dummyMoves.length && !fresh){
+    if(!boundary){ host.hidden = true; host.innerHTML = ""; return; }
+    host.hidden = false;
+    const era = PHASE.seasonLabels?.[PHASE.liveSeason] ?? PHASE.liveLabel;
+    const season = `Season ${(PHASE.seasonOrder ?? []).indexOf(PHASE.liveSeason) + 1}`;
+    host.innerHTML = `<details class="changes"><summary><b>What changed</b> <span class="mnote">${esc(season)} baseline established</span></summary>
+      <div class="chlist"><span class="mnote">This is the first snapshot of ${esc(season)} (${esc(era)}). Movement is measured against the previous snapshot, and the ones before this point describe a different season on a different scale — so there is nothing to compare yet rather than nothing having moved. Arrows return once a second ${esc(season)} snapshot exists.</span></div>
+      </details>`;
+    return;
+  }
   host.hidden = false;
   const ups = moves.filter(x=>x.m.delta>0).length, downs = moves.filter(x=>x.m.delta<0).length;
   const line = x => {

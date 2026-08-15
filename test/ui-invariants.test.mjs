@@ -230,6 +230,18 @@ ui("the What-changed strip agrees with the arrows the grid actually draws", asyn
      when it is hidden, the grid must draw nothing. Both directions are checked, so an
      empty strip can never be a free pass for a grid that IS drawing arrows. */
   const agrees = (v, lane, labelRe) => {
+    /* A THIRD honest shape (2026-08-15): the strip is shown but is narrating a version
+       BOUNDARY rather than a lane — "Season N baseline established". No comparison was
+       possible, so it names no lane and draws no arrows, and the right check is the same one
+       the hidden branch makes. The flip guarantees this state via its mandatory
+       CONSENSUS_VERSION bump; before the message existed the strip hid and this test red on
+       the sanity line instead. */
+    if (v.shown && /baseline established/i.test(v.label)) {
+      assert.equal(v.stripUp + v.stripDown, 0, `${lane}: a baseline-established strip must claim no arrows`);
+      assert.equal(v.drawnUp + v.drawnDown, 0,
+        `${lane}: the strip says the baseline is incomparable but the grid draws ${v.drawnUp + v.drawnDown} arrows`);
+      return;
+    }
     if (v.shown) {
       assert.equal(v.drawnUp, v.stripUp, `${lane}: strip ▲${v.stripUp}, grid ${v.drawnUp}`);
       assert.equal(v.drawnDown, v.stripDown, `${lane}: strip ▼${v.stripDown}, grid ${v.drawnDown}`);
@@ -260,10 +272,20 @@ ui("the What-changed strip agrees with the arrows the grid actually draws", asyn
     return out;
   });
   const shownLanes = Object.entries(labelled).filter(([, v]) => v);
-  assert.ok(shownLanes.length > 0, "sanity: at least one lane must have movement to narrate");
-  for (const [src, label] of shownLanes) {
-    assert.match(label, src === "consensus" ? /Consensus/ : /Ours: 12\.1/,
-      `the ${src} strip must name its own lane, not the other one`);
+  /* The BASELINE-ESTABLISHED state is a third possibility, not a failure (2026-08-15). When
+     the movement baseline sits across a version boundary — which the flip's mandatory
+     CONSENSUS_VERSION bump guarantees — no lane can be compared, and the strip deliberately
+     renders an explanation instead of arrows. It names no lane because it is not narrating
+     one, so the lane-name assertion below must not apply to it. Before the strip had that
+     message it hid entirely and this test red at the flip state on the sanity line. */
+  const boundaryOnly = shownLanes.length > 0 &&
+    shownLanes.every(([, label]) => /baseline established/i.test(label));
+  if (!boundaryOnly) {
+    assert.ok(shownLanes.length > 0, "sanity: at least one lane must have movement to narrate");
+    for (const [src, label] of shownLanes) {
+      assert.match(label, src === "consensus" ? /Consensus/ : /Ours: 12\.1/,
+        `the ${src} strip must name its own lane, not the other one`);
+    }
   }
 });
 
@@ -565,7 +587,14 @@ test("no agent-writable field can inject markup or a handler into the rendered p
 ui("an era-gated PTR tier list shows its own 12.1 letters and is unreachable in the 12.0.7 view", async page => {
   const data = payload();
   const ptr = data.sources.find(s => s.kind === "tier-list" && s.era === "ptr");
-  assert.ok(ptr, "expected an era-gated tier-list source in the payload");
+  /* DERIVED, not asserted into existence (2026-08-15). This used to hard-assert that an
+     era-gated tier list exists, which is true for the whole of a PTR cycle and false the
+     moment flip step 5 retires `icyveins-ptr` — so it red at the flip state for a registry
+     decision rather than a defect. Skipping when the lane is empty also makes it re-arm by
+     itself at 12.2, when the next PTR list appears; naming a literal id here is the same
+     pin-to-live-registry trap `f02caec` had to undo in four other fixtures. Same
+     `if (!x) return` shape the frozen-archive test already uses for an absent lane. */
+  if (!ptr) return;
   const subject = data.specs.find(s => s.ratings?.mplus?.[ptr.id] != null);
   assert.ok(subject, "expected at least one spec rated by the PTR list");
 

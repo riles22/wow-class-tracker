@@ -135,14 +135,18 @@ numbers that matter on the day, they move with the data.
    written back into this runbook. The simulation was green for a step the runbook could not
    actually execute — a reminder that a dry run only validates the procedure it wrote down.
 
-   **⚠ FIVE TESTS RED AT THE FLIP STATE — three from this step, two from elsewhere — AND THE
-   PRE-STAGED PATCH COVERS NONE OF THEM.** Re-measured 2026-08-15 **with Playwright resolved**;
-   the 08-14 and earlier 08-15 runs said "three" because they ran in a copy with no
-   `node_modules`, so all 25 UI invariants SKIPPED and two of the five were invisible. To
-   simulate honestly you must junction the real `node_modules` into the copy —
+   **⚠ THREE TESTS RED ON THIS STEP AND THE PRE-STAGED PATCH DOES NOT COVER THEM.**
+   It was briefly FIVE. Re-measured 2026-08-15 with Playwright resolved, the flip state red
+   five, not three — the 08-14 and earlier 08-15 runs said "three" only because they ran in a
+   copy with no `node_modules`, so all 25 UI invariants SKIPPED and two reds were invisible.
+   **Both of those two are now FIXED in the tree** (see RED #4 and RED #5 below, kept as a
+   record of what was done and why), so the flip state is back to exactly the three here.
+   To re-verify honestly you must junction the real `node_modules` into the copy —
    `New-Item -ItemType Junction` — and remove it afterwards with
    `[System.IO.Directory]::Delete(link, false)`, never `rm -rf`, which follows the junction
-   and would take the real tree with it. The two extra reds are listed after the three below.
+   and would take the real tree with it. Expect one extra red in any copy,
+   `freeze derives exactly what the live page publishes`: it walks git history, which a
+   `tar` copy does not have. That one is an artefact, not a finding.
    Measured in a full local dry run, 2026-08-14 — the flip patch handles the PHASES/era
    changes but nothing in it touches the registry RETIREMENT, so `npm test` inside the flip
    commit lands 3 red even with the patch applied. All three are working as intended; they
@@ -162,29 +166,38 @@ numbers that matter on the day, they move with the data.
      derive-don't-pin lesson `f02caec` applied to four other fixtures.
    Step 7's requirement removals also feed the first of these, so do both before re-running.
 
-   **RED #4 — `test/ui-invariants.test.mjs` → "an era-gated PTR tier list shows its own 12.1
-   letters and is unreachable in the 12.0.7 view".** Also caused by this step: with
-   `icyveins-ptr` gone there is no era-gated list for it to drive. Retire it with the source,
-   or rewrite it to derive its subject (skip when no `era:"ptr"` tier list exists) so it
-   re-arms for the 12.2 cycle. Invisible to any simulation run without Playwright.
+   **RED #4 — ✅ FIXED 2026-08-15, no flip-day action.**
+   `test/ui-invariants.test.mjs` → "an era-gated PTR tier list shows its own 12.1 letters and
+   is unreachable in the 12.0.7 view" hard-asserted that an `era:"ptr"` tier list exists,
+   which this step makes false. It now derives its subject and returns early when the lane is
+   empty, so it re-arms by itself when 12.2 publishes a PTR list — rather than being pinned to
+   a literal id, the trap `f02caec` had to undo in four other fixtures.
 
-   **RED #5 — `test/ui-invariants.test.mjs` → "the What-changed strip agrees with the arrows
-   the grid actually draws", and it is STEP 2's `CONSENSUS_VERSION` bump that causes it.**
+   **RED #5 — ✅ FIXED 2026-08-15, and the promised message now exists.** No flip-day action;
+   what follows is the record. `test/ui-invariants.test.mjs` → "the What-changed strip agrees
+   with the arrows the grid actually draws", caused by STEP 2's own `CONSENSUS_VERSION` bump.
    Isolated by differential measurement at the flip state: with `CONSENSUS_VERSION = 5` the
    test reds on `sanity: at least one lane must have movement to narrate`; revert that single
    integer to 4 and it passes with nothing else changed. The bump is correct and must still
    happen — `pickBaseline` refusing cross-version comparison is exactly the point — but it
    suppresses every consensus arrow, and post-flip there is no projection lane either, so the
    strip has nothing to narrate and its sanity assertion fails.
-   **And the message the bump is supposed to produce does not exist.** Step 2 above,
-   `src/render.mjs:1855` and `docs/s2-transition-scope.md:95` all promise the strip will read
-   *"Season 2 baseline established"*. That string is nowhere in `src/template.html`:
-   `renderChanges()` hides the strip outright when every lane is empty
-   (`if(!moves.length && !dummyMoves.length && !fresh){ host.hidden = true; … }`). So on flip
-   day the strip silently disappears rather than explaining itself, on the one day a reader
-   most needs the explanation. Two options, owner's call — build the message (a few lines in
-   `renderChanges`, and then the invariant needs to accept it) or correct the three documents
-   that promise it and let the strip hide. Either way this test needs a flip-day edit.
+   **The message the bump is supposed to produce did not exist — it does now** (owner
+   decision, Riley 2026-08-15: build it rather than correct the docs down to the behaviour).
+   Step 2, `src/render.mjs`'s `applyFrozenForecast` note and `docs/s2-transition-scope.md:95`
+   all promised the strip would read *"Season 2 baseline established"*, and that string was
+   nowhere in `src/template.html` — `renderChanges()` simply hid the strip when every lane
+   came back empty, so the flip would have made it vanish on the one day a reader most needs
+   it explained.
+   What shipped: `buildPayload` now publishes `meta.movementScope`
+   (`{consensus, ranks, projection}` comparability against the chosen baseline), because the
+   client previously had no way to tell "nothing moved" — honest stability, where hiding IS
+   right — from "the baseline is across a version boundary, so no comparison was possible".
+   `renderChanges()` renders the explanation in the second case only, deriving the season name
+   and label from `PHASE` so 12.2 needs no edit. The invariant learned the same third shape:
+   a strip narrating a boundary names no lane and must claim no arrows, checked like the
+   hidden case. Verified at the flip state with Playwright — this red is gone and the grid
+   still agrees with the strip.
 6. **Era prose residue**: with `ptr: null` the Era toggle hides (template boot, ~:1240) and
    the era tokens derive from `liveLabel` automatically. The remaining hand strings that
    still say "12.0.7" in JS tooltips (template ~:1740/:1763/:1787/:1791/:3166) read

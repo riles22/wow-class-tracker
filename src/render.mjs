@@ -1905,6 +1905,20 @@ export function buildPayload({ specs, sources, scales, community, ptrBuilds, cre
       latestSnapshot: latestSnapshot(sources),
       latestPtrBuild: latestBuild,
       movementSince: baseline?.date ?? null,
+      /* WHICH LANES THE BASELINE CAN NARRATE (2026-08-15). "No arrows" has two completely
+         different meanings and the client could not tell them apart: either nothing moved —
+         honest stability, and the strip hiding is right — or a VERSION BOUNDARY makes the
+         comparison meaningless, which is a thing to say out loud. The flip is exactly that
+         case: its mandatory CONSENSUS_VERSION bump suppresses every consensus arrow, so the
+         strip found all lanes empty and hid itself on the one day a reader most needs the
+         explanation. Three places already promised the strip would read "Season 2 baseline
+         established" (this file's applyFrozenForecast note, s2-transition-scope.md:95 and the
+         flip runbook's step 2); nothing had ever built it, because nothing exposed this. */
+      movementScope: baseline ? {
+        consensus: consensusComparableWith(baseline),
+        ranks: ranksComparableWith(baseline),
+        projection: projComparableWith(baseline),
+      } : null,
       phases: PHASES,
       /* Present ONLY while the frozen artifact is the forecast column's render source
          (post-flip, pre-sunset). The template keys every frozen-mode surface change on
