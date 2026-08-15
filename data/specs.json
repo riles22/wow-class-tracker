@@ -42,18 +42,18 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 100478,
+        "value": 101246,
         "unit": "DPS",
-        "n": 357,
+        "n": 404,
         "asOf": "2026-08-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 39.8,
+        "value": 40,
         "unit": "%",
-        "n": 357,
+        "n": 404,
         "asOf": "2026-08-14"
       },
       {
@@ -98,7 +98,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3990,
         "unit": "rating",
-        "asOf": "2026-08-14"
+        "asOf": "2026-08-15"
       },
       {
         "source": "mythicstats",
@@ -167,7 +167,7 @@
       "raid": {
         "icyveins": "A+",
         "method": "A",
-        "wowhead": "A",
+        "wowhead": "B",
         "archon": "C"
       },
       "mplus": {
@@ -196,18 +196,18 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 151239,
+        "value": 150767,
         "unit": "DPS",
-        "n": 106,
+        "n": 112,
         "asOf": "2026-08-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 1.6,
+        "value": 1.5,
         "unit": "%",
-        "n": 106,
+        "n": 112,
         "asOf": "2026-08-14"
       },
       {
@@ -252,7 +252,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3691,
         "unit": "rating",
-        "asOf": "2026-08-14"
+        "asOf": "2026-08-15"
       },
       {
         "source": "mythicstats",
@@ -306,7 +306,7 @@
         "value": 188227,
         "unit": "DPS",
         "n": 4,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -316,7 +316,7 @@
         "value": 238481,
         "unit": "DPS",
         "n": 9,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -326,7 +326,7 @@
         "value": 319391,
         "unit": "DPS",
         "n": 4,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -336,7 +336,7 @@
         "value": 559915,
         "unit": "DPS",
         "n": 45,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -346,17 +346,17 @@
         "value": 145913,
         "unit": "DPS",
         "n": 44,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 272381,
+        "value": 272575,
         "unit": "DPS",
-        "n": 519,
-        "asOf": "2026-08-14",
+        "n": 518,
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -396,10 +396,10 @@
       "meleeCapable": true
     },
     "tierSet": {
-      "set2": "Each time Remorseless Winter damages at least 1 enemy, gain Freezing Tempest which grants 2% attack speed and 4% increased Icy Death Torrent damage for 5 sec, stacking.",
+      "set2": "Each time Remorseless Winter damages at least 1 enemy, gain Freezing Tempest which grants 1% attack speed and 2% increased Icy Death Torrent damage for 5 sec, stacking.",
       "set4": "Remorseless Winter deals damage 25% more frequently, and Freezing Tempest lasts 5 seconds longer.",
-      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
-      "asOf": "2026-06-18"
+      "source": "https://us.forums.blizzard.com/en/wow/t/class-tuning-incoming-august-18/2336820",
+      "asOf": "2026-08-15"
     },
     "ptrDummy": {
       "source": "warcraftlogs",
@@ -453,18 +453,18 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 167304,
+        "value": 168657,
         "unit": "DPS",
-        "n": 477,
+        "n": 553,
         "asOf": "2026-08-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 7.4,
+        "value": 7.6,
         "unit": "%",
-        "n": 477,
+        "n": 553,
         "asOf": "2026-08-14"
       },
       {
@@ -509,7 +509,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4263,
         "unit": "rating",
-        "asOf": "2026-08-14"
+        "asOf": "2026-08-15"
       },
       {
         "source": "mythicstats",
@@ -563,7 +563,7 @@
         "value": 187408,
         "unit": "DPS",
         "n": 39,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -573,7 +573,7 @@
         "value": 260525,
         "unit": "DPS",
         "n": 14,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -583,7 +583,7 @@
         "value": 272495,
         "unit": "DPS",
         "n": 1,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -593,7 +593,7 @@
         "value": 541901,
         "unit": "DPS",
         "n": 101,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -603,17 +603,17 @@
         "value": 135363,
         "unit": "DPS",
         "n": 101,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 274563,
+        "value": 274490,
         "unit": "DPS",
-        "n": 327,
-        "asOf": "2026-08-14",
+        "n": 328,
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -676,7 +676,7 @@
       "raid": {
         "icyveins": "C",
         "method": "B",
-        "wowhead": "B",
+        "wowhead": "A",
         "archon": "A"
       },
       "mplus": {
@@ -707,18 +707,18 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 178123,
+        "value": 177427,
         "unit": "DPS",
-        "n": 112,
+        "n": 117,
         "asOf": "2026-08-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 1.7,
+        "value": 1.6,
         "unit": "%",
-        "n": 112,
+        "n": 117,
         "asOf": "2026-08-14"
       },
       {
@@ -763,7 +763,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4009,
         "unit": "rating",
-        "asOf": "2026-08-14"
+        "asOf": "2026-08-15"
       },
       {
         "source": "mythicstats",
@@ -817,7 +817,7 @@
         "value": 182153,
         "unit": "DPS",
         "n": 3,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -827,7 +827,7 @@
         "value": 207357,
         "unit": "DPS",
         "n": 6,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -837,7 +837,7 @@
         "value": 484001,
         "unit": "DPS",
         "n": 1,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -847,17 +847,17 @@
         "value": 121485,
         "unit": "DPS",
         "n": 41,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 255557,
+        "value": 255500,
         "unit": "DPS",
-        "n": 140,
-        "asOf": "2026-08-14",
+        "n": 141,
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -876,7 +876,7 @@
         "value": 309010,
         "unit": "DPS",
         "n": 3,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       }
     ],
@@ -965,18 +965,18 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 164381,
+        "value": 167320,
         "unit": "DPS",
-        "n": 527,
+        "n": 602,
         "asOf": "2026-08-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 8.2,
+        "value": 8.3,
         "unit": "%",
-        "n": 527,
+        "n": 602,
         "asOf": "2026-08-14"
       },
       {
@@ -1021,7 +1021,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4261,
         "unit": "rating",
-        "asOf": "2026-08-14"
+        "asOf": "2026-08-15"
       },
       {
         "source": "mythicstats",
@@ -1075,7 +1075,7 @@
         "value": 202081,
         "unit": "DPS",
         "n": 329,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -1085,7 +1085,7 @@
         "value": 274645,
         "unit": "DPS",
         "n": 13,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -1095,7 +1095,7 @@
         "value": 337113,
         "unit": "DPS",
         "n": 21,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -1105,7 +1105,7 @@
         "value": 546686,
         "unit": "DPS",
         "n": 206,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -1115,17 +1115,17 @@
         "value": 108347,
         "unit": "DPS",
         "n": 51,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 280097,
+        "value": 280254,
         "unit": "DPS",
-        "n": 846,
-        "asOf": "2026-08-14",
+        "n": 845,
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -1166,9 +1166,9 @@
     },
     "tierSet": {
       "set2": "Harvesting 4 or more Soul Fragments with Reap has a 20% chance to cause your next Consume to be instant cast and explode in a Soulburst, dealing Cosmic damage to nearby enemies.",
-      "set4": "Soulburst generates 8 Soul Fragments and grants Moment of Craving. Reap deals 20% increased damage.",
-      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
-      "asOf": "2026-06-18"
+      "set4": "Soulburst generates 2 Soul Fragments and grants Moment of Craving. Reap deals 10% increased damage.",
+      "source": "https://us.forums.blizzard.com/en/wow/t/class-tuning-incoming-august-18/2336820",
+      "asOf": "2026-08-15"
     },
     "ptrDummy": {
       "source": "warcraftlogs",
@@ -1221,16 +1221,16 @@
         "name": "95th pct DPS (Mythic)",
         "value": 95424,
         "unit": "DPS",
-        "n": 23,
+        "n": 25,
         "asOf": "2026-08-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 2.6,
+        "value": 2.5,
         "unit": "%",
-        "n": 23,
+        "n": 25,
         "asOf": "2026-08-14"
       },
       {
@@ -1275,7 +1275,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3617,
         "unit": "rating",
-        "asOf": "2026-08-14"
+        "asOf": "2026-08-15"
       },
       {
         "source": "mythicstats",
@@ -1376,18 +1376,18 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 194035,
+        "value": 196097,
         "unit": "DPS",
-        "n": 368,
+        "n": 404,
         "asOf": "2026-08-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 5.7,
+        "value": 5.6,
         "unit": "%",
-        "n": 368,
+        "n": 404,
         "asOf": "2026-08-14"
       },
       {
@@ -1432,7 +1432,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3971,
         "unit": "rating",
-        "asOf": "2026-08-14"
+        "asOf": "2026-08-15"
       },
       {
         "source": "mythicstats",
@@ -1486,7 +1486,7 @@
         "value": 190994,
         "unit": "DPS",
         "n": 164,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -1496,7 +1496,7 @@
         "value": 260051,
         "unit": "DPS",
         "n": 63,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -1506,7 +1506,7 @@
         "value": 280910,
         "unit": "DPS",
         "n": 29,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -1516,7 +1516,7 @@
         "value": 516288,
         "unit": "DPS",
         "n": 44,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -1526,7 +1526,7 @@
         "value": 114212,
         "unit": "DPS",
         "n": 73,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -1536,7 +1536,7 @@
         "value": 267408,
         "unit": "DPS",
         "n": 785,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -1601,7 +1601,7 @@
         "icyveins": "C",
         "method": "C",
         "wowhead": "C",
-        "archon": "A"
+        "archon": "B"
       },
       "mplus": {
         "icyveins": "A+",
@@ -1638,7 +1638,7 @@
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 0.9,
+        "value": 0.8,
         "unit": "%",
         "n": 55,
         "asOf": "2026-08-14"
@@ -1685,7 +1685,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4042,
         "unit": "rating",
-        "asOf": "2026-08-14"
+        "asOf": "2026-08-15"
       },
       {
         "source": "mythicstats",
@@ -1726,10 +1726,10 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 183636,
+        "value": 183848,
         "unit": "DPS",
-        "n": 25,
-        "asOf": "2026-08-14",
+        "n": 24,
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -1739,7 +1739,7 @@
         "value": 192869,
         "unit": "DPS",
         "n": 6,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -1749,7 +1749,7 @@
         "value": 273024,
         "unit": "DPS",
         "n": 7,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -1759,7 +1759,7 @@
         "value": 503251,
         "unit": "DPS",
         "n": 15,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -1769,7 +1769,7 @@
         "value": 100904,
         "unit": "DPS",
         "n": 5,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -1779,7 +1779,7 @@
         "value": 270743,
         "unit": "DPS",
         "n": 106,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -1872,18 +1872,18 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 102955,
+        "value": 109519,
         "unit": "DPS",
-        "n": 100,
+        "n": 116,
         "asOf": "2026-08-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 11.1,
+        "value": 11.5,
         "unit": "%",
-        "n": 100,
+        "n": 116,
         "asOf": "2026-08-14"
       },
       {
@@ -1928,7 +1928,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4268,
         "unit": "rating",
-        "asOf": "2026-08-14"
+        "asOf": "2026-08-15"
       },
       {
         "source": "mythicstats",
@@ -2016,18 +2016,18 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct HPS (Mythic)",
-        "value": 223315,
+        "value": 225866,
         "unit": "HPS",
-        "n": 224,
+        "n": 257,
         "asOf": "2026-08-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 14.2,
+        "value": 14.5,
         "unit": "%",
-        "n": 224,
+        "n": 257,
         "asOf": "2026-08-14"
       },
       {
@@ -2072,7 +2072,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3426,
         "unit": "rating",
-        "asOf": "2026-08-14"
+        "asOf": "2026-08-15"
       },
       {
         "source": "mythicstats",
@@ -2191,18 +2191,18 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 176621,
+        "value": 180210,
         "unit": "DPS",
-        "n": 317,
+        "n": 349,
         "asOf": "2026-08-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 4.9,
+        "value": 4.8,
         "unit": "%",
-        "n": 317,
+        "n": 349,
         "asOf": "2026-08-14"
       },
       {
@@ -2247,7 +2247,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4260,
         "unit": "rating",
-        "asOf": "2026-08-14"
+        "asOf": "2026-08-15"
       },
       {
         "source": "mythicstats",
@@ -2293,7 +2293,7 @@
         "value": 137876,
         "unit": "DPS",
         "n": 5,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -2303,7 +2303,7 @@
         "value": 183523,
         "unit": "DPS",
         "n": 7,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -2323,17 +2323,17 @@
         "value": 108582,
         "unit": "DPS",
         "n": 56,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 242127,
+        "value": 242491,
         "unit": "DPS",
-        "n": 145,
-        "asOf": "2026-08-14",
+        "n": 144,
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -2415,18 +2415,18 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 189916,
+        "value": 200228,
         "unit": "DPS",
-        "n": 176,
+        "n": 210,
         "asOf": "2026-08-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 2.7,
+        "value": 2.9,
         "unit": "%",
-        "n": 176,
+        "n": 210,
         "asOf": "2026-08-14"
       },
       {
@@ -2471,7 +2471,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4084,
         "unit": "rating",
-        "asOf": "2026-08-14"
+        "asOf": "2026-08-15"
       },
       {
         "source": "mythicstats",
@@ -2525,7 +2525,7 @@
         "value": 189492,
         "unit": "DPS",
         "n": 97,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -2535,7 +2535,7 @@
         "value": 262850,
         "unit": "DPS",
         "n": 22,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -2545,17 +2545,17 @@
         "value": 296389,
         "unit": "DPS",
         "n": 23,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 513335,
+        "value": 518201,
         "unit": "DPS",
-        "n": 21,
-        "asOf": "2026-08-14",
+        "n": 20,
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -2565,7 +2565,7 @@
         "value": 94353,
         "unit": "DPS",
         "n": 25,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -2575,7 +2575,7 @@
         "value": 243705,
         "unit": "DPS",
         "n": 77,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -2640,7 +2640,7 @@
         "icyveins": "S",
         "method": "S",
         "wowhead": "S",
-        "archon": "B"
+        "archon": "C"
       },
       "mplus": {
         "icyveins": "C",
@@ -2670,9 +2670,9 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct HPS (Mythic)",
-        "value": 221496,
+        "value": 215648,
         "unit": "HPS",
-        "n": 189,
+        "n": 212,
         "asOf": "2026-08-14"
       },
       {
@@ -2681,7 +2681,7 @@
         "name": "Popularity",
         "value": 11.9,
         "unit": "%",
-        "n": 189,
+        "n": 212,
         "asOf": "2026-08-14"
       },
       {
@@ -2726,7 +2726,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3638,
         "unit": "rating",
-        "asOf": "2026-08-14"
+        "asOf": "2026-08-15"
       },
       {
         "source": "mythicstats",
@@ -2846,18 +2846,18 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 176852,
+        "value": 179607,
         "unit": "DPS",
-        "n": 511,
+        "n": 577,
         "asOf": "2026-08-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 7.9,
+        "value": 8,
         "unit": "%",
-        "n": 511,
+        "n": 577,
         "asOf": "2026-08-14"
       },
       {
@@ -2902,7 +2902,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4018,
         "unit": "rating",
-        "asOf": "2026-08-14"
+        "asOf": "2026-08-15"
       },
       {
         "source": "mythicstats",
@@ -2956,7 +2956,7 @@
         "value": 183337,
         "unit": "DPS",
         "n": 8,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -2966,7 +2966,7 @@
         "value": 219877,
         "unit": "DPS",
         "n": 3,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -2976,7 +2976,7 @@
         "value": 245533,
         "unit": "DPS",
         "n": 2,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -2996,17 +2996,17 @@
         "value": 121311,
         "unit": "DPS",
         "n": 116,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 234263,
+        "value": 234601,
         "unit": "DPS",
-        "n": 143,
-        "asOf": "2026-08-14",
+        "n": 142,
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -3047,9 +3047,9 @@
     },
     "tierSet": {
       "set2": "Barbed Shot causes your pets to Stomp 1 additional time at 50% effectiveness.",
-      "set4": "Stomp causes your next Cobra Shot to either benefit from Beast Cleave at 20% effectiveness, or strike your primary target for 15% additional damage, stacking up to 4 times.",
-      "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/11",
-      "asOf": "2026-07-08"
+      "set4": "Stomp causes your next Cobra Shot to either benefit from Beast Cleave at 30% effectiveness, or strike your primary target for 20% additional damage, stacking up to 4 times.",
+      "source": "https://us.forums.blizzard.com/en/wow/t/class-tuning-incoming-august-18/2336820",
+      "asOf": "2026-08-15"
     },
     "ptrDummy": {
       "source": "warcraftlogs",
@@ -3070,7 +3070,7 @@
       "raid": {
         "icyveins": "B",
         "method": "A",
-        "wowhead": "A",
+        "wowhead": "B",
         "archon": "A"
       },
       "mplus": {
@@ -3103,18 +3103,18 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 175575,
+        "value": 177393,
         "unit": "DPS",
-        "n": 153,
+        "n": 169,
         "asOf": "2026-08-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 2.4,
+        "value": 2.3,
         "unit": "%",
-        "n": 153,
+        "n": 169,
         "asOf": "2026-08-14"
       },
       {
@@ -3159,7 +3159,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4059,
         "unit": "rating",
-        "asOf": "2026-08-14"
+        "asOf": "2026-08-15"
       },
       {
         "source": "mythicstats",
@@ -3204,7 +3204,7 @@
         "value": 206811,
         "unit": "DPS",
         "n": 267,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -3214,7 +3214,7 @@
         "value": 288847,
         "unit": "DPS",
         "n": 46,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -3224,17 +3224,17 @@
         "value": 379372,
         "unit": "DPS",
         "n": 25,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 523120,
+        "value": 524706,
         "unit": "DPS",
-        "n": 171,
-        "asOf": "2026-08-14",
+        "n": 176,
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -3244,7 +3244,7 @@
         "value": 93715,
         "unit": "DPS",
         "n": 10,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -3254,7 +3254,7 @@
         "value": 293547,
         "unit": "DPS",
         "n": 591,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -3349,18 +3349,18 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 163130,
+        "value": 168731,
         "unit": "DPS",
-        "n": 77,
+        "n": 94,
         "asOf": "2026-08-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 1.2,
+        "value": 1.3,
         "unit": "%",
-        "n": 77,
+        "n": 94,
         "asOf": "2026-08-14"
       },
       {
@@ -3405,7 +3405,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4018,
         "unit": "rating",
-        "asOf": "2026-08-14"
+        "asOf": "2026-08-15"
       },
       {
         "source": "mythicstats",
@@ -3459,17 +3459,17 @@
         "value": 188539,
         "unit": "DPS",
         "n": 28,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 522833,
+        "value": 523413,
         "unit": "DPS",
-        "n": 46,
-        "asOf": "2026-08-14",
+        "n": 45,
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -3479,7 +3479,7 @@
         "value": 93974,
         "unit": "DPS",
         "n": 10,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -3489,7 +3489,7 @@
         "value": 248847,
         "unit": "DPS",
         "n": 108,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -3508,7 +3508,7 @@
         "value": 235671,
         "unit": "DPS",
         "n": 2,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       }
     ],
@@ -3562,7 +3562,7 @@
       "raid": {
         "icyveins": "A+",
         "method": "S",
-        "wowhead": "A",
+        "wowhead": "B",
         "archon": "A"
       },
       "mplus": {
@@ -3595,18 +3595,18 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 177026,
+        "value": 177838,
         "unit": "DPS",
-        "n": 317,
+        "n": 360,
         "asOf": "2026-08-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 4.9,
+        "value": 5,
         "unit": "%",
-        "n": 317,
+        "n": 360,
         "asOf": "2026-08-14"
       },
       {
@@ -3651,7 +3651,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3896,
         "unit": "rating",
-        "asOf": "2026-08-14"
+        "asOf": "2026-08-15"
       },
       {
         "source": "mythicstats",
@@ -3705,7 +3705,7 @@
         "value": 195092,
         "unit": "DPS",
         "n": 347,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -3715,7 +3715,7 @@
         "value": 224333,
         "unit": "DPS",
         "n": 7,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -3725,7 +3725,7 @@
         "value": 323979,
         "unit": "DPS",
         "n": 20,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -3735,7 +3735,7 @@
         "value": 595557,
         "unit": "DPS",
         "n": 634,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -3745,17 +3745,17 @@
         "value": 127845,
         "unit": "DPS",
         "n": 60,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 282316,
+        "value": 282549,
         "unit": "DPS",
-        "n": 2022,
-        "asOf": "2026-08-14",
+        "n": 2026,
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -3795,10 +3795,10 @@
       "meleeCapable": false
     },
     "tierSet": {
-      "set2": "Arcane Missiles fires 1 additional missile and deals 20% increased damage.",
-      "set4": "Each wave of Arcane Missiles increases the damage of your next Arcane Blast, Arcane Pulse, or Prismatic Bolt by 5%, up to 40%.",
-      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
-      "asOf": "2026-06-18"
+      "set2": "Arcane Missiles fires 1 additional missile and deals 5% increased damage.",
+      "set4": "Each wave of Arcane Missiles increases the damage of your next Arcane Blast, Arcane Pulse, or Prismatic Bolt by 3%, up to 40%. (2026-08-15 tuning: the per-stack bonus was reduced from 5% to 3%; the notes did not restate the cap, so it is carried forward unchanged.)",
+      "source": "https://us.forums.blizzard.com/en/wow/t/class-tuning-incoming-august-18/2336820",
+      "asOf": "2026-08-15"
     },
     "ptrDummy": {
       "source": "warcraftlogs",
@@ -3850,9 +3850,9 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 191984,
+        "value": 191487,
         "unit": "DPS",
-        "n": 89,
+        "n": 103,
         "asOf": "2026-08-14"
       },
       {
@@ -3861,7 +3861,7 @@
         "name": "Popularity",
         "value": 1.4,
         "unit": "%",
-        "n": 89,
+        "n": 103,
         "asOf": "2026-08-14"
       },
       {
@@ -3906,7 +3906,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3179,
         "unit": "rating",
-        "asOf": "2026-08-14"
+        "asOf": "2026-08-15"
       },
       {
         "source": "mythicstats",
@@ -3950,7 +3950,7 @@
         "value": 184637,
         "unit": "DPS",
         "n": 19,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -3960,7 +3960,7 @@
         "value": 128476,
         "unit": "DPS",
         "n": 2,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -3970,7 +3970,7 @@
         "value": 178672,
         "unit": "DPS",
         "n": 3,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -3980,7 +3980,7 @@
         "value": 498673,
         "unit": "DPS",
         "n": 25,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -3990,7 +3990,7 @@
         "value": 106502,
         "unit": "DPS",
         "n": 5,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -4000,7 +4000,7 @@
         "value": 268088,
         "unit": "DPS",
         "n": 80,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -4063,7 +4063,7 @@
         "icyveins": "A",
         "method": "B",
         "wowhead": "B",
-        "archon": "A"
+        "archon": "S"
       },
       "mplus": {
         "icyveins": "A",
@@ -4095,9 +4095,9 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 182159,
+        "value": 188025,
         "unit": "DPS",
-        "n": 304,
+        "n": 340,
         "asOf": "2026-08-14"
       },
       {
@@ -4106,7 +4106,7 @@
         "name": "Popularity",
         "value": 4.7,
         "unit": "%",
-        "n": 304,
+        "n": 340,
         "asOf": "2026-08-14"
       },
       {
@@ -4151,7 +4151,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3994,
         "unit": "rating",
-        "asOf": "2026-08-14"
+        "asOf": "2026-08-15"
       },
       {
         "source": "mythicstats",
@@ -4205,7 +4205,7 @@
         "value": 181068,
         "unit": "DPS",
         "n": 14,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -4215,7 +4215,7 @@
         "value": 269058,
         "unit": "DPS",
         "n": 27,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -4225,17 +4225,17 @@
         "value": 274662,
         "unit": "DPS",
         "n": 7,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 529022,
+        "value": 529155,
         "unit": "DPS",
-        "n": 97,
-        "asOf": "2026-08-14",
+        "n": 96,
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -4245,17 +4245,17 @@
         "value": 128479,
         "unit": "DPS",
         "n": 103,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 235458,
+        "value": 238231,
         "unit": "DPS",
-        "n": 32,
-        "asOf": "2026-08-14",
+        "n": 31,
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -4351,18 +4351,18 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 88359,
+        "value": 86091,
         "unit": "DPS",
-        "n": 141,
+        "n": 153,
         "asOf": "2026-08-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 15.7,
+        "value": 15.1,
         "unit": "%",
-        "n": 141,
+        "n": 153,
         "asOf": "2026-08-14"
       },
       {
@@ -4407,7 +4407,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4038,
         "unit": "rating",
-        "asOf": "2026-08-14"
+        "asOf": "2026-08-15"
       },
       {
         "source": "mythicstats",
@@ -4510,9 +4510,9 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct HPS (Mythic)",
-        "value": 219381,
+        "value": 222624,
         "unit": "HPS",
-        "n": 229,
+        "n": 257,
         "asOf": "2026-08-14"
       },
       {
@@ -4521,7 +4521,7 @@
         "name": "Popularity",
         "value": 14.5,
         "unit": "%",
-        "n": 229,
+        "n": 257,
         "asOf": "2026-08-14"
       },
       {
@@ -4566,7 +4566,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4262,
         "unit": "rating",
-        "asOf": "2026-08-14"
+        "asOf": "2026-08-15"
       },
       {
         "source": "mythicstats",
@@ -4640,9 +4640,9 @@
     },
     "tierSet": {
       "set2": "Rising Sun Kick deals 30% increased damage and Rushing Wind Kick's healing is increased by 100%.",
-      "set4": "Rising Sun Kick and Rushing Wind Kick have a chance to cause their next cast to ignore their cooldown and have their mana cost reduced by 100%.",
-      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
-      "asOf": "2026-06-18"
+      "set4": "Rising Sun Kick and Rushing Wind Kick have a chance to cause their next cast to ignore their cooldown and have their mana cost reduced by 100%. (2026-08-15 tuning: activation rate increased by 33%; the notes give no new absolute rate.)",
+      "source": "https://us.forums.blizzard.com/en/wow/t/class-tuning-incoming-august-18/2336820",
+      "asOf": "2026-08-15"
     }
   },
   {
@@ -4686,18 +4686,18 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 167565,
+        "value": 169557,
         "unit": "DPS",
-        "n": 203,
+        "n": 242,
         "asOf": "2026-08-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 3.2,
+        "value": 3.3,
         "unit": "%",
-        "n": 203,
+        "n": 242,
         "asOf": "2026-08-14"
       },
       {
@@ -4742,7 +4742,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4005,
         "unit": "rating",
-        "asOf": "2026-08-14"
+        "asOf": "2026-08-15"
       },
       {
         "source": "mythicstats",
@@ -4796,7 +4796,7 @@
         "value": 182746,
         "unit": "DPS",
         "n": 4,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -4806,7 +4806,7 @@
         "value": 228332,
         "unit": "DPS",
         "n": 21,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -4816,17 +4816,17 @@
         "value": 360419,
         "unit": "DPS",
         "n": 9,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 545459,
+        "value": 547133,
         "unit": "DPS",
-        "n": 79,
-        "asOf": "2026-08-14",
+        "n": 76,
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -4836,17 +4836,17 @@
         "value": 119740,
         "unit": "DPS",
         "n": 40,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 292709,
+        "value": 292793,
         "unit": "DPS",
-        "n": 279,
-        "asOf": "2026-08-14",
+        "n": 278,
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -4948,18 +4948,18 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct HPS (Mythic)",
-        "value": 259310,
+        "value": 262453,
         "unit": "HPS",
-        "n": 313,
+        "n": 346,
         "asOf": "2026-08-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 19.8,
+        "value": 19.5,
         "unit": "%",
-        "n": 313,
+        "n": 346,
         "asOf": "2026-08-14"
       },
       {
@@ -5004,7 +5004,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3935,
         "unit": "rating",
-        "asOf": "2026-08-14"
+        "asOf": "2026-08-15"
       },
       {
         "source": "mythicstats",
@@ -5125,18 +5125,18 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 87775,
+        "value": 84910,
         "unit": "DPS",
-        "n": 120,
+        "n": 137,
         "asOf": "2026-08-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 13.4,
+        "value": 13.6,
         "unit": "%",
-        "n": 120,
+        "n": 137,
         "asOf": "2026-08-14"
       },
       {
@@ -5181,7 +5181,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3773,
         "unit": "rating",
-        "asOf": "2026-08-14"
+        "asOf": "2026-08-15"
       },
       {
         "source": "mythicstats",
@@ -5283,18 +5283,18 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 164800,
+        "value": 169138,
         "unit": "DPS",
-        "n": 334,
+        "n": 365,
         "asOf": "2026-08-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 5.2,
+        "value": 5,
         "unit": "%",
-        "n": 334,
+        "n": 365,
         "asOf": "2026-08-14"
       },
       {
@@ -5339,7 +5339,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4099,
         "unit": "rating",
-        "asOf": "2026-08-14"
+        "asOf": "2026-08-15"
       },
       {
         "source": "mythicstats",
@@ -5393,7 +5393,7 @@
         "value": 180558,
         "unit": "DPS",
         "n": 1,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -5403,7 +5403,7 @@
         "value": 207341,
         "unit": "DPS",
         "n": 11,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -5413,7 +5413,7 @@
         "value": 273223,
         "unit": "DPS",
         "n": 14,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -5423,7 +5423,7 @@
         "value": 501340,
         "unit": "DPS",
         "n": 8,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -5433,17 +5433,17 @@
         "value": 110934,
         "unit": "DPS",
         "n": 55,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 248713,
+        "value": 249262,
         "unit": "DPS",
-        "n": 280,
-        "asOf": "2026-08-14",
+        "n": 278,
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -5540,18 +5540,18 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct HPS (Mythic)",
-        "value": 206171,
+        "value": 209433,
         "unit": "HPS",
-        "n": 264,
+        "n": 291,
         "asOf": "2026-08-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 16.7,
+        "value": 16.4,
         "unit": "%",
-        "n": 264,
+        "n": 291,
         "asOf": "2026-08-14"
       },
       {
@@ -5596,7 +5596,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3998,
         "unit": "rating",
-        "asOf": "2026-08-14"
+        "asOf": "2026-08-15"
       },
       {
         "source": "mythicstats",
@@ -5711,9 +5711,9 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct HPS (Mythic)",
-        "value": 222398,
+        "value": 230745,
         "unit": "HPS",
-        "n": 136,
+        "n": 152,
         "asOf": "2026-08-14"
       },
       {
@@ -5722,7 +5722,7 @@
         "name": "Popularity",
         "value": 8.6,
         "unit": "%",
-        "n": 136,
+        "n": 152,
         "asOf": "2026-08-14"
       },
       {
@@ -5767,7 +5767,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3411,
         "unit": "rating",
-        "asOf": "2026-08-14"
+        "asOf": "2026-08-15"
       },
       {
         "source": "mythicstats",
@@ -5885,9 +5885,9 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 186399,
+        "value": 188174,
         "unit": "DPS",
-        "n": 293,
+        "n": 330,
         "asOf": "2026-08-14"
       },
       {
@@ -5896,7 +5896,7 @@
         "name": "Popularity",
         "value": 4.6,
         "unit": "%",
-        "n": 293,
+        "n": 330,
         "asOf": "2026-08-14"
       },
       {
@@ -5941,7 +5941,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4017,
         "unit": "rating",
-        "asOf": "2026-08-14"
+        "asOf": "2026-08-15"
       },
       {
         "source": "mythicstats",
@@ -5995,7 +5995,7 @@
         "value": 183791,
         "unit": "DPS",
         "n": 24,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -6005,7 +6005,7 @@
         "value": 215362,
         "unit": "DPS",
         "n": 23,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -6015,7 +6015,7 @@
         "value": 233463,
         "unit": "DPS",
         "n": 14,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -6025,7 +6025,7 @@
         "value": 498645,
         "unit": "DPS",
         "n": 17,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -6035,7 +6035,7 @@
         "value": 117097,
         "unit": "DPS",
         "n": 80,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -6045,7 +6045,7 @@
         "value": 266290,
         "unit": "DPS",
         "n": 329,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -6145,7 +6145,7 @@
         "name": "95th pct DPS (Mythic)",
         "value": 176932,
         "unit": "DPS",
-        "n": 41,
+        "n": 43,
         "asOf": "2026-08-14"
       },
       {
@@ -6154,7 +6154,7 @@
         "name": "Popularity",
         "value": 0.6,
         "unit": "%",
-        "n": 41,
+        "n": 43,
         "asOf": "2026-08-14"
       },
       {
@@ -6199,7 +6199,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3968,
         "unit": "rating",
-        "asOf": "2026-08-14"
+        "asOf": "2026-08-15"
       },
       {
         "source": "mythicstats",
@@ -6243,7 +6243,7 @@
         "value": 184554,
         "unit": "DPS",
         "n": 1,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -6253,7 +6253,7 @@
         "value": 198596,
         "unit": "DPS",
         "n": 11,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -6263,7 +6263,7 @@
         "value": 200954,
         "unit": "DPS",
         "n": 7,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -6273,7 +6273,7 @@
         "value": 497718,
         "unit": "DPS",
         "n": 4,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -6283,17 +6283,17 @@
         "value": 117369,
         "unit": "DPS",
         "n": 8,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 267374,
+        "value": 267463,
         "unit": "DPS",
-        "n": 101,
-        "asOf": "2026-08-14",
+        "n": 102,
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -6358,7 +6358,7 @@
         "icyveins": "A",
         "method": "B",
         "wowhead": "C",
-        "archon": "B"
+        "archon": "A"
       },
       "mplus": {
         "icyveins": "A+",
@@ -6391,18 +6391,18 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 169079,
+        "value": 180395,
         "unit": "DPS",
-        "n": 54,
+        "n": 62,
         "asOf": "2026-08-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 0.8,
+        "value": 0.9,
         "unit": "%",
-        "n": 54,
+        "n": 62,
         "asOf": "2026-08-14"
       },
       {
@@ -6447,7 +6447,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3977,
         "unit": "rating",
-        "asOf": "2026-08-14"
+        "asOf": "2026-08-15"
       },
       {
         "source": "mythicstats",
@@ -6491,7 +6491,7 @@
         "value": 193255,
         "unit": "DPS",
         "n": 20,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -6501,7 +6501,7 @@
         "value": 240263,
         "unit": "DPS",
         "n": 15,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -6511,7 +6511,7 @@
         "value": 282211,
         "unit": "DPS",
         "n": 7,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -6521,7 +6521,7 @@
         "value": 522622,
         "unit": "DPS",
         "n": 10,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -6531,7 +6531,7 @@
         "value": 93194,
         "unit": "DPS",
         "n": 7,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -6541,7 +6541,7 @@
         "value": 267737,
         "unit": "DPS",
         "n": 215,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -6640,18 +6640,18 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 178913,
+        "value": 176009,
         "unit": "DPS",
-        "n": 312,
+        "n": 354,
         "asOf": "2026-08-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 4.8,
+        "value": 4.9,
         "unit": "%",
-        "n": 312,
+        "n": 354,
         "asOf": "2026-08-14"
       },
       {
@@ -6696,7 +6696,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4007,
         "unit": "rating",
-        "asOf": "2026-08-14"
+        "asOf": "2026-08-15"
       },
       {
         "source": "mythicstats",
@@ -6750,7 +6750,7 @@
         "value": 198275,
         "unit": "DPS",
         "n": 213,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -6760,7 +6760,7 @@
         "value": 192157,
         "unit": "DPS",
         "n": 15,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -6770,7 +6770,7 @@
         "value": 227958,
         "unit": "DPS",
         "n": 10,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -6780,7 +6780,7 @@
         "value": 514087,
         "unit": "DPS",
         "n": 2,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -6790,17 +6790,17 @@
         "value": 117634,
         "unit": "DPS",
         "n": 48,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 253777,
+        "value": 258316,
         "unit": "DPS",
-        "n": 80,
-        "asOf": "2026-08-14",
+        "n": 82,
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -6841,9 +6841,9 @@
     },
     "tierSet": {
       "set2": "Backstab costs 10 less Energy and deals 100% increased damage. Shuriken Storm costs 5 less Energy and deals 60% increased damage.",
-      "set4": "Lingering Shadow now also benefits Eviscerate and Black Powder at 100% effectiveness.",
-      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
-      "asOf": "2026-06-18"
+      "set4": "Lingering Shadow now also benefits Eviscerate and Black Powder at 60% effectiveness.",
+      "source": "https://us.forums.blizzard.com/en/wow/t/class-tuning-incoming-august-18/2336820",
+      "asOf": "2026-08-15"
     },
     "ptrDummy": {
       "source": "warcraftlogs",
@@ -6893,18 +6893,18 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 188899,
+        "value": 189269,
         "unit": "DPS",
-        "n": 391,
+        "n": 448,
         "asOf": "2026-08-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 6.1,
+        "value": 6.2,
         "unit": "%",
-        "n": 391,
+        "n": 448,
         "asOf": "2026-08-14"
       },
       {
@@ -6949,7 +6949,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4015,
         "unit": "rating",
-        "asOf": "2026-08-14"
+        "asOf": "2026-08-15"
       },
       {
         "source": "mythicstats",
@@ -7000,10 +7000,10 @@
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 1T)",
-        "value": 202708,
+        "value": 201608,
         "unit": "DPS",
-        "n": 101,
-        "asOf": "2026-08-14",
+        "n": 102,
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -7013,7 +7013,7 @@
         "value": 234407,
         "unit": "DPS",
         "n": 31,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -7023,17 +7023,17 @@
         "value": 347201,
         "unit": "DPS",
         "n": 16,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "raid",
         "name": "Median raw DPS (12.1 PTR Dummy Dome, 5T)",
-        "value": 633864,
+        "value": 633721,
         "unit": "DPS",
-        "n": 158,
-        "asOf": "2026-08-14",
+        "n": 159,
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -7043,7 +7043,7 @@
         "value": 123908,
         "unit": "DPS",
         "n": 49,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -7052,8 +7052,8 @@
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
         "value": 293964,
         "unit": "DPS",
-        "n": 951,
-        "asOf": "2026-08-14",
+        "n": 953,
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -7117,7 +7117,7 @@
       "raid": {
         "icyveins": "A",
         "method": "C",
-        "wowhead": "C",
+        "wowhead": "B",
         "archon": "B"
       },
       "mplus": {
@@ -7150,18 +7150,18 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 166452,
+        "value": 164461,
         "unit": "DPS",
-        "n": 88,
+        "n": 96,
         "asOf": "2026-08-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 1.4,
+        "value": 1.3,
         "unit": "%",
-        "n": 88,
+        "n": 96,
         "asOf": "2026-08-14"
       },
       {
@@ -7206,7 +7206,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4021,
         "unit": "rating",
-        "asOf": "2026-08-14"
+        "asOf": "2026-08-15"
       },
       {
         "source": "mythicstats",
@@ -7260,7 +7260,7 @@
         "value": 187685,
         "unit": "DPS",
         "n": 12,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -7270,7 +7270,7 @@
         "value": 233540,
         "unit": "DPS",
         "n": 21,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -7280,7 +7280,7 @@
         "value": 279431,
         "unit": "DPS",
         "n": 4,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -7290,7 +7290,7 @@
         "value": 547500,
         "unit": "DPS",
         "n": 17,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -7300,17 +7300,17 @@
         "value": 117258,
         "unit": "DPS",
         "n": 25,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 248323,
+        "value": 248758,
         "unit": "DPS",
-        "n": 195,
-        "asOf": "2026-08-14",
+        "n": 193,
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -7409,18 +7409,18 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct HPS (Mythic)",
-        "value": 240254,
+        "value": 243899,
         "unit": "HPS",
-        "n": 227,
+        "n": 262,
         "asOf": "2026-08-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 14.3,
+        "value": 14.7,
         "unit": "%",
-        "n": 227,
+        "n": 262,
         "asOf": "2026-08-14"
       },
       {
@@ -7465,7 +7465,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4145,
         "unit": "rating",
-        "asOf": "2026-08-14"
+        "asOf": "2026-08-15"
       },
       {
         "source": "mythicstats",
@@ -7581,18 +7581,18 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 155138,
+        "value": 155431,
         "unit": "DPS",
-        "n": 42,
+        "n": 45,
         "asOf": "2026-08-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 0.7,
+        "value": 0.6,
         "unit": "%",
-        "n": 42,
+        "n": 45,
         "asOf": "2026-08-14"
       },
       {
@@ -7637,7 +7637,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3860,
         "unit": "rating",
-        "asOf": "2026-08-14"
+        "asOf": "2026-08-15"
       },
       {
         "source": "mythicstats",
@@ -7691,7 +7691,7 @@
         "value": 185562,
         "unit": "DPS",
         "n": 1,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -7701,7 +7701,7 @@
         "value": 166802,
         "unit": "DPS",
         "n": 16,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -7711,7 +7711,7 @@
         "value": 300056,
         "unit": "DPS",
         "n": 1,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -7721,7 +7721,7 @@
         "value": 497672,
         "unit": "DPS",
         "n": 8,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -7731,17 +7731,17 @@
         "value": 131845,
         "unit": "DPS",
         "n": 76,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 276962,
+        "value": 277553,
         "unit": "DPS",
-        "n": 281,
-        "asOf": "2026-08-14",
+        "n": 280,
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -7821,18 +7821,18 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 168255,
+        "value": 168636,
         "unit": "DPS",
-        "n": 458,
+        "n": 509,
         "asOf": "2026-08-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 7.1,
+        "value": 7,
         "unit": "%",
-        "n": 458,
+        "n": 509,
         "asOf": "2026-08-14"
       },
       {
@@ -7877,7 +7877,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4021,
         "unit": "rating",
-        "asOf": "2026-08-14"
+        "asOf": "2026-08-15"
       },
       {
         "source": "mythicstats",
@@ -7931,7 +7931,7 @@
         "value": 181992,
         "unit": "DPS",
         "n": 2,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -7941,7 +7941,7 @@
         "value": 239052,
         "unit": "DPS",
         "n": 6,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -7951,7 +7951,7 @@
         "value": 316867,
         "unit": "DPS",
         "n": 2,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -7961,7 +7961,7 @@
         "value": 523509,
         "unit": "DPS",
         "n": 22,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -7971,17 +7971,17 @@
         "value": 105218,
         "unit": "DPS",
         "n": 53,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 268004,
+        "value": 268747,
         "unit": "DPS",
-        "n": 130,
-        "asOf": "2026-08-14",
+        "n": 128,
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -8022,9 +8022,9 @@
     },
     "tierSet": {
       "set2": "Wild Imp damage increased by 10%. Implosion damage increased by 20%.",
-      "set4": "When their energy depletes, Wild Imps have a 20% chance to fling themselves at their target and Implode at 250% effectiveness to their main target and 225% effectiveness to other targets. (2026-07-31 build: a tooltip fix — the bonus had displayed 150% / 125%, which is what was recorded here; the intended values are 250% / 225%. The effect itself did not change.)",
-      "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/18",
-      "asOf": "2026-07-31"
+      "set4": "When their energy depletes, Wild Imps have a 20% chance to fling themselves at their target and Implode at 350% effectiveness to their main target and 315% effectiveness to other targets. (2026-07-31 build: a tooltip fix — the bonus had displayed 150% / 125%, which is what was recorded here; the intended values were 250% / 225%. The effect itself did not change. 2026-08-15 tuning: raised to 350% / 315% — note that post attributes this Implode effect to the 2-SET bonus, while the 06-18 datamine and the 07-31 notes placed it here on the 4-set; the values are updated where the effect is stored rather than moved on Blizzard’s say-so alone.)",
+      "source": "https://us.forums.blizzard.com/en/wow/t/class-tuning-incoming-august-18/2336820",
+      "asOf": "2026-08-15"
     },
     "ptrDummy": {
       "source": "warcraftlogs",
@@ -8073,18 +8073,18 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 173232,
+        "value": 176523,
         "unit": "DPS",
-        "n": 194,
+        "n": 224,
         "asOf": "2026-08-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 3,
+        "value": 3.1,
         "unit": "%",
-        "n": 194,
+        "n": 224,
         "asOf": "2026-08-14"
       },
       {
@@ -8129,7 +8129,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3500,
         "unit": "rating",
-        "asOf": "2026-08-14"
+        "asOf": "2026-08-15"
       },
       {
         "source": "mythicstats",
@@ -8183,7 +8183,7 @@
         "value": 185169,
         "unit": "DPS",
         "n": 47,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -8193,7 +8193,7 @@
         "value": 292441,
         "unit": "DPS",
         "n": 74,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -8203,7 +8203,7 @@
         "value": 261644,
         "unit": "DPS",
         "n": 5,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -8223,17 +8223,17 @@
         "value": 105969,
         "unit": "DPS",
         "n": 25,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 269446,
+        "value": 270193,
         "unit": "DPS",
-        "n": 173,
-        "asOf": "2026-08-14",
+        "n": 174,
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -8337,9 +8337,9 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 206915,
+        "value": 208923,
         "unit": "DPS",
-        "n": 355,
+        "n": 400,
         "asOf": "2026-08-14"
       },
       {
@@ -8348,7 +8348,7 @@
         "name": "Popularity",
         "value": 5.5,
         "unit": "%",
-        "n": 355,
+        "n": 400,
         "asOf": "2026-08-14"
       },
       {
@@ -8393,7 +8393,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4107,
         "unit": "rating",
-        "asOf": "2026-08-14"
+        "asOf": "2026-08-15"
       },
       {
         "source": "mythicstats",
@@ -8447,7 +8447,7 @@
         "value": 199865,
         "unit": "DPS",
         "n": 214,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -8457,7 +8457,7 @@
         "value": 336148,
         "unit": "DPS",
         "n": 164,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -8467,7 +8467,7 @@
         "value": 424491,
         "unit": "DPS",
         "n": 42,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -8477,7 +8477,7 @@
         "value": 545770,
         "unit": "DPS",
         "n": 255,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -8487,17 +8487,17 @@
         "value": 106670,
         "unit": "DPS",
         "n": 52,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 289757,
+        "value": 289682,
         "unit": "DPS",
-        "n": 1363,
-        "asOf": "2026-08-14",
+        "n": 1369,
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -8561,7 +8561,7 @@
       "raid": {
         "icyveins": "B",
         "method": "B",
-        "wowhead": "B",
+        "wowhead": "A",
         "archon": "B"
       },
       "mplus": {
@@ -8603,16 +8603,16 @@
         "name": "95th pct DPS (Mythic)",
         "value": 169929,
         "unit": "DPS",
-        "n": 81,
+        "n": 82,
         "asOf": "2026-08-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 1.3,
+        "value": 1.1,
         "unit": "%",
-        "n": 81,
+        "n": 82,
         "asOf": "2026-08-14"
       },
       {
@@ -8657,7 +8657,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 4008,
         "unit": "rating",
-        "asOf": "2026-08-14"
+        "asOf": "2026-08-15"
       },
       {
         "source": "mythicstats",
@@ -8711,7 +8711,7 @@
         "value": 193032,
         "unit": "DPS",
         "n": 16,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -8721,7 +8721,7 @@
         "value": 264189,
         "unit": "DPS",
         "n": 9,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -8731,7 +8731,7 @@
         "value": 341632,
         "unit": "DPS",
         "n": 8,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -8741,7 +8741,7 @@
         "value": 502341,
         "unit": "DPS",
         "n": 14,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -8751,17 +8751,17 @@
         "value": 115339,
         "unit": "DPS",
         "n": 32,
-        "asOf": "2026-08-14",
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median raw DPS (12.1 PTR M+ keys, pooled)",
-        "value": 219134,
+        "value": 221059,
         "unit": "DPS",
-        "n": 62,
-        "asOf": "2026-08-14",
+        "n": 61,
+        "asOf": "2026-08-15",
         "era": "ptr"
       },
       {
@@ -8802,9 +8802,9 @@
     },
     "tierSet": {
       "set2": "Raging Blow damage increased by 15% and during Recklessness, Raging Blow extends the duration of Recklessness by 2 seconds, up to 6 seconds.",
-      "set4": "Bloodthirst damage increased by 10% and during Recklessness, Bloodthirst increases the critical strike bonus of Recklessness by 5%, up to 10%.",
-      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
-      "asOf": "2026-06-18"
+      "set4": "Bloodthirst damage increased by 10% and during Recklessness, Bloodthirst increases the critical strike bonus of Recklessness by 3%, up to 6%.",
+      "source": "https://us.forums.blizzard.com/en/wow/t/class-tuning-incoming-august-18/2336820",
+      "asOf": "2026-08-15"
     },
     "ptrDummy": {
       "source": "warcraftlogs",
@@ -8826,7 +8826,7 @@
         "icyveins": "A",
         "method": "B",
         "wowhead": "B",
-        "archon": "S"
+        "archon": "A"
       },
       "mplus": {
         "icyveins": "B",
@@ -8859,18 +8859,18 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 104537,
+        "value": 104305,
         "unit": "DPS",
-        "n": 156,
+        "n": 175,
         "asOf": "2026-08-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 17.4,
+        "value": 17.3,
         "unit": "%",
-        "n": 156,
+        "n": 175,
         "asOf": "2026-08-14"
       },
       {
@@ -8915,7 +8915,7 @@
         "name": "Top-50 avg M+ rating (ceiling)",
         "value": 3557,
         "unit": "rating",
-        "asOf": "2026-08-14"
+        "asOf": "2026-08-15"
       },
       {
         "source": "mythicstats",

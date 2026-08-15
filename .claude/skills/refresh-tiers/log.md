@@ -831,3 +831,39 @@ method 80, wowhead 80, archon 80).
 - **wowhead — 80 assignments, 0 moves**, all six `published` dates unchanged and agreeing with
   published-evidence. **icyveins-ptr — 0 moves**, no rebuild since 08-09 (Sunday cadence),
   Subtlety Rogue still an explicit TBD null.
+
+## 2026-08-15 (nightly)
+
+All four live tier-list sources plus `icyveins-ptr` fetched fresh. **Consensus movement: 3
+cells, all raid, all one band** — Preservation Evoker A+→A, Frost Mage A+→S, Protection
+Warrior S→A+ — and all three are Archon's, because Archon is now the only source feeding the
+live consensus in its own right (icyveins / method / wowhead all verify s2 = season-AHEAD and
+contribute through the frozen lane, which keeps every cell at a consensus of 4).
+
+- **archon — 80 assignments, 5 raid tier moves** (Frost Mage A→S, Outlaw Rogue B→A, Feral
+  Druid A→B, Preservation Evoker B→C, Protection Warrior S→A); every M+ letter byte-identical.
+  **The Season-1 raid sample collapsed further overnight**: total parses 3992 DPS / 1041 healer
+  / 560 tank, against 6435 / 1582 / 897 on 08-14 and 219704 DPS on 08-12. Weak evidence — noted
+  in the manifest, not smoothed. `lastUpdated` still reads 2026-08-14T12:00:00Z while every raid
+  parse count moved, which is the standing reason the parse-count column, not `lastUpdated`, is
+  Archon's re-cut detector. Archon still describes Season 1 (nine S1 bosses, eight S1 dungeons,
+  zone label "VS / DR / MQD"), so `seasonVerified` stays s1.
+  Per-encounter: 51/51 pages, 83 raid tier changes, 0 M+ changes, 677 rows (was 678 — Archon
+  dropped Affliction Warlock from Vanguard). Empty upstream cuts (Crown all three roles,
+  Chimaerus healer+tank, Vanguard tank) left untouched per "empty = nothing to ingest".
+  Survivability: 40/40, **0 moves** (18 last night).
+- **wowhead — 80 assignments, 6 moves, all on the raid DPS page**, which republished today
+  (Fury Warrior B→A, Havoc DH B→A, Frost DK A→B, Arcane Mage A→B, Marksmanship Hunter A→B,
+  Enhancement Shaman C→B). `published` advanced 08-08 → **08-14 on raid DPS and raid tank**;
+  the other four unchanged. All six agree with published-evidence.
+- **method — 80 assignments, 0 moves.** The Season-2 lists that landed yesterday are stable;
+  self-dates unchanged (raid 10 Aug, M+ 13 Aug). Still s2 / season-ahead.
+- **icyveins — raid 40/40, 0 moves; M+ STILL BLOCKED (sixth day).** The live M+ pages publish
+  S+ / B+ / TBD, bands the 5-band `icyveins` scale does not carry, and their 40 letters are
+  again byte-identical to the `icyveins-ptr` list — Icy Veins is still serving its PTR list as
+  its live M+ list. 34 of 40 stored M+ letters would move if a merge were allowed. `scales.json`
+  is the gate contract → OWNER ESCALATION, stored letters untouched. All `published` unchanged.
+- **icyveins-ptr — 40/40 read, 0 moves.** No rebuild since 08-09 (Sunday 14:00 CEST cadence);
+  Subtlety Rogue is still the literal upstream TBD, stored as an explicit null.
+- No `seasonVerified` value changed this run, so `freeze-season.mjs` had nothing new to freeze
+  (publish runs it regardless).

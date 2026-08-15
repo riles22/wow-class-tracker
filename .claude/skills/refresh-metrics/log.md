@@ -1239,3 +1239,43 @@ one-shot re-harvest, not a per-spec drip.**
 - **WCL — no fetch of any kind by this agent.** `wcl-fetch/evidence.json` (2026-08-14T17:58:40Z)
   verdict **"rdps-broken"**. The three raw keys landed via the deterministic step:
   `wcl-dummy-raw` 103 rows, `wcl-ptr-raid-raw` 27, `wcl-ptr-mplus-raw` 27. Five rDPS cuts frozen.
+
+## 2026-08-15 (nightly)
+
+A quiet numbers night: only Archon's raid cut and murlok produced a fresh observation, and
+Archon's did not advance its own date, so most rows are honestly `partial`.
+
+- **archon — raid halves re-cut, M+ halves frozen for the fifth run.** "95th pct DPS (Mythic)"
+  33 rows, 29 values moved (largest Outlaw Rogue 169079 → 180395, +6.7%); "95th pct HPS
+  (Mythic)" 7/7 moved; Popularity raid 32 of 40 moved. All merged at **Archon's own cut date
+  2026-08-14**, never today — so the coverage dates do not advance and these are `partial`, not
+  `success`. "M+ score (95th pct)" and the M+ popularity half are byte-identical to stored for
+  the fifth consecutive run and were left at **2026-08-10**; that is now 5 days against
+  `maxAgeDays: 5`, so the heartbeat alarms tomorrow unless Archon re-cuts its M+ numbers. That
+  red is the correct signal.
+- **murlok — 40/40, 0 value changes**, second night running: the Season-1 M+ ladder is finished,
+  so the top-50 ceilings are frozen until Season 2 opens 08-18. Murlok publishes no self-date
+  **and no cut identity**, so the fetch date is the only honest observation date and the live
+  re-read is stamped 2026-08-15. Rank column contiguous 1..27 / 1..7 / 1..6 — the parse tell.
+- **mythicstats — period 1075 unchanged, all 34 bars byte-identical, NOTHING merged.** Contrast
+  with murlok deliberately: this source *does* publish a cut identity, so an unchanged period
+  plus unchanged values is the same cut and re-stamping it would be the exact failure the
+  bloodmallet/wowmeta `asOf` rule exists to prevent. Rows stay at 2026-08-14.
+- **wowmeta — `manifest.snapshotDate` still 2026-08-11 (fourth day)**, all 40 `lowerBound` and
+  all 40 `numberOfCharacters` reproduce stored exactly. Nothing merged.
+- **bloodmallet — third consecutive night blocked, byte-for-byte the same picture.** The same
+  14 specs return MID2 charts (re-simmed 2026-08-12); the same 13 return the 76-byte error body
+  on all four retries. Merging 14 MID2 against 12 stored MID1 would mix sim tiers inside the
+  within-role percentile labels the build derives, so stored MID1 profiles stay at 2026-07-08
+  (38 days). OWNER DECISION still pending: adopt MID2 wholesale once the roster is complete.
+- **simulationcraft — same report, seventh run.** Timestamp 2026-08-08 07:28:33+0000, build
+  1205-01, WoW **12.0.7**.68974 — still simming the previous patch four days after 12.1 shipped.
+  All 26 stored values reproduce exactly. Reconfirmed the parse trap: matching player names
+  across *all* `"series"` blocks instead of the first returns ~2.2× the right number (that is
+  the burst chart), which is why the first block is pinned.
+- **robydoby (best-effort, outside the contract)** — sheet re-read, newest Mythic week is still
+  24/7; nothing new to ingest.
+- **WCL — no fetch of any kind by this agent.** `wcl-fetch/evidence.json` (2026-08-15T04:54:53Z)
+  verdict **"rdps-broken"** — rdps@3176 still "Internal server error" while OAuth/GraphQL are
+  healthy (3600 pts/h, 36.74 spent). The three raw keys landed via the deterministic step:
+  `wcl-dummy-raw` 103 rows, `wcl-ptr-raid-raw` 27, `wcl-ptr-mplus-raw` 27. Five rDPS cuts frozen.

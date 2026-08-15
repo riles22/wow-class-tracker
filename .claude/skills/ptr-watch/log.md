@@ -1136,3 +1136,52 @@ one-shot; see docs/s2-flip-runbook.md.
 - **Writeup coverage unchanged: 39 of 40.** Demonology Warlock's null stays deliberate.
 - **Migration status, unchanged and NOT attempted:** 12.1 is live, Season 2 opens 08-18 (inside
   `PHASE_FLIP_DUE` 2026-08-20); tracker still pre-flip. Owner one-shot, docs/s2-flip-runbook.md.
+
+## 2026-08-15 (nightly)
+
+**A new feed entry — the first in nine days.** The dev-notes thread is closed for this cycle
+and Wowhead's RSS carried only the mirror, so the entry came off channel 3: a forum search
+surfaced **"Class Tuning Incoming – August 18"** (Linxy, topic **2336820**, 2026-08-15T00:11Z),
+the Season 2 launch tuning pass applied with the 08-18 weekly reset.
+
+- Logged **`kind: "build"`, `forumPostNumber: 1`**, citing topic 2336820 directly with the
+  Wowhead mirror (`news=382466`) alongside. It is a STANDALONE topic, not a reply in the
+  tracked `thread`, so the `thread` key is unchanged. `kind: "hotfix"` was the first shape
+  tried and is wrong twice over: the post *has* a forum citation, and validation forbids a
+  hotfix carrying `forumUrl` — which also reds `test/validate.test.mjs`'s host-allowlist test,
+  since that test sets `builds[0].forumUrl` and counts errors. **A hotfix must never be the
+  newest entry unless that test is rewritten first.**
+- **14 specs distilled**, one consolidated line each: Blood + Frost DK, Devourer DH,
+  Restoration Druid, Beast Mastery Hunter, Arcane Mage, Mistweaver Monk, Discipline + Holy
+  Priest, Assassination + Subtlety Rogue, Enhancement Shaman, Demonology Warlock, Fury Warrior.
+  Coverage gate agrees 14/14.
+- **Eight Season-2 tier sets revised → eight `spec.tierSet` updates in the same edit** (Frost
+  DK, Devourer DH, BM Hunter, Arcane Mage, Mistweaver, Subtlety, Demonology, Fury), `asOf`
+  2026-08-15, `source` = the forum topic. Clean value swaps into the stored wording where the
+  notes allow; a dated parenthetical where they do not — Arcane (the notes cut the per-stack
+  bonus 5%→3% but never restate the cap), Mistweaver (a relative "+33% activation rate" with no
+  absolute), and **Demonology**, where Blizzard's post calls the Implode effect the **2-set**
+  while the 06-18 datamine and the 07-31 notes both placed it on the 4-set: values were updated
+  where the effect is stored rather than moved on one post's say-so.
+- **The PLAYER VERSUS PLAYER section was deliberately NOT distilled.** It is the only place
+  Fire Mage, Retribution Paladin, Restoration Shaman and Destruction Warlock appear in this
+  post. Note the trap: the tier-set upkeep gate matches on spec name + set keyword and does
+  **not** look at a `PvP only` prefix, so writing the PvP-only Fire Mage 4-set line even as a
+  prefixed out-of-scope record would have fired the gate on a spec whose PvE set never changed.
+  Precedent (07-31 Restoration Druid) is to log no line at all — followed.
+- Checked and NOT logged: the Aug-13 / Aug-14 live hotfix round-ups (bug fixes + trinket and
+  item tuning, no spec tuning), "Season 2 Trinket Tuning Now Live", and the 08-12 tuning
+  roadmap (already recorded — passes 08-18, 08-25, 09-01, 09-22).
+- **"Patch 12.1.5 PTR Now Listed on Battle.net Launcher"** (08-13) still stands as the tip-off
+  that the NEXT cycle needs a new forum thread and a re-pointed `thread` key. Nothing datamined.
+- **WCL zones 54 / 52 / 56 are evidence-only on the runner** — verdict "rdps-broken", nothing
+  ingested, stored data untouched. Zone 57 is not covered by the deterministic step.
+- **Writeup coverage recomputed (not read): 39 of 40.** Demonology Warlock's null deliberate.
+- **Migration status, unchanged and NOT attempted:** 12.1 is live, Season 2 opens 08-18 (inside
+  `PHASE_FLIP_DUE` 2026-08-20); tracker still pre-flip. Owner one-shot, docs/s2-flip-runbook.md.
+- **Follow-up for the next LOCAL run:** the eight `tierSet` edits above make
+  `check-refresh --age` report **`gearing-tierset-sync`** (8 specs whose gearing-side text the
+  tracker has since corrected — the 2026-08-08 Preservation Evoker failure shape). The fix is
+  `node gearing/src/sync-tracker-fields.mjs` then `npm run gearing:build`, both under
+  `gearing/`, which the nightly publish job does not stage — so it was deliberately NOT run
+  here. `npm test` and the publish gate are unaffected; only the heartbeat alarms.

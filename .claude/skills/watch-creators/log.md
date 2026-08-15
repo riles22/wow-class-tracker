@@ -2173,3 +2173,37 @@ one published inside the 12.1 cycle** (first build 2026-06-18).
   discovery so the next run's accounting stays auditable.
 - No `generalCreators` (izen / Maximum / Zorthas) uploads were unseen this run, so no `latest`
   fields moved and `community.json` is untouched.
+
+## 2026-08-15 (nightly)
+
+**Two independent degradations tonight, both recorded rather than worked around.**
+
+1. **Transcripts: `limit-exceeded` again.** `transcript-fetch/summary.json`
+   (2026-08-15T04:58:38Z) — 1 requested / 0 fetched on `bqVHzvKJCuA`, "remaining queue
+   untouched". Supadata's free tier is 100 requests per MONTH and the budget is spent. **Zero
+   takes, zero metaNotes** added, changed or superseded; no transcript was fetched by this
+   agent by any means.
+2. **NEW: the YouTube RSS endpoint is 404-walled from this runner.**
+   `youtube.com/feeds/videos.xml?channel_id=…` returned 404 for **40 of 44** channels and did
+   **not** clear across four rounds with backoff over ~10 minutes — so this is not the
+   documented transient burst. Discovery was completed with the preinstalled **yt-dlp at its
+   `requirements.txt` pin (2026.07.04 — never installed or upgraded in-run)**:
+   `--flat-playlist --playlist-end 15 --extractor-args "youtubetab:approximate_date"` over each
+   channel's `/videos` tab. **44/44 channels enumerated, 0 failures, 652 videos.**
+
+- Seen-set rebuilt from the four structured lanes: **1011 ids**. 134 unseen; **31** date at or
+  after the cycle's opening build (2026-06-18).
+- **Queued 16** (queue 27 → **43**): six same-day reactions to tonight's Aug-18 tuning post —
+  Shadarek (Devourer tier set), Nintern (Devourer), MadSkillzzTV (healer buffs/nerfs), Preheat
+  (Arcane), Supatease, Dratnos — plus ten older 12.1 / Season-2 spec pieces from MadSkillzzTV,
+  AutomaticJak, Megasett, Shindigg, Musguete and Bansherz.
+- **NOTHING was written to `seen[]` this run, deliberately.** `approximate_date` is day-precise
+  only for recent uploads and rounds older ones to mid-month — the 103 apparently pre-cycle
+  videos cluster implausibly on the 15th of each month. `seen[]` is durable, so retiring them on
+  an approximate date would permanently dismiss videos we never actually dated. They stay
+  unexamined and will be reconsidered next run. **If RSS stays down, this is the cost to watch:
+  the seen-set stops growing and the same 100+ videos are re-enumerated nightly.**
+- No `generalCreators` (izen / Maximum / Zorthas) uploads were unseen this run, so no `latest`
+  fields moved and `community.json` is untouched.
+- Coverage recomputed: every spec holds at least one live take; **Brewmaster Monk** is still the
+  only spec with no RAID-scoped one, and nothing queued tonight is Brewmaster.
