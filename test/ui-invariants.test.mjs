@@ -1175,6 +1175,13 @@ test("the FROZEN forecast column renders in the post-flip live view, labelled as
    the END of this file: the pre-staged flip patch carries hunks through ~:1080 and inserting
    near them breaks `git apply`. */
 ui("a 12.0.7-only view hides every PTR-derived summary surface", async page => {
+  /* Cycle-gated. Post-flip `phases.ptr` is null, the Era toggle is not rendered at all
+     (template boot), and there is no PTR-derived content left to hide — so the control this
+     test clicks does not exist and the whole premise is gone. Caught in the 08-15 flip
+     simulation; same guard the pre-staged flip patch applies to every other era-dependent
+     invariant in this file. */
+  if (!payload().meta.phases.ptr) return;
+
   // Both-era baseline: at least one of these must actually be present, or the test proves
   // nothing about gating — it would pass on an empty page.
   const both = await page.evaluate(() => ({

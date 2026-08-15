@@ -158,7 +158,15 @@ test("CLAUDE.md: the take-coverage paragraph matches what expertRead actually re
      deliberately leaves unpinned, coverage is NOT volatile noise: it changes only when a
      writeup or a bracket-scoped take lands, which is exactly when the prose should be
      edited. Reds only when prose and data disagree; the fix is the prose. */
-  const { expertRead } = await import("../src/render.mjs");
+  /* Only meaningful while a PTR cycle is OPEN. expertRead filters takes on
+     PHASES.ptr.marker, so the moment the flip sets `ptr: null` it returns null for all 40
+     specs and the computed gap set becomes the whole roster — the prose would read "zero"
+     against a computed 40 and this would red the flip commit for no reason. Caught in the
+     08-15 flip simulation, which is the SECOND time a test of mine needed this guard; the
+     rule is that anything reading the take lane must gate on PHASES.ptr, the same way the
+     pre-staged flip patch gates every other take-lane assertion. */
+  const { expertRead, PHASES } = await import("../src/render.mjs");
+  if (!PHASES.ptr) return; // cycle closed: no take-era to scope against
   const takes = JSON.parse(
     await readFile(path.join(ROOT, "data/creator-takes.json"), "utf8"),
   ).takes ?? [];

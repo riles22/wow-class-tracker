@@ -115,6 +115,26 @@ numbers that matter on the day, they move with the data.
    source" (RED #2) and "synthesize an `era:"ptr"` fixture rather than name a live registry
    id" (RED #3), and the `icyveins-ptr` requirement block comes out of
    `data/required-sources.json` in the same commit.
+
+   ### ⚠ THE PAIRED `specs.json` EDIT — mandatory, and it was missing until 2026-08-15
+   **Also strip `ratings.mplus["icyveins-ptr"]` from all 40 specs in `data/specs.json`, in the
+   same commit.** Removing the registry entry without this leaves 40 orphan ratings, and
+   `validateData` rejects a rating whose source is not in the registry:
+   ```
+   specs.json: Death Knight / Blood mplus rating from unknown source "icyveins-ptr"   … ×40
+   ```
+   That is **40 errors, not 3** — `npm run validate`, `npm test` and `npm run build` all fail,
+   i.e. the flip commit cannot be verified at all until the pairing is done. Measured on a
+   byte-copy of the tree, 2026-08-15, executing this step exactly as it was written.
+   The values are safe to delete: they are identical to the merged live M+ letters on all 39
+   placed specs (the same fact this step's mechanism decision rests on), so nothing is lost —
+   and the frozen forecast artifact keeps its own copy of what the forecast read at freeze
+   time, independently of the registry.
+   **Why the earlier dry run missed it:** the 2026-08-14 simulation stripped these ratings as
+   part of the same script that removed the registry entry, and only the registry half was
+   written back into this runbook. The simulation was green for a step the runbook could not
+   actually execute — a reminder that a dry run only validates the procedure it wrote down.
+
    **⚠ THREE TESTS RED ON THIS STEP AND THE PRE-STAGED PATCH DOES NOT COVER THEM.**
    Measured in a full local dry run, 2026-08-14 — the flip patch handles the PHASES/era
    changes but nothing in it touches the registry RETIREMENT, so `npm test` inside the flip
@@ -219,6 +239,21 @@ numbers that matter on the day, they move with the data.
    - Steps 5+7 red three tests the flip patch does not cover — see the ⚠ under step 5.
    - `freeze-season` behaved exactly as this step predicts, and the build was clean.
    With the three known reds updated, the flip state is green.
+
+   **Re-run 2026-08-15, and it corrected the run above.** Executing step 5 *as this document
+   worded it* — registry only — produced **40 validation errors**, not three reds: the orphan
+   `ratings.mplus["icyveins-ptr"]` keys. The 08-14 run had silently done the paired
+   `specs.json` edit inside its own script without writing it down, so it validated a
+   procedure the runbook did not contain. Step 5 now carries that edit explicitly.
+   With the pairing applied, the flip state reds exactly the three predicted tests and
+   nothing else — re-measured 2026-08-15 after two further guards landed:
+   `test/claude-md.test.mjs`'s take-coverage assertion and the `ui-invariants` era-gate
+   invariant both read the take lane or the Era toggle, so both now return early when
+   `PHASES.ptr` is null, the same idiom the pre-staged patch uses throughout. Before those
+   guards the flip state red **six**, not three.
+   Method: byte-copy the tree with `tar` into a SHORT temp path — never `git clone`, which
+   truncates on Windows MAX_PATH in `gearing/data/simc-audit/**` and yields a tree that looks
+   complete and fails tests for unrelated reasons.
 
    **A Windows gotcha, since this flip is a LOCAL run:** `git clone` of this repo fails
    with "Filename too long" on the `gearing/data/simc-audit/**` paths unless
