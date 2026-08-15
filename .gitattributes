@@ -27,3 +27,9 @@ gearing/wow-s2-gearing.html text eol=lf
 # reach subdirectories (which is why data/history/ is listed explicitly above).
 docs/s2-flip-test-patch.diff text eol=lf
 data/season-archive/*.json   text eol=lf
+# data/forecasts/ for the same reason as season-archive/, and it was the one immutable lane
+# left unpinned (audit 2026-08-14). `data/*.json` does not reach subdirectories. These hold
+# the frozen forecast the post-launch report card grades — an artifact whose whole value is
+# being byte-stable, re-derivable and hash-checkable months later, which a CRLF rewrite at
+# checkout would quietly undermine.
+data/forecasts/*.json        text eol=lf

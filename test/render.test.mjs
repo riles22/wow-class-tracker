@@ -415,7 +415,7 @@ test("projectionFor: full-signal math is exact and transparent", () => {
   assert.equal(p.tier, "S");
   assert.equal(p.confidence, "high"); // testing + dummy + outlook + expert = 4 of 4 signals
   assert.match(p.basis, /live baseline 80/);
-  assert.match(p.basis, /raid-testing pct 100/);
+  assert.match(p.basis, /raid-testing 100/); // not "pct" — recentred onto the letter axis, v12
   assert.match(p.basis, /Dummy Dome 90/);
   assert.match(p.basis, /outlook \+10/);
   assert.doesNotMatch(p.basis, /meta read/, "one creator is not corroboration");

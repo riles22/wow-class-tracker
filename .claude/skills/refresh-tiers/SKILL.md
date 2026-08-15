@@ -32,6 +32,18 @@ Fetch the current Midnight tier lists live and merge them into `data/specs.json`
    class/spec names from `data/specs.json` to a scratch file.
 4. `node src/apply-ratings.mjs <file>` — refuses to write on unmatched rows.
 5. Update `snapshot` dates (and moved URLs) in `data/sources.json`.
+5b. **If this run changed ANY `seasonVerified` value, run `node src/freeze-season.mjs`
+   BEFORE the verify below** (audit 2026-08-14 — this step was missing entirely, which is
+   how a standalone tier refresh could publish phantom movement). Step 4's era-verify is the
+   only thing in the project that writes `seasonVerified`, so this skill is exactly where a
+   season flip is first observed. The moment an outlet moves ahead it drops out of
+   `consensusFor`, and unless its final live-season letters are lifted into
+   `data/season-final.json` first, the mean recomposes and the ▲▼ engine narrates a registry
+   decision as spec movement — 16 cells the night Wowhead flipped, the largest on record.
+   The nightly runs this in its publish job, so a nightly-driven refresh is covered; a LOCAL
+   or standalone run of this skill is not, and pushing without it leaves a day of published
+   movement nobody wrote. It needs real git history (it walks for the freeze point) and is
+   normally a no-op printing "nothing to freeze". See the local-run skill, step 4.
 6. `npm test && npm run build`. If any data/ file changed this run, finish with
    `node src/snapshot.mjs` (movement baseline; loadData skips baselines identical to the
    current state, so ordering vs the build is safe). Append a line to

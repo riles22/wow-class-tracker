@@ -14,6 +14,14 @@
 /data/scales.json @riles22
 /data/required-sources.json @riles22
 /data/community.json @riles22
+# The three remaining Gate-0 immutable paths (audit 2026-08-14 — this list named two of the
+# five that nightly.yml's boundary guard actually protects, so the declared boundary was
+# narrower than the enforced one). season-final.json is written ONLY by the deterministic
+# freeze step; forecasts/ holds the immutable artifact the report card grades; season-archive/
+# renders verbatim as a public page. All three are append-only and unrecoverable if rewritten.
+/data/season-final.json @riles22
+/data/forecasts/ @riles22
+/data/season-archive/ @riles22
 # Applied into community.json at prebuild, so it is a registry edit by another route
 # (audit 2026-07-24, A2 — Gate 0 now applies it before its own boundary diff).
 /data/community-overrides.json @riles22
@@ -23,3 +31,15 @@
 /src/check-refresh.mjs @riles22
 /src/apply-ratings.mjs @riles22
 /src/apply-metrics.mjs @riles22
+# The freeze lane writes the two append-only records above, so it belongs with the
+# gatekeepers rather than with ordinary source (audit 2026-08-14).
+/src/freeze-season.mjs @riles22
+/src/freeze-season-archive.mjs @riles22
+# normalize.mjs holds PHASES — the single era vocabulary the whole season transition turns
+# on — and render.mjs holds SNAPSHOT_PHASE, PHASE_FLIP_DUE and the frozen projection weights
+# that CLAUDE.md says may be tuned "in code only". Both are one edit away from moving every
+# published letter, which is the same reason the registries above are listed.
+/src/normalize.mjs @riles22
+/src/render.mjs @riles22
+# LF pins that keep the built artifacts' CSP hashes matchable and the flip patch byte-exact.
+/.gitattributes @riles22

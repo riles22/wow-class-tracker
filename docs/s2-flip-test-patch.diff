@@ -110,7 +110,7 @@ index 0fb6089..77adc08 100644
 +  // lane cannot be consulted, so the same fixture honestly reads 3 of 4.
 +  assert.equal(p.confidence, CYCLE_OPEN ? "high" : "medium");
    assert.match(p.basis, /live baseline 80/);
-   assert.match(p.basis, /raid-testing pct 100/);
+   assert.match(p.basis, /raid-testing 100/); // not "pct" — recentred onto the letter axis, v12
    assert.match(p.basis, /Dummy Dome 90/);
 @@ -484,7 +499,13 @@ test("projectionFor: M+ uses the role's own zone-56 series; shifts clamp to 0–
      class:"X", spec:"T", role:"Tank",

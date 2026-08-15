@@ -1387,7 +1387,15 @@ export function projectionFor(spec, bracket, scales, metaNotes = [], sources = [
       signals, obtainable: available
     },
     basis: `live baseline ${prior != null ? Math.round(prior) : "—"}`
-      + (testing != null ? ` · PTR ${bracket === "raid" ? "raid-testing" : "M+ testing"} pct ${Math.round(testing)}` : "")
+      /* NOT labelled "pct" any more (2026-08-14). Since v12 this term is the within-role
+         percentile RECENTRED onto the bracket's live consensus mean, so it no longer lives
+         on a 0-100 percentile axis — it lives on the letter axis, like `live baseline` and
+         `Dummy Dome` beside it. Calling it a percentile published five M+ cells reading
+         "testing pct 110 / 106 / 102", which is self-evidently not a percentile. The number
+         and the model are unchanged (the SCORE is clamped downstream; only this disclosure
+         label moves), and basis strings are prose that snapshots deliberately do not store,
+         so nothing versioned is affected. */
+      + (testing != null ? ` · PTR ${bracket === "raid" ? "raid-testing" : "M+ testing"} ${Math.round(testing)}` : "")
       + (dummy != null ? ` · Dummy Dome ${Math.round(dummy)}` : "")
       /* Publisher concentration, disclosed (2026-08-03, external audit; rewritten
          2026-08-09). The original clause only fired when a PTR list's id extended a live
