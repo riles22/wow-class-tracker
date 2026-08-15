@@ -1,45 +1,140 @@
 {
-  "_comment": "Tier-scale definitions and the normalization map. Each source declares which scale it uses (sources.json → scale). Values place every tier on one 0–100 axis so sources with different scales can be averaged into a consensus. Consensus bands must be sorted by descending min, ending at 0. NOTE: icyveins-ptr is a SEPARATE scale from icyveins on purpose — Icy Veins' 12.1 PTR lists publish a sixth band (B+) that their live lists do not, and reusing the 5-band icyveins scale would have squashed it into a neighbour. Its shared tiers keep the live anchors exactly (A+ 82 / A 66 / B 48 / C 30) so the same author's live and PTR reads are directly comparable on the axis; B+ sits at 57, the midpoint of A and B. 2026-08-04 (owner decision, Riley): the PTR DPS list added a SEVENTH band, S+, in its 02 Aug. \"Update #4\" — S+ takes the 100 anchor and S shifts down to 92. This is the one place the PTR scale deliberately stops matching the live one: PTR S is 92 while live S is 100, because the PTR list now reserves a rung above S that the live list has no equivalent for. Collapsing S+ into S was rejected — it would fabricate a placement the source is explicitly distinguishing. Note this re-spacing moves every icyveins-ptr-derived projection input, not just the two S+ specs, since the source feeds projectionFor via ptrTierRead at weight .25 (it is era:ptr, so consensus is untouched).",
+  "_comment": "Tier-scale definitions and the normalization map. Each source declares which scale it uses (sources.json → scale). Values place every tier on one 0–100 axis so sources with different scales can be averaged into a consensus. Consensus bands must be sorted by descending min, ending at 0. 2026-08-14 (owner decision, Riley — applied ahead of the 08-18 flip rather than in the flip commit): the LIVE icyveins scale is now the SAME seven bands as icyveins-ptr. Icy Veins rebuilt its live M+ lists for Midnight Season 2 and they publish S+ and B+, which the old five-band scale could not represent — the merge had been blocked for six days because storing an S+ letter would have failed validation and collapsing it into S was refused as fabrication. The two scales are now identical by intent, not coincidence, so the note below about them deliberately diverging is HISTORY: it described the window when only the PTR list had the extra rungs. Measured on landing: re-spacing S from 100 to 92 re-scores the frozen Season-1 letters the consensus still reads through the frozen lane, moving 13 consensus scores and 3 M+ letters (Unholy DK, Devourer DH, Augmentation Evoker, all S -> A+) — a scale decision, not spec movement, which is why CONSENSUS_VERSION went 3 -> 4 in the same commit. Its shared tiers keep the live anchors exactly (A+ 82 / A 66 / B 48 / C 30) so the same author's live and PTR reads are directly comparable on the axis; B+ sits at 57, the midpoint of A and B. 2026-08-04 (owner decision, Riley): the PTR DPS list added a SEVENTH band, S+, in its 02 Aug. \"Update #4\" — S+ takes the 100 anchor and S shifts down to 92. This is the one place the PTR scale deliberately stops matching the live one: PTR S is 92 while live S is 100, because the PTR list now reserves a rung above S that the live list has no equivalent for. Collapsing S+ into S was rejected — it would fabricate a placement the source is explicitly distinguishing. Note this re-spacing moves every icyveins-ptr-derived projection input, not just the two S+ specs, since the source feeds projectionFor via ptrTierRead at weight .25 (it is era:ptr, so consensus is untouched).",
   "scales": {
     "icyveins": {
       "label": "Icy Veins",
-      "tiers": ["S", "A+", "A", "B", "C"],
-      "values": { "S": 100, "A+": 82, "A": 66, "B": 48, "C": 30 }
+      "tiers": [
+        "S+",
+        "S",
+        "A+",
+        "A",
+        "B+",
+        "B",
+        "C"
+      ],
+      "values": {
+        "S+": 100,
+        "S": 92,
+        "A+": 82,
+        "A": 66,
+        "B+": 57,
+        "B": 48,
+        "C": 30
+      }
     },
     "icyveins-ptr": {
       "label": "Icy Veins (12.1 PTR)",
-      "tiers": ["S+", "S", "A+", "A", "B+", "B", "C"],
-      "values": { "S+": 100, "S": 92, "A+": 82, "A": 66, "B+": 57, "B": 48, "C": 30 }
+      "tiers": [
+        "S+",
+        "S",
+        "A+",
+        "A",
+        "B+",
+        "B",
+        "C"
+      ],
+      "values": {
+        "S+": 100,
+        "S": 92,
+        "A+": 82,
+        "A": 66,
+        "B+": 57,
+        "B": 48,
+        "C": 30
+      }
     },
     "method": {
       "label": "Method",
-      "tiers": ["S", "A", "B", "C"],
-      "values": { "S": 100, "A": 72, "B": 48, "C": 24 }
+      "tiers": [
+        "S",
+        "A",
+        "B",
+        "C"
+      ],
+      "values": {
+        "S": 100,
+        "A": 72,
+        "B": 48,
+        "C": 24
+      }
     },
     "archon": {
       "label": "Archon",
-      "tiers": ["S", "A", "B", "C"],
-      "values": { "S": 100, "A": 72, "B": 48, "C": 24 }
+      "tiers": [
+        "S",
+        "A",
+        "B",
+        "C"
+      ],
+      "values": {
+        "S": 100,
+        "A": 72,
+        "B": 48,
+        "C": 24
+      }
     },
     "wowmeta": {
       "label": "WoWMeta",
-      "tiers": ["S", "A", "B", "C", "D"],
-      "values": { "S": 100, "A": 72, "B": 52, "C": 34, "D": 16 }
+      "tiers": [
+        "S",
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "values": {
+        "S": 100,
+        "A": 72,
+        "B": 52,
+        "C": 34,
+        "D": 16
+      }
     },
     "wowhead": {
       "label": "Wowhead",
-      "tiers": ["S", "A+", "A", "B", "C", "D", "F"],
-      "values": { "S": 100, "A+": 84, "A": 70, "B": 52, "C": 34, "D": 18, "F": 6 }
+      "tiers": [
+        "S",
+        "A+",
+        "A",
+        "B",
+        "C",
+        "D",
+        "F"
+      ],
+      "values": {
+        "S": 100,
+        "A+": 84,
+        "A": 70,
+        "B": 52,
+        "C": 34,
+        "D": 18,
+        "F": 6
+      }
     }
   },
   "consensus": {
     "label": "Consensus",
     "bands": [
-      { "tier": "S", "min": 88 },
-      { "tier": "A+", "min": 74 },
-      { "tier": "A", "min": 58 },
-      { "tier": "B", "min": 40 },
-      { "tier": "C", "min": 0 }
+      {
+        "tier": "S",
+        "min": 88
+      },
+      {
+        "tier": "A+",
+        "min": 74
+      },
+      {
+        "tier": "A",
+        "min": 58
+      },
+      {
+        "tier": "B",
+        "min": 40
+      },
+      {
+        "tier": "C",
+        "min": 0
+      }
     ],
     "spreadThreshold": 22
   }

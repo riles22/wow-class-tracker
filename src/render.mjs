@@ -862,8 +862,25 @@ export const RANK_VERSION = 3;
    Read the rule as: bump when the set of sources the mean AVERAGES changes for any reason —
    a source arriving, leaving, being retyped, crossing a season, or entering the frozen lane.
    Measured on landing: 0 consensus arrows published, while 64 metric rankDeltas and 4 dummy
-   rankDeltas survive — degrade-don't-reject working as documented. */
-export const CONSENSUS_VERSION = 3;
+   rankDeltas survive — degrade-don't-reject working as documented.
+
+   v4 — 2026-08-14: the icyveins SCALE re-spacing. This one is NOT a composition change, so
+   read it as widening the rule above rather than fitting inside it: the trigger is a
+   registry decision that re-scores the mean for every spec at once, and changing WHICH
+   SOURCES compose it is only the commonest way that happens. Icy Veins' live M+ lists were
+   rebuilt for Season 2 and publish S+ and B+, so the five-band icyveins scale grew to the
+   same seven bands as icyveins-ptr; S moved from the 100 anchor to 92. Because the
+   consensus still reads Icy Veins' Season-1 letters through the frozen lane, re-anchoring S
+   re-scores those frozen letters — 13 consensus scores and 3 M+ letters move (Unholy DK,
+   Devourer DH, Augmentation Evoker, all S -> A+) with no source having re-rated anything.
+   Without this boundary the strip would publish three arrows nobody caused, which is the
+   exact failure the marker exists to prevent.
+   NOTE FOR THE 08-18 FLIP: the runbook's step 2 folds this same bump into the flip commit
+   ("3 -> 4, it covers the scale re-spacing for free"). That bump is now SPENT. The flip
+   recomposes the mean a second time — outlets leave the frozen lane and re-enter the live
+   consensus as s2 — which is a genuine composition change and needs its own boundary, so
+   the flip commit must bump 4 -> 5, not 3 -> 4. */
+export const CONSENSUS_VERSION = 4;
 const versionOf = (snap, field) => snap?.[field] ?? 1;
 const ranksComparableWith = snap => versionOf(snap, "rankVersion") === RANK_VERSION;
 const projComparableWith = snap => versionOf(snap, "projectionVersion") === PROJECTION_VERSION;

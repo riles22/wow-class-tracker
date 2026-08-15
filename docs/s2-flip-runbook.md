@@ -35,9 +35,12 @@ numbers that matter on the day, they move with the data.
    flip-day test patch.)
 2. **`src/render.mjs`**: `SNAPSHOT_PHASE` `"12.1-ptr"` → the live S2 id (pick the id in the
    commit; the check-refresh phase gate silences itself on any non-`"12.1-ptr"` value).
-   Bump **`CONSENSUS_VERSION` 3 → 4** — the transition plan (s2-transition-scope.md:50)
-   commits to this at the boundary; it also covers the scale re-spacing below for free, and
-   `pickBaseline` refuses cross-version comparison so the strip reads "Season 2 baseline
+   Bump **`CONSENSUS_VERSION` 4 → 5** — ⚠️ **not 3 → 4; that bump is SPENT.** Step 3's scale
+   widening was applied early, on 2026-08-14, and took v4 with it (see the version log beside
+   the constant). The flip is a SECOND, independent recomposition — outlets leave the frozen
+   lane and re-enter the live consensus as s2 — so it needs its own boundary. The transition
+   plan (s2-transition-scope.md:50) commits to a bump at this point; only the integer moved.
+   `pickBaseline` refuses cross-version comparison, so the strip reads "Season 2 baseline
    established" instead of ~40 spurious arrows.
 3. **`data/scales.json`** (CODEOWNERS, owner-reviewed): widen `icyveins` to the seven-band
    S2 scale, mirroring the `icyveins-ptr` anchors — S+ 100 / S 92 / A+ 82 / A 66 / B+ 57 /
