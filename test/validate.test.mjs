@@ -730,3 +730,71 @@ test("creator firewall: a generalCreators entry may not also hold specialist tak
   assert.ok(validateData(orphan).some(e => e.toLowerCase().includes("generalcreators")),
     "a metaNote from an unregistered author must be rejected");
 });
+
+/* The tier-set upkeep gate must see CLASS-WIDE set lines, not just spec-named ones (audit
+   2026-08-14). specBuildChanges routes "Warrior (class-wide) — …" to every spec of the
+   class, so a set bonus revised class-wide reached all three drawers while owing no
+   tierSet.asOf upkeep from any of them. Latent when written — the feed carried zero such
+   lines — so the fixture synthesises one rather than relying on live data to stay shaped
+   this way. */
+test("tier-set upkeep gate: a CLASS-WIDE set line obliges every spec of that class", async () => {
+  const data = await loadData(ROOT);
+  assert.deepEqual(validateData(data).filter(e => e.includes("tierSet.asOf")), [],
+    "committed data must already satisfy the upkeep gate");
+
+  const withClassWide = structuredClone(data);
+  withClassWide.ptrBuilds.builds.unshift({
+    date: "2026-12-31", forumPostNumber: 999, kind: "build",
+    specsAffected: ["Warrior (class-wide)"],
+    highlights: ["Warrior (class-wide) — the Season 2 4-set bonus now also increases Rage generation by 10%."],
+  });
+  const errors = validateData(withClassWide).filter(e => e.includes("tierSet.asOf"));
+  const warriors = ["Arms Warrior", "Fury Warrior", "Protection Warrior"];
+  for (const w of warriors) {
+    assert.ok(errors.some(e => e.includes(w)), `${w} must owe tierSet upkeep for a class-wide set line`);
+  }
+  assert.equal(errors.length, warriors.length, "only that class's specs are obliged");
+
+  /* A HERO-TREE line is deliberately NOT class-wide: "Warrior (Colossus)" reaches only the
+     specs specsAffected names outright, which is specBuildChanges' documented rule and the
+     reason this gate defers to it instead of re-implementing the match. */
+  const heroTree = structuredClone(data);
+  heroTree.ptrBuilds.builds.unshift({
+    date: "2026-12-31", forumPostNumber: 998, kind: "build",
+    specsAffected: ["Warrior (Colossus hero talents)"],
+    highlights: ["Warrior (Colossus hero talents) — the 2-set bonus now scales with Demolish."],
+  });
+  assert.deepEqual(validateData(heroTree).filter(e => e.includes("tierSet.asOf")), [],
+    "a hero-tree set line naming no spec must not oblige the whole class");
+});
+
+/* The specsAffected<->highlights gate asks about THIS build, not "any entry sharing its
+   date" (audit 2026-08-14). Two dates in the committed feed carry multiple entries
+   (2026-07-31 three, 2026-07-08 two), so under the old date-match a spec covered by one
+   sibling satisfied the gate for the other. Fired on nothing when tightened — 0 specs were
+   being credited by a sibling — so this pins the stricter question rather than a fix. */
+test("specsAffected coverage gate: a same-date sibling cannot cover for another entry", async () => {
+  const data = await loadData(ROOT);
+  assert.deepEqual(validateData(data).filter(e => e.includes("specsAffected")), [],
+    "committed feed must already satisfy the coverage gate");
+
+  const dates = (data.ptrBuilds.builds ?? []).map(b => b.date);
+  assert.ok(dates.length !== new Set(dates).size,
+    "fixture premise: the feed must still carry at least one date with multiple entries");
+
+  const shared = dates.find((d, i) => dates.indexOf(d) !== i);
+  const masked = structuredClone(data);
+  masked.ptrBuilds.builds.unshift({
+    date: shared, forumPostNumber: 9001, kind: "build",
+    specsAffected: ["Arms Warrior"],                                  // named…
+    highlights: ["Fury Warrior Rampage damage increased by 3%."],     // …but never lined
+  });
+  const errors = validateData(masked).filter(e => e.includes("specsAffected"));
+  assert.equal(errors.length, 1, "an entry naming a spec it has no line for must be caught");
+  assert.ok(errors[0].includes("Arms Warrior"));
+
+  // Control: the same entry WITH its own line is fine, sibling or not.
+  const covered = structuredClone(masked);
+  covered.ptrBuilds.builds[0].highlights.push("Arms Warrior Mortal Strike damage increased by 4%.");
+  assert.deepEqual(validateData(covered).filter(e => e.includes("specsAffected")), []);
+});

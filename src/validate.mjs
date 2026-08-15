@@ -615,7 +615,18 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
         .filter(e => rosterNames.has(e))
         .filter(e => {
           const spec = specs.find(s => `${s.spec} ${s.class}` === e);
-          return spec && !specBuildChanges(spec, ptrBuilds).some(x => x.date === build.date);
+          /* Ask about THIS BUILD, not "any entry sharing its date" (audit 2026-08-14). The
+             old form matched on `x.date === build.date`, so where two entries share a day —
+             2026-07-31 carries three and 2026-07-08 two — a spec covered by one sibling
+             satisfied the gate for the other, and an entry could name a spec it never
+             touched. Passing a single-build feed keeps specBuildChanges' own routing
+             (class-wide lines are still scoped by THIS build's membership) while making the
+             question per-entry, which is what "specsAffected and highlights must agree"
+             means. Verified to fire on nothing in the committed feed: 0 specs were being
+             credited by a sibling, so this tightens the rule without moving today's result.
+             If it ever does fire, check the DATA first — an entry naming a spec it has no
+             line for is usually a mis-scoped specsAffected, not a gate that is too strict. */
+          return spec && !specBuildChanges(spec, { builds: [build] }).length;
         });
       if (missing.length) {
         errors.push(`ptr-builds.json: build ${build.date} lists ${missing.length} spec(s) in specsAffected with no highlight line — they would reach no drawer: ${missing.slice(0, 6).join(", ")}${missing.length > 6 ? ", …" : ""}`);
@@ -643,10 +654,23 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
     // the skill-documented "(Class — Spec)" suffix (em-dash or hyphen).
     const name = `${spec.spec} ${spec.class}`;
     const names = [name, `(${spec.class} — ${spec.spec})`, `(${spec.class} - ${spec.spec})`];
-    const newest = (ptrBuilds?.builds ?? [])
-      .filter(b => ISO_DATE.test(b.date ?? "") &&
-        (b.highlights ?? []).some(h => typeof h === "string" && names.some(n => h.includes(n)) && SET_KEYWORD.test(h)))
+    const dated = (ptrBuilds?.builds ?? []).filter(b => ISO_DATE.test(b.date ?? ""));
+    const newestNamed = dated
+      .filter(b => (b.highlights ?? []).some(h => typeof h === "string" && names.some(n => h.includes(n)) && SET_KEYWORD.test(h)))
       .reduce((m, b) => (b.date > m ? b.date : m), "");
+    /* CLASS-WIDE set lines count too (audit 2026-08-14). The matcher above only sees a
+       spec's own NAME, but `specBuildChanges` also routes "Warrior (class-wide) — …" lines
+       to every spec of the class, so a set bonus revised class-wide reached all three
+       drawers while owing no `tierSet.asOf` upkeep from any of them. Rather than restate
+       the routing rule here — it is subtle (a "Class (…)" line is only whole-class when it
+       carries the class-wide sentinel; otherwise it is a HERO-TREE scope that attaches only
+       where specsAffected names the spec) and a second copy would drift — ask
+       specBuildChanges directly, so the gate sees exactly the lines the drawer shows.
+       Latent when written: the feed carried 0 such lines, so this fires on nothing today. */
+    const newestRouted = specBuildChanges(spec, { builds: dated })
+      .filter(b => (b.lines ?? []).some(l => l.classWide && SET_KEYWORD.test(l.text)))
+      .reduce((m, b) => (b.date > m ? b.date : m), "");
+    const newest = newestRouted > newestNamed ? newestRouted : newestNamed;
     if (newest && !(spec.tierSet?.asOf >= newest)) {
       errors.push(`specs.json: ${name} tierSet.asOf ${spec.tierSet?.asOf ?? "(absent)"} predates the ${newest} build whose notes touched this tier set — update tierSet (set2/set4/asOf/source) alongside the build entry`);
     }
