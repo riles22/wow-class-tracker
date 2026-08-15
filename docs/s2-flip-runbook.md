@@ -109,17 +109,50 @@ numbers that matter on the day, they move with the data.
 7. **`src/check-refresh.mjs` / `data/required-sources.json`** (CODEOWNERS): the WCL
    contract swap — re-point `wcl-live-raid`/`wcl-live-mplus` to the S2 zone ids and REMOVE
    the six PTR-era WCL rows (per the transition scope: removed, not skipped).
-   **Get the ids from the probe, never a pattern**: dispatch `wcl-probe.yml` once the raid
-   is open (08-18 US / 08-19 EU) — the zone enumeration landed in `2cb40f5`.
-   ⚠️ **It was BROKEN from the day it landed and is fixed as of 2026-08-14.** This line used
-   to claim the enumeration was "validated against the live API"; it cannot have been.
-   `wcl-probe.mjs` read `zq.data?.worldData?.zones` while its own `gql()` helper resolves to
-   `{ status, json, textHead }` — the payload is under `.json`, exactly as the rateLimitData
-   read fifty lines above already did it. So `zones` was always `[]` and the probe printed
-   "0 total … (none matched)" every time. Dispatching it on flip day would have returned
-   nothing and left this step with no verified ids. Fixed; still UNVERIFIED against the live
-   API, because no S2 zone existed upstream to enumerate as of 08-14. **Run it once before
-   flip day and confirm it prints a non-empty list** rather than discovering it on the day. As of 08-11 NO S2 zones exist upstream; zone 50
+   ### ✅ THE IDS ARE KNOWN — enumerated live 2026-08-14
+
+   | | zone | name | partition | difficulty / size | encounters |
+   |---|---|---|---|---|---|
+   | **S2 raid → `wcl-live-raid`** | **53** | The Venomous Abyss | **1 = "12.1"** | Mythic **5** / size **20** | **9** |
+   | **S2 M+ → `wcl-live-mplus`** | **55** | Mythic+ Season 2 | **1 = "Season 2"** | Dungeon **10** / size **5** | 8 |
+
+   Both read `frozen` today — they hold no data until the content opens (raid 08-18 US /
+   08-19 EU), so re-run the probe on the day to confirm they have populated before trusting
+   a fetch. Four traps, all measured rather than assumed:
+
+   - **Live and PTR zones share a NAME.** 53 and 54 are both "The Venomous Abyss"; 55 and 56
+     are both "Mythic+ Season 2". Tell them apart by the PARTITION LABEL (`12.1` / `Season 2`
+     vs `PTR`) and the encounter count — **53 has 9 encounters, the PTR zone 54 has 8**. Never
+     by the id pattern.
+   - **Both live zones use partition id `1`.** CLAUDE.md's live-raid model ("partition 3 =
+     12.0.7") does not transfer — the ids restart per zone and only the LABEL is meaningful.
+   - **Zone 46's default partition has already moved to `4 = "12.1"`** (partitions are
+     `1=12.0 2=12.0.5 3=12.0.7 4=12.1*`). Any zone-46 fetch that OMITS the partition now
+     returns 12.1 data under a 12.0.7 label. The stored recipes pin partition 3, so this is
+     correct today — but it is one omitted parameter away from a silent honesty break, and it
+     is why the probe now prints which partition is default.
+   - **Zone 57 (The Tidebound Grotto) has 0 encounters**, confirming the standing 07-28
+     finding that WCL never aggregated it. Nothing to ingest, still.
+
+   **Zone 50 "Sporefall"** — the open question this step used to carry — is a real, live,
+   single-boss Midnight raid (encounter "Rotmire", partitions `1=12.0.7 2=12.1*`). Leaving a
+   one-boss raid untracked is a scope decision, not an oversight; no action.
+
+   ⚠️ **The probe had TWO bugs, both fixed 2026-08-14, and both invisible until it was
+   actually run** — this line previously claimed the enumeration was "validated against the
+   live API", which it cannot have been. (a) It read `zq.data` where `gql()` resolves to
+   `{ status, json, textHead }`, so `zones` was always `[]` and it printed "0 total … (none
+   matched)" every run. (b) Even fixed, the flat `worldData.zones` query is INCOMPLETE — it
+   returns 42 zones where `worldData.expansions { zones }` returns 66, and the 24 it omits
+   include **zones 53 and 55, precisely the two ids this step exists to find**. Fixing only
+   (a) would have made the probe look healthy on flip day while still missing the answer.
+
+   **Also observed on 08-14, and it affects how you fetch:** the WCL HTML statistics-table
+   endpoints now return **HTTP 403 with a Cloudflare challenge from a residential IP too** —
+   not just from CI. The GraphQL API is healthy (OAuth fine, 3600 points/hour). The
+   `rdps`/`ndps` family still returns a bare "Internal server error" on every encounter,
+   live and PTR alike, while `dps`/`default` work; `default` remains byte-identical to `dps`
+   and is still not an rdps substitute. As of 08-11 NO S2 zones exist upstream; zone 50
    "Sporefall" appeared in the Midnight list and is untracked — check what it is while
    there. Note the rdps family is still 500 upstream; re-pointing restores the CONTRACT,
    not necessarily data.

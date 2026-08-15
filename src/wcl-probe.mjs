@@ -186,16 +186,38 @@ if (dome?.ok) {
    content is live and logged (raid opens 2026-08-18 US), dispatch the probe and read the
    S2 raid + M+ zone ids off this list, then re-point required-sources.json and
    fetch-wcl.mjs in a reviewed owner edit — never guess ids from a pattern. */
+/* TWO BUGS, both found by running this for the first time on 2026-08-14 — it had never
+   produced output before, so neither was visible.
+   1. It read `zq.data`, but `gql` resolves to { status, json, textHead }: the payload is
+      under `.json`, exactly as the rateLimitData read above already does it. `zones` was
+      therefore always [] and this printed "0 total ... (none matched)" every run.
+   2. The flat `worldData.zones` query is INCOMPLETE. Measured the same day: it returns 42
+      zones while `worldData.expansions { zones }` returns 66 — and the 24 it omits include
+      zone 53 (The Venomous Abyss, the live S2 raid) and zone 55 (Mythic+ Season 2), i.e.
+      precisely the two ids this section exists to find. Fixing only bug 1 would have made
+      the probe look healthy on flip day while still missing the answer. Enumerate through
+      expansions, and carry partitions/difficulties/encounters because the swap needs them:
+      live and PTR zones share a NAME (53/54 are both "The Venomous Abyss") and are told
+      apart by their partition label and encounter count, never by the id pattern. */
 try {
-  const zq = await gql(t, `{ worldData { zones { id name frozen brackets { min max } expansion { id name } } } }`);
-  // `gql` resolves to { status, json, textHead } — the payload lives under .json, exactly as
-  // the rateLimitData read above does it. Reading zq.data directly always yielded undefined,
-  // so this enumeration silently reported zero zones from the day it landed (audit 2026-08-14).
-  const zones = zq.json?.data?.worldData?.zones ?? [];
-  const current = zones.filter(z => z?.expansion?.name?.includes("Midnight") || z?.id >= 44);
-  console.log(`▣ zone enumeration: ${zones.length} total; Midnight-era candidates:`);
-  for (const z of current) console.log(`   ${String(z.id).padStart(3)}  ${z.name}${z.frozen ? "  (frozen)" : ""}  [${z.expansion?.name ?? "?"}]`);
-  if (!current.length) console.log("   (none matched — read the full list above the filter, or the expansion name changed)");
+  const zq = await gql(t, `{ worldData { expansions { id name zones {
+    id name frozen
+    partitions { id name default }
+    difficulties { id name sizes }
+    encounters { id name }
+  } } } }`);
+  const expansions = zq.json?.data?.worldData?.expansions ?? [];
+  const all = expansions.flatMap(e => (e.zones ?? []).map(z => ({ ...z, exp: e.name })));
+  const current = all.filter(z => z.exp?.includes("Midnight"));
+  console.log(`▣ zone enumeration: ${all.length} zones across ${expansions.length} expansions; Midnight zones:`);
+  for (const z of current.sort((a, b) => a.id - b.id)) {
+    const parts = (z.partitions ?? []).map(p => `${p.id}=${p.name}${p.default ? "*" : ""}`).join(" ") || "none";
+    const diffs = (z.difficulties ?? []).map(d => `${d.id}=${d.name}[${(d.sizes ?? []).join("/")}]`).join(" ") || "none";
+    console.log(`   ${String(z.id).padStart(3)}  ${z.name}${z.frozen ? "  (frozen)" : ""}`);
+    console.log(`        encounters=${z.encounters?.length ?? 0}  difficulties: ${diffs}`);
+    console.log(`        partitions: ${parts}   (* = default; an OMITTED partition takes it)`);
+  }
+  if (!current.length) console.log("   (no Midnight zones — the expansion name changed; read the full list rather than guessing)");
 } catch (e) {
   console.log(`▣ zone enumeration FAILED — ${String(e).slice(0, 200)}`);
 }

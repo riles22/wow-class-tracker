@@ -572,18 +572,41 @@ its own row in `required-sources.json`, so a run that skips it fails the publish
    zone **56 is the 12.1 PTR M+** ("Mythic+ Season 2 (PTR)", same recipe as zone 47 →
    metrics "Median rDPS/HPS (12.1 PTR M+ testing[, tank])", see the ptr-watch skill);
    zone **52 is the Dummy Dome** (fixed-target-count PTR dummies → `spec.ptrDummy`, see
-   the ptr-watch skill); zone **57 is Tidebound Grotto** (the 12.1 raid, opens 2026-08-18) —
-   probed exhaustively 2026-07-28 and it EXISTS but WCL has never aggregated it, so every
+   the ptr-watch skill); zone **57 is Tidebound Grotto** — probed exhaustively 2026-07-28 and
+   re-confirmed 2026-08-14 as having **0 encounters**: WCL has never aggregated it, so every
    statistics table returns "No statistics have been collected…". Empty is not an error:
    ingest nothing and leave the stored rows and snapshot alone. Reserved metric names and the
    verified recipe are in the ptr-watch skill, so a run auto-ingests the moment tables
-   populate — all PTR data era-tagged `"ptr"`. Statistics-table
+   populate — all PTR data era-tagged `"ptr"`.
+   **The SEASON-2 LIVE zones, enumerated against the API 2026-08-14** (they exist but read
+   `frozen` until the content opens): raid = zone **53** "The Venomous Abyss", partition
+   **1 = "12.1"**, Mythic difficulty 5 / size 20, **9 encounters**; M+ = zone **55** "Mythic+
+   Season 2", partition **1 = "Season 2"**, difficulty 10 / size 5. **Live and PTR zones share
+   a NAME** — 53/54 are both "The Venomous Abyss", 55/56 both "Mythic+ Season 2" — so tell
+   them apart by the partition LABEL (`12.1`/`Season 2` vs `PTR`) and the encounter count
+   (53 has 9, PTR 54 has 8), never by the id pattern. Partition IDS RESTART PER ZONE: both
+   live S2 zones use partition `1`, so the "partition 3 = 12.0.7" model above is a fact about
+   zone 46 only. **And zone 46's own default partition has already moved to `4 = 12.1`**, so a
+   zone-46 fetch that omits the partition now returns 12.1 data under a 12.0.7 label — the
+   recipes pin 3, keep it that way. Get ids from `node src/wcl-probe.mjs`, never a pattern,
+   and note the probe must enumerate through `worldData.expansions { zones }`: the flat
+   `worldData.zones` query returns 42 of the 66 zones and omits 53 and 55 specifically.
+   Statistics-table
    endpoint needs `X-Requested-With: XMLHttpRequest` + browser UA + Referer; response is
    an HTML fragment with unclosed `<td>` — parse leniently. **Fetch each cut fresh every
    run** — the automation no longer gates fetches on staleness or a once-daily cap (policy
    2026-07-08: pull everything every run). The sanctioned long-term path is still their
    free v2 GraphQL API (OAuth client); keep the mechanical retry/backoff so fetches
    succeed.
+   ⚠️ **The HTML statistics transport is currently DEAD, and not just from CI** (measured
+   2026-08-14 from Riley's residential IP): every statistics-table request returns **HTTP 403
+   with a Cloudflare challenge** — zones 46, 52 and 54 alike, with the documented headers.
+   The residential-IP workaround that justified local runs no longer applies to THIS source.
+   GraphQL is healthy on the same credentials (OAuth fine, 3600 points/hour, `dps`/`default`
+   return data), so the standing split holds: the rDPS-family series stay frozen and honest
+   rather than being substituted from the `dps` family, and zone 54's cross-boss normalized
+   score still has no API analogue at all. Do not read a 403 as "unreachable, try later"
+   without checking whether it is the challenge — that is a transport change, not an outage.
 2. Murlok meta pages: plain GET (r.jina.ai does NOT work on it).
 3. Write `{ "metrics": [...], "profiles": [...] }` to a scratch file →
    `node src/apply-metrics.mjs <file>`; `npm test && npm run build`.
