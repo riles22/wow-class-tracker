@@ -192,10 +192,10 @@
       "statPriorityPatch": "12.0.7",
       "statPrioritySource": "https://www.icy-veins.com/wow/frost-death-knight-pve-dps-stat-priority",
       "tierSet": {
-        "set2": "Each time Remorseless Winter damages at least 1 enemy, gain Freezing Tempest which grants 2% attack speed and 4% increased Icy Death Torrent damage for 5 sec, stacking.",
+        "set2": "Each time Remorseless Winter damages at least 1 enemy, gain Freezing Tempest which grants 1% attack speed and 2% increased Icy Death Torrent damage for 5 sec, stacking.",
         "set4": "Remorseless Winter deals damage 25% more frequently, and Freezing Tempest lasts 5 seconds longer.",
-        "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
-        "asOf": "2026-06-18"
+        "source": "https://us.forums.blizzard.com/en/wow/t/class-tuning-incoming-august-18/2336820",
+        "asOf": "2026-08-15"
       }
     },
     {
@@ -434,9 +434,9 @@
       "statPrioritySource": "https://www.icy-veins.com/wow/devourer-demon-hunter-pve-dps-stat-priority",
       "tierSet": {
         "set2": "Harvesting 4 or more Soul Fragments with Reap has a 20% chance to cause your next Consume to be instant cast and explode in a Soulburst, dealing Cosmic damage to nearby enemies.",
-        "set4": "Soulburst generates 8 Soul Fragments and grants Moment of Craving. Reap deals 20% increased damage.",
-        "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
-        "asOf": "2026-06-18"
+        "set4": "Soulburst generates 2 Soul Fragments and grants Moment of Craving. Reap deals 10% increased damage.",
+        "source": "https://us.forums.blizzard.com/en/wow/t/class-tuning-incoming-august-18/2336820",
+        "asOf": "2026-08-15"
       }
     },
     {
@@ -1164,9 +1164,9 @@
       "statPrioritySource": "https://www.icy-veins.com/wow/beast-mastery-hunter-pve-dps-stat-priority",
       "tierSet": {
         "set2": "Barbed Shot causes your pets to Stomp 1 additional time at 50% effectiveness.",
-        "set4": "Stomp causes your next Cobra Shot to either benefit from Beast Cleave at 20% effectiveness, or strike your primary target for 15% additional damage, stacking up to 4 times.",
-        "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/11",
-        "asOf": "2026-07-08"
+        "set4": "Stomp causes your next Cobra Shot to either benefit from Beast Cleave at 30% effectiveness, or strike your primary target for 20% additional damage, stacking up to 4 times.",
+        "source": "https://us.forums.blizzard.com/en/wow/t/class-tuning-incoming-august-18/2336820",
+        "asOf": "2026-08-15"
       }
     },
     {
@@ -1396,10 +1396,10 @@
       "statPriorityPatch": "12.0.7",
       "statPrioritySource": "https://www.icy-veins.com/wow/arcane-mage-pve-dps-stat-priority",
       "tierSet": {
-        "set2": "Arcane Missiles fires 1 additional missile and deals 20% increased damage.",
-        "set4": "Each wave of Arcane Missiles increases the damage of your next Arcane Blast, Arcane Pulse, or Prismatic Bolt by 5%, up to 40%.",
-        "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
-        "asOf": "2026-06-18"
+        "set2": "Arcane Missiles fires 1 additional missile and deals 5% increased damage.",
+        "set4": "Each wave of Arcane Missiles increases the damage of your next Arcane Blast, Arcane Pulse, or Prismatic Bolt by 3%, up to 40%. (2026-08-15 tuning: the per-stack bonus was reduced from 5% to 3%; the notes did not restate the cap, so it is carried forward unchanged.)",
+        "source": "https://us.forums.blizzard.com/en/wow/t/class-tuning-incoming-august-18/2336820",
+        "asOf": "2026-08-15"
       }
     },
     {
@@ -1762,9 +1762,9 @@
       "statPrioritySource": "https://www.icy-veins.com/wow/mistweaver-monk-pve-healing-stat-priority",
       "tierSet": {
         "set2": "Rising Sun Kick deals 30% increased damage and Rushing Wind Kick's healing is increased by 100%.",
-        "set4": "Rising Sun Kick and Rushing Wind Kick have a chance to cause their next cast to ignore their cooldown and have their mana cost reduced by 100%.",
-        "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
-        "asOf": "2026-06-18"
+        "set4": "Rising Sun Kick and Rushing Wind Kick have a chance to cause their next cast to ignore their cooldown and have their mana cost reduced by 100%. (2026-08-15 tuning: activation rate increased by 33%; the notes give no new absolute rate.)",
+        "source": "https://us.forums.blizzard.com/en/wow/t/class-tuning-incoming-august-18/2336820",
+        "asOf": "2026-08-15"
       }
     },
     {
@@ -2623,9 +2623,9 @@
       "statPrioritySource": "https://www.icy-veins.com/wow/subtlety-rogue-pve-dps-stat-priority",
       "tierSet": {
         "set2": "Backstab costs 10 less Energy and deals 100% increased damage. Shuriken Storm costs 5 less Energy and deals 60% increased damage.",
-        "set4": "Lingering Shadow now also benefits Eviscerate and Black Powder at 100% effectiveness.",
-        "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
-        "asOf": "2026-06-18"
+        "set4": "Lingering Shadow now also benefits Eviscerate and Black Powder at 60% effectiveness.",
+        "source": "https://us.forums.blizzard.com/en/wow/t/class-tuning-incoming-august-18/2336820",
+        "asOf": "2026-08-15"
       }
     },
     {
@@ -3050,9 +3050,9 @@
       "statPrioritySource": "https://www.icy-veins.com/wow/demonology-warlock-pve-dps-stat-priority",
       "tierSet": {
         "set2": "Wild Imp damage increased by 10%. Implosion damage increased by 20%.",
-        "set4": "When their energy depletes, Wild Imps have a 20% chance to fling themselves at their target and Implode at 250% effectiveness to their main target and 225% effectiveness to other targets. (2026-07-31 build: a tooltip fix — the bonus had displayed 150% / 125%, which is what was recorded here; the intended values are 250% / 225%. The effect itself did not change.)",
-        "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/18",
-        "asOf": "2026-07-31"
+        "set4": "When their energy depletes, Wild Imps have a 20% chance to fling themselves at their target and Implode at 350% effectiveness to their main target and 315% effectiveness to other targets. (2026-07-31 build: a tooltip fix — the bonus had displayed 150% / 125%, which is what was recorded here; the intended values were 250% / 225%. The effect itself did not change. 2026-08-15 tuning: raised to 350% / 315% — note that post attributes this Implode effect to the 2-SET bonus, while the 06-18 datamine and the 07-31 notes placed it here on the 4-set; the values are updated where the effect is stored rather than moved on Blizzard’s say-so alone.)",
+        "source": "https://us.forums.blizzard.com/en/wow/t/class-tuning-incoming-august-18/2336820",
+        "asOf": "2026-08-15"
       }
     },
     {
@@ -3261,9 +3261,9 @@
       "statPrioritySource": "https://www.icy-veins.com/wow/fury-warrior-pve-dps-stat-priority",
       "tierSet": {
         "set2": "Raging Blow damage increased by 15% and during Recklessness, Raging Blow extends the duration of Recklessness by 2 seconds, up to 6 seconds.",
-        "set4": "Bloodthirst damage increased by 10% and during Recklessness, Bloodthirst increases the critical strike bonus of Recklessness by 5%, up to 10%.",
-        "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
-        "asOf": "2026-06-18"
+        "set4": "Bloodthirst damage increased by 10% and during Recklessness, Bloodthirst increases the critical strike bonus of Recklessness by 3%, up to 6%.",
+        "source": "https://us.forums.blizzard.com/en/wow/t/class-tuning-incoming-august-18/2336820",
+        "asOf": "2026-08-15"
       }
     },
     {
@@ -3334,5 +3334,5 @@
       }
     }
   ],
-  "trackerFieldsSyncedAt": "2026-08-09"
+  "trackerFieldsSyncedAt": "2026-08-15"
 }
