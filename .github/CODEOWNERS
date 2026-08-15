@@ -43,3 +43,7 @@
 /src/render.mjs @riles22
 # LF pins that keep the built artifacts' CSP hashes matchable and the flip patch byte-exact.
 /.gitattributes @riles22
+# The agent lane's test reporter (2026-08-15 context audit). No gate uses it — every
+# deterministic gate keeps the default reporter — but it is what an agent reads a red
+# suite through, so a change here changes what the automation believes about its own tests.
+/src/quiet-reporter.mjs @riles22

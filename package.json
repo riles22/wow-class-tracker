@@ -13,6 +13,7 @@
     "gearing:simc:curate": "node gearing/src/curate-simc-profiles.mjs",
     "gearing:test": "node --test gearing/test/project.test.mjs gearing/test/simc-runner.test.mjs gearing/test/simc-curator.test.mjs gearing/test/simc-curation-admission.test.mjs gearing/test/simc-unholy-admission.test.mjs",
     "test": "node --test",
+    "test:quiet": "node --test --test-reporter=./src/quiet-reporter.mjs",
     "prevalidate": "node src/apply-community-overrides.mjs",
     "validate": "node src/validate.mjs",
     "audit:creators": "node src/audit-creators.mjs",
