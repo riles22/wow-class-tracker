@@ -160,7 +160,8 @@ jobs:
             that row, never to delete the requirement: publish diffs the contract against
             master and fails the night red either way.
 
-            Read CLAUDE.md and all four refresh skills before acting:
+            CLAUDE.md is ALREADY LOADED into your context — do not Read it, that is a
+            duplicate 73KB copy. Read the four refresh skills before acting:
             .claude/skills/ptr-watch/SKILL.md
             .claude/skills/watch-creators/SKILL.md
             .claude/skills/refresh-tiers/SKILL.md
@@ -230,7 +231,10 @@ jobs:
             (only a human re-running this workflow with the anomaly_ack input can); it is your
             evidence for that human.
 
-            Run npm test and npm run build before finishing. If a source edit cannot be made
+            Run `npm run test:quiet` and npm run build before finishing (test:quiet is the
+            same suite through a compact reporter — it reports the pass/fail/skip counts and
+            full diagnostics for anything red; the deterministic gate re-runs the verbose
+            `npm test` after you, so use the quiet one). If a source edit cannot be made
             valid, revert only that source's edits (git checkout -- <files>) and record
             parse_error with a useful reason. Do not stop after PTR/creator work; tiers,
             metrics, tests, build, and the fresh manifest are mandatory.
@@ -299,7 +303,8 @@ jobs:
             contract. Resume from the CURRENT working tree; preserve valid completed work and
             inspect git diff plus all four skill logs to identify what is missing.
 
-            Read CLAUDE.md and the ptr-watch, watch-creators, refresh-tiers, and refresh-metrics
+            CLAUDE.md is ALREADY LOADED — do not Read it. Read the ptr-watch, watch-creators,
+            refresh-tiers, and refresh-metrics
             SKILL.md files. Finish every missing skill and attempt every requirement in
             data/required-sources.json. The common failure is stopping after PTR/creator work, so
             explicitly complete tiers and metrics before finalizing. Use only live fetched data.
@@ -324,8 +329,9 @@ jobs:
             Rebuild data/run-manifest.json from scratch with a current UTC startedAt and one
             honest row per required source, each with previousAsOf/newAsOf copied from the real
             stored data. NEVER write an "anomalyAck" field (the gate rejects it); a real mass
-            retune goes in "anomalyAckProposal" with a citation, for human review. Run npm test
-            and npm run build, repair or narrowly revert invalid source edits, and do not finish
+            retune goes in "anomalyAckProposal" with a citation, for human review. Run
+            `npm run test:quiet` (same suite, compact reporter — counts plus full diagnostics
+            on red) and npm run build, repair or narrowly revert invalid source edits, and do not finish
             until both commands pass and `node src/check-refresh.mjs --manifest` either passes
             or fails ONLY on its mass-movement anomaly check for movement you did not cause (a
             season transition recomposing the consensus is the known case) — in that one case

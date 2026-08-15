@@ -44,7 +44,7 @@ Fetch the current Midnight tier lists live and merge them into `data/specs.json`
    or standalone run of this skill is not, and pushing without it leaves a day of published
    movement nobody wrote. It needs real git history (it walks for the freeze point) and is
    normally a no-op printing "nothing to freeze". See the local-run skill, step 4.
-6. `npm test && npm run build`. If any data/ file changed this run, finish with
+6. `npm run test:quiet && npm run build`. If any data/ file changed this run, finish with
    `node src/snapshot.mjs` (movement baseline; loadData skips baselines identical to the
    current state, so ordering vs the build is safe). Append a line to
    `.claude/skills/refresh-tiers/log.md` (date · sources refreshed · notable tier

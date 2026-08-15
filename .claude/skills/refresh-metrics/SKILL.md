@@ -275,6 +275,6 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
   supply raw `targets`; don't hand-write labels.
 - Healers/tanks get no Bloodmallet profiles (DPS sims only) — that's by design.
 
-After merging: `npm test && npm run build`, then `node src/snapshot.mjs` (movement
+After merging: `npm run test:quiet && npm run build`, then `node src/snapshot.mjs` (movement
 baseline; loadData skips baselines identical to the current state, so ordering vs the
 build is safe); append date + row counts to `.claude/skills/refresh-metrics/log.md`.

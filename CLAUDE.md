@@ -9,6 +9,13 @@ on push to `master`; the file also still opens directly in a browser.
 ## Commands
 
 - `npm test` — schema validation + unit tests + build smoke test
+- `npm run test:quiet` — the SAME suite through a compact reporter (`src/quiet-reporter.mjs`):
+  63 bytes and the exact pass/fail/skip counts when green, full diagnostics with `file:line`
+  when red, same exit code. **Use this in agent and interactive sessions.** Default TAP output
+  is ~84KB, which the tool harness truncates to a 2KB preview — so a verbose run costs a
+  second tool call to find out what failed and never shows the counts. Every deterministic
+  gate (ci.yml, deploy.yml, nightly's completion gate, publish Gate 1) deliberately keeps
+  verbose `npm test`; `test` is NOT redefined, so pointing an agent here cannot move a gate.
 - `npm run build` — data + template → `dist/index.html`
 - `npm run validate` — data checks only
 - `npm run audit:creators` — creator/expert-layer audit (scope, firewall, supersession,
@@ -27,7 +34,7 @@ on push to `master`; the file also still opens directly in a browser.
 - `node src/check-refresh.mjs --manifest|--age` — refresh integrity gates (nightly
   publish contract / staleness heartbeat) against `data/required-sources.json`
 
-Always run `npm test && npm run build` after any data edit. Never edit `dist/index.html`
+Always run `npm run test:quiet && npm run build` after any data edit. Never edit `dist/index.html`
 by hand — it is generated.
 
 ## Hard rules
@@ -556,7 +563,7 @@ publishes `lowerBound` as a number; recipe in the refresh-metrics skill.)*
    drops it); raid = throughput tierList, M+ = score tierList.
 2. Write rows `[{class, spec, bracket, source, tier}]` (exact roster names) to a scratch
    file → `node src/apply-ratings.mjs <file>` (refuses on unmatched rows).
-3. Update `snapshot` dates in `sources.json`; `npm test && npm run build`.
+3. Update `snapshot` dates in `sources.json`; `npm run test:quiet && npm run build`.
 
 **`icyveins-ptr` is in this loop too** (added 2026-07-31) — same fetch, same
 `apply-ratings.mjs`, but it era-verifies the OTHER way: the page must self-identify as
@@ -609,7 +616,7 @@ its own row in `required-sources.json`, so a run that skips it fails the publish
    without checking whether it is the challenge — that is a transport change, not an outage.
 2. Murlok meta pages: plain GET (r.jina.ai does NOT work on it).
 3. Write `{ "metrics": [...], "profiles": [...] }` to a scratch file →
-   `node src/apply-metrics.mjs <file>`; `npm test && npm run build`.
+   `node src/apply-metrics.mjs <file>`; `npm run test:quiet && npm run build`.
 
 ### Fight profiles (Bloodmallet)
 `GET https://bloodmallet.com/chart/get/talent_target_scaling/castingpatchwerk/{snake_case_class}/{spec}`

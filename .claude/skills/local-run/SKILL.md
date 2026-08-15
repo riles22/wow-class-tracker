@@ -64,7 +64,7 @@ runs (2026-07-31), which were sound but left drift the next nightly had to absor
    rather than writing an empty record.
 5. **Verify like the publish job would**:
    ```
-   npm test && npm run build
+   npm run test:quiet && npm run build
    node src/check-refresh.mjs --manifest   # informational — see below
    ```
    On a partial run, `--manifest` will fail on exactly one line — `startedAt … is Nh
@@ -133,7 +133,7 @@ no-staleness-gate policy still holds *within* whichever scope you pick.
   (parse verification, era-verification, `log.md` precedent lookups, checking a
   distillation against its cited source). Cap ~4 concurrent.
 - **Single-threaded, main agent only:** every `apply-*.mjs` merge and direct `data/*.json`
-  write; `npm test && npm run build`; `freeze-season.mjs`; `snapshot.mjs`; the final rebuild; the manifest
+  write; `npm run test:quiet && npm run build`; `freeze-season.mjs`; `snapshot.mjs`; the final rebuild; the manifest
   rewrite; all git staging, commit and push. (This list is a CONCURRENCY policy, not a
   running order — read it as "none of these may be delegated", not as a sequence. The
   order is steps 1-8 above, and step 7's rebuild-AFTER-snapshot is the part this list

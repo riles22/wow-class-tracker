@@ -249,7 +249,7 @@ say so and change nothing.
    the raid is noted to open Aug 18) — WCL simply hasn't aggregated statistics for the
    zone yet. Empty = nothing to ingest (not an error); ingest the moment rows appear
    and log the first-ingest parse counts.
-8. `npm test && npm run build`. If any `data/` file changed this run, also run
+8. `npm run test:quiet && npm run build`. If any `data/` file changed this run, also run
    `node src/snapshot.mjs` (movement baseline; loadData skips baselines identical to the
    current state, so ordering vs the build is safe). Append to `log.md`: date · builds
    found · zone-54 (PTR raid) state · zone-52 (Dummy Dome) state · zone-56 (PTR M+)

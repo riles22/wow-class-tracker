@@ -102,7 +102,7 @@ the person's *analysis* belongs here.
 ### 5. Verify and finish
 
 ```
-npm test && npm run build
+npm run test:quiet && npm run build
 ```
 
 Then, per the project rule, if data changed: `node src/snapshot.mjs`.
