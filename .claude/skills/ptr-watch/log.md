@@ -16,6 +16,39 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-16 (nightly)
+
+**No new builds; nothing logged.** Four channels swept.
+(1) Dev-notes thread `2317811.json` via curl for the full `post_stream`: 17 posts,
+`last_posted_at` 2026-07-31T23:42:09Z, newest is Linxy #19 — already the feed's 07-31 entry. The
+thread has been quiet 16 days because the PTR cycle ended when 12.1 shipped on 08-11.
+(2) Wowhead RSS, parsed per `<item>` block: 40 items, newest 2026-08-16 06:05 CDT.
+(3) News INDEX (`data.news.newsData`, brace-balanced from the id attribute), since it leads RSS
+within a run: 20 posts, top id 382474 — nothing beyond RSS.
+(4) Blue tracker (`data.blueTracker.default`): 50 entries → 42 unique topics, newest 2026-08-14
+20:02. The only class-touching blues are still Linxy's "Class Tuning Incoming – August 18"
+(topic 2336820), which IS the feed's 2026-08-15 entry, and the Aug-14 Kaivax hotfixes (2336376),
+re-read in full: its Classes section is entirely BUG FIXES (Devastation Shattering Star/Mastery,
+Warrior Slayer Executioner double effect, Warlock pet Soul Leech, Demonology Soul Harvest) while
+every numeric line in the post is trinkets and items. The Aug-13 round-up is the same shape.
+Writing either as a `Spec Class - ...` highlight would put bug-fix text into the outlook tally.
+
+Open LEAD, not logged: "Patch 12.1.5 PTR Now Listed on Battle.net Launcher" (news 382443, 08-13).
+A new cycle means a NEW forum thread, but the article says the patch has not been updated and
+nothing is datamineable yet — re-discover the thread when it is.
+
+Writeup coverage RECOMPUTED (never read from prose): one spec has no `ptr` writeup — Demonology
+Warlock, the deliberate "the source reported no changes" case — and **zero** specs lack a
+raid-scoped or an M+-scoped expert read.
+
+WCL zones: no fetch by this agent (no credentials). From `wcl-fetch/evidence.json`
+(attemptedAt 10:54:32Z, verdict `rdps-broken`, OAuth+GraphQL healthy, 1 point spent):
+**zone 54** normalized series unreachable, stays 2026-07-28 (its raw-DPS sibling landed, 27 rows
+over 8 encounters — Coiled Altar and Ula'tek at 0 players, which is empty rather than an error);
+**zone 52** ptrDummy unreachable, stays 2026-08-10 (raw 102 rows landed); **zone 56** rDPS/HPS
+unreachable, stays 2026-08-10 (raw 27 rows landed); **zone 57** not probed — no credentials, and
+it has been confirmed twice as having zero aggregated encounters.
+
 ## 2026-08-15 (nightly, 21:50 UTC — second run of this UTC day)
 
 **Nothing new to log on any of the four channels.** (1) Dev-notes thread `2317811.json` via

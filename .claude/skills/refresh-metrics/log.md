@@ -16,6 +16,47 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-16 (nightly)
+
+**Archon merged, everything else held or unchanged.** Archon has genuinely re-cut its RAID data
+since last night (its `lastUpdated` label is pinned at 2026-08-15T12:00:00Z and did NOT move, so
+the label is useless as a change detector in both directions): 33/33 "95th pct DPS (Mythic)" rows
+and 7/7 "95th pct HPS (Mythic)" rows moved in value and/or parse count, plus all 40 RAID
+"Popularity" rows. Merged at Archon's OWN 2026-08-15, never the run date. Biggest single move
+Vengeance DH 95,424 → 72,432 DPS (-24%, inside maxValueMovePct 0.6) on 25 → 32 parses.
+Popularity shape-checked before merging: role×bracket subtotals 100.0/100.1/100.0/99.8/100.0/100.0
+(599.9 total), no row equal to that spec's DPS. The M+ side (`M+ score (95th pct)`, 40 rows, and
+the 40 M+ Popularity rows) is **byte-identical and frozen at 2026-08-10** — S1 keys have been dead
+content since 08-11 — so those two requirements stay `partial` and go red on the heartbeat, which
+is the correct signal.
+
+**Murlok has crossed the season boundary and the merge was HELD BACK WHOLESALE.** The DPS page
+now lists 22 of 27 specs (Balance, Feral, Augmentation, Retribution, Elemental absent), five more
+read a literal **0** (Devastation, Marksmanship, Arcane, Frost DK, Preservation), and every
+surviving value dropped hard (Guardian 4268→4123, Blood DK 3990→3286, Holy Pal 3935→3131). Its own
+`<time datetime>` moved 08-12T02:17Z → **2026-08-16T02:11:23Z** while the title and h1 still read
+"Midnight Season 1". That is an S2 ratings rebuild, not a cut: the five zeros are 100% value moves
+(maxValueMovePct 0.6, no agent-writable ack) and merging the other 30 alone would publish an S1/S2
+mixed pool under one series name. **Owner decision needed** on re-basing or pausing "Top-50 avg M+
+rating (ceiling)" at the flip. Parser note: keep anchoring on the `meta-item` class and reading the
+href out of the tag — 40/40 rows where the href-anchored split found 10.
+
+Unchanged upstream, nothing merged: **wowmeta** (snapshotDate 2026-08-11, Last-Modified 11 Aug,
+40/40 lowerBound + numberOfCharacters identical), **mythicstats** (period 1075 MID1 week 20 again,
+34 rows, sum 100.3%, subtotals 60.2/20.1/20.0, all identical), **simulationcraft** (html still
+1205-01 / 12.0.7.68974, git build 678e66d384, timestamp 2026-08-08 — the `.txt` is a live
+in-progress 1210-01 / 12.1.0.69299 run whose git build moved b642585cbf → 6641c13132, so the S2
+re-sim is still churning), **robydoby** (best-effort, outside the contract: both sheets re-parsed
+at the newest Mythic week 24/7 — 24 DPS + 7 healer specs, every 99th-pct value identical).
+
+**Bloodmallet unchanged from last night: 14 of 27 charts at tier MID2 (timestamps 2026-08-15), 13
+still returning the error body after 3 retries.** Held back wholesale per the tier-uniformity gate;
+`fightProfile.asOf` stays at the CHART's own 2026-07-08 (39 days) and the heartbeat stays red.
+
+WCL: no fetch by this agent (no credentials). Evidence verdict `rdps-broken`; the three raw keys
+landed (z52 102 rows — 1T 2000 / 2T 664 / 3T 297 / 5T 2000; z54 27 rows; z56 27 rows), the five
+rDPS/normalized cuts stay frozen at 2026-08-10 / 2026-07-28.
+
 ## 2026-08-15 (nightly, 21:50 UTC — second run of this UTC day)
 
 Every numeric source re-fetched; **not one value moved**, so nothing was merged and most rows

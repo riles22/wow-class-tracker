@@ -16,6 +16,52 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-16 (nightly)
+
+All five tier lists re-fetched live — icyveins 6 pages, icyveins-ptr 3, method 2, wowhead 6,
+archon 6 aggregate + 51 encounter pages — 74/74 HTTP 200. **Six tier moves, all raid, and both
+sources that moved show their own corroboration.**
+
+Per-page row counts, printed and reconciled against 27 DPS + 7 healer + 6 tank = 40:
+icyveins 27/7/6 raid + **26**/7/6 M+, icyveins-ptr **26**/7/6, method 40 + 40, wowhead 27/7/6
++ 27/7/6, archon 27/7/6 + 27/7/6. Both 26s are the literal upstream **TBD row** — Subtlety
+Rogue's tier cell reads `TBD` on the Icy Veins live and PTR M+ DPS pages, stored as an explicit
+null. Transports: Icy Veins plain browser-UA GET; Wowhead FULL header set, then unescape `\/`
+across the whole document BEFORE searching `[tier-list=rows]`; Method `.tier__tier` with
+non-roster alts rejected by ROSTER MATCH (8 S2 dungeon names + logo); Archon `__NEXT_DATA__`
+resolved from each entry's `icon` "Class-Spec" token.
+
+**Wowhead raid healer: Holy Priest A → B.** The page rebuilt — JSON-LD `dateModified` moved
+2026-08-08 → **2026-08-16T00:20:29-05:00**, matching the published-evidence artifact — and its
+single `[tier-list=rows]` block reads S Disc/Presevoker, A Holy Pal/Resto Sham, B Resto
+Druid/**Holy Priest**/Mistweaver. Two `printHtml` calls on that page, one tier-list block, so
+the known decoy was not in play.
+
+**Archon re-cut with a PINNED LABEL — five tier moves.** `lastUpdated` is still
+2026-08-15T12:00:00Z on all six pages (unchanged from last night, when the numbers had NOT
+moved), yet every raid number moved tonight: 33/33 DPS+tank rows and 7/7 healer rows changed in
+value and/or parse count. Moves: healer Holy Priest B→A, Mistweaver B→C; tank Prot Paladin C→B,
+Brewmaster C→B, Vengeance DH B→C. Corroboration is arithmetic — Holy Priest 95th-pct HPS
+230,745 → 239,634 passes Resto Shaman's 235,907, which is exactly the A it now reads. **Do not
+read Archon's label as its data date in either direction**: last night it ticked ahead of the
+data (correctly held back), tonight it lags behind it.
+
+Encounter tiers: full 51-page re-fetch, 618 rows parsed, **51 rows changed, all raid** (M+
+per-dungeon byte-identical — S1 keys are dead content). Six role cuts empty upstream (Crown ×3,
+Chimaerus healer+tank, Vanguard tank) and three short; their 59 stored rows LEFT UNTOUCHED, so
+the file still holds 677 rows at Archon's own 2026-08-15.
+
+Era re-verified per page and **nothing changed, so freeze-season had nothing to freeze**:
+icyveins s2 (raid-healer changelog "13 Aug. 2026: Further updated for Midnight Season 2 launch"
+under a "Patch 12.0.7" title — body over title), icyveins-ptr s2, method s2 (raid body names The
+Venomous Abyss; M+ names Season 2), wowhead s2, archon **s1** (still the nine S1 bosses and
+eight S1 dungeons). Archon remains the only source in the live consensus in its own right —
+which is why its five moves become the night's **2 consensus letters: Brewmaster Monk raid B→A
+and Mistweaver Monk raid A+→A**, both one band.
+
+`published` re-read per page, 9/9 agreement with the deterministic artifact: icyveins 08-08 ×4,
+08-13 (raid healer), icyveins-ptr 08-09 ×3, wowhead 08-14/**08-16**/08-14/08-15/08-09/08-11.
+
 ## 2026-08-15 (nightly, 21:50 UTC — second run of this UTC day)
 
 All five tier lists re-fetched live and **ZERO tier moves anywhere** — 360 assignments re-read

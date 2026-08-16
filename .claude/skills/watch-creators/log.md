@@ -16,6 +16,39 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-16 (nightly)
+
+**Discovery clean, distillation impossible.** `transcript-fetch/summary.json` verdict
+`limit-exceeded` (requested 1, fetched 0) — the Supadata monthly budget is exhausted, so **0 takes
+and 0 metaNotes** were added and no `latest` field was advanced. No transcript was fetched from
+YouTube or any API by this agent.
+
+44 unique channel feeds polled with backoff, **44/44 HTTP 200**, 660 entries against a **1045-id**
+seen-set built from the four structured lanes (never regex over this log). **26 unseen**, none
+pre-cycle (bound: 2026-06-18, the OLDEST date in ptr-builds.json).
+
+Three queue actions:
+- **DEQUEUED `bqVHzvKJCuA`** (Sha) — the suspected still-live stream flagged 2026-08-09. Its RSS
+  entry is now titled **"S2 Prep short stream"** with `published` moved 08-09 → 08-15 under the
+  same id: live/stream metadata, not a guess. It had spent a Supadata request on four separate
+  nights returning nothing. Left **UNSEEN** per the standing rule so the finished VOD can be
+  picked up later — not `seen[]`, not `skipped[]`.
+- **QUEUED `-sShKFuX2cQ`** (Dratnos, "My Raid Comp Prediction for 12.1 Venomous Abyss RWF") — the
+  one take-shaped upload tonight, and raid-scoped, which is the thin bracket.
+- **SEEN `JNLnHEd_WiU`** (Kalamazi, "Florida Man BBQ Cooking Stream") — durable: not WoW at all.
+
+The other 23 stay UNSEEN because none is a durable judgment: 9 guides/routes (Kesslive ×2,
+Preheat ×2, Megasett, Baze, Dalaran, Tactyks S2 routes, Sha ×2), 8 stream/Short shaped (Bansherz,
+Tettles ×2, Critcake, NeekapHere, Kalamazi, Maximum, Megasett Short, Zorthas delve, plus
+AutomaticJak's "Updating Tier Lists then M0s" — his dedicated tier-list video `c_5u7Jpy-Uo` is
+already queued), 2 Supatease uploads on a PvP-framed channel ("Finding The Best Class 12.1",
+"Destro Lock INSANE 12.1"), 1 raw log footage (Harrek's Dummy Dome healer pulls). Queue depth
+unchanged at 12 against an exhausted budget — fetch broadly, queue narrowly.
+
+`yt-dlp` tried ONCE for metadata on `bqVHzvKJCuA` and hit the expected datacenter bot wall ("Sign
+in to confirm you're not a bot"); not retried, nothing installed or upgraded. Note for a local
+run: `media:description` settled most of tonight's triage at zero transcript cost again.
+
 ## 2026-08-15 (nightly, 21:50 UTC — second run of this UTC day)
 
 **Discovery clean, distillation impossible.** `transcript-fetch/summary.json` reports verdict
