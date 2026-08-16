@@ -1,91 +1,6 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
-  "videos": [
-    {
-      "id": "U_bAsRSY5Y4",
-      "creator": "Megasett",
-      "title": "alt prep and 12.1 achievements",
-      "published": "2026-08-12",
-      "queuedAt": "2026-08-12"
-    },
-    {
-      "id": "vbYnrLDqHoc",
-      "creator": "Nintern",
-      "title": "Like a BEAST! | 8/18 Devourer Demon Hunter Tuning",
-      "published": "2026-08-15",
-      "queuedAt": "2026-08-15"
-    },
-    {
-      "id": "JFEqnHV99uk",
-      "creator": "Musguete",
-      "title": "Rogues Need IMMEDIATE BUFFS Before Patch 12.1 Goes Live (+16 Blinding Vale)",
-      "published": "2026-07-15",
-      "queuedAt": "2026-08-15"
-    },
-    {
-      "id": "tFU5qCIEUF8",
-      "creator": "Bansherz",
-      "title": "[drops] Friday Tuning (4340 io, 10/10M Hunter) !talents !spec !guide !week !buffs",
-      "published": "2026-08-15",
-      "queuedAt": "2026-08-15"
-    },
-    {
-      "id": "nTMq3Y3U14Y",
-      "creator": "Shadarek",
-      "title": "Leveling Magus (dead?) | !UI  !Havoc Guide !nerfs",
-      "published": "2026-08-15",
-      "queuedAt": "2026-08-15"
-    },
-    {
-      "id": "shGSOb8YoMQ",
-      "creator": "YoDaTV",
-      "title": "Is It a ROGUE Season? 12.1 Mythic+ Tierlist Update",
-      "published": "2026-08-15",
-      "queuedAt": "2026-08-15"
-    },
-    {
-      "id": "oomrLdyB8YA",
-      "creator": "Jedith",
-      "title": "Devourer Demon Hunter HIT HARD by TUNING right before 12.1 Raid",
-      "published": "2026-08-15",
-      "queuedAt": "2026-08-15"
-    },
-    {
-      "id": "DMtMmUW5uRE",
-      "creator": "LBNinja7",
-      "title": "Healer Tuning, But It's ALL Good!!! 12.1",
-      "published": "2026-08-15",
-      "queuedAt": "2026-08-15"
-    },
-    {
-      "id": "c_5u7Jpy-Uo",
-      "creator": "AutomaticJak",
-      "title": "Healer Tuning AND Tier List Updates for M+/Raid Season 2 Launch",
-      "published": "2026-08-15",
-      "queuedAt": "2026-08-15"
-    },
-    {
-      "id": "lanOZvwWzw0",
-      "creator": "Musguete",
-      "title": "Assa Rogue WILL BE META?! Patch 12.1 Tunning",
-      "published": "2026-08-15",
-      "queuedAt": "2026-08-15"
-    },
-    {
-      "id": "OdhbpI6Mjsw",
-      "creator": "izen (Izenhart)",
-      "title": "THE LAST, Really This Time! | Final Buffs & Nerfs to Specs Before Season 2 Release",
-      "published": "2026-08-15",
-      "queuedAt": "2026-08-15"
-    },
-    {
-      "id": "-sShKFuX2cQ",
-      "creator": "Dratnos",
-      "title": "My Raid Comp Prediction for 12.1 Venomous Abyss RWF",
-      "published": "2026-08-16",
-      "queuedAt": "2026-08-16"
-    }
-  ],
+  "videos": [],
   "skipped": [
     {
       "id": "02rLfzEKLq4",
@@ -2580,6 +2495,7 @@
     "J6ynDbhl9mA",
     "J96hzCwjjVA",
     "JBS9m6HACYg",
+    "JFEqnHV99uk",
     "JH7wFABJKLk",
     "JM3Uz_fGDP8",
     "JNLnHEd_WiU",
@@ -2829,6 +2745,7 @@
     "nIv9uGHDHBU",
     "nKF6Lg-YtMw",
     "nMXaCpzO7ug",
+    "nTMq3Y3U14Y",
     "nZWVlPnd15o",
     "nsSEqadIPnE",
     "nsqND5BS-C4",
@@ -2882,6 +2799,7 @@
     "vHv9Ixzoquc",
     "vKxE89T9chU",
     "vWY4_2KpAxk",
+    "vbYnrLDqHoc",
     "vblPETORg-I",
     "vgMYoYnlwqg",
     "vwY2ZbIwFkE",

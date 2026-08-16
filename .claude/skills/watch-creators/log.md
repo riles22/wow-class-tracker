@@ -16,6 +16,72 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-16 (LOCAL run, ~14:30-16:00 UTC — the queue drain the nightly could not do)
+
+**Queue fully drained: 12 → 0**, on yt-dlp from a residential IP, after four consecutive nightlies
+reported `limit-exceeded` on the Supadata monthly budget. **34 takes and 21 metaNotes added**, all
+from the August 18 launch tuning pass. This is the backlog local runs exist for.
+
+Of the 12 queued: **8 distilled**, **3 retired to `seen[]`** as durable no-caption facts
+(`vbYnrLDqHoc` Nintern, `JFEqnHV99uk` Musguete, `nTMq3Y3U14Y` Shadarek — the last has a
+`live_chat` track only). Each was probed on **two player clients** (default android-vr and
+`player_client=web`) before being written off, because a false durable dismissal abandons the
+video permanently. **`U_bAsRSY5Y4` (Megasett) DEQUEUED and left UNSEEN** — yt-dlp returns "This
+live event will begin in a few moments", so it is the `bqVHzvKJCuA` shape exactly: a live entry
+that had been sitting in the queue since 08-12 spending Supadata requests against an exhausted
+budget. Not `seen[]`, not `skipped[]`, so the finished VOD returns.
+
+Distilled: izen `OdhbpI6Mjsw` (21 metaNotes — the whole pass, spec by spec), AutomaticJak
+`c_5u7Jpy-Uo` (13 takes; his tier list splits raid and M+ on screen, so each spec got both),
+LBNinja7 `DMtMmUW5uRE` (7), YoDaTV `shGSOb8YoMQ` (6), Bansherz `tFU5qCIEUF8` (5, a 2.3h stream),
+Jedith `oomrLdyB8YA`, Musguete `lanOZvwWzw0`, Dratnos `-sShKFuX2cQ`.
+
+**Published effect: 1 projection letter, 0 consensus letters** — Mistweaver raid B → A, measured
+against `git show HEAD:dist/index.html` rather than the working `dist/`. It is NOT a lone-creator
+healer-exemption move: `expertRead` reports a **4-creator** raid panel that is still net negative
+(shrunk −0.167), just less negative than before.
+
+**Two self-caught data-entry errors, both found by measuring the effect rather than trusting the
+write.** (a) Four AutomaticJak takes were coded `buff` while their own claim text said the buff
+leaves the spec short ("a little less poor", absent from his race comp) — corrected to `mixed`.
+(b) More consequential: twelve takes on specs the pass did NOT touch were coded `neutral` as if
+"no tuning change" were the reading. `expertRead` maps neutral to **abstain-but-still-counted**
+(render.mjs:488), so coding an actively advocated spec neutral dilutes its own panel — the
+placeholder-neutral defect in SKILL.md wearing a different hat. It published a **phantom
+Restoration Shaman raid A+ → A downgrade**, caused purely by superseding AutomaticJak's 08-07
+positive take with a neutral one while he still argues for the spec in his race comp. Recoded to
+read polarity; the downgrade vanished. **The lesson worth keeping: `sentiment` is a directional
+vote on the spec's standing, not a description of whether the patch notes moved it.**
+
+**Discovery: 44/44 feeds, 1045-id seen-set, 32 unseen, all in-cycle — and ALL 32 LEFT UNSEEN.**
+Today's crop is guide-heavy (Tactyks tank-busters, Dalaran Outlaw, Kesslive + Preheat Devastation,
+Preheat Arcane hotfix), plus a Bansherz stream, a Zorthas delve video and 5 Supatease uploads on a
+PvP-framed channel. Under the guide rule none of those yields a take, and none is a durable
+judgment, so retiring them would be a guess — they stay genuinely unexamined and the next run
+reconsiders them. Nothing was queued: the queue drains against the exhausted Supadata budget, so
+"fetch broadly, queue narrowly" means queueing nothing tonight.
+
+**TWO SCOPE-WIDENING CANDIDATES FOR RILEY — flagged, not acted on.** Both creators gave sustained,
+competent analysis outside their declared `specs`, and per SKILL.md that is a human decision:
+- **YoDaTV on Rogue.** His registered scope is Blood DK / Vengeance / Guardian / Brewmaster /
+  Paladin / Prot+Arms Warrior. This video spends ~90 seconds on Rogue specifically, calling
+  Subtlety "probably one of the best specs in the game", predicting Assassination will "go to the
+  moon" in high-target dungeons, and reasoning concretely about Outlaw's target-cap problem at
+  Altar of the Fangs. All of it was DROPPED.
+- **Musguete on Subtlety.** Scope is Outlaw + Assassination. He gives a detailed Subtlety read
+  (the intentional 4-5% bug, the 6% compensating buff, the four-set drop 100% → 60%, and a
+  consequent mastery-to-crit stat shift). Dropped.
+
+**PTR lead, verified and already covered:** every creator this run discusses an August 18/19 tuning
+pass. It is already in `ptr-builds.json` as the 2026-08-15 entry (standalone forum topic 2336820),
+landed by the nightly — so nothing to log. Recorded because five separate transcripts read like a
+new build if you do not check.
+
+`yt-dlp` at the `requirements.txt` pin (2026.07.04); nothing installed or upgraded. No 429s —
+metadata and captions were fetched in small paced batches with `--sleep-requests 1.5`, and
+`--list-subs` carried the caption probes. `media:description` again settled most of the discovery
+triage at zero transcript cost.
+
 ## 2026-08-16 (nightly)
 
 **Discovery clean, distillation impossible.** `transcript-fetch/summary.json` verdict
