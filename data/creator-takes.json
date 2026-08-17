@@ -5528,7 +5528,7 @@
       "bracket": "raid",
       "patchContext": "12.1 PTR — week-one Warlock raid outlook, fight by fight (supersedes his 08-05 raid and 08-10 both reads)",
       "url": "https://youtu.be/9bQVdlUqeAM?t=301",
-      "claim": "Walking the Venomous Abyss fight list he assigns Destruction as the default Warlock spec on most bosses, naming Hellcaller Destruction as the highest single target on Zorax, Destruction with Twin Fangs where Mayhem and the improved Havoc fix apply, and Hellcaller Destruction again on Coiled Altar through its phase structure. He summarises the raid picture as Affliction and Destruction with a question mark for the third slot.",
+      "claim": "Walking the Venomous Abyss fight list he assigns Destruction as the default Warlock spec on most bosses, naming Hellcaller Destruction as the highest single target on Sszorak, Destruction with Twin Fangs where Mayhem and the improved Havoc fix apply, and Hellcaller Destruction again on Coiled Altar through its phase structure. He summarises the raid picture as Affliction and Destruction with a question mark for the third slot.",
       "superseded": false
     },
     {
@@ -8342,268 +8342,292 @@
       "note": "Restoration Shaman is untouched by the pass and appears twice as a benchmark others are measured against. He includes it among the higher-tier healers Mistweaver still does not match even after a 10% buff, and separately places it above Discipline in Mythic+, noting Discipline had routinely been ranked below Holy Paladin, Restoration Shaman and Preservation there. The read is comparative rather than a direct assessment of the spec."
     },
     {
+      "superseded": false,
       "class": "Monk",
       "spec": "Brewmaster",
       "creator": "izen (Izenhart)",
       "date": "2026-08-16",
       "sentiment": "negative",
+      "bracket": "mplus",
       "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
       "url": "https://youtu.be/KktdoK1OZVY?t=155",
-      "note": "He places Brewmaster at the very bottom of the tanks, pairing it with Restoration Druid and observing that the two were the meta combo at the start of Season 1. His reasoning is that neither took major Season 2 nerfs but both were nerfed enough during Season 1, and that other specs were buffed more in Season 2, so they were leapfrogged; in the PTR they again appeared as a combo, this time the one nobody was playing.",
-      "superseded": false
+      "note": "He places Brewmaster at the very bottom of the tanks, pairing it with Restoration Druid and observing that the two were the meta combo at the start of Season 1. His reasoning is that neither took major Season 2 nerfs but both were nerfed enough during Season 1, and that other specs were buffed more in Season 2, so they were leapfrogged; in the PTR they again appeared as a combo, this time the one nobody was playing."
     },
     {
+      "superseded": false,
       "class": "Druid",
       "spec": "Restoration",
       "creator": "izen (Izenhart)",
       "date": "2026-08-16",
       "sentiment": "negative",
+      "bracket": "mplus",
       "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
       "url": "https://youtu.be/KktdoK1OZVY?t=159",
-      "note": "Placed at the bottom of the healers alongside Brewmaster, on the same reasoning: not hit by major Season 2 nerfs, but nerfed enough across Season 1 and then passed by specs that were buffed more, leaving the pair unplayed in PTR rather than merely weaker.",
-      "superseded": false
+      "note": "Placed at the bottom of the healers alongside Brewmaster, on the same reasoning: not hit by major Season 2 nerfs, but nerfed enough across Season 1 and then passed by specs that were buffed more, leaving the pair unplayed in PTR rather than merely weaker."
     },
     {
+      "superseded": false,
       "class": "Warrior",
       "spec": "Protection",
       "creator": "izen (Izenhart)",
       "date": "2026-08-16",
       "sentiment": "negative",
+      "bracket": "mplus",
       "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
       "url": "https://youtu.be/KktdoK1OZVY?t=238",
-      "note": "He puts Protection Warrior only barely above Brewmaster among tanks and rejects the melee-composition argument for it, saying the Battle Shout synergy case does not survive contact with what was actually played — there is no need for a physical composition to bring a Protection Warrior.",
-      "superseded": false
+      "note": "He puts Protection Warrior only barely above Brewmaster among tanks and rejects the melee-composition argument for it, saying the Battle Shout synergy case does not survive contact with what was actually played — there is no need for a physical composition to bring a Protection Warrior."
     },
     {
+      "superseded": false,
       "class": "Priest",
       "spec": "Discipline",
       "creator": "izen (Izenhart)",
       "date": "2026-08-16",
       "sentiment": "negative",
+      "bracket": "mplus",
       "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
       "url": "https://youtu.be/KktdoK1OZVY?t=268",
-      "note": "He calls Discipline the genuine surprise of the bottom healer tier. He reads it as back to its Undermine-era shape with very powerful absorbs, but says the 80%-plus shield value falls away in Mythic+ where sustained rot damage dominates: Void Shield is excellent for saving a player from a targeted mechanic, while the rest of the kit reduces to Mind Blast on cooldown and filler Smite and Penance, which he reads as too weak to keep pace with healers that were buffed.",
-      "superseded": false
+      "note": "He calls Discipline the genuine surprise of the bottom healer tier. He reads it as back to its Undermine-era shape with very powerful absorbs, but says the 80%-plus shield value falls away in Mythic+ where sustained rot damage dominates: Void Shield is excellent for saving a player from a targeted mechanic, while the rest of the kit reduces to Mind Blast on cooldown and filler Smite and Penance, which he reads as too weak to keep pace with healers that were buffed."
     },
     {
+      "superseded": false,
       "class": "Monk",
       "spec": "Mistweaver",
       "creator": "izen (Izenhart)",
       "date": "2026-08-16",
       "sentiment": "negative",
+      "bracket": "mplus",
       "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
       "url": "https://youtu.be/KktdoK1OZVY?t=694",
-      "note": "He notes Mistweaver is the meta Mythic+ healer as Season 1 ends and reads its drop as a straight nerf rather than a change of role: no hero-talent or play-style change, but Morning Breeze cut by 60%, Resplendent Mist reduced and Spinning Crane Kick value lowered, so the spec does the same thing with fewer casts and less output. He says it would have stayed in the top tier had Blizzard left it alone.",
-      "superseded": false
+      "note": "He notes Mistweaver is the meta Mythic+ healer as Season 1 ends and reads its drop as a straight nerf rather than a change of role: no hero-talent or play-style change, but Morning Breeze cut by 60%, Resplendent Mist reduced and Spinning Crane Kick value lowered, so the spec does the same thing with fewer casts and less output. He says it would have stayed in the top tier had Blizzard left it alone."
     },
     {
+      "superseded": false,
       "class": "Evoker",
       "spec": "Preservation",
       "creator": "izen (Izenhart)",
       "date": "2026-08-16",
       "sentiment": "positive",
+      "bracket": "mplus",
       "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
       "url": "https://youtu.be/KktdoK1OZVY?t=541",
-      "note": "He calls Preservation the surprise of the list, given it has historically been the weakest Mythic+ healer and poor at healing small groups. He credits an accumulation of quality-of-life changes running back to late Dragonflight, the significantly buffed Flame Shaper and Consume Flame, Emerald Blossom no longer consuming Echoes, and a tier set that sends a Living Flame at a low target, which together fix its five-target healing. He goes as far as suggesting it may now be slightly too strong.",
-      "superseded": false
+      "note": "He calls Preservation the surprise of the list, given it has historically been the weakest Mythic+ healer and poor at healing small groups. He credits an accumulation of quality-of-life changes running back to late Dragonflight, the significantly buffed Flame Shaper and Consume Flame, Emerald Blossom no longer consuming Echoes, and a tier set that sends a Living Flame at a low target, which together fix its five-target healing. He goes as far as suggesting it may now be slightly too strong."
     },
     {
+      "superseded": false,
       "class": "Paladin",
       "spec": "Holy",
       "creator": "izen (Izenhart)",
       "date": "2026-08-16",
       "sentiment": "positive",
+      "bracket": "mplus",
       "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
       "url": "https://youtu.be/KktdoK1OZVY?t=968",
-      "note": "He puts Holy Paladin as the overall best healer pick. He describes its power as extremely high in Mythic+ and raid alike, with three or four high-value single-target buttons available at nearly all times and a tier set that doubles Infusion of Light value and guarantees two infusions per Holy Light. He also reads it as the natural partner for the meta tank, since Devotion Aura, Lightsmith damage reduction and a tank beacon cover Blood Death Knight's weakness.",
-      "superseded": false
+      "note": "He puts Holy Paladin as the overall best healer pick. He describes its power as extremely high in Mythic+ and raid alike, with three or four high-value single-target buttons available at nearly all times and a tier set that doubles Infusion of Light value and guarantees two infusions per Holy Light. He also reads it as the natural partner for the meta tank, since Devotion Aura, Lightsmith damage reduction and a tank beacon cover Blood Death Knight's weakness."
     },
     {
+      "superseded": false,
       "class": "Shaman",
       "spec": "Restoration",
       "creator": "izen (Izenhart)",
       "date": "2026-08-16",
       "sentiment": "positive",
+      "bracket": "mplus",
       "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
       "url": "https://youtu.be/KktdoK1OZVY?t=1045",
-      "note": "He ranks Restoration Shaman second among healers and the more likely pick in physical compositions. His reasoning is throughput shape rather than raw power: Healing Rain and Chain Heal cap at five targets, which is exactly the Mythic+ group size, and both are easier to land when the group is melee. He adds the composition argument that a Shaman also brings Windfury and the mastery buff to a physical group.",
-      "superseded": false
+      "note": "He ranks Restoration Shaman second among healers and the more likely pick in physical compositions. His reasoning is throughput shape rather than raw power: Healing Rain and Chain Heal cap at five targets, which is exactly the Mythic+ group size, and both are easier to land when the group is melee. He adds the composition argument that a Shaman also brings Windfury and the mastery buff to a physical group."
     },
     {
+      "superseded": false,
       "class": "Death Knight",
       "spec": "Blood",
       "creator": "izen (Izenhart)",
       "date": "2026-08-16",
       "sentiment": "positive",
+      "bracket": "mplus",
       "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
       "url": "https://youtu.be/KktdoK1OZVY?t=474",
-      "note": "He calls Blood Death Knight the one undisputed main tank, and grounds it in representation rather than assertion: at the 20-key level he counts 119 Blood Death Knights against 12 for the next most played tank, and says all other tanks combined would not reach half its key count.",
-      "superseded": false
+      "note": "He calls Blood Death Knight the one undisputed main tank, and grounds it in representation rather than assertion: at the 20-key level he counts 119 Blood Death Knights against 12 for the next most played tank, and says all other tanks combined would not reach half its key count."
     },
     {
+      "superseded": false,
       "class": "Paladin",
       "spec": "Protection",
       "creator": "izen (Izenhart)",
       "date": "2026-08-16",
       "sentiment": "mixed",
+      "bracket": "mplus",
       "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
       "url": "https://youtu.be/KktdoK1OZVY?t=454",
-      "note": "He keeps Protection Paladin ahead of Vengeance and Guardian in the middle tank tier while describing it as displaced: it began the PTR as the tank meta before being hit by nerfs at the same time Blood Death Knight was buffed, which is what changed the standing. He allows it a residual case in physical compositions through Devotion Aura.",
-      "superseded": false
+      "note": "He keeps Protection Paladin ahead of Vengeance and Guardian in the middle tank tier while describing it as displaced: it began the PTR as the tank meta before being hit by nerfs at the same time Blood Death Knight was buffed, which is what changed the standing. He allows it a residual case in physical compositions through Devotion Aura."
     },
     {
+      "superseded": false,
       "class": "Druid",
       "spec": "Guardian",
       "creator": "izen (Izenhart)",
       "date": "2026-08-16",
       "sentiment": "negative",
+      "bracket": "mplus",
       "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
       "url": "https://youtu.be/KktdoK1OZVY?t=517",
-      "note": "Placed in the middle tank group that he says is not really being played, behind both Blood Death Knight and Protection Paladin. The one point in its favour he names is that Mark of the Wild is very valuable, which he offers as a reason it could find a place in a physical composition rather than as a reason to expect play.",
-      "superseded": false
+      "note": "Placed in the middle tank group that he says is not really being played, behind both Blood Death Knight and Protection Paladin. The one point in its favour he names is that Mark of the Wild is very valuable, which he offers as a reason it could find a place in a physical composition rather than as a reason to expect play."
     },
     {
+      "superseded": false,
       "class": "Priest",
       "spec": "Shadow",
       "creator": "izen (Izenhart)",
       "date": "2026-08-16",
       "sentiment": "negative",
+      "bracket": "mplus",
       "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
       "url": "https://youtu.be/KktdoK1OZVY?t=1146",
-      "note": "He uses Shadow Priest as his closing example of a spec that is worse off than its tier position suggests: he argues a player would rather be a Windwalker, a guaranteed pick in a composition making up under 5% of groups, than a Shadow Priest competing as the second or third caster slot in the 95% of groups running a standard composition, because the specs ahead of it make groups hard to find regardless.",
-      "superseded": false
+      "note": "He uses Shadow Priest as his closing example of a spec that is worse off than its tier position suggests: he argues a player would rather be a Windwalker, a guaranteed pick in a composition making up under 5% of groups, than a Shadow Priest competing as the second or third caster slot in the 95% of groups running a standard composition, because the specs ahead of it make groups hard to find regardless."
     },
     {
+      "superseded": false,
       "class": "Rogue",
       "spec": "Outlaw",
       "creator": "izen (Izenhart)",
       "date": "2026-08-16",
       "sentiment": "positive",
+      "bracket": "mplus",
       "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
       "url": "https://youtu.be/KktdoK1OZVY?t=378",
-      "note": "He singles Outlaw out among the mid-tier DPS as the one holding a genuine composition advantage, saying it can anchor a physical Mythic+ group and that looking at the high keys it appears repeatedly at the 20 level in King's Rest and Ruby Life Pools. He places it at the end of the A tier on that basis, expecting higher representation at launch than its raw position would imply.",
-      "superseded": false
+      "note": "He singles Outlaw out among the mid-tier DPS as the one holding a genuine composition advantage, saying it can anchor a physical Mythic+ group and that looking at the high keys it appears repeatedly at the 20 level in King's Rest and Ruby Life Pools. He places it at the end of the A tier on that basis, expecting higher representation at launch than its raw position would imply."
     },
     {
+      "superseded": false,
       "class": "Hunter",
       "spec": "Marksmanship",
       "creator": "izen (Izenhart)",
       "date": "2026-08-16",
       "sentiment": "negative",
+      "bracket": "mplus",
       "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
       "url": "https://youtu.be/KktdoK1OZVY?t=356",
-      "note": "He calls the Marksmanship situation unfortunate, saying that nerf after nerf through the cycle has stripped progressively more value from it, and compounds that by noting it does not even have the melee-composition fallback that lifts Outlaw out of the same tier.",
-      "superseded": false
+      "note": "He calls the Marksmanship situation unfortunate, saying that nerf after nerf through the cycle has stripped progressively more value from it, and compounds that by noting it does not even have the melee-composition fallback that lifts Outlaw out of the same tier."
     },
     {
+      "superseded": false,
       "class": "Warlock",
       "spec": "Destruction",
       "creator": "izen (Izenhart)",
       "date": "2026-08-16",
       "sentiment": "negative",
+      "bracket": "mplus",
       "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
       "url": "https://youtu.be/KktdoK1OZVY?t=211",
-      "note": "Grouped with the specs he considers unlikely to see much play, and placed there only because he reads it as doing slightly better than the other two Warlock specs — a relative placement within a weak class rather than a positive read.",
-      "superseded": false
+      "note": "Grouped with the specs he considers unlikely to see much play, and placed there only because he reads it as doing slightly better than the other two Warlock specs — a relative placement within a weak class rather than a positive read."
     },
     {
+      "superseded": false,
       "class": "Mage",
       "spec": "Frost",
       "creator": "izen (Izenhart)",
       "date": "2026-08-16",
       "sentiment": "mixed",
+      "bracket": "mplus",
       "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
       "url": "https://youtu.be/KktdoK1OZVY?t=79",
-      "note": "He uses Frost Mage as his worked example of the difference between power and expected play, saying it is not much weaker than Arcane and might squeak into a higher tier if he were rating by relative power, but that PTR players picked Arcane roughly 130 times more often, which he treats as the better predictor of how the two will fare at launch.",
-      "superseded": false
+      "note": "He uses Frost Mage as his worked example of the difference between power and expected play, saying it is not much weaker than Arcane and might squeak into a higher tier if he were rating by relative power, but that PTR players picked Arcane roughly 130 times more often, which he treats as the better predictor of how the two will fare at launch."
     },
     {
+      "superseded": false,
       "class": "Warrior",
       "spec": "Fury",
       "creator": "izen (Izenhart)",
       "date": "2026-08-16",
       "sentiment": "mixed",
+      "bracket": "mplus",
       "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
       "url": "https://youtu.be/KktdoK1OZVY?t=121",
-      "note": "The same power-versus-representation split applied to Fury: he says it is probably around the same level as Arms, but that the gap between where the two sit on his list is driven by how much more Arms will be played rather than by a difference in strength.",
-      "superseded": false
+      "note": "The same power-versus-representation split applied to Fury: he says it is probably around the same level as Arms, but that the gap between where the two sit on his list is driven by how much more Arms will be played rather than by a difference in strength."
     },
     {
+      "superseded": false,
       "class": "Mage",
       "spec": "Arcane",
       "creator": "izen (Izenhart)",
       "date": "2026-08-16",
       "sentiment": "positive",
+      "bracket": "mplus",
       "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
       "url": "https://youtu.be/KktdoK1OZVY?t=869",
-      "note": "He treats Arcane as holding a Mythic+ slot regardless of how the composition question resolves, placing it at the top end alongside Arms and above the contested trio competing for the remaining caster spots.",
-      "superseded": false
+      "note": "He treats Arcane as holding a Mythic+ slot regardless of how the composition question resolves, placing it at the top end alongside Arms and above the contested trio competing for the remaining caster spots."
     },
     {
+      "superseded": false,
       "class": "Warrior",
       "spec": "Arms",
       "creator": "izen (Izenhart)",
       "date": "2026-08-16",
       "sentiment": "positive",
+      "bracket": "mplus",
       "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
       "url": "https://youtu.be/KktdoK1OZVY?t=872",
-      "note": "He places Arms at the top end and reads its position as unusually secure: it may miss out if a group commits to a caster-only composition, but it is the guaranteed pick in the physical composition, so it has a home either way.",
-      "superseded": false
+      "note": "He places Arms at the top end and reads its position as unusually secure: it may miss out if a group commits to a caster-only composition, but it is the guaranteed pick in the physical composition, so it has a home either way."
     },
     {
+      "superseded": false,
       "class": "Demon Hunter",
       "spec": "Devourer",
       "creator": "izen (Izenhart)",
       "date": "2026-08-16",
       "sentiment": "positive",
+      "bracket": "mplus",
       "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
       "url": "https://youtu.be/KktdoK1OZVY?t=827",
-      "note": "He names Devourer as one of the trio — with Balance and Elemental — that he expects to contest the remaining Mythic+ DPS slots behind Arcane and Arms, referring back to a dedicated video on that three-way split as what he expects to happen at launch.",
-      "superseded": false
+      "note": "He names Devourer as one of the trio — with Balance and Elemental — that he expects to contest the remaining Mythic+ DPS slots behind Arcane and Arms, referring back to a dedicated video on that three-way split as what he expects to happen at launch."
     },
     {
+      "superseded": false,
       "class": "Druid",
       "spec": "Balance",
       "creator": "izen (Izenhart)",
       "date": "2026-08-16",
       "sentiment": "positive",
+      "bracket": "mplus",
       "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
       "url": "https://youtu.be/KktdoK1OZVY?t=829",
-      "note": "Named in the same expected trio with Devourer and Elemental as the specs competing for the Mythic+ slots below Arcane and Arms, and included in the caster-only composition case.",
-      "superseded": false
+      "note": "Named in the same expected trio with Devourer and Elemental as the specs competing for the Mythic+ slots below Arcane and Arms, and included in the caster-only composition case."
     },
     {
+      "superseded": false,
       "class": "Shaman",
       "spec": "Elemental",
       "creator": "izen (Izenhart)",
       "date": "2026-08-16",
       "sentiment": "positive",
+      "bracket": "mplus",
       "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
       "url": "https://youtu.be/KktdoK1OZVY?t=815",
-      "note": "The third of the expected trio, and the one he supports with representation: he counts 80 Elemental Shamans in the highest keys against eight Outlaws and 15 Windwalkers, which he reads as showing where PTR players had already settled.",
-      "superseded": false
+      "note": "The third of the expected trio, and the one he supports with representation: he counts 80 Elemental Shamans in the highest keys against eight Outlaws and 15 Windwalkers, which he reads as showing where PTR players had already settled."
     },
     {
+      "superseded": false,
       "class": "Monk",
       "spec": "Windwalker",
       "creator": "izen (Izenhart)",
       "date": "2026-08-16",
       "sentiment": "mixed",
+      "bracket": "mplus",
       "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
       "url": "https://youtu.be/KktdoK1OZVY?t=1138",
-      "note": "He places Windwalker at the end of the A tier explicitly on the composition asterisk rather than on strength, saying it is a guaranteed pick in a physical group but that he expects such groups to be under 5% of the total — a niche slot, which he still rates above competing for a crowded caster spot.",
-      "superseded": false
+      "note": "He places Windwalker at the end of the A tier explicitly on the composition asterisk rather than on strength, saying it is a guaranteed pick in a physical group but that he expects such groups to be under 5% of the total — a niche slot, which he still rates above competing for a crowded caster spot."
     },
     {
+      "superseded": false,
       "class": "Death Knight",
       "spec": "Unholy",
       "creator": "izen (Izenhart)",
       "date": "2026-08-16",
       "sentiment": "mixed",
+      "bracket": "mplus",
       "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
       "url": "https://youtu.be/KktdoK1OZVY?t=780",
-      "note": "He describes placing Unholy as an awkward call, saying it was not quite fair to keep it in the lower group but also not fair to put it in the higher one where it would read as ranking behind Frost Death Knight, and settles on treating it as the first of the B tier.",
-      "superseded": false
+      "note": "He describes placing Unholy as an awkward call, saying it was not quite fair to keep it in the lower group but also not fair to put it in the higher one where it would read as ranking behind Frost Death Knight, and settles on treating it as the first of the B tier."
     }
   ]
 }
