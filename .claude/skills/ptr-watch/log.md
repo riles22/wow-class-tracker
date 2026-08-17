@@ -16,6 +16,32 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-17 (nightly)
+
+**No new builds; nothing logged.** Four channels swept.
+(1) Dev-notes thread `2317811.json` via curl for the full `post_stream`: 17 posts,
+`last_posted_at` 2026-07-31T23:42:09Z, newest is Linxy #19 — already the feed's 07-31 entry.
+Quiet 17 days now, because the PTR cycle ended when 12.1 shipped on 08-11.
+(2) Wowhead RSS, parsed per `<item>` block: 40 items, newest 2026-08-16 19:10 CDT.
+(3) News INDEX (`data.news.newsData`, brace-balanced from the id attribute), since it leads RSS
+within a run: 20 posts, top id 382391 — nothing beyond RSS.
+(4) Blue tracker (`data.blueTracker.default`): 50 entries, newest **2026-08-14 20:02**, i.e.
+unchanged since last night. The only class-touching blues are still Linxy's "Class Tuning Incoming
+– August 18" (topic 2336820), which IS the feed's 2026-08-15 entry, and the Aug-14 Kaivax hotfixes
+(2336376). Kaivax's 08-12 "Season 2 Class Tuning Plans" (2335871) and Wowhead's 08-12 "Class
+Tuning Roadmap" (news=382435) remain a **calendar** — Aug 18 / Aug 25 / Sep 1 / Sep 22, no
+per-spec numbers — so they are still correctly absent from the feed.
+
+Writeup coverage **recomputed, never read off prose**: 1 spec at `ptr: null` (Demonology Warlock,
+the deliberate null — the source reported no changes), **0** specs without a raid-scoped expert
+read, **0** without an M+ one. Unchanged from 08-15, and the CLAUDE.md paragraph still matches.
+
+WCL zones are evidence-only on the runner (no credentials). `wcl-fetch/evidence.json` verdict
+`rdps-broken`, so **zone 54 (normalized), zone 52 (ptrDummy rDPS) and zone 56 (rDPS/HPS) all
+stay frozen** at 2026-07-28 / 2026-08-10 / 2026-08-10 respectively; zone 57 was not probed for the
+same reason. What DID land is the deterministic raw-DPS lane: z52 102 rows, z54 27 rows (6 of 8
+encounters populated — Vashnik 678, Soulcoiler 370, Sentinels 363, Sszorak 184, Lost Explorers 150,
+Twin Fangs 146; Coiled Altar and Ula'tek zero), z56 27 rows across all eight dungeons.
 ## 2026-08-16 (nightly)
 
 **No new builds; nothing logged.** Four channels swept.

@@ -16,6 +16,50 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-17 (nightly)
+
+All five tier lists re-fetched live — icyveins 6 pages, icyveins-ptr 3, method 2, wowhead 6,
+archon 6 aggregate + 51 encounter — **74/74 HTTP 200. Six tier moves, and each sits on a page
+whose own self-date moved.**
+
+Per-page row counts, printed and reconciled against 27 DPS + 7 healer + 6 tank = 40:
+icyveins 27/7/6 raid + 27/7/6 M+, icyveins-ptr 27/7/6, method 40 + 40, wowhead 27/7/6 + 27/7/6,
+archon 27/7/6 + 27/7/6. Icy Veins' two M+ DPS pages parse 27 rows but store 26 RATED — Subtlety
+Rogue's cell is the literal upstream `TBD`, written as an explicit null. Transports: Icy Veins
+plain browser-UA GET; Wowhead FULL header set, then unescape `\/` across the whole document
+BEFORE searching `[tier-list=rows]` (one block per page, the raid-healer decoy not in play);
+Method `.tier__tier` with non-roster alts rejected by ROSTER MATCH (8 S2 dungeon names + logo);
+Archon `__NEXT_DATA__` resolved from each entry's `icon` "Class-Spec" token.
+
+**Wowhead M+ healer rebuilt — two moves.** JSON-LD `dateModified` 2026-08-09 →
+**2026-08-16T17:07:04-05:00** (matching the published-evidence artifact), and the block reads
+S Preservation / A Holy Paladin / B Restoration Shaman + Mistweaver / C **Restoration Druid**,
+**Discipline Priest**, Holy Priest. Both moved B → C. Stored `published` advanced to 08-16.
+
+**Archon re-cut raid again — four moves**, `lastUpdated` 2026-08-15T12:00:00Z →
+**2026-08-16T12:00:00Z** on all six pages. Shadow Priest S→A, Frost Mage S→A, Protection Warrior
+A→S, Blood DK A→S. Corroboration is arithmetic from the same payload: Shadow 187.4k and Frost
+Mage 186.7k now sit under Elemental's 189.6k (the S cut), while Prot Warrior 104.7k and Blood DK
+100.3k joined Guardian's 108.7k in tank S.
+
+Encounter tiers: full 51-page re-fetch, 619 rows parsed, **33 moves + 1 newly-populated cell**
+(Vengeance DH on Vaelgor & Ezzorak, C — that boss goes 38 → 39 rows), **all raid**; M+
+per-dungeon byte-identical, S1 keys being dead content. The same six role cuts are empty upstream
+(Crown ×3, Chimaerus healer+tank, Vanguard tank) and their 59 stored rows were LEFT UNTOUCHED, so
+the file holds 678 rows at Archon's own 2026-08-16. Committed encounter `name` values preserved.
+
+Era re-verified per page and **nothing changed, so freeze-season had nothing to freeze**:
+icyveins s2 (raid-healer still titles itself "Patch 12.0.7 / Midnight" over a changelog reading
+"13 Aug. 2026: Further updated for Midnight Season 2 launch" — body over title), icyveins-ptr s2
+(and its newest changelog row now says "Final Update of the progressive S2 PTR Midnight
+tierlist", so its quiet week is a finished series, not a lag), method s2, wowhead s2, archon
+**s1** (still the nine S1 bosses and eight S1 dungeons). Archon is still the only source in the
+live consensus in its own right, which is why its four moves are the night's **3 consensus
+letters — Blood DK raid B→A, Frost Mage raid S→A+, Protection Warrior raid A+→S** — and
+**1 projection letter** (Prot Warrior raid A→A+), measured against `git show HEAD:dist/index.html`.
+
+`published` re-read per page, 9/9 agreement with the deterministic artifact: icyveins 08-08 ×4 +
+08-13 (raid healer), icyveins-ptr 08-09 ×3, wowhead 08-14/08-16/08-14/08-15/**08-16**/08-11.
 ## 2026-08-16 (nightly)
 
 All five tier lists re-fetched live — icyveins 6 pages, icyveins-ptr 3, method 2, wowhead 6,

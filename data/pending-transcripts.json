@@ -1,6 +1,70 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
-  "videos": [],
+  "videos": [
+    {
+      "id": "d99gGdPLxFI",
+      "creator": "Shadarek",
+      "title": "Devourer Demon Hunter nerfs were much smaller than expected",
+      "published": "2026-08-17",
+      "queuedAt": "2026-08-17"
+    },
+    {
+      "id": "byBgZmZlzxI",
+      "creator": "VooDooSaurus",
+      "title": "Devourer Got Some BIG Nerfs! What Does It All Mean And What's Changing?",
+      "published": "2026-08-17",
+      "queuedAt": "2026-08-17"
+    },
+    {
+      "id": "QOmfIifvkgw",
+      "creator": "Jedith",
+      "title": "Devourer Demon Hunter is STILL KING of the DPS!",
+      "published": "2026-08-17",
+      "queuedAt": "2026-08-17"
+    },
+    {
+      "id": "yUVywQqHtVs",
+      "creator": "NeekapHere",
+      "title": "Is Retribution Paladin COOKED? | WoW Midnight 12.1",
+      "published": "2026-08-17",
+      "queuedAt": "2026-08-17"
+    },
+    {
+      "id": "KktdoK1OZVY",
+      "creator": "izen (Izenhart)",
+      "title": "DPS, Tanks & Healers Meta in Season 2 | Official™ Final™ Definitive™ Season 2 Mythic+ Tier List",
+      "published": "2026-08-16",
+      "queuedAt": "2026-08-17"
+    },
+    {
+      "id": "MId00Jg51mo",
+      "creator": "LBNinja7",
+      "title": "EASIEST Healer in Season 2 of Midnight | Each Healer RANKED",
+      "published": "2026-08-16",
+      "queuedAt": "2026-08-17"
+    },
+    {
+      "id": "mzjGn70Hf20",
+      "creator": "AutomaticJak",
+      "title": "Updating Tier Lists then M0s!  | UI in description!",
+      "published": "2026-08-15",
+      "queuedAt": "2026-08-17"
+    },
+    {
+      "id": "Y9Jlp2E04No",
+      "creator": "Bicepspump",
+      "title": "12.1 DK DPS Overview (Dual-Wield is Back!)",
+      "published": "2026-08-16",
+      "queuedAt": "2026-08-17"
+    },
+    {
+      "id": "b3kZyBt660U",
+      "creator": "Whispyr",
+      "title": "Everything Assassination in Season 2",
+      "published": "2026-08-15",
+      "queuedAt": "2026-08-17"
+    }
+  ],
   "skipped": [
     {
       "id": "02rLfzEKLq4",
@@ -2778,6 +2842,7 @@
     "s97eN2P7FoA",
     "sZwBwfkcuZ0",
     "svrjfd3_ebk",
+    "syMKQGVlERo",
     "t0J5WAXZAOs",
     "t6RDSaIQEFU",
     "tByNSM_0uFo",

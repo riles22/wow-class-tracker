@@ -16,6 +16,54 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-17 (nightly)
+
+**Discovery clean, distillation impossible for a different reason than the last four nights.**
+`transcript-fetch/summary.json` verdict **`ok`** with requested 0 / fetched 0 — not
+`limit-exceeded`: the queue was simply EMPTY when the deterministic step ran, because the 08-16
+local run drained all 12. So **0 takes and 0 metaNotes**, no `latest` advanced, and no transcript
+fetched from YouTube or any API by this agent.
+
+44 unique channel feeds polled with backoff, **44/44 HTTP 200**, 660 entries against a **1045-id**
+seen-set built from the four structured lanes (never a regex over this log). **55 unseen, none
+pre-cycle** (bound: 2026-06-18, the OLDEST date in ptr-builds.json).
+
+**NINE QUEUED** — fetch broadly, queue narrowly; all take-shaped, and this is the first night in
+five with a plausibly non-exhausted Supadata budget:
+- `d99gGdPLxFI` Shadarek, `byBgZmZlzxI` VooDooSaurus, `QOmfIifvkgw` Jedith — **three
+  independent Devourer DH reads of the 08-18 nerf**, which is exactly the corroboration
+  `expertRead` shrinks by. Descriptions confirm substance (Shadarek: "sims had an error";
+  VooDooSaurus: tier set + single target, Annihilator vs Void-Scarred).
+- `yUVywQqHtVs` NeekapHere ("Is Retribution Paladin COOKED?" — "Ret is in some dire straits").
+- `KktdoK1OZVY` izen — general creator, S2 M+ meta tier list → **metaNotes lane**.
+- `MId00Jg51mo` LBNinja7 (each healer ranked), `mzjGn70Hf20` AutomaticJak (tier-list stream;
+  his last one yielded 13 takes), `Y9Jlp2E04No` Bicepspump (description promises "my predictions
+  for the meta status" for both DK specs — attribute Unholy only, his registered scope),
+  `b3kZyBt660U` Whispyr (Assassination, "why is everything cleave").
+
+**ONE retired to `seen[]`**: `syMKQGVlERo` Kalamazi, "Florida Man BBQ Cooking Stream" — durable,
+not WoW at all (same series as `JNLnHEd_WiU` last night).
+
+The other **45 stay UNSEEN** because none is a durable judgment, and the split is counted rather
+than estimated: **19** guides / routes / trinket lists / build videos (Kesslive ×3, Megasett ×3,
+Sha routes ×3, Dalaran ×2, Preheat ×2, Shadarek trinket lists ×2, Zorthas ×2, Baze, Tactyks
+routes), **13** stream or Short shells (Bansherz ×2, Critcake ×2, Megasett ×2, Tettles ×2,
+Kalamazi, Maximum live, NeekapHere zone vlog, Shindigg, and Sha `bqVHzvKJCuA` — still the
+live-stream shape, still not queued), **10** PvP-framed uploads (Supatease ×9 + Dalaran's 5v5/1v1
+duels), **`ZS1GMWVLegs`** Tactyks (M+, firewalled), **`QevyPqgpoEs`** Harrek (raw Dummy Dome pull
+footage, logs linked in the description, no comparative read), and **`8b-nyzqIaQ8`** Dratnos,
+whose own chapter list is entirely RWF logistics (headstart / splits / progression / bonus rolls)
+with no spec-strength segment — a raid-scoped upload declined on its own metadata rather than on a
+title guess.
+
+Two firewall applications worth recording: **Tactyks' `ZS1GMWVLegs` and `nZJi0Fdgl5Q` are both
+M+**, and he writes the Method M+ list (re-confirmed on the live page tonight — its M+ body
+credits him by name), so they are out of scope by construction, not by taste.
+And **Supatease's `iF9-2dpJdjo` (Shadow Priest) and `Tsy8Wr09VeA` (Destro)** name specs outside
+his registered scope (Shaman / Affliction / Arms+Prot Warrior).
+
+`media:description` again settled most of the triage at zero transcript cost. Nothing installed
+or upgraded.
 ## 2026-08-16 (LOCAL run, ~14:30-16:00 UTC — the queue drain the nightly could not do)
 
 **Queue fully drained: 12 → 0**, on yt-dlp from a residential IP, after four consecutive nightlies
