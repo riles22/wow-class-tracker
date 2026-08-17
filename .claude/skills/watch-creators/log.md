@@ -16,6 +16,69 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-17 (local run — residential transcript catch-up)
+
+Queue **9 -> 0**. yt-dlp 2026.07.04 (the requirements.txt pin; nothing installed or upgraded).
+No 429 at any point: metadata paced at 1.6s, captions at 1.8s, 36 caption fetches, 0 misses.
+
+**Discovery, unfiltered per the local-run rule.** 38 pollable creator feeds, all HTTP 200,
+diffed against a 1045-id seen-set rebuilt from the four STRUCTURED lanes (never log prose).
+50 unseen in-cycle against the 2026-06-18 bound (the OLDEST date in ptr-builds.json, taken
+by date and not by index) + the 9 queued = 59 considered. Metadata was harvested FIRST as a
+separate invocation (--print with sub flags silently simulates), which settled the live and
+Short triage at zero caption cost.
+
+**+13 takes, +24 metaNotes, 18 takes and 23 metaNotes superseded.**
+- Three INDEPENDENT Devourer reads of the Aug 18 tuning pass, all distilled: Shadarek
+  (d99gGdPLxFI), Jedith (QOmfIifvkgw), VooDooSaurus (byBgZmZlzxI). They agree the nerf
+  landed and the spec is still upper-end, so all three are `mixed`; they disagree only on
+  build preference. Shadarek is a genuine revision — the circulating sim figures used a
+  typo'd 0.8 spell-power override instead of 0.88, so a 12% nerf was being read as 20%.
+- NeekapHere Retribution (yUVywQqHtVs): `nerf`, bottom-five on sims, worse in raid than M+.
+- Bicepspump Unholy (Y9Jlp2E04No): `mixed`, explicitly not expecting a repeat of its S1 meta.
+- Kalamazi Warlock week-one (9bQVdlUqeAM): six takes, raid AND M+ per spec, so the pair
+  genuinely replaces his older reads rather than half-retiring them.
+- Dalaran Gaming Outlaw (rKjGaAE1k3w) and Assassination (lFJw787T2Do).
+- izen KktdoK1OZVY -> 24 metaNotes in the M+ lens. **His stated basis is recorded in every
+  patchContext**: he says outright he is NOT rating by maximum power but by how likely each
+  spec is to be PLAYED, reasoning partly from PTR representation counts. Distilling that as
+  strength would be the popularity-as-power inversion this project refuses elsewhere.
+
+**Applied the list-mention rule and dropped 8 candidate metaNotes** whose only evidence was
+membership in a bare enumeration: Feral, Havoc, Enhancement, Affliction, Demonology,
+Vengeance, Holy Priest, and Frost DK/Ret/Subtlety. Frost MAGE was kept — it carries its own
+worked reasoning about Arcane being played ~130x more.
+
+**27 videos transcript-verified and moved to skipped[]** (durable; each carries what the
+transcript turned out to be). Highlights:
+- LBNinja7 MId00Jg51mo is an EASE-OF-PLAY ranking, not strength — "how easy I think each
+  healer is". It is a lead for playstyle.complexity, which is guide-sourced, not a take.
+- AutomaticJak mzjGn70Hf20 restates the same Aug-15 read already distilled from c_5u7Jpy-Uo
+  the SAME DAY, and additionally reads Zorthas' and Archon's tier lists aloud. Skipped to
+  avoid double-counting one creator's single-day opinion across two videos.
+- Whispyr b3kZyBt660U is a gear/hero-talent guide (Deathstalker vs Fatebound, trinkets) —
+  the standing example in SKILL.md of an item-level claim that must not become a take.
+- All three Supatease uploads are PvP-framed despite PvE-sounding titles ("should you main
+  for PvP", shuffle, conquest, BG Blitz). Confirmed by transcript, not by title.
+- Tactyks ZS1GMWVLegs firewalled by construction (M+ video; he authors the Method M+ list).
+- Sha bqVHzvKJCuA — the video SKILL.md flags as having been queued while still live and
+  burning repeat API requests. Now an ended VOD; fetched locally and RESOLVED.
+- 10 sub-minute Shorts retired to seen[] (duration is a fact that cannot change). The two
+  upcoming premieres (baqjtPWid-M, U_bAsRSY5Y4) were left UNSEEN — no captions can exist yet.
+
+**Trap hit and fixed, worth remembering.** The first write used `patchContext: "12.1 /
+Season 2 — ..."`. `expertRead` era-gates on the LITERAL `PHASES.ptr.marker` ("12.1 PTR"),
+so all 13 new takes were silently excluded while the 18 they superseded were not —
+i.e. the run would have REMOVED coverage. `test/claude-md.test.mjs` caught it precisely
+(3 specs newly without a raid take). Rewritten to "12.1 PTR — ...". metaNotes are NOT
+era-gated, only bracket-scoped, so those were correct as written.
+
+**Scope note for a human:** Bicepspump covers FROST DK in depth in Y9Jlp2E04No (he reads it
+as the stronger of the two and a potential M+ meta spec, with dual-wield now mandatory), but
+his registry entry is scoped Death Knight [Unholy], so nothing was attributed. Preheat
+likewise published a Devastation Evoker guide while registered for Mage only. Both are
+scope-widening candidates — flagged, not silently overridden.
+
 ## 2026-08-17 (nightly)
 
 **Discovery clean, distillation impossible for a different reason than the last four nights.**

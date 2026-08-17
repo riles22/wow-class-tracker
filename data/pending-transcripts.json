@@ -1,70 +1,6 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
-  "videos": [
-    {
-      "id": "d99gGdPLxFI",
-      "creator": "Shadarek",
-      "title": "Devourer Demon Hunter nerfs were much smaller than expected",
-      "published": "2026-08-17",
-      "queuedAt": "2026-08-17"
-    },
-    {
-      "id": "byBgZmZlzxI",
-      "creator": "VooDooSaurus",
-      "title": "Devourer Got Some BIG Nerfs! What Does It All Mean And What's Changing?",
-      "published": "2026-08-17",
-      "queuedAt": "2026-08-17"
-    },
-    {
-      "id": "QOmfIifvkgw",
-      "creator": "Jedith",
-      "title": "Devourer Demon Hunter is STILL KING of the DPS!",
-      "published": "2026-08-17",
-      "queuedAt": "2026-08-17"
-    },
-    {
-      "id": "yUVywQqHtVs",
-      "creator": "NeekapHere",
-      "title": "Is Retribution Paladin COOKED? | WoW Midnight 12.1",
-      "published": "2026-08-17",
-      "queuedAt": "2026-08-17"
-    },
-    {
-      "id": "KktdoK1OZVY",
-      "creator": "izen (Izenhart)",
-      "title": "DPS, Tanks & Healers Meta in Season 2 | Official™ Final™ Definitive™ Season 2 Mythic+ Tier List",
-      "published": "2026-08-16",
-      "queuedAt": "2026-08-17"
-    },
-    {
-      "id": "MId00Jg51mo",
-      "creator": "LBNinja7",
-      "title": "EASIEST Healer in Season 2 of Midnight | Each Healer RANKED",
-      "published": "2026-08-16",
-      "queuedAt": "2026-08-17"
-    },
-    {
-      "id": "mzjGn70Hf20",
-      "creator": "AutomaticJak",
-      "title": "Updating Tier Lists then M0s!  | UI in description!",
-      "published": "2026-08-15",
-      "queuedAt": "2026-08-17"
-    },
-    {
-      "id": "Y9Jlp2E04No",
-      "creator": "Bicepspump",
-      "title": "12.1 DK DPS Overview (Dual-Wield is Back!)",
-      "published": "2026-08-16",
-      "queuedAt": "2026-08-17"
-    },
-    {
-      "id": "b3kZyBt660U",
-      "creator": "Whispyr",
-      "title": "Everything Assassination in Season 2",
-      "published": "2026-08-15",
-      "queuedAt": "2026-08-17"
-    }
-  ],
+  "videos": [],
   "skipped": [
     {
       "id": "02rLfzEKLq4",
@@ -2396,6 +2332,195 @@
       "title": "12.1 Rogue Patch Notes - Tuning and Tier sets!",
       "reason": "2026-07-15 read-through of the initial Rogue 12.1 notes; superseded by the 08-06 launch notes and the 08-18 tuning pass.",
       "verifiedAt": "2026-08-15"
+    },
+    {
+      "id": "MId00Jg51mo",
+      "creator": "LBNinja7",
+      "title": "EASIEST Healer in Season 2 of Midnight | Each Healer RANKED",
+      "reason": "Transcript verified: this is an EASE-OF-PLAY ranking, not a spec-strength read — he states outright it is \"my final tier list of how I think each healer is easy when you compare them to the others\". The substantive mentions (Spinning Crane Kick, abundance) explain difficulty changes, not power. Useful only as a lead for playstyle.complexity, which is guide-sourced, not creator-take material.",
+      "verifiedAt": "2026-08-17"
+    },
+    {
+      "id": "mzjGn70Hf20",
+      "creator": "AutomaticJak",
+      "title": "Updating Tier Lists then M0s!  | UI in description!",
+      "reason": "Transcript verified: a live stream restating the same August-15 healer tuning-pass read already distilled from his c_5u7Jpy-Uo the same day (14 live takes), so distilling it again would double-count one creator's single-day opinion across two videos. It also contains extended read-alouds of Zorthas' tier list and of Archon's, which are external/registered sources and firewalled from the take lane.",
+      "verifiedAt": "2026-08-17"
+    },
+    {
+      "id": "b3kZyBt660U",
+      "creator": "Whispyr",
+      "title": "Everything Assassination in Season 2",
+      "reason": "Transcript verified: a build, gear, trinket and embellishment guide. Its comparative claims are hero-talent and item-level (Deathstalker vs Fatebound, trinket and potion tuning), not spec-versus-spec, and the skill already records this creator as the standing example of an item-level claim that must not become a take.",
+      "verifiedAt": "2026-08-17"
+    },
+    {
+      "id": "XD8_m1HjkQ0",
+      "creator": "Shadarek",
+      "title": "Devourer Demon Hunter Trinket Tierlist | Midnight Season 2",
+      "reason": "Transcript verified: a TRINKET tier list. Every letter grade is an item rating, not a spec-strength read.",
+      "verifiedAt": "2026-08-17"
+    },
+    {
+      "id": "yY-Kd9oYgCc",
+      "creator": "Shadarek",
+      "title": "Havoc DH Trinket Tierlist | Midnight Season 2",
+      "reason": "Transcript verified: a TRINKET tier list; letter grades rate items, not the spec.",
+      "verifiedAt": "2026-08-17"
+    },
+    {
+      "id": "dhgljh17c5o",
+      "creator": "Tettles",
+      "title": "Balance Druid Midnight Season 2 Mythic+ Guide",
+      "reason": "Transcript verified: a fundamentals and build guide. The only cross-content claim is that the Mythic+ and raid builds converge on Alune's Chosen — a build observation, not a strength read.",
+      "verifiedAt": "2026-08-17"
+    },
+    {
+      "id": "Hg3hRswEPUM",
+      "creator": "Megasett",
+      "title": "Mistweaver APEX BUILD Mythic+ Guide • Midnight Season 2",
+      "reason": "Transcript verified: a build guide with no comparative spec-strength language.",
+      "verifiedAt": "2026-08-17"
+    },
+    {
+      "id": "QcanT1VvBc0",
+      "creator": "Megasett",
+      "title": "Mistweaver MASTERY BUILD Mythic+ Guide • Midnight Season 2",
+      "reason": "Transcript verified: a build guide with no comparative spec-strength language.",
+      "verifiedAt": "2026-08-17"
+    },
+    {
+      "id": "U-HgSA_XheQ",
+      "creator": "Megasett",
+      "title": "Mini Mistweaver Guide",
+      "reason": "Transcript verified: a 72-second clip naming Chi-Ji as the strongest cooldown — an ability comparison inside the spec, not a spec-strength read.",
+      "verifiedAt": "2026-08-17"
+    },
+    {
+      "id": "ZvNB6c0QPL4",
+      "creator": "Clandon",
+      "title": "Discipline Priest Midnight Season 2 Guide",
+      "reason": "Transcript verified: a rotation, tier-set and stat guide; its \"tier\" hits are the raid tier and tier set, not tier placement.",
+      "verifiedAt": "2026-08-17"
+    },
+    {
+      "id": "ktdXrfmJYZg",
+      "creator": "AutomaticJak",
+      "title": "Venomous Abyss Raid Boss Guide Midnight Season 2",
+      "reason": "Transcript verified: a boss-encounter guide with zero comparative spec-strength language.",
+      "verifiedAt": "2026-08-17"
+    },
+    {
+      "id": "oI9PpmoVO8Q",
+      "creator": "Preheat",
+      "title": "12.1 Arcane Mage Guide HOTFIX - Answering Questions",
+      "reason": "Transcript verified: a hotfix Q&A on rotation and talent detail; no comparative spec-strength read.",
+      "verifiedAt": "2026-08-17"
+    },
+    {
+      "id": "_3BZbbvl_x8",
+      "creator": "Preheat",
+      "title": "12.1 Devastation Evoker Guide",
+      "reason": "Transcript verified: a rotation and talent guide, and additionally OUT OF SCOPE — Preheat is registered for Mage only, so an Evoker guide cannot be attributed to him without a human widening his scope.",
+      "verifiedAt": "2026-08-17"
+    },
+    {
+      "id": "VYLdSAJEa9Y",
+      "creator": "Kesslive",
+      "title": "Midnight Season 2 Devastation Evoker Guide",
+      "reason": "Transcript verified: a rotation, talent, gearing and crafting guide with no comparative spec-strength read.",
+      "verifiedAt": "2026-08-17"
+    },
+    {
+      "id": "ku_fCFd0a8g",
+      "creator": "Kesslive",
+      "title": "Midnight Season 2 Augmentation Evoker Guide",
+      "reason": "Transcript verified: a rotation and gearing guide; its \"underperforming\" hit refers to a buff target inside the group, not to the spec.",
+      "verifiedAt": "2026-08-17"
+    },
+    {
+      "id": "6QEok5FCd9M",
+      "creator": "Baze",
+      "title": "12.1 Midnight Fury Warrior Guide! Talents, Trinkets, Rotations and More!",
+      "reason": "Transcript verified: a talent, trinket and rotation guide; the \"weakest two\" hit refers to secondary stats.",
+      "verifiedAt": "2026-08-17"
+    },
+    {
+      "id": "5Q2y5bzzVE8",
+      "creator": "Zorthas",
+      "title": "Enhancement Shaman Guide for Midnight Season 2",
+      "reason": "Transcript verified: a spec build guide. Zorthas is a generalCreators entry, so it could only feed metaNotes, and a build guide carries no season/meta outlook to distil.",
+      "verifiedAt": "2026-08-17"
+    },
+    {
+      "id": "ZS1GMWVLegs",
+      "creator": "Tactyks",
+      "title": "EVERYTHING that will KILL TANKS in Midnight Season 2 Mythic+",
+      "reason": "Transcript verified: a Mythic+ tank survival and mechanics guide. Firewalled regardless of content — Tactyks authors the Method Mythic+ list, so all his entries carry raid scope only and an M+ video cannot become a take.",
+      "verifiedAt": "2026-08-17"
+    },
+    {
+      "id": "8b-nyzqIaQ8",
+      "creator": "Dratnos",
+      "title": "Race to World First Viewer's Guide: 12.1 Venomous Abyss Edition",
+      "reason": "Transcript verified: race logistics, schedule and format commentary; its \"tier\" hits all mean the raid tier. No spec-strength segment.",
+      "verifiedAt": "2026-08-17"
+    },
+    {
+      "id": "QevyPqgpoEs",
+      "creator": "Harrek",
+      "title": "12.1 Dummy Dome Healer Testing - All Restoration Shaman Pulls",
+      "reason": "Transcript verified: raw Dummy Dome pull footage with no comparative read across healers.",
+      "verifiedAt": "2026-08-17"
+    },
+    {
+      "id": "l6KzJBK6vrs",
+      "creator": "NeekapHere",
+      "title": "I Spent WAY Too Much Time in WoW's New Zone The Coiled Isle 12.1",
+      "reason": "Transcript verified: zone and content exploration; zero strength-language hits across the whole transcript.",
+      "verifiedAt": "2026-08-17"
+    },
+    {
+      "id": "u_I6sc5QxiQ",
+      "creator": "Supatease",
+      "title": "12.1 My Main and How to Pick One",
+      "reason": "Transcript verified: PvP-framed — he asks outright \"should you main for PvP in patch 12.1\" and reasons from solo shuffle. PvP is out of scope and a PvP read must never vote in PvE.",
+      "verifiedAt": "2026-08-17"
+    },
+    {
+      "id": "Pa_PO4l-En0",
+      "creator": "Supatease",
+      "title": "SCOUTING BEST CLASSES 12.1",
+      "reason": "Transcript verified: PvP-framed throughout (shuffle queues, conquest, PvP-specific tuning). Out of scope despite a PvE-sounding title.",
+      "verifiedAt": "2026-08-17"
+    },
+    {
+      "id": "WOCle5lm6Dk",
+      "creator": "Supatease",
+      "title": "Finding The Best Class 12.1",
+      "reason": "Transcript verified: PvP-framed throughout (shuffle, Battleground Blitz). Out of scope despite a PvE-sounding title.",
+      "verifiedAt": "2026-08-17"
+    },
+    {
+      "id": "x27SdcsuiMU",
+      "creator": "Maximum",
+      "title": "live from AWTF test stream",
+      "reason": "Transcript verified: a raid-test stream of pull commentary and logistics; no per-spec season or meta outlook to distil into the metaNotes lane.",
+      "verifiedAt": "2026-08-17"
+    },
+    {
+      "id": "bqVHzvKJCuA",
+      "creator": "Sha",
+      "title": "S2 Prep short stream",
+      "reason": "Transcript verified: a season-prep and gearing stream with no comparative spec-strength read. (Previously flagged in the skill as having been queued while still live and spending repeat API requests — now an ended VOD, fetched locally and resolved.)",
+      "verifiedAt": "2026-08-17"
+    },
+    {
+      "id": "mMPBLggVX3E",
+      "creator": "Kalamazi",
+      "title": "Main/Alt Gearing and Prep",
+      "reason": "Transcript verified: a gearing and preparation stream. Its Warlock strength commentary is superseded two days later by his 08-17 \"What Spec To Play & What To Run Week 1\", which was distilled instead, so distilling both would double-count the same creator.",
+      "verifiedAt": "2026-08-17"
     }
   ],
   "seen": [
@@ -2909,7 +3034,17 @@
     "zahcyy0SQN8",
     "zfqABvSZFcY",
     "znM25wOIcAI",
-    "zzHKjkTYv-w"
+    "zzHKjkTYv-w",
+    "pABdqvL-VXM",
+    "XYde5-WTIs0",
+    "RGONlrsJlas",
+    "3Cu6wdbnOYs",
+    "EmQpi2j-FWM",
+    "iF9-2dpJdjo",
+    "Tsy8Wr09VeA",
+    "HKKQ9VrBR0s",
+    "Nk8WpSLYCVo",
+    "f0DnTRIO3pw"
   ],
   "seenNote": "Video ids already considered by an earlier run that carry no richer record — migrated 2026-08-08 from backticked ids in watch-creators/log.md when the seen-set stopped being derived from prose. Distilled videos are cited by their take's url, transcript-verified rejects live in skipped[], and queued ones in videos[]; this lane is only for the remainder. Append here when a run dismisses a video at DISCOVERY (pre-cycle date, already-processed) without fetching a transcript."
 }

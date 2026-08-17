@@ -691,7 +691,8 @@
       "patchContext": "12.0.7 live",
       "sentiment": "nerf",
       "claim": "The recent nerfs amount to roughly a 4-5% damage decrease for Unholy, which he considers fine: the spec was S-tier in Mythic+ and has been brought in line rather than knocked out of the meta.",
-      "url": "https://youtu.be/ChaOm-iBaqI?t=37"
+      "url": "https://youtu.be/ChaOm-iBaqI?t=37",
+      "superseded": true
     },
     {
       "class": "Death Knight",
@@ -701,7 +702,8 @@
       "patchContext": "12.0.7 live",
       "sentiment": "buff",
       "claim": "He calls Festering Scythe becoming a self-buff one of the best changes the spec has received, since it removes the multi-GCD target-swap setup and lets you press the weak-feeling Festering Strike far less often.",
-      "url": "https://youtu.be/ChaOm-iBaqI?t=376"
+      "url": "https://youtu.be/ChaOm-iBaqI?t=376",
+      "superseded": true
     },
     {
       "class": "Death Knight",
@@ -711,7 +713,8 @@
       "patchContext": "12.0.7 live",
       "sentiment": "buff",
       "claim": "The new Cycle of Death talent makes Defile-based play much smoother in his view: Defile ticks refund Putrefy cooldown, so big pulls chain extra Putrefies and Magus summons, which is where most of Unholy's AoE damage comes from.",
-      "url": "https://youtu.be/ChaOm-iBaqI?t=421"
+      "url": "https://youtu.be/ChaOm-iBaqI?t=421",
+      "superseded": true
     },
     {
       "class": "Hunter",
@@ -2299,7 +2302,8 @@
       "sentiment": "nerf",
       "patchContext": "12.1 PTR — Season 2 M+ build dummy testing",
       "claim": "Kalamazi measures Affliction's M+-build single target at ~110k and calls the sustain outside cooldowns \"abysmal … diabolically bad\", pinning it on Unstable Affliction being undertuned — he wants roughly a 30% UA buff, which would also lift the tier set since it scales off baseline UA. AoE holds up at ~380k on Seed spam, and he credits the apex-talent and Dark Harvest bug fixes for a small AoE gain, but the Nocturnal Yield removal means Nightfall procs no longer give free instant Seeds, so shard economy and Agony upkeep now genuinely constrain the rotation. He ranks it second of the three for keys and says a UA buff is all it needs to be the pick.",
-      "url": "https://youtu.be/ZOVnfoXjuoc?t=229"
+      "url": "https://youtu.be/ZOVnfoXjuoc?t=229",
+      "superseded": true
     },
     {
       "class": "Warlock",
@@ -2873,7 +2877,8 @@
       "sentiment": "buff",
       "patchContext": "12.1 PTR (2026-07-31 build) — Season 2 M+ outlook",
       "claim": "Playing keys after the tuning pass, Kalamazi puts all three Warlock specs close together in Mythic+ but leans Destruction as the pick, since its single target should stay somewhat ahead even in keys and it is \"really impressive in mass AoE\" with the Diabolist package. He is explicit that the gap is small and that where Warlock lands depends on the several specs nerfed in the same build, so he will not commit harder than \"it could lowkey be Destro\".",
-      "url": "https://youtu.be/Hn9upmp8ywc?t=8857"
+      "url": "https://youtu.be/Hn9upmp8ywc?t=8857",
+      "superseded": true
     },
     {
       "class": "Paladin",
@@ -3566,7 +3571,8 @@
       "bracket": "raid",
       "patchContext": "12.1 PTR — Warlock single-target sims (Warlock Discord APLs), raid lens",
       "url": "https://youtu.be/x1iLDzjKVvI?t=833",
-      "claim": "Destruction is the highest-simming Warlock spec in single target — roughly 222k on Hellcaller against 215k on Diabolist — and he expects it to be the most-played Warlock spec in the raid this tier. He is careful that 222k is not a high number in absolute terms (he points to specs simming 250-270k), so the case for Destro is its toolkit rather than its raw sim: he calls Warlock one of the best spread-cleave classes in the game and reads five of the seven tested Venomous Abyss bosses as Destro fights — four good Havoc/Mayhem cleave fights plus Sszorak, where Destro is the best Warlock single-target option. Soul Fire's 45% buff last week locks in the build; the Destruction capstones went untouched this patch and he still calls that pathing a mess."
+      "claim": "Destruction is the highest-simming Warlock spec in single target — roughly 222k on Hellcaller against 215k on Diabolist — and he expects it to be the most-played Warlock spec in the raid this tier. He is careful that 222k is not a high number in absolute terms (he points to specs simming 250-270k), so the case for Destro is its toolkit rather than its raw sim: he calls Warlock one of the best spread-cleave classes in the game and reads five of the seven tested Venomous Abyss bosses as Destro fights — four good Havoc/Mayhem cleave fights plus Sszorak, where Destro is the best Warlock single-target option. Soul Fire's 45% buff last week locks in the build; the Destruction capstones went untouched this patch and he still calls that pathing a mess.",
+      "superseded": true
     },
     {
       "class": "Warlock",
@@ -3577,7 +3583,8 @@
       "bracket": "raid",
       "patchContext": "12.1 PTR — Warlock single-target sims (Warlock Discord APLs), raid lens",
       "url": "https://youtu.be/x1iLDzjKVvI?t=316",
-      "claim": "After the ~20% Diabolist pet-damage nerf and the following Shadow Bolt / Demon Bolt / Gloomhound buffs, Soul Harvester now sims about 7k above Diabolist in pure single target (~211k). He still expects Diabolist to be the spec played in the raid: he ran a five-target one-minute comparison and Diabolist came out far ahead (765k vs 548k) on an Implosion / Hell back build, and he reads Venomous Abyss as a cleave meat grinder where the single-target edge rarely pays. His overall class-level read is that Demonology has been 'exceptionally mid' this cycle and that other classes power-crept past Warlock."
+      "claim": "After the ~20% Diabolist pet-damage nerf and the following Shadow Bolt / Demon Bolt / Gloomhound buffs, Soul Harvester now sims about 7k above Diabolist in pure single target (~211k). He still expects Diabolist to be the spec played in the raid: he ran a five-target one-minute comparison and Diabolist came out far ahead (765k vs 548k) on an Implosion / Hell back build, and he reads Venomous Abyss as a cleave meat grinder where the single-target edge rarely pays. His overall class-level read is that Demonology has been 'exceptionally mid' this cycle and that other classes power-crept past Warlock.",
+      "superseded": true
     },
     {
       "class": "Warlock",
@@ -3588,7 +3595,8 @@
       "bracket": "raid",
       "patchContext": "12.1 PTR — Warlock single-target sims (Warlock Discord APLs), raid lens",
       "url": "https://youtu.be/x1iLDzjKVvI?t=493",
-      "claim": "His bluntest read of the three: Affliction 'is not good'. Last week's 4% Haunt modifier buff helped a little and he agrees Haunt is the right lever (it scales every damage source, not just Unstable Affliction), but it was nowhere near enough — Soul Harvester sims ~205-206k and Hellcaller ~200k, which he calls a disaster when other specs are at 250k+ and some as high as 270k, a 20-30% gap. He wants a Hellcaller fix along the lines of the Flamevine/Malevolence intervention Destro got days before last tier's raid opened. Talent structure is a second complaint: the tree forces a pure single-target or pure AoE build with no middle, and Ashen Curse being played on both builds papers over that rather than fixing it."
+      "claim": "His bluntest read of the three: Affliction 'is not good'. Last week's 4% Haunt modifier buff helped a little and he agrees Haunt is the right lever (it scales every damage source, not just Unstable Affliction), but it was nowhere near enough — Soul Harvester sims ~205-206k and Hellcaller ~200k, which he calls a disaster when other specs are at 250k+ and some as high as 270k, a 20-30% gap. He wants a Hellcaller fix along the lines of the Flamevine/Malevolence intervention Destro got days before last tier's raid opened. Talent structure is a second complaint: the tree forces a pure single-target or pure AoE build with no middle, and Ashen Curse being played on both builds papers over that rather than fixing it.",
+      "superseded": true
     },
     {
       "class": "Demon Hunter",
@@ -4241,7 +4249,7 @@
       "claim": "He drops Retribution to B and reads it as significantly worse than last season, naming a few bosses that make it bad to play. His comparative point is that it competes for the same non-buff-carrying damage slot as the Rogue specs, and he considers Rogue far better this season."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Warlock",
       "spec": "Demonology",
       "creator": "Kalamazi",
@@ -4476,7 +4484,7 @@
       "bracket": "both",
       "patchContext": "12.1 PTR — his published Season 2 Warlock guide site (hero-talent picks per bracket + Venomous Abyss per-boss spec recommendations)",
       "url": "https://www.kalamazi.gg/guides/destruction#talents",
-      "superseded": false,
+      "superseded": true,
       "claim": "Build guidance rather than a power verdict, and current as of the same day. For raid he reports a mix of Hellcaller and Diabolist actually being played; for M+ he calls Hellcaller the better option, framing the choice as Hellcaller’s tremendous AoE against Diabolist’s strong priority damage with solid passive AoE. In his Season 2 Venomous Abyss guide Destruction is the recommended spec on five of the seven bosses he has called — the Entombed Sentinels, the Lost Explorers, Sszorak, the Twin Fangs and the Coiled Altar — with Ula’tek still TBD. Worth reading as an intra-Warlock recommendation about which of the three to bring per fight, not as a claim about Destruction’s standing against other classes."
     },
     {
@@ -4488,7 +4496,7 @@
       "bracket": "mplus",
       "patchContext": "12.1 PTR — his published Season 2 Warlock guide site, M+ section",
       "url": "https://www.kalamazi.gg/guides/mythic-plus#demonology",
-      "superseded": false,
+      "superseded": true,
       "claim": "The one genuine comparative on the site, and it is scoped to M+: he calls Demonology the most consistent of the three Warlock specs in keys, built on a strong cleave profile with Demonic Tyrant on a short one-minute cooldown, and says that while it may not be as strong at the high end it is arguably the better pick in lower and mid-tier keys. Diabolist is his hero talent for M+. This is a relative read about which Warlock to bring to a key and does not revise his separate, blunter assessment that the spec is undertuned."
     },
     {
@@ -4500,7 +4508,7 @@
       "bracket": "both",
       "patchContext": "12.1 PTR — his published Season 2 Warlock guide site (hero-talent picks per bracket + Venomous Abyss per-boss spec recommendations)",
       "url": "https://www.kalamazi.gg/guides/mythic-plus#affliction",
-      "superseded": false,
+      "superseded": true,
       "claim": "Build guidance, with no power claim attached. Soul Harvester is his pick in both raid and M+, and he explains the M+ trade-off as Soul Harvester’s more upfront burst and stronger single target against Hellcaller’s strong AoE through Wither and Malevolence. In the Season 2 Venomous Abyss guide Affliction shares the recommendation with Demonology on Nek’zali the Soulcoiler and Vashnik the Malignant. Note this sits alongside, and does not revise, his far blunter sims-based reads of the spec’s raw power."
     },
     {
@@ -4564,7 +4572,7 @@
       "claim": "He describes 12.1 as another soft rework for Marksmanship, centred on Explosive Shot: it now detonates every second it is on the target rather than once at the end, with two new talents beneath it — one allowing a second cast, which he calls really strong, and one adding a second of duration and therefore another explosion. Bullet Storm now buffs the next Aimed Shot after Rapid Fire instead of extending a duration, Wind's Quiver is redesigned around Rapid Fire, Aspect of the Hydra no longer affects Arcane Shot, and Double Tap is gone entirely, which he reads as too hard to balance. He rates the two-piece pretty good (a further second on Explosive Shot plus 5% more damage) and the four-piece nice, with flat Aimed and Rapid Fire damage and Explosive Shot reducing both cooldowns. Against that he calls the relocation of Tenacious and Cunning bad for the spec — previously taken automatically on the way to True Shot, it is now a real choice between losing damage and being too squishy, which he characterises as a loss either way. On hero trees he judges Dark Ranger too far behind numerically to touch: the talent and tier-set changes push you toward Sentinel, which is also tanky enough that Dark Ranger's defensives no longer justify it, though he notes the Black Arrow proc is now telegraphed by a buff rather than random, which he rates a nice quality-of-life gain."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Demon Hunter",
       "spec": "Devourer",
       "creator": "VooDooSaurus",
@@ -4720,7 +4728,7 @@
       "claim": "Asked directly by a viewer whether Fury is bad next season, he says he does not think it is bad and that people are underestimating it precisely because Arms is totally in the spotlight. He treats the perception gap as the story rather than the numbers, joking that it is better not to talk Fury up — if the community keeps believing it is weak, it is more likely to be buffed, and he says he would not mind ending up in a Fury season either. He offers no throughput figures or testing to support the read, so this is a contrarian perception call from a Warrior main rather than a measured comparison, recorded as neutral for that reason."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Rogue",
       "spec": "Outlaw",
       "creator": "Dalaran Gaming",
@@ -4744,7 +4752,7 @@
       "claim": "A two-sided read. He says long-standing Subtlety bugs went unfixed in Season 1 and were compensated with buffs, whereas this time the spec was nerfed instead — and that it is now locked into the Deathstalker hero tree, which he thinks plays poorly in M+ and leaves the rotation unchanged and boring. Against that he still expects it to be good on paper and notes rogues carried few structural changes from Season 1, so he does not call it weak, only unappealing and worse-treated than before."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Rogue",
       "spec": "Assassination",
       "creator": "Dalaran Gaming",
@@ -4804,7 +4812,7 @@
       "claim": "His first Guardian read under the widened scope, from a guide rather than a tier list — a changes assessment, not a placement. He reads the patch's blanket percentage tuning as net neutral (compensation for the global 25% health increase) and locates the real movement in three places. The apex talent's full rework from burst toward sustain is a redesign he says he is a fan of: its passives add 6% mastery and Mangle damage, and its final rank resets Thrash and Mangle, amps both by 30% while a spirit is active, and refunds rage — so Mangle is, in his words, definitely back in the conversation after the never-hitting-Mangle end of Season 1. Against that sits the one significant nerf he flags: Lunation becomes a flat 20-second cooldown reduction on Lunar Beam (40 seconds flat, versus sub-30 before), a meaningful uptime loss he calls a pain point but not the end of the world, partly shored up by the tier set's four-piece extending Incarnation toward 35 seconds. For raid specifically he still runs Alune's Chosen — with an explicit on-camera plea for Blizzard to buff Druid of the Claw's damage, which he says otherwise feels bad to play — describes the raid build as a damage/defense hybrid little changed from Season 1, keeps Maul in the raid rotation (unlike keys), and calls out the Ula'tek weapon, a two-socket crit neck and, oddly, the Feral set-bonus trinket off the guillotine boss as standout raid loot, the last being Guardian's best-in-slot damage trinket even though Guardian cannot complete its set. He also notes Maul, Raze and Ravage remain undertuned after the old apex's compensation nerfs and hopes that gets addressed."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Paladin",
       "spec": "Retribution",
       "creator": "NeekapHere",
@@ -4921,7 +4929,7 @@
       "patchContext": "12.1 PTR - reaction to the Friday August 14 'Class Tuning Incoming - August 18' post, with preliminary sim overrides (supersedes his 08-11 refusal to forecast)",
       "url": "https://youtu.be/GedxU3Q37a4?t=477",
       "claim": "He reads the August 18 tuning as a clear net nerf to Devourer while stressing the magnitude is still a question mark. The tier set is the centre of it: the 4-piece now grants 2 soul fragments instead of 8 and buffs Reap damage 10% instead of 20%, which he works through as a drop from roughly 1.6 souls per Reap cast to 0.4 - a fifth as good at generating souls as it was, against a baseline Devour value of 2. Reap, Call and Eradicate take a 12% cut, Eradicate's AoE is slightly raised, and all ability damage is buffed 14%, which he assumes excludes the three nerfed abilities. His preliminary override sims, explicitly before the APL is reworked, put Void Scarred dungeon at 239.5k from 255k and Annihilator dungeon at 222k from 243k (just under a 10% cut); on AoE, Void Scarred falls about 3% to 656k and Annihilator about 5% to 633k, leaving Annihilator around 3% behind where the two were previously close. He is careful that these numbers will recover somewhat once the rotation is rebuilt, since the build can no longer afford to press Call and Reap freely and Collapsing Star was buffed drastically. His guess, offered with an explicit admission he could be wrong, is that the changes end up better for Annihilator than Void Scarred but need more extensive APL work to show it. He closes by saying he no longer knows what he will play into the patch and is holding off until sims and live performance settle.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Mage",
@@ -5053,7 +5061,7 @@
       "patchContext": "12.1 PTR — his review of the August 18 launch tuning pass, the balance the raid opens on (supersedes his 08-10 Annihilator guide read)",
       "url": "https://youtu.be/oomrLdyB8YA?t=36",
       "claim": "He reads the August 18 pass as a deliberate transfer of power out of the Venomous Abyss four-piece and into baseline abilities. Quoting the developer note, the four-set now generates two soul fragments instead of eight and increases Reap damage by 10% instead of 20%, which he calls a pretty large reduction: the old eight-fragment proc combined with the two from the consume that triggered it delivered Moment of Craving immediately, so fishing for the proc drops well down the priority list. Returning to the video later with firmer numbers, he reports the pre-nerf zero-to-four-piece jump was worth an extra 30-40% damage, which he calls unheard of for a tier bonus and the reason it was cut. Compensating, all ability damage rises 14% — he lists Consume, Devour, Void Ray, Collapsing Star and the melee abilities including Void Blade, The Hunt, Hungering Slash and Vengeful Retreat — while Reap, Call and Eradicate lose 12% single-target damage, Eradicate's AoE portion rising from 85% to 90% of base so AoE is largely protected. He accepts the logic, noting single-target Devourer was simming at or very near the top of the list, and is relieved the cut was 12% rather than something like 20%. Two build conclusions: 14% is nowhere near enough to make Collapsing Star worth pressing for Void's Guard, and the changes favour Void's Guard over Annihilator, so he expects to keep playing Void's Guard with only minor talent adjustments. He is explicit that sims and APLs are not settled and promises firmer guidance the following week.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Rogue",
@@ -5450,6 +5458,162 @@
       "url": "https://youtu.be/DMtMmUW5uRE?t=101",
       "claim": "He calls Preservation the dark horse of the tier and is explicitly relieved it was left untouched, giving a bracket-tension reason: he believes the spec is balanced on a knife edge between the two brackets, so a buff aimed at Mythic+ would break it in raid, while the raid-throughput nerf he had been expecting would have hurt it in Mythic+. On that basis he says he is happy it and the other unlisted healers are absent from the pass.",
       "superseded": false
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "creator": "Shadarek",
+      "date": "2026-08-17",
+      "sentiment": "mixed",
+      "bracket": "both",
+      "patchContext": "12.1 PTR — revised read on the August 18 Devourer tuning pass after a sim-side error was corrected (supersedes his 08-15 reaction)",
+      "url": "https://youtu.be/d99gGdPLxFI?t=375",
+      "claim": "He revises his own earlier reaction downward in severity: the widely circulated Devourer nerf figures came from sims run with a typo'd spell-power override (0.8 instead of 0.88), so Reap, Call and Eradicate looked 20% nerfed when the real figure is 12%. Corrected, he puts the single-target nerf near 0.5-1% for Void's Guard and about 5% for Annihilator rather than the 4.2% and 9% first reported. He stresses the in-game change never differed, only the simulation. The four-piece was still cut hard, from roughly 40% of damage to about 20-21% on Annihilator and 25% on Void's Guard, which he still calls a strong set. His overall read is that Devourer was in a good spot before and is now in a great one, still on the upper end of the raid, and he will recommend Annihilator over Void's Guard melee for both raid and Mythic+ on positioning grounds.",
+      "superseded": false
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "creator": "Jedith",
+      "date": "2026-08-17",
+      "sentiment": "mixed",
+      "bracket": "both",
+      "patchContext": "12.1 PTR — post-sim read on the August 18 Devourer tuning pass (supersedes his 08-15 pre-sim speculation)",
+      "url": "https://youtu.be/QOmfIifvkgw?t=21",
+      "claim": "With the sims settled he reads Devourer as coming out of the tuning pass in good shape and still in the upper ranks of all content, with Void's Guard on top. He treats the tier set as the real loss: the four-piece had been worth an extra 30-40% damage, which he concedes was unreasonable, and is now weak enough that the spec no longer plays around it at all, changing the AoE rotation so Reap and Call are dropped above one target to avoid starving Eradicate of soul fragments. He reads Annihilator as hit harder than Void's Guard because it leaned on Reap, leaving it severely behind on single target, though he puts the two within a few percent on AoE and calls Annihilator very much viable in Mythic+ for players who prefer the caster build. For raid he reads Void's Guard melee as the way to go.",
+      "superseded": false
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "creator": "VooDooSaurus",
+      "date": "2026-08-17",
+      "sentiment": "mixed",
+      "bracket": "both",
+      "patchContext": "12.1 PTR — post-sim read on the August 18 Devourer tuning pass, with APL rework (supersedes his 08-10 read)",
+      "url": "https://youtu.be/byBgZmZlzxI?t=826",
+      "claim": "He breaks the pass into its parts: all ability damage up 14%, Reap/Call/Eradicate down 12%, Eradicate's AoE portion restored from 85% to 90%, and the four-piece cut from +20% Reap damage and eight soul fragments to +10% and two. He reads the soul-fragment cut as the consequential one, because it stops Reap being soul-positive and so hits Annihilator, which benefited from the set about 8% more than Void's Guard, harder than Void's Guard. His measured figures are roughly a 9% single-target and 1% AoE nerf to Annihilator against 4% and 2% for Void's Guard, leaving Annihilator about 12% behind on single target. He calls the set still strong in raw value at about 12% but no longer something the spec plays around, and concludes Devourer is definitely nerfed but still in a great spot, with Void's Guard ahead in raid and the two close in Mythic+.",
+      "superseded": false
+    },
+    {
+      "class": "Paladin",
+      "spec": "Retribution",
+      "creator": "NeekapHere",
+      "date": "2026-08-17",
+      "sentiment": "nerf",
+      "bracket": "both",
+      "patchContext": "12.1 PTR — pre-raid-week assessment of Retribution (supersedes his 08-12 read)",
+      "url": "https://youtu.be/yUVywQqHtVs?t=324",
+      "claim": "He reads Retribution as in serious trouble going into the raid week and names three causes. The tier set is the first: the Divine Arbitrator proc solution has to be tuned for Divine Storm and Final Verdict at once, and the four-piece ends up ignored in most builds, contributing meaningfully only for Herald single target. The second is raw damage, which he places in roughly the bottom five DPS specs on the simulations he has seen, compounded by a 6% PvE aura damage reduction applied at the end of Season 1 whose purpose he says he does not understand. The third is holy power and proc generation outrunning the buttons available to spend it, which he says makes Radiant Glory effectively unplayable and is worst in Herald. He reads the position as worse in raid than in Mythic+, and expects buffs to arrive within a few weeks as they did the previous patch rather than at launch.",
+      "superseded": false
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "creator": "Bicepspump",
+      "date": "2026-08-16",
+      "sentiment": "mixed",
+      "bracket": "both",
+      "patchContext": "12.1 PTR — Death Knight DPS overview covering the Unholy changes (supersedes his 05-02 reads)",
+      "url": "https://youtu.be/Y9Jlp2E04No?t=215",
+      "claim": "He describes the Unholy changes as close to a mini-rework aimed at capping pet count: Army of the Dead no longer adds ghouls while active and instead orders the existing eight to attack, reanimation now summons a lich when ghouls are sacrificed, and Soul Reaper is decoupled from Putrify so it grants three lesser ghouls, which reorders the burst window to double Putrify into Soul Reaper. He reads the gameplay as largely unchanged and says he is happy with it, but is explicit that he does not expect Unholy to repeat Season 1, when it was meta: his read is that it will not do quite as well this season. He calls the tier set impact modest and passive, buffing what the magus and Lord of the Dread cast rather than changing play.",
+      "superseded": false
+    },
+    {
+      "class": "Warlock",
+      "spec": "Destruction",
+      "creator": "Kalamazi",
+      "date": "2026-08-17",
+      "sentiment": "buff",
+      "bracket": "raid",
+      "patchContext": "12.1 PTR — week-one Warlock raid outlook, fight by fight (supersedes his 08-05 raid and 08-10 both reads)",
+      "url": "https://youtu.be/9bQVdlUqeAM?t=301",
+      "claim": "Walking the Venomous Abyss fight list he assigns Destruction as the default Warlock spec on most bosses, naming Hellcaller Destruction as the highest single target on Zorax, Destruction with Twin Fangs where Mayhem and the improved Havoc fix apply, and Hellcaller Destruction again on Coiled Altar through its phase structure. He summarises the raid picture as Affliction and Destruction with a question mark for the third slot.",
+      "superseded": false
+    },
+    {
+      "class": "Warlock",
+      "spec": "Destruction",
+      "creator": "Kalamazi",
+      "date": "2026-08-17",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "12.1 PTR — week-one Mythic+ Warlock outlook (supersedes his 08-10 both read)",
+      "url": "https://youtu.be/9bQVdlUqeAM?t=329",
+      "claim": "He says the three Warlock specs are close enough in Mythic+ that players should play whichever they prefer, but that at the high end he reads Destruction as likely the best of them, on a Diabolist build, while flagging that the build may shift away from the minute-and-a-half infernal setup as speculative alternatives are tested.",
+      "superseded": false
+    },
+    {
+      "class": "Warlock",
+      "spec": "Affliction",
+      "creator": "Kalamazi",
+      "date": "2026-08-17",
+      "sentiment": "mixed",
+      "bracket": "raid",
+      "patchContext": "12.1 PTR — week-one Warlock raid outlook, fight by fight (supersedes his 07-27, 08-05 raid and 08-10 both reads)",
+      "url": "https://youtu.be/9bQVdlUqeAM?t=301",
+      "claim": "He keeps Affliction in his expected raid pairing alongside Destruction, but as the AoE-build option rather than a general pick, noting that on Vashnik the boss is exposed on its own often enough that an Affliction AoE build would lose to Demonology there.",
+      "superseded": false
+    },
+    {
+      "class": "Warlock",
+      "spec": "Affliction",
+      "creator": "Kalamazi",
+      "date": "2026-08-17",
+      "sentiment": "neutral",
+      "bracket": "mplus",
+      "patchContext": "12.1 PTR — week-one Mythic+ Warlock outlook (supersedes his 08-10 both read)",
+      "url": "https://youtu.be/9bQVdlUqeAM?t=322",
+      "claim": "Asked directly what to play in week one of Mythic+, he answers that the three Warlock specs are about the same for the most part, each excelling and falling short in different places, and that players can play whatever they want — placing Affliction at parity rather than ahead or behind, with only Destruction singled out at the high end.",
+      "superseded": false
+    },
+    {
+      "class": "Warlock",
+      "spec": "Demonology",
+      "creator": "Kalamazi",
+      "date": "2026-08-17",
+      "sentiment": "mixed",
+      "bracket": "raid",
+      "patchContext": "12.1 PTR — week-one Warlock raid outlook, fight by fight (supersedes his 08-05 raid and 08-08 both reads)",
+      "url": "https://youtu.be/9bQVdlUqeAM?t=213",
+      "claim": "He reads Vashnik as the one plausible Demonology fight of the tier, on the strength of its stacked-cleave add pattern, while stating plainly that Demonology single target is not great. Elsewhere he prefers Destruction stacked cleave over Demonology, so his read is a spec with one likely home in the raid rather than a general raid pick.",
+      "superseded": false
+    },
+    {
+      "class": "Warlock",
+      "spec": "Demonology",
+      "creator": "Kalamazi",
+      "date": "2026-08-17",
+      "sentiment": "neutral",
+      "bracket": "mplus",
+      "patchContext": "12.1 PTR — week-one Mythic+ Warlock outlook (supersedes his 08-10 mplus read)",
+      "url": "https://youtu.be/9bQVdlUqeAM?t=322",
+      "claim": "In the same week-one Mythic+ answer he places Demonology level with the other two Warlock specs — all about the same for the most part, each with different strengths and weaknesses — with only Destruction called out as the high-end pick.",
+      "superseded": false
+    },
+    {
+      "class": "Rogue",
+      "spec": "Outlaw",
+      "creator": "Dalaran Gaming",
+      "date": "2026-08-16",
+      "sentiment": "buff",
+      "bracket": "both",
+      "patchContext": "12.1 PTR — Outlaw guide framing, after the first wave of class tuning (supersedes his 08-12 read)",
+      "url": "https://youtu.be/rKjGaAE1k3w?t=14",
+      "claim": "He opens by reading Rogue as possibly the strongest it has been in a long time and Outlaw in particular as potentially blowing everyone else out of the water in Season 2, in dungeons primarily but with a real chance of performing in raid as well. He grounds it in high player rankings towards the end of PTR testing and in the first wave of class tuning leaving the spec untouched. He notes separately that many published tier lists have placed Outlaw in S tier for dungeons, but explicitly tells viewers not to put their faith in tier lists and to take them with a grain of salt, citing their convergence as corroboration rather than as his basis.",
+      "superseded": false
+    },
+    {
+      "class": "Rogue",
+      "spec": "Assassination",
+      "creator": "Dalaran Gaming",
+      "date": "2026-08-15",
+      "sentiment": "buff",
+      "bracket": "both",
+      "patchContext": "12.1 PTR — Assassination guide framing (supersedes his 08-12 read)",
+      "url": "https://youtu.be/lFJw787T2Do?t=15",
+      "claim": "He reads Assassination as likely to be competitive this season, hedged throughout — his framing is that it \"might actually be kind of competitive\". The reasons he gives are that it is a boss-slayer spec carrying strong cooldowns in Kingsbane and Deathmark, and that it performed well in the later parts of PTR testing, which leads him to expect it may also be good in Mythic+.",
+      "superseded": false
     }
   ],
   "metaNotes": [
@@ -5671,7 +5835,7 @@
       "note": "izen reads Frost Mage as bad/weak for S2, lumping it with Fire as the underperforming Mage specs players are abandoning in favor of the reworked Arcane.",
       "patchContext": "Season 2 PTR — M+ outlook",
       "url": "https://youtu.be/kue_ZtjTSr8?t=250",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Druid",
@@ -5781,7 +5945,7 @@
       "note": "izen reads Disc as a top-popularity healer for S2, played into far more and much higher keys than a struggling spec like Preservation.",
       "patchContext": "Season 2 PTR — M+ outlook",
       "url": "https://youtu.be/kue_ZtjTSr8?t=1014",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Shaman",
@@ -6507,7 +6671,7 @@
       "note": "Preservation gets the same split read as Holy Priest from izen: strong in the recent PTR raid testing after its buffs, but still one of the historically weakest Mythic+ healers and on his short list of specs that need keys-focused help before Season 2 launches. He explicitly says these two need much less help in raid than in Mythic+.",
       "patchContext": "Season 2 PTR — M+ outlook",
       "url": "https://youtu.be/m81w4xTnRrs?t=383",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Rogue",
@@ -6606,7 +6770,7 @@
       "note": "The runaway top tank of PTR M+: played more than every other tank spec combined, completing keys 3–5 levels higher than Blood/Guardian/Brew and 1–2 above Prot Warrior/Vengeance, with the most tank damage — the ~25–30% buff package plus talent-tree cleanup made it the most stable tank; he expects nerfs and considers it pole position for S2 meta tank.",
       "patchContext": "Season 2 PTR — M+ outlook",
       "url": "https://youtu.be/z9sYqwzriCk?t=21",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Paladin",
@@ -6815,7 +6979,7 @@
       "note": "Reads the flat 8% as a straightforward correction for one of the two tanks doing the least damage overall, noting the current top tank damage dealers are Blood DK and Prot Paladin.",
       "patchContext": "Season 2 PTR — M+ outlook",
       "url": "https://youtu.be/OP49uzLmaDk?t=432",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Warrior",
@@ -6826,7 +6990,7 @@
       "note": "Gets the same treatment as Guardian as the other lowest-damage tank — a generic damage increase he calls rather inconsequential to how the spec will play or how well it will do.",
       "patchContext": "Season 2 PTR — M+ outlook",
       "url": "https://youtu.be/OP49uzLmaDk?t=1395",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Monk",
@@ -6914,7 +7078,7 @@
       "note": "Out of the caster-comp race on two counts: a recent nerf he puts at more than 10% in a single sweep, and a kit that does not benefit from the comp — physical damage, so no gain from the Devourer magical-damage debuff and none from Arcane Intellect.",
       "patchContext": "Season 2 PTR — M+ outlook",
       "url": "https://youtu.be/EqgjDKVwYow?t=661",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Mage",
@@ -6947,7 +7111,7 @@
       "note": "States flatly that Brewmaster has fallen off, using it as part of the explanation for why the melee comp now has to source its physical damage from Windwalker instead.",
       "patchContext": "Season 2 PTR — M+ outlook",
       "url": "https://youtu.be/EqgjDKVwYow?t=61",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Evoker",
@@ -7068,7 +7232,7 @@
       "note": "After the recent rogue attention — a 6% buff on top of a 3% buff about a week earlier, plus smaller ones — Outlaw is now reasonably high in picks in the higher keys and he calls it a legitimate option for melee comps. He is careful about why: it owes much of the rise to Mistweaver's nerf and to the specs that would otherwise hold the slot not being played, naming Enhancement (which he says would definitely be played if it were any stronger) and Ret Paladin. Its AoE damage is good but not the best, weaker on trash than on bosses, and its damage being mostly physical makes it a better fit than a Ret or an Unholy for a comp built around the physical debuff and Windfury.",
       "patchContext": "Season 2 PTR — M+ outlook",
       "url": "https://youtu.be/g0adl6lXPQM?t=777",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Shaman",
@@ -7178,7 +7342,7 @@
       "note": "In the same on-the-bubble melee group; earlier he notes Unholy is a spec you might squeeze into the melee comp but that it benefits less than others from the physical/melee buff package.",
       "patchContext": "Season 2 PTR — M+ outlook",
       "url": "https://youtu.be/g0adl6lXPQM?t=966",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Monk",
@@ -7826,7 +7990,7 @@
       "sentiment": "negative",
       "patchContext": "Season 2 PTR — M+ outlook (which DPS specs take the comp slots)",
       "url": "https://youtu.be/_gt1uHQrh1s?t=229",
-      "superseded": false,
+      "superseded": true,
       "note": "Named only as the distant fallback ranged pick. He measures the gap by PTR play rate — Shadow is the next-most-played ranged spec after Balance and Elemental but sits roughly 1.5 times below them and about three times below Elemental, which he presents as evidence the supposed alternative is not really in the conversation."
     },
     {
@@ -7837,7 +8001,7 @@
       "sentiment": "negative",
       "patchContext": "Season 2 PTR — M+ outlook (which DPS specs take the comp slots)",
       "url": "https://youtu.be/_gt1uHQrh1s?t=64",
-      "superseded": false,
+      "superseded": true,
       "note": "Referenced as the spec whose loss of value opened the melee-comp healer slot for Resto Shaman — he treats Mistweaver falling out as an established fact underpinning the rest of his comp reasoning rather than an open question."
     },
     {
@@ -7908,7 +8072,7 @@
       "bracket": "mplus",
       "patchContext": "Season 2 PTR — M+ outlook (the risk case: what could stop each meta-candidate spec from actually being meta)",
       "url": "https://youtu.be/1GfuhNQSZvI?t=726",
-      "superseded": false,
+      "superseded": true,
       "note": "Damage is not the concern — the tier set's heavily buffed Spinning Crane Kick keeps its trash damage strong and he considers it fine on bosses too, so unlike other specs it does not fall off when target count drops. Survivability is the risk. He calls Windwalker traditionally among the squishiest specs and points out that where other historically fragile specs were given baseline durability over the years, monks lost tools instead, leaving Fortifying Brew and Touch of Karma as thin cover for a melee spec at the key levels the season will reach."
     },
     {
@@ -7947,7 +8111,7 @@
       "note": "He reviews his own past Arcane Mage placements and finds an uncomfortable pattern: he had it S tier before three of the last four seasons and C tier before the fourth — and the C-tier season was the only one in which Arcane was actually meta. He draws the general lesson that early tier lists are usually wrong because tuning and strategy development move a spec's perception after the season opens, then applies it to now, calling Arcane Mage's current position a very risky spot given that he and every other tier-list maker have again placed it high. The clip ends mid-sentence before he names the tier, so the placement itself is not on the record here. Recorded mixed: this is a caution about the confidence of the high consensus placement, not a claim that the spec is weak."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Death Knight",
       "spec": "Blood",
       "creator": "izen (Izenhart)",
@@ -7969,7 +8133,7 @@
       "note": "He nets the Frost change to a 6-7% buff, arriving there by combining a 9% increase against a tier-set adjustment that pulls in the other direction. He is careful about what that does and does not achieve: it is not the kind of buff that makes Frost S tier or turns it into one of the potential Mythic+ picks, but it brings the spec much closer to Unholy and makes it a more serious pick than before. His reasoning is that Frost was behind but not catastrophically so, and therefore never needed a massive intervention. He calls 6-7% pretty good while restating that it will not make Frost one of the main top specs of the season."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Demon Hunter",
       "spec": "Devourer",
       "creator": "izen (Izenhart)",
@@ -7991,7 +8155,7 @@
       "note": "He reports Restoration Druid buffed in both damage and healing, and takes the opportunity to revisit the poor PTR healer testing results that generated what he calls drama around the spec. His argument is that those results were partly deceiving: the earlier tests had Druids playing a Season 1 pattern with too many Rejuvenation casts and too little Regrowth, and when the playstyle was corrected in the most recent round of testing the results were significantly better. With the 4% healing buff and the damage buff on top, he calls it a reasonable potential pick as part of a raid composition, while stopping short of saying it is expected to be widely chosen."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Druid",
       "spec": "Restoration",
       "creator": "izen (Izenhart)",
@@ -8013,7 +8177,7 @@
       "note": "He is dismissive of the Beast Mastery buff's significance, saying what is also not going to change almost anything is the buff to BM. His premise is that BM was already consistently behind Marksmanship, especially in Mythic+, throughout the testing, and his objection is magnitude: he concedes it is a buff and cannot be denied as one, but reads the numbers as roughly 3% at best in AoE and barely above 1% on single target, which he does not think affects BM much."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Mage",
       "spec": "Arcane",
       "creator": "izen (Izenhart)",
@@ -8090,7 +8254,7 @@
       "note": "He groups Enhancement with Frost Death Knight as a similar case: a flat 5% damage buff that is necessary and expected because the spec was doing poorly, but not expected to move the needle much. His explanation for why Enhancement was overlooked on the PTR is intra-class rather than absolute — the power of Elemental within the same class took the spotlight away from it."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Shaman",
       "spec": "Elemental",
       "creator": "izen (Izenhart)",
@@ -8101,7 +8265,7 @@
       "note": "Elemental appears across the video as a spec that kept climbing and was left alone. He names it, with Balance, as having become more relevant over time than Devourer during the PTR; attributes Enhancement's neglect to Elemental taking the spotlight within its own class; and in the closing summary lists Elemental among the meta contenders that were explicitly not nerfed in the final pass, which he presents as the reason Devourer's nerf is damaging in relative terms."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Druid",
       "spec": "Balance",
       "creator": "izen (Izenhart)",
@@ -8123,7 +8287,7 @@
       "note": "He measures the Demonology change — Wild Imps imploding at 350% effectiveness on the main target instead of 250, and 350 instead of 225 in AoE — as barely a 2% damage buff, and sets it against a spec he says was doing very poorly. He widens that to the class, saying all three Warlock specs were doing very poorly in Mythic+, with the mitigating observation that a Warlock will usually still find a raid spot. His conclusion is that even after the buffs it is not looking great for Demonology, and that the open question is whether they are enough to put it ahead of Destruction for the raid slot."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Warrior",
       "spec": "Arms",
       "creator": "izen (Izenhart)",
@@ -8134,7 +8298,7 @@
       "note": "He calls Warrior the biggest surprise of the pass, describing his own expectation that having seen Arcane nerfed and Blood's damage cut he went looking for the Arms nerf — and found that the nerf is zero. He returns to it in the closing summary, listing Arms among the meta contenders left untouched while Devourer was cut. The positive read is entirely about an expected nerf failing to arrive rather than about any buff."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Warrior",
       "spec": "Fury",
       "creator": "izen (Izenhart)",
@@ -8145,7 +8309,7 @@
       "note": "He nets Fury's change to a 2-3% damage buff, arriving there from a 6% increase partly clawed back by a tier-set nerf, which he reads as a deliberate move of power out of the set and into baseline. His read on the spec is unusual in separating absolute from relative strength: he says Fury by itself is very strong and doing very good damage, and that if Arms did not exist Fury would be a stable pick for a physical Mythic+ composition. What holds it down is entirely Arms — he notes Fury is played some 40-50 times less despite being much closer in power than that gap implies, because Arms is strong enough that there is no point playing Fury. He calls the buff good and nice while noting it was not even necessary."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Paladin",
       "spec": "Holy",
       "creator": "izen (Izenhart)",
@@ -8167,7 +8331,7 @@
       "note": "Alongside Holy Paladin, he names Preservation Evoker as a spec he had expected the final pass to touch and which it left alone, pointing specifically at what he describes as its uncapped massive explosions of healing in the raid. He also lists it first among the higher-tier healers he says Mistweaver still does not match. As with Holy Paladin, the positive read rests on an anticipated nerf not arriving rather than on any buff."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Shaman",
       "spec": "Restoration",
       "creator": "izen (Izenhart)",
@@ -8176,6 +8340,270 @@
       "patchContext": "Season 2 — final pre-launch tuning pass (applied with the August 18 reset), M+ outlook",
       "url": "https://youtu.be/OdhbpI6Mjsw?t=738",
       "note": "Restoration Shaman is untouched by the pass and appears twice as a benchmark others are measured against. He includes it among the higher-tier healers Mistweaver still does not match even after a 10% buff, and separately places it above Discipline in Mythic+, noting Discipline had routinely been ranked below Holy Paladin, Restoration Shaman and Preservation there. The read is comparative rather than a direct assessment of the spec."
+    },
+    {
+      "class": "Monk",
+      "spec": "Brewmaster",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-16",
+      "sentiment": "negative",
+      "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
+      "url": "https://youtu.be/KktdoK1OZVY?t=155",
+      "note": "He places Brewmaster at the very bottom of the tanks, pairing it with Restoration Druid and observing that the two were the meta combo at the start of Season 1. His reasoning is that neither took major Season 2 nerfs but both were nerfed enough during Season 1, and that other specs were buffed more in Season 2, so they were leapfrogged; in the PTR they again appeared as a combo, this time the one nobody was playing.",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Restoration",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-16",
+      "sentiment": "negative",
+      "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
+      "url": "https://youtu.be/KktdoK1OZVY?t=159",
+      "note": "Placed at the bottom of the healers alongside Brewmaster, on the same reasoning: not hit by major Season 2 nerfs, but nerfed enough across Season 1 and then passed by specs that were buffed more, leaving the pair unplayed in PTR rather than merely weaker.",
+      "superseded": false
+    },
+    {
+      "class": "Warrior",
+      "spec": "Protection",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-16",
+      "sentiment": "negative",
+      "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
+      "url": "https://youtu.be/KktdoK1OZVY?t=238",
+      "note": "He puts Protection Warrior only barely above Brewmaster among tanks and rejects the melee-composition argument for it, saying the Battle Shout synergy case does not survive contact with what was actually played — there is no need for a physical composition to bring a Protection Warrior.",
+      "superseded": false
+    },
+    {
+      "class": "Priest",
+      "spec": "Discipline",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-16",
+      "sentiment": "negative",
+      "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
+      "url": "https://youtu.be/KktdoK1OZVY?t=268",
+      "note": "He calls Discipline the genuine surprise of the bottom healer tier. He reads it as back to its Undermine-era shape with very powerful absorbs, but says the 80%-plus shield value falls away in Mythic+ where sustained rot damage dominates: Void Shield is excellent for saving a player from a targeted mechanic, while the rest of the kit reduces to Mind Blast on cooldown and filler Smite and Penance, which he reads as too weak to keep pace with healers that were buffed.",
+      "superseded": false
+    },
+    {
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-16",
+      "sentiment": "negative",
+      "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
+      "url": "https://youtu.be/KktdoK1OZVY?t=694",
+      "note": "He notes Mistweaver is the meta Mythic+ healer as Season 1 ends and reads its drop as a straight nerf rather than a change of role: no hero-talent or play-style change, but Morning Breeze cut by 60%, Resplendent Mist reduced and Spinning Crane Kick value lowered, so the spec does the same thing with fewer casts and less output. He says it would have stayed in the top tier had Blizzard left it alone.",
+      "superseded": false
+    },
+    {
+      "class": "Evoker",
+      "spec": "Preservation",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-16",
+      "sentiment": "positive",
+      "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
+      "url": "https://youtu.be/KktdoK1OZVY?t=541",
+      "note": "He calls Preservation the surprise of the list, given it has historically been the weakest Mythic+ healer and poor at healing small groups. He credits an accumulation of quality-of-life changes running back to late Dragonflight, the significantly buffed Flame Shaper and Consume Flame, Emerald Blossom no longer consuming Echoes, and a tier set that sends a Living Flame at a low target, which together fix its five-target healing. He goes as far as suggesting it may now be slightly too strong.",
+      "superseded": false
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-16",
+      "sentiment": "positive",
+      "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
+      "url": "https://youtu.be/KktdoK1OZVY?t=968",
+      "note": "He puts Holy Paladin as the overall best healer pick. He describes its power as extremely high in Mythic+ and raid alike, with three or four high-value single-target buttons available at nearly all times and a tier set that doubles Infusion of Light value and guarantees two infusions per Holy Light. He also reads it as the natural partner for the meta tank, since Devotion Aura, Lightsmith damage reduction and a tank beacon cover Blood Death Knight's weakness.",
+      "superseded": false
+    },
+    {
+      "class": "Shaman",
+      "spec": "Restoration",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-16",
+      "sentiment": "positive",
+      "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
+      "url": "https://youtu.be/KktdoK1OZVY?t=1045",
+      "note": "He ranks Restoration Shaman second among healers and the more likely pick in physical compositions. His reasoning is throughput shape rather than raw power: Healing Rain and Chain Heal cap at five targets, which is exactly the Mythic+ group size, and both are easier to land when the group is melee. He adds the composition argument that a Shaman also brings Windfury and the mastery buff to a physical group.",
+      "superseded": false
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Blood",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-16",
+      "sentiment": "positive",
+      "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
+      "url": "https://youtu.be/KktdoK1OZVY?t=474",
+      "note": "He calls Blood Death Knight the one undisputed main tank, and grounds it in representation rather than assertion: at the 20-key level he counts 119 Blood Death Knights against 12 for the next most played tank, and says all other tanks combined would not reach half its key count.",
+      "superseded": false
+    },
+    {
+      "class": "Paladin",
+      "spec": "Protection",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-16",
+      "sentiment": "mixed",
+      "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
+      "url": "https://youtu.be/KktdoK1OZVY?t=454",
+      "note": "He keeps Protection Paladin ahead of Vengeance and Guardian in the middle tank tier while describing it as displaced: it began the PTR as the tank meta before being hit by nerfs at the same time Blood Death Knight was buffed, which is what changed the standing. He allows it a residual case in physical compositions through Devotion Aura.",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Guardian",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-16",
+      "sentiment": "negative",
+      "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
+      "url": "https://youtu.be/KktdoK1OZVY?t=517",
+      "note": "Placed in the middle tank group that he says is not really being played, behind both Blood Death Knight and Protection Paladin. The one point in its favour he names is that Mark of the Wild is very valuable, which he offers as a reason it could find a place in a physical composition rather than as a reason to expect play.",
+      "superseded": false
+    },
+    {
+      "class": "Priest",
+      "spec": "Shadow",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-16",
+      "sentiment": "negative",
+      "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
+      "url": "https://youtu.be/KktdoK1OZVY?t=1146",
+      "note": "He uses Shadow Priest as his closing example of a spec that is worse off than its tier position suggests: he argues a player would rather be a Windwalker, a guaranteed pick in a composition making up under 5% of groups, than a Shadow Priest competing as the second or third caster slot in the 95% of groups running a standard composition, because the specs ahead of it make groups hard to find regardless.",
+      "superseded": false
+    },
+    {
+      "class": "Rogue",
+      "spec": "Outlaw",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-16",
+      "sentiment": "positive",
+      "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
+      "url": "https://youtu.be/KktdoK1OZVY?t=378",
+      "note": "He singles Outlaw out among the mid-tier DPS as the one holding a genuine composition advantage, saying it can anchor a physical Mythic+ group and that looking at the high keys it appears repeatedly at the 20 level in King's Rest and Ruby Life Pools. He places it at the end of the A tier on that basis, expecting higher representation at launch than its raw position would imply.",
+      "superseded": false
+    },
+    {
+      "class": "Hunter",
+      "spec": "Marksmanship",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-16",
+      "sentiment": "negative",
+      "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
+      "url": "https://youtu.be/KktdoK1OZVY?t=356",
+      "note": "He calls the Marksmanship situation unfortunate, saying that nerf after nerf through the cycle has stripped progressively more value from it, and compounds that by noting it does not even have the melee-composition fallback that lifts Outlaw out of the same tier.",
+      "superseded": false
+    },
+    {
+      "class": "Warlock",
+      "spec": "Destruction",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-16",
+      "sentiment": "negative",
+      "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
+      "url": "https://youtu.be/KktdoK1OZVY?t=211",
+      "note": "Grouped with the specs he considers unlikely to see much play, and placed there only because he reads it as doing slightly better than the other two Warlock specs — a relative placement within a weak class rather than a positive read.",
+      "superseded": false
+    },
+    {
+      "class": "Mage",
+      "spec": "Frost",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-16",
+      "sentiment": "mixed",
+      "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
+      "url": "https://youtu.be/KktdoK1OZVY?t=79",
+      "note": "He uses Frost Mage as his worked example of the difference between power and expected play, saying it is not much weaker than Arcane and might squeak into a higher tier if he were rating by relative power, but that PTR players picked Arcane roughly 130 times more often, which he treats as the better predictor of how the two will fare at launch.",
+      "superseded": false
+    },
+    {
+      "class": "Warrior",
+      "spec": "Fury",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-16",
+      "sentiment": "mixed",
+      "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
+      "url": "https://youtu.be/KktdoK1OZVY?t=121",
+      "note": "The same power-versus-representation split applied to Fury: he says it is probably around the same level as Arms, but that the gap between where the two sit on his list is driven by how much more Arms will be played rather than by a difference in strength.",
+      "superseded": false
+    },
+    {
+      "class": "Mage",
+      "spec": "Arcane",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-16",
+      "sentiment": "positive",
+      "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
+      "url": "https://youtu.be/KktdoK1OZVY?t=869",
+      "note": "He treats Arcane as holding a Mythic+ slot regardless of how the composition question resolves, placing it at the top end alongside Arms and above the contested trio competing for the remaining caster spots.",
+      "superseded": false
+    },
+    {
+      "class": "Warrior",
+      "spec": "Arms",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-16",
+      "sentiment": "positive",
+      "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
+      "url": "https://youtu.be/KktdoK1OZVY?t=872",
+      "note": "He places Arms at the top end and reads its position as unusually secure: it may miss out if a group commits to a caster-only composition, but it is the guaranteed pick in the physical composition, so it has a home either way.",
+      "superseded": false
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-16",
+      "sentiment": "positive",
+      "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
+      "url": "https://youtu.be/KktdoK1OZVY?t=827",
+      "note": "He names Devourer as one of the trio — with Balance and Elemental — that he expects to contest the remaining Mythic+ DPS slots behind Arcane and Arms, referring back to a dedicated video on that three-way split as what he expects to happen at launch.",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Balance",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-16",
+      "sentiment": "positive",
+      "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
+      "url": "https://youtu.be/KktdoK1OZVY?t=829",
+      "note": "Named in the same expected trio with Devourer and Elemental as the specs competing for the Mythic+ slots below Arcane and Arms, and included in the caster-only composition case.",
+      "superseded": false
+    },
+    {
+      "class": "Shaman",
+      "spec": "Elemental",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-16",
+      "sentiment": "positive",
+      "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
+      "url": "https://youtu.be/KktdoK1OZVY?t=815",
+      "note": "The third of the expected trio, and the one he supports with representation: he counts 80 Elemental Shamans in the highest keys against eight Outlaws and 15 Windwalkers, which he reads as showing where PTR players had already settled.",
+      "superseded": false
+    },
+    {
+      "class": "Monk",
+      "spec": "Windwalker",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-16",
+      "sentiment": "mixed",
+      "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
+      "url": "https://youtu.be/KktdoK1OZVY?t=1138",
+      "note": "He places Windwalker at the end of the A tier explicitly on the composition asterisk rather than on strength, saying it is a guaranteed pick in a physical group but that he expects such groups to be under 5% of the total — a niche slot, which he still rates above competing for a crowded caster spot.",
+      "superseded": false
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-16",
+      "sentiment": "mixed",
+      "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
+      "url": "https://youtu.be/KktdoK1OZVY?t=780",
+      "note": "He describes placing Unholy as an awkward call, saying it was not quite fair to keep it in the lower group but also not fair to put it in the higher one where it would read as ranking behind Frost Death Knight, and settles on treating it as the first of the B tier.",
+      "superseded": false
     }
   ]
 }
