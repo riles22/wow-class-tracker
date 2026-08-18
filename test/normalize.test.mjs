@@ -165,15 +165,17 @@ test("sourceSeasonOk is bracket-scoped — an M+ flip does not vouch for the rai
 test("PHASES is the single era vocabulary and carries the current cycle", () => {
   // Pinning today's values, so the launch flip is a deliberate edit that fails this
   // test and updates it in the same commit — the same pattern as SNAPSHOT_PHASE.
-  assert.equal(PHASES.liveSeason, "s1");
-  assert.equal(PHASES.ptr?.marker, "12.1 PTR");
-  /* label ≠ marker is the launch-day split: `label` (display) drops " PTR" the moment the
-     patch ships (2026-08-11 ~22:00 UTC) while `marker` (data key — metric names, takeEra,
-     PTR_METRIC_NAMES) is frozen for the cycle. This pin makes the label flip a deliberate
-     one-line edit and guards the marker against being flipped along with it. */
-  assert.equal(PHASES.ptr?.label, "12.1");   // flipped 2026-08-11 22:00 UTC — 12.1 shipped
+  assert.equal(PHASES.liveSeason, "s2");     // flipped 2026-08-18 — Season 2 is live
+  assert.equal(PHASES.liveLabel, "12.1");
+  /* Between cycles the ptr lane is NULL — no marker, no label — until the 12.2 thread
+     appears. The take/era machinery reads as closed (expertRead null, PTR_METRIC_NAMES
+     null) and the frozen forecast (B6) carries the pre-launch read through the window. */
+  assert.equal(PHASES.ptr, null);
   assert.equal(PHASES.patchName, "Curse of Ula'tek");
-  assert.equal(PHASES.ptrSunset, false);
+  /* DECISION 3 as amended 2026-08-12: the sunset happens AT the flip, so ptrSunset is
+     dead weight — the FIELD is deleted, not set false. Assert absence, so resurrecting
+     it is a deliberate edit that fails here first. */
+  assert.ok(!("ptrSunset" in PHASES), "ptrSunset was deleted at the flip (DECISION 3 amendment) — do not resurrect it");
 });
 
 /* ---- the season-ahead predicate + the frozen lane (2026-08-09) ---------------------

@@ -620,10 +620,14 @@ test("checkValueMove covers sims and Dummy Dome, not just spec.metrics", () => {
 
 /* ---- the one-shot launch flip (2026-08-02) ---- */
 
-test("age gate: SNAPSHOT_PHASE still pre-launch past its due date is a violation", () => {
+test("age gate: the flip landed, so no SNAPSHOT_PHASE nag even past the due date", () => {
+  // Pre-flip this asserted the OPPOSITE: "12.1-ptr" past PHASE_FLIP_DUE was a violation.
+  // The 08-18 flip commit moved SNAPSHOT_PHASE off "12.1-ptr", and the gate tests the
+  // phase VALUE (pinned by regex below), so it is silent at any date from here on —
+  // flipping is the one action that may silence it, and it did.
   const after = checkFreshness(config, goodManifest(), freshData(), "2026-08-25");
-  assert.ok(after.violations.some(v => v.includes("SNAPSHOT_PHASE")), after.violations.join("\n"));
-  assert.ok(after.fingerprint.includes("snapshot-phase"));
+  assert.ok(!after.violations.some(v => v.includes("SNAPSHOT_PHASE")), after.violations.join("\n"));
+  assert.ok(!after.fingerprint.includes("snapshot-phase"));
 });
 
 test("age gate: the flip is NOT nagged before its due date", () => {

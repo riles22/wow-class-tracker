@@ -82,7 +82,10 @@ test("the repo's real contract yields exactly the published-gated pages as evide
   assert.deepEqual(problems, [], "the committed contract must not carry published-gate config problems");
   const byKey = {};
   for (const t of targets) byKey[t.key] = (byKey[t.key] ?? 0) + 1;
-  assert.deepEqual(byKey, { icyveins: 6, "icyveins-ptr": 3, wowhead: 6 },
-    "published-gated pages: icyveins 6 + icyveins-ptr 3 + wowhead 6");
+  // icyveins-ptr's 3 pages left this map at the 2026-08-18 flip (the source was removed
+  // from the registry — runbook step 5). The pin stays deliberate: a published block
+  // appearing or vanishing is always a reviewed change.
+  assert.deepEqual(byKey, { icyveins: 6, wowhead: 6 },
+    "published-gated pages: icyveins 6 + wowhead 6");
   assert.ok(targets.every(t => t.url.startsWith("https://")));
 });

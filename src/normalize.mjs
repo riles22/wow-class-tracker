@@ -52,21 +52,19 @@ export function consensusTier(score, scales) {
    At 12.1 launch: liveSeason -> "s2", liveLabel -> "12.1", ptr -> null (until the 12.2
    thread appears), alongside the SNAPSHOT_PHASE flip in render.mjs. */
 export const PHASES = {
-  liveSeason: "s1",
-  liveLabel: "12.0.7",
-  /* `marker` and `label` are DIFFERENT kinds of string and flip on different days.
-     `marker` is a DATA KEY: metric names contain it, takeEra matches patchContext against
-     it, PTR_METRIC_NAMES derives from it — it is frozen for the whole cycle and never
-     tracks the patch's status. `label` is what the PAGE CALLS the era, and it drops the
-     " PTR" suffix the moment the patch ships (12.1 launches 2026-08-11 ~22:00 UTC, seven
-     days before liveSeason flips at S2 open) — during that window "12.1 PTR" is a lie on
-     every surface that says it, while the data keys must not move a byte. */
-  ptr: { marker: "12.1 PTR", label: "12.1" },
+  liveSeason: "s2",
+  liveLabel: "12.1",
+  /* Season 2 flipped live 2026-08-18 (the runbook commit). `ptr` is null until the 12.2
+     PTR thread appears — a null ptr hides the Era toggle, era-gates every PTR surface out
+     of the page, and IS the PTR sunset (DECISION 3 as amended 2026-08-12; the old
+     `ptrSunset` flag is deleted rather than flipped). When the 12.2 cycle opens, restore
+     the shape `{ marker: "12.2 PTR", label: "12.2" }` — `marker` is a frozen DATA KEY for
+     the whole cycle, `label` is what the page calls the era and drops " PTR" at launch. */
+  ptr: null,
   /* The tracked patch's display name — the masthead chip and footer read it via the
      build-time era tokens (build.mjs). It outlives `ptr` (the branding stays after the
      ptr lane sunsets), which is why it does not live inside it. */
   patchName: "Curse of Ula'tek",
-  ptrSunset: false,
   seasonOrder: ["s1", "s2"],
   seasonLabels: { s1: "12.0.7", s2: "12.1" },
 };

@@ -127,7 +127,14 @@ test("validateData enforces era↔name consistency, finite values, and metric un
   assert.ok(errors.some(e => e.includes("finite non-negative")));
   assert.ok(errors.some(e => e.includes("no PTR label")));
   assert.ok(errors.some(e => e.includes("duplicate metric")));
-  assert.ok(errors.some(e => e.includes('named 12.1 PTR but tagged era "live"')));
+  /* The marker→era check is keyed on PHASES.ptr.marker and dies with PHASES.ptr at the
+     phase flip — by design, documented at the guard in validate.mjs; the surviving
+     name-based rule ("PTR-named but carries no explicit era") covers the flip window.
+     Assert the marker check only while a cycle is open, with the marker it derives from. */
+  const { PHASES } = await import("../src/normalize.mjs");
+  if (PHASES.ptr) {
+    assert.ok(errors.some(e => e.includes(`named ${PHASES.ptr.marker} but tagged era "live"`)));
+  }
 });
 
 test("validateData checks encounter-tiers, specsAffected, draft provenance, and full roster", async () => {
@@ -416,27 +423,26 @@ test("validateData rejects a registry whose tier lists are ALL era-gated", async
   assert.ok(errors.some(e => e.includes("no LIVE-era tier-list sources")), errors.join("\n"));
 });
 
-test("the PTR tier list is registered as era-gated and M+ only", async () => {
+/* "the PTR tier list is registered as era-gated and M+ only" was RETIRED WITH ITS SUBJECT
+   at the 2026-08-18 flip (runbook step 5, RED #2): icyveins-ptr left the registry and its
+   40 ratings.mplus keys were stripped in the same commit, so both of the test's assertions
+   describe a source that no longer exists. Rewritten as the DERIVED rule below so it
+   re-arms by itself when the 12.2 cycle registers a PTR list, rather than pinning a
+   literal id — the same derive-don't-pin lesson f02caec applied to four other fixtures. */
+test("any era-gated PTR tier list is M+ only and covers the full roster with explicit nulls", async () => {
   const { sources, specs } = await loadData(ROOT);
-  const ptr = sources.find(s => s.id === "icyveins-ptr");
-  assert.ok(ptr, "icyveins-ptr is in the registry");
-  assert.equal(ptr.era, "ptr");
-  assert.equal(ptr.kind, "tier-list");
-  // Icy Veins publishes no PTR raid list; claiming one would invent a source.
-  assert.deepEqual([...new Set(ptr.pages.map(p => p.bracket))], ["mplus"]);
-  assert.equal(specs.filter(s => s.ratings?.raid?.["icyveins-ptr"] !== undefined).length, 0);
-  // Full roster coverage, with any upstream TBD stored as an EXPLICIT null. The guarantee
-  // being tested is the shape — a spec the authors have not placed is written as null and
-  // never omitted and never guessed — not the tally of how many are currently unplaced.
-  // The COUNT is upstream state that legitimately moves: the 02 Aug. 2026 rebuild
-  // ("Update #4") placed both of the two specs that had been TBD since this source was
-  // added, taking the count 2 -> 0. Asserting a fixed count turns an ordinary upstream
-  // update into a red suite, so assert presence-of-key instead.
-  const present = specs.filter(s => s.ratings?.mplus && "icyveins-ptr" in s.ratings.mplus);
-  assert.equal(present.length, 40, "every roster spec carries an icyveins-ptr M+ key");
-  const rated = specs.filter(s => s.ratings?.mplus?.["icyveins-ptr"] != null).length;
-  const tbd = specs.filter(s => s.ratings?.mplus?.["icyveins-ptr"] === null).length;
-  assert.equal(rated + tbd, 40);
+  const ptrLists = sources.filter(s => s.kind === "tier-list" && s.era === "ptr");
+  if (!ptrLists.length) return; // empty lane between cycles — re-arms when 12.2 publishes one
+  for (const ptr of ptrLists) {
+    // No outlet publishes a PTR raid list; claiming one would invent a source.
+    assert.deepEqual([...new Set(ptr.pages.map(p => p.bracket))], ["mplus"],
+      `${ptr.id} must be M+ only`);
+    assert.equal(specs.filter(s => s.ratings?.raid?.[ptr.id] !== undefined).length, 0,
+      `${ptr.id} must carry no raid ratings`);
+    // Full roster coverage, any upstream TBD stored as an EXPLICIT null, never omitted.
+    const present = specs.filter(s => s.ratings?.mplus && ptr.id in s.ratings.mplus);
+    assert.equal(present.length, 40, `every roster spec carries a ${ptr.id} M+ key`);
+  }
 });
 
 test("build coverage gate: a spec in specsAffected with no line that reaches it fails", async () => {
@@ -571,9 +577,16 @@ test("validateData gates the frozen final-season archive", async () => {
   assert.ok(validateData(badSource).some(e => /is not a tier-list source/.test(e)));
 
   // A PTR list never fed the live consensus, so it has no final-season letters to freeze;
-  // admitting one would inject contributors that were never in the mean.
+  // admitting one would inject contributors that were never in the mean. The fixture
+  // SYNTHESIZES its era:"ptr" subject (2026-08-18 flip: it used to name icyveins-ptr,
+  // which left the registry — naming a live id is the pin f02caec removed elsewhere).
   const ptrFrozen = structuredClone(data);
-  ptrFrozen.seasonFinal.s1["icyveins-ptr"] = { mplus: rec() };
+  ptrFrozen.sources.push({
+    id: "synthetic-ptr-list", name: "Synthetic PTR list", kind: "tier-list", era: "ptr",
+    scale: "icyveins",
+    pages: [{ bracket: "mplus", role: "All", url: "https://example.com/ptr", snapshot: "2026-08-01" }],
+  });
+  ptrFrozen.seasonFinal.s1["synthetic-ptr-list"] = { mplus: rec() };
   assert.ok(validateData(ptrFrozen).some(e => /era:"ptr"/.test(e)));
 
   const badSeason = structuredClone(data);

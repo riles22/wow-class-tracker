@@ -1,7 +1,7 @@
 {
-  "comment": "The nightly refresh contract (2026-07-14, from the external security audit; tightened by the same-day re-audit). Every requirement here must have a row in data/run-manifest.json each run — src/check-refresh.mjs enforces it in the publish gate (--manifest) and the heartbeat (--age). maxAgeDays = staleness alert threshold for the committed data (alerts fire even for EXPLAINED staleness — visibility, not blame). rows.min = catastrophic-shrink floor, set ~60-65% of the 2026-07-14 real counts; raise/lower only with a reviewed reason. Date probes: pages = oldest matching sources.json page snapshot (a lagging page is a finding); metrics/ptrDummy = the COVERAGE date, i.e. the min-th-freshest asOf (min = date.minFresh, else rows.min, else 1) — one fresh row cannot vouch for a cut whose other role cuts/specs stayed old. evidence: \"wcl\" marks requirements cross-checked against wcl-fetch/evidence.json (written by the deterministic credentialed fetch step, uploaded before the agent runs): a success row needs evidence-landed rows, not just the agent's word. wcl-dummy-raw floors were tightened to min 60 + maxAgeDays 10 on 2026-07-17 after the first verified landing (103 rows). 2026-07-24 audit (D3/D4/N5): date probes for murlok, mythicstats, simulationcraft, bloodmallet and the three page-probed WCL cuts now read the DATA's own coverage date rather than the agent-written sources.json page snapshot — before this, rewriting 106 metric rows to 53 days stale while leaving snapshots at today produced zero violations from either gate. New probe type fightProfiles covers spec.fightProfile.asOf (sims live outside spec.metrics). encounterTiers ROW probes now count tier rows, not encounters: a partial Archon parse keeps all 17 encounters and empties their tier maps, so the old probe scored 17 while 92.5% of the surface was gone. archon-hps and archon-mplus-score were added — 47 published rows previously had neither a date gate nor a row floor. minSuccessfulSources = catastrophe floor: a run where essentially nothing arrived must not publish as a quiet night (healthy runs sit at 17-19 of 25).",
+  "comment": "The nightly refresh contract (2026-07-14, from the external security audit; tightened by the same-day re-audit). Every requirement here must have a row in data/run-manifest.json each run — src/check-refresh.mjs enforces it in the publish gate (--manifest) and the heartbeat (--age). maxAgeDays = staleness alert threshold for the committed data (alerts fire even for EXPLAINED staleness — visibility, not blame). rows.min = catastrophic-shrink floor, set ~60-65% of the 2026-07-14 real counts; raise/lower only with a reviewed reason. Date probes: pages = oldest matching sources.json page snapshot (a lagging page is a finding); metrics/ptrDummy = the COVERAGE date, i.e. the min-th-freshest asOf (min = date.minFresh, else rows.min, else 1) — one fresh row cannot vouch for a cut whose other role cuts/specs stayed old. evidence: \"wcl\" marks requirements cross-checked against wcl-fetch/evidence.json (written by the deterministic credentialed fetch step, uploaded before the agent runs): a success row needs evidence-landed rows, not just the agent's word. wcl-dummy-raw floors were tightened to min 60 + maxAgeDays 10 on 2026-07-17 after the first verified landing (103 rows). 2026-07-24 audit (D3/D4/N5): date probes for murlok, mythicstats, simulationcraft, bloodmallet and the three page-probed WCL cuts now read the DATA's own coverage date rather than the agent-written sources.json page snapshot — before this, rewriting 106 metric rows to 53 days stale while leaving snapshots at today produced zero violations from either gate. New probe type fightProfiles covers spec.fightProfile.asOf (sims live outside spec.metrics). encounterTiers ROW probes now count tier rows, not encounters: a partial Archon parse keeps all 17 encounters and empties their tier maps, so the old probe scored 17 while 92.5% of the surface was gone. archon-hps and archon-mplus-score were added — 47 published rows previously had neither a date gate nor a row floor. minSuccessfulSources = catastrophe floor: a run where essentially nothing arrived must not publish as a quiet night. Re-based 10 -> 7 at the 2026-08-18 S2 flip (owner-acked in the flip review): the contract shrank 26 -> 19 requirements and four of the previous night's 11 successes (icyveins-ptr + the three deterministic PTR raw-WCL rows) left with it, so 10 of 19 would red every transition night on sources sitting at their honest season-boundary freeze. 7 is the proportional re-base (10/26 of 19); healthy pre-flip runs sat at 17-19 of 25 — RECALIBRATE upward once S2 upstreams (Archon numerics, Murlok, Mythicstats, WCL live) are flowing and a healthy S2 run count has been observed.",
   "maxRunAgeHours": 28,
-  "minSuccessfulSources": 10,
+  "minSuccessfulSources": 7,
   "maxRowDropPct": 0.25,
   "maxValueMovePct": 0.6,
   "maxFamilyMedianMovePct": 0.35,
@@ -41,24 +41,6 @@
         "type": "ratings",
         "sourceId": "icyveins",
         "min": 60
-      }
-    },
-    {
-      "key": "icyveins-ptr",
-      "label": "Icy Veins 12.1 PTR tier lists (M+, all roles)",
-      "comment": "Era-gated 12.1 opinion: it never feeds the live consensus, so a miss cannot move a published tier — but it IS a projection input, so a silent miss would quietly reweight every M+ forecast. maxAgeDays 4 matches its siblings and measures OUR fetch cadence, not the page's. Upstream rebuilds only weekly (Sundays 14:00 CEST), so page.published legitimately trails page.snapshot by up to 7 days; upstream content staleness is gated by the `published` block below (docs/published-gate-scope.md — added after the 08-02 rebuild went unseen for two days behind a stale published claim): maxAgeDays 9 = one weekly cycle + 2 days slack, alarming via the heartbeat, while the deterministic published-evidence cross-check in the publish gate goes red the same night a stored published contradicts the page. rows.min 24 is ~63% of the 38 rated rows at 2026-07-31, matching the floors used elsewhere; upstream TBDs are stored as explicit nulls and do not count.",
-      "maxAgeDays": 4,
-      "date": {
-        "type": "pages",
-        "sourceId": "icyveins-ptr"
-      },
-      "published": {
-        "maxAgeDays": 9
-      },
-      "rows": {
-        "type": "ratings",
-        "sourceId": "icyveins-ptr",
-        "min": 24
       }
     },
     {
@@ -219,7 +201,7 @@
     },
     {
       "key": "wcl-live-raid",
-      "label": "Warcraft Logs live raid medians (zone 46, Mythic)",
+      "label": "Warcraft Logs live raid medians (zone 53 The Venomous Abyss, Mythic — S2; re-pointed at the 2026-08-18 flip, zone 46 was S1)",
       "maxAgeDays": 10,
       "evidence": "wcl",
       "date": {
@@ -236,7 +218,7 @@
     },
     {
       "key": "wcl-live-mplus",
-      "label": "Warcraft Logs live M+ medians (zone 47)",
+      "label": "Warcraft Logs live M+ medians (zone 55 Mythic+ Season 2 — S2; re-pointed at the 2026-08-18 flip, zone 47 was S1)",
       "maxAgeDays": 10,
       "evidence": "wcl",
       "date": {
@@ -249,108 +231,6 @@
         "source": "warcraftlogs",
         "namePattern": "^Median .*\\(M\\+, all dungeons",
         "min": 25
-      }
-    },
-    {
-      "key": "wcl-ptr-raid",
-      "label": "Warcraft Logs 12.1 PTR raid testing (zone 54, all roles)",
-      "maxAgeDays": 40,
-      "note": "maxAgeDays raised 10 -> 40 on 2026-08-05, deliberately and temporarily. Zone 54's table is EMPTY upstream, not unreachable: WCL's 14-day rolling window aged out the mid-July testing parses around 07-31, and residential-IP local runs confirm HTTP 200 with a header-only fragment and zero rows. The stored 34 rows therefore stand at 2026-07-28 and would have breached the old 10 on 2026-08-08. Nothing can refill them on our side — PTR raid testing windows are Blizzard's to schedule, 12.1 goes live 08-11 and the Venomous Abyss opens 08-19, after which zone 54 stops mattering and the PTR surfaces sunset (Season 2 + 14 = ~09-02, age ~36 days). 40 covers through that sunset with a few days of slack. The honest signal is NOT lost meanwhile: the manifest still records this key every single night with its real status and reason, which is what the publish gate reads. THE COST, stated plainly: while this is 40, a genuine post-refill freeze would go unalarmed for up to 40 days. RETIGHTEN TO 10 the moment zone 54 serves rows again, or retire the requirement when the PTR surfaces sunset — whichever comes first.",
-      "evidence": "wcl",
-      "date": {
-        "type": "metrics",
-        "source": "warcraftlogs",
-        "namePattern": "12\\.1 PTR raid testing"
-      },
-      "rows": {
-        "type": "metrics",
-        "source": "warcraftlogs",
-        "namePattern": "12\\.1 PTR raid testing",
-        "min": 25
-      }
-    },
-    {
-      "key": "wcl-ptr-mplus",
-      "label": "Warcraft Logs 12.1 PTR M+ testing (zone 56)",
-      "maxAgeDays": 10,
-      "evidence": "wcl",
-      "date": {
-        "type": "metrics",
-        "source": "warcraftlogs",
-        "namePattern": "12\\.1 PTR M\\+ testing"
-      },
-      "rows": {
-        "type": "metrics",
-        "source": "warcraftlogs",
-        "namePattern": "12\\.1 PTR M\\+ testing",
-        "min": 25
-      }
-    },
-    {
-      "key": "wcl-dummy-dome",
-      "label": "Warcraft Logs Dummy Dome (zone 52, target counts)",
-      "maxAgeDays": 10,
-      "evidence": "wcl",
-      "date": {
-        "type": "ptrDummy"
-      },
-      "rows": {
-        "type": "ptrDummy",
-        "min": 15
-      }
-    },
-    {
-      "key": "wcl-dummy-raw",
-      "label": "Warcraft Logs Dummy Dome raw-DPS medians (zone 52, API best-parses — deterministic fetch recipe)",
-      "maxAgeDays": 10,
-      "evidence": "wcl",
-      "comment": "minFresh REMOVED 2026-08-14 (audit): it was 15, copied from the two 27-row raw siblings where 15 is ~56% of a 16-row floor. This family carries 106 rows against a floor of 60, so 15 meant a partial landing of 15 rows dated the family fresh while 91 rows stayed stale — measured at 43 days on 2026-08-13 with the row floor, the drop check and the manifest all green. Omitting it falls back to rows.min per probeDate's documented minFresh ?? rows.min ?? 1, which is what the other twelve metric requirements already do.",
-      "date": {
-        "type": "metrics",
-        "source": "warcraftlogs",
-        "namePattern": "Median raw DPS \\(12\\.1 PTR Dummy Dome"
-      },
-      "rows": {
-        "type": "metrics",
-        "source": "warcraftlogs",
-        "namePattern": "Median raw DPS \\(12\\.1 PTR Dummy Dome",
-        "min": 60
-      }
-    },
-    {
-      "key": "wcl-ptr-raid-raw",
-      "label": "Warcraft Logs 12.1 PTR raid raw-DPS pooled medians (zone 54 Heroic, API best-parses — deterministic fetch recipe; floors set 2026-07-17 from the first landing, 27 specs)",
-      "maxAgeDays": 10,
-      "evidence": "wcl",
-      "date": {
-        "type": "metrics",
-        "source": "warcraftlogs",
-        "namePattern": "Median raw DPS \\(12\\.1 PTR Venomous Abyss",
-        "minFresh": 15
-      },
-      "rows": {
-        "type": "metrics",
-        "source": "warcraftlogs",
-        "namePattern": "Median raw DPS \\(12\\.1 PTR Venomous Abyss",
-        "min": 16
-      }
-    },
-    {
-      "key": "wcl-ptr-mplus-raw",
-      "label": "Warcraft Logs 12.1 PTR M+ raw-DPS pooled medians (zone 56, API best-parses — deterministic fetch recipe; floors set 2026-07-17 from the first landing, 27 specs)",
-      "maxAgeDays": 10,
-      "evidence": "wcl",
-      "date": {
-        "type": "metrics",
-        "source": "warcraftlogs",
-        "namePattern": "Median raw DPS \\(12\\.1 PTR M\\+ keys",
-        "minFresh": 15
-      },
-      "rows": {
-        "type": "metrics",
-        "source": "warcraftlogs",
-        "namePattern": "Median raw DPS \\(12\\.1 PTR M\\+ keys",
-        "min": 16
       }
     },
     {

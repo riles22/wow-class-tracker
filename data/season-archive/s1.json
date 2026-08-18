@@ -1,0 +1,3372 @@
+{
+  "kind": "season-archive",
+  "season": "s1",
+  "seasonName": "Season 1",
+  "label": "12.0.7",
+  "frozenAt": "2026-08-18",
+  "gitSha": "2c38a9552c40ecc56389c1d79ea34a76e5be4b20",
+  "consensusVersion": 4,
+  "bands": [
+    {
+      "tier": "S",
+      "min": 88
+    },
+    {
+      "tier": "A+",
+      "min": 74
+    },
+    {
+      "tier": "A",
+      "min": 58
+    },
+    {
+      "tier": "B",
+      "min": 40
+    },
+    {
+      "tier": "C",
+      "min": 0
+    }
+  ],
+  "spreadThreshold": 22,
+  "sources": [
+    {
+      "id": "icyveins",
+      "name": "Icy Veins",
+      "raid": {
+        "lane": "frozen",
+        "frozenAt": "2026-08-11",
+        "fromCommit": "9ed717de57a0b19cecf0e54e2b67b2649660fcc9",
+        "snapshot": "2026-08-18"
+      },
+      "mplus": {
+        "lane": "frozen",
+        "frozenAt": "2026-08-11",
+        "fromCommit": "9ed717de57a0b19cecf0e54e2b67b2649660fcc9",
+        "snapshot": "2026-08-18"
+      }
+    },
+    {
+      "id": "method",
+      "name": "Method",
+      "raid": {
+        "lane": "frozen",
+        "frozenAt": "2026-08-14",
+        "fromCommit": "f02caec40afc5669a985efbabbaa389ab112266d",
+        "snapshot": "2026-08-18"
+      },
+      "mplus": {
+        "lane": "frozen",
+        "frozenAt": "2026-08-14",
+        "fromCommit": "f02caec40afc5669a985efbabbaa389ab112266d",
+        "snapshot": "2026-08-18"
+      }
+    },
+    {
+      "id": "wowhead",
+      "name": "Wowhead",
+      "raid": {
+        "lane": "frozen",
+        "frozenAt": "2026-08-09",
+        "fromCommit": "8aba2ba13e3896b6f8ae4adf2430c14e7ef06e02",
+        "snapshot": "2026-08-18"
+      },
+      "mplus": {
+        "lane": "frozen",
+        "frozenAt": "2026-08-09",
+        "fromCommit": "8aba2ba13e3896b6f8ae4adf2430c14e7ef06e02",
+        "snapshot": "2026-08-18"
+      }
+    },
+    {
+      "id": "archon",
+      "name": "Archon",
+      "raid": {
+        "lane": "live",
+        "snapshot": "2026-08-18"
+      },
+      "mplus": {
+        "lane": "live",
+        "snapshot": "2026-08-18"
+      }
+    }
+  ],
+  "brackets": {
+    "raid": [
+      {
+        "class": "Warrior",
+        "spec": "Protection",
+        "role": "Tank",
+        "tier": "S",
+        "score": 91,
+        "spread": 30,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "S",
+            "score": 92,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "S",
+            "score": 100,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "A",
+            "score": 70,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "S",
+            "score": 100
+          }
+        ]
+      },
+      {
+        "class": "Hunter",
+        "spec": "Marksmanship",
+        "role": "DPS",
+        "tier": "A+",
+        "score": 81,
+        "spread": 30,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "A+",
+            "score": 82,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "S",
+            "score": 100,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "A",
+            "score": 70,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "A",
+            "score": 72
+          }
+        ]
+      },
+      {
+        "class": "Mage",
+        "spec": "Frost",
+        "role": "DPS",
+        "tier": "A+",
+        "score": 81,
+        "spread": 30,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "A+",
+            "score": 82,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "S",
+            "score": 100,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "A",
+            "score": 70,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "A",
+            "score": 72
+          }
+        ]
+      },
+      {
+        "class": "Druid",
+        "spec": "Guardian",
+        "role": "Tank",
+        "tier": "A+",
+        "score": 79,
+        "spread": 48,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "S",
+            "score": 92,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "A",
+            "score": 72,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "B",
+            "score": 52,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "S",
+            "score": 100
+          }
+        ]
+      },
+      {
+        "class": "Paladin",
+        "spec": "Holy",
+        "role": "Healer",
+        "tier": "A+",
+        "score": 79,
+        "spread": 48,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "S",
+            "score": 92,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "A",
+            "score": 72,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "B",
+            "score": 52,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "S",
+            "score": 100
+          }
+        ]
+      },
+      {
+        "class": "Warlock",
+        "spec": "Demonology",
+        "role": "DPS",
+        "tier": "A+",
+        "score": 78,
+        "spread": 52,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "S",
+            "score": 92,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "S",
+            "score": 100,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "A",
+            "score": 70,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "B",
+            "score": 48
+          }
+        ]
+      },
+      {
+        "class": "Demon Hunter",
+        "spec": "Devourer",
+        "role": "DPS",
+        "tier": "A+",
+        "score": 75,
+        "spread": 52,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "A+",
+            "score": 82,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "S",
+            "score": 100,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "A",
+            "score": 70,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "B",
+            "score": 48
+          }
+        ]
+      },
+      {
+        "class": "Warlock",
+        "spec": "Destruction",
+        "role": "DPS",
+        "tier": "A+",
+        "score": 74,
+        "spread": 12,
+        "diverges": false,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "A+",
+            "score": 82,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "A",
+            "score": 72,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "A",
+            "score": 70,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "A",
+            "score": 72
+          }
+        ]
+      },
+      {
+        "class": "Evoker",
+        "spec": "Preservation",
+        "role": "Healer",
+        "tier": "A",
+        "score": 72,
+        "spread": 76,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "S",
+            "score": 92,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "S",
+            "score": 100,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "A",
+            "score": 70,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "C",
+            "score": 24
+          }
+        ]
+      },
+      {
+        "class": "Evoker",
+        "spec": "Devastation",
+        "role": "DPS",
+        "tier": "A",
+        "score": 68,
+        "spread": 52,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "B",
+            "score": 48,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "A",
+            "score": 72,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "B",
+            "score": 52,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "S",
+            "score": 100
+          }
+        ]
+      },
+      {
+        "class": "Monk",
+        "spec": "Mistweaver",
+        "role": "Healer",
+        "tier": "A",
+        "score": 68,
+        "spread": 76,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "B",
+            "score": 48,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "S",
+            "score": 100,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "S",
+            "score": 100,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "C",
+            "score": 24
+          }
+        ]
+      },
+      {
+        "class": "Druid",
+        "spec": "Restoration",
+        "role": "Healer",
+        "tier": "A",
+        "score": 67,
+        "spread": 52,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "B",
+            "score": 48,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "A",
+            "score": 72,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "S",
+            "score": 100,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "B",
+            "score": 48
+          }
+        ]
+      },
+      {
+        "class": "Priest",
+        "spec": "Discipline",
+        "role": "Healer",
+        "tier": "A",
+        "score": 65,
+        "spread": 68,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "S",
+            "score": 92,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "A",
+            "score": 72,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "A",
+            "score": 70,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "C",
+            "score": 24
+          }
+        ]
+      },
+      {
+        "class": "Druid",
+        "spec": "Balance",
+        "role": "DPS",
+        "tier": "A",
+        "score": 64,
+        "spread": 66,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "B",
+            "score": 48,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "A",
+            "score": 72,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "C",
+            "score": 34,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "S",
+            "score": 100
+          }
+        ]
+      },
+      {
+        "class": "Evoker",
+        "spec": "Augmentation",
+        "role": "DPS",
+        "tier": "A",
+        "score": 64,
+        "spread": 24,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "A",
+            "score": 66,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "B",
+            "score": 48,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "A",
+            "score": 70,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "A",
+            "score": 72
+          }
+        ]
+      },
+      {
+        "class": "Monk",
+        "spec": "Windwalker",
+        "role": "DPS",
+        "tier": "A",
+        "score": 64,
+        "spread": 34,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "A+",
+            "score": 82,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "A",
+            "score": 72,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "B",
+            "score": 52,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "B",
+            "score": 48
+          }
+        ]
+      },
+      {
+        "class": "Priest",
+        "spec": "Shadow",
+        "role": "DPS",
+        "tier": "A",
+        "score": 64,
+        "spread": 34,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "A+",
+            "score": 82,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "B",
+            "score": 48,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "B",
+            "score": 52,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "A",
+            "score": 72
+          }
+        ]
+      },
+      {
+        "class": "Death Knight",
+        "spec": "Blood",
+        "role": "Tank",
+        "tier": "A",
+        "score": 62,
+        "spread": 52,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "B",
+            "score": 48,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "B",
+            "score": 48,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "B",
+            "score": 52,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "S",
+            "score": 100
+          }
+        ]
+      },
+      {
+        "class": "Death Knight",
+        "spec": "Unholy",
+        "role": "DPS",
+        "tier": "A",
+        "score": 62,
+        "spread": 34,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "A+",
+            "score": 82,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "B",
+            "score": 48,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "A",
+            "score": 70,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "B",
+            "score": 48
+          }
+        ]
+      },
+      {
+        "class": "Shaman",
+        "spec": "Elemental",
+        "role": "DPS",
+        "tier": "A",
+        "score": 62,
+        "spread": 52,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "B",
+            "score": 48,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "B",
+            "score": 48,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "B",
+            "score": 52,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "S",
+            "score": 100
+          }
+        ]
+      },
+      {
+        "class": "Hunter",
+        "spec": "Survival",
+        "role": "DPS",
+        "tier": "A",
+        "score": 60,
+        "spread": 44,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "S",
+            "score": 92,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "B",
+            "score": 48,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "B",
+            "score": 52,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "B",
+            "score": 48
+          }
+        ]
+      },
+      {
+        "class": "Monk",
+        "spec": "Brewmaster",
+        "role": "Tank",
+        "tier": "A",
+        "score": 60,
+        "spread": 24,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "A",
+            "score": 66,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "A",
+            "score": 72,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "B",
+            "score": 52,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "B",
+            "score": 48
+          }
+        ]
+      },
+      {
+        "class": "Paladin",
+        "spec": "Retribution",
+        "role": "DPS",
+        "tier": "A",
+        "score": 60,
+        "spread": 24,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "B",
+            "score": 48,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "A",
+            "score": 72,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "A",
+            "score": 70,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "B",
+            "score": 48
+          }
+        ]
+      },
+      {
+        "class": "Rogue",
+        "spec": "Subtlety",
+        "role": "DPS",
+        "tier": "A",
+        "score": 60,
+        "spread": 24,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "A",
+            "score": 66,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "B",
+            "score": 48,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "B",
+            "score": 52,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "A",
+            "score": 72
+          }
+        ]
+      },
+      {
+        "class": "Warrior",
+        "spec": "Fury",
+        "role": "DPS",
+        "tier": "A",
+        "score": 60,
+        "spread": 24,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "A",
+            "score": 66,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "A",
+            "score": 72,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "B",
+            "score": 52,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "B",
+            "score": 48
+          }
+        ]
+      },
+      {
+        "class": "Warrior",
+        "spec": "Arms",
+        "role": "DPS",
+        "tier": "B",
+        "score": 56,
+        "spread": 76,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "A",
+            "score": 66,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "C",
+            "score": 24,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "C",
+            "score": 34,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "S",
+            "score": 100
+          }
+        ]
+      },
+      {
+        "class": "Demon Hunter",
+        "spec": "Havoc",
+        "role": "DPS",
+        "tier": "B",
+        "score": 55,
+        "spread": 24,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "B",
+            "score": 48,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "B",
+            "score": 48,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "B",
+            "score": 52,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "A",
+            "score": 72
+          }
+        ]
+      },
+      {
+        "class": "Priest",
+        "spec": "Holy",
+        "role": "Healer",
+        "tier": "B",
+        "score": 54,
+        "spread": 48,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "A",
+            "score": 66,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "C",
+            "score": 24,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "B",
+            "score": 52,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "A",
+            "score": 72
+          }
+        ]
+      },
+      {
+        "class": "Shaman",
+        "spec": "Restoration",
+        "role": "Healer",
+        "tier": "B",
+        "score": 54,
+        "spread": 48,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "A",
+            "score": 66,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "C",
+            "score": 24,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "B",
+            "score": 52,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "A",
+            "score": 72
+          }
+        ]
+      },
+      {
+        "class": "Mage",
+        "spec": "Fire",
+        "role": "DPS",
+        "tier": "B",
+        "score": 52,
+        "spread": 76,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "C",
+            "score": 30,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "C",
+            "score": 24,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "B",
+            "score": 52,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "S",
+            "score": 100
+          }
+        ]
+      },
+      {
+        "class": "Rogue",
+        "spec": "Assassination",
+        "role": "DPS",
+        "tier": "B",
+        "score": 49,
+        "spread": 48,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "B",
+            "score": 48,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "C",
+            "score": 24,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "B",
+            "score": 52,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "A",
+            "score": 72
+          }
+        ]
+      },
+      {
+        "class": "Rogue",
+        "spec": "Outlaw",
+        "role": "DPS",
+        "tier": "B",
+        "score": 49,
+        "spread": 48,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "A",
+            "score": 66,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "C",
+            "score": 24,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "C",
+            "score": 34,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "A",
+            "score": 72
+          }
+        ]
+      },
+      {
+        "class": "Shaman",
+        "spec": "Enhancement",
+        "role": "DPS",
+        "tier": "B",
+        "score": 49,
+        "spread": 32,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "A",
+            "score": 66,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "B",
+            "score": 48,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "C",
+            "score": 34,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "B",
+            "score": 48
+          }
+        ]
+      },
+      {
+        "class": "Warlock",
+        "spec": "Affliction",
+        "role": "DPS",
+        "tier": "B",
+        "score": 49,
+        "spread": 48,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "A",
+            "score": 66,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "A",
+            "score": 72,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "C",
+            "score": 34,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "C",
+            "score": 24
+          }
+        ]
+      },
+      {
+        "class": "Druid",
+        "spec": "Feral",
+        "role": "DPS",
+        "tier": "B",
+        "score": 45,
+        "spread": 22,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "C",
+            "score": 30,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "B",
+            "score": 48,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "B",
+            "score": 52,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "B",
+            "score": 48
+          }
+        ]
+      },
+      {
+        "class": "Hunter",
+        "spec": "Beast Mastery",
+        "role": "DPS",
+        "tier": "B",
+        "score": 45,
+        "spread": 48,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "B",
+            "score": 48,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "C",
+            "score": 24,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "C",
+            "score": 34,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "A",
+            "score": 72
+          }
+        ]
+      },
+      {
+        "class": "Mage",
+        "spec": "Arcane",
+        "role": "DPS",
+        "tier": "B",
+        "score": 45,
+        "spread": 48,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "C",
+            "score": 30,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "C",
+            "score": 24,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "B",
+            "score": 52,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "A",
+            "score": 72
+          }
+        ]
+      },
+      {
+        "class": "Death Knight",
+        "spec": "Frost",
+        "role": "DPS",
+        "tier": "B",
+        "score": 44,
+        "spread": 68,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "S",
+            "score": 92,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "C",
+            "score": 24,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "C",
+            "score": 34,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "C",
+            "score": 24
+          }
+        ]
+      },
+      {
+        "class": "Paladin",
+        "spec": "Protection",
+        "role": "Tank",
+        "tier": "C",
+        "score": 39,
+        "spread": 24,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "B",
+            "score": 48,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "C",
+            "score": 24,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "C",
+            "score": 34,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "B",
+            "score": 48
+          }
+        ]
+      },
+      {
+        "class": "Demon Hunter",
+        "spec": "Vengeance",
+        "role": "Tank",
+        "tier": "C",
+        "score": 29,
+        "spread": 10,
+        "diverges": false,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "C",
+            "score": 30,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "C",
+            "score": 34,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "C",
+            "score": 24
+          }
+        ]
+      }
+    ],
+    "mplus": [
+      {
+        "class": "Monk",
+        "spec": "Mistweaver",
+        "role": "Healer",
+        "tier": "S",
+        "score": 91,
+        "spread": 28,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "S",
+            "score": 92,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "A",
+            "score": 72,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "S",
+            "score": 100,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "S",
+            "score": 100
+          }
+        ]
+      },
+      {
+        "class": "Death Knight",
+        "spec": "Unholy",
+        "role": "DPS",
+        "tier": "A+",
+        "score": 87,
+        "spread": 28,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "S",
+            "score": 92,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "A",
+            "score": 72,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "A+",
+            "score": 84,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "S",
+            "score": 100
+          }
+        ]
+      },
+      {
+        "class": "Demon Hunter",
+        "spec": "Devourer",
+        "role": "DPS",
+        "tier": "A+",
+        "score": 87,
+        "spread": 28,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "S",
+            "score": 92,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "A",
+            "score": 72,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "A+",
+            "score": 84,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "S",
+            "score": 100
+          }
+        ]
+      },
+      {
+        "class": "Evoker",
+        "spec": "Augmentation",
+        "role": "DPS",
+        "tier": "A+",
+        "score": 87,
+        "spread": 28,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "S",
+            "score": 92,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "A",
+            "score": 72,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "A+",
+            "score": 84,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "S",
+            "score": 100
+          }
+        ]
+      },
+      {
+        "class": "Druid",
+        "spec": "Guardian",
+        "role": "Tank",
+        "tier": "A+",
+        "score": 85,
+        "spread": 52,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "S",
+            "score": 92,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "B",
+            "score": 48,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "S",
+            "score": 100,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "S",
+            "score": 100
+          }
+        ]
+      },
+      {
+        "class": "Shaman",
+        "spec": "Restoration",
+        "role": "Healer",
+        "tier": "A+",
+        "score": 82,
+        "spread": 28,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "A+",
+            "score": 82,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "A",
+            "score": 72,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "S",
+            "score": 100,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "A",
+            "score": 72
+          }
+        ]
+      },
+      {
+        "class": "Monk",
+        "spec": "Brewmaster",
+        "role": "Tank",
+        "tier": "A+",
+        "score": 74,
+        "spread": 12,
+        "diverges": false,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "A+",
+            "score": 82,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "A",
+            "score": 72,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "A",
+            "score": 70,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "A",
+            "score": 72
+          }
+        ]
+      },
+      {
+        "class": "Shaman",
+        "spec": "Elemental",
+        "role": "DPS",
+        "tier": "A+",
+        "score": 74,
+        "spread": 12,
+        "diverges": false,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "A+",
+            "score": 82,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "A",
+            "score": 72,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "A",
+            "score": 70,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "A",
+            "score": 72
+          }
+        ]
+      },
+      {
+        "class": "Warlock",
+        "spec": "Demonology",
+        "role": "DPS",
+        "tier": "A",
+        "score": 74,
+        "spread": 18,
+        "diverges": false,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "A",
+            "score": 66,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "A",
+            "score": 72,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "A+",
+            "score": 84,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "A",
+            "score": 72
+          }
+        ]
+      },
+      {
+        "class": "Druid",
+        "spec": "Feral",
+        "role": "DPS",
+        "tier": "A",
+        "score": 70,
+        "spread": 30,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "A+",
+            "score": 82,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "A",
+            "score": 72,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "B",
+            "score": 52,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "A",
+            "score": 72
+          }
+        ]
+      },
+      {
+        "class": "Hunter",
+        "spec": "Survival",
+        "role": "DPS",
+        "tier": "A",
+        "score": 70,
+        "spread": 30,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "A+",
+            "score": 82,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "A",
+            "score": 72,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "B",
+            "score": 52,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "A",
+            "score": 72
+          }
+        ]
+      },
+      {
+        "class": "Warrior",
+        "spec": "Arms",
+        "role": "DPS",
+        "tier": "A",
+        "score": 69,
+        "spread": 76,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "A+",
+            "score": 82,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "C",
+            "score": 24,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "A",
+            "score": 70,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "S",
+            "score": 100
+          }
+        ]
+      },
+      {
+        "class": "Paladin",
+        "spec": "Retribution",
+        "role": "DPS",
+        "tier": "A",
+        "score": 68,
+        "spread": 34,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "A+",
+            "score": 82,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "B",
+            "score": 48,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "A",
+            "score": 70,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "A",
+            "score": 72
+          }
+        ]
+      },
+      {
+        "class": "Rogue",
+        "spec": "Subtlety",
+        "role": "DPS",
+        "tier": "A",
+        "score": 66,
+        "spread": 20,
+        "diverges": false,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "A",
+            "score": 66,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "A",
+            "score": 72,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "B",
+            "score": 52,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "A",
+            "score": 72
+          }
+        ]
+      },
+      {
+        "class": "Mage",
+        "spec": "Frost",
+        "role": "DPS",
+        "tier": "A",
+        "score": 64,
+        "spread": 24,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "A",
+            "score": 66,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "A",
+            "score": 72,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "A",
+            "score": 70,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "B",
+            "score": 48
+          }
+        ]
+      },
+      {
+        "class": "Shaman",
+        "spec": "Enhancement",
+        "role": "DPS",
+        "tier": "A",
+        "score": 64,
+        "spread": 34,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "A+",
+            "score": 82,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "B",
+            "score": 48,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "B",
+            "score": 52,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "A",
+            "score": 72
+          }
+        ]
+      },
+      {
+        "class": "Rogue",
+        "spec": "Assassination",
+        "role": "DPS",
+        "tier": "A",
+        "score": 60,
+        "spread": 24,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "A",
+            "score": 66,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "B",
+            "score": 48,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "B",
+            "score": 52,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "A",
+            "score": 72
+          }
+        ]
+      },
+      {
+        "class": "Warrior",
+        "spec": "Fury",
+        "role": "DPS",
+        "tier": "A",
+        "score": 60,
+        "spread": 24,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "A",
+            "score": 66,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "B",
+            "score": 48,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "B",
+            "score": 52,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "A",
+            "score": 72
+          }
+        ]
+      },
+      {
+        "class": "Priest",
+        "spec": "Shadow",
+        "role": "DPS",
+        "tier": "A",
+        "score": 59,
+        "spread": 48,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "A+",
+            "score": 82,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "B",
+            "score": 48,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "C",
+            "score": 34,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "A",
+            "score": 72
+          }
+        ]
+      },
+      {
+        "class": "Demon Hunter",
+        "spec": "Havoc",
+        "role": "DPS",
+        "tier": "B",
+        "score": 58,
+        "spread": 34,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "A+",
+            "score": 82,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "B",
+            "score": 48,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "B",
+            "score": 52,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "B",
+            "score": 48
+          }
+        ]
+      },
+      {
+        "class": "Demon Hunter",
+        "spec": "Vengeance",
+        "role": "Tank",
+        "tier": "A",
+        "score": 58,
+        "spread": 48,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "A",
+            "score": 66,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "A",
+            "score": 72,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "A",
+            "score": 70,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "C",
+            "score": 24
+          }
+        ]
+      },
+      {
+        "class": "Hunter",
+        "spec": "Beast Mastery",
+        "role": "DPS",
+        "tier": "B",
+        "score": 58,
+        "spread": 34,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "A+",
+            "score": 82,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "B",
+            "score": 48,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "B",
+            "score": 52,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "B",
+            "score": 48
+          }
+        ]
+      },
+      {
+        "class": "Rogue",
+        "spec": "Outlaw",
+        "role": "DPS",
+        "tier": "B",
+        "score": 58,
+        "spread": 58,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "A+",
+            "score": 82,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "C",
+            "score": 24,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "B",
+            "score": 52,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "A",
+            "score": 72
+          }
+        ]
+      },
+      {
+        "class": "Druid",
+        "spec": "Restoration",
+        "role": "Healer",
+        "tier": "B",
+        "score": 54,
+        "spread": 48,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "B",
+            "score": 48,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "A",
+            "score": 72,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "A",
+            "score": 70,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "C",
+            "score": 24
+          }
+        ]
+      },
+      {
+        "class": "Priest",
+        "spec": "Discipline",
+        "role": "Healer",
+        "tier": "B",
+        "score": 54,
+        "spread": 18,
+        "diverges": false,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "A",
+            "score": 66,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "B",
+            "score": 48,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "B",
+            "score": 52,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "B",
+            "score": 48
+          }
+        ]
+      },
+      {
+        "class": "Druid",
+        "spec": "Balance",
+        "role": "DPS",
+        "tier": "B",
+        "score": 52,
+        "spread": 46,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "A",
+            "score": 66,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "B",
+            "score": 48,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "A",
+            "score": 70,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "C",
+            "score": 24
+          }
+        ]
+      },
+      {
+        "class": "Paladin",
+        "spec": "Protection",
+        "role": "Tank",
+        "tier": "B",
+        "score": 52,
+        "spread": 46,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "A",
+            "score": 66,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "B",
+            "score": 48,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "A",
+            "score": 70,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "C",
+            "score": 24
+          }
+        ]
+      },
+      {
+        "class": "Hunter",
+        "spec": "Marksmanship",
+        "role": "DPS",
+        "tier": "B",
+        "score": 51,
+        "spread": 42,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "C",
+            "score": 30,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "A",
+            "score": 72,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "B",
+            "score": 52,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "B",
+            "score": 48
+          }
+        ]
+      },
+      {
+        "class": "Monk",
+        "spec": "Windwalker",
+        "role": "DPS",
+        "tier": "B",
+        "score": 49,
+        "spread": 32,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "A",
+            "score": 66,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "B",
+            "score": 48,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "C",
+            "score": 34,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "B",
+            "score": 48
+          }
+        ]
+      },
+      {
+        "class": "Death Knight",
+        "spec": "Frost",
+        "role": "DPS",
+        "tier": "B",
+        "score": 48,
+        "spread": 42,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "A",
+            "score": 66,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "B",
+            "score": 48,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "B",
+            "score": 52,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "C",
+            "score": 24
+          }
+        ]
+      },
+      {
+        "class": "Paladin",
+        "spec": "Holy",
+        "role": "Healer",
+        "tier": "B",
+        "score": 48,
+        "spread": 46,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "B",
+            "score": 48,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "B",
+            "score": 48,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "A",
+            "score": 70,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "C",
+            "score": 24
+          }
+        ]
+      },
+      {
+        "class": "Mage",
+        "spec": "Arcane",
+        "role": "DPS",
+        "tier": "B",
+        "score": 43,
+        "spread": 28,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "B",
+            "score": 48,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "B",
+            "score": 48,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "B",
+            "score": 52,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "C",
+            "score": 24
+          }
+        ]
+      },
+      {
+        "class": "Warlock",
+        "spec": "Affliction",
+        "role": "DPS",
+        "tier": "B",
+        "score": 43,
+        "spread": 28,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "B",
+            "score": 48,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "C",
+            "score": 24,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "B",
+            "score": 52,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "B",
+            "score": 48
+          }
+        ]
+      },
+      {
+        "class": "Warlock",
+        "spec": "Destruction",
+        "role": "DPS",
+        "tier": "B",
+        "score": 43,
+        "spread": 28,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "B",
+            "score": 48,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "B",
+            "score": 48,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "B",
+            "score": 52,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "C",
+            "score": 24
+          }
+        ]
+      },
+      {
+        "class": "Warrior",
+        "spec": "Protection",
+        "role": "Tank",
+        "tier": "B",
+        "score": 43,
+        "spread": 28,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "B",
+            "score": 48,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "B",
+            "score": 48,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "B",
+            "score": 52,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "C",
+            "score": 24
+          }
+        ]
+      },
+      {
+        "class": "Evoker",
+        "spec": "Devastation",
+        "role": "DPS",
+        "tier": "C",
+        "score": 39,
+        "spread": 28,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "C",
+            "score": 30,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "B",
+            "score": 48,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "B",
+            "score": 52,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "C",
+            "score": 24
+          }
+        ]
+      },
+      {
+        "class": "Evoker",
+        "spec": "Preservation",
+        "role": "Healer",
+        "tier": "C",
+        "score": 39,
+        "spread": 28,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "C",
+            "score": 30,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "B",
+            "score": 48,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "B",
+            "score": 52,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "C",
+            "score": 24
+          }
+        ]
+      },
+      {
+        "class": "Mage",
+        "spec": "Fire",
+        "role": "DPS",
+        "tier": "C",
+        "score": 39,
+        "spread": 28,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "C",
+            "score": 30,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "C",
+            "score": 24,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "B",
+            "score": 52,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "B",
+            "score": 48
+          }
+        ]
+      },
+      {
+        "class": "Death Knight",
+        "spec": "Blood",
+        "role": "Tank",
+        "tier": "C",
+        "score": 33,
+        "spread": 28,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "C",
+            "score": 30,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "C",
+            "score": 24,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "B",
+            "score": 52,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "C",
+            "score": 24
+          }
+        ]
+      },
+      {
+        "class": "Priest",
+        "spec": "Holy",
+        "role": "Healer",
+        "tier": "C",
+        "score": 33,
+        "spread": 28,
+        "diverges": true,
+        "perSource": [
+          {
+            "source": "icyveins",
+            "label": "Icy Veins",
+            "tier": "C",
+            "score": 30,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-11"
+          },
+          {
+            "source": "method",
+            "label": "Method",
+            "tier": "C",
+            "score": 24,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-14"
+          },
+          {
+            "source": "wowhead",
+            "label": "Wowhead",
+            "tier": "B",
+            "score": 52,
+            "lane": "frozen",
+            "frozenAsOf": "2026-08-09"
+          },
+          {
+            "source": "archon",
+            "label": "Archon",
+            "tier": "C",
+            "score": 24
+          }
+        ]
+      }
+    ]
+  }
+}

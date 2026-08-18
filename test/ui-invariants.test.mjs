@@ -121,7 +121,12 @@ const tiersOf = (page, cls, spec) => page.evaluate(([cls, spec]) => {
 
 ui("every source view renders that source's OWN ratings", async page => {
   const data = payload();
-  const sources = data.sources.filter(s => s.kind === "tier-list").map(s => s.id);
+  // Post-flip (phases.ptr null) the era pin makes an era:"ptr" product unreachable by
+  // design — its option is disabled and any selection falls back to consensus, which is
+  // asserted in the PTR-list invariant below — so its own-letters check only applies
+  // while a PTR cycle is open.
+  const sources = data.sources.filter(s => s.kind === "tier-list" &&
+    (data.meta.phases.ptr || (s.era ?? "live") === "live")).map(s => s.id);
   assert.ok(sources.length >= 3, "expected several tier-list sources");
 
   let checked = 0;
@@ -298,7 +303,11 @@ ui("a deep link restores view state and the named drawer", async page => {
     inert: [...document.querySelectorAll(".row.open .drawer")].every(d => d.inert === false),
   }));
   assert.equal(s.src, "projection");
-  assert.equal(s.era, "ptr");
+  // Post-flip there is no PTR era: the era param is an inert no-op (dropped, the rest
+  // of the link still applies — the same rule as a removed overlay's view=) and the
+  // view is pinned live; the projection view itself stays reachable through the
+  // frozen-forecast lane (B6), which is what keeps src=projection restorable at all.
+  assert.equal(s.era, payload().meta.phases.ptr ? "ptr" : "live");
   assert.deepEqual(s.open, ["Destruction"]);
   assert.ok(s.inert, "an open drawer must not be inert");
 }, "#src=projection&era=ptr&role=DPS&spec=warlock-destruction");
@@ -369,11 +378,18 @@ ui("the Into-12.1 movers strip is era-gated, ranked, and drills through", async 
   assert.equal(claimed, realSpecs, `summary says ${claimed} specs, real count is ${realSpecs}: "${summary.trim()}"`);
   assert.ok(claimed <= data.specs.length, "a spec count can never exceed the roster");
 
-  // a 12.0.7-only view has no forecast, so the strip must disappear
-  await page.evaluate(() => document.querySelector('#eraseg button[data-era="live"]').click());
-  await page.waitForTimeout(200);
-  assert.equal(await page.evaluate(() => document.getElementById("movers").hidden), true,
-    "the movers strip must be era-gated out of a 12.0.7-only view");
+  if (data.meta.frozenForecast) {
+    // B6: post-flip everything IS the live view and the frozen record renders in it —
+    // hiding the strip would hide exactly the record the report card grades.
+    assert.equal(await page.evaluate(() => document.getElementById("movers").hidden), false,
+      "the movers strip stays visible for the frozen record");
+  } else {
+    // a 12.0.7-only view has no forecast, so the strip must disappear
+    await page.evaluate(() => document.querySelector('#eraseg button[data-era="live"]').click());
+    await page.waitForTimeout(200);
+    assert.equal(await page.evaluate(() => document.getElementById("movers").hidden), true,
+      "the movers strip must be era-gated out of a 12.0.7-only view");
+  }
 });
 
 ui("a change-strip row drills through even when a filter is hiding that spec", async page => {
@@ -598,6 +614,34 @@ ui("an era-gated PTR tier list shows its own 12.1 letters and is unreachable in 
   const subject = data.specs.find(s => s.ratings?.mplus?.[ptr.id] != null);
   assert.ok(subject, "expected at least one spec rated by the PTR list");
 
+  if (!data.meta.phases.ptr) {
+    // Post-flip the era pin makes the PTR product unreachable EVERYWHERE (DECISION 3 as
+    // amended 2026-08-12: the sunset happens AT the flip — the receipts live on in the
+    // frozen basis strings and the immutable artifact, not as a pickable column).
+    // Selecting it must land somewhere honest, exactly like the old 12.0.7-only gate.
+    await pickSource(page, ptr.id);
+    await page.waitForTimeout(150);
+    const gate = await page.evaluate(id => ({
+      disabled: document.querySelector(`#srcsel option[value="${id}"]`).disabled,
+      pressedSource: document.querySelector('#srcseg button[aria-pressed="true"]')?.dataset.source ?? null,
+      selValue: document.getElementById("srcsel").value
+    }), ptr.id);
+    assert.equal(gate.disabled, true, "the PTR source OPTION is disabled post-flip");
+    assert.equal(gate.pressedSource, "consensus", "the view falls back to consensus, not a blank grid");
+    assert.equal(gate.selValue, "", "…and the select resets to its placeholder");
+    const [, mplusTier] = await tiersOf(page, subject.class, subject.spec);
+    assert.equal(mplusTier, subject.consensus.mplus.tier, "the grid shows the live consensus");
+    // The "N tier lists feed a computed consensus" blurb counts what ACTUALLY feeds it —
+    // mid-transition that is the season-current outlets only (DECISION 1: the consensus
+    // honestly shrinks), so derive the expectation from perSource, same as the page does.
+    const feeding = Math.max(0, ...data.specs.map(sp => Math.max(
+      sp.consensus?.raid?.perSource?.length ?? 0, sp.consensus?.mplus?.perSource?.length ?? 0)));
+    const words = ["No","One","Two","Three","Four","Five","Six","Seven","Eight","Nine"];
+    const shown = await page.evaluate(() => document.getElementById("tlcount")?.textContent ?? "");
+    assert.equal(shown, words[feeding], "the derived tier-list count matches the consensus composition");
+    return;
+  }
+
   // 1. In the default (Both) era it behaves like any other source view: its OWN letters.
   await pickSource(page, ptr.id);
   await page.waitForTimeout(120);
@@ -766,6 +810,18 @@ ui("Compare all distinguishes 'no such measurement' from 'not fetched', and era-
   // 12.0.7-only view, not merely blank — same rule every other surface follows.
   const cols = () => page.$$eval("table.alltab thead tr:first-child th", th => th.map(x => x.dataset.k || "nm"));
   assert.ok((await cols()).includes("projection"), "the forecast column shows in the default (both) era");
+  const meta = payload().meta;
+  if (meta.frozenForecast) {
+    // B6: post-flip the default (and only) view IS live. The frozen forecast is the one
+    // projection surface exempt from the era gate — the PTR receipts still sunset with
+    // the flip (DECISION 3 as amended), so their columns must stay absent.
+    const live = await cols();
+    assert.ok(live.includes("projection"), "the FROZEN forecast column survives in the live view");
+    assert.ok(!live.includes("m:ptr"), "PTR testing ranks are sunset at the flip");
+    assert.ok(!live.some(k => k === "icyveins-ptr"), "the PTR tier list is sunset at the flip");
+    assert.ok(live.includes("consensus") && live.includes("icyveins"), "live-era columns remain");
+    return;
+  }
   await page.click("#all-close");
   await page.evaluate(() => document.querySelector('#eraseg button[data-era="live"]').click());
   await page.click("#allbtn");
@@ -838,7 +894,17 @@ ui("a spec with takes but no writeup says what IS known, not 'pending'", async p
     row.click();
     return row.querySelector(".d-summary")?.textContent ?? "";
   }, [bare.class, bare.spec]);
-  assert.match(text, /cited creator take/, "the slot points at the takes");
+  if (data.meta.phases.ptr) {
+    assert.match(text, /cited creator take/, "the slot points at the takes");
+  } else {
+    // Post-flip the writeup lane sunsets with the rest of the PTR surfaces (DECISION 3
+    // as amended): the drawer shows the live-season baseline slot instead. It must
+    // still never apologise with "pending" — that claim was false pre-flip and would
+    // be meaningless now.
+    assert.match(text, new RegExp(`${data.meta.phases.liveLabel.replace(/\./g, "\\.")} baseline view`),
+      "the slot names the live-season baseline");
+    assert.match(text, /Live-season data\./);
+  }
   assert.doesNotMatch(text, /pending/i, "and never implies nothing is known");
 });
 
@@ -1089,6 +1155,10 @@ ui("a source's column qualifier names the season that source's letters describe"
   }, id);
 
   for (const src of data.sources.filter(s => s.kind === "tier-list")) {
+    // Post-flip an era:"ptr" product's option redirects to consensus (its column is
+    // sunset), so the qualifiers on screen would not be ITS column's — skip it here;
+    // the redirect itself is pinned in the PTR-list invariant.
+    if (!phases.ptr && (src.era ?? "live") !== "live") continue;
     const quals = await qualsFor(src.id);
     assert.equal(quals.length, 2, `${src.id}: expected a raid and an M+ qualifier`);
     for (const [i, bracket] of ["raid", "mplus"].entries()) {
@@ -1112,9 +1182,17 @@ ui("a source's column qualifier names the season that source's letters describe"
     return [...document.querySelectorAll(".head .hqual")].map(e => e.textContent);
   });
   const nextLabel = labelOf(order[order.indexOf(phases.liveSeason) + 1]);
+  const ff = data.meta.frozenForecast;
   for (const q of projQuals) {
-    assert.match(q, /forecast$/, `the forecast column must say so, got "${q}"`);
-    assert.ok(q.startsWith(nextLabel), `the forecast column names ${nextLabel}, got "${q}"`);
+    if (ff) {
+      // B6: the column is a RECORD, and the qualifier — the anti-misattribution
+      // surface — must date the freeze so a screenshot cannot read it as a live opinion.
+      assert.equal(q, `12.1 forecast — frozen ${ff.date}`,
+        `the frozen forecast column must be dated, got "${q}"`);
+    } else {
+      assert.match(q, /forecast$/, `the forecast column must say so, got "${q}"`);
+      assert.ok(q.startsWith(nextLabel), `the forecast column names ${nextLabel}, got "${q}"`);
+    }
   }
 });
 

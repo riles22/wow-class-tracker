@@ -105,6 +105,15 @@ test("every PTR metric-name key resolves against real data (2026-08-08)", async 
   const data = await loadData(ROOT);
   const payload = buildPayload(data);
   const names = payload.meta.ptrMetricNames;
+  /* Between cycles (PHASES.ptr null — post-flip, pre-12.2-thread) there is no marker to
+     derive keys from, and the honest payload value is null: the page has no PTR series
+     to look up, and shipping stale keys would be the exact drift this test exists to
+     catch. The resolution walk below reactivates by itself when the next cycle opens. */
+  const { PHASES } = await import("../src/normalize.mjs");
+  if (!PHASES.ptr) {
+    assert.equal(names, null, "no PTR phase → meta.ptrMetricNames must be null, not stale keys");
+    return;
+  }
   assert.ok(names, "meta.ptrMetricNames must ship while a PTR phase exists");
 
   const known = new Set();

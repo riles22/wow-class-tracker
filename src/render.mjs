@@ -884,17 +884,25 @@ export const RANK_VERSION = 3;
    ("3 -> 4, it covers the scale re-spacing for free"). That bump is now SPENT. The flip
    recomposes the mean a second time — outlets leave the frozen lane and re-enter the live
    consensus as s2 — which is a genuine composition change and needs its own boundary, so
-   the flip commit must bump 4 -> 5, not 3 -> 4. */
-export const CONSENSUS_VERSION = 4;
+   the flip commit must bump 4 -> 5, not 3 -> 4.
+   v5 (2026-08-18, the flip commit): Season 2 open. liveSeason -> "s2", so icyveins /
+   method / wowhead leave the frozen s1 lane and re-enter the live consensus with their
+   S2 letters; archon (still s1) drops out as a laggard per DECISION 1. A second full
+   recomposition of the mean, disclosed to the movement engine by this bump —
+   `pickBaseline` refuses cross-version comparison and the strip narrates
+   "Season 2 baseline established" instead of ~40 arrows nobody caused. */
+export const CONSENSUS_VERSION = 5;
 const versionOf = (snap, field) => snap?.[field] ?? 1;
 const ranksComparableWith = snap => versionOf(snap, "rankVersion") === RANK_VERSION;
 const projComparableWith = snap => versionOf(snap, "projectionVersion") === PROJECTION_VERSION;
 const consensusComparableWith = snap => versionOf(snap, "consensusVersion") === CONSENSUS_VERSION;
 // Snapshot phase marker — the season/settledness tag the post-launch forecast report
 // card uses to find its endpoint ("first settled S2 consensus") without reading commit
-// history. Flip to "12.1-live" (or the S2 season id) when 12.1 ships and the tracker is
-// reconfigured for the live season — the boundary is then the first non-"12.1-ptr" snapshot.
-export const SNAPSHOT_PHASE = "12.1-ptr";
+// history. Flipped "12.1-ptr" -> "12.1-live" 2026-08-18 (the flip commit; the string is
+// the owner decision of 2026-08-15 — the field carries the PATCH phase, not the season,
+// and every post-flip snapshot is permanently stamped with it, so never change it again:
+// the boundary the report card finds is the first non-"12.1-ptr" snapshot.
+export const SNAPSHOT_PHASE = "12.1-live";
 /* The date by which SNAPSHOT_PHASE must no longer read "12.1-ptr". Season 2 opens
    2026-08-18 (12.1 itself lands 08-11); a couple of days of slack absorbs a delayed
    launch without nagging.
