@@ -1,35 +1,6 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
-  "videos": [
-    {
-      "id": "okaZqAQVRN0",
-      "creator": "izen (Izenhart)",
-      "title": "Midnight Season 2 | Raid Specs Meta Predictions",
-      "published": "2026-08-17",
-      "queuedAt": "2026-08-18"
-    },
-    {
-      "id": "x0fxEWTq3Pw",
-      "creator": "Zorthas",
-      "title": "Pre-Season Tuning Analysis & Tier List Update & Channel Update",
-      "published": "2026-08-18",
-      "queuedAt": "2026-08-18"
-    },
-    {
-      "id": "jlbQAmQMRCM",
-      "creator": "NeekapHere",
-      "title": "Retribution Paladin BUFFED — But We are Not Fixed Yet",
-      "published": "2026-08-18",
-      "queuedAt": "2026-08-18"
-    },
-    {
-      "id": "6MlSd4nBtrI",
-      "creator": "Dratnos",
-      "title": "Race to World First Preview (Recap Day 0)",
-      "published": "2026-08-18",
-      "queuedAt": "2026-08-18"
-    }
-  ],
+  "videos": [],
   "skipped": [
     {
       "id": "02rLfzEKLq4",
@@ -2550,6 +2521,13 @@
       "title": "Main/Alt Gearing and Prep",
       "reason": "Transcript verified: a gearing and preparation stream. Its Warlock strength commentary is superseded two days later by his 08-17 \"What Spec To Play & What To Run Week 1\", which was distilled instead, so distilling both would double-count the same creator.",
       "verifiedAt": "2026-08-17"
+    },
+    {
+      "id": "6MlSd4nBtrI",
+      "creator": "Dratnos",
+      "title": "Race to World First Preview (Recap Day 0)",
+      "reason": "Transcript verified: a multi-speaker Race to World First panel (217 speaker changes, guests including Kalamazi and Tal) whose Warrior content is a comp-drafting prediction game, not spec analysis. The one analytical line — that the most imbalanced two-target specs are Frost Mage, Arms Warrior, Outlaw and Devastation — cannot be attributed to Dratnos rather than a guest, and he already carries a live Arms read dated 2026-08-16. Nothing distillable within his Arms/Fury scope.",
+      "verifiedAt": "2026-08-18"
     }
   ],
   "seen": [
@@ -3073,7 +3051,11 @@
     "Tsy8Wr09VeA",
     "HKKQ9VrBR0s",
     "Nk8WpSLYCVo",
-    "f0DnTRIO3pw"
+    "f0DnTRIO3pw",
+    "okaZqAQVRN0",
+    "x0fxEWTq3Pw",
+    "jlbQAmQMRCM",
+    "6MlSd4nBtrI"
   ],
   "seenNote": "Video ids already considered by an earlier run that carry no richer record — migrated 2026-08-08 from backticked ids in watch-creators/log.md when the seen-set stopped being derived from prose. Distilled videos are cited by their take's url, transcript-verified rejects live in skipped[], and queued ones in videos[]; this lane is only for the remainder. Append here when a run dismisses a video at DISCOVERY (pre-cycle date, already-processed) without fetching a transcript."
 }

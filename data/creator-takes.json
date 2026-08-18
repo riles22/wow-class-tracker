@@ -5505,7 +5505,7 @@
       "patchContext": "12.1 PTR — pre-raid-week assessment of Retribution (supersedes his 08-12 read)",
       "url": "https://youtu.be/yUVywQqHtVs?t=324",
       "claim": "He reads Retribution as in serious trouble going into the raid week and names three causes. The tier set is the first: the Divine Arbitrator proc solution has to be tuned for Divine Storm and Final Verdict at once, and the four-piece ends up ignored in most builds, contributing meaningfully only for Herald single target. The second is raw damage, which he places in roughly the bottom five DPS specs on the simulations he has seen, compounded by a 6% PvE aura damage reduction applied at the end of Season 1 whose purpose he says he does not understand. The third is holy power and proc generation outrunning the buttons available to spend it, which he says makes Radiant Glory effectively unplayable and is worst in Herald. He reads the position as worse in raid than in Mythic+, and expects buffs to arrive within a few weeks as they did the previous patch rather than at launch.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Death Knight",
@@ -5613,6 +5613,18 @@
       "patchContext": "12.1 PTR — Assassination guide framing (supersedes his 08-12 read)",
       "url": "https://youtu.be/lFJw787T2Do?t=15",
       "claim": "He reads Assassination as likely to be competitive this season, hedged throughout — his framing is that it \"might actually be kind of competitive\". The reasons he gives are that it is a boss-slayer spec carrying strong cooldowns in Kingsbane and Deathmark, and that it performed well in the later parts of PTR testing, which leads him to expect it may also be good in Mythic+.",
+      "superseded": false
+    },
+    {
+      "class": "Paladin",
+      "spec": "Retribution",
+      "creator": "NeekapHere",
+      "date": "2026-08-18",
+      "sentiment": "mixed",
+      "bracket": "both",
+      "patchContext": "12.1 PTR — his reaction to the +6% all-ability-damage line added to the August 18 tuning post, plus a restatement of his Season 2 tier-set feedback (supersedes his 08-17 pre-raid-week read).",
+      "url": "https://youtu.be/jlbQAmQMRCM?t=32",
+      "claim": "He frames the +6% as undoing an unexplained 6% nerf applied at the very end of Season 1 rather than as a real gain, so Ret returns to roughly its Season 1 strength minus a working tier set. His tier-set complaint is that Divine Arbiter forces the wrong spender for the situation — Divine Storm on single target, Final Verdict in AoE — and the Arbiter damage does not cover what is lost, so it only works for Herald single target and is skipped in Herald AoE and Templar single target. He expects the buff to leave Ret around the middle at best and still names the bottom third for single target, calls it a step in the right direction that shows Blizzard is listening, and says the tier set still needs adjustment.",
       "superseded": false
     }
   ],
@@ -5989,7 +6001,7 @@
       "note": "Warns not to assume Unholy was weak just because Frost stood out: in raid testing Unholy was the spec appearing most in single-target and 2-3 target results (especially the season's pure single-target boss), among the best melee — hence a roughly 15% nerf hitting its core pet damage.",
       "patchContext": "Season 2 PTR — raid outlook",
       "url": "https://youtu.be/o7GiLqBNja8?t=119",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Demon Hunter",
@@ -6000,7 +6012,7 @@
       "note": "Sees Havoc as having been doing okay on the PTR — clearly better than Devourer but not at the nerfed DKs' level — and finds its 5% nerf a bit surprising.",
       "patchContext": "Season 2 PTR — raid outlook",
       "url": "https://youtu.be/o7GiLqBNja8?t=218",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Demon Hunter",
@@ -6066,7 +6078,7 @@
       "note": "Reads BM's changes as roughly a 10%+ net nerf that lands badly: BM was doing decently in single target but quite poorly in AoE, and the round guts its single-target strengths (Cobra Shot package, tier set halved) while giving nothing for the weak AoE.",
       "patchContext": "Season 2 PTR — raid outlook",
       "url": "https://youtu.be/o7GiLqBNja8?t=559",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Hunter",
@@ -6077,7 +6089,7 @@
       "note": "Says Marksmanship wasn't performing nearly as well as BM, particularly in single target, and calls its broad ~8-10% buff (everything except Aimed/Explosive Shot) quite good for the spec.",
       "patchContext": "Season 2 PTR — raid outlook",
       "url": "https://youtu.be/o7GiLqBNja8?t=649",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Mage",
@@ -6154,7 +6166,7 @@
       "note": "Says the 8% Subtlety nerf makes no sense to him: Sub was not doing great in raid testing and was unpopular in M+, so unless Blizzard has a bigger rework planned, the spec is just left worse off.",
       "patchContext": "Season 2 PTR — raid outlook",
       "url": "https://youtu.be/o7GiLqBNja8?t=1220",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Warlock",
@@ -6176,7 +6188,7 @@
       "note": "Calls Destruction the worst-performing spec alongside Fire Mage — very poor damage and very little play in testing — with the flat 10% buff as its only lifeline.",
       "patchContext": "Season 2 PTR — raid outlook",
       "url": "https://youtu.be/o7GiLqBNja8?t=1338",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Warrior",
@@ -6363,7 +6375,7 @@
       "note": "Even after multiple nerfs this cycle, izen names Frost DK one of the best-performing raid specs — it held up through the latest round of PTR testing and stayed near the top, one of his overall highlights of the meta alongside Arms and Ret.",
       "patchContext": "Season 2 PTR — raid testing outlook",
       "url": "https://youtu.be/m5lEbh4lrHA?t=1145",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Warrior",
@@ -6385,7 +6397,7 @@
       "note": "izen repeatedly pairs Ret ('red paladin') with Arms as the top melee in this testing round — strong single-target-weighted results that keep it competitive even on the caster-favoring add fights. Like Arms, it received no changes in the latest tuning pass, so this is existing strength.",
       "patchContext": "Season 2 PTR — raid testing outlook",
       "url": "https://youtu.be/m5lEbh4lrHA?t=176",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Priest",
@@ -6407,7 +6419,7 @@
       "note": "izen reads Frost Mage as good but outshone by Arcane: very strong on two-to-three-target cleave, but the closer a fight gets to pure single target the worse it does, where Arcane clearly pulls ahead. A solid cleave spec that no longer wins the mage slot outright.",
       "patchContext": "Season 2 PTR — raid testing outlook",
       "url": "https://youtu.be/m5lEbh4lrHA?t=414",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Warlock",
@@ -6418,7 +6430,7 @@
       "note": "Very profile-dependent: Affliction shines on the spread add fights (Soul Coiler, where izen notes it doing only ~12% boss damage and 88% on adds) but does noticeably worse in single target. He explicitly attributes its high placements to a favorable damage profile rather than across-the-board tuning.",
       "patchContext": "Season 2 PTR — raid testing outlook",
       "url": "https://youtu.be/m5lEbh4lrHA?t=479",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Evoker",
@@ -6451,7 +6463,7 @@
       "note": "Fury lands in izen's consistently-poor bottom group across the tested bosses; aside from a single-target-fight cameo in top logs, he reads it as undertuned rather than merely profile-unlucky.",
       "patchContext": "Season 2 PTR — raid testing outlook",
       "url": "https://youtu.be/m5lEbh4lrHA?t=594",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Mage",
@@ -6462,7 +6474,7 @@
       "note": "izen lists Fire Mage among the persistent bottom performers (with Assassination, Fury, Augmentation) — consistently low results across fights that he attributes to undertuning, not damage profile.",
       "patchContext": "Season 2 PTR — raid testing outlook",
       "url": "https://youtu.be/m5lEbh4lrHA?t=594",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Evoker",
@@ -6484,7 +6496,7 @@
       "note": "Despite the recent PTR talent changes refocusing it around Wildfire Bomb, izen calls Survival's raid-testing results disappointing — it did not translate the buffs into competitive numbers this round.",
       "patchContext": "Season 2 PTR — raid testing outlook",
       "url": "https://youtu.be/m5lEbh4lrHA?t=45",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Druid",
@@ -6495,7 +6507,7 @@
       "note": "izen points viewers to Feral as one of the disappointing results in the testing data — a weak showing across the tested bosses.",
       "patchContext": "Season 2 PTR — raid testing outlook",
       "url": "https://youtu.be/m5lEbh4lrHA?t=1097",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Druid",
@@ -6506,7 +6518,7 @@
       "note": "izen calls Balance one of the standout raid-testing performers of the PTR (his 'best five-ish' alongside Devourer, Arcane, Elemental and Arms), noting it has flown under the radar and been helped by Guardian and Resto Druid falling out of favor. The Stellar Amplification change nets out to a small nerf but he considers it philosophically good (capping the multi-target tab-target degeneracy); Balance stays strong.",
       "patchContext": "Season 2 PTR — raid testing outlook",
       "url": "https://youtu.be/0mtKobeslFA?t=453",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Mage",
@@ -6517,7 +6529,7 @@
       "note": "izen frames Arcane's ~2% Prismatic Bolt splash nerf as deserved: Arcane was one of the PTR all-stars in both performance and popularity and was placing top-three/top-four in the latest raid testing. He expects it to remain strong after only a light trim, with the bigger unknown being how much the Reflection of Radiance proc-rate nerf hits M+.",
       "patchContext": "Season 2 PTR — raid testing outlook",
       "url": "https://youtu.be/0mtKobeslFA?t=1068",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Shaman",
@@ -6528,7 +6540,7 @@
       "note": "izen again lists Elemental among the outstanding raid-testing results of the PTR (his standout group of Devourer, Arcane, Elemental, Balance and Arms), continuing to read it as one of the stronger raid DPS specs going into Season 2.",
       "patchContext": "Season 2 PTR — raid testing outlook",
       "url": "https://youtu.be/0mtKobeslFA?t=485",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Warrior",
@@ -6539,7 +6551,7 @@
       "note": "izen keeps Arms in his standout raid-testing group. The cleave-nerf / Dreadnought-buff change nets out roughly neutral-to-slightly-positive (he's puzzled Blizzard talked about spreading damage off cleave but only really buffed Dreadnought), so Arms holds its strong raid standing.",
       "patchContext": "Season 2 PTR — raid testing outlook",
       "url": "https://youtu.be/0mtKobeslFA?t=1535",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Demon Hunter",
@@ -6748,7 +6760,7 @@
       "note": "One of the ~5 melee specs repeatedly appearing higher up in the raid-testing tables (helped by fresh buffs) while most melee bunch at the bottom of a caster-favored tier.",
       "patchContext": "Season 2 PTR — raid testing outlook",
       "url": "https://youtu.be/gCNuP2AWvjU?t=1099",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Monk",
@@ -6759,7 +6771,7 @@
       "note": "Given 'perhaps an out' among the melee — seen higher up often enough across the tested bosses to join Arms/Frost/Enhancement/Ret as the melee that work, in a tier otherwise favoring casters.",
       "patchContext": "Season 2 PTR — raid testing outlook",
       "url": "https://youtu.be/gCNuP2AWvjU?t=1099",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Paladin",
@@ -6825,7 +6837,7 @@
       "note": "He rates Devourer as one of the better performers across the whole testing period — consistently near the top of raid results and one of the more consistent Mythic+ DPS entries — and reads the nerf as deserved. Mechanically it lands twice: the Eradicate splash cut hits the Void-Scarred build hardest (it leans on Eradicate where Annihilator gets more from Collapsing Star), and Annihilator then eats its own trim with Final Hour's Voidful bonus persisting 6 seconds instead of 8.",
       "patchContext": "Season 2 PTR — raid testing outlook",
       "url": "https://youtu.be/OP49uzLmaDk?t=185",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Demon Hunter",
@@ -6836,7 +6848,7 @@
       "note": "He describes Havoc as reasonably poor across the testing compared with Devourer, both in overall raid results and in Mythic+, and far less played. The combined Blade Dance / Chaos Strike / cooldown / Essence Break package nets to about 5% in both AoE and single-target-focused fights, which he calls exactly the kind of buff a weaker spec should be getting this close to release.",
       "patchContext": "Season 2 PTR — raid testing outlook",
       "url": "https://youtu.be/OP49uzLmaDk?t=278",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Druid",
@@ -6913,7 +6925,7 @@
       "note": "He calls the flat 10% aura buff the most understandable change of the round: Rogues sat consistently towards the bottom for most of the fights tested regardless of damage type, and Assassination is one of the two specs getting the full 10%.",
       "patchContext": "Season 2 PTR — raid testing outlook",
       "url": "https://youtu.be/OP49uzLmaDk?t=926",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Rogue",
@@ -6924,7 +6936,7 @@
       "note": "Subtlety takes the same flat 10% buff, and he singles it out as the correction of a mistake — he calls the 8% nerf it received a couple of weeks earlier 'really weird' given the spec was barely being played at all in either raid or Mythic+. He stops short of predicting it works, saying only that we will see whether the flat buffs do anything.",
       "patchContext": "Season 2 PTR — raid testing outlook",
       "url": "https://youtu.be/OP49uzLmaDk?t=958",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Rogue",
@@ -6935,7 +6947,7 @@
       "note": "Outlaw gets the smallest of the three Rogue buffs at 6%, which he reads as deliberate: it was the Rogue spec doing slightly better than the others across raid testing, so it needed the least.",
       "patchContext": "Season 2 PTR — raid testing outlook",
       "url": "https://youtu.be/OP49uzLmaDk?t=958",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Shaman",
@@ -6957,7 +6969,7 @@
       "note": "He groups Shadow with Balance as a spread-cleave outlier Blizzard appears concerned about for this raid, where several bosses put spread adds or multiple bosses up at once. The Void Volley cuts (−10%, −25% after a Tentacle slam, another 10% on Archon) come to only about a 2% nerf in pure AoE but specifically reduce the spread-cleave value that made the spec attractive on those encounters.",
       "patchContext": "Season 2 PTR — raid testing outlook",
       "url": "https://youtu.be/OP49uzLmaDk?t=1020",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Warrior",
@@ -7133,7 +7145,7 @@
       "note": "He is explicit that this is not an M+-specific read — he calls Augmentation quite poor in the raid as well as in Mythic+, and treats its absence as freeing raid DPS slots rather than costing the raid anything.",
       "patchContext": "Season 2 PTR — raid testing outlook",
       "url": "https://youtu.be/g0adl6lXPQM?t=722",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Evoker",
@@ -7144,7 +7156,7 @@
       "note": "Mentioned alongside Augmentation as being in \"a similar pretty poor situation\" for raid, so he counts both Evoker DPS specs as opening up raid DPS spots for other classes rather than competing for them.",
       "patchContext": "Season 2 PTR — raid testing outlook",
       "url": "https://youtu.be/g0adl6lXPQM?t=310",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Evoker",
@@ -7199,7 +7211,7 @@
       "note": "Says Holy Paladin is now much better in the raid as well, not just in Mythic+ — he treats the buff run as lifting it in both brackets.",
       "patchContext": "Season 2 PTR — raid testing outlook",
       "url": "https://youtu.be/g0adl6lXPQM?t=741",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Shaman",
@@ -7221,7 +7233,7 @@
       "note": "For raid he is more guarded: he thinks Resto Shaman would have a better chance at being just as strong as the newly-buffed Holy Paladin there, except that it goes out of mana within about five minutes of any fight.",
       "patchContext": "Season 2 PTR — raid testing outlook",
       "url": "https://youtu.be/g0adl6lXPQM?t=741",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Rogue",
@@ -7397,7 +7409,7 @@
       "note": "Working from a sheet collating PTR raid-testing logs, he says Subtlety sits among the bottom five specs on essentially every boss, and that rogue occupies three of the bottom four on Lightbinded Vanguard. He argues this is not only tuning: Midnight's class design stripped the spec's low-target cleave — Subtlety lost most of its Nimble Flurry damage — and much of the new raid is two- and three-target cleave, so the spec will do low damage on those fights unless heavily overtuned elsewhere. He also notes Subtlety took an 8% nerf a few weeks earlier that surprised people.",
       "patchContext": "Season 2 PTR — raid outlook (recorded before the 2026-07-31 rogue aura buffs)",
       "url": "https://youtu.be/JMnU-WUeOuk?t=203",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Rogue",
@@ -7408,7 +7420,7 @@
       "note": "He places Assassination alongside Subtlety among the bottom five specs on nearly every boss in the collated PTR raid-testing logs, and gives the same structural reason — rogue's low-target cleave was removed or reworked in the Midnight transition while much of the new raid is two- and three-target. He adds that the buffed Atrophic Poison raid buff does not rescue the class: environmental and untargetable damage means it delivers under 3% effective mitigation on most of the new bosses, so rogue DPS itself would have to rise significantly.",
       "patchContext": "Season 2 PTR — raid outlook (recorded before the 2026-07-31 rogue aura buffs)",
       "url": "https://youtu.be/JMnU-WUeOuk?t=205",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Rogue",
@@ -7419,7 +7431,7 @@
       "note": "He reads Outlaw as the strongest rogue spec in public PTR raid-testing logs but frames that as faint praise — probably still a middle-of-the-pack spec at best, with a damage profile he calls undesirable for raiding, and a real commitment to gear and craft a weapon toward. He notes Outlaw has not been the raid rogue spec in modern times, the last instance being early Dragonflight on Kurog.",
       "patchContext": "Season 2 PTR — raid outlook (recorded before the 2026-07-31 rogue aura buffs)",
       "url": "https://youtu.be/JMnU-WUeOuk?t=294",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Druid",
@@ -7473,7 +7485,7 @@
       "sentiment": "positive",
       "patchContext": "12.1 PTR — Season 2 raid outlook after full Venomous Abyss heroic/mythic testing",
       "url": "https://youtu.be/NG6Jepgl3js?t=579",
-      "superseded": false,
+      "superseded": true,
       "note": "He reads the later Venomous Abyss bosses as carrying a lot of two-target damage and names this spec as having potential there, in contrast to the spread-cleave specs he expects to be overhyped on the early bosses. He caveats that this is tuning-dependent and that the final boss was never tested."
     },
     {
@@ -7484,7 +7496,7 @@
       "sentiment": "positive",
       "patchContext": "Season 2 PTR — M+ outlook (final pre-launch M+ tier list, ranked for the highest keys)",
       "url": "https://youtu.be/SV3Snl21XC8?t=65",
-      "superseded": false,
+      "superseded": true,
       "note": "Top of S tier and his pick for best spec in the season: among the highest overall damage while also leading single-target boss damage, and it keeps full priority damage during AoE with some funnel on top. He reads the defensive complaints as outdated — two baseline Barrier charges, a Mirror Image stagger and extra avoidance make it durable enough to build around."
     },
     {
@@ -7495,7 +7507,7 @@
       "sentiment": "positive",
       "patchContext": "Season 2 PTR — M+ outlook (final pre-launch M+ tier list, ranked for the highest keys)",
       "url": "https://youtu.be/SV3Snl21XC8?t=104",
-      "superseded": false,
+      "superseded": true,
       "note": "Second S-tier spec, which he flags as a surprise. Lower overall than the big AoE specs but single-target priority damage on par with Arcane, and unusually strong on two-to-three target cleave, which he says several dungeons in the pool reward for long stretches. Caveat: it is on Slayer now, which he rates weaker than Colossus. He expects nearly every comp to run Arcane or Arms, often both."
     },
     {
@@ -7506,7 +7518,7 @@
       "sentiment": "positive",
       "patchContext": "Season 2 PTR — M+ outlook (final pre-launch M+ tier list, ranked for the highest keys)",
       "url": "https://youtu.be/SV3Snl21XC8?t=175",
-      "superseded": false,
+      "superseded": true,
       "note": "Top of A+. Strong damage with two builds — Annihilator for AoE with low single target, Voidguard for single target with moderate AoE — plus Chaos Brand, Darkness and genuine tankiness, which he argues is undervalued after watching DK/DH survive content others could not in Season 1. He calls it the most likely spec to round out a group; the caveats are having to commit to one build and very high sims that could invite a raid-driven nerf."
     },
     {
@@ -7517,7 +7529,7 @@
       "sentiment": "positive",
       "patchContext": "Season 2 PTR — M+ outlook (final pre-launch M+ tier list, ranked for the highest keys)",
       "url": "https://youtu.be/SV3Snl21XC8?t=228",
-      "superseded": false,
+      "superseded": true,
       "note": "A tier. Very good sustained five-target damage, now a consistent rather than bursty spec, decent single target and workable two-to-three target on the Farseer build, plus Skyfury as a group buff. Held out of S only because he thinks several comparable specs exist, and because stacking it with other squishy specs worries him defensively. He notes all mail specs are roughly 3% inflated on PTR by a mail-only bug."
     },
     {
@@ -7528,7 +7540,7 @@
       "sentiment": "mixed",
       "patchContext": "Season 2 PTR — M+ outlook (final pre-launch M+ tier list, ranked for the highest keys)",
       "url": "https://youtu.be/SV3Snl21XC8?t=298",
-      "superseded": false,
+      "superseded": true,
       "note": "He rates it similar to Elemental Shaman — a big AoE spec with weaker single target and no priority damage during AoE — and provides Mark of the Wild, which has never been dropped in past seasons. But he pushes back on the assumption that a Druid is auto-included: he considers Elemental a slightly better version of the same role, and thinks a no-Mark season is genuinely possible."
     },
     {
@@ -7539,7 +7551,7 @@
       "sentiment": "positive",
       "patchContext": "Season 2 PTR — M+ outlook (final pre-launch M+ tier list, ranked for the highest keys)",
       "url": "https://youtu.be/SV3Snl21XC8?t=368",
-      "superseded": false,
+      "superseded": true,
       "note": "A+. He argues the DKs were written off after an early-PTR nerf and are still good, pointing to Unholy logs topping overall damage with strong AoE and priority damage. The stated weakness is low single target. He notes it can operate at full range, unlike Frost."
     },
     {
@@ -7550,7 +7562,7 @@
       "sentiment": "positive",
       "patchContext": "Season 2 PTR — M+ outlook (final pre-launch M+ tier list, ranked for the highest keys)",
       "url": "https://youtu.be/SV3Snl21XC8?t=384",
-      "superseded": false,
+      "superseded": true,
       "note": "A+ alongside Unholy, with a damage profile he rates somewhat worse — rampy this season and more reliant on Skyfury, so he would want a Shaman in the group or would play Unholy instead. He also argues a DPS DK alongside a Blood DK is viable because the overlapping utility is mostly personal."
     },
     {
@@ -7561,7 +7573,7 @@
       "sentiment": "positive",
       "patchContext": "Season 2 PTR — M+ outlook (final pre-launch M+ tier list, ranked for the highest keys)",
       "url": "https://youtu.be/SV3Snl21XC8?t=488",
-      "superseded": false,
+      "superseded": true,
       "note": "A- and, he says, a real contender: currently carrying a positive bug worth roughly 5% too much damage, but strong on both AoE and single target even after discounting that. His caveat is stability rather than ceiling — he calls it historically the most bug-prone spec and expects it to be a nerf candidate."
     },
     {
@@ -7572,7 +7584,7 @@
       "sentiment": "positive",
       "patchContext": "Season 2 PTR — M+ outlook (final pre-launch M+ tier list, ranked for the highest keys)",
       "url": "https://youtu.be/SV3Snl21XC8?t=530",
-      "superseded": false,
+      "superseded": true,
       "note": "A-. Lots of AoE and strong single target, but more dependent on a specific pull style than the other Rogue specs. He thinks target cap is not very relevant this season given few large uncapped pulls, and that the buffs Outlaw wants will likely be present anyway given how good Warriors and Shamans look."
     },
     {
@@ -7583,7 +7595,7 @@
       "sentiment": "positive",
       "patchContext": "Season 2 PTR — M+ outlook (final pre-launch M+ tier list, ranked for the highest keys)",
       "url": "https://youtu.be/SV3Snl21XC8?t=554",
-      "superseded": false,
+      "superseded": true,
       "note": "A- and his \"dark horse\" pick — few players on PTR since a recent buff, but the logs that exist show high overall and very good priority damage. The stated weakness is pure single target with no adds around. He rates all three Rogue specs as high damage in M+ right now while noting Rogues historically fall off."
     },
     {
@@ -7605,7 +7617,7 @@
       "sentiment": "mixed",
       "patchContext": "Season 2 PTR — M+ outlook (final pre-launch M+ tier list, ranked for the highest keys)",
       "url": "https://youtu.be/SV3Snl21XC8?t=694",
-      "superseded": false,
+      "superseded": true,
       "note": "Top of B. Skyfury and Poison Cleansing Totem are real value and its burst is reasonable now, but he says nobody is putting up overall numbers near Elemental, and Doom Winds RNG can leave it short when it matters. His summary is that it lands where it did in Season 1 — playable but clearly behind the best specs."
     },
     {
@@ -7616,7 +7628,7 @@
       "sentiment": "negative",
       "patchContext": "Season 2 PTR — M+ outlook (final pre-launch M+ tier list, ranked for the highest keys)",
       "url": "https://youtu.be/SV3Snl21XC8?t=741",
-      "superseded": false,
+      "superseded": true,
       "note": "He calls it an all-around weak spec: low single target and poor at every low target count, weak priority damage, with mass AoE the only genuine strength. He thinks Windwalker may outclass it in the physical comp and expects Feral at best to hold that slot narrowly."
     },
     {
@@ -7704,7 +7716,7 @@
       "sentiment": "negative",
       "patchContext": "Season 2 PTR — M+ outlook (final pre-launch M+ tier list, ranked for the highest keys)",
       "url": "https://youtu.be/SV3Snl21XC8?t=1021",
-      "superseded": false,
+      "superseded": true,
       "note": "C tier. He groups all three Hunter specs as close together and mid, placing Beast Mastery behind Marksmanship, and says he does not think Hunter will be a good class next season if it stays as it is. He also notes the multi-Hunter marking change was reverted, leaving Hunter’s Mark unremarkable as a raid buff."
     },
     {
@@ -7726,7 +7738,7 @@
       "sentiment": "negative",
       "patchContext": "Season 2 PTR — M+ outlook (final pre-launch M+ tier list, ranked for the highest keys)",
       "url": "https://youtu.be/SV3Snl21XC8?t=1046",
-      "superseded": false,
+      "superseded": true,
       "note": "He says it genuinely looked good earlier in the PTR — strong single target and priority damage — but nerfs to the spec and to its priority/flash tree left the damage mid. His argument is that mid damage cannot carry a slow class with weak defensives, a poor kick and little relevant utility, so he sees it stuck in the pattern of being cut back because of raid scaling."
     },
     {
@@ -7737,7 +7749,7 @@
       "sentiment": "negative",
       "patchContext": "Season 2 PTR — M+ outlook (final pre-launch M+ tier list, ranked for the highest keys)",
       "url": "https://youtu.be/SV3Snl21XC8?t=1090",
-      "superseded": false,
+      "superseded": true,
       "note": "C tier. He notes almost nobody is playing it and logs are nearly absent, credits good single target backed by sims, but rates the AoE poor and says Arms outclasses it at essentially everything. He caps its realistic ceiling at B and explicitly flags the low sample size."
     },
     {
@@ -7781,7 +7793,7 @@
       "sentiment": "positive",
       "patchContext": "Season 2 PTR — M+ outlook (final pre-launch M+ tier list, ranked for the highest keys)",
       "url": "https://youtu.be/SV3Snl21XC8?t=1256",
-      "superseded": false,
+      "superseded": true,
       "note": "Clear S tier and in a category of its own among tanks: by far the most AoE damage of any tank, rivalling DPS on many pulls, while also being very durable. He notes a bug fix that reduced the damage it takes with its defensive up. His caveats are that high-key one-shot patterns have not been tested above the PTR key range, and that its position may rest on overtuned AoE damage that could be nerfed."
     },
     {
@@ -7847,7 +7859,7 @@
       "sentiment": "mixed",
       "patchContext": "Season 2 PTR — M+ outlook (final pre-launch M+ tier list, ranked for the highest keys)",
       "url": "https://youtu.be/SV3Snl21XC8?t=1575",
-      "superseded": false,
+      "superseded": true,
       "note": "He reports it as the most-hyped healer and the consensus strongest — the most healing in the game, with a tier set giving near-constant Infusion of Light spot heals that top people instantly, which he rates excellent for fixing mistakes and for pug play. But he explicitly disagrees with the S-tier framing: the damage is low (around 30k, closer to 60k on Lightsmith), and he argues it is not doing anything structurally broken the way Oracle Disc was, so a healer with 90% of the throughput and far more damage may simply be better."
     },
     {
@@ -7858,7 +7870,7 @@
       "sentiment": "positive",
       "patchContext": "Season 2 PTR — M+ outlook (final pre-launch M+ tier list, ranked for the highest keys)",
       "url": "https://youtu.be/SV3Snl21XC8?t=1706",
-      "superseded": false,
+      "superseded": true,
       "note": "His preferred healer over the more hyped Holy Paladin: decent healing with good stacked AoE, and it solves the damage problem with roughly 60k personal DPS plus Skyfury on top. The stated weakness is that its tier set is built on Healing Rain, so it needs the group stacked and does little concentrated spot healing — which makes it comp-dependent, bad alongside squishy specs and good with a melee or physical group. He notes its damage was also buffed."
     },
     {
@@ -7913,7 +7925,7 @@
       "sentiment": "negative",
       "patchContext": "Season 2 PTR — M+ outlook (final pre-launch M+ tier list, ranked for the highest keys)",
       "url": "https://youtu.be/SV3Snl21XC8?t=2210",
-      "superseded": false,
+      "superseded": true,
       "note": "His bottom-tier healer, stated bluntly: he does not think incremental healing buffs can fix it and believes it needs a redesign. He allows that mana is less of an issue now, especially on Oracle, but returns to the stop-start cast-to-heal profile, rates Prayer of Mending poor in keys, and calls the tier set weak."
     },
     {
@@ -8100,7 +8112,7 @@
       "note": "He rates Elemental the caster that most consistently gets closest to Arcane, with its AoE significantly buffed into the default choice and its real strength being consistency across single target, cleave and AoE alike. Two things could cost it the slot: it has no short-window burst — he contrasts it with Arcane or Arms lining up cooldowns on a spawn wave, where Elemental can only place Earthquake and chain-cast — and it is squishy, with a single 40% mitigation on a 90-second cooldown as its main defensive. He adds that much of its group value is contingent, since Windfury and Mastery matter far less if an Arms Warrior is not in the composition."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Mage",
       "spec": "Arcane",
       "creator": "Zorthas",
@@ -8144,7 +8156,7 @@
       "note": "He describes Devourer as having been very much considered a meta candidate, with its stock slipping somewhat after the PTR mastery rework while Balance and especially Elemental climbed past it — and then nerfed anyway in the final pass. He breaks the change down as a 14% buff to all damage set against a 12% cut to Reap, Call and Eradicate, more splash damage on Eradicate, and a tier set generating two bonus soul fragments instead of eight plus a further 10% cut to Reap. He nets it to roughly a 9% single-target nerf for Annihilator and 4% for Void's Guard, with AoE barely touched at about 2% for both, and notes the resource loss slows Metamorphosis re-entry so the meta cycle lengthens by around five seconds. His conclusion is comparative and is the source of the negative read: Devourer was one of several specs racing for the meta, and Arms, Elemental and Balance were all left unnerfed, so being the only one of that group to be cut is a bad week for it."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Druid",
       "spec": "Restoration",
       "creator": "izen (Izenhart)",
@@ -8188,7 +8200,7 @@
       "note": "He sets Arcane up as the change he considered most important going into the pass, describing it as heavily played on the PTR and doing the most damage overall in raid testing at every target count while dominating the top Mythic+ results, so that hefty nerfs were expected. They did not arrive. He measures the actual cut at about 5% single target and 3% AoE, arriving there from a 15% reduction to the Arcane Missiles tier-set bonus — worth roughly 5% by itself — plus a 2% per-stack reduction to the cumulative power bonus, offset by a flat 3% damage buff. His verdict is that relative to Arcane's power level this is very small: a slap on the wrist, and a clear win for anyone who had been afraid of the nerf or was planning to play it into the season opener."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Monk",
       "spec": "Mistweaver",
       "creator": "izen (Izenhart)",
@@ -8199,7 +8211,7 @@
       "note": "He draws an explicit contrast with Restoration Druid: where Druid's weak testing results were partly an artefact of players using the wrong playstyle, Mistweaver's low results were because Mistweaver was poor. He allows the tested Mistweavers were somewhat undergeared but says it still looked much worse than Druid did, and that this is why the spec received the larger buff — an 8% overall increase plus a four-piece change worth another 2-3%, so more than 10% healing done. His conclusion is nonetheless negative: he twice says it is still not enough, judging Mistweaver not a match for the higher-tier healers he names as Preservation, Discipline and Holy Paladin, nor for Restoration Shaman or the newly buffed Restoration Druid, and says this is not what a Mistweaver wanted to see before the season."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Priest",
       "spec": "Discipline",
       "creator": "izen (Izenhart)",
@@ -8320,7 +8332,7 @@
       "note": "In the closing summary of what the pass might have touched but did not, he names Holy Paladin first, saying he might have expected some nerfs to it and specifically to its Mythic+ healing power. He also lists it among the higher-tier healers Mistweaver is measured against and found short of. The read is positive by omission — a spec strong enough that he anticipated a corrective nerf, which did not come in the final pre-launch pass."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Evoker",
       "spec": "Preservation",
       "creator": "izen (Izenhart)",
@@ -8628,6 +8640,762 @@
       "patchContext": "Season 2 — pre-launch Mythic+ tier list. NOTE his stated basis: he says explicitly he is NOT rating specs by maximum potential power but by how likely they are to be played and to find groups, reasoning from PTR representation counts as much as from strength.",
       "url": "https://youtu.be/KktdoK1OZVY?t=780",
       "note": "He describes placing Unholy as an awkward call, saying it was not quite fair to keep it in the lower group but also not fair to put it in the higher one where it would read as ranking behind Frost Death Knight, and settles on treating it as the first of the B tier."
+    },
+    {
+      "superseded": false,
+      "class": "Death Knight",
+      "spec": "Blood",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-17",
+      "sentiment": "positive",
+      "bracket": "raid",
+      "patchContext": "Season 2 — pre-launch RAID meta predictions. He states his own caveat up front: the last raid testing was 2026-07-24 with three to four tuning rounds since, so the raid read is far more speculative than his Mythic+ one, and he frames it boss-damage-profile first rather than by single-target sims.",
+      "url": "https://youtu.be/okaZqAQVRN0?t=86",
+      "note": "He calls Blood the safest pick for best raid tank: it does the most tank damage, is already self-sufficient, and its grips carry pseudo raid-buff value he expects to be wanted on the first boss, Vashj'ir, the Coiled Altar and possibly Ula'tek."
+    },
+    {
+      "superseded": false,
+      "class": "Demon Hunter",
+      "spec": "Vengeance",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-17",
+      "sentiment": "negative",
+      "bracket": "raid",
+      "patchContext": "Season 2 — pre-launch RAID meta predictions. He states his own caveat up front: the last raid testing was 2026-07-24 with three to four tuning rounds since, so the raid read is far more speculative than his Mythic+ one, and he frames it boss-damage-profile first rather than by single-target sims.",
+      "url": "https://youtu.be/okaZqAQVRN0?t=170",
+      "note": "He puts Vengeance lowest of the tanks, saying it does not do anything particularly special, and notes the usual escape hatch is closed: the meta is not one where DPS Demon Hunters are weak enough that you would bring the tank purely for the debuff."
+    },
+    {
+      "superseded": false,
+      "class": "Paladin",
+      "spec": "Protection",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-17",
+      "sentiment": "mixed",
+      "bracket": "raid",
+      "patchContext": "Season 2 — pre-launch RAID meta predictions. He states his own caveat up front: the last raid testing was 2026-07-24 with three to four tuning rounds since, so the raid read is far more speculative than his Mythic+ one, and he frames it boss-damage-profile first rather than by single-target sims.",
+      "url": "https://youtu.be/okaZqAQVRN0?t=222",
+      "note": "He treats Protection Paladin as one of four situational second picks rather than a default, and the specific case he gives it is being used for immunity-based cheeses."
+    },
+    {
+      "superseded": false,
+      "class": "Warrior",
+      "spec": "Protection",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-17",
+      "sentiment": "mixed",
+      "bracket": "raid",
+      "patchContext": "Season 2 — pre-launch RAID meta predictions. He states his own caveat up front: the last raid testing was 2026-07-24 with three to four tuning rounds since, so the raid read is far more speculative than his Mythic+ one, and he frames it boss-damage-profile first rather than by single-target sims.",
+      "url": "https://youtu.be/okaZqAQVRN0?t=222",
+      "note": "He treats Protection Warrior as one of four situational second picks, with its case being fights carrying very high physical damage."
+    },
+    {
+      "superseded": false,
+      "class": "Monk",
+      "spec": "Brewmaster",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-17",
+      "sentiment": "mixed",
+      "bracket": "raid",
+      "patchContext": "Season 2 — pre-launch RAID meta predictions. He states his own caveat up front: the last raid testing was 2026-07-24 with three to four tuning rounds since, so the raid read is far more speculative than his Mythic+ one, and he frames it boss-damage-profile first rather than by single-target sims.",
+      "url": "https://youtu.be/okaZqAQVRN0?t=222",
+      "note": "He rates Brewmaster the smoothest damage intake of the group, but flags it as the tank most at risk of missing the comp because you are unlikely to be bringing a Mistweaver alongside it — while noting Windwalker is doing fine, which can supply the same raid buff."
+    },
+    {
+      "superseded": false,
+      "class": "Druid",
+      "spec": "Guardian",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-17",
+      "sentiment": "negative",
+      "bracket": "raid",
+      "patchContext": "Season 2 — pre-launch RAID meta predictions. He states his own caveat up front: the last raid testing was 2026-07-24 with three to four tuning rounds since, so the raid read is far more speculative than his Mythic+ one, and he frames it boss-damage-profile first rather than by single-target sims.",
+      "url": "https://youtu.be/okaZqAQVRN0?t=222",
+      "note": "He places Guardian below Paladin, Warrior and Brewmaster, saying those all seem potentially better options, with only Vengeance below it."
+    },
+    {
+      "superseded": false,
+      "class": "Priest",
+      "spec": "Discipline",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-17",
+      "sentiment": "positive",
+      "bracket": "raid",
+      "patchContext": "Season 2 — pre-launch RAID meta predictions. He states his own caveat up front: the last raid testing was 2026-07-24 with three to four tuning rounds since, so the raid read is far more speculative than his Mythic+ one, and he frames it boss-damage-profile first rather than by single-target sims.",
+      "url": "https://youtu.be/okaZqAQVRN0?t=271",
+      "note": "He puts Discipline in the top healer group on very high overall raid healing plus the DPS it contributes, and singles out that it is practically physically unable to run out of mana in this raid."
+    },
+    {
+      "superseded": false,
+      "class": "Evoker",
+      "spec": "Preservation",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-17",
+      "sentiment": "positive",
+      "bracket": "raid",
+      "patchContext": "Season 2 — pre-launch RAID meta predictions. He states his own caveat up front: the last raid testing was 2026-07-24 with three to four tuning rounds since, so the raid read is far more speculative than his Mythic+ one, and he frames it boss-damage-profile first rather than by single-target sims.",
+      "url": "https://youtu.be/okaZqAQVRN0?t=271",
+      "note": "He puts Preservation in the top healer group with the biggest ceiling for uncapped raid healing — the more raid damage goes out the better it does — but notes it runs out of mana far more easily than Discipline."
+    },
+    {
+      "superseded": false,
+      "class": "Paladin",
+      "spec": "Holy",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-17",
+      "sentiment": "positive",
+      "bracket": "raid",
+      "patchContext": "Season 2 — pre-launch RAID meta predictions. He states his own caveat up front: the last raid testing was 2026-07-24 with three to four tuning rounds since, so the raid read is far more speculative than his Mythic+ one, and he frames it boss-damage-profile first rather than by single-target sims.",
+      "url": "https://youtu.be/okaZqAQVRN0?t=305",
+      "note": "He calls Holy Paladin the default strongest spot healer and places it in the top healer group."
+    },
+    {
+      "superseded": false,
+      "class": "Shaman",
+      "spec": "Restoration",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-17",
+      "sentiment": "mixed",
+      "bracket": "raid",
+      "patchContext": "Season 2 — pre-launch RAID meta predictions. He states his own caveat up front: the last raid testing was 2026-07-24 with three to four tuning rounds since, so the raid read is far more speculative than his Mythic+ one, and he frames it boss-damage-profile first rather than by single-target sims.",
+      "url": "https://youtu.be/okaZqAQVRN0?t=310",
+      "note": "He places Resto Shaman one tier below the top three: it kept pace on HPS through testing until mana was counted, and it has essentially no mana-saving tools beyond stacking crit, so it is on a clock from the pull and runs dry faster than the specs above it."
+    },
+    {
+      "superseded": false,
+      "class": "Druid",
+      "spec": "Restoration",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-17",
+      "sentiment": "mixed",
+      "bracket": "raid",
+      "patchContext": "Season 2 — pre-launch RAID meta predictions. He states his own caveat up front: the last raid testing was 2026-07-24 with three to four tuning rounds since, so the raid read is far more speculative than his Mythic+ one, and he frames it boss-damage-profile first rather than by single-target sims.",
+      "url": "https://youtu.be/okaZqAQVRN0?t=344",
+      "note": "He calls Resto Druid the dark horse, arguing the PTR testing that made it look weak was a meme rather than a real read, and pointing to a recent 4% buff plus high-movement fights that suit it. He hedges that 12.1's heavier Regrowth hard-casting removes much of the instant-cast mobility edge it used to have, landing it as a potential fourth healer choice."
+    },
+    {
+      "superseded": false,
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-17",
+      "sentiment": "negative",
+      "bracket": "raid",
+      "patchContext": "Season 2 — pre-launch RAID meta predictions. He states his own caveat up front: the last raid testing was 2026-07-24 with three to four tuning rounds since, so the raid read is far more speculative than his Mythic+ one, and he frames it boss-damage-profile first rather than by single-target sims.",
+      "url": "https://youtu.be/okaZqAQVRN0?t=422",
+      "note": "He calls Mistweaver the weakest healer and the spec most damaged going from Season 1 to Season 2, saying it received few if any positive changes — the mastery buff was reversed at the last minute without compensation — and that even the recent 8% healing buff leaves it clearly below the rest."
+    },
+    {
+      "superseded": false,
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-17",
+      "sentiment": "positive",
+      "bracket": "raid",
+      "patchContext": "Season 2 — pre-launch RAID meta predictions. He states his own caveat up front: the last raid testing was 2026-07-24 with three to four tuning rounds since, so the raid read is far more speculative than his Mythic+ one, and he frames it boss-damage-profile first rather than by single-target sims.",
+      "url": "https://youtu.be/okaZqAQVRN0?t=534",
+      "note": "He keeps Devourer in the top raid group on its testing results and expected damage, the same tier he places it in for Mythic+."
+    },
+    {
+      "superseded": false,
+      "class": "Warrior",
+      "spec": "Arms",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-17",
+      "sentiment": "positive",
+      "bracket": "raid",
+      "patchContext": "Season 2 — pre-launch RAID meta predictions. He states his own caveat up front: the last raid testing was 2026-07-24 with three to four tuning rounds since, so the raid read is far more speculative than his Mythic+ one, and he frames it boss-damage-profile first rather than by single-target sims.",
+      "url": "https://youtu.be/okaZqAQVRN0?t=534",
+      "note": "He keeps Arms in the top raid group on testing results and expected damage, mirroring its Mythic+ placement."
+    },
+    {
+      "superseded": false,
+      "class": "Mage",
+      "spec": "Arcane",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-17",
+      "sentiment": "mixed",
+      "bracket": "raid",
+      "patchContext": "Season 2 — pre-launch RAID meta predictions. He states his own caveat up front: the last raid testing was 2026-07-24 with three to four tuning rounds since, so the raid read is far more speculative than his Mythic+ one, and he frames it boss-damage-profile first rather than by single-target sims.",
+      "url": "https://youtu.be/okaZqAQVRN0?t=534",
+      "note": "He keeps Arcane in the top group for now but explicitly downgrades his confidence, noting it just took a roughly 5% single-target nerf that hurts it more in raid than in Mythic+."
+    },
+    {
+      "superseded": false,
+      "class": "Druid",
+      "spec": "Balance",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-17",
+      "sentiment": "positive",
+      "bracket": "raid",
+      "patchContext": "Season 2 — pre-launch RAID meta predictions. He states his own caveat up front: the last raid testing was 2026-07-24 with three to four tuning rounds since, so the raid read is far more speculative than his Mythic+ one, and he frames it boss-damage-profile first rather than by single-target sims.",
+      "url": "https://youtu.be/okaZqAQVRN0?t=563",
+      "note": "He argues Balance rates higher in raid than its Mythic+ standing because several bosses reward spread cleave and multi-dotting targets other specs cannot reach evenly, and he has it consistently ahead of Shadow Priest on every fight profile except the fixed three-target Lost Explorers, where they were close."
+    },
+    {
+      "superseded": false,
+      "class": "Priest",
+      "spec": "Shadow",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-17",
+      "sentiment": "mixed",
+      "bracket": "raid",
+      "patchContext": "Season 2 — pre-launch RAID meta predictions. He states his own caveat up front: the last raid testing was 2026-07-24 with three to four tuning rounds since, so the raid read is far more speculative than his Mythic+ one, and he frames it boss-damage-profile first rather than by single-target sims.",
+      "url": "https://youtu.be/okaZqAQVRN0?t=563",
+      "note": "He credits Shadow with the same spread-cleave upside the raid rewards, but says Balance's raw performance is simply higher by default — Shadow only edged ahead on the fixed-target turtle fight where spread cleaving was limited."
+    },
+    {
+      "superseded": false,
+      "class": "Rogue",
+      "spec": "Assassination",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-17",
+      "sentiment": "negative",
+      "bracket": "raid",
+      "patchContext": "Season 2 — pre-launch RAID meta predictions. He states his own caveat up front: the last raid testing was 2026-07-24 with three to four tuning rounds since, so the raid read is far more speculative than his Mythic+ one, and he frames it boss-damage-profile first rather than by single-target sims.",
+      "url": "https://youtu.be/okaZqAQVRN0?t=646",
+      "note": "He lists Assassination among the specs that were not highlighted for anything through testing and that preliminary sims put at the bottom of the raid picture."
+    },
+    {
+      "superseded": false,
+      "class": "Demon Hunter",
+      "spec": "Havoc",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-17",
+      "sentiment": "negative",
+      "bracket": "raid",
+      "patchContext": "Season 2 — pre-launch RAID meta predictions. He states his own caveat up front: the last raid testing was 2026-07-24 with three to four tuning rounds since, so the raid read is far more speculative than his Mythic+ one, and he frames it boss-damage-profile first rather than by single-target sims.",
+      "url": "https://youtu.be/okaZqAQVRN0?t=646",
+      "note": "He places Havoc at the bottom of the raid picture, attributing it specifically to another spec in its own class doing much better."
+    },
+    {
+      "superseded": false,
+      "class": "Druid",
+      "spec": "Feral",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-17",
+      "sentiment": "negative",
+      "bracket": "raid",
+      "patchContext": "Season 2 — pre-launch RAID meta predictions. He states his own caveat up front: the last raid testing was 2026-07-24 with three to four tuning rounds since, so the raid read is far more speculative than his Mythic+ one, and he frames it boss-damage-profile first rather than by single-target sims.",
+      "url": "https://youtu.be/okaZqAQVRN0?t=646",
+      "note": "He lists Feral among the specs that went unhighlighted through testing and sit at the bottom of the preliminary raid power read."
+    },
+    {
+      "superseded": false,
+      "class": "Hunter",
+      "spec": "Survival",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-17",
+      "sentiment": "negative",
+      "bracket": "raid",
+      "patchContext": "Season 2 — pre-launch RAID meta predictions. He states his own caveat up front: the last raid testing was 2026-07-24 with three to four tuning rounds since, so the raid read is far more speculative than his Mythic+ one, and he frames it boss-damage-profile first rather than by single-target sims.",
+      "url": "https://youtu.be/okaZqAQVRN0?t=646",
+      "note": "He lists Survival among the bottom specs that were not highlighted for anything through testing."
+    },
+    {
+      "superseded": false,
+      "class": "Evoker",
+      "spec": "Augmentation",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-17",
+      "sentiment": "negative",
+      "bracket": "raid",
+      "patchContext": "Season 2 — pre-launch RAID meta predictions. He states his own caveat up front: the last raid testing was 2026-07-24 with three to four tuning rounds since, so the raid read is far more speculative than his Mythic+ one, and he frames it boss-damage-profile first rather than by single-target sims.",
+      "url": "https://youtu.be/okaZqAQVRN0?t=646",
+      "note": "He places Augmentation at the bottom, and unlike the class-internal cases he says Augmentation simply does not seem to be doing well to begin with. He adds that its class counterpart covers the raid spot on the healer side, so it has no freebie claim."
+    },
+    {
+      "superseded": false,
+      "class": "Mage",
+      "spec": "Fire",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-17",
+      "sentiment": "negative",
+      "bracket": "raid",
+      "patchContext": "Season 2 — pre-launch RAID meta predictions. He states his own caveat up front: the last raid testing was 2026-07-24 with three to four tuning rounds since, so the raid read is far more speculative than his Mythic+ one, and he frames it boss-damage-profile first rather than by single-target sims.",
+      "url": "https://youtu.be/okaZqAQVRN0?t=646",
+      "note": "He places Fire at the bottom of the raid picture, attributing it to another spec in its own class doing much better."
+    },
+    {
+      "superseded": false,
+      "class": "Hunter",
+      "spec": "Marksmanship",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-17",
+      "sentiment": "mixed",
+      "bracket": "raid",
+      "patchContext": "Season 2 — pre-launch RAID meta predictions. He states his own caveat up front: the last raid testing was 2026-07-24 with three to four tuning rounds since, so the raid read is far more speculative than his Mythic+ one, and he frames it boss-damage-profile first rather than by single-target sims.",
+      "url": "https://youtu.be/okaZqAQVRN0?t=676",
+      "note": "He says neither hunter is exciting and that Marksmanship in particular has been nerfed recently, but that one hunter still gets what he calls a freebie raid spot simply because you will be bringing one for the buff."
+    },
+    {
+      "superseded": false,
+      "class": "Hunter",
+      "spec": "Beast Mastery",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-17",
+      "sentiment": "mixed",
+      "bracket": "raid",
+      "patchContext": "Season 2 — pre-launch RAID meta predictions. He states his own caveat up front: the last raid testing was 2026-07-24 with three to four tuning rounds since, so the raid read is far more speculative than his Mythic+ one, and he frames it boss-damage-profile first rather than by single-target sims.",
+      "url": "https://youtu.be/okaZqAQVRN0?t=676",
+      "note": "He says neither hunter looks particularly good right now, but that hunters keep a freebie raid spot regardless because a comp will still bring one for the raid buff."
+    },
+    {
+      "superseded": false,
+      "class": "Rogue",
+      "spec": "Outlaw",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-17",
+      "sentiment": "positive",
+      "bracket": "raid",
+      "patchContext": "Season 2 — pre-launch RAID meta predictions. He states his own caveat up front: the last raid testing was 2026-07-24 with three to four tuning rounds since, so the raid read is far more speculative than his Mythic+ one, and he frames it boss-damage-profile first rather than by single-target sims.",
+      "url": "https://youtu.be/okaZqAQVRN0?t=697",
+      "note": "He spoilers Outlaw as doing quite well overall, potentially even top-group, and clearly the best of the three rogues — hedged only by his general expectation that melee have a worse time than casters across these fights."
+    },
+    {
+      "superseded": false,
+      "class": "Warlock",
+      "spec": "Demonology",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-17",
+      "sentiment": "negative",
+      "bracket": "raid",
+      "patchContext": "Season 2 — pre-launch RAID meta predictions. He states his own caveat up front: the last raid testing was 2026-07-24 with three to four tuning rounds since, so the raid read is far more speculative than his Mythic+ one, and he frames it boss-damage-profile first rather than by single-target sims.",
+      "url": "https://youtu.be/okaZqAQVRN0?t=735",
+      "note": "He calls Demonology the weaker of the Warlock performers, and notes that unlike Augmentation it has no class-side escape hatch: you will bring a Warlock, but not this one."
+    },
+    {
+      "superseded": false,
+      "class": "Paladin",
+      "spec": "Retribution",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-17",
+      "sentiment": "negative",
+      "bracket": "raid",
+      "patchContext": "Season 2 — pre-launch RAID meta predictions. He states his own caveat up front: the last raid testing was 2026-07-24 with three to four tuning rounds since, so the raid read is far more speculative than his Mythic+ one, and he frames it boss-damage-profile first rather than by single-target sims.",
+      "url": "https://youtu.be/okaZqAQVRN0?t=735",
+      "note": "He puts Retribution far away from having a free raid spot, reasoning that Paladin's safe claim on a comp slot is expected to come through the healer rather than through Retribution."
+    },
+    {
+      "superseded": false,
+      "class": "Rogue",
+      "spec": "Subtlety",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-17",
+      "sentiment": "negative",
+      "bracket": "raid",
+      "patchContext": "Season 2 — pre-launch RAID meta predictions. He states his own caveat up front: the last raid testing was 2026-07-24 with three to four tuning rounds since, so the raid read is far more speculative than his Mythic+ one, and he frames it boss-damage-profile first rather than by single-target sims.",
+      "url": "https://youtu.be/okaZqAQVRN0?t=735",
+      "note": "He groups Subtlety with the specs that have no free raid spot, behind Outlaw among the rogues."
+    },
+    {
+      "superseded": false,
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-17",
+      "sentiment": "mixed",
+      "bracket": "raid",
+      "patchContext": "Season 2 — pre-launch RAID meta predictions. He states his own caveat up front: the last raid testing was 2026-07-24 with three to four tuning rounds since, so the raid read is far more speculative than his Mythic+ one, and he frames it boss-damage-profile first rather than by single-target sims.",
+      "url": "https://youtu.be/okaZqAQVRN0?t=759",
+      "note": "He groups Unholy with the no-free-spot specs for raid while allowing it perhaps slightly more value than Subtlety, and explicitly reverses the Mythic+ ordering: Unholy's advantage there is the 20-target cooldown burst, which the raid does not ask for."
+    },
+    {
+      "superseded": false,
+      "class": "Death Knight",
+      "spec": "Frost",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-17",
+      "sentiment": "positive",
+      "bracket": "raid",
+      "patchContext": "Season 2 — pre-launch RAID meta predictions. He states his own caveat up front: the last raid testing was 2026-07-24 with three to four tuning rounds since, so the raid read is far more speculative than his Mythic+ one, and he frames it boss-damage-profile first rather than by single-target sims.",
+      "url": "https://youtu.be/okaZqAQVRN0?t=759",
+      "note": "He argues Frost fits raid damage profiles better than Mythic+ ones: it has higher burst than Unholy even on low target counts, which suits the several fights where an add spawns and must be killed fast. He concludes its recent buff is doing its job in raid even if it did not close the Mythic+ gap."
+    },
+    {
+      "superseded": false,
+      "class": "Shaman",
+      "spec": "Enhancement",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-17",
+      "sentiment": "positive",
+      "bracket": "raid",
+      "patchContext": "Season 2 — pre-launch RAID meta predictions. He states his own caveat up front: the last raid testing was 2026-07-24 with three to four tuning rounds since, so the raid read is far more speculative than his Mythic+ one, and he frames it boss-damage-profile first rather than by single-target sims.",
+      "url": "https://youtu.be/okaZqAQVRN0?t=839",
+      "note": "He puts Enhancement much closer to Elemental in raid than the wide Mythic+ gap between them, because Enhancement handles the limited two-to-three-target cleave these bosses actually present better than Elemental does."
+    },
+    {
+      "superseded": false,
+      "class": "Shaman",
+      "spec": "Elemental",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-17",
+      "sentiment": "mixed",
+      "bracket": "raid",
+      "patchContext": "Season 2 — pre-launch RAID meta predictions. He states his own caveat up front: the last raid testing was 2026-07-24 with three to four tuning rounds since, so the raid read is far more speculative than his Mythic+ one, and he frames it boss-damage-profile first rather than by single-target sims.",
+      "url": "https://youtu.be/okaZqAQVRN0?t=839",
+      "note": "He flags a specific raid weakness: Elemental's two-to-three target limbo, where single target is weak because it is not one target and Chain Lightning or Earthquake are weak because it is not five-plus. He says the raid has many more of these limited-cleave moments than Mythic+, which is what narrows its lead over Enhancement."
+    },
+    {
+      "superseded": false,
+      "class": "Warrior",
+      "spec": "Fury",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-17",
+      "sentiment": "mixed",
+      "bracket": "raid",
+      "patchContext": "Season 2 — pre-launch RAID meta predictions. He states his own caveat up front: the last raid testing was 2026-07-24 with three to four tuning rounds since, so the raid read is far more speculative than his Mythic+ one, and he frames it boss-damage-profile first rather than by single-target sims.",
+      "url": "https://youtu.be/okaZqAQVRN0?t=941",
+      "note": "He says Fury is still good and still fine, but that the choice is not Fury against Frost or Outlaw — it is Fury against Arms, and Arms is so much more complete across the board that he wonders why you would play Fury."
+    },
+    {
+      "superseded": false,
+      "class": "Evoker",
+      "spec": "Devastation",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-17",
+      "sentiment": "negative",
+      "bracket": "raid",
+      "patchContext": "Season 2 — pre-launch RAID meta predictions. He states his own caveat up front: the last raid testing was 2026-07-24 with three to four tuning rounds since, so the raid read is far more speculative than his Mythic+ one, and he frames it boss-damage-profile first rather than by single-target sims.",
+      "url": "https://youtu.be/okaZqAQVRN0?t=972",
+      "note": "He calls Devastation mediocre across the board and says few Devastation players are happy with the current version after the Scale Commander changes. It keeps good burst windows that scale from one target to heavy AoE, but its overall damage peaks are weaker and it stays spiky where Elemental, Frost DK or Devourer are more consistent."
+    },
+    {
+      "superseded": false,
+      "class": "Warlock",
+      "spec": "Affliction",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-17",
+      "sentiment": "mixed",
+      "bracket": "raid",
+      "patchContext": "Season 2 — pre-launch RAID meta predictions. He states his own caveat up front: the last raid testing was 2026-07-24 with three to four tuning rounds since, so the raid read is far more speculative than his Mythic+ one, and he frames it boss-damage-profile first rather than by single-target sims.",
+      "url": "https://youtu.be/okaZqAQVRN0?t=1018",
+      "note": "He credits the Seed of Corruption change — applying Unstable Affliction at 20% strength to the main target — with giving Affliction real focused priority damage in cleave situations, but says it is now clearly less mobile, and that the bigger problem is Destruction sitting above it."
+    },
+    {
+      "superseded": false,
+      "class": "Warlock",
+      "spec": "Destruction",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-17",
+      "sentiment": "positive",
+      "bracket": "raid",
+      "patchContext": "Season 2 — pre-launch RAID meta predictions. He states his own caveat up front: the last raid testing was 2026-07-24 with three to four tuning rounds since, so the raid read is far more speculative than his Mythic+ one, and he frames it boss-damage-profile first rather than by single-target sims.",
+      "url": "https://youtu.be/okaZqAQVRN0?t=1018",
+      "note": "He rates Destruction above Affliction and calls it nearly the opposite of Elemental for this raid: Havoc lets it focus down a freshly spawned add and effectively double its two-target damage at caster range, which fits these boss damage profiles well."
+    },
+    {
+      "superseded": false,
+      "class": "Mage",
+      "spec": "Frost",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-17",
+      "sentiment": "mixed",
+      "bracket": "raid",
+      "patchContext": "Season 2 — pre-launch RAID meta predictions. He states his own caveat up front: the last raid testing was 2026-07-24 with three to four tuning rounds since, so the raid read is far more speculative than his Mythic+ one, and he frames it boss-damage-profile first rather than by single-target sims.",
+      "url": "https://youtu.be/okaZqAQVRN0?t=1093",
+      "note": "He describes Frost as pretty average rather than a top pick and weaker than Arcane, having lost burst it never had much of, and nerfed across Splitting Ice, Flurry and Glacial Spike — while still being a good two-target cleave spec that can do well in this raid."
+    },
+    {
+      "superseded": false,
+      "class": "Monk",
+      "spec": "Windwalker",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-17",
+      "sentiment": "positive",
+      "bracket": "raid",
+      "patchContext": "Season 2 — pre-launch RAID meta predictions. He states his own caveat up front: the last raid testing was 2026-07-24 with three to four tuning rounds since, so the raid read is far more speculative than his Mythic+ one, and he frames it boss-damage-profile first rather than by single-target sims.",
+      "url": "https://youtu.be/okaZqAQVRN0?t=1123",
+      "note": "He calls Windwalker the last of the DPS asterisks in a good way: very high AoE, decent focused priority damage for a spec doing that much AoE, and burst from back-to-back Zenith charges that suits the several fights where adds must be cleaved down fast. He adds it may get in on the raid buff alone if Brewmaster and Mistweaver both miss the comp."
+    },
+    {
+      "superseded": false,
+      "class": "Warrior",
+      "spec": "Arms",
+      "creator": "Zorthas",
+      "date": "2026-08-18",
+      "sentiment": "positive",
+      "bracket": "raid",
+      "patchContext": "Season 2 — raid outlook in his pre-season tuning-analysis video. He explicitly discounts the single-target sim sheet he is reading from, calling it always very inaccurate and citing Season 1, where Feral Druid and Demonology topped single-target sims at the same point and did not pan out; he also concedes raid predictions are often incorrect.",
+      "url": "https://youtu.be/x0fxEWTq3Pw?t=198",
+      "note": "He names Arms one of the three specs most likely to be stacked in the raid, saying it has a very good profile for this raid, and notes the Slayer execute bug fix cost only about 3% single target and 2% or less AoE — leaving it still definitely good."
+    },
+    {
+      "superseded": false,
+      "class": "Rogue",
+      "spec": "Subtlety",
+      "creator": "Zorthas",
+      "date": "2026-08-18",
+      "sentiment": "positive",
+      "bracket": "raid",
+      "patchContext": "Season 2 — raid outlook in his pre-season tuning-analysis video. He explicitly discounts the single-target sim sheet he is reading from, calling it always very inaccurate and citing Season 1, where Feral Druid and Demonology topped single-target sims at the same point and did not pan out; he also concedes raid predictions are often incorrect.",
+      "url": "https://youtu.be/x0fxEWTq3Pw?t=198",
+      "note": "He names Subtlety one of the three specs most likely to be stacked, saying it seems to be doing a lot of damage."
+    },
+    {
+      "superseded": false,
+      "class": "Priest",
+      "spec": "Discipline",
+      "creator": "Zorthas",
+      "date": "2026-08-18",
+      "sentiment": "positive",
+      "bracket": "raid",
+      "patchContext": "Season 2 — raid outlook in his pre-season tuning-analysis video. He explicitly discounts the single-target sim sheet he is reading from, calling it always very inaccurate and citing Season 1, where Feral Druid and Demonology topped single-target sims at the same point and did not pan out; he also concedes raid predictions are often incorrect.",
+      "url": "https://youtu.be/x0fxEWTq3Pw?t=198",
+      "note": "He names Discipline one of the three specs most likely to be stacked, on the basis that it still does a lot of damage while healing well. He separately tracks that the 28% damage nerf plus Atonement compensation left Void Shield healing uncovered, producing a 4.5% healing buff that Blizzard cut back to 1.5% on the Monday."
+    },
+    {
+      "superseded": false,
+      "class": "Rogue",
+      "spec": "Assassination",
+      "creator": "Zorthas",
+      "date": "2026-08-18",
+      "sentiment": "positive",
+      "bracket": "raid",
+      "patchContext": "Season 2 — raid outlook in his pre-season tuning-analysis video. He explicitly discounts the single-target sim sheet he is reading from, calling it always very inaccurate and citing Season 1, where Feral Druid and Demonology topped single-target sims at the same point and did not pan out; he also concedes raid predictions are often incorrect.",
+      "url": "https://youtu.be/x0fxEWTq3Pw?t=165",
+      "note": "He retracts his earlier rogue-bearish video: his log data was wrong and Atrophic does work on much of the new raid's environmental damage. He adds that the repeated aura buffs left the rogue specs looking potentially overtuned and officiates that rogues will not be benched."
+    },
+    {
+      "superseded": false,
+      "class": "Rogue",
+      "spec": "Outlaw",
+      "creator": "Zorthas",
+      "date": "2026-08-18",
+      "sentiment": "positive",
+      "bracket": "raid",
+      "patchContext": "Season 2 — raid outlook in his pre-season tuning-analysis video. He explicitly discounts the single-target sim sheet he is reading from, calling it always very inaccurate and citing Season 1, where Feral Druid and Demonology topped single-target sims at the same point and did not pan out; he also concedes raid predictions are often incorrect.",
+      "url": "https://youtu.be/x0fxEWTq3Pw?t=165",
+      "note": "Covered by the same retraction — he says his earlier claim that rogues had a poor damage profile no longer matters because the specs were buffed so much they look potentially overtuned, and concludes rogues will not be benched."
+    },
+    {
+      "superseded": false,
+      "class": "Death Knight",
+      "spec": "Blood",
+      "creator": "Zorthas",
+      "date": "2026-08-18",
+      "sentiment": "positive",
+      "bracket": "mplus",
+      "patchContext": "Season 2 — his UPDATED pre-launch Mythic+ tier list, revised from his 2026-08-09 list after the launch tuning pass. He flags it as purely speculative because no keys have been run with the newest changes.",
+      "url": "https://youtu.be/x0fxEWTq3Pw?t=272",
+      "note": "He keeps Blood in S on his updated list, judging the San'layn nerfs — about 3% damage — too small to move its position in the meta."
+    },
+    {
+      "superseded": false,
+      "class": "Warrior",
+      "spec": "Arms",
+      "creator": "Zorthas",
+      "date": "2026-08-18",
+      "sentiment": "positive",
+      "bracket": "mplus",
+      "patchContext": "Season 2 — his UPDATED pre-launch Mythic+ tier list, revised from his 2026-08-09 list after the launch tuning pass. He flags it as purely speculative because no keys have been run with the newest changes.",
+      "url": "https://youtu.be/x0fxEWTq3Pw?t=272",
+      "note": "He keeps Arms in S, saying it is very unlikely you would not play an Arms Warrior in its current state."
+    },
+    {
+      "superseded": false,
+      "class": "Mage",
+      "spec": "Arcane",
+      "creator": "Zorthas",
+      "date": "2026-08-18",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 — his UPDATED pre-launch Mythic+ tier list, revised from his 2026-08-09 list after the launch tuning pass. He flags it as purely speculative because no keys have been run with the newest changes.",
+      "url": "https://youtu.be/x0fxEWTq3Pw?t=282",
+      "note": "He still rates Arcane very good but downgrades its outlook because the specs it synergises with got worse — Devourer was nerfed and Balance looks suspect — and because its own tuning came out as a 5% single-target and 3% AoE nerf."
+    },
+    {
+      "superseded": false,
+      "class": "Paladin",
+      "spec": "Holy",
+      "creator": "Zorthas",
+      "date": "2026-08-18",
+      "sentiment": "positive",
+      "bracket": "mplus",
+      "patchContext": "Season 2 — his UPDATED pre-launch Mythic+ tier list, revised from his 2026-08-09 list after the launch tuning pass. He flags it as purely speculative because no keys have been run with the newest changes.",
+      "url": "https://youtu.be/x0fxEWTq3Pw?t=294",
+      "note": "He places Holy Paladin as the healer of the caster comp he expects Arcane Mage to be played in."
+    },
+    {
+      "superseded": false,
+      "class": "Shaman",
+      "spec": "Elemental",
+      "creator": "Zorthas",
+      "date": "2026-08-18",
+      "sentiment": "positive",
+      "bracket": "mplus",
+      "patchContext": "Season 2 — his UPDATED pre-launch Mythic+ tier list, revised from his 2026-08-09 list after the launch tuning pass. He flags it as purely speculative because no keys have been run with the newest changes.",
+      "url": "https://youtu.be/x0fxEWTq3Pw?t=296",
+      "note": "He calls Elemental probably the strongest third DPS in the caster comp."
+    },
+    {
+      "superseded": false,
+      "class": "Rogue",
+      "spec": "Assassination",
+      "creator": "Zorthas",
+      "date": "2026-08-18",
+      "sentiment": "positive",
+      "bracket": "mplus",
+      "patchContext": "Season 2 — his UPDATED pre-launch Mythic+ tier list, revised from his 2026-08-09 list after the launch tuning pass. He flags it as purely speculative because no keys have been run with the newest changes.",
+      "url": "https://youtu.be/x0fxEWTq3Pw?t=302",
+      "note": "He says all three rogue specs look very good and builds a melee comp around rogue plus Arms."
+    },
+    {
+      "superseded": false,
+      "class": "Rogue",
+      "spec": "Outlaw",
+      "creator": "Zorthas",
+      "date": "2026-08-18",
+      "sentiment": "positive",
+      "bracket": "mplus",
+      "patchContext": "Season 2 — his UPDATED pre-launch Mythic+ tier list, revised from his 2026-08-09 list after the launch tuning pass. He flags it as purely speculative because no keys have been run with the newest changes.",
+      "url": "https://youtu.be/x0fxEWTq3Pw?t=302",
+      "note": "He says all three rogue specs look very good and builds a melee comp around rogue plus Arms."
+    },
+    {
+      "superseded": false,
+      "class": "Rogue",
+      "spec": "Subtlety",
+      "creator": "Zorthas",
+      "date": "2026-08-18",
+      "sentiment": "positive",
+      "bracket": "mplus",
+      "patchContext": "Season 2 — his UPDATED pre-launch Mythic+ tier list, revised from his 2026-08-09 list after the launch tuning pass. He flags it as purely speculative because no keys have been run with the newest changes.",
+      "url": "https://youtu.be/x0fxEWTq3Pw?t=302",
+      "note": "He says all three rogue specs look very good and builds a melee comp around rogue plus Arms."
+    },
+    {
+      "superseded": false,
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "creator": "Zorthas",
+      "date": "2026-08-18",
+      "sentiment": "positive",
+      "bracket": "mplus",
+      "patchContext": "Season 2 — his UPDATED pre-launch Mythic+ tier list, revised from his 2026-08-09 list after the launch tuning pass. He flags it as purely speculative because no keys have been run with the newest changes.",
+      "url": "https://youtu.be/x0fxEWTq3Pw?t=306",
+      "note": "He slots Unholy as the third DPS of the melee comp, saying it does good overall damage, is very tanky, and can act as the second ranged on the few bosses where three melee is really bad."
+    },
+    {
+      "superseded": false,
+      "class": "Shaman",
+      "spec": "Restoration",
+      "creator": "Zorthas",
+      "date": "2026-08-18",
+      "sentiment": "positive",
+      "bracket": "mplus",
+      "patchContext": "Season 2 — his UPDATED pre-launch Mythic+ tier list, revised from his 2026-08-09 list after the launch tuning pass. He flags it as purely speculative because no keys have been run with the newest changes.",
+      "url": "https://youtu.be/x0fxEWTq3Pw?t=315",
+      "note": "He calls Resto Shaman definitely the best healer if a melee comp is being played, while noting the plate/mail cantrip stat swap was unfortunate for them."
+    },
+    {
+      "superseded": false,
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "creator": "Zorthas",
+      "date": "2026-08-18",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 — his UPDATED pre-launch Mythic+ tier list, revised from his 2026-08-09 list after the launch tuning pass. He flags it as purely speculative because no keys have been run with the newest changes.",
+      "url": "https://youtu.be/x0fxEWTq3Pw?t=322",
+      "note": "He drops Devourer into the group he thinks could be good but is maybe a little low on damage, because of the tier-set nerf — which he measured as a large single-target loss partly compensated by AoE."
+    },
+    {
+      "superseded": false,
+      "class": "Druid",
+      "spec": "Balance",
+      "creator": "Zorthas",
+      "date": "2026-08-18",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 — his UPDATED pre-launch Mythic+ tier list, revised from his 2026-08-09 list after the launch tuning pass. He flags it as purely speculative because no keys have been run with the newest changes.",
+      "url": "https://youtu.be/x0fxEWTq3Pw?t=324",
+      "note": "He puts Balance in the could-be-good-but-low-damage group, noting it is being criticised for low priority and single-target damage."
+    },
+    {
+      "superseded": false,
+      "class": "Death Knight",
+      "spec": "Frost",
+      "creator": "Zorthas",
+      "date": "2026-08-18",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 — his UPDATED pre-launch Mythic+ tier list, revised from his 2026-08-09 list after the launch tuning pass. He flags it as purely speculative because no keys have been run with the newest changes.",
+      "url": "https://youtu.be/x0fxEWTq3Pw?t=327",
+      "note": "He puts Frost in the could-be-good-but-low-damage group after what he calls quite a big nerf — about 2% single target for Deathbringer and 5% for Rider, with an even larger AoE cut he could not find numbers for."
+    },
+    {
+      "superseded": false,
+      "class": "Druid",
+      "spec": "Feral",
+      "creator": "Zorthas",
+      "date": "2026-08-18",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 — his UPDATED pre-launch Mythic+ tier list, revised from his 2026-08-09 list after the launch tuning pass. He flags it as purely speculative because no keys have been run with the newest changes.",
+      "url": "https://youtu.be/x0fxEWTq3Pw?t=329",
+      "note": "He sees Feral only as a possible third spec in a physical or melee comp, with real problems on single target and low-target cleave, and says a buff could genuinely make it the mark of the wild."
+    },
+    {
+      "superseded": false,
+      "class": "Shaman",
+      "spec": "Enhancement",
+      "creator": "Zorthas",
+      "date": "2026-08-18",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 — his UPDATED pre-launch Mythic+ tier list, revised from his 2026-08-09 list after the launch tuning pass. He flags it as purely speculative because no keys have been run with the newest changes.",
+      "url": "https://youtu.be/x0fxEWTq3Pw?t=339",
+      "note": "He is pleased with Enhancement's flat 5% buff and says it looks good, but still expects it to be worse than the other two Shaman specs."
+    },
+    {
+      "superseded": false,
+      "class": "Priest",
+      "spec": "Shadow",
+      "creator": "Zorthas",
+      "date": "2026-08-18",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 — his UPDATED pre-launch Mythic+ tier list, revised from his 2026-08-09 list after the launch tuning pass. He flags it as purely speculative because no keys have been run with the newest changes.",
+      "url": "https://youtu.be/x0fxEWTq3Pw?t=345",
+      "note": "He moves Shadow up to B after playing it more, saying it can do good damage, but still expects it to miss the meta because Priest is not that useful a class."
+    },
+    {
+      "superseded": false,
+      "class": "Warrior",
+      "spec": "Fury",
+      "creator": "Zorthas",
+      "date": "2026-08-18",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 — his UPDATED pre-launch Mythic+ tier list, revised from his 2026-08-09 list after the launch tuning pass. He flags it as purely speculative because no keys have been run with the newest changes.",
+      "url": "https://youtu.be/x0fxEWTq3Pw?t=354",
+      "note": "He moves Fury up to B after its buffs, which he measured at roughly 4% once the small tier-set nerf and the large spec buff were netted."
+    },
+    {
+      "superseded": false,
+      "class": "Hunter",
+      "spec": "Beast Mastery",
+      "creator": "Zorthas",
+      "date": "2026-08-18",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 — his UPDATED pre-launch Mythic+ tier list, revised from his 2026-08-09 list after the launch tuning pass. He flags it as purely speculative because no keys have been run with the newest changes.",
+      "url": "https://youtu.be/x0fxEWTq3Pw?t=354",
+      "note": "He moves Beast Mastery up to B after its tier-set buff — about 1% single target and 3% AoE — and shuffles it to the top of the hunters, saying the general conclusion is that it is the best hunter spec in keys."
+    },
+    {
+      "superseded": false,
+      "class": "Priest",
+      "spec": "Holy",
+      "creator": "Zorthas",
+      "date": "2026-08-18",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 — his UPDATED pre-launch Mythic+ tier list, revised from his 2026-08-09 list after the launch tuning pass. He flags it as purely speculative because no keys have been run with the newest changes.",
+      "url": "https://youtu.be/x0fxEWTq3Pw?t=366",
+      "note": "He moves Holy Priest up to C, saying the Oracle changes are genuinely good for Mythic+ rather than another do-nothing aura buff, while capping it there: it is Holy Priest, so it will go no higher than C."
     }
   ]
 }
