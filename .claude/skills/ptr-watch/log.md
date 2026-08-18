@@ -16,6 +16,52 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-18 (nightly)
+
+**No new build post — but the Aug-18 tuning post was EDITED twice and those edits are now in
+the feed.** Four channels swept.
+(1) Dev-notes thread `2317811.json` via curl for the full `post_stream`: 17 posts,
+`last_posted_at` 2026-07-31T23:42:09Z, newest is Linxy #19 — already the feed's 07-31 entry.
+(2) Wowhead news RSS parsed per `<item>` block: 40 items, newest 2026-08-17 23:07 CDT.
+(3) The news INDEX (`data.news.newsData`, brace-balanced from the id attribute) — nothing
+beyond RSS. (4) Blue tracker (`data.blueTracker.default`): 50 entries, newest 2026-08-17 20:55.
+
+**Folded into the existing 2026-08-15 entry** (topic 2336820, canonical forum JSON read
+directly — post `updated_at` 2026-08-18T01:51Z — not the Wowhead mirror):
+- `PALADIN / Retribution — All ability damage increased by 6%` — a NEW spec for that entry, and
+  it sits in the PvE **CLASS CHANGES** section, not the PvP one. `specsAffected` 14 → 15.
+- `PRIEST / Discipline — Void Shield reflects 10% of damage (was 15%)`, appended to the existing
+  consolidated Disc line (which stays mixed, so it still casts no outlook vote).
+- Frost DK now reads "All ability **and auto-attack** damage increased by 9%".
+- The entry's label previously claimed Retribution Paladin appears only under PvP. That is now
+  false and was corrected in the same edit.
+No set bonus changed in either edit, so no `spec.tierSet` update was due.
+
+**Swept and deliberately NOT logged: the Kaivax "Hotfixes — August 17, 2026" round-up**
+(news=382492, blue-tracker topic 2336376). Its class section is **bug fixes only** — a
+functional Beast Mastery fix (Wildspeaker Dire Beast Kill Commands were not benefiting from
+Killer Instinct / Alpha Predator / Specialized Arsenal / Savagery), a Holy Priest spec-swap
+fix, a Shaman spellbook display bug and a Destruction Warlock tooltip — with no throughput
+numbers, matching the precedent that left the 08-14 Kaivax hotfixes out.
+⚠️ **Owner flag, learned the hard way tonight:** a `kind: "hotfix"` entry cannot currently be
+the feed's NEWEST entry at all. `test/validate.test.mjs` ("host allowlists pin every
+agent-writable URL field") sets `forumUrl` on `builds[0]` and asserts exactly ONE error; a
+hotfix at index 0 adds the legitimate "hotfixes are not forum build posts" error and reds
+`npm test`. The entry was written, tested, and removed again. Fixing the test is a reviewed
+code edit — and note an agent-side test edit would not even help, since publish checks out
+master and only takes the `data/` artifact.
+Also correctly absent: "Mythic+ Dungeon Tuning with Season 2 Launch" / "Season 2 Dungeon
+Adjustments" (dungeon, not class), and the datamined Venomcursed / Hunter's Ritual Stone item
+hotfixes.
+
+**WCL (evidence-only, no agent fetch):** verdict `rdps-broken`. zone-54 normalized and zone-52
+`ptrDummy` unchanged; the raw-DPS pools landed via the deterministic step — zone 52 102 rows,
+zone 54 27 rows (6 of 8 encounters returned players; The Coiled Altar and Ula'tek 0), zone 56
+27 rows across all 8 dungeons. Zone 57 not probed — no credentials.
+
+Writeup coverage RECOMPUTED (never read): 1 spec at `ptr: null` (Demonology Warlock, the
+deliberate null), 0 specs without a raid-scoped expert read, 0 without an M+ one.
+
 ## 2026-08-17 (nightly)
 
 **No new builds; nothing logged.** Four channels swept.

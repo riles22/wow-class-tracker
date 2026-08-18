@@ -16,6 +16,53 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-18 (nightly)
+
+**Icy Veins rebuilt for Season 2 — 18 tier moves, the biggest single-source move in weeks.**
+All five tier lists re-fetched live: icyveins 6 pages, icyveins-ptr 3, method 2, wowhead 6,
+archon 6 aggregate + 51 encounter = **74/74 HTTP 200**. Per-page counts printed and reconciled
+against 27 DPS + 7 healer + 6 tank = 40 per source-bracket every time.
+
+- **icyveins 80/80, 18 moves** (11 raid, 7 M+; `dateModified` 2026-08-16 on four of the six
+  pages). Raid: Subtlety Rogue B→S, Assassination C→A+, Fury Warrior B→A+, Balance Druid S→A,
+  Shadow Priest A+→B, Unholy DK C→B, Affliction A→B, Devastation A→B, Havoc C→B, Feral C→B,
+  Augmentation C→B. M+: Subtlety (was upstream TBD) →A+, Enhancement A→A+, Devourer A+→A,
+  Destruction A+→A, Frost DK A+→A, Augmentation B→A, Affliction A→B. Cross-checked the whole
+  raid-DPS table tier by tier before merging (S 3 / A+ 6 / A 5 / B 11 / C 2 = 27) — a real
+  re-cut, not a parser artifact.
+- **Consensus impact: zero.** Icy Veins verifies s2 while `liveSeason` is s1, so its letters
+  are out of `consensusFor` (the frozen lane holds its final S1 letters) and feed only the 12.1
+  forecast: 0 consensus moves, **3 projection moves** (Balance raid A→B, Feral raid C→B,
+  Augmentation raid C→B).
+- **Era, read from body not title:** the raid-HEALER page *again* keeps a "Patch 12.0.7 /
+  Midnight" title over a Season-2 body (changelog "13 Aug. 2026: Further updated for Midnight
+  Season 2 launch after the first few live tests"). Body over title, per the blue-tracker
+  precedent. No `seasonVerified` value changed anywhere tonight → nothing for freeze-season.
+- **icyveins-ptr 39 + 1 explicit null**, 0 moves — unchanged since its 08-09 rebuild, which
+  matches the weekly Sunday cadence. Subtlety Rogue is still upstream **TBD** and is stored as
+  `null`, never omitted.
+- **method 80/80, 0 moves.** The M+ page served **8** `tier__tier` blocks; the extra S/A/B/C
+  set is the dungeon-difficulty list, rejected by ROSTER MATCH rather than by position.
+- **wowhead 80/80, 0 moves.** Unescape `\/`→`/` first, then find `[tier-list=rows]`; never
+  anchor on `WH.markup.printHtml(`.
+- **archon 80/80, 0 moves**, still zone-46/47 (Imperator … Midnight Falls) → `seasonVerified`
+  stays **s1**, and Archon remains the only source feeding the live consensus in its own right.
+- **archon encounters 619 rows (was 678), 0 tier moves among the 619.** Archon now withholds
+  the throughput tierList where Season-1 parses have dried up: Crown lost all three roles
+  (172/45/24 parses, "Not a lot of data matches your filters"), Chimaerus kept DPS only,
+  Vanguard lost tanks. Proven upstream rather than a parse failure by the *survivability*
+  tierList still returning 27/7/6 on those same pages. 8.7% drop, inside `maxRowDropPct` 0.25
+  and far above the 440 floor. `asOf` 08-16 → 08-17 (Archon's own `lastUpdated`).
+- **archon survivability re-cut the TANK list**: Blood DK, Brewmaster and Vengeance B→A,
+  Protection Paladin C→A, leaving Protection Warrior alone in S (95.8% against an 88.2–90.7%
+  A band). Worth noting the oddity: the specRankings NUMBERS on those pages are byte-identical
+  to stored, so this is a threshold re-cut, not new parses.
+- `published` re-read per page, never carried forward, agreeing 15/15 with
+  `published-evidence/evidence.json`: icyveins raid DPS 08-16 (stored said 08-08), raid healer
+  08-13, raid tank 08-08, M+ ×3 08-16 (stored said 08-08); wowhead raid healer and M+
+  healer/tank moved to 08-17. Snapshots 2026-08-17 → 2026-08-18. Transport: direct browser-UA
+  GET everywhere (full header set on wowhead; r.jina.ai untried by rule).
+
 ## 2026-08-17 (nightly)
 
 All five tier lists re-fetched live — icyveins 6 pages, icyveins-ptr 3, method 2, wowhead 6,

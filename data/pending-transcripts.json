@@ -1,6 +1,35 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
-  "videos": [],
+  "videos": [
+    {
+      "id": "okaZqAQVRN0",
+      "creator": "izen (Izenhart)",
+      "title": "Midnight Season 2 | Raid Specs Meta Predictions",
+      "published": "2026-08-17",
+      "queuedAt": "2026-08-18"
+    },
+    {
+      "id": "x0fxEWTq3Pw",
+      "creator": "Zorthas",
+      "title": "Pre-Season Tuning Analysis & Tier List Update & Channel Update",
+      "published": "2026-08-18",
+      "queuedAt": "2026-08-18"
+    },
+    {
+      "id": "jlbQAmQMRCM",
+      "creator": "NeekapHere",
+      "title": "Retribution Paladin BUFFED — But We are Not Fixed Yet",
+      "published": "2026-08-18",
+      "queuedAt": "2026-08-18"
+    },
+    {
+      "id": "6MlSd4nBtrI",
+      "creator": "Dratnos",
+      "title": "Race to World First Preview (Recap Day 0)",
+      "published": "2026-08-18",
+      "queuedAt": "2026-08-18"
+    }
+  ],
   "skipped": [
     {
       "id": "02rLfzEKLq4",

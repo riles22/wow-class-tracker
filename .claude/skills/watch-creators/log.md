@@ -16,6 +16,49 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-18 (nightly)
+
+**Discovery only — 0 takes, 0 metaNotes, 4 queued.** `transcript-fetch/summary.json` reports
+verdict `ok` with requested 0 / fetched 0: the queue was EMPTY when the deterministic step ran,
+because the 08-17 local run drained all nine of last night's videos. Nothing was fetched from
+YouTube or any transcript API by this agent, and nothing was installed or upgraded.
+
+44 unique channel feeds polled with backoff, **44/44 HTTP 200**, 660 entries, diffed against a
+**1092-id** seen-set built from the four STRUCTURED lanes (`pending-transcripts` seen[] /
+skipped[] / videos[] + every `youtu.be` id in a take or metaNote url) — never a regex over log
+prose. **33 unseen, all in-cycle** against the 2026-06-18 bound (the OLDEST date in
+`ptr-builds.json`, not `builds[0]`).
+
+**QUEUED (4)** — nightly keyword filter, fetch-broadly/queue-narrowly:
+- `okaZqAQVRN0` izen — "Midnight Season 2 | Raid Specs Meta Predictions". General creator →
+  metaNotes lane. Its own chapter list is Tanks / Healers / DPS / TOP DPS / Bottom DPS, and
+  **raid is the bracket with the least PTR evidence**, so this is the highest-value item in
+  tonight's sweep.
+- `x0fxEWTq3Pw` Zorthas — "Pre-Season Tuning Analysis & Tier List Update". General creator;
+  chapters Tuning Patch / Raid / Cantrip Tuning / Tier List Update. Description links the same
+  Aug-18 tuning post the PTR sweep folded in tonight.
+- `jlbQAmQMRCM` NeekapHere — "Retribution Paladin BUFFED — But We're Not Fixed Yet". His
+  registered spec, and tonight's tuning edit buffs exactly that spec; the description promises
+  aura-buff plus tier-set feedback.
+- `6MlSd4nBtrI` Dratnos — "Race to World First Preview (Recap Day 0)". Queued on its
+  DESCRIPTION, not its title: the chapter list carries "10:50 Raid Comp Predictions". His
+  08-16 RWF video was left unseen for being pure logistics, which is the distinction.
+
+**NOTHING retired to `seen[]`** — no dismissal tonight is durable.
+
+**Left UNSEEN (29), counted rather than estimated:** 12 guides / routes / gearing videos
+(Shadarek's Devourer BiS guide, leak's Survival gearing guide, Sha ×4 dungeon routes, Tactyks
+×2 — the M+ one also firewalled by construction since he writes the Method M+ list, Dalaran
+Gaming's Subtlety guide, YoDaTV routes, Megasett's shopping list, Tactyks' launch-prep promo);
+10 stream / leveling / alt-gearing shells (Bansherz ×2, Critcake ×3, Clandon, Shindigg,
+Tettles, Pkpawner split-run stream, YoDaTV's Twitch restream); 4 PvP-framed (Supatease ×3 —
+"Nine WORST Specs 12.1" and "DISCOVERING THE BEST CLASSES 12.1" cannot be told from a PvP read
+on the title alone, and the 08-09 precedent is that his season reads are PvP-reasoned — plus a
+Dalaran Gaming duels video); NeekapHere's "This Week In WoW" news round-up; Sha's remaining
+route videos. `media:description` again settled most of the triage at zero transcript cost.
+
+No `latest` field advanced — nothing was distilled, so there is nothing new that is KNOWN.
+
 ## 2026-08-17 (local run — residential transcript catch-up)
 
 Queue **9 -> 0**. yt-dlp 2026.07.04 (the requirements.txt pin; nothing installed or upgraded).
