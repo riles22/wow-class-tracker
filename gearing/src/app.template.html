@@ -1212,38 +1212,151 @@ function slotsOf(list) {
   }, {})).sort().join(', ') || '&mdash;';
 }
 
+/* THE GAME PLAN (Phase D, gearing-s2-scope G2 + DECISION G2). Each loot source shows
+   TWO NAMED COMPONENTS, never collapsed into one number:
+   (a) COVERAGE — how many guide-named items for YOUR spec drop there (with the unanimous
+       count called out), computable always;
+   (b) YOUR POTENTIAL — the summed best-per-slot item-level gain over your equipped gear,
+       computable only after a /simc paste in the Upgrade checker, and the page says so.
+   The plan maps GUIDE-NAMED items: like the trinket letters it is a guide-layer surface,
+   so custom weights change nothing here and the note says that too. Dungeons are ordered
+   by coverage (then potential); raid bosses keep encounter order — a raid has one. */
+const MAIN_HAND_EQUIV_PLAN = ['Main Hand', 'One-Hand', 'Two-Hand', 'Ranged'];
+const OFF_HAND_EQUIV_PLAN = ['Off Hand', 'Held In Off-hand'];
+function equippedIlvlBySlot() {
+  // Lowest equipped ilvl per canonical slot (Finger/Trinket pairs: the one you'd replace).
+  const map = {};
+  for (const key of Object.keys(MYGEAR)) {
+    const eq = MYGEAR[key];
+    if (!eq.ilvl) continue;
+    const slot = eq.slotLabel === '@mainHand' ? 'Main Hand'
+      : eq.slotLabel === '@offHand' ? 'Off Hand' : eq.slotLabel;
+    map[slot] = map[slot] == null ? eq.ilvl : Math.min(map[slot], eq.ilvl);
+  }
+  return map;
+}
+function planFor(items) {
+  // items: catalog items from one source, already filtered to CUR-usable gear.
+  const named = items.filter(it => consensusCount(it) > 0);
+  const unanimous = named.filter(it => consensusCount(it) >= 3).length;
+  // Potential is only a NUMBER when the paste yielded readable item levels for at least
+  // one slot a named item could fill — otherwise it stays null and renders as a dash.
+  // A paste with no ilevel= fields (common addon exports) must never claim "+0"
+  // (adversarial review, 2026-08-18: an uncomputed quantity rendered as a computed zero).
+  const equipped = equippedIlvlBySlot();
+  let potential = null;
+  if (Object.keys(equipped).length) {
+    const bestBySlot = {};
+    let readable = 0;
+    for (const it of named) {
+      // Weapon candidates carry slot TYPES (One-Hand/Two-Hand/Ranged) while the paste
+      // yields worn HANDS. A One-Hand can occupy EITHER hand, so it compares against the
+      // lowest equipped hand — the one you would replace, the same rule Finger/Trinket
+      // pairs get — and banks its gain in THAT hand's bucket, so two weapon candidates
+      // can never both bank one hand.
+      let slotKey, have;
+      if (MAIN_HAND_EQUIV_PLAN.includes(it.slot)) {
+        const hands = it.slot === 'One-Hand'
+          ? ['Main Hand', 'Off Hand'].filter(h => equipped[h] != null)
+          : ['Main Hand'].filter(h => equipped[h] != null);
+        if (!hands.length) continue;
+        slotKey = hands.reduce((a, b) => (equipped[a] <= equipped[b] ? a : b));
+        have = equipped[slotKey];
+      } else {
+        slotKey = OFF_HAND_EQUIV_PLAN.includes(it.slot) ? 'Off Hand' : it.slot;
+        have = equipped[slotKey];
+        if (have == null) continue; // slot not read from the paste
+      }
+      readable++;
+      const gain = maxAttainable(it) - have;
+      if (gain > 0) bestBySlot[slotKey] = Math.max(bestBySlot[slotKey] || 0, gain);
+    }
+    if (readable) potential = Object.values(bestBySlot).reduce((sum, g) => sum + g, 0);
+  }
+  return { named, unanimous, potential };
+}
+function planChips(named, limit) {
+  return named.slice().sort((a, b) => consensusCount(b) - consensusCount(a) || a.name.localeCompare(b.name))
+    .slice(0, limit).map(it => '<span class="tag">' + esc(it.name) + ' ' + consensusCount(it) + '/3</span>')
+    .join(' ') + (named.length > limit ? ' <span class="src">+' + (named.length - limit) + ' more</span>' : '');
+}
 function renderSrc() {
   const myTokenIds = new Set(myTokens().map(token => String(token.id)));
+  const hasGear = Object.keys(MYGEAR).length > 0;
+  const usable = ITEMS.filter(it => it.slot && canUse(CUR, it));
+
   const raidRows = RAID.bosses.map(b => {
     const available = ITEMS.filter(it => it.kind === 'raid' && it.boss === b.boss && it.ilvl > 100
       && (it.slot || TOKENS.some(token => String(token.id) === String(it.id))));
-    const mine = available.filter(it => it.slot ? canUse(CUR, it) : myTokenIds.has(String(it.id)));
-    const all = available.length;
+    const slotted = available.filter(it => it.slot && canUse(CUR, it));
+    const plan = planFor(slotted);
+    // Token bosses also buy guide-named TIER pieces: count them toward coverage (labeled),
+    // but keep them out of the potential sum — their upgrade route runs through tokens,
+    // the Vault and the Catalyst, not this boss's direct drop ladder.
+    const tokenSlotName = b.tokenSlot === 'Shoulders' ? 'Shoulder' : b.tokenSlot;
+    const tierNamed = b.tokenSlot ? DIRECT_TIER.filter(it => it.tierClass === CUR.class
+      && (b.tokenSlot === 'omni' || it.slot === tokenSlotName) && consensusCount(it) > 0) : [];
+    const tierChips = tierNamed.map(it => '<span class="tag">' + esc(it.name) + ' '
+      + consensusCount(it) + '/3 (tier)</span>').join(' ');
+    const drops = (b.dropLevels || []).map(s => s.ilvl).join('/');
     return '<tr><td><b>' + b.boss + '</b></td><td>' + esc(b.name)
       + (b.tokenSlot ? '<span class="badge">' + esc(b.tokenSlot) + ' token</span>' : '')
       + (b.orderDisputed ? '<span class="src"> &nbsp;order disputed</span>' : '')
-      + '</td><td><b>' + mine.length + '</b> / ' + all + '</td><td class="src">' + slotsOf(mine) + '</td></tr>';
+      + '<div class="src">drops at ' + esc(drops) + '</div>'
+      + '</td><td><b>' + (plan.named.length + tierNamed.length) + '</b> of '
+      + (slotted.length + tierNamed.length)
+      + (plan.unanimous ? '<div class="src">' + plan.unanimous + ' unanimous</div>' : '')
+      + '</td><td class="src">' + planChips(plan.named, 3) + (tierChips ? ' ' + tierChips : '')
+      + '</td><td>' + (plan.potential == null ? '<span class="src">&mdash;</span>'
+        : '<b>+' + plan.potential + '</b>') + '</td></tr>';
   }).join('');
 
-  const dRows = (DUNG ? DUNG.dungeons : []).map(d => {
-    const mine = d.items.filter(it => it.slot && canUse(CUR, it));
+  const dungeonEntries = (DUNG ? DUNG.dungeons : []).map(d => {
+    const mine = usable.filter(it => it.kind === 'mplus' && it.dungeon === d.name);
+    const plan = planFor(mine);
+    return { d, mine, plan };
+  }).sort((a, b) => b.plan.named.length - a.plan.named.length
+    || (b.plan.potential || 0) - (a.plan.potential || 0) || a.d.name.localeCompare(b.d.name));
+  const dRows = dungeonEntries.map(({ d, mine, plan }) => {
+    // droppedBy is now 204/204 (the Phase D fill), so every named item can say WHICH
+    // encounter drops it — the per-boss detail the raid table gets structurally.
+    const detail = plan.named.length
+      ? '<details class="more-items"><summary>bosses for these</summary>'
+        + plan.named.slice().sort((a, b) => consensusCount(b) - consensusCount(a))
+          .map(it => '<div class="src">' + esc(it.name) + ' &mdash; '
+            + esc(it.droppedBy || 'attribution pending') + '</div>').join('')
+        + '</details>'
+      : '';
     return '<tr><td class="src">' + esc(d.expansion.replace('Battle for Azeroth', 'BfA')) + '</td><td>'
-      + esc(d.name) + (d.isNew ? '<span class="badge">new</span>' : '')
-      + '</td><td><b>' + mine.length + '</b> / ' + d.items.length
-      + '</td><td class="src">' + slotsOf(mine) + '</td></tr>';
+    + esc(d.name) + (d.isNew ? '<span class="badge">new</span>' : '')
+    + '</td><td><b>' + plan.named.length + '</b> of ' + mine.length
+    + (plan.unanimous ? '<div class="src">' + plan.unanimous + ' unanimous</div>' : '')
+    + '</td><td class="src">' + planChips(plan.named, 3) + detail
+    + '</td><td>' + (plan.potential == null ? '<span class="src">&mdash;</span>'
+      : '<b>+' + plan.potential + '</b>') + '</td></tr>';
   }).join('');
 
   const keys = MPLUS_KEYS.map(k => '<tr><td>' + esc(k.key) + '</td><td><b>' + k.end
     + '</b></td><td><b>' + k.vault + '</b></td></tr>').join('');
 
-  $('#src').innerHTML =
-    '<div class="card"><h3>The Venomous Abyss<span>raid</span></h3><table class="src-tbl">'
-    + '<tr><th>#</th><th>Boss</th><th>For you</th><th>Slots it can fill</th></tr>' + raidRows + '</table></div>'
+  const planNote = '<div class="note" style="margin:0 0 14px"><b>The game plan shows two separate signals and never adds them together:</b> '
+    + '<b>Guide-named</b> counts the items the three harvested guides recommend for your spec that drop at each source '
+    + '(the chips name the strongest, with their guide count), and <b>Your potential</b> is the summed best-per-slot '
+    + 'item-level gain over the gear you pasted'
+    + (hasGear ? ' in the Upgrade checker.'
+      : ' &mdash; <b>paste your <code>/simc</code> export in the Upgrade checker to light that column up.</b>')
+    + ' Dungeons are ordered by guide-named count; raid bosses keep their encounter order. Guide-named TIER pieces count toward a token boss\'s coverage (labeled “(tier)”) but never its potential — their upgrade route runs through tokens, the Great Vault and the Catalyst, not one drop.'
+    + ' This plan maps the guides\' picks and does not change with custom weights.</div>';
+
+  $('#src').innerHTML = planNote
+    + '<div class="card"><h3>The Venomous Abyss<span>raid</span></h3><table class="src-tbl">'
+    + '<tr><th>#</th><th>Boss</th><th>Guide-named</th><th>Their picks here</th><th>Your potential</th></tr>' + raidRows + '</table></div>'
     + '<div style="height:16px"></div>'
-    + '<div class="card"><h3>Mythic+ dungeon pool<span>8 dungeons</span></h3><table class="src-tbl">'
-    + '<tr><th>Expansion</th><th>Dungeon</th><th>For you</th><th>Slots it can fill</th></tr>' + dRows + '</table>'
+    + '<div class="card"><h3>Mythic+ dungeon pool<span>8 dungeons &middot; ordered by guide-named count</span></h3><table class="src-tbl">'
+    + '<tr><th>Expansion</th><th>Dungeon</th><th>Guide-named</th><th>Their picks here</th><th>Your potential</th></tr>' + dRows + '</table>'
     + '<div class="note" style="margin:16px 0 0"><b>Mythic+ item levels are set by key level, not by the item.</b> '
-    + 'The same drop is worth more from a higher key, which is why no item level is shown next to M+ items above.</div>'
+    + 'The same drop is worth more from a higher key; potential for M+ items uses the top <b>Great Vault</b> reward '
+    + '(the ceiling an M+ drop can reach), not the end-of-dungeon ilvl — both columns are in the key table below.</div>'
     + '<table class="src-tbl" style="margin-top:14px"><tr><th>Key</th><th>End of dungeon</th><th>Great Vault</th></tr>'
     + keys + '</table></div>';
 }
@@ -1443,6 +1556,7 @@ $('#parse').addEventListener('click', () => {
     $('#curilvl').value = Math.round(ilvls.reduce((a, b) => a + b, 0) / ilvls.length);
   }
   renderUp();
+  renderSrc(); // the game plan's "Your potential" column reads the same paste (Phase D)
 });
 $('#curilvl').addEventListener('input', renderUp);
 

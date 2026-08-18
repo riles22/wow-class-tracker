@@ -637,3 +637,61 @@ test("weapon consensus merges hand vocabularies in BOTH directions", async () =>
   app.setSpec("Demon Hunter|Devourer");
   assert.equal(app.consensusOf("268211"), 3);
 });
+
+test("the game plan shows two named components and lights potential up after a paste", async () => {
+  const [template, raid, specs, dungeons, sheet, itemEligibility, tier, catalyst,
+    catalystAllocations, icons] = await Promise.all([
+    readFile(fromRoot("src/app.template.html"), "utf8"),
+    json("data/raid-items.json"), json("data/specs.json"), json("data/dungeon-items.json"),
+    json("data/sheet-rewards.json"), json("data/item-eligibility-overrides.json"),
+    json("data/tier-items.json"), json("data/catalyst-rules.json"),
+    json("data/catalyst-stat-allocations.json"), json("data/icons.json"),
+  ]);
+  const guides = await loadGuidePayload(raid, dungeons, tier, specs);
+  const data = { raid, specs, dungeons, sheet, itemEligibility, tier, catalyst,
+    catalystAllocations, guides, icons: icons.icons };
+  const scripts = [...template.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)];
+  const appSource = `${scripts.at(-1)[1]}\nreturn {};`;
+  const document = fakeDocument(data);
+  new Function("document", "innerWidth", "innerHeight", appSource)(document, 1600, 900);
+
+  // Every dungeon now carries a full droppedBy attribution (the Phase D fill).
+  for (const d of dungeons.dungeons)
+    for (const it of d.items)
+      assert.ok(it.droppedBy, `${d.name} ${it.id} lacks droppedBy after the Phase D fill`);
+
+  // (a) Coverage renders without any paste; (b) potential explicitly says how to get it.
+  const before = document.ids.get("src").innerHTML;
+  assert.match(before, /two separate signals and never adds them together/);
+  assert.match(before, /Guide-named/);
+  assert.match(before, /paste your <code>\/simc<\/code> export in the Upgrade checker/);
+  assert.match(before, /drops at 279\/292\/305\/318/); // boss 1 ladder shown
+  assert.match(before, /\d+\/3<\/span>/); // consensus chips with guide counts
+  assert.doesNotMatch(before, /<b>\+\d+<\/b>/,
+    "no potential numbers may render before a paste");
+  assert.match(before, /does not change with custom weights/);
+
+  // A paste with NO readable item levels must keep the dash — never claim "+0"
+  // (the adversarial review's high finding: an uncomputed quantity shown as computed).
+  document.ids.get("simc").value = "head=x,id=1\nneck=x,id=1";
+  document.ids.get("parse").listeners.click();
+  const noIlvls = document.ids.get("src").innerHTML;
+  assert.doesNotMatch(noIlvls, /<b>\+\d+<\/b>/, "unreadable paste must not fabricate potential");
+  assert.match(noIlvls, /&mdash;/);
+
+  // Paste a deliberately low-ilvl kit: every named source should now show positive gain.
+  const simcLines = ["head=x,id=1,ilevel=280", "neck=x,id=1,ilevel=280", "back=x,id=1,ilevel=280",
+    "chest=x,id=1,ilevel=280", "wrist=x,id=1,ilevel=280", "hands=x,id=1,ilevel=280",
+    "waist=x,id=1,ilevel=280", "legs=x,id=1,ilevel=280", "feet=x,id=1,ilevel=280",
+    "finger1=x,id=1,ilevel=280", "finger2=x,id=1,ilevel=280",
+    "trinket1=x,id=1,ilevel=280", "trinket2=x,id=1,ilevel=280", "main_hand=x,id=1,ilevel=280"];
+  document.ids.get("simc").value = simcLines.join("\n");
+  document.ids.get("parse").listeners.click();
+  const after = document.ids.get("src").innerHTML;
+  assert.match(after, /<b>\+\d+<\/b>/, "potential column lights up after the paste");
+  // The two components stay separate: the potential cell never absorbs the named count.
+  assert.match(after, /Guide-named<\/th>/);
+  // Token bosses surface guide-named TIER pieces as labeled coverage.
+  assert.match(after, /\/3 \(tier\)<\/span>/, "tier coverage chips render on token bosses");
+  assert.match(after, /Your potential<\/th>/);
+});
