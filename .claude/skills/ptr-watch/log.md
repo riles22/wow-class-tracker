@@ -948,3 +948,27 @@ runbook was written on 08-14; **they are now LIVE**:
 one-shot reviewed OWNER commit touching `scales.json` and `required-sources.json`, both on a
 local DATA run's never-touch list. `PHASES.liveSeason` is still `"s1"`; `PHASE_FLIP_DUE` is
 Aug 20.
+
+## 2026-08-18 (~16:3xZ) — THE SEASON 2 FLIP LANDED (`5e92824`, interactive local run, owner-reviewed)
+
+**`PHASES.liveSeason` is now `"s2"`, `ptr` is `null`, and every PTR surface is sunset.**
+What this means for the next run of THIS skill:
+- **There is no PTR lane to watch until the 12.2 cycle opens.** `PHASES.ptr` is null; the
+  Era toggle is hidden; era-tagged metrics and takes are retained as history but off the
+  page. When the 12.2 PTR thread appears (re-discover via Wowhead news RSS), restore
+  `ptr: { marker: "12.2 PTR", label: "12.2" }` in normalize.mjs — a NEW thread, a NEW
+  marker, and this skill re-arms.
+- **The WCL contract now points at zones 53 (live raid) / 55 (live M+).** The six PTR
+  requirement rows (zones 52/54/56) are GONE from required-sources.json — do not write
+  manifest rows for them. rdps is still 500 upstream and the statistics transport is
+  still Cloudflare-challenged, so both live rows read honestly unreachable until WCL
+  heals; the recipes' partition labels are "12.1" (z53) and "Season 2" (z55), both id 1.
+- **`SNAPSHOT_PHASE` is `"12.1-live"` and `CONSENSUS_VERSION` is 5.** The 2026-08-18
+  snapshot is the report-card boundary. Never change either without reading the version
+  log beside the constants.
+- **`minSuccessfulSources` is 7** (re-based from 10 for the 19-requirement contract,
+  owner-acked in the flip review). The contract comment says to recalibrate upward once
+  S2 upstreams flow — that recalibration is a standing owner TODO, not this skill's call.
+- The stale `wow-snapshot-phase-flip` scheduled task was DELETED before the flip (it
+  predated the runbook and would have flipped SNAPSHOT_PHASE alone, silencing the
+  PHASE_FLIP_DUE tripwire with the rest undone). Its SKILL.md remains on disk, unarmed.
