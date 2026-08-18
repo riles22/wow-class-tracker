@@ -23,9 +23,9 @@ transcript-fetch/
 # clean-tree precheck, and a stale one reds the --manifest freshness guard.
 published-evidence/
 
-# resumable local SimulationCraft runs; accepted evidence is promoted to gearing/data/simc-audit/
+# The SimC pipeline was retired 2026-08-18 (gearing-s2-scope Phase A), but its local run
+# scratch and crash-leftover lock files may still exist on machines that ran it — keep
+# ignoring both so they can never be staged by accident.
 gearing/.simc-work/
-# withPromotionLock creates <path>.promotion.lock beside EVERY target it locks — the run
-# manifest as well as the weights file (run-simc-reference.mjs) — and a hard crash can
-# leave either behind; ignore the pattern, not one instance.
 gearing/data/*.promotion.lock
+

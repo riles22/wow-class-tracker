@@ -1,16 +1,15 @@
 {
-  "source": "Community Season 2 item-level sheet by Norumu (featured by Icy Veins)",
-  "sourceUrl": "https://docs.google.com/spreadsheets/d/1BCDWQvv_HFRO97s8UCQr_7vwz0pFXQw6gbTBgM1VeOg/edit#gid=1935597385",
-  "harvestedAt": "2026-08-02",
-  "policy": "Corroboration only. Values unique to this sheet are marked provisional because the author flags inferred cells in red text, which CSV export strips.",
+  "source": "Gandalin's Gearing Guide — Midnight Season 2 (community infographic, updated 2026-08-18; owner-supplied image, distilled by hand)",
+  "sourceUrl": "https://linktr.ee/GandalinGaming",
+  "harvestedAt": "2026-08-18",
+  "policy": "Distilled from the owner-supplied launch-day chart, cross-checked cell-by-cell against the prior Norumu harvest AND the repo's own EXPECTED_RAID_LEVELS validator constant. Where the two community sources agree the cell counts as confirmed; where the launch chart corrects the pre-launch sheet (crafted quality-5 ilvls 292/308/321 -> 305/318/331) the newer dated source wins and the correction is recorded here rather than in conflicts[]. The delve rows were NOT re-cut from the chart (its delve panel is too dense to transcribe with honest confidence) and keep their Norumu values and provisional markers. PvP rows are chart-only: they are PvP item levels (the level gear scales to IN PvP instances), a different quantity from world ilvl, and are labeled as such.",
   "authorCaveats": [
-    "Red text is inferred information and needs confirmation",
-    "Still need Vaults of Atal'Utek info"
+    "Mythic bosses 7-8 drop and Vault at 344 — a higher ilvl than the Myth track cap (334) — and cannot be upgraded",
+    "Great Vault raid rewards: LFR/N/H are always 1/6 on the next track up; Mythic bosses 1-6 are always 6/6 Myth",
+    "Bonus rolls (Nebulous Voidcores) cost 1 token (raids previously 2) and grant gear at the Great Vault ilvl for that activity",
+    "Ascendant Venomstones (gear upgrades) return later in Season 2 — the stored venomstone rows are pre-launch estimates",
+    "Honor gear is not upgradeable; catalyzed gear now inherits secondary stats and cantrip effects from the original item"
   ],
-  "tabs": {
-    "season2": "1935597385",
-    "season1": "1360188519"
-  },
   "ladder": [
     256,
     259,
@@ -116,8 +115,8 @@
     "explanation": "Blizzard's headline shift is +46, but per-rank deltas are 45/46 because both ladders snap to the discrete item-level grid. Neither figure is an error."
   },
   "validation": {
-    "total": 21,
-    "confirmed": 21,
+    "total": 43,
+    "confirmed": 43,
     "conflicts": []
   },
   "sheetOnlyKeys": [
@@ -127,7 +126,8 @@
     "delveCoffer",
     "delveTrove",
     "delveVault",
-    "raidVault"
+    "raidVault",
+    "pvp"
   ],
   "rewards": {
     "world": [
@@ -162,16 +162,16 @@
     ],
     "crafted": [
       {
-        "ilvl": 292,
-        "label": "Spark of Tides"
+        "ilvl": 305,
+        "label": "Spark of Tides (quality 5)"
       },
       {
-        "ilvl": 308,
-        "label": "Add 80 Hero Crests"
+        "ilvl": 318,
+        "label": "Add 80 Hero Crests (quality 5)"
       },
       {
-        "ilvl": 321,
-        "label": "Add 80 Myth Crests"
+        "ilvl": 331,
+        "label": "Add 80 Myth Crests (quality 5)"
       }
     ],
     "venomstone": [
@@ -385,23 +385,67 @@
     "raidDrop": [
       {
         "ilvl": 279,
-        "label": "Raid Finder / LFR"
+        "label": "LFR boss 1"
+      },
+      {
+        "ilvl": 282,
+        "label": "LFR bosses 2-3"
+      },
+      {
+        "ilvl": 285,
+        "label": "LFR bosses 4-6"
+      },
+      {
+        "ilvl": 289,
+        "label": "LFR bosses 7-8"
       },
       {
         "ilvl": 292,
-        "label": "Normal"
+        "label": "Normal boss 1"
+      },
+      {
+        "ilvl": 295,
+        "label": "Normal bosses 2-3"
+      },
+      {
+        "ilvl": 298,
+        "label": "Normal bosses 4-6"
+      },
+      {
+        "ilvl": 302,
+        "label": "Normal bosses 7-8"
       },
       {
         "ilvl": 305,
-        "label": "Heroic"
+        "label": "Heroic boss 1"
+      },
+      {
+        "ilvl": 308,
+        "label": "Heroic bosses 2-3"
+      },
+      {
+        "ilvl": 311,
+        "label": "Heroic bosses 4-6"
+      },
+      {
+        "ilvl": 315,
+        "label": "Heroic bosses 7-8"
       },
       {
         "ilvl": 318,
-        "label": "(Most) Mythic"
+        "label": "Mythic boss 1"
+      },
+      {
+        "ilvl": 321,
+        "label": "Mythic bosses 2-3"
+      },
+      {
+        "ilvl": 324,
+        "label": "Mythic bosses 4-6"
       },
       {
         "ilvl": 344,
-        "label": "Last 2 Mythic Bosses"
+        "label": "Mythic bosses 7-8 (not upgradeable)"
       }
     ],
     "raidVault": [
@@ -419,12 +463,32 @@
       },
       {
         "ilvl": 334,
-        "label": "(Most) Mythic"
+        "label": "Mythic bosses 1-6 (6/6 Myth)"
       },
       {
         "ilvl": 344,
-        "label": "Last 2 Mythic Bosses"
+        "label": "Mythic bosses 7-8 (not upgradeable)"
+      }
+    ],
+    "pvp": [
+      {
+        "ilvl": 318,
+        "label": "Crafted Combatant (PvP ilvl)"
+      },
+      {
+        "ilvl": 331,
+        "label": "Honor / War Mode / Crafted Aspirant (PvP ilvl)"
+      },
+      {
+        "ilvl": 344,
+        "label": "Conquest / Crafted Gladiator (PvP ilvl)"
       }
     ]
+  },
+  "priorSource": {
+    "name": "Community Season 2 item-level sheet by Norumu (featured by Icy Veins)",
+    "url": "https://docs.google.com/spreadsheets/d/1BCDWQvv_HFRO97s8UCQr_7vwz0pFXQw6gbTBgM1VeOg/edit#gid=1935597385",
+    "harvestedAt": "2026-08-02",
+    "note": "The pre-launch sheet this file was first harvested from. Retained values it uniquely supplies (world campaign rows, venomstone estimates, delve tiers) keep their provisional marker."
   }
 }

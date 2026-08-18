@@ -1,6 +1,6 @@
 # ADR: Curated same-gear SimC profiles
 
-- Status: Accepted
+- Status: Retired 2026-08-18 (docs/gearing-s2-scope.md Phase A, DECISION G3/G5 — the pipeline and its data were removed from gearing/; this document is kept as the design record)
 - Date: 2026-08-04
 - Scope: `gearing/` conventional DPS reference weights
 

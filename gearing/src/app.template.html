@@ -308,7 +308,7 @@ table.paths tr:hover td{background:rgba(255,255,255,.03)}
     </div>
     <div class="rule"></div>
     <div class="sub">Pick your spec to see what to chase and where it drops
-      &middot; season max <b>344</b> &middot; season opens <b>Aug 18, 2026</b></div>
+      &middot; season max <b>344</b> &middot; season opened <b>Aug 18, 2026</b></div>
   </header>
 
   <nav class="sitetabs" aria-label="Sections">
@@ -323,17 +323,12 @@ table.paths tr:hover td{background:rgba(255,255,255,.03)}
         <select id="spec"></select>
       </div>
       <div class="field">
-        <label for="profile">Ranking profile</label>
+        <label for="profile">Build</label>
         <select id="profile"></select>
-      </div>
-      <div class="field">
-        <label for="scenario">Encounter</label>
-        <select id="scenario"></select>
       </div>
       <div class="field">
         <label for="scoring-mode">Scoring method</label>
         <select id="scoring-mode">
-          <option value="reference">Validated reference model (when available)</option>
           <option value="priority">Guide order (rough)</option>
           <option value="custom">Custom decimal weights</option>
         </select>
@@ -420,9 +415,6 @@ const DB = JSON.parse(document.getElementById('data').textContent);
 const RAID = DB.raid, SPECS = DB.specs, DUNG = DB.dungeons, SHEET = DB.sheet;
 const TIER = DB.tier || {sets:[]}, CATALYST = DB.catalyst || {setBonusSlots:[]};
 const STAT_ALLOCATIONS = DB.catalystAllocations || {items:{}};
-const SIMC_WEIGHTS = DB.simcWeights || {records:[]};
-const SIMC_MANIFEST = DB.simcManifest || {scenarios:[], builds:[], profiles:[], specs:[]};
-const HEALER_REFERENCES = DB.healerReferences || {provider:null, providers:[], scenarios:[], records:[], coverage:[]};
 const ITEM_ELIGIBILITY = DB.itemEligibility || {items:{}};
 const ICONS = DB.icons || {};
 const icoTag = it => it.icon && ICONS[it.icon]
@@ -468,10 +460,11 @@ const TOKENS = ITEMS.filter(i => (i.classes && i.classes.length)
 const MPLUS_KEYS = DUNG ? DUNG.keyLevels : [];
 
 /* ---------- scoring -------------------------------------------------------
-   Accepted reference data is the default when an exact profile and scenario
-   match exists. DPS records come from SimC; healer records use the embedded,
-   provider-neutral throughput adapter. Guide order is the explicit fallback.
-   Custom weights come from the user; /simc text has no scale factors.         */
+   Guide-order coefficients (fixed spacing, a sorting device — never stat
+   weights) are the base mode; custom weights are the user's own override.
+   The SimC reference pipeline was retired 2026-08-18 (gearing-s2-scope G3);
+   Phase C replaces this with guide-consensus ranking. /simc text has no
+   scale factors.                                                              */
 const WEAPON_SLOTS = new Set(['Main Hand','One-Hand','Two-Hand','Off Hand','Held In Off-hand','Ranged']);
 const PRIMARY_NEUTRAL_SLOTS = new Set(['Neck','Finger','Back','Trinket']);
 const GUIDE_MULTIPLIERS = [1, 0.75, 0.5, 0.25];
@@ -553,122 +546,12 @@ function customModeSelected() {
   return $('#scoring-mode').value === 'custom';
 }
 
-function referenceModeSelected() {
-  return $('#scoring-mode').value === 'reference';
-}
-
-function specKeyFor(spec) {
-  return spec ? spec.spec + ' ' + spec.class : '';
-}
-
-function isHealerSpec(spec) {
-  return !!spec && String(spec.role || '').toLowerCase() === 'healer';
-}
-
-function healerCoverageFor(spec) {
-  const specKey = specKeyFor(spec);
-  return (HEALER_REFERENCES.coverage || []).filter(entry => entry.specKey === specKey
-    && entry.objective === 'healing-throughput')[0] || null;
-}
-
-function healerScoringFor(record) {
-  return record && (record.scoringBasis || record.scoring) || null;
-}
-
-function isHealerReference(record) {
-  return !!record && record.objective === 'healing-throughput';
-}
-
-function healerReferenceRecordsFor(spec, profile, statuses) {
-  if (!spec || !profile) return [];
-  const allowed = statuses || ['accepted'];
-  return (HEALER_REFERENCES.records || []).filter(record => record.specKey === specKeyFor(spec)
-    && record.profile === profile.name && record.objective === 'healing-throughput'
-    && allowed.indexOf(record.status) >= 0);
-}
-
-function manifestSpecFor(spec) {
-  const specKey = specKeyFor(spec);
-  return (SIMC_MANIFEST.specs || []).filter(entry => entry.specKey === specKey)[0] || null;
-}
-
-function manifestProfileFor(spec, profile) {
-  if (!spec || !profile) return null;
-  const coverage = manifestSpecFor(spec);
-  const profileIds = coverage ? coverage.profileIds || [] : [];
-  return (SIMC_MANIFEST.profiles || []).filter(entry => entry.specKey === specKeyFor(spec)
-    && entry.guideProfileName === profile.name && entry.status !== 'rejected'
-    && profileIds.indexOf(entry.profileId) >= 0)[0] || null;
-}
-
-function manifestProfileById(profileId) {
-  return (SIMC_MANIFEST.profiles || []).filter(profile => profile.profileId === profileId)[0] || null;
-}
-
-function manifestBuildById(buildId) {
-  return (SIMC_MANIFEST.builds || []).filter(build => build.buildId === buildId)[0] || null;
-}
-
-function manifestInputFor(profile, scenarioId) {
-  if (!profile) return null;
-  if (!Array.isArray(profile.scenarioInputs)) return profile;
-  return profile.scenarioInputs.filter(input => input.scenarioId === scenarioId)[0] || null;
-}
-
-function simcReferenceRecordsFor(spec, profile) {
-  const manifestProfile = manifestProfileFor(spec, profile);
-  if (!manifestProfile || manifestProfile.status !== 'accepted') return [];
-  return (SIMC_WEIGHTS.records || []).filter(record => record.status === 'accepted'
-    && record.profileId === manifestProfile.profileId
-    && record.specKey === manifestProfile.specKey
-    && record.buildId === manifestInputFor(manifestProfile, record.scenario)?.buildId
-    && record.objective === manifestProfile.objective
-    && record.primaryStat === manifestProfile.primaryStat);
-}
-
-function referenceRecordsFor(spec, profile) {
-  return healerReferenceRecordsFor(spec, profile).concat(simcReferenceRecordsFor(spec, profile));
-}
-
-function activeReferenceRecord() {
-  const scenario = $('#scenario');
-  if (!referenceModeSelected() || !scenario) return null;
-  return referenceRecordsFor(CUR, activeProfile()).filter(record => record.scenario === scenario.value)[0] || null;
-}
-
-function recordWeights(record) {
-  const scoring = healerScoringFor(record);
-  const healerWeights = scoring && (scoring.kind === 'secondary-weights' || scoring.kind === 'weights')
-    ? scoring.weights : null;
-  const weights = isHealerReference(record) ? healerWeights : record && record.weights;
-  return weights && SECONDARY_STATS.every(stat => Number.isFinite(Number(weights[stat]))) ? weights : null;
-}
-
-function healerItemScore(record, it) {
-  if (!isHealerReference(record) || !it) return null;
-  const scoring = healerScoringFor(record);
-  if (!scoring || scoring.kind !== 'item-scores') return null;
-  const entry = Array.isArray(scoring.items)
-    ? scoring.items.filter(item => String(item.itemId) === String(it.id))[0] : null;
-  const value = entry ? Number(entry.score) : NaN;
-  return Number.isFinite(value) ? value : null;
-}
-
 function activeWeights(spec) {
   if (spec === CUR && customModeSelected()) return customWeights() || guideWeights(spec);
-  if (spec === CUR && referenceModeSelected()) {
-    const reference = activeReferenceRecord();
-    const weights = recordWeights(reference);
-    if (weights) return weights;
-  }
   return guideWeights(spec);
 }
 
 function scoreItem(spec, it) {
-  if (spec === CUR && referenceModeSelected()) {
-    const modelScore = healerItemScore(activeReferenceRecord(), it);
-    if (modelScore != null) return modelScore;
-  }
   const weights = activeWeights(spec);
   const ratings = STAT_ALLOCATIONS.items[String(it.id)]?.allocations || it.secondaryRatings || {};
   const ratingTotal = Object.values(ratings).reduce((sum, value) => sum + value, 0);
@@ -680,25 +563,11 @@ function scoreItem(spec, it) {
 }
 
 function compareItems(spec, a, b) {
-  const reference = spec === CUR && referenceModeSelected() ? activeReferenceRecord() : null;
-  if (healerUsesItemScores(reference)) {
-    const aModel = healerItemScore(reference, a);
-    const bModel = healerItemScore(reference, b);
-    if ((aModel != null) !== (bModel != null)) return aModel != null ? -1 : 1;
-    if (aModel != null && aModel !== bModel) return bModel - aModel;
-  }
   return scoreItem(spec, b) - scoreItem(spec, a) || a.name.localeCompare(b.name);
 }
 
 function sameRecommendationScore(spec, a, b) {
   if (!a || !b) return false;
-  const reference = spec === CUR && referenceModeSelected() ? activeReferenceRecord() : null;
-  if (healerUsesItemScores(reference)) {
-    const aModel = healerItemScore(reference, a);
-    const bModel = healerItemScore(reference, b);
-    if ((aModel != null) !== (bModel != null)) return false;
-    if (aModel != null) return aModel === bModel;
-  }
   return scoreItem(spec, a) === scoreItem(spec, b);
 }
 
@@ -747,64 +616,6 @@ function activePriority() {
   return CUR && CUR.statPriority && profile
     ? {primary: CUR.statPriority.primary, secondaries: profile.secondaries}
     : CUR && CUR.statPriority;
-}
-
-function scenarioLabel(scenario, spec) {
-  const sources = isHealerSpec(spec || CUR)
-    ? [HEALER_REFERENCES.scenarios || [], SIMC_MANIFEST.scenarios || []]
-    : [SIMC_MANIFEST.scenarios || [], HEALER_REFERENCES.scenarios || []];
-  const definition = sources.reduce((found, entries) => found || entries
-    .filter(entry => (typeof entry === 'string' ? entry : entry.scenarioId || entry.id) === scenario)[0], null);
-  if (typeof definition === 'string') {
-    if (definition === 'raid') return 'Raid healing';
-    if (definition === 'mplus') return 'Mythic+ healing';
-    return definition.replace(/-/g, ' ').replace(/\b\w/g, letter => letter.toUpperCase());
-  }
-  return definition ? definition.label : scenario;
-}
-
-function simcScenarioIdsFor(spec, profile) {
-  const manifestProfile = manifestProfileFor(spec, profile);
-  if (manifestProfile) return manifestProfile.scenarioIds || [];
-  const coverage = manifestSpecFor(spec);
-  return coverage ? coverage.plannedScenarioIds || [] : [];
-}
-
-function healerScenarioIdsFor(spec, profile) {
-  if (!isHealerSpec(spec)) return [];
-  const accepted = healerReferenceRecordsFor(spec, profile, ['accepted']).map(record => record.scenario);
-  const pending = healerReferenceRecordsFor(spec, profile, ['pending']).map(record => record.scenario);
-  const coverage = healerCoverageFor(spec);
-  return accepted.concat(pending, coverage
-    ? coverage.plannedScenarios || coverage.plannedScenarioIds || coverage.scenarioIds || [] : []);
-}
-
-function scenarioIdsFor(spec, profile) {
-  return Array.from(new Set(healerScenarioIdsFor(spec, profile).concat(simcScenarioIdsFor(spec, profile))
-    .filter(Boolean)));
-}
-
-function initScenarios() {
-  const sel = $('#scenario');
-  if (!sel) return;
-  const previous = sel.value;
-  const scenarioIds = scenarioIdsFor(CUR, activeProfile());
-  sel.innerHTML = '';
-  scenarioIds.forEach(scenarioId => {
-    const option = document.createElement('option');
-    option.value = scenarioId;
-    option.textContent = scenarioLabel(scenarioId);
-    sel.appendChild(option);
-  });
-  if (!scenarioIds.length) {
-    const option = document.createElement('option');
-    option.value = '';
-    option.textContent = 'No validated reference scenario';
-    sel.appendChild(option);
-  } else if (scenarioIds.indexOf(previous) >= 0) {
-    sel.value = previous;
-  }
-  sel.disabled = !referenceModeSelected() || scenarioIds.length < 2;
 }
 
 function initProfiles() {
@@ -871,14 +682,12 @@ function initSpecs() {
     CUR = find(sel.value);
     writeSpecHash();
     initProfiles();
-    $('#scoring-mode').value = referenceRecordsFor(CUR, activeProfile()).length ? 'reference' : 'priority';
+    $('#scoring-mode').value = 'priority';
     clearCustomWeights(false);
-    initScenarios();
     render();
   });
-  $('#profile').addEventListener('change', () => { initScenarios(); render(); });
-  $('#scoring-mode').addEventListener('change', () => { initScenarios(); render(); });
-  if ($('#scenario')) $('#scenario').addEventListener('change', render);
+  $('#profile').addEventListener('change', render);
+  $('#scoring-mode').addEventListener('change', render);
   SECONDARY_STATS.forEach(stat => $('#weight-' + stat.toLowerCase()).addEventListener('input', render));
   $('#weight-reset').addEventListener('click', () => clearCustomWeights(true));
   // A deep-linked spec wins over the built-in default; an unknown slug is ignored.
@@ -887,8 +696,7 @@ function initSpecs() {
   else if (find('Mage|Frost')) sel.value = 'Mage|Frost';
   CUR = find(sel.value) || SPECS.specs[0];
   initProfiles();
-  $('#scoring-mode').value = referenceRecordsFor(CUR, activeProfile()).length ? 'reference' : 'priority';
-  initScenarios();
+  $('#scoring-mode').value = 'priority';
 }
 
 function specLine() {
@@ -906,168 +714,10 @@ function weightList(weights) {
     + Number(weights[stat] || 0).toFixed(3) + '</strong>').join(' &middot; ');
 }
 
-function healerUsesItemScores(record) {
-  return isHealerReference(record) && healerScoringFor(record)?.kind === 'item-scores';
-}
-
-function referenceLabel(record) {
-  if (isHealerReference(record)) return healerUsesItemScores(record)
-    ? 'accepted in-app healer throughput item scores'
-    : 'accepted in-app healer throughput reference weights';
-  return 'accepted SimulationCraft reference weights';
-}
-
-function referenceValueText(record) {
-  const weights = recordWeights(record);
-  return weights ? weightList(weights) : 'item-specific model scores';
-}
-
-function plainMetadataText(value) {
-  if (value == null) return '';
-  if (Array.isArray(value)) return value.map(plainMetadataText).filter(Boolean).join('; ');
-  if (typeof value !== 'object') return String(value);
-  return Object.keys(value).filter(key => !/url$/i.test(key)).map(key => plainMetadataText(value[key]))
-    .filter(Boolean).join(' / ');
-}
-
-function healerProviderFor(record) {
-  const recordProvider = record && record.provider;
-  const providerId = typeof recordProvider === 'string' ? recordProvider
-    : recordProvider && recordProvider.id || record && record.providerId;
-  const declared = [HEALER_REFERENCES.provider].concat(HEALER_REFERENCES.providers || [])
-    .filter(Boolean).filter(provider => !providerId || provider.id === providerId || provider.providerId === providerId)[0];
-  return Object.assign({}, declared || {}, providerId ? {id: providerId} : {},
-    recordProvider && typeof recordProvider === 'object' && recordProvider.version
-      ? {version: recordProvider.version} : {});
-}
-
-function healerReferenceMetadata(record) {
-  const provider = healerProviderFor(record);
-  const providerName = provider.name || provider.label || provider.id || 'Embedded provider';
-  const providerUrl = provider.url || provider.sourceUrl;
-  const providerText = providerUrl
-    ? '<a href="' + esc(providerUrl) + '" target="_blank" rel="noopener noreferrer">' + esc(providerName) + '</a>'
-    : '<b>' + esc(providerName) + '</b>';
-  const providerVersion = provider.version ? ' <code>' + esc(provider.version) + '</code>' : '';
-  const model = plainMetadataText(record.model);
-  const provenance = record.provenance || {};
-  const provenanceUrl = /^https:\/\//.test(provenance.sourceUrl || '') ? provenance.sourceUrl : '';
-  const provenanceLink = provenanceUrl ? '<a href="' + esc(provenanceUrl)
-    + '" target="_blank" rel="noopener noreferrer">source artifact</a>' : '';
-  const provenanceDetails = [provenance.method ? esc(provenance.method) : '',
-    provenance.capturedAt ? esc(provenance.capturedAt) : '',
-    provenance.verified === true ? 'verified' : '', provenance.artifactSha256
-      ? '<code title="' + esc(provenance.artifactSha256) + '">' + esc(provenance.artifactSha256.slice(0, 12)) + '&hellip;</code>' : '']
-    .filter(Boolean).join(' / ');
-  const assumptions = plainMetadataText(record.assumptions);
-  const limitations = plainMetadataText(record.limitations);
-  const scoring = healerScoringFor(record) || {};
-  const normalization = plainMetadataText(scoring.normalization);
-  const itemCoverage = scoring.itemCoverage === 'complete-candidate-pool' ? 'complete candidate pool'
-    : scoring.itemCoverage === 'listed-items-only' ? 'listed items only' : '';
-  const scoreContext = plainMetadataText(scoring.context);
-  return '<span class="badge">Embedded healer throughput model</span> &middot; provider ' + providerText + providerVersion
-    + (model ? ' &middot; model <b>' + esc(model) + '</b>' : '')
-    + ' &middot; profile <b>' + esc(record.profile) + '</b> &middot; encounter <b>'
-    + esc(scenarioLabel(record.scenario)) + '</b>'
-    + (normalization ? ' &middot; normalization <b>' + esc(normalization) + '</b>' : '')
-    + (itemCoverage ? ' &middot; item coverage <b>' + esc(itemCoverage) + '</b>' : '')
-    + (scoreContext ? ' &middot; score context <b>' + esc(scoreContext) + '</b>' : '')
-    + (provenanceLink || provenanceDetails ? ' &middot; provenance ' + provenanceLink
-      + (provenanceLink && provenanceDetails ? ' / ' : '') + provenanceDetails : '')
-    + (assumptions ? ' &middot; assumptions <b>' + esc(assumptions) + '</b>' : '')
-    + (limitations ? ' &middot; limitations <b>' + esc(limitations) + '</b>' : '');
-}
-
-function sourceModeLabel(sourceMode) {
-  if (sourceMode === 'official-output') return 'Official SimC output';
-  if (sourceMode === 'curated-same-gear') return 'Curated same-gear profile';
-  return 'Unlabeled SimC input';
-}
-
-function referenceMetadata(record) {
-  if (isHealerReference(record)) return healerReferenceMetadata(record);
-  const drift = (Number(record.maxRelativeDrift) * 100).toFixed(2).replace(/\.00$/, '');
-  const date = String(record.simulatedAt || '').slice(0, 10);
-  const profileEntry = manifestProfileById(record.profileId);
-  const input = manifestInputFor(profileEntry, record.scenario);
-  const build = manifestBuildById(record.buildId);
-  const profileName = profileEntry ? profileEntry.name : record.profileId;
-  const sourceMode = record.sourceMode || (input && input.sourceMode);
-  const generatorSource = record.generatorSource || (input && input.generatorSource);
-  const talentSource = record.talentSource || (input && input.talentSource);
-  const talentAsOf = record.talentSourceAsOf || (input && input.talentSourceAsOf);
-  const generator = generatorSource
-    ? '<a href="' + esc(generatorSource) + '" target="_blank" rel="noopener noreferrer">upstream actor/APL generator</a>'
-    : 'unlinked upstream actor/APL generator';
-  const talent = sourceMode === 'curated-same-gear' && talentSource
-    ? ' &middot; <a href="' + esc(talentSource) + '" target="_blank" rel="noopener noreferrer">talent source</a>'
-      + (talentAsOf ? ' as of <b>' + esc(talentAsOf) + '</b>' : '') : '';
-  const generatorActorName = record.generatorActorName || (input && input.generatorActorName);
-  const sourceActorName = generatorActorName || record.sourceProfileName;
-  const sourceActor = sourceActorName
-    ? ' &middot; upstream actor <code>' + esc(sourceActorName) + '</code>' : '';
-  const retainedActor = generatorActorName && record.sourceProfileName
-    ? ' &middot; retained actor <code>' + esc(record.sourceProfileName) + '</code>' : '';
-  return '<span class="badge">' + esc(sourceModeLabel(sourceMode)) + '</span> &middot; Profile <b>'
-    + esc(profileName) + '</b>' + sourceActor + retainedActor + ' &middot; ' + generator + talent
-    + ' &middot; encounter <b>' + esc(scenarioLabel(record.scenario))
-    + '</b> &middot; SimC revision <code>' + esc(build ? build.revision : record.buildId)
-    + '</code> &middot; game build <b>' + esc(build ? build.gameBuild : 'unmatched build')
-    + '</b> &middot; simulated <b>' + esc(date)
-    + '</b> &middot; stability <b>' + drift + '% max drift across ' + record.runs.length + ' runs</b>';
-}
-
-function healerCoverageNotice(spec) {
-  const coverage = healerCoverageFor(spec);
-  if (!coverage) return '';
-  const reason = esc(coverage.reason || 'Reference results remain unpublished until the embedded model passes validation.');
-  if (coverage.status === 'pending' || coverage.status === 'ready') {
-    return '<span class="warning"><strong>In-app healer throughput model pending validation.</strong> '
-      + reason + ' Guide-order fallback is active.</span>';
-  }
-  if (coverage.status === 'unsupported' || coverage.status === 'deferred') {
-    return '<span class="warning"><strong>In-app healer throughput reference unavailable.</strong> '
-      + reason + ' Guide-order fallback is active.</span>';
-  }
-  if (coverage.status === 'rejected') {
-    return '<span class="warning"><strong>In-app healer throughput reference rejected.</strong> '
-      + reason + ' Guide-order fallback is active.</span>';
-  }
-  return '<span class="warning"><strong>Accepted healer throughput coverage exists, but no exact record matches '
-    + 'this profile and encounter.</strong> Guide-order fallback is active.</span>';
-}
-
-function coverageNotice(spec, profile) {
-  const healerNotice = healerCoverageNotice(spec);
-  if (healerNotice) return healerNotice;
-  const manifestProfile = manifestProfileFor(spec, profile);
-  if (manifestProfile && manifestProfile.status === 'ready') {
-    return '<span class="warning"><strong>This reviewed SimulationCraft profile is ready for its planned runs.</strong> '
-      + 'Coefficients stay unpublished until its complete encounter matrix passes validation and is promoted. '
-      + 'Guide-order fallback is active.</span>';
-  }
-  const coverage = manifestSpecFor(spec);
-  if (!coverage) return '<span class="warning"><strong>SimulationCraft coverage is untracked.</strong> '
-    + 'Guide-order fallback is active.</span>';
-  if (coverage.status === 'pending') return '<span class="warning"><strong>SimulationCraft reference pending.</strong> '
-    + esc(coverage.reason || 'This specialization is eligible for the planned damage runs; no coefficients are published yet.') + ' '
-    + 'Guide-order fallback is active.</span>';
-  if (coverage.status === 'deferred') return '<span class="warning"><strong>SimulationCraft reference deferred.</strong> '
-    + esc(coverage.reason || 'A separate simulation objective is required.') + ' Guide-order fallback is active.</span>';
-  if (coverage.status === 'unsupported') return '<span class="warning"><strong>SimulationCraft reference unsupported.</strong> '
-    + esc(coverage.reason || 'No defensible reference model is available.') + ' Guide-order fallback is active.</span>';
-  return '<span class="warning"><strong>Accepted SimulationCraft coverage exists, but no ID-exact record matches '
-    + 'this profile and encounter.</strong> Guide-order fallback is active.</span>';
-}
-
 function renderScoringControls() {
   const editor = $('#weight-editor');
   editor.hidden = !customModeSelected();
   $('#profile').disabled = profilesFor(CUR).length < 2;
-  const scenario = $('#scenario');
-  const scenarioIds = scenarioIdsFor(CUR, activeProfile());
-  if (scenario) scenario.disabled = !referenceModeSelected() || scenarioIds.length < 2;
   const custom = customWeights();
   if (customModeSelected() && custom) {
     $('#scoring-summary').innerHTML = '<strong>Custom weights supplied by you:</strong> ' + weightList(custom)
@@ -1075,36 +725,11 @@ function renderScoringControls() {
       + 'primary stat, effects, sockets, and your current stat totals require a full item simulation.';
     return;
   }
-  const reference = activeReferenceRecord();
-  if (reference) {
-    if (isHealerReference(reference)) {
-      const weights = recordWeights(reference);
-      $('#scoring-summary').innerHTML = '<strong>'
-        + (healerUsesItemScores(reference) ? 'Accepted in-app healer throughput item scores:'
-          : 'Accepted in-app healer throughput reference weights:') + '</strong> '
-        + (weights ? weightList(weights) + '. ' : '') + referenceMetadata(reference) + '. '
-        + (healerUsesItemScores(reference)
-          ? 'Items with an exact embedded model score use it; item-specific coverage may be partial, and unscored items '
-            + 'visibly use the guide-order fallback. Exact scores and guide values are sorted in separate bands and never '
-            + 'compared as if they shared a numeric scale.'
-          : 'These weights rank equal-item-level secondary-stat fit; item level, effects, sockets, and current stat totals '
-            + 'remain outside this reference result.');
-      return;
-    }
-    $('#scoring-summary').innerHTML = '<strong>Accepted SimulationCraft reference weights:</strong> '
-      + weightList(recordWeights(reference)) + '. ' + referenceMetadata(reference)
-      + '. These rank equal-item-level secondary-stat fit only; primary stat, current stat totals, effects, sockets, '
-      + 'and unequal item levels still require a full item simulation.';
-    return;
-  }
   const guide = guideWeights(CUR);
-  $('#scoring-summary').innerHTML = (referenceModeSelected()
-      ? coverageNotice(CUR, activeProfile()) + ' '
-      : customModeSelected()
+  $('#scoring-summary').innerHTML = (customModeSelected()
       ? '<span class="warning"><strong>Custom mode is waiting for all four non-negative weights.</strong> '
         + 'Guide-order fallback is active until then.</span> '
-      : (referenceRecordsFor(CUR, activeProfile()).length ? '' : coverageNotice(CUR, activeProfile()) + ' ')
-        + '<strong>Rough guide-order coefficients:</strong> ')
+      : '<strong>Rough guide-order coefficients:</strong> ')
     + weightList(guide) + '. These are fixed spacing for sorting, not character-specific stat weights or a simulation.';
 }
 
@@ -1114,17 +739,9 @@ function clearCustomWeights(shouldRender) {
 }
 
 function fitText(it) {
-  const reference = activeReferenceRecord();
-  if (healerUsesItemScores(reference)) {
-    const modelScore = healerItemScore(reference, it);
-    if (modelScore != null) return '<span class="fit">Model score '
-      + Number(modelScore).toFixed(3).replace(/\.000$/, '') + '</span>';
-  }
   const weights = activeWeights(CUR);
   const maximum = Math.max.apply(null, Object.values(weights));
-  const label = healerUsesItemScores(reference) ? 'Guide fit ' : 'Fit ';
-  const title = healerUsesItemScores(reference) ? ' title="No item-specific model score; guide-order fallback"' : '';
-  return maximum > 0 ? '<span class="fit"' + title + '>' + label
+  return maximum > 0 ? '<span class="fit">Fit '
     + Math.round(scoreItem(CUR, it) * 100 / maximum) + '</span>' : '';
 }
 
@@ -1166,24 +783,12 @@ function catalystDetails(it) {
 }
 
 function visibleCandidates(list, limit) {
-  const reference = activeReferenceRecord();
-  const itemScores = healerUsesItemScores(reference);
   const sorted = list.slice().sort((a, b) => compareItems(CUR, a, b));
-  const exact = itemScores ? sorted.filter(it => healerItemScore(reference, it) != null) : [];
-  const fallback = itemScores ? sorted.filter(it => healerItemScore(reference, it) == null) : [];
-  const markerFor = (it, index) => !itemScores ? String(index + 1)
-    : healerItemScore(reference, it) != null ? String(exact.indexOf(it) + 1)
-    : 'G' + String(fallback.indexOf(it) + 1);
   const ranked = sorted.slice(0, limit);
   const rankedIds = new Set(ranked.map(it => String(it.id)));
-  return ranked.map((it, index) => ({it: it, marker: markerFor(it, index), special: false,
-    guideFallback: itemScores && healerItemScore(reference, it) == null}))
+  return ranked.map((it, index) => ({it: it, marker: String(index + 1), special: false, guideFallback: false}))
     .concat(sorted.filter(it => it.effect && !rankedIds.has(String(it.id)))
-      .map((it, index) => {
-        const modelScored = itemScores && healerItemScore(reference, it) != null;
-        return {it: it, marker: modelScored ? markerFor(it, ranked.length + index) : 'S',
-          special: !modelScored, guideFallback: itemScores && !modelScored};
-      }));
+      .map(it => ({it: it, marker: 'S', special: true, guideFallback: false})));
 }
 
 function catalystPlanCard(usable) {
@@ -1263,10 +868,7 @@ function tierSlotRows(slot, bases, token) {
   const visibleCount = direct ? 4 : 3;
   const remaining = rows.slice(visibleCount);
   return '<div class="sub-note"><b>Direct</b> = fixed tier; <b>C</b> = Catalyst base. '
-    + (healerUsesItemScores(activeReferenceRecord())
-      ? 'Exact model-scored rows are listed first. <b>Guide fit</b> rows are compared only with other fallback rows; '
-        + 'the two scales are never mixed. Gold marks the best exact score, or the guide fallback if this slot has no exact score.'
-      : 'Gold marks every tied best equal-item-level secondary fit.')
+    + 'Gold marks every tied best equal-item-level secondary fit.'
     + ' The top three Catalyst bases are open by default.</div>'
     + rows.slice(0, visibleCount).join('')
     + (remaining.length ? '<details class="more-items"><summary>Show ' + remaining.length
@@ -1289,28 +891,17 @@ function renderBis() {
   const prioritySource = profile?.source || CUR.statPrioritySource;
   const priorityPatch = profile?.patch || CUR.statPriorityPatch;
   const usingCustom = customModeSelected() && !!customWeights();
-  const reference = activeReferenceRecord();
-  const usingGuide = !usingCustom && !reference;
+  const usingGuide = !usingCustom;
   $('#bis-note').innerHTML = priority
     ? (usingCustom
       ? '<b>Using your custom decimal weights.</b> Candidates are ordered by their full secondary-stat allocation. '
-      : reference
-        ? '<b>Using ' + referenceLabel(reference) + ':</b> ' + referenceValueText(reference) + '. '
-          + referenceMetadata(reference) + '. '
-        : (referenceModeSelected()
-          ? '<b>No accepted reference model matches this selection; guide fallback is active.</b> ' : '')
-          + 'Using the <b>' + esc(profile ? profile.name : 'General') + '</b> guide profile and the rough order <b>'
-          + esc(priority.secondaries.join(' > ')) + '</b>. ')
-      + (healerUsesItemScores(reference)
-        ? '<b>This is an embedded model shortlist, not a definitive BiS list.</b> Exact item-score coverage may be partial; rows marked '
-          + '<b>Guide fit</b> use a separately sorted guide-order fallback. The two numeric scales are never compared. '
-        : '<b>This is an equal-item-level secondary-fit shortlist, not a definitive BiS list.</b> ')
+      : 'Using the <b>' + esc(profile ? profile.name : 'General') + '</b> build and the rough guide order <b>'
+        + esc(priority.secondaries.join(' > ')) + '</b>. ')
+      + '<b>This is an equal-item-level secondary-fit shortlist, not a definitive BiS list.</b> '
       + 'Item level, primary stat, current stat totals, '
       + 'sockets, and item effects can change the winner; '
-      + (healerUsesItemScores(reference)
-        ? 'exact rows include only the factors declared by the model record, while uncovered effects remain unvalued. '
-        : 'effects are shown but never assigned invented values. ')
-      + (usingGuide ? 'The guide profile comes from Icy Veins <b>patch ' + esc(priorityPatch || '?')
+      + 'effects are shown but never assigned invented values. '
+      + (usingGuide ? 'The build comes from Icy Veins <b>patch ' + esc(priorityPatch || '?')
         + '</b> (the prior patch) while 12.1 priorities remain provisional.' : '')
       + (usingGuide && prioritySource ? ' <a href="' + esc(prioritySource)
         + '" target="_blank" rel="noopener noreferrer">View the source</a>.' : '')
@@ -1361,21 +952,13 @@ function renderTier() {
   const tokenBySlot = {};
   myTokens().forEach(token => { if (token.tokenSlot) tokenBySlot[token.tokenSlot] = token; });
   const usingCustom = customModeSelected() && !!customWeights();
-  const reference = activeReferenceRecord();
   const scoringText = usingCustom ? '<b>your custom weights</b>'
-    : reference ? '<b>' + referenceLabel(reference) + '</b> (' + referenceValueText(reference)
-      + '; ' + referenceMetadata(reference) + ')'
-    : (referenceModeSelected() ? '<b>the guide-order fallback because no accepted reference record matches</b>'
-      : '<b>the rough guide-order coefficients</b>');
+    : '<b>the rough guide-order coefficients</b>';
   $('#tier-note').innerHTML = '<b>Catalyst conversions keep the original item\'s secondary and tertiary stats.</b> '
     + 'That means the best converted base can beat the fixed direct-tier stat line at the same item level. '
     + 'The comparisons below use ' + scoringText
-    + (healerUsesItemScores(reference) ? '; exact item-score coverage may be partial, and <b>Guide fit</b> rows use a separately '
-        + 'sorted fallback that is never compared numerically with model scores'
-      : ' for <b>equal-item-level secondary fit only</b>') + '; item level, sockets, '
-    + (healerUsesItemScores(reference)
-      ? 'and any factor not declared in the model assumptions still need an item simulation or Catalyst preview.'
-      : 'and supported special effects still need an item simulation or Catalyst preview.');
+    + ' for <b>equal-item-level secondary fit only</b>; item level, sockets, '
+    + 'and supported special effects still need an item simulation or Catalyst preview.';
   const cards = Array.from(TIER_SET_SLOTS).map(slot => {
     const token = tokenBySlot[slot === 'Shoulder' ? 'Shoulders' : slot];
     const bases = bySlot[slot] || [];
@@ -1455,39 +1038,11 @@ function weaponLoadoutCards(items) {
   }).join('');
 }
 
-/* Trinkets normally bypass the secondary-stat scorer because their effects dominate.
-   An accepted healer item-score record is the one exception: exact matching item IDs can
-   be ranked, while every uncovered trinket stays visibly unranked. */
+/* Trinkets bypass the secondary-stat scorer entirely: their value lives in effects this
+   page does not model, so they are listed, never ranked. (The per-source letter-tier
+   comparison of DECISION G8 arrives with the Phase B guide harvest.) */
 function trinketCard(list) {
   if (!list.length) return '';
-  const reference = activeReferenceRecord();
-  if (healerUsesItemScores(reference)) {
-    const entries = list.map(it => ({it:it, score:healerItemScore(reference, it)}));
-    const ranked = entries.filter(entry => entry.score != null)
-      .sort((a, b) => b.score - a.score || a.it.name.localeCompare(b.it.name));
-    const unranked = entries.filter(entry => entry.score == null)
-      .sort((a, b) => (b.it.effect ? 1 : 0) - (a.it.effect ? 1 : 0));
-    const topScore = ranked.length ? ranked[0].score : null;
-    const rows = ranked.concat(unranked).map((entry, index) => {
-      const it = entry.it;
-      const exact = entry.score != null;
-      return '<div class="row' + (exact && entry.score === topScore ? ' best' : '') + '" data-id="' + it.id + '">'
-        + '<span class="rank" title="' + (exact ? 'Embedded healer model position' : 'No exact healer model score') + '">'
-        + (exact ? index + 1 : '&mdash;') + '</span>' + icoTag(it) + '<span class="nm">' + esc(it.name)
-        + itemDetails(it) + (!exact ? '<span class="fx"><b>Unranked:</b> the active healer model has no exact score for this item.</span>' : '')
-        + (!it.effect ? '<span class="fx">no on-use or proc effect listed</span>' : '')
-        + '</span><span class="meta">' + esc(it.primary || '—')
-        + (it.secondaries.length ? ' ' + esc(allocationText(it)) : '')
-        + (exact ? fitText(it) : '<span class="tag">Unranked</span>')
-        + '</span><span class="src' + (it.kind === 'mplus' ? ' mplus' : '') + '">'
-        + esc(it.kind === 'mplus' ? it.dungeon : it.where) + '</span></div>';
-    }).join('');
-    return '<div class="card wide"><h3>Trinkets<span>' + ranked.length + ' model-ranked &middot; '
-      + unranked.length + ' unranked</span></h3><div class="sub-note"><b>Exact embedded healer item scores rank this slot.</b> '
-      + 'Only matching item IDs are ranked; uncovered trinkets remain unranked rather than receiving an invented effect value. '
-      + referenceMetadata(reference) + '.</div><details class="more-items"><summary>Show all ' + list.length
-      + ' trinkets</summary>' + rows + '</details></div>';
-  }
   const rows = list.slice().sort((a, b) => (b.effect ? 1 : 0) - (a.effect ? 1 : 0)).map(it =>
     '<div class="row" data-id="' + it.id + '">' + icoTag(it) + '<span class="nm">' + esc(it.name)
     + itemDetails(it)
@@ -1697,7 +1252,6 @@ function renderUp() {
   }
   const bySlot = {};
   GEAR.filter(it => canUse(CUR, it)).forEach(it => (bySlot[it.slot] = bySlot[it.slot] || []).push(it));
-  const upgradeReference = activeReferenceRecord();
   const slotPosition = key => {
     const label = MYGEAR[key].slotLabel;
     if (label === '@mainHand') return SLOT_ORDER.indexOf('Main Hand');
@@ -1713,15 +1267,10 @@ function renderUp() {
     const actual = candidatesForEquipped(k, eq, bySlot)
       .filter(it => maxAttainable(it) > threshold);
     const trinketSlot = eq.slotLabel === 'Trinket';
-    const modelRankedTrinkets = trinketSlot && healerUsesItemScores(upgradeReference);
     let entries;
     if (trinketSlot) {
-      const scored = modelRankedTrinkets ? actual.map(it => ({it:it, score:healerItemScore(upgradeReference, it)}))
-        .filter(entry => entry.score != null).sort((a, b) => b.score - a.score) : [];
-      const scoredIds = new Set(scored.map(entry => String(entry.it.id)));
-      entries = scored.map((entry, index) => ({it:entry.it, marker:String(index + 1), modelScore:entry.score}))
-        .concat(actual.filter(it => !scoredIds.has(String(it.id))).sort((a, b) => a.name.localeCompare(b.name))
-          .map(it => ({it:it, marker:'—', modelScore:null})));
+      entries = actual.sort((a, b) => a.name.localeCompare(b.name))
+        .map(it => ({it:it, marker:'—', modelScore:null}));
     } else {
       entries = visibleCandidates(actual, 3);
     }
@@ -1730,12 +1279,9 @@ function renderUp() {
       : (eq.slotLabel === 'Finger' || eq.slotLabel === 'Trinket') ? eq.slotLabel + ' ' + (k.match(/\d+$/)?.[0] || '')
       : eq.slotLabel;
     return '<div class="card"><h3>' + esc(slotName) + '<span>' + esc(eq.name || eq.id) + worn + '</span></h3>'
-      + (trinketSlot && modelRankedTrinkets && entries.length
-        ? '<div class="sub-note"><b>Exact embedded healer item scores rank matching trinkets.</b> Uncovered items remain '
-          + 'unranked. ' + referenceMetadata(upgradeReference) + '.</div>'
-        : trinketSlot && entries.length ? '<div class="sub-note"><b>Trinkets are unranked &mdash; still waiting on '
-          + 'trinket sims:</b> simulate their effects; every eligible source that can exceed your current item '
-          + 'level is listed, alphabetically.</div>' : '')
+      + (trinketSlot && entries.length
+        ? '<div class="sub-note"><b>Trinkets are deliberately unranked:</b> their value lives in effects this page '
+          + 'does not model; every eligible source that can exceed your current item level is listed, alphabetically.</div>' : '')
       + catalystActionHtml(eq)
       + directTierUpgradeHtml(eq, threshold)
       + (entries.length ? entries.map(entry => {
@@ -1793,7 +1339,8 @@ const PATH_COLS = [
   {k: 'delveCoffer', h: 'Delve coffer'}, {k: 'delveTrove', h: "Trovehunter's"},
   {k: 'delveVault', h: 'Delve vault'},
   {k: 'preyHunt', h: 'Prey hunt'}, {k: 'preyVault', h: 'Prey vault'},
-  {k: 'world', h: 'World'}, {k: 'crafted', h: 'Crafted'}, {k: 'venomstone', h: 'Venomstone'}
+  {k: 'world', h: 'World'}, {k: 'crafted', h: 'Crafted'}, {k: 'venomstone', h: 'Venomstone'},
+  {k: 'pvp', h: 'PvP (PvP ilvl)'}
 ];
 const TRACK_OF = {266:'adv',269:'adv',272:'adv',276:'adv',279:'vet',282:'vet',285:'vet',289:'vet',
   292:'champ',295:'champ',298:'champ',302:'champ',305:'hero',308:'hero',311:'hero',315:'hero',
@@ -1844,32 +1391,9 @@ function enhanceInteractiveRows() {
 
 function renderFooter() {
   const custom = customModeSelected() && customWeights();
-  const reference = activeReferenceRecord();
   const scoring = custom
     ? '<b>Current rankings use your custom weights:</b> ' + weightList(custom) + '. '
-    : reference
-      ? '<b>Current rankings use ' + referenceLabel(reference) + ':</b> '
-        + referenceValueText(reference) + '. ' + referenceMetadata(reference) + '. '
-      : referenceModeSelected()
-        ? coverageNotice(CUR, activeProfile()) + ' '
-        : (referenceRecordsFor(CUR, activeProfile()).length ? '' : coverageNotice(CUR, activeProfile()) + ' ')
-          + '<b>Current rankings use the rough guide-order coefficients.</b> ';
-  const simcSourceUrl = SIMC_MANIFEST.source || SIMC_WEIGHTS.source;
-  const simcSource = simcSourceUrl
-    ? '<a href="' + esc(simcSourceUrl) + '" target="_blank" rel="noopener noreferrer">upstream official MID2 generator/APL tree</a>'
-    : 'no reference source embedded';
-  const healerProvider = HEALER_REFERENCES.provider || {};
-  const healerProviderName = healerProvider.name || healerProvider.label || healerProvider.id || 'embedded provider';
-  const healerProviderUrl = healerProvider.url || healerProvider.sourceUrl;
-  const acceptedHealerRecords = (HEALER_REFERENCES.records || []).filter(record => record.status === 'accepted').length;
-  const healerSource = (HEALER_REFERENCES.records || []).length || (HEALER_REFERENCES.coverage || []).length
-    ? (acceptedHealerRecords ? 'Healer throughput references: ' : 'Candidate healer provider: ') + (healerProviderUrl
-      ? '<a href="' + esc(healerProviderUrl) + '" target="_blank" rel="noopener noreferrer">' + esc(healerProviderName) + '</a>'
-      : esc(healerProviderName)) + (acceptedHealerRecords
-        ? '; embedded model records remain subject to their displayed assumptions, limitations, and validation status.'
-        : '; status <b>' + esc(String(healerProvider.status || 'pending').replace(/-/g, ' '))
-          + '</b>. No healer rankings are embedded yet.') + '<br>'
-    : '';
+    : '<b>Current rankings use the rough guide-order coefficients.</b> ';
   /* HOW OLD IS THIS PAGE (2026-08-08). Every harvest date lived inside the collapsed
      "Data sources and technical notes" disclosure, so a visitor had no way to tell whether
      they were reading last night's data or last month's without opening it — and these
@@ -1889,18 +1413,14 @@ function renderFooter() {
   $('#foot').innerHTML = '<p class="footfam">Part of <a href="index.html"><b>Spec Tracker</b></a> — tier consensus, rankings and the 12.1 forecast for every spec. Made by <a href="https://github.com/riles22" target="_blank" rel="noopener noreferrer"><b>riles22</b></a>.</p>'
     + freshness
     + scoring
-    + (healerUsesItemScores(reference)
-      ? '<b>Exact embedded healer item scores are used where available; unscored items use a separately sorted, visible guide-order fallback. The two scales are never compared. This is not a full character simulation.</b>'
-      : '<b>Every score compares equal-item-level secondary-stat fit; it is not an item simulation.</b>')
+    + '<b>Every score compares equal-item-level secondary-stat fit; it is not an item simulation.</b>'
     + '<details class="disclosure"><summary>Data sources and technical notes</summary><div class="disclosure-body">'
     + 'Item data: ' + esc(RAID.source) + ', harvested ' + esc(RAID.harvestedAt) + '.<br>'
     + 'Dungeon data: ' + esc(DUNG.source) + ', harvested ' + esc(DUNG.harvestedAt) + '.<br>'
     + 'Direct tier data: ' + esc(TIER.source) + ', harvested ' + esc(TIER.harvestedAt) + '.<br>'
     + 'Catalyst policy: Blizzard 12.1 PTR notes, reviewed ' + esc(CATALYST.reviewedAt) + '.<br>'
     + 'Spec data: ' + esc(SPECS.source) + ', harvested ' + esc(SPECS.harvestedAt) + '.<br>'
-    + healerSource
-    + 'SimC upstream source: ' + simcSource + '; each retained input is labeled as an official output or curated same-gear profile; generated '
-    + esc(SIMC_WEIGHTS.generatedAt || 'not yet generated') + '.<br><b>'
+    + 'Item-level sheet: ' + esc(SHEET.source) + ', distilled ' + esc(SHEET.harvestedAt) + '.<br><b>'
     + esc(RAID.caveat) + '</b> ' + esc(SPECS.caveat) + '<br>'
     + '<b>Weapon loadouts are explicit, mutually exclusive configurations</b> curated from official Blizzard class pages and patch notes. '
     + 'Allowed types and direct official source links are shown inside each weapon card.<br>'
