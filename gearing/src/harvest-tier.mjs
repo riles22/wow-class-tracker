@@ -12,7 +12,7 @@ import { fetchItems, getText, itemIdsFrom, parsedItemIssues } from "./lib-wowhea
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DATA_PATH = join(ROOT, "data", "tier-items.json");
 const ACCEPT_ITEM_CHANGES = process.env.WOW_ACCEPT_TIER_CHANGES === "1";
-const SET_URL = (setId) => `https://www.wowhead.com/ptr/item-set=${setId}`;
+const SET_URL = (setId) => `https://www.wowhead.com/item-set=${setId}`;
 const SLOT_ORDER = ["Head", "Shoulder", "Chest", "Hands", "Legs"];
 
 const SETS = [
@@ -78,11 +78,11 @@ if (changes.length && !ACCEPT_ITEM_CHANGES)
 
 const out = {
   schemaVersion: 1,
-  patchContext: "ptr-12.1.0",
-  source: "Wowhead 12.1.0 PTR class-set pages + per-item tooltips",
+  patchContext: "12.1-live",
+  source: "Wowhead 12.1 live class-set pages + per-item tooltips",
   overviewUrl: "https://www.wowhead.com/guide/midnight/season-2-tier-set-bonus-appearance-overview",
   harvestedAt: new Date().toISOString().slice(0, 10),
-  caveat: "Pre-launch PTR data. Direct tier item stats may change before Season 2 launches.",
+  caveat: "Season 2 live data (harvested from Wowhead's live set pages after the 2026-08-18 launch). Mid-season hotfixes can still retune individual pieces between harvests.",
   referenceSnapshot: { ilvl: 334, track: "Myth 6/6" },
   counts: { sets: sets.length, items: sets.flatMap((set) => set.items).length },
   sets,

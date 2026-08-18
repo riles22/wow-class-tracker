@@ -909,13 +909,13 @@ function catalystPlanCard(usable) {
         + ' &middot; copied from the Spec Tracker, which is where these are maintained.</span>'
       : '')
     + (charges.passiveCadenceWeeks && charges.cap && unbound.requirement
-      ? '<span class="fx"><b>Charge planning (PTR):</b> each conversion costs one Catalyst charge; charges passively accumulate every '
+      ? '<span class="fx"><b>Charge planning:</b> each conversion costs one Catalyst charge; charges passively accumulate every '
         + esc(charges.passiveCadenceWeeks) + ' weeks to a cap of ' + esc(charges.cap) + '. Earning the '
         + esc(unbound.requirement) + ' unlocks bonus drops from ' + esc((charges.bonusDropsAfterCatalystUnbound || []).join(', '))
         + ' on that ' + esc(unbound.scope) + '. Serpent Scion grants ' + esc(scion.bonusCharges || 1)
         + ' bonus charge on the ' + esc(scion.scope || 'current character') + ' for any one of: '
-        + esc((scion.criteriaAnyOf || []).join('; ')) + '. These PTR details may change.'
-        + (scionSource ? ' <a href="' + esc(scionSource) + '" target="_blank" rel="noopener noreferrer">PTR achievement</a>.' : '')
+        + esc((scion.criteriaAnyOf || []).join('; ')) + '. These details can change with mid-season hotfixes.'
+        + (scionSource ? ' <a href="' + esc(scionSource) + '" target="_blank" rel="noopener noreferrer">achievement</a>.' : '')
         + '</span>' : '')
     + '</div></details></div>';
 }
@@ -1435,7 +1435,7 @@ function catalystActionHtml(equipped) {
       + (mustVerify ? 'Possible Catalyst conversion — verify this instance:' : 'Catalyst conversion option:')
       + '</b> convert ' + esc(it.name) + ' into this slot\'s class-set piece while retaining its '
       + esc(allocationText(it)) + ' secondary allocation and any tertiary roll. Under established Catalyst '
-      + 'behavior, item level and upgrade track also remain; confirm the PTR preview.'
+      + 'behavior, item level and upgrade track also remain; confirm the in-game Catalyst preview.'
       + (mustVerify ? ' The item ID alone does not prove that this is a current-season Veteran+ instance.' : '')
       + (MAPPED_VENOMCURSED_ITEMS.has(String(it.id))
         ? ' Blizzard identifies the Ula\'tek Venomcursed cantrip family as a supported example; this item is mapped to that family.' : '')
@@ -1650,7 +1650,7 @@ function renderFooter() {
     + 'Item data: ' + esc(RAID.source) + ', harvested ' + esc(RAID.harvestedAt) + '.<br>'
     + 'Dungeon data: ' + esc(DUNG.source) + ', harvested ' + esc(DUNG.harvestedAt) + '.<br>'
     + 'Direct tier data: ' + esc(TIER.source) + ', harvested ' + esc(TIER.harvestedAt) + '.<br>'
-    + 'Catalyst policy: Blizzard 12.1 PTR notes, reviewed ' + esc(CATALYST.reviewedAt) + '.<br>'
+    + 'Catalyst policy: Blizzard 12.1 development notes, reviewed ' + esc(CATALYST.reviewedAt) + '.<br>'
     + 'Spec data: ' + esc(SPECS.source) + ', harvested ' + esc(SPECS.harvestedAt) + '.<br>'
     + 'Item-level sheet: ' + esc(SHEET.source) + ', distilled ' + esc(SHEET.harvestedAt) + '.<br>'
     + 'Guide consensus sources: ' + Object.values(GUIDES.sources).map(s =>

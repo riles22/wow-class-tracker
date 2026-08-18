@@ -68,10 +68,19 @@ export function canonicalSlot(label) {
 export function canonicalRosters(raid, dungeons) {
   const bosses = new Map();   // nameKey -> canonical boss name
   const itemIndex = new Map(); // itemId -> { sourceKind, boss, dungeon, droppedBy }
+  const raidSubBosses = new Map(); // nameKey(droppedBy alias) -> canonical boss name
   for (const b of raid.bosses) {
     bosses.set(nameKey(b.name), b.name);
-    for (const item of b.items) itemIndex.set(String(item.id),
-      { sourceKind: "raid", boss: b.name, dungeon: null, droppedBy: null });
+    for (const item of b.items) {
+      itemIndex.set(String(item.id),
+        { sourceKind: "raid", boss: b.name, dungeon: null, droppedBy: item.droppedBy ?? null });
+      // The rewards guide attributes drops by SUB-BOSS names inside multi-part encounters
+      // ("Vexhul"/"Ithraz" are The Twin Fangs; "Nymrissa Wavecaller" belongs to boss 1;
+      // "Mor'zahi" to The Lost Explorers) — the harvest records them in droppedBy, and
+      // guide sources cite them, so they must join to their encounter.
+      if (item.droppedBy && nameKey(item.droppedBy) !== nameKey(b.name))
+        raidSubBosses.set(nameKey(item.droppedBy), b.name);
+    }
   }
   const dungeonNames = new Map();
   const dungeonBosses = new Map(); // nameKey(droppedBy) -> { dungeon, droppedBy }
@@ -102,7 +111,7 @@ export function canonicalRosters(raid, dungeons) {
   for (const d of dungeons.dungeons) addTokens(d.name, { sourceKind: "dungeon", boss: null, dungeon: d.name, droppedBy: null });
   const uniqueTokens = new Map([...tokenTarget].filter(([tok]) => tokenCounts.get(tok) === 1));
   const raidName = raid.instance ? nameKey(raid.instance) : null; // "The Venomous Abyss"
-  return { bosses, dungeonNames, dungeonBosses, itemIndex, uniqueTokens, raidName };
+  return { bosses, dungeonNames, dungeonBosses, raidSubBosses, itemIndex, uniqueTokens, raidName };
 }
 
 /**
@@ -161,14 +170,13 @@ export function normalizeDropSource(text, rosters) {
     viaTierToken: viaTierToken || undefined });
 
   const NON_INSTANCE = [
-    // World-boss/lair sources named by the guides but outside our per-item harvest.
-    // Evidence (2026-08-18): Icy Veins anchors Nymrissa and Tidebound Grotto to its
-    // midnight-world-bosses-guide; Wowhead names Nymrissa directly; Method sources
-    // Sporefall (the one-boss lair raid CLAUDE.md records as deliberately untracked).
-    // Vexhul added 08-18 evening: Icy Veins' own BiS rows source "Vexhul's Everflowing
-    // Gland" from Tidebound Grotto, so Vexhul is the Grotto's boss — Method just
-    // attributes by NPC where Icy Veins attributes by lair.
-    [/nymrissa|tidebound grotto|sporefall|rotmire|vexhul/i, "world"],
+    // Lair/world sources outside our per-item harvest. NYMRISSA settled at launch
+    // (Phase E, 2026-08-18 evening): her three drops left Nek'zali's live guide table
+    // with no raid destination, she has no live boss page, and Icy Veins files her
+    // under world bosses — she is a WORLD boss whose loot briefly rode boss 1's PTR
+    // table (WCL lists her under zone 53 because zones bundle associated content).
+    // Vexhul and Mor'zahi remain true sub-bosses resolved via raidSubBosses.
+    [/nymrissa|tidebound grotto|sporefall|rotmire/i, "world"],
     [/^tier set$|tier set\b/i, "tier-token"],
     [/craft|spark of tides|profession|tailoring|blacksmithing|leatherworking|jewelcrafting|engineering|inscription|misc/i, "crafted"],
     [/^catalyst$/i, "catalyst"],
@@ -187,6 +195,9 @@ export function normalizeDropSource(text, rosters) {
   for (const [k, name] of rosters.bosses)
     if (strippedKey === k || strippedKey.includes(k) || k.includes(strippedKey))
       return decorate({ sourceKind: "raid", boss: name, dungeon: null, droppedBy: null });
+  for (const [k, bossName] of rosters.raidSubBosses ?? [])
+    if (strippedKey === k || strippedKey.includes(k))
+      return decorate({ sourceKind: "raid", boss: bossName, dungeon: null, droppedBy: raw });
   for (const [k, entry] of rosters.dungeonBosses)
     if (strippedKey === k || strippedKey.includes(k))
       return decorate({ sourceKind: "dungeon", boss: null, dungeon: entry.dungeon, droppedBy: entry.droppedBy });

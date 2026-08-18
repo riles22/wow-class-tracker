@@ -407,10 +407,10 @@
           "itemId": "271474",
           "itemName": "Baleful Grave-Knight's Casque",
           "sourceText": "Vexhul",
-          "sourceKind": "world",
-          "boss": null,
+          "sourceKind": "raid",
+          "boss": "The Twin Fangs",
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": "Vexhul"
         },
         {
           "list": "overall",
@@ -574,10 +574,10 @@
           "itemId": "271474",
           "itemName": "Baleful Grave-Knight's Casque",
           "sourceText": "Vexhul",
-          "sourceKind": "world",
-          "boss": null,
+          "sourceKind": "raid",
+          "boss": "The Twin Fangs",
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": "Vexhul"
         },
         {
           "list": "raid",
@@ -1112,10 +1112,10 @@
           "itemId": "271474",
           "itemName": "Baleful Grave-Knight's Casque",
           "sourceText": "Vexhul",
-          "sourceKind": "world",
-          "boss": null,
+          "sourceKind": "raid",
+          "boss": "The Twin Fangs",
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": "Vexhul"
         },
         {
           "list": "raid",
@@ -7454,7 +7454,7 @@
           "sourceKind": "raid",
           "boss": "The Twin Fangs",
           "dungeon": null,
-          "droppedBy": null,
+          "droppedBy": "Vexhul",
           "sourceTextUnmatched": true
         },
         {
@@ -7544,7 +7544,7 @@
           "sourceKind": "raid",
           "boss": "Ula'tek",
           "dungeon": null,
-          "droppedBy": null,
+          "droppedBy": "Ula'tek",
           "sourceTextUnmatched": true
         },
         {
@@ -7599,7 +7599,7 @@
           "itemName": "Soulslither Spaulders",
           "sourceText": "The Colled Altar",
           "sourceKind": "raid",
-          "boss": "Nek'zali the Soulcoiler",
+          "boss": "The Coiled Altar",
           "dungeon": null,
           "droppedBy": null,
           "sourceTextUnmatched": true
@@ -10931,8 +10931,7 @@
           "sourceKind": "raid",
           "boss": "The Lost Explorers",
           "dungeon": null,
-          "droppedBy": null,
-          "sourceTextUnmatched": true
+          "droppedBy": "Mor'zahi"
         },
         {
           "list": "overall",
@@ -11112,8 +11111,7 @@
           "sourceKind": "raid",
           "boss": "The Lost Explorers",
           "dungeon": null,
-          "droppedBy": null,
-          "sourceTextUnmatched": true
+          "droppedBy": "Mor'zahi"
         },
         {
           "list": "raid",
@@ -14774,7 +14772,7 @@
     },
     "Subtlety Rogue": {
       "guideUrl": "https://www.method.gg/guides/subtlety-rogue/gearing",
-      "published": "2026-08-16",
+      "published": "2026-08-18",
       "priorities": [
         {
           "label": "General",

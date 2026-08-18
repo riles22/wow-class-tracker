@@ -21,13 +21,14 @@ const MAPPED_VENOMCURSED_ITEMS = new Set(["271874", "271875", "271876", "271878"
 const CATALYST_SOURCES = {
   blizzardPatchNotes: "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/1",
   blizzardRewardChanges: "https://us.forums.blizzard.com/en/wow/t/curse-of-ulatek-endgame-reward-changes/2317450/1",
-  catalystGuide: "https://www.wowhead.com/ptr/guide/midnight/matrix-catalyst-crafting-tier-set",
-  chargeTooltip: "https://www.wowhead.com/ptr/currency=3465/venomblight-manaflux",
+  catalystGuide: "https://www.wowhead.com/guide/midnight/matrix-catalyst-crafting-tier-set",
+  chargeTooltip: "https://www.wowhead.com/currency=3465/venomblight-manaflux",
   chargeUpdate: "https://www.wowhead.com/news/catalyst-tooltips-updated-acquisition-now-works-similar-to-midnight-season-1-382051",
-  serpentScionAchievement: "https://www.wowhead.com/ptr/achievement=62872/midnight-season-2-serpent-scion",
+  serpentScionAchievement: "https://www.wowhead.com/achievement=62872/midnight-season-2-serpent-scion",
 };
 const TIER_OVERVIEW = "https://www.wowhead.com/guide/midnight/season-2-tier-set-bonus-appearance-overview";
-const CATALYST_ALLOCATION_DIGEST = "7c0e02b0da5e7148a769a16143db0b5314d29f737968f265be47918912501a82";
+// Re-approved 2026-08-18: launch re-harvest (live tier ids, 316 items, Nymrissa delta).
+const CATALYST_ALLOCATION_DIGEST = "19f09c04e2b87b083661ad1e5546eb6617e350f61afd658db92b2b307a2c895a";
 const ITEM_PRIMARIES = new Set(["Agi", "Int", "Str", "Agi/Int", "Agi/Str", "Str/Int", "Any"]);
 const ARMOR_PRIMARY = { Cloth: "Int", Leather: "Agi/Int", Mail: "Agi/Int", Plate: "Str/Int" };
 const ARMOR_BY_CLASS = {
@@ -40,7 +41,7 @@ const WEAPON_TYPES = new Set(["Dagger", "Sword", "Axe", "Mace", "Staff", "Bow", 
   "Crossbow", "Fist Weapon", "Polearm", "Warglaive", "Wand", "Shield"]);
 const WEAPON_SLOTS = new Set(["Main Hand", "One-Hand", "Two-Hand", "Off Hand", "Held In Off-hand", "Ranged"]);
 const PRIMARY_NEUTRAL_SLOTS = new Set(["Neck", "Finger", "Back", "Trinket"]);
-const WEAPON_PATCH_CONTEXT = "ptr-12.1.0";
+const WEAPON_PATCH_CONTEXT = "12.1-live";
 const EXPECTED_STAT_OVERRIDE_KEYS = new Set([
   "Blood Death Knight", "Devourer Demon Hunter", "Guardian Druid", "Restoration Druid",
   "Beast Mastery Hunter", "Survival Hunter", "Brewmaster Monk", "Holy Paladin",
@@ -183,7 +184,7 @@ function validateCatalystAndTier(catalyst, tier, catalystAllocations, raidGroups
   for (const set of sets) {
     const expectedSet = TIER_SETS[set.class] || [];
     if (set.setId !== expectedSet[0] || set.name !== expectedSet[1]
-      || set.sourceUrl !== `https://www.wowhead.com/ptr/item-set=${set.setId}`)
+      || set.sourceUrl !== `https://www.wowhead.com/item-set=${set.setId}`)
       errors.push(`${set.class || "unknown"}: invalid direct-tier set identity`);
     if (!sameSet(new Set((set.items || []).map((item) => item.slot)), TIER_SLOTS))
       errors.push(`${set.class || "unknown"}: direct tier does not cover all five slots`);
@@ -219,12 +220,12 @@ function validateCatalystAndTier(catalyst, tier, catalystAllocations, raidGroups
   if (catalystAllocations?.schemaVersion !== 4
     || catalystAllocations?.patchContext !== WEAPON_PATCH_CONTEXT
     || catalystAllocations?.counts?.catalystBases !== 94
-    || catalystAllocations?.counts?.otherRanked !== 159
+    || catalystAllocations?.counts?.otherRanked !== 157
     || catalystAllocations?.counts?.directTier !== 65
-    || catalystAllocations?.counts?.items !== 318
+    || catalystAllocations?.counts?.items !== 316
     || catalystAllocations?.sourceUrlPattern
-      !== "https://nether.wowhead.com/ptr/tooltip/item/{itemId}?locale=0&ilvl=1000"
-    || Object.keys(reviewed).length !== 318)
+      !== "https://nether.wowhead.com/tooltip/item/{itemId}?locale=0&ilvl=1000"
+    || Object.keys(reviewed).length !== 316)
     errors.push("reviewed ranked-item stat-allocation fingerprint is missing or stale");
   const actualIds = new Set(fingerprints.map(({item}) => String(item.id)));
   if (!sameSet(actualIds, new Set(Object.keys(reviewed))))
@@ -491,11 +492,13 @@ export function validateData({ raid, specs, dungeons, sheet, statOverrides, stat
   }
   for (const duplicate of duplicateAssignments(raidGroups, raid?.allowedDuplicateItemIds || []))
     errors.push(`duplicate raid assignment: ${duplicate}`);
+  // Re-pinned 2026-08-18: Wowhead's LIVE guide resolved the PTR duplicate listing to
+  // The Coiled Altar (boss 7) natively, so the old boss-1 override is retired — its
+  // reappearance would mean someone resurrected stale PTR-era data.
   const correctedOwners = raidGroups.filter((boss) => (boss.items || []).some((item) => item.id === "268231"));
-  const ownershipOverride = raid?.assignmentOverrides?.["268231"];
-  if (correctedOwners.length !== 1 || correctedOwners[0]?.boss !== 1
-    || ownershipOverride?.boss !== 1 || !/^https:\/\//.test(ownershipOverride?.source || ""))
-    errors.push("Soulslither Spaulders ownership correction is missing or stale");
+  if (correctedOwners.length !== 1 || correctedOwners[0]?.boss !== 7
+    || raid?.assignmentOverrides?.["268231"])
+    errors.push("Soulslither Spaulders ownership is missing or stale");
 
   const raidItems = raidGroups.flatMap((boss) => boss.items || []);
   const raidTokenCount = raidGroups.reduce((sum, boss) => sum + (boss.items || []).filter((item) =>

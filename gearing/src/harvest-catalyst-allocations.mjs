@@ -40,9 +40,12 @@ const directTier = tier.sets.flatMap((set) => (set.items || []).map((item) => ({
 })));
 const candidates = [...rankedSourceItems, ...directTier];
 const otherRanked = rankedSourceItems.length - catalystBases.length;
-if (catalystBases.length !== 94 || otherRanked !== 159 || directTier.length !== 65
-  || new Set(candidates.map((item) => String(item.id))).size !== 318)
-  throw new Error("refusing to harvest stat allocations: expected 94 Catalyst bases, 159 other ranked items, and 65 direct-tier items");
+// Counts re-pinned 2026-08-18 (launch re-harvest): 159→157 ranked / 318→316 unique.
+// The −2 is the Nymrissa resolution (boss 1 lost her 3 world drops, dungeons gained
+// 271680/271681 net +1); bases and direct-tier are unchanged.
+if (catalystBases.length !== 94 || otherRanked !== 157 || directTier.length !== 65
+  || new Set(candidates.map((item) => String(item.id))).size !== 316)
+  throw new Error("refusing to harvest stat allocations: expected 94 Catalyst bases, 157 other ranked items, and 65 direct-tier items");
 
 let previous = null;
 try { previous = JSON.parse(await readFile(DATA_PATH, "utf8")); }
@@ -50,9 +53,9 @@ catch (error) {
   if (error?.code !== "ENOENT")
     throw new Error(`cannot trust existing Catalyst allocation baseline: ${error.message}`, { cause: error });
 }
-if (previous && (previous?.counts?.items !== 318 || Object.keys(previous?.items || {}).length !== 318)
+if (previous && (previous?.counts?.items !== 316 || Object.keys(previous?.items || {}).length !== 316)
   && !ACCEPT_CHANGES)
-  throw new Error("cannot trust existing stat-allocation baseline: expected 318 items");
+  throw new Error("cannot trust existing stat-allocation baseline: expected 316 items");
 
 console.log("Harvesting stable ranked-item stat allocations ...");
 const items = {};
@@ -115,9 +118,9 @@ if ((removed.length || added.length || changed.length) && previous && !ACCEPT_CH
 
 const out = {
   schemaVersion: 4,
-  patchContext: "ptr-12.1.0",
-  source: `Wowhead 12.1.0 PTR ranked-item tooltips scaled to reference item level ${REFERENCE_ILVL}`,
-  sourceUrlPattern: "https://nether.wowhead.com/ptr/tooltip/item/{itemId}?locale=0&ilvl=1000",
+  patchContext: "12.1-live",
+  source: `Wowhead 12.1 live ranked-item tooltips scaled to reference item level ${REFERENCE_ILVL}`,
+  sourceUrlPattern: "https://nether.wowhead.com/tooltip/item/{itemId}?locale=0&ilvl=1000",
   harvestedAt: new Date().toISOString().slice(0, 10),
   caveat: "The 7,000-point allocations are recovered from a high-level reference tooltip to avoid legacy-template rounding; displayed rating amounts still scale with actual item level.",
   counts: {

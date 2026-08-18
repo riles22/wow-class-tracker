@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "patchContext": "ptr-12.1.0",
-  "source": "Local data/raid-items.json and data/dungeon-items.json harvested from Wowhead PTR tooltips on 2026-08-02; each override links the direct item page or the Wowhead loot table that supplies its role label.",
+  "patchContext": "12.1-live",
+  "source": "Local data/raid-items.json and data/dungeon-items.json role labels reviewed against Wowhead PTR tooltips on 2026-08-02 (pre-launch; none of these items changed at the 2026-08-18 launch); links point at the live pages for the same items; each override links the direct item page or the Wowhead loot table that supplies its role label.",
   "items": {
     "158368": {
       "eligibleSpecs": [
@@ -19,7 +19,7 @@
         "Destruction Warlock"
       ],
       "note": "Intellect DPS recommendation override. The on-use deals damage and is amplified by subsequent damaging spells; healing specs are excluded from the default candidate list.",
-      "source": "https://www.wowhead.com/ptr/item=158368"
+      "source": "https://www.wowhead.com/item=158368"
     },
     "159618": {
       "eligibleSpecs": [
@@ -44,7 +44,7 @@
         "Restoration Shaman"
       ],
       "note": "Healer-only recommendation override. The statless-primary proc requires helpful spells or abilities and heals an ally; non-healer specs are excluded from the default candidate list.",
-      "source": "https://www.wowhead.com/ptr/item=193748"
+      "source": "https://www.wowhead.com/item=193748"
     },
     "193762": {
       "eligibleSpecs": [
@@ -58,7 +58,7 @@
         "Protection Warrior"
       ],
       "note": "The tooltip has no static primary stat, but its on-use stacks explicitly grant Strength. Eligibility is limited to Strength specializations.",
-      "source": "https://www.wowhead.com/ptr/item=193762"
+      "source": "https://www.wowhead.com/item=193762"
     },
     "250214": {
       "eligibleSpecs": [
@@ -86,7 +86,7 @@
         "Destruction Warlock"
       ],
       "note": "DPS recommendation override for the item's Agility/Intellect consumers. Its additional Mastery proc requires damaging spells or abilities; tanks and healers are excluded from the default candidate list.",
-      "source": "https://www.wowhead.com/ptr/item=250214"
+      "source": "https://www.wowhead.com/item=250214"
     },
     "250224": {
       "eligibleSpecs": [
@@ -104,7 +104,7 @@
         "Destruction Warlock"
       ],
       "note": "The tooltip has no static primary stat, but the proc requires damaging spells, deals damage, and grants Intellect. Eligibility is limited to Intellect DPS recommendations.",
-      "source": "https://www.wowhead.com/ptr/item=250224"
+      "source": "https://www.wowhead.com/item=250224"
     },
     "250229": {
       "eligibleSpecs": [
@@ -118,7 +118,7 @@
         "Protection Warrior"
       ],
       "note": "The tooltip has no static primary stat, but the proc explicitly grants Strength. Eligibility is limited to Strength specializations.",
-      "source": "https://www.wowhead.com/ptr/item=250229"
+      "source": "https://www.wowhead.com/item=250229"
     },
     "250243": {
       "eligibleSpecs": [
@@ -130,7 +130,7 @@
         "Protection Warrior"
       ],
       "note": "Tank-only recommendation override. Wowhead's Murder Row loot table labels this trinket Tanks, and its effect is a personal absorb that stores damage for a retaliatory explosion.",
-      "source": "https://www.wowhead.com/ptr/guide/midnight/murder-row-dungeon-overview-location-rewards"
+      "source": "https://www.wowhead.com/guide/midnight/murder-row-dungeon-overview-location-rewards"
     },
     "250244": {
       "eligibleSpecs": [
@@ -181,7 +181,7 @@
         "Restoration Shaman"
       ],
       "note": "Healer-only recommendation override. The Intellect on-use sacrifices the user's health to place an absorb on a target ally; non-healer Intellect specs are excluded from the default candidate list.",
-      "source": "https://www.wowhead.com/ptr/item=250255"
+      "source": "https://www.wowhead.com/item=250255"
     },
     "270160": {
       "eligibleSpecs": [
@@ -193,7 +193,7 @@
         "Protection Warrior"
       ],
       "note": "Tank-only recommendation override. Wowhead's Lost Explorers loot table labels this trinket Tanks, and its effect is a personal damage-absorption shield with retaliation damage.",
-      "source": "https://www.wowhead.com/ptr/guide/midnight/raids/venomous-abyss-lost-explorers-boss-strategy-abilities"
+      "source": "https://www.wowhead.com/guide/midnight/raids/venomous-abyss-lost-explorers-boss-strategy-abilities"
     },
     "270161": {
       "eligibleSpecs": [
@@ -211,7 +211,7 @@
         "Destruction Warlock"
       ],
       "note": "Intellect DPS recommendation override. The proc requires harmful spells and deals damage; healing specs that can cast offensive spells are intentionally excluded from the default candidate list.",
-      "source": "https://www.wowhead.com/ptr/item=270161"
+      "source": "https://www.wowhead.com/item=270161"
     },
     "270162": {
       "eligibleSpecs": [
@@ -224,7 +224,7 @@
         "Restoration Shaman"
       ],
       "note": "Healer-only recommendation override. Wowhead's Nek'zali loot table labels this trinket Healers, and its use grants barriers to allies. Other Intellect specs can physically equip it but are excluded from recommendation eligibility.",
-      "source": "https://www.wowhead.com/ptr/guide/midnight/raids/venomous-abyss-nekzali-the-soulcoiler-boss-strategy-abilities"
+      "source": "https://www.wowhead.com/guide/midnight/raids/venomous-abyss-nekzali-the-soulcoiler-boss-strategy-abilities"
     },
     "270168": {
       "eligibleSpecs": [
@@ -270,7 +270,7 @@
         "Protection Warrior"
       ],
       "note": "Explicit all-spec override. This statless-primary trinket supplies Mastery and generic direct damage without granting or scaling from a particular primary stat; no role restriction is stated.",
-      "source": "https://www.wowhead.com/ptr/item=270168"
+      "source": "https://www.wowhead.com/item=270168"
     },
     "270169": {
       "eligibleSpecs": [
@@ -295,7 +295,7 @@
         "Destruction Warlock"
       ],
       "note": "The tooltip has no static primary stat, but its on-use consumes Hex Lord's Doom to increase Intellect, so all Intellect specializations are eligible.",
-      "source": "https://www.wowhead.com/ptr/item=270169"
+      "source": "https://www.wowhead.com/item=270169"
     },
     "270170": {
       "eligibleSpecs": [
@@ -313,7 +313,7 @@
         "Destruction Warlock"
       ],
       "note": "Intellect DPS recommendation override. This Intellect trinket is a direct enemy-damage on-use; healing specs are excluded from the default candidate list.",
-      "source": "https://www.wowhead.com/ptr/item=270170"
+      "source": "https://www.wowhead.com/item=270170"
     },
     "270171": {
       "eligibleSpecs": [
@@ -326,7 +326,7 @@
         "Restoration Shaman"
       ],
       "note": "Healer-only recommendation override. Wowhead's Twin Fangs loot table labels this trinket Healers, and the proc requires healing an ally. Its tooltip has no static primary stat.",
-      "source": "https://www.wowhead.com/ptr/guide/midnight/raids/venomous-abyss-twin-fangs-boss-strategy-abilities"
+      "source": "https://www.wowhead.com/guide/midnight/raids/venomous-abyss-twin-fangs-boss-strategy-abilities"
     },
     "270174": {
       "eligibleSpecs": [
@@ -338,7 +338,7 @@
         "Protection Warrior"
       ],
       "note": "Tank-only recommendation override. The effect requires dodging, parrying, or blocking to trigger and then grants Strength or Agility, so non-tank specializations are excluded from the default candidate list.",
-      "source": "https://www.wowhead.com/ptr/item=270174"
+      "source": "https://www.wowhead.com/item=270174"
     },
     "270175": {
       "eligibleSpecs": [
@@ -365,7 +365,7 @@
         "Protection Warrior"
       ],
       "note": "The tooltip has no static primary stat, but both the on-use buff and its stacking effect explicitly grant Strength or Agility. Intellect specializations are excluded.",
-      "source": "https://www.wowhead.com/ptr/item=270175"
+      "source": "https://www.wowhead.com/item=270175"
     },
     "273794": {
       "eligibleSpecs": [
@@ -383,7 +383,7 @@
         "Destruction Warlock"
       ],
       "note": "Intellect DPS recommendation override. The proc requires harmful spells and deals damage; healing specs are intentionally excluded from the default candidate list.",
-      "source": "https://www.wowhead.com/ptr/item=273794"
+      "source": "https://www.wowhead.com/item=273794"
     }
   }
 }

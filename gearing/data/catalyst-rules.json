@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "patchContext": "ptr-12.1.0",
+  "patchContext": "12.1-live",
   "season": 2,
   "reviewedAt": "2026-08-02",
   "setBonusSlots": [
@@ -70,10 +70,10 @@
   "sources": {
     "blizzardPatchNotes": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/1",
     "blizzardRewardChanges": "https://us.forums.blizzard.com/en/wow/t/curse-of-ulatek-endgame-reward-changes/2317450/1",
-    "catalystGuide": "https://www.wowhead.com/ptr/guide/midnight/matrix-catalyst-crafting-tier-set",
-    "chargeTooltip": "https://www.wowhead.com/ptr/currency=3465/venomblight-manaflux",
+    "catalystGuide": "https://www.wowhead.com/guide/midnight/matrix-catalyst-crafting-tier-set",
+    "chargeTooltip": "https://www.wowhead.com/currency=3465/venomblight-manaflux",
     "chargeUpdate": "https://www.wowhead.com/news/catalyst-tooltips-updated-acquisition-now-works-similar-to-midnight-season-1-382051",
-    "serpentScionAchievement": "https://www.wowhead.com/ptr/achievement=62872/midnight-season-2-serpent-scion"
+    "serpentScionAchievement": "https://www.wowhead.com/achievement=62872/midnight-season-2-serpent-scion"
   },
-  "caveat": "Patch 12.1 and Season 2 are still on PTR. Compare item level alongside retained stats and effects, confirm the result in the Catalyst preview, and simulate unequal-level or cantrip choices."
+  "caveat": "Season 2 live rules (verified against Wowhead after the 2026-08-18 launch). Compare item level alongside retained stats and effects, confirm the result in the Catalyst preview, and simulate unequal-level or cantrip choices."
 }

@@ -20,7 +20,7 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const TRACKER = process.env.WOW_CLASS_TRACKER_SPECS
   || join(ROOT, "..", "data", "specs.json");
 const EXPECTED_LIVE_PATCH = "12.0.7";
-const WEAPON_PATCH_CONTEXT = "ptr-12.1.0";
+const WEAPON_PATCH_CONTEXT = "12.1-live";
 
 // Primary stat is a specialization capability, not a property of how a guide happens
 // to format its priority list. Keep it explicit and fail generation if the roster drifts.
@@ -245,7 +245,7 @@ if (failed.length) {
 const doc = {
   source: "WoW Class Tracker data/specs.json (class, spec, role, tier set) + Icy Veins stat-priority pages",
   harvestedAt: new Date().toISOString().slice(0, 10),
-  caveat: "Icy Veins publishes LIVE-patch stat priorities. Season 2 (12.1) priorities are not published yet; treat ordering as a proxy.",
+  caveat: "Stat priorities on this page come from the Season 2 guide harvest (Icy Veins / Wowhead / Method). The statPriority field here is the legacy Icy Veins 12.0.7 fallback, used only when the guide layer lacks a build.",
   weaponProficiencyProvenance: PROF._provenance,
   armorByClass: ARMOR_BY_CLASS,
   counts: {

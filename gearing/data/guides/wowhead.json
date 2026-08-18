@@ -11,11 +11,27 @@
       "author": "Mandl",
       "priorities": [
         {
+          "label": "San'layn",
+          "heroTalentSlug": "sanlayn",
+          "primary": "Strength",
+          "secondaries": [
+            "Haste",
+            "Mast",
+            "Crit",
+            "Vers"
+          ],
+          "leadsWithItemLevel": false,
+          "softCaps": [],
+          "raw": "Strength > Haste > Mastery / Critical Strike / Versatility"
+        },
+        {
           "label": "Deathbringer",
           "heroTalentSlug": "deathbringer",
           "primary": "Strength",
           "secondaries": [
             "Crit",
+            "Mast",
+            "Vers",
             "Haste"
           ],
           "leadsWithItemLevel": false,
@@ -388,7 +404,7 @@
     },
     "Frost Death Knight": {
       "guideUrl": "https://www.wowhead.com/guide/classes/death-knight/frost/bis-gear",
-      "published": "2026-08-13",
+      "published": "2026-08-18",
       "author": "khazakdk",
       "priorities": [
         {
@@ -490,8 +506,8 @@
         {
           "list": "overall",
           "slot": "Chest",
-          "itemId": "268222",
-          "itemName": "Reckless Spirit Breastplate",
+          "itemId": "271474",
+          "itemName": "Baleful Grave-Knight's Casque",
           "sourceText": "The Coiled Altar",
           "sourceKind": "raid",
           "boss": "The Coiled Altar",
@@ -2042,6 +2058,351 @@
         }
       ]
     },
+    "Restoration Druid": {
+      "guideUrl": "https://www.wowhead.com/guide/classes/druid/restoration/bis-gear",
+      "published": "2026-08-12",
+      "author": "Voulk",
+      "priorities": [
+        {
+          "label": "Keeper of the Grove",
+          "heroTalentSlug": "keeper-of-the-grove",
+          "primary": "Intellect",
+          "secondaries": [
+            "Haste",
+            "Mast",
+            "Vers",
+            "Crit"
+          ],
+          "leadsWithItemLevel": false,
+          "softCaps": [],
+          "raw": "Intellect > Haste > Mastery > Versatility > Critical Strike"
+        },
+        {
+          "label": "Wildstalker",
+          "heroTalentSlug": "wildstalker",
+          "primary": "Intellect",
+          "secondaries": [
+            "Haste",
+            "Mast",
+            "Vers",
+            "Crit"
+          ],
+          "leadsWithItemLevel": false,
+          "softCaps": [],
+          "raw": "Intellect > Haste > Mastery > Versatility > Critical Strike"
+        }
+      ],
+      "bis": [
+        {
+          "list": "overall",
+          "slot": "Head",
+          "itemId": "271875",
+          "itemName": "Gaze of the Coiled Watcher",
+          "catalyzedResultId": "271528",
+          "sourceText": "Ula'tek",
+          "sourceKind": "raid",
+          "boss": "Ula'tek",
+          "dungeon": null,
+          "droppedBy": null
+        },
+        {
+          "list": "overall",
+          "slot": "Neck",
+          "itemId": "268251",
+          "itemName": "Amulet of the Twin Fangs",
+          "sourceText": "The Twin Fangs",
+          "sourceKind": "raid",
+          "boss": "The Twin Fangs",
+          "dungeon": null,
+          "droppedBy": null
+        },
+        {
+          "list": "overall",
+          "slot": "Shoulder",
+          "itemId": "244572",
+          "itemName": "Silvermoon Agent's Mantle",
+          "sourceText": "[skill=165]",
+          "sourceKind": "crafted",
+          "boss": null,
+          "dungeon": null,
+          "droppedBy": null
+        },
+        {
+          "list": "overall",
+          "slot": "Chest",
+          "itemId": "268235",
+          "itemName": "Vestment of the Awakening",
+          "catalyzedResultId": "271531",
+          "sourceText": "Nek'zali the Soulcoiler",
+          "sourceKind": "raid",
+          "boss": "Nek'zali the Soulcoiler",
+          "dungeon": null,
+          "droppedBy": null
+        },
+        {
+          "list": "overall",
+          "slot": "Wrist",
+          "itemId": "244576",
+          "itemName": "Silvermoon Agent's Deflectors",
+          "sourceText": "[skill=165]",
+          "sourceKind": "crafted",
+          "boss": null,
+          "dungeon": null,
+          "droppedBy": null
+        },
+        {
+          "list": "overall",
+          "slot": "Hands",
+          "itemId": "271529",
+          "itemName": "Enigmatic Dreamwatcher's Gauntlets",
+          "sourceText": "Entomed Sentinels",
+          "sourceKind": "raid",
+          "boss": "Entombed Sentinels",
+          "dungeon": null,
+          "droppedBy": null,
+          "sourceTextFuzzy": true
+        },
+        {
+          "list": "overall",
+          "slot": "Waist",
+          "itemId": "268256",
+          "itemName": "Sash of the Forlorn Vessel",
+          "sourceText": "The Coiled Alter",
+          "sourceKind": "raid",
+          "boss": "The Coiled Altar",
+          "dungeon": null,
+          "droppedBy": null,
+          "sourceTextFuzzy": true
+        },
+        {
+          "list": "overall",
+          "slot": "Legs",
+          "itemId": "268225",
+          "itemName": "Coiled Hex Legguards",
+          "catalyzedResultId": "271527",
+          "sourceText": "The Coiled Alter",
+          "sourceKind": "raid",
+          "boss": "The Coiled Altar",
+          "dungeon": null,
+          "droppedBy": null,
+          "sourceTextFuzzy": true
+        },
+        {
+          "list": "overall",
+          "slot": "Feet",
+          "itemId": "244569",
+          "itemName": "Silvermoon Agent's Sneakers",
+          "sourceText": "[skill=165]",
+          "sourceKind": "crafted",
+          "boss": null,
+          "dungeon": null,
+          "droppedBy": null
+        },
+        {
+          "list": "overall",
+          "slot": "Finger",
+          "itemId": "268266",
+          "itemName": "Alluring Bubbleband",
+          "sourceText": "Nymrissa Wavebinder",
+          "sourceKind": "world",
+          "boss": null,
+          "dungeon": null,
+          "droppedBy": null
+        },
+        {
+          "list": "overall",
+          "slot": "Finger",
+          "itemId": "252258",
+          "itemName": "Sickening Signet of Atroxus",
+          "sourceText": "Voidscar Arena",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "Voidscar Arena",
+          "droppedBy": null
+        },
+        {
+          "list": "overall",
+          "slot": "Trinket",
+          "itemId": "270167",
+          "itemName": "Wavecaller's Seastone",
+          "sourceText": "Nymrissa Wavebinder",
+          "sourceKind": "world",
+          "boss": null,
+          "dungeon": null,
+          "droppedBy": null
+        },
+        {
+          "list": "overall",
+          "slot": "Trinket",
+          "itemId": "270162",
+          "itemName": "Soulcoiler Ritual Vessel",
+          "sourceText": "Nek'zali the Soulcoiler",
+          "sourceKind": "raid",
+          "boss": "Nek'zali the Soulcoiler",
+          "dungeon": null,
+          "droppedBy": null
+        },
+        {
+          "list": "overall",
+          "slot": "Off Hand",
+          "itemId": "268197",
+          "itemName": "Spine of the Hissing Abyss",
+          "sourceText": "Entomed Sentinels",
+          "sourceKind": "raid",
+          "boss": "Entombed Sentinels",
+          "dungeon": null,
+          "droppedBy": null,
+          "sourceTextFuzzy": true
+        },
+        {
+          "list": "overall",
+          "slot": "Head",
+          "itemId": "251140",
+          "itemName": null,
+          "catalyzedResultId": "271528",
+          "sourceText": "Murder Row",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "Murder Row",
+          "droppedBy": null
+        },
+        {
+          "list": "overall",
+          "slot": "Neck",
+          "itemId": "251142",
+          "itemName": "Pendant of Malefic Fury",
+          "sourceText": "Murder Row",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "Murder Row",
+          "droppedBy": null
+        },
+        {
+          "list": "overall",
+          "slot": "Shoulder",
+          "itemId": "244572",
+          "itemName": "Silvermoon Agent's Mantle",
+          "sourceText": "[skill=165]",
+          "sourceKind": "crafted",
+          "boss": null,
+          "dungeon": null,
+          "droppedBy": null
+        },
+        {
+          "list": "overall",
+          "slot": "Chest",
+          "itemId": "251159",
+          "itemName": null,
+          "catalyzedResultId": "271531",
+          "sourceText": "Den of Nalorakk",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "Den of Nalorakk",
+          "droppedBy": "Nalorakk"
+        },
+        {
+          "list": "overall",
+          "slot": "Wrist",
+          "itemId": "244576",
+          "itemName": "Silvermoon Agent's Deflectors",
+          "sourceText": "[skill=165]",
+          "sourceKind": "crafted",
+          "boss": null,
+          "dungeon": null,
+          "droppedBy": null
+        },
+        {
+          "list": "overall",
+          "slot": "Hands",
+          "itemId": "159337",
+          "itemName": null,
+          "catalyzedResultId": "271529",
+          "sourceText": "Temple of Sethraliss",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "Temple of Sethraliss",
+          "droppedBy": null
+        },
+        {
+          "list": "overall",
+          "slot": "Waist",
+          "itemId": "159317",
+          "itemName": "Whirling Dervish Sash",
+          "sourceText": "Temple of Sethraliss",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "Temple of Sethraliss",
+          "droppedBy": null
+        },
+        {
+          "list": "overall",
+          "slot": "Legs",
+          "itemId": "159313",
+          "itemName": null,
+          "catalyzedResultId": "271527",
+          "sourceText": "Kings Rest",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "Kings' Rest",
+          "droppedBy": null
+        },
+        {
+          "list": "overall",
+          "slot": "Feet",
+          "itemId": "251153",
+          "itemName": "Arctic Explorer's Legwraps",
+          "sourceText": "Den of Nalorakk",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "Den of Nalorakk",
+          "droppedBy": "Nalorakk"
+        },
+        {
+          "list": "overall",
+          "slot": "Finger",
+          "itemId": "159459",
+          "itemName": "Ritual Binder's Ring",
+          "sourceText": "Kings Rest",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "Kings' Rest",
+          "droppedBy": null
+        },
+        {
+          "list": "overall",
+          "slot": "Finger",
+          "itemId": "252258",
+          "itemName": "Sickening Signet of Atroxus",
+          "sourceText": "Voidscar Arena",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "Voidscar Arena",
+          "droppedBy": null
+        },
+        {
+          "list": "overall",
+          "slot": "Trinket",
+          "itemId": "250214",
+          "itemName": "Lightspire Core",
+          "sourceText": "The Blinding Vale",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "The Blinding Vale",
+          "droppedBy": null
+        },
+        {
+          "list": "overall",
+          "slot": "Trinket",
+          "itemId": "250255",
+          "itemName": "Unstable Felheart Crystal",
+          "sourceText": "Murder Row",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "Murder Row",
+          "droppedBy": null
+        }
+      ]
+    },
     "Augmentation Evoker": {
       "guideUrl": "https://www.wowhead.com/guide/classes/evoker/augmentation/bis-gear",
       "published": "2026-08-17",
@@ -2671,7 +3032,7 @@
           "boss": "Entombed Sentinels",
           "dungeon": null,
           "droppedBy": null,
-          "sourceTextUnmatched": true
+          "sourceTextFuzzy": true
         }
       ]
     },
@@ -2797,7 +3158,7 @@
           "slot": "Wrist",
           "itemId": "244584",
           "itemName": "Farstrider's Plated Bracers",
-          "sourceText": "",
+          "sourceText": "[skill=165]",
           "sourceKind": "crafted",
           "boss": null,
           "dungeon": null,
@@ -2820,7 +3181,7 @@
           "slot": "Waist",
           "itemId": "244581",
           "itemName": "Farstrider's Trophy Belt",
-          "sourceText": "",
+          "sourceText": "[skill=165]",
           "sourceKind": "crafted",
           "boss": null,
           "dungeon": null,
@@ -3990,56 +4351,56 @@
         {
           "label": "Shado-Pan",
           "heroTalentSlug": "shado-pan",
-          "primary": null,
+          "primary": "Agility",
           "secondaries": [
             "Vers",
             "Crit",
             "Mast",
             "Haste"
           ],
-          "leadsWithItemLevel": false,
+          "leadsWithItemLevel": true,
           "softCaps": [],
           "raw": "Item Level / Agility / Armor / Stamina > Versatility = Critical Strike = Mastery > Haste"
         },
         {
           "label": "Master of Harmony",
           "heroTalentSlug": "master-of-harmony",
-          "primary": null,
+          "primary": "Agility",
           "secondaries": [
             "Vers",
             "Crit",
             "Mast",
             "Haste"
           ],
-          "leadsWithItemLevel": false,
+          "leadsWithItemLevel": true,
           "softCaps": [],
           "raw": "Item Level / Agility / Armor / Stamina > Versatility = Critical Strike = Mastery > Haste"
         },
         {
           "label": "Shado-Pan",
           "heroTalentSlug": "shado-pan",
-          "primary": null,
+          "primary": "Agility",
           "secondaries": [
             "Crit",
             "Vers",
             "Mast",
             "Haste"
           ],
-          "leadsWithItemLevel": false,
+          "leadsWithItemLevel": true,
           "softCaps": [],
           "raw": "Item Level / Agility > Critical Strike > Versatility = Mastery > Haste"
         },
         {
           "label": "Master of Harmony",
           "heroTalentSlug": "master-of-harmony",
-          "primary": null,
+          "primary": "Agility",
           "secondaries": [
             "Crit",
             "Vers",
             "Mast",
             "Haste"
           ],
-          "leadsWithItemLevel": false,
+          "leadsWithItemLevel": true,
           "softCaps": [],
           "raw": "Item Level / Agility > Critical Strike > Versatility = Mastery > Haste"
         }
@@ -4511,7 +4872,7 @@
           "boss": "Entombed Sentinels",
           "dungeon": null,
           "droppedBy": null,
-          "sourceTextUnmatched": true
+          "sourceTextFuzzy": true
         }
       ]
     },
@@ -5365,7 +5726,7 @@
           "sourceKind": "raid",
           "boss": "Ula'tek",
           "dungeon": null,
-          "droppedBy": null,
+          "droppedBy": "Ula'tek",
           "sourceTextUnmatched": true
         },
         {
@@ -5389,7 +5750,7 @@
           "sourceKind": "raid",
           "boss": "Ula'tek",
           "dungeon": null,
-          "droppedBy": null,
+          "droppedBy": "Ula'tek",
           "sourceTextUnmatched": true
         },
         {
@@ -5401,7 +5762,7 @@
           "sourceKind": "raid",
           "boss": "Ula'tek",
           "dungeon": null,
-          "droppedBy": null,
+          "droppedBy": "Ula'tek",
           "sourceTextUnmatched": true
         },
         {
@@ -5468,8 +5829,8 @@
           "itemId": "268266",
           "itemName": "Alluring Bubbleband",
           "sourceText": "[npc=252959]",
-          "sourceKind": "raid",
-          "boss": "Nek'zali the Soulcoiler",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
           "droppedBy": null,
           "sourceTextUnmatched": true
@@ -5584,7 +5945,7 @@
           "sourceKind": "raid",
           "boss": "Ula'tek",
           "dungeon": null,
-          "droppedBy": null,
+          "droppedBy": "Ula'tek",
           "sourceTextUnmatched": true
         },
         {
@@ -5593,8 +5954,8 @@
           "itemId": "268263",
           "itemName": "Frostscale's Mystic Frond",
           "sourceText": "[npc=252959]",
-          "sourceKind": "raid",
-          "boss": "Nek'zali the Soulcoiler",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
           "droppedBy": null,
           "sourceTextUnmatched": true
@@ -5608,7 +5969,7 @@
           "sourceKind": "raid",
           "boss": "Ula'tek",
           "dungeon": null,
-          "droppedBy": null,
+          "droppedBy": "Ula'tek",
           "sourceTextUnmatched": true
         },
         {
@@ -5620,7 +5981,7 @@
           "sourceKind": "raid",
           "boss": "Ula'tek",
           "dungeon": null,
-          "droppedBy": null,
+          "droppedBy": "Ula'tek",
           "sourceTextUnmatched": true
         },
         {
@@ -5702,7 +6063,7 @@
           "sourceKind": "raid",
           "boss": "Sszorak",
           "dungeon": null,
-          "droppedBy": null,
+          "droppedBy": "Sszorak",
           "sourceTextUnmatched": true
         },
         {
@@ -5726,7 +6087,7 @@
           "sourceKind": "raid",
           "boss": "The Lost Explorers",
           "dungeon": null,
-          "droppedBy": null,
+          "droppedBy": "Mor'zahi",
           "sourceTextUnmatched": true
         },
         {
@@ -6553,7 +6914,34 @@
       "guideUrl": "https://www.wowhead.com/guide/classes/shaman/elemental/bis-gear",
       "published": "2026-08-17",
       "author": "HawkCorrigan",
-      "priorities": [],
+      "priorities": [
+        {
+          "label": "Farseer",
+          "heroTalentSlug": "farseer",
+          "primary": "Intellect",
+          "secondaries": [
+            "Haste",
+            "Crit",
+            "Vers"
+          ],
+          "leadsWithItemLevel": false,
+          "softCaps": [],
+          "raw": "Mastery to 1200 rating > Haste/Crit > Versatility > Intellect"
+        },
+        {
+          "label": "Stormbringer",
+          "heroTalentSlug": "stormbringer",
+          "primary": "Intellect",
+          "secondaries": [
+            "Haste",
+            "Crit",
+            "Vers"
+          ],
+          "leadsWithItemLevel": false,
+          "softCaps": [],
+          "raw": "Mastery to 1200 rating > Haste/Crit > Versatility > Intellect"
+        }
+      ],
       "bis": [
         {
           "list": "overall",
@@ -6768,6 +7156,191 @@
         }
       ],
       "bis": []
+    },
+    "Restoration Shaman": {
+      "guideUrl": "https://www.wowhead.com/guide/classes/shaman/restoration/bis-gear",
+      "published": "2026-08-18",
+      "author": "Harreks",
+      "priorities": [
+        {
+          "label": "Farseer",
+          "heroTalentSlug": "farseer",
+          "primary": "Intellect",
+          "secondaries": [
+            "Crit",
+            "Haste",
+            "Vers",
+            "Mast"
+          ],
+          "leadsWithItemLevel": false,
+          "softCaps": [],
+          "raw": "Intellect > Critical Strike > Haste > Versatility > Mastery"
+        },
+        {
+          "label": "Totemic",
+          "heroTalentSlug": "totemic",
+          "primary": "Intellect",
+          "secondaries": [
+            "Crit",
+            "Haste",
+            "Vers",
+            "Mast"
+          ],
+          "leadsWithItemLevel": false,
+          "softCaps": [],
+          "raw": "Intellect > Critical Strike > Haste > Versatility > Mastery"
+        }
+      ],
+      "bis": [
+        {
+          "list": "overall",
+          "slot": "Head",
+          "itemId": "271483",
+          "itemName": "Serpent Crown of the Ophidian Oracle",
+          "sourceText": "Raid",
+          "sourceKind": "unknown",
+          "boss": null,
+          "dungeon": null,
+          "droppedBy": null,
+          "sourceTextUnmatched": true
+        },
+        {
+          "list": "overall",
+          "slot": "Neck",
+          "itemId": "268265",
+          "itemName": "Aqirbane Reliquary",
+          "sourceText": "Ula'tek",
+          "sourceKind": "raid",
+          "boss": "Ula'tek",
+          "dungeon": null,
+          "droppedBy": null
+        },
+        {
+          "list": "overall",
+          "slot": "Shoulder",
+          "itemId": "268231",
+          "itemName": "Soulslither Spaulders",
+          "catalyzedResultId": "271481",
+          "sourceText": "The Coiled Altar",
+          "sourceKind": "raid",
+          "boss": "The Coiled Altar",
+          "dungeon": null,
+          "droppedBy": null
+        },
+        {
+          "list": "overall",
+          "slot": "Chest",
+          "itemId": "271876",
+          "itemName": "Awoken Dreadfang Cuirass",
+          "catalyzedResultId": "271486",
+          "sourceText": "Ula'tek",
+          "sourceKind": "raid",
+          "boss": "Ula'tek",
+          "dungeon": null,
+          "droppedBy": null
+        },
+        {
+          "list": "overall",
+          "slot": "Wrist",
+          "itemId": "251200",
+          "itemName": "Saptorbane Guards",
+          "sourceText": "The Blinding Vale",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "The Blinding Vale",
+          "droppedBy": null
+        },
+        {
+          "list": "overall",
+          "slot": "Hands",
+          "itemId": "268238",
+          "itemName": "Grips of Swirling Fury",
+          "catalyzedResultId": "271484",
+          "sourceText": "Nymrissa Wavebinder",
+          "sourceKind": "world",
+          "boss": null,
+          "dungeon": null,
+          "droppedBy": null
+        },
+        {
+          "list": "overall",
+          "slot": "Waist",
+          "itemId": "268216",
+          "itemName": "Cursed Reliquary Cincture",
+          "sourceText": "Nek'zali the Soulcoiler",
+          "sourceKind": "raid",
+          "boss": "Nek'zali the Soulcoiler",
+          "dungeon": null,
+          "droppedBy": null
+        },
+        {
+          "list": "overall",
+          "slot": "Legs",
+          "itemId": "268237",
+          "itemName": "Cuisses of the Uncoiled Union",
+          "catalyzedResultId": "271482",
+          "sourceText": "The Coiled Altar",
+          "sourceKind": "raid",
+          "boss": "The Coiled Altar",
+          "dungeon": null,
+          "droppedBy": null
+        },
+        {
+          "list": "overall",
+          "slot": "Feet",
+          "itemId": "251125",
+          "itemName": "Felsoaked Soles",
+          "sourceText": "Murder Row",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "Murder Row",
+          "droppedBy": null
+        },
+        {
+          "list": "overall",
+          "slot": "Finger",
+          "itemId": "268252",
+          "itemName": "Apex Brute's Claw Ring",
+          "sourceText": "Sszorak",
+          "sourceKind": "raid",
+          "boss": "Sszorak",
+          "dungeon": null,
+          "droppedBy": null
+        },
+        {
+          "list": "overall",
+          "slot": "Finger",
+          "itemId": "159459",
+          "itemName": "Ritual Binder's Ring",
+          "sourceText": "Kings Rest",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "Kings' Rest",
+          "droppedBy": null
+        },
+        {
+          "list": "overall",
+          "slot": "Trinket",
+          "itemId": "270162",
+          "itemName": "Soulcoiler Ritual Vessel",
+          "sourceText": "Nek'zali the Soulcoiler",
+          "sourceKind": "raid",
+          "boss": "Nek'zali the Soulcoiler",
+          "dungeon": null,
+          "droppedBy": null
+        },
+        {
+          "list": "overall",
+          "slot": "Trinket",
+          "itemId": "270164",
+          "itemName": "Gebbo's Bottomless Bag",
+          "sourceText": "The Lost Explorers",
+          "sourceKind": "raid",
+          "boss": "The Lost Explorers",
+          "dungeon": null,
+          "droppedBy": null
+        }
+      ]
     },
     "Affliction Warlock": {
       "guideUrl": "https://www.wowhead.com/guide/classes/warlock/affliction/bis-gear",
@@ -7175,7 +7748,7 @@
           "sourceKind": "dungeon",
           "boss": null,
           "dungeon": "Temple of Sethraliss",
-          "droppedBy": null,
+          "droppedBy": "Galvazzt",
           "sourceTextUnmatched": true
         },
         {
@@ -7205,7 +7778,7 @@
     },
     "Destruction Warlock": {
       "guideUrl": "https://www.wowhead.com/guide/classes/warlock/destruction/bis-gear",
-      "published": "2026-08-12",
+      "published": "2026-08-18",
       "author": "Loozy",
       "priorities": [
         {
@@ -8023,536 +8596,6 @@
           "sourceText": "Ula'tek",
           "sourceKind": "raid",
           "boss": "Ula'tek",
-          "dungeon": null,
-          "droppedBy": null
-        }
-      ]
-    },
-    "Restoration Druid": {
-      "guideUrl": "https://www.wowhead.com/guide/classes/druid/restoration/bis-gear",
-      "published": "2026-08-12",
-      "author": "Voulk",
-      "priorities": [
-        {
-          "label": "Keeper of the Grove",
-          "heroTalentSlug": "keeper-of-the-grove",
-          "primary": "Intellect",
-          "secondaries": [
-            "Haste",
-            "Mast",
-            "Vers",
-            "Crit"
-          ],
-          "leadsWithItemLevel": false,
-          "softCaps": [],
-          "raw": "Intellect > Haste > Mastery > Versatility > Critical Strike"
-        },
-        {
-          "label": "Wildstalker",
-          "heroTalentSlug": "wildstalker",
-          "primary": "Intellect",
-          "secondaries": [
-            "Haste",
-            "Mast",
-            "Vers",
-            "Crit"
-          ],
-          "leadsWithItemLevel": false,
-          "softCaps": [],
-          "raw": "Intellect > Haste > Mastery > Versatility > Critical Strike"
-        }
-      ],
-      "bis": [
-        {
-          "list": "overall",
-          "slot": "Head",
-          "itemId": "271875",
-          "itemName": "Gaze of the Coiled Watcher",
-          "catalyzedResultId": "271528",
-          "sourceText": "Ula'tek",
-          "sourceKind": "raid",
-          "boss": "Ula'tek",
-          "dungeon": null,
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Neck",
-          "itemId": "268251",
-          "itemName": "Amulet of the Twin Fangs",
-          "sourceText": "The Twin Fangs",
-          "sourceKind": "raid",
-          "boss": "The Twin Fangs",
-          "dungeon": null,
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Shoulder",
-          "itemId": "244572",
-          "itemName": "Silvermoon Agent's Mantle",
-          "sourceText": "",
-          "sourceKind": "crafted",
-          "boss": null,
-          "dungeon": null,
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Chest",
-          "itemId": "268235",
-          "itemName": "Vestment of the Awakening",
-          "catalyzedResultId": "271531",
-          "sourceText": "Nek'zali the Soulcoiler",
-          "sourceKind": "raid",
-          "boss": "Nek'zali the Soulcoiler",
-          "dungeon": null,
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Wrist",
-          "itemId": "244576",
-          "itemName": "Silvermoon Agent's Deflectors",
-          "sourceText": "",
-          "sourceKind": "crafted",
-          "boss": null,
-          "dungeon": null,
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Hands",
-          "itemId": "271529",
-          "itemName": "Enigmatic Dreamwatcher's Gauntlets",
-          "sourceText": "Entomed Sentinels",
-          "sourceKind": "raid",
-          "boss": "Entombed Sentinels",
-          "dungeon": null,
-          "droppedBy": null,
-          "sourceTextFuzzy": true
-        },
-        {
-          "list": "overall",
-          "slot": "Waist",
-          "itemId": "268256",
-          "itemName": "Sash of the Forlorn Vessel",
-          "sourceText": "The Coiled Alter",
-          "sourceKind": "raid",
-          "boss": "The Coiled Altar",
-          "dungeon": null,
-          "droppedBy": null,
-          "sourceTextFuzzy": true
-        },
-        {
-          "list": "overall",
-          "slot": "Legs",
-          "itemId": "268225",
-          "itemName": "Coiled Hex Legguards",
-          "catalyzedResultId": "271527",
-          "sourceText": "The Coiled Alter",
-          "sourceKind": "raid",
-          "boss": "The Coiled Altar",
-          "dungeon": null,
-          "droppedBy": null,
-          "sourceTextFuzzy": true
-        },
-        {
-          "list": "overall",
-          "slot": "Feet",
-          "itemId": "244569",
-          "itemName": "Silvermoon Agent's Sneakers",
-          "sourceText": "",
-          "sourceKind": "crafted",
-          "boss": null,
-          "dungeon": null,
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Finger",
-          "itemId": "268266",
-          "itemName": "Alluring Bubbleband",
-          "sourceText": "Nymrissa Wavebinder",
-          "sourceKind": "world",
-          "boss": null,
-          "dungeon": null,
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Finger",
-          "itemId": "252258",
-          "itemName": "Sickening Signet of Atroxus",
-          "sourceText": "Voidscar Arena",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Voidscar Arena",
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Trinket",
-          "itemId": "270167",
-          "itemName": "Wavecaller's Seastone",
-          "sourceText": "Nymrissa Wavebinder",
-          "sourceKind": "world",
-          "boss": null,
-          "dungeon": null,
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Trinket",
-          "itemId": "270162",
-          "itemName": "Soulcoiler Ritual Vessel",
-          "sourceText": "Nek'zali the Soulcoiler",
-          "sourceKind": "raid",
-          "boss": "Nek'zali the Soulcoiler",
-          "dungeon": null,
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Off Hand",
-          "itemId": "268197",
-          "itemName": "Spine of the Hissing Abyss",
-          "sourceText": "Entomed Sentinels",
-          "sourceKind": "raid",
-          "boss": "Entombed Sentinels",
-          "dungeon": null,
-          "droppedBy": null,
-          "sourceTextFuzzy": true
-        },
-        {
-          "list": "overall",
-          "slot": "Head",
-          "itemId": "251140",
-          "itemName": null,
-          "catalyzedResultId": "271528",
-          "sourceText": "Murder Row",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Murder Row",
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Neck",
-          "itemId": "251142",
-          "itemName": "Pendant of Malefic Fury",
-          "sourceText": "Murder Row",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Murder Row",
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Shoulder",
-          "itemId": "244572",
-          "itemName": "Silvermoon Agent's Mantle",
-          "sourceText": "",
-          "sourceKind": "crafted",
-          "boss": null,
-          "dungeon": null,
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Chest",
-          "itemId": "251159",
-          "itemName": null,
-          "catalyzedResultId": "271531",
-          "sourceText": "Den of Nalorakk",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Den of Nalorakk",
-          "droppedBy": "Nalorakk"
-        },
-        {
-          "list": "overall",
-          "slot": "Wrist",
-          "itemId": "244576",
-          "itemName": "Silvermoon Agent's Deflectors",
-          "sourceText": "",
-          "sourceKind": "crafted",
-          "boss": null,
-          "dungeon": null,
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Hands",
-          "itemId": "159337",
-          "itemName": null,
-          "catalyzedResultId": "271529",
-          "sourceText": "Temple of Sethraliss",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Temple of Sethraliss",
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Waist",
-          "itemId": "159317",
-          "itemName": "Whirling Dervish Sash",
-          "sourceText": "Temple of Sethraliss",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Temple of Sethraliss",
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Legs",
-          "itemId": "159313",
-          "itemName": null,
-          "catalyzedResultId": "271527",
-          "sourceText": "Kings Rest",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Kings' Rest",
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Feet",
-          "itemId": "251153",
-          "itemName": "Arctic Explorer's Legwraps",
-          "sourceText": "Den of Nalorakk",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Den of Nalorakk",
-          "droppedBy": "Nalorakk"
-        },
-        {
-          "list": "overall",
-          "slot": "Finger",
-          "itemId": "159459",
-          "itemName": "Ritual Binder's Ring",
-          "sourceText": "Kings Rest",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Kings' Rest",
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Finger",
-          "itemId": "252258",
-          "itemName": "Sickening Signet of Atroxus",
-          "sourceText": "Voidscar Arena",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Voidscar Arena",
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Trinket",
-          "itemId": "250214",
-          "itemName": "Lightspire Core",
-          "sourceText": "The Blinding Vale",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "The Blinding Vale",
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Trinket",
-          "itemId": "250255",
-          "itemName": "Unstable Felheart Crystal",
-          "sourceText": "Murder Row",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Murder Row",
-          "droppedBy": null
-        }
-      ]
-    },
-    "Restoration Shaman": {
-      "guideUrl": "https://www.wowhead.com/guide/classes/shaman/restoration/bis-gear",
-      "published": "2026-08-18",
-      "author": "Harreks",
-      "priorities": [
-        {
-          "label": "Farseer",
-          "heroTalentSlug": "farseer",
-          "primary": "Intellect",
-          "secondaries": [
-            "Crit",
-            "Haste",
-            "Vers",
-            "Mast"
-          ],
-          "leadsWithItemLevel": false,
-          "softCaps": [],
-          "raw": "Intellect > Critical Strike > Haste > Versatility > Mastery"
-        },
-        {
-          "label": "Totemic",
-          "heroTalentSlug": "totemic",
-          "primary": "Intellect",
-          "secondaries": [
-            "Crit",
-            "Haste",
-            "Vers",
-            "Mast"
-          ],
-          "leadsWithItemLevel": false,
-          "softCaps": [],
-          "raw": "Intellect > Critical Strike > Haste > Versatility > Mastery"
-        }
-      ],
-      "bis": [
-        {
-          "list": "overall",
-          "slot": "Head",
-          "itemId": "271483",
-          "itemName": "Serpent Crown of the Ophidian Oracle",
-          "sourceText": "Raid",
-          "sourceKind": "unknown",
-          "boss": null,
-          "dungeon": null,
-          "droppedBy": null,
-          "sourceTextUnmatched": true
-        },
-        {
-          "list": "overall",
-          "slot": "Neck",
-          "itemId": "268265",
-          "itemName": "Aqirbane Reliquary",
-          "sourceText": "Ula'tek",
-          "sourceKind": "raid",
-          "boss": "Ula'tek",
-          "dungeon": null,
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Shoulder",
-          "itemId": "268231",
-          "itemName": "Soulslither Spaulders",
-          "catalyzedResultId": "271481",
-          "sourceText": "The Coiled Altar",
-          "sourceKind": "raid",
-          "boss": "The Coiled Altar",
-          "dungeon": null,
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Chest",
-          "itemId": "271876",
-          "itemName": "Awoken Dreadfang Cuirass",
-          "catalyzedResultId": "271486",
-          "sourceText": "Ula'tek",
-          "sourceKind": "raid",
-          "boss": "Ula'tek",
-          "dungeon": null,
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Wrist",
-          "itemId": "251200",
-          "itemName": "Saptorbane Guards",
-          "sourceText": "The Blinding Vale",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "The Blinding Vale",
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Hands",
-          "itemId": "268238",
-          "itemName": "Grips of Swirling Fury",
-          "catalyzedResultId": "271484",
-          "sourceText": "Nymrissa Wavebinder",
-          "sourceKind": "world",
-          "boss": null,
-          "dungeon": null,
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Waist",
-          "itemId": "268216",
-          "itemName": "Cursed Reliquary Cincture",
-          "sourceText": "Nek'zali the Soulcoiler",
-          "sourceKind": "raid",
-          "boss": "Nek'zali the Soulcoiler",
-          "dungeon": null,
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Legs",
-          "itemId": "268237",
-          "itemName": "Cuisses of the Uncoiled Union",
-          "catalyzedResultId": "271482",
-          "sourceText": "The Coiled Altar",
-          "sourceKind": "raid",
-          "boss": "The Coiled Altar",
-          "dungeon": null,
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Feet",
-          "itemId": "251125",
-          "itemName": "Felsoaked Soles",
-          "sourceText": "Murder Row",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Murder Row",
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Finger",
-          "itemId": "268252",
-          "itemName": "Apex Brute's Claw Ring",
-          "sourceText": "Sszorak",
-          "sourceKind": "raid",
-          "boss": "Sszorak",
-          "dungeon": null,
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Finger",
-          "itemId": "159459",
-          "itemName": "Ritual Binder's Ring",
-          "sourceText": "Kings Rest",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Kings' Rest",
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Trinket",
-          "itemId": "270162",
-          "itemName": "Soulcoiler Ritual Vessel",
-          "sourceText": "Nek'zali the Soulcoiler",
-          "sourceKind": "raid",
-          "boss": "Nek'zali the Soulcoiler",
-          "dungeon": null,
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Trinket",
-          "itemId": "270164",
-          "itemName": "Gebbo's Bottomless Bag",
-          "sourceText": "The Lost Explorers",
-          "sourceKind": "raid",
-          "boss": "The Lost Explorers",
           "dungeon": null,
           "droppedBy": null
         }

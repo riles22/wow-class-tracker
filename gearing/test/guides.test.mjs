@@ -139,7 +139,7 @@ test("Wowhead: hero-talent × profile priority scoping (the last-symbol trap)", 
   assert.deepEqual(priorities[1].secondaries, ["Crit", "Mast", "Haste", "Vers"]);
 });
 
-test("Method: ordinal self-date, tab-pane BiS, entity apostrophes, typo fallback", async () => {
+test("Method: ordinal self-date, tab-pane BiS, entity apostrophes, world text pass", async () => {
   const html = await fixture("method-hpal-gearing.html");
   assert.equal(methodDate(html), "2026-08-15"); // ordinal "15th Aug, 2026" on this page
   const rows = parseMethodBis(html, rosters);
@@ -150,10 +150,12 @@ test("Method: ordinal self-date, tab-pane BiS, entity apostrophes, typo fallback
   assert.ok(rows.every((r) => /^\d+$/.test(r.itemId)));
   // &rsquo; boss names joined the canonical roster
   assert.ok(rows.some((r) => r.boss === "Ula'tek"));
-  // the item-ID fallback kept the unmatched-text rows instead of dropping them
-  const unmatched = rows.filter((r) => r.sourceTextUnmatched);
-  assert.ok(unmatched.length >= 1);
-  assert.ok(unmatched.every((r) => r.sourceKind === "raid" || r.sourceKind === "dungeon"));
+  // Since the 2026-08-18 launch resolution the fixture's two "The Tidebound Grotto"
+  // rows classify world at the TEXT pass — catalog-independent, so a live-catalog
+  // refresh can no longer flag fixture rows here. The flagged item-ID fallback stays
+  // covered by the resolveDropSource unit test above, which has no catalog coupling.
+  assert.equal(rows.filter((r) => r.sourceTextUnmatched).length, 0);
+  assert.ok(rows.some((r) => r.sourceKind === "world" && /tidebound grotto/i.test(r.sourceText)));
 });
 
 test("Method: all three priority markup shapes normalize", async () => {

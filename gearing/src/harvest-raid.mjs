@@ -1,4 +1,4 @@
-// Harvest every Venomous Abyss drop from Wowhead's 12.1.0 PTR data.
+// Harvest every Venomous Abyss drop from Wowhead's 12.1 live data.
 //
 // Two hops:
 //   1. each boss guide page  -> the item IDs that boss drops
@@ -29,7 +29,7 @@ catch (error) {
     throw new Error(`cannot trust existing raid loot baseline: ${error.message}`, { cause: error });
 }
 const GUIDE = (slug) =>
-  `https://www.wowhead.com/ptr/guide/midnight/raids/venomous-abyss-${slug}-boss-strategy-abilities`;
+  `https://www.wowhead.com/guide/midnight/raids/venomous-abyss-${slug}-boss-strategy-abilities`;
 const ITEM_LEVEL_SOURCE = "https://www.wowhead.com/guide/midnight/raids/the-venomous-abyss-overview-location-rewards-bosses";
 const DROP_LEVELS = [
   { bosses: [1], values: [279, 292, 305, 318] },
@@ -44,7 +44,7 @@ const dropLevelsFor = (boss) => {
 };
 
 const BOSSES = [
-  { n: 1, slug: "nekzali-the-soulcoiler", name: "Nek'zali the Soulcoiler", token: null, dropAliases: ["Nek'zali the Soulcoiler", "Nymrissa Wavecaller"] },
+  { n: 1, slug: "nekzali-the-soulcoiler", name: "Nek'zali the Soulcoiler", token: null, dropAliases: ["Nek'zali the Soulcoiler"] },
   { n: 2, slug: "entombed-sentinels", name: "Entombed Sentinels", token: "Hands", dropAliases: ["Blood of Ula'tek", "Breath of Ula'tek"] },
   { n: 3, slug: "lost-explorers", name: "The Lost Explorers", token: "Shoulders", orderDisputed: true, dropAliases: ["Mor'zahi"] },
   { n: 4, slug: "vashnik-the-malignant", name: "Vashnik the Malignant", token: "Chest", orderDisputed: true, dropAliases: ["Vashnik", "Vashnik the Malignant"] },
@@ -63,19 +63,15 @@ if (hasPrevious) {
     throw new Error("cannot trust existing raid loot baseline: expected eight numbered, nonempty bosses");
 }
 
-// PTR guide correction: this item is listed in both boss-guide Gear tables, while
-// Nek'zali's own reward table and the encounter loot record assign it to Nek'zali.
-// Keeping the resolution explicit means any future duplicate still fails closed.
-const ITEM_OWNER_OVERRIDES = {
-  "268231": {
-    boss: 1,
-    item: "Soulslither Spaulders",
-    source: GUIDE("nekzali-the-soulcoiler"),
-    note: "Removed from The Coiled Altar's duplicate PTR guide table.",
-  },
-};
+// Duplicate-listing overrides. Empty since the 2026-08-18 launch re-harvest: the PTR-era
+// override for 268231 (Soulslither Spaulders — listed under both Nek'zali and The Coiled
+// Altar on PTR, forced to Nek'zali here) became obsolete when Wowhead's LIVE guide
+// resolved the duplicate the OTHER way (verified 08-18: 0 mentions on Nek'zali's live
+// page, 3 on The Coiled Altar's), and the stale override failed the harvest closed —
+// exactly its design. Any future duplicate gets a new explicit entry here.
+const ITEM_OWNER_OVERRIDES = {};
 
-console.log("Harvesting The Venomous Abyss from Wowhead 12.1.0 PTR ...");
+console.log("Harvesting The Venomous Abyss from Wowhead (12.1 live) ...");
 const bosses = [];
 const failed = [];
 
@@ -173,10 +169,10 @@ if (duplicateItems.length) {
 
 const all = bosses.flatMap((b) => b.items);
 const out = {
-  source: "Wowhead 12.1.0 PTR boss-guide Gear tables + per-item tooltips",
+  source: "Wowhead 12.1 live boss-guide Gear tables + per-item tooltips",
   itemLevelSource: ITEM_LEVEL_SOURCE,
   harvestedAt: new Date().toISOString().slice(0, 10),
-  caveat: "Pre-launch PTR data. Stats and drop assignments may change before Aug 18 2026.",
+  caveat: "Season 2 live data (harvested from Wowhead's live guides after the 2026-08-18 launch). Mid-season hotfixes can still retune individual items between harvests.",
   assignmentOverrides: ITEM_OWNER_OVERRIDES,
   instance: "The Venomous Abyss",
   counts: {

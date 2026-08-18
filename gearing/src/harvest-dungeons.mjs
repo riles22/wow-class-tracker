@@ -1,4 +1,4 @@
-// Harvest Season 2 Mythic+ dungeon loot from Wowhead's PTR dungeon guides.
+// Harvest Season 2 Mythic+ dungeon loot from Wowhead's live dungeon guides.
 //
 // IMPORTANT — why there is no item level here.
 // Mythic+ gear is the base dungeon item scaled at drop time by key level, so Wowhead
@@ -12,7 +12,7 @@
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { getText, dungeonLootIdsFrom, fetchItems, parsedItemIssues } from "./lib-wowhead.mjs";
+import { getText, dungeonLootIdsFrom, dungeonBossDropsFrom, fetchItems, parsedItemIssues } from "./lib-wowhead.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DATA_PATH = join(ROOT, "data", "dungeon-items.json");
@@ -27,10 +27,10 @@ catch (error) {
   if (error?.code !== "ENOENT")
     throw new Error(`cannot trust existing dungeon loot baseline: ${error.message}`, { cause: error });
 }
-const M = (s) => `https://www.wowhead.com/ptr/guide/midnight/${s}-dungeon-overview-location-rewards`;
-const MP = (s) => `https://www.wowhead.com/ptr/guide/midnight/${s}-dungeon-overview-mythic-plus`;
-const G = (s) => `https://www.wowhead.com/ptr/guide/${s}-dungeon-strategy-guide`;
-const D = (s) => `https://www.wowhead.com/ptr/guide/dungeons/${s}-strategy`;
+const M = (s) => `https://www.wowhead.com/guide/midnight/${s}-dungeon-overview-location-rewards`;
+const MP = (s) => `https://www.wowhead.com/guide/midnight/${s}-dungeon-overview-mythic-plus`;
+const G = (s) => `https://www.wowhead.com/guide/${s}-dungeon-strategy-guide`;
+const D = (s) => `https://www.wowhead.com/guide/dungeons/${s}-strategy`;
 
 // End-of-dungeon and Great Vault item levels by key level (see sheet 1 / Season 2 tables).
 const KEY_ILVL = [
@@ -66,13 +66,14 @@ const dungeons = [];
 const unresolved = [];
 
 for (const d of POOL) {
-  let ids = null, used = null;
+  let ids = null, used = null, usedHtml = null;
   for (const u of d.urls) {
     const html = await getText(u);
     if (!html) continue;
     try {
       ids = dungeonLootIdsFrom(html);
       used = u;
+      usedHtml = html;
       break;
     } catch { /* try the next known guide URL */ }
   }
@@ -100,6 +101,13 @@ for (const d of POOL) {
     unresolved.push(`${d.name} (parser schema: ${schemaProblems.join(", ")})`);
     console.log(`  --   ${d.name.padEnd(22)} parsed item schema failed`);
     continue;
+  }
+  // Backfill droppedBy for tooltip-silent items from the same overview table the loot
+  // ids came from (old-expansion tooltips carry no source line). Tooltip values win;
+  // backfilled names face the encounter-roster gate below like any other attribution.
+  const bossDrops = dungeonBossDropsFrom(usedHtml);
+  for (const item of gear) {
+    if (!item.droppedBy && bossDrops.has(item.id)) item.droppedBy = bossDrops.get(item.id);
   }
   const unexpectedSources = gear.filter((item) => item.droppedBy && !d.encounters.includes(item.droppedBy));
   if (unexpectedSources.length) {
@@ -149,9 +157,9 @@ if (duplicateItems.length) {
 }
 
 const out = {
-  source: "Wowhead 12.1.0 PTR — Midnight dungeon guides + per-item tooltips",
+  source: "Wowhead 12.1 live — Midnight dungeon guides + per-item tooltips",
   harvestedAt: new Date().toISOString().slice(0, 10),
-  caveat: "Pre-launch PTR data. Mythic+ gear is scaled at drop time by key level, so item levels come from the key-level table, not from the item.",
+  caveat: "Season 2 live data (harvested from Wowhead's live guides after the 2026-08-18 launch). Mythic+ gear is scaled at drop time by key level, so item levels come from the key-level table, not from the item.",
   ilvlNote: "Wowhead shows these items at their template item level; the real level is set by key level on drop.",
   keyLevels: KEY_ILVL,
   unresolved,

@@ -3,7 +3,7 @@
 //
 // Nothing is inferred. Fields absent from the tooltip stay null.
 
-export const TOOLTIP = (id) => `https://nether.wowhead.com/ptr/tooltip/item/${id}?locale=0`;
+export const TOOLTIP = (id) => `https://nether.wowhead.com/tooltip/item/${id}?locale=0`;
 
 const UA = { "user-agent": "Mozilla/5.0 (wow-s2-gearing harvester)" };
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -33,7 +33,9 @@ export async function getText(url, tries = 3) {
 }
 
 export function itemIdsFrom(html) {
-  return [...new Set([...html.matchAll(/\/ptr\/item=(\d+)\//g)].map((m) => m[1]))];
+  // (?:ptr\/)? — live pages link /item=N/, PTR pages /ptr/item=N/; accept both so the
+  // helper survives either era (the documented namespace trap, hit live 2026-08-18).
+  return [...new Set([...html.matchAll(/\/(?:ptr\/)?item=(\d+)\//g)].map((m) => m[1]))];
 }
 
 // Wowhead guide pages contain the rendered guide, navigation, recommendation cards,
@@ -94,6 +96,36 @@ export function dungeonLootIdsFrom(html) {
   const ids = markupItemIds(tables.map((table) => table.raw).join("\n"));
   if (!ids.length) throw new Error("dungeon loot table contains no items");
   return ids;
+}
+
+// The same semantic loot tables carry a per-row boss attribution column ("Boss",
+// "Boss Drop", "Dropped By" or "Source"). Old-expansion dungeon items often carry no
+// source line on their own tooltips, so the dungeon harvester backfills nulls from
+// here — the SAME channel the loot ids come from (this replaced a scratchpad-side
+// fill on 2026-08-18: a data-only fill is clobbered by every re-harvest). It never
+// overwrites a tooltip-supplied value, and backfilled names still pass through the
+// harvester's encounter-roster gate, so an off-roster attribution fails the dungeon
+// rather than landing silently.
+export function dungeonBossDropsFrom(html) {
+  const markup = guideMarkupFrom(html);
+  const headings = markupHeadings(markup);
+  const drops = new Map();
+  for (const table of markupBlocks(markup, "table")) {
+    const section = nearestHeading(headings, table.start);
+    if (!/loot table|gear drops/i.test(section)) continue;
+    const rows = markupBlocks(table.raw, "tr")
+      .map((row) => markupBlocks(row.raw, "td").map((cell) => cell.raw));
+    const header = rows.map((row) => row.map(plainMarkup)).find((row) => row.includes("Item"));
+    if (!header) continue;
+    const bossColumn = header.findIndex((cell) => /^(Boss(?: Drop)?|Dropped By|Source)$/i.test(cell));
+    if (bossColumn === -1) continue;
+    for (const row of rows) {
+      const item = /\[item=(\d+)(?=[\s\]])/i.exec(row[0] ?? "");
+      const boss = plainMarkup(row[bossColumn] ?? "");
+      if (item && boss && !drops.has(item[1])) drops.set(item[1], boss);
+    }
+  }
+  return drops;
 }
 
 export function raidBossLootIdsFrom(html) {

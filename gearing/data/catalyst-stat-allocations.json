@@ -1,15 +1,15 @@
 {
   "schemaVersion": 4,
-  "patchContext": "ptr-12.1.0",
-  "source": "Wowhead 12.1.0 PTR ranked-item tooltips scaled to reference item level 1000",
-  "sourceUrlPattern": "https://nether.wowhead.com/ptr/tooltip/item/{itemId}?locale=0&ilvl=1000",
-  "harvestedAt": "2026-08-03",
+  "patchContext": "12.1-live",
+  "source": "Wowhead 12.1 live ranked-item tooltips scaled to reference item level 1000",
+  "sourceUrlPattern": "https://nether.wowhead.com/tooltip/item/{itemId}?locale=0&ilvl=1000",
+  "harvestedAt": "2026-08-18",
   "caveat": "The 7,000-point allocations are recovered from a high-level reference tooltip to avoid legacy-template rounding; displayed rating amounts still scale with actual item level.",
   "counts": {
     "catalystBases": 94,
-    "otherRanked": 159,
+    "otherRanked": 157,
     "directTier": 65,
-    "items": 318
+    "items": 316
   },
   "items": {
     "158366": {
@@ -25,14 +25,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Crit": 9,
-        "Mast": 7
+        "Crit": 232,
+        "Mast": 174
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 19,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -54,14 +54,14 @@
         "Vers"
       ],
       "dataRatings": {
-        "Haste": 3,
-        "Vers": 2
+        "Haste": 59,
+        "Vers": 42
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 19,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -83,14 +83,14 @@
         "Haste"
       ],
       "dataRatings": {
-        "Crit": 5,
-        "Haste": 7
+        "Crit": 79,
+        "Haste": 122
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 19,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -112,14 +112,14 @@
         "Haste"
       ],
       "dataRatings": {
-        "Crit": 3,
-        "Haste": 3
+        "Crit": 57,
+        "Haste": 44
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 19,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -141,14 +141,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Vers": 3,
-        "Mast": 2
+        "Vers": 59,
+        "Mast": 42
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 19,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -170,14 +170,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Haste": 6,
-        "Mast": 5
+        "Haste": 52,
+        "Mast": 48
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 56,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -199,14 +199,14 @@
         "Vers"
       ],
       "dataRatings": {
-        "Haste": 5,
-        "Vers": 6
+        "Haste": 44,
+        "Vers": 57
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 56,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -228,14 +228,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Crit": 13,
-        "Mast": 10
+        "Crit": 113,
+        "Mast": 88
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 56,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -257,14 +257,14 @@
         "Vers"
       ],
       "dataRatings": {
-        "Haste": 6,
-        "Vers": 11
+        "Haste": 53,
+        "Vers": 98
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 56,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -286,14 +286,14 @@
         "Haste"
       ],
       "dataRatings": {
-        "Crit": 6,
-        "Haste": 3
+        "Crit": 101,
+        "Haste": 50
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 19,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -315,14 +315,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Vers": 4,
-        "Mast": 5
+        "Vers": 62,
+        "Mast": 88
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 19,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -344,14 +344,14 @@
         "Haste"
       ],
       "dataRatings": {
-        "Crit": 5,
-        "Haste": 3
+        "Crit": 91,
+        "Haste": 59
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 19,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -373,14 +373,14 @@
         "Vers"
       ],
       "dataRatings": {
-        "Crit": 4,
-        "Vers": 3
+        "Crit": 66,
+        "Vers": 47
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 19,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -402,20 +402,20 @@
         "Mast"
       ],
       "dataRatings": {
-        "Vers": 7,
-        "Mast": 6
+        "Vers": 61,
+        "Mast": 52
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 56,
-      "dataTrack": null,
-      "effect": "Standing still for 4 sec increases your Speed by 12. Lasts for 4 sec once you start moving.",
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
+      "effect": "Standing still for 4 sec increases your Speed by 101. Lasts for 4 sec once you start moving.",
       "effectKind": "Equip",
       "effects": [
         {
           "kind": "Equip",
-          "text": "Standing still for 4 sec increases your Speed by 12. Lasts for 4 sec once you start moving."
+          "text": "Standing still for 4 sec increases your Speed by 101. Lasts for 4 sec once you start moving."
         }
       ],
       "allocations": {
@@ -436,14 +436,14 @@
         "Vers"
       ],
       "dataRatings": {
-        "Crit": 8,
-        "Vers": 5
+        "Crit": 71,
+        "Vers": 42
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 56,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -465,14 +465,14 @@
         "Haste"
       ],
       "dataRatings": {
-        "Crit": 10,
-        "Haste": 8
+        "Crit": 85,
+        "Haste": 66
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 56,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -494,14 +494,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Vers": 10,
-        "Mast": 8
+        "Vers": 85,
+        "Mast": 66
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 56,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -523,14 +523,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Crit": 10,
-        "Mast": 7
+        "Crit": 91,
+        "Mast": 59
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 56,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -552,14 +552,14 @@
         "Vers"
       ],
       "dataRatings": {
-        "Haste": 10,
-        "Vers": 13
+        "Haste": 83,
+        "Vers": 118
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 56,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -581,14 +581,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Haste": 3,
-        "Mast": 5
+        "Haste": 59,
+        "Mast": 91
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 19,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -610,14 +610,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Crit": 5,
-        "Mast": 4
+        "Crit": 88,
+        "Mast": 62
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 19,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -639,14 +639,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Vers": 5,
-        "Mast": 6
+        "Vers": 92,
+        "Mast": 109
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 19,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -668,14 +668,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Vers": 4,
-        "Mast": 5
+        "Vers": 69,
+        "Mast": 82
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 19,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -697,14 +697,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Vers": 10,
-        "Mast": 7
+        "Vers": 88,
+        "Mast": 62
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 56,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -726,14 +726,14 @@
         "Haste"
       ],
       "dataRatings": {
-        "Crit": 7,
-        "Haste": 5
+        "Crit": 118,
+        "Haste": 83
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 19,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -755,14 +755,14 @@
         "Haste"
       ],
       "dataRatings": {
-        "Crit": 4,
-        "Haste": 3
+        "Crit": 69,
+        "Haste": 44
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 19,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -784,14 +784,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Crit": 4,
-        "Mast": 5
+        "Crit": 66,
+        "Mast": 85
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 19,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -813,14 +813,14 @@
         "Haste"
       ],
       "dataRatings": {
-        "Crit": 8,
-        "Haste": 5
+        "Crit": 69,
+        "Haste": 44
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 56,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -842,14 +842,14 @@
         "Vers"
       ],
       "dataRatings": {
-        "Crit": 7,
-        "Vers": 10
+        "Crit": 62,
+        "Vers": 88
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 56,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -871,14 +871,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Crit": 6,
-        "Mast": 12
+        "Crit": 50,
+        "Mast": 101
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 56,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -900,14 +900,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Haste": 11,
-        "Mast": 6
+        "Haste": 95,
+        "Mast": 56
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 56,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -929,14 +929,14 @@
         "Vers"
       ],
       "dataRatings": {
-        "Haste": 3,
-        "Vers": 4
+        "Haste": 47,
+        "Vers": 66
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 19,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -958,14 +958,14 @@
         "Vers"
       ],
       "dataRatings": {
-        "Crit": 4,
-        "Vers": 7
+        "Crit": 75,
+        "Vers": 126
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 19,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -987,14 +987,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Haste": 10,
-        "Mast": 7
+        "Haste": 91,
+        "Mast": 59
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 56,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -1016,14 +1016,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Vers": 5,
-        "Mast": 3
+        "Vers": 95,
+        "Mast": 56
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 19,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -1045,14 +1045,14 @@
         "Vers"
       ],
       "dataRatings": {
-        "Haste": 21,
-        "Vers": 11
+        "Haste": 266,
+        "Vers": 139
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 56,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -1074,14 +1074,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Haste": 7,
-        "Mast": 5
+        "Haste": 118,
+        "Mast": 83
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 19,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -1103,14 +1103,14 @@
         "Haste"
       ],
       "dataRatings": {
-        "Crit": 7,
-        "Haste": 5
+        "Crit": 113,
+        "Haste": 88
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 19,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -1132,14 +1132,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Crit": 13,
-        "Mast": 10
+        "Crit": 113,
+        "Mast": 88
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 56,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -1161,14 +1161,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Haste": 13,
-        "Mast": 10
+        "Haste": 118,
+        "Mast": 83
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 56,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -1190,14 +1190,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Crit": 5,
-        "Mast": 7
+        "Crit": 42,
+        "Mast": 59
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 56,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -1219,14 +1219,14 @@
         "Vers"
       ],
       "dataRatings": {
-        "Crit": 3,
-        "Vers": 3
+        "Crit": 46,
+        "Vers": 55
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 19,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -1248,14 +1248,14 @@
         "Vers"
       ],
       "dataRatings": {
-        "Haste": 7,
-        "Vers": 5
+        "Haste": 61,
+        "Vers": 39
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 56,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -1277,14 +1277,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Haste": 8,
-        "Mast": 10
+        "Haste": 66,
+        "Mast": 85
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 56,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -1306,14 +1306,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Crit": 7,
-        "Mast": 5
+        "Crit": 59,
+        "Mast": 42
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 56,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -1335,14 +1335,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Vers": 6,
-        "Mast": 10
+        "Vers": 151,
+        "Mast": 255
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 19,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -1364,14 +1364,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Haste": 10,
-        "Mast": 6
+        "Haste": 95,
+        "Mast": 56
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 53,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -1393,14 +1393,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Vers": 10,
-        "Mast": 6
+        "Vers": 98,
+        "Mast": 53
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 53,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -1421,19 +1421,19 @@
         "Crit"
       ],
       "dataRatings": {
-        "Crit": 15
+        "Crit": 143
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 53,
-      "dataTrack": null,
-      "effect": "Your helpful spells and abilities have a high chance to create a Burning Ember on an ally. The ember flares up after 1 sec, cauterizing wounds to heal for 818 and expelling 259 Fire damage split between nearby enemies. (1s cooldown)",
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
+      "effect": "Your helpful spells and abilities have a high chance to create a Burning Ember on an ally. The ember flares up after 1 sec, cauterizing wounds to heal for 34183 and expelling 10842 Fire damage split between nearby enemies. (1s cooldown)",
       "effectKind": "Equip",
       "effects": [
         {
           "kind": "Equip",
-          "text": "Your helpful spells and abilities have a high chance to create a Burning Ember on an ally. The ember flares up after 1 sec, cauterizing wounds to heal for 818 and expelling 259 Fire damage split between nearby enemies. (1s cooldown)"
+          "text": "Your helpful spells and abilities have a high chance to create a Burning Ember on an ally. The ember flares up after 1 sec, cauterizing wounds to heal for 34183 and expelling 10842 Fire damage split between nearby enemies. (1s cooldown)"
         }
       ],
       "allocations": {
@@ -1453,14 +1453,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Crit": 8,
-        "Mast": 14
+        "Crit": 70,
+        "Mast": 131
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 53,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -1482,14 +1482,14 @@
         "Vers"
       ],
       "dataRatings": {
-        "Crit": 8,
-        "Vers": 14
+        "Crit": 75,
+        "Vers": 126
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 53,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -1511,14 +1511,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Crit": 7,
-        "Mast": 9
+        "Crit": 62,
+        "Mast": 88
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 53,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -1540,14 +1540,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Haste": 8,
-        "Mast": 14
+        "Haste": 75,
+        "Mast": 126
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 53,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -1569,14 +1569,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Vers": 7,
-        "Mast": 4
+        "Vers": 61,
+        "Mast": 39
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 53,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -1598,14 +1598,14 @@
         "Haste"
       ],
       "dataRatings": {
-        "Crit": 8,
-        "Haste": 14
+        "Crit": 75,
+        "Haste": 126
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 53,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -1627,14 +1627,14 @@
         "Vers"
       ],
       "dataRatings": {
-        "Haste": 4,
-        "Vers": 7
+        "Haste": 39,
+        "Vers": 61
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 53,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -1656,14 +1656,14 @@
         "Vers"
       ],
       "dataRatings": {
-        "Crit": 9,
-        "Vers": 7
+        "Crit": 88,
+        "Vers": 62
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 53,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -1685,14 +1685,14 @@
         "Vers"
       ],
       "dataRatings": {
-        "Haste": 8,
-        "Vers": 13
+        "Haste": 79,
+        "Vers": 122
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 53,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -1714,14 +1714,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Crit": 13,
-        "Mast": 8
+        "Crit": 122,
+        "Mast": 79
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 53,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -1742,19 +1742,19 @@
         "Haste"
       ],
       "dataRatings": {
-        "Haste": 15
+        "Haste": 143
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 53,
-      "dataTrack": null,
-      "effect": "Bind with the blaze for 20 sec, giving your attacks a high chance to increase your Strength by 10, stacking up to 6 times. When your binding is complete, emit a burnout wave, dealing up to 2832 Fire damage split between all nearby enemies, based on the strength of your binding. (500ms cooldown) (2 Min Cooldown)",
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
+      "effect": "Bind with the blaze for 20 sec, giving your attacks a high chance to increase your Strength by 155, stacking up to 6 times. When your binding is complete, emit a burnout wave, dealing up to 118335 Fire damage split between all nearby enemies, based on the strength of your binding. (500ms cooldown) (2 Min Cooldown)",
       "effectKind": "Use",
       "effects": [
         {
           "kind": "Use",
-          "text": "Bind with the blaze for 20 sec, giving your attacks a high chance to increase your Strength by 10, stacking up to 6 times. When your binding is complete, emit a burnout wave, dealing up to 2832 Fire damage split between all nearby enemies, based on the strength of your binding. (500ms cooldown) (2 Min Cooldown)"
+          "text": "Bind with the blaze for 20 sec, giving your attacks a high chance to increase your Strength by 155, stacking up to 6 times. When your binding is complete, emit a burnout wave, dealing up to 118335 Fire damage split between all nearby enemies, based on the strength of your binding. (500ms cooldown) (2 Min Cooldown)"
         }
       ],
       "allocations": {
@@ -1774,14 +1774,14 @@
         "Haste"
       ],
       "dataRatings": {
-        "Crit": 4,
-        "Haste": 8
+        "Crit": 42,
+        "Haste": 71
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 53,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -1803,14 +1803,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Vers": 8,
-        "Mast": 13
+        "Vers": 79,
+        "Mast": 122
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 53,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -1832,14 +1832,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Vers": 8,
-        "Mast": 14
+        "Vers": 75,
+        "Mast": 126
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 53,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -1861,14 +1861,14 @@
         "Vers"
       ],
       "dataRatings": {
-        "Crit": 7,
-        "Vers": 4
+        "Crit": 65,
+        "Vers": 35
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 53,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -1890,14 +1890,14 @@
         "Haste"
       ],
       "dataRatings": {
-        "Crit": 7,
-        "Haste": 4
+        "Crit": 63,
+        "Haste": 37
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 53,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -1919,14 +1919,14 @@
         "Haste"
       ],
       "dataRatings": {
-        "Crit": 8,
-        "Haste": 9
+        "Crit": 73,
+        "Haste": 77
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 56,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -1948,14 +1948,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Crit": 10,
-        "Mast": 13
+        "Crit": 88,
+        "Mast": 113
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 56,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -1977,14 +1977,14 @@
         "Haste"
       ],
       "dataRatings": {
-        "Crit": 13,
-        "Haste": 10
+        "Crit": 118,
+        "Haste": 83
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 56,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -2006,14 +2006,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Vers": 15,
-        "Mast": 8
+        "Vers": 135,
+        "Mast": 66
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 56,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -2035,14 +2035,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Crit": 9,
-        "Mast": 14
+        "Crit": 79,
+        "Mast": 122
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 56,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -2064,14 +2064,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Crit": 9,
-        "Mast": 14
+        "Crit": 79,
+        "Mast": 122
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 56,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -2093,14 +2093,14 @@
         "Haste"
       ],
       "dataRatings": {
-        "Crit": 6,
-        "Haste": 12
+        "Crit": 50,
+        "Haste": 101
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 56,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -2122,14 +2122,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Haste": 6,
-        "Mast": 11
+        "Haste": 52,
+        "Mast": 99
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 56,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -2151,14 +2151,14 @@
         "Vers"
       ],
       "dataRatings": {
-        "Crit": 15,
-        "Vers": 8
+        "Crit": 131,
+        "Vers": 70
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 56,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -2180,14 +2180,14 @@
         "Vers"
       ],
       "dataRatings": {
-        "Crit": 10,
-        "Vers": 13
+        "Crit": 88,
+        "Vers": 113
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 56,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -2209,14 +2209,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Crit": 13,
-        "Mast": 10
+        "Crit": 113,
+        "Mast": 88
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 56,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -2238,14 +2238,14 @@
         "Haste"
       ],
       "dataRatings": {
-        "Crit": 8,
-        "Haste": 9
+        "Crit": 72,
+        "Haste": 79
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 56,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -2267,14 +2267,14 @@
         "Vers"
       ],
       "dataRatings": {
-        "Haste": 10,
-        "Vers": 13
+        "Haste": 83,
+        "Vers": 118
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 56,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -2296,14 +2296,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Vers": 10,
-        "Mast": 8
+        "Vers": 85,
+        "Mast": 66
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 56,
-      "dataTrack": null,
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -2324,19 +2324,19 @@
         "Crit"
       ],
       "dataRatings": {
-        "Crit": 117
+        "Crit": 143
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
-      "effect": "You have proven your worth to Nalorakk. Your abilities have a chance to echo with the war god's furious roar, granting you 231 Strength for 15 sec. Nearby allies with Nalorakk's favor are rallied, gaining 25% movement speed for 10 sec.",
+      "effect": "You have proven your worth to Nalorakk. Your abilities have a chance to echo with the war god's furious roar, granting you 282 Strength for 15 sec. Nearby allies with Nalorakk's favor are rallied, gaining 25% movement speed for 10 sec.",
       "effectKind": "Equip",
       "effects": [
         {
           "kind": "Equip",
-          "text": "You have proven your worth to Nalorakk. Your abilities have a chance to echo with the war god's furious roar, granting you 231 Strength for 15 sec. Nearby allies with Nalorakk's favor are rallied, gaining 25% movement speed for 10 sec."
+          "text": "You have proven your worth to Nalorakk. Your abilities have a chance to echo with the war god's furious roar, granting you 282 Strength for 15 sec. Nearby allies with Nalorakk's favor are rallied, gaining 25% movement speed for 10 sec."
         }
       ],
       "allocations": {
@@ -2356,13 +2356,13 @@
         "Haste"
       ],
       "dataRatings": {
-        "Crit": 100,
-        "Haste": 65
+        "Crit": 122,
+        "Haste": 79
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -2385,13 +2385,13 @@
         "Haste"
       ],
       "dataRatings": {
-        "Crit": 80,
-        "Haste": 43
+        "Crit": 98,
+        "Haste": 53
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -2414,13 +2414,13 @@
         "Vers"
       ],
       "dataRatings": {
-        "Crit": 43,
-        "Vers": 80
+        "Crit": 53,
+        "Vers": 98
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -2443,13 +2443,13 @@
         "Mast"
       ],
       "dataRatings": {
-        "Crit": 61,
-        "Mast": 103
+        "Crit": 75,
+        "Mast": 126
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -2472,13 +2472,13 @@
         "Haste"
       ],
       "dataRatings": {
-        "Crit": 36,
-        "Haste": 56
+        "Crit": 44,
+        "Haste": 69
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -2501,13 +2501,13 @@
         "Mast"
       ],
       "dataRatings": {
-        "Crit": 48,
-        "Mast": 34
+        "Crit": 59,
+        "Mast": 42
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -2530,13 +2530,13 @@
         "Mast"
       ],
       "dataRatings": {
-        "Vers": 46,
-        "Mast": 78
+        "Vers": 56,
+        "Mast": 95
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -2559,13 +2559,13 @@
         "Mast"
       ],
       "dataRatings": {
-        "Crit": 96,
-        "Mast": 68
+        "Crit": 118,
+        "Mast": 83
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -2588,13 +2588,13 @@
         "Vers"
       ],
       "dataRatings": {
-        "Crit": 51,
-        "Vers": 72
+        "Crit": 62,
+        "Vers": 88
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -2617,13 +2617,13 @@
         "Mast"
       ],
       "dataRatings": {
-        "Crit": 54,
-        "Mast": 38
+        "Crit": 66,
+        "Mast": 47
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -2646,13 +2646,13 @@
         "Haste"
       ],
       "dataRatings": {
-        "Crit": 36,
-        "Haste": 56
+        "Crit": 44,
+        "Haste": 69
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -2660,35 +2660,6 @@
       "allocations": {
         "Crit": 2750,
         "Haste": 4250
-      }
-    },
-    "251134": {
-      "category": "ranked-item",
-      "sourceKind": "mplus",
-      "sourceKey": "Murder Row",
-      "tierClass": null,
-      "name": "Xathuux's Cleave",
-      "slot": "Two-Hand",
-      "type": "Axe",
-      "secondaries": [
-        "Crit",
-        "Haste"
-      ],
-      "dataRatings": {
-        "Crit": 96,
-        "Haste": 68
-      },
-      "tertiaries": [],
-      "tertiaryRatings": {},
-      "sockets": [],
-      "dataIlvl": 289,
-      "dataTrack": "Myth 6/6",
-      "effect": null,
-      "effectKind": null,
-      "effects": [],
-      "allocations": {
-        "Crit": 4100,
-        "Haste": 2900
       }
     },
     "251135": {
@@ -2704,13 +2675,13 @@
         "Haste"
       ],
       "dataRatings": {
-        "Crit": 34,
-        "Haste": 58
+        "Crit": 42,
+        "Haste": 71
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -2733,13 +2704,13 @@
         "Mast"
       ],
       "dataRatings": {
-        "Crit": 186,
-        "Mast": 117
+        "Crit": 249,
+        "Mast": 156
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -2762,13 +2733,13 @@
         "Mast"
       ],
       "dataRatings": {
-        "Haste": 46,
-        "Mast": 78
+        "Haste": 56,
+        "Mast": 95
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -2791,13 +2762,13 @@
         "Mast"
       ],
       "dataRatings": {
-        "Haste": 78,
-        "Mast": 46
+        "Haste": 95,
+        "Mast": 56
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -2820,13 +2791,13 @@
         "Haste"
       ],
       "dataRatings": {
-        "Crit": 58,
-        "Haste": 107
+        "Crit": 70,
+        "Haste": 131
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -2849,13 +2820,13 @@
         "Mast"
       ],
       "dataRatings": {
-        "Haste": 96,
-        "Mast": 68
+        "Haste": 118,
+        "Mast": 83
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -2878,13 +2849,13 @@
         "Vers"
       ],
       "dataRatings": {
-        "Haste": 100,
-        "Vers": 65
+        "Haste": 122,
+        "Vers": 79
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -2907,13 +2878,13 @@
         "Mast"
       ],
       "dataRatings": {
-        "Haste": 95,
-        "Mast": 208
+        "Haste": 127,
+        "Mast": 278
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -2936,13 +2907,13 @@
         "Vers"
       ],
       "dataRatings": {
-        "Haste": 48,
-        "Vers": 34
+        "Haste": 59,
+        "Vers": 42
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -2965,13 +2936,13 @@
         "Mast"
       ],
       "dataRatings": {
-        "Vers": 48,
-        "Mast": 75
+        "Vers": 59,
+        "Mast": 91
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -2994,13 +2965,13 @@
         "Vers"
       ],
       "dataRatings": {
-        "Haste": 72,
-        "Vers": 51
+        "Haste": 88,
+        "Vers": 62
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -3023,13 +2994,13 @@
         "Vers"
       ],
       "dataRatings": {
-        "Crit": 51,
-        "Vers": 72
+        "Crit": 62,
+        "Vers": 88
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -3052,13 +3023,13 @@
         "Mast"
       ],
       "dataRatings": {
-        "Vers": 65,
-        "Mast": 100
+        "Vers": 79,
+        "Mast": 122
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -3081,13 +3052,13 @@
         "Vers"
       ],
       "dataRatings": {
-        "Crit": 121,
-        "Vers": 182
+        "Crit": 162,
+        "Vers": 243
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -3110,13 +3081,13 @@
         "Mast"
       ],
       "dataRatings": {
-        "Haste": 68,
-        "Mast": 96
+        "Haste": 83,
+        "Mast": 118
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -3139,13 +3110,13 @@
         "Mast"
       ],
       "dataRatings": {
-        "Haste": 52,
-        "Mast": 31
+        "Haste": 63,
+        "Mast": 37
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -3168,13 +3139,13 @@
         "Mast"
       ],
       "dataRatings": {
-        "Crit": 107,
-        "Mast": 58
+        "Crit": 131,
+        "Mast": 70
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -3197,13 +3168,13 @@
         "Vers"
       ],
       "dataRatings": {
-        "Haste": 72,
-        "Vers": 51
+        "Haste": 88,
+        "Vers": 62
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -3226,13 +3197,13 @@
         "Haste"
       ],
       "dataRatings": {
-        "Crit": 46,
-        "Haste": 78
+        "Crit": 56,
+        "Haste": 95
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -3255,13 +3226,13 @@
         "Mast"
       ],
       "dataRatings": {
-        "Crit": 58,
-        "Mast": 34
+        "Crit": 71,
+        "Mast": 42
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -3284,13 +3255,13 @@
         "Mast"
       ],
       "dataRatings": {
-        "Crit": 78,
-        "Mast": 46
+        "Crit": 95,
+        "Mast": 56
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -3313,13 +3284,13 @@
         "Vers"
       ],
       "dataRatings": {
-        "Haste": 103,
-        "Vers": 61
+        "Haste": 126,
+        "Vers": 75
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -3342,13 +3313,13 @@
         "Vers"
       ],
       "dataRatings": {
-        "Haste": 68,
-        "Vers": 96
+        "Haste": 83,
+        "Vers": 118
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -3371,13 +3342,13 @@
         "Mast"
       ],
       "dataRatings": {
-        "Haste": 61,
-        "Mast": 103
+        "Haste": 75,
+        "Mast": 126
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -3400,13 +3371,13 @@
         "Haste"
       ],
       "dataRatings": {
-        "Crit": 61,
-        "Haste": 103
+        "Crit": 75,
+        "Haste": 126
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -3429,13 +3400,13 @@
         "Vers"
       ],
       "dataRatings": {
-        "Crit": 75,
-        "Vers": 48
+        "Crit": 91,
+        "Vers": 59
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -3458,13 +3429,13 @@
         "Haste"
       ],
       "dataRatings": {
-        "Crit": 104,
-        "Haste": 199
+        "Crit": 139,
+        "Haste": 266
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -3487,13 +3458,13 @@
         "Mast"
       ],
       "dataRatings": {
-        "Haste": 32,
-        "Mast": 50
+        "Haste": 39,
+        "Mast": 61
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -3516,13 +3487,13 @@
         "Vers"
       ],
       "dataRatings": {
-        "Haste": 96,
-        "Vers": 68
+        "Haste": 118,
+        "Vers": 83
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -3545,13 +3516,13 @@
         "Vers"
       ],
       "dataRatings": {
-        "Crit": 100,
-        "Vers": 65
+        "Crit": 122,
+        "Vers": 79
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -3574,13 +3545,13 @@
         "Mast"
       ],
       "dataRatings": {
-        "Crit": 60,
-        "Mast": 32
+        "Crit": 73,
+        "Mast": 40
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -3603,13 +3574,13 @@
         "Vers"
       ],
       "dataRatings": {
-        "Haste": 78,
-        "Vers": 46
+        "Haste": 95,
+        "Vers": 56
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -3632,13 +3603,13 @@
         "Mast"
       ],
       "dataRatings": {
-        "Haste": 51,
-        "Mast": 72
+        "Haste": 62,
+        "Mast": 88
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -3661,13 +3632,13 @@
         "Mast"
       ],
       "dataRatings": {
-        "Crit": 31,
-        "Mast": 52
+        "Crit": 37,
+        "Mast": 63
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -3690,13 +3661,13 @@
         "Vers"
       ],
       "dataRatings": {
-        "Crit": 68,
-        "Vers": 96
+        "Crit": 83,
+        "Vers": 118
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -3719,13 +3690,13 @@
         "Mast"
       ],
       "dataRatings": {
-        "Haste": 52,
-        "Mast": 31
+        "Haste": 63,
+        "Mast": 37
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -3748,13 +3719,13 @@
         "Vers"
       ],
       "dataRatings": {
-        "Crit": 46,
-        "Vers": 78
+        "Crit": 56,
+        "Vers": 95
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -3777,13 +3748,13 @@
         "Mast"
       ],
       "dataRatings": {
-        "Haste": 60,
-        "Mast": 32
+        "Haste": 73,
+        "Mast": 40
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -3806,13 +3777,13 @@
         "Mast"
       ],
       "dataRatings": {
-        "Haste": 34,
-        "Mast": 48
+        "Haste": 42,
+        "Mast": 59
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -3835,13 +3806,13 @@
         "Vers"
       ],
       "dataRatings": {
-        "Crit": 107,
-        "Vers": 58
+        "Crit": 131,
+        "Vers": 70
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -3864,13 +3835,13 @@
         "Vers"
       ],
       "dataRatings": {
-        "Haste": 103,
-        "Vers": 61
+        "Haste": 126,
+        "Vers": 75
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -3893,13 +3864,13 @@
         "Mast"
       ],
       "dataRatings": {
-        "Vers": 100,
-        "Mast": 203
+        "Vers": 133,
+        "Mast": 272
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -3922,13 +3893,13 @@
         "Haste"
       ],
       "dataRatings": {
-        "Crit": 34,
-        "Haste": 48
+        "Crit": 42,
+        "Haste": 59
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -3951,13 +3922,13 @@
         "Vers"
       ],
       "dataRatings": {
-        "Crit": 50,
-        "Vers": 32
+        "Crit": 61,
+        "Vers": 39
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -3980,13 +3951,13 @@
         "Mast"
       ],
       "dataRatings": {
-        "Vers": 43,
-        "Mast": 80
+        "Vers": 53,
+        "Mast": 98
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -4009,13 +3980,13 @@
         "Mast"
       ],
       "dataRatings": {
-        "Vers": 103,
-        "Mast": 61
+        "Vers": 126,
+        "Mast": 75
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -4038,13 +4009,13 @@
         "Mast"
       ],
       "dataRatings": {
-        "Crit": 61,
-        "Mast": 103
+        "Crit": 75,
+        "Mast": 126
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -4067,13 +4038,13 @@
         "Haste"
       ],
       "dataRatings": {
-        "Crit": 34,
-        "Haste": 58
+        "Crit": 42,
+        "Haste": 71
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -4096,13 +4067,13 @@
         "Haste"
       ],
       "dataRatings": {
-        "Crit": 48,
-        "Haste": 75
+        "Crit": 59,
+        "Haste": 91
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -4125,13 +4096,13 @@
         "Mast"
       ],
       "dataRatings": {
-        "Haste": 48,
-        "Mast": 34
+        "Haste": 59,
+        "Mast": 42
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -4154,13 +4125,13 @@
         "Mast"
       ],
       "dataRatings": {
-        "Haste": 103,
-        "Mast": 61
+        "Haste": 126,
+        "Mast": 75
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -4183,13 +4154,13 @@
         "Mast"
       ],
       "dataRatings": {
-        "Vers": 75,
-        "Mast": 48
+        "Vers": 91,
+        "Mast": 59
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -4212,13 +4183,13 @@
         "Haste"
       ],
       "dataRatings": {
-        "Crit": 46,
-        "Haste": 78
+        "Crit": 56,
+        "Haste": 95
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -4241,13 +4212,13 @@
         "Haste"
       ],
       "dataRatings": {
-        "Crit": 78,
-        "Haste": 46
+        "Crit": 95,
+        "Haste": 56
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -4270,13 +4241,13 @@
         "Mast"
       ],
       "dataRatings": {
-        "Haste": 29,
-        "Mast": 53
+        "Haste": 35,
+        "Mast": 65
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -4299,13 +4270,13 @@
         "Mast"
       ],
       "dataRatings": {
-        "Vers": 34,
-        "Mast": 48
+        "Vers": 42,
+        "Mast": 59
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -4328,13 +4299,13 @@
         "Vers"
       ],
       "dataRatings": {
-        "Crit": 96,
-        "Vers": 68
+        "Crit": 118,
+        "Vers": 83
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -4357,13 +4328,13 @@
         "Mast"
       ],
       "dataRatings": {
-        "Vers": 72,
-        "Mast": 51
+        "Vers": 88,
+        "Mast": 62
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -4386,13 +4357,13 @@
         "Mast"
       ],
       "dataRatings": {
-        "Haste": 75,
-        "Mast": 48
+        "Haste": 91,
+        "Mast": 59
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -4415,13 +4386,13 @@
         "Mast"
       ],
       "dataRatings": {
-        "Crit": 107,
-        "Mast": 58
+        "Crit": 131,
+        "Mast": 70
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -4444,13 +4415,13 @@
         "Mast"
       ],
       "dataRatings": {
-        "Vers": 100,
-        "Mast": 65
+        "Vers": 122,
+        "Mast": 79
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -4473,13 +4444,13 @@
         "Haste"
       ],
       "dataRatings": {
-        "Crit": 48,
-        "Haste": 34
+        "Crit": 59,
+        "Haste": 42
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -4502,13 +4473,13 @@
         "Mast"
       ],
       "dataRatings": {
-        "Haste": 100,
-        "Mast": 65
+        "Haste": 122,
+        "Mast": 79
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -4531,13 +4502,13 @@
         "Haste"
       ],
       "dataRatings": {
-        "Crit": 103,
-        "Haste": 61
+        "Crit": 126,
+        "Haste": 75
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -4560,13 +4531,13 @@
         "Mast"
       ],
       "dataRatings": {
-        "Crit": 195,
-        "Mast": 108
+        "Crit": 261,
+        "Mast": 145
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -4589,13 +4560,13 @@
         "Mast"
       ],
       "dataRatings": {
-        "Vers": 80,
-        "Mast": 43
+        "Vers": 98,
+        "Mast": 53
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -4618,13 +4589,13 @@
         "Mast"
       ],
       "dataRatings": {
-        "Haste": 208,
-        "Mast": 95
+        "Haste": 278,
+        "Mast": 127
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 289,
+      "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
       "effect": null,
       "effectKind": null,
@@ -4791,19 +4762,19 @@
         "Haste"
       ],
       "dataRatings": {
-        "Haste": 100
+        "Haste": 104
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 334,
-      "dataTrack": "Myth 6/6",
-      "effect": "Your spells and abilities have a chance to increase your Haste by 363, but reduce your other secondary stats by 60 for 12 sec.",
+      "dataIlvl": 344,
+      "dataTrack": null,
+      "effect": "Your spells and abilities have a chance to increase your Haste by 378, but reduce your other secondary stats by 63 for 12 sec.",
       "effectKind": "Equip",
       "effects": [
         {
           "kind": "Equip",
-          "text": "Your spells and abilities have a chance to increase your Haste by 363, but reduce your other secondary stats by 60 for 12 sec."
+          "text": "Your spells and abilities have a chance to increase your Haste by 378, but reduce your other secondary stats by 63 for 12 sec."
         }
       ],
       "allocations": {
@@ -4938,19 +4909,19 @@
         "Crit"
       ],
       "dataRatings": {
-        "Crit": 201
+        "Crit": 209
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 334,
-      "dataTrack": "Myth 6/6",
-      "effect": "Your spells and abilities have a chance to increase your Critical Strike by 363, but reduce your other secondary stats by 60 for 12 sec.",
+      "dataIlvl": 344,
+      "dataTrack": null,
+      "effect": "Your spells and abilities have a chance to increase your Critical Strike by 378, but reduce your other secondary stats by 63 for 12 sec.",
       "effectKind": "Equip",
       "effects": [
         {
           "kind": "Equip",
-          "text": "Your spells and abilities have a chance to increase your Critical Strike by 363, but reduce your other secondary stats by 60 for 12 sec."
+          "text": "Your spells and abilities have a chance to increase your Critical Strike by 378, but reduce your other secondary stats by 63 for 12 sec."
         }
       ],
       "allocations": {
@@ -4999,20 +4970,20 @@
         "Mast"
       ],
       "dataRatings": {
-        "Haste": 30,
-        "Mast": 70
+        "Haste": 31,
+        "Mast": 73
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 334,
-      "dataTrack": "Myth 6/6",
-      "effect": "Your attacks have a high chance to apply Venomfang, dealing (874 * 6) Nature damage over 6 sec before bursting to deal 2295 Nature damage to nearby enemies. Multiple applications may overlap.",
+      "dataIlvl": 344,
+      "dataTrack": null,
+      "effect": "Your attacks have a high chance to apply Venomfang, dealing (1004 * 6) Nature damage over 6 sec before bursting to deal 2636 Nature damage to nearby enemies. Multiple applications may overlap.",
       "effectKind": "Equip",
       "effects": [
         {
           "kind": "Equip",
-          "text": "Your attacks have a high chance to apply Venomfang, dealing (874 * 6) Nature damage over 6 sec before bursting to deal 2295 Nature damage to nearby enemies. Multiple applications may overlap."
+          "text": "Your attacks have a high chance to apply Venomfang, dealing (1004 * 6) Nature damage over 6 sec before bursting to deal 2636 Nature damage to nearby enemies. Multiple applications may overlap."
         }
       ],
       "allocations": {
@@ -5062,14 +5033,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Haste": 68,
-        "Mast": 32
+        "Haste": 71,
+        "Mast": 33
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 334,
-      "dataTrack": "Myth 6/6",
+      "dataIlvl": 344,
+      "dataTrack": null,
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -5091,20 +5062,20 @@
         "Mast"
       ],
       "dataRatings": {
-        "Crit": 142,
-        "Mast": 59
+        "Crit": 148,
+        "Mast": 61
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 334,
-      "dataTrack": "Myth 6/6",
-      "effect": "Your attacks have a high chance to apply Venomfang, dealing (874 * 6) Nature damage over 6 sec before bursting to deal 2295 Nature damage to nearby enemies. Multiple applications may overlap.",
+      "dataIlvl": 344,
+      "dataTrack": null,
+      "effect": "Your attacks have a high chance to apply Venomfang, dealing (1004 * 6) Nature damage over 6 sec before bursting to deal 2636 Nature damage to nearby enemies. Multiple applications may overlap.",
       "effectKind": "Equip",
       "effects": [
         {
           "kind": "Equip",
-          "text": "Your attacks have a high chance to apply Venomfang, dealing (874 * 6) Nature damage over 6 sec before bursting to deal 2295 Nature damage to nearby enemies. Multiple applications may overlap."
+          "text": "Your attacks have a high chance to apply Venomfang, dealing (1004 * 6) Nature damage over 6 sec before bursting to deal 2636 Nature damage to nearby enemies. Multiple applications may overlap."
         }
       ],
       "allocations": {
@@ -5153,19 +5124,19 @@
         "Mast"
       ],
       "dataRatings": {
-        "Mast": 201
+        "Mast": 209
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 334,
-      "dataTrack": "Myth 6/6",
-      "effect": "Your spells and abilities have a chance to increase your Mastery by 363, but reduce your other secondary stats by 60 for 12 sec.",
+      "dataIlvl": 344,
+      "dataTrack": null,
+      "effect": "Your spells and abilities have a chance to increase your Mastery by 378, but reduce your other secondary stats by 63 for 12 sec.",
       "effectKind": "Equip",
       "effects": [
         {
           "kind": "Equip",
-          "text": "Your spells and abilities have a chance to increase your Mastery by 363, but reduce your other secondary stats by 60 for 12 sec."
+          "text": "Your spells and abilities have a chance to increase your Mastery by 378, but reduce your other secondary stats by 63 for 12 sec."
         }
       ],
       "allocations": {
@@ -5301,14 +5272,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Haste": 143,
-        "Mast": 58
+        "Haste": 149,
+        "Mast": 60
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 334,
-      "dataTrack": "Myth 6/6",
+      "dataIlvl": 344,
+      "dataTrack": null,
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -5388,14 +5359,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Haste": 63,
-        "Mast": 138
+        "Haste": 66,
+        "Mast": 143
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 334,
-      "dataTrack": "Myth 6/6",
+      "dataIlvl": 344,
+      "dataTrack": null,
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -5523,7 +5494,7 @@
     "268231": {
       "category": "base",
       "sourceKind": "raid",
-      "sourceKey": "1",
+      "sourceKey": "7",
       "tierClass": null,
       "name": "Soulslither Spaulders",
       "slot": "Shoulder",
@@ -5533,14 +5504,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Crit": 46,
-        "Mast": 105
+        "Crit": 48,
+        "Mast": 109
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 334,
-      "dataTrack": "Myth 6/6",
+      "dataIlvl": 344,
+      "dataTrack": null,
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -5678,14 +5649,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Haste": 139,
-        "Mast": 62
+        "Haste": 144,
+        "Mast": 65
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 334,
-      "dataTrack": "Myth 6/6",
+      "dataIlvl": 344,
+      "dataTrack": null,
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -5823,14 +5794,14 @@
         "Haste"
       ],
       "dataRatings": {
-        "Crit": 45,
-        "Haste": 106
+        "Crit": 47,
+        "Haste": 110
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 334,
-      "dataTrack": "Myth 6/6",
+      "dataIlvl": 344,
+      "dataTrack": null,
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -6075,14 +6046,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Haste": 33,
-        "Mast": 80
+        "Haste": 35,
+        "Mast": 83
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 334,
-      "dataTrack": "Myth 6/6",
+      "dataIlvl": 344,
+      "dataTrack": null,
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -6133,14 +6104,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Haste": 101,
-        "Mast": 50
+        "Haste": 105,
+        "Mast": 52
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 334,
-      "dataTrack": "Myth 6/6",
+      "dataIlvl": 344,
+      "dataTrack": null,
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -6162,14 +6133,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Haste": 47,
-        "Mast": 103
+        "Haste": 49,
+        "Mast": 108
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 334,
-      "dataTrack": "Myth 6/6",
+      "dataIlvl": 344,
+      "dataTrack": null,
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -6249,14 +6220,14 @@
         "Mast"
       ],
       "dataRatings": {
-        "Crit": 106,
-        "Mast": 45
+        "Crit": 110,
+        "Mast": 46
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 334,
-      "dataTrack": "Myth 6/6",
+      "dataIlvl": 344,
+      "dataTrack": null,
       "effect": null,
       "effectKind": null,
       "effects": [],
@@ -6323,64 +6294,6 @@
         "Haste": 2144
       }
     },
-    "268262": {
-      "category": "ranked-item",
-      "sourceKind": "raid",
-      "sourceKey": "1",
-      "tierClass": null,
-      "name": "Bubblefin Splash Guard",
-      "slot": "Off Hand",
-      "type": "Shield",
-      "secondaries": [
-        "Haste",
-        "Mast"
-      ],
-      "dataRatings": {
-        "Haste": 33,
-        "Mast": 67
-      },
-      "tertiaries": [],
-      "tertiaryRatings": {},
-      "sockets": [],
-      "dataIlvl": 334,
-      "dataTrack": "Myth 6/6",
-      "effect": null,
-      "effectKind": null,
-      "effects": [],
-      "allocations": {
-        "Haste": 2304,
-        "Mast": 4696
-      }
-    },
-    "268263": {
-      "category": "ranked-item",
-      "sourceKind": "raid",
-      "sourceKey": "1",
-      "tierClass": null,
-      "name": "Frostscale's Mystic Frond",
-      "slot": "Held In Off-hand",
-      "type": null,
-      "secondaries": [
-        "Crit",
-        "Mast"
-      ],
-      "dataRatings": {
-        "Crit": 68,
-        "Mast": 33
-      },
-      "tertiaries": [],
-      "tertiaryRatings": {},
-      "sockets": [],
-      "dataIlvl": 334,
-      "dataTrack": "Myth 6/6",
-      "effect": null,
-      "effectKind": null,
-      "effects": [],
-      "allocations": {
-        "Crit": 4710,
-        "Mast": 2290
-      }
-    },
     "268264": {
       "category": "ranked-item",
       "sourceKind": "raid",
@@ -6422,15 +6335,15 @@
         "Crit"
       ],
       "dataRatings": {
-        "Crit": 405
+        "Crit": 428
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [
         "Prismatic Socket"
       ],
-      "dataIlvl": 334,
-      "dataTrack": "Myth 6/6",
+      "dataIlvl": 344,
+      "dataTrack": null,
       "effect": "Damage taken from Deadly Venom on the Coiled Isle and within the Venomous Abyss reduced by 7%.",
       "effectKind": "Equip",
       "effects": [
@@ -6440,40 +6353,11 @@
         },
         {
           "kind": "Equip",
-          "text": "Your spells and abilities have a chance to increase your Critical Strike by 363, but reduce your other secondary stats by 60 for 12 sec."
+          "text": "Your spells and abilities have a chance to increase your Critical Strike by 378, but reduce your other secondary stats by 63 for 12 sec."
         }
       ],
       "allocations": {
         "Crit": 7000
-      }
-    },
-    "268266": {
-      "category": "ranked-item",
-      "sourceKind": "raid",
-      "sourceKey": "1",
-      "tierClass": null,
-      "name": "Alluring Bubbleband",
-      "slot": "Finger",
-      "type": null,
-      "secondaries": [
-        "Haste",
-        "Vers"
-      ],
-      "dataRatings": {
-        "Haste": 316,
-        "Vers": 89
-      },
-      "tertiaries": [],
-      "tertiaryRatings": {},
-      "sockets": [],
-      "dataIlvl": 334,
-      "dataTrack": "Myth 6/6",
-      "effect": null,
-      "effectKind": null,
-      "effects": [],
-      "allocations": {
-        "Haste": 5460,
-        "Vers": 1540
       }
     },
     "270168": {
@@ -6488,19 +6372,19 @@
         "Mast"
       ],
       "dataRatings": {
-        "Mast": 143
+        "Mast": 149
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 334,
-      "dataTrack": "Myth 6/6",
-      "effect": "Channel a torrent of venomous rage over 2 sec, dealing 819839 Nature damage to your target and splattering all nearby enemies for 144279 Nature damage. Damage reduced beyond 8 targets. (4 Min Cooldown)",
+      "dataIlvl": 344,
+      "dataTrack": null,
+      "effect": "Channel a torrent of venomous rage over 2 sec, dealing 906988 Nature damage to your target and splattering all nearby enemies for 159616 Nature damage. Damage reduced beyond 8 targets. (4 Min Cooldown)",
       "effectKind": "Use",
       "effects": [
         {
           "kind": "Use",
-          "text": "Channel a torrent of venomous rage over 2 sec, dealing 819839 Nature damage to your target and splattering all nearby enemies for 144279 Nature damage. Damage reduced beyond 8 targets. (4 Min Cooldown)"
+          "text": "Channel a torrent of venomous rage over 2 sec, dealing 906988 Nature damage to your target and splattering all nearby enemies for 159616 Nature damage. Damage reduced beyond 8 targets. (4 Min Cooldown)"
         }
       ],
       "allocations": {
@@ -6519,23 +6403,23 @@
         "Haste"
       ],
       "dataRatings": {
-        "Haste": 143
+        "Haste": 149
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 334,
-      "dataTrack": "Myth 6/6",
-      "effect": "Your spells afflict you with Hex Lord's Doom, draining your Intellect by 4 up to 30 times. This effect may occur once every 6 sec. (6s cooldown)",
+      "dataIlvl": 344,
+      "dataTrack": null,
+      "effect": "Your spells afflict you with Hex Lord's Doom, draining your Intellect by 5 up to 30 times. This effect may occur once every 6 sec. (6s cooldown)",
       "effectKind": "Equip",
       "effects": [
         {
           "kind": "Equip",
-          "text": "Your spells afflict you with Hex Lord's Doom, draining your Intellect by 4 up to 30 times. This effect may occur once every 6 sec. (6s cooldown)"
+          "text": "Your spells afflict you with Hex Lord's Doom, draining your Intellect by 5 up to 30 times. This effect may occur once every 6 sec. (6s cooldown)"
         },
         {
           "kind": "Use",
-          "text": "Consume the power of Hex Lord's Doom, increasing your Intellect by 31 per stack for 30 sec. (30 Sec Cooldown)"
+          "text": "Consume the power of Hex Lord's Doom, increasing your Intellect by 34 per stack for 30 sec. (30 Sec Cooldown)"
         }
       ],
       "allocations": {
@@ -6616,19 +6500,19 @@
         "Crit"
       ],
       "dataRatings": {
-        "Crit": 143
+        "Crit": 149
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 334,
-      "dataTrack": "Myth 6/6",
-      "effect": "Bite the heart and embrace the ravening hunger, gaining 437 Strength or Agility for 20 sec. While the hunger persists, gain a very high chance to devour a morsel of your target with every attack, dealing 13921 Physical damage and further increasing your Strength or Agility by 49. (1 Min, 30 Sec Cooldown)",
+      "dataIlvl": 344,
+      "dataTrack": null,
+      "effect": "Bite the heart and embrace the ravening hunger, gaining 480 Strength or Agility for 20 sec. While the hunger persists, gain a very high chance to devour a morsel of your target with every attack, dealing 15990 Physical damage and further increasing your Strength or Agility by 54. (1 Min, 30 Sec Cooldown)",
       "effectKind": "Use",
       "effects": [
         {
           "kind": "Use",
-          "text": "Bite the heart and embrace the ravening hunger, gaining 437 Strength or Agility for 20 sec. While the hunger persists, gain a very high chance to devour a morsel of your target with every attack, dealing 13921 Physical damage and further increasing your Strength or Agility by 49. (1 Min, 30 Sec Cooldown)"
+          "text": "Bite the heart and embrace the ravening hunger, gaining 480 Strength or Agility for 20 sec. While the hunger persists, gain a very high chance to devour a morsel of your target with every attack, dealing 15990 Physical damage and further increasing your Strength or Agility by 54. (1 Min, 30 Sec Cooldown)"
         }
       ],
       "allocations": {
@@ -6676,19 +6560,19 @@
         "Haste"
       ],
       "dataRatings": {
-        "Haste": 100
+        "Haste": 104
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 334,
-      "dataTrack": "Myth 6/6",
-      "effect": "Your spells have a chance to drain a nearby enemy's will, reducing their cast speed by 10% and increasing your Haste by 133 for 12 sec.",
+      "dataIlvl": 344,
+      "dataTrack": null,
+      "effect": "Your spells have a chance to drain a nearby enemy's will, reducing their cast speed by 10% and increasing your Haste by 138 for 12 sec.",
       "effectKind": "Equip",
       "effects": [
         {
           "kind": "Equip",
-          "text": "Your spells have a chance to drain a nearby enemy's will, reducing their cast speed by 10% and increasing your Haste by 133 for 12 sec."
+          "text": "Your spells have a chance to drain a nearby enemy's will, reducing their cast speed by 10% and increasing your Haste by 138 for 12 sec."
         }
       ],
       "allocations": {
@@ -6707,19 +6591,19 @@
         "Crit"
       ],
       "dataRatings": {
-        "Crit": 100
+        "Crit": 104
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 334,
-      "dataTrack": "Myth 6/6",
-      "effect": "Your attacks have a chance to inflict Breath of Corruption, dealing 14501 Nature damage and rending a Necrotic Tear that persists until death and increases the damage of this effect by 5%, up to 10 times.",
+      "dataIlvl": 344,
+      "dataTrack": null,
+      "effect": "Your attacks have a chance to inflict Breath of Corruption, dealing 16655 Nature damage and rending a Necrotic Tear that persists until death and increases the damage of this effect by 5%, up to 10 times.",
       "effectKind": "Equip",
       "effects": [
         {
           "kind": "Equip",
-          "text": "Your attacks have a chance to inflict Breath of Corruption, dealing 14501 Nature damage and rending a Necrotic Tear that persists until death and increases the damage of this effect by 5%, up to 10 times."
+          "text": "Your attacks have a chance to inflict Breath of Corruption, dealing 16655 Nature damage and rending a Necrotic Tear that persists until death and increases the damage of this effect by 5%, up to 10 times."
         }
       ],
       "allocations": {
@@ -8611,6 +8495,64 @@
         "Haste": 2462
       }
     },
+    "271680": {
+      "category": "ranked-item",
+      "sourceKind": "mplus",
+      "sourceKey": "Murder Row",
+      "tierClass": null,
+      "name": "Sinseared Repeater",
+      "slot": "Ranged",
+      "type": "Gun",
+      "secondaries": [
+        "Crit",
+        "Vers"
+      ],
+      "dataRatings": {
+        "Crit": 131,
+        "Vers": 70
+      },
+      "tertiaries": [],
+      "tertiaryRatings": {},
+      "sockets": [],
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
+      "effect": null,
+      "effectKind": null,
+      "effects": [],
+      "allocations": {
+        "Crit": 4550,
+        "Vers": 2450
+      }
+    },
+    "271681": {
+      "category": "ranked-item",
+      "sourceKind": "mplus",
+      "sourceKey": "Den of Nalorakk",
+      "tierClass": null,
+      "name": "Perennial Frostbound Charm",
+      "slot": "Held In Off-hand",
+      "type": null,
+      "secondaries": [
+        "Crit",
+        "Mast"
+      ],
+      "dataRatings": {
+        "Crit": 42,
+        "Mast": 59
+      },
+      "tertiaries": [],
+      "tertiaryRatings": {},
+      "sockets": [],
+      "dataIlvl": 334,
+      "dataTrack": "Myth 6/6",
+      "effect": null,
+      "effectKind": null,
+      "effects": [],
+      "allocations": {
+        "Crit": 2900,
+        "Mast": 4100
+      }
+    },
     "271874": {
       "category": "base",
       "sourceKind": "raid",
@@ -8623,19 +8565,19 @@
         "Mast"
       ],
       "dataRatings": {
-        "Mast": 201
+        "Mast": 209
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 334,
-      "dataTrack": "Myth 6/6",
-      "effect": "Your spells and abilities have a chance to increase your Mastery by 363, but reduce your other secondary stats by 60 for 12 sec.",
+      "dataIlvl": 344,
+      "dataTrack": null,
+      "effect": "Your spells and abilities have a chance to increase your Mastery by 378, but reduce your other secondary stats by 63 for 12 sec.",
       "effectKind": "Equip",
       "effects": [
         {
           "kind": "Equip",
-          "text": "Your spells and abilities have a chance to increase your Mastery by 363, but reduce your other secondary stats by 60 for 12 sec."
+          "text": "Your spells and abilities have a chance to increase your Mastery by 378, but reduce your other secondary stats by 63 for 12 sec."
         }
       ],
       "allocations": {
@@ -8654,19 +8596,19 @@
         "Haste"
       ],
       "dataRatings": {
-        "Haste": 201
+        "Haste": 209
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 334,
-      "dataTrack": "Myth 6/6",
-      "effect": "Your spells and abilities have a chance to increase your Haste by 363, but reduce your other secondary stats by 60 for 12 sec.",
+      "dataIlvl": 344,
+      "dataTrack": null,
+      "effect": "Your spells and abilities have a chance to increase your Haste by 378, but reduce your other secondary stats by 63 for 12 sec.",
       "effectKind": "Equip",
       "effects": [
         {
           "kind": "Equip",
-          "text": "Your spells and abilities have a chance to increase your Haste by 363, but reduce your other secondary stats by 60 for 12 sec."
+          "text": "Your spells and abilities have a chance to increase your Haste by 378, but reduce your other secondary stats by 63 for 12 sec."
         }
       ],
       "allocations": {
@@ -8685,19 +8627,19 @@
         "Crit"
       ],
       "dataRatings": {
-        "Crit": 201
+        "Crit": 209
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 334,
-      "dataTrack": "Myth 6/6",
-      "effect": "Your spells and abilities have a chance to increase your Critical Strike by 363, but reduce your other secondary stats by 60 for 12 sec.",
+      "dataIlvl": 344,
+      "dataTrack": null,
+      "effect": "Your spells and abilities have a chance to increase your Critical Strike by 378, but reduce your other secondary stats by 63 for 12 sec.",
       "effectKind": "Equip",
       "effects": [
         {
           "kind": "Equip",
-          "text": "Your spells and abilities have a chance to increase your Critical Strike by 363, but reduce your other secondary stats by 60 for 12 sec."
+          "text": "Your spells and abilities have a chance to increase your Critical Strike by 378, but reduce your other secondary stats by 63 for 12 sec."
         }
       ],
       "allocations": {
@@ -8716,19 +8658,19 @@
         "Mast"
       ],
       "dataRatings": {
-        "Mast": 201
+        "Mast": 209
       },
       "tertiaries": [],
       "tertiaryRatings": {},
       "sockets": [],
-      "dataIlvl": 334,
-      "dataTrack": "Myth 6/6",
-      "effect": "Your spells and abilities have a chance to increase your Mastery by 363, but reduce your other secondary stats by 60 for 12 sec.",
+      "dataIlvl": 344,
+      "dataTrack": null,
+      "effect": "Your spells and abilities have a chance to increase your Mastery by 378, but reduce your other secondary stats by 63 for 12 sec.",
       "effectKind": "Equip",
       "effects": [
         {
           "kind": "Equip",
-          "text": "Your spells and abilities have a chance to increase your Mastery by 363, but reduce your other secondary stats by 60 for 12 sec."
+          "text": "Your spells and abilities have a chance to increase your Mastery by 378, but reduce your other secondary stats by 63 for 12 sec."
         }
       ],
       "allocations": {
@@ -8802,11 +8744,11 @@
       "slot": "Wrist",
       "type": "Mail",
       "secondaries": [
-        "Crit",
+        "Vers",
         "Mast"
       ],
       "dataRatings": {
-        "Crit": 52,
+        "Vers": 52,
         "Mast": 61
       },
       "tertiaries": [],
@@ -8818,7 +8760,7 @@
       "effectKind": null,
       "effects": [],
       "allocations": {
-        "Crit": 3200,
+        "Vers": 3200,
         "Mast": 3800
       }
     },

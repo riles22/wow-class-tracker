@@ -21,7 +21,7 @@
       "asOf": "2026-08-02",
       "sourceUrl": "https://worldofwarcraft.blizzard.com/en-us/news/24244888"
     },
-    "ptr-12.1.0": {
+    "12.1-live": {
       "patch": "12.1.0",
       "channel": "ptr",
       "asOf": "2026-08-02",
@@ -64,8 +64,8 @@
     "Demon Hunter": ["Warglaive", "Warglaives", "Fist Weapon", "Axe", "Sword", "Dagger"],
     "Evoker":       ["Dagger", "Fist Weapon", "Axe", "Mace", "Sword", "Staff", "Held In Off-hand"]
   },
-  "_byClassPatchNote": "Deprecated compatibility union only. Demon Hunter Dagger is a 12.1 PTR proficiency and must not be applied class-wide for spec eligibility; use specLoadouts. Monk Held In Off-hand is included for Mistweaver.",
-  "_dhDagger": "Daggers are new to Demon Hunter on the 12.1 PTR for Devourer's Intellect weapons. Havoc and Vengeance core attacks explicitly require warglaives, axes, swords, or fist weapons, so their loadouts never include daggers.",
+  "_byClassPatchNote": "Deprecated compatibility union only. Demon Hunter Dagger is a 12.1 proficiency and must not be applied class-wide for spec eligibility; use specLoadouts. Monk Held In Off-hand is included for Mistweaver.",
+  "_dhDagger": "Daggers are new to Demon Hunter in 12.1 for Devourer's Intellect weapons. Havoc and Vengeance core attacks explicitly require warglaives, axes, swords, or fist weapons, so their loadouts never include daggers.",
 
   "shieldSpecs": [
     "Protection Warrior", "Protection Paladin", "Holy Paladin",
@@ -106,7 +106,7 @@
   "specLoadouts": {
     "Arms Warrior": {
       "primaryStat": "Strength",
-      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "patchContexts": ["live-12.0.7", "12.1-live"],
       "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/warrior"],
       "loadouts": [
         {
@@ -120,7 +120,7 @@
     },
     "Fury Warrior": {
       "primaryStat": "Strength",
-      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "patchContexts": ["live-12.0.7", "12.1-live"],
       "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/warrior"],
       "loadouts": [
         {
@@ -134,7 +134,7 @@
     },
     "Protection Warrior": {
       "primaryStat": "Strength",
-      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "patchContexts": ["live-12.0.7", "12.1-live"],
       "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/warrior"],
       "loadouts": [
         {
@@ -149,7 +149,7 @@
 
     "Holy Paladin": {
       "primaryStat": "Intellect",
-      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "patchContexts": ["live-12.0.7", "12.1-live"],
       "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/paladin"],
       "loadouts": [
         {
@@ -163,7 +163,7 @@
     },
     "Protection Paladin": {
       "primaryStat": "Strength",
-      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "patchContexts": ["live-12.0.7", "12.1-live"],
       "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/paladin"],
       "loadouts": [
         {
@@ -177,7 +177,7 @@
     },
     "Retribution Paladin": {
       "primaryStat": "Strength",
-      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "patchContexts": ["live-12.0.7", "12.1-live"],
       "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/paladin"],
       "loadouts": [
         {
@@ -192,7 +192,7 @@
 
     "Beast Mastery Hunter": {
       "primaryStat": "Agility",
-      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "patchContexts": ["live-12.0.7", "12.1-live"],
       "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/hunter"],
       "loadouts": [
         {
@@ -206,7 +206,7 @@
     },
     "Marksmanship Hunter": {
       "primaryStat": "Agility",
-      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "patchContexts": ["live-12.0.7", "12.1-live"],
       "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/hunter"],
       "loadouts": [
         {
@@ -220,7 +220,7 @@
     },
     "Survival Hunter": {
       "primaryStat": "Agility",
-      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "patchContexts": ["live-12.0.7", "12.1-live"],
       "sourceUrls": [
         "https://worldofwarcraft.blizzard.com/en-us/game/classes/hunter",
         "https://worldofwarcraft.blizzard.com/en-us/news/24244455/midnight-pre-expansion-content-update-notes"
@@ -246,7 +246,7 @@
 
     "Assassination Rogue": {
       "primaryStat": "Agility",
-      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "patchContexts": ["live-12.0.7", "12.1-live"],
       "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/rogue"],
       "notes": "Both hands require daggers.",
       "loadouts": [
@@ -261,7 +261,7 @@
     },
     "Outlaw Rogue": {
       "primaryStat": "Agility",
-      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "patchContexts": ["live-12.0.7", "12.1-live"],
       "sourceUrls": [
         "https://worldofwarcraft.blizzard.com/en-us/game/classes/rogue",
         "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811"
@@ -279,7 +279,7 @@
     },
     "Subtlety Rogue": {
       "primaryStat": "Agility",
-      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "patchContexts": ["live-12.0.7", "12.1-live"],
       "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/rogue"],
       "notes": "The main hand requires a dagger; the off hand may be any Rogue one-handed weapon.",
       "loadouts": [
@@ -295,7 +295,7 @@
 
     "Discipline Priest": {
       "primaryStat": "Intellect",
-      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "patchContexts": ["live-12.0.7", "12.1-live"],
       "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/priest"],
       "loadouts": [
         {
@@ -316,7 +316,7 @@
     },
     "Holy Priest": {
       "primaryStat": "Intellect",
-      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "patchContexts": ["live-12.0.7", "12.1-live"],
       "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/priest"],
       "loadouts": [
         {
@@ -337,7 +337,7 @@
     },
     "Shadow Priest": {
       "primaryStat": "Intellect",
-      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "patchContexts": ["live-12.0.7", "12.1-live"],
       "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/priest"],
       "loadouts": [
         {
@@ -359,7 +359,7 @@
 
     "Blood Death Knight": {
       "primaryStat": "Strength",
-      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "patchContexts": ["live-12.0.7", "12.1-live"],
       "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/death-knight"],
       "loadouts": [
         {
@@ -373,7 +373,7 @@
     },
     "Frost Death Knight": {
       "primaryStat": "Strength",
-      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "patchContexts": ["live-12.0.7", "12.1-live"],
       "sourceUrls": [
         "https://worldofwarcraft.blizzard.com/en-us/game/classes/death-knight",
         "https://worldofwarcraft.blizzard.com/en-us/news/24244455/midnight-pre-expansion-content-update-notes"
@@ -398,7 +398,7 @@
     },
     "Unholy Death Knight": {
       "primaryStat": "Strength",
-      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "patchContexts": ["live-12.0.7", "12.1-live"],
       "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/death-knight"],
       "loadouts": [
         {
@@ -413,7 +413,7 @@
 
     "Elemental Shaman": {
       "primaryStat": "Intellect",
-      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "patchContexts": ["live-12.0.7", "12.1-live"],
       "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/shaman"],
       "loadouts": [
         {
@@ -434,7 +434,7 @@
     },
     "Enhancement Shaman": {
       "primaryStat": "Agility",
-      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "patchContexts": ["live-12.0.7", "12.1-live"],
       "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/shaman"],
       "notes": "Enhancement requires dual one-handed axes, maces, or fist weapons. Daggers are intentionally excluded because core attacks cannot use them.",
       "loadouts": [
@@ -449,7 +449,7 @@
     },
     "Restoration Shaman": {
       "primaryStat": "Intellect",
-      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "patchContexts": ["live-12.0.7", "12.1-live"],
       "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/shaman"],
       "loadouts": [
         {
@@ -471,7 +471,7 @@
 
     "Arcane Mage": {
       "primaryStat": "Intellect",
-      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "patchContexts": ["live-12.0.7", "12.1-live"],
       "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/mage"],
       "loadouts": [
         {
@@ -492,7 +492,7 @@
     },
     "Fire Mage": {
       "primaryStat": "Intellect",
-      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "patchContexts": ["live-12.0.7", "12.1-live"],
       "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/mage"],
       "loadouts": [
         {
@@ -513,7 +513,7 @@
     },
     "Frost Mage": {
       "primaryStat": "Intellect",
-      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "patchContexts": ["live-12.0.7", "12.1-live"],
       "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/mage"],
       "loadouts": [
         {
@@ -535,7 +535,7 @@
 
     "Affliction Warlock": {
       "primaryStat": "Intellect",
-      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "patchContexts": ["live-12.0.7", "12.1-live"],
       "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/warlock"],
       "loadouts": [
         {
@@ -556,7 +556,7 @@
     },
     "Demonology Warlock": {
       "primaryStat": "Intellect",
-      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "patchContexts": ["live-12.0.7", "12.1-live"],
       "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/warlock"],
       "loadouts": [
         {
@@ -577,7 +577,7 @@
     },
     "Destruction Warlock": {
       "primaryStat": "Intellect",
-      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "patchContexts": ["live-12.0.7", "12.1-live"],
       "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/warlock"],
       "loadouts": [
         {
@@ -599,7 +599,7 @@
 
     "Brewmaster Monk": {
       "primaryStat": "Agility",
-      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "patchContexts": ["live-12.0.7", "12.1-live"],
       "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/monk"],
       "notes": "One-handed configurations are dual wield; two-handed configurations are restricted to staves and polearms.",
       "loadouts": [
@@ -621,7 +621,7 @@
     },
     "Mistweaver Monk": {
       "primaryStat": "Intellect",
-      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "patchContexts": ["live-12.0.7", "12.1-live"],
       "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/monk"],
       "notes": "Mistweaver pairs a one-handed weapon with a held-in-off-hand item; it does not dual wield weapons.",
       "loadouts": [
@@ -643,7 +643,7 @@
     },
     "Windwalker Monk": {
       "primaryStat": "Agility",
-      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "patchContexts": ["live-12.0.7", "12.1-live"],
       "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/monk"],
       "notes": "One-handed configurations are dual wield; two-handed configurations are restricted to staves and polearms.",
       "loadouts": [
@@ -666,7 +666,7 @@
 
     "Balance Druid": {
       "primaryStat": "Intellect",
-      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "patchContexts": ["live-12.0.7", "12.1-live"],
       "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/druid"],
       "loadouts": [
         {
@@ -687,7 +687,7 @@
     },
     "Feral Druid": {
       "primaryStat": "Agility",
-      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "patchContexts": ["live-12.0.7", "12.1-live"],
       "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/druid"],
       "loadouts": [
         {
@@ -701,7 +701,7 @@
     },
     "Guardian Druid": {
       "primaryStat": "Agility",
-      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "patchContexts": ["live-12.0.7", "12.1-live"],
       "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/druid"],
       "loadouts": [
         {
@@ -715,7 +715,7 @@
     },
     "Restoration Druid": {
       "primaryStat": "Intellect",
-      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "patchContexts": ["live-12.0.7", "12.1-live"],
       "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/druid"],
       "loadouts": [
         {
@@ -737,12 +737,12 @@
 
     "Havoc Demon Hunter": {
       "primaryStat": "Agility",
-      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "patchContexts": ["live-12.0.7", "12.1-live"],
       "sourceUrls": [
         "https://worldofwarcraft.blizzard.com/en-us/game/classes/demon-hunter",
         "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811"
       ],
-      "notes": "Daggers are excluded in both contexts. On the 12.1 PTR, Demon Blades, Blade Dance, and Chaos Strike explicitly require warglaives, axes, swords, or fist weapons.",
+      "notes": "Daggers are excluded in both contexts. In 12.1, Demon Blades, Blade Dance, and Chaos Strike explicitly require warglaives, axes, swords, or fist weapons.",
       "loadouts": [
         {
           "id": "dual-one-hand",
@@ -755,12 +755,12 @@
     },
     "Vengeance Demon Hunter": {
       "primaryStat": "Agility",
-      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "patchContexts": ["live-12.0.7", "12.1-live"],
       "sourceUrls": [
         "https://worldofwarcraft.blizzard.com/en-us/game/classes/demon-hunter",
         "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811"
       ],
-      "notes": "Daggers are excluded in both contexts. On the 12.1 PTR, Fracture and Soul Cleave explicitly require warglaives, axes, swords, or fist weapons.",
+      "notes": "Daggers are excluded in both contexts. In 12.1, Fracture and Soul Cleave explicitly require warglaives, axes, swords, or fist weapons.",
       "loadouts": [
         {
           "id": "dual-one-hand",
@@ -773,12 +773,12 @@
     },
     "Devourer Demon Hunter": {
       "primaryStat": "Intellect",
-      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "patchContexts": ["live-12.0.7", "12.1-live"],
       "sourceUrls": [
         "https://worldofwarcraft.blizzard.com/en-us/game/classes/demon-hunter",
         "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811"
       ],
-      "notes": "Dagger eligibility is Devourer-only and begins on the 12.1 PTR; the live 12.0.7 loadout intentionally excludes daggers.",
+      "notes": "Dagger eligibility is Devourer-only and went live with 12.1; the earlier 12.0.7 loadout intentionally excluded daggers.",
       "loadouts": [
         {
           "id": "dual-one-hand-live",
@@ -789,8 +789,8 @@
           }
         },
         {
-          "id": "dual-one-hand-ptr-12.1",
-          "patchContexts": ["ptr-12.1.0"],
+          "id": "dual-one-hand-12.1",
+          "patchContexts": ["12.1-live"],
           "hands": {
             "mainHand": {"required": true, "inventorySlots": ["One-Hand", "Main Hand"], "itemTypes": ["Warglaive", "Fist Weapon", "Axe", "Sword", "Dagger"]},
             "offHand": {"required": true, "inventorySlots": ["One-Hand", "Off Hand"], "itemTypes": ["Warglaive", "Fist Weapon", "Axe", "Sword", "Dagger"]}
@@ -801,7 +801,7 @@
 
     "Augmentation Evoker": {
       "primaryStat": "Intellect",
-      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "patchContexts": ["live-12.0.7", "12.1-live"],
       "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/evoker"],
       "loadouts": [
         {
@@ -822,7 +822,7 @@
     },
     "Devastation Evoker": {
       "primaryStat": "Intellect",
-      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "patchContexts": ["live-12.0.7", "12.1-live"],
       "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/evoker"],
       "loadouts": [
         {
@@ -843,7 +843,7 @@
     },
     "Preservation Evoker": {
       "primaryStat": "Intellect",
-      "patchContexts": ["live-12.0.7", "ptr-12.1.0"],
+      "patchContexts": ["live-12.0.7", "12.1-live"],
       "sourceUrls": ["https://worldofwarcraft.blizzard.com/en-us/game/classes/evoker"],
       "loadouts": [
         {

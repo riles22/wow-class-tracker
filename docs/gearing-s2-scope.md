@@ -210,6 +210,22 @@ fingerprints, drop the `domain=ptr` / `wowhead.com/ptr/` handling to live, repla
 `caveat`, and update the hardcoded "season max 344 · season opens Aug 18, 2026" subhead. Soft
 window opens 08-18/19; the raid opens the week of Aug 18 per Blizzard.
 
+**Phase E addendum — executed 2026-08-18, and the Nymrissa question settled.** The live
+re-harvest resolved the open classification from the recon: **Nymrissa Wavecaller is a WORLD
+boss.** Her three drops (268262/268263/268266) left Nek'zali's live guide table with no raid
+destination, she has no live boss page, and Icy Veins files her under world bosses — so the
+`world` pattern in `normalizeDropSource` keeps her (with a final-evidence comment), and her
+items are simply out of the raid catalog (101 items, was 104). The PTR duplicate 268231
+resolved the OTHER way from the PTR-era override: live Wowhead lists it only under The Coiled
+Altar (boss 7), so `ITEM_OWNER_OVERRIDES` is empty again. All 65 tier item ids changed
+PTR->live. Dungeon launch adjustments: Murder Row swapped 251134->271680, Den of Nalorakk
+gained 271681 (205 items, was 204). The Phase-D droppedBy fill was promoted INTO
+`harvest-dungeons.mjs` (`dungeonBossDropsFrom` in lib-wowhead reads the Boss Drop column of
+the same overview tables the loot ids come from), because the data-side fill was clobbered by
+the first re-harvest exactly as a data-side fill always will be; coverage is 205/205 and
+backfilled names still face the encounter-roster gate. Catalyst counts re-pinned
+159->157 ranked / 318->316 unique (the Nymrissa delta).
+
 ---
 
 ## Honesty rules for this lane

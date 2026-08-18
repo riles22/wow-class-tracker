@@ -1,7 +1,7 @@
 {
   "source": "WoW Class Tracker data/specs.json (class, spec, role, tier set) + Icy Veins stat-priority pages",
   "harvestedAt": "2026-08-02",
-  "caveat": "Icy Veins publishes LIVE-patch stat priorities. Season 2 (12.1) priorities are not published yet; treat ordering as a proxy.",
+  "caveat": "Stat priorities on this page come from the Season 2 guide harvest (Icy Veins / Wowhead / Method). The statPriority field here is the legacy Icy Veins 12.0.7 fallback, used only when the guide layer lacks a build.",
   "weaponProficiencyProvenance": "Compiled from Blizzard's official class pages and official Midnight patch notes. Class pages establish class-wide proficiencies and preferred weapons; specLoadouts adds the hand, core-ability, and patch restrictions needed for item eligibility. See officialSources and each spec's sourceUrls.",
   "armorByClass": {
     "Priest": "Cloth",
@@ -53,7 +53,7 @@
           }
         }
       ],
-      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutPatchContext": "12.1-live",
       "weaponLoadoutSources": [
         "https://worldofwarcraft.blizzard.com/en-us/game/classes/death-knight"
       ],
@@ -165,7 +165,7 @@
           }
         }
       ],
-      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutPatchContext": "12.1-live",
       "weaponLoadoutSources": [
         "https://worldofwarcraft.blizzard.com/en-us/game/classes/death-knight",
         "https://worldofwarcraft.blizzard.com/en-us/news/24244455/midnight-pre-expansion-content-update-notes"
@@ -226,7 +226,7 @@
           }
         }
       ],
-      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutPatchContext": "12.1-live",
       "weaponLoadoutSources": [
         "https://worldofwarcraft.blizzard.com/en-us/game/classes/death-knight"
       ],
@@ -296,12 +296,12 @@
           }
         }
       ],
-      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutPatchContext": "12.1-live",
       "weaponLoadoutSources": [
         "https://worldofwarcraft.blizzard.com/en-us/game/classes/demon-hunter",
         "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811"
       ],
-      "weaponLoadoutNote": "Daggers are excluded in both contexts. On the 12.1 PTR, Demon Blades, Blade Dance, and Chaos Strike explicitly require warglaives, axes, swords, or fist weapons.",
+      "weaponLoadoutNote": "Daggers are excluded in both contexts. In 12.1, Demon Blades, Blade Dance, and Chaos Strike explicitly require warglaives, axes, swords, or fist weapons.",
       "weaponPrimaryStatExceptions": {
         "itemTypes": [],
         "inventorySlots": [
@@ -336,9 +336,9 @@
       "armor": "Leather",
       "weaponLoadouts": [
         {
-          "id": "dual-one-hand-ptr-12.1",
+          "id": "dual-one-hand-12.1",
           "patchContexts": [
-            "ptr-12.1.0"
+            "12.1-live"
           ],
           "hands": {
             "mainHand": {
@@ -372,12 +372,12 @@
           }
         }
       ],
-      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutPatchContext": "12.1-live",
       "weaponLoadoutSources": [
         "https://worldofwarcraft.blizzard.com/en-us/game/classes/demon-hunter",
         "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811"
       ],
-      "weaponLoadoutNote": "Dagger eligibility is Devourer-only and begins on the 12.1 PTR; the live 12.0.7 loadout intentionally excludes daggers.",
+      "weaponLoadoutNote": "Dagger eligibility is Devourer-only and went live with 12.1; the earlier 12.0.7 loadout intentionally excluded daggers.",
       "weaponPrimaryStatExceptions": {
         "itemTypes": [],
         "inventorySlots": [
@@ -477,12 +477,12 @@
           }
         }
       ],
-      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutPatchContext": "12.1-live",
       "weaponLoadoutSources": [
         "https://worldofwarcraft.blizzard.com/en-us/game/classes/demon-hunter",
         "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811"
       ],
-      "weaponLoadoutNote": "Daggers are excluded in both contexts. On the 12.1 PTR, Fracture and Soul Cleave explicitly require warglaives, axes, swords, or fist weapons.",
+      "weaponLoadoutNote": "Daggers are excluded in both contexts. In 12.1, Fracture and Soul Cleave explicitly require warglaives, axes, swords, or fist weapons.",
       "weaponPrimaryStatExceptions": {
         "itemTypes": [],
         "inventorySlots": [
@@ -563,7 +563,7 @@
           }
         }
       ],
-      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutPatchContext": "12.1-live",
       "weaponLoadoutSources": [
         "https://worldofwarcraft.blizzard.com/en-us/game/classes/druid"
       ],
@@ -622,7 +622,7 @@
           }
         }
       ],
-      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutPatchContext": "12.1-live",
       "weaponLoadoutSources": [
         "https://worldofwarcraft.blizzard.com/en-us/game/classes/druid"
       ],
@@ -681,7 +681,7 @@
           }
         }
       ],
-      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutPatchContext": "12.1-live",
       "weaponLoadoutSources": [
         "https://worldofwarcraft.blizzard.com/en-us/game/classes/druid"
       ],
@@ -789,7 +789,7 @@
           }
         }
       ],
-      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutPatchContext": "12.1-live",
       "weaponLoadoutSources": [
         "https://worldofwarcraft.blizzard.com/en-us/game/classes/druid"
       ],
@@ -908,7 +908,7 @@
           }
         }
       ],
-      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutPatchContext": "12.1-live",
       "weaponLoadoutSources": [
         "https://worldofwarcraft.blizzard.com/en-us/game/classes/evoker"
       ],
@@ -993,7 +993,7 @@
           }
         }
       ],
-      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutPatchContext": "12.1-live",
       "weaponLoadoutSources": [
         "https://worldofwarcraft.blizzard.com/en-us/game/classes/evoker"
       ],
@@ -1078,7 +1078,7 @@
           }
         }
       ],
-      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutPatchContext": "12.1-live",
       "weaponLoadoutSources": [
         "https://worldofwarcraft.blizzard.com/en-us/game/classes/evoker"
       ],
@@ -1137,7 +1137,7 @@
           }
         }
       ],
-      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutPatchContext": "12.1-live",
       "weaponLoadoutSources": [
         "https://worldofwarcraft.blizzard.com/en-us/game/classes/hunter"
       ],
@@ -1196,7 +1196,7 @@
           }
         }
       ],
-      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutPatchContext": "12.1-live",
       "weaponLoadoutSources": [
         "https://worldofwarcraft.blizzard.com/en-us/game/classes/hunter"
       ],
@@ -1285,7 +1285,7 @@
           }
         }
       ],
-      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutPatchContext": "12.1-live",
       "weaponLoadoutSources": [
         "https://worldofwarcraft.blizzard.com/en-us/game/classes/hunter",
         "https://worldofwarcraft.blizzard.com/en-us/news/24244455/midnight-pre-expansion-content-update-notes"
@@ -1370,7 +1370,7 @@
           }
         }
       ],
-      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutPatchContext": "12.1-live",
       "weaponLoadoutSources": [
         "https://worldofwarcraft.blizzard.com/en-us/game/classes/mage"
       ],
@@ -1454,7 +1454,7 @@
           }
         }
       ],
-      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutPatchContext": "12.1-live",
       "weaponLoadoutSources": [
         "https://worldofwarcraft.blizzard.com/en-us/game/classes/mage"
       ],
@@ -1538,7 +1538,7 @@
           }
         }
       ],
-      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutPatchContext": "12.1-live",
       "weaponLoadoutSources": [
         "https://worldofwarcraft.blizzard.com/en-us/game/classes/mage"
       ],
@@ -1627,7 +1627,7 @@
           }
         }
       ],
-      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutPatchContext": "12.1-live",
       "weaponLoadoutSources": [
         "https://worldofwarcraft.blizzard.com/en-us/game/classes/monk"
       ],
@@ -1735,7 +1735,7 @@
           }
         }
       ],
-      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutPatchContext": "12.1-live",
       "weaponLoadoutSources": [
         "https://worldofwarcraft.blizzard.com/en-us/game/classes/monk"
       ],
@@ -1824,7 +1824,7 @@
           }
         }
       ],
-      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutPatchContext": "12.1-live",
       "weaponLoadoutSources": [
         "https://worldofwarcraft.blizzard.com/en-us/game/classes/monk"
       ],
@@ -1889,7 +1889,7 @@
           }
         }
       ],
-      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutPatchContext": "12.1-live",
       "weaponLoadoutSources": [
         "https://worldofwarcraft.blizzard.com/en-us/game/classes/paladin"
       ],
@@ -1988,7 +1988,7 @@
           }
         }
       ],
-      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutPatchContext": "12.1-live",
       "weaponLoadoutSources": [
         "https://worldofwarcraft.blizzard.com/en-us/game/classes/paladin"
       ],
@@ -2071,7 +2071,7 @@
           }
         }
       ],
-      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutPatchContext": "12.1-live",
       "weaponLoadoutSources": [
         "https://worldofwarcraft.blizzard.com/en-us/game/classes/paladin"
       ],
@@ -2155,7 +2155,7 @@
           }
         }
       ],
-      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutPatchContext": "12.1-live",
       "weaponLoadoutSources": [
         "https://worldofwarcraft.blizzard.com/en-us/game/classes/priest"
       ],
@@ -2262,7 +2262,7 @@
           }
         }
       ],
-      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutPatchContext": "12.1-live",
       "weaponLoadoutSources": [
         "https://worldofwarcraft.blizzard.com/en-us/game/classes/priest"
       ],
@@ -2369,7 +2369,7 @@
           }
         }
       ],
-      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutPatchContext": "12.1-live",
       "weaponLoadoutSources": [
         "https://worldofwarcraft.blizzard.com/en-us/game/classes/priest"
       ],
@@ -2456,7 +2456,7 @@
           }
         }
       ],
-      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutPatchContext": "12.1-live",
       "weaponLoadoutSources": [
         "https://worldofwarcraft.blizzard.com/en-us/game/classes/rogue"
       ],
@@ -2527,7 +2527,7 @@
           }
         }
       ],
-      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutPatchContext": "12.1-live",
       "weaponLoadoutSources": [
         "https://worldofwarcraft.blizzard.com/en-us/game/classes/rogue",
         "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811"
@@ -2596,7 +2596,7 @@
           }
         }
       ],
-      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutPatchContext": "12.1-live",
       "weaponLoadoutSources": [
         "https://worldofwarcraft.blizzard.com/en-us/game/classes/rogue"
       ],
@@ -2680,7 +2680,7 @@
           }
         }
       ],
-      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutPatchContext": "12.1-live",
       "weaponLoadoutSources": [
         "https://worldofwarcraft.blizzard.com/en-us/game/classes/shaman"
       ],
@@ -2748,7 +2748,7 @@
           }
         }
       ],
-      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutPatchContext": "12.1-live",
       "weaponLoadoutSources": [
         "https://worldofwarcraft.blizzard.com/en-us/game/classes/shaman"
       ],
@@ -2855,7 +2855,7 @@
           }
         }
       ],
-      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutPatchContext": "12.1-live",
       "weaponLoadoutSources": [
         "https://worldofwarcraft.blizzard.com/en-us/game/classes/shaman"
       ],
@@ -2939,7 +2939,7 @@
           }
         }
       ],
-      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutPatchContext": "12.1-live",
       "weaponLoadoutSources": [
         "https://worldofwarcraft.blizzard.com/en-us/game/classes/warlock"
       ],
@@ -3023,7 +3023,7 @@
           }
         }
       ],
-      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutPatchContext": "12.1-live",
       "weaponLoadoutSources": [
         "https://worldofwarcraft.blizzard.com/en-us/game/classes/warlock"
       ],
@@ -3107,7 +3107,7 @@
           }
         }
       ],
-      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutPatchContext": "12.1-live",
       "weaponLoadoutSources": [
         "https://worldofwarcraft.blizzard.com/en-us/game/classes/warlock"
       ],
@@ -3168,7 +3168,7 @@
           }
         }
       ],
-      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutPatchContext": "12.1-live",
       "weaponLoadoutSources": [
         "https://worldofwarcraft.blizzard.com/en-us/game/classes/warrior"
       ],
@@ -3234,7 +3234,7 @@
           }
         }
       ],
-      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutPatchContext": "12.1-live",
       "weaponLoadoutSources": [
         "https://worldofwarcraft.blizzard.com/en-us/game/classes/warrior"
       ],
@@ -3301,7 +3301,7 @@
           }
         }
       ],
-      "weaponLoadoutPatchContext": "ptr-12.1.0",
+      "weaponLoadoutPatchContext": "12.1-live",
       "weaponLoadoutSources": [
         "https://worldofwarcraft.blizzard.com/en-us/game/classes/warrior"
       ],

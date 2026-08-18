@@ -209,8 +209,10 @@ test("generated datasets satisfy all build invariants", async () => {
   const temple = dungeons.dungeons.find((dungeon) => dungeon.name === "Temple of Sethraliss");
   assert.ok(kingsRest.items.some((item) => item.id === "159645"));
   assert.equal(temple.items.some((item) => item.id === "159645"), false);
-  assert.ok(raid.bosses.find((boss) => boss.boss === 1).items.some((item) => item.id === "268231"));
-  assert.equal(raid.bosses.find((boss) => boss.boss === 7).items.some((item) => item.id === "268231"), false);
+  // 268231 flipped owners at launch: Wowhead's live guide resolved the PTR duplicate
+  // listing to The Coiled Altar (boss 7), retiring the Nek'zali override (2026-08-18).
+  assert.ok(raid.bosses.find((boss) => boss.boss === 7).items.some((item) => item.id === "268231"));
+  assert.equal(raid.bosses.find((boss) => boss.boss === 1).items.some((item) => item.id === "268231"), false);
   assert.equal(raid.counts.tokens, 21);
   assert.ok(raid.bosses.find((boss) => boss.boss === 8).items.some((item) => item.id === "270909"));
   const hexIdol = raid.bosses.flatMap((boss) => boss.items).find((item) => item.id === "270169");
@@ -227,12 +229,12 @@ test("generated datasets satisfy all build invariants", async () => {
   assert.equal(directTier.length, 65);
   assert.ok(directTier.every((item) => item.secondaries.length === 2));
   assert.deepEqual(data.catalystAllocations.counts,
-    { catalystBases: 94, otherRanked: 159, directTier: 65, items: 318 });
+    { catalystBases: 94, otherRanked: 157, directTier: 65, items: 316 });
   assert.equal(data.catalystAllocations.schemaVersion, 4);
   assert.deepEqual(data.catalyst.chargeSystem.catalystUnbound,
     { requirement: "first 4-piece class-set bonus", scope: "character", unlocksBonusDrops: true });
   assert.equal(data.catalyst.chargeSystem.serpentScion.bonusCharges, 1);
-  assert.equal(Object.keys(data.catalystAllocations.items).length, 318);
+  assert.equal(Object.keys(data.catalystAllocations.items).length, 316);
   assert.ok(Object.values(data.catalystAllocations.items).every((item) =>
     Object.values(item.allocations).reduce((sum, value) => sum + value, 0) === 7000));
 });

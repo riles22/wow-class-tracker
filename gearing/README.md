@@ -43,7 +43,7 @@ of them with `typeof x === 'undefined'` or that test fails with a bare Reference
 ## Pipeline
 
 ```
-node src/harvest-raid.mjs        # Venomous Abyss loot, per-item Wowhead PTR tooltips
+node src/harvest-raid.mjs        # Venomous Abyss loot, per-item Wowhead tooltips
 node src/harvest-dungeons.mjs    # M+ pool loot (8 dungeons); ilvl comes from key level
 node src/harvest-tier.mjs        # Tier 36 set items
 node src/harvest-specs.mjs       # spec capabilities + stat priorities (reads ../data/specs.json)

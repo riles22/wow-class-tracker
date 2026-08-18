@@ -2,11 +2,10 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "tracker",
-      "runtimeExecutable": "node",
-      "runtimeArgs": ["src/serve.mjs"],
-      "port": 8317,
-      "autoPort": true
+      "name": "tracker-preview",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "serve"],
+      "port": 8317
     }
   ]
 }
