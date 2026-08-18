@@ -111,6 +111,25 @@ export function parseIcyVeinsBis(html, rosters) {
   return rows;
 }
 
+/** The per-spec trinket letter rankings (G8). Lives in a collapsed block after
+ *  <h2 id="trinkets">: rows of "<Letter> Tier" label cells followed by item spans.
+ *  Icy Veins defines a tier as ~0.5% DPS on the page itself; we keep the LETTERS
+ *  per source and never merge scales (DECISION G8). Absent section -> empty array
+ *  (healers/tanks may not publish one). */
+export function parseIcyVeinsTrinketTiers(html) {
+  const start = html.search(/<h2[^>]*id="trinkets"/i);
+  if (start < 0) return [];
+  const next = html.slice(start + 10).search(/<h2[^>]*id="(?!trinkets)/i);
+  const section = html.slice(start, next > 0 ? start + 10 + next : start + 30000);
+  const tiers = [];
+  const matches = [...section.matchAll(/([SABCDF]) Tier([\s\S]*?)(?=[SABCDF] Tier|$)/g)];
+  for (const m of matches) {
+    const ids = [...new Set([...m[2].matchAll(/data-wowhead="item=(\d+)/g)].map((x) => x[1]))];
+    if (ids.length) tiers.push({ tier: m[1], itemIds: ids });
+  }
+  return tiers;
+}
+
 async function harvestSpec(spec) {
   const base = `https://www.icy-veins.com/wow/${slug(spec.spec)}-${slug(spec.class)}-pve-${roleSlug(spec.role)}`;
   const statHtml = await fetchText(`${base}-stat-priority`);
@@ -124,6 +143,7 @@ async function harvestSpec(spec) {
     guideUrl: `${base}-gear-best-in-slot`,
     published: articleDate(bisHtml || statHtml),
     priorities, bis,
+    trinketTiers: bisHtml ? parseIcyVeinsTrinketTiers(bisHtml) : [],
   };
 }
 

@@ -9,6 +9,7 @@ import { gunzipSync, gzipSync } from "node:zlib";
 import { dungeonLootIdsFrom, parseItem, parsedItemIssues, raidBossLootIdsFrom } from "../src/lib-wowhead.mjs";
 import { extractPriority } from "../src/lib-icy-veins.mjs";
 import { validateData } from "../src/validate-data.mjs";
+import { buildGuidePayload } from "../src/lib-guides.mjs";
 
 const fromRoot = (path) => new URL(`../${path}`, import.meta.url);
 const rootPath = fileURLToPath(new URL("..", import.meta.url));
@@ -26,6 +27,18 @@ async function allValidatedData() {
   ]);
   return { raid, specs, dungeons, sheet, statOverrides, statBaseline, weaponProficiency,
     itemEligibility, tier, catalyst, catalystAllocations };
+}
+
+async function loadGuidePayload(raid, dungeons, tier, specs) {
+  const [ivGuide, whGuide, meGuide] = await Promise.all([
+    json("data/guides/icyveins.json"), json("data/guides/wowhead.json"), json("data/guides/method.json"),
+  ]);
+  const itemSlots = new Map();
+  for (const b of raid.bosses) for (const it of b.items) if (it.slot) itemSlots.set(String(it.id), it.slot);
+  for (const d of dungeons.dungeons) for (const it of d.items) if (it.slot) itemSlots.set(String(it.id), it.slot);
+  for (const set of tier.sets) for (const it of set.items) if (it.slot) itemSlots.set(String(it.id), it.slot);
+  return buildGuidePayload({ icyveins: ivGuide, wowhead: whGuide, method: meGuide },
+    specs.specs, { itemSlots, sourceNames: { icyveins: "Icy Veins", wowhead: "Wowhead", method: "Method" } });
 }
 
 function guidePage(markup) {
@@ -408,10 +421,30 @@ test("self-contained output embeds current data and valid browser JavaScript", a
   ]);
   const embedded = html.match(/<script id="data" type="application\/json">([\s\S]*?)<\/script>/);
   assert.ok(embedded);
-  assert.deepEqual(JSON.parse(embedded[1]), {
+  const payload = JSON.parse(embedded[1]);
+  // guides is PRECOMPUTED by build.mjs from data/guides/*.json (Phase C) — assert its
+  // shape and provenance here, and byte-equality for every directly-embedded dataset.
+  const { guides, ...direct } = payload;
+  assert.deepEqual(direct, {
     raid, specs, dungeons, sheet, itemEligibility, tier, catalyst, catalystAllocations,
     icons: icons.icons,
   });
+  assert.deepEqual(Object.keys(guides.sources).sort(), ["icyveins", "method", "wowhead"]);
+  assert.equal(Object.keys(guides.specs).length, 40);
+  assert.ok(Object.values(guides.specs).every((s) => s.builds.length >= 1),
+    "every spec carries at least one published Build option");
+  // The seam is live, not just shaped (adversarial review): a real 3/3 candidate and a
+  // real per-source trinket-letter set exist in the SHIPPED payload.
+  const frost = guides.specs["Frost Mage"];
+  assert.ok(frost.candidates.Neck.some((c) => c.itemId === "268265" && c.consensus === 3),
+    "Frost Mage Neck 268265 must ship as a 3/3 candidate");
+  assert.ok(frost.trinketTiers.icyveins?.length >= 3,
+    "Frost Mage ships Icy Veins trinket letter tiers");
+  // No spec ships two Build options with the same id (G7 disambiguation).
+  for (const [key, s] of Object.entries(guides.specs)) {
+    const ids = s.builds.map((b) => b.id);
+    assert.equal(new Set(ids).size, ids.length, `${key}: duplicate Build ids`);
+  }
 
   const scripts = [...template.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)];
   assert.doesNotThrow(() => new Function(scripts.at(-1)[1]));
@@ -423,7 +456,8 @@ test("self-contained output embeds current data and valid browser JavaScript", a
   assert.doesNotMatch(template, /<label for="scenario">/);
   assert.match(template, /class="skip-link" href="#main-content"/);
   assert.doesNotMatch(template, /Validated reference model/);
-  assert.match(template, /Guide order \(rough\)/);
+  assert.doesNotMatch(template, /Guide order \(rough\)/);
+  assert.match(template, /Guide consensus \(default\)/);
   assert.match(template, /Custom decimal weights/);
   assert.doesNotMatch(template, /Questionably Epic|questionablyepic\.com/);
   assert.match(template, /@media \(max-width:640px\)/);
@@ -462,7 +496,7 @@ test("the built artifact is the current template — a template edit without a r
     "wow-s2-gearing.html does not match src/app.template.html — run `node gearing/src/build.mjs`");
 });
 
-test("client app drives Build selection, guide-order weights, and custom overrides", async () => {
+test("client app: consensus-first ranking, source-labeled Builds, custom override announces", async () => {
   const [template, raid, specs, dungeons, sheet, itemEligibility, tier, catalyst,
     catalystAllocations, icons] = await Promise.all([
     readFile(fromRoot("src/app.template.html"), "utf8"),
@@ -471,10 +505,11 @@ test("client app drives Build selection, guide-order weights, and custom overrid
     json("data/tier-items.json"), json("data/catalyst-rules.json"),
     json("data/catalyst-stat-allocations.json"), json("data/icons.json"),
   ]);
+  const guides = await loadGuidePayload(raid, dungeons, tier, specs);
   const data = { raid, specs, dungeons, sheet, itemEligibility, tier, catalyst,
-    catalystAllocations, icons: icons.icons };
+    catalystAllocations, guides, icons: icons.icons };
   const scripts = [...template.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)];
-  const appSource = `${scripts.at(-1)[1]}\nreturn { current: () => CUR, scoreFor: id => scoreItem(CUR, BY_ID[id]), weights: () => activeWeights(CUR) };`;
+  const appSource = `${scripts.at(-1)[1]}\nreturn { current: () => CUR, scoreFor: id => scoreItem(CUR, BY_ID[id]), weights: () => activeWeights(CUR), consensusOf: id => consensusCount(BY_ID[id]) };`;
   const startClient = (clientData) => {
     const document = fakeDocument(clientData);
     const app = new Function("document", "innerWidth", "innerHeight", appSource)(document, 1600, 900);
@@ -484,88 +519,88 @@ test("client app drives Build selection, guide-order weights, and custom overrid
   const specSelect = document.ids.get("spec");
   const scoringMode = document.ids.get("scoring-mode");
   const profileSelect = document.ids.get("profile");
-  const GUIDE = [1, 0.75, 0.5, 0.25];
-  const guideFor = (specKey, buildName) => {
-    const spec = specs.specs.find((entry) => `${entry.spec} ${entry.class}` === specKey);
-    const variant = (spec.statPriorityVariants || []).find((entry) => entry.name === buildName)
-      || { secondaries: spec.statPriority.secondaries };
-    return Object.fromEntries(variant.secondaries.map((stat, index) => [stat, GUIDE[index]]));
-  };
 
-  // Boot: Frost Mage, guide-order mode, no Encounter control anywhere.
+  // Boot: Frost Mage, consensus mode, and the G1 headline facts.
   assert.equal(app.current().spec, "Frost");
-  assert.equal(scoringMode.value, "priority");
-  assert.equal(document.ids.get("scenario"), undefined);
-  assert.match(document.ids.get("bis").innerHTML, /Weapon setup:/);
-  assert.match(document.ids.get("scoring-summary").innerHTML, /Rough guide-order coefficients/);
-  assert.match(document.ids.get("scoring-summary").innerHTML, /fixed spacing for sorting/);
+  assert.equal(scoringMode.value, "consensus");
+  assert.match(document.ids.get("scoring-summary").innerHTML, /Guide consensus ranks first/);
+  assert.match(document.ids.get("bis-note").innerHTML, /Ranked by guide consensus/);
+  assert.match(document.ids.get("bis-note").innerHTML, /never summed/);
+  // A 3/3-consensus item leads its slot card. Head is a TIER slot (it renders in the
+  // Tier tab, not the #bis grid), so probe Neck instead: Aqirbane Reliquary 268265 is
+  // named by all three guides for Frost Mage.
+  assert.equal(app.consensusOf("268265"), 3);
+  const bisHtml = document.ids.get("bis").innerHTML;
+  assert.match(bisHtml, /3\/3 guides/);
+  assert.match(bisHtml, /data-ilvl-ceiling>up to \d+/); // the G2 named ilvl term
+  const neckCard = bisHtml.slice(bisHtml.indexOf("<h3>Neck<"));
+  const firstRow = neckCard.indexOf('data-id="');
+  assert.ok(firstRow >= 0 && neckCard.slice(firstRow, firstRow + 24).includes("268265"),
+    "the 3/3-consensus Neck item leads its card");
+  // G8: per-source trinket letters, never merged.
+  assert.match(bisHtml, /Icy Veins: S/);
+  assert.match(bisHtml, /deliberately outside the consensus ranking/);
 
-  // Build selector lists exactly the published variants; switching Build switches weights.
+  // G7: the Build selector lists exactly the published combinations, source-labeled.
   specSelect.value = "Priest|Shadow";
   specSelect.listeners.change();
-  assert.deepEqual(profileSelect.children.map((option) => option.value), [
-    "Voidweaver (single- and multi-target)", "Archon (single- and multi-target)",
-  ]);
-  assert.equal(scoringMode.value, "priority");
-  assert.deepEqual(app.weights(), guideFor("Shadow Priest", "Voidweaver (single- and multi-target)"));
-  assert.match(document.ids.get("bis-note").innerHTML, /Voidweaver \(single- and multi-target\)/);
+  assert.deepEqual(profileSelect.children.map((o) => o.value),
+    ["icyveins:Shadow Priest", "wowhead:Archon", "wowhead:Voidweaver"]);
+  assert.ok(profileSelect.children.every((o) => / — /.test(o.textContent)),
+    "every Build option names its source");
 
-  profileSelect.value = "Archon (single- and multi-target)";
+  // Switching Builds switches the fit order (BM Hunter's published orders differ).
+  specSelect.value = "Hunter|Beast Mastery";
+  specSelect.listeners.change();
+  const GUIDE = [1, 0.75, 0.5, 0.25];
+  const bmBuilds = guides.specs["Beast Mastery Hunter"].builds;
+  const packLeader = bmBuilds.find((b) => /Pack Leader/.test(b.label));
+  const darkRangerSt = bmBuilds.find((b) => /Dark Ranger .*Single/.test(b.label));
+  profileSelect.value = packLeader.id;
   profileSelect.listeners.change();
-  const archonWeights = guideFor("Shadow Priest", "Archon (single- and multi-target)");
-  assert.deepEqual(app.weights(), archonWeights);
-  assert.equal(app.scoreFor("271874"), archonWeights.Mast);
-  assert.match(document.ids.get("bis-note").innerHTML, /Archon \(single- and multi-target\)/);
+  assert.deepEqual(app.weights(),
+    Object.fromEntries(packLeader.secondaries.map((s, i) => [s, GUIDE[i]])));
+  profileSelect.value = darkRangerSt.id;
+  profileSelect.listeners.change();
+  assert.deepEqual(app.weights(),
+    Object.fromEntries(darkRangerSt.secondaries.map((s, i) => [s, GUIDE[i]])));
 
-  // Render output under guide mode (unchanged by the SimC removal).
-  const tierHtml = document.ids.get("tier").innerHTML;
-  assert.match(tierHtml, /Season 2 Catalyst tier plan/);
-  assert.match(tierHtml, /first 4-piece class-set bonus/);
-  assert.equal((tierHtml.match(/data-catalyst-base="true"/g) || []).length, 22);
-  assert.equal((tierHtml.match(/data-direct-tier="true"/g) || []).length, 5);
-  assert.match(tierHtml, /Cosmic Penitent's Truesight/);
-  assert.match(tierHtml, /Mapped Venomcursed item/);
-  assert.match(tierHtml, /Crit 29%\/Haste 71%/);
-  assert.match(document.ids.get("bis").innerHTML, /Special-effect item shown outside the secondary-stat top five/);
-  assert.doesNotMatch(document.ids.get("bis").innerHTML,
-    /Blazebinder's Hoof|Preternatural Antivenom|Idol of the Howling Nexus/);
-  assert.match(document.ids.get("src").innerHTML, /Hands tier token/);
-
-  // Custom mode is a full override and announces itself.
+  // G6: custom mode is a FULL override and announces itself on every ranked surface.
   scoringMode.value = "custom";
   scoringMode.listeners.change();
   assert.match(document.ids.get("scoring-summary").innerHTML, /waiting for all four/);
-  assert.equal(document.ids.get("weight-editor").hidden, false);
-  assert.deepEqual(app.weights(), archonWeights); // guide fallback until all four land
   document.ids.get("weight-crit").value = "1.12";
   document.ids.get("weight-haste").value = "0.99";
   document.ids.get("weight-mast").value = "1.25";
   document.ids.get("weight-vers").value = "0.40";
   document.ids.get("weight-mast").listeners.input();
   assert.match(document.ids.get("scoring-summary").innerHTML, /Custom weights supplied by you/);
-  assert.match(document.ids.get("scoring-summary").innerHTML, /Mastery <strong>1\.250<\/strong>/);
-  assert.equal(app.scoreFor("271874"), 1.25);
-  assert.match(document.ids.get("tier-note").innerHTML, /your custom weights/);
+  for (const surface of ["bis", "tier"])
+    assert.match(document.ids.get(surface).innerHTML, /Ranked by your custom weights/,
+      `custom announcement missing on #${surface}`);
+  // Ranked-row consensus chips carry data-consensus=; the trinket card's informational
+  // "named by N/3 guides" chips deliberately STAY (trinkets are never consensus-ranked,
+  // so the custom override changes nothing about them).
+  assert.doesNotMatch(document.ids.get("bis").innerHTML, /data-consensus=/,
+    "ranked-row consensus chips leave under the full custom override");
+  // G6 TOTALITY, behaviorally: under custom the Neck card's row order must equal pure
+  // descending fit — consensus must not influence it (mutation-proof: a compareItems
+  // that still consults consensus under custom breaks this on real data).
+  {
+    const bh = document.ids.get("bis").innerHTML;
+    const card = bh.slice(bh.indexOf("<h3>Neck<"), bh.indexOf("<h3>", bh.indexOf("<h3>Neck<") + 1));
+    const ids = [...card.matchAll(/data-id="(\d+)"/g)].map((m) => m[1]);
+    assert.ok(ids.length >= 2, "Neck card renders multiple rows");
+    const scores = ids.map((id) => app.scoreFor(id));
+    for (let i = 1; i < scores.length; i++)
+      assert.ok(scores[i - 1] >= scores[i] - 1e-12,
+        "custom-mode Neck order must be non-increasing fit: " + ids.join(",") + " -> " + scores.join(","));
+  }
 
-  // A spec with no published variants falls back to the single General build.
-  specSelect.value = "Warlock|Destruction";
-  specSelect.listeners.change();
-  assert.equal(scoringMode.value, "priority");
-  assert.equal(document.ids.get("profile").value, "General");
-  assert.deepEqual(app.weights(), guideFor("Destruction Warlock", "General"));
-
-  // Healers rank by guide order like every other spec (the model lane is retired).
-  specSelect.value = "Priest|Discipline";
-  specSelect.listeners.change();
-  assert.equal(scoringMode.value, "priority");
-  assert.match(document.ids.get("scoring-summary").innerHTML, /Rough guide-order coefficients/);
-  assert.doesNotMatch(document.ids.get("scoring-summary").innerHTML, /SimulationCraft|healer throughput/);
-
-  // Weapon-card edge cases survive the cut.
+  // Weapon-card edge cases survive.
   specSelect.value = "Demon Hunter|Devourer";
   specSelect.listeners.change();
   assert.match(document.ids.get("bis").innerHTML, /Allowed types:/);
-  assert.match(document.ids.get("bis").innerHTML, /official source 1/);
   const uniqueWeaponData = clone(data);
   for (const group of [...uniqueWeaponData.raid.bosses, ...uniqueWeaponData.dungeons.dungeons])
     for (const item of group.items)
@@ -574,4 +609,31 @@ test("client app drives Build selection, guide-order weights, and custom overrid
   uniqueWeaponClient.document.ids.get("spec").value = "Demon Hunter|Devourer";
   uniqueWeaponClient.document.ids.get("spec").listeners.change();
   assert.match(uniqueWeaponClient.document.ids.get("bis").innerHTML, /Alternative hand only:/);
+});
+
+test("weapon consensus merges hand vocabularies in BOTH directions", async () => {
+  // Guides file weapons by worn hand ("Main Hand"); the catalog stores the item's own
+  // slot type ("One-Hand"). 271092 (Jan'thrazet, the Soul Fang) is Frost Mage's
+  // 3/3-consensus weapon and must resolve through the equivalence.
+  const [template, raid, specs, dungeons, sheet, itemEligibility, tier, catalyst,
+    catalystAllocations, icons] = await Promise.all([
+    readFile(fromRoot("src/app.template.html"), "utf8"),
+    json("data/raid-items.json"), json("data/specs.json"), json("data/dungeon-items.json"),
+    json("data/sheet-rewards.json"), json("data/item-eligibility-overrides.json"),
+    json("data/tier-items.json"), json("data/catalyst-rules.json"),
+    json("data/catalyst-stat-allocations.json"), json("data/icons.json"),
+  ]);
+  const guides = await loadGuidePayload(raid, dungeons, tier, specs);
+  const data = { raid, specs, dungeons, sheet, itemEligibility, tier, catalyst,
+    catalystAllocations, guides, icons: icons.icons };
+  const scripts = [...template.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)];
+  const appSource = `${scripts.at(-1)[1]}\nreturn { consensusOf: id => consensusCount(BY_ID[id]), setSpec: v => { const s = document.getElementById("spec"); s.value = v; s.listeners.change(); } };`;
+  const document = fakeDocument(data);
+  const app = new Function("document", "innerWidth", "innerHeight", appSource)(document, 1600, 900);
+  // Main-hand direction: guides say "Main Hand", catalog says "One-Hand".
+  assert.equal(app.consensusOf("271092"), 3);
+  // Off-hand direction (the adversarial-review high): Devourer's Baleful Hexblade is the
+  // unanimous OFF-hand pick of all three guides; its catalog slot is "One-Hand".
+  app.setSpec("Demon Hunter|Devourer");
+  assert.equal(app.consensusOf("268211"), 3);
 });

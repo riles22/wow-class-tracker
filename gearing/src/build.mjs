@@ -10,6 +10,7 @@ import { readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { validateData } from "./validate-data.mjs";
+import { buildGuidePayload } from "./lib-guides.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const readData = async (f) => JSON.parse(await readFile(join(ROOT, "data", f), "utf8"));
@@ -25,6 +26,8 @@ const itemEligibility = await readData("item-eligibility-overrides.json");
 const tier = await readData("tier-items.json");
 const catalyst = await readData("catalyst-rules.json");
 const catalystAllocations = await readData("catalyst-stat-allocations.json");
+const guides = {};
+for (const id of ["icyveins", "wowhead", "method"]) guides[id] = await readData(`guides/${id}.json`);
 let icons = { icons: {} };
 try { icons = await readData("icons.json"); }
 catch { console.warn("  (no data/icons.json -- run node src/harvest-icons.mjs for item icons)"); }
@@ -34,9 +37,22 @@ validateData({ raid, specs, dungeons, sheet, statOverrides, statBaseline, weapon
   itemEligibility, tier, catalyst, catalystAllocations },
 { gearingRoot: ROOT });
 
+/* Precompute the guide-consensus payload (Phase C, gearing-s2-scope G1/G7/G8) instead of
+   inlining the three raw harvest files (~1.6 MB pretty). The logic lives in
+   lib-guides.buildGuidePayload so tests can feed it broken inputs and pin the loud
+   failures; candidates re-bucket under the CATALOG's slot for items we know, which is
+   what heals the guides' occasional misfilings (a Neck under Finger) and keeps one slot
+   vocabulary page-wide. */
+const itemSlots = new Map();
+for (const b of raid.bosses) for (const it of b.items) if (it.slot) itemSlots.set(String(it.id), it.slot);
+for (const d of dungeons.dungeons) for (const it of d.items) if (it.slot) itemSlots.set(String(it.id), it.slot);
+for (const set of tier.sets) for (const it of set.items) if (it.slot) itemSlots.set(String(it.id), it.slot);
+const guidePayload = buildGuidePayload(guides, specs.specs, { itemSlots,
+  sourceNames: { icyveins: "Icy Veins", wowhead: "Wowhead", method: "Method" } });
+
 // </script> inside the JSON would close the host <script> tag early
 const blob = JSON.stringify({ raid, specs, dungeons, sheet, itemEligibility, tier, catalyst,
-  catalystAllocations, icons: icons.icons })
+  catalystAllocations, guides: guidePayload, icons: icons.icons })
   .replace(/<\/script>/gi, "<\\/script>");
 
 if (!template.includes("__DATA__")) throw new Error("template is missing the __DATA__ placeholder");

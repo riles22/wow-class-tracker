@@ -8,8 +8,8 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 
-import { canonicalRosters, canonicalSlot, decodeEntities, nameKey, normApostrophes,
-  normalizeDropSource, normalizeStatRun, parseSoftCaps, resolveDropSource }
+import { buildGuidePayload, canonicalRosters, canonicalSlot, decodeEntities, nameKey,
+  normApostrophes, normalizeDropSource, normalizeStatRun, parseSoftCaps, resolveDropSource }
   from "../src/lib-guides.mjs";
 import { articleDate, parseIcyVeinsBis, parseIcyVeinsPriorities }
   from "../src/harvest-guide-icyveins.mjs";
@@ -239,4 +239,35 @@ test("guide coverage: every roster spec is either harvested or absent-with-reaso
     const missing = rosterKeys.filter((k) => !covered.has(k));
     assert.deepEqual(missing, [], `${id}: specs with neither a record nor a recorded absence`);
   }
+});
+
+test("buildGuidePayload fails loudly and disambiguates colliding build labels", () => {
+  const spec = [{ spec: "Frost", class: "Mage" }];
+  const base = { harvestedAt: "2026-08-18", specs: { "Frost Mage": {
+    published: "2026-08-18",
+    priorities: [{ label: "General", secondaries: ["Mast", "Haste"] }],
+    bis: [{ list: "overall", slot: "Neck", itemId: "1" }],
+  } } };
+  // zero builds for a spec -> throw
+  assert.throws(() => buildGuidePayload({ icyveins: { harvestedAt: "2026-08-18", specs: {
+    "Frost Mage": { priorities: [], bis: [] } } } }, spec), /zero guide builds/);
+  // malformed priority -> throw
+  assert.throws(() => buildGuidePayload({ icyveins: { harvestedAt: "2026-08-18", specs: {
+    "Frost Mage": { priorities: [{ label: "Bad", secondaries: ["Mast"] }], bis: [] } } } }, spec),
+  /malformed priority/);
+  // one source, two different orders under ONE label -> unique ids, "(list N)" labels
+  const dup = JSON.parse(JSON.stringify(base));
+  dup.specs["Frost Mage"].priorities.push({ label: "General", secondaries: ["Haste", "Mast"] });
+  const payload = buildGuidePayload({ wowhead: dup }, spec);
+  const builds = payload.specs["Frost Mage"].builds;
+  assert.equal(builds.length, 2);
+  assert.notEqual(builds[0].id, builds[1].id);
+  assert.deepEqual(builds.map((b) => b.label), ["General (list 1)", "General (list 2)"]);
+  // catalog-slot re-bucketing heals a misfiled row
+  const misfiled = JSON.parse(JSON.stringify(base));
+  misfiled.specs["Frost Mage"].bis = [{ list: "overall", slot: "Finger", itemId: "42" }];
+  const healed = buildGuidePayload({ icyveins: misfiled }, spec,
+    { itemSlots: new Map([["42", "Neck"]]) });
+  assert.ok(healed.specs["Frost Mage"].candidates.Neck.some((c) => c.itemId === "42"));
+  assert.equal(healed.specs["Frost Mage"].candidates.Finger, undefined);
 });

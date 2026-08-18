@@ -329,7 +329,7 @@ table.paths tr:hover td{background:rgba(255,255,255,.03)}
       <div class="field">
         <label for="scoring-mode">Scoring method</label>
         <select id="scoring-mode">
-          <option value="priority">Guide order (rough)</option>
+          <option value="consensus">Guide consensus (default)</option>
           <option value="custom">Custom decimal weights</option>
         </select>
       </div>
@@ -415,6 +415,10 @@ const DB = JSON.parse(document.getElementById('data').textContent);
 const RAID = DB.raid, SPECS = DB.specs, DUNG = DB.dungeons, SHEET = DB.sheet;
 const TIER = DB.tier || {sets:[]}, CATALYST = DB.catalyst || {setBonusSlots:[]};
 const STAT_ALLOCATIONS = DB.catalystAllocations || {items:{}};
+const GUIDES = DB.guides || {sources:{}, specs:{}};
+const GUIDE_SOURCE_NAMES = {icyveins:'Icy Veins', wowhead:'Wowhead', method:'Method'};
+const specKey = spec => spec ? spec.spec + ' ' + spec.class : '';
+const guideSpec = spec => GUIDES.specs[specKey(spec)] || null;
 const ITEM_ELIGIBILITY = DB.itemEligibility || {items:{}};
 const ICONS = DB.icons || {};
 const icoTag = it => it.icon && ICONS[it.icon]
@@ -562,12 +566,23 @@ function scoreItem(spec, it) {
   return stats.length ? stats.reduce((sum, stat) => sum + (weights[stat] || 0), 0) / stats.length : 0;
 }
 
+/* Ranking (DECISION G1): guide consensus orders first; equal-item-level stat fit breaks
+   ties inside a consensus band. Under CUSTOM weights the override is TOTAL (DECISION G6):
+   consensus is not consulted at all, and every ranked surface says so in visible text. */
+function consensusActive() {
+  return !(customModeSelected() && customWeights());
+}
 function compareItems(spec, a, b) {
+  if (spec === CUR && consensusActive()) {
+    const d = consensusCount(b) - consensusCount(a);
+    if (d) return d;
+  }
   return scoreItem(spec, b) - scoreItem(spec, a) || a.name.localeCompare(b.name);
 }
 
 function sameRecommendationScore(spec, a, b) {
   if (!a || !b) return false;
+  if (spec === CUR && consensusActive() && consensusCount(a) !== consensusCount(b)) return false;
   return scoreItem(spec, a) === scoreItem(spec, b);
 }
 
@@ -597,11 +612,24 @@ let CUR = null, MYGEAR = {};
 
 const find = v => SPECS.specs.filter(s => s.class + '|' + s.spec === v)[0];
 
+/* The Build control (DECISION G7): its options are EXACTLY the combinations the guide
+   sources actually published — the union across sources, each labeled with who published
+   it — never a synthesized two-axis grid. Data comes from the Phase B harvest
+   (GUIDES.specs[key].builds); the legacy statPriorityVariants path survives only as a
+   fallback for a spec the payload somehow lacks. */
 function profilesFor(spec) {
+  const g = guideSpec(spec);
+  if (g && g.builds.length) return g.builds.map(b => ({
+    name: b.id, label: b.label + ' — ' + (GUIDE_SOURCE_NAMES[b.source] || b.source),
+    source: b.source, primary: b.primary, secondaries: b.secondaries,
+    leadsWithItemLevel: b.leadsWithItemLevel, published: b.published,
+  }));
   const variants = (spec && spec.statPriorityVariants) || [];
-  if (variants.length) return variants;
+  if (variants.length) return variants.map(v => ({name: v.name, label: v.name,
+    secondaries: v.secondaries, source: null, published: null}));
   return spec && spec.statPriority
-    ? [{name: 'General', secondaries: spec.statPriority.secondaries}]
+    ? [{name: 'General', label: 'General', secondaries: spec.statPriority.secondaries,
+      source: null, published: null}]
     : [];
 }
 
@@ -613,9 +641,48 @@ function activeProfile() {
 
 function activePriority() {
   const profile = activeProfile();
-  return CUR && CUR.statPriority && profile
-    ? {primary: CUR.statPriority.primary, secondaries: profile.secondaries}
+  return CUR && profile
+    ? {primary: profile.primary || (CUR.statPriority && CUR.statPriority.primary),
+      secondaries: profile.secondaries}
     : CUR && CUR.statPriority;
+}
+
+/* Consensus lookup (DECISION G1): how many DISTINCT sources name this item for this slot,
+   and which lists. Zero when no guide names it — those rank below any consensus.
+   Weapon slots need an equivalence: the guides file a weapon under the HAND it is worn in
+   ("Main Hand"/"Off Hand") while our catalog stores the item's own slot type ("One-Hand"/
+   "Two-Hand"/"Ranged") — the same item, two vocabularies, and a dual-wield weapon may be
+   one source's main-hand pick and another's off-hand pick. So for any weapon-slot item,
+   ALL weapon cells are searched and their mentions MERGED — first-hit-wins undercounted
+   real consensus and zeroed unanimous off-hand picks (adversarial review, 2026-08-18:
+   Devourer's 3/3 Baleful Hexblade rendered no chip while a 1/3 item sat gold above it). */
+const WEAPON_CELL_SLOTS = ['Main Hand', 'One-Hand', 'Two-Hand', 'Ranged', 'Off Hand', 'Held In Off-hand'];
+function consensusOf(it) {
+  const g = guideSpec(CUR);
+  if (!g || !it) return null;
+  const slots = WEAPON_CELL_SLOTS.includes(it.slot) ? WEAPON_CELL_SLOTS : [it.slot];
+  let merged = null;
+  for (const slot of slots) {
+    const cell = g.candidates[slot];
+    const hit = cell && cell.find(c => c.itemId === String(it.id));
+    if (!hit) continue;
+    if (!merged) merged = {itemId: hit.itemId, consensus: 0, mentions: {}};
+    for (const src of Object.keys(hit.mentions))
+      merged.mentions[src] = Array.from(new Set((merged.mentions[src] || []).concat(hit.mentions[src])));
+  }
+  if (merged) merged.consensus = Object.keys(merged.mentions).length;
+  return merged;
+}
+function consensusCount(it) {
+  const hit = consensusOf(it);
+  return hit ? hit.consensus : 0;
+}
+function consensusChip(it) {
+  const hit = consensusOf(it);
+  if (!hit) return '';
+  const names = Object.keys(hit.mentions).map(s => GUIDE_SOURCE_NAMES[s] || s);
+  return '<span class="tag" data-consensus="' + hit.consensus + '">'
+    + hit.consensus + '/3 guides: ' + esc(names.join(', ')) + '</span>';
 }
 
 function initProfiles() {
@@ -625,7 +692,7 @@ function initProfiles() {
   profiles.forEach(p => {
     const o = document.createElement('option');
     o.value = p.name;
-    o.textContent = p.name;
+    o.textContent = p.label || p.name;
     sel.appendChild(o);
   });
   if (!profiles.length) {
@@ -682,7 +749,7 @@ function initSpecs() {
     CUR = find(sel.value);
     writeSpecHash();
     initProfiles();
-    $('#scoring-mode').value = 'priority';
+    $('#scoring-mode').value = 'consensus';
     clearCustomWeights(false);
     render();
   });
@@ -696,7 +763,7 @@ function initSpecs() {
   else if (find('Mage|Frost')) sel.value = 'Mage|Frost';
   CUR = find(sel.value) || SPECS.specs[0];
   initProfiles();
-  $('#scoring-mode').value = 'priority';
+  $('#scoring-mode').value = 'consensus';
 }
 
 function specLine() {
@@ -726,11 +793,26 @@ function renderScoringControls() {
     return;
   }
   const guide = guideWeights(CUR);
+  const build = activeProfile();
+  const buildText = build && build.source
+    ? 'the <b>' + esc(build.label || build.name) + '</b> build'
+      + (build.published ? ' (guide updated ' + esc(build.published) + ')' : '')
+    : 'the sourced guide order';
   $('#scoring-summary').innerHTML = (customModeSelected()
       ? '<span class="warning"><strong>Custom mode is waiting for all four non-negative weights.</strong> '
-        + 'Guide-order fallback is active until then.</span> '
-      : '<strong>Rough guide-order coefficients:</strong> ')
-    + weightList(guide) + '. These are fixed spacing for sorting, not character-specific stat weights or a simulation.';
+        + 'Guide-consensus ranking stays active until then.</span> '
+      : '<strong>Guide consensus ranks first</strong> — how many of the three guides name an item for its slot — '
+        + 'and ties break on stat fit from ' + buildText + ': ')
+    + weightList(guide) + '. The fit spacing is a sorting device, never stat weights or a simulation.';
+}
+
+/* DECISION G6: when custom weights drive the ordering, every ranked surface says so in
+   visible text — never a title= (the touch-legibility rule). */
+function customBanner() {
+  return customModeSelected() && customWeights()
+    ? '<div class="sub-note"><b>Ranked by your custom weights.</b> Guide consensus is not '
+      + 'consulted while custom mode is active — rank 1 means your numbers, not the guides.</div>'
+    : '';
 }
 
 function clearCustomWeights(shouldRender) {
@@ -892,17 +974,20 @@ function renderBis() {
   const priorityPatch = profile?.patch || CUR.statPriorityPatch;
   const usingCustom = customModeSelected() && !!customWeights();
   const usingGuide = !usingCustom;
+  const buildSource = profile && profile.source ? GUIDE_SOURCE_NAMES[profile.source] : null;
   $('#bis-note').innerHTML = priority
     ? (usingCustom
       ? '<b>Using your custom decimal weights.</b> Candidates are ordered by their full secondary-stat allocation. '
-      : 'Using the <b>' + esc(profile ? profile.name : 'General') + '</b> build and the rough guide order <b>'
-        + esc(priority.secondaries.join(' > ')) + '</b>. ')
-      + '<b>This is an equal-item-level secondary-fit shortlist, not a definitive BiS list.</b> '
+      : '<b>Ranked by guide consensus</b> — how many of the three harvested guides '
+        + '(Icy Veins, Wowhead, Method) name the item for its slot — with ties broken by stat fit from the <b>'
+        + esc(profile ? (profile.label || profile.name) : 'General') + '</b> build'
+        + (buildSource && profile.published ? ' (' + esc(buildSource) + ' guide updated ' + esc(profile.published) + ')' : '')
+        + ': <b>' + esc(priority.secondaries.join(' > ')) + '</b>. ')
+      + '<b>Consensus counts and stat fit are different quantities and are never summed;</b> '
+      + 'the item-level ceiling shown per row is a third, separate fact. '
       + 'Item level, primary stat, current stat totals, '
       + 'sockets, and item effects can change the winner; '
-      + 'effects are shown but never assigned invented values. '
-      + (usingGuide ? 'The build comes from Icy Veins <b>patch ' + esc(priorityPatch || '?')
-        + '</b> (the prior patch) while 12.1 priorities remain provisional.' : '')
+      + 'effects are shown but never assigned invented values.'
       + (usingGuide && prioritySource ? ' <a href="' + esc(prioritySource)
         + '" target="_blank" rel="noopener noreferrer">View the source</a>.' : '')
       + (usingGuide && CUR.statPriorityNote ? ' ' + esc(CUR.statPriorityNote) : '')
@@ -928,11 +1013,12 @@ function renderBis() {
       const it = entry.it;
       rows.push('<div class="row' + (!entry.special && sameRecommendationScore(CUR, it, topItem) ? ' best' : '')
       + '" data-id="' + it.id + '">'
-      + '<span class="rank"' + (entry.special ? ' title="Special-effect item shown outside the secondary-stat top five"'
-        : entry.guideFallback ? ' title="Guide-fallback position; not compared with exact model scores"' : '')
-      + '>' + entry.marker + '</span>' + icoTag(it) + '<span class="nm">' + esc(it.name) + itemDetails(it)
+      + '<span class="rank"' + (entry.special ? ' title="Special-effect item shown outside the consensus top five"' : '')
+      + '>' + entry.marker + '</span>' + icoTag(it) + '<span class="nm">' + esc(it.name)
+      + (usingCustom ? '' : consensusChip(it)) + itemDetails(it)
       + '</span><span class="meta">' + esc(it.primary || '—')
       + (it.secondaries.length ? ' ' + esc(allocationText(it)) + fitText(it) : '')
+      + '<span class="tag" data-ilvl-ceiling>up to ' + maxAttainable(it) + '</span>'
       + '</span><span class="src' + (it.kind === 'mplus' ? ' mplus' : '') + '">'
       + esc(it.kind === 'mplus' ? it.dungeon : it.where) + '</span></div>');
     });
@@ -940,7 +1026,7 @@ function renderBis() {
       + (rows.join('') || '<div class="empty">nothing here</div>') + '</div>';
   }).join('');
 
-  $('#bis').innerHTML = weaponLoadoutCards(weaponItems) + cards
+  $('#bis').innerHTML = customBanner() + weaponLoadoutCards(weaponItems) + cards
     + trinketCard(bySlot['Trinket'] || [])
     || '<div class="empty">No usable items found for this spec.</div>';
 }
@@ -965,7 +1051,7 @@ function renderTier() {
     return '<div class="card"><h3>' + esc(slot) + '<span>' + bases.length
       + ' Catalyst bases</span></h3>' + tierSlotRows(slot, bases, token) + '</div>';
   }).join('');
-  $('#tier').innerHTML = catalystPlanCard(usable) + cards + omniTokenCard(tokenBySlot.omni);
+  $('#tier').innerHTML = customBanner() + catalystPlanCard(usable) + cards + omniTokenCard(tokenBySlot.omni);
 }
 
 function loadoutLabel(id) {
@@ -990,7 +1076,7 @@ function weaponRows(list, reservedUniqueId) {
       : entry.special ? 'Special-effect item shown outside the secondary-stat top five'
       : entry.guideFallback ? 'Guide-fallback position; not compared with exact model scores' : 'Priority position')
     + '">' + entry.marker + '</span>' + icoTag(it)
-    + '<span class="nm">' + esc(it.name) + itemDetails(it)
+    + '<span class="nm">' + esc(it.name) + (consensusActive() ? consensusChip(it) : '') + itemDetails(it)
     + (entry.reserved ? '<span class="fx"><b>Alternative hand only:</b> the main-hand recommendation already uses this unique item.</span>' : '')
     + '</span><span class="meta">' + esc(it.primary || '—')
     + (it.secondaries.length ? ' ' + esc(allocationText(it)) + fitText(it) : '')
@@ -1039,23 +1125,55 @@ function weaponLoadoutCards(items) {
 }
 
 /* Trinkets bypass the secondary-stat scorer entirely: their value lives in effects this
-   page does not model, so they are listed, never ranked. (The per-source letter-tier
-   comparison of DECISION G8 arrives with the Phase B guide harvest.) */
+   page does not model, so they are listed, never consensus-ranked. */
+/* DECISION G8: trinket letter tiers stay PER-SOURCE and are never merged onto one axis —
+   a trinket shows each source's own letter side by side and the reader judges. Trinkets
+   remain OUTSIDE the consensus top-5 ranking; the display order inside this card (by the
+   first source's letter, then guide mentions, then name) is a presentation convention,
+   not a ranking claim, and the card says so. */
+function trinketLetterOf(it, srcId) {
+  const g = guideSpec(CUR);
+  const tiers = g && g.trinketTiers && g.trinketTiers[srcId];
+  if (!tiers) return null;
+  const hit = tiers.find(t => t.itemIds.includes(String(it.id)));
+  return hit ? hit.tier : null;
+}
+function trinketChips(it) {
+  const chips = [];
+  const ivLetter = trinketLetterOf(it, 'icyveins');
+  if (ivLetter) chips.push('<span class="tag" data-trinket-letter="icyveins">Icy Veins: ' + esc(ivLetter) + '</span>');
+  const hit = consensusOf(it);
+  if (hit) chips.push('<span class="tag">named by ' + Object.keys(hit.mentions).length + '/3 guides</span>');
+  return chips.join('');
+}
+const TRINKET_LETTER_ORDER = {S: 0, A: 1, B: 2, C: 3, D: 4, F: 5};
 function trinketCard(list) {
   if (!list.length) return '';
-  const rows = list.slice().sort((a, b) => (b.effect ? 1 : 0) - (a.effect ? 1 : 0)).map(it =>
+  const sortKey = it => {
+    const letter = trinketLetterOf(it, 'icyveins');
+    return [letter != null ? TRINKET_LETTER_ORDER[letter] ?? 8 : 9, -consensusCount(it)];
+  };
+  const rows = list.slice().sort((a, b) => {
+    const [la, ca] = sortKey(a), [lb, cb] = sortKey(b);
+    return la - lb || ca - cb || (b.effect ? 1 : 0) - (a.effect ? 1 : 0) || a.name.localeCompare(b.name);
+  }).map(it =>
     '<div class="row" data-id="' + it.id + '">' + icoTag(it) + '<span class="nm">' + esc(it.name)
-    + itemDetails(it)
+    + trinketChips(it) + itemDetails(it)
     + (!it.effect ? '<span class="fx">no on-use or proc effect listed</span>' : '')
     + '</span><span class="meta">' + esc(it.primary || '—')
     + (it.secondaries.length ? ' ' + esc(allocationText(it)) : '')
     + '</span><span class="src' + (it.kind === 'mplus' ? ' mplus' : '') + '">'
     + esc(it.kind === 'mplus' ? it.dungeon : it.where) + '</span></div>').join('');
+  const hasLetters = list.some(it => trinketLetterOf(it, 'icyveins'));
   return '<div class="card wide"><h3>Trinkets<span>' + list.length + ' usable &middot; not ranked</span></h3>'
-    + '<div class="sub-note"><b>Still waiting on trinket sims for Season 2.</b> Trinket value lives in the '
-    + 'effect, not in secondary stats &mdash; most of these carry no secondaries at all &mdash; and the stat model '
-    + 'on this page deliberately does not score effects. Until trinket sims land, here is every usable trinket '
-    + 'with its full effect, listed by where it drops and never by how good it is. Role- or primary-specific '
+    + '<div class="sub-note"><b>Trinkets are deliberately outside the consensus ranking:</b> their value lives '
+    + 'in effects this page does not model. '
+    + (hasLetters
+      ? 'Where a guide publishes its own letter tiers they are shown PER SOURCE and never merged onto one '
+        + 'scale &mdash; the display order here (first source\'s letter, then guide mentions) is a presentation '
+        + 'convention, not a computed ranking. '
+      : '')
+    + 'Every usable trinket is listed with its full effect. Role- or primary-specific '
     + 'effects are filtered using explicit recommendation eligibility; excluded specs may still be able to equip '
     + 'the item technically. <b>This is the slot where a full item simulation matters most.</b></div>'
     + '<details class="more-items"><summary>Show all ' + list.length + ' trinkets</summary>' + rows
@@ -1260,7 +1378,7 @@ function renderUp() {
     return index < 0 ? 99 : index;
   };
 
-  $('#up').innerHTML = '<div class="grid">' + keys.sort((a, b) => slotPosition(a) - slotPosition(b)
+  $('#up').innerHTML = customBanner() + '<div class="grid">' + keys.sort((a, b) => slotPosition(a) - slotPosition(b)
     || a.localeCompare(b)).map(k => {
     const eq = MYGEAR[k];
     const threshold = eq.ilvl || cur;
@@ -1420,7 +1538,10 @@ function renderFooter() {
     + 'Direct tier data: ' + esc(TIER.source) + ', harvested ' + esc(TIER.harvestedAt) + '.<br>'
     + 'Catalyst policy: Blizzard 12.1 PTR notes, reviewed ' + esc(CATALYST.reviewedAt) + '.<br>'
     + 'Spec data: ' + esc(SPECS.source) + ', harvested ' + esc(SPECS.harvestedAt) + '.<br>'
-    + 'Item-level sheet: ' + esc(SHEET.source) + ', distilled ' + esc(SHEET.harvestedAt) + '.<br><b>'
+    + 'Item-level sheet: ' + esc(SHEET.source) + ', distilled ' + esc(SHEET.harvestedAt) + '.<br>'
+    + 'Guide consensus sources: ' + Object.values(GUIDES.sources).map(s =>
+      esc(s.name) + ' (harvested ' + esc(s.harvestedAt) + ')').join(', ')
+    + ' — each Build option names its own guide\'s update date.<br><b>'
     + esc(RAID.caveat) + '</b> ' + esc(SPECS.caveat) + '<br>'
     + '<b>Weapon loadouts are explicit, mutually exclusive configurations</b> curated from official Blizzard class pages and patch notes. '
     + 'Allowed types and direct official source links are shown inside each weapon card.<br>'

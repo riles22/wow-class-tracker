@@ -165,7 +165,10 @@ export function normalizeDropSource(text, rosters) {
     // Evidence (2026-08-18): Icy Veins anchors Nymrissa and Tidebound Grotto to its
     // midnight-world-bosses-guide; Wowhead names Nymrissa directly; Method sources
     // Sporefall (the one-boss lair raid CLAUDE.md records as deliberately untracked).
-    [/nymrissa|tidebound grotto|sporefall|rotmire/i, "world"],
+    // Vexhul added 08-18 evening: Icy Veins' own BiS rows source "Vexhul's Everflowing
+    // Gland" from Tidebound Grotto, so Vexhul is the Grotto's boss — Method just
+    // attributes by NPC where Icy Veins attributes by lair.
+    [/nymrissa|tidebound grotto|sporefall|rotmire|vexhul/i, "world"],
     [/^tier set$|tier set\b/i, "tier-token"],
     [/craft|spark of tides|profession|tailoring|blacksmithing|leatherworking|jewelcrafting|engineering|inscription|misc/i, "crafted"],
     [/^catalyst$/i, "catalyst"],
@@ -220,7 +223,15 @@ export function normalizeStatRun(entries) {
   // "Intellect > Mastery = Critical Strike > Haste" in one Method paragraph) —
   // tokenize on the separators first, keeping written order. Ties flatten in order
   // of appearance; the caller keeps `raw` verbatim so nothing is lost.
-  const tokens = entries.flatMap((raw) => normApostrophes(raw).split(/\s*(?:>=|=|>|&gt;)\s*/));
+  // Separators include "/" and repeated ">" ("Crit > Haste/ Mastery >>> Versatility",
+  // Method Demonology), and a leading inline label is stripped from each token
+  // ("Farseer : Mastery" — Method Elemental writes the scope INSIDE the run) so the
+  // first stat is never swallowed by the label (adversarial review, 2026-08-18).
+  const tokens = entries.flatMap((raw) => normApostrophes(raw).split(/\s*(?:>=|>+|=|\/|(?:&gt;)+)\s*/))
+    // Strip a leading inline label ("Farseer : Mastery") or prose run ending in "is"
+    // ("Current stat priority for Single Target is Crit") so the first stat is never
+    // swallowed — both shapes measured on Method 2026-08-18.
+    .map((tok) => tok.replace(/^[A-Za-z' -]{2,40}:\s*/, "").replace(/^.{0,60}\bis\s+/i, ""));
   for (const rawToken of tokens) {
     const t = rawToken.replace(/[.:]+$/, "").trim();
     const k = t.toLowerCase();
@@ -285,4 +296,73 @@ export async function fetchTextCurl(url, { tries = 3, delayMs = 1500, timeoutMs 
     if (attempt < tries) await new Promise((resolve) => setTimeout(resolve, attempt * 800));
   }
   return null;
+}
+
+/**
+ * Build the client's consensus payload from the three harvest files (Phase C, G1/G7/G8).
+ * Extracted from build.mjs so tests can feed it broken inputs and pin the loud failures.
+ *
+ * - builds: the UNION of published combinations, source-labeled (G7). When one source
+ *   publishes TWO different orders under one label (Wowhead's "Shado-Pan" twice, raid vs
+ *   M+ tab), the ids are uniquified and the labels disambiguated as "(list N)" — never
+ *   silently shadowed, never given an invented scope name.
+ * - candidates: bucketed by the CATALOG's slot when we know the item (the guides misfile
+ *   a handful — Icy Veins puts a Neck under Finger — and the catalog is our canonical
+ *   vocabulary); the guide's slot only buckets items outside our catalog.
+ * - consensus = distinct sources naming the item for the slot (G1).
+ */
+export function buildGuidePayload(guides, specs, { itemSlots = new Map(), sourceNames = {} } = {}) {
+  const payload = {
+    sources: Object.fromEntries(Object.entries(guides).map(([id, g]) =>
+      [id, { name: sourceNames[id] || id, harvestedAt: g.harvestedAt }])),
+    specs: {},
+  };
+  for (const s of specs) {
+    const key = `${s.spec} ${s.class}`;
+    const builds = [];
+    const labelCounts = new Map();
+    const bySlot = {};
+    const trinketTiers = {};
+    for (const [srcId, g] of Object.entries(guides)) {
+      const rec = g.specs[key];
+      if (!rec) continue;
+      for (const p of rec.priorities) {
+        if (!Array.isArray(p.secondaries) || p.secondaries.length < 2)
+          throw new Error(`${srcId}/${key}: malformed priority "${p.label}"`);
+        const lk = `${srcId}:${p.label}`;
+        labelCounts.set(lk, (labelCounts.get(lk) || 0) + 1);
+        builds.push({ id: lk, source: srcId, label: p.label,
+          primary: p.primary ?? null, secondaries: p.secondaries,
+          leadsWithItemLevel: !!p.leadsWithItemLevel, published: rec.published ?? null });
+      }
+      for (const r of rec.bis) {
+        const slot = itemSlots.get(String(r.itemId)) || r.slot;
+        const cell = (bySlot[slot] = bySlot[slot] || {});
+        const entry = (cell[r.itemId] = cell[r.itemId] || { itemId: r.itemId, mentions: {} });
+        (entry.mentions[srcId] = entry.mentions[srcId] || []).push(r.list);
+      }
+      if (rec.trinketTiers?.length)
+        trinketTiers[srcId] = rec.trinketTiers.map((t) => ({ tier: t.tier, itemIds: t.itemIds }));
+    }
+    // Second pass: disambiguate colliding (source,label) build ids.
+    const seen = new Map();
+    for (const b of builds) {
+      if ((labelCounts.get(b.id) || 0) > 1) {
+        const n = (seen.get(b.id) || 0) + 1;
+        seen.set(b.id, n);
+        b.label = `${b.label} (list ${n})`;
+        b.id = `${b.id}#${n}`;
+      }
+    }
+    const candidates = Object.fromEntries(Object.entries(bySlot).map(([slot, cell]) => [slot,
+      Object.values(cell).map((e) => ({ itemId: e.itemId,
+        consensus: Object.keys(e.mentions).length,
+        mentions: Object.fromEntries(Object.entries(e.mentions).map(([k, v]) => [k, [...new Set(v)]])) }))
+        .sort((a, b) => b.consensus - a.consensus)]));
+    payload.specs[key] = { builds, candidates, trinketTiers };
+  }
+  const buildCounts = Object.values(payload.specs).map((x) => x.builds.length);
+  if (buildCounts.length && Math.min(...buildCounts) < 1)
+    throw new Error("a spec has zero guide builds — harvest incomplete");
+  return payload;
 }
