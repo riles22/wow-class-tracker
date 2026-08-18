@@ -74,6 +74,37 @@ overview guides carries an `Item | Slot | Boss Drop` table (24–33 rows). The W
 a dead end for this — the raid zone listview links 15 of ~105 items, all to Ula'tek; new boss NPC
 pages have no drops tab; item pages name trash NPCs, not bosses.
 
+**Recon addendum (2026-08-18, Phase B build day — live re-verification corrected five recorded
+facts; the parse recipes of record now live in `gearing/src/harvest-guide-*.mjs` and their
+fixtures):**
+- **Method now self-dates** — every subpage carries `Last Updated: <ordinal date>` plus a
+  "Patch 12.1" chip, so G4's "must be labeled undated" concession is obsolete; its typographic
+  apostrophes are the HTML entity `&rsquo;`, never raw U+2019.
+- **Wowhead's BiS URL is role-less** (`/bis-gear`; the table's `bis-gear-pve-<role>` 404s), the
+  guide body is `WH.markup.printHtml` markup (items `[item=ID]`, bosses `[url guide=N]`),
+  `original-item=` is a markup attribute not a URL query, and only the Overall tab is a real
+  Slot|Item|Source table — its raid/M+ sections are slot-less icon strips. The 403-to-plain-curl
+  trap did not reproduce from a residential IP.
+- **Icy Veins moved item identity into `data-wowhead=` attributes** (no Wowhead hrefs remain, so
+  the `domain=ptr` trap is gone; `bonus=` runs 1–6 segments, not triplets), each list renders as
+  a PAIRED main+weapons grid, drop sources are now anchors to its own boss/dungeon guides, and
+  stat priorities are structured widgets that may LEAD with "Item Level".
+- **Cross-source name variance is real and handled in `lib-guides.mjs`**: "King's Rest" (IV)
+  vs canonical "Kings' Rest", Method's "Temple of Sethrallis" typo, dropped leading "The",
+  and world-boss attributions (Nymrissa Wavecaller / Tidebound Grotto) outside the M+ roster.
+  Text-join failures fall back to an item-ID join against our own catalog, flagged
+  `sourceTextUnmatched` — rows are never dropped (the hard-error rule holds when BOTH fail).
+- **Post-harvest findings (same day, full 40×3 run):** WCL zone 53 lists NINE encounters —
+  the ninth is **Nymrissa Wavecaller** (verified via GraphQL), whom Icy Veins nonetheless
+  files under world bosses and whose loot our 8-boss raid harvest does not carry; her rows
+  classify `world` pending a Phase E re-harvest look. Method also names **"Vexhul"** (not a
+  zone-53 encounter — unresolved, kept verbatim as `unknown`) and legitimately sources
+  old-expansion dungeons in alternatives rows; one Wowhead author writes sources as bare
+  `[npc=ID]`/`[zone=ID]` entities, preserved verbatim when no text exists.
+- **No soft caps found on any recon spec** ("Haste to 18%" is captured by the parser but the
+  idiom was absent 08-18); trinket letter-tier grids on Icy Veins also need per-spec
+  re-checking before G8's display work leans on them.
+
 ---
 
 ## The decisions

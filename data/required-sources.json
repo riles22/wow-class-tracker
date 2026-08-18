@@ -21,7 +21,10 @@
       { "key": "gearing-specs", "file": "specs.json", "dateField": "harvestedAt", "maxAgeDays": 30 },
       { "key": "gearing-icons", "file": "icons.json", "dateField": "harvestedAt", "maxAgeDays": 60 },
       { "key": "gearing-catalyst-rules", "file": "catalyst-rules.json", "dateField": "reviewedAt", "maxAgeDays": 45 },
-      { "key": "gearing-stat-baseline", "file": "stat-priority-baseline.json", "dateField": "reviewedAt", "maxAgeDays": 45 }
+      { "key": "gearing-stat-baseline", "file": "stat-priority-baseline.json", "dateField": "reviewedAt", "maxAgeDays": 45 },
+      { "key": "gearing-guide-icyveins", "file": "guides/icyveins.json", "dateField": "harvestedAt", "maxAgeDays": 30 },
+      { "key": "gearing-guide-wowhead", "file": "guides/wowhead.json", "dateField": "harvestedAt", "maxAgeDays": 30 },
+      { "key": "gearing-guide-method", "file": "guides/method.json", "dateField": "harvestedAt", "maxAgeDays": 30 }
     ]
   },
   "requirements": [
