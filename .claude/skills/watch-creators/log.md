@@ -1308,3 +1308,46 @@ disagree, re-scope the new evidence before retiring the old.
   `yt-dlp --print` could not settle it from this runner (datacenter bot wall, as expected),
   so it was left in place rather than purged on a guess — worth one metadata check from a
   residential IP, since it is at the head of the queue and has now spent several requests.
+
+## 2026-08-18 (LOCAL run, ~14:2xZ — Opus 5; scheduled residential catch-up, ~3.5h after the nightly)
+
+Queue **4 -> 0**. All four drained with yt-dlp (`player_client=android`, json3 auto-subs);
+every fetch returned captions on the first attempt, so nothing was re-queued and the
+Supadata monthly budget was untouched.
+
+- `okaZqAQVRN0` **izen**, *Midnight Season 2 | Raid Specs Meta Predictions* (08-17) —
+  **39 RAID-scoped metaNotes**, the counterpart to the 08-16 M+ set. This is the full-roster
+  raid read; **Holy Priest is the only spec he does not cover**. He states his own caveat on
+  camera (last raid testing 07-24, three to four tuning rounds since), so he reasons from
+  boss damage profiles rather than sims — carried into the `patchContext` verbatim in
+  substance.
+  **Superseded 34 older raid-ONLY izen notes.** The `both`- and `mplus`-scoped ones were
+  left alone deliberately: a raid-scoped read cannot retire a note that still carries M+
+  content, and the 08-15 tuning-pass notes are exactly that shape. Supersession was computed
+  with a local copy of `takeInBracket`'s own raid/mplus regexes, not by eyeballing dates.
+- `x0fxEWTq3Pw` **Zorthas**, *Pre-Season Tuning Analysis & Tier List Update* (08-18) —
+  **5 raid + 19 M+ metaNotes**, 24 older same-bracket notes retired. Two things worth
+  keeping: he **retracts** his earlier rogue-bearish video (his log data was wrong; Atrophic
+  does work on much of the new raid's environmental damage), and he announces a **content
+  pause for the next few weeks** during progression, so expect no uploads from him.
+  His prior `latest` claimed the 08-09 tier list was "NOT yet distilled" — that was wrong,
+  40 metaNotes dated 2026-08-09 exist; corrected in the same commit.
+- `jlbQAmQMRCM` **NeekapHere**, *Retribution Paladin BUFFED* (08-18) — **1 take**,
+  superseding his 08-17 read (audit stayed at MED 21, confirming it retired rather than
+  diluted). Sentiment recorded **`mixed`, not `buff`**: his own framing is that the +6% only
+  undoes an unexplained end-of-Season-1 nerf, and that the Divine Arbiter set still forces
+  the wrong spender outside Herald single target, leaving Ret mid-pack at best.
+- `6MlSd4nBtrI` **Dratnos**, *RWF Preview (Recap Day 0)* — **skipped[] (verified)**.
+  A multi-speaker panel: **217 speaker-change markers**, guests including Kalamazi and Tal.
+  Its Warrior content is a comp-drafting prediction game, and the one analytical line —
+  the most imbalanced two-target specs being Frost Mage, Arms, Outlaw and Devastation —
+  **cannot be attributed to Dratnos rather than a guest**. He already carries a live Arms
+  read dated 08-16. This is the durable-skip lane working as intended: the title
+  ("Race to World First Preview") would have been queued again next run otherwise.
+
+Measured effect of the whole drain: **7 projection SCORES moved, 0 projection letters,
+0 consensus letters** — the ±3 meta nudge staying within-tier, as designed.
+
+`latest` advanced for all three distilled creators. NeekapHere's standing warning
+("also posts cross-class news weeklies — those must never be distilled as Paladin takes")
+was preserved verbatim in the rewrite.

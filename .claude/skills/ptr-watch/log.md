@@ -887,3 +887,64 @@ one-shot; see docs/s2-flip-runbook.md.
   the machinery handles this by design (seasonVerified s2 → season-ahead lane + frozen
   letters, Archon still s1 and the only live-consensus contributor). **OWNER: the one-shot
   `SNAPSHOT_PHASE` flip is still pending — runbook date 08-18, `PHASE_FLIP_DUE` Aug 20.**
+
+## 2026-08-18 (LOCAL run, ~14:2xZ — Opus 5; scheduled residential catch-up, ~3.5h after the nightly)
+
+**Nothing ingested. No snapshot or asOf touched.** Season 2 launched with today's reset, so
+this run is mostly a state check at the boundary.
+
+**Build feed — no new entry.**
+- Forum dev-notes thread `2317811`: **unchanged since 07-31** (17 posts, highest 19,
+  last_posted 2026-07-31T23:42Z). The cycle has moved off this thread onto standalone topics.
+- Aug-18 tuning topic `2336820`: post #1 `updated_at` is still **2026-08-18T01:51Z** — the
+  exact value the nightly already recorded when it folded in the Disc Priest / Ret Paladin /
+  Frost DK edits. No further edits. (Its 214 replies are all player posts, not blue.)
+- **The 08-17 Wowhead hotfix round-up was deliberately NOT logged.** Its four class lines are
+  BM Hunter (Dire Beast Kill Commands now benefit from Killer Instinct / Alpha Predator /
+  Specialized Arsenal / Savagery), Holy Priest (spec-swap leaves SW:P not becoming Holy
+  Fire), Shaman (Lava Burst shows as Primal Strike in the spellbook) and Destruction (a
+  Shadowburn tooltip duration). **Three of the four are cosmetic**, and cosmetic lines vote
+  in the outlook tally through `classifyHighlight` — that is the "weakest evidence steers"
+  inversion the project has already rejected twice. One real-but-small scaling fix does not
+  justify importing three null-or-wrong votes. Reconsider only if a later round-up carries
+  actual tuning.
+- Also seen and out of per-spec scope: "Mythic+ Dungeon Tuning with Season 2 Launch",
+  "Venomcursed Items Secondary Stat Changes", "Hunter's Ritual Stone Weapon Embellishment
+  Nerfed" (item/dungeon tuning, not spec tuning).
+
+**WCL — the transport wall has changed SHAPE, and it is worth recording precisely.**
+From Riley's residential IP, the statistics-table endpoints no longer return a bare 403:
+they **302-redirect to `https://www.warcraftlogs.com/human-challenge`** (Server: cloudflare,
+CF-RAY present), which follows to a 200 challenge page of 2651 bytes. `src/wcl-probe.mjs`
+reports the same event as `HTTP 403 … CLOUDFLARE CHALLENGE` on all four of its site-table
+probes, so **the probe's "403" and a hand curl's "302" are the same wall seen two ways** —
+do not read the discrepancy as two different faults. **Not bypassed**: completing a
+human-challenge is out of bounds, so zones 46/52/54 stay frozen and honest.
+GraphQL is healthy on the same credentials (OAuth fine, 3600 points/hour): `dps` and
+`default` return data and are **byte-identical** (0 differing of 198 on enc 3176), while
+`rdps`/`ndps` still return a bare "Internal server error". The rDPS family is therefore
+still broken upstream and was **not** substituted from the raw-DPS series.
+
+**Zone enumeration — the flip-runbook step-7 confirmation, and it has flipped.**
+Step 7 asks for exactly this check "on the day". Both S2 zones were `frozen` when the
+runbook was written on 08-14; **they are now LIVE**:
+- **53** The Venomous Abyss — 9 encounters, partitions `1=12.1*`, Mythic 5 / size 20.
+- **55** Mythic+ Season 2 — 8 encounters, partitions `1=Season 2*`, Dungeon 10 / size 5.
+- **54** (PTR raid, 8 encounters) and **56** (PTR M+) have now gone **`frozen`** — the PTR
+  zones closed as the live ones opened, which is the cleanest possible confirmation that
+  53/55 are the right ids and not their PTR namesakes.
+- **57** The Tidebound Grotto still **0 encounters** — the standing 07-28 finding holds for
+  the fourth check. Nothing to ingest, still.
+- **New: 510 "The Venomous Abyss Complete Raid"** (1 encounter, partition `1=12.1*`), the S2
+  analogue of zone 509. Untracked, same scope decision as zone 50 "Sporefall".
+- ⚠ **Zone 46's default partition now reads `3=12.0.7*`, with `4=12.1` available** — the
+  runbook and CLAUDE.md both record the default as having moved to `4=12.1`. It has moved
+  back, or the earlier reading was of a transient. **The stored recipes pin partition 3, so
+  they are correct either way**, but the documented warning ("a zone-46 fetch that omits the
+  partition now returns 12.1 data under a 12.0.7 label") is not true today. Re-check rather
+  than trusting either number.
+
+**The flip itself was NOT performed** — see the run report and the commit message. It is a
+one-shot reviewed OWNER commit touching `scales.json` and `required-sources.json`, both on a
+local DATA run's never-touch list. `PHASES.liveSeason` is still `"s1"`; `PHASE_FLIP_DUE` is
+Aug 20.
