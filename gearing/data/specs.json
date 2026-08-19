@@ -2707,9 +2707,9 @@
       "statPrioritySource": "https://www.icy-veins.com/wow/elemental-shaman-pve-dps-stat-priority",
       "tierSet": {
         "set2": "Earth Shock, Elemental Blast, and Earthquake damage increased by 25%.",
-        "set4": "When Stormkeeper or Ascendance fade, your next 2 Lightning Bolts, Chain Lightnings, or Lava Bursts deal 25% increased damage and cause your next Earthquake, Earth Shock, or Elemental Blast to cost 100% less Maelstrom.",
-        "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
-        "asOf": "2026-06-18"
+        "set4": "When Stormkeeper or Ascendance fade, your next 2 Lightning Bolts, Chain Lightnings, or Lava Bursts deal 25% increased damage and cause your next Earthquake, Earth Shock, or Elemental Blast to cost 100% less Maelstrom. (2026-08-18 hotfix: a bug that sometimes failed to consume the resulting Overcharge! buff when a Maelstrom spending ability was cast — inflating the number of free casts — was corrected; the bonus wording itself is unchanged, and Elemental's all-damage +5% in the same round-up compensates for the fix.)",
+        "source": "https://us.forums.blizzard.com/en/wow/t/world-of-warcraft-midnight-hotfixes-august-18/2336376",
+        "asOf": "2026-08-18"
       }
     },
     {
@@ -3334,5 +3334,5 @@
       }
     }
   ],
-  "trackerFieldsSyncedAt": "2026-08-15"
+  "trackerFieldsSyncedAt": "2026-08-19"
 }
