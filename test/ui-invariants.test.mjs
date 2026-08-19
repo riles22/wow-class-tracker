@@ -299,8 +299,28 @@ ui("the What-changed strip agrees with the arrows the grid actually draws", asyn
      message it hid entirely and this test red at the flip state on the sanity line. */
   const boundaryOnly = shownLanes.length > 0 &&
     shownLanes.every(([, label]) => /baseline established/i.test(label));
+  /* A FOURTH honest shape (2026-08-19): the payload really has no movement in EITHER lane,
+     so both strips are correctly hidden and there is nothing for either to narrate.
+     Demanding movement here asserted the DATASET rather than the code — the same mistake
+     already corrected in the drill-through test below — and went red on the first night
+     that legitimately moved nothing (nightly a2ef039, "0 consensus moves"). Note the two
+     lanes carry SEPARATE fields: consensus movement lands on `spec.movement`, the forecast's
+     on `spec.projMovement` (they are computed by different passes, movementFor and
+     projectionMovementFor), so a check reading only one of them would go blind to the other.
+     The guard now runs in BOTH directions, which is strictly stronger than the assertion it
+     replaces: with movement present a lane must narrate it, and with none present no lane
+     may claim any. `agrees()` above has already tied each strip to the arrows the grid
+     actually draws, so a hidden strip still cannot mask a grid that IS drawing. */
+  const payloadMoved = payload().specs.some(sp =>
+    Object.values(sp.movement ?? {}).some(Boolean) ||
+    Object.values(sp.projMovement ?? {}).some(Boolean));
   if (!boundaryOnly) {
-    assert.ok(shownLanes.length > 0, "sanity: at least one lane must have movement to narrate");
+    if (payloadMoved) {
+      assert.ok(shownLanes.length > 0, "sanity: at least one lane must have movement to narrate");
+    } else {
+      assert.equal(shownLanes.length, 0,
+        `the payload has no movement in either lane, but ${shownLanes.length} strip(s) claim some`);
+    }
     for (const [src, label] of shownLanes) {
       assert.match(label, src === "consensus" ? /Consensus/ : /Ours: 12\.1/,
         `the ${src} strip must name its own lane, not the other one`);
@@ -510,12 +530,21 @@ test("no agent-writable field can inject markup or a handler into the rendered p
     // asOf is required on any writeup this fixture SYNTHESISES (the victim spec may not
     // have had one), and it is itself a rendered field — so poison-adjacent values must
     // still be valid data, or the hostile build fails validation before it can be probed.
+    /* DERIVE the date, never hard-code it (2026-08-19). The tier-set upkeep gate compares
+       tierSet.asOf against the newest build whose notes touch that spec's set, so a literal
+       here is a time bomb with a fuse the length of the next set change. It went off: the
+       Season-2 launch hotfix advanced Elemental Shaman's tierSet to 2026-08-18, the frozen
+       "2026-07-24" fell behind it, and this test died inside build() — before probing a
+       single sink — on a fixture fault that looked exactly like a data fault. Reading the
+       date off the same feed the gate reads keeps the fixture valid for every future build. */
+    const feed = await load("ptr-builds.json");
+    const PROBE_DATE = (feed.builds ?? feed).reduce((max, b) => (b.date > max ? b.date : max), "2026-07-24");
     s.ptr = { verdict: "Mixed", theme: TEXT_BREAK, summary: ATTR_BREAK,
       changes: [TEXT_BREAK, ATTR_BREAK], set2: TEXT_BREAK, set4: ATTR_BREAK,
-      watch: TEXT_BREAK, source: "https://www.wowhead.com/news/probe", asOf: "2026-07-24" };
-    s.tierSet = { set2: TEXT_BREAK, set4: ATTR_BREAK, asOf: "2026-07-24", source: "https://www.wowhead.com/probe" };
+      watch: TEXT_BREAK, source: "https://www.wowhead.com/news/probe", asOf: PROBE_DATE };
+    s.tierSet = { set2: TEXT_BREAK, set4: ATTR_BREAK, asOf: PROBE_DATE, source: "https://www.wowhead.com/probe" };
     s.metrics = [...(s.metrics ?? []), { source: "warcraftlogs", bracket: "raid",
-      name: `Median rDPS ${TEXT_BREAK}`, value: 1, unit: ATTR_BREAK, asOf: "2026-07-24" }];
+      name: `Median rDPS ${TEXT_BREAK}`, value: 1, unit: ATTR_BREAK, asOf: PROBE_DATE }];
     await save("specs.json", specs);
 
     victim.claim = TEXT_BREAK;                 // creator/class/spec left intact on purpose
