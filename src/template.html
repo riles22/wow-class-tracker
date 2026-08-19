@@ -52,7 +52,7 @@ try {
     --ink:#EDE7F7; --ink-dim:#A99BC7; --ink-faint:#8B7EAE;
     --accent:#B57BEE; --accent-2:#7FD8FF; --gold:#F0C24B;
 
-    --t-s:#F0C24B; --t-aplus:#C77DFF; --t-a:#6AA8F0; --t-bplus:#4FBCBB; --t-b:#45C4A8; --t-c:#8A93A8; --t-d:#D2887A; --t-f:#D27575;
+    --t-splus:#FFE3A3; --t-s:#F0C24B; --t-aplus:#C77DFF; --t-a:#6AA8F0; --t-bplus:#4FBCBB; --t-b:#45C4A8; --t-c:#8A93A8; --t-d:#D2887A; --t-f:#D27575;
     --v-pos:#52C97A; --v-mix:#E0A73E; --v-neg:#E0655F;
 
     --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
@@ -288,11 +288,15 @@ try {
     display:inline-flex; align-items:center; justify-content:center; min-width:30px; height:24px;
     padding:0 7px; border-radius:6px; border:1px solid transparent
   }
+  /* S+ arrived on the LIVE Icy Veins scale 2026-08-14 (521ceaf) but only ever had a
+     style on no band at all — an unstyled tier falls through to the base .tier with no
+     color and read as invisible (Riley, 2026-08-18). Brighter white-gold: above S. */
+  .tier[data-t="S+"] {color:var(--t-splus); background:color-mix(in srgb,var(--t-splus) 15%,transparent); border-color:color-mix(in srgb,var(--t-splus) 42%,transparent)}
   .tier[data-t="S"]  {color:var(--t-s);     background:color-mix(in srgb,var(--t-s) 15%,transparent);     border-color:color-mix(in srgb,var(--t-s) 42%,transparent)}
   .tier[data-t="A+"] {color:var(--t-aplus); background:color-mix(in srgb,var(--t-aplus) 15%,transparent); border-color:color-mix(in srgb,var(--t-aplus) 42%,transparent)}
   .tier[data-t="A"]  {color:var(--t-a);     background:color-mix(in srgb,var(--t-a) 15%,transparent);     border-color:color-mix(in srgb,var(--t-a) 42%,transparent)}
-  /* B+ exists only on the Icy Veins 12.1 PTR scale — sits between A and B in hue as it
-     does in rank, so an unstyled band can never read as "no tier". */
+  /* B+ arrived with the Icy Veins PTR scale and joined the live scale 2026-08-14 —
+     sits between A and B in hue as it does in rank. */
   .tier[data-t="B+"] {color:var(--t-bplus); background:color-mix(in srgb,var(--t-bplus) 15%,transparent); border-color:color-mix(in srgb,var(--t-bplus) 42%,transparent)}
   .tier[data-t="B"]  {color:var(--t-b);     background:color-mix(in srgb,var(--t-b) 15%,transparent);     border-color:color-mix(in srgb,var(--t-b) 42%,transparent)}
   .tier[data-t="C"]  {color:var(--t-c);     background:color-mix(in srgb,var(--t-c) 15%,transparent);     border-color:color-mix(in srgb,var(--t-c) 42%,transparent)}
@@ -564,11 +568,6 @@ try {
      a reader came down here for — who the sources are and when they were snapshotted —
      and closes with identity. Needs its own top margin now that it is no longer the
      footer's first child sitting under the border. */
-  .footbrand{display:flex; gap:14px; align-items:flex-start; margin:26px 0 22px}
-  .footmark{width:40px; height:40px; flex:none}
-  .footword{font-family:var(--disp); font-weight:700; font-size:19px; color:#fff}
-  .foottag{margin:4px 0 6px; font-size:12.5px; color:var(--ink-faint); max-width:44ch}
-  .footcover{margin:0; font-family:var(--mono); font-size:11px; color:var(--ink-faint)}
   .foot-grid{display:grid; grid-template-columns:1fr; gap:22px}
   @media(min-width:720px){ .foot-grid{grid-template-columns:1.1fr .9fr} }
   .foot-h{font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); margin:0 0 11px}
@@ -848,7 +847,7 @@ try {
     <div class="rule"></div>
     <!-- One sentence of lede; the mental model folds. This paragraph ran five lines and
          was ~40% of a 329px masthead sitting directly above a page people check daily. -->
-    <div class="sub">Where every spec of <b>WoW: Midnight</b> stands — <b>not one site's opinion</b>, but every major tier list distilled into a single consensus with a <b>±</b> wherever they disagree, layered with live numbers, sim profiles, and per-spec PTR reads. <details class="sub-more"><summary>How to read it</summary><span id="tlcount">Several</span> tier lists feed a computed <b>consensus</b>, with a <b>±</b> marker where they disagree — flip between them with <b>View</b>, or pick <b>Ours: 12.1&nbsp;✦</b> for this site's own Season-2 forecast (a projection, never a source). Filter by era or a specific fight, and click <b>any row</b> for the full read: PTR changes, current numbers with ranks, sim fight profile, and community takes. Two tools up top: <b>📊 The Ladder</b> draws any measured ranking as a chart, and <b>⊞ Compare all</b> is the whole roster against every rating and rank on one screen. The <b>⚙ S2 Gearing</b> tab is a separate explorer for Season-2 gear and loot sources.</details></div>
+    <div class="sub">Where every spec of <b>WoW: Midnight</b> stands — <b>not one site's opinion</b>, but every major tier list distilled into a single consensus with a <b>±</b> wherever they disagree, layered with live numbers, sim profiles, and per-spec patch reads. <details class="sub-more"><summary>How to read it</summary><span id="tlcount">Several</span> tier lists feed a computed <b>consensus</b>, with a <b>±</b> marker where they disagree — flip between them with <b>View</b>, or pick <b>Ours: 12.1&nbsp;✦</b> for this site's own Season-2 forecast (a projection, never a source). Filter by era or a specific fight, and click <b>any row</b> for the full read: patch changes, current numbers with ranks, sim fight profile, and community takes. Two tools up top: <b>📊 The Ladder</b> draws any measured ranking as a chart, and <b>⊞ Compare all</b> is the whole roster against every rating and rank on one screen. The <b>⚙ S2 Gearing</b> tab is a separate explorer for Season-2 gear and loot sources.</details></div>
     <div class="stamp">
       <span><b>Baseline:</b> __ERA_BASELINE__</span>
       <span>__ERA_TRACKED_STAMP__</span>
@@ -1021,7 +1020,6 @@ try {
         </p>
       </div>
     </div>
-    <div class="footbrand"><svg class="footmark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#130B22" stroke="#B57BEE" stroke-opacity=".45" stroke-width="2.5"/><rect x="12" y="13" width="40" height="9" rx="4.5" fill="#F0C24B"/><rect x="12" y="27.5" width="29" height="9" rx="4.5" fill="#C77DFF"/><rect x="12" y="42" width="19" height="9" rx="4.5" fill="#6AA8F0"/></svg><div><div class="footword">Spec Tracker</div><p class="foottag">A multi-source class &amp; spec consensus for World of Warcraft — live numbers, PTR reads, and a forecast that shows its math. Updated nightly.</p><p class="footcover">__ERA_FOOTCOVER__</p></div></div>
     <div class="credits-block">
       <p class="foot-h">Creators &amp; theorycrafters</p>
       <p class="fine" style="margin-top:0">The tiers, sims, and takes here are the work of the WoW community. <b style="color:var(--ink-dim)">Creator takes are cited opinions — quoted, linked, and dated; never altered or presented as our own.</b> Full credit and thanks to everyone whose analysis this aggregates:</p>

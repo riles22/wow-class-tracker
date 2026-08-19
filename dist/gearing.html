@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-X/BxEFxufXH+YIlHifezCm1NhqXOESXl7BcjBN7xSo8='; style-src 'unsafe-inline'; font-src data:; img-src data:; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-4IryluyYBXGC0hvfoBA6OjHdNMU8Sz7ksFKUrrPtBzs='; style-src 'unsafe-inline'; font-src data:; img-src data:; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Spec Tracker &mdash; Season 2 Gearing</title>
 <!-- The Spec Tracker brand mark as favicon — same artwork as the tracker page, shipped
@@ -236,16 +236,12 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);
 table.paths td,table.paths th{padding:8px 12px;white-space:nowrap;font-size:13px}
 table.paths td.ilvl{font-family:var(--mono);font-weight:700;color:var(--t1)}
 table.paths .dash{color:var(--t4)}
-table.paths td.provcell{color:var(--t2)}
 table.paths tr.tr-adv td.ilvl{color:var(--adv)}
 table.paths tr.tr-vet td.ilvl{color:var(--vet)}
 table.paths tr.tr-champ td.ilvl{color:var(--champ)}
 table.paths tr.tr-hero td.ilvl{color:var(--hero)}
 table.paths tr.tr-myth td.ilvl{color:var(--myth)}
 table.paths tr:hover td{background:rgba(255,255,255,.03)}
-.prov{display:inline-block;margin-left:6px;font-size:10.5px;font-weight:700;letter-spacing:.6px;
-      text-transform:uppercase;color:var(--hero);border:1px solid rgba(255,148,54,.4);
-      border-radius:4px;padding:1px 4px;vertical-align:1px}
 
 /* ---- item tooltip: Wowhead's own markup, captured at harvest time and rendered here ---- */
 .row[data-id]{cursor:help}
@@ -1185,7 +1181,6 @@ function trinketCard(list) {
    community-sheet ladder, so it covers paths with no per-item data (Delves, world). */
 function ceilingCard() {
   if (!SHEET) return '';
-  const only = SHEET.sheetOnlyKeys || [];
   const paths = [
     {k: 'raidVault', h: 'Raid', extra: 'raidDrop'}, {k: 'dungeonVault', h: 'Mythic+', extra: 'dungeonDrop'},
     {k: 'delveVault', h: 'Delves', extra: 'delveCoffer'}, {k: 'preyVault', h: 'Prey', extra: 'preyHunt'},
@@ -1195,8 +1190,7 @@ function ceilingCard() {
     const rows = (SHEET.rewards[p.k] || []).concat(p.extra ? (SHEET.rewards[p.extra] || []) : []);
     if (!rows.length) return '';
     const top = rows.reduce((a, b) => (b.ilvl > a.ilvl ? b : a));
-    return '<div class="ceil"><div class="ceil-h">' + esc(p.h)
-      + (only.indexOf(p.k) >= 0 ? '<span class="prov">prov</span>' : '') + '</div>'
+    return '<div class="ceil"><div class="ceil-h">' + esc(p.h) + '</div>'
       + '<div class="ceil-v">' + top.ilvl + '</div>'
       + '<div class="ceil-s">' + esc(top.label) + '</div></div>';
   }).join('');
@@ -1562,10 +1556,11 @@ $('#parse').addEventListener('click', () => {
 $('#curilvl').addEventListener('input', renderUp);
 
 /* ---- all gearing paths ---------------------------------------------------
-   The full item-level ladder against every source that awards gear. Values
-   corroborated by our own harvest render plain; values only this sheet has are
-   marked provisional, because its author flags inferred cells in red text and
-   the CSV export we read strips colour.                                      */
+   The full item-level ladder against every source that awards gear. The
+   "prov"/provisional tags that marked sheet-only columns were removed at
+   Riley's request 2026-08-18 — post-launch the ladder is confirmed game data
+   (Gandalin chart updated launch day), so the early-season hedge had expired.
+   sheetOnlyKeys stays in the data for the validation disclosure.             */
 const PATH_COLS = [
   {k: 'raidDrop', h: 'Raid drop'}, {k: 'raidVault', h: 'Raid vault'},
   {k: 'dungeonDrop', h: 'Dungeon drop'}, {k: 'dungeonVault', h: 'Dungeon vault'},
@@ -1581,11 +1576,9 @@ const TRACK_OF = {266:'adv',269:'adv',272:'adv',276:'adv',279:'vet',282:'vet',28
 
 function renderPaths() {
   if (!SHEET) { $('#paths').innerHTML = '<div class="empty">no sheet data</div>'; return; }
-  const only = SHEET.sheetOnlyKeys || [];
   const v = SHEET.validation || {};
   $('#paths-note').innerHTML =
-    'Compare the maximum item level and full reward ladder for each Season 2 gearing path. Cells marked '
-    + '<span class="prov">provisional</span> rely on the community sheet and should be treated as early-season guidance.'
+    'Compare the maximum item level and full reward ladder for each Season 2 gearing path.'
     + '<details class="disclosure"><summary>Validation and source details</summary><div class="disclosure-body">'
     + '<b>' + (v.confirmed || 0) + ' of ' + (v.total || 0) + '</b> independent anchor checks agree with data '
     + 'harvested from game guides and loot tables. Unmarked columns have corroborated anchor points, but not every individual cell was independently verified. '
@@ -1600,12 +1593,12 @@ function renderPaths() {
   const used = PATH_COLS.filter(c => (SHEET.rewards[c.k] || []).length);
 
   const head = '<tr><th>ilvl</th>' + used.map(c =>
-    '<th>' + esc(c.h) + (only.indexOf(c.k) >= 0 ? '<span class="prov">prov</span>' : '') + '</th>').join('') + '</tr>';
+    '<th>' + esc(c.h) + '</th>').join('') + '</tr>';
 
   const body = SHEET.ladder.map(l => {
     const cells = used.map(c => {
       const val = idx[c.k][l];
-      return '<td class="' + (only.indexOf(c.k) >= 0 ? 'provcell' : '') + '">'
+      return '<td>'
         + (val ? esc(val.join(' / ')) : '<span class="dash">&middot;</span>') + '</td>';
     }).join('');
     const tr = TRACK_OF[l];
