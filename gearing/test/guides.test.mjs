@@ -217,6 +217,61 @@ test("harvested guide files satisfy the Phase B shape contract", async () => {
   }
 });
 
+test("enhancements data invariants: no ability/trinket pollution, no fragments, diamonds never filler", async () => {
+  // Every class of pollution the 2026-08-18 adversarial review found in the shipped
+  // payload, pinned against the harvested files so a future harvest cannot re-ship it:
+  // abilities as potions (Bloodlust), trinkets as flasks, enchants as oils, anchor-split
+  // fragment names, unique-equipped meta diamonds in the socket-everywhere filler lane.
+  for (const src of ["icyveins", "wowhead", "method"]) {
+    const g = await json(`data/guides/${src}.json`);
+    for (const [key, rec] of Object.entries(g.specs)) {
+      const enh = rec.enhancements;
+      if (!enh) continue;
+      const label = `${src}/${key}`;
+      const names = (list) => (list ?? []).map((c) => c.name);
+      for (const [cat, list] of Object.entries(enh.consumables ?? {})) {
+        if (cat === "note") continue;
+        for (const name of names(list)) {
+          assert.ok(name.length >= 4, `${label} ${cat}: fragment name "${name}"`);
+          // Wowhead and Method classify by their own authored labels (Type cells /
+          // bold row labels), which outrank any name heuristic — "Light's Potential"
+          // is a potion whose name says otherwise. Only the PROSE-classified source
+          // (Icy Veins) must satisfy the name-family gates; every source must satisfy
+          // cross-family exclusion (a potion candidate may never be a flask, etc.).
+          if (src === "icyveins") {
+            if (/Potion$/i.test(cat) || cat === "combatPotion")
+              assert.match(name, /potion|draught|elixir|philter|brew\b|potential\b|concoction/i,
+                `${label} ${cat}: non-potion-family candidate "${name}"`);
+            if (cat === "flask")
+              assert.match(name, /flask/i, `${label} flask: non-flask candidate "${name}"`);
+            if (cat === "augmentRune")
+              assert.match(name, /rune/i, `${label} augmentRune: non-rune candidate "${name}"`);
+            if (cat === "weaponBuff")
+              assert.match(name, /\boil\b|imbue|whetstone|sharpening|weightstone|rite of|sanctification/i,
+                `${label} weaponBuff: non-oil candidate "${name}"`);
+          }
+          if (/Potion$/i.test(cat) || cat === "combatPotion")
+            assert.doesNotMatch(name, /flask|\brune\b|enchant /i, `${label} ${cat}: cross-family "${name}"`);
+          if (cat === "flask")
+            assert.doesNotMatch(name, /potion|\brune\b|enchant /i, `${label} flask: cross-family "${name}"`);
+          if (cat === "food")
+            assert.doesNotMatch(name, /enchant |flask|potion|\brune\b/i, `${label} food: cross-family "${name}"`);
+        }
+      }
+      const uniqueNames = new Set(names(enh.gems?.unique).map((n) => n.toLowerCase()));
+      for (const name of names(enh.gems?.filler)) {
+        assert.ok(!/diamond$/i.test(name),
+          `${label}: meta diamond "${name}" in the filler lane (unique-equipped)`);
+        assert.ok(!uniqueNames.has(name.toLowerCase()),
+          `${label}: "${name}" in both gem lanes`);
+      }
+      for (const e of enh.enchants ?? [])
+        for (const name of names(e.candidates))
+          assert.ok(name.length >= 4, `${label} enchant ${e.slot}: fragment name "${name}"`);
+    }
+  }
+});
+
 test("unknown-kind rows stay capped — recipe drift trips loudly, never accumulates", async () => {
   for (const id of GUIDE_SOURCES) {
     const g = await json(`data/guides/${id}.json`);

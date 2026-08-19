@@ -26,7 +26,8 @@
 // id="stat-prio" .. the next guide-section-title.
 import { runGuideHarvest } from "./lib-guide-runner.mjs";
 import { canonicalRosters, canonicalSlot, fetchText, normApostrophes, resolveDropSource,
-  normalizeStatRun, parseSoftCaps } from "./lib-guides.mjs";
+  normalizeStatRun, parseSoftCaps, ENHANCEMENT_CONSUMABLE_KEYS, validateEnhancements }
+  from "./lib-guides.mjs";
 
 const kebab = (s) => s.toLowerCase().replace(/['’]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 const PANE_LISTS = { overall_table: "overall", raid_table: "raid", dungeon_table: "mplus" };
@@ -101,6 +102,102 @@ export function parseMethodPriorities(html) {
   });
 }
 
+// Enhancements (enchants / gems / consumables) — the lib-guides shared contract. All
+// three sections live on the SAME stats page harvestSpec already fetches (recon
+// 2026-08-18: zero extra requests). Each section is bounded id-anchor .. next
+// guide-section-title exactly like parseMethodPriorities — but consumables is the LAST
+// section on the page, so every capture also stops at </article> (or the tail swallows
+// the guide-next/footer markup). Item ids come from item=(\d+) ONLY: hrefs still carry
+// stale /beta/ and /ptr/ namespaces and the SAME item flips namespace between specs,
+// so the numeric id is the only stable key. A section or row the page lacks is real
+// absence, never a parse failure — Holy Paladin genuinely publishes no augment rune.
+const sectionOf = (html, id) => {
+  const m = html.match(new RegExp(
+    `id="${id}"[\\s\\S]*?(?=<div class="guide-section-title"|<\\/article>|$)`, "i"));
+  return m ? m[0].replace(/^[^>]*>\s*<h2[^>]*>[\s\S]*?<\/h2>\s*<\/div>/i, "") : null;
+};
+const itemLinks = (frag) => {
+  const raw = [...String(frag ?? "").matchAll(/<a\b[^>]*\bitem=(\d+)[^>]*>([\s\S]*?)<\/a>/gi)]
+    .map((m) => ({ id: m[1], name: textOnly(m[2]) })).filter((c) => c.name);
+  // Method sometimes splits one recommendation across two adjacent anchors sharing an
+  // id (Prot Warrior's "…Ren'dore" + "i" — adversarial review 2026-08-18): keep one
+  // candidate per id with the LONGEST name, and never emit fragment names (<4 chars).
+  const byId = new Map();
+  for (const c of raw) {
+    const prev = byId.get(c.id);
+    if (!prev || c.name.length > prev.name.length) byId.set(c.id, c);
+  }
+  return [...byId.values()].filter((c) => c.name.length >= 4);
+};
+// A labeled row is '<p><strong>Label:</strong> <a>…</a>…'. The bold element varies
+// (<strong> mostly, <b> sometimes) and the colon sits inside or outside it.
+function labeledRows(section) {
+  const rows = [];
+  for (const p of String(section ?? "").matchAll(/<p[^>]*>([\s\S]*?)<\/p>/gi)) {
+    const label = p[1].match(/^\s*<(strong|b)\b[^>]*>\s*([^<:]{1,40}?)\s*(?::\s*<\/\1>|<\/\1>\s*:)/i);
+    if (label) rows.push([normApostrophes(label[2]), p[1]]);
+  }
+  return rows;
+}
+// Leftover prose once the label and the links are gone is a real note — unless it is
+// only the "or" / "/" joiner between alternative candidates.
+const rowNote = (body) => {
+  const t = textOnly(body.replace(/^\s*<(strong|b)\b[^>]*>[\s\S]*?<\/\1>/i, " ")
+    .replace(/<a\b[^>]*>[\s\S]*?<\/a>/gi, " "));
+  return t && !/^(?:or|and|[/,+&\s.])+$/i.test(t) ? t : null;
+};
+const CONSUMABLE_LABELS = { food: "food", flask: "flask", "health potion": "healthPotion",
+  "mana potion": "manaPotion", "combat potion": "combatPotion", "weapon oil": "weaponBuff",
+  "weapon buff": "weaponBuff", rune: "augmentRune", "augment rune": "augmentRune", tea: "tea" };
+
+export function parseMethodEnhancements(html) {
+  const out = {};
+  const enchants = [];
+  for (const [label, body] of labeledRows(sectionOf(html, "enchants"))) {
+    const slot = canonicalSlot(label);   // Shoulder(s)/Rings/Boots/Weapon variance
+    const candidates = itemLinks(body);
+    if (!slot || !candidates.length) continue;
+    const note = rowNote(body);
+    enchants.push({ slot, candidates, ...(note ? { note } : {}) });
+  }
+  if (enchants.length) out.enchants = enchants;
+
+  // Gems markup is spec-inconsistent (pure unlabeled prose on some specs, bold-labeled
+  // rows with the link nested INSIDE the <b> on others), so never key on labels — a
+  // label-first parser silently misses the prose shape entirely. Collect every item
+  // link in the section and classify by NAME: the once-per-character meta gem is
+  // always an "… Eversong Diamond". The section's prose rides along as the note.
+  const gemSection = sectionOf(html, "gems");
+  const gemLinks = itemLinks(gemSection);
+  if (gemLinks.length) {
+    const isUnique = (c) => /eversong diamond/i.test(c.name) || /diamond\s*$/i.test(c.name);
+    const unique = gemLinks.filter(isUnique);
+    const filler = gemLinks.filter((c) => !isUnique(c));
+    const note = textOnly(gemSection);
+    out.gems = { ...(unique.length ? { unique } : {}), ...(filler.length ? { filler } : {}),
+      ...(note ? { note } : {}) };
+  }
+
+  // Consumables: labeled rows like enchants. A bare "Potions" row is classified by the
+  // ITEM NAME, never the label — the healer's Potions row holds a MANA potion.
+  const buckets = new Map();
+  const add = (key, cands) => {
+    if (cands.length) buckets.set(key, [...(buckets.get(key) ?? []), ...cands]);
+  };
+  for (const [label, body] of labeledRows(sectionOf(html, "consumables"))) {
+    const key = label.toLowerCase().trim().replace(/s$/, "");
+    const cands = itemLinks(body);
+    if (!cands.length) continue;
+    if (key === "potion") {
+      add("manaPotion", cands.filter((c) => /mana/i.test(c.name)));
+      add("combatPotion", cands.filter((c) => !/mana/i.test(c.name)));
+    } else if (CONSUMABLE_LABELS[key]) add(CONSUMABLE_LABELS[key], cands);
+  }
+  if (buckets.size) out.consumables = Object.fromEntries(
+    ENHANCEMENT_CONSUMABLE_KEYS.filter((k) => buckets.has(k)).map((k) => [k, buckets.get(k)]));
+  return Object.keys(out).length ? out : null;
+}
+
 async function harvestSpec(spec, rosters) {
   const base = `https://www.method.gg/guides/${kebab(spec.spec)}-${kebab(spec.class)}`;
   const bisHtml = await fetchText(`${base}/gearing`);
@@ -110,8 +207,11 @@ async function harvestSpec(spec, rosters) {
   const bis = bisHtml ? parseMethodBis(bisHtml, rosters) : [];
   if (!priorities.length && !bis.length)
     throw new Error("pages fetched but neither priorities nor BiS parsed — recipe drift?");
+  const enhancements = statHtml ? parseMethodEnhancements(statHtml) : null;
+  validateEnhancements(enhancements, `${spec.spec} ${spec.class}`);
   return { guideUrl: `${base}/gearing`,
-    published: methodDate(bisHtml || statHtml), priorities, bis };
+    published: methodDate(bisHtml || statHtml), priorities, bis,
+    ...(enhancements ? { enhancements } : {}) };
 }
 
 const isMain = process.argv[1] && import.meta.url.endsWith(process.argv[1].replace(/\\/g, "/").split("/").pop());

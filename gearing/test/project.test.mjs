@@ -109,7 +109,7 @@ function fakeDocument(data) {
   const ids = new Map();
   for (const id of ["spec", "profile", "scoring-mode", "spec-info", "scoring-summary", "weight-editor",
     "weight-crit", "weight-haste", "weight-mast", "weight-vers", "weight-reset", "bis-note", "bis",
-    "tier-note", "tier", "src", "paths-note", "paths", "up", "simc", "curilvl", "up-hint",
+    "tier-note", "tier", "enh-note", "enh", "src", "paths-note", "paths", "up", "simc", "curilvl", "up-hint",
     "p-items", "p-specs", "foot", "parse"])
     ids.set(id, new FakeElement(["spec", "profile", "scoring-mode"].includes(id) ? "select"
       : id.startsWith("weight-") && id !== "weight-reset" ? "input" : "div"));
@@ -584,6 +584,26 @@ test("client app: consensus-first ranking, source-labeled Builds, custom overrid
     const filtered = rdruBis.match(/data-eligibility-filtered="true" data-id="250214"[\s\S]*?<\/div>/);
     assert.ok(filtered, "the guides-named-but-eligibility-excluded trinket renders as a disclosed row");
     assert.match(rdruBis, /Excluded by recommendation eligibility/);
+  }
+
+  // Enhancements tab (Riley, 2026-08-18): consensus-ranked enchants/gems/consumables.
+  {
+    const enhHtml = document.ids.get("enh").innerHTML;
+    const enhNote = document.ids.get("enh-note").innerHTML;
+    if (/No enhancement recommendations harvested/.test(enhHtml)) {
+      // Pre-harvest state: the pane must say so honestly and render nothing else.
+      assert.equal(enhNote, "");
+    } else {
+      assert.match(enhNote, /Ranked by guide consensus/);
+      assert.match(enhNote, /Covered by <b>\d of 3<\/b> guides/);
+      assert.match(enhHtml, /<h3>Enchants<span>/);
+      assert.match(enhHtml, /Main Hand/);
+      assert.match(enhHtml, /<h3>Consumables<span>/);
+      // Every candidate row carries a consensus chip; ranks start at 1 per group.
+      assert.match(enhHtml, /data-enh-cand="true"/);
+      assert.match(enhHtml, /\d\/3 guides: /);
+      assert.doesNotMatch(enhHtml, /undefined/);
+    }
   }
 
   // G7: the Build selector lists exactly the published combinations, source-labeled.

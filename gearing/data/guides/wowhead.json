@@ -3,7 +3,7 @@
   "source": "Wowhead",
   "sourceId": "wowhead",
   "dated": true,
-  "harvestedAt": "2026-08-18",
+  "harvestedAt": "2026-08-19",
   "specs": {
     "Blood Death Knight": {
       "guideUrl": "https://www.wowhead.com/guide/classes/death-knight/blood/bis-gear",
@@ -400,7 +400,52 @@
           "dungeon": null,
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "consumables": {
+          "flask": [
+            {
+              "id": "241324",
+              "name": "Flask of the Blood Knights"
+            },
+            {
+              "id": "241326",
+              "name": "Flask of the Shattered Sun"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241288",
+              "name": "Potion of Recklessness"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "food": [
+            {
+              "id": "242273",
+              "name": "Blooming Feast"
+            }
+          ],
+          "note": "Flasks: The best Flask for Blood Death Knights is Flask of the Blood Knights or Flask of the Shattered Sun. Unlike prior expansions, no consumables or other effects are tied to the use of a flask. If you are specifically after damage reduction in order to guarantee survival on something, and you are certain that a flask will offset this, Flask of Thalassian Resistance is available. In addition to this, stacking versatility to just enough so that it is your first stat by rating allows you to use Potion of Recklessness as a direct defensive cooldown. · Food: Blood Death Knights have two choices at their disposal in Midnight: a primary stat feast, and a secondary stat feast. The secondary stat feat gives slightly more rating and will typically be better, but this is not always guaranteed. Primary stat: Harandar Celebration; Secondary stats: Blooming Feast; We strongly recommend simming these choices."
+        }
+      }
     },
     "Frost Death Knight": {
       "guideUrl": "https://www.wowhead.com/guide/classes/death-knight/frost/bis-gear",
@@ -613,7 +658,119 @@
           "dungeon": null,
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "243963",
+                "name": "Enchant Shoulders - Akil'zon's Swiftness"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark of the Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "243981",
+                "name": "Enchant Helm - Empowered Blessing of Speed"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "244641",
+                "name": "Forest Hunter's Armor Kit"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "244009",
+                "name": "Enchant Boots - Farstrider's Hunt"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "243957",
+                "name": "Enchant Ring - Eyes of the Eagle"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240983",
+              "name": "Indecipherable Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240908",
+              "name": "Flawless Masterful Garnet"
+            }
+          ],
+          "note": "For maximum damage, you will want to use Indecipherable Eversong Diamond as your Diamond; the increased Strength means it outweighs Powerful Eversong Diamond. If you are using one of the embellishments that deals with gem colors, double-check that your gems are the colors you need. Amethyst : Flawless Deadly Amethyst; Garnet : Flawless Masterful Garnet; Peridot : Flawless Deadly Peridot; Lapid : Flawless Deadly Lapis"
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241326",
+              "name": "Flask of the Shattered Sun"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241308",
+              "name": "Light's Potential"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "241304",
+              "name": "Silvermoon Health Potion"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "food": [
+            {
+              "id": "242275",
+              "name": "Royal Roast"
+            }
+          ],
+          "note": "Combat Potion: The best combat potion is Light's Potential. Another option is Draught of Rampant Abandon. The void zone dropped is fairly easy to play around as a melee DPS, but in hectic situations, you may not notice fast enough to start moving out and will lose a GCD, making it no longer worth it. · Food: The differences between the food buffs are very slight; do not worry too much about which one it is as long as you have one. Feast: Hearty Silvermoon Parade/Hearty Quel'dorei Medley; Personal Food: Royal Roast"
+        }
+      }
     },
     "Unholy Death Knight": {
       "guideUrl": "https://www.wowhead.com/guide/classes/death-knight/unholy/bis-gear",
@@ -815,7 +972,48 @@
           "dungeon": null,
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "consumables": {
+          "flask": [
+            {
+              "id": "241322",
+              "name": "Flask of the Magisters"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241288",
+              "name": "Potion of Recklessness"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "241304",
+              "name": "Silvermoon Health Potion"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "food": [
+            {
+              "id": "255845",
+              "name": "Silvermoon Parade"
+            }
+          ],
+          "note": "Diamond: Indecipherable Eversong Diamond · Other Gems: Flawless Masterful Garnet · Consumable Cheat Sheet: Type Best Options Flask Flask of the Magisters Flask of the Shattered Sun Combat Potion Potion of Recklessness Light's Potential Health Potion Silvermoon Health Potion - Weapon Buff Thalassian Phoenix Oil Refulgent Whetstone/Refulgent Weightstone Augment Rune Void-Touched Augment Rune Food Silvermoon Parade Royal Roast Diamond Indecipherable Eversong Diamond Powerful Eversong Diamond Other Gems Flawless Masterful Garnet Flawless Deadly Amethyst · Flasks: The best Flask for Unholy Death Knights depends on your current stats. If Mastery is high enough to where using Flask of the Shattered Sun keeps Mastery higher, use this. Instead, if you need some extra Mastery to keep it as your highest stat (by rating), use Flask of the Magisters. · Combat Potion: Potion of Recklessness is always the best option for Unholy Death Knights, as our love for secondary stats knows no bounds. If Light's Potential is cheaper, it can be used instead, as Strength is still plenty valuable for us. · Weapon Buff: For their weapons, Unholy Death Knights have a few options. The best one is generally Thalassian Phoenix Oil, as the secondary stats this provides are quite good. Alternatively, you can use Refulgent Whetstone or Refulgent Weightstone, depending on your weapon type. Make sure that you buy the correct one - Whetstone for Swords and Axes, Weightstone for Maces. · Food: Unholy Death Knights are most likely using primary stat foods in Midnight. As always, sim your character to check which food is the best for your configuration of secondary stats. Feast: Silvermoon Parade; Personal Food: Royal Roast"
+        }
+      }
     },
     "Havoc Demon Hunter": {
       "guideUrl": "https://www.wowhead.com/guide/classes/demon-hunter/havoc/bis-gear",
@@ -1031,7 +1229,133 @@
           "dungeon": null,
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "243971",
+                "name": "Enchant Weapon - Jan'alai's Precision"
+              }
+            ],
+            "note": "Enchant Weapon - Jan'alai's Precision is the best weapon enchant, using one each of Enchant Weapon - Jan'alai's Precision and Enchant Weapon - Arcane Mastery can be better depending on your characters stats."
+          },
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "244007",
+                "name": "Enchant Helm - Empowered Rune of Avoidance"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "243991",
+                "name": "Enchant Shoulders - Amirdrassil's Grace"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark of the Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "244641",
+                "name": "Forest Hunter's Armor Kit"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243953",
+                "name": "Enchant Boots - Lynx's Dexterity"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "243957",
+                "name": "Enchant Ring - Eyes of the Eagle"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240967",
+              "name": "Powerful Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240908",
+              "name": "Flawless Masterful Garnet"
+            }
+          ],
+          "note": "One of each color, Fill with: Flawless Masterful Garnet · Havoc Demon Hunter will want to use Powerful Eversong Diamond as their single Unique Eversong Diamond. To buff it, one each of Flawless Masterful Garnet, Flawless Deadly Amethyst, Flawless Deadly Peridot, and Flawless Deadly Lapis. Fill any remaining gem sockets with Flawless Masterful Garnet"
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241326",
+              "name": "Flask of the Shattered Sun"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241288",
+              "name": "Potion of Recklessness"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "food": [
+            {
+              "id": "242275",
+              "name": "Royal Roast"
+            },
+            {
+              "id": "242747",
+              "name": "Hearty Royal Roast"
+            }
+          ],
+          "note": "Flasks: The best Flask for Havoc Demon Hunter is Flask of the Shattered Sun, though this depends on your precise gear and Flask of the Magisters can be used if you need Mastery more than Critical Strike. · Food: In Midnight, Havoc Demon Hunters currently prefer Primary Stat food. The Feast Hearty Harandar Celebration is preferred as it also gives Stamina. Feast: Hearty Harandar Celebration; Personal Food: Royal Roast / Hearty Royal Roast"
+        }
+      }
     },
     "Devourer Demon Hunter": {
       "guideUrl": "https://www.wowhead.com/guide/classes/demon-hunter/devourer/bis-gear",
@@ -1236,7 +1560,149 @@
           "dungeon": "Murder Row",
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "244031",
+                "name": "Enchant Weapon - Arcane Mastery"
+              }
+            ]
+          },
+          {
+            "slot": "Off Hand",
+            "candidates": [
+              {
+                "id": "244031",
+                "name": "Enchant Weapon - Arcane Mastery"
+              }
+            ]
+          },
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "244007",
+                "name": "Enchant Helm - Empowered Rune of Avoidance"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark of the Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "243991",
+                "name": "Enchant Shoulders - Amirdrassil's Grace"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "240133",
+                "name": "Sunfire Silk Spellthread"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243953",
+                "name": "Enchant Boots - Lynx's Dexterity"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "243957",
+                "name": "Enchant Ring - Eyes of the Eagle"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240983",
+              "name": "Indecipherable Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240898",
+              "name": "Flawless Deadly Amethyst"
+            },
+            {
+              "id": "240900",
+              "name": "Flawless Quick Amethyst"
+            }
+          ],
+          "note": "Flawless Deadly Amethyst or Flawless Quick Amethyst"
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241322",
+              "name": "Flask of the Magisters"
+            },
+            {
+              "id": "241326",
+              "name": "Flask of the Shattered Sun"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241288",
+              "name": "Potion of Recklessness"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "food": [
+            {
+              "id": "275266",
+              "name": "Feast of Knowledge"
+            },
+            {
+              "id": "242274",
+              "name": "Champion's Bento"
+            }
+          ],
+          "note": "Flask: Flask of the Magisters or Flask of the Shattered Sun · Food: Feast of Knowledge or Champion's Bento · Flasks: The best Flask for Devourer Demon Hunters is Flask of the Magisters, though Flask of the Blood Knights can be useful for Annihilator . Flask of the Shattered Sun can also be useful, should you have much higher Mastery relative to your Critical Strike."
+        }
+      }
     },
     "Vengeance Demon Hunter": {
       "guideUrl": "https://www.wowhead.com/guide/classes/demon-hunter/vengeance/bis-gear",
@@ -1453,7 +1919,123 @@
           "dungeon": null,
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "243981",
+                "name": "Enchant Helm - Empowered Blessing of Speed"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark of the Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "243963",
+                "name": "Enchant Shoulders - Akil'zon's Swiftness"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "244641",
+                "name": "Forest Hunter's Armor Kit"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "244009",
+                "name": "Enchant Boots - Farstrider's Hunt"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "243957",
+                "name": "Enchant Ring - Eyes of the Eagle"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240983",
+              "name": "Indecipherable Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240890",
+              "name": "Flawless Deadly Peridot"
+            }
+          ],
+          "note": "For maximum damage, you will want to use Powerful Eversong Diamond as your Eversong Diamond, and a combination of at least 1 of each gem type, then Flawless Deadly Peridot or Flawless Versatile Peridot in all other sockets. Peridot : Flawless Versatile Peridot; Lapis : Flawless Quick Lapis; Garnet : Flawless Quick Garnet; Amethyst : Flawless Quick Amethyst; As the damage increase provided by Powerful Eversong Diamond is so low, you should likely opt instead for Indecipherable Eversong Diamond as the consistent mainstat also provides more defensive benefit. As always, sim yourself, just in case."
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241325",
+              "name": "Flask of the Blood Knights"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241308",
+              "name": "Light's Potential"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "food": [
+            {
+              "id": "255846",
+              "name": "Harandar Celebration"
+            },
+            {
+              "id": "242273",
+              "name": "Blooming Feast"
+            }
+          ],
+          "note": "Combat Potion: While there are many options for potions, Vengeance Demon Hunters will nearly always use Light's Potential. Draught of Rampant Abandon grants more stat but can get you killed due to the silence, so it's not worth the risk. Meanwhile, Potion of Recklessness will practically get you to the stat cap, so it can have niche uses. · Weapon Buff: Thalassian Phoenix Oil is a good option for Vengeance Demon Hunters because it provides both of our preferred Secondary stats. However, if you want to focus purely on damage, you can use Smuggler's Enchanted Edge for single-target or Refulgent Weightstone/Refulgent Whetstone depending on your weapon type for AoE. · Food: In Midnight, Vengeance Demon Hunters are most likely using the Primary feast due to the outsized value of Primary stat in early expansion. As always, sim your character to check which food is the best for your configuration of Secondary stats. Secondary stat food: Blooming Feast/Quel'dorei Medley (Feast), Champion's Bento/Flora Frenzy/Venom-Spiced Cutlets(Individual Food) Agility Feast: Harandar Celebration/Silvermoon Parade"
+        }
+      }
     },
     "Balance Druid": {
       "guideUrl": "https://www.wowhead.com/guide/classes/druid/balance/bis-gear",
@@ -1666,7 +2248,137 @@
           "dungeon": "Altar of Fangs",
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "244031",
+                "name": "Enchant Weapon - Arcane Mastery"
+              }
+            ],
+            "note": "The option for weapon enchants comes down to flat secondary stats in Thalassian Phoenix Oil or a damage proc in Smuggler's Enchanted Edge. The damage proc is currently simming quite low, so we opt for the secondary stats instead."
+          },
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "244007",
+                "name": "Enchant Helm - Empowered Rune of Avoidance"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "243991",
+                "name": "Enchant Shoulders - Amirdrassil's Grace"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark of the Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "240133",
+                "name": "Sunfire Silk Spellthread"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243953",
+                "name": "Enchant Boots - Lynx's Dexterity"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "243957",
+                "name": "Enchant Ring - Eyes of the Eagle"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240983",
+              "name": "Indecipherable Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240900",
+              "name": "Flawless Quick Amethyst"
+            }
+          ],
+          "note": "Due to differences in stat distribution you may want to use gems with different stats on them. Generally Balance always opt into ones with Mastery . There are also effects like Prismatic Focusing Iris that increases in power the more different colored gems you have. Garnet : Flawless Masterful Garnet; Peridot : Flawless Masterful Peridot; Amethyst : Flawless Quick Amethyst; Lapis : Flawless Masterful Lapis"
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241322",
+              "name": "Flask of the Magisters"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241308",
+              "name": "Light's Potential"
+            },
+            {
+              "id": "241288",
+              "name": "Potion of Recklessness"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243733",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "food": [
+            {
+              "id": "255847",
+              "name": "Impossibly Royal Roast"
+            },
+            {
+              "id": "242274",
+              "name": "Champion's Bento"
+            }
+          ],
+          "note": "Flasks: You should sim your character to determine the best Flask option for you. The available flasks are: Flask of the Shattered Sun Flask of the Blood Knights Flask of the Magisters Flask of Thalassian Resistance"
+        }
+      }
     },
     "Feral Druid": {
       "guideUrl": "https://www.wowhead.com/guide/classes/druid/feral/bis-gear",
@@ -1868,7 +2580,54 @@
           "dungeon": null,
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "consumables": {
+          "flask": [
+            {
+              "id": "241326",
+              "name": "Flask of the Shattered Sun"
+            },
+            {
+              "id": "241322",
+              "name": "Flask of the Magisters"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241288",
+              "name": "Potion of Recklessness"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "food": [
+            {
+              "id": "255846",
+              "name": "Harandar Celebration"
+            },
+            {
+              "id": "242275",
+              "name": "Royal Roast"
+            },
+            {
+              "id": "242299",
+              "name": "Sanguithorn Tea"
+            }
+          ],
+          "note": "Flask: / Flask of the Shattered Sun (best) / Flask of the Magisters (alternative) / · Weapon Buff (Main hand): Thalassian Phoenix Oil · Weapon Buff (Off hand): Thalassian Phoenix Oil · Food: Harandar Celebration (feast) / Royal Roast / Sanguithorn Tea (Stacks with other food) · Combat Potion: While there are many options for potions, Feral Druids will use Draught of Rampant Abandon. The void pools spawned by this poiton silence you, which means you need to actively run out of them. Switching to Light's Potential is advised if the void pool mechanism becomes overwhelming. · Health Potion: The best healing potion for Feral Druids is Silvermoon Health Potion. · Weapon Buff: For Feral Druids weapons the best option is listed below: Main Hand: Thalassian Phoenix Oil · Food: In Midnight, Feral Druids will use Feasts where possible due to the relative strength of agility to Secondary stats. As always, sim your character to check which food is the best for your configuration of Secondary stats. Feast: Blooming Feast; Personal Food: Crimson Calamari; It's also worth noting that you can use Taa's such as Sanguithorn Tea alongside a regular food buff for a 5% speed increase."
+        }
+      }
     },
     "Guardian Druid": {
       "guideUrl": "https://www.wowhead.com/guide/classes/druid/guardian/bis-gear",
@@ -2056,7 +2815,135 @@
           "dungeon": null,
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "243973",
+                "name": "Enchant Weapon - Berserker's Rage"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "243963",
+                "name": "Enchant Shoulders - Akil'zon's Swiftness"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark of the Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "243981",
+                "name": "Enchant Helm - Empowered Blessing of Speed"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "244641",
+                "name": "Forest Hunter's Armor Kit"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "244009",
+                "name": "Enchant Boots - Farstrider's Hunt"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "244015",
+                "name": "Enchant Ring - Silvermoon's Alacrity"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240983",
+              "name": "Indecipherable Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240894",
+              "name": "Flawless Versatile Peridot"
+            }
+          ]
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241324",
+              "name": "Flask of the Blood Knights"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241292",
+              "name": "Draught of Rampant Abandon"
+            },
+            {
+              "id": "241308",
+              "name": "Light's Potential"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "food": [
+            {
+              "id": "255845",
+              "name": "Silvermoon Parade"
+            },
+            {
+              "id": "255846",
+              "name": "Harandar Celebration"
+            }
+          ],
+          "note": "Combat Potion: Draught of Rampant Abandon or Light's Potential"
+        }
+      }
     },
     "Restoration Druid": {
       "guideUrl": "https://www.wowhead.com/guide/classes/druid/restoration/bis-gear",
@@ -2401,7 +3288,52 @@
           "dungeon": "Murder Row",
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "consumables": {
+          "flask": [
+            {
+              "id": "241324",
+              "name": "Flask of the Blood Knights"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241288",
+              "name": "Potion of Recklessness"
+            },
+            {
+              "id": "241300",
+              "name": "Lightfused Mana Potion"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "241304",
+              "name": "Silvermoon Health Potion"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "food": [
+            {
+              "id": "255846",
+              "name": "Harandar Celebration"
+            }
+          ],
+          "note": "Combat Potion: Potion of Recklessness (Preferred) / Lightfused Mana Potion (Situational) · Health Potion: You'll use Concentrated Silvermoon Health Potion as your Health potion. Make sure you keybind it and use it often! · Weapon Buff: You'll put Thalassian Phoenix Oil on your weapon in both content types. Oil of Dawn is not very good."
+        }
+      }
     },
     "Augmentation Evoker": {
       "guideUrl": "https://www.wowhead.com/guide/classes/evoker/augmentation/bis-gear",
@@ -2619,7 +3551,127 @@
           "dungeon": null,
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "244031",
+                "name": "Enchant Weapon - Arcane Mastery"
+              }
+            ]
+          },
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "244007",
+                "name": "Enchant Helm - Empowered Rune of Avoidance"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "243991",
+                "name": "Enchant Shoulders - Amirdrassil's Grace"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark of the Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "240133",
+                "name": "Sunfire Silk Spellthread"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243953",
+                "name": "Enchant Boots - Lynx's Dexterity"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "243959",
+                "name": "Enchant Ring - Zul'jin's Mastery"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240983",
+              "name": "Indecipherable Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240898",
+              "name": "Flawless Deadly Amethyst"
+            }
+          ]
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241322",
+              "name": "Flask of the Magisters"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241288",
+              "name": "Potion of Recklessness"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "food": [
+            {
+              "id": "266985",
+              "name": "Hearty Silvermoon Parade"
+            }
+          ],
+          "note": "Food: Augmentation Evokers will likely prefer to use feasts which provide Intellect over other alternative food options. Personal food can be used instead of a feast, but this comes at the cost of bonus Stamina. Feast: Hearty Silvermoon Parade; Personal Food: Hearty Royal Roast"
+        }
+      }
     },
     "Devastation Evoker": {
       "guideUrl": "https://www.wowhead.com/guide/classes/evoker/devastation/bis-gear",
@@ -2837,7 +3889,140 @@
           "dungeon": null,
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "244029",
+                "name": "Enchant Weapon - Acuity of the Ren'dorei"
+              }
+            ]
+          },
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "244007",
+                "name": "Enchant Helm - Empowered Rune of Avoidance"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "243991",
+                "name": "Enchant Shoulders - Amirdrassil's Grace"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark of the Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "240133",
+                "name": "Sunfire Silk Spellthread"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243953",
+                "name": "Enchant Boots - Lynx's Dexterity"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "243987",
+                "name": "Enchant Ring - Nature's Fury"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240983",
+              "name": "Indecipherable Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240906",
+              "name": "Flawless Quick Garnet"
+            },
+            {
+              "id": "240908",
+              "name": "Flawless Masterful Garnet"
+            }
+          ],
+          "note": "One Indecipherable Eversong Diamond with a mix of Flawless Quick Garnet and Flawless Masterful Garnet. · For maximum damage, you will want to use Indecipherable Eversong Diamond as your Diamond, and a mix of Flawless Quick Garnet and Flawless Masterful Garnet in all other sockets. Powerful Eversong Diamond is also very close, but requires a combination of at least 1 Peridot, 1 Lapis, 1 Garnet, and 1 Amethyst. Indecipherable Eversong Diamond does not require as many gem slots. As always, sim yourself. Peridot : Flawless Deadly Peridot; Amethyst : Flawless Deadly Amethyst; Garnet : Flawless Quick Garnet; Lapis : Flawless Deadly Lapis"
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241326",
+              "name": "Flask of the Shattered Sun"
+            },
+            {
+              "id": "241322",
+              "name": "Flask of the Magisters"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241288",
+              "name": "Potion of Recklessness"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "food": [
+            {
+              "id": "255846",
+              "name": "Harandar Celebration"
+            },
+            {
+              "id": "242272",
+              "name": "Quel'dorei Medley"
+            }
+          ],
+          "note": "Flasks: The best Flask for Devastation Evokers is Flask of the Shattered Sun. Flask of the Magisters and Flask of the Blood Knights can also be good to push your Haste and Mastery above Versatility for Potion of Recklessness. · Combat Potion: When it comes to combat potions, they are both close. Potion of Recklessness is best if your stats are good. Light's Potential is slightly worse, but does not have any special requirements. · Health Potion: The best healing potion for Devastation Evokers is Silvermoon Health Potion. · Food: In Midnight, personal stat food is no better than feast buffs. Intellect food is equivalent to Secondary stats. As always, sim your character to check which food is the best for your configuration of Secondary stats. Feast: Harandar Celebration and Quel'dorei Medley are equal; Personal Food: Champion's Bento; In addition to food, you can also consume any tea (ex: Sanguithorn Tea) for a movement speed increase that stacks with your food buff."
+        }
+      }
     },
     "Preservation Evoker": {
       "guideUrl": "https://www.wowhead.com/guide/classes/evoker/preservation/bis-gear",
@@ -3034,7 +4219,52 @@
           "droppedBy": null,
           "sourceTextFuzzy": true
         }
-      ]
+      ],
+      "enhancements": {
+        "consumables": {
+          "flask": [
+            {
+              "id": "241322",
+              "name": "Flask of the Magisters"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241288",
+              "name": "Potion of Recklessness"
+            },
+            {
+              "id": "241300",
+              "name": "Lightfused Mana Potion"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "241304",
+              "name": "Silvermoon Health Potion"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "food": [
+            {
+              "id": "255846",
+              "name": "Harandar Celebration"
+            }
+          ],
+          "note": "Combat Potion: Potion of Recklessness (Preferred) / Lightfused Mana Potion (Situational) · Flasks: In raid, you will use Flask of the Magisters on all fights. Flask of the Blood Knights is a reasonable alternative in Mythic+, or when you value increasing your damage over adding more healing. · Health Potion: You'll use Concentrated Silvermoon Health Potion as your Health potion. Make sure you keybind it! · Weapon Buff: You'll put Thalassian Phoenix Oil on your weapon in both content types. Oil of Dawn is not competitive."
+        }
+      }
     },
     "Beast Mastery Hunter": {
       "guideUrl": "https://www.wowhead.com/guide/classes/hunter/beast-mastery/bis-gear",
@@ -3254,7 +4484,156 @@
           "dungeon": null,
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "244031",
+                "name": "Enchant Weapon - Arcane Mastery"
+              }
+            ]
+          },
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "244007",
+                "name": "Enchant Helm - Empowered Rune of Avoidance"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "243991",
+                "name": "Enchant Shoulders - Amirdrassil's Grace"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark of the Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "244641",
+                "name": "Forest Hunter's Armor Kit"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243953",
+                "name": "Enchant Boots - Lynx's Dexterity"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "243957",
+                "name": "Enchant Ring - Eyes of the Eagle"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240967",
+              "name": "Powerful Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240898",
+              "name": "Flawless Deadly Amethyst"
+            },
+            {
+              "id": "240918",
+              "name": "Flawless Masterful Lapis"
+            },
+            {
+              "id": "240908",
+              "name": "Flawless Masterful Garnet"
+            },
+            {
+              "id": "240892",
+              "name": "Flawless Masterful Peridot"
+            },
+            {
+              "id": "240898",
+              "name": "Flawless Deadly Amethyst"
+            },
+            {
+              "id": "240900",
+              "name": "Flawless Quick Amethyst"
+            }
+          ],
+          "note": "One Powerful Eversong Diamond and one each of Flawless Deadly Amethyst, Flawless Masterful Lapis, Flawless Masterful Garnet and Flawless Masterful Peridot. Fill the rest with Flawless Deadly Amethyst or Flawless Quick Amethyst, depending on your sim."
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241322",
+              "name": "Flask of the Magisters"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241308",
+              "name": "Light's Potential"
+            },
+            {
+              "id": "241288",
+              "name": "Potion of Recklessness"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ],
+          "food": [
+            {
+              "id": "255846",
+              "name": "Harandar Celebration"
+            },
+            {
+              "id": "242275",
+              "name": "Royal Roast"
+            }
+          ],
+          "note": "Combat Potion: Light's Potential (Most of the time) / Potion of Recklessness (Near-BiS gear with low Versatility) · Food: / Feasts: Harandar Celebration, or equivalent. / Personal Food: Royal Roast, or equivalent."
+        }
+      }
     },
     "Marksmanship Hunter": {
       "guideUrl": "https://www.wowhead.com/guide/classes/hunter/marksmanship/bis-gear",
@@ -3461,7 +4840,142 @@
           "dungeon": null,
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "243971",
+                "name": "Enchant Weapon - Jan'alai's Precision"
+              }
+            ]
+          },
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "243951",
+                "name": "Enchant Helm - Empowered Hex of Leeching"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "244021",
+                "name": "Enchant Shoulders - Silvermoon's Mending"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark of the Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "244641",
+                "name": "Forest Hunter's Armor Kit"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243983",
+                "name": "Enchant Boots - Shaladrassil's Roots"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "243957",
+                "name": "Enchant Ring - Eyes of the Eagle"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240967",
+              "name": "Powerful Eversong Diamond"
+            },
+            {
+              "id": "240983",
+              "name": "Indecipherable Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240890",
+              "name": "Flawless Deadly Peridot"
+            },
+            {
+              "id": "240898",
+              "name": "Flawless Deadly Amethyst"
+            },
+            {
+              "id": "240914",
+              "name": "Flawless Deadly Lapis"
+            },
+            {
+              "id": "240908",
+              "name": "Flawless Masterful Garnet"
+            },
+            {
+              "id": "240908",
+              "name": "Flawless Masterful Garnet"
+            }
+          ],
+          "note": "If you have >4 sockets in your gear, Powerful Eversong Diamond. Otherwise, Indecipherable Eversong Diamond. · If you have >4 sockets in your gear: 1x each of Flawless Deadly Peridot, Flawless Deadly Amethyst, and Flawless Deadly Lapis. Rest Flawless Masterful Garnet. Otherwise, fill all with Flawless Masterful Garnet. · If you have 5 sockets or more in your gear, you can make use of Powerful Eversong Diamond as your Eversong Diamond, and a combination of at least 1 Peridot, 1 Amethyst, 1 Garnet, and 1 Lapis, then Flawless Masterful Garnet in all other sockets. This fully stacks up the Crit Damage Effect of the Eversong Diamond, which is particularly potent for us as Marksmanship Hunters, since we have tons of Crit naturally, and our Aimed Shot is guaranteed to Crit. Peridot : Flawless Deadly Peridot; Amethyst : Flawless Deadly Amethyst; Garnet : Flawless Masterful Garnet; Lapis : Flawless Deadly Lapis; If you do not have the sockets required to fully realize the Powerful Eversong Diamond, simply use Indecipherable Eversong Diamond instead."
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241326",
+              "name": "Flask of the Shattered Sun"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241288",
+              "name": "Potion of Recklessness"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "note": "Food - Feast: Harandar Celebration or Silvermoon Parade · Food - Personal: Hearty Royal Roast · Combat Potion: Marksmanship Hunters should use Potion of Recklessness, which gives you a large amount of your highest secondary stat for 30 seconds and wants to be synced with your cooldowns. It is sensitive to Critical Strike actually being your highest stat when you press it, so if your gear has not got there yet, use Light's Potential instead. · Food: Marksmanship Hunters prefers eating Agility food (such as Feasts) over secondary stat foods when given the option. Feast: Harandar Celebration or Silvermoon Parade; Personal Food: Hearty Royal Roast"
+        }
+      }
     },
     "Survival Hunter": {
       "guideUrl": "https://www.wowhead.com/guide/classes/hunter/survival/bis-gear",
@@ -3665,7 +5179,127 @@
           "dungeon": null,
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "244031",
+                "name": "Enchant Weapon - Arcane Mastery"
+              }
+            ]
+          },
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "244007",
+                "name": "Enchant Helm - Empowered Rune of Avoidance"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "243991",
+                "name": "Enchant Shoulders - Amirdrassil's Grace"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark of the Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "244641",
+                "name": "Forest Hunter's Armor Kit"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243953",
+                "name": "Enchant Boots - Lynx's Dexterity"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "243957",
+                "name": "Enchant Ring - Eyes of the Eagle"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240983",
+              "name": "Indecipherable Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240898",
+              "name": "Flawless Deadly Amethyst"
+            }
+          ],
+          "note": "Indecipherable Eversong Diamond(limit of 1)|Flawless Deadly Amethyst · Generally, for all of our gems, we recommend Flawless Deadly Amethyst as it has our best stats on one package, but there are some edge cases where this is not true. For example, if you happen to have 1140 crit and 1120 mastery, it might be in your best interest to swap your Flawless Deadly Amethyst to Flawless Quick Amethyst, to ensure Potion of Recklessness picks Mastery over Crit ."
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "245933",
+              "name": "Fleeting Flask of the Magisters"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241288",
+              "name": "Potion of Recklessness"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ],
+          "food": [
+            {
+              "id": "275265",
+              "name": "Loa's Gathering"
+            }
+          ]
+        }
+      }
     },
     "Arcane Mage": {
       "guideUrl": "https://www.wowhead.com/guide/classes/mage/arcane/bis-gear",
@@ -3883,7 +5517,127 @@
           "dungeon": null,
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "244029",
+                "name": "Enchant Weapon - Acuity of the Ren'dorei"
+              }
+            ]
+          },
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "244007",
+                "name": "Enchant Helm - Empowered Rune of Avoidance"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "244021",
+                "name": "Enchant Shoulders - Silvermoon's Mending"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark of the Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "240155",
+                "name": "Arcanoweave Spellthread"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243983",
+                "name": "Enchant Boots - Shaladrassil's Roots"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "243957",
+                "name": "Enchant Ring - Eyes of the Eagle"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240967",
+              "name": "Powerful Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240900",
+              "name": "Flawless Quick Amethyst"
+            }
+          ],
+          "note": "For maximum damage, you will want to use Powerful Eversong Diamond as your Eversong Diamond, and a combination of at least 1 of each other gem type, then Flawless Quick Amethyst in all remaining sockets. As always though, sim for best results! Amethyst : Flawless Quick Amethyst; Peridot : Flawless Masterful Peridot; Garnet : Flawless Masterful Garnet; Lapis : Flawless Masterful Lapis"
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241324",
+              "name": "Flask of the Blood Knights"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241308",
+              "name": "Light's Potential"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "food": [
+            {
+              "id": "255845",
+              "name": "Silvermoon Parade"
+            }
+          ]
+        }
+      }
     },
     "Fire Mage": {
       "guideUrl": "https://www.wowhead.com/guide/classes/mage/fire/bis-gear",
@@ -4123,7 +5877,144 @@
           "dungeon": null,
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "244029",
+                "name": "Enchant Weapon - Acuity of the Ren'dorei"
+              }
+            ]
+          },
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "244007",
+                "name": "Enchant Helm - Empowered Rune of Avoidance"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "243991",
+                "name": "Enchant Shoulders - Amirdrassil's Grace"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark of the Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "240133",
+                "name": "Sunfire Silk Spellthread"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243953",
+                "name": "Enchant Boots - Lynx's Dexterity"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "243957",
+                "name": "Enchant Ring - Eyes of the Eagle"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240967",
+              "name": "Powerful Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240892",
+              "name": "Flawless Masterful Peridot"
+            },
+            {
+              "id": "240900",
+              "name": "Flawless Quick Amethyst"
+            },
+            {
+              "id": "240916",
+              "name": "Flawless Quick Lapis"
+            }
+          ],
+          "note": "One Powerful Eversong Diamond and a mix of Flawless Masterful Peridot and Flawless Quick Amethyst with one Flawless Quick Lapis. · For maximum damage, you will want to use Powerful Eversong Diamond as your Diamond, and a combination of at least 1 Peridot, 1 Lapis, 1 Garnet, and 1 Amethyst, then Flawless Quick Amethyst in all other sockets. Peridot : Flawless Masterful Peridot; Amethyst : Flawless Quick Amethyst; Garnet : Flawless Quick Garnet; Lapis : Flawless Quick Lapis; As the damage increase provided by Powerful Eversong Diamond is low, and some Fire Mages may opt for Indecipherable Eversong Diamond instead, since it does not require as many gem slots. As always, sim yourself."
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241322",
+              "name": "Flask of the Magisters"
+            },
+            {
+              "id": "241324",
+              "name": "Flask of the Blood Knights"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241308",
+              "name": "Light's Potential"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "food": [
+            {
+              "id": "255846",
+              "name": "Harandar Celebration"
+            },
+            {
+              "id": "242272",
+              "name": "Quel'dorei Medley"
+            }
+          ],
+          "note": "Flasks: The best Flask for Fire Mages is Flask of the Magisters, though Flask of the Blood Knights can be better depending on your stats. Flask of Thalassian Resistance is also a decent option for Pyroclasm builds (if they get buffed). · Combat Potion: When it comes to combat potions, Fire Mage uses Light's Potential. Notes: Sunfury Light's Potential Int pot Frostfire Potion of Recklessness Reckless pot · Health Potion: The best healing potion for Fire Mages is Silvermoon Health Potion. · Food: In Midnight, personal stat food is no better than feast buffs. Intellect food is equivalent to Secondary stats. As always, sim your character to check which food is the best for your configuration of Secondary stats. Feast: Harandar Celebration and Quel'dorei Medley are equal; Personal Food: Champion's Bento"
+        }
+      }
     },
     "Frost Mage": {
       "guideUrl": "https://www.wowhead.com/guide/classes/mage/frost/bis-gear",
@@ -4341,7 +6232,161 @@
           "dungeon": null,
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "244029",
+                "name": "Enchant Weapon - Acuity of the Ren'dorei"
+              }
+            ]
+          },
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "244007",
+                "name": "Enchant Helm - Empowered Rune of Avoidance"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "243991",
+                "name": "Enchant Shoulders - Amirdrassil's Grace"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark of the Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "240133",
+                "name": "Sunfire Silk Spellthread"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243953",
+                "name": "Enchant Boots - Lynx's Dexterity"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "256739",
+                "name": "Formula: Enchant Ring - Eyes of the Eagle"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240967",
+              "name": "Powerful Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240898",
+              "name": "Flawless Deadly Amethyst"
+            },
+            {
+              "id": "240908",
+              "name": "Flawless Masterful Garnet"
+            },
+            {
+              "id": "240892",
+              "name": "Flawless Masterful Peridot"
+            },
+            {
+              "id": "240918",
+              "name": "Flawless Masterful Lapis"
+            }
+          ]
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241322",
+              "name": "Flask of the Magisters"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241308",
+              "name": "Light's Potential"
+            },
+            {
+              "id": "241288",
+              "name": "Potion of Recklessness"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "food": [
+            {
+              "id": "255846",
+              "name": "Harandar Celebration"
+            },
+            {
+              "id": "242274",
+              "name": "Champion's Bento"
+            }
+          ],
+          "tea": [
+            {
+              "id": "242298",
+              "name": "Argentleaf Tea"
+            },
+            {
+              "id": "242299",
+              "name": "Sanguithorn Tea"
+            },
+            {
+              "id": "242301",
+              "name": "Azeroot Tea"
+            }
+          ],
+          "note": "Combat Potion: Frost Mages should use Potion of Recklessness as their combat potion in most cases, but in rare cases you may want to use Light's Potential with your specific gear. You should simulate the two options if you want to know which is best for you. Keep in mind that if you are using Vantus Rune: Radiant, it may make Potion of Recklessness significantly worse by causing it to grant versatility. · Augment Rune: With The War Within, the new Augment Rune is Void-Touched Augment Rune. If you've farmed enough Renown, you can also use Ethereal Augment Rune or Soulgorged Augment Rune."
+        }
+      }
     },
     "Brewmaster Monk": {
       "guideUrl": "https://www.wowhead.com/guide/classes/monk/brewmaster/bis-gear",
@@ -4519,7 +6564,157 @@
           "dungeon": null,
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "244029",
+                "name": "Enchant Weapon - Acuity of the Ren'dorei"
+              }
+            ],
+            "note": "In general, a Brewmaster can decide between a slightly more offensive or defensive set of weapon enchants by opting for either Enchant Weapon - Acuity of the Ren'dorei or a secondary stat effect such as Enchant Weapon - Worldsoul Tenacity as desired. If you are dual-wielding, you get two weapons to enchant, whereas using a 2-handed weapon only gives you one weapon to enchant; which hand your weapon enchants are on ultimately does not matter . If you use different enchants on each weapon, their procs will be independent of each other. With two of the same enchant, the proc rate stays the same, but its effect will be increased. What this all means is that any combination of the enchants above could prove useful to you, but none of them will be what ultimately determines your performance. They may be freely mixed and matched based on what your own character needs with the help of simulations."
+          },
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "243951",
+                "name": "Enchant Helm - Empowered Hex of Leeching"
+              },
+              {
+                "id": "243981",
+                "name": "Enchant Helm - Empowered Blessing of Speed"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "244021",
+                "name": "Enchant Shoulders - Silvermoon's Mending"
+              },
+              {
+                "id": "243963",
+                "name": "Enchant Shoulders - Akil'zon's Swiftness"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark of the Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "244641",
+                "name": "Forest Hunter's Armor Kit"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243983",
+                "name": "Enchant Boots - Shaladrassil's Roots"
+              },
+              {
+                "id": "244009",
+                "name": "Enchant Boots - Farstrider's Hunt"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "243957",
+                "name": "Enchant Ring - Eyes of the Eagle"
+              },
+              {
+                "id": "244017",
+                "name": "Enchant Ring - Silvermoon's Tenacity"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240983",
+              "name": "Indecipherable Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240914",
+              "name": "Flawless Deadly Lapis"
+            }
+          ],
+          "note": "You will generally want to equip gems that grant Versatility or Critical Strike, such as the Flawless Deadly Lapis or Flawless Versatile Garnet, in any available gem slots. At higher gear levels, the Flawless Deadly Amethyst may also be appropriate. Sim yourself, just in case. Note that in Midnight all jewelry automatically comes with one socket, and you may add a socket to any Helm, Bracer, or Belt with a Radiant Jewelbinder from the Great Vault. Some rare items may even have two! Meanwhile, although there are multiple Eversong Diamonds available, stick to the Indecipherable Eversong Diamond by default. The alternatives require extra work for inferior results."
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241320",
+              "name": "Flask of Thalassian Resistance"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241308",
+              "name": "Light's Potential"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            },
+            {
+              "id": "5512",
+              "name": "Healthstone"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ],
+          "food": [
+            {
+              "id": "255845",
+              "name": "Silvermoon Parade"
+            },
+            {
+              "id": "255846",
+              "name": "Harandar Celebration"
+            },
+            {
+              "id": "242275",
+              "name": "Royal Roast"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "note": "Food: (Hearty) Silvermoon Parade / (Hearty) Harandar Celebration / Royal Roast / · Flasks: Flask of Thalassian Resistance is your default flask choice in Midnight, offering the most generally useful stat of Versatility. However, both the Flask of the Shattered Sun and Flask of the Magisters can also be potent or even superior depending on your current gear. Remember, you can also acquire conjured versions of these flasks from a Cauldron of Sin'dorei Flasks, provided the Alchemist who placed it knows the recipes! · Combat Potion: Light's Potential acts as your most consistently useful combat potion, providing a large burst of Agility for a long period of time, though there are a number of competitive options in Midnight. There is also the Draught of Rampant Abandon, which offers more Agility at the cost of potentially spawning puddles of The Void's Toll under your feet to silence and pacify your character. Raid : Light's Potential; Mythic+ : Light's Potential/Draught of Rampant Abandon; As with flasks, you may obtain temporary conjured versions of any of these potions from an Alchemist's Voidlight Potion Cauldron, assuming they know the recipes. · Health Potion: Concentrated Silvermoon Health Potion is the default healing potion for Brewmaster Monks, offering improved healing over a regular Silvermoon Health Potion. As a staple craft of Alchemists seeking to level the profession, you should have access to plenty of this consumable at a reasonable price, though only one may be used every 5 minutes. In addition, remember that a Warlock 's Healthstone is considered a separate healing item and will not share a cooldown with the healing potion above. Use it as another resource once per encounter! · Food: Feast: (Hearty) Silvermoon Parade/Harandar Celebration; Personal Food: There are two food items that provide the same effect of increasing your Agility: Royal Roast or Impossibly Royal Roast. Find whichever is cheapest to acquire, or consider an alternative such as Champion's Bento which increases your highest secondary stat instead.; Midnight Season 2 additionally features \"hearty\" versions of food items, which can be created by combining multiples of a given item together (such as the Hearty Silvermoon Parade). These items, in addition to being warband-bound, keep their buffs through death . Seek them out for use in areas where you are likely to die and lose an otherwise normal food buff. · Further Consumables: Though less important for your success in group content, Void-Touched Augment Rune offers a small amount of additional Agility. However, the effect will be lost on death, making this a very expensive consumable effect to maintain. All the same, aim to keep a few of these handy for those moments when you need to eke out every bit of damage from your character. Should you need access to a Bloodlust effect and a class with the ability is not available, you may also wish to hold on to a small number of drums consumables. These allow you to trigger a slightly weaker version of the bonus Haste from these spells, but that is still better than not having it at all! For Level 90 characters, the only drums that are usable are the Void-Touched Drums. Finally, you have access to a battle-resurrection consumable: Emergency Soul Link. Although these have a cast time (during which you cannot dodge), they are indispensable if your group is otherwise missing this utility. Have a few on hand, just in case, and make sure to use the higher-ranked version to remove the otherwise small chance of the effect failing!"
+        }
+      }
     },
     "Mistweaver Monk": {
       "guideUrl": "https://www.wowhead.com/guide/classes/monk/mistweaver/bis-gear",
@@ -4874,7 +7069,116 @@
           "droppedBy": null,
           "sourceTextFuzzy": true
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "244029",
+                "name": "Enchant Weapon - Acuity of the Ren'dorei"
+              }
+            ],
+            "note": "The best weapon enchant for Mistweaver Monks will be Enchant Weapon - Acuity of the Ren'dorei in nearly all cases. The Intellect boost it provides makes it the stronger choice throughout the season, even before you've acquired your best-in-slot gear. Once you're fully geared, it's worth checking QE Live 's weapon enchant recommendations to see whether Enchant Weapon - Berserker's Rage pulls ahead at that point. Mistweaver Monk Stat Priority"
+          },
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "243951",
+                "name": "Enchant Helm - Empowered Hex of Leeching"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "244021",
+                "name": "Enchant Shoulders - Silvermoon's Mending"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark of the Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "240133",
+                "name": "Sunfire Silk Spellthread"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243983",
+                "name": "Enchant Boots - Shaladrassil's Roots"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "244015",
+                "name": "Enchant Ring - Silvermoon's Alacrity"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240983",
+              "name": "Indecipherable Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240890",
+              "name": "Flawless Deadly Peridot"
+            }
+          ]
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241324",
+              "name": "Flask of the Blood Knights"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241288",
+              "name": "Potion of Recklessness"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ],
+          "note": "Invisiblity Potion: Void-Shrouded Tincture · Group Feast: Hearty Harandar Celebration · Personal Food: Hearty Royal Roast · Flasks: The best Flask for Mistweaver Monks in Midnight Season 2 is Flask of the Blood Knights, though Flask of the Shattered Sun can be used if you find yourself with too much Haste. Again, please use QE LIve to determine this for your current needs. · Combat Potion: For Mistweaver Monks, the best combat potion is Potion of Recklessness. I do not recommend using mana potions in any form of combat, but if you decide against this advice, the potion you're looking for is the Lightfused Mana Potion. · Food: With Cooking in Midnight, there are different methods of increasing your stats through food! Both feasts and personal food can increase either your Intellect or your highest secondary stat, with personal food having more combination of options albeit at a lower stat gain. By combining the same dish with itself you can make Hearty variants, that act as if you had a weaker version of the Alchemical Flavor Pocket from Dragonflight , allowing the buff from food to persist through death. For Mistweaver food options, we'll be going with Intellect-increasing foods below: Feast: Hearty Harandar Celebration; Personal Food: Hearty Royal Roast (or the Vegetarian option, Hearty Impossibly Royal Roast) · Food: In Midnight Season 2, healers will focus on gaining Mana water from Cooking! There are several options that stack very high and replenish the most amount of mana per second: Argentleaf Tea; Sanguithorn Tea; Azeroot Tea; Mana Lily Tea; Tranquility Bloom Tea; Personally, I'd suggest choosing whichever is the cheapest on the Auction House at the time, since they offer virtually no difference with the latter two not having the movement speed increase buff on them."
+        }
+      }
     },
     "Windwalker Monk": {
       "guideUrl": "https://www.wowhead.com/guide/classes/monk/windwalker/bis-gear",
@@ -5065,7 +7369,52 @@
           "dungeon": null,
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "consumables": {
+          "flask": [
+            {
+              "id": "241324",
+              "name": "Flask of the Blood Knights"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241288",
+              "name": "Potion of Recklessness"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271883",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "food": [
+            {
+              "id": "255846",
+              "name": "Harandar Celebration"
+            },
+            {
+              "id": "255845",
+              "name": "Silvermoon Parade"
+            }
+          ],
+          "note": "Food: Harandar Celebration or Silvermoon Parade"
+        }
+      }
     },
     "Holy Paladin": {
       "guideUrl": "https://www.wowhead.com/guide/classes/paladin/holy/bis-gear",
@@ -5271,7 +7620,142 @@
           "dungeon": null,
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "244031",
+                "name": "Enchant Weapon - Arcane Mastery"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "244021",
+                "name": "Enchant Shoulders - Silvermoon's Mending"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "244003",
+                "name": "Enchant Chest - Mark of the Magister"
+              }
+            ]
+          },
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "243951",
+                "name": "Enchant Helm - Empowered Hex of Leeching"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "240155",
+                "name": "Arcanoweave Spellthread"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243983",
+                "name": "Enchant Boots - Shaladrassil's Roots"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "243959",
+                "name": "Enchant Ring - Zul'jin's Mastery"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240969",
+              "name": "Telluric Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240900",
+              "name": "Flawless Quick Amethyst"
+            }
+          ],
+          "note": "The best Everson Diamond is Telluric Eversong Diamond as it gives a bit of mana. Indecipherable Eversong Diamond provides more direct throughput increase as it gives more Intellect, but the difference is very minor. Beyond that, you want to use at least 1 Garnet, 1 Lapis, and 1 Perido, then Flawless Quick Amethyst in all other sockets. Amethyst : Flawless Quick Amethyst; Garnet : Flawless Masterful Garnet; Peridot : Flawless Masterful Peridot; Lapis : Flawless Masterful Lapis"
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241322",
+              "name": "Flask of the Magisters"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241288",
+              "name": "Potion of Recklessness"
+            }
+          ],
+          "manaPotion": [
+            {
+              "id": "241300",
+              "name": "Lightfused Mana Potion"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            },
+            {
+              "spellId": "433568",
+              "name": "Rite of Sanctification"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "food": [
+            {
+              "id": "275264",
+              "name": "Amani Cornucopia"
+            },
+            {
+              "id": "242299",
+              "name": "Sanguithorn Tea"
+            }
+          ],
+          "note": "Weapon Buff: Thalassian Phoenix Oil as Herald / Rite of Sanctification as Lightsmith · Food: In Midnight Season 2, Holy Paladins prefer using the new Secondary stat feast. Feast: Amani Cornucopia or Loa's Gathering; Mana Drink: Sanguithorn Tea. Grants the most mana of any drink and stacks to 1000."
+        }
+      }
     },
     "Protection Paladin": {
       "guideUrl": "https://www.wowhead.com/guide/classes/paladin/protection/bis-gear",
@@ -5473,7 +7957,135 @@
           "dungeon": null,
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "243973",
+                "name": "Enchant Weapon - Berserker's Rage"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "243963",
+                "name": "Enchant Shoulders - Akil'zon's Swiftness"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark of the Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "243981",
+                "name": "Enchant Helm - Empowered Blessing of Speed"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "244641",
+                "name": "Forest Hunter's Armor Kit"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "244009",
+                "name": "Enchant Boots - Farstrider's Hunt"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "244015",
+                "name": "Enchant Ring - Silvermoon's Alacrity"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240983",
+              "name": "Indecipherable Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240894",
+              "name": "Flawless Versatile Peridot"
+            }
+          ]
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241324",
+              "name": "Flask of the Blood Knights"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241292",
+              "name": "Draught of Rampant Abandon"
+            },
+            {
+              "id": "241308",
+              "name": "Light's Potential"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "food": [
+            {
+              "id": "255845",
+              "name": "Silvermoon Parade"
+            },
+            {
+              "id": "255846",
+              "name": "Harandar Celebration"
+            }
+          ],
+          "note": "Combat Potion: Draught of Rampant Abandon or Light's Potential"
+        }
+      }
     },
     "Retribution Paladin": {
       "guideUrl": "https://www.wowhead.com/guide/classes/paladin/retribution/bis-gear",
@@ -5680,7 +8292,132 @@
           "dungeon": null,
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "244031",
+                "name": "Enchant Weapon - Arcane Mastery"
+              }
+            ]
+          },
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "244007",
+                "name": "Enchant Helm - Empowered Rune of Avoidance"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "243990",
+                "name": "Enchant Shoulders - Amirdrassil's Grace"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark of the Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "244641",
+                "name": "Forest Hunter's Armor Kit"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243952",
+                "name": "Enchant Boots - Lynx's Dexterity"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "243957",
+                "name": "Enchant Ring - Eyes of the Eagle"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240983",
+              "name": "Indecipherable Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240892",
+              "name": "Flawless Masterful Peridot"
+            }
+          ],
+          "note": "For maximum damage, you will want to use Indecipherable Eversong Diamond as your Eversong Diamond, and Flawless Masterful Peridot in all other sockets. Depending on your stats, other secondary stat gems can be reasonable alternatives, so sim your options just in case. If you have Loa Worshiper's Band, you will always want to use a Peridot gem in every non-Diamond slot."
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241322",
+              "name": "Flask of the Magisters"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241288",
+              "name": "Potion of Recklessness"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271883",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "food": [
+            {
+              "id": "242275",
+              "name": "Royal Roast"
+            },
+            {
+              "id": "255846",
+              "name": "Harandar Celebration"
+            }
+          ],
+          "note": "Combat Potion: Potion of Recklessness is the strongest potion generally, but requires you to have stats that accommodate it. Either Critical Strike or Mastery is fine to have as your highest stat for it, but if it's Haste then Light's Potential is better."
+        }
+      }
     },
     "Discipline Priest": {
       "guideUrl": "https://www.wowhead.com/guide/classes/priest/discipline/bis-gear",
@@ -5871,7 +8608,52 @@
           "droppedBy": null,
           "sourceTextUnmatched": true
         }
-      ]
+      ],
+      "enhancements": {
+        "consumables": {
+          "flask": [
+            {
+              "id": "241324",
+              "name": "Flask of the Blood Knights"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241288",
+              "name": "Potion of Recklessness"
+            },
+            {
+              "id": "241308",
+              "name": "Light's Potential"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "food": [
+            {
+              "id": "255846",
+              "name": "Harandar Celebration"
+            }
+          ],
+          "note": "Combat Potion: There are a couple of different potions that have different useful scenarios for Discipline Priests: Raiding : Potion of Recklessness/Light's Potential ; Mythic+ : Potion of Recklessness, Light's Potential or Void-Shrouded Tincture for invisibility skips"
+        }
+      }
     },
     "Holy Priest": {
       "guideUrl": "https://www.wowhead.com/guide/classes/priest/holy/bis-gear",
@@ -6102,7 +8884,131 @@
           "droppedBy": null,
           "sourceTextUnmatched": true
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "244029",
+                "name": "Enchant Weapon - Acuity of the Ren'dorei"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "244021",
+                "name": "Enchant Shoulders - Silvermoon's Mending"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark of the Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "243951",
+                "name": "Enchant Helm - Empowered Hex of Leeching"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "240133",
+                "name": "Sunfire Silk Spellthread"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243983",
+                "name": "Enchant Boots - Shaladrassil's Roots"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "243987",
+                "name": "Enchant Ring - Nature's Fury"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240983",
+              "name": "Indecipherable Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240910",
+              "name": "Flawless Versatile Garnet"
+            }
+          ]
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241326",
+              "name": "Flask of the Shattered Sun"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241288",
+              "name": "Potion of Recklessness"
+            },
+            {
+              "id": "241308",
+              "name": "Light's Potential"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "food": [
+            {
+              "id": "255846",
+              "name": "Harandar Celebration"
+            }
+          ],
+          "note": "Combat Potion: There are a couple of different potions that have different useful scenarios for Holy Priests: Raiding : Potion of Recklessness/Light's Potential ; Mythic+ : Potion of Recklessness, Light's Potential or Void-Shrouded Tincture for invisibility skips · Food: In Midnight Feast: Harandar Celebration; Personal Food: Royal Roast"
+        }
+      }
     },
     "Shadow Priest": {
       "guideUrl": "https://www.wowhead.com/guide/classes/priest/shadow/bis-gear",
@@ -6261,7 +9167,48 @@
           "dungeon": "Murder Row",
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "consumables": {
+          "flask": [
+            {
+              "id": "241322",
+              "name": "Flask of the Magisters"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241288",
+              "name": "Potion of Recklessness"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "food": [
+            {
+              "id": "242273",
+              "name": "Blooming Feast"
+            }
+          ],
+          "note": "Food: Shadow Priests are most likely using a feast buff over personal stat food due to stat allocation, but personal food is more than fine to use if feasts are not available. Feast: Blooming Feast; Personal Food: Royal Roast"
+        }
+      }
     },
     "Assassination Rogue": {
       "guideUrl": "https://www.wowhead.com/guide/classes/rogue/assassination/bis-gear",
@@ -6478,7 +9425,47 @@
           "dungeon": null,
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "consumables": {
+          "flask": [
+            {
+              "id": "241324",
+              "name": "Flask of the Blood Knights"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "271887",
+              "name": "Liquid Luster"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "food": [
+            {
+              "id": "255845",
+              "name": "Silvermoon Parade"
+            }
+          ]
+        }
+      }
     },
     "Outlaw Rogue": {
       "guideUrl": "https://www.wowhead.com/guide/classes/rogue/outlaw/bis-gear",
@@ -6692,7 +9679,146 @@
           "dungeon": null,
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "243971",
+                "name": "Enchant Weapon - Jan'alai's Precision"
+              },
+              {
+                "id": "244029",
+                "name": "Enchant Weapon - Acuity of the Ren'dorei"
+              }
+            ],
+            "note": "Enchant Weapon - Jan'alai's Precision or Enchant Weapon - Acuity of the Ren'dorei · As mentioned above, Haste can be a tricky thing to optimize perfectly for this spec which means that Enchant Weapon - Jan'alai's Precision or Enchant Weapon - Acuity of the Ren'dorei could swap value after even just a few gear upgrades. Always double check by simming with Raidbots to figure out optimal damage."
+          },
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "243951",
+                "name": "Enchant Helm - Empowered Hex of Leeching"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "244021",
+                "name": "Enchant Shoulders - Silvermoon's Mending"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark of the Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "244641",
+                "name": "Forest Hunter's Armor Kit"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243983",
+                "name": "Enchant Boots - Shaladrassil's Roots"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "243957",
+                "name": "Enchant Ring - Eyes of the Eagle"
+              },
+              {
+                "id": "244015",
+                "name": "Enchant Ring - Silvermoon's Alacrity"
+              }
+            ],
+            "note": "Enchant Ring - Eyes of the Eagle or Enchant Ring - Silvermoon's Alacrity"
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240983",
+              "name": "Indecipherable Eversong Diamond"
+            },
+            {
+              "id": "240967",
+              "name": "Powerful Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240890",
+              "name": "Flawless Deadly Peridot"
+            }
+          ],
+          "note": "Indecipherable Eversong Diamond or Powerful Eversong Diamond · For maximum damage, you will want to use Powerful Eversong Diamond as your Thalassian Diamond, and a combination of at least 1 Peridot, 1 Lapis, 1 Garnet, and 1 Amethyst, then probably Flawless Versatile Garnet in all other sockets. Peridot : Flawless Deadly Peridot; Onyx : Flawless Deadly Amethyst; Garnet : Flawless Quick Garnet; Lapis : Flawless Quick Lapis; As always, sim yourself as Haste can be a fickle thing to optimize perfectly."
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241326",
+              "name": "Flask of the Shattered Sun"
+            },
+            {
+              "id": "241324",
+              "name": "Flask of the Blood Knights"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241309",
+              "name": "Light's Potential"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "food": [
+            {
+              "id": "255846",
+              "name": "Harandar Celebration"
+            }
+          ],
+          "note": "Flask: Flask of the Shattered Sun or Flask of the Blood Knights · Food: Outlaw Rogue is most likely using feast buffs in TWW due to how valuable Agility is for the class. As always, sim your character to see which food is best for your secondary stat configuration. Feast: Harandar Celebration; Personal Food: Hearty Royal Roast"
+        }
+      }
     },
     "Subtlety Rogue": {
       "guideUrl": "https://www.wowhead.com/guide/classes/rogue/subtlety/bis-gear",
@@ -6908,7 +10034,144 @@
           "dungeon": null,
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "244031",
+                "name": "Enchant Weapon - Arcane Mastery"
+              }
+            ],
+            "note": "Higher gear levels in season two make secondary stat enchants become competitive options, you can still use Enchant Weapon - Acuity of the Ren'dorei. Single Stat enchants (Enchant Weapon - Arcane Mastery, Enchant Weapon - Berserker's Rage, Enchant Weapon - Worldsoul Tenacity or Enchant Weapon - Jan'alai's Precision) , will be used instead on both weapons. Mastery is typically the best of the secondary stat enchants early on, while others compete when we get closer to best in slot gear levels. Main Hand: Enchant Weapon - Arcane Mastery; Off Hand: Enchant Weapon - Arcane Mastery"
+          },
+          {
+            "slot": "Off Hand",
+            "candidates": [
+              {
+                "id": "244031",
+                "name": "Enchant Weapon - Arcane Mastery"
+              }
+            ]
+          },
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "244007",
+                "name": "Enchant Helm - Empowered Rune of Avoidance"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "243991",
+                "name": "Enchant Shoulders - Amirdrassil's Grace"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark of the Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "244641",
+                "name": "Forest Hunter's Armor Kit"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243953",
+                "name": "Enchant Boots - Lynx's Dexterity"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "243957",
+                "name": "Enchant Ring - Eyes of the Eagle"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240983",
+              "name": "Indecipherable Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240900",
+              "name": "Flawless Quick Amethyst"
+            }
+          ],
+          "note": "For maximum damage, you will want to use Indecipherable Eversong Diamond as your Eversong Diamond. The remaining slots are filled with either of the ones listed below: Amethyst : Flawless Quick Amethyst / Flawless Deadly Amethyst; Peridot : Flawless Masterful Peridot; Garnet : Flawless Masterful Garnet; Which ones you use does not matter. The gem selection can differ depending on your stats, so always use a simulation if you want the optimal result."
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241322",
+              "name": "Flask of the Magisters"
+            },
+            {
+              "id": "241326",
+              "name": "Flask of the Shattered Sun"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241308",
+              "name": "Light's Potential"
+            },
+            {
+              "id": "241288",
+              "name": "Potion of Recklessness"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "food": [
+            {
+              "id": "255845",
+              "name": "Silvermoon Parade"
+            },
+            {
+              "id": "242275",
+              "name": "Royal Roast"
+            }
+          ],
+          "note": "Flask: / Flask of the Magisters (best) / Flask of the Shattered Sun (alternative) / · Combat Potion: Light's Potential(default) / Potion of Recklessness (if you get Mastery) · Weapon Buff (Main hand): Thalassian Phoenix Oil · Weapon Buff (Off hand): Thalassian Phoenix Oil · Food: Silvermoon Parade (feast) / Royal Roast(personal) · Flasks: The best Flask for Subtlety Rogues is between Flask of the Shattered Sun and Flask of the Magisters. Which one is better will usually depend on your gear, and its best to use a simulation to compare. Flask of the Magisters is likely the better option. If you are below the haste breakpoints (1100 in Single Target / 800 for Mythic+), its advised to use Fleeting Flask of the Blood Knights instead. · Combat Potion: While there are many options for potions, Subtlety Rogues will use Light's Potential. Potion of Recklessness becomes the best option if you get Mastery . The technically best potion is Draught of Rampant Abandon, but its tricky to use. The void pools spawned by this poison silence you, which means you need to actively run out of them to use abilities. There is a short grace period before the silence effect applies. Using the potion, it seemed to proc roughly 3, often 4 times during the duration. Attacking a dummy was possible for the entire time, but it did need some practice and good positioning. The use of the potion is only recommended for encounters with big hitboxes, some amount of boss movement, or with a low amount of mechanical overhead to allow you to focus on avoiding the zones. · Weapon Buff: For their weapons, Subtlety Rogues, the best option is listed below: Main Hand: Thalassian Phoenix Oil; Off Hand: Thalassian Phoenix Oil; Note: Adamantite Sharpening Stone technically perform slightly better as buff for your main hand weapon. It is likely unintentional for this item to still function on current gear, so could stop working with any hotfix. This option is only relevant at the start of the season before your first craft due to the Item Level restriction."
+        }
+      }
     },
     "Elemental Shaman": {
       "guideUrl": "https://www.wowhead.com/guide/classes/shaman/elemental/bis-gear",
@@ -7119,7 +10382,137 @@
           "dungeon": "Altar of Fangs",
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "243973",
+                "name": "Enchant Weapon - Berserker's Rage"
+              }
+            ],
+            "note": "Enchant Weapon - Jan'alai's Precision or Enchant Weapon - Berserker's Rage are the most effective weapon enchant for Elemental Shaman in maxed out gear, more specfically when you get past roughly 1100 Mastery on your gear. Enchant Weapon - Arcane Mastery is better while you are still gearing up and lack Mastery from your Gear and other sources, but the lack of consistency on the proc works against us trying to stay as close to capped as possible for as long as possible. As usual, we recommend simming your character to get data tailored to your specific gear and character."
+          },
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "244007",
+                "name": "Enchant Helm - Empowered Rune of Avoidance"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "243991",
+                "name": "Enchant Shoulders - Amirdrassil's Grace"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark of the Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "240133",
+                "name": "Sunfire Silk Spellthread"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243953",
+                "name": "Enchant Boots - Lynx's Dexterity"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "243957",
+                "name": "Enchant Ring - Eyes of the Eagle"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240967",
+              "name": "Powerful Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240908",
+              "name": "Flawless Masterful Garnet"
+            }
+          ],
+          "note": "For maximum damage, you will want to use Powerful Eversong Diamond as your Thalassian Diamond, and a combination of at least 1 Garnet, 1 Amethyst, 1 Peridot, and 1 Lapis, then Flawless Masterful Garnet or Flawless Deadly Amethyst in all other sockets. Garnet : Flawless Masterful Garnet; Peridot : Flawless Masterful Peridot; Amethyst : Flawless Deadly Amethyst; Lapis : Flawless Masterful Lapis"
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241322",
+              "name": "Flask of the Magisters"
+            },
+            {
+              "id": "241326",
+              "name": "Flask of the Shattered Sun"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241308",
+              "name": "Light's Potential"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271883",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "spellId": "318038",
+              "name": "Flametongue Weapon"
+            },
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "food": [
+            {
+              "id": "255846",
+              "name": "Harandar Celebration"
+            }
+          ],
+          "note": "Weapon Buff: If you are talented into Flametongue Weapon, do not use any weapon oils, but instead use Flametongue Weapon to imbue your weapon. Otherwise you use Thalassian Phoenix Oil."
+        }
+      }
     },
     "Enhancement Shaman": {
       "guideUrl": "https://www.wowhead.com/guide/classes/shaman/enhancement/bis-gear",
@@ -7155,7 +10548,139 @@
           "raw": "Agility > Mastery = Haste > Critical Strike > Versatility"
         }
       ],
-      "bis": []
+      "bis": [],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "244031",
+                "name": "Enchant Weapon - Arcane Mastery"
+              }
+            ],
+            "note": "In Midnight Season 2, with the rising value of secondary stats we've made the shift over, using Enchant Weapon - Arcane Mastery paired with Enchant Weapon - Berserker's Rage."
+          },
+          {
+            "slot": "Off Hand",
+            "candidates": [
+              {
+                "id": "243973",
+                "name": "Enchant Weapon - Berserker's Rage"
+              }
+            ]
+          },
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "244007",
+                "name": "Enchant Helm - Empowered Rune of Avoidance"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "243991",
+                "name": "Enchant Shoulders - Amirdrassil's Grace"
+              }
+            ]
+          },
+          {
+            "slot": "Wrist",
+            "candidates": [
+              {
+                "id": "275707",
+                "name": "Miasmic Jewelbinder"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark of the Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Waist",
+            "candidates": [
+              {
+                "id": "275707",
+                "name": "Miasmic Jewelbinder"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "244641",
+                "name": "Forest Hunter's Armor Kit"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243953",
+                "name": "Enchant Boots - Lynx's Dexterity"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "243957",
+                "name": "Enchant Ring - Eyes of the Eagle"
+              }
+            ]
+          }
+        ],
+        "consumables": {
+          "flask": [
+            {
+              "id": "241324",
+              "name": "Flask of the Blood Knights"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241288",
+              "name": "Potion of Recklessness"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "food": [
+            {
+              "id": "255845",
+              "name": "Silvermoon Parade"
+            },
+            {
+              "id": "242275",
+              "name": "Royal Roast"
+            }
+          ],
+          "note": "Flasks: In Midnight Season 2, due to the limited amount of Haste available, the best general flask to use is Flask of the Blood Knights to help keep your stats in order. Depending on your current gear setup, Flask of the Magisters is also an option when lacking Mastery. You can also obtain these from a Cauldron of Sin'dorei Flasks if your group is using one. · Combat Potion: Going into Season 2 of Midnight, due to a number of gear system changes we've switched over to Potion of Recklessness. We want this to trigger Mastery , so it may require some gear shifting to consistently do so. If you can't consistently trigger this stat, then Light's Potential is almost the same in value. These can also be obtained from an Voidlight Potion Cauldron if your group is using one. · Weapon Buff: Unfortunately, due to the Weapon Imbues (Flametongue Weapon and Windfury Weapon) that Enhancement uses, it CANNOT use weapon enhancements such as oils or whetstones at the same time . Due to the way that Elemental Weapons works, opting out of these is not an option, so we do not use runes."
+        }
+      }
     },
     "Restoration Shaman": {
       "guideUrl": "https://www.wowhead.com/guide/classes/shaman/restoration/bis-gear",
@@ -7340,7 +10865,157 @@
           "dungeon": null,
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "244029",
+                "name": "Enchant Weapon - Acuity of the Ren'dorei"
+              }
+            ],
+            "note": "Enchant Weapon - Acuity of the Ren'dorei is your best weapon enchant for all content. The absorption effect from Enchant Weapon - Worldsoul Cradle is not strong enough to compete and intellect is more valuable than secondary stats early on in the expansion."
+          },
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "243951",
+                "name": "Enchant Helm - Empowered Hex of Leeching"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "244021",
+                "name": "Enchant Shoulders - Silvermoon's Mending"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "244003",
+                "name": "Enchant Chest - Mark of the Magister"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "240155",
+                "name": "Arcanoweave Spellthread"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243983",
+                "name": "Enchant Boots - Shaladrassil's Roots"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "243957",
+                "name": "Enchant Ring - Eyes of the Eagle"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240983",
+              "name": "Indecipherable Eversong Diamond"
+            },
+            {
+              "id": "240968",
+              "name": "Telluric Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240909",
+              "name": "Flawless Versatile Garnet"
+            },
+            {
+              "id": "240889",
+              "name": "Flawless Deadly Peridot"
+            },
+            {
+              "id": "240913",
+              "name": "Flawless Deadly Lapis"
+            },
+            {
+              "id": "240897",
+              "name": "Flawless Deadly Amethyst"
+            }
+          ],
+          "note": "Due to how Resurgence works based on your maximum mana, effects that increase your mana and multiply each other like Primordial Capacity, Enchant Chest - Mark of the Magister, Arcanoweave Spellthread, and Telluric Eversong Diamond gain value. In any scenario where mana is a consideration you would run Telluric Eversong Diamond. If you are not having any issues with mana you can instead run Indecipherable Eversong Diamond. For the rest of the sockets the Telluric diamond requires you to wear one of each color, while the Indecipherable diamond doesn't care and lets you simply run multiple Flawless Versatile Garnet. Garnet : Flawless Versatile Garnet; Peridot : Flawless Deadly Peridot; Lapis : Flawless Deadly Lapis; Amethyst : Flawless Deadly Amethyst"
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241326",
+              "name": "Flask of the Shattered Sun"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241300",
+              "name": "Lightfused Mana Potion"
+            },
+            {
+              "id": "241288",
+              "name": "Potion of Recklessness"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271883",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "spellId": "382021",
+              "name": "Earthliving Weapon"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "food": [
+            {
+              "id": "255845",
+              "name": "Silvermoon Parade"
+            },
+            {
+              "id": "242275",
+              "name": "Royal Roast"
+            },
+            {
+              "id": "242299",
+              "name": "Sanguithorn Tea"
+            }
+          ],
+          "note": "Combat Potion: If your highest secondary stat is Critical Strike, then your best potion to use will always be Potion of Recklessness. The effect not only increases your healing output by a very high amount, but due to Resurgence you also gain a substantial amount of mana from this increase. While the mana by itself is not as much as what Lightfused Mana Potion gives, the combination of mana and more healing end up being better by a decent margin. The best way to use this potion during raids is to pair with Ascendance. The effect of Ascendance makes Chain Heal heal more targets which translates into more Resurgence procs, and the reduced mana cost means you can cast it a lot without mana issues. This combination results in doing an incredibly high amount of raid healing for very little mana cost, saving you more mana in the long run than what a normal mana potion would. · Health Potion: The best healing potion for Restoration Shamans is Silvermoon Health Potion."
+        }
+      }
     },
     "Affliction Warlock": {
       "guideUrl": "https://www.wowhead.com/guide/classes/warlock/affliction/bis-gear",
@@ -7554,7 +11229,52 @@
           "droppedBy": "King Dazar",
           "sourceTextUnmatched": true
         }
-      ]
+      ],
+      "enhancements": {
+        "consumables": {
+          "flask": [
+            {
+              "id": "241324",
+              "name": "Flask of the Blood Knights"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241308",
+              "name": "Light's Potential"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "food": [
+            {
+              "id": "255846",
+              "name": "Harandar Celebration"
+            },
+            {
+              "id": "242275",
+              "name": "Royal Roast"
+            }
+          ],
+          "note": "Food: Harandar Celebration and Royal Roast · Flasks: The best Flask for Affliction Warlocks is Flask of the Magisters, though other stat flasks can still be used depending on your overall stat weighting."
+        }
+      }
     },
     "Demonology Warlock": {
       "guideUrl": "https://www.wowhead.com/guide/classes/warlock/demonology/bis-gear",
@@ -7774,7 +11494,48 @@
           "droppedBy": "Zaen Bladesorrow",
           "sourceTextUnmatched": true
         }
-      ]
+      ],
+      "enhancements": {
+        "consumables": {
+          "flask": [
+            {
+              "id": "241326",
+              "name": "Flask of the Shattered Sun"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241308",
+              "name": "Light's Potential"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "food": [
+            {
+              "id": "242275",
+              "name": "Royal Roast"
+            }
+          ],
+          "note": "Food: Demonology Warlocks are most likely using personal stat food over feast buffs as we value the baseline Intellect more than secondaries. As always, sim your character to check which food is the best for your configuration of secondary stats. Feast: Silvermoon Parade; Personal Food: Royal Roast"
+        }
+      }
     },
     "Destruction Warlock": {
       "guideUrl": "https://www.wowhead.com/guide/classes/warlock/destruction/bis-gear",
@@ -7988,7 +11749,52 @@
           "dungeon": null,
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "consumables": {
+          "flask": [
+            {
+              "id": "241326",
+              "name": "Flask of the Shattered Sun"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241308",
+              "name": "Light's Potential"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "food": [
+            {
+              "id": "255846",
+              "name": "Harandar Celebration"
+            },
+            {
+              "id": "242275",
+              "name": "Royal Roast"
+            }
+          ],
+          "note": "Food: Harandar Celebration or Royal Roast"
+        }
+      }
     },
     "Arms Warrior": {
       "guideUrl": "https://www.wowhead.com/guide/classes/warrior/arms/bis-gear",
@@ -8193,7 +11999,128 @@
           "dungeon": null,
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "243973",
+                "name": "Enchant Weapon - Berserker's Rage"
+              }
+            ]
+          },
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "243951",
+                "name": "Enchant Helm - Empowered Hex of Leeching"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "243991",
+                "name": "Enchant Shoulders - Amirdrassil's Grace"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark of the Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "244643",
+                "name": "Blood Knight's Armor Kit"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243953",
+                "name": "Enchant Boots - Lynx's Dexterity"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "243957",
+                "name": "Enchant Ring - Eyes of the Eagle"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240967",
+              "name": "Powerful Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240906",
+              "name": "Flawless Quick Garnet"
+            }
+          ],
+          "note": "The Powerful Eversong Diamond is just barely starting to become stronger than Indecipherable Eversong Diamond, though versatility gems are not worth using to maximize the bonus."
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241324",
+              "name": "Flask of the Blood Knights"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241288",
+              "name": "Potion of Recklessness"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "food": [
+            {
+              "id": "242273",
+              "name": "Blooming Feast"
+            }
+          ],
+          "note": "false: The best flask for Arms Warriors is Flask of the Shattered Sun or Flask of the Blood Knights. · false: Light's Potential is recommended due to its ease of use, as Potion of Recklessness requires carefully balancing secondary stats to ensure that Critical Strike is always highest and Versatility is minimized, despite being very slightly stronger when not using Vantus Runes. Draught of Rampant Abandon also looks powerful, but the frequent need to move to avoid being silenced makes it weaker in practice. · false: Any feast, with Blooming Feast, Champion's Bento, and Flora Frenzy all providing the maximum benefit."
+        }
+      }
     },
     "Fury Warrior": {
       "guideUrl": "https://www.wowhead.com/guide/classes/warrior/fury/bis-gear",
@@ -8411,7 +12338,128 @@
           "dungeon": null,
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "243973",
+                "name": "Enchant Weapon - Berserker's Rage"
+              }
+            ]
+          },
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "243951",
+                "name": "Enchant Helm - Empowered Hex of Leeching"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "243991",
+                "name": "Enchant Shoulders - Amirdrassil's Grace"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark of the Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "244643",
+                "name": "Blood Knight's Armor Kit"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243953",
+                "name": "Enchant Boots - Lynx's Dexterity"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "243959",
+                "name": "Enchant Ring - Zul'jin's Mastery"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240967",
+              "name": "Powerful Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240900",
+              "name": "Flawless Quick Amethyst"
+            }
+          ],
+          "note": "The Powerful Eversong Diamond is just barely starting to become stronger than Indecipherable Eversong Diamond, though versatility gems are not worth using to maximize the bonus."
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241324",
+              "name": "Flask of the Blood Knights"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241288",
+              "name": "Potion of Recklessness"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "food": [
+            {
+              "id": "242273",
+              "name": "Blooming Feast"
+            }
+          ],
+          "note": "false: The best flask for Fury Warriors is Flask of the Magisters or Flask of the Blood Knights. · false: Light's Potential is recommended due to its ease of use, as Potion of Recklessness requires carefully balancing secondary stats to ensure that Mastery is always highest and Versatility is minimized, despite being very slightly stronger when not using Vantus Runes. Draught of Rampant Abandon also looks powerful, but the frequent need to move to avoid being silenced makes it weaker in practice. · false: Any feast, with Blooming Feast, Champion's Bento, and Flora Frenzy all providing the maximum benefit."
+        }
+      }
     },
     "Protection Warrior": {
       "guideUrl": "https://www.wowhead.com/guide/classes/warrior/protection/bis-gear",
@@ -8599,7 +12647,135 @@
           "dungeon": null,
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "243973",
+                "name": "Enchant Weapon - Berserker's Rage"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "243963",
+                "name": "Enchant Shoulders - Akil'zon's Swiftness"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark of the Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "243981",
+                "name": "Enchant Helm - Empowered Blessing of Speed"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "244641",
+                "name": "Forest Hunter's Armor Kit"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "244009",
+                "name": "Enchant Boots - Farstrider's Hunt"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "244015",
+                "name": "Enchant Ring - Silvermoon's Alacrity"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240983",
+              "name": "Indecipherable Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240894",
+              "name": "Flawless Versatile Peridot"
+            }
+          ]
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241324",
+              "name": "Flask of the Blood Knights"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241292",
+              "name": "Draught of Rampant Abandon"
+            },
+            {
+              "id": "241308",
+              "name": "Light's Potential"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "food": [
+            {
+              "id": "255845",
+              "name": "Silvermoon Parade"
+            },
+            {
+              "id": "255846",
+              "name": "Harandar Celebration"
+            }
+          ],
+          "note": "Combat Potion: Draught of Rampant Abandon or Light's Potential"
+        }
+      }
     }
   },
   "coverage": {

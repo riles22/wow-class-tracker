@@ -348,6 +348,7 @@ table.paths tr:hover td{background:rgba(255,255,255,.03)}
   <nav class="tabs" role="tablist" aria-label="Gearing views">
     <button class="tab on" id="tab-bis" type="button" role="tab" aria-selected="true" aria-controls="p-bis" data-p="bis">Gear recommendations</button>
     <button class="tab" id="tab-tier" type="button" role="tab" aria-selected="false" aria-controls="p-tier" data-p="tier" tabindex="-1">Tier &amp; Catalyst</button>
+    <button class="tab" id="tab-enh" type="button" role="tab" aria-selected="false" aria-controls="p-enh" data-p="enh" tabindex="-1">Enhancements</button>
     <button class="tab" id="tab-up" type="button" role="tab" aria-selected="false" aria-controls="p-up" data-p="up" tabindex="-1">Upgrade checker</button>
     <button class="tab" id="tab-src" type="button" role="tab" aria-selected="false" aria-controls="p-src" data-p="src" tabindex="-1">Loot sources</button>
     <button class="tab" id="tab-paths" type="button" role="tab" aria-selected="false" aria-controls="p-paths" data-p="paths" tabindex="-1">Item levels</button>
@@ -382,6 +383,12 @@ table.paths tr:hover td{background:rgba(255,255,255,.03)}
         <span class="pill" id="up-hint" role="status" aria-live="polite">No gear read yet</span>
       </div>
       <div id="up" style="margin-top:20px"></div>
+    </section>
+
+    <section class="panel" id="p-enh" role="tabpanel" aria-labelledby="tab-enh" tabindex="0" hidden>
+      <h2>Enhancements</h2>
+      <div class="note" id="enh-note"></div>
+      <div class="grid" id="enh"></div>
     </section>
 
     <section class="panel" id="p-src" role="tabpanel" aria-labelledby="tab-src" tabindex="0" hidden>
@@ -1840,11 +1847,99 @@ function renderFooter() {
     + 'node src/harvest-sheet.mjs &amp;&amp; node src/build.mjs</code>.</div></details>';
 }
 
+/* ---- Enhancements tab (Riley, 2026-08-18) --------------------------------------
+   Enchants, gems and consumables ranked by guide-consensus count — the same
+   distinct-sources quantity the gear candidates use — with ties broken by best
+   published position (0 = a source's primary rec), never by an invented score.
+   Custom weights cannot apply here (enchant choices are not stat-scored items), so
+   the tab renders identically in both scoring modes and says so. Null-guarded: the
+   pane may be absent in minimal test DOMs. */
+function enhCandLine(cands, limit, opts) {
+  const spellLabel = (opts && opts.spellLabel) || null;
+  return cands.slice(0, limit || cands.length).map((c, i) => {
+    const names = Object.keys(c.mentions).map(s => GUIDE_SOURCE_NAMES[s] || s);
+    return '<div class="row" data-enh-cand="true">'
+      + '<span class="rank" title="Guide-consensus rank">' + (i + 1) + '</span>'
+      + '<span class="nm">' + esc(c.name)
+      + '<span class="tag" data-consensus="' + c.consensus + '">' + c.consensus + '/3 guides: ' + esc(names.join(', ')) + '</span>'
+      + (c.spellId && spellLabel ? '<span class="badge">' + spellLabel + '</span>' : '')
+      + '</span></div>';
+  }).join('');
+}
+function enhNotesBlock(g, keys, title) {
+  const rows = [];
+  for (const key of keys) {
+    for (const n of (g.notes && g.notes[key]) || []) {
+      rows.push('<div class="src"><b>' + esc(GUIDE_SOURCE_NAMES[n.source] || n.source) + ':</b> ' + esc(n.note) + '</div>');
+    }
+  }
+  if (!rows.length) return '';
+  return '<details class="more-items"><summary>' + title + '</summary>' + rows.join('') + '</details>';
+}
+const ENH_CONSUMABLE_LABELS = {
+  flask: 'Flask', combatPotion: 'Combat potion', manaPotion: 'Mana potion',
+  healthPotion: 'Health potion', food: 'Food', augmentRune: 'Augment rune',
+  weaponBuff: 'Weapon buff / oil', tea: 'Tea',
+};
+function renderEnh() {
+  const pane = $('#enh');
+  if (!pane) return;
+  const noteEl = $('#enh-note');
+  const g = guideSpec(CUR);
+  const enh = g && g.enhancements;
+  if (!enh) {
+    if (noteEl) noteEl.innerHTML = '';
+    pane.innerHTML = '<div class="empty">No enhancement recommendations harvested for this spec yet.</div>';
+    return;
+  }
+  if (noteEl) noteEl.innerHTML =
+    '<b>Ranked by guide consensus</b> &mdash; how many of the three harvested guides recommend it, ties broken '
+    + 'by each source\'s own published order (its first-listed pick ranks ahead). These are the guides\' '
+    + 'recommendations, never simulated; conditional advice (hero-talent or bracket exceptions) is quoted '
+    + 'per source under each card. Covered by <b>' + enh.sources + ' of 3</b> guides for this spec.'
+    + (customModeSelected() && customWeights()
+      ? ' <b>Custom weights do not apply here</b> &mdash; enhancements are not stat-scored items.' : '');
+  const slotOrder = ['Main Hand', 'Off Hand', 'Head', 'Shoulder', 'Back', 'Chest', 'Wrist', 'Hands',
+    'Waist', 'Legs', 'Feet', 'Finger'];
+  const enchantRows = enh.enchants.slice().sort((a, b) => {
+    const i = slotOrder.indexOf(a.slot), j = slotOrder.indexOf(b.slot);
+    return (i < 0 ? 99 : i) - (j < 0 ? 99 : j) || a.slot.localeCompare(b.slot);
+  }).map(e =>
+    '<div class="hand-group"><div class="hand-title">' + esc(e.slot)
+    + '<span>' + e.candidates.length + ' recommended</span></div>'
+    + enhCandLine(e.candidates)
+    + enhNotesBlock(enh, ['enchant:' + e.slot], 'source notes for ' + esc(e.slot)) + '</div>').join('');
+  const enchantCard = enh.enchants.length
+    ? '<div class="card wide"><h3>Enchants<span>' + enh.enchants.length + ' slots</span></h3>' + enchantRows + '</div>'
+    : '';
+  const gemsCard = (enh.gems.unique.length || enh.gems.filler.length)
+    ? '<div class="card"><h3>Gems<span>unique + filler</span></h3>'
+      + (enh.gems.unique.length
+        ? '<div class="hand-group"><div class="hand-title">Unique / meta gem</div>' + enhCandLine(enh.gems.unique) + '</div>' : '')
+      + (enh.gems.filler.length
+        ? '<div class="hand-group"><div class="hand-title">Filler gems</div>' + enhCandLine(enh.gems.filler) + '</div>' : '')
+      + enhNotesBlock(enh, ['gems'], 'source notes on gems') + '</div>'
+    : '';
+  const consumableKeys = Object.keys(ENH_CONSUMABLE_LABELS).filter(k => (enh.consumables[k] || []).length);
+  const consumablesCard = consumableKeys.length
+    ? '<div class="card"><h3>Consumables<span>' + consumableKeys.length + ' categories</span></h3>'
+      + consumableKeys.map(k =>
+        '<div class="hand-group"><div class="hand-title">' + ENH_CONSUMABLE_LABELS[k] + '</div>'
+        + enhCandLine(enh.consumables[k], null,
+          k === 'weaponBuff' ? { spellLabel: 'imbue (spell, not an item)' }
+          : k === 'food' ? { spellLabel: 'feast (spell)' } : null) + '</div>').join('')
+      + enhNotesBlock(enh, ['consumables'], 'source notes on consumables') + '</div>'
+    : '';
+  pane.innerHTML = (enchantCard + gemsCard + consumablesCard)
+    || '<div class="empty">No enhancement recommendations harvested for this spec yet.</div>';
+}
+
 function render() {
   specLine();
   renderScoringControls();
   renderBis();
   renderTier();
+  renderEnh();
   renderSrc();
   renderPaths();
   renderUp();

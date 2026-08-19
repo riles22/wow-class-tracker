@@ -323,6 +323,34 @@ export async function fetchTextCurl(url, { tries = 3, delayMs = 1500, timeoutMs 
  * - consensus = distinct sources naming the item for the slot (G1).
  */
 export function buildGuidePayload(guides, specs, { itemSlots = new Map(), sourceNames = {} } = {}) {
+  /* Global enhancement name authority: every (id -> display-name) vote across every
+     source and spec. A single source's text/href mismatch (Method's "Farstrider's
+     Swiftness" anchor on the Hunt id, 2026-08-18 review) then loses to the other
+     thirteen specs' spelling even in a cell where it is the only mention. */
+  const enhGlobalNames = new Map();
+  const enhVote = (cand) => {
+    const key = cand.id != null ? `i${cand.id}` : `s${cand.spellId}`;
+    const clean = String(cand.name).replace(/^formula:\s*/i, "").replace(/^enchant [a-z' -]+ - /i, "").trim();
+    if (!clean) return;
+    const votes = enhGlobalNames.get(key) || new Map();
+    votes.set(clean, (votes.get(clean) || 0) + 1);
+    enhGlobalNames.set(key, votes);
+  };
+  for (const g of Object.values(guides)) {
+    for (const rec of Object.values(g.specs || {})) {
+      const enh = rec.enhancements;
+      if (!enh) continue;
+      for (const e of enh.enchants ?? []) for (const c of e.candidates ?? []) enhVote(c);
+      for (const lane of ["unique", "filler"]) for (const c of enh.gems?.[lane] ?? []) enhVote(c);
+      for (const [cat, list] of Object.entries(enh.consumables ?? {}))
+        if (cat !== "note") for (const c of list ?? []) enhVote(c);
+    }
+  }
+  const enhGlobalName = (cand) => {
+    const votes = enhGlobalNames.get(cand.id != null ? `i${cand.id}` : `s${cand.spellId}`);
+    if (!votes) return null;
+    return [...votes.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))[0][0];
+  };
   const payload = {
     sources: Object.fromEntries(Object.entries(guides).map(([id, g]) =>
       [id, { name: sourceNames[id] || id, harvestedAt: g.harvestedAt }])),
@@ -387,10 +415,143 @@ export function buildGuidePayload(guides, specs, { itemSlots = new Map(), source
         // present only on out-of-catalog picks (crafted/world) — see the bis loop above
         ...(e.name ? { name: e.name } : {}), ...(e.kind ? { kind: e.kind } : {}) }))
         .sort((a, b) => b.consensus - a.consensus)]));
-    payload.specs[key] = { builds, candidates, trinketTiers };
+    /* Enhancements consensus (Riley, 2026-08-18): same distinct-sources counting the
+       gear candidates get, applied to enchants (per slot), gems (unique/filler) and
+       consumables (per category). mentions[src] records the candidate's POSITION in
+       that source's published order (0 = its primary rec) so ties on count break on
+       best published position, never on an invented score. Per-source prose notes are
+       carried verbatim, keyed by section — conditionality stays prose (G7 reasoning). */
+    const enhCell = () => ({});
+    /* JOIN KEY IS THE NORMALIZED NAME, not the id (adversarial review 2026-08-18):
+       the three guides cite different quality-rank ids — and sometimes the Formula:
+       recipe id — for the SAME enchant, which fragmented one true 3/3 into 2/3 + 1/3
+       rows in ~119 cells (Thalassian Phoenix Oil, Eyes of the Eagle three ways). The
+       "Formula: " and "Enchant <Slot> - " prefixes are stripped for keying AND for
+       display; item-vs-spell citations of one recommendation join the same way. */
+    const enhKey = (name) => nameKey(String(name)
+      .replace(/^formula:\s*/i, "").replace(/^enchant [a-z' -]+ - /i, ""));
+    const enhDisplay = (name) => String(name)
+      .replace(/^formula:\s*/i, "").replace(/^enchant [a-z' -]+ - /i, "").trim();
+    const enhAdd = (cell, cand, srcId, pos) => {
+      if (!cand?.name || cand.name.length < 4) return; // fragment guard (belt+braces)
+      const k = enhKey(cand.name);
+      if (!k) return;
+      const entry = (cell[k] = cell[k] || {
+        ...(cand.id != null ? { id: String(cand.id) } : { spellId: String(cand.spellId) }),
+        name: enhDisplay(cand.name), mentions: {}, nameVotes: {},
+      });
+      const voteName = enhGlobalName(cand) ?? enhDisplay(cand.name);
+      entry.nameVotes[voteName] = (entry.nameVotes[voteName] || 0) + 1;
+      if (!(srcId in entry.mentions) || pos < entry.mentions[srcId]) entry.mentions[srcId] = pos;
+    };
+    const enhRank = (cell) => Object.values(cell).map((e) => {
+      // display name = the most-voted spelling across sources (fixes a lone source's
+      // text/href mismatch, e.g. Method's "Farstrider's Swiftness" for the Hunt id)
+      const { nameVotes, ...rest } = e;
+      const name = Object.entries(nameVotes).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))[0][0];
+      return { ...rest, name, consensus: Object.keys(e.mentions).length,
+        bestPos: Math.min(...Object.values(e.mentions)) };
+    }).sort((a, b) => b.consensus - a.consensus || a.bestPos - b.bestPos
+      || a.name.localeCompare(b.name));
+    const enchantCells = {}; const gemCells = { unique: enhCell(), filler: enhCell() };
+    const consumableCells = {}; const enhNotes = {};
+    let enhSources = 0;
+    for (const [srcId, g] of Object.entries(guides)) {
+      const enh = g.specs[key]?.enhancements;
+      if (!enh) continue;
+      enhSources += 1;
+      const note = (section, text) => {
+        if (text) (enhNotes[section] = enhNotes[section] || []).push({ source: srcId, note: text });
+      };
+      for (const e of enh.enchants ?? []) {
+        const cell = (enchantCells[e.slot] = enchantCells[e.slot] || enhCell());
+        (e.candidates ?? []).forEach((cand, pos) => enhAdd(cell, cand, srcId, pos));
+        note(`enchant:${e.slot}`, e.note);
+      }
+      if (enh.gems) {
+        (enh.gems.unique ?? []).forEach((cand, pos) => enhAdd(gemCells.unique, cand, srcId, pos));
+        (enh.gems.filler ?? []).forEach((cand, pos) => enhAdd(gemCells.filler, cand, srcId, pos));
+        note("gems", enh.gems.note);
+      }
+      if (enh.consumables) {
+        for (const [cat, list] of Object.entries(enh.consumables)) {
+          if (cat === "note") { note("consumables", enh.consumables.note); continue; }
+          const cell = (consumableCells[cat] = consumableCells[cat] || enhCell());
+          (list ?? []).forEach((cand, pos) => enhAdd(cell, cand, srcId, pos));
+        }
+      }
+    }
+    const enhancements = enhSources === 0 ? null : {
+      sources: enhSources,
+      enchants: Object.entries(enchantCells).map(([slot, cell]) => ({ slot, candidates: enhRank(cell) })),
+      // unique wins over filler: a unique-equipped meta gem must never also render as
+      // "socket in every remaining socket" (adversarial review 2026-08-18)
+      gems: (() => {
+        const unique = enhRank(gemCells.unique);
+        const uniqueKeys = new Set(unique.map((g) => enhKey(g.name)));
+        return { unique, filler: enhRank(gemCells.filler).filter((g) => !uniqueKeys.has(enhKey(g.name))) };
+      })(),
+      consumables: Object.fromEntries(Object.entries(consumableCells).map(([cat, cell]) => [cat, enhRank(cell)])),
+      notes: enhNotes,
+    };
+    payload.specs[key] = { builds, candidates, trinketTiers,
+      ...(enhancements ? { enhancements } : {}) };
   }
   const buildCounts = Object.values(payload.specs).map((x) => x.builds.length);
   if (buildCounts.length && Math.min(...buildCounts) < 1)
     throw new Error("a spec has zero guide builds — harvest incomplete");
   return payload;
+}
+
+/* ---- Enhancements lane (Riley, 2026-08-18): shared contract ----------------------
+   Each guide harvester may attach an `enhancements` block to its per-spec record:
+     { enchants: [{ slot, candidates: [cand...], note? }],
+       gems: { unique: [cand...], filler: [cand...], note? },
+       consumables: { <key from ENHANCEMENT_CONSUMABLE_KEYS>: [cand...], note? } }
+   where cand = { id: "<numeric item id>", name } OR { spellId: "<numeric>", name }
+   (weapon imbues are spells on some sources). Candidates keep the SOURCE's published
+   order — first is that source's primary recommendation. A category a source does not
+   publish is simply ABSENT (Holy Paladin genuinely has no augment rune) — never
+   invented, never an error. Weapon oils/imbues normalize into consumables.weaponBuff
+   whatever section the source printed them in, so cross-source consensus can join.
+   Prose conditionality (hero-talent exceptions, bracket alternatives) stays in the
+   free-text note fields — the axes are ragged across sources, the same reason G7
+   refused a scope grid for builds. */
+export const ENHANCEMENT_CONSUMABLE_KEYS = [
+  "flask", "combatPotion", "manaPotion", "healthPotion", "food", "augmentRune",
+  "weaponBuff", "tea",
+];
+
+const validCand = (c) => c && typeof c.name === "string" && c.name.length > 0
+  && ((/^\d+$/.test(String(c.id ?? "")) ? 1 : 0) + (/^\d+$/.test(String(c.spellId ?? "")) ? 1 : 0) === 1);
+
+export function validateEnhancements(enh, label) {
+  const fail = (msg) => { throw new Error(`${label}: enhancements ${msg}`); };
+  if (enh == null) return;
+  if (typeof enh !== "object") fail("must be an object");
+  for (const key of Object.keys(enh))
+    if (!["enchants", "gems", "consumables"].includes(key)) fail(`unknown key ${key}`);
+  for (const e of enh.enchants ?? []) {
+    if (!CANONICAL_SLOTS.has(e.slot) && !["Main Hand", "Off Hand"].includes(e.slot))
+      fail(`enchant slot "${e.slot}" is not canonical`);
+    if (!Array.isArray(e.candidates) || !e.candidates.length || !e.candidates.every(validCand))
+      fail(`enchant candidates malformed for slot ${e.slot}`);
+    if (e.note != null && typeof e.note !== "string") fail(`enchant note for ${e.slot} not a string`);
+  }
+  if (enh.gems != null) {
+    for (const lane of ["unique", "filler"]) {
+      const list = enh.gems[lane];
+      if (list != null && (!Array.isArray(list) || !list.every(validCand))) fail(`gems.${lane} malformed`);
+    }
+    for (const key of Object.keys(enh.gems))
+      if (!["unique", "filler", "note"].includes(key)) fail(`gems has unknown key ${key}`);
+  }
+  if (enh.consumables != null) {
+    for (const key of Object.keys(enh.consumables)) {
+      if (key === "note") continue;
+      if (!ENHANCEMENT_CONSUMABLE_KEYS.includes(key)) fail(`consumables has unknown key ${key}`);
+      const list = enh.consumables[key];
+      if (!Array.isArray(list) || !list.length || !list.every(validCand)) fail(`consumables.${key} malformed`);
+    }
+  }
 }

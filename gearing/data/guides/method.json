@@ -3,7 +3,7 @@
   "source": "Method",
   "sourceId": "method",
   "dated": true,
-  "harvestedAt": "2026-08-18",
+  "harvestedAt": "2026-08-19",
   "specs": {
     "Blood Death Knight": {
       "guideUrl": "https://www.method.gg/guides/blood-death-knight/gearing",
@@ -367,7 +367,40 @@
           "dungeon": null,
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "gems": {
+          "unique": [
+            {
+              "id": "240983",
+              "name": "Indecipherable Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240906",
+              "name": "Flawless Quick Garnet"
+            },
+            {
+              "id": "240908",
+              "name": "Flawless Masterful Garnet"
+            }
+          ],
+          "note": "You are always advised to sim your character for minor decisions such as Gems. The general recommendation here is to use: 1x Indecipherable Eversong Diamond Fill the rest of the slots with Flawless Quick Garnet (San'layn) Fill the rest of the slots with Flawless Masterful Garnet (Deathbringer)"
+        },
+        "consumables": {
+          "food": [
+            {
+              "id": "255846",
+              "name": "Harandar Celebration"
+            },
+            {
+              "id": "242275",
+              "name": "Royal Roast"
+            }
+          ]
+        }
+      }
     },
     "Frost Death Knight": {
       "guideUrl": "https://www.method.gg/guides/frost-death-knight/gearing",
@@ -903,7 +936,130 @@
           "dungeon": "The Blinding Vale",
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "243981",
+                "name": "Empowered Blessing of Speed"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "243961",
+                "name": "Flight of the Eagle"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Mark of the Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "244009",
+                "name": "Farstrider's Hunt"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "244641",
+                "name": "Forest Hunter's Armor Kit"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "243987",
+                "name": "Nature's Fury"
+              },
+              {
+                "id": "243959",
+                "name": "Zul'jin's Mastery"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240966",
+              "name": "Powerful Eversong Diamond"
+            },
+            {
+              "id": "240983",
+              "name": "Indecipherable Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240898",
+              "name": "Flawless Deadly Amethyst"
+            }
+          ],
+          "note": "Diamond Gem: Powerful Eversong Diamond : +23 Primary Stat + 0.15% Critical Effect per unique Midnight Gem color Indecipherable Eversong Diamond : +32 Primary Stat The DPS difference between these two gems is marginal at best. Depending on your current gear, it could be better to run either one. So, as usual, simulate your character to see which is best for you. All gems are colored based on the stats they give: Peridot (Green) = Haste Garnet (Red) = Crit Amethyst (Purple) = Mastery Lapis (Blue) = Versatility You will always want to use the dual stat gems as they give you more stats overall (example: Flawless Deadly Amethyst ). The best way to find out the best gems for your character make sure to sim multiple gem combinations!"
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241326",
+              "name": "Flask of the Magisters"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241288",
+              "name": "Potion of Recklessness"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "food": [
+            {
+              "id": "255846",
+              "name": "Harandar Celebration"
+            },
+            {
+              "id": "242275",
+              "name": "Royal Roast"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ]
+        }
+      }
     },
     "Unholy Death Knight": {
       "guideUrl": "https://www.method.gg/guides/unholy-death-knight/gearing",
@@ -1442,7 +1598,116 @@
           "dungeon": "Murder Row",
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "243981",
+                "name": "Empowered Blessing of Speed"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "243961",
+                "name": "Flight of the Eagle"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Mark of the Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "244009",
+                "name": "Farstrider's Hunt"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "244641",
+                "name": "Forest Hunter's Armor Kit"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "243957",
+                "name": "Eyes of the Eagle"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240966",
+              "name": "Powerful Eversong Diamond"
+            },
+            {
+              "id": "240983",
+              "name": "Indecipherable Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240898",
+              "name": "Flawless Deadly Amethyst"
+            }
+          ],
+          "note": "Diamond Gems: Powerful Eversong Diamond : +23 Primary Stat + 0.15% Critical Effect per unique Midnight Gem color Indecipherable Eversong Diamond : +32 Primary Stat The DPS difference between these two gems is marginal at best. Depending on your current gear, it could be better to run either one. So, as usual, simulate your character to see which is best for you. All gems are colored based on the stats they give: Peridot (Green) = Haste Garnet (Red) = Crit Amethyst (Purple) = Mastery Lapis (Blue) = Versatility You will always want to use the dual stat gems as they give you more stats overall (example: Flawless Deadly Amethyst ). The best way to find out the best gems for your character, make sure to sim multiple gem combinations!"
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241326",
+              "name": "Flask of the Magisters"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241288",
+              "name": "Potion of Recklessness"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ]
+        }
+      }
     },
     "Havoc Demon Hunter": {
       "guideUrl": "https://www.method.gg/guides/havoc-demon-hunter/gearing",
@@ -2002,7 +2267,137 @@
           "droppedBy": null,
           "sourceTextUnmatched": true
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "244007",
+                "name": "Enchant Helm - Empowered Rune Of Avoidance"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "243991",
+                "name": "Enchant Shoulders - Amirdrassil's Grace"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark Of The Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243953",
+                "name": "Enchant Boots - Lynx's Dexterity"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "243957",
+                "name": "Enchant Ring - Eyes Of The Eagle"
+              }
+            ]
+          },
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "243971",
+                "name": "Enchant Weapon - Jan'alai's Precision"
+              },
+              {
+                "id": "244031",
+                "name": "Enchant Weapon - Arcane Mastery"
+              }
+            ],
+            "note": "1x and 1x"
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240983",
+              "name": "Indecipherable Eversong Diamond"
+            },
+            {
+              "id": "240967",
+              "name": "Powerful Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240898",
+              "name": "Flawless Deadly Amethyst"
+            },
+            {
+              "id": "240890",
+              "name": "Flawless Deadly Peridot"
+            },
+            {
+              "id": "240918",
+              "name": "Flawless Masterful Lapis"
+            },
+            {
+              "id": "240908",
+              "name": "Flawless Masterful Garnet"
+            }
+          ],
+          "note": "Indecipherable Eversong Diamond is a unique gem that provides primary stat, you will always use one of these. Powerful Eversong Diamond is another option. While it increases your Critical Strike effectiveness by 0.15% per unique gem colour, it grants far less primary stat. There are four gem colours, the best ones for Havoc are listed below: Best Amethyst gem: Flawless Deadly Amethyst Best Peridot gem: Flawless Deadly Peridot Best Lapis gem: Flawless Masterful Lapis Best Garnet Gem: Flawless Masterful Garnet Currently, Havoc wants Flawless Masterful Garnet in every gem slot, due to not using Powerful Eversong Diamond or an embellishment that wants different coloured gems. Note: You want to use gems that give 2 different secondary stats since they provide more stats than the single secondary stat gems. Always sim your own character to get a clearer picture on which enchants and gems to choose."
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241322",
+              "name": "Flask Of The Magisters"
+            },
+            {
+              "id": "241326",
+              "name": "Flask Of The Shattered Sun"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241288",
+              "name": "Potion Of Recklessness"
+            }
+          ],
+          "food": [
+            {
+              "id": "255846",
+              "name": "Harandar Celebration"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ]
+        }
+      }
     },
     "Devourer Demon Hunter": {
       "guideUrl": "https://www.method.gg/guides/devourer-demon-hunter/gearing",
@@ -2574,7 +2969,156 @@
           "droppedBy": null,
           "sourceTextUnmatched": true
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "244007",
+                "name": "Enchant Helm - Empowered Rune Of Avoidance"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "243991",
+                "name": "Enchant Shoulders - Amirdrassil's Grace"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark Of The Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "240133",
+                "name": "Sunfire Silk Spellthread"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243953",
+                "name": "Enchant Boots - Lynx's Dexterity"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "243957",
+                "name": "Enchant Ring - Eyes Of The Eagle"
+              }
+            ]
+          },
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "243973",
+                "name": "Enchant Weapon - Berserker's Rage"
+              },
+              {
+                "id": "244031",
+                "name": "Enchant Weapon - Arcane Mastery"
+              }
+            ],
+            "note": "1x and 1x"
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240983",
+              "name": "Indecipherable Eversong Diamond"
+            },
+            {
+              "id": "240967",
+              "name": "Powerful Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240900",
+              "name": "Flawless Quick Amethyst"
+            },
+            {
+              "id": "240892",
+              "name": "Flawless Masterful Peridot"
+            },
+            {
+              "id": "240918",
+              "name": "Flawless Masterful Lapis"
+            },
+            {
+              "id": "240908",
+              "name": "Flawless Masterful Garnet"
+            }
+          ],
+          "note": "Indecipherable Eversong Diamond is a unique gem that provides primary stat, you will always use one of these. Powerful Eversong Diamond is another option. While it increases your Critical Strike effectiveness by 0.15% per unique gem colour, it grants far less primary stat. There are four gem colours, the best ones for Devourer are listed below: Best Amethyst gem: Flawless Quick Amethyst Best Peridot gem: Flawless Masterful Peridot Best Lapis gem: Flawless Masterful Lapis Best Garnet Gem: Flawless Masterful Garnet For Devourer you want to use an Indecipherable Eversong Diamond , then fill all other sockets with Flawless Quick Amethyst . Note: You want to use gems that give 2 different secondary stats since they provide more stats than the single secondary stat gems. Always sim your own character to get a clearer picture on which enchants and gems to choose."
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241322",
+              "name": "Flask Of The Magisters"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241288",
+              "name": "Potion Of Recklessness"
+            },
+            {
+              "id": "241308",
+              "name": "Light's Potential"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "food": [
+            {
+              "id": "255846",
+              "name": "Harandar Celebration"
+            },
+            {
+              "id": "242275",
+              "name": "Royal Roast"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ]
+        }
+      }
     },
     "Vengeance Demon Hunter": {
       "guideUrl": "https://www.method.gg/guides/vengeance-demon-hunter/gearing",
@@ -3133,7 +3677,121 @@
           "dungeon": "Den of Nalorakk",
           "droppedBy": "Nalorakk"
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "243948",
+                "name": "Hex Of Leeching"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "244021",
+                "name": "Silvermoon's Mending"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Mark Of The Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243983",
+                "name": "Shaladrassil's Roots"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "244641",
+                "name": "Forest Hunter's Armor Kit"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "244015",
+                "name": "Silvermoon's Alacrity"
+              }
+            ]
+          },
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "243973",
+                "name": "Berserker's Rage"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240983",
+              "name": "Indecipherable Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240890",
+              "name": "Flawless Deadly Peridot"
+            }
+          ],
+          "note": "Generally, you will want one Indecipherable Eversong Diamond for the main stat and then primarily focus on gems that give some combination of Haste, Crit or Vers. Flawless Deadly Peridot is an example of a gem like that."
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241324",
+              "name": "Flask Of The Blood Knights"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241288",
+              "name": "Potion Of Recklessness"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "241304",
+              "name": "Silvermoon Health Potion"
+            }
+          ],
+          "food": [
+            {
+              "id": "242275",
+              "name": "Royal Roast"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ]
+        }
+      }
     },
     "Balance Druid": {
       "guideUrl": "https://www.method.gg/guides/balance-druid/gearing",
@@ -3684,7 +4342,105 @@
           "dungeon": "Ruby Life Pools",
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "244007",
+                "name": "Enchant Helm - Empowered Rune Of Avoidance"
+              },
+              {
+                "id": "243951",
+                "name": "Enchant Helm - Empowered Hex Of Leeching"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "243991",
+                "name": "Enchant Shoulders - Amirdrassil's Grace"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark Of The Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243953",
+                "name": "Enchant Boots - Lynx's Dexterity"
+              },
+              {
+                "id": "243983",
+                "name": "Enchant Boots - Shaladrassil's Roots"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "240133",
+                "name": "Sunfire Silk Spellthread"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "243957",
+                "name": "Enchant Ring - Eyes Of The Eagle"
+              }
+            ]
+          },
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "244029",
+                "name": "Enchant Weapon - Acuity Of The Ren'dorei"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240983",
+              "name": "Indecipherable Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240900",
+              "name": "Flawless Quick Amethyst"
+            }
+          ],
+          "note": "I strongly advise simming to find out what the current best gems are for you. You want to have at least one Indecipherable Eversong Diamond , and then fill out the rest of your sockets with whatever gems have the best stats for you. If you want to follow a recommendation, you can probably safely opt into the Flawless Quick Amethyst gem."
+        },
+        "consumables": {
+          "combatPotion": [
+            {
+              "id": "241288",
+              "name": "Potion Of Recklessness"
+            }
+          ]
+        }
+      }
     },
     "Feral Druid": {
       "guideUrl": "https://www.method.gg/guides/feral-druid/gearing",
@@ -3813,7 +4569,167 @@
           "dungeon": null,
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark Of The Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "244641",
+                "name": "Forest Hunter's Armor Kit"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "243957",
+                "name": "Enchant Ring - Eyes Of The Eagle"
+              }
+            ]
+          },
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "244029",
+                "name": "Enchant Weapon - Acuity Of The Ren'dorei"
+              }
+            ]
+          },
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "244007",
+                "name": "Enchant Helm - Empowered Rune Of Avoidance"
+              },
+              {
+                "id": "243951",
+                "name": "Enchant Helm - Empowered Hex Of Leeching"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "243991",
+                "name": "Enchant Shoulders - Amirdrassil's Grace"
+              },
+              {
+                "id": "244021",
+                "name": "Enchant Shoulders - Silvermoon's Mending"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243983",
+                "name": "Enchant Boots - Shaladrassil's Roots"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240983",
+              "name": "Indecipherable Eversong Diamond"
+            },
+            {
+              "id": "240967",
+              "name": "Powerful Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240892",
+              "name": "Flawless Masterful Peridot"
+            },
+            {
+              "id": "240900",
+              "name": "Flawless Quick Amethyst"
+            },
+            {
+              "id": "251513",
+              "name": "Loa Worshiper's Band"
+            }
+          ],
+          "note": "Always use: Indecipherable Eversong Diamond - main stat gems are very powerful and you should always have one. Indecipherable is the best since the crit damage effect on Powerful Eversong Diamond is much weaker than the extra 9 agility. As for the remaining gems, it is best to sim your character. If you don't want to bother, then going Flawless Masterful Peridot or Flawless Quick Amethyst is relatively safe. The former provides better buffs from Loa Worshiper's Band if you're using that."
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241322",
+              "name": "Flask Of The Magisters"
+            },
+            {
+              "id": "241324",
+              "name": "Flask Of The Blood Knights"
+            },
+            {
+              "id": "241320",
+              "name": "Flask Of Thalassian Resistance"
+            },
+            {
+              "id": "241326",
+              "name": "Flask Of The Shattered Sun"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241308",
+              "name": "Light's Potential"
+            },
+            {
+              "id": "241292",
+              "name": "Draught Of Rampant Abandon"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "food": [
+            {
+              "id": "255846",
+              "name": "Harandar Celebration"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            },
+            {
+              "id": "237371",
+              "name": "Refulgent Whetstone"
+            }
+          ]
+        }
+      }
     },
     "Guardian Druid": {
       "guideUrl": "https://www.method.gg/guides/guardian-druid/gearing",
@@ -4323,7 +5239,135 @@
           "dungeon": "Temple of Sethraliss",
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "243948",
+                "name": "Enchant Helm - Hex Of Leeching"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "244021",
+                "name": "Enchant Shoulders - Silvermoon's Mending"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark Of The Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "244641",
+                "name": "Forest Hunter's Armor Kit"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243983",
+                "name": "Enchant Boots - Shaladrassil's Roots"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "244015",
+                "name": "Enchant Ring - Silvermoon's Alacrity"
+              }
+            ]
+          },
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "244029",
+                "name": "Enchant Weapon - Acuity Of The Ren'dorei"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240983",
+              "name": "Indecipherable Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240894",
+              "name": "Flawless Versatile Peridot"
+            },
+            {
+              "id": "240890",
+              "name": "Flawless Deadly Peridot"
+            }
+          ],
+          "note": "Eversong Diamond: Indecipherable Eversong Diamond Other Gems: Flawless Versatile Peridot or Flawless Deadly Peridot"
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241324",
+              "name": "Flask Of The Blood Knights"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241288",
+              "name": "Potion Of Recklessness"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "food": [
+            {
+              "id": "255846",
+              "name": "Harandar Celebration"
+            },
+            {
+              "id": "255845",
+              "name": "Silvermoon Parade"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ]
+        }
+      }
     },
     "Restoration Druid": {
       "guideUrl": "https://www.method.gg/guides/restoration-druid/gearing",
@@ -4561,7 +5605,129 @@
           "dungeon": null,
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "243951",
+                "name": "Enchant Helm - Empowered Hex of Leeching"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "244021",
+                "name": "Enchant Shoulders - Silvermoon's Mending"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark of the Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243983",
+                "name": "Enchant Boots - Shaladrassil's Roots"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "240094",
+                "name": "Sunfire Silk Spellthread"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "244015",
+                "name": "Enchant Ring - Silvermoon's Alacrity"
+              }
+            ]
+          },
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "244029",
+                "name": "Enchant Weapon - Acuity of the Ren'dorei"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240982",
+              "name": "Indecipherable Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240892",
+              "name": "Flawless Masterful Peridot"
+            },
+            {
+              "id": "240900",
+              "name": "Flawless Quick Amethyst"
+            }
+          ],
+          "note": "Unique Gems: Indecipherable Eversong Diamond Regular Gems: Flawless Masterful Peridot / Flawless Quick Amethyst"
+        },
+        "consumables": {
+          "combatPotion": [
+            {
+              "id": "241308",
+              "name": "Light's Potential"
+            }
+          ],
+          "manaPotion": [
+            {
+              "id": "241300",
+              "name": "Lightfused Mana Potion"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "food": [
+            {
+              "id": "242273",
+              "name": "Blooming Feast"
+            },
+            {
+              "id": "255846",
+              "name": "Harandar Celebration"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243733",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ]
+        }
+      }
     },
     "Augmentation Evoker": {
       "guideUrl": "https://www.method.gg/guides/augmentation-evoker/gearing",
@@ -5142,7 +6308,101 @@
           "dungeon": null,
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "244007",
+                "name": "Enchant Helm - Empowered Rune Of Avoidance"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "243991",
+                "name": "Enchant Shoulders - Amirdrassil's Grace"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark Of The Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243953",
+                "name": "Enchant Boots - Lynx's Dexterity"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "240133",
+                "name": "Sunfire Silk Spellthread"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240983",
+              "name": "Indecipherable Eversong Diamond"
+            }
+          ],
+          "note": "I strongly advise simming to find out what the current best gems are for you. You want to have one Eversong Diamond, the best option for us is the Indecipherable Eversong Diamond . After that Mastery gems are always a good pick."
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241326",
+              "name": "Flask Of The Shattered Sun"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "food": [
+            {
+              "id": "255846",
+              "name": "Harandar Celebration"
+            },
+            {
+              "id": "255845",
+              "name": "Silvermoon Parade"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ]
+        }
+      }
     },
     "Devastation Evoker": {
       "guideUrl": "https://www.method.gg/guides/devastation-evoker/gearing",
@@ -5707,7 +6967,110 @@
           "dungeon": null,
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "244007",
+                "name": "Enchant Helm - Empowered Rune Of Avoidance"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "243991",
+                "name": "Enchant Shoulders - Amirdrassil's Grace"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark Of The Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243953",
+                "name": "Enchant Boots - Lynx's Dexterity"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "240133",
+                "name": "Sunfire Silk Spellthread"
+              }
+            ]
+          },
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "244029",
+                "name": "Enchant Weapon - Acuity Of The Ren'dorei"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240983",
+              "name": "Indecipherable Eversong Diamond"
+            }
+          ],
+          "note": "I strongly advise simming to find out what the current best gems are for you. You want to have one Eversong Diamond, the best option for us is the Indecipherable Eversong Diamond . After that Critical Strike or Haste sockets are always a good pick."
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241326",
+              "name": "Flask Of The Shattered Sun"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "food": [
+            {
+              "id": "255846",
+              "name": "Harandar Celebration"
+            },
+            {
+              "id": "255845",
+              "name": "Silvermoon Parade"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ]
+        }
+      }
     },
     "Preservation Evoker": {
       "guideUrl": "https://www.method.gg/guides/preservation-evoker/gearing",
@@ -6305,7 +7668,184 @@
           "dungeon": "Altar of Fangs",
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "244007",
+                "name": "Enchant Helm - Empowered Rune Of Avoidance"
+              },
+              {
+                "id": "243951",
+                "name": "Enchant Helm - Empowered Hex Of Leeching"
+              }
+            ],
+            "note": "Leech is more valuable in raid, while Avoidance is favored in Mythic+. As a result, is the better choice for Mythic+, whereas performs better in raid."
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "243991",
+                "name": "Enchant Shoulders - Amirdrassil's Grace"
+              },
+              {
+                "id": "244021",
+                "name": "Enchant Shoulders - Silvermoon's Mending"
+              }
+            ],
+            "note": "For the same reason, is preferred in Mythic+, while is stronger in raid."
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "244003",
+                "name": "Enchant Chest - Mark Of The Magister"
+              },
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark Of The Worldsoul"
+              }
+            ],
+            "note": "is the default choice in Midnight, as mana management has become more demanding after the removal of . If mana is not an issue, is the stronger alternative"
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243953",
+                "name": "Enchant Boots - Lynx's Dexterity"
+              },
+              {
+                "id": "243983",
+                "name": "Enchant Boots - Shaladrassil's Roots"
+              }
+            ],
+            "note": "is the better option for Mythic+, while performs better in raid."
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "240155",
+                "name": "Arcanoweave Spellthread"
+              }
+            ],
+            "note": "is the best option, as it increases maximum mana by 4% and provides additional Intellect."
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "243959",
+                "name": "Enchant Ring - Zul'jin's Mastery"
+              }
+            ],
+            "note": "Since Mastery is your strongest secondary stat, is the best choice."
+          },
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "244029",
+                "name": "Enchant Weapon - Acuity Of The Ren'dorei"
+              }
+            ],
+            "note": "is the best option."
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240969",
+              "name": "Telluric Eversong Diamond"
+            },
+            {
+              "id": "240967",
+              "name": "Powerful Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "263897",
+              "name": "Radiant Jewelbinder"
+            },
+            {
+              "id": "249920",
+              "name": "Eye Of Midnight"
+            },
+            {
+              "id": "240910",
+              "name": "Flawless Versatile Garnet"
+            },
+            {
+              "id": "240900",
+              "name": "Flawless Quick Amethyst"
+            },
+            {
+              "id": "240918",
+              "name": "Flawless Masterful Lapis"
+            },
+            {
+              "id": "240892",
+              "name": "Flawless Masterful Peridot"
+            }
+          ],
+          "note": "In Midnight both rings and the neck always come with a socket, and additional sockets cannot be added to them. You can, however, add sockets to your Helm Bracers Belt The item for this is called Radiant Jewelbinder and can be purchased from the vendor next to the Great Vault in Silvermoon. This results in six total gem slots, or seven if you use Eye Of Midnight , which has two sockets. Your neck can be fitted with a unique gem. Telluric Eversong Diamond is the default choice, as it helps you with your mana in longer encounters. If mana is not a concern, Powerful Eversong Diamond becomes the stronger alternative. To maximize the effect of these unique gems, you should equip four different gem colors. Use Flawless Versatile Garnet (Red) Flawless Quick Amethyst (Purple) Flawless Masterful Lapis (Blue) Flawless Masterful Peridot (Green). Once you have one of each colour equipped, fill any remaining sockets with Flawless Quick Amethyst for the best value."
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241322",
+              "name": "Flask Of The Magisters"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241308",
+              "name": "Light's Potential"
+            }
+          ],
+          "manaPotion": [
+            {
+              "id": "241300",
+              "name": "Lightfused Mana Potion"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "food": [
+            {
+              "id": "242747",
+              "name": "Hearty Royal Roast"
+            },
+            {
+              "id": "266985",
+              "name": "Hearty Silvermoon Parade"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ]
+        }
+      }
     },
     "Beast Mastery Hunter": {
       "guideUrl": "https://www.method.gg/guides/beast-mastery-hunter/gearing",
@@ -6842,7 +8382,123 @@
           "dungeon": "The Blinding Vale",
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "243990",
+                "name": "Enchant Shoulders - Amirdrassil's Grace"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark of the Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "244640",
+                "name": "Forest Hunter's Armor Kit"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243952",
+                "name": "Enchant Boots - Lynx's Dexterity"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "243959",
+                "name": "Enchant Ring - Zul'jin's Mastery"
+              }
+            ],
+            "note": ":"
+          },
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "244029",
+                "name": "Enchant Weapon - Acuity of the Ren'dorei"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240983",
+              "name": "Indecipherable Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240898",
+              "name": "Flawless Deadly Amethyst"
+            }
+          ],
+          "note": "Meta Gem: Indecipherable Eversong Diamond - Agility (you can only have one of these on your gear). Combination Stat Gems: Flawless Deadly Amethyst - Mastery/Crit gem. Fill the rest of your sockets with this gem."
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241326",
+              "name": "Flask of the Shattered Sun"
+            },
+            {
+              "id": "241322",
+              "name": "Flask of the Magisters"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241288",
+              "name": "Potion of Recklessness"
+            },
+            {
+              "id": "241308",
+              "name": "Light's Potential"
+            }
+          ],
+          "food": [
+            {
+              "id": "255846",
+              "name": "Harandar Celebration"
+            },
+            {
+              "id": "255845",
+              "name": "Silvermoon Parade"
+            },
+            {
+              "id": "242747",
+              "name": "Hearty Royal Roast"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ]
+        }
+      }
     },
     "Marksmanship Hunter": {
       "guideUrl": "https://www.method.gg/guides/marksmanship-hunter/gearing",
@@ -7366,7 +9022,123 @@
           "dungeon": "Murder Row",
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "243990",
+                "name": "Enchant Shoulders - Amirdrassil's Grace"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark of the Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "244640",
+                "name": "Forest Hunter's Armor Kit"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243952",
+                "name": "Enchant Boots - Lynx's Dexterity"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "243956",
+                "name": "Enchant Ring - Eyes of the Eagle"
+              }
+            ],
+            "note": ":"
+          },
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "244029",
+                "name": "Enchant Weapon - Acuity of the Ren'dorei"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240983",
+              "name": "Indecipherable Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240908",
+              "name": "Flawless Masterful Garnet"
+            }
+          ],
+          "note": "Meta Gem: Indecipherable Eversong Diamond - Agility (you can only have one of these on your gear). Combination Stat Gems: Flawless Masterful Garnet - Mastery/Crit gem. Fill the rest of your sockets with this gem."
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241326",
+              "name": "Flask of the Shattered Sun"
+            },
+            {
+              "id": "241322",
+              "name": "Flask of the Magisters"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241288",
+              "name": "Potion of Recklessness"
+            },
+            {
+              "id": "241308",
+              "name": "Light's Potential"
+            }
+          ],
+          "food": [
+            {
+              "id": "255846",
+              "name": "Harandar Celebration"
+            },
+            {
+              "id": "255845",
+              "name": "Silvermoon Parade"
+            },
+            {
+              "id": "242747",
+              "name": "Hearty Royal Roast"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ]
+        }
+      }
     },
     "Survival Hunter": {
       "guideUrl": "https://www.method.gg/guides/survival-hunter/gearing",
@@ -7902,7 +9674,131 @@
           "dungeon": "Altar of Fangs",
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "243951",
+                "name": "Enchant Helm - Empowered Hex Of Leeching"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243975",
+                "name": "Enchant Chest - Mark Of The Rootwarden"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "244021",
+                "name": "Enchant Shoulders - Silvermoon's Mending"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243983",
+                "name": "Enchant Boots - Shaladrassil's Roots"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "244641",
+                "name": "Forest Hunter's Armor Kit"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "243959",
+                "name": "Enchant Ring - Zul'jin's Mastery"
+              }
+            ]
+          },
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "244029",
+                "name": "Enchant Weapon - Acuity Of The Ren'dorei"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240967",
+              "name": "Powerful Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240898",
+              "name": "Flawless Deadly Amethyst"
+            }
+          ],
+          "note": "In Midnight we want to use a Unique Metagem: Powerful Eversong Diamond And the rest of our gem slots can be filled with: Flawless Deadly Amethyst"
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241322",
+              "name": "Flask Of The Magisters"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241292",
+              "name": "Draught Of Rampant Abandon"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "food": [
+            {
+              "id": "255845",
+              "name": "Silvermoon Parade"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            },
+            {
+              "id": "237369",
+              "name": "Refulgent Weightstone"
+            }
+          ]
+        }
+      }
     },
     "Arcane Mage": {
       "guideUrl": "https://www.method.gg/guides/arcane-mage/gearing",
@@ -8453,7 +10349,139 @@
           "dungeon": "Kings' Rest",
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "244005",
+                "name": "Enchant Helm - Rune Of Avoidance"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "243991",
+                "name": "Enchant Shoulders - Amirdrassil's Grace"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark Of The Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243953",
+                "name": "Enchant Boots - Lynx's Dexterity"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "240155",
+                "name": "Arcanoweave Spellthread"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "243957",
+                "name": "Enchant Ring - Eyes Of The Eagle"
+              }
+            ]
+          },
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "244029",
+                "name": "Enchant Weapon - Acuity Of The Ren'dorei"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240969",
+              "name": "Telluric Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240900",
+              "name": "Flawless Quick Amethyst"
+            },
+            {
+              "id": "240906",
+              "name": "Flawless Quick Garnet"
+            },
+            {
+              "id": "240890",
+              "name": "Flawless Deadly Peridot"
+            },
+            {
+              "id": "240914",
+              "name": "Flawless Deadly Lapis"
+            }
+          ],
+          "note": "You should socket one Telluric Eversong Diamond (often referred to as a \"meta gem\") for the high amount of Intellect and its secondary mana bonus effect per unique gem color. Additionally, you should socket one gem of each color, for example: Flawless Quick Amethyst , Flawless Quick Garnet , Flawless Deadly Peridot , and Flawless Deadly Lapis ."
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241322",
+              "name": "Flask Of The Magisters"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241308",
+              "name": "Light's Potential"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "241304",
+              "name": "Silvermoon Health Potion"
+            }
+          ],
+          "food": [
+            {
+              "id": "255846",
+              "name": "Harandar Celebration"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ]
+        }
+      }
     },
     "Fire Mage": {
       "guideUrl": "https://www.method.gg/guides/fire-mage/gearing",
@@ -8650,7 +10678,119 @@
           "dungeon": null,
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "244007",
+                "name": "Enchant Helm - Empowered Rune Of Avoidance"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "243991",
+                "name": "Enchant Shoulders - Amirdrassil's Grace"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark Of The Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243953",
+                "name": "Enchant Boots - Lynx's Dexterity"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "240133",
+                "name": "Sunfire Silk Spellthread"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "243957",
+                "name": "Enchant Ring - Eyes Of The Eagle"
+              }
+            ]
+          },
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "244029",
+                "name": "Enchant Weapon - Acuity Of The Ren'dorei"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240967",
+              "name": "Powerful Eversong Diamond"
+            }
+          ],
+          "note": "Use 1x Powerful Eversong Diamond and then for the rest use any Haste / Mastery combination of gems."
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241322",
+              "name": "Flask Of The Magisters"
+            },
+            {
+              "id": "241324",
+              "name": "Flask Of The Blood Knights"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241308",
+              "name": "Light's Potential"
+            }
+          ],
+          "food": [
+            {
+              "id": "255846",
+              "name": "Harandar Celebration"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ]
+        }
+      }
     },
     "Frost Mage": {
       "guideUrl": "https://www.method.gg/guides/frost-mage/gearing",
@@ -9189,7 +11329,127 @@
           "dungeon": "Ruby Life Pools",
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "244007",
+                "name": "Enchant Helm - Empowered Rune Of Avoidance"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "243991",
+                "name": "Enchant Shoulders - Amirdrassil's Grace"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark Of The Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243953",
+                "name": "Enchant Boots - Lynx's Dexterity"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "240133",
+                "name": "Sunfire Silk Spellthread"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "243957",
+                "name": "Enchant Ring - Eyes Of The Eagle"
+              }
+            ]
+          },
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "244029",
+                "name": "Enchant Weapon - Acuity Of The Ren'dorei"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240983",
+              "name": "Indecipherable Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240908",
+              "name": "Flawless Masterful Garnet"
+            }
+          ],
+          "note": "You should socket one Indecipherable Eversong Diamond (often referred to as a \"meta gem\") for the high amount of Intellect. Additionally, you should put Flawless Masterful Garnet in all your remaining sockets."
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241326",
+              "name": "Flask Of The Shattered Sun"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241288",
+              "name": "Potion Of Recklessness"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "food": [
+            {
+              "id": "255846",
+              "name": "Harandar Celebration"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ]
+        }
+      }
     },
     "Brewmaster Monk": {
       "guideUrl": "https://www.method.gg/guides/brewmaster-monk/gearing",
@@ -9717,7 +11977,126 @@
           "dungeon": "The Blinding Vale",
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "243951",
+                "name": "Enchant Helm - Empowered Hex Of Leeching"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "244021",
+                "name": "Enchant Shoulders - Silvermoon's Mending"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark Of The Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243983",
+                "name": "Enchant Boots - Shaladrassil's Roots"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "244641",
+                "name": "Forest Hunter's Armor Kit"
+              }
+            ]
+          },
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "244029",
+                "name": "Enchant Weapon - Acuity Of The Ren'dorei"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240983",
+              "name": "Indecipherable Eversong Diamond"
+            },
+            {
+              "id": "240967",
+              "name": "Powerful Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240894",
+              "name": "Flawless Versatile Peridot"
+            },
+            {
+              "id": "240914",
+              "name": "Flawless Deadly Lapis"
+            },
+            {
+              "id": "240898",
+              "name": "Flawless Deadly Amethyst"
+            },
+            {
+              "id": "240910",
+              "name": "Flawless Versatile Garnet"
+            }
+          ],
+          "note": "In Midnight, the gem system is exactly the same as before. You have the option to run 1 unique Diamond gem, and there are 4 to choose from. The effects of these Diamond Gems in Midnight are much less interesting than previously, however, and now you simply opt for either Indecipherable Eversong Diamond for the highest main stat increase, or Powerful Eversong Diamond . The Powerful Eversong Diamond requires a combination of different coloured gems to boost the critical strike effect, in which you'll need 1 Peridot, 1 Lapis, 1 Amethyst, and 1 Garnet in other slots. Peridot: Flawless Versatile Peridot Lapis: Flawless Deadly Lapis Amethyst: Flawless Deadly Amethyst Garnet: Flawless Versatile Garnet"
+        },
+        "consumables": {
+          "combatPotion": [
+            {
+              "id": "241308",
+              "name": "Light's Potential"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "241304",
+              "name": "Silvermoon Health Potion"
+            }
+          ],
+          "food": [
+            {
+              "id": "255845",
+              "name": "Silvermoon Parade"
+            },
+            {
+              "id": "255846",
+              "name": "Harandar Celebration"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ]
+        }
+      }
     },
     "Mistweaver Monk": {
       "guideUrl": "https://www.method.gg/guides/mistweaver-monk/gearing",
@@ -10236,7 +12615,131 @@
           "dungeon": "Murder Row",
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "243948",
+                "name": "Enchant Helm - Hex Of Leeching"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "244021",
+                "name": "Enchant Shoulders - Silvermoon's Mending"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "244003",
+                "name": "Enchant Chest - Mark Of The Magister"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243983",
+                "name": "Enchant Boots - Shaladrassil's Roots"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "240155",
+                "name": "Arcanoweave Spellthread"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "244015",
+                "name": "Enchant Ring - Silvermoon's Alacrity"
+              }
+            ]
+          },
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "244029",
+                "name": "Enchant Weapon - Acuity of the Ren'dorei"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240982",
+              "name": "Indecipherable Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240890",
+              "name": "Flawless Deadly Peridot"
+            }
+          ],
+          "note": "Indecipherable Eversong Diamond as your main stat gem and then Flawless Deadly Peridot for all other gem slots."
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241324",
+              "name": "Flask of the Blood Knights"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241308",
+              "name": "Light's Potential"
+            }
+          ],
+          "manaPotion": [
+            {
+              "id": "241300",
+              "name": "Lightfused Mana Potion"
+            }
+          ],
+          "food": [
+            {
+              "id": "266996",
+              "name": "Hearty Harandar Celebration"
+            },
+            {
+              "id": "266985",
+              "name": "Hearty Silvermoon Parade"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ]
+        }
+      }
     },
     "Windwalker Monk": {
       "guideUrl": "https://www.method.gg/guides/windwalker-monk/gearing",
@@ -10754,7 +13257,134 @@
           "dungeon": "Den of Nalorakk",
           "droppedBy": "Nalorakk"
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "244005",
+                "name": "Enchant Helm - Rune Of Avoidance"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "243991",
+                "name": "Enchant Shoulders - Amirdrassil's Grace"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark Of The Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243953",
+                "name": "Enchant Boots - Lynx's Dexterity"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "244641",
+                "name": "Forest Hunter's Armor Kit"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "243957",
+                "name": "Enchant Ring - Eyes Of The Eagle"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240983",
+              "name": "Indecipherable Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240892",
+              "name": "Flawless Masterful Peridot"
+            },
+            {
+              "id": "240906",
+              "name": "Flawless Quick Garnet"
+            }
+          ],
+          "note": "Primary Stat: Indecipherable Eversong Diamond Haste & Mastery : Flawless Masterful Peridot Crit & Haste: Flawless Quick Garnet DISCLAIMER: When it comes to which gems, make sure to sim your character for the most accurate recommendations for your character. The sims use Flawless Masterful Peridot but they also have a very specific secondary stat distribution that favors those stats being gemmed."
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241324",
+              "name": "Flask Of The Blood Knights"
+            },
+            {
+              "id": "241326",
+              "name": "Flask Of The Shattered Sun"
+            },
+            {
+              "id": "241322",
+              "name": "Flask Of The Magisters"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241288",
+              "name": "Potion Of Recklessness"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "food": [
+            {
+              "id": "255846",
+              "name": "Harandar Celebration"
+            },
+            {
+              "id": "255845",
+              "name": "Silvermoon Parade"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ]
+        }
+      }
     },
     "Holy Paladin": {
       "guideUrl": "https://www.method.gg/guides/holy-paladin/gearing",
@@ -11315,7 +13945,129 @@
           "dungeon": "Den of Nalorakk",
           "droppedBy": "Nalorakk"
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "243948",
+                "name": "Enchant Helm - Hex Of Leeching"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "244021",
+                "name": "Enchant Shoulders - Silvermoon's Mending"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "244003",
+                "name": "Enchant Chest - Mark Of The Magister"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243983",
+                "name": "Enchant Boots - Shaladrassil's Roots"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "240155",
+                "name": "Arcanoweave Spellthread"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "243959",
+                "name": "Enchant Ring - Zul'jin's Mastery"
+              }
+            ]
+          },
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "244029",
+                "name": "Enchant Weapon - Acuity Of The Ren'dorei"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240969",
+              "name": "Telluric Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240892",
+              "name": "Flawless Masterful Peridot"
+            },
+            {
+              "id": "240900",
+              "name": "Flawless Quick Amethyst"
+            }
+          ],
+          "note": "Unique Gem: Telluric Eversong Diamond (when you get enough sockets) Regular Gem: Flawless Masterful Peridot / Flawless Quick Amethyst"
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241324",
+              "name": "Flask Of The Blood Knights"
+            },
+            {
+              "id": "241322",
+              "name": "Flask Of The Magisters"
+            }
+          ],
+          "manaPotion": [
+            {
+              "id": "241300",
+              "name": "Lightfused Mana Potion"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "food": [
+            {
+              "id": "266985",
+              "name": "Hearty Silvermoon Parade"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ]
+        }
+      }
     },
     "Protection Paladin": {
       "guideUrl": "https://www.method.gg/guides/protection-paladin/gearing",
@@ -11861,7 +14613,131 @@
           "dungeon": "The Blinding Vale",
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "243948",
+                "name": "Enchant Helm - Hex Of Leeching"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "244021",
+                "name": "Enchant Shoulders - Silvermoon's Mending"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark Of The Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "244641",
+                "name": "Forest Hunter's Armor Kit"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243983",
+                "name": "Enchant Boots - Shaladrassil's Roots"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "244015",
+                "name": "Enchant Ring - Silvermoon's Alacrity"
+              }
+            ]
+          },
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "244029",
+                "name": "Enchant Weapon - Acuity Of The Ren'dorei"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240983",
+              "name": "Indecipherable Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240890",
+              "name": "Flawless Deadly Peridot"
+            }
+          ],
+          "note": "Eversong Diamond: Indecipherable Eversong Diamond Other Gems: Flawless Deadly Peridot"
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241324",
+              "name": "Flask Of The Blood Knights"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241288",
+              "name": "Potion Of Recklessness"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "food": [
+            {
+              "id": "255846",
+              "name": "Harandar Celebration"
+            },
+            {
+              "id": "255845",
+              "name": "Silvermoon Parade"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ]
+        }
+      }
     },
     "Retribution Paladin": {
       "guideUrl": "https://www.method.gg/guides/retribution-paladin/gearing",
@@ -12372,7 +15248,60 @@
           "dungeon": "Murder Row",
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "gems": {
+          "unique": [
+            {
+              "id": "240983",
+              "name": "Indecipherable Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240900",
+              "name": "Flawless Quick Amethyst"
+            },
+            {
+              "id": "240892",
+              "name": "Flawless Masterful Peridot"
+            }
+          ],
+          "note": "Always sim your character to assure you're using the best gems as they're likely to be different for everyone, however if you're looking for a solid guideline: You'll want one main stat gem, Indecipherable Eversong Diamond , then fill every other gem slot with either Flawless Quick Amethyst or Flawless Masterful Peridot , depending on your gear."
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241322",
+              "name": "Flask Of The Magisters"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241288",
+              "name": "Potion Of Recklessness"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "241304",
+              "name": "Silvermoon Health Potion"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ]
+        }
+      }
     },
     "Discipline Priest": {
       "guideUrl": "https://www.method.gg/guides/discipline-priest/gearing",
@@ -12923,7 +15852,110 @@
           "dungeon": "Temple of Sethraliss",
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "244029",
+                "name": "Enchant Weapon - Acuity Of The Ren'dorei"
+              }
+            ],
+            "note": ":"
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark Of The Worldsoul"
+              },
+              {
+                "id": "244003",
+                "name": "Enchant Chest - Mark Of The Magister"
+              }
+            ],
+            "note": ": / (Extra Mana)"
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "244021",
+                "name": "Enchant Shoulders - Silvermoon's Mending"
+              },
+              {
+                "id": "243991",
+                "name": "Enchant Shoulders - Amirdrassil's Grace"
+              }
+            ],
+            "note": ": /"
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "240155",
+                "name": "Arcanoweave Spellthread"
+              }
+            ],
+            "note": ":"
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243953",
+                "name": "Enchant Boots - Lynx's Dexterity"
+              },
+              {
+                "id": "243983",
+                "name": "Enchant Boots - Shaladrassil's Roots"
+              }
+            ],
+            "note": ": /"
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "244015",
+                "name": "Enchant Ring - Silvermoon's Alacrity"
+              }
+            ],
+            "note": ": - Ring enchants will be dependent on the content you do and on the rest of your gear. They are good for balancing out your stats."
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240969",
+              "name": "Telluric Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240890",
+              "name": "Flawless Deadly Peridot"
+            },
+            {
+              "id": "240892",
+              "name": "Flawless Masterful Peridot"
+            },
+            {
+              "id": "240900",
+              "name": "Flawless Quick Amethyst"
+            },
+            {
+              "id": "240906",
+              "name": "Flawless Quick Garnet"
+            }
+          ],
+          "note": "Unique Gem: Telluric Eversong Diamond . The extra mana can come in handy on longer fights. After that you should follow your stat weights but here are some options: Flawless Deadly Peridot Flawless Masterful Peridot Flawless Quick Amethyst Flawless Quick Garnet"
+        }
+      }
     },
     "Holy Priest": {
       "guideUrl": "https://www.method.gg/guides/holy-priest/gearing",
@@ -13459,7 +16491,110 @@
           "dungeon": "Ruby Life Pools",
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "244029",
+                "name": "Enchant Weapon - Acuity Of The Ren'dorei"
+              }
+            ],
+            "note": ":"
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark Of The Worldsoul"
+              },
+              {
+                "id": "244003",
+                "name": "Enchant Chest - Mark Of The Magister"
+              }
+            ],
+            "note": ": / (Extra Mana)"
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "244021",
+                "name": "Enchant Shoulders - Silvermoon's Mending"
+              },
+              {
+                "id": "243991",
+                "name": "Enchant Shoulders - Amirdrassil's Grace"
+              }
+            ],
+            "note": ": /"
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "240155",
+                "name": "Arcanoweave Spellthread"
+              }
+            ],
+            "note": ":"
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243953",
+                "name": "Enchant Boots - Lynx's Dexterity"
+              },
+              {
+                "id": "243983",
+                "name": "Enchant Boots - Shaladrassil's Roots"
+              }
+            ],
+            "note": ": /"
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "243987",
+                "name": "Enchant Ring - Nature's Fury"
+              }
+            ],
+            "note": ": - Ring enchants will be dependent on the content you do and on the rest of your gear. They are good for balancing out your stats."
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240969",
+              "name": "Telluric Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240908",
+              "name": "Flawless Masterful Garnet"
+            },
+            {
+              "id": "240898",
+              "name": "Flawless Deadly Amethyst"
+            },
+            {
+              "id": "240890",
+              "name": "Flawless Deadly Peridot"
+            },
+            {
+              "id": "240894",
+              "name": "Flawless Versatile Peridot"
+            }
+          ],
+          "note": "Unique Gem: Telluric Eversong Diamond . The extra mana can come in handy on longer fights. After that you follow your stat weights: Raiding : Flawless Masterful Garnet / Flawless Deadly Amethyst M+ : Flawless Deadly Peridot / Flawless Versatile Peridot"
+        }
+      }
     },
     "Shadow Priest": {
       "guideUrl": "https://www.method.gg/guides/shadow-priest/gearing",
@@ -13646,7 +16781,147 @@
           "dungeon": null,
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "243981",
+                "name": "Empowered Blessing of Speed"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Mark of the Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "243962",
+                "name": "Akil'zon's Swiftness"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "240133",
+                "name": "Sunfire Silk Spellthread"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "244008",
+                "name": "Farstrider's Swiftness"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "243956",
+                "name": "Eyes of the Eagle"
+              }
+            ]
+          },
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "243973",
+                "name": "Berserker's Rage"
+              },
+              {
+                "id": "244031",
+                "name": "Arcane Mastery"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240983",
+              "name": "Indecipherable Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240892",
+              "name": "Flawless Masterful Peridot"
+            },
+            {
+              "id": "240898",
+              "name": "Flawless Deadly Amethyst"
+            },
+            {
+              "id": "240906",
+              "name": "Flawless Quick Garnet"
+            }
+          ],
+          "note": "Diamond: Indecipherable Eversong Diamond Peridot: Flawless Masterful Peridot Amethyst: Flawless Deadly Amethyst Garnet: Flawless Quick Garnet"
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241325",
+              "name": "Flask of the Blood Knights"
+            },
+            {
+              "id": "241322",
+              "name": "Flask of the Magisters"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241288",
+              "name": "Potion of Recklessness"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "food": [
+            {
+              "id": "242285",
+              "name": "Warped Wise Wings"
+            },
+            {
+              "id": "242286",
+              "name": "Fel-Kissed Filet"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ]
+        }
+      }
     },
     "Assassination Rogue": {
       "guideUrl": "https://www.method.gg/guides/assassination-rogue/gearing",
@@ -14214,7 +17489,18 @@
           "dungeon": null,
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "gems": {
+          "unique": [
+            {
+              "id": "240983",
+              "name": "Indecipherable Eversong Diamond"
+            }
+          ],
+          "note": "Always use the Indecipherable Eversong Diamond in one slot. Fill the rest of the slots with Haste or Crit."
+        }
+      }
     },
     "Outlaw Rogue": {
       "guideUrl": "https://www.method.gg/guides/outlaw-rogue/gearing",
@@ -14768,11 +18054,134 @@
           "dungeon": "Altar of Fangs",
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "244029",
+                "name": "Enchant Weapon - Acuity Of The Ren'dorei"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "244021",
+                "name": "Enchant Shoulders - Silvermoon's Mending"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark Of The Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "244641",
+                "name": "Forest Hunter's Armor Kit"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243983",
+                "name": "Enchant Boots - Shaladrassil's Roots"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "243957",
+                "name": "Enchant Ring - Eyes Of The Eagle"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240983",
+              "name": "Indecipherable Eversong Diamond"
+            },
+            {
+              "id": "240967",
+              "name": "Powerful Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240906",
+              "name": "Flawless Quick Garnet"
+            },
+            {
+              "id": "240890",
+              "name": "Flawless Deadly Peridot"
+            }
+          ],
+          "note": "With the current high value of Agility, the Indecipherable Eversong Diamond remains the better option when compared to the Powerful Eversong Diamond . Which second stat you want the gems to have will be gear-dependent, so it's hard to suggest a catch-all solution; you should sim your character to identify which stat is most valuable for your own gear setup and content of choice. Flawless Quick Garnet and Flawless Deadly Peridot are the most likely ones to be stacked."
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241326",
+              "name": "Flask Of The Shattered Sun"
+            },
+            {
+              "id": "241324",
+              "name": "Flask Of The Blood Knights"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241308",
+              "name": "Light's Potential"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "food": [
+            {
+              "id": "255846",
+              "name": "Harandar Celebration"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ]
+        }
+      }
     },
     "Subtlety Rogue": {
       "guideUrl": "https://www.method.gg/guides/subtlety-rogue/gearing",
-      "published": "2026-08-18",
+      "published": "2026-08-19",
       "priorities": [
         {
           "label": "General",
@@ -14970,7 +18379,115 @@
           "dungeon": null,
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "244007",
+                "name": "Enchant Helm - Empowered Rune Of Avoidance"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark Of The Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243953",
+                "name": "Enchant Boots - Lynx's Dexterity"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "244641",
+                "name": "Forest Hunter's Armor Kit"
+              }
+            ]
+          },
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "244029",
+                "name": "Enchant Weapon - Acuity Of The Ren'dorei"
+              },
+              {
+                "id": "244031",
+                "name": "Enchant Weapon - Arcane Mastery"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240983",
+              "name": "Indecipherable Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240900",
+              "name": "Flawless Quick Amethyst"
+            }
+          ],
+          "note": "Eversong Diamond Gem: Indecipherable Eversong Diamond Regular Gems: Flawless Quick Amethyst"
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241326",
+              "name": "Flask Of The Shattered Sun"
+            },
+            {
+              "id": "241322",
+              "name": "Flask Of The Magisters"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "food": [
+            {
+              "id": "242273",
+              "name": "Blooming Feast"
+            },
+            {
+              "id": "242277",
+              "name": "Crimson Calamari"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ]
+        }
+      }
     },
     "Elemental Shaman": {
       "guideUrl": "https://www.method.gg/guides/elemental-shaman/gearing",
@@ -15545,7 +19062,61 @@
           "dungeon": "Den of Nalorakk",
           "droppedBy": "Nalorakk"
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "244005",
+                "name": "Enchant Helm - Rune Of Avoidance"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "243991",
+                "name": "Enchant Shoulders - Amirdrassil's Grace"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark Of The Worldsoul"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240983",
+              "name": "Indecipherable Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240898",
+              "name": "Flawless Deadly Amethyst"
+            }
+          ],
+          "note": "As always, simming will give you better results for your exact situation. One Indecipherable Eversong Diamond . Fill every other slot with Flawless Deadly Amethyst ."
+        },
+        "consumables": {
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ]
+        }
+      }
     },
     "Enhancement Shaman": {
       "guideUrl": "https://www.method.gg/guides/enhancement-shaman/gearing",
@@ -16107,7 +19678,141 @@
           "dungeon": null,
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "243950",
+                "name": "Enchant Helm - Empowered Hex of Leeching"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "244021",
+                "name": "Enchant Shoulders - Silvermoon's Mending"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243976",
+                "name": "Enchant Chest - Mark of the Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243983",
+                "name": "Enchant Boots - Shaladrassil's Roots"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "244640",
+                "name": "Forest Hunter's Armor Kit"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "243957",
+                "name": "Enchant Ring - Eyes Of The Eagle"
+              }
+            ]
+          },
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "243973",
+                "name": "Enchant Weapon - Berserker's Rage"
+              },
+              {
+                "id": "244031",
+                "name": "Enchant Weapon - Arcane Mastery"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240983",
+              "name": "Indecipherable Eversong Diamond"
+            },
+            {
+              "id": "240967",
+              "name": "Powerful Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240900",
+              "name": "Flawless Quick Amethyst"
+            },
+            {
+              "id": "240892",
+              "name": "Flawless Masterful Peridot"
+            },
+            {
+              "id": "240908",
+              "name": "Flawless Masterful Garnet"
+            },
+            {
+              "id": "240918",
+              "name": "Flawless Masterful Lapis"
+            }
+          ],
+          "note": "Similarly to The War Within, there is once again a unique-equipped gem type, which is called Thalassian Diamond this time around. Realistically there are two options here: Using an Indecipherable Eversong Diamond and then filling any remaining gem sockets with your best simming gem, which is most likely going to be either Flawless Quick Amethyst or Flawless Masterful Peridot . Using a Powerful Eversong Diamond , while making sure to also socket at minimum one gem of each color: Flawless Quick Amethyst Flawless Masterful Peridot Flawless Masterful Garnet Flawless Masterful Lapis Which of these two options is going to be optimal will most likely depend on your gear."
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241322",
+              "name": "Flask of the Magisters"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241288",
+              "name": "Potion Of Recklessness"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "241304",
+              "name": "Silvermoon Health Potion"
+            }
+          ],
+          "food": [
+            {
+              "id": "242275",
+              "name": "Royal Roast"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ]
+        }
+      }
     },
     "Restoration Shaman": {
       "guideUrl": "https://www.method.gg/guides/restoration-shaman/gearing",
@@ -16671,7 +20376,129 @@
           "dungeon": "The Blinding Vale",
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "243951",
+                "name": "Enchant Helm - Empowered Hex Of Leeching"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "244021",
+                "name": "Enchant Shoulders - Silvermoon's Mending"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark Of The Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243983",
+                "name": "Enchant Boots - Shaladrassil's Roots"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "240155",
+                "name": "Arcanoweave Spellthread"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "243987",
+                "name": "Enchant Ring - Nature's Fury"
+              }
+            ]
+          },
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "243971",
+                "name": "Enchant Weapon - Jan'alai's Precision"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240969",
+              "name": "Telluric Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240910",
+              "name": "Flawless Versatile Garnet"
+            },
+            {
+              "id": "240914",
+              "name": "Flawless Deadly Lapis"
+            },
+            {
+              "id": "240890",
+              "name": "Flawless Deadly Peridot"
+            }
+          ],
+          "note": "It's recommended that you socket 1x Telluric Eversong Diamond . This is a unique Primary stat Gem that also gives 1% max mana per Unique gem color socketed in your gear. You then want to socket at least one of each of the following secondary stat gems to get the most out of the Telluric Eversong Diamond bonus effect: Flawless Versatile Garnet (Crit + Vers Gem) Flawless Deadly Lapis (Vers + Crit Gem) Flawless Deadly Peridot (Haste + Crit Gem)"
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241326",
+              "name": "Flask Of The Shattered Sun"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241308",
+              "name": "Light's Potential"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "241304",
+              "name": "Silvermoon Health Potion"
+            }
+          ],
+          "food": [
+            {
+              "id": "266985",
+              "name": "Hearty Silvermoon Parade"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ]
+        }
+      }
     },
     "Affliction Warlock": {
       "guideUrl": "https://www.method.gg/guides/affliction-warlock/gearing",
@@ -17221,7 +21048,143 @@
           "dungeon": "Murder Row",
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "244007",
+                "name": "Enchant Helm - Empowered Rune Of Avoidance"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "243991",
+                "name": "Enchant Shoulders - Amirdrassil's Grace"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark Of The Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243953",
+                "name": "Enchant Boots - Lynx's Dexterity"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "240133",
+                "name": "Sunfire Silk Spellthread"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "243985",
+                "name": "Enchant Ring - Nature's Wrath"
+              }
+            ]
+          },
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "244029",
+                "name": "Enchant Weapon - Acuity Of The Ren'dorei"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240967",
+              "name": "Powerful Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240908",
+              "name": "Flawless Masterful Garnet"
+            },
+            {
+              "id": "240898",
+              "name": "Flawless Deadly Amethyst"
+            },
+            {
+              "id": "240914",
+              "name": "Flawless Deadly Lapis"
+            },
+            {
+              "id": "240890",
+              "name": "Flawless Deadly Peridot"
+            }
+          ],
+          "note": "You want to use 1x Powerful Eversong Diamond , which is a unique Gem that gives primary stat and a very small amount of critical strike effectiveness per unique Midnight gem color. So once you have a Powerful Eversong Diamond in your gear, you should then ideally socket a combination of the following: 1x Flawless Masterful Garnet 1x Flawless Deadly Amethyst 1x Flawless Deadly Lapis 1x Flawless Deadly Peridot"
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241326",
+              "name": "Flask Of The Shattered Sun"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241308",
+              "name": "Light's Potential"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "food": [
+            {
+              "id": "242275",
+              "name": "Royal Roast"
+            },
+            {
+              "id": "255846",
+              "name": "Harandar Celebration"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ]
+        }
+      }
     },
     "Demonology Warlock": {
       "guideUrl": "https://www.method.gg/guides/demonology-warlock/gearing",
@@ -17420,7 +21383,116 @@
           "dungeon": null,
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "244007",
+                "name": "Enchant Helm - Empowered Rune Of Avoidance"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark Of The Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243953",
+                "name": "Enchant Boots - Lynx's Dexterity"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "240133",
+                "name": "Sunfire Silk Spellthread"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "243987",
+                "name": "Enchant Ring - Nature's Fury"
+              }
+            ]
+          },
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "243971",
+                "name": "Enchant Weapon - Jan'alai's Precision"
+              },
+              {
+                "id": "244029",
+                "name": "Enchant Weapon - Acuity Of The Ren'dorei"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240967",
+              "name": "Powerful Eversong Diamond"
+            }
+          ],
+          "note": "You want to socket a Powerful Eversong Diamond , then 4x different colored gems with Crit."
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241326",
+              "name": "Flask Of The Shattered Sun"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241288",
+              "name": "Potion Of Recklessness"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "241304",
+              "name": "Silvermoon Health Potion"
+            }
+          ],
+          "food": [
+            {
+              "id": "242289",
+              "name": "Spellfire Filet"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ]
+        }
+      }
     },
     "Destruction Warlock": {
       "guideUrl": "https://www.method.gg/guides/destruction-warlock/gearing",
@@ -17977,7 +22049,120 @@
           "dungeon": "Den of Nalorakk",
           "droppedBy": "Nalorakk"
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark Of The Worldsoul"
+              }
+            ],
+            "note": "(+50 Intellect)"
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "240133",
+                "name": "Sunfire Silk Spellthread"
+              }
+            ],
+            "note": "(+41 Intellect & 115 Stamina)"
+          },
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "244029",
+                "name": "Enchant Weapon - Acuity Of The Ren'dorei"
+              }
+            ],
+            "note": "(Intellect Proc)"
+          },
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "243948",
+                "name": "Enchant Helm - Hex Of Leeching"
+              }
+            ],
+            "note": "(+55 Leech)"
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "244021",
+                "name": "Enchant Shoulders - Silvermoon's Mending"
+              }
+            ],
+            "note": "(+166 Leech)"
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "243983",
+                "name": "Enchant Boots - Shaladrassil's Roots"
+              }
+            ],
+            "note": "(+28 Leech & +232 Stamina)"
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240967",
+              "name": "Powerful Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240890",
+              "name": "Flawless Deadly Peridot"
+            }
+          ],
+          "note": "You should always sim your character to find the optimal combination of gems, but if you want a quick solution follow this priority: Equip a Powerful Eversong Diamond . Equip a Flawless Deadly Peridot , and Flawless Quick versions of all other gem colors. Equip Flawless Deadly Peridot in your remaining gem slots."
+        },
+        "consumables": {
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ],
+          "food": [
+            {
+              "id": "242275",
+              "name": "Royal Roast"
+            },
+            {
+              "id": "255846",
+              "name": "Harandar Celebration"
+            },
+            {
+              "id": "255845",
+              "name": "Silvermoon Parade"
+            }
+          ],
+          "augmentRune": [
+            {
+              "id": "259085",
+              "name": "Void-Touched Augment Rune"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ]
+        }
+      }
     },
     "Arms Warrior": {
       "guideUrl": "https://www.method.gg/guides/arms-warrior/gearing",
@@ -18506,7 +22691,32 @@
           "dungeon": "Altar of Fangs",
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "gems": {
+          "unique": [
+            {
+              "id": "240983",
+              "name": "Indecipherable Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240890",
+              "name": "Flawless Deadly Peridot"
+            }
+          ],
+          "note": "A general gem guide for Arms Warrior is as follows: Gem recommendations are: Indecipherable Eversong Diamond (Primary stat) Flawless Deadly Peridot (High Haste, Low Crit) As always, it is best to sim your character regularly for the best gem results for your character."
+        },
+        "consumables": {
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ]
+        }
+      }
     },
     "Fury Warrior": {
       "guideUrl": "https://www.method.gg/guides/fury-warrior/gearing",
@@ -19068,7 +23278,32 @@
           "dungeon": null,
           "droppedBy": null
         }
-      ]
+      ],
+      "enhancements": {
+        "gems": {
+          "unique": [
+            {
+              "id": "240983",
+              "name": "Indecipherable Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240892",
+              "name": "Flawless Masterful Peridot"
+            }
+          ],
+          "note": "Gem recommendation for Fury Warrior is as follows: Gem recommendations are: Indecipherable Eversong Diamond Flawless Masterful Peridot"
+        },
+        "consumables": {
+          "healthPotion": [
+            {
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
+            }
+          ]
+        }
+      }
     },
     "Protection Warrior": {
       "guideUrl": "https://www.method.gg/guides/protection-warrior/gearing",
@@ -19629,7 +23864,149 @@
           "dungeon": "Den of Nalorakk",
           "droppedBy": "Nalorakk"
         }
-      ]
+      ],
+      "enhancements": {
+        "enchants": [
+          {
+            "slot": "Head",
+            "candidates": [
+              {
+                "id": "243951",
+                "name": "Enchant Helm - Empowered Hex Of Leeching"
+              }
+            ]
+          },
+          {
+            "slot": "Shoulder",
+            "candidates": [
+              {
+                "id": "244021",
+                "name": "Enchant Shoulders - Silvermoon's Mending"
+              }
+            ]
+          },
+          {
+            "slot": "Chest",
+            "candidates": [
+              {
+                "id": "243977",
+                "name": "Enchant Chest - Mark Of The Worldsoul"
+              }
+            ]
+          },
+          {
+            "slot": "Legs",
+            "candidates": [
+              {
+                "id": "244641",
+                "name": "Forest Hunter's Armor Kit"
+              }
+            ]
+          },
+          {
+            "slot": "Feet",
+            "candidates": [
+              {
+                "id": "244009",
+                "name": "Enchant Boots - Farstrider's Hunt"
+              }
+            ]
+          },
+          {
+            "slot": "Finger",
+            "candidates": [
+              {
+                "id": "244015",
+                "name": "Enchant Ring - Silvermoon's Alacrity"
+              },
+              {
+                "id": "243957",
+                "name": "Enchant Ring - Eyes Of The Eagle"
+              }
+            ]
+          },
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "244029",
+                "name": "Enchant Weapon - Acuity Of The Ren'dore"
+              },
+              {
+                "id": "243973",
+                "name": "Enchant Weapon - Berserker's Rage"
+              }
+            ]
+          }
+        ],
+        "gems": {
+          "unique": [
+            {
+              "id": "240983",
+              "name": "Indecipherable Eversong Diamond"
+            },
+            {
+              "id": "240967",
+              "name": "Powerful Eversong Diamond"
+            }
+          ],
+          "filler": [
+            {
+              "id": "240890",
+              "name": "Flawless Deadly Peridot"
+            },
+            {
+              "id": "240916",
+              "name": "Flawless Quick Lapis"
+            },
+            {
+              "id": "240900",
+              "name": "Flawless Quick Amethyst"
+            },
+            {
+              "id": "240906",
+              "name": "Flawless Quick Garnet"
+            }
+          ],
+          "note": "In Midnight, the Gem system is the exact same as previously. You have the option to run 1 unique Diamond Gem, and there are 4 to choose from. The effects of these Diamond Gems in Midnight are much less interesting than previously however, and now you simply opt for either Indecipherable Eversong Diamond for the highest main stat increase, or Powerful Eversong Diamond . The Powerful Eversong Diamond requires a combination of different coloured Gems to boost the critical strike effect, in which you'll need 1 Peridot, 1 Lapis, 1 Amethyst and 1 Garnet in other slots: Peridot: Flawless Deadly Peridot Lapis: Flawless Quick Lapis Amethyst: Flawless Quick Amethyst Garnet: Flawless Quick Garnet"
+        },
+        "consumables": {
+          "flask": [
+            {
+              "id": "241320",
+              "name": "Flask Of Thalassian Resistance"
+            }
+          ],
+          "combatPotion": [
+            {
+              "id": "241308",
+              "name": "Light's Potential"
+            }
+          ],
+          "healthPotion": [
+            {
+              "id": "241304",
+              "name": "Silvermoon Health Potion"
+            }
+          ],
+          "food": [
+            {
+              "id": "255845",
+              "name": "Silvermoon Parade"
+            },
+            {
+              "id": "255846",
+              "name": "Harandar Celebration"
+            }
+          ],
+          "weaponBuff": [
+            {
+              "id": "243734",
+              "name": "Thalassian Phoenix Oil"
+            }
+          ]
+        }
+      }
     }
   },
   "coverage": {

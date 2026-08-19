@@ -228,6 +228,35 @@ backfilled names still face the encounter-roster gate. Catalyst counts re-pinned
 
 ---
 
+### ⚑ DECISION G9 (Riley, 2026-08-18, launch-day review): the enhancements lane
+
+Enchants, gems, and consumables per spec, harvested from the SAME three guide sources and
+ranked by the SAME distinct-sources consensus count the gear candidates use — ties broken
+by each source's own published order (its first-listed pick), never by an invented score.
+Built same-day from a three-agent live recon:
+
+- **Icy Veins**: dedicated `…-gems-enchants-consumables` page (+1 fetch/spec, Node
+  transport). The only real table is `table.enchants`; gems/consumables are heading-scoped
+  prose; the weapon oil lives OUTSIDE the table; FAQ blocks must be stripped pre-extraction.
+- **Wowhead**: sibling `enchants-gems-pve-<role>` page (+1 curl fetch/spec). Two BBCode
+  grid tables; Gatherer type-6 spell names for weapon imbues; era-verified per page.
+  **Slot vocabulary drifts hard across authors** ("Helmet", "Weapons (2h & Dual-Wield)",
+  "Weapon - Main Hand", a bare "Gems" row) — the parser normalizes, and an unmappable slot
+  row becomes a verbatim note, never a throw: the throwing version cost SIX SPECS their
+  whole gear records when the error escaped into the runner's absent lane (full-harvest
+  find, fixed same night with a containment rule: an enhancements failure may cost only
+  the enhancements block).
+- **Method**: zero extra fetches — everything parses from the stats page the harvester
+  already downloads. Gems come in two markup shapes (unlabeled prose vs bold labels), so
+  the parser classifies by item name, never by label.
+
+Contract lives in lib-guides (`validateEnhancements`, `ENHANCEMENT_CONSUMABLE_KEYS`):
+candidates keep published order, absent categories are OMITTED (Holy Paladin genuinely
+has no augment rune), oils/imbues normalize into `consumables.weaponBuff`, and prose
+conditionality (hero-talent/bracket exceptions) stays in free-text notes — the ragged-axes
+reasoning of G7, again. The Enhancements tab renders in both scoring modes: custom weights
+cannot apply to non-stat-scored recommendations, and the page says so.
+
 ## Honesty rules for this lane
 
 1. **No invented numeric weights, ever.** Guides publish orderings and refuse to publish weights;
