@@ -451,7 +451,7 @@ test("self-contained output embeds current data and valid browser JavaScript", a
   const scripts = [...template.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)];
   assert.doesNotThrow(() => new Function(scripts.at(-1)[1]));
   assert.match(template, /filter\(it => maxAttainable\(it\) > threshold\)/);
-  assert.match(template, /Trinkets are deliberately unranked/);
+  assert.match(template, /Trinket upgrades are listed by item level, not ranked/);
   assert.match(template, /role="tablist"/);
   assert.match(template, /<label for="spec">Specialization<\/label>/);
   assert.match(template, /<label for="profile">Build<\/label>/);
@@ -539,9 +539,52 @@ test("client app: consensus-first ranking, source-labeled Builds, custom overrid
   const firstRow = neckCard.indexOf('data-id="');
   assert.ok(firstRow >= 0 && neckCard.slice(firstRow, firstRow + 24).includes("268265"),
     "the 3/3-consensus Neck item leads its card");
-  // G8: per-source trinket letters, never merged.
+  // G8 (revised 2026-08-18): trinkets rank by guide-consensus COUNT with ties shared;
+  // per-source letters still never merge, and stat fit is never computed for them.
   assert.match(bisHtml, /Icy Veins: S/);
-  assert.match(bisHtml, /deliberately outside the consensus ranking/);
+  assert.match(bisHtml, /rank by guide-consensus count alone/);
+  assert.match(bisHtml, /Stat fit is never computed/);
+  // The ranked trinket rows carry rank spans; ties share a number (dense ranking).
+  const trinketCardHtml = bisHtml.slice(bisHtml.indexOf("<h3>Trinkets<"));
+  const trinketRanks = [...trinketCardHtml.matchAll(/Guide-consensus rank[^>]*>(\d+)</g)].map(m => Number(m[1]));
+  assert.ok(trinketRanks.length >= 2, "at least two guide-named trinkets carry rank numbers");
+  assert.equal(trinketRanks[0], 1, "the ranked trinket list starts at rank 1");
+  for (let i = 1; i < trinketRanks.length; i++)
+    assert.ok(trinketRanks[i] === trinketRanks[i-1] || trinketRanks[i] === trinketRanks[i-1] + 1,
+      "dense ranking: each rank repeats (tie) or increments by exactly one");
+
+  // Adversarial-review pins (2026-08-18, wf_3b2d327a-5ee — each was a shipped-state HIGH):
+  // (1) Weapon-slot guide-only picks render: Frost Mage's crafted off-hand pick appears
+  //     in the Weapons guide-picks card (74/265 picks previously rendered NOWHERE).
+  assert.match(document.ids.get("bis").innerHTML, /Aln'hara Lantern/);
+  assert.match(document.ids.get("bis").innerHTML, /Weapons &mdash; guide picks without drop data/);
+  // (2) Guide-only trinkets RANK: Wavecaller's Seastone (3/3 world) must carry a rank
+  //     number, sharing rank 1 with the 3/3 catalog trinket — not dangle unranked.
+  {
+    const bisNow2 = document.ids.get("bis").innerHTML;
+    const seastone = bisNow2.match(/<div class="row" data-guide-only="true" data-id="270167">[\s\S]*?<\/span>/);
+    assert.ok(seastone, "Wavecaller's Seastone renders as a guide-only trinket row");
+    assert.match(seastone[0], /Guide-consensus rank[^>]*>1</,
+      "the 3/3 world trinket shares rank 1, never unranked below ranked rows");
+  }
+  // (3) The unknown/stale-id lanes never surface: no named candidate in the payload may
+  //     carry a kind outside crafted/world (Method's 63 sourceTextUnmatched rows hold
+  //     WotLK-era item ids and must stay data-only).
+  for (const spec of Object.values(guides.specs))
+    for (const cell of Object.values(spec.candidates))
+      for (const c of cell)
+        if (c.name) assert.ok(c.kind === "crafted" || c.kind === "world",
+          `named candidate ${c.itemId} has non-presentable kind ${c.kind}`);
+  // (4) Eligibility conflicts are DISCLOSED, not hidden: Restoration Druid's guides name
+  //     Lightspire Core (250214) but the curated eligibility list excludes it.
+  specSelect.value = "Druid|Restoration";
+  specSelect.listeners.change();
+  {
+    const rdruBis = document.ids.get("bis").innerHTML;
+    const filtered = rdruBis.match(/data-eligibility-filtered="true" data-id="250214"[\s\S]*?<\/div>/);
+    assert.ok(filtered, "the guides-named-but-eligibility-excluded trinket renders as a disclosed row");
+    assert.match(rdruBis, /Excluded by recommendation eligibility/);
+  }
 
   // G7: the Build selector lists exactly the published combinations, source-labeled.
   specSelect.value = "Priest|Shadow";
@@ -672,6 +715,22 @@ test("the game plan shows two named components and lights potential up after a p
   assert.doesNotMatch(before, /<b>\+\d+<\/b>/,
     "no potential numbers may render before a paste");
   assert.match(before, /does not change with custom weights/);
+
+  // The Crafted section (Riley, 2026-08-18): guide-named crafted pieces render with
+  // counts only — no fit, no potential — and the sheet's crafted ceiling is cited.
+  assert.match(before, /<h3>Crafted<span>/);
+  assert.match(before, /guide-named pieces/);
+  assert.match(before, /no fit score and no potential/);
+
+  // Guide-only picks in the slot cards: out-of-catalog items (crafted/world) render as
+  // clearly-marked rows with consensus chips and never a fit score or drop ladder.
+  const bisNow = document.ids.get("bis").innerHTML;
+  assert.match(bisNow, /data-guide-only="true"/);
+  assert.match(bisNow, /No harvested item data/);
+  const guideOnlyBlocks = [...bisNow.matchAll(/data-guide-only="true"[\s\S]*?<\/div><\/div>/g)];
+  assert.ok(guideOnlyBlocks.length >= 1, "at least one guide-only pick renders");
+  for (const m of guideOnlyBlocks)
+    assert.ok(!/Fit \d/.test(m[0]), "guide-only picks must never show a fit score");
 
   // A paste with NO readable item levels must keep the dash — never claim "+0"
   // (the adversarial review's high finding: an uncomputed quantity shown as computed).

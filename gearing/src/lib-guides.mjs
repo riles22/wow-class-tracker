@@ -347,10 +347,25 @@ export function buildGuidePayload(guides, specs, { itemSlots = new Map(), source
           leadsWithItemLevel: !!p.leadsWithItemLevel, published: rec.published ?? null });
       }
       for (const r of rec.bis) {
+        const inCatalog = itemSlots.has(String(r.itemId));
         const slot = itemSlots.get(String(r.itemId)) || r.slot;
         const cell = (bySlot[slot] = bySlot[slot] || {});
         const entry = (cell[r.itemId] = cell[r.itemId] || { itemId: r.itemId, mentions: {} });
         (entry.mentions[srcId] = entry.mentions[srcId] || []).push(r.list);
+        // Out-of-catalog picks have no harvested item row to supply a display name or
+        // source kind, so the guide row's own values ride along — the client renders
+        // them as "guide picks without drop data" (Riley, 2026-08-18). ONLY the two
+        // kinds we can present honestly ride: crafted and world. Everything else
+        // out-of-catalog is either the capped-verbatim `unknown` lane (adversarial
+        // review 2026-08-18: Method's 63 sourceTextUnmatched rows carry WotLK-era item
+        // ids — surfacing them as launch picks would be a false claim) or a stale-id /
+        // non-pool raid-dungeon claim we cannot verify; those stay data-only, never
+        // rendered. In-catalog entries stay lean; the catalog is their authority.
+        if (!inCatalog && !r.sourceTextUnmatched
+          && (r.sourceKind === "crafted" || r.sourceKind === "world")) {
+          if (!entry.name && r.itemName) entry.name = r.itemName;
+          if (!entry.kind && r.sourceKind) entry.kind = r.sourceKind;
+        }
       }
       if (rec.trinketTiers?.length)
         trinketTiers[srcId] = rec.trinketTiers.map((t) => ({ tier: t.tier, itemIds: t.itemIds }));
@@ -368,7 +383,9 @@ export function buildGuidePayload(guides, specs, { itemSlots = new Map(), source
     const candidates = Object.fromEntries(Object.entries(bySlot).map(([slot, cell]) => [slot,
       Object.values(cell).map((e) => ({ itemId: e.itemId,
         consensus: Object.keys(e.mentions).length,
-        mentions: Object.fromEntries(Object.entries(e.mentions).map(([k, v]) => [k, [...new Set(v)]])) }))
+        mentions: Object.fromEntries(Object.entries(e.mentions).map(([k, v]) => [k, [...new Set(v)]])),
+        // present only on out-of-catalog picks (crafted/world) — see the bis loop above
+        ...(e.name ? { name: e.name } : {}), ...(e.kind ? { kind: e.kind } : {}) }))
         .sort((a, b) => b.consensus - a.consensus)]));
     payload.specs[key] = { builds, candidates, trinketTiers };
   }

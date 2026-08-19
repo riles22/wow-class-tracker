@@ -680,6 +680,78 @@ function consensusChip(it) {
   return '<span class="tag" data-consensus="' + hit.consensus + '">'
     + hit.consensus + '/3 guides: ' + esc(names.join(', ')) + '</span>';
 }
+/* Guide picks we hold NO drop data for (crafted and world items are outside the
+   raid/dungeon/tier catalog): the payload carries their name + source kind from the
+   guide rows themselves (Riley, 2026-08-18). They render as clearly-separated entries —
+   named and counted, never fit-scored or ilvl-laddered, because there is no harvested
+   item row to score. Crafted picks cite the sheet's crafted ceiling when it exists. */
+function guideOnlyPicks(slot) {
+  const g = guideSpec(CUR);
+  const cell = (g && g.candidates && g.candidates[slot]) || [];
+  // kinds are restricted to crafted/world at the payload layer too — anything else
+  // out-of-catalog is unverifiable (stale ids, the capped `unknown` lane) and must
+  // never render as a recommendation.
+  return cell.filter(c => c.name && (c.kind === 'crafted' || c.kind === 'world'))
+    .sort((a, b) => b.consensus - a.consensus);
+}
+function craftedCeiling() {
+  const rows = (SHEET && SHEET.rewards && SHEET.rewards.crafted) || [];
+  return rows.length ? rows.reduce((a, b) => (b.ilvl > a.ilvl ? b : a)).ilvl : null;
+}
+/* Weapon and tier-set slots have no per-slot card in #bis (weapons get setup cards,
+   Head/Shoulder/Chest/Hands/Legs live on the Tier tab), so their crafted/world guide
+   picks were invisible — the adversarial review measured 74 of 265 named picks
+   rendering nowhere, seven of them 3/3-unanimous. Each group gets one clearly-labeled
+   card; rows carry the slot so the reader knows where the piece goes. */
+function guideOnlyGroupCard(title, slots) {
+  const blocks = [];
+  for (const slot of slots) {
+    for (const c of guideOnlyPicks(slot)) blocks.push({ slot, c });
+  }
+  if (!blocks.length) return '';
+  blocks.sort((a, b) => b.c.consensus - a.c.consensus || a.slot.localeCompare(b.slot));
+  const ceil = craftedCeiling();
+  const rows = blocks.map(({ slot, c }) => {
+    const names = Object.keys(c.mentions).map(s => GUIDE_SOURCE_NAMES[s] || s);
+    const kindLabel = c.kind === 'world' ? 'world drop' : c.kind;
+    const ceilTag = (c.kind === 'crafted' && ceil)
+      ? '<span class="tag" data-ilvl-ceiling>crafted up to ' + ceil + '</span>' : '';
+    return '<div class="row" data-guide-only="true" data-id="' + esc(c.itemId) + '">'
+      + '<span class="rank" title="Guide pick without harvested drop data — named, not scored">&middot;</span>'
+      + '<span class="nm">' + esc(c.name)
+      + '<span class="badge">' + esc(slot) + '</span><span class="badge">' + esc(kindLabel) + '</span>'
+      + '<span class="tag" data-consensus="' + c.consensus + '">' + c.consensus + '/3 guides: ' + esc(names.join(', ')) + '</span>'
+      + ceilTag
+      + '<span class="fx">No harvested item data &mdash; this is the guides\' pick, listed without a fit score.</span>'
+      + '</span></div>';
+  }).join('');
+  return '<div class="card wide"><h3>' + title + '<span>' + blocks.length + ' guide-named &middot; no drop data held</span></h3>'
+    + '<div class="sub-note">The guides name these <b>crafted or world-drop</b> pieces for slots whose cards rank '
+    + 'harvested drops only. They are listed with guide counts, never fit-scored &mdash; there is no item data to score.</div>'
+    + rows + '</div>';
+}
+
+function guideOnlyRows(slot) {
+  const picks = guideOnlyPicks(slot);
+  if (!picks.length) return '';
+  const ceil = craftedCeiling();
+  return picks.map(c => {
+    const names = Object.keys(c.mentions).map(s => GUIDE_SOURCE_NAMES[s] || s);
+    const kindLabel = {crafted: 'crafted', world: 'world drop', dungeon: 'non-pool dungeon',
+      raid: 'raid (unlisted)', vault: 'Great Vault', boe: 'BoE', catalyst: 'Catalyst',
+      'tier-token': 'tier token', unknown: 'source unknown'}[c.kind] || c.kind;
+    const kindTag = c.kind ? '<span class="badge">' + esc(kindLabel) + '</span>' : '';
+    const ceilTag = (c.kind === 'crafted' && ceil)
+      ? '<span class="tag" data-ilvl-ceiling>crafted up to ' + ceil + '</span>' : '';
+    return '<div class="row" data-guide-only="true" data-id="' + esc(c.itemId) + '">'
+      + '<span class="rank" title="Guide pick without harvested drop data — named, not scored">&middot;</span>'
+      + '<span class="nm">' + esc(c.name) + kindTag
+      + '<span class="tag" data-consensus="' + c.consensus + '">' + c.consensus + '/3 guides: ' + esc(names.join(', ')) + '</span>'
+      + ceilTag
+      + '<span class="fx">No harvested item data — this is the guides\' pick, listed without a fit score.</span>'
+      + '</span></div>';
+  }).join('');
+}
 
 function initProfiles() {
   const sel = $('#profile');
@@ -1019,11 +1091,17 @@ function renderBis() {
       + esc(it.kind === 'mplus' ? it.dungeon : it.where) + '</span></div>');
     });
     return '<div class="card"><h3>' + esc(slot) + '<span>' + bySlot[slot].length + ' usable</span></h3>'
-      + (rows.join('') || '<div class="empty">nothing here</div>') + '</div>';
+      + (rows.join('') || '<div class="empty">nothing here</div>')
+      + (usingCustom ? '' : guideOnlyRows(slot)) + '</div>';
   }).join('');
 
-  $('#bis').innerHTML = customBanner() + weaponLoadoutCards(weaponItems) + cards
-    + trinketCard(bySlot['Trinket'] || [])
+  $('#bis').innerHTML = customBanner() + weaponLoadoutCards(weaponItems)
+    + (usingCustom ? '' : guideOnlyGroupCard('Weapons &mdash; guide picks without drop data',
+        ['Main Hand', 'Off Hand', 'One-Hand', 'Two-Hand', 'Ranged', 'Held In Off-hand', 'Shield']))
+    + cards
+    + (usingCustom ? '' : guideOnlyGroupCard('Tier slots &mdash; guide picks without drop data',
+        ['Head', 'Shoulder', 'Chest', 'Hands', 'Legs']))
+    + trinketCard(bySlot['Trinket'] || [], usingCustom)
     || '<div class="empty">No usable items found for this spec.</div>';
 }
 
@@ -1121,12 +1199,14 @@ function weaponLoadoutCards(items) {
 }
 
 /* Trinkets bypass the secondary-stat scorer entirely: their value lives in effects this
-   page does not model, so they are listed, never consensus-ranked. */
-/* DECISION G8: trinket letter tiers stay PER-SOURCE and are never merged onto one axis —
-   a trinket shows each source's own letter side by side and the reader judges. Trinkets
-   remain OUTSIDE the consensus top-5 ranking; the display order inside this card (by the
-   first source's letter, then guide mentions, then name) is a presentation convention,
-   not a ranking claim, and the card says so. */
+   page does not model, so stat fit is never computed for them. */
+/* DECISION G8, REVISED by Riley 2026-08-18 (launch-day review): trinkets are now RANKED
+   by guide-consensus COUNT alone (how many of the three guides name the trinket) — the
+   same coverage signal every other slot uses — with ties shown AS ties (shared rank
+   number) and NO stat-fit tiebreak, because fit on an effect-driven slot would be fake
+   precision. G8's core is unchanged: per-source letter tiers are shown side by side and
+   NEVER merged onto one axis. Unnamed trinkets (0/3) follow the ranked set unranked, in
+   the old letter-then-name presentation order. */
 function trinketLetterOf(it, srcId) {
   const g = guideSpec(CUR);
   const tiers = g && g.trinketTiers && g.trinketTiers[srcId];
@@ -1143,37 +1223,109 @@ function trinketChips(it) {
   return chips.join('');
 }
 const TRINKET_LETTER_ORDER = {S: 0, A: 1, B: 2, C: 3, D: 4, F: 5};
-function trinketCard(list) {
-  if (!list.length) return '';
-  const sortKey = it => {
+function trinketCard(list, usingCustom) {
+  const letterKey = it => {
     const letter = trinketLetterOf(it, 'icyveins');
-    return [letter != null ? TRINKET_LETTER_ORDER[letter] ?? 8 : 9, -consensusCount(it)];
+    return letter != null ? TRINKET_LETTER_ORDER[letter] ?? 8 : 9;
   };
-  const rows = list.slice().sort((a, b) => {
-    const [la, ca] = sortKey(a), [lb, cb] = sortKey(b);
-    return la - lb || ca - cb || (b.effect ? 1 : 0) - (a.effect ? 1 : 0) || a.name.localeCompare(b.name);
-  }).map(it =>
-    '<div class="row" data-id="' + it.id + '">' + icoTag(it) + '<span class="nm">' + esc(it.name)
+  const rowFor = (it, rankLabel) =>
+    '<div class="row" data-id="' + it.id + '">'
+    + (rankLabel ? '<span class="rank" title="Guide-consensus rank; ties share a number">' + rankLabel + '</span>' : '')
+    + icoTag(it) + '<span class="nm">' + esc(it.name)
     + trinketChips(it) + itemDetails(it)
     + (!it.effect ? '<span class="fx">no on-use or proc effect listed</span>' : '')
     + '</span><span class="meta">' + esc(it.primary || '—')
     + (it.secondaries.length ? ' ' + esc(allocationText(it)) : '')
     + '</span><span class="src' + (it.kind === 'mplus' ? ' mplus' : '') + '">'
+    + esc(it.kind === 'mplus' ? it.dungeon : it.where) + '</span></div>';
+
+  /* CUSTOM WEIGHTS MODE (G6): custom is a full override and guide-consensus surfaces
+     hide with it — the same policy the slot cards apply. Trinkets cannot be scored by
+     secondary weights at all, so the card falls back to the pre-ranking presentation
+     order (first source letter, then name) and says so. */
+  if (usingCustom) {
+    if (!list.length) return '';
+    const rows = list.slice().sort((a, b) => letterKey(a) - letterKey(b)
+      || (b.effect ? 1 : 0) - (a.effect ? 1 : 0) || a.name.localeCompare(b.name))
+      .map(it => rowFor(it, null)).join('');
+    return '<div class="card wide"><h3>Trinkets<span>' + list.length + ' usable &middot; not scorable by custom weights</span></h3>'
+      + '<div class="sub-note"><b>Custom weights cannot score trinkets</b> (their value lives in effects, not '
+      + 'secondary stats), and guide-consensus surfaces are hidden while custom weights are active. Listed in '
+      + 'presentation order (first source letter, then name) &mdash; not a ranking.</div>'
+      + rows + '</div>';
+  }
+
+  /* Ranked pool = usable catalog trinkets the guides name PLUS crafted/world guide-only
+     picks — the adversarial review caught 3/3-unanimous world trinkets (Wavecaller's
+     Seastone on 8 specs) rendering UNRANKED below 2/3 ranked rows, making the "ranked
+     by consensus count" claim false as displayed. Both kinds now rank in one dense
+     ordering; within a tied count, catalog items (we hold their data) list first. */
+  const guideOnly = guideOnlyPicks('Trinket');
+  const pool = [
+    ...list.filter(it => consensusCount(it) > 0).map(it => ({ count: consensusCount(it), it })),
+    ...guideOnly.map(c => ({ count: c.consensus, c })),
+  ].sort((a, b) => b.count - a.count || (a.it ? 0 : 1) - (b.it ? 0 : 1)
+    || (a.it && b.it ? (letterKey(a.it) - letterKey(b.it) || a.it.name.localeCompare(b.it.name)) : 0));
+  const unnamed = list.filter(it => consensusCount(it) === 0)
+    .sort((a, b) => letterKey(a) - letterKey(b)
+      || (b.effect ? 1 : 0) - (a.effect ? 1 : 0) || a.name.localeCompare(b.name));
+  const ceil = craftedCeiling();
+  let rank = 0, lastCount = null;
+  const rankedRows = pool.map(entry => {
+    if (entry.count !== lastCount) { rank += 1; lastCount = entry.count; }
+    if (entry.it) return rowFor(entry.it, String(rank));
+    const c = entry.c;
+    const names = Object.keys(c.mentions).map(s => GUIDE_SOURCE_NAMES[s] || s);
+    const ceilTag = (c.kind === 'crafted' && ceil)
+      ? '<span class="tag" data-ilvl-ceiling>crafted up to ' + ceil + '</span>' : '';
+    return '<div class="row" data-guide-only="true" data-id="' + esc(c.itemId) + '">'
+      + '<span class="rank" title="Guide-consensus rank; ties share a number">' + rank + '</span>'
+      + '<span class="nm">' + esc(c.name)
+      + '<span class="badge">' + esc(c.kind === 'world' ? 'world drop' : c.kind) + '</span>'
+      + '<span class="tag" data-consensus="' + c.consensus + '">' + c.consensus + '/3 guides: ' + esc(names.join(', ')) + '</span>'
+      + ceilTag
+      + '<span class="fx">No harvested item data &mdash; ranked by guide count only, no effect or stat detail held.</span>'
+      + '</span></div>';
+  }).join('');
+
+  /* Eligibility-filtered disclosure (adversarial review): a catalog trinket the guides
+     name can be excluded from `usable` by the curated recommendation-eligibility list
+     (Lightspire Core is DPS-only yet named for Restoration Druid). Silently omitting it
+     would make the rank numbers misstate the guides' order, so the conflict renders. */
+  const listIds = new Set(list.map(it => String(it.id)));
+  const filteredNamed = ITEMS.filter(it => it.slot === 'Trinket' && !listIds.has(String(it.id))
+    && consensusCount(it) > 0);
+  const filteredRows = filteredNamed.map(it =>
+    '<div class="row" data-eligibility-filtered="true" data-id="' + it.id + '">'
+    + '<span class="rank" title="Named by guides, excluded by eligibility">&times;</span>'
+    + icoTag(it) + '<span class="nm">' + esc(it.name) + trinketChips(it)
+    + '<span class="fx"><b>Excluded by recommendation eligibility for this spec</b> &mdash; the guides name it '
+    + 'anyway; not ranked here because our curated eligibility list disagrees.</span>'
+    + '</span><span class="src' + (it.kind === 'mplus' ? ' mplus' : '') + '">'
     + esc(it.kind === 'mplus' ? it.dungeon : it.where) + '</span></div>').join('');
+
+  const unnamedRows = unnamed.map(it => rowFor(it, null)).join('');
   const hasLetters = list.some(it => trinketLetterOf(it, 'icyveins'));
-  return '<div class="card wide"><h3>Trinkets<span>' + list.length + ' usable &middot; not ranked</span></h3>'
-    + '<div class="sub-note"><b>Trinkets are deliberately outside the consensus ranking:</b> their value lives '
-    + 'in effects this page does not model. '
+  const total = list.length + guideOnly.length;
+  if (!total && !filteredNamed.length) return '';
+  return '<div class="card wide"><h3>Trinkets<span>' + total + ' listed &middot; ranked by guide consensus</span></h3>'
+    + '<div class="sub-note"><b>Trinkets rank by guide-consensus count alone</b> &mdash; how many of the three '
+    + 'guides name the trinket &mdash; with ties shown as ties (shared number; within a tie, items we hold data '
+    + 'for list first). <b>Stat fit is never computed here:</b> trinket value lives in effects this page does '
+    + 'not model, so a fit tiebreak would be fake precision. Crafted and world-drop picks rank alongside drops. '
     + (hasLetters
       ? 'Where a guide publishes its own letter tiers they are shown PER SOURCE and never merged onto one '
-        + 'scale &mdash; the display order here (first source\'s letter, then guide mentions) is a presentation '
-        + 'convention, not a computed ranking. '
+        + 'scale. '
       : '')
-    + 'Every usable trinket is listed with its full effect. Role- or primary-specific '
-    + 'effects are filtered using explicit recommendation eligibility; excluded specs may still be able to equip '
-    + 'the item technically. <b>This is the slot where a full item simulation matters most.</b></div>'
-    + '<details class="more-items"><summary>Show all ' + list.length + ' trinkets</summary>' + rows
-    + '</details></div>';
+    + 'Unnamed trinkets follow the ranked set, unranked. Role- or primary-specific effects are filtered using '
+    + 'explicit recommendation eligibility; a named-but-excluded item is disclosed, never hidden. '
+    + '<b>This is the slot where a full item simulation matters most.</b></div>'
+    + rankedRows
+    + filteredRows
+    + (unnamed.length
+      ? '<details class="more-items"><summary>Show ' + unnamed.length + ' more usable trinkets no guide names</summary>' + unnamedRows + '</details>'
+      : '')
+    + '</div>';
 }
 
 /* What is the highest item level each gearing path can reach? Uses the validated
@@ -1274,6 +1426,35 @@ function planChips(named, limit) {
     .slice(0, limit).map(it => '<span class="tag">' + esc(it.name) + ' ' + consensusCount(it) + '/3</span>')
     .join(' ') + (named.length > limit ? ' <span class="src">+' + (named.length - limit) + ' more</span>' : '');
 }
+/* The Crafted section of the game plan (Riley, 2026-08-18): every crafted item the
+   three guides name for this spec, by slot with guide counts. These are guide CLAIMS —
+   the harvest holds no crafted item rows, so there is no fit score, no per-item ladder,
+   and no "Your potential" column; the one number shown is the sheet's crafted ceiling. */
+function craftedPlanCard() {
+  const g = guideSpec(CUR);
+  if (!g || !g.candidates) return '';
+  const rows = [];
+  for (const slot of Object.keys(g.candidates)) {
+    for (const c of g.candidates[slot]) {
+      if (!c.name || c.kind !== 'crafted') continue;
+      const names = Object.keys(c.mentions).map(s => GUIDE_SOURCE_NAMES[s] || s);
+      rows.push({ slot, c, names });
+    }
+  }
+  if (!rows.length) return '';
+  rows.sort((a, b) => b.c.consensus - a.c.consensus || a.slot.localeCompare(b.slot));
+  const ceil = craftedCeiling();
+  const body = rows.map(r =>
+    '<tr><td class="src">' + esc(r.slot) + '</td><td>' + esc(r.c.name)
+    + '</td><td><b>' + r.c.consensus + '</b> of 3<div class="src">' + esc(r.names.join(', ')) + '</div></td></tr>').join('');
+  return '<div class="card"><h3>Crafted<span>' + rows.length + ' guide-named pieces'
+    + (ceil ? ' &middot; crafted gear reaches ' + ceil : '') + '</span></h3>'
+    + '<div class="sub-note">The guides name these <b>crafted</b> pieces for your spec. The harvest holds no '
+    + 'crafted item data, so they are listed with their guide counts only — no fit score and no potential '
+    + 'column' + (ceil ? '; the crafted item-level ceiling comes from the Item levels sheet' : '') + '.</div>'
+    + '<table class="src-tbl"><tr><th>Slot</th><th>Item</th><th>Guides naming it</th></tr>' + body + '</table></div>';
+}
+
 function renderSrc() {
   const myTokenIds = new Set(myTokens().map(token => String(token.id)));
   const hasGear = Object.keys(MYGEAR).length > 0;
@@ -1352,7 +1533,8 @@ function renderSrc() {
     + 'The same drop is worth more from a higher key; potential for M+ items uses the top <b>Great Vault</b> reward '
     + '(the ceiling an M+ drop can reach), not the end-of-dungeon ilvl — both columns are in the key table below.</div>'
     + '<table class="src-tbl" style="margin-top:14px"><tr><th>Key</th><th>End of dungeon</th><th>Great Vault</th></tr>'
-    + keys + '</table></div>';
+    + keys + '</table></div>'
+    + craftedPlanCard();
 }
 
 const SIMC_SLOT = {head:'Head',neck:'Neck',shoulder:'Shoulder',shoulders:'Shoulder',back:'Back',
@@ -1505,8 +1687,9 @@ function renderUp() {
       : eq.slotLabel;
     return '<div class="card"><h3>' + esc(slotName) + '<span>' + esc(eq.name || eq.id) + worn + '</span></h3>'
       + (trinketSlot && entries.length
-        ? '<div class="sub-note"><b>Trinkets are deliberately unranked:</b> their value lives in effects this page '
-          + 'does not model; every eligible source that can exceed your current item level is listed, alphabetically.</div>' : '')
+        ? '<div class="sub-note"><b>Trinket upgrades are listed by item level, not ranked:</b> trinket value lives in effects '
+          + 'this page does not model (the Gear tab ranks them by guide-consensus count); every eligible source that can '
+          + 'exceed your current item level is listed, alphabetically.</div>' : '')
       + catalystActionHtml(eq)
       + directTierUpgradeHtml(eq, threshold)
       + (entries.length ? entries.map(entry => {

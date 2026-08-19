@@ -325,6 +325,18 @@ Note this leaves today's real defect unfixed in ranking terms: 5 of 14 raid trin
 secondaries and the rest score 0 and tie. Showing both sources' letters replaces a meaningless
 ranked order with honest unranked information, which is the improvement — not a ranked trinket list.
 
+**REVISED (Riley, 2026-08-18, launch-day review):** trinkets now RANK — but by
+**guide-consensus count alone** (how many of the three guides name the trinket, dense
+ranking, ties share a number), never by stat fit and never by merged letters. This keeps
+both of G8's original refusals intact (no shared letter axis; no fit scores on an
+effect-driven slot) while giving the slot the best/second-best ordering Riley wanted: the
+consensus COUNT is the same coverage quantity every other slot already uses, so no new
+scale is invented. Unnamed trinkets follow the ranked set explicitly unranked. Shipped
+with the same pass: out-of-catalog guide picks (117 crafted, 55 world at ship time)
+render in slot cards and the trinket card as counted-never-scored rows, and the game
+plan gains a **Crafted** section (guide claims + the sheet's crafted ceiling — no fit,
+no potential column, because no item data exists to compute either).
+
 ## Open questions for kickoff
 
 None outstanding. Eight decisions (G1–G8) are locked; the next open choices arrive with Phase A
