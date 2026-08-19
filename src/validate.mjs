@@ -734,6 +734,13 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
   // --- encounter tiers (per-boss / per-dungeon Archon tiers; a whole displayed file) ---
   if (encounterTiers != null) {
     isoOk(encounterTiers.asOf, "encounter-tiers.json: asOf");
+    // season: which season the Archon pages described at harvest (stamped by the
+    // refresh, like sources.json seasonVerified). The UI hides the Fight selector
+    // when it is not the live season — prior-season fight tiers must never mix into
+    // the live grid (Riley, 2026-08-19). Optional: an unstamped file just hides the
+    // control, which is the conservative-honest failure mode, not a red.
+    if (encounterTiers.season != null && !PHASES.seasonOrder.includes(encounterTiers.season))
+      errors.push(`encounter-tiers.json: season "${encounterTiers.season}" is not in PHASES.seasonOrder`);
     const archon = scales.scales?.archon;
     for (const bracket of ["raid", "mplus"]) {
       for (const [slug, enc] of Object.entries(encounterTiers[bracket] ?? {})) {

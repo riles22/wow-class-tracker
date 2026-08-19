@@ -160,6 +160,10 @@ try {
   .ctl{display:flex; align-items:center; gap:8px; flex-wrap:nowrap}
   .ctl-ctas{flex-wrap:wrap}
   .seg{display:inline-flex; background:var(--bg-2); border:1px solid var(--edge); border-radius:9px; padding:3px; gap:2px}
+  /* An author display beats the UA's [hidden]{display:none}, so the era seg's
+     between-cycles hide was a visual no-op — the "Both | 12.1" pair kept rendering
+     for a day after the flip (Riley, 2026-08-19). */
+  .seg[hidden]{display:none}
   .seg button{
     font-family:var(--body); font-size:13px; font-weight:600; color:var(--ink-dim);
     background:transparent; border:0; border-radius:6px; padding:6px 13px; cursor:pointer;
@@ -1170,6 +1174,9 @@ function applyHash(){
   // "both" — must not resurrect retired PTR surfaces with the toggle hidden and no way back.
   const ERAS = (PHASE.ptr && !PHASE.ptrSunset) ? ["both","live","ptr"] : ["live"];
   if(!ERAS.includes(state.era)) state.era = ERAS.includes("both") ? "both" : "live";
+  // A fight= deep link is inert while the per-fight view is unavailable (prior-season
+  // encounter data) — same convention as a retired view= overlay param.
+  if(state.fight && DATA.encounterTiers?.season !== PHASE.liveSeason) state.fight = "";
   // Restore a shared compare set (L14): resolve slugs → keys, cap at 3.
   const cmp = p.get("cmp");
   if(cmp && typeof COMPARE !== "undefined"){
@@ -1756,9 +1763,10 @@ function render(){
     const fsel = document.getElementById('fightsel');
     if(fsel){
       const blocked = state.era === "ptr";
+      const fightSeasonLabel = PHASE.seasonLabels?.[DATA.encounterTiers?.season] ?? DATA.encounterTiers?.season ?? "";
       fsel.disabled = blocked;
       fsel.title = blocked
-        ? "Per-fight tiers are Archon Season-1 (12.0.7) data — switch Era to Both or 12.0.7 to use them"
+        ? "Per-fight tiers are Archon " + fightSeasonLabel + " live data — the PTR era has no per-fight cut; switch Era to Both or " + PHASE.liveLabel + " to use them"
         : "Archon per-boss (throughput) / per-dungeon (score) tiers — replaces the selected source while a fight is picked";
       if(blocked && state.fight){ state.fight = ""; fsel.value = ""; }
     }
@@ -1781,7 +1789,9 @@ function render(){
       chip = document.createElement('span');
       chip.className = 'segoverride';
       chip.textContent = 'Archon · per-fight';
-      chip.title = 'A fight is selected, so the tier columns show Archon per-encounter tiers (12.0.7 / Season 1) instead of the chosen source. Clear the Fight selector to go back.';
+      chip.title = 'A fight is selected, so the tier columns show Archon per-encounter tiers ('
+        + (PHASE.seasonLabels?.[DATA.encounterTiers?.season] ?? 'season data')
+        + ') instead of the chosen source. Clear the Fight selector to go back.';
       srcseg.appendChild(chip);
     } else if(!onFight && chip){ chip.remove(); }
   }
@@ -2360,7 +2370,20 @@ document.getElementById('livelinks').insertAdjacentHTML('beforeend',
   const enc = DATA.encounterTiers;
   const raid = Object.entries(enc?.raid || {});
   const mplus = Object.entries(enc?.mplus || {});
-  if(!raid.length && !mplus.length){ document.getElementById('fightctl').style.display='none'; return; }
+  /* SEASON GATE (Riley, 2026-08-19): the per-fight tiers are Archon data for the season
+     stamped on the file. Serving a prior season's bosses into the live grid is exactly
+     the cross-season mixing the consensus machinery refuses, so the control hides
+     until the stamp matches the live season (Archon's S2 encounter rebuild lands via
+     the same refresh that flips its tier pages). An unstamped file also hides — the
+     conservative-honest default. A stale fight= deep link stays inert (below). */
+  const fightSeasonOk = enc?.season === PHASE.liveSeason;
+  if((!raid.length && !mplus.length) || !fightSeasonOk){
+    document.getElementById('fightctl').style.display='none';
+    if(state.fight){ state.fight = ""; }
+    window.FIGHT_VIEW_AVAILABLE = false;
+    return;
+  }
+  window.FIGHT_VIEW_AVAILABLE = true;
   const opt = (bracket, slug, name) => `<option value="${esc(bracket)}|${esc(slug)}">${esc(name)}</option>`;
   sel.innerHTML = `<option value="">All fights</option>`
     + (raid.length ? `<optgroup label="Raid bosses (Archon throughput)">${raid.map(([slug,e])=>opt("raid",slug,e.name)).join("")}</optgroup>` : "")

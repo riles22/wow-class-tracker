@@ -2,6 +2,7 @@
   "_comment": "Per-encounter Archon throughput tiers (raid bosses) and M+ score tiers (dungeons). Populated by the encounter-fetch workflow / refresh-tiers skill. Keys under tiers are 'Class|Spec'. Single-source by design (Archon is the only per-encounter tier publisher) — the UI labels the source; no consensus applies per fight. (2026-07-21: full 3-role re-fetch across all 9 bosses + 8 dungeons, 40/40 specs each.)",
   "source": "archon",
   "asOf": "2026-08-17",
+  "season": "s1",
   "raid": {
     "imperator": {
       "name": "Imperator Averzian",

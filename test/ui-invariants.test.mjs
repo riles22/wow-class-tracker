@@ -172,6 +172,20 @@ ui("a selected fight never leaves another view's button lit over Archon data", a
   const [slug, enc] = Object.entries(data.encounterTiers?.raid ?? {})[0] ?? [];
   assert.ok(slug, "expected at least one raid encounter");
 
+  // SEASON GATE (2026-08-19): prior-season encounter tiers must never mix into the live
+  // grid — when the data's season stamp is not the live season the Fight control hides
+  // entirely and that IS the invariant; the override machinery below re-tests itself
+  // automatically once Archon's live-season encounter data lands.
+  if (data.encounterTiers?.season !== data.phases?.liveSeason) {
+    const gate = await page.evaluate(() => ({
+      hidden: document.getElementById("fightctl")?.style.display === "none",
+      fightState: !!document.querySelector(".segoverride"),
+    }));
+    assert.ok(gate.hidden, "prior-season fight data must hide the Fight control");
+    assert.ok(!gate.fightState, "no fight override may be active while the control is hidden");
+    return;
+  }
+
   // pick a non-consensus source first: the regression was that the fight branch ran
   // BEFORE state.source was ever consulted, so the lit button became a lie
   await page.evaluate(() => document.querySelector('#srcseg button[data-source="projection"]').click());

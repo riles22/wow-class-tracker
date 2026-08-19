@@ -169,6 +169,13 @@ letters, not just a wasted run.
   dropped that page (74 rows instead of 80, 2026-07-27). Recorded false positives on the
   other side: editorial `[-- Season 2 --]` markers in Wowhead's markup and Icy Veins changelog
   rows for Dragonflight / TWW. Step 2 records what a misread costs.
+- **`data/encounter-tiers.json` must carry a `season` stamp** (top-level, e.g.
+  `"season": "s2"`) — the season the Archon encounter pages actually described,
+  era-verified the same way as the tier pages' `seasonVerified`. The UI hides the
+  whole Fight selector when the stamp is not `PHASES.liveSeason` (added 2026-08-19
+  after the S1 file kept serving Imperator et al. into the live S2 grid), so an
+  Archon S2 encounter refresh that forgets the stamp ships a hidden control, and a
+  wrong stamp mixes seasons — stamp what you verified, never what you expect.
 - **When `data/encounter-tiers.json` is rewritten, keep the COMMITTED encounter `name`
   values.** `page.title` is the generic page headline ("Midnight DPS Rankings and VS / DR /
   MQD Tier List"), not the boss name — taking it renames every encounter to the same string
