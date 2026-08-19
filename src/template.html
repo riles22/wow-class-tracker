@@ -2,7 +2,7 @@
 <html lang="en">
 <!--
   ══════════════════════════════════════════════════════════════════════
-   Midnight 12.1 PTR Spec Tracker  —  Made by riles22
+   Midnight Spec Tracker  —  Made by riles22
    An original, hand-built multi-source WoW class/spec performance tracker.
    github.com/riles22/wow-class-tracker
    If you share, fork, or repost this file, please keep the credit.
@@ -164,6 +164,9 @@ try {
      between-cycles hide was a visual no-op — the "Both | 12.1" pair kept rendering
      for a day after the flip (Riley, 2026-08-19). */
   .seg[hidden]{display:none}
+  /* Same trap as .seg[hidden] one rule up: .toggle sets display, which beats the UA's
+     [hidden] rule — the between-cycles hide of "PTR-tracked only" needs this to be real. */
+  .toggle[hidden]{display:none}
   .seg button{
     font-family:var(--body); font-size:13px; font-weight:600; color:var(--ink-dim);
     background:transparent; border:0; border-radius:6px; padding:6px 13px; cursor:pointer;
@@ -851,7 +854,7 @@ try {
     <div class="rule"></div>
     <!-- One sentence of lede; the mental model folds. This paragraph ran five lines and
          was ~40% of a 329px masthead sitting directly above a page people check daily. -->
-    <div class="sub">Where every spec of <b>WoW: Midnight</b> stands — <b>not one site's opinion</b>, but every major tier list distilled into a single consensus with a <b>±</b> wherever they disagree, layered with live numbers, sim profiles, and per-spec patch reads. <details class="sub-more"><summary>How to read it</summary><span id="tlcount">Several</span> tier lists feed a computed <b>consensus</b>, with a <b>±</b> marker where they disagree — flip between them with <b>View</b>, or pick <b>Ours: 12.1&nbsp;✦</b> for this site's own Season-2 forecast (a projection, never a source). Filter by era or a specific fight, and click <b>any row</b> for the full read: patch changes, current numbers with ranks, sim fight profile, and community takes. Two tools up top: <b>📊 The Ladder</b> draws any measured ranking as a chart, and <b>⊞ Compare all</b> is the whole roster against every rating and rank on one screen. The <b>⚙ S2 Gearing</b> tab is a separate explorer for Season-2 gear and loot sources.</details></div>
+    <div class="sub">Where every spec of <b>WoW: Midnight</b> stands — <b>not one site's opinion</b>, but every major tier list distilled into a single consensus with a <b>±</b> wherever they disagree, layered with live numbers, sim profiles, and per-spec patch reads. <details class="sub-more"><summary>How to read it</summary><span id="tlcount">Several</span> tier lists feed a computed <b>consensus</b>, with a <b>±</b> marker where they disagree — flip between them with <b>View</b>, or pick <b>Ours: 12.1&nbsp;✦</b> for this site's own Season-2 forecast (a projection, never a source). Filter, sort, or search the roster, and click <b>any row</b> for the full read: patch changes, current numbers with ranks, sim fight profile, and community takes. Two tools up top: <b>📊 The Ladder</b> draws any measured ranking as a chart, and <b>⊞ Compare all</b> is the whole roster against every rating and rank on one screen. The <b>⚙ S2 Gearing</b> tab is a separate explorer for Season-2 gear and loot sources.</details></div>
     <div class="stamp">
       <span><b>Baseline:</b> __ERA_BASELINE__</span>
       <span>__ERA_TRACKED_STAMP__</span>
@@ -954,7 +957,7 @@ try {
       <span class="li"><span class="divmark">±</span><span>sources diverge (consensus)</span></span>
       <!-- the bands the always-visible note above the grid deliberately omits -->
       <span class="li"><span>consensus score → letter: <b>S</b> 88+ · <b>A+</b> 74 · <b>A</b> 58 · <b>B</b> 40 · <b>C</b> below</span></span>
-      <span class="li"><span class="conf" data-c="high" style="margin:0">●●●</span><span class="conf" data-c="low" style="margin:0">●○○</span><span>evidence behind our 12.1 forecast — three dots means every obtainable PTR signal is present, one means it mostly reflects the __ERA_LIVE_LABEL__ baseline</span></span>
+      <span class="li"><span class="conf" data-c="high" style="margin:0">●●●</span><span class="conf" data-c="low" style="margin:0">●○○</span><span>evidence behind our 12.1 forecast — three dots means every obtainable PTR signal is present, one means it mostly reflects the <span id="fcbase">__ERA_LIVE_LABEL__</span> baseline</span></span>
       <span class="lsep" aria-hidden="true"></span>
       <span class="li"><span class="mv" data-d="up" style="margin:0">▲</span><span class="mv" data-d="down" style="margin:0">▼</span><span>tier / rank moved since the last data change (hover for from-when)</span></span>
     </div>
@@ -1174,6 +1177,9 @@ function applyHash(){
   // "both" — must not resurrect retired PTR surfaces with the toggle hidden and no way back.
   const ERAS = (PHASE.ptr && !PHASE.ptrSunset) ? ["both","live","ptr"] : ["live"];
   if(!ERAS.includes(state.era)) state.era = ERAS.includes("both") ? "both" : "live";
+  // A stale ptr=1 deep link must not filter by the hidden "PTR-tracked only" lane —
+  // same convention as the era clamp above (2026-08-19 audit, B3).
+  if(!PHASE.ptr || PHASE.ptrSunset) state.ptrOnly = false;
   // A fight= deep link is inert while the per-fight view is unavailable (prior-season
   // encounter data) — same convention as a retired view= overlay param.
   if(state.fight && DATA.encounterTiers?.season !== PHASE.liveSeason) state.fight = "";
@@ -1253,6 +1259,24 @@ const FROZEN_SOURCES = (() => {
   if (!PHASE.ptr || PHASE.ptrSunset) {
     document.getElementById('eraseg')?.setAttribute('hidden', '');
     state.era = "live";
+    /* "PTR-tracked only" filters on the s.ptr writeup lane, which this state no longer
+       renders anywhere — a control whose label names a test realm the cycle no longer
+       has, and whose only visible effect was hiding Demonology Warlock, inscrutably
+       (2026-08-19 audit, B3). Same rule as the era segment; it re-arms with the next
+       cycle. state.ptrOnly is also cleared here and in applyHash so a stale ptr=1 deep
+       link cannot filter by an invisible lane. */
+    document.getElementById('ptronly')?.closest('label')?.setAttribute('hidden', '');
+    state.ptrOnly = false;
+  }
+  /* Labels that ENUMERATE era-cycle controls must not advertise ones the phase has
+     hidden — a phone user opening the fold found neither "Era" nor the PTR legend the
+     summaries promised (2026-08-19 audit, B5). The Fight entry is handled at render
+     time (its gate is data-driven), so only the era-cycle vocabulary is pruned here. */
+  if (!PHASE.ptr || PHASE.ptrSunset) {
+    const sum = document.querySelector('.ctlsum-h');
+    if (sum) sum.textContent = sum.textContent.replace(/\s*Era ·/, '');
+    const leg = document.querySelector('#legendwrap > summary');
+    if (leg) leg.textContent = 'Legend — tiers, profile chips';
   }
 }
 const metricEra = m => m.era ?? (PHASE.ptr && m.name.includes(PHASE.ptr.marker) ? "ptr" : "live");
@@ -1266,6 +1290,17 @@ const eraOk = era => state.era === "both" || state.era === era;
    projection surface consults — before the flip it is the old era gate unchanged. */
 const FROZEN_FC = META.frozenForecast ?? null;
 const projAvailable = () => state.era !== "live" || !!FROZEN_FC;
+/* Which baseline the forecast's confidence prose names. The LIVE computation leans on
+   the current live consensus (liveLabel). The FROZEN record's prior is the PRE-LAUNCH
+   consensus — the season before the flip — and interpolating the flipped liveLabel into
+   its description turned a true sentence false ("leans on the 12.1 baseline" about a
+   forecast whose baseline is 12.0.7; 2026-08-19 audit, B4). */
+const FC_BASE_LABEL = (() => {
+  if(!FROZEN_FC) return PHASE.liveLabel;
+  const order = PHASE.seasonOrder ?? [], i = order.indexOf(PHASE.liveSeason);
+  return (i > 0 && PHASE.seasonLabels?.[order[i-1]]) || PHASE.liveLabel;
+})();
+{ const el = document.getElementById('fcbase'); if(el) el.textContent = FC_BASE_LABEL; }
 const matrix = document.getElementById('matrix');
 const reduceMotionControl = document.getElementById('reduce-motion');
 const motionReduced = () => document.documentElement.dataset.reduceMotion === 'true';
@@ -1364,8 +1399,8 @@ function tierEl(r, mv){
   const CONF_TIP = {
     high: "High confidence — every PTR signal obtainable for this spec and bracket is present (testing, tuning outlook, specialist takes, and where they exist Dummy Dome + a PTR tier list)",
     medium: "Medium confidence — more than half the obtainable PTR signals are present",
-    low: `Low confidence — half or fewer of the obtainable PTR signals are present; this forecast leans on the ${PHASE.liveLabel} baseline`,
-    "prior-only": `No PTR evidence at all — this is the ${PHASE.liveLabel} consensus, not a forecast`
+    low: `Low confidence — half or fewer of the obtainable PTR signals are present; this forecast leans on the ${FC_BASE_LABEL} baseline`,
+    "prior-only": `No PTR evidence at all — this is the ${FC_BASE_LABEL} consensus, not a forecast`
   };
   const conf = (state.source === "projection" && r.conf && CONF_GLYPH[r.conf])
     ? `<span class="conf" data-c="${esc(r.conf)}" title="${esc(CONF_TIP[r.conf])}" aria-label="${esc(r.conf)} confidence">${CONF_GLYPH[r.conf]}</span>` : '';
@@ -1447,6 +1482,15 @@ function metricsHTML(s){
   // gets the muted "stale" treatment so a mid-outage 07-09 median reads as visibly old.
   const boxLatest = list.map(m=>m.asOf).filter(Boolean).sort().slice(-1)[0] || null;
   const staleGap = (from,to) => Math.round((Date.parse(to)-Date.parse(from))/86400000);
+  /* The section heading stamps liveLabel over every era:"live" row, but through a season
+     transition the box MIXES prior-season cuts (frozen WCL zones, held-back ceilings)
+     with genuine new-season rows under that one banner (2026-08-19 audit, B2). A row
+     whose asOf predates the flip is a measurement of the previous season and says so in
+     visible text — the tag disappears by itself as each series refreshes. */
+  const prevSeasonLabel = (()=>{ const o = PHASE.seasonOrder ?? [], i = o.indexOf(PHASE.liveSeason);
+    return i > 0 ? (PHASE.seasonLabels?.[o[i-1]] ?? null) : null; })();
+  const preSeason = m => prevSeasonLabel && PHASE.liveSince && metricEra(m)==="live"
+    && m.asOf && m.asOf < PHASE.liveSince;
   const row = m => {
     const src = SOURCES.find(x=>x.id===m.source);
     const val = typeof m.value==="number" ? m.value.toLocaleString("en-US") : esc(String(m.value));
@@ -1461,7 +1505,10 @@ function metricsHTML(s){
         ? ` title="frozen — upstream rDPS outage since ${esc(m.asOf)}"`
         : ` title="frozen — last refreshed ${esc(m.asOf)}"`;
     const asof = m.asOf ? ` <span class="mnote">· <span class="asof"${staleTip}>${esc(m.asOf)}</span></span>` : "";
-    return `<div class="setrow${stale?" stale":""}"><span class="pc">${esc(src?src.name:m.source)}</span><span class="pct"${rdpsTip}>${esc(m.name)}: <b>${val}</b>${m.unit?` ${esc(m.unit)}`:""}${rank}${m.n?` <span class="mnote${m.thin?" thin-n":""}">(n=${Number(m.n).toLocaleString("en-US")}${m.thin?" · thin sample":""})</span>`:""}${asof}</span></div>`;
+    const eraTag = preSeason(m)
+      ? ` <span class="mnote" title="Measured before ${esc(PHASE.liveLabel)} went live (${esc(PHASE.liveSince)}) — a ${esc(prevSeasonLabel)}-era cut">· ${esc(prevSeasonLabel)} era</span>`
+      : "";
+    return `<div class="setrow${stale?" stale":""}"><span class="pc">${esc(src?src.name:m.source)}</span><span class="pct"${rdpsTip}>${esc(m.name)}: <b>${val}</b>${m.unit?` ${esc(m.unit)}`:""}${rank}${m.n?` <span class="mnote${m.thin?" thin-n":""}">(n=${Number(m.n).toLocaleString("en-US")}${m.thin?" · thin sample":""})</span>`:""}${asof}${eraTag}</span></div>`;
   };
   const section = (label, items) => items.length ? `<p class="d-h">${label}</p><div class="setbox">${items.map(row).join("")}</div>` : "";
   const live = m => metricEra(m)==="live", ptr = m => metricEra(m)==="ptr";
@@ -1520,7 +1567,7 @@ function metaNotesHTML(s){
   if(!notes.length) return "";
   const rows = notes.map(n=>
     `<div class="setrow"><span class="pc" data-sent="${esc(n.sentiment||"")}">${esc(n.sentiment||"note")}</span><span class="pct">${esc(n.note)} <span class="mnote">— <a href="${esc(safeHref(n.url))}" target="_blank" rel="noopener">${esc(n.creator)}, ${esc(n.date||"")}</a>${n.patchContext?` · ${esc(n.patchContext)}`:""}</span></span></div>`).join("");
-  return `<div class="srcbreak"><p class="d-h">Meta outlook <span class="mnote">(general PTR-news creators — cross-class opinion, cited; never feeds source tiers or consensus — when two or more creators' newest reads agree they nudge our 12.1 projection ±3 within its tier, disclosed in its basis)</span></p><div class="setbox">${rows}</div></div>`;
+  return `<div class="srcbreak"><p class="d-h">Meta outlook <span class="mnote">(general patch-news creators — cross-class opinion, cited; never feeds source tiers or consensus — when two or more creators' newest reads agree they nudge our 12.1 projection ±3 within its tier, disclosed in its basis)</span></p><div class="setbox">${rows}</div></div>`;
 }
 
 function communityHTML(s){
@@ -1573,6 +1620,15 @@ function tierSetHTML(s){
 function drawerHTML(s){
   const p = s.ptr;
   const showPtr = state.era !== "live";
+  /* The CURRENT-CYCLE content lane (2026-08-19 audit, A1/A2). During a PTR cycle the
+     official-tuning feed and the next season's tier set are next-patch content and follow
+     the era view (showPtr). Between cycles they are LIVE-season facts — the launch notes,
+     the live hotfix rounds, the set bonuses of the season being played — and gating them
+     on a toggle that no longer exists made them permanently invisible while the masthead
+     promised "patch changes" on every row. Deliberately NOT applied to the ptr writeup
+     lane (the decided flip consequence — see the baseline-view branch below) or to
+     ptrDummy (genuinely PTR data, sunset with the cycle). */
+  const showCycle = showPtr || !PHASE.ptr;
   // Hover-only info (outlook basis, movement history) restated as text so touch and
   // keyboard users can reach what mouse users see in tooltips. Additive.
   const signals = [];
@@ -1600,11 +1656,11 @@ function drawerHTML(s){
        <p class="d-summary"><span class="theme">${PHASE.liveLabel} baseline view</span><br>${PHASE.ptr
          ? `Live-season data only — switch Era to ${PHASE.ptr.label} (or Both) for the change read.`
          : `Live-season data.`}</p>${signalHTML}`;
-  const tierset = showPtr ? tierSetHTML(s) : "";
+  const tierset = showCycle ? tierSetHTML(s) : "";
   // Inner content only — the .drawer shell is emitted empty by rowHTML and filled lazily
   // on open, so render() rebuilds ~1.3K visible nodes instead of ~9.3K (85% was drawers).
   return `<div class="drawer-in"><div class="drawer-grid">
-     <div>${left}${showPtr?buildChangesHTML(s):""}${metricsHTML(s)}${showPtr?ptrDummyHTML(s):""}${timelineHTML(s)}</div>
+     <div>${left}${showCycle?buildChangesHTML(s):""}${metricsHTML(s)}${showPtr?ptrDummyHTML(s):""}${timelineHTML(s)}</div>
      <div>${cmpBtnHTML(s)}${gearingLinkHTML(s)}${tierset}${profileHTML(s)}${sourceBreakdownHTML(s)}${takesHTML(s)}${metaNotesHTML(s)}${communityHTML(s)}</div>
    </div></div>`;
 }
@@ -1624,19 +1680,32 @@ function buildEntryHTML(b){
 function buildChangesHTML(s){
   const bc = s.buildChanges || [];
   if(!bc.length) return "";
+  /* Three lanes, newest authority first (2026-08-19 audit, A1). Live hotfix rounds used
+     to fall into the "PTR development notes" bucket — a live-realm event filed under a
+     test realm — and post-launch they are the newest word on current tuning, so they
+     lead. The patch label is the CYCLE's patch: the ptr label during a cycle, the live
+     label between cycles (pre-flip this heading hardcoded "12.1" — same value, now
+     derived so the 12.2 cycle inherits it). */
+  const cyclePatch = PHASE.ptr?.label ?? PHASE.liveLabel;
   const ships = bc.filter(b=>b.kind==="patch-notes");
-  const history = bc.filter(b=>b.kind!=="patch-notes");
+  const hotfixes = bc.filter(b=>b.kind==="hotfix");
+  const history = bc.filter(b=>b.kind!=="patch-notes" && b.kind!=="hotfix");
+  const hotfixBlock = hotfixes.length ? `<div class="d-sec shipsec">
+      <p class="d-h">Live ${esc(cyclePatch)} tuning <span class="shipchip">hotfixes</span></p>
+      ${hotfixes.map(buildEntryHTML).join("")}
+      <p class="mnote">Live-realm hotfix rounds — the newest word on current tuning. Where these differ from the ${ships.length?"launch notes":"builds"} below, these are what is live.</p>
+    </div>` : "";
   const shipBlock = ships.length ? `<div class="d-sec shipsec">
-      <p class="d-h">Shipping in 12.1 <span class="shipchip">official patch notes</span></p>
+      <p class="d-h">${PHASE.ptr?"Shipping":"Shipped"} in ${esc(cyclePatch)} <span class="shipchip">official patch notes</span></p>
       ${ships.map(buildEntryHTML).join("")}
-      <p class="mnote">Blizzard's consolidated launch notes — the authoritative statement of what goes live. Where these differ from a PTR build below, these are what ships.</p>
+      <p class="mnote">Blizzard's consolidated launch notes — the authoritative statement of what ${PHASE.ptr?"goes":"went"} live at launch${hotfixes.length?" (live hotfixes above supersede these where they touch the same values)":""}. Where these differ from a PTR build below, these are what ${PHASE.ptr?"ships":"shipped"}.</p>
     </div>` : "";
   const histBlock = history.length ? `<div class="d-sec">
       <p class="d-h">How it got here — PTR development notes, by build</p>
       ${history.map(buildEntryHTML).join("")}
       <p class="mnote">Verbatim PTR notes in date order. These are the development path${ships.length?", and their figures are intermediate — superseded by the patch notes above":", not a statement of final values"}. The 12.1 outlook tally counts these lines, not the consolidated notes.</p>
     </div>` : "";
-  return shipBlock + histBlock;
+  return hotfixBlock + shipBlock + histBlock;
 }
 
 /* "New" freshness cue — is there fresh info for this spec within the last few days of the
@@ -1663,11 +1732,12 @@ function newInfoFor(s){
   return best;
 }
 function newBadgeHTML(s){
-  /* Era-gated like every other PTR surface (audit 2026-08-14). Both of newInfoFor's inputs
-     are PTR-layer — creator takes and the PTR build feed — so in a 12.0.7-only view the
-     badge was advertising next-patch activity on a page that has deliberately hidden it.
-     Same rule as the projection, the era-tagged metrics and the writeups. */
-  if(state.era === "live") return "";
+  /* Era-gated ONLY while a PTR cycle is running (audit 2026-08-14, amended 2026-08-19
+     audit A3). During a cycle both of newInfoFor's inputs — creator takes and the build
+     feed — are next-patch content, so a live-only view rightly hides the badge. Between
+     cycles the same inputs are LIVE-season content arriving daily (hotfix rounds, fresh
+     takes), and the permanent live-pin was silencing the freshness cue forever. */
+  if(state.era === "live" && PHASE.ptr) return "";
   const ni = newInfoFor(s);
   return ni ? `<span class="newbadge" title="New — ${esc(ni.label)} · ${esc(ni.date)}" aria-label="New info for this spec: ${esc(ni.label)} ${esc(ni.date)}">NEW</span>` : "";
 }
@@ -1947,7 +2017,7 @@ function render(){
   // there is" — which is how a phone tester read the DPS filter and reported specs missing
   // (feedback 2026-08-05). Matches the #toolstatus phrasing below; unfiltered stays plain.
   document.getElementById('count').textContent =
-    `${shown}${shown < SPECS.length ? ` of ${SPECS.length}` : ''} spec${shown!==1?'s':''}${state.ptrOnly?'':` · ${ptrShown} tracked`}`;
+    `${shown}${shown < SPECS.length ? ` of ${SPECS.length}` : ''} spec${shown!==1?'s':''}${state.ptrOnly || !PHASE.ptr ? '' : ` · ${ptrShown} tracked`}`;
   {
     const st = document.getElementById('toolstatus');
     if(st){
@@ -1959,8 +2029,18 @@ function render(){
          Measured on the freeze build — payload histogram {4:79, 3:1} against a toolbar
          reading "consensus of 3 sources (1 updating)", with all 338 tests green. The
          payload is the only honest source for this number. */
-      const counts = SPECS.map(s => (s.consensus?.raid?.perSource ?? s.consensus?.mplus?.perSource ?? []).length).filter(n => n > 0);
-      const verified = counts.length ? Math.max(...counts) : 0;
+      /* Per-BRACKET, because a transition can split them (2026-08-19 audit, C1 landing:
+         Archon's M+ pages verified S2 while its raid pages were still rebuilding, so M+
+         cells honestly averaged 4 sources while raid averaged 3). One number cannot
+         describe both without overstating one bracket — say both when they differ. */
+      const bracketMax = b => { const c = SPECS.map(s => (s.consensus?.[b]?.perSource ?? []).length).filter(n => n > 0);
+        return c.length ? Math.max(...c) : 0; };
+      const nRaid = bracketMax('raid'), nMplus = bracketMax('mplus');
+      const verified = Math.max(nRaid, nMplus);
+      const split = nRaid && nMplus && nRaid !== nMplus;
+      const countPhrase = split
+        ? `consensus of ${nRaid} (raid) · ${nMplus} (M+) sources`
+        : `consensus of ${verified} source${verified!==1?'s':''}`;
       const frozenIds = new Set();
       for(const s of SPECS) for(const b of ['raid','mplus'])
         for(const p of (s.consensus?.[b]?.perSource ?? [])) if(p.lane === 'frozen') frozenIds.add(p.source);
@@ -1972,7 +2052,7 @@ function render(){
       // lag phrasing that would tell a visitor the opposite of what happened.
       const frozenNote = frozenIds.size
         ? ` (${[...frozenIds].map(nameOf).join(', ')} on final ${PHASE.seasonLabels?.[PHASE.liveSeason] ?? PHASE.liveLabel} letters)` : '';
-      st.textContent = `${shown} of ${SPECS.length} specs · consensus of ${verified} source${verified!==1?'s':''}` +
+      st.textContent = `${shown} of ${SPECS.length} specs · ${countPhrase}` +
         frozenNote + ` · snapshot ${META.latestSnapshot ?? "—"}`;
       /* Mirror the two facts that must survive the phone controls fold — how many sources the
          consensus actually averaged, and the snapshot date — into the always-visible note
@@ -1985,7 +2065,9 @@ function render(){
         const when = frozenAt(id);
         return when ? `${nameOf(id)}: final ${PHASE.seasonLabels?.[PHASE.liveSeason] ?? PHASE.liveLabel} letters, ${when}` : `${nameOf(id)}: final letters`;
       }).join(' · ');
-      if(ns) ns.textContent = ` ${verified}-source consensus` +
+      if(ns) ns.textContent = (split
+          ? ` ${nRaid}-source (raid) / ${nMplus}-source (M+) consensus`
+          : ` ${verified}-source consensus`) +
         (dated ? ` — ${dated}` : '') + ` · snapshot ${META.latestSnapshot ?? "—"}.`;
     }
   }
@@ -2161,8 +2243,12 @@ function syncSrcControls(){
    list; no "Tracked:" either — the legend count carries it and doubles as filter
    feedback. The stamp keeps only what nothing else shows: the data freshness dates. */
 if(META.latestSnapshot){
+  // Label follows the newest feed entry's KIND — post-launch that entry is a live-realm
+  // hotfix round-up, and "Latest PTR build: <live date>" was a liveness mislabel
+  // (2026-08-19 audit, B1).
+  const buildLabel = { hotfix: "Latest live hotfixes:", "patch-notes": "Launch notes:" }[META.latestBuildKind] || "Latest PTR build:";
   document.getElementById('stamp-snapshot').innerHTML = `<b>Latest snapshot:</b> ${esc(META.latestSnapshot)}`
-    + (META.latestPtrBuild ? ` <b style="margin-left:14px">Latest PTR build:</b> ${esc(META.latestPtrBuild)}` : "");
+    + (META.latestPtrBuild ? ` <b style="margin-left:14px">${esc(buildLabel)}</b> ${esc(META.latestPtrBuild)}` : "");
 }
 
 /* Data-health banner (H1): the header's "latest snapshot" is the freshest data we have,
@@ -2335,7 +2421,7 @@ document.getElementById('buildfeed').innerHTML = (PTR_BUILDS.builds||[]).map(b=>
    generalCreators; a news lane, never per-spec tier authority) join the build feed. */
 document.getElementById('buildfeed').insertAdjacentHTML('beforeend',
   (COMMUNITY.generalCreators||[]).map(gc=>
-    `<div class="srcitem"><span><a href="${esc(safeHref(gc.url))}" target="_blank" rel="noopener">${esc(gc.name)}</a> <span class="mnote">general PTR coverage${gc.latest?` — latest: ${esc(gc.latest)}`:""}</span></span><span class="when">${esc(gc.verifiedDate||"")}</span></div>`
+    `<div class="srcitem"><span><a href="${esc(safeHref(gc.url))}" target="_blank" rel="noopener">${esc(gc.name)}</a> <span class="mnote">general patch coverage${gc.latest?` — latest: ${esc(gc.latest)}`:""}</span></span><span class="when">${esc(gc.verifiedDate||"")}</span></div>`
   ).join(""));
 
 /* reference-kind sources (e.g. Liquid Armory) join the live-links row */
@@ -2379,6 +2465,10 @@ document.getElementById('livelinks').insertAdjacentHTML('beforeend',
   const fightSeasonOk = enc?.season === PHASE.liveSeason;
   if((!raid.length && !mplus.length) || !fightSeasonOk){
     document.getElementById('fightctl').style.display='none';
+    // The controls-fold summary enumerates what's inside — don't advertise a control
+    // this gate just hid (2026-08-19 audit, B5; the Era entry is pruned at boot).
+    const sum = document.querySelector('.ctlsum-h');
+    if (sum) sum.textContent = sum.textContent.replace(/\s*Fight ·/, '');
     if(state.fight){ state.fight = ""; }
     window.FIGHT_VIEW_AVAILABLE = false;
     return;
@@ -2539,10 +2629,13 @@ function openCompare(){
     ["Consensus · Raid", s=>tierCell(s,"raid")],
     ["Consensus · M+", s=>tierCell(s,"mplus")],
     // era-gated like everywhere else — except the FROZEN record, which is exempt (it is
-    // what the report card grades, and post-flip there is no other era to switch to)
+    // what the report card grades, and post-flip there is no other era to switch to).
+    // When the frozen record IS the render source, say so in the row label — every grid
+    // surface names it, and an overlay screenshot must not read the frozen letters as a
+    // live opinion (2026-08-19 audit, B6).
     ...(projAvailable() ? [
-      ["Ours: 12.1 · Raid", s=>projCell(s,"raid")],
-      ["Ours: 12.1 · M+", s=>projCell(s,"mplus")]
+      [`Ours: 12.1 · Raid${FROZEN_FC?` <span class="mnote">frozen ${esc(FROZEN_FC.date)}</span>`:""}`, s=>projCell(s,"raid")],
+      [`Ours: 12.1 · M+${FROZEN_FC?` <span class="mnote">frozen ${esc(FROZEN_FC.date)}</span>`:""}`, s=>projCell(s,"mplus")]
     ] : []),
     ["Live raid median", s=>cmpLiveMedian(s,"raid")],
     ["Live M+ median", s=>cmpLiveMedian(s,"mplus")],
@@ -2625,8 +2718,13 @@ function renderChanges(){
      next-patch activity it had otherwise hidden ("N Dummy Dome shifts · M specs with fresh
      info · latest PTR build …"). Gate them on the same rule the rest of the page uses. */
   const ptrOk = state.era !== "live";
+  /* Split gate (2026-08-19 audit, A3): Dummy Dome and the latest-PTR-build mention are
+     genuinely PTR content and stay behind the strict era gate (dormant between cycles).
+     The fresh-info lane's inputs become LIVE-season content between cycles — hotfix
+     rounds, new takes — so it follows the same rule as the NEW badge it counts. */
+  const cycleOk = state.era !== "live" || !PHASE.ptr;
   const dummyMoves = ptrOk ? SPECS.filter(s=>s.ptrDummy?.rankDelta) : [];
-  const freshSpecs = ptrOk ? SPECS.filter(s=>newInfoFor(s)) : [];
+  const freshSpecs = cycleOk ? SPECS.filter(s=>newInfoFor(s)) : [];
   const fresh = freshSpecs.length;
   /* Nothing to narrate has TWO meanings and they must not look the same (2026-08-15).
      Either nothing moved — honest stability, and hiding the strip is correct — or the
@@ -2658,7 +2756,7 @@ function renderChanges(){
       ? ` <span class="mnote">(${x.m.scoreDelta>0?"+":""}${x.m.scoreDelta} pts)</span>` : "";
     return `<button type="button" class="chjump" data-cls="${esc(x.s.class)}" data-spec="${esc(x.s.spec)}"><b>${esc(x.s.spec)} ${esc(x.s.class)}</b> <span class="mnote">${esc(label)}</span> ${x.b==="raid"?"Raid":"M+"} ${esc(x.m.was)} → ${esc(tierNow(x.s,x.b))} <span class="mv" data-d="${x.m.delta>0?'up':'down'}" title="${esc(label)} ${x.b==="raid"?"raid":"M+"} tier ${x.m.delta>0?'rose':'fell'} since ${esc(fmtDate(x.m.since))}${x.m.scoreDelta!=null?`, score ${x.m.scoreDelta>0?"+":""}${x.m.scoreDelta}`:""}">${x.m.delta>0?'▲':'▼'}</span>${sd} <span class="mnote">since ${esc(fmtDate(x.m.since))}</span></button>`;
   };
-  host.innerHTML = `<details class="changes"><summary><b>What changed</b> <span class="mnote">${esc(label)}${META.movementSince?` · since ${esc(fmtDate(META.movementSince))}`:""}</span> — <span class="mv" data-d="up">▲${ups}</span> <span class="mv" data-d="down">▼${downs}</span> tier moves${ptrOk?` · ${dummyMoves.length} Dummy Dome shifts · ${fresh} specs with fresh info`:""}${ptrOk&&META.latestPtrBuild?` · latest PTR build ${esc(fmtDate(META.latestPtrBuild))}`:""}</summary>
+  host.innerHTML = `<details class="changes"><summary><b>What changed</b> <span class="mnote">${esc(label)}${META.movementSince?` · since ${esc(fmtDate(META.movementSince))}`:""}</span> — <span class="mv" data-d="up">▲${ups}</span> <span class="mv" data-d="down">▼${downs}</span> tier moves${ptrOk?` · ${dummyMoves.length} Dummy Dome shifts`:""}${cycleOk?` · ${fresh} specs with fresh info`:""}${ptrOk&&META.latestPtrBuild?` · latest PTR build ${esc(fmtDate(META.latestPtrBuild))}`:""}</summary>
     <div class="chlist">${moves.map(line).join("") || `<span class='mnote'>No ${esc(label)} tier moves since the baseline.</span>`}
     ${dummyMoves.map(s=>`<button type="button" class="chjump" data-cls="${esc(s.class)}" data-spec="${esc(s.spec)}"><b>${esc(s.spec)} ${esc(s.class)}</b> Dummy Dome rank ${s.ptrDummy.rankDelta>0?'climbed':'fell'} ${Math.abs(s.ptrDummy.rankDelta)} <span class="mnote">(now #${s.ptrDummy.rank}/${s.ptrDummy.of})</span></button>`).join("")}</div>
     ${freshSpecs.length?`<details class="chfresh"><summary>${freshSpecs.length} specs with fresh info</summary><div class="chlist">${freshSpecs.map(s=>`<button type="button" class="chjump" data-cls="${esc(s.class)}" data-spec="${esc(s.spec)}"><b>${esc(s.spec)} ${esc(s.class)}</b> <span class="mnote">new take or tuning in the last ${NEW_WINDOW_DAYS} days</span></button>`).join("")}</div></details>`:""}
@@ -3170,7 +3268,7 @@ function openSpecFromOverlay(cls, spec){
   const consCell = s => { const c = s.consensus && s.consensus[A.bracket];
     return c ? { tier:c.tier, score:c.score, div:c.diverges, tip:"Consensus "+c.tier+" ("+c.score+"/100)" } : { tier:null, score:null, tip:"No ratings yet" }; };
   const projCell = s => { const p = s.projection && s.projection[A.bracket];
-    return p ? { tier:p.tier, score:p.score, conf:p.confidence, tip:"Our 12.1 forecast: "+p.tier+" ("+p.score+"/100, confidence "+p.confidence+") — "+p.basis }
+    return p ? { tier:p.tier, score:p.score, conf:p.confidence, tip:"Our 12.1 forecast"+(FROZEN_FC?" (FROZEN pre-launch record, declared "+FROZEN_FC.date+")":"")+": "+p.tier+" ("+p.score+"/100, confidence "+p.confidence+") — "+p.basis }
              : { tier:null, score:null, tip:"No projection — nothing to project from" }; };
 
   function cellFor(s, key){
@@ -3248,7 +3346,7 @@ function openSpecFromOverlay(cls, spec){
       + '<th class="nm" data-k="consensus">Spec</th>'
       + tcs.map(c=>'<th data-k="'+esc(c.id)+'" title="'+esc(c.name+(isPtrSource(c.id)?" — a 12.1 PTR list, excluded from the live consensus":""))+'">'+esc(c.shortName||c.name)+mk(c.id)+'</th>').join("")
       + '<th data-k="consensus" title="Mean of the live-era tier lists, on a shared 0–100 axis">Consensus'+mk("consensus")+'</th>'
-      + (proj ? '<th class="all-ours" data-k="projection" title="Our own 12.1 forecast — a projection, never a source">Ours: 12.1 ✦'+mk("projection")+'</th>' : '')
+      + (proj ? '<th class="all-ours" data-k="projection" title="Our own 12.1 forecast — a projection, never a source'+(FROZEN_FC?' — FROZEN pre-launch record, declared '+esc(FROZEN_FC.date):'')+'">Ours: 12.1 ✦'+(FROZEN_FC?'<br><span class="mnote">frozen '+esc(FROZEN_FC.date)+'</span>':'')+mk("projection")+'</th>' : '')
       + mcs.map(c=>'<th data-k="m:'+esc(c.key)+'" title="'+esc(c.tip)+'">'+esc(c.label)+mk("m:"+c.key)+'</th>').join("")
       + '</tr><tr class="filt"><th class="nm"><input class="all-fs" id="all-q" type="search" placeholder="filter specs…" value="'+esc(A.q)+'" aria-label="Filter specs by name"></th>'
       + tcs.map(c=>'<th>'+tierSel(c.id)+'</th>').join("")

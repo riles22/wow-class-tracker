@@ -1113,10 +1113,18 @@ ui("motion defaults on, marks real entrances, and persists the site reduction co
    So: assert the visible counts against what the payload's cells actually averaged. */
 ui("every visible consensus count equals the number of sources the cells actually averaged", async page => {
   const data = payload();
-  const counts = data.specs
-    .flatMap(s => ["raid", "mplus"].map(b => (s.consensus?.[b]?.perSource ?? []).length))
-    .filter(n => n > 0);
-  const averaged = Math.max(...counts);
+  /* PER BRACKET (2026-08-19, C1 landing): a transition can split the brackets — Archon's
+     M+ pages verified S2 while its raid pages were still rebuilding, so M+ cells honestly
+     averaged 4 sources against raid's 3. When they differ the page must say BOTH numbers;
+     a single figure would overstate one bracket, which is the exact contradiction this
+     invariant exists to catch. */
+  const bracketMax = b => {
+    const counts = data.specs.map(s => (s.consensus?.[b]?.perSource ?? []).length).filter(n => n > 0);
+    return counts.length ? Math.max(...counts) : 0;
+  };
+  const nRaid = bracketMax("raid"), nMplus = bracketMax("mplus");
+  const averaged = Math.max(nRaid, nMplus);
+  const split = nRaid > 0 && nMplus > 0 && nRaid !== nMplus;
 
   const shown = await page.evaluate(() => ({
     toolstatus: document.getElementById("toolstatus")?.textContent ?? "",
@@ -1125,10 +1133,17 @@ ui("every visible consensus count equals the number of sources the cells actuall
   }));
 
   const words = ["No", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"];
-  assert.match(shown.toolstatus, new RegExp(`consensus of ${averaged} sources?\\b`),
-    `#toolstatus must state the ${averaged} sources the cells averaged, got "${shown.toolstatus}"`);
-  assert.match(shown.notestamp, new RegExp(`\\b${averaged}-source consensus`),
-    `#notestamp must agree with #toolstatus, got "${shown.notestamp}"`);
+  if (split) {
+    assert.match(shown.toolstatus, new RegExp(`consensus of ${nRaid} \\(raid\\) · ${nMplus} \\(M\\+\\) sources`),
+      `#toolstatus must state both bracket counts (${nRaid} raid / ${nMplus} M+), got "${shown.toolstatus}"`);
+    assert.match(shown.notestamp, new RegExp(`\\b${nRaid}-source \\(raid\\) / ${nMplus}-source \\(M\\+\\) consensus`),
+      `#notestamp must agree with #toolstatus, got "${shown.notestamp}"`);
+  } else {
+    assert.match(shown.toolstatus, new RegExp(`consensus of ${averaged} sources?\\b`),
+      `#toolstatus must state the ${averaged} sources the cells averaged, got "${shown.toolstatus}"`);
+    assert.match(shown.notestamp, new RegExp(`\\b${averaged}-source consensus`),
+      `#notestamp must agree with #toolstatus, got "${shown.notestamp}"`);
+  }
   assert.equal(shown.tlcount, words[averaged],
     `the "N tier lists feed a computed consensus" blurb must agree too, got "${shown.tlcount}"`);
 
@@ -1317,6 +1332,48 @@ test("the FROZEN forecast column renders in the post-flip live view, labelled as
       assert.deepEqual(errors, [], `page errors: ${errors.join(" | ")}`);
     } finally { await page.close(); }
   } finally { await rm(dir, { recursive: true, force: true }); }
+});
+
+/* THE INVARIANT WHOSE ABSENCE LET THE FLIP HIDE LIVE CONTENT (2026-08-19 audit, A1/A2).
+   The drawer's tuning lane and tier-set box were gated on the era VIEW (state.era !==
+   "live"), which the flip pinned permanently false — so the launch notes, the live
+   Aug-18 hotfix rounds and the S2 set bonuses rendered NOWHERE while the masthead
+   promised "patch changes" on every row, and invariants 324/325 stayed green because
+   hiding PTR surfaces in live view is exactly what they pin. This is the missing third
+   assertion: between cycles, CURRENT-cycle content must be reachable in the live view. */
+ui("between cycles, a post-launch hotfix and the tier set are reachable in the live drawer", async page => {
+  const data = payload();
+  // Only meaningful between cycles — during a PTR cycle the live view hides the lane by
+  // design and the era toggle offers the way in (the mirror of the guard two tests down).
+  if (data.meta.phases.ptr) return;
+  const liveSince = data.meta.phases.liveSince ?? "";
+  const target = data.specs.find(s =>
+    (s.buildChanges ?? []).some(b => b.kind === "hotfix" && (!liveSince || b.date >= liveSince)) &&
+    s.tierSet && s.ptr);
+  assert.ok(target, "fixture must hold a spec with a post-launch hotfix entry, a tierSet and a writeup — if none exists the invariant is vacuous");
+
+  const seen = await page.evaluate(([cls, spec]) => {
+    const row = [...document.querySelectorAll(".row.clickable")].find(r =>
+      r.querySelector(".spec-txt")?.textContent.trim() === spec &&
+      r.querySelector(".cls")?.textContent.trim() === cls);
+    if (!row) return null;
+    row.click();
+    const drawer = row.querySelector(".drawer");
+    const txt = drawer?.textContent ?? "";
+    return {
+      hotfixBlock: /Live .* tuning/.test(txt) && txt.includes("hotfix"),
+      shippedBlock: /Shipped in/.test(txt) || /Shipping in/.test(txt),
+      tierSetBox: /tier set/i.test(txt),
+      // A4 guard: the writeup lane must NOT have resurrected with the cycle lane — the
+      // decided flip consequence is the baseline placeholder, not the PTR-era read.
+      baselinePlaceholder: /baseline view/.test(txt),
+    };
+  }, [target.class, target.spec]);
+  assert.ok(seen, "target row not found in the grid");
+  assert.ok(seen.hotfixBlock, "the live hotfix block must render in the between-cycles live drawer");
+  assert.ok(seen.shippedBlock, "the launch-notes block must render in the between-cycles live drawer");
+  assert.ok(seen.tierSetBox, "the tier-set box must render in the between-cycles live drawer");
+  assert.ok(seen.baselinePlaceholder, "the ptr writeup lane must stay retired (A4) — cycle content only");
 });
 
 /* Era-gating of the PTR-derived summary surfaces (audit 2026-08-14). The projection lane was

@@ -199,7 +199,8 @@
         "label": "Per-boss tiers (9 bosses, throughput)",
         "url": "https://www.archon.gg/wow/tier-list/dps-rankings/raid/mythic/imperator",
         "snapshot": "2026-08-18",
-        "seasonVerified": "s1"
+        "seasonVerified": "s1",
+        "ancillary": true
       },
       {
         "bracket": "mplus",
@@ -207,7 +208,8 @@
         "label": "Per-dungeon tiers (8 dungeons, score)",
         "url": "https://www.archon.gg/wow/tier-list/dps-rankings/mythic-plus/10/windrunner-spire/this-week",
         "snapshot": "2026-08-18",
-        "seasonVerified": "s1"
+        "seasonVerified": "s1",
+        "ancillary": true
       },
       {
         "bracket": "raid",
@@ -215,7 +217,8 @@
         "label": "Survivability tiers (Mythic raid)",
         "url": "https://www.archon.gg/wow/tier-list/dps-rankings/raid/mythic/all-bosses",
         "snapshot": "2026-08-18",
-        "seasonVerified": "s1"
+        "seasonVerified": "s1",
+        "ancillary": true
       }
     ],
     "notes": "Fetch recipe: parse the __NEXT_DATA__ JSON script tag from raw HTML (WebFetch markdown drops it). Raid pages carry three tierLists (popularity/throughput/survivability) — use metric \"throughput\"; M+ pages use metric \"score\". Mirrored at u.gg/wow.",
@@ -276,7 +279,7 @@
     "name": "Warcraft Logs",
     "kind": "metrics",
     "author": "Warcraft Logs aggregate statistics",
-    "methodology": "Per-spec aggregate combat-log statistics: median (50th percentile) rDPS/HPS and parse counts. Live Season 1 raid = zone 46 (Mythic = difficulty 5, size 20, partition 3 = patch 12.0.7); M+ Season 1 = zone 47 (difficulty 10, size 5, partition 1); zone 54 is the 12.1 PTR raid and zone 56 is the 12.1 PTR M+ (\"Mythic+ Season 2 (PTR)\", same recipe as zone 47) — both PTR-quality, era-tagged \"ptr\", kept out of live baselines. Sanctioned long-term access is the v2 GraphQL API (free OAuth client), which DOES serve the PTR zones — the nightly reads zones 52/54/56 through it every run, so an earlier note here claiming \"PTR zones are HTML-only\" was wrong and is corrected (2026-08-08); it would have misdirected the Season-2 zone-discovery run into a transport we do not need. What the API does not currently serve is the rDPS metric family, which has returned a bare \"Internal server error\" since 2026-07-12 while metric dps on the same encounter returns normally. HTML statistics tables are the fallback for exactly that gap, fetched fresh every run (policy 2026-07-08: no at-most-daily cap) — but datacenter IPs are Cloudflare-blocked on the HTML endpoint, and as of 2026-08-08 the residential path is challenged too, so the rDPS series are currently unreachable by either transport.",
+    "methodology": "Per-spec aggregate combat-log statistics: median (50th percentile) rDPS/HPS and parse counts. LIVE Season 2 raid = zone 53 \"The Venomous Abyss\" (partition 1 = 12.1, Mythic difficulty 5, size 20, 9 encounters); live S2 M+ = zone 55 (partition 1 = Season 2, difficulty 10, size 5) — both enumerated 2026-08-14, frozen until content opens. Retired-cycle zones, kept as history: S1 raid = zone 46 (Mythic difficulty 5, size 20, partition 3 = 12.0.7 — the zone's DEFAULT partition has since moved to 4 = 12.1, so recipes must pin 3); S1 M+ = zone 47 (difficulty 10, size 5, partition 1); zone 54 was the 12.1 PTR raid and zone 56 the 12.1 PTR M+ — PTR-quality, era-tagged \"ptr\", kept out of live baselines. Sanctioned long-term access is the v2 GraphQL API (free OAuth client), which DOES serve the PTR zones — the nightly reads zones 52/54/56 through it every run, so an earlier note here claiming \"PTR zones are HTML-only\" was wrong and is corrected (2026-08-08); it would have misdirected the Season-2 zone-discovery run into a transport we do not need. What the API does not currently serve is the rDPS metric family, which has returned a bare \"Internal server error\" since 2026-07-12 while metric dps on the same encounter returns normally. HTML statistics tables are the fallback for exactly that gap, fetched fresh every run (policy 2026-07-08: no at-most-daily cap) — but datacenter IPs are Cloudflare-blocked on the HTML endpoint, and as of 2026-08-08 the residential path is challenged too, so the rDPS series are currently unreachable by either transport.",
     "pages": [
       {
         "bracket": "raid",

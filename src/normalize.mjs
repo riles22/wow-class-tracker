@@ -61,6 +61,13 @@ export const PHASES = {
      the shape `{ marker: "12.2 PTR", label: "12.2" }` — `marker` is a frozen DATA KEY for
      the whole cycle, `label` is what the page calls the era and drops " PTR" at launch. */
   ptr: null,
+  /* The date liveSeason went live (ISO). Drawer metric rows whose asOf predates it are
+     measurements of the PREVIOUS season and get a visible per-row era tag, because the
+     box heading stamps liveLabel over every era:"live" row and the transition window
+     mixes S1 cuts (frozen WCL zones, held-back ceilings) with genuine S2 rows under one
+     "(12.1)" banner (2026-08-19 audit, B2). Update alongside liveSeason at every flip
+     (the era-vocabulary pin test checks the shape). */
+  liveSince: "2026-08-18",
   /* The tracked patch's display name — the masthead chip and footer read it via the
      build-time era tokens (build.mjs). It outlives `ptr` (the branding stays after the
      ptr lane sunsets), which is why it does not live inside it. */
@@ -101,10 +108,13 @@ export const ptrTierSources = sources =>
    · a bracket split ACROSS seasons (some pages s1, some s2 — an outlet mid-rebuild)
      returns null, so the source goes dark for that bracket: out of the consensus by
      sourceSeasonOk and out of the forecast by this. Never mix two seasons in one term.
-   · an unknown season id throws rather than sorting last. */
+   · an unknown season id throws rather than sorting last.
+   `ancillary: true` pages are excluded from the page set here exactly as in
+   sourceSeasonOk below (2026-08-19 audit, C1) — the two must read the SAME set or the
+   structural consensus/forecast mutual exclusion breaks. */
 export function aheadSeasonFor(source, bracket = null, liveSeason = PHASES.liveSeason, order = PHASES.seasonOrder) {
   if (source?.kind !== "tier-list" || !isLiveEra(source)) return null;
-  const pages = (source.pages ?? []).filter(pg => bracket == null || pg.bracket === bracket);
+  const pages = (source.pages ?? []).filter(pg => !pg.ancillary && (bracket == null || pg.bracket === bracket));
   if (!pages.length) return null;
   const labelled = pages.filter(pg => pg.seasonVerified != null);
   if (!labelled.length) return null;
@@ -139,9 +149,20 @@ export const nextPatchTierSources = (sources, bracket = null, liveSeason = PHASE
    that shrinks the consensus to the outlets that have flipped ("consensus of 2") and
    it recovers by itself as pages update — and it equally keeps an outlet that flips
    EARLY out of the pre-launch consensus, in both cases because averaging two seasons
-   into one number is the lie this column must never tell (DECISION 1). */
+   into one number is the lie this column must never tell (DECISION 1).
+
+   Pages marked `ancillary: true` (per-boss/per-dungeon encounter cuts, survivability —
+   inputs to encounter-tiers.json and drawer metrics, never to the letter consensus) are
+   OUTSIDE this gate and outside aheadSeasonFor's page set (2026-08-19 audit, C1). The
+   season test exists so the consensus never averages two seasons; a page that feeds no
+   letters into the mean cannot cause that lie, but at the S2 transition Archon's retired
+   S1 per-dungeon page — un-reverifiable upstream while its S2 raid parses were zero —
+   was keeping the outlet's fully S2-verified M+ tier lists dark for weeks. The flag is
+   registry structure (Gate-0 protected, human-reviewed); era-verify keeps writing
+   seasonVerified on ancillary pages for the record, it just no longer gates letters. */
 export const sourceSeasonOk = (source, bracket, liveSeason = PHASES.liveSeason) =>
   !(source.pages ?? []).some(pg =>
+    !pg.ancillary &&
     (bracket == null || pg.bracket === bracket) &&
     pg.seasonVerified != null && pg.seasonVerified !== liveSeason);
 

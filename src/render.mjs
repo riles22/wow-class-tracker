@@ -1897,6 +1897,11 @@ export function buildPayload({ specs, sources, scales, community, ptrBuilds, cre
   const frozenActive = frozenForecastActive(frozenForecast);
   if (frozenActive) applyFrozenForecast(decorated, frozenForecast);
   const latestBuild = ptrBuilds?.builds?.[0]?.date ?? null;
+  /* The stamp's label must follow the entry's KIND: post-launch the newest feed entry is
+     a live-realm hotfix round-up, and "Latest PTR build: <live hotfix date>" was exactly
+     the liveness mislabel the flip runbook's residue sweep exists to catch (2026-08-19
+     audit, B1). Default "build" keeps the old label for undated/legacy entries. */
+  const latestBuildKind = ptrBuilds?.builds?.[0]?.kind ?? "build";
   // notes-feed pages track build posts, not page snapshots — stamp them from the feed
   const stampedSources = sources.map(source => source.kind !== "notes-feed" ? source : {
     ...source,
@@ -1917,6 +1922,7 @@ export function buildPayload({ specs, sources, scales, community, ptrBuilds, cre
       trackedCount: specs.filter(spec => spec.ptr).length,
       latestSnapshot: latestSnapshot(sources),
       latestPtrBuild: latestBuild,
+      latestBuildKind,
       movementSince: baseline?.date ?? null,
       /* WHICH LANES THE BASELINE CAN NARRATE (2026-08-15). "No arrows" has two completely
          different meanings and the client could not tell them apart: either nothing moved —

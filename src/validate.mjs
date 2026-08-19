@@ -198,8 +198,16 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
       // era-verify observation, stored (S2 transition, DECISION 1). A page whose season
       // does not match PHASES.liveSeason drops its source from that bracket's consensus,
       // so a typo here must fail red rather than silently keep a stale list averaged in.
-      if (page.seasonVerified != null && !["s1", "s2"].includes(page.seasonVerified)) {
-        errors.push(`sources.json: source "${source.id}" page seasonVerified must be "s1" or "s2", got "${page.seasonVerified}"`);
+      // Valid ids come from PHASES.seasonOrder — "the 12.2 cycle appends s3 THERE and
+      // nowhere else" was false while this line hardcoded the set (2026-08-19 audit).
+      if (page.seasonVerified != null && !PHASES.seasonOrder.includes(page.seasonVerified)) {
+        errors.push(`sources.json: source "${source.id}" page seasonVerified must be one of ${PHASES.seasonOrder.join("/")}, got "${page.seasonVerified}"`);
+      }
+      // `ancillary: true` marks a page that feeds encounter-tiers/metrics rather than
+      // the letter consensus, excluding it from the season gate (2026-08-19 audit, C1).
+      // Registry structure: Gate 0 keeps it human-owned. Anything but a boolean is a typo.
+      if (page.ancillary !== undefined && typeof page.ancillary !== "boolean") {
+        errors.push(`sources.json: source "${source.id}" page ancillary must be boolean when present, got "${page.ancillary}"`);
       }
     }
     // `era` marks a source whose ratings describe a patch we are not running. Only "ptr"

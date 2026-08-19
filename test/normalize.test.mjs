@@ -172,6 +172,11 @@ test("PHASES is the single era vocabulary and carries the current cycle", () => 
      null) and the frozen forecast (B6) carries the pre-launch read through the window. */
   assert.equal(PHASES.ptr, null);
   assert.equal(PHASES.patchName, "Curse of Ula'tek");
+  /* liveSince is the flip date (2026-08-19 audit, B2): drawer metric rows older than it
+     get a visible previous-season tag. It must move WITH liveSeason at every flip, so it
+     is pinned here beside it — the flip edit updates both or fails this test. */
+  assert.equal(PHASES.liveSince, "2026-08-18");
+  assert.match(PHASES.liveSince, /^\d{4}-\d{2}-\d{2}$/);
   /* DECISION 3 as amended 2026-08-12: the sunset happens AT the flip, so ptrSunset is
      dead weight — the FIELD is deleted, not set false. Assert absence, so resurrecting
      it is a deliberate edit that fails here first. */
@@ -214,6 +219,48 @@ test("aheadSeasonFor refuses a half-flipped bracket rather than mixing two seaso
   ]);
   assert.equal(aheadSeasonFor(src, "raid", "s1"), null, "half-flipped is not an ahead opinion");
   assert.equal(sourceSeasonOk(src, "raid", "s1"), false, "and it is out of the consensus too — it goes dark, never mixed");
+});
+
+/* ---- ancillary pages and the season gate (2026-08-19 audit, C1) --------------------
+   Pages marked `ancillary: true` feed encounter-tiers/metrics, never the letter
+   consensus — so they must not gate it. At the S2 transition Archon's retired S1
+   per-dungeon page (un-reverifiable upstream) kept the outlet's fully S2-verified M+
+   tier lists dark for weeks. These pin the exclusion in BOTH predicates, because
+   sourceSeasonOk and aheadSeasonFor must read the same page set or the structural
+   consensus/forecast mutual exclusion breaks. */
+
+test("an ancillary page's season does not darken the bracket's consensus", () => {
+  // The Archon shape at the S2 transition: main M+ pages verified s2, the retired
+  // per-dungeon encounter page still s1.
+  const src = mk("a", [
+    { bracket: "mplus", role: "DPS", seasonVerified: "s2" },
+    { bracket: "mplus", role: "Healer", seasonVerified: "s2" },
+    { bracket: "mplus", role: "All", seasonVerified: "s1", ancillary: true },
+  ]);
+  assert.equal(sourceSeasonOk(src, "mplus", "s2"), true,
+    "a page that feeds no letters must not keep verified letters out of the consensus");
+  // ...while a MAIN page at the wrong season still darkens the bracket, exactly as before.
+  const lagging = mk("a", [
+    { bracket: "mplus", role: "DPS", seasonVerified: "s1" },
+    { bracket: "mplus", role: "All", seasonVerified: "s1", ancillary: true },
+  ]);
+  assert.equal(sourceSeasonOk(lagging, "mplus", "s2"), false);
+});
+
+test("aheadSeasonFor ignores ancillary pages the same way — same page set, both predicates", () => {
+  // Main pages ahead, ancillary page still on the live season: the outlet IS ahead.
+  const src = mk("w", [
+    { bracket: "mplus", seasonVerified: "s2" },
+    { bracket: "mplus", role: "All", seasonVerified: "s1", ancillary: true },
+  ]);
+  assert.equal(aheadSeasonFor(src, "mplus", "s1"), "s2",
+    "an ancillary page must not read as a mid-rebuild split");
+  // And an UNLABELLED ancillary page does not trip the half-labelled throw.
+  const halfLabelled = mk("w", [
+    { bracket: "mplus", seasonVerified: "s2" },
+    { bracket: "mplus", role: "All", ancillary: true },
+  ]);
+  assert.equal(aheadSeasonFor(halfLabelled, "mplus", "s1"), "s2");
 });
 
 test("a partially-labelled bracket is an error, not a silent not-ahead", () => {

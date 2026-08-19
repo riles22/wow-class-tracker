@@ -54,9 +54,14 @@ const gitShow = (sha, file, cwd) => {
    field and lifts letters from a tree that never made the claim. Measured at liveSeason
    "s2": method/archon resolve to e65332a, whose sources.json holds zero seasonVerified
    entries. Requiring the explicit label makes the walk throw "Refusing to guess" instead —
-   and the archive is append-only, so a wrong record there is permanent. */
+   and the archive is append-only, so a wrong record there is permanent.
+   Ancillary pages (per-boss/per-dungeon/survivability — never consensus inputs) are
+   outside the walk's page set for the same reason they are outside sourceSeasonOk and
+   aheadSeasonFor (2026-08-19 audit, C1): the walk answers "when did this outlet's
+   LETTERS last describe the live season", and a page that feeds no letters must not
+   move that answer. */
 const explicitlyVerifiedAt = (source, bracket, liveSeason) => {
-  const pages = (source.pages ?? []).filter(p => p.bracket === bracket);
+  const pages = (source.pages ?? []).filter(p => !p.ancillary && p.bracket === bracket);
   return pages.length > 0 && pages.every(p => p.seasonVerified === liveSeason);
 };
 
