@@ -137,10 +137,18 @@ for (const cls of community.classes ?? []) {
 for (const c of creators)
   if (c.transcribable !== false && !takes.some(t => t.creator === c.name))
     add("INFO", "yield", `${c.class}/${c.name}: transcribable, zero takes ever`);
-for (const s of specs)
-  for (const b of ["raid", "mplus"])
-    if (!expertRead(s, takes, b))
-      add("INFO", "coverage", `${s.spec} ${s.class} ${b}: no expert panel (expertRead null)`);
+/* Between cycles (PHASES.ptr null) expertRead returns null for EVERY spec by
+   construction — the take lane is dormant, not under-covered — so the per-spec sweep
+   would emit 80 vacuous lines and bury the real zero-yield findings above (2026-08-19
+   audit, E6). One honest line instead; the sweep re-arms with the next cycle. */
+if (PHASES.ptr == null) {
+  add("INFO", "coverage", `expert lane dormant between cycles (PHASES.ptr null) — per-spec coverage sweep suppressed; it re-arms when the next PTR cycle opens`);
+} else {
+  for (const s of specs)
+    for (const b of ["raid", "mplus"])
+      if (!expertRead(s, takes, b))
+        add("INFO", "coverage", `${s.spec} ${s.class} ${b}: no expert panel (expertRead null)`);
+}
 
 const n = sev => findings.filter(f => f.sev === sev).length;
 console.log(`ROSTER  ${creators.length} class entries · ${new Set(creators.map(c => c.name)).size} distinct · ${generalNames.size} generalCreators`);

@@ -10,7 +10,7 @@ Only these tier-list sources feed the consensus (**four** today — the table be
 
 | Source | Scale | Lens | Cadence | Notes |
 |---|---|---|---|---|
-| **Icy Veins** | S/A+/A/B/C | Broad meta, general population | editorial (weeks) | per role × raid/M+ pages |
+| **Icy Veins** | S+/S/A+/A/B+/B/C (7-band since 2026-08-14, `521ceaf` — was S/A+/A/B/C) | Broad meta, general population | editorial (weeks) | per role × raid/M+ pages |
 | **Method** | S/A/B/C | Race-to-world-first output (raid w/ Method raiders; M+ by Tactyks) | editorial | may omit specs (e.g. Vengeance DH) — omitted, never invented |
 | **Wowhead** | S/A+/A/B/C/D/F | Class-writer rankings | editorial | per role pages; also the PTR datamining mirror |
 | **Archon** | S/A/B/C | Statistical (Warcraft Logs parses / Blizzard leaderboards, 14-day window) | **daily** | raid tiers = *throughput* list, M+ = *score* list; mirrored at u.gg |
@@ -32,9 +32,12 @@ because the reasoning re-applies to whatever source occupies the next-patch slot
 
 Three things about it were load-bearing:
 
-- **Its own scale.** Icy Veins' PTR lists publish a sixth band (**B+**) their live lists do
-  not, so `icyveins-ptr` is a separate entry in `scales.json`. Reusing the 5-band
-  `icyveins` scale would have silently squashed B+ into a neighbour. Shared tiers keep the
+- **Its own scale.** Icy Veins' PTR lists published a band (**B+**) their live lists THEN
+  did not, so `icyveins-ptr` is a separate entry in `scales.json`. Reusing the then-5-band
+  `icyveins` scale would have silently squashed B+ into a neighbour. (The live scale has
+  since widened to 7 bands itself — S+ and B+ arrived with the S2 rebuild, 2026-08-14 —
+  but the lesson stands: the next cycle's PTR list gets its own scale first, merged never.)
+  Shared tiers keep the
   live anchors exactly, so the same author's live and PTR reads are comparable on the axis.
 - **It disagrees with its own live list — hard.** At adoption (2026-07-31) 33 of 40 specs
   sat in a different band than Icy Veins' live 12.0.7 M+ list, including multi-band swings
@@ -69,45 +72,32 @@ The tracker also renders its OWN computed 12.1 forecast (projection lane). It is
 | **Murlok.io** | Avg M+ rating of each spec's top-50 players | "top-50 ceiling" — NOT popularity, NOT a tier |
 | **Bloodmallet (SimC, tier MID1)** | Best-build DPS at 1/2/3/5/8/15 targets | powers ST/Cleave/AoE fight profiles (DPS only; Augmentation unsimmable) |
 | **SimulationCraft nightly** | Best hero-variant Patchwerk DPS per DPS spec from the engine-official MID1_Raid report (daily) | pure ST, fixed profile — a sim baseline next to Bloodmallet, never a tier |
-| **SimulationCraft MID2 reference profiles** (`gearing/` only) | Repeated-run secondary-stat scale factors for the highest-DPS reviewed source build in each supported encounter | local gearing heuristic, never a tier or cross-spec DPS metric; scenario-specific actors, Catalyst stat redirects, reports, and hashes are retained |
+| ~~**SimulationCraft MID2 reference profiles** (`gearing/` only)~~ | **RETIRED 2026-08-18** — gearing-s2-scope Phase A removed the entire SimC reference pipeline from `gearing/`; guide-consensus ranking (Icy Veins + Wowhead + Method harvested stat priorities) replaced sim-derived weights. The ADRs (`docs/adr-simc-*.md`) are history. | |
 | **Robydoby PTR raid sheets** (Google Sheets, public CSV) | Per-spec 99th-pct raw DPS + HPS from curated WCL zone-54 testing parses, newest Venomous Abyss week (separate DPS & Healer sheets) | community-curated top-end percentile; DPS + healer specs; **best-effort — deliberately NOT in the refresh contract** (`required-sources.json`), so a volunteer sheet going quiet never reddens a night; **credit Robydoby with a visible link wherever used** (the sheets ask for it) |
 | **WoWMeta** | `lowerBound` — the 95% CI lower bound of a spec's MEAN official Blizzard M+ rating across ALL logged players | population-wide MEAN, sample-size-penalised — **not a ceiling** (Murlok is the ceiling) and not popularity. Fetch the JSON API (`data.wowmeta.com`), never the HTML: the page is a stale prerender and its letters cluster on player count. |
 | **Mythicstats** | Representation % in the top 2000 keys per weekly period | true meta-share (the axis Murlok's fixed-50 sample can't measure); JS-heavy → r.jina.ai |
 
 Every metric gets a computed within-role **rank** (#n/of) at build time.
 
-The MID2 scale-factor ledger and its curated run manifest live under `gearing/data/` and
-do not participate in the root nightly refresh. Scale factors are local derivatives around
-a reference character, so the gearing app falls back visibly when no accepted matching
-record exists and still recommends direct character/item simulations for final decisions.
-When official profiles expose multiple hero builds, a bounded same-gear baseline comparison
-selects the source actor separately for single target and five-target AoE before scale factors
-are run. Each `scenarioInputs[]` entry is the exact reviewed scenario input, not a generic
-target-count description. Selection does not compare specs and does not feed tracker tier
-grades.
-
-Provenance is explicit. Existing Shadow and Destruction evidence, plus the resolved Unholy
-admission, use `official-output`. The other 23 conventional DPS specs use 26
-`curated-same-gear` profiles derived from pinned official actors and APL generators with
-reviewed talents and a deterministic, Catalyst-aware gear plan. Retained profiles, selection
-reports, gear/generator hashes, Catalyst redirects, and actual tertiary ratings are audited;
-commented drafts are never mislabeled as official outputs. Curated admission prepares the
-campaign, but coefficient records are accepted only after repeated scale runs pass promotion.
-Tanks and healers remain deferred to role-appropriate objectives, and Augmentation remains
-unsupported for personal-DPS scale factors.
-
-Healer gearing has a separate provider-neutral ledger under `gearing/data/`. Questionably
-Epic is the first candidate model, but it currently contributes no accepted production
-records: provider permission, a versioned export contract, and 12.1 Catalyst carry-over
-fixtures are required first. Any future admitted results remain local gearing guidance,
-never a spec-strength metric or tier input, and the tracker item catalog stays authoritative
-for inherited secondaries, tertiaries, sockets, bonus IDs, and cantrip effects.
+**The gearing SimC lane is RETIRED (2026-08-18, gearing-s2-scope Phase A).** The MID2
+scale-factor ledger, its curated run manifest, the curated-same-gear provenance campaign,
+and the provider-neutral healer ledger (Questionably Epic was the candidate; it never
+contributed an accepted record) were all removed with the pipeline — gearing now ranks by
+harvested guide consensus with SCOPED stat priorities, `custom` weights survive as an
+announcing override, and the tracker item catalog stays authoritative for inherited
+secondaries, tertiaries, sockets, bonus IDs, and cantrip effects. The two ADRs under
+`docs/` record why the lane existed and why it went. (This section described the lane in
+present tense until the 2026-08-19 audit, E3.)
 
 ## 3 · Per-fight tiers → the Fight selector
 
 **Archon per-encounter pages** — 9 raid bosses (throughput) + 8 dungeons (M+ score),
 single-source by design (nobody else publishes per-fight tiers); always labeled Archon
-in the UI, no consensus applies. Stored in `data/encounter-tiers.json`.
+in the UI, no consensus applies. Stored in `data/encounter-tiers.json`. The registry
+pages behind this section (and survivability below) carry **`ancillary: true`** in
+`sources.json` — they feed this file and drawer metrics, never the letter consensus, so
+their `seasonVerified` no longer gates it (2026-08-19 audit, C1). The Fight selector is
+**season-gated**: it hides while the file's `season` stamp trails `PHASES.liveSeason`.
 
 ## 4 · Survivability
 
@@ -171,13 +161,12 @@ What stays LIVE from this layer: the Wowhead RSS discovery lane, now watching fo
   not a spec-strength axis — deliberately not a tier column.
 - **Raidbots** — run-your-own-sims tool; no public per-spec aggregates (re-verified).
   Linked as a Tools row in every spec drawer.
-- **QE Live** — Voulk's client-side healer gear evaluator and the candidate provider for
-  the gearing app's separate healer-reference ledger. Its public source and undocumented
-  shared-report endpoints are inspectable, but the repository has no detected reuse license
-  or supported integration contract; no automated ingestion or bundled engine is active.
-  The ledger stays pending until permission, versioning, and 12.1 Catalyst fixtures pass.
-  Its blog also publishes dated Midnight healer articles. Voulk himself is a creator entry
-  (Wowhead Healing Expert — Prevoker/Resto Druid).
+- **QE Live** — Voulk's client-side healer gear evaluator. It WAS the candidate provider
+  for the gearing app's healer-reference ledger; that ledger retired unfilled with the
+  SimC lane (2026-08-18, gearing-s2-scope Phase A — healers now rank by harvested guide
+  consensus like every other role), so QE stays a linked tool and a research reference,
+  never an ingestion source. Its blog publishes dated Midnight healer articles. Voulk
+  himself is a creator entry (Wowhead Healing Expert — Prevoker/Resto Druid).
 - **u.gg/wow** — mirror of Archon.
 
 ## Audited and skipped (re-check later)

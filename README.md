@@ -1,7 +1,7 @@
 # Spec Tracker
 
-Currently covering: 12.0.7 / Season 1 → **12.1 "Curse of Ula'tek"** (patch live since 11 Aug 2026;
-Season 2 opens 18 Aug, when the live-season baseline moves with it).
+Currently covering: **12.1 "Curse of Ula'tek" / Season 2 — LIVE** (patch 11 Aug 2026,
+Season 2 opened 18 Aug 2026; Season 1's final standings live on as a frozen archive page).
 
 [![Deploy](https://github.com/riles22/wow-class-tracker/actions/workflows/deploy.yml/badge.svg)](https://github.com/riles22/wow-class-tracker/actions/workflows/deploy.yml)
 
@@ -23,19 +23,23 @@ Made by **[riles22](https://github.com/riles22)**. A personal project — if you
   consensus to any single source. Only real tier lists count here: WoWMeta was retyped to a
   metrics source in July 2026 once its letters were found to cluster on player count rather
   than performance, and it now contributes a number instead of a grade.
-- **Era toggle** — view the 12.0.7 live season, the 12.1 read, or both at once.
+- **Era toggle** — during a PTR cycle, view the live season, the next patch's read, or
+  both at once. Between cycles (as now, since the 18 Aug flip) there is only one era, so
+  the toggle hides and every surface shows the live season; it returns when the 12.2 PTR
+  opens.
 - **Numbers that stay numbers.** Only real tier lists feed the letter consensus; measured
   data is shown as figures and never converted to grades — Warcraft Logs median rDPS/HPS,
   Archon 95th-percentile throughput and M+ score, Murlok top-50 rating ceilings, and
   Bloodmallet fight profiles (ST / cleave / AoE percentiles).
-- **12.1 layer** — per-spec change writeups, datamined Season 2 tier-set bonuses, the
-  official PTR build feed, Warcraft Logs zone-54 raid testing, and **Dummy Dome** (zone-52)
-  real-player DPS by target count with a normalized composite score + rank across the field.
-- **"Ours: 12.1" projection** — the tracker's own computed forecast tier list for the
-  coming patch (raid + M+): live consensus baseline blended with PTR raid/M+ testing
-  percentiles and Dummy Dome composites, nudged by the tuning outlook and cited meta
-  reads — every cell carries its full component math and a confidence tag. A projection,
-  not a source: it never feeds the consensus.
+- **Patch layer** — per-spec official tuning in three honest lanes: live hotfix rounds on
+  top, the consolidated "Shipped in 12.1" launch notes as the authority beneath, and the
+  PTR development history that led there — plus the Season 2 tier-set bonuses as fact.
+- **"Ours: 12.1" forecast — a FROZEN record** — the tracker's own pre-launch forecast
+  tier list (raid + M+), declared frozen 2026-08-11 and rendered as a record: live
+  consensus baseline blended with PTR testing percentiles and Dummy Dome composites,
+  nudged by the tuning outlook and cited meta reads, every cell carrying its full
+  component math and a confidence tag. A projection, not a source — it never feeds the
+  consensus — and once the S2 consensus settles, a report card grades it.
 - **Timeline sparklines** — every drawer charts the spec's consensus score (and our 12.1
   projection) across the daily history snapshots — the story of the meta, not just today.
 - **Deep links, watchlist & compare** — every view is a shareable URL; star your specs
@@ -46,6 +50,11 @@ Made by **[riles22](https://github.com/riles22)**. A personal project — if you
   live consensus, ranked both ways, so the season-over-season shift is one glance.
 - **Fight view** — pick a raid boss or M+ dungeon and the matching tier column swaps to
   Archon's per-encounter tiers (single-source by design, and labelled as Archon).
+  Season-gated: hidden until Archon's Season-2 encounter tiers land, so a prior season's
+  bosses never feed the live grid.
+- **Past seasons** — each season's final standings freeze into a script-free archive page
+  at the flip (Season 1 is live now, linked from the footer), so historical comparison
+  never depends on a wayback machine.
 - **The Ladder** — rank the whole field by any measured series (log medians, sims, 95th
   percentiles, adoption, PTR cuts). Measured numbers stay numbers: it never turns them
   into letter grades, never mixes sims with logs, and never crosses roles.

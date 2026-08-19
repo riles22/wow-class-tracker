@@ -638,6 +638,27 @@ test("age gate: the flip is NOT nagged before its due date", () => {
   assert.ok(!before.fingerprint.includes("snapshot-phase"));
 });
 
+/* The dated floor-restore gate (2026-08-19 audit, D1) — same one-shot shape as the
+   phase-flip gate: 152dcc6 lowered minSuccessfulSources 7 -> 5 for the S2 transition
+   with "restore ~09-01" recorded only in prose, and nothing would have noticed the date
+   passing. The gate keys on the VALUE, so restoring it silences the check permanently. */
+test("age gate: a below-full floor is nagged past its restore date, and only then", () => {
+  const lowered = { ...config, minSuccessfulSources: 5 };
+  // Before the due date: the transition window is legitimate, no nag.
+  const before = checkFreshness(lowered, goodManifest(), freshData(), "2026-08-25");
+  assert.ok(!before.violations.some(v => v.includes("minSuccessfulSources")), before.violations.join("\n"));
+  assert.ok(!before.fingerprint.includes("min-sources-floor"));
+  // Past it: red until restored.
+  const after = checkFreshness(lowered, goodManifest(), freshData(), "2026-09-02");
+  assert.ok(after.violations.some(v => v.includes("minSuccessfulSources is still 5")), after.violations.join("\n"));
+  assert.ok(after.fingerprint.includes("min-sources-floor"));
+  // Restored (or absent — the fixture default): quiet at any date, forever.
+  const restored = checkFreshness({ ...config, minSuccessfulSources: 7 }, goodManifest(), freshData(), "2027-01-01");
+  assert.ok(!restored.violations.some(v => v.includes("minSuccessfulSources")), restored.violations.join("\n"));
+  const absent = checkFreshness(config, goodManifest(), freshData(), "2027-01-01");
+  assert.ok(!absent.fingerprint.includes("min-sources-floor"));
+});
+
 test("age gate: once flipped, the check goes quiet forever", async () => {
   // Guards against the gate becoming a permanent nag after a correct flip: the condition
   // is on the phase VALUE, not the date, so a live-season id passes at any future date.

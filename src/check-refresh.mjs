@@ -480,6 +480,18 @@ export function checkFreshness(config, manifest, data, now, gearing = null) {
     violations.push(`SNAPSHOT_PHASE is still "12.1-ptr" past ${PHASE_FLIP_DUE} — flip it in src/render.mjs to the live Season-2 id. Until then every snapshot is tagged pre-launch and the forecast report card cannot find the boundary it grades the frozen projection against.`);
     keys.push("snapshot-phase");
   }
+  /* The one-shot transition restore (2026-08-19 audit, D1) — same shape as the flip gate
+     above: a dated owner action whose omission nothing else can detect. 152dcc6 lowered
+     the catastrophe floor 7 -> 5 for the S2 transition window with "restore ~09-01"
+     recorded only in a comment and a commit message; if the date passed unremembered the
+     floor stayed silently weakened. Restoring the value silences this permanently — it
+     cannot become a standing nag; if the window legitimately needs extending, move the
+     date here in the same reviewed edit that decides so. */
+  const FLOOR_RESTORE_DUE = "2026-09-01", FULL_FLOOR = 7;
+  if ((config.minSuccessfulSources ?? FULL_FLOOR) < FULL_FLOOR && dateOf(nowDate) > FLOOR_RESTORE_DUE) {
+    violations.push(`minSuccessfulSources is still ${config.minSuccessfulSources} past ${FLOOR_RESTORE_DUE} — the S2-transition lowering (152dcc6) was dated "restore ~2026-09-01". Put it back to ${FULL_FLOOR} in data/required-sources.json, or move FLOOR_RESTORE_DUE in src/check-refresh.mjs if the window must extend.`);
+    keys.push("min-sources-floor");
+  }
   for (const req of config.requirements) {
     if (req.maxAgeDays == null || !req.date) continue;
     const date = probeDate(req, data);

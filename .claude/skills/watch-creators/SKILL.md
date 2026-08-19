@@ -51,7 +51,7 @@ locally, and distill them into cited per-spec takes in `data/creator-takes.json`
      12.2 feed starts, the bound moves with the new file automatically.)
      Ignore anything older, because a video that predates the cycle cannot discuss it.
      **Take the date, do not take an index.** That file is stored NEWEST-FIRST, so
-     `builds[0]` is the most recent build (2026-08-06 today) and using it would bound the
+     `builds[0]` is the most recent entry (the newest hotfix round-up, post-launch) and using it would bound the
      sweep two months too late and silently drop most of the cycle — this line said "the
      FIRST entry" until 2026-08-14 and meant the opposite of what it read as. Derive it:
      `Math.min(...builds.map(b => b.date))`, or `builds.at(-1).date` while the file stays

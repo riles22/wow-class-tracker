@@ -16,13 +16,18 @@ Fetch the current Midnight tier lists live and merge them into `data/specs.json`
    out subagents: the nightly runner passes `--disallowedTools "Agent,Task"`, so the call
    fails, and backgrounding slow work to "wait" for it was the root cause of the
    2026-07-15→17 lost nights. Era-verify as you go (step 2).
-2. Era-verify every page: "Midnight", Season 1 / 12.0.x, or Devourer DH present in DPS
+2. Era-verify every page: "Midnight", the CURRENT live season per `PHASES.liveSeason`
+   (S2 / 12.1 since the 2026-08-18 flip — the 12.0.x cue this line carried until
+   2026-08-19 was one season stale), and Devourer DH present in DPS
    — and STORE the observation: write `seasonVerified: "s1" | "s2"` on the page entry in
    sources.json (whichever season the page actually described). This is not bookkeeping:
    `consensusFor` drops a source from a bracket's consensus when its page's season does
    not match the current live season (PHASES.liveSeason, normalize.mjs) — the DECISION-1
    transition rule. Mis-recording it either keeps a stale list averaged in or silently
-   shrinks the consensus.
+   shrinks the consensus. Pages flagged `ancillary: true` (Archon per-boss/per-dungeon/
+   survivability) still get `seasonVerified` written for the record, but they no longer
+   gate the letter consensus (2026-08-19 audit, C1) — never add or remove that flag in a
+   run; it is Gate-0 registry structure.
    lists. Unverifiable → skip that source, never guess.
    **Except any era-gated source** (`era: "ptr"` in the registry — currently NONE:
    `icyveins-ptr` was retired at the 2026-08-18 flip, its letters superseded by the live

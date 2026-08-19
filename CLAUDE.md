@@ -22,8 +22,9 @@ on push to `master`; the file also still opens directly in a browser.
 - `npm run validate` — data checks only
 - `npm run audit:creators` — creator/expert-layer audit (scope, firewall, supersession,
   discovery reachability). A REPORT, not a gate; `--strict` exits 1 on any HIGH finding.
-- `npm run serve` — preview `dist/` at http://localhost:8317 (serves both published
-  pages: `/` → index.html, `/gearing.html` → the gearing explorer)
+- `npm run serve` — preview `dist/` at http://localhost:8317 (serves every published
+  page: `/` → index.html, `/gearing.html` → the gearing explorer, `/s1.html` → the
+  frozen Season-1 archive; serve.mjs allowlists each by name)
 - `npm run report-card` — grade the frozen pre-launch projection. Pre-settlement it runs in
   DRIFT mode against the CURRENT live consensus. Pre-flip that consensus was 12.0.7 and
   the forecast was *designed* to diverge from it; post-flip (2026-08-18) the live
@@ -106,9 +107,11 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
 - `ptrDummy` = real-player Dummy Dome logs (WCL zone 52): `{ source, asOf,
   targets: {"<count>": medianRDPS} }`, merged via apply-metrics.mjs `ptrdummy` key.
   A parallel **"Median raw DPS (12.1 PTR Dummy Dome, NT)"** metric series (plain
-  `dps`, best-parse-per-player medians) is fetched AND merged by the deterministic
-  `src/fetch-wcl.mjs` step (frozen recipe, owner-approved 2026-07-17) — agents never
-  write it, and it never substitutes for the rDPS series (honest source typing).
+  `dps`, best-parse-per-player medians) WAS fetched AND merged by the deterministic
+  `src/fetch-wcl.mjs` step through the 12.1 PTR cycle (frozen recipe, owner-approved
+  2026-07-17; the zone-52/54/56 recipes retired at the 2026-08-18 flip — the stored rows
+  are history now) — agents never wrote it, and it never substitutes for the rDPS series
+  (honest source typing).
   The build computes a 0–100 composite + rank across target counts (`dummyDomeScores`
   in render.mjs, coverage-floored) — never hand-write score/rank/perCount.
 - `ptr` is the per-spec 12.1 writeup: `{ verdict: "Positive|Mixed|Negative", theme,
@@ -133,7 +136,13 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   they go stale within days, and on 2026-08-14 an audit found them not merely out of date but
   wrong in COMPOSITION: they named three raid gaps that were all already closed while missing
   the one that was actually open. Chasing a closed gap wastes a run; missing an open one is
-  worse. The two-line recomputation, which takes seconds and is always right:
+  worse. **BETWEEN CYCLES THE WHOLE LANE IS DORMANT, NOT UNDER-COVERED** (2026-08-19
+  audit, E1): `expertRead` era-filters on `PHASES.ptr.marker`, so while `PHASES.ptr` is
+  null (since the 2026-08-18 flip, until the 12.2 thread appears) it returns null for
+  every spec — the one-liner prints all-40 "no take" lists, the pin test below
+  self-disarms, and none of that is data loss (all takes stay intact in
+  creator-takes.json; the coverage claims below re-arm, and get re-verified, when the
+  next cycle opens). The two-line recomputation, meaningful ONLY while a cycle is open:
   ```
   node -e 'const s=require("./data/specs.json"),t=require("./data/creator-takes.json");
   import("./src/render.mjs").then(r=>{const g=b=>s.filter(x=>!r.expertRead(x,t.takes,b)).map(x=>x.class+" "+x.spec);
@@ -368,8 +377,10 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   allowlist is now a pinned regex accepting `index.html`/`gearing.html` with an optional
   `[a-z0-9=&-]` fragment — `slugOf` can only emit that charset, so no roster value can
   widen it.
-- **Footer order** (2026-08-05, Riley): the footer opens with **Sources & snapshot dates**
-  and the build feed; the `.footbrand` identity block sits BELOW them, above the credits.
+- **Footer order** (2026-08-05, Riley; amended at the 2026-08-18 launch review): the
+  footer opens with **Sources & snapshot dates** and the build feed, then the "Past
+  seasons" archive links and the credits. The `.footbrand` identity block this bullet
+  used to place was REMOVED entirely at the launch review — do not reintroduce it.
 - **Site tabs** (2026-08-05): the masthead ends in a two-tab strip — **Spec Tracker**
   (`index.html`) and **⚙ S2 Gearing** (`gearing.html`) — mirrored at the head of the
   gearing page, which lost its old one-way `.backlink`. Gearing used to be a fourth CTA
@@ -381,6 +392,13 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
 - **Fight view**: `data/encounter-tiers.json` holds Archon per-boss (throughput) and
   per-dungeon (score) tiers — single-source by design, labeled as Archon in the UI; the
   Fight selector swaps the matching tier column. Refresh alongside the tier lists.
+  **Season-gated since the 2026-08-19 launch review**: the selector hides (and `fight=`
+  deep links go inert) while the file's `season` stamp ≠ `PHASES.liveSeason` — so it is
+  HIDDEN right now, until Archon's S2 encounter rebuild lands and stamps `s2`. The
+  per-boss/per-dungeon/survivability REGISTRY pages are `ancillary: true` in
+  sources.json (2026-08-19 audit, C1): era-verify still writes their `seasonVerified`
+  for the record, but they no longer gate the letter consensus — they feed this file
+  and drawer metrics, never the mean.
 - `spec.tierSet` = the Season 2 set bonuses as fact: `{ set2, set4, asOf, source }`,
   official-notes/datamine-sourced (host-allowlisted). The drawer's "Season 2 tier set"
   box renders it as the primary line with the writeup's `ptr.set2/set4` as commentary
@@ -414,7 +432,14 @@ its page for that bracket describes the current live season (`PHASES.liveSeason`
 normalize.mjs — the single era vocabulary; the 12.1 launch and every later cycle is a
 config edit there + SNAPSHOT_PHASE, pinned by a test so the flip is deliberate).
 Mid-transition the consensus honestly shrinks ("consensus of 2") and recovers as pages
-update; the toolbar count, Source select and footer registry all say who is lagging.
+update; the toolbar count, Source select and footer registry all say who is lagging —
+and since 2026-08-19 the toolbar says BOTH brackets' counts when a transition splits
+them ("consensus of 3 (raid) · 4 (M+) sources"), because one number would overstate a
+bracket. Pages marked **`ancillary: true`** (Archon's per-boss/per-dungeon/survivability
+cuts — encounter-tiers/metrics inputs, never letter inputs) are OUTSIDE the season gate
+in both `sourceSeasonOk` and `aheadSeasonFor` (2026-08-19 audit, C1: Archon's retired,
+un-reverifiable S1 per-dungeon page was keeping its fully S2-verified M+ lists dark).
+The flag is registry structure — Gate-0 protected, added only as a reviewed human edit.
 **The rule cuts BOTH ways, and until 2026-08-09 only one direction existed.** Seasons were
 compared for equality alone, so "behind" and "ahead" were the same fact — then Wowhead
 published its Season-2 lists early and every surface said it was *lagging*. `PHASES` now
@@ -787,14 +812,15 @@ test/     normalize · validate · render · build · apply-metrics · apply-rat
           change, run them for real:
           `npm i --no-save playwright@1.61.1 && npx playwright install chromium && npm test`)
 dist/     index.html + gearing.html  (generated — open directly in a browser; the two
-          pages the site publishes, linked to each other by the masthead tab strip)
-          + <season>.html per season-archive record once one exists (footer-linked
-          frozen archive pages, e.g. s1.html — serve.mjs and the injection invariant's
-          href allowlist name each one explicitly)
+          LIVE pages, linked to each other by the masthead tab strip)
+          + s1.html — the frozen Season-1 archive page (footer-linked; one
+          <season>.html per season-archive record — serve.mjs and the injection
+          invariant's href allowlist name each one explicitly)
 docs/     working notes (finder-audit.md — HISTORY, the Spec Finder was removed
           2026-08-05 · security-audit-2026-07.md ·
           cloud-routine.md · portfolio-audit-2026-07-18.md · audit-2026-07-23.md ·
-          audit-2026-07-24.md · audit-2026-07-25-premerge.md — audit dispositions.
+          audit-2026-07-24.md · audit-2026-07-25-premerge.md ·
+          audit-2026-08-19.md (the post-flip audit) — audit dispositions.
           Read the NEWEST audit before proposing work: its "Still open" and "Leave alone"
           sections record what has already been decided, and re-litigating them wastes a
           run. **Do not take this list's ordering as the recency ordering** — it is
@@ -802,7 +828,7 @@ docs/     working notes (finder-audit.md — HISTORY, the Spec Finder was remove
           at 07-24 while 07-25-premerge existed, so an obedient reader picked the wrong
           "newest"). `ls docs/` is the authority. ·
           adr-simc-reference-pipeline.md + adr-simc-curated-profiles.md — the gearing SimC
-          lane's ADRs, which docs/gearing-s2-scope.md Phase A retires ·
+          lane's ADRs, which gearing-s2-scope Phase A RETIRED (2026-08-18) — history now ·
           era-prose-scope.md — the launch-label mechanism (build-time era tokens) ·
           archive/ — preserved run logs from a retired agent runtime; a RECORD, not
           instructions, and historically wrong about the project as it now stands.
@@ -843,9 +869,12 @@ docs/     working notes (finder-audit.md — HISTORY, the Spec Finder was remove
           selector replaces the two SimC-fed ones (the guides' scoping axes are ragged —
           1 to 3 published priorities per spec — so a 2-axis grid would invent cells),
           and trinket letter tiers stay per-source, which keeps trinkets deliberately
-          OUTSIDE the top-5 ranking. Phase A must not land before the 08-18 flip —
-          gearing's tests run under the root `npm test`, so a broken gearing breaks the
-          nightly publish gate.
+          OUTSIDE the top-5 ranking. **ALL FIVE PHASES LANDED 2026-08-18** (after the
+          flip, honoring the sequencing constraint — gearing's tests run under the root
+          `npm test`, so landing earlier would have broken the nightly publish gate),
+          plus the G9 enhancements lane 2026-08-19: the SimC pipeline is GONE from
+          gearing/, guide-consensus ranking is live, and the memory note "Gearing S2
+          overhaul complete" records the same from the session side.
           published-gate-scope.md — the page-self-date integrity gate (2026-08-04,
           both owner decisions locked; BUILT same day): deterministic published-evidence
           step + staleness threshold, severity split dishonesty-red/lag-heartbeat.
@@ -895,7 +924,8 @@ legacy/   original single-file tracker (pre-conversion reference)
           dependabot.yml (weekly grouped action-SHA + pip bumps; requirements.txt pins
           yt-dlp) · CODEOWNERS (declares the human-owned boundary: workflows, gate
           contract, scales, registries, gatekeeper code)
-.claude/skills/   refresh-tiers · refresh-metrics · ptr-watch · watch-creators
+.claude/skills/   refresh-tiers · refresh-metrics · ptr-watch · watch-creators ·
+                  local-run · paste-discord
                   (each has the procedure + hard-won gotchas + a log.md memory)
 ```
 

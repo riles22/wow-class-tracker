@@ -10,11 +10,14 @@
 
    · GRADE (the real thing, post-launch). Forecast = the last snapshot of the pre-launch
      phase; actual = the first settled Season-2 consensus. This measures accuracy.
-   · DRIFT (available now). Forecast = an older snapshot; actual = today's consensus,
-     which is still 12.0.7. A 12.1 forecast is not WRONG for disagreeing with the patch it
-     was never predicting, so this is NOT accuracy — it measures how far the forecast sits
-     from the live picture and, aggregated, whether the model leans optimistic. Every
-     result carries `mode` so a drift number can never be read as a grade.
+   · DRIFT (available now). Forecast = an older snapshot; actual = today's consensus.
+     What that means changed at the flip (2026-08-19 audit, D2): PRE-flip the actual side
+     was the 12.0.7 consensus the forecast was designed to diverge from, so disagreement
+     meant nothing. POST-flip the actual side is the live early-S2 consensus — an
+     UNSETTLED preview of the real answer key, still not a grade because week-one tier
+     lists churn hard (that is what SETTLE_DAYS exists to wait out). The CLI banner picks
+     its wording by comparing the two sides' phases. Every result carries `mode` so a
+     drift number can never be read as a grade.
 
    Version handling: `projectionVersion` labels the formula that produced a forecast.
    Grading one frozen forecast against reality is valid at any version — but two forecasts
@@ -403,9 +406,19 @@ if (isMain) {
   const r = gradeSnapshot(forecast, actual, scales, { mode, specs });
   console.log(`\nForecast report card — mode: ${r.mode.toUpperCase()}`);
   if (r.mode === "drift") {
-    console.log("  NOT an accuracy grade: the 'actual' side is still a 12.0.7 consensus, and a");
-    console.log("  12.1 forecast is not wrong for disagreeing with the patch it never predicted.");
-    console.log("  Read the bias line only — it says which way the model leans.");
+    // Same phase on both sides = pre-flip: the actual side is the prior-patch consensus
+    // the forecast was DESIGNED to diverge from. Phases differing = post-flip: the actual
+    // side is the live early-season consensus — an unsettled preview of the real answer
+    // key, still not a grade because week-one tier lists churn hard (2026-08-19, D2).
+    if (r.actualPhase === r.forecastPhase) {
+      console.log("  NOT an accuracy grade: the 'actual' side is still the pre-launch consensus, and");
+      console.log("  the forecast is not wrong for disagreeing with the patch it never predicted.");
+      console.log("  Read the bias line only — it says which way the model leans.");
+    } else {
+      console.log("  NOT an accuracy grade YET: the 'actual' side is the live early-season consensus —");
+      console.log("  an unsettled preview of the real answer key. Week-one tier lists churn hard;");
+      console.log("  only GRADE mode (first settled snapshot, SETTLE_DAYS after launch) scores accuracy.");
+    }
   }
   console.log(`  forecast ${r.forecastDate} (phase ${r.forecastPhase}, projection v${r.projectionVersion}) → actual ${r.actualDate} (phase ${r.actualPhase})`);
   // Loudly, and BEFORE any number: a grade against a moved consensus definition is not a grade.
