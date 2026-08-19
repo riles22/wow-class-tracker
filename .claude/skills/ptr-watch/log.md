@@ -16,6 +16,42 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-19 (local run — scheduled)
+
+Between-cycles posture held. Dormant lanes (WCL PTR zones 54/52/56/57) not touched.
+**Nothing logged — and that is the correct outcome, reached from source rather than
+inherited.**
+
+**RSS swept** (`wowhead.com/news/rss/all`, 40 items, parsed per `<item>` block): newest
+2026-08-19 07:33 CDT. **No 12.2 / 12.1.5 PTR announcement** — the only PTR-category item in
+the whole feed is the closed cycle's "Venomous Abyss Raid BoEs Datamined". The 08-15 lead
+(news 382443, "Patch 12.1.5 PTR Now Listed on Battle.net Launcher") has still produced no
+dev notes; re-check stands.
+
+**Canonical hotfix topic 2336376 fetched and parsed** (Kaivax, post 1, updated
+2026-08-19T01:53Z). Date sections present: **August 18, 17, 14, 13 — no August 19 section
+yet**, so the nightly six hours earlier saw the same state.
+
+**Three articles looked like gaps and all three are already-settled decisions:**
+- news=382492 "August 17th — Hunter, Priest, Shaman & Warlock Bug Fixes". I extracted its
+  class section from the FORUM JSON (not just the Wowhead mirror) and it is four bug fixes
+  with no throughput value: BM Hunter Wildspeaker/Dire Beast, Holy Priest spec-swap, a bare
+  **Shaman** heading with no spec qualifier, Destruction Warlock tooltip. The 08-18 log
+  already records this as deliberately not logged, on the precedent that left 08-14 out.
+- Topic 2336376's August 14 and August 13 Classes sections (Devastation Shattering Star,
+  Warrior Slayer Executioner, Warlock pet Soul Leech, Demonology cooldown-manager,
+  Affliction Seed of Corruption) — same shape, and the 08-15 entry records them re-read in
+  full and independently confirmed as non-feed material.
+- news=382517 "Coiled Altar Massively Nerfed" — I read the body: pure encounter health
+  tuning, zero class lines. Correctly absent, as the 08-19 nightly says.
+
+Not re-litigated. Recording the re-check only so the next run knows the 08-17 round-up has
+now been verified against the forum JSON twice, by two different runs, to the same answer.
+
+⚠️ **The `kind: "hotfix"` at builds[0] flag from 08-18 appears to be RESOLVED** — the feed's
+newest entry is now the 08-18 hotfix and `npm test`'s validate/build lane is green on it.
+The two suite failures tonight are unrelated (see the local-run report).
+
 ## 2026-08-19 (nightly)
 
 Between-cycles posture held: the live lanes were swept, the four dormant WCL PTR zone lanes

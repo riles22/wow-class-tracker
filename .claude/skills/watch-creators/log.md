@@ -16,6 +16,61 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-19 (local run — residential transcript catch-up, scheduled)
+
+**Queue drained to ZERO: 2 in, 0 out. 44/44 feeds polled, 660 entries, 67 unseen (all
+in-cycle against the 2026-06-18 bound). 5 transcripts fetched by yt-dlp, 1 take added,
+4 verified-skipped, 1 retired to `seen[]`.** No metaNotes.
+
+**The two queued videos both verified-skipped, and neither was a transport failure.**
+- Dratnos `38bYF2buWg0` "RWF Day 1 Recap" — a TWO-SPEAKER co-cast. The only line inside his
+  Arms/Fury scope is "arms warrior still looks great", spoken inside an answer anchored by
+  self-reference ("in my estimation", "my predictions for the tier") — but the transcript
+  never says WHICH voice is Dratnos, and `--print description` credits no co-host. The other
+  voice's own picks (destruction warlock, balance druid, shadow priest) point at a Balance
+  specialist. **This is the same call already on file for `6MlSd4nBtrI`, the Day 0 preview**,
+  reached independently before that record was found. He also already carries a live
+  raid-scoped Arms take (2026-08-16) from the same RWF-comp lens, so even a successful
+  attribution would have superseded rather than added. Recoverable if the co-host is named.
+- Shindigg `W40Mcpr1kLg` "12.1 Rogue Guide (All changes)" — a mechanics walkthrough of all
+  three Rogue specs. Every comparison is INTERNAL (Trickster vs Deathstalker, finisher
+  priority, stat thresholds, four opener methods). No spec-strength read exists in it.
+
+**The one take: Dalaran Gaming → Restoration Druid, `bracket: "mplus"`, sentiment buff**
+(`owz2wMTAa5k?t=222`, published 08-18). He weights the launch tuning's two Resto lines
+differently — 4% healing "nice but not insane", 20% damage "significant" — and reads the
+damage buff as an M+ opening. Captured WITH its hedging ("possibly, maybe, potentially"),
+because that hedging is the read. **Two things deliberately not written:** his
+"boomkins were going to be the go-to DPS" clause is received wisdom he reports, not his
+analysis, so it did not become a Balance take (list-mention rule); and the 06-30 Resto take
+was NOT superseded — it is a general-lens read of the June QoL redesign, a different lens
+and a different change set from an M+-scoped read of August tuning.
+
+**ERA FRAMING:** this take is the first written under the post-launch rule —
+`patchContext` reads "Season 2 live — …", never "Season 2 PTR — …". Note the 08-18 nightly's
+takes still say "12.1 PTR" for 08-18 content; those pre-date the flip in practice.
+
+**Two guide-shaped videos transcript-verified rather than assumed** (both confirmed the
+standing rule, both now durable in `skipped[]`): Shadarek `TdX8LxFVVME` (Devourer DH
+BiS/rotation guide) and Sha `pBrG9id-5OM` (63-minute per-boss tanking walkthrough — checked
+BECAUSE tanks are the thin lane, and it still carried nothing).
+⚠️ **New parser trap, cost me a scan:** in a Demon Hunter transcript **every "meta" hit is
+the ability Metamorphosis**, not the game meta. A keyword scan for meta-reads returns ~15
+false positives per DH guide. The scan was validated against a known-positive file first
+(the Dalaran transcript, 12/38 blocks) exactly as SKILL.md requires.
+
+**Retired to `seen[]`: `ak84M-_idos`** (Supatease, "Assassination Rogue STRONG 12.1") — 20
+SECONDS long. Sub-minute duration is a durable fact. Its siblings were checked and are NOT
+retired: Tettles `ghJ_b308GQE`/`-_HdsFdOGKg` (111s/91s) and Megasett `a49UmUth7m0` (95s) all
+exceed a minute, so they stay unseen rather than stretch the rule.
+
+**The other ~62 stay UNSEEN on purpose** — a budget decision, not a judgment, so nothing was
+retired: ~24 stream/Twitch VOD shells (metadata-confirmed, incl. Supatease `kGsd9cMmBCc`
+at 6.9h `was_live` and Sha `N0gl58RajmI` at 11.6h), the guide/route block, and the PvP lane.
+I stopped the sweep after four guide-shaped confirmations rather than spend ~40 more fetches
+re-proving a settled rule and risking the batch-429. Anything not in the four lanes is still
+genuinely unexamined.
+
 ## 2026-08-19 (nightly)
 
 **44/44 feeds polled OK, 660 entries, 66 unseen — all in-cycle. 2 queued, 0 distilled.**

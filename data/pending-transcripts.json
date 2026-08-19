@@ -1,21 +1,6 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
-  "videos": [
-    {
-      "id": "38bYF2buWg0",
-      "creator": "Dratnos",
-      "title": "Race to World First Day 1 Recap - A Tough Start",
-      "published": "2026-08-19",
-      "queuedAt": "2026-08-19"
-    },
-    {
-      "id": "W40Mcpr1kLg",
-      "creator": "Shindigg",
-      "title": "12.1 Rogue Guide (All changes)",
-      "published": "2026-08-18",
-      "queuedAt": "2026-08-19"
-    }
-  ],
+  "videos": [],
   "skipped": [
     {
       "id": "02rLfzEKLq4",
@@ -2543,6 +2528,34 @@
       "title": "Race to World First Preview (Recap Day 0)",
       "reason": "Transcript verified: a multi-speaker Race to World First panel (217 speaker changes, guests including Kalamazi and Tal) whose Warrior content is a comp-drafting prediction game, not spec analysis. The one analytical line — that the most imbalanced two-target specs are Frost Mage, Arms Warrior, Outlaw and Devastation — cannot be attributed to Dratnos rather than a guest, and he already carries a live Arms read dated 2026-08-16. Nothing distillable within his Arms/Fury scope.",
       "verifiedAt": "2026-08-18"
+    },
+    {
+      "id": "38bYF2buWg0",
+      "creator": "Dratnos",
+      "title": "Race to World First Day 1 Recap - A Tough Start",
+      "reason": "Transcript verified (yt-dlp, local run): a two-speaker RWF recap co-cast. The only read inside Dratnos' Arms/Fury scope is a passing 'arms warrior still looks great' inside an answer anchored by self-reference ('my estimation', 'my predictions for the tier') — but the transcript never identifies WHICH of the two voices is Dratnos, and the co-host's own spec list (destruction warlock, balance druid, shadow priest) points at a Balance Druid specialist. Same call as 6MlSd4nBtrI, the Day 0 preview. He also already carries a live raid-scoped Arms take dated 2026-08-16 from the same RWF-comp lens, so nothing would be gained. Recoverable if the co-host is ever identified.",
+      "verifiedAt": "2026-08-19"
+    },
+    {
+      "id": "W40Mcpr1kLg",
+      "creator": "Shindigg",
+      "title": "12.1 Rogue Guide (All changes)",
+      "reason": "Transcript verified (yt-dlp, local run): a mechanics walkthrough of the Season 2 changes for all three Rogue specs — hero-talent picks, finisher priority, stat thresholds, opener methods, breakpoints. Every comparison is internal (Trickster vs Deathstalker, Between the Eyes vs Dispatch priority); there is no spec-strength read against other specs. Reading its tier-set lines as a spec buff is the 'new set beats old set' trap.",
+      "verifiedAt": "2026-08-19"
+    },
+    {
+      "id": "TdX8LxFVVME",
+      "creator": "Shadarek",
+      "title": "Devourer Demon Hunter Raiding & Mythic+ Guide | BiS Gear, Talents, Rotation and More!",
+      "reason": "Transcript verified (yt-dlp, local run): a BiS/talent/rotation guide. Its change discussion is all internal build math (mastery nerf, damage moved out of Metamorphosis, Collapsing Star scaling) with no comparative read against other specs. Note for future scans: every 'meta' hit in a Demon Hunter transcript is the ability Metamorphosis, not the game meta.",
+      "verifiedAt": "2026-08-19"
+    },
+    {
+      "id": "pBrG9id-5OM",
+      "creator": "Sha",
+      "title": "Tank Tips & Tricks for Dungeon Bosses | Mythic+ Season 2",
+      "reason": "Transcript verified (yt-dlp, local run): a per-boss tanking walkthrough across the Season 2 dungeons — positioning, soaks, kiting, defensive timing. No spec-strength read; the one cross-spec line (Protection Warrior soaks beams well) is a utility observation outside Sha's Brewmaster scope.",
+      "verifiedAt": "2026-08-19"
     }
   ],
   "seen": [
@@ -3070,7 +3083,8 @@
     "okaZqAQVRN0",
     "x0fxEWTq3Pw",
     "jlbQAmQMRCM",
-    "6MlSd4nBtrI"
+    "6MlSd4nBtrI",
+    "ak84M-_idos"
   ],
   "seenNote": "Video ids already considered by an earlier run that carry no richer record — migrated 2026-08-08 from backticked ids in watch-creators/log.md when the seen-set stopped being derived from prose. Distilled videos are cited by their take's url, transcript-verified rejects live in skipped[], and queued ones in videos[]; this lane is only for the remainder. Append here when a run dismisses a video at DISCOVERY (pre-cycle date, already-processed) without fetching a transcript."
 }
