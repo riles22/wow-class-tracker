@@ -106,7 +106,7 @@ export function verdictFor({ hasCreds, oauth, transportOk, probe }) {
   };
   if ((probe.rankings ?? 0) > 0) return {
     verdict: "rdps-restored",
-    detail: `characterRankings(metric: rdps) on encounter ${probe.encounterId} returned ${probe.rankings} rankings — WCL fixed the rDPS family; owner decision needed: freeze a deterministic median recipe into src/fetch-wcl.mjs (zone 52 first) before any cut can land`
+    detail: `characterRankings(metric: rdps) on encounter ${probe.encounterId} returned ${probe.rankings} rankings — WCL fixed the rDPS family; owner decision needed: freeze a deterministic median recipe into src/fetch-wcl.mjs targeting the LIVE S2 zones (53 raid / 55 M+ — partition 1 on both) before any cut can land`
   };
   return {
     verdict: "network-failed",
@@ -240,13 +240,20 @@ async function paginateEncounter(token, encounterId, { difficulty } = {}) {
    rDPS/normalized requirements' namePatterns (wcl-ptr-raid: "12.1 PTR raid testing";
    wcl-ptr-mplus: "12.1 PTR M+ testing") — fresh raw rows must not let a manifest row
    vouch for the stale series (a regression test pins this). */
-export const RAW_RECIPES = [
-  { key: "wcl-dummy-raw", mode: "targets", encounters: DUMMY_ENCOUNTERS, bracket: "raid" },
-  { key: "wcl-ptr-raid-raw", mode: "pooled", zoneId: 54, difficulty: 4, bracket: "raid",
-    name: "Median raw DPS (12.1 PTR Venomous Abyss, pooled)" }, // Heroic — where testing happens
-  { key: "wcl-ptr-mplus-raw", mode: "pooled", zoneId: 56, bracket: "mplus",
-    name: "Median raw DPS (12.1 PTR M+ keys, pooled)" }
-];
+/* RETIRED 2026-08-18 (post-launch routines pass, owner-approved): the 12.1 PTR cycle
+   closed at launch, so the three PTR recipes (zone-52 Dummy Dome targets, zone-54 raid
+   pooled, zone-56 M+ pooled) no longer fetch. Their last-landed rows (asOf 2026-08-18)
+   stay in data/specs.json as the cycle's final receipts — they are era:"ptr" history
+   feeding the frozen forecast's audit trail, not live series. The recipe FUNCTIONS
+   (buildDummyRawRows / buildPooledRawRows) are kept frozen for the 12.2 cycle, which
+   re-arms this list as an owner-reviewed edit with the new zone ids.
+   Pre-retirement entries, for that day:
+     { key: "wcl-dummy-raw", mode: "targets", encounters: DUMMY_ENCOUNTERS, bracket: "raid" },
+     { key: "wcl-ptr-raid-raw", mode: "pooled", zoneId: 54, difficulty: 4, bracket: "raid",
+       name: "Median raw DPS (12.1 PTR Venomous Abyss, pooled)" }, // Heroic — where testing happened
+     { key: "wcl-ptr-mplus-raw", mode: "pooled", zoneId: 56, bracket: "mplus",
+       name: "Median raw DPS (12.1 PTR M+ keys, pooled)" } */
+export const RAW_RECIPES = [];
 
 async function fetchRawRecipe(token, recipe) {
   const perEncounter = {};

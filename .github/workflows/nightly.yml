@@ -174,12 +174,15 @@ jobs:
             unchanged and be recorded honestly.
 
             WARCRAFT LOGS: you hold NO WCL credentials. A deterministic step already ran
-            src/fetch-wcl.mjs and wrote wcl-fetch/evidence.json — your ONLY WCL input,
-            covering every WCL cut (live zones 46/47, PTR zones 54/56, Dummy Dome zone 52).
-            Write every WCL manifest row (wcl-live-raid, wcl-live-mplus, wcl-ptr-raid,
-            wcl-ptr-mplus, wcl-dummy-dome, wcl-dummy-raw, wcl-ptr-raid-raw,
-            wcl-ptr-mplus-raw) from it honestly. A WCL row may claim success ONLY when
-            evidence.landed[key] shows rows — normally just the three *-raw keys, whose
+            src/fetch-wcl.mjs and wrote wcl-fetch/evidence.json — your ONLY WCL input.
+            The live S2 zones are 53 (raid, The Venomous Abyss) and 55 (M+); the PTR
+            zones (52/54/56) belong to the CLOSED 12.1 cycle and are no longer fetched.
+            Write the two WCL manifest rows (wcl-live-raid, wcl-live-mplus) from the
+            evidence honestly. A WCL row may claim success ONLY when
+            evidence.landed[key] shows rows — currently none do (the transport outage
+            is an OWNER-ACCEPTED standing red; see the rows' labels in
+            data/required-sources.json), so both rows normally record the evidence
+            verdict as their degradation detail. Historically the three *-raw keys, whose
             raw-DPS medians the fetch step merges into specs.json ITSELF before you start
             (never re-fetch, recompute, or edit those rows; if a landed entry is absent,
             report that key partial/unreachable/parse_error with the evidence's
@@ -211,11 +214,13 @@ jobs:
             keep queueing pending as before. Verdict "unauthorized" or "limit-exceeded" =
             put "TRANSCRIPT API KEY problem: <verdict>" near the top of the manifest summary.
 
-            SEASON-FLIP GUARD: if era-verification fails because sources now self-identify as
-            Season 2 / 12.1 LIVE (not because a page is broken), the patch has LAUNCHED. Keep
-            refusing to ingest S2-live data as 12.0.7, but put "SEASON 2 IS LIVE — tracker
-            needs its 12.1-live migration" at the TOP of the summary and in every affected
-            row's detail. Do not attempt the migration autonomously.
+            SEASON NOTE (the 12.1-live migration LANDED 2026-08-18 — the old season-flip
+            guard is retired): the live season is S2 and pages verifying as Season 2 /
+            12.1 are the CORRECT pages. A source still describing Season 1 (Archon until
+            its S2 rebuild lands) simply stays out of the consensus via seasonVerified —
+            record it honestly, do not chase it. The night Archon flips to S2 the
+            consensus recomposes and may trip the anomaly gate: that red is DESIGNED and
+            needs the human anomaly_ack input, not an agent workaround.
 
             Rebuild data/run-manifest.json from scratch for THIS run — the committed copy is
             the PREVIOUS run's record and never excuses skipping work. It must contain today's
@@ -316,11 +321,13 @@ jobs:
             the night red either way, so removing a requirement only wastes the run.
 
             WARCRAFT LOGS: you hold NO WCL credentials — wcl-fetch/evidence.json (written by the
-            deterministic pre-agent step) is your only WCL input; write all eight WCL manifest
-            rows from it honestly. Success is allowed ONLY where evidence.landed[key] shows rows
-            (normally just the three *-raw keys, already merged into specs.json by the fetch
-            step — never re-fetch or edit those rows); the other cuts stay degraded with the
-            evidence's rawRecipes[key] or verdict detail (the publish gate cross-checks a
+            deterministic pre-agent step) is your only WCL input; write the two WCL manifest
+            rows (wcl-live-raid, wcl-live-mplus) from it honestly. Success is allowed ONLY where
+            evidence.landed[key] shows rows — currently none do (owner-accepted standing red
+            while the S2 transport outage lasts; the PTR *-raw recipes were retired at the
+            2026-08-18 flip and their stored rows in specs.json are final receipts — never
+            re-fetch or edit those rows); both rows stay degraded with the
+            evidence's verdict detail (the publish gate cross-checks a
             pre-agent artifact copy you cannot modify). Do not fetch warcraftlogs.com yourself,
             by any means. Same for YouTube transcripts: distill only from the pre-fetched
             transcript-fetch/ files (offsets in ms), maintain data/pending-transcripts.json

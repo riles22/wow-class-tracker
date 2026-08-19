@@ -175,7 +175,7 @@ export function checkManifest(config, manifest, data, now, evidence = null) {
     if (!ISO_DATE.test(eDate) || Math.abs(ageDays(nowDate, eDate)) > 1) {
       errors.push(`wcl evidence: attemptedAt ${JSON.stringify(evidence.attemptedAt ?? null)} is not from this run — a stale or malformed wcl-fetch/evidence.json must not vouch for anything`);
     }
-    if (evidence.verdict === "rdps-restored") notes.push('wcl evidence: the rDPS metric family works again upstream — owner decision needed: freeze a deterministic median recipe into src/fetch-wcl.mjs (zone 52 first; see refresh-metrics SKILL.md) before any WCL cut can land');
+    if (evidence.verdict === "rdps-restored") notes.push('wcl evidence: the rDPS metric family works again upstream — owner decision needed: freeze a deterministic median recipe into src/fetch-wcl.mjs targeting the live S2 zones 53/55 (see refresh-metrics SKILL.md) before any WCL cut can land');
     if (["no-credentials", "oauth-failed", "network-failed"].includes(evidence.verdict)) {
       degraded.push(`wcl evidence: ${evidence.verdict} — ${evidence.detail ?? "the deterministic WCL fetch step failed before reaching a metric conclusion"}`);
     }

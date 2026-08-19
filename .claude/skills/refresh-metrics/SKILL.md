@@ -14,7 +14,8 @@ Numbers stay numbers — **never convert metrics to letter tiers.**
 **Nightly CI (2026-07-14 re-audit): the agent has NO WCL credentials.** A deterministic
 pre-agent workflow step runs `src/fetch-wcl.mjs` with `WCL_CLIENT_ID`/`WCL_CLIENT_SECRET`
 scoped to that step alone and writes `wcl-fetch/evidence.json` — on the runner, read
-that file and record the five WCL manifest rows from it; never fetch warcraftlogs.com
+that file and record the WCL manifest rows named in required-sources.json (currently
+wcl-live-raid and wcl-live-mplus) from it; never fetch warcraftlogs.com
 yourself there (the publish gate cross-checks a pre-agent copy of the evidence, so a
 fabricated WCL "success" fails the publish). Everything below applies to LOCAL runs.
 
@@ -41,7 +42,17 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
 
 ## Sources & recipes
 
-- **Warcraft Logs** (live S1: raid zone 46, M+ zone 47): statistics-table endpoint
+- **Warcraft Logs** (live S2 since 2026-08-18: raid **zone 53** "The Venomous Abyss"
+  partition 1, Mythic difficulty **5** size 20, 9 encounters; M+ **zone 55** "Mythic+
+  Season 2" partition 1, difficulty 10 size 5). ⚠️ Three traps re-learned at the flip:
+  (a) live and PTR zones SHARE NAMES — 53/54 are both "The Venomous Abyss", 55/56 both
+  "Mythic+ Season 2"; tell them apart by partition label and encounter count (53 has 9,
+  PTR 54 had 8), never the id pattern. (b) Partition ids restart per zone — both live S2
+  zones use partition 1. (c) Zone 46/47 are the RETIRED S1 zones; the stored live metric
+  NAMES are season-agnostic, so a zone-46/47 fetch merged under them would land 12.0.7
+  medians as the live S2 series and green the staleness gates on wrong-season data.
+  **Any zone-46/47 fetch is an S1 historical fetch and must never merge under the live
+  metric names.** Statistics-table endpoint
   documented in CLAUDE.md → "Metrics" workflow. Needs `X-Requested-With: XMLHttpRequest`
   + browser UA + Referer headers; response is an HTML fragment with UNCLOSED `<td>` tags
   — parse with regex, not a strict parser. Metric names in use:
@@ -271,7 +282,7 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
     call and 403-challenges the GraphQL call. Reference implementation: `src/wcl-probe.mjs`.
   - **The blocker is WCL-side, not ours:** `characterRankings` throws a bare
     "Internal server error" for the entire redistributed-credit metric family
-    (`rdps`/`ndps`/`cdps`/`bossrdps`) on EVERY encounter — live zone 46 and PTR zone 52
+    (`rdps`/`ndps`/`cdps`/`bossrdps`) on EVERY encounter — (then-live S1) zone 46 and PTR zone 52
     alike — while `dps`/`hps`/`wdps`/`default` work. Bisected argument-by-argument
     (className/specName/difficulty/partition all fine) and reproduced deterministically.
   - **`metric: default` is NOT a workaround:** probe-verified byte-identical to plain
@@ -290,7 +301,8 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
     exactly what's broken. Do not retry other scrape proxies; wait for the rdps fix.
   - **Standing behavior until WCL fixes it:** ONE cheap retry per run (a single
     `metric: rdps` query on a known-good encounter, e.g. 3176); if still 500, record
-    the five WCL manifest rows as `unreachable` with this reason and leave data
+    the WCL manifest rows named in required-sources.json (currently wcl-live-raid and
+    wcl-live-mplus) as `unreachable` with this reason and leave data
     unchanged. On the nightly runner this check IS `src/fetch-wcl.mjs` (the
     deterministic pre-agent step — read its `wcl-fetch/evidence.json` instead of
     re-running anything); locally you can run the same script or the query by hand.
@@ -322,7 +334,8 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
 - **PTR data stays labeled**: metric names carry "(12.1 PTR …)" AND rows carry
   `era: "ptr"` (apply-metrics preserves it; validation enforces name↔era agreement).
   Keep PTR series out of live baselines.
-- Live raid zone 46: Mythic requires `size=20`; `difficulty=4` is HEROIC, Mythic is 5.
+- Live raid zone 53: Mythic requires `size=20`; `difficulty=4` is HEROIC, Mythic is 5.
+  (Same rule as retired zone 46 — the difficulty enum is global, the zone is not.)
 - Fight-profile labels are computed at build time (within-role percentiles) — you only
   supply raw `targets`; don't hand-write labels.
 - Healers/tanks get no Bloodmallet profiles (DPS sims only) — that's by design.

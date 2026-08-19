@@ -24,9 +24,10 @@ Fetch the current Midnight tier lists live and merge them into `data/specs.json`
    transition rule. Mis-recording it either keeps a stale list averaged in or silently
    shrinks the consensus.
    lists. Unverifiable → skip that source, never guess.
-   **Except the era-gated sources** (`era: "ptr"` in the registry — `icyveins-ptr` today):
-   those must verify as **12.1 / Season 2**. A page that reads Season 1 is the WRONG page
-   for that source and must not be applied. Record each page's OWN date in `published`
+   **Except any era-gated source** (`era: "ptr"` in the registry — currently NONE:
+   `icyveins-ptr` was retired at the 2026-08-18 flip, its letters superseded by the live
+   Icy Veins S2 pages): such a source must era-verify the OTHER way, as the NEXT patch,
+   and a page reading the current season is the wrong page for it. Record each page's OWN date in `published`
    (JSON-LD `dateModified`, or the in-body "Last UPDATED" line) as well as `snapshot`.
 3. Write rows `[{class, spec, bracket: "raid"|"mplus", source, tier}]` using the EXACT
    class/spec names from `data/specs.json` to a scratch file.
@@ -96,34 +97,16 @@ Fetch the current Midnight tier lists live and merge them into `data/specs.json`
   **transport-induced view flips, not upstream movement** — they nonetheless fed
   consensus, the ▲▼ engine and `data/history/`, so the movement narrative for those
   dates is not trustworthy. Record which transport you used, every run.
-- **`icyveins-ptr` is a tier list you fetch but must NEVER let into the consensus.** It is
-  era-gated in the registry (`era: "ptr"`), so `consensusFor` already skips it — you do not
-  need to do anything to keep it out, and you must not "fix" a spec whose consensus ignores
-  it. Its shape differs from every other source here in four ways, all deliberate:
-  · **M+ only** — three pages (`mythic-ptr-{dps,healer,tank}-tier-list`). Icy Veins
-    publishes no PTR raid list. If one ever appears, it needs a registry page + a
-    `required-sources` review, not an improvised row.
-  · **Seven bands since 2026-08-02** (S+/S/A+/A/B+/B/C) on its own `icyveins-ptr` scale —
-    upstream added `S+` in its "Update #4" rebuild (owner-set anchors: S+ 100, S 92). The
-    live `icyveins` scale has had the SAME seven bands since 521ceaf (2026-08-14), so the
-    two scales now differ only in source id and era. The old backstop this line used to
-    claim — "applying a PTR row under the live source id will fail validation" — NO LONGER
-    HOLDS, because there is no longer a band the live scale lacks; the `era` gate and
-    `seasonVerified` are what keep the lanes apart now. A NEW
-    band appearing upstream is an owner escalation, never a silent collapse into a
-    neighbor (`scales.json` is CODEOWNERS-owned).
-  · **`TBD` is a real upstream state**, not a parse miss. Write it as an explicit `null`
-    (Augmentation Evoker and Vengeance DH were TBD at adoption; both placed 2026-08-02).
-    Omitting the row instead loses the distinction between "unplaced by the authors" and
-    "we never checked".
-  · **Weekly cadence** — rebuilt Sundays 14:00 CEST on stream, then published. Its
-    `published` date trailing `snapshot` by up to a week is NORMAL and not a finding.
-    **Re-read `published` from the page EVERY run — never carry the stored value
-    forward.** Since 2026-08-04 it is gated (docs/published-gate-scope.md): a
-    deterministic pre-agent step records what the page itself says, and the publish gate
-    goes red the same night a stored `published` contradicts it; past 9 days the
-    heartbeat alarms. The gate exists because a carried-forward stale value hid the
-    08-02 rebuild for two days.
+- **`icyveins-ptr` — RETIRED at the 2026-08-18 flip** (history, kept for the next PTR
+  cycle's source): it was the era-gated (`era: "ptr"`) M+-only PTR list, never in the
+  consensus, feeding only the 12.1 forecast. At the flip it left the registry, the
+  ratings and the contract; the live `icyveins` pages carry the S2 letters now. Rules
+  that outlive it, for whichever source occupies the next-patch slot at 12.2: era-verify
+  the OTHER way (the page must self-identify as the NEXT patch); `TBD` is a real
+  upstream state written as explicit `null`, never omitted; a NEW band appearing
+  upstream is an owner escalation (`scales.json` is CODEOWNERS-owned); and re-read
+  `published` from the page every run — the published gate
+  (docs/published-gate-scope.md) reds the night a carried-forward value contradicts it.
 - **murlok-style numbers are NOT tiers.** Only the four LIVE tier-list sources feed
   consensus; era-gated lists are shown and feed the projection, never the mean.
 - A new source first needs a scale in `data/scales.json` (check each tier round-trips
@@ -171,8 +154,11 @@ letters, not just a wasted run.
 - **Archon: resolve every entry from its `icon` "Class-Spec" token, never the display name**,
   and note `tiers[].entries` is a list **of lists**. Archon writes display names as
   `"BeastMastery Hunter"` / `"Blood DeathKnight"`, which match no roster entry; the icon reads
-  `"DemonHunter-Devourer"` (2026-07-26 / 08-01). This matters more now than when it was
-  written — Archon is currently the only source feeding the live consensus in its own right.
+  `"DemonHunter-Devourer"` (2026-07-26 / 08-01). This matters in both directions: post-flip
+  (2026-08-18) Archon is the one tier source still describing S1 — "updating for 12.1"
+  on every bracket — so it is currently the only source NOT feeding the live consensus;
+  when its S2 pages land, that night's consensus recomposition will trip the anomaly
+  gate by design (expect one red night needing the human `anomaly_ack`).
 - **Method's M+ page carries more than one tierlist and the extras are dungeon-difficulty
   blocks.** Reject by ROSTER MATCH — the eight dungeon names and the site logos simply fail
   to map — never by position: "take the first" and "take container[2]" are both on record and

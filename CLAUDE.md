@@ -1,6 +1,8 @@
-# Midnight 12.1 PTR Spec Tracker
+# Midnight Spec Tracker — 12.1 "Curse of Ula'tek", Season 2 LIVE
 
-Multi-source class/spec performance tracker for WoW Midnight (Patch 12.1 PTR, "Curse of Ula'tek").
+Multi-source class/spec performance tracker for WoW Midnight (Patch 12.1, "Curse of
+Ula'tek" — LIVE since 2026-08-18; this file's older sections still speak in the PTR-era
+voice where they record history).
 Data lives in `data/*.json`; a build step compiles it with `src/template.html` into **one
 self-contained artifact — `dist/index.html`** — a personal project. It's published as a
 public GitHub Pages site (https://riles22.github.io/wow-class-tracker/) that auto-deploys
@@ -23,9 +25,12 @@ on push to `master`; the file also still opens directly in a browser.
 - `npm run serve` — preview `dist/` at http://localhost:8317 (serves both published
   pages: `/` → index.html, `/gearing.html` → the gearing explorer)
 - `npm run report-card` — grade the frozen pre-launch projection. Pre-settlement it runs in
-  DRIFT mode against the CURRENT live consensus, which the 12.1 forecast is *designed* to
-  diverge from, so its "misses" and its confidence breakdown are not accuracy measurements.
-  Only GRADE mode (after the settled S2 consensus exists, ~09-01) scores the forecast.
+  DRIFT mode against the CURRENT live consensus. Pre-flip that consensus was 12.0.7 and
+  the forecast was *designed* to diverge from it; post-flip (2026-08-18) the live
+  consensus IS early S2, so drift is now an unsettled preview of the real answer key —
+  still not a grade, because week-one tier lists churn hard.
+  Only GRADE mode (after the settled S2 consensus exists — arrives by itself ~09-01 via
+  `SETTLE_DAYS`) scores the forecast.
 - `npm run gearing:build` — rebuild `gearing/wow-s2-gearing.html`. **Required after any edit
   to `gearing/src/app.template.html`**: the artifact is committed, and a template edit
   without a rebuild publishes nothing (a test pins this since 2026-08-14).
@@ -89,8 +94,10 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   inferred ptr). At build time every metric gets `rank`/`of` — its position within
   (role, bracket, name), #1 = highest value; all current metrics are higher-is-better
   (extend `metricRanks` in render.mjs with a direction flag before adding one that isn't).
-  The UI has an Era toggle (Both / 12.0.7 / 12.1 PTR) filtering verdicts, writeups,
-  era-tagged metrics, and creator takes.
+  The UI's Era toggle (which filtered verdicts, writeups, era-tagged metrics and creator
+  takes across Both / 12.0.7 / 12.1 PTR) is HIDDEN while `PHASES.ptr` is null — since the
+  2026-08-18 flip there is no second era to toggle to; it returns when a 12.2 PTR entry
+  is added to `PHASES`.
 - `fightProfile.targets` maps target count → sim DPS (best build per count). The build
   derives ST/cleave/AoE labels (canonical counts 1/3/8; a spec missing a count gets a
   null label) as **within-role percentiles across DPS specs** (≥70th = strong, ≤30th =
@@ -184,7 +191,11 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   general-creator meta read (±3, within-tier), clamped and mapped through the consensus
   bands, with a confidence tag. **A projection is
   NOT a source**: it never feeds consensus (it derives from it), is era-gated out of
-  12.0.7-only views, and every surface carries its component basis string. Tune weights
+  12.0.7-only views, and every surface carries its component basis string.
+  **Since the flip the RENDERED "Ours: 12.1" column is the FROZEN 2026-08-11 artifact,
+  not a live recomputation** — `frozenForecastActive` (render.mjs) switches the lane so
+  post-launch data cannot leak into the graded record; the live computation resumes as
+  the next cycle's forecast when a new PTR opens. Tune weights
   in code only — never hand-write `spec.projection`.
   **Confidence is a RATIO, not a count** (v3, 2026-07-31): signals present ÷ signals
   *obtainable* for that spec+bracket — all → high, more than half → medium, any → low,
@@ -263,8 +274,9 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   enrichment feeds the drawer **Timeline** sparklines (`historySeries` → payload
   `history`) and is the raw data for the post-launch **forecast report card** (grade the
   frozen pre-launch projection against the first settled S2 consensus).
-- **Two one-shot OWNER actions at 12.1 launch, and they are DIFFERENT events**
-  (2026-08-03, external audit). `node src/snapshot.mjs --frozen` on the LAST pre-launch
+- **Two one-shot OWNER actions at 12.1 launch — BOTH EXECUTED** (freeze declared
+  2026-08-11, phase flip 2026-08-18; kept because the reasoning generalizes to every
+  future cycle). `node src/snapshot.mjs --frozen` on the LAST pre-launch
   refresh declares which forecast the report card grades — and also writes the immutable
   forecast artifact `data/forecasts/frozen-<date>.json` (all 80 cells with component
   values + eligibility flags, git SHA, data hash, per-source snapshot dates): the record
@@ -280,8 +292,9 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   moves what gets graded (it reports `frozenExplicit: false` when it had to guess).
   The settled side is chosen by date, not by the flip: `SETTLE_DAYS = [14, 28]` after
   launch, because tier lists churn hard in week one.
-- **`SNAPSHOT_PHASE` (`render.mjs`) is a one-shot OWNER action at 12.1 launch**: flip
-  `"12.1-ptr"` to the live Season-2 id. **Gated since 2026-08-02**: `check-refresh --age`
+- **`SNAPSHOT_PHASE` (`render.mjs`) — the 12.1 flip is DONE** (2026-08-18: `"12.1-ptr"`
+  → `"12.1-live"`, and the gate below self-silenced as designed; this bullet is the
+  playbook for the NEXT cycle's flip). **Gated since 2026-08-02**: `check-refresh --age`
   (the daily heartbeat) fails red once `PHASE_FLIP_DUE` passes with the flip undone, so
   the one action nothing else can detect after the fact now announces itself. The gate
   tests the phase VALUE, so flipping it silences the check permanently — it cannot become
@@ -455,10 +468,11 @@ patch we are not running: an `era: "ptr"` tier list keeps its toggle button, its
 its drawer row and its projection input, but `consensusFor` skips it and the 12.0.7-only
 view disables it. A typo'd era fails validation rather than defaulting to live, and a
 registry with no live-era tier list fails too (the consensus would have nothing to
-average). Currently one: `icyveins-ptr` (M+ only) — and note it does NOT self-repair at
-the flip: at `liveSeason: "s2"` it still occupies the next-patch slot on all 40 M+ cells
-while describing the season we are running. Retyping or merging it is an 08-18 one-shot
-(pinned by a test so the behaviour cannot be inherited silently). All URLs must be https:// —
+average). Currently NONE: `icyveins-ptr` (the 12.1 cycle's M+-only PTR list) was retired
+in the 2026-08-18 flip commit — removed from the registry, ratings and contract, its
+letters superseded by the live Icy Veins S2 pages. Its scale deliberately REMAINS in
+`data/scales.json` (test-pinned) as the template for the next cycle's era-gated source,
+and the retirement one-shot's pin now guards the next flip rather than this one. All URLs must be https:// —
 validation enforces it, plus host allowlists on every agent-writable URL field
 (creator-take/metaNote citations, writeup + tier-set sources, community discord/creator
 links, PTR build-feed links — the approved-host sets live in `src/validate.mjs`; a new
@@ -573,23 +587,27 @@ again: each run attempts every requirement fresh and rewrites the file (fresh `r
 *(WoWMeta was retyped to `kind: "metrics"` on 2026-07-31 — its letters clustered on player
 count, not performance, and its HTML transport served a 130-day-old prerender. It now
 publishes `lowerBound` as a number; recipe in the refresh-metrics skill.)*
-1. Fetch each page in `sources.json` live; era-verify (Midnight S1, Devourer in DPS lists).
+1. Fetch each page in `sources.json` live; era-verify (the CURRENT live season per
+   `PHASES.liveSeason` — S2 since 2026-08-18 — and Devourer in DPS lists).
    Archon: parse the `__NEXT_DATA__` JSON script tag from raw HTML (WebFetch markdown
    drops it); raid = throughput tierList, M+ = score tierList.
 2. Write rows `[{class, spec, bracket, source, tier}]` (exact roster names) to a scratch
    file → `node src/apply-ratings.mjs <file>` (refuses on unmatched rows).
 3. Update `snapshot` dates in `sources.json`; `npm run test:quiet && npm run build`.
 
-**`icyveins-ptr` is in this loop too** (added 2026-07-31) — same fetch, same
-`apply-ratings.mjs`, but it era-verifies the OTHER way: the page must self-identify as
-**12.1 / Season 2**, not Season 1. M+ only (no PTR raid list exists — do not invent one),
-7-band scale including **B+**, and specs the page marks **TBD are written as explicit
-`null`**, never omitted and never guessed. It also carries `published` (the page's own
-date, from JSON-LD `dateModified` / the "Last UPDATED" line) alongside `snapshot`. It has
-its own row in `required-sources.json`, so a run that skips it fails the publish gate.
+**`icyveins-ptr` LEFT this loop at the 2026-08-18 flip** (added 2026-07-31, retired with
+the cycle): the live Icy Veins S2 pages carry its letters now, and the source is out of
+the registry and the contract. The rules it taught survive for the NEXT cycle's era-gated
+source: era-verify the OTHER way (the page must self-identify as the NEXT patch, never
+the live season), **TBD is written as explicit `null`** (never omitted, never guessed),
+and the page's own `published` date rides alongside `snapshot`.
 
 ### Metrics (Warcraft Logs / Murlok / Archon numbers / SimC / Mythicstats / Bloodmallet / Robydoby)
-1. WCL: zone 46 = live S1 raid (Mythic = difficulty **5**, size 20, partition 3 = 12.0.7);
+1. WCL: **zone 53 = LIVE S2 raid** (partition 1, Mythic difficulty **5** size 20, 9
+   encounters) and **zone 55 = LIVE S2 M+** (partition 1) — currently NO fetch path
+   (transport outage; the wcl-live-* heartbeat red is owner-accepted 2026-08-18, see the
+   contract rows). Retired-cycle map: zone 46 = S1 raid (Mythic = difficulty **5**,
+   size 20, partition 3 = 12.0.7);
    zone 47 = M+ S1 (difficulty **10**, size 5, partition 1); zone **54 is the 12.1 PTR raid**;
    zone **56 is the 12.1 PTR M+** ("Mythic+ Season 2 (PTR)", same recipe as zone 47 →
    metrics "Median rDPS/HPS (12.1 PTR M+ testing[, tank])", see the ptr-watch skill);
@@ -802,7 +820,8 @@ docs/     working notes (finder-audit.md — HISTORY, the Spec Finder was remove
           2026-08-12: happens AT the flip, not +14 — ptrSunset is deleted in the flip
           commit), the Season-1 archive page (DECISION 6, 2026-08-12), the
           12.2-cycle generalization (PHASES constant), and the gearing-lane stub.
-          Phase-1 machinery must land before PHASE_FLIP_DUE (Aug 20).
+          Phase-1 machinery LANDED and the flip executed 2026-08-18 (the runbook's
+          checklist is fully done; see git log around 5e92824).
           s2-flip-runbook.md — the operational 08-18 flip checklist (execution mode:
           LOCAL RUN, chosen 2026-08-12); read it before touching anything flip-related.
           s2-flip-test-patch.diff + s2-flip-test-patch-verify.md — the PRE-STAGED flip-day

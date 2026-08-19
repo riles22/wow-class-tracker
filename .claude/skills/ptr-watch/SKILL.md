@@ -1,13 +1,38 @@
 ---
 name: ptr-watch
-description: Check for new 12.1 PTR developments and fold them into the tracker — new PTR build tuning notes (official forum thread), new Wowhead datamined tuning posts, new Warcraft Logs PTR raid-testing data (zone 54), and new real-player Dummy Dome target-count logs (zone 52). Use when the user says "check the PTR", "any new builds?", "ptr watch", or on a scheduled/loop run.
+description: Watch patch developments and fold them into the tracker. BETWEEN CYCLES since the 2026-08-18 12.1 launch — the live lanes are Wowhead RSS + official forums for live 12.1 tuning (hotfix round-ups, scheduled tuning passes) and for the 12.2 PTR ANNOUNCEMENT; the PTR zone sweeps (54/52/56/57) are dormant until 12.2. Use when the user says "check the PTR", "any new builds?", "ptr watch", or on a scheduled/loop run.
 ---
 
 # PTR watch — the constant-updates loop
 
-Idempotent check for new 12.1 PTR information since the last run. Designed to be run
-weekly (PTR builds land ~weekly) by a schedule, /loop, or by hand. If nothing is new,
-say so and change nothing.
+Idempotent check for new patch developments since the last run. If nothing is new, say
+so and change nothing.
+
+## ⚑ BETWEEN-CYCLES POSTURE (2026-08-18, the 12.1 launch — read this first)
+
+**The 12.1 PTR cycle is CLOSED, not quiet.** 12.1 went live 2026-08-18; the PTR realm,
+its forum thread, and its WCL zones (54 raid / 52 Dummy Dome / 56 M+ / 57 grotto) are
+history. Until Blizzard announces a 12.2 PTR:
+
+- **Live lanes (run every time):** step 2's RSS sweep — now filtered for LIVE 12.1
+  tuning ("Class Tuning", "Hotfixes", tuning round-ups) and for the 12.2 PTR
+  announcement — plus step 3's feed logging and step 4's writeup flagging. Live tuning
+  logs as `kind: "hotfix"` (Wowhead round-up = citation, NO forumUrl/forumPostNumber)
+  or `kind: "build"` when a scheduled pass has a citable forum post. The `specsAffected`
+  ↔ `highlights` coverage gate and the tierSet upkeep gate apply to these exactly as
+  they did to PTR builds.
+- **Dormant lanes (skip; do NOT mark them unreachable in the manifest — their contract
+  rows were removed at the flip):** steps 5–7b, the four WCL PTR zone sweeps. Their
+  recipes below are kept verbatim for the 12.2 cycle — transport lessons cost weeks to
+  learn. Stored zone-52/54/56 rows in specs.json are the closed cycle's final receipts;
+  never refresh or delete them.
+- **The thread-rediscovery gotcha is SUSPENDED**: the 12.1 thread going quiet is not a
+  lost thread — there is no thread. When the 12.2 PTR opens, starting the new cycle is
+  an OWNER action (new `PHASES.ptr` entry, new thread key, contract rows, zone probe via
+  `node src/wcl-probe.mjs`), not an agent-side thread-key update.
+
+Everything below this block is written in the 12.1-cycle voice; read it through the
+posture above.
 
 ## Procedure
 

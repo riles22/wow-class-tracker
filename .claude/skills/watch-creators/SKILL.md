@@ -44,8 +44,11 @@ locally, and distill them into cited per-spec takes in `data/creator-takes.json`
    2026-08-08) — the two transcript sources have wildly different costs:
    · **LOCAL run (yt-dlp): replace the keyword filter with a DATE bound.** Do not judge on
      the title — judge on whether the video could possibly contain current-cycle content.
-     Fetch every unseen video **published on or after the current PTR cycle's OPENING
-     build** — the OLDEST date in `data/ptr-builds.json`, which is 2026-06-18 for 12.1.
+     Fetch every unseen video **published on or after the current CYCLE's opening
+     build** — the OLDEST date in `data/ptr-builds.json`, which is 2026-06-18 for the
+     12.1 cycle. (Since the 2026-08-18 launch the "cycle" spans the 12.1 PTR *and* the
+     live season it became — the computed bound is unchanged and still correct; when a
+     12.2 feed starts, the bound moves with the new file automatically.)
      Ignore anything older, because a video that predates the cycle cannot discuss it.
      **Take the date, do not take an index.** That file is stored NEWEST-FIRST, so
      `builds[0]` is the most recent build (2026-08-06 today) and using it would bound the
@@ -138,8 +141,11 @@ locally, and distill them into cited per-spec takes in `data/creator-takes.json`
    `{class, spec, creator, date, sentiment: "positive|negative|neutral|mixed", note,
    patchContext, url, superseded}` — `note` = faithful paraphrase of THEIR read (never
    quote ASR captions), `url` = `youtu.be/<id>?t=<seconds>` deep link, `patchContext`
-   carries the lens (e.g. "Season 2 PTR — raid testing outlook" vs "… — M+ outlook"; a
-   spec may hold one of each). Validation requires the creator be a `generalCreators`
+   carries the lens (e.g. "Season 2 live — raid outlook" vs "… — M+ outlook"; a spec may
+   hold one of each). **Era framing since the 2026-08-18 launch: content published on or
+   after 2026-08-18 discussing 12.1 is LIVE-era, not PTR** — write "Season 2 live — …",
+   never "Season 2 PTR — …", for post-launch takes; PTR phrasing on a new take mislabels
+   its provenance and misleads the bracket-scope regexes' era context. Validation requires the creator be a `generalCreators`
    entry, keeping the firewall intact. **Curate honestly**: capture only genuine spec-level
    reads — if the creator says a spec merely topped ONE fight because the fight favors its
    role (not a spec-strength call), that's a fight artifact, NOT a meta note; drop it or

@@ -91,8 +91,14 @@ test("host allowlists pin every agent-writable URL field, not just creator takes
   assert.ok(pinned.some(e => e.includes("forumUrl")));
   assert.ok(pinned.some(e => e.includes("wowheadUrl")));
   // A malformed URL still reports exactly once (urlOk), never a second hostOk error.
+  // Mutate the first kind:"build" entry, NOT builds[0]: a kind:"hotfix" at the top of
+  // the feed (the expected launch-week shape) also errors on carrying a forumUrl at
+  // all, and that second error is the hotfix rule working, not a urlOk double-report.
+  // Pinned after the 08-17/08-18 nightly wrote a hotfix entry, went red on this exact
+  // assertion, and backed the entry out.
   const single = structuredClone(data);
-  single.ptrBuilds.builds[0].forumUrl = "http://us.forums.blizzard.com/x";
+  const firstBuild = single.ptrBuilds.builds.find(b => (b.kind ?? "build") === "build");
+  firstBuild.forumUrl = "http://us.forums.blizzard.com/x";
   const singleErrors = validateData(single).filter(e => e.includes("forumUrl"));
   assert.equal(singleErrors.length, 1);
   assert.ok(singleErrors[0].includes("must be a valid https:// URL"));

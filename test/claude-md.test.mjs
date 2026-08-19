@@ -98,17 +98,17 @@ test("CLAUDE.md: the consensus S band threshold matches data/scales.json", () =>
   );
 });
 
-test("CLAUDE.md: the Icy Veins PTR scale band count matches data/scales.json", () => {
+test("CLAUDE.md: the retired icyveins-ptr scale is retained in data/scales.json", () => {
+  // The band-count prose pin retired with the source (post-flip routines pass,
+  // 2026-08-18): CLAUDE.md no longer states a band count because the source left the
+  // registry at the flip. The scale itself is DELIBERATELY kept as the template for the
+  // next cycle's era-gated source — this assertion is what stops a cleanup pass from
+  // deleting it, and CLAUDE.md's sources.json section documents the retention.
   const scale = scales.scales["icyveins-ptr"];
-  assert.ok(scale, "data/scales.json has no icyveins-ptr scale");
-
-  const stated = claim(/(\d+)-band scale including \*\*B\+\*\*/, "icyveins-ptr band count");
-  assert.equal(
-    stated.value,
-    scale.tiers.length,
-    `CLAUDE.md:${stated.line} says "${stated.text}" but scales.json gives icyveins-ptr ` +
-      `${scale.tiers.length} bands (${scale.tiers.join("/")}). This exact drift is why ` +
-      `this test exists: commit 521ceaf widened the scale and the prose was not updated.`,
+  assert.ok(scale, "data/scales.json has no icyveins-ptr scale — it is retained on purpose (see CLAUDE.md's sources.json section)");
+  assert.ok(
+    /scale deliberately REMAINS in\s*`data\/scales\.json`/.test(claudeMd.replace(/\r\n/g, "\n")),
+    "CLAUDE.md no longer documents that the icyveins-ptr scale is deliberately retained",
   );
 });
 

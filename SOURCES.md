@@ -25,9 +25,12 @@ and hidden entirely in the 12.0.7-only era view.
 
 | Source | Scale | Lens | Cadence | Notes |
 |---|---|---|---|---|
-| **Icy Veins (12.1 PTR)** | S+/S/A+/A/B+/B/C (S+ added upstream 2026-08-02) | Forward PTR read — throughput + group-added value (utility, survivability, mobility, sustain) | rebuilt weekly on stream (Sun 14:00 CEST), then published | **M+ only** — no PTR raid list exists, so the raid column is an honest dash. Full 40-spec coverage; specs the authors have not placed are **TBD upstream → stored as explicit `null`**, never guessed. |
+*(A fifth row lived here through the 12.1 PTR cycle: **Icy Veins (12.1 PTR)** — retired
+at the 2026-08-18 flip when its letters were superseded by Icy Veins' live S2 pages. Its
+scale stays in `scales.json` as the next cycle's template. The history below is kept
+because the reasoning re-applies to whatever source occupies the next-patch slot at 12.2.)*
 
-Three things about it are load-bearing:
+Three things about it were load-bearing:
 
 - **Its own scale.** Icy Veins' PTR lists publish a sixth band (**B+**) their live lists do
   not, so `icyveins-ptr` is a separate entry in `scales.json`. Reusing the 5-band
@@ -112,6 +115,14 @@ in the UI, no consensus applies. Stored in `data/encounter-tiers.json`.
 shown in each drawer's Source ratings box.
 
 ## 5 · 12.1 PTR layer → build feed, outlook, PTR metrics
+### ⚑ CYCLE CLOSED 2026-08-18 — this layer is now HISTORY + the live-tuning lane
+
+12.1 launched 2026-08-18. The zone-54/56/52 series are frozen final receipts (their
+contract rows were removed at the flip; the fetch recipes are retired in
+`src/fetch-wcl.mjs` awaiting the 12.2 zone ids), and the dev-notes thread is closed.
+What stays LIVE from this layer: the Wowhead RSS discovery lane, now watching for
+**live 12.1 tuning** (hotfix round-ups → `kind: "hotfix"` feed entries) and for the
+**12.2 PTR announcement**, which re-opens everything below with new ids.
 
 | Source | Role |
 |---|---|

@@ -109,18 +109,34 @@ no-staleness-gate policy still holds *within* whichever scope you pick.
 
 ## The work — each skill's SKILL.md is authoritative
 
-1. **`ptr-watch`** — Wowhead news RSS + the official forum thread for new builds; WCL
-   zones **54** (PTR raid), **52** (Dummy Dome), **56** (PTR M+), **57** (Tidebound
-   Grotto). Zone 54 has been empty upstream since 2026-07-31 (the 14-day rolling window
-   aged out the mid-July parses) and 57 has never aggregated — **empty is not an error**:
-   ingest nothing and leave both the stored rows and that zone's `snapshot` alone, so the
-   staleness stays visible rather than being papered over.
+1. **`ptr-watch`** — now in its BETWEEN-CYCLES posture (see the ⚑ block at the top of
+   its SKILL.md, added at the 2026-08-18 launch): Wowhead news RSS + official forums for
+   **live 12.1 tuning** (hotfix round-ups → `kind: "hotfix"`, scheduled passes with a
+   forum post → `kind: "build"`) and for the **12.2 PTR announcement**. The four PTR
+   WCL zone sweeps (54/52/56/57) are DORMANT — skip them entirely; their contract rows
+   were removed at the flip, so they need no manifest excuse. Stored zone rows are the
+   closed cycle's final receipts: never refresh, never delete. The live S2 WCL zones
+   (53 raid / 55 M+, partition 1 on both) currently have NO fetch path — the standing
+   heartbeat red on wcl-live-* is OWNER-ACCEPTED (2026-08-18) and is not yours to fix
+   or ack away.
 2. **`watch-creators`** — draining the transcript queue is the main reason this run
    exists. Honour the `skipped[]` lane (durable verified-skips), the same-lens supersede
    pass, and the `generalCreators` → `metaNotes[]` firewall.
 3. **`refresh-tiers` / `refresh-metrics`** — scoped per above. 🛑 **Do not apply WoWMeta
    M+ rows or re-stamp their `snapshot`** while that source is under review (see
    `refresh-tiers/log.md`, 2026-07-31).
+4. **Gearing guide harvest** (duty added 2026-08-18 with the gearing overhaul; NOT part
+   of the nightly — Wowhead is unreachable from CI, so local runs are the only lane):
+   when `gearing/data/guides/*.json` `harvestedAt` ages past ~7 days during the launch
+   window (through ~09-15; the contract's 30d thresholds are the backstop, not the
+   target), re-run the three harvesters from `gearing/`:
+   `node src/harvest-guide-icyveins.mjs --force && node src/harvest-guide-wowhead.mjs
+   --force && node src/harvest-guide-method.mjs --force`, then `npm run gearing:build`
+   from the repo root and let the root suite gate it. Loot/tier/catalyst re-harvests
+   (`harvest-raid` / `harvest-dungeons` / `harvest-tier` / `harvest-catalyst-allocations`)
+   only on a loot-change signal or owner ask — each has fail-closed change gates that
+   will tell you if reality moved. NEVER re-run `harvest-sheet.mjs` as-is (it would
+   regress the owner-supplied Gandalin ilvl data — gearing/README.md).
 
 ## Orchestration limits (a scheduled run is unattended)
 
@@ -144,7 +160,8 @@ no-staleness-gate policy still holds *within* whichever scope you pick.
 
 ## Report shape
 
-Builds found; zone 54/52/56/57 state; videos processed and queue count before→after;
+Builds/hotfixes found; 12.2 PTR announcement check; videos processed and queue count
+before→after; gearing guide harvest run-or-skipped and why;
 takes **and** metaNotes added; sources refreshed vs verified-unchanged; whether the
 manifest was rewritten or deliberately left alone and why; what `check-refresh
 --manifest` printed; what was rebuilt; whether you pushed.
