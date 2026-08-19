@@ -16,6 +16,64 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-19 (nightly)
+
+Between-cycles posture held: the live lanes were swept, the four dormant WCL PTR zone lanes
+(54 / 52 / 56 / 57) were not touched and have no contract rows.
+
+**Four channels swept.** (1) Dev-notes thread `2317811.json` via curl for the full
+`post_stream`: 17 posts, `last_posted_at` 2026-07-31, newest still Linxy #19 — a quiet thread
+is the expected state now, not a lost one. (2) Wowhead news RSS, parsed per `<item>` block:
+40 items, newest 2026-08-18 22:30 CDT. (3) The news INDEX (`data.news.newsData`,
+brace-balanced from the id attribute), because it leads RSS within a run — it tops out at the
+same id 382513, so nothing landed mid-run. (4) Blue tracker (`data.blueTracker.default`):
+50 entries, newest 2026-08-18 20:54.
+
+**LOGGED: a `kind: "hotfix"` entry dated 2026-08-18** — Blizzard's Season-2 launch-day
+hotfixes. Verified against the canonical forum topic **2336376** ("World of Warcraft: Midnight
+Hotfixes - August 18"), not just the Wowhead mirror; cited via `wowheadUrl` news=382516,
+because a hotfix has no post in the tracked thread.
+
+**The interesting part is what was deliberately NOT logged.** The article's title reads "Many
+Class Bug Fixes" but its PvE class section is substantial — and it turned out to be the
+SHIPPED form of the 2026-08-15 "Class Tuning Incoming – August 18" pass already in this feed.
+All 15 of those specs were compared line by line against the forum JSON and are identical in
+spec, effect and value. Restating them would count the same tuning **twice** in the outlook
+tally, which counts LINES — the same double-counting reason `outlookFor` excludes the launch
+patch notes. So the entry carries only what is genuinely new:
+
+- **Elemental Shaman — the one new throughput change**, a spec absent from the 08-15 pass:
+  +5% all damage alongside a Venomous Abyss 4-piece bug fix (the Overcharge! buff was
+  sometimes not consumed, inflating free Maelstrom spenders). `spec.tierSet` asOf/source
+  advanced to the 08-18 hotfix with a dated note on the 4-set — the tier-set upkeep gate's
+  requirement, and a pure bug fix still bumps asOf.
+- Bug-fix and mechanical lines for Blood DK, Subtlety Rogue, Demonology, Affliction,
+  Destruction, Protection Warrior and the Hellcaller tree. Each was run through
+  `classifyHighlight` before writing: **only the Elemental line votes** (as a buff); the rest
+  return null, which is correct — they state no direction.
+
+**Excluded, and said so in the entry label:** the whole PLAYER VERSUS PLAYER section. Worth
+pinning — **Fire Mage's Venomous Abyss 4-piece change lives in that section and is explicitly
+scoped "in PvP combat"**, so its PvE set bonus is unchanged and `spec.tierSet` was NOT touched.
+A run that read that line as a set change would have bumped a tier set on a PvP-only tweak.
+Also excluded: the Delves / Dungeons / Items / Professions / Quests sections and a cosmetic
+tamed-Hydra size reduction.
+
+**Also swept and correctly not logged:** "Coiled Altar Massively Nerfed" (encounter tuning) and
+"Venomcursed Ula'tek Neck Tuning" (item), and Kaivax's 2026-08-12 **"Season 2 Class Tuning
+Plans"** (topic 2335871) — read in full, it is a tuning ROADMAP with no per-spec line, which is
+why it belongs in no feed entry.
+
+**Coverage, recomputed rather than quoted:** 1 spec at `ptr: null` (Demonology Warlock, the
+deliberate null). **`expertRead` now returns null for all 40 specs in BOTH brackets** — this is
+not lost takes, it is by construction: it gates on `PHASES.ptr`, and the 12.1 PTR phase ended
+at the flip. The expert lane is DORMANT between cycles and returns when a 12.2 PTR entry is
+added to `PHASES`. Anyone running CLAUDE.md's coverage snippet after the flip will see 40/40
+"gaps" and should read them as the phase, not a regression.
+
+Zone state, for the record: 54 / 52 / 56 / 57 all dormant (closed cycle, no contract rows, no
+fetch attempted). Live S2 zones 53 / 55 have no fetch path — see the metrics log.
+
 ## 2026-08-18 (nightly)
 
 **No new build post — but the Aug-18 tuning post was EDITED twice and those edits are now in

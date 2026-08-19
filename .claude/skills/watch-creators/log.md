@@ -16,6 +16,63 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-19 (nightly)
+
+**44/44 feeds polled OK, 660 entries, 66 unseen — all in-cycle. 2 queued, 0 distilled.**
+
+Distillation was impossible rather than skipped: `transcript-fetch/summary.json` reports
+verdict `ok` with **requested 0 / fetched 0**, because `pending-transcripts.json` was EMPTY
+when the deterministic step ran, so there was nothing to drain and no transcript to read.
+No transcript was fetched from YouTube or any API by this agent; nothing was installed or
+upgraded. No `latest` field advanced (there was nothing to advance it to).
+
+Seen-set rebuilt from the four STRUCTURED lanes — **1096 ids** (pending-transcripts
+`seen[]` 525 / `skipped[]` 361 / `videos[]` + every `youtu.be` id in a take or metaNote url) —
+never a regex over log prose. Cycle bound taken as `Math.min(...builds.map(b => b.date))` =
+**2026-06-18**, not `builds[0]`.
+
+Launch week is loud: 66 unseen against ~33 last night, and **every one is in-cycle**, so the
+date bound filtered nothing tonight and the triage did all the work.
+
+**QUEUED (2)** — nightly keyword filter plus fetch-broadly/queue-narrowly, protecting
+Supadata's 100-request MONTHLY budget:
+- `38bYF2buWg0` **Dratnos** — "Race to World First Day 1 Recap - A Tough Start" (2026-08-19).
+  Registered Warrior specialist; day-one raid analysis, and raid is the bracket carrying the
+  least evidence.
+- `W40Mcpr1kLg` **Shindigg** — "12.1 Rogue Guide (All changes)" (2026-08-18). His own class,
+  and a *changes* walkthrough rather than a route/BiS guide, which is the distinction that
+  makes it worth a transcript.
+
+**NOT queued, counted rather than estimated (64), and NOTHING retired to `seen[]`** — no
+dismissal tonight is durable:
+- **24 stream / Twitch shells and live launch broadcasts** (YoDaTV, Critcake, Tettles,
+  LBNinja7, AutomaticJak "SERVERS UP", Pkpawner, Whispyr, Clandon, Shindigg splits, Megasett,
+  Shadarek raid splits, Tactyks launch stream, Dalaran's livestream, Supatease "DAY 1", and
+  Maximum's "RWF day 1", whose description is literally "watch on twitch"). Captions cannot
+  exist yet — leave UNSEEN so the VOD is reconsidered.
+- **21 guides** — dungeon routes (Sha ×5, YoDaTV, Tactyks ×2), boss/delve guides (AutomaticJak
+  Nymrissa, Tactyks Azta'rec, NeekapHere Azta'rec, Critcake), spec how-tos (leak ×2, Sam,
+  Shadarek Devourer, Dalaran Subtlety, LBNinja7 Resto Shaman), gearing/shopping PSAs (leak,
+  Megasett). Standing rule: guide-shaped content carries no spec-strength read. **4 of these
+  are Tactyks' M+ content, separately firewalled** — he writes the Method M+ list.
+- **8 PvP-framed** — Supatease ×5 (including "Nine WORST Specs 12.1" and "DISCOVERING THE BEST
+  CLASSES 12.1"; the 08-09 precedent records his season reads as PvP-reasoned, and his
+  registered scope is Shaman/Warlock/Warrior anyway, so the Assassination Rogue clip is out of
+  scope twice over) and Dalaran Gaming's three "5v5 1v1 Duels" videos.
+- **6 raid-boss PoV clips** (Bansherz) whose entire description is a Twitch link and a
+  Warcraft Logs url — no commentary to distil.
+- **4 shorts/off-topic**, and NeekapHere's "This Week In WoW August 18th" news round-up, left
+  unseen on the 08-18 precedent.
+
+`media:description` was parsed alongside every title on the discovery pass and settled most of
+that triage at zero transcript cost — the Bansherz PoV clips and the Maximum restream were
+decided entirely by their descriptions.
+
+**Worth knowing before the next run spends budget here:** `expertRead` gates on `PHASES.ptr`,
+which is null between cycles, so new takes currently move no projection at all — they are
+drawer context only until a 12.2 PTR phase opens. That does not change the queueing rules, but
+it does mean a thin night here costs nothing downstream.
+
 ## 2026-08-18 (nightly)
 
 **Discovery only — 0 takes, 0 metaNotes, 4 queued.** `transcript-fetch/summary.json` reports

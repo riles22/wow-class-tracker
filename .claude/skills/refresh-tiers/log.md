@@ -16,6 +16,66 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-19 (nightly)
+
+**ARCHON REBUILT FOR SEASON 2 — the event this lane has been waiting for, and it landed
+half-finished.** Four sources refreshed; per-page row counts printed and reconciled against
+the 27 DPS + 7 healer + 6 tank = 40 roster shape before any merge, as the standing rule
+requires.
+
+- **Icy Veins** — 6 pages, direct browser-UA GET, HTTP 200, 181–329 KB. 80/80 rows, 0
+  unmatched, **0 tier moves**. Page self-dates identical to last night (raid DPS 08-16,
+  healer 08-13, tank 08-08; all three M+ 08-16) and agreeing 6/6 with published-evidence,
+  so nothing rebuilt since the 08-18 S2 re-cut. The raid-HEALER page STILL titles itself
+  "Patch 12.0.7 / Midnight" over a Season-2 body (21 S2 mentions vs 6 S1) — body over title,
+  third run in a row. seasonVerified s2, unchanged.
+- **Method** — 2 pages, 80/80, 0 unmatched, **0 tier moves**. M+ page carries 8 tier blocks;
+  the extra 4 are the dungeon-difficulty list, rejected by ROSTER MATCH (9 labels failed to
+  map), never by position. NEW TRAP WORTH KNOWING: both pages' `<meta description>` still
+  reads **"The War Within Season 3"** while the rendered body says "Midnight Season 2 Raid,
+  The Venomous Abyss" / "in Midnight Season 2". An era check that reads the meta tag would
+  drop both pages out of the consensus on stale site chrome. Read the BODY.
+- **Wowhead** — 6 pages, full browser header set, 80/80, 0 unmatched, **0 tier moves**.
+  Four pages re-dated themselves to 2026-08-18 (raid healer, M+ DPS/healer/tank) while
+  publishing identical letters — a launch-day rebuild that changed no ranking. `published`
+  re-read per page, agreeing 6/6 with published-evidence.
+- **Archon** — the big one. **M+ pages have flipped to Season 2**: the encounter selector
+  now lists the eight S2 dungeons (Altar of Fangs, Den of Nalorakk, Kings' Rest, Murder Row,
+  Ruby Life Pools, Temple of Sethraliss, The Blinding Vale, Voidscar Arena), scores read
+  2663–2726 against last week's S1 3396–4256, and 88,280 / 29,405 / 29,435 parses sit behind
+  them. seasonVerified **s1 → s2** on all three, 40/40 letters merged, **25 tier moves**
+  (Arcane Mage C→S, Devastation Evoker C→S, Blood DK C→S, Fury Warrior A→C the largest).
+  **RAID pages have also rebuilt to S2 and publish NOTHING** — "DPS Tier List for Mythic The
+  Venomous Abyss", the 9 S2 bosses in the selector, `totalParses: 0`, and all three tierLists
+  (popularity / throughput / survivability) empty, because Mythic opened hours ago.
+
+**The judgement call, recorded because the next run will face it again:** archon's three RAID
+pages were deliberately left at `seasonVerified: "s1"`. The field gates whether the STORED
+letters feed the live-season consensus, and the stored archon raid letters are still the S1
+cut — flipping to s2 would average S1 opinion into the S2 raid consensus. The apparently
+cleaner alternative, nulling those 40 letters as "upstream publishes no rating", is blocked:
+archon's ratings count would fall 80 → 40 against the archon-tiers floor of 60 AND a 50% drop
+against maxRowDropPct 0.25, and neither guard has an agent-side ack path. **When Archon's raid
+list populates, flip those three pages to s2 in the same run that merges the new letters.**
+
+**Net effect on the published grid: ZERO consensus moves, and that is correct.**
+`sourceSeasonOk` reads EVERY page of a bracket, and archon's M+ bracket still contains the
+per-dungeon encounter page at s1 — so Archon stays dark in both brackets' consensus. That is
+the documented mid-rebuild refusal ("never mix two seasons in one term") doing exactly its
+job, and it is why the anomaly gate saw 0 moves on the night an outlet re-cut 25 letters.
+
+**Encounter lane is stuck and needs the owner.** Both registered per-encounter URLs
+(`.../raid/mythic/imperator`, `.../mythic-plus/10/windrunner-spire/this-week`) now return
+HTTP 200 with **no `page` object in `__NEXT_DATA__` at all** — Archon retired the S1
+encounters. Probing the replacements: an S2 dungeon page (altar-of-fangs) returns a healthy
+27-row DPS score tier list, an S2 raid boss page (nekzali-the-soulcoiler) returns
+`totalParses: 0` and empty tier lists. So a full S2 rewrite tops out at 8 × 40 = **320 tier
+rows**, below the archon-encounters floor of 440 and a 48% drop against the committed 619 —
+two hard publish-gate errors with no ack channel. `data/encounter-tiers.json` was therefore
+left byte-identical (season stamp still `s1`, so the UI keeps the Fight selector hidden).
+Unsticking it needs a reviewed floor change in `required-sources.json`, or patience until
+Venomous Abyss accumulates enough parses for per-boss tiers.
+
 ## 2026-08-18 (nightly)
 
 **Icy Veins rebuilt for Season 2 — 18 tier moves, the biggest single-source move in weeks.**

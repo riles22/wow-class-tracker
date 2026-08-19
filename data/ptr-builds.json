@@ -3,6 +3,32 @@
   "thread": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811",
   "builds": [
     {
+      "date": "2026-08-18",
+      "kind": "hotfix",
+      "label": "Live 12.1 hotfixes for August 18 — the Season 2 launch-day round-up. Canonical: Blizzard's “World of Warcraft: Midnight Hotfixes - August 18” blue post (us.forums topic 2336376, mirrored as the Blizzard News “Hotfixes: August 18, 2026” article); logged kind “hotfix” because it is a live-realm hotfix round-up with no post in the 12.1 development-notes thread this feed tracks, so the Wowhead round-up carries the citation. MOST OF ITS PvE CLASS SECTION IS DELIBERATELY NOT RESTATED HERE: it is the shipped form of the 2026-08-15 “Class Tuning Incoming – August 18” pass already in this feed, and every one of those lines was compared against the forum JSON and found identical in spec, effect and value (Blood DK San'layn, Frost DK, Devourer DH, Restoration Druid, BM Hunter, Arcane Mage, Mistweaver, Retribution Paladin, Discipline Priest, Holy Priest, Assassination Rogue, Subtlety Rogue, Enhancement Shaman, Demonology Warlock, Fury Warrior — 15 specs). Restating them would count the same tuning twice in the outlook tally, the same double-counting reason the launch patch notes are excluded from it. What IS new, and is logged below: Elemental Shaman, a spec absent from the 08-15 pass, gains +5% all damage alongside a Venomous Abyss 4-piece bug fix (its tierSet.asOf and source were advanced accordingly); plus bug fixes and mechanical changes for Blood Death Knight, Subtlety Rogue, Demonology Warlock, Affliction Warlock, Destruction Warlock, Protection Warrior and the Hellcaller hero tree, none of which state a throughput change and none of which vote in the tally. Excluded as out of scope: the whole PLAYER VERSUS PLAYER section (Devourer DH, Restoration Druid, Fire Mage, Holy and Retribution Paladin, Restoration Shaman, Destruction Warlock) — note in particular that Fire Mage's Venomous Abyss 4-piece change there is explicitly scoped “in PvP combat”, so its PvE set bonus is unchanged and spec.tierSet was deliberately not touched; and the Delves, Dungeons, Items, Professions and Quests sections, plus a cosmetic reduction in tamed Hydra size.",
+      "wowheadUrl": "https://www.wowhead.com/news=382516/patch-12-1-hotfixes-for-august-18th-many-class-bug-fixes",
+      "specsAffected": [
+        "Elemental Shaman",
+        "Blood Death Knight",
+        "Subtlety Rogue",
+        "Demonology Warlock",
+        "Affliction Warlock",
+        "Destruction Warlock",
+        "Protection Warrior",
+        "Warlock (Hellcaller hero talents)"
+      ],
+      "highlights": [
+        "Elemental Shaman — Corrected an issue where the Venomous Abyss 4-piece set bonus Overcharge! buff was sometimes not consumed when casting a Maelstrom spending ability. All damage dealt increased by 5%. Developers' notes: a PTR bug was inflating the number of free Maelstrom spending abilities the 4-piece granted, so the damage increase compensates for the fix.",
+        "Blood Death Knight — Deathbringer: resolved an issue causing Echoing Fury to grant Exterminate stacks on Reaper’s Mark casts.",
+        "Subtlety Rogue — Shadow Dance now cancels when swapping talents and can no longer be cancelled manually; Deathstalker: Lingering Darkness now cancels when swapping talents, when a raid encounter starts, and when an M+ dungeon starts.",
+        "Demonology Warlock — Burning Cleave (granted by Antoran Armaments) now strikes enemies in a circular area, rather than a cone. The tooltip will be updated in a future patch.",
+        "Affliction Warlock — Fixed an issue where Withering Bolt would not account for Wither.",
+        "Destruction Warlock — Fixed an issue where Conflagration of Chaos would not guarantee a Conflagrate or Shadowburn to critically strike. Fixed an issue where Shadowburn would not apply its debuff after dealing damage to a Havoc target.",
+        "Protection Warrior — Mountain Thane: fixed an issue that would sometimes disable the bonus Thunder Clap damage from Crashing Thunder.",
+        "Warlock (Hellcaller hero talents) — Fixed an issue where Blackened Soul would not function with mouse-over casting."
+      ]
+    },
+    {
       "date": "2026-08-15",
       "kind": "build",
       "label": "“Class Tuning Incoming – August 18” (Linxy, 2026-08-15T00:11Z): the Season 2 launch tuning pass, applied with the August 18 weekly reset. This is an official forum post but a STANDALONE topic (2336820), not a reply in the 12.1 development-notes thread the feed’s `thread` key tracks, so its post number is 1 of its own topic; the Wowhead mirror is carried alongside. Blizzard’s stated aim: pull back Venomous Abyss tier sets that overperform while raising the affected specs’ baseline abilities to limit the net impact. Eight Season-2 set bonuses are revised (Frost DK, Devourer DH, Beast Mastery Hunter, Arcane Mage, Mistweaver Monk, Subtlety Rogue, Demonology Warlock, Fury Warrior) and spec.tierSet was updated for each alongside this entry. Blizzard EDITED the post twice on 2026-08-17 (post updated_at 2026-08-18T01:51Z, re-verified against topic 2336820 that day): a Discipline Priest line (Void Shield reflects 10%, was 15%) and a new Retribution Paladin line (all ability damage +6%) were added to the PvE CLASS CHANGES section, and the Frost Death Knight line now reads \"all ability and auto-attack damage\"; all three are folded into the highlights below. The post’s separate PLAYER VERSUS PLAYER section is out of scope for this PvE tracker and is deliberately not distilled — Fire Mage, Restoration Shaman and Destruction Warlock appear there only (the Fire Mage set-bonus line is PvP-only), and Retribution Paladin and Holy Paladin carry PvP-only lines there in addition to Retribution’s PvE buff above.",
