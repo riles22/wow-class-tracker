@@ -16,6 +16,52 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-20 (nightly CI)
+
+Between-cycles posture held: dormant lanes (WCL PTR zones 54/52/56/57) untouched, and no
+WCL fetch of any kind was made by this agent. **One entry logged.**
+
+**Four channels swept, all healthy.** (1) Wowhead news RSS parsed per `<item>` block: 40
+items, newest 2026-08-20 02:09 CDT. (2) The news INDEX (`data.news.newsData`, brace-balanced
+from the `id=` attribute) because it leads RSS within a run — it tops out at the same
+news=382535, so the two agree and nothing landed mid-run. (3) Blue tracker
+(`data.blueTracker.default`): 50 entries, newest 2026-08-19 22:15. (4) Dev-notes thread
+`2317811.json` via curl for the full `post_stream` (WebFetch truncates to post 1): 17 posts,
+`last_posted_at` 2026-07-31, newest still Linxy #19 — the closed 12.1 cycle's expected quiet,
+not a lost thread. **No 12.2 PTR announcement anywhere in the four channels.**
+
+**LOGGED — `kind: "hotfix"`, dated 2026-08-19**, "Patch 12.1 Hotfixes for August 19th"
+(wowheadUrl news=382535). Verified against the CANONICAL forum source rather than the mirror:
+Kaivax's running hotfix topic **2336376**, whose title has rolled to "World of Warcraft:
+Midnight Hotfixes - August 19" and whose post 1 was edited 2026-08-20T03:14Z to append the
+August 19 section. Read with heading structure INTACT off the cooked HTML `<ul>` nesting —
+which is what settled the two attribution questions: **Army of the Dead** sits directly under
+the bare `Death Knight` heading (logged `Death Knight (class-wide)`, so it reaches all three
+DK specs via `CLASS_WIDE`), while **Dark Simulacrum / Cooldown Manager** sits INSIDE the
+`Unholy` sub-list despite reading like a baseline line. Flattened to prose both would have
+been guessable either way.
+
+**The whole Classes section is bug fixes — no tuning value anywhere**, so every one of the 6
+highlights classifies null and NONE votes in the outlook tally. That is the honest reading of
+a bug-fix pass, not a gap. No set bonus is touched, so no `spec.tierSet` was advanced and the
+tier-set upkeep gate stays quiet by fact rather than by omission. specsAffected ↔ highlights
+reconcile 6/6.
+
+**Swept and correctly NOT logged**, each checked rather than assumed: the Aug-19 post's own
+Delves / Dungeons and Raids (Blinding Vale, Ruby Life Pools, Temple of Sethraliss and five
+Venomous Abyss bosses) / Items / Quests sections and its single PvP line; "Ula'tek Nerfed"
+and "Coiled Altar Massively Nerfed" (encounter tuning); "Hunter's Ritual Stone Weapon
+Embellishment Nerfed" ("Hunter's Ritual Stone" is an ITEM name, not the class — the bare-token
+trap in item shape); "Venomcursed Items Secondary Stat Changes" and "Blizzard Reverts Special
+Weapon Restrictions" (items); "Mythic+ Dungeon Tuning with Season 2 Launch" (dungeon); and
+Kaivax's standalone blue post **"Item Adjustment Incoming - August 25"** (topic 2338382),
+fetched in full — it adjusts exactly one item (Aqirbane Reliquary secondary stats) and carries
+no class line.
+
+**Writeup lane**: recomputed, not quoted — 1 spec at `ptr: null` (Demonology Warlock, the
+deliberate null: the source reported no changes). No new per-spec 12.1 review articles in the
+RSS window; the cycle is closed, so this is the expected steady state.
+
 ## 2026-08-19 (local run — scheduled)
 
 Between-cycles posture held. Dormant lanes (WCL PTR zones 54/52/56/57) not touched.

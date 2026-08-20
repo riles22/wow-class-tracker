@@ -16,6 +16,75 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-20 (nightly CI)
+
+**Sources refreshed: all four. 240 letter assignments parsed, 0 unmatched, 20 tier moves —
+all Archon M+, and they are real.** Per-page row counts were printed and reconciled against
+the 27 DPS + 7 healer + 6 tank = 40 roster shape BEFORE every merge.
+
+- **Icy Veins** — 6 live pages by direct browser-UA GET, HTTP 200, 192–340 KB, parsed from
+  `<table class="tier-list">` rows (first `<td>` = the letter; each `tier-list-entry`'s FIRST
+  `alt=` looked up WHOLE against the roster, never split positionally, which is what keeps the
+  six two-word-class specs matchable). 27/7/6 raid + 27/7/6 M+ = **80 rows, 0 unmatched, ZERO
+  tier moves.** Consistent with the page dates, which are byte-identical to last night (raid
+  DPS 08-16, raid healer 08-13, raid tank 08-08, M+ all three 08-16) and agree **6/6** with
+  `published-evidence/evidence.json`. Era from each page's own title AND body: five titles
+  self-identify Patch 12.1 / Season 2, and the raid-HEALER page again carries a
+  "Patch 12.0.7 / Midnight" title over a Season-2 body (21 S2 mentions to 6 S1) — body over
+  title, the blue-tracker precedent. `seasonVerified` stays s2 on all six.
+- **Method** — both pages live, HTTP 200, 158/161 KB, parsed from `.tier__tier` blocks
+  (`tier__title` = letter, img `alt` = "Spec Class"): 40 raid + 40 M+, **0 unmatched, ZERO
+  moves**. The M+ page again carries **8** tier blocks, not 4; the extra set is the
+  dungeon-difficulty list and was rejected by ROSTER MATCH (9 non-roster labels — the eight S2
+  dungeons plus the Method logo — simply failed to map), never by position. Era from the BODY:
+  raid "…the Midnight Season 2 Raid, The Venomous Abyss" (Last Updated 10th August 2026), M+
+  "…in Midnight Season 2" under Tactyks' byline (Last Updated 13th August 2026). **The stale
+  `<meta description>` still reads "The War Within Season 3" on both** — site chrome that
+  contradicts the rendered body; an era check reading the meta tag would wrongly drop both
+  pages from the consensus. `seasonVerified` stays s2.
+- **Wowhead** — 6 pages with the FULL browser header set (a UA-only request is Cloudflare-403;
+  r.jina.ai stays untried, IP-403 on `/guide/*` since 2026-08-03), HTTP 200, 73–337 KB. Parsed
+  by unescaping `\/` → `/` across the whole document FIRST, then finding
+  `[tier-list=rows] … [/tier-list]` — never anchoring on `WH.markup.printHtml(` — with tolerant
+  whitespace on `[tier-label …]X [/tier-label]` and the `[spec-badge=<spec>-<class>]` kebab slug
+  as the identifier: **exactly one tier-list block per page**, 80 rows, 0 unmatched, **ZERO
+  moves**. All six titles read "for Midnight Season 2"; `seasonVerified` stays s2. `published`
+  re-read per page and NOT carried forward — raid DPS 08-14, raid healer 08-18, raid tank 08-14,
+  M+ DPS/healer/tank all 08-18 — unchanged from stored and agreeing **6/6** with the evidence
+  artifact. Nothing rebuilt upstream since Season-2 launch day.
+- **Archon** — 6 aggregate pages, HTTP 200, 48–92 KB, parsed from `<script id="__NEXT_DATA__">`
+  at `props.pageProps.page.specTierListSection.tierLists`, taking metric **"score"** for M+
+  (never the default popularity grouping) and resolving every entry from its icon "Class-Spec"
+  token with `tiers[].entries` read as a list OF LISTS. **M+ merged 40/40 with 20 tier moves.**
+  It is a genuine week-two re-cut, not a parse artifact: the M+ parse pool has nearly
+  quadrupled overnight (88,280 + 29,405 + 29,435 last night → 332,239 + 110,677 + 110,727),
+  0 rows unmatched, letters S/A/B/C as before. Largest moves: Assassination Rogue B→S, Fire Mage
+  C→A, Discipline Priest A→C, Feral Druid and Outlaw Rogue A→S, Guardian Druid and Shadow Priest
+  S→A. **RAID: still publishing NOTHING** — all three raid pages describe Season 2 (title
+  "Midnight DPS/Healer/Tank Rankings and Raid Tier List", the 9 S2 bosses in the selector) but
+  return `totalParses` 0 with all three tierLists (popularity/throughput/survivability) empty,
+  two days into Mythic Venomous Abyss. Their `seasonVerified` was again left at **s1
+  DELIBERATELY**, the same judgement as 08-19 and for the same reason: the field gates whether
+  the STORED letters feed the live-season consensus, those stored letters are still the S1 cut,
+  and flipping to s2 would average S1 opinion into the S2 raid consensus. Nulling them instead
+  breaches the archon-tiers row floor (80 → 40 against min 60) and the 25% row-drop guard,
+  neither of which has an agent-side ack path.
+  **OWNER FLAG (repeat of 08-19): when Archon's raid tier list populates, re-verify those three
+  pages to s2 in the SAME run that merges the new letters.**
+
+**Consensus effect: 8 cells moved, all M+, all one band, 0 two-band** (Augmentation B→C,
+Marksmanship A→B, Arcane S→A+, Holy Paladin A+→S, Protection Paladin A+→A, Retribution A→B,
+Assassination A→A+, Demonology A→B). Checked against the anomaly limits BEFORE finishing:
+8 of max 25 total, 0 of max 6 two-band, 0 vanished — no ack needed and none proposed. Archon
+is in the M+ consensus (4 sources) and out of the raid consensus (3 sources), which is the
+2026-08-19 `ancillary: true` change working as designed: the retired S1 per-dungeon page no
+longer keeps Archon's fully S2-verified M+ lists dark.
+
+**No `seasonVerified` value changed this run**, so `freeze-season.mjs` has nothing to freeze and
+was correctly not run agent-side. Snapshots: the 6 Archon aggregate pages + all Icy Veins /
+Method / Wowhead pages 2026-08-19 → 2026-08-20; the 3 labelled (ancillary) Archon pages left at
+2026-08-18 because nothing landed from them, so their 10-day gates keep aging visibly.
+
 ## 2026-08-19 (nightly)
 
 **ARCHON REBUILT FOR SEASON 2 — the event this lane has been waiting for, and it landed

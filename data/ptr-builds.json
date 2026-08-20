@@ -3,6 +3,31 @@
   "thread": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811",
   "builds": [
     {
+      "date": "2026-08-19",
+      "kind": "hotfix",
+      "label": "Live 12.1 hotfixes for August 19 — a BUG-FIX round-up with no tuning values anywhere in its Classes section. Canonical source verified directly: Kaivax's running hotfix blue post (us.forums topic 2336376, whose title now reads “World of Warcraft: Midnight Hotfixes - August 19”; post 1 was edited 2026-08-20T03:14Z to append the August 19 section), read with its heading structure intact rather than off the Wowhead mirror. Logged kind “hotfix” because it is a live-realm round-up with no post in the 12.1 development-notes thread this feed tracks, so the Wowhead article carries the citation. Every class line below was checked against classifyHighlight: none states a throughput change, so NONE votes in the outlook tally — which is the honest reading of a bug-fix pass. No set bonus is touched anywhere in the post, so no spec.tierSet was advanced. The Army of the Dead line sits under the bare Death Knight heading with no spec qualifier (nesting confirmed against the forum HTML, not the flattened text), so it is logged class-wide rather than attributed to a spec; the Dark Simulacrum Cooldown Manager line, by the same reading, sits INSIDE the Unholy block and is logged there. Deliberately not distilled, as out of scope: the Delves section; the whole Dungeons and Raids section (encounter fixes for The Blinding Vale, Ruby Life Pools, Temple of Sethraliss and five Venomous Abyss bosses); Items (the Aman'muso, Warlord's Vengeance main-hand restriction being reinstated); Quests; and the single Player versus Player line about Conqueror's Venomous Lacquer.",
+      "forumPostNumber": null,
+      "forumUrl": null,
+      "wowheadUrl": "https://www.wowhead.com/news=382535/patch-12-1-hotfixes-for-august-19th-bug-fixes-for-raids-and-mythic",
+      "icyveinsUrl": null,
+      "specsAffected": [
+        "Death Knight (class-wide)",
+        "Unholy Death Knight",
+        "Restoration Druid",
+        "Marksmanship Hunter",
+        "Retribution Paladin",
+        "Restoration Shaman"
+      ],
+      "highlights": [
+        "Death Knight (class-wide) — Resolved an issue causing Army of the Dead Epidemic Orders to cast from the Death Knight instead of the Lesser Ghoul.",
+        "Unholy Death Knight — Resolved an issue causing Forbidden Knowledge Rank 4 to not have a chance to activate when the Dread Plague target has a damage absorb effect; resolved an issue causing Transfusion to not empower already summoned Lesser Ghouls; resolved an issue causing Lord of the Dead to occasionally have a delay in between casts; Dark Simulacrum can now be tracked through the Cooldown Manager.",
+        "Restoration Druid — Fixed an issue where Rejuvenation could be removed early if the player gained or lost haste while it was active.",
+        "Marksmanship Hunter — Corrected an issue where Rapid Fire fired fewer shots than intended when hitting a second target with the Aspect of the Hydra talent.",
+        "Retribution Paladin — Fixed an issue where Paladins talented into Radiant Glory would not have Avenging Wrath be applied after casting Wake of Ashes while silenced.",
+        "Restoration Shaman — Totemic: Corrected an issue where the Whirling Water effect was not properly working."
+      ]
+    },
+    {
       "date": "2026-08-18",
       "kind": "hotfix",
       "label": "Live 12.1 hotfixes for August 18 — the Season 2 launch-day round-up. Canonical: Blizzard's “World of Warcraft: Midnight Hotfixes - August 18” blue post (us.forums topic 2336376, mirrored as the Blizzard News “Hotfixes: August 18, 2026” article); logged kind “hotfix” because it is a live-realm hotfix round-up with no post in the 12.1 development-notes thread this feed tracks, so the Wowhead round-up carries the citation. MOST OF ITS PvE CLASS SECTION IS DELIBERATELY NOT RESTATED HERE: it is the shipped form of the 2026-08-15 “Class Tuning Incoming – August 18” pass already in this feed, and every one of those lines was compared against the forum JSON and found identical in spec, effect and value (Blood DK San'layn, Frost DK, Devourer DH, Restoration Druid, BM Hunter, Arcane Mage, Mistweaver, Retribution Paladin, Discipline Priest, Holy Priest, Assassination Rogue, Subtlety Rogue, Enhancement Shaman, Demonology Warlock, Fury Warrior — 15 specs). Restating them would count the same tuning twice in the outlook tally, the same double-counting reason the launch patch notes are excluded from it. What IS new, and is logged below: Elemental Shaman, a spec absent from the 08-15 pass, gains +5% all damage alongside a Venomous Abyss 4-piece bug fix (its tierSet.asOf and source were advanced accordingly); plus bug fixes and mechanical changes for Blood Death Knight, Subtlety Rogue, Demonology Warlock, Affliction Warlock, Destruction Warlock, Protection Warrior and the Hellcaller hero tree, none of which state a throughput change and none of which vote in the tally. Excluded as out of scope: the whole PLAYER VERSUS PLAYER section (Devourer DH, Restoration Druid, Fire Mage, Holy and Retribution Paladin, Restoration Shaman, Destruction Warlock) — note in particular that Fire Mage's Venomous Abyss 4-piece change there is explicitly scoped “in PvP combat”, so its PvE set bonus is unchanged and spec.tierSet was deliberately not touched; and the Delves, Dungeons, Items, Professions and Quests sections, plus a cosmetic reduction in tamed Hydra size.",

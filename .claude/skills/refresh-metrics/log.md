@@ -16,6 +16,101 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-20 (nightly CI)
+
+**Merged: 160 metric rows across three sources (Archon M+ 80, Murlok 40, Mythicstats 40).
+Held back: Bloodmallet and SimulationCraft, both deliberately. WCL: evidence-only, no fetch.**
+
+- **Archon numerics** — read from `props.pageProps.page.specRankingsSection.table.data[]`, NOT
+  the `tierList` structure. **M+ refreshed in full**: `M+ score (95th pct)` and `Popularity`,
+  27 + 7 + 6 = 40 specs each, 0 unmatched, floats rounded to the STORED precision per series
+  (score integer, popularity 1 dp — read off `specs.json` first, not assumed), each row's
+  `parses` carried through as `n` (332,239 / 110,677 / 110,727). Shape-checked BEFORE merging:
+  every popularity value a plausible percentage, role groups summing 99.9 / 99.9 / 100.1, and
+  **no row equal to that spec's own 95th-pct DPS** (0 clashes) — the check that catches the
+  DPS-column-under-a-`%`-unit failure. Movement is mild: score family median 2709 → 2730
+  (+0.8%), worst single row a popularity move of 30.8% on a value of 1.3, far below the
+  100-magnitude floor. asOf = Archon's own `lastUpdated` 2026-08-19, never the run date.
+  **The RAID half could not be refreshed at all** — `specRankingsSection` is EMPTY (0 rows,
+  `totalParses` 0) on all three Season-2 raid pages, the same rebuild-with-no-data state as the
+  raid tier lists rather than a parse failure; the recipe was proven on the same run against the
+  M+ pages. So `archon-metrics` (33 rows), `archon-hps` (7) and the 40 RAID popularity rows stay
+  byte-identical at 2026-08-16 and nothing was restamped. Reported as four separate manifest
+  rows per the split rule — coupling them would hide which series failed.
+- **Murlok** — 3 meta pages by plain GET (r.jina.ai does not work on murlok), HTTP 200,
+  41–71 KB, 40/40 parsed from the `meta-item` blocks. **MERGED.** All 40 values moved upward,
+  family median 2192 → 2744.5 (**+25.2%**, against `maxFamilyMedianMovePct` 0.35) with a worst
+  single row of Fire Mage 1539 → 2346 (**52.4%**, against `maxValueMovePct` 0.6) — both checked
+  BEFORE merging, both inside the guards, so this lands without an ack. This is week-two of
+  Season 2 doing exactly what a top-50 *ceiling* does: no zeros anywhere, range 2346–2898.
+  Pages self-identify "Mythic+ in Midnight Season 2" and **publish their own timestamp** in a
+  `datetime=` attribute (2026-08-20T03:32Z) — asOf is that, not the run date.
+- **Mythicstats** — `https://mythicstats.com/period/latest` server-rendered (r.jina.ai is
+  Cloudflare-403 on this host), 302 → **/period/1077**, the SAME period as last night but no
+  longer half-filled: the page now reads **"Top 2000 keys, 10000 characters (5914 unique), 12.1
+  average key level"** where last night it read "Top 999 keys, 4994 characters". So the series
+  finally MEANS what its name says. Parse bounded to the "Spec representation in top keys"
+  section (scanning the whole page yields 59 rows from the Classes-and-specs and per-dungeon
+  blocks), labels normalised on `[-\s]+`: 40 rows, 0 unmatched. Verified it is the
+  representation SHARE and not the `/meta` per-key-PRESENCE column before merging — series sum
+  **100.1%**, role subtotals 30.7 / 29.3 / 20.0 / 20.0, max row 10.1, no zeros. 38 of 40 values
+  moved (Restoration Shaman 5.6 → 8.2, Discipline Priest 2.5 → 1.0); all far below the
+  100-magnitude floor, so the value-move gate correctly does not see them. asOf 2026-08-20:
+  the page publishes no date of its own and the period is live.
+- **WoWMeta** — both JSON API endpoints by plain curl, no headers/proxy/auth (the wowmeta.com
+  HTML is a stale S3 prerender and was not touched). `manifest.json` snapshotDate **2026-08-11**
+  and `rankings/…/0.json` carrying `Last-Modified: Tue, 11 Aug 2026 15:25:05 GMT` — the two
+  agree, so unlike the 08-04 case there is no movement hidden behind a pinned manifest; the
+  rankings file was DIFFED rather than trusted to the manifest date. Selected by WHITELIST
+  (`categoryType ∈ {dps,hps,tank}` + `sortField === "lowerBound"` + `keyRange === undefined`,
+  never a "not dungeon" blacklist — melee/ranged are SUBSETS of dps) = 40 rows, 40/40
+  name-matched. **All 40 `lowerBound` values and `numberOfCharacters` counts byte-identical to
+  stored.** Nothing merged; asOf stays the SOURCE's 2026-08-11. Upstream has now not run a
+  pipeline for **9 days** — one day past the contract's 8 — so the heartbeat reds on this
+  tonight, accurately.
+- **Bloodmallet** — all 27 DPS charts requested, 5 attempts each. **17 return real data and 10
+  still return the 76-byte `{"status": "error"}` body persistently** (Havoc, Devourer, Balance,
+  Feral, Augmentation, Devastation, Windwalker, Retribution, Arms, Fury) — retried rather than
+  treated as structural, per the Beast Mastery precedent. Identical roster to last night: no
+  progress in 24h. Every one of the 17 carries `simc_settings.tier` **"MID2"** (read off each
+  chart, never hard-coded) with chart timestamps of 2026-08-19, while the 26 stored profiles are
+  MID1-era. **MERGED NOTHING**, per the sim-tier uniformity gate: MID2 runs a mean 1.79× MID1
+  and `fightLabels` pools every DPS profile with no provenance key, so a 17-of-27 merge would
+  publish WHICH specs have been re-simmed as if it were spec strength. `simc_settings.ptr` was
+  compared explicitly against the STRING `"0"`. `fightProfile.asOf` therefore stays at the
+  CHARTS' own 2026-07-08 / 07-15 — **43 days stale** — and the heartbeat stays red, which is the
+  true signal.
+- **SimulationCraft** — **NEW UPSTREAM FACT, and it changes nothing tonight.** `MID2_Raid.txt`
+  and `MID2_Raid.html` now EXIST (993 KB / 26.7 MB); both 404'd last night. Not adopted, for two
+  independent reasons, each verified rather than assumed: (a) its header self-identifies
+  `12.1.0.69382 **PTR**` (MID1's reads `Live`), and (b) its `DPS Ranking:` block is a **PARTIAL**
+  run — 32 profiles covering roughly half the DPS roster (no Druid, Evoker, Monk, Warrior,
+  Havoc/Devourer, Retribution), the same "which specs got re-simmed" trap the Bloodmallet gate
+  exists to stop, and the metric name `SimC nightly Patchwerk DPS` is season-agnostic so a
+  partial swap would publish silently. Meanwhile `MID1_Raid.txt` is a 272-byte LIVE IN-PROGRESS
+  run with no ranking block (header 1210-01, 12.1.0.69382 Live, git build HEAD **3e75e1b590**,
+  moved again from last night's b4248732a8), so the recipe fell back to `MID1_Raid.html` — which
+  is **UNCHANGED**: 1205-01, 12.0.7.68974 Live, its own timestamp 2026-08-08 07:28:33. Re-parsed
+  anyway by taking the `"data":[…]` array enclosing the FIRST big-value `MID1_` hit (a fixed byte
+  window after `"series"` reads the later burst/DTPS charts at 2.2–2.5× inflation) and mapping
+  profile names by LONGEST-PREFIX with a hyphen allowed: 49 profiles → 26 DPS specs, **all 26
+  byte-identical**; the 9 unmapped names are tank profiles, excluded by design. Nothing merged —
+  an unchanged build is the honest explanation for an unchanged parse. **OWNER DECISION: adopting
+  MID2 is a source-definition change (the registry page is `MID1_Raid.html`) and should wait for
+  a complete, Live-flagged MID2 run.** At 12 days the contract's 10-day gate is firing, correctly.
+- **Warcraft Logs** — **no fetch of any kind by this agent**, by any transport, API or HTML; it
+  holds no credentials. Read from `wcl-fetch/evidence.json` (attemptedAt 2026-08-20T11:00:22Z,
+  this run): verdict **"rdps-broken"** — OAuth and GraphQL healthy (3600 points/hour, 1 spent),
+  but `characterRankings(metric: rdps)` on encounter 3176 returns a bare "Internal server error".
+  `evidence.landed` is EMPTY, so neither zone 53 (raid) nor zone 55 (M+) could land and both
+  stored cuts are unchanged at 2026-08-10. This is the OWNER-ACCEPTED STANDING RED written into
+  the requirements' own labels: the 10-day staleness alarm IS the intended signal, and it clears
+  when a zone-53/55 recipe lands in `src/fetch-wcl.mjs`, not by acking it away.
+- **Robydoby** (best-effort, deliberately OUTSIDE the contract) — tab map fetched: 26 tabs,
+  newest Mythic week still **24/7**, unchanged. The sheet stopped with the 12.1 PTR cycle, which
+  is the expected between-cycles state for a PTR-testing source. Nothing to re-merge; stored
+  rows and snapshot untouched. No manifest row, by design.
+
 ## 2026-08-19 (nightly)
 
 Season-2 re-bases arriving everywhere; two landed, two were held back at the value-move guard,

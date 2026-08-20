@@ -16,6 +16,77 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-20 (nightly CI)
+
+**Discovery complete; 0 takes and 0 metaNotes added; 2 videos queued; no `latest` advanced.**
+No transcript was fetched from YouTube or any transcript API by this agent, and nothing was
+installed or upgraded.
+
+`transcript-fetch/summary.json` reports verdict **"ok"** with requested 0 / fetched 0, because
+`data/pending-transcripts.json` was EMPTY when the deterministic step ran (the 08-19 local run
+had drained both of last night's queued videos into `skipped[]`). So there was no transcript in
+existence to distil from, which is why nothing landed — a supply fact, not a judgement.
+
+**44 unique channel feeds polled with backoff (119 creator entries, 40 of them
+`transcribable: false` 📖, sharing those feeds): 44/44 HTTP 200, 660 entries.** Diffed against a
+**1102-id** seen-set built from the four STRUCTURED lanes (`pending-transcripts` seen[] /
+skipped[] / videos[] plus every `youtu.be` id in a take or metaNote url) — never a regex over log
+prose. **97 unseen, all 97 in-cycle** against the 2026-06-18 bound (the OLDEST date in
+ptr-builds.json, taken as a date and not as `builds[0]`); zero pre-cycle. Launch week plus the
+Race to World First produces a lot of uploads.
+
+**TWO QUEUED**, under the nightly's keyword filter and the fetch-broadly / queue-narrowly rule
+that protects Supadata's 100-request MONTHLY budget. Both are spec-STRENGTH-read shaped, which
+is the scarce thing in week two of a season:
+- **Obli `nmErWeN4woE`** — "From S-tier to F-Tier... / Frost DK Update 12.1 Season 2". Its
+  `media:description` is an explicit read, not a title guess: "TLDR; Frost heavily overnerfed and
+  now DKs are in the worst spot they've been in for years." Squarely inside Obli's registered
+  Frost/Unholy DK scope.
+- **Dorki `3r_vwmTUZXs`** — "OFFICIAL SEASON 2 M+ TIER LIST | Midnight 12.1". Description carries
+  his own chapter list (Intro / The List / Possible Comps / Revisions-Predictions), so it is a
+  20-minute analysis rather than a clip. **Note for the distiller: this is DORKI'S OWN list, not
+  a read-aloud of ours** — he is not on the rejected-creator register, and Archon/Icy Veins/
+  Wowhead/Method are not his sources; if the transcript turns out to recap our registered lists
+  on screen, `skipped[]` it and flag him. Scope to his six registered classes only. He is one of
+  the 14 `[yield] transcribable, zero takes ever` entries in `npm run audit:creators`, so this is
+  the first real chance at a Dorki take.
+
+**NOTHING was retired to `seen[]`: no dismissal tonight is durable.** The other 95 stay UNSEEN
+and were COUNTED, not estimated (2 + 2 + 31 + 29 + 10 + 8 + 4 + 11 = 97) — `media:description`
+was parsed alongside every title and settled most of the triage at zero transcript cost:
+**31** dungeon-route / boss / delve / gearing / BiS / spec-how-to guides (the standing rule that
+guide-shaped content carries no spec-strength read; 5 of them are Tactyks' M+ content, separately
+firewalled because he writes the Method M+ list), **29** livestream and Twitch shells — RWF split
+streams, key-spam and "servers are live" broadcasts — which cannot carry captions yet and must be
+left for the VOD, **10** raid-boss PoV clips whose descriptions are a Twitch link and a log url,
+**8** PvP-framed uploads (Dalaran Gaming's duels plus Supatease's "DISCOVERING THE BEST CLASSES
+12.1" / "NEW PATCH NEW META DISCOVERY" / "Nine WORST Specs 12.1" / "12.1 Most Fun PVP Tier List",
+which the 08-09 precedent records as PvP-reasoned), **4** hashtag Shorts, and **11** others —
+NeekapHere's "This Week In WoW" news round-up (08-18 precedent), three Supatease off-topic
+commentary uploads, Whispyr's untitled reaction, and izen's "Season 2 Start Reminders", a QoL
+to-do list whose chapters are keystone tricks and bonus rolls rather than a per-spec meta read,
+so it is not `metaNotes[]` material.
+
+Two judgement calls worth naming:
+- **Dratnos `o3Ury9zK_1U`** ("RWF Day 2 Recap") NOT queued. Its Day-1 twin was transcript-verified
+  and skipped on 08-19 for a structural reason that has not changed: it is a two-speaker co-cast
+  and the transcript never identifies which voice is Dratnos. Left UNSEEN, not `seen[]` — this is
+  a budget/shape dismissal, and the video becomes recoverable the moment the co-host is identified.
+- **Musguete `MVZ2YaUC9Fo`** ("Season 2 is ROGUE SEASON!!") NOT queued despite a genuine
+  strength claim in its description ("All 3 rogue specs are BLASTING RIGHT NOW!!"). It is a
+  hashtag Short, and a sub-minute duration would be a durable `seen[]` fact — but that duration
+  could not be VERIFIED (see below), and the rule is that only a verified fact retires an id.
+  Left unseen.
+
+**yt-dlp metadata probe hit the datacenter bot wall — settled behaviour, not a new failure.**
+Three `--print` metadata calls (no download, no captions) all returned "Sign in to confirm you're
+not a bot"; backed off immediately after the third rather than hammering, and made no further
+YouTube request. This is the 2026-07-17 finding: residential IPs are unaffected, runners are
+blocked, and the landed fallback is exactly the Supadata queue used above. Practical consequence
+for this lane on CI: `live_status` and `duration` triage is unavailable, so stream-shells and
+Shorts must be judged from title + `media:description` alone and can only be left unseen, never
+retired.
+
 ## 2026-08-19 (local run — residential transcript catch-up, scheduled)
 
 **Queue drained to ZERO: 2 in, 0 out. 44/44 feeds polled, 660 entries, 67 unseen (all
