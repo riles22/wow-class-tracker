@@ -16,6 +16,90 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-20 (local run — residential transcript catch-up, scheduled)
+
+**9 takes added across 8 specs · 0 metaNotes · 4 takes superseded · queue drained 2 → 0 ·
+47 transcripts fetched · 44 verified-skipped · 13 durably retired to `seen[]`.**
+Ran ~3.2h after the nightly (manifest `startedAt` 11:00:40Z), so this was catch-up, not a race.
+
+**The queue's two videos both distilled — the nightly could not, because it had no transcript
+to read.** yt-dlp cleared the bot wall from this IP on the first try for all 47 attempts.
+
+- **Obli `nmErWeN4woE`** (Frost DK Update, 08-20) → 2 takes. Frost DK **both/nerf**: reads the
+  launch tuning as a severe net nerf, arguing it as a before/after against his own June PTR
+  logs at comparable item level (Obliterate ~128k → 62k in a key; Breath of Sindragosa 451k →
+  170k; Frost and Fury 585k → 364k; Reaper's Mark ~500k → 289k; Howling Blast 50k → 80k the only
+  gain), and asks for the PTR Obliterate change to be reverted. Unholy DK **raid/nerf**: a
+  secondary read he explicitly defers a full treatment on. Scoped Unholy to RAID, not both — the
+  evidence he actually shows for it is the all-boss damage table; he gives no M+ read for Unholy.
+- **Dorki `3r_vwmTUZXs`** (Season 2 M+ tier list, 08-19) → 6 takes, **all mplus**, and this is
+  his FIRST take ever. **Dorki is registered as a TANK-only authority** (Blood DK, Vengeance,
+  Guardian, Brewmaster, Prot Paladin, Prot Warrior), so only the six tank reads were attributed:
+  Blood DK **buff** (alone at the top, "deserves its own tier", and he offers his own history of
+  ranking DK worst as a bias check), Guardian **buff** and Vengeance **buff** (meta contenders),
+  Prot Paladin **mixed** (contender on paper, but he builds no comp for it), Brewmaster **mixed**
+  ("aggressively mid" but surrounded by strong comp partners), Prot Warrior **nerf** (spell
+  reflect and little else). His whole-roster DPS and healer reads — Preservation, Holy Paladin,
+  Resto Druid, Shadow Priest and the rest — were DELIBERATELY NOT LOGGED: out of scope, and
+  `validate.mjs` would have failed them red anyway. Never converted his S/A/B/C into letters.
+- **Dalaran Gaming `f8YlxVEbGCY`** (Subtlety guide, 08-17) → 1 take, Subtlety **raid/buff**.
+  The whole read is the intro: Rogue looks like one of the strongest classes for Season 2,
+  especially raid, with Subtlety leading boss damage — heavily hedged and caveated on nerfs.
+
+**Supersessions (4).** Obli's 08-10 Frost and Unholy `both` takes, plus his 08-06 Frost `mplus`
+take (the new `both` take occupies the M+ lens too). His 08-06 **Unholy** `mplus` take was left
+LIVE on purpose — the new Unholy take is raid-scoped, so 08-06 remains the only M+ date on that
+lens. Also superseded Dalaran's 08-12 Subtlety `both`; noted in its `supersededNote` that his M+
+reservation is not carried forward, only preserved.
+
+**THE FIND OF THE RUN — a title that lied in the direction that costs takes.**
+Supatease `MDh9YwHmtZQ` "Nine WORST Specs 12.1" reads as a general spec-strength list and would
+have been a nine-spec harvest. Its first sentence scopes it to **PvP** ("when it comes to PvP for
+week number one"), and so does the number-one pick. Every read in it is an arena judgement about
+cooldown dependence, durability and mobility. Verified-skipped. This is the fetch-broadly rule
+paying off in the OTHER direction from the 08-08 Tactyks lesson: there a boring title hid a real
+take, here an exciting title hid out-of-scope content. Neither is knowable from the title.
+
+**Breadth, per the local rule — no keyword filter, DATE bound only.** 44 feeds, 44/44 HTTP 200,
+100 unseen in-cycle against the 2026-06-18 bound (`Math.min` over `ptr-builds.json`, never
+`builds[0]`), diffed against a 1104-id seen-set from the four structured lanes. Disposition of
+all 100, so nothing is silently abandoned:
+- **1 distilled** (Dalaran Subtlety) + the 2 queued above.
+- **44 verified-skipped** with reasons: 9 dungeon-route walkthroughs (Sha ×6, Tactyks ×2, YoDaTV)
+  where every "buff" is a vendor consumable and every "nerf" is a mob; 11 Bansherz PoV runs and
+  4 short clips; 5 PvP videos (Supatease ×2, Dalaran ×3); 8 mechanics/gearing guides; the rest
+  news and misc. **Tactyks' two dungeon videos were fetched specifically because the 08-08 run
+  skipped him on a "dungeon guide" title** — this time the transcripts really do carry no spec
+  content, which is now on the record rather than assumed.
+- **13 durably retired to `seen[]`**: 10 sub-90s Shorts (duration is a fact that rules them out)
+  and 3 "Video unavailable — blocked due to claimed content by SME". **This closes a gap the
+  nightly named**: it could not verify durations at all, because the yt-dlp metadata probe hits
+  the datacenter bot wall, so it had to leave Shorts unseen forever. Musguete `MVZ2YaUC9Fo` is
+  one of these — the nightly flagged it as having a genuine strength claim in its description
+  but declined to queue it because it could not VERIFY the sub-minute duration. Verified: 46s.
+- **42 left UNSEEN on purpose**, because these are budget/transport dismissals and marking them
+  seen would abandon a handed-forward backlog: 37 multi-hour stream VODs (3–12h raid/key
+  streams), 2 with no caption track yet (Shadarek `POENnO-sGog`, Harrek `1LfW9JXNRsI` — both
+  published within 2 days, auto-captions may still appear, so retiring them would risk losing a
+  Havoc DH and a Resto Shaman read), 1 upcoming live, 2 "live event has ended" with no VOD.
+
+**Dratnos `o3Ury9zK_1U` (RWF Day 2) — the nightly's judgement confirmed, not inherited.** Fetched
+it rather than trusting the Day-1 precedent. Its "overtuned"/"nerf" language is all ENCOUNTER
+tuning (Mythic Nymrissa, heroic Ula'tek, 25→20 scaling) plus server and bug problems, and the
+transcript still never attributes either speaker of the co-cast. Skipped on both grounds.
+
+`latest` advanced on Obli, Dorki (×6 class entries), Dalaran Gaming (×5) — each to a distilled
+one-line read, never a bare title. `npm run audit:creators`: HIGH 0 · MED 0 · INFO 9 (was 15 —
+Dorki and two others left the "transcribable, zero takes ever" list).
+
+**Note for the next cycle:** `expertRead` and the audit's supersede check both era-filter on
+`PHASES.ptr.marker`, which is null between cycles — so these 9 takes moved NO projection letter
+today (verified: `expertRead` returns null for every spec, and the rendered forecast is the
+frozen 08-11 artifact). The 08-20 snapshot came out byte-identical, which is the same fact from
+the other side. They are archival and drawer-visible now, and they re-arm at 12.2 — which is
+also when the supersessions above start mattering, so they were done properly rather than
+deferred.
+
 ## 2026-08-20 (nightly CI)
 
 **Discovery complete; 0 takes and 0 metaNotes added; 2 videos queued; no `latest` advanced.**

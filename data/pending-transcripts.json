@@ -1,21 +1,6 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
-  "videos": [
-    {
-      "id": "nmErWeN4woE",
-      "creator": "Obli",
-      "title": "From S-tier to F-Tier... / Frost DK Update 12.1 Season 2",
-      "published": "2026-08-20",
-      "queuedAt": "2026-08-20"
-    },
-    {
-      "id": "3r_vwmTUZXs",
-      "creator": "Dorki",
-      "title": "OFFICIAL SEASON 2 M+ TIER LIST | Midnight 12.1",
-      "published": "2026-08-19",
-      "queuedAt": "2026-08-20"
-    }
-  ],
+  "videos": [],
   "skipped": [
     {
       "id": "02rLfzEKLq4",
@@ -2571,6 +2556,314 @@
       "title": "Tank Tips & Tricks for Dungeon Bosses | Mythic+ Season 2",
       "reason": "Transcript verified (yt-dlp, local run): a per-boss tanking walkthrough across the Season 2 dungeons — positioning, soaks, kiting, defensive timing. No spec-strength read; the one cross-spec line (Protection Warrior soaks beams well) is a utility observation outside Sha's Brewmaster scope.",
       "verifiedAt": "2026-08-19"
+    },
+    {
+      "id": "MDh9YwHmtZQ",
+      "creator": "Supatease",
+      "title": "Nine WORST Specs 12.1",
+      "reason": "Transcript verified (yt-dlp, local run): the title reads as a general spec-strength list, but the video scopes itself to PvP in its first sentence (\"terribly performing specializations when it comes to PvP for week number one\") and again at the number-one pick. All nine reads — Outlaw Rogue, Shadow Priest, Fury Warrior, Elemental Shaman, Frost DK, Demonology Warlock, Augmentation Evoker, Discipline Priest, Unholy DK — are arena/solo-shuffle judgements about cooldown-dependence, durability and mobility. PvP content, out of scope for this PvE tracker by the same rule that excludes the PLAYER VERSUS PLAYER sections of the official notes. Distilling any of it as a PvE take would have mislabelled arena performance as spec strength, and the title alone gave no warning — this is the case the fetch-broadly rule exists for, in reverse.",
+      "verifiedAt": "2026-08-20"
+    },
+    {
+      "id": "z-CIYtN4gbE",
+      "creator": "Supatease",
+      "title": "12.1 Most Fun PVP Tier List",
+      "reason": "Transcript verified (yt-dlp, local run): an explicitly PvP tier list ranking specs by how fun they are to play in arena, not by strength. PvP content, out of scope for this PvE tracker by the same rule that excludes the PLAYER VERSUS PLAYER sections of the official notes.",
+      "verifiedAt": "2026-08-20"
+    },
+    {
+      "id": "4_qtGKU338c",
+      "creator": "Dalaran Gaming",
+      "title": "Bleed Classes Are Looking STRONG In 12.1! (5v5 1v1 Duels) - PvP WoW: Midnight",
+      "reason": "Transcript verified (yt-dlp, local run): a 5v5/1v1 duel showcase of bleed specs. PvP content, out of scope for this PvE tracker by the same rule that excludes the PLAYER VERSUS PLAYER sections of the official notes.",
+      "verifiedAt": "2026-08-20"
+    },
+    {
+      "id": "Z1ufrq8Kl7A",
+      "creator": "Dalaran Gaming",
+      "title": "New Devourer DH Is CRAZY STRONG In 12.1! (5v5 1v1 Duels) - PvP WoW: Midnight",
+      "reason": "Transcript verified (yt-dlp, local run): a 5v5/1v1 duel showcase of Devourer Demon Hunter. PvP content, out of scope for this PvE tracker by the same rule that excludes the PLAYER VERSUS PLAYER sections of the official notes.",
+      "verifiedAt": "2026-08-20"
+    },
+    {
+      "id": "Fn9NFFCJqA0",
+      "creator": "Dalaran Gaming",
+      "title": "Did Blizzard Buff Evokers For 12.1? (5v5 1v1 Duels) - PvP WoW: Midnight",
+      "reason": "Transcript verified (yt-dlp, local run): a 5v5/1v1 duel showcase asking whether Evokers were buffed. PvP content, out of scope for this PvE tracker by the same rule that excludes the PLAYER VERSUS PLAYER sections of the official notes.",
+      "verifiedAt": "2026-08-20"
+    },
+    {
+      "id": "2_zNT-PJDX8",
+      "creator": "AutomaticJak",
+      "title": "Discipline Priest Mythic+ and Raid Guide Midnight Season 2",
+      "reason": "Transcript verified (yt-dlp, local run): a Discipline Priest talent/rotation/build walkthrough for Season 2 — Shadowmend replacing Flash Heal, atonement application, the Voidweaver raid build and Greater Smite. Its \"buff\" hits are all ability mechanics (the atonement buff, Surge of Light-buffed casts), never a spec-strength claim. The \"new build beats old build\" trap.",
+      "verifiedAt": "2026-08-20"
+    },
+    {
+      "id": "tG7eCn2Lv3c",
+      "creator": "AutomaticJak",
+      "title": "Raid Healing Cooldowns Made Easy",
+      "reason": "Transcript verified (yt-dlp, local run): a teaching video on sequencing raid healing cooldowns, framed across healers generally rather than ranking any of them.",
+      "verifiedAt": "2026-08-20"
+    },
+    {
+      "id": "yjpt5fUY_og",
+      "creator": "Sam",
+      "title": "Season 2 Frost DK Starter Guide - Deathbringer - Abilities - Rotation - Macros - Priority - Rolls",
+      "reason": "Transcript verified (yt-dlp, local run): a Frost DK starter guide — ability list, action-bar setup, rotation and what changed. Purely internal mechanics with no comparison against other specs.",
+      "verifiedAt": "2026-08-20"
+    },
+    {
+      "id": "7H5ANPT3LKI",
+      "creator": "Dalaran Gaming",
+      "title": "WoW 12.1 Gearing Guide: Reaching Max 334+ iLvl As Fast As Possible",
+      "reason": "Transcript verified (yt-dlp, local run): a gearing-speed guide (item level targets, crafts, vault slots). Itemisation only; no spec-strength read.",
+      "verifiedAt": "2026-08-20"
+    },
+    {
+      "id": "IcOH3Fao1DY",
+      "creator": "leak",
+      "title": "Survival Hunter Gearing Guide for Midnight Season 2 | Crafts, Bonus Rolls, Great Vaults, and More",
+      "reason": "Transcript verified (yt-dlp, local run): a Survival Hunter gearing guide weighing crafts and bonus rolls. Its \"competitive\"/\"stronger\" lines compare a dual-wield setup against a two-hand setup for the same spec — weapon itemisation, not spec strength.",
+      "verifiedAt": "2026-08-20"
+    },
+    {
+      "id": "OB5zcfy3o9E",
+      "creator": "LBNinja7",
+      "title": "1 Minute Resto Shaman GUIDE for Season 2 Midnight m+ | Beginner's Totemic in 1 Minute 39 Seconds!",
+      "reason": "Transcript verified (yt-dlp, local run): a one-minute beginner Restoration Shaman totem primer. Too short to carry a comparative read and does not attempt one.",
+      "verifiedAt": "2026-08-20"
+    },
+    {
+      "id": "a49UmUth7m0",
+      "creator": "Megasett",
+      "title": "Your Season 2 Shopping List •  #midnight #worldofwarcraft #mistweaver #monk",
+      "reason": "Transcript verified (yt-dlp, local run): a consumables shopping list — flask, potion, weapon oil, food, health potion. No spec read of any kind.",
+      "verifiedAt": "2026-08-20"
+    },
+    {
+      "id": "fL3CS4Kxm9A",
+      "creator": "NeekapHere",
+      "title": "Retribution Paladin 12.1 Nemesis ?? Boss Guide | Let Me Solo Him Azta'rec",
+      "reason": "Transcript verified (yt-dlp, local run): a Retribution Paladin walkthrough for soloing the Azta'rec delve boss. The one \"nerfed\" line is about an item (Lute's Gift), not the spec.",
+      "verifiedAt": "2026-08-20"
+    },
+    {
+      "id": "ZmpFeWsRkOA",
+      "creator": "Dalaran Gaming",
+      "title": "How to Solo Azta’rec Tier ?? For The BEST Season 2 Rewards!",
+      "reason": "Transcript verified (yt-dlp, local run): a walkthrough for soloing the Azta'rec delve boss for its Season 2 reward. Encounter strategy, no spec-strength read.",
+      "verifiedAt": "2026-08-20"
+    },
+    {
+      "id": "Z-nkr-0GbUE",
+      "creator": "Tactyks",
+      "title": "AZTA'REC DELVE BOSS GUIDE AND WALKTHROUGH | Midnight Season 2",
+      "reason": "Transcript verified (yt-dlp, local run): an Azta'rec delve boss guide and walkthrough. Encounter mechanics only.",
+      "verifiedAt": "2026-08-20"
+    },
+    {
+      "id": "SJO0AF9pssA",
+      "creator": "Critcake",
+      "title": "[Let Me Solo Him] Tier ?? Azta'rec - Arms Warrior - Midnight Season 2",
+      "reason": "Transcript verified (yt-dlp, local run): an unnarrated Arms Warrior solo attempt at the Azta'rec delve boss with live self-commentary on his own mistakes. No spec-strength read.",
+      "verifiedAt": "2026-08-20"
+    },
+    {
+      "id": "Bg29hU3BBz4",
+      "creator": "Tactyks",
+      "title": "Tips, Tricks, and Tech for ALL 8 MIDNIGHT SEASON 2 Mythic+ Dungeons",
+      "reason": "Transcript verified (yt-dlp, local run): a dungeon routing walkthrough — pull order, skips, mob packs, interrupt assignments. Every \"buff\" in it is a dungeon vendor/consumable or an enemy buff and every \"nerf\" is a mob, not a spec; there is no comparative spec-strength read anywhere. Fetched despite the \"dungeon guide\" title precisely because Tactyks was skipped on that basis in the 2026-08-08 run; this time the transcript genuinely carries no spec content.",
+      "verifiedAt": "2026-08-20"
+    },
+    {
+      "id": "nZJi0Fdgl5Q",
+      "creator": "Tactyks",
+      "title": "PUG FRIENDLY Mythic+ Routes for ALL Midnight Season 2 Dungeons",
+      "reason": "Transcript verified (yt-dlp, local run): a dungeon routing walkthrough — pull order, skips, mob packs, interrupt assignments. Every \"buff\" in it is a dungeon vendor/consumable or an enemy buff and every \"nerf\" is a mob, not a spec; there is no comparative spec-strength read anywhere.",
+      "verifiedAt": "2026-08-20"
+    },
+    {
+      "id": "G0pwB8Yz--U",
+      "creator": "YoDaTV",
+      "title": "Use These EASY Routes for Midnight Season 2 Mythic+",
+      "reason": "Transcript verified (yt-dlp, local run): a dungeon routing walkthrough — pull order, skips, mob packs, interrupt assignments. Every \"buff\" in it is a dungeon vendor/consumable or an enemy buff and every \"nerf\" is a mob, not a spec; there is no comparative spec-strength read anywhere.",
+      "verifiedAt": "2026-08-20"
+    },
+    {
+      "id": "FdwTDTrrNrk",
+      "creator": "Sha",
+      "title": "Easy Route for The Blinding Vale | Midnight Season 2",
+      "reason": "Transcript verified (yt-dlp, local run): a dungeon routing walkthrough — pull order, skips, mob packs, interrupt assignments. Every \"buff\" in it is a dungeon vendor/consumable or an enemy buff and every \"nerf\" is a mob, not a spec; there is no comparative spec-strength read anywhere.",
+      "verifiedAt": "2026-08-20"
+    },
+    {
+      "id": "EXSFHgKTxUU",
+      "creator": "Sha",
+      "title": "Easy Route for Murder Row | Midnight Season 2",
+      "reason": "Transcript verified (yt-dlp, local run): a dungeon routing walkthrough — pull order, skips, mob packs, interrupt assignments. Every \"buff\" in it is a dungeon vendor/consumable or an enemy buff and every \"nerf\" is a mob, not a spec; there is no comparative spec-strength read anywhere.",
+      "verifiedAt": "2026-08-20"
+    },
+    {
+      "id": "EST9JxvlPTQ",
+      "creator": "Sha",
+      "title": "Easy Route for Den of Nalorakk | Midnight Season 2",
+      "reason": "Transcript verified (yt-dlp, local run): a dungeon routing walkthrough — pull order, skips, mob packs, interrupt assignments. Every \"buff\" in it is a dungeon vendor/consumable or an enemy buff and every \"nerf\" is a mob, not a spec; there is no comparative spec-strength read anywhere.",
+      "verifiedAt": "2026-08-20"
+    },
+    {
+      "id": "bQiDIBBL9Ic",
+      "creator": "Sha",
+      "title": "Easy Route for Altar of Fangs | Midnight Season 2",
+      "reason": "Transcript verified (yt-dlp, local run): a dungeon routing walkthrough — pull order, skips, mob packs, interrupt assignments. Every \"buff\" in it is a dungeon vendor/consumable or an enemy buff and every \"nerf\" is a mob, not a spec; there is no comparative spec-strength read anywhere.",
+      "verifiedAt": "2026-08-20"
+    },
+    {
+      "id": "4yVzlLI0JTw",
+      "creator": "Sha",
+      "title": "Easy Route for Temple of Sethraliss | Midnight Season 2",
+      "reason": "Transcript verified (yt-dlp, local run): a dungeon routing walkthrough — pull order, skips, mob packs, interrupt assignments. Every \"buff\" in it is a dungeon vendor/consumable or an enemy buff and every \"nerf\" is a mob, not a spec; there is no comparative spec-strength read anywhere.",
+      "verifiedAt": "2026-08-20"
+    },
+    {
+      "id": "iy0uwqrI9TY",
+      "creator": "Sha",
+      "title": "Easy Route for Ruby Life Pools | Midnight Season 2",
+      "reason": "Transcript verified (yt-dlp, local run): a dungeon routing walkthrough — pull order, skips, mob packs, interrupt assignments. Every \"buff\" in it is a dungeon vendor/consumable or an enemy buff and every \"nerf\" is a mob, not a spec; there is no comparative spec-strength read anywhere.",
+      "verifiedAt": "2026-08-20"
+    },
+    {
+      "id": "IfP0pdT9FXA",
+      "creator": "Bansherz",
+      "title": "Heroic Vashnik the Malignant BM Hunter PoV Consequence",
+      "reason": "Transcript verified (yt-dlp, local run): an unnarrated gameplay PoV run with party voice chatter over it — callouts, mechanics reactions and loot talk. No comparative spec-strength read; the incidental \"I wish they would buff X\" remarks are fun-preference asides during play, not strength claims.",
+      "verifiedAt": "2026-08-20"
+    },
+    {
+      "id": "yPldyfNu2GU",
+      "creator": "Bansherz",
+      "title": "Heroic Twin Fangs MM Hunter PoV Consequence",
+      "reason": "Transcript verified (yt-dlp, local run): an unnarrated gameplay PoV run with party voice chatter over it — callouts, mechanics reactions and loot talk. No comparative spec-strength read; the incidental \"I wish they would buff X\" remarks are fun-preference asides during play, not strength claims.",
+      "verifiedAt": "2026-08-20"
+    },
+    {
+      "id": "Digu_LNxwXQ",
+      "creator": "Bansherz",
+      "title": "+10 Voidscar Arena | 4 Piece | MM Hunter PoV",
+      "reason": "Transcript verified (yt-dlp, local run): an unnarrated gameplay PoV run with party voice chatter over it — callouts, mechanics reactions and loot talk. No comparative spec-strength read; the incidental \"I wish they would buff X\" remarks are fun-preference asides during play, not strength claims.",
+      "verifiedAt": "2026-08-20"
+    },
+    {
+      "id": "U196LxY2gXM",
+      "creator": "Bansherz",
+      "title": "Heroic Nek'zali the Soulcoiler | MM Hunter PoV [Consequence]",
+      "reason": "Transcript verified (yt-dlp, local run): an unnarrated gameplay PoV run with party voice chatter over it — callouts, mechanics reactions and loot talk. No comparative spec-strength read; the incidental \"I wish they would buff X\" remarks are fun-preference asides during play, not strength claims.",
+      "verifiedAt": "2026-08-20"
+    },
+    {
+      "id": "xX64XPBhd2Q",
+      "creator": "Bansherz",
+      "title": "Heroic Entombed Sentinels | MM Hunter PoV [Consequence]",
+      "reason": "Transcript verified (yt-dlp, local run): an unnarrated gameplay PoV run with party voice chatter over it — callouts, mechanics reactions and loot talk. No comparative spec-strength read; the incidental \"I wish they would buff X\" remarks are fun-preference asides during play, not strength claims.",
+      "verifiedAt": "2026-08-20"
+    },
+    {
+      "id": "b-NOBGDAdS0",
+      "creator": "Bansherz",
+      "title": "Heroic The Lost Explorers | MM Hunter PoV [Consequence]",
+      "reason": "Transcript verified (yt-dlp, local run): an unnarrated gameplay PoV run with party voice chatter over it — callouts, mechanics reactions and loot talk. No comparative spec-strength read; the incidental \"I wish they would buff X\" remarks are fun-preference asides during play, not strength claims.",
+      "verifiedAt": "2026-08-20"
+    },
+    {
+      "id": "J-Br1GJQfj8",
+      "creator": "Bansherz",
+      "title": "Heroic Sszorak | BM Hunter PoV [Consequence]",
+      "reason": "Transcript verified (yt-dlp, local run): an unnarrated gameplay PoV run with party voice chatter over it — callouts, mechanics reactions and loot talk. No comparative spec-strength read; the incidental \"I wish they would buff X\" remarks are fun-preference asides during play, not strength claims.",
+      "verifiedAt": "2026-08-20"
+    },
+    {
+      "id": "x23nrla-Fzw",
+      "creator": "Bansherz",
+      "title": "+10 Altar of Fangs | BM Hunter PoV",
+      "reason": "Transcript verified (yt-dlp, local run): an unnarrated gameplay PoV run with party voice chatter over it — callouts, mechanics reactions and loot talk. No comparative spec-strength read; the incidental \"I wish they would buff X\" remarks are fun-preference asides during play, not strength claims.",
+      "verifiedAt": "2026-08-20"
+    },
+    {
+      "id": "KLXN8OHShQ0",
+      "creator": "Bansherz",
+      "title": "+10 Ruby Life Pools | MM Hunter PoV",
+      "reason": "Transcript verified (yt-dlp, local run): an unnarrated gameplay PoV run with party voice chatter over it — callouts, mechanics reactions and loot talk. No comparative spec-strength read; the incidental \"I wish they would buff X\" remarks are fun-preference asides during play, not strength claims.",
+      "verifiedAt": "2026-08-20"
+    },
+    {
+      "id": "45skGckAHK8",
+      "creator": "Bansherz",
+      "title": "+10 Murder Row | MM Hunter PoV",
+      "reason": "Transcript verified (yt-dlp, local run): an unnarrated gameplay PoV run with party voice chatter over it — callouts, mechanics reactions and loot talk. No comparative spec-strength read; the incidental \"I wish they would buff X\" remarks are fun-preference asides during play, not strength claims.",
+      "verifiedAt": "2026-08-20"
+    },
+    {
+      "id": "uckvt-VDA8c",
+      "creator": "Bansherz",
+      "title": "+10 Altar of Fangs | MM Hunter PoV",
+      "reason": "Transcript verified (yt-dlp, local run): an unnarrated gameplay PoV run with party voice chatter over it — callouts, mechanics reactions and loot talk. No comparative spec-strength read; the incidental \"I wish they would buff X\" remarks are fun-preference asides during play, not strength claims.",
+      "verifiedAt": "2026-08-20"
+    },
+    {
+      "id": "ExtfTZCBEn0",
+      "creator": "Reholy",
+      "title": "+13 Blinding Vale | BDK POV | 12.1",
+      "reason": "Transcript verified (yt-dlp, local run): a Blood DK key run with party voice chatter over it — mechanics callouts, no analysis.",
+      "verifiedAt": "2026-08-20"
+    },
+    {
+      "id": "NVLUYClgCsE",
+      "creator": "Tettles",
+      "title": "The dungeon was unlosable... #worldofwarcraft #gaming  #twitch  #wow",
+      "reason": "Transcript verified (yt-dlp, local run): a two-minute clip narrating one key going wrong. Anecdote, no spec read.",
+      "verifiedAt": "2026-08-20"
+    },
+    {
+      "id": "ghJ_b308GQE",
+      "creator": "Tettles",
+      "title": "The abandon system is very frustrating #worldofwarcraft #gaming  #twitch  #wow",
+      "reason": "Transcript verified (yt-dlp, local run): a two-minute clip complaining about the dungeon abandon system. A systems gripe, not a spec read.",
+      "verifiedAt": "2026-08-20"
+    },
+    {
+      "id": "-_HdsFdOGKg",
+      "creator": "Tettles",
+      "title": "I tried to do a good deed in LFG.. #worldofwarcraft #gaming  #twitch  #wow",
+      "reason": "Transcript verified (yt-dlp, local run): a two-minute LFG anecdote. No spec content.",
+      "verifiedAt": "2026-08-20"
+    },
+    {
+      "id": "o3Ury9zK_1U",
+      "creator": "Dratnos",
+      "title": "Race to World First Day 2 Recap - Servers, Scaling, and Struggles!",
+      "reason": "Transcript verified (yt-dlp, local run): a Race to World First day-two recap. Its \"overtuned\"/\"nerf\" lines are all about ENCOUNTER tuning and raid scaling (Mythic Nymrissa, heroic Ula'tek, 25-to-20 player scaling) plus server and bug problems — not spec strength. It is also the two-speaker co-cast whose day-one twin was skipped on 2026-08-19: the transcript still never attributes a speaker, so no claim in it could be sourced to a named creator even if one appeared.",
+      "verifiedAt": "2026-08-20"
+    },
+    {
+      "id": "f6Zpc3S4Ka4",
+      "creator": "NeekapHere",
+      "title": "This Week In WoW August 18th",
+      "reason": "Transcript verified (yt-dlp, local run): a weekly news round-up for the week of August 18 — what opens when, gearing targets, the PvP season starting. The only spec-adjacent line is an aside that Retribution Paladin does not currently need its tier set, which is a gearing remark rather than a strength read, and the PvP passages are out of scope.",
+      "verifiedAt": "2026-08-20"
+    },
+    {
+      "id": "cbfZVkI4lUE",
+      "creator": "izen (Izenhart)",
+      "title": "Season 2 Start Reminders | TO DO List That You Might Have Missed!",
+      "reason": "Transcript verified (yt-dlp, local run): a season-start to-do list (weekly reset reminders, what to unlock first). No per-spec meta read, confirming the nightly's read of its description. izen is a generalCreators entry whose only take lane is metaNotes[], and nothing here qualifies.",
+      "verifiedAt": "2026-08-20"
+    },
+    {
+      "id": "JqLbKafjpk0",
+      "creator": "Whispyr",
+      "title": "Blizzard???????????",
+      "reason": "Transcript verified (yt-dlp, local run): a short reaction to a one-handed axe off Coiled Altar and how it interacts with the Bite of Zul'jin set bonus and trinket. An ITEM discussion, not a spec-strength read.",
+      "verifiedAt": "2026-08-20"
     }
   ],
   "seen": [
@@ -2595,6 +2888,7 @@
     "1UKu8qGszVc",
     "1VRYTJLlB94",
     "1fDIPveOZcs",
+    "1kj1-0exOOs",
     "1v2YQupL9FI",
     "1woxmQBvJQ0",
     "25oNFzR-_qU",
@@ -2606,6 +2900,7 @@
     "2vnJQzY5gE4",
     "31IkN0ugTDM",
     "37Ru-ofHfvU",
+    "3Cu6wdbnOYs",
     "3NezzttrW44",
     "3RtKJIppzdc",
     "3YV04t9Wm-8",
@@ -2637,6 +2932,7 @@
     "6KacWrw7O7A",
     "6KemlBr_YPM",
     "6MjQP0dLASI",
+    "6MlSd4nBtrI",
     "6XJDJFTbv5k",
     "6kbEbK3DFUE",
     "6yF4Q7SUimE",
@@ -2692,6 +2988,7 @@
     "EUa6nHm81X0",
     "EakXflo16CA",
     "EkUD6Q1-occ",
+    "EmQpi2j-FWM",
     "F79EhWSwmMs",
     "FAQLChMkf9Y",
     "FIEboW-px8k",
@@ -2712,6 +3009,7 @@
     "GmuxAkRNBaM",
     "GnLMvJiYZOE",
     "H9A3ueCoaAI",
+    "HKKQ9VrBR0s",
     "HMOnlcDaupA",
     "HOszuJbXO3w",
     "HP3H1aDcQCo",
@@ -2725,6 +3023,7 @@
     "IKVfX3GY42M",
     "INpNDjMJib0",
     "ISJb_lOf9-0",
+    "IdiL_oKMFco",
     "InJYLpo1VXA",
     "IqQD_onDbUg",
     "ItSboOGdXOY",
@@ -2748,6 +3047,7 @@
     "K8DyVITQEH0",
     "K8PRMSVfkXI",
     "KCT4t-3NjOA",
+    "KDSY2A7I5BE",
     "KVbS_yWPUDY",
     "KXCoeyc6cws",
     "KizxeX0BBck",
@@ -2763,6 +3063,7 @@
     "Lrn7cOwCIgE",
     "LrxIFR5MazE",
     "M-QRkzkQ-X0",
+    "MVZ2YaUC9Fo",
     "MhWQboNziwk",
     "Mj-L36mQdrI",
     "MmT3uQQy3u0",
@@ -2772,6 +3073,7 @@
     "NOa9SvuyzMs",
     "NVbuuILEUGo",
     "NffkOLMuuIk",
+    "Nk8WpSLYCVo",
     "NtYCdj5vdDg",
     "NyfCoA2QhdE",
     "O-z2Naopgw8",
@@ -2801,6 +3103,7 @@
     "R6pPLdrv7as",
     "R7P0Y-UvvRE",
     "REgNxsie4uE",
+    "RGONlrsJlas",
     "RJnOHSK5nFk",
     "RLb_Fwax9Sc",
     "RPXIMIEBhUI",
@@ -2827,10 +3130,12 @@
     "Tf_55J6vk7Q",
     "TivwZH2a3tk",
     "TrCvBswsmc8",
+    "Tsy8Wr09VeA",
     "Tx3lMN3u-_4",
     "TxBZ3TL3MUM",
     "TzchUzEEgW0",
     "UHPsUjPKdgQ",
+    "USYnEc2CLqo",
     "UZ4PQrjwd3o",
     "Ud8-YiXvm9M",
     "UdDvVskOEP4",
@@ -2857,8 +3162,10 @@
     "Wv1CnmUu7Go",
     "X1Od3Ovp2i0",
     "X1R8EvIlmXc",
+    "XLgiTNq3kxo",
     "XQvPXcXZf_g",
     "XYZUWEdEgpk",
+    "XYde5-WTIs0",
     "XZFA6VJJOUA",
     "Xiy0gotKMRE",
     "XktK-_KyXZM",
@@ -2893,6 +3200,7 @@
     "aSNos5zVTp4",
     "abSbWlojhpc",
     "ae2NusHAPQQ",
+    "ak84M-_idos",
     "b18xdbeYuuw",
     "b3UuhYRlbbc",
     "b52rKB31EZs",
@@ -2905,6 +3213,7 @@
     "cDoPzWhqGDc",
     "cNAYduWx_8c",
     "c_fDQWyqhwM",
+    "cbdUSkALamY",
     "cdJX8LuRG3Q",
     "cf8iHf-HrGw",
     "chLJ-HXwGBs",
@@ -2920,6 +3229,7 @@
     "ejx9CFYVn4k",
     "eoWuDTtY-50",
     "f-Kd-Km18Tc",
+    "f0DnTRIO3pw",
     "f39cPNDLxLA",
     "f6Y-rQPQ3CE",
     "fCihDBF3os0",
@@ -2936,12 +3246,14 @@
     "g_kuY1zIMQA",
     "gaZGPSZLEg0",
     "gbWzRIfSL7c",
+    "gqeVUSeAQmU",
     "hZv1gnjQzLA",
     "haVxf1T4XKw",
     "hi2VSsoPeqU",
     "hjOaecGbKXI",
     "hlAiTUOAA-4",
     "hvOVpcRLMpM",
+    "iF9-2dpJdjo",
     "iS5vss7mTcQ",
     "iTx9NX47SYA",
     "ie-AZrposyc",
@@ -2955,6 +3267,7 @@
     "jW_eJF3F0Dc",
     "jXQ9wyt9VYM",
     "jlVi-o2ZtnI",
+    "jlbQAmQMRCM",
     "jmwvWSYlNno",
     "k1ec99zOI28",
     "k2KnidE8TwE",
@@ -2999,6 +3312,8 @@
     "oftXUDL1c5c",
     "ohTHzEnudig",
     "ohlGpvJSwxs",
+    "okaZqAQVRN0",
+    "pABdqvL-VXM",
     "pH0qoDuI86E",
     "pSZn7QF7QAw",
     "pZohT7rRJy8",
@@ -3006,7 +3321,9 @@
     "qCQcwRN75A8",
     "qGB6T-11z-Q",
     "qIEceoRY2E0",
+    "qW9TYMD2Eo0",
     "qa5zkbigqT8",
+    "qc8xP7scX3o",
     "qchTxFW9HSY",
     "qkqwSJtmD88",
     "r6KUE8ifeFU",
@@ -3026,6 +3343,7 @@
     "uB9txDWrlXk",
     "uBvZ4Abj57M",
     "uDMI4Ih9SFU",
+    "uJ9Cw_rrYZQ",
     "uhRsc6vpRu8",
     "uiOS6Pg0VXQ",
     "ukHrwGpoCEU",
@@ -3042,6 +3360,7 @@
     "vbYnrLDqHoc",
     "vblPETORg-I",
     "vgMYoYnlwqg",
+    "vruM5ZAL6Kw",
     "vwY2ZbIwFkE",
     "vyLUvBw3Kcs",
     "w262WFvgCGc",
@@ -3057,6 +3376,7 @@
     "wpoMbE2MQ_k",
     "wxXDFW5bPL8",
     "wzynLjlZJf4",
+    "x0fxEWTq3Pw",
     "xEjKXJYTW8o",
     "xHd_VBC_Avk",
     "xRgqqeJ9B6k",
@@ -3081,25 +3401,11 @@
     "ypr4jRkd-Ik",
     "yxRmKx5Q1WA",
     "z3hv3AvTYT0",
+    "zN5Hdouex7o",
     "zahcyy0SQN8",
     "zfqABvSZFcY",
     "znM25wOIcAI",
-    "zzHKjkTYv-w",
-    "pABdqvL-VXM",
-    "XYde5-WTIs0",
-    "RGONlrsJlas",
-    "3Cu6wdbnOYs",
-    "EmQpi2j-FWM",
-    "iF9-2dpJdjo",
-    "Tsy8Wr09VeA",
-    "HKKQ9VrBR0s",
-    "Nk8WpSLYCVo",
-    "f0DnTRIO3pw",
-    "okaZqAQVRN0",
-    "x0fxEWTq3Pw",
-    "jlbQAmQMRCM",
-    "6MlSd4nBtrI",
-    "ak84M-_idos"
+    "zzHKjkTYv-w"
   ],
   "seenNote": "Video ids already considered by an earlier run that carry no richer record — migrated 2026-08-08 from backticked ids in watch-creators/log.md when the seen-set stopped being derived from prose. Distilled videos are cited by their take's url, transcript-verified rejects live in skipped[], and queued ones in videos[]; this lane is only for the remainder. Append here when a run dismisses a video at DISCOVERY (pre-cycle date, already-processed) without fetching a transcript."
 }

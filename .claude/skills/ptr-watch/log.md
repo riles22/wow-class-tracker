@@ -16,6 +16,29 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-20 (local run — scheduled)
+
+**Nothing new. Nothing changed.** Between-cycles posture, live lanes only; the four PTR zone
+sweeps stayed dormant and were not marked unreachable (their contract rows are gone).
+
+- **Wowhead news RSS** — 1 fetch, HTTP 200, 133 KB, 40 items, parsed per `<item>` block.
+  Newest item is "Patch 12.1 Hotfixes for August 19th" at 2026-08-20 02:09 CDT, which is the
+  same newest item the nightly saw and already logged as the 08-19 `hotfix` entry. Nothing
+  newer exists. The other tuning-shaped titles in the window are all ENCOUNTER or ITEM tuning
+  (Ula'tek nerfed, Coiled Altar, Venomcursed neck, M+ dungeon tuning) — out of scope for a
+  per-spec feed, and the class-tuning ones predate entries already logged.
+- **Official hotfix topic 2336376** — HTTP 200 (note: the `/t/<slug>/<id>.json` form 301s;
+  follow redirects or use `/t/<id>.json`). Title still reads "…Hotfixes - August 19" and post 1's
+  `updated_at` is 2026-08-20T03:14:06Z — the exact edit the nightly already captured. **No
+  August 20 section has been appended yet.**
+- **12.1 development-notes thread 2317811** — last post #19, 2026-07-31. Closed, as expected
+  since the launch; the thread-rediscovery gotcha stays suspended.
+- **12.2 PTR announcement: none.** Checked titles AND all 40 article bodies for
+  `12.2` / `PTR` / "next patch" — **0 of 40 articles** mention any of them. `PHASES.ptr` stays
+  null and starting a 12.2 cycle remains an owner action.
+
+No `ptr-builds.json` entry, no `tierSet` change, no writeup touched.
+
 ## 2026-08-20 (nightly CI)
 
 Between-cycles posture held: dormant lanes (WCL PTR zones 54/52/56/57) untouched, and no

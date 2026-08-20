@@ -3751,7 +3751,8 @@
       "patchContext": "12.1 PTR — Blood DK discussion with a guest; the DPS-DK consequence is Obli's own read",
       "url": "https://youtu.be/gIgTCFhLyig?t=68",
       "claim": "The video is about Blood, but Obli — whose authority here is the DPS specs — draws an explicit consequence for them. Because Blood brings no raid buff, its only real utility is Death Grip, and in a group that already has a Blood DK a Frost DK loses a lot of its value: he says that in a lot of groups Blood being brought alienates the other DKs precisely through grip redundancy. He goes further and says that in M+ it does not matter how good Frost looks, because Blood is simultaneously so offensively and so defensively strong that it is difficult to place a DPS DK at all when Blood is doing this well. He notes Blood is expected to be nerfed for raid overperformance and that such a nerf would land unintentionally on keys too, but his DPS-DK point is about roster displacement rather than tuning. Separately, on the raid side he says that in a Race to World First context he cannot see DPS DKs really being brought — one at most — given Blood's single-target and defensive profile; that is a world-first roster observation rather than a general raid read.",
-      "superseded": false
+      "superseded": true,
+      "supersededNote": "2026-08-20: retired by Obli's 2026-08-20 post-launch Frost read (local run, yt-dlp transcript) on the same lens."
     },
     {
       "class": "Death Knight",
@@ -4536,7 +4537,7 @@
       "claim": "From the 12.1 PTR healer Dummy Dome session — a full raid of high-level healers on a dummy that ramps damage over five minutes — he reads Restoration Shaman as gaining substantially in Season 2, with haste as the change that matters: Riptide's heal-over-time is doubled and extendable through the new Swelling Tides, Healing Rain is buffed, the tier set randomly spawns extra Healing Rains (more of them the more haste you carry) and the 4-piece shields on every Healing Rain tick rather than the tooltip's stated one second, while the higher crit reachable in Season 2 feeds Resurgence and eases the mana ceiling that made haste unattractive in Season 1. He settles on mostly crit and then heavy haste, with Versatility as the fallback if mana is a real problem, and adds that 12.1's Innervate is \"probably better than it has ever been\" for the spec. On hero talents he recommends Totemic: Farseer beat his expectations and can match or exceed its healing, but is far more punishing under movement and overlapping cooldown resets, where Totemic \"practically plays itself\". He makes no comparison against other healers."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Death Knight",
       "spec": "Frost",
       "creator": "Obli",
@@ -4545,10 +4546,11 @@
       "bracket": "both",
       "patchContext": "12.1 PTR — his Season 2 DPS Death Knight tier list, ranking the spec/hero-tree combinations against each other",
       "url": "https://youtu.be/HjnR3eeGsKI?t=449",
-      "claim": "He ranks Rider Frost the best Death Knight specialisation for Season 2 by a clear margin, putting it alone at the top of his list. His case is that it is doing very well on the PTR, carries good damage with significant burst roughly every 90 seconds, and — unlike Deathbringer — keeps more consistent damage outside its cooldown windows, while playing far more simply: the opener is straightforward, there is no Exterminate buff to track, and the rotation does not change whether or not the Riders are out. He rates Deathbringer Frost third and explicitly not bad, praising its 45-second burst window as handy for a lot of content but arguing it loses power on longer fights and is punishing if the second window does not arrive. The one hard condition he attaches: Rider Frost needs the new raid two-piece and one-handed weapons, so he tells viewers not to play Frost without it and to switch to it only once they have it. He rates only the DPS specs and states outright that he is not covering Blood."
+      "claim": "He ranks Rider Frost the best Death Knight specialisation for Season 2 by a clear margin, putting it alone at the top of his list. His case is that it is doing very well on the PTR, carries good damage with significant burst roughly every 90 seconds, and — unlike Deathbringer — keeps more consistent damage outside its cooldown windows, while playing far more simply: the opener is straightforward, there is no Exterminate buff to track, and the rotation does not change whether or not the Riders are out. He rates Deathbringer Frost third and explicitly not bad, praising its 45-second burst window as handy for a lot of content but arguing it loses power on longer fights and is punishing if the second window does not arrive. The one hard condition he attaches: Rider Frost needs the new raid two-piece and one-handed weapons, so he tells viewers not to play Frost without it and to switch to it only once they have it. He rates only the DPS specs and states outright that he is not covering Blood.",
+      "supersededNote": "2026-08-20: retired by Obli's 2026-08-20 post-launch Frost read (local run, yt-dlp transcript) on the same lens."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Death Knight",
       "spec": "Unholy",
       "creator": "Obli",
@@ -4557,7 +4559,8 @@
       "bracket": "both",
       "patchContext": "12.1 PTR — his Season 2 DPS Death Knight tier list, ranking the spec/hero-tree combinations against each other",
       "url": "https://youtu.be/HjnR3eeGsKI?t=462",
-      "claim": "He places Rider Unholy second, in A tier, and makes it his explicit patch-day recommendation: because Rider Frost depends on the new raid two-piece, he tells viewers to play Unholy at launch and switch once they have the set and one-handed weapons. On the spec itself he is positive — great damage, a simpler rotation than the Sandlane build because there is no Essence of the Blood Queen buff to maintain, more mobility, and damage he rates as equal to or better than Sandlane for an easier time. He is markedly negative on Sandlane Unholy specifically, not on the spec: it demands tank coordination to hold the Blood Queen buff, is hard to rebuild once dropped, and is not worth forcing yourself into a harder version of the spec for minimal or no gain when Rider Unholy does comparable damage in keys. He allows Sandlane could see raid play, where constant combat makes the buff easier to hold, and could do very well if there are execute damage amplifiers."
+      "claim": "He places Rider Unholy second, in A tier, and makes it his explicit patch-day recommendation: because Rider Frost depends on the new raid two-piece, he tells viewers to play Unholy at launch and switch once they have the set and one-handed weapons. On the spec itself he is positive — great damage, a simpler rotation than the Sandlane build because there is no Essence of the Blood Queen buff to maintain, more mobility, and damage he rates as equal to or better than Sandlane for an easier time. He is markedly negative on Sandlane Unholy specifically, not on the spec: it demands tank coordination to hold the Blood Queen buff, is hard to rebuild once dropped, and is not worth forcing yourself into a harder version of the spec for minimal or no gain when Rider Unholy does comparable damage in keys. He allows Sandlane could see raid play, where constant combat makes the buff easier to hold, and could do very well if there are execute damage amplifiers.",
+      "supersededNote": "2026-08-20: retired by Obli's 2026-08-20 post-launch Unholy read (local run, yt-dlp transcript) on the same lens."
     },
     {
       "superseded": false,
@@ -4740,7 +4743,7 @@
       "claim": "He is unreservedly positive on the Season 2 rebuild: Killing Spree was buffed heavily and, combined with routing it through the drone-rush supercharger, Outlaw finally has a real burst window instead of purely sustained damage. He also notes the talent tree gained connectors that make builds easier to path. Levelling a rogue on the spec, he repeatedly calls the new flow the most fun part of the patch for him and expects viewers to enjoy it, though he ties none of this to throughput numbers."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Rogue",
       "spec": "Subtlety",
       "creator": "Dalaran Gaming",
@@ -4749,7 +4752,8 @@
       "bracket": "both",
       "patchContext": "12.1 PTR — patch-day release stream, answering viewers on Subtlety's Season 2 standing",
       "url": "https://youtu.be/NsiXhBpKwaU?t=278",
-      "claim": "A two-sided read. He says long-standing Subtlety bugs went unfixed in Season 1 and were compensated with buffs, whereas this time the spec was nerfed instead — and that it is now locked into the Deathstalker hero tree, which he thinks plays poorly in M+ and leaves the rotation unchanged and boring. Against that he still expects it to be good on paper and notes rogues carried few structural changes from Season 1, so he does not call it weak, only unappealing and worse-treated than before."
+      "claim": "A two-sided read. He says long-standing Subtlety bugs went unfixed in Season 1 and were compensated with buffs, whereas this time the spec was nerfed instead — and that it is now locked into the Deathstalker hero tree, which he thinks plays poorly in M+ and leaves the rotation unchanged and boring. Against that he still expects it to be good on paper and notes rogues carried few structural changes from Season 1, so he does not call it weak, only unappealing and worse-treated than before.",
+      "supersededNote": "2026-08-20: retired by his 2026-08-17 Season 2 Subtlety guide (local run, yt-dlp transcript), which is the newer read on this lens. Note the newer take is RAID-scoped, so his M+ reservation about the Deathstalker lock-in is not carried forward — it is preserved in this superseded record rather than averaged."
     },
     {
       "superseded": true,
@@ -5638,6 +5642,114 @@
       "url": "https://youtu.be/owz2wMTAa5k?t=222",
       "claim": "He treats the launch tuning as a real lift for Restoration, weighting the two lines differently: the 4% healing increase he calls nice but not insane, while the 20% damage increase he calls significant and noticeable. His read is Mythic+-scoped — damage matters a lot in dungeon groups, so the buff gives Restoration an opening to perform acceptably this season. He hedges it heavily rather than asserting it (possibly, maybe, potentially, and depending on further tuning), and sets it against his sense that boomkins had been looking like the go-to DPS pick for many dungeon groups, concluding only that Restoration could end up somewhat competitive.",
       "superseded": false
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Frost",
+      "creator": "Obli",
+      "date": "2026-08-20",
+      "sentiment": "nerf",
+      "bracket": "both",
+      "patchContext": "Season 2 live — his reaction to the launch tier-set nerf, argued as a before/after against his own June PTR logs at comparable item level; he shows both all-boss raid damage statistics and a live Mythic+ key.",
+      "url": "https://youtu.be/nmErWeN4woE?t=13",
+      "superseded": false,
+      "claim": "Obli reads the Season 2 launch tuning as a severe net nerf to Frost: the tier set was cut by half and the roughly 9% compensating damage does not come close to covering it. His case is a before/after against his own June PTR logs at comparable item level — average Obliterate casts roughly halved (about 128k down to 62k in a key, which he generously estimates at around 80k in a raid group), Breath of Sindragosa down from about 451k to 170k per cast, Frost and Fury from about 585k to 364k, and Reaper's Mark from about 500k to 289k — with Howling Blast the only ability gaining meaningfully (about 50k to 80k). He shows Frost near the bottom of the all-boss damage statistics at both the 99th and 90th percentiles. He accepts the AoE profile has potential and will improve once the set is acquired, which he puts at roughly a 13% DPS gain, and places the entire problem on single target, asking specifically for the PTR Obliterate change to be reverted rather than for further compensation elsewhere."
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "creator": "Obli",
+      "date": "2026-08-20",
+      "sentiment": "nerf",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — his reaction to the launch tier-set nerf, argued as a before/after against his own June PTR logs at comparable item level; he shows both all-boss raid damage statistics and a live Mythic+ key.",
+      "url": "https://youtu.be/nmErWeN4woE?t=349",
+      "superseded": false,
+      "claim": "Obli's Unholy read is secondary to his Frost case and he explicitly defers a full treatment to a separate video. His position is that Unholy is also not in a good place: a player working hard can still pull respectable numbers out of it, but it does not come easily. In the all-boss damage statistics he displays, Unholy sits low enough that even the heavily-nerfed Frost overtakes it on one encounter, and he attributes that single result to an Unholy bug where some of its damage fails to register on that fight rather than to any Frost strength."
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Blood",
+      "creator": "Dorki",
+      "date": "2026-08-19",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his four-tier Mythic+ tier list built live on stream in launch week (strongest / meta contenders / mid / weak), drawing on his Season 2 PTR key experience.",
+      "url": "https://youtu.be/3r_vwmTUZXs?t=408",
+      "superseded": false,
+      "claim": "Dorki puts Blood DK alone at the top of his Mythic+ list and says it arguably deserves a tier of its own, describing it as clearly ahead of every other tank. Speaking as a Blood main, he pushes back directly on a suggestion from chat that it is not tanky at the key levels that matter, calling it extraordinarily durable right now. He offers his own history as a check against bias, saying he has ranked Death Knight among the weakest tanks on every past list he has made. Every group composition he builds in the video is anchored on Blood, and he expects it to be nerfed in a later patch — which he treats as the single change that would reshuffle the whole tank picture."
+    },
+    {
+      "class": "Druid",
+      "spec": "Guardian",
+      "creator": "Dorki",
+      "date": "2026-08-19",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his four-tier Mythic+ tier list built live on stream in launch week (strongest / meta contenders / mid / weak), drawing on his Season 2 PTR key experience.",
+      "url": "https://youtu.be/3r_vwmTUZXs?t=246",
+      "superseded": false,
+      "claim": "Dorki names Guardian a meta-contender tank and the likeliest beneficiary if Blood DK is nerfed, citing decent damage and solid survivability, and leaning Guardian over the other contenders specifically because a group needs Mark of the Wild from somewhere. The composition he settles on as his favourite — and the one he calls least likely to be hit by tuning — is built on Guardian. The counterweight comes from his own argument: he rates Mark of the Wild as close to worthless in its current state and says a Druid spec would need buffing for that slot to justify itself, so his case for Guardian is prospective rather than a claim that it is strong today."
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Vengeance",
+      "creator": "Dorki",
+      "date": "2026-08-19",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his four-tier Mythic+ tier list built live on stream in launch week (strongest / meta contenders / mid / weak), drawing on his Season 2 PTR key experience.",
+      "url": "https://youtu.be/3r_vwmTUZXs?t=396",
+      "superseded": false,
+      "claim": "Dorki places Vengeance in his second tier of meta-contender tanks and calls it good. He rebuts a suggestion from chat that it is squishy, his position being that Vengeance, Protection Paladin and Guardian are all about equally durable — and that none of the three is close to Blood DK. He builds no composition around it, treating it as one of three broadly interchangeable options should Blood DK be nerfed."
+    },
+    {
+      "class": "Paladin",
+      "spec": "Protection",
+      "creator": "Dorki",
+      "date": "2026-08-19",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his four-tier Mythic+ tier list built live on stream in launch week (strongest / meta contenders / mid / weak), drawing on his Season 2 PTR key experience.",
+      "url": "https://youtu.be/3r_vwmTUZXs?t=400",
+      "superseded": false,
+      "claim": "Dorki lists Protection Paladin among the meta-contender tanks and calls it good, grouping it with Vengeance and Guardian as roughly equally durable. His practical read is more negative than that placement suggests: he builds no composition around it, says the only reason to bring it would be if you were giving up a Blood DK, and when he picks which contender he would actually play in that scenario he chooses Guardian instead, for the raid buff."
+    },
+    {
+      "class": "Monk",
+      "spec": "Brewmaster",
+      "creator": "Dorki",
+      "date": "2026-08-19",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his four-tier Mythic+ tier list built live on stream in launch week (strongest / meta contenders / mid / weak), drawing on his Season 2 PTR key experience.",
+      "url": "https://youtu.be/3r_vwmTUZXs?t=574",
+      "superseded": false,
+      "claim": "Dorki rates Brewmaster itself as distinctly mid, saying its main strength is single-target damage and not much beyond that, and grouping it with Protection Warrior in the tier below his contenders. His mitigating point is about context rather than the spec: he notes Monks tanking fairly high keys, and argues that the specs pairing with Brewmaster in a physical composition — Outlaw Rogue, Arms Warrior, Restoration Shaman — are all strong this season, so a Brewmaster player has good reason not to feel badly off despite the spec being unremarkable on its own."
+    },
+    {
+      "class": "Warrior",
+      "spec": "Protection",
+      "creator": "Dorki",
+      "date": "2026-08-19",
+      "sentiment": "nerf",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his four-tier Mythic+ tier list built live on stream in launch week (strongest / meta contenders / mid / weak), drawing on his Season 2 PTR key experience.",
+      "url": "https://youtu.be/3r_vwmTUZXs?t=583",
+      "superseded": false,
+      "claim": "Dorki puts Protection Warrior in his mid tier and is more dismissive of it than of any other tank he rates: he says the one thing it is genuinely good at is reflecting spells, and that its case is situational — worth a look only where a particular dungeon happens to reward that. He offers no composition for it and does not include it among the contenders he would turn to if Blood DK were nerfed."
+    },
+    {
+      "class": "Rogue",
+      "spec": "Subtlety",
+      "creator": "Dalaran Gaming",
+      "date": "2026-08-17",
+      "sentiment": "buff",
+      "bracket": "raid",
+      "patchContext": "12.1 PTR — his Season 2 Subtlety guide, published the day before the Season 2 launch; the strength read is the framing he opens with and is explicitly raid-scoped, while the body of the video is a talent/stat/BiS walkthrough.",
+      "url": "https://youtu.be/f8YlxVEbGCY?t=16",
+      "superseded": false,
+      "claim": "Opening his Season 2 Subtlety guide, he frames Rogue as looking like one of the strongest classes going into the season, especially in raid content, with Subtlety specifically the spec he expects to lead on total boss damage. He hedges the claim throughout rather than asserting it — it seems, probably, possibly — and immediately caveats that Blizzard could still nerf it. His supporting evidence is circumstantial rather than measured: he says a lot of players are visibly prepping Rogues for the Ula'tek raid. He also notes Deathstalker has finally become hard to ignore for Subtlety, which he calls a more meta option even though it does not fix what some players dislike about the tree."
     }
   ],
   "metaNotes": [
