@@ -2966,9 +2966,9 @@
       "statPrioritySource": "https://www.icy-veins.com/wow/affliction-warlock-pve-dps-stat-priority",
       "tierSet": {
         "set2": "Agony damage increased by 15%. Corruption damage increased by 25%. Seed of Corruption applies Unstable Affliction at 20% effectiveness to your target.",
-        "set4": "Each active Unstable Affliction increases your damage dealt by your spells and abilities by 2%, up to 6%.",
-        "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/11",
-        "asOf": "2026-07-08"
+        "set4": "Each active Unstable Affliction increases your damage dealt by your spells and abilities by 2%, up to 6%. (2026-08-20 hotfix: a bug where the Unstable Affliction granted by the Venomous Abyss 4-piece would not grant a stack of Wither was corrected; the bonus wording itself is unchanged.)",
+        "source": "https://us.forums.blizzard.com/en/wow/t/world-of-warcraft-midnight-hotfixes-august-20/2336376",
+        "asOf": "2026-08-20"
       }
     },
     {
@@ -3334,5 +3334,5 @@
       }
     }
   ],
-  "trackerFieldsSyncedAt": "2026-08-19"
+  "trackerFieldsSyncedAt": "2026-08-21"
 }

@@ -1,21 +1,6 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
-  "videos": [
-    {
-      "id": "gGzU0vD8R6M",
-      "creator": "izen (Izenhart)",
-      "title": "Season 2 Mythic+ Talking Points: Boltslop, Minibosses and Less AoE DPS",
-      "published": "2026-08-20",
-      "queuedAt": "2026-08-21"
-    },
-    {
-      "id": "k0mCjMlwyys",
-      "creator": "Nintern",
-      "title": "To Ground... | Midnight Season 2 Devourer Sim Update",
-      "published": "2026-08-20",
-      "queuedAt": "2026-08-21"
-    }
-  ],
+  "videos": [],
   "skipped": [
     {
       "id": "02rLfzEKLq4",
@@ -2879,6 +2864,20 @@
       "title": "Blizzard???????????",
       "reason": "Transcript verified (yt-dlp, local run): a short reaction to a one-handed axe off Coiled Altar and how it interacts with the Bite of Zul'jin set bonus and trinket. An ITEM discussion, not a spec-strength read.",
       "verifiedAt": "2026-08-20"
+    },
+    {
+      "id": "gGzU0vD8R6M",
+      "creator": "izen (Izenhart)",
+      "title": "Season 2 Mythic+ Talking Points: Boltslop, Minibosses and Less AoE DPS",
+      "reason": "Transcript verified (yt-dlp, local run). A substantive 12-minute argument that the Season 2 dungeon pool shifts value away from large AoE toward single-target and low-target cleave, via fewer casters per pack and far more mini-bosses (Void Scar Arena, King's Rest, Den of Nalorakk, Mardero walked through). But the only per-spec content is a single two-sentence enumeration — \"specs like arms ... specs like arcane ... specs like outlaw and specs like wind walker ... worse for specs like balance\" — and each of those five specs is named exactly ONCE in the whole transcript, with no second spec-specific mention. That is verbatim the bare-enumeration shape the list-mention rule rejects, so no metaNote was distilled. The general dungeon-pace argument has no per-spec home in the data model.",
+      "verifiedAt": "2026-08-21"
+    },
+    {
+      "id": "k0mCjMlwyys",
+      "creator": "Nintern",
+      "title": "To Ground... | Midnight Season 2 Devourer Sim Update",
+      "reason": "Transcript verified (yt-dlp, local run): a 2m42s gem-optimisation PSA for Devourer — a crit-effectiveness gem configuration simming roughly 1k ahead of the current all-crit/mastery recommendation, with the takeaway being to re-sim your own gems, enchants and Omnium Folio. He calls it a super minor gain himself. Gear/consumable-level content with no spec-strength read, which yields no take by the standing guide-shaped rule.",
+      "verifiedAt": "2026-08-21"
     }
   ],
   "seen": [

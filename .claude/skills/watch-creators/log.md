@@ -16,6 +16,92 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-21 (local run, scheduled task)
+
+**Queue drained to 0; 5 takes added across 3 specs; 0 metaNotes; 2 videos verified-skipped.**
+Residential catch-up after the 10:37 UTC nightly (91205d7), which had queued two videos it
+could not distil itself.
+
+- **Queue drained (2 -> 0), both to `skipped[]`, neither yielding a claim.**
+  - izen `gGzU0vD8R6M` "Season 2 Mythic+ Talking Points" — a genuinely substantive 12-minute
+    argument that the S2 dungeon pool shifts value from large AoE toward single-target and
+    low-target cleave (fewer casters per pack, far more mini-bosses; Void Scar Arena, King's
+    Rest, Den of Nalorakk and Mardero each walked through). **No metaNote distilled**, and this
+    is the run's one contestable call: the only per-spec content is a single two-sentence
+    enumeration — "specs like arms ... specs like arcane ... specs like outlaw and specs like
+    wind walker ... worse for specs like balance" — and **each of those five specs is named
+    exactly ONCE in the whole transcript** (verified by grep over the flattened captions), with
+    no second spec-specific mention anywhere. That is verbatim the `specs like X ... like Y`
+    bare-enumeration shape SKILL.md's list-mention rule rejects. Balance was the closest call,
+    because the Mardero passage that follows elaborates *why* a former massive-AoE dungeon now
+    punishes it — but that passage describes the DUNGEON, and the only Balance-specific
+    assertion in it is "was perfectly fine doing massive AoE". Dropped on the rule. The general
+    dungeon-pace argument has no per-spec home in the data model, so nothing was written.
+  - Nintern `k0mCjMlwyys` "Devourer Sim Update" — 2m42s gem-optimisation PSA (a crit-effectiveness
+    gem config simming ~1k ahead; takeaway is "re-sim your own gems/enchants/Omnium Folio"). He
+    calls it a super minor gain himself. Gear-level content, no spec-strength read — the standing
+    guide-shaped rule, applied.
+
+- **Unfiltered local sweep: 44/44 channel feeds HTTP 200, 66 unseen in-cycle** against the
+  2026-06-18 bound (computed as the OLDEST date in `ptr-builds.json`, not `builds[0]`).
+  Seen-set 1164 from the four structured lanes. Up one from the nightly's 65. Title filtering
+  deliberately not applied; triage was by metadata (duration / `live_status`) on the 8
+  candidates that could plausibly carry an analytical read.
+- **Nothing was retired to `seen[]`.** No sub-minute durations and no caption-less videos were
+  found, so no dismissal this run is durable. The 64 unexamined videos stay UNSEEN and will be
+  reconsidered — they are overwhelmingly livestream/split-run shells (Tettles `9YgGUE2c5TM`
+  3.6h `was_live`, Pkpawner `WeZH5pda1M4` 8.7h `was_live`), raid/M+ PoV clips, and the 9
+  PvP-framed Supatease uploads.
+
+- **AutomaticJak `PS-C4w5vJz8` "Holy or Disc? Midnight Season 2"** (7m41s, in scope: his Priest
+  entry is `["Discipline","Holy"]`) — **4 takes**, all bracket-explicit, all `Season 2 live —`
+  framing. His first-week live read moves Holy Priest UP sharply in both brackets from his
+  08-15 launch tier list, and confirms the Disc M+ collapse he predicted on the PTR:
+  - Discipline / mplus / `nerf` — "struggle busing in keys"; ties it to the removed independent
+    Atonement dungeon modifier he and Clandon argued for on 08-06, and says if there were ever
+    a season to bring it back, this is it. Supersedes his 08-06 M+ take (same argument, now
+    confirmed live rather than predicted).
+  - Discipline / raid / `mixed` — still expects Disc at RWF/top-100; damage remains the asset
+    (~45k at 308 ilvl, "close to tank damage") despite the heavy nerfs, Rift buffed for
+    two-target. Mixed because he advises everyone below that bracket to play Holy instead.
+  - Holy / raid / `buff` — a real upgrade: on 08-15 he excluded Holy from his predicted race
+    comp; now he reports seeing "tons of holy priests" through the opening Venomous Abyss week
+    and recommends it below top-50/100 for ease of access and cheat death.
+  - Holy / mplus / `buff` — "crushing it right now", effectively infinite mana on an Oracle
+    build, and *decently tanky*, which speaks to the survivability gap that held his 08-15
+    B-tier placement down.
+  **Deliberately NOT used as evidence:** "smacked was top HPS on a seven-minute fight" — a
+  named player on a single Heroic Twin Fangs kill, which is the fight-artifact trap. Also left
+  out rather than guessed: several ASR-mangled talent names ("wood guides" = Wowhead, "Palm"
+  ~ PoM, "trail"), since build minutiae are not a strength read.
+
+- **Sha `vtNNBI8kdOw` "Heroic Twin Fangs | Brewmaster Commentary"** (9m03s, in scope: Brewmaster)
+  — **1 take**, Brewmaster / raid / `buff`, superseding his 08-14 raid take. Having now actually
+  raided the spec (~world-200 Heroic kill; he notes he does not normally do raid content) he
+  **revises** that negative read: he states the bracket contrast directly — *he has been pretty
+  down on Brewmaster in M+, but in raid it actually feels pretty okay* — credits two-target
+  cleave via Master of Harmony plus the apex talent, Blackout Kick and Overwhelming Force, and
+  reports that Master of Harmony + Exploding Keg + Empty the Cellar gives enough brew CDR that
+  the rotation never goes dull. That last point directly answers the resource-deficit objection
+  he raised on 08-14, which is why this is a genuine replacement rather than a second opinion.
+  **He disclaims his own rank-1 parse outright** ("competing with literally myself", ~17
+  Brewmasters in the bracket), so the take rests on kit behaviour and says so.
+  - **His 08-06 M+ take was deliberately left LIVE and un-superseded.** He restates the M+
+    negative here, but only as a one-clause aside with no new mechanism, whereas the 08-06 take
+    is a detailed, mechanism-rich analysis in the same direction. Superseding a rich take with a
+    thin restatement would strip the drawer of information while changing nothing — the
+    re-affirmation is recorded here instead.
+
+- **OWNER FLAG carried forward, unchanged:** Musguete `DHqw-Oq9NjY` "Subtlety Rogue Season 2
+  Guide" falsifies his registry note ("No dedicated Subtlety content exists, so Subtlety is
+  deliberately out of scope"). Not queued and not silently widened — it is also guide-shaped, so
+  it yields no take either way. Still needs a human decision on the scope note.
+- `expertRead` remains dormant for all 40 specs in both brackets (`PHASES.ptr` is null since the
+  flip), so none of these five takes can move a projection — they are drawer context only.
+- Verification pass done on all five takes against their own transcripts before commit: every
+  number attached to the referent the creator attached it to, no ASR mangle written as a name,
+  no claim resting on a video it does not deep-link.
+
 ## 2026-08-21 (nightly CI)
 
 **Discovery complete; 0 takes, 0 metaNotes, 2 queued.** `transcript-fetch/summary.json`

@@ -16,6 +16,34 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-21 (local run, scheduled task)
+
+**Nothing new to log — verified, not assumed. No 12.2 PTR announcement. PTR zone lanes remain
+dormant.** A short confirmatory sweep after the nightly (91205d7), whose own sweep closed at
+2026-08-20 22:51 CDT; this run checks only the window since.
+
+- **Wowhead news RSS** re-fetched, HTTP 200, 40 items parsed per `<item>` block. Exactly ONE
+  item is newer than the nightly's newest: `news=382506` "Viserio Cooldowns Updated for Midnight
+  Season 2" (2026-08-21 09:14 CDT). Read rather than judged on its title — **Viserio Cooldowns is
+  a third-party raid-cooldown planning addon** that has been updated for S2 with a raid planning
+  hub. No class line, no tuning. Correctly NOT logged.
+- **Canonical hotfix topic 2336376 fetched directly** (not the Wowhead mirror). Title still reads
+  "World of Warcraft: Midnight Hotfixes - August 20"; **post 1's `updated_at` is
+  2026-08-21T02:27:47Z — byte-identical to the timestamp the nightly recorded**, and its newest
+  date heading is still "August 20, 2026". So the nightly's `kind: "hotfix"` entry for 08-20 is
+  current and complete, and there is no August 21 section to append. The topic's
+  `last_posted_at` of 2026-08-21T13:36Z is community replies, not Kaivax — checking post 1's
+  edit time rather than the topic's last post is what distinguishes the two.
+- **12.2 PTR announcement: absent from two independent channels.** The 12.1 dev-notes thread
+  (2317811) is still 17 posts with `last_posted_at` 2026-07-31T23:42Z — the closed cycle's
+  expected quiet, not a lost thread — and no RSS item mentions 12.2 or a new PTR. When the 12.2
+  thread does appear it must be re-discovered via RSS; a new cycle means a NEW thread.
+- **PTR zone sweeps (54 / 52 / 56 / 57) skipped by design**, per the between-cycles posture.
+  Their contract rows were removed at the flip, so they need no manifest excuse. Stored zone rows
+  are the closed cycle's final receipts and were not touched.
+- The live S2 WCL zones (53 raid / 55 M+) still have no fetch path; the `wcl-live-*` heartbeat red
+  is owner-accepted (2026-08-18) and was deliberately left alone.
+
 ## 2026-08-21 (nightly CI)
 
 **One build logged (`kind: "hotfix"`, 2026-08-20). No 12.2 PTR announcement in any channel.

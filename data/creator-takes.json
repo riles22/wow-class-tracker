@@ -3655,7 +3655,7 @@
       "patchContext": "12.1 PTR — Season 2 M+ outlook (Atonement structural review with Clandon of WarcraftPriests)",
       "url": "https://youtu.be/rX3X-I_4lCA?t=1017",
       "claim": "On the Mythic+ side he is blunt: his own Voidweaver testing in keys feels awful right now — a moderate level of healing all the time, with no way to push health bars up quickly the way a rift-up Voidweaver could last expansion. Clandon supplies the structural reason: because Atonement output is effectively always maxed, Disc has no lever left to pull, so the season starts fine through the low keys and then hits the level where gear stops keeping up with key scaling and Atonement is simply no longer enough — with Shadow Mend significantly weaker than the previous proc version (more consistent, but no longer the emergency punch), Void Shield's power shifted out of raw absorb into Atonement application, and nothing beyond Shadow Mend spam and a couple of Pain Suppression charges to fall back on. Clandon's proposed fix is a hybrid rather than scrapping the scaling: soften the curve and restore a reduced version of the retired out-of-raid Atonement bonus — he floats 30-40%, where it was 100% historically and then 75% before being cut — so keys can be tuned without breaking raid. Jak endorses the shape of it, saying a single front-end number would make a huge difference for Disc in keys.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Monk",
@@ -5017,7 +5017,7 @@
       "patchContext": "12.1 PTR - his Season 2 plans video, the Brewmaster raid section (complements, not replaces, his 08-06 Mythic+ read, which stays live)",
       "url": "https://youtu.be/im6DkjkRDlw?t=341",
       "claim": "He is openly and self-consciously negative on the Season 2 Brewmaster rework while planning to main the spec anyway. The change he objects to is Celestial Brew and Celestial Infusion having their cooldown doubled to 1.5 minutes with the absorb raised by 150%. He credits the likely intent - Blizzard published no note, but he infers they want Brewmasters to feel tankier against specific raid tank busters - and concedes from his own two-night cutting-edge-casual raiding that this was a real Season 1 problem: after the pruning he felt weak compared to other tanks against tank busters, naming the Light-Blinded Vanguard in the Void Spire raid where he felt very weak, and Bellerin's tank busters. He contrasts that with Brewmaster's historic identity, where Stagger and what he calls insanely overpowered defensives - Dampen Harm, Diffuse Magic, Zen Meditation, Zen State before its nerf - carried the spec, and says that no longer felt true. His objection is structural rather than numerical: the spec is designed around an apex talent driven by RNG and guaranteed Empty Barrel procs, so lengthening the brew cooldown puts the fundamental gameplay loop in jeopardy. He says the class does not feel good to play over a long fight, and that even inside a one- or two-minute pull you hit stretches where you cannot purify or stagger enough, run out of brews and energy, and are left exposed.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Warrior",
@@ -5281,7 +5281,7 @@
       "patchContext": "12.1 PTR — his Season 2 launch healer tier list, raid side, rebuilt after the August 18 healer tuning (race-to-world-first framing)",
       "url": "https://youtu.be/c_5u7Jpy-Uo?t=115",
       "claim": "He reads the Discipline change as a damage-only correction that leaves the spec's raid standing intact. Quoting the developer note, all damage is reduced 30% with Atonement transferring 46% of damage into healing to hold total healing steady, and Entropic Rift damage increased 20% to protect Void Weaver's dungeon viability. He reports others' math putting the healing outcome at a very slight increase, effectively net neutral, and expects Discipline to keep playing Void Weaver with near-constant Rift uptime at high haste. He is candid that the pre-nerf state was absurd — in his testing Discipline was doing 70-80k damage, more than tanks, while also bringing Power Infusion — and calls the correction really generous, because Discipline is still doing some of the best healing in raid and still doing some of the best damage. He puts it in the group he considers close to locked for the race, arguing it has the whole package of healing, damage, damage reduction through Lenience and Power Infusion, though he is sceptical about stacking two of them.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Priest",
@@ -5293,7 +5293,7 @@
       "patchContext": "12.1 PTR — his Season 2 launch healer tier list, raid side, rebuilt after the August 18 healer tuning (race-to-world-first framing)",
       "url": "https://youtu.be/c_5u7Jpy-Uo?t=191",
       "claim": "He calls the Holy Priest buffs some of the big things he had wanted to see out of the Dummy Dome testing: Enlightenment now generating mana 25% faster instead of 10%, and direct Oracle buffs — Words of the Wise increasing Holy Word Serenity and Sanctify healing by 40%, Prompt Prognosis increasing Prayer of Mending's direct heal by 55%, and Preventive Measures increasing Prayer of Mending healing by 40%. He notes Oracle Holy Priest had been really bad in raid throughout his testing and expects it to feel really powerful now. Despite that, he does not put Holy Priest in his predicted race comp: he says explicitly that even though Holy Priest got really good buffs in raid, Discipline still brings the whole package, and he would not expect to see Holy Priest, Restoration Druid or Mistweaver in the race — while stressing that anyone chasing a Hall of Fame rating rather than the race should not worry, because the changes those three received were really good for that environment.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Priest",
@@ -5305,7 +5305,7 @@
       "patchContext": "12.1 PTR — his Season 2 launch healer tier list, Mythic+ side, rebuilt after the August 18 healer tuning (high-key framing)",
       "url": "https://youtu.be/c_5u7Jpy-Uo?t=737",
       "claim": "He places Holy Priest in B tier for Mythic+ while arguing its raw healing may be the best in the bracket — with the new buffs he feels Holy might be one of the best raw healers in dungeons, and says not to count out how much healing it will do, expecting it to heal noticeably better than Discipline because Discipline's penance damage alone does not translate as well in dungeons. He notes Oracle was already better than Archon in dungeons and that these buffs only widen that, and that the mana buff addresses the efficiency problem when power-healing through poisons. What holds the placement down is not throughput but two specific gaps: survivability, and the lack of a poison dispel. He frames both as largely outside the player's control — a composition that brings poison dispels for you turns into a big boon, and a fast versatility set would help the defensive problem, but neither is reliable early in a season.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Paladin",
@@ -5750,6 +5750,61 @@
       "url": "https://youtu.be/f8YlxVEbGCY?t=16",
       "superseded": false,
       "claim": "Opening his Season 2 Subtlety guide, he frames Rogue as looking like one of the strongest classes going into the season, especially in raid content, with Subtlety specifically the spec he expects to lead on total boss damage. He hedges the claim throughout rather than asserting it — it seems, probably, possibly — and immediately caveats that Blizzard could still nerf it. His supporting evidence is circumstantial rather than measured: he says a lot of players are visibly prepping Rogues for the Ula'tek raid. He also notes Deathstalker has finally become hard to ignore for Subtlety, which he calls a more meta option even though it does not fix what some players dislike about the tree."
+    },
+    {
+      "class": "Priest",
+      "spec": "Discipline",
+      "creator": "AutomaticJak",
+      "date": "2026-08-21",
+      "sentiment": "nerf",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — first-week Mythic+ read on Discipline, revisiting the Atonement dungeon modifier he and Clandon argued for on the PTR",
+      "claim": "Now that the season is live he reports the Mythic+ prediction he made on the PTR has come true, and he is blunt about it: Discipline is struggling badly in keys. He says it is very noticeable how weak the shields are and how little Atonement healing is doing, and describes running out of Penance casts and simply being unable to make something happen while healing dungeons. He ties it directly to the structural cause he has been naming since early August — the independent Atonement tuning modifier that used to increase Atonement healing specifically in a dungeon environment, which was removed going into this expansion so that Atonement would not feel half-strength when Disc heals ten targets in a raid. His read is that the back-end tuning Blizzard expected to substitute for it has not worked, and he says that if there were ever a season for them to bring the independent dungeon modifier back, this is it — noting the problem persists even after the launch healer rebalancing.",
+      "url": "https://youtu.be/PS-C4w5vJz8?t=16"
+    },
+    {
+      "class": "Priest",
+      "spec": "Discipline",
+      "creator": "AutomaticJak",
+      "date": "2026-08-21",
+      "sentiment": "mixed",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — first-week raid read on Discipline, race-to-world-first framing",
+      "claim": "He still expects Discipline in the race to world first and in high-end raid generally, and says that at roughly the top 50 to top 100 world level there will be a lot of Discipline being played. The asset he leans on is damage: he acknowledges the very heavy damage nerfs the spec took, but says it is still doing around 45k at 308 item level, which he puts close to tank damage, and expects Power Infusion stacked on top to raise that further. He also notes Entropic Rift was buffed, making two-target encounters where the Rift can hit both targets particularly valuable. The mixed half is the recommendation he attaches: because Void Weaver demands standing still and casting a lot of Void Blast to yield its value, he advises players outside that top bracket to play Holy in raid instead, and says his own plan is to play Discipline in Mythic while continuing to build the setup around it.",
+      "url": "https://youtu.be/PS-C4w5vJz8?t=357"
+    },
+    {
+      "class": "Priest",
+      "spec": "Holy",
+      "creator": "AutomaticJak",
+      "date": "2026-08-21",
+      "sentiment": "buff",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — first-week raid read on Holy Priest, a clear upgrade on the launch tier list where he left it out of his predicted race comp",
+      "claim": "His raid read on Holy Priest has moved up sharply from his launch tier list, where he excluded it from his predicted race composition. He reports that across the opening Venomous Abyss raid week he has been seeing only the occasional Discipline Priest but a great many Holy Priests putting out very large amounts of healing. His recommendation for anyone below roughly the top 50 to top 100 world is now to play Holy and, in his words, chill in raids — citing ease of access and the cheat-death effect, and describing it as a spec you can simply push buttons on without the setup Discipline demands. On the numbers he singles out Prompt Prognosis, which he estimates at nearly 100k per cast already and expects to clear 100k as gear improves. He notes both Oracle and Archon builds are being played, with a lot of the Chinese logs running Oracle setups, and says he expects Oracle to do better in Mythic.",
+      "url": "https://youtu.be/PS-C4w5vJz8?t=204"
+    },
+    {
+      "class": "Priest",
+      "spec": "Holy",
+      "creator": "AutomaticJak",
+      "date": "2026-08-21",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — first-week Mythic+ read on Holy Priest, an upgrade on the B-tier placement in his launch list",
+      "claim": "He is emphatic that Holy Priest is doing crazy amounts of healing in keys and, in his words, crushing it right now — a clear step up from the B-tier placement in his launch Mythic+ list, where throughput was never the concern. Running an Oracle build he describes having effectively infinite healing and never running out of mana, letting him keep pressure on constantly, and he adds that the spec also feels decently tanky, which speaks to the survivability gap he previously called the thing holding its placement down. The mechanisms he names are the buffed Prayer of Mending healing through Prompt Prognosis, and Enlightenment's mana regeneration going from 10% to 25%, which he calls a ridiculous amount of regeneration. He flags that further optimisation of the talent build is still open — he has moved onto Epiphany and thinks there may be an argument for Say Your Prayers instead — but stresses that none of it changes how the spec is played.",
+      "url": "https://youtu.be/PS-C4w5vJz8?t=92"
+    },
+    {
+      "class": "Monk",
+      "spec": "Brewmaster",
+      "creator": "Sha",
+      "date": "2026-08-21",
+      "sentiment": "buff",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — Heroic Twin Fangs kill commentary, revising the negative raid read from his 08-14 Season 2 plans video (his 08-06 Mythic+ read stays live and he restates it here)",
+      "claim": "Having now actually raided the spec — a roughly world-200 Heroic Twin Fangs kill, and unusually for him a raid video at all — he revises the negative raid read from his Season 2 plans video. He states the contrast directly: he has been pretty down on Brewmaster in Mythic+, but in raid it actually feels pretty okay. Two-target cleave is the part he singles out as genuinely good, crediting Master of Harmony together with the apex talent's additional two-target damage and the cleave from Blackout Kick and Overwhelming Force. He also reports the resource problem he objected to in August has not bitten him here: running Master of Harmony with Exploding Keg and Empty the Cellar gives him heavy brew cooldown reduction, so the rotation never reaches a dull moment where he has nothing to press. He is careful to disclaim the evidence rather than lean on it — his rank-one parse he dismisses outright, noting the bracket held about 17 Brewmasters and that he was effectively competing against himself — so the read rests on how the kit performed, not on the log.",
+      "url": "https://youtu.be/vtNNBI8kdOw?t=451"
     }
   ],
   "metaNotes": [
