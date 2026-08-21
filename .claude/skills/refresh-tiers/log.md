@@ -16,6 +16,58 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-21 (nightly CI)
+
+**Sources refreshed: all four. 240 letter assignments parsed, 0 unmatched, 15 tier moves —
+all Archon M+ again, and again they are real.** Per-page row counts were printed and
+reconciled against the 27 DPS + 7 healer + 6 tank = 40 roster shape BEFORE every merge.
+
+- **Icy Veins** — 6 live pages by direct browser-UA GET, HTTP 200, 192–340 KB, parsed from
+  `<table class="tier-list">` rows (first `<td>` = the letter; each `tier-list-entry`'s FIRST
+  `alt=` looked up WHOLE against the roster, never split at a space). 27/7/6 raid + 27/7/6 M+
+  = **80 rows, 0 unmatched, ZERO tier moves.** Page dates byte-identical to last night (raid
+  DPS 08-16, raid healer 08-13, raid tank 08-08, M+ all three 08-16), agreeing **6/6** with
+  `published-evidence/evidence.json`. Era off title AND body: **two** pages now carry a
+  stale-era title over a Season-2 body — raid HEALER ("Patch 12.0.7 / Midnight", 21 S2
+  mentions vs 6 S1) and raid DPS ("Midnight (12.1)", 54 vs 14). Body over title. All six stay
+  `seasonVerified: s2`.
+- **Method** — both pages live, HTTP 200, 158/165 KB, `.tier__tier` blocks. **40 + 40 rows,
+  ZERO tier moves.** The M+ page again serves **8** tier blocks; the extra four are the
+  dungeon-difficulty list, rejected by ROSTER MATCH (the eight S2 dungeon names + the Method
+  logo alt all fail to map) and never by position. Last Updated 10th August (raid) / 13th
+  August (M+), both unchanged. The `<meta description>` still reads "The War Within Season 3"
+  on both — stale chrome; an era check reading the meta tag would drop both from the consensus.
+- **Wowhead** — 6 pages with the FULL browser header set, HTTP 200, 73–337 KB. Unescape
+  `\/` → `/` across the whole document FIRST, then find `[tier-list=rows] … [/tier-list]`;
+  exactly one block per page (never anchor on `WH.markup.printHtml(` — the raid-healer decoy).
+  **80 rows, 0 unmatched, ZERO tier moves.** `published` re-read: 08-14 / 08-18 / 08-14 /
+  08-18 / 08-18 / 08-18, all unchanged, 6/6 against the evidence artifact. The raid-healer
+  title still carries the DOUBLE space ("Midnight  Season 2") — the standing reason the era
+  check is not an exact-spacing literal.
+- **Archon** — 6 aggregate pages from `__NEXT_DATA__` → `specTierListSection.tierLists`,
+  metric `score` for M+, entries resolved from the `icon` "Class-Spec" token, `tiers[].entries`
+  read as a list OF LISTS. **M+ 40/40, 0 unmatched, 15 TIER MOVES**: two cross two bands
+  (Mistweaver S→B, Vengeance C→A); the rest are Subtlety S→A; Balance / Enhancement /
+  Windwalker / Marksmanship / Shadow / Devastation / Fire all A→B; Frost DK / Beast Mastery /
+  Destruction B→C; Protection Paladin and Brewmaster B→A. Genuine week-two re-cut, not a
+  parse artifact: the M+ parse pool tripled again overnight (DPS 332,239 → **950,129**;
+  healer 110,677 → 316,669; tank 110,727 → 316,628). **Consensus impact was SIMULATED before
+  merging** — 10 cells, all M+, all one band, 0 two-band, 0 vanished — so no ack needed and
+  none proposed; the gate later confirmed 10 / 0 against the committed baseline.
+  **RAID: tier lists still empty** (popularity, throughput and survivability all 0 entries,
+  totalParses 0) on pages that self-describe Season 2. Left at `seasonVerified: s1` for the
+  third night running, deliberately: the stored Archon raid letters ARE the S1 cut, and
+  flipping the flag would average S1 opinion into the S2 raid consensus. Nulling them instead
+  breaches the row floor (80→40 vs min 60) and `maxRowDropPct`, neither of which has an
+  agent-side ack.
+- **New upstream fact worth watching:** Archon's raid `specRankingsSection.table.data` is no
+  longer empty (13 DPS / 4 healer / 2 tank rows) even though the tier lists are — so the raid
+  ingest has started and the letters will follow. When they do, re-verify those three pages to
+  s2 in the SAME run that merges them, and expect that night to need the human `anomaly_ack`.
+- No `seasonVerified` value changed this run, so `freeze-season.mjs` has nothing to do.
+  Snapshots 2026-08-20 → 2026-08-21 on all four sources' aggregate pages; Archon's three
+  `ancillary` pages held at 2026-08-18 because nothing landed from them.
+
 ## 2026-08-20 (nightly CI)
 
 **Sources refreshed: all four. 240 letter assignments parsed, 0 unmatched, 20 tier moves —
@@ -236,6 +288,7 @@ letters — Blood DK raid B→A, Frost Mage raid S→A+, Protection Warrior raid
 
 `published` re-read per page, 9/9 agreement with the deterministic artifact: icyveins 08-08 ×4 +
 08-13 (raid healer), icyveins-ptr 08-09 ×3, wowhead 08-14/08-16/08-14/08-15/**08-16**/08-11.
+
 ## 2026-08-16 (nightly)
 
 All five tier lists re-fetched live — icyveins 6 pages, icyveins-ptr 3, method 2, wowhead 6,
@@ -841,140 +894,6 @@ policy.
   not a spec-by-spec re-rating. It feeds no consensus.
 - **No season flip.** 12.1 ships **Aug 11**; every live page still self-identifies as
   12.0.7 / Season 1, so `PHASES.liveSeason` and `SNAPSHOT_PHASE` stay put. Three days left.
-
-## 2026-08-07 — nightly CI (headless)
-
-- **All five tier-list sources refreshed live; ZERO tier moves anywhere.** 80 Icy Veins
-  rows, 40 Icy Veins PTR rows, 79 Method rows, 80 Wowhead rows, 80 Archon aggregate rows
-  — 0 unmatched, 0 moves. A quiet night for letters is the honest reading, not a broken
-  fetch: three of the four live sources also re-published unchanged page dates.
-- **Icy Veins** 6 live pages + 3 PTR pages, browser-UA curl, all 200. Era: live titles
-  read 12.0.7 / Midnight / Season 1 (s1); PTR titles read "Patch 12.1 / Season 2" (s2).
-  PTR band spread unchanged: S+ 2, S 5, A+ 11, A 10, B+ 6, B 5, C 1 — no upstream TBDs,
-  so no explicit nulls were needed. `published` re-read from every page (never carried
-  forward) and unchanged; agrees with `published-evidence/evidence.json` 9/9.
-- **Method** raid S tier carried **7 specs** this run while the **M+ spec S tier is still
-  genuinely empty upstream** — both re-verified in the raw markup. The two lists differ;
-  don't assume an empty S on one means a parse bug on the other.
-- **Wowhead** needs the FULL browser header set (UA-only is 403). The M+ healer page's
-  `dateModified` stays 2026-08-05 — that is the rebuild whose Resto Druid S→A move landed
-  on the 08-06 run, not a new one.
-- **Archon** — this WAS a new upstream cut: `page.lastUpdated` advanced 2026-08-05T12:00Z →
-  **2026-08-06T12:00:00Z** (the 08-07 12:00Z publish had not landed at 11:31Z fetch time).
-  Aggregate letters still moved zero, 55 of 680 per-encounter tiers moved, and
-  **survivability moved 18 of 40 — every one by exactly one band, 17 of them upward**
-  (11 C→B, 6 B→A, Enhancement A→S; only Brewmaster B→C). That is a re-clustered
-  distribution on a new cut, not a spec-by-spec re-rating; it feeds no consensus.
-- **No season flip.** 12.1 ships **Aug 11 (US) / Aug 12 (EU)**; the official patch notes
-  published 08-06 (see ptr-watch log) are pre-launch. Every live page still self-identifies
-  as 12.0.7 / Season 1, so `PHASES.liveSeason` and `SNAPSHOT_PHASE` stay as they are.
-  **The flip window opens in four days.**
-
-## 2026-08-06 (nightly CI, Opus 5 — single-shot)
-- **All 5 tier-list sources fetched live; 359 rating rows applied; exactly ONE tier moved anywhere.**
-  Transports used, all direct `curl` (no proxy): Icy Veins browser-UA; Method browser-UA;
-  Wowhead the FULL browser header set (a UA-only fetch is 403 + 919-byte stub); Archon
-  browser-UA + `__NEXT_DATA__` from raw HTML.
-- **THE ONE MOVE — Wowhead M+ Healer: Restoration Druid S → A**, and the page's own
-  `dateModified` moved with it (**2026-05-06 → 2026-08-05**), i.e. Wowhead rebuilt that
-  single page yesterday. Its `published` was updated to match; the other five Wowhead
-  pages re-read unchanged. This is the whole consensus movement for the run (Resto Druid
-  M+ consensus A → B).
-- **Icy Veins** 80 rows (40 raid + 40 M+), 0 unmatched, 0 moves. Era: raid DPS title
-  "Midnight (12.0.7)", raid tank "Patch 12.0.7 / Season 1", other four "Patch 12.0.7 /
-  Midnight" → `seasonVerified: "s1"` on all six. `dateModified` unchanged (healer 08-04,
-  tank 06-30, rest 07-01) and matches the pre-agent published evidence 6/6.
-- **`icyveins-ptr`** 40 rows, **0 TBD this run** (was 38 rated at adoption — Augmentation
-  and Vengeance placed on 08-02 and have stayed placed). Band spread S+ 2 / S 5 / A+ 11 /
-  A 10 / B+ 6 / B 5 / C 1. All three titles read "PTR Tier List for Midnight (Patch 12.1 /
-  Season 2)" → `seasonVerified: "s2"`. `published` **re-read, never carried forward**:
-  JSON-LD 2026-08-02T10:53Z and the in-body "Last UPDATED - 2nd of August" agree, so the
-  stored value stands; 4 days behind on a Sunday-rebuild cadence is normal.
-- **Method** 79 rows (40 M+ + 39 raid), 0 moves. Two things worth pinning:
-  · **Era-verify from the BODY, not `og:description`** — that meta tag still says "The War
-    Within Season 3" (stale boilerplate). The page header says "Midnight Season 1 Raids:
-    The Voidspire, The Dreamrift and March on Quel'Danas". Reading the meta tag would have
-    produced a false season-flip alarm.
-  · **The M+ page carries TWO tier lists** — the spec list, then a "Mythic+ Dungeon
-    Difficulty Tier List". The 8 dungeon names come through the same `tier__icon` markup
-    and must be dropped as unmatched. And the M+ **spec S tier is genuinely EMPTY upstream**
-    (raw markup: `<div class="tier__entries">` immediately closed), so all 40 M+ specs sit
-    in A/B/C. Verify that in the markup before treating a missing S tier as a parse bug.
-  · Vengeance DH still absent from the raid list (documented upstream omission).
-- **Archon** 80 aggregate rows (raid = `throughput` tierList, M+ = `score`), 40
-  survivability rows, and **51/51 per-encounter pages** (9 bosses + 8 dungeons × 3 roles)
-  → 680 tier rows, 45 of which moved. Aggregates moved zero. `page.lastUpdated` read
-  **2026-08-05T12:00:00Z** at 12:49Z fetch time — their daily 12:00Z cut had not yet
-  published for 08-06 — so identical aggregate values are the correct reading of the same
-  upstream cut, not a stalled fetch. Era from `page.description`: raid "in 12.0.7", M+ "in
-  Season 1" → s1.
-- **No season flip.** Blizzard has announced Curse of Ula'tek for **Aug 11 (US) / Aug 12
-  (EU)** with the Venomous Abyss raid Aug 18/19; every live source still self-identifies as
-  12.0.7 / Season 1, so `PHASES.liveSeason` and `SNAPSHOT_PHASE` stay as they are. The flip
-  window opens in five days.
-
-## 2026-08-05 (nightly, 12:31Z)
-- **All 5 tier-list sources refreshed live, 359 rows applied, 0 unmatched, 1 tier move.**
-  · Icy Veins 80 (raid+M+ × DPS/Healer/Tank, 6 pages, 212–371 KB), Method 79 (39 raid — Vengeance DH still absent upstream — + 40 M+), Wowhead 80, Archon 80, `icyveins-ptr` 40. **The only move anywhere: Archon raid throughput Devourer Demon Hunter S → A.** Augmentation Evoker (184.7k) is now the sole S; Devourer sits at 180.5k in A. It is upstream drift, not a parse artifact — Archon's underlying numbers moved with it (Devourer 95th-pct DPS 180,424 → 180,495, parses 27,351 → 25,185), see the refresh-metrics log.
-  · **Archon's `lastUpdated` still reads 2026-08-04T12:00:00Z at 12:31Z today** — verified with a cache-busted re-fetch, so this is not a CDN stale copy; their daily aggregate had not republished at fetch time. The values underneath it nonetheless moved (55 of 160 numeric series), which is why this is recorded as a live re-read rather than a frozen source.
-  · **`icyveins-ptr`: 40 rated rows on the 7-band scale (S+ 2 / S 2 / A+ 9 / A 7 / B+ 4 / B 2 / C 1 on DPS), 0 moves, no TBDs** — the string does not appear on any of the three pages, so again no explicit nulls were written. Its `published` reads **2026-08-02** on all three (JSON-LD `dateModified`), matching both the stored value and the deterministic `published-evidence/evidence.json`; 3 days old against the 9-day threshold, nothing for the published gate to flag.
-  · **Era verification — all live sources Season 1, NO FLIP.** Icy Veins titles: "Midnight (12.0.7)" (raid DPS), "Patch 12.0.7 / Season 1" (raid tank), "Patch 12.0.7 / Midnight" (other four). Wowhead: all six read "Midnight Season 1", Devourer present in both DPS lists. Method: "Midnight" present, zero "Season 2". Archon verified structurally: raid pool is Imperator … Midnight Falls (373,222 parses), M+ pool is the S1 dungeon set. `icyveins-ptr` verifies the other way — all three titles read "PTR Tier List for Midnight (Patch 12.1 / Season 2)".
-  · **The `seasonVerified` conflict is unchanged and still unresolved** — Gate 0 whitelists only `snapshot`, so writing it fails the night red. Era-verification recorded here and in the manifest instead. Same problem would hit `published` the day a page's self-date moves.
-  · Transports unchanged: Icy Veins plain curl+UA; Method plain curl+UA (split on `<div class="tier__tier`); Wowhead needs the FULL browser header set (UA alone = 403) — parse the embedded `WH.markup [tier-list=rows]` block, **but note it is JSON-escaped in the page source** (`[\/tier-list]`, `\r\n`), so unescape before regexing or the whole block "vanishes"; Archon `__NEXT_DATA__` → `specTierListSection.tierLists`, entries live under `tiers[].entries[][]` with an `icon` like `DemonHunter-Devourer` (raid = **throughput**, M+ = **score**).
-  · Archon per-encounter re-fetch: **51 pages, all 200, 680 tier rows, 23 moved** (see manifest `archon-encounters`). Encounter display names are taken from the stored file, not the per-encounter page's `encounterOptions` label — the latter is truncated ("Imperator" vs "Imperator Averzian").
-
-## 2026-08-05 (nightly CI, Opus 5 — THIRD run of the day, 15:37Z; single-shot)
-- **All 5 tier-list sources re-fetched live, 26 pages + 51 encounter pages. 279 rating rows re-applied. ONE tier change anywhere: Brewmaster Monk survivability C -> B** (Archon, display-only — feeds no consensus and no projection). Consensus tiers: **zero moves** on icyveins / icyveins-ptr / method / wowhead / archon, and zero across all 680 per-encounter rows.
-- **`seasonVerified` IS NOW WRITABLE AND IS WRITTEN — the long-standing conflict is CLOSED.** Commit e65332a widened Gate 0's sources.json whitelist from `["snapshot"]` to `["snapshot", "published", "seasonVerified"]`. This run stored the era-verify observation on **all 26 tier-list pages** (icyveins 6 · method 2 · wowhead 6 · archon 9 → `"s1"`; icyveins-ptr 3 → `"s2"`), where 0 of 55 pages carried it before. `sourceSeasonOk`/`consensusFor` (DECISION 1) now has data to act on at the S2 flip instead of silently no-opping. Deliberately NOT written on metrics sources — seasonVerified is a consensus concept and those feed no consensus.
-- **`published` still stored only on `icyveins-ptr`** (2026-08-02, re-read from JSON-LD every run and matching `published-evidence/evidence.json` exactly). The other four sources' page-self-dates were read and logged but not stored: only requirements carrying a `published` block in required-sources.json are covered by `fetch-published.mjs` and the publish gate, and that file is CODEOWNERS-owned. Storing dates no gate reads would add an uncross-checked claim. **Owner call if wanted:** add `published` blocks for icyveins/wowhead and this run's dates can be stored next night.
-- **NEW WOWHEAD PARSE GOTCHA — pin this, it cost one rewrite.** The badge token inside the `[tier-list=rows]` block is **`[spec-badge=<slug>]`**, not `[spec-badge spec=<slug>]`. A regex written for the latter still matches the `[tier-label bg=qN]X[/tier-label]` scaffolding, so the block count and the tier labels parse fine and only the SPECS come back empty — 6 pages x 0 rows, which reads exactly like six emptied tier lists rather than a parser bug. Slugs are `<spec>-<class>` lowercase-hyphenated (`blood-death-knight`, `vengeance-demon-hunter`), byte-compatible with the roster after the same normalisation. The JSON-escape gotcha from 08-05 12:31Z still applies and must be undone first.
-- **Archon transport, re-confirmed:** `__NEXT_DATA__` → `props.pageProps.page.specTierListSection.tierLists`; entries are `tiers[].entries[][]` with an `icon` of the form `DemonHunter-Devourer`. Raid = the **throughput** list, M+ = **score**. `lastUpdated` has now advanced to **2026-08-05T12:00:00Z** — the 12:31Z run read this exact cut hours before the label caught up (every tier and every number reproduces byte-identically here), which retro-confirms that run's disposition of "values moved under a stale label".
-- **Era verification — all live sources Season 1, NO FLIP.** Icy Veins titles unchanged ("Midnight (12.0.7)", "Patch 12.0.7 / Season 1", "Patch 12.0.7 / Midnight"); Wowhead all six "Midnight Season 1"; Method "Midnight" x10/x6 with zero "Season 2"; Archon structurally (raid pool Imperator … Midnight Falls, 356,431 parses; M+ pool the S1 dungeon set). `icyveins-ptr` verifies the other way — all three titles "PTR Tier List for Midnight (Patch 12.1 / Season 2)", 7 bands S+/S/A+/A/B+/B/C, **no TBDs on any page this run**.
-- **Archon per-encounter re-fetch: 51 pages, 51/51 HTTP 200, 680 tier rows, ZERO moved.** The write is all-or-nothing per encounter (any parse failure or a sub-40 spec count leaves the whole file untouched), so a partial night can never half-update the fight view.
-
-- 2026-08-05 (LOCAL, independent cross-check of the `seasonVerified` backfill — no fetch-to-store, verification only)
-  · The 15:37Z nightly stored `seasonVerified` on all 26 tier-list pages. Because a WRONG value here fails **silently and permanently** — `sourceSeasonOk` drops a source from a bracket's consensus the moment `PHASES.liveSeason` flips, with no gate to catch it — all 26 were re-derived from scratch: pages re-fetched live from a residential IP, in a separate process, with an independently-written parser. **26/26 agree with what the nightly stored, 0 disagreements** (icyveins 6 · method 2 · wowhead 6 · archon 9 = `s1`; icyveins-ptr 3 = `s2`). Confirmed too that no non-tier-list page carries the field.
-  · **Method and Archon are the two that cannot be verified by title** and are worth knowing about before anyone "fixes" them: neither page states a season anywhere. Method was settled structurally — "Midnight" x20 (M+) / x16 (raid) and "Season 1" x3, **zero** "Season 2" / "12.1" / "PTR", all 8 Season-1 dungeons present with zero Season-2 dungeons, Devourer in both lists. Archon likewise, from its own pools.
-  · ⚠ **A body-text check would have mis-verified twelve pages.** Every Icy Veins and Wowhead page matches "Season 2" **in its body** (they link PTR content), while the TITLE says Season 1. Title is the authority for those two sources; only fall back to structure where there is no season string at all, as with Method and Archon.
-
-- 2026-08-04 (nightly CI, Opus 5; single-shot) · **All 5 tier-list sources fetched live · ZERO tier moves anywhere** — 359 rating rows re-applied, 0 unmatched. Transport recorded per the gotcha: direct curl with a browser UA for icyveins / icyveins-ptr / method / archon, and the FULL browser header set for wowhead (r.jina.ai remains dead on `wowhead.com/guide/*`). r.jina.ai unused.
-  · **icyveins** 6 pages, 212–371 KB, 80 rows. Era per `<title>`: raid DPS "Midnight (12.0.7)", raid tank "Patch 12.0.7 / Season 1", other four "Patch 12.0.7 / Midnight"; Devourer in both DPS lists. Page-own `dateModified` still **2026-06-30 / 2026-07-01** — ~5 weeks static, so zero moves is upstream cadence, not a stall.
-  · **icyveins-ptr** 3 M+ pages, all titles "PTR Tier List for Midnight (Patch 12.1 / Season 2)". 38 rated (26/7/5) + the 2 upstream TBDs (Augmentation Evoker, Vengeance DH, both re-verified in the body) as explicit `null` = 40. ⚠ **`published` STILL 2026-07-26 — 9 days, second missed Sunday rebuild.** Below the ~2-week finding threshold but converging; nothing gates it (SOURCES.md). Check first next run.
-  · **method** 79 rows (40 M+ + 39 raid); Vengeance DH still absent from raid. ⚠ **NEW PARSE HAZARD, cost the whole C tier before it was caught.** `re.findall(r'<div class="tier__tier.*?(?=<div class="tier__tier|</main)')` **silently drops the LAST tier block of every page** — findall matches are non-overlapping, so the final block has no terminator and never matches. Result: **29 raid rows instead of 39** (all 10 C-tier specs gone) and 7 of 8 M+ dungeon labels, with 0 "unmatched" reported. It looks exactly like a clean parse of a shorter list. **Split the document on the marker; never match between markers.** (Same class of bug as the 08-01 Wowhead `printHtml` decoy: a per-page row count is the only thing that catches it.)
-  · **wowhead** 6 pages, 80 rows, 0 unmatched, M+ DPS A+ band present; parsed from the `[tier-list=rows]` WH.markup block (badge slugs, so no name-splitting and no hyphenated-"(S-Tier)" hazard). Per-page `dateModified` spans **2026-04-19 → 2026-06-25** — these lists are weeks old upstream.
-  · **archon** 6 aggregate pages via `__NEXT_DATA__` (raid = throughput, M+ = score), 80 rows; survivability 40 rows, 0 moves. **`lastUpdated` still `2026-08-03T12:00:00Z` at a 12:35Z fetch** — the 08-04 daily aggregate had not published yet. Consistent with the 08-01 finding that it is a coarse daily LABEL: the numeric series underneath it *did* move this run (30 of 33 95th-pct DPS values), which is the evidence the fetch was live. Do not use it as a change detector in either direction.
-  · **archon-encounters**: full 51-page re-fetch, 0 failures, 40 specs on every encounter, **680 rows**, asOf 08-04, **24 moved (3.5%), all raid-side** — imperator 6, chimaerus 6, beloren 5, crown 3, salhadaar 2, vaelgor-ezzorak 2; all 8 dungeons unchanged.
-  · Era-verified everywhere; **no season flip** (12.1 launches Aug 11, S2 Aug 18, both still labelled PTR upstream). npm test 229 (210 pass / 19 skipped), build OK.
-
-- 2026-08-04 (LOCAL run, ~20:2x-20:5xZ — Opus 5; residential, **interactive** — Riley spotted that a new Icy Veins PTR list had landed and asked whether it was included. It was not: the preceding ptr-watch run covers the build feed / blue posts / WCL PTR zones, and tier lists are this lane.) · **`icyveins-ptr` REFRESHED — the source's 02 Aug. "Update #4" ingested after being missed for two days. 22 tier moves, 2 upstream TBDs resolved, 16 unchanged.** No other tier-list source was touched this run.
-  · **HOW IT WAS MISSED — worth keeping.** All three PTR pages have carried JSON-LD `dateModified` **2026-08-02** and the in-body line "Last UPDATED - 2nd of August." since 08-02, and the changelog's newest row reads "02 Aug. 2026: Update #4 of the progressive S2 Midnight tierlist." Stored `published` was **2026-07-26** and stored ratings had been frozen since **2026-07-31** (verified by fingerprinting `data/specs.json` across 25 commits). The 08-04 nightly manifest row nonetheless recorded `result: success` with detail asserting the published date "is STILL 2026-07-26 — now 9 days" and "ZERO tier moves". The page contains **exactly one date string and zero occurrences of "26th of July"**, so this was NOT a changelog misread — `snapshot` is cross-checked by `check-refresh --manifest` but **`published` is gated by nothing**, so a stale value survived four-plus runs unchallenged. Follow-up task raised for an owner-reviewed gate.
-  · **PARSE VERIFIED FOUR WAYS before anything was applied** (the diff was large enough that one reading was not good enough): one deterministic local script plus three independent agent parses of the same saved HTML, each cross-checked by **two adversarial verifiers using deliberately different techniques** — an independent re-parse (split on tier markers rather than matching between them) and a trap audit against the six known failure modes (dropped last band, roster coverage, B+ collapse, non-spec alts, TBD handling, name-split damage). **All 6 verifiers returned agrees=true and all four readings agree on all 40 rows.** Only cosmetic nits were raised (chunk-count arithmetic in a note; which sibling lists a cross-link points at). Era-verified the OPPOSITE way this source requires: every page self-identifies "PTR Tier List for Midnight (Patch 12.1 / Season 2)"; the ~24 "Season 1" strings per page are nav boilerplate, pre-Feb-2026 changelog rows, one retrospective sentence, and one stale template line ("until Season 1 arrives") — none claims the list rates the live season.
-  · **⚠ NEW SEVENTH BAND: `S+`, on the DPS page only** (Arcane Mage, Arms Warrior). `data/scales.json` defined six bands, so `apply-ratings.mjs` would have rejected those two rows. **Collapsing S+ into S was refused** — it fabricates a placement the source is explicitly distinguishing — and `scales.json` is CODEOWNERS-owned (`.github/CODEOWNERS:14`), so it was escalated rather than inferred. **Owner decision (Riley, in-session): S+ = 100, S = 92**, remaining anchors unchanged (A+ 82 / A 66 / B+ 57 / B 48 / C 30). Consequence recorded in the file's `_comment`: the PTR scale now deliberately stops matching the live one at the top rung (PTR S 92 vs live S 100), and the re-spacing moves **every** icyveins-ptr-derived projection input via `ptrTierRead` (weight .25), not just the two S+ specs. Consensus is untouched — the source is `era: "ptr"`. **Open question left with the owner: whether this warrants a `PROJECTION_VERSION` bump.**
-  · **Moves — DPS:** Windwalker B+→S (+3) · Outlaw A→S · Subtlety C→B+ · Marksmanship A+→B+ · Beast Mastery A→B (±2) · Fire B+→A, Assassination + Destruction A→A+, Unholy + Balance S→A+, Shadow A+→A, Survival A→B+, Fury B+→B, Devastation B→C (±1) · Arcane + Arms S→**S+** · **Augmentation TBD→A**. **Healer:** Restoration Druid A→B (−2) · Holy Priest B→B+ · Mistweaver A+→A · Preservation B+→B. **Tank:** Guardian B+→A+ (+2) · Blood A+→S · **Vengeance TBD→A**. Both former TBDs are now placed upstream — **zero TBD remains on any of the three pages**, so `null` rows went 2 → 0.
-  · **ONE TEST EDIT, DISCLOSED:** `test/validate.test.mjs` asserted `tbd === 2` — a fixture assumption about upstream state, not a behaviour, so an ordinary upstream update turned the suite red. Rewritten to assert the guarantee that actually matters: every roster spec carries the `icyveins-ptr` key, and an unplaced spec is stored as an **explicit null rather than omitted**. `src/validate.mjs` and every gate are untouched; `test/` is outside the CODEOWNERS boundary. Same class of fix, same precedent, as the 2026-08-02 `kind === undefined` edit.
-  · **⚠ REPO ANOMALY, NOT CAUSED BY THIS WORK AND DELIBERATELY LEFT ALONE.** Partway through, `git status` showed the whole `gearing/` SimC-pipeline changeset **staged on master**, though a clean-tree check immediately after `git reset --hard origin/master` had passed and nothing in this run ran `git add` on those paths. No git hooks are installed. Two of the files (`gearing/src/app.template.html`, `gearing/wow-s2-gearing.html`) are **genuinely different from both HEAD and the `s2-gearing` commit 9bc95bd**, i.e. real unpushed work that discarding would destroy — so nothing was reset, restored or stashed. This run committed **explicit paths only** (`data/scales.json`, `data/sources.json`, `data/specs.json`, `data/history/2026-08-04.json`, `test/validate.test.mjs`, `dist/index.html`), the same discipline the nightly publish job uses, and the gearing state was verified byte-identical before and after the commit. **Left for the owner to resolve.**
-  · `npm test` **260 (241 pass / 19 skipped / 0 fail)**, `npm run build` OK, `node src/snapshot.mjs` written (data changed) and rebuilt after. Manifest deliberately **NOT** rewritten — single-source partial refresh, not a full one. Commit `0102bcf`, **not pushed**.
-  · **BOTH OPEN ITEMS RESOLVED (owner, 2026-08-04, later same day):** (1) the S+
-    re-spacing gets **NO `PROJECTION_VERSION` bump** — the formula ("mean of era:ptr
-    tier lists through their own scale") is unchanged; the source's vocabulary moved and
-    the scale config followed it, the same category as upstream data movement. The
-    re-anchoring shifts an unchanged-S spec's forecast by ≤~2 points at the .25 weight,
-    dwarfed by the 22 real moves in the same commit; bumping would sever the two-day-old
-    v8 series to avoid a calibration artifact smaller than its noise floor. Disclosed
-    here and in the scales `_comment` — disclose-don't-version, matching the
-    CONSENSUS_VERSION precedent for era-gated sources. (2) the `published` gate is
-    **scoped as the next work item** — `docs/published-gate-scope.md` (deterministic
-    evidence step + 9d staleness threshold; mismatch/ratchet red at the publish gate,
-    staleness to the heartbeat — both decisions Riley's, in-session).
-
-- 2026-08-04 (nightly CI, Opus 5; single-shot — **second run of the day**, 22:44Z, after the 12:31Z nightly) · **All 5 tier-list sources fetched live and re-applied; 6 source-level moves, all on one page.**
-  · **Icy Veins RAID HEALER list was rebuilt upstream mid-day** — JSON-LD `dateModified` moved `2026-06-30` → **`2026-08-04T19:56:31+02:00`**, i.e. after the 12:31Z run had already fetched it. Six real moves: **Holy Paladin B→S, Preservation Evoker A→S, Restoration Shaman B→A, Holy Priest B→A, Restoration Druid S→B, Mistweaver S→B**. Downstream that is **4 one-band consensus moves** (all raid healers), 0 of ≥2 bands — far inside the anomaly limits, and the page's own fresh date is the evidence it is editorial movement rather than a parse artifact. The other five Icy Veins pages are unchanged at `dateModified` 2026-06-30 / 07-01 with zero moves.
-  · Method 79 rows (39 raid — Vengeance DH still absent upstream — + 40 M+), Wowhead 80, Archon 80, icyveins-ptr 40: **all zero moves.** 0 unmatched anywhere.
-  · **`icyveins-ptr`: the TBDs are gone.** Augmentation Evoker and Vengeance DH are both placed; the string `TBD` no longer appears on any of the three pages, so **40 rated rows, no explicit nulls written this run** (rows.min 24 unaffected). Its `published` reads **2026-08-02** on all three pages and matches the deterministic `published-evidence/evidence.json` exactly — the 3-run watch item from 07-26 is **CLOSED**, and the new published gate had nothing to flag (2d against the 9d threshold).
-  · **⚠ CONFLICT FOR THE OWNER — this skill asks for something the publish gate rejects.** Step 2 says to store `seasonVerified: "s1"|"s2"` on each page in `sources.json`. The nightly's **Gate 0 whitelists only the page `snapshot` key** for agent edits (`changedBeyond("data/sources.json", ["snapshot"])`), so writing `seasonVerified` from a nightly agent fails the night **RED**. No page currently carries the field, so this is unresolvable from inside a nightly: era-verification was performed and recorded in the manifest + this log instead. Reconciling needs a reviewed edit to `nightly.yml` (add `seasonVerified` — and `published`, which has the same problem the day a page's self-date moves) to Gate 0's volatile list.
-  · **Era verification, all live sources = Season 1, NO FLIP.** Icy Veins titles: "Midnight (12.0.7)" / "Patch 12.0.7 / Season 1" / "Patch 12.0.7 / Midnight". Wowhead: all six read "Midnight Season 1". Method: "Midnight" present, zero "Season 2" strings. Archon verified structurally rather than by title — its **encounter list** is the S1 raid (Imperator … Midnight Falls, 373,222 parses) and the S1 dungeon pool, not the S2 PTR pool. Devourer DH present in every DPS list. icyveins-ptr verifies the other way: all three titles read "PTR Tier List for Midnight (Patch 12.1 / Season 2)".
-  · Transports, all unchanged from the last run: Icy Veins plain curl + UA; Method plain curl + UA (**split on** `<div class="tier__tier`, never match between markers); Wowhead needs the FULL browser header set (UA alone = 403, r.jina.ai dead) and the embedded `WH.markup [tier-list=rows]` block; Archon `__NEXT_DATA__` from raw HTML, raid = **throughput**, M+ = **score**. Archon `lastUpdated` has caught up to **2026-08-04T12:00:00Z**.
-  · `npm test` 259 (240 pass / 19 skipped / 0 fail), `npm run build` OK, `src/snapshot.mjs` written, manifest rewritten, `check-refresh --manifest` green.
 
 ## 2026-08-15 (third run of the day — nightly, headless)
 

@@ -3,6 +3,33 @@
   "thread": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811",
   "builds": [
     {
+      "date": "2026-08-20",
+      "kind": "hotfix",
+      "label": "Live 12.1 hotfixes for August 20 — a second consecutive BUG-FIX round-up, with no tuning value anywhere in its Classes section. Canonical source verified directly rather than off the Wowhead mirror: Kaivax's running hotfix blue post (us.forums topic 2336376), whose title has rolled to “World of Warcraft: Midnight Hotfixes - August 20” and whose post 1 was edited 2026-08-21T02:27Z to append the August 20 section; read with its <ul> heading structure INTACT, which is what settles the one attribution question in the post — the Hellcaller line sits directly under the bare Warlock heading, one level SHALLOWER than the four Affliction lines, so it is a hero-tree line and not an Affliction one. Logged kind “hotfix” because it is a live-realm round-up with no post in the 12.1 development-notes thread this feed tracks (that thread has been quiet since 2026-07-31, the closed cycle's expected silence), so the Wowhead article carries the citation. Every class line was checked against classifyHighlight rather than assumed: 5 of the 7 classify null and do not vote, but TWO do and are reported as such rather than talked down — Marksmanship Hunter classifies NERF (both its lines remove a damage double-dip: Precise Shots benefiting twice, and Explosive Shot's AoE not being reduced by damage-taken-reduction) and Elemental Shaman classifies BUFF (Master of the Elements now increases Earthquake damage). Neither moved an outlook DIRECTION, because both specs are driven by a dated writeup verdict rather than the tally (Marksmanship stays Mixed/flat at +5/−2, Elemental stays Positive/up at +2/−1); only their stated line counts moved. ONE set bonus is touched: the last Affliction Warlock line fixes the Unstable Affliction granted by the Venomous Abyss 4-piece failing to grant a stack of Wither, so that spec's tierSet.asOf and source were advanced to this post and a dated parenthetical was appended recording the fix; the 4-piece WORDING is unchanged, which is why the stored bonus text was not rewritten. Deliberately not distilled, as out of scope for a PvE class tracker: the Delves section; the whole Dungeons and Raids section (Ruby Life Pools, Temple of Sethraliss, and the Venomous Abyss fixes for The Serpent Warren, Vashnik the Malignant, The Coiled Altar and the seven Heroic-difficulty Ula'tek tuning lines — encounter tuning, not class tuning); Items (Companion Command Crystal, Omnium Folio); Prey's Toxic Snare affix nerf; Quests; and Treasures. Also swept and correctly NOT logged from the same news window: “Heroic Vashnik Stealthily Nerfed” (news=382552) and “Nightmare Prey Affix Nerfed” (news=382549), both encounter/affix tuning with no class line.",
+      "forumPostNumber": null,
+      "forumUrl": null,
+      "wowheadUrl": "https://www.wowhead.com/news=382550/heroic-ulatek-nerfs-and-raid-bug-fixes-patch-12-1-hotfixes",
+      "icyveinsUrl": null,
+      "specsAffected": [
+        "Havoc Demon Hunter",
+        "Restoration Druid",
+        "Marksmanship Hunter",
+        "Holy Priest",
+        "Elemental Shaman",
+        "Affliction Warlock",
+        "Warlock (Hellcaller hero talents)"
+      ],
+      "highlights": [
+        "Havoc Demon Hunter — Aldrachi Reaver: Fixed an issue where Evasive Action was not granting an extra cast of Vengeful Retreat.",
+        "Restoration Druid — Fixed an issue where the tooltip for Tranquility incorrectly described how long it extended heal over time effects; fixed an issue where Overgrowth was applying healing over time effects to the incorrect target when used in tandem with Soul of the Forest.",
+        "Marksmanship Hunter — Corrected an issue where Hunters could benefit from the Precise Shots effect twice by casting Arcane Shot or Multi-Shot as Rapid Fire finishes channeling while talented into Unload; corrected an issue where the AoE damage from Explosive Shot was not properly reduced by damage taken reduction effects.",
+        "Holy Priest — Fixed an issue where casting Benediction and queuing a Holy Word would consume the proc.",
+        "Elemental Shaman — Resolved an issue causing Master of the Elements to not increase the damage of Earthquake.",
+        "Affliction Warlock — Fixed an issue where Malefic Grasp was not affected by Withering Bolt; fixed an issue where Withering Bolt did not account for Wither when increasing Shadowbolt Volley damage; fixed an issue where Wither would not count toward Darkglare Eye Beam damage increase; fixed an issue where the Unstable Affliction granted by the Venomous Abyss 4-piece set bonus would not grant a stack of Wither.",
+        "Warlock (Hellcaller hero talents) — Fixed an issue where Blackened Soul could trigger from Unstable Affliction periodic damage."
+      ]
+    },
+    {
       "date": "2026-08-19",
       "kind": "hotfix",
       "label": "Live 12.1 hotfixes for August 19 — a BUG-FIX round-up with no tuning values anywhere in its Classes section. Canonical source verified directly: Kaivax's running hotfix blue post (us.forums topic 2336376, whose title now reads “World of Warcraft: Midnight Hotfixes - August 19”; post 1 was edited 2026-08-20T03:14Z to append the August 19 section), read with its heading structure intact rather than off the Wowhead mirror. Logged kind “hotfix” because it is a live-realm round-up with no post in the 12.1 development-notes thread this feed tracks, so the Wowhead article carries the citation. Every class line below was checked against classifyHighlight: none states a throughput change, so NONE votes in the outlook tally — which is the honest reading of a bug-fix pass. No set bonus is touched anywhere in the post, so no spec.tierSet was advanced. The Army of the Dead line sits under the bare Death Knight heading with no spec qualifier (nesting confirmed against the forum HTML, not the flattened text), so it is logged class-wide rather than attributed to a spec; the Dark Simulacrum Cooldown Manager line, by the same reading, sits INSIDE the Unholy block and is logged there. Deliberately not distilled, as out of scope: the Delves section; the whole Dungeons and Raids section (encounter fixes for The Blinding Vale, Ruby Life Pools, Temple of Sethraliss and five Venomous Abyss bosses); Items (the Aman'muso, Warlord's Vengeance main-hand restriction being reinstated); Quests; and the single Player versus Player line about Conqueror's Venomous Lacquer.",

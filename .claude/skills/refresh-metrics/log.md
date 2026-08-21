@@ -16,6 +16,78 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-21 (nightly CI)
+
+**Merged: Archon M+ (40 score + 40 popularity) and Mythicstats (40). Held back: the whole
+Archon RAID numeric cut, Bloodmallet, SimC, WoWMeta, Murlok, both WCL rows.** Row counts and
+guard arithmetic were computed BEFORE every merge, never after.
+
+- **Archon M+ numbers** — from `specRankingsSection.table.data[]`, never `tierList`.
+  27 + 7 + 6 = **40/40** rows, 0 unmatched, floats rounded to the stored precision read off
+  `specs.json` (score integer, popularity 1 dp). `parses` carried through as `n`
+  (950,129 / 316,669 / 316,628). "M+ score (95th pct)" family median 2730 → **2751**, +0.8%
+  against `maxFamilyMedianMovePct` 0.35; worst single row nowhere near `maxValueMovePct` 0.6.
+  Popularity shape-checked first: values 0.3–43.6, the three role groups summing
+  100.0 / 100.0 / 100.0, **0** rows equal to that spec's own 95th-pct DPS (the check that
+  catches the DPS-column-under-a-%-unit failure). `asOf` = Archon's own `lastUpdated`
+  2026-08-20T12:00:00Z.
+- **Archon RAID numbers — NEW STATE, and the judgement call of the run.**
+  `specRankingsSection.table.data` is no longer empty on the S2 raid pages: 13 DPS rows (of
+  27), 4 healer (of 7), 2 tank (of 6). **Merged nothing.** Every row has `parses` of **1**
+  except Destruction Warlock at 2 — a "95th percentile" from one parse is that one parse — and
+  13 of 27 is a partial roster under a season-agnostic metric name, so the 13 re-based specs
+  would rank below the 14 surviving S1 rows (n = 95–682) purely for having been re-based.
+  Same shape as the Bloodmallet sim-tier trap. Held-back deltas run −11% to −39%
+  (Windwalker 171,021 → 114,311; Arms 208,648 → 133,283) — all *inside* `maxValueMovePct`,
+  so no gate would have stopped this; the judgement is the guard. Merge WHOLESALE the first
+  night a full 27-spec raid cut with real parse counts appears, and expect a value-move check
+  that night.
+- **Mythicstats** — `/period/latest` → **/period/1077**, the same period as the last two
+  nights but still live and still moving: "Top 2000 keys, 10000 characters (**4549** unique),
+  **13.3** average key level" against last night's 5914 / 12.1. Parse bounded to the "Spec
+  representation in top keys" section, terminated at the next `<h2>`; labels normalised on
+  `[-\s]+`, whitespace allowed around the bare number. **40 rows, 0 unmatched.** Confirmed it
+  is the representation SHARE column and not `/meta`'s per-key PRESENCE column before merging:
+  sum **100.4%**, page's own role subtotals Ranged 28.6 / Melee 31.4 / Tank 20.0 / Healer 20.0,
+  max row 12.0, no zeros. 37 of 40 moved (Blood DK 10.1 → 12.0, Arms 8.7 → 10.6, Balance
+  3.6 → 2.7); every value far below the 100-magnitude floor, so the value-move gate correctly
+  does not see them. `asOf` = the run date — this page publishes no date of its own.
+- **Murlok** — 3 pages, plain GET, HTTP 200, 40/40 parsed, 0 unmatched. **Nothing merged and
+  recorded `partial`, not `success`:** the pages' own `datetime="2026-08-20T03:32:10Z"` is
+  identical to the stamp the series already carries and all 40 values are byte-identical
+  (median 2744.5, range 2346–2898). Claiming success on an unchanged fetch is precisely the
+  wowmeta-freeze failure mode.
+- **WoWMeta** — `manifest.json` snapshotDate 2026-08-11 AND the rankings file's
+  `Last-Modified: Tue, 11 Aug 2026 15:25:05 GMT` agree, so no movement is hidden behind a
+  pinned manifest; the rankings file was cache-busted and diffed anyway. Whitelist
+  (`categoryType ∈ {dps,hps,tank}` + `sortField === "lowerBound"` + `keyRange === undefined`)
+  → 40 of 44 blocks' worth, 40/40 name-matched, **all identical**. Upstream has not run for
+  **10 days**; two days past the 8-day threshold, and that red is accurate.
+- **Bloodmallet** — 27 charts × 5 attempts. **17 real, the SAME 10 persistently erroring**
+  (Havoc, Devourer, Balance, Feral, Augmentation, Devastation, Windwalker, Retribution, Arms,
+  Fury) with the 76-byte `{"status": "error"}` body — roster identical to last night, so no
+  upstream progress in 24h. All 17 read `simc_settings.tier` **MID2** at chart timestamp
+  2026-08-19 against 26 stored MID1 profiles; **merged nothing** per the sim-tier uniformity
+  gate. `ptr` compared explicitly against the STRING `"0"`. `fightProfile.asOf` stays at the
+  charts' own 07-08 / 07-15 — 44 days — and the heartbeat red is the true signal.
+- **SimC** — `MID1_Raid.txt` is a 272-byte in-progress run with no ranking block (header
+  1210-01, 12.1.0.69404 Live, git build HEAD **69a46e15b4**, moved from 3e75e1b590), so fell
+  back to `MID1_Raid.html`: **unchanged** at 1205-01, 12.0.7.68974 Live, own timestamp
+  2026-08-08 07:28:33. Re-parsed anyway — `"data":[…]` array ENCLOSING the first big-value
+  `MID1_` hit, longest-prefix name mapping with a hyphen allowed — 49 profiles → **26 DPS
+  specs, all byte-identical**; the 9 unmapped are tank profiles, excluded by design.
+  MID2_Raid.txt still self-identifies **12.1.0.69382 PTR** and its ranking block is still
+  partial (**33** distinct profiles, up one, from only ten classes — no Druid, Evoker or
+  Warrior at all). Not adopted; owner decision unchanged.
+- **WCL** — no fetch by this agent, no credentials, warcraftlogs.com not contacted by any
+  means. `wcl-fetch/evidence.json` (attemptedAt 2026-08-21T11:00:57.617Z) reports verdict
+  **rdps-broken**: OAuth and GraphQL healthy (3600/hr, 1 spent), `characterRankings(metric:
+  rdps)` on encounter 3176 returns a bare "Internal server error". `landed` empty → both
+  wcl-live rows `unreachable`, stored data untouched at 2026-08-10.
+- **Robydoby** (best-effort, deliberately outside the contract): tab map re-read, 26 tabs,
+  newest Mythic week still **24/7** — unchanged since the PTR cycle closed, as expected.
+  Nothing to merge, nothing proposed into `required-sources.json`.
+
 ## 2026-08-20 (nightly CI)
 
 **Merged: 160 metric rows across three sources (Archon M+ 80, Murlok 40, Mythicstats 40).
@@ -262,6 +334,7 @@ healthy, `characterRankings(metric: rdps)` on 3176 still a bare Internal server 
 raw keys landed (z52 102 rows — 1T 2000 / 2T 668 / 3T 297 / 5T 2000; z54 27 rows, 6 of 8
 encounters populated, Coiled Altar and Ula'tek zero; z56 27 rows, all eight dungeons at the full
 2000-player page), and the five rDPS/normalized cuts stay frozen at 2026-08-10 / 2026-07-28.
+
 ## 2026-08-16 (nightly)
 
 **Archon merged, everything else held or unchanged.** Archon has genuinely re-cut its RAID data
@@ -899,362 +972,6 @@ WoWMeta**, which is the honest headline: this run sits ~6h behind the 12:00Z one
   rows / Venomous Abyss 27 / M+ keys 27). No warcraftlogs.com fetch of any kind by the agent.
 - `npm test` 336 pass / 0 fail / 27 skipped; `npm run build` OK; `check-refresh --manifest`
   passes (1 tier move vs the committed baseline, 0 of ≥2 bands).
-
-## 2026-08-09 (nightly, CI runner)
-
-- **Archon** — new upstream cut (08-07T12:00Z → 08-08T12:00Z): 95th-pct DPS 33, HPS 7,
-  M+ score 40, popularity 80 = 160 rows at asOf 2026-08-09; 59 values changed, all far
-  inside `maxValueMovePct`. Read from `specRankingsSection.table.data[]`, never `tierList`.
-- **Murlok** 40/40 at 2026-08-09; **0 of 40 values moved**. Not a stale fetch: the pages
-  self-report "Updated 7 hours ago" and refresh every 8h — the top-50 ceiling is simply
-  near-static this late in Season 1. Plain GET only (r.jina.ai still does not work there).
-- **Mythicstats** — `r.jina.ai` returned **403 this run**; fetched the site DIRECTLY
-  instead (index 200, and `/period/latest` is server-rendered, 206 KB). Period **1075**,
-  week 20 of MID1, top 2000 keys / 10000 characters / 21.8 avg key. 39 of 40 specs at
-  2026-08-09; Devastation Evoker is absent from the bars entirely (as last run — its
-  stored value is 0.0%), so its row keeps the older date rather than being invented.
-- **WoWMeta** partial: JSON API 200 but `manifest.snapshotDate` is **still 2026-08-05**,
-  the third consecutive night with no upstream pipeline run. 40 rows re-merged unchanged;
-  the coverage date stays 08-05 (4 days, maxAgeDays 8).
-- **Bloodmallet** partial: 26/27 charts (Augmentation still errors on all 3 retries — the
-  documented genuine absence), MID1 confirmed, and the per-spec chart timestamps are
-  **unchanged at 2026-07-08 (Elemental 07-15)** with 0 of 26 profiles moving a value.
-  32 days without a re-sim against `maxAgeDays 5` — the heartbeat SHOULD go red here; that
-  red is the signal (the 08-08 honest-date correction), not something to paper over.
-- **SimulationCraft** partial: the fetched `MID1_Raid.html` is the SAME report as
-  yesterday — Timestamp **2026-08-08 07:28:33+0000**, SimC 1205-01, WoW 12.0.7.68974.
-  Re-verified the reduction rule while re-parsing: best build per spec (max matched all 26
-  stored values exactly, min matched none), tanks excluded. asOf stays the report's own
-  date, so the row is partial.
-- **Robydoby** (best-effort, outside the contract): both sheet indexes fetched; the newest
-  **Mythic** week is still **24/7**, i.e. the week already stored at asOf 2026-07-24. Nothing
-  new to ingest, so nothing was merged — and a probe of the 24/7 CSV tabs made clear the
-  right-hand percentile block does not sit at a fixed column offset, so re-deriving the
-  parse for a week that has not changed would have risked writing wrong values for no gain.
-- **WCL**: this agent holds no credentials and fetched nothing from warcraftlogs.com. Per
-  `wcl-fetch/evidence.json` (11:04:54Z, verdict **rdps-broken** — `characterRankings(rdps)`
-  on 3176 still a bare Internal server error while OAuth/GraphQL transport is fine), the
-  five rDPS/normalized cuts stay frozen (zones 46/47 at 08-07, zone 54 at 07-28, ptrDummy
-  at 08-07) and only the three deterministic RAW series landed, by the fetch step itself:
-  dummy 104 rows (1T 2000 / 2T 593 / 3T 274 / 5T 2000 ranked players), Venomous Abyss
-  pooled 27, M+ keys pooled 27 — all at 2026-08-09.
-- `npm test` 317 pass / 0 fail / 21 skipped; `npm run build` OK; `check-refresh --manifest`
-  passes (16 consensus tier moves vs the committed baseline, 0 of ≥2 bands).
-
-- 2026-08-09 (LOCAL run, ~14:2xZ — Opus 5; scheduled residential catch-up after the 10:37Z
-  nightly). **Scope: residential-only catch-up. No metric source was re-fetched or
-  re-stamped** — CI had already refreshed Archon/Murlok/Mythicstats/WoWMeta/Bloodmallet/SimC
-  this morning, and independently regenerating what CI produced is what makes a local push
-  unmergeable. `data/run-manifest.json` deliberately NOT touched (partial run — it remains
-  the nightly's honest record; a fresh `startedAt` would claim a full refresh happened).
-- **WCL is in a FULL API OUTAGE from here, wider than the standing rdps breakage.** The
-  mandated cheap retry was run against the canonical probe (`characterRankings(metric: rdps,
-  page: 1)` on encounter 3176, the exact query `fetch-wcl.mjs` uses): **HTTP 500**. So was
-  plain `dps`. So was `{ worldData { encounter(id: 3176) { id name } } }`. So was
-  **`rateLimitData`** — the simplest query the API accepts — all returning a 500 with an
-  HTML "An error has occurred" page rather than a GraphQL error body. OAuth still issues a
-  token fine, so this is not credentials and not our transport. That is a strictly broader
-  fault than the documented `rdps-broken` state (where `dps`/`hps` work), and it began
-  AFTER the nightly's 11:04:54Z fetch step, which did land its three raw-DPS series.
-- **The HTML statistics endpoint no longer clears Cloudflare from a residential IP with
-  node `fetch`** — worth recording, because the skill currently says it does. Both
-  `zone/statistics/table/46/...?dpstype=rdps` and the zone-54 normalized cut returned
-  **HTTP 403 with a "Just a moment..." interstitial** (6.2 KB, spriteRows=0), sent with the
-  full documented header set (XHR + browser UA + Referer). Residential IP is evidently no
-  longer sufficient on its own — Cloudflare is fingerprinting the client, not just the
-  address. A real browser might still render it, but that is a scrape path against WCL's
-  stated API-only policy and was not attempted.
-- **Net: no WCL data obtainable by either transport this run; all five frozen series left
-  untouched** (zones 46/47 at 08-07, zone 54 at 07-28, ptrDummy at 08-07). Nothing papered
-  over. Re-check next run — if `rateLimitData` answers again the outage has cleared, and the
-  separate question of whether `rdps` itself is fixed is back to the standing one-retry rule.
-
-## 2026-08-09 (nightly CI, ~19:5x-20:0xZ — second scheduled run of the day)
-
-- **SIMC PARSE GOTCHA, and it was silently wrong until this run.** Hero-talent profile names
-  can carry a **HYPHEN** — `MID1_Demon_Hunter_Havoc_Fel-Scarred`, `..._Devourer_Void-Scarred`
-  — so a profile-name character class of `[A-Za-z_'0-9]` **drops Havoc entirely** (it has no
-  hyphen-free variant) and reads Devourer off its lesser build: 115175 instead of the correct
-  **118341**, a 2.7% error that looks exactly like a real sim move. Include `-` in the pattern.
-  With it fixed, all 26 stored DPS values reproduced EXACTLY. Report unchanged from the last
-  two runs (SimC 1205-01, WoW 12.0.7.68974, git **678e66d384**, Timestamp 2026-08-08
-  07:28:33+0000) → `partial`, asOf stays 08-08. `MID1_Raid.txt` is a live in-progress log of
-  a NEWER run (git e5e7634a61, 4 of 49 profiles) with no ranking block — not ingestible.
-- **MURLOK PARSE GOTCHA:** the meta-item anchor emits its attributes in **either order**
-  (`<a class="vi-box meta-item…"` and `<a href="…" class="vi-box meta-item…"`), so a regex
-  anchored on `<a class=` drops 5 of 40 specs (Frost/Fire Mage, Marksmanship, Destruction
-  Warlock, one tank) — and it drops them *silently*, since the page still parses. Match
-  `<a [^>]*class="[^"]*meta-item`. 40/40 at 2026-08-09, **0 values moved** (second run of the
-  day; the pages refresh ~8-hourly).
-- **Archon** all four numeric series re-read from `specRankingsSection.table.data[]` at
-  `lastUpdated` 2026-08-09T12:00:00Z: 33 DPS / 7 HPS / 40 M+ score / 80 popularity, plus 40
-  survivability. Values identical to this morning's ingest (same daily aggregate); the
-  survivability BANDS moved on 16 of 40 — clustering, not throughput.
-- **Bloodmallet** `partial`: 26/27 charts (Augmentation still errors on all 3 retries), MID1
-  confirmed on every one, chart timestamps **still 2026-07-08 (Elemental 07-15)** and 0 of 26
-  target sets moved — 32 days without a re-sim against `maxAgeDays 5`. The heartbeat red is
-  the signal; do not paper it over by stamping the run date.
-- **WoWMeta** `partial`: JSON API only, 40 rows, `manifest.snapshotDate` **still 2026-08-05**
-  for the fourth consecutive night.
-- **Mythicstats** `success`: r.jina.ai still 403s, fetched directly; `/period/latest` is
-  server-rendered. Period **1075** (week 20; 2000 keys / 10000 chars, 3949 unique, 21.8 avg —
-  the unique-character count moved, so the sample rolled within the period), 39 rows, 0 values
-  moved. Devastation Evoker absent from the figure again (0 slug hits in raw HTML).
-- **Robydoby** (best-effort, outside the contract): both sheet indexes fetched; newest
-  **Mythic** week is still **24/7** (Sszorak + Twin Fangs). Unlike the last run the parse WAS
-  re-derived and verified — locate the 4-column `Class | 90th | 95th | 99th` header with a
-  real CSV reader (it sits at col 18 on both sheets, but do not hardcode that), strip
-  thousands separators, take the max 99th across the week's bosses: **31 rows, all 31
-  byte-identical to stored**, so nothing was merged and the two 07-16 leftovers were left
-  alone. Six cells oscillated between the 08-01 and 08-02 runs; they are stable now.
-- **WCL**: evidence-only (`rdps-broken`, 19:46:17Z). Five cuts frozen, three raw series
-  landed pre-agent (dummy 104 / Venomous Abyss 27 / M+ keys 27). No warcraftlogs.com fetch.
-- `npm test` 336 pass / 0 fail / 27 skipped; `npm run build` OK; `check-refresh --manifest`
-  passes (0 tier moves vs the committed baseline).
-
-## 2026-08-08 — nightly CI (headless, Opus 5, single-shot; started 11:26Z)
-
-- **WCL: agent holds no credentials, fetched nothing from warcraftlogs.com.** Sole input
-  `wcl-fetch/evidence.json` (11:03:50Z), verdict **`rdps-broken`** — `characterRankings
-  (metric: rdps)` on encounter 3176 still 200-with-"Internal server error", 0 rankings,
-  while OAuth + GraphQL transport report ok (3600/h, 1 point). So the five rDPS/normalized
-  cuts (`wcl-live-raid`, `wcl-live-mplus`, `wcl-ptr-raid`, `wcl-ptr-mplus`,
-  `wcl-dummy-dome`) are `unreachable` and their data was **left untouched**; the three
-  deterministic RAW keys landed before the agent started and advanced to 2026-08-08:
-  dummy 102 rows (1T 2000 / 2T 549 / 3T 250 / 5T 2000 ranked players), zone-54 pooled 27,
-  zone-56 pooled 27. Corroboration for zone 54's emptiness: its raw cut reports **The
-  Coiled Altar and Ula'tek at 0 ranked players** — between testing windows.
-- **Archon numbers** — 160 rows from `specRankingsSection.table.data[]` (never `tierList`):
-  95th-pct DPS 33, 95th-pct HPS 7, M+ score 40, popularity 80. New cut (lastUpdated
-  08-07T12:00Z), all moves well inside `maxValueMovePct`.
-- **WoWMeta `partial`** — JSON API only (`manifest.json` + `rankings/midnight/mplus/all/0.json`,
-  plain curl, 161 KB). 40 rows via the dps|hps|tank **whitelist** (melee/ranged are subsets
-  of dps). `snapshotDate` still **2026-08-05**, byte-identical to yesterday's cut: 0 of 40
-  values and every `n` unchanged. **Two consecutive nights with no upstream pipeline run** —
-  `maxAgeDays` 8 not breached, but worth watching.
-- **Murlok** 40/40, plain GET (r.jina.ai does not work on it), split on
-  `class="vi-box meta-item ` — 27/7/6 items is the correct count. 27 values moved, all
-  DOWN by 1–13 rating (largest Feral 4235→4222).
-- **SimC — NEW nightly build**, HEAD `678e66d384` (was `fee98c101c`) at the same
-  12.0.7.68974 / hotfix 2026-08-06. 26/26 DPS specs. **Bound the parse strictly between
-  `DPS Ranking:` and `HPS Ranking:`** — a fixed-size window past the block also swallows
-  the HPS section (49 real profiles vs 60 lines in an 8 KB window); it happened to be
-  harmless here only because healer profiles can't match a DPS-role spec. 25 of 26 moves
-  are sub-1%; the exception is **Fury Warrior 114,165 → 109,256 (−4.3%)**, no reordering.
-- **Bloodmallet** 26/26, `simc_settings.tier == "MID1"` on every chart, **zero target
-  values moved** — chart timestamps are still 2026-07-08 02:5x (Elemental 07-15), i.e.
-  nothing re-simmed upstream; only our verification date advanced. Augmentation returns
-  `{status: "error"}` by design.
-- **Mythicstats** — fetch **`/period/latest`**, not the site root (the root's 9 KB markdown
-  has no representation section; the period page's 19 KB does). Period 1075 still, week
-  progressed: 3949 unique characters (was 4650) at 21.8 avg key (was 21.5). **39 of 40
-  parsed — Devastation Evoker has dropped out of the top-2000 cut entirely** and appears
-  nowhere on the page. Legitimate upstream absence: its stored row was left alone rather
-  than written as a fabricated 0.0. The coverage probe (25th-freshest of 40) is unaffected.
-- **Robydoby (best-effort, outside the contract)** — `htmlview` tab map fetched, 26 tabs,
-  newest **Mythic** week is still **24/7** (Sszorak + Twin Fangs), which is already
-  ingested at `asOf 2026-07-24`. One CSV re-fetched to confirm reachability (200, 776
-  lines). Nothing new upstream, so nothing merged.
-- **Registry snapshots** bumped to 2026-08-08 for murlok / bloodmallet / simulationcraft /
-  mythicstats / robydoby and WCL zones **52 and 56** (their raw series landed today).
-  **Zones 46/47 left at 2026-08-07 and zone 54 at 2026-07-28** — this agent observed
-  neither, and bumping a snapshot for a cut that did not refresh is the "a 200 is not
-  freshness" trap in reverse.
-- `npm test` **313 pass / 0 fail / 21 skipped** (Playwright UI invariants skip in this job);
-  `npm run build` OK (1272.8 KB); `node src/snapshot.mjs`; `check-refresh --manifest` **passes**.
-
-## 2026-08-07 — nightly CI (headless)
-
-- **Archon** (new 2026-08-06T12:00:00Z cut): 160 numbers re-read from
-  `specRankingsSection.table.data[]` — 95th-pct DPS 33, 95th-pct HPS 7, M+ score 40,
-  Popularity 80. 61 of 160 values moved; largest relative move 12.5% (a small popularity
-  figure), well inside `maxValueMovePct` 0.6.
-- **Murlok** 40/40 (27/7/6). Split on `class="vi-box meta-item ` — the documented fix; the
-  narrower `<a class="vi-box meta-item ` literal still silently drops 5 specs. 27 values
-  moved, all DPS, max +0.68%.
-- **WoWMeta** JSON API only (manifest + `/rankings/midnight/mplus/all/0.json`, plain curl,
-  no headers). 40 rows, **0 values moved and every `n` identical** because
-  `snapshotDate` is STILL **2026-08-05** — two days behind. Recorded `partial`, not
-  success: `asOf` is the source's date, never today. `maxAgeDays` 8 not breached.
-- **SimulationCraft** — new nightly: `git build HEAD fee98c101c` (was `c5b695436c`) at the
-  same `hotfix 2026-08-06/68974`. 26/26 specs, all moved, all sub-1% (largest Shadow Priest
-  +0.95%). No reordering.
-- **Bloodmallet** 26/26 charts, `tier == "MID1"` on every one, **zero target values moved**:
-  chart timestamps are still 2026-07-08 (Elemental 2026-07-15). Only our verification date
-  advanced — say that plainly rather than calling it fresh sims.
-- **Mythicstats** still period **1075**, but the in-progress week moved: 4650 unique
-  characters (was 6313) at 21.5 average key level (was 19.8), so 38 of 40 values moved.
-  All values are percentages, below the anomaly gate's `minValueMagnitude` 100.
-- **Robydoby** (best-effort, outside the contract): both sheets fetched, tab map parsed —
-  the newest **Mythic** week is still `24/7`, the week already stored at `asOf 2026-07-24`.
-  Nothing new upstream, so nothing merged; the 17/7 Tidebound Grotto tabs stay skipped
-  (zone 57, not tracked).
-- **WCL: agent holds no credentials and fetched nothing from warcraftlogs.com.**
-  `wcl-fetch/evidence.json` (2026-08-07T11:27:10Z) verdict **`rdps-broken`** — rdps on
-  encounter 3176 still 500s with OAuth and GraphQL both healthy. The three `*-raw` keys
-  landed via the frozen recipe before the agent started (dummy 103 rows: 1T 2000 / 2T 505 /
-  3T 232 / 5T 2000; PTR raid 27 pooled; PTR M+ 27 pooled); the five rDPS/normalized cuts
-  stay frozen and untouched.
-- **Registry snapshots** bumped to 2026-08-07 for murlok / mythicstats / bloodmallet /
-  simulationcraft / robydoby. **The five warcraftlogs page entries were deliberately NOT
-  bumped** — this agent fetched none of those pages, and the gates read the data's own
-  coverage dates anyway.
-- `npm test` **332 pass / 0 fail**, build OK, snapshot written; `check-refresh --manifest`
-  and `--age` both pass.
-
-## 2026-08-07 (LOCAL run, Opus 5 — scheduled residential catch-up, ~15:0xZ, after the 11:31Z nightly)
-
-- **Scope: residential-only.** The five cuts the nightly recorded `unreachable` were re-fetched
-  and landed; Archon, Murlok, Mythicstats, SimC, Bloodmallet, WoWMeta and every tier list were
-  left exactly as CI produced them (verify-not-rewrite). WoWMeta stays untouched under the
-  standing 07-31 review hold as well as the no-regenerate rule.
-- **The rDPS split held for the third night running.** CI's `wcl-fetch/evidence.json`
-  (2026-08-07T11:27:10Z) verdict was `rdps-broken` — `characterRankings(metric: rdps)` on
-  encounter 3176 still 200s with a bare "Internal server error" while OAuth and GraphQL are
-  healthy. From this residential IP the **HTML statistics table served rDPS on every cut**:
-  21 fetches, all HTTP 200, **0 unmatched roster rows anywhere**. `rdps-broken` remains an
-  API-transport fact, not a claim that rDPS is unavailable.
-- **Transport unchanged:** curl only, with the XHR + browser-UA + Referer header set. Not
-  re-derived; see the 08-06 entry.
-- **127 metric rows + 27 ptrDummy specs applied, asOf → 2026-08-07:**
-  · zone 46 Mythic raid (5/20/p3): DPS 27 / 310,093 parses · tank 6 / 44,340 · HPS 7 / 76,845
-    · **healer-DPS 7 / 76,845**
-  · zone 47 M+ (10/5/p1): DPS 27 / 3,062,512 · tank 6 / 1,033,136 · HPS 7 / 1,030,993
-  · zone 56 PTR M+ (10/5/p1): DPS 27 / 5,939 · tank 6 / 1,980 · HPS 7 / 1,981
-  · zone 52 Dummy Dome: 1T 27 specs / 1,733 parses · 2T 23 / 275 · 3T 19 / 83 · 5T 27 / 1,234
-- ⚠ **`Median DPS (Mythic, healer)` had silently fallen a day behind** — it sat at 2026-08-05
-  because the 08-06 local run fetched only three of zone 46's four cuts. It is a real tracked
-  series (rDPS-family despite the name — see docs/audit-2026-07-25-premerge.md row 2) and it is
-  inside `wcl-live-raid`'s `^Median .*\(Mythic` pattern, so it was hidden by coverage dating
-  rather than alarmed on. **Zone 46 is FOUR cuts, not three.** Re-verified genuinely distinct
-  from the HPS cut before merging: HPS 161k–186k vs healer-DPS 5.1k–33.1k, on identical parse
-  counts — which is exactly what makes an accidental same-column merge easy to miss.
-- **Value-move check (the guard CI's anomaly gate would have applied): 0 moves >50%.** Live
-  cuts max |Δ| 0.27–2.08%, median 0.12–0.64%, on parse counts drifting −7% (raid, the 14-day
-  rolling window) and ~−1% (M+). PTR M+ max 4.19%, median ~1% on ~5,900 parses. Dummy Dome
-  largest were Feral 5T −15.4% and Fury 1T +12.8% — far calmer than 08-06's −42.9% on the 3T
-  cut, whose population grew 79 → 83 parses.
-- **Zone-52 duplicate-row gotcha did NOT apply again** — raw row count equalled deduped count
-  on all four dummies (27/23/19/27). Deduped by (class, spec); never blind-halve.
-- **Registry snapshots** bumped to 2026-08-07 for zones 46 / 47 / 56 / 52; **zone 54 left at
-  2026-07-28** (empty upstream — the staleness stays visible).
-- `npm test` **332 pass / 0 fail**; `npm run build` OK (1226.9 KB); `node src/snapshot.mjs`
-  written, then rebuilt (step-6 ordering). `check-refresh --manifest` failed on exactly one
-  line — the **stale gitignored `wcl-fetch/evidence.json` from 2026-08-03**, the same
-  local-hygiene leftover as 08-06 (`.gitignore:11`); with it moved aside the gate exits **0**.
-  Manifest deliberately NOT rewritten (partial run — local-run skill step 3).
-
-## 2026-08-06 (nightly CI, Opus 5 — single-shot)
-- **Two real movers this run: MYTHICSTATS finally rolled to period 1075, and SimC shipped a
-  new nightly.** Everything else re-fetched live and reproduced its stored values, which is
-  the honest reading rather than a stalled fetch — see each entry for why.
-- **MYTHICSTATS: the half-landed period roll has COMPLETED.** The last two runs found
-  `/period/latest` 302-ing to `/period/1075` while 1075 itself 404'd, and ingested 1074
-  instead. 1075 now renders: *"Period 1075 MID1 (Lindormi's Guidance, Xal'atath's Bargain:
-  Pulsar, Tyrannical, Fortified, Xal'atath's Guile)"*, top 2000 keys / 10000 characters
-  (6313 unique) / 19.8 avg key, flagged **"just started and still in progress"**. **40/40
-  roster specs** parsed from the "Spec representation in top keys" section — the four 1074
-  absences (Blood DK, Vengeance DH, Resto Druid, Prot Paladin) are all back — 0 unmatched,
-  all 40 values new. Fetched via r.jina.ai (the site is JS-heavy). Alt labels stay
-  hyphenated (`beast-mastery hunter`, `unholy death-knight`); normalise before matching.
-- **SimC: NEW nightly.** Header `12.0.7.68974 Live (hotfix 2026-08-06/68974, git build HEAD
-  c5b695436c)`; previous run had hotfix 2026-08-03 / HEAD f4719d79e8. 26/26 DPS-roster specs
-  re-parsed from the plain-text `DPS Ranking` block (best hero/talent variant per spec). All
-  26 values moved and **every move is sub-0.15%** — largest is Retribution Paladin 112,288 →
-  112,146 — i.e. iteration noise on a rebuilt nightly with no reordering of the field. Last
-  run's Devourer +10.5% jump therefore stands and was not re-derived. Augmentation absent by
-  design.
-- **MURLOK — parse fix worth pinning, it silently lost 5 specs.** Splitting on the literal
-  `<a class="vi-box meta-item ` returns only **35** rows because murlok emits **both**
-  attribute orders: `<a class="vi-box meta-item …">` AND `<a href="/mage/frost/m+"
-  class="vi-box meta-item …">`. Marksmanship Hunter, Fire Mage, Frost Mage, Protection
-  Paladin and Destruction Warlock were the casualties, and `apply-metrics` would have
-  upserted the other 35 while leaving those five carrying a stale `asOf` — a silently mixed
-  cut that passes every gate (floor is 25). **Split on `class="vi-box meta-item ` instead**;
-  the correct per-page item counts are **27 / 7 / 6**, and a short count is the tell.
-  40/40 landed, 27 values moved (all DPS, max +0.67%).
-- **Archon** — all four numeric series re-read from `__NEXT_DATA__`
-  `specRankingsSection.table.data[]` (never `tierList`): 33 × "95th pct DPS (Mythic)", 7 ×
-  HPS, 40 × "M+ score (95th pct)", 80 × Popularity = **160 rows, 0 unmatched, 0 values
-  moved**. That is correct, not a stall: `page.lastUpdated` still reads
-  **2026-08-05T12:00:00Z** at 12:49Z, so their daily 12:00Z cut had not yet published for
-  08-06 and this is the same upstream data the last run read. Max relative move across all
-  160 rows: 0.0% (checked, not assumed).
-- **WoWMeta** — JSON API only (never the stale HTML prerender). 44 blocks →
-  whitelist `categoryType ∈ {dps,hps,tank}` + `sortField lowerBound` + `keyRange undefined`
-  = 27 + 7 + 6 = **40 rows**, class/spec byte-identical to the roster. **0 of 40 values
-  moved at the stored 2-decimal precision.** ⚠ **Round to 2 dp, not to integer** — a naive
-  `round()` reports all 40 as "changed" (394.32 → 394) and would rewrite the file for
-  nothing. `snapshotDate` still **2026-08-05**, so recorded **`partial`**: the source's own
-  date did not advance, and `asOf` is the source's date, never ours.
-- **Bloodmallet** 26/26, `simc_settings.tier == "MID1"` confirmed on every chart, **0 target
-  values moved** — every chart's own `timestamp` is still 2026-07-08 02:52–02:55 (Elemental
-  Shaman 2026-07-15 02:25), i.e. nothing has been re-simmed upstream; only our verification
-  date advanced. Augmentation returns `{status: "error"}` by design.
-- **Robydoby (best-effort, outside the contract): VERIFIED, NOT re-ingested — no new week.**
-  26 tabs mapped from the htmlview `items.push` blocks; newest **Mythic** week is still
-  **24/7** (Sszorak #5 gid=16354462, Twin Fangs #6 gid=1886150557). Both CSVs re-fetched
-  with `curl -sL` (the export URL 307s) and re-parsed with a **quote-aware** reader locating
-  the block by `lastIndexOf('Class')` in the header row (index **18** this week): **24
-  in-roster DPS specs, 0 value diffs**, so nothing merged and `asOf` stays 2026-07-24. The
-  12 tank/healer rows the DPS sheet carries are tank-DPS and correctly not ingested.
-- **WCL is evidence-only on the runner; nothing was fetched from warcraftlogs.com by any
-  means.** `wcl-fetch/evidence.json` (this run's, 2026-08-06T12:28:34Z) verdict
-  **`rdps-broken`** — `characterRankings(metric: rdps)` on encounter 3176 returns HTTP 200
-  with a bare "Internal server error" and 0 rankings while OAuth + GraphQL transport both
-  report ok (3600/h, 1 point). The five rDPS/normalized cuts recorded `unreachable`, stored
-  rows untouched. The three frozen-recipe **raw-DPS** series landed via the deterministic
-  step: dummy **102 rows** (1T 2000 / 2T 488 / 3T 228 / 5T 2000 ranked players, complete
-  pagination), Venomous Abyss pooled **27** (Coiled Altar + Ula'tek `ok` with 0 players —
-  between windows), M+ keys pooled **27** across all 8 S2 PTR dungeons.
-- ⚠ **`wcl-ptr-raid` (zone 54) breaches `maxAgeDays` 10 TOMORROW (2026-08-07)** — stored at
-  2026-07-28, and the last residential run confirmed the zone itself returns the
-  valid-but-empty fragment at both Heroic and Mythic. The Venomous Abyss opens 08-18/19; a
-  new testing window is the only thing that clears it. The heartbeat firing is correct
-  visibility, not a fixable miss.
-
-## 2026-08-06 (LOCAL run, Opus 5 — scheduled residential catch-up, ~14:3xZ, after the 12:49Z nightly)
-- **Scope: residential-only. The five rDPS cuts the nightly recorded `unreachable` were all
-  re-fetched and landed; nothing CI already refreshed was regenerated.** Archon, Murlok,
-  Mythicstats, SimC, Bloodmallet, WoWMeta and every tier list were left exactly as the
-  nightly produced them (verify-not-rewrite — independently regenerating them is what made
-  the 07-30/07-31 pushes unmergeable).
-- **The rDPS split held again, and this is the whole reason the local run exists.** The
-  nightly's `wcl-fetch/evidence.json` verdict was `rdps-broken` (`characterRankings(metric:
-  rdps)` on encounter 3176 = HTTP 200 + bare "Internal server error"), so CI froze all five
-  cuts at 2026-08-05. From this residential IP the **HTML statistics table served rDPS
-  fine on every cut** — 17 fetches, all HTTP 200, **0 unmatched roster rows anywhere**.
-  "rdps-broken" remains an API-transport fact, not a statement that rDPS is unavailable.
-- **Transport, unchanged and worth not re-deriving:** `curl` only. Node's global `fetch()`
-  is still Cloudflare-403'd on warcraftlogs.com even residentially; curl with the identical
-  XHR + browser-UA + Referer headers passes clean.
-- **120 metric rows + 27 ptrDummy specs applied, asOf → 2026-08-06:**
-  · zone 46 Mythic raid (5/20/p3): DPS 27 / 334,385 parses · tank 6 / 47,838 · HPS 7 / 83,189
-  · zone 47 M+ (10/5/p1): DPS 27 / 3,084,131 · tank 6 / 1,040,250 · HPS 7 / 1,037,955
-  · zone 56 PTR M+ (10/5/p1): DPS 27 / 5,894 · tank 6 / 1,965 · HPS 7 / 1,966
-  · zone 52 Dummy Dome: 1T 27 specs / 1,563 parses · 2T 21 / 263 · 3T 19 / 79 · 5T 27 / 1,221
-- **Value-move check (the guard CI's anomaly gate would have applied): 0 moves >50%.** The
-  live series are the honest tell that the parse is right — max |Δ| 0.2–1.0% and median
-  |Δ| 0.1–0.3% across all six live cuts, on parse counts that drifted −6% (raid, the 14-day
-  rolling window) and ~0% (M+). PTR M+ moved more (max 10.9%, median ~1%) on its ~5,900-parse
-  population, which is expected at that n, not a misparse.
-- ⚠ **Dummy Dome 3T is very thin and it moved a raid forecast band.** 79 parses across 19
-  specs (~4 each) produced the run's two largest moves — Assassination Rogue −42.9% and
-  Marksmanship Hunter −26.8% — and Marksmanship's dummy composite fell rank 2→5 (score
-  87→62), which alone took its **raid projection A+/84 → A/70**. The cell is tagged
-  `confidence: low` and the composite is coverage-floored, so the machinery disclosed it
-  correctly; recording it here because a band change off ~4 parses per spec is worth a
-  human eye, not because anything is wrong.
-- **Zone-52 duplicate-row gotcha did NOT apply this run** — raw row count equalled deduped
-  count on all four dummies (27/21/19/27). Keep deduping by (class, spec); never blind-halve.
-- **Registry snapshots** bumped to 2026-08-06 for zones 46 / 47 / 56 / 52; **zone 54 left at
-  2026-07-28** (see ptr-watch log — empty upstream, so the staleness stays visible).
-- `npm test` **332 pass / 0 fail**; `npm run build` OK (1130.0 KB); `node src/snapshot.mjs`
-  written, then rebuilt (step-6 ordering). `check-refresh --manifest` — see the note in the
-  run report: its single failure is a **stale gitignored `wcl-fetch/evidence.json` from
-  2026-08-03**, the exact local-hygiene case `.gitignore:20-24` documents; with that
-  leftover moved aside the gate exits **0**. Manifest deliberately NOT rewritten (partial
-  run — local-run skill step 3).
 
 ## 2026-08-15 (third run of the day — nightly, headless)
 

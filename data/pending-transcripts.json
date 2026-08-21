@@ -1,6 +1,21 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
-  "videos": [],
+  "videos": [
+    {
+      "id": "gGzU0vD8R6M",
+      "creator": "izen (Izenhart)",
+      "title": "Season 2 Mythic+ Talking Points: Boltslop, Minibosses and Less AoE DPS",
+      "published": "2026-08-20",
+      "queuedAt": "2026-08-21"
+    },
+    {
+      "id": "k0mCjMlwyys",
+      "creator": "Nintern",
+      "title": "To Ground... | Midnight Season 2 Devourer Sim Update",
+      "published": "2026-08-20",
+      "queuedAt": "2026-08-21"
+    }
+  ],
   "skipped": [
     {
       "id": "02rLfzEKLq4",
