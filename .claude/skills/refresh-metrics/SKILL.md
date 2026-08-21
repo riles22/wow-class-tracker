@@ -82,6 +82,29 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
   (role × bracket) groups summing to ~100 (~600 across all 80 rows), and no row equal to that
   spec's "95th pct DPS (Mythic)". A prior run merged the `dps` column in and 40 rows carried
   DPS magnitudes under unit `%` (Devourer 178,800%) through **three consecutive nights**.
+- 🛑 **PER-BOSS survivability is NOT a substitute for the aggregate — measured dead end,
+  2026-08-21, do not re-run.** `spec.survivability` is Archon's **raid** survivability tier and
+  its registered page is the raid AGGREGATE (`.../raid/mythic/all-bosses`). Since 2026-08-16
+  that page has published the `survivability` tierList EMPTY across all three roles, and the
+  tempting move is to source it from a per-boss page instead, because some of them are
+  populated. Do not. Four independent reasons, any one sufficient:
+  (a) **Coverage is 2 of 9 bosses** — only Nek'zali and Nymrissa publish survivability at all;
+  the other seven and all three aggregates are empty.
+  (b) **The only COMPLETE 40/40 set is a WORLD BOSS.** Nymrissa Wavecaller was settled as a
+  world boss by this project on 2026-08-18 (`docs/gearing-s2-scope.md`, Phase E addendum: no
+  live boss page, Icy Veins files her under world bosses, her loot left the raid catalog
+  104→101). Archon nonetheless lists her in the Venomous Abyss `encounterOptions`, so the
+  category error is easy to make and invisible afterwards.
+  (c) **Per-boss survivability is a FIGHT ARTIFACT, and the size of it was measured**: across
+  the 38 specs present on both bosses, **21 tiers disagree (55%)** and **14 swing two or more
+  bands** — Fury Warrior C→S, Guardian C→S, Brewmaster A→C. Picking Nek'zali alone would
+  publish one fight's hazard profile as a spec property.
+  (d) **The sample is 1-2 parses.** Nek'zali's numeric `survivability` column exists for 13 of
+  27 DPS at `parses` 1-2 — the floor `archon-metrics` already declines on. Nymrissa is worse:
+  a full 40/40 letter list on a page whose `specRankingsSection.table.data` has **zero rows**,
+  so those letters have no visible parse basis at all.
+  The correct behaviour is the Bloodmallet/WCL precedent — leave the stored aggregate standing,
+  merge nothing, and let the staleness red be the honest signal that upstream has not rebuilt.
 - **Murlok** meta pages (plain GET; **r.jina.ai does NOT work on murlok**):
   "Top-50 avg M+ rating (ceiling)" — it is the avg rating of each spec's own top-50
   players, NOT popularity; keep the "(ceiling)" in the name.

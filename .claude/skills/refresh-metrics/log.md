@@ -16,6 +16,47 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-21 (investigation — per-boss survivability: DEAD END, nothing merged)
+
+**Checked on Riley's ask, after the archon-encounters re-point surfaced 26 survivability
+entries on Nek'zali while the aggregate publishes zero. Answer: not a usable source. No data
+changed.** The durable rule is now in SKILL.md; this is the working.
+
+- **The aggregate is genuinely empty, re-confirmed live**: all three raid pages
+  (`dps/healer/tank-rankings/raid/mythic/all-bosses`) return the `survivability` tierList with
+  0 entries. That is the standing state since 2026-08-16.
+- **Per-boss coverage is 2 of 9.** Swept every boss across all three role pages. Only
+  **Nek'zali** and **Nymrissa** publish survivability; Sentinels, Vashnik, Explorers, Sszorak,
+  The Twin Fangs, The Coiled Altar and Ula'tek are all zero.
+  - Nek'zali: DPS 26/27 · healer 7/7 · tank 5/6 = **38 of 40**
+  - Nymrissa: DPS 27/27 · healer 7/7 · tank 6/6 = **40 of 40**
+- **The complete set is the disqualified one.** Nymrissa Wavecaller is a **WORLD BOSS**,
+  settled by this project 2026-08-18 (`docs/gearing-s2-scope.md`, Phase E: no live boss page,
+  Icy Veins files her under world bosses, her loot left the raid catalog 104→101). Archon
+  lists her in the Venomous Abyss `encounterOptions` anyway — and WCL's zone 53 counts nine
+  encounters including her — so the trap is well disguised: the one page that would fully
+  refresh a 40-spec raid row is not raid content.
+- **The disagreement was measured, not asserted.** Across the 38 specs present on both bosses,
+  **21 tiers disagree (55%)**, and **14 swing ≥2 bands**: Frost DK S→A, Arcane A→S, Havoc A→S,
+  Enhancement B→S, Outlaw B→S, **Fury C→S (three bands)**, Resto Druid S→A, Holy Priest S→A,
+  Resto Shaman A→S, Mistweaver C→A, Blood DK S→A, **Brewmaster A→C**, Prot Warrior B→S,
+  Guardian C→S. Survivability on a single encounter is a hazard-profile reading of that
+  encounter, not a property of the spec — which is exactly what the aggregate exists to average
+  out.
+- **And the sample cannot carry it either.** The numeric lane
+  (`specRankingsSection.table.data[].survivability`) is present on Nek'zali for 13 of 27 DPS at
+  `parses` **1-2** — the same floor `archon-metrics` declined on this week ("a 95th percentile
+  computed from one parse is that one parse"). Nymrissa is the stranger case: a complete 40/40
+  LETTER list on a page whose ranking table has **zero rows**, so its letters have no visible
+  parse basis at all. That alone would have stopped the merge.
+- **Disposition: merge nothing.** The 40 stored tiers stay byte-identical at their 2026-08-17
+  `asOf`, the `archon-survivability` page snapshot stays 2026-08-18, and the staleness red
+  stays armed — the Bloodmallet/WCL precedent, where the red measures upstream reality rather
+  than our effort. It clears when Archon's raid aggregate repopulates, which needs parse counts
+  the raid does not yet have.
+- Recorded in SKILL.md rather than only here, because the log is prunable and this WILL look
+  like a free win to the next run that sees an empty aggregate beside a populated boss page.
+
 ## 2026-08-21 (nightly CI, second run of the day)
 
 **Every metric source attempted; NOTHING merged. `data/specs.json` is byte-identical.** That is
