@@ -16,6 +16,62 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-21 (nightly CI, second run of the day — the 11:00Z run also landed)
+
+**No new build, hotfix or patch-notes entry. `data/ptr-builds.json` unchanged.** Between-cycles
+posture held: the PTR zone sweeps (54 / 52 / 56 / 57) were skipped as dormant and no manifest row
+was written for them, per the SKILL's between-cycles block.
+
+Three live channels swept, all healthy:
+
+1. **Wowhead news RSS** (`/news/rss/all`, parsed per `<item>` block, never by tag adjacency):
+   HTTP 200, 112,515 B, 40 items, newest news=382560 at 2026-08-21 13:00 CDT. Nothing in the
+   window is class tuning. The only hotfix-shaped article is news=382550 (Aug 20), already logged.
+   Swept and correctly not logged: 382552 "Heroic Vashnik Stealthily Nerfed", 382549 "Nightmare
+   Prey Affix Nerfed", 382554 (achievement), 382506 "Viserio Cooldowns Updated for Midnight
+   Season 2" (an addon, not the game), 382558/382559/382557/382545/382538 (RWF and boss coverage).
+2. **News INDEX** (`data.news.newsData`, anchored on the id attribute and brace-balanced —
+   the index leads RSS within a run): totalPages 1540, 20 posts on page 1, top id 382560,
+   identical to the RSS head. No post the RSS missed.
+3. **Blue tracker** (`data.blueTracker.default`): 50 entries, 44 unique topics. Newest
+   class-relevant entry is Kaivax's running hotfix topic (us 2336376), whose title still reads
+   "…Hotfixes - August 20". Read the canonical forum JSON directly rather than the mirror:
+   post 1's `updated_at` is 2026-08-21T02:27:47Z and its `<strong>` date sections top out at
+   **August 20, 2026** — i.e. exactly the state the 11:00Z run already logged. Post 42 (Linxy,
+   2026-08-21T00:52Z) is the Aug 20 section as a reply, and post 40 (Kaivax, 2026-08-20T03:14Z)
+   is Aug 19; both are already in the feed. **No August 21 section exists yet.**
+
+Dev-notes thread `2317811.json`: `posts_count` 17, `last_posted_at` 2026-07-31T23:42Z, newest
+post #19. Quiet since the cycle closed — expected, not a lost thread.
+
+**Two blue posts examined and deliberately NOT logged, recorded here so the next run does not
+re-litigate them:**
+
+- **"Season 2 Class Tuning Plans"** (Kaivax, us 2335871, 2026-08-12T23:32Z). Class-relevant and
+  absent from the feed, so it was read in full. It is a **roadmap**: no spec is named, no value
+  changes, nothing `specBuildChanges` could surface. Its content is the tuning CALENDAR —
+  Aug 18 (season start), **Aug 25 (first week of S2 tuning)**, Sep 1 (second week), Sep 22
+  (fifth week), with roughly four more passes between Sep 22 and S3, and a stated intent to keep
+  early progression tuning conservative until Mythic Ula'tek dies. `kind` has no value that fits
+  (it is not a build, not a hotfix, not patch notes), and forcing it to `build` with
+  `specsAffected: []` would put a schedule announcement in a change feed nine days behind two
+  entries that already shipped. **The actionable part is the Aug 25 date: expect a real tuning
+  pass in the next run window after weekly maintenance.**
+- **"Item Adjustment Incoming - August 25"** (Kaivax, us 2338382, 2026-08-18T20:54Z). One item —
+  Aqirbane Reliquary now grants a smaller quantity of all secondaries (was a large quantity of
+  Crit only), second on-equip randomised. Items are out of the per-spec feed scope by the
+  standing precedent.
+
+Spec writeups: recomputed rather than remembered — **one spec has no `ptr` writeup, Demonology
+Warlock**, whose null is the deliberate "the source reported no changes" case. No writeup gap to
+work, so lanes (a)–(e) were not opened. `expertRead` returns null for all 40 specs in both
+brackets because `PHASES.ptr` is null between cycles; that is the documented dormant state, not
+coverage loss. No set bonus was touched anywhere tonight, so no `spec.tierSet` moved and the
+tier-set upkeep gate has nothing to pair.
+
+`npm run test:quiet` 373 tests / 341 pass / 0 fail / 32 skipped (Playwright absent, CI runs the
+UI invariants in their own job); build 1705.0 KB.
+
 ## 2026-08-21 (local run, scheduled task)
 
 **Nothing new to log — verified, not assumed. No 12.2 PTR announcement. PTR zone lanes remain

@@ -1,6 +1,28 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
-  "videos": [],
+  "videos": [
+    {
+      "id": "kGsd9cMmBCc",
+      "creator": "Supatease",
+      "title": "DISCOVERING THE BEST CLASSES 12.1",
+      "published": "2026-08-18",
+      "queuedAt": "2026-08-21"
+    },
+    {
+      "id": "POENnO-sGog",
+      "creator": "Shadarek",
+      "title": "Azta'rec 💀 Nemesis Delve Boss Kill | Havoc Demon Hunter",
+      "published": "2026-08-20",
+      "queuedAt": "2026-08-21"
+    },
+    {
+      "id": "1LfW9JXNRsI",
+      "creator": "Harrek",
+      "title": "Midnight Season Two Delve Boss: Azta'rek 💀 Restoration Shaman Solo",
+      "published": "2026-08-19",
+      "queuedAt": "2026-08-21"
+    }
+  ],
   "skipped": [
     {
       "id": "02rLfzEKLq4",
@@ -2943,6 +2965,7 @@
     "B7ri9yA4hmU",
     "B9qKaeqYkPU",
     "BHiCxGXH1B0",
+    "BKpNGRtiDpc",
     "BYw916n6fDo",
     "BaoSEn7sJt4",
     "BhXcWVF3NkQ",
@@ -2961,8 +2984,10 @@
     "DPmgXDoBJf8",
     "DTiQy4yTWgE",
     "D_vBGnneXj4",
+    "DrleLy1u2dI",
     "Dw1bbOSTMgY",
     "E5QElluK44M",
+    "ELRklBVajH4",
     "EUa6nHm81X0",
     "EakXflo16CA",
     "EkUD6Q1-occ",
@@ -3027,6 +3052,7 @@
     "KDSY2A7I5BE",
     "KVbS_yWPUDY",
     "KXCoeyc6cws",
+    "KeiluPpDWCQ",
     "KizxeX0BBck",
     "KkdYA6EnJCQ",
     "KnAyr9wwLBg",
@@ -3035,6 +3061,7 @@
     "LJ94XJVXPL8",
     "LcWIPLhak0E",
     "Li3mmjnaLqg",
+    "Ln9u8uDpP7E",
     "LnonkuVZilI",
     "Lrn7cOwCIgE",
     "LrxIFR5MazE",
@@ -3244,6 +3271,7 @@
     "jXQ9wyt9VYM",
     "jlVi-o2ZtnI",
     "jmwvWSYlNno",
+    "jzNfwI-tr_g",
     "k1ec99zOI28",
     "k2KnidE8TwE",
     "k5qgByslPAI",

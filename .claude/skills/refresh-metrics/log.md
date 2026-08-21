@@ -16,6 +16,92 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-21 (nightly CI, second run of the day)
+
+**Every metric source attempted; NOTHING merged. `data/specs.json` is byte-identical.** That is
+the honest outcome tonight, not a skipped lane — five of the six live numeric sources are frozen
+upstream at a date we already hold, and the sixth (Bloodmallet) is blocked by the tier gate.
+
+- **Warcraft Logs** — no fetch by this agent, by any transport, API or HTML. Read
+  `wcl-fetch/evidence.json` (attemptedAt 2026-08-21T18:11:24.705Z, this run): verdict
+  **"rdps-broken"**, `landed` `{}`, `rawRecipes` `{}`, oauth true / graphql true, one probe
+  `rdps@3176` HTTP 200 with "Internal server error", 1 point spent of 3600/hr. So the transport is
+  healthy and the rDPS metric family is still 500ing upstream — the standing owner-accepted red.
+  Both `wcl-live-raid` (zone 53) and `wcl-live-mplus` (zone 55) recorded **unreachable** with that
+  verdict; all frozen WCL rows left at 2026-08-10. The three `*-raw` keys left the contract at the
+  flip and get no row.
+- **Archon numerics** — all four requirements emitted separately, per the split-row rule. Read
+  from `props.pageProps.page.specRankingsSection.table.data[]` (never `tierList`, which holds only
+  letters). **The M+ half re-parsed 27/7/6 = 40 rows and matched stored EXACTLY, value and `n`
+  alike** (Arms 2892 n=156,334; Resto Shaman 2869 n=138,546; Blood DK 2866 n=200,480 …) against
+  `lastUpdated` 2026-08-20T12:00:00Z — upstream has not recut, so `archon-mplus-score` and the
+  40 M+ `Popularity` rows had nothing to advance.
+  **UPDATE TO THE STANDING RED, worth reaching the owner: the S2 raid pages are no longer
+  EMPTY.** The contract note (2026-08-21) says `specRankingsSection.table.data` returns 0 rows;
+  tonight it returns **13 DPS / 4 healer / 2 tank** rows at `lastUpdated` 2026-08-21T12:00:00Z —
+  but `totalParses` still reads **0** and every row carries **n = 1 or 2**. Nothing was merged and
+  nothing should be: against stored (2026-08-16, n = 95–627) these would move Windwalker
+  171,021 → 114,311, Arms 208,648 → 133,283 and Guardian 108,730 → 63,780, and would shrink the
+  DPS cut from 33 rows to 13, straight through the 25-row floor and the 0.25 row-drop limit.
+  The stored raid numbers are themselves Season-1 values dated 08-16; they stay put until Archon
+  has real S2 raid parses. `archon-metrics`, `archon-hps` and `archon-popularity` all recorded
+  partial.
+- **Archon survivability** — the `metric: "survivability"` tierList on the three raid aggregate
+  pages returned 0 entries again (same rebuild state as throughput/popularity). `spec.survivability`
+  untouched; partial.
+- **WoWMeta** — both JSON endpoints by plain curl, no headers/proxy/auth; the HTML prerender was
+  not touched. `manifest.json` snapshotDate **2026-08-11** (completedAt 2026-08-11T22:52:39Z) and
+  the rankings file's `Last-Modified: Tue, 11 Aug 2026 15:25:05 GMT` AGREE, so this is not the
+  08-04 pinned-manifest shape. The payload was diffed anyway rather than trusted to the manifest:
+  44 blocks → whitelist `categoryType ∈ {dps,hps,tank}` + `sortField === "lowerBound"` +
+  `keyRange === undefined` → 27+7+6 = 40 rows, and **all 40 `lowerBound` values are identical to
+  stored** at the 1-dp stored precision. Genuinely frozen upstream; partial, date stays 08-11.
+- **Murlok** — 3 meta pages by plain GET (r.jina.ai does not work on murlok), HTTP 200,
+  70,939 / ~63 / ~62 KB **uncompressed** (curl's `size_download` reported 8.5–9.6 KB because
+  `--compressed` measures the compressed body — do not read that as an empty page). 27/7/6 = 40
+  rows parsed from the `meta-item` blocks, 0 unmatched. All three pages carry
+  `<time datetime="2026-08-20T03:32Z">` and all 40 ceilings match stored exactly. Partial; stored
+  asOf stays 2026-08-20.
+- **Mythicstats** — `https://mythicstats.com/period/latest` server-rendered, 302 → `/period/1077`,
+  HTTP 200, 210,929 B: the SAME period as the last three nights. Parse bounded to the "Spec
+  representation in top keys" section (whole-page scanning yields 59 rows from the repeated
+  blocks): 40 li blocks → 40 rows, 0 unmatched, labels normalised on `[-\s]+`. Shape-checked
+  before comparing — **sum 100.40%**, role subtotals DPS 60.3 / Tank 20.0 / Healer 20.1, i.e. the
+  representation SHARE column and not the `/meta` per-key-presence figure. 0 value moves. Recorded
+  success: the source is reachable, fully parsed and its stored coverage date is today's — but
+  note nothing was merged, because the weekly period has not rolled.
+- **SimulationCraft** — the standing recipe ran and the standing red is unchanged, with one
+  detail refreshed. `MID1_Raid.txt` is a **221-byte live in-progress log** with no "DPS Ranking:"
+  block (header: SimulationCraft 1210-01, 12.1.0.69404 **Live**, hotfix 2026-08-21/69404, git build
+  HEAD 69a46e15b4), so the recipe falls through to `MID1_Raid.html` — which is 37.2 MB and still
+  the **2026-08-08** report (SimulationCraft 1205-01, 12.0.7.68974 Live, hotfix 2026-08-06/68974,
+  git build 678e66d384, Timestamp 2026-08-08 07:28:33+0000). That is byte-for-byte the provenance
+  of the 26 stored rows, so there is nothing to re-merge and an unchanged build hash is the honest
+  explanation. `MID2_Raid.txt` (174,708 B) again self-identifies **12.1.0.69382 PTR**, hotfix
+  2026-08-20, and its "DPS Ranking:" block holds **33 profile lines covering 17 distinct DPS specs
+  plus 6 tank profiles** — against a 26-spec stored roster. PTR-labelled and partial: not
+  adoptable. Partial, date stays 2026-08-08.
+- **Bloodmallet** — all 27 DPS charts requested via `talent_target_scaling/castingpatchwerk`, up
+  to 3 attempts each. **17 return real data; the SAME 10 as the last two nights return the 76-byte
+  `{"status": "error"}` body on every retry** (Havoc, Devourer, Balance, Feral, Augmentation,
+  Devastation, Windwalker, Retribution, Arms, Fury) while the other 17 succeed interleaved in the
+  same minutes — the endpoint is demonstrably healthy, those specs simply have not been re-simmed.
+  Every one of the 17 reads `simc_settings.tier` = **MID2** (read off the chart, never assumed),
+  `ptr` the string `"0"`, own chart timestamp **2026-08-19**, target counts 1,2,3,4,5,6,8,9,15.
+  Stored is 26 profiles at **MID1**, 2026-07-08 (Elemental 07-15). **Merged nothing**, and the
+  reasoning is the tier gate, not caution: a 17-MID2 + 9-MID1 pool fails `validate.mjs`'s
+  uniformity check outright, `fightLabels` pools every profile with no provenance key so the
+  MID2/MID1 mean ratio of ~1.79× would hand the "strong" labels to whichever specs happen to have
+  been re-simmed, and "adopt what exists, null the rest" leaves 17 of 26 — under the 19-row
+  drop floor. **Adopt MID2 wholesale or not at all**; that becomes possible only when all 27 charts
+  carry it, and it will need a human `value_move_ack` when it does. Partial, coverage date stays
+  2026-07-08 — the red heartbeat IS the signal.
+- **Robydoby** — not fetched, and deliberately. Both sheets feed `era: "ptr"` zone-54 series from
+  the CLOSED 12.1 PTR cycle; new rows merged under those names now would be stale-cycle data
+  dressed as current. Outside `required-sources.json` by design, so no manifest row.
+
+`npm run test:quiet` 373 / 341 pass / 0 fail / 32 skipped; build 1705.0 KB.
+
 ## 2026-08-21 (nightly CI)
 
 **Merged: Archon M+ (40 score + 40 popularity) and Mythicstats (40). Held back: the whole

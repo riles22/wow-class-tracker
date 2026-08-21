@@ -16,6 +16,79 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-21 (nightly CI, second run of the day — the 11:00Z run also refreshed all four)
+
+**All four sources re-fetched live. 280 letter assignments parsed, 0 unmatched, ZERO tier moves
+and zero consensus moves.** Per-page row counts were printed and reconciled against the
+27 DPS + 7 healer + 6 tank = 40 roster shape BEFORE any merge, and `apply-ratings.mjs` re-applied
+all 280 rows to prove the roster match — `git diff data/specs.json` came back empty.
+
+- **Icy Veins** — 6 pages, direct browser-UA GET, HTTP 200, 192–340 KB. Parsed from
+  `<table class="tier-list">`; each `tier-list-entry`'s FIRST `alt=` looked up WHOLE against the
+  roster (never split at a space, which is what keeps the six two-word-class specs matchable).
+  raid 27/7/6 + M+ 27/7/6 = 80, 0 unmatched, 0 moves. Own dates re-read per page and unchanged:
+  raid DPS 2026-08-16, raid healer 08-13, raid tank 08-08, M+ DPS/healer/tank all 08-16 —
+  6/6 agreement with `published-evidence/evidence.json`. Era read from title AND body: the raid
+  HEALER page still titles itself "Patch 12.0.7 / Midnight" over a body of 21 Season-2 mentions
+  against 6 Season-1, and the raid DPS page reads "Midnight (12.1)" over 54 against 14. Body over
+  title (blue-tracker precedent) — `seasonVerified` stays **s2** on all six.
+- **Method** — 2 pages, HTTP 200, 159/166 KB, parsed from `.tier__tier` blocks. 40 raid + 40 M+,
+  0 moves. The M+ page carries 8 tier blocks (4 spec + 4 dungeon-difficulty); the extras were
+  rejected by ROSTER MATCH, never by position — King's Rest, Ruby Life Pools, Voidscar Arena,
+  The Blinding Vale, Den of Nalorakk, Murder Row, Temple of Sethraliss, Altar of Fangs and the
+  Method logo all failed to map, exactly as intended. Era is explicit in the ranking body
+  ("the Midnight Season 2 Raid, The Venomous Abyss"; "Mythic+ … for Midnight Season 2", by
+  Tactyks) and the dungeon pool is the S2 pool — **s2**, unchanged.
+- **Wowhead** — 6 pages with the FULL browser header set (UA-only is Cloudflare-403; r.jina.ai
+  stays untried, IP-403 on `/guide/*` since 2026-08-03), HTTP 200, 73–337 KB. Unescaped `\/`→`/`
+  across the whole document FIRST, then searched for `[tier-list=rows] … [/tier-list]`, taking the
+  block with the most `[spec-badge=]` hits rather than anchoring on `WH.markup.printHtml(` (the
+  raid-healer decoy). One block per page, badge counts 27/7/6/27/7/6 = 80, 0 unmatched, 0 moves.
+  Tier labels came back S/A/B/C/D/F everywhere except M+ DPS (S/A+/A/B/C/D — the documented A+)
+  and M+ tank (S/A/B/C/D). All six titles self-identify Season 2. Own dates unchanged: raid
+  08-14/08-18/08-14, M+ 08-18/08-18/08-18. **s2**, unchanged.
+- **Archon** — 6 aggregate pages, HTTP 200, 52–92 KB, parsed from `<script id="__NEXT_DATA__">`.
+  Note the path: the tier lists are at `page.specTierListSection.tierLists`, **not** `page.tierLists`
+  — an earlier probe this run read the latter, got `[]` on all six, and would have reported the
+  healthy M+ half as broken. Entries resolved from the `icon` "Class-Spec" token, never the
+  display name, and `tiers[].entries` is a list OF LISTS.
+  - M+ (score tierList): 27/7/6 = 40, 0 unmatched, **0 moves** — consistent with `lastUpdated`
+    still reading 2026-08-20T12:00:00Z, i.e. upstream has not recut since this morning's run.
+  - Raid: all three tierLists (popularity / throughput / survivability) returned **0 entries**.
+
+**FINDING — Archon's RAID pages have rebuilt to Season 2, and `seasonVerified` was deliberately
+left at `s1`.** The chrome is unambiguously S2 now: `encounterOptions` is the Venomous Abyss
+(Nek'zali, Sentinels, Vashnik, Explorers, Sszorak, The Twin Fangs, The Coiled Altar, Ula'tek,
+Nymrissa) and the description reads "tier list for The Venomous Abyss … in 12.1". But the tier
+lists are EMPTY, so there are no S2 Archon raid letters to store — the 40 letters sitting in
+`ratings.raid.archon` are its **Season-1** letters. Writing `seasonVerified: "s2"` would flip
+`sourceSeasonOk` true and feed those S1 letters straight into the S2 raid mean, which is precisely
+the two-seasons-in-one-number lie DECISION 1 exists to prevent; it would also manufacture a
+movement event tonight and a second, real one the day genuine S2 letters land. The letters, not
+the page furniture, are what the flag gates, and the letters are S1. Step 2's own escape hatch
+applies: with an empty DPS list there is no Devourer entry to era-verify against, so the ranking
+body is UNVERIFIABLE — "skip that source, never guess". **The correct flip is a single run that
+replaces the letters and moves the flag together**, and that run is the one the skill already
+predicts will trip the anomaly gate and need a human `anomaly_ack`. No `seasonVerified` value
+changed anywhere tonight, so `freeze-season.mjs` has nothing to do (step 5b is a no-op).
+
+**FINDING for the owner — the two ancillary Archon encounter URLs are dead.** Both registry URLs
+still point at Season-1 content (`…/raid/mythic/imperator`, `…/mythic-plus/10/windrunner-spire/…`)
+and both now 302 to Archon's game landing page: `__NEXT_DATA__.page` comes back as `/[gameSlug]`
+with no `specTierListSection` at all, which is why both fetches returned an identical 199,262 B
+body. URLs are owner-only under Gate 0, so this run could not re-point them. The S2 replacements
+are enumerable from the aggregate pages' `encounterOptions` (the 9 bosses above; dungeons
+Altar of Fangs, Den of Nalorakk, Kings' Rest, Murder Row, Ruby Life Pools, Sethraliss,
+The Blinding Vale, Voidscar Arena). Two things gate an actual `encounter-tiers.json` rebuild
+beyond the URL edit: the raid side has n=1–2 per spec so per-boss raid tiers would be noise, and
+an M+-only rewrite is 8 × 40 = 320 tier rows, under the 440 floor in `required-sources.json`.
+The file is untouched and still stamped `s1`, so the Fight selector stays hidden.
+
+Snapshots: no `snapshot` date changed — all 23 tier-list pages were already stamped 2026-08-21 by
+this morning's run, and a same-day second run cannot advance a date. Nothing was papered over;
+the manifest rows say so explicitly. Transport used, for the record: plain `curl` with the full
+browser header set on every source, no proxy anywhere.
+
 ## 2026-08-21 (nightly CI)
 
 **Sources refreshed: all four. 240 letter assignments parsed, 0 unmatched, 15 tier moves —

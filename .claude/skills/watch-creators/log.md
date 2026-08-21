@@ -16,6 +16,65 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-21 (nightly CI, second run of the day)
+
+**Discovery complete and clean; distillation impossible. 0 takes, 0 metaNotes, 0 `latest`
+advanced. 3 videos queued, 6 ids retired to `seen[]`.**
+
+`transcript-fetch/summary.json` reports verdict **"ok"** with requested 0 / fetched 0 — not a
+credential problem: `data/pending-transcripts.json` `videos[]` was EMPTY when the deterministic
+step ran, because the 11:00Z run drained to zero and the 2026-08-21 local run cleared the rest.
+So the step had nothing to drain and this agent holds no transcript credentials. Everything
+queued below is for the NEXT run's deterministic step.
+
+**Discovery: 44 unique channels polled (41 class-lane + 3 general), every one HTTP 200 on the
+first attempt, 0 feed errors, 660 entries.** Seen-set rebuilt from the four structured lanes
+(`seen[]` + `skipped[]` + `videos[]` + every `youtu.be/<id>` in a take or metaNote url) — never
+from this file's prose — and measured at **1,167 ids**. 72 entries came back unseen.
+
+`media:description` was parsed alongside every title, and it did most of the triage. The unseen
+72 are almost entirely launch-week **stream VODs**: bare-Twitch-link descriptions (Shindigg,
+Critcake, Bansherz, Clandon, Sha, Megasett, Maximum, Tactyks), key-run and split POVs, and
+`streamlabs.com` boilerplate. Those carry no spec-strength read by the standing rules
+(key-run/guide-shaped precedent), and they were left **UNSEEN** rather than retired — an
+unverified budget/shape dismissal is exactly what `seen[]` must not absorb.
+
+**Queued (3), keyword-filtered as the nightly lane requires (Supadata is 100 requests/MONTH):**
+- `kGsd9cMmBCc` Supatease, "DISCOVERING THE BEST CLASSES 12.1" (2026-08-18). Queued to SETTLE the
+  standing question rather than guess it: he is registered as a class-change-roundup authority
+  (scoped Shaman all / Affliction / Arms+Protection Warrior), but the 2026-08-09 precedent is that
+  his "best classes" content keeps turning out PvP-framed. One transcript answers it durably,
+  either as a take or as a `skipped[]` record.
+- `POENnO-sGog` Shadarek, "Azta'rec Nemesis Delve Boss Kill | Havoc Demon Hunter" (2026-08-20) —
+  in-scope specs (Havoc/Devourer), solo content that may carry a spec read.
+- `1LfW9JXNRsI` Harrek, "Midnight Season Two Delve Boss: Azta'rek — Restoration Shaman Solo"
+  (2026-08-19) — Wowhead's Resto Shaman guide author. NOTE for whoever distils it: his own
+  description compares the BOSS to Nullaeus and the TWW bosses, which is a boss read, not a spec
+  read. Do not mint a Resto Shaman take out of it unless the transcript carries a spec-specific
+  comparative claim.
+
+**Retired to `seen[]` (6) — durable SCOPE dismissals only:** five explicitly PvP videos, out of
+scope for a PvE tracker by their own titles and descriptions — Supatease `Ln9u8uDpP7E` "PVP Data
+Analysis Week 1 Season 2", `BKpNGRtiDpc` "Honest Thoughts on PVP 12.1", `KeiluPpDWCQ` "This Is
+Why PVE'rs Hate PVP", `DrleLy1u2dI` "World PVP Still Fun in 2026?", and Dalaran Gaming
+`jzNfwI-tr_g` "5V5 1V1 DUELS IN MIDNIGHT" — plus MadSkillzzTV `ELRklBVajH4` "12.1 Best M+
+Addon?", whose description states it is an EXBoss **addon** preview, i.e. content that cannot
+contain a spec-strength read.
+
+Supatease's four remaining ambiguous titles (`-NmzE6Pnqfo`, `QmTbOMRFJjQ`, `M0K2d-jzFas`,
+`-0UpYyH_L58`, plus `RA9ysZxxRuE`) were left UNSEEN on purpose: spending a second and third
+Supadata request on the same open question before the first one answers it is the wrong order.
+Re-evaluate them once `kGsd9cMmBCc` comes back.
+
+**yt-dlp was NOT usable and was not hammered.** One metadata probe (`--skip-download --print`, no
+subtitle flags) on `ELRklBVajH4` returned the datacenter bot wall — "Sign in to confirm you're not
+a bot" — which is the settled 2026-07-17 finding; the run stopped there rather than retrying. The
+practical cost is that live_status and duration could not be read, so no Short or in-progress
+stream could be retired on a measured fact tonight.
+
+No creator demonstrated coverage outside their registered `specs`, so nothing is flagged for a
+scope widening. No supersession was needed (no take was added).
+
 ## 2026-08-21 (cross-lane collisions — SEVEN, not two; validation gap closed)
 
 **The two I reported were a sample, not the set.** Measuring every lane pair before writing
