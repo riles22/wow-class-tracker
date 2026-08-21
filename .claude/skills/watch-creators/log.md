@@ -16,6 +16,70 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-21 (distillation — Musguete Subtlety, the read dropped for scope)
+
+**1 take added: Rogue Subtlety, Musguete, 2026-08-15, `mixed`, bracket `both`.** This is the
+read that was transcript-verified and DROPPED for scope on 2026-08-16 and cited as evidence in
+the scope-widening commit above. With Subtlety now in his registry scope, `validate.mjs`'s
+take-scope gate accepts it.
+
+- **Distilled from the transcript, not from this log's paraphrase of it.** The 08-16 entry
+  summarised the read in one line; that line is a paraphrase and is not a source. `lanOZvwWzw0`
+  was re-fetched with yt-dlp (216s, author-matched Musguete, upload_date 20260815) and the take
+  was written against the captions, per "a claim must rest on the source it deep-links".
+- **An adversarial verification pass over the draft caught two BLOCKING errors of mine, and
+  both are worth recording because they are the exact failure modes SKILL.md names:**
+  1. **An invented event.** The draft said the 6% left the spec ~1% ahead "once that is
+     corrected" — asserting a bug FIX that the creator never states and that appears nowhere in
+     the build feed for this pass. He says only that there was a bug, that it had them 4-5%
+     above intended, and that the buff compensates for it. The correction step was mine.
+  2. **A valence inversion.** The draft framed the 6% as a disappointment — "much smaller than
+     it looks", "compensation rather than a gain". He says the opposite in the same breath:
+     "Which is very very good and it's I believe **even** 1% increased damage from what we had
+     previously." The "even" makes it a net gain on top of the compensation. That is the
+     distiller's editorial replacing the source's own read, and it would have been the basis
+     for the take's sentiment.
+  Also fixed: the deep link was `t=81`, which opens on his ASSASSINATION close (the Subtlety
+  segment starts at 86.64s) — a Subtlety take would have landed the reader on the other spec's
+  praise, and on the very sentence the sibling Assassination take already rests on. Now `t=87`.
+- **Two provenance discrepancies are recorded in `patchContext` rather than silently resolved:**
+  (a) the official August 18 post frames the pass as pulling back overperforming tier sets while
+  raising baseline damage, and **no Subtlety damage-overperformance bug appears in our build
+  feed for it** — the only Subtlety bug on file is the 08-06 double-generation Energy fix, a
+  different pass and a different bug — so his bug premise and the ~1% net are HIS account, not a
+  stated delta; (b) the official four-set covers **Eviscerate** alongside Black Powder and has
+  **no leech component**, whereas he says "black powder and the leech rate" (almost certainly an
+  ASR mangle of Eviscerate). The 100%→60% figure itself is exact and matches both the build feed
+  and the stored `tierSet`. Neither discrepancy was used to overrule him — they are flagged so a
+  reader sees them.
+- **"Potent Powder" is attributed to HIM, not asserted by us.** The string appears nowhere in
+  `data/`, our own record names other Subtlety talents (Shadow Dance, Secret Technique, The
+  First Dance), and it could not be verified live — a Wowhead search merely echoed the query
+  back, which is not verification. Written as "the talent he names as Potent Powder": hard
+  rule 1 forbids resolving a 12.1 name from model memory, and the same caption track renders
+  Eviscerate as "the leech rate" and his own name as "Mush Getz". The 20%-of-mastery MECHANIC
+  is his and is stated plainly.
+- **`mixed`, deliberately, and the case was argued both ways.** For `buff`: he calls the 6%
+  very good, reads the net as positive, and closes that all three Rogue specs are in a very good
+  position. For `mixed`, which wins: he sets an explicit nerf against it ("And we got nerfs"),
+  on the ability he says was topping meters, and revises his own stat guidance DOWNWARD as a
+  consequence. Encoding `buff` would drop the nerf; the closing line cannot carry it either,
+  because it is class-wide and the skill forbids stretching a class-wide label into a spec read.
+- **`both` because the Subtlety segment names no bracket at all.** The video's only raid/M+
+  references are the A+/A tier-list placements at 47s-64s, which are explicitly about
+  Assassination and belong to the sibling take — they cannot justify a bracket here.
+- **Era stays `12.1 PTR`**: published 2026-08-15, before the flip, and he says outright the
+  changes are "not live yet" until the 18th. It matches its own sibling and Dalaran Gaming's
+  08-17 Subtlety take, and keeps these takes correctly OUT of the eventual 12.2 expert panel.
+- **Nothing superseded** — Musguete had zero Subtlety takes. Dalaran Gaming's live 08-17 raid
+  take is a different creator and is untouched; Subtlety now carries two live takes from two
+  independent voices, which is the first time that has been true.
+- `community.json`'s `latest` said in so many words that no Subtlety take was on file from him;
+  it is corrected in the same commit, per the rule that `latest` states what is actually KNOWN.
+- No downstream movement: `expertRead` is dormant (`PHASES.ptr` null), snapshot byte-identical,
+  the only rendered change is the Subtlety drawer's Creator-takes section going 1 row → 2.
+  371 tests pass, validate clean, `audit:creators` HIGH 0 · MED 0 · INFO 9.
+
 ## 2026-08-21 (owner registry edit — Musguete Subtlety scope)
 
 **Riley authorised widening Musguete to include Subtlety. Landed as a reviewed human commit,
