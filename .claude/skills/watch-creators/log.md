@@ -16,6 +16,80 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-21 (re-open — the six scope-conditional Musguete skips)
+
+**Five of six yielded a Subtlety take; all five land SUPERSEDED. The sixth is now a settled
+skip.** Riley directed the re-open after the scope widening; the annotations added earlier
+today are what made these six findable as re-openable.
+
+- **All six re-fetched with yt-dlp and read in full** — 4-6 minutes each, all Musguete,
+  published 2026-07-09..07-13, all 12.1 PTR Mythic raid-testing POVs. No 429 and no bot wall;
+  paced ~4s apart with a hard stop on the first rate-limit, per the batch-429 precedent.
+  The triage regex was proven on a known-positive (`lanOZvwWzw0`) BEFORE being trusted, per the
+  rule that a broken extractor looks exactly like a batch with nothing in it.
+- **`pqAH9DPyDPs` stays skipped, and its note is now SETTLED rather than conditional.** Its only
+  Subtlety reference is him saying they did NOT test Subtlety on those bosses because another
+  Subtlety rogue was in the raid — a statement the spec was untested, which is the opposite of a
+  read. Independently confirmed.
+- **The other five LEFT `skipped[]` entirely rather than being amended.** That lane means
+  "transcript read, nothing to distil", and the file's own `seenNote` is explicit that distilled
+  videos are cited by their take's url instead. Keeping them would have had the repo asserting
+  both things about the same five ids. A guard in the merge refused to remove any id a take did
+  not actually cite.
+- **`5UjnyOvtRes` carried a same-day standing refusal and it was NOT stepped over silently.**
+  This morning's note said it stays skipped for two reasons surviving the scope change. Both
+  were checked and neither reaches a *superseded Subtlety* take: reason 1 ("raid lens already
+  covered by his unbracketed 07-31 takes") names takes that are **Outlaw and Assassination** —
+  he has no 07-31 Subtlety take, so the Subtlety raid lens was never covered by them; reason 2
+  ("landing it live would dilute the post-buff read") is conditioned on landing LIVE, which
+  `superseded: true` neutralises.
+
+**The verification pass caught three BLOCKING errors in my drafts. Two were referent
+transplants — the precise failure the honesty rule names — and one would have shipped.**
+1. **`superseded` was ABSENT from all five, not `true`.** The patchContext prose said
+   "superseded on landing"; the field was never written. Committed as drafted, all five would
+   have landed LIVE and the Subtlety drawer would have gone **2 rows → 7**, publishing five
+   pre-launch July PTR reads as current. **No gate catches this**: `validate.mjs` only
+   type-checks `superseded` when present, and `audit-creators`' supersession check is
+   era-scoped on `PHASES.ptr`, which is null between cycles — so it reports MED 0 having run on
+   an empty set. Prose is not a flag.
+2. **`5UjnyOvtRes`: a Fatebound comparison transplanted into a Subtlety take.** "Deathstalker
+   beating Fatebound for single target" is explicitly and exclusively his **Assassination**
+   claim; only the following clause ("even on subtlety rogue, the best one it's Deathstalker")
+   is about Subtlety. Cut to the Subtlety half.
+3. **`YCyxU0uQCWc`: the Darkest Night complaint lifted out of the ASSASSINATION block.** In that
+   video every cue around it is Assassination-scoped. Removed. (It genuinely IS inside the
+   Subtlety block in `_NvJjBK65ME`, where it is kept — the same talent, correctly filed in one
+   video and not the other, which is exactly why this needs checking per-video.)
+
+Also corrected: a cross-video superlative that rested on no source ("his most negative Subtlety
+read of the testing series"); a modality upgrade ("he would go" for his "I might go"); a
+dangling antecedent that pointed the spec-selection heuristic at the nerf complaint instead of
+the single-target read; a deep link at `t=192` opening 0.84s inside the preceding Assassination
+sentence (now `t=193`); and three omissions that changed the LEVEL of a read — the top-two
+framing ("for now the best spec is between Subtlety and Outlaw"), the three-spec ranking on Twin
+Fangs (Outlaw best, Assassination second, so Subtlety last), and his single-target hedge.
+
+- **Why all five are superseded rather than leaving the newest live.** The 2026-07-13 read is
+  empirical where the live 08-15 read is a tuning reaction, which is a real argument for keeping
+  it — but its central content is the 8% nerf and a hope for reversal, and that hope was
+  *answered* by the 08-15/18 pass the live take distils. All five predate the 07-31 buff pass,
+  the 08-15/18 tuning and the 08-18 launch. `takeInBracket` also puts a `raid` take and the
+  `both` anchor in ONE lane, so leaving one live would be a different-dated live pair — the
+  invariant-3 defect. Note the `nerf`-sentiment Twin Fangs take WOULD have moved the panel vote
+  had the lane been active.
+- Deep links verified against raw caption offsets, not the flattened text: each opens on the
+  first words of its Subtlety segment, none on a sibling spec's.
+- No downstream movement: `expertRead` returns null for all 40 specs (`PHASES.ptr` null), and
+  these "12.1 PTR" strings can never re-arm — the 12.2 marker will not match them. Payload
+  identical outside the takes array; drawer unchanged at 2 live Subtlety takes. 371 tests pass,
+  validate clean, `audit:creators` HIGH 0 · MED 0.
+- **Second pre-existing cross-lane defect found, NOT fixed here** (unrelated, predates this
+  commit): `aqe2LKeMIqQ` sits in `skipped[]` while a live-archive Tettles take cites it —
+  one take pulled from a ~2.8h stream VOD, the remainder later skipped. Defensible on its own
+  terms but it stretches the lane definition. Flagged alongside the `6MlSd4nBtrI`
+  skipped/seen collision.
+
 ## 2026-08-21 (distillation — Musguete Subtlety, the read dropped for scope)
 
 **1 take added: Rogue Subtlety, Musguete, 2026-08-15, `mixed`, bracket `both`.** This is the
