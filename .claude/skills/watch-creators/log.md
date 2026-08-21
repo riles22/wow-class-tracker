@@ -75,6 +75,40 @@ stream could be retired on a measured fact tonight.
 No creator demonstrated coverage outside their registered `specs`, so nothing is flagged for a
 scope widening. No supersession was needed (no take was added).
 
+## 2026-08-21 (SKILL.md step 4a — the operational half of the one-record rule)
+
+**The check landed without the instruction that keeps a run from tripping it.** `0acbfae`
+documented the precedence ladder and enforced it, but never said what to DO at the moment of
+action. Added as step **4a**, deliberately parallel to step 4's "do this EVERY time you add a
+take, it is not optional" — because it is the same kind of mandatory bookkeeping attached to
+the same event.
+
+- **The rule:** distilling a video makes its take/metaNote url that video's record, so if the
+  id is still in `seen[]`, `skipped[]` or `videos[]`, remove it from that lane in the SAME
+  edit. Placed at step 4a rather than in the lane description at step 2, because step 2 is read
+  when you are deciding where something goes and step 4 is read when you are writing a take —
+  and this fires on the write.
+- **Why it needed saying:** five of the seven collisions the check found got there by exactly
+  this route — considered at discovery, filed in `seen[]`, later distilled, never removed.
+  The nightly dispatched to confirm the check (run 32512032066, green) did NOT exercise it:
+  the agent queued 3 videos and added 6 ids to `seen[]` but distilled nothing, so the promotion
+  path never ran. The check was proven not to break a night; it was not proven to catch a live
+  agent's mistake. This guidance is what stops the first agent that takes that path from
+  discovering the rule via a red run.
+- **The asymmetry is spelled out** because it decides whether you can just delete: dropping
+  from `seen[]` is lossless (bare id list), dropping from `skipped[]` destroys a `reason`, so
+  the finding gets restated in this log first — the `aqe2LKeMIqQ` precedent.
+- **Also covers the re-open direction**: a `skipped[]` video that yields a take on re-open
+  loses its skip entry, because "nothing to distil" stops being true of it. That is what the
+  Musguete re-open did for five ids, and it is now written down rather than inferred.
+
+**Corrected a number I got wrong, in the same pass.** `okaZqAQVRN0` carries **39** live
+metaNotes, not 40 — a miscount off a terminal listing that I propagated into the `0acbfae`
+commit message, this log, and two places in SKILL.md. Verified against the data (39 then, 39
+now); SKILL.md and the log line are fixed, the commit message stands because history is not
+rewritten. The `x0fxEWTq3Pw` figure of 24 was checked at the same time and is correct.
+The `1167 → 1167` seen-set measurement is now labelled as what it is — a reading taken across
+the fix, not a constant. It is 1176 after tonight's nightly, and it grows with the roster.
 ## 2026-08-21 (cross-lane collisions — SEVEN, not two; validation gap closed)
 
 **The two I reported were a sample, not the set.** Measuring every lane pair before writing
@@ -91,7 +125,10 @@ validate.mjs did is closed.
   - `aqe2LKeMIqQ` (Tettles) — distilled + `skipped[]`.
   - `HP3H1aDcQCo`, `Li67ghcCJo4`, `jlbQAmQMRCM`, `okaZqAQVRN0`, `x0fxEWTq3Pw` — distilled +
     `seen[]`, **all five previously unknown**. These are not marginal: `okaZqAQVRN0` carries
-    **40 live izen metaNotes** and `x0fxEWTq3Pw` carries 24 from Zorthas.
+    **39 live izen metaNotes** and `x0fxEWTq3Pw` carries 24 from Zorthas. (Corrected
+    2026-08-21: the 0acbfae commit message and this line both said 40 — a miscount off a
+    terminal listing. The count was 39 then and is 39 now; the commit message stands as
+    written since history is not rewritten.)
 - **The rule, which the code now enforces:** the lanes are a PRECEDENCE LADDER, not tags —
   distilled (cited by its take/metaNote url) > `skipped[]` > `seen[]`, with `videos[]` meaning
   "still waiting" and overlapping none. An examined video carries exactly ONE record. This was

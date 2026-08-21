@@ -103,7 +103,7 @@ locally, and distill them into cited per-spec takes in `data/creator-takes.json`
    That sentence used to promise more than the code did: only the `videos[]` pairs were
    checked, so `skipped[]`+`seen[]` and distilled+anything went unenforced, and **seven ids
    were sitting in two lanes at once with `npm run validate` reporting clean** (one of them
-   a video carrying 40 live metaNotes). Fixed in the same commit that closed the gap; the
+   a video carrying 39 live metaNotes). Fixed in the same commit that closed the gap; the
    error names which record to keep and which to drop. This lane is DURABLE: before it
    existed (added 2026-07-31), "verified-skipped" lived only in log.md prose, every run
    re-derived its seen-set by regex over that prose, and Shadarek's comedy tier list
@@ -136,6 +136,26 @@ locally, and distill them into cited per-spec takes in `data/creator-takes.json`
    projection's date-sort assumes the newest live take is the current read, so a stale
    un-superseded take both clutters the drawer and can mislead — supersede diligently,
    but only within the same lens.
+4a. **Drop the weaker lane record — also EVERY time you add a take or metaNote.** Distilling a
+   video makes its take/metaNote url that video's record, so if the same id is still sitting in
+   `seen[]`, `skipped[]` or `videos[]`, remove it from that lane **in the same edit**. The lanes
+   are a precedence ladder (step 2): distilled > `skipped[]` > `seen[]`, with `videos[]` meaning
+   "still waiting" and overlapping none of them. **Since 2026-08-21 validation reds on the
+   overlap**, so forgetting this now fails the run instead of rotting quietly — which is the
+   point, because it rotted quietly for a long time. Seven ids were sitting in two lanes at once
+   when the check landed, and **five got there by exactly this route**: considered at discovery,
+   filed in `seen[]`, later distilled, never removed. One of the five was `okaZqAQVRN0`, still
+   filed as a bare "considered" id while carrying **39 live metaNotes**.
+   Two practical notes. Removing from `seen[]` is LOSSLESS — it is a bare id list, and the
+   seen-set union does not shrink because the take url already covers the id (measured across
+   the 2026-08-21 fix: 1167 before, 1167 after, zero ids stopped counting as examined — the
+   union grows with the roster, so re-measure rather than expecting that figure today).
+   Removing from `skipped[]` is NOT
+   lossless: that entry carries a `reason`, and where the finding still matters — typically
+   "one take came out of this long VOD and the remainder is not worth re-mining" — **restate it
+   in `log.md` before deleting the entry** (the `aqe2LKeMIqQ` precedent, 2026-08-21).
+   The same applies when you RE-OPEN a `skipped[]` video and it yields a take: the skip entry
+   goes, because "transcript read, nothing to distil" is no longer true of it.
 4b. **General-coverage creators** (`community.json` top-level `generalCreators` — e.g.
    izen): a cross-class PTR-NEWS lane, NOT a specialist take lane. Poll their RSS the same
    way, title-filter for 12.1/PTR/Season relevance. **Never distill specialist per-spec
