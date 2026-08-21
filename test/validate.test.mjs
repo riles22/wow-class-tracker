@@ -296,6 +296,59 @@ test("pending transcript queue: skipped[] is durable and cannot overlap the queu
   assert.deepEqual(validateData(data).filter(e => e.includes("skipped")), []);
 });
 
+test("pending transcript lanes: an examined video carries exactly ONE record", async () => {
+  const data = await loadData(ROOT);
+  const broken = structuredClone(data);
+  // A real distilled id from the committed takes, so the "distilled" side is not fabricated.
+  const distilled = JSON.stringify(broken.creatorTakes).match(/youtu\.be\/([A-Za-z0-9_-]{11})/)[1];
+  broken.pendingTranscripts = {
+    videos: [],
+    // skipped[] + seen[] — the pair that went unchecked until 2026-08-21 and let
+    // 6MlSd4nBtrI sit in both lanes while `npm run validate` reported clean.
+    skipped: [{ id: "Z8Jygl_NpF4", creator: "Shadarek", title: "t", reason: "a sufficiently long reason", verifiedAt: "2026-07-17" }],
+    seen: ["Z8Jygl_NpF4", distilled],
+  };
+  const errors = validateData(broken, { now: "2026-08-21" });
+  assert.ok(
+    errors.some(e => e.includes('"Z8Jygl_NpF4"') && e.includes("skipped[] AND seen[]")),
+    "an id in skipped[] and seen[] is rejected",
+  );
+  assert.ok(
+    errors.some(e => e.includes(`"${distilled}"`) && e.includes("distilled") && e.includes("seen[]")),
+    "a distilled video also listed in seen[] is rejected",
+  );
+  // The message must say which record survives, or the fix is a guess.
+  assert.ok(errors.some(e => /Keep .+, drop .+\./.test(e)), "the error names the lane to keep and the one to drop");
+
+  // distilled + skipped[] — aqe2LKeMIqQ's shape: a take pulled from a long VOD whose
+  // remainder was later filed as "nothing to distil", so the file asserted both.
+  const both = structuredClone(data);
+  both.pendingTranscripts = {
+    videos: [],
+    skipped: [{ id: distilled, creator: "Tettles", title: "t", reason: "a sufficiently long reason", verifiedAt: "2026-07-30" }],
+    seen: [],
+  };
+  assert.ok(
+    validateData(both, { now: "2026-08-21" }).some(e => e.includes("distilled") && e.includes("skipped[]")),
+    "a distilled video also in skipped[] is rejected",
+  );
+
+  // A distilled video must not sit in the queue either — it is done, not waiting.
+  const queued = structuredClone(data);
+  queued.pendingTranscripts = {
+    videos: [{ id: distilled, creator: "X", title: "t", published: "2026-08-01", queuedAt: "2026-08-01" }],
+    skipped: [], seen: [],
+  };
+  assert.ok(
+    validateData(queued, { now: "2026-08-21" }).some(e => e.includes("distilled") && e.includes("videos[]")),
+    "a distilled video left in the queue is rejected",
+  );
+
+  // The committed file must itself be clean — this is the assertion that reds if the
+  // lanes drift apart again.
+  assert.deepEqual(validateData(data).filter(e => e.includes("exactly ONE record")), []);
+});
+
 test("tier-set upkeep gate: a build highlight naming a spec + set keyword forces tierSet.asOf forward", async () => {
   const data = await loadData(ROOT);
   const broken = structuredClone(data);

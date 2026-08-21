@@ -859,6 +859,51 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
         }
       }
     }
+
+    /* ONE RECORD PER EXAMINED VIDEO (2026-08-21). The lanes are a PRECEDENCE LADDER, not
+       a set of tags — the seen[] comment above already says so ("a distilled video is
+       cited by its take's url, a verified reject lives in skipped[], a waiting one in
+       videos[] — everything else belongs here"), but only the videos[] pairs were ever
+       enforced. So an id could carry a redundant WEAKER record beside its richer one and
+       the file would assert two different things about the same video: skipped[] says
+       "transcript read, nothing to distil" while a take deep-links into it.
+       Measured when this landed: SEVEN such ids — one skipped[]+seen[] (6MlSd4nBtrI),
+       one distilled+skipped[] (aqe2LKeMIqQ, a take pulled from a long stream VOD whose
+       remainder was later skipped), and five distilled+seen[] including okaZqAQVRN0,
+       which carries 40 live metaNotes. None was caught, because `npm run validate`
+       passed on every one of them — while watch-creators/SKILL.md already told readers
+       validation "refuses to let an id sit in both lanes". This closes the gap between
+       that promise and the code.
+       Harmless to the seen-set union (the id is covered either way); the damage is a
+       self-contradicting record and an unresolvable question about which lane is
+       authoritative. Precedence: distilled > skipped[] > seen[]; videos[] is "waiting"
+       and may not overlap any of them (its two pairs were already checked above). */
+    const distilledIds = new Set();
+    if (creatorTakes != null) {
+      for (const m of JSON.stringify(creatorTakes).matchAll(/youtu\.be\/([A-Za-z0-9_-]{11})/g)) distilledIds.add(m[1]);
+    }
+    const idsOf = arr => new Set(Array.isArray(arr) ? arr.map(x => (typeof x === "string" ? x : x?.id)).filter(x => typeof x === "string") : []);
+    const laneIds = {
+      "videos[]": idsOf(pendingTranscripts.videos),
+      "skipped[]": idsOf(pendingTranscripts.skipped),
+      "seen[]": idsOf(pendingTranscripts.seen),
+    };
+    const RANK = { "a distilled take/metaNote url": 0, "skipped[]": 1, "seen[]": 2 };
+    const collide = (aName, a, bName, b) => {
+      for (const id of a) {
+        if (!b.has(id)) continue;
+        const keep = (RANK[aName] ?? 9) <= (RANK[bName] ?? 9) ? aName : bName;
+        const drop = keep === aName ? bName : aName;
+        errors.push(
+          `pending-transcripts.json: "${id}" is recorded in ${aName} AND ${bName} — an examined video carries exactly ONE record, ` +
+          `at its richest lane (distilled > skipped[] > seen[]). Keep ${keep}, drop ${drop}.`,
+        );
+      }
+    };
+    collide("skipped[]", laneIds["skipped[]"], "seen[]", laneIds["seen[]"]);
+    collide("a distilled take/metaNote url", distilledIds, "skipped[]", laneIds["skipped[]"]);
+    collide("a distilled take/metaNote url", distilledIds, "seen[]", laneIds["seen[]"]);
+    collide("a distilled take/metaNote url", distilledIds, "videos[]", laneIds["videos[]"]);
   }
 
   /* --- the frozen forecast artifact (DECISION 2's render source) ---

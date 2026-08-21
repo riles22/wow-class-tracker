@@ -97,7 +97,14 @@ locally, and distill them into cited per-spec takes in `data/creator-takes.json`
    **When you transcript-verify a video and distil NOTHING from it, move it to the
    `skipped[]` lane in the same file** — `{id, creator, title, reason, verifiedAt}`, where
    `reason` says what the transcript actually turned out to be. Validation enforces the
-   shape and refuses to let an id sit in both lanes. This lane is DURABLE: before it
+   shape and, since 2026-08-21, the ONE-RECORD rule: the lanes are a **precedence ladder**
+   — distilled (cited by its take/metaNote url) > `skipped[]` > `seen[]`, with `videos[]`
+   meaning "still waiting" and overlapping none of them — and an id may sit in exactly one.
+   That sentence used to promise more than the code did: only the `videos[]` pairs were
+   checked, so `skipped[]`+`seen[]` and distilled+anything went unenforced, and **seven ids
+   were sitting in two lanes at once with `npm run validate` reporting clean** (one of them
+   a video carrying 40 live metaNotes). Fixed in the same commit that closed the gap; the
+   error names which record to keep and which to drop. This lane is DURABLE: before it
    existed (added 2026-07-31), "verified-skipped" lived only in log.md prose, every run
    re-derived its seen-set by regex over that prose, and Shadarek's comedy tier list
    `Z8Jygl_NpF4` came back three separate times — each costing a transcript fetch and a

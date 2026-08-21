@@ -16,6 +16,45 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-21 (cross-lane collisions — SEVEN, not two; validation gap closed)
+
+**The two I reported were a sample, not the set.** Measuring every lane pair before writing
+any fix turned up **seven** ids carrying two records at once, and `npm run validate` reported
+clean on all of them. Data fixed, and the gap between what SKILL.md promised and what
+validate.mjs did is closed.
+
+- **What was actually enforced:** `videos[]`∩`seen[]` and `videos[]`∩`skipped[]`. That is all.
+  The SKILL.md sentence "refuses to let an id sit in both lanes" sat in the `skipped[]`
+  paragraph and read as covering every pair — it never did. Unenforced: `skipped[]`∩`seen[]`,
+  and distilled∩anything.
+- **The seven:**
+  - `6MlSd4nBtrI` (Dratnos) — `skipped[]` + `seen[]`.
+  - `aqe2LKeMIqQ` (Tettles) — distilled + `skipped[]`.
+  - `HP3H1aDcQCo`, `Li67ghcCJo4`, `jlbQAmQMRCM`, `okaZqAQVRN0`, `x0fxEWTq3Pw` — distilled +
+    `seen[]`, **all five previously unknown**. These are not marginal: `okaZqAQVRN0` carries
+    **40 live izen metaNotes** and `x0fxEWTq3Pw` carries 24 from Zorthas.
+- **The rule, which the code now enforces:** the lanes are a PRECEDENCE LADDER, not tags —
+  distilled (cited by its take/metaNote url) > `skipped[]` > `seen[]`, with `videos[]` meaning
+  "still waiting" and overlapping none. An examined video carries exactly ONE record. This was
+  always the stated intent — the `seen[]` comment in validate.mjs already spelled the ladder
+  out ("everything else belongs here") — it just was not checked.
+- **Six of seven were lossless.** `seen[]` is a bare id list, so dropping a redundant entry
+  discards no information. **Verified the seen-set union is byte-identical: 1167 → 1167, zero
+  ids stopped being examined.** This is deduplication, not forgetting — which matters, because
+  the whole point of the union is that anything outside it is genuinely unexamined.
+- **The seventh lost prose, so it is preserved here.** `aqe2LKeMIqQ` (Tettles, "Stream VOD")
+  left `skipped[]`, and its reason read: *"Livestream VOD whose only spec reads are one-line
+  replies to chat — no sustained analysis to distil. Transcript verified 2026-07-30 (local
+  run)."* The video IS distilled — a Balance Druid take at `t=10036`, ~2.8 hours in — so
+  `skipped[]` ("nothing to distil") contradicted it. The take url is now its only record.
+  **The 07-30 finding still stands and is why this VOD should not be re-mined**: one take was
+  taken from it and the remainder is chat replies.
+- **The error message names the fix**, because a collision otherwise leaves you guessing which
+  lane is authoritative: it prints "Keep <lane>, drop <lane>" derived from the ladder.
+- **The test was mutation-checked**, not just run: neutering the four `collide()` calls makes it
+  red (`not ok 19`), restoring them makes it green. It also asserts the committed file is clean,
+  so it reds if the lanes drift apart again. `src/validate.mjs` is CODEOWNERS-owned
+  (`@riles22`), so this is a reviewed code edit and its own commit.
 ## 2026-08-21 (re-open — the six scope-conditional Musguete skips)
 
 **Five of six yielded a Subtlety take; all five land SUPERSEDED. The sixth is now a settled
