@@ -16,6 +16,56 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-21 (owner registry edit — archon-encounters URLs re-pointed to S2)
+
+**Two URLs, verified live before being written. No data rebuilt, no dates touched.**
+Riley authorised the re-point after the 18:37Z nightly diagnosed both registry URLs as
+RETIRED upstream.
+
+- **The retirement is independently confirmed, not taken on the agent's word.** Both stored
+  URLs (`.../raid/mythic/imperator`, `.../mythic-plus/10/windrunner-spire/this-week`) return
+  HTTP 200 with a **byte-identical 199,655-byte body**, `__NEXT_DATA__` page `/[gameSlug]`,
+  `title: null`, no `specTierListSection`. A dead URL that answers 200 is the worst shape of
+  all — it MASKED the real upstream state as "unreachable".
+- **S2 encounters enumerated live** from the aggregate pages' `encounterOptions` rather than
+  from the agent's list (a search result is a lead, never a fact): 9 raid bosses and 8 M+
+  dungeons, ids matching what the nightly reported.
+- **All 17 candidate URLs then swept individually.** Every one returns HTTP 200 with real page
+  structure, so the URL PATTERN is right. The split is total and clean:
+  - **raid: 9 of 9 bosses publish ZERO throughput entries.** Identical across every boss, so
+    this is upstream data availability, not a per-boss quirk. (Nek'zali does carry 26
+    survivability entries — noted, not acted on; survivability is a separate requirement whose
+    own row reads the aggregate pages.)
+  - **M+: 8 of 8 dungeons publish 27 score entries each** — the DPS lane is fully live.
+- **Chosen representatives** (these URLs are templates the recipe iterates from, which is why
+  the labels say "9 bosses" / "8 dungeons"): raid → `nekzali`, the first boss enumerated and
+  the only one returning any data at all, so a reachability probe on it is meaningful;
+  M+ → `altar-of-fangs`, first enumerated and verified at 27 entries.
+- **`snapshot` deliberately NOT bumped** — left at 2026-08-18. The URLs changed; no encounter
+  tiers were refreshed. Stamping today would restart a 10-day staleness clock on data that did
+  not move, which is exactly the failure this project already wrote down for the
+  archon-survivability row. The gate now reads 3d of 10d and will fire around 2026-08-28 if the
+  lane still has not rebuilt — that red is the true signal and it is left armed.
+- **`seasonVerified` deliberately left at `s1`** — that field is written by refresh-tiers'
+  era-verify step, in the run that actually fetches and merges. A registry edit hand-writing it
+  would claim a verification the pipeline did not perform. It self-heals on the next refresh.
+  Inert either way here: both pages are `ancillary: true`, so they sit outside the season gate
+  in both `sourceSeasonOk` and `aheadSeasonFor`.
+- **What this does and does not buy.** It does NOT unblock the rebuild, and the numbers say so
+  precisely: an M+-only S2 cut is 8 x 27 = 216 DPS rows, or 320 with healer and tank pages
+  (8 x 40) — against this requirement's `rows.min` of **440**, with the raid side contributing
+  zero. That floor lives in `required-sources.json`, which is Gate-0 and CODEOWNERS-owned, so
+  lowering it is an owner decision and was NOT taken here. What the re-point buys is the
+  DIAGNOSTIC: the next nightly can now distinguish "upstream has no S2 raid data yet" from
+  "our URL is broken", which the 200-answering dead page made impossible.
+- Verified after the edit: `npm run validate` clean, 373 tests / 372 pass / 0 fail,
+  `freeze-season` still a no-op with the archive untouched (and still correctly reading
+  archon/raid as BEHIND the live season, not ahead), heartbeat fingerprint unchanged at the
+  five owner-accepted standing reds. `encounter-tiers.json` keeps its `s1` stamp, so the Fight
+  selector stays hidden — `imperator` and `windrunner-spire` still appear once each in
+  `dist/index.html`, but as the stored S1 encounter KEYS (Imperator Averzian, Windrunner
+  Spire), not as URLs. Checked rather than assumed.
+
 ## 2026-08-21 (nightly CI, second run of the day — the 11:00Z run also refreshed all four)
 
 **All four sources re-fetched live. 280 letter assignments parsed, 0 unmatched, ZERO tier moves
