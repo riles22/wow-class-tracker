@@ -16,6 +16,78 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-21 (owner registry edit — Musguete Subtlety scope)
+
+**Riley authorised widening Musguete to include Subtlety. Landed as a reviewed human commit,
+not an agent edit.** This resolves the OWNER FLAG raised in the nightly entry below (the one
+noting his registry premise "No dedicated Subtlety content exists" had become false) and
+repeated in the local-run entry above it. Those entries are left as written — they were true
+when written; this entry supersedes them.
+
+- **Lane matters here.** `data/community.json` is agent-writable in **`latest` and
+  `verifiedDate` ONLY** — Gate 0 (`nightly.yml`, the `changedBeyond` guard) treats `specs` and
+  `credential` as registry structure, and simulating each field against HEAD confirms a
+  nightly artifact carrying either would fail the night RED. `.github/CODEOWNERS` also names
+  `/data/community.json`. So this had to be an owner-reviewed commit on master, pushed the same
+  session, well clear of the ~10:30-12:30 UTC nightly window (landed ~14:50 UTC).
+  Musguete's entry is hand-curated (no `managedBy`), so `apply-community-overrides.mjs` never
+  touches it and the edit will not be clobbered; routing it through
+  `community-overrides.json` was considered and REJECTED — it would stamp
+  `managedBy: "overrides"` and replace the hand-curated record.
+
+- **THE TRIGGER IS NOT THE EVIDENCE, and that distinction is the substance of this entry.**
+  `DHqw-Oq9NjY` "Maximize Your DPS NOW! Subtlety Rogue Season 2 Guide" (8m32s, verified live:
+  oEmbed 200, author Musguete, newest upload on channelId `UCdgkIUZiySx2hL7edWPD_Gw`,
+  published 2026-08-21T09:42:45Z) is what falsified the premise, but it does NOT carry the
+  competence case. Its stats/BiS block is explicitly derivative — it summarises a published
+  Wowhead Subtlety guide, and someone else's material read aloud is not the reader's own read
+  (the same test that declined a Resto Druid read in an AutomaticJak co-stream and Maximum's
+  Zorthas-scripted watch-along). Its comparative sentences are class-wide and generic.
+  It is transcript-verified into `skipped[]` with all three reasons recorded.
+  **The widening rests instead on two videos of his OWN analysis:**
+  - `HDqRItIXGmE` (2026-08-04, "HOW are Rogues AFTER Buffs?") — a dedicated Subtlety segment of
+    his own WCL log analysis running roughly 18s-306s. Independent corroboration that this is
+    real and was dropped for scope: that video's two EXISTING takes deep-link at `t=311` and
+    `t=535`, i.e. both start after the Subtlety segment ends.
+  - `lanOZvwWzw0` (2026-08-15, "Assa Rogue WILL BE META?! Patch 12.1 Tunning") — Subtlety tuning
+    detail (intentional 4-5% bug, 6% compensating buff, four-set 100%→60%, mastery-to-crit).
+    A transcript-verified Subtlety read from this video was explicitly DROPPED for scope on
+    2026-08-16; see that entry.
+  Both titles and authors re-verified live via oEmbed before being written into a registry field.
+
+- **The premise was already false on 2026-08-04** — three days BEFORE its own
+  `verifiedDate: 2026-08-07` — and the transcript that falsified it had already been read.
+  The failure was not discovery; it was that nothing re-checked a scope note against takes
+  already on file.
+
+- **Six durable `skipped[]` entries rested on the OLD scope and were annotated, not rewritten.**
+  `5UjnyOvtRes` named it verbatim ("Subtlety content in the video is out of scope:
+  community.json scopes Musguete to Outlaw and Assassination"); the other five (`qsCTpF_eYoY`,
+  `YCyxU0uQCWc`, `F_fWti_cRP8`, `_NvJjBK65ME`, `pqAH9DPyDPs`, all 2026-08-10) read "within the
+  creator's scoped specs". Each keeps its original text with a dated bracketed note appended.
+  **None was re-queued**: all are 12.1 PTR-era, `expertRead` is dormant between cycles so
+  nothing distilled from them could move a projection today, and `5UjnyOvtRes` carries two
+  independent non-scope reasons. They are re-openable on scope by a future transcript run —
+  which is precisely what the annotation exists to tell that run.
+
+- **What this does and does not buy.** It does NOT close a coverage gap: **Dalaran Gaming** is
+  unscoped (absent `specs` = whole class), transcribable, and already holds all six existing
+  Subtlety takes including the only live one (2026-08-17 raid buff, `f8YlxVEbGCY?t=16`). What
+  the edit actually buys is unblocking `validate.mjs`'s take-scope gate so Musguete's already-
+  dropped Subtlety reads become distillable, plus registry honesty. Musguete becomes the only
+  creator *scoped* to Subtlety who is also transcribable — Stealthi, Eleem and Fuu all cover it
+  but are `transcribable: false`.
+- **Firewalls checked and clear:** Musguete is not in `generalCreators[]`, and "Musguete" occurs
+  zero times in `data/sources.json`, so he authors none of our registered tier lists.
+- **Verified no downstream movement:** `expertRead` returns null for all 40 specs in both
+  brackets (`PHASES.ptr` null), the frozen forecast lane is active, and the build payload is
+  byte-identical outside the community subtree. `npm run validate` clean, `audit:creators`
+  HIGH 0 · MED 0 · INFO 9 (unchanged), 371 tests pass.
+- **Separate pre-existing defect found and NOT fixed here** (it predates this commit and is
+  unrelated): `6MlSd4nBtrI` (Dratnos) sits in BOTH `skipped[]` and `seen[]`, which this SKILL.md
+  says validation refuses — yet `npm run validate` passes. Either the check is missing from
+  validate.mjs or the SKILL.md sentence overstates it. Flagged for its own reviewed commit.
+
 ## 2026-08-21 (local run, scheduled task)
 
 **Queue drained to 0; 5 takes added across 3 specs; 0 metaNotes; 2 videos verified-skipped.**
