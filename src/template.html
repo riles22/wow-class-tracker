@@ -1217,6 +1217,16 @@ const PHASE = META.phases ?? { liveSeason: "s1", liveLabel: "12.0.7", ptr: null,
 const SEASON_ORDER = PHASE.seasonOrder ?? ["s1", "s2"];
 const seasonLabelOf = season => PHASE.seasonLabels?.[season] ?? PHASE.liveLabel;
 function seasonStateOf(page){
+  /* Ancillary pages are OUTSIDE the season gate, exactly as sourceSeasonOk/aheadSeasonFor
+     exclude them (2026-08-19 audit, C1). They are encounter-tier and drawer-metric inputs,
+     never letter inputs, so "behind" is a category error: the chip claimed the page "is
+     excluded from the consensus until it updates" when such a page is never in the
+     consensus at all, and never will be. normalize.mjs was fixed for C1; this copy of the
+     rule was not, so the UI went on contradicting the logic it was meant to mirror.
+     It also fails permanently rather than transiently — Archon's retired S1 per-boss,
+     per-dungeon and survivability pages can never be re-verified, so once the raid lists
+     flip to S2 those three would pin the source on "updating…" forever. */
+  if(page?.ancillary) return null;
   const s = page?.seasonVerified;
   if(s == null || s === PHASE.liveSeason) return null;
   const a = SEASON_ORDER.indexOf(s), b = SEASON_ORDER.indexOf(PHASE.liveSeason);
@@ -2326,7 +2336,14 @@ if(META.latestSnapshot){
     // Tier lists publish on an editorial cadence and carry a looser threshold; using the
     // metric one here would flag a healthy weekly source every time it had a quiet week.
     const limit = s => (s.kind === "tier-list" ? (dh.tierStaleDays ?? 14) : (dh.staleDays ?? 7));
-    return dh.all.filter(s => gap(s.asOf, ref) > limit(s));
+    /* A RETIRED cycle's PTR series is finished, not lagging (2026-08-20). Between cycles
+       (PHASE.ptr null) those series are era-gated off every other surface, so announcing
+       them as "data feeds gone stale" describes feeds the reader cannot find, about a test
+       realm that no longer exists — and worse, one of them was setting the date on the LIVE
+       Warcraft Logs outage clause, because it shares that source and family. During a cycle
+       they are current content and stay in. */
+    const retiredPtr = s => !PHASE.ptr && (s.era ?? "live") === "ptr";
+    return dh.all.filter(s => !retiredPtr(s) && gap(s.asOf, ref) > limit(s));
   })();
   if(!stale.length){ el.hidden = true; return; }
   /* MISATTRIBUTION FIX (2026-08-08). This was `stale[0]?.asOf` — the oldest stale source of
@@ -2343,7 +2360,14 @@ if(META.latestSnapshot){
     ...Object.values(PTRNAMES.mplusTesting || {}).filter(Boolean),
     "Dummy Dome rDPS (real-player medians)"
   ]);
-  const oldest = stale.filter(x => PTR_EMPIRICAL_LABELS.has(x.label))[0]?.asOf ?? null;
+  /* Read from `all`, not `stale` (2026-08-20). This states WHERE the frozen forecast's
+     empirical term came from — a fact about the record's provenance that does not depend on
+     whether those cuts currently count as stale. Sourcing it from `stale` meant the sentence
+     vanished the moment retired PTR series stopped being reported as stale feeds, dropping a
+     true disclosure for an unrelated reason. `all` is pre-sorted oldest-first. */
+  const ptrEmpiricalAll = (Array.isArray(dh.all) ? dh.all : (dh.series || []))
+    .filter(x => PTR_EMPIRICAL_LABELS.has(x.label));
+  const oldest = ptrEmpiricalAll[0]?.asOf ?? null;
   const n = stale.length;
   const names = stale.map(s=>s.label).join(" · ");
   // One clause per stalled SOURCE, each with its own date. A single "N Warcraft Logs

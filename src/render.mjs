@@ -1771,20 +1771,31 @@ export function tierListHealth(sources) {
 const wclFamily = label => (/\braw DPS\b/i.test(label) ? "raw" : "redistributed");
 
 export function dataHealth(specs, sources = null) {
-  const newest = new Map(); // series label → { asOf: newest seen, source }
-  const note = (label, asOf, source) => {
+  const newest = new Map(); // series label → { asOf: newest seen, source, era }
+  const note = (label, asOf, source, era = "live") => {
     if (!asOf) return;
     const cur = newest.get(label);
-    if (!cur || asOf > cur.asOf) newest.set(label, { asOf, source: source ?? cur?.source ?? null });
+    if (!cur || asOf > cur.asOf) newest.set(label, { asOf, source: source ?? cur?.source ?? null, era });
   };
   for (const spec of specs) {
-    for (const m of spec.metrics ?? []) note(m.name, m.asOf, m.source);
+    /* The era travels with the series (2026-08-20). A retired cycle's PTR series never
+       refreshes again, and pooling it with the live rows let ONE dormant row set the
+       outage date for the whole family: the banner read "12 Warcraft Logs rDPS/HPS series
+       frozen at 2026-07-28 — that family is erroring upstream", where 07-28 belonged to
+       "12.1 PTR raid testing score (normalized)" from the closed 12.1 cycle while every
+       live rDPS/HPS row sat at 08-10. That overstated the live outage by 13 days and
+       described a finished cycle as an upstream failure.
+       Read the EXPLICIT field only — no marker inference — so this stays a pure function
+       of the data with no PHASES import (verified: 0 of 660 rows rely on inference, and
+       validation enforces era typing, so the explicit field is exact). */
+    for (const m of spec.metrics ?? []) note(m.name, m.asOf, m.source, m.era ?? "live");
     // ptrDummy carries its own source id — read it rather than assuming Warcraft Logs.
-    if (spec.ptrDummy?.asOf) note("Dummy Dome rDPS (real-player medians)", spec.ptrDummy.asOf, spec.ptrDummy.source);
+    // It is PTR by definition: fixed-target-count test-realm dummies.
+    if (spec.ptrDummy?.asOf) note("Dummy Dome rDPS (real-player medians)", spec.ptrDummy.asOf, spec.ptrDummy.source, "ptr");
     // Sims live outside spec.metrics, so a stalled Bloodmallet run had no staleness
     // surface anywhere — not the gate, not the heartbeat, not this banner (audit
     // 2026-07-24, D3). Its gate probe is fixed; this is the user-visible half.
-    if (spec.fightProfile?.asOf) note("Sim fight profiles (target-count DPS)", spec.fightProfile.asOf, spec.fightProfile.source);
+    if (spec.fightProfile?.asOf) note("Sim fight profiles (target-count DPS)", spec.fightProfile.asOf, spec.fightProfile.source, "live");
   }
   const tiers = tierListHealth(sources);
   // Tier dates join the frontier: it means "the newest data of ANY kind we hold", so a
@@ -1797,7 +1808,7 @@ export function dataHealth(specs, sources = null) {
   // Google Sheets a WCL API failure (audit 2026-07-24, D1).
   const all = [...newest.entries()]
     .map(([label, v]) => ({
-      label, asOf: v.asOf, source: v.source ?? null,
+      label, asOf: v.asOf, source: v.source ?? null, era: v.era ?? "live",
       // Only Warcraft Logs has two independently-healthy pipelines to tell apart; every
       // other source is one feed, so it carries no family and gets no causal wording.
       ...(v.source === "warcraftlogs" ? { family: wclFamily(label) } : {})

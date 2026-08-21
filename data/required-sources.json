@@ -183,7 +183,7 @@
     },
     {
       "key": "archon-metrics",
-      "label": "Archon numeric throughput metrics (95th-pct DPS/HPS + M+ score, from specRankingsSection)",
+      "label": "Archon numeric throughput metrics (95th-pct DPS/HPS + M+ score, from specRankingsSection). OWNER-ACCEPTED STANDING RED (2026-08-21, Riley): the Season-2 RAID pages return specRankingsSection.table.data EMPTY (0 rows, totalParses 0) — a rebuild-with-no-data state, NOT a parse failure, proven on the same run against the M+ pages where the identical path returns 27/7/6 rows. The raid cut cannot advance until Archon publishes S2 raid parses. Do not ack it away and do not raise maxAgeDays; the M+ half is unaffected and refreshes normally.",
       "maxAgeDays": 5,
       "date": {
         "type": "metrics",
@@ -199,7 +199,7 @@
     },
     {
       "key": "archon-hps",
-      "label": "Archon 95th-pct HPS (raid, healers)",
+      "label": "Archon 95th-pct HPS (raid, healers). OWNER-ACCEPTED STANDING RED (2026-08-21, Riley): same Season-2 raid state as archon-metrics — the healer page carries 0 rows (totalParses 0), so none of the 7 stored HPS values can be refreshed. Kept as its own row per the split-row rule rather than coupled to archon-metrics. Do not ack it away and do not raise maxAgeDays.",
       "maxAgeDays": 5,
       "date": {
         "type": "metrics",
@@ -231,7 +231,7 @@
     },
     {
       "key": "archon-popularity",
-      "label": "Archon popularity % (raid + M+, from specRankingsSection — the series a 07-21 recipe-navigation error silently stalled)",
+      "label": "Archon popularity % (raid + M+, from specRankingsSection — the series a 07-21 recipe-navigation error silently stalled). OWNER-ACCEPTED STANDING RED (2026-08-21, Riley): half this series refreshes and half cannot — the 40 M+ rows re-parse from the S2 pages, while the raid rows sit behind the same totalParses-0 rebuild as archon-metrics, so the coverage date correctly does not move. Do not ack it away and do not raise maxAgeDays.",
       "maxAgeDays": 5,
       "date": {
         "type": "metrics",
@@ -247,7 +247,7 @@
     },
     {
       "key": "wowmeta",
-      "label": "WoWMeta M+ population lb_ci rating (metrics; letters retired 2026-07-31)",
+      "label": "WoWMeta M+ population lb_ci rating (metrics; letters retired 2026-07-31). OWNER-ACCEPTED STANDING RED (2026-08-21, Riley): UPSTREAM is frozen, not our fetch — manifest.json snapshotDate and the rankings file's Last-Modified both read 2026-08-11 and agree, and the payload is diffed each run rather than trusted to the manifest (the 08-04 pinned-manifest shape). Nothing to merge means the coverage date correctly does not move. Do not ack it away and do not raise maxAgeDays; it clears when WoWMeta re-runs.",
       "maxAgeDays": 8,
       "date": {
         "type": "metrics",
@@ -328,7 +328,7 @@
     },
     {
       "key": "simulationcraft",
-      "label": "SimC nightly MID1 raid report",
+      "label": "SimC nightly MID1 raid report. OWNER-ACCEPTED STANDING RED (2026-08-21, Riley): MID2_Raid now EXISTS upstream but is not adoptable — its header self-identifies 12.1.0.69382 PTR where MID1's reads Live, and its \"DPS Ranking:\" block is a PARTIAL run of ~32 profiles covering roughly half the DPS roster. Holding MID1 is the honest call, and the red is the signal that upstream has not shipped a complete Live MID2 (Bloodmallet precedent). Do not ack it away and do not raise maxAgeDays; it clears when a complete Live MID2 report lands.",
       "maxAgeDays": 10,
       "date": {
         "type": "metrics",

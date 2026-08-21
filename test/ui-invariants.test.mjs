@@ -1168,16 +1168,38 @@ ui("every visible consensus count equals the number of sources the cells actuall
 
   /* The footer chips, both directions. Expected: one chip per page of a live-era source
      that is out of step, none at all for an era:"ptr" list (describing the next patch is
-     what it IS), and no lag vocabulary on a page that is ahead. */
+     what it IS), none for an ANCILLARY page, and no lag vocabulary on a page that is ahead. */
   const liveSources = data.sources.filter(s => s.kind === "tier-list" && (s.era ?? "live") === "live");
   const liveSeason = data.meta.phases.liveSeason;
   const order = data.meta.phases.seasonOrder ?? ["s1", "s2"];
-  const expectedChips = liveSources.reduce((n, s) => n + (s.pages ?? [])
-    .filter(p => p.seasonVerified != null && p.seasonVerified !== liveSeason).length, 0);
+  /* `!p.ancillary` mirrors sourceSeasonOk/aheadSeasonFor (2026-08-19 audit, C1). Ancillary
+     pages are encounter-tier and drawer-metric inputs, never letter inputs, so they are
+     outside the season gate entirely and a lag chip on one is a category error — its
+     tooltip claims exclusion "from the consensus until it updates" about a page that is
+     never in the consensus. This expectation omitted the predicate and so pinned the bug:
+     it required the 3 chips Archon's retired S1 per-boss/per-dungeon/survivability pages
+     were wrongly rendering. */
+  const chipPages = s => (s.pages ?? []).filter(p =>
+    !p.ancillary && p.seasonVerified != null && p.seasonVerified !== liveSeason);
+  const expectedChips = liveSources.reduce((n, s) => n + chipPages(s).length, 0);
   const chips = await page.evaluate(() => [...document.querySelectorAll(".lagchip")]
     .map(c => ({ text: c.textContent, title: c.getAttribute("title") ?? "" })));
   assert.equal(chips.length, expectedChips,
-    "one season chip per out-of-step page of a LIVE-era source, and none for an era:'ptr' list");
+    "one season chip per out-of-step page of a LIVE-era source, and none for an era:'ptr' list or an ancillary page");
+  /* Pin the C1 rule from the other side: no chip may sit on an ancillary page's row. The
+     count above can be satisfied by the right TOTAL landing on the wrong rows, which is
+     precisely what a label-keyed lookup would do if the chip moved. */
+  const ancillaryLabels = liveSources.flatMap(s => (s.pages ?? [])
+    .filter(p => p.ancillary && p.label).map(p => p.label));
+  if (ancillaryLabels.length) {
+    const rows = await page.evaluate(() => [...document.querySelectorAll(".srcitem")]
+      .map(e => ({ text: e.textContent ?? "", chip: !!e.querySelector(".lagchip") })));
+    for (const label of ancillaryLabels) {
+      const row = rows.find(r => r.text.includes(label));
+      if (row) assert.equal(row.chip, false,
+        `an ancillary page is outside the season gate and must carry no lag chip — "${label}" has one`);
+    }
+  }
   for (const chip of chips) {
     const ahead = liveSources.some(s => (s.pages ?? []).some(p =>
       p.seasonVerified != null && order.indexOf(p.seasonVerified) > order.indexOf(liveSeason)));
