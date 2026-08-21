@@ -680,9 +680,16 @@ and the page's own `published` date rides alongside `snapshot`.
 `GET https://bloodmallet.com/chart/get/talent_target_scaling/castingpatchwerk/{snake_case_class}/{spec}`
 per DPS spec; take best-build DPS at target counts 1/2/3/5/8/15. Merge via
 `apply-metrics.mjs` (`profiles` key).
-**A source's fight-profile pool may only ever hold ONE sim tier** (gated in validate.mjs
-since 2026-08-15). Read `simc_settings.tier` off each chart into `profiles[].tier` — never
-hard-code the expected value, it moves each season (`MID1` → `MID2` for S2). `fightLabels`
+**A source's fight-profile pool may only ever hold ONE sim tier, and for bloodmallet that
+tier must be RECORDED** (uniformity gated in validate.mjs since 2026-08-15; the recording
+requirement — `SIM_TIER_REQUIRED` — since 2026-08-20). Read `simc_settings.tier` off each
+chart into `profiles[].tier` — never hard-code the expected value, it moves each season
+(`MID1` → `MID2` for S2). Uniformity alone was NOT enough: an absent tier is its own
+bucket, so a pool where nobody carried the field passed as one null group. That was the
+real state until 2026-08-20 — 0 of 26 profiles had a tier, and a partial merge that simply
+OMITTED it passed validation with **0 errors** (verified; with the requirement in place the
+same merge now reds with 18). The stored 26 were backfilled to `MID1` from the
+refresh-metrics log's own contemporaneous record, changing no sim value or date. `fightLabels`
 pools every DPS profile into one flat array with **no provenance key** and derives the
 ST/cleave/AoE labels and row tag as within-role percentiles over it, and the tiers are not
 comparable: MID2 measured a mean **1.79×** MID1 (range 1.114–2.563, varying by spec AND

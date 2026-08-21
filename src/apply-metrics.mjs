@@ -4,8 +4,12 @@
    The input file may contain either or both of:
      "metrics":  [{ "class", "spec", "bracket": "raid"|"mplus", "source",
                     "name", "value", "unit"?, "n"?, "asOf"? }]
-     "profiles": [{ "class", "spec", "source", "asOf"?,
+     "profiles": [{ "class", "spec", "source", "asOf"?, "tier"?,
                     "targets": { "<targetCount>": <dps>, ... } }]
+                  `tier` is the chart's own simc_settings.tier ("MID1"/"MID2") — REQUIRED for
+                  bloodmallet (validate.mjs's SIM_TIER_REQUIRED). It was implemented here but
+                  missing from this list, which is how a whole harvest came to omit it and left
+                  the sim-tier guard passing vacuously until 2026-08-20.
    Metrics upsert by (source, bracket, name); profiles replace fightProfile.
    Exact class+spec matching; refuses to write on any unmatched row or
    validation failure. */

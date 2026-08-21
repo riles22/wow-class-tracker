@@ -221,11 +221,18 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
     `subtitle` restates it as `UTC <ts> | SimC build: <hash>`. Take the DATE PART, **per spec** —
     they genuinely differ (on 2026-08-08: 25 specs at 2026-07-08, Elemental Shaman alone at
     2026-07-15).
-  - **Carry `simc_settings.tier` through into `profiles[].tier`, and never merge a mixed
-    pool** (2026-08-15). Do NOT hard-code the expected tier — it changes each season
-    (`MID1` → `MID2` for Season 2). Read it off each chart and pass it in the profiles row;
-    `apply-metrics.mjs` stores it as `fightProfile.tier` and `validate.mjs` fails the run
-    when one source's fight-profile pool contains more than one tier.
+  - **`profiles[].tier` is REQUIRED for bloodmallet, and a mixed pool never merges**
+    (2026-08-15; requirement added 2026-08-20). Do NOT hard-code the expected tier — it
+    changes each season (`MID1` → `MID2` for Season 2). Read it off each chart and pass it in
+    the profiles row; `apply-metrics.mjs` stores it as `fightProfile.tier`, and `validate.mjs`
+    now fails the run **both** when a bloodmallet profile lacks a tier and when one source's
+    pool contains more than one.
+    The requirement exists because uniformity alone was not enough: an absent tier is its own
+    bucket, so a pool where NOBODY carried the field passed as a single null group. That was
+    the live state until 2026-08-20 (0 of 26 profiles carried one) — verified, a partial merge
+    that simply OMITTED the tier passed validation with **0 errors**, which is precisely the
+    failure the guard exists to stop. The stored 26 were backfilled to `MID1` from this log's
+    own contemporaneous record (see the 2026-08-12 entry: "against MID1 in stored data").
     Why this is a gate and not advice: `fightLabels` (render.mjs) pools every DPS spec's
     profile into one flat array with **no provenance key** and derives the ST/cleave/AoE
     labels and row tag as within-role percentiles over it. Tiers are not comparable —
@@ -247,10 +254,17 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
     `success` row unless the stored date is within 1 day of the run, so honest dates mean the
     manifest row is **`partial`** on any day Bloodmallet has not re-simmed. Record it as partial
     and let the age gate go red — a red heartbeat is the true signal that upstream has stalled.
-  - **The 76-byte `{"status": "error", ...}` body is a TRANSIENT, not a structural signal.**
-    Augmentation genuinely has no standard chart (8/8 retries error), but Beast Mastery returned
-    the identical body once and then succeeded on retry with real data. Retry before concluding a
-    spec is absent — treating the error body as "by design" would silently drop a live spec.
+  - **The 76-byte `{"status": "error", ...}` body is AMBIGUOUS — retry, but do not assume
+    transient.** Beast Mastery once returned the identical body and then succeeded on retry
+    with real data, so a single error never proves absence. But the body is equally the
+    signal for a spec upstream has not re-simmed yet, and that state can persist for weeks:
+    measured 2026-08-20, ten specs (Havoc, Devourer, Balance, Feral, Augmentation,
+    Devastation, Windwalker, Retribution, Arms, Fury) errored on **8/8 retries each** across
+    four fight styles and four chart types, while control specs succeeded interleaved in the
+    same minutes — the endpoint was demonstrably healthy throughout. Retry before concluding
+    absence; then record the persistent set in the manifest row rather than re-litigating it
+    every night. Either way the answer is the same: **merge nothing**, because the tier gate
+    forbids a partial pool and the row-drop floor (19 of 26) forbids adopting only what exists.
 
 ## Gotchas
 

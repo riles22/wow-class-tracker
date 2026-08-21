@@ -28,6 +28,12 @@ const UNDATED_WRITEUPS = new Set([
   "Rogue|Outlaw", "Rogue|Subtlety", "Shaman|Enhancement", "Warrior|Protection"
 ]);
 const KINDS = new Set(["tier-list", "metrics", "notes-feed", "reference", "community"]);
+/* Fight-profile sources whose charts publish a sim tier, and which must therefore RECORD it
+   on every profile — see the two checks further down (the per-spec requirement and the pool
+   uniformity guard). Per-source rather than blanket-required because "publishes no tier" is
+   a legitimate shape for some future source; admitting one is then a one-line reviewed edit
+   here rather than a silent exemption. */
+const SIM_TIER_REQUIRED = new Set(["bloodmallet"]);
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
 // Creator-take URLs come from an autonomous nightly pipeline over untrusted transcripts —
 // beyond https-only they must point at a host the pipeline actually cites.
@@ -354,6 +360,20 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
       const fp = spec.fightProfile;
       if (!allSources.has(fp.source)) errors.push(`specs.json: ${key} fightProfile from unknown source "${fp.source}"`);
       isoOk(fp.asOf, `specs.json: ${key} fightProfile.asOf`);
+      /* The tier must be RECORDED, not merely uniform (2026-08-20). The uniformity guard
+         below treats an absent tier as its own bucket — right for a source that publishes
+         none — but that means a pool where NOBODY carries the field passes as a single null
+         group. Until today that was the real state (0 of 26 profiles had one), so the guard
+         was passing vacuously: verified, a partial merge that simply OMITTED tier passed
+         validation with 0 errors, which is the exact failure the guard exists to stop.
+         apply-metrics.mjs:49 already carries `profiles[].tier` through — nothing required it. */
+      if (SIM_TIER_REQUIRED.has(fp.source) && (typeof fp.tier !== "string" || !fp.tier.trim())) {
+        errors.push(
+          `specs.json: ${key} fightProfile from "${fp.source}" must record the chart's own ` +
+          `simc_settings.tier (e.g. "MID1"). Without it the sim-tier uniformity guard below ` +
+          `passes vacuously and a partial re-sim merges invisibly.`
+        );
+      }
       const targets = Object.entries(fp.targets ?? {});
       if (targets.length === 0) errors.push(`specs.json: ${key} fightProfile.targets must be a non-empty object`);
       for (const [count, dps] of targets) {
@@ -445,6 +465,10 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
      Absent counts as its own value on purpose: today's 26 profiles predate the field, so a
      pool of all-untiered passes, an all-MID2 pool passes, and the mixed state fails. It also
      fails closed if a source stops publishing its tier mid-adoption. */
+  /* Sources whose charts publish a sim tier, and which must therefore record it (checked
+     per spec above). Kept per-SOURCE rather than blanket-required because "publishes no
+     tier" stays a legitimate shape — admitting a tier-less fight-profile source is then a
+     one-line reviewed edit here rather than a silent exemption. */
   const tiersBySource = new Map();
   for (const spec of specs) {
     const fp = spec.fightProfile;

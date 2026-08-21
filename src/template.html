@@ -404,6 +404,15 @@ try {
      accessible sole cue, and `title` does not exist on touch (see the touch-legibility
      note in CLAUDE.md). The colour is reinforcement for the text, never the message. */
   .mnote.thin-n{color:var(--v-mix); font-weight:600}
+  /* Season provenance on every dated value (2026-08-20). Current-season reads muted so it
+     states a fact without competing for attention; a prior-season measurement reads gold,
+     the same signal .lagchip already uses for "this source has not caught up". The NAME is
+     always present — the colour only reinforces it. */
+  .seasontag{font-family:var(--mono); font-size:10px; color:var(--ink-faint); white-space:nowrap}
+  .seasontag.old{color:var(--gold)}
+  /* In a Compare-all column header the chip sits on its own line under the label, so it
+     needs to shed the inherited header casing/tracking to stay readable at 10px. */
+  .alltab thead .seasontag{display:block; margin-top:2px; text-transform:none; letter-spacing:0; font-weight:400}
   .olk{margin-left:5px; font-weight:700; cursor:help}
   .olk[data-d="up"]{color:var(--v-pos)}
   .olk[data-d="down"]{color:var(--v-neg)}
@@ -1282,6 +1291,54 @@ const FROZEN_SOURCES = (() => {
 const metricEra = m => m.era ?? (PHASE.ptr && m.name.includes(PHASE.ptr.marker) ? "ptr" : "live");
 const takeEra = t => (PHASE.ptr && (t.patchContext||"").includes(PHASE.ptr.marker)) ? "ptr" : "live";
 const eraOk = era => state.era === "both" || state.era === era;
+
+/* ---------- season provenance, shared by EVERY dated surface (2026-08-20) ----------
+   A measurement's season is decided by its asOf against PHASE.liveSince, never by how
+   recently it was fetched: the Warcraft Logs zone-46/47 medians pulled on 2026-08-10 are
+   Season-1 measurements however fresh that pull was, because zones 46/47 ARE Season 1.
+
+   This logic previously lived as a private `preSeason` closure inside metricsHTML(), and
+   that scoping was the whole defect — the drawer got the 2026-08-19 audit's B2 fix while
+   ⊞ Compare all went on shipping four columns of Season-1 ranks with nothing on screen
+   saying so, on the one surface built for screenshotting the whole roster.
+
+   Labelled with a SEASON name, and keyed on the SEASON boundary, on purpose. PHASE
+   .seasonLabels maps a season to its PATCH ("s1" -> "12.0.7"), but patch 12.1 shipped
+   2026-08-11 and Season 2 opened 2026-08-18 — so a patch label on a season test is wrong
+   for everything measured in those seven days (docs/era-prose-scope.md: "anything reading
+   liveSeason to pick a LABEL is wrong for those seven days"; measured, it mislabelled 120
+   rows — Archon's raid cuts and WoWMeta — as "12.0.7 era" when they are Season-1 content
+   under 12.1 tuning). Naming the season puts the boundary and the vocabulary on one axis,
+   where they cannot drift apart again. */
+const seasonNameOf = s => { const i = (PHASE.seasonOrder ?? []).indexOf(s); return i < 0 ? null : `Season ${i + 1}`; };
+const PREV_SEASON = (()=>{ const o = PHASE.seasonOrder ?? [], i = o.indexOf(PHASE.liveSeason);
+  return i > 0 ? o[i-1] : null; })();
+/* { season, name, current } for an ISO date; null when the date is absent or the declared
+   timeline cannot place it (no previous season, so nothing to contrast against). */
+function seasonOfDate(asOf){
+  if(!asOf || !PHASE.liveSince || !PHASE.liveSeason) return null;
+  const current = asOf >= PHASE.liveSince;
+  const season = current ? PHASE.liveSeason : PREV_SEASON;
+  const name = seasonNameOf(season);
+  return name ? { season, name, current } : null;
+}
+/* The visible chip. Both states are tagged, not just the stale one (Riley, 2026-08-20):
+   an untagged row is ambiguous between "current" and "we forgot", and the whole point is
+   that a screenshot should describe itself. Current reads muted, prior-season reads gold,
+   so the eye still lands on the stale ones first — but the season is stated in TEXT, never
+   by colour or a title alone, because colour is not an accessible sole cue and `title` does
+   not exist on a phone (the 2026-08-05 touch-legibility rule). */
+function seasonChip(asOf, opts){
+  const s = seasonOfDate(asOf); if(!s) return "";
+  const live = seasonNameOf(PHASE.liveSeason) ?? "the live season";
+  const tip = s.current
+    ? `Measured ${asOf} — on or after ${live} opened (${PHASE.liveSince}), so this is current-season data`
+    : `Measured ${asOf} — before ${live} opened (${PHASE.liveSince}), so this measures ${s.name}, not ${live}`;
+  const cls = `seasontag${s.current ? "" : " old"}`;
+  return (opts && opts.block)
+    ? `<span class="${cls}" title="${esc(tip)}">${esc(s.name)}</span>`
+    : ` <span class="${cls}" title="${esc(tip)}">· ${esc(s.name)}</span>`;
+}
 /* Non-null ONLY while the frozen pre-launch forecast is the column's render source (the
    post-flip grading window — DECISION 2). The projection surfaces then show a RECORD, not
    a live computation, so they are exempt from the "no forecast in a live-only view" era
@@ -1451,7 +1508,7 @@ function sourceBreakdownHTML(s){
     return `<div class="setrow"><span class="pc">${esc(src.name)}</span><span class="pct">Raid ${esc(raid)}${rd?` <span class="mnote">${esc(rd)}</span>`:""} · M+ ${esc(mplus)}${md?` <span class="mnote">${esc(md)}</span>`:""}${tag}${why}</span></div>`;
   }).filter(Boolean).join("");
   const surv = s.survivability
-    ? `<div class="setrow"><span class="pc">Survive</span><span class="pct">Archon raid survivability tier: <b>${esc(s.survivability.tier)}</b>${s.survivability.asOf?` <span class="mnote">· ${esc(s.survivability.asOf)}</span>`:""}</span></div>`
+    ? `<div class="setrow"><span class="pc">Survive</span><span class="pct">Archon raid survivability tier: <b>${esc(s.survivability.tier)}</b>${s.survivability.asOf?` <span class="mnote">· ${esc(s.survivability.asOf)}</span>`:""}${seasonChip(s.survivability.asOf)}</span></div>`
     : "";
   // Our computed 12.1 forecast, PTR views only — full component math shown so the
   // number is auditable, never oracular. Not a source; never feeds consensus.
@@ -1484,13 +1541,9 @@ function metricsHTML(s){
   const staleGap = (from,to) => Math.round((Date.parse(to)-Date.parse(from))/86400000);
   /* The section heading stamps liveLabel over every era:"live" row, but through a season
      transition the box MIXES prior-season cuts (frozen WCL zones, held-back ceilings)
-     with genuine new-season rows under that one banner (2026-08-19 audit, B2). A row
-     whose asOf predates the flip is a measurement of the previous season and says so in
-     visible text — the tag disappears by itself as each series refreshes. */
-  const prevSeasonLabel = (()=>{ const o = PHASE.seasonOrder ?? [], i = o.indexOf(PHASE.liveSeason);
-    return i > 0 ? (PHASE.seasonLabels?.[o[i-1]] ?? null) : null; })();
-  const preSeason = m => prevSeasonLabel && PHASE.liveSince && metricEra(m)==="live"
-    && m.asOf && m.asOf < PHASE.liveSince;
+     with genuine new-season rows under that one banner (2026-08-19 audit, B2). Every live
+     row now states its own season in visible text — see seasonChip(); the prior-season
+     ones fade back to muted by themselves as each series refreshes. */
   const row = m => {
     const src = SOURCES.find(x=>x.id===m.source);
     const val = typeof m.value==="number" ? m.value.toLocaleString("en-US") : esc(String(m.value));
@@ -1505,9 +1558,9 @@ function metricsHTML(s){
         ? ` title="frozen — upstream rDPS outage since ${esc(m.asOf)}"`
         : ` title="frozen — last refreshed ${esc(m.asOf)}"`;
     const asof = m.asOf ? ` <span class="mnote">· <span class="asof"${staleTip}>${esc(m.asOf)}</span></span>` : "";
-    const eraTag = preSeason(m)
-      ? ` <span class="mnote" title="Measured before ${esc(PHASE.liveLabel)} went live (${esc(PHASE.liveSince)}) — a ${esc(prevSeasonLabel)}-era cut">· ${esc(prevSeasonLabel)} era</span>`
-      : "";
+    // Season provenance for live-era rows only: a PTR row's season is the cycle it tested,
+    // which the "PTR numbers" heading already states and asOf cannot answer.
+    const eraTag = metricEra(m) === "live" ? seasonChip(m.asOf) : "";
     return `<div class="setrow${stale?" stale":""}"><span class="pc">${esc(src?src.name:m.source)}</span><span class="pct"${rdpsTip}>${esc(m.name)}: <b>${val}</b>${m.unit?` ${esc(m.unit)}`:""}${rank}${m.n?` <span class="mnote${m.thin?" thin-n":""}">(n=${Number(m.n).toLocaleString("en-US")}${m.thin?" · thin sample":""})</span>`:""}${asof}${eraTag}</span></div>`;
   };
   const section = (label, items) => items.length ? `<p class="d-h">${label}</p><div class="setbox">${items.map(row).join("")}</div>` : "";
@@ -1529,7 +1582,7 @@ function profileHTML(s){
   return `<div class="srcbreak"><p class="d-h">Fight profile</p>
     <div class="setbox">
       <div class="fchips">${chip("st","ST")}${chip("cleave","Cleave")}${chip("aoe","AoE")}${fp.tag?`<span class="ptag" style="margin-left:0">${esc(fp.tag)}</span>`:""}</div>
-      <div class="mnote" style="margin-top:7px">Sim DPS by target count: ${esc(counts)}${fp.asOf?` · Bloodmallet ${esc(fp.asOf)}`:""}. Labels are within-role percentiles across DPS specs.</div>
+      <div class="mnote" style="margin-top:7px">Sim DPS by target count: ${esc(counts)}${fp.asOf?` · Bloodmallet ${esc(fp.asOf)}`:""}${seasonChip(fp.asOf)}. Labels are within-role percentiles across DPS specs${fp.tier?`, simmed on ${esc(fp.tier)} gear`:""}.</div>
     </div></div>`;
 }
 
@@ -1783,7 +1836,7 @@ function rowHTML(s, idx, simBar, rank, quals){
        <span class="mtag">M+${quals?.mplus ? ` <i class="mqual">${esc(quals.mplus)}</i>` : ""}</span>${tierEl(ratingFor(s,"mplus"), mvOf(s,"mplus"))}
      </div>
      <span class="chev">▸</span>
-     ${simBar && typeof s.fightProfile?.metricsUsed?.[simBar.key]==="number" ? `<div class="rowbar" aria-hidden="true" title="Sim ${simBar.label} DPS ${Math.round(s.fightProfile.metricsUsed[simBar.key]).toLocaleString('en-US')}"><i style="width:${(s.fightProfile.metricsUsed[simBar.key]/simBar.max*100).toFixed(1)}%;background:${color}"></i></div>` : ""}
+     ${simBar && typeof s.fightProfile?.metricsUsed?.[simBar.key]==="number" ? `<div class="rowbar" aria-hidden="true" title="Sim ${simBar.label} DPS ${Math.round(s.fightProfile.metricsUsed[simBar.key]).toLocaleString('en-US')}${s.fightProfile.asOf?` · ${esc(s.fightProfile.asOf)}${(seasonOfDate(s.fightProfile.asOf)||{}).name?` · ${esc(seasonOfDate(s.fightProfile.asOf).name)}`:""}`:""}"><i style="width:${(s.fightProfile.metricsUsed[simBar.key]/simBar.max*100).toFixed(1)}%;background:${color}"></i></div>` : ""}
      <div class="drawer" inert></div>
    </div>`;
 }
@@ -2616,7 +2669,8 @@ function cmpLiveMedian(s, b){
   const stale = DATA.dataHealth?.latest && m.asOf && (Date.parse(DATA.dataHealth.latest) - Date.parse(m.asOf))/86400000 > 7;
   return `${Math.round(m.value).toLocaleString("en-US")}${m.unit?` <span class="mnote">${esc(m.unit)}</span>`:""}`
     + `${m.rank?` <span class="mnote">#${m.rank}/${m.of} ${esc(s.role)}</span>`:""}`
-    + `${m.asOf?` <span class="mnote${stale?" asof-stale":""}"${stale?` title="frozen — last refreshed ${esc(m.asOf)}"`:""}>· ${esc(m.asOf)}</span>`:""}`;
+    + `${m.asOf?` <span class="mnote${stale?" asof-stale":""}"${stale?` title="frozen — last refreshed ${esc(m.asOf)}"`:""}>· ${esc(m.asOf)}</span>`:""}`
+    + seasonChip(m.asOf);
 }
 function openCompare(){
   const list = [...COMPARE].map(k => SPECS.find(s => `${s.class}|${s.spec}` === k)).filter(Boolean);
@@ -2644,11 +2698,14 @@ function openCompare(){
     ...(state.era !== "live" ? [["PTR raid testing", s=>{ const m=(s.metrics||[]).find(m=>m.name===PTRNAMES.raidTestingScore.DPS);
       return m ? `${Math.round(m.value)}/100${m.rank?` <span class="mnote">#${m.rank}/${m.of}</span>`:""}` : "—"; }]] : []),
     ...(state.era !== "live" ? [["Dummy Dome (PTR, DPS)", s=>s.ptrDummy?.score!=null?`${s.ptrDummy.score}/100 <span class="mnote">#${s.ptrDummy.rank}/${s.ptrDummy.of}</span>`:"—"]] : []),
-    ["Fight profile", s=>s.fightProfile?.tag ? esc(s.fightProfile.tag) : "—"],
+    // Season on the CELL, not the row label: fightProfile.asOf is genuinely per-spec (the
+    // source re-sims specs on its own schedule), so two pinned specs can sit in different
+    // seasons on this one row.
+    ["Fight profile", s=>s.fightProfile?.tag ? esc(s.fightProfile.tag)+seasonChip(s.fightProfile.asOf) : "—"],
     ["Mobility", s=>s.playstyle ? `${s.playstyle.mobility}/5` : "—"],
     ["Utility", s=>s.playstyle ? `${s.playstyle.utility}/5` : "—"],
     ["Complexity", s=>s.playstyle ? `${s.playstyle.complexity}/5` : "—"],
-    ["Survivability", s=>s.survivability ? esc(s.survivability.tier) : "—"],
+    ["Survivability", s=>s.survivability ? esc(s.survivability.tier)+seasonChip(s.survivability.asOf) : "—"],
     ...(state.era !== "live" ? [["12.1 outlook", s=>{ const o = s.outlook, v = s.ptr?.verdict;
       const word = o ? (o.direction==="up"?"↗ improving":o.direction==="down"?"↘ declining":"→ holding") : "";
       return ((v?esc(v)+" ":"") + word) || "—"; }]] : [])
@@ -2947,8 +3004,12 @@ function openSpecFromOverlay(cls, spec){
   }
   // Sim fight profile at canonical target counts (ST / cleave / AoE) → three ladders under Sims.
   for(const [c,label] of [["1","Sim DPS — 1 target (ST)"],["3","Sim DPS — 3 targets (cleave)"],["8","Sim DPS — 8 targets (AoE)"]]){
+    // Carry the CHART's own per-spec date so the caption can date and season-tag this cut.
+    // Without it these series read "undated", which on the oldest data the page holds — the
+    // sims are the only thing here still on a prior-season chart — was the worst place for
+    // the date to go missing.
     const rows = SPECS.filter(s=>s.fightProfile?.targets && typeof s.fightProfile.targets[c]==="number")
-      .map(s=>({ spec:s.spec, cls:s.class, value:s.fightProfile.targets[c] }))
+      .map(s=>({ spec:s.spec, cls:s.class, value:s.fightProfile.targets[c], asOf:s.fightProfile.asOf ?? null }))
       .sort((a,b)=>b.value-a.value).map((r,i,a)=>({ ...r, rank:i+1, of:a.length }));
     if(rows.length>1) catalog.set(`DPS|raid|${label}`,
       { key:`DPS|raid|${label}`, role:"DPS", bracket:"raid", name:label, source:"bloodmallet", unit:"DPS", era:"live", rows });
@@ -2996,7 +3057,18 @@ function openSpecFromOverlay(cls, spec){
         ? `<b class="ladder-stale" title="This cut has not refreshed since ${esc(asOf)} — see the data-health note on the main page">frozen at ${esc(asOf)}</b>`
         : `<span class="mnote">${esc(asOf)}</span>`)
       : `<span class="mnote">undated</span>`;
-    return `<div class="ladder-cap">${[...pre, base, dateHTML].join(" &nbsp;·&nbsp; ")}</div>`;
+    /* Which season the whole series measures. The Ladder is full-screen, so neither the
+       column chips in Compare all nor the drawer rows are on screen to say it — and a
+       ladder of Season-1 medians is exactly the image someone screenshots as "the current
+       rankings". A PTR series is excluded: its season is the cycle it tested, which the
+       "12.1 PTR" prefix above already states and asOf cannot answer. */
+    const seasons = e.era === "ptr" ? [] : [...new Set(dates.map(d=>seasonOfDate(d)?.season).filter(Boolean))];
+    const seasonHTML = seasons.length === 1
+      ? seasonChip(dates[dates.length-1], {block:true})
+      : seasons.length > 1
+        ? `<span class="seasontag old" title="${esc(`This series spans the Season 2 boundary (${PHASE.liveSince}) — rows range from ${dates[0]} to ${dates[dates.length-1]}`)}">mixed seasons</span>`
+        : "";
+    return `<div class="ladder-cap">${[...pre, base, dateHTML, ...(seasonHTML?[seasonHTML]:[])].join(" &nbsp;·&nbsp; ")}</div>`;
   }
 
   function drawLadder(e){
@@ -3221,6 +3293,51 @@ function openSpecFromOverlay(cls, spec){
   const metricCols = () => COLS[A.bracket].filter(c => eraOk(c.era));
   const showProjection = () => eraOk("ptr") || !!FROZEN_FC;
 
+  /* ---- season provenance per COLUMN (2026-08-20) ----------------------------------
+     This matrix is the surface people screenshot, and until now it was the only one that
+     never said which season its numbers describe — the drawer got the 2026-08-19 audit's
+     B2 tag, Compare all did not, and every raid metric column here is Season-1 data.
+     Column-grained rather than cell-grained because a metric family is fetched in one
+     pass, so all 40 cells share an asOf; a column is the honest unit and a chip per cell
+     would be 400 chips saying the same thing. A column that genuinely SPANS the flip is
+     the one case that must not claim either side, so it says "mixed". */
+  function metricColSeason(col){
+    if(col.dummy) return null;                       // PTR-era composite, hidden between cycles
+    const names = new Set(Object.values(col.names || {}).filter(Boolean));
+    if(!names.size) return null;
+    const dates = new Set();
+    for(const s of SPECS) for(const m of (s.metrics||[]))
+      if(m.bracket === A.bracket && names.has(m.name) && m.asOf) dates.add(m.asOf);
+    if(!dates.size) return null;                     // nothing landed — the cells already say "—"
+    const sorted = [...dates].sort();
+    const seasons = new Set(sorted.map(d => seasonOfDate(d)?.season).filter(Boolean));
+    if(seasons.size > 1) return { mixed:true, from:sorted[0], to:sorted[sorted.length-1] };
+    return seasonOfDate(sorted[sorted.length-1]);
+  }
+  /* A tier column's season comes from the page's own seasonVerified, not a date: a list
+     re-read today can still describe last season, which is exactly the Archon raid case
+     (verified s1, so its letters show here while contributing to 0 of 40 raid consensus
+     cells). Ancillary pages are excluded the way sourceSeasonOk excludes them — they are
+     encounter/metric inputs and never letter inputs. */
+  function tierColSeason(src){
+    const seasons = new Set((src.pages||[])
+      .filter(p => p.bracket === A.bracket && !p.ancillary)
+      .map(p => p.seasonVerified).filter(Boolean));
+    if(seasons.size !== 1) return null;              // unverified, or mid-rebuild across seasons
+    const season = [...seasons][0], name = seasonNameOf(season);
+    return name ? { season, name, current: season === PHASE.liveSeason } : null;
+  }
+  /* Renders either shape as the header's second line. */
+  function colChip(cs, what){
+    if(!cs) return "";
+    if(cs.mixed) return '<span class="seasontag old" title="'+esc(`This column spans the ${seasonNameOf(PHASE.liveSeason)} boundary (${PHASE.liveSince}) — cells range from ${cs.from} to ${cs.to}, so it is not all one season`)+'">mixed seasons</span>';
+    const live = seasonNameOf(PHASE.liveSeason) ?? "the live season";
+    const tip = cs.current
+      ? `${what} describes ${cs.name} — the current season`
+      : `${what} still describes ${cs.name}. ${live} opened ${PHASE.liveSince}; these numbers predate it and have not been re-cut.`;
+    return '<span class="seasontag'+(cs.current?"":" old")+'" title="'+esc(tip)+'">'+esc(cs.name)+'</span>';
+  }
+
   /* One cell's value + how to sort it. Tier cells sort by the scale's numeric score, never
      alphabetically — "A+" must sit above "A" above "B+", which alphabetical ordering gets
      wrong in both directions. Absent sorts last in either direction. */
@@ -3344,10 +3461,10 @@ function openSpecFromOverlay(cls, spec){
 
     const head = '<tr>'
       + '<th class="nm" data-k="consensus">Spec</th>'
-      + tcs.map(c=>'<th data-k="'+esc(c.id)+'" title="'+esc(c.name+(isPtrSource(c.id)?" — a 12.1 PTR list, excluded from the live consensus":""))+'">'+esc(c.shortName||c.name)+mk(c.id)+'</th>').join("")
+      + tcs.map(c=>'<th data-k="'+esc(c.id)+'" title="'+esc(c.name+(isPtrSource(c.id)?" — a 12.1 PTR list, excluded from the live consensus":""))+'">'+esc(c.shortName||c.name)+mk(c.id)+colChip(tierColSeason(c), c.name+"'s "+(A.bracket==="raid"?"raid":"M+")+" list")+'</th>').join("")
       + '<th data-k="consensus" title="Mean of the live-era tier lists, on a shared 0–100 axis">Consensus'+mk("consensus")+'</th>'
       + (proj ? '<th class="all-ours" data-k="projection" title="Our own 12.1 forecast — a projection, never a source'+(FROZEN_FC?' — FROZEN pre-launch record, declared '+esc(FROZEN_FC.date):'')+'">Ours: 12.1 ✦'+(FROZEN_FC?'<br><span class="mnote">frozen '+esc(FROZEN_FC.date)+'</span>':'')+mk("projection")+'</th>' : '')
-      + mcs.map(c=>'<th data-k="m:'+esc(c.key)+'" title="'+esc(c.tip)+'">'+esc(c.label)+mk("m:"+c.key)+'</th>').join("")
+      + mcs.map(c=>'<th data-k="m:'+esc(c.key)+'" title="'+esc(c.tip)+'">'+esc(c.label)+mk("m:"+c.key)+colChip(metricColSeason(c), c.label)+'</th>').join("")
       + '</tr><tr class="filt"><th class="nm"><input class="all-fs" id="all-q" type="search" placeholder="filter specs…" value="'+esc(A.q)+'" aria-label="Filter specs by name"></th>'
       + tcs.map(c=>'<th>'+tierSel(c.id)+'</th>').join("")
       + '<th>'+tierSel("consensus")+'</th>'
@@ -3368,7 +3485,7 @@ function openSpecFromOverlay(cls, spec){
     const roles = ["All","DPS","Healer","Tank"].map(r=>'<button data-ar="'+r+'" aria-pressed="'+(r===A.role)+'">'+r+'</button>').join("");
 
     ov.innerHTML = '<div class="finder-panel all-panel" role="dialog" aria-modal="true" aria-label="Compare all specs">'
-      + '<div class="finder-head"><div><h2>⊞ Compare all</h2><p>Every spec against every rating and rank, on one screen. Click a column to sort, use the row under it to filter, click a spec to open its card. Letters are tier ratings — each source’s own, their computed consensus, and our 12.1 forecast; <b>#numbers are measured ranks within that spec’s role</b> and are never turned into grades. <b>·</b> means no such measurement exists for that role; <b>—</b> means it exists but has not landed; <b class="thin-n">n=…</b> means it DID land but on too few logs to rank (under 10); <b class="thin-n">†</b> marks a rank built on fewer than 100 logged parses — real, but thin enough that it should not be read like the dense cuts beside it.</p></div>'
+      + '<div class="finder-head"><div><h2>⊞ Compare all</h2><p>Every spec against every rating and rank, on one screen. Click a column to sort, use the row under it to filter, click a spec to open its card. Letters are tier ratings — each source’s own, their computed consensus, and our 12.1 forecast; <b>#numbers are measured ranks within that spec’s role</b> and are never turned into grades. <b>·</b> means no such measurement exists for that role; <b>—</b> means it exists but has not landed; <b class="thin-n">n=…</b> means it DID land but on too few logs to rank (under 10); <b class="thin-n">†</b> marks a rank built on fewer than 100 logged parses — real, but thin enough that it should not be read like the dense cuts beside it. Under each column header is <b>the season that column actually measures</b> — <span class="seasontag old">Season 1</span> in gold means the source has not been re-cut since Season 2 opened, so those numbers describe last season however recently they were fetched.</p></div>'
       + '<button class="finder-x" id="all-close" aria-label="Close">✕</button></div>'
       + '<div class="all-hd"><div class="seg" role="group" aria-label="Bracket" id="all-bkt">'+bkt+'</div>'
       + '<div class="seg" role="group" aria-label="Role" id="all-role">'+roles+'</div>'
