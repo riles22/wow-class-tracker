@@ -11,7 +11,7 @@
 -->
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-/3NTl1fh6tUK+XrWgiteHJOzsAHDEvuRt06lxXbXBeQ=' 'sha256-vc3VA+8X9dQflTE/wPw2ZwQZaEo76B5C0Pu9JS7cC5M='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-/3NTl1fh6tUK+XrWgiteHJOzsAHDEvuRt06lxXbXBeQ=' 'sha256-GawFK6LDKnkMhprmqieoLdfAwi9E6/w5ynbN+iyLzuU='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="riles22">
 <title>Spec Tracker — WoW multi-source spec consensus</title>
@@ -253,6 +253,9 @@ try {
      wrapped rows (~330px on a phone) directly above the data. It folds; the "within role"
      note does NOT (it is an honesty statement, not a key) and sits outside as .standalone.
      Open by default on wide screens, where the space is free. */
+  .legend-panel{max-width:min(860px, 94vw)}
+  .legend-sheet .legend{padding-top:4px}
+  .legend-sheet .legend-wrap{padding:0}
   .legend-wrap{padding:10px 0 2px}
   .legend-wrap > summary{
     font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase;
@@ -701,6 +704,23 @@ try {
   /* Patch feed: a dated INDEX. Each entry's stored label is a full paragraph, so the
      visible line is capped and the whole text lives in the title (audit 2026-08-22). */
   .srcitem .feedline{white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0}
+  /* Source list: one summary line per outlet, pages folded underneath. */
+  .srcfold > summary{
+    display:flex; align-items:baseline; gap:8px; cursor:pointer; list-style:none;
+    padding:5px 0; border-bottom:1px solid var(--hair)
+  }
+  .srcfold > summary::-webkit-details-marker{display:none}
+  .srcfold > summary::before{content:"▸"; font-size:8px; color:var(--accent); flex:none; transition:transform .15s}
+  .srcfold[open] > summary::before{transform:rotate(90deg)}
+  .srcfold > summary:hover .srcname{color:var(--ink)}
+  .srcfold > summary:focus-visible{outline:2px solid var(--accent-2); outline-offset:2px; border-radius:3px}
+  .srcfold .srcname{color:var(--ink-dim); font-weight:600; flex:1 1 auto; min-width:0}
+  .srcfold .srccount{flex:none}
+  .srcfold .when.stale{color:var(--gold)}
+  .srcfold[open]{padding-bottom:6px}
+  .srcfold .srcitem{padding-left:14px}
+  html[data-reduce-motion="true"] .srcfold > summary::before{transition:none}
+  @media(pointer:coarse){ .srcfold > summary{min-height:44px; align-items:center} }
   .feedfold{margin-top:2px}
   .feedfold > summary{
     font-family:var(--mono); font-size:11px; color:var(--accent-2); cursor:pointer;
@@ -757,6 +777,13 @@ try {
     .stamp{flex-wrap:nowrap; overflow-x:auto; white-space:nowrap; gap:14px}
   }
   .ctlsum{display:none}
+  /* Escape hatch. The fold's open state is DOM state no media query can reach, so the
+     only route back was a matchMedia change event — and the summary that reopens it is
+     display:none at >=760px. Observed once at 1440px with .controls 25px tall and every
+     filter, the search and both overlay buttons unreachable (audit 2026-08-22). If the
+     fold is closed at a width where the summary is meant to be hidden, show it anyway:
+     a visible control beats a correct-looking but unusable toolbar. */
+  @media(min-width:760px){ .ctlfold:not([open]) > .ctlsum{display:flex} }
   @media(max-width:759px){
     .ctlsum{display:flex; flex-wrap:wrap; gap:6px 10px; align-items:center; cursor:pointer;
       list-style:none; padding:2px 0; min-height:44px}
@@ -1042,6 +1069,11 @@ try {
          pushes the last one off a phone screen entirely -->
       <button class="finderbtn" id="ladderbtn" type="button">📊 The Ladder</button>
       <button class="finderbtn" id="allbtn" type="button">⊞ Compare all</button>
+      <!-- The key, one click from the controls. The legend still lives inline below the
+           grid (and remembers its own toggle), but the 2026-08-22 reading-order change
+           moved it BELOW the data — so on a first visit the glyphs now arrive before
+           their explanation unless something up here offers it. -->
+      <button class="finderbtn" id="legendbtn" type="button" title="What the tiers, ±, arrows and the 0–100 score mean" aria-label="Legend — what the tiers, marks and scores mean">? Legend</button>
     </div>
   </div>
   <div class="controls-row controls-sub">
@@ -2744,6 +2776,7 @@ if(META.latestSnapshot){
 
 /* ---------- footer: source registry (tier lists + metrics + notes feeds) ---------- */
 document.getElementById('srclist').innerHTML = SOURCES.filter(s=>Array.isArray(s.pages)).map(src=>{
+  let flagged = 0;
   const pages = (src.pages||[]).map(p=>{
     const label = p.label ? esc(p.label)
       : `${p.bracket==="raid"?"Raid":p.bracket==="mplus"?"M+":""}${p.role && p.role!=="All" ? " · "+esc(p.role) : ""}`;
@@ -2767,10 +2800,22 @@ document.getElementById('srclist').innerHTML = SOURCES.filter(s=>Array.isArray(s
       : FROZEN_SOURCES.has(src.id)
         ? `<span class="lagchip" title="This page has already moved to ${esc(nextLabel)}. Its ${esc(PHASE.liveLabel)} letters are frozen at the last date it described ${esc(PHASE.liveLabel)}, and those are what the consensus averages — never the ${esc(nextLabel)} ones.">final ${esc(PHASE.liveLabel)} letters</span>`
         : `<span class="lagchip" title="This page already describes ${esc(nextLabel)}, which we are not running yet — its letters are held out of the ${esc(PHASE.liveLabel)} consensus and feed the 12.1 forecast instead">already on ${esc(nextLabel)}</span>`;
+    if(lag) flagged++;
     return `<div class="srcitem">${link}${lag}<span class="when">${when}</span></div>`;
   }).join("");
   const kind = src.kind!=="tier-list" ? ` <span class="mnote">· ${esc(src.kind)}</span>` : "";
-  return `<div class="srcgroup"><span>${esc(src.name)}${kind}</span><span class="how">${esc(src.author||"")}</span></div>${pages}`;
+  /* One line per outlet, its pages folded underneath — 68 rows was 2,185px and the single
+     largest block left in the footer (audit 2026-08-22).
+     A source with an out-of-step page stays OPEN: its .lagchip is an honesty marker and
+     must not be something you have to go looking for. Deliberately not copied onto the
+     summary — exactly one chip per out-of-step page is a pinned invariant. */
+  const dates = (src.pages||[]).map(p=>p.snapshot).filter(Boolean).sort();
+  const freshest = dates.length ? dates[dates.length-1] : null;
+  const stale = !!(freshest && META.latestSnapshot && freshest < META.latestSnapshot);
+  const n = (src.pages||[]).length;
+  return `<details class="srcfold"${flagged ? " open" : ""}>
+    <summary><span class="srcname">${esc(src.name)}${kind}</span><span class="how">${esc(src.author||"")}</span><span class="mnote srccount">${n} page${n===1?"":"s"}</span><span class="when${stale?" stale":""}">${freshest?esc(freshest):"—"}</span></summary>
+    ${pages}</details>`;
 }).join("");
 
 /* ---------- footer: 12.1 PTR build feed ---------- */
@@ -3058,6 +3103,64 @@ function openCompare(){
   cmpOv.classList.add("open"); replayEntrance(cmpOv); document.body.style.overflow = "hidden";
   setTimeout(()=>cmpOv.querySelector("#cmp-close").focus(), 0);
 }
+
+/* ---------- the legend sheet ----------
+   Same shell, focus handling and Escape as the Ladder and Compare all. The content is
+   CLONED from #legendwrap rather than duplicated in source: one legend, two presentations,
+   so the sheet can never drift from the inline one. */
+(function(){
+  const btn = document.getElementById("legendbtn");
+  const src = document.getElementById("legendwrap");
+  if(!btn || !src) return;
+  const ov = document.createElement("div");
+  ov.className = "finder-ov"; ov.id = "legend-ov";
+  document.body.appendChild(ov);
+  let opener = null;
+
+  function render(){
+    const body = document.createElement("div");
+    for(const node of src.children){
+      if(node.tagName === "SUMMARY") continue;
+      body.appendChild(node.cloneNode(true));
+    }
+    const note = document.querySelector(".note.standalone");
+    ov.innerHTML = `<div class="finder-panel legend-panel" role="dialog" aria-modal="true" aria-label="Legend">
+        <div class="finder-hd"><h2 class="finder-t">Legend</h2>
+          <button class="finder-x" id="legend-close" type="button" aria-label="Close legend">✕</button></div>
+        <div class="legend-sheet"></div>
+      </div>`;
+    ov.querySelector(".legend-sheet").appendChild(body);
+    if(note){
+      const p = document.createElement("p");
+      p.className = "mnote"; p.style.margin = "12px 0 0";
+      p.textContent = note.textContent.replace(/\s+/g, " ").trim();
+      ov.querySelector(".legend-sheet").appendChild(p);
+    }
+    ov.querySelector("#legend-close").onclick = close;
+  }
+  function open(){
+    opener = document.activeElement;
+    render();
+    ov.classList.add("open"); replayEntrance(ov);
+    document.body.style.overflow = "hidden";
+    const c = ov.querySelector("#legend-close"); if(c) setTimeout(()=>c.focus(), 0);
+  }
+  function close(){
+    ov.classList.remove("open"); document.body.style.overflow = "";
+    if(opener && opener.focus) opener.focus();
+  }
+  btn.addEventListener("click", open);
+  ov.addEventListener("click", e=>{ if(e.target === ov) close(); });
+  document.addEventListener("keydown", e=>{ if(e.key === "Escape" && ov.classList.contains("open")) close(); });
+  ov.addEventListener("keydown", e=>{
+    if(e.key !== "Tab" || !ov.classList.contains("open")) return; // focus trap, as the others
+    const f = [...ov.querySelectorAll('button, a[href], [tabindex="0"]')];
+    if(!f.length) return;
+    const first = f[0], last = f[f.length-1];
+    if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+    else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+  });
+})();
 
 /* ---------- floating utility corner: back-to-top + close-all-drawers ---------- */
 const utilBar = document.createElement('div'); utilBar.className = 'utilbar'; document.body.appendChild(utilBar);

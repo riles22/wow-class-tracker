@@ -389,6 +389,31 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   `.dfold-full` rather than being demoted to a `title=`, which is the exact failure this
   audit exists to fix. `.dfold .dfold-dupe` is two classes deep on purpose — `.watch b` sets
   `display:block` and outranks a single class.
+- **The legend is reachable from the top** (audit stage 4). The stage-3 reading order moved
+  `#legendwrap` BELOW the grid, so on a first visit the glyphs arrived before their key —
+  which made the `? Legend` button in the controls row load-bearing rather than a nicety.
+  The sheet reuses the `.finder-ov` shell (inheriting the dialog role, focus handling, trap
+  and Escape the other three overlays already had) and CLONES the children of
+  `#legendwrap` rather than restating them: one legend, two presentations, so the sheet
+  cannot drift from the inline one. The inline block stays exactly where it is — it still
+  remembers its own toggle, which is a pinned invariant.
+- **The controls fold can no longer strand itself** (audit stage 4). `.ctlsum` is
+  `display:none` at >=760px, and the fold's open state is DOM state no media query can
+  reach, so the only route back was a matchMedia change event; observed once at 1440px with
+  `.controls` 25px tall and every filter, the search and both overlay buttons unreachable.
+  `@media(min-width:760px){ .ctlfold:not([open]) > .ctlsum{display:flex} }` makes it
+  self-healing — a visible control beats a correct-looking but unusable toolbar.
+- **The source list folds per outlet** (audit stage 4): one summary line (name, author, page
+  count, freshest date, gold when behind `META.latestSnapshot`) with the pages underneath.
+  68 rows was 2,185px and the largest block left in the footer; it is 842px now, and the
+  footer 1,374px of a 3,728px document — against 7,200px of 10,533px before the audit.
+  **A source with an out-of-step page defaults to OPEN.** Its `.lagchip` is an honesty
+  marker and must not be something you go looking for — and the chip is deliberately NOT
+  copied onto the summary, because exactly one chip per out-of-step page is a pinned
+  invariant that a duplicate would break.
+  ⚠️ **The working tree is CRLF** (git autocrlf rewrites it on checkout/merge), so any patch
+  script matching multi-line anchors must normalise its newlines to the file's or it
+  silently finds 0 matches. This cost a cycle in stage 4.
 - **Between-cycles copy residue** (same audit, stage 3). All keyed on `PHASE.ptr` so they
   self-heal when the next cycle opens, rather than on data that has to be remembered:
   the masthead stamp says **"Latest class tuning"** rather than "Latest PTR build" when there
