@@ -587,6 +587,29 @@ try {
     color:var(--accent-2); border:1px solid var(--edge-2); border-radius:5px; padding:2px 8px; margin-bottom:9px
   }
   .d-h{font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-faint); margin:0 0 8px}
+  /* Drawer accordion (2026-08-22). Every section is still present — folding it is what
+     took one open spec from 4,443px to roughly a screen. <details> rather than tabs so
+     find-in-page and a whole-read screenshot still reach the content. */
+  .dfold{border-bottom:1px solid var(--hair)}
+  .dfold:last-child{border-bottom:0}
+  .dfold > summary{
+    font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--ink-dim); cursor:pointer; list-style:none;
+    display:flex; align-items:center; gap:7px; padding:8px 0
+  }
+  .dfold > summary::-webkit-details-marker{display:none}
+  .dfold > summary::before{content:"▸"; font-size:9px; color:var(--accent); transition:transform .15s}
+  .dfold[open] > summary::before{transform:rotate(90deg)}
+  .dfold > summary:hover{color:var(--ink)}
+  .dfold > summary:focus-visible{outline:2px solid var(--accent-2); outline-offset:2px; border-radius:3px}
+  .dfold[open]{padding-bottom:8px}
+  /* the original heading became the summary; keep it for find-in-page, hide the duplicate */
+  /* two classes deep on purpose: .watch b sets display:block and would otherwise win */
+  .dfold .dfold-dupe{display:none}
+  /* a heading the summary had to truncate keeps its full text, quietly, inside the fold */
+  .dfold-full{letter-spacing:.04em; text-transform:none; color:var(--ink-mute); font-size:10.5px; line-height:1.45}
+  html[data-reduce-motion="true"] .dfold > summary::before{transition:none}
+  @media(pointer:coarse){ .dfold > summary{min-height:44px} }
   .d-list{margin:0 0 12px; padding:0; list-style:none}
   .d-list li{position:relative; padding-left:16px; margin-bottom:6px; font-size:13px; color:var(--ink)}
   .d-list li::before{content:"›"; position:absolute; left:2px; color:var(--accent); font-weight:700}
@@ -2373,8 +2396,64 @@ function setSort(key){
 /* Drawers open lazily and survive re-renders (keyed class|spec). One delegated
    listener pair on #matrix replaces 40 per-row pairs re-created every render. */
 const openRows = new Set();
+/* Sections that are the ANSWER, not the archive — never folded. */
+const DRAWER_ALWAYS_OPEN = new Set(["d-summary", "cmpbtn", "gearlink"]);
+
+/* Group a drawer column's children into [heading, ...content] runs and wrap each run in a
+   collapsed <details>. Two shapes exist and both must work:
+     - a block that CONTAINS its own .d-h (.d-sec, .metrics, .srcbreak) -> wrap it alone
+     - a BARE .d-h followed by its content siblings (.d-h + .setbox) -> wrap the run
+   Anything with no heading at all is left exactly where it is. */
+function foldDrawerColumn(col){
+  const kids = [...col.children];
+  const groups = [];
+  let cur = null;
+  for(const el of kids){
+    const cls = [...el.classList];
+    if(cls.some(c => DRAWER_ALWAYS_OPEN.has(c))){ cur = null; groups.push({ open:true, els:[el] }); continue; }
+    const bareHeading = el.classList.contains("d-h");
+    /* .watch labels itself with a <b> rather than a .d-h, so without this it is swallowed
+       into whichever fold precedes it — it landed under "Season 2 tier set". */
+    const ownHeading = !bareHeading && (el.querySelector(":scope .d-h")
+      || (el.classList.contains("watch") ? el.querySelector(":scope > b") : null));
+    if(bareHeading){ cur = { open:false, head:el, els:[el] }; groups.push(cur); continue; }
+    if(ownHeading){ groups.push({ open:false, head:ownHeading, els:[el] }); cur = null; continue; }
+    if(cur) cur.els.push(el); else groups.push({ open:true, els:[el] });
+  }
+  for(const g of groups){
+    if(g.open || !g.head) continue;
+    const full = (g.head.textContent || "").replace(/\s+/g, " ").trim();
+    if(!full) continue;
+    /* Cut at the first parenthetical / dash / middot — that is where these headings stop
+       naming the section and start explaining it. */
+    const brk = full.search(/\s[—(·]/);
+    // >=6, not >12: "Timeline (" breaks at 8 and "Meta outlook (" at exactly 12, so a
+    // higher floor left both explaining themselves in the summary line.
+    let label = brk >= 6 ? full.slice(0, brk).trim() : full;
+    if(label.length > 58){
+      const sp = label.lastIndexOf(" ", 58);
+      label = label.slice(0, sp > 20 ? sp : 58).trim() + "…";
+    }
+    const d = document.createElement("details");
+    d.className = "dfold";
+    const sum = document.createElement("summary");
+    sum.textContent = label;
+    d.appendChild(sum);
+    col.insertBefore(d, g.els[0]);
+    for(const el of g.els) d.appendChild(el);
+    /* Only a heading the summary fully restates is a duplicate. A truncated one still
+       carries the explanation, so it stays on screen once the section is open — never
+       demoted to a title=, which is the failure this audit exists to fix. */
+    if(label === full) g.head.classList.add("dfold-dupe");
+    else g.head.classList.add("dfold-full");
+  }
+}
+
 function fillDrawer(row){
-  row.querySelector('.drawer').innerHTML = drawerHTML(SPECS[+row.dataset.idx]);
+  const host = row.querySelector('.drawer');
+  host.innerHTML = drawerHTML(SPECS[+row.dataset.idx]);
+  const grid = host.querySelector('.drawer-grid');
+  if(grid) for(const col of grid.children) foldDrawerColumn(col);
 }
 function toggleRow(row){
   const s = SPECS[+row.dataset.idx];

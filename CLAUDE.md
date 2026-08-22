@@ -355,6 +355,51 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   `contain-intrinsic-size` is re-measured: **22px desktop** (real content 24) and **60px card**
   (real 67) — deliberately low, per the rule above that over-estimating shrinks the document
   under the reader and skips rows.
+- **Page weight and reading order** (same audit, stage 3). Measured before: the desktop
+  document was **10,533px**, of which the footer was **7,200px (68%)** and the grid 22%; the
+  first spec row sat at **890px**, the whole fold on a 1366x768 laptop. After: **5,382px**,
+  footer 50%, grid 31%, first row at **637px**.
+  Three changes got there.
+  (a) **The data-first reading order is no longer phone-only.** The `order` block that fixed
+  the phone in Aug 2026 now lives on `.wrap` at every width. Visual order only — DOM order is
+  untouched, so the movers-after-caveat invariant still holds — and what stays ABOVE the grid
+  is still exactly the honesty surfaces plus the 0-100 note.
+  ⚠️ **`.wrap` is now a flex column, and that has a cost that bit once.** Flex items default to
+  `min-width:auto`, so a child holding an unshrinkable run of text can push itself wider than
+  `.wrap` — which block children never could. `.foot-grid`'s bare `1.1fr .9fr` then sized to
+  content and went **582/476 -> 277/916**, wrapping every source row to four lines. Tracks are
+  `minmax(0,...)` now and `.wrap > *` carries `min-width:0`. Any new full-width child with
+  `white-space:nowrap` inside needs the same care.
+  (b) **The patch feed is a dated INDEX.** Each entry was rendering its stored `label`, which
+  is a paragraph and not a title — `#buildfeed` alone was 6,535px. The headline is capped on a
+  word boundary with the full text in the `title`, and everything past `FEED_OPEN` (4) folds.
+  6,535 -> ~700px.
+  (c) **The spec drawer is a collapsed accordion**, 4,443px -> ~350px with everything folded.
+  Riley chose `<details>` over tabs specifically so find-in-page and a whole-read screenshot
+  still reach the content — every section is PRESENT, just closed.
+  **The fold is applied in the DOM after assembly (`foldDrawerColumn`), not at the fifteen
+  emit sites, and that is deliberate**: the sections are heterogeneous siblings — `.d-sec`,
+  `.metrics` and `.srcbreak` carry their own `.d-h` INSIDE, while `.setbox` is preceded by a
+  BARE `.d-h` sibling and `.watch` labels itself with a `<b>`. One pairing pass handles all
+  three shapes; fifteen string edits would not have. Three traps it encodes:
+  `.watch` must be recognised explicitly or it is swallowed into the fold above it; the
+  summary label cuts at the first ` —`/` (`/` ·` with a floor of **6** characters (a floor of
+  12 leaves "Timeline (" and "Meta outlook (" explaining themselves in the summary); and a
+  heading the summary had to TRUNCATE keeps its full text visible inside the fold as
+  `.dfold-full` rather than being demoted to a `title=`, which is the exact failure this
+  audit exists to fix. `.dfold .dfold-dupe` is two classes deep on purpose — `.watch b` sets
+  `display:block` and outranks a single class.
+- **Between-cycles copy residue** (same audit, stage 3). All keyed on `PHASE.ptr` so they
+  self-heal when the next cycle opens, rather than on data that has to be remembered:
+  the masthead stamp says **"Latest class tuning"** rather than "Latest PTR build" when there
+  is no PTR (a live tuning post falls back to `kind: "build"`, so the kind alone could not
+  tell — this was the mislabel render.mjs's own residue note exists to catch); the footer
+  heading is a **"patch feed"** between cycles; the **"PTR verdict" sort option hides** when
+  the era filter is rendering no verdict chips; the lede states **both bracket counts** when
+  the consensus is split, because a single figure contradicted the toolbar two rows below it;
+  and the movers strip reframes from "Into 12.1" to **"Forecast vs. live consensus"** once the
+  forecast is frozen, labelled **"not yet a grade"** — week-one tier lists churn hard and the
+  report card only scores after `SETTLE_DAYS`, so a verdict there would overclaim.
 - **Accessibility baseline** (same audit, stage 1). `.wrap` is `<main id="main">` with a
   focus-revealed `.skiplink`; the footer stays INSIDE main because the phone reading order is
   a flex `order` on `.wrap` and moving it out would break that, so it carries an explicit
