@@ -926,9 +926,20 @@ ui("a shared overlay link opens on the linked bracket, role and sort", async pag
 ui("a spec with takes but no writeup says what IS known, not 'pending'", async page => {
   const data = payload();
   const takes = data.creatorTakes?.takes ?? [];
+  // The fixture must follow the era vocabulary, not outlive it. Pre-flip every live take
+  // said "PTR" in its patchContext, so filtering on that picked an era-relevant take. Since
+  // the 2026-08-18 launch, watch-creators writes post-launch takes as "Season 2 live — …"
+  // by rule, so that filter goes empty the moment the last PTR-era take on the writeup-less
+  // spec is superseded — which is exactly what a correct supersede does. It happened on
+  // 2026-08-22, when Kalamazi's 08-17 Demonology reads (the only writeup-less spec's only
+  // live takes) were replaced by his live-era August 25 tuning reads. Requiring "PTR" while
+  // a cycle is open keeps the original selection; requiring only a LIVE take between cycles
+  // keeps the invariant testable instead of quietly asserting a stale era.
+  const eraOk = data.meta.phases.ptr
+    ? t => (t.patchContext || "").includes("PTR")
+    : () => true;
   const bare = data.specs.find(s => !s.ptr &&
-    takes.some(t => t.class === s.class && t.spec === s.spec && !t.superseded &&
-      (t.patchContext || "").includes("PTR")));
+    takes.some(t => t.class === s.class && t.spec === s.spec && !t.superseded && eraOk(t)));
   assert.ok(bare, "expected a writeup-less spec that carries takes");
   const text = await page.evaluate(([cls, spec]) => {
     const row = [...document.querySelectorAll(".row.clickable")].find(r =>

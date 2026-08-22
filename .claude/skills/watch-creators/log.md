@@ -16,6 +16,71 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-22 (LOCAL run, ~16:1x-16:4xZ — scheduled residential catch-up, ~5h after the nightly) — queue DRAINED 7 → 0: 7 takes, 14 metaNotes, 1 verified skip, 2 retired
+
+**Every queued video resolved this run — nothing handed forward.** The nightly (11:20Z) had done
+discovery and queued 5; two older ids it reported as Supadata `unavailable` turned out to have no
+caption track at all, which is a durable fact and closes that loop rather than re-spending requests
+on it every night.
+
+- **TRANSCRIPTS (yt-dlp, residential, pinned 2026.07.04):** 5 of 7 returned auto-captions on the
+  first pass, paced with `--sleep-requests 1.5`, **no 429 of either kind**. The two failures were
+  probed with `--list-subs` (never rate-limited) and both answered *"has no automatic captions /
+  has no subtitles"* — `POENnO-sGog` (Shadarek, Nemesis delve-boss kill) and `1LfW9JXNRsI`
+  (Harrek, delve boss solo). No caption track of any kind is the durable shape SKILL.md names for
+  `seen[]`, so both left `videos[]` for it. This also explains the nightly's Supadata
+  `unavailable` on the same two ids: there is nothing upstream to fetch, and left queued they
+  would have spent a request a night against a 100/month budget (the `bqVHzvKJCuA` precedent).
+- **DISTILLED 4 videos → 7 takes + 14 metaNotes, every one superseding exactly one prior live
+  record (7 and 14, 1:1, no over- or under-supersession):**
+  - `sIu3Kjo8ggI` **Shadarek** → Havoc `buff` and Devourer `mixed`, both `both`. Havoc takes the
+    flat 3% aura buff he says lands where he hoped; Devourer is the one DH spec the August 25 pass
+    does not touch and his Void's Guard/Annihilator recommendation is unchanged.
+  - `BdzA4HWaUSc` **Kalamazi** (filmed at the RWF venue) → Affliction raid `mixed`, Demonology
+    raid + M+ `buff`, Destruction M+ `buff`. **No Destruction RAID take was written**: he says the
+    pass changes little for Destruction in raid, which does not revise his 08-17 raid read, and
+    inventing a `neutral` there would have retired a live take to record a non-change.
+  - `y77i8M9dCSw` **NeekapHere** → Retribution `buff`, `both`. He is explicit it is *only a
+    moderate* raid and M+ buff that puts Ret where you would normally expect to find it.
+  - `OyIp5Ua0Qo4` **izen** → **14 M+ metaNotes** (week-one representation checked against his own
+    pre-season predictions). Curated against the popularity-is-not-power rule: Beast Mastery and
+    Demonology are logged `negative` precisely *because* he separates their high early
+    representation from their power placement, and Windwalker/Outlaw `positive` because he defends
+    them against low early numbers. **Dropped as list-mentions or single-data-point artifacts:**
+    Retribution (its clause turns on an ASR token that could be "Ret" or "Wrath"), Assassination
+    ("the highest key so far was done by one"), Brewmaster/Feral (membership in one comp),
+    Preservation (bare tier placement), Frost/Unholy DK (a comp-conflict aside). **No raid
+    metaNotes** — he says the raid picture is still under construction.
+- **VERIFIED SKIP: `xHUTjrulyrA` (Supatease, "12.1 Class Tuning Did Your Spec Survive?")** →
+  `skipped[]`. The nightly queued it deliberately to settle by transcript rather than by title, and
+  the transcript settles it: the PvE half is note-reading with almost no evaluation, and every
+  directional opinion is in the notes' PvP section, which he works through as a PvP player. Nothing
+  falls in his registered scope either. Same answer as `kGsd9cMmBCc` the same day — two Supatease
+  tuning videos, both PvP-lens, both settled by transcript and not by title.
+- **VERIFICATION PASS (read-only, against each video's own captions) changed three claims before
+  commit** — worth recording because all three are the ASR failure modes SKILL.md names:
+  (a) Shadarek's *"I think with with it's going to be a lot more competitive now too"* has no
+  recoverable referent, so the clause was dropped rather than guessed; (b) Kalamazi said "other
+  **classes** get nerfed", not specs; (c) the Destruction M+ take's *"30% on 15% of your damage"*
+  figure and its *"doubt this puts them in meta"* line both sit inside an unscripted exchange with
+  people at the venue — **ASR gives no speakers**, so both were removed and the ceiling is now
+  reported as left open rather than attributed to him. What survives rests only on first-person,
+  self-anchored lines.
+- **`latest` advanced for all four distilled creators** (Shadarek, Kalamazi, NeekapHere, izen) to
+  what this run actually established, not to a bare title. `verifiedDate` deliberately NOT touched:
+  across the registry it lags `latest`, so it means "entry/link last verified", and advancing it
+  would have quietly redefined the field.
+- **One test fixture fixed, and it is an era-vocabulary bug rather than a data problem.**
+  `ui-invariants` *"a spec with takes but no writeup"* selected its fixture with
+  `patchContext.includes("PTR")`. Demonology Warlock is the only writeup-less spec, and
+  superseding Kalamazi's 08-17 PTR-era reads with correct **live-era** 08-22 ones emptied that
+  filter — the fixture assumed a vocabulary the 2026-08-18 era-framing rule retired. Its assertion
+  body already branches on `PHASES.ptr`; the selector now does too (PTR filter while a cycle is
+  open, any live take between cycles). The invariant is unchanged and all 26 UI invariants pass
+  under real Playwright.
+- No creator showed coverage outside their registered specs, so nothing is flagged for widening.
+  `pending-transcripts.json`: **videos 7 → 0**, skipped 407 → 408, seen 541 → 543.
+
 ## 2026-08-22 (nightly) — 1 transcript read → 0 takes (PvP), 5 queued, 44 channels clean
 
 **Discovery clean; the one transcript available this run was a PvP stream, so it yielded nothing
@@ -157,6 +222,7 @@ now); SKILL.md and the log line are fixed, the commit message stands because his
 rewritten. The `x0fxEWTq3Pw` figure of 24 was checked at the same time and is correct.
 The `1167 → 1167` seen-set measurement is now labelled as what it is — a reading taken across
 the fix, not a constant. It is 1176 after tonight's nightly, and it grows with the roster.
+
 ## 2026-08-21 (cross-lane collisions — SEVEN, not two; validation gap closed)
 
 **The two I reported were a sample, not the set.** Measuring every lane pair before writing
@@ -199,6 +265,7 @@ validate.mjs did is closed.
   red (`not ok 19`), restoring them makes it green. It also asserts the committed file is clean,
   so it reds if the lanes drift apart again. `src/validate.mjs` is CODEOWNERS-owned
   (`@riles22`), so this is a reviewed code edit and its own commit.
+
 ## 2026-08-21 (re-open — the six scope-conditional Musguete skips)
 
 **Five of six yielded a Subtlety take; all five land SUPERSEDED. The sixth is now a settled
@@ -1060,381 +1127,6 @@ unchanged at 12 against an exhausted budget — fetch broadly, queue narrowly.
 `yt-dlp` tried ONCE for metadata on `bqVHzvKJCuA` and hit the expected datacenter bot wall ("Sign
 in to confirm you're not a bot"); not retried, nothing installed or upgraded. Note for a local
 run: `media:description` settled most of tonight's triage at zero transcript cost again.
-
-## 2026-08-15 (nightly, 21:50 UTC — second run of this UTC day)
-
-**Discovery clean, distillation impossible.** `transcript-fetch/summary.json` reports verdict
-`limit-exceeded` (requested 1, fetched 0, `bqVHzvKJCuA`): the Supadata free-tier monthly budget
-is spent, so there was no transcript to distil and **0 takes / 0 metaNotes** were added. No
-YouTube or transcript-API fetch was made by this agent.
-
-RSS: all **44** unique channel feeds polled with backoff, 44/44 HTTP 200, **660** entries
-scanned against a **1035-id** seen-set built from the four structured lanes (`seen[]`,
-`skipped[]`, `videos[]`, plus every `youtu.be` id in creator-takes.json) — never by regex over
-this log. **17 unseen.**
-
-- **1 retired to `seen[]`** as a durable dismissal: `80dIIds3qPM` (Dalaran Gaming, "What Did
-  Blizzard Do To ROGUES In 12.1? (5v5 1v1 Duels) - PvP"). Explicit PvP frame = permanently out
-  of scope, the same shape as `oUjUd8kcWew` retired earlier today.
-- **0 queued.** The queue already holds 12 against an exhausted monthly budget, and everything
-  else tonight is guide/route-shaped (Tactyks S2 routes, Sha's Temple of Sethraliss route,
-  Megasett's Mistweaver M+ guide, Baze's Fury guide, Dalaran's Assassination guide), stream- or
-  Short-shaped (Tettles ×2, Critcake, Kalamazi, NeekapHere, a Megasett achievement Short,
-  Maximum's live AWTF test stream), raw footage (Harrek's Dummy Dome healer pulls), or a
-  Supatease upload whose channel reads PvP by default.
-- **16 left UNSEEN on purpose.** None of those judgments is durable, so they stay
-  reconsiderable by a local run with yt-dlp rather than being marked off.
-
-The one genuine borderline: `mzjGn70Hf20` (AutomaticJak, "Updating Tier Lists then M0s! | UI in
-description!"). A tier-list update is the highest-value take shape, but this one is
-stream-shaped and the same creator's *dedicated* tier-list video from the same day
-(`c_5u7Jpy-Uo`, "Healer Tuning AND Tier List Updates for M+/Raid Season 2 Launch") is already
-queued — so queueing it would likely spend a second request on duplicate content. Left unseen.
-
-yt-dlp was tried **once**, to settle that video's duration/live status, and hit the expected
-datacenter bot wall ("Sign in to confirm you're not a bot"); not retried, per the standing
-back-off rule. That is also why `bqVHzvKJCuA` — still the suspected live stream first flagged
-on 08-09 — was left queued rather than purged on a guess. No creator `latest` advanced, since
-nothing was distilled.
-
-## 2026-08-15 (nightly)
-
-**Two independent degradations tonight, both recorded rather than worked around.**
-
-1. **Transcripts: `limit-exceeded` again.** `transcript-fetch/summary.json`
-   (2026-08-15T04:58:38Z) — 1 requested / 0 fetched on `bqVHzvKJCuA`, "remaining queue
-   untouched". Supadata's free tier is 100 requests per MONTH and the budget is spent. **Zero
-   takes, zero metaNotes** added, changed or superseded; no transcript was fetched by this
-   agent by any means.
-2. **NEW: the YouTube RSS endpoint is 404-walled from this runner.**
-   `youtube.com/feeds/videos.xml?channel_id=…` returned 404 for **40 of 44** channels and did
-   **not** clear across four rounds with backoff over ~10 minutes — so this is not the
-   documented transient burst. Discovery was completed with the preinstalled **yt-dlp at its
-   `requirements.txt` pin (2026.07.04 — never installed or upgraded in-run)**:
-   `--flat-playlist --playlist-end 15 --extractor-args "youtubetab:approximate_date"` over each
-   channel's `/videos` tab. **44/44 channels enumerated, 0 failures, 652 videos.**
-
-- Seen-set rebuilt from the four structured lanes: **1011 ids**. 134 unseen; **31** date at or
-  after the cycle's opening build (2026-06-18).
-- **Queued 16** (queue 27 → **43**): six same-day reactions to tonight's Aug-18 tuning post —
-  Shadarek (Devourer tier set), Nintern (Devourer), MadSkillzzTV (healer buffs/nerfs), Preheat
-  (Arcane), Supatease, Dratnos — plus ten older 12.1 / Season-2 spec pieces from MadSkillzzTV,
-  AutomaticJak, Megasett, Shindigg, Musguete and Bansherz.
-- **NOTHING was written to `seen[]` this run, deliberately.** `approximate_date` is day-precise
-  only for recent uploads and rounds older ones to mid-month — the 103 apparently pre-cycle
-  videos cluster implausibly on the 15th of each month. `seen[]` is durable, so retiring them on
-  an approximate date would permanently dismiss videos we never actually dated. They stay
-  unexamined and will be reconsidered next run. **If RSS stays down, this is the cost to watch:
-  the seen-set stops growing and the same 100+ videos are re-enumerated nightly.**
-- No `generalCreators` (izen / Maximum / Zorthas) uploads were unseen this run, so no `latest`
-  fields moved and `community.json` is untouched.
-- Coverage recomputed: every spec holds at least one live take; **Brewmaster Monk** is still the
-  only spec with no RAID-scoped one, and nothing queued tonight is Brewmaster.
-
-## 2026-08-15 (nightly CI, headless Opus 5, single-shot; started 10:57Z — SECOND run of this UTC day)
-
-**ZERO takes and ZERO metaNotes added, changed or superseded — the transcript budget is
-spent.** `transcript-fetch/summary.json` (2026-08-15T10:57:18Z) reports verdict
-**`limit-exceeded`** on the single video it attempted (`bqVHzvKJCuA`), 1 requested / 0
-fetched, "remaining queue untouched": Supadata's free tier is **100 requests per MONTH** and
-the month's budget is gone, third night running. No transcript was readable, and this agent
-fetched none from YouTube or any transcript API by any means.
-
-**RSS IS BACK.** Last night's 404 wall (40 of 44 channels, four rounds of backoff over ~10
-minutes, worked around with yt-dlp) did not recur: `youtube.com/feeds/videos.xml` answered
-**44/44 channels on the first attempt**, 660 videos enumerated, 0 failures. That confirms it
-was the documented transient burst after all, just an unusually long one — yt-dlp stays the
-fallback, not the default.
-
-Seen-set rebuilt from the four STRUCTURED lanes (never a regex over this log): `seen[]` 502 +
-`skipped[]` 295 + `videos[]` 43 + every `youtu.be/<id>` in a take or metaNote = **1027 ids**.
-Against it, **14 unseen videos**, all 14 published on or after the 12.1 cycle's opening build
-(2026-06-18, the OLDEST date in `ptr-builds.json` — taken as a date, never as an index). The
-sweep is this small precisely because RSS dates are exact tonight, so nothing needed the
-approximate-date caution the yt-dlp run had to record.
-
-**8 queued** under the nightly keyword filter (queue 43 → **51**), all 08-14/08-15 uploads:
-Preheat's 12.1 Arcane Mage guide (`ajdnU9EAGtU`, the highest-value item), Supatease "12.1
-CLASS TESTING POWER" (`VdxJLYndJSg`), Bansherz "Friday Tuning" Hunter stream (`tFU5qCIEUF8`),
-MadSkillzzTV on the Resilient key system (`E2YySmAwnuM`), Shadarek with a Havoc-guide stream
-(`nTMq3Y3U14Y`), Shindigg 12.1 launch stream (`kxujYlK8KG8`), and two LBNinja7 Mistweaver
-streams (`Qu5OGUGRZPM`, `FdMtgWW4oIk`). They drain when the monthly budget resets or in a
-local run.
-
-**6 NOT queued, and none of them written to `seen[]`** — this is deliberate. The lane exists
-for videos dismissed on a DATE bound or a newest-first cut; a *keyword* dismissal is a
-nightly-only economy (Supadata's monthly quota), and burning it into `seen[]` would
-permanently retire the video from the unfiltered LOCAL sweep, which is exactly the breadth
-the 08-08 policy bought. Left unexamined for a local run: Kalamazi "Main/Alt Gearing and Prep"
-(`mMPBLggVX3E` — a Warlock authority on S2 gearing; the best of the six), Tettles
-`Nk8WpSLYCVo`, Maximum "live from AWTF test stream" (`x27SdcsuiMU`), NeekapHere on the Coiled
-Isle (`l6KzJBK6vrs`, zone content), Megasett achievement short (`f0DnTRIO3pw`), and Dalaran
-Gaming "Demon Hunters Are BACK With Vengeance In 12.1! (5v5 1v1 Duels)" (`oUjUd8kcWew`) —
-that last one matches the keyword filter but is **PvP duel content, out of scope for this PvE
-tracker**, the same scope line ptr-watch applies to PvP-only tuning lines.
-
-No `generalCreators` (izen / Maximum / Zorthas) upload was in scope this run — Maximum's only
-new video is the AWTF PvP test stream — so no `latest` field moved and `community.json` is
-untouched.
-
-Coverage recomputed: every spec holds at least one live take; **Brewmaster Monk** is still the
-only spec with no RAID-scoped one, and nothing queued tonight is Brewmaster.
-
-## 2026-08-15 (local run, evening) — the 51-video queue drained with yt-dlp
-
-The reason this run exists. Supadata's free tier has been `limit-exceeded` for three straight
-nights, so the nightly added to `pending-transcripts.json` without ever draining it and the
-queue had grown to **51**. yt-dlp from the residential IP fetched **45 of 51** on the pinned
-2026.7.4 build with no extractor rot.
-
-**6 could not be fetched and stay queued** — not skipped, because none was transcript-verified:
-`bqVHzvKJCuA` (Sha) and `U_bAsRSY5Y4` (Megasett) both return "This live event will begin in a
-few moments", and four have no captions published yet (`vbYnrLDqHoc` Nintern, `tFU5qCIEUF8`
-Bansherz, `nTMq3Y3U14Y` Shadarek — all 08-15 uploads where auto-captions may still be
-processing — plus `JFEqnHV99uk` Musguete from 07-15, which is a month old and probably never
-getting them). Queue **51 → 6**.
-
-**12 takes added, 11 superseded**, from 7 videos. Coverage recomputed after the merge with the
-two-line recomputation, and the headline is that **`no raid take` is now empty**: Sha's Season 2
-plans video (`im6DkjkRDlw`) carries a substantial raid-scoped Brewmaster read — the Celestial
-Brew/Infusion cooldown doubling, argued structurally against the apex-talent proc loop — which
-closes the one RAID-scoped gap this log has been carrying. Brewmaster raid confidence moved
-**low → medium** as a result; it was previously a cell with no PTR-aware evidence at all.
-
-Other takes: YoDaTV's log-based Prot Paladin M+ argument (Sentinel uptime 38% → 25-31%),
-Shadarek on the Devourer tier-set gutting with pre-APL sim overrides, Preheat quantifying the
-Arcane nerf at 4.7% ST / 2.5% AoE, MadSkillzzTV's five-healer walkthrough of the August 18
-tuning (Resto Druid, Mistweaver split raid/M+, Disc raid, Holy Priest), Dratnos on Fury and
-Arms, and Pkpawner on the Windwalker AoE-burst pullback.
-
-**Net effect on published letters: zero.** 16 projection scores moved by 1-3 points in the
-direction of the takes, and **no projection or consensus letter crossed a band** — shrinkage
-plus the one-edge clamp working as designed.
-
-**38 verified-skipped**, which is the point of the unfiltered local sweep: the title is a bad
-predictor in both directions. Notable earned skips — Tactyks' "Venomous Abyss TANK TIPS" is a
-pure encounter-mechanics guide with zero strength language despite reading like tank analysis;
-Kalamazi's "COIN & CRAFT", flagged by last night's nightly as "the best of the six" unexamined,
-turns out to be a gearing/embellishment guide with no spec read; and Preheat's full Arcane guide
-(`ajdnU9EAGtU`) was recorded BEFORE the nerf he reacts to in `ekZp5FfWXfg`, so distilling it
-would have recorded a superseded state. Both Supatease "class testing" streams were skipped on
-measured framing rather than vibe (197 PvP references against 73 PvE in one; 36 against 14 in
-the other) — battleground testing is out of scope for a PvE tracker.
-
-**Three scope-review flags for a human — none acted on, per the skill's "note it, don't
-silently override" rule:**
-1. **YoDaTV competently analyses Balance Druid** (`9SUfTFMcRJk`) — a log-driven argument that
-   Moonkin is weak in Season 2 M+, using a world-class Moonkin's parse. Balance is outside his
-   declared Druid scope (Guardian only), so the take could not be written. This is the single
-   highest-value blocked distillation of the run.
-2. **Sha ranges well beyond Brewmaster** in `im6DkjkRDlw` — competent reads on Windwalker,
-   Blood DK, Prot Warrior and Prot Paladin, including an explicit disagreement with YoDaTV's
-   Wowhead tank list placing Prot Warrior weakest. Only the Brewmaster half was distilled.
-3. **Supatease's authority looks PvP-shaped.** He holds 6 live takes across Shaman, Affliction
-   and Arms/Prot Warrior, but both of his videos this run were PvP-framed by a wide margin and
-   his tuning read-through is a PvP-lens recitation. Worth deciding whether a PvP creator
-   should carry specialist takes in a PvE tracker's expert panel.
-
-Also confirmed while distilling: the **August 18 class tuning** both Shadarek and Preheat react
-to is already logged in `ptr-builds.json` (2026-08-15 entry, 14 specs) — ptr-watch caught it
-this morning, so these takes are commentary on a build already in the feed, not a lead.
-
-## 2026-08-14 — local run: transcript lane BLOCKED by a self-inflicted 429; 0 takes, 0 metaNotes
-
-Discovery was complete and clean: **44/44 channels polled, 0 RSS failures, 34 unseen videos
-all inside the 12.1 cycle** (bound = first `ptr-builds.json` entry, 2026-06-18) against a
-**970-id** seen-set built from structured data only. Zero pre-cycle videos surfaced, so the
-date bound cost nothing this run.
-
-**The transcript fetch failed and it was my own doing — record this so the next run does not
-repeat it.** Following the "fetch broadly, no keyword filter" rule for local runs, I handed
-all 42 candidates (34 discovered + 8 queued) to a SINGLE yt-dlp invocation. YouTube
-rate-limited the timedtext endpoint with **HTTP 429** partway through and it never cleared:
-30/60/90s in-loop backoffs, then a 4-minute cooldown, then a further 7-minute cooldown — all
-still 429. **0 of 42 transcripts retrieved.**
-
-The lesson is about PACING, not about the unfiltered sweep, and the two must not be conflated
-— dropping the keyword filter is correct and stays. What is wrong is bursting the resulting
-list. The 2026-08-13 run drained its queue fine because it was small. A ~40-video sweep is
-now the normal size, so it needs to be paced from the START (single invocation, several
-seconds between videos, and stop on the first 429 rather than retrying into a deeper block) —
-retry-after-burst does not recover, the block outlives the run.
-
-Useful side-finding: **`--list-subs` was never rate-limited**, only the subtitle *download*
-was. So caption AVAILABILITY can be probed cheaply even mid-block, which is how the three
-skips below were confirmed without a second download attempt.
-
-**Queue: 8 → 13** (3 durable skips out, 8 in).
-- **3 verified skips** (YoDaTV `c5QQHhL34f0`, `u3XBRu8FNUU`, `0461YCGqWws` — Season 2 +20 key
-  runs): confirmed twice, by download attempt and by an independent `--list-subs` probe, to
-  have **no captions of any kind**. Silent key runs with no commentary track, so no transcript
-  source can ever return anything. Moved to `skipped[]` to stop the nightly spending a paid
-  Supadata request on each of them every run.
-- **8 queued narrowly** from today's discovery, keyword-filtered as the queue rule requires
-  (it is drained by the PAID lane): the two YoDaTV spec verdicts (`z0weFwfFuSQ` Prot Paladin
-  got worse, `9SUfTFMcRJk` Moonkin not good in S2 M+), **Tactyks `P-V2_kWBmP8` Venomous Abyss
-  TANK TIPS — raid-scoped tank, the documented scarcest signal**, AutomaticJak `3ONMAmgTre8`
-  Holy Priest, Supatease `leHJTQQirT8` / `c-YGgqlosyQ` class-power, LBNinja7 `wm5l2vtzO2o`
-  Mistweaver, and izen `Oeab1J60RfI` for the metaNotes lane.
-- The other **26 discovered videos were deliberately NOT written to `seen[]`** — they were
-  never examined, only failed on transport, so they must stay visible to the next unfiltered
-  local sweep. RSS re-finds them for free.
-
-Supadata remains `limit-exceeded` (free tier, 100/month), so the queue will not drain on the
-nightly until the monthly budget rolls; the free yt-dlp lane in the next local run is the
-realistic drain, once the 429 ages out.
-
-## 2026-08-14 (nightly, CI runner)
-
-**Transcripts: `limit-exceeded` again** — `transcript-fetch/summary.json` (2026-08-14T18:02:09Z)
-attempted 1, fetched 0 on `bqVHzvKJCuA`, "remaining queue untouched". Supadata's free tier is
-100 requests/month and the budget is spent, so **0 takes and 0 metaNotes** were added, changed or
-superseded. No YouTube or transcript-API fetch of any kind was made by this agent.
-
-**Discovery ran in full:** all 44 transcribable channels polled off the public RSS endpoint,
-0 failures, seen-set rebuilt from the four structured lanes (978 ids). **33 unseen videos, every
-one published inside the 12.1 cycle** (first build 2026-06-18).
-
-- **Queued (14, nightly keyword filter):** Pkpawner "The Complete Windwalker Monk Guide For
-  Season 2"; Dratnos "Gear Available Now, Week 1 FAQ"; Kalamazi on 12.1 embellishments; Shadarek
-  Havoc/Devourer M0s; Sha ×2 (Season-2 Kings' Rest route, Season-2 plans); Bansherz ×3 (BM
-  Hunter S2 M0 tour, Venomfall Deeps solo, io grind); Supatease ×2 ("Best 12.1 Change",
-  "Number 1 Elemental Shaman NA"); YoDaTV 12.1 gearing; Dalaran Gaming 12.1 class-changes
-  stream; Tettles 12.1 stream. Queue now **27**.
-- **Appended to `seen[]` (19):** PvP duel/arena streams (Dalaran ×2, Supatease ×4 including
-  "Top 7 Specs PVP Season 2" — PvP-only is out of scope for a PvE tracker), UI-setup videos,
-  and generic first-day livestreams with no class/spec/12.1/Season signal. Recorded at
-  discovery so the next run's accounting stays auditable.
-- No `generalCreators` (izen / Maximum / Zorthas) uploads were unseen this run, so no `latest`
-  fields moved and `community.json` is untouched.
-
-## 2026-08-13 (nightly CI, 11:47Z — Opus 5; single-shot) — discovery complete, transcripts still limit-exceeded
-
-- **TRANSCRIPT API KEY problem: limit-exceeded.** `transcript-fetch/summary.json`
-  (2026-08-13T11:28:23Z): 1 requested / 0 fetched, `bqVHzvKJCuA` → "limit-exceeded", remaining
-  queue untouched. Supadata's free tier is **100 requests per MONTH** and the budget is spent,
-  so **0 takes and 0 metaNotes** were added, changed or superseded. Nothing was fetched from
-  YouTube or any transcript API by this agent.
-- **Discovery ran in full:** 44 distinct channels (114 class-creator entries + 3
-  generalCreators), **44/44 HTTP 200, 0 RSS failures, 660 videos enumerated**, diffed against a
-  **955-id** seen-set built from structured data only (pending `seen[]` + `skipped[]` +
-  `videos[]`, union every `youtu.be` id in a take or metaNote). **11 unseen, all inside the
-  12.1 cycle** (none pre-2026-06-18).
-- **5 queued** (nightly keyword filter KEPT, per the monthly-budget rule), taking the queue to
-  **20**: `sh7XxGz4DD8` Shadarek "Havoc Demon Hunter 12.1 Raiding & Mythic+ Guide" (drain this
-  one first — a real spec guide from a scoped Havoc/Devourer creator), `luzhyXtdocM`
-  MadSkillzzTV "12.1 Targeted Spells CHANGED", `81vn_Aq6k1Q` YoDaTV "A Few Tips for the First
-  Week of 12.1...", `Z9HAi6-QVUs` Kalamazi and `nYatsKq_vVI` Shindigg (both stream VODs whose
-  titles repeat an already-queued entry from 08-10/08-12 — queued because they pass the filter,
-  but they are the low-value end of the queue).
-- **6 not queued and deliberately NOT written into `seen[]`:** `j1VG7ZgUZ9A` + `qf81kWc96Z8`
-  (Critcake stream titles), `hGV_YCJOD3E` (Tettles short), `r4VxP_NNBFM` (Tactyks mount
-  giveaway), `vrFiZ1rlGz4` (Shindigg meme short), `6HWnK5sPxb8` (Dalaran Gaming PvP duels —
-  same format as the already transcript-verified skip `FyzXK8_AMQ8`). A nightly keyword
-  dismissal is a budget measure, not a durable verdict: hiding these would keep them out of the
-  local unfiltered, date-bounded yt-dlp sweep that is supposed to reconsider them. `seen[]`
-  stays at 483, `skipped[]` at 275.
-- `generalCreators[].latest` left alone on purpose — those fields hold *distilled* one-line
-  reads, not bare titles.
-- Standing recommendation, unchanged and now worth more: a local yt-dlp catch-up run clears all
-  **20** queued videos for free, and the queue now contains the first real per-spec 12.1 guides
-  (Shadarek Havoc DH, NeekapHere Retribution Paladin).
-
-## 2026-08-13 — LOCAL run (scheduled 07:10 task), residential yt-dlp catch-up
-
-Ran after the CI nightly (`e87054d`) had already pushed. Scope: residential-only catch-up —
-transcripts, which is the one lane a datacenter runner cannot do. Tier lists and metrics were
-NOT re-fetched (CI did them today); the manifest was deliberately left alone (partial run).
-
-- **The queue drained for free.** 30 candidates: the 20 queued videos plus 10 newly discovered.
-  yt-dlp (pinned 2026.07.04, `player_client=android`) got **22 of 30** transcripts. The other 8
-  are not IP-blocked — YouTube has published **no auto-captions** for them (6 livestream VODs)
-  or the id is still an upcoming-live placeholder (`bqVHzvKJCuA`, `U_bAsRSY5Y4`). Nothing about
-  a residential IP fixes those, which is worth knowing: **they are not catch-up work, they are
-  videos that may never be captioned.**
-- **Discovery, unfiltered + date-bounded** as the local rule requires: 44 channels, 44/44 HTTP
-  200, 0 RSS failures, 660 entries, seen-set 960 (structured lanes only). **10 unseen, all
-  inside the 12.1 cycle** (≥2026-06-18, the first `ptr-builds.json` entry). All 10 are now
-  accounted for — none left dangling.
-- **6 takes + 1 metaNote added, 3 superseded.** Queue **20 → 8**, `skipped[]` **275 → 292**.
-  - `NeekapHere` **Retribution Paladin** (nerf, both) — his full Season 2 guide. **This closes
-    one of the three documented raid-scoped gaps.** His verdict is explicit: Ret is fun but "a
-    little bit weak right now". The mechanism is the tier set — Divine Arbiter's damage never
-    beats Final Verdict, so on Templar single target you never press Divine Storm and therefore
-    **never use the four-piece at all**; same on Templar AoE and Herald AoE, leaving Herald
-    single target as the only case it works. He says the shipped fix (Divine Arbiter benefiting
-    from Divine Purpose and Greater Judgment) is not good enough and expects to re-cut the video
-    if it is retuned. Supersedes his 07-22 M+ take.
-  - `Shadarek` **Havoc DH** (buff, both) — "pretty good for raid", built around an Essence Break
-    that gained ~50% on its initial hit plus 12%/35% from the tier set and 40s→30s cooldown.
-    Offsetting nerfs recorded too (Immolation Aura fury 40→30, Blind Fury, Inertia bugged to
-    unplayable, leech worth ~80% of its old value after the global 25% HP buff). Supersedes his
-    08-11 neutral read.
-  - `MadSkillzzTV` **Discipline Priest** — split by bracket because his read is: **raid** buff
-    ("insane in raid", expects a nerf), **M+** nerf (not in a good state, and the raid strength
-    is what blocks a key-facing buff). Plus **Holy Paladin** (buff, M+) from live 12.1 rather
-    than PTR — "moves bars like no other", "the latest hotness"; supersedes his 08-09 take.
-  - `Bansherz` **Marksmanship** (buff, **raid**) — boss-by-boss, "king in the raid". Kept
-    complementary to his 08-11 guide take rather than superseding it (different lens). His M+
-    ordering is the opposite way round (Survival ≳ BM ≳ MM, all within a couple of percent) and
-    is recorded inside the claim.
-- **⚠ One judgment call with a measurable published effect.** `Zorthas` **Arcane Mage** metaNote
-  (mixed): a 45-second short observing that he had Arcane at S before three of the last four
-  seasons and C before the fourth — and the C season was the only one Arcane was actually meta —
-  then calling its current high placement "a very risky spot". **The clip ends mid-sentence
-  before he names the tier.** Recorded `mixed` (a hedge on his own call, not a weakness claim)
-  and NOT superseding his substantive 08-09 M+ tier-list read. Effect, measured: because the
-  nudge takes the newest note per creator, his positive Arcane vote is withdrawn, corroboration
-  drops from 2 creators to 1, and the +3 meta nudge switches off — **Arcane Mage M+ forecast
-  82.0 → 79.0, tier unchanged at A+**, 1 cell of 80. Defensible (he is explicitly cautioning
-  against his own placement, which is exactly what an abstention encodes) but it is a truncated
-  45-second clip moving a published score, so it is flagged here rather than buried.
-- **17 videos transcript-verified and skipped** — the durable lane, so they never cost a fetch
-  again. Dispositions worth keeping: the two Kalamazi launch streams and the Dalaran/Critcake/
-  Tettles/Shindigg/Bansherz VODs restate reads their live takes already carry; Tactyks' raid
-  guide says on camera it avoids spec-specific material; Dalaran's "COMPLETE Season 2 M+ Guide"
-  turns out to name no player spec at all (its spec-sounding words are mob names).
-- **Scope-widening candidate for a human** (not acted on): `r4VxP_NNBFM` has Tactyks giving a
-  real read on **Blood DK and Vengeance DH** apex-talent random defensive procs — Vengeance in
-  particular, where he says you can go a long time without a proc and it feels bad. Both sit
-  outside his declared Guardian/Protection scope so nothing was attributed. Vengeance DH is one
-  of the remaining raid-scoped gaps, so widening Tactyks' scope would be worth considering.
-- **The title filter would have missed the best of this run again.** Under the nightly's keyword
-  rule the two highest-value items were not the obvious ones: NeekapHere's Ret Paladin guide was
-  already queued, but `Iu_h1QuAgOc` — titled "12.1 is HERE (Healer Gearing) | *NEW* !UI !main
-  !tierlist" — carried the Discipline and Holy Paladin reads 8 hours into a 509-minute stream.
-- **Standing note for the queue:** 6 of the 8 remaining entries are livestream VODs with no
-  published captions. The nightly's Supadata drain will spend its 100-request monthly budget
-  retrying videos that likely have nothing to fetch. Worth a rule (`noCaptionsAt` marker, or a
-  cap on retries per id) if the pattern holds — not changed here, since queue policy is not a
-  data run's call.
-
-## 2026-08-15 (third run of the day — nightly, headless)
-
-- **Transcript budget is exhausted: `transcript-fetch/summary.json` verdict
-  `limit-exceeded`** (requested 1, fetched 0, on `bqVHzvKJCuA`). No transcript existed to
-  distil, so **0 takes and 0 metaNotes** were added and no take moved. This agent fetched no
-  transcript from YouTube or any API.
-- Discovery: **44/44** unique channel feeds polled with backoff, **660 entries** scanned
-  against a **1035-id** seen-set built from the four structured lanes (never from log prose).
-  **25 unseen.**
-- **Queued 6** (nightly keyword filter applies): `shGSOb8YoMQ` YoDaTV *12.1 M+ tierlist
-  update*, `oomrLdyB8YA` Jedith *Devourer hit hard by tuning*, `DMtMmUW5uRE` LBNinja7 *healer
-  tuning*, `c_5u7Jpy-Uo` AutomaticJak *healer tuning + tier list updates*, `lanOZvwWzw0`
-  Musguete *Assa Rogue tuning*, `OdhbpI6Mjsw` izen *final Season-2 buffs & nerfs* (metaNotes
-  lane — izen is a `generalCreators` entry and is firewalled out of `takes[]`).
-- **Retired 3 to `seen[]`** as durable dismissals on an explicit PvP frame: `wzynLjlZJf4`
-  ("Midnight PVP Tier List Season 2"), `Fi5pYpANSQ0` ("WoW PVP Saved"), `oUjUd8kcWew`
-  (Dalaran Gaming, "5v5 1v1 Duels – PvP").
-- **16 left UNSEEN on purpose** — guides/routes (Tactyks, Dalaran Assassination, Megasett
-  Mistweaver, Baze Fury, Sha), stream VODs and Shorts (Tettles ×2, AutomaticJak, Kalamazi,
-  Critcake, NeekapHere), Maximum's live "AWTF test stream", Harrek's raw Dummy Dome pull
-  footage, and the two Supatease uploads whose PvP lens is inferred rather than stated. A
-  budget or title dismissal is not durable and must stay reconsiderable by a local run.
-- `bqVHzvKJCuA` stays queued and stays the **suspected still-live stream** flagged 08-09.
-  `yt-dlp --print` could not settle it from this runner (datacenter bot wall, as expected),
-  so it was left in place rather than purged on a guess — worth one metadata check from a
-  residential IP, since it is at the head of the queue and has now spent several requests.
 
 ## 2026-08-18 (LOCAL run, ~14:2xZ — Opus 5; scheduled residential catch-up, ~3.5h after the nightly)
 
