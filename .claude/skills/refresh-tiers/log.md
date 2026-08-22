@@ -16,6 +16,61 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-22 (nightly) — 280 letters re-parsed; Archon's M+ recut moves 25 of its 40
+
+**Icy Veins, Method and Wowhead: 0 moves. Archon M+: 25 of 40 letters moved on an upstream
+recut, the first real tier movement since the flip. Archon raid still publishes nothing.**
+
+- **Per-page counts printed and reconciled against 27 DPS + 7 healer + 6 tank = 40 BEFORE
+  merging**, every source: icyveins 27/7/6 raid + 27/7/6 M+ = 80, method 40 raid + 40 M+ = 80,
+  wowhead 27/7/6 + 27/7/6 = 80, archon 27/7/6 M+ = 40 and **0/0/0 raid**. 0 unmatched rows
+  anywhere. Total 280 assignments across the four sources.
+- **Transports, recorded per the standing rule.** Icy Veins: direct browser-UA GET, 192–339 KB,
+  parsed from `<table class="tier-list">` (first `<td>` = the letter) with each
+  `tier-list-entry`'s FIRST `alt=` looked up WHOLE. Method: direct GET, 159/165 KB, parsed from
+  the `.tier__title` blocks. Wowhead: FULL browser header set (r.jina.ai untried — IP-403 on
+  `/guide/*` since 08-03), unescape `\/`→`/` across the whole document FIRST, then
+  `[tier-list=rows] … [/tier-list]`, selecting the block with the most `[spec-badge=]` hits rather than
+  anchoring on `WH.markup.printHtml(`; exactly one block per page, 73–337 KB. Archon:
+  `__NEXT_DATA__` → `props.pageProps.page.specTierListSection.tierLists` (NOT `page.tierLists`),
+  entries resolved from each entry's icon `Class-Spec` token, `tiers[].entries` a list of lists.
+- **ARCHON M+ RECUT — the one real movement tonight.** `lastUpdated` advanced
+  2026-08-20T12:00:00Z → **2026-08-21T12:00:00Z** and the whole distribution shifted up: DPS is
+  now S 13 / A 5 / B 9 / **C 0** (was spread A/B/C), healers S 2 / A 1 / B 1 / C 3, tanks
+  S 1 / A 2 / B 2 / C 1. 25 of 40 letters moved — 4 up two Archon bands (Balance, Enhancement,
+  Retribution, Havoc B→S), Protection Warrior down two (A→C), the rest one. This is a genuine
+  upstream recut, not a parse artifact: the underlying `score` column moved with it (Arms 2892→2962,
+  Arcane 2784→2952) and parse counts rose ~50% (Arms 156,334→238,025), i.e. week-1 Season-2 keys
+  climbing. Downstream it produced **16 consensus letter moves, every one a single band and none
+  two-band** — well inside the anomaly limits (25 total / 6 two-band), so no ack is needed and
+  none was proposed.
+- **Archon RAID is unchanged from the last three nights**: all three tierLists (popularity,
+  throughput, survivability) return **0 entries** on all three aggregate pages while the chrome is
+  Season-2 (encounterOptions = the Venomous Abyss, description "tier list for The Venomous Abyss …
+  in 12.1"). `seasonVerified` stays **s1** on the three raid pages for the reason the 08-21 run
+  recorded and which has not changed: the stored `ratings.raid.archon` letters are Archon's
+  SEASON-1 letters, flipping the flag would average them into the S2 raid consensus, and with an
+  empty DPS list there is no Devourer entry to era-verify against. No `seasonVerified` value
+  changed anywhere this run, so `freeze-season.mjs` had nothing to do.
+- **Era verified from each page's own title AND body, never a substring count.** Two Icy Veins
+  pages again carry a stale-era title over a Season-2 body — raid HEALER titles "Patch 12.0.7 /
+  Midnight" with 21 Season-2 mentions against 6 Season-1, raid DPS titles "Midnight (12.1)" with
+  48 against 14 — body over title, the blue-tracker precedent, so both stay s2. Method's raid page
+  reads "the Midnight Season 2 Raid, The Venomous Abyss", its M+ page "Midnight Season 2" under
+  Tactyks' byline. All six Wowhead titles self-identify Season 2. Method's M+ page again carries
+  the 4 dungeon-difficulty blocks alongside the 4 spec tiers, and the 8 dungeon names plus the
+  Method logo were rejected by ROSTER MATCH, never by position.
+- **`published` re-read per page, not carried forward, and unchanged** — 12/12 agreement with
+  `published-evidence/evidence.json`: icyveins raid DPS 2026-08-16, raid healer 08-13 (JSON-LD over
+  the 08-10 "Last UPDATED" line), raid tank 08-08, M+ ×3 all 08-16; wowhead raid DPS 08-14, raid
+  healer 08-18, raid tank 08-14, M+ ×3 all 08-18. **Method does publish an in-body date after all**
+  — "Last Updated 10th August 2026" (raid) and "13th August 2026" (M+), which earlier runs recorded
+  as absent. Not written to the registry: `fetch-published.mjs` does not cover method, so a stored
+  `published` there would sit permanently un-cross-checked. Noted here for the owner instead.
+- Snapshots bumped to 2026-08-22 for the 20 aggregate tier-list pages actually re-parsed. The three
+  Archon ANCILLARY pages were probed (see refresh-metrics log) but merged nothing, so their
+  snapshots stay at 2026-08-18 — the date the stored encounter/survivability data really comes from.
+
 ## 2026-08-21 (owner registry edit — archon-encounters URLs re-pointed to S2)
 
 **Two URLs, verified live before being written. No data rebuilt, no dates touched.**

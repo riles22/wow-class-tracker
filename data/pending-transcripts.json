@@ -2,13 +2,6 @@
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
   "videos": [
     {
-      "id": "kGsd9cMmBCc",
-      "creator": "Supatease",
-      "title": "DISCOVERING THE BEST CLASSES 12.1",
-      "published": "2026-08-18",
-      "queuedAt": "2026-08-21"
-    },
-    {
       "id": "POENnO-sGog",
       "creator": "Shadarek",
       "title": "Azta'rec 💀 Nemesis Delve Boss Kill | Havoc Demon Hunter",
@@ -21,6 +14,41 @@
       "title": "Midnight Season Two Delve Boss: Azta'rek 💀 Restoration Shaman Solo",
       "published": "2026-08-19",
       "queuedAt": "2026-08-21"
+    },
+    {
+      "id": "sIu3Kjo8ggI",
+      "creator": "Shadarek",
+      "title": "Havoc is BUFFED | August 25th Class Tuning | Patch 12.1",
+      "published": "2026-08-22",
+      "queuedAt": "2026-08-22"
+    },
+    {
+      "id": "BdzA4HWaUSc",
+      "creator": "Kalamazi",
+      "title": "MASSIVE Warlock Buffs Announced! What Do They Mean?",
+      "published": "2026-08-22",
+      "queuedAt": "2026-08-22"
+    },
+    {
+      "id": "y77i8M9dCSw",
+      "creator": "NeekapHere",
+      "title": "Retribution Paladin 4-Piece Is FINALLY Worth Using",
+      "published": "2026-08-22",
+      "queuedAt": "2026-08-22"
+    },
+    {
+      "id": "OyIp5Ua0Qo4",
+      "creator": "izen (Izenhart)",
+      "title": "Season 2 Mythic+ Meta Picks | Week 1 Early Choices",
+      "published": "2026-08-21",
+      "queuedAt": "2026-08-22"
+    },
+    {
+      "id": "xHUTjrulyrA",
+      "creator": "Supatease",
+      "title": "12.1 Class Tuning Did Your Spec Survive?",
+      "published": "2026-08-22",
+      "queuedAt": "2026-08-22"
     }
   ],
   "skipped": [
@@ -2865,6 +2893,13 @@
       "title": "Maximize Your DPS NOW! Subtlety Rogue Season 2 Guide",
       "reason": "Transcript verified (yt-dlp, local run; 8m32s, 503 caption events). This is the video that TRIGGERED the 2026-08-21 Subtlety scope widening, and it is recorded here rather than distilled. Three independent reasons: it is guide-shaped how-to-play content, which yields no take by the standing rule; its comparative sentences are class-wide and generic, so they would not survive distillation even setting that rule aside; and its stats/BiS block is explicitly derivative, summarising a published Wowhead Subtlety guide rather than his own analysis — someone else's material read aloud is not the reader's read. The widening therefore rests on HDqRItIXGmE (2026-08-04, a roughly five-minute dedicated Subtlety segment of his own WCL log analysis) and lanOZvwWzw0 (2026-08-15, Subtlety tuning detail), NOT on this video.",
       "verifiedAt": "2026-08-21"
+    },
+    {
+      "id": "kGsd9cMmBCc",
+      "creator": "Supatease",
+      "title": "DISCOVERING THE BEST CLASSES 12.1",
+      "reason": "Transcript verified (Supadata, nightly step; 5,413 caption chunks, ~172k characters) and it is a PvP stream, so it yields nothing for this PvE tracker. The \"best classes\" framing is arena/battleground: he queues lobbies throughout, reasons about damage he sees in Training Grounds and duels, and the counts bear it out — 46 \"PvP\", 10 \"arena\", 4 \"battleground\", 6 \"rated\" against 0 \"Mythic+\" and 3 passing \"mythic plus\" mentions that are both about mount/transmog rewards and PvP participation, never spec strength. The four \"tier list\" mentions are his own PvP prediction list, a racial tier list joke, and chat teasing him about a list already published. Exactly the shape the 2026-08-09 rule names: a PvP creator answering \"top classes\" is still a PvP read, and titles are no defence.",
+      "verifiedAt": "2026-08-22"
     }
   ],
   "seen": [
@@ -3406,7 +3441,9 @@
     "zahcyy0SQN8",
     "zfqABvSZFcY",
     "znM25wOIcAI",
-    "zzHKjkTYv-w"
+    "zzHKjkTYv-w",
+    "vn9QRw-zkoo",
+    "6zjh3PbfBno"
   ],
   "seenNote": "Video ids already considered by an earlier run that carry no richer record — migrated 2026-08-08 from backticked ids in watch-creators/log.md when the seen-set stopped being derived from prose. Distilled videos are cited by their take's url, transcript-verified rejects live in skipped[], and queued ones in videos[]; this lane is only for the remainder. Append here when a run dismisses a video at DISCOVERY (pre-cycle date, already-processed) without fetching a transcript."
 }

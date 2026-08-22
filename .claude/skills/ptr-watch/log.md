@@ -16,6 +16,70 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-22 (nightly) — the August 25 tuning pass logged: 14 specs, 2 set bonuses
+
+**Between-cycles posture unchanged: no 12.2 PTR announcement anywhere, the dev-notes thread is
+still quiet, and the four PTR zone sweeps stay dormant.** One new feed entry, from the LIVE lane.
+
+- **Live lanes swept in full.** Wowhead news RSS (40 items, parsed per `<item>` block; bodies come
+  free in `<content:encoded>`), the news INDEX payload `data.news.newsData` (which leads the RSS —
+  newest id 382566, and it agreed with RSS tonight), and the blue-tracker payload
+  `data.blueTracker.default` (66 KB page, 50 entries deduped by topic). Nothing about a 12.2 PTR
+  realm, a 12.2 thread, or a next-patch announcement in any of the three.
+- **NEW ENTRY — 2026-08-22, kind `build`: "Class Tuning Incoming – August 25"** (Kaivax, us topic
+  **2339812**, post 1, created 2026-08-22T01:37:59Z). Verified against the canonical forum JSON, not
+  taken off the Wowhead mirror (news=382565), and read with its heading nesting INTACT. This is the
+  first of the three weekly Season-2 passes Blizzard scheduled in "Season 2 Class Tuning Plans"
+  (topic 2335871, 2026-08-12 — Aug 25 / Sep 1 / Sep 22). Standalone topic, so post number 1 of its
+  own topic, exactly like the 08-15 entry. Entry date is the post's own UTC date, the same
+  convention the 08-15 entry used.
+  - **14 specs in `specsAffected`, 15 highlights** (one consolidated line per spec plus one
+    class-wide line). classifyHighlight checked rather than assumed: **13 lines classify buff**,
+    Restoration Druid classifies **null** because its consolidated line genuinely mixes buffs with
+    two nerfs (Nature's Bounty 10% was 20%, Everbloom 5 targets was 6) — Blizzard's own note
+    describes it as trading raid healing for dungeon healing — and the Warlock class-wide line is
+    excluded from scoring by construction while still reaching all three Warlock drawers.
+  - **The one attribution question settled by nesting**: "Imp, Voidwalker, Sayaad, and Felhunter
+    damage increased by 350%" sits directly under the bare Warlock heading, one level SHALLOWER
+    than the Affliction/Demonology/Destruction blocks → logged `Warlock (class-wide)`, not against
+    a spec.
+  - **TWO SET BONUSES TOUCHED, both `spec.tierSet` entries advanced** to asOf 2026-08-22 with the
+    forum post as `source`: Restoration Druid's 4-piece (a clean value swap into the stored
+    wording — Genesis duration now +8s, was +4s) and Retribution Paladin's 4-piece Divine Arbiter
+    (a dated parenthetical, since the notes give damage multipliers rather than replacement bonus
+    text: main target +150%, secondary +75%). The tier-set upkeep gate passes.
+  - **The PLAYER VERSUS PLAYER section is large this week and is deliberately not distilled.**
+    Devourer and Havoc defensive nerfs, Feral, Augmentation, Marksmanship, Survival, Fire Mage,
+    Windwalker, three Paladin specs, all three Priest specs, all three Rogue specs, Elemental and
+    Restoration Shaman, all three Warlock specs and Arms Warrior appear there and NOWHERE in the
+    PvE section — which is why they are absent from `specsAffected`. Note the direction this cuts:
+    logging them would have let PvP nerfs vote in the PvE outlook tally for Devourer, Havoc and
+    Holy Priest. Lines that merely CARRY a PvP exclusion ("Does not apply to PvP combat") are
+    ordinary PvE lines and were kept.
+- **Swept and correctly NOT logged**: "Patch 12.1 Hotfixes for August 21st" (news=382566; verified
+  against Kaivax's running hotfix post, topic 2336376, whose post 1 was edited 2026-08-22T01:46Z —
+  its August 21 section has **no Classes block at all**, only Delves, Dungeons and Raids, Housing,
+  Items and Prey); "Altar of Fangs Nerfed" and "Heroic Vashnik Stealthily Nerfed" (encounter
+  tuning); "Evokers Are Having Disconnect and Disintegrate Bugs" (a bug report, no tuning value);
+  and the 08-12 "Season 2 Class Tuning Plans" roadmap, which carries dates but not a single
+  per-spec value, so it gets no entry of its own and is instead cited inside the new entry's label.
+- **Dev-notes thread 2317811 re-polled**: highest post still **19** (Linxy, 2026-07-31) — unchanged,
+  the closed cycle's expected silence, and not a lost thread.
+- **Writeup coverage recomputed, not remembered**: exactly one spec has no writeup (Demonology
+  Warlock, whose null is deliberate — the source reported no changes). `expertRead` returns null for
+  all 40 in both brackets because `PHASES.ptr` is null between cycles; that is the dormant lane, not
+  data loss, and the pin test self-disarms accordingly.
+- **FOR THE OWNER — the gearing page now carries stale tier-set text for those two specs.**
+  `check-refresh --age` reports `gearing-tierset-sync: 2 spec(s) carry tier-set text the tracker has
+  since corrected`, which is that check doing exactly its job (the 2026-08-08 Preservation Evoker
+  failure). The remedy is `node gearing/src/sync-tracker-fields.mjs` followed by `npm run
+  gearing:build`, and it is deliberately NOT run here: the nightly publish job stages only `data/`,
+  `dist/` and the skill logs, so a gearing/ edit could not be committed and would only leave the
+  tree inconsistent. It is a local-run action.
+- Zone sweeps 54 / 52 / 56 / 57: **dormant, not attempted, and no manifest rows written** — their
+  contract rows were removed at the flip. Stored zone-52/54/56 rows stay as the closed cycle's final
+  receipts.
+
 ## 2026-08-21 (nightly CI, second run of the day — the 11:00Z run also landed)
 
 **No new build, hotfix or patch-notes entry. `data/ptr-builds.json` unchanged.** Between-cycles

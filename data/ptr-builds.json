@@ -3,6 +3,47 @@
   "thread": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811",
   "builds": [
     {
+      "date": "2026-08-22",
+      "kind": "build",
+      "label": "“Class Tuning Incoming – August 25” (Kaivax, 2026-08-22T01:37Z): the FIRST of the three weekly Season 2 tuning passes Blizzard scheduled in its 2026-08-12 “Season 2 Class Tuning Plans” roadmap (topic 2335871 — that roadmap post carries no per-spec values, so it gets no feed entry of its own; its dates are Aug 25, Sep 1 and Sep 22). Applied with each region’s weekly maintenance on August 25. Like the 08-15 pass this is an official forum post in a STANDALONE topic (2339812), not a reply in the 12.1 development-notes thread the feed’s `thread` key tracks (that thread has been quiet since 2026-07-31, the closed cycle’s expected silence), so its post number is 1 of its own topic and the Wowhead mirror is carried alongside. Read from the forum JSON with its heading nesting INTACT, which is what settles the one attribution question in the post: the “Imp, Voidwalker, Sayaad, and Felhunter damage increased by 350%” line sits directly under the bare Warlock heading, one level SHALLOWER than the Affliction/Demonology/Destruction blocks, so it is logged class-wide rather than attributed to a spec. The post’s separate PLAYER VERSUS PLAYER section is out of scope for this PvE tracker and is deliberately not distilled — it is large this week (Devourer and Havoc defensive nerfs, Feral, Augmentation, Marksmanship and Survival, Fire Mage, Windwalker, Holy/Protection/Retribution Paladin, all three Priest specs, all three Rogue specs, Elemental and Restoration Shaman, all three Warlock specs and Arms Warrior appear there and NOWHERE in the PvE section, which is why they are absent from specsAffected). TWO SET BONUSES ARE TOUCHED and both spec.tierSet entries were updated alongside this entry: Restoration Druid’s 4-piece (Genesis duration now +8s, was +4s — a clean value swap into the stored wording) and Retribution Paladin’s 4-piece Divine Arbiter (main-target damage +150%, secondary +75% — appended as a dated parenthetical, since the notes give a damage multiplier rather than replacement bonus text). Every line was checked against classifyHighlight rather than assumed: 13 of the 14 spec lines are one-directional buffs and vote accordingly, and Restoration Druid’s consolidated line mixes buffs with two explicit nerfs (Nature’s Bounty 10% was 20%, Everbloom 5 targets was 6) so it classifies null and does not vote — which is the honest reading of a pass Blizzard itself describes as trading raid healing for dungeon healing.",
+      "forumPostNumber": 1,
+      "forumUrl": "https://us.forums.blizzard.com/en/wow/t/class-tuning-incoming-august-25/2339812",
+      "wowheadUrl": "https://www.wowhead.com/news=382565/upcoming-class-tuning-for-the-weekly-reset-ret-paladin-and-warlock-buffs",
+      "specsAffected": [
+        "Frost Death Knight",
+        "Havoc Demon Hunter",
+        "Vengeance Demon Hunter",
+        "Restoration Druid",
+        "Preservation Evoker",
+        "Beast Mastery Hunter",
+        "Survival Hunter",
+        "Frost Mage",
+        "Brewmaster Monk",
+        "Retribution Paladin",
+        "Affliction Warlock",
+        "Demonology Warlock",
+        "Destruction Warlock",
+        "Protection Warrior"
+      ],
+      "highlights": [
+        "Frost Death Knight — All ability damage and melee damage increased by 6%; Obliterate damage increased by 15%.",
+        "Havoc Demon Hunter — All damage increased by 3%.",
+        "Vengeance Demon Hunter — Mastery: Fel Blood effectiveness increased by 24%.",
+        "Restoration Druid — 4-piece class set bonus increases Genesis duration by 8 seconds (was 4 seconds); Rejuvenation and Germination healing increased by 15%; Wild Growth healing increased by 10%; Nature’s Bounty replicates 10% of Regrowth’s healing (was 20%); Everbloom heals 5 targets (was 6 targets); Everbloom heals for 48% of Lifebloom’s final heal (was 40%).",
+        "Preservation Evoker — Verdant Embrace healing increased by 25% and Living Flame healing increased by 20% (both PvE only); Dream Simulacrum increases healing of Verdant Embrace by 40% (was 30%).",
+        "Beast Mastery Hunter — Wild Thrash now deals 300% increased damage when striking more than 2 targets (was 200%); Beast Cleave now causes your pets to strike nearby enemies for 70% of the damage dealt (was 55%).",
+        "Survival Hunter — All damage dealt by you and your pets increased by 4%.",
+        "Frost Mage — Ice Barrier absorb amount increased to 35% of maximum health (was 30%, PvE only); Blizzard damage increased by 10%; Frostbite Talent: Shatter damage to nearby enemies increased by 10%; Frostfire: Isothermic Core — Meteor damage increased by 25%.",
+        "Brewmaster Monk — All damage increased by 3%; Celestial Brew and Celestial Infusion absorb value increased by 20%.",
+        "Retribution Paladin — Class Set 4-piece Divine Arbiter main target damage increased by 150% and secondary target damage increased by 75%.",
+        "Warlock (class-wide) — Imp, Voidwalker, Sayaad and Felhunter damage increased by 350%.",
+        "Affliction Warlock — Unstable Affliction damage increased by 15%; Hellcaller: Blackened Soul damage increased by 20%; Wrath of Nathreza damage increased by 35%; Shadow of Nathreza damage increased by 25%; Agony damage increased by 20%; Corruption damage increased by 15%; Hellcaller: Wither damage increased by 10% (all PvE only).",
+        "Demonology Warlock — Shadow Bolt damage increased by 35% (PvE only); Demonbolt damage increased by 30%; Wild Imp damage increased by 20%; Summon Felguard damage increased by 20%; demons summoned by Dominion of Argus damage increased by 20% (PvE only); Call Dreadstalkers damage increased by 30%.",
+        "Destruction Warlock — Rain of Fire damage increased by 30%.",
+        "Protection Warrior — Fight Through the Flames reduces Magic damage by 8% (was 6%)."
+      ]
+    },
+    {
       "date": "2026-08-20",
       "kind": "hotfix",
       "label": "Live 12.1 hotfixes for August 20 — a second consecutive BUG-FIX round-up, with no tuning value anywhere in its Classes section. Canonical source verified directly rather than off the Wowhead mirror: Kaivax's running hotfix blue post (us.forums topic 2336376), whose title has rolled to “World of Warcraft: Midnight Hotfixes - August 20” and whose post 1 was edited 2026-08-21T02:27Z to append the August 20 section; read with its <ul> heading structure INTACT, which is what settles the one attribution question in the post — the Hellcaller line sits directly under the bare Warlock heading, one level SHALLOWER than the four Affliction lines, so it is a hero-tree line and not an Affliction one. Logged kind “hotfix” because it is a live-realm round-up with no post in the 12.1 development-notes thread this feed tracks (that thread has been quiet since 2026-07-31, the closed cycle's expected silence), so the Wowhead article carries the citation. Every class line was checked against classifyHighlight rather than assumed: 5 of the 7 classify null and do not vote, but TWO do and are reported as such rather than talked down — Marksmanship Hunter classifies NERF (both its lines remove a damage double-dip: Precise Shots benefiting twice, and Explosive Shot's AoE not being reduced by damage-taken-reduction) and Elemental Shaman classifies BUFF (Master of the Elements now increases Earthquake damage). Neither moved an outlook DIRECTION, because both specs are driven by a dated writeup verdict rather than the tally (Marksmanship stays Mixed/flat at +5/−2, Elemental stays Positive/up at +2/−1); only their stated line counts moved. ONE set bonus is touched: the last Affliction Warlock line fixes the Unstable Affliction granted by the Venomous Abyss 4-piece failing to grant a stack of Wither, so that spec's tierSet.asOf and source were advanced to this post and a dated parenthetical was appended recording the fix; the 4-piece WORDING is unchanged, which is why the stored bonus text was not rewritten. Deliberately not distilled, as out of scope for a PvE class tracker: the Delves section; the whole Dungeons and Raids section (Ruby Life Pools, Temple of Sethraliss, and the Venomous Abyss fixes for The Serpent Warren, Vashnik the Malignant, The Coiled Altar and the seven Heroic-difficulty Ula'tek tuning lines — encounter tuning, not class tuning); Items (Companion Command Crystal, Omnium Folio); Prey's Toxic Snare affix nerf; Quests; and Treasures. Also swept and correctly NOT logged from the same news window: “Heroic Vashnik Stealthily Nerfed” (news=382552) and “Nightmare Prey Affix Nerfed” (news=382549), both encounter/affix tuning with no class line.",

@@ -16,6 +16,54 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-22 (nightly) — 1 transcript read → 0 takes (PvP), 5 queued, 44 channels clean
+
+**Discovery clean; the one transcript available this run was a PvP stream, so it yielded nothing
+and was retired to `skipped[]` rather than mined for a take.**
+
+- **DISCOVERY: 44 unique channels polled** (41 class-lane + 3 general), every one HTTP 200 on the
+  first attempt, **0 RSS failures**, no retries needed and no backoff spent. Seen-set rebuilt from
+  the four structured lanes (`seen[]` + `skipped[]` + `videos[]` + every `youtu.be` id in a take or
+  metaNote url) — never from log prose. **85 entries came back unseen and in-cycle** (bound =
+  2026-06-18, the OLDEST date in ptr-builds.json, derived not indexed).
+- **`media:description` parsed alongside every title**, and it did most of the triage again: the
+  large majority of the 85 are launch-week stream VODs with bare-Twitch or streamlabs descriptions
+  ("M+ spam", "HEROIC SPLITS", "keys + raid tonight", RWF day-N splits). Those carry no
+  spec-strength read under the standing guide-shaped/key-run rules and were left **UNSEEN**, not
+  retired — an unverified shape dismissal is exactly what `seen[]` must not absorb, and leaving
+  them unseen is what keeps the next run's accounting auditable.
+- **DISTILLED: nothing. `kGsd9cMmBCc` (Supatease, "DISCOVERING THE BEST CLASSES 12.1", 08-18) →
+  `skipped[]`.** The deterministic step fetched it (5,413 chunks, ~172k chars; the other two queued
+  ids came back `unavailable`). Read in full: it is a **PvP stream** — arena lobbies, Training
+  Grounds, duels, DR talk — with 46 "PvP", 10 "arena", 4 "battleground" and 6 "rated" against 0
+  "Mythic+"; its 3 "mythic plus" mentions are about mount/transmog rewards and PvP participation,
+  and its 4 "tier list" mentions are his own PvP prediction list, a racial-tier-list joke and chat
+  teasing him. Precisely the 2026-08-09 shape: a PvP creator answering "the best classes" is still
+  a PvP read, and the title is no defence. **0 takes, 0 metaNotes, no `latest` advanced** — and no
+  filler `neutral` minted to record that the video was watched.
+- **QUEUED 5**, keyword-filtered as the nightly lane requires (Supadata free tier = 100 requests per
+  MONTH; last night's summary read `ok`, so there is headroom, but the queue stays narrow):
+  `sIu3Kjo8ggI` (Shadarek, "Havoc is BUFFED | August 25th Class Tuning", 08-22),
+  `BdzA4HWaUSc` (Kalamazi, "MASSIVE Warlock Buffs Announced! What Do They Mean?", 08-22),
+  `y77i8M9dCSw` (NeekapHere, "Retribution Paladin 4-Piece Is FINALLY Worth Using", 08-22),
+  `OyIp5Ua0Qo4` (izen, "Season 2 Mythic+ Meta Picks | Week 1 Early Choices", 08-21 — the metaNotes
+  lane), `xHUTjrulyrA` (Supatease, "12.1 Class Tuning Did Your Spec Survive?", 08-22 — queued to
+  settle by transcript whether his tuning content is PvP-framed like `kGsd9cMmBCc`, rather than
+  guessing from the title in either direction). All five are analysis videos about the August 25
+  tuning pass or the week-1 M+ meta, i.e. the content most likely to carry a real read.
+  `xg5sxI6LspI` (Kalamazi, "HUGE Warlock Buffs Announced!", same day, generic link-block
+  description) was NOT queued as the probable clip/restream of `BdzA4HWaUSc`, and left unseen.
+- **RETIRED 2 ids to `seen[]` as durable SCOPE dismissals only**: `vn9QRw-zkoo` (Dalaran Gaming,
+  "WoW 12.1 Rogue PvP Guide - ALL 3 SPECS Starter Guide") and `6zjh3PbfBno` (same channel,
+  "Assassination Rogues Are Back To DELETING People! (5v5 1v1 Duels) - PvP"). Both self-identify as
+  PvP in title AND description, which is a fact about the video rather than a budget cut.
+- **`POENnO-sGog` and `1LfW9JXNRsI` stay queued** (both `unavailable` from Supadata this run) — they
+  are neither distilled nor transcript-verified, so removing them would lose the backlog.
+- yt-dlp was NOT used and NOT installed or upgraded: this is a nightly runner behind the settled
+  datacenter bot wall, so the queue is the only path. No creator showed coverage outside their
+  registered specs (nothing was distilled), so no scope widening is flagged, and no supersession was
+  needed because no take was added.
+
 ## 2026-08-21 (nightly CI, second run of the day)
 
 **Discovery complete and clean; distillation impossible. 0 takes, 0 metaNotes, 0 `latest`
