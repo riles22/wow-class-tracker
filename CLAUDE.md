@@ -440,6 +440,35 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   transition durations, which flip with the same control and survive every layout. Its
   stronger checks — overlay/chart entrance classes and animation names — are untouched.
   Note `.chev` transitions two properties, so its duration reads `"0.18s, 0.15s"`.
+- **Gearing carries the same bar** (2026-08-22). The 2026-08-05 rebrand aligned the two
+  pages; compressing the tracker's masthead broke that alignment in the other direction —
+  gearing still had the 179px Cinzel header the tracker had just dropped. Gearing's header
+  is now the same 60px `.topbar` with the same anatomy in the same order (mark, name in
+  Cinzel 18px, patch chip with a `.pc-short` phone form, separator, both tabs inline), and
+  its `header` is 88px against 179 with the first control at **144px** against 603.
+  **Its `.sitetab` had to be restyled too, and that is the trap**: gearing keeps its OWN
+  copy of the tab CSS, so aligning only the tracker left gearing's tabs as a 42px tab STRIP
+  inside a 60px bar and pushed the bar to 86px. Any future change to one page's bar has to
+  be made in both templates — they mirror each other by hand, not by shared code.
+  `h1` also had to come off its `clamp(28px,5vw,46px)`; the bar's name is `.brandname`.
+- **Gearing no longer opens on Frost Mage** (2026-08-22). It was a hardcoded
+  `sel.value = 'Mage|Frost'` with nothing behind it, so every visitor landed on someone
+  else's spec. Order is now: a `#spec=` deep link, then the spec you last looked at
+  (`localStorage` key `wow-s2-gearing:spec`), then the top of the list.
+  **`localStorage` is `typeof`-guarded like `location` and `history`** — the client-boot
+  test runs that source through `new Function("document","innerWidth","innerHeight", …)`
+  and an unguarded read throws there instead of failing a useful assertion.
+  Two gearing tests had been using the Frost Mage default as an implicit fixture and now
+  select the spec they need; one already had a `setSpec` helper it had never called for
+  its first assertion. An app default is not a test fixture.
+⚠️ **`.tiercell` sizing is coupled to the tier COLUMN width, and the coupling is silent.**
+  It is a `34px auto` grid, sized when the tier was a badge plate in a 70px column. Console
+  made the tier a bare glyph in a 40px column, which left the `.tind` marker slot **4px**,
+  so the ±, the ▲▼ arrows and the projection's ●●● dots all overflowed into the 30d column
+  — visible, ugly, and nothing errored. In the row it is a flex run now and the tier
+  columns are **54px**; the worst case measured is 32px (projection view, letter + arrow +
+  ± + three dots). Re-measure `scrollWidth` against `clientWidth` across all 80 cells in
+  BOTH the consensus and projection views if either width changes again.
 - **Between-cycles copy residue** (same audit, stage 3). All keyed on `PHASE.ptr` so they
   self-heal when the next cycle opens, rather than on data that has to be remembered:
   the masthead stamp says **"Latest class tuning"** rather than "Latest PTR build" when there

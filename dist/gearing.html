@@ -52,42 +52,57 @@ code{font-family:var(--mono);font-size:.92em;color:var(--t2);overflow-wrap:anywh
 .skip-link{position:fixed;left:14px;top:10px;z-index:10000;transform:translateY(-150%);
   background:#fff;color:#07101a;padding:10px 14px;border-radius:8px;font-weight:800}
 .skip-link:focus{transform:none}
-/* Mirrors .masthead-inner on the tracker: eyebrow, mark + title + chips, rule, sub. */
-header{padding-bottom:22px}
-.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.28em;
-  text-transform:uppercase;color:var(--accent);margin:0 0 12px}
+/* Mirrors the tracker's compressed .topbar (2026-08-22) — same heights, same type sizes,
+   same order — so the two tabs read as one product rather than two eras of one. */
+header{padding-bottom:0}
+.topbar{display:flex;align-items:center;gap:11px;min-height:60px;flex-wrap:wrap;padding:9px 0}
+.brandname{font-family:var(--disp);font-weight:700;font-size:18px;letter-spacing:.01em;
+  margin:0;color:#fff;white-space:nowrap}
+.tbsep{width:1px;height:22px;background:var(--line);flex:none}
+.tbgrow{flex:1 1 auto}
+.statline{font-size:12.5px;color:var(--t2);margin:0 0 2px;padding-bottom:9px}
+.statline b{color:var(--t1)}
+.pc-short{display:none}
 .titlerow{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
-.brandmark{width:48px;height:48px;vertical-align:-9px;margin-right:13px;flex:none}
+.brandmark{width:26px;height:26px;vertical-align:0;margin:0;flex:none}
 .brandlink{display:inline-block;line-height:0;border-radius:10px}
 .brandlink:hover .brandmark rect:first-child{stroke-opacity:.9}
 .brandlink:focus-visible{outline:2px solid var(--accent-2);outline-offset:2px}
-.rule{height:2px;margin:20px 0 14px;border-radius:2px;
-  background:linear-gradient(90deg,transparent,var(--accent) 22%,var(--accent-2) 55%,transparent);
-  background-size:220% 100%;animation:sweep 7s linear infinite}
-@keyframes sweep{to{background-position:220% 0}}
-@media(prefers-reduced-motion:reduce){ .rule{animation:none} }
-@media(max-width:560px){ .brandmark{width:32px;height:32px;vertical-align:-6px;margin-right:9px} }
+/* .rule and its sweep retired with the tall header, as on the tracker. */
+/* Phone: the patch chip is the widest thing in the bar and forced its own row on the
+   tracker; same treatment here rather than hiding it, because the era label is what tells
+   a screenshot which season the item levels belong to. */
+@media(max-width:759px){
+  .topbar{gap:6px 9px;min-height:0}
+  .brandname{font-size:16px}
+  .tbsep{display:none}
+  .pc-full{display:none}
+  .pc-short{display:inline}
+  .sitetabs{margin-left:auto}
+  .tbgrow{display:none}
+}
 .kick{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--t3);font-weight:700}
 /* Top-level tabs between the two pages this project publishes. Mirrors the Spec
    Tracker's .sitetabs strip (2026-08-05) so the pair reads as one site with two tabs
    rather than a tracker with a gearing link bolted into its toolbar. The strip carries
    the header's old border-bottom — it IS the boundary between chrome and content. */
-.sitetabs{display:flex;gap:4px;margin:0 0 26px;border-bottom:1px solid var(--line)}
-.sitetab{font-size:13.5px;font-weight:600;text-decoration:none;color:var(--t3);
-  border:1px solid transparent;border-bottom:0;border-radius:9px 9px 0 0;
-  padding:9px 16px 10px;display:inline-flex;align-items:center;gap:7px;white-space:nowrap;
-  transition:color .15s,background .15s}
-.sitetab:hover{color:var(--t1);background:rgba(181,123,238,.10)}
-.sitetab[aria-current="page"]{color:var(--t1);background:var(--panel);
-  border-color:var(--line);box-shadow:inset 0 2px 0 var(--accent)}
+/* Inline in the bar, matching the tracker exactly (2026-08-22). As a tab STRIP these were
+   42px tall and pushed the 60px bar to 86. */
+.sitetabs{display:flex;gap:10px;margin:0;border-bottom:0;flex:none}
+.sitetab{font-size:12.5px;font-weight:600;text-decoration:none;color:var(--t3);
+  border:0;border-radius:6px;padding:5px 3px;display:inline-flex;align-items:center;gap:7px;
+  white-space:nowrap;transition:color .15s,box-shadow .15s}
+.sitetab:hover{color:var(--t1)}
+.sitetab[aria-current="page"]{color:var(--t1);box-shadow:inset 0 -2px 0 var(--accent)}
 .sitetab:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
 @media(pointer:coarse){.sitetab{min-height:44px}}
-@media(max-width:560px){.sitetab{font-size:12.5px;padding:9px 12px 10px}}
+@media(max-width:560px){.sitetab{font-size:12px}}
 .patchchip{font-family:var(--mono);font-size:11px;font-weight:700;
   letter-spacing:.08em;color:var(--gold);border:1px solid rgba(240,194,75,.4);
   border-radius:6px;padding:5px 9px;white-space:nowrap}
-h1{font-family:var(--disp);font-weight:700;letter-spacing:.01em;font-size:clamp(28px,5vw,46px);
-    line-height:1.02;margin:0;color:#fff;text-shadow:0 0 34px rgba(181,123,238,.35)}
+/* the bar's h1 is .brandname; this stays for any other h1 the page grows */
+h1{font-family:var(--disp);font-weight:700;letter-spacing:.01em;font-size:18px;
+    line-height:1.02;margin:0;color:#fff}
 .sub{font-size:14px;color:var(--t2);margin:0;max-width:70ch}
 .sub b{color:var(--t1)}
 
@@ -111,6 +126,7 @@ button:hover{background:#241740}
 .primary-button:hover{filter:brightness(1.08)}
 :where(a,button,select,textarea,input,summary,[tabindex]):focus-visible{
   outline:3px solid var(--focus);outline-offset:3px}
+.topbar .pill{font-size:11px;padding:3px 9px;font-family:var(--mono)}
 .pill{font-size:12.5px;color:var(--t2);background:var(--panel);border:1px solid var(--line);
       border-radius:999px;padding:6px 12px}
 .pill b{color:var(--t1)}
@@ -295,23 +311,26 @@ table.paths tr:hover td{background:rgba(255,255,255,.03)}
 <body>
 <a class="skip-link" href="#main-content">Skip to recommendations</a>
 <div class="wrap">
+  <!-- Compressed to match the tracker's bar (2026-08-22). Same anatomy in the same order:
+       mark, name in Cinzel at 18px, patch chip with a phone short form, separator, the two
+       site tabs inline. The status facts move to their own line under it. -->
   <header>
-    <p class="eyebrow">Season 2 gear &amp; loot &middot; part of Spec Tracker</p>
-    <div class="titlerow">
-      <h1><a class="brandlink" href="index.html" title="Back to the Spec Tracker"><svg class="brandmark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#130B22" stroke="#B57BEE" stroke-opacity=".45" stroke-width="2.5"/><rect x="12" y="13" width="40" height="9" rx="4.5" fill="#F0C24B"/><rect x="12" y="27.5" width="29" height="9" rx="4.5" fill="#C77DFF"/><rect x="12" y="42" width="19" height="9" rx="4.5" fill="#6AA8F0"/></svg></a>Season 2 Gearing</h1>
-      <span class="patchchip">12.1 &mdash; CURSE OF ULA'TEK</span>
+    <div class="topbar">
+      <a class="brandlink" href="index.html" title="Back to the Spec Tracker"><svg class="brandmark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#130B22" stroke="#B57BEE" stroke-opacity=".45" stroke-width="2.5"/><rect x="12" y="13" width="40" height="9" rx="4.5" fill="#F0C24B"/><rect x="12" y="27.5" width="29" height="9" rx="4.5" fill="#C77DFF"/><rect x="12" y="42" width="19" height="9" rx="4.5" fill="#6AA8F0"/></svg></a>
+      <h1 class="brandname">Season 2 Gearing</h1>
+      <span class="patchchip"><span class="pc-full">12.1 &mdash; CURSE OF ULA'TEK</span><span class="pc-short">12.1</span></span>
+      <span class="tbsep" aria-hidden="true"></span>
+      <nav class="sitetabs" aria-label="Sections">
+        <a class="sitetab" href="index.html" title="Spec Tracker — tier consensus, rankings and the 12.1 forecast">Tracker</a>
+        <a class="sitetab" href="gearing.html" aria-current="page">Gearing</a>
+      </nav>
+      <span class="tbgrow"></span>
       <span class="pill"><b id="p-items">0</b> items</span>
       <span class="pill"><b id="p-specs">0</b> specs</span>
     </div>
-    <div class="rule"></div>
-    <div class="sub">Pick your spec to see what to chase and where it drops
-      &middot; season max <b>344</b> &middot; season opened <b>Aug 18, 2026</b></div>
+    <p class="statline">Pick your spec to see what to chase and where it drops
+      &middot; season max <b>344</b> &middot; season opened <b>Aug 18, 2026</b></p>
   </header>
-
-  <nav class="sitetabs" aria-label="Sections">
-    <a class="sitetab" href="index.html" title="Spec Tracker — tier consensus, rankings and the 12.1 forecast">📊 Spec Tracker</a>
-    <a class="sitetab" href="gearing.html" aria-current="page">⚙ S2 Gearing</a>
-  </nav>
 
   <section class="setup-card" aria-label="Character and scoring setup">
     <div class="setup-grid">
