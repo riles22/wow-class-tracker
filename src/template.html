@@ -55,6 +55,11 @@ try {
     --t-splus:#FFE3A3; --t-s:#F0C24B; --t-aplus:#C77DFF; --t-a:#6AA8F0; --t-bplus:#4FBCBB; --t-b:#45C4A8; --t-c:#8A93A8; --t-d:#D2887A; --t-f:#D27575;
     --v-pos:#52C97A; --v-mix:#E0A73E; --v-neg:#E0655F;
 
+    /* Console (direction C) adds two quiet greys and a hairline below --edge. Density
+       is bought with a four-step ramp — ink / ink-dim / ink-mute / ink-struct — so that
+       tier colour is the only saturated thing in the row body. */
+    --hair:#190F2E; --ink-mute:#6B5D8C; --ink-struct:#4A3D6B;
+
     --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
     --disp:'Cinzel',Georgia,'Times New Roman',serif;
     --body:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
@@ -74,6 +79,19 @@ try {
   a:hover{text-decoration:underline}
 
   .wrap{max-width:1120px; margin:0 auto; padding:0 20px 72px}
+
+  /* Skip link: 105 buttons and 40 focusable rows sit between the top of the document
+     and the grid, and there was no landmark or bypass (audit 2026-08-22). Visually
+     hidden until focused rather than display:none, which would take it out of the tab
+     order and defeat the point. */
+  .skiplink{
+    position:absolute; left:-9999px; top:0; z-index:100;
+    font-family:var(--body); font-size:13px; font-weight:600;
+    background:var(--accent); color:#160a24; padding:10px 16px;
+    border-radius:0 0 9px 0; text-decoration:none
+  }
+  .skiplink:focus{left:0}
+  .skiplink:focus-visible{outline:2px solid var(--accent-2); outline-offset:2px}
 
   /* ---------- header ---------- */
   .masthead{position:relative; overflow:hidden; border-bottom:1px solid var(--edge)}
@@ -438,20 +456,52 @@ try {
   .matrix{margin-top:6px; border:1px solid var(--edge); border-radius:12px; overflow:clip; background:var(--bg-2)}
   .head, .row{
     display:grid;
-    /* Tier columns are 70px, not 56px: a badge (34) + gap (2) + movement arrow (~11.5)
-       + gap (3) + confidence dots (~17.7) needs ~68px in the projection view. At the
-       760px card-layout breakpoint the row still fits with room to spare. */
-    grid-template-columns:34px minmax(200px,1.4fr) minmax(170px,1fr) 70px 70px 26px;
-    align-items:center; gap:12px; padding:9px 14px
+    /* Console, 2026-08-22. Ten data columns: star+rank, spec, class, role, overall,
+       raid, M+, 30d spark, profile, notes, chevron. The tier columns stay ~40px because
+       the badge chrome is gone — the letter is a bare glyph now, and the movement arrow
+       and confidence dots sit beside it in .tind rather than under it. */
+    grid-template-columns:48px 148px 108px 38px 62px 40px 40px 76px 66px minmax(0,1fr) 16px;
+    align-items:center; gap:10px; padding:5px 14px
   }
-  .rank{font-family:var(--mono); font-size:11px; font-weight:700; color:var(--accent-2)}
-  .ovcell{display:flex; align-items:center; gap:8px; min-width:0}
-  .ovtrack{flex:1; height:8px; min-width:60px; background:var(--bg-3); border-radius:8px; overflow:hidden}
-  .ovtrack i{display:block; height:100%; border-radius:8px; background:linear-gradient(90deg,var(--accent),var(--accent-2))}
+  /* Below ~980px the spark and the profile chip go first: both are secondary reads and
+     the notes column earns the width over either. Below ~860 the notes go too. */
+  @media(min-width:760px) and (max-width:979px){
+    .head, .row{grid-template-columns:48px minmax(110px,148px) minmax(84px,108px) 38px 58px 40px 40px minmax(0,1fr) 16px}
+    /* .sparkcell declares display:flex further down the sheet, so an unqualified
+       selector here loses on source order at equal specificity and the column never
+       hid — 10 grid items in 9 columns. Qualified to outrank it. */
+    .head .sparkcell, .row .sparkcell, .head .profcell, .row .profcell{display:none}
+  }
+  @media(min-width:760px) and (max-width:859px){
+    .head, .row{grid-template-columns:48px minmax(100px,1fr) minmax(78px,108px) 38px 54px 40px 40px 16px}
+    .head .notecell, .row .notecell{display:none}
+  }
+  .idcell{display:flex; align-items:center; gap:3px; min-width:0}
+  .rank{font-family:var(--mono); font-size:11px; font-weight:700; color:var(--ink-struct)}
+  .clscell{font-family:var(--mono); font-size:11px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0}
+  .rolecell{font-family:var(--mono); font-size:10px; letter-spacing:.08em; color:var(--ink-struct)}
+  .ovcell{display:flex; align-items:center; gap:6px; min-width:0}
+  .ovtrack{flex:1; height:4px; min-width:18px; background:var(--bg-3); border-radius:4px; overflow:hidden}
+  .ovtrack i{display:block; height:100%; border-radius:4px; background:linear-gradient(90deg,var(--accent),var(--accent-2))}
   .ovnum{font-family:var(--mono); font-size:12px; color:var(--ink)}
-  .row .tier{height:20px; font-size:11px; min-width:26px; padding:0 5px; border-radius:5px}
+  /* The tier letter is the only saturated colour in the row body, so it does not also
+     need a plate. The badge treatment survives in the legend and the drawer, where it
+     reads as a swatch rather than as data. */
+  .row .tier{height:auto; font-size:12.5px; min-width:0; padding:0; border:0; background:none; border-radius:0}
+  .row .tscore{display:none}
+  .sparkcell{display:flex; align-items:center; min-width:0}
+  .sparkcell svg{display:block}
+  .profcell{font-family:var(--mono); font-size:10px; color:var(--ink-mute); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+  /* The one-line "why". This is the column that answers what moved and who disagrees
+     without opening a drawer — and it is the visible-text replacement for the largest
+     block of grid tooltips the 2026-08-22 audit counted (367 of 407). */
+  .notecell{font-family:var(--mono); font-size:11px; color:var(--ink-mute); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0}
+  .head .sparkcell, .head .profcell, .head .notecell{font:inherit; color:inherit; letter-spacing:inherit}
+  .notecell .ndiv{color:var(--v-mix)}
+  .notecell .nup{color:var(--v-pos)}
+  .notecell .ndown{color:var(--v-neg)}
   .head{
-    font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+    font-family:var(--mono); font-size:9.5px; letter-spacing:.13em; text-transform:uppercase;
     color:var(--ink-faint); background:var(--bg-3); border-bottom:1px solid var(--edge);
     position:sticky; top:var(--controls-h, 0px); z-index:6
   }
@@ -493,15 +543,16 @@ try {
      you, and the browser clamps scrollY to the new smaller maximum, skipping rows the
      reader never saw. Under-estimating just grows the page, which scroll anchoring
      absorbs. Track the real heights; if in doubt, err low. */
-  .row{border-bottom:1px solid var(--edge); transition:background .12s;
-       content-visibility:auto; contain-intrinsic-size:auto 38px}
+  .row{border-bottom:1px solid var(--hair); transition:background .12s;
+       font-family:var(--mono); font-size:12px;
+       content-visibility:auto; contain-intrinsic-size:auto 22px}
   .row:last-child{border-bottom:0}
   .row.clickable{cursor:pointer}
   .row.clickable:hover{background:var(--bg-3)}
   .row:focus-visible{outline:2px solid var(--accent-2); outline-offset:-2px}
-  .spec-name{display:flex; align-items:center; gap:10px; min-width:0}
+  .spec-name{display:flex; align-items:center; gap:7px; min-width:0}
   .cbar{width:4px; height:20px; border-radius:3px; flex:none}
-  .spec-txt{font-weight:600; color:var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+  .spec-txt{font-family:var(--body); font-weight:600; font-size:13px; color:var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
   .newbadge{font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:.09em; color:#160a24; background:var(--gold); border-radius:4px; padding:2px 5px; margin-left:-2px; flex:none; cursor:help; align-self:center}
   .cls{font-family:var(--mono); font-size:11px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0; flex:none}
   .rolechip{font-family:var(--mono); font-size:10px; letter-spacing:.08em; text-transform:uppercase; padding:1px 6px; border-radius:5px; border:1px solid var(--edge-2); color:var(--ink-faint); flex:none}
@@ -544,6 +595,9 @@ try {
   .watch{margin-top:12px; font-size:13px; color:var(--ink-dim); background:color-mix(in srgb,var(--v-mix) 8%,transparent); border:1px solid color-mix(in srgb,var(--v-mix) 26%,transparent); border-radius:8px; padding:8px 12px}
   .watch b{font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--v-mix); display:block; margin-bottom:3px}
   .empty{padding:34px 16px; text-align:center; color:var(--ink-faint); font-size:14px}
+  /* A filtered-to-nothing grid was a dead end with no route back — and the visitor may
+     have stacked role + search + starred to get there (audit 2026-08-22). */
+  .empty .finderbtn{margin-left:12px}
   .ptrcaveat{
     display:none; margin:10px 0 0; padding:9px 13px; font-size:12px; line-height:1.5;
     color:var(--ink-dim); background:color-mix(in srgb,var(--accent) 7%,transparent);
@@ -608,16 +662,25 @@ try {
   /* ---------- mobile matrix -> cards ---------- */
   @media(max-width:759px){
     .head{display:none}
+    /* Console on a phone: a dedicated 44px star rail so the watchlist control and the
+       row's own tap target stop competing (the star measured 15x13px before), and the
+       body on three or four lines instead of ten columns. */
     .row{
-      grid-template-columns:auto 1fr auto; grid-auto-rows:min-content;
-      row-gap:9px; padding:13px 15px;
-      contain-intrinsic-size:auto 93px /* card layout: rank+name / overall bar / chips — measured, see .row above */
+      grid-template-columns:44px 1fr auto; grid-auto-rows:min-content;
+      row-gap:5px; column-gap:9px; padding:0;
+      contain-intrinsic-size:auto 60px
     }
-    .rank{grid-column:1; grid-row:1; align-self:center}
-    .spec-name{grid-column:2; grid-row:1; flex-wrap:wrap}
-    .chev{grid-column:3; grid-row:1; align-self:center}
-    .ovcell{grid-column:1/-1; grid-row:2}
-    .metaline{grid-column:1/-1; grid-row:3; display:flex; gap:8px; align-items:center; flex-wrap:wrap}
+    .idcell{grid-column:1; grid-row:1/-1; flex-direction:column; justify-content:center;
+      align-self:stretch; gap:3px; border-right:1px solid var(--hair); background:color-mix(in srgb,var(--bg-3) 45%,transparent)}
+    .spec-name{grid-column:2; grid-row:1; flex-wrap:wrap; padding-top:9px}
+    .chev{grid-column:3; grid-row:1; align-self:center; padding:9px 13px 0 0}
+    .clscell{grid-column:2; grid-row:2}
+    .rolecell{grid-column:3; grid-row:2; justify-self:end; padding-right:13px}
+    .ovcell{grid-column:3; grid-row:3; justify-self:end; padding-right:13px}
+    .row .sparkcell, .row .profcell{display:none}
+    .notecell{grid-column:2/4; grid-row:4; white-space:normal; padding:0 13px 9px 0; line-height:1.4}
+    .notecell:empty{display:none}
+    .metaline{grid-column:2; grid-row:3; display:flex; gap:8px; align-items:center; flex-wrap:wrap; padding-bottom:9px}
     .metaline .mtag{display:inline; font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-faint)}
     /* the patch/fight attribution the hidden .head would otherwise have carried */
     .metaline .mqual{font-style:normal; letter-spacing:.02em; text-transform:none; opacity:.75}
@@ -740,6 +803,14 @@ try {
     .seg button, .fopt, .finderbtn, .search, .sortsel, .laddersearch{min-height:44px}
     .toggle{min-height:44px}
     .finder-x{width:40px; height:40px}
+    /* Measured 2026-08-22: 40 star buttons at 15x13px, 187 footer links at ~15px and
+       five disclosure summaries at 16px — all below even the 24x24 AA floor. The star
+       is the grid's only per-row control, so it gets the full 44. A dedicated 44px star
+       rail is the better answer and belongs with the row rebuild, not here. */
+    .starbtn{min-width:32px; min-height:44px; padding:0 8px}
+    .legend-wrap > summary, .sub-more > summary, .caveat-more > summary,
+    .changes summary{min-height:44px; display:inline-flex; align-items:center}
+    .srclist a, .creditlist a, .live a{display:inline-block; padding:5px 0; min-height:26px}
   }
 
   /* Compare all — the full-roster matrix (overlay reuses the Spec Finder shell).
@@ -854,6 +925,7 @@ try {
 </style>
 </head>
 <body>
+<a class="skiplink" href="#main">Skip to the spec grid</a>
 
 <header class="masthead">
   <canvas class="starfield" id="stars" aria-hidden="true"></canvas>
@@ -943,12 +1015,14 @@ try {
       <span>Reduce motion</span>
     </label>
     <span class="grow"></span>
-    <span class="toolstatus" id="toolstatus"></span>
+    <!-- Filtering silently went 40 -> 0 with nothing announced (audit 2026-08-22). This
+         span already carries the count, so making it a live region is the whole fix. -->
+    <span class="toolstatus" id="toolstatus" role="status" aria-live="polite" aria-atomic="true"></span>
   </div>
   </details>
 </div>
 
-<div class="wrap">
+<main class="wrap" id="main">
 
   <!-- What changed leads: this is a page people check daily, and the change
        narration used to sit 773px down on desktop / 1,658px on a phone, below the
@@ -1011,7 +1085,7 @@ try {
 
   <div class="matrix" id="matrix"></div>
 
-  <footer>
+  <footer role="contentinfo">
     <div class="foot-grid">
       <div>
         <p class="foot-h">Sources &amp; snapshot dates</p>
@@ -1046,7 +1120,7 @@ try {
       <span class="keep">An original project — if you share or fork it, please keep the credit.</span>
     </p>
   </footer>
-</div>
+</main>
 
 <script>
 /* Async font load — kicked off first so the swap happens as early as possible. */
@@ -1086,6 +1160,14 @@ const CLASS_COLOR = {
   "Hunter":"#AAD372","Mage":"#3FC7EB","Monk":"#00FF98","Paladin":"#F48CBA","Priest":"#E9E9E9",
   "Rogue":"#FFF468","Shaman":"#0070DD","Warlock":"#8788EE","Warrior":"#C69B6D"
 };
+/* Three official class colours miss 4.5:1 against --bg at the 11px the class name is
+   set in: Death Knight 3.27, Demon Hunter 3.48, Shaman 3.97 (measured 2026-08-22; every
+   other colour on the page passes). Hue is preserved and lightness lifted, so the class
+   still reads as itself. The canonical colour stays in CLASS_COLOR for the 4px class
+   bar, the compare-tray dots and the compare table headers, where the glyph is
+   decorative or large enough that the small-text ratio does not apply. */
+const CLASS_COLOR_TEXT = { ...CLASS_COLOR,
+  "Death Knight":"#D45E76", "Demon Hunter":"#BE5AE0", "Shaman":"#3E93E8" };
 const CLASS_ORDER = Object.keys(CLASS_COLOR);
 
 const VERDICT_RANK = { "Positive":0, "Mixed":1, "Negative":2, "—":3 };
@@ -1812,6 +1894,85 @@ function overallOf(s){
   const parts = [ratingFor(s,"raid").score, ratingFor(s,"mplus").score].filter(v => v >= 0);
   return parts.length ? parts.reduce((x,y)=>x+y,0)/parts.length : null;
 }
+
+const ROLE_ABBR = { DPS:"DPS", Healer:"HLR", Tank:"TNK" };
+
+/* 30-day consensus spark. The series is already in the payload — historySeries() ships
+   per-spec raid/mplus score arrays — so this column costs no new data.
+   ONE constraint, and it is load-bearing: history.enriched marks which snapshots carry
+   EXACT scores; earlier points are reconstructed from tier midpoints, and render.mjs is
+   explicit that drawing them identically "reads as a score move that never happened".
+   At 72x14 there is no room for two line styles, so the series simply STARTS at the
+   first enriched point rather than plotting the reconstruction. */
+const SPARK_POINTS = 12;
+function sparkCell(s){
+  const H = DATA.history;
+  const row = H && H.specs && H.specs[`${s.class}|${s.spec}`];
+  const blank = '<span class="sparkcell" aria-hidden="true"></span>';
+  if(!row) return blank;
+  const start = (H.enriched || []).findIndex(Boolean);
+  if(start < 0) return blank;
+  const raid = row.raid || [], mp = row.mplus || [];
+  const pts = [];
+  for(let i = start; i < Math.max(raid.length, mp.length); i++){
+    const v = [raid[i], mp[i]].filter(x => typeof x === "number");
+    pts.push(v.length ? v.reduce((a,b)=>a+b,0)/v.length : null);
+  }
+  const tail = pts.slice(-SPARK_POINTS).filter(v => v != null);
+  if(tail.length < 2) return blank;
+  const W = 72, Hh = 14, lo = Math.min(...tail), hi = Math.max(...tail);
+  const span = (hi - lo) || 1;
+  const d = tail.map((v,i) => {
+    const x = (i / (tail.length - 1)) * W;
+    const y = Hh - 1.5 - ((v - lo) / span) * (Hh - 3);
+    return `${x.toFixed(1)},${y.toFixed(1)}`;
+  }).join(" ");
+  const delta = tail[tail.length-1] - tail[0];
+  const stroke = delta > 1.5 ? "var(--v-pos)" : delta < -1.5 ? "var(--v-neg)" : "var(--ink-mute)";
+  const dates = H.dates || [];
+  const from = dates[Math.max(0, dates.length - tail.length)] || "";
+  const tip = `Consensus 0-100 across the last ${tail.length} snapshots${from?` (from ${esc(from)})`:""} — ${Math.round(tail[0])} to ${Math.round(tail[tail.length-1])}`;
+  return `<span class="sparkcell" title="${esc(tip)}"><svg width="${W}" height="${Hh}" viewBox="0 0 ${W} ${Hh}" role="img" aria-label="${esc(tip)}"><polyline points="${d}" fill="none" stroke="${stroke}" stroke-width="1.4" stroke-linejoin="round"/></svg></span>`;
+}
+
+/* The one-line "why". Movement first, because that is what changed; otherwise the widest
+   disagreement, spelled out with each source's own letter. Both come straight off the
+   payload (spec.movement, consensus[bracket].perSource, which already carries a label).
+   This is the visible-text answer to the tooltip problem: the 2026-08-22 audit counted
+   367 of 407 title= attributes inside the grid, where touch can never reach them. */
+function noteCell(s){
+  const bits = [];
+  const full = [];
+  const projView = state.source === "projection" && state.era !== "live";
+  const showMv = !state.fight && (state.source === "consensus" || projView);
+  for(const b of ["raid","mplus"]){
+    const mv = showMv ? (projView ? s.projMovement?.[b] : s.movement?.[b]) : null;
+    if(!mv) continue;
+    const cls = mv.delta > 0 ? "nup" : "ndown";
+    bits.push(`<span class="${cls}">${b==="raid"?"raid":"m+"} ${esc(mv.was)}→${esc(ratingFor(s,b).tier)}</span>`);
+  }
+  if(!bits.length && !state.fight){
+    for(const b of ["raid","mplus"]){
+      const c = s.consensus?.[b];
+      if(!c || !c.diverges) continue;
+      const rated = (c.perSource || []).filter(p => p.tier && typeof p.score === "number");
+      if(rated.length < 2) continue;
+      const byScore = [...rated].sort((a,b) => b.score - a.score);
+      const hi = byScore[0], lo = byScore[byScore.length - 1];
+      const name = p => esc(p.label || p.source);
+      bits.push(`<span class="ndiv">±</span> ${b==="raid"?"raid":"m+"} — ${name(hi)} ${esc(hi.tier)} ↔ ${name(lo)} ${esc(lo.tier)}`);
+      // the full list stays reachable — the visible line is the spread, the title is the roll-call
+      full.push(`${b==="raid"?"raid":"m+"}: ` + rated.map(p => `${p.label || p.source} ${p.tier}`).join(", "));
+      break;
+    }
+  }
+  if(!bits.length) return '<span class="notecell"></span>';
+  const html = bits.join(" · ");
+  const plain = html.replace(/<[^>]+>/g, "");
+  const tip = full.length ? `${plain} — all sources · ${full.join(" · ")}` : plain;
+  return `<span class="notecell" title="${esc(tip)}">${html}</span>`;
+}
+
 function rowHTML(s, idx, simBar, rank, quals){
   const color = CLASS_COLOR[s.class] || "#888";
   const hasPtr = !!s.ptr;
@@ -1827,16 +1988,18 @@ function rowHTML(s, idx, simBar, rank, quals){
   return `
    <div class="row clickable ${hasPtr?'has-ptr':''}" data-idx="${idx}"
         role="button" tabindex="0" aria-expanded="false">
-     <span class="rank" aria-hidden="true">${rank!=null?String(rank).padStart(2,'0'):''}</span>
-     <div class="spec-name">
-       <span class="cbar" style="background:${color}"></span>
+     <span class="idcell">
        <button class="starbtn${STARS.has(`${s.class}|${s.spec}`)?' on':''}" type="button" data-key="${esc(`${s.class}|${s.spec}`)}"
                title="${STARS.has(`${s.class}|${s.spec}`)?'Remove from':'Add to'} watchlist" aria-label="${STARS.has(`${s.class}|${s.spec}`)?'Unstar':'Star'} ${esc(s.spec)} ${esc(s.class)}"
                aria-pressed="${STARS.has(`${s.class}|${s.spec}`)?'true':'false'}">${STARS.has(`${s.class}|${s.spec}`)?'★':'☆'}</button>
+       <span class="rank" aria-hidden="true">${rank!=null?String(rank).padStart(2,'0'):''}</span>
+     </span>
+     <div class="spec-name">
+       <span class="cbar" style="background:${color}"></span>
        <span class="spec-txt">${esc(s.spec)}</span>${newBadgeHTML(s)}
-       <span class="cls" style="color:${color}" title="${esc(s.class)}">${esc(s.class)}</span>
-       <span class="rolechip">${esc(s.role)}</span>
      </div>
+     <span class="clscell cls" style="color:${CLASS_COLOR_TEXT[s.class] || color}" title="${esc(s.class)}">${esc(s.class)}</span>
+     <span class="rolecell" title="${esc(s.role)}">${esc(ROLE_ABBR[s.role] || s.role)}</span>
      <div class="ovcell" title="Overall — mean of the Raid and M+ scores under the current view (the number the Overall sort orders by)">${
        ov!=null
         ? `<span class="ovtrack" aria-hidden="true"><i style="width:${Math.round(ov)}%"></i></span><span class="ovnum">${Math.round(ov)}</span>`
@@ -1845,6 +2008,9 @@ function rowHTML(s, idx, simBar, rank, quals){
        <span class="mtag">Raid${quals?.raid ? ` <i class="mqual">${esc(quals.raid)}</i>` : ""}</span>${tierEl(ratingFor(s,"raid"), mvOf(s,"raid"))}
        <span class="mtag">M+${quals?.mplus ? ` <i class="mqual">${esc(quals.mplus)}</i>` : ""}</span>${tierEl(ratingFor(s,"mplus"), mvOf(s,"mplus"))}
      </div>
+     ${sparkCell(s)}
+     <span class="profcell"${s.fightProfile?.tag ? ` title="Sim fight profile — ${esc(s.fightProfile.tag)}"` : ""}>${s.fightProfile?.tag ? esc(s.fightProfile.tag) : ""}</span>
+     ${noteCell(s)}
      <span class="chev">▸</span>
      ${simBar && typeof s.fightProfile?.metricsUsed?.[simBar.key]==="number" ? `<div class="rowbar" aria-hidden="true" title="Sim ${simBar.label} DPS ${Math.round(s.fightProfile.metricsUsed[simBar.key]).toLocaleString('en-US')}${s.fightProfile.asOf?` · ${esc(s.fightProfile.asOf)}${(seasonOfDate(s.fightProfile.asOf)||{}).name?` · ${esc(seasonOfDate(s.fightProfile.asOf).name)}`:""}`:""}"><i style="width:${(s.fightProfile.metricsUsed[simBar.key]/simBar.max*100).toFixed(1)}%;background:${color}"></i></div>` : ""}
      <div class="drawer" inert></div>
@@ -2052,11 +2218,11 @@ function render(){
   const rh = fightHead('raid','Raid'), mh = fightHead('mplus','M+');
   const quals = { raid: rh.qual, mplus: mh.qual };
   let html = `<div class="head">
-      <div>#</div>${hcell('spec','Spec')}${hcell('overall','Overall')}${hcell('raid',rh.label,rh.aria)}${hcell('mplus',mh.label,mh.aria)}<div></div>
+      <div>#</div>${hcell('spec','Spec')}${hcell('class','Class')}<div>Role</div>${hcell('overall','Overall')}${hcell('raid',rh.label,rh.aria)}${hcell('mplus',mh.label,mh.aria)}<div class="sparkcell">30d</div><div class="profcell">Profile</div><div class="notecell">Notes</div><div></div>
     </div>`;
 
   if(ordered.length===0){
-    html += `<div class="empty">No specs match these filters.</div>`;
+    html += `<div class="empty">No specs match these filters.<button type="button" id="clearfilters" class="finderbtn">Clear filters</button></div>`;
   } else if(state.sort==="class"){
     // Grouped by class the global rank is meaningless — number within the class instead.
     let cur=null, n=0;
@@ -2217,6 +2383,16 @@ function toggleRow(row){
   }
 }
 matrix.addEventListener('click', e=>{
+  if(e.target.id === 'clearfilters'){
+    state.role='All'; state.q=''; state.starOnly=false; state.ptrOnly=false;
+    const q=document.getElementById('search'); if(q) q.value='';
+    const st=document.getElementById('staronly'); if(st) st.checked=false;
+    const pt=document.getElementById('ptronly'); if(pt) pt.checked=false;
+    document.querySelectorAll('#roleseg button').forEach(b=>
+      b.setAttribute('aria-pressed', String(b.dataset.role==='All')));
+    render(); writeHash();
+    return;
+  }
   const hs = e.target.closest('.hsort'); if(hs){ setSort(hs.dataset.sort); return; }
   const cb = e.target.closest('.cmpbtn');
   if(cb){ // compare toggle lives inside the drawer — handle before the drawer guard
