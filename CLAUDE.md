@@ -318,6 +318,111 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
 - **Zone-54 raid testing covers ALL ROLES** (2026-07-09): healer (hps) and tank cuts
   merge under the SAME metric name as DPS — "12.1 PTR raid testing score (normalized)" —
   so within-role ranks and the projection consume them with no special-casing.
+- **The grid is "Console"** (2026-08-22 UX audit, direction C — chosen by Riley from three
+  candidates; the audit canvas records the two that lost and why). The row went from five
+  columns to **eleven grid items** — star+rank · spec · class · role · overall · raid · M+ ·
+  30d spark · profile · notes · chevron — with a mono body at 12px and a 33px row. Measured:
+  **27 specs per screen at 1440x900 against 18** before, 11 on a 375px phone against 6, and
+  the whole document 10,533px -> 9,564px.
+  **The two new columns cost NO new data, which is why the direction was affordable.** The
+  spark reads `history.specs[key].raid/.mplus` (already shipped by `historySeries()` for the
+  drawer Timeline) and the notes line joins `consensus[bracket].perSource`, which already
+  carries each source's `label` and `tier`. Two rules on them:
+  (a) the spark **starts at the first `history.enriched` point** and never plots the earlier
+  tier-midpoint reconstruction — render.mjs is explicit that drawing them alike "reads as a
+  score move that never happened", and at 72x14px there is no room for two line styles;
+  (b) the notes line shows the **spread**, not the roll-call — `± m+ — Icy Veins S+ ↔ Method A`
+  — because listing all four sources overflowed 308px on 9 of 40 rows and ellipsed mid-list.
+  The full per-source list stays in the `title`.
+  **The notes column is also the touch fix**: it is visible text where a `title=` used to be,
+  and the audit counted 367 of the page's 407 tooltips inside the grid.
+  Two things the row deliberately GAVE UP: the per-tier `.tscore` within-band meter (the 0-100
+  Overall already carries position) and the tier badge plate — the letter is now the only
+  saturated colour in the row body. The badge treatment survives in the legend and the drawer,
+  where it reads as a swatch rather than as data.
+  **Contracts the rebuild had to preserve, and did** (the UI invariants read these by class,
+  never by position): exactly **two `.tier` elements per row in raid-then-mplus DOM order**
+  with the letter as `textContent`, plus `.spec-txt`, `.cls`, `.newbadge`, `.conf`, `.mv`,
+  `.head .hqual`, and `.row[data-idx][role=button][aria-expanded]` with an `inert` `.drawer`.
+  `.metaline{display:contents}` is STILL the mechanism that lets the two tier cells be direct
+  grid items on desktop and one flex line on the phone — do not remove it.
+  **Breakpoint trap, hit once and fixed:** `.sparkcell` declares `display:flex` LATER in the
+  sheet than the media query that hides it, so an unqualified `.sparkcell{display:none}` lost
+  on source order at equal specificity and the column never hid — 10 grid items in 9 columns
+  at 920px. The hide rules are qualified (`.head .sparkcell, .row .sparkcell`) for that reason.
+  Item count must equal column count at every width: **11 at >=980px, 9 at 860-979** (spark +
+  profile drop), **8 below** (notes drop), and the card layout under 760px.
+  `contain-intrinsic-size` is re-measured: **22px desktop** (real content 24) and **60px card**
+  (real 67) — deliberately low, per the rule above that over-estimating shrinks the document
+  under the reader and skips rows.
+- **Page weight and reading order** (same audit, stage 3). Measured before: the desktop
+  document was **10,533px**, of which the footer was **7,200px (68%)** and the grid 22%; the
+  first spec row sat at **890px**, the whole fold on a 1366x768 laptop. After: **5,382px**,
+  footer 50%, grid 31%, first row at **637px**.
+  Three changes got there.
+  (a) **The data-first reading order is no longer phone-only.** The `order` block that fixed
+  the phone in Aug 2026 now lives on `.wrap` at every width. Visual order only — DOM order is
+  untouched, so the movers-after-caveat invariant still holds — and what stays ABOVE the grid
+  is still exactly the honesty surfaces plus the 0-100 note.
+  ⚠️ **`.wrap` is now a flex column, and that has a cost that bit once.** Flex items default to
+  `min-width:auto`, so a child holding an unshrinkable run of text can push itself wider than
+  `.wrap` — which block children never could. `.foot-grid`'s bare `1.1fr .9fr` then sized to
+  content and went **582/476 -> 277/916**, wrapping every source row to four lines. Tracks are
+  `minmax(0,...)` now and `.wrap > *` carries `min-width:0`. Any new full-width child with
+  `white-space:nowrap` inside needs the same care.
+  (b) **The patch feed is a dated INDEX.** Each entry was rendering its stored `label`, which
+  is a paragraph and not a title — `#buildfeed` alone was 6,535px. The headline is capped on a
+  word boundary with the full text in the `title`, and everything past `FEED_OPEN` (4) folds.
+  6,535 -> ~700px.
+  (c) **The spec drawer is a collapsed accordion**, 4,443px -> ~350px with everything folded.
+  Riley chose `<details>` over tabs specifically so find-in-page and a whole-read screenshot
+  still reach the content — every section is PRESENT, just closed.
+  **The fold is applied in the DOM after assembly (`foldDrawerColumn`), not at the fifteen
+  emit sites, and that is deliberate**: the sections are heterogeneous siblings — `.d-sec`,
+  `.metrics` and `.srcbreak` carry their own `.d-h` INSIDE, while `.setbox` is preceded by a
+  BARE `.d-h` sibling and `.watch` labels itself with a `<b>`. One pairing pass handles all
+  three shapes; fifteen string edits would not have. Three traps it encodes:
+  `.watch` must be recognised explicitly or it is swallowed into the fold above it; the
+  summary label cuts at the first ` —`/` (`/` ·` with a floor of **6** characters (a floor of
+  12 leaves "Timeline (" and "Meta outlook (" explaining themselves in the summary); and a
+  heading the summary had to TRUNCATE keeps its full text visible inside the fold as
+  `.dfold-full` rather than being demoted to a `title=`, which is the exact failure this
+  audit exists to fix. `.dfold .dfold-dupe` is two classes deep on purpose — `.watch b` sets
+  `display:block` and outranks a single class.
+- **Between-cycles copy residue** (same audit, stage 3). All keyed on `PHASE.ptr` so they
+  self-heal when the next cycle opens, rather than on data that has to be remembered:
+  the masthead stamp says **"Latest class tuning"** rather than "Latest PTR build" when there
+  is no PTR (a live tuning post falls back to `kind: "build"`, so the kind alone could not
+  tell — this was the mislabel render.mjs's own residue note exists to catch); the footer
+  heading is a **"patch feed"** between cycles; the **"PTR verdict" sort option hides** when
+  the era filter is rendering no verdict chips; the lede states **both bracket counts** when
+  the consensus is split, because a single figure contradicted the toolbar two rows below it;
+  and the movers strip reframes from "Into 12.1" to **"Forecast vs. live consensus"** once the
+  forecast is frozen, labelled **"not yet a grade"** — week-one tier lists churn hard and the
+  report card only scores after `SETTLE_DAYS`, so a verdict there would overclaim.
+- **Accessibility baseline** (same audit, stage 1). `.wrap` is `<main id="main">` with a
+  focus-revealed `.skiplink`; the footer stays INSIDE main because the phone reading order is
+  a flex `order` on `.wrap` and moving it out would break that, so it carries an explicit
+  `role="contentinfo"`. `#toolstatus` is `role="status" aria-live="polite"` — it already held
+  the count, so that was the whole fix — and the empty state has a **Clear filters** button
+  (role + search + starred + PTR-only) because a filtered-to-nothing grid was a dead end.
+  `@media(pointer:coarse)` now reaches `.starbtn` (32x44; it measured **15x13**), the
+  disclosure summaries (44) and footer links (26, above the 24x24 AA floor — 44 each would add
+  thousands of px to a footer we are trying to shrink).
+  **`CLASS_COLOR_TEXT`** lifts the three official class colours that miss 4.5:1 as 11px text —
+  Death Knight 3.27, Demon Hunter 3.48, Shaman 3.97 — to `#D45E76`/`#BE5AE0`/`#3E93E8`. The
+  canonical `CLASS_COLOR` stays on the 4px `.cbar` and the compare dots, where the small-text
+  ratio does not apply. Every other colour on the page already passes.
+  **Two audit findings were RETRACTED on implementation, and must not be "fixed" again.**
+  (1) The three overlays are already correct dialogs: `role="dialog"` + `aria-modal` + a label
+  on the **panel** (not the backdrop), focus to the close button on open, restore to the opener
+  on close, and a Tab trap. An audit that inspects the backdrop, or checks `activeElement`
+  synchronously before the `setTimeout` that moves focus, will wrongly report all four missing.
+  (2) Ignoring `prefers-reduced-motion` is DELIBERATE, not an oversight — `ui-invariants`
+  emulates `reducedMotion: "reduce"` and then asserts motion stays ON, because the reference
+  site does and this one ships a persisted control instead. Changing it reds that invariant by
+  design; it is an owner decision, and the live argument for revisiting is that gearing honours
+  the OS while the tracker does not.
 - **Client-side UX lanes** (template-only, no build step): URL-hash deep links (state +
   open drawer, `applyHash`/`writeHash`), localStorage watchlist (★ + Starred filter),
   the "What changed" strip (narrates the movement-baseline diff), and Compare (pin ≤3

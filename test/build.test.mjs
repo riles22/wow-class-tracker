@@ -59,7 +59,8 @@ test("build produces the tracker and fetchable launcher icons", async () => {
   const eraDisplay = PHASES.ptr ? PHASES.ptr.label : PHASES.liveLabel;
   assert.ok(html.includes(`class="patchchip">${eraDisplay} — ${PHASES.patchName.toUpperCase()}<`), "masthead chip must carry the PHASES-derived era");
   assert.ok(html.includes(`${PHASES.liveLabel} / ${seasonName(PHASES.liveSeason)}`), "baseline line must carry liveLabel + season");
-  assert.ok(html.includes(`>${eraDisplay} build feed<`), "build-feed heading must carry the era display label");
+  assert.ok(html.includes(`>${eraDisplay} build feed<`) || html.includes(`>${eraDisplay} patch feed<`),
+    "patch-feed heading must carry the era display label");
   assert.ok(!/__ERA_[A-Z_]+__/.test(html), "no era token may survive substitution");
 });
 
