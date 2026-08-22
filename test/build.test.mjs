@@ -57,7 +57,11 @@ test("build produces the tracker and fetchable launcher icons", async () => {
   const { PHASES } = await import("../src/normalize.mjs");
   const seasonName = s => `Season ${PHASES.seasonOrder.indexOf(s) + 1}`;
   const eraDisplay = PHASES.ptr ? PHASES.ptr.label : PHASES.liveLabel;
-  assert.ok(html.includes(`class="patchchip">${eraDisplay} — ${PHASES.patchName.toUpperCase()}<`), "masthead chip must carry the PHASES-derived era");
+  // the chip carries a full and a short form since the 2026-08-22 bar compression
+  assert.ok(html.includes(`<span class="pc-full">${eraDisplay} — ${PHASES.patchName.toUpperCase()}</span>`),
+    "masthead chip must carry the PHASES-derived era");
+  assert.ok(html.includes(`<span class="pc-short">${eraDisplay}</span>`),
+    "…and its phone form must carry the era too, so attribution survives a mobile screenshot");
   assert.ok(html.includes(`${PHASES.liveLabel} / ${seasonName(PHASES.liveSeason)}`), "baseline line must carry liveLabel + season");
   assert.ok(html.includes(`>${eraDisplay} build feed<`) || html.includes(`>${eraDisplay} patch feed<`),
     "patch-feed heading must carry the era display label");

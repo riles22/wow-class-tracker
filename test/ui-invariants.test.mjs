@@ -992,18 +992,16 @@ ui("motion defaults on, marks real entrances, and persists the site reduction co
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.reload();
   await page.waitForFunction(() => document.querySelectorAll(".row").length > 0);
-  const starfieldHasPaint = () => page.$eval("#stars", canvas => {
-    const pixels = canvas.getContext("2d").getImageData(0, 0, canvas.width, canvas.height).data;
-    for(let i = 3; i < pixels.length; i += 4) if(pixels[i]) return true;
-    return false;
-  });
+  /* .rule and the #stars canvas were retired with the tall masthead (2026-08-22), so the
+     ambient probes are gone. The .switch and .chev transitions replace them: both are
+     motion surfaces the control governs, and both survive every layout this page has. */
 
   const defaultOn = await page.evaluate(() => ({
     rootReduced: document.documentElement.dataset.reduceMotion ?? null,
     stored: localStorage.getItem("wct-reduce-motion"),
     checked: document.getElementById("reduce-motion").checked,
-    ruleAnimation: getComputedStyle(document.querySelector(".rule")).animationName,
-    starfieldVisible: getComputedStyle(document.getElementById("stars")).display !== "none",
+    switchTransition: getComputedStyle(document.querySelector(".switch")).transitionDuration,
+    chevTransition: getComputedStyle(document.querySelector(".chev")).transitionDuration,
     topScroll: (() => {
       let behavior = null;
       const prior = window.scrollTo;
@@ -1013,10 +1011,9 @@ ui("motion defaults on, marks real entrances, and persists the site reduction co
       return behavior;
     })(),
   }));
-  defaultOn.starfieldPainted = await starfieldHasPaint();
   assert.deepEqual(defaultOn, {
     rootReduced: null, stored: null, checked: false,
-    ruleAnimation: "sweep", starfieldVisible: true, topScroll: "smooth", starfieldPainted: true,
+    switchTransition: "0.15s", chevTransition: "0.18s, 0.15s", topScroll: "smooth",
   });
 
   // Opening the Ladder animates its shell and its bars together.
@@ -1056,7 +1053,7 @@ ui("motion defaults on, marks real entrances, and persists the site reduction co
     panelAnimation: getComputedStyle(document.querySelector("#ladder-ov .finder-panel")).animationName,
     barAnimation: getComputedStyle(document.querySelector("#ladder-chart .ladderbar")).animationName,
     switchTransition: getComputedStyle(document.querySelector(".switch")).transitionDuration,
-    starfieldVisible: getComputedStyle(document.getElementById("stars")).display !== "none",
+    chevTransition: getComputedStyle(document.querySelector(".chev")).transitionDuration,
     topScroll: (() => {
       let behavior = null;
       const prior = window.scrollTo;
@@ -1066,11 +1063,10 @@ ui("motion defaults on, marks real entrances, and persists the site reduction co
       return behavior;
     })(),
   }));
-  reducedNow.starfieldPainted = await starfieldHasPaint();
   assert.deepEqual(reducedNow, {
     rootReduced: "true", stored: "reduce", checked: true,
     overlayClass: false, chartClass: false, panelAnimation: "none", barAnimation: "none",
-    switchTransition: "0s", starfieldVisible: false, topScroll: "auto", starfieldPainted: false,
+    switchTransition: "0s", chevTransition: "0s", topScroll: "auto",
   });
 
   await page.reload();
@@ -1079,24 +1075,19 @@ ui("motion defaults on, marks real entrances, and persists the site reduction co
     rootReduced: document.documentElement.dataset.reduceMotion,
     stored: localStorage.getItem("wct-reduce-motion"),
     checked: document.getElementById("reduce-motion").checked,
-    ruleAnimation: getComputedStyle(document.querySelector(".rule")).animationName,
-    starfieldVisible: getComputedStyle(document.getElementById("stars")).display !== "none",
+    switchTransition: getComputedStyle(document.querySelector(".switch")).transitionDuration,
+    chevTransition: getComputedStyle(document.querySelector(".chev")).transitionDuration,
   }));
-  persisted.starfieldPainted = await starfieldHasPaint();
   assert.deepEqual(persisted, {
     rootReduced: "true", stored: "reduce", checked: true,
-    ruleAnimation: "none", starfieldVisible: false, starfieldPainted: false,
+    switchTransition: "0s", chevTransition: "0s",
   });
 
-  // Re-enabling motion starts the ambient layer and future entrances without a reload.
+  // Re-enabling motion restores transitions and future entrances without a reload.
   await page.evaluate(() => document.getElementById("reduce-motion").click());
   await page.evaluate(() => document.getElementById("ladderbtn").click());
-  await page.waitForFunction(() => {
-    const canvas = document.getElementById("stars");
-    const pixels = canvas.getContext("2d").getImageData(0, 0, canvas.width, canvas.height).data;
-    for(let i = 3; i < pixels.length; i += 4) if(pixels[i]) return true;
-    return false;
-  });
+  await page.waitForFunction(() =>
+    getComputedStyle(document.querySelector(".switch")).transitionDuration !== "0s");
   const resumed = await page.evaluate(() => ({
     rootReduced: document.documentElement.dataset.reduceMotion ?? null,
     stored: localStorage.getItem("wct-reduce-motion"),
@@ -1105,13 +1096,12 @@ ui("motion defaults on, marks real entrances, and persists the site reduction co
     chartClass: document.getElementById("ladder-chart").classList.contains("motion-enter"),
     panelAnimation: getComputedStyle(document.querySelector("#ladder-ov .finder-panel")).animationName,
     barAnimation: getComputedStyle(document.querySelector("#ladder-chart .ladderbar")).animationName,
-    starfieldVisible: getComputedStyle(document.getElementById("stars")).display !== "none",
+    switchTransition: getComputedStyle(document.querySelector(".switch")).transitionDuration,
   }));
-  resumed.starfieldPainted = await starfieldHasPaint();
   assert.deepEqual(resumed, {
     rootReduced: null, stored: null, checked: false,
     overlayClass: true, chartClass: true, panelAnimation: "ov-rise", barAnimation: "bar-grow",
-    starfieldVisible: true, starfieldPainted: true,
+    switchTransition: "0.15s",
   });
 });
 

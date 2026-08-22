@@ -108,9 +108,42 @@ try {
   .skiplink:focus-visible{outline:2px solid var(--accent-2); outline-offset:2px}
 
   /* ---------- header ---------- */
-  .masthead{position:relative; overflow:hidden; border-bottom:1px solid var(--edge)}
-  .starfield{position:absolute; inset:0; pointer-events:none; opacity:.7}
-  .brandmark{width:48px; height:48px; vertical-align:-9px; margin-right:13px}
+  /* ---------- compressed masthead (2026-08-22) ---------- */
+  .masthead{position:relative; border-bottom:1px solid var(--edge); background:var(--bg-2)}
+  .topbar{
+    max-width:1120px; margin:0 auto; padding:9px 20px;
+    display:flex; align-items:center; gap:11px; min-height:60px; flex-wrap:wrap
+  }
+  .brandname{
+    font-family:var(--disp); font-weight:700; font-size:18px; letter-spacing:.01em;
+    margin:0; color:#fff; white-space:nowrap
+  }
+  .tbsep{width:1px; height:22px; background:var(--edge-2); flex:none}
+  /* the bar's search is the flexible element — everything else is intrinsic */
+  .topbar .search{flex:1 1 220px; min-width:150px; width:auto}
+  .topbar .search:focus{width:auto}
+  .topbar .finderbtn{flex:none; gap:6px}
+  .btw{display:inline}
+  /* Phone: two rows, not four. The identity line stays intact — it is the only branding
+     left after the compression — and search + tools share the second row, with the tool
+     labels dropping to their glyphs so three buttons fit beside a usable search field. */
+  .pc-short{display:none}
+  @media(max-width:759px){
+    .topbar{gap:6px 9px; padding:8px 16px; min-height:0}
+    .brandname{font-size:16px}
+    .tbsep{display:none}
+    .pc-full{display:none}
+    .pc-short{display:inline}
+    .sitetabs{gap:10px; margin-left:auto; font-size:12px}
+    .topbar .search{flex:1 1 100%; order:1}
+    .topbar .finderbtn{order:2}
+  }
+  @media(max-width:559px){
+    .btw{display:none}
+    .topbar .finderbtn{padding:7px 11px}
+    .topbar .search{flex:1 1 auto}
+  }
+  .brandmark{width:26px; height:26px; vertical-align:0; margin:0}
   .titlerow{display:flex; align-items:center; gap:16px; flex-wrap:wrap}
   .patchchip{font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:.08em;
     color:var(--gold); border:1px solid color-mix(in srgb,var(--gold) 40%,transparent);
@@ -130,12 +163,21 @@ try {
     text-shadow:0 0 34px rgba(181,123,238,.35)
   }
   .title .curse{color:var(--accent)}
-  .rule{
-    height:2px; margin:20px 0 14px; border-radius:2px;
-    background:linear-gradient(90deg,transparent,var(--accent) 22%,var(--accent-2) 55%,transparent);
-    background-size:220% 100%; animation:sweep 7s linear infinite
+  /* .rule and @keyframes sweep retired with the tall masthead (2026-08-22) */
+  /* the pitch line — one sentence, always visible, between the controls and the grid */
+  .pitch{max-width:1120px; margin:0 auto; padding:8px 20px 9px}
+  .pitchline{margin:0; font-size:12.5px; color:var(--ink-dim)}
+  .pitch .sub{font-size:12.5px; max-width:88ch; margin-top:2px}
+  .pitchline b{color:var(--ink)}
+  .pitchline b.pm{color:var(--v-mix); font-family:var(--mono)}
+  .pitchmore{
+    font-family:var(--body); font-size:12.5px; color:var(--accent-2);
+    background:none; border:0; padding:0; cursor:pointer;
+    text-decoration:underline dotted; text-underline-offset:3px
   }
-  @keyframes sweep{to{background-position:220% 0}}
+  .pitchmore:hover{color:var(--ink)}
+  .pitchmore:focus-visible{outline:2px solid var(--accent-2); outline-offset:2px; border-radius:3px}
+  @media(pointer:coarse){ .pitchmore{min-height:44px} }
   .sub{color:var(--ink-dim); max-width:70ch; margin:0; font-size:14px}
   .sub b{color:var(--ink); font-weight:600}
   .sub-more{display:inline}
@@ -145,8 +187,8 @@ try {
   .sub-more[open] > summary{display:block; margin:6px 0 3px}
   .sub-more[open]{display:block; margin-top:4px}
   .stamp{
-    font-family:var(--mono); font-size:11px; color:var(--ink-faint);
-    margin-top:14px; display:flex; gap:8px 18px; flex-wrap:wrap
+    font-family:var(--mono); font-size:10.5px; color:var(--ink-faint);
+    margin-top:0; display:flex; gap:6px 14px; flex-wrap:wrap; min-width:0
   }
   .stamp b{color:var(--ink-dim); font-weight:500}
 
@@ -157,23 +199,17 @@ try {
      tracker rather than the separate page it is. Sits at the foot of the masthead so the
      strip is the boundary between site chrome and the panel it selects, tab-style.
      Two pages, so these are links, not buttons — the current one is aria-current. */
-  .sitetabs{
-    display:flex; gap:4px; margin:18px 0 -26px; padding:0;
-    border-bottom:1px solid var(--edge); position:relative; z-index:1
-  }
+  /* Inline in the bar now, not a tab strip under a tall header. */
+  .sitetabs{display:flex; gap:10px; margin:0; padding:0; border-bottom:0; position:static; flex:none}
   .sitetab{
-    font-family:var(--body); font-size:13.5px; font-weight:600; text-decoration:none;
-    color:var(--ink-faint); background:transparent;
-    border:1px solid transparent; border-bottom:0;
-    border-radius:9px 9px 0 0; padding:9px 16px 10px;
+    font-family:var(--body); font-size:12.5px; font-weight:600; text-decoration:none;
+    color:var(--ink-faint); background:transparent; border:0;
+    border-radius:6px; padding:5px 3px;
     display:inline-flex; align-items:center; gap:7px; white-space:nowrap;
-    transition:color .15s, background .15s
+    transition:color .15s, box-shadow .15s
   }
-  .sitetab:hover{color:var(--ink); background:color-mix(in srgb,var(--accent) 10%,transparent)}
-  .sitetab[aria-current="page"]{
-    color:var(--ink); background:var(--bg-2);
-    border-color:var(--edge); box-shadow:inset 0 2px 0 var(--accent)
-  }
+  .sitetab:hover{color:var(--ink)}
+  .sitetab[aria-current="page"]{color:var(--ink); box-shadow:inset 0 -2px 0 var(--accent)}
   .sitetab:focus-visible{outline:2px solid var(--accent-2); outline-offset:2px}
   @media(pointer:coarse){ .sitetab{min-height:44px} }
   @media(max-width:560px){ .sitetab{font-size:12.5px; padding:9px 12px 10px} }
@@ -648,11 +684,24 @@ try {
      frozen upstream while the header's "latest snapshot" reflects the nightly-fresh
      tiers/sims. Amber, full-bleed under the masthead, only shown when a series is stale. */
   .datahealth{
-    max-width:var(--wrap,1100px); margin:14px auto 0; padding:10px 14px; font-size:12.5px;
+    max-width:var(--wrap,1100px); margin:8px auto 0; padding:0 14px; font-size:12.5px;
     line-height:1.5; color:var(--ink-dim); border-radius:8px;
-    background:color-mix(in srgb,#e8a13a 12%,transparent);
-    border:1px solid color-mix(in srgb,#e8a13a 42%,transparent)
+    background:color-mix(in srgb,#e8a13a 10%,transparent);
+    border:1px solid color-mix(in srgb,#e8a13a 36%,transparent)
   }
+  .dh-fold > summary{
+    display:flex; align-items:center; gap:8px; cursor:pointer; list-style:none;
+    padding:6px 0; font-family:var(--mono); font-size:11px; color:var(--gold)
+  }
+  .dh-fold > summary::-webkit-details-marker{display:none}
+  .dh-fold > summary::before{content:"▸"; font-size:9px; transition:transform .15s}
+  .dh-fold[open] > summary::before{transform:rotate(90deg)}
+  .dh-fold > summary:focus-visible{outline:2px solid var(--accent-2); outline-offset:2px; border-radius:3px}
+  .dh-flag{flex:none}
+  .dh-open{color:var(--ink-faint); text-decoration:underline dotted; text-underline-offset:3px; margin-left:auto}
+  .dh-body{padding:2px 0 10px}
+  html[data-reduce-motion="true"] .dh-fold > summary::before{transition:none}
+  @media(pointer:coarse){ .dh-fold > summary{min-height:44px} }
   .datahealth b{color:#e8a13a; font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase}
   /* the enumeration is 200+px of the phone banner; the honest headline above it is not */
   .datahealth .dh-series,
@@ -965,7 +1014,7 @@ try {
 
   /* The reference site animates regardless of the OS hint. This tracker now matches that
      default while keeping a persistent, explicit Reduce motion control in the toolbar. */
-  html[data-reduce-motion="true"] .rule{animation:none}
+  /* .rule and .starfield retired 2026-08-22 with the tall masthead */
   html[data-reduce-motion="true"] .drawer,
   html[data-reduce-motion="true"] .chev,
   html[data-reduce-motion="true"] .row,
@@ -977,7 +1026,7 @@ try {
   html[data-reduce-motion="true"] .rowbar > i,
   html[data-reduce-motion="true"] .starbtn,
   html[data-reduce-motion="true"] .utilbar button{transition:none}
-  html[data-reduce-motion="true"] .starfield{display:none}
+
   html[data-reduce-motion="true"] .finder-ov.open.motion-enter,
   html[data-reduce-motion="true"] .finder-ov.open.motion-enter .finder-panel,
   html[data-reduce-motion="true"] .row.open.motion-enter .drawer-in,
@@ -999,24 +1048,25 @@ try {
 <body>
 <a class="skiplink" href="#main">Skip to the spec grid</a>
 
+<!-- Compressed masthead (audit 2026-08-22, direction C). The 302px masthead and the
+     100px health banner were 402 of the 637px that preceded the first spec row. What is
+     deliberately spent: the 46px Cinzel wordmark, the starfield canvas, the animated rule
+     and the eyebrow. What is kept: the mark, the name in Cinzel at 18px, the patch chip,
+     both site tabs, and every one of the ten controls. -->
 <header class="masthead">
-  <canvas class="starfield" id="stars" aria-hidden="true"></canvas>
-  <div class="masthead-inner">
-    <p class="eyebrow">Multi-source class &amp; spec consensus · updated nightly</p>
-    <div class="titlerow"><h1 class="title"><a id="brandhome" class="brandlink" href="#" title="Back to the default view"><svg class="brandmark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#130B22" stroke="#B57BEE" stroke-opacity=".45" stroke-width="2.5"/><rect x="12" y="13" width="40" height="9" rx="4.5" fill="#F0C24B"/><rect x="12" y="27.5" width="29" height="9" rx="4.5" fill="#C77DFF"/><rect x="12" y="42" width="19" height="9" rx="4.5" fill="#6AA8F0"/></svg></a>Spec Tracker</h1><span class="patchchip">__ERA_CHIP__</span></div>
-    <div class="rule"></div>
-    <!-- One sentence of lede; the mental model folds. This paragraph ran five lines and
-         was ~40% of a 329px masthead sitting directly above a page people check daily. -->
-    <div class="sub">Where every spec of <b>WoW: Midnight</b> stands — <b>not one site's opinion</b>, but every major tier list distilled into a single consensus with a <b>±</b> wherever they disagree, layered with live numbers, sim profiles, and per-spec patch reads. <details class="sub-more"><summary>How to read it</summary><span id="tlcount">Several</span> tier lists feed a computed <b>consensus</b>, with a <b>±</b> marker where they disagree — flip between them with <b>View</b>, or pick <b>Ours: 12.1&nbsp;✦</b> for this site's own Season-2 forecast (a projection, never a source). Filter, sort, or search the roster, and click <b>any row</b> for the full read: patch changes, current numbers with ranks, sim fight profile, and community takes. Two tools up top: <b>📊 The Ladder</b> draws any measured ranking as a chart, and <b>⊞ Compare all</b> is the whole roster against every rating and rank on one screen. The <b>⚙ S2 Gearing</b> tab is a separate explorer for Season-2 gear and loot sources.</details></div>
-    <div class="stamp">
-      <span><b>Baseline:</b> __ERA_BASELINE__</span>
-      <span>__ERA_TRACKED_STAMP__</span>
-      <span id="stamp-snapshot"></span>
-    </div>
+  <div class="topbar">
+    <a id="brandhome" class="brandlink" href="#" title="Back to the default view"><svg class="brandmark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#130B22" stroke="#B57BEE" stroke-opacity=".45" stroke-width="2.5"/><rect x="12" y="13" width="40" height="9" rx="4.5" fill="#F0C24B"/><rect x="12" y="27.5" width="29" height="9" rx="4.5" fill="#C77DFF"/><rect x="12" y="42" width="19" height="9" rx="4.5" fill="#6AA8F0"/></svg></a>
+    <h1 class="brandname">Spec Tracker</h1>
+    <span class="patchchip"><span class="pc-full">__ERA_CHIP__</span><span class="pc-short">__ERA_SHORT__</span></span>
+    <span class="tbsep" aria-hidden="true"></span>
     <nav class="sitetabs" aria-label="Sections">
-      <a class="sitetab" href="index.html" aria-current="page">📊 Spec Tracker</a>
-      <a class="sitetab" href="gearing.html" title="Season 2 gearing — best-per-slot, loot sources, item-level ladder, SimC upgrade check">⚙ S2 Gearing</a>
+      <a class="sitetab" href="index.html" aria-current="page">Tracker</a>
+      <a class="sitetab" href="gearing.html" title="Season 2 gearing — best-per-slot, loot sources, item-level ladder, SimC upgrade check">Gearing</a>
     </nav>
+    <input class="search" id="search" type="search" placeholder="Search spec, class, or role…" aria-label="Search spec or class">
+    <button class="finderbtn" id="ladderbtn" type="button">📊<span class="btw">Ladder</span></button>
+    <button class="finderbtn" id="allbtn" type="button">⊞<span class="btw">Compare all</span></button>
+    <button class="finderbtn" id="legendbtn" type="button" title="What the tiers, ±, arrows and the 0–100 score mean" aria-label="Legend — what the tiers, marks and scores mean">?</button>
   </div>
 </header>
 <div id="datahealth" class="datahealth" hidden></div>
@@ -1027,7 +1077,7 @@ try {
        guard in the script is load-bearing — widening past 760px MUST force it open, or the
        summary disappears while open=false and the entire toolbar becomes unreachable. -->
   <details class="ctlfold" id="ctlfold" open>
-    <summary class="ctlsum"><span>⚙ Filters &amp; view</span><span class="ctlsum-h">Ratings · Era · Role · Fight · Sort · Search · The Ladder · Compare all</span></summary>
+    <summary class="ctlsum"><span>⚙ Filters &amp; view</span><span class="ctlsum-h">Ratings · Era · Role · Fight · Group · Sort · Starred</span></summary>
   <div class="controls-row">
     <div class="seg" id="srcseg" role="group" aria-label="Which ratings the tier columns show"></div>
     <div class="seg" id="eraseg" role="group" aria-label="Era" title="Filters verdicts, writeups, era-tagged numbers and creator takes. It does not change the tier columns — those follow the View picker.">
@@ -1062,18 +1112,7 @@ try {
         <option value="simaoe">AoE sim DPS</option>
       </select>
     </div>
-    <input class="search" id="search" type="search" placeholder="Search spec…" aria-label="Search spec or class">
     <span class="grow"></span>
-    <div class="ctl ctl-ctas"><!-- the overlay CTAs — wrap allowed: a no-break rule
-         pushes the last one off a phone screen entirely -->
-      <button class="finderbtn" id="ladderbtn" type="button">📊 The Ladder</button>
-      <button class="finderbtn" id="allbtn" type="button">⊞ Compare all</button>
-      <!-- The key, one click from the controls. The legend still lives inline below the
-           grid (and remembers its own toggle), but the 2026-08-22 reading-order change
-           moved it BELOW the data — so on a first visit the glyphs now arrive before
-           their explanation unless something up here offers it. -->
-      <button class="finderbtn" id="legendbtn" type="button" title="What the tiers, ±, arrows and the 0–100 score mean" aria-label="Legend — what the tiers, marks and scores mean">? Legend</button>
-    </div>
   </div>
   <div class="controls-row controls-sub">
     <label class="toggle">
@@ -1091,12 +1130,27 @@ try {
       <span class="switch"></span>
       <span>Reduce motion</span>
     </label>
+    <span class="stamp">
+      <span><b>Baseline:</b> __ERA_BASELINE__</span>
+      <span>__ERA_TRACKED_STAMP__</span>
+      <span id="stamp-snapshot"></span>
+    </span>
     <span class="grow"></span>
     <!-- Filtering silently went 40 -> 0 with nothing announced (audit 2026-08-22). This
          span already carries the count, so making it a live region is the whole fix. -->
     <span class="toolstatus" id="toolstatus" role="status" aria-live="polite" aria-atomic="true"></span>
   </div>
   </details>
+</div>
+
+<!-- The pitch. The compression took the five-line lede out of the header, but this is the
+     only place the premise is stated — a returning player never reads it twice, a first-time
+     visitor reads it once and it is the whole argument. One line stays visible; the full
+     paragraph and the "how to read it" walkthrough fold behind the summary, which is also
+     where #tlcount lives (a pinned invariant reads it). -->
+<div class="pitch">
+  <p class="pitchline">Every major tier list, distilled into <b>one consensus</b> — with a <b class="pm">±</b> wherever they disagree.</p>
+  <div class="sub"><details class="sub-more"><summary>How to read it</summary>Where every spec of <b>WoW: Midnight</b> stands — <b>not one site's opinion</b>, but every major tier list distilled into a single consensus with a <b>±</b> wherever they disagree, layered with live numbers, sim profiles, and per-spec patch reads. <span id="tlcount">Several</span> tier lists feed a computed <b>consensus</b>, with a <b>±</b> marker where they disagree — flip between them with <b>View</b>, or pick <b>Ours: 12.1&nbsp;✦</b> for this site's own Season-2 forecast (a projection, never a source). Filter, sort, or search the roster, and click <b>any row</b> for the full read: patch changes, current numbers with ranks, sim fight profile, and community takes. Two tools up top: <b>📊 The Ladder</b> draws any measured ranking as a chart, and <b>⊞ Compare all</b> is the whole roster against every rating and rank on one screen. The <b>⚙ S2 Gearing</b> tab is a separate explorer for Season-2 gear and loot sources.</details></div>
 </div>
 
 <main class="wrap" id="main">
@@ -2745,10 +2799,15 @@ if(META.latestSnapshot){
   const tierClauses = groups.filter(g => g.kind === "tier-list").map(clause);
   const rest = groups.filter(g => g.kind !== "tier-list").map(clause);
   const phone = window.matchMedia("(max-width:759px)").matches;
-  el.innerHTML = (!phone || !rest.length)
+  const body = (!phone || !rest.length)
     ? `<b>Heads up</b> ${groups.map(clause).join("; ")}. ` + tail
     : `<b>Heads up</b> ${[...tierClauses, `${rest.length} more data ${rest.length === 1 ? "feed is" : "feeds are"} stale or frozen`].join("; ")}. `
       + `<details class="dh-why"><summary>Which feeds, and since when</summary>${rest.join("; ")}. ${tail}</details>`;
+  /* Chip, not a slab (audit 2026-08-22). At 100px this sat directly under the compressed
+     60px bar and became the largest thing in the header — for a caveat, not the data.
+     Folded, the claim still states its own size up front and the full banner is one click
+     away; nothing about it is removed. */
+  el.innerHTML = `<details class="dh-fold"><summary><span class="dh-flag">⚑</span> ${stale.length} data ${stale.length === 1 ? "series is" : "series are"} stale or frozen <span class="dh-open">details</span></summary><div class="dh-body">${body}</div></details>`;
   el.hidden = false;
 })();
 
@@ -4005,49 +4064,10 @@ function openSpecFromOverlay(cls, spec){
   claimPendingView("all");
 })();
 
-/* ---------- ambient starfield (respects the site Reduce motion control) ---------- */
-(function(){
-  const c = document.getElementById('stars');
-  if(!c) return;
-  const ctx = c.getContext('2d');
-  let stars = [], raf, inView = true;
-  function size(){
-    const r = c.parentElement.getBoundingClientRect();
-    c.width = r.width; c.height = r.height;
-    const n = Math.min(90, Math.floor(r.width/14));
-    stars = Array.from({length:n}, ()=>({
-      x:Math.random()*c.width, y:Math.random()*c.height,
-      r:Math.random()*1.3+.3, a:Math.random()*.5+.2, s:Math.random()*.5+.15
-    }));
-  }
-  function draw(){
-    ctx.clearRect(0,0,c.width,c.height);
-    stars.forEach(st=>{
-      st.a += st.s*0.02*(Math.random()<.5?-1:1);
-      st.a = Math.max(.12, Math.min(.75, st.a));
-      ctx.beginPath(); ctx.arc(st.x,st.y,st.r,0,6.283);
-      ctx.fillStyle = `rgba(199,168,255,${st.a})`; ctx.fill();
-    });
-    raf = requestAnimationFrame(draw);
-  }
-  // The loop used to run forever, repainting at 60fps with the masthead scrolled
-  // thousands of pixels off-screen (audit 2026-07-24, P3). Pause when the canvas leaves
-  // the viewport and re-arm when it returns. `raf = 0` is the "stopped" sentinel so a
-  // re-entry can never stack two loops. The site control can stop and restart this loop
-  // without a reload, so opting back into motion takes effect immediately.
-  function start(){ if(inView && !document.hidden && !motionReduced() && !raf) draw(); }
-  function stop(){ if(raf){ cancelAnimationFrame(raf); raf = 0; } }
-  size(); start();
-  if(window.IntersectionObserver){
-    new IntersectionObserver(es => { inView = es[0].isIntersecting; inView ? start() : stop(); }).observe(c);
-  }
-  window.addEventListener('resize', ()=>{ stop(); size(); start(); });
-  document.addEventListener('visibilitychange', ()=>{ document.hidden ? stop() : start(); });
-  document.addEventListener('wct-motion-change', e=>{
-    if(e.detail?.reduced){ stop(); ctx.clearRect(0,0,c.width,c.height); }
-    else { size(); start(); }
-  });
-})();
+/* The ambient starfield was removed with the tall masthead (2026-08-22): a 60px bar has
+   nowhere to put it, and half-painting it behind the bar read as a strip of a header that
+   was not there. */
+/* The ambient starfield was removed with the tall masthead (2026-08-22). */
 </script>
 </body>
 </html>

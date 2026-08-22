@@ -42,6 +42,9 @@ export async function build(root = ROOT) {
     // masthead chip: "12.1 PTR — CURSE OF ULA'TEK" now, "12.1 — …" once the patch ships,
     // and identical off liveLabel after the ptr lane sunsets.
     __ERA_CHIP__: `${eraDisplay} — ${PHASES.patchName.toUpperCase()}`,
+    // the phone form of the same chip: the era without the patch name, which is 192px wide
+    // and forced its own row in the compressed bar (2026-08-22)
+    __ERA_SHORT__: eraDisplay,
     __ERA_BASELINE__: `${PHASES.liveLabel} / ${seasonName(PHASES.liveSeason)}`,
     // static fallback only — boot overwrites it from PHASE.ptr.label (template ~:1239)
     __ERA_PTR_BTN__: PHASES.ptr?.label ?? "",

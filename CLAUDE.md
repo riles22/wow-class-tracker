@@ -414,6 +414,32 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   ⚠️ **The working tree is CRLF** (git autocrlf rewrites it on checkout/merge), so any patch
   script matching multi-line anchors must normalise its newlines to the file's or it
   silently finds 0 matches. This cost a cycle in stage 4.
+- **The masthead is a 60px command bar** (audit stage 5, Riley's call after seeing it mocked
+  against the shipped grid). The 302px masthead and the 100px health banner were 402 of the
+  637px that preceded the first spec row; the page now reaches the grid at **363px** and
+  shows **16 specs above the fold** on a 1440x900 screen.
+  The bar carries the mark, the name in Cinzel at 18px, the patch chip, both site tabs,
+  search, and all three tools — **Ladder, Compare all AND the ? legend**. The other seven
+  controls stay in two tight rows below it, unchanged. Nothing moved into an overflow menu.
+  **Deliberately spent:** the 46px Cinzel wordmark, the `#stars` starfield canvas (and its
+  43-line animation IIFE), the animated `.rule`, and the eyebrow. Keeping the starfield
+  behind a 60px bar was considered and rejected — it read as a strip of a header that was
+  not there.
+  **The lede survives, and had to.** It is the only place the premise is stated, so a
+  one-line version is always visible in `.pitch` and the full paragraph folds behind
+  "How to read it" — which is also where `#tlcount` lives, and a pinned invariant reads it.
+  **The health banner is a chip** (`.dh-fold`): 100px -> 31px, expanding to the full banner.
+  A caveat should not be the largest thing in the header.
+  Two mobile traps this hit, both fixed: the bar wrapped to **253px** on a 375px phone until
+  the tool labels were wrapped in `.btw` and dropped to their glyphs under 560px; and the
+  patch chip is 192px, which forced its own row — so it has a **short form** (`.pc-short`,
+  fed by the new `__ERA_SHORT__` token) rather than being hidden, because era attribution
+  has to survive on the device most likely to screenshot the page. Phone bar: 148px.
+  ⚠️ **The motion invariant was re-pointed, not weakened.** It probed `.rule`'s animation and
+  the `#stars` canvas pixels, both of which are gone; it now reads the `.switch` and `.chev`
+  transition durations, which flip with the same control and survive every layout. Its
+  stronger checks — overlay/chart entrance classes and animation names — are untouched.
+  Note `.chev` transitions two properties, so its duration reads `"0.18s, 0.15s"`.
 - **Between-cycles copy residue** (same audit, stage 3). All keyed on `PHASE.ptr` so they
   self-heal when the next cycle opens, rather than on data that has to be remembered:
   the masthead stamp says **"Latest class tuning"** rather than "Latest PTR build" when there
