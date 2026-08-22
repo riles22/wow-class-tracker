@@ -1155,8 +1155,18 @@ ui("every visible consensus count equals the number of sources the cells actuall
     assert.match(shown.notestamp, new RegExp(`\\b${averaged}-source consensus`),
       `#notestamp must agree with #toolstatus, got "${shown.notestamp}"`);
   }
-  assert.equal(shown.tlcount, words[averaged],
-    `the "N tier lists feed a computed consensus" blurb must agree too, got "${shown.tlcount}"`);
+  /* The split case: this invariant already argues in the comment above that BOTH numbers
+     must be shown when the brackets differ — "a single figure would overstate one bracket,
+     which is the exact contradiction this invariant exists to catch" — and enforces that
+     for #toolstatus and #notestamp. The blurb was the one place still pinned to the max,
+     i.e. the contradiction the comment describes. Widened 2026-08-22 so the assertion
+     matches its own reasoning. */
+  const expectedBlurb = split
+    ? `${words[Math.min(nRaid, nMplus)]} to ${words[Math.max(nRaid, nMplus)].toLowerCase()}`
+    : words[averaged];
+  assert.equal(shown.tlcount, expectedBlurb,
+    `the "N tier lists feed a computed consensus" blurb must agree too, and must say BOTH
+     counts when the brackets are split, got "${shown.tlcount}"`);
 
   /* DIRECTION. A frozen source is AHEAD — it has already published the next season — so
      it must never be described with the lag vocabulary ("updating"), which asserts the

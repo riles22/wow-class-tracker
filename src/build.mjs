@@ -45,7 +45,9 @@ export async function build(root = ROOT) {
     __ERA_BASELINE__: `${PHASES.liveLabel} / ${seasonName(PHASES.liveSeason)}`,
     // static fallback only — boot overwrites it from PHASE.ptr.label (template ~:1239)
     __ERA_PTR_BTN__: PHASES.ptr?.label ?? "",
-    __ERA_FEED_HEADING__: `${eraDisplay} build feed`,
+    // "build feed" is PTR vocabulary. Between cycles the same list is mostly live
+    // hotfixes and class-tuning posts, so it is a patch feed (audit 2026-08-22).
+    __ERA_FEED_HEADING__: PHASES.ptr ? `${eraDisplay} build feed` : `${eraDisplay} patch feed`,
     // __ERA_FOOTCOVER__ retired 2026-08-18: the footer identity block it fed was
     // removed at Riley's request; the masthead chip + baseline carry the same era info.
     __ERA_LIVE_LABEL__: PHASES.liveLabel,

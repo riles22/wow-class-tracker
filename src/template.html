@@ -78,7 +78,21 @@ try {
   a{color:var(--accent-2); text-decoration:none}
   a:hover{text-decoration:underline}
 
-  .wrap{max-width:1120px; margin:0 auto; padding:0 20px 72px}
+  /* READING ORDER (phone 2026-08-08, extended to every width 2026-08-22). Measured: the
+     first spec row sat at y=1543 on a 390x844 phone — 1.83 screens of preamble — so the
+     three things that make this site different (the multi-source consensus, the ±
+     disagreement marks, and the forecast) all sat below the fold while masthead, controls
+     and banners owned the opening. The phone was fixed then; DESKTOP kept the old order and
+     still spent 890px before row 1, which is the whole fold on a 1366x768 laptop.
+     Visual order only — DOM order is untouched, so the movers-after-caveat UI invariant
+     still holds. What stays ABOVE the grid is exactly the honesty surfaces plus the
+     one-line explanation of a column a tester already misread. */
+  .wrap{max-width:1120px; margin:0 auto; padding:0 20px 72px; display:flex; flex-direction:column}
+  #viewnote{order:1} .note.standalone{order:2} #ptrcaveat{order:3} #matrix{order:4}
+  #movers{order:5} #changes{order:6} #legendwrap{order:7} footer{order:8}
+  /* Flex items default to min-width:auto, so any child holding an unshrinkable run of text
+     can push itself wider than .wrap. Block children never could; these now can. */
+  .wrap > *{min-width:0}
 
   /* Skip link: 105 buttons and 40 focusable rows sit between the top of the document
      and the grid, and there was no landmark or bypass (audit 2026-08-22). Visually
@@ -638,8 +652,11 @@ try {
      a reader came down here for — who the sources are and when they were snapshotted —
      and closes with identity. Needs its own top margin now that it is no longer the
      footer's first child sitting under the border. */
-  .foot-grid{display:grid; grid-template-columns:1fr; gap:22px}
-  @media(min-width:720px){ .foot-grid{grid-template-columns:1.1fr .9fr} }
+  /* minmax(0,...) not bare fr: a bare fr track cannot shrink below its content min-content,
+     and .feedline is white-space:nowrap, so the feed column claimed 916px of a 1080px row and
+     starved the source list to 277px — wrapping its rows to four lines each (2026-08-22). */
+  .foot-grid{display:grid; grid-template-columns:minmax(0,1fr); gap:22px}
+  @media(min-width:720px){ .foot-grid{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)} }
   .foot-h{font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); margin:0 0 11px}
   .srclist{margin:0 0 16px; padding:0; list-style:none; font-family:var(--mono); font-size:12px}
   .srcgroup{color:var(--ink-dim); padding:7px 0 3px; border-bottom:1px solid var(--edge); display:flex; justify-content:space-between; gap:12px}
@@ -657,6 +674,20 @@ try {
   .credits-block{margin-top:22px; padding-top:20px; border-top:1px solid var(--edge)}
   .creditlist{display:flex; flex-wrap:wrap; gap:3px 0; margin-top:10px; font-family:var(--mono); font-size:12px; line-height:1.7}
   .creditlist a{color:var(--accent-2)}
+  /* Patch feed: a dated INDEX. Each entry's stored label is a full paragraph, so the
+     visible line is capped and the whole text lives in the title (audit 2026-08-22). */
+  .srcitem .feedline{white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0}
+  .feedfold{margin-top:2px}
+  .feedfold > summary{
+    font-family:var(--mono); font-size:11px; color:var(--accent-2); cursor:pointer;
+    list-style:none; display:inline-flex; align-items:center; gap:6px; padding:4px 0
+  }
+  .feedfold > summary::-webkit-details-marker{display:none}
+  .feedfold > summary::before{content:"▸"; font-size:9px; transition:transform .15s}
+  .feedfold[open] > summary::before{transform:rotate(90deg)}
+  .feedfold > summary:hover{color:var(--ink)}
+  .feedfold > summary:focus-visible{outline:2px solid var(--accent-2); outline-offset:2px; border-radius:3px}
+  @media(pointer:coarse){ .feedfold > summary{min-height:44px} }
   .creditlist a:hover{color:var(--ink)}
 
   /* ---------- mobile matrix -> cards ---------- */
@@ -695,16 +726,7 @@ try {
     .metaline .mtag{display:inline} /* must be re-shown HERE — the rule inside the card block above loses the cascade to the display:none default */
     .controls{position:static} /* sticky controls ate ~55% of a phone viewport */
     .seg{flex-wrap:wrap} /* the source segment is ~500px unwrapped — wrap instead of forcing horizontal pan */
-    /* PHONE READING ORDER (2026-08-08). Measured: the first spec row sat at y=1543 on a
-       390x844 phone — 1.83 screens of preamble — so the three things that make this site
-       different (the multi-source consensus, the 71 ± disagreement marks, and the forecast)
-       all sat below the fold while masthead, controls and banners owned the opening. Visual
-       order only; DOM order is untouched, so the movers-after-caveat UI invariant still holds.
-       What stays ABOVE the grid is exactly the honesty surfaces plus the one-line explanation
-       of a column a tester already misread. */
-    .wrap{display:flex; flex-direction:column}
-    #viewnote{order:1} .note.standalone{order:2} #ptrcaveat{order:3} #matrix{order:4}
-    #movers{order:5} #changes{order:6} #legendwrap{order:7} footer{order:8}
+    /* the reading order below is no longer phone-only — see .wrap in the base sheet */
     /* The date strip scrolls rather than wrapping to three lines. Nothing is lost: the
        snapshot date is also in the always-visible note directly above the grid. */
     .eyebrow{font-size:10.5px; line-height:1.4}
@@ -1368,6 +1390,12 @@ const FROZEN_SOURCES = (() => {
        link cannot filter by an invisible lane. */
     document.getElementById('ptronly')?.closest('label')?.setAttribute('hidden', '');
     state.ptrOnly = false;
+    /* Same rule for the "PTR verdict" sort: between cycles the era filter hides every
+       verdict chip, so the option orders the grid by something invisible (audit
+       2026-08-22). Hidden, and a stale sort=ptr falls back to the default. */
+    const ptrOpt = document.querySelector('#sortsel option[value="ptr"]');
+    if (ptrOpt) ptrOpt.hidden = true;
+    if (state.sort === "ptr") state.sort = "overall";
   }
   /* Labels that ENUMERATE era-cycle controls must not advertise ones the phase has
      hidden — a phone user opening the fold found neither "Era" nor the PTR legend the
@@ -2485,7 +2513,12 @@ if(META.latestSnapshot){
   // Label follows the newest feed entry's KIND — post-launch that entry is a live-realm
   // hotfix round-up, and "Latest PTR build: <live date>" was a liveness mislabel
   // (2026-08-19 audit, B1).
-  const buildLabel = { hotfix: "Latest live hotfixes:", "patch-notes": "Launch notes:" }[META.latestBuildKind] || "Latest PTR build:";
+  /* The kind vocabulary has no value for a post-launch tuning post, so a live class-tuning
+     announcement falls back to kind "build" and used to stamp "Latest PTR build:" four days
+     after launch — the exact mislabel render.mjs's residue note exists to catch (audit
+     2026-08-22). Between cycles there IS no PTR, so the phase decides, not the kind. */
+  const buildLabel = { hotfix: "Latest live hotfixes:", "patch-notes": "Launch notes:" }[META.latestBuildKind]
+    || (PHASE.ptr ? "Latest PTR build:" : "Latest class tuning:");
   document.getElementById('stamp-snapshot').innerHTML = `<b>Latest snapshot:</b> ${esc(META.latestSnapshot)}`
     + (META.latestPtrBuild ? ` <b style="margin-left:14px">${esc(buildLabel)}</b> ${esc(META.latestPtrBuild)}` : "");
 }
@@ -2618,10 +2651,15 @@ if(META.latestSnapshot){
   // LIVE tier lists only — the sentence says these "feed a computed consensus", and an
   // era-gated PTR list does not. Counting it would restate the WoWMeta bug in a new key:
   // a number on the page that its own toggles contradict.
-  const n = Math.max(0, ...SPECS.map(sp => Math.max(
-    sp.consensus?.raid?.perSource?.length ?? 0, sp.consensus?.mplus?.perSource?.length ?? 0)));
+  /* Per BRACKET, not across both. A season transition can leave raid and M+ composed of
+     different source sets — it does right now, 3 and 4 — and a single number then
+     contradicts the toolbar chip two rows below it, which says both (audit 2026-08-22). */
+  const per = b => Math.max(0, ...SPECS.map(sp => sp.consensus?.[b]?.perSource?.length ?? 0));
   const words = ["No","One","Two","Three","Four","Five","Six","Seven","Eight","Nine"];
-  el.textContent = words[n] ?? String(n);
+  const word = k => words[k] ?? String(k);
+  const raidN = per("raid"), mplusN = per("mplus");
+  const lo = Math.min(raidN, mplusN), hi = Math.max(raidN, mplusN);
+  el.textContent = lo === hi ? word(hi) : `${word(lo)} to ${word(hi).toLowerCase()}`;
 })();
 
 /* ---------- footer: source registry (tier lists + metrics + notes feeds) ---------- */
@@ -2656,7 +2694,10 @@ document.getElementById('srclist').innerHTML = SOURCES.filter(s=>Array.isArray(s
 }).join("");
 
 /* ---------- footer: 12.1 PTR build feed ---------- */
-document.getElementById('buildfeed').innerHTML = (PTR_BUILDS.builds||[]).map(b=>{
+/* How many entries stay open. The rest fold — the feed is reference material people
+   consult occasionally, and it was two thirds of the document (audit 2026-08-22). */
+const FEED_OPEN = 4;
+const feedItem = b => {
   // A hotfix has no forum post, so the date links to whatever citation it does have —
   // previously this produced an href of "" for any entry without a forumUrl.
   const dateHref = b.forumUrl || b.wowheadUrl || b.icyveinsUrl || "";
@@ -2667,8 +2708,23 @@ document.getElementById('buildfeed').innerHTML = (PTR_BUILDS.builds||[]).map(b=>
     b.icyveinsUrl ? `<a href="${esc(safeHref(b.icyveinsUrl))}" target="_blank" rel="noopener">icy-veins</a>` : ""
   ].filter(Boolean).join(" · ");
   const affected = (b.specsAffected||[]).length;
-  return `<div class="srcitem"><span>${links} <span class="mnote">${esc(b.label||"")}</span></span><span class="when">${affected?affected+" specs":""}</span></div>`;
-}).join("") || `<div class="srcitem"><span class="mnote">No builds logged yet.</span></div>`;
+  /* The stored label is prose — one entry measured 875px on its own. Cap the visible
+     headline on a word boundary and keep the full text reachable via the title. */
+  const full = (b.label||"").replace(/\s+/g," ").trim();
+  const cutAt = full.length > 96 ? (full.lastIndexOf(" ", 96) > 40 ? full.lastIndexOf(" ", 96) : 96) : -1;
+  const short = cutAt > 0 ? full.slice(0, cutAt) + "…" : full;
+  return `<div class="srcitem"><span class="feedline"${full?` title="${esc(full)}"`:""}>${links} <span class="mnote">${esc(short)}</span></span><span class="when">${affected?affected+" specs":""}</span></div>`;
+};
+{
+  const builds = PTR_BUILDS.builds || [];
+  const head = builds.slice(0, FEED_OPEN).map(feedItem).join("");
+  const rest = builds.slice(FEED_OPEN);
+  const restHTML = rest.length
+    ? `<details class="feedfold"><summary>${rest.length} older ${rest.length===1?"entry":"entries"}</summary>${rest.map(feedItem).join("")}</details>`
+    : "";
+  document.getElementById('buildfeed').innerHTML =
+    (head + restHTML) || `<div class="srcitem"><span class="mnote">No builds logged yet.</span></div>`;
+}
 
 /* General-coverage creators (cross-class PTR news — registry in community.json
    generalCreators; a news lane, never per-spec tier authority) join the build feed. */
@@ -3061,11 +3117,16 @@ function renderMovers(){
   // Count SPECS, not (spec, bracket) pairs — a spec moving in both brackets is one spec.
   // The naive rows.length published "43 specs change tier" on a 40-spec roster.
   const movedSpecs = new Set(rows.map(r => `${r.s.class}|${r.s.spec}`)).size;
-  host.innerHTML = `<details class="movers"><summary><b>Into 12.1 — biggest movers</b> <span class="mnote">${FROZEN_FC ? `our frozen ${esc(FROZEN_FC.date)} forecast vs the live consensus` : `our forecast vs the live consensus`} · ${movedSpecs} of ${SPECS.length} specs change tier</span></summary>
+  /* Once the forecast is FROZEN the lane stops being a prediction and becomes a
+     comparison, so the heading stops saying "into" (audit 2026-08-22). Deliberately not
+     "where we were wrong": week-one tier lists churn hard and the report card only scores
+     after SETTLE_DAYS, so a verdict here would overclaim what the data can support. */
+  const moversTitle = FROZEN_FC ? "Forecast vs. live consensus" : `Into ${esc(PHASE.liveLabel)} — biggest movers`;
+  host.innerHTML = `<details class="movers"><summary><b>${moversTitle}</b> <span class="mnote">${FROZEN_FC ? `our frozen ${esc(FROZEN_FC.date)} forecast against today's live reading — not yet a grade` : `our forecast vs the live consensus`} · ${movedSpecs} of ${SPECS.length} specs change tier</span></summary>
     <p class="mnote mvr-note">This is <b>our own 12.1 projection</b>, not a source — live consensus blended with PTR testing and Dummy Dome data, shifted by the tuning outlook. Points are forecast-score deltas. Open a spec for its full basis.</p>
     <div class="mvr-cols">
-      <div><p class="d-h">Rising into 12.1</p><div class="chlist">${risers.map(cell).join("") || "<span class='mnote'>None.</span>"}</div></div>
-      <div><p class="d-h">Falling into 12.1</p><div class="chlist">${fallers.map(cell).join("") || "<span class='mnote'>None.</span>"}</div></div>
+      <div><p class="d-h">${FROZEN_FC ? "Forecast above live" : `Rising into ${esc(PHASE.liveLabel)}`}</p><div class="chlist">${risers.map(cell).join("") || "<span class='mnote'>None.</span>"}</div></div>
+      <div><p class="d-h">${FROZEN_FC ? "Forecast below live" : `Falling into ${esc(PHASE.liveLabel)}`}</p><div class="chlist">${fallers.map(cell).join("") || "<span class='mnote'>None.</span>"}</div></div>
     </div></details>`;
 }
 
