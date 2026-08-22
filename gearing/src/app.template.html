@@ -168,28 +168,38 @@ button:hover{background:#241740}
 .note a:hover{text-decoration:underline}
 
 .grid,.card-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;align-items:start}
-.card{min-width:0;border:1px solid var(--line);background:var(--panel);border-radius:13px;padding:18px 19px}
+.card{min-width:0;border:1px solid var(--line);background:var(--panel);border-radius:13px;padding:12px 14px}
 .card h3{font-size:14px;letter-spacing:1.25px;text-transform:uppercase;color:var(--t2);
          margin-bottom:13px;display:flex;justify-content:space-between;align-items:baseline;gap:10px}
 .card h3 span{font-size:12px;letter-spacing:.2px;text-transform:none;color:var(--t3);font-weight:600}
-.hand-group+.hand-group{margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+.hand-group+.hand-group{margin-top:9px;padding-top:8px;border-top:1px solid var(--line)}
 .hand-title{display:flex;justify-content:space-between;gap:10px;margin-bottom:3px;
              font-size:12.5px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--t2)}
 .hand-title span{font-size:12px;letter-spacing:.1px;text-transform:none;color:var(--t3);font-weight:600}
 
-.row{display:grid;grid-template-columns:52px 32px minmax(0,1fr) auto;column-gap:10px;row-gap:2px;
-     align-items:start;padding:10px 4px;border-bottom:1px solid var(--line);font-size:14px;border-radius:6px}
+/* Five columns, not four: the source used to span 3/5 on a second line, which cost ~30px
+   a row while ~500px sat empty beside the stat meta at 1440 (2026-08-22). It drops back to
+   its own line below 900px, where that width genuinely is not there. */
+.row{display:grid;grid-template-columns:40px 26px minmax(150px,1.5fr) auto minmax(140px,1.1fr);
+     column-gap:10px;row-gap:2px;
+     align-items:start;padding:5px 6px;border-bottom:1px solid var(--line);font-size:13px;border-radius:6px}
 .row:last-child{border-bottom:none}
-.rank{grid-column:1;font-family:var(--mono);font-size:11.5px;color:var(--t3);
-      min-width:0;font-weight:800;padding-top:4px}
+.rank{grid-column:1;font-family:var(--mono);font-size:11px;color:var(--t3);
+      min-width:0;font-weight:800;padding-top:2px}
 .row.best .rank{color:var(--myth)}
 .row.best{box-shadow:inset 3px 0 0 var(--myth);background:rgba(242,214,152,.035)}
-.row>.ico{grid-column:2}
-.nm{grid-column:3;min-width:0;color:var(--t1);font-weight:650}
+.row>.ico{grid-column:2;width:24px;height:24px}
+.nm{grid-column:3;min-width:0;color:var(--t1);font-weight:650;font-size:13px}
 .row.tier .nm{color:var(--myth);font-weight:600}
-.meta{grid-column:4;font-family:var(--mono);font-size:12px;color:var(--t2);
+.meta{grid-column:4;font-family:var(--mono);font-size:11px;color:var(--t2);
       white-space:nowrap;text-align:right}
-.src{grid-column:3/5;font-size:12px;color:var(--t3);white-space:normal}
+/* mono and truncating — it is a where-it-drops label, not prose */
+.src{grid-column:5;font-family:var(--mono);font-size:11px;color:var(--t3);
+     white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;text-align:right}
+@media (max-width:899px){
+  .row{grid-template-columns:40px 26px minmax(0,1fr) auto}
+  .src{grid-column:3/5;white-space:normal;text-align:left}
+}
 .fit{display:inline-block;margin-left:7px;color:var(--myth);font-weight:800}
 .fx{display:block;font-size:12.5px;color:var(--t3);margin-top:5px;line-height:1.5;font-weight:450}
 .fx b{color:var(--hero);font-weight:600}

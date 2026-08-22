@@ -451,6 +451,23 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   inside a 60px bar and pushed the bar to 86px. Any future change to one page's bar has to
   be made in both templates — they mirror each other by hand, not by shared code.
   `h1` also had to come off its `clamp(28px,5vw,46px)`; the bar's name is `.brandname`.
+- **Gearing's BiS rows carry Console's density too** (2026-08-22, the pass after the bar).
+  67 rows at 69-105px each made the panel 4,710px; simple rows are **34px** now and the
+  panel is 3,896px, with the document 5,612px -> 4,662px at 1440.
+  The change that did most of it: `.src` used to be `grid-column:3/5`, i.e. its own second
+  line, which cost ~30px a row while roughly **500px sat unused** beside the stat meta at
+  1440. It is a fifth column at >=900px and drops back to its own line below that, where
+  the width genuinely is not there. Gearing already had a `<=640px` block that stacks meta
+  and src onto one column; the new `<=899px` rule sits above it and only covers tablets.
+  **The column needs a FLOOR, not just a fraction.** As `minmax(0,1.1fr)` it collapsed to
+  58px on rows with wide stat meta and truncated 20 labels; `minmax(140px,1.1fr)` clears
+  the longest dungeon name ("Temple of Sethraliss", 132px) and truncation is zero — verified
+  across four specs and at 1440 / 800 / 375.
+  Console's colour-and-type law holds here as on the tracker: the item NAME stays in the
+  body font because it is prose; rank, stat meta and source are mono.
+  A `title` was briefly added to `.src` for the truncated cases and then REMOVED once the
+  floor made truncation impossible — a tooltip duplicating fully visible text is exactly
+  the noise this audit spent its time deleting.
 - **Gearing no longer opens on Frost Mage** (2026-08-22). It was a hardcoded
   `sel.value = 'Mage|Frost'` with nothing behind it, so every visitor landed on someone
   else's spec. Order is now: a `#spec=` deep link, then the spec you last looked at
