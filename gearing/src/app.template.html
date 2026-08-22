@@ -799,6 +799,19 @@ function specFromHash() {
   const want = hashParams().get('spec');
   return want ? (SPECS.specs.find(s => specSlug(s) === want) || null) : null;
 }
+/* Last spec looked at. Guarded exactly like location/history above — there is no
+   localStorage in the client-boot test's scope either, and an unguarded read throws
+   there rather than failing a useful assertion. */
+const SPEC_KEY = 'wow-s2-gearing:spec';
+function readSavedSpec() {
+  try { return typeof localStorage === 'undefined' ? null : localStorage.getItem(SPEC_KEY); }
+  catch { return null; }
+}
+function saveSpec(value) {
+  try { if (typeof localStorage !== 'undefined') localStorage.setItem(SPEC_KEY, value); }
+  catch { /* private mode, quota, blocked storage — the default path still works */ }
+}
+
 function writeSpecHash() {
   if (!CUR || typeof location === 'undefined' || typeof history === 'undefined') return;
   const p = hashParams();
@@ -822,6 +835,7 @@ function initSpecs() {
   });
   sel.addEventListener('change', () => {
     CUR = find(sel.value);
+    saveSpec(sel.value);
     writeSpecHash();
     initProfiles();
     $('#scoring-mode').value = 'consensus';
@@ -832,10 +846,13 @@ function initSpecs() {
   $('#scoring-mode').addEventListener('change', render);
   SECONDARY_STATS.forEach(stat => $('#weight-' + stat.toLowerCase()).addEventListener('input', render));
   $('#weight-reset').addEventListener('click', () => clearCustomWeights(true));
-  // A deep-linked spec wins over the built-in default; an unknown slug is ignored.
+  /* A deep-linked spec wins; an unknown slug is ignored. Then the spec you last looked
+     at on this page. Then the top of the list — which is arbitrary, but explicably so.
+     It used to hardcode Frost Mage, which just looked like a bug to everyone else. */
   const linked = specFromHash();
+  const saved = readSavedSpec();
   if (linked) sel.value = linked.class + '|' + linked.spec;
-  else if (find('Mage|Frost')) sel.value = 'Mage|Frost';
+  else if (saved && find(saved)) sel.value = saved;
   CUR = find(sel.value) || SPECS.specs[0];
   initProfiles();
   $('#scoring-mode').value = 'consensus';

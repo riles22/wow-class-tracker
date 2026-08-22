@@ -522,7 +522,12 @@ test("client app: consensus-first ranking, source-labeled Builds, custom overrid
   const scoringMode = document.ids.get("scoring-mode");
   const profileSelect = document.ids.get("profile");
 
-  // Boot: Frost Mage, consensus mode, and the G1 headline facts.
+  /* Boot: consensus mode and the G1 headline facts, on Frost Mage. The default spec used
+     to be hardcoded to Frost Mage, so this read it for free; since 2026-08-22 the page
+     opens on your last spec (then the top of the list), and a test should name the
+     fixture it needs rather than lean on an app default. */
+  specSelect.value = "Mage|Frost";
+  specSelect.listeners.change();
   assert.equal(app.current().spec, "Frost");
   assert.equal(scoringMode.value, "consensus");
   assert.match(document.ids.get("scoring-summary").innerHTML, /Guide consensus ranks first/);
@@ -695,7 +700,9 @@ test("weapon consensus merges hand vocabularies in BOTH directions", async () =>
   const appSource = `${scripts.at(-1)[1]}\nreturn { consensusOf: id => consensusCount(BY_ID[id]), setSpec: v => { const s = document.getElementById("spec"); s.value = v; s.listeners.change(); } };`;
   const document = fakeDocument(data);
   const app = new Function("document", "innerWidth", "innerHeight", appSource)(document, 1600, 900);
-  // Main-hand direction: guides say "Main Hand", catalog says "One-Hand".
+  // Main-hand direction: guides say "Main Hand", catalog says "One-Hand". Selected
+  // explicitly — this used to ride on Frost Mage being the hardcoded default spec.
+  app.setSpec("Mage|Frost");
   assert.equal(app.consensusOf("271092"), 3);
   // Off-hand direction (the adversarial-review high): Devourer's Baleful Hexblade is the
   // unanimous OFF-hand pick of all three guides; its catalog slot is "One-Hand".

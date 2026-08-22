@@ -514,20 +514,20 @@ try {
        raid, M+, 30d spark, profile, notes, chevron. The tier columns stay ~40px because
        the badge chrome is gone — the letter is a bare glyph now, and the movement arrow
        and confidence dots sit beside it in .tind rather than under it. */
-    grid-template-columns:48px 148px 108px 38px 62px 40px 40px 76px 66px minmax(0,1fr) 16px;
+    grid-template-columns:48px 148px 108px 38px 62px 54px 54px 76px 66px minmax(0,1fr) 16px;
     align-items:center; gap:10px; padding:5px 14px
   }
   /* Below ~980px the spark and the profile chip go first: both are secondary reads and
      the notes column earns the width over either. Below ~860 the notes go too. */
   @media(min-width:760px) and (max-width:979px){
-    .head, .row{grid-template-columns:48px minmax(110px,148px) minmax(84px,108px) 38px 58px 40px 40px minmax(0,1fr) 16px}
+    .head, .row{grid-template-columns:48px minmax(110px,148px) minmax(84px,108px) 38px 58px 54px 54px minmax(0,1fr) 16px}
     /* .sparkcell declares display:flex further down the sheet, so an unqualified
        selector here loses on source order at equal specificity and the column never
        hid — 10 grid items in 9 columns. Qualified to outrank it. */
     .head .sparkcell, .row .sparkcell, .head .profcell, .row .profcell{display:none}
   }
   @media(min-width:760px) and (max-width:859px){
-    .head, .row{grid-template-columns:48px minmax(100px,1fr) minmax(78px,108px) 38px 54px 40px 40px 16px}
+    .head, .row{grid-template-columns:48px minmax(100px,1fr) minmax(78px,108px) 38px 54px 54px 54px 16px}
     .head .notecell, .row .notecell{display:none}
   }
   .idcell{display:flex; align-items:center; gap:3px; min-width:0}
@@ -543,6 +543,13 @@ try {
      reads as a swatch rather than as data. */
   .row .tier{height:auto; font-size:12.5px; min-width:0; padding:0; border:0; background:none; border-radius:0}
   .row .tscore{display:none}
+  /* Console: the letter and its marks are ONE run. The 34px+auto grid below was sized for
+     a badge plate in a 70px column; in a narrow column it gave .tind 4px and the ± and
+     arrows spilled into the next column (2026-08-22). */
+  .row .tiercell{display:inline-flex; align-items:center; gap:3px; min-width:0}
+  .row .tcol{flex-direction:row; align-items:center; gap:0}
+  .row .tcol .tier{width:auto}
+  .row .tind{gap:2px; flex:none}
   .sparkcell{display:flex; align-items:center; min-width:0}
   .sparkcell svg{display:block}
   .profcell{font-family:var(--mono); font-size:10px; color:var(--ink-mute); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
