@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-Gxpp4WodmEVK/LKtGgbsqFRrhDr8Hyaknex2JOukPOA='; style-src 'unsafe-inline'; font-src data:; img-src data:; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-leVj1pC2pibRONgV6yzUGkHJsU1xiZD7l59HDLsJBvs='; style-src 'unsafe-inline'; font-src data:; img-src data:; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Spec Tracker &mdash; Season 2 Gearing</title>
 <!-- The Spec Tracker brand mark as favicon — same artwork as the tracker page, shipped
@@ -150,6 +150,18 @@ button:hover{background:#241740}
 .weight-grid label{font-size:12px;color:var(--t2);font-weight:700}
 .weight-grid input{display:block;width:100%;margin-top:5px}
 
+/* Reference row: below the sheet, and visibly secondary to it. */
+.refrow{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin:20px 0 14px;
+  padding-top:14px;border-top:1px solid var(--line)}
+.reflabel{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--t4);margin-right:4px}
+.refrow .tab{min-height:34px;padding:6px 12px;font-size:12.5px;font-weight:600;
+  border:1px solid var(--line);border-radius:8px;color:var(--t2);background:transparent}
+.refrow .tab:hover{color:var(--t1);border-color:var(--control-line)}
+.refrow .tab.on{color:var(--t1);border-color:var(--accent);background:rgba(181,123,238,.10)}
+.refrow .tab[aria-expanded="true"]::after{content:" \2013";color:var(--accent)}
+@media(pointer:coarse){.refrow .tab{min-height:44px}}
+.refpanel{margin-top:4px}
 .tabs{display:flex;gap:4px;margin:22px 0 20px;border-bottom:1px solid var(--line);overflow-x:auto}
 .tab{min-height:46px;padding:10px 16px;font-size:14px;font-weight:750;color:var(--t3);cursor:pointer;
      border:0;border-bottom:3px solid transparent;border-radius:8px 8px 0 0;background:transparent;
@@ -186,7 +198,12 @@ button:hover{background:#241740}
    tab. Each row is a <details> so expansion needs no script and keeps keyboard and
    find-in-page behaviour. Rows whose answer is not a single item (Finger, Trinket) still
    render as one row and carry a "+N" so the choice underneath is visible. */
+/* #bis is a two-column grid, and the sheet MUST span it. Boxed into one 623px column
+   the desktop 8-column row template (min 640px with padding) overflowed every one of the
+   13 rows and truncated 88 elements — and the responsive breakpoints could not help,
+   because a media query measures the VIEWPORT, not the column it happens to sit in. */
 .sheet{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--panel)}
+#bis .sheet{grid-column:1/-1}
 .shead,.srow{display:grid;
   grid-template-columns:78px 18px minmax(180px,1.5fr) 40px minmax(120px,1fr) 54px 40px 16px;
   gap:10px;align-items:center;padding:6px 12px;font-family:var(--mono);font-size:12px}
@@ -429,29 +446,32 @@ table.paths tr:hover td{background:rgba(255,255,255,.03)}
     </div>
   </section>
 
-  <nav class="tabs" role="tablist" aria-label="Gearing views">
-    <button class="tab on" id="tab-bis" type="button" role="tab" aria-selected="true" aria-controls="p-bis" data-p="bis">Gear recommendations</button>
-    <button class="tab" id="tab-tier" type="button" role="tab" aria-selected="false" aria-controls="p-tier" data-p="tier" tabindex="-1">Tier &amp; Catalyst</button>
-    <button class="tab" id="tab-enh" type="button" role="tab" aria-selected="false" aria-controls="p-enh" data-p="enh" tabindex="-1">Enhancements</button>
-    <button class="tab" id="tab-up" type="button" role="tab" aria-selected="false" aria-controls="p-up" data-p="up" tabindex="-1">Upgrade checker</button>
-    <button class="tab" id="tab-src" type="button" role="tab" aria-selected="false" aria-controls="p-src" data-p="src" tabindex="-1">Loot sources</button>
-    <button class="tab" id="tab-paths" type="button" role="tab" aria-selected="false" aria-controls="p-paths" data-p="paths" tabindex="-1">Item levels</button>
-  </nav>
-
   <main id="main-content">
-    <section class="panel on" id="p-bis" role="tabpanel" aria-labelledby="tab-bis" tabindex="0">
+    <section class="panel on" id="p-bis" aria-label="Gear recommendations" tabindex="0">
       <h2>Gear recommendations</h2>
       <div class="note" id="bis-note"></div>
       <div class="grid" id="bis"></div>
     </section>
 
-    <section class="panel" id="p-tier" role="tabpanel" aria-labelledby="tab-tier" tabindex="0" hidden>
+  <!-- The slot sheet is the page now; these five are reference, not alternatives to it
+       (audit 2026-08-22, Option A stage 3). Disclosures rather than tabs because none of
+       them needs to be open — a tablist would assert that one always is. -->
+  <nav class="refrow" aria-label="Reference">
+    <span class="reflabel">Reference</span>
+    <button class="tab" id="tab-tier" type="button" aria-expanded="false" aria-controls="p-tier" data-p="tier">Tier &amp; Catalyst</button>
+    <button class="tab" id="tab-enh" type="button" aria-expanded="false" aria-controls="p-enh" data-p="enh">Enhancements</button>
+    <button class="tab" id="tab-up" type="button" aria-expanded="false" aria-controls="p-up" data-p="up">Upgrade checker</button>
+    <button class="tab" id="tab-src" type="button" aria-expanded="false" aria-controls="p-src" data-p="src">Loot sources</button>
+    <button class="tab" id="tab-paths" type="button" aria-expanded="false" aria-controls="p-paths" data-p="paths">Item levels</button>
+  </nav>
+
+    <section class="panel refpanel" id="p-tier" role="region" aria-labelledby="tab-tier" tabindex="0" hidden>
       <h2>Tier &amp; Catalyst</h2>
       <div class="note" id="tier-note"></div>
       <div class="grid" id="tier"></div>
     </section>
 
-    <section class="panel" id="p-up" role="tabpanel" aria-labelledby="tab-up" tabindex="0" hidden>
+    <section class="panel refpanel" id="p-up" role="region" aria-labelledby="tab-up" tabindex="0" hidden>
       <h2>Upgrade checker</h2>
       <div class="note" id="upgrade-help">Paste your <b>SimulationCraft addon</b> output (in-game: <code>/simc</code>).
         Nothing leaves this page. This reads equipped item IDs and levels for source comparisons; it does not run a damage simulation or import stat weights.</div>
@@ -469,13 +489,13 @@ table.paths tr:hover td{background:rgba(255,255,255,.03)}
       <div id="up" style="margin-top:20px"></div>
     </section>
 
-    <section class="panel" id="p-enh" role="tabpanel" aria-labelledby="tab-enh" tabindex="0" hidden>
+    <section class="panel refpanel" id="p-enh" role="region" aria-labelledby="tab-enh" tabindex="0" hidden>
       <h2>Enhancements</h2>
       <div class="note" id="enh-note"></div>
       <div class="grid" id="enh"></div>
     </section>
 
-    <section class="panel" id="p-src" role="tabpanel" aria-labelledby="tab-src" tabindex="0" hidden>
+    <section class="panel refpanel" id="p-src" role="region" aria-labelledby="tab-src" tabindex="0" hidden>
       <h2>Loot sources</h2>
       <div class="note">See every raid boss and dungeon, plus how many drops your selected spec can use.
         Tier-token bosses are clearly marked.
@@ -486,7 +506,7 @@ table.paths tr:hover td{background:rgba(255,255,255,.03)}
       <div id="src"></div>
     </section>
 
-    <section class="panel" id="p-paths" role="tabpanel" aria-labelledby="tab-paths" tabindex="0" hidden>
+    <section class="panel refpanel" id="p-paths" role="region" aria-labelledby="tab-paths" tabindex="0" hidden>
       <h2>Item levels by source</h2>
       <div class="note" id="paths-note"></div>
       <div id="paths"></div>
@@ -1297,13 +1317,17 @@ function renderBis() {
   });
   void cards;
 
-  $('#bis').innerHTML = customBanner() + weaponLoadoutCards(weaponItems)
-    + (usingCustom ? '' : guideOnlyGroupCard('Weapons &mdash; guide picks without drop data',
-        ['Main Hand', 'Off Hand', 'One-Hand', 'Two-Hand', 'Ranged', 'Held In Off-hand', 'Shield']))
+  /* The sheet leads. Weapon setups follow it rather than preceding it: a setup is chosen
+     as a complete pair, so it stays a card, but it is not what you came to read first —
+     before this it pushed the first slot row to 1,785px. */
+  $('#bis').innerHTML = customBanner()
     + '<div class="sheet"><div class="shead">'
     + '<span>Slot</span><span></span><span>Guide pick</span><span style="text-align:center">3/3</span>'
     + '<span>Drops from</span><span style="text-align:right">Ceiling</span><span></span><span></span>'
     + '</div>' + sheetRows(bySlot, usingCustom) + '</div>'
+    + weaponLoadoutCards(weaponItems)
+    + (usingCustom ? '' : guideOnlyGroupCard('Weapons &mdash; guide picks without drop data',
+        ['Main Hand', 'Off Hand', 'One-Hand', 'Two-Hand', 'Ranged', 'Held In Off-hand', 'Shield']))
     || '<div class="empty">No usable items found for this spec.</div>';
 }
 
@@ -2158,16 +2182,19 @@ function render() {
 }
 
 const TAB_ELEMENTS = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+/* Toggle a reference view. Opening one closes the others so the page stays short, and
+   clicking the open one closes it — the sheet above is always the thing you come back to,
+   so there is no state where a reference view is forced on you. */
 function activateTab(tab, shouldFocus) {
+  const wasOpen = tab.getAttribute('aria-expanded') === 'true';
   TAB_ELEMENTS.forEach(candidate => {
-    const selected = candidate === tab;
-    candidate.classList[selected ? 'add' : 'remove']('on');
-    candidate.setAttribute('aria-selected', selected ? 'true' : 'false');
-    candidate.tabIndex = selected ? 0 : -1;
+    const open = !wasOpen && candidate === tab;
+    candidate.classList[open ? 'add' : 'remove']('on');
+    candidate.setAttribute('aria-expanded', open ? 'true' : 'false');
     const panel = $('#p-' + candidate.dataset.p);
     if (panel) {
-      panel.classList[selected ? 'add' : 'remove']('on');
-      panel.hidden = !selected;
+      panel.classList[open ? 'add' : 'remove']('on');
+      panel.hidden = !open;
     }
   });
   if (shouldFocus) tab.focus();

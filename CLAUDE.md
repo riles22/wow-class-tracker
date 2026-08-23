@@ -512,6 +512,28 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   Every candidate row contains its own item-details disclosure, so the first `</details>`
   after a slot's name closes inside that slot's first row and the slice captures one id
   instead of the whole slot. Both Neck assertions hit this.
+- **The six tabs are now the sheet plus a five-item Reference row** (2026-08-22, Option A
+  stage 3). `Gear recommendations` stopped being a tab: it is `#p-bis`, always on, and the
+  other five — Tier & Catalyst, Enhancements, Upgrade checker, Loot sources, Item levels —
+  are `aria-expanded` disclosure buttons in a `<nav class="refrow">` over `role="region"`
+  panels, all closed on load. A **tablist was the wrong control** once the sheet stopped
+  being one of the alternatives: a tablist asserts that exactly one of its panels is open,
+  and here the correct default is none. `activateTab` toggles rather than selects, so a
+  second click on the open button closes it. Document 2,531px against 5,475 before the
+  option, and the whole page is reachable without opening anything.
+  **Three placement defects came out of MEASURING it, not looking at it** — all three now
+  pinned in `gearing/test/project.test.mjs`:
+  (a) the nav kept the old tab strip’s DOM position, i.e. *above* `<main>`, so the five
+  things just demoted to reference were still the first thing under the setup card;
+  (b) `weaponLoadoutCards()` emitted before the sheet, putting the first slot row at
+  **1,785px** — a setup is chosen as a complete pair so it stays a card, but it is not what
+  the page is about, and it now follows the sheet (first slot **593px**);
+  (c) ⚠️ **`#bis` is a two-column grid and the sheet has to span it.** Boxed into one 623px
+  column, the desktop 8-column row template (min 640px with padding) overflowed **all 13
+  rows** and truncated **88 elements** — and the responsive breakpoints could not save it,
+  because a media query measures the **viewport**, not the column an element happens to sit
+  in. `#bis .sheet{grid-column:1/-1}`; verified 0 truncated elements at 1440 with all 13
+  slots open, and 1 at 375 (a long item name meeting `.sitem`’s deliberate ellipsis).
 - **Gearing no longer opens on Frost Mage** (2026-08-22). It was a hardcoded
   `sel.value = 'Mage|Frost'` with nothing behind it, so every visitor landed on someone
   else's spec. Order is now: a `#spec=` deep link, then the spec you last looked at

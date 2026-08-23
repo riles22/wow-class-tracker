@@ -452,7 +452,34 @@ test("self-contained output embeds current data and valid browser JavaScript", a
   assert.doesNotThrow(() => new Function(scripts.at(-1)[1]));
   assert.match(template, /filter\(it => maxAttainable\(it\) > threshold\)/);
   assert.match(template, /Trinket upgrades are listed by item level, not ranked/);
-  assert.match(template, /role="tablist"/);
+  /* The reference row stopped being a tablist at Option A stage 3 (2026-08-22): the sheet
+     is the page and these five are independent reference views, none of which needs to be
+     open. The pin follows the pattern — the affordance must still carry correct ARIA. */
+  assert.doesNotMatch(template, /role="tablist"/);
+  assert.match(template, /<nav class="refrow" aria-label="Reference">/);
+  for (const p of ["tier", "enh", "up", "src", "paths"]) {
+    assert.match(template, new RegExp('id="tab-' + p + '"[^>]*aria-expanded="false"'),
+      `reference button ${p} must be a disclosure`);
+    assert.match(template, new RegExp('id="p-' + p + '"[^>]*role="region"'),
+      `reference panel ${p} must be a labelled region`);
+  }
+  // the sheet is not one of them — it is the page, and cannot be closed
+  assert.doesNotMatch(template, /id="tab-bis"/);
+  assert.match(template, /id="p-bis" aria-label="Gear recommendations"/);
+  /* Three placement pins, each one a defect that was MEASURED rather than noticed:
+     the reference row must follow the sheet in the DOM (it kept the old tab strip's
+     position and so was still the first thing under the setup card); the sheet must be
+     emitted before the weapon cards (they pushed the first slot row to 1,785px); and it
+     must span the whole of #bis, because boxed into one 623px grid column the desktop
+     row template overflowed all 13 rows and no media query could help — a media query
+     measures the viewport, not the column. */
+  assert.ok(template.indexOf('<nav class="refrow"') > template.indexOf('id="p-bis"'),
+    "the reference row must come after the slot sheet");
+  assert.ok(/customBanner\(\)\s*\+\s*.<div class="sheet">/.test(template)
+    && template.indexOf("weaponLoadoutCards(weaponItems)", template.indexOf("customBanner()"))
+       > template.indexOf('<div class="sheet">'),
+    "the sheet must be emitted before the weapon loadout cards");
+  assert.match(template, /#bis \.sheet\{grid-column:1\/-1\}/);
   assert.match(template, /<label for="spec">Specialization<\/label>/);
   assert.match(template, /<label for="profile">Build<\/label>/);
   assert.doesNotMatch(template, /<label for="scenario">/);
