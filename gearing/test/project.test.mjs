@@ -533,17 +533,25 @@ test("client app: consensus-first ranking, source-labeled Builds, custom overrid
   assert.match(document.ids.get("scoring-summary").innerHTML, /Guide consensus ranks first/);
   assert.match(document.ids.get("bis-note").innerHTML, /Ranked by guide consensus/);
   assert.match(document.ids.get("bis-note").innerHTML, /never summed/);
-  // A 3/3-consensus item leads its slot card. Head is a TIER slot (it renders in the
-  // Tier tab, not the #bis grid), so probe Neck instead: Aqirbane Reliquary 268265 is
-  // named by all three guides for Frost Mage.
+  // A 3/3-consensus item leads its slot. Neck is probed because Aqirbane Reliquary
+  // 268265 is named by all three guides for Frost Mage. (Head would work too since the
+  // 2026-08-22 sheet merged tier slots back in, but Neck keeps this pin stable.)
   assert.equal(app.consensusOf("268265"), 3);
   const bisHtml = document.ids.get("bis").innerHTML;
   assert.match(bisHtml, /3\/3 guides/);
   assert.match(bisHtml, /data-ilvl-ceiling>up to \d+/); // the G2 named ilvl term
-  const neckCard = bisHtml.slice(bisHtml.indexOf("<h3>Neck<"));
+  const neckCard = bisHtml.slice(bisHtml.indexOf('<span class="sname">Neck</span>'));
   const firstRow = neckCard.indexOf('data-id="');
   assert.ok(firstRow >= 0 && neckCard.slice(firstRow, firstRow + 24).includes("268265"),
-    "the 3/3-consensus Neck item leads its card");
+    "the 3/3-consensus Neck item leads its slot");
+  /* The sheet is the whole character: every slot gets a row, tier slots included and
+     marked rather than moved to another tab (audit 2026-08-22). */
+  for (const slot of ["Head", "Shoulder", "Chest", "Hands", "Legs"])
+    assert.match(bisHtml, new RegExp('<span class="sname">' + slot + '</span>'),
+      `tier slot ${slot} must appear on the sheet, not only under the Catalyst tab`);
+  assert.match(bisHtml, /class="stier"/, "tier slots are marked with a badge on the sheet");
+  assert.doesNotMatch(bisHtml, /Tier slots &mdash; guide picks without drop data/,
+    "the leftover tier card is gone — those picks fold into their own slot rows");
   // G8 (revised 2026-08-18): trinkets rank by guide-consensus COUNT with ties shared;
   // per-source letters still never merge, and stat fit is never computed for them.
   assert.match(bisHtml, /Icy Veins: S/);
@@ -658,9 +666,14 @@ test("client app: consensus-first ranking, source-labeled Builds, custom overrid
   // that still consults consensus under custom breaks this on real data).
   {
     const bh = document.ids.get("bis").innerHTML;
-    const card = bh.slice(bh.indexOf("<h3>Neck<"), bh.indexOf("<h3>", bh.indexOf("<h3>Neck<") + 1));
+    // bounded by the Neck sheet row rather than the old <h3> card (sheet, 2026-08-22)
+    /* Bound by the NEXT slot row, not by </details>: each candidate row contains its own
+       item-details disclosure, so the first </details> closes inside row 1. */
+    const start = bh.indexOf('<span class="sname">Neck</span>');
+    const next = bh.indexOf('<span class="sname">', start + 1);
+    const card = bh.slice(start, next < 0 ? undefined : next);
     const ids = [...card.matchAll(/data-id="(\d+)"/g)].map((m) => m[1]);
-    assert.ok(ids.length >= 2, "Neck card renders multiple rows");
+    assert.ok(ids.length >= 2, "the Neck slot renders multiple candidate rows");
     const scores = ids.map((id) => app.scoreFor(id));
     for (let i = 1; i < scores.length; i++)
       assert.ok(scores[i - 1] >= scores[i] - 1e-12,

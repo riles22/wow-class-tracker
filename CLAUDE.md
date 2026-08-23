@@ -468,6 +468,34 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   A `title` was briefly added to `.src` for the truncated cases and then REMOVED once the
   floor made truncation impossible — a tooltip duplicating fully visible text is exactly
   the noise this audit spent its time deleting.
+- **Gearing's recommendations panel is a SLOT SHEET** (2026-08-22, Option A of the gearing
+  design audit — Riley chose it from three structural options; the canvas records the two
+  that lost and why). One row per equipment slot, each a `<details>` that expands to that
+  slot's candidates. Sheet **460px** against 2,829px of cards; the panel 3,015 -> 1,755px
+  and the document 5,475 -> 2,521px. Rows are 32px desktop / 50px phone.
+  **The point of it is the tier merge.** `renderBis` filtered the pool with
+  `!TIER_SET_SLOTS.has(it.slot)`, so Head/Shoulder/Chest/Hands/Legs were excluded from the
+  recommendations grid entirely and only ever appeared under a tab named after the
+  Catalyst — the character was split across two tabs by a game mechanic rather than by any
+  question a player asks. Tier slots are ordinary rows now, marked with a `T` badge, and
+  the leftover `"Tier slots — guide picks without drop data"` card is gone because those
+  picks fold into their own slot rows. A test pins all five tier slots onto the sheet, the
+  badge, and the absence of that card.
+  Note `renderTier` is NOT the same view for those slots — it is a Catalyst conversion
+  planner built from `isCatalystBase`, a different item filter. So the sheet's tier rows
+  and the Catalyst tab legitimately show different items: the guide's pick versus the
+  conversion bases. Moving the per-slot half of that planner into the slot rows is the
+  next stage, with the cross-slot plan staying as a reference page.
+  **Trinkets are ONE row covering both slots, deliberately.** The guides rank them as a
+  pool and decline to name a pair, so two rows would repeat the same list and assert a
+  1st/2nd the sources never gave. The row's body is `trinketCard` whole — a first attempt
+  dropped it and would have lost the per-source letter tiers, the dense consensus ranking
+  and the "stat fit is never computed" note, all of which are deliberate (G8). The gearing
+  test caught that; `.sbody .card` just strips the nested frame.
+  ⚠️ **Slicing the sheet in a test: bound by the NEXT `.sname`, never by `</details>`.**
+  Every candidate row contains its own item-details disclosure, so the first `</details>`
+  after a slot's name closes inside that slot's first row and the slice captures one id
+  instead of the whole slot. Both Neck assertions hit this.
 - **Gearing no longer opens on Frost Mage** (2026-08-22). It was a hardcoded
   `sel.value = 'Mage|Frost'` with nothing behind it, so every visitor landed on someone
   else's spec. Order is now: a `#spec=` deep link, then the spec you last looked at

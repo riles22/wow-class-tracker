@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-qVSyq7+Nbxmpi/TZL5QfjQZ0HpX+EaPV3ufMHcrJWQs='; style-src 'unsafe-inline'; font-src data:; img-src data:; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-635xR0wctNoOrIEjNgzQ9rpWSoVfkWriBh0nH6D9c+U='; style-src 'unsafe-inline'; font-src data:; img-src data:; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Spec Tracker &mdash; Season 2 Gearing</title>
 <!-- The Spec Tracker brand mark as favicon — same artwork as the tracker page, shipped
@@ -181,6 +181,48 @@ button:hover{background:#241740}
 /* Five columns, not four: the source used to span 3/5 on a second line, which cost ~30px
    a row while ~500px sat empty beside the stat meta at 1440 (2026-08-22). It drops back to
    its own line below 900px, where that width genuinely is not there. */
+/* ---------- the slot sheet (Option A, 2026-08-22) ----------
+   One row per equipment slot, tier slots included and marked rather than moved to another
+   tab. Each row is a <details> so expansion needs no script and keeps keyboard and
+   find-in-page behaviour. Rows whose answer is not a single item (Finger, Trinket) still
+   render as one row and carry a "+N" so the choice underneath is visible. */
+.sheet{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--panel)}
+.shead,.srow{display:grid;
+  grid-template-columns:78px 18px minmax(180px,1.5fr) 40px minmax(120px,1fr) 54px 40px 16px;
+  gap:10px;align-items:center;padding:6px 12px;font-family:var(--mono);font-size:12px}
+.shead{background:var(--panel-2);border-bottom:1px solid var(--line);
+  font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--t3)}
+.sslot{border-bottom:1px solid #190F2E}
+.sslot:last-child{border-bottom:0}
+.sslot>summary{list-style:none;cursor:pointer}
+.sslot>summary::-webkit-details-marker{display:none}
+.sslot>summary:hover{background:rgba(181,123,238,.05)}
+.sslot>summary:focus-visible{outline:2px solid var(--focus);outline-offset:-2px}
+.sslot[open]>summary{background:rgba(181,123,238,.06)}
+.sname{color:var(--t4);font-size:10px;letter-spacing:.1em;text-transform:uppercase}
+.stier{font-size:9px;color:var(--gold);border:1px solid rgba(240,194,75,.4);border-radius:3px;text-align:center}
+.sitem{font-family:var(--body);font-size:13px;font-weight:600;color:var(--t1);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sitem.none{color:var(--t4);font-weight:400}
+.scons{font-size:11px;font-weight:700;text-align:center}
+.ssrc{color:var(--t3);font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sceil{color:var(--t2);font-size:11px;text-align:right}
+.smore{color:var(--t3);font-size:10.5px;text-align:right}
+.schev{color:var(--t2);font-size:13px;justify-self:end}
+.sslot[open] .schev{color:var(--accent)}
+.sbody{padding:2px 12px 10px 24px;border-left:2px solid var(--accent);margin:0 12px 8px 12px}
+.sbody .card{border:0;background:none;border-radius:0;padding:0}
+.sbody .card>h3{font-size:12px}
+@media (max-width:899px){
+  .shead,.srow{grid-template-columns:70px 18px minmax(0,1fr) 34px 46px 34px 16px}
+  .shead>:nth-child(5),.srow>.ssrc{display:none}
+}
+@media (max-width:640px){
+  .shead{display:none}
+  .srow{grid-template-columns:18px minmax(0,1fr) 34px 16px;row-gap:2px}
+  .srow>.sname{grid-column:1/-1;order:-1}
+  .srow>.sceil,.srow>.smore{display:none}
+}
 .row{display:grid;grid-template-columns:40px 26px minmax(150px,1.5fr) auto minmax(140px,1.1fr);
      column-gap:10px;row-gap:2px;
      align-items:start;padding:5px 6px;border-bottom:1px solid var(--line);font-size:13px;border-radius:6px}
@@ -1089,6 +1131,67 @@ function omniTokenCard(token) {
     + '</span><span class="src">' + esc(token.whereFull) + '</span></div></div>';
 }
 
+/* Slots the sheet lists, in the order you would read a character panel. Finger and
+   Trinket appear twice because you equip two; they draw from one candidate pool, so row 1
+   takes the best pick and row 2 the next. Weapons keep their loadout cards below — a
+   weapon setup is chosen as a complete pair, which is a different shape from one row. */
+const SHEET_SLOTS = [
+  { slot: 'Head' }, { slot: 'Neck' }, { slot: 'Shoulder' }, { slot: 'Back' },
+  { slot: 'Chest' }, { slot: 'Wrist' }, { slot: 'Hands' }, { slot: 'Waist' },
+  { slot: 'Legs' }, { slot: 'Feet' },
+  { slot: 'Finger', nth: 1 }, { slot: 'Finger', nth: 2 },
+  { slot: 'Trinket', label: 'Trinkets', pool: true },
+];
+
+function sheetRows(bySlot, usingCustom) {
+  const out = [];
+  for (const spec of SHEET_SLOTS) {
+    const list = bySlot[spec.slot] || [];
+    const entries = visibleCandidates(list, 5);
+    const ranked = entries.filter(e => !e.special);
+    const pick = ranked[(spec.nth || 1) - 1];
+    const label = spec.label || (spec.nth ? spec.slot + ' ' + spec.nth : spec.slot);
+    const isTier = TIER_SET_SLOTS.has(spec.slot);
+    const more = spec.pool ? list.length : Math.max(0, list.length - (spec.nth || 1));
+
+    let item, cons, src, ceil;
+    if (pick) {
+      const it = pick.it;
+      const hit = usingCustom ? null : consensusOf(it);
+      item = '<span class="sitem">' + esc(it.name)
+           + (spec.pool ? ' <span style="color:var(--t4);font-weight:400">and 1 more to equip</span>' : '')
+           + '</span>';
+      cons = '<span class="scons" style="color:' + (!hit ? 'var(--t4)' : hit.consensus >= 3 ? 'var(--adv)' : hit.consensus === 2 ? '#E0A73E' : 'var(--t3)') + '">'
+           + (hit ? hit.consensus : '—') + '</span>';
+      src = '<span class="ssrc">' + esc(it.kind === 'mplus' ? it.dungeon : it.where) + '</span>';
+      ceil = '<span class="sceil">' + maxAttainable(it) + '</span>';
+    } else {
+      /* Completeness is the point of the sheet: a slot we hold no drop data for still gets
+         a row and says so, rather than vanishing the way it does in a card grid. */
+      item = '<span class="sitem none">no drop data held for this slot</span>';
+      cons = '<span class="scons" style="color:var(--t4)">·</span>';
+      src = '<span class="ssrc" style="color:var(--t4)">&mdash;</span>';
+      ceil = '<span class="sceil" style="color:var(--t4)">&mdash;</span>';
+    }
+
+    /* Trinkets keep their own presentation: per-source letter tiers, dense consensus
+       ranking, and no stat fit — none of which the generic candidate row can express. */
+    const body = spec.pool
+      ? trinketCard(list, usingCustom)
+      : entries.map(entry => bisRow(entry, ranked[0]?.it || null, usingCustom)).join('')
+        + (usingCustom ? '' : guideOnlyRows(spec.slot));
+
+    out.push('<details class="sslot"><summary class="srow">'
+      + '<span class="sname">' + esc(label) + '</span>'
+      + (isTier ? '<span class="stier" title="Tier set slot">T</span>' : '<span></span>')
+      + item + cons + src + ceil
+      + '<span class="smore">' + (more > 0 ? '+' + more : '') + '</span>'
+      + '<span class="schev">&rsaquo;</span></summary>'
+      + '<div class="sbody">' + (body || '<div class="empty">nothing here</div>') + '</div></details>');
+  }
+  return out.join('');
+}
+
 function renderBis() {
   const priority = activePriority();
   const profile = activeProfile();
@@ -1118,7 +1221,10 @@ function renderBis() {
   const usable = GEAR.filter(it => canUse(CUR, it));
   const weaponItems = usable.filter(isWeaponItem);
   const bySlot = {};
-  usable.filter(it => !isWeaponItem(it) && !TIER_SET_SLOTS.has(it.slot))
+  /* Tier slots used to be excluded here, which is what split the character across two
+     tabs (audit 2026-08-22). They are ordinary slots on the sheet now and carry a "T"
+     badge; the Catalyst planner keeps its own tab for the cross-slot conversion view. */
+  usable.filter(it => !isWeaponItem(it))
     .forEach(it => (bySlot[it.slot] = bySlot[it.slot] || []).push(it));
 
   // Trinket is pulled out of the normal grid and handled on its own below
@@ -1132,8 +1238,26 @@ function renderBis() {
     const topItem = entries.filter(entry => !entry.special)[0]?.it || null;
     const rows = [];
     entries.forEach(entry => {
+      rows.push(bisRow(entry, topItem, usingCustom));
+    });
+    return '';
+  });
+  void cards;
+
+  $('#bis').innerHTML = customBanner() + weaponLoadoutCards(weaponItems)
+    + (usingCustom ? '' : guideOnlyGroupCard('Weapons &mdash; guide picks without drop data',
+        ['Main Hand', 'Off Hand', 'One-Hand', 'Two-Hand', 'Ranged', 'Held In Off-hand', 'Shield']))
+    + '<div class="sheet"><div class="shead">'
+    + '<span>Slot</span><span></span><span>Guide pick</span><span style="text-align:center">3/3</span>'
+    + '<span>Drops from</span><span style="text-align:right">Ceiling</span><span></span><span></span>'
+    + '</div>' + sheetRows(bySlot, usingCustom) + '</div>'
+    || '<div class="empty">No usable items found for this spec.</div>';
+}
+
+/* one candidate line — shared by the sheet body and anything else that lists candidates */
+function bisRow(entry, topItem, usingCustom) {
       const it = entry.it;
-      rows.push('<div class="row' + (!entry.special && sameRecommendationScore(CUR, it, topItem) ? ' best' : '')
+      return ('<div class="row' + (!entry.special && sameRecommendationScore(CUR, it, topItem) ? ' best' : '')
       + '" data-id="' + it.id + '">'
       + '<span class="rank"' + (entry.special ? ' title="Special-effect item shown outside the consensus top five"' : '')
       + '>' + entry.marker + '</span>' + icoTag(it) + '<span class="nm">' + esc(it.name)
@@ -1143,20 +1267,6 @@ function renderBis() {
       + '<span class="tag" data-ilvl-ceiling>up to ' + maxAttainable(it) + '</span>'
       + '</span><span class="src' + (it.kind === 'mplus' ? ' mplus' : '') + '">'
       + esc(it.kind === 'mplus' ? it.dungeon : it.where) + '</span></div>');
-    });
-    return '<div class="card"><h3>' + esc(slot) + '<span>' + bySlot[slot].length + ' usable</span></h3>'
-      + (rows.join('') || '<div class="empty">nothing here</div>')
-      + (usingCustom ? '' : guideOnlyRows(slot)) + '</div>';
-  }).join('');
-
-  $('#bis').innerHTML = customBanner() + weaponLoadoutCards(weaponItems)
-    + (usingCustom ? '' : guideOnlyGroupCard('Weapons &mdash; guide picks without drop data',
-        ['Main Hand', 'Off Hand', 'One-Hand', 'Two-Hand', 'Ranged', 'Held In Off-hand', 'Shield']))
-    + cards
-    + (usingCustom ? '' : guideOnlyGroupCard('Tier slots &mdash; guide picks without drop data',
-        ['Head', 'Shoulder', 'Chest', 'Hands', 'Legs']))
-    + trinketCard(bySlot['Trinket'] || [], usingCustom)
-    || '<div class="empty">No usable items found for this spec.</div>';
 }
 
 function renderTier() {
