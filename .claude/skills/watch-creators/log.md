@@ -16,6 +16,66 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-23 (nightly) — 44 feeds clean, 0 distilled (the queue arrived empty), 5 queued, 3 retired
+
+**Discovery complete: 44/44 channels HTTP 200 on the first attempt, 0 feed errors, no backoff
+needed. 0 takes and 0 metaNotes — not a judgment call, there was nothing to read:
+`transcript-fetch/summary.json` reports `requested: 0, fetched: 0, verdict "ok"`, because the
+queue was already empty when the deterministic step ran.**
+
+- **Seen-set rebuilt from the four structured lanes**, never from log prose: `seen[]` 543 +
+  `skipped[]` 408 + `videos[]` 0 + every `youtu.be` id in a take or metaNote url (232 distinct)
+  → **1,183 ids**. 660 feed entries across 44 channels; **105 unseen and inside the cycle bound
+  2026-06-18** (the OLDEST date in ptr-builds.json, derived with `Math.min`, not an index — the
+  file is newest-first and `builds[0]` is the 08-22 tuning entry). 0 unseen entries predate the
+  bound.
+- **`media:description` did the triage again, and settled one candidate in each direction.**
+  · It SAVED `1wxoNsiyCtM` (YoDaTV, "A NEW Tank Meta on the Horizon? Patch Notes and Tierlist
+    Update for 12.1 Mythic+!"), whose description is the bare-Twitch shape that usually reads
+    as a restream. Checking the channel's own conventions settled it: YoDaTV titles raw VOD
+    restreams **"yodatv on twitch"** with a bare `twitch.tv/yodatv` description, while edited
+    uploads get a real title plus the "come watch me live" boilerplate — so the boilerplate is
+    not evidence of a restream on THIS channel. Queued.
+  · It CONFIRMED three PvP retirements outright (below).
+- **QUEUED 5**, keyword-filtered as the nightly lane requires against the 100-request MONTHLY
+  budget (`PER_RUN_CAP` 25 is only the per-run guard). All five are edited analysis uploads
+  about the August 25 tuning pass or the week-one meta:
+  · `R7kYD23sDQs` Obli — "Frost DK BUFFED! + What am I crafting?"; the description is itself a
+    spec-strength read ("you're likely still going to play Unholy in keys due to its tankiness
+    and range even if both specs did the same damage"). In scope: Obli is registered Frost +
+    Unholy.
+  · `9XtfT9ka2B0` leak — "Survival Hunter is DOOMED in Midnight Season 2."; description states
+    the thesis ("a 4% aura buff is not nearly enough … no damage niche to excel at"). leak is
+    registered Survival Hunter.
+  · `xg5sxI6LspI` Kalamazi — "HUGE Warlock Buffs Announced!" (unscoped entry, and the four
+    Maximum panels confirmed him as Warlock-wide).
+  · `5m_K51fnwhc` izen — "FIRST Buffs & Nerfs of Season 2 | Weekly Reset Balance Tuning #1";
+    per-spec impact framing, so this is the **metaNotes** lane, not `takes[]`.
+  · `1wxoNsiyCtM` YoDaTV — see above; attribution will be limited to his registered Blood.
+- **RETIRED 3 to `seen[]`, durable SCOPE dismissals only** — each self-identifies as PvP in the
+  title AND description, which is a fact about the video rather than a budget cut:
+  `nAVBL7mSGsQ` (Supatease, "12.1 PVP Tier List Update (Prediction Week 2)"), `wSlgCYK8Bxo`
+  (Supatease, "New Elite PVP Weapons 12.1") and `qmEnXITZFUs` (Dalaran Gaming, "Paladins Are
+  Still A Walking TERROR In Season 2! (5v5 1v1 Duels) - PvP WoW: Midnight 12.1").
+- **The remaining ~97 stay UNSEEN on purpose.** They are overwhelmingly launch-week stream
+  VODs and boss/dungeon guides — "M+ Farming", "[drops] Key Gearing Day", "HEROIC SPLITS",
+  "rsham/hpal keys", "Venomous Abyss TIPS AND TRICKS", "Mistweaver Raid Guide", the Dratnos
+  and Maximum RWF day-recaps — plus two ambiguous Supatease titles whose only description is
+  the title repeated ("New Changes INCOMING", "CHANGES TODAY OR NOT"). Guide-shaped content
+  yields no take under the standing rule, and a budget or shape dismissal must NOT be absorbed
+  into `seen[]`, so next run reconsiders every one of them. One deliberate borderline pass:
+  `3E_EY7ULmkw` (Dalaran Gaming, "Midnight Season 2 Patch Notes: Up To 350% Increases Dropping
+  Next Reset!") is not PvP-titled and could carry a Druid read, but it is a notes read-through
+  from a channel whose other output is duels — left unseen as the weakest of six candidates
+  rather than spending the sixth request on it.
+- **yt-dlp: one metadata probe, refused, backed off immediately.** `yt-dlp --skip-download
+  --print` on `1wxoNsiyCtM` returned "Sign in to confirm you're not a bot" — the settled
+  2026-07-17 datacenter bot wall, still in force, so the Supadata queue is the only path from a
+  runner. No retry, no second video, nothing installed or upgraded (pinned 2026.07.04).
+- No creator showed coverage outside their registered specs, so nothing is flagged for a scope
+  widening. No supersession was needed because no take was added, and no `latest` was advanced
+  — rule (c): it moves only to a video actually distilled.
+
 ## 2026-08-22 (LOCAL run, ~16:1x-16:4xZ — scheduled residential catch-up, ~5h after the nightly) — queue DRAINED 7 → 0: 7 takes, 14 metaNotes, 1 verified skip, 2 retired
 
 **Every queued video resolved this run — nothing handed forward.** The nightly (11:20Z) had done

@@ -1,6 +1,42 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
-  "videos": [],
+  "videos": [
+    {
+      "id": "R7kYD23sDQs",
+      "creator": "Obli",
+      "title": "Frost DK BUFFED! + What am I crafting? / Midnight Season 2 DK update",
+      "published": "2026-08-23",
+      "queuedAt": "2026-08-23"
+    },
+    {
+      "id": "9XtfT9ka2B0",
+      "creator": "leak",
+      "title": "Survival Hunter is DOOMED in Midnight Season 2.",
+      "published": "2026-08-22",
+      "queuedAt": "2026-08-23"
+    },
+    {
+      "id": "xg5sxI6LspI",
+      "creator": "Kalamazi",
+      "title": "HUGE Warlock Buffs Announced!",
+      "published": "2026-08-22",
+      "queuedAt": "2026-08-23"
+    },
+    {
+      "id": "5m_K51fnwhc",
+      "creator": "izen",
+      "title": "FIRST Buffs & Nerfs of Season 2 | Weekly Reset Balance Tuning #1",
+      "published": "2026-08-22",
+      "queuedAt": "2026-08-23"
+    },
+    {
+      "id": "1wxoNsiyCtM",
+      "creator": "YoDaTV",
+      "title": "A NEW Tank Meta on the Horizon? Patch Notes and Tierlist Update for 12.1 Mythic+!",
+      "published": "2026-08-22",
+      "queuedAt": "2026-08-23"
+    }
+  ],
   "skipped": [
     {
       "id": "02rLfzEKLq4",
@@ -3402,7 +3438,10 @@
     "vn9QRw-zkoo",
     "6zjh3PbfBno",
     "POENnO-sGog",
-    "1LfW9JXNRsI"
+    "1LfW9JXNRsI",
+    "nAVBL7mSGsQ",
+    "wSlgCYK8Bxo",
+    "qmEnXITZFUs"
   ],
   "seenNote": "Video ids already considered by an earlier run that carry no richer record — migrated 2026-08-08 from backticked ids in watch-creators/log.md when the seen-set stopped being derived from prose. Distilled videos are cited by their take's url, transcript-verified rejects live in skipped[], and queued ones in videos[]; this lane is only for the remainder. Append here when a run dismisses a video at DISCOVERY (pre-cycle date, already-processed) without fetching a transcript."
 }

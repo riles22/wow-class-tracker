@@ -16,6 +16,55 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-23 (nightly) — three channels swept, nothing new to log, still no 12.2 PTR
+
+**No new feed entry. The newest entry stays 2026-08-22 (the "Class Tuning Incoming – August
+25" post), and the canonical forum post behind it is still v1 — unedited since creation, so
+the logged distillation is current.**
+
+- **Wowhead news RSS**: 40 items, parsed per `<item>` block (never by tag adjacency), bodies
+  free in `content:encoded`. Newest item Sat 22 Aug 2026 22:34:02.
+- **News INDEX** (`data.news.newsData`, anchored on the id attribute and brace-balanced via
+  `raw_decode`): 20 posts on page 1, newest **382572** (2026/08/22 10:34 PM). It did NOT lead
+  the RSS tonight — both top out on the same article — but it was polled anyway, because the
+  index leading by minutes is exactly the 08-04 case.
+- **Blue tracker** (`data.blueTracker.default`): 50 entries, 44 unique topics after deduping
+  by topic id. Newest Blizzard class-tuning topic is still Kaivax's "Class Tuning Incoming –
+  August 25" (us 2339812) / "– 26 August" (eu 626484), both 2026-08-21 20:3x, already logged.
+- **Dev-notes thread 2317811**: re-polled, `highest_post_number` 19, `last_posted_at`
+  2026-07-31T23:42:09Z. The closed cycle's expected silence, not a lost thread — the
+  rediscovery gotcha stays SUSPENDED until Blizzard announces a 12.2 PTR.
+- **Nothing about a 12.2 PTR** in any of the three channels — no realm, no thread, no
+  announcement article.
+- **Swept and correctly NOT logged**, each checked rather than assumed:
+  · `382569` "Venomous Abyss Race to World First Day 4 Recap: Mythic Begins, Ula'tek Killed,
+    **and Class Tuning**" — the title is the trap; the body (1,128 chars, read whole) is a
+    Dratnos/Tettles recap-video announcement about splits and gearing and carries **not one
+    per-spec value**. No feed entry.
+  · `382571` Mythic Nymrissa Wavecaller nerf and Limestone's "Nymrissa Wavecaller Tuning
+    Changes" blue post — encounter tuning, not class.
+  · `382572` Evoker disconnect / Disintegrate bugs — a bug acknowledgement with no tuning.
+  · The running hotfix post 2336376 ("World of Warcraft: Midnight Hotfixes - August 21") —
+    post #1 is at v15 with `updated_at` 2026-08-22T01:46:38Z, i.e. it has not been touched
+    since the 08-22 run verified its August 21 section carries no Classes block at all.
+  · "Item Adjustment Incoming - August 25" (2338382) and "Altar of Fangs Adjustments"
+    (2339724) — item and dungeon tuning, out of the class lane.
+- ⚠️ **HANDOFF: the 08-22 tier-set corrections have NOT reached the gearing subproject.**
+  `check-refresh --age` reds on **`gearing-tierset-sync`** — gearing/data/specs.json still
+  carries the PRE-08-22 4-piece text for **Restoration Druid** and **Retribution Paladin**,
+  the two `spec.tierSet` entries the August-25 tuning entry corrected. Diffed against
+  data/specs.json to confirm: exactly 2 mismatches, both `set4`, both trailing-clause. NOT
+  fixed by this run on purpose — the fix is `node gearing/src/sync-tracker-fields.mjs`
+  followed by `npm run gearing:build`, and the nightly publish job stages only `data/`,
+  `dist/` and the skill logs, so a gearing edit made here would never be committed. Local-run
+  duty, like every other gearing harvest.
+- **Tier-set upkeep**: no set bonus was touched by anything tonight, so no `spec.tierSet`
+  needed advancing (the two advanced on 08-22 — Restoration Druid 4pc and Retribution Paladin
+  4pc — are current).
+- **PTR zone sweeps (54 / 52 / 56 / 57) remain dormant** and were not attempted; their
+  contract rows were removed at the flip, so they are correctly absent from the manifest
+  rather than recorded unreachable.
+
 ## 2026-08-22 (nightly) — the August 25 tuning pass logged: 14 specs, 2 set bonuses
 
 **Between-cycles posture unchanged: no 12.2 PTR announcement anywhere, the dev-notes thread is
