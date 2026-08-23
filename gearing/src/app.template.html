@@ -278,6 +278,20 @@ button:hover{background:#241740}
   .row{grid-template-columns:40px 26px minmax(0,1fr) auto}
   .row > .src{grid-column:3/5;white-space:normal;text-align:left}
 }
+/* ...and the same rule keyed on the CONTAINER, because the media query above measures the
+   VIEWPORT and a .row does not always get the viewport’s width. This is the third time that
+   gap has bitten: the slot sheet overflowed inside a 623px grid column, and the two
+   weapon-setup cards spilled 103px each at any width from 901 to 1280px — 506px of column
+   for a template whose five tracks need ~600 — scrolling the whole page sideways at 1100px,
+   a very ordinary laptop. Cards are containers now, so a row responds to the box it is
+   actually in. Threshold is 620px: the 5-track template measured 594px of content in a
+   476px box. Safe to contain — nothing position:fixed/absolute lives inside a .card
+   (#tip and .skip-link are both body-level; verified before landing this). */
+.card{container-type:inline-size}
+@container (max-width:620px){
+  .row{grid-template-columns:40px 26px minmax(0,1fr) auto}
+  .row > .src{grid-column:3/5;white-space:normal;text-align:left}
+}
 .fit{display:inline-block;margin-left:7px;color:var(--myth);font-weight:800}
 .fx{display:block;font-size:12.5px;color:var(--t3);margin-top:5px;line-height:1.5;font-weight:450}
 .fx b{color:var(--hero);font-weight:600}

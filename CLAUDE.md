@@ -554,6 +554,19 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   class here, **check where else the name is emitted first** — `.src` has 16 emit sites.
   For the record, the wide `table.paths` at 375px is NOT a defect: it sits in a
   `.card.wide.table-scroll` with `overflow-x:auto`, so the table scrolls and the page does not.
+- ⚠️ **`.row` is keyed on its CONTAINER as well as the viewport** (2026-08-23). The BiS density
+  pass gave `.row` a fifth `minmax(140px,1.1fr)` track, so the five-track template needs ~600px —
+  but the two weapon-setup cards sit in a **~506px** column of the two-column `#bis` grid, and the
+  `@media(max-width:899px)` fallback that drops the fifth column **measures the viewport**. Result:
+  each card spilled **103px** past its border at every width from **901 to 1280px** — 1100px is an
+  ordinary laptop — with the text landing on the neighbouring card and the whole document scrolling
+  sideways. `.card{container-type:inline-size}` plus an `@container (max-width:620px)` twin of the
+  same rule; the cards keep their side-by-side comparison, which spanning the grid would have lost.
+  **This is the THIRD time the viewport-vs-container gap has bitten in one week** (the slot sheet,
+  the `.src` collision, this), which is why the fix is general rather than another one-off span.
+  Containment is safe here because nothing `position:fixed/absolute` lives inside a `.card` — `#tip`
+  and `.skip-link` are both body-level; re-check that before putting a positioned element in a card.
+  Verified 0 overflowing rows of 149 at 375 / 950 / 1100 / 1280 with every slot and panel open.
 - **Gearing no longer opens on Frost Mage** (2026-08-22). It was a hardcoded
   `sel.value = 'Mage|Frost'` with nothing behind it, so every visitor landed on someone
   else's spec. Order is now: a `#spec=` deep link, then the spec you last looked at

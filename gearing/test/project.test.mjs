@@ -487,6 +487,13 @@ test("self-contained output embeds current data and valid browser JavaScript", a
   assert.doesNotMatch(template, /^\.src\{[^}]*white-space:nowrap/m);
   assert.match(template, /\.row > \.src\{grid-column:5;white-space:nowrap/);
   assert.match(template, /\.row > \.src\{grid-column:3\/5;white-space:normal/);
+  /* The same rule keyed on the CONTAINER. The @media twin measures the viewport, and a .row
+     does not always get the viewport’s width: the two weapon-setup cards sit in a ~506px
+     column of the two-column #bis grid and spilled 103px each at every width from 901 to
+     1280px, scrolling the whole page sideways at 1100. Third time this exact gap has bitten,
+     hence the general fix rather than another one-off span. */
+  assert.match(template, /\.card\{container-type:inline-size\}/);
+  assert.match(template, /@container \(max-width:620px\)\{/);
   assert.match(template, /<label for="spec">Specialization<\/label>/);
   assert.match(template, /<label for="profile">Build<\/label>/);
   assert.doesNotMatch(template, /<label for="scenario">/);
