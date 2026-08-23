@@ -492,6 +492,22 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   dropped it and would have lost the per-source letter tiers, the dense consensus ranking
   and the "stat fit is never computed" note, all of which are deliberate (G8). The gearing
   test caught that; `.sbody .card` just strips the nested frame.
+  **Stage 2 added a per-slot footer** (`slotFooter`): the ENCHANT for that slot and, for a
+  tier slot, the CATALYST route (token, base count, direct-tier item, pointer to the full
+  plan). Both previously lived on their own tabs, so answering "what do I do about my
+  chest" meant visiting three places. Eight of thirteen slots carry a footer for Frost
+  Mage — the five tier slots plus every slot the guides publish an enchant for; Back and
+  Wrist have none because the harvested data has none, which is data, not a bug.
+  **The footer obeys G6 totality**: its consensus chip is gated on `usingCustom`, because
+  guide-consensus surfaces must leave `#bis` entirely while custom weights are active. The
+  gearing test caught the ungated version — `assert.doesNotMatch(bisHtml, /data-consensus=/)`.
+  Note `usingCustom` is `customModeSelected() && !!customWeights()`, so selecting Custom in
+  the dropdown without entering weights does NOT engage it; a browser spot-check that only
+  flips the select is checking nothing.
+  **Deliberately NOT in the footer:** the season-wide item-level ladder. It is identical
+  for all thirteen slots, so repeating it thirteen times would be exactly the noise this
+  audit exists to delete — it stays one reference page. Per-slot "where and how high" is
+  already on each candidate row as its source and its `up to N`.
   ⚠️ **Slicing the sheet in a test: bound by the NEXT `.sname`, never by `</details>`.**
   Every candidate row contains its own item-details disclosure, so the first `</details>`
   after a slot's name closes inside that slot's first row and the slice captures one id

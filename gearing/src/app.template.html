@@ -211,6 +211,18 @@ button:hover{background:#241740}
 .sslot[open] .schev{color:var(--accent)}
 .sbody{padding:2px 12px 10px 24px;border-left:2px solid var(--accent);margin:0 12px 8px 12px}
 .sbody .card{border:0;background:none;border-radius:0;padding:0}
+/* the per-slot footer: enchant, and the Catalyst route for tier slots */
+.sxtra{margin-top:8px;padding-top:8px;border-top:1px solid var(--line);
+  display:flex;flex-direction:column;gap:5px}
+.sx{display:grid;grid-template-columns:74px minmax(0,1fr);gap:10px;align-items:baseline}
+.sxk{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-2)}
+.sxk-t{color:var(--gold)}
+.sxv{font-size:12.5px;color:var(--t2);min-width:0}
+.sxm{font-family:var(--mono);font-size:10px;color:var(--t4);margin-left:8px;white-space:nowrap}
+@media (max-width:640px){
+  .sx{grid-template-columns:minmax(0,1fr);gap:2px}
+  .sxm{display:block;margin-left:0}
+}
 .sbody .card>h3{font-size:12px}
 @media (max-width:899px){
   .shead,.srow{grid-template-columns:70px 18px minmax(0,1fr) 34px 46px 34px 16px}
@@ -1142,6 +1154,46 @@ const SHEET_SLOTS = [
   { slot: 'Trinket', label: 'Trinkets', pool: true },
 ];
 
+/* Everything about a slot that is not a candidate: what you enchant it with, and — for a
+   tier slot — how the Catalyst reaches it. Both previously lived on their own tabs, so
+   answering "what do I do about my chest" meant visiting three places. */
+function slotFooter(slot, usingCustom) {
+  const bits = [];
+
+  const enh = (guideSpec(CUR) || {}).enhancements;
+  const ench = enh && (enh.enchants || []).find(e => e.slot === slot);
+  if (ench && ench.candidates.length) {
+    const top = ench.candidates[0];
+    const names = Object.keys(top.mentions).map(k => GUIDE_SOURCE_NAMES[k] || k);
+    bits.push('<div class="sx"><span class="sxk">Enchant</span>'
+      + '<span class="sxv">' + esc(top.name)
+      + (usingCustom ? ''
+        : '<span class="tag" data-consensus="' + top.consensus + '">' + top.consensus
+          + '/3 guides: ' + esc(names.join(', ')) + '</span>')
+      + (ench.candidates.length > 1
+        ? '<span class="sxm">' + (ench.candidates.length - 1) + ' more on Enhancements</span>' : '')
+      + '</span></div>');
+  }
+
+  if (TIER_SET_SLOTS.has(slot)) {
+    const bases = GEAR.filter(it => canUse(CUR, it) && isCatalystBase(it) && it.slot === slot).length;
+    const token = myTokens().find(t => t.tokenSlot === slot)
+      || myTokens().find(t => t.tokenSlot === 'omni') || null;
+    const direct = directTierFor(slot);
+    const parts = [];
+    if (token) parts.push('converts with <b>' + esc(token.name) + '</b>');
+    if (bases) parts.push(bases + ' Catalyst base' + (bases === 1 ? '' : 's') + ' for this slot');
+    if (direct) parts.push('direct tier: <b>' + esc(direct.name) + '</b>');
+    if (parts.length) {
+      bits.push('<div class="sx"><span class="sxk sxk-t">Catalyst</span>'
+        + '<span class="sxv">' + parts.join(' &middot; ')
+        + '<span class="sxm">full conversion plan on Tier &amp; Catalyst</span></span></div>');
+    }
+  }
+
+  return bits.length ? '<div class="sxtra">' + bits.join('') + '</div>' : '';
+}
+
 function sheetRows(bySlot, usingCustom) {
   const out = [];
   for (const spec of SHEET_SLOTS) {
@@ -1175,10 +1227,11 @@ function sheetRows(bySlot, usingCustom) {
 
     /* Trinkets keep their own presentation: per-source letter tiers, dense consensus
        ranking, and no stat fit — none of which the generic candidate row can express. */
-    const body = spec.pool
+    const body = (spec.pool
       ? trinketCard(list, usingCustom)
       : entries.map(entry => bisRow(entry, ranked[0]?.it || null, usingCustom)).join('')
-        + (usingCustom ? '' : guideOnlyRows(spec.slot));
+        + (usingCustom ? '' : guideOnlyRows(spec.slot)))
+      + slotFooter(spec.slot, usingCustom);
 
     out.push('<details class="sslot"><summary class="srow">'
       + '<span class="sname">' + esc(label) + '</span>'
