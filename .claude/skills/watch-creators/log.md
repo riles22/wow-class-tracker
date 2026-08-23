@@ -16,6 +16,38 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-23 (local) — the residential yt-dlp caption lane is 429-BLOCKED; 5 queued videos left queued, 0 distilled
+
+**New transport finding, and it matters because draining the queue from a residential IP is the
+main reason local runs exist: `timedtext` caption downloads now return HTTP 429 from home, while
+the metadata/info endpoint is completely healthy.** Nothing distilled; no data file changed.
+
+- **Attempted**: the five ids the nightly queued today — R7kYD23sDQs (Obli), 9XtfT9ka2B0 (leak),
+  xg5sxI6LspI (Kalamazi), 5m_K51fnwhc (izen), 1wxoNsiyCtM (YoDaTV).
+- **The failure is caption-endpoint-specific — not the bot wall, and not a missing track.**
+  `--list-subs` succeeded for **all five** (each publishes `en-orig` + `en` in json3, and
+  `--list-subs` is never rate-limited, which is what makes it the right probe), and the info
+  fetch resolved formats on every call. Only the subtitle download 429s. This is NOT the
+  2026-07-17 datacenter "Sign in to confirm you're not a bot" wall — that message never appeared.
+- **The documented single retry was spent and failed.** Per the 2026-08-06 / 08-14 gotcha an
+  isolated 429 alongside a successful info fetch is transient throttling, so `R7kYD23sDQs` was
+  retried **without** `player_client=android` (the `MdvcFzV0tmI` precedent): still 429. A third
+  attempt on `xg5sxI6LspI` after ~20 minutes of unrelated work as a natural cooldown: still 429.
+  Three caption requests, all blocked — the "retries deepen" shape, so it was stopped there
+  rather than deepened into a backoff ladder.
+- **yt-dlp is at the pin** (2026.07.04 == `requirements.txt` `yt-dlp==2026.7.4`); nothing was
+  installed or upgraded. Two warnings accompany every call and are NOT the cause: the
+  android-client SABR format skip, and "no impersonate target is available".
+- **The five stay in `videos[]` and were deliberately NOT retired.** A transport failure is a
+  transport dismissal, which stays UNSEEN — filing them in `seen[]` would silently abandon five
+  in-scope analysis videos. The nightly's Supadata drain picks them up on its next run.
+- **No discovery sweep.** The nightly's ran 3h earlier (44/44 feeds clean, 105 unseen inside the
+  cycle bound), so re-running it would only re-derive the same list with no transcript path to
+  act on it.
+- **Worth watching**: if this 429 persists across days, the residential lane stops being a
+  reliable catch-up path and the 100-request/month Supadata budget becomes the only route —
+  which would change how the next breadth sweep should be planned.
+
 ## 2026-08-23 (nightly) — 44 feeds clean, 0 distilled (the queue arrived empty), 5 queued, 3 retired
 
 **Discovery complete: 44/44 channels HTTP 200 on the first attempt, 0 feed errors, no backoff

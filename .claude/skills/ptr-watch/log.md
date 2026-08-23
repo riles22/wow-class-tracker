@@ -16,6 +16,35 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-23 (local) — verification pass over the nightly; nothing new, and the Aug-21 hotfix round-up is correctly ABSENT
+
+**No feed change.** Ran as the scheduled local ptr-watch ~3h after the nightly (CI `startedAt`
+11:21Z, this run 14:11Z) and re-derived its "nothing new" independently rather than trusting it.
+
+- **Wowhead news RSS**: HTTP 200, 121,628 bytes, 40 items, parsed per `<item>` block. Newest
+  item 2026-08-23.
+- **The one apparent gap was checked and is not a gap.** "Patch 12.1 Hotfixes for August 21st —
+  Raid and Delve Fixes" (news=382566, published 08-22) sits one day past the feed's newest
+  hotfix entry (2026-08-20) and looks exactly like a missed round-up. Its body was read in full
+  from `content:encoded`: Delves, Dungeons and Raids (Altar of Fangs, Rav'i, Zul'jan), The
+  Venomous Abyss, Housing, Items, Prey — and **zero class or spec lines**. A `kind: "hotfix"`
+  entry would carry an empty `specsAffected`/`highlights` pair and reach no drawer, so no entry
+  is warranted. Recorded here so the next run does not re-open it.
+- **"Heroic Ula'tek Nerfs and Raid Bug Fixes" (news=382550, published 08-21) is the AUGUST 20
+  set, not a new one** — its in-body date header reads "August 20, 2026". Already logged: the
+  stored 08-20 entry cites that exact URL and its 7 `specsAffected` match the article's class
+  blocks one-for-one (Havoc, Restoration Druid, Marksmanship, Holy Priest, Elemental,
+  Affliction, Warlock/Hellcaller class-wide). **Date-in-title is not date-of-hotfixes — read the
+  body header**, or a re-log of an existing set looks like a discovery.
+- **Class-tuning sweep over every article on/after 08-21**: the only value-bearing class line in
+  the window is "Druid of the Claw: Ravage damage increased by 20% **in PvP combat**", from the
+  already-logged 08-22 tuning post — and PvP is deliberately out of scope for this PvE tracker.
+- **Dev-notes thread 2317811**: re-polled, `last_posted_at` still 2026-07-31T23:42Z, unchanged.
+  The closed cycle's expected silence, not a lost thread (the rediscovery gotcha stays suspended).
+- **12.2 PTR: still no announcement.** Scanned all 40 RSS bodies for `12.2` / "next major patch" /
+  "PTR is now available" / "PTR Development Notes" — zero hits.
+- Nothing written: no feed entry, no `tierSet` touch, no snapshot, no manifest edit.
+
 ## 2026-08-23 (nightly) — three channels swept, nothing new to log, still no 12.2 PTR
 
 **No new feed entry. The newest entry stays 2026-08-22 (the "Class Tuning Incoming – August
