@@ -757,6 +757,22 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run deploy.yml --ref master
 
+      # Same reason, different gap: the 26 UI invariants in test/ui-invariants.test.mjs are
+      # the only tests that execute template.html's client JS, and they need Playwright,
+      # which this job deliberately does not have — so `npm test` above passed them as
+      # SKIPPED and exit 0. Combined with the no-auto-trigger rule that meant no nightly
+      # commit had ever been checked against them. Dispatched here rather than gated on:
+      # ci.yml states that the browser lives nowhere near the release path, and the owner
+      # chose (2026-08-23) to keep that and accept finding out after the push instead.
+      # continue-on-error because a dispatch hiccup must never redden a good publish — the
+      # ci.yml run reddens on its own if the invariants actually fail.
+      - name: Run the UI invariants against what we just pushed
+        if: steps.commit.outputs.pushed == 'true'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run ci.yml --ref master
+
       # Owner-facing change digest (owner-requested 2026-07-17): deterministic diff
       # of the just-pushed commit vs its parent (same derivation the site uses),
       # posted as a comment on the pinned "Nightly digest" issue — GitHub's own

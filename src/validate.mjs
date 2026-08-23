@@ -110,7 +110,7 @@ const isRealDate = v => {
 /* opts.fullRoster: enforce the real 40-spec Midnight roster — used by the CLI, the build,
    and the apply-* merge scripts (which operate on the repo's real data), but not by unit
    fixtures, which validate small synthetic datasets. */
-export function validateData({ specs, sources, scales, community, ptrBuilds, creatorTakes, encounterTiers, historySnapshots, pendingTranscripts, seasonFinal, frozenForecast }, opts = {}) {
+export function validateData({ specs, sources, scales, community, ptrBuilds, creatorTakes, encounterTiers, historySnapshots, pendingTranscripts, seasonFinal, frozenForecast, gearingSpecs }, opts = {}) {
   const errors = [];
   // Every date in the data is a claim about when something was fetched or published —
   // none may sit in the future. +1 day of skew allowed: a nightly UTC run can honestly
@@ -752,6 +752,31 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
     }
   }
 
+  /* --- the SAME upkeep, one page over (2026-08-23, owner decision) ---
+     The gate above reads only data/specs.json, and gearing/data/specs.json carries its own
+     copy of set2/set4/asOf that renders as fact in gearing's Catalyst plan. Nothing checked
+     the two against each other, so the copies drifted FIVE times — most recently publishing
+     "Genesis duration increased by 4 seconds" on one page of the site while the other said 8.
+     The daily `check-refresh --age` heartbeat was the only detector, and the nightly cannot
+     act on it: publish stages data/, dist/ and skill logs, never gearing/. So the drift could
+     only ever be cleared by a human local run, and stayed live until one happened.
+     This is the root validator reaching INTO gearing/, which it otherwise never does — a
+     deliberate, read-only coupling the owner accepted to stop the recurrence. It stays
+     one-directional: nothing here writes, and an absent gearing/ simply skips.
+     Only specs present in BOTH are compared, so gearing lagging the roster is not an error. */
+  if (gearingSpecs) {
+    const byKey = new Map(gearingSpecs.map(g => [`${g.class}|${g.spec}`, g]));
+    for (const spec of specs) {
+      const mirror = byKey.get(`${spec.class}|${spec.spec}`);
+      if (!mirror?.tierSet || !spec.tierSet) continue;
+      for (const field of ["set2", "set4", "asOf"]) {
+        if ((spec.tierSet[field] ?? null) !== (mirror.tierSet[field] ?? null)) {
+          errors.push(`gearing/data/specs.json: ${spec.spec} ${spec.class} tierSet.${field} does not match data/specs.json — run \`node gearing/src/sync-tracker-fields.mjs && npm run gearing:build\` (the two pages must not state different set bonuses)`);
+        }
+      }
+    }
+  }
+
   // --- history snapshots (movement baselines + the freshness heartbeat's proof of life) ---
   // The nightly agent's whole data/ tree travels to the publish job, so a snapshot it
   // wrote is committed like any data file. A future-dated snapshot would permanently
@@ -998,9 +1023,20 @@ export async function loadData(root) {
   } catch (error) {
     if (error?.code !== "ENOENT") throw error;
   }
+  /* Gearing keeps its OWN copy of each spec's tierSet, generated from this one, and it
+     renders as fact on a second public page. Optional load: gearing/ is a self-contained
+     subproject and the tracker copies its artifact only if present, so an absent file is
+     not an error. Corrupt JSON throws, like every other optional load here. */
+  let gearingSpecs = null;
+  try {
+    const raw = JSON.parse(await readFile(path.join(root, "gearing", "data", "specs.json"), "utf8"));
+    gearingSpecs = Array.isArray(raw) ? raw : (raw?.specs ?? null);
+  } catch (error) {
+    if (error?.code !== "ENOENT") throw error;
+  }
   return { specs, sources, scales, community, ptrBuilds, creatorTakes, encounterTiers,
            historySnapshot: historySnapshots[0] ?? null, historySnapshots, pendingTranscripts,
-           seasonFinal, frozenForecast };
+           seasonFinal, frozenForecast, gearingSpecs };
 }
 
 /* SEASON-AHEAD BUT NEVER RE-MERGED — a WARNING, deliberately not an error (audit 2026-08-14).

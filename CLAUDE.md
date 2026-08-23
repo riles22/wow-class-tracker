@@ -707,6 +707,18 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   (asOf = build date, source = the forum post) — the tier-set upkeep gate in
   validate.mjs fails the run when a set-touching build highlight lands without the
   spec's `tierSet.asOf` catching up.
+  **Since 2026-08-23 the same upkeep is checked one page over** (owner decision): gearing keeps
+  its OWN copy of `set2/set4/asOf` and renders it as fact, and nothing compared the two, so they
+  drifted **five times** — most recently publishing "Genesis duration increased by 4 seconds" on
+  one page of the site while the other said 8. The daily `--age` heartbeat was the sole detector
+  and the nightly *structurally cannot* clear it (publish stages `data/`, `dist/` and skill logs,
+  never `gearing/`), so every occurrence waited for a human local run. `validateData` now compares
+  `gearing/data/specs.json` against `data/specs.json` and names the fix
+  (`node gearing/src/sync-tracker-fields.mjs && npm run gearing:build`). This is the root validator
+  reaching INTO `gearing/`, which it otherwise never does — read-only, one-directional, an absent
+  subproject skips, and only specs present in BOTH are compared so a lagging roster is not an
+  error. Consequence to know: **bumping a tracker `tierSet` now requires syncing the mirror in the
+  same change**, which is why the upkeep gate’s own test bumps both.
 - `spec.survivability` = Archon's raid survivability tier (merge via apply-metrics.mjs
   `survivability` key) — shown in the drawer's Source ratings box.
 - `spec.playstyle` = `{ range: "Melee"|"Ranged", mobility: 1-5, utility: 1-5, complexity: 1-5, notes }`,
@@ -1236,6 +1248,15 @@ legacy/   original single-file tracker (pre-conversion reference)
                   local-run · paste-discord
                   (each has the procedure + hard-won gotchas + a log.md memory)
 ```
+
+**The 26 UI invariants now run against every nightly commit** (2026-08-23 owner decision):
+`ci.yml` gained `workflow_dispatch` and the publish job dispatches it after pushing. They had
+never run on a nightly — a `GITHUB_TOKEN` push does not trigger `on: push`, and the job’s own
+`npm test` passes them as SKIPPED (373 tests, 27 skipped, exit 0) because Playwright is
+deliberately absent, so 43 nightly commits deployed unchecked. Dispatched rather than gated:
+`ci.yml` states the browser lives nowhere near the release path and that posture was kept, so a
+UI break is found minutes AFTER the push, not before it. The dispatch is `continue-on-error` —
+a dispatch hiccup must never redden a good publish; the ci.yml run reddens on its own.
 
 Nightly automation lives in `.github/workflows/nightly.yml` (cron 10:37 UTC), split into
 isolated stages since the 2026-07-14 security audit (tightened by the same-day

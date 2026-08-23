@@ -7,6 +7,13 @@ name: Tests
 on:
   push:
   pull_request:
+  # Dispatchable so the nightly can run this AFTER its own push. A GITHUB_TOKEN push does
+  # not trigger `on: push` (GitHub loop protection), so without this the 26 UI invariants
+  # never ran on a nightly commit — and they skip themselves silently when playwright is
+  # absent, so the nightly's own `npm test` went green with 27 skipped. Owner decision
+  # 2026-08-23: dispatch after publish rather than gating publish on a browser, which keeps
+  # the deliberate posture that Playwright lives nowhere near the release path.
+  workflow_dispatch:
 
 permissions:
   contents: read

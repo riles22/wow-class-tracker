@@ -361,10 +361,46 @@ test("tier-set upkeep gate: a build highlight naming a spec + set keyword forces
   });
   const errors = validateData(broken);
   assert.ok(errors.some(e => e.includes("Outlaw Rogue tierSet.asOf") && e.includes("2026-07-19")));
-  // Bumping asOf to the build date satisfies the gate.
+  /* Bumping asOf to the build date satisfies the gate — and since 2026-08-23 a real edit has
+     to bump gearing's mirror too, or the mirror gate fires on the same spec. Both are moved
+     here so the fixture stays a picture of a CORRECT edit; the assertion greps the upkeep
+     gate's own wording so it keeps testing this gate rather than whichever fires first. */
   const fixed = structuredClone(broken);
   fixed.specs.find(s => s.class === "Rogue" && s.spec === "Outlaw").tierSet.asOf = "2026-07-19";
-  assert.ok(!validateData(fixed).some(e => e.includes("Outlaw Rogue tierSet.asOf")));
+  fixed.gearingSpecs.find(g => g.class === "Rogue" && g.spec === "Outlaw").tierSet.asOf = "2026-07-19";
+  const after = validateData(fixed);
+  assert.ok(!after.some(e => e.includes("Outlaw Rogue tierSet.asOf") && e.includes("predates the")));
+  assert.deepEqual(after.filter(e => e.includes("gearing/data/specs.json")), []);
+});
+
+/* The same upkeep one page over (2026-08-23). gearing/data/specs.json carries its own copy of
+   set2/set4/asOf and renders it as fact; the copies drifted FIVE times before this gate, once
+   publishing "increased by 4 seconds" on one page of the site while the other said 8. Only the
+   daily heartbeat caught it, and the nightly structurally cannot fix it — publish never stages
+   gearing/. Pinned in both directions because a gate nobody has watched fire is not a gate. */
+test("tier-set mirror gate: gearing's copy must match the tracker's, and skips cleanly when absent", async () => {
+  const data = await loadData(ROOT);
+  assert.ok(Array.isArray(data.gearingSpecs), "loadData must surface gearing's specs");
+  assert.deepEqual(validateData(data).filter(e => e.includes("gearing/data/specs.json")), [],
+    "the committed tree must be in sync");
+
+  // Drift the mirror the way it actually drifted: stale text AND a stale date.
+  const drifted = structuredClone(data);
+  const mirror = drifted.gearingSpecs.find(g => g.class === "Druid" && g.spec === "Restoration");
+  mirror.tierSet.set4 = "something the tracker no longer says";
+  mirror.tierSet.asOf = "2026-07-14";
+  const errors = validateData(drifted);
+  assert.ok(errors.some(e => e.includes("Restoration Druid tierSet.set4") && e.includes("gearing/data/specs.json")));
+  assert.ok(errors.some(e => e.includes("Restoration Druid tierSet.asOf")));
+  // The message must name the fix — this gate fires on a human, not on the nightly.
+  assert.ok(errors.some(e => e.includes("sync-tracker-fields.mjs")));
+
+  // A repo without the subproject is not an error, and neither is gearing lagging the roster.
+  assert.deepEqual(
+    validateData({ ...data, gearingSpecs: null }).filter(e => e.includes("gearing/data/specs.json")), []);
+  assert.deepEqual(
+    validateData({ ...data, gearingSpecs: data.gearingSpecs.slice(0, 3) })
+      .filter(e => e.includes("gearing/data/specs.json")), []);
 });
 
 test("tier-set upkeep gate: ignores highlights without a set keyword or naming no spec", async () => {
