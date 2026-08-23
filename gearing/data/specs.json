@@ -850,9 +850,9 @@
       "statPrioritySource": "https://www.icy-veins.com/wow/restoration-druid-pve-healing-stat-priority",
       "tierSet": {
         "set2": "Rejuvenation has a 15% chance and Nature's Swiftness has a 100% chance to grant Genesis, causing all your heal over time effects to heal for 15% more for 8 seconds. Multiple applications may overlap.",
-        "set4": "Nature's Swiftness, Tranquility, and Incarnation: Tree of Life or Convoke the Spirits have a 100% chance to grant Genesis, and its duration is increased by 4 seconds.",
-        "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/14",
-        "asOf": "2026-07-14"
+        "set4": "Nature's Swiftness, Tranquility, and Incarnation: Tree of Life or Convoke the Spirits have a 100% chance to grant Genesis, and its duration is increased by 8 seconds.",
+        "source": "https://us.forums.blizzard.com/en/wow/t/class-tuning-incoming-august-25/2339812",
+        "asOf": "2026-08-22"
       }
     },
     {
@@ -2098,9 +2098,9 @@
       "statPrioritySource": "https://www.icy-veins.com/wow/retribution-paladin-pve-dps-stat-priority",
       "tierSet": {
         "set2": "Divine Purpose has an additional 10% chance to activate and consuming it grants Divine Power, increasing Holy damage done by 10% for 12 seconds.",
-        "set4": "Consuming Divine Purpose grants Divine Arbiter, empowering your other Holy Power spenders to unleash an arbiter of light at their primary target, dealing Holy damage and Holy damage to enemies within 8 yards. Cannot occur while Divine Arbiter is active. Divine Arbiter damage increased by 35% (07-08). Divine Arbiter damage benefits from Divine Purpose and Greater Judgment (08-06).",
-        "source": "https://us.forums.blizzard.com/en/wow/t/curse-of-ulatek-content-update-notes/2333514",
-        "asOf": "2026-08-06"
+        "set4": "Consuming Divine Purpose grants Divine Arbiter, empowering your other Holy Power spenders to unleash an arbiter of light at their primary target, dealing Holy damage and Holy damage to enemies within 8 yards. Cannot occur while Divine Arbiter is active. Divine Arbiter damage increased by 35% (07-08). Divine Arbiter damage benefits from Divine Purpose and Greater Judgment (08-06). Divine Arbiter main target damage increased by 150% and secondary target damage by 75% (08-22).",
+        "source": "https://us.forums.blizzard.com/en/wow/t/class-tuning-incoming-august-25/2339812",
+        "asOf": "2026-08-22"
       }
     },
     {
@@ -3334,5 +3334,5 @@
       }
     }
   ],
-  "trackerFieldsSyncedAt": "2026-08-21"
+  "trackerFieldsSyncedAt": "2026-08-23"
 }
