@@ -534,6 +534,26 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   because a media query measures the **viewport**, not the column an element happens to sit
   in. `#bis .sheet{grid-column:1/-1}`; verified 0 truncated elements at 1440 with all 13
   slots open, and 1 at 375 (a long item name meeting `.sitem`’s deliberate ellipsis).
+- **The five reference panels got Console density last** (2026-08-22, after stage 3). They
+  kept the pre-audit 13px/10px table sizing right through the option, because they were
+  behind tabs — demoting the tabs did not shrink them, it only stopped them being the first
+  thing on the page. `table.src-tbl` now matches `.shead`/`.srow`: a 9.5px mono uppercase
+  header and 6px cell padding, with **cells staying in the body font because they hold item
+  and dungeon NAMES**, which is prose — the same colour-and-type law as the BiS rows.
+  `table.paths` keeps its `nowrap` (every cell is a number or a difficulty name) and takes
+  the density only. Loot sources 2,883 → 2,568px, Item levels 1,474 → 1,255px, row 58 → 49px.
+  ⚠️ **This is where the `.src` class collision surfaced, and it was a real page-level bug.**
+  `.src` is the generic small-mono meta style — divs, spans and table cells use it across the
+  whole page — but the 2026-08-22 BiS density pass gave the bare selector the candidate row’s
+  `grid-column:5` + `white-space:nowrap` + ellipsis. `grid-column` is inert on a `<td>`, but
+  `nowrap` is not, and a `td` cannot clip the way a grid item does: the Loot sources table
+  grew to **2,197px** and the document scrolled sideways to **2,292px at a 1,440px viewport**.
+  It shipped in `d91bfa5` and stayed invisible for a day because the panel was behind a tab
+  nobody had measured. The truncating behaviour is `.row > .src` now, in both the base rule
+  and the two breakpoints; three assertions pin it. When adding a rule to a generic-sounding
+  class here, **check where else the name is emitted first** — `.src` has 16 emit sites.
+  For the record, the wide `table.paths` at 375px is NOT a defect: it sits in a
+  `.card.wide.table-scroll` with `overflow-x:auto`, so the table scrolls and the page does not.
 - **Gearing no longer opens on Frost Mage** (2026-08-22). It was a hardcoded
   `sel.value = 'Mage|Frost'` with nothing behind it, so every visitor landed on someone
   else's spec. Order is now: a `#spec=` deep link, then the spec you last looked at

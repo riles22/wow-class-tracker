@@ -264,12 +264,19 @@ button:hover{background:#241740}
 .row.tier .nm{color:var(--myth);font-weight:600}
 .meta{grid-column:4;font-family:var(--mono);font-size:11px;color:var(--t2);
       white-space:nowrap;text-align:right}
+/* .src is the generic small-mono meta style and is used on divs, spans and table cells
+   all over the page. The truncating fifth-column behaviour belongs ONLY to a BiS candidate
+   row, and scoping it there is not cosmetic: unscoped, the white-space:nowrap reached the
+   Loot sources table, where a <td> cannot clip the way a grid item does, so the table grew
+   to 2,197px and the document scrolled sideways to 2,292. Invisible until stage 3, because
+   the panel was behind a tab nobody had measured. */
+.src{font-family:var(--mono);font-size:11px;color:var(--t3)}
 /* mono and truncating — it is a where-it-drops label, not prose */
-.src{grid-column:5;font-family:var(--mono);font-size:11px;color:var(--t3);
-     white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;text-align:right}
+.row > .src{grid-column:5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+     min-width:0;text-align:right}
 @media (max-width:899px){
   .row{grid-template-columns:40px 26px minmax(0,1fr) auto}
-  .src{grid-column:3/5;white-space:normal;text-align:left}
+  .row > .src{grid-column:3/5;white-space:normal;text-align:left}
 }
 .fit{display:inline-block;margin-left:7px;color:var(--myth);font-weight:800}
 .fx{display:block;font-size:12.5px;color:var(--t3);margin-top:5px;line-height:1.5;font-weight:450}
@@ -289,10 +296,16 @@ button:hover{background:#241740}
 .disclosure-body{padding:4px 0 8px;max-width:90ch}
 .token-route{margin-top:8px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:#0a1018}
 
-table.src-tbl{width:100%;border-collapse:collapse;font-size:13px}
-table.src-tbl th{text-align:left;font-size:12px;letter-spacing:.8px;text-transform:uppercase;
-   color:var(--t2);font-weight:750;padding:9px 10px;border-bottom:1px solid var(--line)}
-table.src-tbl td{padding:10px;border-bottom:1px solid var(--line);vertical-align:top}
+/* Console density, matching .shead/.srow rather than the pre-audit 13px/10px. These five
+   reference panels kept the old sizing through stages 1-3 because they were behind tabs;
+   demoting the tabs to disclosures did not make them smaller, it just stopped them being
+   the first thing you saw. Header is mono and structural; cells stay body font because
+   they hold item and dungeon NAMES, which is prose (the same law as the BiS rows). */
+table.src-tbl{width:100%;border-collapse:collapse;font-size:12px}
+table.src-tbl th{text-align:left;font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;
+   text-transform:uppercase;color:var(--t3);font-weight:700;padding:5px 10px;
+   border-bottom:1px solid var(--line)}
+table.src-tbl td{padding:6px 10px;border-bottom:1px solid #190F2E;vertical-align:top}
 table.src-tbl tr:last-child td{border-bottom:none}
 .badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;
        padding:2px 7px;border-radius:5px;background:rgba(242,214,152,.14);color:var(--myth);margin-left:7px}
@@ -329,7 +342,9 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);
 .step b{font-weight:700}
 
 /* ---- all gearing paths matrix ---- */
-table.paths td,table.paths th{padding:8px 12px;white-space:nowrap;font-size:13px}
+/* the item-level table keeps nowrap — every cell is a number or a short difficulty
+   name — but takes the same Console density as the other reference tables */
+table.paths td,table.paths th{padding:5px 12px;white-space:nowrap;font-size:12px}
 table.paths td.ilvl{font-family:var(--mono);font-weight:700;color:var(--t1)}
 table.paths .dash{color:var(--t4)}
 table.paths tr.tr-adv td.ilvl{color:var(--adv)}
@@ -381,7 +396,7 @@ table.paths tr:hover td{background:rgba(255,255,255,.03)}
   .rank{grid-column:1}
   .row>.ico{grid-column:2}
   .nm{grid-column:3}
-  .meta,.src{grid-column:3;text-align:left;justify-self:start;white-space:normal}
+  .meta,.row > .src{grid-column:3;text-align:left;justify-self:start;white-space:normal}
   .meta{margin-top:4px}
   .ceils{grid-template-columns:repeat(2,minmax(0,1fr))}
   #tip{max-width:calc(100vw - 24px)}

@@ -480,6 +480,13 @@ test("self-contained output embeds current data and valid browser JavaScript", a
        > template.indexOf('<div class="sheet">'),
     "the sheet must be emitted before the weapon loadout cards");
   assert.match(template, /#bis \.sheet\{grid-column:1\/-1\}/);
+  /* .src is the generic small-mono meta class, used on divs, spans AND table cells all
+     over the page; only a BiS candidate row wants the truncating fifth column. Unscoped,
+     its white-space:nowrap reached the Loot sources <td>, which cannot clip the way a grid
+     item does, and the document scrolled sideways to 2,292px at a 1,440px viewport. */
+  assert.doesNotMatch(template, /^\.src\{[^}]*white-space:nowrap/m);
+  assert.match(template, /\.row > \.src\{grid-column:5;white-space:nowrap/);
+  assert.match(template, /\.row > \.src\{grid-column:3\/5;white-space:normal/);
   assert.match(template, /<label for="spec">Specialization<\/label>/);
   assert.match(template, /<label for="profile">Build<\/label>/);
   assert.doesNotMatch(template, /<label for="scenario">/);
