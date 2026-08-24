@@ -54,6 +54,26 @@ Nothing distilled; no data file changed.
   affordable precisely because yt-dlp was free. Flagging for Riley rather than deciding it here:
   the options are to keep the nightly's keyword filter tight and accept narrower coverage, to
   raise the Supadata tier, or to leave the lane dormant until the 429 clears on its own.
+- **SAME-DAY ADDENDUM — the cause is settled: an IP-scoped abuse flag on the timedtext service,
+  diagnosed interactively with Riley present.** The elimination chain, so no future run re-runs it:
+  the pinned yt-dlp 2026.07.04 with `--js-runtimes node` (challenge solving enabled, warning gone)
+  still 429s; the LATEST yt-dlp (2026.08.19, scratch venv, repo pin untouched) with a working
+  `curl_cffi` Chrome TLS impersonation target still 429s (note: fresh `curl_cffi` on Python 3.10
+  needs `typing_extensions` installed or it import-fails and yt-dlp silently reports "no
+  impersonate target"); an in-page browser `fetch` of the signed caption URL from youtube.com
+  itself returns 429 with Google's "Sorry..." abuse page; and — decisive — the REAL YouTube player
+  with CC on, sending fully-attested requests carrying a valid `pot=` (PO/BotGuard) token, gets
+  429 and renders no captions. Nothing client-side can beat that; the flag is keyed on the IP, not
+  the tool, and is scoped to timedtext only (watch pages, player API, `--list-subs`, streams and
+  RSS all healthy). It hit Riley's other YouTube project the same day — shared egress IP, and the
+  combined caption volume of the two projects is the likely trigger, with retries keeping it warm.
+  Consequences for this lane: an upgraded/reconfigured client is NOT the fix and should not be
+  attempted; the flag should decay after 24-72h of ZERO caption traffic from this IP (or
+  immediately on an ISP IP rotation), so local runs should spend AT MOST one cheap probe —
+  `--list-subs` is never rate-limited and proves nothing about timedtext, so the probe that
+  matters is a single caption request on one queued id, stopped on the first 429 with no retry.
+  Today's whole diagnosis cost ~6 well-spaced caption requests. Supadata is unaffected (their
+  infra, not this IP), which the nightly's 5/5 drain already demonstrated.
 
 ## 2026-08-24 (nightly) — 4 videos distilled: 14 takes + 14 metaNotes, the first distillation night in three
 
