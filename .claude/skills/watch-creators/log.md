@@ -16,6 +16,45 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-24 (local) — the residential 429 is now DAY TWO; 2 queued videos left queued, 0 distilled
+
+**Yesterday's "worth watching" happened.** The 08-23 local entry recorded the `timedtext` caption
+429 and said that if it persisted across days the residential lane stops being a reliable catch-up
+path. It persisted. Two consecutive local runs, two disjoint video sets, same failure — so this
+should now be read as a standing transport condition, not throttling to be retried around.
+Nothing distilled; no data file changed.
+
+- **Attempted**: the two ids the nightly queued today — `3E_EY7ULmkw` (Dalaran Gaming, "Midnight
+  Season 2 Patch Notes: Up To 350% Increases Dropping Next Reset!", 18m53s) and `qG-So9pnRBQ`
+  (MadSkillzzTV, "12.1 Healer M+ & Raid | Holy Paladin & Preservation Evoker", a 9h33m `was_live`
+  VOD). Both are in-scope specialists: MadSkillzzTV carries Holy Paladin and Preservation Evoker
+  in `specs`, so that VOD is squarely on-lens for two healer specs.
+- **Same caption-endpoint-specific shape as 08-23, re-derived rather than assumed.** `--list-subs`
+  succeeded on **both** (each publishes `en-orig` + `en` in json3) and the info fetch resolved
+  formats and metadata on every call — durations, `live_status` and channel names all read clean.
+  Only the subtitle download 429s. Not the datacenter bot wall; that message never appeared.
+- **Four caption requests, all 429.** `3E_EY7ULmkw` three times — with `player_client=android`,
+  then WITHOUT it (the `MdvcFzV0tmI` precedent the gotcha names), then with `--retries 4
+  --retry-sleep 25 --sleep-requests 3` as a paced ladder — and `qG-So9pnRBQ` once. The documented
+  single retry was spent on the first video and failed, which is where the gotcha says to stop
+  rather than deepen; the second video was probed only to establish that the block is
+  ENDPOINT-wide rather than per-video, which it is.
+- **yt-dlp is at the pin** (2026.07.04 == `requirements.txt`); nothing installed or upgraded. The
+  SABR format-skip and "no impersonate target" warnings accompany every call and are not the cause.
+- **Both stay in `videos[]` and were deliberately NOT retired.** A transport failure is a transport
+  dismissal and stays UNSEEN; filing them in `seen[]` would silently abandon two in-scope videos,
+  one of them the only healer-raid VOD in the queue. `pending-transcripts.json` is untouched —
+  queue count 2 before, 2 after.
+- **No discovery sweep**, same reasoning as 08-23: the nightly's ran ~3h earlier (44/44 feeds
+  clean, 117 unseen inside the cycle bound) and there is no transcript path to act on the result.
+- **OWNER DECISION SURFACING, not an agent call.** With the residential lane down two days running,
+  Supadata's **100 requests per MONTH** is currently the only working transcript route — and the
+  nightly spent 5 of them today (it distilled 4 videos: 14 takes + 14 metaNotes). If the 429
+  persists, the planned unfiltered breadth sweep has no lane to run in, because breadth was
+  affordable precisely because yt-dlp was free. Flagging for Riley rather than deciding it here:
+  the options are to keep the nightly's keyword filter tight and accept narrower coverage, to
+  raise the Supadata tier, or to leave the lane dormant until the 429 clears on its own.
+
 ## 2026-08-24 (nightly) — 4 videos distilled: 14 takes + 14 metaNotes, the first distillation night in three
 
 **Discovery:** 44 channels polled (41 class-lane + 3 general), **every one HTTP 200 on the first

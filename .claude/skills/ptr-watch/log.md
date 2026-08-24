@@ -16,6 +16,41 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-24 (local) — verification pass over the nightly; one post-nightly article read and correctly not logged
+
+**No feed change. The newest entry stays 2026-08-22** ("Class Tuning Incoming – August 25"). Ran as
+the scheduled local ptr-watch ~2.7h after the nightly (CI `startedAt` 11:37Z, this run 14:1xZ) and
+re-derived its "nothing new" independently rather than trusting it. Nothing written by this skill:
+no feed entry, no `tierSet` touch.
+
+- **Wowhead news RSS**: HTTP 200, 121,890 bytes, 40 items, parsed per `<item>` block (never by tag
+  adjacency), bodies free in `content:encoded`.
+- **One item POSTDATES the nightly's sweep and was read in full.** The nightly's newest was
+  `news=382495` (08-24 00:56Z); tonight's is **`news=382541`** "Communicate Cooldowns and Resources
+  with Expanded Pings" (08-24 12:17Z, ~3.1 KB of body text after tag-stripping). It is a UI feature
+  article about the new `/pingspell` command, macro examples and resource-bar pings — **zero class
+  or spec tuning values**, so a feed entry would carry an empty specsAffected/highlights pair and
+  reach no drawer. Correctly not logged. This is the case the sweep exists for: it landed in the
+  ~40-minute gap between the nightly's RSS read and its publish.
+- **Edit checks on all three canonical topics — every one byte-matching the nightly's record**,
+  so no in-place amendment slipped in after its poll: running hotfix topic **2336376** ("Hotfixes -
+  August 21") post #1 still **v15**, `updated_at` 2026-08-22T01:46:38Z, so no August 22/23/24
+  hotfix section has been appended; **2339812** ("Class Tuning Incoming – August 25") post #1 still
+  **v1**, unedited since creation, so the logged 08-22 distillation is current and the Aug-25
+  reset pass has not been revised; dev-notes thread **2317811** still at highest post **19**
+  (Linxy, 2026-07-31), the closed cycle's expected silence.
+- **`news=382566`** (the Aug-21 hotfix round-up) remains correctly ABSENT — settled by the 08-23
+  local run and re-confirmed by tonight's nightly, which read the body in full and found its
+  sections are Delves/Dungeons/Raids/Housing/Items/Prey with no class lines. Not re-derived here.
+- **12.2 PTR: still no announcement.** All 40 RSS bodies scanned for `12.2`, "next major patch",
+  "PTR is now available", "PTR Development Notes" and "Public Test Realm" — **0 hits** in titles or
+  bodies. (Two creator videos in the transcript queue carry tuning-flavoured titles — Dalaran
+  Gaming's "Up To 350% Increases Dropping Next Reset!" and izen's "FIRST Buffs & Nerfs of Season 2"
+  — and both point at the already-logged 08-22 post, which is the leads-are-not-sources rule
+  working as intended.)
+- PTR zone sweeps (54/52/56/57) remain dormant and were not attempted; their contract rows were
+  removed at the flip.
+
 ## 2026-08-24 (nightly) — three channels swept, nothing new to log, still no 12.2 PTR
 
 **No new feed entry. The newest entry stays 2026-08-22** (the "Class Tuning Incoming – August 25"

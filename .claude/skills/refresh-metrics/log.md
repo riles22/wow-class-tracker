@@ -16,6 +16,30 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-24 (local) — bloodmallet spot-probe: still MID2-partial, unchanged since the nightly, nothing merged
+
+Read-only verification of the one source whose manifest row carries an explicit handoff. **No
+fetch of any other metric source** — CI refreshed icyveins/method/wowhead/archon-tiers/
+archon-mplus-score/murlok/mythicstats successfully at 11:37Z and re-pulling them locally would
+only risk an unmergeable divergence, which is the standing local-run scope rule.
+
+- **6 of the 27 DPS charts probed** via `talent_target_scaling/castingpatchwerk`, chosen to
+  straddle the nightly's split: three it reported as data-bearing (Frost DK, Frost Mage,
+  Destruction) and three from its persistent-error set (Havoc, Balance, Windwalker).
+- **The split is unchanged, to the spec.** All three controls returned charts reading
+  `simc_settings.tier` = **MID2** stamped **2026-08-19 02:5x** — the same tier and the same day
+  the nightly recorded, so upstream has NOT re-simmed anything in the ~2.7h since. All three from
+  the error set returned the same **76-byte** `{"status": "error"}` body. The ten-spec gap is
+  holding, not closing.
+- **Nothing was merged, and merging was never the option.** All 26 stored profiles are MID1;
+  mixing tiers in one source pool fails `validate.mjs` outright, and `fightLabels` pools every DPS
+  profile with no provenance key, so a partial merge would publish *which specs bloodmallet has
+  re-simmed* as spec strength. Adopt wholesale or not at all. Stored data byte-identical; the
+  47-day staleness red stands as the honest signal.
+- The handoff the nightly wrote is unchanged and re-affirmed: the night all 27 charts return MID2
+  is a **wholesale adoption that will need a human `value_move_ack`**, because MID2 runs a measured
+  mean 1.79x MID1 and most rows move far past `maxValueMovePct`. Not an unattended-run decision.
+
 ## 2026-08-24 (nightly) — Murlok and Mythicstats both recut; Archon's raid numerics came back and were HELD
 
 **Merged:** murlok 40 rows, mythicstats 39, archon M+ score 40 + M+ popularity 40.
