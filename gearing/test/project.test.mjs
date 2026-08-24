@@ -494,6 +494,14 @@ test("self-contained output embeds current data and valid browser JavaScript", a
      hence the general fix rather than another one-off span. */
   assert.match(template, /\.card\{container-type:inline-size\}/);
   assert.match(template, /@container \(max-width:620px\)\{/);
+  /* The reference row is disclosures, not a tablist, so it must NOT carry roving focus.
+     The handler outlived the role change at stage 3 and was two bugs at once: arrowing
+     across the row opened and closed page sections instead of moving focus, and the
+     unconditional preventDefault() swallowed Home/End so the page would not scroll while
+     focus sat on any of the five. All five are in the tab order already. */
+  assert.doesNotMatch(template, /ArrowRight|ArrowLeft/,
+    "no roving-focus handler — these five are disclosures, not tabs");
+  assert.match(template, /TAB_ELEMENTS\.forEach\(tab => \{[\s\S]{0,120}?addEventListener\('click'/);
   assert.match(template, /<label for="spec">Specialization<\/label>/);
   assert.match(template, /<label for="profile">Build<\/label>/);
   assert.doesNotMatch(template, /<label for="scenario">/);

@@ -40,6 +40,7 @@ import path from "node:path";
    the summary is preferred only when it actually arrives. */
 export default async function* quietReporter(source) {
   const failures = [];
+  const skips = [];
   const tally = { tests: 0, passed: 0, failed: 0, skipped: 0, todo: 0 };
   let summary = null;
   let durationMs = null;
@@ -55,7 +56,7 @@ export default async function* quietReporter(source) {
       if (event.type === "test:fail") {
         tally.failed++;
         failures.push(d);
-      } else if (d?.skip) tally.skipped++;
+      } else if (d?.skip) { tally.skipped++; skips.push(d); }
       else if (d?.todo) tally.todo++;
       else tally.passed++;
       continue;
@@ -92,11 +93,29 @@ export default async function* quietReporter(source) {
   const took = durationMs == null ? "" : `  (${(durationMs / 1000).toFixed(1)}s)`;
   yield `\n# ${parts.join(" | ")}${took}\n`;
 
-  /* Named explicitly because it is the number CLAUDE.md warns about misreading: a
-     checkout without Playwright skips the UI invariants and still looks green. */
+  /* The skip count is the number CLAUDE.md warns about misreading — a checkout without
+     Playwright skips the 26 UI invariants and still looks green. But keying the warning on
+     `skipped > 0` made it fire on ANY skip, and the suite now has a permanent one that has
+     nothing to do with Playwright (freeze-season's "expired until an outlet leaves the
+     current season", true for months). So every green run carried a Playwright warning that
+     was false — and it worked: it convinced a reader the invariants had not run when they
+     had. Name the tests that actually skipped, and mention Playwright only when the
+     invariants are genuinely among them. A hint that cries wolf is worse than no hint. */
   if (counts.skipped > 0) {
-    yield `# ${counts.skipped} skipped — check whether the UI invariants ran (they need Playwright)\n`;
+    const invariantsSkipped = skips.some(d => /ui-invariants/.test(d?.file ?? ""));
+    yield invariantsSkipped
+      ? `# ${counts.skipped} skipped INCLUDING the UI invariants — install Playwright; this run proved nothing about template.html\n`
+      : `# ${counts.skipped} skipped (UI invariants ran): ${skipList(skips)}\n`;
   }
+}
+
+/* One line however many there are: skips should be rare enough to name, and a bare count is
+   exactly what sent a reader looking for the wrong cause. */
+function skipList(skips) {
+  const names = skips.map(d => d?.name ?? "unnamed");
+  return names.length <= 3
+    ? names.join("; ")
+    : `${names.slice(0, 3).join("; ")} +${names.length - 3} more`;
 }
 
 function formatFailure(failure) {

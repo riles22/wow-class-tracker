@@ -1453,3 +1453,25 @@ ui("a 12.0.7-only view hides every PTR-derived summary surface", async page => {
   assert.ok(!/latest PTR build/.test(live.summary),
     `"What changed" leaked the PTR build date into the live-only view: "${live.summary.trim()}"`);
 });
+
+/* The spark column header must state the window it actually shows. It was the literal
+   "30d" while SPARK_POINTS is a point COUNT, so the two only agree at a daily cadence —
+   at the real one the window is ~11 days, and the true span was reachable only through a
+   per-row title=, on a column that renders at >=980px where touch cannot read it. */
+test("the spark header states the real window, not a hard-coded duration", skipOpts, async () => {
+  const { page } = await newPage();
+  const head = (await page.textContent(".head .sparkcell"))?.trim() ?? "";
+  await page.close();
+
+  assert.notEqual(head, "30d", "the header must not be the old hard-coded literal");
+  assert.match(head, /^(\d+d|Trend)$/, `header should be "<n>d" or "Trend", got "${head}"`);
+
+  if (head === "Trend") return;   // no enriched history in this artifact — nothing to check
+  const { history } = payload();
+  const dates = history?.dates ?? [];
+  const start = (history?.enriched ?? []).findIndex(Boolean);
+  const n = Math.min(12, dates.length - start);
+  const days = Math.round((Date.parse(dates.at(-1)) - Date.parse(dates[dates.length - n])) / 86400000);
+  assert.equal(head, days + "d",
+    `header "${head}" disagrees with the payload's own dates (${days}d over the last ${n} snapshots)`);
+});

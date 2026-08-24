@@ -9,7 +9,7 @@
     "build": "node src/build.mjs",
     "check": "npm test && npm run build",
     "gearing:build": "node gearing/src/build.mjs",
-    "gearing:test": "node --test gearing/test/project.test.mjs",
+    "gearing:test": "node --test \"gearing/test/*.test.mjs\"",
     "test": "node --test",
     "test:quiet": "node --test --test-reporter=./src/quiet-reporter.mjs",
     "prevalidate": "node src/apply-community-overrides.mjs",

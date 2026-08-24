@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-leVj1pC2pibRONgV6yzUGkHJsU1xiZD7l59HDLsJBvs='; style-src 'unsafe-inline'; font-src data:; img-src data:; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-+H9Qgsab/BF71KBEmw59zHQvXyc52OUQolHjmUPPBoE='; style-src 'unsafe-inline'; font-src data:; img-src data:; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Spec Tracker &mdash; Season 2 Gearing</title>
 <!-- The Spec Tracker brand mark as favicon — same artwork as the tracker page, shipped
@@ -2214,7 +2214,7 @@ const TAB_ELEMENTS = Array.prototype.slice.call(document.querySelectorAll('.tab'
 /* Toggle a reference view. Opening one closes the others so the page stays short, and
    clicking the open one closes it — the sheet above is always the thing you come back to,
    so there is no state where a reference view is forced on you. */
-function activateTab(tab, shouldFocus) {
+function activateTab(tab) {
   const wasOpen = tab.getAttribute('aria-expanded') === 'true';
   TAB_ELEMENTS.forEach(candidate => {
     const open = !wasOpen && candidate === tab;
@@ -2226,20 +2226,16 @@ function activateTab(tab, shouldFocus) {
       panel.hidden = !open;
     }
   });
-  if (shouldFocus) tab.focus();
 }
-TAB_ELEMENTS.forEach((tab, index) => {
-  tab.addEventListener('click', () => activateTab(tab, false));
-  tab.addEventListener('keydown', event => {
-    let next = null;
-    if (event.key === 'ArrowRight') next = (index + 1) % TAB_ELEMENTS.length;
-    if (event.key === 'ArrowLeft') next = (index - 1 + TAB_ELEMENTS.length) % TAB_ELEMENTS.length;
-    if (event.key === 'Home') next = 0;
-    if (event.key === 'End') next = TAB_ELEMENTS.length - 1;
-    if (next == null) return;
-    event.preventDefault();
-    activateTab(TAB_ELEMENTS[next], true);
-  });
+/* Click only. The arrow/Home/End roving-focus handler that used to live here was correct
+   for the TABLIST this row stopped being at Option A stage 3 — as disclosures it was two
+   separate bugs: arrowing across the row OPENED AND CLOSED page sections rather than
+   moving focus, and the unconditional preventDefault() swallowed Home/End so the page
+   would not scroll whenever focus sat on one of these five. Roving focus exists to keep a
+   tablist to one tab stop; all five buttons are in the tab order on their own, so nothing
+   replaces it. */
+TAB_ELEMENTS.forEach(tab => {
+  tab.addEventListener('click', () => activateTab(tab));
 });
 
 $('#p-items').textContent = GEAR.length + DIRECT_TIER.length;

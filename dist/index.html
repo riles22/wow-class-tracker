@@ -11,7 +11,7 @@
 -->
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-/3NTl1fh6tUK+XrWgiteHJOzsAHDEvuRt06lxXbXBeQ=' 'sha256-xYdbBc9CtzPv35GB86e87SMN2q+u6u0SPMlHOzAjkAA='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-/3NTl1fh6tUK+XrWgiteHJOzsAHDEvuRt06lxXbXBeQ=' 'sha256-XJNY/VuyoCW2c+HakiRGgwehOKbPKynbjYPvdgQH3yg='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="riles22">
 <title>Spec Tracker — WoW multi-source spec consensus</title>
@@ -515,6 +515,13 @@ try {
        the badge chrome is gone — the letter is a bare glyph now, and the movement arrow
        and confidence dots sit beside it in .tind rather than under it. */
     grid-template-columns:48px 148px 108px 38px 62px 54px 54px 76px 66px minmax(0,1fr) 16px;
+    /* `gap`, not `column-gap` — measured 2026-08-23. An audit proposed column-gap on the
+       theory that the collapsed .drawer is a dead second track costing ~400px of document.
+       It IS a second track, but forcing row-gap back on and off live moves the document 0px
+       and the row 0px (33px either way) — the collapsed drawer is 1px and the row height
+       does not come from the tracks. What column-gap DOES change is the OPEN state, where it
+       removes the 10px between the row and its drawer: a regression with no saving behind
+       it. Do not re-propose this without re-measuring BOTH states. */
     align-items:center; gap:10px; padding:5px 14px
   }
   /* Below ~980px the spark and the profile chip go first: both are secondary reads and
@@ -591,8 +598,10 @@ try {
      125ms -> 33ms with nothing open and 1,580ms -> 421ms with all 40 drawers open, with
      pixel-identical output (audit 2026-07-24, P1). contain-intrinsic-size holds the
      scrollbar steady at the measured row heights.
-     contain-intrinsic-size sets the CONTENT box, so the on-screen row is this + 19px
-     desktop / 27px card of padding+border. Measure it by forcing content-visibility:
+     contain-intrinsic-size sets the CONTENT box, so the on-screen row is this + 11px
+     desktop (10 padding + 1 border) / 1px card of chrome — re-measured 2026-08-23; the
+     +19/+27 this line used to claim were both wrong, which is how the stale "real content
+     24 / 67" figures in CLAUDE.md got generated. Measure by forcing content-visibility:
      visible on every .row — an unpainted row reports the placeholder back at you, which
      is how the old values survived a spot check.
      Re-measured 2026-08-05 (mobile report of specs missing under the DPS filter): rows
@@ -2042,14 +2051,29 @@ function overallOf(s){
 
 const ROLE_ABBR = { DPS:"DPS", Healer:"HLR", Tank:"TNK" };
 
-/* 30-day consensus spark. The series is already in the payload — historySeries() ships
-   per-spec raid/mplus score arrays — so this column costs no new data.
-   ONE constraint, and it is load-bearing: history.enriched marks which snapshots carry
+/* Consensus spark over the last SPARK_POINTS snapshots. The series is already in the
+   payload — historySeries() ships per-spec raid/mplus score arrays — so it costs no new
+   data. ONE constraint, and it is load-bearing: history.enriched marks which snapshots carry
    EXACT scores; earlier points are reconstructed from tier midpoints, and render.mjs is
    explicit that drawing them identically "reads as a score move that never happened".
    At 72x14 there is no room for two line styles, so the series simply STARTS at the
    first enriched point rather than plotting the reconstruction. */
 const SPARK_POINTS = 12;
+/* The column header used to be the literal string "30d". SPARK_POINTS is a point COUNT,
+   not a duration, so the two only agree at a daily cadence — and at the real one (48
+   snapshots over 54 days) the window is ELEVEN days. The true span was reachable only
+   through the per-row title=, on a column that renders at >=980px, i.e. every landscape
+   tablet, where a title does not exist. Derive the label from the dates the tips already
+   read, so no cadence change can make it lie again. */
+function sparkHeadLabel(){
+  const H = DATA.history, dates = (H && H.dates) || [];
+  const start = ((H && H.enriched) || []).findIndex(Boolean);
+  if(start < 0 || dates.length < 2) return "Trend";
+  const n = Math.min(SPARK_POINTS, dates.length - start);
+  const from = dates[dates.length - n], to = dates[dates.length - 1];
+  const days = Math.round((Date.parse(to) - Date.parse(from)) / 86400000);
+  return Number.isFinite(days) && days > 0 ? days + "d" : "Trend";
+}
 function sparkCell(s){
   const H = DATA.history;
   const row = H && H.specs && H.specs[`${s.class}|${s.spec}`];
@@ -2363,7 +2387,7 @@ function render(){
   const rh = fightHead('raid','Raid'), mh = fightHead('mplus','M+');
   const quals = { raid: rh.qual, mplus: mh.qual };
   let html = `<div class="head">
-      <div>#</div>${hcell('spec','Spec')}${hcell('class','Class')}<div>Role</div>${hcell('overall','Overall')}${hcell('raid',rh.label,rh.aria)}${hcell('mplus',mh.label,mh.aria)}<div class="sparkcell">30d</div><div class="profcell">Profile</div><div class="notecell">Notes</div><div></div>
+      <div>#</div>${hcell('spec','Spec')}${hcell('class','Class')}<div>Role</div>${hcell('overall','Overall')}${hcell('raid',rh.label,rh.aria)}${hcell('mplus',mh.label,mh.aria)}<div class="sparkcell">${sparkHeadLabel()}</div><div class="profcell">Profile</div><div class="notecell">Notes</div><div></div>
     </div>`;
 
   if(ordered.length===0){

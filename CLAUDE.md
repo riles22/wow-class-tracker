@@ -18,6 +18,15 @@ on push to `master`; the file also still opens directly in a browser.
   second tool call to find out what failed and never shows the counts. Every deterministic
   gate (ci.yml, deploy.yml, nightly's completion gate, publish Gate 1) deliberately keeps
   verbose `npm test`; `test` is NOT redefined, so pointing an agent here cannot move a gate.
+  ⚠️ **Read the skip LINE, not the skip COUNT.** The reporter used to append a Playwright
+  warning whenever `skipped > 0`, and the suite has a permanent skip that has nothing to do
+  with Playwright (freeze-season's assertion is expired until an outlet leaves S2, i.e.
+  months). So every green run carried a false warning — and on 2026-08-23 it worked: it
+  convinced a reader the UI invariants had not run when they had, and that was reported to
+  the owner. It now NAMES the skipped tests and says `(UI invariants ran)`, switching to
+  "skipped INCLUDING the UI invariants" only when a skip really came from that file. Both
+  branches are exercised by hiding `node_modules/playwright` — with it absent the run reads
+  **347 pass / 27 skipped**, which is exactly what the nightly sees.
 - `npm run build` — data + template → `dist/index.html`
 - `npm run validate` — data checks only
 - `npm run audit:creators` — creator/expert-layer audit (scope, firewall, supersession,
@@ -35,7 +44,12 @@ on push to `master`; the file also still opens directly in a browser.
 - `npm run gearing:build` — rebuild `gearing/wow-s2-gearing.html`. **Required after any edit
   to `gearing/src/app.template.html`**: the artifact is committed, and a template edit
   without a rebuild publishes nothing (a test pins this since 2026-08-14).
-  `npm run gearing:test` runs gearing's tests alone — though the root `npm test` already
+  `npm run gearing:test` runs gearing's tests alone — all **44** of them. It ran only
+  `project.test.mjs` (12) until 2026-08-23: Phase A correctly trimmed a five-file enumeration
+  to one file, and Phases B and G9 added the guide-harvest and enhancements-parser suites
+  without re-extending it, so a third of gearing's tests answered to no gearing command. It is
+  a glob now (`node --test "gearing/test/*.test.mjs"`; Node expands it on both shells), so a
+  new test file joins automatically — though the root `npm test` already
   discovers them, which is why a broken gearing reds the nightly publish gate.
 - `node src/check-refresh.mjs --manifest|--age` — refresh integrity gates (nightly
   publish contract / staleness heartbeat) against `data/required-sources.json`
@@ -321,10 +335,16 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
 - **The grid is "Console"** (2026-08-22 UX audit, direction C — chosen by Riley from three
   candidates; the audit canvas records the two that lost and why). The row went from five
   columns to **eleven grid items** — star+rank · spec · class · role · overall · raid · M+ ·
-  30d spark · profile · notes · chevron — with a mono body at 12px and a 33px row. Measured:
-  **27 specs per screen at 1440x900 against 18** before, 11 on a 375px phone against 6, and
+  trend spark · profile · notes · chevron — with a mono body at 12px and a 33px row. Measured:
+  **27 specs per screen at 1440x900 against 18** before, **13** on a 375px phone against 6, and
   the whole document 10,533px -> 9,564px.
-  **The two new columns cost NO new data, which is why the direction was affordable.** The
+  ⚠️ **The spark header is DERIVED, never a literal.** It read `30d` until 2026-08-23, but
+  `SPARK_POINTS` is a point COUNT and the two only agree at a daily cadence — at the real
+  one (48 snapshots over 54 days) the window is **11 days**, so the column header was simply
+  false, and the true span lived only in a per-row `title=` on a column that renders at
+  >=980px, i.e. every landscape tablet, where a title does not exist. `sparkHeadLabel()`
+  reads the same `history.dates` the tips do; a UI invariant recomputes it from the payload,
+  so no cadence change can make it lie again. Do not hard-code a duration here.  **The two new columns cost NO new data, which is why the direction was affordable.** The
   spark reads `history.specs[key].raid/.mplus` (already shipped by `historySeries()` for the
   drawer Timeline) and the notes line joins `consensus[bracket].perSource`, which already
   carries each source's `label` and `tier`. Two rules on them:
@@ -336,6 +356,11 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   The full per-source list stays in the `title`.
   **The notes column is also the touch fix**: it is visible text where a `title=` used to be,
   and the audit counted 367 of the page's 407 tooltips inside the grid.
+  (Those were the AUDIT-TIME counts of the problem, not a promise the total would fall. It is
+  **490 of 539** now, re-counted 2026-08-23 — the notes cells and spark labels the audit added
+  are themselves `title`-bearing, and that is the documented design, since each one has visible
+  text beside it. Do not chase the total downwards; check that a new tooltip has a visible
+  counterpart, which is the rule that actually matters.)
   Two things the row deliberately GAVE UP: the per-tier `.tscore` within-band meter (the 0-100
   Overall already carries position) and the tier badge plate — the letter is now the only
   saturated colour in the row body. The badge treatment survives in the legend and the drawer,
@@ -352,9 +377,13 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   at 920px. The hide rules are qualified (`.head .sparkcell, .row .sparkcell`) for that reason.
   Item count must equal column count at every width: **11 at >=980px, 9 at 860-979** (spark +
   profile drop), **8 below** (notes drop), and the card layout under 760px.
-  `contain-intrinsic-size` is re-measured: **22px desktop** (real content 24) and **60px card**
-  (real 67) — deliberately low, per the rule above that over-estimating shrinks the document
-  under the reader and skips rows.
+  `contain-intrinsic-size` is **22px desktop and 60px card, and both are EXACT** — re-measured
+  2026-08-23 against the shipped artifact, the content box is 22px and 60px on the nose. Earlier
+  prose here claimed real content of 24 and 67 and called the declarations "deliberately low";
+  both figures were wrong and the rationale with them. The rule they invoked still holds — OVER-
+  estimating shrinks the document under the reader and skips rows — it just is not what these
+  values are doing. Re-measure with `getBoundingClientRect().height` minus padding+border on a
+  PAINTED row; an unpainted one reports the placeholder back at you.
 - **Page weight and reading order** (same audit, stage 3). Measured before: the desktop
   document was **10,533px**, of which the footer was **7,200px (68%)** and the grid 22%; the
   first spec row sat at **890px**, the whole fold on a 1366x768 laptop. After: **5,382px**,
@@ -417,7 +446,8 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
 - **The masthead is a 60px command bar** (audit stage 5, Riley's call after seeing it mocked
   against the shipped grid). The 302px masthead and the 100px health banner were 402 of the
   637px that preceded the first spec row; the page now reaches the grid at **363px** and
-  shows **16 specs above the fold** on a 1440x900 screen.
+  shows **15 specs above the fold** on a 1440x900 screen (27 once the grid is scrolled to the
+  top — the two figures answer different questions and both are quoted here deliberately).
   The bar carries the mark, the name in Cinzel at 18px, the patch chip, both site tabs,
   search, and all three tools — **Ladder, Compare all AND the ? legend**. The other seven
   controls stay in two tight rows below it, unchanged. Nothing moved into an overflow menu.
