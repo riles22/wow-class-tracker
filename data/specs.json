@@ -8,7 +8,7 @@
         "icyveins": "S",
         "method": "S",
         "wowhead": "S",
-        "archon": "S"
+        "archon": "A"
       },
       "mplus": {
         "icyveins": "S",
@@ -59,19 +59,19 @@
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 2980,
+        "value": 3023,
         "unit": "score",
-        "n": 406508,
-        "asOf": "2026-08-22"
+        "n": 504081,
+        "asOf": "2026-08-24"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 43.5,
+        "value": 43.3,
         "unit": "%",
-        "n": 406508,
-        "asOf": "2026-08-22"
+        "n": 504081,
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -95,17 +95,17 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3230,
+        "value": 3354,
         "unit": "rating",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 12.4,
+        "value": 13,
         "unit": "%",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -173,7 +173,7 @@
         "icyveins": "A",
         "method": "A",
         "wowhead": "A",
-        "archon": "A"
+        "archon": "B"
       }
     },
     "ptr": {
@@ -212,10 +212,10 @@
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 2933,
+        "value": 2944,
         "unit": "score",
-        "n": 38612,
-        "asOf": "2026-08-22"
+        "n": 47380,
+        "asOf": "2026-08-24"
       },
       {
         "source": "archon",
@@ -223,8 +223,8 @@
         "name": "Popularity",
         "value": 1.4,
         "unit": "%",
-        "n": 38612,
-        "asOf": "2026-08-22"
+        "n": 47380,
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -248,17 +248,17 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 2995,
+        "value": 3119,
         "unit": "rating",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.6,
+        "value": 0.5,
         "unit": "%",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -426,7 +426,7 @@
         "icyveins": "A+",
         "method": "B",
         "wowhead": "B",
-        "archon": "S"
+        "archon": "A"
       }
     },
     "ptr": {
@@ -469,19 +469,19 @@
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 2962,
+        "value": 2973,
         "unit": "score",
-        "n": 134672,
-        "asOf": "2026-08-22"
+        "n": 165754,
+        "asOf": "2026-08-24"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 4.8,
+        "value": 4.7,
         "unit": "%",
-        "n": 134672,
-        "asOf": "2026-08-22"
+        "n": 165754,
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -505,17 +505,17 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3140,
+        "value": 3245,
         "unit": "rating",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 2.9,
+        "value": 2.4,
         "unit": "%",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -676,13 +676,13 @@
         "icyveins": "B",
         "method": "B",
         "wowhead": "A",
-        "archon": "A"
+        "archon": "B"
       },
       "mplus": {
         "icyveins": "A",
         "method": "B",
         "wowhead": "B",
-        "archon": "S"
+        "archon": "A"
       }
     },
     "ptr": {
@@ -723,10 +723,10 @@
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 2951,
+        "value": 2960,
         "unit": "score",
-        "n": 59601,
-        "asOf": "2026-08-22"
+        "n": 74764,
+        "asOf": "2026-08-24"
       },
       {
         "source": "archon",
@@ -734,8 +734,8 @@
         "name": "Popularity",
         "value": 2.1,
         "unit": "%",
-        "n": 59601,
-        "asOf": "2026-08-22"
+        "n": 74764,
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -759,17 +759,17 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3049,
+        "value": 3157,
         "unit": "rating",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 1.2,
+        "value": 0.6,
         "unit": "%",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -931,7 +931,7 @@
         "icyveins": "S",
         "method": "A",
         "wowhead": "A",
-        "archon": "B"
+        "archon": "A"
       },
       "mplus": {
         "icyveins": "A",
@@ -981,19 +981,19 @@
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 2975,
+        "value": 2998,
         "unit": "score",
-        "n": 137379,
-        "asOf": "2026-08-22"
+        "n": 167199,
+        "asOf": "2026-08-24"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 4.9,
+        "value": 4.8,
         "unit": "%",
-        "n": 137379,
-        "asOf": "2026-08-22"
+        "n": 167199,
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -1017,17 +1017,17 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3162,
+        "value": 3298,
         "unit": "rating",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 4.3,
+        "value": 4.2,
         "unit": "%",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -1235,10 +1235,10 @@
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 2939,
+        "value": 2950,
         "unit": "score",
-        "n": 66887,
-        "asOf": "2026-08-22"
+        "n": 83777,
+        "asOf": "2026-08-24"
       },
       {
         "source": "archon",
@@ -1246,8 +1246,8 @@
         "name": "Popularity",
         "value": 7.2,
         "unit": "%",
-        "n": 66887,
-        "asOf": "2026-08-22"
+        "n": 83777,
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -1271,9 +1271,9 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3041,
+        "value": 3164,
         "unit": "rating",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "mythicstats",
@@ -1281,7 +1281,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.7,
         "unit": "%",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -1343,13 +1343,13 @@
         "icyveins": "A",
         "method": "A",
         "wowhead": "A",
-        "archon": "S"
+        "archon": "A"
       },
       "mplus": {
         "icyveins": "A+",
         "method": "A",
         "wowhead": "A",
-        "archon": "S"
+        "archon": "A"
       }
     },
     "ptr": {
@@ -1391,19 +1391,19 @@
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 2959,
+        "value": 2970,
         "unit": "score",
-        "n": 145616,
-        "asOf": "2026-08-22"
+        "n": 177765,
+        "asOf": "2026-08-24"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 5.2,
+        "value": 5.1,
         "unit": "%",
-        "n": 145616,
-        "asOf": "2026-08-22"
+        "n": 177765,
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -1427,17 +1427,17 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3115,
+        "value": 3243,
         "unit": "rating",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 2.8,
+        "value": 2.3,
         "unit": "%",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -1599,7 +1599,7 @@
         "icyveins": "B",
         "method": "C",
         "wowhead": "C",
-        "archon": "B"
+        "archon": "C"
       },
       "mplus": {
         "icyveins": "A",
@@ -1644,10 +1644,10 @@
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 2979,
+        "value": 3010,
         "unit": "score",
-        "n": 29522,
-        "asOf": "2026-08-22"
+        "n": 37063,
+        "asOf": "2026-08-24"
       },
       {
         "source": "archon",
@@ -1655,8 +1655,8 @@
         "name": "Popularity",
         "value": 1.1,
         "unit": "%",
-        "n": 29522,
-        "asOf": "2026-08-22"
+        "n": 37063,
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -1680,17 +1680,17 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3088,
+        "value": 3215,
         "unit": "rating",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 1.4,
+        "value": 1.5,
         "unit": "%",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "simulationcraft",
@@ -1887,19 +1887,19 @@
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 2953,
+        "value": 2964,
         "unit": "score",
-        "n": 106779,
-        "asOf": "2026-08-22"
+        "n": 134599,
+        "asOf": "2026-08-24"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 11.4,
+        "value": 11.6,
         "unit": "%",
-        "n": 106779,
-        "asOf": "2026-08-22"
+        "n": 134599,
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -1923,17 +1923,17 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3107,
+        "value": 3241,
         "unit": "rating",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 1.8,
+        "value": 1.7,
         "unit": "%",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -2030,10 +2030,10 @@
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 2765,
+        "value": 2830,
         "unit": "score",
-        "n": 58548,
-        "asOf": "2026-08-22"
+        "n": 73372,
+        "asOf": "2026-08-24"
       },
       {
         "source": "archon",
@@ -2041,8 +2041,8 @@
         "name": "Popularity",
         "value": 6.3,
         "unit": "%",
-        "n": 58548,
-        "asOf": "2026-08-22"
+        "n": 73372,
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -2066,17 +2066,17 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 2943,
+        "value": 2920,
         "unit": "rating",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.2,
+        "value": 0.1,
         "unit": "%",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -2156,7 +2156,7 @@
         "icyveins": "B",
         "method": "C",
         "wowhead": "C",
-        "archon": "A"
+        "archon": "B"
       },
       "mplus": {
         "icyveins": "A",
@@ -2204,10 +2204,10 @@
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 2777,
+        "value": 2807,
         "unit": "score",
-        "n": 13804,
-        "asOf": "2026-08-22"
+        "n": 15947,
+        "asOf": "2026-08-24"
       },
       {
         "source": "archon",
@@ -2215,8 +2215,8 @@
         "name": "Popularity",
         "value": 0.5,
         "unit": "%",
-        "n": 13804,
-        "asOf": "2026-08-22"
+        "n": 15947,
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -2240,9 +2240,9 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 2804,
+        "value": 2698,
         "unit": "rating",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "mythicstats",
@@ -2250,7 +2250,7 @@
         "name": "Top-2000 keys representation",
         "value": 0,
         "unit": "%",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -2386,7 +2386,7 @@
         "icyveins": "C",
         "method": "B",
         "wowhead": "B",
-        "archon": "A"
+        "archon": "B"
       }
     },
     "ptr": {
@@ -2427,10 +2427,10 @@
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 2911,
+        "value": 2940,
         "unit": "score",
-        "n": 55968,
-        "asOf": "2026-08-22"
+        "n": 68364,
+        "asOf": "2026-08-24"
       },
       {
         "source": "archon",
@@ -2438,8 +2438,8 @@
         "name": "Popularity",
         "value": 2,
         "unit": "%",
-        "n": 55968,
-        "asOf": "2026-08-22"
+        "n": 68364,
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -2463,17 +2463,17 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 2971,
+        "value": 3010,
         "unit": "rating",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.4,
+        "value": 0.2,
         "unit": "%",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -2635,13 +2635,13 @@
         "icyveins": "S",
         "method": "S",
         "wowhead": "S",
-        "archon": "C"
+        "archon": "A"
       },
       "mplus": {
         "icyveins": "A",
         "method": "B",
         "wowhead": "B",
-        "archon": "B"
+        "archon": "A"
       }
     },
     "ptr": {
@@ -2682,19 +2682,19 @@
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 2871,
+        "value": 2940,
         "unit": "score",
-        "n": 59700,
-        "asOf": "2026-08-22"
+        "n": 73048,
+        "asOf": "2026-08-24"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 6.4,
+        "value": 6.3,
         "unit": "%",
-        "n": 59700,
-        "asOf": "2026-08-22"
+        "n": 73048,
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -2718,9 +2718,9 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 2987,
+        "value": 3101,
         "unit": "rating",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "mythicstats",
@@ -2728,7 +2728,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.3,
         "unit": "%",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -2808,13 +2808,13 @@
         "icyveins": "B",
         "method": "B",
         "wowhead": "B",
-        "archon": "A"
+        "archon": "B"
       },
       "mplus": {
         "icyveins": "C",
         "method": "B",
         "wowhead": "B",
-        "archon": "A"
+        "archon": "B"
       }
     },
     "ptr": {
@@ -2857,19 +2857,19 @@
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 2909,
+        "value": 2941,
         "unit": "score",
-        "n": 182219,
-        "asOf": "2026-08-22"
+        "n": 229703,
+        "asOf": "2026-08-24"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 6.5,
+        "value": 6.6,
         "unit": "%",
-        "n": 182219,
-        "asOf": "2026-08-22"
+        "n": 229703,
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -2893,17 +2893,17 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3070,
+        "value": 3173,
         "unit": "rating",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.9,
+        "value": 0.6,
         "unit": "%",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -3065,13 +3065,13 @@
         "icyveins": "B",
         "method": "A",
         "wowhead": "B",
-        "archon": "A"
+        "archon": "S"
       },
       "mplus": {
         "icyveins": "B",
         "method": "B",
         "wowhead": "B",
-        "archon": "S"
+        "archon": "A"
       }
     },
     "ptr": {
@@ -3114,10 +3114,10 @@
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 2949,
+        "value": 2959,
         "unit": "score",
-        "n": 73808,
-        "asOf": "2026-08-22"
+        "n": 90569,
+        "asOf": "2026-08-24"
       },
       {
         "source": "archon",
@@ -3125,8 +3125,8 @@
         "name": "Popularity",
         "value": 2.6,
         "unit": "%",
-        "n": 73808,
-        "asOf": "2026-08-22"
+        "n": 90569,
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -3150,17 +3150,17 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3050,
+        "value": 3185,
         "unit": "rating",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 1,
+        "value": 0.7,
         "unit": "%",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -3313,7 +3313,7 @@
         "icyveins": "C",
         "method": "C",
         "wowhead": "C",
-        "archon": "B"
+        "archon": "C"
       },
       "mplus": {
         "icyveins": "B",
@@ -3360,10 +3360,10 @@
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 2853,
+        "value": 2935,
         "unit": "score",
-        "n": 22297,
-        "asOf": "2026-08-22"
+        "n": 26773,
+        "asOf": "2026-08-24"
       },
       {
         "source": "archon",
@@ -3371,8 +3371,8 @@
         "name": "Popularity",
         "value": 0.8,
         "unit": "%",
-        "n": 22297,
-        "asOf": "2026-08-22"
+        "n": 26773,
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -3396,9 +3396,9 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 2938,
+        "value": 2931,
         "unit": "rating",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "mythicstats",
@@ -3406,7 +3406,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.2,
         "unit": "%",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -3557,7 +3557,7 @@
         "icyveins": "A+",
         "method": "S",
         "wowhead": "B",
-        "archon": "A"
+        "archon": "S"
       },
       "mplus": {
         "icyveins": "S+",
@@ -3606,19 +3606,19 @@
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 2975,
+        "value": 3005,
         "unit": "score",
-        "n": 444221,
-        "asOf": "2026-08-22"
+        "n": 561029,
+        "asOf": "2026-08-24"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 15.8,
+        "value": 16,
         "unit": "%",
-        "n": 444221,
-        "asOf": "2026-08-22"
+        "n": 561029,
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -3642,17 +3642,17 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3209,
+        "value": 3353,
         "unit": "rating",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 10.6,
+        "value": 11.7,
         "unit": "%",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -3814,7 +3814,7 @@
         "icyveins": "C",
         "method": "C",
         "wowhead": "C",
-        "archon": "S"
+        "archon": null
       },
       "mplus": {
         "icyveins": "A",
@@ -3861,10 +3861,10 @@
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 2837,
+        "value": 2935,
         "unit": "score",
-        "n": 8998,
-        "asOf": "2026-08-22"
+        "n": 11028,
+        "asOf": "2026-08-24"
       },
       {
         "source": "archon",
@@ -3872,8 +3872,8 @@
         "name": "Popularity",
         "value": 0.3,
         "unit": "%",
-        "n": 8998,
-        "asOf": "2026-08-22"
+        "n": 11028,
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -3897,9 +3897,9 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 2788,
+        "value": 2613,
         "unit": "rating",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "mythicstats",
@@ -4057,7 +4057,7 @@
         "icyveins": "A",
         "method": "B",
         "wowhead": "B",
-        "archon": "A"
+        "archon": null
       },
       "mplus": {
         "icyveins": "B",
@@ -4106,10 +4106,10 @@
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 2734,
+        "value": 2739,
         "unit": "score",
-        "n": 28929,
-        "asOf": "2026-08-22"
+        "n": 35195,
+        "asOf": "2026-08-24"
       },
       {
         "source": "archon",
@@ -4117,8 +4117,8 @@
         "name": "Popularity",
         "value": 1,
         "unit": "%",
-        "n": 28929,
-        "asOf": "2026-08-22"
+        "n": 35195,
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -4142,9 +4142,9 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 2846,
+        "value": 2673,
         "unit": "rating",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "mythicstats",
@@ -4152,7 +4152,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.1,
         "unit": "%",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -4362,10 +4362,10 @@
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 2943,
+        "value": 2954,
         "unit": "score",
-        "n": 51310,
-        "asOf": "2026-08-22"
+        "n": 63771,
+        "asOf": "2026-08-24"
       },
       {
         "source": "archon",
@@ -4373,8 +4373,8 @@
         "name": "Popularity",
         "value": 5.5,
         "unit": "%",
-        "n": 51310,
-        "asOf": "2026-08-22"
+        "n": 63771,
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -4398,17 +4398,17 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3087,
+        "value": 3224,
         "unit": "rating",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 1,
+        "value": 1.3,
         "unit": "%",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -4520,19 +4520,19 @@
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 2954,
+        "value": 2963,
         "unit": "score",
-        "n": 80845,
-        "asOf": "2026-08-22"
+        "n": 100050,
+        "asOf": "2026-08-24"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 8.7,
+        "value": 8.6,
         "unit": "%",
-        "n": 80845,
-        "asOf": "2026-08-22"
+        "n": 100050,
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -4556,17 +4556,17 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3083,
+        "value": 3202,
         "unit": "rating",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 1.4,
+        "value": 1.1,
         "unit": "%",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -4646,13 +4646,13 @@
         "icyveins": "A+",
         "method": "B",
         "wowhead": "B",
-        "archon": "B"
+        "archon": "C"
       },
       "mplus": {
         "icyveins": "S",
         "method": "A",
         "wowhead": "A",
-        "archon": "S"
+        "archon": "A"
       }
     },
     "ptr": {
@@ -4695,19 +4695,19 @@
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 2954,
+        "value": 2966,
         "unit": "score",
-        "n": 84353,
-        "asOf": "2026-08-22"
+        "n": 102867,
+        "asOf": "2026-08-24"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 3,
+        "value": 2.9,
         "unit": "%",
-        "n": 84353,
-        "asOf": "2026-08-22"
+        "n": 102867,
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -4731,17 +4731,17 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3071,
+        "value": 3241,
         "unit": "rating",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 1.5,
+        "value": 1.7,
         "unit": "%",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -4903,7 +4903,7 @@
         "icyveins": "S",
         "method": "S",
         "wowhead": "A",
-        "archon": "S"
+        "archon": "B"
       },
       "mplus": {
         "icyveins": "S",
@@ -4957,10 +4957,10 @@
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 2976,
+        "value": 3016,
         "unit": "score",
-        "n": 287330,
-        "asOf": "2026-08-22"
+        "n": 360502,
+        "asOf": "2026-08-24"
       },
       {
         "source": "archon",
@@ -4968,8 +4968,8 @@
         "name": "Popularity",
         "value": 30.9,
         "unit": "%",
-        "n": 287330,
-        "asOf": "2026-08-22"
+        "n": 360502,
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -4993,17 +4993,17 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3189,
+        "value": 3340,
         "unit": "rating",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 7.8,
+        "value": 8.8,
         "unit": "%",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -5083,7 +5083,7 @@
         "icyveins": "A",
         "method": "B",
         "wowhead": "B",
-        "archon": "B"
+        "archon": "A"
       },
       "mplus": {
         "icyveins": "A+",
@@ -5133,19 +5133,19 @@
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 2952,
+        "value": 2962,
         "unit": "score",
-        "n": 221868,
-        "asOf": "2026-08-22"
+        "n": 277224,
+        "asOf": "2026-08-24"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 23.7,
+        "value": 23.8,
         "unit": "%",
-        "n": 221868,
-        "asOf": "2026-08-22"
+        "n": 277224,
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -5169,17 +5169,17 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3150,
+        "value": 3251,
         "unit": "rating",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 3.5,
+        "value": 2.6,
         "unit": "%",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -5247,7 +5247,7 @@
         "icyveins": "A+",
         "method": "B",
         "wowhead": "B",
-        "archon": "S"
+        "archon": "A"
       }
     },
     "ptr": {
@@ -5290,19 +5290,19 @@
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 2954,
+        "value": 2966,
         "unit": "score",
-        "n": 217930,
-        "asOf": "2026-08-22"
+        "n": 277610,
+        "asOf": "2026-08-24"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 7.8,
+        "value": 7.9,
         "unit": "%",
-        "n": 217930,
-        "asOf": "2026-08-22"
+        "n": 277610,
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -5326,17 +5326,17 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3154,
+        "value": 3282,
         "unit": "rating",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 3.5,
+        "value": 3.3,
         "unit": "%",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -5498,13 +5498,13 @@
         "icyveins": "S",
         "method": "S",
         "wowhead": "S",
-        "archon": "C"
+        "archon": "B"
       },
       "mplus": {
         "icyveins": "B+",
         "method": "B",
         "wowhead": "C",
-        "archon": "C"
+        "archon": "B"
       }
     },
     "ptr": {
@@ -5547,19 +5547,19 @@
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 2791,
+        "value": 2873,
         "unit": "score",
-        "n": 79284,
-        "asOf": "2026-08-22"
+        "n": 93475,
+        "asOf": "2026-08-24"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 8.5,
+        "value": 8,
         "unit": "%",
-        "n": 79284,
-        "asOf": "2026-08-22"
+        "n": 93475,
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -5583,17 +5583,17 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3027,
+        "value": 3099,
         "unit": "rating",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.6,
+        "value": 0.3,
         "unit": "%",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -5673,7 +5673,7 @@
         "icyveins": "A",
         "method": "A",
         "wowhead": "B",
-        "archon": "A"
+        "archon": "S"
       },
       "mplus": {
         "icyveins": "B+",
@@ -5717,19 +5717,19 @@
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 2953,
+        "value": 2964,
         "unit": "score",
-        "n": 83629,
-        "asOf": "2026-08-22"
+        "n": 112155,
+        "asOf": "2026-08-24"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 9,
+        "value": 9.6,
         "unit": "%",
-        "n": 83629,
-        "asOf": "2026-08-22"
+        "n": 112155,
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -5753,17 +5753,17 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3037,
+        "value": 3190,
         "unit": "rating",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 1,
+        "value": 1.1,
         "unit": "%",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -5843,13 +5843,13 @@
         "icyveins": "B",
         "method": "A",
         "wowhead": "A",
-        "archon": "A"
+        "archon": "S"
       },
       "mplus": {
         "icyveins": "A",
         "method": "B",
         "wowhead": "B",
-        "archon": "S"
+        "archon": "A"
       }
     },
     "ptr": {
@@ -5890,10 +5890,10 @@
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 2950,
+        "value": 2960,
         "unit": "score",
-        "n": 93279,
-        "asOf": "2026-08-22"
+        "n": 114620,
+        "asOf": "2026-08-24"
       },
       {
         "source": "archon",
@@ -5901,8 +5901,8 @@
         "name": "Popularity",
         "value": 3.3,
         "unit": "%",
-        "n": 93279,
-        "asOf": "2026-08-22"
+        "n": 114620,
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -5926,17 +5926,17 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3060,
+        "value": 3170,
         "unit": "rating",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 1.5,
+        "value": 1.2,
         "unit": "%",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -6098,7 +6098,7 @@
         "icyveins": "A+",
         "method": "B",
         "wowhead": "B",
-        "archon": "A"
+        "archon": "S"
       },
       "mplus": {
         "icyveins": "A+",
@@ -6148,10 +6148,10 @@
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 2986,
+        "value": 3031,
         "unit": "score",
-        "n": 57999,
-        "asOf": "2026-08-22"
+        "n": 74584,
+        "asOf": "2026-08-24"
       },
       {
         "source": "archon",
@@ -6159,8 +6159,8 @@
         "name": "Popularity",
         "value": 2.1,
         "unit": "%",
-        "n": 57999,
-        "asOf": "2026-08-22"
+        "n": 74584,
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -6184,17 +6184,17 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3107,
+        "value": 3275,
         "unit": "rating",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 2.7,
+        "value": 3.1,
         "unit": "%",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "simulationcraft",
@@ -6396,10 +6396,10 @@
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 2977,
+        "value": 3011,
         "unit": "score",
-        "n": 41554,
-        "asOf": "2026-08-22"
+        "n": 50939,
+        "asOf": "2026-08-24"
       },
       {
         "source": "archon",
@@ -6407,8 +6407,8 @@
         "name": "Popularity",
         "value": 1.5,
         "unit": "%",
-        "n": 41554,
-        "asOf": "2026-08-22"
+        "n": 50939,
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -6432,17 +6432,17 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3124,
+        "value": 3280,
         "unit": "rating",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 2.1,
+        "value": 2.6,
         "unit": "%",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "simulationcraft",
@@ -6600,7 +6600,7 @@
         "icyveins": "A+",
         "method": "B",
         "wowhead": "B",
-        "archon": "S"
+        "archon": "A"
       }
     },
     "ptr": {
@@ -6645,19 +6645,19 @@
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 2968,
+        "value": 2981,
         "unit": "score",
-        "n": 83972,
-        "asOf": "2026-08-22"
+        "n": 103047,
+        "asOf": "2026-08-24"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 3,
+        "value": 2.9,
         "unit": "%",
-        "n": 83972,
-        "asOf": "2026-08-22"
+        "n": 103047,
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -6681,17 +6681,17 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3118,
+        "value": 3251,
         "unit": "rating",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 2.2,
+        "value": 2,
         "unit": "%",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -6898,19 +6898,19 @@
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 2972,
+        "value": 3005,
         "unit": "score",
-        "n": 232272,
-        "asOf": "2026-08-22"
+        "n": 294033,
+        "asOf": "2026-08-24"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 8.3,
+        "value": 8.4,
         "unit": "%",
-        "n": 232272,
-        "asOf": "2026-08-22"
+        "n": 294033,
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -6934,17 +6934,17 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3169,
+        "value": 3300,
         "unit": "rating",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 5,
+        "value": 5.3,
         "unit": "%",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -7106,13 +7106,13 @@
         "icyveins": "A",
         "method": "C",
         "wowhead": "B",
-        "archon": "B"
+        "archon": "C"
       },
       "mplus": {
         "icyveins": "A+",
         "method": "B",
         "wowhead": "B",
-        "archon": "S"
+        "archon": "A"
       }
     },
     "ptr": {
@@ -7155,10 +7155,10 @@
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 2955,
+        "value": 2966,
         "unit": "score",
-        "n": 55922,
-        "asOf": "2026-08-22"
+        "n": 69509,
+        "asOf": "2026-08-24"
       },
       {
         "source": "archon",
@@ -7166,8 +7166,8 @@
         "name": "Popularity",
         "value": 2,
         "unit": "%",
-        "n": 55922,
-        "asOf": "2026-08-22"
+        "n": 69509,
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -7191,17 +7191,17 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3066,
+        "value": 3207,
         "unit": "rating",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 1.1,
+        "value": 1,
         "unit": "%",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -7414,10 +7414,10 @@
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 2973,
+        "value": 2993,
         "unit": "score",
-        "n": 281868,
-        "asOf": "2026-08-22"
+        "n": 352890,
+        "asOf": "2026-08-24"
       },
       {
         "source": "archon",
@@ -7425,8 +7425,8 @@
         "name": "Popularity",
         "value": 30.3,
         "unit": "%",
-        "n": 281868,
-        "asOf": "2026-08-22"
+        "n": 352890,
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -7450,17 +7450,17 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3223,
+        "value": 3344,
         "unit": "rating",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 8.9,
+        "value": 8.5,
         "unit": "%",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -7540,7 +7540,7 @@
         "icyveins": "B",
         "method": "B",
         "wowhead": "B",
-        "archon": "C"
+        "archon": null
       },
       "mplus": {
         "icyveins": "B",
@@ -7585,10 +7585,10 @@
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 2753,
+        "value": 2804,
         "unit": "score",
-        "n": 20195,
-        "asOf": "2026-08-22"
+        "n": 24803,
+        "asOf": "2026-08-24"
       },
       {
         "source": "archon",
@@ -7596,8 +7596,8 @@
         "name": "Popularity",
         "value": 0.7,
         "unit": "%",
-        "n": 20195,
-        "asOf": "2026-08-22"
+        "n": 24803,
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -7621,9 +7621,9 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 2838,
+        "value": 2737,
         "unit": "rating",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "mythicstats",
@@ -7631,7 +7631,7 @@
         "name": "Top-2000 keys representation",
         "value": 0,
         "unit": "%",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -7792,13 +7792,13 @@
         "icyveins": "B",
         "method": "B",
         "wowhead": "B",
-        "archon": "B"
+        "archon": "A"
       },
       "mplus": {
         "icyveins": "A",
         "method": "B",
         "wowhead": "B",
-        "archon": "S"
+        "archon": "A"
       }
     },
     "ptr": null,
@@ -7825,19 +7825,19 @@
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 2945,
+        "value": 2956,
         "unit": "score",
-        "n": 125548,
-        "asOf": "2026-08-22"
+        "n": 159940,
+        "asOf": "2026-08-24"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 4.5,
+        "value": 4.6,
         "unit": "%",
-        "n": 125548,
-        "asOf": "2026-08-22"
+        "n": 159940,
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -7861,17 +7861,17 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3045,
+        "value": 3157,
         "unit": "rating",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 1.3,
+        "value": 1.1,
         "unit": "%",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -8032,7 +8032,7 @@
         "icyveins": "A+",
         "method": "A",
         "wowhead": "A",
-        "archon": "A"
+        "archon": "S"
       },
       "mplus": {
         "icyveins": "A",
@@ -8077,19 +8077,19 @@
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 2848,
+        "value": 2932,
         "unit": "score",
-        "n": 57711,
-        "asOf": "2026-08-22"
+        "n": 69180,
+        "asOf": "2026-08-24"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 2.1,
+        "value": 2,
         "unit": "%",
-        "n": 57711,
-        "asOf": "2026-08-22"
+        "n": 69180,
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -8113,17 +8113,17 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 2976,
+        "value": 3069,
         "unit": "rating",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.4,
+        "value": 0.3,
         "unit": "%",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -8341,10 +8341,10 @@
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 2985,
+        "value": 3037,
         "unit": "score",
-        "n": 324536,
-        "asOf": "2026-08-22"
+        "n": 404296,
+        "asOf": "2026-08-24"
       },
       {
         "source": "archon",
@@ -8352,8 +8352,8 @@
         "name": "Popularity",
         "value": 11.6,
         "unit": "%",
-        "n": 324536,
-        "asOf": "2026-08-22"
+        "n": 404296,
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -8377,17 +8377,17 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3229,
+        "value": 3367,
         "unit": "rating",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 11.7,
+        "value": 12.7,
         "unit": "%",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -8555,7 +8555,7 @@
         "icyveins": "A",
         "method": "B",
         "wowhead": "C",
-        "archon": "S"
+        "archon": "A"
       }
     },
     "ptr": {
@@ -8605,10 +8605,10 @@
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 2954,
+        "value": 2966,
         "unit": "score",
-        "n": 33115,
-        "asOf": "2026-08-22"
+        "n": 41966,
+        "asOf": "2026-08-24"
       },
       {
         "source": "archon",
@@ -8616,8 +8616,8 @@
         "name": "Popularity",
         "value": 1.2,
         "unit": "%",
-        "n": 33115,
-        "asOf": "2026-08-22"
+        "n": 41966,
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -8641,17 +8641,17 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3024,
+        "value": 3159,
         "unit": "rating",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.7,
+        "value": 0.8,
         "unit": "%",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -8863,10 +8863,10 @@
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 2874,
+        "value": 2939,
         "unit": "score",
-        "n": 81178,
-        "asOf": "2026-08-22"
+        "n": 101889,
+        "asOf": "2026-08-24"
       },
       {
         "source": "archon",
@@ -8874,8 +8874,8 @@
         "name": "Popularity",
         "value": 8.7,
         "unit": "%",
-        "n": 81178,
-        "asOf": "2026-08-22"
+        "n": 101889,
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",
@@ -8899,17 +8899,17 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3027,
+        "value": 3147,
         "unit": "rating",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.6,
+        "value": 0.7,
         "unit": "%",
-        "asOf": "2026-08-22"
+        "asOf": "2026-08-24"
       },
       {
         "source": "warcraftlogs",

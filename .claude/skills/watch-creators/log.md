@@ -16,6 +16,77 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-24 (nightly) — 4 videos distilled: 14 takes + 14 metaNotes, the first distillation night in three
+
+**Discovery:** 44 channels polled (41 class-lane + 3 general), **every one HTTP 200 on the first
+attempt**, 0 feed errors, no backoff. Seen-set rebuilt from the four structured lanes (seen[] +
+skipped[] + videos[] + take/metaNote urls = **1,191 ids**), never from log prose. 660 feed entries
+-> **117 unseen inside the cycle bound 2026-06-18** (`Math.min` over ptr-builds.json, not an
+index), 0 unseen predating it.
+
+**Distilled** from the five pre-fetched transcripts (summary.json verdict "ok", 5/5 fetched):
+
+- **leak, `9XtfT9ka2B0`** "Survival Hunter is DOOMED" -> a raid take and an M+ take, both `nerf`.
+  His argument is a tier-set TIMING one and worth keeping straight: a now-fixed launch bug let
+  Survival pull catalyst charges off the 2-piece, so the competitive Survival logs already run
+  the S2 4-piece — meaning no week-two surge for it while the specs above it gain theirs *and*
+  take buffs in the same pass. Third worst in raid, second worst in M+, on his read.
+- **Obli, `R7kYD23sDQs`** -> Frost raid (`mixed`), Frost M+ (`buff`), Unholy M+ (`mixed`). He
+  prices the August 25 package at ~7.3% and welcomes it while saying it does not move Frost in a
+  raid tier he calls unfriendly to both DK specs; in keys he expects it to close the ~10% gap to
+  Unholy. The Unholy take is the Blightful-over-Rider consistency argument. **The dungeon name in
+  his log comparison was left out of the claim**: ASR renders it "Ultra Fangs", and writing a
+  mangled name as a name is exactly what the rule forbids — the numbers stand without it.
+- **YoDaTV, `1wxoNsiyCtM`** -> **nine** M+ takes, all inside his registered scope: Vengeance to
+  A+ and frontrunner for tank damage on the 24% mastery line, Blood DK still the tankiest tank
+  (he rejects the key-22 one-shot speculation outright), Guardian next after VDH on untapped
+  apex-talent potential, Retribution up from B to A+ on its tier-set buff, Brewmaster and
+  Protection Warrior and Protection Paladin left low, Arms and Holy Paladin held in the top
+  group. **Everything outside his scope was left undistilled** — his rogue, shaman, Windwalker,
+  mage, warlock, hunter, evoker, Mistweaver and Feral reads are substantive and none of them are
+  his to carry here.
+- **izen, `5m_K51fnwhc`** "FIRST Buffs & Nerfs of Season 2" -> **14 metaNotes**, era-framed
+  "Season 2 live", never "Season 2 PTR". Reads it as a pass aimed at the bottom (Frost DK, Havoc,
+  Survival, Affliction, Demonology), judges the three tank lines too small to matter, splits the
+  Resto Druid and Preservation packages as better for M+ than raid, and flags the 30% Rain of
+  Fire buff for an already-fine Destruction as the pass's curious one. His closing "why isn't
+  Arms/Arcane/Elemental nerfed, why isn't Mistweaver buffed" passage was NOT distilled: he is
+  voicing what players will ask, not stating a read.
+
+**Skipped (durable):** **Kalamazi `xg5sxI6LspI`** "HUGE Warlock Buffs Announced!" — 4,741 chunks,
+3h24m, and it is the unedited RWF-week **stream VOD of the same day** as `BdzA4HWaUSc`, whose
+edited version was distilled on 08-22 into four live Kalamazi takes. Every Warlock read in it is
+already carried and thinner here (Destro still his high-end M+ pick at t=5602, Rain of Fire the
+biggest M+ change at t=5627, Demo the pug pick at t=813, a passing raid line at t=1760).
+Distilling would duplicate one creator/spec/date/lens with a weaker source and force superseding
+a richer take with a poorer one. Recorded so nobody re-opens it: **redundant, not off-topic.**
+
+**Superseded 16 records, same lens only** — 12 takes (leak's 07-24 directional Survival read;
+Obli's 08-20 Frost "both" and 08-06 Unholy M+; one per YoDaTV spec) and 4 izen **general-lens**
+metaNotes (Frost DK 08-15, Havoc 08-06, Retribution 08-06, Affliction 07-09). His bracket-scoped
+08-16 M+ and 08-17 raid sets are a different lens and stay live. leak's second 07-24 take is a
+hero-tree mechanics note rather than a standing claim, and stays live.
+
+**Retired 3 to seen[] as durable SCOPE dismissals only** — `czPW0XwrzhQ` (Dalaran Gaming, "5v5
+1v1 Duels - PvP" in the title, and Havoc is outside his scope anyway), `Pq9NJVn-SQc` and
+`sb7LNHsCD2Q` (Supatease, "PVP Tier List" and "New PVP Enchant"). Each is a fact about the video.
+
+**Queued 2** for the next Supadata drain, keyword-filtered as the nightly lane requires against
+the 100-request monthly budget: `qG-So9pnRBQ` (MadSkillzzTV, healer M+ and raid on Holy Paladin
+and Preservation — the thin lane) and `3E_EY7ULmkw` (Dalaran Gaming, the August 25 patch notes).
+Guide-shaped uploads were deliberately NOT queued even where the title tempts — Megasett's
+"Mistweaver 12.1 Raid Guide", LBNinja7's Mistweaver raid guide, Musguete's "Assassination Rogue
+is Broken! Season 2 Guide" (its description is explicit how-to-play) — because guide content
+yields no take by the standing rule and the queue is drained by the paid API. Two Supatease
+uploads ("THE NEW META IS COMING", "I Was Wrong About Warrior") were left UNSEEN rather than
+queued or retired: both have a media:description that merely repeats the title, the clip shape,
+and his last two verified transcripts were both PvP-framed. The other ~110 unseen stay unseen on
+purpose, so the next run reconsiders every one of them.
+
+**`latest` advanced** for Obli, leak, YoDaTV (6 class entries, one channel) and izen — each to a
+video THIS run distilled. yt-dlp was not invoked at all: the settled 2026-07-17 datacenter bot
+wall makes it useless from a runner, and nothing was installed or upgraded.
+
 ## 2026-08-23 (local) — the residential yt-dlp caption lane is 429-BLOCKED; 5 queued videos left queued, 0 distilled
 
 **New transport finding, and it matters because draining the queue from a residential IP is the

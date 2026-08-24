@@ -3153,7 +3153,7 @@
       "patchContext": "12.1 PTR (2026-07-31 build) — Season 2 M+ tier list update",
       "url": "https://youtu.be/9cnTo1yK3C8?t=769",
       "claim": "A tier alongside Prot Warrior: he says both can definitely survive the keys, but they require noticeably more healing than Blood DK and have to work harder while doing less damage, which is what keeps them a row below the tanks he would build a comp around.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Warrior",
@@ -3619,7 +3619,8 @@
       "bracket": "mplus",
       "patchContext": "12.1 PTR — Season 2 Vengeance DH Mythic+ guide",
       "url": "https://youtu.be/duIjLdAU3HQ?t=5",
-      "claim": "Opening his Season 2 Vengeance guide he calls the spec 'looking really strong going into next season' on the strength of its damage and its raid buff, but explicitly declines to call it the meta tank because its defensives are RNG-dependent. The damage read rests on Annihilator, which he recommends outright over Aldrachi: he rates the two about equal defensively and close on Metamorphosis uptime, so Annihilator's higher damage decides it. He flags that the current Annihilator rotation runs on a bug — holding Spirit Bomb and casting it into Soul Cleave on the same Voidfall proc fires six meteors instead of three — which makes Spirit Bomb otherwise unused, and he notes nobody has pushed high keys as VDH yet so the build is unsettled. His two practical Season 2 warnings are that Fiery Brand and Metamorphosis are both offensive and defensive buttons that cannot be spent purely for damage in keys, and that the Sigil-of-Flame-centred tier set makes trash gathering awkward because a partial-hit sigil is a large damage loss."
+      "claim": "Opening his Season 2 Vengeance guide he calls the spec 'looking really strong going into next season' on the strength of its damage and its raid buff, but explicitly declines to call it the meta tank because its defensives are RNG-dependent. The damage read rests on Annihilator, which he recommends outright over Aldrachi: he rates the two about equal defensively and close on Metamorphosis uptime, so Annihilator's higher damage decides it. He flags that the current Annihilator rotation runs on a bug — holding Spirit Bomb and casting it into Soul Cleave on the same Voidfall proc fires six meteors instead of three — which makes Spirit Bomb otherwise unused, and he notes nobody has pushed high keys as VDH yet so the build is unsettled. His two practical Season 2 warnings are that Fiery Brand and Metamorphosis are both offensive and defensive buttons that cannot be spent purely for damage in keys, and that the Sigil-of-Flame-centred tier set makes trash gathering awkward because a partial-hit sigil is a large damage loss.",
+      "superseded": true
     },
     {
       "class": "Druid",
@@ -3764,7 +3765,7 @@
       "patchContext": "12.1 PTR — Blood DK discussion with a guest; the DPS-DK consequence is Obli's own read",
       "url": "https://youtu.be/gIgTCFhLyig?t=68",
       "claim": "Same read as for Frost, stated by Obli in the same breath. Blood DK brings no raid buff and its only real utility is Death Grip, so an Unholy DK in a group that already fields a Blood DK loses a lot of its value to grip redundancy — he says bringing Blood alienates the other DKs. He then says that in M+ it does not matter how good Unholy looks, because Blood is strong enough on both offence and defence that placing a DPS DK becomes hard when Blood is performing this well. He expects Blood to be nerfed for raid overperformance with keys caught in the blast, but the point about Unholy is displacement rather than tuning. On the raid side he adds that in a Race to World First he cannot see DPS DKs being brought beyond one at most — a world-first roster observation, not a general raid verdict.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Shaman",
@@ -3933,7 +3934,7 @@
       "claim": "He welcomes Divine Storm's 10% buff as small but needed and most useful in AoE, then reports that Retribution did not feel the best in his PTR keys — his abilities, particularly Final Verdict and Divine Storm on Herald, did not feel like they were doing anything, though he caveats that his groups and pull sizes were poor. He reads single target as feeling pretty good with the tier set changes and AoE as the weak side, rates Templar ahead of Herald in both, and says Herald is not fun in M+ because the tier set adds yet another button to a build that already has more globals' worth of priority abilities than it can press."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Hunter",
       "spec": "Survival",
       "creator": "leak",
@@ -4921,7 +4922,7 @@
       "patchContext": "12.1 PTR - a dedicated argument that Season 2 Protection Paladin is worse than Season 1 for Mythic+, built on live-log Sentinel uptime rather than the notes (supersedes his 08-03 M+ guide read)",
       "url": "https://youtu.be/z0weFwfFuSQ?t=225",
       "claim": "He argues against the widespread expectation that Protection Paladin is the M+ meta tank if Blood DK is not, saying flatly that it will not be Paladin and that Season 1 Prot Paladin is actually stronger than Season 2. The evidence he leans on is Sentinel uptime measured off logs rather than tooltips: a Season 1 log of his own shows 38.4% uptime, while Season 2 logs filtered to after August 1 (past the PTR nerfs) show a spread of roughly 25% to low-30s across several different Paladins. He attributes the drop to two stacked changes - losing Sanctified Wrath cuts Sentinel's base duration from 15 to 12 seconds despite the notes describing it as extended, and Reflection of Radiance was significantly reduced, so Holy Bulwark resets extend it less. His framing of why a 6-8 point uptime loss matters more than it looks: Season 1 coverage was roughly 48 of every 60 seconds, leaving only 12 seconds to survive uncovered, so adding two to three uncovered seconds is about a 20% increase in the time you must kite, beg an external, or CC through. He credits the offsetting gains honestly - a baseline 10% cooldown reduction on Blessed Hammer that he says feels very nice inside cooldowns, a Divine Guidance quality-of-life hotfix, and damage moved into Shield of the Righteous - but judges the minor self-healing buffs a wash against the universal 25% tank health increase, and concludes the defensive uptime loss outweighs the package.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Demon Hunter",
@@ -5101,7 +5102,7 @@
       "patchContext": "12.1 PTR — Mythic+ tier list update after the August 18 tuning pass (supersedes his 08-08 tier list read)",
       "url": "https://youtu.be/shGSOb8YoMQ?t=12",
       "claim": "He works through the Blood DK line of the August 18 notes and concludes the nerf does not move the spec. Physical Strength is cut 6% and Transfusion drops from a tooltip 20% to 5, though he flags the in-game tooltip is believed wrong and the real current value is 10, which would make the pass roughly a 3-4% damage nerf. He stresses both changes are San'layn-lane only, so Deathbringer is completely unaffected. His verdict is that Blood DK's damage lead over the other tanks was far larger than 3-4% and its survivability is also well ahead even in the highest keys, so he does not see this moving the needle. He keeps it in his top group, describing Blood DK as doing the best surviving of any tank and the best damage, and later frames the whole tank tier around it — every tank that is not Blood DK is in a similar boat of adequate damage and adequate survivability while missing something.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Druid",
@@ -5113,7 +5114,7 @@
       "patchContext": "12.1 PTR — Mythic+ tier list update after the August 18 tuning pass (supersedes his 08-08 tier list read)",
       "url": "https://youtu.be/shGSOb8YoMQ?t=454",
       "claim": "He names Guardian the best tank after Blood DK. His argument is comparative: Guardian's damage does not look good in isolation, but measured against the other tanks rather than against Blood DK — and counting Mark of the Wild — he calls the damage perfectly fine, with great survivability alongside it. Mark of the Wild is the deciding factor in his framing, and he concludes that if the tank is not Blood DK it is probably bear, mainly for that raid buff. He places it above the remaining tanks, which he groups together in A tier as adequate but each missing something.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Paladin",
@@ -5125,7 +5126,7 @@
       "patchContext": "12.1 PTR — Mythic+ tier list update after the August 18 tuning pass (supersedes his 08-08 tier list read)",
       "url": "https://youtu.be/shGSOb8YoMQ?t=304",
       "claim": "Holy Paladin takes no changes in the pass and he keeps it in his top group, stating flatly that it does the best healing. He builds his S+ tier around four specs he is confident are the best in the game, Holy Paladin among them, while explicitly declining to call that group the meta composition — his hesitation is that Subtlety Rogue may demand a Restoration Shaman alongside it, which would push Holy Paladin out of the comp even though he rates it the strongest healer. He returns to this as the one swap he would most likely make.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Paladin",
@@ -5137,7 +5138,7 @@
       "patchContext": "12.1 PTR — Mythic+ tier list update after the August 18 tuning pass (supersedes his 08-08 tier list read)",
       "url": "https://youtu.be/shGSOb8YoMQ?t=542",
       "claim": "Retribution stays in his B tier, untouched by the pass. He characterises B tier as specs that are broadly fine but each suffer from one specific shortfall, and names Retribution's as low single-target damage. He does not revisit it further; the placement is unchanged from his previous list rather than a reaction to any tuning.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Warrior",
@@ -5149,7 +5150,7 @@
       "patchContext": "12.1 PTR — Mythic+ tier list update after the August 18 tuning pass (supersedes his 08-08 tier list read)",
       "url": "https://youtu.be/shGSOb8YoMQ?t=268",
       "claim": "He reads the Arms change as a bug fix worth roughly a 3% damage nerf and judges it insufficient to move the spec, saying he is pretty sure it is still one of the best specs — and pointedly, that this holds especially because everything near it got nerfed. He keeps it in his top group as one of the two specs providing the best damage profile.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Warrior",
@@ -5161,7 +5162,7 @@
       "patchContext": "12.1 PTR — Mythic+ tier list update after the August 18 tuning pass (supersedes his 08-08 tier list read)",
       "url": "https://youtu.be/shGSOb8YoMQ?t=480",
       "claim": "He is openly uncertain on Protection Warrior, saying it definitely maybe does not belong in A tier. His stated reservation is that spell reflect is not good this season, but he has already seen a few examples where spell reflect turned out to be really good, and on that basis he leaves it in A rather than dropping it — placing it beside Brewmaster within the tier. It sits inside his general tank verdict that every tank other than Blood DK has adequate damage and survivability while missing something.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Hunter",
@@ -5652,7 +5653,7 @@
       "bracket": "both",
       "patchContext": "Season 2 live — his reaction to the launch tier-set nerf, argued as a before/after against his own June PTR logs at comparable item level; he shows both all-boss raid damage statistics and a live Mythic+ key.",
       "url": "https://youtu.be/nmErWeN4woE?t=13",
-      "superseded": false,
+      "superseded": true,
       "claim": "Obli reads the Season 2 launch tuning as a severe net nerf to Frost: the tier set was cut by half and the roughly 9% compensating damage does not come close to covering it. His case is a before/after against his own June PTR logs at comparable item level — average Obliterate casts roughly halved (about 128k down to 62k in a key, which he generously estimates at around 80k in a raid group), Breath of Sindragosa down from about 451k to 170k per cast, Frost and Fury from about 585k to 364k, and Reaper's Mark from about 500k to 289k — with Howling Blast the only ability gaining meaningfully (about 50k to 80k). He shows Frost near the bottom of the all-boss damage statistics at both the 99th and 90th percentiles. He accepts the AoE profile has potential and will improve once the set is acquired, which he puts at roughly a 13% DPS gain, and places the entire problem on single target, asking specifically for the PTR Obliterate change to be reverted rather than for further compensation elsewhere."
     },
     {
@@ -5960,6 +5961,174 @@
       "patchContext": "Season 2 live — his reaction to the announced August 25 buff to the Retribution 4-piece Divine Arbiter, demonstrated on a target dummy",
       "url": "https://youtu.be/y77i8M9dCSw?t=501",
       "claim": "He frames the 4-piece buff — Divine Arbiter main target +150%, secondary +75% — as the fix Retribution asked for and got inside the first week, and as the change that finally makes the set worth using: on single target under Templar the old gain was too small to justify the rotational mental load, and under Herald in AoE it was not worth pressing at all. With the buff he expects Divine Arbiter to end up one of Retribution's better tier sets by damage, since the 2-piece is already strong, while conceding that players who dislike what the set asks for — pressing Divine Storm on single target and Final Verdict while AoEing — will still dislike it but will press it now that the button is worth pressing. He is deliberate about magnitude: this will only be a moderate raid buff and only a moderate Mythic+ buff, no sims have been run on it yet, and combined with the 6% recently returned to the spec it puts Retribution about where you would normally expect to find it — pretty good in raid and pretty good in Mythic+, explicitly not near the very top. He leaves two items open: the target count above which the Arbiter proc stops being worth spending is unknown until it is simulated, and the proc cannot currently be tracked on the default Blizzard UI, which he reports as broken at least on the PTR."
+    },
+    {
+      "class": "Hunter",
+      "spec": "Survival",
+      "creator": "leak",
+      "date": "2026-08-22",
+      "sentiment": "nerf",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — his read of Survival Hunter’s first-week standing against the announced August 25 tuning pass (a 4% all-damage buff), argued from live logs",
+      "url": "https://youtu.be/9XtfT9ka2B0?t=39",
+      "claim": "He judges the announced 4% all-damage buff nowhere near enough and expects Survival to lose ground in raid in spite of it. His argument is about tier-set timing: a now-fixed launch bug let Survival obtain catalyst charges from the 2-piece, so the competitive Survival logs already run the Season 2 4-piece while many other specs will not have theirs until week two — and Survival is nonetheless at the bottom of the raid results, which he puts at third worst. That means no week-two tier-set surge is coming for it while the specs above it both gain their sets and take buffs in this same pass. On the fight profile he says Survival is not good at anything in this raid: it cannot spray cleave, its two-target damage is awful, it lacks meaningful execute and it has zero burst, all of which the tier’s bosses ask for — and he names the twin-snake fight specifically as one where Wildfire Bomb cannot hit both targets, making Survival the worst spec in the game there. He puts no figure on what would be enough, saying only that even 8% would barely change things.",
+      "superseded": false
+    },
+    {
+      "class": "Hunter",
+      "spec": "Survival",
+      "creator": "leak",
+      "date": "2026-08-22",
+      "sentiment": "nerf",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his read of Survival Hunter’s first-week standing against the announced August 25 tuning pass (a 4% all-damage buff), argued from live logs",
+      "url": "https://youtu.be/9XtfT9ka2B0?t=105",
+      "claim": "He calls the Mythic+ picture even more dire than the raid one: Survival is the second worst spec in the game in keys while already holding its Season 2 tier set, and the specs above it are being buffed by more than its 4% in the same pass. His conclusion is relative rather than absolute — the buff does not move Survival’s position, and as the specs above it collect their own tier sets at the next reset he expects Survival to fall further down the rankings rather than climb.",
+      "superseded": false
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Frost",
+      "creator": "Obli",
+      "date": "2026-08-23",
+      "sentiment": "mixed",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — his follow-up to the August 20 launch read, reacting to the announced August 25 Frost tuning after about a week of playing both DK specs on a 2-piece",
+      "url": "https://youtu.be/R7kYD23sDQs?t=99",
+      "claim": "He treats the August 25 package — 6% to all ability and melee damage plus 15% on Obliterate, which he prices at about 7.3% overall — as a genuine but modest improvement that does not change Frost’s raid standing. He welcomes the Obliterate line specifically, saying he had asked for it because the ability’s damage was pitiful, and calls the size better than the gradual 4% buffs of last season, but says it does not change a lot and that he could do with one more small buff before the spec would be fine. His raid frame is that the tier is unfriendly to both DK specs and that neither Frost nor Unholy is doing stellar in it; he also notes a bug on the raid’s final boss that stops Necrotic Coils from hitting the heart, which is part of why he would advise Frost over Unholy for that progression. His objection is to the pattern rather than the size: he says Blizzard nerfs Frost to the ground at the start of a season out of fear it will be too strong and then creeps it back week by week, when it seemed fine on the PTR.",
+      "superseded": false
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Frost",
+      "creator": "Obli",
+      "date": "2026-08-23",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his follow-up to the August 20 launch read, reacting to the announced August 25 Frost tuning after about a week of playing both DK specs on a 2-piece",
+      "url": "https://youtu.be/R7kYD23sDQs?t=177",
+      "claim": "In Mythic+ he reads the same package as a real gain. He says Frost is not that far behind in keys to begin with — on his own logs, with only the 2-piece, he puts it roughly 10% behind Unholy at about 280k against 300k — and that this is single-target tuning of exactly the kind that closes that gap, so he expects Frost to creep towards Unholy in keys and to see noticeably more Frost play as a result. He calls it a very good change and a step in the right direction without claiming it makes Frost strong.",
+      "superseded": false
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "creator": "Obli",
+      "date": "2026-08-23",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his follow-up to the August 20 launch read, reacting to the announced August 25 Frost tuning after about a week of playing both DK specs on a 2-piece",
+      "url": "https://youtu.be/R7kYD23sDQs?t=152",
+      "claim": "Speaking to the Unholy side of the same comparison, he says Unholy is clearly ahead of Frost right now — his own logs put Frost about 10% behind — and that the Blightful build is the one to play: it sits roughly where the top Rider logs sit, but it is much harder to do badly with, because its damage is good and it carries far less RNG, where Rider depends on constant uptime and on spawning riders through the fight. He does not read that as Unholy being strong in absolute terms — he says neither DK spec is doing stellar this tier — and Unholy takes no tuning at all in the August 25 pass.",
+      "superseded": false
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Vengeance",
+      "creator": "YoDaTV",
+      "date": "2026-08-22",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his Mythic+ tier-list update after the announced August 25 tuning pass, week one of the season",
+      "url": "https://youtu.be/1wxoNsiyCtM?t=42",
+      "claim": "He prices the 24% Mastery: Fel Blood increase at about 4 to 5% overall DPS by his own napkin math, plus a very small amount of survivability, and calls that pretty good for Vengeance. On the back of it he places Vengeance in A+ and names it the frontrunner for tank damage: the best tank for damage output after this buff if Chaos Brand is counted, and close to Blood DK if it is not. He adds that the funnel-focused build gives the most insane funnel of any tank while Annihilator does high overall damage, and that Chaos Brand alone is worth a lot of damage to a caster comp that has no other Demon Hunter.",
+      "superseded": false
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Blood",
+      "creator": "YoDaTV",
+      "date": "2026-08-22",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his Mythic+ tier-list update after the announced August 25 tuning pass, week one of the season",
+      "url": "https://youtu.be/1wxoNsiyCtM?t=160",
+      "claim": "He keeps Blood DK in his top group of Mythic+ specs and calls it still the tankiest of the tanks. He addresses head-on the speculation that Blood falls apart once keys reach the low twenties and rejects it: it will not be one-shot at 21, he does not put much stock in the idea, and he sees no reason a spec would suddenly start getting one-shot a single key level higher while other tanks became tankier at the same time. Because he reads it as the tankiest tank at any key level, it stays in his S+ group.",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Guardian",
+      "creator": "YoDaTV",
+      "date": "2026-08-22",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his Mythic+ tier-list update after the announced August 25 tuning pass, week one of the season",
+      "url": "https://youtu.be/1wxoNsiyCtM?t=375",
+      "claim": "He places Guardian just below Vengeance in A+ and calls it the next tank after VDH, at almost the same level. His case is utility plus untapped potential: it is very good at providing Mark of the Wild, it is very tanky inside cooldowns, and he thinks most players are not yet playing around the reworked apex talent properly, so the spec has room nobody has really explored. What keeps it a step below Vengeance is damage — he does not rate its output as highly as Vengeance’s or Blood DK’s.",
+      "superseded": false
+    },
+    {
+      "class": "Monk",
+      "spec": "Brewmaster",
+      "creator": "YoDaTV",
+      "date": "2026-08-22",
+      "sentiment": "nerf",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his Mythic+ tier-list update after the announced August 25 tuning pass, week one of the season",
+      "url": "https://youtu.be/1wxoNsiyCtM?t=120",
+      "claim": "He is dismissive of the Brewmaster line in the pass: a very small 3% damage buff and an absorb increase on Celestial Brew and Celestial Infusion that he says might as well not have been written, because you are not going to feel it — he wanted the cooldown reduced again instead, for more free uses. He leaves Brewmaster near the bottom of his list and says it and Protection Warrior are probably not having the best seasons, singling out the doubled cooldown on Celestial Infusion as not called for and as what makes the spec feel awkward to play, while acknowledging that people are still pushing high keys on it.",
+      "superseded": false
+    },
+    {
+      "class": "Warrior",
+      "spec": "Protection",
+      "creator": "YoDaTV",
+      "date": "2026-08-22",
+      "sentiment": "nerf",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his Mythic+ tier-list update after the announced August 25 tuning pass, week one of the season",
+      "url": "https://youtu.be/1wxoNsiyCtM?t=155",
+      "claim": "He dismisses the Protection Warrior line as the smallest buff of all time and leaves the spec near the bottom of his tier list alongside Brewmaster, saying the two are probably not having the best seasons. He offers no revised case for it in this video beyond that placement.",
+      "superseded": false
+    },
+    {
+      "class": "Warrior",
+      "spec": "Arms",
+      "creator": "YoDaTV",
+      "date": "2026-08-22",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his Mythic+ tier-list update after the announced August 25 tuning pass, week one of the season",
+      "url": "https://youtu.be/1wxoNsiyCtM?t=203",
+      "claim": "Arms stays in his top group of Mythic+ specs. He notes that Arms took a small nerf in the last patch but says he still thinks it will be really good, crediting a strong damage profile and strong overall DPS in keys.",
+      "superseded": false
+    },
+    {
+      "class": "Paladin",
+      "spec": "Protection",
+      "creator": "YoDaTV",
+      "date": "2026-08-22",
+      "sentiment": "nerf",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his Mythic+ tier-list update after the announced August 25 tuning pass, week one of the season",
+      "url": "https://youtu.be/1wxoNsiyCtM?t=482",
+      "claim": "He puts Protection Paladin in A and restates his standing objection to the widespread expectation that it is the second-best tank of the season: he simply does not believe it after the Reflection of Radiance nerfs, says flatly that he does not think it is very good right now, and invites disagreement rather than arguing it further.",
+      "superseded": false
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "creator": "YoDaTV",
+      "date": "2026-08-22",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his Mythic+ tier-list update after the announced August 25 tuning pass, week one of the season",
+      "url": "https://youtu.be/1wxoNsiyCtM?t=193",
+      "claim": "Holy Paladin takes no changes in the pass and he keeps it in S+, saying it still does the best healing of all the healers in his opinion. The only movement he makes around it is to put the two healers buffed in this pass a step above the rest of the field but still below Holy Paladin.",
+      "superseded": false
+    },
+    {
+      "class": "Paladin",
+      "spec": "Retribution",
+      "creator": "YoDaTV",
+      "date": "2026-08-22",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his Mythic+ tier-list update after the announced August 25 tuning pass, week one of the season",
+      "url": "https://youtu.be/1wxoNsiyCtM?t=141",
+      "claim": "He calls the Retribution tier-set change a huge buff and moves the spec up into A+ on the strength of it. He bounds what it does: he does not expect a massive overall damage increase, but says it at least makes the 4-piece something you play around in AoE now, which he counts as a good thing in itself.",
+      "superseded": false
     }
   ],
   "metaNotes": [
@@ -6511,7 +6680,7 @@
       "note": "Reads Affliction as having been around top-5 M+ damage, but largely via a degenerate tier-set interaction that let players skip casting Unstable Affliction entirely; the effectiveness cut from 50% to 20% closes that loophole and forces the real rotation back.",
       "patchContext": "Season 2 PTR — M+ outlook",
       "url": "https://youtu.be/o7GiLqBNja8?t=1249",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Warlock",
@@ -7666,7 +7835,7 @@
       "note": "His Ret mentions pull both ways and the honest read is unsettled. He lists Ret among the melee physical damage dealers a comp can look at, but also as a spec that might have been played and is not, and finally puts it in the clump of melee that could become more relevant with a few more buffs — with at least three more rounds of tuning expected before the season starts, on the every-five-days cadence he counts from the patch's release.",
       "patchContext": "Season 2 PTR — M+ outlook",
       "url": "https://youtu.be/g0adl6lXPQM?t=966",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Demon Hunter",
@@ -7677,7 +7846,7 @@
       "note": "In the same on-the-bubble melee clump as Ret and the DK specs: not a current pick, plausibly relevant with a few more buffs. Earlier in the video he notes Havoc was the sort of option a melee comp would have reached for before the Resto Shaman buffs reshaped it.",
       "patchContext": "Season 2 PTR — M+ outlook",
       "url": "https://youtu.be/g0adl6lXPQM?t=966",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Death Knight",
@@ -8468,7 +8637,7 @@
       "note": "He opens on Blood Death Knight as the predicted overpowered tank of Season 2 and asks whether the final pass addresses it. His answer is essentially no. Looking at the highest keys reachable on the PTR, around 20 and above, he describes the tank spread as already skewed, and says squishing it to the post-change state — Blood buffed while Protection Paladin is nerfed — makes it redder still. His key point is about what was nerfed rather than whether: Blood's problem was not only overall power but damage, which he calls one of the highest among tanks, and the cuts land almost entirely there, with less damage on Transfusion for Dancing Rune Weapon and the loss of a near-permanent 4% strength buff from Visceral Strength when playing the San'layn side. Defensiveness and the extra defensive tools gained over the season are untouched, which he reads as the best outcome a tank could have asked for in a final pass."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Death Knight",
       "spec": "Frost",
       "creator": "izen (Izenhart)",
@@ -9898,6 +10067,174 @@
       "patchContext": "Season 2 live — week-one Mythic+ first impressions, checking the season's early representation against his own pre-season predictions (about four days into NA, three into EU)",
       "url": "https://youtu.be/OyIp5Ua0Qo4?t=460",
       "note": "He flags Demonology as a case where early representation overstates the spec: he placed the Warlock specs reasonably low for the release because they were not doing too well, and although Demonology is technically in the top third of most played specs right now, he attributes that to Warlock being a reasonably popular class in a week where everyone has to run Mythic+ for gear. He expects Warlocks in general to lose representation as key levels rise, and does not revise the power placement."
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Frost",
+      "sentiment": "positive",
+      "bracket": "both",
+      "url": "https://youtu.be/5m_K51fnwhc?t=50",
+      "note": "He reads the Frost DK line as a good and welcome buff for the size of it this early in a season. His starting point is that the pre-launch pass meant to compensate the tier-set nerf ended up a 4 to 5% net nerf rather than a buff, and that Frost has been at the bottom of the raid results and not having a good time in Mythic+ either. He rates the 6% all-damage line as the substantive part and the 15% Obliterate increase at only about 1%, because Obliterate lost a lot of value this patch next to newly buffed tools like Remorseless Winter and Howling Blast — but says it is still fine for Frost.",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-22",
+      "patchContext": "Season 2 live — the season’s first weekly-reset balance tuning (the announced August 25 pass), read against the first days of live results, which he stresses are Heroic and mostly without completed tier sets",
+      "superseded": false
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Havoc",
+      "sentiment": "negative",
+      "bracket": "both",
+      "url": "https://youtu.be/5m_K51fnwhc?t=120",
+      "note": "He is unimpressed by the 3% all-damage buff, calling it not particularly good. He grants Havoc was doing fine — slightly better than Frost DK on damage, with slightly the operative word — and reads 3% as too small in two directions at once: Frost DK will now pass it easily, and it still leaves Havoc not really competing with its in-class rival Devourer.",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-22",
+      "patchContext": "Season 2 live — the season’s first weekly-reset balance tuning (the announced August 25 pass), read against the first days of live results, which he stresses are Heroic and mostly without completed tier sets",
+      "superseded": false
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Vengeance",
+      "sentiment": "mixed",
+      "bracket": "both",
+      "url": "https://youtu.be/5m_K51fnwhc?t=162",
+      "note": "He calls the 24% mastery increase a nice change overall but still somewhat small for the spec, and warns the headline number is misleading: Vengeance does not focus mastery because mastery is weak for it, and even after this change you would not shift your stat focus. What it practically buys is slightly better Demon Spikes effectiveness when you are chaining them through the most dangerous moments of a large pull. He adds that he was not expecting Vengeance to be one of the good tanks of this season in the first place.",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-22",
+      "patchContext": "Season 2 live — the season’s first weekly-reset balance tuning (the announced August 25 pass), read against the first days of live results, which he stresses are Heroic and mostly without completed tier sets",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Restoration",
+      "sentiment": "positive",
+      "bracket": "both",
+      "url": "https://youtu.be/5m_K51fnwhc?t=192",
+      "note": "He works the Restoration Druid block as mostly a shuffling of power that nets out a buff. His frame is that the significant Abundance nerf, now capping at five, killed the old pattern of spreading Rejuvenation across a dozen targets to fuel near-free guaranteed-crit Regrowths — pushing casts towards Regrowth and Nature’s Bounty, away from total Rejuvenation healing, which he found simultaneously boring and disappointing and which he could already see happening on a Druid without this season’s tier set. The pass answers it by buffing Rejuvenation and Germination 15% and Wild Growth on top of extending the tier set’s buff window, while nerfing Nature’s Bounty’s Regrowth splash by 10% — and he says the 15% increases against the 10% nerf already come out a buff before the tier-set extension is counted. He reads the Everbloom change back to five targets as a rebalance aimed at Mythic+, where six targets was effectively a nerf because keys only have five, with the per-target healing raised to compensate: a better change for Mythic+ than for the raid, and still a small buff in the raid.",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-22",
+      "patchContext": "Season 2 live — the season’s first weekly-reset balance tuning (the announced August 25 pass), read against the first days of live results, which he stresses are Heroic and mostly without completed tier sets",
+      "superseded": false
+    },
+    {
+      "class": "Evoker",
+      "spec": "Preservation",
+      "sentiment": "positive",
+      "bracket": "both",
+      "url": "https://youtu.be/5m_K51fnwhc?t=377",
+      "note": "He is surprised Preservation is buffed at all, since it was already doing quite fine in the early results and was one of the specs predicted to do well in the raid even before healers have their tier sets. He splits the package by bracket: the Verdant Embrace and Dream Simulacrum lines he calls pointless in the raid, because nobody plays with Dream Simulacrum and nobody cares about Verdant Embrace healing there, while in Mythic+ the extra Verdant Embrace spot healing does matter; the 20% Living Flame increase is good at all levels and will soon compound with the tier set, which hands out free Living Flames whenever essence bursts are consumed. His summary is a very good buff for Mythic+ and a small, minor increase for the raid, clearly aimed at the spec’s ever-weak single-target spot healing in keys.",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-22",
+      "patchContext": "Season 2 live — the season’s first weekly-reset balance tuning (the announced August 25 pass), read against the first days of live results, which he stresses are Heroic and mostly without completed tier sets",
+      "superseded": false
+    },
+    {
+      "class": "Hunter",
+      "spec": "Beast Mastery",
+      "sentiment": "positive",
+      "bracket": "both",
+      "url": "https://youtu.be/5m_K51fnwhc?t=452",
+      "note": "He frames the Beast Mastery changes as the spec’s mandatory AoE buff for the season — Wild Thrash to 300% above two targets from 200%, and Beast Cleave to 70% of damage dealt from 55% — and says they land on the right problem: Beast Mastery’s single target was fine next to its AoE, and it was the AoE that was lagging behind.",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-22",
+      "patchContext": "Season 2 live — the season’s first weekly-reset balance tuning (the announced August 25 pass), read against the first days of live results, which he stresses are Heroic and mostly without completed tier sets",
+      "superseded": false
+    },
+    {
+      "class": "Hunter",
+      "spec": "Survival",
+      "sentiment": "negative",
+      "bracket": "both",
+      "url": "https://youtu.be/5m_K51fnwhc?t=481",
+      "note": "He groups Survival with Frost DK and Havoc as one of the weakest performers in both the raid and Mythic+, and has nothing more to say about its 4% increase than that it is a flat buff — no argument that it repositions the spec.",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-22",
+      "patchContext": "Season 2 live — the season’s first weekly-reset balance tuning (the announced August 25 pass), read against the first days of live results, which he stresses are Heroic and mostly without completed tier sets",
+      "superseded": false
+    },
+    {
+      "class": "Mage",
+      "spec": "Frost",
+      "sentiment": "mixed",
+      "bracket": "both",
+      "url": "https://youtu.be/5m_K51fnwhc?t=508",
+      "note": "He reads the Frost Mage changes as a targeted AoE fix — Blizzard 10%, Shatter’s splash 10% and the Frostfire meteor 25% — for an area that has been weak, noting the previous change there was a nerf to its cleave and two-target damage. But he places the spec at the bottom of the overall results and argues it cannot expect to be bailed out by its tier set: measured as the damage increase gained going from Midnight into Season 2, the Frost Mage 4-piece is very average and lower than quite a few other specs.",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-22",
+      "patchContext": "Season 2 live — the season’s first weekly-reset balance tuning (the announced August 25 pass), read against the first days of live results, which he stresses are Heroic and mostly without completed tier sets",
+      "superseded": false
+    },
+    {
+      "class": "Monk",
+      "spec": "Brewmaster",
+      "sentiment": "negative",
+      "bracket": "mplus",
+      "url": "https://youtu.be/5m_K51fnwhc?t=563",
+      "note": "He calls the Brewmaster package weird and says it will not really fix much. Blizzard states the intent is to improve Celestial Brew as a defensive option, but he argues a 20% absorb increase is the wrong lever when the problem is availability: you would rather have the cooldown reduced so you can press it more often, and not being able to is what he thinks is making Brewmaster squishier than intended in Mythic+ right now. He places it as the second least-run tank in keys, just above Protection Warrior.",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-22",
+      "patchContext": "Season 2 live — the season’s first weekly-reset balance tuning (the announced August 25 pass), read against the first days of live results, which he stresses are Heroic and mostly without completed tier sets",
+      "superseded": false
+    },
+    {
+      "class": "Paladin",
+      "spec": "Retribution",
+      "sentiment": "positive",
+      "bracket": "both",
+      "url": "https://youtu.be/5m_K51fnwhc?t=617",
+      "note": "He notes this is one of the first and only tier-set buffs handed to a DPS spec in the pass — the 4-piece Divine Arbiter’s main and secondary target damage — and calls it well targeted, because Retribution’s expected tier-set power was right in the average against other DPS specs and this should make it one of the stronger tier-set increases, even though most of the spec’s power sits in the holy damage buff from the 2-piece rather than in the 4-piece’s own damage. He is careful about what changes immediately, since most Retribution players do not yet have the 4-piece they were just buffed on, and places the spec as doing fine — slightly better in the raid, middle of the pack in Mythic+.",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-22",
+      "patchContext": "Season 2 live — the season’s first weekly-reset balance tuning (the announced August 25 pass), read against the first days of live results, which he stresses are Heroic and mostly without completed tier sets",
+      "superseded": false
+    },
+    {
+      "class": "Warlock",
+      "spec": "Affliction",
+      "sentiment": "positive",
+      "bracket": "both",
+      "url": "https://youtu.be/5m_K51fnwhc?t=728",
+      "note": "He counts Affliction among the bottom specs in the raid and not doing well in Mythic+ either, and reads this pass as continuing a pattern of buffing the bottom. He discounts the Hellcaller lines because that is not what is being played, especially in Mythic+ where the pick is Soul Harvester, and prices the parts that do apply — Unstable Affliction 15%, Corruption 15%, Agony 20% — at roughly 3 to 4%, or about six-ish percent once the class-wide pet buff is added. He notes that is still slightly smaller than what Demonology gets.",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-22",
+      "patchContext": "Season 2 live — the season’s first weekly-reset balance tuning (the announced August 25 pass), read against the first days of live results, which he stresses are Heroic and mostly without completed tier sets",
+      "superseded": false
+    },
+    {
+      "class": "Warlock",
+      "spec": "Demonology",
+      "sentiment": "positive",
+      "bracket": "both",
+      "url": "https://youtu.be/5m_K51fnwhc?t=785",
+      "note": "He calls Demonology comfortably the most buffed of the three Warlock specs: Demonbolt and Shadow Bolt together are worth about 1.2%, and stacked with the 20% on Wild Imps, Dominion of Argus demons and Felguard plus 30% on Dreadstalkers he puts the package above 8%. He reads it as offsetting a structural problem rather than as a windfall — Demonology was among the specs gaining the lowest damage bonus from their tier set, so when most specs pick up a 4-piece at the next reset through loot or the catalyst, this buff mainly keeps Demonology level with them. He notes the spec was also doing poorly in the raid while looking considerably better in Mythic+ AoE.",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-22",
+      "patchContext": "Season 2 live — the season’s first weekly-reset balance tuning (the announced August 25 pass), read against the first days of live results, which he stresses are Heroic and mostly without completed tier sets",
+      "superseded": false
+    },
+    {
+      "class": "Warlock",
+      "spec": "Destruction",
+      "sentiment": "positive",
+      "bracket": "both",
+      "url": "https://youtu.be/5m_K51fnwhc?t=900",
+      "note": "He flags the Destruction line as the curious one: Blizzard framed the pass as increasing Affliction and Demonology throughput and then casually dropped a 30% Rain of Fire increase for Destruction, which was already doing fine in the raid as one of the bigger beneficiaries of the tier’s spread-cleave fights. Because Rain of Fire is not what Destruction presses on those raid fights, he reads the buff as landing almost entirely on Mythic+ AoE, where he calls it a pretty good increase for a spec that was not expected to do especially well in keys.",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-22",
+      "patchContext": "Season 2 live — the season’s first weekly-reset balance tuning (the announced August 25 pass), read against the first days of live results, which he stresses are Heroic and mostly without completed tier sets",
+      "superseded": false
+    },
+    {
+      "class": "Warrior",
+      "spec": "Protection",
+      "sentiment": "negative",
+      "bracket": "both",
+      "url": "https://youtu.be/5m_K51fnwhc?t=954",
+      "note": "He puts the Protection Warrior change in the same very small category as Vengeance’s and Brewmaster’s — 2% more magical damage reduction — and says it will not really change much for a spec that was, and still is, the least popular tank at the release of this season.",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-22",
+      "patchContext": "Season 2 live — the season’s first weekly-reset balance tuning (the announced August 25 pass), read against the first days of live results, which he stresses are Heroic and mostly without completed tier sets",
+      "superseded": false
     }
   ]
 }

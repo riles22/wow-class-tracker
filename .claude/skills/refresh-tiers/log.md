@@ -16,6 +16,49 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-24 (nightly) — ARCHON'S SEASON-2 RAID LISTS LAND; the raid consensus recomposes 3 -> 4 sources
+
+**The event the transition plan has been waiting for.** After three weeks of empty raid tier
+lists, Archon's Mythic Venomous Abyss pages returned data tonight, so `seasonVerified`
+advanced **s1 -> s2** on all three raid pages and Archon re-entered the raid consensus.
+
+- **Icy Veins / Method / Wowhead: 240 letters re-parsed, ZERO moves, third night running.**
+  Counts reconciled before merging (27/7/6 per bracket per source), 0 unmatched, and
+  apply-ratings re-run to prove the match — the specs.json diff stayed empty for all three.
+- **Archon RAID**: throughput lists returned 24 DPS + 7 healer + 6 tank = **37 entries**
+  (0 unmatched), with the specRankingsSection table repopulating at the same 37 rows.
+  Era-verified three ways before anything was written: `page.description` reads "tier list
+  for The Venomous Abyss ... in 12.1", `specRankingsSection.title` reads "DPS Rankings for
+  Mythic The Venomous Abyss", and **Devourer is present** in the DPS list.
+- **21 raid letters recut** against the stored Season-1 ones, and **three specs were written
+  as EXPLICIT NULL** — Fire Mage, Frost Mage, Affliction Warlock have no row in Archon's S2
+  raid list at all. Leaving their S1 letters standing under an s2-verified source is exactly
+  the two-seasons-in-one-number lie DECISION 1 exists to stop; they now render "—" and their
+  raid consensus averages 3 sources while the other 37 average 4.
+- **Archon M+ recut for the THIRD consecutive night**: 17 of 40 letters moved, eleven of them
+  S->A as Archon's own clustering narrowed the S band from 12 specs to 7. Real recut, proven
+  on the same fetch: every score rose (Arms 2985->3037, Assassination 2986->3031, Arcane
+  2975->3005), parses rose with them (Arms 324,536->404,296), the page total went
+  2,353,508 -> 3,082,472, and `lastUpdated` advanced 08-22T12:00Z -> 08-23T12:00Z on all six.
+- **Downstream: 10 consensus letter moves, all ONE band, none two-band** — raid Frost DK A->B,
+  Marksmanship B->A, Windwalker A->B, Prot Paladin B->A, Discipline S->A+, Elemental B->A,
+  Prot Warrior B->A; M+ Preservation B->A, Marksmanship A->B, Fury A->B. Anomaly limits are
+  25 total / 6 two-band, so the gate is **not** tripped and no ack was proposed. Measured
+  against committed history (2026-08-23), not against tonight's own snapshot.
+- **freeze-season is not involved.** Archon moved from BEHIND to current, not ahead;
+  `aheadSeasonFor` returns null for it, and `season-final.json` holds only s1 records for
+  the three outlets that flipped ahead pre-launch. Nothing to freeze, nothing frozen.
+- Six `published` dates re-read from JSON-LD and unchanged, 6/6 against
+  published-evidence/evidence.json for both Icy Veins and Wowhead. Method's in-body dates
+  (raid 10 Aug, M+ 13 Aug) are unchanged and still not stored — fetch-published.mjs does not
+  cover method, so a stored value there would never be cross-checked. Owner call, unchanged.
+- The Icy Veins raid HEALER page still carries a "Patch 12.0.7 / Midnight" title over a body
+  that opens "for Midnight Season 2" and whose changelog top line reads "Further updated for
+  Midnight Season 2 launch after the first few live tests". Body over title, as always.
+- **encounter-tiers.json was NOT rewritten** — see the refresh-metrics log entry for the
+  measurement; the short version is that 8 of Archon's 9 raid bosses still publish nothing,
+  so an S2 rewrite would be a 42% row drop and a one-boss fight view.
+
 ## 2026-08-23 (nightly) — 280 letters re-parsed; Archon's M+ recuts again, 13 of its 40 move
 
 **Icy Veins, Method and Wowhead: 0 moves for the second night running. Archon M+ moved 13

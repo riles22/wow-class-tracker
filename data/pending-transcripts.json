@@ -2,39 +2,18 @@
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
   "videos": [
     {
-      "id": "R7kYD23sDQs",
-      "creator": "Obli",
-      "title": "Frost DK BUFFED! + What am I crafting? / Midnight Season 2 DK update",
-      "published": "2026-08-23",
-      "queuedAt": "2026-08-23"
+      "id": "qG-So9pnRBQ",
+      "creator": "MadSkillzzTV",
+      "title": "12.1 Healer M+ & Raid | Holy Paladin & Preservation Evoker",
+      "published": "2026-08-22",
+      "queuedAt": "2026-08-24"
     },
     {
-      "id": "9XtfT9ka2B0",
-      "creator": "leak",
-      "title": "Survival Hunter is DOOMED in Midnight Season 2.",
+      "id": "3E_EY7ULmkw",
+      "creator": "Dalaran Gaming",
+      "title": "Midnight Season 2 Patch Notes: Up To 350% Increases Dropping Next Reset!",
       "published": "2026-08-22",
-      "queuedAt": "2026-08-23"
-    },
-    {
-      "id": "xg5sxI6LspI",
-      "creator": "Kalamazi",
-      "title": "HUGE Warlock Buffs Announced!",
-      "published": "2026-08-22",
-      "queuedAt": "2026-08-23"
-    },
-    {
-      "id": "5m_K51fnwhc",
-      "creator": "izen",
-      "title": "FIRST Buffs & Nerfs of Season 2 | Weekly Reset Balance Tuning #1",
-      "published": "2026-08-22",
-      "queuedAt": "2026-08-23"
-    },
-    {
-      "id": "1wxoNsiyCtM",
-      "creator": "YoDaTV",
-      "title": "A NEW Tank Meta on the Horizon? Patch Notes and Tierlist Update for 12.1 Mythic+!",
-      "published": "2026-08-22",
-      "queuedAt": "2026-08-23"
+      "queuedAt": "2026-08-24"
     }
   ],
   "skipped": [
@@ -2893,6 +2872,13 @@
       "title": "12.1 Class Tuning Did Your Spec Survive?",
       "reason": "Transcript verified (yt-dlp auto-captions, 1,137s, 73 merged caption blocks) and it yields no PvE take. The video is a read-through of the August 25 tuning notes in two halves: in the PvE half he narrates the values with almost no evaluation of his own, and every directional opinion he does express lands in the notes' PLAYER VERSUS PLAYER section, which he reads at length as a PvP player (Rogue/Mage running the show, Demon Hunter defensives, Fire, Holy Priest, Resto Shaman mana) — the 2026-08-09 rule that a PvP-lens read must never vote in PvE. Nothing falls inside his registered scope either: his PvE-half remarks on Havoc, tank balance and Protection Paladin are about classes he holds no community.json entry for, and for the specs he IS scoped to (Restoration/Elemental Shaman, Affliction Warlock, Arms/Protection Warrior) he only restates the notes or comments on their PvP-only versions. Same shape as kGsd9cMmBCc, verified the same day.",
       "verifiedAt": "2026-08-22"
+    },
+    {
+      "id": "xg5sxI6LspI",
+      "creator": "Kalamazi",
+      "title": "HUGE Warlock Buffs Announced!",
+      "reason": "Transcript verified (Supadata, nightly step; 4,741 caption chunks over 3h24m) and it yields nothing NEW to distil: it is the unedited Race-to-World-First-week STREAM VOD of the same day whose edited counterpart, BdzA4HWaUSc, was distilled on 2026-08-22 into four live Kalamazi takes. Every Warlock read in it is already carried by those takes and is thinner here — Destruction still his high-end Mythic+ pick with Demonology the easier pug choice (t=5602), the 30% Rain of Fire buff named as the biggest Mythic+ change for Warlock (t=5627), Demonology solid for average keys and better after the buffs (t=813), and a passing raid line that the buffs are relatively big but will not be super impactful (t=1760). Distilling any of it would duplicate the same creator, spec, date and lens with a weaker source and force superseding a richer take with a poorer one. The remainder is key gameplay, chat and venue talk with co-streamers, and per the no-speakers rule none of it is attributable anyway. Recorded so a later run does not re-open it: the video is not off-topic, it is redundant.",
+      "verifiedAt": "2026-08-24"
     }
   ],
   "seen": [
@@ -3441,7 +3427,10 @@
     "1LfW9JXNRsI",
     "nAVBL7mSGsQ",
     "wSlgCYK8Bxo",
-    "qmEnXITZFUs"
+    "qmEnXITZFUs",
+    "czPW0XwrzhQ",
+    "Pq9NJVn-SQc",
+    "sb7LNHsCD2Q"
   ],
   "seenNote": "Video ids already considered by an earlier run that carry no richer record — migrated 2026-08-08 from backticked ids in watch-creators/log.md when the seen-set stopped being derived from prose. Distilled videos are cited by their take's url, transcript-verified rejects live in skipped[], and queued ones in videos[]; this lane is only for the remainder. Append here when a run dismisses a video at DISCOVERY (pre-cycle date, already-processed) without fetching a transcript."
 }

@@ -16,6 +16,71 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-24 (nightly) — Murlok and Mythicstats both recut; Archon's raid numerics came back and were HELD
+
+**Merged:** murlok 40 rows, mythicstats 39, archon M+ score 40 + M+ popularity 40.
+**Held on purpose:** archon's raid numerics, bloodmallet, simulationcraft.
+
+- **Murlok RECUT** (the last two nights it had not). All three meta pages plain browser-UA GET
+  (r.jina.ai still does not work on murlok), 40/40 rows, 0 unmatched, pages self-report
+  "Updated 6-7 hours ago". All 40 values moved — 26 of 27 DPS up (Arms 3229 -> 3367, Arcane
+  3209 -> 3353), the bottom four down (Frost Mage 2846 -> 2673), max move 6.3%. Stamped
+  asOf = the run date, because murlok publishes only a relative "N hours ago"; that is the
+  exception to the publish-its-own-date rule, not a lapse from it.
+- **Mythicstats**: /period/latest 302s to **/period/1077** ("Period 1077 MID2"), 199,856 bytes.
+  39 rows, 33 moved. Identity check before merging: total **100.3%**, role subtotals DPS 60.1 /
+  Tank 20.0 / Healer 20.2 — the representation SHARE column, not the /meta per-key-presence
+  figure that reads 7-10x higher. Fire Mage is absent from the chart entirely; its stored value
+  is already 0 and was left at its own 08-22 date rather than written as a dated zero, because
+  an upstream absence is not a measurement.
+- **Archon raid numerics came back and were NOT merged.** The rankings table repopulated with
+  the tier lists: 24 of 27 DPS, 7/7 healer, 6/6 tank. Two reasons to hold. (a) Fire Mage, Frost
+  Mage and Affliction Warlock have no row, so a merge leaves 3 Season-1 values inside a 27-row
+  series that `metricRanks` pools within (role, bracket, name) with **no provenance key** — the
+  bloodmallet mixing failure with seasons in place of sim tiers. (b) The whole Mythic cut is
+  **918 parses**, 1-79 per spec (Assassination 1, Feral 2, Survival 3), against stored n in the
+  hundreds, and `page.totalParses` still reads 0. For the record the moves are 0.6%-32%, none
+  near maxValueMovePct — this is a coverage decision, not a value-move one. Merge wholesale the
+  first night all 27 DPS specs appear.
+- **The archon-metrics / archon-hps / archon-popularity labels in required-sources.json are now
+  factually stale** — they say the S2 raid pages return "0 rows, totalParses 0". The rows came
+  back tonight; only coverage is missing. Owner edit, not an agent one.
+- **encounter-tiers.json: measured, then left alone.** All 17 S2 encounters enumerated from
+  `encounterOptions` and all **51 pages** (17 x DPS/healer/tank) fetched, 200/200. Every dungeon
+  is complete at 40 rows; of the nine raid bosses only **Nek'zali** publishes anything (36 rows)
+  and the other eight are empty across all three roles. 356 rows against 619 stored = a **42%
+  drop**, past maxRowDropPct 0.25 and below the 440 floor, and it would ship a one-of-nine-boss
+  fight view. Stored S1 file byte-identical, season stamp stays s1, Fight selector stays hidden.
+  The two "Per-" page snapshots were deliberately NOT advanced — nothing was ingested.
+- **Survivability** is still 0 entries on all three raid aggregates, ninth day, even though
+  throughput on those same pages repopulated. Nek'zali's per-boss page does carry 26 entries and
+  was NOT used: the 2026-08-21 dead-end measurement stands.
+- **Bloodmallet: 17 of 27 charts returned data and all 17 read `simc_settings.tier` = MID2
+  (2026-08-19), against MID1 in all 26 stored profiles.** The same ten specs error on every
+  retry as on 08-20 (Havoc, Devourer, Balance, Feral, Augmentation, Devastation, Windwalker,
+  Retribution, Arms, Fury) with controls succeeding interleaved. Nothing merged: a two-tier pool
+  fails validation outright, and MID2 runs a measured mean 1.79x MID1, so a partial merge would
+  publish "which specs got re-simmed" as spec strength. **Handoff: the night all 27 return MID2
+  is a wholesale adoption that WILL need a human `value_move_ack`.**
+- **SimulationCraft: half the standing objection has cleared.** MID1_Raid.txt is 272 bytes (a
+  run that just started, no ranking block), so the recipe falls to MID1_Raid.html — still the
+  completed **12.0.7.68974** report (hotfix 08-06) behind the stored values, unchanged, nothing
+  merged. But **MID2_Raid.html now reads "12.1.0.69404 Live (hotfix 2026-08-22/69404, git build
+  HEAD c357aef3e7)"** — the PTR objection recorded on 08-21 is gone. What remains is
+  completeness: 34 baseline profiles covering **18 DPS specs**, with no Druid and no Evoker
+  profiles at all, and no Havoc, Devourer, Windwalker, Retribution, Arms or Fury — eight of the
+  same ten bloodmallet cannot sim, which reads like one upstream module rebuild rather than two
+  outages. The requirement's label needs rewriting; that is an owner edit.
+- **WoWMeta frozen, and honestly so**: manifest snapshotDate 2026-08-11 and the rankings file's
+  `Last-Modified: Tue, 11 Aug 2026 15:25:05 GMT` **agree** (the 08-04 incident was them
+  disagreeing). Payload diffed anyway: 40/40 rows, all lowerBound values byte-identical.
+- **WCL: no fetch by this agent.** wcl-fetch/evidence.json (attemptedAt 11:04:51Z, this run)
+  reports verdict **rdps-broken** — OAuth and GraphQL healthy, the rdps retry on encounter 3176
+  returns HTTP 200 carrying "Internal server error", `landed` empty. Both live rows unreachable.
+- **Robydoby not fetched, deliberately**: it is a 12.1 PTR raid-testing sheet and the PTR cycle
+  closed on 08-18, so its stored rows are era-tagged history. It is outside the refresh contract
+  by design; there is nothing a between-cycles run can honestly add to it.
+
 ## 2026-08-23 (nightly) — Archon M+ merges 80 rows; Murlok and Mythicstats BOTH froze, and Murlok's page hides that in plain sight
 
 **Merged: Archon M+ score 40 + Archon M+ Popularity 40. Merged nothing else. Two sources

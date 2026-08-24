@@ -16,6 +16,40 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-24 (nightly) — three channels swept, nothing new to log, still no 12.2 PTR
+
+**No new feed entry. The newest entry stays 2026-08-22** (the "Class Tuning Incoming – August 25"
+post), and every canonical post behind the recent entries was re-polled for in-place EDITS rather
+than assumed static.
+
+- **Wowhead news RSS**: 40 items, parsed per `<item>` block (never by tag adjacency), bodies free
+  in `content:encoded`. Newest item Sun 23 Aug 19:56 CDT (news=382495).
+- **News INDEX** (`data.news.newsData`, anchored on the id attribute and brace-balanced): 20 posts,
+  newest **382495**. It did not lead the RSS tonight, but was polled anyway — the 08-04 case is
+  exactly a post landing between the two.
+- **Blue tracker** (`data.blueTracker.default`): 66 KB, 50 entries, **44 unique topics** after
+  deduping by topic id. Newest 2026-08-22 22:58 (Zorbrix, the Evoker disconnect thread).
+- **Edit checks, all three unchanged:** running hotfix topic **2336376** post #1 still **v15**,
+  `updated_at` 2026-08-22T01:46:38Z — so no August 22 or 23 hotfix section has been appended;
+  **2339812** ("Class Tuning Incoming – August 25") post #1 still **v1**, unedited since creation,
+  so the logged 08-22 distillation is current; dev-notes thread **2317811** still at highest post
+  19 (Linxy, 2026-07-31), the closed cycle's expected silence.
+- **Swept and correctly NOT logged**, each read rather than judged by title: **news=382566**
+  "Patch 12.1 Hotfixes for August 21st" — body read in full, and its sections are Delves, Dungeons
+  and Raids, The Venomous Abyss, Housing, Items and Prey with **zero class or spec lines**, so a
+  `kind: "hotfix"` entry would carry an empty specsAffected/highlights pair and reach no drawer
+  (this re-confirms the 08-23 local finding rather than re-deriving it); **news=382564** "Concealed
+  Pistol in Murder Row" — a dungeon-item guide about vendor Extra Action items, no class content;
+  the Mythic Nymrissa nerf and the Evoker disconnect acknowledgement (encounter tuning and a bug);
+  the Altar of Fangs and Item Adjustment topics (dungeon and item tuning); and the RWF day recaps.
+- **The only value-bearing class line anywhere on or after 08-21** is in the already-logged 08-22
+  tuning post. No set bonus was touched by anything tonight, so no `spec.tierSet` needed advancing.
+- **12.2 PTR: still no announcement.** All 40 RSS bodies scanned for `12.2`, "next major patch",
+  "PTR is now available", "PTR Development Notes" and "Public Test Realm" — **zero hits** in titles
+  or bodies.
+- PTR zone sweeps (54/52/56/57) remain dormant and were not attempted; their contract rows were
+  removed at the flip. Nothing written by this skill: no feed entry, no tierSet touch.
+
 ## 2026-08-23 (local) — verification pass over the nightly; nothing new, and the Aug-21 hotfix round-up is correctly ABSENT
 
 **No feed change.** Ran as the scheduled local ptr-watch ~3h after the nightly (CI `startedAt`
