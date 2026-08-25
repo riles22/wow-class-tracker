@@ -149,26 +149,26 @@
     "kind": "tier-list",
     "scale": "archon",
     "author": "Archon.gg (statistical)",
-    "methodology": "Statistical tier lists computed from Warcraft Logs parses and Blizzard leaderboards — 14-day rolling window, refreshed daily. Raid tiers read from the throughput metric tier list (NOT the default popularity grouping); M+ tiers from the M+ score tier list. Mirrored at u.gg/wow.",
+    "methodology": "Statistical tier lists computed from Warcraft Logs parses and Blizzard leaderboards — 14-day rolling window, refreshed daily. Raid tiers read from the throughput metric tier list (NOT the default popularity grouping); M+ tiers from the M+ score tier list. EARLY-S2 BASIS (owner decision 2026-08-25): the raid letters come from the HEROIC throughput list while Mythic is sparse — Heroic carries ~170x the parses and covers all 27 DPS specs where Mythic held 6 specs under 10 parses and no Fire Mage at all. Switch back to the Mythic list (a reviewed registry edit + CONSENSUS_VERSION bump) once Mythic reaches 27/27 DPS with healthy samples. The Mythic rankings pages stay registered as ancillary metric feeds. Mirrored at u.gg/wow.",
     "pages": [
       {
         "bracket": "raid",
         "role": "DPS",
-        "url": "https://www.archon.gg/wow/tier-list/dps-rankings/raid/mythic/all-bosses",
+        "url": "https://www.archon.gg/wow/tier-list/dps-rankings/raid/heroic/all-bosses",
         "snapshot": "2026-08-25",
         "seasonVerified": "s2"
       },
       {
         "bracket": "raid",
         "role": "Healer",
-        "url": "https://www.archon.gg/wow/tier-list/healer-rankings/raid/mythic/all-bosses",
+        "url": "https://www.archon.gg/wow/tier-list/healer-rankings/raid/heroic/all-bosses",
         "snapshot": "2026-08-25",
         "seasonVerified": "s2"
       },
       {
         "bracket": "raid",
         "role": "Tank",
-        "url": "https://www.archon.gg/wow/tier-list/tank-rankings/raid/mythic/all-bosses",
+        "url": "https://www.archon.gg/wow/tier-list/tank-rankings/raid/heroic/all-bosses",
         "snapshot": "2026-08-25",
         "seasonVerified": "s2"
       },
@@ -219,9 +219,36 @@
         "snapshot": "2026-08-25",
         "seasonVerified": "s2",
         "ancillary": true
+      },
+      {
+        "bracket": "raid",
+        "role": "DPS",
+        "label": "Mythic rankings — DPS (95th-pct numbers)",
+        "url": "https://www.archon.gg/wow/tier-list/dps-rankings/raid/mythic/all-bosses",
+        "snapshot": "2026-08-25",
+        "seasonVerified": "s2",
+        "ancillary": true
+      },
+      {
+        "bracket": "raid",
+        "role": "Healer",
+        "label": "Mythic rankings — Healer (95th-pct numbers)",
+        "url": "https://www.archon.gg/wow/tier-list/healer-rankings/raid/mythic/all-bosses",
+        "snapshot": "2026-08-25",
+        "seasonVerified": "s2",
+        "ancillary": true
+      },
+      {
+        "bracket": "raid",
+        "role": "Tank",
+        "label": "Mythic rankings — Tank (95th-pct numbers)",
+        "url": "https://www.archon.gg/wow/tier-list/tank-rankings/raid/mythic/all-bosses",
+        "snapshot": "2026-08-25",
+        "seasonVerified": "s2",
+        "ancillary": true
       }
     ],
-    "notes": "Fetch recipe: parse the __NEXT_DATA__ JSON script tag from raw HTML (WebFetch markdown drops it). Raid pages carry three tierLists (popularity/throughput/survivability) — use metric \"throughput\"; M+ pages use metric \"score\". Mirrored at u.gg/wow.",
+    "notes": "Fetch recipe: parse the __NEXT_DATA__ JSON script tag from raw HTML (WebFetch markdown drops it). Raid pages carry three tierLists (popularity/throughput/survivability) — use metric \"throughput\"; M+ pages use metric \"score\". The Heroic raid pages (the letter basis since 2026-08-25) parse with the IDENTICAL recipe — only the /heroic/ path segment differs; the ancillary Mythic rankings pages feed the \"(Mythic)\" numeric families and survivability. Mirrored at u.gg/wow.",
     "summary": "Letter grades computed from logged play. Raid tiers come from its THROUGHPUT list and M+ tiers from its SCORE list — never the default popularity grouping, which ranks how often a spec is played rather than how it performs."
   },
   {

@@ -214,6 +214,38 @@
       }
     },
     {
+      "key": "archon-heroic-dps",
+      "label": "Archon 95th-pct DPS, HEROIC raid (DPS + tank rows). Added 2026-08-25 with the Heroic lane (owner decision): Heroic is the dense early-season series (~170x the Mythic parses, all 27 DPS specs incl. Fire Mage) and, since the same change, the basis of archon's raid LETTERS. Same specRankingsSection recipe as archon-metrics, /heroic/ path. Split from the Mythic row so either difficulty can stall visibly on its own.",
+      "maxAgeDays": 5,
+      "date": {
+        "type": "metrics",
+        "source": "archon",
+        "namePattern": "^95th pct DPS \\(Heroic"
+      },
+      "rows": {
+        "type": "metrics",
+        "source": "archon",
+        "namePattern": "^95th pct DPS \\(Heroic",
+        "min": 25
+      }
+    },
+    {
+      "key": "archon-heroic-hps",
+      "label": "Archon 95th-pct HPS, HEROIC raid (healers). Added 2026-08-25 with the Heroic lane. Kept as its own row per the split-row rule (archon-hps precedent).",
+      "maxAgeDays": 5,
+      "date": {
+        "type": "metrics",
+        "source": "archon",
+        "namePattern": "^95th pct HPS \\(Heroic"
+      },
+      "rows": {
+        "type": "metrics",
+        "source": "archon",
+        "namePattern": "^95th pct HPS \\(Heroic",
+        "min": 5
+      }
+    },
+    {
       "key": "archon-mplus-score",
       "label": "Archon M+ score (95th pct)",
       "maxAgeDays": 5,

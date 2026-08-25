@@ -49,6 +49,14 @@ else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have 
 - Heartbeat after the merge: archon-metrics / archon-hps / archon-popularity all 0d; the
   remaining `--age` reds are the five pre-existing owner-accepted ones (wowmeta, wcl-live-*,
   bloodmallet, simulationcraft), untouched.
+- **Later the same evening: the HEROIC raid families landed** (owner decision, with the
+  letter-basis switch logged in refresh-tiers' log): "95th pct DPS (Heroic)" (26 DPS + 6
+  tank) and "95th pct HPS (Heroic)" (7), n = parses, asOf 2026-08-24 = the pages' own
+  lastUpdated (NOT the fetch date). All 40 rows ≥1,215 parses — zero under LOW_SAMPLE_N,
+  zero under MIN_RANK_N. New contract rows `archon-heroic-dps` / `archon-heroic-hps`
+  (maxAgeDays 5) landed in the SAME change as the SKILL.md recipe update — emit manifest
+  rows for ALL SIX archon numeric requirements from tonight on. Heroic popularity
+  deliberately NOT merged (stored "Popularity" stays the Mythic cut).
 
 ## 2026-08-25 (nightly, 2nd run of the day) — Archon re-clusters survivability inside four hours; tank DPS cut merged; every other series byte-identical
 

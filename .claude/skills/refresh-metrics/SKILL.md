@@ -58,7 +58,8 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
   — parse with regex, not a strict parser. Metric names in use:
   "Median rDPS (Mythic, all bosses)" / "Median HPS (…)" / "…(M+, all dungeons)".
 - **Archon numbers** (same `__NEXT_DATA__` JSON as tiers): "95th pct DPS (Mythic)",
-  "95th pct HPS (Mythic)", "M+ score (95th pct)", "Popularity" (fraction × 100, unit "%").
+  "95th pct HPS (Mythic)", "95th pct DPS (Heroic)", "95th pct HPS (Heroic)",
+  "M+ score (95th pct)", "Popularity" (fraction × 100, unit "%").
   **Read them from `props.pageProps.page.specRankingsSection.table.data[]`** — each row is
   `{item: "<ActorIcon type='Class-Spec'>…", dps, survivability, popularity, parses}` (raid
   DPS/healer pages carry `dps`/`hps` + `popularity`; the M+ page carries the score +
@@ -66,11 +67,23 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
   numbers. (2026-07-21 stall root cause: an agent looked for popularity in `tierList`,
   didn't find it, and left ALL four numeric series stale at 07-20 rather than refreshing
   the ones it could — popularity is and was cleanly in `specRankingsSection`, verified by
-  runner probe 2026-07-23.) Refresh every run; **emit a manifest row for ALL FOUR Archon
-  numeric requirements — `archon-metrics` (95th-pct DPS, raid), `archon-hps` (95th-pct HPS,
-  raid healers), `archon-mplus-score` (M+ score 95th pct) and `archon-popularity`** — each
+  runner probe 2026-07-23.)
+  **The HEROIC raid families (added 2026-08-25, owner decision)** come from the three
+  `.../raid/heroic/all-bosses` rankings pages — the registry's main raid pages since the
+  same change (they also feed the raid LETTERS now; the Mythic pages are the labeled
+  ancillary entries and keep feeding the "(Mythic)" families + survivability). Identical
+  parse, `/heroic/` path; tank rows merge under the DPS family name (both difficulties);
+  asOf = the page's own `lastUpdated` date. **DIFFICULTY IS PART OF THE NAME** — Heroic
+  numbers under a Mythic name are the exact mislabel the Robydoby rule below forbids, and
+  the measured scales are close enough (Heroic ≈ 0.88–1.01x Mythic) that nothing else
+  would catch it. Heroic popularity is deliberately NOT merged — the stored "Popularity"
+  family is the Mythic cut.
+  Refresh every run; **emit a manifest row for ALL SIX Archon
+  numeric requirements — `archon-metrics` (95th-pct DPS, Mythic raid), `archon-hps`
+  (95th-pct HPS, Mythic raid healers), `archon-heroic-dps`, `archon-heroic-hps`,
+  `archon-mplus-score` (M+ score 95th pct) and `archon-popularity`** — each
   is separately gated in required-sources.json, and a missing row fails the publish. They
-  are split deliberately: one combined row would hide which of the four series failed.
+  are split deliberately: one combined row would hide which of the six series failed.
   (`archon-hps` and `archon-mplus-score` were added by the 2026-07-24 audit, D4 — 47
   published rows had neither a date gate nor a row floor and could vanish silently.)
   If a series ever genuinely can't be parsed, mark just that requirement `parse_error`

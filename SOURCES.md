@@ -13,7 +13,7 @@ Only these tier-list sources feed the consensus (**four** today — the table be
 | **Icy Veins** | S+/S/A+/A/B+/B/C (7-band since 2026-08-14, `521ceaf` — was S/A+/A/B/C) | Broad meta, general population | editorial (weeks) | per role × raid/M+ pages |
 | **Method** | S/A/B/C | Race-to-world-first output (raid w/ Method raiders; M+ by Tactyks) | editorial | may omit specs (e.g. Vengeance DH) — omitted, never invented |
 | **Wowhead** | S/A+/A/B/C/D/F | Class-writer rankings | editorial | per role pages; also the PTR datamining mirror |
-| **Archon** | S/A/B/C | Statistical (Warcraft Logs parses / Blizzard leaderboards, 14-day window) | **daily** | raid tiers = *throughput* list, M+ = *score* list; mirrored at u.gg |
+| **Archon** | S/A/B/C | Statistical (Warcraft Logs parses / Blizzard leaderboards, 14-day window) | **daily** | raid tiers = *throughput* list, M+ = *score* list; mirrored at u.gg. **Raid letters read from the HEROIC list since 2026-08-25** (owner decision, early-S2: Heroic carries ~170× the Mythic parses and all 27 DPS specs; switch back — a reviewed registry edit + `CONSENSUS_VERSION` bump — once Mythic reaches 27/27 with healthy samples) |
 | ~~**WoWMeta**~~ | — | **Retyped to a metrics source 2026-07-31** — see layer 2. Its letters were Ckmeans clusters of an undocumented toggle defaulting to PLAYER COUNT (representation, not performance), and its HTML transport served a stale 2026-03-23 prerender. Consensus is now four tier-list sources. | | |
 
 ### Era-gated tier lists → their own column, never the consensus
@@ -68,7 +68,7 @@ The tracker also renders its OWN computed 12.1 forecast (projection lane). It is
 | Source | What we take | Honest label |
 |---|---|---|
 | **Warcraft Logs** | Median rDPS/HPS + parse counts (zone 46 raid, 47 M+) | population medians; parses ≈ participation |
-| **Archon (numeric layer)** | 95th-pct DPS/HPS, M+ score, popularity % | top-end throughput + representation |
+| **Archon (numeric layer)** | 95th-pct DPS/HPS (Mythic AND Heroic — separate families, never mixed; Heroic added 2026-08-25 as the dense early-season series), M+ score, popularity % (Mythic) | top-end throughput + representation; difficulty is part of the metric name |
 | **Murlok.io** | Avg M+ rating of each spec's top-50 players | "top-50 ceiling" — NOT popularity, NOT a tier |
 | **Bloodmallet (SimC, tier MID1)** | Best-build DPS at 1/2/3/5/8/15 targets | powers ST/Cleave/AoE fight profiles (DPS only; Augmentation unsimmable) |
 | **SimulationCraft nightly** | Best hero-variant Patchwerk DPS per DPS spec from the engine-official MID1_Raid report (daily) | pure ST, fixed profile — a sim baseline next to Bloodmallet, never a tier |

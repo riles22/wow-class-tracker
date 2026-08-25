@@ -3782,12 +3782,18 @@ function openSpecFromOverlay(cls, spec){
     raid: [
       { key:"wcl", label:"WCL median", era:"live", tip:"Warcraft Logs median, Mythic raid — rDPS for DPS, tank rDPS for tanks, HPS for healers. Rank within role.",
         names:{ DPS:"Median rDPS (Mythic, all bosses)", Tank:"Median rDPS (Mythic, all bosses, tank)", Healer:"Median HPS (Mythic, all bosses)" } },
-      { key:"archon", label:"Archon", era:"live", tip:"Archon 95th-percentile THROUGHPUT, Mythic raid (not popularity). Rank within role.",
+      { key:"archon", label:"Archon (M)", era:"live", tip:"Archon 95th-percentile THROUGHPUT, Mythic raid (not popularity). Sparse early-season — see Archon (H) for the dense series. Rank within role.",
         /* Tank reads the same DPS family as DPS specs — Archon's tank rankings page IS tank
            throughput and its rows merge under this name (DK Blood etc.). Tank:null here
            rendered "·" = "not measured for a tank", which was false: a ranked 6-row tank
            pool sat in the data the whole time (fixed 2026-08-25). */
         names:{ DPS:"95th pct DPS (Mythic)", Tank:"95th pct DPS (Mythic)", Healer:"95th pct HPS (Mythic)" } },
+      /* Heroic joined 2026-08-25 (owner decision) as its own family — never mixed with the
+         Mythic pool (the season-uniform guard and the Robydoby difficulty-labeling rule both
+         forbid it). It is also the CURRENT basis of Archon's raid letter column, so this is
+         the rank column that agrees with those letters while Mythic densifies. */
+      { key:"archonh", label:"Archon (H)", era:"live", tip:"Archon 95th-percentile THROUGHPUT, Heroic raid — the dense early-season series (~170x the Mythic parses) and the current basis of Archon's raid letters. Rank within role.",
+        names:{ DPS:"95th pct DPS (Heroic)", Tank:"95th pct DPS (Heroic)", Healer:"95th pct HPS (Heroic)" } },
       { key:"pop", label:"Popularity", era:"live", tip:"Archon raid popularity — how many players run the spec, not how well it performs. Rank within role.",
         names:{ DPS:"Popularity", Tank:"Popularity", Healer:"Popularity" } },
       { key:"simc", label:"SimC", era:"live", tip:"SimulationCraft nightly Patchwerk DPS. DPS specs only — healers and tanks have no sim basis.",

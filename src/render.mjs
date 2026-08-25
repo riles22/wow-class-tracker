@@ -890,8 +890,15 @@ export const RANK_VERSION = 3;
    S2 letters; archon (still s1) drops out as a laggard per DECISION 1. A second full
    recomposition of the mean, disclosed to the movement engine by this bump —
    `pickBaseline` refuses cross-version comparison and the strip narrates
-   "Season 2 baseline established" instead of ~40 arrows nobody caused. */
-export const CONSENSUS_VERSION = 5;
+   "Season 2 baseline established" instead of ~40 arrows nobody caused.
+   v6 (2026-08-25, owner decision): archon's raid LETTER BASIS moves from the Mythic
+   throughput list to the HEROIC one while Mythic is sparse (~170x the parses, all 27
+   DPS specs vs 26 with six under 10 parses; Frost Mage was Mythic #1 on n=5). The v4
+   widened rule applies — the source set is unchanged, but a registry decision re-rated
+   26 of 40 archon raid letters at once, which is a basis change, not spec movement.
+   Switch-back (Mythic 27/27 with healthy samples) is the same shape and needs its own
+   bump. */
+export const CONSENSUS_VERSION = 6;
 const versionOf = (snap, field) => snap?.[field] ?? 1;
 const ranksComparableWith = snap => versionOf(snap, "rankVersion") === RANK_VERSION;
 const projComparableWith = snap => versionOf(snap, "projectionVersion") === PROJECTION_VERSION;

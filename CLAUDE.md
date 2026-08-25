@@ -69,7 +69,10 @@ by hand — it is generated.
    as numbers and NEVER converted to letter grades. Murlok's number is a *top-50 ceiling*
    (avg rating of each spec's best 50 players), not popularity, and must stay labeled so.
    Archon raid tiers come from its **throughput** tier list (not the default popularity
-   grouping); Archon M+ tiers from its **score** tier list.
+   grouping); Archon M+ tiers from its **score** tier list. Early-S2 the raid letters read
+   from the **Heroic** throughput list (owner decision 2026-08-25 — Mythic was 26/27 specs
+   with six under 10 parses; the registry's methodology text carries the switch-back
+   trigger, and the Mythic/Heroic NUMBERS stay separate metric families, never mixed).
 4. `src/template.html` is presentation only — zero data in it.
 5. Data-changing workflows run **plan-first**: propose the diff, then apply. *(Interactive
    sessions only — the unattended nightly routine has no one to propose to; its

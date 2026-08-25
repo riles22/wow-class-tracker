@@ -16,6 +16,25 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-25 (local, evening) — ARCHON'S RAID LETTER BASIS MOVES TO HEROIC (owner decision); 26 of 40 letters re-rated, CONSENSUS_VERSION 5 → 6
+
+- **This is a BASIS change, not spec movement, and the version bump is what says so.**
+  Riley switched `ratings.raid.archon` from the Mythic throughput list to the HEROIC one
+  while Mythic is sparse: Heroic carries ~170x the parses (470k vs ~2,950 DPS), covers all
+  27 DPS specs — closing the Fire Mage null with a real letter (B, 1,215 parses) — and has
+  zero rows under the rank floor, where Mythic had six specs under 10 parses and rank
+  agreement with Heroic of only rho 0.54–0.71 (Frost Mage: Mythic #1 on n=5, Heroic #20
+  on 14k+). 26 letters moved on landing; the v6 bump makes `pickBaseline` refuse the
+  cross-version comparison, so the strip reads "baseline established" instead of arrows.
+- **The registry is the authority on which pages feed letters**: the three main raid pages
+  now point at `.../raid/heroic/all-bosses` (seasonVerified s2 — the pages self-describe
+  12.1/The Venomous Abyss with the nine S2 bosses). The Mythic pages stayed registered as
+  labeled `ancillary: true` entries — they feed the "(Mythic)" numeric families and
+  survivability, never letters. Same __NEXT_DATA__ parse either way.
+- **Switch-back trigger, recorded in the archon methodology text**: Mythic 27/27 DPS with
+  healthy samples → reviewed registry edit back to the Mythic URLs + its own
+  CONSENSUS_VERSION bump. Do not switch back silently mid-run.
+
 ## 2026-08-25 (nightly, 2nd run of the day) — all four sources re-fetched, 319 rows parsed, **0 letters moved**
 
 Every source fetched inline, one at a time. Per-page counts printed and reconciled against

@@ -65,6 +65,12 @@ Fetch the current Midnight tier lists live and merge them into `data/specs.json`
   The default view groups by popularity — read the `metric: "throughput"` tierList.
   M+ pages use `metric: "score"`. Parse the `<script id="__NEXT_DATA__">` JSON from
   raw HTML; WebFetch's markdown conversion silently drops it.
+  **The registered raid pages are the HEROIC ones since 2026-08-25** (owner decision:
+  early-S2 letter basis is Heroic while Mythic is sparse — see the archon methodology
+  text in sources.json for the switch-back trigger). The registry URL is the authority
+  as always — fetch what pages[] names, never assume a difficulty. Do NOT read letters
+  off the ancillary "Mythic rankings" pages; they feed the numeric "(Mythic)" families
+  only (refresh-metrics' lane). Same parse either way.
 - **Wowhead guide URLs move.** The tier lists live under
   `/guide/classes/tier-lists/{role}-rankings-{raids|mythic-plus}`; older URL shapes 404.
   Body is JS-rendered. **Transport, in this order — the r.jina.ai proxy is DEAD on
