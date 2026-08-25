@@ -16,7 +16,7 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
-## 2026-08-24 (local) — the residential 429 is now DAY TWO; 2 queued videos left queued, 0 distilled
+## 2026-08-24 (local) — the 429 is DAY TWO and now DIAGNOSED; 1 of 2 queued videos drained through Riley's session, 3 takes
 
 **Yesterday's "worth watching" happened.** The 08-23 local entry recorded the `timedtext` caption
 429 and said that if it persisted across days the residential lane stops being a reliable catch-up
@@ -74,6 +74,35 @@ Nothing distilled; no data file changed.
   matters is a single caption request on one queued id, stopped on the first 429 with no retry.
   Today's whole diagnosis cost ~6 well-spaced caption requests. Supadata is unaffected (their
   infra, not this IP), which the nightly's 5/5 drain already demonstrated.
+- **EVENING ADDENDUM 2 — the flag exempts AUTHENTICATED traffic, and 1 of the 2 queued videos
+  was drained through Riley's logged-in session (owner-approved).** Interactive testing settled
+  the remaining questions and every finding is now codified in SKILL.md step 2's authenticated-
+  fallback block (owner-approved 2026-08-24) — the durable facts live THERE; this is the run
+  record. In brief: logged-in `timedtext` returns 200 from this IP while every anonymous client
+  429s; `--cookies-from-browser chrome` is dead (App-Bound Encryption, yt-dlp issue 10927, pin
+  and latest alike); a bare or borrowed-pot `baseUrl` fetch returns an EMPTY 200 (PO tokens are
+  content-bound); and `get_transcript` is not a lane (anonymous 400 even with SAPISIDHASH; 400
+  for YouTube's own UI on long was_live VODs).
+- **Distilled `3E_EY7ULmkw`** (Dalaran Gaming, "Midnight Season 2 Patch Notes: Up To 350%
+  Increases Dropping Next Reset!", 2026-08-22, 18m53s, 1,091 caption events) — fetched by
+  replaying the player's own pot-bearing timedtext URL inside Riley's session, per the new
+  fallback. His read of the announced Aug-25 tuning pass. **3 takes, all mplus-scoped**: Resto
+  Druid `buff` (t=128; supersedes his own 08-18 mplus take, same creator+spec+lens across tuning
+  passes), BM Hunter `buff` (t=247), Frost Mage `mixed` (t=301 — buffs walked, but 'maybe a
+  little bit better, who knows really'). Every number in every claim re-verified against the
+  transcript AND against the logged 08-22 build entry's own highlight lines before commit; all
+  agree. **Not distilled, deliberately**: the Warlock deep-dive (his most substantive analysis —
+  'I wonder if this will be enough to possibly bring affliction to the forefront of the overall
+  meta') is OUTSIDE his registered scope (Druid/Hunter/Mage/Rogue/Shaman) — scope-widening
+  evidence for a human, per the rules, not a take; he also calls Preservation 'my favorite
+  healer', same disposition. Everything from t=676 on is the PvP section and triages out,
+  including all the Rogue and Shaman material — so his two strongest registry classes yield
+  nothing tonight, which is the PvP rule working, not a miss. Survival Hunter's '4%, not crazy,
+  but it is a buff' was left unminted (filler-neutral territory). `latest` advanced on all five
+  of his class entries; id removed from `videos[]` (the take urls are its record).
+- **`qG-So9pnRBQ` (MadSkillzzTV, 9h33m was_live VOD) stays QUEUED** — it is exactly the
+  no-browser-route case above (SABR in-band captions, get_transcript 400 on YouTube's own UI).
+  The nightly's Supadata drain is its designed path; queue count 2 -> 1.
 
 ## 2026-08-24 (nightly) — 4 videos distilled: 14 takes + 14 metaNotes, the first distillation night in three
 

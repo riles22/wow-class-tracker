@@ -82,6 +82,36 @@ locally, and distill them into cited per-spec takes in `data/creator-takes.json`
    (b) **Local/residential runs:**
    `yt-dlp --no-update --extractor-args "youtube:player_client=android" --skip-download --write-auto-subs --sub-langs en --sub-format json3 --sleep-requests 1.5 -o "<scratchpad>/%(id)s.%(ext)s" <url>`
    Flatten json3 events to text, PRESERVING per-event `tStartMs`.
+   **AUTHENTICATED FALLBACK when the anonymous lane is 429-blocked (owner-approved
+   2026-08-24, QUEUE-ONLY):** the 2026-08-23/24 caption 429 is an IP-scoped abuse flag on
+   `timedtext` that EXEMPTS authenticated traffic (measured: the same endpoint returned
+   200 for Riley's logged-in Chrome while every anonymous client — including the real
+   player with a valid PO token — got 429). Facts that bound HOW to authenticate, all
+   measured 2026-08-24:
+   · `--cookies-from-browser chrome` is DEAD on this machine — Chrome's App-Bound
+     Encryption fails DPAPI decryption (yt-dlp issue 10927) at the pin AND at 2026.08.19.
+     Do not retry it; the fix is not a yt-dlp version.
+   · The durable lane is a **cookies.txt export** (e.g. "Get cookies.txt LOCALLY", exported
+     from a PRIVATE window so YouTube does not rotate the main session away) passed via
+     `--cookies <file>`. Riley supplies the file; never read browser cookie stores directly.
+   · The interactive lane is fetching INSIDE the logged-in browser session (credentials
+     never leave Chrome): replay the player's own pot-bearing `timedtext` URL captured from
+     the network log while CC is on, then save the json3. A BARE `captionTracks[].baseUrl`
+     returns an empty 200 without `pot` even authenticated, and a pot borrowed from another
+     video also returns empty 200 — PO tokens are content-bound; only the player-minted URL
+     for THAT video works.
+   · **Long `was_live` VODs have no browser route at all**: their captions stream in-band
+     over SABR (`sabr=1` videoplayback), so no `timedtext` request ever fires to replay, and
+     `get_transcript` 400s on them even for YouTube's own logged-in UI (trusted click,
+     measured on a 9h33m VOD). Those wait for Supadata or for the flag to clear.
+   · Do NOT build on `youtubei/v1/get_transcript` generally: anonymous requests 400
+     ("Precondition check failed") even with full context + visitorData + SAPISIDHASH, and
+     where it does work (logged-in UI, normal videos) it returns coarser sentence-chunk
+     segments than the json3 track.
+   Scope discipline: authenticated fetching ties volume to Riley's Google account, so it is
+   a bridge for the QUEUED BACKLOG (a handful of videos), never for breadth sweeps — an
+   unfiltered sweep through the account is exactly the volume shape that flagged the IP.
+   Pace `--sleep-requests 3`+ and stop on the first error of any kind.
    (c) **Neither available** → queue it in `data/pending-transcripts.json`
    (`{id, creator, title, published, queuedAt}` — the machine queue the deterministic
    step drains, 25 fetches/run inside the free-tier budget); log.md keeps the
@@ -314,7 +344,14 @@ pruned.
   retries DEEPEN: 42 videos through one invocation drew a 429 that survived 30/60/90s backoffs,
   a 4-minute cooldown and a 7-minute cooldown — **0 of 42 transcripts retrieved**. Pace from the
   start and stop on the first 429. `--list-subs` is never rate-limited, so caption availability
-  can still be probed mid-block.
+  can still be probed mid-block. A THIRD shape landed 2026-08-23/24: a
+  PERSISTENT 429 on every caption download across days and disjoint videos while
+  `--list-subs` and the info endpoint stay healthy — an IP-scoped abuse flag on the
+  timedtext service, not throttling. No client change fixes it (even the real player's
+  PO-token requests 429 anonymously); it should decay after 24-72h of zero caption
+  traffic or an ISP IP rotation, authenticated requests are exempt (see the
+  authenticated fallback in step 2), and a run that hits it spends AT MOST one caption
+  probe before stopping.
 - **Prove any grep/regex triage pass on a known-positive file before trusting it
   (2026-08-08).** An extractor that returns zero hits looks exactly like a batch with nothing in
   it. The first extractor in the 52-transcript sweep scored **zero hits on all 52 files** — a

@@ -5642,7 +5642,7 @@
       "patchContext": "Season 2 live — his walkthrough of the launch class tuning pass, published on Season 2 launch day; the Restoration read is explicitly Mythic+-scoped.",
       "url": "https://youtu.be/owz2wMTAa5k?t=222",
       "claim": "He treats the launch tuning as a real lift for Restoration, weighting the two lines differently: the 4% healing increase he calls nice but not insane, while the 20% damage increase he calls significant and noticeable. His read is Mythic+-scoped — damage matters a lot in dungeon groups, so the buff gives Restoration an opening to perform acceptably this season. He hedges it heavily rather than asserting it (possibly, maybe, potentially, and depending on further tuning), and sets it against his sense that boomkins had been looking like the go-to DPS pick for many dungeon groups, concluding only that Restoration could end up somewhat competitive.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Death Knight",
@@ -6128,6 +6128,42 @@
       "patchContext": "Season 2 live — his Mythic+ tier-list update after the announced August 25 tuning pass, week one of the season",
       "url": "https://youtu.be/1wxoNsiyCtM?t=141",
       "claim": "He calls the Retribution tier-set change a huge buff and moves the spec up into A+ on the strength of it. He bounds what it does: he does not expect a massive overall damage increase, but says it at least makes the 4-piece something you play around in AoE now, which he counts as a good thing in itself.",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Restoration",
+      "creator": "Dalaran Gaming",
+      "date": "2026-08-22",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — reaction to the announced August 25 tuning pass (posted 2026-08-22), week one of the season",
+      "url": "https://youtu.be/3E_EY7ULmkw?t=128",
+      "claim": "Reading the announced August 25 tuning pass: he relays Blizzard's own framing that Restoration 'has not really been feeling that great' in five-man content and takes the pass as a real dungeon-healing buff — the tier-set Genesis duration bonus going from 4 to 8 seconds, Rejuvenation and Germination healing 15% more ('a lot of raw healing'), and Wild Growth 10% more. He flags the trims riding along — Nature's Bounty replicating 10% of Regrowth healing instead of 20, Everloom healing five targets instead of six but for 48% of Lifebloom's final heal instead of 40 — and still lands on slightly better output overall.",
+      "superseded": false
+    },
+    {
+      "class": "Hunter",
+      "spec": "Beast Mastery",
+      "creator": "Dalaran Gaming",
+      "date": "2026-08-22",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — reaction to the announced August 25 tuning pass (posted 2026-08-22), week one of the season",
+      "url": "https://youtu.be/3E_EY7ULmkw?t=247",
+      "claim": "On the announced August 25 pass: he reads the Beast Mastery changes as Blizzard making sure the spec is 'not terrible for mythic plus' — Wild Thrash dealing 300% increased damage against multiple targets instead of 200 is 'quite a decent bit of overall gain', and Beast Cleave rising from 55% to 70% of single-target damage 'should be quite a significant bit of raw overall damage'.",
+      "superseded": false
+    },
+    {
+      "class": "Mage",
+      "spec": "Frost",
+      "creator": "Dalaran Gaming",
+      "date": "2026-08-22",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — reaction to the announced August 25 tuning pass (posted 2026-08-22), week one of the season",
+      "url": "https://youtu.be/3E_EY7ULmkw?t=301",
+      "claim": "On the announced August 25 pass: he frames Frost as the Mage spec Blizzard is worried about — underplayed while 'everybody's playing arcane', and a little squishier than the other Mage specs after earlier survivability cutbacks. He walks the buffs (Ice Barrier absorbing 35% of max health instead of 30, Blizzard damage +10%, the Frostbite talent's shatter splash +10%, Isothermic Core's Meteor +25% for Frostfire) but his conclusion stays guarded: maybe 'a little bit better, but who knows really'.",
       "superseded": false
     }
   ],
