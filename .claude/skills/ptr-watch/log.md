@@ -16,6 +16,40 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-25 (nightly) — the August 25 tuning post was EDITED to v2, and the edit is PvP-only
+
+- **No new feed entry.** Newest entry stays 2026-08-22.
+- **The finding:** forum topic 2339812 "Class Tuning Incoming – August 25" — the source of the
+  logged 08-22 entry — went from **version 1 to version 2 at 2026-08-24T21:44:22Z**. It was still
+  v1 and unedited when checked 24 hours earlier, and Wowhead re-headlined its mirror news=382565
+  as "(Updated) … Restoration Druid Tuning Added", which reads like new PvE tuning and is not.
+  Blizzard's own words: "Following a review of feedback and data, we've decided to make a few
+  additional updates for **the PvP tuning** this week." What it actually does:
+  (a) attaches "Does not apply to PvP combat" to two Restoration Druid lines already logged here
+  at the SAME PvE numbers (Rejuvenation/Germination +15%, Everbloom 48% of Lifebloom's final heal
+  was 40%) — those two clauses gained a "PvE only" marker to match the Preservation, Affliction
+  and Demonology lines that already carried one, and the consolidated line still classifies null;
+  (b) adds PvP-combat-only changes for Fire Mage (Burnout 50% of remaining Ignite in PvP, was 75%)
+  and Arms Warrior (Slayer's Strike +5% in PvP, was +15%) — **out of scope per rule 3c** and
+  deliberately NOT written as spec highlights.
+  `specsAffected` unchanged; the amendment and its date are recorded in the entry's own label.
+  **Lesson worth keeping: re-poll a logged post's `version`/`updated_at`, not just the topic list.**
+  Nothing in the news feed or blue tracker would have told you the PvE section was untouched —
+  only reading the diff does.
+- The **EU mirror topic 626484** ("Class Tuning Incoming – 26 August") took the identical v2 edit
+  at 21:46Z. Same pass, not a second one; the US topic already carries it.
+- **No 12.2 signal.** All 40 RSS bodies plus the news-index and blue-tracker payloads scanned for
+  "12.2", "next major patch", "PTR is now available", "PTR Development Notes", "Public Test Realm"
+  — zero hits. Dev-notes thread 2317811 still at highest post 19 (Linxy, 2026-07-31).
+- Swept and correctly not logged: news=382597 "Mythic+ Tuning Changes Now Live" (Murder Row /
+  Blinding Vale trash and boss tuning, zero class lines), news=382564 Concealed Pistol, the
+  Trading Post and BCC Anniversary items, the RWF day recaps. Running hotfix topic 2336376 is
+  still v15 at 2026-08-22T01:46:38Z — no Aug 23/24 hotfix section exists yet.
+- No set bonus touched → no `spec.tierSet` advanced.
+- Channels: RSS 40 items / 154 KB, news index 20 posts (newest id 382597), blue tracker 50
+  entries → 42 unique topics. PTR zone sweeps (54/52/56/57) dormant between cycles, not attempted.
+
+
 ## 2026-08-24 (local) — verification pass over the nightly; one post-nightly article read and correctly not logged
 
 **No feed change. The newest entry stays 2026-08-22** ("Class Tuning Incoming – August 25"). Ran as

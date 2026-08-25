@@ -16,6 +16,62 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-25 (nightly) — Archon S2 survivability returns after 10 empty days; archon-hps un-held; murlok parser rebuilt after a 0-of-40 silent failure
+
+- **murlok 40/40, ALL moved, max 11.4%.** The stored recipe here (split on `<h3>`) returned
+  **0 rows on a healthy HTTP 200** — the spec name is not an `<h3>` element, it is a
+  `<div class="h3">` inside each `meta-item` anchor, and the RANK number is a sibling div of the
+  same class. Split on `meta-item`, take whichever `class="h3"` div matches the roster WHOLE
+  (never by position), read the value from the `<li>` after the `</svg>`. Printing the count is
+  the only thing that told these two apart from an outage.
+  **murlok publishes a machine-readable date and it should be used**: `<time
+  datetime="2026-08-25T02:45:22Z">` sits next to the human "Updated 32 minutes ago". asOf is that,
+  not the run clock.
+- **archon-survivability MERGED, 39 tiers, first S2 set this project has held.** The
+  `metric:"survivability"` tierList on the three raid aggregate pages repopulated (26+7+6) after
+  ten consecutive empty days. 30 of 39 moved and several move hard (Prot Warrior S→C, Brewmaster
+  A→C, Holy Priest S→B, Retribution B→S) — that is a SEASON change, not a wobble. Per-boss pages
+  again NOT used (the 2026-08-21 measurement settles that). Fire Mage is absent and keeps its own
+  2026-08-17 date; that is honest here because `spec.survivability` carries a per-spec asOf the
+  drawer renders with a season chip, so the one stale row is self-labelling. The page's
+  `seasonVerified` recorded s1→s2 and its snapshot advanced; it is `ancillary`, so it moves no
+  consensus.
+- **archon-hps MERGED (7/7), reversing last night's hold on purpose.** Last night held it because
+  the same page family's DPS third was stale — but that is coupling, and the split-row rule exists
+  to prevent it: this requirement resolves its own coverage date from its own 7 rows, and its rank
+  pool contains nothing but S2 values. Moves 14.5–43.8%, all inside `maxValueMovePct`. Parse
+  counts FALL (Holy Paladin 390→167) because these are S2 counts replacing S1 ones.
+- **archon-metrics still HELD, on one spec now.** The raid DPS table is 26 of 27 (was 24) with a
+  real sample (Arcane 316 parses). Only Fire Mage blocks it: there is no way to write "unrated"
+  for a NUMBER the way apply-ratings writes an explicit null for a letter, so one S1 value would
+  sit at ~rank 5 of 27 and shift everything below it. Merge wholesale the first night Archon
+  covers all 27.
+- **archon-popularity: merged the two COMPLETE raid role groups.** Raid healer 7/7 and raid tank
+  6/6 each sum to exactly 100.0 on their own, so they merge cleanly; raid DPS is held with
+  archon-metrics because 26-of-27 would publish a group summing to 101.5. All six source groups
+  summed to 100.00 before merging. 1 dp against a 2-dp payload.
+- **archon-mplus-score 40/40, max 2.05% up, parse counts rising.**
+- **mythicstats HELD at period 1077** — `/period/latest` still 302s to the same period first
+  ingested 08-24, 39 rows byte-identical, totals 100.3% (DPS 60.1 / Tank 20.0 / Healer 20.2). The
+  asOf was NOT re-stamped: re-dating unchanged data is the exact freshness lie the coverage-date
+  gate exists to catch.
+- **wowmeta frozen at 2026-08-11**, manifest `snapshotDate` and the rankings file's
+  `Last-Modified` agreeing, all 40 `lowerBound` and `numberOfCharacters` unchanged. Diffed the
+  payload rather than trusting the manifest, per the 08-04 incident.
+- **bloodmallet: 17 MID2 / 10 persistent errors, nothing merged.** Same ten specs as 08-20 and
+  08-24 (Havoc, Devourer, Balance, Feral, Augmentation, Devastation, Windwalker, Retribution,
+  Arms, Fury) on 3/3 attempts each, controls interleaved fine. Upstream IS working through the
+  roster: the three Warlock charts re-simmed 2026-08-24, the other 14 still read 08-19.
+- **simulationcraft: hold MID1, and the picture is about to resolve itself.** `MID1_Raid.txt` is
+  272 bytes (run just started); the HTML is the same completed report, `git build 678e66d384`
+  unmoved. But that in-progress header now reads **12.1.0.69465 Live (hotfix 2026-08-25)** — MID1
+  itself is being regenerated at a live 12.1 build, which would resolve this with no tier-mixing
+  question at all. `MID2_Raid.txt` now HAS a DPS Ranking block at the same build; 36 profiles /
+  18 of 26 DPS specs, missing eight of the same ten bloodmallet cannot re-sim.
+- WCL: no fetch by this agent (no credentials, warcraftlogs.com not contacted). Evidence file
+  verdict `rdps-broken`, `landed {}`; both rows `unreachable`.
+
+
 ## 2026-08-24 (local) — bloodmallet spot-probe: still MID2-partial, unchanged since the nightly, nothing merged
 
 Read-only verification of the one source whose manifest row carries an explicit handoff. **No

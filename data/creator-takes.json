@@ -4437,7 +4437,7 @@
       "sentiment": "buff",
       "patchContext": "12.1 PTR — Season 2 M+ outlook (healer prep stream)",
       "url": "https://youtu.be/u869GspePck?t=1201",
-      "superseded": false,
+      "superseded": true,
       "claim": "He recommends it as the easy-and-good healer and explains the mechanism: totems give constant \"buffer\" healing so a slow or imprecise player is punished far less than on healers where every heal is a discrete press. He names it his main for the season. The M+ caveat he is explicit about is that its tier set wants the group stacked — with two ranged in a pug who will not stack, he says the tier set is partly wasted and far-field play drives you nuts.",
       "bracket": "mplus"
     },
@@ -4865,7 +4865,7 @@
       "claim": "For keys specifically he says he does not think Discipline is in a good state, and advises a viewer who plays only Mythic+ not to put their eggs in the Disc basket. His reasoning is that the spec's raid strength makes a Mythic+ buff unlikely — Blizzard cannot lift it for keys without lifting it in raid, where he thinks it could use a nerf — so he expects the key-facing weakness to persist rather than be tuned away. He explicitly contrasts it with Holy Priest, which he says he would pick over Disc for keys in the specs' current state."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Paladin",
       "spec": "Holy",
       "creator": "MadSkillzzTV",
@@ -5006,7 +5006,7 @@
       "patchContext": "12.1 PTR - walkthrough of the August 18 healer tuning, Holy Priest section (supersedes his 08-09 M+ read)",
       "url": "https://youtu.be/39tIEQJLJFw?t=308",
       "claim": "He reads the August 18 Holy Priest changes as a substantial and welcome package on a spec he thinks needed the attention. Two threads: Enlightenment now regenerates mana 25% faster instead of 10%, which he calls very much needed for Holy Priest's mana economy; and a set of Oracle throughput buffs - Words of the Wise raising Holy Word: Serenity and Sanctify healing by 40% instead of 10%, Prompt Prognosis healing up 55%, and Preventative Measures raising Prayer of Mending healing by 40% instead of 15% - which Blizzard frames as making Oracle competitive against Archon. He notes these same abilities were already buffed on the PTR a couple of weeks earlier, so this compounds rather than starts the trend. His read on where it lands: Oracle is already the Mythic+ recommendation and this cements it further, while for raid the previous recommendation was Archon and he expects the build choice to genuinely reopen. He counts Holy Priest among the underperforming raid healers Blizzard set out to lift in this pass, alongside Restoration Druid and Mistweaver.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Monk",
@@ -6164,6 +6164,54 @@
       "patchContext": "Season 2 live — reaction to the announced August 25 tuning pass (posted 2026-08-22), week one of the season",
       "url": "https://youtu.be/3E_EY7ULmkw?t=301",
       "claim": "On the announced August 25 pass: he frames Frost as the Mage spec Blizzard is worried about — underplayed while 'everybody's playing arcane', and a little squishier than the other Mage specs after earlier survivability cutbacks. He walks the buffs (Ice Barrier absorbing 35% of max health instead of 30, Blizzard damage +10%, the Frostbite talent's shatter splash +10%, Isothermic Core's Meteor +25% for Frostfire) but his conclusion stays guarded: maybe 'a little bit better, but who knows really'.",
+      "superseded": false
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "creator": "MadSkillzzTV",
+      "date": "2026-08-22",
+      "sentiment": "mixed",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — his 9h30m week-one healer stream (Mythic+ into Heroic/Mythic raid splits), published 2026-08-22 hours before Blizzard announced the August 25 tuning pass",
+      "url": "https://youtu.be/qG-So9pnRBQ?t=27600",
+      "claim": "Raiding through heroic-week splits he calls Holy Paladin the outlier of the healer roster: “Paladin felt very strong”, and repeating what he said in PTR testing, every ability you press visibly moves the healing bars in a way he says is not true of the other healers. He reads that as unsustainable rather than as a lasting advantage — he expects Blizzard to look at the heroic-week logs and cut it, guessing a 5–8% nerf, and elsewhere in the stream says he would rather they wait for Mythic logs before changing anything.",
+      "superseded": false
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "creator": "MadSkillzzTV",
+      "date": "2026-08-22",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his 9h30m week-one healer stream (Mythic+ into Heroic/Mythic raid splits), published 2026-08-22 hours before Blizzard announced the August 25 tuning pass",
+      "url": "https://youtu.be/qG-So9pnRBQ?t=9720",
+      "claim": "Answering a viewer on where the healers land in keys, he names Holy Paladin and Restoration Shaman as the two that are “going to probably dominate” Mythic+, and uses them as the bar the spec under discussion falls short of.",
+      "superseded": false
+    },
+    {
+      "class": "Shaman",
+      "spec": "Restoration",
+      "creator": "MadSkillzzTV",
+      "date": "2026-08-22",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his 9h30m week-one healer stream (Mythic+ into Heroic/Mythic raid splits), published 2026-08-22 hours before Blizzard announced the August 25 tuning pass",
+      "url": "https://youtu.be/qG-So9pnRBQ?t=9720",
+      "claim": "He names Restoration Shaman alongside Holy Paladin as the two healers he expects to “probably dominate” Mythic+ this season, holding them out as the standard the rest of the roster is measured against in keys.",
+      "superseded": false
+    },
+    {
+      "class": "Priest",
+      "spec": "Holy",
+      "creator": "MadSkillzzTV",
+      "date": "2026-08-22",
+      "sentiment": "buff",
+      "bracket": "both",
+      "patchContext": "Season 2 live — his 9h30m week-one healer stream (Mythic+ into Heroic/Mythic raid splits), published 2026-08-22 hours before Blizzard announced the August 25 tuning pass",
+      "url": "https://youtu.be/qG-So9pnRBQ?t=33720",
+      "claim": "Asked directly which is the better spec, Restoration Shaman or Holy Priest, he answers that both are “doing quite well” this season and are also relatively easy to play — a positive read on Holy Priest with no bracket attached.",
       "superseded": false
     }
   ],

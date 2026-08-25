@@ -16,6 +16,54 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-25 (nightly) — ICY VEINS RECUTS 35 LETTERS AND WITHDRAWS TWO TO "TBD"; a \b in the letter regex nearly published 38 phantom moves
+
+All four tier sources fetched inline, one at a time, no subagents. Per-page counts printed and
+reconciled against 27+7+6=40 before every merge.
+
+- **icyveins 80/80, 0 unmatched, 35 MOVES.** Six pages, direct browser-UA GET, HTTP 200,
+  192–340 KB. **The parser trap of the night:** the first letter regex was
+  `/^([SABCDF][+-]?)\b/`, and because `+` is a non-word character the `\b` cannot sit after
+  "A+" — the engine backtracks and matches "A". Every plussed row therefore read one band low,
+  and the diff against stored showed **38 moves on 78 rows**: the exact shape of the recorded
+  "13 phantom S-/A-/B- moves" trap, and it looks like a real recut. Anchor the letter as a
+  WHOLE-CELL alternation over the registered scale (`^(S\+|S|A\+|A|B\+|B|C|TBD)$`), then the
+  tier tables print verbatim and can be eyeballed: raid DPS S 3 / A+ 10 / A 7 / B 6 / C 1 = 27,
+  M+ DPS S+ 3 / S 2 / A+ 6 / A 8 / B 5 / C 1 / **TBD 2** = 27.
+- **Icy Veins publishes "TBD" as a tier row**, and it is not the era-gated source this project
+  used to reserve that rule for. Windwalker Monk and Frost Death Knight sit in it on the M+ DPS
+  page. Written as **explicit null**, never omitted and never left at the previous letter — they
+  now read "—" and average 3 sources in M+ instead of 4. Ratings UPSERT, so "omit it" silently
+  publishes a letter the page has withdrawn.
+- The recut is genuinely upstream: raid DPS `dateModified` 2026-08-23T13:09Z and M+ DPS
+  2026-08-23T15:31Z against the 2026-08-16 stored, and five of six `published` values moved
+  (raid DPS 08-16→08-23, raid healer 08-13→08-24, all three M+ 08-16→08-23; raid tank alone
+  unchanged at 08-08). All six agree with the pre-agent `published-evidence/evidence.json`.
+- **method 40+40, 0 moves, fourth night running.** M+ page again carries 8 tier blocks; the four
+  dungeon-difficulty ones were rejected by ROSTER MATCH, never by position.
+  Note: the era-check "Devourer present" flag came back FALSE on a tag-stripped body scan and it
+  was a false alarm — Method writes spec names in `data-original-title` attributes, which
+  tag-stripping deletes. Confirm Devourer from the PARSED ROWS (it is there, A in both brackets),
+  not from body text.
+- **wowhead 80/80, 0 moves.** Unescape backslash-slash across the whole document FIRST, then take
+  the `[tier-list=rows]` block with the most `[spec-badge=]` hits. Exactly one block per page
+  tonight. M+ DPS still S/A+/A/B/C/D with no S-tier spec.
+- **archon raid 39 entries (26+7+6), up from 37.** Frost Mage and Affliction Warlock are BACK;
+  only Fire Mage is still missing from the S2 raid list, and its stored letter was re-written as
+  explicit null. `lastUpdated` 08-23T12:00Z → 08-24T12:00Z on all six.
+- **Downstream: 25 consensus letter moves, all one band, zero two-band** — exactly at
+  `maxTotalMoves` 25 and therefore NOT a breach (`check-refresh` tests `total > limit`). Most of
+  it is the Icy Veins recut. No ack proposed. Two raid cells went 3→4 sources and two M+ cells
+  went 4→3.
+- No `seasonVerified` value changed on any consensus-feeding page, so freeze-season had nothing
+  to do (and on the runner it is publish's step, never the agent's). The ancillary Archon
+  survivability page DID move s1→s2 — see refresh-metrics.
+- `node src/snapshot.mjs` deliberately NOT run: on the nightly runner the publish job resets
+  agent-shipped `data/history/` snapshots and takes its own, and writing one here would become
+  the anomaly gate's own baseline in the completion check that runs after this agent — turning a
+  25-move night into a self-certified 0-move night. Local runs still snapshot.
+
+
 ## 2026-08-24 (nightly) — ARCHON'S SEASON-2 RAID LISTS LAND; the raid consensus recomposes 3 -> 4 sources
 
 **The event the transition plan has been waiting for.** After three weeks of empty raid tier

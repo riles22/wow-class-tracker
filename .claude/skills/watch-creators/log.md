@@ -16,6 +16,50 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-25 (nightly) — 44 feeds, 0 errors; MadSkillzzTV's 9h33m week-one healer stream → 4 takes
+
+- **Discovery:** 44 channels (41 class + 3 general), every one HTTP 200 on the FIRST attempt, 0
+  feed errors, no backoff. Seen-set rebuilt from the four structured lanes (seen 549 + skipped 409
+  + videos + take/metaNote youtu.be ids = **1,196**), never from log prose. 660 entries → **142
+  unseen inside the cycle bound 2026-06-18** (derived with `Math.min` over ptr-builds dates, not
+  an index), 0 unseen predating it.
+- **Distilled `qG-So9pnRBQ`** (MadSkillzzTV, published 2026-08-22, 9h33m, Supadata verdict "ok")
+  into **4 takes**, all inside his registered healer scope, all era-framed "Season 2 live":
+  · **Holy Paladin — raid — mixed** (t=27600). "Paladin felt very strong"; repeating what he said
+  in PTR testing, every ability visibly moves the healing bars in a way he says is not true of
+  other healers; he reads that as unsustainable and guesses a 5–8% nerf off the heroic-week logs.
+  **`mixed`, not `buff`** — the read points both ways, and mixed correctly abstains rather than
+  asserting a direction he did not give.
+  · **Holy Paladin — mplus — buff** and **Restoration Shaman — mplus — buff** (t=9720). He names
+  those two as the pair "going to probably dominate" keys. Note the bracket: he contrasts
+  "probably not in mythic" with "in raid it's all right", so "mythic" there means Mythic+, not
+  Mythic raid.
+  · **Holy Priest — both — buff** (t=33720). Asked point-blank whether Restoration Shaman or Holy
+  Priest is better, he answers both are "doing quite well" and relatively easy.
+- **Deliberately NOT distilled from the same stream**, and worth recording because a 9-hour VOD
+  invites over-mining: the "this is really bad this season" passage at 162m — the chat question it
+  answers never appears in the caption track, and pinning it on Preservation Evoker because he
+  happens to be playing one is inference; and the tier-set comparisons at 481m, because "new set
+  beats old set" is a gear claim, not a spec-strength read.
+- **Superseded 3, same lens only:** his 08-09 Resto Shaman M+, 08-12 Holy Paladin M+, 08-15 Holy
+  Priest both-bracket. His 08-04 Resto Shaman **raid** take is a different lens and stays live.
+  The new Holy Paladin raid take supersedes nothing — he had no live raid take on it.
+- **Lane hygiene:** `qG-So9pnRBQ` removed from `videos[]` on distillation and confirmed absent
+  from `seen[]` and `skipped[]` (the precedence ladder — distilled beats both).
+- **Queued 2** for the next drain, keyword-filtered as the nightly lane requires against the
+  100-request monthly budget: `LoCCPjj7J6c` (Dalaran Gaming, "If You Aren't Playing These 5 Specs
+  in Season 2…", inside his Druid/Hunter/Mage/Rogue/Shaman scope) and `igWiPoYPlV4` (Musguete,
+  "Assassination Rogue is Broken! Season 2 Guide", inside his Assassination scope).
+- **Nothing retired to `seen[]`** — no dismissal this run was durable. The other ~140 unseen are
+  launch-week and RWF stream VODs, boss/dungeon/UI guides, spec how-tos and Supatease clip-shaped
+  uploads whose `media:description` merely repeats the title; all stay unseen so the next run
+  reconsiders them.
+- **`latest` NOT advanced for MadSkillzzTV** — his entry is `managedBy: "overrides"` and
+  `data/community-overrides.json` is owner-curated and off-limits to this agent (Gate 0 applies it
+  before the boundary diff, so an agent edit reds the night). Flagged for Riley instead.
+- yt-dlp not invoked (settled 2026-07-17 datacenter bot wall); nothing installed or upgraded.
+
+
 ## 2026-08-24 (local) — the 429 is DAY TWO and now DIAGNOSED; 1 of 2 queued videos drained through Riley's session, 3 takes
 
 **Yesterday's "worth watching" happened.** The 08-23 local entry recorded the `timedtext` caption
