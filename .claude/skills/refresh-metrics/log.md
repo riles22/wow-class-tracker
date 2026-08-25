@@ -16,6 +16,37 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-25 (local, evening) — Archon raid DPS/popularity merged wholesale-minus-Fire-Mage by OWNER DECISION; the "wait for 27/27" plan is superseded
+
+- **The standing hold ended tonight, by Riley's call, on the drop path the nightly's manifest
+  note said didn't exist.** Both 08-25 nightlies held the 26-of-27 raid DPS cut because a merge
+  would leave Fire Mage's stored S1 row ranked inside an S2 pool ("no way to write 'unrated'
+  for a number"). The third option — merge the 26+6 S2 rows and DROP Fire Mage's two stale S1
+  rows (DPS family + raid Popularity) — keeps every pool season-uniform, sums popularity
+  groups back to 100.0, and reads "—"/pending for Fire Mage, consistent with its null Archon
+  letter. Chosen over waiting because Fire Mage is absent for being UNPLAYED at Mythic (also
+  absent from Archon's throughput/popularity tier lists), so "all 27" had no near exit. It
+  re-enters by ordinary upsert whenever Archon publishes it.
+- Merged from the 2026-08-25T12:00Z dataset (fetched ~16:00 UTC, raw `__NEXT_DATA__`,
+  `specRankingsSection.table.data`, resolved by `itemPath` slugs — immune to the
+  "BeastMastery Hunter" compound-name trap): 26 DPS "95th pct DPS (Mythic)" rows (the 6 tank
+  rows the 2nd nightly had merged were re-upserted, same values), 39 raid Popularity rows,
+  7 HPS rows re-upserted, survivability 39/40. **Fire Mage's survivability hold was
+  RESPECTED** (the 2nd nightly's call: 100.0 on zero parses is a clustering artifact) — its
+  stale row self-labels via its own asOf. Popularity sums 100.0 per role at source;
+  throughput letters cross-checked 39/39 against stored ratings. 6 rows under MIN_RANK_N=10
+  (Fury 9, Feral 7, Frost Mage 5, Survival 4, Affliction 2, Vengeance 9) — value shown, no
+  rank, honest.
+- **validate.mjs now GATES the mixing these holds were protecting against** (season-uniform
+  rank pools: era-live rows in one (role, bracket, name) pool must sit on one side of
+  `PHASES.liveSince`). A future partial merge across a season boundary fails red instead of
+  relying on run discipline; wholesale holds still pass. The three archon standing-red labels
+  in required-sources.json were rewritten as resolved in the same change (reviewed code
+  commit, not the data commit).
+- Heartbeat after the merge: archon-metrics / archon-hps / archon-popularity all 0d; the
+  remaining `--age` reds are the five pre-existing owner-accepted ones (wowmeta, wcl-live-*,
+  bloodmallet, simulationcraft), untouched.
+
 ## 2026-08-25 (nightly, 2nd run of the day) — Archon re-clusters survivability inside four hours; tank DPS cut merged; every other series byte-identical
 
 - **archon survivability — 39 of 40 merged, 26 letters MOVED against the merge made at 11:24Z the

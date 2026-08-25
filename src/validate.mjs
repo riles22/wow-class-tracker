@@ -492,6 +492,45 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
     );
   }
 
+  /* --- season-uniform metric rank pools (2026-08-25) ---
+     metricRanks (render.mjs) groups by (role, bracket, name) with no date key, so a
+     PARTIAL re-harvest of a family across a season boundary would rank old-season values
+     against new-season values in one published list. The 08-25 Archon transition avoided
+     that only by run discipline: the S2 raid tables came back 26-of-27 (no Fire Mage),
+     and a naive merge would have left one Season-1 value ranked ~5/27 inside a Season-2
+     pool — same shape as the sim-tier mixing above, and equally invisible to the
+     magnitude-based value-move guard. Era-live rows in one rank pool must therefore sit
+     on the same side of PHASES.liveSince; merge a family wholesale, hold it wholesale,
+     or drop the unrefreshable rows — never mix. Wholesale holds pass (the whole pool
+     stays on the old side). Limitation, accepted: pools wholly BEFORE liveSince may span
+     older seasons undetected — PHASES records no historical boundaries, and such pools
+     are frozen history that no longer refreshes. */
+  if (PHASES.liveSince) {
+    const rankPools = new Map();
+    for (const spec of specs) {
+      for (const m of spec.metrics ?? []) {
+        if ((m.era ?? "live") !== "live" || m.asOf == null) continue;
+        const key = `${spec.role}|${m.bracket}|${m.name}`;
+        if (!rankPools.has(key)) rankPools.set(key, new Map());
+        const sides = rankPools.get(key);
+        const side = m.asOf >= PHASES.liveSince ? "current" : "pre";
+        if (!sides.has(side)) sides.set(side, []);
+        sides.get(side).push(`${spec.class} ${spec.spec} @${m.asOf}`);
+      }
+    }
+    for (const [key, sides] of rankPools) {
+      if (sides.size <= 1) continue;
+      const pre = sides.get("pre"), cur = sides.get("current");
+      errors.push(
+        `specs.json: rank pool (${key}) mixes seasons — ${cur.length} row(s) on/after PHASES.liveSince ` +
+        `(${PHASES.liveSince}) ranked against ${pre.length} from before it ` +
+        `(${pre.slice(0, 4).join("; ")}${pre.length > 4 ? "; …" : ""}). ` +
+        `Merge the family wholesale, hold it wholesale, or drop the unrefreshable rows — a mixed pool ` +
+        `publishes a cross-season ranking no source ever made.`
+      );
+    }
+  }
+
   // --- community registry ---
   const specsByClass = new Map();
   for (const s of specs) {

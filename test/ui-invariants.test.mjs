@@ -318,8 +318,19 @@ ui("the What-changed strip agrees with the arrows the grid actually draws", asyn
     if (payloadMoved) {
       assert.ok(shownLanes.length > 0, "sanity: at least one lane must have movement to narrate");
     } else {
-      assert.equal(shownLanes.length, 0,
-        `the payload has no movement in either lane, but ${shownLanes.length} strip(s) claim some`);
+      /* A FIFTH honest shape (2026-08-25): the strip also opens for its NON-movement
+         lanes — "N specs with fresh info", and Dummy Dome shifts inside a cycle — and
+         then states an explicit ▲0 ▼0 arrow count. That is not a movement claim, so a
+         visible strip is allowed here; what it may not do is claim a nonzero arrow.
+         First hit by the Archon S2 metric merge: ranks moved (drawer rankDeltas) but no
+         tier letter did, fresh-info specs existed, and the old total-absence assertion
+         red on a strip honestly reading "▲0 ▼0 tier moves · N specs with fresh info". */
+      for (const [src, label] of shownLanes) {
+        assert.match(label, /▲0(?!\d)/,
+          `payload has no ${src} movement — a visible strip must count ▲0, got: ${label}`);
+        assert.match(label, /▼0(?!\d)/,
+          `payload has no ${src} movement — a visible strip must count ▼0, got: ${label}`);
+      }
     }
     for (const [src, label] of shownLanes) {
       assert.match(label, src === "consensus" ? /Consensus/ : /Ours: 12\.1/,

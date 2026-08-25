@@ -943,3 +943,37 @@ test("sim-tier guard: apply-metrics carries the chart's own tier through to figh
   // The profiles branch must not drop `tier`, or the guard above can never see a mixed pool.
   assert.match(src, /fightProfile\.tier\s*=\s*row\.tier/);
 });
+
+/* The season-mixing guard — the rank-pool sibling of the sim-tier guard above. metricRanks
+   keys by (role, bracket, name) with no date, so a PARTIAL re-harvest across a season
+   boundary would rank old-season values against new-season values in one published list.
+   Landed 2026-08-25, when Archon's S2 raid tables came back 26-of-27 (no Fire Mage) and only
+   run discipline kept the one S1 leftover out of the S2 pool. */
+test("season guard: a rank pool mixing rows across PHASES.liveSince fails validation", async () => {
+  const data = await loadData(ROOT);
+  const broken = structuredClone(data);
+  // Recreate the exact 08-25 hazard: one DPS spec's row left behind on a pre-flip date
+  // while the rest of its family is current.
+  const dps = broken.specs.filter(s => s.role === "DPS" &&
+    (s.metrics ?? []).some(m => m.source === "archon" && m.bracket === "raid" && m.name === "95th pct DPS (Mythic)"));
+  assert.ok(dps.length >= 2, "fixture needs a real multi-spec rank pool");
+  dps[0].metrics.find(m => m.source === "archon" && m.bracket === "raid" && m.name === "95th pct DPS (Mythic)")
+    .asOf = "2026-08-16"; // pre-liveSince (2026-08-18)
+  const errors = validateData(broken);
+  assert.ok(
+    errors.some(e => e.includes("mixes seasons") && e.includes("95th pct DPS (Mythic)")),
+    `expected a mixed-season pool error, got: ${errors.join(" | ")}`
+  );
+});
+
+test("season guard: a WHOLESALE hold passes — the whole pool on the old side is honest staleness, not mixing", async () => {
+  const data = await loadData(ROOT);
+  const held = structuredClone(data);
+  for (const s of held.specs) {
+    for (const m of s.metrics ?? []) {
+      if (m.source === "archon" && m.bracket === "raid" && m.name === "95th pct DPS (Mythic)") m.asOf = "2026-08-16";
+    }
+  }
+  // Staleness is check-refresh's beat (--age flags it); validation only refuses the mix.
+  assert.ok(!validateData(held).some(e => e.includes("mixes seasons")));
+});

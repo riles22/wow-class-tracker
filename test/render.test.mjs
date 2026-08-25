@@ -894,8 +894,9 @@ test("dataHealth stays clock-free and ships what the client needs to age it (aud
   assert.equal(clientStale.length, 2, "the client can see what the build deliberately cannot");
 
   // A mixed state still resolves self-relatively at build time, sources intact. NOTE the
-  // labels must differ: entries are keyed by metric NAME across all specs, keeping the
-  // newest date per name — same-named metrics on two specs collapse to one entry.
+  // labels must differ: entries are keyed by (bracket, name) across all specs, keeping the
+  // newest date per key — same-named metrics on two specs in one bracket collapse to one
+  // entry, while the same name across BOTH brackets stays two (the Popularity mask fix).
   const mixed = dataHealth([
     { metrics: [{ name: "Fresh", asOf: "2026-07-25", source: "archon" }] },
     { metrics: [{ name: "Frozen", asOf: "2026-06-01", source: "warcraftlogs" }] },
@@ -905,6 +906,22 @@ test("dataHealth stays clock-free and ships what the client needs to age it (aud
   assert.deepEqual(mixed.series.map(s => s.label), ["Frozen"]);
   assert.equal(mixed.oldest, "2026-06-01");
   assert.equal(mixed.series[0].source, "warcraftlogs");
+});
+
+test("dataHealth: a name shared across brackets cannot mask the other bracket's stall", () => {
+  // The real case (2026-08-25): "Popularity" exists in raid AND M+. Name-only keying let
+  // the fresh M+ rows set the family's newest date, hiding 27 raid rows 9 days stale.
+  const h = dataHealth([
+    { metrics: [{ name: "Popularity", bracket: "mplus", asOf: "2026-08-25", source: "archon" }] },
+    { metrics: [{ name: "Popularity", bracket: "raid", asOf: "2026-08-16", source: "archon" }] },
+  ]);
+  assert.equal(h.all.length, 2, "two brackets must stay two series");
+  assert.deepEqual(h.series.map(s => s.label), ["Popularity (raid)"],
+    "the stale raid series must surface, bracket-qualified so the banner can tell them apart");
+  // Bracket-unique names keep their bare label — banner text only changes where it was ambiguous.
+  assert.ok(h.all.some(s => s.label === "Popularity (M+)"));
+  const solo = dataHealth([{ metrics: [{ name: "M+ score (95th pct)", bracket: "mplus", asOf: "2026-08-25", source: "archon" }] }]);
+  assert.deepEqual(solo.all.map(s => s.label), ["M+ score (95th pct)"]);
 });
 
 test("dataHealth splits Warcraft Logs' two pipelines, so fresh rows never join an outage clause", () => {

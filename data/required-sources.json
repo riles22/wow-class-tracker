@@ -183,7 +183,7 @@
     },
     {
       "key": "archon-metrics",
-      "label": "Archon numeric throughput metrics (95th-pct DPS/HPS + M+ score, from specRankingsSection). OWNER-ACCEPTED STANDING RED (2026-08-21, Riley): the Season-2 RAID pages return specRankingsSection.table.data EMPTY (0 rows, totalParses 0) — a rebuild-with-no-data state, NOT a parse failure, proven on the same run against the M+ pages where the identical path returns 27/7/6 rows. The raid cut cannot advance until Archon publishes S2 raid parses. Do not ack it away and do not raise maxAgeDays; the M+ half is unaffected and refreshes normally.",
+      "label": "Archon 95th-pct DPS (raid — DPS + tank rows, from specRankingsSection; HPS and M+ score are their own rows). The 2026-08-21 standing red (S2 rebuild served 0 rows) RESOLVED 2026-08-25 in a reviewed local run: the repopulated S2 tables were merged wholesale, and Fire Mage — which has no S2 row because nobody logs it at Mythic — had its S1 rows DROPPED rather than held, so the rank pool stays season-uniform (validate.mjs now gates that shape). Fire Mage reads pending until Archon publishes it; that is data, not a failure.",
       "maxAgeDays": 5,
       "date": {
         "type": "metrics",
@@ -199,7 +199,7 @@
     },
     {
       "key": "archon-hps",
-      "label": "Archon 95th-pct HPS (raid, healers). OWNER-ACCEPTED STANDING RED (2026-08-21, Riley): same Season-2 raid state as archon-metrics — the healer page carries 0 rows (totalParses 0), so none of the 7 stored HPS values can be refreshed. Kept as its own row per the split-row rule rather than coupled to archon-metrics. Do not ack it away and do not raise maxAgeDays.",
+      "label": "Archon 95th-pct HPS (raid, healers). The 2026-08-21 standing red (healer page served 0 rows) RESOLVED 2026-08-24/25: the S2 healer table repopulated, all 7 rows merged by the 08-25 nightly and re-upserted from the same 08-25T12:00 dataset as archon-metrics in the follow-up local run. Kept as its own row per the split-row rule.",
       "maxAgeDays": 5,
       "date": {
         "type": "metrics",
@@ -231,7 +231,7 @@
     },
     {
       "key": "archon-popularity",
-      "label": "Archon popularity % (raid + M+, from specRankingsSection — the series a 07-21 recipe-navigation error silently stalled). OWNER-ACCEPTED STANDING RED (2026-08-21, Riley): half this series refreshes and half cannot — the 40 M+ rows re-parse from the S2 pages, while the raid rows sit behind the same totalParses-0 rebuild as archon-metrics, so the coverage date correctly does not move. Do not ack it away and do not raise maxAgeDays.",
+      "label": "Archon popularity % (raid + M+, from specRankingsSection — the series a 07-21 recipe-navigation error silently stalled). The 2026-08-21 standing red RESOLVED 2026-08-25: the raid DPS group merged once the S2 tables repopulated, with Fire Mage's leftover S1 share DROPPED rather than held (a published sum-to-100 group cannot carry a stale extra share — it summed to 101.5). All role groups sum to 100.0 again; 79 rows, Fire Mage pending upstream.",
       "maxAgeDays": 5,
       "date": {
         "type": "metrics",

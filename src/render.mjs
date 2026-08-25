@@ -1771,11 +1771,17 @@ export function tierListHealth(sources) {
 const wclFamily = label => (/\braw DPS\b/i.test(label) ? "raw" : "redistributed");
 
 export function dataHealth(specs, sources = null) {
-  const newest = new Map(); // series label → { asOf: newest seen, source, era }
-  const note = (label, asOf, source, era = "live") => {
+  /* Keyed by (bracket, name), not name alone (2026-08-25). "Popularity" exists in BOTH
+     brackets, and name-only keying let the fresh M+ rows set the family's newest date —
+     which masked 27 raid rows sitting 9 days stale (Season 1, held through the S2
+     transition) from this banner entirely. The label stays the bare name unless the same
+     name really does span brackets, so banner text only changes where it was ambiguous. */
+  const newest = new Map(); // `${bracket}|${label}` → { label, bracket, asOf: newest seen, source, era }
+  const note = (label, asOf, source, era = "live", bracket = null) => {
     if (!asOf) return;
-    const cur = newest.get(label);
-    if (!cur || asOf > cur.asOf) newest.set(label, { asOf, source: source ?? cur?.source ?? null, era });
+    const key = `${bracket ?? ""}|${label}`;
+    const cur = newest.get(key);
+    if (!cur || asOf > cur.asOf) newest.set(key, { label, bracket: bracket ?? null, asOf, source: source ?? cur?.source ?? null, era });
   };
   for (const spec of specs) {
     /* The era travels with the series (2026-08-20). A retired cycle's PTR series never
@@ -1788,7 +1794,7 @@ export function dataHealth(specs, sources = null) {
        Read the EXPLICIT field only — no marker inference — so this stays a pure function
        of the data with no PHASES import (verified: 0 of 660 rows rely on inference, and
        validation enforces era typing, so the explicit field is exact). */
-    for (const m of spec.metrics ?? []) note(m.name, m.asOf, m.source, m.era ?? "live");
+    for (const m of spec.metrics ?? []) note(m.name, m.asOf, m.source, m.era ?? "live", m.bracket);
     // ptrDummy carries its own source id — read it rather than assuming Warcraft Logs.
     // It is PTR by definition: fixed-target-count test-realm dummies.
     if (spec.ptrDummy?.asOf) note("Dummy Dome rDPS (real-player medians)", spec.ptrDummy.asOf, spec.ptrDummy.source, "ptr");
@@ -1806,12 +1812,18 @@ export function dataHealth(specs, sources = null) {
   // The source travels with each series so the banner can attribute a stall correctly. It
   // used to announce every stall as a Warcraft Logs rDPS outage, which made two Robydoby
   // Google Sheets a WCL API failure (audit 2026-07-24, D1).
-  const all = [...newest.entries()]
-    .map(([label, v]) => ({
-      label, asOf: v.asOf, source: v.source ?? null, era: v.era ?? "live",
+  // A name spanning brackets gets a bracket qualifier so the banner can tell the two
+  // series apart; every other label renders exactly as before.
+  const labelBrackets = new Map();
+  for (const v of newest.values()) labelBrackets.set(v.label, (labelBrackets.get(v.label) ?? 0) + 1);
+  const bracketLabel = b => (b === "mplus" ? "M+" : b ?? "?");
+  const all = [...newest.values()]
+    .map(v => ({
+      label: labelBrackets.get(v.label) > 1 ? `${v.label} (${bracketLabel(v.bracket)})` : v.label,
+      asOf: v.asOf, source: v.source ?? null, era: v.era ?? "live",
       // Only Warcraft Logs has two independently-healthy pipelines to tell apart; every
       // other source is one feed, so it carries no family and gets no causal wording.
-      ...(v.source === "warcraftlogs" ? { family: wclFamily(label) } : {})
+      ...(v.source === "warcraftlogs" ? { family: wclFamily(v.label) } : {})
     }))
     .concat(tiers)
     .sort((a, b) => a.asOf.localeCompare(b.asOf) || a.label.localeCompare(b.label));
