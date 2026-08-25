@@ -16,6 +16,38 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-25 (nightly, 2nd run of the day) — nothing new; the Aug 25 pass is live but Blizzard has posted no round-up for it yet
+
+Ran at ~15:55Z, i.e. after the 11:24Z nightly and the ~14:30Z local sweep. **No feed entry created,
+no data file touched by this lane.** All four channels swept:
+
+- **Wowhead RSS** 40 items, HTTP 200, 154 KB, parsed per `<item>` block. Nothing new since the
+  14:30Z local sweep; newest is `news=382603` (08:05 CDT).
+- **News INDEX polled as well** (`data.news.newsData`, 20 posts, newest 382603) because the index
+  leads the RSS — same head, so nothing landed mid-run.
+- **Blue tracker** (`data.blueTracker.default`, brace-balanced from the id attribute): newest
+  Blizzard class post is still Kaivax's "Class Tuning Incoming – August 25". No 12.2 PTR
+  announcement in any channel.
+- **Dev-notes thread 2317811**: last Linxy post is #19, 2026-07-31 — the closed cycle's silence.
+
+Three examined and correctly NOT logged:
+- `news=382603` "Estimated DPS Increases for August 25th Class Tuning" — **Wowhead's own class
+  writers' sim estimates OF the already-logged pass**, not Blizzard data. Worth recording that its
+  16-row table is a clean cross-check on our distillation: it names exactly the 14 PvE specs in the
+  08-22 entry (plus Preservation Evoker and Havoc DH in the headline, both of which ARE in our
+  `specsAffected`), so no spec was missed.
+- **The running hotfix post has an August 21 section with no Classes block at all** (topic 2336376,
+  title rolled to "August 21", post 1 v15, edited 2026-08-22T01:46Z): Delves, Dungeons and Raids,
+  Housing, Items, Prey only. That is why there is no 08-21 hotfix entry in the feed and why one
+  should not be manufactured — the absence is upstream's, not a distillation gap.
+- `news=382602` Vashnik, `news=382597` M+ tuning, the Nymrissa and Altar of Fangs blue posts:
+  encounter/dungeon tuning, out of scope.
+
+The 08-22 entry's v2 amendment re-verified against the forum JSON: topic 2339812 is **still version
+2**, updated 2026-08-24T21:44Z, so no third edit landed. No set bonus touched → no `spec.tierSet`
+advanced. Writeup coverage recomputed rather than remembered: **one** spec at `ptr: null`
+(Demonology Warlock, the deliberate one). PTR zone lanes (54/52/56/57) dormant, as designed.
+
 ## 2026-08-25 (local) — nothing new to log; the August 25 tuning had not gone live yet at run time
 
 Delta check against the nightly's own sweep three hours earlier (its `startedAt` 11:24:31Z), run

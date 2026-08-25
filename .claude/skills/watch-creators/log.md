@@ -16,6 +16,35 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-25 (nightly, 2nd run of the day) — 44/44 feeds polled, no transcript lane, ONE video queued
+
+- **Discovery**: all **44 unique channels** behind the 79 transcribable creator entries polled via
+  `feeds/videos.xml`, 44/44 HTTP 200 after retry/backoff, **0 failures, 660 videos**. Seen-set
+  rebuilt from the four machine lanes only (seen[] 549 · skipped[] 409 · videos[] 0 · take/metaNote
+  urls) → **149 unseen, all in-cycle** against the computed bound (oldest `ptr-builds.json` date,
+  2026-06-18, taken as a DATE not an index). 106 of them match the nightly keyword filter.
+- **Transcripts: none available.** `transcript-fetch/summary.json` reads verdict `ok`,
+  `requested 0` — the deterministic step ran at 15:51:05Z against an empty queue. This agent holds
+  no transcript credentials and contacted no caption endpoint. **0 takes, 0 metaNotes, 0
+  supersessions; `creator-takes.json` byte-identical.**
+- **Queued exactly one**: Obli `djVmUT8w0fU` "Talking shop about Blightfall + NEW UNHOLY BUGS!! /
+  Unholy DK Midnight Update 12.1" (08-25). Chosen on its `media:description`, not its title —
+  it promises Blightfall's "strengths and weaknesses in raid and M+", a spec-strength read inside
+  Obli's registered Frost/Unholy scope.
+- **The other 105 keyword matches were deliberately NOT queued and deliberately NOT marked seen.**
+  Supadata is 100 requests a MONTH and we are six days from month end, so the queue takes the
+  video most likely to yield a take, not everything that mentions a class. What was passed over is
+  the shapes with a long verified-skip record here (counts recomputed from `skipped[]`, not
+  remembered): stream VODs and key/raid POV clips — Bansherz **32**, Shindigg **11**, Maximum **11**,
+  Critcake **7**; boss/dungeon guides — Tactyks **20**, Megasett **19**; spec build walkthroughs —
+  NeekapHere **18**, LBNinja7 **13**, AutomaticJak **10**, Jedith **7**; and Supatease, **19 of whose
+  39 skips are explicitly PvP-framed**. Dratnos' RWF recaps are the same story: **6** of his 18 skips
+  are recap episodes, days 0-2 of this very race among them. Leaving them
+  UNSEEN is the point: a budget/triage dismissal is not durable, so the next run reconsiders them,
+  whereas seen[] would abandon them silently.
+- **General lane**: izen's newest (`5m_K51fnwhc`, 08-22) and Zorthas' (`x0fxEWTq3Pw`, 08-18) are
+  both already distilled — nothing new for `metaNotes`.
+
 ## 2026-08-25 (local) — THE 429 HAS CLEARED after three days; queue drained 2 → 0, 5 takes
 
 - **The headline is transport, not content: the anonymous `timedtext` caption lane WORKS again.**

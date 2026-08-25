@@ -16,6 +16,34 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-25 (nightly, 2nd run of the day) — all four sources re-fetched, 319 rows parsed, **0 letters moved**
+
+Every source fetched inline, one at a time. Per-page counts printed and reconciled against
+27+7+6=40 before any merge, exactly as the 35-letter recut earlier today required.
+
+- **icyveins 80/80, 0 unmatched, 0 moves.** Letter matched as a whole-cell alternation over the
+  registered scale (the `\b` backtracking trap that read "A+" as "A" is now avoided by
+  construction). **Two M+ DPS specs are still TBD upstream** — Windwalker Monk and Frost DK,
+  withdrawn on the 08-25 morning recut — and both stay explicit null rather than reverting to their
+  old S and A. Tier counts: raid S 7 / A+ 10 / A 14 / B 8 / C 1 = 40, M+ S+ 3 / S 5 / A+ 8 / A 13 /
+  B 7 / C 2 / TBD 2 = 40. Self-dates unchanged (raid DPS 08-23T13:09Z, raid
+  healer 08-24T00:44Z, raid tank 08-08, M+ all three 08-23).
+- **method 80/80, 0 moves.** The M+ page's second tierlist (dungeon difficulty) rejected by ROSTER
+  MATCH — its eight dungeon names came back as unmatched and were reported, never dropped silently.
+- **wowhead 80/80, 0 moves.** Unescape `\/` first, then the `[tier-list=rows]` block; one block
+  per page tonight, so the raid-healer decoy did not arise. Self-dates 08-14/08-18, unchanged.
+- **archon 79/80, 0 moves.** Fire Mage is still absent from the S2 raid DPS throughput list; stored
+  as explicit null, nothing invented.
+- **Era-verify note worth keeping:** the Icy Veins raid HEALER page still titles itself
+  "(Patch 12.0.7 / Midnight)" while its body is Season 2 throughout and its changelog reads
+  "24 Aug. 2026: Updated for the start of RWF Mythic progression". Body over title — it stays s2.
+  A title-only check would silently drop 7 rows from the raid consensus.
+- **`seasonVerified` changed on two pages**: the Archon **Per-boss** and **Per-dungeon** entries go
+  s1 → s2, because the pages fetched tonight describe Season 2 content. Both are `ancillary: true`,
+  so this is a record-only edit — outside `sourceSeasonOk` and `aheadSeasonFor`, no consensus, no
+  forecast, no frozen-lane effect. `freeze-season` therefore had nothing to freeze (no live-lane
+  season moved); the encounter FILE keeps its own `season: "s1"` stamp, because its data is S1.
+
 ## 2026-08-25 (nightly) — ICY VEINS RECUTS 35 LETTERS AND WITHDRAWS TWO TO "TBD"; a \b in the letter regex nearly published 38 phantom moves
 
 All four tier sources fetched inline, one at a time, no subagents. Per-page counts printed and

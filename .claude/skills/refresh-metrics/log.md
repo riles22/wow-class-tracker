@@ -16,6 +16,45 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-25 (nightly, 2nd run of the day) — Archon re-clusters survivability inside four hours; tank DPS cut merged; every other series byte-identical
+
+- **archon survivability — 39 of 40 merged, 26 letters MOVED against the merge made at 11:24Z the
+  same day.** The raid pages' `lastUpdated` is 2026-08-25T12:00Z. Two checks before believing it:
+  (1) each tier entry carries its own numeric value and **39 of 40 match that page's own
+  `specRankingsSection.table` survivability column to the decimal**, with letters monotone in the
+  number inside each role page — so tonight's letters are what this document says; (2) they do NOT
+  match this build's popularity or throughput lists either (11/39 each), so the earlier letters were
+  not a wrong-list read — the clustering itself moved. **Likely driver, and it is worth remembering:
+  FIRE MAGE has entered the DPS survivability list at exactly 100.0% while still having no rankings
+  row at all** — an extreme new anchor for a Ckmeans clustering. Fire Mage is the one row HELD
+  (a letter with no visible parse basis), so its stale 08-17 value stands and self-labels via the
+  per-spec `asOf`. Merged distribution S 8 / A 16 / B 12 / C 4.
+- **archon-metrics — the six TANK rows of "95th pct DPS (Mythic)" merged** (6/6 complete role pool;
+  `metricRanks` pools within (role, bracket, name), so a complete tank cut publishes on its own
+  terms — the archon-hps precedent, applied without coupling). Moves 1.1–10.6%. The 26 raid DPS
+  rows stay HELD on the same Fire Mage condition as the last three nights.
+- **Byte-identical upstream, nothing merged**: archon-hps (7 rows, values AND parse counts equal),
+  archon-mplus-score + M+ popularity (pages still 08-24T12:00Z), murlok 40/40, wowmeta 40/40 with
+  `snapshotDate` still 2026-08-11 (rankings file DIFFED, not trusted to the manifest stamp),
+  mythicstats period **1077** again (39 rows; Fire Mage absent from the chart, stored 0% at 08-22
+  left alone).
+- **bloodmallet**: 17/27 charts return data, all `simc_settings.tier` **MID2** against MID1 in all
+  26 stored profiles; the same 10 specs error as on 08-20. Merged nothing — adopt a tier wholesale
+  or not at all, and 17 is under the 19-of-26 floor anyway.
+- **simulationcraft — real upstream movement, still not adoptable.** `MID1_Raid.txt` is a 272-byte
+  in-progress log whose header now reads **12.1.0.69465 Live** (hotfix 2026-08-25, git build HEAD
+  91edd10b21), so MID1 is finally being re-simmed on a live 12.1 build; `MID1_Raid.html` is still
+  the completed 2026-08-08 12.0.7 report. **`MID2_Raid.txt` has flipped PTR → Live** on that same
+  build (it read 12.1.0.69382 PTR last night) but is still a partial roster: 36 profiles covering
+  **18 of 26** DPS specs. Adopting it would mix sim tiers AND drop 26 rows to 18 (31%, past the 25%
+  limit). Held.
+- **WCL**: no fetch by this agent. `wcl-fetch/evidence.json` (15:51:03Z) verdict `rdps-broken`,
+  `landed {}` — transport healthy (oauth/graphql true), the rDPS family still 500s. Both live rows
+  recorded unreachable; stored medians untouched at 08-10.
+- **robydoby not refreshed** and that is deliberate, not an omission: its sheets are zone-54 **PTR**
+  raid testing from the closed cycle and the stored rows are that cycle's final receipts. It is
+  outside the refresh contract by design.
+
 ## 2026-08-25 (nightly) — Archon S2 survivability returns after 10 empty days; archon-hps un-held; murlok parser rebuilt after a 0-of-40 silent failure
 
 - **murlok 40/40, ALL moved, max 11.4%.** The stored recipe here (split on `<h3>`) returned
