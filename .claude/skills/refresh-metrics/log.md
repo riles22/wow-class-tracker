@@ -33,7 +33,10 @@ else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have 
   rows the 2nd nightly had merged were re-upserted, same values), 39 raid Popularity rows,
   7 HPS rows re-upserted, survivability 39/40. **Fire Mage's survivability hold was
   RESPECTED** (the 2nd nightly's call: 100.0 on zero parses is a clustering artifact) — its
-  stale row self-labels via its own asOf. Popularity sums 100.0 per role at source;
+  stale row self-labels via its own asOf. **SUPERSEDED an hour later by owner decision**
+  (Riley, same evening): publish Archon's letter as Archon's letter — Fire Mage
+  survivability S @2026-08-25 merged in a follow-up commit. Do not re-hold it; if the letter
+  looks artifactual, that is Archon's methodology to own, and ours to store labeled. Popularity sums 100.0 per role at source;
   throughput letters cross-checked 39/39 against stored ratings. 6 rows under MIN_RANK_N=10
   (Fury 9, Feral 7, Frost Mage 5, Survival 4, Affliction 2, Vengeance 9) — value shown, no
   rank, honest.
