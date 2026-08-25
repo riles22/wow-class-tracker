@@ -16,6 +16,80 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-25 (local) — THE 429 HAS CLEARED after three days; queue drained 2 → 0, 5 takes
+
+- **The headline is transport, not content: the anonymous `timedtext` caption lane WORKS again.**
+  The 08-24 addendum predicted the IP-scoped abuse flag would decay after 24–72h of zero caption
+  traffic, and it did — the last anonymous caption attempts were 08-24, and the single sanctioned
+  probe tonight returned a 192 KB json3 on the first try, no retry, no backoff. Spending exactly
+  ONE probe before committing to a sweep is what made this cheap to discover. **Nothing
+  client-side was changed**: same pinned yt-dlp 2026.07.04, same `player_client=android`, nothing
+  installed or upgraded. That is the point — the 08-24 elimination chain concluded no client
+  change could beat the flag, and correspondingly no client change was needed to un-beat it.
+- **Both queued videos drained; `videos[]` is 2 → 0**, the first empty queue since 08-22. Paced
+  `--sleep-requests 3` with a 5s gap between the two, on the reasoning that the flag was likely
+  triggered by combined caption VOLUME from this egress IP — the lane is healthy, not proven
+  durable.
+- **`LoCCPjj7J6c`** (Dalaran Gaming, 2026-08-24, 9m01s, "If You Aren't Playing These 5 Specs in
+  Season 2…") → **4 takes**, all era-framed "Season 2 live":
+  · **Arcane Mage — both — buff** (t=235). The standout Mage spec; credits the 12.1 rework
+  (Prismatic Bolt) for boss/AoE/cleave damage that "inches" it ahead of Fire and Frost, and reads
+  the defensive rework (Refractive Images, improved Prismatic Barrier, Improved Warding) as
+  leaving it no longer the squishiest Mage, which he thinks helps specifically in M+.
+  · **Subtlety Rogue — raid — buff** (t=435) and **— mplus — buff** (t=465), deliberately
+  bracket-SPLIT because his read genuinely differs by bracket: unmatched pure single-target boss
+  damage in raid, versus "only ever so slightly behind Assassination and only at the highest key
+  levels" in dungeons.
+  · **Assassination Rogue — mplus — buff** (t=470). A little better than Subtlety at the most
+  record-breaking keys, with Subtlety the more popular pick below that ceiling.
+- **`igWiPoYPlV4`** (Musguete, 2026-08-24, 9m25s, "Assassination Rogue is Broken! Season 2 Guide")
+  → **1 take**: **Assassination — both — buff** (t=140). **This id was explicitly NOT queued on
+  08-24 as guide-shaped** ("its description is explicit how-to-play"), and tonight's nightly
+  queued it anyway. The local lane resolves the disagreement for free: the transcript IS mostly
+  how-to-play (rotation, energy, macros, talents, stats) **but it opens and closes on his own
+  spec-strength read** — damage "really, really good" with intense output outside the burst window
+  and a lot of sustain, and he does not believe the spec is going away. So the guide-shaped rule
+  held as a prior and failed on the particular: verified by transcript, it yields a take. Worth
+  remembering that the rule says *verify by transcript, then skip* — not *skip on the description*.
+- **THREE SUBSTANTIVE READS WERE DELIBERATELY NOT DISTILLED, and this is the flag for Riley.**
+  Dalaran's five picks are Blood Death Knight (tank), Holy Paladin (healer), Arcane Mage, Arms
+  Warrior and Subtlety Rogue — but he is registered only under Druid, Hunter, Mage, Rogue and
+  Shaman, so **Death Knight, Paladin and Warrior are outside his scope entirely** and were left
+  alone rather than silently widened. Two of the three are a TANK and a HEALER raid read, which is
+  the thinnest lane this project has. His Blood DK read in particular is emphatic (strongest and
+  most popular tank of the season, "a tier of its own", more runs than several other tanks
+  combined). **Scope widening is an owner call, not an agent one** — flagged here, not acted on.
+- **Also deliberately not distilled:** Outlaw Rogue. "Subtlety, assassination, and hey, even
+  outlaw rogue are all performing really well" is a bare enumeration, which the list-mention rule
+  excludes. And Fire/Frost Mage: "inches them ahead of fire mages and frost mages" is a
+  comparative about ARCANE, not a read on either of them.
+- **Superseded 3, same lens only:** Dalaran's 2026-06-26 Arcane (both-lens, PTR-era) and his
+  2026-08-17 Subtlety **raid**; Musguete's 2026-08-15 Assassination **both**. Two live takes were
+  deliberately LEFT ALONE because superseding them would be the Kalamazi trap in reverse —
+  Dalaran's 08-15 Assassination **both** take (my new one is `mplus`, a narrower lens, and
+  retiring a both-take with it would silently drop his raid read) and Musguete's 08-04
+  Assassination **mplus** take (my new one is `both`, and that direction is the documented
+  over-supersede error). New Subtlety `mplus` take supersedes nothing — no live M+-lens take
+  existed.
+- **Verification pass done, 13 anchors** — every claim re-checked against its OWN transcript,
+  whitespace-normalised because the ASR drops spaces at segment seams (a naive grep reported 5
+  false misses: "improvedwarding", "cannot be matched" spanning a seam). All 13 present. No
+  number moved off its referent; the one figure I chose not to carry is Musguete's "2 to 3% less
+  DPS on Fate Bound", a hero-talent build comparison rather than a spec-strength claim.
+- **Lane hygiene:** both ids removed from `videos[]` on distillation, and each asserted absent
+  from `seen[]` and `skipped[]` first (the merge script throws rather than proceeding) — the
+  precedence ladder holds. `seen` 549 and `skipped` 409 unchanged.
+- **`latest` advanced** for Dalaran Gaming (5 class entries, one channel) and Musguete — each to a
+  video THIS run distilled, with the out-of-scope reads named in Dalaran's line so the omission is
+  visible from the registry.
+- **NO BREADTH SWEEP, deliberately.** The unfiltered date-bound sweep is now affordable again in
+  principle, and I did not run it: the 08-24 diagnosis names combined caption VOLUME from this
+  egress IP as the likely trigger, and a ~140-video sweep on the first day the flag lifted is the
+  exact shape that set it. The backlog stays UNSEEN and reconsiderable, as it has for three runs.
+  **Recommend staging it** — a capped newest-first batch on a later run, never keyword-filtered as
+  the limiter — rather than resuming at full width.
+
+
 ## 2026-08-25 (nightly) — 44 feeds, 0 errors; MadSkillzzTV's 9h33m week-one healer stream → 4 takes
 
 - **Discovery:** 44 channels (41 class + 3 general), every one HTTP 200 on the FIRST attempt, 0

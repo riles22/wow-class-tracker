@@ -3,7 +3,7 @@
   "source": "Icy Veins",
   "sourceId": "icyveins",
   "dated": true,
-  "harvestedAt": "2026-08-19",
+  "harvestedAt": "2026-08-25",
   "specs": {
     "Blood Death Knight": {
       "guideUrl": "https://www.icy-veins.com/wow/blood-death-knight-pve-tank-gear-best-in-slot",
@@ -2173,7 +2173,7 @@
     },
     "Havoc Demon Hunter": {
       "guideUrl": "https://www.icy-veins.com/wow/havoc-demon-hunter-pve-dps-gear-best-in-slot",
-      "published": "2026-08-10",
+      "published": "2026-08-23",
       "priorities": [
         {
           "label": "Havoc Demon Hunter",
@@ -2732,19 +2732,20 @@
         {
           "tier": "A",
           "itemIds": [
-            "270164",
-            "250259",
-            "250215",
+            "250225",
+            "270165",
             "273796",
-            "270166"
+            "270166",
+            "250259"
           ]
         },
         {
           "tier": "B",
           "itemIds": [
+            "270164",
             "250228",
-            "270165",
-            "250225",
+            "270168",
+            "250215",
             "159617",
             "248583",
             "250214",
@@ -2756,7 +2757,6 @@
           "itemIds": [
             "265657",
             "158374",
-            "270168",
             "251785",
             "274493"
           ]
@@ -2822,8 +2822,8 @@
             "slot": "Off Hand",
             "candidates": [
               {
-                "id": "244031",
-                "name": "Arcane Mastery"
+                "id": "243970",
+                "name": "Jan'alai's Precision"
               }
             ]
           },
@@ -5216,7 +5216,7 @@
     },
     "Feral Druid": {
       "guideUrl": "https://www.icy-veins.com/wow/feral-druid-pve-dps-gear-best-in-slot",
-      "published": "2026-08-10",
+      "published": "2026-08-23",
       "priorities": [
         {
           "label": "Feral Druid Single-Target",
@@ -5758,30 +5758,30 @@
           "itemIds": [
             "270165",
             "159617",
-            "250228",
             "273796",
-            "250259"
+            "250228"
           ]
         },
         {
           "tier": "B",
           "itemIds": [
+            "250225",
             "250214",
+            "270166",
             "248583",
             "250215",
             "241288",
-            "250225",
             "265657",
-            "270166",
             "251792"
           ]
         },
         {
           "tier": "C",
           "itemIds": [
+            "270168",
+            "250259",
             "274493",
             "158374",
-            "270168",
             "251785"
           ]
         },
@@ -5837,8 +5837,8 @@
             "slot": "Main Hand",
             "candidates": [
               {
-                "id": "244031",
-                "name": "Arcane Mastery"
+                "id": "273072",
+                "name": "Rite of the Hash'ey"
               }
             ]
           },
@@ -5924,8 +5924,8 @@
               "name": "Potion of Recklessness"
             },
             {
-              "id": "245902",
-              "name": "Fleeting Potion of Recklessness"
+              "id": "241308",
+              "name": "Light's Potential"
             },
             {
               "id": "241285",
@@ -5958,7 +5958,7 @@
               "name": "Void-Touched Augment Rune"
             }
           ],
-          "note": "Your weapon enhancement consumable of choice is Thalassian Phoenix Oil for Critical Strike and Haste. Flasks are a good way to adjust your secondary stats if you're lacking in a particular area with your gear setup. Due to the slight imbalance in priority between the two Hero Trees, recommendations can shift slightly: You can also obtain a flask of your choice from Cauldron of Sin'dorei Flasks , provided by Alchemists. Potion of Recklessness is the best option in Season 2, and should be paired with your major cooldowns alongisde Bloodlust / Heroism . Ideally, you want this to trigger Mastery whenever possible. You can also obtain Fleeting Potion of Recklessness from Voidlight Potion Cauldron provided by Alchemists. A note on Draught of Rampant Abandon is that, while it's technically stronger, one wrong step will pacify you inside the void zone that it occasionally spawns. It only takes 1-2 GCDs (or a cancelled Convoke the Spirits !) inside this to wipe out the extra value, so playing this potion generally isn't worth it. Concentrated Silvermoon Health Potion is the current best healing potion. Using this has a 5-minute cooldown, but multiple can be consumed in an extended boss fight should it go on long enough. Additionally, Warlock 's Healthstone s do not share a cooldown with other healing consumables. Remember to use it as well if you are holding one! Agility remains the strongest stat in Season 2, so you should be eating a Silvermoon Parade or other primary stat Feast if possible. If this isn't provided by your group, stick to Royal Roast personal food instead. In addition, if you can afford it, you should use Void-Touched Augment Rune s to increase your primary stat. These can be obtained through the weekly housing quest, but remember: Augment Runes are expensive and disappear on death, so use them wisely!"
+          "note": "Your weapon enhancement consumable of choice is Thalassian Phoenix Oil for Critical Strike and Haste. Flasks are a good way to adjust your secondary stats if you're lacking in a particular area with your gear setup. Due to the slight imbalance in priority between the two Hero Trees, recommendations can shift slightly: You can also obtain a flask of your choice from Cauldron of Sin'dorei Flasks , provided by Alchemists. In Season 2, there's a few different options depending on your current gear level: Of the three, Potion of Recklessness will generally be the strongest as soon as your gear is set up to trigger a preferred stat. You may find in sims that, with unbalanced gearsets, Light's Potential is preferred - this is normal and you should follow the recommendation until your stats balance out to support it. Potions should always be paired with major cooldowns alongside Bloodlust / Heroism . You can also obtain Fleeting versions of any of these potions from a Voidlight Potion Cauldron , provided by Alchemists. A note on Draught of Rampant Abandon is that, while it's technically stronger, one wrong step will pacify you inside the void zone that it occasionally spawns. It only takes 1-2 GCDs (or a cancelled Convoke the Spirits !) inside this to wipe out the extra value, so playing this potion generally isn't worth it. Concentrated Silvermoon Health Potion is the current best healing potion. Using this has a 5-minute cooldown, but multiple can be consumed in an extended boss fight should it go on long enough. Additionally, Warlock 's Healthstone s do not share a cooldown with other healing consumables. Remember to use it as well if you are holding one! Agility remains the strongest stat in Season 2, so you should be eating a Silvermoon Parade or other primary stat Feast if possible. If this isn't provided by your group, stick to Royal Roast personal food instead. In addition, if you can afford it, you should use Void-Touched Augment Rune s to increase your primary stat. These can be obtained through the weekly housing quest, but remember: Augment Runes are expensive and disappear on death, so use them wisely!"
         }
       }
     },
@@ -9597,7 +9597,7 @@
     },
     "Beast Mastery Hunter": {
       "guideUrl": "https://www.icy-veins.com/wow/beast-mastery-hunter-pve-dps-gear-best-in-slot",
-      "published": "2026-08-18",
+      "published": "2026-08-24",
       "priorities": [
         {
           "label": "Single-Target",
@@ -10244,8 +10244,8 @@
             "slot": "Main Hand",
             "candidates": [
               {
-                "id": "244031",
-                "name": "Enchant Weapon - Arcane Mastery"
+                "id": "273072",
+                "name": "Enchant Weapon - Rite of the Hash'ey"
               },
               {
                 "id": "243733",
@@ -10303,7 +10303,7 @@
     },
     "Marksmanship Hunter": {
       "guideUrl": "https://www.icy-veins.com/wow/marksmanship-hunter-pve-dps-gear-best-in-slot",
-      "published": "2026-08-18",
+      "published": "2026-08-24",
       "priorities": [
         {
           "label": "Marksmanship Hunter",
@@ -10952,8 +10952,8 @@
             "slot": "Main Hand",
             "candidates": [
               {
-                "id": "243970",
-                "name": "Enchant Weapon - Jan'alai's Precision"
+                "id": "273072",
+                "name": "Enchant Weapon - Rite of the Hash'ey"
               },
               {
                 "id": "243733",
@@ -11005,13 +11005,13 @@
               "name": "Void-Touched Augment Rune"
             }
           ],
-          "note": "The best flask is generally going to be Flask of the Shattered Sun . That said, it is best to think of Flasks as just another piece of gear that is easily swappable, and depending on your exact gear situation, any of the 4 secondary stat flasks can be optimal. To really minmax on this point, you would need to simulate it. There is only one DPS Potion worth using. Make sure to carry Concentrated Silvermoon Health Potion as well. It has a 5-minute cooldown and heals most of your health; use it as a last resort, preferring your personal defensives wherever possible. The best Food you can eat is from a Harandar Celebration or Silvermoon Parade feast. The best non-feast food is Hearty Royal Roast . The \"Hearty\" part is important, as this food persists through death, and we highly recommend grabbing Cooking to easily make your own Hearty Food, as it cannot be straightforwardly purchased on the Auction House. The best Augment Rune in Midnight is Void-Touched Augment Rune , but it might be very expensive to use on every pull or every dungeon, so use it sparingly unless your wallet is deep. This guide has been written by Azortharion , a full-timer Hunter Guidewriter, Theorycrafter, Content Creator, and top player since 2014 who is widely considered one of the best PvE Hunters in the world. He is an accomplished player with hundreds of top parses across all Hunter specs. He is the Head Admin of Trueshot Lodge , the official Hunter Class Discord. You can find him on his stream on Twitch and his channel on YouTube. He also has his own, personal Discord server where you can freely ask him any Hunter questions you may have!"
+          "note": "The best flask is generally going to be Flask of the Shattered Sun . That said, it is best to think of Flasks as just another piece of gear that is easily swappable, and depending on your exact gear situation, any of the 4 secondary stat flasks can be optimal. To really minmax on this point, you would need to simulate it. Marksmanship uses two different DPS Potions in most 5+ minute fights. Make sure to carry Concentrated Silvermoon Health Potion as well. It has a 5-minute cooldown and heals most of your health; use it as a last resort, preferring your personal defensives wherever possible. The best Food you can eat is from a Harandar Celebration or Silvermoon Parade feast. The best non-feast food is Hearty Royal Roast . The \"Hearty\" part is important, as this food persists through death, and we highly recommend grabbing Cooking to easily make your own Hearty Food, as it cannot be straightforwardly purchased on the Auction House. The best Augment Rune in Midnight is Void-Touched Augment Rune , but it might be very expensive to use on every pull or every dungeon, so use it sparingly unless your wallet is deep. This guide has been written by Azortharion , a full-timer Hunter Guidewriter, Theorycrafter, Content Creator, and top player since 2014 who is widely considered one of the best PvE Hunters in the world. He is an accomplished player with hundreds of top parses across all Hunter specs. He is the Head Admin of Trueshot Lodge , the official Hunter Class Discord. You can find him on his stream on Twitch and his channel on YouTube. He also has his own, personal Discord server where you can freely ask him any Hunter questions you may have!"
         }
       }
     },
     "Survival Hunter": {
       "guideUrl": "https://www.icy-veins.com/wow/survival-hunter-pve-dps-gear-best-in-slot",
-      "published": "2026-08-18",
+      "published": "2026-08-24",
       "priorities": [
         {
           "label": "Survival Hunter",
@@ -11655,8 +11655,8 @@
             "slot": "Main Hand",
             "candidates": [
               {
-                "id": "244031",
-                "name": "Enchant Weapon - Arcane Mastery"
+                "id": "243973",
+                "name": "Enchant Weapon - Berserker's Rage"
               },
               {
                 "id": "243733",
@@ -11715,7 +11715,7 @@
     },
     "Arcane Mage": {
       "guideUrl": "https://www.icy-veins.com/wow/arcane-mage-pve-dps-gear-best-in-slot",
-      "published": "2026-08-15",
+      "published": "2026-08-24",
       "priorities": [
         {
           "label": "Arcane Mage",
@@ -11837,11 +11837,11 @@
           "slot": "Finger",
           "itemId": "268266",
           "itemName": "Alluring Bubbleband",
-          "sourceText": "Nek'zali",
-          "sourceKind": "raid",
-          "boss": "Nek'zali the Soulcoiler",
+          "sourceText": "Tidebound Grotto",
+          "sourceKind": "world",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": "Tidebound Grotto"
         },
         {
           "list": "overall",
@@ -12189,11 +12189,11 @@
           "slot": "Finger",
           "itemId": "268266",
           "itemName": "Alluring Bubbleband",
-          "sourceText": "Nek'zali",
-          "sourceKind": "raid",
-          "boss": "Nek'zali the Soulcoiler",
+          "sourceText": "Tidebound Grotto",
+          "sourceKind": "world",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": "Tidebound Grotto"
         },
         {
           "list": "raid",
@@ -12421,7 +12421,7 @@
     },
     "Fire Mage": {
       "guideUrl": "https://www.icy-veins.com/wow/fire-mage-pve-dps-gear-best-in-slot",
-      "published": "2026-08-15",
+      "published": "2026-08-24",
       "priorities": [
         {
           "label": "Fire Mage",
@@ -12475,11 +12475,11 @@
         {
           "list": "overall",
           "slot": "Waist",
-          "itemId": "239649",
-          "itemName": "Martyr's Waistwrap",
-          "sourceText": "Crafted by Tailoring",
-          "sourceKind": "crafted",
-          "boss": null,
+          "itemId": "268257",
+          "itemName": "Caustic Chain-Wrapped Sash",
+          "sourceText": "Sszorak",
+          "sourceKind": "raid",
+          "boss": "Sszorak",
           "dungeon": null,
           "droppedBy": null
         },
@@ -12543,11 +12543,11 @@
           "slot": "Finger",
           "itemId": "268266",
           "itemName": "Alluring Bubbleband",
-          "sourceText": "Nek'zali",
-          "sourceKind": "raid",
-          "boss": "Nek'zali the Soulcoiler",
+          "sourceText": "Tidebound Grotto",
+          "sourceKind": "world",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": "Tidebound Grotto"
         },
         {
           "list": "overall",
@@ -12607,12 +12607,12 @@
         {
           "list": "overall",
           "slot": "Off Hand",
-          "itemId": "159667",
-          "itemName": "Vessel of Last Rites",
-          "sourceText": "King's Rest",
-          "sourceKind": "dungeon",
+          "itemId": "245769",
+          "itemName": "Aln'hara Lantern",
+          "sourceText": "Crafted by Inscription",
+          "sourceKind": "crafted",
           "boss": null,
-          "dungeon": "Kings' Rest",
+          "dungeon": null,
           "droppedBy": null
         },
         {
@@ -12827,11 +12827,11 @@
         {
           "list": "raid",
           "slot": "Waist",
-          "itemId": "239649",
-          "itemName": "Martyr's Waistwrap",
-          "sourceText": "Crafted by Tailoring",
-          "sourceKind": "crafted",
-          "boss": null,
+          "itemId": "268257",
+          "itemName": "Caustic Chain-Wrapped Sash",
+          "sourceText": "Sszorak",
+          "sourceKind": "raid",
+          "boss": "Sszorak",
           "dungeon": null,
           "droppedBy": null
         },
@@ -12895,11 +12895,11 @@
           "slot": "Finger",
           "itemId": "268266",
           "itemName": "Alluring Bubbleband",
-          "sourceText": "Nek'zali",
-          "sourceKind": "raid",
-          "boss": "Nek'zali the Soulcoiler",
+          "sourceText": "Tidebound Grotto",
+          "sourceKind": "world",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": "Tidebound Grotto"
         },
         {
           "list": "raid",
@@ -12959,11 +12959,11 @@
         {
           "list": "raid",
           "slot": "Off Hand",
-          "itemId": "268263",
-          "itemName": "Frostscale's Mystic Frond",
-          "sourceText": "Nek'zali",
-          "sourceKind": "raid",
-          "boss": "Nek'zali the Soulcoiler",
+          "itemId": "245769",
+          "itemName": "Aln'hara Lantern",
+          "sourceText": "Crafted by Inscription",
+          "sourceKind": "crafted",
+          "boss": null,
           "dungeon": null,
           "droppedBy": null
         }
@@ -16849,7 +16849,7 @@
     },
     "Protection Paladin": {
       "guideUrl": "https://www.icy-veins.com/wow/protection-paladin-pve-tank-gear-best-in-slot",
-      "published": "2026-08-10",
+      "published": "2026-08-18",
       "priorities": [
         {
           "label": "Protection Paladin",
@@ -17181,12 +17181,12 @@
         {
           "list": "mplus",
           "slot": "Trinket",
-          "itemId": "273796",
-          "itemName": "Vile Vial of Volatile Venom",
-          "sourceText": "Altar of Fangs",
+          "itemId": "250259",
+          "itemName": "Sapling of the Dawnroot",
+          "sourceText": "Blinding Vale",
           "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": "Altar of Fangs",
+          "dungeon": "The Blinding Vale",
           "droppedBy": null
         },
         {
@@ -17225,13 +17225,13 @@
         {
           "list": "mplus",
           "slot": "Off Hand",
-          "itemId": "193754",
-          "itemName": "Drake Rider's Stecktarge",
-          "sourceText": "Ruby Life Pools",
+          "itemId": "251150",
+          "itemName": "Tempest's Shelter",
+          "sourceText": "Den of Nalorakk",
           "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": "Ruby Life Pools",
-          "droppedBy": null
+          "dungeon": "Den of Nalorakk",
+          "droppedBy": "Nalorakk"
         },
         {
           "list": "raid",
@@ -17422,12 +17422,13 @@
           "tier": "A",
           "itemIds": [
             "270164",
-            "270602"
+            "250259"
           ]
         },
         {
           "tier": "B",
           "itemIds": [
+            "270602",
             "273796",
             "158367",
             "270160",
@@ -22722,7 +22723,7 @@
     },
     "Elemental Shaman": {
       "guideUrl": "https://www.icy-veins.com/wow/elemental-shaman-pve-dps-gear-best-in-slot",
-      "published": "2026-08-18",
+      "published": "2026-08-19",
       "priorities": [
         {
           "label": "Elemental Shaman",
@@ -22842,23 +22843,23 @@
         {
           "list": "overall",
           "slot": "Finger",
-          "itemId": "252258",
-          "itemName": "Sickening Signet of Atroxus",
-          "sourceText": "Voidscar Arena",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Voidscar Arena",
+          "itemId": "268252",
+          "itemName": "Apex Brute's Claw Ring",
+          "sourceText": "Sszorak",
+          "sourceKind": "raid",
+          "boss": "Sszorak",
+          "dungeon": null,
           "droppedBy": null
         },
         {
           "list": "overall",
           "slot": "Finger",
-          "itemId": "268249",
-          "itemName": "Vile Alchemist's Band",
-          "sourceText": "Vashnik",
-          "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
-          "dungeon": null,
+          "itemId": "273792",
+          "itemName": "Band of the Amani Warlord",
+          "sourceText": "Altar of Fangs",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "Altar of Fangs",
           "droppedBy": null
         },
         {
@@ -22886,12 +22887,12 @@
         {
           "list": "overall",
           "slot": "Trinket",
-          "itemId": "250215",
-          "itemName": "Freightrunner's Flask",
-          "sourceText": "Murder Row",
+          "itemId": "273796",
+          "itemName": "Vile Vial of Volatile Venom",
+          "sourceText": "Altar of Fangs",
           "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": "Murder Row",
+          "dungeon": "Altar of Fangs",
           "droppedBy": null
         },
         {
@@ -23040,12 +23041,12 @@
         {
           "list": "mplus",
           "slot": "Trinket",
-          "itemId": "193757",
-          "itemName": "Ruby Whelp Shell",
-          "sourceText": "Ruby Life Pools",
+          "itemId": "273794",
+          "itemName": "Knot of Writhing Serpents",
+          "sourceText": "Altar of Fangs",
           "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": "Ruby Life Pools",
+          "dungeon": "Altar of Fangs",
           "droppedBy": null
         },
         {
@@ -23062,12 +23063,12 @@
         {
           "list": "mplus",
           "slot": "Trinket",
-          "itemId": "250215",
-          "itemName": "Freightrunner's Flask",
-          "sourceText": "Murder Row",
+          "itemId": "273796",
+          "itemName": "Vile Vial of Volatile Venom",
+          "sourceText": "Altar of Fangs",
           "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": "Murder Row",
+          "dungeon": "Altar of Fangs",
           "droppedBy": null
         },
         {
@@ -23273,19 +23274,14 @@
         {
           "tier": "S",
           "itemIds": [
-            "270164"
-          ]
-        },
-        {
-          "tier": "A",
-          "itemIds": [
+            "270164",
             "250215",
             "270167",
             "273796"
           ]
         },
         {
-          "tier": "B",
+          "tier": "A",
           "itemIds": [
             "270161",
             "270170",
@@ -23294,12 +23290,22 @@
           ]
         },
         {
-          "tier": "C",
+          "tier": "B",
           "itemIds": [
+            "270169",
             "251792",
             "248583",
+            "273794",
+            "245752"
+          ]
+        },
+        {
+          "tier": "C",
+          "itemIds": [
             "193757",
-            "270168"
+            "270168",
+            "250259",
+            "250224"
           ]
         }
       ],
@@ -23474,7 +23480,7 @@
     },
     "Enhancement Shaman": {
       "guideUrl": "https://www.icy-veins.com/wow/enhancement-shaman-pve-dps-gear-best-in-slot",
-      "published": "2026-08-10",
+      "published": "2026-08-23",
       "priorities": [
         {
           "label": "Stormbringer",
@@ -23482,13 +23488,13 @@
           "primary": null,
           "secondaries": [
             "Mast",
-            "Haste",
             "Crit",
+            "Haste",
             "Vers"
           ],
           "leadsWithItemLevel": true,
           "softCaps": [],
-          "raw": "Item Level > Mastery > Haste > Critical Strike > Versatility"
+          "raw": "Item Level > Mastery > Critical Strike > Haste > Versatility"
         },
         {
           "label": "Totemic",
@@ -23522,10 +23528,10 @@
           "slot": "Hands",
           "itemId": "271484",
           "itemName": "Hexing Grips of the Ophidian Oracle",
-          "sourceText": "Catalyst from King's Rest",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Kings' Rest",
+          "sourceText": "Entombed Sentinels",
+          "sourceKind": "raid",
+          "boss": "Entombed Sentinels",
+          "dungeon": null,
           "droppedBy": null
         },
         {
@@ -23586,11 +23592,11 @@
         {
           "list": "overall",
           "slot": "Feet",
-          "itemId": "268233",
-          "itemName": "Ferocious Scaleboots",
-          "sourceText": "Sszorak",
+          "itemId": "268258",
+          "itemName": "Boots of the Reckless Wayfarer",
+          "sourceText": "Lost Explorers",
           "sourceKind": "raid",
-          "boss": "Sszorak",
+          "boss": "The Lost Explorers",
           "dungeon": null,
           "droppedBy": null
         },
@@ -23608,23 +23614,23 @@
         {
           "list": "overall",
           "slot": "Finger",
-          "itemId": "268249",
-          "itemName": "Vile Alchemist's Band",
-          "sourceText": "Vashnik",
+          "itemId": "268252",
+          "itemName": "Apex Brute's Claw Ring",
+          "sourceText": "Sszorak",
           "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
+          "boss": "Sszorak",
           "dungeon": null,
           "droppedBy": null
         },
         {
           "list": "overall",
           "slot": "Finger",
-          "itemId": "252258",
-          "itemName": "Sickening Signet of Atroxus",
-          "sourceText": "Voidscar Arena",
+          "itemId": "273792",
+          "itemName": "Band of the Amani Warlord",
+          "sourceText": "Altar of Fangs",
           "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": "Voidscar Arena",
+          "dungeon": "Altar of Fangs",
           "droppedBy": null
         },
         {
@@ -23698,33 +23704,33 @@
           "slot": "Hands",
           "itemId": "271484",
           "itemName": "Hexing Grips of the Ophidian Oracle",
-          "sourceText": "Catalyst from King's Rest",
+          "sourceText": "Catalyst from Ruby Life Pools",
           "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": "Kings' Rest",
+          "dungeon": "Ruby Life Pools",
           "droppedBy": null
         },
         {
           "list": "mplus",
           "slot": "Neck",
-          "itemId": "251142",
-          "itemName": "Pendant of Malefic Fury",
-          "sourceText": "Murder Row",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Murder Row",
-          "droppedBy": null
-        },
-        {
-          "list": "mplus",
-          "slot": "Waist",
-          "itemId": "251228",
-          "itemName": "Behemoth Waistband",
+          "itemId": "251234",
+          "itemName": "Graft of the Domanaar",
           "sourceText": "Voidscar Arena",
           "sourceKind": "dungeon",
           "boss": null,
           "dungeon": "Voidscar Arena",
           "droppedBy": null
+        },
+        {
+          "list": "mplus",
+          "slot": "Waist",
+          "itemId": "251155",
+          "itemName": "Tribal Defender's Cord",
+          "sourceText": "Den of Nalorakk",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "Den of Nalorakk",
+          "droppedBy": "Nalorakk"
         },
         {
           "list": "mplus",
@@ -23863,9 +23869,9 @@
           "slot": "Head",
           "itemId": "271483",
           "itemName": "Serpent Crown of the Ophidian Oracle",
-          "sourceText": "Twin Fangs",
+          "sourceText": "Catalyst from Nek'zali",
           "sourceKind": "raid",
-          "boss": "The Twin Fangs",
+          "boss": "Nek'zali the Soulcoiler",
           "dungeon": null,
           "droppedBy": null
         },
@@ -23938,11 +23944,11 @@
         {
           "list": "raid",
           "slot": "Feet",
-          "itemId": "268233",
-          "itemName": "Ferocious Scaleboots",
-          "sourceText": "Sszorak",
+          "itemId": "268258",
+          "itemName": "Boots of the Reckless Wayfarer",
+          "sourceText": "Lost Explorers",
           "sourceKind": "raid",
-          "boss": "Sszorak",
+          "boss": "The Lost Explorers",
           "dungeon": null,
           "droppedBy": null
         },
@@ -24041,8 +24047,7 @@
           "itemIds": [
             "270175",
             "270173",
-            "268209",
-            "270164"
+            "268209"
           ]
         },
         {
@@ -24050,32 +24055,34 @@
           "itemIds": [
             "273796",
             "241288",
-            "250215",
+            "270164",
             "270165",
+            "250225",
             "250228"
           ]
         },
         {
           "tier": "B",
           "itemIds": [
+            "159617",
+            "250215",
+            "241288",
             "250214",
             "248583",
-            "250259",
-            "250225",
-            "159617",
             "251792",
-            "265657",
             "270166"
           ]
         },
         {
           "tier": "C",
           "itemIds": [
+            "270168",
+            "265657",
+            "250259",
             "274493",
             "158374",
             "251785",
-            "273797",
-            "270168"
+            "273797"
           ]
         },
         {
@@ -24130,8 +24137,8 @@
             "slot": "Main Hand",
             "candidates": [
               {
-                "id": "243973",
-                "name": "Berserker's Rage"
+                "id": "273072",
+                "name": "Rite of the Hash'ey"
               }
             ]
           },
@@ -24139,8 +24146,8 @@
             "slot": "Off Hand",
             "candidates": [
               {
-                "id": "244031",
-                "name": "Arcane Mastery"
+                "id": "273072",
+                "name": "Rite of the Hash'ey"
               }
             ]
           },
@@ -24220,8 +24227,8 @@
               "name": "Potion of Recklessness"
             },
             {
-              "id": "245902",
-              "name": "Fleeting Potion of Recklessness"
+              "id": "241308",
+              "name": "Light's Potential"
             },
             {
               "id": "241285",
@@ -24254,7 +24261,7 @@
               "name": "Void-Touched Augment Rune"
             }
           ],
-          "note": "Depending on your Hero Talent of choice, you should use a dedicated secondary flask to lean your gearset toward the preferred secondary: You can also obtain a flask of your choice from Cauldron of Sin'dorei Flasks , provided by Alchemists. Potion of Recklessness is the best option in Season 2, and should be paired with your major cooldowns alongside Bloodlust / Heroism . Ideally, you want this to trigger Mastery whenever possible. You can also obtain Fleeting Potion of Recklessness from Voidlight Potion Cauldron provided by Alchemists. A note on Draught of Rampant Abandon is that, while it's technically stronger, the void zones it spawns pacify you. It only takes 1-2 GCDs inside this to wipe out the extra value, so using the potion isn't generally worth it. Concentrated Silvermoon Health Potion is the current best healing potion. Using this has a 5-minute cooldown, but multiple can be consumed in an extended boss fight should it go on long enough. Additionally, Warlock 's Healthstone s do not share a cooldown with other healing consumables. Remember to use it as well if you are holding one! Agility remains the strongest stat in Season 2, so you should be eating a Silvermoon Parade or other primary stat Feast if possible. If this isn't provided by your group, stick to Royal Roast personal food instead. In addition, if you can afford it, you should use Void-Touched Augment Rune s to increase your primary stat. These can be obtained through the weekly housing quest, but remember: Augment Runes are expensive and disappear on death, so use them wisely!"
+          "note": "In Season 2, Flask picks aren't as cut and dry — they're instead used to balance out your secondaries as Stormbringer : Your goal as Stormbringer is to keep Critical Strike and Mastery as close to each other as possible, while keeping a solid floor of Haste to allow for resource cycling. That means flasks are used to \"fix\" the stat you're currently lacking the most of, rather than doubling down on the strongest. As Totemic however, always play with Flask of the Magisters . You can also obtain a flask of your choice from Cauldron of Sin'dorei Flasks , provided by Alchemists. In Season 2, Potions are also much more complicated, and there are three different options with different use cases: Since your current gear can severely impact the effectiveness of Potion of Recklessness following gear changes, both other options are now very relevant, and have different rotational considerations when using them. You can check our Rotation page for an explanation on using each. You can also obtain fleeting versions of each of these potions from a Voidlight Potion Cauldron provided by Alchemists. A note on Draught of Rampant Abandon is that, while it's technically stronger, the void zones it spawns pacify you. It only takes 1-2 GCDs inside this to wipe out the extra value, so using the potion isn't generally worth it unless you're extremely comfortable with the downside. Concentrated Silvermoon Health Potion is the current best healing potion. Using this has a 5-minute cooldown, but multiple can be consumed in an extended boss fight should it go on long enough. Additionally, Warlock 's Healthstone s do not share a cooldown with other healing consumables. Remember to use it as well if you are holding one! Agility remains the strongest stat in Season 2, so you should be eating a Silvermoon Parade or other primary stat Feast if possible. If this isn't provided by your group, stick to Royal Roast personal food instead. In addition, if you can afford it, you should use Void-Touched Augment Rune s to increase your primary stat. These can be obtained through the weekly housing quest, but remember: Augment Runes are expensive and disappear on death, so use them wisely!"
         }
       }
     },
@@ -28572,7 +28579,7 @@
     },
     "Protection Warrior": {
       "guideUrl": "https://www.icy-veins.com/wow/protection-warrior-pve-tank-gear-best-in-slot",
-      "published": "2026-08-17",
+      "published": "2026-08-24",
       "priorities": [
         {
           "label": "Protection Warrior",
@@ -28914,10 +28921,10 @@
           "slot": "Trinket",
           "itemId": "273796",
           "itemName": "Vile Vial of Volatile Venom",
-          "sourceText": "Murder Row",
+          "sourceText": "Altar of Fangs",
           "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": "Murder Row",
+          "dungeon": "Altar of Fangs",
           "droppedBy": null
         },
         {
@@ -29148,8 +29155,8 @@
             "158367",
             "270160",
             "159618",
-            "270173",
             "270175",
+            "270173",
             "270165"
           ]
         }

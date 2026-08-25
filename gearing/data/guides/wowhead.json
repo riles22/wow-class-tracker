@@ -3,11 +3,11 @@
   "source": "Wowhead",
   "sourceId": "wowhead",
   "dated": true,
-  "harvestedAt": "2026-08-19",
+  "harvestedAt": "2026-08-25",
   "specs": {
     "Blood Death Knight": {
       "guideUrl": "https://www.wowhead.com/guide/classes/death-knight/blood/bis-gear",
-      "published": "2026-08-14",
+      "published": "2026-08-20",
       "author": "Mandl",
       "priorities": [
         {
@@ -449,7 +449,7 @@
     },
     "Frost Death Knight": {
       "guideUrl": "https://www.wowhead.com/guide/classes/death-knight/frost/bis-gear",
-      "published": "2026-08-18",
+      "published": "2026-08-19",
       "author": "khazakdk",
       "priorities": [
         {
@@ -496,11 +496,11 @@
         {
           "list": "overall",
           "slot": "Off Hand",
-          "itemId": "268202",
-          "itemName": "Jaw of the Shackled Goddess",
-          "sourceText": "Ula'tek",
+          "itemId": "268209",
+          "itemName": "Aman'muso, Warlord's Vengeance",
+          "sourceText": "The Coiled Altar",
           "sourceKind": "raid",
-          "boss": "Ula'tek",
+          "boss": "The Coiled Altar",
           "dungeon": null,
           "droppedBy": null
         },
@@ -774,7 +774,7 @@
     },
     "Unholy Death Knight": {
       "guideUrl": "https://www.wowhead.com/guide/classes/death-knight/unholy/bis-gear",
-      "published": "2026-08-14",
+      "published": "2026-08-20",
       "author": "Taeznak",
       "priorities": [
         {
@@ -1017,7 +1017,7 @@
     },
     "Havoc Demon Hunter": {
       "guideUrl": "https://www.wowhead.com/guide/classes/demon-hunter/havoc/bis-gear",
-      "published": "2026-08-16",
+      "published": "2026-08-22",
       "author": "Shadarek",
       "priorities": [
         {
@@ -1567,8 +1567,8 @@
             "slot": "Main Hand",
             "candidates": [
               {
-                "id": "244031",
-                "name": "Enchant Weapon - Arcane Mastery"
+                "id": "273071",
+                "name": "Enchant Weapon - Rite of the Hash'ey"
               }
             ]
           },
@@ -1576,8 +1576,8 @@
             "slot": "Off Hand",
             "candidates": [
               {
-                "id": "244031",
-                "name": "Enchant Weapon - Arcane Mastery"
+                "id": "273071",
+                "name": "Enchant Weapon - Rite of the Hash'ey"
               }
             ]
           },
@@ -1706,7 +1706,7 @@
     },
     "Vengeance Demon Hunter": {
       "guideUrl": "https://www.wowhead.com/guide/classes/demon-hunter/vengeance/bis-gear",
-      "published": "2026-08-15",
+      "published": "2026-08-20",
       "author": "Itamae",
       "priorities": [
         {
@@ -2039,7 +2039,7 @@
     },
     "Balance Druid": {
       "guideUrl": "https://www.wowhead.com/guide/classes/druid/balance/bis-gear",
-      "published": "2026-08-18",
+      "published": "2026-08-21",
       "author": "gamz",
       "priorities": [
         {
@@ -2119,11 +2119,11 @@
         {
           "list": "overall",
           "slot": "Shoulder",
-          "itemId": "244572",
-          "itemName": "Silvermoon Agent's Mantle",
-          "sourceText": "Crafting/Misc",
-          "sourceKind": "crafted",
-          "boss": null,
+          "itemId": "268246",
+          "itemName": "Frothing Venom Spaulders",
+          "sourceText": "The Lost Explorers",
+          "sourceKind": "raid",
+          "boss": "The Lost Explorers",
           "dungeon": null,
           "droppedBy": null
         },
@@ -2152,11 +2152,11 @@
         {
           "list": "overall",
           "slot": "Wrist",
-          "itemId": "268240",
-          "itemName": "Restless Spirit Shackles",
-          "sourceText": "Nek'zali the Soulcoiler",
-          "sourceKind": "raid",
-          "boss": "Nek'zali the Soulcoiler",
+          "itemId": "244576",
+          "itemName": "Silvermoon Agent's Deflectors",
+          "sourceText": "Crafting/Misc",
+          "sourceKind": "crafted",
+          "boss": null,
           "dungeon": null,
           "droppedBy": null
         },
@@ -2165,9 +2165,9 @@
           "slot": "Hands",
           "itemId": "268234",
           "itemName": "Ruthless Slaughtergrips",
-          "sourceText": "Tier Set",
-          "sourceKind": "tier-token",
-          "boss": null,
+          "sourceText": "Sszorak",
+          "sourceKind": "raid",
+          "boss": "Sszorak",
           "dungeon": null,
           "droppedBy": null
         },
@@ -2196,23 +2196,23 @@
         {
           "list": "overall",
           "slot": "Feet",
-          "itemId": "251153",
-          "itemName": "Arctic Explorer's Legwraps",
-          "sourceText": "Den of Nalorakk",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Den of Nalorakk",
-          "droppedBy": "Nalorakk"
+          "itemId": "268261",
+          "itemName": "Bespittled Slitherslippers",
+          "sourceText": "The Twin Fangs",
+          "sourceKind": "raid",
+          "boss": "The Twin Fangs",
+          "dungeon": null,
+          "droppedBy": null
         },
         {
           "list": "overall",
           "slot": "Finger",
-          "itemId": "252258",
-          "itemName": "Sickening Signet of Atroxus",
-          "sourceText": "Voidscar Arena",
+          "itemId": "158366",
+          "itemName": "Charged Sandstone Band",
+          "sourceText": "Temple of Sethraliss",
           "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": "Voidscar Arena",
+          "dungeon": "Temple of Sethraliss",
           "droppedBy": null
         },
         {
@@ -2229,11 +2229,11 @@
         {
           "list": "overall",
           "slot": "Trinket",
-          "itemId": "270164",
-          "itemName": "Gebbo's Bottomless Bag",
-          "sourceText": "The Lost Explorers",
-          "sourceKind": "raid",
-          "boss": "The Lost Explorers",
+          "itemId": "270167",
+          "itemName": "Wavecaller's Seastone",
+          "sourceText": "Nymrissa Wavecaller",
+          "sourceKind": "world",
+          "boss": null,
           "dungeon": null,
           "droppedBy": null
         },
@@ -4268,7 +4268,7 @@
     },
     "Beast Mastery Hunter": {
       "guideUrl": "https://www.wowhead.com/guide/classes/hunter/beast-mastery/bis-gear",
-      "published": "2026-08-18",
+      "published": "2026-08-21",
       "author": "Tarlo",
       "priorities": [
         {
@@ -4491,8 +4491,8 @@
             "slot": "Main Hand",
             "candidates": [
               {
-                "id": "244031",
-                "name": "Enchant Weapon - Arcane Mastery"
+                "id": "273072",
+                "name": "Enchant Weapon - Rite of the Hash'ey"
               }
             ]
           },
@@ -4601,6 +4601,10 @@
             {
               "id": "241288",
               "name": "Potion of Recklessness"
+            },
+            {
+              "id": "271887",
+              "name": "Liquid Luster"
             }
           ],
           "healthPotion": [
@@ -4631,13 +4635,13 @@
               "name": "Royal Roast"
             }
           ],
-          "note": "Combat Potion: Light's Potential (Most of the time) / Potion of Recklessness (Near-BiS gear with low Versatility) · Food: / Feasts: Harandar Celebration, or equivalent. / Personal Food: Royal Roast, or equivalent."
+          "note": "Combat Potion: Light's Potential (Raid) / Potion of Recklessness (Near-BiS gear with low Versatility) / Liquid Luster (Mythic+) · Food: / Feasts: Harandar Celebration, or equivalent. / Personal Food: Royal Roast, or equivalent."
         }
       }
     },
     "Marksmanship Hunter": {
       "guideUrl": "https://www.wowhead.com/guide/classes/hunter/marksmanship/bis-gear",
-      "published": "2026-08-17",
+      "published": "2026-08-22",
       "author": "TheAzortharion",
       "priorities": [
         {
@@ -4847,8 +4851,8 @@
             "slot": "Main Hand",
             "candidates": [
               {
-                "id": "243971",
-                "name": "Enchant Weapon - Jan'alai's Precision"
+                "id": "273072",
+                "name": "Enchant Weapon - Rite of the Hash'ey"
               }
             ]
           },
@@ -4973,13 +4977,13 @@
               "name": "Void-Touched Augment Rune"
             }
           ],
-          "note": "Food - Feast: Harandar Celebration or Silvermoon Parade · Food - Personal: Hearty Royal Roast · Combat Potion: Marksmanship Hunters should use Potion of Recklessness, which gives you a large amount of your highest secondary stat for 30 seconds and wants to be synced with your cooldowns. It is sensitive to Critical Strike actually being your highest stat when you press it, so if your gear has not got there yet, use Light's Potential instead. · Food: Marksmanship Hunters prefers eating Agility food (such as Feasts) over secondary stat foods when given the option. Feast: Harandar Celebration or Silvermoon Parade; Personal Food: Hearty Royal Roast"
+          "note": "Food - Feast: Harandar Celebration or Silvermoon Parade · Food - Personal: Hearty Royal Roast · Combat Potion: Marksmanship Hunters should use Potion of Recklessness, which gives you a large amount of your highest secondary stat for 30 seconds and wants to be synced with your cooldowns. It is sensitive to Critical Strike actually being your highest stat when you press it, so if your gear has not got there yet, use Light's Potential instead. Stock up on Liquid Luster too and use it as your second Potion during execute. In the execute phase Bullseye gives you plenty of Critical Strike on its own, which leaves a repeat Potion of Recklessness worth much less there. Liquid Luster increases its Versatility over time, so press it about 10 seconds before Trueshot. · Food: Marksmanship Hunters prefers eating Agility food (such as Feasts) over secondary stat foods when given the option. Feast: Harandar Celebration or Silvermoon Parade; Personal Food: Hearty Royal Roast"
         }
       }
     },
     "Survival Hunter": {
       "guideUrl": "https://www.wowhead.com/guide/classes/hunter/survival/bis-gear",
-      "published": "2026-08-18",
+      "published": "2026-08-21",
       "author": "DoolB",
       "priorities": [
         {
@@ -5140,10 +5144,10 @@
           "slot": "Finger",
           "itemId": "273792",
           "itemName": "Band of the Amani Warlord",
-          "sourceText": "The Coiled Altar",
-          "sourceKind": "raid",
-          "boss": "The Coiled Altar",
-          "dungeon": null,
+          "sourceText": "Altar of Fangs",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "Altar of Fangs",
           "droppedBy": null
         },
         {
@@ -5186,8 +5190,8 @@
             "slot": "Main Hand",
             "candidates": [
               {
-                "id": "244031",
-                "name": "Enchant Weapon - Arcane Mastery"
+                "id": "273072",
+                "name": "Enchant Weapon - Rite of the Hash'ey"
               }
             ]
           },
@@ -5641,7 +5645,7 @@
     },
     "Fire Mage": {
       "guideUrl": "https://www.wowhead.com/guide/classes/mage/fire/bis-gear",
-      "published": "2026-08-14",
+      "published": "2026-08-24",
       "author": "Preheat",
       "priorities": [
         {
@@ -5733,12 +5737,12 @@
         {
           "list": "overall",
           "slot": "Neck",
-          "itemId": "251142",
-          "itemName": "Pendant of Malefic Fury",
-          "sourceText": "Murder Row",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Murder Row",
+          "itemId": "268265",
+          "itemName": "Aqirbane Reliquary",
+          "sourceText": "Ula'tek",
+          "sourceKind": "raid",
+          "boss": "Ula'tek",
+          "dungeon": null,
           "droppedBy": null
         },
         {
@@ -7418,7 +7422,7 @@
     },
     "Holy Paladin": {
       "guideUrl": "https://www.wowhead.com/guide/classes/paladin/holy/bis-gear",
-      "published": "2026-08-18",
+      "published": "2026-08-20",
       "author": "HolyClarius",
       "priorities": [
         {
@@ -7753,7 +7757,7 @@
               "name": "Sanguithorn Tea"
             }
           ],
-          "note": "Weapon Buff: Thalassian Phoenix Oil as Herald / Rite of Sanctification as Lightsmith · Food: In Midnight Season 2, Holy Paladins prefer using the new Secondary stat feast. Feast: Amani Cornucopia or Loa's Gathering; Mana Drink: Sanguithorn Tea. Grants the most mana of any drink and stacks to 1000."
+          "note": "Weapon Buff: Thalassian Phoenix Oil as Herald / Rite of Sanctification as Lightsmith · Food: In Midnight Season 2, Holy Paladins prefer using the new Secondary stat feast. Feast: Amani Cornucopia or Loa's Gathering; Personal Food: Hearty Royal Roast; Mana Drink: Sanguithorn Tea. Grants the most mana of any drink and stacks to 1000."
         }
       }
     },
@@ -8657,7 +8661,7 @@
     },
     "Holy Priest": {
       "guideUrl": "https://www.wowhead.com/guide/classes/priest/holy/bis-gear",
-      "published": "2026-08-17",
+      "published": "2026-08-24",
       "author": "AutomaticJak",
       "priorities": [
         {
@@ -9012,7 +9016,7 @@
     },
     "Shadow Priest": {
       "guideUrl": "https://www.wowhead.com/guide/classes/priest/shadow/bis-gear",
-      "published": "2026-08-18",
+      "published": "2026-08-20",
       "author": "EllipsisPriest",
       "priorities": [
         {
@@ -9148,11 +9152,11 @@
         {
           "list": "overall",
           "slot": "Trinket",
-          "itemId": "270164",
-          "itemName": "Gebbo's Bottomless Bag",
-          "sourceText": "The Lost Explorers",
-          "sourceKind": "raid",
-          "boss": "The Lost Explorers",
+          "itemId": "270167",
+          "itemName": "Wavecaller's Seastone",
+          "sourceText": "Nymrissa Wavecaller",
+          "sourceKind": "world",
+          "boss": null,
           "dungeon": null,
           "droppedBy": null
         },
@@ -9212,7 +9216,7 @@
     },
     "Assassination Rogue": {
       "guideUrl": "https://www.wowhead.com/guide/classes/rogue/assassination/bis-gear",
-      "published": "2026-08-15",
+      "published": "2026-08-24",
       "author": "Whispyr",
       "priorities": [
         {
@@ -9469,7 +9473,7 @@
     },
     "Outlaw Rogue": {
       "guideUrl": "https://www.wowhead.com/guide/classes/rogue/outlaw/bis-gear",
-      "published": "2026-08-12",
+      "published": "2026-08-22",
       "author": "JustGuy",
       "priorities": [
         {
@@ -9822,7 +9826,7 @@
     },
     "Subtlety Rogue": {
       "guideUrl": "https://www.wowhead.com/guide/classes/rogue/subtlety/bis-gear",
-      "published": "2026-08-18",
+      "published": "2026-08-24",
       "author": "fuu1",
       "priorities": [
         {
@@ -9831,12 +9835,12 @@
           "primary": "Agility",
           "secondaries": [
             "Mast",
-            "Crit",
-            "Vers"
+            "Vers",
+            "Crit"
           ],
           "leadsWithItemLevel": false,
           "softCaps": [],
-          "raw": "Agility > Mastery > Haste (~1100 Haste) > Critical Strike > Versatility"
+          "raw": "Agility > Mastery > Haste (~700 Haste) > Versatility > Critical Strike"
         },
         {
           "label": "Trickster",
@@ -9844,12 +9848,12 @@
           "primary": "Agility",
           "secondaries": [
             "Mast",
-            "Crit",
-            "Vers"
+            "Vers",
+            "Crit"
           ],
           "leadsWithItemLevel": false,
           "softCaps": [],
-          "raw": "Agility > Mastery > Haste (~1100 Haste) > Critical Strike > Versatility"
+          "raw": "Agility > Mastery > Haste (~700 Haste) > Versatility > Critical Strike"
         }
       ],
       "bis": [
@@ -9982,23 +9986,12 @@
         {
           "list": "overall",
           "slot": "Feet",
-          "itemId": "271512",
-          "itemName": "Chosen Bloodslayer's Boots",
-          "sourceText": "Catalyst",
-          "sourceKind": "catalyst",
-          "boss": null,
-          "dungeon": null,
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Finger",
-          "itemId": "252258",
-          "itemName": "Sickening Signet of Atroxus",
-          "sourceText": "Voidscar Arena",
+          "itemId": "159304",
+          "itemName": "Goldfeather Boots",
+          "sourceText": "King's Rest",
           "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": "Voidscar Arena",
+          "dungeon": "Kings' Rest",
           "droppedBy": null
         },
         {
@@ -10010,6 +10003,17 @@
           "sourceKind": "dungeon",
           "boss": null,
           "dungeon": "The Blinding Vale",
+          "droppedBy": null
+        },
+        {
+          "list": "overall",
+          "slot": "Finger",
+          "itemId": "162544",
+          "itemName": "Jade Ophidian Band",
+          "sourceText": "Temple of Sethraliss",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "Temple of Sethraliss",
           "droppedBy": null
         },
         {
@@ -10041,18 +10045,18 @@
             "slot": "Main Hand",
             "candidates": [
               {
-                "id": "244031",
-                "name": "Enchant Weapon - Arcane Mastery"
+                "id": "273072",
+                "name": "Enchant Weapon - Rite of the Hash'ey"
               }
             ],
-            "note": "Higher gear levels in season two make secondary stat enchants become competitive options, you can still use Enchant Weapon - Acuity of the Ren'dorei. Single Stat enchants (Enchant Weapon - Arcane Mastery, Enchant Weapon - Berserker's Rage, Enchant Weapon - Worldsoul Tenacity or Enchant Weapon - Jan'alai's Precision) , will be used instead on both weapons. Mastery is typically the best of the secondary stat enchants early on, while others compete when we get closer to best in slot gear levels. Main Hand: Enchant Weapon - Arcane Mastery; Off Hand: Enchant Weapon - Arcane Mastery"
+            "note": "Subtlety can utilize all stats well, which makes the random stat proc enchant,Enchant Weapon - Rite of the Hash'ey, the best choice. The agility and secondary stat enchants are strong alternatives even tho slightly worse. options. This means you can still use Enchant Weapon - Acuity of the Ren'dorei or single stat enchants (Enchant Weapon - Arcane Mastery, Enchant Weapon - Berserker's Rage, Enchant Weapon - Worldsoul Tenacity or Enchant Weapon - Jan'alai's Precision) if they are cheaper. And opt for Enchant Weapon - Rite of the Hash'ey for your crafted dagger, or once you get a strong mainhand weapon. Main Hand: Enchant Weapon - Rite of the Hash'ey; Off Hand: Enchant Weapon - Rite of the Hash'ey"
           },
           {
             "slot": "Off Hand",
             "candidates": [
               {
-                "id": "244031",
-                "name": "Enchant Weapon - Arcane Mastery"
+                "id": "273072",
+                "name": "Enchant Weapon - Rite of the Hash'ey"
               }
             ]
           },
@@ -10169,7 +10173,7 @@
               "name": "Royal Roast"
             }
           ],
-          "note": "Flask: / Flask of the Magisters (best) / Flask of the Shattered Sun (alternative) / · Combat Potion: Light's Potential(default) / Potion of Recklessness (if you get Mastery) · Weapon Buff (Main hand): Thalassian Phoenix Oil · Weapon Buff (Off hand): Thalassian Phoenix Oil · Food: Silvermoon Parade (feast) / Royal Roast(personal) · Flasks: The best Flask for Subtlety Rogues is between Flask of the Shattered Sun and Flask of the Magisters. Which one is better will usually depend on your gear, and its best to use a simulation to compare. Flask of the Magisters is likely the better option. If you are below the haste breakpoints (1100 in Single Target / 800 for Mythic+), its advised to use Fleeting Flask of the Blood Knights instead. · Combat Potion: While there are many options for potions, Subtlety Rogues will use Light's Potential. Potion of Recklessness becomes the best option if you get Mastery . The technically best potion is Draught of Rampant Abandon, but its tricky to use. The void pools spawned by this poison silence you, which means you need to actively run out of them to use abilities. There is a short grace period before the silence effect applies. Using the potion, it seemed to proc roughly 3, often 4 times during the duration. Attacking a dummy was possible for the entire time, but it did need some practice and good positioning. The use of the potion is only recommended for encounters with big hitboxes, some amount of boss movement, or with a low amount of mechanical overhead to allow you to focus on avoiding the zones. · Weapon Buff: For their weapons, Subtlety Rogues, the best option is listed below: Main Hand: Thalassian Phoenix Oil; Off Hand: Thalassian Phoenix Oil; Note: Adamantite Sharpening Stone technically perform slightly better as buff for your main hand weapon. It is likely unintentional for this item to still function on current gear, so could stop working with any hotfix. This option is only relevant at the start of the season before your first craft due to the Item Level restriction."
+          "note": "Flask: / Flask of the Magisters (best) / Flask of the Shattered Sun (alternative) / · Combat Potion: Light's Potential(default) / Potion of Recklessness (if you get Mastery) · Weapon Buff (Main hand): Thalassian Phoenix Oil · Weapon Buff (Off hand): Thalassian Phoenix Oil · Food: Silvermoon Parade (feast) / Royal Roast(personal) · Flasks: The best Flask for Subtlety Rogues is between Flask of the Shattered Sun and Flask of the Magisters. Which one is better will usually depend on your gear, and its best to use a simulation to compare. Flask of the Magisters is likely the better option. If you are below the haste breakpoints of 700, it's advised to use Fleeting Flask of the Blood Knights instead. · Combat Potion: While there are many options for potions, Subtlety Rogues will use Light's Potential. Potion of Recklessness becomes the best option if you get Mastery . The technically best potion is Draught of Rampant Abandon, but it's tricky to use. The void pools spawned by this poison silence you, which means you need to actively run out of them to use abilities. There is a short grace period before the silence effect applies. Using the potion, it seemed to proc roughly 3, often 4 times during the duration. Attacking a dummy was possible for the entire time, but it did need some practice and good positioning. The use of the potion is only recommended for encounters with big hitboxes, some amount of boss movement, or with a low amount of mechanical overhead to allow you to focus on avoiding the zones. · Weapon Buff: For their weapons, Subtlety Rogues, the best option is listed below: Main Hand: Thalassian Phoenix Oil; Off Hand: Thalassian Phoenix Oil"
         }
       }
     },
@@ -10516,7 +10520,7 @@
     },
     "Enhancement Shaman": {
       "guideUrl": "https://www.wowhead.com/guide/classes/shaman/enhancement/bis-gear",
-      "published": "2026-08-14",
+      "published": "2026-08-24",
       "author": "wordup",
       "priorities": [
         {
@@ -10524,14 +10528,14 @@
           "heroTalentSlug": "stormbringer",
           "primary": "Agility",
           "secondaries": [
+            "Crit",
             "Mast",
             "Haste",
-            "Crit",
             "Vers"
           ],
           "leadsWithItemLevel": false,
           "softCaps": [],
-          "raw": "Agility > Mastery = Haste > Critical Strike > Versatility"
+          "raw": "Agility > Critical Strike = Mastery > Haste > Versatility"
         },
         {
           "label": "Totemic",
@@ -10555,18 +10559,17 @@
             "slot": "Main Hand",
             "candidates": [
               {
-                "id": "244031",
-                "name": "Enchant Weapon - Arcane Mastery"
+                "id": "273072",
+                "name": "Enchant Weapon - Rite of the Hash'ey"
               }
-            ],
-            "note": "In Midnight Season 2, with the rising value of secondary stats we've made the shift over, using Enchant Weapon - Arcane Mastery paired with Enchant Weapon - Berserker's Rage."
+            ]
           },
           {
             "slot": "Off Hand",
             "candidates": [
               {
-                "id": "243973",
-                "name": "Enchant Weapon - Berserker's Rage"
+                "id": "273072",
+                "name": "Enchant Weapon - Rite of the Hash'ey"
               }
             ]
           },
@@ -10646,14 +10649,14 @@
         "consumables": {
           "flask": [
             {
-              "id": "241324",
-              "name": "Flask of the Blood Knights"
+              "id": "241322",
+              "name": "Flask of the Magisters"
             }
           ],
           "combatPotion": [
             {
-              "id": "241288",
-              "name": "Potion of Recklessness"
+              "id": "271887",
+              "name": "Liquid Luster"
             }
           ],
           "healthPotion": [
@@ -10678,13 +10681,13 @@
               "name": "Royal Roast"
             }
           ],
-          "note": "Flasks: In Midnight Season 2, due to the limited amount of Haste available, the best general flask to use is Flask of the Blood Knights to help keep your stats in order. Depending on your current gear setup, Flask of the Magisters is also an option when lacking Mastery. You can also obtain these from a Cauldron of Sin'dorei Flasks if your group is using one. · Combat Potion: Going into Season 2 of Midnight, due to a number of gear system changes we've switched over to Potion of Recklessness. We want this to trigger Mastery , so it may require some gear shifting to consistently do so. If you can't consistently trigger this stat, then Light's Potential is almost the same in value. These can also be obtained from an Voidlight Potion Cauldron if your group is using one. · Weapon Buff: Unfortunately, due to the Weapon Imbues (Flametongue Weapon and Windfury Weapon) that Enhancement uses, it CANNOT use weapon enhancements such as oils or whetstones at the same time . Due to the way that Elemental Weapons works, opting out of these is not an option, so we do not use runes."
+          "note": "Flask: either — Flask of the Magisters * · Combat Potion: ST — Liquid Luster * · Flasks: In Midnight Season 2, Flasks are now very volatile, and which you use depends on your other stats. As annoying as it is to not have a catch all answer, there's a few rules to decide which to use, so simming your character may be best here: Flask of the Magisters — If your Critical Strike is higher than your Mastery.; Flask of the Shattered Sun — If your Mastery is higher than your Critical Strike.; Flask of the Blood Knights — If your gear has next to no Haste, this can raise the floor in an emergency.; Flasks are best used this season to balance out the needs of the three stats, since they're all extremely close to each other, and can be influenced by cantrips and gear you're wearing. You can also obtain these from a Cauldron of Sin'dorei Flasks if your group is using one. · Combat Potion: Even worse than Flasks, Potions are more complicated in Season 2 as well. There's use cases for three separate potions, as annoying as that is: Potion of Recklessness — in AoE or you can guarantee it triggers Mastery or Critical Strike, this is strongest.; Liquid Luster — Stormbringer pre-potting 12s before the pull for Ascendance is roughly equal.; Light's Potential — at low gear or if you don't want the hassle, it's a fine backup.; At different gear breakpoints Potion of Recklessness can fluctuate a lot for Stormbringer , but always stays the best for Totemic . Liquid Luster also needs to be pre-potted to ramp the effect for it to stay competitive buffing your Ascendance, so needs extra care when using it. These can also be obtained from an Voidlight Potion Cauldron if your group is using one. · Weapon Buff: Unfortunately, due to the Weapon Imbues (Flametongue Weapon and Windfury Weapon) that Enhancement uses, it CANNOT use weapon enhancements such as oils or whetstones at the same time . Due to the way that Elemental Weapons works, opting out of these is not an option, so we do not use runes."
         }
       }
     },
     "Restoration Shaman": {
       "guideUrl": "https://www.wowhead.com/guide/classes/shaman/restoration/bis-gear",
-      "published": "2026-08-18",
+      "published": "2026-08-22",
       "author": "Harreks",
       "priorities": [
         {
@@ -11019,7 +11022,7 @@
     },
     "Affliction Warlock": {
       "guideUrl": "https://www.wowhead.com/guide/classes/warlock/affliction/bis-gear",
-      "published": "2026-08-16",
+      "published": "2026-08-23",
       "author": "Kalamazi",
       "priorities": [
         {
@@ -11066,13 +11069,14 @@
         {
           "list": "overall",
           "slot": "Off Hand",
-          "itemId": "245769",
-          "itemName": "Aln'hara Lantern",
-          "sourceText": "Crafting",
-          "sourceKind": "crafted",
+          "itemId": "273779",
+          "itemName": "Nocuous Focal Fang",
+          "sourceText": "[npc=259446]",
+          "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": null,
-          "droppedBy": null
+          "dungeon": "Altar of Fangs",
+          "droppedBy": "The Writhing Coil",
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -11278,7 +11282,7 @@
     },
     "Demonology Warlock": {
       "guideUrl": "https://www.wowhead.com/guide/classes/warlock/demonology/bis-gear",
-      "published": "2026-08-12",
+      "published": "2026-08-24",
       "author": "NotWarlock",
       "priorities": [
         {
@@ -11485,13 +11489,13 @@
         {
           "list": "overall",
           "slot": "Trinket",
-          "itemId": "250215",
-          "itemName": "Freightrunner's Flask",
-          "sourceText": "[npc=234649]",
+          "itemId": "273796",
+          "itemName": "Vile Vial of Volatile Venom",
+          "sourceText": "[npc=259445]",
           "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": "Murder Row",
-          "droppedBy": "Zaen Bladesorrow",
+          "dungeon": "Altar of Fangs",
+          "droppedBy": "Rav'i",
           "sourceTextUnmatched": true
         }
       ],
@@ -11798,7 +11802,7 @@
     },
     "Arms Warrior": {
       "guideUrl": "https://www.wowhead.com/guide/classes/warrior/arms/bis-gear",
-      "published": "2026-08-16",
+      "published": "2026-08-21",
       "author": "Archimtiros",
       "priorities": [
         {
@@ -12124,7 +12128,7 @@
     },
     "Fury Warrior": {
       "guideUrl": "https://www.wowhead.com/guide/classes/warrior/fury/bis-gear",
-      "published": "2026-08-17",
+      "published": "2026-08-21",
       "author": "Archimtiros",
       "priorities": [
         {

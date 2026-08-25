@@ -758,7 +758,7 @@
       "patchContext": "12.1 PTR (initial June builds)",
       "claim": "Arcane is the big winner of the 12.1 Mage revamp: a brand-new Prismatic Bolt apex talent (procs off Arcane Salvo consumption, instantly generates four Arcane Charges, and at rank 2 guarantees Clearcasting with +30% Missiles), Arcane Pulse redesigned into a 15-second-cooldown AoE charge generator, and a second Prismatic Barrier charge for defensive parity; with the tier set angling the spec toward Sunfury and Missiles over Spellslinger, the changes 'on paper look good' and he is excited Arcane could return to the endgame spotlight - though Spellslinger's orb jank goes unaddressed.",
       "url": "https://youtu.be/LevNqEHVB_o?t=446",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Mage",
@@ -5078,7 +5078,7 @@
       "patchContext": "12.1 PTR — reaction to the August 18 tuning pass, Rogue section (supersedes his 07-31 reaction to the previous Rogue tuning; complements his 08-04 M+ log review)",
       "url": "https://youtu.be/lanOZvwWzw0?t=24",
       "claim": "He reports Assassination taking a flat 4% buff to all damage in the pass landing on the August 18 reset, and reads it as unusually strong precisely because the spec was already performing well without it — a buff that impressed a lot of people. He anchors the claim on placements he has seen rather than his own sims, citing A+ on many raid tier lists and A for Mythic+, and argues the extra 4% could push it to meta or S tier from there. He is careful to flag the changes are not live yet, quoting the source's own wording that they apply on the incoming reset. His summary read is that Assassination is looking insane at the moment and that he expects it to be a genuine surprise for the season.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Warrior",
@@ -5749,7 +5749,7 @@
       "bracket": "raid",
       "patchContext": "12.1 PTR — his Season 2 Subtlety guide, published the day before the Season 2 launch; the strength read is the framing he opens with and is explicitly raid-scoped, while the body of the video is a talent/stat/BiS walkthrough.",
       "url": "https://youtu.be/f8YlxVEbGCY?t=16",
-      "superseded": false,
+      "superseded": true,
       "claim": "Opening his Season 2 Subtlety guide, he frames Rogue as looking like one of the strongest classes going into the season, especially in raid content, with Subtlety specifically the spec he expects to lead on total boss damage. He hedges the claim throughout rather than asserting it — it seems, probably, possibly — and immediately caveats that Blizzard could still nerf it. His supporting evidence is circumstantial rather than measured: he says a lot of players are visibly prepping Rogues for the Ula'tek raid. He also notes Deathstalker has finally become hard to ignore for Subtlety, which he calls a more meta option even though it does not fix what some players dislike about the tree."
     },
     {
@@ -6212,6 +6212,66 @@
       "patchContext": "Season 2 live — his 9h30m week-one healer stream (Mythic+ into Heroic/Mythic raid splits), published 2026-08-22 hours before Blizzard announced the August 25 tuning pass",
       "url": "https://youtu.be/qG-So9pnRBQ?t=33720",
       "claim": "Asked directly which is the better spec, Restoration Shaman or Holy Priest, he answers that both are “doing quite well” this season and are also relatively easy to play — a positive read on Holy Priest with no bracket attached.",
+      "superseded": false
+    },
+    {
+      "class": "Mage",
+      "spec": "Arcane",
+      "creator": "Dalaran Gaming",
+      "date": "2026-08-24",
+      "sentiment": "buff",
+      "bracket": "both",
+      "patchContext": "Season 2 live — his week-one \"five specs standing out\" video, published 2026-08-24, framed around the meta forming in the first week of Season 2 content and caveated throughout on the balance passes still to come",
+      "url": "https://youtu.be/LoCCPjj7J6c?t=235",
+      "claim": "He names Arcane as the standout Mage spec so far this season, crediting the 12.1 rework — the new Prismatic Bolt in particular — for damage that is strong on boss, AoE and cleave while still handling priority targets, which he says inches it ahead of Fire and Frost for the time being. He also reads the defensive rework (Refractive Images, the improved Prismatic Barrier double-barrier, Improved Warding for raid chip damage) as leaving Arcane no longer the squishiest Mage spec, which he thinks helps it specifically in Mythic+, with Time Warp securing it an easy dungeon slot.",
+      "superseded": false
+    },
+    {
+      "class": "Rogue",
+      "spec": "Subtlety",
+      "creator": "Dalaran Gaming",
+      "date": "2026-08-24",
+      "sentiment": "buff",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — his week-one \"five specs standing out\" video, published 2026-08-24; Subtlety is his fifth and final pick, chosen out of a DPS slot he calls genuinely competitive",
+      "url": "https://youtu.be/LoCCPjj7J6c?t=435",
+      "claim": "He reads Subtlety's pure single-target boss damage as unmatched right now: on a raid encounter where you can ignore adds and focus priority boss damage, he says Subtlety cannot be matched and may be one of the best pure boss-damage specs in the game — explicitly caveated on nerfs not yet landing.",
+      "superseded": false
+    },
+    {
+      "class": "Rogue",
+      "spec": "Subtlety",
+      "creator": "Dalaran Gaming",
+      "date": "2026-08-24",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his week-one \"five specs standing out\" video, published 2026-08-24; the dungeon half of his Subtlety segment, where he separates how popular the spec is from how it actually performs",
+      "url": "https://youtu.be/LoCCPjj7J6c?t=465",
+      "claim": "In keys he reports Subtlety as extremely popular, with many players preferring the playstyle, and places its performance only ever so slightly behind Assassination — and only at the highest key levels, a gap he expects gear to close fairly easily. The popularity is the larger part of his dungeon claim; the performance gap he names is narrow and top-end only.",
+      "superseded": false
+    },
+    {
+      "class": "Rogue",
+      "spec": "Assassination",
+      "creator": "Dalaran Gaming",
+      "date": "2026-08-24",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his week-one \"five specs standing out\" video, published 2026-08-24; a direct comparison of the two Rogue DPS specs at the top of the key ladder",
+      "url": "https://youtu.be/LoCCPjj7J6c?t=470",
+      "claim": "Comparing the Rogue DPS specs in keys, he says it can technically be argued that Assassination is a little better than Subtlety at the most bleeding-edge, record-breaking key levels, while Subtlety remains the more popular pick below that ceiling.",
+      "superseded": false
+    },
+    {
+      "class": "Rogue",
+      "spec": "Assassination",
+      "creator": "Musguete",
+      "date": "2026-08-24",
+      "sentiment": "buff",
+      "bracket": "both",
+      "patchContext": "Season 2 live — his Season 2 Assassination guide, published 2026-08-24. The video is mostly how-to-play (rotation, energy management, macros, talents, stats), but it opens and closes on his own spec-strength read, which is what is distilled here",
+      "url": "https://youtu.be/igWiPoYPlV4?t=140",
+      "claim": "He reads Assassination as being in a really good spot in Season 2: damage is doing intense amounts even outside the burst window and the spec has a lot of sustain, and he closes by saying he likes Assassination's position and does not believe it is going away any time soon. He frames the season's play pattern as deliberately slower — Blizzard removing the Season 1 Envenom-aura cancel and pushing a paced Envenom chain — rather than as a downgrade.",
       "superseded": false
     }
   ],

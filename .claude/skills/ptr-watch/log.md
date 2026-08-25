@@ -16,6 +16,40 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-25 (local) — nothing new to log; the August 25 tuning had not gone live yet at run time
+
+Delta check against the nightly's own sweep three hours earlier (its `startedAt` 11:24:31Z), run
+at ~14:30Z. **No feed entry created, no data file touched by this lane.**
+
+- **Wowhead RSS**: 40 items, HTTP 200, 155 KB. **Three landed after the nightly's sweep** — the
+  only one in scope is `news=382602` "Heroic Vashnik Nerfed in Hotfixes" (12:17Z). Read in full
+  from `content:encoded` rather than judged by its title: it is **pure encounter tuning** (Blood /
+  Shadow / Flame Infusion each 200% → 100% on Normal and Heroic, plus the Imbibe damage ladder)
+  with **zero class lines**, so it is correctly not feed material — the same call the nightly made
+  on `news=382597`. The other two were a Delve loot post and a Method world-first recap.
+- **The August 25 class tuning pass is ALREADY LOGGED** as the 2026-08-22 `kind: "build"` entry
+  (topic 2339812, 14 specs / 15 highlights). It had **not gone live** when this ran: US weekly
+  reset is ~15:00Z and the run was ~14:30Z, so its live confirmation belongs to the next sweep.
+  Recording this explicitly because "the announced pass is in the feed" and "the pass has shipped"
+  are different facts and only the first is true tonight.
+- **Three forum topics polled, all byte-unchanged since the nightly:**
+  · dev-notes `2317811` — still `highest_post_number` 19 (Linxy, 2026-07-31). The closed 12.1
+  cycle's expected silence; per the between-cycles posture this is NOT a lost thread.
+  · running hotfix `2336376` — post#1 still v15 at 2026-08-22T01:46:38Z, so **no August 23/24/25
+  hotfix section has been added** upstream.
+  · `2339812` "Class Tuning Incoming – August 25" — post#1 still v2 at 2026-08-24T21:44:22Z, i.e.
+  the PvP-only amendment the nightly already handled. No third revision.
+- **NO 12.2 SIGNAL.** All 40 RSS titles *and* bodies scanned for "12.2", "next major patch", "PTR
+  is now available", "PTR Development Notes", "Public Test Realm" — **0 hits**, matching the
+  nightly. PTR zone sweeps (54/52/56/57) remain dormant and were not attempted.
+- **Transport note for the next run:** the Discourse `.json` needs the **canonical slug** —
+  `…/t/<slug>/<id>.json` returns 200, while the `…/t/x/<id>.json` placeholder form returns an
+  EMPTY body with no error, which reads exactly like a dead topic. `curl -sL` on the bare
+  `…/t/<id>.json` form also works. Cost one wasted probe round; recorded so it does not cost
+  another. (Wowhead's `/news` index remains 403 to a UA-only curl, as the existing trap says —
+  the RSS carried everything needed, so the full header set was not required tonight.)
+
+
 ## 2026-08-25 (nightly) — the August 25 tuning post was EDITED to v2, and the edit is PvP-only
 
 - **No new feed entry.** Newest entry stays 2026-08-22.

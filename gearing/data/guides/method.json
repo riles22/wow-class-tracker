@@ -3,11 +3,11 @@
   "source": "Method",
   "sourceId": "method",
   "dated": true,
-  "harvestedAt": "2026-08-19",
+  "harvestedAt": "2026-08-25",
   "specs": {
     "Blood Death Knight": {
       "guideUrl": "https://www.method.gg/guides/blood-death-knight/gearing",
-      "published": "2026-08-17",
+      "published": "2026-08-23",
       "priorities": [
         {
           "label": "General",
@@ -4444,7 +4444,7 @@
     },
     "Feral Druid": {
       "guideUrl": "https://www.method.gg/guides/feral-druid/gearing",
-      "published": "2026-08-18",
+      "published": "2026-08-23",
       "priorities": [],
       "bis": [
         {
@@ -7074,7 +7074,7 @@
     },
     "Preservation Evoker": {
       "guideUrl": "https://www.method.gg/guides/preservation-evoker/gearing",
-      "published": "2026-08-12",
+      "published": "2026-08-20",
       "priorities": [
         {
           "label": "General",
@@ -7849,7 +7849,7 @@
     },
     "Beast Mastery Hunter": {
       "guideUrl": "https://www.method.gg/guides/beast-mastery-hunter/gearing",
-      "published": "2026-08-17",
+      "published": "2026-08-23",
       "priorities": [
         {
           "label": "General",
@@ -8502,7 +8502,7 @@
     },
     "Marksmanship Hunter": {
       "guideUrl": "https://www.method.gg/guides/marksmanship-hunter/gearing",
-      "published": "2026-08-17",
+      "published": "2026-08-23",
       "priorities": [
         {
           "label": "General",
@@ -18491,7 +18491,7 @@
     },
     "Elemental Shaman": {
       "guideUrl": "https://www.method.gg/guides/elemental-shaman/gearing",
-      "published": "2026-08-13",
+      "published": "2026-08-23",
       "priorities": [
         {
           "label": "General",
@@ -18639,23 +18639,23 @@
         {
           "list": "overall",
           "slot": "Finger",
-          "itemId": "268249",
-          "itemName": "Vile Alchemist's Band",
-          "sourceText": "Vashnik the Malignant",
+          "itemId": "268252",
+          "itemName": "Apex Brute's Claw Ring",
+          "sourceText": "Sszorak",
           "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
+          "boss": "Sszorak",
           "dungeon": null,
           "droppedBy": null
         },
         {
           "list": "overall",
           "slot": "Finger",
-          "itemId": "252258",
-          "itemName": "Sickening Signet Of Atroxus",
-          "sourceText": "Voidscar Arena",
+          "itemId": "273792",
+          "itemName": "Band Of The Amani Warlord",
+          "sourceText": "Altar of Fangs",
           "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": "Voidscar Arena",
+          "dungeon": "Altar of Fangs",
           "droppedBy": null
         },
         {
@@ -18694,13 +18694,13 @@
         {
           "list": "overall",
           "slot": "Off Hand",
-          "itemId": "251150",
-          "itemName": "Tempest's Shelter",
-          "sourceText": "Den of Nalorakk",
-          "sourceKind": "dungeon",
+          "itemId": "268262",
+          "itemName": "Bubblefin Splash Guard",
+          "sourceText": "Nymrissa Wavecaller",
+          "sourceKind": "world",
           "boss": null,
-          "dungeon": "Den of Nalorakk",
-          "droppedBy": "Nalorakk"
+          "dungeon": null,
+          "droppedBy": null
         },
         {
           "list": "raid",
@@ -18818,11 +18818,11 @@
         {
           "list": "raid",
           "slot": "Finger",
-          "itemId": "268249",
-          "itemName": "Vile Alchemist's Band",
-          "sourceText": "Vashnik the Malignant",
+          "itemId": "268252",
+          "itemName": "Apex Brute's Claw Ring",
+          "sourceText": "Sszorak",
           "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
+          "boss": "Sszorak",
           "dungeon": null,
           "droppedBy": null
         },
@@ -19096,17 +19096,29 @@
         "gems": {
           "unique": [
             {
-              "id": "240983",
-              "name": "Indecipherable Eversong Diamond"
+              "id": "240967",
+              "name": "Powerful Eversong Diamond"
             }
           ],
           "filler": [
             {
-              "id": "240898",
-              "name": "Flawless Deadly Amethyst"
+              "id": "240900",
+              "name": "Flawless Quick Amethyst"
+            },
+            {
+              "id": "240908",
+              "name": "Flawless Masterful Garnet"
+            },
+            {
+              "id": "240918",
+              "name": "Flawless Masterful Lapis"
+            },
+            {
+              "id": "240892",
+              "name": "Flawless Masterful Peridot"
             }
           ],
-          "note": "As always, simming will give you better results for your exact situation. One Indecipherable Eversong Diamond . Fill every other slot with Flawless Deadly Amethyst ."
+          "note": "As always, simming will give you better results for your exact situation. Currently I can recommend using one of each of the following: Powerful Eversong Diamond Flawless Quick Amethyst Flawless Masterful Garnet Flawless Masterful Lapis Then fill the rest with Flawless Masterful Peridot ."
         },
         "consumables": {
           "healthPotion": [
@@ -19120,7 +19132,7 @@
     },
     "Enhancement Shaman": {
       "guideUrl": "https://www.method.gg/guides/enhancement-shaman/gearing",
-      "published": "2026-08-17",
+      "published": "2026-08-23",
       "priorities": [
         {
           "label": "General",
@@ -19211,12 +19223,11 @@
           "slot": "Hands",
           "itemId": "271484",
           "itemName": "Hexing Grips Of The Ophidian Oracle",
-          "sourceText": "King's Rest (Catalyst)",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Kings' Rest",
-          "droppedBy": null,
-          "viaCatalyst": true
+          "sourceText": "Entombed Sentinels",
+          "sourceKind": "raid",
+          "boss": "Entombed Sentinels",
+          "dungeon": null,
+          "droppedBy": null
         },
         {
           "list": "overall",
@@ -19244,8 +19255,19 @@
         {
           "list": "overall",
           "slot": "Feet",
-          "itemId": "268233",
-          "itemName": "Ferocious Scaleboots",
+          "itemId": "268258",
+          "itemName": "Boots Of The Reckless Wayfarer",
+          "sourceText": "Entombed Sentinels",
+          "sourceKind": "raid",
+          "boss": "Entombed Sentinels",
+          "dungeon": null,
+          "droppedBy": null
+        },
+        {
+          "list": "overall",
+          "slot": "Finger",
+          "itemId": "268252",
+          "itemName": "Apex Brute's Claw Ring",
           "sourceText": "Sszorak",
           "sourceKind": "raid",
           "boss": "Sszorak",
@@ -19255,23 +19277,12 @@
         {
           "list": "overall",
           "slot": "Finger",
-          "itemId": "268249",
-          "itemName": "Vile Alchemist's Band",
-          "sourceText": "Vashnik the Malignant",
-          "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
-          "dungeon": null,
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Finger",
-          "itemId": "252258",
-          "itemName": "Sickening Signet Of Atroxus",
-          "sourceText": "Voidscar Arena",
+          "itemId": "273792",
+          "itemName": "Band Of The Amani Warlord",
+          "sourceText": "Altar of Fangs",
           "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": "Voidscar Arena",
+          "dungeon": "Altar of Fangs",
           "droppedBy": null
         },
         {
@@ -19391,9 +19402,9 @@
           "slot": "Hands",
           "itemId": "271484",
           "itemName": "Hexing Grips Of The Ophidian Oracle",
-          "sourceText": "Breath of Ula'tek",
+          "sourceText": "Entombed Sentinels",
           "sourceKind": "raid",
-          "boss": "Ula'tek",
+          "boss": "Entombed Sentinels",
           "dungeon": null,
           "droppedBy": null
         },
@@ -19423,8 +19434,19 @@
         {
           "list": "raid",
           "slot": "Feet",
-          "itemId": "268233",
-          "itemName": "Ferocious Scaleboots",
+          "itemId": "268258",
+          "itemName": "Boots Of The Reckless Wayfarer",
+          "sourceText": "Entombed Sentinels",
+          "sourceKind": "raid",
+          "boss": "Entombed Sentinels",
+          "dungeon": null,
+          "droppedBy": null
+        },
+        {
+          "list": "raid",
+          "slot": "Finger",
+          "itemId": "268252",
+          "itemName": "Apex Brute's Claw Ring",
           "sourceText": "Sszorak",
           "sourceKind": "raid",
           "boss": "Sszorak",
@@ -19439,17 +19461,6 @@
           "sourceText": "Vashnik the Malignant",
           "sourceKind": "raid",
           "boss": "Vashnik the Malignant",
-          "dungeon": null,
-          "droppedBy": null
-        },
-        {
-          "list": "raid",
-          "slot": "Finger",
-          "itemId": "240949",
-          "itemName": "Masterwork Sin'dorei Band",
-          "sourceText": "Crafted",
-          "sourceKind": "crafted",
-          "boss": null,
           "dungeon": null,
           "droppedBy": null
         },
@@ -19615,23 +19626,23 @@
         {
           "list": "mplus",
           "slot": "Finger",
-          "itemId": "158366",
-          "itemName": "Charged Sandstone Band",
-          "sourceText": "Temple of Sethraliss",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Temple of Sethraliss",
-          "droppedBy": null
-        },
-        {
-          "list": "mplus",
-          "slot": "Finger",
           "itemId": "252258",
           "itemName": "Sickening Signet Of Atroxus",
           "sourceText": "Voidscar Arena",
           "sourceKind": "dungeon",
           "boss": null,
           "dungeon": "Voidscar Arena",
+          "droppedBy": null
+        },
+        {
+          "list": "mplus",
+          "slot": "Finger",
+          "itemId": "273792",
+          "itemName": "Band Of The Amani Warlord",
+          "sourceText": "Altar of Fangs",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "Altar of Fangs",
           "droppedBy": null
         },
         {
