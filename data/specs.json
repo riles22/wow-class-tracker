@@ -8,7 +8,7 @@
         "icyveins": "S",
         "method": "S",
         "wowhead": "S",
-        "archon": "S"
+        "archon": "A"
       },
       "mplus": {
         "icyveins": "S",
@@ -135,6 +135,15 @@
         "unit": "rating",
         "n": 61738,
         "asOf": "2026-08-11"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Heroic)",
+        "value": 91769,
+        "unit": "DPS",
+        "n": 27986,
+        "asOf": "2026-08-24"
       }
     ],
     "survivability": {
@@ -365,6 +374,15 @@
         "unit": "rating",
         "n": 14376,
         "asOf": "2026-08-11"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Heroic)",
+        "value": 151700,
+        "unit": "DPS",
+        "n": 6642,
+        "asOf": "2026-08-24"
       }
     ],
     "fightProfile": {
@@ -420,7 +438,7 @@
         "icyveins": "B",
         "method": "B",
         "wowhead": "B",
-        "archon": "A"
+        "archon": "B"
       },
       "mplus": {
         "icyveins": "A+",
@@ -622,6 +640,15 @@
         "unit": "rating",
         "n": 64652,
         "asOf": "2026-08-11"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Heroic)",
+        "value": 170899,
+        "unit": "DPS",
+        "n": 37033,
+        "asOf": "2026-08-24"
       }
     ],
     "fightProfile": {
@@ -676,7 +703,7 @@
         "icyveins": "B",
         "method": "B",
         "wowhead": "A",
-        "archon": "B"
+        "archon": "C"
       },
       "mplus": {
         "icyveins": "A",
@@ -876,6 +903,15 @@
         "n": 3,
         "asOf": "2026-08-18",
         "era": "ptr"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Heroic)",
+        "value": 163066,
+        "unit": "DPS",
+        "n": 10775,
+        "asOf": "2026-08-24"
       }
     ],
     "fightProfile": {
@@ -931,7 +967,7 @@
         "icyveins": "A",
         "method": "A",
         "wowhead": "A",
-        "archon": "S"
+        "archon": "B"
       },
       "mplus": {
         "icyveins": "A",
@@ -1134,6 +1170,15 @@
         "unit": "rating",
         "n": 44921,
         "asOf": "2026-08-11"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Heroic)",
+        "value": 175132,
+        "unit": "DPS",
+        "n": 29579,
+        "asOf": "2026-08-24"
       }
     ],
     "fightProfile": {
@@ -1188,7 +1233,7 @@
       "raid": {
         "icyveins": "B",
         "wowhead": "B",
-        "archon": "C",
+        "archon": "A",
         "method": "B"
       },
       "mplus": {
@@ -1311,6 +1356,15 @@
         "unit": "rating",
         "n": 17565,
         "asOf": "2026-08-11"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Heroic)",
+        "value": 91437,
+        "unit": "DPS",
+        "n": 3245,
+        "asOf": "2026-08-24"
       }
     ],
     "survivability": {
@@ -1343,7 +1397,7 @@
         "icyveins": "A+",
         "method": "A",
         "wowhead": "A",
-        "archon": "S"
+        "archon": "B"
       },
       "mplus": {
         "icyveins": "A+",
@@ -1544,6 +1598,15 @@
         "unit": "rating",
         "n": 31804,
         "asOf": "2026-08-11"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Heroic)",
+        "value": 173630,
+        "unit": "DPS",
+        "n": 30568,
+        "asOf": "2026-08-24"
       }
     ],
     "fightProfile": {
@@ -1787,6 +1850,15 @@
         "unit": "rating",
         "n": 13515,
         "asOf": "2026-08-11"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Heroic)",
+        "value": 159512,
+        "unit": "DPS",
+        "n": 4088,
+        "asOf": "2026-08-24"
       }
     ],
     "fightProfile": {
@@ -1842,7 +1914,7 @@
         "icyveins": "A",
         "method": "A",
         "wowhead": "B",
-        "archon": "S"
+        "archon": "A"
       },
       "mplus": {
         "icyveins": "A+",
@@ -1953,6 +2025,15 @@
         "unit": "rating",
         "n": 75340,
         "asOf": "2026-08-11"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Heroic)",
+        "value": 91928,
+        "unit": "DPS",
+        "n": 4626,
+        "asOf": "2026-08-24"
       }
     ],
     "survivability": {
@@ -1985,7 +2066,7 @@
         "icyveins": "A",
         "method": "B",
         "wowhead": "B",
-        "archon": "B"
+        "archon": "A"
       },
       "mplus": {
         "icyveins": "B",
@@ -2124,6 +2205,15 @@
         "unit": "rating",
         "n": 17567,
         "asOf": "2026-08-11"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct HPS (Heroic)",
+        "value": 259015,
+        "unit": "HPS",
+        "n": 14108,
+        "asOf": "2026-08-24"
       }
     ],
     "survivability": {
@@ -2156,7 +2246,7 @@
         "icyveins": "C",
         "method": "C",
         "wowhead": "C",
-        "archon": "B"
+        "archon": "C"
       },
       "mplus": {
         "icyveins": "C",
@@ -2339,6 +2429,15 @@
         "unit": "rating",
         "n": 19430,
         "asOf": "2026-08-11"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Heroic)",
+        "value": 154761,
+        "unit": "DPS",
+        "n": 4033,
+        "asOf": "2026-08-24"
       }
     ],
     "survivability": {
@@ -2380,7 +2479,7 @@
         "icyveins": "A+",
         "method": "A",
         "wowhead": "A",
-        "archon": "S"
+        "archon": "A"
       },
       "mplus": {
         "icyveins": "B",
@@ -2580,6 +2679,15 @@
         "unit": "rating",
         "n": 5208,
         "asOf": "2026-08-11"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Heroic)",
+        "value": 184564,
+        "unit": "DPS",
+        "n": 15018,
+        "asOf": "2026-08-24"
       }
     ],
     "fightProfile": {
@@ -2776,6 +2884,15 @@
         "unit": "rating",
         "n": 10942,
         "asOf": "2026-08-11"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct HPS (Heroic)",
+        "value": 270899,
+        "unit": "HPS",
+        "n": 16763,
+        "asOf": "2026-08-24"
       }
     ],
     "survivability": {
@@ -2808,7 +2925,7 @@
         "icyveins": "B",
         "method": "B",
         "wowhead": "B",
-        "archon": "B"
+        "archon": "C"
       },
       "mplus": {
         "icyveins": "A",
@@ -3010,6 +3127,15 @@
         "unit": "rating",
         "n": 60360,
         "asOf": "2026-08-11"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Heroic)",
+        "value": 163088,
+        "unit": "DPS",
+        "n": 33340,
+        "asOf": "2026-08-24"
       }
     ],
     "fightProfile": {
@@ -3065,7 +3191,7 @@
         "icyveins": "A+",
         "method": "A",
         "wowhead": "B",
-        "archon": "S"
+        "archon": "A"
       },
       "mplus": {
         "icyveins": "A",
@@ -3258,6 +3384,15 @@
         "unit": "rating",
         "n": 14438,
         "asOf": "2026-08-11"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Heroic)",
+        "value": 186051,
+        "unit": "DPS",
+        "n": 19148,
+        "asOf": "2026-08-24"
       }
     ],
     "fightProfile": {
@@ -3503,6 +3638,15 @@
         "n": 2,
         "asOf": "2026-08-18",
         "era": "ptr"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Heroic)",
+        "value": 151969,
+        "unit": "DPS",
+        "n": 2498,
+        "asOf": "2026-08-24"
       }
     ],
     "fightProfile": {
@@ -3759,6 +3903,15 @@
         "unit": "rating",
         "n": 38032,
         "asOf": "2026-08-11"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Heroic)",
+        "value": 194526,
+        "unit": "DPS",
+        "n": 64177,
+        "asOf": "2026-08-24"
       }
     ],
     "fightProfile": {
@@ -3814,7 +3967,7 @@
         "icyveins": "A",
         "method": "C",
         "wowhead": "C",
-        "archon": null
+        "archon": "B"
       },
       "mplus": {
         "icyveins": "B",
@@ -3986,6 +4139,15 @@
         "unit": "rating",
         "n": 4257,
         "asOf": "2026-08-11"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Heroic)",
+        "value": 170355,
+        "unit": "DPS",
+        "n": 1215,
+        "asOf": "2026-08-24"
       }
     ],
     "fightProfile": {
@@ -4039,7 +4201,7 @@
         "icyveins": "A",
         "method": "B",
         "wowhead": "B",
-        "archon": "S"
+        "archon": "C"
       },
       "mplus": {
         "icyveins": "B",
@@ -4241,6 +4403,15 @@
         "unit": "rating",
         "n": 43585,
         "asOf": "2026-08-11"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Heroic)",
+        "value": 160804,
+        "unit": "DPS",
+        "n": 6695,
+        "asOf": "2026-08-24"
       }
     ],
     "fightProfile": {
@@ -4420,6 +4591,15 @@
         "unit": "rating",
         "n": 19467,
         "asOf": "2026-08-11"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Heroic)",
+        "value": 84567,
+        "unit": "DPS",
+        "n": 7529,
+        "asOf": "2026-08-24"
       }
     ],
     "survivability": {
@@ -4452,7 +4632,7 @@
         "icyveins": "B",
         "method": "B",
         "wowhead": "B",
-        "archon": "C"
+        "archon": "B"
       },
       "mplus": {
         "icyveins": "A",
@@ -4596,6 +4776,15 @@
         "unit": "rating",
         "n": 47838,
         "asOf": "2026-08-11"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct HPS (Heroic)",
+        "value": 250673,
+        "unit": "HPS",
+        "n": 13215,
+        "asOf": "2026-08-24"
       }
     ],
     "survivability": {
@@ -4628,7 +4817,7 @@
         "icyveins": "A",
         "method": "B",
         "wowhead": "B",
-        "archon": "A"
+        "archon": "B"
       },
       "mplus": {
         "icyveins": null,
@@ -4830,6 +5019,15 @@
         "unit": "rating",
         "n": 24153,
         "asOf": "2026-08-11"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Heroic)",
+        "value": 167317,
+        "unit": "DPS",
+        "n": 15361,
+        "asOf": "2026-08-24"
       }
     ],
     "fightProfile": {
@@ -4885,7 +5083,7 @@
         "icyveins": "S",
         "method": "S",
         "wowhead": "A",
-        "archon": "A"
+        "archon": "S"
       },
       "mplus": {
         "icyveins": "S",
@@ -5033,6 +5231,15 @@
         "unit": "rating",
         "n": 49007,
         "asOf": "2026-08-11"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct HPS (Heroic)",
+        "value": 269524,
+        "unit": "HPS",
+        "n": 34417,
+        "asOf": "2026-08-24"
       }
     ],
     "survivability": {
@@ -5065,7 +5272,7 @@
         "icyveins": "A",
         "method": "B",
         "wowhead": "B",
-        "archon": "B"
+        "archon": "C"
       },
       "mplus": {
         "icyveins": "A",
@@ -5191,6 +5398,15 @@
         "unit": "rating",
         "n": 51080,
         "asOf": "2026-08-11"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Heroic)",
+        "value": 82141,
+        "unit": "DPS",
+        "n": 10057,
+        "asOf": "2026-08-24"
       }
     ],
     "survivability": {
@@ -5425,6 +5641,15 @@
         "unit": "rating",
         "n": 77558,
         "asOf": "2026-08-11"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Heroic)",
+        "value": 172814,
+        "unit": "DPS",
+        "n": 32636,
+        "asOf": "2026-08-24"
       }
     ],
     "fightProfile": {
@@ -5480,7 +5705,7 @@
         "icyveins": "S",
         "method": "S",
         "wowhead": "S",
-        "archon": "B"
+        "archon": "C"
       },
       "mplus": {
         "icyveins": "C",
@@ -5623,6 +5848,15 @@
         "unit": "rating",
         "n": 32924,
         "asOf": "2026-08-11"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct HPS (Heroic)",
+        "value": 246493,
+        "unit": "HPS",
+        "n": 7133,
+        "asOf": "2026-08-24"
       }
     ],
     "survivability": {
@@ -5793,6 +6027,15 @@
         "unit": "rating",
         "n": 14144,
         "asOf": "2026-08-11"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct HPS (Heroic)",
+        "value": 270378,
+        "unit": "HPS",
+        "n": 24754,
+        "asOf": "2026-08-24"
       }
     ],
     "survivability": {
@@ -5825,7 +6068,7 @@
         "icyveins": "A+",
         "method": "A",
         "wowhead": "A",
-        "archon": "S"
+        "archon": "A"
       },
       "mplus": {
         "icyveins": "B",
@@ -6025,6 +6268,15 @@
         "unit": "rating",
         "n": 26321,
         "asOf": "2026-08-11"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Heroic)",
+        "value": 179015,
+        "unit": "DPS",
+        "n": 18748,
+        "asOf": "2026-08-24"
       }
     ],
     "fightProfile": {
@@ -6080,7 +6332,7 @@
         "icyveins": "A+",
         "method": "B",
         "wowhead": "B",
-        "archon": "B"
+        "archon": "A"
       },
       "mplus": {
         "icyveins": "A+",
@@ -6273,6 +6525,15 @@
         "unit": "rating",
         "n": 8802,
         "asOf": "2026-08-11"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Heroic)",
+        "value": 183737,
+        "unit": "DPS",
+        "n": 6572,
+        "asOf": "2026-08-24"
       }
     ],
     "fightProfile": {
@@ -6328,7 +6589,7 @@
         "icyveins": "A+",
         "method": "B",
         "wowhead": "C",
-        "archon": "A"
+        "archon": "B"
       },
       "mplus": {
         "icyveins": "S",
@@ -6521,6 +6782,15 @@
         "unit": "rating",
         "n": 11553,
         "asOf": "2026-08-11"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Heroic)",
+        "value": 174114,
+        "unit": "DPS",
+        "n": 4605,
+        "asOf": "2026-08-24"
       }
     ],
     "fightProfile": {
@@ -6780,6 +7050,15 @@
         "unit": "rating",
         "n": 13779,
         "asOf": "2026-08-11"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Heroic)",
+        "value": 182893,
+        "unit": "DPS",
+        "n": 19048,
+        "asOf": "2026-08-24"
       }
     ],
     "fightProfile": {
@@ -7033,6 +7312,15 @@
         "unit": "rating",
         "n": 39948,
         "asOf": "2026-08-11"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Heroic)",
+        "value": 179622,
+        "unit": "DPS",
+        "n": 31394,
+        "asOf": "2026-08-24"
       }
     ],
     "fightProfile": {
@@ -7088,7 +7376,7 @@
         "icyveins": "A",
         "method": "C",
         "wowhead": "B",
-        "archon": "B"
+        "archon": "A"
       },
       "mplus": {
         "icyveins": "A",
@@ -7290,6 +7578,15 @@
         "unit": "rating",
         "n": 22982,
         "asOf": "2026-08-11"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Heroic)",
+        "value": 177605,
+        "unit": "DPS",
+        "n": 7035,
+        "asOf": "2026-08-24"
       }
     ],
     "fightProfile": {
@@ -7345,7 +7642,7 @@
         "icyveins": "A",
         "method": "A",
         "wowhead": "A",
-        "archon": "S"
+        "archon": "A"
       },
       "mplus": {
         "icyveins": "S",
@@ -7490,6 +7787,15 @@
         "unit": "rating",
         "n": 76590,
         "asOf": "2026-08-11"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct HPS (Heroic)",
+        "value": 257469,
+        "unit": "HPS",
+        "n": 34044,
+        "asOf": "2026-08-24"
       }
     ],
     "survivability": {
@@ -7720,6 +8026,15 @@
         "unit": "rating",
         "n": 15212,
         "asOf": "2026-08-11"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Heroic)",
+        "value": 152505,
+        "unit": "DPS",
+        "n": 2191,
+        "asOf": "2026-08-24"
       }
     ],
     "fightProfile": {
@@ -7774,7 +8089,7 @@
         "icyveins": "A",
         "method": "B",
         "wowhead": "B",
-        "archon": "A"
+        "archon": "C"
       },
       "mplus": {
         "icyveins": "A+",
@@ -7960,6 +8275,15 @@
         "unit": "rating",
         "n": 33506,
         "asOf": "2026-08-11"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Heroic)",
+        "value": 158403,
+        "unit": "DPS",
+        "n": 10446,
+        "asOf": "2026-08-24"
       }
     ],
     "fightProfile": {
@@ -8014,7 +8338,7 @@
         "icyveins": "A+",
         "method": "A",
         "wowhead": "A",
-        "archon": "S"
+        "archon": "A"
       },
       "mplus": {
         "icyveins": "A+",
@@ -8212,6 +8536,15 @@
         "unit": "rating",
         "n": 12384,
         "asOf": "2026-08-11"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Heroic)",
+        "value": 182183,
+        "unit": "DPS",
+        "n": 36163,
+        "asOf": "2026-08-24"
       }
     ],
     "fightProfile": {
@@ -8476,6 +8809,15 @@
         "unit": "rating",
         "n": 42348,
         "asOf": "2026-08-11"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Heroic)",
+        "value": 194142,
+        "unit": "DPS",
+        "n": 47885,
+        "asOf": "2026-08-24"
       }
     ],
     "fightProfile": {
@@ -8740,6 +9082,15 @@
         "unit": "rating",
         "n": 21163,
         "asOf": "2026-08-11"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Heroic)",
+        "value": 161660,
+        "unit": "DPS",
+        "n": 3557,
+        "asOf": "2026-08-24"
       }
     ],
     "fightProfile": {
@@ -8911,6 +9262,15 @@
         "unit": "rating",
         "n": 23526,
         "asOf": "2026-08-11"
+      },
+      {
+        "source": "archon",
+        "bracket": "raid",
+        "name": "95th pct DPS (Heroic)",
+        "value": 98387,
+        "unit": "DPS",
+        "n": 6949,
+        "asOf": "2026-08-24"
       }
     ],
     "survivability": {
