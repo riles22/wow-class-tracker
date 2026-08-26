@@ -9037,7 +9037,7 @@
       "note": "He places Brewmaster at the very bottom of the tanks, pairing it with Restoration Druid and observing that the two were the meta combo at the start of Season 1. His reasoning is that neither took major Season 2 nerfs but both were nerfed enough during Season 1, and that other specs were buffed more in Season 2, so they were leapfrogged; in the PTR they again appeared as a combo, this time the one nobody was playing."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Druid",
       "spec": "Restoration",
       "creator": "izen (Izenhart)",
@@ -9049,7 +9049,7 @@
       "note": "Placed at the bottom of the healers alongside Brewmaster, on the same reasoning: not hit by major Season 2 nerfs, but nerfed enough across Season 1 and then passed by specs that were buffed more, leaving the pair unplayed in PTR rather than merely weaker."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Warrior",
       "spec": "Protection",
       "creator": "izen (Izenhart)",
@@ -9469,7 +9469,7 @@
       "note": "He keeps Devourer in the top raid group on its testing results and expected damage, the same tier he places it in for Mythic+."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Warrior",
       "spec": "Arms",
       "creator": "izen (Izenhart)",
@@ -9481,7 +9481,7 @@
       "note": "He keeps Arms in the top raid group on testing results and expected damage, mirroring its Mythic+ placement."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Mage",
       "spec": "Arcane",
       "creator": "izen (Izenhart)",
@@ -9493,7 +9493,7 @@
       "note": "He keeps Arcane in the top group for now but explicitly downgrades his confidence, noting it just took a roughly 5% single-target nerf that hurts it more in raid than in Mythic+."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Druid",
       "spec": "Balance",
       "creator": "izen (Izenhart)",
@@ -9505,7 +9505,7 @@
       "note": "He argues Balance rates higher in raid than its Mythic+ standing because several bosses reward spread cleave and multi-dotting targets other specs cannot reach evenly, and he has it consistently ahead of Shadow Priest on every fight profile except the fixed three-target Lost Explorers, where they were close."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Priest",
       "spec": "Shadow",
       "creator": "izen (Izenhart)",
@@ -10069,7 +10069,7 @@
       "note": "He moves Holy Priest up to C, saying the Oracle changes are genuinely good for Mythic+ rather than another do-nothing aura buff, while capping it there: it is Holy Priest, so it will go no higher than C."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Death Knight",
       "spec": "Blood",
       "creator": "izen (Izenhart)",
@@ -10093,7 +10093,7 @@
       "note": "He places Protection Paladin as the closest tank to Blood Death Knight and the clear second pick, which is where his pre-season prediction put it. He gives the reason for the ordering rather than just the ranking: Protection Paladin was the strongest tank on the PTR before Blood Death Knight was buffed and before Protection Paladin itself was nerfed, and the early-season representation is respecting that expectation."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Paladin",
       "spec": "Holy",
       "creator": "izen (Izenhart)",
@@ -10129,7 +10129,7 @@
       "note": "He names Mistweaver in the second tier of his pre-season healer prediction, behind Holy Paladin and Restoration Shaman and alongside Preservation, but the substantive point is structural and negative: the role that carried Mistweaver in Season 1 is gone. When Guardian Druid replaced Brewmaster as the meta tank you also swapped to Mistweaver to keep the physical damage debuff in the group, and that combination then stayed meta even for non-physical comps. In Season 2 he expects Restoration Shaman to take that place in the physical composition instead."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Warrior",
       "spec": "Arms",
       "creator": "izen (Izenhart)",
@@ -10141,7 +10141,7 @@
       "note": "Arms was half of what he calls the simplest answer before the season — Arms and Arcane — and he says that call has been easily correct: the two are the most played specs, not only across all key levels but in the first higher keys in the 14 to 16 range, where nobody has a gearing reason to be. He goes further on Arms specifically, saying he is definitely leaning towards it being the popular spec in every type of composition, leaving open only the question of which third spec joins Arms and Arcane."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Mage",
       "spec": "Arcane",
       "creator": "izen (Izenhart)",
@@ -10153,7 +10153,7 @@
       "note": "Arcane is the other half of what he calls the simplest pre-season answer, and he reports the call as easily correct: Arcane and Arms are the most played specs at all key levels, and remain the most played in the earliest higher keys in the 14 to 16 range, which he treats as the more meaningful signal because nobody needs to push that high for gear yet. The open question he leaves is not whether Arcane is in the comp but which third spec joins it and Arms."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Shaman",
       "spec": "Elemental",
       "creator": "izen (Izenhart)",
@@ -10165,7 +10165,7 @@
       "note": "Elemental was one of the three specs in the second tier of his pre-season DPS prediction, and he reports all three as being among the most played on release. He singles Elemental out later as doing quite well, naming it and Devourer as the leading candidates for the third slot alongside Arms and Arcane, and expects the casters in this group to stretch away from the popular farm-key specs as the standard key level rises."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Demon Hunter",
       "spec": "Devourer",
       "creator": "izen (Izenhart)",
@@ -10403,6 +10403,150 @@
       "date": "2026-08-22",
       "patchContext": "Season 2 live — the season’s first weekly-reset balance tuning (the announced August 25 pass), read against the first days of live results, which he stresses are Heroic and mostly without completed tier sets",
       "superseded": false
+    },
+    {
+      "superseded": false,
+      "class": "Warrior",
+      "spec": "Arms",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-25",
+      "sentiment": "positive",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — week-one raid outlook, recorded at the end of the first week as NA takes its first weekly reset. He applies a week-one caveat throughout: many players are still on a two- or three-piece waiting for more tokens, and raid standings are skewed by which bosses the bulk of guilds have actually killed.",
+      "url": "https://youtu.be/i5751gjXrDs?t=173",
+      "note": "Reviewing the first week of raid results he says the specs that were expected to be good are being confirmed good, naming Arms alongside Arcane as predictably remaining among the best performers. He treats this as the unsurprising part of the week and spends his attention instead on the specs whose standings he thinks are distorted by which bosses have been killed."
+    },
+    {
+      "superseded": false,
+      "class": "Mage",
+      "spec": "Arcane",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-25",
+      "sentiment": "positive",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — week-one raid outlook, recorded at the end of the first week as NA takes its first weekly reset. He applies a week-one caveat throughout: many players are still on a two- or three-piece waiting for more tokens, and raid standings are skewed by which bosses the bulk of guilds have actually killed.",
+      "url": "https://youtu.be/i5751gjXrDs?t=173",
+      "note": "He names Arcane alongside Arms as one of the specs that was expected to be good and is being confirmed good in the raid, calling the pair predictably among the best performers. He attaches the same week-one caveat he gives the whole raid picture: a lot of power is still missing because many players do not yet have a completed tier set."
+    },
+    {
+      "superseded": false,
+      "class": "Priest",
+      "spec": "Shadow",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-25",
+      "sentiment": "mixed",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — week-one raid outlook, recorded at the end of the first week as NA takes its first weekly reset. He applies a week-one caveat throughout: many players are still on a two- or three-piece waiting for more tokens, and raid standings are skewed by which bosses the bulk of guilds have actually killed.",
+      "url": "https://youtu.be/i5751gjXrDs?t=192",
+      "note": "He observes Shadow Priest sitting reasonably high in the first week of raid results and immediately cautions that the placement is substantially an artifact of which bosses have been killed rather than a spec-strength signal: on the early encounters he names — Entombed Sentinels and the Lost Explorers — the cleave-and-DoT specs do very well, and those are the bosses the bulk of guilds have reached. He expects Shadow to stay high through the first few weeks of Mythic for the same reason, and says explicitly there is room for the early results to mislead."
+    },
+    {
+      "superseded": false,
+      "class": "Druid",
+      "spec": "Balance",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-25",
+      "sentiment": "mixed",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — week-one raid outlook, recorded at the end of the first week as NA takes its first weekly reset. He applies a week-one caveat throughout: many players are still on a two- or three-piece waiting for more tokens, and raid standings are skewed by which bosses the bulk of guilds have actually killed.",
+      "url": "https://youtu.be/i5751gjXrDs?t=208",
+      "note": "He groups Balance Druid with the cleave-and-DoT specs doing very well on the raid's early bosses (Entombed Sentinels, the Lost Explorers) and expects it to remain quite high through the first few weeks of Mythic, because that is where the bulk of guilds will be progressing. He presents this as a caveat rather than a strength call — his stated point is that early-boss kill counts distort the standings."
+    },
+    {
+      "superseded": false,
+      "class": "Shaman",
+      "spec": "Elemental",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-25",
+      "sentiment": "positive",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — week-one Mythic+ outlook, recorded at the end of the first week as NA takes its first weekly reset, reading group compositions and popularity at the top of the key ladder. He notes the meta will not truly settle until the .5 or .7 patches.",
+      "url": "https://youtu.be/i5751gjXrDs?t=438",
+      "note": "Of the three caster candidates he expected to compete for the meta composition's caster slot, he says Elemental is the one that survived — which is what he had predicted would happen if Arms broke into the comp. He reads Elemental as sitting very high in popularity and rising further the higher the keys go: at the very top of the ladder he calls it one of the only remaining picks besides Arcane and Arms. He also places Elemental among the top three specs by damage done in Mythic+."
+    },
+    {
+      "superseded": false,
+      "class": "Mage",
+      "spec": "Arcane",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-25",
+      "sentiment": "positive",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — week-one Mythic+ outlook, recorded at the end of the first week as NA takes its first weekly reset, reading group compositions and popularity at the top of the key ladder. He notes the meta will not truly settle until the .5 or .7 patches.",
+      "url": "https://youtu.be/i5751gjXrDs?t=458",
+      "note": "He reads Arcane as one of the settled picks of the week-one Mythic+ meta: it looked set in stone in his pre-season prediction and it is holding. It appears with Arms as the most popular of the DPS specs, is one of the only remaining picks at the very highest keys, and is among the top three by damage done in Mythic+."
+    },
+    {
+      "superseded": false,
+      "class": "Warrior",
+      "spec": "Arms",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-25",
+      "sentiment": "positive",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — week-one Mythic+ outlook, recorded at the end of the first week as NA takes its first weekly reset, reading group compositions and popularity at the top of the key ladder. He notes the meta will not truly settle until the .5 or .7 patches.",
+      "url": "https://youtu.be/i5751gjXrDs?t=458",
+      "note": "The open question in his pre-season prediction was whether Arms was strong enough to break into and displace the caster composition rather than being confined to melee comps, and he reads the first week as answering yes. Arms appears with Arcane as the most popular of the DPS specs, is one of the only remaining picks at the very highest keys, and is among the top three by damage done in Mythic+. He notes the resulting composition accounts for almost 42% of groups at the top of the ladder."
+    },
+    {
+      "superseded": false,
+      "class": "Death Knight",
+      "spec": "Blood",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-25",
+      "sentiment": "positive",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — week-one Mythic+ outlook, recorded at the end of the first week as NA takes its first weekly reset, reading group compositions and popularity at the top of the key ladder. He notes the meta will not truly settle until the .5 or .7 patches.",
+      "url": "https://youtu.be/i5751gjXrDs?t=385",
+      "note": "He reports his pre-season call that Blood looked set in stone as the meta tank holding through week one: the predicted composition of Blood, Holy Paladin, Arms, Arcane and Elemental makes up almost 42% of groups at the top of the key ladder, and he describes the player base as already pretty settled on its tank-and-healer combination this early in the season."
+    },
+    {
+      "superseded": false,
+      "class": "Paladin",
+      "spec": "Holy",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-25",
+      "sentiment": "positive",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — week-one Mythic+ outlook, recorded at the end of the first week as NA takes its first weekly reset, reading group compositions and popularity at the top of the key ladder. He notes the meta will not truly settle until the .5 or .7 patches.",
+      "url": "https://youtu.be/i5751gjXrDs?t=395",
+      "note": "He reports Holy Paladin as the healer of the predicted meta composition and says it looked set in stone pre-season and is holding: the comp of Blood, Holy Paladin, Arms, Arcane and Elemental accounts for almost 42% of groups at the top of the key ladder, and he describes the player base as already pretty settled on its tank-and-healer combination."
+    },
+    {
+      "superseded": false,
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-25",
+      "sentiment": "negative",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — week-one Mythic+ outlook, recorded at the end of the first week as NA takes its first weekly reset, reading group compositions and popularity at the top of the key ladder. He notes the meta will not truly settle until the .5 or .7 patches.",
+      "url": "https://youtu.be/i5751gjXrDs?t=467",
+      "note": "Devourer was one of three caster candidates he expected to compete for a slot in the meta composition, and he reads week one as it losing out: Elemental is the survivor among them, and at the very highest keys he places Devourer behind Elemental by what he calls a pretty large gap."
+    },
+    {
+      "superseded": false,
+      "class": "Warrior",
+      "spec": "Protection",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-25",
+      "sentiment": "negative",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — week-one Mythic+ outlook, recorded at the end of the first week as NA takes its first weekly reset, reading group compositions and popularity at the top of the key ladder. He notes the meta will not truly settle until the .5 or .7 patches.",
+      "url": "https://youtu.be/i5751gjXrDs?t=326",
+      "note": "He cites Protection Warrior as one of two specs players are already reporting being declined for, and at modest key levels rather than only at the ceiling — he says it is happening even at +10, let alone +12. He raises it as evidence against the argument that the early meta does not matter: however much one says the week-one meta will not matter, he expects a trickle-down effect on the groups players can actually form."
+    },
+    {
+      "superseded": false,
+      "class": "Druid",
+      "spec": "Restoration",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-25",
+      "sentiment": "negative",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — week-one Mythic+ outlook, recorded at the end of the first week as NA takes its first weekly reset, reading group compositions and popularity at the top of the key ladder. He notes the meta will not truly settle until the .5 or .7 patches.",
+      "url": "https://youtu.be/i5751gjXrDs?t=326",
+      "note": "He cites Restoration Druid as one of two specs players are already reporting being declined for, and at modest key levels rather than only at the ceiling — he says it is happening even at +10, let alone +12. He raises it as evidence against the argument that the early meta does not matter: however much one says the week-one meta will not matter, he expects a trickle-down effect on the groups players can actually form."
     }
   ]
 }

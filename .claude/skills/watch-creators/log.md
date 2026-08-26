@@ -16,6 +16,51 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-26 (local) — queue drained 5 → 0; izen's week-one video → 12 metaNotes; the other four are guide-shaped skips
+
+- **The caption lane is still healthy.** One sanctioned probe first (`i5751gjXrDs`) returned a 216 KB json3 on the first
+  try, no 429, no retry — so the 08-25 clearing of the IP-scoped `timedtext` abuse flag is holding two days on. Nothing
+  client-side changed: pinned yt-dlp 2026.07.04, `player_client=android`, `--sleep-requests 3` with a 5s gap between
+  videos. All five queued ids drained; `videos[]` is **5 → 0**.
+- **`i5751gjXrDs`** (izen, 2026-08-25, 11m14s, "Season 2 Week 1 Raid & Mythic+ Meta & Specs Popularity") → **12 metaNotes**,
+  all era-framed "Season 2 live", split 4 raid / 8 M+. This is his first read with a full week of LIVE results behind it.
+  · **Raid** — Arms and Arcane **positive** (he says the specs expected to be good are being confirmed good, naming those
+  two as predictably among the best performers). Shadow Priest and Balance Druid **mixed**, deliberately not positive:
+  he raises their high placement only to explain it away as an artifact of which bosses have been killed, since the
+  cleave-and-DoT specs excel on the early encounters the bulk of guilds have reached, and he says outright there is
+  "room for some misleading". Marking those two positive would invert his actual point.
+  · **M+** — his predicted comp (Blood, Holy Paladin, Arms, Arcane, Elemental) is holding at almost 42% of top groups, so
+  **Blood DK, Holy Paladin, Arms, Arcane and Elemental positive**; Elemental specifically as the caster that survived the
+  three-way contest. **Devourer negative** — it lost that contest and sits behind Elemental by "a pretty large gap",
+  which is a genuine reversal of his own 08-21 positive. **Protection Warrior and Restoration Druid negative** — both
+  named as specs players report being declined for at +10, let alone +12.
+- **DECLINED, recorded so the judgment is auditable.** Five candidate reads were dropped on the list-mention rule and
+  the ASR rule: **Destruction Warlock** (named once, only inside the enumeration "the cleave dot specs like destro and
+  shadow priest and balance" — Shadow and Balance each get a second, separate mention and Destruction does not);
+  **Marksmanship Hunter** (a single hedged "even specs like marksmanship being quite high in fact", immediately undercut
+  and never returned to); an ASR token rendered **"death"** in the same early-boss list, ambiguous between Devastation
+  and a Death Knight spec and therefore not written as a name (the `djVmUT8w0fU` Frost DK precedent);
+  **Balance Druid in the M+ lane** (named only inside the three-candidate enumeration — the raid lane clears the bar,
+  the M+ lane does not); and the **pure-melee comp roster** (Outlaw, Feral, Brewmaster) plus "the recently buffed rogue
+  specs perhaps windwalker monk", all bare enumerations with no individual predicate.
+- **12 supersessions, same-lens only.** Raid: his 08-17 pre-launch RAID predictions for Arms, Arcane, Shadow, Balance.
+  M+: his 08-21 week-one M+ notes for Blood, Holy Paladin, Arms, Arcane, Elemental, Devourer, and his 08-16 pre-launch
+  M+ tier-list notes for Prot Warrior and Resto Druid (neither was covered by the 08-21 video). His **08-22 tuning-pass**
+  notes for Resto Druid and Prot Warrior were deliberately LEFT LIVE — that is a different lens, and the two claims are
+  complementary rather than contradictory: the tuning pass buffed Resto Druid while players are still declining it.
+- **Four guide-shaped verified skips**, which is the documented expectation for this content type, not a shortfall:
+  `J2tP3uynoiM` NeekapHere (Ret guide UPDATE — Herald over Templar, four-piece weaving, trinket amendments; its tier-set
+  claim is already carried by his 08-22 take, so distilling would duplicate it with a weaker source), `w4MTlSOTaLM`
+  AutomaticJak (Holy Paladin how-to; its only strength-adjacent line is the "feels more powerful than ever" opener,
+  the new-set-beats-old-set shape that would fire for every spec guide and would have superseded his richer comparative
+  tier-list read), `unV9EKXb820` LBNinja7 and `y6K0fV8O9u4` Megasett (both Mistweaver raid how-tos; their only
+  strength-adjacent lines are ability-level — Revival being weak, mastery having been buffed — not spec-level).
+  `skipped[]` is **409 → 413**.
+- **Measured effect: 0 letters moved.** The post-run snapshot is byte-identical to the nightly's own `2026-08-26.json`,
+  so no consensus tier, metric rank or projection score changed. That is the expected and correct outcome — the
+  general-creator meta nudge is gated on ≥2 creators agreeing unanimously, and izen is one voice, so this lane is
+  display-only. Recorded because "12 metaNotes landed" reads like movement and is not.
+
 ## 2026-08-26 (nightly) — 44/44 feeds polled; Obli's Blightfall video distilled into 2 Unholy takes; 5 queued
 
 **Discovery:** 44 unique channel ids resolved from `community.json` (76 class-creator entries with

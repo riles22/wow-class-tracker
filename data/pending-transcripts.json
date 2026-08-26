@@ -1,42 +1,6 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
-  "videos": [
-    {
-      "id": "i5751gjXrDs",
-      "creator": "izen (Izenhart)",
-      "title": "Season 2 Week 1 Raid & Mythic+ Meta & Specs Popularity | A Very Big Difference",
-      "published": "2026-08-25",
-      "queuedAt": "2026-08-26"
-    },
-    {
-      "id": "J2tP3uynoiM",
-      "creator": "NeekapHere",
-      "title": "UPDATE Retribution Paladin 12.1 Guide (PvE) | Midnight",
-      "published": "2026-08-24",
-      "queuedAt": "2026-08-26"
-    },
-    {
-      "id": "w4MTlSOTaLM",
-      "creator": "AutomaticJak",
-      "title": "Holy Paladin Mythic+ and Raid Guide Midnight Season 2",
-      "published": "2026-08-24",
-      "queuedAt": "2026-08-26"
-    },
-    {
-      "id": "unV9EKXb820",
-      "creator": "LBNinja7",
-      "title": "Mistweaver Raid Guide for Midnight Season 2 | 12.1",
-      "published": "2026-08-23",
-      "queuedAt": "2026-08-26"
-    },
-    {
-      "id": "y6K0fV8O9u4",
-      "creator": "Megasett",
-      "title": "Mistweaver 12.1 Raid Guide",
-      "published": "2026-08-24",
-      "queuedAt": "2026-08-26"
-    }
-  ],
+  "videos": [],
   "skipped": [
     {
       "id": "02rLfzEKLq4",
@@ -2900,6 +2864,34 @@
       "title": "HUGE Warlock Buffs Announced!",
       "reason": "Transcript verified (Supadata, nightly step; 4,741 caption chunks over 3h24m) and it yields nothing NEW to distil: it is the unedited Race-to-World-First-week STREAM VOD of the same day whose edited counterpart, BdzA4HWaUSc, was distilled on 2026-08-22 into four live Kalamazi takes. Every Warlock read in it is already carried by those takes and is thinner here — Destruction still his high-end Mythic+ pick with Demonology the easier pug choice (t=5602), the 30% Rain of Fire buff named as the biggest Mythic+ change for Warlock (t=5627), Demonology solid for average keys and better after the buffs (t=813), and a passing raid line that the buffs are relatively big but will not be super impactful (t=1760). Distilling any of it would duplicate the same creator, spec, date and lens with a weaker source and force superseding a richer take with a poorer one. The remainder is key gameplay, chat and venue talk with co-streamers, and per the no-speakers rule none of it is attributable anyway. Recorded so a later run does not re-open it: the video is not off-topic, it is redundant.",
       "verifiedAt": "2026-08-24"
+    },
+    {
+      "id": "J2tP3uynoiM",
+      "creator": "NeekapHere",
+      "title": "UPDATE Retribution Paladin 12.1 Guide (PvE) | Midnight",
+      "reason": "Transcript verified by yt-dlp (443 caption events, 15m20s) and it is a guide UPDATE, not a spec-strength read: three amendments to his existing 12.1 Retribution guide — Herald of the Sun over Templar for essentially all competitive content (a hero-talent choice, argued from this raid's sustained AoE), how to weave the buffed four-piece around Divine Purpose, and a narrowed trinket list now that some sims were fixed. The only strength-adjacent line is a closing 'it has been a really interesting and good tier so far in my opinion', which is about his enjoyment and about buffs landing rather than a comparative read. His tier-set claim is already carried by his 2026-08-22 take (Retribution Paladin 4-Piece Is FINALLY Worth Using), so distilling it here would duplicate the same creator, spec and claim with a weaker source.",
+      "verifiedAt": "2026-08-26"
+    },
+    {
+      "id": "w4MTlSOTaLM",
+      "creator": "AutomaticJak",
+      "title": "Holy Paladin Mythic+ and Raid Guide Midnight Season 2",
+      "reason": "Transcript verified by yt-dlp (651 caption events, 22m09s) and it is a full how-to guide: spell-by-spell kit explanation, Beacon of Virtue spell-queuing, the blessings, stat priority, and per-encounter positioning notes for both brackets. No comparative spec-strength read anywhere in it. The only strength-adjacent line is the opening claim that the spec has gotten a ton of upgrades to their spenders and feels more powerful than ever before to play, which rests on spender and tier-set upgrades — the new-set-beats-old-set shape that would fire for every spec with a guide video — and is weaker evidence than his existing comparative healer tier-list read, which it would otherwise supersede.",
+      "verifiedAt": "2026-08-26"
+    },
+    {
+      "id": "unV9EKXb820",
+      "creator": "LBNinja7",
+      "title": "Mistweaver Raid Guide for Midnight Season 2 | 12.1",
+      "reason": "Transcript verified by yt-dlp (881 caption events, 38m20s, with a raid kill clip filling the last several minutes) and it is a pure raid how-to: stat priority, how the new tier set differs from Season 1's, the Renewing Mist / Rushing Wind Kick / Vivify core loop, the Rising Mist one-second internal cooldown, Thunder Focus Tea usage, mana management and the three cooldowns. No comparative spec-strength read. The two strength-adjacent lines are ability-level rather than spec-level — mastery having gotten buffed coming into the season, and Revival not doing that much — and his closing summary is explicitly that the spec plays much as it did in Season 1 with a slightly shifted priority.",
+      "verifiedAt": "2026-08-26"
+    },
+    {
+      "id": "y6K0fV8O9u4",
+      "creator": "Megasett",
+      "title": "Mistweaver 12.1 Raid Guide",
+      "reason": "Transcript verified by yt-dlp (169 caption events, 5m04s) and it is a short raid how-to: the raid spell priority versus the keys one, melee-versus-healer mechanic assignment, stat priority, the revival/restoral swap, and the Yulon window sequence. No comparative spec-strength read at all. The one strength-adjacent line is that Revival is extremely weak right now and not worth assigning as a throughput cooldown, which is an ability-level claim about a single spell, not a read on where Mistweaver stands.",
+      "verifiedAt": "2026-08-26"
     }
   ],
   "seen": [
