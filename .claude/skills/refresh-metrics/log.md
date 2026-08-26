@@ -16,6 +16,72 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-26 (nightly) — Archon behind a human-verification wall (6 numeric rows unreachable); every other source fetched and NOTHING merged, all for measured reasons
+
+**Archon (archon-metrics / -hps / -heroic-dps / -heroic-hps / -mplus-score / -popularity, plus
+-survivability and -encounters): unreachable.** Site-wide "Human Verification" interstitial, HTTP 200
+at ~1 KB with no `__NEXT_DATA__`; full write-up in the refresh-tiers log for this date. Not worked
+around. All stored Archon numbers byte-identical.
+
+**Murlok — partial, and the reason is a trap worth pinning.** Three pages HTTP 200. The page prints
+**"Updated 13 seconds ago"** right next to `<time datetime="2026-08-25T02:45:24Z">` — the prose is a
+server-rendered relative string and the `datetime` is the data's real date. Reading the prose as
+freshness would have produced a `success` row on 19-hour-old data. All 40 values identical to stored,
+consistent with the unchanged timestamp; nothing merged, `asOf` stays the source's own 2026-08-25.
+⚠️ **The count reconciliation caught a real defect tonight.** A first parse split on the full opening
+anchor and returned **24 DPS / 6 healer / 4 tank = 34 rows** — a short roster on a healthy HTTP 200,
+which is exactly the silent-failure shape. Splitting on the bare `meta-item` token gives 27+7+6 = 40.
+Print the counts and reconcile against 27/7/6 *before* merging, every time.
+
+**Mythicstats — partial, HELD on a period roll.** `/period/latest` now 302s to **/period/1078**
+(was 1077), and the page carries the site's own red banner **"This period just started and is still in
+progress"**: "Top 2000 keys, 10000 characters (7671 unique), **10.6 average key level**" against 1077's
+completed 2895 unique at **15.3**. Parsed cleanly all the same — section-bounded, labels normalised,
+value taken from the `<span class="mt-1">` after the bar height — **40 rows, 0 unmatched, sum 100.10%,
+role subtotals 60.1 / 20.0 / 20.0**, matching the page's own group headings, so this is the
+representation SHARE column and not the `/meta` per-key-presence figure. Fire Mage is present this
+period; it was absent from 1077's chart entirely. **33 of 40 values move**, many far past
+`maxValueMovePct` 0.6 (Resto Druid 0.1→1.4, BM 0.6→4.8, Blood DK 13→7.4, Arms 12.7→6.1), so merging
+would trip the value-move gate — which has no agent-writable proposal channel by design. Held; the
+day-one sample is not the quantity this series publishes. Let a later run merge the matured week.
+
+**Bloodmallet — partial, held, but upstream is clearly moving.** 27 charts requested (3 attempts
+each), failures re-probed 5 more times each **alongside a control**: 18 returned data, 9 returned the
+76-byte `{"status": "error"}` body on 8/8 attempts (Havoc, Balance, Feral, Augmentation, Devastation,
+Retribution, **Elemental Shaman**, Arms, Fury) while Subtlety Rogue succeeded **5/5 interleaved**, so
+the endpoint is demonstrably healthy. The available set MOVED: Devourer and Windwalker appeared
+(17→18), Elemental dropped out, and **every one of the 18 charts is re-timestamped 2026-08-26**
+(against 08-19/08-24 last night). All 18 carry `simc_settings.tier` **MID2** (read off the payload;
+`simc_settings.ptr` is the STRING "0" and was compared explicitly) against MID1 in all 26 stored
+profiles. Merged nothing, for three independent reasons: one tier per pool (MID2 ≈ 1.79× MID1 and
+`fightLabels` pools with no provenance key), 18 < the 19-row drop floor, and Augmentation is absent by
+design so a "complete" roster is 26. `fightProfile.asOf` stays each spec's own chart date; the age red
+is the honest signal.
+
+**SimulationCraft — partial, hold-MID1, with one real change.** `MID1_Raid.txt` is 272 bytes — a run
+that has just started, no `DPS Ranking:` block — at **12.1.0.69497 Live (hotfix 2026-08-26/69497, git
+build HEAD 0711f60438)**, so MID1 *is* being re-simmed on today's live build. `MID1_Raid.html` is
+still the completed 12.0.7.68974 Live report at **git build 678e66d384** — the same hash last night
+recorded, which is the honest explanation for an unchanged parse — matching stored `asOf` 2026-08-08.
+`MID2_Raid.txt` is now complete on the same 69497 Live build (was 69465) and DOES carry a ranking
+block, but resolves by longest-prefix to only **18 of 27** roster DPS specs (missing Havoc, Devourer,
+Balance, Feral, Devastation, Retribution, Arms, Fury; Augmentation by design) — a 26→18 drop, 31%,
+past the 25% limit, on top of a tier mix. Nothing merged.
+
+**WoWMeta — partial, standing red, genuinely frozen.** `manifest.json` snapshotDate 2026-08-11 AND the
+rankings file's `Last-Modified: Tue, 11 Aug 2026 15:25:05 GMT` agree, and the payload was **diffed**
+rather than trusted to the manifest (the 08-04 pinned-manifest shape): 44 blocks → whitelisted
+dps|hps|tank + `sortField lowerBound` + `keyRange undefined` = 27+7+6 = 40 rows, all 40 `lowerBound`
+AND all 40 `numberOfCharacters` byte-identical to stored.
+
+**WCL — unreachable, from the evidence artifact only.** `wcl-fetch/evidence.json` attemptedAt
+2026-08-26T11:04:47Z, verdict **rdps-broken** (`characterRankings(metric: rdps)` on encounter 3176 →
+"Internal server error"), transport healthy (oauth true, graphql true, 3600/hr, 1 spent),
+`landed: {}`. This agent did not contact warcraftlogs.com by any means.
+
+**Robydoby not refreshed** — deliberately outside the contract, and its series is the *closed* 12.1
+PTR zone-54 cycle, so there is nothing current for it to carry.
+
 ## 2026-08-25 (local, evening) — Archon raid DPS/popularity merged wholesale-minus-Fire-Mage by OWNER DECISION; the "wait for 27/27" plan is superseded
 
 - **The standing hold ended tonight, by Riley's call, on the drop path the nightly's manifest

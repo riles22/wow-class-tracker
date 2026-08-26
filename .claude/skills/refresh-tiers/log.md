@@ -16,6 +16,55 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-26 (nightly) — ARCHON IS BEHIND A SITE-WIDE HUMAN-VERIFICATION WALL; the other three re-verified 80/80 with 0 moves
+
+**Archon: unreachable, and the shape matters so it is not misread as a parse failure.** Every request
+returns **HTTP 200 with a ~1 KB body titled "Human Verification"** — "One Quick Check … confirm that
+you are a human and not a bot" — carrying a POST form to `/human-challenge` with
+`intendedUrl`/`expiresAt`/`signature` hidden fields. There is **no `<script id="__NEXT_DATA__">` at
+all**, so the documented parse has nothing to read; a parser that anchored on `__NEXT_DATA__` and
+reported "0 rows" would be describing the wrong thing entirely.
+
+Probed enough to establish it is site-wide and not path- or header-specific: `archon.gg/`, `/wow`,
+and both a raid and an M+ tier-list URL all return the same interstitial, with a UA-only request,
+with the full browser header set (`sec-ch-ua`, `sec-fetch-*`, `Upgrade-Insecure-Requests`), and with
+a `Referer`; three further attempts spaced ~12s apart were identical. **It was NOT worked around** —
+no form POST, no proxy, no scrape service. It is an explicit anti-bot control, and the WCL precedent
+("Use the API … instead of scraping HTML") is that we respect a site's stated position rather than
+route around it. All nine archon-* manifest rows are `unreachable`; every Archon-derived value in the
+tree is byte-identical to last night's reviewed local run, no `seasonVerified` moved, so no source
+entered or left the consensus and the frozen lane was untouched.
+
+Note for whoever sees this next: last night's local run fetched Archon fine, so this is new and quite
+possibly **runner-IP reputation** rather than a policy change. A local run from a residential IP is
+the thing to try. If it persists past ~2026-08-30 the archon-* staleness reds start firing (their
+stored dates are 08-24/08-25 against `maxAgeDays` 5).
+
+**Icy Veins — 80/80, 0 moves.** Six pages by direct browser-UA GET, HTTP 200, 193-340 KB raw. Parse
+bounded to the single `<table class="tier-list">` per page (block count printed: exactly 1 each);
+first `<td>` = letter, matched WHOLE-CELL against the registered scale with `TBD` written as explicit
+`null`; each entry's FIRST `img alt` looked up whole. raid 27/7/6 + M+ 27/7/6 = **80**, 0 unmatched,
+0 dups. Still exactly two M+ DPS TBDs (Windwalker Monk, Frost DK), both carried as nulls. Page
+dateModified re-read and unchanged (raid DPS 08-23, raid healer 08-24, raid tank 08-08, all three M+
+08-23), matching stored `published` and the pre-agent evidence artifact. Era-verified **s2 from the
+body**: the raid HEALER page *still* titles itself "(Patch 12.0.7 / Midnight)" while its body carries
+21 Season-2 references to 6 Season-1 and its newest changelog row is 24 Aug 2026 — body over title.
+
+**Method — 80/80, 0 moves.** raid S 6 / A 11 / B 17 / C 6; M+ S 2 / A 13 / B 21 / C 4. The M+ page
+again carries a SECOND tierlist (8 blocks vs raid's 4) and the eight dungeon names were rejected by
+**roster match and reported as unmatched**, never by position. Era s2 in both bodies.
+⚠️ Devourer is carried only in tag ATTRIBUTES here (`data-original-title`), so a tags-stripped body
+scan reports it absent — check the raw HTML before concluding a roster gap on this source.
+
+**Wowhead — 80/80, 0 moves.** Full browser header set (UA-only is Cloudflare-403; r.jina.ai still not
+tried, IP-403 on `/guide/*`). Unescaped `\/` across the whole document FIRST, then took the
+`[tier-list=rows] … [/tier-list]` block — exactly one per page tonight, no decoy. Tolerant-whitespace
+tier labels, specs from the `[spec-badge=<spec>-<class>]` kebab slug. M+ DPS again publishes A+ (2)
+and no S. Page self-dates unchanged and matching the evidence artifact.
+
+Snapshots advanced to 2026-08-26 for the three verified sources (14 page entries); Archon's were left
+where they were, because nothing was fetched.
+
 ## 2026-08-25 (local, evening) — ARCHON'S RAID LETTER BASIS MOVES TO HEROIC (owner decision); 26 of 40 letters re-rated, CONSENSUS_VERSION 5 → 6
 
 - **This is a BASIS change, not spec movement, and the version bump is what says so.**

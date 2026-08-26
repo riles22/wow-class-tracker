@@ -5665,7 +5665,7 @@
       "bracket": "raid",
       "patchContext": "Season 2 live — his reaction to the launch tier-set nerf, argued as a before/after against his own June PTR logs at comparable item level; he shows both all-boss raid damage statistics and a live Mythic+ key.",
       "url": "https://youtu.be/nmErWeN4woE?t=349",
-      "superseded": false,
+      "superseded": true,
       "claim": "Obli's Unholy read is secondary to his Frost case and he explicitly defers a full treatment to a separate video. His position is that Unholy is also not in a good place: a player working hard can still pull respectable numbers out of it, but it does not come easily. In the all-boss damage statistics he displays, Unholy sits low enough that even the heavily-nerfed Frost overtakes it on one encounter, and he attributes that single result to an Unholy bug where some of its damage fails to register on that fight rather than to any Frost strength."
     },
     {
@@ -6020,7 +6020,7 @@
       "patchContext": "Season 2 live — his follow-up to the August 20 launch read, reacting to the announced August 25 Frost tuning after about a week of playing both DK specs on a 2-piece",
       "url": "https://youtu.be/R7kYD23sDQs?t=152",
       "claim": "Speaking to the Unholy side of the same comparison, he says Unholy is clearly ahead of Frost right now — his own logs put Frost about 10% behind — and that the Blightful build is the one to play: it sits roughly where the top Rider logs sit, but it is much harder to do badly with, because its damage is good and it carries far less RNG, where Rider depends on constant uptime and on spawning riders through the fight. He does not read that as Unholy being strong in absolute terms — he says neither DK spec is doing stellar this tier — and Unholy takes no tuning at all in the August 25 pass.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Demon Hunter",
@@ -6272,6 +6272,30 @@
       "patchContext": "Season 2 live — his Season 2 Assassination guide, published 2026-08-24. The video is mostly how-to-play (rotation, energy management, macros, talents, stats), but it opens and closes on his own spec-strength read, which is what is distilled here",
       "url": "https://youtu.be/igWiPoYPlV4?t=140",
       "claim": "He reads Assassination as being in a really good spot in Season 2: damage is doing intense amounts even outside the burst window and the spec has a lot of sustain, and he closes by saying he likes Assassination's position and does not believe it is going away any time soon. He frames the season's play pattern as deliberately slower — Blizzard removing the Season 1 Envenom-aura cancel and pushing a paced Envenom chain — rather than as a downgrade.",
+      "superseded": false
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "creator": "Obli",
+      "date": "2026-08-25",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his San’layn/Blightfall walkthrough published 2026-08-25, the day the August 25 tuning pass landed. The video is largely how-to-play (a +12 Altar of Fangs key and Heroic raid footage with rotation commentary), but it carries two explicit spec-strength reads, which is what is distilled here; his own play is on the 4-piece.",
+      "url": "https://youtu.be/djVmUT8w0fU?t=431",
+      "claim": "On the dungeon half he reads Unholy as being in a genuinely strong place in keys, saying plainly that for keys \"we’re looking really, really strong\" — an upgrade on the merely-ahead-of-Frost framing of his 08-23 read. He argues it from his own +12 Altar of Fangs run rather than from tier lists: about 470k on a trash pull, about 323k over the whole dungeon, and an execute phase where his damage rises rather than falls because San’layn amplifies plague damage as the target’s health drops. He is explicit about the ceiling too — the 470k is nothing like what an Arcane Mage can muster, where he has seen about 500k at the same point — so this is a strong-but-not-top read. Two things he credits: the 4-piece, which he says he has and which he describes as carrying DK far harder than players think, especially in AoE; and Blightfall itself, which consumes all nearby diseases for their full remaining damage and can do roughly a million damage in a single global.",
+      "superseded": false
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "creator": "Obli",
+      "date": "2026-08-25",
+      "sentiment": "mixed",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — his San’layn/Blightfall walkthrough published 2026-08-25, the day the August 25 tuning pass landed. The video is largely how-to-play (a +12 Altar of Fangs key and Heroic raid footage with rotation commentary), but it carries two explicit spec-strength reads, which is what is distilled here; his own play is on the 4-piece.",
+      "url": "https://youtu.be/djVmUT8w0fU?t=651",
+      "claim": "His raid read is a clear improvement on the 08-20 \"not in a good place\" position but stops well short of positive: Unholy is \"not doing too bad in the raid once you get your set\", with some fights very good and some not so good. The good case is cleave and add windows — he says there is a fair bit of cleave in this tier, that San’layn’s 45-second burst lines up well with several boss mechanics, and that egg-add phases are where Unholy shines; he ends the shown Heroic pull around 240k and calls it respectable. The bad case is pure single target and the current bugs: during the weakened-heart phase he says Unholy simply does not do a lot, and he is scathing that Necrotic Coil does not hit the Venomous Heart at all even though the heart is the thing taking 100% additional damage, so he has to command pets onto it manually — and that Blizzard’s attempted fix has turned Necrotic Coil into a melee-range effect. He also notes Unholy Devotion had been bugged into providing near-nothing, which he believes is now fixed (it is — the August 25 hotfixes carry that line). He adds that he sees few people playing Unholy on that fight and does not think the spec deserves the neglect.",
       "superseded": false
     }
   ],

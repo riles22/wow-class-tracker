@@ -16,6 +16,61 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-26 (nightly) — the August 25 hotfix round-up LANDED; one new class line in it (Unholy DK), the other 14 are the 08-22 pass restated
+
+Between-cycles posture unchanged: the 12.1 PTR cycle is closed, so only the live lanes ran and
+the four dormant WCL PTR zone sweeps (54 raid / 52 Dummy Dome / 56 M+ / 57 grotto) were skipped
+rather than recorded — their contract rows left with the flip. No 12.2 PTR announcement in any
+channel, so no owner escalation is due.
+
+**Three discovery channels swept, not one.** (a) Wowhead news RSS — HTTP 200, 179,289 bytes,
+40 items parsed per `<item>` block. (b) The news INDEX, because it leads RSS within a run:
+`data.news.newsData` extracted by anchoring on the id attribute and brace-balancing from there,
+20 posts, top id 382626, head identical to the RSS so nothing landed mid-run. (c) The
+blue-tracker index (`data.blueTracker.default`, 50 entries, deduped by topic) — and this is the
+channel that carried tonight's find. RSS alone would have missed it: the hotfix round-up has no
+Wowhead news article covering its Classes section.
+
+**Logged: 2026-08-25, kind `hotfix`.** Canonical source read directly, not off a mirror —
+Kaivax's rolling hotfix post, us.forums topic **2336376**, title now "World of Warcraft: Midnight
+Hotfixes - August 25", post 1 edited **2026-08-25T17:11:23Z** to append the section (72,987 chars,
+read with its `<ul>` nesting intact). Cited via the wowhead blue-tracker mirror in `wowheadUrl`
+(the hotfix kind forbids a `forumUrl` and validation enforces it).
+
+**Only ONE class line is new to this feed:** Unholy Death Knight — "Resolved an issue causing the
+Unholy Devotion attack speed increase to also reduce attack damage and therefore have a neutral
+effect." It classifies **null** under `classifyHighlight` (checked in-process, not assumed): its
+clauses mix an *increase* with a *reduce*, so it does not vote. That is the honest reading — the
+net effect is a buff, but the sentence is not one-directional.
+
+**The other 14 lines were deliberately NOT re-distilled**, and this is the judgment worth
+remembering. The Classes section is the 2026-08-22 "Class Tuning Incoming – August 25" pass
+restated verbatim as it shipped; compared line by line, all 14 match at identical values. The
+outlook tally counts LINES, so logging them again would double-count one tuning pass — the same
+reasoning CLAUDE.md gives for excluding the launch patch notes. The comparison also settles the
+tier-set question for free: both set-bonus lines (Restoration Druid 4-piece Genesis +8s,
+Retribution Paladin 4-piece Divine Arbiter +150%/+75%) are unchanged from the announcing post,
+whose date the two `spec.tierSet` entries already carry, so nothing needed advancing and the
+upkeep gate is quiet *honestly* rather than by omission.
+
+The post's PvP section is very large this week (Devourer, Havoc, Feral, Augmentation, MM, Survival,
+Fire, Brewmaster, Windwalker, three Paladin specs, all three Priest, all three Rogue, Elemental and
+Restoration Shaman, all three Warlock, Arms) and is out of scope per the PvE rule.
+
+**Swept and correctly NOT logged:** the **August 21** round-up (news=382566) — it has no Classes
+section at all, only Delves / Dungeons and Raids / Housing / Items / Prey, which is why the feed's
+gap between 08-20 and 08-25 is right; the encounter and affix articles news=382602 (Heroic Vashnik),
+382607, 382610 and 382597 (M+ tuning); and **news=382603 "Estimated DPS Increases for August 25th
+Class Tuning"**, which is Wowhead's own third-party sim ESTIMATE of this pass, not a source of
+tuning values.
+
+Also checked: forum post 2339812 is still at **version 2** (edited 2026-08-24T21:44Z), i.e. no
+further edit since last night's amendment, so the 08-22 entry stands as written. The official
+development-notes thread 2317811 is still quiet since post #19 on 2026-07-31 — the closed cycle's
+expected silence, not a lost thread. Writeup coverage recomputed rather than remembered:
+**1 of 40** specs has no `ptr` writeup (Demonology Warlock, deliberate — its source reported no
+changes).
+
 ## 2026-08-25 (nightly, 2nd run of the day) — nothing new; the Aug 25 pass is live but Blizzard has posted no round-up for it yet
 
 Ran at ~15:55Z, i.e. after the 11:24Z nightly and the ~14:30Z local sweep. **No feed entry created,

@@ -16,6 +16,58 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-26 (nightly) — 44/44 feeds polled; Obli's Blightfall video distilled into 2 Unholy takes; 5 queued
+
+**Discovery:** 44 unique channel ids resolved from `community.json` (76 class-creator entries with
+`transcribable !== false` and a `channelId`, plus the 3 generalCreators, deduped), all polled with
+retry/backoff — **44 of 44 HTTP 200, 0 failures**. Seen-set built as STRUCTURED DATA from the four
+lanes (`seen[]`/`skipped[]`/`videos[]` + every `youtu.be` id in a take or metaNote url): **1199 ids**.
+**175 unseen** videos surfaced, every one of them on or after the cycle bound **2026-06-18** (derived
+as `Math.min` over ptr-builds dates, never `builds[0]`); 104 keyword-relevant.
+
+**Distilled 1 video** — the one the deterministic step pre-fetched (`transcript-fetch/summary.json`
+verdict `ok`, requested 1 / fetched 1, 346 chunks). This agent contacted neither YouTube nor any
+transcript API.
+
+**Obli `djVmUT8w0fU`** "Talking shop about Blightfall + NEW UNHOLY BUGS!!", 2026-08-25 → **2 takes**,
+both Unholy DK, both inside his registered `[Frost, Unholy]` scope:
+- **M+ / buff** — "for keys we're looking really, really strong", argued off his own +12 Altar of
+  Fangs run (≈470k on trash, ≈323k dungeon-wide, execute damage *rising* because San'layn amplifies
+  plague damage as health drops). Capped by his own comparison: an Arcane Mage does ≈500k where he
+  does 470k. He credits the 4-piece explicitly.
+- **Raid / mixed** — "not doing too bad once you get your set", good on cleave and add windows, weak
+  on pure single target and during the weakened-heart phase, with Necrotic Coil still bugged so it
+  cannot hit the Venomous Heart at all (and the attempted fix having made it melee-range).
+
+Superseded within the same lens only: his 08-23 Unholy **M+** take and his 08-20 Unholy **raid** take.
+His live Frost takes are a different spec and were left alone. `videos[]` record dropped in the same
+edit — and validation caught it when the first attempt forgot, which is the one-record rule earning
+its keep.
+
+**DECLINED, recorded so the judgment is auditable:** the same transcript contains one passing clause
+about **Frost DK** — "I think a Frost DK would do really well here if the tuning just got turned up
+ever so slightly, but it's not great". Not distilled: it is a single fight-specific hypothetical, the
+ASR mangles the spec name ("frost decay"), and the video's publication date straddles the August 25
+Frost buff, so its currency is ambiguous. Obli's `latest` was advanced to state what is now KNOWN.
+
+**Queued 5** (nightly keeps the keyword filter — Supadata is 100 requests/MONTH):
+`i5751gjXrDs` izen "Season 2 Week 1 Raid & Mythic+ Meta & Specs Popularity" (highest value in the
+sweep; its own chapter list names *Raid Specs Popularity* and *M+ Top Specs* — the metaNotes
+archetype), `J2tP3uynoiM` NeekapHere Retribution 12.1 PvE guide update, `w4MTlSOTaLM` AutomaticJak
+Holy Paladin S2 guide, `unV9EKXb820` LBNinja7 Mistweaver S2 raid guide, `y6K0fV8O9u4` Megasett
+Mistweaver 12.1 raid guide.
+
+**`media:description` parsed alongside every title** and it settled the borderline cases at zero
+transcript cost: Supatease's "THE META IS EVOLVING" / "THE NEW META IS COMING" / "Fire Mage is THE
+Spec To Play" all have descriptions that merely copy the title — the clip-short shape — from a
+PvP channel whose meta reads have repeatedly triaged out, so none were queued; Pkpawner's Windwalker
+video is explicitly a Heroic Ula'tek boss guide and Jedith's Havoc video a sponsored
+opener/rotation how-to; Dratnos' RWF recaps sit outside his registered Warrior specialist scope.
+
+**Nothing was added to `seen[]`.** Every one of those is a budget or judgment dismissal rather than a
+durable fact about the video, so they stay genuinely unexamined and will be reconsidered next run.
+Expect the unseen count to stay high; that is the accounting working, not a backlog rotting.
+
 ## 2026-08-25 (nightly, 2nd run of the day) — 44/44 feeds polled, no transcript lane, ONE video queued
 
 - **Discovery**: all **44 unique channels** behind the 79 transcribable creator entries polled via

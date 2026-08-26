@@ -2,11 +2,39 @@
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
   "videos": [
     {
-      "id": "djVmUT8w0fU",
-      "creator": "Obli",
-      "title": "Talking shop about Blightfall + NEW UNHOLY BUGS!! / Unholy DK Midnight Update 12.1",
+      "id": "i5751gjXrDs",
+      "creator": "izen (Izenhart)",
+      "title": "Season 2 Week 1 Raid & Mythic+ Meta & Specs Popularity | A Very Big Difference",
       "published": "2026-08-25",
-      "queuedAt": "2026-08-25"
+      "queuedAt": "2026-08-26"
+    },
+    {
+      "id": "J2tP3uynoiM",
+      "creator": "NeekapHere",
+      "title": "UPDATE Retribution Paladin 12.1 Guide (PvE) | Midnight",
+      "published": "2026-08-24",
+      "queuedAt": "2026-08-26"
+    },
+    {
+      "id": "w4MTlSOTaLM",
+      "creator": "AutomaticJak",
+      "title": "Holy Paladin Mythic+ and Raid Guide Midnight Season 2",
+      "published": "2026-08-24",
+      "queuedAt": "2026-08-26"
+    },
+    {
+      "id": "unV9EKXb820",
+      "creator": "LBNinja7",
+      "title": "Mistweaver Raid Guide for Midnight Season 2 | 12.1",
+      "published": "2026-08-23",
+      "queuedAt": "2026-08-26"
+    },
+    {
+      "id": "y6K0fV8O9u4",
+      "creator": "Megasett",
+      "title": "Mistweaver 12.1 Raid Guide",
+      "published": "2026-08-24",
+      "queuedAt": "2026-08-26"
     }
   ],
   "skipped": [
