@@ -15,6 +15,81 @@ Entries are sorted NEWEST FIRST by date. Two forms are in use ("- <date>" and "#
 they interleave, and refresh-tiers was chronologically scrambled before this prune — so sort
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
+
+## 2026-08-27 (nightly) — the Supadata lane came back clean and all three queued videos distilled: 7 takes, and Kalamazi's post-buff Warlock read is a real reversal
+
+**Videos processed: 3 (all three from `transcript-fetch/`, verdict `ok`, 3 requested / 3
+fetched). Takes added: 7. MetaNotes added: 0. Superseded: 6. Queue: 3 drained, 5 appended.**
+
+- **The 08-23/24 caption 429 that blocked the 08-27 local run is irrelevant here** — the nightly
+  does not touch YouTube. `transcript-fetch/summary.json` (attemptedAt 2026-08-27T20:43:53Z)
+  reads `fetched:543`, `fetched:209` and `fetched:41` chunks for the three queued ids. No
+  transcript API or YouTube request was made by this agent.
+- **KALAMAZI — `A7ZMRYQALHw`, "Is Demo OP? Warlock Buffs Are Changing Things!" (2026-08-26),
+  4 takes.** This is the after-the-fact counterpart to his 08-22 preview, read off live
+  Venomous Abyss logs filtered to the previous 24–48 hours, and it reverses the preview's central
+  prediction: he had asked whether buffed Demonology could take fights off Destruction and
+  answered probably not. **Demonology raid (buff)** — taking over the stacked-cleave bosses
+  (Nek'zali, Heroic Vashnik, the Coiled Altar, Ula'tek), with Tomb Sentinels staying Destruction
+  and two Mythic fights a toss-up he expects to drift. **Demonology M+ (buff)** — "cranking",
+  "gapping in many keys", with utility (bad kick, no raid or party buff) as the only stated
+  brake. **Destruction raid (mixed)** and **Destruction M+ (mixed)** — it keeps its high end
+  (Havoc cleave "insane this patch", a rank-one Altar of Fangs key that same day) but loses the
+  default slot; his own words on the Coiled Altar are that it "just sort of ended up not being
+  what we thought at all". His four prior live Warlock takes on those exact lenses (Demonology
+  raid + M+ 08-22, Destruction raid 08-17, Destruction M+ 08-22) are superseded.
+  **Affliction was deliberately NOT distilled.** The only Affliction material is fight-shaped —
+  top raw-damage logs on Ula'tek, a "wouldn't fault you playing either" on the Coiled Altar — and
+  a fight artifact is not a spec read. His 08-22 raid and 08-17 M+ Affliction takes stay live and
+  untouched. A co-streamer is present from ~464s; nothing he says is distilled, including the
+  "10%" buff figure, which is his question and which Kalamazi answers with an explicit "I'm not
+  sure exactly".
+- **CRITCAKE — `inGFY23zA-c`, "FURY IS UNDERRATED. +17 Den of Nalorakk" (2026-08-26), 1 take.**
+  A key run that carries a genuine comparative read, which is exactly why the nightly's title
+  filter is a poor instrument and this one was queued anyway. Logged **Fury / M+ / mixed**, not
+  buff: he says Fury is currently out-damaging his Arms, then undercuts the comparison himself
+  three ways — old two-piece, Arms-itemised gear pulled from his bags, and "I am mashing buttons
+  a lot harder when I'm playing Fury, so I think that's why we're doing more damage" — and his
+  one concrete negative is that Fury's single target is behind Arms until the new 4-set lands.
+  **No Arms take was minted from it.** Arms appears only as the comparator in a claim its author
+  discounts, and reading a negative into that would manufacture a signal. His 08-10 Fury take is
+  bracket "both" and was NOT superseded — different lens, and it is a pre-season read this one
+  does not replace.
+- **AUTOMATICJAK — `wgwLOufz5r8`, "RWF Healer Comp Explained" (2026-08-27), 2 takes.** A short
+  clip; identity is anchored by its own description ("Explaining the benefits of the RWF Healer
+  Comp's we're seeing"), not by the caption track, which names no speaker.
+  **Restoration Shaman / raid / buff** — he is "quite a bit of a believer" and wants it on the
+  race comp books, arguing Spirit Link against the Coiled Altar's stacking rot plus heal absorbs.
+  **Preservation Evoker / raid / mixed** — a real RWF possibility with named upside (Time Spiral,
+  other healers wanting a Rescue, Zephyr damage reduction) but he is "a little skeptical" it beats
+  the other three healers on mitigation, so this is not the clean positive the first half sounds
+  like. Both supersede his 08-15 raid reads on the same specs.
+  ⚠️ **The PRIEST material was declined.** The clip's opening "this priest kind of has it all …
+  power infusion" never names Discipline or Holy, and a bare class token is not a spec. Two of the
+  ability references in that passage (Rescue, Zephyr) are Evoker's, not Priest's, which is exactly
+  how a flattened read mis-attributes.
+- **Discovery: all 44 transcribable channels polled, 0 RSS failures**, 15 entries each. Seen-set
+  union (pending `seen[]` + `skipped[]` + `videos[]` + every take/metaNote url) = **1,207**;
+  199 unseen videos, all of them inside the cycle bound (2026-06-18, the oldest
+  `ptr-builds.json` date). Nightly mode, so the keyword filter stays — the free Supadata tier is
+  100 requests per MONTH and an unfiltered nightly would burn it in two runs.
+- **Queued 5**, chosen for spec-analytical content rather than title keywords alone, with the
+  `media:description` read on each: `x429ozbMXnQ` izen "Season 2 Mythic+ Meta | Best Performing
+  Specs and...Surprises" (2026-08-27 — the metaNotes archetype, description lists per-spec
+  chapters); `ps4If_WbBPQ` Musguete "Outlaw feels INSANE in Season 2!" (Outlaw is in his declared
+  scope); `rGk2fajsQ1g` AutomaticJak "Disc Priest in 60 Seconds" and `l1qKWWYZGZE` "This NEW Holy
+  Priest Build Dominates"; `if8kxRXBzSA` Critcake "+16 Murder Row — Slayer Arms" (his key runs
+  demonstrably carry reads — see tonight's Fury take).
+  **The other 194 stay UNSEEN, not `seen[]`** — they are a budget/keyword cut, which is precisely
+  the dismissal class that must remain reconsiderable. Bicepspump's "How To Play Unholy DK in
+  Midnight (12.1)" is the clearest example: it passes the keyword filter, but its own description
+  calls it a "Beginner Rotation Guide", and guide-shaped content has never yielded a take. It was
+  not queued and not retired.
+- **Firewall notes, unchanged and still awaiting Riley** (flag, never retire): AutomaticJak
+  authors the Wowhead M+ healer tier list, flagged on 08-27; tonight's two takes are both RAID,
+  so nothing new was added on that side. If either queued Priest video turns out to be an M+
+  read, that decision lands before it is logged.
+
 ## 2026-08-27 (local, scheduled) — the caption 429 is BACK after two clear days; queue held at 3, nothing distilled
 
 - **The residential yt-dlp caption lane is 429-blocked again.** All three queued ids attempted once

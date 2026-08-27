@@ -15,6 +15,38 @@ Entries are sorted NEWEST FIRST by date. Two forms are in use ("- <date>" and "#
 they interleave, and refresh-tiers was chronologically scrambled before this prune — so sort
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
+
+## 2026-08-27 (nightly) — nothing new in any live lane; the dev-notes thread is still at post #19 and no 12.2 PTR has been announced
+
+**Builds found: 0. `data/ptr-builds.json` untouched.** Newest entry stays the 2026-08-26 live
+hotfix round-up that the same-day local run completed (its deferred Devourer set line landed there).
+
+- **All three live lanes polled, not just the RSS.** (a) Wowhead news RSS: HTTP 200, 161 KB,
+  40 items parsed per `<item>` block (title-then-link order, never tag adjacency), window
+  2026-08-24 → 2026-08-27 15:00. Nothing after the already-logged 08-26 hotfix (news=382643,
+  19:57) is class tuning: the six newer items are a TBC anniversary compendium, the Psybear
+  developer interview, an RWF day-9 recap, a pet guide, a Taliesin/Evitel opinion piece and an
+  achievement note. (b) The news INDEX (`data.news.newsData`, brace-balanced from the id
+  attribute) — polled because the index LEADS the RSS within a run; page 1 held 20 posts, top id
+  382642, and surfaced nothing the RSS had not. (c) The blue-tracker index
+  (`data.blueTracker.default`): 50 entries, newest class-relevant one is Kaivax's 26 August
+  hotfix topic 2336376 at 19:55, already the citation on the logged entry.
+- **The canonical running hotfix post was read directly, not inferred from its tracker
+  timestamp** — it is edited in place, so a stale index entry proves nothing. `2336376.json`:
+  post 1 created 2026-08-14, `updated_at` **2026-08-27T00:55:19Z**, which is the same edit the
+  local run already distilled; its newest dated heading is still **August 26, 2026**. No
+  August 27 section exists yet.
+- **The 12.1 development-notes thread (2317811) is at post #19, last posted 2026-07-31T23:42Z**
+  — unchanged, and the closed cycle's expected silence rather than a lost thread. No 12.2 PTR
+  announcement in any lane, so the between-cycles posture holds and `PHASES.ptr` stays null.
+- **Dormant lanes skipped as designed**: the WCL PTR zone sweeps (54 raid / 52 Dummy Dome /
+  56 M+ / 57 Tidebound Grotto). Their contract rows left at the flip, so they get no manifest
+  row, and the stored zone-52/54/56 rows remain the closed cycle's final receipts. This agent
+  made no warcraftlogs.com request of any kind.
+- Watch item for the next few runs, from the 08-22 entry's own citation: Blizzard's Season 2
+  tuning roadmap (topic 2335871) names **September 1** as the next scheduled pass, so a
+  "Class Tuning Incoming" post is expected around 08-29 to 08-31.
+
 ## 2026-08-27 (local, scheduled) — the nightly's DEFERRED set line landed: the August 26 Devourer entry is logged and the gearing mirror resynced in the same commit
 
 - **The one class line the nightly could not ship is now shipped.** Tonight's nightly logged 4 of

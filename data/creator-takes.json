@@ -5342,7 +5342,7 @@
       "patchContext": "12.1 PTR — his Season 2 launch healer tier list, raid side, rebuilt after the August 18 healer tuning (race-to-world-first framing)",
       "url": "https://youtu.be/c_5u7Jpy-Uo?t=319",
       "claim": "Restoration Shaman takes no changes and he keeps it in his predicted race comp, resting the call on a specific and under-discussed piece of kit: Elemental Resistance, where healing from Healing Stream Totem reduces fire, frost and nature damage taken. He argues this is really good in this particular raid because there is a great deal of nature damage going out, making it another layer of mitigation on top of high healing. He names the Coiled Altar — the second-to-last boss, where the raid stacks through overlapping rot damage and heal absorbs while players run out for mechanics — as the fight where Spirit Link Totem could really shine, and says he is quite a believer on that basis. He flags one dependency: if the composition brings Elemental Shamans then the Skyfury coverage no longer requires Restoration.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Shaman",
@@ -5366,7 +5366,7 @@
       "patchContext": "12.1 PTR — his Season 2 launch healer tier list, raid side, rebuilt after the August 18 healer tuning (race-to-world-first framing)",
       "url": "https://youtu.be/c_5u7Jpy-Uo?t=369",
       "claim": "He treats Preservation as a real but not settled race-to-world-first pick, saying there is a very real possibility of running it and naming Time Spiral as really valuable for this race, alongside the raw healing every one of the four candidate healers brings. His scepticism is comparative rather than about the spec itself: judged purely as a healer he thinks the mitigation offered by Discipline, Holy Paladin and Restoration Shaman wins out, though he stresses the answer depends heavily on the DPS composition. He also sketches the specific synergy that would earn Preservation its slot — rescuing a Priest on the fights where Discipline is immobile, then Time Spiral, which he floats as a reason a composition might carry one.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Evoker",
@@ -5534,7 +5534,7 @@
       "patchContext": "12.1 PTR — week-one Warlock raid outlook, fight by fight (supersedes his 08-05 raid and 08-10 both reads)",
       "url": "https://youtu.be/9bQVdlUqeAM?t=301",
       "claim": "Walking the Venomous Abyss fight list he assigns Destruction as the default Warlock spec on most bosses, naming Hellcaller Destruction as the highest single target on Sszorak, Destruction with Twin Fangs where Mayhem and the improved Havoc fix apply, and Hellcaller Destruction again on Coiled Altar through its phase structure. He summarises the raid picture as Affliction and Destruction with a question mark for the third slot.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Warlock",
@@ -5915,7 +5915,7 @@
       "claim": "He treats the Affliction buffs as real but short of what the spec needs. Unstable Affliction +15% he calls considerable while saying it probably needs to be more than this realistically and that he would not have minded seeing 30%, adding that this is something Affliction has needed for a long time. He works the rest through live logs from what he calls the tier's only single-target fight: Agony sits near 8.7% and Corruption near 7.5% of damage on a Soul Harvester log, so the 20% and 15% increases are a bump rather than a transformation, while Wrath and Shadow of Nathreza are passive apex-talent damage that applies in essentially every scenario. Separately he prices the class-wide pet buff off a Destruction log where the imp is worth roughly 1% of damage, so 350% puts pets near 3.5% — about a 3.5% single-target gain for Affliction and Destruction alike. Adding it up he estimates the whole Affliction package at roughly 10 to 12% on what he stresses is very rough napkin math, and concludes Affliction needs a bump in single target and probably needs more still, but that it is nice either way. He also argues Hellcaller remains well behind Soul Harvester in single target and that the Felvine line should have been buffed for it, as it was for Destruction a patch earlier, if the intent was to make Hellcaller Affliction stronger there."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Warlock",
       "spec": "Demonology",
       "creator": "Kalamazi",
@@ -5927,7 +5927,7 @@
       "claim": "He reads Demonology as meaningfully buffed but stops short of calling it strong. He starts from the state: Demonology and Affliction have been putting out similar and, in his words, pretty bad single-target damage, and this pass helps both. He walks the values against live logs — Shadow Bolt sits near 5% and Demonbolt near 4% of damage, so their 35% and 30% increases are worth roughly 2% and 1.5%; the imp is one of the higher single sources at about 12%, so 20% there is about 2.2 to 2.3%; the Felguard is low enough that its 20% adds little. He singles out the Dominion of Argus increase as the more interesting one, because it lands on the apex talent's demons rather than the hero-tree demons that were nerfed roughly two weeks earlier, and says it strengthens both the every-minute apex window and single target. He frames the package as the compensation that should have accompanied that earlier nerf, which cut single target as well as AoE with nothing given back. For the raid specifically he expects little overall change — Destruction stays the pick on most fights — but says a couple of fights may swap to Demonology on the strength of these buffs, naming Vashnik and one other where constant running between targets makes pets awkward."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Warlock",
       "spec": "Demonology",
       "creator": "Kalamazi",
@@ -5939,7 +5939,7 @@
       "claim": "For Mythic+ he expects Demonology to come out of this pass in a good place: the 30% Call Dreadstalkers increase lands on an ability worth roughly 8% of a dungeon damage breakdown, and stacked with the 20% Dominion of Argus demons buff and the smaller Felguard buff he says Demonology is probably pretty strong in Mythic+. He bounds it in the same breath — to what extent remains to be seen, and it is not going to be meta or anything unless the damage is stronger than expected and other classes get nerfed, because Warlock lacks utility. Placing it inside his own class he says Destruction is the better spec at the high end while Demonology is the better option for pugging average keys, where a tank who does not handle pets well makes Rain of Fire and Cataclysm play a pain."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Warlock",
       "spec": "Destruction",
       "creator": "Kalamazi",
@@ -6296,6 +6296,90 @@
       "patchContext": "Season 2 live — his San’layn/Blightfall walkthrough published 2026-08-25, the day the August 25 tuning pass landed. The video is largely how-to-play (a +12 Altar of Fangs key and Heroic raid footage with rotation commentary), but it carries two explicit spec-strength reads, which is what is distilled here; his own play is on the 4-piece.",
       "url": "https://youtu.be/djVmUT8w0fU?t=651",
       "claim": "His raid read is a clear improvement on the 08-20 \"not in a good place\" position but stops well short of positive: Unholy is \"not doing too bad in the raid once you get your set\", with some fights very good and some not so good. The good case is cleave and add windows — he says there is a fair bit of cleave in this tier, that San’layn’s 45-second burst lines up well with several boss mechanics, and that egg-add phases are where Unholy shines; he ends the shown Heroic pull around 240k and calls it respectable. The bad case is pure single target and the current bugs: during the weakened-heart phase he says Unholy simply does not do a lot, and he is scathing that Necrotic Coil does not hit the Venomous Heart at all even though the heart is the thing taking 100% additional damage, so he has to command pets onto it manually — and that Blizzard’s attempted fix has turned Necrotic Coil into a melee-range effect. He also notes Unholy Devotion had been bugged into providing near-nothing, which he believes is now fixed (it is — the August 25 hotfixes carry that line). He adds that he sees few people playing Unholy on that fight and does not think the spec deserves the neglect.",
+      "superseded": false
+    },
+    {
+      "class": "Warlock",
+      "spec": "Demonology",
+      "creator": "Kalamazi",
+      "date": "2026-08-26",
+      "sentiment": "buff",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — \"Is Demo OP? Warlock Buffs Are Changing Things!\", published 2026-08-26, the follow-up to his 08-22 preview now that the August 25 Warlock pass has actually shipped. He reads it off live Warcraft Logs for the Venomous Abyss (heroic and mythic filtered to the previous 24-48 hours) and off Raider.IO/M+ logs, boss by boss, with a co-streamer present — only his own reads are distilled here.",
+      "url": "https://youtu.be/A7ZMRYQALHw?t=75",
+      "claim": "His 08-22 preview asked whether the buffed Demonology could take fights off Destruction and answered probably not; four days of live logs have changed his answer for much of the tier. He says there has been a lot more Demonology play than most expected and that it is taking over on the stacked-cleave fights: Nek'zali, where he expected the add travel time to be longer than it turned out and where Demonology now sits above Destruction; Vashnik on Heroic, which he calls a wall of Demonology; the Coiled Altar, one of the fights he had expected Destruction to be really good on and which he says just ended up not being what they thought at all; and Ula'tek, where he played Demonology himself and found phases two and three solid. He does not call it universal — Tomb Sentinels stays Destruction on both difficulties, and on Mythic Lost Explorers and Twin Fangs he says it is a toss-up he expects to drift toward Demonology later in the week as guilds gear. He credits the Apex talent buffs plus the class-wide pet buff, and flags a build consequence: with the Felguard's talent support gone, top logs are appearing on the other pets, so a non-Felguard build may be correct until Blizzard revisits it.",
+      "superseded": false
+    },
+    {
+      "class": "Warlock",
+      "spec": "Demonology",
+      "creator": "Kalamazi",
+      "date": "2026-08-26",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — \"Is Demo OP? Warlock Buffs Are Changing Things!\", published 2026-08-26, the follow-up to his 08-22 preview now that the August 25 Warlock pass has actually shipped. He reads it off live Warcraft Logs for the Venomous Abyss (heroic and mythic filtered to the previous 24-48 hours) and off Raider.IO/M+ logs, boss by boss, with a co-streamer present — only his own reads are distilled here.",
+      "url": "https://youtu.be/A7ZMRYQALHw?t=749",
+      "claim": "His strongest read in the video, and a clear escalation from the bounded \"probably pretty strong\" of 08-22. He says Demonology is cranking Mythic+, that over the last couple of days it has taken over the M+ logs, and that it is gapping the field in many keys — the appeal being short cooldowns, a one-minute Tyrant cycle and a constant stacked-cleave profile that does not depend on setup. He allows that Destruction was really good at the high end pre-buff and can still edge it with maximum stacked cleave, but rates Demonology better for consistent damage. The caveat he keeps is utility, not throughput: Demonology has a bad kick and brings no raid or party buff, and he is explicit that Gateway and Healthstone are not one. His conclusion is conditional rather than a coronation — the damage may be strong enough that a group plays Demonology over a third DPS chosen for buffs, and the open question is whether it is enough to knock an established meta spec out.",
+      "superseded": false
+    },
+    {
+      "class": "Warlock",
+      "spec": "Destruction",
+      "creator": "Kalamazi",
+      "date": "2026-08-26",
+      "sentiment": "mixed",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — \"Is Demo OP? Warlock Buffs Are Changing Things!\", published 2026-08-26, the follow-up to his 08-22 preview now that the August 25 Warlock pass has actually shipped. He reads it off live Warcraft Logs for the Venomous Abyss (heroic and mythic filtered to the previous 24-48 hours) and off Raider.IO/M+ logs, boss by boss, with a co-streamer present — only his own reads are distilled here.",
+      "url": "https://youtu.be/A7ZMRYQALHw?t=117",
+      "claim": "A step down from his 08-17 read, which had Destruction as the default Warlock spec on most bosses. He still names it the pick where the fight suits it — Tomb Sentinels he calls a tried-and-true Destruction fight on both difficulties, saying Destruction's Havoc cleave is insane this patch with nearly permanent Havoc, and Mythic Vashnik and Mythic Twin Fangs stay Destruction for now — but two of the fights he had assigned it have gone the other way. On the Coiled Altar he says outright that this is one of the fights they thought Destruction would be really good on and it just sort of ended up not being what they thought at all; on Nek'zali he found it a clunky Destruction fight where Demonology feels a lot better. He also names a Mythic-specific problem on Twin Fangs: Mayhem procs land on the shielded adds that have to be crowd-controlled and soaked, wasting the proc and a large chunk of boss damage, which he suggests may push the fight toward a Havoc build or off the spec entirely.",
+      "superseded": false
+    },
+    {
+      "class": "Warlock",
+      "spec": "Destruction",
+      "creator": "Kalamazi",
+      "date": "2026-08-26",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — \"Is Demo OP? Warlock Buffs Are Changing Things!\", published 2026-08-26, the follow-up to his 08-22 preview now that the August 25 Warlock pass has actually shipped. He reads it off live Warcraft Logs for the Venomous Abyss (heroic and mythic filtered to the previous 24-48 hours) and off Raider.IO/M+ logs, boss by boss, with a co-streamer present — only his own reads are distilled here.",
+      "url": "https://youtu.be/A7ZMRYQALHw?t=773",
+      "claim": "He keeps the substance of his 08-22 read on the 30% Rain of Fire buff but no longer has Destruction ahead. The evidence he offers for it is a rank-one Altar of Fangs key run as Destruction that same day, and he says he thinks Destruction was really good at the high end pre-buff and might still be a little better with maximum stacked cleave from Rain of Fire and Cataclysm. Against that he sets consistency: for overall consistent damage he says Demonology is better, because Destruction's ceiling depends on the setup and Demonology's does not. The read is therefore a spec that keeps its high end and loses the default slot rather than one that got worse.",
+      "superseded": false
+    },
+    {
+      "class": "Warrior",
+      "spec": "Fury",
+      "creator": "Critcake",
+      "date": "2026-08-26",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — \"FURY IS UNDERRATED. +17 Den of Nalorakk\", published 2026-08-26, week 2 of Season 2. A pugged key run with running commentary; the spec read is comparative (Fury against his own Arms) and he states its confounds himself, which is why it is distilled as mixed rather than as a clean positive.",
+      "url": "https://youtu.be/inGFY23zA-c?t=28",
+      "claim": "His headline is that Fury is underrated and that it is currently doing more overall damage than Arms for him in keys — but he undercuts his own comparison twice and both caveats belong to the claim. He is playing the previous season's Vain build on the old two-piece with higher-item-level pieces filling the rest, because he does not have the new set yet, and warns that the build changes once you do. He is also gearing for Arms, using whatever was in his bags for Fury. And he says plainly that he is mashing buttons a lot harder on Fury and thinks that is why the damage is higher. His concrete negative is that single target on Fury with his current gear is worse than Arms, which he expects to reverse with the new set because it opens a build with more single target; he calls the tier-set bonus really good for Fury. His softest and most quotable line — if you are brain dead, play Fury, Fury is easier, and it might be the best way anyway — is a difficulty read as much as a strength one.",
+      "superseded": false
+    },
+    {
+      "class": "Evoker",
+      "spec": "Preservation",
+      "creator": "AutomaticJak",
+      "date": "2026-08-27",
+      "sentiment": "mixed",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — \"RWF Healer Comp Explained\", published 2026-08-27 during the Venomous Abyss race to world first. A short single-speaker clip on his own channel (its description, \"Explaining the benefits of the RWF Healer Comp's we're seeing\", is what anchors the read to him rather than to a guest), arguing which four healers the top guilds are fielding and why.",
+      "url": "https://youtu.be/wgwLOufz5r8?t=8",
+      "claim": "He puts Preservation genuinely in the race-to-world-first conversation and then declines to place it above the alternatives. The upside he names is specific: Time Spiral he expects to be really, really valuable for this race, other healers will have spots where they badly want a Rescue, and Preservation brings its own damage reduction from the Zephyr apex talent on top of large raw healing. His hesitation is equally specific — purely from a healer standpoint he is a little skeptical, and thinks the mitigation of the other three healers in the comp wins out, while adding that the answer depends on the DPS composition alongside them. He closes by saying not to cast Preservation out, which is where the read lands: a real possibility with named upside rather than a recommendation.",
+      "superseded": false
+    },
+    {
+      "class": "Shaman",
+      "spec": "Restoration",
+      "creator": "AutomaticJak",
+      "date": "2026-08-27",
+      "sentiment": "buff",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — \"RWF Healer Comp Explained\", published 2026-08-27 during the Venomous Abyss race to world first. A short single-speaker clip on his own channel (its description, \"Explaining the benefits of the RWF Healer Comp's we're seeing\", is what anchors the read to him rather than to a guest), arguing which four healers the top guilds are fielding and why.",
+      "url": "https://youtu.be/wgwLOufz5r8?t=42",
+      "claim": "He calls himself quite a bit of a believer in Restoration Shaman for this raid and wants it on the books for the race comp. The argument is Spirit Link Totem against the tier's hardest damage patterns rather than throughput: he singles out the Coiled Altar, the second-to-last boss, where the raid stacks together while a couple of players run out for mechanics and the damage arrives as stacking rot plus heal absorbs, and says that is exactly where Restoration and Spirit Link really shine. He frames it as one of several strong options in a four-healer comp, all of which bring huge output plus something else, rather than as the outright best healer.",
       "superseded": false
     }
   ],
