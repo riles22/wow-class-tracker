@@ -1,6 +1,28 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
-  "videos": [],
+  "videos": [
+    {
+      "id": "A7ZMRYQALHw",
+      "creator": "Kalamazi",
+      "title": "Is Demo OP? Warlock Buffs Are Changing Things!",
+      "published": "2026-08-26",
+      "queuedAt": "2026-08-27"
+    },
+    {
+      "id": "inGFY23zA-c",
+      "creator": "Critcake",
+      "title": "FURY IS UNDERRATED. +17 Den of Nalorakk - Midnight M+ Season 2 (week 2)",
+      "published": "2026-08-26",
+      "queuedAt": "2026-08-27"
+    },
+    {
+      "id": "wgwLOufz5r8",
+      "creator": "AutomaticJak",
+      "title": "RWF Healer Comp Explained",
+      "published": "2026-08-27",
+      "queuedAt": "2026-08-27"
+    }
+  ],
   "skipped": [
     {
       "id": "02rLfzEKLq4",

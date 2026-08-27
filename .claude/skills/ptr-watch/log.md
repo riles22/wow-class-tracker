@@ -16,6 +16,83 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-27 (nightly) — the August 26 hotfix round-up LANDED (4 of its 5 class lines); the 5th touches a SET BONUS and a nightly structurally cannot ship it
+
+- **Feed +1: `2026-08-26`, `kind: "hotfix"`, 4 specs / 4 highlights.** Canonical source read
+  DIRECTLY rather than off the Wowhead mirror: Kaivax's running hotfix blue post (us.forums topic
+  **2336376**, `.json` via curl so the whole `post_stream` comes back), whose title has rolled to
+  "World of Warcraft: Midnight Hotfixes - August 26" and whose post 1 was edited
+  **2026-08-27T00:55:19Z** to carry the August 26 section. Read with its `<ul>` heading structure
+  INTACT, which is what settles the post's one attribution question: the **Sudden Death** line sits
+  directly under the bare **Warrior** heading with no spec beneath it, one level SHALLOWER than the
+  four spec-scoped lines, so it is logged `Warrior (class-wide)` rather than guessed onto Arms or
+  Fury. `specsAffected` carries the `Warrior (class-wide)` sentinel, which is what makes
+  `specBuildChanges` route it — verified after the edit that Arms, Fury AND Protection each receive
+  it flagged `classWide`, and that Prot Paladin / Holy Priest / Elemental Shaman each receive their
+  own line.
+- **Classification checked, not assumed.** Three of the four classify **null**; **Elemental Shaman
+  classifies BUFF** (the Farseer fix restores healing Maelstrom Supremacy was failing to increase)
+  and is reported as such rather than talked down. It moved no outlook DIRECTION — Elemental is
+  driven by a dated writeup verdict (Positive → up), so only its stated line counts moved, **+2/−1
+  across 6 builds → +3/−1 across 7**. Verified by running `outlookFor` against the committed feed
+  and the new one side by side.
+- ⚠ **ONE CLASS LINE IS DELIBERATELY MISSING AND NEEDS A LOCAL RUN — the biggest thing in this
+  entry.** The post's **Devourer Demon Hunter** line ("Fixed an issue that prevented the effect of
+  the Devourer **2-piece set bonus** (Soulburst) from displaying correctly") matches `SET_KEYWORD`,
+  so logging it obliges bumping that spec's `tierSet.asOf`/`source` — and since 2026-08-23
+  `validateData` ALSO requires `gearing/data/specs.json` to carry identical `set2`/`set4`/`asOf`.
+  **The nightly cannot ship the gearing half.** The refresh artifact is `path: data/` +
+  `.claude/skills/*/log.md`, and publish stages `git add data/ dist/ ".claude/skills/*/log.md"` —
+  `gearing/` travels in neither. So publish would check out master's mirror (asOf 2026-08-15) over
+  my bumped tracker copy.
+  **Measured rather than assumed:** with the tracker bumped and the mirror at its committed text,
+  `validateData` returns **exactly 2 errors**, both the `tierSetSync` message for Devourer Demon
+  Hunter. That is a Gate-1 red, which discards the whole night — and it would REPEAT every night
+  after, because the un-logged hotfix gets re-derived each run and the same agent reaches the same
+  edit. A permanent nightly outage against one display-bug line is the wrong trade, so the line is
+  deferred and the deferral is written into the build entry's own `label` (not only here), so it is
+  discoverable from the data.
+  **LOCAL-RUN FIX, one pass:** append the Devourer line to the 2026-08-26 entry's `highlights` and
+  `"Devourer Demon Hunter"` to its `specsAffected`; set that spec's `tierSet.source` to
+  `https://us.forums.blizzard.com/en/wow/t/world-of-warcraft-midnight-hotfixes-august-26/2336376`
+  and `tierSet.asOf` to `2026-08-26`, appending a dated parenthetical to `set2` (the 2-piece
+  **wording is unchanged**, so do not rewrite the bonus text — the 08-20 Affliction Warlock entry is
+  the precedent); then `node gearing/src/sync-tracker-fields.mjs && npm run gearing:build`.
+  **Worth raising with Riley as a structural item, not just a chore:** any set-touching hotfix now
+  puts the nightly in this position, and it will recur.
+- **Out of scope, deliberately not distilled** (all verified present and passed over): the Delves
+  section (Infiltrator Garand, Gnok); the whole Dungeons and Raids section (Venomous Abyss Story
+  Mode followers, The Lost Explorers' Cauterizing Flame interaction, the two Ula'tek fixes for
+  Mother's Wrath targeting and duplicate Doomscale Shell); Items and Rewards (Silvermoon Splendor /
+  Nebulous Voidcore, Catalyst eligibility for Great Vault and bonus-rolled raid armor, Season 2
+  socketing, Renown "Overflowing" caches); and the PvP-only Training Grounds: Arena fix.
+- **Three discovery channels swept, all three clean beyond the above.**
+  · **Wowhead news RSS** (`/news/rss/all`, 187 KB, 40 items parsed per `<item>` block): newest item
+    2026-08-27 08:00. The only class-relevant item newer than the stored feed's 2026-08-25 head is
+    news=382643, the August 26 hotfix article. Correctly NOT logged from the same window:
+    "Coiled Altar, Ula'tek and Nymrissa Tuning with Weekly Reset" and "Heroic Vashnik Nerfed in
+    Hotfixes" (encounter tuning, no class line) and the Tettles/Ion interview news=382637 (design
+    commentary, not tuning).
+  · **Wowhead news INDEX** polled as well, because the index leads RSS within a run
+    (`data.news.newsData`, brace-balanced from the id attribute): 20 posts, newest 382629 at
+    2026-08-27 08:00 — identical head to RSS, so nothing landed mid-run.
+  · **Blue tracker** (`data.blueTracker.default`, 50 entries): nothing newer than the August 26
+    hotfix topic. The most recent standalone class-tuning topic is "Class Tuning Incoming –
+    August 25" (2339812), stamped 2026-08-24 18:59 for its Restoration-Druid update — already
+    carried by the feed's 2026-08-22 entry, which lists Restoration Druid. **No new standalone blue
+    post**, and **no 12.2 PTR announcement** anywhere in the window.
+- **The 12.1 development-notes thread (2317811) is still at post #19, `last_posted_at`
+  2026-07-31T23:42Z.** That is the closed cycle's expected silence, re-verified this run, NOT a
+  lost thread — the rediscovery gotcha stays suspended until Blizzard announces 12.2, at which point
+  opening the new cycle is an owner action.
+- **Dormant lanes skipped as designed:** the four WCL PTR zone sweeps (54 raid / 52 Dummy Dome /
+  56 M+ / 57 Tidebound Grotto). Their contract rows left with the flip, so they get no manifest row
+  and the stored zone-52/54/56 series stay untouched as the closed cycle's final receipts. This
+  agent made no request to warcraftlogs.com by any route.
+- **Tier-set upkeep otherwise clean:** the Restoration Druid 4-piece "Genesis duration increased by
+  8 seconds (was 4)" from the 08-25 pass is already stored at 8 with `asOf` 2026-08-22, and the
+  gearing mirror agrees — the drift this gate exists for is not present.
+
 ## 2026-08-26 (nightly) — the August 25 hotfix round-up LANDED; one new class line in it (Unholy DK), the other 14 are the 08-22 pass restated
 
 Between-cycles posture unchanged: the 12.1 PTR cycle is closed, so only the live lanes ran and
@@ -136,7 +213,6 @@ at ~14:30Z. **No feed entry created, no data file touched by this lane.**
   another. (Wowhead's `/news` index remains 403 to a UA-only curl, as the existing trap says —
   the RSS carried everything needed, so the full header set was not required tonight.)
 
-
 ## 2026-08-25 (nightly) — the August 25 tuning post was EDITED to v2, and the edit is PvP-only
 
 - **No new feed entry.** Newest entry stays 2026-08-22.
@@ -169,7 +245,6 @@ at ~14:30Z. **No feed entry created, no data file touched by this lane.**
 - No set bonus touched → no `spec.tierSet` advanced.
 - Channels: RSS 40 items / 154 KB, news index 20 posts (newest id 382597), blue tracker 50
   entries → 42 unique topics. PTR zone sweeps (54/52/56/57) dormant between cycles, not attempted.
-
 
 ## 2026-08-24 (local) — verification pass over the nightly; one post-nightly article read and correctly not logged
 
@@ -720,407 +795,6 @@ zone 54 27 rows (6 of 8 encounters returned players; The Coiled Altar and Ula'te
 
 Writeup coverage RECOMPUTED (never read): 1 spec at `ptr: null` (Demonology Warlock, the
 deliberate null), 0 specs without a raid-scoped expert read, 0 without an M+ one.
-
-## 2026-08-17 (nightly)
-
-**No new builds; nothing logged.** Four channels swept.
-(1) Dev-notes thread `2317811.json` via curl for the full `post_stream`: 17 posts,
-`last_posted_at` 2026-07-31T23:42:09Z, newest is Linxy #19 — already the feed's 07-31 entry.
-Quiet 17 days now, because the PTR cycle ended when 12.1 shipped on 08-11.
-(2) Wowhead RSS, parsed per `<item>` block: 40 items, newest 2026-08-16 19:10 CDT.
-(3) News INDEX (`data.news.newsData`, brace-balanced from the id attribute), since it leads RSS
-within a run: 20 posts, top id 382391 — nothing beyond RSS.
-(4) Blue tracker (`data.blueTracker.default`): 50 entries, newest **2026-08-14 20:02**, i.e.
-unchanged since last night. The only class-touching blues are still Linxy's "Class Tuning Incoming
-– August 18" (topic 2336820), which IS the feed's 2026-08-15 entry, and the Aug-14 Kaivax hotfixes
-(2336376). Kaivax's 08-12 "Season 2 Class Tuning Plans" (2335871) and Wowhead's 08-12 "Class
-Tuning Roadmap" (news=382435) remain a **calendar** — Aug 18 / Aug 25 / Sep 1 / Sep 22, no
-per-spec numbers — so they are still correctly absent from the feed.
-
-Writeup coverage **recomputed, never read off prose**: 1 spec at `ptr: null` (Demonology Warlock,
-the deliberate null — the source reported no changes), **0** specs without a raid-scoped expert
-read, **0** without an M+ one. Unchanged from 08-15, and the CLAUDE.md paragraph still matches.
-
-WCL zones are evidence-only on the runner (no credentials). `wcl-fetch/evidence.json` verdict
-`rdps-broken`, so **zone 54 (normalized), zone 52 (ptrDummy rDPS) and zone 56 (rDPS/HPS) all
-stay frozen** at 2026-07-28 / 2026-08-10 / 2026-08-10 respectively; zone 57 was not probed for the
-same reason. What DID land is the deterministic raw-DPS lane: z52 102 rows, z54 27 rows (6 of 8
-encounters populated — Vashnik 678, Soulcoiler 370, Sentinels 363, Sszorak 184, Lost Explorers 150,
-Twin Fangs 146; Coiled Altar and Ula'tek zero), z56 27 rows across all eight dungeons.
-
-## 2026-08-16 (nightly)
-
-**No new builds; nothing logged.** Four channels swept.
-(1) Dev-notes thread `2317811.json` via curl for the full `post_stream`: 17 posts,
-`last_posted_at` 2026-07-31T23:42:09Z, newest is Linxy #19 — already the feed's 07-31 entry. The
-thread has been quiet 16 days because the PTR cycle ended when 12.1 shipped on 08-11.
-(2) Wowhead RSS, parsed per `<item>` block: 40 items, newest 2026-08-16 06:05 CDT.
-(3) News INDEX (`data.news.newsData`, brace-balanced from the id attribute), since it leads RSS
-within a run: 20 posts, top id 382474 — nothing beyond RSS.
-(4) Blue tracker (`data.blueTracker.default`): 50 entries → 42 unique topics, newest 2026-08-14
-20:02. The only class-touching blues are still Linxy's "Class Tuning Incoming – August 18"
-(topic 2336820), which IS the feed's 2026-08-15 entry, and the Aug-14 Kaivax hotfixes (2336376),
-re-read in full: its Classes section is entirely BUG FIXES (Devastation Shattering Star/Mastery,
-Warrior Slayer Executioner double effect, Warlock pet Soul Leech, Demonology Soul Harvest) while
-every numeric line in the post is trinkets and items. The Aug-13 round-up is the same shape.
-Writing either as a `Spec Class - ...` highlight would put bug-fix text into the outlook tally.
-
-Open LEAD, not logged: "Patch 12.1.5 PTR Now Listed on Battle.net Launcher" (news 382443, 08-13).
-A new cycle means a NEW forum thread, but the article says the patch has not been updated and
-nothing is datamineable yet — re-discover the thread when it is.
-
-Writeup coverage RECOMPUTED (never read from prose): one spec has no `ptr` writeup — Demonology
-Warlock, the deliberate "the source reported no changes" case — and **zero** specs lack a
-raid-scoped or an M+-scoped expert read.
-
-WCL zones: no fetch by this agent (no credentials). From `wcl-fetch/evidence.json`
-(attemptedAt 10:54:32Z, verdict `rdps-broken`, OAuth+GraphQL healthy, 1 point spent):
-**zone 54** normalized series unreachable, stays 2026-07-28 (its raw-DPS sibling landed, 27 rows
-over 8 encounters — Coiled Altar and Ula'tek at 0 players, which is empty rather than an error);
-**zone 52** ptrDummy unreachable, stays 2026-08-10 (raw 102 rows landed); **zone 56** rDPS/HPS
-unreachable, stays 2026-08-10 (raw 27 rows landed); **zone 57** not probed — no credentials, and
-it has been confirmed twice as having zero aggregated encounters.
-
-## 2026-08-15 (nightly, 21:50 UTC — second run of this UTC day)
-
-**Nothing new to log on any of the four channels.** (1) Dev-notes thread `2317811.json` via
-curl for the full `post_stream`: 17 posts, `last_posted_at` 2026-07-31T23:42:09Z, newest is
-Linxy #19 — already the feed's 07-31 entry. The thread has been quiet 15 days; the PTR cycle
-ended when 12.1 shipped. (2) Wowhead RSS, parsed per `<item>` block: 40 items, newest
-2026-08-15 15:35 CDT. (3) News INDEX (`data.news.newsData`, brace-balanced from the id
-attribute) polled as well because it leads RSS within a run: 20 posts, top id 382472, nothing
-beyond RSS. (4) Blue tracker (`data.blueTracker.default`): 50 entries → 42 unique topics.
-
-**The two candidate blues were re-read in full and independently confirmed as non-feed
-material** — the same conclusion the earlier run reached, reached again from the source rather
-than inherited: topic **2336376** (Kaivax, Hotfixes August 14) has a Classes section that is
-entirely BUG FIXES with no tuning values (Devastation Shattering Star / Mastery: Giantkiller,
-Warrior Slayer Executioner double-effect, Warlock pet Soul Leech, Demonology cooldown-manager)
-while every numeric change in it is trinkets and items; topic **2335871** (Kaivax, "Season 2
-Class Tuning Plans", 08-12) is a calendar — Aug 18 / Aug 25 / Sep 1 / Sep 22 — with no per-spec
-line. Writing either as a `Spec Class — …` highlight would feed bug-fix or calendar text into
-the outlook tally.
-
-**Lead recorded, not logged:** news 382443 (08-13) — "Patch 12.1.5 PTR Now Listed on Battle.net
-Launcher". A new cycle means a NEW forum thread (the `thread` key would need re-discovery), but
-the article states the patch itself has not been updated and no datamining is possible yet, so
-there is nothing to discover. Re-check when 12.1.5 dev notes appear.
-
-WCL zones were **not fetched by this agent** (no credentials): from `wcl-fetch/evidence.json`,
-verdict `rdps-broken` — zone 54 (PTR raid, normalized) and zone 52 (Dummy Dome rDPS) and zone
-56 (PTR M+ rDPS) all unreachable through the broken metric family, while the three RAW-DPS
-recipes landed (52: 102 rows, 1T/2T/3T/5T = 2000/662/297/2000 ranked players; 54 Heroic: 27
-rows across 8 encounters, Coiled Altar and Ula'tek at 0; 56: 27 rows, all eight dungeons at the
-2000-player pagination ceiling). Zone 57 not probed — no credentials, and it has never
-aggregated.
-
-Writeup coverage recomputed rather than read: **one** spec has no `ptr` writeup (Demonology
-Warlock, the deliberate "source reported no changes" null); **zero** specs lack a raid-scoped
-or an M+-scoped expert read.
-
-## 2026-08-15 (nightly)
-
-**A new feed entry — the first in nine days.** The dev-notes thread is closed for this cycle
-and Wowhead's RSS carried only the mirror, so the entry came off channel 3: a forum search
-surfaced **"Class Tuning Incoming – August 18"** (Linxy, topic **2336820**, 2026-08-15T00:11Z),
-the Season 2 launch tuning pass applied with the 08-18 weekly reset.
-
-- Logged **`kind: "build"`, `forumPostNumber: 1`**, citing topic 2336820 directly with the
-  Wowhead mirror (`news=382466`) alongside. It is a STANDALONE topic, not a reply in the
-  tracked `thread`, so the `thread` key is unchanged. `kind: "hotfix"` was the first shape
-  tried and is wrong twice over: the post *has* a forum citation, and validation forbids a
-  hotfix carrying `forumUrl` — which also reds `test/validate.test.mjs`'s host-allowlist test,
-  since that test sets `builds[0].forumUrl` and counts errors. **A hotfix must never be the
-  newest entry unless that test is rewritten first.**
-- **14 specs distilled**, one consolidated line each: Blood + Frost DK, Devourer DH,
-  Restoration Druid, Beast Mastery Hunter, Arcane Mage, Mistweaver Monk, Discipline + Holy
-  Priest, Assassination + Subtlety Rogue, Enhancement Shaman, Demonology Warlock, Fury Warrior.
-  Coverage gate agrees 14/14.
-- **Eight Season-2 tier sets revised → eight `spec.tierSet` updates in the same edit** (Frost
-  DK, Devourer DH, BM Hunter, Arcane Mage, Mistweaver, Subtlety, Demonology, Fury), `asOf`
-  2026-08-15, `source` = the forum topic. Clean value swaps into the stored wording where the
-  notes allow; a dated parenthetical where they do not — Arcane (the notes cut the per-stack
-  bonus 5%→3% but never restate the cap), Mistweaver (a relative "+33% activation rate" with no
-  absolute), and **Demonology**, where Blizzard's post calls the Implode effect the **2-set**
-  while the 06-18 datamine and the 07-31 notes both placed it on the 4-set: values were updated
-  where the effect is stored rather than moved on one post's say-so.
-- **The PLAYER VERSUS PLAYER section was deliberately NOT distilled.** It is the only place
-  Fire Mage, Retribution Paladin, Restoration Shaman and Destruction Warlock appear in this
-  post. Note the trap: the tier-set upkeep gate matches on spec name + set keyword and does
-  **not** look at a `PvP only` prefix, so writing the PvP-only Fire Mage 4-set line even as a
-  prefixed out-of-scope record would have fired the gate on a spec whose PvE set never changed.
-  Precedent (07-31 Restoration Druid) is to log no line at all — followed.
-- Checked and NOT logged: the Aug-13 / Aug-14 live hotfix round-ups (bug fixes + trinket and
-  item tuning, no spec tuning), "Season 2 Trinket Tuning Now Live", and the 08-12 tuning
-  roadmap (already recorded — passes 08-18, 08-25, 09-01, 09-22).
-- **"Patch 12.1.5 PTR Now Listed on Battle.net Launcher"** (08-13) still stands as the tip-off
-  that the NEXT cycle needs a new forum thread and a re-pointed `thread` key. Nothing datamined.
-- **WCL zones 54 / 52 / 56 are evidence-only on the runner** — verdict "rdps-broken", nothing
-  ingested, stored data untouched. Zone 57 is not covered by the deterministic step.
-- **Writeup coverage recomputed (not read): 39 of 40.** Demonology Warlock's null deliberate.
-- **Migration status, unchanged and NOT attempted:** 12.1 is live, Season 2 opens 08-18 (inside
-  `PHASE_FLIP_DUE` 2026-08-20); tracker still pre-flip. Owner one-shot, docs/s2-flip-runbook.md.
-- **Follow-up for the next LOCAL run:** the eight `tierSet` edits above make
-  `check-refresh --age` report **`gearing-tierset-sync`** (8 specs whose gearing-side text the
-  tracker has since corrected — the 2026-08-08 Preservation Evoker failure shape). The fix is
-  `node gearing/src/sync-tracker-fields.mjs` then `npm run gearing:build`, both under
-  `gearing/`, which the nightly publish job does not stage — so it was deliberately NOT run
-  here. `npm test` and the publish gate are unaffected; only the heartbeat alarms.
-
-## 2026-08-15 (nightly CI, headless Opus 5, single-shot; started 10:57Z — SECOND run of this UTC day)
-
-All three channels checked; **nothing new to log — `data/ptr-builds.json` stays at 16 entries,
-newest 2026-08-15.** No writeup changed, no `tierSet` changed.
-
-1. **Official dev-notes thread** `2317811.json`: `posts_count` 17, `highest_post_number` still
-   **19**, `last_posted_at` 2026-07-31T23:42:09Z. Closed for this cycle, as it has been since
-   the patch shipped.
-2. **Wowhead news RSS**: 40 items spanning 2026-08-11 → 2026-08-15T01:05Z, parsed per `<item>`
-   block (never by tag adjacency). The newest item is 10 hours old, so the window is identical
-   to the 05:34Z run's. Nothing tuning-related is unlogged: "Season 2 Class Tuning Incoming
-   with Weekly Reset - Blood DK Nerf" is the mirror of the Aug-18 post already in the feed.
-3. **Standalone blue posts** — the blue-tracker index is **Cloudflare-403 to this runner**
-   (919-byte challenge body), so discovery was done against the forum's own Discourse search
-   instead (`search.json?q=@<staff>+after:2026-08-12` for Linxy / Kaivax / Aerythlea). Newest
-   Linxy post is still topic **2336820** "Class Tuning Incoming – August 18"
-   (2026-08-15T00:11Z), already logged as feed entry #16. Newest Kaivax class content is the
-   Aug-14 hotfix topic (2336376), below.
-   *Transport note for the next run: the 403 is on `wowhead.com/blue-tracker` specifically,
-   and `search.json` answered every query in one round with no auth. Prefer it.*
-
-**Checked and deliberately NOT logged** — the Aug-14 live hotfix round-up (topic 2336376;
-post 1 was EDITED at 2026-08-15T01:00:47Z and re-posted as post 18, which is why it can look
-new). Its Classes section is **bug fixes only, with no tuning numbers**: Devastation's
-Shattering Star now correctly benefits from Mastery: Giantkiller, Arms/Fury Slayer's
-Executioner no longer double-dips, Warlock pets no longer keep re-learning Soul Leech, and a
-Demonology cooldown-manager display fix. Everything numeric in that post is trinket/item
-tuning (Coiled Fangstone +15%, Gaze of the Alnseer -20% primary stat, …) or reward plumbing.
-This matches the 05:34Z run's disposition of the Aug-13/Aug-14 round-ups; re-litigating it
-would only churn the feed.
-
-**WCL zones 54 / 52 / 56 / 57 are evidence-only for this agent** and are reported under their
-own manifest keys — see the refresh-metrics log for the `rdps-broken` verdict and the three
-RAW keys that landed.
-
-Coverage recomputed rather than read (the two-line recipe in CLAUDE.md): **39/40 writeups**,
-the single null being Demonology Warlock, which is deliberate — the source reported no
-changes, and "nothing changed" is not a verdict.
-
-**Still open from the 05:34Z run, unchanged:** those eight `tierSet` edits still leave
-`check-refresh --age` reporting `gearing-tierset-sync`. The fix is
-`node gearing/src/sync-tracker-fields.mjs` + `npm run gearing:build` under `gearing/`, which
-the nightly publish job does not stage — so it stays a LOCAL-run duty and was again not run
-here. `npm test` and the publish gate are unaffected; only the heartbeat alarms.
-
-## 2026-08-14 (nightly, CI runner)
-
-**No new build — feed unchanged at 15 entries** (newest still the 2026-08-06 launch notes).
-
-- **Official thread 2317811.json:** posts_count 17, highest_post_number still 19 (Linxy,
-  2026-07-31T23:42Z). With 12.1 shipped this thread is closed for the cycle.
-- **Wowhead news RSS** (40 items, 2026-08-11..08-14, bodies read from `content:encoded` in one
-  fetch): no PTR build, no spec tuning. Three items recorded rather than logged —
-  (a) the **Aug-13 live hotfixes** carry a Classes section that is two BUG FIXES (pet Spirit Walk
-  in Vaults of Atal'utek; Affliction's Seed of Corruption not consuming Shard Instability) on
-  LIVE realms, not PTR tuning, so nothing entered the feed — consistent with 08-12 and 08-13;
-  (b) "Season 2 Trinket Tuning Now Live" is item tuning with no spec attribution;
-  (c) **"Patch 12.1.5 PTR Now Listed on Battle.net Launcher" (08-13)** — the next cycle is
-  starting. Per the standing gotcha, a new cycle means a NEW forum thread: re-discover it via
-  Wowhead RSS and re-point the `thread` key when the first 12.1.5 development notes appear.
-  Nothing is datamined yet.
-- **Blue-tracker sweep** (US index, 20 topics, full browser header set — a UA-only GET is 403):
-  no standalone class-tuning blue post. Only "Season 2 Class Tuning Plans" (the 08-12 roadmap
-  already recorded: first pass 08-18, then 08-25 / 09-01 / 09-22) and the hotfix mirror.
-- **WCL zones 54 / 52 / 56 are evidence-only on the runner** — verdict "rdps-broken", nothing
-  ingested, stored data untouched. Zone 57 is not covered by the deterministic step and was not
-  fetched here.
-- **Writeup coverage unchanged: 39 of 40.** Demonology Warlock's null stays deliberate.
-- **Migration status, unchanged and NOT attempted:** 12.1 is live, Season 2 opens 08-18 (inside
-  `PHASE_FLIP_DUE` 2026-08-20); tracker still pre-flip. Owner one-shot, docs/s2-flip-runbook.md.
-
-## 2026-08-13 (nightly CI, 11:47Z — Opus 5; single-shot) — no new build; the only new class item is a tuning ROADMAP
-
-- **Feed unchanged at 15 entries**, newest still the 2026-08-06 launch patch notes.
-- **(1) Official thread** `2317811.json`: posts_count 17, highest_post_number still **19**
-  (Linxy, 2026-07-31T23:42Z). With 12.1 shipped the thread is effectively closed for this cycle.
-- **(2) Wowhead news RSS**: 40 items, 2026-08-08 → 08-13, bodies read from `content:encoded` in
-  a single fetch. Exactly one new class-relevant item — **"Class Tuning Roadmap for Midnight
-  Season 2"** (news=382435, 08-12 18:34) — and it is a **schedule, not tuning**: Season 2 opens
-  **August 18** with the first tuning pass that day, then **Aug 25 / Sep 1 / Sep 22**, with
-  roughly four more passes before Season 3 and hotfixes "at any time". No per-spec line ⇒ no
-  feed entry and no outlook vote. Everything else is live-service (scenario bugs, hero gear,
-  Renown rewards, sparks, housing, Coiled Isle).
-- **(3) Wowhead blue tracker** (`/blue-tracker?rss` with the FULL browser header set — a UA-only
-  fetch is CloudFront-403 and reads as an empty feed): 50 items back to 08-07; the only
-  class-relevant entries are the same roadmap mirrored as "Season 2 Class Tuning Plans". **No
-  standalone class-tuning blue post** of the Kaivax "Healer Tuning" shape.
-- No set-touching line landed ⇒ **no `spec.tierSet` upkeep due**. Writeup coverage holds at
-  **39/40**; Demonology Warlock's `ptr: null` stays deliberate ("no changes going to Season 2"
-  is not a verdict) and nothing was manufactured from tuning lines.
-- **WCL (evidence-only on the runner):** `wcl-fetch/evidence.json` verdict **"rdps-broken"** —
-  zone 54 (34 rows, 2026-07-28), zone 52 `ptrDummy` (27 specs, 2026-08-10) and zone 56 (40 rows,
-  2026-08-10) are rDPS-family and stay frozen; their raw-DPS counterparts landed via the
-  deterministic step. Zone 57 (Tidebound Grotto) is not covered by the fetch step and was not
-  fetched here.
-- **Migration status, unchanged and NOT attempted:** 12.1 is live; Blizzard's own roadmap post
-  now re-confirms **Season 2 on August 18**, inside `PHASE_FLIP_DUE` 2026-08-20. Tracker is
-  still pre-flip (`PHASES.liveSeason` "s1", `SNAPSHOT_PHASE` "12.1-ptr"). Owner one-shot; see
-  docs/s2-flip-runbook.md.
-
-- 2026-08-12 (LOCAL run, ~14:3xZ — Opus 5; scheduled residential catch-up after the 10:37Z
-  nightly). **0 new builds, verified independently rather than inherited from the nightly.**
-  Forum thread 2317811 fetched fresh (`.json`, HTTP 200, 407 KB): posts_count 17,
-  highest_post_number **19**, last_posted_at **2026-07-31** — post #19 is already logged, and
-  the development-notes thread is effectively closed now that 12.1 shipped on 08-06. Wowhead
-  news RSS (40 items) carries **no class-tuning or hotfix article since launch**; the only
-  tuning item in range is 08-07 "More Season 2 Mythic+ Dungeon Tuning — Ruby Life Pools and
-  Temple Changes", which is dungeon-side and outside this feed's per-spec scope. Feed stays at
-  **15 entries**, newest still the 08-06 launch patch notes. No set-bonus-touching highlight
-  landed, so no `tierSet.asOf` upkeep was owed. · **Zones 54/52/56/57: not re-fetched — the
-  WCL statistics-table endpoint is behind the human challenge** (see refresh-metrics entry
-  same date); stored rows and snapshots left exactly as they were.
-
-## 2026-08-12 (nightly CI, headless Opus 5, single-shot; started 11:31Z)
-
-**No new build. Feed unchanged at 15 entries, newest still the 2026-08-06 launch patch
-notes.** All three channels checked, plus the WCL zones by evidence only.
-
-1. **Official thread `2317811.json`** — `posts_count` 17, `highest_post_number` **19**,
-   newest Linxy post still 2026-07-31. Nothing after the two 07-31 posts already logged as
-   builds #18/#19.
-2. **Wowhead news RSS** — 40 items spanning 2026-08-06 → 2026-08-12, bodies read out of
-   `content:encoded` in the single fetch. **Zero class-tuning lines anywhere in the window**:
-   every item published since yesterday's run (14 of them, 08-11 17:17Z onward) scores 0
-   change-verb hits — launch cinematic, Coiled Isle, known-issues, Lairs, Season 2 dungeon
-   guides, "Class Guides Now Updated for Midnight Season 2" (a Wowhead guide-refresh
-   announcement, not tuning), Battle.net sale, sparks/trophies/lair-queue fixes.
-3. **Wowhead blue tracker** — `?rss` needs the FULL browser header set (a UA-only fetch is
-   CloudFront-403; recorded because the plain-UA attempt looks exactly like an empty feed).
-   50 items back to 08-06: **no standalone class-tuning blue post** of the Kaivax "Healer
-   Tuning" shape. Launch-adjacent posts are all non-tuning (Curse of Ula'tek now live, known
-   issues, Umbral title score finalisation, Lairs, pre-season, Twitch drops, sale).
-   **Dated fact worth having: "The Shadows Deepen: Midnight Season 2 Begins August 18"
-   (US) / 19 August (EU)** — Season 2 opens 08-18, which is inside `PHASE_FLIP_DUE`
-   2026-08-20.
-- **Tier sets:** no set-touching line landed, so no `spec.tierSet` upkeep was due.
-- **Writeups:** coverage unchanged at 39/40. Demonology Warlock stays `ptr: null`
-  deliberately — the source reported no changes, and "nothing changed" is not a verdict.
-- **WCL zones are evidence-only on the runner and none of them could land.**
-  `wcl-fetch/evidence.json` verdict "rdps-broken": zone 54 (PTR raid testing score), zone 52
-  (`ptrDummy` median rDPS) and zone 56 (PTR M+ rDPS/HPS medians) are all rDPS-family and stay
-  frozen at 2026-07-28 / 2026-08-10 / 2026-08-10. Their RAW-DPS counterparts DID land via the
-  deterministic step (see refresh-metrics) and are deliberately different statistics. Zone 57
-  (Tidebound Grotto) is not probed by the fetch step and was not fetched here.
-- **Migration status, unchanged and NOT attempted here:** 12.1 is live, Season 2 opens 08-18,
-  and the tracker is still configured pre-flip (`PHASES.liveSeason` "s1", `SNAPSHOT_PHASE`
-  "12.1-ptr", `PHASE_FLIP_DUE` 2026-08-20). Owner one-shot.
-
-## 2026-08-12 (nightly CI, headless Opus 5, single-shot; started 20:35Z — SECOND run of this UTC day)
-
-**No new build; all three Blizzard channels checked and clean.** Feed unchanged at 15 entries,
-newest still the 2026-08-06 launch patch notes.
-
-1. **Official thread** `2317811.json`: `posts_count` 17, `highest_post_number` still **19**
-   (Linxy, 2026-07-31T23:42Z). Nothing after the two 07-31 posts already logged as #18/#19.
-   With 12.1 shipped on 08-11 this thread is effectively closed for the cycle.
-2. **Wowhead news RSS**: 40 items spanning 2026-08-07..2026-08-12, bodies read out of
-   `content:encoded` in the single feed fetch. Scanned every body for change verbs
-   ("increased by / reduced by / (was / Developers' note" …): **zero hits across all 40 items**.
-   The six items new since the 11:31Z run are all live-service (Blinding Vale / Temple scenario
-   bugs, a bugged Zul'jarra contract, hero-gear and Renown-reward explainers, Vaults of
-   Atal'Utek, sparks).
-3. **Wowhead blue tracker** (`/blue-tracker?rss`, FULL browser header set — a UA-only fetch is
-   CloudFront-403 and reads as an empty feed): 50 items back to 08-06. The only two carrying
-   "hotfix" are Bob the Bartender and lair-queue grouping. **No standalone class-tuning blue
-   post** of the Kaivax "Healer Tuning" shape.
-
-No set-touching highlight landed, so no `spec.tierSet` upkeep was due.
-
-**Writeup coverage stays 39/40 and Demonology Warlock's `ptr: null` is re-confirmed, not
-inherited.** Icy Veins' Season-2 raid DPS page — now a live lane since the guides rebuilt —
-says in its own words: *"Demonology Warlock received no changes going to Season 2, with the
-only new feature added being their tier-set."* "Nothing changed" is not a verdict, so no
-writeup was manufactured.
-
-**WCL (evidence-only on the runner):** `wcl-fetch/evidence.json` verdict **"rdps-broken"** —
-zone 54 (PTR raid testing score, 34 rows), zone 52 (`ptrDummy` median rDPS, 27 specs) and zone
-56 (PTR M+ rDPS/HPS medians, 40 rows) are all rDPS-family and stay frozen at 2026-07-28 /
-2026-08-10 / 2026-08-10. Their raw-DPS counterparts landed via the deterministic step (see
-refresh-metrics). Zone 57 (Tidebound Grotto) is not covered by the fetch step and was not
-fetched here.
-
-**Migration status, unchanged and NOT attempted:** 12.1 is live, Blizzard's own post puts
-Season 2 at **August 18 (NA) / 19 August (EU)**, and the tracker is still configured pre-flip
-(`PHASES.liveSeason` "s1", `SNAPSHOT_PHASE` "12.1-ptr", `PHASE_FLIP_DUE` 2026-08-20). Owner
-one-shot; see docs/s2-flip-runbook.md.
-
-## 2026-08-11 (nightly, CI) — launch day; nine null writeups became one
-
-- **PATCH 12.1 GOES LIVE TODAY.** Wowhead: 8 hours of NA maintenance ending 15:00 PT on
-  2026-08-11; the week of 08-11 is a **PRE-SEASON**, and **Midnight Season 2 formally opens
-  2026-08-18**. So "12.1 live" and "Season 2 live" are a week apart — worth saying out loud,
-  because the tracker's era vocabulary has one `liveSeason` for both. The owner's frozen
-  forecast is already declared (`data/forecasts/frozen-2026-08-11.json` at HEAD);
-  `SNAPSHOT_PHASE` is still "12.1-ptr" against PHASE_FLIP_DUE 2026-08-20.
-- **No new build.** Thread 2317811.json highest_post_number still 19 (Linxy, 07-31). Wowhead
-  RSS (40 items, 08-04..08-10) carries launch trailer / maintenance / pre-season details /
-  background downloader / housing — no per-spec tuning line. Blue-post sweep: Discourse
-  search for @Kaivax and @Linxy since 08-05 returns housing, an outage and TBC Classic PTR
-  notes only. **Transport note: the Wowhead blue-tracker index is JS-hydrated and every RSS
-  path tried 404s** (`/blue-tracker/rss`, `/blue-tracker/rss/all`, `/blue-posts/rss`,
-  `/news/rss/blue-tracker`) — use the forum's own `search.json` instead.
-- **The writeup gap closed from 9 specs to 1, and the lane that did it was new.** Icy Veins'
-  rebuilt LIVE tier-list pages now carry per-spec **Season 2 analysis paragraphs** — exactly
-  the material the skill's lane (b) said would not exist "until launch". Today is launch.
-  Eight writeups distilled with `source` + `asOf` (page dateModified): Frost DK **Positive**
-  (burst redistributed into sustain, good raid testing), Feral Druid **Mixed** (talent buffs
-  + Apex nerfs, energy fixed, single target still weak), Guardian Druid **Mixed** (Apex
-  rework = steadier damage, but Balance Druid may take the Mark of the Wild slot),
-  Restoration Druid **Negative** (Abundance rework + Verdant Infusion no longer extending
-  HoTs "significantly lower Druid's throughput potential"), Holy Priest **Positive** (S2 mana
-  buffs ease its one stated weakness), Elemental Shaman **Positive** (damage out of
-  Ascendance into baseline; Stormbringer nerf opens Farseer), Affliction Warlock
-  **Positive** (new set + Nightfall rework, Seed applying UA at 20%), Destruction Warlock
-  **Positive** (damage buff + Conflagration of Chaos redesign).
-- **Demonology Warlock stays `ptr: null` on purpose.** Its blurb says the spec received *no*
-  changes beyond the tier set. "Nothing changed" is not one of Positive/Mixed/Negative, and
-  rule (c) is explicit: no clear verdict from the source, no writeup.
-- Worth flagging for the owner: these eight verdicts come from the SAME publisher whose
-  letters feed the next-patch forecast term. Different components, but one voice.
-- WCL zones are evidence-only from CI: zone 54/52/56 raw series landed pre-agent; the
-  rDPS/normalized cuts stay frozen under the standing `rdps-broken` verdict.
-
-## 2026-08-15 (third run of the day — nightly, headless)
-
-- **No new build.** Four channels swept: (1) dev-notes thread `2317811.json` via curl — 17
-  posts, `last_posted_at` **2026-07-31T23:42:09Z**, newest is Linxy #19, already logged; the
-  PTR thread has been quiet 15 days because the cycle ended when 12.1 shipped 08-11. (2)
-  Wowhead news RSS, 40 items, newest 2026-08-15 12:40 CDT. (3) The news INDEX
-  (`data.news.newsData`, brace-balanced from the id attribute) polled as well since it leads
-  RSS — top id 382472, nothing beyond RSS. (4) Blue tracker (`data.blueTracker.default`), 50
-  entries deduped by topic.
-- **Two candidate posts read in full and deliberately NOT logged.** The Aug-13 and Aug-14
-  Kaivax hotfixes each carry a `Classes` section that is **entirely bug fixes** — Devastation
-  Shattering Star/Mastery, Warrior Executioner double-effect, Warlock pet Soul Leech,
-  Demonology cooldown-manager, Affliction Seed of Corruption — with no tuning values; and the
-  Aug-12 "Season 2 Class Tuning Plans" is a **calendar** (Aug 18 / Aug 25 / Sep 1 / Sep 22)
-  with no per-spec lines. Writing either as `Spec Class — …` highlights would feed bug-fix
-  and schedule text into the outlook tally.
-- The feed's newest entry (2026-08-15, Linxy topic **2336820**, "Class Tuning Incoming –
-  August 18") is the Wowhead item `news=382466` and was logged by an earlier run today.
-- **Writeup coverage recomputed, not read:** exactly **one** spec has no `ptr` writeup —
-  Demonology Warlock, the deliberate "source reported no changes" null — and **every** spec
-  now carries both a raid-scoped and an M+-scoped expert read (the Brewmaster raid gap noted
-  on 08-14 is closed).
-- WCL is evidence-only here: `wcl-fetch/evidence.json` verdict `rdps-broken`, so zone 54
-  (normalized), zone 52 `ptrDummy` and zone 56 medians stay frozen; the three `*-raw` keys
-  landed pre-agent (z52 102 rows with 1T/2T/3T/5T at 2000/662/297/2000 players; z54 27 rows,
-  Coiled Altar and Ula'tek at 0 parses; z56 27 rows, all eight dungeons at the 2000 ceiling).
-  Zone 57 not probed — the agent holds no WCL access at all.
-- **SEASON STATE:** 12.1 is live and three of four tier sources self-identify as Season 2;
-  the machinery handles this by design (seasonVerified s2 → season-ahead lane + frozen
-  letters, Archon still s1 and the only live-consensus contributor). **OWNER: the one-shot
-  `SNAPSHOT_PHASE` flip is still pending — runbook date 08-18, `PHASE_FLIP_DUE` Aug 20.**
 
 ## 2026-08-18 (LOCAL run, ~14:2xZ — Opus 5; scheduled residential catch-up, ~3.5h after the nightly)
 
