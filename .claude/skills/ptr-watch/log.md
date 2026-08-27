@@ -15,6 +15,46 @@ Entries are sorted NEWEST FIRST by date. Two forms are in use ("- <date>" and "#
 they interleave, and refresh-tiers was chronologically scrambled before this prune — so sort
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
+## 2026-08-27 (local, scheduled) — the nightly's DEFERRED set line landed: the August 26 Devourer entry is logged and the gearing mirror resynced in the same commit
+
+- **The one class line the nightly could not ship is now shipped.** Tonight's nightly logged 4 of
+  the August 26 round-up's 5 class lines and deferred the fifth by design — "Fixed an issue that
+  prevented the effect of the Devourer 2-piece set bonus (Soulburst) from displaying correctly"
+  matches SET_KEYWORD, so logging it obliges a `tierSet.asOf/source` bump, and since 2026-08-23
+  `validateData` also requires `gearing/data/specs.json` to carry identical `set2/set4/asOf`. The
+  nightly's refresh artifact and publish staging are `data/` + `dist/` + skill logs, so a nightly
+  agent structurally cannot ship the gearing half; a local run holds the whole tree and can.
+- **Re-verified live before editing rather than inherited from the manifest.** Topic 2336376 fetched
+  as `.json` (HTTP 200, 33 KB); post 1, `updated_at` 2026-08-27T00:55:19Z — unchanged since the
+  nightly read it, so no August 27 section exists yet. The August 26 section was sliced by its own
+  date marker and re-counted: **5 class lines**, matching the stored 4 plus the deferred Devourer one.
+- **The trap this run had to avoid, and did:** the same post also carries a Devourer **4-piece**
+  tuning note ("performing significantly above expectations, so we're reducing its power"). Located
+  by byte offset it sits at 43730, inside the **August 18** section (42779–64717) — the launch-day
+  tuning, already historic. Only the 2-piece display fix belongs to August 26. A grep for
+  "Devourer" across the post without date-slicing would have pulled a live-looking 4-piece nerf into
+  an August 26 entry.
+- **What changed:** the 2026-08-26 entry gains the highlight and `Devourer Demon Hunter` in
+  `specsAffected` (both PREPENDED, since Demon Hunter is first in the post's own order) — 5 specs /
+  5 highlights. Devourer's `tierSet.asOf` 2026-08-15 → 2026-08-26, `source` → the hotfix topic, and a
+  dated parenthetical appended to **set2** (the piece the fix concerns); the 2-piece WORDING is
+  unchanged, per the 2026-08-20 Affliction Warlock and 2026-08-18 Elemental Shaman precedents. The
+  entry's own label was rewritten from "⚠ ONE CLASS LINE IS DELIBERATELY MISSING" to a resolved
+  "✔ LANDED" note, so the data no longer advertises a deferral that has been paid.
+- **Impact measured, not assumed:** `classifyHighlight` returns **null** on the line (a display-bug
+  fix), so it does not vote and no outlook DIRECTION moved; `npm run validate` passes, which is what
+  proves the `specsAffected` ↔ `highlights` coverage gate and the tierSet-sync gate are both
+  satisfied. `node gearing/src/sync-tracker-fields.mjs` reported exactly 1 field synced, 1 with
+  changed text.
+- **RSS + forum sweep, nothing new:** Wowhead news RSS re-fetched (HTTP 200, 187 KB, 40 items parsed
+  per `<item>` block), newest item 2026-08-27T08:00-0500 — the SAME head the nightly saw, so nothing
+  landed in the intervening half hour. **No 12.2 PTR announcement.** The Aug 26 hotfix article is
+  already logged; the Tettles/Ion interview, the Mysterious Mix Master achievement item and the RWF
+  recaps carry no class tuning.
+- **STRUCTURAL, for Riley (unchanged and worth a decision):** any set-touching hotfix puts the
+  nightly in exactly this position again — it must defer, and the deferral then blocks that hotfix's
+  line until someone runs locally. The fix would be letting the publish job stage `gearing/`, or
+  moving the mirror sync into the build.
 
 ## 2026-08-27 (nightly) — the August 26 hotfix round-up LANDED (4 of its 5 class lines); the 5th touches a SET BONUS and a nightly structurally cannot ship it
 

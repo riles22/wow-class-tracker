@@ -1209,10 +1209,10 @@
       "meleeCapable": false
     },
     "tierSet": {
-      "set2": "Harvesting 4 or more Soul Fragments with Reap has a 20% chance to cause your next Consume to be instant cast and explode in a Soulburst, dealing Cosmic damage to nearby enemies.",
+      "set2": "Harvesting 4 or more Soul Fragments with Reap has a 20% chance to cause your next Consume to be instant cast and explode in a Soulburst, dealing Cosmic damage to nearby enemies. (2026-08-26 hotfix: a bug that prevented the effect of this 2-piece bonus (Soulburst) from displaying correctly was fixed; the bonus wording itself is unchanged.)",
       "set4": "Soulburst generates 2 Soul Fragments and grants Moment of Craving. Reap deals 10% increased damage.",
-      "source": "https://us.forums.blizzard.com/en/wow/t/class-tuning-incoming-august-18/2336820",
-      "asOf": "2026-08-15"
+      "source": "https://us.forums.blizzard.com/en/wow/t/world-of-warcraft-midnight-hotfixes-august-26/2336376",
+      "asOf": "2026-08-26"
     },
     "ptrDummy": {
       "source": "warcraftlogs",

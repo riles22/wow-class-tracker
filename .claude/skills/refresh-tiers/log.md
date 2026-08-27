@@ -15,6 +15,33 @@ Entries are sorted NEWEST FIRST by date. Two forms are in use ("- <date>" and "#
 they interleave, and refresh-tiers was chronologically scrambled before this prune — so sort
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
+## 2026-08-27 (local, scheduled) — Archon's wall is NOT IP-scoped: it holds from a residential IP too, and it has changed shape from 403 to 200
+
+- **The residential retry that this local run exists to make: Archon is still walled.** The nightly
+  has recorded all 9 Archon rows unreachable for three consecutive nights, and the standing
+  hypothesis for a CI-only block is a datacenter IP. Re-tested from Riley's residential IP with the
+  full browser header set: **the wall holds**, so the datacenter-IP explanation is now ruled out.
+  Nothing merged, no snapshot bumped, stored letters byte-identical.
+- **⚠ THE SHAPE CHANGED AND IT NOW LOOKS LIKE SUCCESS — read the BODY, not the status.** The nightly
+  saw **HTTP 403** with a "Just a moment..." interstitial. Tonight every registered page returns
+  **HTTP 200** carrying a 1.3–2.5 KB `<title>Human Verification</title>` page ("One Quick Check /
+  Please confirm that you are a human and not a bot"), with `__CF$cv$params` and the
+  `/cdn-cgi/challenge-platform/` precursor script. **`__NEXT_DATA__` count is 0.** A transport check
+  keyed on status alone would now record all 9 rows as SUCCESS and stamp today's snapshot over
+  unchanged letters — which is the wowmeta failure mode (a 200 is not freshness) wearing a new hat.
+  Assert on `__NEXT_DATA__` presence, never on the status code.
+- **Measured as site-wide, not page-specific:** the same interstitial on the site ROOT
+  (`archon.gg/`, 2452 b), on the raid Heroic DPS and Healer pages, and on the M+ DPS page. The root
+  is not a tier list and has no reason to be gated on its own, which is what makes "the site is
+  walled" a measurement rather than an inference about our parse.
+- **The gate was NOT solved and must not be.** It is now an explicit interactive "I am a human and
+  not a bot" button — a bot check, which this project does not defeat by policy; the honest record
+  is "unreachable". If it persists, the decision is Riley's: wait it out, or approach Archon.
+- **Standing consequence, unchanged:** Archon is the one tier source still describing S1 ("updating
+  for 12.1"), so this wall is also holding back the consensus recomposition the anomaly gate is
+  waiting for. Icy Veins / Method / Wowhead were refreshed by tonight's nightly and were NOT
+  re-fetched here — independently regenerating what CI already produced is what makes a local push
+  unmergeable.
 
 ## 2026-08-27 (nightly) — Archon's human-verification wall holds for a second night; Wowhead moves ONE letter (Holy Priest M+ C → B) and it is corroborated by the page's own date
 

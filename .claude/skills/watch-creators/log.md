@@ -15,6 +15,33 @@ Entries are sorted NEWEST FIRST by date. Two forms are in use ("- <date>" and "#
 they interleave, and refresh-tiers was chronologically scrambled before this prune — so sort
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
+## 2026-08-27 (local, scheduled) — the caption 429 is BACK after two clear days; queue held at 3, nothing distilled
+
+- **The residential yt-dlp caption lane is 429-blocked again.** All three queued ids attempted once
+  each at the pinned version with the documented flags
+  (`--extractor-args "youtube:player_client=android" --write-auto-subs --sub-langs en --sub-format json3`):
+  `A7ZMRYQALHw`, `inGFY23zA-c`, `wgwLOufz5r8` — every one `ERROR: Unable to download video subtitles
+  for 'en': HTTP Error 429: Too Many Requests`. Stopped there; no retry loop, per the skill.
+- **Same signature as the 2026-08-23/24 flag, not the datacenter bot wall.** Metadata resolved
+  normally on all three (formats listed, `Downloading subtitles: en` reached) and ONLY the
+  `timedtext` request 429s — which is the IP-scoped abuse flag, diagnosed 08-24. It had cleared on
+  **08-25** and was still clear on **08-26** ("one try, no 429"); it has returned on **08-27**. Two
+  clear days then a relapse means the 08-25 clearing was a remission, not a fix, and the residential
+  lane cannot be treated as a reliable catch-up route.
+- **Not escalated to the authenticated fallback, and that is the rule rather than a judgement
+  call.** The owner-approved lane needs a `cookies.txt` Riley exports himself
+  (`--cookies-from-browser chrome` is dead on this machine — App-Bound Encryption, yt-dlp issue
+  10927), and browser cookie stores are never read directly. This was an unattended scheduled run
+  with no owner present, so there was nothing to escalate to.
+- **Queue deliberately UNCHANGED at 3** (`videos[]` still `A7ZMRYQALHw` / `inGFY23zA-c` /
+  `wgwLOufz5r8`). Nothing was moved to `skipped[]`: a skip entry is a DURABLE verified claim that the
+  transcript was read and held nothing, and a transport 429 is not that. They drain through Supadata
+  in the next nightly, which is a different network path and unaffected by this flag.
+- **No unfiltered breadth sweep this run, on purpose.** The local run's breadth privilege is that
+  yt-dlp is free — with captions 429ing, a wider sweep yields no transcripts and therefore no takes,
+  and the only thing it could produce is more QUEUE entries, which spend the nightly's 100/month
+  Supadata budget on the 27th. The nightly already queued the three highest-value candidates with
+  `media:description` evidence. `takes` stays 553, `metaNotes` 374, `seen[]` 549, `skipped[]` 413.
 
 ## 2026-08-27 (nightly) — all 44 feeds polled clean; 194 unseen in-cycle videos, 3 queued; a NEW byline-firewall finding covering 23 live takes
 
