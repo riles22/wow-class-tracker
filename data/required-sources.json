@@ -140,7 +140,7 @@
     },
     {
       "key": "archon-tiers",
-      "label": "Archon tier lists (raid throughput + M+ score, all roles)",
+      "label": "Archon tier lists (raid throughput + M+ score, all roles) ARCHON WALL (opened 2026-08-25/26, held three consecutive nights as of 2026-08-27): every archon.gg application route is behind a site-wide human-verification interstitial, so all nine archon-* rows are expected to go red together. Three measured facts that a future reader needs. (1) It is NOT IP-scoped — re-tested from a residential IP on 2026-08-27, the wall held, so the datacenter-IP hypothesis is dead. (2) ITS SHAPE CHANGED FROM 403 TO 200: pages now return HTTP 200 carrying a ~2.5 KB \"Human Verification\" body with __NEXT_DATA__ count 0, so a status-only transport check would record SUCCESS and stamp a fresh snapshot over unchanged letters — assert on __NEXT_DATA__ presence, never on the status code. (3) There is no sanctioned machine lane: Archon is an RPGLogs property and publishes no Archon API (the \"API Documentation\" it links is Warcraft Logs’ own), and the Next.js data route /_next/data/<buildId>/... returns 403 {\"error\":\"Human verification required\"} — a content-type-aware, application-level refusal, i.e. deliberate rather than a default Cloudflare toggle. DO NOT attempt to solve, replay or automate past the check, and do NOT backfill these values from Warcraft Logs: Archon’s letters are Archon’s own tiering and its numbers are Archon’s own percentile cuts, so publishing ours under the archon source id would fabricate the source (hard rule 3). The honest behaviour is the one already built — consensusFor drops to Icy Veins + Method + Wowhead and the toolbar reports \"consensus of 3\". Clears if the wall lifts or an access agreement is reached.",
       "maxAgeDays": 4,
       "date": {
         "type": "pages",
@@ -155,7 +155,7 @@
     },
     {
       "key": "archon-encounters",
-      "label": "Archon per-boss / per-dungeon tiers",
+      "label": "Archon per-boss / per-dungeon tiers ARCHON WALL: see archon-tiers for the measured detail — same site-wide human-verification wall, upstream and expected, red together with the other archon-* rows. Assert on __NEXT_DATA__ presence, not the status code (the wall now returns 200). Do not attempt to defeat the check and do not backfill from Warcraft Logs (hard rule 3).",
       "maxAgeDays": 10,
       "date": {
         "type": "pages",
@@ -169,7 +169,7 @@
     },
     {
       "key": "archon-survivability",
-      "label": "Archon raid survivability tiers",
+      "label": "Archon raid survivability tiers ARCHON WALL: see archon-tiers for the measured detail — same site-wide human-verification wall, upstream and expected, red together with the other archon-* rows. Assert on __NEXT_DATA__ presence, not the status code (the wall now returns 200). Do not attempt to defeat the check and do not backfill from Warcraft Logs (hard rule 3).",
       "maxAgeDays": 10,
       "date": {
         "type": "pages",
@@ -183,7 +183,7 @@
     },
     {
       "key": "archon-metrics",
-      "label": "Archon 95th-pct DPS (raid — DPS + tank rows, from specRankingsSection; HPS and M+ score are their own rows). The 2026-08-21 standing red (S2 rebuild served 0 rows) RESOLVED 2026-08-25 in a reviewed local run: the repopulated S2 tables were merged wholesale, and Fire Mage — which has no S2 row because nobody logs it at Mythic — had its S1 rows DROPPED rather than held, so the rank pool stays season-uniform (validate.mjs now gates that shape). Fire Mage reads pending until Archon publishes it; that is data, not a failure.",
+      "label": "Archon 95th-pct DPS (raid — DPS + tank rows, from specRankingsSection; HPS and M+ score are their own rows). The 2026-08-21 standing red (S2 rebuild served 0 rows) RESOLVED 2026-08-25 in a reviewed local run: the repopulated S2 tables were merged wholesale, and Fire Mage — which has no S2 row because nobody logs it at Mythic — had its S1 rows DROPPED rather than held, so the rank pool stays season-uniform (validate.mjs now gates that shape). Fire Mage reads pending until Archon publishes it; that is data, not a failure. ARCHON WALL: see archon-tiers for the measured detail — same site-wide human-verification wall, upstream and expected, red together with the other archon-* rows. Assert on __NEXT_DATA__ presence, not the status code (the wall now returns 200). Do not attempt to defeat the check and do not backfill from Warcraft Logs (hard rule 3).",
       "maxAgeDays": 5,
       "date": {
         "type": "metrics",
@@ -199,7 +199,7 @@
     },
     {
       "key": "archon-hps",
-      "label": "Archon 95th-pct HPS (raid, healers). The 2026-08-21 standing red (healer page served 0 rows) RESOLVED 2026-08-24/25: the S2 healer table repopulated, all 7 rows merged by the 08-25 nightly and re-upserted from the same 08-25T12:00 dataset as archon-metrics in the follow-up local run. Kept as its own row per the split-row rule.",
+      "label": "Archon 95th-pct HPS (raid, healers). The 2026-08-21 standing red (healer page served 0 rows) RESOLVED 2026-08-24/25: the S2 healer table repopulated, all 7 rows merged by the 08-25 nightly and re-upserted from the same 08-25T12:00 dataset as archon-metrics in the follow-up local run. Kept as its own row per the split-row rule. ARCHON WALL: see archon-tiers for the measured detail — same site-wide human-verification wall, upstream and expected, red together with the other archon-* rows. Assert on __NEXT_DATA__ presence, not the status code (the wall now returns 200). Do not attempt to defeat the check and do not backfill from Warcraft Logs (hard rule 3).",
       "maxAgeDays": 5,
       "date": {
         "type": "metrics",
@@ -215,7 +215,7 @@
     },
     {
       "key": "archon-heroic-dps",
-      "label": "Archon 95th-pct DPS, HEROIC raid (DPS + tank rows). Added 2026-08-25 with the Heroic lane (owner decision): Heroic is the dense early-season series (~170x the Mythic parses, all 27 DPS specs incl. Fire Mage) and, since the same change, the basis of archon's raid LETTERS. Same specRankingsSection recipe as archon-metrics, /heroic/ path. Split from the Mythic row so either difficulty can stall visibly on its own.",
+      "label": "Archon 95th-pct DPS, HEROIC raid (DPS + tank rows). Added 2026-08-25 with the Heroic lane (owner decision): Heroic is the dense early-season series (~170x the Mythic parses, all 27 DPS specs incl. Fire Mage) and, since the same change, the basis of archon's raid LETTERS. Same specRankingsSection recipe as archon-metrics, /heroic/ path. Split from the Mythic row so either difficulty can stall visibly on its own. ARCHON WALL: see archon-tiers for the measured detail — same site-wide human-verification wall, upstream and expected, red together with the other archon-* rows. Assert on __NEXT_DATA__ presence, not the status code (the wall now returns 200). Do not attempt to defeat the check and do not backfill from Warcraft Logs (hard rule 3).",
       "maxAgeDays": 5,
       "date": {
         "type": "metrics",
@@ -231,7 +231,7 @@
     },
     {
       "key": "archon-heroic-hps",
-      "label": "Archon 95th-pct HPS, HEROIC raid (healers). Added 2026-08-25 with the Heroic lane. Kept as its own row per the split-row rule (archon-hps precedent).",
+      "label": "Archon 95th-pct HPS, HEROIC raid (healers). Added 2026-08-25 with the Heroic lane. Kept as its own row per the split-row rule (archon-hps precedent). ARCHON WALL: see archon-tiers for the measured detail — same site-wide human-verification wall, upstream and expected, red together with the other archon-* rows. Assert on __NEXT_DATA__ presence, not the status code (the wall now returns 200). Do not attempt to defeat the check and do not backfill from Warcraft Logs (hard rule 3).",
       "maxAgeDays": 5,
       "date": {
         "type": "metrics",
@@ -247,7 +247,7 @@
     },
     {
       "key": "archon-mplus-score",
-      "label": "Archon M+ score (95th pct)",
+      "label": "Archon M+ score (95th pct) ARCHON WALL: see archon-tiers for the measured detail — same site-wide human-verification wall, upstream and expected, red together with the other archon-* rows. Assert on __NEXT_DATA__ presence, not the status code (the wall now returns 200). Do not attempt to defeat the check and do not backfill from Warcraft Logs (hard rule 3).",
       "maxAgeDays": 5,
       "date": {
         "type": "metrics",
@@ -263,7 +263,7 @@
     },
     {
       "key": "archon-popularity",
-      "label": "Archon popularity % (raid + M+, from specRankingsSection — the series a 07-21 recipe-navigation error silently stalled). The 2026-08-21 standing red RESOLVED 2026-08-25: the raid DPS group merged once the S2 tables repopulated, with Fire Mage's leftover S1 share DROPPED rather than held (a published sum-to-100 group cannot carry a stale extra share — it summed to 101.5). All role groups sum to 100.0 again; 79 rows, Fire Mage pending upstream.",
+      "label": "Archon popularity % (raid + M+, from specRankingsSection — the series a 07-21 recipe-navigation error silently stalled). The 2026-08-21 standing red RESOLVED 2026-08-25: the raid DPS group merged once the S2 tables repopulated, with Fire Mage's leftover S1 share DROPPED rather than held (a published sum-to-100 group cannot carry a stale extra share — it summed to 101.5). All role groups sum to 100.0 again; 79 rows, Fire Mage pending upstream. ARCHON WALL: see archon-tiers for the measured detail — same site-wide human-verification wall, upstream and expected, red together with the other archon-* rows. Assert on __NEXT_DATA__ presence, not the status code (the wall now returns 200). Do not attempt to defeat the check and do not backfill from Warcraft Logs (hard rule 3).",
       "maxAgeDays": 5,
       "date": {
         "type": "metrics",
@@ -346,7 +346,7 @@
     },
     {
       "key": "bloodmallet",
-      "label": "Bloodmallet target-count sims / fight profiles",
+      "label": "Bloodmallet target-count sims / fight profiles. OWNER-ACCEPTED STANDING RED (2026-08-28, Riley): a DELIBERATE HOLD, not a fetch failure and no longer \"upstream has not re-simmed\" — the reason changed on 2026-08-27. All 27 DPS charts are requested each run at talent_target_scaling/castingpatchwerk with retries; 19 return real payloads carrying simc_settings.tier = MID2 (read off the chart, never hard-coded; chart timestamp 2026-08-26) against 26 stored MID1 profiles at 2026-07-08/07-15, and 8 still return the 76-byte error body (Havoc, Balance, Feral, Augmentation, Devastation, Retribution, Arms, Fury). Merging is blocked three independent ways, any one sufficient: SIM_TIER_REQUIRED plus the tier-uniformity invariant forbid a pool holding both MID1 and MID2; MID2 measures ~1.79x MID1 with a spec- and target-count-dependent ratio, so the pool is not comparable on the scale-invariant percentile axis fightLabels computes, and merging the 19 alone would hand the strong labels to whichever specs happened to be re-simmed; and adopting only the 19 drops 26 -> 19 rows, past maxRowDropPct 0.25. fightProfile.asOf stays each chart’s OWN timestamp rather than the run date, so the coverage date correctly does not move and the staleness IS the honest signal. Do not ack it away and do not raise maxAgeDays; it clears when the remaining 8 specs re-sim and MID2 is adopted WHOLESALE via the human value_move_ack (64 of 156 sim rows move >60%). Bloodmallet and simulationcraft are blocked on substantially the same specs and are expected to clear together.",
       "maxAgeDays": 5,
       "date": {
         "type": "fightProfiles",
@@ -360,7 +360,7 @@
     },
     {
       "key": "simulationcraft",
-      "label": "SimC nightly MID1 raid report. OWNER-ACCEPTED STANDING RED (2026-08-21, Riley): MID2_Raid now EXISTS upstream but is not adoptable — its header self-identifies 12.1.0.69382 PTR where MID1's reads Live, and its \"DPS Ranking:\" block is a PARTIAL run of ~32 profiles covering roughly half the DPS roster. Holding MID1 is the honest call, and the red is the signal that upstream has not shipped a complete Live MID2 (Bloodmallet precedent). Do not ack it away and do not raise maxAgeDays; it clears when a complete Live MID2 report lands.",
+      "label": "SimC nightly MID1 raid report. OWNER-ACCEPTED STANDING RED (2026-08-21, Riley; reason RESTATED 2026-08-28 — the original PTR-vs-Live objection is SUPERSEDED and was measurably false by 08-27, so do not read it as current). MID2_Raid is now LIVE, not PTR: its header reads 12.1.0.69497 Live (hotfix 2026-08-26/69497, git build HEAD 32146c2cc6) and it is a COMPLETE run (text and html reports emitted) carrying a real \"DPS Ranking:\" block of 38 profiles — while MID1 has itself become the 12.0.7 artefact (12.0.7.68974 Live, hotfix 2026-08-06), so holding MID1 is now holding an OLD-PATCH report rather than a stale 12.1 one. What blocks adoption is COVERAGE: the 38 profiles map to only 19 of the 27 DPS specs (absent: Devourer DH, Balance, Feral, Augmentation, Devastation, Retribution, Arms, Fury), so wholesale adoption drops 26 -> 19 stored rows (27%, past maxRowDropPct 0.25), and merging only the 19 would leave seven 12.0.7 values standing under the same season-agnostic name \"SimC nightly Patchwerk DPS\" whose ranks are pooled across the family. Adoption must be WHOLESALE and needs the human value_move_ack (MID2 runs ~2x MID1 on the overlap; the gate genuinely fires). Do not ack it away and do not raise maxAgeDays; it clears when upstream covers all 27 specs. Note this red will NOT clear by itself even if MID2 completes, because the MID1 fallback is no longer a stable anchor.",
       "maxAgeDays": 10,
       "date": {
         "type": "metrics",
