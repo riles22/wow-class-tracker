@@ -16,6 +16,47 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-28 (local, scheduled) — the August 27 hotfix round-up lands: 6 class lines, 3 of them class-wide on NESTING, and a misclassified Blur line that structurally cannot vote
+
+- **One new feed entry: `2026-08-27`, `kind: "hotfix"`.** It postdates the 2026-08-27 nightly
+  (which started 20:43Z; the Wowhead mirror published 2026-08-28T01:30Z and the canonical post was
+  edited 2026-08-28T00:59:15Z), so no nightly had seen it, and today's 10:37Z nightly has not run —
+  GitHub's scheduler is badly delayed right now (yesterday's fired at 20:43Z, ten hours late).
+- **Canonical source read directly, per the 08-25/08-26 precedent:** Kaivax's running hotfix blue
+  post, us.forums topic 2336376, title rolled to "World of Warcraft: Midnight Hotfixes - August 27",
+  post 1 edited 2026-08-28T00:59:15Z. Read with `<ul>` nesting INTACT.
+- **The nesting settled THREE attributions, not one.** The flattened Wowhead mirror renders two of
+  them as "EvokerFlameshaper:" and "RogueDeathstalker:", which reads as spec scoping and is not:
+  · Blur sits under a bare **Demon Hunter** heading with no spec beneath → class-wide.
+  · Flameshaper sits under **Evoker**, one level SHALLOWER than the Preservation block → class-wide.
+  · Deathstalker sits under **Rogue**, which has no spec block at all → class-wide.
+  Flameshaper and Deathstalker are HERO talents spanning two specs each (Devastation/Preservation,
+  Assassination/Subtlety), so pinning either to one spec would be inference the post does not make.
+- **⚠ The Blur line classifies NERF and the classification is WRONG in direction.** The fix removes
+  a PvP adjustment that was leaking into PvE and explicitly restores Blur's PvE damage reduction
+  "to previous intended values" — a defensive restoration. It reaches no tally, and that is
+  STRUCTURAL rather than lucky: `outlookFor` scores only highlights beginning "<Spec> <Class> ",
+  so class-wide lines are excluded from scoring by construction while still reaching the drawer's
+  fact list via `specBuildChanges`. Confirmed empirically, not just by reading the code — outlook
+  captured for all eleven specs across the three affected classes before and after: direction,
+  source and buff/nerf tallies identical on all eleven, with the Demon Hunter specs holding at
+  Havoc +7/−1, Devourer +2/−2, Vengeance +4/−0. Only build MEMBERSHIP moved (N of 21 → N+1 of 22),
+  which is the ordinary bookkeeping of adding a build they are all named in.
+  The first draft of the entry label overclaimed this as "all eleven unchanged"; it was corrected
+  to name the membership move before commit.
+- **No set bonus is touched**, so no `spec.tierSet` bump and no gearing mirror resync — this
+  round-up does not repeat the split the 2026-08-26 entry documents.
+- **12.2 PTR: still nothing.** Swept all 40 RSS items, titles and `content:encoded` bodies, for
+  12.2 / PTR / "next patch". Two hits, both design commentary in Ion Hazzikostas interviews: the
+  Psybear one names "a plan for Patch 12.1.5, 12.2, and well beyond" as release-cadence talk, and
+  the Tettles one discusses PTR-testing philosophy in general. Neither is an announcement. The
+  between-cycles posture is unchanged and the dormant zone sweeps stayed dormant.
+- **RSS parser trap, hit and recorded:** the documented `<title>`-then-`<link>` ordering is
+  right, but a first pass that built the tag regex through a shell `node -e` string returned 40
+  items with every field EMPTY — which looks exactly like a dead feed rather than a quoting fault.
+  Moving the same regex into a `.mjs` file fixed it with no logic change. Prove the extractor on a
+  known-positive item before believing an empty result; this is the third shape of that lesson.
+
 ## 2026-08-27 (nightly) — nothing new in any live lane; the dev-notes thread is still at post #19 and no 12.2 PTR has been announced
 
 **Builds found: 0. `data/ptr-builds.json` untouched.** Newest entry stays the 2026-08-26 live

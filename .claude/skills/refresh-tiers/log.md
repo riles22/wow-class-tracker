@@ -16,6 +16,29 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-28 (local, scheduled) — Archon's wall holds for a FOURTH night and has reverted from 200 to 403; no source re-fetched
+
+- **Archon: still walled, and the shape flipped back.** Probed the site root plus four registered
+  pages with the full browser header set: all five **HTTP 403**, 5.7–6.0 KB, `<title>Just a
+  moment...`, `__NEXT_DATA__` count **0** on every one. That is the 08-25/08-26 Cloudflare
+  interstitial again, NOT the HTTP 200 "Human Verification / One Quick Check" page the 08-27 local
+  run measured. So the wall oscillates in presentation between nights while remaining continuously
+  impassable — which is the strongest argument yet for the standing rule to **assert on
+  `__NEXT_DATA__` presence, never on the status code**: across four nights this source has
+  returned 403 and 200 for the same underlying block.
+- **Root included in the probe**, as before: the root is not a tier list and has no reason to be
+  gated on its own, so its interstitial makes "the site is walled" a measurement rather than an
+  inference about our parse.
+- **Not solved, and must not be.** It is a bot check; this project does not defeat those by policy.
+  The honest record stays "unreachable". Nothing merged, no snapshot stamped, stored letters
+  byte-identical. Note `archon-tiers` sits at 3d against a 4d max and will go red tomorrow on its
+  own — that red is the honest signal, and it is Riley's call whether to wait it out or approach
+  Archon.
+- **Icy Veins / Method / Wowhead deliberately NOT re-fetched.** They were refreshed by the
+  2026-08-27 nightly (1d, against a 4d max) and independently regenerating what CI already produced
+  is what makes a local push unmergeable — the more so today, with GitHub's scheduler running hours
+  late and today's nightly still pending. Same call as 08-27, same reason.
+
 ## 2026-08-27 (nightly) — three tier sources fetched, parsed and reconciled; ZERO letters moved anywhere, and Archon's wall holds for a third night
 
 **Merged: 0 rows. Nothing to merge — all 240 letters parsed identical to stored.** No

@@ -16,6 +16,34 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-28 (local, scheduled) — the caption 429 is on its SECOND consecutive day; queue held at 5, nothing distilled
+
+**Videos processed: 0. Takes added: 0. MetaNotes added: 0. Queue: 5 → 5 (unchanged).**
+
+- **One caption probe, one 429, stopped there** — the skill's rule, not a judgement call.
+  `x429ozbMXnQ` (izen, "Season 2 Mythic+ Meta") at the pinned yt-dlp with the documented flags:
+  metadata resolved normally (formats listed, "Downloading subtitles: en" reached) and ONLY the
+  `timedtext` request failed, `HTTP Error 429: Too Many Requests`. That is the IP-scoped abuse-flag
+  signature diagnosed 08-24, not the datacenter bot wall and not transient throttling. No retry loop.
+- **This is day two of the current relapse** (clear 08-25 and 08-26, back 08-27, still blocked
+  08-28). The 08-27 reading that the 08-25 clearing was a remission rather than a fix now has a
+  second day behind it: the residential lane cannot be treated as a reliable catch-up route.
+- **The authenticated fallback was NOT usable this run, and for a new reason worth recording.**
+  A `cookies.txt` Riley exported on 08-24 is still on disk, so unlike 08-27 the file existed — but
+  this session's permission layer refused the read, and working around a credential-access denial
+  is not something a scheduled run should do. Recording it so the next run knows the blocker was
+  the harness, not a missing file. If Riley wants the authenticated lane available to scheduled
+  runs, that needs an explicit allowance rather than an agent finding a way round.
+- **Queue deliberately UNCHANGED at 5** (`x429ozbMXnQ`, `ps4If_WbBPQ`, `rGk2fajsQ1g`,
+  `l1qKWWYZGZE`, `if8kxRXBzSA`). Nothing moved to `skipped[]`: a skip is a DURABLE claim that the
+  transcript was read and held nothing, and a transport 429 is not that. They drain through
+  Supadata on the next nightly — a different network path, unaffected by this flag, and proven so
+  by the 08-27 nightly which fetched 3 of 3 while this lane was blocked.
+- **No unfiltered breadth sweep, on purpose** (the 08-27 reasoning, unchanged): the local run's
+  breadth privilege is that yt-dlp is free, and with captions 429ing a wider sweep yields no
+  transcripts and therefore no takes — the only thing it could produce is more QUEUE entries, which
+  spend the nightly's 100/month Supadata budget. Counts stand: `seen[]` 549, `skipped[]` 413.
+
 ## 2026-08-27 (nightly) — the Supadata lane came back clean and all three queued videos distilled: 7 takes, and Kalamazi's post-buff Warlock read is a real reversal
 
 **Videos processed: 3 (all three from `transcript-fetch/`, verdict `ok`, 3 requested / 3
