@@ -2,39 +2,11 @@
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
   "videos": [
     {
-      "id": "x429ozbMXnQ",
-      "creator": "izen (Izenhart)",
-      "title": "Season 2 Mythic+ Meta | Best Performing Specs and...Surprises",
-      "published": "2026-08-27",
-      "queuedAt": "2026-08-27"
-    },
-    {
-      "id": "ps4If_WbBPQ",
-      "creator": "Musguete",
-      "title": "Outlaw feels INSANE in Season 2! 12.1 Guide",
-      "published": "2026-08-27",
-      "queuedAt": "2026-08-27"
-    },
-    {
-      "id": "rGk2fajsQ1g",
-      "creator": "AutomaticJak",
-      "title": "Disc Priest in 60 Seconds Midnight Season 2",
-      "published": "2026-08-26",
-      "queuedAt": "2026-08-27"
-    },
-    {
-      "id": "l1qKWWYZGZE",
-      "creator": "AutomaticJak",
-      "title": "This NEW Holy Priest Build Dominates",
-      "published": "2026-08-26",
-      "queuedAt": "2026-08-27"
-    },
-    {
-      "id": "if8kxRXBzSA",
-      "creator": "Critcake",
-      "title": "+16 Murder Row - Slayer Arms Warrior - Midnight M+ Season 2 (week 1)",
-      "published": "2026-08-25",
-      "queuedAt": "2026-08-27"
+      "id": "n0H4JFE6Suc",
+      "creator": "Obli",
+      "title": "What did the buffs do for Frost DK?",
+      "published": "2026-08-28",
+      "queuedAt": "2026-08-28"
     }
   ],
   "skipped": [
@@ -2928,6 +2900,20 @@
       "title": "Mistweaver 12.1 Raid Guide",
       "reason": "Transcript verified by yt-dlp (169 caption events, 5m04s) and it is a short raid how-to: the raid spell priority versus the keys one, melee-versus-healer mechanic assignment, stat priority, the revival/restoral swap, and the Yulon window sequence. No comparative spec-strength read at all. The one strength-adjacent line is that Revival is extremely weak right now and not worth assigning as a throughput cooldown, which is an ability-level claim about a single spell, not a read on where Mistweaver stands.",
       "verifiedAt": "2026-08-26"
+    },
+    {
+      "id": "rGk2fajsQ1g",
+      "creator": "AutomaticJak",
+      "title": "Disc Priest in 60 Seconds Midnight Season 2",
+      "reason": "Transcript pre-fetched by the deterministic Supadata step (32 caption chunks, 59 seconds) and it is a pure how-to at its stated length: always use Mind Blast for the guaranteed Void Shield, Penance for the tier set's cooldown reduction, Shadow Mend's mana cost and Surge of Light discount, opening trash pulls with Shadow Word: Pain and spreading it with Penance, and being aggressive with Pain Suppression because Protector of the Frail refunds its cooldown off Void Shields. No comparative spec-strength read of any kind, and he closes by pointing at his own longer guide. A Discipline read from this creator IS on file from the same window — the raid one distilled from l1qKWWYZGZE the same night — so nothing is lost by skipping this one.",
+      "verifiedAt": "2026-08-28"
+    },
+    {
+      "id": "if8kxRXBzSA",
+      "creator": "Critcake",
+      "title": "+16 Murder Row - Slayer Arms Warrior - Midnight M+ Season 2 (week 1)",
+      "reason": "Transcript pre-fetched by the deterministic Supadata step (201 caption chunks, 31m20s) and it is a commentated pug key run: gear and crest spend at the end of week one, a standard Slayer Arms build he says he will keep, then in-run callouts, mistakes and chat banter. No comparative spec-strength read survives the test. The three strength-adjacent lines all fail it — \"do I like arms this season? I love slayer arms\" is enjoyment rather than placement, \"it is not the greatest fight, but Arms is very good on it\" is a fight artifact on one boss, and the tank-meta and Windwalker remarks are answers to chat about specs outside his declared Arms/Fury scope. He does flag intent to test Fury once the four-piece lands, which is a lead for a later video rather than a take.",
+      "verifiedAt": "2026-08-28"
     }
   ],
   "seen": [

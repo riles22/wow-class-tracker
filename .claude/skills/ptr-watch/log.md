@@ -16,6 +16,50 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-28 (nightly, CI runner) — every live lane polled, 0 new builds; the August 27 round-up was already logged this morning
+
+- **Between-cycles posture unchanged.** `PHASES.ptr` is null, no 12.2 PTR announcement in any
+  lane, so the four dormant WCL PTR zone sweeps (54 / 52 / 56 / 57) were correctly skipped and
+  no manifest row was invented for them.
+- **(a) Wowhead news RSS** — HTTP 200, 148 KB, 40 items parsed per `<item>` block (never by tag
+  adjacency), window 2026-08-25 through 2026-08-28 15:16 CDT. The only class-tuning item in the
+  window is **news=382657 "Vashnik LFR Nerf - Patch 12.1 Hotfixes for August 27th"**, which is
+  ALREADY the newest entry in `data/ptr-builds.json` — landed by this morning's local run with
+  all six class lines and the three class-wide attributions (Blur, Flameshaper, Deathstalker)
+  read off the post's heading structure. Its content was re-read from `<content:encoded>`
+  tonight and matches the logged entry line for line, so nothing was added.
+- **(b) News INDEX polled as well**, because it LEADS the RSS within a run: `data.news.newsData`
+  brace-balanced from its `id` attribute, 20 posts, top id 382668 at 2026-08-28 15:16 — nothing
+  the RSS lacked, and nothing class-related after 382657.
+- **(c) Blue-tracker index** `data.blueTracker.default`, 50 entries. The newest class-relevant
+  topic is still Kaivax's 27 August hotfix (topic 2336376, posted 19:59), already this feed's
+  citation. Everything above it is the Black Temple / WoW Weekly / BCC anniversary lane plus a
+  "Raid Bonus Roll Update" (topic 2341990), none of which carries a class line.
+- **(d) The canonical running hotfix post was read DIRECTLY, not inferred from its tracker
+  timestamp**, since it is edited in place: `2336376.json`, title still "…Hotfixes - August
+  27", post 1 `updated_at` **2026-08-28T00:59:15Z** — the same edit the local run distilled —
+  and its dated section headings run August 27, 26, 25, 21, 20, 19, 18, 17, 14, 13. **There is
+  no August 28 section.** The literal string "August 28" does not appear in the post.
+- **(e) The 12.1 development-notes thread 2317811** is at post **#19**, last posted
+  2026-07-31T23:42Z: unchanged, and the closed cycle's expected silence rather than a lost
+  thread. The rediscovery gotcha stays suspended.
+- **Also checked: topic 2335871 "Season 2 Class Tuning Plans"**, now 190 posts but with Kaivax
+  present only at post #1 (unedited since 2026-08-12) — the whole tail is player replies. Its
+  roadmap still points at a pass after the first full week of live Season 2 data, so a "Class
+  Tuning Incoming" post remains plausible in the next few days; izen independently says at the
+  end of tonight's distilled video that another round of balance tuning lands at the end of
+  this week. Nothing to log until it exists.
+- **Correctly NOT logged from the same window:** "Mythic Coiled Altar Nerfed - Race to World
+  First" (news=382658) — encounter tuning, its five lines all Veil of Twilight / Malacrass /
+  Zul'jan / Spiteful Soulcoiler / Mass Dreadmarch; the Vashnik LFR and Normal difficulty
+  numbers that headline 382657's own mirror; and the two Ion Hazzikostas interviews. No
+  set-bonus text was touched anywhere, so no `spec.tierSet` needed advancing and the gearing
+  mirror needed no resync — which also means the nightly did not hit the structural bind the
+  08-26 entry documents.
+- **Writeup coverage** recomputed rather than remembered: exactly one spec has no `ptr`
+  writeup, Demonology Warlock, whose null is the deliberate "the source reported no changes"
+  case. Nothing to fill.
+
 ## 2026-08-28 (local, scheduled) — the August 27 hotfix round-up lands: 6 class lines, 3 of them class-wide on NESTING, and a misclassified Blur line that structurally cannot vote
 
 - **One new feed entry: `2026-08-27`, `kind: "hotfix"`.** It postdates the 2026-08-27 nightly

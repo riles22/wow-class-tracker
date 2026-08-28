@@ -5772,7 +5772,8 @@
       "bracket": "raid",
       "patchContext": "Season 2 live — first-week raid read on Discipline, race-to-world-first framing",
       "claim": "He still expects Discipline in the race to world first and in high-end raid generally, and says that at roughly the top 50 to top 100 world level there will be a lot of Discipline being played. The asset he leans on is damage: he acknowledges the very heavy damage nerfs the spec took, but says it is still doing around 45k at 308 item level, which he puts close to tank damage, and expects Power Infusion stacked on top to raise that further. He also notes Entropic Rift was buffed, making two-target encounters where the Rift can hit both targets particularly valuable. The mixed half is the recommendation he attaches: because Void Weaver demands standing still and casting a lot of Void Blast to yield its value, he advises players outside that top bracket to play Holy in raid instead, and says his own plan is to play Discipline in Mythic while continuing to build the setup around it.",
-      "url": "https://youtu.be/PS-C4w5vJz8?t=357"
+      "url": "https://youtu.be/PS-C4w5vJz8?t=357",
+      "superseded": true
     },
     {
       "class": "Priest",
@@ -5783,7 +5784,8 @@
       "bracket": "raid",
       "patchContext": "Season 2 live — first-week raid read on Holy Priest, a clear upgrade on the launch tier list where he left it out of his predicted race comp",
       "claim": "His raid read on Holy Priest has moved up sharply from his launch tier list, where he excluded it from his predicted race composition. He reports that across the opening Venomous Abyss raid week he has been seeing only the occasional Discipline Priest but a great many Holy Priests putting out very large amounts of healing. His recommendation for anyone below roughly the top 50 to top 100 world is now to play Holy and, in his words, chill in raids — citing ease of access and the cheat-death effect, and describing it as a spec you can simply push buttons on without the setup Discipline demands. On the numbers he singles out Prompt Prognosis, which he estimates at nearly 100k per cast already and expects to clear 100k as gear improves. He notes both Oracle and Archon builds are being played, with a lot of the Chinese logs running Oracle setups, and says he expects Oracle to do better in Mythic.",
-      "url": "https://youtu.be/PS-C4w5vJz8?t=204"
+      "url": "https://youtu.be/PS-C4w5vJz8?t=204",
+      "superseded": true
     },
     {
       "class": "Priest",
@@ -6380,6 +6382,42 @@
       "patchContext": "Season 2 live — \"RWF Healer Comp Explained\", published 2026-08-27 during the Venomous Abyss race to world first. A short single-speaker clip on his own channel (its description, \"Explaining the benefits of the RWF Healer Comp's we're seeing\", is what anchors the read to him rather than to a guest), arguing which four healers the top guilds are fielding and why.",
       "url": "https://youtu.be/wgwLOufz5r8?t=42",
       "claim": "He calls himself quite a bit of a believer in Restoration Shaman for this raid and wants it on the books for the race comp. The argument is Spirit Link Totem against the tier's hardest damage patterns rather than throughput: he singles out the Coiled Altar, the second-to-last boss, where the raid stacks together while a couple of players run out for mechanics and the damage arrives as stacking rot plus heal absorbs, and says that is exactly where Restoration and Spirit Link really shine. He frames it as one of several strong options in a four-healer comp, all of which bring huge output plus something else, rather than as the outright best healer.",
+      "superseded": false
+    },
+    {
+      "class": "Priest",
+      "spec": "Holy",
+      "creator": "AutomaticJak",
+      "date": "2026-08-26",
+      "sentiment": "buff",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — \"This NEW Holy Priest Build Dominates\", published 2026-08-26. A solo update video on his own channel (he opens naming himself and cites his own Wowhead guides and his own logs), arguing an Oracle Holy Priest build off the first week of Venomous Abyss, in which he had killed two Mythic bosses at the time of recording.",
+      "url": "https://youtu.be/l1qKWWYZGZE?t=9",
+      "claim": "He recommends Holy over Discipline in Venomous Abyss for 99% of raiders on the fights seen so far, calling Holy safer and less stressful while still one of the highest HPS specs in the game. Two supports he gives are his own: an effective-healing-required-per-second figure from his Lost Explorers kill that placed him third from the bottom of the raid, i.e. very little healing needed on himself, and a build reason — Dispersing Light cleaving every Flash Heal, Prismatic Echoes, Renewed Faith's 10% healing-taken buff on Renew targets, and an Oracle tree whose Enlightenment makes running out of mana while spamming Flash Heal very hard. He is explicit the build is a spot-healing and steady-output kit rather than an AoE one, and names immobility as the real cost on these boss fights. He also splits it by raid size: Oracle at or under 20 players, Archon at around 30, where he reads Archon as almost too bursty and short on passive healing.",
+      "superseded": false
+    },
+    {
+      "class": "Priest",
+      "spec": "Discipline",
+      "creator": "AutomaticJak",
+      "date": "2026-08-26",
+      "sentiment": "nerf",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — \"This NEW Holy Priest Build Dominates\", published 2026-08-26. A solo update video on his own channel (he opens naming himself and cites his own Wowhead guides and his own logs), arguing an Oracle Holy Priest build off the first week of Venomous Abyss, in which he had killed two Mythic bosses at the time of recording.",
+      "url": "https://youtu.be/l1qKWWYZGZE?t=27",
+      "claim": "Discipline comes off worse in the same comparison: he says he would recommend Holy over Disc for almost everyone on the Venomous Abyss fights encountered so far, and that Holy is much safer and less stressful to play in this raid. He closes by asking Blizzard directly to buff Disc — specifically to add an Atonement modifier for dungeons as existed when Disc was strong there last expansion — which is a statement about where he thinks the spec currently sits rather than a build note. He gives no throughput figure for Disc, so this is a relative placement read against Holy, not a measurement.",
+      "superseded": false
+    },
+    {
+      "class": "Rogue",
+      "spec": "Outlaw",
+      "creator": "Musguete",
+      "date": "2026-08-27",
+      "sentiment": "buff",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — \"Outlaw feels INSANE in Season 2! 12.1 Guide\", published 2026-08-27. Primarily a rotation and talent update video, but it reads his own live damage meters and log breakdowns and reaches an explicit placement claim.",
+      "url": "https://youtu.be/ps4If_WbBPQ?t=124",
+      "claim": "He puts Outlaw in a very good position for Season 2, and the reason he gives is fight profile rather than a rotation change: many of the new raid's bosses are two- and three-target cleave, which is where he says Outlaw performs really well, so he expects to keep seeing Outlaw played in raid. Off his own meters he describes sustained damage that is consistent and high even outside burst, and notably more front-loaded burst at the start of a pull than in Season 1, to the point that on a pull without opening burst he nearly catches a Mage who burst early by the end. He is clear Outlaw changed least of the three Rogue specs — the rotation is close to Season 1 apart from empowering Killing Spree, the tier set's Dispatch procs, and dropping Blade Rush on single target.",
       "superseded": false
     }
   ],
@@ -10189,7 +10227,7 @@
       "note": "He keeps Holy Paladin at the top of his healer read and says the early numbers support it: in total logs Holy Paladin is very slightly ahead of Restoration Shaman, with the two practically even. His pre-season framing was that Holy Paladin would be the meta healer for the standard caster and most-popular-spec compositions while Restoration Shaman took the melee comps, and he still expects that split to resolve in Holy Paladin's favour in the more popular comps as key levels rise."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Shaman",
       "spec": "Restoration",
       "creator": "izen (Izenhart)",
@@ -10537,7 +10575,7 @@
       "note": "He groups Balance Druid with the cleave-and-DoT specs doing very well on the raid's early bosses (Entombed Sentinels, the Lost Explorers) and expects it to remain quite high through the first few weeks of Mythic, because that is where the bulk of guilds will be progressing. He presents this as a caveat rather than a strength call — his stated point is that early-boss kill counts distort the standings."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Shaman",
       "spec": "Elemental",
       "creator": "izen (Izenhart)",
@@ -10549,7 +10587,7 @@
       "note": "Of the three caster candidates he expected to compete for the meta composition's caster slot, he says Elemental is the one that survived — which is what he had predicted would happen if Arms broke into the comp. He reads Elemental as sitting very high in popularity and rising further the higher the keys go: at the very top of the ladder he calls it one of the only remaining picks besides Arcane and Arms. He also places Elemental among the top three specs by damage done in Mythic+."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Mage",
       "spec": "Arcane",
       "creator": "izen (Izenhart)",
@@ -10561,7 +10599,7 @@
       "note": "He reads Arcane as one of the settled picks of the week-one Mythic+ meta: it looked set in stone in his pre-season prediction and it is holding. It appears with Arms as the most popular of the DPS specs, is one of the only remaining picks at the very highest keys, and is among the top three by damage done in Mythic+."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Warrior",
       "spec": "Arms",
       "creator": "izen (Izenhart)",
@@ -10573,7 +10611,7 @@
       "note": "The open question in his pre-season prediction was whether Arms was strong enough to break into and displace the caster composition rather than being confined to melee comps, and he reads the first week as answering yes. Arms appears with Arcane as the most popular of the DPS specs, is one of the only remaining picks at the very highest keys, and is among the top three by damage done in Mythic+. He notes the resulting composition accounts for almost 42% of groups at the top of the ladder."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Death Knight",
       "spec": "Blood",
       "creator": "izen (Izenhart)",
@@ -10585,7 +10623,7 @@
       "note": "He reports his pre-season call that Blood looked set in stone as the meta tank holding through week one: the predicted composition of Blood, Holy Paladin, Arms, Arcane and Elemental makes up almost 42% of groups at the top of the key ladder, and he describes the player base as already pretty settled on its tank-and-healer combination this early in the season."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Paladin",
       "spec": "Holy",
       "creator": "izen (Izenhart)",
@@ -10631,6 +10669,90 @@
       "patchContext": "Season 2 live — week-one Mythic+ outlook, recorded at the end of the first week as NA takes its first weekly reset, reading group compositions and popularity at the top of the key ladder. He notes the meta will not truly settle until the .5 or .7 patches.",
       "url": "https://youtu.be/i5751gjXrDs?t=326",
       "note": "He cites Restoration Druid as one of two specs players are already reporting being declined for, and at modest key levels rather than only at the ceiling — he says it is happening even at +10, let alone +12. He raises it as evidence against the argument that the early meta does not matter: however much one says the week-one meta will not matter, he expects a trickle-down effect on the groups players can actually form."
+    },
+    {
+      "superseded": false,
+      "class": "Mage",
+      "spec": "Arcane",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-27",
+      "sentiment": "positive",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — M+ outlook, \"Season 2 Mythic+ Meta | Best Performing Specs and...Surprises\", published 2026-08-27 at the start of the second reset of Season 2. He reads average Mythic+ score and damage-done charts at high key levels alongside the common group composition, and flags up front that many players still lack the Season 2 four-piece, which he puts at a 10-15% DPS swing.",
+      "url": "https://youtu.be/x429ozbMXnQ?t=159",
+      "note": "He calls Arcane the easiest spec to read since the PTR and puts it among the top three by average score in high keys. The mechanism he gives is the apex talent change that makes Prismatic Bolt proc extra bonus AoE off Arcane Blast, to the point where the proc version is cast more than the button it replaces, on top of a low-cooldown Touch of the Magi and a 90-second Arcane Surge with Sunfury. He is explicit that Arcane has no single specialty — it is good at boss damage and trash damage alike, good across the board rather than dominant in any one profile."
+    },
+    {
+      "superseded": false,
+      "class": "Warrior",
+      "spec": "Arms",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-27",
+      "sentiment": "positive",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — M+ outlook, \"Season 2 Mythic+ Meta | Best Performing Specs and...Surprises\", published 2026-08-27 at the start of the second reset of Season 2. He reads average Mythic+ score and damage-done charts at high key levels alongside the common group composition, and flags up front that many players still lack the Season 2 four-piece, which he puts at a 10-15% DPS swing.",
+      "url": "https://youtu.be/x429ozbMXnQ?t=337",
+      "note": "He names Arms the other spec that is good across the board and one of the most popular picks alongside Arcane. Arms has settled on Slayer over Colossus after the Executioner buff moved to a self-buff and Tactical Edge began proccing Sudden Death, which in turn procs Reap the Storm and reduces Bladestorm's cooldown; he says that tipped Slayer above Colossus in AoE having already been ahead in single target, and puts its AoE back at War Within levels — similar to Arcane and, on reflection, better. He stresses consistency and low cooldown dependence, citing 50 Bladestorms and 47 Colossus Smashes across 28 minutes."
+    },
+    {
+      "superseded": false,
+      "class": "Rogue",
+      "spec": "Assassination",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-27",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — M+ outlook, \"Season 2 Mythic+ Meta | Best Performing Specs and...Surprises\", published 2026-08-27 at the start of the second reset of Season 2. He reads average Mythic+ score and damage-done charts at high key levels alongside the common group composition, and flags up front that many players still lack the Season 2 four-piece, which he puts at a 10-15% DPS swing.",
+      "url": "https://youtu.be/x429ozbMXnQ?t=467",
+      "note": "He calls Assassination the first asterisk of the season: one of the highest average scores in high keys, yet passed in popularity by specs he considers further behind it, and hard to explain because its last four buffs in a row were flat percentage damage increases rather than toolkit changes. He also notes the rank-three apex talent is now merely playable and that rogues have moved off Zeldig's Recipe because its execute-window bonus arrives after the opener's advantages have fallen off. His central caveat is profile rather than power: Assassination does not have the even damage split Arcane or Arms do, it is significantly stronger in AoE and funnel than on bosses, and on forced single target such as Nalorakk it is quite a lot weaker."
+    },
+    {
+      "superseded": false,
+      "class": "Shaman",
+      "spec": "Elemental",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-27",
+      "sentiment": "positive",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — M+ outlook, \"Season 2 Mythic+ Meta | Best Performing Specs and...Surprises\", published 2026-08-27 at the start of the second reset of Season 2. He reads average Mythic+ score and damage-done charts at high key levels alongside the common group composition, and flags up front that many players still lack the Season 2 four-piece, which he puts at a 10-15% DPS swing.",
+      "url": "https://youtu.be/x429ozbMXnQ?t=832",
+      "note": "He puts Elemental at number one on average score in high key levels and says it perhaps has the best damage profile of the lot for how even it is between single target and AoE. The reasoning is that Voltaic Blaze plus Purging Flames turn Lava Burst into a five-to-six-target AoE button that can be pre-buffed every cast, so Earthquake, Chain Lightning and Lava Burst are all AoE, while swapping to Elemental Blast and Lightning Bolt keeps it competitive on single-target bosses. He grants that its burst windows are weaker than before after repeated Ascendance nerfs and that its tankiness is poor, resting on one weak defensive, offset by a poison dispel and snare removal that are valuable this season."
+    },
+    {
+      "superseded": false,
+      "class": "Paladin",
+      "spec": "Holy",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-27",
+      "sentiment": "positive",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — M+ outlook, \"Season 2 Mythic+ Meta | Best Performing Specs and...Surprises\", published 2026-08-27 at the start of the second reset of Season 2. He reads average Mythic+ score and damage-done charts at high key levels alongside the common group composition, and flags up front that many players still lack the Season 2 four-piece, which he puts at a 10-15% DPS swing.",
+      "url": "https://youtu.be/x429ozbMXnQ?t=1089",
+      "note": "He calls Holy Paladin the clear advantage among healers and says it has now started to gap Restoration Shaman by about 100 average score, making it the default choice for many groups in high keys. He observes that the very top keys are essentially all Lightsmith rather than the Herald of the Sun that Warcraft Logs' talent data suggests. The case is three interchangeable single-target buttons at roughly 215/240/260k per cast, endlessly rotated through Infusion with the four-piece, which suits dungeon mechanics that hit one or two players; the acknowledged weakness is flat consistent rot healing."
+    },
+    {
+      "superseded": false,
+      "class": "Death Knight",
+      "spec": "Blood",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-27",
+      "sentiment": "positive",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — M+ outlook, \"Season 2 Mythic+ Meta | Best Performing Specs and...Surprises\", published 2026-08-27 at the start of the second reset of Season 2. He reads average Mythic+ score and damage-done charts at high key levels alongside the common group composition, and flags up front that many players still lack the Season 2 four-piece, which he puts at a 10-15% DPS swing.",
+      "url": "https://youtu.be/x429ozbMXnQ?t=117",
+      "note": "Reading the tank average-score chart he says the tank situation is much simpler to decipher than the DPS one, and that Blood Death Knight holds a clear advantage over the other tanks. It is a short call, but a direct comparative one off the score data rather than a passing mention."
+    },
+    {
+      "superseded": false,
+      "class": "Shaman",
+      "spec": "Restoration",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-27",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — M+ outlook, \"Season 2 Mythic+ Meta | Best Performing Specs and...Surprises\", published 2026-08-27 at the start of the second reset of Season 2. He reads average Mythic+ score and damage-done charts at high key levels alongside the common group composition, and flags up front that many players still lack the Season 2 four-piece, which he puts at a 10-15% DPS swing.",
+      "url": "https://youtu.be/x429ozbMXnQ?t=1372",
+      "note": "Restoration Shaman is still the only real alternative to Holy Paladin among the healers making it into high keys, but he says Holy Paladin has now gapped it by about 100 average score. The trade he draws is specific: Restoration is better on flat consistent heavy rot damage, where Healing Rain proccing and Chain Heal spam beat single-target casts, but it has much weaker spot healing and much weaker single-target buttons than Holy Paladin."
     }
   ]
 }

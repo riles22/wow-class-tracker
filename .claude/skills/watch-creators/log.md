@@ -16,6 +16,82 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-28 (nightly, CI runner) — 5 pre-fetched transcripts read: 3 takes, 7 metaNotes, 2 verified skips
+
+- **Discovery:** all **44** transcribable channels polled via the YouTube RSS endpoint, 0
+  failures, 15 entries each = 660 videos. Seen-set union (pending `seen[]` + `skipped[]` +
+  `videos[]` + every `youtu.be/<id>` in a take or metaNote url) = **1,212**. Unseen **220**,
+  all of them inside the cycle bound (2026-06-18, `Math.min` over `ptr-builds.json` — taken as
+  a DATE, never an index); **130** pass the nightly keyword filter. The filter stays on, per the
+  100-request MONTHLY Supadata budget; the 129 not queued stay UNSEEN rather than being written
+  to `seen[]`, because a budget cut is exactly the dismissal class that must remain
+  reconsiderable.
+- **Transcripts:** all five queued videos were pre-fetched by the deterministic step
+  (`transcript-fetch/summary.json` attemptedAt 2026-08-28T21:14:27Z, verdict **ok**, 5
+  requested / 5 fetched). No YouTube or transcript-API request was made by this agent.
+- **izen `x429ozbMXnQ` — "Season 2 Mythic+ Meta | Best Performing Specs and...Surprises"
+  (2026-08-27, 26 min) → 7 metaNotes, M+ lens.** Arcane Mage positive (Prismatic Bolt proccing
+  off Arcane Blast; "good at all points"), Arms Warrior positive (Slayer over Colossus after
+  Tactical Edge began proccing Sudden Death; AoE back at War Within levels; 50 Bladestorms in
+  28 minutes), Elemental Shaman positive (number one on average score; Voltaic Blaze + Purging
+  Flames make Lava Burst a 5–6 target button; weak tankiness), Holy Paladin positive (gapping
+  Resto Shaman by ~100 average score; top keys are essentially all Lightsmith), Blood DK
+  positive (clear advantage among tanks off the score chart), Restoration Shaman **mixed** (the
+  only real alternative, better on flat rot healing, much weaker spot and single-target), and
+  Assassination Rogue **mixed** — logged mixed rather than positive because izen calls it "the
+  first asterisk of the season": very high average score he cannot explain beyond four
+  consecutive flat percentage buffs, and a lopsided profile that is much weaker on forced
+  single target. Six prior izen M+ notes superseded (five from 08-25, Resto Shaman's from
+  08-21); same lens, newer read.
+  Deliberately NOT distilled: **Outlaw Rogue**, whose only appearance is the score-swap caveat
+  (run keys as Assassination, swap to Outlaw, keep the score) — a scoring artifact, not a
+  strength read; and **Marksmanship / Shadow Priest / Holy**, which appear solely as bare
+  comparators in one enumeration (the list-mention rule).
+- **AutomaticJak `l1qKWWYZGZE` — "This NEW Holy Priest Build Dominates" (2026-08-26, 11.5 min)
+  → 2 RAID takes.** Holy Priest **buff**: he recommends Holy over Disc for 99% of raiders on
+  the Venomous Abyss fights so far, calls it still one of the highest HPS specs in the game,
+  and backs it with his own Lost Explorers log where his effective-healing-required-per-second
+  was third from the bottom of the raid; immobility is the named cost, and he splits Oracle
+  (≤20) from Archon (~30). Discipline Priest **nerf**: the same comparison run the other way —
+  Holy is "much safer and less stressful" than Disc in this raid — closing with a direct ask to
+  buff Disc via an Atonement modifier for dungeons. Both supersede his 08-21 raid takes on the
+  same specs.
+  ⚠️ **His M+ read was deliberately NOT logged, and this is the flag, not a decision.** The
+  video contains a substantive M+ passage ("we've done 17s as holy… around like an A tier
+  healer right now", weak AoE healing, verse-stacking to survive) — but AutomaticJak is the
+  bylined author of the **Wowhead M+ healer tier list**, one of our four consensus sources, and
+  he literally states a tier. Logging it would feed `consensusFor` and `expertRead` from one
+  voice on the same cell, the Tactyks firewall shape. His existing 08-21 M+ takes were left
+  live: pre-existing entries are an owner decision, flag never retire.
+- **Musguete `ps4If_WbBPQ` — "Outlaw feels INSANE in Season 2! 12.1 Guide" (2026-08-27, 8 min)
+  → 1 RAID take, buff.** Mostly a rotation/stat/talent update, which is normally the
+  guide-shaped no-take case, but it carries an explicit placement claim with a mechanism: many
+  of the new raid's bosses are two- and three-target cleave and Outlaw performs really well
+  there, so he expects to keep seeing it raided; off his own meters, sustained damage is
+  consistent and high outside burst and the opener burst is notably bigger than Season 1's. His
+  live M+ Outlaw take (08-04) and the unscoped PTR-era tuning take (07-31) were left alone —
+  different lenses, and a naive `bracket ?? "both"` retirement is the documented over-supersede
+  failure.
+- **Verified skips (2), both moved to `skipped[]` with reasons:** AutomaticJak `rGk2fajsQ1g`
+  "Disc Priest in 60 Seconds" — 32 chunks, 59 seconds, pure how-to, no comparative read (and a
+  Disc read from him IS on file from the same window, so nothing is lost); Critcake
+  `if8kxRXBzSA` "+16 Murder Row" — 201 chunks, 31m20s of a commentated pug key run whose three
+  strength-adjacent lines all fail the test ("I love slayer arms" is enjoyment, "Arms is very
+  good on it" is one fight, and the tank-meta / Windwalker remarks answer chat about specs
+  outside his declared Arms/Fury scope). No neutral take was minted to record having watched
+  either.
+- **Queued (1):** Obli `n0H4JFE6Suc` "What did the buffs do for Frost DK?" (2026-08-28). Queued
+  on its DESCRIPTION rather than its title — "Frost got buffed with this reset but has it
+  actually done anything for us in the raid? Short answer, no" is a raid-scoped spec-strength
+  read in Obli's declared Frost/Unholy scope. Queue depth is now 1.
+- **Considered and left unseen** (keyword/budget cut, reconsiderable next run): Bicepspump
+  `_7W3AVF1p8c` Unholy DK rotation guide and Jedith `DbXY5OnAxoU` Havoc build/opener guide (both
+  guide-shaped); Supatease `pLFqCP68UhY` "THE NEW META IS COMING" and `jBXCc2bTTDs` "Midnight
+  PVP Tier List Season 2 Update" (PvP lens, the documented title trap); Dalaran Gaming
+  `seRL4jirX9E` "Blizzard Just Revealed Huge Changes…" (design-news commentary from a class
+  creator); the MadSkillzzTV and LBNinja7 healer streams and the YoDaTV / Bansherz / Shindigg /
+  J-Funk key-and-raid PoV runs.
+
 ## 2026-08-28 (local, scheduled) — the caption 429 is on its SECOND consecutive day; queue held at 5, nothing distilled
 
 **Videos processed: 0. Takes added: 0. MetaNotes added: 0. Queue: 5 → 5 (unchanged).**

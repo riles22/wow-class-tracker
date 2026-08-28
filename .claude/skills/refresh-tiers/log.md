@@ -16,6 +16,62 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-28 (nightly, CI runner) — 240 letters re-parsed across three sources, 0 moves; Archon walled a FOURTH night
+
+- **Icy Veins — all 6 live pages, HTTP 200, 196–343 KB, direct browser-UA GET** (r.jina.ai
+  deliberately not tried; it is IP-403 on these hosts). `<style>` blocks stripped BEFORE
+  parsing — the page ships its whole tier-list CSS inline, so an unstripped anchor matches
+  stylesheet rules — and the `<table class="tier-list">` count then asserted EXACTLY 1 per
+  page. Letter from each row's first `<td>`, spec from each `tier-list-entry`'s FIRST `img`
+  alt looked up WHOLE against the roster. Counts reconciled before any merge: 27 / 7 / 6 per
+  bracket = **80 rows**, 0 unmatched, 0 duplicates, every letter inside the registered 7-band
+  icyveins scale. Upstream still publishes exactly TWO M+ DPS specs as **TBD** (Windwalker
+  Monk, Frost Death Knight); both stay explicit `null`. **All 80 letters byte-identical to
+  stored**, so nothing was merged. Page self-dates re-read from JSON-LD `dateModified` and
+  unchanged: raid DPS 2026-08-23, raid healer 2026-08-24, raid tank 2026-08-08, M+ DPS
+  2026-08-23, M+ healer 2026-08-23, M+ tank 2026-08-23 — identical to stored `published` AND
+  to the pre-agent `published-evidence/evidence.json`, three agreeing witnesses. Era-verified
+  **s2** on all six from the BODY: the raid HEALER page still titles itself "Patch 12.0.7 /
+  Midnight" while its body counts Season 2 21 times against Season 1 six — body over title,
+  the blue-tracker precedent. `seasonVerified` unchanged, so freeze-season had nothing to
+  consider.
+- **Method — both pages, HTTP 200, 159 / 166 KB.** CSS stripped, letters from each
+  `tier__tier` block's `tier__title`, specs from the entry `img` alts. Extra tierlists
+  rejected by ROSTER MATCH, never by position: the M+ page's nine unmatched images are the
+  eight dungeon-difficulty blocks (Altar of Fangs, Den of Nalorakk, King's Rest, Murder Row,
+  Ruby Life Pools, Temple of Sethraliss, The Blinding Vale, Voidscar Arena) plus the Method
+  logo; the raid page's single unmatched image is the logo. 40 rows per bracket, 0 duplicates,
+  letters confined to the 4-band method scale S|A|B|C. **All 80 byte-identical.** Self-dates
+  from the body's "Last Updated" line: raid 10th August 2026, M+ 13th August 2026 (bylined
+  Tactyks), both unchanged. Era-verified s2 from the body — "the Midnight Season 2 Raid, The
+  Venomous Abyss" and "dungeon difficulty in Midnight Season 2".
+- **Wowhead — all 6 pages, HTTP 200, 73–339 KB, full browser header set** (a UA-only request
+  is Cloudflare-403). Parse: unescape `\/` across the WHOLE document FIRST, then locate
+  `[tier-list=rows] … [/tier-list]` in the unescaped text — never anchored on
+  `WH.markup.printHtml(`, the decoy that once returned 0 rows for the raid-healer page.
+  Exactly ONE tier-list block per page, asserted. Specs resolved from the
+  `[spec-badge=<spec>-<class>]` kebab slug, which sidesteps the two-word-class split. 27 / 7 /
+  6 = **80 rows**, 0 unmatched, 0 duplicates. **ZERO letters moved.** `dateModified`
+  byte-identical to stored and to the published-evidence artifact on all six: raid DPS
+  2026-08-14, raid healer 2026-08-18, raid tank 2026-08-14, M+ DPS 2026-08-18, M+ healer
+  2026-08-26, M+ tank 2026-08-18. The M+ healer page that rebuilt on 08-26 and carried the
+  Holy Priest C→B move has not re-dated or re-moved again — the right shape for real upstream
+  movement settling.
+- **Archon: walled for a FOURTH consecutive night, and the shape matches this morning's local
+  run rather than last night's nightly.** All 12 registered pages plus the site ROOT return
+  **HTTP 403**, 5.7–6.0 KB, `<title>Just a moment...`, `__NEXT_DATA__` count **0** — the
+  Cloudflare challenge of 08-25/08-26, not the HTTP 200 "Human Verification" interstitial the
+  08-27 nightly measured. Second transport for the record: r.jina.ai now returns **HTTP 200
+  with a 232-byte body** whose entire content is "Human Verification / One Quick Check", i.e.
+  the proxy reaches the interstitial where direct traffic is stopped a layer earlier — the
+  exact inverse of last night. Either way `__NEXT_DATA__` is absent, which is the assertion
+  the contract row mandates; a status-code check alone would have called tonight a clean 403
+  and last night a success. Nothing merged, no snapshot bumped, stored letters byte-identical.
+  Standing consequence unchanged: Archon is the only tier source still describing S1, so this
+  wall is also holding off the one consensus recomposition the anomaly gate is waiting for.
+- Snapshots bumped to 2026-08-28 for the three reachable sources (18 pages). `npm run
+  test:quiet` 345 pass / 0 fail / 33 skipped, build clean, `node src/snapshot.mjs` written.
+
 ## 2026-08-28 (local, scheduled) — Archon's wall holds for a FOURTH night and has reverted from 200 to 403; no source re-fetched
 
 - **Archon: still walled, and the shape flipped back.** Probed the site root plus four registered
