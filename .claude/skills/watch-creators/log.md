@@ -16,6 +16,64 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-29 (nightly, CI runner) — 4 takes from one pre-fetched transcript; 3 queued
+
+All **44** transcribable channels polled via the YouTube RSS endpoint, 0 failures, 15 entries
+each = **660 videos**. `media:description` parsed alongside every title, which settled three of
+tonight's triage calls at zero transcript cost. No YouTube or transcript-API request was made by
+this agent.
+
+- **Transcript step:** `transcript-fetch/summary.json` attemptedAt 2026-08-29T15:17:21Z, verdict
+  **`ok`**, 1 requested / 1 fetched — the single video the 08-28 run queued.
+- **Obli, `n0H4JFE6Suc` "What did the buffs do for Frost DK?"** (205 caption chunks, 6m32s,
+  published 2026-08-28T13:20Z) — his first raid week on BOTH Death Knights after the August 25
+  pass, argued from his own logs on a 311-ilvl Frost main against a lower-geared Unholy alt, both
+  on the 4-piece. It splits cleanly by bracket, which is why it is **four takes and not two**:
+  · **Frost / raid — negative.** Falls away as fights lengthen ("just not it" on anything not
+    killed fast); the two-target cleave he had expected to be its strength is the one place it
+    merely does okay (Basilik the Malignant, the Lost Explorers) and Unholy does that better.
+    Hard evidence is a within-player comparison, not a tier list — his worse-geared Unholy alt
+    out-damaged his Frost main. Asks for a flat **10–15%**, sized off his own Hiz'garak log
+    against an Arcane Mage at the same percentile, and wants the season's Obliterate change
+    reverted plus a pass on Breath of Sindragosa's primary hit.
+  · **Frost / M+ — positive.** "In Mythic+ we're actually doing pretty good", roughly level with
+    Unholy, raised as the reason raid tuning must not overshoot into keys.
+  · **Unholy / raid — positive.** Little opening burst but scales up as the encounter runs, with
+    execute creeping higher, so San'layn is good for Mythic and can creep up to match meta
+    classes; "Unholy can do everything Frost can do but better". NEW BUG he says has been live
+    all tier: target damage amplifiers (he names Syzygy's Dig In, and Soul Reaper) do **not**
+    apply to Blightfall's eruption damage, which is why the build currently only matches Rider.
+  · **Unholy / M+ — positive.** "Very good", a teeny bit ahead of Frost.
+  Both specs are inside his declared Frost/Unholy scope; Blood is untouched.
+- **Superseded four prior Obli takes, each within the same lens** — Frost raid and Frost M+ from
+  08-23, Unholy raid and Unholy M+ from 08-25. His `latest` line was rewritten to what was
+  actually distilled, not to the newest upload.
+- **Declined on the list-mention rule:** the Arcane Mage 176k figure and the Marksmanship Hunter
+  comparison are the yardsticks of his own buff arithmetic, not reads on those specs.
+- **Timing worth recording:** the video predates the September 1 tuning announcement by nine
+  hours, and that pass gives Frost DK exactly the shape he asks for (Howling Blast +15%,
+  Obliterate +15%, Frost Strike +20%, melee +10%). The take is his read on 08-28 and was NOT
+  edited to anticipate it.
+- **Queue:** `n0H4JFE6Suc` removed from `videos[]` (distilled, so its take url is its record and
+  no weaker lane may hold it — the precedence ladder). Three appended:
+  · Shadarek `s508k-L7ims` "Havoc BUFFED AGAIN! | Sep 1st Class Tuning" (Havoc/Devourer scope);
+  · Critcake `UfjdyqXGbeM` "SLAYER FURY IS SO BACK" — queued on its DESCRIPTION ("Season 2 4-set
+    acquired. Slayer Fury is back on the menu"), a placement claim, where his 08-28 pug-key video
+    was correctly skipped as a commentated run;
+  · LBNinja7 `pdYpGLyZ7VM` "Healers Buffed AGAIN!! | 12.1 Tuning" — description cites the Sept 1
+    blue post, and this creator carries five healer specs across four classes.
+- **Accounting:** seen-set union **1,213**; **228** unseen in-cycle videos of which **135** pass
+  the nightly keyword filter. The **132 not queued stay UNSEEN**, not written to `seen[]` — a
+  budget cut is exactly the dismissal class that must remain reconsiderable. Nightly keyword
+  filtering kept, per Supadata's 100-request MONTHLY tier.
+- **Two deliberate non-queues worth naming.** Both Supatease items ("12.1 MAJOR Class Changes BIG
+  Update", "THE NEW META IS COMING") are from the creator SKILL.md names as the PvP-framing trap,
+  and both titles are the exact shape it warns about. Dalaran Gaming's `seRL4jirX9E` "Talent
+  Squish, New Modes, & Huge Patch Roadmap" is a LEAD about future plans; the forum and blue
+  tracker carry no 12.2 PTR announcement tonight, so it is not corroborated and was not treated
+  as a source. Shadarek's `DJCr5_KFzcM` (BiS gear setup + post-buff sims) was left unseen as
+  gear-shaped and redundant with `s508k-L7ims` for the same buff window.
+
 ## 2026-08-29 (local, scheduled) — the caption 429 is on its THIRD consecutive day; queue held at 1, nothing distilled
 
 - **Discovery ran in full and is the useful half of this run.** All **44** transcribable
@@ -54,6 +112,7 @@ else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have 
   never a source.
 - 0 takes, 0 metaNotes, 0 verified skips this run. `data/creator-takes.json` and
   `data/pending-transcripts.json` are both untouched.
+
 
 ## 2026-08-28 (nightly, CI runner) — 5 pre-fetched transcripts read: 3 takes, 7 metaNotes, 2 verified skips
 
@@ -131,6 +190,7 @@ else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have 
   creator); the MadSkillzzTV and LBNinja7 healer streams and the YoDaTV / Bansherz / Shindigg /
   J-Funk key-and-raid PoV runs.
 
+
 ## 2026-08-28 (local, scheduled) — the caption 429 is on its SECOND consecutive day; queue held at 5, nothing distilled
 
 **Videos processed: 0. Takes added: 0. MetaNotes added: 0. Queue: 5 → 5 (unchanged).**
@@ -158,6 +218,7 @@ else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have 
   breadth privilege is that yt-dlp is free, and with captions 429ing a wider sweep yields no
   transcripts and therefore no takes — the only thing it could produce is more QUEUE entries, which
   spend the nightly's 100/month Supadata budget. Counts stand: `seen[]` 549, `skipped[]` 413.
+
 
 ## 2026-08-27 (nightly) — the Supadata lane came back clean and all three queued videos distilled: 7 takes, and Kalamazi's post-buff Warlock read is a real reversal
 
@@ -261,6 +322,7 @@ fetched). Takes added: 7. MetaNotes added: 0. Superseded: 6. Queue: 3 drained, 5
   Supadata budget on the 27th. The nightly already queued the three highest-value candidates with
   `media:description` evidence. `takes` stays 553, `metaNotes` 374, `seen[]` 549, `skipped[]` 413.
 
+
 ## 2026-08-27 (nightly) — all 44 feeds polled clean; 194 unseen in-cycle videos, 3 queued; a NEW byline-firewall finding covering 23 live takes
 
 - **Discovery: 44 of 44 transcribable creators polled, zero RSS errors, zero retries needed.** 15
@@ -326,6 +388,7 @@ fetched). Takes added: 7. MetaNotes added: 0. Superseded: 6. Queue: 3 drained, 5
   is KNOWN, and overwriting one with a fresh title trades information for recency. `takes` stays
   553, `metaNotes` 374, newest 2026-08-25.
 
+
 ## 2026-08-26 (local) — queue drained 5 → 0; izen's week-one video → 12 metaNotes; the other four are guide-shaped skips
 
 - **The caption lane is still healthy.** One sanctioned probe first (`i5751gjXrDs`) returned a 216 KB json3 on the first
@@ -370,6 +433,7 @@ fetched). Takes added: 7. MetaNotes added: 0. Superseded: 6. Queue: 3 drained, 5
   so no consensus tier, metric rank or projection score changed. That is the expected and correct outcome — the
   general-creator meta nudge is gated on ≥2 creators agreeing unanimously, and izen is one voice, so this lane is
   display-only. Recorded because "12 metaNotes landed" reads like movement and is not.
+
 
 ## 2026-08-26 (nightly) — 44/44 feeds polled; Obli's Blightfall video distilled into 2 Unholy takes; 5 queued
 
@@ -423,6 +487,7 @@ opener/rotation how-to; Dratnos' RWF recaps sit outside his registered Warrior s
 durable fact about the video, so they stay genuinely unexamined and will be reconsidered next run.
 Expect the unseen count to stay high; that is the accounting working, not a backlog rotting.
 
+
 ## 2026-08-25 (nightly, 2nd run of the day) — 44/44 feeds polled, no transcript lane, ONE video queued
 
 - **Discovery**: all **44 unique channels** behind the 79 transcribable creator entries polled via
@@ -451,6 +516,7 @@ Expect the unseen count to stay high; that is the accounting working, not a back
   whereas seen[] would abandon them silently.
 - **General lane**: izen's newest (`5m_K51fnwhc`, 08-22) and Zorthas' (`x0fxEWTq3Pw`, 08-18) are
   both already distilled — nothing new for `metaNotes`.
+
 
 ## 2026-08-25 (local) — THE 429 HAS CLEARED after three days; queue drained 2 → 0, 5 takes
 
@@ -525,6 +591,7 @@ Expect the unseen count to stay high; that is the accounting working, not a back
   **Recommend staging it** — a capped newest-first batch on a later run, never keyword-filtered as
   the limiter — rather than resuming at full width.
 
+
 ## 2026-08-25 (nightly) — 44 feeds, 0 errors; MadSkillzzTV's 9h33m week-one healer stream → 4 takes
 
 - **Discovery:** 44 channels (41 class + 3 general), every one HTTP 200 on the FIRST attempt, 0
@@ -567,6 +634,7 @@ Expect the unseen count to stay high; that is the accounting working, not a back
   `data/community-overrides.json` is owner-curated and off-limits to this agent (Gate 0 applies it
   before the boundary diff, so an agent edit reds the night). Flagged for Riley instead.
 - yt-dlp not invoked (settled 2026-07-17 datacenter bot wall); nothing installed or upgraded.
+
 
 ## 2026-08-24 (local) — the 429 is DAY TWO and now DIAGNOSED; 1 of 2 queued videos drained through Riley's session, 3 takes
 
@@ -656,6 +724,7 @@ Nothing distilled; no data file changed.
   no-browser-route case above (SABR in-band captions, get_transcript 400 on YouTube's own UI).
   The nightly's Supadata drain is its designed path; queue count 2 -> 1.
 
+
 ## 2026-08-24 (nightly) — 4 videos distilled: 14 takes + 14 metaNotes, the first distillation night in three
 
 **Discovery:** 44 channels polled (41 class-lane + 3 general), **every one HTTP 200 on the first
@@ -727,6 +796,7 @@ purpose, so the next run reconsiders every one of them.
 video THIS run distilled. yt-dlp was not invoked at all: the settled 2026-07-17 datacenter bot
 wall makes it useless from a runner, and nothing was installed or upgraded.
 
+
 ## 2026-08-23 (local) — the residential yt-dlp caption lane is 429-BLOCKED; 5 queued videos left queued, 0 distilled
 
 **New transport finding, and it matters because draining the queue from a residential IP is the
@@ -758,6 +828,7 @@ the metadata/info endpoint is completely healthy.** Nothing distilled; no data f
 - **Worth watching**: if this 429 persists across days, the residential lane stops being a
   reliable catch-up path and the 100-request/month Supadata budget becomes the only route —
   which would change how the next breadth sweep should be planned.
+
 
 ## 2026-08-23 (nightly) — 44 feeds clean, 0 distilled (the queue arrived empty), 5 queued, 3 retired
 
@@ -818,6 +889,7 @@ queue was already empty when the deterministic step ran.**
 - No creator showed coverage outside their registered specs, so nothing is flagged for a scope
   widening. No supersession was needed because no take was added, and no `latest` was advanced
   — rule (c): it moves only to a video actually distilled.
+
 
 ## 2026-08-22 (LOCAL run, ~16:1x-16:4xZ — scheduled residential catch-up, ~5h after the nightly) — queue DRAINED 7 → 0: 7 takes, 14 metaNotes, 1 verified skip, 2 retired
 
@@ -884,6 +956,7 @@ on it every night.
 - No creator showed coverage outside their registered specs, so nothing is flagged for widening.
   `pending-transcripts.json`: **videos 7 → 0**, skipped 407 → 408, seen 541 → 543.
 
+
 ## 2026-08-22 (nightly) — 1 transcript read → 0 takes (PvP), 5 queued, 44 channels clean
 
 **Discovery clean; the one transcript available this run was a PvP stream, so it yielded nothing
@@ -931,6 +1004,7 @@ and was retired to `skipped[]` rather than mined for a take.**
   datacenter bot wall, so the queue is the only path. No creator showed coverage outside their
   registered specs (nothing was distilled), so no scope widening is flagged, and no supersession was
   needed because no take was added.
+
 
 ## 2026-08-21 (nightly CI, second run of the day)
 
@@ -991,6 +1065,7 @@ stream could be retired on a measured fact tonight.
 No creator demonstrated coverage outside their registered `specs`, so nothing is flagged for a
 scope widening. No supersession was needed (no take was added).
 
+
 ## 2026-08-21 (SKILL.md step 4a — the operational half of the one-record rule)
 
 **The check landed without the instruction that keeps a run from tripping it.** `0acbfae`
@@ -1025,6 +1100,7 @@ now); SKILL.md and the log line are fixed, the commit message stands because his
 rewritten. The `x0fxEWTq3Pw` figure of 24 was checked at the same time and is correct.
 The `1167 → 1167` seen-set measurement is now labelled as what it is — a reading taken across
 the fix, not a constant. It is 1176 after tonight's nightly, and it grows with the roster.
+
 
 ## 2026-08-21 (cross-lane collisions — SEVEN, not two; validation gap closed)
 
@@ -1069,343 +1145,3 @@ validate.mjs did is closed.
   so it reds if the lanes drift apart again. `src/validate.mjs` is CODEOWNERS-owned
   (`@riles22`), so this is a reviewed code edit and its own commit.
 
-## 2026-08-21 (re-open — the six scope-conditional Musguete skips)
-
-**Five of six yielded a Subtlety take; all five land SUPERSEDED. The sixth is now a settled
-skip.** Riley directed the re-open after the scope widening; the annotations added earlier
-today are what made these six findable as re-openable.
-
-- **All six re-fetched with yt-dlp and read in full** — 4-6 minutes each, all Musguete,
-  published 2026-07-09..07-13, all 12.1 PTR Mythic raid-testing POVs. No 429 and no bot wall;
-  paced ~4s apart with a hard stop on the first rate-limit, per the batch-429 precedent.
-  The triage regex was proven on a known-positive (`lanOZvwWzw0`) BEFORE being trusted, per the
-  rule that a broken extractor looks exactly like a batch with nothing in it.
-- **`pqAH9DPyDPs` stays skipped, and its note is now SETTLED rather than conditional.** Its only
-  Subtlety reference is him saying they did NOT test Subtlety on those bosses because another
-  Subtlety rogue was in the raid — a statement the spec was untested, which is the opposite of a
-  read. Independently confirmed.
-- **The other five LEFT `skipped[]` entirely rather than being amended.** That lane means
-  "transcript read, nothing to distil", and the file's own `seenNote` is explicit that distilled
-  videos are cited by their take's url instead. Keeping them would have had the repo asserting
-  both things about the same five ids. A guard in the merge refused to remove any id a take did
-  not actually cite.
-- **`5UjnyOvtRes` carried a same-day standing refusal and it was NOT stepped over silently.**
-  This morning's note said it stays skipped for two reasons surviving the scope change. Both
-  were checked and neither reaches a *superseded Subtlety* take: reason 1 ("raid lens already
-  covered by his unbracketed 07-31 takes") names takes that are **Outlaw and Assassination** —
-  he has no 07-31 Subtlety take, so the Subtlety raid lens was never covered by them; reason 2
-  ("landing it live would dilute the post-buff read") is conditioned on landing LIVE, which
-  `superseded: true` neutralises.
-
-**The verification pass caught three BLOCKING errors in my drafts. Two were referent
-transplants — the precise failure the honesty rule names — and one would have shipped.**
-1. **`superseded` was ABSENT from all five, not `true`.** The patchContext prose said
-   "superseded on landing"; the field was never written. Committed as drafted, all five would
-   have landed LIVE and the Subtlety drawer would have gone **2 rows → 7**, publishing five
-   pre-launch July PTR reads as current. **No gate catches this**: `validate.mjs` only
-   type-checks `superseded` when present, and `audit-creators`' supersession check is
-   era-scoped on `PHASES.ptr`, which is null between cycles — so it reports MED 0 having run on
-   an empty set. Prose is not a flag.
-2. **`5UjnyOvtRes`: a Fatebound comparison transplanted into a Subtlety take.** "Deathstalker
-   beating Fatebound for single target" is explicitly and exclusively his **Assassination**
-   claim; only the following clause ("even on subtlety rogue, the best one it's Deathstalker")
-   is about Subtlety. Cut to the Subtlety half.
-3. **`YCyxU0uQCWc`: the Darkest Night complaint lifted out of the ASSASSINATION block.** In that
-   video every cue around it is Assassination-scoped. Removed. (It genuinely IS inside the
-   Subtlety block in `_NvJjBK65ME`, where it is kept — the same talent, correctly filed in one
-   video and not the other, which is exactly why this needs checking per-video.)
-
-Also corrected: a cross-video superlative that rested on no source ("his most negative Subtlety
-read of the testing series"); a modality upgrade ("he would go" for his "I might go"); a
-dangling antecedent that pointed the spec-selection heuristic at the nerf complaint instead of
-the single-target read; a deep link at `t=192` opening 0.84s inside the preceding Assassination
-sentence (now `t=193`); and three omissions that changed the LEVEL of a read — the top-two
-framing ("for now the best spec is between Subtlety and Outlaw"), the three-spec ranking on Twin
-Fangs (Outlaw best, Assassination second, so Subtlety last), and his single-target hedge.
-
-- **Why all five are superseded rather than leaving the newest live.** The 2026-07-13 read is
-  empirical where the live 08-15 read is a tuning reaction, which is a real argument for keeping
-  it — but its central content is the 8% nerf and a hope for reversal, and that hope was
-  *answered* by the 08-15/18 pass the live take distils. All five predate the 07-31 buff pass,
-  the 08-15/18 tuning and the 08-18 launch. `takeInBracket` also puts a `raid` take and the
-  `both` anchor in ONE lane, so leaving one live would be a different-dated live pair — the
-  invariant-3 defect. Note the `nerf`-sentiment Twin Fangs take WOULD have moved the panel vote
-  had the lane been active.
-- Deep links verified against raw caption offsets, not the flattened text: each opens on the
-  first words of its Subtlety segment, none on a sibling spec's.
-- No downstream movement: `expertRead` returns null for all 40 specs (`PHASES.ptr` null), and
-  these "12.1 PTR" strings can never re-arm — the 12.2 marker will not match them. Payload
-  identical outside the takes array; drawer unchanged at 2 live Subtlety takes. 371 tests pass,
-  validate clean, `audit:creators` HIGH 0 · MED 0.
-- **Second pre-existing cross-lane defect found, NOT fixed here** (unrelated, predates this
-  commit): `aqe2LKeMIqQ` sits in `skipped[]` while a live-archive Tettles take cites it —
-  one take pulled from a ~2.8h stream VOD, the remainder later skipped. Defensible on its own
-  terms but it stretches the lane definition. Flagged alongside the `6MlSd4nBtrI`
-  skipped/seen collision.
-
-## 2026-08-21 (distillation — Musguete Subtlety, the read dropped for scope)
-
-**1 take added: Rogue Subtlety, Musguete, 2026-08-15, `mixed`, bracket `both`.** This is the
-read that was transcript-verified and DROPPED for scope on 2026-08-16 and cited as evidence in
-the scope-widening commit above. With Subtlety now in his registry scope, `validate.mjs`'s
-take-scope gate accepts it.
-
-- **Distilled from the transcript, not from this log's paraphrase of it.** The 08-16 entry
-  summarised the read in one line; that line is a paraphrase and is not a source. `lanOZvwWzw0`
-  was re-fetched with yt-dlp (216s, author-matched Musguete, upload_date 20260815) and the take
-  was written against the captions, per "a claim must rest on the source it deep-links".
-- **An adversarial verification pass over the draft caught two BLOCKING errors of mine, and
-  both are worth recording because they are the exact failure modes SKILL.md names:**
-  1. **An invented event.** The draft said the 6% left the spec ~1% ahead "once that is
-     corrected" — asserting a bug FIX that the creator never states and that appears nowhere in
-     the build feed for this pass. He says only that there was a bug, that it had them 4-5%
-     above intended, and that the buff compensates for it. The correction step was mine.
-  2. **A valence inversion.** The draft framed the 6% as a disappointment — "much smaller than
-     it looks", "compensation rather than a gain". He says the opposite in the same breath:
-     "Which is very very good and it's I believe **even** 1% increased damage from what we had
-     previously." The "even" makes it a net gain on top of the compensation. That is the
-     distiller's editorial replacing the source's own read, and it would have been the basis
-     for the take's sentiment.
-  Also fixed: the deep link was `t=81`, which opens on his ASSASSINATION close (the Subtlety
-  segment starts at 86.64s) — a Subtlety take would have landed the reader on the other spec's
-  praise, and on the very sentence the sibling Assassination take already rests on. Now `t=87`.
-- **Two provenance discrepancies are recorded in `patchContext` rather than silently resolved:**
-  (a) the official August 18 post frames the pass as pulling back overperforming tier sets while
-  raising baseline damage, and **no Subtlety damage-overperformance bug appears in our build
-  feed for it** — the only Subtlety bug on file is the 08-06 double-generation Energy fix, a
-  different pass and a different bug — so his bug premise and the ~1% net are HIS account, not a
-  stated delta; (b) the official four-set covers **Eviscerate** alongside Black Powder and has
-  **no leech component**, whereas he says "black powder and the leech rate" (almost certainly an
-  ASR mangle of Eviscerate). The 100%→60% figure itself is exact and matches both the build feed
-  and the stored `tierSet`. Neither discrepancy was used to overrule him — they are flagged so a
-  reader sees them.
-- **"Potent Powder" is attributed to HIM, not asserted by us.** The string appears nowhere in
-  `data/`, our own record names other Subtlety talents (Shadow Dance, Secret Technique, The
-  First Dance), and it could not be verified live — a Wowhead search merely echoed the query
-  back, which is not verification. Written as "the talent he names as Potent Powder": hard
-  rule 1 forbids resolving a 12.1 name from model memory, and the same caption track renders
-  Eviscerate as "the leech rate" and his own name as "Mush Getz". The 20%-of-mastery MECHANIC
-  is his and is stated plainly.
-- **`mixed`, deliberately, and the case was argued both ways.** For `buff`: he calls the 6%
-  very good, reads the net as positive, and closes that all three Rogue specs are in a very good
-  position. For `mixed`, which wins: he sets an explicit nerf against it ("And we got nerfs"),
-  on the ability he says was topping meters, and revises his own stat guidance DOWNWARD as a
-  consequence. Encoding `buff` would drop the nerf; the closing line cannot carry it either,
-  because it is class-wide and the skill forbids stretching a class-wide label into a spec read.
-- **`both` because the Subtlety segment names no bracket at all.** The video's only raid/M+
-  references are the A+/A tier-list placements at 47s-64s, which are explicitly about
-  Assassination and belong to the sibling take — they cannot justify a bracket here.
-- **Era stays `12.1 PTR`**: published 2026-08-15, before the flip, and he says outright the
-  changes are "not live yet" until the 18th. It matches its own sibling and Dalaran Gaming's
-  08-17 Subtlety take, and keeps these takes correctly OUT of the eventual 12.2 expert panel.
-- **Nothing superseded** — Musguete had zero Subtlety takes. Dalaran Gaming's live 08-17 raid
-  take is a different creator and is untouched; Subtlety now carries two live takes from two
-  independent voices, which is the first time that has been true.
-- `community.json`'s `latest` said in so many words that no Subtlety take was on file from him;
-  it is corrected in the same commit, per the rule that `latest` states what is actually KNOWN.
-- No downstream movement: `expertRead` is dormant (`PHASES.ptr` null), snapshot byte-identical,
-  the only rendered change is the Subtlety drawer's Creator-takes section going 1 row → 2.
-  371 tests pass, validate clean, `audit:creators` HIGH 0 · MED 0 · INFO 9.
-
-## 2026-08-21 (owner registry edit — Musguete Subtlety scope)
-
-**Riley authorised widening Musguete to include Subtlety. Landed as a reviewed human commit,
-not an agent edit.** This resolves the OWNER FLAG raised in the nightly entry below (the one
-noting his registry premise "No dedicated Subtlety content exists" had become false) and
-repeated in the local-run entry above it. Those entries are left as written — they were true
-when written; this entry supersedes them.
-
-- **Lane matters here.** `data/community.json` is agent-writable in **`latest` and
-  `verifiedDate` ONLY** — Gate 0 (`nightly.yml`, the `changedBeyond` guard) treats `specs` and
-  `credential` as registry structure, and simulating each field against HEAD confirms a
-  nightly artifact carrying either would fail the night RED. `.github/CODEOWNERS` also names
-  `/data/community.json`. So this had to be an owner-reviewed commit on master, pushed the same
-  session, well clear of the ~10:30-12:30 UTC nightly window (landed ~14:50 UTC).
-  Musguete's entry is hand-curated (no `managedBy`), so `apply-community-overrides.mjs` never
-  touches it and the edit will not be clobbered; routing it through
-  `community-overrides.json` was considered and REJECTED — it would stamp
-  `managedBy: "overrides"` and replace the hand-curated record.
-
-- **THE TRIGGER IS NOT THE EVIDENCE, and that distinction is the substance of this entry.**
-  `DHqw-Oq9NjY` "Maximize Your DPS NOW! Subtlety Rogue Season 2 Guide" (8m32s, verified live:
-  oEmbed 200, author Musguete, newest upload on channelId `UCdgkIUZiySx2hL7edWPD_Gw`,
-  published 2026-08-21T09:42:45Z) is what falsified the premise, but it does NOT carry the
-  competence case. Its stats/BiS block is explicitly derivative — it summarises a published
-  Wowhead Subtlety guide, and someone else's material read aloud is not the reader's own read
-  (the same test that declined a Resto Druid read in an AutomaticJak co-stream and Maximum's
-  Zorthas-scripted watch-along). Its comparative sentences are class-wide and generic.
-  It is transcript-verified into `skipped[]` with all three reasons recorded.
-  **The widening rests instead on two videos of his OWN analysis:**
-  - `HDqRItIXGmE` (2026-08-04, "HOW are Rogues AFTER Buffs?") — a dedicated Subtlety segment of
-    his own WCL log analysis running roughly 18s-306s. Independent corroboration that this is
-    real and was dropped for scope: that video's two EXISTING takes deep-link at `t=311` and
-    `t=535`, i.e. both start after the Subtlety segment ends.
-  - `lanOZvwWzw0` (2026-08-15, "Assa Rogue WILL BE META?! Patch 12.1 Tunning") — Subtlety tuning
-    detail (intentional 4-5% bug, 6% compensating buff, four-set 100%→60%, mastery-to-crit).
-    A transcript-verified Subtlety read from this video was explicitly DROPPED for scope on
-    2026-08-16; see that entry.
-  Both titles and authors re-verified live via oEmbed before being written into a registry field.
-
-- **The premise was already false on 2026-08-04** — three days BEFORE its own
-  `verifiedDate: 2026-08-07` — and the transcript that falsified it had already been read.
-  The failure was not discovery; it was that nothing re-checked a scope note against takes
-  already on file.
-
-- **Six durable `skipped[]` entries rested on the OLD scope and were annotated, not rewritten.**
-  `5UjnyOvtRes` named it verbatim ("Subtlety content in the video is out of scope:
-  community.json scopes Musguete to Outlaw and Assassination"); the other five (`qsCTpF_eYoY`,
-  `YCyxU0uQCWc`, `F_fWti_cRP8`, `_NvJjBK65ME`, `pqAH9DPyDPs`, all 2026-08-10) read "within the
-  creator's scoped specs". Each keeps its original text with a dated bracketed note appended.
-  **None was re-queued**: all are 12.1 PTR-era, `expertRead` is dormant between cycles so
-  nothing distilled from them could move a projection today, and `5UjnyOvtRes` carries two
-  independent non-scope reasons. They are re-openable on scope by a future transcript run —
-  which is precisely what the annotation exists to tell that run.
-
-- **What this does and does not buy.** It does NOT close a coverage gap: **Dalaran Gaming** is
-  unscoped (absent `specs` = whole class), transcribable, and already holds all six existing
-  Subtlety takes including the only live one (2026-08-17 raid buff, `f8YlxVEbGCY?t=16`). What
-  the edit actually buys is unblocking `validate.mjs`'s take-scope gate so Musguete's already-
-  dropped Subtlety reads become distillable, plus registry honesty. Musguete becomes the only
-  creator *scoped* to Subtlety who is also transcribable — Stealthi, Eleem and Fuu all cover it
-  but are `transcribable: false`.
-- **Firewalls checked and clear:** Musguete is not in `generalCreators[]`, and "Musguete" occurs
-  zero times in `data/sources.json`, so he authors none of our registered tier lists.
-- **Verified no downstream movement:** `expertRead` returns null for all 40 specs in both
-  brackets (`PHASES.ptr` null), the frozen forecast lane is active, and the build payload is
-  byte-identical outside the community subtree. `npm run validate` clean, `audit:creators`
-  HIGH 0 · MED 0 · INFO 9 (unchanged), 371 tests pass.
-- **Separate pre-existing defect found and NOT fixed here** (it predates this commit and is
-  unrelated): `6MlSd4nBtrI` (Dratnos) sits in BOTH `skipped[]` and `seen[]`, which this SKILL.md
-  says validation refuses — yet `npm run validate` passes. Either the check is missing from
-  validate.mjs or the SKILL.md sentence overstates it. Flagged for its own reviewed commit.
-
-## 2026-08-21 (local run, scheduled task)
-
-**Queue drained to 0; 5 takes added across 3 specs; 0 metaNotes; 2 videos verified-skipped.**
-Residential catch-up after the 10:37 UTC nightly (91205d7), which had queued two videos it
-could not distil itself.
-
-- **Queue drained (2 -> 0), both to `skipped[]`, neither yielding a claim.**
-  - izen `gGzU0vD8R6M` "Season 2 Mythic+ Talking Points" — a genuinely substantive 12-minute
-    argument that the S2 dungeon pool shifts value from large AoE toward single-target and
-    low-target cleave (fewer casters per pack, far more mini-bosses; Void Scar Arena, King's
-    Rest, Den of Nalorakk and Mardero each walked through). **No metaNote distilled**, and this
-    is the run's one contestable call: the only per-spec content is a single two-sentence
-    enumeration — "specs like arms ... specs like arcane ... specs like outlaw and specs like
-    wind walker ... worse for specs like balance" — and **each of those five specs is named
-    exactly ONCE in the whole transcript** (verified by grep over the flattened captions), with
-    no second spec-specific mention anywhere. That is verbatim the `specs like X ... like Y`
-    bare-enumeration shape SKILL.md's list-mention rule rejects. Balance was the closest call,
-    because the Mardero passage that follows elaborates *why* a former massive-AoE dungeon now
-    punishes it — but that passage describes the DUNGEON, and the only Balance-specific
-    assertion in it is "was perfectly fine doing massive AoE". Dropped on the rule. The general
-    dungeon-pace argument has no per-spec home in the data model, so nothing was written.
-  - Nintern `k0mCjMlwyys` "Devourer Sim Update" — 2m42s gem-optimisation PSA (a crit-effectiveness
-    gem config simming ~1k ahead; takeaway is "re-sim your own gems/enchants/Omnium Folio"). He
-    calls it a super minor gain himself. Gear-level content, no spec-strength read — the standing
-    guide-shaped rule, applied.
-
-- **Unfiltered local sweep: 44/44 channel feeds HTTP 200, 66 unseen in-cycle** against the
-  2026-06-18 bound (computed as the OLDEST date in `ptr-builds.json`, not `builds[0]`).
-  Seen-set 1164 from the four structured lanes. Up one from the nightly's 65. Title filtering
-  deliberately not applied; triage was by metadata (duration / `live_status`) on the 8
-  candidates that could plausibly carry an analytical read.
-- **Nothing was retired to `seen[]`.** No sub-minute durations and no caption-less videos were
-  found, so no dismissal this run is durable. The 64 unexamined videos stay UNSEEN and will be
-  reconsidered — they are overwhelmingly livestream/split-run shells (Tettles `9YgGUE2c5TM`
-  3.6h `was_live`, Pkpawner `WeZH5pda1M4` 8.7h `was_live`), raid/M+ PoV clips, and the 9
-  PvP-framed Supatease uploads.
-
-- **AutomaticJak `PS-C4w5vJz8` "Holy or Disc? Midnight Season 2"** (7m41s, in scope: his Priest
-  entry is `["Discipline","Holy"]`) — **4 takes**, all bracket-explicit, all `Season 2 live —`
-  framing. His first-week live read moves Holy Priest UP sharply in both brackets from his
-  08-15 launch tier list, and confirms the Disc M+ collapse he predicted on the PTR:
-  - Discipline / mplus / `nerf` — "struggle busing in keys"; ties it to the removed independent
-    Atonement dungeon modifier he and Clandon argued for on 08-06, and says if there were ever
-    a season to bring it back, this is it. Supersedes his 08-06 M+ take (same argument, now
-    confirmed live rather than predicted).
-  - Discipline / raid / `mixed` — still expects Disc at RWF/top-100; damage remains the asset
-    (~45k at 308 ilvl, "close to tank damage") despite the heavy nerfs, Rift buffed for
-    two-target. Mixed because he advises everyone below that bracket to play Holy instead.
-  - Holy / raid / `buff` — a real upgrade: on 08-15 he excluded Holy from his predicted race
-    comp; now he reports seeing "tons of holy priests" through the opening Venomous Abyss week
-    and recommends it below top-50/100 for ease of access and cheat death.
-  - Holy / mplus / `buff` — "crushing it right now", effectively infinite mana on an Oracle
-    build, and *decently tanky*, which speaks to the survivability gap that held his 08-15
-    B-tier placement down.
-  **Deliberately NOT used as evidence:** "smacked was top HPS on a seven-minute fight" — a
-  named player on a single Heroic Twin Fangs kill, which is the fight-artifact trap. Also left
-  out rather than guessed: several ASR-mangled talent names ("wood guides" = Wowhead, "Palm"
-  ~ PoM, "trail"), since build minutiae are not a strength read.
-
-- **Sha `vtNNBI8kdOw` "Heroic Twin Fangs | Brewmaster Commentary"** (9m03s, in scope: Brewmaster)
-  — **1 take**, Brewmaster / raid / `buff`, superseding his 08-14 raid take. Having now actually
-  raided the spec (~world-200 Heroic kill; he notes he does not normally do raid content) he
-  **revises** that negative read: he states the bracket contrast directly — *he has been pretty
-  down on Brewmaster in M+, but in raid it actually feels pretty okay* — credits two-target
-  cleave via Master of Harmony plus the apex talent, Blackout Kick and Overwhelming Force, and
-  reports that Master of Harmony + Exploding Keg + Empty the Cellar gives enough brew CDR that
-  the rotation never goes dull. That last point directly answers the resource-deficit objection
-  he raised on 08-14, which is why this is a genuine replacement rather than a second opinion.
-  **He disclaims his own rank-1 parse outright** ("competing with literally myself", ~17
-  Brewmasters in the bracket), so the take rests on kit behaviour and says so.
-  - **His 08-06 M+ take was deliberately left LIVE and un-superseded.** He restates the M+
-    negative here, but only as a one-clause aside with no new mechanism, whereas the 08-06 take
-    is a detailed, mechanism-rich analysis in the same direction. Superseding a rich take with a
-    thin restatement would strip the drawer of information while changing nothing — the
-    re-affirmation is recorded here instead.
-
-- **OWNER FLAG carried forward, unchanged:** Musguete `DHqw-Oq9NjY` "Subtlety Rogue Season 2
-  Guide" falsifies his registry note ("No dedicated Subtlety content exists, so Subtlety is
-  deliberately out of scope"). Not queued and not silently widened — it is also guide-shaped, so
-  it yields no take either way. Still needs a human decision on the scope note.
-- `expertRead` remains dormant for all 40 specs in both brackets (`PHASES.ptr` is null since the
-  flip), so none of these five takes can move a projection — they are drawer context only.
-- Verification pass done on all five takes against their own transcripts before commit: every
-  number attached to the referent the creator attached it to, no ASR mangle written as a name,
-  no claim resting on a video it does not deep-link.
-
-## 2026-08-21 (nightly CI)
-
-**Discovery complete; 0 takes, 0 metaNotes, 2 queued.** `transcript-fetch/summary.json`
-reports verdict `ok` with requested 0 / fetched 0 — `pending-transcripts.json` was EMPTY when
-the deterministic step ran, because the 2026-08-20 local run drained and distilled both videos
-this nightly queued on 08-20 (2 Obli DK takes, 6 Dorki tank takes are in `creator-takes.json`).
-No transcript was fetched from YouTube or any API by this agent.
-
-- **44 unique channel feeds polled** with 3-attempt backoff (119 creator entries, 40 of them
-  `transcribable: false`, sharing them), **44/44 HTTP 200**, 660 entries diffed against a
-  **1162-id** seen-set built from the four STRUCTURED lanes — never a regex over this file.
-- **65 unseen, all 65 in-cycle** against the 2026-06-18 bound (`Math.min` over
-  `ptr-builds.json` dates, taken as a DATE and not as `builds[0]`). That is **down** from last
-  night's 97 not because anything was retired but because YouTube RSS holds only 15 entries per
-  channel and the tail scrolled out — a real loss of reach, recorded as such.
-- **TWO QUEUED**, both chosen on `media:description` rather than title, under the nightly's
-  keyword filter and the fetch-broadly/queue-narrowly rule that protects Supadata's
-  100-request MONTHLY budget:
-  - `gGzU0vD8R6M` — izen, "Season 2 Mythic+ Talking Points: Boltslop, Minibosses and Less AoE
-    DPS". His own chapter list ends "10:27 DPS Damage Profiles"; a `generalCreators` entry, so
-    the metaNotes lane.
-  - `k0mCjMlwyys` — Nintern, "Midnight Season 2 Devourer Sim Update". Squarely inside his
-    registered Devourer/Havoc scope and the first sim-update content of the live season.
-- **NOTHING retired to `seen[]`** — no dismissal tonight is durable. The other 63 stay UNSEEN
-  and were counted, not estimated: **9** PvP-framed (all Supatease, including the
-  title-innocent "NEW PATCH NEW META DISCOVERY" and "DISCOVERING THE BEST CLASSES 12.1" — the
-  durable 2026-08-09 finding is that he reasons every meta read from PvP), **29**
-  livestream/split-run shells that cannot carry captions yet, **14** raid-boss and delve PoV
-  clips, **3** guide-shaped, **7** other misc streams, and **1** named judgement call:
-  Dratnos `3FKkYYSMiNo` (RWF Day 3) not queued, because its Day-1 and Day-2 twins were both
-  transcript-verified and skipped for a structural reason that has not changed — a two-speaker
-  co-cast the transcript never attributes — and its description promises speculation about
-  tuning not yet posted, which is not a read.
-- **OWNER FLAG (new).** Musguete published `DHqw-Oq9NjY` "Maximize Your DPS NOW! Subtlety Rogue
-  Season 2 Guide". His registry entry reads `specs: [Outlaw, Assassination]` with the explicit
-  note *"No dedicated Subtlety content exists, so Subtlety is deliberately out of scope"* —
-  that premise is now false. Not queued and **not silently widened**: it is also guide-shaped
-  how-to-play content, which yields no take by the standing rule. The scope note wants a human.
-- **yt-dlp metadata probe** (no download, no captions, one video) hit the datacenter bot wall —
-  "Sign in to confirm you're not a bot", the settled 2026-07-17 finding — and was abandoned
-  immediately rather than retried. So `live_status`/`duration` triage is unavailable on CI, and
-  stream shells and Shorts can only be left unseen, never retired.
-- `npm run audit:creators`: **HIGH 0 · MED 0 · INFO 9** (8 transcribable creators with zero
-  takes ever; the per-spec coverage sweep is suppressed while the expert lane is dormant).

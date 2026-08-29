@@ -5998,7 +5998,8 @@
       "patchContext": "Season 2 live — his follow-up to the August 20 launch read, reacting to the announced August 25 Frost tuning after about a week of playing both DK specs on a 2-piece",
       "url": "https://youtu.be/R7kYD23sDQs?t=99",
       "claim": "He treats the August 25 package — 6% to all ability and melee damage plus 15% on Obliterate, which he prices at about 7.3% overall — as a genuine but modest improvement that does not change Frost’s raid standing. He welcomes the Obliterate line specifically, saying he had asked for it because the ability’s damage was pitiful, and calls the size better than the gradual 4% buffs of last season, but says it does not change a lot and that he could do with one more small buff before the spec would be fine. His raid frame is that the tier is unfriendly to both DK specs and that neither Frost nor Unholy is doing stellar in it; he also notes a bug on the raid’s final boss that stops Necrotic Coils from hitting the heart, which is part of why he would advise Frost over Unholy for that progression. His objection is to the pattern rather than the size: he says Blizzard nerfs Frost to the ground at the start of a season out of fear it will be too strong and then creeps it back week by week, when it seemed fine on the PTR.",
-      "superseded": false
+      "superseded": true,
+      "supersededNote": "2026-08-29: retired by Obli's 2026-08-28 first-raid-week read (n0H4JFE6Suc) on the same lens."
     },
     {
       "class": "Death Knight",
@@ -6010,7 +6011,8 @@
       "patchContext": "Season 2 live — his follow-up to the August 20 launch read, reacting to the announced August 25 Frost tuning after about a week of playing both DK specs on a 2-piece",
       "url": "https://youtu.be/R7kYD23sDQs?t=177",
       "claim": "In Mythic+ he reads the same package as a real gain. He says Frost is not that far behind in keys to begin with — on his own logs, with only the 2-piece, he puts it roughly 10% behind Unholy at about 280k against 300k — and that this is single-target tuning of exactly the kind that closes that gap, so he expects Frost to creep towards Unholy in keys and to see noticeably more Frost play as a result. He calls it a very good change and a step in the right direction without claiming it makes Frost strong.",
-      "superseded": false
+      "superseded": true,
+      "supersededNote": "2026-08-29: retired by Obli's 2026-08-28 first-raid-week read (n0H4JFE6Suc) on the same lens."
     },
     {
       "class": "Death Knight",
@@ -6286,7 +6288,8 @@
       "patchContext": "Season 2 live — his San’layn/Blightfall walkthrough published 2026-08-25, the day the August 25 tuning pass landed. The video is largely how-to-play (a +12 Altar of Fangs key and Heroic raid footage with rotation commentary), but it carries two explicit spec-strength reads, which is what is distilled here; his own play is on the 4-piece.",
       "url": "https://youtu.be/djVmUT8w0fU?t=431",
       "claim": "On the dungeon half he reads Unholy as being in a genuinely strong place in keys, saying plainly that for keys \"we’re looking really, really strong\" — an upgrade on the merely-ahead-of-Frost framing of his 08-23 read. He argues it from his own +12 Altar of Fangs run rather than from tier lists: about 470k on a trash pull, about 323k over the whole dungeon, and an execute phase where his damage rises rather than falls because San’layn amplifies plague damage as the target’s health drops. He is explicit about the ceiling too — the 470k is nothing like what an Arcane Mage can muster, where he has seen about 500k at the same point — so this is a strong-but-not-top read. Two things he credits: the 4-piece, which he says he has and which he describes as carrying DK far harder than players think, especially in AoE; and Blightfall itself, which consumes all nearby diseases for their full remaining damage and can do roughly a million damage in a single global.",
-      "superseded": false
+      "superseded": true,
+      "supersededNote": "2026-08-29: retired by Obli's 2026-08-28 first-raid-week read (n0H4JFE6Suc) on the same lens."
     },
     {
       "class": "Death Knight",
@@ -6298,7 +6301,8 @@
       "patchContext": "Season 2 live — his San’layn/Blightfall walkthrough published 2026-08-25, the day the August 25 tuning pass landed. The video is largely how-to-play (a +12 Altar of Fangs key and Heroic raid footage with rotation commentary), but it carries two explicit spec-strength reads, which is what is distilled here; his own play is on the 4-piece.",
       "url": "https://youtu.be/djVmUT8w0fU?t=651",
       "claim": "His raid read is a clear improvement on the 08-20 \"not in a good place\" position but stops well short of positive: Unholy is \"not doing too bad in the raid once you get your set\", with some fights very good and some not so good. The good case is cleave and add windows — he says there is a fair bit of cleave in this tier, that San’layn’s 45-second burst lines up well with several boss mechanics, and that egg-add phases are where Unholy shines; he ends the shown Heroic pull around 240k and calls it respectable. The bad case is pure single target and the current bugs: during the weakened-heart phase he says Unholy simply does not do a lot, and he is scathing that Necrotic Coil does not hit the Venomous Heart at all even though the heart is the thing taking 100% additional damage, so he has to command pets onto it manually — and that Blizzard’s attempted fix has turned Necrotic Coil into a melee-range effect. He also notes Unholy Devotion had been bugged into providing near-nothing, which he believes is now fixed (it is — the August 25 hotfixes carry that line). He adds that he sees few people playing Unholy on that fight and does not think the spec deserves the neglect.",
-      "superseded": false
+      "superseded": true,
+      "supersededNote": "2026-08-29: retired by Obli's 2026-08-28 first-raid-week read (n0H4JFE6Suc) on the same lens."
     },
     {
       "class": "Warlock",
@@ -6419,6 +6423,50 @@
       "url": "https://youtu.be/ps4If_WbBPQ?t=124",
       "claim": "He puts Outlaw in a very good position for Season 2, and the reason he gives is fight profile rather than a rotation change: many of the new raid's bosses are two- and three-target cleave, which is where he says Outlaw performs really well, so he expects to keep seeing Outlaw played in raid. Off his own meters he describes sustained damage that is consistent and high even outside burst, and notably more front-loaded burst at the start of a pull than in Season 1, to the point that on a pull without opening burst he nearly catches a Mage who burst early by the end. He is clear Outlaw changed least of the three Rogue specs — the rotation is close to Season 1 apart from empowering Killing Spree, the tier set's Dispatch procs, and dropping Blade Rush on single target.",
       "superseded": false
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Frost",
+      "creator": "Obli",
+      "date": "2026-08-28",
+      "sentiment": "nerf",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — his first raid week on both Death Knights after the August 25 tuning pass, argued from his own logs and from playing Frost on his 311-ilvl main against Unholy on a lower-geared alt, both on the 4-piece. Published 2026-08-28T13:20Z, nine hours before the September 1 tuning pass was announced, so it does not react to it.",
+      "url": "https://youtu.be/n0H4JFE6Suc?t=118",
+      "claim": "Having now raided on both of his Death Knights, Obli reads Frost as the wrong side of the DK comparison in raid and does not soften it: for long encounters Frost's damage only falls away as the fight goes on, so it is 'just not it' on anything that is not killed quickly, and the two-target cleave he had expected to be its strength is the one place it merely does okay (he names Basilik the Malignant and the Lost Explorers) — where Unholy does it better anyway. His hard evidence is a within-player comparison rather than a tier list: his worse-geared alt on Unholy out-damaged his 311-ilvl main on Frost, both on the 4-piece. He says Frost is not being brought to progression fights and asks for a flat 10-15% across the board, sizing it off his own Hiz'garak log against an Arcane Mage at the same percentile — 15% would be about 21k DPS and would land him next to Marksmanship Hunter — and adds that even that might not be enough. Specifically he wants the season's Obliterate change reverted and a tuning pass on the primary hit of Breath of Sindragosa, saying the cooldowns lack punch; the rest of the damage profile he considers fine in shape, just weak."
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Frost",
+      "creator": "Obli",
+      "date": "2026-08-28",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his first raid week on both Death Knights after the August 25 tuning pass, argued from his own logs and from playing Frost on his 311-ilvl main against Unholy on a lower-geared alt, both on the 4-piece. Published 2026-08-28T13:20Z, nine hours before the September 1 tuning pass was announced, so it does not react to it.",
+      "url": "https://youtu.be/n0H4JFE6Suc?t=266",
+      "claim": "He separates the brackets sharply and reads Mythic+ as the healthy one for Frost: 'in Mythic+ we're actually doing pretty good', with Frost and Unholy at about the same damage and Unholy a teeny bit ahead. He raises it as a balancing problem rather than a complaint — the 10-15% raid buff he wants would, applied flatly, make Frost a powerhouse in keys, so he says any raid-targeted tuning has to be careful not to overshoot there. This is a placement read on the current state, not a claim that keys have improved."
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "creator": "Obli",
+      "date": "2026-08-28",
+      "sentiment": "buff",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — his first raid week on both Death Knights after the August 25 tuning pass, argued from his own logs and from playing Frost on his 311-ilvl main against Unholy on a lower-geared alt, both on the 4-piece. Published 2026-08-28T13:20Z, nine hours before the September 1 tuning pass was announced, so it does not react to it.",
+      "url": "https://youtu.be/n0H4JFE6Suc?t=59",
+      "claim": "His Unholy raid read is the positive half of the same comparison and is stronger than his 08-25 'not doing too bad once you get your set'. He argues the spec has little opening burst but scales up as an encounter runs, with the execute creeping higher the longer the fight lasts — which he says makes San'layn Unholy specifically good for Mythic, where fights are long and execute phases are extended, and where it can creep up to match the damage of meta classes. Flatly: Unholy can do everything Frost can do but better, and in the content that actually matters it will stomp on Frost. He attaches a bug he says has been live all tier and possibly longer: damage amplifiers on the target — he names boss effects like Syzygy's Dig In, and Soul Reaper — do not apply to Blightfall's eruption damage, which he calls a massive chunk of Blightfall's output, so the build currently only matches Rider rather than beating it; his expectation is that Blightfall San'layn will own once that is fixed. The standing caveat he keeps is that DK brings no raid buff and nothing but grip."
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "creator": "Obli",
+      "date": "2026-08-28",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his first raid week on both Death Knights after the August 25 tuning pass, argued from his own logs and from playing Frost on his 311-ilvl main against Unholy on a lower-geared alt, both on the 4-piece. Published 2026-08-28T13:20Z, nine hours before the September 1 tuning pass was announced, so it does not react to it.",
+      "url": "https://youtu.be/n0H4JFE6Suc?t=286",
+      "claim": "On keys he states plainly that Unholy's damage in Mythic+ is very good, and that it does more than Frost — though only a teeny bit more, with the two at about the same damage right now. He raises it as the constraint on tuning Frost for raid rather than as a fresh case for Unholy, so it is a confirmation of his 08-25 'really, really strong' key read at a lower intensity rather than a new argument for it."
     }
   ],
   "metaNotes": [

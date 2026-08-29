@@ -2,11 +2,25 @@
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
   "videos": [
     {
-      "id": "n0H4JFE6Suc",
-      "creator": "Obli",
-      "title": "What did the buffs do for Frost DK?",
+      "id": "s508k-L7ims",
+      "creator": "Shadarek",
+      "title": "Havoc BUFFED AGAIN! | Sep 1st Class Tuning",
       "published": "2026-08-28",
-      "queuedAt": "2026-08-28"
+      "queuedAt": "2026-08-29"
+    },
+    {
+      "id": "UfjdyqXGbeM",
+      "creator": "Critcake",
+      "title": "SLAYER FURY IS SO BACK - +17 Temple of Sethraliss - Midnight M+ Season 2 (week 2)",
+      "published": "2026-08-28",
+      "queuedAt": "2026-08-29"
+    },
+    {
+      "id": "pdYpGLyZ7VM",
+      "creator": "LBNinja7",
+      "title": "Healers Buffed AGAIN!! | 12.1 Tuning",
+      "published": "2026-08-29",
+      "queuedAt": "2026-08-29"
     }
   ],
   "skipped": [
