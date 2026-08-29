@@ -16,6 +16,45 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-29 (local, scheduled) — the caption 429 is on its THIRD consecutive day; queue held at 1, nothing distilled
+
+- **Discovery ran in full and is the useful half of this run.** All **44** transcribable
+  channels polled via the YouTube RSS endpoint, **0 feed failures**, 15 entries each.
+  Unfiltered by title per the local-run rule, bounded by DATE at the cycle's opening build
+  — derived as `Math.min(...builds.map(b => b.date))` = **2026-06-18**, not read off
+  `builds[0]`, which is now the 2026-08-28 tuning pass and would have cut the sweep to a
+  single day. Seen-set union recomputed rather than trusted: **1213** ids across the four
+  lanes. **227 unseen in-cycle videos** stand after the bound.
+- **The caption transport is still dead.** `--list-subs` on the queued Obli video
+  `n0H4JFE6Suc` succeeded (full auto-caption language table, so captions exist and the info
+  endpoint is healthy), and then **exactly one** caption download was spent, per the
+  one-probe rule: `HTTP Error 429: Too Many Requests`. That is the persistent IP-scoped
+  abuse-flag shape on `timedtext`, not throttling — third consecutive day, and the skill's
+  24–72h decay window is now at its far end. Stopped the caption lane immediately; no
+  retries, no client-shuffling, no backoff ladder.
+- **Nothing was queued, deliberately, and this is the part worth not getting wrong.** The
+  queue is drained by Supadata against a 100-request MONTHLY budget, so it stays
+  keyword-filtered even on a local run — "fetch broadly, queue narrowly". The keyword-shaped
+  titles in tonight's 227 (Shadarek "Havoc BUFFED AGAIN! | Sep 1st Class Tuning", LBNinja7
+  "Healers Buffed AGAIN!! | 12.1 Tuning", Dalaran Gaming "New Buffs For Season 2! Class
+  Tuning Coming with Weekly Reset") are ones **the nightly's own filtered discovery will
+  queue by itself**, so hand-queueing them here would duplicate the nightly rather than add
+  reach. The ones the nightly genuinely cannot see are the non-keyword titles — and those I
+  could not fetch either, since the transport is down. So there was nothing this run could
+  usefully add to the queue, and it stays at **1** (`n0H4JFE6Suc`, Obli, queued 08-28).
+- **All 227 stay UNSEEN, on purpose.** This was a transport failure, and budget/transport
+  dismissals never enter `seen[]` — that lane takes durable judgments only. Marking tonight's
+  sweep seen would silently abandon a 227-video backlog and reproduce exactly the
+  Tactyks/J-Funk failure. They will be reconsidered next run.
+- **Leads noticed but NOT distilled** (they are ptr-watch's lane, and were verified there
+  against the canonical forum post rather than off a video title): several creators posted
+  on the September 1 class tuning pass within hours of the announcement. That pass is now
+  logged in `data/ptr-builds.json` from **forum topic 2342331 read at version 3** — see
+  ptr-watch/log.md. No take or metaNote was minted from any video title; a title is a lead,
+  never a source.
+- 0 takes, 0 metaNotes, 0 verified skips this run. `data/creator-takes.json` and
+  `data/pending-transcripts.json` are both untouched.
+
 ## 2026-08-28 (nightly, CI runner) — 5 pre-fetched transcripts read: 3 takes, 7 metaNotes, 2 verified skips
 
 - **Discovery:** all **44** transcribable channels polled via the YouTube RSS endpoint, 0

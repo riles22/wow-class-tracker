@@ -16,6 +16,69 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-29 (local run, residential) — the September 1 tuning pass lands; Archon walled night 5
+
+- **A real find, and the first tuning pass this feed has caught on announcement day.**
+  Wowhead news RSS (HTTP 200, 147 KB, 40 items, parsed per `<item>` block) surfaced
+  **news=382674 "Boomkin, Feral Druid, Mistweaver Monk Buffs - Class Tuning Coming with
+  Weekly Reset"**, published 2026-08-28 17:28 CDT. Canonical source located and read
+  directly rather than off the mirror: Discourse search resolved it to **topic 2342331,
+  "Class Tuning Incoming – September 1" (Linxy, 2026-08-28T22:27:13Z)**. Logged as
+  `kind: "build"`, `forumPostNumber: 1` of its own topic, mirror carried in `wowheadUrl`.
+- **Read at VERSION 3, and that is the whole reason to fetch the forum rather than the
+  mirror.** Post 1 was created 22:27:13Z and edited to v3 at 22:48:44Z; Wowhead published
+  at 22:28:50Z, i.e. off v1. Two stale spots in the mirror, both confirmed harmless here:
+  Discipline Priest's PvP absorb/Atonement buffs read 10/10/5% there against 15/15/10% in
+  v3 (PvP-only either way, so out of scope and not distilled), and the mirror omits the
+  "Does not apply to PvP combat." clause v3 attaches to Fire Mage's +3%. **No PvE value
+  differs between versions** — so nothing had to be re-distilled, but the check is what
+  establishes that rather than assuming it.
+- **Heading nesting kept intact, and it settled the one attribution question** exactly as
+  the 08-22 Warlock line did. "Shred damage increased by 10%." sits at list **depth 2**,
+  directly under the bare Druid heading, one level SHALLOWER than the Balance / Feral /
+  Restoration blocks at depth 3. Logged **class-wide**, not as Feral — despite Shred being
+  a cat-form ability. The post's structure is the evidence; inference is not. Depths were
+  measured by walking `<ul>`/`<li>` in the cooked HTML, not eyeballed off a flattened dump,
+  because a flattened dump renders d2 and d3 identically.
+- **PvP section deliberately not distilled** (rule 3c). Nine specs appear there and
+  NOWHERE in the Classes section — Devourer DH, Devastation and Preservation Evoker,
+  Arcane Mage, Assassination Rogue, Elemental and Enhancement Shaman, Arms and Fury
+  Warrior — which is why they are absent from `specsAffected`. Lines that merely CARRY a
+  PvP exclusion (Havoc/Balance/Feral/Windwalker "does not affect PvP combat") are ordinary
+  PvE lines and were kept.
+- **One set bonus touched → tierSet upkeep done in the same change.** "The Venomous Abyss
+  4-piece set bonus chance to activate has been increased from 20% to 25%" is Mistweaver
+  Monk's. `spec.tierSet.asOf` → 2026-08-28, `source` → this post. Note this is the **first
+  absolute activation rate the notes have ever given for this bonus**: the 2026-08-15 pass
+  could record only "+33% relative, no absolute available", so the stored parenthetical was
+  REPLACED rather than appended to, and the bonus text itself was left verbatim (the notes
+  still do not restate the full bonus, so a value swap had nothing to swap into). Gearing's
+  mirror re-synced in the same change per the two-page rule —
+  `node gearing/src/sync-tracker-fields.mjs && npm run gearing:build`, 1 field, text changed.
+- **Every line checked against `classifyHighlight` rather than assumed** — all **15 return
+  `buff`**, matching what the label claims. The two worth having verified: Discipline's
+  "Shadow Mend mana cost reduced by 20%" (resource-aware, so a cost cut reads as a buff)
+  and Vengeance's two mitigation lines in the "X% (was Y%)" idiom (decided by the values).
+  Survival's line carries a PvP-scoped *smaller* increase ("only 3% while engaged in PvP")
+  rather than a nerf clause, so it stays one-directional and votes.
+- **Effect, measured against `git show HEAD:dist/index.html` and not the working tree:**
+  14 spec drawers gained a build line, and 14 outlook tallies each gained a buff (e.g.
+  Frost DK +3/−3 → +4/−3 over 7 of 23 builds; Protection Paladin +1/−2 → +2/−2).
+  **0 outlook directions, 0 projection letters and 0 consensus letters moved** — the
+  affected specs all read `source: "verdict"`, where the dated writeup outranks the tally,
+  and the forecast lane is frozen post-flip. That is the honest result, not a null one:
+  the pass is recorded and visible, it just does not move an arrow this week.
+- **The pass is an ANNOUNCEMENT** — values apply at each region's weekly maintenance on
+  September 1, so nothing live has changed yet. Said so in the label.
+- **Archon: walled night 5**, and re-probed from a residential IP rather than assumed.
+  Site root `archon.gg/wow` and the raid throughput tier list both return **HTTP 403,
+  5.7/5.9 KB, `cf-mitigated: challenge`, `__NEXT_DATA__` absent** — the same shape as
+  nights 4 and 5, and the root probe again shows this is site-wide rather than a tier-list
+  gate. Residential blocked too, so the 08-27 finding that it is not IP-scoped still holds.
+  Nothing merged, no snapshot bumped, stored letters and encounter tiers byte-identical.
+- No 12.2 PTR announcement in any lane. The four dormant WCL PTR zone sweeps were skipped
+  and no manifest row invented for them.
+
 ## 2026-08-28 (nightly, CI runner) — every live lane polled, 0 new builds; the August 27 round-up was already logged this morning
 
 - **Between-cycles posture unchanged.** `PHASES.ptr` is null, no 12.2 PTR announcement in any
