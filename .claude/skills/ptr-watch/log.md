@@ -16,6 +16,41 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-30 (nightly, CI runner) — 0 new builds; the Sept 1 pass still at forum v3, no 12.2 anywhere
+
+Between-cycles posture unchanged: `PHASES.ptr` is null, no 12.2 PTR announcement in any lane,
+and the dormant WCL PTR zone sweeps (54 / 52 / 56 / 57) were correctly skipped — their contract
+rows left with the flip and must not be re-added to the manifest.
+
+- **Wowhead news RSS** — HTTP 200, 154 KB, 40 items parsed per `<item>` block, window
+  2026-08-26 → 2026-08-30 09:00 CDT. The only class-tuning item is still **news=382674**, the
+  2026-08-28 feed entry. Every 08-28…08-30 item's `content:encoded` body was keyword-scanned;
+  the one tuning-bearing article is **news=382679 "(Reverted) Mythic Coiled Altar Nerfed Again"**
+  — ENCOUNTER tuning (Defilement healing absorb −20%, Coalesced Venom −15%, Venom Rupture −10%,
+  variance removed) and **reverted** on lockout issues. No class content, so no feed entry: the
+  `specsAffected: []` + `Non-class:` precedent is for posts in the tracked dev-notes thread, not
+  for Wowhead race articles.
+- **Forum, re-read rather than assumed** — topic **2342331** post 1 is still **version 3**,
+  created 2026-08-28T22:27:13.800Z, last updated 22:48:44.482Z. Its spec sections reconcile 1:1
+  against the stored entry's 14 `specsAffected` / 15 `highlights`, including the Mistweaver line
+  "The Venomous Abyss 4-piece set bonus chance to activate has been increased from 20% to 25%"
+  that `spec.tierSet` already carries at asOf 2026-08-28 — so the **tier-set upkeep gate needed
+  nothing tonight** and the gearing mirror was not touched. (Note the topic slug 301-redirects to
+  a percent-encoded en-dash form; fetch with `curl -L` or the `.json` comes back empty.)
+- **Dev-notes thread 2317811** — `highest_post_number` still **19**, newest post Linxy
+  2026-07-31. The closed 12.1 PTR cycle, unchanged.
+- **News INDEX polled too**, because it LEADS the RSS within a run: `data.news.newsData`
+  brace-balanced from its `id` attribute, 20 posts, top id 382669 at 09:00 — nothing the RSS
+  lacked.
+- **Blue-tracker index** `data.blueTracker.default`, 50 entries / ~35 unique topics. Newest
+  class-relevant topic is still Linxy's September 1 tuning post (US 2342331 / EU 627043, both
+  2026-08-28); nothing standalone since. `data/ptr-builds.json` untouched, newest entry stays
+  2026-08-28.
+- One creator LEAD noted and **not** logged: Dalaran Gaming's 08-28 "WoW Is Changing FOREVER.
+  Talent 'Squish', New Modes, & Huge Patch Roadmap!" is downstream of the Psybear/Tettles Ion
+  Hazzikostas interviews, and no official channel carries a 12.2 PTR announcement — the video is
+  the tip-off, never the source of record.
+
 ## 2026-08-29 (nightly, CI runner) — 0 new builds; the Sept 1 pass verified still at forum v3
 
 Between-cycles posture unchanged: `PHASES.ptr` is null, no 12.2 PTR announcement in any lane,
@@ -238,7 +273,8 @@ hotfix round-up that the same-day local run completed (its deferred Devourer set
   tuning roadmap (topic 2335871) names **September 1** as the next scheduled pass, so a
   "Class Tuning Incoming" post is expected around 08-29 to 08-31.
 
-## 2026-08-27 (local, scheduled) — the nightly's DEFERRED set line landed: the August 26 Devourer entry is logged and the gearing mirror resynced in the same commit
+
+## 2026-08-27 (local, scheduled) — the nightly's DEFERRED set line landed: the August 26 Devourer entry is logged and the gearing mirror resynced in the same commit
 
 - **The one class line the nightly could not ship is now shipped.** Tonight's nightly logged 4 of
   the August 26 round-up's 5 class lines and deferred the fifth by design — "Fixed an issue that

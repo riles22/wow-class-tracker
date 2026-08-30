@@ -16,6 +16,73 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-30 (nightly, CI runner) — Mythicstats moved (28 of 39) and merged; Bloodmallet coverage 19 → 22 but still held
+
+- **WCL (both live rows) — from the pre-agent evidence file only.** `wcl-fetch/evidence.json`,
+  attemptedAt 2026-08-30T14:57:50.398Z, verdict **`rdps-broken`**; oauth true, graphql true,
+  3600 points/hour with 1 spent; the single sanctioned retry (`characterRankings(metric: rdps)`
+  on encounter 3176) returned HTTP 200 carrying "Internal server error" with 0 rankings.
+  `landed` and `rawRecipes` both `{}`. Stored medians byte-identical — 47 Mythic-raid rows and
+  40 M+ rows at their 2026-08-10 coverage date, now **20 days** old. This agent made no
+  warcraftlogs.com request of any kind.
+- **Archon (all six numeric series + survivability) — walled, night 6.** Same site-wide 403 as
+  the tier pages; `specRankingsSection` sits behind the same challenge as `tierList`. Stored rows
+  byte-identical: 95th pct DPS (Mythic) 32, HPS (Mythic) 7, DPS (Heroic) 33, HPS (Heroic) 7, M+
+  score 40, Popularity 79 (all six role×bracket groups still summing to 100.0), survivability 40.
+  The Heroic cuts are now **6 days** old, past their maxAgeDays of 5 — and Heroic is the basis of
+  Archon's raid LETTERS since the 08-25 owner decision, so that red is the one that matters.
+- **Mythicstats — MERGED 39 rows, the period matured.** `/period/latest` HTTP 200, 198 KB,
+  302 → period **1078**, still week 2 of MID2, but the subtitle moved: 10,000 characters
+  (**2,833** unique), **17.2** average key level, against (3,384) / 16.3 on 08-28 — the rolling
+  top-2000 pool has turned over into higher keys, which is what a maturing period looks like.
+  Parse BOUNDED to "Spec representation in top keys" ending at the "Classes and specs" heading;
+  labels normalised across the lowercase-hyphenated form; value taken from the span AFTER the
+  bar's `height:` style. Shape checks: 39 rows, 0 unmatched, sum **100.2%**, role subtotals DPS
+  60.1 / Tank 20.1 / Healer 19.9, and the page's own headers agree (Ranged 30.3 / Melee 29.8 /
+  Tank 20 / Healer 20) — the representation SHARE column, not the `/meta` per-key-presence
+  figure. **28 of 39 values moved** (Arcane Mage 13.0 → 12.0, Retribution 3.7 → 3.2, Elemental
+  6.6 → 7.2, Brewmaster 1.1 → 1.7); every value is under `minValueMagnitude` 100 so the
+  value-move gate does not apply, and the family median moves 1.05 → 1.3. **Augmentation Evoker
+  has returned** to the block at 0.0 after being absent on 08-28; **Frost Mage is still absent**,
+  so its stored row stays untouched at 0 / asOf 08-27 and the family holds 40 rows. asOf 08-30.
+- **Murlok — fetched clean, upstream still has NOT re-cut.** Three meta pages, plain browser-UA
+  GET, HTTP 200, 70.9 / 41.9 / 40.6 KB. All three still carry `<time datetime="2026-08-28T03:00:2xZ">`
+  — **two** daily 03:00Z cuts have now failed to publish. Payload diffed rather than trusted to
+  the timestamp: 27/7/6 = 40 rows, 0 unmatched, ranks contiguous 1..N per page, all 40 values
+  identical to stored at integer precision (Arms 3512 / Holy Paladin 3485 / Blood DK 3485).
+  Merged nothing; snapshot left at 08-28 to match the cut it describes. Coverage date 2 days old
+  against maxAgeDays 5, so not yet a red.
+- **WoWMeta — frozen 19 days, and it is upstream.** `manifest.json` snapshotDate 2026-08-11
+  (completedAt 22:52:39.026Z) and the rankings file's `Last-Modified: Tue, 11 Aug 2026 15:25:05
+  GMT` agree. Payload diffed anyway per the 08-04 pinned-manifest lesson: 44 blocks, whitelist
+  `categoryType ∈ {dps,hps,tank}` + `sortField === "lowerBound"` + `keyRange` undefined → 3
+  blocks = 27+7+6 = 40 rows, all 40 `lowerBound` and `numberOfCharacters` identical to stored at
+  1 dp. Owner-accepted standing red. The wowmeta.com HTML was NOT fetched.
+- **Bloodmallet — coverage improved, still HELD WHOLESALE (night 5).** All 27 DPS specs
+  requested at `talent_target_scaling/castingpatchwerk` with up to 3 retries: **22 real charts
+  against 19 last night**, and only **5** still return the 76-byte error body — Balance, Feral,
+  Augmentation, Devastation, Retribution. Havoc, Arms and Fury arrived. Every one of the 22 reads
+  `simc_settings.tier = MID2` (`ptr` is the string `"0"`) with chart timestamps **2026-08-29**
+  (advanced from 08-26), against 26 stored MID1 profiles at 07-08/07-15. The **row-drop floor no
+  longer blocks**: 22 of 26 is 15%, inside `maxRowDropPct` 0.25. What still blocks is the tier
+  pair — `SIM_TIER_REQUIRED` + uniformity forbid a mixed pool, and `fightLabels` percentiles over
+  a provenance-free pool would publish *which specs were re-simmed* as spec strength. Merged
+  nothing; coverage date correctly stays 2026-07-08.
+- **SimulationCraft — held (night 5), blocker unchanged, but MID1 has moved to 12.1.**
+  `MID2_Raid.txt` 1.29 MB, Last-Modified 2026-08-30T07:27:34Z, header `12.1.0.69497 Live (hotfix
+  2026-08-29/69497, git build HEAD 5f3ee6dba2)` — new build against last night's `f367d1aff1` —
+  with 41 profiles in its `DPS Ranking:` block mapping by LONGEST-PREFIX (hyphen allowed) to the
+  same **22 of 27** DPS specs; the 7 unmapped are tanks. Notably `MID1_Raid.txt` now reads the
+  SAME 12.1.0.69497 header, i.e. the 12.0.7 artefact this row was anchored on is being re-run —
+  but it is 272 bytes, an in-progress log with no ranking block, and `MID1_Raid.html` is still
+  Last-Modified 2026-08-08. Adoption blocked by `maxValueMovePct`: all 22 overlaps move **+69.3%
+  to +135.1%** (Frost DK 137,886 → 233,408; Fury 109,256 → 256,864), which takes a human
+  `value_move_ack`. Merged nothing.
+- **Robydoby** not refreshed: its sheets are the CLOSED 12.1 PTR cycle (zone 54), it is
+  deliberately outside the refresh contract, and it carries no manifest row.
+- Bloodmallet's missing 5 are **exactly** SimC MID2's missing 5, so the two are converging
+  together as the contract rows predict.
+
 ## 2026-08-29 (nightly, CI runner) — every numeric source fetched cleanly and NONE had moved; SimC's blocker changed shape
 
 - **WCL (both live rows) — from the pre-agent evidence file only.** `wcl-fetch/evidence.json`,

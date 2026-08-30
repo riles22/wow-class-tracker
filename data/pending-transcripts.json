@@ -2,25 +2,39 @@
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
   "videos": [
     {
-      "id": "s508k-L7ims",
-      "creator": "Shadarek",
-      "title": "Havoc BUFFED AGAIN! | Sep 1st Class Tuning",
-      "published": "2026-08-28",
-      "queuedAt": "2026-08-29"
-    },
-    {
-      "id": "UfjdyqXGbeM",
-      "creator": "Critcake",
-      "title": "SLAYER FURY IS SO BACK - +17 Temple of Sethraliss - Midnight M+ Season 2 (week 2)",
-      "published": "2026-08-28",
-      "queuedAt": "2026-08-29"
-    },
-    {
       "id": "pdYpGLyZ7VM",
       "creator": "LBNinja7",
       "title": "Healers Buffed AGAIN!! | 12.1 Tuning",
       "published": "2026-08-29",
       "queuedAt": "2026-08-29"
+    },
+    {
+      "id": "z_dKoGx_FIk",
+      "creator": "Kalamazi",
+      "title": "Warlock Is RISING Rapidly! Updated Sims For Each Spec",
+      "published": "2026-08-29",
+      "queuedAt": "2026-08-30"
+    },
+    {
+      "id": "bDElWkJxvtY",
+      "creator": "izen (Izenhart)",
+      "title": "BUFFS ONLY!!! Sept. 1st Weekly Reset Balance Tuning Incoming",
+      "published": "2026-08-29",
+      "queuedAt": "2026-08-30"
+    },
+    {
+      "id": "xYXkZA1L490",
+      "creator": "YoDaTV",
+      "title": "ONLY Buffs! Patch Notes & Tierlist Update for Mythic+ (August 29)",
+      "published": "2026-08-29",
+      "queuedAt": "2026-08-30"
+    },
+    {
+      "id": "1qclgMKPdz4",
+      "creator": "Whispyr",
+      "title": "Fatebound is BACK (and a bunch of other updates)",
+      "published": "2026-08-30",
+      "queuedAt": "2026-08-30"
     }
   ],
   "skipped": [
@@ -2928,6 +2942,13 @@
       "title": "+16 Murder Row - Slayer Arms Warrior - Midnight M+ Season 2 (week 1)",
       "reason": "Transcript pre-fetched by the deterministic Supadata step (201 caption chunks, 31m20s) and it is a commentated pug key run: gear and crest spend at the end of week one, a standard Slayer Arms build he says he will keep, then in-run callouts, mistakes and chat banter. No comparative spec-strength read survives the test. The three strength-adjacent lines all fail it — \"do I like arms this season? I love slayer arms\" is enjoyment rather than placement, \"it is not the greatest fight, but Arms is very good on it\" is a fight artifact on one boss, and the tank-meta and Windwalker remarks are answers to chat about specs outside his declared Arms/Fury scope. He does flag intent to test Fury once the four-piece lands, which is a lead for a later video rather than a take.",
       "verifiedAt": "2026-08-28"
+    },
+    {
+      "id": "UfjdyqXGbeM",
+      "creator": "Critcake",
+      "title": "SLAYER FURY IS SO BACK - +17 Temple of Sethraliss - Midnight M+ Season 2 (week 2)",
+      "reason": "Transcript pre-fetched by the deterministic Supadata step (255 caption chunks, ~26 minutes) and it is a commentated pug key run of the same shape as if8kxRXBzSA, skipped 2026-08-28. His own scripted intro is gear-and-build housekeeping: he now has the Season 2 4-set, his gear is still itemised for Arms so he is low on mastery and running the mastery folio, and 'the spec still works even though I don't have ideal stats'. The rest is in-run callouts, party banter and chat answers. Three strength-adjacent lines were tested and all fail: 'I like the feel of Fury four piece ... it's good, feels good' is feel rather than placement; 'we did 19 Dan earlier and I played [the other one] and I felt like I would have done better as slayer' arrives after a speaker-change marker and cannot be attributed to him; and the one genuinely comparative line, a chat question answered 'is arms and fury damage comparable. Yes,' followed across a speaker boundary by 'keys.', is four ASR words whose split between him and the chat reader is not resolvable from the caption track. His 2026-08-26 Fury M+ take is already on file and remains the current read, so nothing is lost by declining this one; if he restates the Arms/Fury comparison on the 4-set in a scripted video it should be distilled then.",
+      "verifiedAt": "2026-08-30"
     }
   ],
   "seen": [

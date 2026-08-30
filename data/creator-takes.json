@@ -5881,7 +5881,7 @@
       "superseded": true
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Demon Hunter",
       "spec": "Havoc",
       "creator": "Shadarek",
@@ -5890,7 +5890,8 @@
       "bracket": "both",
       "patchContext": "Season 2 live — his walkthrough of the announced August 25 class tuning pass (applied with the NA weekly reset), read spec by spec off the official notes; Demon Hunter first",
       "url": "https://youtu.be/sIu3Kjo8ggI?t=33",
-      "claim": "He reads the pass as all upside for Havoc: a flat 3% aura buff, which he says puts the spec a lot more in line with where he was hoping it would be, and he is happy with it. He qualifies the size himself — much of Havoc's damage comes from proc sources he does not yet have the gear for, so on his own character the 3% lands as a flat increase rather than scaling with those procs. He notes the pass contains zero nerfs anywhere in the PvE section and remarks that it is unusual for tuning to land before anyone has pulled Mythic. Placing the spec, he says he is still leaning to play Havoc in raid and expects it to be good on many raid fights, and will mix Havoc with Annihilator Devourer in Mythic+ depending on how he feels. The pass's separate PvP section nerfs Demon Hunter defensives hard, which he treats throughout as a PvP-only concern."
+      "claim": "He reads the pass as all upside for Havoc: a flat 3% aura buff, which he says puts the spec a lot more in line with where he was hoping it would be, and he is happy with it. He qualifies the size himself — much of Havoc's damage comes from proc sources he does not yet have the gear for, so on his own character the 3% lands as a flat increase rather than scaling with those procs. He notes the pass contains zero nerfs anywhere in the PvE section and remarks that it is unusual for tuning to land before anyone has pulled Mythic. Placing the spec, he says he is still leaning to play Havoc in raid and expects it to be good on many raid fights, and will mix Havoc with Annihilator Devourer in Mythic+ depending on how he feels. The pass's separate PvP section nerfs Demon Hunter defensives hard, which he treats throughout as a PvP-only concern.",
+      "supersededNote": "2026-08-30: replaced by the same creator's bracket-split 2026-08-28 pair (raid + Mythic+) on the September 1 tuning pass."
     },
     {
       "superseded": false,
@@ -6467,6 +6468,30 @@
       "patchContext": "Season 2 live — his first raid week on both Death Knights after the August 25 tuning pass, argued from his own logs and from playing Frost on his 311-ilvl main against Unholy on a lower-geared alt, both on the 4-piece. Published 2026-08-28T13:20Z, nine hours before the September 1 tuning pass was announced, so it does not react to it.",
       "url": "https://youtu.be/n0H4JFE6Suc?t=286",
       "claim": "On keys he states plainly that Unholy's damage in Mythic+ is very good, and that it does more than Frost — though only a teeny bit more, with the two at about the same damage right now. He raises it as the constraint on tuning Frost for raid rather than as a fresh case for Unholy, so it is a confirmation of his 08-25 'really, really strong' key read at a lower intensity rather than a new argument for it."
+    },
+    {
+      "superseded": false,
+      "class": "Demon Hunter",
+      "spec": "Havoc",
+      "creator": "Shadarek",
+      "date": "2026-08-28",
+      "sentiment": "buff",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — his reaction to the announced September 1 class tuning pass (applied at the NA weekly reset), combined with a Font of Venomous Rage simulation correction he published the same day; raid outlook",
+      "url": "https://youtu.be/s508k-L7ims?t=303",
+      "claim": "He reads the September 1 pass as straightforwardly good for Havoc — a flat 4% aura buff on a spec he already considered to be in a pretty okay spot — and notes it is the last tuning pass for about two weeks. He argues Havoc has more than most to gain from gearing, because its two-target damage depends on a Mythic Amun'Thul (main-hand only) paired with Guiltine and most players do not yet have that. The larger part of his read is a trinket correction: Font of Venomous Rage was under-simming because SimulationCraft modelled the tooltip's four ticks when the effect actually ticks five times, costing roughly 25% of its damage. With that fixed he reports the base tick going from 217,676 to 272,096 and his Havoc average crit from about 630,000 to 787,000, and he now rates it the best on-use trinket for Havoc over Heart of Ula'tek — it drops from Ula'tek and its timers line up with that fight's three burn windows (about 2:15, 4:45 and 9:30–9:45), it cleaves, and he shows his own casts at 2 million and 4.7 million damage, the latter about 1.7 million DPS across that window. He also likes that Havoc can amplify it deliberately inside an Inertia window and a combat-potion window. His conclusion is that with the tuning and the Font fix now in sims, Havoc is going to be in an incredibly good spot and he expects to be very well off in raid for the season."
+    },
+    {
+      "superseded": false,
+      "class": "Demon Hunter",
+      "spec": "Havoc",
+      "creator": "Shadarek",
+      "date": "2026-08-28",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his reaction to the announced September 1 class tuning pass (applied at the NA weekly reset); Mythic+ outlook",
+      "url": "https://youtu.be/s508k-L7ims?t=318",
+      "claim": "In Mythic+ he says he has actually felt Havoc seems pretty good right now, and that an extra 4% will go a long way. He draws a build consequence from the size of the buff: a player who already has enough AoE can now drop Glaive Tempest for Isolated Prey, which he prices at about 4% of overall damage lost against about 10% gained in single target, so the aura buff roughly pays for the swap. That makes it possible to fix boss damage in keys while still doing good AoE, which he calls a newly available option and one he finds exciting."
     }
   ],
   "metaNotes": [

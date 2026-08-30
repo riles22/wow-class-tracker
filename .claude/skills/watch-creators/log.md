@@ -16,6 +16,60 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-30 (nightly, CI runner) — 2 bracket-split Havoc takes; 1 verified-skipped; 4 queued
+
+All **44** transcribable channels polled via the YouTube RSS endpoint, 0 failures, 15 entries
+each = **660 videos**. `media:description` parsed alongside every title. No YouTube or
+transcript-API request was made by this agent.
+
+- **Seen-set recomputed as the four-lane union** (`seen` 549 + `skipped` 415 + `videos` 3 +
+  every `youtu.be` id in a take or metaNote) = **1,216 ids**, leaving **238 unseen**, all inside
+  the cycle bound **2026-06-18** (the OLDEST `ptr-builds` date, not `builds[0]`). 196 pass the
+  nightly keyword filter.
+- **Transcript step:** `transcript-fetch/summary.json` attemptedAt 2026-08-30T14:57:53Z, verdict
+  **`ok`**, 3 requested / **2** fetched.
+- **DISTILLED — Shadarek, `s508k-L7ims` "Havoc BUFFED AGAIN! | Sep 1st Class Tuning"**
+  (170 chunks, ~6m12s, published 2026-08-28). A scripted, self-anchored read that splits by
+  bracket, so **two takes**:
+  · **Havoc / raid — buff.** The flat 4% aura buff on a spec he already called "pretty okay",
+    plus a trinket correction he published the same day: **Font of Venomous Rage** was
+    under-simming because SimC modelled the tooltip's four ticks when it actually ticks five —
+    base tick 217,676 → 272,096, his average crit ~630k → 787k, roughly 25% missing. He now
+    rates it his best on-use over Heart of Ula'tek (drops from Ula'tek, timers matching that
+    fight's ~2:15 / 4:45 / 9:30 burns, cleaves; his own casts 2M and 4.7M, ~1.7M DPS in that
+    window), amplifiable inside Inertia and potion windows. Conclusion: "incredibly good spot",
+    "very well off in raid for the season".
+  · **Havoc / M+ — buff.** Havoc "seems pretty good right now" and the extra 4% "will go a long
+    way"; the buff roughly pays for dropping Glaive Tempest for Isolated Prey (≈4% overall lost
+    against ≈10% single target gained), which he calls a newly available option.
+  His **2026-08-22 whole-spec "both" take was superseded** by the pair — the Obli 08-23/08-28
+  precedent for a bracket-split replacing a `both` read.
+  **Devourer got NO take**: the only mention is that Havoc/Devourer stats now roll into
+  Vengeance, a gear remark and not a read. The eleven other specs he names (Frost DK, Feral,
+  Balance, Resto Druid, BM, Survival, Fire, Frost Mage, Mistweaver, Windwalker, Prot Paladin)
+  are him reading the tuning notes aloud, outside his registered scope — including the Frost
+  Mage "getting laid on Twin Fang on Mythic World First" line, which is a fight artifact twice
+  over. `latest` advanced to state what was distilled.
+- **VERIFIED-SKIPPED — Critcake, `UfjdyqXGbeM`** (255 chunks, ~26m): a commentated pug key run of
+  the same shape as `if8kxRXBzSA`, skipped 08-28. His scripted intro is 4-set/gear housekeeping
+  ("the spec still works even though I don't have ideal stats"); the rest is callouts, banter and
+  chat answers. Three strength-adjacent lines tested and all failed — "I like the feel of Fury
+  four piece … feels good" is feel not placement; "I felt like I would have done better as
+  slayer" sits after a speaker-change marker; and the one genuinely comparative line, *"is arms
+  and fury damage comparable. Yes,"* / *"keys."*, straddles a speaker boundary and cannot be
+  attributed from the caption track. His 08-26 Fury M+ take stands as the current read. If he
+  restates the Arms/Fury 4-set comparison in a scripted video, distil it then.
+- **`pdYpGLyZ7VM`** (LBNinja7, "Healers Buffed AGAIN!! | 12.1 Tuning") came back `unavailable`
+  from Supadata and **stays queued**.
+- **QUEUED 4**, deliberately narrow against the **100-request MONTHLY** budget rather than the
+  25-per-run cap: Kalamazi `z_dKoGx_FIk` (Warlock sims, all three specs), izen `bDElWkJxvtY`
+  (general → metaNotes lane, Sept 1 tuning), YoDaTV `xYXkZA1L490` (M+ patch notes + tier-list
+  update, tank-scoped — the coverage-poor role), Whispyr `1qclgMKPdz4` (Assassination, "Fatebound
+  is BACK"). Shadarek's `DJCr5_KFzcM` "new BiS Gear Setup and Post-Buff Sims" was deliberately
+  NOT queued — gear-shaped, same creator+spec distilled tonight.
+- The remaining ~192 keyword-passing candidates are a **BUDGET cut** and were left **UNSEEN** so
+  the next run reconsiders them. **Nothing was added to `seen[]` tonight.**
+
 ## 2026-08-29 (nightly, CI runner) — 4 takes from one pre-fetched transcript; 3 queued
 
 All **44** transcribable channels polled via the YouTube RSS endpoint, 0 failures, 15 entries
@@ -294,7 +348,8 @@ fetched). Takes added: 7. MetaNotes added: 0. Superseded: 6. Queue: 3 drained, 5
   so nothing new was added on that side. If either queued Priest video turns out to be an M+
   read, that decision lands before it is logged.
 
-## 2026-08-27 (local, scheduled) — the caption 429 is BACK after two clear days; queue held at 3, nothing distilled
+
+## 2026-08-27 (local, scheduled) — the caption 429 is BACK after two clear days; queue held at 3, nothing distilled
 
 - **The residential yt-dlp caption lane is 429-blocked again.** All three queued ids attempted once
   each at the pinned version with the documented flags

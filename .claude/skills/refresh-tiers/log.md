@@ -16,6 +16,50 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-30 (nightly, CI runner) — all three reachable sources fetched, ZERO letters moved; Archon walled a SIXTH night
+
+- **Icy Veins — all 6 live pages, HTTP 200, 196–343 KB decompressed, direct browser-UA GET**
+  (r.jina.ai deliberately not tried; it is IP-403 on these hosts). `<style>` blocks stripped
+  BEFORE parsing, `<table class="tier-list">` count asserted EXACTLY 1 per page, letter from
+  each row's first `<td>`, spec from each `tier-list-entry`'s FIRST `img` alt looked up WHOLE.
+  Counts reconciled before any merge: raid 27/7/6 = 40 and M+ 27/7/6 = 40 = **80 cells**,
+  0 unmatched, 0 duplicates, every letter inside the registered 7-band scale. The M+ DPS page
+  still carries its literal `<tr><td>TBD</td>` row holding Windwalker Monk and Frost Death
+  Knight; both parse as explicit nulls and match the stored nulls, so the **rated**-cell count
+  stays 78 (the number `required-sources` counts) while the parse reads 80. All 80 cells
+  byte-identical to stored: **0 moves**, nothing merged, snapshots → 08-30. Self-dates (JSON-LD
+  `dateModified`) unchanged: raid DPS 08-23, raid healer 08-24, raid tank 08-08, M+ DPS 08-23,
+  M+ healer 08-23, M+ tank 08-23 — matching stored AND the pre-agent published-evidence
+  artifact. Era-verified s2 on all six from the BODY: the raid healer page still titles itself
+  "Patch 12.0.7 / Midnight" while its body counts Season 2 21× against Season 1 6× — body over
+  title, the blue-tracker precedent. Devourer present and A in both DPS pages.
+- **Method — both pages, HTTP 200, 159 KB / 166 KB.** Letters from each `tier__tier` block's
+  `tier__title`, specs from each entry's `img` alt, extras rejected by ROSTER MATCH: the M+
+  page's nine unmatched images are the eight dungeon-difficulty blocks + the Method logo, the
+  raid page's one is the logo. 40 rows per bracket, 0 duplicates, letters confined to the
+  4-band S|A|B|C scale. All 80 byte-identical: **0 moves**. Self-dates from the body's "Last
+  Updated" line unchanged — raid 10th August 2026, M+ 13th August 2026 (the M+ list is bylined
+  Tactyks, which is exactly why his creator entry is raid-scoped). Era-verified s2 from the
+  body; neither page mentions Season 1.
+- **Wowhead — all 6 pages, full browser header set, HTTP 200, 73–339 KB.** Unescape `\/` → `/`
+  across the WHOLE document FIRST, then locate `[tier-list=rows] … [/tier-list]` — never anchor
+  on `WH.markup.printHtml(`. Exactly ONE block per page, asserted; tolerant-whitespace tier
+  labels; specs from the `[spec-badge=<spec>-<class>]` kebab slug. 27/7/6 per bracket = 80 rows,
+  0 unmatched, 0 duplicates. **The 08-28 M+ DPS rebuild HELD**: Demonology S, Unholy A, Subtlety
+  A, Balance B, Frost DK B and Frost Mage C all unchanged, and the tier shape counts out the
+  same (S 1, A+ 2, A 7, B 14, C 3 = 27). All six `dateModified` unchanged (raid DPS 08-14, raid
+  healer 08-18, raid tank 08-14, M+ DPS 08-28, M+ healer 08-26, M+ tank 08-18), matching stored
+  and the artifact, so no `published` value was touched. **0 moves**, snapshots → 08-30.
+- **Archon — walled, night 6, still the HTTP 403 form.** All 12 registered pages fetched
+  individually: every one 403 with a 5.8–5.9 KB Cloudflare body, `<title>Just a moment...</title>`,
+  `__NEXT_DATA__` count 0 — asserted on `__NEXT_DATA__` presence, never on the status code. The
+  site ROOT returns the same 403 and r.jina.ai returns a 319-byte "Human Verification / One Quick
+  Check" page, so this is upstream and not our parse. Nothing merged, no snapshot bumped,
+  `encounter-tiers.json` untouched (s1 stamp, 619 tier rows). Consensus stays at Icy Veins +
+  Method + Wowhead, "consensus of 3", and the S1→S2 recomposition the anomaly gate is waiting
+  for is still held off by the wall.
+- **No `seasonVerified` value changed**, so `freeze-season.mjs` had nothing to consider.
+
 ## 2026-08-29 (nightly, CI runner) — Wowhead's M+ DPS page REBUILT: 6 letters moved, Demonology B→S; Archon walled a FIFTH night
 
 - **Icy Veins — all 6 live pages, HTTP 200, 196–343 KB decompressed, direct browser-UA GET**
@@ -191,7 +235,8 @@ earlier run today, and a snapshot is not bumped onto data that did not move.
   Standing consequence unchanged: Archon is the one tier source still describing S1, so this wall
   is also holding back the consensus recomposition the anomaly gate is waiting for.
 
-## 2026-08-27 (local, scheduled) — Archon's wall is NOT IP-scoped: it holds from a residential IP too, and it has changed shape from 403 to 200
+
+## 2026-08-27 (local, scheduled) — Archon's wall is NOT IP-scoped: it holds from a residential IP too, and it has changed shape from 403 to 200
 
 - **The residential retry that this local run exists to make: Archon is still walled.** The nightly
   has recorded all 9 Archon rows unreachable for three consecutive nights, and the standing
