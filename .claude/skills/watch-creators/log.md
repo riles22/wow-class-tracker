@@ -16,6 +16,41 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-30 (local, scheduled) — the caption 429 is on its FOURTH consecutive day; queue held at 5, nothing distilled
+
+- **One caption probe, one 429, stopped there** — the skill's rule, not a judgement call.
+  `--list-subs` on the queued Whispyr video `1qclgMKPdz4` succeeded and returned the full
+  auto-caption language table, so captions exist and the info endpoint is healthy; the single
+  caption download that followed returned `ERROR: Unable to download video subtitles for 'en':
+  HTTP Error 429: Too Many Requests`. That is the persistent IP-scoped abuse-flag shape on
+  `timedtext`, not throttling. No retries, no client-shuffling, no backoff ladder.
+- **Day four puts this PAST the skill's 24–72h decay window.** The relapse pattern is now
+  clear 08-25, clear 08-26, blocked 08-27, 08-28, 08-29 and 08-30. The 08-27 reading — that
+  the 08-25 clearing was a remission rather than a fix — has four days behind it. The
+  residential yt-dlp caption lane cannot be treated as a reliable catch-up route, and a
+  scheduled run cannot fix that by trying harder.
+- **The authenticated fallback was again NOT usable, and the reason is now a FILE reason, not
+  a harness one.** The `cookies.txt` in `~/Downloads` that the 08-28 run recorded as
+  present-but-unreadable was read this run — and it is **not a cookie export at all**: 792
+  bytes whose entire content is a `robots.txt` (`User-agent:` / `Disallow:` / `Sitemap:`
+  lines, no cookie records, no youtube.com domain). So even with the permission question
+  settled the owner-approved lane has no usable credential on disk. If Riley wants that lane
+  available to scheduled runs, it needs a genuine Netscape-format export from a private
+  window — the 08-24 file will never work no matter who can read it.
+- **Queue deliberately UNCHANGED at 5** (`pdYpGLyZ7VM` LBNinja7, `z_dKoGx_FIk` Kalamazi,
+  `bDElWkJxvtY` izen, `xYXkZA1L490` YoDaTV, `1qclgMKPdz4` Whispyr). Nothing moved to
+  `skipped[]`: a skip is a DURABLE claim that the transcript was read and held nothing, and a
+  transport 429 is not that. All five are keyword-shaped titles the nightly's own filtered
+  discovery already queued, and they drain through Supadata on a different network path —
+  proven unaffected by this flag by the 08-30 nightly, which fetched 2 of 3 while this lane
+  was blocked.
+- **No unfiltered breadth sweep, on purpose** (the 08-27/08-28/08-29 reasoning, unchanged):
+  the local run's breadth privilege is that yt-dlp is free, and with captions 429ing a wider
+  sweep yields no transcripts and therefore no takes — it would only spend the info endpoint's
+  goodwill on the one service still answering.
+- 0 takes, 0 metaNotes, 0 verified skips. `data/creator-takes.json` and
+  `data/pending-transcripts.json` are both untouched.
+
 ## 2026-08-30 (nightly, CI runner) — 2 bracket-split Havoc takes; 1 verified-skipped; 4 queued
 
 All **44** transcribable channels polled via the YouTube RSS endpoint, 0 failures, 15 entries

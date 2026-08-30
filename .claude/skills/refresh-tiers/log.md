@@ -16,6 +16,38 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-30 (local, scheduled) — Archon walled a SEVENTH night; residential re-probe reproduced the wall; 0 letters touched
+
+- **Scope: Archon only.** Icy Veins, Method and Wowhead were all fetched successfully by the
+  nightly ~1h before this run (15:16Z) with zero letters moved, so re-fetching them here would
+  be independently regenerating data CI already produced — the thing that makes a local push
+  unmergeable. Verified-unchanged rather than re-fetched.
+- **The wall held from a residential IP, and this is a CONFIRMATION, not a new finding.** The
+  `archon-tiers` contract row already records the residential re-test of 2026-08-27 and
+  declares the datacenter-IP hypothesis dead; this run reproduced it. One page probed
+  (`dps-rankings/raid/heroic/all-bosses`) with the full browser header set: **HTTP 200**, 1,290
+  bytes, `<title>Human Verification</title>`, and — the assertion that actually matters —
+  **`__NEXT_DATA__` count 0**, exactly as the contract row instructs (never assert on the
+  status code here; a status-only check would have recorded SUCCESS and stamped a fresh
+  snapshot over unchanged letters).
+- **Worth recording: the two shapes coexist.** Tonight's nightly saw **403** with a
+  `Just a moment...` Cloudflare body from CI; this residential probe saw **200** with the
+  signed `/human-challenge` form (hidden `intendedUrl` / `expiresAt` / `signature` fields, plus
+  `window.__CF$cv$params`). Same wall, two presentations depending on the requesting path — so
+  neither status code is diagnostic on its own, which is precisely why the contract asserts on
+  `__NEXT_DATA__`.
+- **No attempt was made to submit, replay or automate past the challenge.** The contract row
+  says so in terms and it is also simply not something a scheduled run should do; the form is
+  bot-detection and defeating it is out of scope at any hour. Nor was anything backfilled from
+  Warcraft Logs — Archon's letters are Archon's own tiering, and publishing ours under the
+  `archon` source id would fabricate the source (hard rule 3).
+- **Consequence, unchanged and correctly handled by the build:** `consensusFor` stays at Icy
+  Veins + Method + Wowhead and the toolbar reads "consensus of 3". Note the Archon pages are
+  `seasonVerified: s2` as of the 08-25 snapshot, so this is a reachability outage rather than
+  the season-gate case — the letters are 5 days stale, not withheld.
+- `data/specs.json` ratings, `data/encounter-tiers.json` and every Archon snapshot date are
+  byte-identical. 0 rows written.
+
 ## 2026-08-30 (nightly, CI runner) — all three reachable sources fetched, ZERO letters moved; Archon walled a SIXTH night
 
 - **Icy Veins — all 6 live pages, HTTP 200, 196–343 KB decompressed, direct browser-UA GET**

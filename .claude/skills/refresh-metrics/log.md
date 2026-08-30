@@ -16,6 +16,41 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-30 (local, scheduled) — nothing merged; the Bloodmallet/SimC MID2 adoption is left for the owner ON PURPOSE
+
+- **Nothing was fetched or merged this run.** The nightly (15:16Z, ~1h before this run) had
+  already pulled every reachable metrics source: Mythicstats merged 39 rows, Murlok fetched
+  clean and correctly did not advance an unchanged 08-28 cut, WoWMeta stays the owner-accepted
+  frozen-upstream red, and the Archon numeric series are behind the same wall as its letters
+  (see refresh-tiers/log.md). Re-fetching any of them here would regenerate CI's own data.
+- **The MID2 adoption is the one live decision, and a scheduled run is the wrong place to make
+  it.** Coverage moved again tonight — Bloodmallet returns real charts for **22 of 27** DPS
+  specs against 19 on 08-29 (Havoc, Arms and Fury arrived), and SimC's `MID2_Raid.txt` maps to
+  the same **22**. The five still missing are identical on both sources — Balance Druid, Feral
+  Druid, Augmentation Evoker, Devastation Evoker, Retribution Paladin — so the two are
+  converging together exactly as the contract row predicts.
+- **What is no longer blocking, and what still is.** The row-drop floor has stopped being an
+  obstacle on both rows: 22 of 26 is a 15% drop, inside `maxRowDropPct` 0.25. What remains is
+  `maxValueMovePct` — all 22 overlapping SimC rows move **+69.3% to +135.1%** (Frost DK
+  137,886 → 233,408; Fury Warrior 109,256 → 256,864) — plus, on Bloodmallet,
+  `SIM_TIER_REQUIRED` and the tier-uniformity invariant, since MID2 measures ~1.79x MID1 with a
+  spec- and target-count-dependent ratio that no scale factor reconciles.
+- **Why this run declined it rather than exercising the local run's ack privilege.** The
+  local-run skill says a human at the keyboard substitutes for the `value_move_ack` — but this
+  run is the *unattended scheduled* one, and there is no human at the keyboard. Both contract
+  rows say in terms "adopted WHOLESALE via the human value_move_ack". Adopting 22 specs would
+  rewrite the ST/cleave/AoE labels and row tags across the whole DPS roster (`fightLabels`
+  pools every profile with no provenance key), and dropping the other five would delete their
+  stored profiles outright. That is a published-output change on a mass value move, and an
+  unattended agent standing in for the human review the gate exists to require is exactly the
+  substitution the gate is designed to prevent. Flagged, not taken.
+- **Cheapest correct trigger for the next look:** the five missing specs. When Bloodmallet and
+  SimC both cover 27 of 27, wholesale adoption becomes a clean single call needing only the
+  ack — no partial-merge reasoning at all. Waiting costs stale sims; adopting early costs
+  published labels that encode which specs upstream happened to re-sim.
+- 0 metric rows, 0 profiles, 0 dates written. `data/run-manifest.json` deliberately untouched
+  (partial run — see the local-run skill's manifest rule).
+
 ## 2026-08-30 (nightly, CI runner) — Mythicstats moved (28 of 39) and merged; Bloodmallet coverage 19 → 22 but still held
 
 - **WCL (both live rows) — from the pre-agent evidence file only.** `wcl-fetch/evidence.json`,

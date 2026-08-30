@@ -16,6 +16,34 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-30 (local, scheduled) — 0 new builds; Sept 1 pass re-read and still at forum v3; no 12.2
+
+- **Between-cycles posture, live lanes only.** The four PTR WCL zone sweeps (54/52/56/57)
+  stay dormant and were not attempted; their contract rows were removed at the flip, so they
+  need no manifest excuse.
+- **Wowhead news RSS swept** (`/news/rss/all`, HTTP 200, 154 KB, 40 items, parsed per `<item>`
+  block rather than by tag adjacency). Twenty-three items dated 2026-08-28 or later; **none is
+  new class-tuning content**. The two that look like it are already logged: "Boomkin, Feral
+  Druid, Mistweaver Monk Buffs — Class Tuning Coming with Weekly Reset" (08-28) IS the
+  September 1 pass already in the feed, and "Vashnik LFR Nerf — Patch 12.1 Hotfixes for August
+  27th" (08-28) is the round-up logged as the 2026-08-27 hotfix entry. No "Hotfixes for August
+  28th/29th" round-up has been published yet.
+- **Deliberately NOT logged: "Bonus Roll Hotfix Applied Early: No More Loot from Locked
+  Bosses"** (08-29). It is a live hotfix, but it changes bonus-roll/loot-lock behaviour and
+  touches no spec's tuning, so it has an empty `specsAffected` and would fail the
+  `specsAffected` ↔ `highlights` coverage gate for the right reason. A loot-level change lands
+  on every spec equally; the patch feed is the class-tuning record, not a general patch log.
+- **The September 1 pass was RE-READ rather than assumed current**, since announced tuning gets
+  retuned before it ships and the pass is two days out. Discourse JSON for topic 2342331
+  (follow the 301 — the bare `.json` URL redirects): post #1 by Linxy is still **version 3**,
+  `updated_at` 2026-08-28T22:48:44Z, unchanged since the 08-29 local run distilled it. The
+  stored build entry (14 specs, 15 highlights) is therefore current by construction; nothing
+  to re-distil.
+- **No 12.2 PTR announcement** anywhere in the sweep. `PHASES.ptr` stays null and the cycle
+  stays closed; opening a 12.2 cycle remains an owner action, not an agent-side edit.
+- `data/ptr-builds.json` untouched; newest entry stays the 2026-08-28 "Class Tuning Incoming –
+  September 1" post.
+
 ## 2026-08-30 (nightly, CI runner) — 0 new builds; the Sept 1 pass still at forum v3, no 12.2 anywhere
 
 Between-cycles posture unchanged: `PHASES.ptr` is null, no 12.2 PTR announcement in any lane,
