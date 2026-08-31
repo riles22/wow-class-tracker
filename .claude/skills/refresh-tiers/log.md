@@ -16,6 +16,40 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-31 (nightly) — Icy Veins M+ re-cut (11 letters) + Wowhead raid healers (3); Archon walled night 9, and from CI it is STILL the 403
+
+- **Three of four tier sources refreshed, 240 rows re-applied, 14 letters moved.** Icy Veins
+  6 pages, Method 2, Wowhead 6 — all direct browser-UA GET, HTTP 200, r.jina.ai deliberately
+  not attempted (IP-403 on these hosts). Per-page counts reconciled BEFORE any merge:
+  Icy Veins raid 27/7/6 and M+ 27/7/6 = 80; Wowhead the same 80; Method 40 + 40. Zero
+  unmatched, zero duplicate-tier conflicts, every letter inside its registered scale.
+- **Icy Veins M+ moved 11 letters, and two of them were the TBD rows closing.** Last night's
+  run recorded a literal TBD row holding Windwalker Monk and Frost Death Knight; both are
+  rated now (Windwalker S, Frost DK A+), so they land as null → letter rather than as
+  movement. The other nine: Demonology A+ → S+, Beast Mastery A → A+, Feral A → A+,
+  Mistweaver A → A+, Holy Priest B → A, Survival B → A, Discipline C → B, Destruction
+  A+ → A, Marksmanship A → B. All three M+ pages carry `dateModified` 2026-08-30 (15:31,
+  13:48, 12:46 UTC) — the DPS page was re-cut about fifteen minutes AFTER last night's
+  fetch, which is exactly why last night saw none of this.
+- **Wowhead raid healers moved 3 and is dated TODAY** (`dateModified` 2026-08-31T11:20 −05:00):
+  Discipline S → A, Holy Priest B → A, Holy Paladin A → B. Every other Wowhead page and both
+  Method pages are byte-identical to last night. Method's own "Last Updated" strings are
+  unchanged at 10th August (raid) and 13th August (M+).
+- **The Icy Veins raid-HEALER page title still says "Patch 12.0.7 / Midnight" and it is still
+  Season 2** — body over title, the blue-tracker precedent. Its section heading reads
+  "Midnight Healer Tier List for Season 2" and "Season 2" appears 21 times in the body.
+  seasonVerified stays `s2`; no seasonVerified value changed anywhere this run, so
+  freeze-season had nothing to be triggered by.
+- **Archon: night 9, and the shape depends on WHERE YOU FETCH FROM.** The 08-31 local entry
+  below records the wall turning into an HTTP 200 carrying a ~2.5 KB human-verification body
+  from Riley's residential IP. From the CI runner the same twelve registered pages return
+  **HTTP 403 with a ~6.1 KB Cloudflare managed-challenge body** (`cType: 'managed'`,
+  "Just a moment...", `/cdn-cgi/challenge-platform/`), `__NEXT_DATA__` count **0** on all
+  twelve. So the two forms coexist and are IP-dependent — which does not change the required
+  behaviour one bit, because the assertion that matters is `__NEXT_DATA__` presence and it is
+  zero either way. Nothing touched: archon's snapshots stay 2026-08-25/08-18 and its letters
+  stay out of the consensus, which remains Icy Veins + Method + Wowhead.
+
 ## 2026-08-31 (local, scheduled) — Archon walled an EIGHTH night, and the wall CHANGED SHAPE; 0 letters touched
 
 - **Archon is still unreachable, but it is no longer serving the 403.** Two representative

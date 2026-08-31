@@ -16,6 +16,66 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-31 (nightly) — 44 channels polled, 4 transcripts distilled into 15 takes + 24 metaNotes, 2 queued
+
+- **Discovery: 44 unique transcribable channels, 0 RSS failures, 660 entries.** Seen-set
+  recomputed from the four structured lanes (videos[] / skipped[] / seen[] / take+metaNote
+  urls) = **1220 ids**, of which 250 come from take urls. **245 unseen videos, all 245 inside
+  the cycle** (bound = 2026-06-18, the OLDEST date in ptr-builds.json, taken as a date and
+  not an index). This is a nightly, so the keyword filter stays on for QUEUEING: those 243
+  not queued are budget dismissals and are deliberately left in NO lane, so a local run
+  reconsiders them.
+- **Four pre-fetched transcripts, all distilled, none skipped.** `transcript-fetch/summary.json`
+  verdict `ok`, requested 5 / fetched 4; `1qclgMKPdz4` (Whispyr) came back `unavailable` and
+  stays queued.
+  - **LBNinja7 `pdYpGLyZ7VM`** (2026-08-29) → **3 takes**, bracket `both`: Mistweaver a buff
+    he expects to make it "a force to be reckoned with in raid" (and he names what the 5%
+    does NOT buff — Ancient Teachings and SCK healing in keys); Restoration Druid buffed but
+    already fine, the change he calls least needed; Discipline Priest mixed — glad of the
+    Shadow Mend reduction, but "still stuck back in 2024" on mana and needing more.
+    **Two asides deliberately NOT logged**: "holy's actually in a good spot" (Holy PALADIN,
+    not Priest — the transcript reaches it through "any Paladin changes? prot only") and "no
+    Shaman changes, Shaman's in a very good spot". Both are no-change remarks in a tuning
+    reaction, and logging them would have clobbered two substantive 08-15 takes at the same
+    lens with a passing line. Left for a video that actually argues them.
+  - **Kalamazi `z_dKoGx_FIk`** (2026-08-29) → **5 takes**: Demonology M+ ("quite possibly the
+    highest overall output damage spec in M+ right now", ST sim 205k → 228-232k, limited by
+    utility not damage) and raid (taking over the cleave bosses); Hellcaller Affliction raid
+    (the THC/Spire Coiled Altar pick) and M+ (universal Agony buff, hybrid Seed builds);
+    Destruction M+ mixed (static at ~230k, strong only where mobs stay in Rain of Fire and
+    Cataclysm — "doesn't perform the best" in pugs). His raid Destruction take from 08-26
+    left LIVE: this video says nothing new about it.
+  - **YoDaTV `xYXkZA1L490`** (2026-08-29) → **7 M+ takes**, all inside his registered tank +
+    Paladin + Prot/Arms Warrior scope: Vengeance to S and possibly the best tank on the 4%
+    damage-taken buff (and he retracts his own "Aldrachi cope" — Annihilator is better),
+    Guardian level with it, Blood DK / Arcane / Holy Paladin / Arms unchanged as the best
+    four, Brewmaster A+ as the preferred fiscomp tank, Protection Warrior unchanged in A,
+    Protection Paladin left in A because ~5% damage does not fix post-Reflection-of-Radiance
+    survivability. ⚠️ **One take declined on ASR**: the passage that appears to move
+    Retribution to A+ reads "Brett's most recent buffs…", and the referent cannot be pinned
+    without guessing at the mangle. A claim must rest on the source it deep-links, so it was
+    dropped rather than written; the 08-22 Retribution take stays live.
+  - **izen `bDElWkJxvtY`** (2026-08-29) → **24 metaNotes** (general-creator lane, never takes):
+    every spec in the September 1 pass weighed against live Heroic/Mythic parses and M+
+    score/damage/popularity charts. Highlights: Frost DK last in the raid on Mythic and
+    second-last on Heroic; Feral weakest in Mythic yet the fourth-highest M+ average score;
+    Balance top five in raid only because the early bosses cleave; Resto Druid mid-pack in
+    raid but the least represented healer in high keys; Mistweaver "still not enough … to
+    become decent"; Marksmanship left unbuffed precisely because it is performing; Prot
+    Paladin's 150% Blaze of Glory worth ~3% of its damage; Augmentation the one bottom spec
+    given nothing. **The opening list-mention was dropped per the list-mention rule** — Arcane,
+    Arms, Elemental, Marksmanship, Blood DK, Holy Paladin and Preservation are named only as
+    "specs whose players might have been sweating", which is not a spec read (Marksmanship
+    and Arcane are logged from their own later, argued passages instead).
+- **Supersession:** 15 same-creator/same-spec/same-lens takes and 20 izen metaNotes retired.
+  Cross-lens pairs left alone — a prior `both` or unbracketed note is not the same lens as a
+  new `raid` or `mplus` one.
+- **Queued 2** (keyword-relevant, no fetched transcript): Obli `wPDn4G-8JNs` "New Frost Single
+  & Two target buffs coming on Tuesday!" and Shadarek `DJCr5_KFzcM` "Havoc Demon Hunter new
+  BiS Gear Setup and Post-Buff Sims". Queue is now 3 including the unavailable Whispyr video.
+- `latest` advanced on all four creators to what this run actually distilled, never to a
+  fresher title.
+
 ## 2026-08-31 (local, scheduled) — caption 429 on its FIFTH consecutive day; queue held at 5, nothing distilled
 
 - **The anonymous residential caption lane is still 429.** One probe only, on the queue's head

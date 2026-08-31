@@ -5390,7 +5390,7 @@
       "patchContext": "12.1 PTR — reaction to the August 18 healer tuning pass (supersedes his 08-02 main-choice review; complements his M+ tier list read)",
       "url": "https://youtu.be/DMtMmUW5uRE?t=125",
       "claim": "He frames Restoration Druid as a spec whose problems were acknowledged on both axes at once. On healing, he places it in PTR testing down near Mistweaver for raid throughput and notes a lot of people were disappointed by its dungeon performance too, so an overall healing increase is in his word phenomenal. On damage he is stronger still: he describes Druid damage on the PTR as literally non-existent, to the point that casting damaging spells in a dungeon felt like trolling the spec, and calls the 20% buff huge for that reason. He is careful not to overclaim what the damage buff achieves — he does not know how much it will actually change any attempt to play for damage, and mentions a fringe owl-weaving build he saw a few people testing without endorsing it — but says the point is that spending globals on damage will no longer feel like inting. His summary is that he is glad the developers acknowledged underperformance in both forms of throughput.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Monk",
@@ -5402,7 +5402,7 @@
       "patchContext": "12.1 PTR — reaction to the August 18 healer tuning pass (supersedes his 08-02 M+ tier list read; complements his 08-10 Mythic+ guide)",
       "url": "https://youtu.be/DMtMmUW5uRE?t=189",
       "claim": "As a Mistweaver player he calls this the change that made his morning, and explains why the spec had been in a strange place: Mistweaver does not heal entirely off the healing modifier, so the repeated PTR nerfs to that modifier hit only part of the kit. The damage-driven healing kept performing while spot heals and cooldowns got really bad, which he says was also dragging down raid healing. He reads the developers as targeting exactly that, quoting their intent to increase cast healing and the four-set to improve performance while maintaining build diversity, and approves of the blanket 8% healing buff excluding Ancient Teachings applying broadly. He reports the spot-healing shortfall was visible even in his own Mythic 0 runs that week, well below where Season 1 had it, and treats the pass as reverting one of the PTR nerfs. His conclusion is that Mistweaver is back to being a big-time contender in Mythic+, with the four-set activation increase helping boss healing there specifically; he raises race-to-world-first only speculatively.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Priest",
@@ -5414,7 +5414,7 @@
       "patchContext": "12.1 PTR — reaction to the August 18 healer tuning pass (supersedes his 08-02 main-choice review and M+ tier list read)",
       "url": "https://youtu.be/DMtMmUW5uRE?t=356",
       "claim": "He anticipates Discipline players being the ones upset by this pass and gives a qualified rather than hostile read. He accepts the stated design — all damage reduced 30% with Atonement retuned around it so total healing should come out about the same, plus an Entropic Rift damage increase because the developers like that Void Weaver is now seeing Mythic+ play — and says if the healing really does end up equal, it is a fine change, since Discipline's damage was very high. He expects it to improve the race-to-world-first picture, reasoning that guilds had surely been contemplating stacking Discipline given how strong both its healing and its damage were. His reservation is about practice rather than intent: he stresses this is a massive shift of power out of damage and into healing-from-damage, and warns that even when the numbers balance on paper, a change like this alters priorities and how the spec actually plays, so he hopes it balances out without ruining Discipline. He notes approvingly that the Entropic Rift buff shows the developers understood Void Weaver leans on that damage.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Priest",
@@ -5570,7 +5570,7 @@
       "patchContext": "12.1 PTR — week-one Mythic+ Warlock outlook (supersedes his 08-10 both read)",
       "url": "https://youtu.be/9bQVdlUqeAM?t=322",
       "claim": "Asked directly what to play in week one of Mythic+, he answers that the three Warlock specs are about the same for the most part, each excelling and falling short in different places, and that players can play whatever they want — placing Affliction at parity rather than ahead or behind, with only Destruction singled out at the high end.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Warlock",
@@ -5906,7 +5906,7 @@
       "claim": "Devourer is the one Demon Hunter spec the August 25 pass does not touch, and he says so plainly: there is nothing for Devourer. He had hoped for some change, naming a Collapsing Star buff that would have put Annihilator in a better spot, and did not get it. Against that he reports what he has actually been seeing since launch — the meta is heavily Void's Guard favoured, but Annihilator gameplay is appearing and he thinks it can be better on some bosses and in some situations. His standing build recommendation is unchanged and he restates it: Void's Guard is the favoured build but he still does not recommend playing it, while Annihilator is good for Mythic+ and good for many raid fights."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Warlock",
       "spec": "Affliction",
       "creator": "Kalamazi",
@@ -6037,7 +6037,7 @@
       "patchContext": "Season 2 live — his Mythic+ tier-list update after the announced August 25 tuning pass, week one of the season",
       "url": "https://youtu.be/1wxoNsiyCtM?t=42",
       "claim": "He prices the 24% Mastery: Fel Blood increase at about 4 to 5% overall DPS by his own napkin math, plus a very small amount of survivability, and calls that pretty good for Vengeance. On the back of it he places Vengeance in A+ and names it the frontrunner for tank damage: the best tank for damage output after this buff if Chaos Brand is counted, and close to Blood DK if it is not. He adds that the funnel-focused build gives the most insane funnel of any tank while Annihilator does high overall damage, and that Chaos Brand alone is worth a lot of damage to a caster comp that has no other Demon Hunter.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Death Knight",
@@ -6049,7 +6049,7 @@
       "patchContext": "Season 2 live — his Mythic+ tier-list update after the announced August 25 tuning pass, week one of the season",
       "url": "https://youtu.be/1wxoNsiyCtM?t=160",
       "claim": "He keeps Blood DK in his top group of Mythic+ specs and calls it still the tankiest of the tanks. He addresses head-on the speculation that Blood falls apart once keys reach the low twenties and rejects it: it will not be one-shot at 21, he does not put much stock in the idea, and he sees no reason a spec would suddenly start getting one-shot a single key level higher while other tanks became tankier at the same time. Because he reads it as the tankiest tank at any key level, it stays in his S+ group.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Druid",
@@ -6061,7 +6061,7 @@
       "patchContext": "Season 2 live — his Mythic+ tier-list update after the announced August 25 tuning pass, week one of the season",
       "url": "https://youtu.be/1wxoNsiyCtM?t=375",
       "claim": "He places Guardian just below Vengeance in A+ and calls it the next tank after VDH, at almost the same level. His case is utility plus untapped potential: it is very good at providing Mark of the Wild, it is very tanky inside cooldowns, and he thinks most players are not yet playing around the reworked apex talent properly, so the spec has room nobody has really explored. What keeps it a step below Vengeance is damage — he does not rate its output as highly as Vengeance’s or Blood DK’s.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Monk",
@@ -6073,7 +6073,7 @@
       "patchContext": "Season 2 live — his Mythic+ tier-list update after the announced August 25 tuning pass, week one of the season",
       "url": "https://youtu.be/1wxoNsiyCtM?t=120",
       "claim": "He is dismissive of the Brewmaster line in the pass: a very small 3% damage buff and an absorb increase on Celestial Brew and Celestial Infusion that he says might as well not have been written, because you are not going to feel it — he wanted the cooldown reduced again instead, for more free uses. He leaves Brewmaster near the bottom of his list and says it and Protection Warrior are probably not having the best seasons, singling out the doubled cooldown on Celestial Infusion as not called for and as what makes the spec feel awkward to play, while acknowledging that people are still pushing high keys on it.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Warrior",
@@ -6085,7 +6085,7 @@
       "patchContext": "Season 2 live — his Mythic+ tier-list update after the announced August 25 tuning pass, week one of the season",
       "url": "https://youtu.be/1wxoNsiyCtM?t=155",
       "claim": "He dismisses the Protection Warrior line as the smallest buff of all time and leaves the spec near the bottom of his tier list alongside Brewmaster, saying the two are probably not having the best seasons. He offers no revised case for it in this video beyond that placement.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Warrior",
@@ -6097,7 +6097,7 @@
       "patchContext": "Season 2 live — his Mythic+ tier-list update after the announced August 25 tuning pass, week one of the season",
       "url": "https://youtu.be/1wxoNsiyCtM?t=203",
       "claim": "Arms stays in his top group of Mythic+ specs. He notes that Arms took a small nerf in the last patch but says he still thinks it will be really good, crediting a strong damage profile and strong overall DPS in keys.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Paladin",
@@ -6109,7 +6109,7 @@
       "patchContext": "Season 2 live — his Mythic+ tier-list update after the announced August 25 tuning pass, week one of the season",
       "url": "https://youtu.be/1wxoNsiyCtM?t=482",
       "claim": "He puts Protection Paladin in A and restates his standing objection to the widespread expectation that it is the second-best tank of the season: he simply does not believe it after the Reflection of Radiance nerfs, says flatly that he does not think it is very good right now, and invites disagreement rather than arguing it further.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Paladin",
@@ -6315,7 +6315,7 @@
       "patchContext": "Season 2 live — \"Is Demo OP? Warlock Buffs Are Changing Things!\", published 2026-08-26, the follow-up to his 08-22 preview now that the August 25 Warlock pass has actually shipped. He reads it off live Warcraft Logs for the Venomous Abyss (heroic and mythic filtered to the previous 24-48 hours) and off Raider.IO/M+ logs, boss by boss, with a co-streamer present — only his own reads are distilled here.",
       "url": "https://youtu.be/A7ZMRYQALHw?t=75",
       "claim": "His 08-22 preview asked whether the buffed Demonology could take fights off Destruction and answered probably not; four days of live logs have changed his answer for much of the tier. He says there has been a lot more Demonology play than most expected and that it is taking over on the stacked-cleave fights: Nek'zali, where he expected the add travel time to be longer than it turned out and where Demonology now sits above Destruction; Vashnik on Heroic, which he calls a wall of Demonology; the Coiled Altar, one of the fights he had expected Destruction to be really good on and which he says just ended up not being what they thought at all; and Ula'tek, where he played Demonology himself and found phases two and three solid. He does not call it universal — Tomb Sentinels stays Destruction on both difficulties, and on Mythic Lost Explorers and Twin Fangs he says it is a toss-up he expects to drift toward Demonology later in the week as guilds gear. He credits the Apex talent buffs plus the class-wide pet buff, and flags a build consequence: with the Felguard's talent support gone, top logs are appearing on the other pets, so a non-Felguard build may be correct until Blizzard revisits it.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Warlock",
@@ -6327,7 +6327,7 @@
       "patchContext": "Season 2 live — \"Is Demo OP? Warlock Buffs Are Changing Things!\", published 2026-08-26, the follow-up to his 08-22 preview now that the August 25 Warlock pass has actually shipped. He reads it off live Warcraft Logs for the Venomous Abyss (heroic and mythic filtered to the previous 24-48 hours) and off Raider.IO/M+ logs, boss by boss, with a co-streamer present — only his own reads are distilled here.",
       "url": "https://youtu.be/A7ZMRYQALHw?t=749",
       "claim": "His strongest read in the video, and a clear escalation from the bounded \"probably pretty strong\" of 08-22. He says Demonology is cranking Mythic+, that over the last couple of days it has taken over the M+ logs, and that it is gapping the field in many keys — the appeal being short cooldowns, a one-minute Tyrant cycle and a constant stacked-cleave profile that does not depend on setup. He allows that Destruction was really good at the high end pre-buff and can still edge it with maximum stacked cleave, but rates Demonology better for consistent damage. The caveat he keeps is utility, not throughput: Demonology has a bad kick and brings no raid or party buff, and he is explicit that Gateway and Healthstone are not one. His conclusion is conditional rather than a coronation — the damage may be strong enough that a group plays Demonology over a third DPS chosen for buffs, and the open question is whether it is enough to knock an established meta spec out.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Warlock",
@@ -6351,7 +6351,7 @@
       "patchContext": "Season 2 live — \"Is Demo OP? Warlock Buffs Are Changing Things!\", published 2026-08-26, the follow-up to his 08-22 preview now that the August 25 Warlock pass has actually shipped. He reads it off live Warcraft Logs for the Venomous Abyss (heroic and mythic filtered to the previous 24-48 hours) and off Raider.IO/M+ logs, boss by boss, with a co-streamer present — only his own reads are distilled here.",
       "url": "https://youtu.be/A7ZMRYQALHw?t=773",
       "claim": "He keeps the substance of his 08-22 read on the 30% Rain of Fire buff but no longer has Destruction ahead. The evidence he offers for it is a rank-one Altar of Fangs key run as Destruction that same day, and he says he thinks Destruction was really good at the high end pre-buff and might still be a little better with maximum stacked cleave from Rain of Fire and Cataclysm. Against that he sets consistency: for overall consistent damage he says Demonology is better, because Destruction's ceiling depends on the setup and Demonology's does not. The read is therefore a spec that keeps its high end and loses the default slot rather than one that got worse.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Warrior",
@@ -6492,6 +6492,186 @@
       "patchContext": "Season 2 live — his reaction to the announced September 1 class tuning pass (applied at the NA weekly reset); Mythic+ outlook",
       "url": "https://youtu.be/s508k-L7ims?t=318",
       "claim": "In Mythic+ he says he has actually felt Havoc seems pretty good right now, and that an extra 4% will go a long way. He draws a build consequence from the size of the buff: a player who already has enough AoE can now drop Glaive Tempest for Isolated Prey, which he prices at about 4% of overall damage lost against about 10% gained in single target, so the aura buff roughly pays for the swap. That makes it possible to fix boss damage in keys while still doing good AoE, which he calls a newly available option and one he finds exciting."
+    },
+    {
+      "superseded": false,
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "creator": "LBNinja7",
+      "date": "2026-08-29",
+      "sentiment": "buff",
+      "bracket": "both",
+      "patchContext": "Season 2 live — his reaction video to the announced September 1 class tuning pass, read straight off the notes as a healer specialist (\"Healers Buffed AGAIN!! | 12.1 Tuning\", published 2026-08-29).",
+      "url": "https://youtu.be/pdYpGLyZ7VM?t=401",
+      "claim": "He reads the 5% blanket healing increase as buffing most of what Mistweaver actually casts — Rushing Wind Kick healing, Vivify and its cleave, Renewing Mist — while explicitly noting it will NOT buff Ancient Teachings or Spinning Crane Kick healing in Mythic+. He treats the four-piece activation going from 20% to 25% as the bigger change because the procs can proc each other, so one in four instead of one in five compounds over a boss fight and each proc now also heals more. His conclusion is that this will make Mistweaver \"more of a force to be reckoned with in raid\" and improve fluidity in both Mythic+ and raid; he says the buff was needed and that he is very happy with it."
+    },
+    {
+      "superseded": false,
+      "class": "Druid",
+      "spec": "Restoration",
+      "creator": "LBNinja7",
+      "date": "2026-08-29",
+      "sentiment": "buff",
+      "bracket": "both",
+      "patchContext": "Season 2 live — his reaction video to the announced September 1 class tuning pass, read straight off the notes as a healer specialist (\"Healers Buffed AGAIN!! | 12.1 Tuning\", published 2026-08-29).",
+      "url": "https://youtu.be/pdYpGLyZ7VM?t=45",
+      "claim": "He welcomes the blanket 4% healing increase but frames Restoration Druid as already fine — \"their healing’s pretty good\" and only in need of a minor buff. Later in the same video he names this as the change on the list he thought was least needed, while saying he does not dislike it."
+    },
+    {
+      "superseded": false,
+      "class": "Priest",
+      "spec": "Discipline",
+      "creator": "LBNinja7",
+      "date": "2026-08-29",
+      "sentiment": "mixed",
+      "bracket": "both",
+      "patchContext": "Season 2 live — his reaction video to the announced September 1 class tuning pass, read straight off the notes as a healer specialist (\"Healers Buffed AGAIN!! | 12.1 Tuning\", published 2026-08-29).",
+      "url": "https://youtu.be/pdYpGLyZ7VM?t=193",
+      "claim": "He is glad the 20% Shadow Mend mana cost reduction is happening but says it does not go far enough: in his read every healer has comfortable mana in 2026 — Mistweaver through Mana Tea, Holy Priest through its regen, Holy Paladin through Shield of the Righteous spam — while \"disc priest mana situation is still stuck back in 2024\" and Restoration Shaman’s in 2025. He calls Discipline the number one healer with a mana problem and says it needs more regen tools, naming the talent that returns mana when a shield expires as something that should be doubled or tripled."
+    },
+    {
+      "superseded": false,
+      "class": "Warlock",
+      "spec": "Demonology",
+      "creator": "Kalamazi",
+      "date": "2026-08-29",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — follow-up to his 2026-08-26 buff video, this time with single-target and AoE sims he ran himself for all three Warlock specs alongside live raid and Mythic+ logs (\"Warlock Is RISING Rapidly! Updated Sims For Each Spec\", published 2026-08-29).",
+      "url": "https://youtu.be/z_dKoGx_FIk?t=915",
+      "claim": "He says Demonology is \"quite possibly the highest overall output damage spec in M+ right now\". His mechanism is that the buffs aimed at single target — Shadow Bolt, Demon Bolt, and above all the 20% to Dreadstalkers and to the demons summoned by Demonic Tyrant — also hit AoE, because those pets cleave; in his logs the Demonic Tyrant summons are the single largest damage source in a run and the Apex pets together make up close to 40% of damage in the burst window. He puts the single-target sim at roughly 205k before the buffs and 228-232k after, which he says is enough to be competitive with the better single-target specs while keeping an already strong stacked-cleave profile. The limiter he names is not damage but group utility: no Bloodlust, no Fortitude, no Chaos Brand, no Mystic Touch, no Power Infusion, so it needs a comp (he sketches Demo plus Elemental Shaman, Mage and a Paladin or DK) that can carry it. He expects more Demonology play into mid-September and the MDI."
+    },
+    {
+      "superseded": false,
+      "class": "Warlock",
+      "spec": "Demonology",
+      "creator": "Kalamazi",
+      "date": "2026-08-29",
+      "sentiment": "buff",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — follow-up to his 2026-08-26 buff video, this time with single-target and AoE sims he ran himself for all three Warlock specs alongside live raid and Mythic+ logs (\"Warlock Is RISING Rapidly! Updated Sims For Each Spec\", published 2026-08-29).",
+      "url": "https://youtu.be/z_dKoGx_FIk?t=947",
+      "claim": "He says Demonology has been \"taking over a bit\" in the raid over the past couple of days, pointing at Heroic and Mythic parses on Lost Explorers, Sszorak, Twin Fangs and Ula’tek where the cleave profile pays. He played Ula’tek as Demonology himself and says it felt pretty good if you can cleave the eggs without pulling off the boss, with the timings on the heart being the rough part. He does not expect Blizzard to touch Demonology before BlizzCon, and says if it is brought down it would most likely be a partial reversal of the Demonic Tyrant pet buff."
+    },
+    {
+      "superseded": false,
+      "class": "Warlock",
+      "spec": "Affliction",
+      "creator": "Kalamazi",
+      "date": "2026-08-29",
+      "sentiment": "buff",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — follow-up to his 2026-08-26 buff video, this time with single-target and AoE sims he ran himself for all three Warlock specs alongside live raid and Mythic+ logs (\"Warlock Is RISING Rapidly! Updated Sims For Each Spec\", published 2026-08-29).",
+      "url": "https://youtu.be/z_dKoGx_FIk?t=36",
+      "claim": "He says Affliction is seeing a lot of play in the race to world first, with both THC and Spire running Hellcaller Affliction on the Coiled Altar for its strong execute and Death’s Embrace damage, the minute cooldown lining up with burn shields, and the spec being a very strong Power Infusion target. His own sims put Soul Harvester Affliction around 233k single target and Hellcaller close behind at roughly 230k, with the trinket choice moving it as much as the build does."
+    },
+    {
+      "superseded": false,
+      "class": "Warlock",
+      "spec": "Affliction",
+      "creator": "Kalamazi",
+      "date": "2026-08-29",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — follow-up to his 2026-08-26 buff video, this time with single-target and AoE sims he ran himself for all three Warlock specs alongside live raid and Mythic+ logs (\"Warlock Is RISING Rapidly! Updated Sims For Each Spec\", published 2026-08-29).",
+      "url": "https://youtu.be/z_dKoGx_FIk?t=1050",
+      "claim": "He says the Affliction changes are not being seen much in Mythic+ but probably could be — the Unstable Affliction change helps, the Agony buff is universal across builds, and he has seen hybrid builds running Seed of Corruption that look pretty good. His summary is that even if Demonology is knocked down, Affliction is looking pretty good in keys too. He is explicit that Affliction’s AoE, while lower peak than Demonology (roughly 1.3 million against 2.0 million in his sim), is more consistent and sustains higher on average."
+    },
+    {
+      "superseded": false,
+      "class": "Warlock",
+      "spec": "Destruction",
+      "creator": "Kalamazi",
+      "date": "2026-08-29",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — follow-up to his 2026-08-26 buff video, this time with single-target and AoE sims he ran himself for all three Warlock specs alongside live raid and Mythic+ logs (\"Warlock Is RISING Rapidly! Updated Sims For Each Spec\", published 2026-08-29).",
+      "url": "https://youtu.be/z_dKoGx_FIk?t=739",
+      "claim": "He says nothing changed for Destruction this week and its single-target sim is static at roughly 230k. His Mythic+ read is split by group quality: with mass pulls, Rain of Fire and Cataclysm plus Lake of Fire value, it was probably the best Warlock spec at the high end and is still solid in coordinated groups, but the mobs have to stay inside the ground effects, which pugs do not deliver — so it \"doesn’t perform the best\" there, unlike Apex and hero-talent pets that follow their targets regardless. He notes Destruction now loses the default slot to Demonology."
+    },
+    {
+      "superseded": false,
+      "class": "Demon Hunter",
+      "spec": "Vengeance",
+      "creator": "YoDaTV",
+      "date": "2026-08-29",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his post-tuning Mythic+ tier list, built from the announced September 1 pass plus the first week of the live M+ leaderboard (\"ONLY Buffs! Patch Notes & Tierlist Update for Mythic+ (August 29)\", published 2026-08-29). He states explicitly that he does not make raid tier lists.",
+      "url": "https://youtu.be/xYXkZA1L490?t=24",
+      "claim": "He calls the 4% damage-taken reduction (Demonic Wards 12% to 15%, Frailty 5% to 6%) a big survivability buff and says he would not be surprised to see Vengeance end up the best or second-best tank after it — S tier, level with Guardian, and with an outside chance of being meta. He dismisses the Fel Devastation healing buff as doing nothing because the button still will not be pressed except for aggro. He also retracts his earlier \"Aldrachi cope\": he is now confident Annihilator is the better hero tree."
+    },
+    {
+      "superseded": false,
+      "class": "Druid",
+      "spec": "Guardian",
+      "creator": "YoDaTV",
+      "date": "2026-08-29",
+      "sentiment": "neutral",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his post-tuning Mythic+ tier list, built from the announced September 1 pass plus the first week of the live M+ leaderboard (\"ONLY Buffs! Patch Notes & Tierlist Update for Mythic+ (August 29)\", published 2026-08-29). He states explicitly that he does not make raid tier lists.",
+      "url": "https://youtu.be/xYXkZA1L490?t=146",
+      "claim": "He keeps Guardian in S tier and says the live leaderboard matched his expectation that bear would be the second-best tank, because it provides Mark of the Wild and is itself pretty tanky. After the Vengeance buffs he now places the two at the same level rather than Guardian clearly ahead."
+    },
+    {
+      "superseded": false,
+      "class": "Death Knight",
+      "spec": "Blood",
+      "creator": "YoDaTV",
+      "date": "2026-08-29",
+      "sentiment": "neutral",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his post-tuning Mythic+ tier list, built from the announced September 1 pass plus the first week of the live M+ leaderboard (\"ONLY Buffs! Patch Notes & Tierlist Update for Mythic+ (August 29)\", published 2026-08-29). He states explicitly that he does not make raid tier lists.",
+      "url": "https://youtu.be/xYXkZA1L490?t=132",
+      "claim": "Reviewing the first week of the live leaderboard he says Blood DK, Holy Paladin, Arcane Mage and Arms Warrior appear in almost every top key that is not a fiscomp, and he keeps those four as the best four specs with the fifth slot a flex. Nothing in this tuning pass touched Blood DK and he expects no change."
+    },
+    {
+      "superseded": false,
+      "class": "Monk",
+      "spec": "Brewmaster",
+      "creator": "YoDaTV",
+      "date": "2026-08-29",
+      "sentiment": "neutral",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his post-tuning Mythic+ tier list, built from the announced September 1 pass plus the first week of the live M+ leaderboard (\"ONLY Buffs! Patch Notes & Tierlist Update for Mythic+ (August 29)\", published 2026-08-29). He states explicitly that he does not make raid tier lists.",
+      "url": "https://youtu.be/xYXkZA1L490?t=266",
+      "claim": "He places Brewmaster in A+ as currently the preferred fiscomp tank, while adding that he thinks a Blood DK plus Windwalker pairing could also work for those comps. Brewmaster fiscomps are showing up on the leaderboard."
+    },
+    {
+      "superseded": false,
+      "class": "Paladin",
+      "spec": "Protection",
+      "creator": "YoDaTV",
+      "date": "2026-08-29",
+      "sentiment": "nerf",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his post-tuning Mythic+ tier list, built from the announced September 1 pass plus the first week of the live M+ leaderboard (\"ONLY Buffs! Patch Notes & Tierlist Update for Mythic+ (August 29)\", published 2026-08-29). He states explicitly that he does not make raid tier lists.",
+      "url": "https://youtu.be/xYXkZA1L490?t=108",
+      "claim": "He says the roughly 5% damage buff will not change anything for Protection Paladin in keys: its damage is \"omega behind\" and not recoverable by a buff this size compared to Blood DK, and its survivability does not feel good at all after the Reflection of Radiance nerf, which it got nothing back for. He expects the damage to be felt more in raid than in keys and leaves the spec in A tier."
+    },
+    {
+      "superseded": false,
+      "class": "Warrior",
+      "spec": "Protection",
+      "creator": "YoDaTV",
+      "date": "2026-08-29",
+      "sentiment": "neutral",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his post-tuning Mythic+ tier list, built from the announced September 1 pass plus the first week of the live M+ leaderboard (\"ONLY Buffs! Patch Notes & Tierlist Update for Mythic+ (August 29)\", published 2026-08-29). He states explicitly that he does not make raid tier lists.",
+      "url": "https://youtu.be/xYXkZA1L490?t=379",
+      "claim": "Protection Warrior was untouched by the pass and he says it \"kind of hasn’t changed much\", leaving it in A tier."
+    },
+    {
+      "superseded": false,
+      "class": "Warrior",
+      "spec": "Arms",
+      "creator": "YoDaTV",
+      "date": "2026-08-29",
+      "sentiment": "neutral",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his post-tuning Mythic+ tier list, built from the announced September 1 pass plus the first week of the live M+ leaderboard (\"ONLY Buffs! Patch Notes & Tierlist Update for Mythic+ (August 29)\", published 2026-08-29). He states explicitly that he does not make raid tier lists.",
+      "url": "https://youtu.be/xYXkZA1L490?t=201",
+      "claim": "He keeps Arms Warrior in the best four Mythic+ specs alongside Blood DK, Holy Paladin and Arcane Mage, and says Arms and Arcane are by far the most prevalent picks in top keys with the third DPS slot being a flex. No change from this tuning pass."
     }
   ],
   "metaNotes": [
@@ -9256,7 +9436,7 @@
       "note": "He puts Protection Warrior only barely above Brewmaster among tanks and rejects the melee-composition argument for it, saying the Battle Shout synergy case does not survive contact with what was actually played — there is no need for a physical composition to bring a Protection Warrior."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Priest",
       "spec": "Discipline",
       "creator": "izen (Izenhart)",
@@ -9628,7 +9808,7 @@
       "note": "He places Resto Shaman one tier below the top three: it kept pace on HPS through testing until mana was counted, and it has essentially no mana-saving tools beyond stacking crit, so it is on a clock from the pull and runs dry faster than the specs above it."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Druid",
       "spec": "Restoration",
       "creator": "izen (Izenhart)",
@@ -9640,7 +9820,7 @@
       "note": "He calls Resto Druid the dark horse, arguing the PTR testing that made it look weak was a meme rather than a real read, and pointing to a recent 4% buff plus high-movement fights that suit it. He hedges that 12.1's heavier Regrowth hard-casting removes much of the instant-cast mobility edge it used to have, landing it as a potential fourth healer choice."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Monk",
       "spec": "Mistweaver",
       "creator": "izen (Izenhart)",
@@ -9652,7 +9832,7 @@
       "note": "He calls Mistweaver the weakest healer and the spec most damaged going from Season 1 to Season 2, saying it received few if any positive changes — the mastery buff was reversed at the last minute without compensation — and that even the recent 8% healing buff leaves it clearly below the rest."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Demon Hunter",
       "spec": "Devourer",
       "creator": "izen (Izenhart)",
@@ -9724,7 +9904,7 @@
       "note": "He lists Assassination among the specs that were not highlighted for anything through testing and that preliminary sims put at the bottom of the raid picture."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Demon Hunter",
       "spec": "Havoc",
       "creator": "izen (Izenhart)",
@@ -9736,7 +9916,7 @@
       "note": "He places Havoc at the bottom of the raid picture, attributing it specifically to another spec in its own class doing much better."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Druid",
       "spec": "Feral",
       "creator": "izen (Izenhart)",
@@ -9760,7 +9940,7 @@
       "note": "He lists Survival among the bottom specs that were not highlighted for anything through testing."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Evoker",
       "spec": "Augmentation",
       "creator": "izen (Izenhart)",
@@ -9772,7 +9952,7 @@
       "note": "He places Augmentation at the bottom, and unlike the class-internal cases he says Augmentation simply does not seem to be doing well to begin with. He adds that its class counterpart covers the raid spot on the healer side, so it has no freebie claim."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Mage",
       "spec": "Fire",
       "creator": "izen (Izenhart)",
@@ -9784,7 +9964,7 @@
       "note": "He places Fire at the bottom of the raid picture, attributing it to another spec in its own class doing much better."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Hunter",
       "spec": "Marksmanship",
       "creator": "izen (Izenhart)",
@@ -9796,7 +9976,7 @@
       "note": "He says neither hunter is exciting and that Marksmanship in particular has been nerfed recently, but that one hunter still gets what he calls a freebie raid spot simply because you will be bringing one for the buff."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Hunter",
       "spec": "Beast Mastery",
       "creator": "izen (Izenhart)",
@@ -9868,7 +10048,7 @@
       "note": "He groups Unholy with the no-free-spot specs for raid while allowing it perhaps slightly more value than Subtlety, and explicitly reverses the Mythic+ ordering: Unholy's advantage there is the 20-target cooldown burst, which the raid does not ask for."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Death Knight",
       "spec": "Frost",
       "creator": "izen (Izenhart)",
@@ -9952,7 +10132,7 @@
       "note": "He rates Destruction above Affliction and calls it nearly the opposite of Elemental for this raid: Havoc lets it focus down a freshly spawned add and effectively double its two-target damage at caster range, which fits these boss damage profiles well."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Mage",
       "spec": "Frost",
       "creator": "izen (Izenhart)",
@@ -9964,7 +10144,7 @@
       "note": "He describes Frost as pretty average rather than a top pick and weaker than Arcane, having lost burst it never had much of, and nerfed across Splitting Ice, Flurry and Glacial Spike — while still being a good two-target cleave spec that can do well in this raid."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Monk",
       "spec": "Windwalker",
       "creator": "izen (Izenhart)",
@@ -10276,7 +10456,7 @@
       "note": "His pre-season call was that Blood Death Knight would be the most powerful tank and the one primed to be the season's meta tank, and he says that is still holding true a few days in: Blood is comfortably the most played tank. He adds a structural reason it has room to stay there — because Blood is the meta tank there is no conflict of interest with the DPS picks, since neither Frost nor Unholy was expected among the main DPS choices, so he describes it as an open road ahead for Blood becoming the meta tank."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Paladin",
       "spec": "Protection",
       "creator": "izen (Izenhart)",
@@ -10372,7 +10552,7 @@
       "note": "Devourer was in the second tier of his pre-season DPS prediction and is among the most played specs on release, which he counts as the prediction holding. He notes it is being overtaken slightly at current key levels by Beast Mastery and Retribution Paladin, and reads that as a farm-key artifact rather than a ranking: he expects the trend to stretch back the other way as the standard key level moves to 14 to 15 next week. He names Devourer, alongside Elemental, as doing quite well and as a live candidate for the third slot in the Arms and Arcane comp."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Druid",
       "spec": "Balance",
       "creator": "izen (Izenhart)",
@@ -10384,7 +10564,7 @@
       "note": "Balance Druid is the third spec in the second tier of his pre-season DPS prediction, and he reports it among the most played on release. He is careful about the current ordering — Balance and Devourer are being overtaken slightly by Beast Mastery and Retribution Paladin at the key levels most people are running — and treats that as an early-season gearing effect, expecting the casters to pull away as key levels rise."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Hunter",
       "spec": "Beast Mastery",
       "creator": "izen (Izenhart)",
@@ -10396,7 +10576,7 @@
       "note": "He uses Beast Mastery as his clearest example of popularity not tracking power: he put it at the very bottom of the tier of potential power level, and it is still very popular at the release of the season, as Beast Mastery is every season, because Hunter is a very popular class and everyone has to run Mythic+ for gear right now. He expects it to lose out compared with the second-tier casters as keys go higher, and says nothing to revise the power-level placement itself."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Monk",
       "spec": "Windwalker",
       "creator": "izen (Izenhart)",
@@ -10636,7 +10816,7 @@
       "note": "He observes Shadow Priest sitting reasonably high in the first week of raid results and immediately cautions that the placement is substantially an artifact of which bosses have been killed rather than a spec-strength signal: on the early encounters he names — Entombed Sentinels and the Lost Explorers — the cleave-and-DoT specs do very well, and those are the bosses the bulk of guilds have reached. He expects Shadow to stay high through the first few weeks of Mythic for the same reason, and says explicitly there is room for the early results to mislead."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Druid",
       "spec": "Balance",
       "creator": "izen (Izenhart)",
@@ -10732,7 +10912,7 @@
       "note": "He cites Protection Warrior as one of two specs players are already reporting being declined for, and at modest key levels rather than only at the ceiling — he says it is happening even at +10, let alone +12. He raises it as evidence against the argument that the early meta does not matter: however much one says the week-one meta will not matter, he expects a trickle-down effect on the groups players can actually form."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Druid",
       "spec": "Restoration",
       "creator": "izen (Izenhart)",
@@ -10744,7 +10924,7 @@
       "note": "He cites Restoration Druid as one of two specs players are already reporting being declined for, and at modest key levels rather than only at the ceiling — he says it is happening even at +10, let alone +12. He raises it as evidence against the argument that the early meta does not matter: however much one says the week-one meta will not matter, he expects a trickle-down effect on the groups players can actually form."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Mage",
       "spec": "Arcane",
       "creator": "izen (Izenhart)",
@@ -10826,6 +11006,294 @@
       "patchContext": "Season 2 live — M+ outlook, \"Season 2 Mythic+ Meta | Best Performing Specs and...Surprises\", published 2026-08-27 at the start of the second reset of Season 2. He reads average Mythic+ score and damage-done charts at high key levels alongside the common group composition, and flags up front that many players still lack the Season 2 four-piece, which he puts at a 10-15% DPS swing.",
       "url": "https://youtu.be/x429ozbMXnQ?t=1372",
       "note": "Restoration Shaman is still the only real alternative to Holy Paladin among the healers making it into high keys, but he says Holy Paladin has now gapped it by about 100 average score. The trade he draws is specific: Restoration is better on flat consistent heavy rot damage, where Healing Rain proccing and Chain Heal spam beat single-target casts, but it has much weaker spot healing and much weaker single-target buttons than Holy Paladin."
+    },
+    {
+      "superseded": false,
+      "class": "Death Knight",
+      "spec": "Frost",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-29",
+      "sentiment": "negative",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — his walkthrough of the announced September 1 tuning pass (\"BUFFS ONLY!!! Sept. 1st Weekly Reset Balance Tuning Incoming\", published 2026-08-29), each change weighed against live Heroic and Mythic raid parse charts and Mythic+ score, damage and popularity charts. He flags up front that this pass is buffs only and that nerfs are being held until after the race to world first.",
+      "url": "https://youtu.be/bDElWkJxvtY?t=84",
+      "note": "He says Frost DK is not doing particularly well in the raid: on Heroic, where there are hundreds of thousands of parses, it is literally the worst performing DPS spec except for Augmentation, and on Mythic it is outright last, not beating Augmentation either. He prices the incoming buffs at over 4% in single target, weighted toward Obliterate and melee damage, and notes this is now roughly the fourth round of buffs Frost has received."
+    },
+    {
+      "superseded": false,
+      "class": "Death Knight",
+      "spec": "Frost",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-29",
+      "sentiment": "negative",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his walkthrough of the announced September 1 tuning pass (\"BUFFS ONLY!!! Sept. 1st Weekly Reset Balance Tuning Incoming\", published 2026-08-29), each change weighed against live Heroic and Mythic raid parse charts and Mythic+ score, damage and popularity charts. He flags up front that this pass is buffs only and that nerfs are being held until after the race to world first.",
+      "url": "https://youtu.be/bDElWkJxvtY?t=117",
+      "note": "In Mythic+ he reads Frost DK as low on all three of his charts — popularity, average score and damage done. He expects the September 1 pass to help far less here than in raid: with Remorseless Winter, Anguish, Advance and Icy Death Torrent carrying the AoE build, Obliterate and melee autos matter much less, so he puts the AoE gain at under 2%."
+    },
+    {
+      "superseded": false,
+      "class": "Demon Hunter",
+      "spec": "Havoc",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-29",
+      "sentiment": "negative",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — his walkthrough of the announced September 1 tuning pass (\"BUFFS ONLY!!! Sept. 1st Weekly Reset Balance Tuning Incoming\", published 2026-08-29), each change weighed against live Heroic and Mythic raid parse charts and Mythic+ score, damage and popularity charts. He flags up front that this pass is buffs only and that nerfs are being held until after the race to world first.",
+      "url": "https://youtu.be/bDElWkJxvtY?t=207",
+      "note": "He puts Havoc just above Frost DK in the raid and says it \"wasn’t doing particularly well\" either. He likes the shape of its buff better — a flat 4% that applies to every profile rather than spell-by-spell increases — and expects it to close the gap to Devourer, especially in raid."
+    },
+    {
+      "superseded": false,
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-29",
+      "sentiment": "negative",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — his walkthrough of the announced September 1 tuning pass (\"BUFFS ONLY!!! Sept. 1st Weekly Reset Balance Tuning Incoming\", published 2026-08-29), each change weighed against live Heroic and Mythic raid parse charts and Mythic+ score, damage and popularity charts. He flags up front that this pass is buffs only and that nerfs are being held until after the race to world first.",
+      "url": "https://youtu.be/bDElWkJxvtY?t=261",
+      "note": "He says Devourer \"hasn’t been doing nearly as well as expected so far\" on Heroic, and that it has not been stellar in Mythic either. With Havoc taking a flat 4% and Devourer nothing, he expects the two to converge."
+    },
+    {
+      "superseded": false,
+      "class": "Demon Hunter",
+      "spec": "Vengeance",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-29",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his walkthrough of the announced September 1 tuning pass (\"BUFFS ONLY!!! Sept. 1st Weekly Reset Balance Tuning Incoming\", published 2026-08-29), each change weighed against live Heroic and Mythic raid parse charts and Mythic+ score, damage and popularity charts. He flags up front that this pass is buffs only and that nerfs are being held until after the race to world first.",
+      "url": "https://youtu.be/bDElWkJxvtY?t=313",
+      "note": "He calls the 4% damage-taken reduction the only sizable tank buff of the pass and says it is good and warranted, because damage reduction is what a Mythic+ tank wants. His read of the current standing is poor, though: above key level 15 Vengeance is barely not the least played tank (only Brewmaster is below it) and its average score has been falling further below the field. He dismisses the Fel Devastation healing increase, showing that current Vengeance builds ignore every Fel Devastation talent because the button is too weak to press."
+    },
+    {
+      "superseded": false,
+      "class": "Druid",
+      "spec": "Balance",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-29",
+      "sentiment": "negative",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his walkthrough of the announced September 1 tuning pass (\"BUFFS ONLY!!! Sept. 1st Weekly Reset Balance Tuning Incoming\", published 2026-08-29), each change weighed against live Heroic and Mythic raid parse charts and Mythic+ score, damage and popularity charts. He flags up front that this pass is buffs only and that nerfs are being held until after the race to world first.",
+      "url": "https://youtu.be/bDElWkJxvtY?t=421",
+      "note": "He puts Balance on the lower end for damage in Mythic+ and gives a structural reason: Balance needs larger pulls for its AoE to work, and this season’s dungeons run smaller — more mini-bosses and small packs, with King’s Rest and several Voidscar Arena pulls as examples. He would have preferred targeted buffs to the flat 4%."
+    },
+    {
+      "superseded": false,
+      "class": "Druid",
+      "spec": "Balance",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-29",
+      "sentiment": "mixed",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — his walkthrough of the announced September 1 tuning pass (\"BUFFS ONLY!!! Sept. 1st Weekly Reset Balance Tuning Incoming\", published 2026-08-29), each change weighed against live Heroic and Mythic raid parse charts and Mythic+ score, damage and popularity charts. He flags up front that this pass is buffs only and that nerfs are being held until after the race to world first.",
+      "url": "https://youtu.be/bDElWkJxvtY?t=454",
+      "note": "He notes Balance is currently top five in the raid, but discounts it: the Mythic sample is dominated by the early bosses, which have heavy cleave, split adds and multiple simultaneous targets, all of which flatter Balance. He still thinks the buff makes sense because the underlying damage problem is real."
+    },
+    {
+      "superseded": false,
+      "class": "Druid",
+      "spec": "Restoration",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-29",
+      "sentiment": "neutral",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — his walkthrough of the announced September 1 tuning pass (\"BUFFS ONLY!!! Sept. 1st Weekly Reset Balance Tuning Incoming\", published 2026-08-29), each change weighed against live Heroic and Mythic raid parse charts and Mythic+ score, damage and popularity charts. He flags up front that this pass is buffs only and that nerfs are being held until after the race to world first.",
+      "url": "https://youtu.be/bDElWkJxvtY?t=522",
+      "note": "He says Restoration Druid is doing okay-ish overall and sits balanced in the middle of the healers, doing even better when you filter to Mythic. He notes this vindicates his own PTR position that Resto Druid was stronger than the PTR testing suggested, once players adapted to the Abundance rework, and finds the 4% healing buff a bit surprising in that light."
+    },
+    {
+      "superseded": false,
+      "class": "Druid",
+      "spec": "Restoration",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-29",
+      "sentiment": "negative",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his walkthrough of the announced September 1 tuning pass (\"BUFFS ONLY!!! Sept. 1st Weekly Reset Balance Tuning Incoming\", published 2026-08-29), each change weighed against live Heroic and Mythic raid parse charts and Mythic+ score, damage and popularity charts. He flags up front that this pass is buffs only and that nerfs are being held until after the race to world first.",
+      "url": "https://youtu.be/bDElWkJxvtY?t=563",
+      "note": "He says the flat 4% healing buff is not very helpful where Resto Druid actually needs it: in Mythic+ it is currently the least represented healer in high keys and is not doing well on overall population either. He would have wanted a Mythic+ targeted buff instead."
+    },
+    {
+      "superseded": false,
+      "class": "Druid",
+      "spec": "Feral",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-29",
+      "sentiment": "negative",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — his walkthrough of the announced September 1 tuning pass (\"BUFFS ONLY!!! Sept. 1st Weekly Reset Balance Tuning Incoming\", published 2026-08-29), each change weighed against live Heroic and Mythic raid parse charts and Mythic+ score, damage and popularity charts. He flags up front that this pass is buffs only and that nerfs are being held until after the race to world first.",
+      "url": "https://youtu.be/bDElWkJxvtY?t=593",
+      "note": "He says Feral had the weakest overall performance of any spec in Mythic and was still doing very poorly on Heroic. He prices the buff at about 6.5% (5% all damage plus the auto-attack and Ferocious Bite increases), with Shred adding essentially nothing."
+    },
+    {
+      "superseded": false,
+      "class": "Druid",
+      "spec": "Feral",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-29",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his walkthrough of the announced September 1 tuning pass (\"BUFFS ONLY!!! Sept. 1st Weekly Reset Balance Tuning Incoming\", published 2026-08-29), each change weighed against live Heroic and Mythic raid parse charts and Mythic+ score, damage and popularity charts. He flags up front that this pass is buffs only and that nerfs are being held until after the race to world first.",
+      "url": "https://youtu.be/bDElWkJxvtY?t=602",
+      "note": "His Mythic+ read is the opposite of his raid read: Feral is consistently one of the least played DPS specs, but it is currently the fourth highest average score spec, kept up by a small core of committed players, and it is a fixture of the melee comp alongside Arms and one of the Rogues. He says its damage there is significantly better than its raid results and not nearly as poor as the other specs being buffed."
+    },
+    {
+      "superseded": false,
+      "class": "Hunter",
+      "spec": "Beast Mastery",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-29",
+      "sentiment": "negative",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — his walkthrough of the announced September 1 tuning pass (\"BUFFS ONLY!!! Sept. 1st Weekly Reset Balance Tuning Incoming\", published 2026-08-29), each change weighed against live Heroic and Mythic raid parse charts and Mythic+ score, damage and popularity charts. He flags up front that this pass is buffs only and that nerfs are being held until after the race to world first.",
+      "url": "https://youtu.be/bDElWkJxvtY?t=699",
+      "note": "He places both Hunter specs towards the bottom in the raid and says it is even harder to find a BM or Survival Hunter in Mythic. He calls the 7% figure notably large against the 4% that most specs in this pass received."
+    },
+    {
+      "superseded": false,
+      "class": "Hunter",
+      "spec": "Beast Mastery",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-29",
+      "sentiment": "negative",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his walkthrough of the announced September 1 tuning pass (\"BUFFS ONLY!!! Sept. 1st Weekly Reset Balance Tuning Incoming\", published 2026-08-29), each change weighed against live Heroic and Mythic raid parse charts and Mythic+ score, damage and popularity charts. He flags up front that this pass is buffs only and that nerfs are being held until after the race to world first.",
+      "url": "https://youtu.be/bDElWkJxvtY?t=721",
+      "note": "He says BM still looks quite low in Mythic+ damage and loses out to Marksmanship as keys go up, despite being far more popular. His framing is that Hunter is a very popular class at the 10-12 weekly key level but \"falls off a lot\" once you look at good groups, with BM disappearing completely at much higher keys. He finds it odd that BM took a 7% buff while Marksmanship took none."
+    },
+    {
+      "superseded": false,
+      "class": "Hunter",
+      "spec": "Survival",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-29",
+      "sentiment": "negative",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his walkthrough of the announced September 1 tuning pass (\"BUFFS ONLY!!! Sept. 1st Weekly Reset Balance Tuning Incoming\", published 2026-08-29), each change weighed against live Heroic and Mythic raid parse charts and Mythic+ score, damage and popularity charts. He flags up front that this pass is buffs only and that nerfs are being held until after the race to world first.",
+      "url": "https://youtu.be/bDElWkJxvtY?t=712",
+      "note": "He says that at all key levels Survival is one of the absolute weakest specs in Mythic+, which is why he reads the 7% damage increase as warranted rather than surprising."
+    },
+    {
+      "superseded": false,
+      "class": "Hunter",
+      "spec": "Marksmanship",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-29",
+      "sentiment": "positive",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — his walkthrough of the announced September 1 tuning pass (\"BUFFS ONLY!!! Sept. 1st Weekly Reset Balance Tuning Incoming\", published 2026-08-29), each change weighed against live Heroic and Mythic raid parse charts and Mythic+ score, damage and popularity charts. He flags up front that this pass is buffs only and that nerfs are being held until after the race to world first.",
+      "url": "https://youtu.be/bDElWkJxvtY?t=777",
+      "note": "He reads Marksmanship as one of the better performers in the raid on the Heroic results, and offers that as the explanation for it receiving nothing in this pass while BM and Survival each took 7% — the mirror image of Balance Druid, which was buffed despite being in what he calls basically the same situation."
+    },
+    {
+      "superseded": false,
+      "class": "Mage",
+      "spec": "Arcane",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-29",
+      "sentiment": "positive",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his walkthrough of the announced September 1 tuning pass (\"BUFFS ONLY!!! Sept. 1st Weekly Reset Balance Tuning Incoming\", published 2026-08-29), each change weighed against live Heroic and Mythic raid parse charts and Mythic+ score, damage and popularity charts. He flags up front that this pass is buffs only and that nerfs are being held until after the race to world first.",
+      "url": "https://youtu.be/bDElWkJxvtY?t=814",
+      "note": "He says Arcane is doing very well and that its AoE damage and average Mythic+ score are much higher than Frost’s or Fire’s. He makes a sample-size argument for the raid too: with about 2,044 Arcane logs against six and 69 for Frost and Fire, the fact that flavour-of-the-month Arcane rerollers match one-trick Frost and Fire players is itself telling, and on Heroic the gap is much larger."
+    },
+    {
+      "superseded": false,
+      "class": "Mage",
+      "spec": "Frost",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-29",
+      "sentiment": "negative",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — his walkthrough of the announced September 1 tuning pass (\"BUFFS ONLY!!! Sept. 1st Weekly Reset Balance Tuning Incoming\", published 2026-08-29), each change weighed against live Heroic and Mythic raid parse charts and Mythic+ score, damage and popularity charts. He flags up front that this pass is buffs only and that nerfs are being held until after the race to world first.",
+      "url": "https://youtu.be/bDElWkJxvtY?t=842",
+      "note": "He says the Heroic results show a much larger gap between Frost, Fire and Arcane than the thin Mythic samples suggest, and treats the 6% buff to Frost as one of the simplest changes in the pass. He questions why BM Hunter got 7% while Frost and Fire got only 6% and 3%."
+    },
+    {
+      "superseded": false,
+      "class": "Mage",
+      "spec": "Fire",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-29",
+      "sentiment": "negative",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — his walkthrough of the announced September 1 tuning pass (\"BUFFS ONLY!!! Sept. 1st Weekly Reset Balance Tuning Incoming\", published 2026-08-29), each change weighed against live Heroic and Mythic raid parse charts and Mythic+ score, damage and popularity charts. He flags up front that this pass is buffs only and that nerfs are being held until after the race to world first.",
+      "url": "https://youtu.be/bDElWkJxvtY?t=842",
+      "note": "Fire sits with Frost well behind Arcane on the Heroic results in his read, and he calls its 3% buff smaller than expected relative to what other specs in this pass received."
+    },
+    {
+      "superseded": false,
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-29",
+      "sentiment": "negative",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — his walkthrough of the announced September 1 tuning pass (\"BUFFS ONLY!!! Sept. 1st Weekly Reset Balance Tuning Incoming\", published 2026-08-29), each change weighed against live Heroic and Mythic raid parse charts and Mythic+ score, damage and popularity charts. He flags up front that this pass is buffs only and that nerfs are being held until after the race to world first.",
+      "url": "https://youtu.be/bDElWkJxvtY?t=902",
+      "note": "He says Mistweaver has been consistently one of the weakest healers in the raid and is even worse when filtered to Mythic, with little hope from players in terms of popularity. He judges the 5% healing buff plus the four-piece proc chance going 20% to 25% as still not enough: \"this is still not enough for them to become decent, not good, even just decent\", and expects it to take a couple more rounds of buffs."
+    },
+    {
+      "superseded": false,
+      "class": "Monk",
+      "spec": "Windwalker",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-29",
+      "sentiment": "negative",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his walkthrough of the announced September 1 tuning pass (\"BUFFS ONLY!!! Sept. 1st Weekly Reset Balance Tuning Incoming\", published 2026-08-29), each change weighed against live Heroic and Mythic raid parse charts and Mythic+ score, damage and popularity charts. He flags up front that this pass is buffs only and that nerfs are being held until after the race to world first.",
+      "url": "https://youtu.be/bDElWkJxvtY?t=958",
+      "note": "He argues players have a misguided impression of Windwalker from lower keys, where fast-dying packs and large pulls reward its flat wide AoE — damage he is willing to call padding because it does little priority damage to the enemies that matter. He says it lacks pure single target and focused priority damage, and that its Mythic+ presence is partly structural: groups want a Monk for the buff, and since Mistweaver and Brewmaster are unpopular, that Monk ends up being a Windwalker."
+    },
+    {
+      "superseded": false,
+      "class": "Monk",
+      "spec": "Windwalker",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-29",
+      "sentiment": "negative",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — his walkthrough of the announced September 1 tuning pass (\"BUFFS ONLY!!! Sept. 1st Weekly Reset Balance Tuning Incoming\", published 2026-08-29), each change weighed against live Heroic and Mythic raid parse charts and Mythic+ score, damage and popularity charts. He flags up front that this pass is buffs only and that nerfs are being held until after the race to world first.",
+      "url": "https://youtu.be/bDElWkJxvtY?t=1013",
+      "note": "He says Windwalker was among the weakest performers across all bosses killed so far in Mythic, while cautioning that the Mythic log count is small; the Heroic sample is larger and still very low. The 4% damage buff is his read of what the spec was given."
+    },
+    {
+      "superseded": false,
+      "class": "Priest",
+      "spec": "Discipline",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-29",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his walkthrough of the announced September 1 tuning pass (\"BUFFS ONLY!!! Sept. 1st Weekly Reset Balance Tuning Incoming\", published 2026-08-29), each change weighed against live Heroic and Mythic raid parse charts and Mythic+ score, damage and popularity charts. He flags up front that this pass is buffs only and that nerfs are being held until after the race to world first.",
+      "url": "https://youtu.be/bDElWkJxvtY?t=1065",
+      "note": "He calls the 20% Shadow Mend mana cost reduction a Mythic+ change rather than a raid one, because Discipline does not press Shadow Mend in raid at all. His diagnosis is that Discipline’s mana is a raid strength and a Mythic+ weakness: in raid, Shield Discipline procs constantly and Voidweaver keeps a Shadow Fiend or Mindbender up, so mana comes back for free, whereas in keys far more players run Oracle, lose that Mindbender route, and have to spend heavily on Shadow Mend."
+    },
+    {
+      "superseded": false,
+      "class": "Paladin",
+      "spec": "Protection",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-29",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his walkthrough of the announced September 1 tuning pass (\"BUFFS ONLY!!! Sept. 1st Weekly Reset Balance Tuning Incoming\", published 2026-08-29), each change weighed against live Heroic and Mythic raid parse charts and Mythic+ score, damage and popularity charts. He flags up front that this pass is buffs only and that nerfs are being held until after the race to world first.",
+      "url": "https://youtu.be/bDElWkJxvtY?t=1163",
+      "note": "He is unimpressed by the buff’s shape: Blaze of Glory’s headline 150% is effectively about 3% of overall damage and the Consecration and Divine Guidance increases add roughly 2.5%, so around 5% in total, taking Protection Paladin to about 141k and still the lowest-damage tank. His point is that damage is not what makes a tank meta — cooldown reduction, armour, parry or dodge would be — and he adds that Protection Paladin is not actually in a bad spot, being the second most popular tank in keys of 15 and above."
+    },
+    {
+      "superseded": false,
+      "class": "Evoker",
+      "spec": "Augmentation",
+      "creator": "izen (Izenhart)",
+      "date": "2026-08-29",
+      "sentiment": "negative",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — his walkthrough of the announced September 1 tuning pass (\"BUFFS ONLY!!! Sept. 1st Weekly Reset Balance Tuning Incoming\", published 2026-08-29), each change weighed against live Heroic and Mythic raid parse charts and Mythic+ score, damage and popularity charts. He flags up front that this pass is buffs only and that nerfs are being held until after the race to world first.",
+      "url": "https://youtu.be/bDElWkJxvtY?t=94",
+      "note": "Augmentation is his floor of the raid rankings: on Heroic it sits below Frost DK, which he calls the worst performing DPS spec \"only above augmentation\", and at the end of the video he notes the pass buffed everyone in the bottom pile \"other than the lizard at the very bottom\", i.e. Augmentation received nothing."
     }
   ]
 }

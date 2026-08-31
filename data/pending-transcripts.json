@@ -2,39 +2,25 @@
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
   "videos": [
     {
-      "id": "pdYpGLyZ7VM",
-      "creator": "LBNinja7",
-      "title": "Healers Buffed AGAIN!! | 12.1 Tuning",
-      "published": "2026-08-29",
-      "queuedAt": "2026-08-29"
-    },
-    {
-      "id": "z_dKoGx_FIk",
-      "creator": "Kalamazi",
-      "title": "Warlock Is RISING Rapidly! Updated Sims For Each Spec",
-      "published": "2026-08-29",
-      "queuedAt": "2026-08-30"
-    },
-    {
-      "id": "bDElWkJxvtY",
-      "creator": "izen (Izenhart)",
-      "title": "BUFFS ONLY!!! Sept. 1st Weekly Reset Balance Tuning Incoming",
-      "published": "2026-08-29",
-      "queuedAt": "2026-08-30"
-    },
-    {
-      "id": "xYXkZA1L490",
-      "creator": "YoDaTV",
-      "title": "ONLY Buffs! Patch Notes & Tierlist Update for Mythic+ (August 29)",
-      "published": "2026-08-29",
-      "queuedAt": "2026-08-30"
-    },
-    {
       "id": "1qclgMKPdz4",
       "creator": "Whispyr",
       "title": "Fatebound is BACK (and a bunch of other updates)",
       "published": "2026-08-30",
       "queuedAt": "2026-08-30"
+    },
+    {
+      "id": "wPDn4G-8JNs",
+      "creator": "Obli",
+      "title": "New Frost Single & Two target buffs coming on Tuesday!",
+      "published": "2026-08-30",
+      "queuedAt": "2026-08-31"
+    },
+    {
+      "id": "DJCr5_KFzcM",
+      "creator": "Shadarek",
+      "title": "Havoc Demon Hunter new BiS Gear Setup and Post-Buff Sims",
+      "published": "2026-08-29",
+      "queuedAt": "2026-08-31"
     }
   ],
   "skipped": [

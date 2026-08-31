@@ -16,6 +16,58 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-31 (nightly) — Murlok/Mythicstats/WoWMeta all frozen upstream, 0 rows merged; Bloodmallet and SimC coverage BOTH moved 19 → 22
+
+- **Nothing merged this run, and every one of those is an upstream fact rather than a fetch
+  failure.** Murlok 3 pages HTTP 200, Mythicstats HTTP 200, WoWMeta both endpoints HTTP 200,
+  Bloodmallet 22 of 27 charts HTTP 200, SimC both reports HTTP 200. Archon's six numeric
+  requirements are walled with the letters (see refresh-tiers).
+- **Murlok: 40/40 rows parsed, 0 values moved, `<time datetime>` still 2026-08-28T03:00Z** on
+  all three pages — three days stale against a page that advertises an 8-hour cadence.
+  ⚠️ **A parser trap caught here, worth keeping: Murlok's `<a>` attribute ORDER is not stable.**
+  Most rows are `<a class="vi-box meta-item …" href=…>` but some are `<a href=… class="vi-box
+  meta-item …">`, and a regex anchored on `<a class="vi-box meta-item` silently dropped
+  **4 of 40** rows — Arms Warrior, Beast Mastery, Restoration Druid, Protection Paladin — one
+  per page plus one. It presented as "those specs left the page", i.e. exactly like real
+  upstream movement. Caught only by reconciling 25/6/5 against the 27/7/6 roster shape.
+  Split on `<a [^>]*class="vi-box meta-item` instead.
+- **Mythicstats: period 1078 has NOT advanced.** `/period/latest` 302s to 1078 as it did last
+  night, the subtitle is character-for-character identical ("Top 2000 keys, 10000 characters
+  (2833 unique), 17.2 average key level"), and all 39 parsed rows equal the stored values.
+  Sum 100.20 with role subtotals 60.10 / 20.10 / 20.00 — the representation column, not the
+  `/meta` presence column. Frost Mage is still absent upstream and stays stored at 0.
+  Stored asOf correctly stays 2026-08-30.
+- **WoWMeta: frozen 20 days and the two independent dates still agree** — `manifest.json`
+  snapshotDate 2026-08-11 and the rankings file's `Last-Modified: Tue, 11 Aug 2026 15:25:05
+  GMT`. Payload diffed rather than trusted: 44 blocks, the dps/hps/tank + lowerBound +
+  no-keyRange selection gives 27/7/6 = 40 rows, **0 of 40 lowerBound values moved**.
+- **Bloodmallet coverage 19 → 22 of 27, and the row-drop objection is now GONE while the
+  value-move one is not.** 22 charts return `simc_settings.tier = MID2` at chart timestamp
+  2026-08-29 (read off the chart, never assumed); Arms and Fury re-simmed since last night.
+  Five still return the 76-byte error body across 3 retries each: Balance, Feral,
+  Augmentation, Devastation, Retribution. Stored is 26 profiles at MID1, 2026-07-08/07-15.
+  Adopting the 22 wholesale would drop 26 → 22 = **15.4%, comfortably inside maxRowDropPct
+  0.25** — that was 27% and blocking last night. What still blocks it: **114 of the 132
+  overlapping target rows move more than 60%** (MID2/MID1 ratio min 1.152, median 1.870, max
+  2.833), which is `maxValueMovePct` and has no agent-writable proposal channel. Held
+  wholesale; stored data byte-identical; `fightProfile.asOf` untouched.
+- **SimC: MID2 covers the same 22 of 27 DPS specs, and MID1 has stopped being a fallback at
+  all.** `MID1_Raid.txt` is **272 bytes** (Last-Modified 2026-08-31T07:05Z) — a fresh
+  in-progress run with no `DPS Ranking:` block — and its header now reads the SAME build as
+  MID2: `12.1.0.69497 Live (hotfix 2026-08-29/69497, git build HEAD 3b891e639e)`. So MID1 is
+  no longer the 12.0.7 artefact the contract row describes; it is a 12.1 run that has not
+  produced a ranking yet. MID2_Raid.txt (1.29 MB, 07:27Z) parses 22 specs by longest-prefix
+  (absent: Balance, Feral, Augmentation, Devastation, Retribution — the same five as
+  Bloodmallet, as the contract predicted). All 22 overlap rows move >60% (ratio 1.692 /
+  1.997 / 2.351), so the same `value_move_ack` gate applies. Held.
+- **Robydoby deliberately not fetched.** Its two sheets are the CLOSED 12.1 PTR cycle's
+  zone-54 percentiles; the stored rows are that cycle's final receipts and re-stamping them
+  post-flip would be dishonest. Best-effort and outside the contract by design, so no
+  manifest row is owed.
+- **WCL: read from the pre-agent evidence file only, no warcraftlogs.com request made.**
+  `wcl-fetch/evidence.json` attemptedAt 2026-08-31T17:41:53Z, verdict `rdps-broken`, oauth
+  and graphql both true, `landed` empty, `rawRecipes` empty.
+
 ## 2026-08-30 (local, scheduled) — nothing merged; the Bloodmallet/SimC MID2 adoption is left for the owner ON PURPOSE
 
 - **Nothing was fetched or merged this run.** The nightly (15:16Z, ~1h before this run) had

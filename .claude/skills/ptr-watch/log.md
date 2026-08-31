@@ -16,6 +16,39 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-31 (nightly) — all four live lanes polled, 0 new entries; the Sept 1 pass re-verified at v3 against the stored build
+
+- **No new build, hotfix or tuning post anywhere.** `data/ptr-builds.json` untouched; its
+  newest entry is still the 2026-08-28 "Class Tuning Incoming – September 1" pass, which
+  applies at tomorrow's weekly reset.
+  - Wowhead news **RSS**: HTTP 200, 40 items spanning 2026-08-27T00:57Z → 2026-08-31T17:43Z.
+    Nothing class-tuning or hotfix shaped after 08-28. The two candidates in the window are
+    both already logged: news=382674 (the Sept 1 mirror, = our 08-28 entry) and news=382657
+    ("Patch 12.1 Hotfixes for August 27th", = our 08-27 entry). The Coiled Altar nerf/unnerf
+    articles (382658, 382679) are raid-encounter tuning, not class tuning, and are correctly
+    out of the feed.
+  - Wowhead news **INDEX** (`data.news.newsData`, brace-balanced from the id attribute):
+    20 posts, top id 382660 at 2026-08-31 12:43 — the index does NOT lead the RSS this run,
+    both top out in the same place.
+  - Wowhead **blue tracker** (`data.blueTracker.default`): 50 entries, newest 2026-08-28
+    17:48 (Linxy, "Class Tuning Incoming – September 1", US and EU). No standalone blue post
+    since. Last hotfix topic is Kaivax's 08-27 round-up, already logged.
+  - **Official dev-notes thread** 2317811.json: HTTP 200, posts_count 17, `last_posted_at`
+    2026-07-31T23:42Z — quiet for a month, which is correct and expected: the 12.1 PTR cycle
+    is closed and this is not a lost thread (the rediscovery gotcha stays suspended).
+- **The Sept 1 tuning post was re-read at version 3 and the stored entry survives it exactly.**
+  Topic 2342331 fetched via the `/t/<id>.json` form (the slug form 301s and leaves an empty
+  body — use the bare id). `updated_at` 2026-08-28T22:48:44Z, unchanged since we logged it.
+  All 15 stored highlights match the v3 text line for line, including the Mistweaver
+  four-piece 20% → 25%, Shred logged class-wide at the shallower heading depth, and the whole
+  PLAYER VERSUS PLAYER section correctly left undistilled. No tierSet change is owed —
+  Mistweaver's was already advanced on 08-28 and the validator's upkeep gate is green.
+- **Writeup coverage: 1 spec at `ptr: null`, Demonology Warlock, and that null is deliberate**
+  (the source reported no changes). Unchanged from 08-15.
+- **PTR zone lanes 54 / 52 / 56 / 57 stayed dormant** as the between-cycles posture requires;
+  no WCL request of any kind was made from this session, and their contract rows were removed
+  at the flip so there is nothing to report as unreachable.
+
 ## 2026-08-31 (local, scheduled) — 0 new builds; no hotfix round-up since Aug 27; Sept 1 pass STILL v3; no 12.2
 
 - **Feed unchanged at 24 entries; nothing logged.** Wowhead news RSS fetched once (HTTP 200,
