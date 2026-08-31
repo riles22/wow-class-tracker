@@ -3,7 +3,7 @@
   "source": "Wowhead",
   "sourceId": "wowhead",
   "dated": true,
-  "harvestedAt": "2026-08-25",
+  "harvestedAt": "2026-08-31",
   "specs": {
     "Blood Death Knight": {
       "guideUrl": "https://www.wowhead.com/guide/classes/death-knight/blood/bis-gear",
@@ -1017,7 +1017,7 @@
     },
     "Havoc Demon Hunter": {
       "guideUrl": "https://www.wowhead.com/guide/classes/demon-hunter/havoc/bis-gear",
-      "published": "2026-08-22",
+      "published": "2026-08-28",
       "author": "Shadarek",
       "priorities": [
         {
@@ -1188,12 +1188,12 @@
         {
           "list": "overall",
           "slot": "Finger",
-          "itemId": "268249",
-          "itemName": "Vile Alchemist's Band",
-          "sourceText": "Vashnik the Malignant",
-          "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
-          "dungeon": null,
+          "itemId": "251136",
+          "itemName": "Signet of Snarling Servitude",
+          "sourceText": "Murder Row",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "Murder Row",
           "droppedBy": null
         },
         {
@@ -1221,8 +1221,8 @@
         {
           "list": "overall",
           "slot": "Trinket",
-          "itemId": "270175",
-          "itemName": "Voracious Heart of Ula'tek",
+          "itemId": "270168",
+          "itemName": "Font of Venomous Rage",
           "sourceText": "Ula'tek",
           "sourceKind": "raid",
           "boss": "Ula'tek",
@@ -1236,11 +1236,10 @@
             "slot": "Main Hand",
             "candidates": [
               {
-                "id": "243971",
-                "name": "Enchant Weapon - Jan'alai's Precision"
+                "id": "273072",
+                "name": "Enchant Weapon - Rite of the Hash'ey"
               }
-            ],
-            "note": "Enchant Weapon - Jan'alai's Precision is the best weapon enchant, using one each of Enchant Weapon - Jan'alai's Precision and Enchant Weapon - Arcane Mastery can be better depending on your characters stats."
+            ]
           },
           {
             "slot": "Head",
@@ -1300,8 +1299,8 @@
         "gems": {
           "unique": [
             {
-              "id": "240967",
-              "name": "Powerful Eversong Diamond"
+              "id": "240983",
+              "name": "Indecipherable Eversong Diamond"
             }
           ],
           "filler": [
@@ -1309,8 +1308,7 @@
               "id": "240908",
               "name": "Flawless Masterful Garnet"
             }
-          ],
-          "note": "One of each color, Fill with: Flawless Masterful Garnet · Havoc Demon Hunter will want to use Powerful Eversong Diamond as their single Unique Eversong Diamond. To buff it, one each of Flawless Masterful Garnet, Flawless Deadly Amethyst, Flawless Deadly Peridot, and Flawless Deadly Lapis. Fill any remaining gem sockets with Flawless Masterful Garnet"
+          ]
         },
         "consumables": {
           "flask": [
@@ -1706,7 +1704,7 @@
     },
     "Vengeance Demon Hunter": {
       "guideUrl": "https://www.wowhead.com/guide/classes/demon-hunter/vengeance/bis-gear",
-      "published": "2026-08-20",
+      "published": "2026-08-25",
       "author": "Itamae",
       "priorities": [
         {
@@ -2039,7 +2037,7 @@
     },
     "Balance Druid": {
       "guideUrl": "https://www.wowhead.com/guide/classes/druid/balance/bis-gear",
-      "published": "2026-08-21",
+      "published": "2026-08-28",
       "author": "gamz",
       "priorities": [
         {
@@ -2121,9 +2119,9 @@
           "slot": "Shoulder",
           "itemId": "268246",
           "itemName": "Frothing Venom Spaulders",
-          "sourceText": "The Lost Explorers",
+          "sourceText": "Vashnik the Malignant",
           "sourceKind": "raid",
-          "boss": "The Lost Explorers",
+          "boss": "Vashnik the Malignant",
           "dungeon": null,
           "droppedBy": null
         },
@@ -2255,8 +2253,8 @@
             "slot": "Main Hand",
             "candidates": [
               {
-                "id": "244031",
-                "name": "Enchant Weapon - Arcane Mastery"
+                "id": "273072",
+                "name": "Enchant Weapon - Rite of the Hash'ey"
               }
             ],
             "note": "The option for weapon enchants comes down to flat secondary stats in Thalassian Phoenix Oil or a damage proc in Smuggler's Enchanted Edge. The damage proc is currently simming quite low, so we opt for the secondary stats instead."
@@ -2631,7 +2629,7 @@
     },
     "Guardian Druid": {
       "guideUrl": "https://www.wowhead.com/guide/classes/druid/guardian/bis-gear",
-      "published": "2026-08-12",
+      "published": "2026-08-30",
       "author": "Pumps",
       "priorities": [
         {
@@ -3337,7 +3335,7 @@
     },
     "Augmentation Evoker": {
       "guideUrl": "https://www.wowhead.com/guide/classes/evoker/augmentation/bis-gear",
-      "published": "2026-08-17",
+      "published": "2026-08-26",
       "author": "Jereico",
       "priorities": [
         {
@@ -4268,7 +4266,7 @@
     },
     "Beast Mastery Hunter": {
       "guideUrl": "https://www.wowhead.com/guide/classes/hunter/beast-mastery/bis-gear",
-      "published": "2026-08-21",
+      "published": "2026-08-30",
       "author": "Tarlo",
       "priorities": [
         {
@@ -4432,12 +4430,12 @@
         {
           "list": "overall",
           "slot": "Feet",
-          "itemId": "268233",
-          "itemName": "Ferocious Scaleboots",
-          "sourceText": "Sszorak",
-          "sourceKind": "raid",
-          "boss": "Sszorak",
-          "dungeon": null,
+          "itemId": "159388",
+          "itemName": "Sabatons of Coruscating Energy",
+          "sourceText": "Temple of Sethraliss",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "Temple of Sethraliss",
           "droppedBy": null
         },
         {
@@ -4641,7 +4639,7 @@
     },
     "Marksmanship Hunter": {
       "guideUrl": "https://www.wowhead.com/guide/classes/hunter/marksmanship/bis-gear",
-      "published": "2026-08-22",
+      "published": "2026-08-29",
       "author": "TheAzortharion",
       "priorities": [
         {
@@ -6394,7 +6392,7 @@
     },
     "Brewmaster Monk": {
       "guideUrl": "https://www.wowhead.com/guide/classes/monk/brewmaster/bis-gear",
-      "published": "2026-08-17",
+      "published": "2026-08-27",
       "author": "Sinzhu",
       "priorities": [
         {
@@ -6676,8 +6674,8 @@
           ],
           "combatPotion": [
             {
-              "id": "241308",
-              "name": "Light's Potential"
+              "id": "271887",
+              "name": "Liquid Luster"
             }
           ],
           "healthPotion": [
@@ -6716,13 +6714,13 @@
               "name": "Void-Touched Augment Rune"
             }
           ],
-          "note": "Food: (Hearty) Silvermoon Parade / (Hearty) Harandar Celebration / Royal Roast / · Flasks: Flask of Thalassian Resistance is your default flask choice in Midnight, offering the most generally useful stat of Versatility. However, both the Flask of the Shattered Sun and Flask of the Magisters can also be potent or even superior depending on your current gear. Remember, you can also acquire conjured versions of these flasks from a Cauldron of Sin'dorei Flasks, provided the Alchemist who placed it knows the recipes! · Combat Potion: Light's Potential acts as your most consistently useful combat potion, providing a large burst of Agility for a long period of time, though there are a number of competitive options in Midnight. There is also the Draught of Rampant Abandon, which offers more Agility at the cost of potentially spawning puddles of The Void's Toll under your feet to silence and pacify your character. Raid : Light's Potential; Mythic+ : Light's Potential/Draught of Rampant Abandon; As with flasks, you may obtain temporary conjured versions of any of these potions from an Alchemist's Voidlight Potion Cauldron, assuming they know the recipes. · Health Potion: Concentrated Silvermoon Health Potion is the default healing potion for Brewmaster Monks, offering improved healing over a regular Silvermoon Health Potion. As a staple craft of Alchemists seeking to level the profession, you should have access to plenty of this consumable at a reasonable price, though only one may be used every 5 minutes. In addition, remember that a Warlock 's Healthstone is considered a separate healing item and will not share a cooldown with the healing potion above. Use it as another resource once per encounter! · Food: Feast: (Hearty) Silvermoon Parade/Harandar Celebration; Personal Food: There are two food items that provide the same effect of increasing your Agility: Royal Roast or Impossibly Royal Roast. Find whichever is cheapest to acquire, or consider an alternative such as Champion's Bento which increases your highest secondary stat instead.; Midnight Season 2 additionally features \"hearty\" versions of food items, which can be created by combining multiples of a given item together (such as the Hearty Silvermoon Parade). These items, in addition to being warband-bound, keep their buffs through death . Seek them out for use in areas where you are likely to die and lose an otherwise normal food buff. · Further Consumables: Though less important for your success in group content, Void-Touched Augment Rune offers a small amount of additional Agility. However, the effect will be lost on death, making this a very expensive consumable effect to maintain. All the same, aim to keep a few of these handy for those moments when you need to eke out every bit of damage from your character. Should you need access to a Bloodlust effect and a class with the ability is not available, you may also wish to hold on to a small number of drums consumables. These allow you to trigger a slightly weaker version of the bonus Haste from these spells, but that is still better than not having it at all! For Level 90 characters, the only drums that are usable are the Void-Touched Drums. Finally, you have access to a battle-resurrection consumable: Emergency Soul Link. Although these have a cast time (during which you cannot dodge), they are indispensable if your group is otherwise missing this utility. Have a few on hand, just in case, and make sure to use the higher-ranked version to remove the otherwise small chance of the effect failing!"
+          "note": "Food: (Hearty) Silvermoon Parade / (Hearty) Harandar Celebration / Royal Roast / · Flasks: Flask of Thalassian Resistance is your default flask choice in Midnight, offering the most generally useful stat of Versatility. However, both the Flask of the Shattered Sun and Flask of the Magisters can also be potent or even superior depending on your current gear. Remember, you can also acquire conjured versions of these flasks from a Cauldron of Sin'dorei Flasks, provided the Alchemist who placed it knows the recipes! · Combat Potion: Liquid Luster acts as your most consistently useful combat potion, providing a ramping Versatility bonus for a long period of time, though there are a number of competitive options in Midnight. There is also the Draught of Rampant Abandon, which grants a massive amount of Agility at the cost of potentially spawning puddles of The Void's Toll under your feet to silence and pacify your character. Raid : Liquid Luster; Mythic+ : Liquid Luster/Draught of Rampant Abandon; As with flasks, you may obtain temporary conjured versions of any of these potions from an Alchemist's Voidlight Potion Cauldron, assuming they know the recipes. · Health Potion: Concentrated Silvermoon Health Potion is the default healing potion for Brewmaster Monks, offering improved healing over a regular Silvermoon Health Potion. As a staple craft of Alchemists seeking to level the profession, you should have access to plenty of this consumable at a reasonable price, though only one may be used every 5 minutes. In addition, remember that a Warlock 's Healthstone is considered a separate healing item and will not share a cooldown with the healing potion above. Use it as another resource once per encounter! · Food: Feast: (Hearty) Silvermoon Parade/Harandar Celebration; Personal Food: There are two food items that provide the same effect of increasing your Agility: Royal Roast or Impossibly Royal Roast. Find whichever is cheapest to acquire, or consider an alternative such as Champion's Bento which increases your highest secondary stat instead.; Midnight Season 2 additionally features \"hearty\" versions of food items, which can be created by combining multiples of a given item together (such as the Hearty Silvermoon Parade). These items, in addition to being warband-bound, keep their buffs through death . Seek them out for use in areas where you are likely to die and lose an otherwise normal food buff. · Further Consumables: Though less important for your success in group content, Void-Touched Augment Rune offers a small amount of additional Agility. However, the effect will be lost on death, making this a very expensive consumable effect to maintain. All the same, aim to keep a few of these handy for those moments when you need to eke out every bit of damage from your character. Should you need access to a Bloodlust effect and a class with the ability is not available, you may also wish to hold on to a small number of drums consumables. These allow you to trigger a slightly weaker version of the bonus Haste from these spells, but that is still better than not having it at all! For Level 90 characters, the only drums that are usable are the Void-Touched Drums. Finally, you have access to a battle-resurrection consumable: Emergency Soul Link. Although these have a cast time (during which you cannot dodge), they are indispensable if your group is otherwise missing this utility. Have a few on hand, just in case, and make sure to use the higher-ranked version to remove the otherwise small chance of the effect failing!"
         }
       }
     },
     "Mistweaver Monk": {
       "guideUrl": "https://www.wowhead.com/guide/classes/monk/mistweaver/bis-gear",
-      "published": "2026-08-15",
+      "published": "2026-08-29",
       "author": "Swirl",
       "priorities": [
         {
@@ -7186,7 +7184,7 @@
     },
     "Windwalker Monk": {
       "guideUrl": "https://www.wowhead.com/guide/classes/monk/windwalker/bis-gear",
-      "published": "2026-08-16",
+      "published": "2026-08-25",
       "author": "Babylonius",
       "priorities": [
         {
@@ -7422,7 +7420,7 @@
     },
     "Holy Paladin": {
       "guideUrl": "https://www.wowhead.com/guide/classes/paladin/holy/bis-gear",
-      "published": "2026-08-20",
+      "published": "2026-08-25",
       "author": "HolyClarius",
       "priorities": [
         {
@@ -7631,8 +7629,8 @@
             "slot": "Main Hand",
             "candidates": [
               {
-                "id": "244031",
-                "name": "Enchant Weapon - Arcane Mastery"
+                "id": "273072",
+                "name": "Enchant Weapon - Rite of the Hash'ey"
               }
             ]
           },
@@ -7763,7 +7761,7 @@
     },
     "Protection Paladin": {
       "guideUrl": "https://www.wowhead.com/guide/classes/paladin/protection/bis-gear",
-      "published": "2026-08-12",
+      "published": "2026-08-30",
       "author": "Pumps",
       "priorities": [
         {
@@ -8093,7 +8091,7 @@
     },
     "Retribution Paladin": {
       "guideUrl": "https://www.wowhead.com/guide/classes/paladin/retribution/bis-gear",
-      "published": "2026-08-12",
+      "published": "2026-08-25",
       "author": "Bolas",
       "priorities": [
         {
@@ -8255,12 +8253,12 @@
         {
           "list": "overall",
           "slot": "Finger",
-          "itemId": "252258",
-          "itemName": "Sickening Signet of Atroxus",
-          "sourceText": "Voidscar Arena",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Voidscar Arena",
+          "itemId": "268249",
+          "itemName": "Vile Alchemist's Band",
+          "sourceText": "Vashnik the Malignant",
+          "sourceKind": "raid",
+          "boss": "Vashnik the Malignant",
+          "dungeon": null,
           "droppedBy": null
         },
         {
@@ -8303,8 +8301,8 @@
             "slot": "Main Hand",
             "candidates": [
               {
-                "id": "244031",
-                "name": "Enchant Weapon - Arcane Mastery"
+                "id": "273072",
+                "name": "Enchant Weapon - Rite of the Hash'ey"
               }
             ]
           },
@@ -9216,7 +9214,7 @@
     },
     "Assassination Rogue": {
       "guideUrl": "https://www.wowhead.com/guide/classes/rogue/assassination/bis-gear",
-      "published": "2026-08-24",
+      "published": "2026-08-29",
       "author": "Whispyr",
       "priorities": [
         {
@@ -9257,17 +9255,6 @@
           "sourceText": "Ula'tek",
           "sourceKind": "raid",
           "boss": "Ula'tek",
-          "dungeon": null,
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Off Hand",
-          "itemId": "237837",
-          "itemName": "Farstrider's Mercy",
-          "sourceText": "Crafting/Misc",
-          "sourceKind": "crafted",
-          "boss": null,
           "dungeon": null,
           "droppedBy": null
         },
@@ -9328,17 +9315,6 @@
           "boss": null,
           "dungeon": "Den of Nalorakk",
           "droppedBy": "Nalorakk"
-        },
-        {
-          "list": "overall",
-          "slot": "Wrist",
-          "itemId": "244576",
-          "itemName": "Silvermoon Agent's Deflectors",
-          "sourceText": "Crafting/Misc",
-          "sourceKind": "crafted",
-          "boss": null,
-          "dungeon": null,
-          "droppedBy": null
         },
         {
           "list": "overall",
@@ -9436,12 +9412,28 @@
             {
               "id": "241324",
               "name": "Flask of the Blood Knights"
+            },
+            {
+              "id": "241326",
+              "name": "Flask of the Shattered Sun"
+            },
+            {
+              "id": "241322",
+              "name": "Flask of the Magisters"
             }
           ],
           "combatPotion": [
             {
               "id": "271887",
               "name": "Liquid Luster"
+            },
+            {
+              "id": "241308",
+              "name": "Light's Potential"
+            },
+            {
+              "id": "241288",
+              "name": "Potion of Recklessness"
             }
           ],
           "healthPotion": [
@@ -9467,7 +9459,8 @@
               "id": "255845",
               "name": "Silvermoon Parade"
             }
-          ]
+          ],
+          "note": "Flask: Flask of the Blood Knights, Flask of the Shattered Sun, or Flask of the Magisters · Combat Potion: Liquid Luster, Light's Potential, or Potion of Recklessness"
         }
       }
     },
@@ -10687,7 +10680,7 @@
     },
     "Restoration Shaman": {
       "guideUrl": "https://www.wowhead.com/guide/classes/shaman/restoration/bis-gear",
-      "published": "2026-08-22",
+      "published": "2026-08-26",
       "author": "Harreks",
       "priorities": [
         {
@@ -10758,36 +10751,36 @@
         {
           "list": "overall",
           "slot": "Chest",
-          "itemId": "271876",
-          "itemName": "Awoken Dreadfang Cuirass",
+          "itemId": "239046",
+          "itemName": "Loa-Blessed Chestguard",
           "catalyzedResultId": "271486",
-          "sourceText": "Ula'tek",
-          "sourceKind": "raid",
-          "boss": "Ula'tek",
-          "dungeon": null,
+          "sourceText": "Kings Rest",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "Kings' Rest",
           "droppedBy": null
         },
         {
           "list": "overall",
           "slot": "Wrist",
-          "itemId": "251200",
-          "itemName": "Saptorbane Guards",
-          "sourceText": "The Blinding Vale",
+          "itemId": "159380",
+          "itemName": "Arc-Glass Bindings",
+          "sourceText": "Temple of Sethraliss",
           "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": "The Blinding Vale",
+          "dungeon": "Temple of Sethraliss",
           "droppedBy": null
         },
         {
           "list": "overall",
           "slot": "Hands",
-          "itemId": "268238",
-          "itemName": "Grips of Swirling Fury",
+          "itemId": "251165",
+          "itemName": "Pulverizing Pads",
           "catalyzedResultId": "271484",
-          "sourceText": "Nymrissa Wavebinder",
-          "sourceKind": "world",
+          "sourceText": "The Blinding Vale",
+          "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": null,
+          "dungeon": "The Blinding Vale",
           "droppedBy": null
         },
         {
@@ -10804,13 +10797,13 @@
         {
           "list": "overall",
           "slot": "Legs",
-          "itemId": "268237",
-          "itemName": "Cuisses of the Uncoiled Union",
+          "itemId": "159375",
+          "itemName": "Legguards of the Awakening Brood",
           "catalyzedResultId": "271482",
-          "sourceText": "The Coiled Altar",
-          "sourceKind": "raid",
-          "boss": "The Coiled Altar",
-          "dungeon": null,
+          "sourceText": "Temple of Sethraliss",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "Temple of Sethraliss",
           "droppedBy": null
         },
         {
@@ -10838,13 +10831,13 @@
         {
           "list": "overall",
           "slot": "Finger",
-          "itemId": "159459",
-          "itemName": "Ritual Binder's Ring",
-          "sourceText": "Kings Rest",
+          "itemId": "251148",
+          "itemName": "Pilfered Precious Band",
+          "sourceText": "Den of Nalorakk",
           "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": "Kings' Rest",
-          "droppedBy": null
+          "dungeon": "Den of Nalorakk",
+          "droppedBy": "Nalorakk"
         },
         {
           "list": "overall",
@@ -10860,11 +10853,11 @@
         {
           "list": "overall",
           "slot": "Trinket",
-          "itemId": "270164",
-          "itemName": "Gebbo's Bottomless Bag",
-          "sourceText": "The Lost Explorers",
-          "sourceKind": "raid",
-          "boss": "The Lost Explorers",
+          "itemId": "270167",
+          "itemName": "Wavecaller's Seastone",
+          "sourceText": "Nymrissa Wavebinder",
+          "sourceKind": "world",
+          "boss": null,
           "dungeon": null,
           "droppedBy": null
         }
@@ -11802,7 +11795,7 @@
     },
     "Arms Warrior": {
       "guideUrl": "https://www.wowhead.com/guide/classes/warrior/arms/bis-gear",
-      "published": "2026-08-21",
+      "published": "2026-08-26",
       "author": "Archimtiros",
       "priorities": [
         {
@@ -12010,8 +12003,8 @@
             "slot": "Main Hand",
             "candidates": [
               {
-                "id": "243973",
-                "name": "Enchant Weapon - Berserker's Rage"
+                "id": "273072",
+                "name": "Enchant Weapon - Rite of the Hash'ey"
               }
             ]
           },
@@ -12083,7 +12076,7 @@
               "name": "Flawless Quick Garnet"
             }
           ],
-          "note": "The Powerful Eversong Diamond is just barely starting to become stronger than Indecipherable Eversong Diamond, though versatility gems are not worth using to maximize the bonus."
+          "note": "The Powerful Eversong Diamond is just barely starting to become stronger than Indecipherable Eversong Diamond, though it requires more carefully juggling gems to maximize."
         },
         "consumables": {
           "flask": [
@@ -12128,7 +12121,7 @@
     },
     "Fury Warrior": {
       "guideUrl": "https://www.wowhead.com/guide/classes/warrior/fury/bis-gear",
-      "published": "2026-08-21",
+      "published": "2026-08-26",
       "author": "Archimtiros",
       "priorities": [
         {
@@ -12349,8 +12342,8 @@
             "slot": "Main Hand",
             "candidates": [
               {
-                "id": "243973",
-                "name": "Enchant Weapon - Berserker's Rage"
+                "id": "273072",
+                "name": "Enchant Weapon - Rite of the Hash'ey"
               }
             ]
           },
@@ -12422,7 +12415,7 @@
               "name": "Flawless Quick Amethyst"
             }
           ],
-          "note": "The Powerful Eversong Diamond is just barely starting to become stronger than Indecipherable Eversong Diamond, though versatility gems are not worth using to maximize the bonus."
+          "note": "The Powerful Eversong Diamond is just barely starting to become stronger than Indecipherable Eversong Diamond, though it requires more carefully juggling gems to maximize."
         },
         "consumables": {
           "flask": [
@@ -12467,7 +12460,7 @@
     },
     "Protection Warrior": {
       "guideUrl": "https://www.wowhead.com/guide/classes/warrior/protection/bis-gear",
-      "published": "2026-08-12",
+      "published": "2026-08-30",
       "author": "Pumps",
       "priorities": [
         {

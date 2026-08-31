@@ -3,11 +3,11 @@
   "source": "Method",
   "sourceId": "method",
   "dated": true,
-  "harvestedAt": "2026-08-25",
+  "harvestedAt": "2026-08-31",
   "specs": {
     "Blood Death Knight": {
       "guideUrl": "https://www.method.gg/guides/blood-death-knight/gearing",
-      "published": "2026-08-23",
+      "published": "2026-08-25",
       "priorities": [
         {
           "label": "General",
@@ -161,8 +161,8 @@
         {
           "list": "raid",
           "slot": "Finger",
-          "itemId": "251513",
-          "itemName": "Loa Worshiper's Band",
+          "itemId": "240949",
+          "itemName": "Masterwork Sin'dorei Band",
           "sourceText": "Crafted",
           "sourceKind": "crafted",
           "boss": null,
@@ -326,8 +326,8 @@
         {
           "list": "mplus",
           "slot": "Finger",
-          "itemId": "251513",
-          "itemName": "Loa Worshiper's Band",
+          "itemId": "240949",
+          "itemName": "Masterwork Sin'dorei Band",
           "sourceText": "Crafted",
           "sourceKind": "crafted",
           "boss": null,
@@ -3122,7 +3122,7 @@
     },
     "Vengeance Demon Hunter": {
       "guideUrl": "https://www.method.gg/guides/vengeance-demon-hunter/gearing",
-      "published": "2026-08-11",
+      "published": "2026-08-27",
       "priorities": [
         {
           "label": "General",
@@ -3135,7 +3135,7 @@
           ],
           "leadsWithItemLevel": false,
           "softCaps": [],
-          "raw": "Agility (Item Level) > Haste > Critical Strike = Versatility > Mastery"
+          "raw": "Agility (Item Level) > Haste > Critical Strike = Versatility = Mastery"
         }
       ],
       "bis": [
@@ -3222,12 +3222,12 @@
         {
           "list": "overall",
           "slot": "Waist",
-          "itemId": "251189",
-          "itemName": "Rootwalker Harness",
-          "sourceText": "The Blinding Vale",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "The Blinding Vale",
+          "itemId": "268256",
+          "itemName": "Sash Of The Forlorn Vessel",
+          "sourceText": "The Coiled Altar",
+          "sourceKind": "raid",
+          "boss": "The Coiled Altar",
+          "dungeon": null,
           "droppedBy": null
         },
         {
@@ -3235,10 +3235,10 @@
           "slot": "Legs",
           "itemId": "159313",
           "itemName": "Breeches Of The Sacred Hall",
-          "sourceText": "Kings' Rest (Catalyst)",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Kings' Rest",
+          "sourceText": "The Coiled Altar (Catalyst)",
+          "sourceKind": "raid",
+          "boss": "The Coiled Altar",
+          "dungeon": null,
           "droppedBy": null,
           "viaCatalyst": true
         },
@@ -4444,7 +4444,7 @@
     },
     "Feral Druid": {
       "guideUrl": "https://www.method.gg/guides/feral-druid/gearing",
-      "published": "2026-08-23",
+      "published": "2026-08-30",
       "priorities": [],
       "bis": [
         {
@@ -4603,8 +4603,8 @@
             "slot": "Main Hand",
             "candidates": [
               {
-                "id": "244029",
-                "name": "Enchant Weapon - Acuity Of The Ren'dorei"
+                "id": "273072",
+                "name": "Enchant Weapon - Rite Of The Hash'ey"
               }
             ]
           },
@@ -5371,7 +5371,7 @@
     },
     "Restoration Druid": {
       "guideUrl": "https://www.method.gg/guides/restoration-druid/gearing",
-      "published": "2026-08-15",
+      "published": "2026-08-25",
       "priorities": [
         {
           "label": "For Raiding",
@@ -5731,7 +5731,7 @@
     },
     "Augmentation Evoker": {
       "guideUrl": "https://www.method.gg/guides/augmentation-evoker/gearing",
-      "published": "2026-08-17",
+      "published": "2026-08-25",
       "priorities": [
         {
           "label": "Scalecommander",
@@ -5846,11 +5846,11 @@
         {
           "list": "overall",
           "slot": "Waist",
-          "itemId": "268254",
-          "itemName": "Serpentine Mixing Belt",
-          "sourceText": "Vashnik the Malignant",
-          "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
+          "itemId": "244581",
+          "itemName": "Farstrider's Trophy Belt",
+          "sourceText": "Crafting",
+          "sourceKind": "crafted",
+          "boss": null,
           "dungeon": null,
           "droppedBy": null
         },
@@ -5902,11 +5902,11 @@
         {
           "list": "overall",
           "slot": "Trinket",
-          "itemId": "270164",
-          "itemName": "Gebbo's Bottomless Bag",
-          "sourceText": "The Lost Explorers",
-          "sourceKind": "raid",
-          "boss": "The Lost Explorers",
+          "itemId": "270167",
+          "itemName": "Wavecaller's Seastone",
+          "sourceText": "Nymrissa Wavecaller",
+          "sourceKind": "world",
+          "boss": null,
           "dungeon": null,
           "droppedBy": null
         },
@@ -5935,11 +5935,11 @@
         {
           "list": "overall",
           "slot": "Off Hand",
-          "itemId": "245769",
-          "itemName": "Aln'hara Lantern",
-          "sourceText": "Crafting",
-          "sourceKind": "crafted",
-          "boss": null,
+          "itemId": "268197",
+          "itemName": "Spine Of The Hissing Abyss",
+          "sourceText": "Entombed Sentinels",
+          "sourceKind": "raid",
+          "boss": "Entombed Sentinels",
           "dungeon": null,
           "droppedBy": null
         },
@@ -6027,11 +6027,11 @@
         {
           "list": "raid",
           "slot": "Waist",
-          "itemId": "268254",
-          "itemName": "Serpentine Mixing Belt",
-          "sourceText": "Vashnik the Malignant",
-          "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
+          "itemId": "244581",
+          "itemName": "Farstrider's Trophy Belt",
+          "sourceText": "Crafting",
+          "sourceKind": "crafted",
+          "boss": null,
           "dungeon": null,
           "droppedBy": null
         },
@@ -6083,11 +6083,11 @@
         {
           "list": "raid",
           "slot": "Trinket",
-          "itemId": "270164",
-          "itemName": "Gebbo's Bottomless Bag",
-          "sourceText": "The Lost Explorers",
-          "sourceKind": "raid",
-          "boss": "The Lost Explorers",
+          "itemId": "270167",
+          "itemName": "Wavecaller's Seastone",
+          "sourceText": "Nymrissa Wavecaller",
+          "sourceKind": "world",
+          "boss": null,
           "dungeon": null,
           "droppedBy": null
         },
@@ -6116,11 +6116,11 @@
         {
           "list": "raid",
           "slot": "Off Hand",
-          "itemId": "245769",
-          "itemName": "Aln'hara Lantern",
-          "sourceText": "Crafting",
-          "sourceKind": "crafted",
-          "boss": null,
+          "itemId": "268197",
+          "itemName": "Spine Of The Hissing Abyss",
+          "sourceText": "Entombed Sentinels",
+          "sourceKind": "raid",
+          "boss": "Entombed Sentinels",
           "dungeon": null,
           "droppedBy": null
         },
@@ -6406,7 +6406,7 @@
     },
     "Devastation Evoker": {
       "guideUrl": "https://www.method.gg/guides/devastation-evoker/gearing",
-      "published": "2026-08-17",
+      "published": "2026-08-25",
       "priorities": [
         {
           "label": "General",
@@ -9802,7 +9802,7 @@
     },
     "Arcane Mage": {
       "guideUrl": "https://www.method.gg/guides/arcane-mage/gearing",
-      "published": "2026-08-11",
+      "published": "2026-08-28",
       "priorities": [
         {
           "label": "General",
@@ -12100,7 +12100,7 @@
     },
     "Mistweaver Monk": {
       "guideUrl": "https://www.method.gg/guides/mistweaver-monk/gearing",
-      "published": "2026-08-11",
+      "published": "2026-08-27",
       "priorities": [
         {
           "label": "Raid / Mythic+",
@@ -12132,11 +12132,11 @@
         {
           "list": "overall",
           "slot": "Neck",
-          "itemId": "268250",
-          "itemName": "Sentinel's Vitriolic Chain",
-          "sourceText": "Entombed Sentinels",
+          "itemId": "268265",
+          "itemName": "Aqirbane Reliquary",
+          "sourceText": "Ula'tek",
           "sourceKind": "raid",
-          "boss": "Entombed Sentinels",
+          "boss": "Ula'tek",
           "dungeon": null,
           "droppedBy": null
         },
@@ -12266,11 +12266,11 @@
         {
           "list": "overall",
           "slot": "Trinket",
-          "itemId": "270171",
-          "itemName": "Preternatural Antivenom",
-          "sourceText": "The Twin Fangs",
+          "itemId": "270162",
+          "itemName": "Soulcoiler Ritual Vessel",
+          "sourceText": "Nekzali the Soulcoiler",
           "sourceKind": "raid",
-          "boss": "The Twin Fangs",
+          "boss": "Nek'zali the Soulcoiler",
           "dungeon": null,
           "droppedBy": null
         },
@@ -12299,11 +12299,11 @@
         {
           "list": "raid",
           "slot": "Neck",
-          "itemId": "268250",
-          "itemName": "Sentinel's Vitriolic Chain",
-          "sourceText": "Entombed Sentinels",
+          "itemId": "268265",
+          "itemName": "Aqirbane Reliquary",
+          "sourceText": "Ula'tek",
           "sourceKind": "raid",
-          "boss": "Entombed Sentinels",
+          "boss": "Ula'tek",
           "dungeon": null,
           "droppedBy": null
         },
@@ -12431,11 +12431,11 @@
         {
           "list": "raid",
           "slot": "Trinket",
-          "itemId": "270171",
-          "itemName": "Preternatural Antivenom",
-          "sourceText": "The Twin Fangs",
+          "itemId": "270162",
+          "itemName": "Soulcoiler Ritual Vessel",
+          "sourceText": "Nekzali the Soulcoiler",
           "sourceKind": "raid",
-          "boss": "The Twin Fangs",
+          "boss": "Nek'zali the Soulcoiler",
           "dungeon": null,
           "droppedBy": null
         },
@@ -13388,7 +13388,7 @@
     },
     "Holy Paladin": {
       "guideUrl": "https://www.method.gg/guides/holy-paladin/gearing",
-      "published": "2026-08-15",
+      "published": "2026-08-27",
       "priorities": [
         {
           "label": "Overall",
@@ -13420,11 +13420,11 @@
         {
           "list": "overall",
           "slot": "Neck",
-          "itemId": "268251",
-          "itemName": "Amulet Of The Twin Fangs",
-          "sourceText": "The Twin Fangs",
+          "itemId": "268265",
+          "itemName": "Aqirbane Reliquary",
+          "sourceText": "Ula'tek",
           "sourceKind": "raid",
-          "boss": "The Twin Fangs",
+          "boss": "Ula'tek",
           "dungeon": null,
           "droppedBy": null
         },
@@ -13454,14 +13454,14 @@
         {
           "list": "overall",
           "slot": "Chest",
-          "itemId": "271468",
-          "itemName": "Bulwark Of The Consecrated Flame",
-          "sourceText": "Vashnik the Malignant (Tier Token)",
+          "itemId": "268222",
+          "itemName": "Reckless Spirit Breastplate",
+          "sourceText": "The Coiled Altar (Catalyst)",
           "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
+          "boss": "The Coiled Altar",
           "dungeon": null,
           "droppedBy": null,
-          "viaTierToken": true
+          "viaCatalyst": true
         },
         {
           "list": "overall",
@@ -13489,12 +13489,12 @@
         {
           "list": "overall",
           "slot": "Waist",
-          "itemId": "159418",
-          "itemName": "Girdle Of Pestilent Purification",
-          "sourceText": "King's Rest",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Kings' Rest",
+          "itemId": "268259",
+          "itemName": "Girdle Of Toxic Regret",
+          "sourceText": "The Coiled Altar",
+          "sourceKind": "raid",
+          "boss": "The Coiled Altar",
+          "dungeon": null,
           "droppedBy": null
         },
         {
@@ -13600,11 +13600,11 @@
         {
           "list": "raid",
           "slot": "Neck",
-          "itemId": "268251",
-          "itemName": "Amulet Of The Twin Fangs",
-          "sourceText": "The Twin Fangs",
+          "itemId": "268265",
+          "itemName": "Aqirbane Reliquary",
+          "sourceText": "Ula'tek",
           "sourceKind": "raid",
-          "boss": "The Twin Fangs",
+          "boss": "Ula'tek",
           "dungeon": null,
           "droppedBy": null
         },
@@ -13634,14 +13634,14 @@
         {
           "list": "raid",
           "slot": "Chest",
-          "itemId": "271468",
-          "itemName": "Bulwark Of The Consecrated Flame",
-          "sourceText": "Vashnik the Malignant (Tier Token)",
+          "itemId": "268222",
+          "itemName": "Reckless Spirit Breastplate",
+          "sourceText": "The Coiled Altar (Catalyst)",
           "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
+          "boss": "The Coiled Altar",
           "dungeon": null,
           "droppedBy": null,
-          "viaTierToken": true
+          "viaCatalyst": true
         },
         {
           "list": "raid",
@@ -14029,7 +14029,7 @@
               "name": "Flawless Quick Amethyst"
             }
           ],
-          "note": "Unique Gem: Telluric Eversong Diamond (when you get enough sockets) Regular Gem: Flawless Masterful Peridot / Flawless Quick Amethyst"
+          "note": "Unique Gem: Telluric Eversong Diamond Regular Gem: Flawless Masterful Peridot / Flawless Quick Amethyst"
         },
         "consumables": {
           "flask": [
@@ -14741,15 +14741,15 @@
     },
     "Retribution Paladin": {
       "guideUrl": "https://www.method.gg/guides/retribution-paladin/gearing",
-      "published": "2026-08-12",
+      "published": "2026-08-27",
       "priorities": [],
       "bis": [
         {
           "list": "overall",
           "slot": "Head",
-          "itemId": "268229",
-          "itemName": "Skullguard Of The Risen Sacrifice",
-          "sourceText": "Nek'zali the Soulcoiler (Catalyst)",
+          "itemId": "271465",
+          "itemName": "Warhelm Of The Consecrated Flame",
+          "sourceText": "Nek'zali the Soulcoiler(Catalyst)",
           "sourceKind": "raid",
           "boss": "Nek'zali the Soulcoiler",
           "dungeon": null,
@@ -14770,9 +14770,9 @@
         {
           "list": "overall",
           "slot": "Shoulder",
-          "itemId": "251138",
-          "itemName": "Cinderfury Shoulderguards",
-          "sourceText": "Murder Row (Catalyst)",
+          "itemId": "271463",
+          "itemName": "Pauldrons Of The Consecrated Flame",
+          "sourceText": "Murder Row(Catalyst)",
           "sourceKind": "dungeon",
           "boss": null,
           "dungeon": "Murder Row",
@@ -14795,11 +14795,12 @@
           "slot": "Chest",
           "itemId": "271468",
           "itemName": "Bulwark Of The Consecrated Flame",
-          "sourceText": "Vashnik the Malignant",
+          "sourceText": "The Coiled Altar(Catalyst)",
           "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
+          "boss": "The Coiled Altar",
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "viaCatalyst": true
         },
         {
           "list": "overall",
@@ -14817,11 +14818,12 @@
           "slot": "Hands",
           "itemId": "271466",
           "itemName": "Gauntlets Of The Consecrated Flame",
-          "sourceText": "Entombed Sentinels",
-          "sourceKind": "raid",
-          "boss": "Entombed Sentinels",
-          "dungeon": null,
-          "droppedBy": null
+          "sourceText": "Den of Nalorakk(Catalyst)",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "Den of Nalorakk",
+          "droppedBy": "Nalorakk",
+          "viaCatalyst": true
         },
         {
           "list": "overall",
@@ -14837,9 +14839,9 @@
         {
           "list": "overall",
           "slot": "Legs",
-          "itemId": "271878",
-          "itemName": "Chausses Of Unbound Rancor",
-          "sourceText": "Ula'tek (Catalyst)",
+          "itemId": "271464",
+          "itemName": "Greaves Of The Consecrated Flame",
+          "sourceText": "Ula'tek(Catalyst)",
           "sourceKind": "raid",
           "boss": "Ula'tek",
           "dungeon": null,
@@ -14860,22 +14862,22 @@
         {
           "list": "overall",
           "slot": "Finger",
-          "itemId": "252258",
-          "itemName": "Sickening Signet Of Atroxus",
-          "sourceText": "Voidscar Arena",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Voidscar Arena",
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Finger",
           "itemId": "268249",
           "itemName": "Vile Alchemist's Band",
           "sourceText": "Vashnik the Malignant",
           "sourceKind": "raid",
           "boss": "Vashnik the Malignant",
+          "dungeon": null,
+          "droppedBy": null
+        },
+        {
+          "list": "overall",
+          "slot": "Finger",
+          "itemId": "251513",
+          "itemName": "Loa Worshiper's Band",
+          "sourceText": "Crafted",
+          "sourceKind": "crafted",
+          "boss": null,
           "dungeon": null,
           "droppedBy": null
         },
@@ -16598,7 +16600,7 @@
     },
     "Shadow Priest": {
       "guideUrl": "https://www.method.gg/guides/shadow-priest/gearing",
-      "published": "2026-08-11",
+      "published": "2026-08-27",
       "priorities": [],
       "bis": [
         {
@@ -16684,11 +16686,11 @@
         {
           "list": "overall",
           "slot": "Waist",
-          "itemId": "268257",
-          "itemName": "Caustic Chain-Wrapped Sash",
-          "sourceText": "Sszorak",
-          "sourceKind": "raid",
-          "boss": "Sszorak",
+          "itemId": "239649",
+          "itemName": "Martyr's Waistwrap",
+          "sourceText": "Crafted",
+          "sourceKind": "crafted",
+          "boss": null,
           "dungeon": null,
           "droppedBy": null
         },
@@ -16740,11 +16742,11 @@
         {
           "list": "overall",
           "slot": "Trinket",
-          "itemId": "270164",
-          "itemName": "Gebbo's Bottomless Bag",
-          "sourceText": "The Lost Explorers",
-          "sourceKind": "raid",
-          "boss": "The Lost Explorers",
+          "itemId": "270167",
+          "itemName": "Wavecaller's Seastone",
+          "sourceText": "Nymrissa Wavecaller",
+          "sourceKind": "world",
+          "boss": null,
           "dungeon": null,
           "droppedBy": null
         },
@@ -16773,13 +16775,14 @@
         {
           "list": "overall",
           "slot": "Off Hand",
-          "itemId": "245769",
-          "itemName": "Aln'hara Lantern",
-          "sourceText": "Crafted",
-          "sourceKind": "crafted",
-          "boss": null,
+          "itemId": "268197",
+          "itemName": "Spine Of The Hissing Abyss",
+          "sourceText": "Entomed Sentinels",
+          "sourceKind": "raid",
+          "boss": "Entombed Sentinels",
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextFuzzy": true
         }
       ],
       "enhancements": {
@@ -19132,7 +19135,7 @@
     },
     "Enhancement Shaman": {
       "guideUrl": "https://www.method.gg/guides/enhancement-shaman/gearing",
-      "published": "2026-08-23",
+      "published": "2026-08-24",
       "priorities": [
         {
           "label": "General",
@@ -19750,12 +19753,8 @@
             "slot": "Main Hand",
             "candidates": [
               {
-                "id": "243973",
-                "name": "Enchant Weapon - Berserker's Rage"
-              },
-              {
-                "id": "244031",
-                "name": "Enchant Weapon - Arcane Mastery"
+                "id": "273072",
+                "name": "Enchant Weapon - Rite Of The Hash'ey"
               }
             ]
           }
@@ -22177,7 +22176,7 @@
     },
     "Arms Warrior": {
       "guideUrl": "https://www.method.gg/guides/arms-warrior/gearing",
-      "published": "2026-08-11",
+      "published": "2026-08-25",
       "priorities": [
         {
           "label": "General",

@@ -16,6 +16,42 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-31 (local, scheduled) — caption 429 on its FIFTH consecutive day; queue held at 5, nothing distilled
+
+- **The anonymous residential caption lane is still 429.** One probe only, on the queue's head
+  (`pdYpGLyZ7VM`, LBNinja7), with the skill's pinned recipe (`--extractor-args
+  youtube:player_client=android --write-auto-subs --sub-langs en --sub-format json3
+  --sleep-requests 1.5`, yt-dlp at the `requirements.txt` pin 2026.07.04). The info endpoint
+  answered fine — webpage and android player API both fetched, subtitle track `en` detected and
+  selected — and then the `timedtext` request failed `HTTP Error 429: Too Many Requests`. That
+  is the IP-scoped abuse-flag shape, not throttling: the block sits on captions alone while
+  metadata flows. **No retries, no client-shuffling, no backoff ladder, and no second video** —
+  with the flag up, probing the other four would only spend goodwill on the one endpoint still
+  answering.
+- **Day five, and the relapse is now longer than the remission.** Clear 08-25 and 08-26; blocked
+  08-27, 08-28, 08-29, 08-30 and 08-31. The 08-27 reading — that the 08-25 clearing was a
+  remission rather than a fix — has five days behind it. **The residential yt-dlp caption lane
+  should no longer be planned around**, and a scheduled run cannot fix it by trying harder.
+- **The authenticated fallback still has no usable credential, and this run re-checked rather
+  than assuming.** `~/Downloads/cookies.txt` is the SAME file the 08-30 run characterised:
+  792 bytes, mtime Aug 24 21:24, and its first line is `# robots.txt file for YouTube`. It is a
+  robots.txt, not a Netscape cookie export — no cookie records, no youtube.com domain. Only the
+  file's size, mtime and first line were read, which is all that is needed to tell an export
+  from a non-export; no browser cookie store was touched, and none should be. **If Riley wants
+  this lane available to scheduled runs it needs a genuine Netscape-format export from a
+  private window** — the 08-24 file will never work regardless of who reads it.
+- **Queue deliberately UNCHANGED at 5** (`pdYpGLyZ7VM` LBNinja7, `z_dKoGx_FIk` Kalamazi,
+  `bDElWkJxvtY` izen, `xYXkZA1L490` YoDaTV, `1qclgMKPdz4` Whispyr). **Nothing moved to
+  `skipped[]`**: a skip is a DURABLE claim that the transcript was read and held nothing, and a
+  transport 429 is not that — writing one would permanently retire a video nobody has read. All
+  five carry keyword-shaped titles the nightly's own filtered discovery already queued, and they
+  drain through Supadata on a different network path, proven unaffected by this flag.
+- **No unfiltered breadth sweep, on purpose** (the 08-27 → 08-30 reasoning, unchanged): the
+  local run's breadth privilege is that yt-dlp is free, and with captions 429ing a wider sweep
+  yields no transcripts and therefore no takes. It would only spend the info endpoint's goodwill.
+- **0 takes, 0 metaNotes, 0 videos distilled or skipped.** `creator-takes.json` and
+  `pending-transcripts.json` are both byte-identical to HEAD.
+
 ## 2026-08-30 (local, scheduled) — the caption 429 is on its FOURTH consecutive day; queue held at 5, nothing distilled
 
 - **One caption probe, one 429, stopped there** — the skill's rule, not a judgement call.

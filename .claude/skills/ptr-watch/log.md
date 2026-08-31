@@ -16,6 +16,48 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-31 (local, scheduled) — 0 new builds; no hotfix round-up since Aug 27; Sept 1 pass STILL v3; no 12.2
+
+- **Feed unchanged at 24 entries; nothing logged.** Wowhead news RSS fetched once (HTTP 200,
+  157,896 bytes, 40 items spanning 08-27 → 08-31) and read per `<item>` block, never by tag
+  adjacency. Titles AND `content:encoded` bodies were both scanned — the body pass is what
+  makes a "no new tuning" claim honest, since Wowhead headlines the highlights rather than the
+  scope (the 08-28 article names three specs for a pass that carries fourteen).
+- **The canonical rolling hotfix topic is the authority, and it says August 27.** Kaivax topic
+  **2336376** fetched directly (`.json`, HTTP 200, 34 KB): title still "World of Warcraft:
+  Midnight Hotfixes - August 27", post 1 at **v21**, last edited 2026-08-28T00:59:15Z. Its
+  bold date sections enumerate Aug 27/26/25/21/20/19/18/17/14/13 and **nothing later** — so
+  08-28, 08-29 and 08-30 genuinely had no hotfix round-up, rather than one we missed. The Aug
+  27 section is already logged as this feed's 2026-08-27 `hotfix` entry. Checked the topic
+  BODY for a later section rather than trusting the rolled title, because the title lags the
+  edit that appends a section.
+- **The September 1 tuning post is unchanged: still v3.** Topic **2342331** post 1 created
+  2026-08-28T22:27:13Z, updated 2026-08-28T22:48:44Z, `version` 3 — byte-identical in version
+  terms to what the 08-29 run distilled. The pass applies with tomorrow's weekly maintenance,
+  so this was the check worth making today: an amended post would have changed fourteen specs'
+  logged lines the night before they go live. It was not amended.
+- ⚠️ **NEW GOTCHA — a blue name on a post number is not a blue post.** A naive scan of that
+  topic's `post_stream.posts` shows "#5 | Linxy", which reads as a second Linxy post carrying a
+  clarification. It is not: `post_type: 3` with `action_code: "pinned.enabled"` and a
+  **zero-length `cooked`** — a Discourse small-action recording that Linxy pinned the topic.
+  The cheap cross-check that settles it is `details.participants`, which lists Linxy at
+  `post_count: 1`. **Filter on `post_type === 1` (or a non-empty `cooked`) before reading a
+  post as content**, or a moderation event gets distilled as tuning.
+- **Forum transport note:** `us.forums.blizzard.com/en/wow/t/x/<id>.json` returns **HTTP 301
+  with a zero-byte body** — the slug-less form redirects. Use `-L`, or the real slug. Without
+  `-L` this looks exactly like a dead topic.
+- **Dev-notes thread 2317811: no change**, newest post still #19 (Linxy, 2026-07-31T23:42Z),
+  `last_posted_at` 2026-07-31. The closed 12.1 cycle's expected quiet, per the between-cycles
+  posture — not a lost thread. Note `posts_count` reads 17 against a highest post number of 19
+  (deleted replies); do not read that gap as missing blue posts.
+- **No 12.2 PTR announcement** in any channel — RSS titles, RSS bodies (`12.2` / `Patch 12.2`
+  matched nothing), the dev-notes thread, or the hotfix topic.
+- **Writeup lane unchanged:** still exactly 1 spec at `ptr: null` (Demonology Warlock, the
+  deliberate null — the source reported no changes). No new per-spec 12.1 review articles in
+  the RSS window.
+- **Dormant lanes correctly skipped**, not marked unreachable: the four PTR WCL zone sweeps
+  (54/52/56/57) have no contract rows since the flip, so they need no manifest excuse.
+
 ## 2026-08-30 (local, scheduled) — 0 new builds; Sept 1 pass re-read and still at forum v3; no 12.2
 
 - **Between-cycles posture, live lanes only.** The four PTR WCL zone sweeps (54/52/56/57)

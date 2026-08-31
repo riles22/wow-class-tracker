@@ -16,6 +16,38 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-08-31 (local, scheduled) — Archon walled an EIGHTH night, and the wall CHANGED SHAPE; 0 letters touched
+
+- **Archon is still unreachable, but it is no longer serving the 403.** Two representative
+  registered pages re-probed from Riley's residential IP with the full browser header set
+  (raid heroic all-bosses DPS, and M+ 10 all-dungeons this-week DPS). Both returned **HTTP 200**
+  — not the 403 the last seven nights recorded — with a **~2.5 KB** body (against 5.8–5.9 KB
+  before), `<title>Human Verification</title>`, and `__NEXT_DATA__` count **0**.
+- ⚠️ **This is exactly why the contract row says to assert on `__NEXT_DATA__` presence and not
+  on the status code.** A status-code check would have read tonight's 200 as a recovery and
+  then either merged an empty parse or thrown somewhere further downstream. The assertion held
+  and reported the truth: the page is a challenge page, whatever its status line says. Same
+  lesson as the WCL 403 note in CLAUDE.md, from the opposite direction — **a 200 is not
+  reachability any more than a 403 is an outage.** Keep the assertion on the payload.
+- **Not bypassed, and it must not be.** The interstitial is a human-verification challenge;
+  completing or working around one is out of bounds for this project regardless of how much
+  data sits behind it. The honest outcome is an `unreachable` row.
+- **Nothing merged, nothing stamped.** No `snapshot` date advanced, no letter written:
+  `data/specs.json`, `data/sources.json` and `data/encounter-tiers.json` are byte-identical to
+  HEAD. Archon's 80 rated cells, its six numeric series and the 619 encounter rows all stand at
+  their stored 2026-08-24/25 dates.
+- **Standing consequence, unchanged:** Archon is the only tier source still describing S1, so
+  the wall continues to hold off the one consensus recomposition the anomaly gate is waiting
+  for, and `consensusFor` stays at Icy Veins + Method + Wowhead ("consensus of 3"). The
+  `archon-heroic-dps` coverage date (2026-08-24) is now 7 days old against `maxAgeDays` 5 — and
+  since the 2026-08-25 owner decision that is the series Archon's raid LETTERS read from, so
+  the heartbeat red is the honest signal and is not to be acked away.
+- **Icy Veins / Method / Wowhead deliberately NOT refetched this run.** All three are `success`
+  rows the CI nightly fetches reliably, and today's nightly had not yet fired at run time
+  (the schedule has been landing ~14:57–15:17Z since the 08-27 degradation, against its 10:37Z
+  cron). Regenerating them locally is what makes a push unmergeable, and would have raced the
+  night for no gain. Residential-only catch-up was the whole scope.
+
 ## 2026-08-30 (local, scheduled) — Archon walled a SEVENTH night; residential re-probe reproduced the wall; 0 letters touched
 
 - **Scope: Archon only.** Icy Veins, Method and Wowhead were all fetched successfully by the

@@ -3,7 +3,7 @@
   "source": "Icy Veins",
   "sourceId": "icyveins",
   "dated": true,
-  "harvestedAt": "2026-08-25",
+  "harvestedAt": "2026-08-31",
   "specs": {
     "Blood Death Knight": {
       "guideUrl": "https://www.icy-veins.com/wow/blood-death-knight-pve-tank-gear-best-in-slot",
@@ -295,7 +295,7 @@
         {
           "list": "mplus",
           "slot": "Chest",
-          "itemId": "159424",
+          "itemId": "239036",
           "itemName": "Desert Guardian's Breastplate",
           "sourceText": "Temple of Sethraliss",
           "sourceKind": "dungeon",
@@ -471,11 +471,11 @@
         {
           "list": "raid",
           "slot": "Finger",
-          "itemId": "268251",
-          "itemName": "Amulet of the Twin Fangs",
-          "sourceText": "Twin Fangs in Venomous Abyss",
+          "itemId": "268252",
+          "itemName": "Apex Brute's Claw Ring",
+          "sourceText": "Sszorak",
           "sourceKind": "raid",
-          "boss": "The Twin Fangs",
+          "boss": "Sszorak",
           "dungeon": null,
           "droppedBy": null
         },
@@ -2173,7 +2173,7 @@
     },
     "Havoc Demon Hunter": {
       "guideUrl": "https://www.icy-veins.com/wow/havoc-demon-hunter-pve-dps-gear-best-in-slot",
-      "published": "2026-08-23",
+      "published": "2026-08-30",
       "priorities": [
         {
           "label": "Havoc Demon Hunter",
@@ -2315,8 +2315,8 @@
         {
           "list": "overall",
           "slot": "Trinket",
-          "itemId": "270175",
-          "itemName": "Voracious Heart of Ula'tek",
+          "itemId": "270168",
+          "itemName": "Font of Venomous Rage",
           "sourceText": "Ula'tek",
           "sourceKind": "raid",
           "boss": "Ula'tek",
@@ -2667,8 +2667,8 @@
         {
           "list": "raid",
           "slot": "Trinket",
-          "itemId": "270175",
-          "itemName": "Voracious Heart of Ula'tek",
+          "itemId": "270168",
+          "itemName": "Font of Venomous Rage",
           "sourceText": "Ula'tek",
           "sourceKind": "raid",
           "boss": "Ula'tek",
@@ -2726,6 +2726,7 @@
           "itemIds": [
             "270173",
             "268209",
+            "270168",
             "270175"
           ]
         },
@@ -2744,7 +2745,6 @@
           "itemIds": [
             "270164",
             "250228",
-            "270168",
             "250215",
             "159617",
             "248583",
@@ -2813,8 +2813,8 @@
             "slot": "Main Hand",
             "candidates": [
               {
-                "id": "243970",
-                "name": "Jan'alai's Precision"
+                "id": "273072",
+                "name": "Rite of the Hash'ey"
               }
             ]
           },
@@ -2822,8 +2822,8 @@
             "slot": "Off Hand",
             "candidates": [
               {
-                "id": "243970",
-                "name": "Jan'alai's Precision"
+                "id": "273072",
+                "name": "Rite of the Hash'ey"
               }
             ]
           },
@@ -3731,7 +3731,7 @@
     },
     "Vengeance Demon Hunter": {
       "guideUrl": "https://www.icy-veins.com/wow/vengeance-demon-hunter-pve-tank-gear-best-in-slot",
-      "published": "2026-08-16",
+      "published": "2026-08-26",
       "priorities": [
         {
           "label": "Vengeance Demon Hunter",
@@ -3739,13 +3739,13 @@
           "primary": "Agility",
           "secondaries": [
             "Haste",
+            "Mast",
             "Vers",
-            "Crit",
-            "Mast"
+            "Crit"
           ],
           "leadsWithItemLevel": false,
           "softCaps": [],
-          "raw": "Agility > Haste > Versatility > Critical Strike > Mastery"
+          "raw": "Agility > Haste > Mastery > Versatility > Critical Strike"
         }
       ],
       "bis": [
@@ -4284,7 +4284,7 @@
           "itemIds": [
             "270175",
             "270173",
-            "270168",
+            "270164",
             "270165"
           ]
         },
@@ -4294,8 +4294,6 @@
             "273796",
             "270165",
             "270160",
-            "270164",
-            "270168",
             "250215",
             "273797",
             "250228",
@@ -4308,11 +4306,11 @@
             "250215",
             "159617",
             "273797",
-            "270164",
             "250243",
             "250244",
             "250228",
             "250259",
+            "270168",
             "193757",
             "270174",
             "250225",
@@ -6737,11 +6735,11 @@
         {
           "list": "overall",
           "slot": "Neck",
-          "itemId": "268251",
-          "itemName": "Amulet of the Twin Fangs",
-          "sourceText": "Twin Fangs",
+          "itemId": "268265",
+          "itemName": "Aqirbane Reliquary",
+          "sourceText": "Ula'tek",
           "sourceKind": "raid",
-          "boss": "The Twin Fangs",
+          "boss": "Ula'tek",
           "dungeon": null,
           "droppedBy": null
         },
@@ -7078,11 +7076,11 @@
         {
           "list": "raid",
           "slot": "Neck",
-          "itemId": "268251",
-          "itemName": "Amulet of the Twin Fangs",
-          "sourceText": "Twin Fangs",
+          "itemId": "268265",
+          "itemName": "Aqirbane Reliquary",
+          "sourceText": "Ula'tek",
           "sourceKind": "raid",
-          "boss": "The Twin Fangs",
+          "boss": "Ula'tek",
           "dungeon": null,
           "droppedBy": null
         },
@@ -7234,14 +7232,15 @@
         {
           "tier": "S",
           "itemIds": [
-            "270162"
+            "270162",
+            "270164",
+            "270167"
           ]
         },
         {
           "tier": "A",
           "itemIds": [
-            "270164",
-            "270167",
+            "270169",
             "250214",
             "248583",
             "193757"
@@ -7253,7 +7252,6 @@
             "273649",
             "249343",
             "249811",
-            "270169",
             "251792"
           ]
         },
@@ -8845,7 +8843,7 @@
     },
     "Preservation Evoker": {
       "guideUrl": "https://www.icy-veins.com/wow/preservation-evoker-pve-healing-gear-best-in-slot",
-      "published": "2026-08-17",
+      "published": "2026-08-25",
       "priorities": [
         {
           "label": "Preservation Evoker",
@@ -9597,7 +9595,7 @@
     },
     "Beast Mastery Hunter": {
       "guideUrl": "https://www.icy-veins.com/wow/beast-mastery-hunter-pve-dps-gear-best-in-slot",
-      "published": "2026-08-24",
+      "published": "2026-08-31",
       "priorities": [
         {
           "label": "Single-Target",
@@ -9634,10 +9632,10 @@
           "slot": "Head",
           "itemId": "271492",
           "itemName": "Skulking Viper's Weeping Fangs",
-          "sourceText": "Catalyst from Voidscar Arena",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Voidscar Arena",
+          "sourceText": "Catalyst from Nek'zali",
+          "sourceKind": "raid",
+          "boss": "Nek'zali the Soulcoiler",
+          "dungeon": null,
           "droppedBy": null
         },
         {
@@ -9645,10 +9643,10 @@
           "slot": "Hands",
           "itemId": "271493",
           "itemName": "Skulking Viper's Hidepiercers",
-          "sourceText": "Catalyst from King's Rest",
+          "sourceText": "Catalyst from Ruby Life Pools",
           "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": "Kings' Rest",
+          "dungeon": "Ruby Life Pools",
           "droppedBy": null
         },
         {
@@ -9896,12 +9894,12 @@
         {
           "list": "mplus",
           "slot": "Finger",
-          "itemId": "251194",
-          "itemName": "Lightwarden's Bind",
-          "sourceText": "The Blinding Vale",
+          "itemId": "158366",
+          "itemName": "Charged Sandstone Band",
+          "sourceText": "Temple of Sethraliss",
           "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": "The Blinding Vale",
+          "dungeon": "Temple of Sethraliss",
           "droppedBy": null
         },
         {
@@ -9951,12 +9949,12 @@
         {
           "list": "mplus",
           "slot": "Main Hand",
-          "itemId": "251187",
-          "itemName": "Amirdrassil's Reach",
-          "sourceText": "The Blinding Vale",
+          "itemId": "271680",
+          "itemName": "Sinseared Repeater",
+          "sourceText": "Murder Row",
           "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": "The Blinding Vale",
+          "dungeon": "Murder Row",
           "droppedBy": null
         },
         {
@@ -10039,11 +10037,11 @@
         {
           "list": "raid",
           "slot": "Feet",
-          "itemId": "268233",
-          "itemName": "Ferocious Scaleboots",
-          "sourceText": "Sszorak",
+          "itemId": "268258",
+          "itemName": "Boots of the Reckless Wayfarer",
+          "sourceText": "Lost Explorers",
           "sourceKind": "raid",
-          "boss": "Sszorak",
+          "boss": "The Lost Explorers",
           "dungeon": null,
           "droppedBy": null
         },
@@ -10072,13 +10070,13 @@
         {
           "list": "raid",
           "slot": "Finger",
-          "itemId": "268266",
-          "itemName": "Alluring Bubbleband",
-          "sourceText": "Nymrissa Wavecaller",
-          "sourceKind": "world",
-          "boss": null,
+          "itemId": "268252",
+          "itemName": "Apex Brute's Claw Ring",
+          "sourceText": "Sszorak",
+          "sourceKind": "raid",
+          "boss": "Sszorak",
           "dungeon": null,
-          "droppedBy": "Nymrissa Wavecaller"
+          "droppedBy": null
         },
         {
           "list": "raid",
@@ -10303,7 +10301,7 @@
     },
     "Marksmanship Hunter": {
       "guideUrl": "https://www.icy-veins.com/wow/marksmanship-hunter-pve-dps-gear-best-in-slot",
-      "published": "2026-08-24",
+      "published": "2026-08-31",
       "priorities": [
         {
           "label": "Marksmanship Hunter",
@@ -10401,12 +10399,12 @@
         {
           "list": "overall",
           "slot": "Feet",
-          "itemId": "159388",
-          "itemName": "Sabatons of Coruscating Energy",
-          "sourceText": "Temple of Sethraliss",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Temple of Sethraliss",
+          "itemId": "268258",
+          "itemName": "Boots of the Reckless Wayfarer",
+          "sourceText": "Lost Explorers",
+          "sourceKind": "raid",
+          "boss": "The Lost Explorers",
+          "dungeon": null,
           "droppedBy": null
         },
         {
@@ -10434,12 +10432,12 @@
         {
           "list": "overall",
           "slot": "Finger",
-          "itemId": "268249",
-          "itemName": "Vile Alchemist's Band",
-          "sourceText": "Vashnik",
-          "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
-          "dungeon": null,
+          "itemId": "158366",
+          "itemName": "Charged Sandstone Band",
+          "sourceText": "Temple of Sethraliss",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "Temple of Sethraliss",
           "droppedBy": null
         },
         {
@@ -10610,12 +10608,12 @@
         {
           "list": "mplus",
           "slot": "Trinket",
-          "itemId": "250214",
-          "itemName": "Lightspire Core",
-          "sourceText": "The Blinding Vale",
+          "itemId": "159617",
+          "itemName": "Lustrous Golden Plumage",
+          "sourceText": "King's Rest",
           "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": "The Blinding Vale",
+          "dungeon": "Kings' Rest",
           "droppedBy": null
         },
         {
@@ -10632,12 +10630,12 @@
         {
           "list": "mplus",
           "slot": "Trinket",
-          "itemId": "159617",
-          "itemName": "Lustrous Golden Plumage",
-          "sourceText": "King's Rest",
+          "itemId": "250214",
+          "itemName": "Lightspire Core",
+          "sourceText": "The Blinding Vale",
           "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": "Kings' Rest",
+          "dungeon": "The Blinding Vale",
           "droppedBy": null
         },
         {
@@ -10731,11 +10729,11 @@
         {
           "list": "raid",
           "slot": "Feet",
-          "itemId": "268233",
-          "itemName": "Ferocious Scaleboots",
-          "sourceText": "Sszorak",
+          "itemId": "268258",
+          "itemName": "Boots of the Reckless Wayfarer",
+          "sourceText": "Lost Explorers",
           "sourceKind": "raid",
-          "boss": "Sszorak",
+          "boss": "The Lost Explorers",
           "dungeon": null,
           "droppedBy": null
         },
@@ -10822,15 +10820,15 @@
           "tier": "S",
           "itemIds": [
             "270175",
-            "270173"
+            "270173",
+            "270168"
           ]
         },
         {
           "tier": "A",
           "itemIds": [
             "273796",
-            "159617",
-            "270168"
+            "159617"
           ]
         },
         {
@@ -11011,7 +11009,7 @@
     },
     "Survival Hunter": {
       "guideUrl": "https://www.icy-veins.com/wow/survival-hunter-pve-dps-gear-best-in-slot",
-      "published": "2026-08-24",
+      "published": "2026-08-29",
       "priorities": [
         {
           "label": "Survival Hunter",
@@ -11655,8 +11653,8 @@
             "slot": "Main Hand",
             "candidates": [
               {
-                "id": "243973",
-                "name": "Enchant Weapon - Berserker's Rage"
+                "id": "273072",
+                "name": "Enchant Weapon - Rite of the Hash'ey"
               },
               {
                 "id": "243733",
@@ -11715,7 +11713,7 @@
     },
     "Arcane Mage": {
       "guideUrl": "https://www.icy-veins.com/wow/arcane-mage-pve-dps-gear-best-in-slot",
-      "published": "2026-08-24",
+      "published": "2026-08-31",
       "priorities": [
         {
           "label": "Arcane Mage",
@@ -12421,7 +12419,7 @@
     },
     "Fire Mage": {
       "guideUrl": "https://www.icy-veins.com/wow/fire-mage-pve-dps-gear-best-in-slot",
-      "published": "2026-08-24",
+      "published": "2026-08-31",
       "priorities": [
         {
           "label": "Fire Mage",
@@ -13854,7 +13852,7 @@
     },
     "Brewmaster Monk": {
       "guideUrl": "https://www.icy-veins.com/wow/brewmaster-monk-pve-tank-gear-best-in-slot",
-      "published": "2026-08-15",
+      "published": "2026-08-25",
       "priorities": [
         {
           "label": "Brewmaster Monk",
@@ -13902,7 +13900,7 @@
           "slot": "Hands",
           "itemId": "271520",
           "itemName": "Monkey King's Fighting Fists",
-          "sourceText": "Catalyst Ruby Life Pools",
+          "sourceText": "Ruby Life Pools",
           "sourceKind": "dungeon",
           "boss": null,
           "dungeon": "Ruby Life Pools",
@@ -14398,30 +14396,31 @@
           "itemIds": [
             "159617",
             "158374",
+            "250215",
             "270164",
+            "250228",
             "270166",
             "250259",
-            "250215",
             "250214",
+            "248583",
             "270165",
             "270160",
-            "273796"
+            "265657"
           ]
         },
         {
           "tier": "B",
           "itemIds": [
+            "273796",
+            "251785",
             "159618",
             "274493",
-            "265657",
-            "248583",
             "250225",
-            "250228",
             "193757",
             "273797",
             "250243",
             "251792",
-            "251785",
+            "250244",
             "246307",
             "245873",
             "241340"
@@ -14430,14 +14429,13 @@
         {
           "tier": "C",
           "itemIds": [
+            "274498",
             "251790",
             "251783",
             "246306",
             "274499",
-            "250244",
             "274497",
-            "270174",
-            "264694"
+            "270174"
           ]
         },
         {
@@ -14445,7 +14443,7 @@
           "itemIds": [
             "274496",
             "246304",
-            "274498",
+            "264694",
             "246305"
           ]
         }
@@ -15696,8 +15694,8 @@
         {
           "list": "mplus",
           "slot": "Trinket",
-          "itemId": "250259",
-          "itemName": "Sapling of the Dawnroot",
+          "itemId": "250214",
+          "itemName": "Lightspire Core",
           "sourceText": "The Blinding Vale",
           "sourceKind": "dungeon",
           "boss": null,
@@ -15893,16 +15891,16 @@
           "tier": "A",
           "itemIds": [
             "250215",
-            "250259",
             "273796",
-            "250225"
+            "250225",
+            "270164"
           ]
         },
         {
           "tier": "B",
           "itemIds": [
+            "250259",
             "270168",
-            "270164",
             "159617"
           ]
         },
@@ -16017,8 +16015,8 @@
             "slot": "Main Hand",
             "candidates": [
               {
-                "id": "244029",
-                "name": "Acuity of the Ren'dorei"
+                "id": "273072",
+                "name": "Rite of the Hash'ey"
               }
             ]
           }
@@ -16064,7 +16062,7 @@
     },
     "Holy Paladin": {
       "guideUrl": "https://www.icy-veins.com/wow/holy-paladin-pve-healing-gear-best-in-slot",
-      "published": "2026-08-17",
+      "published": "2026-08-25",
       "priorities": [
         {
           "label": "Herald of the Sun",
@@ -17573,7 +17571,7 @@
     },
     "Retribution Paladin": {
       "guideUrl": "https://www.icy-veins.com/wow/retribution-paladin-pve-dps-gear-best-in-slot",
-      "published": "2026-08-11",
+      "published": "2026-08-25",
       "priorities": [
         {
           "label": "Retribution Paladin",
@@ -17693,12 +17691,12 @@
         {
           "list": "overall",
           "slot": "Finger",
-          "itemId": "252258",
-          "itemName": "Sickening Signet of Atroxus",
-          "sourceText": "Voidscar Arena",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Voidscar Arena",
+          "itemId": "268249",
+          "itemName": "Vile Alchemist's Band",
+          "sourceText": "Vashnik",
+          "sourceKind": "raid",
+          "boss": "Vashnik the Malignant",
+          "dungeon": null,
           "droppedBy": null
         },
         {
@@ -18092,14 +18090,8 @@
           "tier": "S",
           "itemIds": [
             "270173",
-            "268213"
-          ]
-        },
-        {
-          "tier": "A",
-          "itemIds": [
-            "270175",
-            "250259"
+            "268213",
+            "270175"
           ]
         },
         {
@@ -18108,7 +18100,8 @@
             "270164",
             "270165",
             "273796",
-            "193762"
+            "193762",
+            "250259"
           ]
         },
         {
@@ -18153,8 +18146,8 @@
             "slot": "Main Hand",
             "candidates": [
               {
-                "id": "244031",
-                "name": "Arcane Mastery"
+                "id": "273072",
+                "name": "Rite of the Hash'ey"
               }
             ]
           },
@@ -20410,7 +20403,7 @@
     },
     "Assassination Rogue": {
       "guideUrl": "https://www.icy-veins.com/wow/assassination-rogue-pve-dps-gear-best-in-slot",
-      "published": "2026-08-18",
+      "published": "2026-08-25",
       "priorities": [
         {
           "label": "Assassination Rogue",
@@ -20962,7 +20955,8 @@
           "tier": "S",
           "itemIds": [
             "270175",
-            "270168"
+            "270168",
+            "270165"
           ]
         },
         {
@@ -20970,9 +20964,7 @@
           "itemIds": [
             "270173",
             "270168",
-            "250259",
-            "270164",
-            "270165"
+            "270164"
           ]
         },
         {
@@ -20981,15 +20973,16 @@
             "159617",
             "270175",
             "250228",
+            "250215",
             "273796",
             "270166",
-            "250225"
+            "250225",
+            "250259"
           ]
         },
         {
           "tier": "C",
           "itemIds": [
-            "250215",
             "193757",
             "273797",
             "250214"
@@ -22723,7 +22716,7 @@
     },
     "Elemental Shaman": {
       "guideUrl": "https://www.icy-veins.com/wow/elemental-shaman-pve-dps-gear-best-in-slot",
-      "published": "2026-08-19",
+      "published": "2026-08-26",
       "priorities": [
         {
           "label": "Elemental Shaman",
@@ -23342,11 +23335,10 @@
             "slot": "Main Hand",
             "candidates": [
               {
-                "id": "244031",
-                "name": "Arcane Mastery"
+                "id": "273072",
+                "name": "Rite of the Hash'ey"
               }
-            ],
-            "note": "Depending on gear, until you have high item level, then whichever secondary you lack the most."
+            ]
           },
           {
             "slot": "Head",
@@ -24267,7 +24259,7 @@
     },
     "Restoration Shaman": {
       "guideUrl": "https://www.icy-veins.com/wow/restoration-shaman-pve-healing-gear-best-in-slot",
-      "published": "2026-08-10",
+      "published": "2026-08-26",
       "priorities": [
         {
           "label": "Restoration Shaman",
@@ -24821,15 +24813,22 @@
             "270162",
             "270164",
             "270167",
-            "193757",
-            "250215"
+            "270169"
           ]
         },
         {
           "tier": "A",
           "itemIds": [
+            "193757",
+            "270167",
+            "250215",
             "248583",
-            "251792",
+            "251792"
+          ]
+        },
+        {
+          "tier": "B",
+          "itemIds": [
             "250214",
             "273796",
             "250255",
@@ -24837,18 +24836,12 @@
           ]
         },
         {
-          "tier": "B",
+          "tier": "C",
           "itemIds": [
-            "270169",
             "250248",
             "250214",
             "273649",
-            "241291"
-          ]
-        },
-        {
-          "tier": "C",
-          "itemIds": [
+            "241291",
             "251788",
             "251789"
           ]
