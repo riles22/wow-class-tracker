@@ -16,6 +16,80 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-01 (nightly) — WoWMeta re-ran (40 rows merged under its own lagging date) and Mythicstats moved within period 1078 (39 rows); Murlok still frozen; SimC + Bloodmallet held a SEVENTH night
+
+- **WoWMeta — the 2026-08-04 pinned-manifest shape is BACK, and diffing the payload is what
+  caught it.** Two plain curls, no headers/proxy/auth. `manifest.json` HTTP 200 →
+  `snapshotDate` **2026-08-11** (completedAt 2026-08-11T22:52:39Z), i.e. unchanged for 21
+  days — but `rankings/midnight/mplus/all/0.json` came back HTTP 200 at **161,637 bytes with
+  `Last-Modified: Tue, 01 Sep 2026 00:21:38 GMT`** (161,191 bytes / 11 Aug last night). The
+  manifest step and the rankings step run independently, so the frozen snapshotDate is NOT
+  evidence the data is frozen. Selection exactly as specified: 44 blocks, whitelist
+  `categoryType ∈ {dps,hps,tank}` + `sortField lowerBound` + `keyRange === undefined` =
+  27+7+6 = **40 rows** (melee/ranged excluded as dps subsets). **All 40 `lowerBound` values
+  moved** and every `numberOfCharacters` grew, several severalfold (Arcane Mage 38,032 →
+  228,312; Blood DK 61,738 → 179,977), which is a population accumulating rather than a
+  re-scale. Merged at **1 dp** to match the stored precision, and `asOf` stays the SOURCE's
+  `manifest.snapshotDate` 2026-08-11, never today — so the coverage date does not advance,
+  the row is `partial`, and the staleness red stays as the honest signal. Movement is well
+  inside the value gate (largest single move Augmentation 415.6 → 321.6 = −22.6%, family
+  median ≈ −3%).
+- **Mythicstats — moved WITHIN period 1078, which the period id alone would have hidden.**
+  `/period/latest` HTTP 200, 196 KB, still resolving to period 1078, but the subtitle is NOT
+  identical to last night: "10000 characters (**2671** unique), **17.3** average key level"
+  against 2833 / 17.2. Parse bounded to the "Spec representation in top keys" section
+  (scanning the page yields ~59 rows from the Classes-and-specs block and the per-dungeon
+  sections), labels normalised on `[-\s]+`, whitespace-tolerant number match: **39 rows**.
+  Shape-checked BEFORE merging — series sum **99.9** with role subtotals DPS 60.0 / Tank
+  19.9 / Healer 20.0, i.e. the representation share and not the `/meta` per-key-presence
+  column. **25 of 39 values moved** (largest: Unholy DK 1.5→0.9, Arms Warrior 11.5→12.2,
+  Demonology Warlock 3.5→3.9). Merged at `asOf` 2026-09-01. **Frost Mage is BACK upstream**
+  at an explicit 0.0 (it was absent last night); **Fire Mage is now the absent one** and
+  keeps its stored 0 at 2026-08-30 — a legitimate upstream absence, not a parse failure.
+- **Murlok — fetched cleanly, upstream still has not re-cut.** Three meta pages by plain
+  browser-UA GET (r.jina.ai does not work on murlok), HTTP 200, 41–71 KB. Split on
+  `<a [^>]*class="vi-box meta-item` per the 08-31 attribute-order trap; counts reconciled at
+  27/7/6 = 40 before any merge. Each page's own `<time datetime>` reads
+  **2026-08-28T03:00:31Z / 03:00:28Z / 03:00:31Z** — now FOUR days stale on a page that
+  advertises an 8-hour cadence (its visible "Updated 4 hours ago" string disagrees with its
+  own `<time>`; the `<time>` is the machine-readable one and is what we record). **0 of 40
+  values moved.** Nothing merged, stored date correctly does not advance.
+- **SimulationCraft — HELD for a seventh night, same single blocker.** `MID2_Raid.txt` 1.29 MB,
+  `Last-Modified` 2026-09-01T07:28:41Z, header `12.1.0.69497 Live (hotfix 2026-09-01/69497,
+  git build HEAD **adc39a57a2**)` — a NEW build hash (3b891e639e last night), so upstream is
+  re-simming daily. Its `DPS Ranking:` block maps by longest-prefix (hyphens allowed) to
+  **22 of 27 DPS specs**; absent are Balance, Feral, Augmentation, Devastation and
+  Retribution — the same five Bloodmallet is missing. `MID1_Raid.txt` is again 272 BYTES
+  (07:07:07Z), an in-progress log with no ranking block, and carries the SAME build header as
+  MID2, so MID1 is neither the 12.0.7 artefact the contract label describes nor readable as a
+  fallback. Wholesale adoption would drop 26 → 22 stored rows = 15.4%, inside `maxRowDropPct`
+  0.25 — but all 22 overlap rows move more than 60% (MID2/MID1 ratio min 1.692, median 1.997,
+  max 2.351), so `maxValueMovePct` fires and only a human `value_move_ack` can land it.
+  Nothing merged; the stored 26 rows keep their 2026-08-08 date byte-identical.
+- **Bloodmallet — HELD WHOLESALE for a seventh night, unchanged from last night.** All 27 DPS
+  charts requested at `talent_target_scaling/castingpatchwerk` with 3 retries each: **22**
+  return real payloads, every one carrying `simc_settings.tier = MID2` (read off each chart,
+  never hard-coded) at chart timestamp **2026-08-29**; the same **5** return the 76-byte
+  `{"status": "error"}` body on every retry (Balance, Feral, Augmentation, Devastation,
+  Retribution). Against the 26 stored MID1 profiles (2026-07-08 / 07-15), **114 of the 132
+  overlapping target rows move more than 60%** (ratio min 1.152, median 1.870, max 2.833), so
+  the value gate blocks adoption and the tier-uniformity invariant separately forbids a pool
+  holding both MID1 and MID2. Nothing merged; `fightProfile.asOf` stays each chart's OWN
+  timestamp so the coverage date does not move.
+- **Archon numerics — all six requirements unreachable, night 10 of the wall.** Same 403
+  managed-challenge bodies as the tier lane (see refresh-tiers log). The Mythic and Heroic
+  95th-pct DPS/HPS families, M+ score and Popularity all keep their stored rows and dates
+  untouched.
+- **Warcraft Logs — evidence file only; no warcraftlogs.com request was made from this
+  session by any means.** `wcl-fetch/evidence.json` attemptedAt 2026-09-01T15:09:08.918Z,
+  verdict **`rdps-broken`**, detail "characterRankings(metric: rdps) on encounter 3176:
+  Internal server error". Transport itself healthy (oauth true, graphql true, 3600 points/h,
+  1 spent), `landed` and `rawRecipes` both empty, so neither wcl-live row may claim success.
+  This is the owner-accepted standing red.
+- **Robydoby not refreshed** (deliberate, and it is outside `required-sources.json` by
+  design): its sheets are zone-54 **12.1 PTR** raid testing from the CLOSED cycle, so there is
+  nothing current to ingest and the stored rows stay as the cycle's final receipts.
+
 ## 2026-08-31 (nightly) — Murlok/Mythicstats/WoWMeta all frozen upstream, 0 rows merged; Bloodmallet and SimC coverage BOTH moved 19 → 22
 
 - **Nothing merged this run, and every one of those is an upstream fact rather than a fetch

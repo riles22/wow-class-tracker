@@ -16,6 +16,71 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-01 (nightly) — TWO feed changes: the Aug 31 hotfix round-up logged, and the Sept 1 tuning post gained a line at version 4
+
+- **Between-cycles posture unchanged**: live lanes only. PTR zone sweeps (54/52/56/57) stayed
+  dormant — the 12.1 PTR cycle is closed and those contract rows were removed at the flip.
+- **(a) Wowhead news RSS** HTTP 200, 191 KB, 40 items spanning 2026-08-27T18:53Z to
+  2026-09-01T09:30Z, parsed per `<item>` block (never by tag adjacency). Two candidates in
+  the window, and they resolved in opposite directions:
+  · `news=382701` "Coiled Altar and Ula'tek Fixes - Patch 12.1 Hotfixes for August 31st" —
+    REAL class content, logged (below).
+  · `news=382697` "Estimated DPS and Healing Increases for September 1st Class Tuning"
+    (2026-09-01) — Wowhead's own class writers' *estimates* of the already-logged 08-28 pass,
+    not a Blizzard post and not a new tuning event, so it is NOT a feed entry. Noting it here
+    because it will look like new tuning to the next reader: it restates our 08-28 values with
+    per-spec throughput guesses (Frost DK 7%, Feral 8-10% ST / 6% AoE, BM 6.5%, Frost Mage 6%,
+    Fire 2.9%, Havoc 3.8%, Vengeance 0% with ~5.55% less damage taken, Resto Druid 4%).
+- **(b) Wowhead news INDEX** (`data.news.newsData`, brace-balanced from the id attribute) and
+  **(c) blue tracker** (`data.blueTracker.default`, 50 entries ≈ 30 unique topics) both polled.
+  The tracker's newest entries are Kaivax "World of Warcraft: Midnight Hotfixes - August 31"
+  (US topic 2336376, posted 2026-08-31 20:10) and Linxy "Class Tuning Incoming – September 1"
+  (topic 2342331) re-listed at 2026-08-31 14:49 — the second is what surfaced the version bump.
+- **(d) Official dev-notes thread** `2317811.json` HTTP 200, 17 posts, `last_posted_at`
+  2026-07-31T23:42Z — quiet for a month, which is CORRECT for a closed cycle. The
+  thread-rediscovery gotcha stays suspended.
+- **NEW ENTRY: 2026-08-31, `kind: "hotfix"`** — read from the canonical source (us.forums topic
+  2336376, post 1 at **version 23**, updated 2026-09-01T01:10:18Z) with its `<ul>` heading
+  structure INTACT, not off the flattened Wowhead mirror. Every class line sits under an
+  explicit SPEC heading, so there is no class-wide/hero-tree attribution question this time:
+  Unholy DK (Dread / Virulent Plague Erupt modifier interactions), Restoration Druid (Grove
+  Guardians priority; Everbloom 6→5 targets), Mistweaver Monk (Soothing Mist aura), Holy
+  Priest (Guardian Angel / Guardian Spirit cooldown), Affliction Warlock (Hellcaller Blackened
+  Soul via Fatal Echoes), plus a `Non-class:` line for the Venomous Abyss encounter work,
+  the Gnarldor Isle delve change, the Omnium Folio CC fix and a Group Finder move. All six
+  lines classify **null** under `classifyHighlight`, i.e. bug fixes cast no outlook vote —
+  checked, not assumed.
+- ⚠️ **ONE CLASS LINE FROM THAT ROUND-UP IS DELIBERATELY NOT LOGGED, AND IT IS AN OWNER
+  ACTION.** The Mage › Fire entry — "Resolved an issue where the 2-piece set bonus: Flamestrike
+  did not correctly always grant Hot Streak when it is a guaranteed critical strike due to
+  Pyroclasm" — touches a SET BONUS, so logging it obliges Fire Mage's `spec.tierSet.asOf` to
+  advance to 2026-08-31 (a pure bug fix still bumps `asOf`), and since the 2026-08-23 two-page
+  rule that same change must re-sync `gearing/data/specs.json` and rebuild the gearing artifact
+  **in the same commit**. The nightly structurally cannot do that: publish stages only `data/`,
+  `dist/` and the skill logs, never `gearing/`, so a tracker-side bump would land on master
+  without its mirror and red the publish gate for everyone. Fire Mage is therefore absent from
+  `specsAffected` and the line is not reworded to dodge the gate — it is recorded here and in
+  the entry's own `label`. **To close it in a local run**: add the fix as a `Fire Mage — …`
+  highlight on the 2026-08-31 entry, bump `tierSet.asOf` → 2026-08-31 with
+  `source: https://us.forums.blizzard.com/en/wow/t/world-of-warcraft-midnight-hotfixes-august-31/2336376`
+  (wording unchanged; append a dated parenthetical), then
+  `node gearing/src/sync-tracker-fields.mjs && npm run gearing:build`.
+- **THE 08-28 TUNING POST GAINED A LINE AT VERSION 4.** Post 1 of topic 2342331 was edited to
+  v4 at **2026-08-31T19:44:31Z**, after last night's run had read v3. Re-read in full: the
+  fifteen stored PvE lines are unchanged line for line, and **one line is new** — Shaman ›
+  Hero Talents › Farseer, "Fixed an issue that caused Natural Harmony to increase the healing
+  of Nature's Guardian by 20% instead of its listed and intended 10%." It sits under a bare
+  Shaman heading at hero-tree depth with no spec block beneath it, so it is logged
+  **class-wide with the tree named in the line text** (the Evoker/Flameshaper and
+  Rogue/Deathstalker precedent from the 08-27 round-up) rather than guessed onto Elemental or
+  Restoration. Class-wide lines reach all three Shaman drawers and are excluded from the
+  outlook tally by construction, so this adds a fact and casts no vote — verified: the line
+  classifies null anyway, and `specBuildChanges` returns it for all three Shaman specs.
+  `specsAffected` gained "Shaman (class-wide)"; the entry's label records the v3→v4 diff.
+- **No tier-set upkeep is owed by either change** beyond the disclosed Fire Mage deferral:
+  the Mistweaver 4-piece line was already reconciled with the 08-28 entry, and validation is
+  green (`✓ data valid — 40 specs, 39 PTR-tracked`).
+
 ## 2026-08-31 (nightly) — all four live lanes polled, 0 new entries; the Sept 1 pass re-verified at v3 against the stored build
 
 - **No new build, hotfix or tuning post anywhere.** `data/ptr-builds.json` untouched; its

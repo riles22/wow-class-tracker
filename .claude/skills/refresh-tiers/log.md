@@ -16,6 +16,59 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-01 (nightly) — Icy Veins raid DPS re-cut (5 letters) + Wowhead raid DPS/tank and M+ tank (10); Archon walled night 10
+
+- **Transport, recorded per the rule**: every page fetched by DIRECT browser-header GET
+  (full header set — a UA-only request is Cloudflare-403 on wowhead; r.jina.ai deliberately
+  not attempted, it has been IP-403 on `wowhead.com/guide/*` since 2026-08-03 and never
+  worked on murlok). Sizes read off disk, never `curl`'s `size_download` (that reports the
+  COMPRESSED length under `--compressed`).
+- **Icy Veins** — 6/6 pages HTTP 200, 196–343 KB. `<style>` stripped BEFORE parsing (the
+  tier-list CSS ships inline), `<table class="tier-list">` asserted at exactly 1 per page,
+  letter from each row's first `<td>`, spec from each `tier-list-entry`'s FIRST `img alt`
+  looked up WHOLE. Counts reconciled before merge: raid 27/7/6 = 40, M+ 27/7/6 = 40,
+  80 rows, 0 unmatched, 0 duplicates. **5 letters moved, all on the raid DPS page**:
+  Demonology Warlock A→S, Beast Mastery Hunter B→A, Frost Death Knight B→A, Survival
+  Hunter B→A, Fury Warrior A+→A. That page now self-dates **2026-08-30** (JSON-LD
+  `dateModified` 2026-08-30T13:09:00Z and an in-body "LAST UPDATED - 30th of August"),
+  where last night's run recorded 08-23 for it — the stored `published` was corrected to
+  what the page says today rather than carried forward. Other page dates unchanged: raid
+  healer 08-24, raid tank 08-08, all three M+ pages 08-30.
+- **Method** — 2/2 pages HTTP 200, 160/167 KB. Parsed from `tier__tier` / `tier__title` /
+  `data-original-title` and resolved by ROSTER MATCH, which is again what rejects the M+
+  page's second tierlist (8 dungeon-difficulty blocks — Altar of Fangs, Den of Nalorakk,
+  King's Rest, Murder Row, Ruby Life Pools, Temple of Sethraliss and two more — none of
+  which maps to a spec). raid 40/40, M+ 40/40, 0 unmatched. **0 letters moved**, and the
+  pages' own "Last Updated" lines are unchanged at 10th August (raid) / 13th August (M+),
+  which is the honest explanation for a static parse.
+- **Wowhead** — 6/6 pages HTTP 200, 74–339 KB. Recipe as recorded: unescape `\/`→`/` across
+  the whole document FIRST, then the `[tier-list=rows] … [/tier-list]` block (never anchor
+  on `WH.markup.printHtml`), segment on `[tier-label …]X[/tier-label]` with tolerant
+  whitespace, resolve each `[spec-badge=<spec>-<class>]` slug. Exactly one tier-list block
+  per page; raid 27/7/6 = 40, M+ 27/7/6 = 40, 0 unmatched, 0 duplicate-tier conflicts.
+  **10 letters moved on the three pages that were re-cut, and none anywhere else** — raid
+  DPS (dateModified 2026-08-31T15:47Z): Arms Warrior S→A, Arcane Mage B→A, Havoc DH A→B,
+  Devourer DH A→B, Augmentation Evoker C→B; raid TANK (2026-08-31T15:53Z): Protection
+  Paladin B→A, Guardian Druid B→A, Vengeance DH B→A, Brewmaster Monk A→B; M+ tank
+  (**2026-09-01T09:55Z**, the only page dated today): Protection Paladin A→B. `published`
+  re-read per page and written: raid 08-31/08-31/08-31, M+ 08-28/08-26/09-01.
+- **Archon — walled for a TENTH consecutive night.** All 11 distinct registered archon.gg
+  URLs (12 page entries; the survivability entry shares the Mythic all-bosses URL) fetched
+  individually with the full browser header set: every one HTTP 403 with a ~6.1 KB
+  Cloudflare managed-challenge body (`<title>Just a moment...</title>`, `cType: 'managed'`,
+  `/cdn-cgi/challenge-platform/`) and `__NEXT_DATA__` count 0. Asserted on `__NEXT_DATA__`
+  presence rather than the status code. No solve, replay or automation attempted; nothing
+  backfilled from Warcraft Logs. Stored letters, numbers and snapshots byte-identical, and
+  `data/encounter-tiers.json` stays stamped s1, so the Fight selector stays season-gated off.
+- **Era-verify**: all 14 live-source pages self-identify as Midnight Season 2 with Devourer
+  present in both DPS lists (the two healer pages legitimately have no DH). The Icy Veins
+  Season-1 hits are changelog rows, not the ranking body — body-over-title as always. **No
+  `seasonVerified` value changed anywhere this run**, so `freeze-season` had nothing to do
+  (publish runs it regardless).
+- Consensus effect of the whole night: **2 letters** — Vengeance DH raid B→A and Arcane Mage
+  raid A+→S. Consensus composition unchanged at Icy Veins + Method + Wowhead (Archon still
+  s1 and therefore still out).
+
 ## 2026-08-31 (nightly) — Icy Veins M+ re-cut (11 letters) + Wowhead raid healers (3); Archon walled night 9, and from CI it is STILL the 403
 
 - **Three of four tier sources refreshed, 240 rows re-applied, 14 letters moved.** Icy Veins

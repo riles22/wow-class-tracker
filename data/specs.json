@@ -103,9 +103,9 @@
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 12.1,
+        "value": 12.3,
         "unit": "%",
-        "asOf": "2026-08-30"
+        "asOf": "2026-09-01"
       },
       {
         "source": "warcraftlogs",
@@ -131,9 +131,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 341.6,
+        "value": 351.7,
         "unit": "rating",
-        "n": 61738,
+        "n": 179977,
         "asOf": "2026-08-11"
       },
       {
@@ -173,7 +173,7 @@
     "role": "DPS",
     "ratings": {
       "raid": {
-        "icyveins": "B",
+        "icyveins": "A",
         "method": "A",
         "wowhead": "B",
         "archon": "C"
@@ -267,7 +267,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.5,
         "unit": "%",
-        "asOf": "2026-08-30"
+        "asOf": "2026-09-01"
       },
       {
         "source": "warcraftlogs",
@@ -370,9 +370,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 331.5,
+        "value": 330.7,
         "unit": "rating",
-        "n": 14376,
+        "n": 21283,
         "asOf": "2026-08-11"
       },
       {
@@ -531,9 +531,9 @@
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 1.5,
+        "value": 0.9,
         "unit": "%",
-        "asOf": "2026-08-30"
+        "asOf": "2026-09-01"
       },
       {
         "source": "warcraftlogs",
@@ -636,9 +636,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 397.7,
+        "value": 344.1,
         "unit": "rating",
-        "n": 64652,
+        "n": 55042,
         "asOf": "2026-08-11"
       },
       {
@@ -702,7 +702,7 @@
       "raid": {
         "icyveins": "B",
         "method": "B",
-        "wowhead": "A",
+        "wowhead": "B",
         "archon": "C"
       },
       "mplus": {
@@ -796,7 +796,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.5,
         "unit": "%",
-        "asOf": "2026-08-30"
+        "asOf": "2026-09-01"
       },
       {
         "source": "warcraftlogs",
@@ -889,9 +889,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 347.5,
+        "value": 333.9,
         "unit": "rating",
-        "n": 25016,
+        "n": 33712,
         "asOf": "2026-08-11"
       },
       {
@@ -966,7 +966,7 @@
       "raid": {
         "icyveins": "A",
         "method": "A",
-        "wowhead": "A",
+        "wowhead": "B",
         "archon": "B"
       },
       "mplus": {
@@ -1061,9 +1061,9 @@
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 3.5,
+        "value": 3.2,
         "unit": "%",
-        "asOf": "2026-08-30"
+        "asOf": "2026-09-01"
       },
       {
         "source": "warcraftlogs",
@@ -1166,9 +1166,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 397.6,
+        "value": 348.5,
         "unit": "rating",
-        "n": 44921,
+        "n": 59462,
         "asOf": "2026-08-11"
       },
       {
@@ -1232,7 +1232,7 @@
     "ratings": {
       "raid": {
         "icyveins": "B",
-        "wowhead": "B",
+        "wowhead": "A",
         "archon": "A",
         "method": "B"
       },
@@ -1324,9 +1324,9 @@
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.6,
+        "value": 0.5,
         "unit": "%",
-        "asOf": "2026-08-30"
+        "asOf": "2026-09-01"
       },
       {
         "source": "warcraftlogs",
@@ -1352,9 +1352,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 340.2,
+        "value": 334.5,
         "unit": "rating",
-        "n": 17565,
+        "n": 36977,
         "asOf": "2026-08-11"
       },
       {
@@ -1489,9 +1489,9 @@
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 1.7,
+        "value": 1.3,
         "unit": "%",
-        "asOf": "2026-08-30"
+        "asOf": "2026-09-01"
       },
       {
         "source": "warcraftlogs",
@@ -1594,9 +1594,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 344.2,
+        "value": 340,
         "unit": "rating",
-        "n": 31804,
+        "n": 62388,
         "asOf": "2026-08-11"
       },
       {
@@ -1751,9 +1751,9 @@
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 1.5,
+        "value": 1.8,
         "unit": "%",
-        "asOf": "2026-08-30"
+        "asOf": "2026-09-01"
       },
       {
         "source": "simulationcraft",
@@ -1846,9 +1846,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 355.6,
+        "value": 336.8,
         "unit": "rating",
-        "n": 13515,
+        "n": 18064,
         "asOf": "2026-08-11"
       },
       {
@@ -1913,7 +1913,7 @@
       "raid": {
         "icyveins": "A",
         "method": "A",
-        "wowhead": "B",
+        "wowhead": "A",
         "archon": "A"
       },
       "mplus": {
@@ -2005,7 +2005,7 @@
         "name": "Top-2000 keys representation",
         "value": 2.6,
         "unit": "%",
-        "asOf": "2026-08-30"
+        "asOf": "2026-09-01"
       },
       {
         "source": "warcraftlogs",
@@ -2021,9 +2021,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 396.6,
+        "value": 338.6,
         "unit": "rating",
-        "n": 75340,
+        "n": 71487,
         "asOf": "2026-08-11"
       },
       {
@@ -2157,7 +2157,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.3,
         "unit": "%",
-        "asOf": "2026-08-30"
+        "asOf": "2026-09-01"
       },
       {
         "source": "warcraftlogs",
@@ -2201,9 +2201,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 326.7,
+        "value": 319.9,
         "unit": "rating",
-        "n": 17567,
+        "n": 36380,
         "asOf": "2026-08-11"
       },
       {
@@ -2245,7 +2245,7 @@
       "raid": {
         "icyveins": "C",
         "method": "C",
-        "wowhead": "C",
+        "wowhead": "B",
         "archon": "C"
       },
       "mplus": {
@@ -2340,7 +2340,7 @@
         "name": "Top-2000 keys representation",
         "value": 0,
         "unit": "%",
-        "asOf": "2026-08-30"
+        "asOf": "2026-09-01"
       },
       {
         "source": "warcraftlogs",
@@ -2425,9 +2425,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 415.6,
+        "value": 321.6,
         "unit": "rating",
-        "n": 19430,
+        "n": 3981,
         "asOf": "2026-08-11"
       },
       {
@@ -2572,7 +2572,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.2,
         "unit": "%",
-        "asOf": "2026-08-30"
+        "asOf": "2026-09-01"
       },
       {
         "source": "warcraftlogs",
@@ -2675,9 +2675,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 329.3,
+        "value": 331.9,
         "unit": "rating",
-        "n": 5208,
+        "n": 21077,
         "asOf": "2026-08-11"
       },
       {
@@ -2834,9 +2834,9 @@
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.4,
+        "value": 0.5,
         "unit": "%",
-        "asOf": "2026-08-30"
+        "asOf": "2026-09-01"
       },
       {
         "source": "warcraftlogs",
@@ -2880,9 +2880,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 331.2,
+        "value": 330.6,
         "unit": "rating",
-        "n": 10942,
+        "n": 22744,
         "asOf": "2026-08-11"
       },
       {
@@ -2922,7 +2922,7 @@
     "role": "DPS",
     "ratings": {
       "raid": {
-        "icyveins": "B",
+        "icyveins": "A",
         "method": "B",
         "wowhead": "B",
         "archon": "C"
@@ -3018,9 +3018,9 @@
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 1,
+        "value": 0.9,
         "unit": "%",
-        "asOf": "2026-08-30"
+        "asOf": "2026-09-01"
       },
       {
         "source": "warcraftlogs",
@@ -3123,9 +3123,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 351,
+        "value": 329.7,
         "unit": "rating",
-        "n": 60360,
+        "n": 109680,
         "asOf": "2026-08-11"
       },
       {
@@ -3286,7 +3286,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.2,
         "unit": "%",
-        "asOf": "2026-08-30"
+        "asOf": "2026-09-01"
       },
       {
         "source": "warcraftlogs",
@@ -3380,9 +3380,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 337.6,
+        "value": 334.5,
         "unit": "rating",
-        "n": 14438,
+        "n": 26653,
         "asOf": "2026-08-11"
       },
       {
@@ -3445,7 +3445,7 @@
     "role": "DPS",
     "ratings": {
       "raid": {
-        "icyveins": "B",
+        "icyveins": "A",
         "method": "C",
         "wowhead": "C",
         "archon": "C"
@@ -3541,7 +3541,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.3,
         "unit": "%",
-        "asOf": "2026-08-30"
+        "asOf": "2026-09-01"
       },
       {
         "source": "warcraftlogs",
@@ -3624,9 +3624,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 369.8,
+        "value": 327.4,
         "unit": "rating",
-        "n": 12188,
+        "n": 9551,
         "asOf": "2026-08-11"
       },
       {
@@ -3700,7 +3700,7 @@
       "raid": {
         "icyveins": "S",
         "method": "S",
-        "wowhead": "B",
+        "wowhead": "A",
         "archon": "S"
       },
       "mplus": {
@@ -3794,9 +3794,9 @@
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 12,
+        "value": 11.9,
         "unit": "%",
-        "asOf": "2026-08-30"
+        "asOf": "2026-09-01"
       },
       {
         "source": "warcraftlogs",
@@ -3899,9 +3899,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 339.1,
+        "value": 349,
         "unit": "rating",
-        "n": 38032,
+        "n": 228312,
         "asOf": "2026-08-11"
       },
       {
@@ -4135,9 +4135,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 334.1,
+        "value": 321.6,
         "unit": "rating",
-        "n": 4257,
+        "n": 4305,
         "asOf": "2026-08-11"
       },
       {
@@ -4296,7 +4296,7 @@
         "name": "Top-2000 keys representation",
         "value": 0,
         "unit": "%",
-        "asOf": "2026-08-27"
+        "asOf": "2026-09-01"
       },
       {
         "source": "warcraftlogs",
@@ -4399,9 +4399,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 343.3,
+        "value": 296.9,
         "unit": "rating",
-        "n": 43585,
+        "n": 13829,
         "asOf": "2026-08-11"
       },
       {
@@ -4466,7 +4466,7 @@
       "raid": {
         "icyveins": "A",
         "method": "A",
-        "wowhead": "A",
+        "wowhead": "B",
         "archon": "B"
       },
       "mplus": {
@@ -4559,9 +4559,9 @@
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 1.7,
+        "value": 1.8,
         "unit": "%",
-        "asOf": "2026-08-30"
+        "asOf": "2026-09-01"
       },
       {
         "source": "warcraftlogs",
@@ -4587,9 +4587,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 365,
+        "value": 333.4,
         "unit": "rating",
-        "n": 19467,
+        "n": 29854,
         "asOf": "2026-08-11"
       },
       {
@@ -4728,7 +4728,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.9,
         "unit": "%",
-        "asOf": "2026-08-30"
+        "asOf": "2026-09-01"
       },
       {
         "source": "warcraftlogs",
@@ -4772,9 +4772,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 389.3,
+        "value": 336.1,
         "unit": "rating",
-        "n": 47838,
+        "n": 38529,
         "asOf": "2026-08-11"
       },
       {
@@ -4910,9 +4910,9 @@
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 1.3,
+        "value": 1.4,
         "unit": "%",
-        "asOf": "2026-08-30"
+        "asOf": "2026-09-01"
       },
       {
         "source": "warcraftlogs",
@@ -5015,9 +5015,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 342.6,
+        "value": 341.3,
         "unit": "rating",
-        "n": 24153,
+        "n": 38435,
         "asOf": "2026-08-11"
       },
       {
@@ -5181,9 +5181,9 @@
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 9.9,
+        "value": 9.6,
         "unit": "%",
-        "asOf": "2026-08-30"
+        "asOf": "2026-09-01"
       },
       {
         "source": "warcraftlogs",
@@ -5227,9 +5227,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 338.9,
+        "value": 350.1,
         "unit": "rating",
-        "n": 49007,
+        "n": 145319,
         "asOf": "2026-08-11"
       },
       {
@@ -5271,13 +5271,13 @@
       "raid": {
         "icyveins": "A",
         "method": "B",
-        "wowhead": "B",
+        "wowhead": "A",
         "archon": "C"
       },
       "mplus": {
         "icyveins": "A",
         "method": "A",
-        "wowhead": "A",
+        "wowhead": "B",
         "archon": "A"
       }
     },
@@ -5366,9 +5366,9 @@
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 2.4,
+        "value": 2,
         "unit": "%",
-        "asOf": "2026-08-30"
+        "asOf": "2026-09-01"
       },
       {
         "source": "warcraftlogs",
@@ -5394,9 +5394,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 335.6,
+        "value": 336.4,
         "unit": "rating",
-        "n": 51080,
+        "n": 114465,
         "asOf": "2026-08-11"
       },
       {
@@ -5532,9 +5532,9 @@
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 3.2,
+        "value": 3.3,
         "unit": "%",
-        "asOf": "2026-08-30"
+        "asOf": "2026-09-01"
       },
       {
         "source": "warcraftlogs",
@@ -5637,9 +5637,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 361.3,
+        "value": 337,
         "unit": "rating",
-        "n": 77558,
+        "n": 122979,
         "asOf": "2026-08-11"
       },
       {
@@ -5800,7 +5800,7 @@
         "name": "Top-2000 keys representation",
         "value": 0,
         "unit": "%",
-        "asOf": "2026-08-30"
+        "asOf": "2026-09-01"
       },
       {
         "source": "warcraftlogs",
@@ -5844,9 +5844,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 349.7,
+        "value": 317.8,
         "unit": "rating",
-        "n": 32924,
+        "n": 22206,
         "asOf": "2026-08-11"
       },
       {
@@ -5977,9 +5977,9 @@
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 1.3,
+        "value": 1.1,
         "unit": "%",
-        "asOf": "2026-08-30"
+        "asOf": "2026-09-01"
       },
       {
         "source": "warcraftlogs",
@@ -6023,9 +6023,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 332.6,
+        "value": 335.2,
         "unit": "rating",
-        "n": 14144,
+        "n": 69563,
         "asOf": "2026-08-11"
       },
       {
@@ -6159,9 +6159,9 @@
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.8,
+        "value": 0.7,
         "unit": "%",
-        "asOf": "2026-08-30"
+        "asOf": "2026-09-01"
       },
       {
         "source": "warcraftlogs",
@@ -6264,9 +6264,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 350.1,
+        "value": 335.3,
         "unit": "rating",
-        "n": 26321,
+        "n": 43898,
         "asOf": "2026-08-11"
       },
       {
@@ -6426,9 +6426,9 @@
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 3.1,
+        "value": 3.2,
         "unit": "%",
-        "asOf": "2026-08-30"
+        "asOf": "2026-09-01"
       },
       {
         "source": "simulationcraft",
@@ -6521,9 +6521,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 346.1,
+        "value": 346.5,
         "unit": "rating",
-        "n": 8802,
+        "n": 36272,
         "asOf": "2026-08-11"
       },
       {
@@ -6683,9 +6683,9 @@
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 2.8,
+        "value": 2.9,
         "unit": "%",
-        "asOf": "2026-08-30"
+        "asOf": "2026-09-01"
       },
       {
         "source": "simulationcraft",
@@ -6778,9 +6778,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 341.4,
+        "value": 343.9,
         "unit": "rating",
-        "n": 11553,
+        "n": 19147,
         "asOf": "2026-08-11"
       },
       {
@@ -6943,7 +6943,7 @@
         "name": "Top-2000 keys representation",
         "value": 2,
         "unit": "%",
-        "asOf": "2026-08-30"
+        "asOf": "2026-09-01"
       },
       {
         "source": "warcraftlogs",
@@ -7046,9 +7046,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 354.5,
+        "value": 345.3,
         "unit": "rating",
-        "n": 13779,
+        "n": 33977,
         "asOf": "2026-08-11"
       },
       {
@@ -7203,9 +7203,9 @@
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 7.2,
+        "value": 7.3,
         "unit": "%",
-        "asOf": "2026-08-30"
+        "asOf": "2026-09-01"
       },
       {
         "source": "warcraftlogs",
@@ -7308,9 +7308,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 345.9,
+        "value": 344.8,
         "unit": "rating",
-        "n": 39948,
+        "n": 122946,
         "asOf": "2026-08-11"
       },
       {
@@ -7469,9 +7469,9 @@
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.9,
+        "value": 0.8,
         "unit": "%",
-        "asOf": "2026-08-30"
+        "asOf": "2026-09-01"
       },
       {
         "source": "warcraftlogs",
@@ -7574,9 +7574,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 357,
+        "value": 340.9,
         "unit": "rating",
-        "n": 22982,
+        "n": 32522,
         "asOf": "2026-08-11"
       },
       {
@@ -7737,9 +7737,9 @@
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 7.2,
+        "value": 7.6,
         "unit": "%",
-        "asOf": "2026-08-30"
+        "asOf": "2026-09-01"
       },
       {
         "source": "warcraftlogs",
@@ -7783,9 +7783,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 370,
+        "value": 347.4,
         "unit": "rating",
-        "n": 76590,
+        "n": 142755,
         "asOf": "2026-08-11"
       },
       {
@@ -7917,9 +7917,9 @@
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.1,
+        "value": 0,
         "unit": "%",
-        "asOf": "2026-08-30"
+        "asOf": "2026-09-01"
       },
       {
         "source": "warcraftlogs",
@@ -8022,9 +8022,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 347.3,
+        "value": 323.9,
         "unit": "rating",
-        "n": 15212,
+        "n": 14218,
         "asOf": "2026-08-11"
       },
       {
@@ -8086,7 +8086,7 @@
     "role": "DPS",
     "ratings": {
       "raid": {
-        "icyveins": "A",
+        "icyveins": "S",
         "method": "B",
         "wowhead": "B",
         "archon": "C"
@@ -8166,9 +8166,9 @@
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 3.5,
+        "value": 3.9,
         "unit": "%",
-        "asOf": "2026-08-30"
+        "asOf": "2026-09-01"
       },
       {
         "source": "warcraftlogs",
@@ -8271,9 +8271,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 359.5,
+        "value": 343.6,
         "unit": "rating",
-        "n": 33506,
+        "n": 110994,
         "asOf": "2026-08-11"
       },
       {
@@ -8429,7 +8429,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.1,
         "unit": "%",
-        "asOf": "2026-08-30"
+        "asOf": "2026-09-01"
       },
       {
         "source": "warcraftlogs",
@@ -8532,9 +8532,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 323.8,
+        "value": 310.9,
         "unit": "rating",
-        "n": 12384,
+        "n": 16988,
         "asOf": "2026-08-11"
       },
       {
@@ -8599,7 +8599,7 @@
       "raid": {
         "icyveins": "S",
         "method": "S",
-        "wowhead": "S",
+        "wowhead": "A",
         "archon": "S"
       },
       "mplus": {
@@ -8700,9 +8700,9 @@
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 11.5,
+        "value": 12.2,
         "unit": "%",
-        "asOf": "2026-08-30"
+        "asOf": "2026-09-01"
       },
       {
         "source": "warcraftlogs",
@@ -8805,9 +8805,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 349.5,
+        "value": 351.2,
         "unit": "rating",
-        "n": 42348,
+        "n": 149124,
         "asOf": "2026-08-11"
       },
       {
@@ -8870,7 +8870,7 @@
     "role": "DPS",
     "ratings": {
       "raid": {
-        "icyveins": "A+",
+        "icyveins": "A",
         "method": "B",
         "wowhead": "A",
         "archon": "C"
@@ -8973,9 +8973,9 @@
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.7,
+        "value": 0.5,
         "unit": "%",
-        "asOf": "2026-08-30"
+        "asOf": "2026-09-01"
       },
       {
         "source": "warcraftlogs",
@@ -9078,9 +9078,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 352.9,
+        "value": 334.7,
         "unit": "rating",
-        "n": 21163,
+        "n": 22294,
         "asOf": "2026-08-11"
       },
       {
@@ -9242,7 +9242,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.7,
         "unit": "%",
-        "asOf": "2026-08-30"
+        "asOf": "2026-09-01"
       },
       {
         "source": "warcraftlogs",
@@ -9258,9 +9258,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 334.6,
+        "value": 327.4,
         "unit": "rating",
-        "n": 23526,
+        "n": 44412,
         "asOf": "2026-08-11"
       },
       {

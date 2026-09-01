@@ -16,6 +16,53 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-01 (nightly) — 44 channels polled, 3 transcripts read → 1 take + 2 verified skips, 3 queued
+
+- **Discovery**: all 44 transcribable channels with a `channelId` polled via the YouTube RSS
+  endpoint, **0 failures**, 15 entries each = **660 videos**, `media:description` parsed
+  alongside every title. Seen-set recomputed from the four structured lanes (`videos[]` /
+  `skipped[]` / `seen[]` plus every `youtu.be` id in a take or metaNote url) = **1222 ids**.
+  **254 unseen, all 254 inside the cycle** (bound **2026-06-18**, the OLDEST date in
+  `ptr-builds.json`, taken as a date and not an index). This is a nightly, so the keyword
+  filter governs QUEUEING: 174 of the 254 are keyword-relevant and 171 of those are budget
+  dismissals left in **NO lane**, so a local run reconsiders them.
+- **Distilled — 1 take.** Obli `wPDn4G-8JNs` "New Frost Single & Two target buffs coming on
+  Tuesday!" (2026-08-30) → **Frost Death Knight, raid, sentiment buff**. He works the Sept 1
+  values off his own logs (Howling Blast +15% also lifting Cryogenic Chamber because it stores
+  Howling Blast damage; two main-target hits under Northwinds), sizes the whole thing at about
+  6.5% single-target / 5% two-target ≈ 5–7M on his logs, and lands on "truly middle of the
+  pack" / "the damage is just mid" — not enough for Hall of Fame guilds given DK brings only
+  grip, but "absolutely fine" for ordinary raiders, no longer sandbagging. His 2026-08-28 Frost
+  RAID take (sentiment nerf) is superseded — same creator, spec and lens; his 08-28 Frost **M+**
+  take and both Unholy takes are a different lens and stay live.
+- **Verified skips — 2**, both moved to `skipped[]` with the reason recorded there:
+  · Whispyr `1qclgMKPdz4` "Fatebound is BACK…" — an Assassination hero-tree/BUILD and
+    sim-correctness video (Fatebound over Deathstalker on execution cost against a ~2% lead
+    inflated ~1.3% by a Mass Casualty single-target sim bug; Font of Venomous Rage under-simming
+    by 25% from a missing null tick; a Wowhead guide pass). Every claim is hero-tree, trinket or
+    guide-level → guide-shaped content rule, no take.
+  · Shadarek `DJCr5_KFzcM` "Havoc DH new BiS Gear Setup and Post-Buff Sims" — a BiS-list update.
+    The Sept 1 +4% is one input to the sim number (top build 254k) and is never compared against
+    another spec; the substance is Font (mastery) displacing Heart of Vultalec (crit) and the
+    stat-order consequences → gear-level claim rule, no take.
+  Neither was minted as a filler `neutral`: a transcript with no comparative read goes to
+  `skipped[]`, which is exactly what happened.
+- **Queued 3** (narrow, per "fetch broadly, queue narrowly" — Supadata is a 100-request MONTHLY
+  budget and September's just opened): izen `nuUVv1WwfLM` "Best DPS & Raid Meta — Before & After
+  Pre-Season Tier Lists" (2026-08-31; general-creator **metaNotes** lane, its description
+  promises a week-1/2 outcome-vs-PTR-prediction comparison, which is the archetype);
+  Dalaran Gaming `acRd5yk-3N0` "New Buffs For Season 2! Class Tuning Coming with Weekly Reset"
+  (2026-08-29); Critcake `S2nGA4gww8I` "Arms owns. +18 Ruby Life Pools" (2026-08-29 — a
+  registered Arms/Fury specialist making an M+ placement claim in the title itself).
+- **Deliberately NOT queued** despite matching keywords: Supatease's week (PvP-framed by
+  construction — "Best PVP Classes 12.1", "Midnight PVP Tier List Season 2"), the large
+  boss/dungeon-POV blocks from YoDaTV, Shindigg, Critcake, Reholy, Clandon, Megasett and
+  Bansherz, Tactyks' boss guides, and the gearing/vault videos (Kalamazi, Sha, Dalaran's
+  "Gearing is BROKEN") — all budget dismissals, all left UNSEEN.
+- `npm run audit:creators` clean: **HIGH 0 · MED 0**, INFO 9 (8 zero-yield transcribable
+  creators, plus the standing "expert lane dormant between cycles" note — `PHASES.ptr` is null,
+  so the per-spec coverage sweep is suppressed and that is not data loss).
+
 ## 2026-08-31 (nightly) — 44 channels polled, 4 transcripts distilled into 15 takes + 24 metaNotes, 2 queued
 
 - **Discovery: 44 unique transcribable channels, 0 RSS failures, 660 entries.** Seen-set
