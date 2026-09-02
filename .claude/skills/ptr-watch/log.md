@@ -16,6 +16,57 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-02 (local) — the Sept 1 round-up logged (3 new class lines), and the deferred Fire Mage tier-set action CLOSED
+
+- **Between-cycles posture unchanged**: live lanes only; PTR zone sweeps (54/52/56/57) stayed
+  dormant. No 12.2 PTR announcement anywhere in the Wowhead RSS sweep (40 items, 25 of them
+  dated 08-31 or later) — the 12.1 development-notes thread this feed's `thread` key tracks is
+  still the closed cycle's.
+- **Canonical source, not the mirror**: Kaivax's running hotfix blue post (us.forums topic
+  2336376), title now "World of Warcraft: Midnight Hotfixes - September 1", post 1 at
+  **version 26**, last edited 2026-09-02T00:30:25Z, read with its `<ul>` heading structure
+  INTACT so every class line sits under an explicit SPEC heading. The Wowhead article is the
+  citation only (news=382716 — the id was VERIFIED off the RSS `<link>`, not guessed; a first
+  draft of this entry carried 382731 and was corrected before commit).
+- **ONLY THREE class lines are new to the feed**, all bug fixes with no tuning value: Unholy
+  Death Knight (Mastery: Dreadblade / Foul Infections not increasing Plague Erupt crit chance),
+  Beast Mastery Hunter (Wild Thrash ignoring target bounding radius) and Assassination Rogue
+  (Caustic Spatter triggering off non-class Nature damage such as trinkets).
+- **The Sept 1 tuning pass itself is NOT re-distilled** — the 2026-08-25 precedent. It shipped
+  verbatim from the already-logged 08-28 "Class Tuning Incoming – September 1" post; checked
+  line by line against that entry and matching at identical values across all 15 spec lines,
+  including the Mistweaver Monk 4-piece line (activation chance 25%, was 20%) whose
+  `spec.tierSet` was already advanced to the announcing post. The outlook tally counts LINES,
+  so logging them twice would double-count one pass. The Shaman › Farseer Natural Harmony fix
+  is likewise already carried by 08-28.
+- **The whole Player versus Player section triages out** — roughly half the post (Devourer DH,
+  Havoc, Druid/Feral/Restoration, Devastation and Preservation Evoker, Beast Mastery, all three
+  Mage specs, Discipline, Rogue/Assassination, Elemental and Enhancement Shaman, Arms, Fury).
+  Standing rule, not an omission.
+- **One line DISCLOSED rather than logged**: "Resolved an issue where Protection Paladin's
+  Mastery did not function correctly against Caustic Deluge or Eternal Venom" names a spec but
+  sits under Dungeons and Raids › The Venomous Abyss › The Twin Fangs, not under a Classes spec
+  heading. By the heading-structure discipline this feed uses it is an ENCOUNTER line, so it is
+  recorded in the non-class summary rather than minted as a Protection Paladin change.
+- **THE 08-31 DEFERRAL IS CLOSED — this is the local run that entry asked for.** The Mage › Fire
+  line ("Resolved an issue where the 2-piece set bonus: Flamestrike did not correctly always
+  grant Hot Streak when it is a guaranteed critical strike due to Pyroclasm") is now logged, and
+  the tier-set upkeep gate duly required Fire Mage's `spec.tierSet.asOf` to advance to
+  2026-08-31. That fired the 2026-08-23 two-page rule exactly as predicted — `npm run validate`
+  red with two errors naming `gearing/data/specs.json` — which is precisely why the nightly
+  structurally could not do it (its publish job stages only `data/`, `dist/` and the skill logs,
+  never `gearing/`). Fixed in the SAME change with
+  `node gearing/src/sync-tracker-fields.mjs && npm run gearing:build`; the mirror comparison is
+  back to 0 drifting fields across all 40 specs. The set bonus TEXT is unchanged — a bug fix
+  making the printed 2-piece behave as written, not a value change — so only `asOf` and `source`
+  moved, with a dated parenthetical recording why.
+- **Nothing published moved**: all 79 outlook arrows are byte-identical before and after. The
+  Unholy DK line does classify `buff` (restoring intended crit scaling is a real gain), but it
+  joined a tally that already pointed the same way rather than flipping a direction.
+- **Manifest deliberately NOT touched** — partial run, per the local-run rule. `check-refresh
+  --manifest` failed on exactly the one expected line (`startedAt … 23h old`); every other row
+  it printed was a documented owner-accepted standing red.
+
 ## 2026-09-01 (nightly) — TWO feed changes: the Aug 31 hotfix round-up logged, and the Sept 1 tuning post gained a line at version 4
 
 - **Between-cycles posture unchanged**: live lanes only. PTR zone sweeps (54/52/56/57) stayed

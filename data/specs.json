@@ -4178,10 +4178,10 @@
       "meleeCapable": false
     },
     "tierSet": {
-      "set2": "Pyroclasm causes Flamestrike and Pyroblast to always critically strike.",
+      "set2": "Pyroclasm causes Flamestrike and Pyroblast to always critically strike. (2026-08-31 hotfix: fixed so the guaranteed critical strike from Pyroclasm correctly grants Hot Streak — a bug fix to make the printed bonus behave as written; no value changed.)",
       "set4": "Pyroclasm reduces the cast time of Flamestrike and Pyroblast by 20% and its damage bonus is increased by 20%.",
-      "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
-      "asOf": "2026-07-14"
+      "source": "https://us.forums.blizzard.com/en/wow/t/world-of-warcraft-midnight-hotfixes-august-31/2336376",
+      "asOf": "2026-08-31"
     },
     "ptrDummy": {
       "source": "warcraftlogs",

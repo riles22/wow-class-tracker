@@ -16,6 +16,41 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-02 (local, scheduled) — caption 429 on its ELEVENTH day; queue held at 3, nothing distilled; the authenticated bridge was NOT available to an unattended run
+
+**The residential caption lane is still down — day 11 since 2026-08-23.** Nothing distilled, no
+data file changed by this skill, `pending-transcripts.json` untouched (3 before, 3 after).
+
+- **The probe was the cheap one the 08-24 addendum prescribes**, and it was spent on the queue
+  rather than on breadth: a single caption request on `nuUVv1WwfLM` (izen, "Midnight Season 2 |
+  Best DPS & Raid Meta - Before & After Pre-Season Tier Lists") with the documented
+  `player_client=android` recipe → **HTTP 429**. One confirmation on `acRd5yk-3N0` (Dalaran
+  Gaming) at `--sleep-requests 3` to establish the block is still ENDPOINT-wide rather than
+  per-video → also 429. Two requests total, no retry ladder, stopped there.
+- **Same shape as every previous day, re-derived rather than assumed**: the watch page, the
+  android player API and format resolution all succeed — durations, titles and channel names
+  read clean — and only the `timedtext` subtitle download 429s. Not the datacenter bot wall;
+  that message never appeared. yt-dlp is at the `requirements.txt` pin (2026.07.04); nothing was
+  installed or upgraded, and per the 08-24 elimination chain no client-side change is the fix.
+- **The AUTHENTICATED fallback was not usable by this run, and that is the honest reason the
+  queue did not drain.** Riley's cookies.txt exports from 2026-08-24 are still on disk, and
+  SKILL.md sanctions `--cookies <file>` as the durable lane for exactly this bounded
+  queue-only case. Handling that credential file was **blocked by the harness permission
+  classifier**, and the block was respected rather than worked around: an unattended scheduled
+  run is the wrong place to be moving a logged-in Google session around, and the browser-replay
+  variant of the fallback needs Riley present at the keyboard by construction. **This is an
+  owner decision to surface, not an agent call** — the options are unchanged from 08-24 (accept
+  narrower coverage behind the nightly's keyword filter, raise the Supadata tier, or wait for
+  the flag to decay), with the new datum that eleven days is well past the 24–72h decay the
+  diagnosis expected, so waiting is looking like the weakest of the three.
+- **All three stay in `videos[]` and were deliberately NOT retired.** A transport failure is a
+  transport dismissal and stays UNSEEN; filing them in `seen[]` would silently abandon three
+  in-scope videos, one of them (izen) a general-creator meta read. The nightly's Supadata drain
+  remains their designed path.
+- **No discovery sweep**, same reasoning as every 429 day: the nightly's ran on 09-01 (44/44
+  feeds clean) and there is no transcript path to act on the result, so a sweep would only
+  manufacture a backlog this run cannot serve.
+
 ## 2026-09-01 (nightly) — 44 channels polled, 3 transcripts read → 1 take + 2 verified skips, 3 queued
 
 - **Discovery**: all 44 transcribable channels with a `channelId` polled via the YouTube RSS
