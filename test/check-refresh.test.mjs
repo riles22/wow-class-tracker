@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
-import { checkManifest, checkFreshness, checkAnomaly, checkRowDrop, checkValueMove, checkPublished, probeDate, probeRows, ageDays } from "../src/check-refresh.mjs";
+import { checkManifest, checkFreshness, checkAnomaly, checkRowDrop, checkValueMove, checkPublished, probeDate, probeRows, ageDays, FLOOR_RESTORE_DUE } from "../src/check-refresh.mjs";
 
 /* Small synthetic world: one tier-list source (two pages), one metrics source, one
    probe-less feed requirement — enough to exercise every gate rule without the repo's
@@ -648,8 +648,10 @@ test("age gate: a below-full floor is nagged past its restore date, and only the
   const before = checkFreshness(lowered, goodManifest(), freshData(), "2026-08-25");
   assert.ok(!before.violations.some(v => v.includes("minSuccessfulSources")), before.violations.join("\n"));
   assert.ok(!before.fingerprint.includes("min-sources-floor"));
-  // Past it: red until restored.
-  const after = checkFreshness(lowered, goodManifest(), freshData(), "2026-09-02");
+  // Past it: red until restored. The date is read off the module so a reviewed extension
+  // of the window (2026-09-03: 09-01 -> 10-01) moves this pin with it instead of reddening it.
+  const dayAfter = new Date(Date.parse(FLOOR_RESTORE_DUE) + 86400000).toISOString().slice(0, 10);
+  const after = checkFreshness(lowered, goodManifest(), freshData(), dayAfter);
   assert.ok(after.violations.some(v => v.includes("minSuccessfulSources is still 5")), after.violations.join("\n"));
   assert.ok(after.fingerprint.includes("min-sources-floor"));
   // Restored (or absent — the fixture default): quiet at any date, forever.

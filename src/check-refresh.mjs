@@ -426,6 +426,8 @@ export function checkValueMove(config, data, prevData, ack = null) {
 
 /* --- the heartbeat ----------------------------------------------------------------- */
 
+export const FLOOR_RESTORE_DUE = "2026-10-01", FULL_FLOOR = 7;
+
 export function checkFreshness(config, manifest, data, now, gearing = null) {
   const violations = [], report = [], keys = [];
   const nowDate = dateOf(now);
@@ -486,10 +488,16 @@ export function checkFreshness(config, manifest, data, now, gearing = null) {
      recorded only in a comment and a commit message; if the date passed unremembered the
      floor stayed silently weakened. Restoring the value silences this permanently — it
      cannot become a standing nag; if the window legitimately needs extending, move the
-     date here in the same reviewed edit that decides so. */
-  const FLOOR_RESTORE_DUE = "2026-09-01", FULL_FLOOR = 7;
+     date here in the same reviewed edit that decides so.
+     EXTENDED 2026-09-01 -> 2026-10-01 (Riley, 2026-09-03, that reviewed edit): the nine
+     nightlies 2026-08-26..09-03 landed 5-7 successes of 21 (two at exactly 5), because 13
+     requirements were structurally unable to succeed — the nine archon-* rows behind the
+     human-verification wall, wcl-live x2 on the upstream rDPS 500, and both sim rows held
+     pre-adoption. Restoring 7 would have redded six of those nine nights for no new fact.
+     The same-day wholesale MID2 adoption lifts the reachable ceiling by two; restore to 7
+     when Archon returns or by the new date, whichever first. */
   if ((config.minSuccessfulSources ?? FULL_FLOOR) < FULL_FLOOR && dateOf(nowDate) > FLOOR_RESTORE_DUE) {
-    violations.push(`minSuccessfulSources is still ${config.minSuccessfulSources} past ${FLOOR_RESTORE_DUE} — the S2-transition lowering (152dcc6) was dated "restore ~2026-09-01". Put it back to ${FULL_FLOOR} in data/required-sources.json, or move FLOOR_RESTORE_DUE in src/check-refresh.mjs if the window must extend.`);
+    violations.push(`minSuccessfulSources is still ${config.minSuccessfulSources} past ${FLOOR_RESTORE_DUE} — the S2-transition lowering (152dcc6) was dated "restore ~2026-09-01" and extended once to ${FLOOR_RESTORE_DUE}. Put it back to ${FULL_FLOOR} in data/required-sources.json, or move FLOOR_RESTORE_DUE in src/check-refresh.mjs if the window must extend.`);
     keys.push("min-sources-floor");
   }
   for (const req of config.requirements) {
