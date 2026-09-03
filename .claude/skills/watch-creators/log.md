@@ -16,6 +16,65 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+
+## 2026-09-03 (nightly) — 3 transcripts read: 10 izen raid metaNotes, 3 Dalaran takes, 2 Critcake takes; 3 new videos queued
+
+- **Discovery**: all **44** transcribable channels with a `channelId` polled via the YouTube RSS
+  endpoint, **0 failures**, 15 entries each = **660 videos**, `media:description` parsed alongside
+  each title. Seen-set recomputed from the four structured lanes (`videos[]` / `skipped[]` / `seen[]`
+  plus every `youtu.be` id in a take or metaNote url) = **1225 ids**. **275 unseen, all 275 inside
+  the cycle** (bound **2026-06-18**, the OLDEST date in ptr-builds.json, taken as a DATE and not an
+  index). This is a nightly, so the keyword filter governs QUEUEING: 168 of the 275 are
+  keyword-relevant; the 107 that are not, and the keyword-relevant ones not queued, are **budget
+  dismissals left in NO lane** so a local run reconsiders them.
+- **transcript-fetch/summary.json**: verdict `ok`, requested 3 / fetched 3, all three read in full.
+- **izen (Izenhart), `nuUVv1WwfLM` (2026-08-31) -> 10 metaNotes, raid lens.** His "Before & After"
+  recap scores the channel's own pre-season raid predictions against live Heroic/Mythic parses and
+  against what race guilds are fielding. Distilled: **Devourer DH negative** (simmed and tested well,
+  now bottom half and arguably the worst caster in the game; the start-of-season tier-set cut is his
+  causal claim); **Frost DK negative** (his single worst prediction-vs-reality gap, on fight profile
+  rather than tuning); **Windwalker negative** (squishiest DPS alongside Balance, no full raid buff to
+  lean on); **Havoc mixed** (taking Devourer's slot on MOVEMENT, not damage — both "midling to
+  average"); **Marksmanship positive** (burst niche, double-MM in the race, with his own ceiling
+  caveat); **Subtlety / Assassination / Outlaw positive** (post-testing buffs nobody got to test);
+  **Balance positive** (add-slop AoE on Ula'tek plus the incoming 4%); **Arms positive** (best melee
+  performer alongside Sub, two-target cleave). Each superseded izen's prior RAID-lens metaNote for
+  that spec (10 superseded); his M+ and unbracketed notes are a different lens and stay live.
+  **Outlaw's entry carries his own one-log caveat in the note** — he ranks it first on Zorak and then
+  says that rests on a single logged parse. **Not distilled**: the bare enumeration of top Mythic
+  results (all three Warlocks / Arcane / Shadow "all the way over there") is a list-mention, not a
+  read; the Vengeance passage is explicitly hypothetical ("the biggest cooking play some of these top
+  guilds MIGHT do"); Fire and Frost Mage appear only inside enumerations.
+- **Dalaran Gaming, `acRd5yk-3N0` (2026-08-29) -> 3 takes.** His class-by-class walkthrough of the
+  September 1 PvE pass — same shape as the 08-22 video that was distilled before, so the precedent is
+  in the data. In-scope: **Feral Druid (buff, raid)** — he says Feral's raid value has fallen
+  drastically this expansion and splits the pass by where it lands rather than quoting the headline;
+  **Beast Mastery Hunter (buff, both)** — the 7% covers pet AND abilities, which is why he thinks it
+  moves the spec; **Survival Hunter (buff, both)** — same shape, stated intent is to pull SV and BM up
+  to Marksmanship, hedged on magnitude not direction. Superseded his general-lens 2026-06-25 BM and
+  Survival takes (same creator, spec, lens); the Feral take is raid-scoped and does NOT retire his
+  general 06-30 Feral take. **His Frost DK, Demon Hunter, Protection Paladin and Discipline Priest
+  passages are substantive but fall outside his registered classes and were NOT distilled.** His
+  Arcane line ("arcane already is really the better option") was deliberately **not** minted: it is
+  thinner than his live 2026-08-24 Arcane take and would have displaced it for nothing.
+- **Critcake, `S2nGA4gww8I` (2026-08-29) -> 2 takes, M+ lens.** The intro is a real read from the
+  registered Arms/Fury specialist, on his own character with the new four-piece finally equipped:
+  Arms and Fury are very close in keys, Arms does more priority damage, Fury very similar overalls,
+  and he cannot say which is better — "which is a good situation to be in". Logged as **neutral** for
+  both specs, which is a parity read he genuinely expressed, not a placeholder. It supersedes his
+  2026-08-26 Fury M+ take, which had deferred exactly this comparison until the four-piece landed, and
+  the two 2026-07-09 Arms M+ takes (same lens, PTR-era build commentary — superseded, never deleted).
+  The remaining ~25 minutes is the key run with co-streamers and carries no further read; ASR gives no
+  speakers, so nothing was attributed from it.
+- **Queued 3** (keyword-relevant, no fetched transcript): izen `4z49EhVeP7I` (2026-09-01, the **M+
+  counterpart** to the raid recap distilled tonight — highest-value item in the queue),
+  MadSkillzzTV `yD9mjG-ajUU` (2026-09-01, a healer-balance short covering M+ and raid, and healer raid
+  reads are the thin lane), Dalaran Gaming `Kq3saXcBt10` (2026-09-02, the "PATCH 12.1.5 LEAKED? MAYBE
+  NEW PTR LATER?" stream — a ptr-watch LEAD to verify against the canonical thread, not a source).
+  Supatease's week was again NOT queued: PvP-framed by construction. AutomaticJak's Resto Shaman M+
+  guide and the boss/dungeon guides were not queued either — guide-shaped content yields no take.
+- `npm run audit:creators` clean at **HIGH 0 / MED 0**, INFO 9 (eight zero-yield transcribable
+  creators plus the standing "expert lane dormant between cycles" note).
 ## 2026-09-02 (local, scheduled) — caption 429 on its ELEVENTH day; queue held at 3, nothing distilled; the authenticated bridge was NOT available to an unattended run
 
 **The residential caption lane is still down — day 11 since 2026-08-23.** Nothing distilled, no

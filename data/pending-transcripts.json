@@ -2,25 +2,25 @@
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
   "videos": [
     {
-      "id": "nuUVv1WwfLM",
+      "id": "4z49EhVeP7I",
       "creator": "izen (Izenhart)",
-      "title": "Midnight Season 2 | Best DPS & Raid Meta - Before & After Pre-Season Tier Lists",
-      "published": "2026-08-31",
-      "queuedAt": "2026-09-01"
+      "title": "12.1 Season 2 | Mythic+ Best Specs & Meta - Preseason Tier Lists Before & After",
+      "published": "2026-09-01",
+      "queuedAt": "2026-09-03"
     },
     {
-      "id": "acRd5yk-3N0",
+      "id": "yD9mjG-ajUU",
+      "creator": "MadSkillzzTV",
+      "title": "Most Healers are OP in 12.1 Midnight #worldofwarcraft",
+      "published": "2026-09-01",
+      "queuedAt": "2026-09-03"
+    },
+    {
+      "id": "Kq3saXcBt10",
       "creator": "Dalaran Gaming",
-      "title": "New Buffs For Season 2! Class Tuning Coming with Weekly Reset",
-      "published": "2026-08-29",
-      "queuedAt": "2026-09-01"
-    },
-    {
-      "id": "S2nGA4gww8I",
-      "creator": "Critcake",
-      "title": "Arms owns. +18 Ruby Life Pools -  Midnight M+ Season 2 (week 2)",
-      "published": "2026-08-29",
-      "queuedAt": "2026-09-01"
+      "title": "PATCH 12.1.5 LEAKED? MAYBE NEW PTR LATER? GREAT WEEK FOR GEARING! - World of Warcraft (Livestream)",
+      "published": "2026-09-02",
+      "queuedAt": "2026-09-03"
     }
   ],
   "skipped": [

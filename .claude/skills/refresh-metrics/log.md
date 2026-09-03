@@ -16,6 +16,89 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+
+## 2026-09-03 (nightly) — Murlok re-cut after five days (40 rows), WoWMeta's manifest finally caught up, Mythicstats rolled to period 1079; Bloodmallet and SimC still HELD
+
+- **Murlok — MERGED, 40 rows, and it is the first re-cut since 2026-08-28.** Plain browser-UA GET
+  on all three meta pages (r.jina.ai does not work on murlok), HTTP 200, 41-71 KB. Rows split on
+  `<a [^>]*class="vi-box meta-item` per the 08-31 attribute-order trap; counts reconciled at
+  27 DPS / 7 healer / 6 tank = 40 before merging. Each page's own `<time datetime>` now reads
+  **2026-09-02T10:10Z** (08-28 for four straight nights before this), and every one of the 40
+  values moved, all upward by **2.7-7.0%** (median about 4.2%) — the shape of rating ceilings
+  climbing through a season, not a re-scale. Well inside `maxValueMovePct` 0.6 and
+  `maxFamilyMedianMovePct` 0.35. Merged at the SOURCE's date 2026-09-02, so the row is `success`
+  (stored date within a day of the run) and the coverage date advances honestly.
+- **WoWMeta — MERGED, and this is the 08-04 pinned-manifest shape RESOLVING.** `manifest.json`
+  HTTP 200 with `snapshotDate` **2026-09-01** (completedAt 2026-09-01T22:25:20Z) against 2026-08-11
+  for the last three weeks; `rankings/midnight/mplus/all/0.json` HTTP 200, 161,730 bytes,
+  `Last-Modified: Tue, 01 Sep 2026 22:23:28 GMT` (last night: 161,637 bytes at 01 Sep 00:21:38).
+  Selection as specified: 44 blocks, whitelist `categoryType` in {dps,hps,tank} + `sortField`
+  lowerBound + `keyRange === undefined` = 27+7+6 = **40 rows** (melee/ranged excluded as dps
+  subsets). The payload was DIFFED rather than trusted, and the result is the mirror image of last
+  night: **0 of 40 lowerBound values moved and 0 of 40 numberOfCharacters moved** — the 22:23 rewrite
+  carries the same numbers we merged from the 00:21 file, and what actually changed is that the
+  manifest caught up to them. So the merge here is a DATE correction, not new numbers: `asOf` moves
+  2026-08-11 -> 2026-09-01, which is what the source now says its snapshot is. Row is `partial`, not
+  success, because 09-01 is two days from the run and `check-refresh` requires within one.
+- **Mythicstats — MERGED 40 rows at a NEW period.** `/period/latest` HTTP 200, 215 KB, now resolving
+  to **period 1079** ("week 3 of MID2", Lindormi's Guidance / Xal'atath's Bargain: Devour / Fortified
+  / Tyrannical / Xal'atath's Guile), against 1078 last night; the page says the period "just started
+  and is still in progress" with 10000 characters (5350 unique), 16.6 average key level. Parse bounded
+  to the "Spec representation in top keys" section (the whole page yields ~59 rows from the
+  Classes-and-specs block and the per-dungeon sections), labels normalised on `[-\s]+`: **40 rows,
+  0 unmatched — Fire Mage is back upstream**, so this is the first full-roster cut in days. Sanity
+  check before merging: series sum **99.9** with role subtotals DPS 59.8 / Tank 20.0 / Healer 20.1,
+  i.e. the representation share and not the `/meta` per-key-presence column. 37 of 40 values moved,
+  which is a fresh-period reset rather than drift (Arms 12.2 -> 9.9, Outlaw 2.9 -> 1.1, Prot Paladin
+  2.0 -> 3.3, Havoc 0.5 -> 1.4); every value is under `minValueMagnitude` 100 so the value-move gate
+  does not apply. Merged at 2026-09-03.
+- **Bloodmallet — HELD WHOLESALE for a ninth night, and the hold is now blocked by ONE gate.**
+  All 27 DPS charts requested at `talent_target_scaling/castingpatchwerk` with 3 retries each:
+  **23 return real payloads**, every one carrying `simc_settings.tier = MID2` (read off each chart,
+  never hard-coded) at chart timestamps 2026-09-02 / 09-03; **4** still return the 76-byte
+  `{"status": "error"}` body on every retry — **Balance Druid, Feral Druid, Augmentation Evoker,
+  Devastation Evoker**. Retribution Paladin, which had been in that set, is BACK. Against the 26
+  stored MID1 profiles (2026-07-08 / 07-15), wholesale adoption of the 23 would drop 26 -> 23 rows
+  = **11.5%**, comfortably inside `maxRowDropPct` 0.25 — so the row floor no longer blocks it. What
+  does: **121 of the 138 overlapping target rows move more than 60%** (MID2/MID1 ratio min 1.152,
+  median 1.908, max 2.872), tripping `maxValueMovePct` 0.6, and that gate has no agent-writable
+  proposal channel — only a human `value_move_ack` re-run or a reviewed local run can land it. The
+  tier-uniformity invariant separately forbids a pool holding both MID1 and MID2. Nothing merged;
+  `fightProfile.asOf` stays each chart's OWN timestamp, so the coverage date does not move and the
+  staleness red is the honest signal.
+- **SimulationCraft — HELD for a ninth night, same single blocker.** `MID2_Raid.txt` is 1.36 MB,
+  `Last-Modified` 2026-09-03T07:30:19Z, header `12.1.0.69587 Live (hotfix 2026-09-02/69587, git build
+  HEAD f5b50a3f97)` — a NEW build hash again (adc39a57a2 last night), so upstream is re-simming
+  daily. Its `DPS Ranking:` block holds 43 profiles which map by longest-prefix (hyphen allowed) to
+  **23 of 27 DPS specs**; absent are Balance, Feral, Augmentation and Devastation — **the same four
+  Bloodmallet is missing**, which is why the two contract rows keep clearing together. `MID1_Raid.txt`
+  is again **272 bytes** (Last-Modified 2026-09-03T07:07:34Z), an in-progress run with no ranking
+  block, and carries the SAME build header as MID2 — so MID1 is neither a 12.0.7 artefact nor a
+  usable fallback. Wholesale adoption would drop 26 -> 23 rows = 11.5%, inside the row floor, but all
+  23 overlap rows move more than 60% (77.6% to 135.2%), so the value gate fires and needs the human
+  `value_move_ack`. Nothing merged; the stored 26 rows and their 2026-08-08 date are byte-identical.
+- **Archon numerics (six contract rows) — walled.** Same site-wide human-verification wall as the
+  tier pages: all 11 registered archon.gg URLs HTTP 403, ~6.1 KB Cloudflare managed-challenge body,
+  `__NEXT_DATA__` count 0. Asserted on `__NEXT_DATA__`, not the status code. Nothing merged, nothing
+  backfilled from Warcraft Logs (hard rule 3).
+- **Warcraft Logs — evidence file only, no warcraftlogs.com request made from this session by any
+  means.** `wcl-fetch/evidence.json` attemptedAt 2026-09-03T14:42:44.810Z, verdict **`rdps-broken`**,
+  detail "characterRankings(metric: rdps) on encounter 3176: Internal server error". Transport itself
+  healthy (oauth true, graphql true, 3600 points/hour, 12.3 spent). `landed = {}` and
+  `rawRecipes = {}`, so no key landed rows and no cut may claim success. Stored zone-53/55 series
+  unchanged at 2026-08-10 — the OWNER-ACCEPTED standing red.
+- **OWNER ACTION now overdue, surfaced by `check-refresh --age`**: `minSuccessfulSources` is still
+  **5**, and the contract's own comment dated the S2-transition lowering "RESTORE TO 7 by ~2026-09-01".
+  The heartbeat names it explicitly as of tonight. It is the GATE CONTRACT, so no agent may touch it —
+  and the evidence says it is safe to restore: tonight's run landed **7** successes (icyveins, method,
+  wowhead, murlok, mythicstats, blizzard-ptr, creators), exactly at the restored floor, with Archon
+  walled and both WCL rows in their standing red. Restore it in `data/required-sources.json`, or move
+  `FLOOR_RESTORE_DUE` in `src/check-refresh.mjs` if the window has to extend.
+- **Also red on the heartbeat and NOT fixable from a nightly**: `gearing-specs` is 32 days stale
+  (max 30). Gearing harvests are manual by design — a local-run duty, not a nightly one.
+- **Robydoby not refreshed, deliberately**: the sheets are 12.1 PTR zone-54 percentiles and the PTR
+  cycle is CLOSED, so the stored rows are that cycle's final receipts. It is outside
+  `required-sources.json` by design and carries no manifest row.
 ## 2026-09-01 (nightly) — WoWMeta re-ran (40 rows merged under its own lagging date) and Mythicstats moved within period 1078 (39 rows); Murlok still frozen; SimC + Bloodmallet held a SEVENTH night
 
 - **WoWMeta — the 2026-08-04 pinned-manifest shape is BACK, and diffing the payload is what

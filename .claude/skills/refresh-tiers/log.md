@@ -16,6 +16,50 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+
+## 2026-09-03 (nightly) — Icy Veins raid HEALER re-cut (2 letters); Method and Wowhead static; Archon walled again
+
+- **Transport, recorded per the rule**: all 14 registered tier-list pages fetched by DIRECT
+  browser-header GET (full header set — a UA-only request is Cloudflare-403 on wowhead;
+  r.jina.ai deliberately not attempted, IP-403 on `wowhead.com/guide/*` since 2026-08-03 and
+  never worked on murlok). Sizes read off disk, not `curl`'s `size_download`.
+- **Icy Veins** (6 pages, 196-343 KB, HTTP 200): `<style>` stripped before parsing, exactly one
+  `<table class="tier-list">` asserted per page, letter from each row's first `<td>`, spec from
+  each `tier-list-entry`'s FIRST `img alt` looked up WHOLE. Counts reconciled BEFORE merging:
+  raid 27/7/6 = 40, M+ 27/7/6 = 40, 80 rows, 0 unmatched, 0 duplicates, every letter inside the
+  registered 7-band scale. **2 letters moved, both on the raid HEALER page: Holy Priest A -> S
+  and Holy Paladin S -> A** — a straight swap at the top of that list. That page is the one that
+  re-cut: JSON-LD `dateModified` 2026-09-01 with an in-body "LAST UPDATED - 01st of September"
+  and a new changelog row "01 Sep. 2026: Updated for the end of RWF Mythic progression", where
+  last night recorded 2026-08-24 for it. `published` re-read per page: raid 08-30 / **09-01** /
+  08-08, M+ 08-30 / 08-30 / 08-30.
+- **Era note worth keeping**: the raid-healer page's TITLE still reads "(Patch 12.0.7 / Midnight)"
+  while its body and changelog are unambiguously Season 2 ("large nerfs before Season 2's launch",
+  "Further updated for Midnight Season 2 launch"). Body over title, the blue-tracker precedent —
+  the Season 1 hits on all six pages are changelog rows and retrospective prose, never the ranking
+  body. `seasonVerified` stays s2 everywhere; **no seasonVerified value changed this run**, so
+  freeze-season had nothing to do (it runs publish-side anyway).
+- **Method** (2 pages, 160/167 KB): parsed from `tier__title` / `data-original-title` and resolved
+  by ROSTER MATCH, which again rejects the M+ page's second tierlist — its eight entries are
+  dungeon-difficulty blocks (Altar of Fangs, Den of Nalorakk, King's Rest, Murder Row, Ruby Life
+  Pools, Temple of Sethraliss, Voidscar Arena, The Blinding Vale) and none maps to a spec. Raid
+  40/40, M+ 40/40, 0 unmatched. **ZERO letters moved.** The pages' own "Last Updated" lines are
+  unchanged at 10th August (raid) and 13th August (M+), which is the honest explanation.
+- **Wowhead** (6 pages, 75-340 KB): unescape `\/` -> `/` across the whole document FIRST, then find
+  `[tier-list=rows] … [/tier-list]` (never anchor on `WH.markup.printHtml` — the raid-healer page
+  carries a decoy call), segment on `[tier-label …]X[/tier-label]` with tolerant whitespace, resolve
+  each `[spec-badge=<spec>-<class>]` slug. Exactly one tier-list block per page; raid 27/7/6 = 40,
+  M+ 27/7/6 = 40, 0 unmatched slugs, 0 duplicate-tier conflicts. **ZERO letters moved** — and every
+  page's `dateModified` is unchanged from last night (raid 08-31 x3, M+ 08-28 / 08-26 / 09-01), so
+  a static parse is exactly what a static page should produce. Note the raid DPS list currently has
+  no S tier at all; that is upstream's shape, not a dropped block.
+- **Archon: walled again, unchanged since 2026-08-25/26.** All 11 distinct registered archon.gg URLs
+  fetched individually with the full browser header set; every one returned **HTTP 403** with a
+  ~6.1 KB Cloudflare managed-challenge body (`<title>Just a moment...</title>`) and `__NEXT_DATA__`
+  count **0**. Asserted on `__NEXT_DATA__` presence, not the status code, per the contract note.
+  No solve, replay or automation attempted; nothing backfilled from Warcraft Logs (hard rule 3).
+  Stored letters, numbers and snapshots left byte-identical. Consensus stays Icy Veins + Method +
+  Wowhead, "consensus of 3".
 ## 2026-09-01 (nightly) — Icy Veins raid DPS re-cut (5 letters) + Wowhead raid DPS/tank and M+ tank (10); Archon walled night 10
 
 - **Transport, recorded per the rule**: every page fetched by DIRECT browser-header GET

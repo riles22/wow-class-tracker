@@ -16,6 +16,49 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+
+## 2026-09-03 (nightly) — ONE new feed entry: the September 2 hotfix round-up (3 class lines, all bug fixes); PTR zone lanes dormant
+
+- **New entry, 2026-09-02, `kind: "hotfix"`.** Canonical source read directly rather than off the
+  Wowhead mirror: Kaivax's running hotfix blue post (`us.forums.blizzard.com/en/wow/t/2336376.json`),
+  title now "World of Warcraft: Midnight Hotfixes - September 2", post 1 at **version 27**, updated
+  2026-09-03T01:11:28Z; read with its `<ul>` heading structure INTACT. Three class lines:
+  Druid > **Feral** (Unseen Predator Rank 1 now prefers targets not immune / not taking under 5%
+  physical damage), Warlock > **Destruction** (Font of Venomous Rage channel could be cancelled if
+  spell-queued after Cataclysm), and a **bare Warrior heading** with no spec block beneath it
+  (Bladestorm now displays as an important aura on nameplates) — logged **class-wide** rather than
+  guessed onto Arms or Fury, the 2026-08-26 Warrior precedent. All three classify **null** under
+  `classifyHighlight` — checked with the real function, not assumed — so this round-up casts no
+  outlook vote, which is the honest reading of a pure bug-fix pass. **No line touches a set bonus**,
+  so no `spec.tierSet` date moves and the upkeep gate stays quiet.
+- **Mirror-vs-canonical discrepancy worth recording**: Wowhead's news=382725 renders the Warrior line
+  as "**Bladetorm**"; the blue post reads **Bladestorm**. Logged the canonical spelling.
+- **The whole Player versus Player section triages out** (Balance Druid's Faerie Swarm raid-frame
+  debuff, the Evoker PvP-vendor staff fix, Preservation's Rewind-under-Cyclone fix) — standing rule,
+  not an omission.
+- **Non-class content folded into the entry's summary line**: Mythic Ula'tek phase-two nerfs (Soul
+  Constrictor duration to 5s, Blight Vein damage -25%, both Mythic-only), two Doomscale Egg pickup
+  fixes, and two Catalyst repairs (remaining Great Vault items now convertible; certain non-armor
+  items no longer appear convertible).
+- **Lanes polled and otherwise empty.** Wowhead news RSS HTTP 200, 40 items spanning 2026-08-30T13:00Z
+  to 2026-09-03T14:00Z. The news INDEX (`data.news.newsData`, 20 posts, totalPages 1547) tops out at
+  the same id as RSS (382623), so nothing landed mid-run. Blue tracker (`data.blueTracker.default`,
+  50 entries, 50 unique topics) carries no standalone class-tuning post beyond what is already logged;
+  Linxy's "Week 3 of 3: Interrupts and dispels" (topic 2343549) turned out to be a player thread with a
+  blue reply, not a class post. The dev-notes thread 2317811 is at 17 posts, `last_posted_at`
+  2026-07-31T23:42Z — correctly quiet for a closed cycle.
+- **Not logged, deliberately**: news=382721 "Phase 2 Nerfed on Mythic Ula'tek" is the same encounter
+  work already covered by the Sept-2 blue post and carries no class content; news=382699 "Season 2 DPS
+  Rankings for The Venomous Abyss: Week 2" is Wowhead's own analysis, not a Blizzard post and not a
+  registered tier list.
+- **No 12.2 PTR announcement anywhere** (RSS, news index, blue tracker, forum). `PHASES.ptr` is still
+  null, so the between-cycles posture holds: **zone lanes 54 / 52 / 56 / 57 stayed dormant** and were
+  not fetched or marked unreachable — their contract rows left with the flip. The expert lane is
+  dormant for the same reason (`audit:creators` reports the coverage sweep suppressed).
+- Note for the next run: Dalaran Gaming's 2026-09-02 stream is titled "PATCH 12.1.5 LEAKED? MAYBE NEW
+  PTR LATER?" — a LEAD only. Nothing in the official forum, the blue tracker or Wowhead's news index
+  supports a new PTR, so nothing was logged; the video is QUEUED for transcript so the claim can be
+  read and checked against the canonical thread next run.
 ## 2026-09-02 (local) — the Sept 1 round-up logged (3 new class lines), and the deferred Fire Mage tier-set action CLOSED
 
 - **Between-cycles posture unchanged**: live lanes only; PTR zone sweeps (54/52/56/57) stayed

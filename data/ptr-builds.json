@@ -3,6 +3,26 @@
   "thread": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811",
   "builds": [
     {
+      "date": "2026-09-02",
+      "kind": "hotfix",
+      "label": "Live 12.1 hotfixes for September 2 — a bug-fix round-up with no tuning value in any class line. Canonical source read directly rather than off the Wowhead mirror: Kaivax's running hotfix blue post (us.forums topic 2336376), whose title has rolled to “World of Warcraft: Midnight Hotfixes - September 2” and whose post 1 is at version 27, last edited 2026-09-03T01:11:28Z; read with its <ul> heading structure INTACT. Two of the three class lines sit under an explicit SPEC heading (Druid › Feral, Warlock › Destruction); the Bladestorm nameplate line sits under a BARE Warrior heading with no spec block beneath it, so it is logged class-wide rather than guessed onto Arms or Fury (the 2026-08-26 Warrior precedent). All three classify null under classifyHighlight — checked, not assumed — so this round-up casts no outlook vote, which is the honest reading of a pure bug-fix pass. THE ENTIRE Player versus Player SECTION TRIAGES OUT (Balance Druid's Faerie Swarm raid-frame debuff, the Evoker PvP-vendor staff fix and Preservation's Rewind-under-Cyclone fix): PvP-only changes are out of scope for this tracker's PvE brackets, which is the standing rule, not an omission. Note the Wowhead mirror renders the Warrior line as “Bladetorm”; the canonical blue post reads Bladestorm and that is what is logged. No line in this round-up touches a set bonus, so no spec.tierSet date moves.",
+      "forumPostNumber": null,
+      "forumUrl": null,
+      "wowheadUrl": "https://www.wowhead.com/news=382725/ulatek-changes-and-class-fixes-patch-12-1-hotfixes-for-september-2nd",
+      "icyveinsUrl": null,
+      "specsAffected": [
+        "Feral Druid",
+        "Destruction Warlock",
+        "Warrior (class-wide)"
+      ],
+      "highlights": [
+        "Feral Druid — Apex Talent: Unseen Predator (Rank 1) now prefers targets that are not immune to damage or taking less than 5% physical damage.",
+        "Destruction Warlock — Fixed an issue where the Font of Venomous Rage trinket channel could be immediately canceled if spell-queued after Cataclysm.",
+        "Warrior (class-wide) — Bladestorm now displays as an important aura on nameplates.",
+        "Non-class: the September 2 round-up also nerfed Mythic Ula'tek in phase two — Soul Constrictor duration reduced to 5 seconds and Blight Vein damage reduced by 25%, both Mythic-only — with two Doomscale Egg pickup fixes (an egg could still be picked up after the Ravenous Doomscale spawns while the Doomscale Warden is alive, and additional protections against one egg triggering multiple pickups), plus Catalyst repairs: remaining Great Vault items that could not be converted are fixed, and certain non-armor items no longer appear convertible (affected characters may need to relog)."
+      ]
+    },
+    {
       "date": "2026-09-01",
       "kind": "hotfix",
       "label": "Live 12.1 hotfixes for September 1 — the weekly-reset round-up, in which the already-logged 2026-08-28 “Class Tuning Incoming – September 1” pass actually went live. Canonical source read directly rather than off the Wowhead mirror: Kaivax's running hotfix blue post (us.forums topic 2336376), whose title has rolled to “World of Warcraft: Midnight Hotfixes - September 1” and whose post 1 is at version 26, last edited 2026-09-02T00:30:25Z; read with its <ul> heading structure INTACT, so every class line below sits under an explicit SPEC heading. ONLY THREE class lines here are new to this feed, all bug fixes carrying no tuning value: Unholy Death Knight, Beast Mastery Hunter and Assassination Rogue. Every other line in the Classes section is the 08-28 tuning post's PvE tuning restated verbatim as it shipped — checked line by line against that entry and matching at identical values across all 15 spec lines, including the Mistweaver Monk 4-piece line (activation chance 25%, was 20%), whose spec.tierSet was already advanced to the announcing post and therefore needs no further bump — and they are deliberately NOT re-distilled here, because the outlook tally counts LINES and logging them twice would double-count a single tuning pass (the 2026-08-25 round-up set this precedent, and it is the same reasoning that excludes the launch patch notes). The Shaman › Farseer Natural Harmony fix is likewise already carried by the 08-28 entry. THE ENTIRE Player versus Player SECTION TRIAGES OUT (roughly half the post: Devourer DH, Havoc, Druid/Feral/Restoration, Devastation and Preservation Evoker, Beast Mastery, all three Mage specs, Discipline, Rogue/Assassination, Elemental and Enhancement Shaman, Arms and Fury) — PvP-only tuning is out of scope for this tracker's PvE brackets, which is the standing rule, not an omission. ONE LINE IS DISCLOSED RATHER THAN LOGGED: “Resolved an issue where Protection Paladin's Mastery did not function correctly against Caustic Deluge or Eternal Venom” names a spec but sits under Dungeons and Raids › The Venomous Abyss › The Twin Fangs, not under a Classes spec heading — by the heading-structure discipline this feed uses it is an ENCOUNTER line, so it is recorded in the non-class summary below rather than minted as a Protection Paladin change.",
