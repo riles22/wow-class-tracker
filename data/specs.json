@@ -283,9 +283,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 137886,
+        "value": 249969,
         "unit": "DPS",
-        "asOf": "2026-08-08"
+        "asOf": "2026-09-03"
       },
       {
         "source": "warcraftlogs",
@@ -387,16 +387,16 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-08",
+      "asOf": "2026-09-02",
       "targets": {
-        "1": 133933,
-        "2": 176457,
-        "3": 215985,
-        "5": 294424,
-        "8": 391980,
-        "15": 594123
+        "1": 242521,
+        "2": 364214,
+        "3": 479483,
+        "5": 708576,
+        "8": 978009,
+        "15": 1540677
       },
-      "tier": "MID1"
+      "tier": "MID2"
     },
     "survivability": {
       "tier": "S",
@@ -549,9 +549,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 135169,
+        "value": 240106,
         "unit": "DPS",
-        "asOf": "2026-08-08"
+        "asOf": "2026-09-03"
       },
       {
         "source": "warcraftlogs",
@@ -653,16 +653,16 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-08",
+      "asOf": "2026-09-02",
       "targets": {
-        "1": 128228,
-        "2": 174873,
-        "3": 215371,
-        "5": 290513,
-        "8": 413523,
-        "15": 606949
+        "1": 231096,
+        "2": 329572,
+        "3": 390450,
+        "5": 519853,
+        "8": 758829,
+        "15": 1107047
       },
-      "tier": "MID1"
+      "tier": "MID2"
     },
     "survivability": {
       "tier": "S",
@@ -812,9 +812,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 116571,
+        "value": 250322,
         "unit": "DPS",
-        "asOf": "2026-08-08"
+        "asOf": "2026-09-03"
       },
       {
         "source": "warcraftlogs",
@@ -916,16 +916,16 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-08",
+      "asOf": "2026-09-02",
       "targets": {
-        "1": 119957,
-        "2": 155982,
-        "3": 190288,
-        "5": 249528,
-        "8": 307451,
-        "15": 396292
+        "1": 236148,
+        "2": 305627,
+        "3": 364643,
+        "5": 472155,
+        "8": 586481,
+        "15": 755064
       },
-      "tier": "MID1"
+      "tier": "MID2"
     },
     "survivability": {
       "tier": "A",
@@ -1079,9 +1079,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 118341,
+        "value": 263483,
         "unit": "DPS",
-        "asOf": "2026-08-08"
+        "asOf": "2026-09-03"
       },
       {
         "source": "warcraftlogs",
@@ -1183,16 +1183,16 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-08",
+      "asOf": "2026-09-02",
       "targets": {
-        "1": 103948,
-        "2": 150867,
-        "3": 197325,
-        "5": 241011,
-        "8": 339646,
-        "15": 541227
+        "1": 251160,
+        "2": 318120,
+        "3": 402038,
+        "5": 476527,
+        "8": 649148,
+        "15": 936412
       },
-      "tier": "MID1"
+      "tier": "MID2"
     },
     "survivability": {
       "tier": "A",
@@ -1504,14 +1504,6 @@
         "era": "ptr"
       },
       {
-        "source": "simulationcraft",
-        "bracket": "raid",
-        "name": "SimC nightly Patchwerk DPS",
-        "value": 116061,
-        "unit": "DPS",
-        "asOf": "2026-08-08"
-      },
-      {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (12.1 PTR M+ testing)",
@@ -1609,19 +1601,6 @@
         "asOf": "2026-08-24"
       }
     ],
-    "fightProfile": {
-      "source": "bloodmallet",
-      "asOf": "2026-07-08",
-      "targets": {
-        "1": 116028,
-        "2": 140667,
-        "3": 186220,
-        "5": 273645,
-        "8": 388380,
-        "15": 619195
-      },
-      "tier": "MID1"
-    },
     "survivability": {
       "tier": "B",
       "source": "archon",
@@ -1756,14 +1735,6 @@
         "asOf": "2026-09-03"
       },
       {
-        "source": "simulationcraft",
-        "bracket": "raid",
-        "name": "SimC nightly Patchwerk DPS",
-        "value": 133611,
-        "unit": "DPS",
-        "asOf": "2026-08-08"
-      },
-      {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (12.1 PTR M+ testing)",
@@ -1861,19 +1832,6 @@
         "asOf": "2026-08-24"
       }
     ],
-    "fightProfile": {
-      "source": "bloodmallet",
-      "asOf": "2026-07-08",
-      "targets": {
-        "1": 133603,
-        "2": 158096,
-        "3": 185434,
-        "5": 225208,
-        "8": 242882,
-        "15": 267948
-      },
-      "tier": "MID1"
-    },
     "survivability": {
       "tier": "C",
       "source": "archon",
@@ -2585,14 +2543,6 @@
         "era": "ptr"
       },
       {
-        "source": "simulationcraft",
-        "bracket": "raid",
-        "name": "SimC nightly Patchwerk DPS",
-        "value": 115120,
-        "unit": "DPS",
-        "asOf": "2026-08-08"
-      },
-      {
         "source": "warcraftlogs",
         "bracket": "mplus",
         "name": "Median rDPS (12.1 PTR M+ testing)",
@@ -2690,19 +2640,6 @@
         "asOf": "2026-08-24"
       }
     ],
-    "fightProfile": {
-      "source": "bloodmallet",
-      "asOf": "2026-07-08",
-      "targets": {
-        "1": 114487,
-        "2": 180694,
-        "3": 239353,
-        "5": 341186,
-        "8": 454051,
-        "15": 711801
-      },
-      "tier": "MID1"
-    },
     "survivability": {
       "tier": "B",
       "source": "archon",
@@ -3036,9 +2973,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 121537,
+        "value": 251185,
         "unit": "DPS",
-        "asOf": "2026-08-08"
+        "asOf": "2026-09-03"
       },
       {
         "source": "warcraftlogs",
@@ -3140,16 +3077,16 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-08",
+      "asOf": "2026-09-02",
       "targets": {
-        "1": 121362,
-        "2": 143924,
-        "3": 165950,
-        "5": 207747,
-        "8": 243761,
-        "15": 316702
+        "1": 245597,
+        "2": 282866,
+        "3": 315123,
+        "5": 387595,
+        "8": 458574,
+        "15": 602359
       },
-      "tier": "MID1"
+      "tier": "MID2"
     },
     "survivability": {
       "tier": "B",
@@ -3302,9 +3239,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 128040,
+        "value": 239683,
         "unit": "DPS",
-        "asOf": "2026-08-08"
+        "asOf": "2026-09-03"
       },
       {
         "source": "warcraftlogs",
@@ -3397,16 +3334,16 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-08",
+      "asOf": "2026-09-02",
       "targets": {
-        "1": 128015,
-        "2": 163911,
-        "3": 178868,
-        "5": 208618,
-        "8": 253464,
-        "15": 334895
+        "1": 230628,
+        "2": 287535,
+        "3": 332746,
+        "5": 421772,
+        "8": 522970,
+        "15": 658527
       },
-      "tier": "MID1"
+      "tier": "MID2"
     },
     "survivability": {
       "tier": "A",
@@ -3557,9 +3494,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 118762,
+        "value": 247640,
         "unit": "DPS",
-        "asOf": "2026-08-08"
+        "asOf": "2026-09-03"
       },
       {
         "source": "warcraftlogs",
@@ -3651,16 +3588,16 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-08",
+      "asOf": "2026-09-02",
       "targets": {
-        "1": 118350,
-        "2": 185852,
-        "3": 259620,
-        "5": 349384,
-        "8": 432391,
-        "15": 529061
+        "1": 239844,
+        "2": 311683,
+        "3": 375529,
+        "5": 500474,
+        "8": 647695,
+        "15": 812259
       },
-      "tier": "MID1"
+      "tier": "MID2"
     },
     "survivability": {
       "tier": "B",
@@ -3812,9 +3749,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 117551,
+        "value": 217077,
         "unit": "DPS",
-        "asOf": "2026-08-08"
+        "asOf": "2026-09-03"
       },
       {
         "source": "warcraftlogs",
@@ -3916,16 +3853,16 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-08",
+      "asOf": "2026-09-02",
       "targets": {
-        "1": 113188,
-        "2": 176897,
-        "3": 227826,
-        "5": 326961,
-        "8": 413558,
-        "15": 582208
+        "1": 194622,
+        "2": 277360,
+        "3": 350730,
+        "5": 495283,
+        "8": 593572,
+        "15": 751324
       },
-      "tier": "MID1"
+      "tier": "MID2"
     },
     "survivability": {
       "tier": "A",
@@ -4048,9 +3985,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 120540,
+        "value": 226926,
         "unit": "DPS",
-        "asOf": "2026-08-08"
+        "asOf": "2026-09-03"
       },
       {
         "source": "warcraftlogs",
@@ -4152,16 +4089,16 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-08",
+      "asOf": "2026-09-02",
       "targets": {
-        "1": 114776,
-        "2": 165657,
-        "3": 216361,
-        "5": 272349,
-        "8": 381145,
-        "15": 536341
+        "1": 216409,
+        "2": 282890,
+        "3": 390935,
+        "5": 613799,
+        "8": 947636,
+        "15": 1286503
       },
-      "tier": "MID1"
+      "tier": "MID2"
     },
     "survivability": {
       "tier": "S",
@@ -4312,9 +4249,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 121559,
+        "value": 222902,
         "unit": "DPS",
-        "asOf": "2026-08-08"
+        "asOf": "2026-09-03"
       },
       {
         "source": "warcraftlogs",
@@ -4416,16 +4353,16 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-08",
+      "asOf": "2026-09-02",
       "targets": {
-        "1": 116986,
-        "2": 145476,
-        "3": 174003,
-        "5": 231587,
-        "8": 283861,
-        "15": 337171
+        "1": 211982,
+        "2": 262130,
+        "3": 310709,
+        "5": 410636,
+        "8": 518539,
+        "15": 618108
       },
-      "tier": "MID1"
+      "tier": "MID2"
     },
     "survivability": {
       "tier": "A",
@@ -4928,9 +4865,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 118281,
+        "value": 246601,
         "unit": "DPS",
-        "asOf": "2026-08-08"
+        "asOf": "2026-09-03"
       },
       {
         "source": "warcraftlogs",
@@ -5032,16 +4969,16 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-08",
+      "asOf": "2026-09-02",
       "targets": {
-        "1": 118210,
-        "2": 167690,
-        "3": 224655,
-        "5": 341358,
-        "8": 438762,
-        "15": 581200
+        "1": 237146,
+        "2": 320286,
+        "3": 426190,
+        "5": 638038,
+        "8": 798475,
+        "15": 1047645
       },
-      "tier": "MID1"
+      "tier": "MID2"
     },
     "survivability": {
       "tier": "A",
@@ -5550,9 +5487,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 112101,
+        "value": 231626,
         "unit": "DPS",
-        "asOf": "2026-08-08"
+        "asOf": "2026-09-03"
       },
       {
         "source": "warcraftlogs",
@@ -5654,16 +5591,16 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-08",
+      "asOf": "2026-09-03",
       "targets": {
-        "1": 111859,
-        "2": 139719,
-        "3": 175635,
-        "5": 256668,
-        "8": 352541,
-        "15": 482545
+        "1": 219987,
+        "2": 319162,
+        "3": 408317,
+        "5": 563703,
+        "8": 722399,
+        "15": 1048461
       },
-      "tier": "MID1"
+      "tier": "MID2"
     },
     "survivability": {
       "tier": "A",
@@ -6177,9 +6114,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 118095,
+        "value": 216602,
         "unit": "DPS",
-        "asOf": "2026-08-08"
+        "asOf": "2026-09-03"
       },
       {
         "source": "warcraftlogs",
@@ -6281,16 +6218,16 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-08",
+      "asOf": "2026-09-02",
       "targets": {
-        "1": 117612,
-        "2": 168841,
-        "3": 219337,
-        "5": 319950,
-        "8": 449661,
-        "15": 670087
+        "1": 203150,
+        "2": 300812,
+        "3": 398841,
+        "5": 594811,
+        "8": 839551,
+        "15": 1295553
       },
-      "tier": "MID1"
+      "tier": "MID2"
     },
     "survivability": {
       "tier": "B",
@@ -6434,9 +6371,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 107689,
+        "value": 238558,
         "unit": "DPS",
-        "asOf": "2026-08-08"
+        "asOf": "2026-09-03"
       },
       {
         "source": "warcraftlogs",
@@ -6538,16 +6475,16 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-08",
+      "asOf": "2026-09-02",
       "targets": {
-        "1": 107681,
-        "2": 120092,
-        "3": 136953,
-        "5": 170921,
-        "8": 197364,
-        "15": 185256
+        "1": 229166,
+        "2": 262998,
+        "3": 315712,
+        "5": 389386,
+        "8": 475834,
+        "15": 488120
       },
-      "tier": "MID1"
+      "tier": "MID2"
     },
     "survivability": {
       "tier": "B",
@@ -6691,9 +6628,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 128160,
+        "value": 256670,
         "unit": "DPS",
-        "asOf": "2026-08-08"
+        "asOf": "2026-09-03"
       },
       {
         "source": "warcraftlogs",
@@ -6795,16 +6732,16 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-08",
+      "asOf": "2026-09-02",
       "targets": {
-        "1": 127039,
-        "2": 160702,
-        "3": 205319,
-        "5": 296987,
-        "8": 328074,
-        "15": 355006
+        "1": 247517,
+        "2": 315701,
+        "3": 394135,
+        "5": 579002,
+        "8": 634166,
+        "15": 641267
       },
-      "tier": "MID1"
+      "tier": "MID2"
     },
     "survivability": {
       "tier": "A",
@@ -6959,9 +6896,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 123493,
+        "value": 268243,
         "unit": "DPS",
-        "asOf": "2026-08-08"
+        "asOf": "2026-09-03"
       },
       {
         "source": "warcraftlogs",
@@ -7063,16 +7000,16 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-08",
+      "asOf": "2026-09-02",
       "targets": {
-        "1": 123476,
-        "2": 152387,
-        "3": 195353,
-        "5": 309894,
-        "8": 472474,
-        "15": 591342
+        "1": 259811,
+        "2": 319149,
+        "3": 422490,
+        "5": 623634,
+        "8": 897106,
+        "15": 1223189
       },
-      "tier": "MID1"
+      "tier": "MID2"
     },
     "survivability": {
       "tier": "A",
@@ -7221,9 +7158,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 126815,
+        "value": 249825,
         "unit": "DPS",
-        "asOf": "2026-08-08"
+        "asOf": "2026-09-03"
       },
       {
         "source": "warcraftlogs",
@@ -7325,16 +7262,16 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-15",
+      "asOf": "2026-09-02",
       "targets": {
-        "1": 129897,
-        "2": 151384,
-        "3": 213431,
-        "5": 456392,
-        "8": 576380,
-        "15": 801385
+        "1": 244244,
+        "2": 279721,
+        "3": 373922,
+        "5": 597313,
+        "8": 726776,
+        "15": 1010457
       },
-      "tier": "MID1"
+      "tier": "MID2"
     },
     "survivability": {
       "tier": "A",
@@ -7487,9 +7424,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 114853,
+        "value": 234488,
         "unit": "DPS",
-        "asOf": "2026-08-08"
+        "asOf": "2026-09-03"
       },
       {
         "source": "warcraftlogs",
@@ -7591,16 +7528,16 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-08",
+      "asOf": "2026-09-02",
       "targets": {
-        "1": 112715,
-        "2": 164447,
-        "3": 221840,
-        "5": 322874,
-        "8": 419320,
-        "15": 640905
+        "1": 220824,
+        "2": 333334,
+        "3": 450378,
+        "5": 707760,
+        "8": 843443,
+        "15": 1056466
       },
-      "tier": "MID1"
+      "tier": "MID2"
     },
     "survivability": {
       "tier": "A",
@@ -7935,9 +7872,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 114320,
+        "value": 233410,
         "unit": "DPS",
-        "asOf": "2026-08-08"
+        "asOf": "2026-09-03"
       },
       {
         "source": "warcraftlogs",
@@ -8039,16 +7976,16 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-08",
+      "asOf": "2026-09-02",
       "targets": {
-        "1": 114127,
-        "2": 153940,
-        "3": 188763,
-        "5": 254942,
-        "8": 329947,
-        "15": 455724
+        "1": 223295,
+        "2": 294818,
+        "3": 354243,
+        "5": 472158,
+        "8": 648573,
+        "15": 890121
       },
-      "tier": "MID1"
+      "tier": "MID2"
     },
     "survivability": {
       "tier": "C",
@@ -8184,9 +8121,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 115692,
+        "value": 228895,
         "unit": "DPS",
-        "asOf": "2026-08-08"
+        "asOf": "2026-09-03"
       },
       {
         "source": "warcraftlogs",
@@ -8288,16 +8225,16 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-08",
+      "asOf": "2026-09-03",
       "targets": {
-        "1": 118513,
-        "2": 205765,
-        "3": 261052,
-        "5": 371817,
-        "8": 537648,
-        "15": 785370
+        "1": 222321,
+        "2": 279173,
+        "3": 335792,
+        "5": 449332,
+        "8": 619520,
+        "15": 905740
       },
-      "tier": "MID1"
+      "tier": "MID2"
     },
     "survivability": {
       "tier": "B",
@@ -8445,9 +8382,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 114654,
+        "value": 228847,
         "unit": "DPS",
-        "asOf": "2026-08-08"
+        "asOf": "2026-09-03"
       },
       {
         "source": "warcraftlogs",
@@ -8549,16 +8486,16 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-08",
+      "asOf": "2026-09-02",
       "targets": {
-        "1": 114984,
-        "2": 147682,
-        "3": 181618,
-        "5": 241090,
-        "8": 350665,
-        "15": 562207
+        "1": 220827,
+        "2": 259796,
+        "3": 298069,
+        "5": 420184,
+        "8": 643087,
+        "15": 1195923
       },
-      "tier": "MID1"
+      "tier": "MID2"
     },
     "survivability": {
       "tier": "B",
@@ -8718,9 +8655,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 106746,
+        "value": 240709,
         "unit": "DPS",
-        "asOf": "2026-08-08"
+        "asOf": "2026-09-03"
       },
       {
         "source": "warcraftlogs",
@@ -8822,16 +8759,16 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-08",
+      "asOf": "2026-09-02",
       "targets": {
-        "1": 112641,
-        "2": 156775,
-        "3": 152562,
-        "5": 192895,
-        "8": 241038,
-        "15": 303660
+        "1": 239886,
+        "2": 346031,
+        "3": 406820,
+        "5": 532825,
+        "8": 690357,
+        "15": 872025
       },
-      "tier": "MID1"
+      "tier": "MID2"
     },
     "survivability": {
       "tier": "B",
@@ -8991,9 +8928,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 109256,
+        "value": 256921,
         "unit": "DPS",
-        "asOf": "2026-08-08"
+        "asOf": "2026-09-03"
       },
       {
         "source": "warcraftlogs",
@@ -9095,16 +9032,16 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-07-08",
+      "asOf": "2026-09-02",
       "targets": {
-        "1": 119613,
-        "2": 138632,
-        "3": 161144,
-        "5": 206500,
-        "8": 273029,
-        "15": 345336
+        "1": 256763,
+        "2": 302276,
+        "3": 338497,
+        "5": 410775,
+        "8": 519195,
+        "15": 633468
       },
-      "tier": "MID1"
+      "tier": "MID2"
     },
     "survivability": {
       "tier": "B",

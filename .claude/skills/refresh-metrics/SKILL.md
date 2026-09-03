@@ -222,19 +222,26 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
   - The raid endpoint (`/rankings/midnight/raid/all-bosses/5.json`) is live, but its
     `lowerBound` is **DPS throughput** (~180k), a different quantity on a different scale —
     do not merge it under the M+ rating name.
-- **SimulationCraft nightly** (`SimC nightly Patchwerk DPS`, 26 DPS specs):
-  - **Transport:** prefer the plain-text `MID1_Raid.txt` `DPS Ranking:` block (~1.5 MB) when
+- **SimulationCraft nightly** (`SimC nightly Patchwerk DPS`; **23** DPS specs since the 2026-09-03
+  wholesale MID2 adoption — Balance, Feral, Augmentation and Devastation have no MID2 profile
+  upstream yet and were DROPPED, not held; each joins the pool on the night it appears):
+  - **The report NAME follows the sim tier.** `MID1_Raid` through Season 1; **`MID2_Raid`** since
+    the 2026-09-03 adoption (Riley, value_move_ack in a reviewed local run). `MID1_Raid.txt` has
+    been a 272-byte in-progress stub carrying the SAME build header as MID2 since 2026-09-01 — it
+    is not a fallback and must not be read as one.
+  - **Transport:** prefer the plain-text `MID2_Raid.txt` `DPS Ranking:` block (~1.4 MB) when
     it HAS one — it is sometimes a live in-progress log of a newer run with no ranking block,
-    in which case parse `MID1_Raid.html`. In the HTML take the `"data":[…]` array **enclosing
-    the FIRST big-value `"name":"MID1_…","y":…` hit**; a fixed byte window after `"series"`, or
+    in which case parse `MID2_Raid.html`. In the HTML take the `"data":[…]` array **enclosing
+    the FIRST big-value `"name":"MID2_…","y":…` hit**; a fixed byte window after `"series"`, or
     a max across all blocks, reads the later burst/DTPS charts — ~2.2–2.5× inflated (Frost DK
     137,711 → 296,861), which cost a merge-and-revert on 2026-07-26 and was caught only by a
-    pre-merge diff. Skip the leading `Raid` aggregate row; 49 profiles → best hero-variant per
-    DPS spec = **26** (tanks/healers excluded, Augmentation absent by design).
-  - **Map profile names by LONGEST-PREFIX, and allow a hyphen.** `MID1_Death_Knight_Frost_Rider`
-    has underscores in both class and spec, so a `MID1_(w+)_(w+)_(w+)` regex maps nothing at
+    pre-merge diff. Skip the leading `Raid` aggregate row; 43 profiles (2026-09-03) → best
+    hero-variant per DPS spec = **23** (tanks/healers excluded; Augmentation absent by design,
+    Balance/Feral/Devastation absent upstream as of the adoption).
+  - **Map profile names by LONGEST-PREFIX, and allow a hyphen.** `MID2_Death_Knight_Frost_Rider`
+    has underscores in both class and spec, so a `MID2_(w+)_(w+)_(w+)` regex maps nothing at
     all — a silent zero-row parse on a healthy fetch. A name class without `-` drops
-    `MID1_Demon_Hunter_Havoc_Fel-Scarred` entirely and reads Devourer off its lesser build
+    `MID2_Demon_Hunter_Havoc_Fel-Scarred` entirely and reads Devourer off its lesser build
     (115175 instead of 118341), which looks exactly like a real sim move.
   - **Era-verify off the header build string, not the visible version.** The "12.3.0" on the
     HTML report is the **Highcharts JS** version, not the WoW build; the real header reads e.g.
@@ -280,6 +287,13 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
     purely for not having been re-simmed. **Adopt a new tier wholesale across every spec of
     the source, or not at all** — a partial upstream roster means you merge nothing and record
     the row `partial`.
+    **DONE 2026-09-03: MID2 adopted wholesale** in a reviewed local run with the human
+    `value_move_ack` — 23 charts merged (all `tier = MID2`, ptr `"0"`, per-chart timestamps
+    09-02/09-03), and the three MID1-only stored profiles (Balance, Feral, Devastation) DROPPED
+    so the pool stays uniform (26 -> 23). The stored pool IS MID2 now: a normal night merges
+    whatever charts are current (their tier matches), records the specs still returning the
+    error body, and needs no ack; a returning spec joins on its night. The row floor (15) and
+    row-drop gate (25%) still bound every merge.
   - Why this is written down (2026-08-08): for a month every run stamped `asOf` with the RUN
     date while the sim values sat byte-identical. That defeats the staleness alarm *precisely* —
     `required-sources.json` measures bloodmallet via `date.type "fightProfiles"`, i.e. off
@@ -299,8 +313,10 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
     four fight styles and four chart types, while control specs succeeded interleaved in the
     same minutes — the endpoint was demonstrably healthy throughout. Retry before concluding
     absence; then record the persistent set in the manifest row rather than re-litigating it
-    every night. Either way the answer is the same: **merge nothing**, because the tier gate
-    forbids a partial pool and the row-drop floor (19 of 26) forbids adopting only what exists.
+    every night. While the stored pool was MID1 the answer was the same either way — **merge
+    nothing** — because the tier gate forbade a partial MID2 pool. Since the 2026-09-03 wholesale
+    adoption the pool is MID2, so the erroring specs are simply absent that night and the charts
+    that exist merge; only the row floor (15) and row-drop gate (25%) still bound the merge.
 
 ## Gotchas
 

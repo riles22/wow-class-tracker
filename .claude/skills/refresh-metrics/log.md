@@ -17,6 +17,52 @@ by parsed DATE, never by position. Do not cite lines of this file by NUMBER from
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
 
+## 2026-09-03 (local, interactive) — MID2 ADOPTED WHOLESALE: Bloodmallet 23 charts + SimC MID2_Raid 23 rows merged under Riley's value_move_ack; the three MID1-only rows dropped; both standing reds CLOSED
+
+- **Decision and gate.** Riley chose adoption from the session's health check (the 09-02 heartbeat
+  had the two sim rows at 57 and 26 days). `check-refresh --manifest --value-ack="…"` waived
+  **151 findings** (138 Bloodmallet target rows + the family medians + 23 SimC rows) and then passed
+  outright — movement 0, row-drop inside limits, no other line — so the ack was the only thing
+  holding this. The manifest was NOT rewritten (partial run: two requirements, not a full
+  refresh); its two `partial` rows describe last night honestly and the next nightly rewrites them.
+- **Bloodmallet — 23 of 27 DPS charts merged, tier MID2 on every one** (read off
+  `simc_settings.tier`, `ptr` the string `"0"`, per-chart `timestamp` date as `asOf`: 21 at
+  2026-09-02, Retribution and Demonology at 2026-09-03). Targets kept at the canonical
+  1/2/3/5/8/15 (the chart also publishes 4/6/9). **Balance, Feral, Augmentation, Devastation** still
+  return the 76-byte error body on 3/3 retries each — the same four the nightly has recorded since
+  08-31. The stored MID1 profiles for Balance, Feral and Devastation (Augmentation never had one)
+  were **DROPPED, not held**: the uniformity guard rejected the merge with them present (verified —
+  apply-metrics refused "MID2 x23 | MID1 x3"), so the order is drop first, merge second.
+  26 -> 23 rows (11.5%). Measured against the stored MID1: 121 of 138 overlapping target rows moved
+  >60%, MID2/MID1 ratio min 1.152, median 1.908, max 2.872 — identical to the 09-03 nightly's own
+  numbers, which is the parse check.
+- **SimC — `MID2_Raid.txt` (1,361,242 bytes, Last-Modified 2026-09-03T07:30:19Z), header
+  `12.1.0.69587 Live (hotfix 2026-09-02/69587, git build HEAD f5b50a3f97)`.** `DPS Ranking:` block:
+  43 profiles; longest-prefix mapping with the hyphen allowed reaches **23 of 27 DPS specs** (best
+  hero-variant each); the 7 unmapped names are all tanks (Protection ×3, Brewmaster, Vengeance,
+  Blood ×2) — the expected residue. Same four specs absent as Bloodmallet. Stored MID1 rows for
+  Balance/Feral/Devastation dropped so the `SimC nightly Patchwerk DPS` rank pool sits on one side of
+  `PHASES.liveSince` (the season-uniform guard fired on the mixed state, as designed). 26 -> 23 rows.
+  `asOf` = the report's Last-Modified date, 2026-09-03. All 23 overlap rows moved >60% (1.78–2.35x).
+- **Registry.** `sources.json`: bloodmallet author "(tier MID2)", both pages snapshot 2026-09-03 and
+  the SimC-report page re-pointed at `MID2_Raid.html`; simulationcraft's report page label/url ->
+  MID2_Raid, snapshot 2026-09-03, methodology/notes restated. **The report NAME follows the sim
+  tier** — `MID1_Raid.txt` has been a 272-byte in-progress stub with the same build header since
+  09-01 and is not a fallback (SKILL.md now says so in the transport bullet).
+- **Contract + heartbeat (reviewed edits, separate commit).** Both labels in `required-sources.json`
+  restated: the 08-21/08-28 OWNER-ACCEPTED STANDING REDs are CLOSED, and a night where the four
+  missing specs still error simply merges the charts that exist (tier matches; row floor 15 and
+  maxRowDropPct still bound it). Also `FLOOR_RESTORE_DUE` 09-01 -> **10-01** (exported; the test
+  derives its "after" date from it): nine nightlies landed 5–7 of 21 with 13 requirements
+  structurally unable to succeed, so restoring 7 would have redded six of nine nights.
+- **Tests.** Two fixtures hard-coded the pool's tier and became no-ops/contradictions the moment
+  the pool moved: `validate.test.mjs` (partial-mix and wholesale cases) and `apply-metrics.test.mjs`
+  (the Outlaw profile row). Both now DERIVE the tier from the stored pool. 377 pass / 0 fail / 1
+  permanent skip, UI invariants ran.
+- **Trap for the next reader:** the sim tier will roll again (MID3 at 12.2). Everything above is
+  keyed on reading the tier off the chart; the only literals left are the report URL in
+  `sources.json` and the SKILL.md transport text — update both in the same reviewed edit.
+
 ## 2026-09-03 (nightly) — Murlok re-cut after five days (40 rows), WoWMeta's manifest finally caught up, Mythicstats rolled to period 1079; Bloodmallet and SimC still HELD
 
 - **Murlok — MERGED, 40 rows, and it is the first re-cut since 2026-08-28.** Plain browser-UA GET

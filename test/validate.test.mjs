@@ -917,8 +917,13 @@ test("sim-tier guard: a partially re-simmed fightProfile pool fails validation",
   const broken = structuredClone(data);
   const dps = broken.specs.filter(s => s.role === "DPS" && s.fightProfile?.source === "bloodmallet");
   assert.ok(dps.length >= 4, "fixture needs several bloodmallet profiles to mix");
-  // Re-sim only some of them, exactly as adopting a partial upstream roster would.
-  for (const s of dps.slice(0, 2)) s.fightProfile.tier = "MID2";
+  // Re-sim only some of them, exactly as adopting a partial upstream roster would. The
+  // "next" tier is DERIVED from whatever the stored pool holds (MID1 until 2026-09-03, MID2
+  // since the wholesale adoption) so this fixture keeps mixing as the seasons roll — a
+  // hard-coded "MID2" became a silent no-op the day the pool itself moved to MID2.
+  const current = dps[0].fightProfile.tier ?? "MID1";
+  const next = current === "MID2" ? "MID1" : "MID2";
+  for (const s of dps.slice(0, 2)) s.fightProfile.tier = next;
   const errors = validateData(broken);
   assert.ok(
     errors.some(e => e.includes("mixes 2 sim tiers") && e.includes("bloodmallet")),
@@ -928,12 +933,14 @@ test("sim-tier guard: a partially re-simmed fightProfile pool fails validation",
 
 test("sim-tier guard: a WHOLESALE tier adoption passes, and so does the untiered status quo", async () => {
   const data = await loadData(ROOT);
-  // Status quo — no profile carries a tier yet.
+  // Status quo — the committed pool, whatever single tier it carries.
   assert.deepEqual(validateData(structuredClone(data)), []);
-  // Wholesale: every bloodmallet profile moves to the new tier together.
+  // Wholesale: every bloodmallet profile moves to the new tier together (derived, see above).
   const adopted = structuredClone(data);
+  const current = adopted.specs.find(s => s.fightProfile?.source === "bloodmallet")?.fightProfile.tier ?? "MID1";
+  const next = current === "MID2" ? "MID1" : "MID2";
   for (const s of adopted.specs) {
-    if (s.fightProfile?.source === "bloodmallet") s.fightProfile.tier = "MID2";
+    if (s.fightProfile?.source === "bloodmallet") s.fightProfile.tier = next;
   }
   assert.deepEqual(validateData(adopted), []);
 });

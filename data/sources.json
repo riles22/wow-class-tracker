@@ -378,7 +378,7 @@
     "id": "bloodmallet",
     "name": "Bloodmallet (SimC)",
     "kind": "metrics",
-    "author": "Bloodmallet / SimulationCraft (tier MID1)",
+    "author": "Bloodmallet / SimulationCraft (tier MID2)",
     "methodology": "SimulationCraft per-spec simulations, refreshed ~daily. Target-count scaling (talent_target_scaling chart: DPS at 1/2/3/…/15 targets, best build per count) powers the fight-type profiles for DPS specs. Sim DPS is point-in-time and build-dependent — display as numbers, never letters. JSON API: bloodmallet.com/chart/get/{chart}/{fight_style}/{snake_case_class}/{spec}.",
     "pages": [
       {
@@ -386,14 +386,14 @@
         "role": "DPS",
         "label": "Target-count sims",
         "url": "https://bloodmallet.com/",
-        "snapshot": "2026-08-18"
+        "snapshot": "2026-09-03"
       },
       {
         "bracket": "raid",
         "role": "DPS",
         "label": "Official SimC nightly",
-        "url": "https://www.simulationcraft.org/reports/MID1_Raid.html",
-        "snapshot": "2026-08-18"
+        "url": "https://www.simulationcraft.org/reports/MID2_Raid.html",
+        "snapshot": "2026-09-03"
       }
     ],
     "summary": "SimulationCraft damage against a fixed target dummy at several target counts. Theoretical output under perfect play with pre-set gear — a shape, not a prediction of your parse."
@@ -470,14 +470,14 @@
     "kind": "metrics",
     "url": "https://www.simulationcraft.org/",
     "author": "SimC project nightly (engine-official)",
-    "methodology": "Official nightly MID1_Raid Patchwerk report: one fixed high-ilvl profile per spec/hero-variant, iterations=7500 — we ingest the best variant per DPS spec as 'SimC nightly Patchwerk DPS'. Pure single-target, fixed gear: a sim baseline, not a rankings verdict (the project itself disclaims class comparisons — keep it a number, never a tier).",
+    "methodology": "Official nightly MID2_Raid Patchwerk report (the report name follows the sim tier: MID1_Raid through Season 1, MID2_Raid since the 2026-09-03 wholesale adoption): one fixed high-ilvl profile per spec/hero-variant, iterations=7500 — we ingest the best variant per DPS spec as 'SimC nightly Patchwerk DPS'. Pure single-target, fixed gear: a sim baseline, not a rankings verdict (the project itself disclaims class comparisons — keep it a number, never a tier).",
     "pages": [
       {
         "bracket": "raid",
         "role": "DPS",
-        "label": "MID1_Raid nightly report",
-        "url": "https://www.simulationcraft.org/reports/MID1_Raid.html",
-        "snapshot": "2026-08-18"
+        "label": "MID2_Raid nightly report",
+        "url": "https://www.simulationcraft.org/reports/MID2_Raid.html",
+        "snapshot": "2026-09-03"
       },
       {
         "bracket": null,
@@ -487,7 +487,7 @@
         "snapshot": "2026-08-10"
       }
     ],
-    "notes": "Parse the .txt variant (plain text ranking of ~49 MID1_{Class}_{Spec}_{HeroVariant} profiles). Filter to DPS-role roster specs (tanks appear at low DPS; healers absent; Augmentation has no profile — unsimmable support spec).",
+    "notes": "Parse the .txt variant (plain text ranking of ~43 MID2_{Class}_{Spec}_{HeroVariant} profiles). Filter to DPS-role roster specs (tanks appear at low DPS; healers absent; Augmentation has no profile — unsimmable support spec).",
     "summary": "The SimulationCraft project's own nightly raid report. Theoretical damage under a standard profile — the same caveat as any sim: perfect play, fixed gear."
   },
   {
