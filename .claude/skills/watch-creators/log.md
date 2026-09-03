@@ -17,6 +17,47 @@ by parsed DATE, never by position. Do not cite lines of this file by NUMBER from
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
 
+## 2026-09-03 (local, scheduled) — caption 429 on its TWELFTH day; queue held at 3, nothing distilled — but the Supadata lane drained tonight's nightly, so the queue is being served by its designed path
+
+**The residential caption lane is still down — day 12 since 2026-08-23.** Nothing distilled, no
+data file changed by this skill, `pending-transcripts.json` untouched (3 before, 3 after).
+
+- **The probe was the cheap one the 08-24 addendum prescribes**, two requests total, no retry
+  ladder, stopped on the first 429: `4z49EhVeP7I` (izen, "12.1 Season 2 | Mythic+ Best Specs &
+  Meta") with the documented `player_client=android` recipe at `--sleep-requests 1.5` → **HTTP
+  429**; one confirmation on `Kq3saXcBt10` (Dalaran Gaming) at `--sleep-requests 3` to establish
+  the block is still ENDPOINT-wide rather than per-video → also **429**.
+- **Same shape as every previous day, re-derived rather than assumed**: the watch page, the
+  android player API and format resolution all succeed — yt-dlp resolves format 18 and writes the
+  subtitle target path — and only the `timedtext` download 429s. Not the datacenter bot wall; that
+  message never appeared. yt-dlp is at the `requirements.txt` pin (2026.07.04); nothing was
+  installed or upgraded, and per the 08-24 elimination chain no client-side change is the fix.
+- **The queue turned over completely since 09-02, which is the thing worth noticing.** The three
+  videos this run probed are NOT the three the 09-02 local run left behind. Tonight's nightly
+  (`b60bde2`) read its Supadata drain successfully and distilled **5 takes + 10 metaNotes**,
+  clearing `nuUVv1WwfLM` / `acRd5yk-3N0` / `S2nGA4gww8I`, then queued three fresh ones
+  (`4z49EhVeP7I` izen, `yD9mjG-ajUU` MadSkillzzTV, `Kq3saXcBt10` Dalaran Gaming). So the residential
+  429 is currently costing **latency, not coverage** — the paid API lane is the designed path for
+  this queue and it is working. That materially weakens the urgency of the owner decision below
+  without removing it: the Supadata free tier is 100 requests/MONTH, so the nightly lane is a
+  budget, not a substitute.
+- **The AUTHENTICATED fallback was again not usable by an unattended run**, and was not worked
+  around. Riley's 2026-08-24 cookies.txt exports are still on disk and SKILL.md sanctions
+  `--cookies <file>` for exactly this bounded queue-only case, but moving a logged-in Google
+  session around is the wrong thing for a scheduled run with nobody at the keyboard, and the
+  browser-replay variant needs Riley present by construction. **Still an owner decision, unchanged
+  in shape from 08-24**: accept narrower coverage behind the nightly's keyword filter, raise the
+  Supadata tier, or wait for the flag to decay. Twelve days is far past the 24-72h decay the
+  diagnosis expected, so "wait" continues to look like the weakest option.
+- **All three stay in `videos[]` and were deliberately NOT retired.** A transport failure is a
+  transport dismissal and stays UNSEEN; filing them in `seen[]` would silently abandon three
+  in-scope videos, one of them (izen) a general-creator meta read and one (Dalaran Gaming) the
+  source of the 12.1.5 PTR lead that the ptr-watch lane verified as unofficial tonight.
+- **No discovery sweep**, same reasoning as every 429 day: tonight's nightly polled all 44
+  channels ~40 minutes before this run, and there is no residential transcript path to act on the
+  result, so a sweep would only manufacture a backlog this run cannot serve.
+
+
 ## 2026-09-03 (nightly) — 3 transcripts read: 10 izen raid metaNotes, 3 Dalaran takes, 2 Critcake takes; 3 new videos queued
 
 - **Discovery**: all **44** transcribable channels with a `channelId` polled via the YouTube RSS

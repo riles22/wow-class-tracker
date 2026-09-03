@@ -17,6 +17,45 @@ by parsed DATE, never by position. Do not cite lines of this file by NUMBER from
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
 
+## 2026-09-03 (local, scheduled) — live lane swept clean; NO 12.1.5/12.2 PTR announcement, and the creator "leak" is player speculation with no blue post behind it
+
+Ran ~40 minutes after tonight's nightly published (`b60bde2`, publish 15:05:31Z), so this is
+catch-up verification rather than a second pass. **Nothing changed; no file this skill owns was
+touched.**
+
+- **Wowhead RSS swept fresh** (`/news/rss/all`, direct browser-UA GET, HTTP 200, 210,538 bytes,
+  40 items reaching back to 2026-09-01T16:04). Parsed per `<item>` block, never by tag adjacency
+  — the documented trap. Newest tuning-relevant article is **"Ula'tek Changes and Class Fixes -
+  Patch 12.1 Hotfixes for September 2nd"** (2026-09-03T01:07), which tonight's nightly already
+  logged as the `2026-09-02` `kind: "hotfix"` entry off the canonical Kaivax blue post. **No
+  September 3 round-up has been published yet** — the feed's two newest items (14:00 Mark of the
+  Illidari consumables, 13:00 a Race-to-World-First think piece) carry no tuning.
+- **Two encounter-tuning articles were correctly NOT logged**: "Phase 2 Nerfed on Mythic Ula'tek"
+  (09-02T17:33) and "Nymrissa Wavecaller Nerfs, Mythic Twin Fangs Changed" (09-01T17:22). Both are
+  RAID ENCOUNTER tuning — boss health and mechanics — not class tuning, so they produce no
+  `highlights` and no `specsAffected`. Recorded here because the titles read tuning-shaped and a
+  future run may re-find them and wonder why they are absent.
+- **The 12.2 / next-cycle lane is still empty, and the "leak" was chased down rather than
+  dismissed.** Queued creator video `Kq3saXcBt10` (Dalaran Gaming, 09-02) is titled "PATCH 12.1.5
+  LEAKED? MAYBE NEW PTR LATER?", which is exactly the general-creator LEAD the firewall says to
+  verify against the official forum before believing. Verified:
+  - Wowhead RSS carries **no** 12.1.5 or PTR article across all 40 items.
+  - Blizzard forum search (`search.json?q=PTR order:latest`, 50 topics) surfaces one on-point
+    thread — **"They're Really Delaying 12.1.5 PTR"** (topic 2344249, 2026-09-03T04:44). Fetched
+    it: **all 8 posts are players, zero staff/blue.** Its content is speculation (one poster
+    claims 12.1.5 notes appeared on Facebook and were deleted; another cites an interview saying
+    "before BlizzCon"). None of that is citable and none of it is ingested — hard rule 1.
+  - Net reading: there is **no PTR announcement**, and the community's own framing is that the
+    PTR is LATE, not that it opened. The between-cycles posture holds unchanged.
+- **Dormant lanes skipped as prescribed** — the four PTR WCL zone sweeps (54/52/56/57). Their
+  contract rows were removed at the flip, so they need no manifest excuse and got none.
+- **Archon was deliberately NOT re-probed from residential.** The wall is measured **not
+  IP-scoped** (re-tested residentially 2026-08-27, and again on 08-30), and tonight's nightly hit
+  it from CI ~40 minutes before this run and recorded all nine `archon-*` rows unreachable. A
+  residential GET therefore re-derives a settled transport fact and answers nothing the nightly
+  did not already answer; SKILL.md's "do not re-derive" applies. Reported from the nightly's
+  finding instead.
+
 ## 2026-09-03 (nightly) — ONE new feed entry: the September 2 hotfix round-up (3 class lines, all bug fixes); PTR zone lanes dormant
 
 - **New entry, 2026-09-02, `kind: "hotfix"`.** Canonical source read directly rather than off the
