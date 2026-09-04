@@ -17,6 +17,64 @@ by parsed DATE, never by position. Do not cite lines of this file by NUMBER from
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
 
+## 2026-09-04 (nightly) — Icy Veins raid TANK re-cut (Protection Paladin A -> S, the only letter that moved anywhere); Method and Wowhead static; Archon walled night 11
+
+- **Transport, recorded per the rule**: all 14 registered tier-list pages fetched by DIRECT
+  browser-header GET (full header set — a UA-only request is Cloudflare-403 on wowhead;
+  r.jina.ai deliberately not attempted, IP-403 on `wowhead.com/guide/*` since 2026-08-03 and
+  never worked on murlok). Sizes read off disk, not `curl`'s `size_download`.
+- **Icy Veins** (6 pages, 196–343 KB, HTTP 200): `<style>` stripped before parsing, exactly one
+  `<table class="tier-list">` asserted per page, letter from each row's first `<td>`, spec from
+  each `tier-list-entry`'s FIRST `img alt` looked up WHOLE. Counts reconciled BEFORE merging:
+  raid 27/7/6 = 40, M+ 27/7/6 = 40, 80 rows, 0 unmatched, 0 duplicates, every letter inside the
+  registered 7-band scale. **1 letter moved: Protection Paladin raid A -> S**, on the raid TANK
+  page. Worth keeping as a first-alt-rule confirmation — that page's S row emits alts
+  `Blood Death Knight` / `Death Grip Icon` / `Protection Paladin`, so a naive "all alts" pass
+  would have tried to resolve an ability icon.
+- ⚠️ **The raid-tank page's `published` was WRONG in the registry and is corrected to 2026-08-29.**
+  It stored 2026-08-08. Its JSON-LD `dateModified` reads `2026-08-29T15:00` and the deterministic
+  pre-agent `published-evidence` artifact independently resolves it to `2026-08-29`, so the two
+  agree and the stored value contradicted both. The trap: this page has **no in-body
+  "LAST UPDATED - Nth of Month" line** (the other five do), and its visible changelog still tops
+  out at `08 Aug. 2026` — so a run that reads only the changelog lands on 08-08 and looks right.
+  Take `dateModified` when the in-body line is absent, and cross-check the evidence artifact:
+  a stored `published` that disagrees with it is a **red publish gate**, not a nit.
+  Other `published` values re-read and unchanged — raid 08-30 / 09-01 / **08-29**, M+ 08-30 x3.
+- **Method** (2 pages, 160/166 KB): parsed from `tier__tier` / `tier__title` /
+  `data-original-title` and resolved by ROSTER MATCH, which again rejects the M+ page's second
+  tierlist — its eight entries are the dungeon-difficulty blocks and none maps to a spec. Raid
+  40/40, M+ 40/40, 0 spec rows unmatched. **ZERO letters moved**, and the pages' own "Last
+  Updated" lines are unchanged at 10th August (raid) / 13th August (M+), which is the honest
+  explanation. Era: both bodies self-identify as Midnight and both carry all three DH specs
+  including Devourer — note the flattened-text `Devourer` check reads FALSE on these pages
+  because the spec names live in `data-original-title` attributes, not in the text; check the
+  parsed rows, not the stripped body.
+- **Wowhead** (6 pages, 75–341 KB): unescape `\/` -> `/` across the whole document FIRST, then
+  find `[tier-list=rows] … [/tier-list]` (never anchor on `WH.markup.printHtml`), segment on
+  `[tier-label …]X[/tier-label]` with tolerant whitespace, resolve each `[spec-badge=…]` slug.
+  Exactly one block per page; raid 27/7/6 = 40, M+ 27/7/6 = 40, 0 unmatched, 0 duplicate-tier
+  conflicts. **ZERO letters moved**, and every `dateModified` matches the stored `published`
+  (raid 08-31 x3, M+ 08-28 / 08-26 / 09-01), confirmed independently by the evidence artifact.
+- **Archon — walled, night 11.** All 11 distinct registered URLs returned **HTTP 403 with
+  Cloudflare's "Just a moment..." interstitial** (~6.0–6.2 KB), `__NEXT_DATA__` count 0, and the
+  string "Human Verification" absent. **That is a DIFFERENT shape from the one
+  `required-sources.json` describes** (HTTP 200 carrying a ~2.5 KB human-verification body) —
+  which is exactly why that label tells you to assert on `__NEXT_DATA__` presence and never on
+  the status code. Both shapes are the same wall; neither was worked around. Stored letters,
+  numbers and snapshots byte-identical. Consensus stays Icy Veins + Method + Wowhead,
+  "consensus of 3".
+- No `seasonVerified` value changed anywhere this run, so `freeze-season` had nothing to observe.
+
+- **PRUNE DEFERRED to a local run, deliberately — and the reason is structural.** This log is at
+  28 entries against the header's "~20", but a NIGHTLY cannot prune safely: the 2026-08-15
+  precedent is that durable rules must be promoted into `SKILL.md` *before* the entries carrying
+  them are dropped, and the publish job stages only `data/`, `dist/` and
+  `.claude/skills/*/log.md` (nightly.yml) — a `SKILL.md` edit made here is never committed. So a
+  nightly prune can delete a rule but cannot save it. Checked before deferring: the drop range
+  (8 entries) holds one rule that exists NOWHERE else — the 2026-08-16 Archon finding that
+  `lastUpdated` moved independently of the data in BOTH directions ("do not read Archon's label as
+  its data date in either direction"), which `SKILL.md` does not carry. Files are 107 KB, well under the Read tool's 262,144-byte gate, so
+  nothing is broken by waiting for a run that can do both halves.
 ## 2026-09-03 (nightly) — Icy Veins raid HEALER re-cut (2 letters); Method and Wowhead static; Archon walled again
 
 - **Transport, recorded per the rule**: all 14 registered tier-list pages fetched by DIRECT

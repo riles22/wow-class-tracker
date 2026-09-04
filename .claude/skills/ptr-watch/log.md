@@ -17,6 +17,44 @@ by parsed DATE, never by position. Do not cite lines of this file by NUMBER from
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
 
+## 2026-09-04 (nightly) — nothing new in the live 12.1 lane; the September 3 round-up was already logged by a local run ~30 minutes earlier, and 12.1.5 stays UNINGESTED pending the owner
+
+- **Four channels polled, not one.** (1) Wowhead news RSS — HTTP 200, 210 KB, 40 items parsed per
+  `<item>` block, newest 2026-09-04 09:30. (2) The news INDEX as well, because the index leads
+  the RSS within a run: `data.news.newsData` brace-balanced from the id attribute, 20 posts,
+  newest 382645 at 09-04 09:30. (3) The blue tracker (`data.blueTracker.default`), 50 entries,
+  newest 2026-09-03 19:16 — no standalone class-tuning blue post. (4) The canonical source read
+  directly rather than off the Wowhead mirror.
+- **The running hotfix post's `updated_at` is NOT a new-content signal.** Kaivax's topic 2336376
+  shows post 1 `updated 2026-09-04T00:15:02Z`, which looks like a September 4 round-up landed —
+  it has not. Read with its heading structure intact, the newest dated section is still
+  **"September 3, 2026"**, whose two class lines (Priest › Holy 2-set Renew fix, Shaman ›
+  Restoration Totemic Oversurge fix) are already stored verbatim in the feed's 09-03 entry with
+  Holy Priest's `tierSet.asOf` advanced. Check the newest **section date**, never the post's edit
+  timestamp. The old 12.1 dev-notes thread 2317811 is unchanged since 2026-07-31.
+- **12.1.5 — still an OWNER action, still nothing ingested.** Linxy's "Midnight: 12.1.5 PTR
+  Development Notes" (us.forums topic 2344395) is unchanged from what this morning's local run
+  recorded: post 1 at **version 3**, last edited 2026-09-03T22:48:20Z, with posts #2 and #3 the
+  usual empty reservation posts. Wowhead's 12.1.5 PTR news category has grown to nine articles in
+  the current 40-item feed, including **"Class Changes for Devourer DH — Midnight 12.1.5 PTR
+  Development Notes"**. None of it was written anywhere: opening a cycle means a new
+  `PHASES.ptr` entry, a new `thread` key, contract rows and a `wcl-probe` zone enumeration, and
+  `PHASES.ptr` is still `null`. Corollary for the creator lane the same night — the three
+  12.1.5-changes videos in the RSS sweep have no lane to land in either, and were left unseen
+  rather than queued.
+- **Dormant lanes correctly untouched**: zones 54 / 52 / 56 / 57 were not swept and their
+  contract rows do not exist; the stored zone-52/54/56 rows remain the closed cycle's receipts.
+
+- **PRUNE DEFERRED to a local run, deliberately — and the reason is structural.** This log is at
+  31 entries against the header's "~20", but a NIGHTLY cannot prune safely: the 2026-08-15
+  precedent is that durable rules must be promoted into `SKILL.md` *before* the entries carrying
+  them are dropped, and the publish job stages only `data/`, `dist/` and
+  `.claude/skills/*/log.md` (nightly.yml) — a `SKILL.md` edit made here is never committed. So a
+  nightly prune can delete a rule but cannot save it. Checked before deferring: the drop range
+  (11 entries) holds one ⚠️ that IS safe to drop — the 2026-08-22 gearing tier-set
+  sync handoff, verified resolved tonight (`check-refresh --age` no longer reds
+  `gearing-tierset-sync`) — and nothing else rule-shaped. Files are 107 KB, well under the Read tool's 262,144-byte gate, so
+  nothing is broken by waiting for a run that can do both halves.
 ## 2026-09-04 (local, scheduled) — **PATCH 12.1.5 PTR IS LIVE AND OFFICIAL** — the between-cycles posture ENDS on an owner action, not on this run; plus the September 3 hotfix round-up logged (2 class lines, one of them a set-bonus fix)
 
 Ran ~40 minutes BEFORE today's nightly rather than after it — the 09-04 nightly had not fired at

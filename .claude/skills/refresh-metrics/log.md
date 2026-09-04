@@ -17,6 +17,64 @@ by parsed DATE, never by position. Do not cite lines of this file by NUMBER from
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
 
+## 2026-09-04 (nightly) — SimC re-simmed (23 rows, new HEAD) and Mythicstats moved WITHIN period 1079 (31 of 40); Murlok, WoWMeta and Bloodmallet all fetched, diffed and byte-identical; Archon walled night 11
+
+- **SimulationCraft — MERGED 23 rows, a genuinely fresh sim.** `MID2_Raid.txt` HTTP 200, 1.36 MB,
+  `Last-Modified 2026-09-04T07:29:44Z`, and it HAS a `DPS Ranking:` block so the `.html` fallback
+  was not needed. Era-verified off the header build string, not the visible version:
+  `12.1.0.69587 Live (hotfix 2026-09-02/69587, git build HEAD 7d86fb9c3a)` — the HEAD moved from
+  the stored `f5b50a3f97`, which is the freshness detector and the honest reason values moved.
+  43 profile lines mapped by LONGEST-PREFIX with a hyphen allowed, best hero-variant per spec,
+  leading `Raid` row skipped -> 23 of 27 DPS. The 7 unmapped lines are the tank profiles, which
+  is correct. Moves are **23 of 23 rows but max 0.3%**, family median 240106 -> 240089: ordinary
+  iteration noise, nowhere near `maxValueMovePct` 0.6. asOf 2026-09-04.
+- **Mythicstats — MERGED 40 rows at the SAME period.** `/period/latest` 302s to **1079 again**
+  ("week 3 of MID2", top 2000 keys, 10000 characters / 3838 unique, 17.4 avg key level), yet
+  **31 of 40 values moved**. Worth writing down: the period id is NOT a change detector — the
+  window rolls inside the week, so re-parse and re-merge every run rather than short-circuiting
+  on an unchanged period. Shape-checked before merging (the only thing separating this column
+  from the `/meta` per-key-presence one): sum **100.2**, role subtotals Ranged 31.5 / Melee 28.5
+  / Tank 20 / Healer 20. All values are under `minValueMagnitude` 100, so the relative-move guard
+  correctly ignores swings like 0.3 -> 0.1.
+- **Murlok — fetched, diffed, nothing to merge (partial).** Three meta pages, plain browser-UA
+  GET, HTTP 200, 41–71 KB; 27/7/6 = 40 rows, 0 missing, all 40 byte-identical to stored.
+  ⚠️ **Take the machine-readable `<time datetime="…">`, never the rendered "Updated N hours
+  ago".** All three pages render "Updated 6 hours ago" while their `datetime` reads
+  `2026-09-02T10:10:2xZ` — the visible string is server-rendered at build and was ~52h stale
+  here. Believing it would have stamped today's date on two-day-old numbers, which is the exact
+  failure the bloodmallet/wowmeta `asOf` rule exists to stop. asOf stays 2026-09-02.
+- **WoWMeta — fetched, diffed, nothing to merge (partial).** `manifest.json` snapshotDate
+  2026-09-01 and the rankings file's `Last-Modified` 2026-09-01 AGREE (so not the 08-04
+  pinned-manifest shape), and the payload was diffed anyway: 44 blocks, whitelist
+  `{dps,hps,tank}` + `sortField lowerBound` + `keyRange undefined` -> 40 rows, all identical.
+  The 2026-08-21 owner-accepted standing red continues; upstream is frozen, not our fetch.
+- **Bloodmallet — fetched, diffed, nothing to merge (partial).** All 27 DPS charts requested with
+  up to 3 retries: 23 real charts, and the same **4** returning the 76-byte error body on 3/3
+  each (Balance, Feral, Augmentation, Devastation). All 23 carry `simc_settings.tier = MID2`
+  (read off the chart) and `ptr` as the string `"0"`; per-chart timestamps 21x 2026-09-02 plus
+  Retribution and Demonology at 2026-09-03 — **identical to stored, and all 138 target values
+  byte-identical**. Upstream has not re-simmed since the 09-03 wholesale adoption, so the
+  coverage date honestly does not move and no ack was needed.
+- **Archon — walled, night 11**, all nine archon-* rows `unreachable` together. Shape today was
+  **HTTP 403 + Cloudflare "Just a moment..."**, not the 200-plus-human-verification body the
+  contract label describes; `__NEXT_DATA__` count 0 on all 11 URLs. Nothing backfilled from WCL.
+  The per-boss survivability substitution stays a closed dead end and was not attempted.
+- **Warcraft Logs — evidence file only, no request made from this session.**
+  `wcl-fetch/evidence.json` attemptedAt 2026-09-04T14:31:21Z, verdict `rdps-broken`, oauth and
+  graphql both healthy (1 of 3600 points spent), `landed` and `rawRecipes` both **empty**. Both
+  live rows recorded `unreachable`; stored rows stand at 2026-08-10.
+- **Robydoby deliberately not fetched** — its two sheets are the CLOSED 12.1 PTR cycle's zone-54
+  lane, it sits outside `required-sources.json` by design, and the stored rows are final receipts.
+
+- **PRUNE DEFERRED to a local run, deliberately — and the reason is structural.** This log is at
+  27 entries against the header's "~20", but a NIGHTLY cannot prune safely: the 2026-08-15
+  precedent is that durable rules must be promoted into `SKILL.md` *before* the entries carrying
+  them are dropped, and the publish job stages only `data/`, `dist/` and
+  `.claude/skills/*/log.md` (nightly.yml) — a `SKILL.md` edit made here is never committed. So a
+  nightly prune can delete a rule but cannot save it. Checked before deferring: the drop range
+  (7 entries) holds no rule-shaped or ⚠️-marked content, but the scan was a grep and not
+  a read, which is exactly the confidence a nightly should not act on. Files are 144 KB, well under the Read tool's 262,144-byte gate, so
+  nothing is broken by waiting for a run that can do both halves.
 ## 2026-09-03 (local, interactive) — MID2 ADOPTED WHOLESALE: Bloodmallet 23 charts + SimC MID2_Raid 23 rows merged under Riley's value_move_ack; the three MID1-only rows dropped; both standing reds CLOSED
 
 - **Decision and gate.** Riley chose adoption from the session's health check (the 09-02 heartbeat

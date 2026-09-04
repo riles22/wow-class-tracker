@@ -17,6 +17,69 @@ by parsed DATE, never by position. Do not cite lines of this file by NUMBER from
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
 
+## 2026-09-04 (nightly) — 3 pre-fetched transcripts distilled: 7 MadSkillzzTV healer takes, 3 Dalaran Gaming Rogue takes, 13 izen M+ metaNotes; 18 superseded; 2 new videos queued
+
+- **All 44 transcribable channels with a `channelId` polled via the YouTube RSS endpoint, 0
+  failures**, 15 entries each = 660 videos, `media:description` parsed alongside the title.
+  Seen-set recomputed from structured data only (union **1228**); **284 unseen**, all 284 in-cycle
+  against the computed bound 2026-06-18 (oldest date in `ptr-builds.json`, taken as a DATE).
+- **Transcripts came from the deterministic step, as they must on a runner**:
+  `transcript-fetch/summary.json` verdict `ok`, requested 3 / fetched 3. No YouTube or transcript
+  API call was made from this session.
+- **MadSkillzzTV `yD9mjG-ajUU` (2026-09-01, a 58-second short) — 7 takes.** Mistweaver
+  (mplus buff / raid mixed), Discipline (raid buff / mplus mixed), Holy Paladin mplus buff,
+  Restoration Shaman mplus buff, Restoration Druid both buff.
+  ⚠️ **Preservation Evoker and Holy Priest were deliberately NOT distilled**, and this is the
+  judgment call worth recording: for those two alone he switches from his own voice to *"if you
+  ask a Preservation player, **they might tell you**…"* / *"you might look at a Holy Priest player
+  and **they might tell you**…"*, then drops the device again for Holy Paladin and Resto Shaman
+  ("**you look at** Holy Paladin who's also OP"). A rhetorical report of what a spec's own
+  community says is not the creator's read — the same test that declined the Resto Druid passage
+  in AutomaticJak's stream. Two positive takes were left on the table on purpose.
+- **Dalaran Gaming `Kq3saXcBt10` (2026-09-02, 2h23m) — 3 takes from ONE passage.** A viewer asks
+  whether this is a good season to roll a Rogue; his answer is self-anchored ("I'd say so", "I
+  think so at least") and spec-specific: Subtlety **raid** buff ("really good in raids"),
+  Assassination **both** buff ("so is assassination" + decent key play), Outlaw **mplus** buff
+  ("a very, very meta Mythic+ spec"). The PvP half of the same answer triages out per the standing
+  rule. Everything else in 2h23m is key-running commentary — the triage extractor (spec token AND
+  strength token, proven on izen's transcript first at 12 hits before being trusted here) returned
+  16 candidate segments and 15 were gameplay, gear or hearsay about an out-of-scope class.
+- **izen `4z49EhVeP7I` (2026-09-01) — 13 metaNotes**, generalCreators lane, never `takes[]`. His
+  M+ counterpart to the 08-31 raid recap, scoring the channel's own pre-season grid against two
+  weeks of live results. Held: Blood DK, Holy Paladin, Brewmaster. Missed: **Demonology** is the
+  big one (bottom-ranked pre-season, now 5th most popular DPS at high keys after three buff
+  rounds, 5% -> 19% of keys); Assassination +14% and Subtlety +10% both rose post-grid while
+  **Outlaw fell out as a relative casualty of its own class's buffs**; Retribution gained on a
+  ~17% four-piece. Restoration Shaman kept its predicted popularity but not the triple-melee comp
+  that justified it, and Balance/Feral are inverted (Feral ~100 score points higher, Balance
+  played 4x more).
+- **18 records superseded**, same creator + spec + LENS only. izen's M+-lens notes from
+  `x429ozbMXnQ` / `OyIp5Ua0Qo4` / `KktdoK1OZVY` / `OdhbpI6Mjsw` retired; his 08-31 RAID recap and
+  the 08-29 tuning-pass notes left live as complementary lenses.
+- **Queue rewritten honestly.** The 3 distilled ids left `videos[]`; none was sitting in `seen[]`
+  or `skipped[]`, so there was no weaker lane record to drop. Queued 2 (nightly keyword filter
+  kept — Supadata is 100 requests/MONTH): `MivlWUZEWOY` (MadSkillzzTV, "12.1 Best Healers (so
+  far) | M+ & Raid Healer Balance", 2026-09-04T08:00Z — its `media:description` confirms a healer
+  tier list for raid and M+, so the description paid for itself again) and `A1PXCqNKAdo` (Dalaran
+  Gaming, "BIG CLASS BUFFS ARE LIVE THIS WEEK", 2026-09-01). Both verified against the live RSS
+  with an author match.
+- **The other 282 stay UNSEEN, deliberately.** They are budget and relevance cuts, not durable
+  dismissals. Three of them (Shadarek, VooDooSaurus, Nintern — all Devourer/12.1.5 patch-note
+  reactions) are a new shape worth naming: **content about a cycle the owner has not opened has
+  no lane**, `expertRead` era-filters on `PHASES.ptr.marker` which is null, so queueing them
+  would spend the paid budget on takes that cannot surface. Reconsider them when 12.1.5 opens.
+- `npm run audit:creators`: **0 HIGH, 0 MED**, 9 INFO (8 never-yielded creators + the standing
+  "expert lane dormant between cycles" note).
+
+- **PRUNE DEFERRED to a local run, deliberately — and the reason is structural.** This log is at
+  31 entries against the header's "~20", but a NIGHTLY cannot prune safely: the 2026-08-15
+  precedent is that durable rules must be promoted into `SKILL.md` *before* the entries carrying
+  them are dropped, and the publish job stages only `data/`, `dist/` and
+  `.claude/skills/*/log.md` (nightly.yml) — a `SKILL.md` edit made here is never committed. So a
+  nightly prune can delete a rule but cannot save it. Checked before deferring: the drop range
+  (11 entries) holds no rule-shaped or ⚠️-marked content, but the scan was a grep and not
+  a read, which is exactly the confidence a nightly should not act on. Files are 130 KB, well under the Read tool's 262,144-byte gate, so
+  nothing is broken by waiting for a run that can do both halves.
 ## 2026-09-04 (local, scheduled) — caption 429 on its THIRTEENTH day; queue held at 3, nothing distilled; ran BEFORE the nightly rather than after it
 
 **The residential caption lane is still down — day 13 since 2026-08-23.** Nothing distilled, no

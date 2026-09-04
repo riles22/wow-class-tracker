@@ -4853,7 +4853,7 @@
       "claim": "Asked to compare the two Priest healers, he reads Discipline as very strong in raid — his words are that Disc is 'insane in raid' — and draws the forward-looking conclusion that it is more likely to be nerfed than buffed. He frames this as a standing design problem rather than a passing tuning state: Blizzard has struggled to buff Discipline for Mythic+ without also buffing it in raid, so the raid strength is what blocks help arriving for keys. Recorded as a strength read on the raid bracket, with the nerf expectation as his own hedge rather than an observed change."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Priest",
       "spec": "Discipline",
       "creator": "MadSkillzzTV",
@@ -4958,7 +4958,7 @@
       "patchContext": "12.1 PTR - walkthrough of the August 18 healer tuning, first-week-of-raid pass (supersedes his 08-01 short-form tier-list read)",
       "url": "https://youtu.be/39tIEQJLJFw?t=28",
       "claim": "He reports Blizzard buffing Restoration Druid on an explicit developer note that both its healing and damage are underperforming relative to other healers: all healing +4% and all damage +20%. His own read is that the direction is right but the size is conservative - he notes Wildstalker damage was low on the PTR even accounting for the 20%, and says the damage buff could honestly have been a lot higher. On healing he does not think Restoration Druid is all that bad in raid, and frames Blizzard as being very careful because so little data exists before the season opens. He expects Mythic+ Restoration Druids in particular to have wanted a much larger increase and does not think they will be insanely happy, but places the pass in context as first-week tuning with further passes scheduled for the following weeks. He characterises the whole tuning round as soft changes aimed at raid performance rather than big swings.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Monk",
@@ -4970,7 +4970,7 @@
       "patchContext": "12.1 PTR - walkthrough of the August 18 healer tuning, raid half (supersedes his 08-11 unsplit read; the M+ half is recorded separately and stays live)",
       "url": "https://youtu.be/39tIEQJLJFw?t=167",
       "claim": "On the raid side he judges Mistweaver Monk to be in a genuinely poor place and the August 18 buffs to be nowhere near sufficient to fix it, saying in his own words that Mistweaver was really, really poor in raid and agreeing with players who will read the notes and conclude this is not even close to enough. The changes themselves are an 8% all-healing increase - which he points out is Blizzard reverting an 8% healing cut it made on the PTR rather than new headroom - plus a 33% higher activation rate on the Venomous Abyss 4-piece. He wanted the buffs targeted at Sheilun's and Vivify specifically and says the across-the-board healing increase does reach them but that he wants further changes to those abilities. He softens the outlook only by pointing at the schedule rather than the spec: more data arrives when the season actually launches, further tuning is planned, and he advises players not to reroll off a healer they enjoy on the strength of a first-week pass.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Monk",
@@ -4982,7 +4982,7 @@
       "patchContext": "12.1 PTR - walkthrough of the August 18 healer tuning, Mythic+ half (complements, not replaces, the raid half recorded from the same video)",
       "url": "https://youtu.be/39tIEQJLJFw?t=157",
       "claim": "For Mythic+ he reads the same August 18 package far more positively than he does for raid, calling it nice that Blizzard is walking back some of the nerfs it applied on the PTR - the 8% all-healing increase restores an 8% cut, and the Venomous Abyss 4-piece activation rate rises 33%. He volunteers that he had knowingly placed Mistweaver Monk a little high on his own Mythic+ tier list because he expected exactly these follow-up buffs, and says the changes would not shift that tier list all that much. He attaches one important scoping caveat of his own: Way of the Crane and Ancient Teachings are damage-conversion driven and so are not affected by flat healing increases, which limits how much of the buff actually reaches a Mythic+ Mistweaver's throughput. He also warns generally that this tuning round is calibrated on raid performance and that Mythic+ balance tends to slip through the cracks in such passes.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Priest",
@@ -4994,7 +4994,7 @@
       "patchContext": "12.1 PTR - walkthrough of the August 18 healer tuning, raid read on the Discipline damage cut (supersedes his 08-12 raid take; his 08-12 M+ read stays live)",
       "url": "https://youtu.be/39tIEQJLJFw?t=283",
       "claim": "He reads the headline 30% Discipline Priest damage cut as a spec that escaped pretty nicely rather than one that was taken down. The offsetting changes are what carry his conclusion: Atonement now transfers 46% of damage into healing instead of 32%, and Entropic Rift damage is up 20%, so he expects HPS to come out slightly ahead - he adds that Void Shield's reflected damage should not be hit by the damage reduction while still benefiting from the higher Atonement transfer. He had considered the nerf fully expected by anyone watching raid logs, describing Voidweaver Discipline damage in raid as absolutely insane and noting the widespread assumption that this would be a double-Discipline season. His verdict after the cut is that Discipline is still most likely one of the best DPS healers in raid, that Voidweaver remains the raid recommendation, and that he could still see double Discipline in the race to world first. He expects Mythic+ Discipline players to stay on Oracle.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Priest",
@@ -5618,7 +5618,7 @@
       "patchContext": "12.1 PTR — Assassination guide framing (supersedes his 08-12 read)",
       "url": "https://youtu.be/lFJw787T2Do?t=15",
       "claim": "He reads Assassination as likely to be competitive this season, hedged throughout — his framing is that it \"might actually be kind of competitive\". The reasons he gives are that it is a boss-slayer spec carrying strong cooldowns in Kingsbane and Deathmark, and that it performed well in the later parts of PTR testing, which leads him to expect it may also be good in Mythic+.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Paladin",
@@ -6193,7 +6193,7 @@
       "patchContext": "Season 2 live — his 9h30m week-one healer stream (Mythic+ into Heroic/Mythic raid splits), published 2026-08-22 hours before Blizzard announced the August 25 tuning pass",
       "url": "https://youtu.be/qG-So9pnRBQ?t=9720",
       "claim": "Answering a viewer on where the healers land in keys, he names Holy Paladin and Restoration Shaman as the two that are “going to probably dominate” Mythic+, and uses them as the bar the spec under discussion falls short of.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Shaman",
@@ -6205,7 +6205,7 @@
       "patchContext": "Season 2 live — his 9h30m week-one healer stream (Mythic+ into Heroic/Mythic raid splits), published 2026-08-22 hours before Blizzard announced the August 25 tuning pass",
       "url": "https://youtu.be/qG-So9pnRBQ?t=9720",
       "claim": "He names Restoration Shaman alongside Holy Paladin as the two healers he expects to “probably dominate” Mythic+ this season, holding them out as the standard the rest of the roster is measured against in keys.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Priest",
@@ -6241,7 +6241,7 @@
       "patchContext": "Season 2 live — his week-one \"five specs standing out\" video, published 2026-08-24; Subtlety is his fifth and final pick, chosen out of a DPS slot he calls genuinely competitive",
       "url": "https://youtu.be/LoCCPjj7J6c?t=435",
       "claim": "He reads Subtlety's pure single-target boss damage as unmatched right now: on a raid encounter where you can ignore adds and focus priority boss damage, he says Subtlety cannot be matched and may be one of the best pure boss-damage specs in the game — explicitly caveated on nerfs not yet landing.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Rogue",
@@ -6745,6 +6745,126 @@
       "patchContext": "Season 2 live — the intro to a +18 Ruby Life Pools key run (\"Arms owns.\", published 2026-08-29), recorded after he had finally geared and tested Arms with the new four-piece, on his own character rather than off a chart. It is the follow-up to his 2026-08-26 Fury read, which had deferred exactly this comparison until the new set landed.",
       "url": "https://youtu.be/S2nGA4gww8I?t=31",
       "claim": "The other half of the same comparison, and it revises his 2026-08-26 read: on the new four-piece, Fury is no longer clearly ahead of his Arms in keys. He puts Fury's overall damage as very similar to Arms — sometimes feeling higher — while conceding Arms does more priority damage, and concludes the pair are close enough in Mythic+ that spec choice is preference."
+    },
+    {
+      "superseded": false,
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "creator": "MadSkillzzTV",
+      "date": "2026-09-01",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — a one-minute short (\"Most Healers are OP in 12.1 Midnight\", published 2026-09-01), two weeks into Season 2. Its thesis is that healer balance is good because no single healer is clearly the best; the per-spec clauses below are his evidence for that. Where he switched to reporting what a player of a spec would say rather than his own read (Preservation Evoker and Holy Priest), nothing was distilled.",
+      "url": "https://youtu.be/yD9mjG-ajUU?t=8",
+      "claim": "He calls Mistweaver Monk very decent in Mythic+, listing it among the healers he considers strong two weeks into Season 2."
+    },
+    {
+      "superseded": false,
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "creator": "MadSkillzzTV",
+      "date": "2026-09-01",
+      "sentiment": "mixed",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — a one-minute short (\"Most Healers are OP in 12.1 Midnight\", published 2026-09-01), two weeks into Season 2. Its thesis is that healer balance is good because no single healer is clearly the best; the per-spec clauses below are his evidence for that. Where he switched to reporting what a player of a spec would say rather than his own read (Preservation Evoker and Holy Priest), nothing was distilled.",
+      "url": "https://youtu.be/yD9mjG-ajUU?t=2",
+      "claim": "Raid is the side he still wants worked on: inside an otherwise positive read of the healer roster he says he would like further changes to Mistweaver Monk specifically for raid content. A softening of his 2026-08-15 raid read rather than a reversal — he is no longer calling the raid position poor, only unfinished."
+    },
+    {
+      "superseded": false,
+      "class": "Priest",
+      "spec": "Discipline",
+      "creator": "MadSkillzzTV",
+      "date": "2026-09-01",
+      "sentiment": "buff",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — a one-minute short (\"Most Healers are OP in 12.1 Midnight\", published 2026-09-01), two weeks into Season 2. Its thesis is that healer balance is good because no single healer is clearly the best; the per-spec clauses below are his evidence for that. Where he switched to reporting what a player of a spec would say rather than his own read (Preservation Evoker and Holy Priest), nothing was distilled.",
+      "url": "https://youtu.be/yD9mjG-ajUU?t=14",
+      "claim": "He reads Discipline Priest as very decent in raid, the mirror image of his Mistweaver read."
+    },
+    {
+      "superseded": false,
+      "class": "Priest",
+      "spec": "Discipline",
+      "creator": "MadSkillzzTV",
+      "date": "2026-09-01",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — a one-minute short (\"Most Healers are OP in 12.1 Midnight\", published 2026-09-01), two weeks into Season 2. Its thesis is that healer balance is good because no single healer is clearly the best; the per-spec clauses below are his evidence for that. Where he switched to reporting what a player of a spec would say rather than his own read (Preservation Evoker and Holy Priest), nothing was distilled.",
+      "url": "https://youtu.be/yD9mjG-ajUU?t=9",
+      "claim": "For keys he still wants more: he says Discipline Priest should receive further changes when it comes to Mythic+, while placing it inside his overall \"most healers are OP\" framing."
+    },
+    {
+      "superseded": false,
+      "class": "Paladin",
+      "spec": "Holy",
+      "creator": "MadSkillzzTV",
+      "date": "2026-09-01",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — a one-minute short (\"Most Healers are OP in 12.1 Midnight\", published 2026-09-01), two weeks into Season 2. Its thesis is that healer balance is good because no single healer is clearly the best; the per-spec clauses below are his evidence for that. Where he switched to reporting what a player of a spec would say rather than his own read (Preservation Evoker and Holy Priest), nothing was distilled.",
+      "url": "https://youtu.be/yD9mjG-ajUU?t=29",
+      "claim": "He names Holy Paladin as OP in Mythic+, without qualification."
+    },
+    {
+      "superseded": false,
+      "class": "Shaman",
+      "spec": "Restoration",
+      "creator": "MadSkillzzTV",
+      "date": "2026-09-01",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — a one-minute short (\"Most Healers are OP in 12.1 Midnight\", published 2026-09-01), two weeks into Season 2. Its thesis is that healer balance is good because no single healer is clearly the best; the per-spec clauses below are his evidence for that. Where he switched to reporting what a player of a spec would say rather than his own read (Preservation Evoker and Holy Priest), nothing was distilled.",
+      "url": "https://youtu.be/yD9mjG-ajUU?t=33",
+      "claim": "He calls Restoration Shaman OP as well, and scopes the strength to Mythic+ melee compositions in particular."
+    },
+    {
+      "superseded": false,
+      "class": "Druid",
+      "spec": "Restoration",
+      "creator": "MadSkillzzTV",
+      "date": "2026-09-01",
+      "sentiment": "buff",
+      "bracket": "both",
+      "patchContext": "Season 2 live — a one-minute short (\"Most Healers are OP in 12.1 Midnight\", published 2026-09-01), two weeks into Season 2. Its thesis is that healer balance is good because no single healer is clearly the best; the per-spec clauses below are his evidence for that. Where he switched to reporting what a player of a spec would say rather than his own read (Preservation Evoker and Holy Priest), nothing was distilled.",
+      "url": "https://youtu.be/yD9mjG-ajUU?t=37",
+      "claim": "His most explicitly first-person read of the short: after several weeks of buffs he thinks Restoration Druid is better in raid than people anticipate, and expects that to carry into Mythic+ as well."
+    },
+    {
+      "superseded": false,
+      "class": "Rogue",
+      "spec": "Subtlety",
+      "creator": "Dalaran Gaming",
+      "date": "2026-09-02",
+      "sentiment": "buff",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — answering a viewer on stream (\"PATCH 12.1.5 LEAKED? MAYBE NEW PTR LATER? GREAT WEEK FOR GEARING!\", published 2026-09-02) who asked whether this is a good season to roll a Rogue for the first time. His answer is a three-spec comparison in his own voice, anchored by \"I'd say so\" and \"I think so at least\"; the PvP half of the same answer is out of scope for this tracker and is not distilled.",
+      "url": "https://youtu.be/Kq3saXcBt10?t=2484",
+      "claim": "He says Subtlety is really good in raids, and uses it as the first of three reasons this is a good season to pick the class up."
+    },
+    {
+      "superseded": false,
+      "class": "Rogue",
+      "spec": "Assassination",
+      "creator": "Dalaran Gaming",
+      "date": "2026-09-02",
+      "sentiment": "buff",
+      "bracket": "both",
+      "patchContext": "Season 2 live — answering a viewer on stream (\"PATCH 12.1.5 LEAKED? MAYBE NEW PTR LATER? GREAT WEEK FOR GEARING!\", published 2026-09-02) who asked whether this is a good season to roll a Rogue for the first time. His answer is a three-spec comparison in his own voice, anchored by \"I'd say so\" and \"I think so at least\"; the PvP half of the same answer is out of scope for this tracker and is not distilled.",
+      "url": "https://youtu.be/Kq3saXcBt10?t=2486",
+      "claim": "He puts Assassination alongside Subtlety as also really good in raids, and reports it getting a decent amount of play in Mythic+ dungeons — one of the three Rogue specs he says all look really good this season."
+    },
+    {
+      "superseded": false,
+      "class": "Rogue",
+      "spec": "Outlaw",
+      "creator": "Dalaran Gaming",
+      "date": "2026-09-02",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — answering a viewer on stream (\"PATCH 12.1.5 LEAKED? MAYBE NEW PTR LATER? GREAT WEEK FOR GEARING!\", published 2026-09-02) who asked whether this is a good season to roll a Rogue for the first time. His answer is a three-spec comparison in his own voice, anchored by \"I'd say so\" and \"I think so at least\"; the PvP half of the same answer is out of scope for this tracker and is not distilled.",
+      "url": "https://youtu.be/Kq3saXcBt10?t=2489",
+      "claim": "His strongest single-spec claim in the answer: he calls Outlaw a very, very meta Mythic+ spec, and reports both it and Assassination getting a decent amount of key play."
     }
   ],
   "metaNotes": [
@@ -9352,7 +9472,7 @@
       "note": "He calls the Holy Priest buff arguably one of the largest of the round — mana regeneration plus flat, permanent Oracle buffs to Words of the Wise, Prompt Prognosis and Preventive Measures, which he totals to about 8% healing — and then argues the headline overstates it. His reasoning is that the buff lands on the hero tree players are not using: the recommended raid build has remained Archon rather than Oracle, and Archon was 10-15% ahead in healing, so the buff largely closes a gap within the spec instead of raising the spec. In his framing you do not get stronger overall, you get the weaker hero talent brought closer to the stronger one. He allows it is a genuinely large buff for Mythic+, where Oracle is what you would be playing, but immediately undercuts that too by noting Holy Priest has not been played in Mythic+."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Rogue",
       "spec": "Assassination",
       "creator": "izen (Izenhart)",
@@ -9363,7 +9483,7 @@
       "note": "He reports a 4% flat buff to Assassination set against a four-piece nerf reducing effectiveness from 100% to 60%, and reads the combination as much smaller than it appears — on a good day barely 1-2% overall, because the set bonus being offset was itself strong. He calls Assassination the only relevant buff of the Rogue pass, and grounds the read in standing rather than numbers: Assassination had not been having a good time in terms of being valued or considered in Mythic+. His summary is that the buffs are still pretty tiny for both Rogue specs."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Rogue",
       "spec": "Subtlety",
       "creator": "izen (Izenhart)",
@@ -9473,7 +9593,7 @@
       "note": "Restoration Shaman is untouched by the pass and appears twice as a benchmark others are measured against. He includes it among the higher-tier healers Mistweaver still does not match even after a 10% buff, and separately places it above Discipline in Mythic+, noting Discipline had routinely been ranked below Holy Paladin, Restoration Shaman and Preservation there. The read is comparative rather than a direct assessment of the spec."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Monk",
       "spec": "Brewmaster",
       "creator": "izen (Izenhart)",
@@ -10661,7 +10781,7 @@
       "note": "He explicitly defends Windwalker against its middling current representation. It was placed high in his second DPS tier not because he expected it to match Elemental's popularity but because he expected it to have the same chance of pushing high keys in a slightly different composition. He points out that Windwalker and Outlaw already appear at a higher rate in the first high keys than in the average keys being run, and expects them to gain value once groups settle on a physical composition for pushing."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Rogue",
       "spec": "Outlaw",
       "creator": "izen (Izenhart)",
@@ -10673,7 +10793,7 @@
       "note": "Outlaw's raw popularity right now is low — he says so directly — but he treats that as the wrong measure this early. It was placed high in his second DPS tier for its chance of pushing high keys in a physical composition rather than for expected popularity, and he notes Outlaw and Windwalker are already over-represented in the first high keys relative to the average key being run. He expects both to gain value as groups settle on physical comps for pushing."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Warlock",
       "spec": "Demonology",
       "creator": "izen (Izenhart)",
@@ -11021,7 +11141,7 @@
       "note": "He names Arms the other spec that is good across the board and one of the most popular picks alongside Arcane. Arms has settled on Slayer over Colossus after the Executioner buff moved to a self-buff and Tactical Edge began proccing Sudden Death, which in turn procs Reap the Storm and reduces Bladestorm's cooldown; he says that tipped Slayer above Colossus in AoE having already been ahead in single target, and puts its AoE back at War Within levels — similar to Arcane and, on reflection, better. He stresses consistency and low cooldown dependence, citing 50 Bladestorms and 47 Colossus Smashes across 28 minutes."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Rogue",
       "spec": "Assassination",
       "creator": "izen (Izenhart)",
@@ -11045,7 +11165,7 @@
       "note": "He puts Elemental at number one on average score in high key levels and says it perhaps has the best damage profile of the lot for how even it is between single target and AoE. The reasoning is that Voltaic Blaze plus Purging Flames turn Lava Burst into a five-to-six-target AoE button that can be pre-buffed every cast, so Earthquake, Chain Lightning and Lava Burst are all AoE, while swapping to Elemental Blast and Lightning Bolt keeps it competitive on single-target bosses. He grants that its burst windows are weaker than before after repeated Ascendance nerfs and that its tankiness is poor, resting on one weak defensive, offset by a poison dispel and snare removal that are valuable this season."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Paladin",
       "spec": "Holy",
       "creator": "izen (Izenhart)",
@@ -11057,7 +11177,7 @@
       "note": "He calls Holy Paladin the clear advantage among healers and says it has now started to gap Restoration Shaman by about 100 average score, making it the default choice for many groups in high keys. He observes that the very top keys are essentially all Lightsmith rather than the Herald of the Sun that Warcraft Logs' talent data suggests. The case is three interchangeable single-target buttons at roughly 215/240/260k per cast, endlessly rotated through Infusion with the four-piece, which suits dungeon mechanics that hit one or two players; the acknowledged weakness is flat consistent rot healing."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Death Knight",
       "spec": "Blood",
       "creator": "izen (Izenhart)",
@@ -11069,7 +11189,7 @@
       "note": "Reading the tank average-score chart he says the tank situation is much simpler to decipher than the DPS one, and that Blood Death Knight holds a clear advantage over the other tanks. It is a short call, but a direct comparative one off the score data rather than a passing mention."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Shaman",
       "spec": "Restoration",
       "creator": "izen (Izenhart)",
@@ -11487,6 +11607,149 @@
       "patchContext": "Season 2 live — his \"Before & After\" raid-meta recap (published 2026-08-31, end of the second weekly reset), scoring the channel's own pre-season raid predictions against live Heroic and Mythic parse charts and against what race-to-world-first guilds are actually fielding. He is explicit that the raid side was the hard one to predict because the last PTR raid testing was in July, over a month before launch, with balance tuning in between.",
       "url": "https://youtu.be/nuUVv1WwfLM?t=152",
       "note": "A prediction that came true rather than a surprise. He has Arms as the best melee performer in the live Mythic results alongside Subtlety, and singles out its two-target cleave as the reason it holds up on Lost Explorers, where the bosses are spread and the other melee lose their multi-target value."
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Blood",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-01",
+      "sentiment": "positive",
+      "superseded": false,
+      "patchContext": "Season 2 live — M+ outlook, \"12.1 Season 2 | Mythic+ Best Specs & Meta - Preseason Tier Lists Before & After\" (published 2026-09-01), the Mythic+ companion to his raid recap of the day before. He scores the channel's own pre-season Mythic+ predictions against two weeks of live results, reading average score and damage at 15+ key levels alongside popularity and the group compositions actually being fielded, and says up front that Mythic+ was the easier of the two brackets to predict.",
+      "url": "https://youtu.be/4z49EhVeP7I?t=62",
+      "note": "The least surprising call of his whole pre-season Mythic+ grid, and it has held: Blood DK was predicted the S-tier and most popular tank and is exactly that two weeks in, with essentially the entire top of the 15-and-up key ladder on Blood. He notes it took no meaningful nerfs across the three tuning rounds around launch beyond some damage trims."
+    },
+    {
+      "class": "Monk",
+      "spec": "Brewmaster",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-01",
+      "sentiment": "negative",
+      "superseded": false,
+      "patchContext": "Season 2 live — M+ outlook, \"12.1 Season 2 | Mythic+ Best Specs & Meta - Preseason Tier Lists Before & After\" (published 2026-09-01), the Mythic+ companion to his raid recap of the day before. He scores the channel's own pre-season Mythic+ predictions against two weeks of live results, reading average score and damage at 15+ key levels alongside popularity and the group compositions actually being fielded, and says up front that Mythic+ was the easier of the two brackets to predict.",
+      "url": "https://youtu.be/4z49EhVeP7I?t=111",
+      "note": "Still the least-played tank, as predicted since the PTR, and he finds not a single Brewmaster in the more popular high-key compositions. He allows one asterisk in the other direction — its average high-key score reads higher than expected — but attributes that to a small loyal one-trick population rather than to spec strength."
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-01",
+      "sentiment": "positive",
+      "superseded": false,
+      "patchContext": "Season 2 live — M+ outlook, \"12.1 Season 2 | Mythic+ Best Specs & Meta - Preseason Tier Lists Before & After\" (published 2026-09-01), the Mythic+ companion to his raid recap of the day before. He scores the channel's own pre-season Mythic+ predictions against two weeks of live results, reading average score and damage at 15+ key levels alongside popularity and the group compositions actually being fielded, and says up front that Mythic+ was the easier of the two brackets to predict.",
+      "url": "https://youtu.be/4z49EhVeP7I?t=268",
+      "note": "The healer prediction held: Holy Paladin sits at the top of Mythic+ healer popularity, and its lead widens rather than narrows as key level rises. He puts a massive drop-off in representation behind it and Restoration Shaman."
+    },
+    {
+      "class": "Shaman",
+      "spec": "Restoration",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-01",
+      "sentiment": "mixed",
+      "superseded": false,
+      "patchContext": "Season 2 live — M+ outlook, \"12.1 Season 2 | Mythic+ Best Specs & Meta - Preseason Tier Lists Before & After\" (published 2026-09-01), the Mythic+ companion to his raid recap of the day before. He scores the channel's own pre-season Mythic+ predictions against two weeks of live results, reading average score and damage at 15+ key levels alongside popularity and the group compositions actually being fielded, and says up front that Mythic+ was the easier of the two brackets to predict.",
+      "url": "https://youtu.be/4z49EhVeP7I?t=187",
+      "note": "Correctly predicted popular — roughly a third of 15-and-up keys carry one, second only to Holy Paladin — but for the wrong reason. The triple-melee composition it was ranked high in anticipation of has not materialised at any key level he checks; the groups he pulls run Restoration Shaman with two melee and an Arcane Mage, or with two casters. Popularity holds, the thesis behind it does not."
+    },
+    {
+      "class": "Warlock",
+      "spec": "Demonology",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-01",
+      "sentiment": "positive",
+      "superseded": false,
+      "patchContext": "Season 2 live — M+ outlook, \"12.1 Season 2 | Mythic+ Best Specs & Meta - Preseason Tier Lists Before & After\" (published 2026-09-01), the Mythic+ companion to his raid recap of the day before. He scores the channel's own pre-season Mythic+ predictions against two weeks of live results, reading average score and damage at 15+ key levels alongside popularity and the group compositions actually being fielded, and says up front that Mythic+ was the easier of the two brackets to predict.",
+      "url": "https://youtu.be/4z49EhVeP7I?t=352",
+      "note": "The biggest miss of his own pre-season Mythic+ prediction, and he says so: ranked at the bottom, Demonology is now the fifth most popular DPS at high key levels after three consecutive rounds of buffs that were not priced in. He rates the tier-set buffs as the ones that mattered — a 7.5 percent single-target gain from the four-piece that is worth much more in keys through Wild Imps and Implosion — and reports its share of keys rising from about 5 percent to 19 percent, ahead of both Destruction and Affliction on highest key and average damage."
+    },
+    {
+      "class": "Rogue",
+      "spec": "Assassination",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-01",
+      "sentiment": "positive",
+      "superseded": false,
+      "patchContext": "Season 2 live — M+ outlook, \"12.1 Season 2 | Mythic+ Best Specs & Meta - Preseason Tier Lists Before & After\" (published 2026-09-01), the Mythic+ companion to his raid recap of the day before. He scores the channel's own pre-season Mythic+ predictions against two weeks of live results, reading average score and damage at 15+ key levels alongside popularity and the group compositions actually being fielded, and says up front that Mythic+ was the easier of the two brackets to predict.",
+      "url": "https://youtu.be/4z49EhVeP7I?t=536",
+      "note": "The other prediction asterisk: a 14 percent damage buff after the pre-season grid was drawn, which he sizes by pointing out that removing it again would drop the spec back down the sim ordering. A handful of Assassination rogues now appear in the top Mythic+ compositions, and it matches Subtlety and Outlaw on high-key average score."
+    },
+    {
+      "class": "Rogue",
+      "spec": "Subtlety",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-01",
+      "sentiment": "positive",
+      "superseded": false,
+      "patchContext": "Season 2 live — M+ outlook, \"12.1 Season 2 | Mythic+ Best Specs & Meta - Preseason Tier Lists Before & After\" (published 2026-09-01), the Mythic+ companion to his raid recap of the day before. He scores the channel's own pre-season Mythic+ predictions against two weeks of live results, reading average score and damage at 15+ key levels alongside popularity and the group compositions actually being fielded, and says up front that Mythic+ was the easier of the two brackets to predict.",
+      "url": "https://youtu.be/4z49EhVeP7I?t=531",
+      "note": "Buffed 10 percent after the pre-season predictions were made, alongside Assassination's 14 percent, and he counts both as the reason the Rogue picture in keys has moved up from where the grid put it."
+    },
+    {
+      "class": "Rogue",
+      "spec": "Outlaw",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-01",
+      "sentiment": "negative",
+      "superseded": false,
+      "patchContext": "Season 2 live — M+ outlook, \"12.1 Season 2 | Mythic+ Best Specs & Meta - Preseason Tier Lists Before & After\" (published 2026-09-01), the Mythic+ companion to his raid recap of the day before. He scores the channel's own pre-season Mythic+ predictions against two weeks of live results, reading average score and damage at 15+ key levels alongside popularity and the group compositions actually being fielded, and says up front that Mythic+ was the easier of the two brackets to predict.",
+      "url": "https://youtu.be/4z49EhVeP7I?t=655",
+      "note": "The casualty of its own class's buffs: with Subtlety and Assassination both lifted, he says the rogues now showing up in high keys are Assassination and Subtlety and there is basically no Outlaw any more. He is explicit that this is a relative effect of buffing the other two rather than anything done to Outlaw."
+    },
+    {
+      "class": "Paladin",
+      "spec": "Retribution",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-01",
+      "sentiment": "positive",
+      "superseded": false,
+      "patchContext": "Season 2 live — M+ outlook, \"12.1 Season 2 | Mythic+ Best Specs & Meta - Preseason Tier Lists Before & After\" (published 2026-09-01), the Mythic+ companion to his raid recap of the day before. He scores the channel's own pre-season Mythic+ predictions against two weeks of live results, reading average score and damage at 15+ key levels alongside popularity and the group compositions actually being fielded, and says up front that Mythic+ was the easier of the two brackets to predict.",
+      "url": "https://youtu.be/4z49EhVeP7I?t=611",
+      "note": "He rates the recent Retribution tier-set buff as one of the stronger sets in the game now — around a 17 percent gain from the four-piece as Templar, large compared with other DPS — and observes that Retribution has kept more popularity than Windwalker and can be spotted in the most popular 15-and-up compositions."
+    },
+    {
+      "class": "Monk",
+      "spec": "Windwalker",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-01",
+      "sentiment": "mixed",
+      "superseded": false,
+      "patchContext": "Season 2 live — M+ outlook, \"12.1 Season 2 | Mythic+ Best Specs & Meta - Preseason Tier Lists Before & After\" (published 2026-09-01), the Mythic+ companion to his raid recap of the day before. He scores the channel's own pre-season Mythic+ predictions against two weeks of live results, reading average score and damage at 15+ key levels alongside popularity and the group compositions actually being fielded, and says up front that Mythic+ was the easier of the two brackets to predict.",
+      "url": "https://youtu.be/4z49EhVeP7I?t=602",
+      "note": "Grouped with Retribution as sitting in the top half without being expected to do much unless a melee-physical composition takes hold, which it has not; of the pair he says Retribution has clearly kept more popularity."
+    },
+    {
+      "class": "Druid",
+      "spec": "Balance",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-01",
+      "sentiment": "mixed",
+      "superseded": false,
+      "patchContext": "Season 2 live — M+ outlook, \"12.1 Season 2 | Mythic+ Best Specs & Meta - Preseason Tier Lists Before & After\" (published 2026-09-01), the Mythic+ companion to his raid recap of the day before. He scores the channel's own pre-season Mythic+ predictions against two weeks of live results, reading average score and damage at 15+ key levels alongside popularity and the group compositions actually being fielded, and says up front that Mythic+ was the easier of the two brackets to predict.",
+      "url": "https://youtu.be/4z49EhVeP7I?t=679",
+      "note": "The specs predicted to do well have mostly turned up; Balance is the one that has turned up least. He puts its average Mythic+ score a full 100 points below Feral while its popularity is over four times higher, so it keeps the representation without the performance — and notes a Balance buff lands on the reset he is recording ahead of."
+    },
+    {
+      "class": "Druid",
+      "spec": "Feral",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-01",
+      "sentiment": "mixed",
+      "superseded": false,
+      "patchContext": "Season 2 live — M+ outlook, \"12.1 Season 2 | Mythic+ Best Specs & Meta - Preseason Tier Lists Before & After\" (published 2026-09-01), the Mythic+ companion to his raid recap of the day before. He scores the channel's own pre-season Mythic+ predictions against two weeks of live results, reading average score and damage at 15+ key levels alongside popularity and the group compositions actually being fielded, and says up front that Mythic+ was the easier of the two brackets to predict.",
+      "url": "https://youtu.be/4z49EhVeP7I?t=694",
+      "note": "The inverse of his Balance read: on several damage metrics Feral is cranking higher than Balance and its average key score is about 100 points ahead, but participation has not followed — no Feral in the top groups he checks, and Balance stays comfortably ahead in actual high-key play."
+    },
+    {
+      "class": "Mage",
+      "spec": "Arcane",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-01",
+      "sentiment": "positive",
+      "superseded": false,
+      "patchContext": "Season 2 live — M+ outlook, \"12.1 Season 2 | Mythic+ Best Specs & Meta - Preseason Tier Lists Before & After\" (published 2026-09-01), the Mythic+ companion to his raid recap of the day before. He scores the channel's own pre-season Mythic+ predictions against two weeks of live results, reading average score and damage at 15+ key levels alongside popularity and the group compositions actually being fielded, and says up front that Mythic+ was the easier of the two brackets to predict.",
+      "url": "https://youtu.be/4z49EhVeP7I?t=367",
+      "note": "Treated throughout as the fixed point of the Mythic+ caster slot: when he walks through what Demonology and Assassination are displacing, he says outright that Arcane Mage is not the one being replaced, and groups keep running it even where a third melee would complete the composition."
     }
   ]
 }
