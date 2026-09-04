@@ -17,6 +17,52 @@ by parsed DATE, never by position. Do not cite lines of this file by NUMBER from
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
 
+## 2026-09-04 (local, scheduled) — caption 429 on its THIRTEENTH day; queue held at 3, nothing distilled; ran BEFORE the nightly rather than after it
+
+**The residential caption lane is still down — day 13 since 2026-08-23.** Nothing distilled, no
+data file changed by this skill, `pending-transcripts.json` untouched (3 before, 3 after).
+
+- **ONE probe this time, not two.** Previous days spent a second request confirming the block was
+  endpoint-wide rather than per-video; twelve consecutive days of identical endpoint-wide results
+  have settled that question, and SKILL.md's bound is "AT MOST one caption probe before stopping".
+  So: `4z49EhVeP7I` (izen, "12.1 Season 2 | Mythic+ Best Specs & Meta" — the queue head and the
+  highest-value item in it) with the documented `player_client=android` recipe at
+  `--sleep-requests 1.5` → **HTTP 429**. Stopped there.
+- **Same shape as every previous day, re-derived rather than assumed**: the watch page downloads,
+  the android player API JSON downloads, subtitles resolve (`Downloading subtitles: en`), format 18
+  is selected and yt-dlp writes the subtitle target path — and only the `timedtext` download 429s.
+  Not the datacenter bot wall; that message never appeared. yt-dlp is at the `requirements.txt`
+  pin (2026.07.04); nothing was installed or upgraded, and per the 08-24 elimination chain no
+  client-side change is the fix.
+- **The queue did NOT turn over since 09-03, unlike the previous run.** The same three videos are
+  present (`4z49EhVeP7I` izen, `yD9mjG-ajUU` MadSkillzzTV, `Kq3saXcBt10` Dalaran Gaming), because
+  this run happened ~40 minutes BEFORE today's nightly rather than after it — the 09-04 nightly had
+  not fired at 14:0xZ. The Supadata drain that cleared the previous three has simply not run yet
+  today. Worth stating plainly: **the 429 is still costing latency, not coverage**, and the paid
+  API lane remains the designed path for this queue.
+- **All three stay in `videos[]` and were deliberately NOT retired.** A transport failure is a
+  transport dismissal and stays UNSEEN; filing them in `seen[]` would silently abandon three
+  in-scope videos. `Kq3saXcBt10` (Dalaran Gaming, "PATCH 12.1.5 LEAKED? MAYBE NEW PTR LATER?") is
+  now especially worth keeping: **its lead turned out to be RIGHT** — the 12.1.5 PTR development
+  notes went up officially on 09-03 (Linxy, topic 2344395; see this cycle's ptr-watch entry). That
+  does NOT promote the video to a source — it was verified against the canonical forum thread, per
+  the general-creator firewall, and the thread is the citation — but it is a useful data point on
+  this creator's lead quality, and the video is still worth distilling when a transcript path
+  exists.
+- **Still an owner decision, unchanged in shape from 08-24**: accept narrower coverage behind the
+  nightly's keyword filter, raise the Supadata tier, or wait for the flag to decay. Thirteen days
+  is far past the 24-72h decay the diagnosis expected, so "wait" continues to look like the
+  weakest option. The authenticated fallback was again not used: moving a logged-in Google session
+  around is the wrong thing for a scheduled run with nobody at the keyboard, and the
+  browser-replay variant needs Riley present by construction.
+- **No discovery sweep.** The reasoning differs slightly from previous 429 days and is worth
+  recording: on those days the nightly had already polled all 44 channels shortly before the run,
+  so a sweep was redundant. Today it has not — but the conclusion is the same, because there is no
+  residential transcript path to act on a sweep's result, so it would only manufacture a backlog
+  this run cannot serve, and the nightly's own discovery (with the working Supadata lane behind it)
+  is due within the hour.
+
+
 ## 2026-09-03 (local, scheduled) — caption 429 on its TWELFTH day; queue held at 3, nothing distilled — but the Supadata lane drained tonight's nightly, so the queue is being served by its designed path
 
 **The residential caption lane is still down — day 12 since 2026-08-23.** Nothing distilled, no

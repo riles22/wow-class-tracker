@@ -17,6 +17,80 @@ by parsed DATE, never by position. Do not cite lines of this file by NUMBER from
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
 
+## 2026-09-04 (local, scheduled) — **PATCH 12.1.5 PTR IS LIVE AND OFFICIAL** — the between-cycles posture ENDS on an owner action, not on this run; plus the September 3 hotfix round-up logged (2 class lines, one of them a set-bonus fix)
+
+Ran ~40 minutes BEFORE today's nightly rather than after it — the 09-04 nightly had not fired at
+14:0xZ (yesterday's fired late, 14:42Z). So this is a genuine first sweep of the day, not catch-up
+verification, and the two findings below reached master ahead of the night rather than behind it.
+
+- **The 12.2-announcement lane finally fired — as 12.1.5.** Yesterday's run chased the Dalaran
+  Gaming "PATCH 12.1.5 LEAKED?" title down to eight player posts with zero blue and correctly
+  logged it as speculation. It is speculation no longer: **Linxy posted "Midnight: 12.1.5 PTR
+  Development Notes" (us.forums topic 2344395) at 2026-09-03T16:42:43Z**, post 1 now at **version 3**
+  (last edited 22:48:20Z — already revised once). Posts #2 and #3 are Linxy's EMPTY reservation
+  posts (0 bytes), the same shape the 12.1 thread used to accumulate later build posts. Wowhead
+  mirrors it at news=382730 and has opened a **PTR news category** (nine 12.1.5 articles in the
+  current 40-item feed: the reveal, datamined maps, mount models, key bindings, Warband
+  reputations, Ascendant Venomstones, a solo-delve achievement, a vendor-mount cost update).
+- **NOTHING FROM 12.1.5 WAS INGESTED, AND THAT IS THE RULE, NOT CAUTION.** The between-cycles
+  block is explicit: opening a cycle is an **OWNER action** — a new `PHASES.ptr` entry, a new
+  `thread` key, contract rows, and a zone probe via `node src/wcl-probe.mjs` — "not an agent-side
+  thread-key update". Two further reasons it would have been wrong to log these into
+  `data/ptr-builds.json` as ordinary entries: (a) the feed is the LIVE 12.1 lane, so 12.1.5 PTR
+  changes would render in the drawer's shipping/development surfaces as though they were live
+  now; (b) with `PHASES.ptr` null there is no era to attribute them to, so `classifyHighlight`
+  would fold next-patch changes straight into the live outlook tally. The feed's `thread` key is
+  untouched and still points at the closed 12.1 thread (2317811).
+- **What the owner is deciding about, recorded so the decision does not need re-fetching.** The
+  notes carry real class work for three specs: **Devourer Demon Hunter** (Collapsing Star range,
+  no 5s cooldown on cancel, Fury-drain slow now time-limited; Void-Scarred reshuffled — Demonic
+  Intensity now resets The Hunt at +30%, Violent Transformation resets Soul Immolation instead,
+  Monster Rising Intellect 15%→10% and Collapsing Star damage 15%→20%); **Marksmanship Hunter**
+  (new talent **Blood Fletching**, and **Unload has been removed**); **Protection Warrior**
+  (Execute no longer consumes optional Rage and its damage is **increased by 100%**; Colossus's
+  Practiced Strikes now cuts Execute and Revenge Rage cost by 10). Non-class: the "Promise of
+  Tomorrow" campaign, Labyrinths (mega-dungeon-scale Delves), Aqir Invasions, a one-boss raid
+  (**The Unbinding of Kith'ix**), Ascendant Venomstones (upgrade a fully-upgraded S2 Hero/Mythic
+  weapon, trinket or necklace — a **gearing-lane** input when it ships), and Legion/BfA warband
+  reputations. All read off the canonical thread, not the mirror.
+- **The live 12.1 lane also produced a real entry**: the **September 3 hotfix round-up**, logged as
+  the `2026-09-03` `kind: "hotfix"` build. Read from Kaivax's canonical running blue post (topic
+  2336376, title rolled to "…Hotfixes - September 3", post 1 at **version 29**, last edited
+  2026-09-04T00:15:02Z) with its `<ul>` heading structure intact, rather than off the Wowhead
+  mirror. Both class lines sit under an explicit SPEC heading — Priest › Holy and Shaman ›
+  Restoration — so there was no class-wide or hero-tree attribution call to make; the Shaman line
+  names Totemic inside its own text under the Restoration heading, so it stays spec-scoped (the
+  08-31 Affliction/Hellcaller precedent). No PvP section this round.
+- **Classification was checked, and the two lines DISAGREE — which is worth writing down because
+  every previous round-up in this cycle classified uniformly null.** The Holy Priest line is null;
+  the Restoration Shaman line classifies **buff**, on "did not properly increase the healing done
+  by". That vote was left standing rather than reworded away: the stored text is the verbatim
+  blue-post line, and editing a highlight to steer `classifyHighlight` would be gaming the outlook
+  tally. It is also defensible on the merits — a talent that was silently doing nothing and now
+  works is honestly more healing than before the hotfix. Measured after the rebuild: **it moved no
+  published outlook arrow** (Restoration Shaman's outlook was already ↗ off its dated verdict,
+  which outranks the tally).
+- **The Holy Priest line touches a SET BONUS, so the tier-set upkeep gate fired and was closed in
+  this same commit** — including the gearing mirror, which the nightly structurally cannot do
+  (publish stages `data/`, `dist/` and skill logs, never `gearing/`). `spec.tierSet.asOf`
+  2026-06-30 → **2026-09-03**, source moved to the September 3 blue post, and the set2 TEXT gained
+  a dated parenthetical rather than a rewrite, because this was a bug fix making the printed
+  2-piece behave as written — no value changed. Exactly the shape of the 2026-09-02 Fire Mage
+  close. `node gearing/src/sync-tracker-fields.mjs` reported the one field, and
+  `npm run gearing:build` rebuilt the artifact in the same change, so the two pages cannot state
+  different set bonuses.
+- **Two encounter-tuning articles again correctly NOT logged** — the raid nerfs inside the same
+  September 3 round-up (Ula'tek Caustic Waves, a Blight Vein tooltip correction) are encounter
+  work, not class tuning, so they ride in the entry's `Non-class:` highlight and produce no
+  `specsAffected`.
+- **Dormant lanes skipped as prescribed** — the four PTR WCL zone sweeps (54/52/56/57). Their
+  contract rows were removed at the flip, so they need no manifest excuse and got none. **Note for
+  the owner:** when 12.1.5 opens as a cycle, this is where the new zone ids get probed.
+- **Archon deliberately NOT re-probed from residential.** The wall is measured not IP-scoped
+  (re-tested 08-27 and 08-30); the manifest's nine `archon-*` rows carry yesterday's finding and a
+  residential GET would only re-derive a settled transport fact.
+
+
 ## 2026-09-03 (local, scheduled) — live lane swept clean; NO 12.1.5/12.2 PTR announcement, and the creator "leak" is player speculation with no blue post behind it
 
 Ran ~40 minutes after tonight's nightly published (`b60bde2`, publish 15:05:31Z), so this is

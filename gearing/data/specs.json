@@ -2311,10 +2311,10 @@
       "statPriorityPatch": "12.0.7",
       "statPrioritySource": "https://www.icy-veins.com/wow/holy-priest-pve-healing-stat-priority",
       "tierSet": {
-        "set2": "Each target affected by your Renew increases your Critical Strike chance by 2%, up to 6%.",
+        "set2": "Each target affected by your Renew increases your Critical Strike chance by 2%, up to 6%. (2026-09-03 hotfix: fixed so the 2-set reliably grants Renewed Vigor from Renew — a bug fix to make the printed bonus behave as written; no value changed.)",
         "set4": "Renew healing increased by 10%. Light's Resurgence now has a 100% chance to leave a Renew on the first target Prayer of Mending heals.",
-        "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/10",
-        "asOf": "2026-06-30"
+        "source": "https://us.forums.blizzard.com/en/wow/t/world-of-warcraft-midnight-hotfixes-september-3/2336376",
+        "asOf": "2026-09-03"
       }
     },
     {
@@ -3334,5 +3334,5 @@
       }
     }
   ],
-  "trackerFieldsSyncedAt": "2026-09-02"
+  "trackerFieldsSyncedAt": "2026-09-04"
 }
