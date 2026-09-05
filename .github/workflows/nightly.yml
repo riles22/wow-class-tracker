@@ -883,8 +883,8 @@ jobs:
           {
             echo "### ❌ Nightly publish failed"
             echo
-            echo "The refresh agent finished, but the publish job did not ship. Nothing was"
-            echo "committed or deployed — the site still shows the last good run."
+            echo "The nightly publish job failed. The full log records whether a commit"
+            echo "or deployment completed before the failure."
             echo
             echo "[Full job log]($RUN_URL)"
             echo
@@ -902,6 +902,12 @@ jobs:
             echo
             echo "--- Gate 3 (refresh contract) ---"
             node src/check-refresh.mjs --manifest --wcl-evidence=wcl-fetch/evidence.json 2>&1 | tail -30 || true
+            echo
+            echo "--- Deterministic numeric collection ---"
+            node src/check-stable-metrics.mjs --manifest data/run-manifest.json 2>&1 | tail -20 || true
+            echo
+            echo "--- Official-note revision intake ---"
+            node src/check-official-notes.mjs 2>&1 | tail -20 || true
             echo '```'
           } > "$RUNNER_TEMP/failure.md"
           num="$(gh issue list --state open --search "in:title \"Nightly digest\"" --json number --jq '.[0].number // empty')" || num=""
