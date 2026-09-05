@@ -3,7 +3,7 @@
   "source": "Icy Veins",
   "sourceId": "icyveins",
   "dated": true,
-  "harvestedAt": "2026-08-31",
+  "harvestedAt": "2026-09-05",
   "specs": {
     "Blood Death Knight": {
       "guideUrl": "https://www.icy-veins.com/wow/blood-death-knight-pve-tank-gear-best-in-slot",
@@ -207,9 +207,9 @@
         {
           "list": "mplus",
           "slot": "Head",
-          "itemId": "239050",
-          "itemName": "Helm of the Raptor King",
-          "sourceText": "King's Rest",
+          "itemId": "271474",
+          "itemName": "Baleful Grave-Knight's Casque",
+          "sourceText": "Catalyst from King's Rest",
           "sourceKind": "dungeon",
           "boss": null,
           "dungeon": "Kings' Rest",
@@ -251,9 +251,9 @@
         {
           "list": "mplus",
           "slot": "Shoulder",
-          "itemId": "239037",
-          "itemName": "C'thraxxi Binders Pauldrons",
-          "sourceText": "Temple of Sethraliss",
+          "itemId": "271472",
+          "itemName": "Baleful Grave-Knight's Gibbets",
+          "sourceText": "Catalyst from Temple of Sethraliss",
           "sourceKind": "dungeon",
           "boss": null,
           "dungeon": "Temple of Sethraliss",
@@ -262,9 +262,9 @@
         {
           "list": "mplus",
           "slot": "Legs",
-          "itemId": "273776",
-          "itemName": "Ancient General's Obsidian Pillars",
-          "sourceText": "Altar of Fangs",
+          "itemId": "271473",
+          "itemName": "Baleful Grave-Knight's Greaves",
+          "sourceText": "Catalyst from Altar of Fangs",
           "sourceKind": "dungeon",
           "boss": null,
           "dungeon": "Altar of Fangs",
@@ -295,9 +295,9 @@
         {
           "list": "mplus",
           "slot": "Chest",
-          "itemId": "239036",
-          "itemName": "Desert Guardian's Breastplate",
-          "sourceText": "Temple of Sethraliss",
+          "itemId": "271477",
+          "itemName": "Baleful Grave-Knight's Breastplate",
+          "sourceText": "Catalyst from Temple of Sethraliss",
           "sourceKind": "dungeon",
           "boss": null,
           "dungeon": "Temple of Sethraliss",
@@ -742,7 +742,8 @@
           ],
           "note": "Midnight expanded the array of oils and weapon enchants, but the power of most of them is middling at best. When you are fully geared, your choice of weapon imbuement will generally be Thalassian Phoenix Oil as a default for all content. The best Flask for San'layn is Flask of the Shattered Sun or Flask of the Blood Knights , depending on your current stats. As Deathbringer , the best flask will be either Flask of the Shattered Sun or Flask of Thalassian Resistance . You should sim yourself to identify which one it is; it will very likely come down to margin of error. Your default potion is Potion of Recklessness , with Light's Potential being slightly worse. In situations where you do not have to worry about performance, you can play Light's Potential if it is a lot cheaper to craft/buy. Do not get baited by Draught of Rampant Abandon . It provides slightly more strength than Light's Potential , but its downside-effect drops a 12 yard silence zone on you that persists until the potion is over. As a tank, one of your main responsibilities is positioning enemies, and there are very few things worse than an AoE denial that forces you to move at a moment's notice. You should use Concentrated Silvermoon Health Potion for in-combat healing. Healing potions do not share a cooldown with Healthstone s, so you can use both independently if you play with a Warlock. Feasts are the only food in Midnight to grant stamina alongside primary or secondary stats. Use Harandar Celebration (primary) or Blooming Feast (secondary stats); either option is fine and they provide comparable benefits to you, so it will likely be down to which feast your raid is placing. The personal food equivalents to both is Royal Roast (primary stat) or Champion's Bento (secondary stat). As mentioned, they are slightly worse due to not providing Stamina. Midnight brings with it a new augment rune, as is the custom for every expansion. For the entirety of the expansion, you will be using Void-Touched Augment Rune . Since these will be very limited in supply and thus quite expensive, we recommend getting the permanent Ethereal Augment Rune from K'aresh as a stopgap. It is a very small amount of primary stats, but it is more than zero in all of the cases where Void-Touched Augment Rune is out of financial reach. This guide has been written by Mandl and Panthea. Mandl is one of Acherus ' Useful Minions and an avid Blood Death Knight theorycrafter. Panthea raids in the Hall of Fame guild Catalyst . He plays all tanks and is a \"Useful Minion\" for the Acherus Death Knight Discord . You can follow him on Twitter ."
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Frost Death Knight": {
       "guideUrl": "https://www.icy-veins.com/wow/frost-death-knight-pve-dps-gear-best-in-slot",
@@ -1471,7 +1472,8 @@
           ],
           "note": "Frost Death Knights can utilize powerful Runeforges on their weapons instead of normal enchants. Choosing the right enchant is crucial for optimizing your DPS. Here are the best enchants for the different viable builds! You generally want to use Flask of the Shattered Sun in all content. If your crit is already sufficiently high (1600+) consider using either Flask of the Magisters or Flask of the Blood Knights to get a better stat distribution. Sim yourself to be sure. There are some options for potions that we can use, but we recommend Potion of Recklessness as your go-to potion for all content. However, if you are running either Algeth'ar Puzzle Box or your potion wouldn't grant Mastery, you can run Light's Potential instead. We do recommend simming yourself to be sure if this applies to you. You should also make sure to keep up a stock of Concentrated Silvermoon Health Potion ! These healing potions are great for when you need to quickly heal yourself, helping your healers, and ensuring that you stay alive. For Frost Death Knights, food which boosts your main stat is the best option. This means that you either want to eat a feast such as Harandar Celebration or Silvermoon Parade . If your party or raid team does not supply a feast, you can eat Impossibly Royal Roast or Royal Roast as an alternative. In addition, if you can afford it, you should use Void-Touched Augment Rune s to increase your primary stat. Augment Runes are expensive and disappear on death, so use them wisely and sparingly!"
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Unholy Death Knight": {
       "guideUrl": "https://www.icy-veins.com/wow/unholy-death-knight-pve-dps-gear-best-in-slot",
@@ -2169,7 +2171,8 @@
           ],
           "note": "Use Flask of the Shattered Sun as your go-to choice. You generally want to use either Flask of the Shattered Sun or Flask of the Magisters in all content. The choice depends on your current stats and is unfortunately not an obvious one. If you have lots of Mastery and not much Crit, Shattered Sun is likely best. If you have lots of Crit and not much Mastery, Magisters is better. You need to simulate yourself to get the most accurate result that fits your character, but the above guidelines will serve you well in 99% of cases. There are some options for potions that we can use, but we recommend Potion of Recklessness as your go-to potion for all content. You should also make sure to keep up a stock of Concentrated Silvermoon Health Potion ! These healing potions are great for when you need to quickly heal yourself, helping your healers, and ensuring that you stay alive. You can either pick up main stat food or secondary stat food in Midnight. For Unholy Death Knights, main stat is the best option. This means that you either want to eat a feast such as Harandar Celebration or Silvermoon Parade . If your party or raid team does not supply a feast, you can eat Impossibly Royal Roast or Royal Roast as an alternative. In addition, if you can afford it, you should use Void-Touched Augment Rune s to increase your primary stat. Augment Runes are expensive and disappear on death, so use them wisely and sparingly!"
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Havoc Demon Hunter": {
       "guideUrl": "https://www.icy-veins.com/wow/havoc-demon-hunter-pve-dps-gear-best-in-slot",
@@ -2945,7 +2948,8 @@
           ],
           "note": "Your weapon enhancement consumable of choice is two Thalassian Phoenix Oil for Critical Strike and Haste. There are two options for your flask of choice depending on your character's stats: You can also obtain a flask of your choice from Cauldron of Sin'dorei Flasks , provided by Alchemists. Potion of Recklessness is your best option, provided you can make it provide Critical Strike. Always pair these with Bloodlust / Heroism alongside Metamorphosis . You can also obtain Fleeting Potion of Recklessness from Voidlight Potion Cauldron provided by Alchemists. A note on Draught of Rampant Abandon is that, while it's technically stronger, the void zones it spawns pacify you. It only takes 1-2 GCDs inside this to wipe out the extra value, so isn't generally worth it. Concentrated Silvermoon Health Potion is the current best healing potion. Using this has a 5-minute cooldown, but multiple can be consumed in an extended boss fight should it go on long enough. Additionally, Warlock 's Healthstone s do not share a cooldown with other healing consumables. Remember to use it as well if you are holding one! Agility remains the strongest stat in Season 2, so you should be eating a Silvermoon Parade or other primary stat Feast if possible. If this isn't provided by your group, stick to Royal Roast personal food instead. In addition, if you can afford it, you should use Void-Touched Augment Rune s to increase your primary stat. These can be obtained through the weekly housing quest, but remember: Augment Runes are expensive and disappear on death, so use them wisely!"
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Devourer Demon Hunter": {
       "guideUrl": "https://www.icy-veins.com/wow/devourer-demon-hunter-pve-dps-gear-best-in-slot",
@@ -3727,7 +3731,8 @@
           ],
           "note": "Your weapon enhancement consumable of choice is Thalassian Phoenix Oil to provide additional Critical Strike and Haste. There are three options for your flask of choice depending on the situation: You can also obtain a flask of your choice from Cauldron of Sin'dorei Flasks s provided by Alchemists. Potion of Recklessness is your best option, and should be paired with major cooldowns and Bloodlust / Heroism . You can also obtain temporary Potion of Recklessness from Voidlight Potion Cauldron provided by Alchemists. Concentrated Silvermoon Health Potion is the current best healing potion. Using this has a 5-minute cooldown, but multiple can be consumed in an extended boss fight should it go on long enough. Additionally, Warlock 's Healthstone s do not share a cooldown with other healing consumables. Remember to use it as well if you are holding one! In Season Two, secondary stats from food have started to outweigh the value of Intellect. As such, seek to eat Feast of Knowledge when it is available, or Champion's Bento when it is not. In addition, if you can afford it, you should use Void-Touched Augment Rune s to increase your primary stat. These can be obtained through the weekly housing quest, but remember: Augment Runes are expensive and disappear on death, so use them wisely!"
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Vengeance Demon Hunter": {
       "guideUrl": "https://www.icy-veins.com/wow/vengeance-demon-hunter-pve-tank-gear-best-in-slot",
@@ -4501,7 +4506,8 @@
           ],
           "note": "In current tuning Thalassian Phoenix Oil wins compared to other oils and Refulgent Whetstone both offensively and defensively. Midnight flasks come in four variants, one for each secondary stat. Vengeance prefers Flask of the Blood Knights for Haste, but if you are very heavy on Haste gear you can choose to use Flask of the Shattered Sun for Critical Strike or Flask of Thalassian Resistance for Versatility instead. When it comes to Combat potions the strongest option is currently Potion of Recklessness for a massive burst of your highest Secondary Stat, which is usually going to be Haste, at a small loss of your lowest Secondary Stat. This makes it a really strong potion for both burst damage and survivability while it is active. Midnight season 2 introduces a new Healing potion, Concentrated Silvermoon Health Potion , which heals for a larger amount than normal Healing potions making it a small upgrade. As a tank it will not restore a massive amount of your health, but it can still be useful in a pinch. There are plenty of food choices available in Midnight, but the food that currently looks to perform the best is one of the Main Stat Feasts such as Silvermoon Parade , and if that is not available you can use Royal Roast for yourself. This guide is written by Meyra, a Vengeance main with a love for pushing Mythic+ keys and showcasing Proof of Concept keys with 5 tanks or other non-standard group compositions. They are a distinguished member and frequent contributor to Vengeance theory in the Demon Hunter class discord , and also occasionally stream Vengeance and other tank content on Twitch ."
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Balance Druid": {
       "guideUrl": "https://www.icy-veins.com/wow/balance-druid-pve-dps-gear-best-in-slot",
@@ -5210,7 +5216,8 @@
           ],
           "note": "The best weapon enhancement/oil is Thalassian Phoenix Oil , and you will want to apply it to your weapon in all content. The default flask for most situations is Flask of the Magisters . Depending on your gear set, you could also use Flask of the Blood Knights if you have plenty of Mastery. The best DPS potion is Potion of Recklessness . Depending on your gear, Light's Potential may be better. Considering how close they are in power, you do want to sim yourself to determine the best option. During encounters, you can heal yourself using Concentrated Silvermoon Health Potion and Healthstone . Make sure you use these when in danger of dying. Harandar Celebration or Silvermoon Parade should be used in raid or dungeons if possible. Otherwise, Royal Roast offers main stat but no stamina, making it a great choice for all content. The feast heavily outperforms other food options. For close progression pulls or for pushing your damage, you can also use a Void-Touched Augment Rune s. This was written by Borabank , a Balance Druid theorycrafter and raider in Country Club . You can watch him on his Twitch channel or find him in the Dreamgrove Discord server ."
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Feral Druid": {
       "guideUrl": "https://www.icy-veins.com/wow/feral-druid-pve-dps-gear-best-in-slot",
@@ -5958,7 +5965,8 @@
           ],
           "note": "Your weapon enhancement consumable of choice is Thalassian Phoenix Oil for Critical Strike and Haste. Flasks are a good way to adjust your secondary stats if you're lacking in a particular area with your gear setup. Due to the slight imbalance in priority between the two Hero Trees, recommendations can shift slightly: You can also obtain a flask of your choice from Cauldron of Sin'dorei Flasks , provided by Alchemists. In Season 2, there's a few different options depending on your current gear level: Of the three, Potion of Recklessness will generally be the strongest as soon as your gear is set up to trigger a preferred stat. You may find in sims that, with unbalanced gearsets, Light's Potential is preferred - this is normal and you should follow the recommendation until your stats balance out to support it. Potions should always be paired with major cooldowns alongside Bloodlust / Heroism . You can also obtain Fleeting versions of any of these potions from a Voidlight Potion Cauldron , provided by Alchemists. A note on Draught of Rampant Abandon is that, while it's technically stronger, one wrong step will pacify you inside the void zone that it occasionally spawns. It only takes 1-2 GCDs (or a cancelled Convoke the Spirits !) inside this to wipe out the extra value, so playing this potion generally isn't worth it. Concentrated Silvermoon Health Potion is the current best healing potion. Using this has a 5-minute cooldown, but multiple can be consumed in an extended boss fight should it go on long enough. Additionally, Warlock 's Healthstone s do not share a cooldown with other healing consumables. Remember to use it as well if you are holding one! Agility remains the strongest stat in Season 2, so you should be eating a Silvermoon Parade or other primary stat Feast if possible. If this isn't provided by your group, stick to Royal Roast personal food instead. In addition, if you can afford it, you should use Void-Touched Augment Rune s to increase your primary stat. These can be obtained through the weekly housing quest, but remember: Augment Runes are expensive and disappear on death, so use them wisely!"
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Guardian Druid": {
       "guideUrl": "https://www.icy-veins.com/wow/guardian-druid-pve-tank-gear-best-in-slot",
@@ -6131,7 +6139,7 @@
           "slot": "Wrist",
           "itemId": "244576",
           "itemName": "Silvermoon Agent's Deflectors",
-          "sourceText": "Crafted",
+          "sourceText": "Crafted by Leatherworking",
           "sourceKind": "crafted",
           "boss": null,
           "dungeon": null,
@@ -6162,8 +6170,8 @@
         {
           "list": "mplus",
           "slot": "Head",
-          "itemId": "273791",
-          "itemName": "Spare Speaker's Hood",
+          "itemId": "271528",
+          "itemName": "Enigmatic Dreamwatcher's Somnolent Stare",
           "sourceText": "Altar of Fangs",
           "sourceKind": "dungeon",
           "boss": null,
@@ -6173,8 +6181,8 @@
         {
           "list": "mplus",
           "slot": "Hands",
-          "itemId": "251124",
-          "itemName": "Gauntlets of Fevered Defense",
+          "itemId": "271529",
+          "itemName": "Enigmatic Dreamwatcher's Gauntlets",
           "sourceText": "Catalyst or Murder Row",
           "sourceKind": "dungeon",
           "boss": null,
@@ -6206,8 +6214,8 @@
         {
           "list": "mplus",
           "slot": "Shoulder",
-          "itemId": "251223",
-          "itemName": "Somber Spaulders",
+          "itemId": "271526",
+          "itemName": "Enigmatic Dreamwatcher's Plumage",
           "sourceText": "Catalyst or Voidscar Arena",
           "sourceKind": "dungeon",
           "boss": null,
@@ -6217,8 +6225,8 @@
         {
           "list": "mplus",
           "slot": "Legs",
-          "itemId": "159313",
-          "itemName": "Breeches of the Sacred Hall",
+          "itemId": "271527",
+          "itemName": "Enigmatic Dreamwatcher's Leggings",
           "sourceText": "Catalyst or King's Rest",
           "sourceKind": "dungeon",
           "boss": null,
@@ -6250,8 +6258,8 @@
         {
           "list": "mplus",
           "slot": "Chest",
-          "itemId": "251159",
-          "itemName": "War Trial Vestments",
+          "itemId": "271531",
+          "itemName": "Enigmatic Dreamwatcher's Lunar Raiment",
           "sourceText": "Catalyst or Den of Nalorakk",
           "sourceKind": "dungeon",
           "boss": null,
@@ -6674,7 +6682,8 @@
           ],
           "note": "You should be drinking Flask of the Blood Knights at all times. Your stat potion should be Light's Potential . Use these when you will do the most damage with your abilities, likely during your cooldowns and/or Bloodlust / Heroism . You should keep a stock of Concentrated Silvermoon Health Potion 's to use when at low health, and if you have a Warlock in the group, grab their Healthstone s and use them as well. Do not macro these together, they are best used separately! Either Silvermoon Parade or Harandar Celebration are your best food buffs, providing you not only with primary or secondary stats, but also with Stamina, which will only be available from these feasts. Make sure to carry a few Royal Roast as well, in case no feast is available to you. In addition, if you can afford it, you should use Void-Touched Augment Rune s to increase your primary stat. Augment Runes are expensive and disappear on death, so use them wisely and sparingly! This guide has been written by Pumps who has played since Vanilla and has tanked in Honestly , the #1 Oceanic raiding guild, since Mists of Pandaria. He also played in the first MDI Mythic+ dungeon tournament, where his team placed second. His mindset on tanking has always been about taking the utility and damage one can bring to the raid to the next level. He was the #1 Rank DPS Guardian Druid for 5 tiers in a row and top the 1-6 for the last 12 tiers, playing Guardian Druid, Brewmaster Monk and Protection Warrior based on which is the strongest for progression at the time. You can find him on discord — pumps. — and on Twitch ."
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Restoration Druid": {
       "guideUrl": "https://www.icy-veins.com/wow/restoration-druid-pve-healing-gear-best-in-slot",
@@ -7422,7 +7431,8 @@
           ],
           "note": "Make sure you apply Thalassian Phoenix Oil to your weapon for all content. You will also use Potion of Recklessness as your default potion. Mana potions are very weak currently and burst healing cooldowns are weaker than in previous expansions, so it is recommended to use a stat-potion to better cover the most difficult parts of the fight by using them with your cooldowns. For Healing Potions, use Concentrated Silvermoon Health Potion - This is new in 12.1! . Also, do not forget to keybind and use Healthstone s too. You can use one per pull. The different intellect Feast options are all very good ( Silvermoon Parade , Quel'dorei Medley , Harandar Celebration ). Impossibly Royal Roast is a fine personal food choice if a Feast is not available. The secondary stat food options are not viable. Void-Touched Augment Rune is the only other consumable worth mentioning. Use it whenever possible for extra stats though they can be expensive."
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Augmentation Evoker": {
       "guideUrl": "https://www.icy-veins.com/wow/augmentation-evoker-pve-dps-gear-best-in-slot",
@@ -8144,11 +8154,12 @@
           ],
           "note": "You should be using Thalassian Phoenix Oil at all times. You should use Flask of the Magisters for all content, as Mastery is Augmentation Evoker's best stat. As an Augmentation Evoker you will want to use the best Primary stat food available to you. Currently this would be the Silvermoon Parade feast. If the feast is not available, or if the secondary stat Feast is placed, then you should use Royal Roast to ensure you get the primary stat buff. You should use Void-Touched Augment Rune , if you can afford it, when challenging the hardest content the game has to offer. We do not suggest using these regularly for farm kills or dungeons, as they are often expensive, but if your wallet allows for it, you can expect approximately a 1% DPS gain from using these. This guide has been written by Saeldur, an Evoker Theorycrafter since the class came out in Dragonflight. He is an accomplished high end player with top parses on multiple specs, an Expert on the Evoker Discord , and has a deep understanding of many other classes, and how they interact with Augmentation Evoker."
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Devastation Evoker": {
       "guideUrl": "https://www.icy-veins.com/wow/devastation-evoker-pve-dps-gear-best-in-slot",
-      "published": "2026-08-10",
+      "published": "2026-08-31",
       "priorities": [
         {
           "label": "Devastation Evoker",
@@ -8171,10 +8182,10 @@
           "slot": "Head",
           "itemId": "271501",
           "itemName": "Calamitous Echo's Magmashapers",
-          "sourceText": "Catalyst from Nek'zali",
-          "sourceKind": "raid",
-          "boss": "Nek'zali the Soulcoiler",
-          "dungeon": null,
+          "sourceText": "Catalyst from Temple of Sethraliss",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "Temple of Sethraliss",
           "droppedBy": null
         },
         {
@@ -8182,11 +8193,11 @@
           "slot": "Hands",
           "itemId": "271502",
           "itemName": "Calamitous Echo's Ebon Greathorns",
-          "sourceText": "Entombed Sentinels",
-          "sourceKind": "raid",
-          "boss": "Entombed Sentinels",
+          "sourceText": "Catalyst from Tidebound Grotto",
+          "sourceKind": "world",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": "Catalyst from Tidebound Grotto"
         },
         {
           "list": "overall",
@@ -8202,11 +8213,11 @@
         {
           "list": "overall",
           "slot": "Waist",
-          "itemId": "268254",
-          "itemName": "Serpentine Mixing Belt",
-          "sourceText": "Vashnik",
-          "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
+          "itemId": "244581",
+          "itemName": "Farstrider's Trophy Belt",
+          "sourceText": "Crafted by Leatherworking",
+          "sourceKind": "crafted",
+          "boss": null,
           "dungeon": null,
           "droppedBy": null
         },
@@ -8246,34 +8257,23 @@
         {
           "list": "overall",
           "slot": "Feet",
-          "itemId": "268258",
-          "itemName": "Boots of the Reckless Wayfarer",
-          "sourceText": "Lost Explorers",
+          "itemId": "268233",
+          "itemName": "Ferocious Scaleboots",
+          "sourceText": "Sszorak",
           "sourceKind": "raid",
-          "boss": "The Lost Explorers",
+          "boss": "Sszorak",
           "dungeon": null,
           "droppedBy": null
         },
         {
           "list": "overall",
           "slot": "Chest",
-          "itemId": "271876",
-          "itemName": "Awoken Dreadfang Cuirass",
-          "sourceText": "Ula'tek",
+          "itemId": "271504",
+          "itemName": "Searing Caldera of Calamity",
+          "sourceText": "Catalyst from Ula'tek",
           "sourceKind": "raid",
           "boss": "Ula'tek",
           "dungeon": null,
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Finger",
-          "itemId": "158366",
-          "itemName": "Charged Sandstone Band",
-          "sourceText": "Temple of Sethraliss",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Temple of Sethraliss",
           "droppedBy": null
         },
         {
@@ -8284,6 +8284,17 @@
           "sourceText": "Vashnik",
           "sourceKind": "raid",
           "boss": "Vashnik the Malignant",
+          "dungeon": null,
+          "droppedBy": null
+        },
+        {
+          "list": "overall",
+          "slot": "Finger",
+          "itemId": "268252",
+          "itemName": "Apex Brute's Claw Ring",
+          "sourceText": "Sszorak",
+          "sourceKind": "raid",
+          "boss": "Sszorak",
           "dungeon": null,
           "droppedBy": null
         },
@@ -8312,13 +8323,13 @@
         {
           "list": "overall",
           "slot": "Trinket",
-          "itemId": "270167",
-          "itemName": "Wavecaller's Seastone",
-          "sourceText": "Tidebound Grotto",
-          "sourceKind": "world",
-          "boss": null,
+          "itemId": "270168",
+          "itemName": "Font of Venomous Rage",
+          "sourceText": "Ula'tek",
+          "sourceKind": "raid",
+          "boss": "Ula'tek",
           "dungeon": null,
-          "droppedBy": "Tidebound Grotto"
+          "droppedBy": null
         },
         {
           "list": "overall",
@@ -8334,11 +8345,11 @@
         {
           "list": "overall",
           "slot": "Off Hand",
-          "itemId": "245769",
-          "itemName": "Aln'hara Lantern",
-          "sourceText": "Crafted by Inscription",
-          "sourceKind": "crafted",
-          "boss": null,
+          "itemId": "268197",
+          "itemName": "Spine of the Hissing Abyss",
+          "sourceText": "Entombed Sentinels",
+          "sourceKind": "raid",
+          "boss": "Entombed Sentinels",
           "dungeon": null,
           "droppedBy": null
         },
@@ -8347,10 +8358,10 @@
           "slot": "Head",
           "itemId": "271501",
           "itemName": "Calamitous Echo's Magmashapers",
-          "sourceText": "Catalyst from Voidscar Arena",
+          "sourceText": "Catalyst from Temple of Sethraliss",
           "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": "Voidscar Arena",
+          "dungeon": "Temple of Sethraliss",
           "droppedBy": null
         },
         {
@@ -8378,13 +8389,13 @@
         {
           "list": "mplus",
           "slot": "Waist",
-          "itemId": "251155",
-          "itemName": "Tribal Defender's Cord",
-          "sourceText": "Den of Nalorakk",
-          "sourceKind": "dungeon",
+          "itemId": "244581",
+          "itemName": "Farstrider's Trophy Belt",
+          "sourceText": "Crafted by Leatherworking",
+          "sourceKind": "crafted",
           "boss": null,
-          "dungeon": "Den of Nalorakk",
-          "droppedBy": "Nalorakk"
+          "dungeon": null,
+          "droppedBy": null
         },
         {
           "list": "mplus",
@@ -8433,8 +8444,8 @@
         {
           "list": "mplus",
           "slot": "Chest",
-          "itemId": "271876",
-          "itemName": "Awoken Dreadfang Cuirass",
+          "itemId": "271504",
+          "itemName": "Searing Caldera of Calamity",
           "sourceText": "Catalyst from Altar of Fangs",
           "sourceKind": "dungeon",
           "boss": null,
@@ -8488,12 +8499,12 @@
         {
           "list": "mplus",
           "slot": "Trinket",
-          "itemId": "250224",
-          "itemName": "Mindpiercer's Sigil",
-          "sourceText": "Voidscar Arena",
+          "itemId": "250214",
+          "itemName": "Lightspire Core",
+          "sourceText": "Blinding Vale",
           "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": "Voidscar Arena",
+          "dungeon": "The Blinding Vale",
           "droppedBy": null
         },
         {
@@ -8510,12 +8521,12 @@
         {
           "list": "mplus",
           "slot": "Off Hand",
-          "itemId": "245769",
-          "itemName": "Aln'hara Lantern",
-          "sourceText": "Crafted by Inscription",
-          "sourceKind": "crafted",
+          "itemId": "273779",
+          "itemName": "Nocuous Focal Fang",
+          "sourceText": "Altar of Fangs",
+          "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": null,
+          "dungeon": "Altar of Fangs",
           "droppedBy": null
         },
         {
@@ -8534,11 +8545,11 @@
           "slot": "Hands",
           "itemId": "271502",
           "itemName": "Calamitous Echo's Ebon Greathorns",
-          "sourceText": "Entombed Sentinels",
-          "sourceKind": "raid",
-          "boss": "Entombed Sentinels",
+          "sourceText": "Catalyst from Tidebound Grotto",
+          "sourceKind": "world",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": "Catalyst from Tidebound Grotto"
         },
         {
           "list": "raid",
@@ -8554,11 +8565,11 @@
         {
           "list": "raid",
           "slot": "Waist",
-          "itemId": "268254",
-          "itemName": "Serpentine Mixing Belt",
-          "sourceText": "Vashnik",
-          "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
+          "itemId": "244581",
+          "itemName": "Farstrider's Trophy Belt",
+          "sourceText": "Crafted by Leatherworking",
+          "sourceKind": "crafted",
+          "boss": null,
           "dungeon": null,
           "droppedBy": null
         },
@@ -8598,20 +8609,20 @@
         {
           "list": "raid",
           "slot": "Feet",
-          "itemId": "268258",
-          "itemName": "Boots of the Reckless Wayfarer",
-          "sourceText": "Lost Explorers",
+          "itemId": "268233",
+          "itemName": "Ferocious Scaleboots",
+          "sourceText": "Sszorak",
           "sourceKind": "raid",
-          "boss": "The Lost Explorers",
+          "boss": "Sszorak",
           "dungeon": null,
           "droppedBy": null
         },
         {
           "list": "raid",
           "slot": "Chest",
-          "itemId": "271876",
-          "itemName": "Awoken Dreadfang Cuirass",
-          "sourceText": "Ula'tek",
+          "itemId": "271504",
+          "itemName": "Searing Caldera of Calamity",
+          "sourceText": "Catalyst from Ula'tek",
           "sourceKind": "raid",
           "boss": "Ula'tek",
           "dungeon": null,
@@ -8664,13 +8675,13 @@
         {
           "list": "raid",
           "slot": "Trinket",
-          "itemId": "270167",
-          "itemName": "Wavecaller's Seastone",
-          "sourceText": "Tidebound Grotto",
-          "sourceKind": "world",
-          "boss": null,
+          "itemId": "270168",
+          "itemName": "Font of Venomous Rage",
+          "sourceText": "Ula'tek",
+          "sourceKind": "raid",
+          "boss": "Ula'tek",
           "dungeon": null,
-          "droppedBy": "Tidebound Grotto"
+          "droppedBy": null
         },
         {
           "list": "raid",
@@ -8686,11 +8697,11 @@
         {
           "list": "raid",
           "slot": "Off Hand",
-          "itemId": "245769",
-          "itemName": "Aln'hara Lantern",
-          "sourceText": "Crafted by Inscription",
-          "sourceKind": "crafted",
-          "boss": null,
+          "itemId": "268197",
+          "itemName": "Spine of the Hissing Abyss",
+          "sourceText": "Entombed Sentinels",
+          "sourceKind": "raid",
+          "boss": "Entombed Sentinels",
           "dungeon": null,
           "droppedBy": null
         }
@@ -8699,6 +8710,7 @@
         {
           "tier": "S",
           "itemIds": [
+            "270168",
             "270164",
             "270167"
           ]
@@ -8714,7 +8726,6 @@
         {
           "tier": "B",
           "itemIds": [
-            "270168",
             "270169",
             "273794"
           ]
@@ -8839,7 +8850,8 @@
           ],
           "note": "You should be using Thalassian Phoenix Oil at all times. You should use one of these two flasks depending on what your lower stat is. As a Devastation Evoker you will want to use the best primary stat food available to you. Currently this would be the Silvermoon Parade feast if available. If the feast is not available, or if the secondary stat feast is placed, then you should use Royal Roast personal food. You should use an Augment Rune if you can afford it during Progression, especially when you get close to a kill. It provides a sizeable boost to Intellect. We do not recommend using at all times, as they are often quite expensive. Using the current best rune is approximately a 1% DPS gain. For Season 2 the following Augment Rune is available:"
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Preservation Evoker": {
       "guideUrl": "https://www.icy-veins.com/wow/preservation-evoker-pve-healing-gear-best-in-slot",
@@ -9591,11 +9603,12 @@
           ],
           "note": "The best Weapon Oil for Preservation Evoker will be Thalassian Phoenix Oil . The secondary stat boosts provides a nice bonus in every form of content and the alternative Oil of Dawn is not strong enough to ever be worth using. Flask of the Magisters will be your go-to choice for maximizing your healing output. In situations like Mythic+, where you do not need extra healing, you can instead choose to run Flask of the Blood Knights . There are two potions that are worth considering in Midnight: Potion of Recklessness and Lightfused Mana Potion . It is important to note that these potions share cooldowns. Using one of them with put all others on cooldown. In any situation where mana is concerned, you should be using Lightfused Mana Potion only. When you do not need the mana you can instead use Potion of Recklessness . Make sure to always keep Concentrated Silvermoon Health Potion s on you at all times. These potions do not share a cooldown with combat/mana potions meaning that you can use them whenever you are in need of emergency healing to yourself. You should be eating Hearty Royal Roast as the desired feast or Hearty Silvermoon Parade for your own personal food. These provide you with an increase to your primary stat and that beats out any other food choices. Void-Touched Augment Rune provide around 1% HPS increase and should be evaluated during progress, especially when close to pivotal kills. They can be quite pricey though, so use them sparingly when truly needed. This guide has been written by Mytholxgy, a former RWF progression raider and analyst for Pieces and Liquid . He is also a Templar in the Paladin Class Discord , as well as one of the class experts in the Evoker Discord . You can reach him on Twitter and watch him stream occasionally on Twitch ."
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Beast Mastery Hunter": {
       "guideUrl": "https://www.icy-veins.com/wow/beast-mastery-hunter-pve-dps-gear-best-in-slot",
-      "published": "2026-08-31",
+      "published": "2026-09-04",
       "priorities": [
         {
           "label": "Single-Target",
@@ -9773,11 +9786,11 @@
         {
           "list": "overall",
           "slot": "Trinket",
-          "itemId": "270173",
-          "itemName": "Zul'jin's Guillotine Technique",
-          "sourceText": "Coiled Altar",
+          "itemId": "270165",
+          "itemName": "Keeper's Seething Core",
+          "sourceText": "Entombed Sentinels",
           "sourceKind": "raid",
-          "boss": "The Coiled Altar",
+          "boss": "Entombed Sentinels",
           "dungeon": null,
           "droppedBy": null
         },
@@ -10128,8 +10141,9 @@
           "tier": "S",
           "itemIds": [
             "270175",
+            "270165",
             "270173",
-            "270165"
+            "270168"
           ]
         },
         {
@@ -10146,7 +10160,6 @@
           "itemIds": [
             "250215",
             "250225",
-            "270168",
             "270166",
             "273797"
           ]
@@ -10297,11 +10310,12 @@
           ],
           "note": "The best flask is generally going to be Flask of the Magisters . That said, it is best to think of Flasks as just another piece of gear that is easily swappable, and depending on your exact gear situation, any of the 4 secondary stat flasks can be optimal. To really minmax on this point, you would need to simulate it. There is only one DPS Potion worth using. Make sure to carry Concentrated Silvermoon Health Potion as well. It has a 5-minute cooldown and heals most of your health; use it as a last resort, preferring your personal defensives wherever possible. The best Food you can eat is from a Harandar Celebration or Silvermoon Parade feast. The best non-feast food is Hearty Royal Roast . The \"Hearty\" part is important, as this food persists through death, and we highly recommend grabbing Cooking to easily make your own Hearty Food, as it cannot be straightforwardly purchased on the Auction House. The best Augment Rune in Midnight is Void-Touched Augment Rune , but it might be very expensive to use on every pull or every dungeon, so use it sparingly unless your wallet is deep. This guide has been written by Azortharion , a full-timer Hunter Guidewriter, Theorycrafter, Content Creator, and top player since 2014 who is widely considered one of the best PvE Hunters in the world. He is an accomplished player with hundreds of top parses across all Hunter specs. He is the Head Admin of Trueshot Lodge , the official Hunter Class Discord. You can find him on his stream on Twitch and his channel on YouTube. He also has his own, personal Discord server where you can freely ask him any Hunter questions you may have!"
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Marksmanship Hunter": {
       "guideUrl": "https://www.icy-veins.com/wow/marksmanship-hunter-pve-dps-gear-best-in-slot",
-      "published": "2026-08-31",
+      "published": "2026-09-02",
       "priorities": [
         {
           "label": "Marksmanship Hunter",
@@ -10465,11 +10479,11 @@
         {
           "list": "overall",
           "slot": "Trinket",
-          "itemId": "270173",
-          "itemName": "Zul'jin's Guillotine Technique",
-          "sourceText": "Coiled Altar",
+          "itemId": "270168",
+          "itemName": "Font of Venomous Rage",
+          "sourceText": "Ula'tek",
           "sourceKind": "raid",
-          "boss": "The Coiled Altar",
+          "boss": "Ula'tek",
           "dungeon": null,
           "droppedBy": null
         },
@@ -10795,11 +10809,11 @@
         {
           "list": "raid",
           "slot": "Trinket",
-          "itemId": "270173",
-          "itemName": "Zul'jin's Guillotine Technique",
-          "sourceText": "Coiled Altar",
+          "itemId": "270168",
+          "itemName": "Font of Venomous Rage",
+          "sourceText": "Ula'tek",
           "sourceKind": "raid",
-          "boss": "The Coiled Altar",
+          "boss": "Ula'tek",
           "dungeon": null,
           "droppedBy": null
         },
@@ -10820,8 +10834,8 @@
           "tier": "S",
           "itemIds": [
             "270175",
-            "270173",
-            "270168"
+            "270168",
+            "270173"
           ]
         },
         {
@@ -11005,11 +11019,12 @@
           ],
           "note": "The best flask is generally going to be Flask of the Shattered Sun . That said, it is best to think of Flasks as just another piece of gear that is easily swappable, and depending on your exact gear situation, any of the 4 secondary stat flasks can be optimal. To really minmax on this point, you would need to simulate it. Marksmanship uses two different DPS Potions in most 5+ minute fights. Make sure to carry Concentrated Silvermoon Health Potion as well. It has a 5-minute cooldown and heals most of your health; use it as a last resort, preferring your personal defensives wherever possible. The best Food you can eat is from a Harandar Celebration or Silvermoon Parade feast. The best non-feast food is Hearty Royal Roast . The \"Hearty\" part is important, as this food persists through death, and we highly recommend grabbing Cooking to easily make your own Hearty Food, as it cannot be straightforwardly purchased on the Auction House. The best Augment Rune in Midnight is Void-Touched Augment Rune , but it might be very expensive to use on every pull or every dungeon, so use it sparingly unless your wallet is deep. This guide has been written by Azortharion , a full-timer Hunter Guidewriter, Theorycrafter, Content Creator, and top player since 2014 who is widely considered one of the best PvE Hunters in the world. He is an accomplished player with hundreds of top parses across all Hunter specs. He is the Head Admin of Trueshot Lodge , the official Hunter Class Discord. You can find him on his stream on Twitch and his channel on YouTube. He also has his own, personal Discord server where you can freely ask him any Hunter questions you may have!"
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Survival Hunter": {
       "guideUrl": "https://www.icy-veins.com/wow/survival-hunter-pve-dps-gear-best-in-slot",
-      "published": "2026-08-29",
+      "published": "2026-09-04",
       "priorities": [
         {
           "label": "Survival Hunter",
@@ -11540,7 +11555,8 @@
           "itemIds": [
             "270175",
             "270173",
-            "270165"
+            "270165",
+            "270168"
           ]
         },
         {
@@ -11554,7 +11570,6 @@
         {
           "tier": "B",
           "itemIds": [
-            "270168",
             "273797",
             "273796",
             "250225",
@@ -11709,11 +11724,12 @@
           ],
           "note": "The best flask is generally going to be Flask of the Magisters . That said, it is best to think of Flasks as just another piece of gear that is easily swappable, and depending on your exact gear situation, any of the 4 secondary stat flasks can be optimal. To really minmax on this point, you would need to simulate it. There is only one DPS Potion worth using. Make sure to carry Concentrated Silvermoon Health Potion as well. It has a 5-minute cooldown and heals most of your health; use it as a last resort, preferring your personal defensives wherever possible. The best Food you can eat is from a Harandar Celebration or Silvermoon Parade feast. The best non-feast food is Hearty Royal Roast . The \"Hearty\" part is important, as this food persists through death, and we highly recommend grabbing Cooking to easily make your own Hearty Food, as it cannot be straightforwardly purchased on the Auction House. The best Augment Rune in Midnight is Void-Touched Augment Rune , but it might be very expensive to use on every pull or every dungeon, so use it sparingly unless your wallet is deep. This guide has been written by Azortharion , a full-timer Hunter Guidewriter, Theorycrafter, Content Creator, and top player since 2014 who is widely considered one of the best PvE Hunters in the world. He is an accomplished player with hundreds of top parses across all Hunter specs. He is the Head Admin of Trueshot Lodge , the official Hunter Class Discord. You can find him on his stream on Twitch and his channel on YouTube. He also has his own, personal Discord server where you can freely ask him any Hunter questions you may have!"
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Arcane Mage": {
       "guideUrl": "https://www.icy-veins.com/wow/arcane-mage-pve-dps-gear-best-in-slot",
-      "published": "2026-08-31",
+      "published": "2026-09-01",
       "priorities": [
         {
           "label": "Arcane Mage",
@@ -12415,11 +12431,12 @@
           ],
           "note": "You should be using Thalassian Phoenix Oil as your weapon augment in all content. For Season 2, all secondary stat flasks are very close in DPS and the exact best Flask will differ based on your gear. Flask of the Blood Knights is usually a safe choice to be best or close to best. Light's Potential is the best DPS potion for all content, while Concentrated Silvermoon Health Potion is our healing potion of choice. Silvermoon Parade , or Hearty Silvermoon Parade if you are doing content with frequent dying, like progressing a raid boss. Augment Runes are often quite expensive, but do provide roughly a 1% DPS increase when used so they can be quite important when doing the hardest content. Void-Touched Augment Rune is the only available Augment Rune currently. This guide has been written by Dutchmagoz . Dutchmagoz has been playing Mage since 2009 and writing guides and theorycrafting since 2012, with many top 20-100 world kills and rank 1 parses under his belt. He is the owner of the official Mage Discord server Altered Time , where he is involved in Mage Theorycrafting and everything else Mage. You can reach out to him directly for questions or feedback about the guide there."
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Fire Mage": {
       "guideUrl": "https://www.icy-veins.com/wow/fire-mage-pve-dps-gear-best-in-slot",
-      "published": "2026-08-31",
+      "published": "2026-09-01",
       "priorities": [
         {
           "label": "Fire Mage",
@@ -12462,12 +12479,12 @@
         {
           "list": "overall",
           "slot": "Neck",
-          "itemId": "251142",
-          "itemName": "Pendant of Malefic Fury",
-          "sourceText": "Murder Row",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Murder Row",
+          "itemId": "268265",
+          "itemName": "Aqirbane Reliquary",
+          "sourceText": "Ula'tek",
+          "sourceKind": "raid",
+          "boss": "Ula'tek",
+          "dungeon": null,
           "droppedBy": null
         },
         {
@@ -12814,11 +12831,11 @@
         {
           "list": "raid",
           "slot": "Neck",
-          "itemId": "268251",
-          "itemName": "Amulet of the Twin Fangs",
-          "sourceText": "Twin Fangs",
+          "itemId": "268265",
+          "itemName": "Aqirbane Reliquary",
+          "sourceText": "Ula'tek",
           "sourceKind": "raid",
-          "boss": "The Twin Fangs",
+          "boss": "Ula'tek",
           "dungeon": null,
           "droppedBy": null
         },
@@ -13121,7 +13138,8 @@
           ],
           "note": "You should be using Thalassian Phoenix Oil for all content. For Season 2, you should use Flask of the Blood Knights . Light's Potential is the best DPS potion for all content, while Concentrated Silvermoon Health Potion is our healing potion of choice. Silvermoon Parade , or Hearty Silvermoon Parade if you are doing content with frequent dying, like progressing a raid boss. Augment Runes are often quite expensive, especially early on, but do provide roughly a 1% DPS increase when used so can make the difference when doing hard content. Void-Touched Augment Rune is the only available Augment Rune currently. This guide has been written by Dutchmagoz . Dutchmagoz has been playing Mage since 2009 and writing guides and theorycrafting since 2012, with many top 20-100 world kills and rank 1 parses under his belt. He is the owner of the official Mage Discord server Altered Time , where he is involved in Mage Theorycrafting and everything else Mage. You can reach out to him directly for questions or feedback about the guide there."
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Frost Mage": {
       "guideUrl": "https://www.icy-veins.com/wow/frost-mage-pve-dps-gear-best-in-slot",
@@ -13146,9 +13164,9 @@
         {
           "list": "overall",
           "slot": "Head",
-          "itemId": "271874",
-          "itemName": "Venomkeeper's Horrific Cowl",
-          "sourceText": "Ula'tek",
+          "itemId": "271564",
+          "itemName": "Crown of the Primal Leywarden",
+          "sourceText": "Catalyst from Ula'tek",
           "sourceKind": "raid",
           "boss": "Ula'tek",
           "dungeon": null,
@@ -13157,8 +13175,8 @@
         {
           "list": "overall",
           "slot": "Hands",
-          "itemId": "268243",
-          "itemName": "Grasps of the Eternal Shadow",
+          "itemId": "271565",
+          "itemName": "Primal Leywarden's Manashapers",
           "sourceText": "Coiled Altar",
           "sourceKind": "raid",
           "boss": "The Coiled Altar",
@@ -13190,9 +13208,9 @@
         {
           "list": "overall",
           "slot": "Shoulder",
-          "itemId": "239031",
-          "itemName": "Brood Cleanser's Amice",
-          "sourceText": "Temple of Sethraliss",
+          "itemId": "271562",
+          "itemName": "Primal Leywarden's Manaflux",
+          "sourceText": "Catalyst from Temple of Sethraliss",
           "sourceKind": "dungeon",
           "boss": null,
           "dungeon": "Temple of Sethraliss",
@@ -13234,9 +13252,9 @@
         {
           "list": "overall",
           "slot": "Chest",
-          "itemId": "273785",
-          "itemName": "Primordial Robe of Rites",
-          "sourceText": "Altar of Fangs",
+          "itemId": "271567",
+          "itemName": "Crest of the Primal Leywarden",
+          "sourceText": "Catalyst from Altar of Fangs",
           "sourceKind": "dungeon",
           "boss": null,
           "dungeon": "Altar of Fangs",
@@ -13322,9 +13340,9 @@
         {
           "list": "mplus",
           "slot": "Head",
-          "itemId": "251199",
-          "itemName": "Worldroot Canopy",
-          "sourceText": "Blinding Vale",
+          "itemId": "271564",
+          "itemName": "Crown of the Primal Leywarden",
+          "sourceText": "Catalyst from Blinding Vale",
           "sourceKind": "dungeon",
           "boss": null,
           "dungeon": "The Blinding Vale",
@@ -13333,8 +13351,8 @@
         {
           "list": "mplus",
           "slot": "Hands",
-          "itemId": "159247",
-          "itemName": "Handwraps of Oscillating Polarity",
+          "itemId": "271565",
+          "itemName": "Primal Leywarden's Manashapers",
           "sourceText": "Temple of Sethraliss",
           "sourceKind": "dungeon",
           "boss": null,
@@ -13366,9 +13384,9 @@
         {
           "list": "mplus",
           "slot": "Shoulder",
-          "itemId": "239031",
-          "itemName": "Brood Cleanser's Amice",
-          "sourceText": "Temple of Sethraliss",
+          "itemId": "271562",
+          "itemName": "Primal Leywarden's Manaflux",
+          "sourceText": "Catalyst from Temple of Sethraliss",
           "sourceKind": "dungeon",
           "boss": null,
           "dungeon": "Temple of Sethraliss",
@@ -13410,9 +13428,9 @@
         {
           "list": "mplus",
           "slot": "Chest",
-          "itemId": "159257",
-          "itemName": "Robes of the Reborn Serpent",
-          "sourceText": "Temple of Sethraliss",
+          "itemId": "271567",
+          "itemName": "Crest of the Primal Leywarden",
+          "sourceText": "Catalyst from Temple of Sethraliss",
           "sourceKind": "dungeon",
           "boss": null,
           "dungeon": "Temple of Sethraliss",
@@ -13498,9 +13516,9 @@
         {
           "list": "raid",
           "slot": "Head",
-          "itemId": "271874",
-          "itemName": "Venomkeeper's Horrific Cowl",
-          "sourceText": "Ula'tek",
+          "itemId": "271564",
+          "itemName": "Crown of the Primal Leywarden",
+          "sourceText": "Catalyst from Ula'tek",
           "sourceKind": "raid",
           "boss": "Ula'tek",
           "dungeon": null,
@@ -13509,9 +13527,9 @@
         {
           "list": "raid",
           "slot": "Hands",
-          "itemId": "268243",
-          "itemName": "Grasps of the Eternal Shadow",
-          "sourceText": "Coiled Altar",
+          "itemId": "271565",
+          "itemName": "Primal Leywarden's Manashapers",
+          "sourceText": "Catalyst from Coiled Altar",
           "sourceKind": "raid",
           "boss": "The Coiled Altar",
           "dungeon": null,
@@ -13848,7 +13866,8 @@
           ],
           "note": "Make sure to apply Thalassian Phoenix Oil to your weapon for all content. You should be drinking the Flask of the Shattered Sun at all times. Potion of Recklessness is the best DPS potion to use. You should also keep a stock of Concentrated Silvermoon Health Potion s to use when at low health, and if you have a Warlock in the group, grab their Healthstone s and use them as well. Do not macro these together, they are best used separately! We recommend eating from the Harandar Celebration or Silvermoon Parade when possible, and if no feast is provided for your group, use personal food ( Royal Roast or Impossibly Royal Roast ). In addition, if you can afford it, you should use Void-Touched Augment Rune s to increase your primary stat. Augment Runes are expensive, and disappear on death, so use them wisely! This guide has been written by Kuni , one of the best Frost Mages in the world, who raids in Mortal Desire ."
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Brewmaster Monk": {
       "guideUrl": "https://www.icy-veins.com/wow/brewmaster-monk-pve-tank-gear-best-in-slot",
@@ -14623,7 +14642,8 @@
           ],
           "note": "Beyond the permanent options below, there exists a small variety of temporary weapon enchants, applying a short-term buff to your weapon that is not removed on death. Throughout Midnight , you will want to apply a Thalassian Phoenix Oil to your weapons to passively increase your Critical Strike and Haste. In Midnight, your flask choice is based on which secondary stat you desire. Flask of Thalassian Resistance should be used in most situations, providing Versatility as a generally useful stat for both damage and defense. However, the Flask of the Shattered Sun can be just as effective or slightly better for damage if you have plenty of Versatility already or low Critical Strike by comparison. Remember, you may obtain any flasks of your choice with access to a Cauldron of Sin'dorei Flasks , so long as the Alchemist placing it knows the recipe. Liquid Luster is your general recommended potion, which provides bonus Versatility that ramps up over 30 seconds. Due to this, aim to make use of any on-use damage effects during the last six seconds of its duration! Although you can instead use a Draught of Rampant Abandon to gain even more Agility, this has the risk of spawning silencing puddles of The Void's Toll beneath you over its duration. Only consider using it if it will not be harmful to enemy positioning. Finally, a Potion of Recklessness may be best in strictly single-target if your gear has maximized Critical Strike and you are using a potent damage trinket such as Font of Venomous Rage . If available, Silvermoon Parade / Harandar Celebration is your food of choice for some additional Agility in a dungeon or raid group; there are also personal food items offering the same effect, such as Royal Roast / Impossibly Royal Roast . Otherwise, there are a number of food items both as feasts and personal consumables that increase your highest secondary stat, such as Blooming Feast or Champion's Bento . If Agility food items are not available, use the cheapest of these alternatives. In addition, you are able create a \"hearty\" version of most food items by combining multiple copies of a dish together, such as the Hearty Silvermoon Parade . These dishes are defined by having their buffs maintained on death , making them especially useful for a dungeon or progression-raiding. While expensive, Void-Touched Augment Rune s can also be used for a small amount of extra Agility. Consider keeping a few on hand for times when you need to eke out every bit of possible damage."
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Mistweaver Monk": {
       "guideUrl": "https://www.icy-veins.com/wow/mistweaver-monk-pve-healing-gear-best-in-slot",
@@ -14649,13 +14669,13 @@
           "primary": null,
           "secondaries": [
             "Haste",
+            "Mast",
             "Crit",
-            "Vers",
-            "Mast"
+            "Vers"
           ],
           "leadsWithItemLevel": true,
           "softCaps": [],
-          "raw": "Item Level > Haste > Critical Strike > Versatility > Mastery"
+          "raw": "Item Level > Haste > Mastery > Critical Strike > Versatility"
         }
       ],
       "bis": [
@@ -15360,7 +15380,8 @@
           ],
           "note": "The best Weapon Oil for Mistweavers is Thalassian Phoenix Oil as it buffs both of our strongest secondary stats. For most content Flask of the Blood Knights will be your standard choice, as it provides our strongest throughput stat. In Mythic+, there may be times in which you find that the extra Versatility from Flask of Thalassian Resistance is more beneficial in order to leverage the slight damage reduction. For optimal throughput, you should be using Silvermoon Parade / Harandar Celebration in order to gain primary stat. However, if these feasts are unavailable to you (as they can be cost prohibitive) then you should make use of Royal Roast . The secondary stat it provides is weaker than the Intellect you would gain from a feast, but it is much more affordable. Mistweavers generally have three options for potions: Potion of Devoured Dreams for maximal mana return, Lightfused Mana Potion for immediate mana return, and Light's Potential for throughput. Generally, in raids you will be using Potion of Devoured Dreams and in Mythic+ you will be using Lightfused Mana Potion , but it is a good idea to carry a stock of all three in order to use whichever is best in the moment. In Season 2 you now have access to Concentrated Silvermoon Health Potion which is significantly better than Silvermoon Health Potion . Using this has a 5-minute cooldown, but multiple can be consumed in an extended boss fight should it go on long enough. Additionally, Warlock 's Healthstone does not share a cooldown with other healing consumables. Remember to use it as well if you are holding one! Void-Touched Augment Rune provide around 1% HPS increase and should be evaluated during progress, especially when close to important kills.They can be quite pricey though, so use them sparingly when truly needed. This guide has been written by Dhaubbs , a Mistweaver Monk theorycrafter, and founder of the once World 4th guild Big Dumb Guild (BDG) on Illidan-US. You can follow him on Twitter , Twitch , and YouTube ."
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Windwalker Monk": {
       "guideUrl": "https://www.icy-veins.com/wow/windwalker-monk-pve-dps-gear-best-in-slot",
@@ -16058,7 +16079,8 @@
           ],
           "note": "You will want to use Thalassian Phoenix Oil in all content and situations. For your DPS potion, use Potion of Recklessness in all situations. Make sure to also carry Concentrated Silvermoon Health Potion to heal yourself. You should eat the Feasts to increase your Agility; Harandar Celebration . Keep a few Royal Roast in your inventory as well, in case no feast is available to you. While expensive, Void-Touched Augment Rune s can also be used for a small amount of extra Agility. Consider keeping a few on hand for times when you need to eke out every bit of possible damage. This guide is written and maintained by Babylonius ; Long time raider in Occasional Excellence ; Thirteen year veteran of Windwalker; Founder and owner of the dedicated Monk website, Peak of Serenity ; and Admin/Owner of the Monk Discord, PeakofSerenity . You can find him on Twitch , Twitter , and occasionally YouTube ."
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Holy Paladin": {
       "guideUrl": "https://www.icy-veins.com/wow/holy-paladin-pve-healing-gear-best-in-slot",
@@ -16843,11 +16865,12 @@
           ],
           "note": "The best Weapon Oil for Holy Paladin will be Thalassian Phoenix Oil . The secondary stat boosts provides a nice bonus in every form of content and the alternative Oil of Dawn is not strong enough to ever be worth using. When playing Lightsmith , you will not need a weapon oil as Rite of Sanctification will instead be used. Flask of the Magisters will be your go-to choice for maximizing your healing output. In situations like Mythic+, where you do not need extra healing, you can instead choose to run Flask of the Blood Knights or Flask of the Shattered Sun . There are two potions that are worth considering in Midnight: Potion of Recklessness and Lightfused Mana Potion . It is important to note that these potions share cooldowns. Using one of them will put all others on cooldown. In any situation where mana is concerned, you should be using Lightfused Mana Potion only. When you do not need the mana you can instead use Potion of Recklessness alongside your major cooldowns. Make sure to always keep Concentrated Silvermoon Health Potion s on you at all times. These potions do not share a cooldown with combat/mana potions meaning that you can use them whenever you are in need of emergency healing to yourself. You should be eating Hearty Silvermoon Parade as the desired feast or Hearty Royal Roast for your own personal food. These provide you with an increase to your primary stat and that beats out any other food choices. This guide has been written by Mytholxgy, a former RWF progression raider and analyst for Pieces and Liquid . He is also a Templar in the Paladin Class Discord , as well as one of the class experts in the Evoker Discord . You can reach him on Twitter and watch him stream occasionally on Twitch ."
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Protection Paladin": {
       "guideUrl": "https://www.icy-veins.com/wow/protection-paladin-pve-tank-gear-best-in-slot",
-      "published": "2026-08-18",
+      "published": "2026-09-04",
       "priorities": [
         {
           "label": "Protection Paladin",
@@ -16983,10 +17006,10 @@
           "slot": "Finger",
           "itemId": "273792",
           "itemName": "Band of the Amani Warlord",
-          "sourceText": "Coiled Altar",
-          "sourceKind": "raid",
-          "boss": "The Coiled Altar",
-          "dungeon": null,
+          "sourceText": "Altar of Fangs",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "Altar of Fangs",
           "droppedBy": null
         },
         {
@@ -17157,12 +17180,12 @@
         {
           "list": "mplus",
           "slot": "Finger",
-          "itemId": "252258",
-          "itemName": "Sickening Signet of Atroxus",
-          "sourceText": "Voidscar Arena",
+          "itemId": "273792",
+          "itemName": "Band of the Amani Warlord",
+          "sourceText": "Altar of Fangs",
           "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": "Voidscar Arena",
+          "dungeon": "Altar of Fangs",
           "droppedBy": null
         },
         {
@@ -17333,11 +17356,11 @@
         {
           "list": "raid",
           "slot": "Finger",
-          "itemId": "273792",
-          "itemName": "Band of the Amani Warlord",
-          "sourceText": "Coiled Altar",
+          "itemId": "268252",
+          "itemName": "Apex Brute's Claw Ring",
+          "sourceText": "Sszorak",
           "sourceKind": "raid",
-          "boss": "The Coiled Altar",
+          "boss": "Sszorak",
           "dungeon": null,
           "droppedBy": null
         },
@@ -17567,7 +17590,8 @@
           ],
           "note": "Thalassian Phoenix Oil as Templar or Rite of Sanctification as Lightsmith . Use Flask of the Shattered Sun as a general-use flask in all content types. Light's Potential should be your combat potion of choice. You should use Concentrated Silvermoon Health Potion for in-combat healing. Healing potions do not share a cooldown with Healthstone s, so you can use both independently if you can access a Warlock. Use Champion's Bento (secondary stat) as your food buff of choice if a Feast is not available. If a Harandar Celebration (primary stat) / Blooming Feast (secondary stat) is provided by the group, use them instead. Either are fine. When deciding what food type to use it would be advisable to sim both options to identify which one is better for you. Primary Stat (Strength) and Highest Secondary Stat options are available for both feasts and personal food buffs. In addition, if you can afford it, you should use Void-Touched Augment Rune s to increase your primary stat. Augment Runes will be expensive until the final Season of the expansion, and disappear on death, so use them wisely! This guide has been written by Panthea, who raids in Catalyst and is the author of TankNotes . He plays all tanks and is a Moderator for the Hammer of Wrath Paladin Discord . You can follow him on Twitter ."
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Retribution Paladin": {
       "guideUrl": "https://www.icy-veins.com/wow/retribution-paladin-pve-dps-gear-best-in-slot",
@@ -18249,7 +18273,8 @@
           ],
           "note": "Thalassian Phoenix Oil is the best weapon oil to use. In general, Flask of the Magisters is the best flask to use. However, other secondary stat flasks are alternative options depending on the stats that your equipped gear provides. You will have to sim yourself to figure out whether another flask might be better, but the Magister's flask will serve you well in most scenarios. The best potion to use is Potion of Recklessness . However, it requires minimizing its downside by having close to 0 Versatility, and not having Haste as your highest secondary stat. If either of these apply to you, Light's Potential can be a stronger choice. Concentrated Silvermoon Health Potion is the best option you have for a health potion. Using this has a 5-minute cooldown, but multiple can be consumed in an extended boss fight should it go on long enough. Additionally, Warlock 's Healthstone does not share a cooldown with other healing consumables. Remember to use it as well if you are holding one! Royal Roast and other similar food that buffs your Strength are the best food to use. If a feast is placed, we recommend eating from it instead as it also provides Stamina alongside the primary or secondary stat. If you want to (and can afford to) use them, Void-Touched Augment Rune is the best choice. This guide has been written by Bolas , a long time Retribution Paladin enthusiast, theorycrafter, and high-end raider in the #1 Oceanic guild Honestly . You can find him in the Paladin Discord as bolas.ret."
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Discipline Priest": {
       "guideUrl": "https://www.icy-veins.com/wow/discipline-priest-pve-healing-gear-best-in-slot",
@@ -18970,7 +18995,8 @@
           ],
           "note": "You should utilize Thalassian Phoenix Oil as your weapon oil whenever possible. As a general use recommendation, Light's Potential is your best bet. However, when playing as Voidweaver , Potion of Recklessness is valid alternative option. Recklessness can give you more overall output in a single window, but you need to be careful when using it as it cannot be used with Power Infusion or a Lust window as you can easily reach haste levels where the stat is heavily devalued. As a result, for Voidwewaver specifically, Recklessness is your best option if you want an additional cooldown to use separate of your existing cooldowns and Light's Potential is your best option if you want to stack it with an existing cooldown window. For mana potions, if you do use one it would be a Potion of Devoured Dreams . Howeveer, the power level of combat pots means you should NEVER be using mana potions. For health potions, utilize Concentrated Silvermoon Health Potion ."
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Holy Priest": {
       "guideUrl": "https://www.icy-veins.com/wow/holy-priest-pve-healing-gear-best-in-slot",
@@ -19665,7 +19691,8 @@
           ],
           "note": "For your temporary weapon oil, you should use Thalassian Phoenix Oil for all content. While our suggested tertiary stat enchants for maximum throughput are Leech, using Speed enchants is also a good option given Holy Priest's limited mobility. For Season 2, you should use one of the following, depending on which stat you need more of. Light's Potential is your default potion and should be paired with Apotheosis or Divine Hymn to get the most out of it. Potion of Recklessness is another competitive throughput option, and you can use it instead if it is cheaper to craft or buy. While the Mana potions Lightfused Mana Potion and Potion of Devoured Dreams are available alternatives, they do not restore enough mana to be worth using over the stat potions. From Season 2 you now have access to Concentrated Silvermoon Health Potion which is a significant upgrade over Silvermoon Health Potion from Season 1. As a Holy Priest you can use any Feast or Master-level food to get the most optimal results. This includes any of the highest secondary or primary stat food buffs. Below are some examples: If you want cheaper food, you can also use Sun-Seared Lumifin or Arcano Cutlets . Depending on the level of progression content, you can also choose to craft Hearty versions of most food, which gives the exact same effect, but the buff now persists through death. This costs 5 normal food to produce 1 hearty version. You should aim to use an Augment Rune to get a boost of Intellect during any progression content. For Season 2 the following Augment Runes are available:"
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Shadow Priest": {
       "guideUrl": "https://www.icy-veins.com/wow/shadow-priest-pve-dps-gear-best-in-slot",
@@ -20397,9 +20424,10 @@
               "name": "Void-Touched Augment Rune"
             }
           ],
-          "note": "For your temporary weapon oil, you should use Thalassian Phoenix Oil . For Season 2, you should use one of the following depending on which stat you need more of. Our best combat potion in all content is Potion of Recklessness . This is roughly 1% better than Light's Potential as you start gearing up. In Season 2 you now have access to Concentrated Silvermoon Health Potion which is significantly better than Silvermoon Health Potion . As a Shadow Priest our preferred food in all content is the Silvermoon Parade or Harandar Celebration feasts. If you do not have access to feasts we prefer using Royal Roast as our personal food of choice, as it has the same stats as those feasts. If you want cheaper personal food you can also use Warped Wise Wings or Fel-Kissed Filet . Depending on the level of progression content, you can also choose to craft Hearty versions of most food, which gives the exact same effect (despite a few wrong tooltips), but the buff now persists through death. This costs 5 normal food to produce 1 hearty version. You should aim to use an Augment Rune to get a boost of Intellect during any progression content. This is a gain of about 1% DPS. For Season 2 the following Augment Runes are available:"
+          "note": "For your temporary weapon oil, you should use Thalassian Phoenix Oil . For Season 2, you should use one of the following depending on which stat you need more of. Our theoretical best combat potion in all content is Potion of Recklessness . This potion can be gear dependent though, and can cause wild changes in damage even swapping a single item. For this reason the potion is not used by default in our sims, but it is still a very strong option. If you are not using this potion, Light's Potential is a solid alternative. In Season 2 you now have access to Concentrated Silvermoon Health Potion which is significantly better than Silvermoon Health Potion . As a Shadow Priest our preferred food in all content is the Silvermoon Parade or Harandar Celebration feasts. If you do not have access to feasts we prefer using Royal Roast as our personal food of choice, as it has the same stats as those feasts. If you want cheaper personal food you can also use Warped Wise Wings or Fel-Kissed Filet . Depending on the level of progression content, you can also choose to craft Hearty versions of most food, which gives the exact same effect (despite a few wrong tooltips), but the buff now persists through death. This costs 5 normal food to produce 1 hearty version. You should aim to use an Augment Rune to get a boost of Intellect during any progression content. This is a gain of about 1% DPS. For Season 2 the following Augment Runes are available:"
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Assassination Rogue": {
       "guideUrl": "https://www.icy-veins.com/wow/assassination-rogue-pve-dps-gear-best-in-slot",
@@ -21177,7 +21205,8 @@
           ],
           "note": "You will want to grab Flask of the Blood Knights as your go-to Flask for the Haste bonus. However, Flask of the Shattered Sun is also viable if you already have very high Haste levels, i.e. if every single one of your items has Haste on them, the Crit Flask is going to be ever-so-slightly better. You can also obtain a flask of your choice from Cauldron of Sin'dorei Flasks s provided by Alchemists. Light's Potential is your best option, and should be paired with major cooldowns and Bloodlust / Heroism . You can also obtain temporary versions of the potion from Voidlight Potion Cauldron provided by Alchemists. In Season 2 you now have access to Concentrated Silvermoon Health Potion which is significantly better than Silvermoon Health Potion . Using this has a 5-minute cooldown, but multiple can be consumed in an extended boss fight should it go on long enough. Additionally, Warlock 's Healthstone does not share a cooldown with other healing consumables. Remember to use it as well if you are holding one! Try to chomp down on Silvermoon Parade or another primary stat feast if possible. If this isn't provided by your group, stick to Royal Roast as your personal food instead. In addition, if you can afford it, you should use Void-Touched Augment Rune s to increase your primary stat. Augment Runes are expensive and disappear on death, so use them wisely and sparingly! This guide has been written and reviewed by Seliathan, who has been playing Rogue for over two decades since the very first day of Vanilla WoW. After decades of raiding within the Top 100 and numerous Rank 1 Mythic+ runs in previous expansions, he has now set his sights on sharing his experience through guides and other content."
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Outlaw Rogue": {
       "guideUrl": "https://www.icy-veins.com/wow/outlaw-rogue-pve-dps-gear-best-in-slot",
@@ -21944,7 +21973,8 @@
           ],
           "note": "You will want to grab Flask of the Shattered Sun as your go-to Flask for the Crit bonus, unless this would put you over the ~40% Crit mark, at which point you want to play Flask of the Blood Knights instead. You can also obtain a flask of your choice from Cauldron of Sin'dorei Flasks s provided by Alchemists. Potion of Recklessness is your best option, and should be paired with major cooldowns and Bloodlust / Heroism . You can also obtain temporary versions of the potion from Voidlight Potion Cauldron provided by Alchemists. In Season 2 you now have access to Concentrated Silvermoon Health Potion which is significantly better than Silvermoon Health Potion . Using this has a 5-minute cooldown, but multiple can be consumed in an extended boss fight should it go on long enough. Additionally, Warlock 's Healthstone does not share a cooldown with other healing consumables. Remember to use it as well if you are holding one! Try to chomp down on Silvermoon Parade or another primary stat feast if possible. If this is not provided by your group, stick to Royal Roast as your personal food instead. In addition, if you can afford it, you should use Void-Touched Augment Rune s to increase your primary stat. Augment Runes are expensive and disappear on death, so use them wisely and sparingly! This guide has been written and reviewed by Seliathan, who has been playing Rogue for over two decades since the very first day of Vanilla WoW. After decades of raiding within the Top 100 and numerous Rank 1 Mythic+ runs in previous expansions, he has now set his sights on sharing his experience through guides and other content."
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Subtlety Rogue": {
       "guideUrl": "https://www.icy-veins.com/wow/subtlety-rogue-pve-dps-gear-best-in-slot",
@@ -22499,28 +22529,28 @@
           "tier": "S",
           "itemIds": [
             "270175",
-            "270173"
+            "270173",
+            "270165"
           ]
         },
         {
           "tier": "A",
           "itemIds": [
             "250215",
-            "250259",
-            "250214",
-            "270165",
-            "270166",
-            "250228"
+            "270164",
+            "270168",
+            "274493",
+            "248583"
           ]
         },
         {
           "tier": "B",
           "itemIds": [
             "265657",
-            "270164",
-            "270168",
-            "274493",
-            "248583",
+            "250259",
+            "270166",
+            "250228",
+            "250214",
             "159617",
             "270175",
             "250215",
@@ -22584,8 +22614,8 @@
             "slot": "Main Hand",
             "candidates": [
               {
-                "id": "244031",
-                "name": "Arcane Mastery"
+                "id": "273072",
+                "name": "Rite of the Hash'ey"
               },
               {
                 "id": "243733",
@@ -22598,8 +22628,8 @@
             "slot": "Off Hand",
             "candidates": [
               {
-                "id": "244031",
-                "name": "Arcane Mastery"
+                "id": "273072",
+                "name": "Rite of the Hash'ey"
               },
               {
                 "id": "243733",
@@ -22712,7 +22742,8 @@
           ],
           "note": "If you have yet to reach the Haste breakpoint you should be using Flask of the Blood Knights , otherwise use Flask of the Magisters . The best general stat potion is Light's Potential . At first glance Draught of Rampant Abandon might look like it is better but the downside from it makes it near impossible to use as a melee, especially in boss encounters or M+ scenarios. In AoE situations with AoE talent setups it is better to use Potion of Recklessness instead, however only if you get mastery from it . As it increases your highest secondary stat you need to have your stats configured in a way that makes sure you get mastery from it, if you do not then stick to using Light's Potential . Make sure to also carry at least a few Concentrated Silvermoon Health Potion s to heal yourself in dire situations. The recommended food is Harandar Celebration or Royal Roast . The best augment rune is Void-Touched Augment Rune . This guide has been written by Eleem , who has been a rogue player, enjoyer and theorycrafter since Legion. He is currently raiding in a top 100 guild and has been known to dabble in Mythic+ from time to time. You can find him in the Ravenholdt Discord as Eleem."
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Elemental Shaman": {
       "guideUrl": "https://www.icy-veins.com/wow/elemental-shaman-pve-dps-gear-best-in-slot",
@@ -23468,7 +23499,8 @@
           ],
           "note": "If you are not using the Flametongue Weapon weapon imbue talent, you should apply Thalassian Phoenix Oil on your weapon every couple of hours. They do not stack. You should be drinking a secondary stat flask: Flask of the Magisters if you lack Mastery, or Flask of the Shattered Sun if you lack Critical Strike. There are a few different potions that all provide similar DPS benefits, but we recommend using Light's Potential or potentially Potion of Recklessness . You should use them during Bloodlust / Heroism along with Ascendance and Stormkeeper . It might be worth it to use Draught of Rampant Abandon , but beware of the void zone which silences you! You should keep a stock of Concentrated Silvermoon Health Potion s to use when at low health, and if you have a Warlock in the group, grab their Healthstone s and use them as well. Do not macro these together, they are best used separately! You want to use Silvermoon Parade or Harandar Celebration to gain 50 Intelligence. When you need to buy personal food, use Royal Roast or Impossibly Royal Roast instead."
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Enhancement Shaman": {
       "guideUrl": "https://www.icy-veins.com/wow/enhancement-shaman-pve-dps-gear-best-in-slot",
@@ -24255,11 +24287,12 @@
           ],
           "note": "In Season 2, Flask picks aren't as cut and dry — they're instead used to balance out your secondaries as Stormbringer : Your goal as Stormbringer is to keep Critical Strike and Mastery as close to each other as possible, while keeping a solid floor of Haste to allow for resource cycling. That means flasks are used to \"fix\" the stat you're currently lacking the most of, rather than doubling down on the strongest. As Totemic however, always play with Flask of the Magisters . You can also obtain a flask of your choice from Cauldron of Sin'dorei Flasks , provided by Alchemists. In Season 2, Potions are also much more complicated, and there are three different options with different use cases: Since your current gear can severely impact the effectiveness of Potion of Recklessness following gear changes, both other options are now very relevant, and have different rotational considerations when using them. You can check our Rotation page for an explanation on using each. You can also obtain fleeting versions of each of these potions from a Voidlight Potion Cauldron provided by Alchemists. A note on Draught of Rampant Abandon is that, while it's technically stronger, the void zones it spawns pacify you. It only takes 1-2 GCDs inside this to wipe out the extra value, so using the potion isn't generally worth it unless you're extremely comfortable with the downside. Concentrated Silvermoon Health Potion is the current best healing potion. Using this has a 5-minute cooldown, but multiple can be consumed in an extended boss fight should it go on long enough. Additionally, Warlock 's Healthstone s do not share a cooldown with other healing consumables. Remember to use it as well if you are holding one! Agility remains the strongest stat in Season 2, so you should be eating a Silvermoon Parade or other primary stat Feast if possible. If this isn't provided by your group, stick to Royal Roast personal food instead. In addition, if you can afford it, you should use Void-Touched Augment Rune s to increase your primary stat. These can be obtained through the weekly housing quest, but remember: Augment Runes are expensive and disappear on death, so use them wisely!"
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Restoration Shaman": {
       "guideUrl": "https://www.icy-veins.com/wow/restoration-shaman-pve-healing-gear-best-in-slot",
-      "published": "2026-08-26",
+      "published": "2026-09-02",
       "priorities": [
         {
           "label": "Restoration Shaman",
@@ -24370,10 +24403,10 @@
           "slot": "Chest",
           "itemId": "271486",
           "itemName": "Fanged Raiment of the Ophidian Oracle",
-          "sourceText": "Catalyst on the chest from Ula'tek",
-          "sourceKind": "raid",
-          "boss": "Ula'tek",
-          "dungeon": null,
+          "sourceText": "Catalyst on the chest from King's Rest",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "Kings' Rest",
           "droppedBy": null
         },
         {
@@ -24722,9 +24755,9 @@
           "slot": "Chest",
           "itemId": "271486",
           "itemName": "Fanged Raiment of the Ophidian Oracle",
-          "sourceText": "Catalyst on the chest from Ula'tek",
+          "sourceText": "Catalyst on the chest from Twin Fangs",
           "sourceKind": "raid",
-          "boss": "Ula'tek",
+          "boss": "The Twin Fangs",
           "dungeon": null,
           "droppedBy": null
         },
@@ -25003,11 +25036,12 @@
           ],
           "note": "Thalassian Phoenix Oil is the best temporary oil, but you will usually be using the Earthliving Weapon talent instead. You will generally want to be using Flask of the Shattered Sun in raids, as Critical Strike is a favored stat for all talent builds, while swapping to Flask of Thalassian Resistance in Mythic+ for its defensive benefits. Light's Potential is your best combat potion option, and should be paired with major cooldowns during moments of high group damage. You can also obtain Fleeting Light's Potential from Voidlight Potion Cauldron provided by Alchemists. Concentrated Silvermoon Health Potion is the current best healing potion, which should be used in emergencies or whenever you do not have the time to heal yourself. It does not share a cooldown with the combat potion, and using potions has a 5-minute cooldown, allowing you to use multiple in long encounters. While Mana-restoring potions do exist, they are very low value compared to Light's Potential , and therefore not worth using in almost all scenarios. You may want to keep a stack of them at hand for absolute emergencies, but it is generally better to simply use a stat-potion alongside your cooldowns. You should be eating from the Silvermoon Parade or Harandar Celebration feasts whenever possible, but can also use Royal Roast in solo and small group scenarios. Hearty versions of all foods can be created by the Cooking profession by combining 5 to 10 regular foods and, once eaten, provide their benefit for a full hour, even if you die midway through. Void-Touched Augment Rune grant a decent amount of Intellect and come from many sources, including NPC crafting orders for the various professions. As they tend to be very expensive for the stats granted, use these only in high-stakes situations! This guide has been written by Seksi , member of Cursed Gifts and healing aficionado. You can find him answering questions and discussing Restoration Shaman gameplay on the Ancestral Guidance and Earthshrine Discords."
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Affliction Warlock": {
       "guideUrl": "https://www.icy-veins.com/wow/affliction-warlock-pve-dps-gear-best-in-slot",
-      "published": "2026-08-16",
+      "published": "2026-08-31",
       "priorities": [
         {
           "label": "Affliction Warlock",
@@ -25074,10 +25108,10 @@
           "slot": "Shoulder",
           "itemId": "271544",
           "itemName": "Spires of the Damned Necrolyte",
-          "sourceText": "Catalyst from Lost Explorers",
-          "sourceKind": "raid",
-          "boss": "The Lost Explorers",
-          "dungeon": null,
+          "sourceText": "Catalyst from Temple of Sethraliss",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "Temple of Sethraliss",
           "droppedBy": null
         },
         {
@@ -25149,12 +25183,12 @@
         {
           "list": "overall",
           "slot": "Trinket",
-          "itemId": "270170",
-          "itemName": "Vexhul's Everflowing Gland",
-          "sourceText": "Twin Fangs",
-          "sourceKind": "raid",
-          "boss": "The Twin Fangs",
-          "dungeon": null,
+          "itemId": "273649",
+          "itemName": "Stormbound Emblem of Dazar",
+          "sourceText": "King's Rest",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "Kings' Rest",
           "droppedBy": null
         },
         {
@@ -25217,10 +25251,10 @@
           "slot": "Hands",
           "itemId": "271547",
           "itemName": "Damned Necrolyte's Charred Grasps",
-          "sourceText": "Catalyst",
-          "sourceKind": "catalyst",
+          "sourceText": "Catalyst from Temple of Sethraliss",
+          "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": null,
+          "dungeon": "Temple of Sethraliss",
           "droppedBy": null
         },
         {
@@ -25250,10 +25284,10 @@
           "slot": "Shoulder",
           "itemId": "271544",
           "itemName": "Spires of the Damned Necrolyte",
-          "sourceText": "Catalyst",
-          "sourceKind": "catalyst",
+          "sourceText": "Catalyst from Temple of Sethraliss",
+          "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": null,
+          "dungeon": "Temple of Sethraliss",
           "droppedBy": null
         },
         {
@@ -25261,11 +25295,11 @@
           "slot": "Legs",
           "itemId": "271545",
           "itemName": "Damned Necrolyte's Leg Bindings",
-          "sourceText": "Catalyst",
-          "sourceKind": "catalyst",
+          "sourceText": "Catalyst from Den of Nalorakk",
+          "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": null,
-          "droppedBy": null
+          "dungeon": "Den of Nalorakk",
+          "droppedBy": "Nalorakk"
         },
         {
           "list": "mplus",
@@ -25281,12 +25315,12 @@
         {
           "list": "mplus",
           "slot": "Feet",
-          "itemId": "268255",
-          "itemName": "Cackling Soultreads",
-          "sourceText": "Coiled Altar",
-          "sourceKind": "raid",
-          "boss": "The Coiled Altar",
-          "dungeon": null,
+          "itemId": "251137",
+          "itemName": "Tempestuous Sandals",
+          "sourceText": "Murder Row",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "Murder Row",
           "droppedBy": null
         },
         {
@@ -25294,10 +25328,10 @@
           "slot": "Chest",
           "itemId": "271549",
           "itemName": "Damned Necrolyte's Rattling Robes",
-          "sourceText": "Catalyst",
-          "sourceKind": "catalyst",
+          "sourceText": "Catalyst from Altar of Fangs",
+          "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": null,
+          "dungeon": "Altar of Fangs",
           "droppedBy": null
         },
         {
@@ -25558,15 +25592,15 @@
         {
           "tier": "S",
           "itemIds": [
-            "270170"
+            "273649"
           ]
         },
         {
           "tier": "A",
           "itemIds": [
             "270168",
+            "270170",
             "270167",
-            "273649",
             "270164",
             "250214",
             "250224"
@@ -25733,11 +25767,12 @@
           ],
           "note": "Use Thalassian Phoenix Oil as weapon oil. For Season 2, Flask of the Blood Knights is the default choice. Potion of Recklessness should be the first choice if your gearset has little to no Versatility, otherwise use Light's Potential . After acquiring Font of Venomous Rage , Liquid Luster becomes a stronger choice, particularly in the last 5 seconds. Concentrated Silvermoon Health Potion is the healing potion of choice. Void-Touched Augment Rune provide around 1% dps increase and should be evaluated during progress, especially when close to pivotal kills. This guide has been written by Motoko , Warlock main since The Burning Crusade, co-admin in the Warlock Discord , and theorycrafter and contributor for LockOneStopShop ."
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Demonology Warlock": {
       "guideUrl": "https://www.icy-veins.com/wow/demonology-warlock-pve-dps-gear-best-in-slot",
-      "published": "2026-08-16",
+      "published": "2026-08-31",
       "priorities": [
         {
           "label": "Demonology Warlock",
@@ -25810,10 +25845,10 @@
           "slot": "Shoulder",
           "itemId": "271544",
           "itemName": "Spires of the Damned Necrolyte",
-          "sourceText": "Catalyst from Lost Explorers",
-          "sourceKind": "raid",
-          "boss": "The Lost Explorers",
-          "dungeon": null,
+          "sourceText": "Catalyst from Temple of Sethraliss",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "Temple of Sethraliss",
           "droppedBy": null
         },
         {
@@ -25953,10 +25988,10 @@
           "slot": "Hands",
           "itemId": "271547",
           "itemName": "Damned Necrolyte's Charred Grasps",
-          "sourceText": "Catalyst",
-          "sourceKind": "catalyst",
+          "sourceText": "Catalyst from Temple of Sethraliss",
+          "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": null,
+          "dungeon": "Temple of Sethraliss",
           "droppedBy": null
         },
         {
@@ -25986,10 +26021,10 @@
           "slot": "Shoulder",
           "itemId": "271544",
           "itemName": "Spires of the Damned Necrolyte",
-          "sourceText": "Catalyst",
-          "sourceKind": "catalyst",
+          "sourceText": "Catalyst from Temple of Sethraliss",
+          "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": null,
+          "dungeon": "Temple of Sethraliss",
           "droppedBy": null
         },
         {
@@ -25997,11 +26032,11 @@
           "slot": "Legs",
           "itemId": "271545",
           "itemName": "Damned Necrolyte's Leg Bindings",
-          "sourceText": "Catalyst",
-          "sourceKind": "catalyst",
+          "sourceText": "Catalyst from Den of Nalorakk",
+          "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": null,
-          "droppedBy": null
+          "dungeon": "Den of Nalorakk",
+          "droppedBy": "Nalorakk"
         },
         {
           "list": "mplus",
@@ -26017,12 +26052,12 @@
         {
           "list": "mplus",
           "slot": "Feet",
-          "itemId": "268255",
-          "itemName": "Cackling Soultreads",
-          "sourceText": "Coiled Altar",
-          "sourceKind": "raid",
-          "boss": "The Coiled Altar",
-          "dungeon": null,
+          "itemId": "251137",
+          "itemName": "Tempestuous Sandals",
+          "sourceText": "Murder Row",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "Murder Row",
           "droppedBy": null
         },
         {
@@ -26030,10 +26065,10 @@
           "slot": "Chest",
           "itemId": "271549",
           "itemName": "Damned Necrolyte's Rattling Robes",
-          "sourceText": "Catalyst",
-          "sourceKind": "catalyst",
+          "sourceText": "Catalyst from Altar of Fangs",
+          "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": null,
+          "dungeon": "Altar of Fangs",
           "droppedBy": null
         },
         {
@@ -26300,17 +26335,17 @@
         {
           "tier": "A",
           "itemIds": [
-            "270167",
             "273649",
+            "270167",
             "270164",
-            "250224",
+            "270169",
             "270170"
           ]
         },
         {
           "tier": "B",
           "itemIds": [
-            "270169",
+            "250224",
             "250214",
             "250215",
             "270168"
@@ -26469,11 +26504,12 @@
           ],
           "note": "Use Thalassian Phoenix Oil as your weapon oil in all content. For Season 2, Flask of the Shattered Sun is the default choice. Potion of Recklessness should be the first choice if your gearset has little to no Versatility, otherwise use Light's Potential . Concentrated Silvermoon Health Potion is the healing potion of choice. Void-Touched Augment Rune provide around 1% dps increase and should be evaluated during progress, especially when close to pivotal kills. This guide has been written by Motoko , Warlock main since The Burning Crusade, co-admin in the Warlock Discord , and theorycrafter and contributor for LockOneStopShop ."
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Destruction Warlock": {
       "guideUrl": "https://www.icy-veins.com/wow/destruction-warlock-pve-dps-gear-best-in-slot",
-      "published": "2026-08-16",
+      "published": "2026-08-31",
       "priorities": [
         {
           "label": "Destruction Warlock",
@@ -26546,10 +26582,10 @@
           "slot": "Shoulder",
           "itemId": "271544",
           "itemName": "Spires of the Damned Necrolyte",
-          "sourceText": "Catalyst from Lost Explorers",
-          "sourceKind": "raid",
-          "boss": "The Lost Explorers",
-          "dungeon": null,
+          "sourceText": "Catalyst from Temple of Sethraliss",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "Temple of Sethraliss",
           "droppedBy": null
         },
         {
@@ -26643,13 +26679,13 @@
         {
           "list": "overall",
           "slot": "Trinket",
-          "itemId": "270167",
-          "itemName": "Wavecaller's Seastone",
-          "sourceText": "Nymrissa Wavecaller",
-          "sourceKind": "world",
-          "boss": null,
+          "itemId": "270164",
+          "itemName": "Gebbo's Bottomless Bag",
+          "sourceText": "Lost Explorers",
+          "sourceKind": "raid",
+          "boss": "The Lost Explorers",
           "dungeon": null,
-          "droppedBy": "Nymrissa Wavecaller"
+          "droppedBy": null
         },
         {
           "list": "overall",
@@ -26689,10 +26725,10 @@
           "slot": "Hands",
           "itemId": "271547",
           "itemName": "Damned Necrolyte's Charred Grasps",
-          "sourceText": "Catalyst",
-          "sourceKind": "catalyst",
+          "sourceText": "Catalyst from Temple of Sethraliss",
+          "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": null,
+          "dungeon": "Temple of Sethraliss",
           "droppedBy": null
         },
         {
@@ -26722,10 +26758,10 @@
           "slot": "Shoulder",
           "itemId": "271544",
           "itemName": "Spires of the Damned Necrolyte",
-          "sourceText": "Catalyst",
-          "sourceKind": "catalyst",
+          "sourceText": "Catalyst from Temple of Sethraliss",
+          "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": null,
+          "dungeon": "Temple of Sethraliss",
           "droppedBy": null
         },
         {
@@ -26733,11 +26769,11 @@
           "slot": "Legs",
           "itemId": "271545",
           "itemName": "Damned Necrolyte's Leg Bindings",
-          "sourceText": "Catalyst",
-          "sourceKind": "catalyst",
+          "sourceText": "Catalyst from Den of Nalorakk",
+          "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": null,
-          "droppedBy": null
+          "dungeon": "Den of Nalorakk",
+          "droppedBy": "Nalorakk"
         },
         {
           "list": "mplus",
@@ -26753,12 +26789,12 @@
         {
           "list": "mplus",
           "slot": "Feet",
-          "itemId": "268255",
-          "itemName": "Cackling Soultreads",
-          "sourceText": "Coiled Altar",
-          "sourceKind": "raid",
-          "boss": "The Coiled Altar",
-          "dungeon": null,
+          "itemId": "251137",
+          "itemName": "Tempestuous Sandals",
+          "sourceText": "Murder Row",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "Murder Row",
           "droppedBy": null
         },
         {
@@ -26766,10 +26802,10 @@
           "slot": "Chest",
           "itemId": "271549",
           "itemName": "Damned Necrolyte's Rattling Robes",
-          "sourceText": "Catalyst",
-          "sourceKind": "catalyst",
+          "sourceText": "Catalyst from Altar of Fangs",
+          "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": null,
+          "dungeon": "Altar of Fangs",
           "droppedBy": null
         },
         {
@@ -27030,34 +27066,34 @@
         {
           "tier": "S",
           "itemIds": [
-            "270167"
+            "250215"
           ]
         },
         {
           "tier": "A",
           "itemIds": [
-            "250215",
             "270164",
-            "250259",
-            "250224",
-            "273649",
+            "270167",
+            "270168",
             "270170",
-            "273796"
+            "273649"
           ]
         },
         {
           "tier": "B",
           "itemIds": [
-            "270168",
+            "270169",
+            "273796",
             "250214",
-            "270161",
-            "273794"
+            "250224"
           ]
         },
         {
           "tier": "C",
           "itemIds": [
-            "270169",
+            "250259",
+            "270161",
+            "273794",
             "193757",
             "158368"
           ]
@@ -27221,7 +27257,8 @@
           ],
           "note": "Use Thalassian Phoenix Oil as your weapon oil in all content. For Season 2, Flask of the Shattered Sun is the default choice. Flask of the Magisters gains a lot of value though when using the Freightrunner's Flask trinket and Enchant Weapon - Arcane Mastery , so make sure to adjust your consumables. Potion of Recklessness should be the first choice if your gearset has little to no Versatility, otherwise use Light's Potential . Concentrated Silvermoon Health Potion is the healing potion of choice. Void-Touched Augment Rune provide around 1% dps increase and should be evaluated during progress, especially when close to pivotal kills. This guide has been written by Motoko , Warlock main since The Burning Crusade, co-admin in the Warlock Discord , and theorycrafter and contributor for LockOneStopShop ."
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Arms Warrior": {
       "guideUrl": "https://www.icy-veins.com/wow/arms-warrior-pve-dps-gear-best-in-slot",
@@ -27881,7 +27918,8 @@
           ],
           "note": "In addition to enchants, players can also apply temporary augments to their weapons, two-hour long buffs that increase their damage or statistics. While they last through death, these bonuses are not permanent and must be reapplied. Thalassian Phoenix Oil should be used for more secondary stats. The Void-Touched Augment Rune is the best and only augment rune currently available in Midnight. This guide has been written by Archimtiros, Warrior class theorycrafter and SimulationCraft developer who has been writing class guides for more than a decade. You can follow him on Twitter or see more of his day to day work in Skyhold , the Warrior Discord."
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Fury Warrior": {
       "guideUrl": "https://www.icy-veins.com/wow/fury-warrior-pve-dps-gear-best-in-slot",
@@ -28568,11 +28606,12 @@
           ],
           "note": "In addition to enchants, players can also apply temporary augments to their weapons, two-hour long buffs that increase their damage or statistics. While they last through death, these bonuses are not permanent and must be reapplied. Thalassian Phoenix Oil should be used on both weapons for more secondary stats."
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Protection Warrior": {
       "guideUrl": "https://www.icy-veins.com/wow/protection-warrior-pve-tank-gear-best-in-slot",
-      "published": "2026-08-24",
+      "published": "2026-09-03",
       "priorities": [
         {
           "label": "Protection Warrior",
@@ -28890,13 +28929,13 @@
         {
           "list": "mplus",
           "slot": "Trinket",
-          "itemId": "250229",
-          "itemName": "Idol of the War Loa",
-          "sourceText": "Den of Nalorakk",
+          "itemId": "250245",
+          "itemName": "Tumor of the Swarm",
+          "sourceText": "Voidscar Arena",
           "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": "Den of Nalorakk",
-          "droppedBy": "Nalorakk"
+          "dungeon": "Voidscar Arena",
+          "droppedBy": null
         },
         {
           "list": "mplus",
@@ -29131,12 +29170,10 @@
           "tier": "A",
           "itemIds": [
             "270165",
-            "250229",
             "273795",
             "273796",
             "250245",
-            "270164",
-            "250238"
+            "270164"
           ]
         },
         {
@@ -29144,7 +29181,8 @@
           "itemIds": [
             "250228",
             "193757",
-            "250244",
+            "250229",
+            "250238",
             "158367",
             "270160",
             "159618",
@@ -29298,7 +29336,8 @@
           ],
           "note": "Thalassian Phoenix Oil should be your default weapon Oil as it provides us with 2 of our favourite stats. Flask of the Shattered Sun and Flask of the Blood Knights are both excellent choices. Which exact one is best for you depends on your current stat distribution, i.e. if you have a lot of Crit on gear already, you may choose the Haste flask instead, and vice versa. Light's Potential is your best potion in every scenario. Potion of Recklessness is only slightly behind, so it can be used as an alternative if you do not have access to Light's Potential . Concentrated Silvermoon Health Potion should be used as the healing potion in combat. Harandar Celebration or Blooming Feast should be used as your food when available. Champion's Bento and Royal Roast are your two alternative food buffs. Similarly to potions and flasks, the best one depends on your current stat distribution. Generally speaking, you will not go wrong with either of them. Void-Touched Augment Rune provides you with a temporary primary stat buff that lasts for an hour, or until you die. While expensive, they do add to your damage output and as such, should be used if gold is not a issue. This guide has been written by Mwahi , a Protection Warrior theorycrafter and moderator of the Skyhold Warrior Discord ."
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     }
   },
   "coverage": {
