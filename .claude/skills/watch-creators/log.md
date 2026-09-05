@@ -16,6 +16,47 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-05 (nightly, THIRD run of the day) — 44 channels, 1 transcript distilled, 2 takes, 4 queued
+
+- **Discovery:** all 44 distinct transcribable channels with a channelId polled via the YouTube RSS
+  endpoint, **0 failures**, 15 entries each = 660 videos, `media:description` parsed alongside the
+  title. Seen-set recomputed from structured data only (pending seen[]/skipped[]/videos[] plus every
+  `youtu.be` id in a take or metaNote url): **union 1233, 289 unseen, all 289 in-cycle** against the
+  computed bound **2026-06-18** (the OLDEST date in ptr-builds.json, taken as a date, never an index).
+- **Distilled the one pre-fetched transcript** (transcript-fetch/summary.json verdict `ok`,
+  requested 1 / fetched 1, offsets in ms): Dalaran Gaming, *"5 Specs Blizzard Just SAVED In Season 2!
+  (Class Buffs)"* (`Fw6_unqijso`, 2026-09-05) -> **2 M+ takes, both buff**: Feral Druid (the raid-aimed
+  single-target buffs, Ferocious Bite named, become the priority damage keys demand, on top of
+  best-in-class Druid party utility) and Guardian Druid (buffed enough to push high keys without
+  reinventing Chosen of Elune / Moonfire / Thrash, named with Brewmaster as the sturdiest tanks
+  outside Blood DK).
+- **Three of the video's five specs were deliberately NOT distilled**: Demonology Warlock, Windwalker
+  Monk and Brewmaster Monk. Dalaran Gaming has no Warlock or Monk entry at all — same call his own
+  2026-09-01 entry records for Frost DK and Demonology. **FOR A HUMAN:** he now covers Warlock and Monk
+  in round-up form often enough that widening his registered scope is worth a look; not doing it
+  silently. His **Feral RAID** remark was also dropped — "it will take a little bit of time until we
+  see if feral can actually compete" is anticipation, not a read.
+- **No supersession.** His live Druid takes are the 2026-06-30 unscoped PTR-era pair and a 2026-08-29
+  Feral RAID take — all a different lens from a live M+ read, so complementary. `Fw6_unqijso` removed
+  from `videos[]` in the same edit per the one-record ladder; validation caught the overlap the moment
+  the takes landed and before the queue edit, which is the check doing exactly its job.
+- **Queue kept keyword-filtered** (nightly rule — Supadata is 100 requests/MONTH): 4 appended, chosen
+  for a likely spec-strength read rather than a keyword hit — leak *"Wildfire Bomb Has HUGE Issues |
+  Survival Needs These Changes in 12.1.5"* (chaptered mechanical critique), Kalamazi *"Demonology Is
+  NOT Playing The Felguard!"* (description: "those buffs last week have shifted Demonology to a state
+  of No Felguard play"), Shadarek and VooDooSaurus on the 12.1.5 Devourer changes. Nintern and Jedith
+  cover the same Devourer topic and were left UNSEEN for a later run rather than spending four
+  requests on one subject.
+- **Left unqueued with reasons, and deliberately NOT marked seen** (they are budget/judgment cuts, not
+  durable dismissals): the Supatease clips — bare descriptions copying the title, the clip-short
+  shape, and his channel is the PvP lane the distillation rules exclude; Maximum's "Barista", a Twitch
+  restream pointer; LBNinja7's boss-healing guide (guide-shaped); and the 12.1.5 **content-feature**
+  previews from izen, Dalaran Gaming and NeekapHere, which are labyrinth/loot/mount reveals, not
+  per-spec meta reads — note izen is a generalCreator, so a metaNote would have been the lane had the
+  content been per-spec, and it is not.
+- No transcript was fetched from YouTube or any transcript API by this session. Dalaran Gaming's
+  `latest` updated on all five of his class entries to state what was actually distilled.
+
 ## 2026-09-05 (nightly, SECOND run of the day) — 2 takes + 1 metaNote from the two pre-fetched transcripts; 1 video queued
 
 - **44 channels polled, 0 failures, 660 videos**, media:description parsed alongside the title.

@@ -16,6 +16,46 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-05 (nightly, THIRD run of the day) — every metric family verified, NOTHING moved anywhere
+
+- **Murlok + Mythicstats via the trusted pre-agent collectors only** (metrics-fetch/evidence.json,
+  checkedAt 18:47:04Z). No second parser was written and neither host was fetched from this session.
+  Murlok: 3 pages HTTP 200 first attempt, 27/7/6 = 40 rows, sourceDate 2026-09-02 off the
+  `<time datetime>` (dateBasis source-time-datetime) — three days behind the run, hence **partial**.
+  Mythicstats: /period/latest -> period 1079, 39 rows, Mage|Fire the one omitted spec, sum 99.9 with
+  role totals 30.7 / 29.2 / 20.0 / 20.0 against the page's printed 30.8 Ranged. `updates.json` merged
+  through apply-metrics; a pre-merge diff showed **all 79 rows identical to stored in value AND asOf**,
+  so both merges were no-ops. `check-stable-metrics` passes.
+- **Bloodmallet 23/27 charts, byte-identical.** Same four persistent error bodies as since 08-31
+  (Balance, Feral, Augmentation, Devastation; 3/3 retries each, 76 B `{"status": "error"}`). All 23
+  carry `simc_settings.tier = MID2` READ OFF THE CHART and `ptr` as the STRING "0" compared
+  explicitly; pool stays tier-uniform at 23, so no drop and no floor engaged. asOf is each chart's own
+  timestamp, all 23 at 2026-09-05 — which is why bloodmallet is **success** tonight rather than the
+  usual partial. All 138 target values unchanged.
+- **SimC MID2_Raid.txt, 1.36 MB, has a "DPS Ranking:" block** so the .html fallback was not needed.
+  Header build `12.1.0.69587 Live (hotfix 2026-09-04/69587, git build HEAD aa9de89aac)` — the SAME
+  HEAD the earlier nightly merged, which is the honest explanation for an unchanged parse. 44 ranking
+  lines = Raid aggregate + 43 profiles; longest-prefix mapping with a hyphen allowed gives 23 of 27
+  DPS specs, and the 7 unmapped names are all tank profiles (Prot Warrior/Paladin ×2, Brewmaster,
+  Vengeance, both Blood builds). All 23 values identical to stored. MID1_Raid not consulted.
+- **WoWMeta fetched and diffed anyway** rather than trusted to the manifest: manifest.json
+  snapshotDate 2026-09-01 (Last-Modified 09-01 22:55 GMT) AGREES with the rankings file's
+  Last-Modified (09-01 22:23 GMT) — not the 08-04 pinned-manifest shape. 44 blocks, whitelist
+  {dps,hps,tank} + sortField lowerBound + keyRange undefined = 40 rows, 40/40 roster-matched, all 40
+  `lowerBound` identical at the stored 1 dp. Partial; the 8-day age gate is not yet due (4 days).
+- **Archon: night 14 of the wall** — all nine archon-* rows unreachable together. See refresh-tiers'
+  entry for the transport detail. Nothing parsed, nothing substituted from Warcraft Logs, no
+  snapshot moved. Per-boss survivability stays the measured dead end it was recorded as on 08-21.
+- **WCL: evidence file only.** No warcraftlogs.com request of any kind was made from this session.
+  `wcl-fetch/evidence.json` attemptedAt 18:46:53Z, verdict `rdps-broken`: zone 53 enc 3470 and zone 55
+  enc 12993 both return "Internal server error" on `metric: rdps` with 0 rankings, while the `dps`
+  control returns 100 on each — upstream metric family, not access (oauth true, graphql true, 1/3600
+  points). `landed` and `rawRecipes` both empty, so neither row may claim success and no dps-family
+  number was dressed up as rDPS.
+- **Robydoby deliberately not refreshed.** Its sheets are the CLOSED 12.1 PTR cycle's zone-54 testing
+  parses; re-merging would re-date closed-cycle PTR receipts. It sits outside required-sources.json by
+  design, so this costs no manifest row.
+
 ## 2026-09-05 (nightly, SECOND run of the day) — Murlok 13 and Mythicstats 21 values re-cut inside the same day; SimC and Bloodmallet byte-identical; Archon walled night 13
 
 - **Murlok — 13 rows merged, and a parser bug caught by counting.** The first pass anchored on

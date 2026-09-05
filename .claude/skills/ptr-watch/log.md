@@ -16,6 +16,35 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-05 (nightly, THIRD run of the day) — official ledger clean, no new live tuning, 12.1.5 lane untouched
+
+- **Revision ledger first, per the skill.** official-notes/evidence.json (checkedAt 18:47:09Z) reports
+  both configured sources `success`: live-hotfixes topic 2336376 post 1 at **version 31**, updatedAt
+  2026-09-05T01:21:46Z, **99 class sections**; ptr-preview topic 2344395, **3 sections**. Every section
+  hash matches the committed ledger, so every prior resolution carried over — live 2 applied / 97
+  irrelevant, 12.1.5 preview 3 applied notes (Demon Hunter, Hunter, Warrior) — with **0 unresolved and
+  0 removed-section tombstones**. The reviewed pending ledger was written to data/official-notes.json;
+  the ONLY change is the checkedAt instant. `check-official-notes` passes.
+- **12.1.5 stayed NOTES ONLY**: PHASES untouched, nothing written into ptr-builds.json or any
+  `spec.ptr` verdict, no forecast reopened, no archived 12.1 PTR metric relabelled.
+- **Four channels swept, nothing new in the LIVE 12.1 tuning lane.** (1) Wowhead news RSS 193 KB, 40
+  items parsed per `<item>` block, newest 2026-09-05 13:00 CDT — the only class-relevant items are the
+  already-logged September 4 hotfix round-up (news=382760) and 12.1.5 preview coverage. (2) News INDEX
+  (`data.news.newsData`, brace-balanced from the id attribute) polled too because the index leads the
+  RSS: 20 posts, newest 382694, nothing the RSS lacked. (3) Blue tracker (`data.blueTracker.default`)
+  50 entries / ~30 unique topics, newest 2026-09-04 20:23 — only the Sept 4 hotfix mirrors and 12.1.5
+  items. The one candidate that looked like a standalone tuning post, Linxy in **"Week 3 of 3:
+  Interrupts and dispels" (topic 2343549)**, was fetched directly and is a player quest-bug thread —
+  worth recording so the next run does not re-chase it. (4) The tracked 12.1 dev-notes thread
+  2317811.json: highest_post_number 19, last_posted_at 2026-07-31, quiet as expected for a CLOSED
+  cycle — not a lost thread, and no agent-side thread-key change was made.
+- No build or hotfix entry added; ptr-builds.json still tops out at the 2026-09-04 hotfix. No set
+  bonus was touched this run, so the tier-set upkeep gate had nothing to pair.
+- Writeup coverage recomputed rather than remembered: **1 spec at `ptr: null`** — Demonology Warlock,
+  the deliberate one (the source reported no changes). Nothing to fill.
+- Dormant lanes skipped as the between-cycles posture requires: zone 54 / 52 / 56 / 57 were NOT
+  fetched and carry no contract rows; their stored receipts are the closed cycle's final state.
+
 ## 2026-09-05 (nightly, SECOND run of the day) — nothing new in the live 12.1 lane; the 12.1.5 PTR cycle is open and still UNINGESTED
 
 - **Four channels polled fresh**, ~2h45m after the morning nightly. (1) Wowhead news RSS — HTTP 200,

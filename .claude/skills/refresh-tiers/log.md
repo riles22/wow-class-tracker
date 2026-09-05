@@ -16,6 +16,34 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-05 (nightly, THIRD run of the day) — 240/240 rows re-parsed, ZERO letters moved; Archon walled night 14
+
+- **Icy Veins 80/80, Method 80/80, Wowhead 80/80 — 240 rows, 0 unmatched, 0 letters moved.** Counts
+  reconciled per page BEFORE any merge (27 DPS / 7 healer / 6 tank on each bracket); `apply-ratings`
+  was then run on the full 240 anyway and confirmed the no-op (no diff on specs.json).
+- **Page self-dates all unchanged**, the honest explanation for a static parse, each re-read from the
+  page rather than carried forward: Icy Veins JSON-LD dateModified 08-30 / 09-01 / 08-29 (raid) and
+  08-30 ×3 (M+); Wowhead 08-31 ×3 (raid), 08-28 / 08-26 / 09-01 (M+); Method's own "Last Updated"
+  lines 10th August (raid) and 13th August (M+).
+- Era-verified from bodies and changelogs, never a substring count. All twelve Icy Veins and Wowhead
+  pages self-identify as Season 2 and mention Season 1 only as the past; the Icy Veins raid-healer
+  TITLE still says "(Patch 12.0.7 / Midnight)" and is overridden by its Season 2 body (body-over-title).
+  Devourer present in all four DPS and both tank lists, correctly absent from the healer ones.
+  seasonVerified stays s2 on all 20 pages, so nothing for freeze-season to observe.
+- Transports, for the record: Icy Veins direct browser-UA GET (r.jina.ai not attempted, IP-403 here);
+  Method direct; Wowhead the FULL browser header set, then unescape \\/ -> / across the whole document
+  BEFORE locating [tier-list=rows], never anchoring on WH.markup.printHtml. Method's M+ page again
+  offered 8 extra "tierlist" blocks that are the dungeon-difficulty ones — rejected by ROSTER MATCH,
+  which is the only position-independent rejection.
+- **Archon: night 14 of the wall.** All 11 distinct registered URLs fetched with the full header set;
+  every one HTTP 403 with Cloudflare's "Just a moment..." body (6,054-6,180 B) and `__NEXT_DATA__`
+  count 0 — asserted on __NEXT_DATA__, never on status, because the wall also appears as a 200
+  "Human Verification" body (which is exactly the shape the pre-agent source-health probe caught on
+  the M+ DPS route this run, 2,516 B, while our own fetch of the same URL drew the 403). Nothing
+  parsed, nothing written, no snapshot touched; retention policy keeps Archon's last verified S2
+  letters in the four-source consensus. encounter-tiers.json read, not assumed: still season "s1"
+  at asOf 2026-08-17, so the Fight selector stays hidden.
+
 ## 2026-09-05 (nightly, SECOND run of the day) — 240/240 rows re-parsed, ZERO letters moved; Archon walled night 13
 
 - **Icy Veins 80/80, Method 80/80, Wowhead 80/80 — 240 rows, 0 unmatched, 0 letters moved.**
