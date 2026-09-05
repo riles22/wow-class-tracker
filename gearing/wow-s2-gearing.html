@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-lB91k0/fhnNnqQeMFFvlqHFAunRmvHiyUMUVGc2LuNE='; style-src 'unsafe-inline'; font-src data:; img-src data:; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-dUPc02E2mS05Zny7m59dkhlkVSOV+acm20LNiMBXT3U='; style-src 'unsafe-inline'; font-src data:; img-src data:; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Spec Tracker &mdash; Season 2 Gearing</title>
 <!-- The Spec Tracker brand mark as favicon — same artwork as the tracker page, shipped
@@ -2094,7 +2094,7 @@ function renderFooter() {
   /* HOW OLD IS THIS PAGE (2026-08-08). Every harvest date lived inside the collapsed
      "Data sources and technical notes" disclosure, so a visitor had no way to tell whether
      they were reading last night's data or last month's without opening it — and these
-     harvests are MANUAL (Wowhead is unreachable from CI), so they genuinely do lag. The
+     loot/rule harvests remain manual, while guide verification runs separately. The
      tracker states its freshness in an always-visible banner; this is the same promise kept
      on this page. Clock-free like the tracker's dataHealth: it states the oldest date it
      holds rather than computing an age against the reader's clock, so it cannot lie when a
@@ -2105,9 +2105,18 @@ function renderFooter() {
     ? '<p class="footfresh">Gear and item data on this page was last harvested <b>' + esc(harvestDates[harvestDates.length - 1])
       + '</b>' + (harvestDates[0] !== harvestDates[harvestDates.length - 1]
         ? '; the oldest dataset here dates from <b>' + esc(harvestDates[0]) + '</b>' : '')
-      + '. Harvests are manual, so this page can lag the game — see the source notes below for each dataset.</p>'
+      + '. Loot and rule tables are maintained separately from the guides — see the source notes below for each dataset.</p>'
+    : '';
+  const guideSources = Object.values(GUIDES.sources);
+  const guideDates = guideSources.map(s => s.harvestedAt).filter(Boolean).sort();
+  const guideFreshness = guideSources.length
+    ? '<p class="footfresh">Build priorities and BiS guides: '
+      + (guideDates.length === guideSources.length
+        ? 'all sources verified through <b>' + esc(guideDates[0]) + '</b> (oldest source)'
+        : 'source verification is incomplete') + '.</p>'
     : '';
   $('#foot').innerHTML = '<p class="footfam">Part of <a href="index.html"><b>Spec Tracker</b></a> — tier consensus, rankings and the 12.1 forecast for every spec. Made by <a href="https://github.com/riles22" target="_blank" rel="noopener noreferrer"><b>riles22</b></a>.</p>'
+    + guideFreshness
     + freshness
     + scoring
     + '<b>The stat-fit number compares equal-item-level secondary-stat fit; it is not an item simulation.</b>'

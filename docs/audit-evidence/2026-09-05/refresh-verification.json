@@ -175,7 +175,29 @@
         }
       }
     },
-    "rawRecipes": {}
+    "rawRecipes": {},
+    "htmlProbes": [
+      {
+        "zoneId": 53,
+        "url": "https://www.warcraftlogs.com/zone/statistics/53",
+        "observedAt": "Sat, 05 Sep 2026 16:25:05 GMT",
+        "httpStatus": 403,
+        "status": "blocked",
+        "bodySignature": "cloudflare-challenge",
+        "bodyBytes": 5443,
+        "bodySha256": "714cb17c5888afe4714ee8a928a7283389130423dad388382c436b6025dbc5b6"
+      },
+      {
+        "zoneId": 55,
+        "url": "https://www.warcraftlogs.com/zone/statistics/55",
+        "observedAt": "Sat, 05 Sep 2026 16:25:05 GMT",
+        "httpStatus": 403,
+        "status": "blocked",
+        "bodySignature": "cloudflare-challenge",
+        "bodyBytes": 5443,
+        "bodySha256": "20fe2f4d1a6dcbc530f050a8aea7a76cabe778ead6456d3fb8e0885c92b803c0"
+      }
+    ]
   },
   "guides": {
     "admission": {
