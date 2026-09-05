@@ -16,6 +16,52 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-05 (nightly) — Bloodmallet re-simmed the WHOLE pool overnight; SimC + Mythicstats fresh; Murlok's healer/tank pages re-cut inside the same calendar day
+
+- **Bloodmallet — 23 profiles merged, coverage 09-02 -> 09-05.** 27 requested with up to 3 retries; the
+  same 4 returned the 76-byte error body on 3/3 (Balance, Feral, Augmentation, Devastation — the set
+  standing since 08-31). All 23 carry `simc_settings.tier = MID2` **read off the chart**, `ptr` as the
+  STRING "0" compared explicitly, so the pool is tier-uniform against the stored MID2 pool and
+  composition is unchanged at 23 (no drop). `asOf` is each chart's OWN timestamp and all 23 now read
+  2026-09-05, up from 21@09-02 + 2@09-03 — a genuine whole-pool re-sim, not a run-date stamp. **All 138
+  target values moved, max 4.54%**, so no `value_move_ack` is needed; this is what an ordinary re-sim
+  looks like next to the 1.15-2.87x MID1->MID2 season jump that did need one.
+- **SimC — 23 rows, asOf 09-05.** `MID2_Raid.txt` 1.36 MB, Last-Modified 2026-09-05T07:28:33Z, and it
+  HAS a `DPS Ranking:` block **at line 58, directly under the header** — worth checking the line number,
+  because the file also carries a long in-progress generation log further down and the two look alike in
+  a byte count. Header build string (not the visible Highcharts version): `12.1.0.69587 Live (hotfix
+  2026-09-04/69587, git build HEAD aa9de89aac)` — hash moved from 7d86fb9c3a, which is why values moved.
+  44 ranking lines, longest-prefix map with hyphen allowed -> 23 DPS specs; the 7 unmapped are tank
+  profiles. 23/23 rows moved, max **0.11%**, family median 240089 -> 239944: iteration noise.
+- **Mythicstats — 39 rows, asOf 09-05, and the row count is the finding.** Period 1079 again (rolling
+  window; 22 of 39 values moved). Parse bounded to the "Spec representation in top keys" `<figure>`,
+  read per `<li>` from the img alt + `<span class="mt-1">`. Sum 100.2, role subtotals ranged+melee 60.3
+  / tank 20.0 / healer 19.9 — the representation share, not the /meta per-key-presence column.
+  **Fire Mage is absent from the chart this period.** Not a parse failure: it was published at 0.0 on
+  09-04 and the other 0.0 specs (Frost Mage, Augmentation, Discipline) are still listed, so upstream
+  dropped it. Its stored 0.0 row was LEFT STANDING at its 09-04 date rather than re-invented at today's
+  — the group still sums to the same 100.2, so no stale share is carried, and the coverage date (25th-
+  freshest, floor 25) still advances.
+- **Murlok — partial, and the reason is a same-day re-cut.** The machine-readable `<time datetime>` is
+  the source's own date; the rendered "Updated N hours ago" is baked at page build and here read 1-7
+  hours against real cut times ~67 hours old. DPS unchanged at 2026-09-02T10:10:21Z, but healer and tank
+  have moved to **18:17:55Z / 18:18:12Z** (the 09-04 run saw all three at 10:10:2xZ) — same DATE, later
+  time. The data matches exactly: 27/27 DPS byte-identical, 13/13 healer+tank moved (max 0.3%). Merged
+  all 40 at the source's own 2026-09-02 per the WoWMeta 08-04 precedent; the coverage date therefore does
+  not advance and the row is honestly `partial`. **A same-date re-cut is invisible to a date-only
+  change detector — diff the values every run.**
+- **WoWMeta — partial, upstream still frozen at 2026-09-01.** manifest `snapshotDate` and the rankings
+  file's Last-Modified agree (22:55:42Z / 22:23:28Z), so not the 08-04 pinned-manifest shape; payload
+  diffed anyway — 44 blocks, whitelist {dps,hps,tank} + lowerBound + `keyRange === undefined` -> 40 rows,
+  all byte-identical at 1 dp. Owner-accepted standing red continuing.
+- **WCL — evidence file only, verdict `rdps-broken`.** No warcraftlogs.com request from this session.
+  oauth true / graphql true / 1 of 3600 points, `landed` and `rawRecipes` both empty, so neither
+  wcl-live row may claim success. Owner-accepted standing red since 08-18.
+- **Archon — walled night 12**, all 11 URLs 403 + "Just a moment..." interstitial, `__NEXT_DATA__` 0.
+  All six numeric requirements plus survivability recorded unreachable; nothing backfilled from WCL.
+- Robydoby not fetched: its sheets are the closed 12.1 PTR cycle's zone-54 parses, deliberately outside
+  the contract, and there is no live-season lane for them.
+
 
 ## 2026-09-04 (nightly) — SimC re-simmed (23 rows, new HEAD) and Mythicstats moved WITHIN period 1079 (31 of 40); Murlok, WoWMeta and Bloodmallet all fetched, diffed and byte-identical; Archon walled night 11
 

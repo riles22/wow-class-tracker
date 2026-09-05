@@ -16,6 +16,46 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-05 (nightly) — ONE new live-12.1 hotfix round-up logged (Sept 4), with its Enhancement Shaman set-bonus line deliberately DEFERRED to a local run
+
+- **Four channels polled.** (1) Wowhead news RSS — HTTP 200, 205 KB, 40 items parsed per `<item>`
+  block (never by tag adjacency), newest 2026-09-05 08:00. (2) Wowhead news INDEX
+  (`data.news.newsData`, brace-balanced from the id attribute) polled as well because the index
+  leads the RSS: 20 posts, newest id 382757. (3) Blue tracker (`data.blueTracker.default`): 50
+  entries, ~30 unique topics, newest 2026-09-04 20:23 — only the hotfix mirrors (Kaivax + Linxy EU,
+  plus the Blizzard News copy) and Linxy's 12.1.5 PTR Development Notes. No standalone live-12.1
+  class-tuning blue post. (4) Canonical source read directly: Kaivax topic 2336376, now titled
+  "World of Warcraft: Midnight Hotfixes - September 4", post 1 at version 31, last edited
+  2026-09-05T01:21:46Z, read with heading structure INTACT.
+- **Logged:** `data/ptr-builds.json` gains a 2026-09-04 `kind: "hotfix"` entry (feed now 29) —
+  Balance Druid (Stellar Amplification cooldown-manager tracking; Twin Moons' range increased by
+  target combat reach) plus the non-class round-up (Ula'tek Ingested Venom / Serpent's Bite overlap,
+  housing Secret Souvenir credit, the non-set Catalyst-eligibility fix, Preternatural Antivenom).
+  Classification CHECKED not assumed: the consolidated Balance line scores **buff** on the range
+  increase, and the line is left as written rather than reworded — steering `classifyHighlight` by
+  editing a highlight would be gaming the outlook tally.
+- ⚠️ **DEFERRED, and this is a structural nightly limit worth remembering.** The same round-up carries
+  "Enhancement Shaman — Corrected an issue where the Venomous Abyss 4-set bonus was not properly
+  increasing the upfront damage of Crash Lightning." It is real 12.1 PvE tuning and belongs in the
+  entry, but it trips `SET_KEYWORD`, so the tier-set upkeep gate demands Enhancement Shaman's
+  `tierSet.asOf` advance to 2026-09-04 — and since the 2026-08-23 two-page rule that also demands
+  `gearing/data/specs.json` be re-synced in the SAME change. **gearing/ never travels in the nightly
+  refresh artifact** (publish uploads `data/` + skill logs and checks out master for everything else),
+  so a nightly-side bump is unpublishable in both directions, and this was VERIFIED rather than
+  assumed: bumping the tracker alone reds `validate` with "gearing/data/specs.json: Enhancement Shaman
+  tierSet.asOf does not match data/specs.json", and syncing the mirror as well would simply be dropped
+  at publish and red Gate 1 there instead. So the line is omitted from `specsAffected`/`highlights`
+  and the omission is written into the entry's own `label`, the manifest row and here — an explicit
+  deferral, not a silent under-distillation. **OWNER local run:** bump the tierSet asOf/source, run
+  `node gearing/src/sync-tracker-fields.mjs && npm run gearing:build`, then add the line and
+  Enhancement Shaman to the 2026-09-04 entry. Same shape as the 09-03 Holy Priest and 09-02 Fire Mage
+  set lines, both of which a local run handled.
+- **12.1.5 still NOT ingested.** The feed now carries nine 12.1.5 PTR articles (loading screen, Kith'ix
+  loot, renown catch-up, maps, key bindings, "Class Changes for Devourer DH") and Linxy's dev-notes
+  topic is on the blue tracker. Opening a cycle is an OWNER action — new `PHASES.ptr` entry, thread
+  key, contract rows, zone probe — and `PHASES.ptr` is still null, so nothing 12.1.5 was written.
+- Dormant WCL PTR zone sweeps (52/54/56/57) correctly not attempted; their contract rows left at the flip.
+
 
 ## 2026-09-04 (nightly) — nothing new in the live 12.1 lane; the September 3 round-up was already logged by a local run ~30 minutes earlier, and 12.1.5 stays UNINGESTED pending the owner
 

@@ -95,7 +95,7 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3630,
+        "value": 3635,
         "unit": "rating",
         "asOf": "2026-09-02"
       },
@@ -103,9 +103,9 @@
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 12.7,
+        "value": 13,
         "unit": "%",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -265,9 +265,9 @@
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.9,
+        "value": 1,
         "unit": "%",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -283,9 +283,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 249975,
+        "value": 250055,
         "unit": "DPS",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -387,14 +387,14 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-09-02",
+      "asOf": "2026-09-05",
       "targets": {
-        "1": 242521,
-        "2": 364214,
-        "3": 479483,
-        "5": 708576,
-        "8": 978009,
-        "15": 1540677
+        "1": 249671,
+        "2": 374785,
+        "3": 490875,
+        "5": 724962,
+        "8": 1000538,
+        "15": 1574649
       },
       "tier": "MID2"
     },
@@ -531,9 +531,9 @@
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 1,
+        "value": 0.7,
         "unit": "%",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -549,9 +549,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 240089,
+        "value": 239944,
         "unit": "DPS",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -653,14 +653,14 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-09-02",
+      "asOf": "2026-09-05",
       "targets": {
-        "1": 231096,
-        "2": 329572,
-        "3": 390450,
-        "5": 519853,
-        "8": 758829,
-        "15": 1107047
+        "1": 237263,
+        "2": 338022,
+        "3": 400668,
+        "5": 533173,
+        "8": 777523,
+        "15": 1134232
       },
       "tier": "MID2"
     },
@@ -794,9 +794,9 @@
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 1.3,
+        "value": 1.2,
         "unit": "%",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -812,9 +812,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 250192,
+        "value": 250225,
         "unit": "DPS",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -916,14 +916,14 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-09-02",
+      "asOf": "2026-09-05",
       "targets": {
-        "1": 236148,
-        "2": 305627,
-        "3": 364643,
-        "5": 472155,
-        "8": 586481,
-        "15": 755064
+        "1": 243707,
+        "2": 315014,
+        "3": 375506,
+        "5": 485547,
+        "8": 603390,
+        "15": 776944
       },
       "tier": "MID2"
     },
@@ -1063,7 +1063,7 @@
         "name": "Top-2000 keys representation",
         "value": 2,
         "unit": "%",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -1079,9 +1079,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 263615,
+        "value": 263662,
         "unit": "DPS",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -1183,14 +1183,14 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-09-02",
+      "asOf": "2026-09-05",
       "targets": {
-        "1": 251160,
-        "2": 318120,
-        "3": 402038,
-        "5": 476527,
-        "8": 649148,
-        "15": 936412
+        "1": 257790,
+        "2": 326148,
+        "3": 411182,
+        "5": 488086,
+        "8": 663859,
+        "15": 957409
       },
       "tier": "MID2"
     },
@@ -1316,7 +1316,7 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3447,
+        "value": 3451,
         "unit": "rating",
         "asOf": "2026-09-02"
       },
@@ -1326,7 +1326,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.6,
         "unit": "%",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -1489,9 +1489,9 @@
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 1.8,
+        "value": 1.7,
         "unit": "%",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -1730,9 +1730,9 @@
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 1.7,
+        "value": 2,
         "unit": "%",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -1953,7 +1953,7 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3569,
+        "value": 3566,
         "unit": "rating",
         "asOf": "2026-09-02"
       },
@@ -1961,9 +1961,9 @@
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 3,
+        "value": 2.9,
         "unit": "%",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -2105,7 +2105,7 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3369,
+        "value": 3370,
         "unit": "rating",
         "asOf": "2026-09-02"
       },
@@ -2113,9 +2113,9 @@
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.2,
+        "value": 0.1,
         "unit": "%",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -2298,7 +2298,7 @@
         "name": "Top-2000 keys representation",
         "value": 0,
         "unit": "%",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -2530,7 +2530,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.1,
         "unit": "%",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -2763,7 +2763,7 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3426,
+        "value": 3423,
         "unit": "rating",
         "asOf": "2026-09-02"
       },
@@ -2773,7 +2773,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.5,
         "unit": "%",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -2957,7 +2957,7 @@
         "name": "Top-2000 keys representation",
         "value": 1.3,
         "unit": "%",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -2973,9 +2973,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 251004,
+        "value": 251212,
         "unit": "DPS",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -3077,14 +3077,14 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-09-02",
+      "asOf": "2026-09-05",
       "targets": {
-        "1": 245597,
-        "2": 282866,
-        "3": 315123,
-        "5": 387595,
-        "8": 458574,
-        "15": 602359
+        "1": 251279,
+        "2": 288860,
+        "3": 322159,
+        "5": 396599,
+        "8": 468857,
+        "15": 616369
       },
       "tier": "MID2"
     },
@@ -3223,7 +3223,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.1,
         "unit": "%",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -3239,9 +3239,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 239359,
+        "value": 239335,
         "unit": "DPS",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -3334,14 +3334,14 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-09-02",
+      "asOf": "2026-09-05",
       "targets": {
-        "1": 230628,
-        "2": 287535,
-        "3": 332746,
-        "5": 421772,
-        "8": 522970,
-        "15": 658527
+        "1": 236342,
+        "2": 293983,
+        "3": 339539,
+        "5": 430463,
+        "8": 532831,
+        "15": 670759
       },
       "tier": "MID2"
     },
@@ -3478,7 +3478,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.3,
         "unit": "%",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -3494,9 +3494,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 247610,
+        "value": 247592,
         "unit": "DPS",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -3588,14 +3588,14 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-09-02",
+      "asOf": "2026-09-05",
       "targets": {
-        "1": 239844,
-        "2": 311683,
-        "3": 375529,
-        "5": 500474,
-        "8": 647695,
-        "15": 812259
+        "1": 248444,
+        "2": 321688,
+        "3": 387193,
+        "5": 515542,
+        "8": 666664,
+        "15": 835914
       },
       "tier": "MID2"
     },
@@ -3733,7 +3733,7 @@
         "name": "Top-2000 keys representation",
         "value": 13.1,
         "unit": "%",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -3749,9 +3749,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 217791,
+        "value": 217634,
         "unit": "DPS",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -3853,14 +3853,14 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-09-02",
+      "asOf": "2026-09-05",
       "targets": {
-        "1": 194622,
-        "2": 277360,
-        "3": 350730,
-        "5": 495283,
-        "8": 593572,
-        "15": 751324
+        "1": 199587,
+        "2": 284267,
+        "3": 358906,
+        "5": 506137,
+        "8": 606058,
+        "15": 766436
       },
       "tier": "MID2"
     },
@@ -3985,9 +3985,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 226946,
+        "value": 226743,
         "unit": "DPS",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -4089,14 +4089,14 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-09-02",
+      "asOf": "2026-09-05",
       "targets": {
-        "1": 216409,
-        "2": 282890,
-        "3": 390935,
-        "5": 613799,
-        "8": 947636,
-        "15": 1286503
+        "1": 222272,
+        "2": 289548,
+        "3": 400308,
+        "5": 627537,
+        "8": 968073,
+        "15": 1314246
       },
       "tier": "MID2"
     },
@@ -4233,7 +4233,7 @@
         "name": "Top-2000 keys representation",
         "value": 0,
         "unit": "%",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -4249,9 +4249,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 222795,
+        "value": 222846,
         "unit": "DPS",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -4353,14 +4353,14 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-09-02",
+      "asOf": "2026-09-05",
       "targets": {
-        "1": 211982,
-        "2": 262130,
-        "3": 310709,
-        "5": 410636,
-        "8": 518539,
-        "15": 618108
+        "1": 221616,
+        "2": 272409,
+        "3": 322670,
+        "5": 424287,
+        "8": 536155,
+        "15": 641766
       },
       "tier": "MID2"
     },
@@ -4488,7 +4488,7 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3537,
+        "value": 3536,
         "unit": "rating",
         "asOf": "2026-09-02"
       },
@@ -4496,9 +4496,9 @@
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.9,
+        "value": 1,
         "unit": "%",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -4655,7 +4655,7 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3479,
+        "value": 3484,
         "unit": "rating",
         "asOf": "2026-09-02"
       },
@@ -4663,9 +4663,9 @@
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.9,
+        "value": 1.1,
         "unit": "%",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -4847,9 +4847,9 @@
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 1.8,
+        "value": 1.9,
         "unit": "%",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -4865,9 +4865,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 246618,
+        "value": 246351,
         "unit": "DPS",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -4969,14 +4969,14 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-09-02",
+      "asOf": "2026-09-05",
       "targets": {
-        "1": 237146,
-        "2": 320286,
-        "3": 426190,
-        "5": 638038,
-        "8": 798475,
-        "15": 1047645
+        "1": 243003,
+        "2": 328326,
+        "3": 435837,
+        "5": 651960,
+        "8": 816903,
+        "15": 1071607
       },
       "tier": "MID2"
     },
@@ -5110,7 +5110,7 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3625,
+        "value": 3629,
         "unit": "rating",
         "asOf": "2026-09-02"
       },
@@ -5118,9 +5118,9 @@
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 10.4,
+        "value": 10.6,
         "unit": "%",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -5295,7 +5295,7 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3521,
+        "value": 3532,
         "unit": "rating",
         "asOf": "2026-09-02"
       },
@@ -5303,9 +5303,9 @@
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 2.5,
+        "value": 2.1,
         "unit": "%",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -5469,9 +5469,9 @@
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 3.3,
+        "value": 3.1,
         "unit": "%",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -5487,9 +5487,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 231604,
+        "value": 231656,
         "unit": "DPS",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -5591,14 +5591,14 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-09-03",
+      "asOf": "2026-09-05",
       "targets": {
-        "1": 219987,
-        "2": 319162,
-        "3": 408317,
-        "5": 563703,
-        "8": 722399,
-        "15": 1048461
+        "1": 226892,
+        "2": 329391,
+        "3": 421656,
+        "5": 581396,
+        "8": 745114,
+        "15": 1080515
       },
       "tier": "MID2"
     },
@@ -5727,7 +5727,7 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3291,
+        "value": 3292,
         "unit": "rating",
         "asOf": "2026-09-02"
       },
@@ -5735,9 +5735,9 @@
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.1,
+        "value": 0,
         "unit": "%",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -5906,7 +5906,7 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3489,
+        "value": 3492,
         "unit": "rating",
         "asOf": "2026-09-02"
       },
@@ -5914,9 +5914,9 @@
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 1.1,
+        "value": 0.9,
         "unit": "%",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -6098,7 +6098,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.5,
         "unit": "%",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -6114,9 +6114,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 216644,
+        "value": 216653,
         "unit": "DPS",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -6218,14 +6218,14 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-09-02",
+      "asOf": "2026-09-05",
       "targets": {
-        "1": 203150,
-        "2": 300812,
-        "3": 398841,
-        "5": 594811,
-        "8": 839551,
-        "15": 1295553
+        "1": 209427,
+        "2": 310337,
+        "3": 411130,
+        "5": 613532,
+        "8": 867061,
+        "15": 1341471
       },
       "tier": "MID2"
     },
@@ -6363,17 +6363,17 @@
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 3.6,
+        "value": 4,
         "unit": "%",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 238561,
+        "value": 238606,
         "unit": "DPS",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -6475,14 +6475,14 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-09-02",
+      "asOf": "2026-09-05",
       "targets": {
-        "1": 229166,
-        "2": 262998,
-        "3": 315712,
-        "5": 389386,
-        "8": 475834,
-        "15": 488120
+        "1": 237373,
+        "2": 273090,
+        "3": 328053,
+        "5": 404217,
+        "8": 492524,
+        "15": 510006
       },
       "tier": "MID2"
     },
@@ -6620,17 +6620,17 @@
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 1.4,
+        "value": 1.5,
         "unit": "%",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 256530,
+        "value": 256791,
         "unit": "DPS",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -6732,14 +6732,14 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-09-02",
+      "asOf": "2026-09-05",
       "targets": {
-        "1": 247517,
-        "2": 315701,
-        "3": 394135,
-        "5": 579002,
-        "8": 634166,
-        "15": 641267
+        "1": 253748,
+        "2": 323210,
+        "3": 403427,
+        "5": 591822,
+        "8": 648178,
+        "15": 656261
       },
       "tier": "MID2"
     },
@@ -6878,9 +6878,9 @@
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 1.2,
+        "value": 1,
         "unit": "%",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -6896,9 +6896,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 268242,
+        "value": 268266,
         "unit": "DPS",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -7000,14 +7000,14 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-09-02",
+      "asOf": "2026-09-05",
       "targets": {
-        "1": 259811,
-        "2": 319149,
-        "3": 422490,
-        "5": 623634,
-        "8": 897106,
-        "15": 1223189
+        "1": 266418,
+        "2": 326545,
+        "3": 432084,
+        "5": 637886,
+        "8": 917047,
+        "15": 1253535
       },
       "tier": "MID2"
     },
@@ -7142,7 +7142,7 @@
         "name": "Top-2000 keys representation",
         "value": 7.5,
         "unit": "%",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -7158,9 +7158,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 249580,
+        "value": 249709,
         "unit": "DPS",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -7262,14 +7262,14 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-09-02",
+      "asOf": "2026-09-05",
       "targets": {
-        "1": 244244,
-        "2": 279721,
-        "3": 373922,
-        "5": 597313,
-        "8": 726776,
-        "15": 1010457
+        "1": 251127,
+        "2": 287521,
+        "3": 384985,
+        "5": 613548,
+        "8": 747489,
+        "15": 1037965
       },
       "tier": "MID2"
     },
@@ -7408,7 +7408,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.8,
         "unit": "%",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -7424,9 +7424,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 234351,
+        "value": 234499,
         "unit": "DPS",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -7528,14 +7528,14 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-09-02",
+      "asOf": "2026-09-05",
       "targets": {
-        "1": 220824,
-        "2": 333334,
-        "3": 450378,
-        "5": 707760,
-        "8": 843443,
-        "15": 1056466
+        "1": 228320,
+        "2": 343517,
+        "3": 463839,
+        "5": 729272,
+        "8": 867315,
+        "15": 1084224
       },
       "tier": "MID2"
     },
@@ -7666,7 +7666,7 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3625,
+        "value": 3630,
         "unit": "rating",
         "asOf": "2026-09-02"
       },
@@ -7674,9 +7674,9 @@
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 6.9,
+        "value": 6.7,
         "unit": "%",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -7856,7 +7856,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.1,
         "unit": "%",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -7872,9 +7872,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 233518,
+        "value": 233431,
         "unit": "DPS",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -7976,14 +7976,14 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-09-02",
+      "asOf": "2026-09-05",
       "targets": {
-        "1": 223295,
-        "2": 294818,
-        "3": 354243,
-        "5": 472158,
-        "8": 648573,
-        "15": 890121
+        "1": 229877,
+        "2": 302828,
+        "3": 363646,
+        "5": 483384,
+        "8": 664360,
+        "15": 910800
       },
       "tier": "MID2"
     },
@@ -8105,7 +8105,7 @@
         "name": "Top-2000 keys representation",
         "value": 4.9,
         "unit": "%",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -8121,9 +8121,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 228732,
+        "value": 228897,
         "unit": "DPS",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -8225,14 +8225,14 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-09-03",
+      "asOf": "2026-09-05",
       "targets": {
-        "1": 222321,
-        "2": 279173,
-        "3": 335792,
-        "5": 449332,
-        "8": 619520,
-        "15": 905740
+        "1": 227468,
+        "2": 285997,
+        "3": 344458,
+        "5": 461639,
+        "8": 636713,
+        "15": 931463
       },
       "tier": "MID2"
     },
@@ -8366,7 +8366,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.1,
         "unit": "%",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -8382,9 +8382,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 228919,
+        "value": 228893,
         "unit": "DPS",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -8486,14 +8486,14 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-09-02",
+      "asOf": "2026-09-05",
       "targets": {
-        "1": 220827,
-        "2": 259796,
-        "3": 298069,
-        "5": 420184,
-        "8": 643087,
-        "15": 1195923
+        "1": 227597,
+        "2": 267639,
+        "3": 306825,
+        "5": 434262,
+        "8": 664521,
+        "15": 1236749
       },
       "tier": "MID2"
     },
@@ -8637,9 +8637,9 @@
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 10.8,
+        "value": 10.9,
         "unit": "%",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -8655,9 +8655,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 240726,
+        "value": 240645,
         "unit": "DPS",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -8759,14 +8759,14 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-09-02",
+      "asOf": "2026-09-05",
       "targets": {
-        "1": 239886,
-        "2": 346031,
-        "3": 406820,
-        "5": 532825,
-        "8": 690357,
-        "15": 872025
+        "1": 248314,
+        "2": 355826,
+        "3": 418884,
+        "5": 548810,
+        "8": 711418,
+        "15": 899505
       },
       "tier": "MID2"
     },
@@ -8912,7 +8912,7 @@
         "name": "Top-2000 keys representation",
         "value": 0.5,
         "unit": "%",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -8928,9 +8928,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 256871,
+        "value": 256635,
         "unit": "DPS",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",
@@ -9032,14 +9032,14 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-09-02",
+      "asOf": "2026-09-05",
       "targets": {
-        "1": 256763,
-        "2": 302276,
-        "3": 338497,
-        "5": 410775,
-        "8": 519195,
-        "15": 633468
+        "1": 264172,
+        "2": 310247,
+        "3": 347074,
+        "5": 421596,
+        "8": 532342,
+        "15": 648739
       },
       "tier": "MID2"
     },
@@ -9169,7 +9169,7 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3442,
+        "value": 3432,
         "unit": "rating",
         "asOf": "2026-09-02"
       },
@@ -9177,9 +9177,9 @@
         "source": "mythicstats",
         "bracket": "mplus",
         "name": "Top-2000 keys representation",
-        "value": 0.3,
+        "value": 0.4,
         "unit": "%",
-        "asOf": "2026-09-04"
+        "asOf": "2026-09-05"
       },
       {
         "source": "warcraftlogs",

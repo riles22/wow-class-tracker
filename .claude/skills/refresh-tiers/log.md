@@ -16,6 +16,36 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-05 (nightly) — all three reachable sources parsed clean and ZERO letters moved; Archon walled night 12
+
+- **Icy Veins** 6/6 pages, direct browser-UA GET, HTTP 200, 195-343 KB. `<style>` stripped first,
+  `<table class="tier-list">` asserted at exactly 1 per page, letter from each row's first `<td>`,
+  spec from each entry's FIRST `alt` looked up WHOLE. **raid 27/7/6 = 40, M+ 27/7/6 = 40, 0 unmatched,
+  0 duplicates.** 0 letters moved. JSON-LD `dateModified` re-read on every page and all six match the
+  stored `published` (08-30 / 09-01 / 08-29 raid; 08-30 / 08-30 / 08-30 M+) — a static page producing a
+  static parse, which is the only combination that should ever be reported as "no movement".
+- **Method** 2/2, HTTP 200, 159/166 KB. Roster match again rejects the M+ page's second tierlist — the
+  same eight dungeon-difficulty labels, 0 spec rows unmatched, 40/40 both brackets, 0 letters moved.
+  Its own `.last-updated` paragraphs still read 10th August (raid) and 13th August (M+). Note when
+  grepping these: a `(?:st|nd|rd|th)` regex that starts at the digit eats the leading "1", so "10th"
+  reads as "0th" — take the whole `<p class="last-updated">` text.
+- **Wowhead** 6/6 with the full header set, HTTP 200, 75-341 KB. Unescape `\/` FIRST, then the
+  `[tier-list=rows]` block; exactly one per page, 0 unmatched `[spec-badge=…]` slugs, 40/40 both
+  brackets, 0 letters moved, and every `dateModified` matches stored `published` (raid 08-31 x3;
+  M+ 08-28 / 08-26 / 09-01).
+- **Archon: walled, night 12.** All 11 distinct registered URLs fetched: HTTP 403 with Cloudflare's
+  "Just a moment..." interstitial, 6,054-6,159 bytes, `__NEXT_DATA__` count 0, zero "Human
+  Verification" text — the 403 shape rather than the 200-plus-verification-body shape the contract
+  label describes, which is exactly why the assertion is on `__NEXT_DATA__` presence. Nothing solved,
+  replayed or backfilled; consensus stays "consensus of 3".
+- Era: all 14 reachable pages self-identify as Season 2 / Patch 12.1 in the BODY. Two traps re-confirmed
+  and both handled by reading the body, not a substring count — Icy Veins' raid-healer page still titles
+  itself "(Patch 12.0.7 / Midnight)", and its DPS and M+ DPS pages mention Season 1 only in
+  retrospective prose ("a less powerful version than Season 1"). No `seasonVerified` value changed,
+  so freeze-season had nothing to observe.
+- Snapshots bumped to 2026-09-05 for icyveins/method/wowhead (and the four fetched metric sources);
+  archon's left untouched at 08-25 / 08-18.
+
 
 ## 2026-09-04 (nightly) — Icy Veins raid TANK re-cut (Protection Paladin A -> S, the only letter that moved anywhere); Method and Wowhead static; Archon walled night 11
 

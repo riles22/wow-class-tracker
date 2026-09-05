@@ -3399,7 +3399,8 @@
       "sentiment": "buff",
       "patchContext": "12.1 PTR — Season 2 M+ outlook",
       "url": "https://youtu.be/oocq_kuo-pk?t=481",
-      "claim": "Calls Preservation the most undervalued healer in M+ and the most fun spec of his S2 testing. The tier set adds spot healing or extra damage off essence spenders, Live Spark was buffed, and he rates its healer damage as bonkers — arguably the best of any M+ healer. Explicitly gated on difficulty: it is harder to play than the alternatives and the range limitations remain, so he doubts many players will swap, but says the payoff is there for those who put the time in. On the 08-03 stream he adds that he does not expect it to be meta, for lack of a good raid buff."
+      "claim": "Calls Preservation the most undervalued healer in M+ and the most fun spec of his S2 testing. The tier set adds spot healing or extra damage off essence spenders, Live Spark was buffed, and he rates its healer damage as bonkers — arguably the best of any M+ healer. Explicitly gated on difficulty: it is harder to play than the alternatives and the range limitations remain, so he doubts many players will swap, but says the payoff is there for those who put the time in. On the 08-03 stream he adds that he does not expect it to be meta, for lack of a good raid buff.",
+      "superseded": true
     },
     {
       "class": "Paladin",
@@ -3420,7 +3421,8 @@
       "sentiment": "mixed",
       "patchContext": "12.1 PTR — Season 2 M+ outlook",
       "url": "https://youtu.be/oocq_kuo-pk?t=840",
-      "claim": "His honorable mention — he was strongly considering maining it. Says it felt genuinely fun in M+ testing and he likes the S2 changes that cut its RNG, but atonement transfer does not pay off enough in M+ for the effort the spec demands. His read is conditional: if Blizzard raises atonement transfer for M+ specifically, Discipline could be an absolute blaster; he is waiting to see whether that happens."
+      "claim": "His honorable mention — he was strongly considering maining it. Says it felt genuinely fun in M+ testing and he likes the S2 changes that cut its RNG, but atonement transfer does not pay off enough in M+ for the effort the spec demands. His read is conditional: if Blizzard raises atonement transfer for M+ specifically, Discipline could be an absolute blaster; he is waiting to see whether that happens.",
+      "superseded": true
     },
     {
       "class": "Priest",
@@ -6157,7 +6159,7 @@
       "patchContext": "Season 2 live — reaction to the announced August 25 tuning pass (posted 2026-08-22), week one of the season",
       "url": "https://youtu.be/3E_EY7ULmkw?t=247",
       "claim": "On the announced August 25 pass: he reads the Beast Mastery changes as Blizzard making sure the spec is 'not terrible for mythic plus' — Wild Thrash dealing 300% increased damage against multiple targets instead of 200 is 'quite a decent bit of overall gain', and Beast Cleave rising from 55% to 70% of single-target damage 'should be quite a significant bit of raw overall damage'.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Mage",
@@ -6181,7 +6183,7 @@
       "patchContext": "Season 2 live — his 9h30m week-one healer stream (Mythic+ into Heroic/Mythic raid splits), published 2026-08-22 hours before Blizzard announced the August 25 tuning pass",
       "url": "https://youtu.be/qG-So9pnRBQ?t=27600",
       "claim": "Raiding through heroic-week splits he calls Holy Paladin the outlier of the healer roster: “Paladin felt very strong”, and repeating what he said in PTR testing, every ability you press visibly moves the healing bars in a way he says is not true of the other healers. He reads that as unsustainable rather than as a lasting advantage — he expects Blizzard to look at the heroic-week logs and cut it, guessing a 5–8% nerf, and elsewhere in the stream says he would rather they wait for Mythic logs before changing anything.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Paladin",
@@ -6217,7 +6219,7 @@
       "patchContext": "Season 2 live — his 9h30m week-one healer stream (Mythic+ into Heroic/Mythic raid splits), published 2026-08-22 hours before Blizzard announced the August 25 tuning pass",
       "url": "https://youtu.be/qG-So9pnRBQ?t=33720",
       "claim": "Asked directly which is the better spec, Restoration Shaman or Holy Priest, he answers that both are “doing quite well” this season and are also relatively easy to play — a positive read on Holy Priest with no bracket attached.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Mage",
@@ -6747,7 +6749,7 @@
       "claim": "The other half of the same comparison, and it revises his 2026-08-26 read: on the new four-piece, Fury is no longer clearly ahead of his Arms in keys. He puts Fury's overall damage as very similar to Arms — sometimes feeling higher — while conceding Arms does more priority damage, and concludes the pair are close enough in Mythic+ that spec choice is preference."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Monk",
       "spec": "Mistweaver",
       "creator": "MadSkillzzTV",
@@ -6759,7 +6761,7 @@
       "claim": "He calls Mistweaver Monk very decent in Mythic+, listing it among the healers he considers strong two weeks into Season 2."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Monk",
       "spec": "Mistweaver",
       "creator": "MadSkillzzTV",
@@ -6771,7 +6773,7 @@
       "claim": "Raid is the side he still wants worked on: inside an otherwise positive read of the healer roster he says he would like further changes to Mistweaver Monk specifically for raid content. A softening of his 2026-08-15 raid read rather than a reversal — he is no longer calling the raid position poor, only unfinished."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Priest",
       "spec": "Discipline",
       "creator": "MadSkillzzTV",
@@ -6783,7 +6785,7 @@
       "claim": "He reads Discipline Priest as very decent in raid, the mirror image of his Mistweaver read."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Priest",
       "spec": "Discipline",
       "creator": "MadSkillzzTV",
@@ -6795,7 +6797,7 @@
       "claim": "For keys he still wants more: he says Discipline Priest should receive further changes when it comes to Mythic+, while placing it inside his overall \"most healers are OP\" framing."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Paladin",
       "spec": "Holy",
       "creator": "MadSkillzzTV",
@@ -6807,7 +6809,7 @@
       "claim": "He names Holy Paladin as OP in Mythic+, without qualification."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Shaman",
       "spec": "Restoration",
       "creator": "MadSkillzzTV",
@@ -6865,6 +6867,150 @@
       "patchContext": "Season 2 live — answering a viewer on stream (\"PATCH 12.1.5 LEAKED? MAYBE NEW PTR LATER? GREAT WEEK FOR GEARING!\", published 2026-09-02) who asked whether this is a good season to roll a Rogue for the first time. His answer is a three-spec comparison in his own voice, anchored by \"I'd say so\" and \"I think so at least\"; the PvP half of the same answer is out of scope for this tracker and is not distilled.",
       "url": "https://youtu.be/Kq3saXcBt10?t=2489",
       "claim": "His strongest single-spec claim in the answer: he calls Outlaw a very, very meta Mythic+ spec, and reports both it and Assassination getting a decent amount of key play."
+    },
+    {
+      "superseded": false,
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "creator": "MadSkillzzTV",
+      "date": "2026-09-04",
+      "sentiment": "nerf",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — \"12.1 Best Healers (so far) | M+ & Raid Healer Balance\" (published 2026-09-04), three weeks into Season 2. A chart-driven review of live raid HPS (Mythic and Heroic Venomous Abyss), Race-to-World-First healer compositions and top-2000 M+ key representation. He repeatedly flags the sample as thin on the late Mythic bosses and says the Archon M+ tier list on screen is not his own; only his first-person reads are distilled below, and the raid/M+ halves are scoped separately because his reads genuinely differ between them. Raid outlook.",
+      "url": "https://youtu.be/MivlWUZEWOY?t=54",
+      "claim": "He calls Mistweaver Monk the absolute outlier of the raid healer roster and puts the cause on its Season 2 tier set: the four-piece is weak enough that many Mistweavers are running two pieces of the old set alongside two of the new, which he says is a bad place for a healer to be. He notes two Blizzard attempts to address it — one buff that he says was not actually applied and a second he calls a minuscule increase — and observes Mistweaver was not brought to the Race to World First much, its Mystic Touch debuff usually covered by a Windwalker instead."
+    },
+    {
+      "superseded": false,
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "creator": "MadSkillzzTV",
+      "date": "2026-09-04",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — \"12.1 Best Healers (so far) | M+ & Raid Healer Balance\" (published 2026-09-04), three weeks into Season 2. A chart-driven review of live raid HPS (Mythic and Heroic Venomous Abyss), Race-to-World-First healer compositions and top-2000 M+ key representation. He repeatedly flags the sample as thin on the late Mythic bosses and says the Archon M+ tier list on screen is not his own; only his first-person reads are distilled below, and the raid/M+ halves are scoped separately because his reads genuinely differ between them. M+ outlook.",
+      "url": "https://youtu.be/MivlWUZEWOY?t=616",
+      "claim": "He reads Mistweaver as clearly better in Mythic+ than in raid, and places it above its raid standing on that basis."
+    },
+    {
+      "superseded": false,
+      "class": "Paladin",
+      "spec": "Holy",
+      "creator": "MadSkillzzTV",
+      "date": "2026-09-04",
+      "sentiment": "nerf",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — \"12.1 Best Healers (so far) | M+ & Raid Healer Balance\" (published 2026-09-04), three weeks into Season 2. A chart-driven review of live raid HPS (Mythic and Heroic Venomous Abyss), Race-to-World-First healer compositions and top-2000 M+ key representation. He repeatedly flags the sample as thin on the late Mythic bosses and says the Archon M+ tier list on screen is not his own; only his first-person reads are distilled below, and the raid/M+ halves are scoped separately because his reads genuinely differ between them. Raid outlook.",
+      "url": "https://youtu.be/MivlWUZEWOY?t=108",
+      "claim": "He extends the tier-set complaint to Holy Paladin's raid position: the four-piece leans on Holy Light and Virtue, which he says players do not end up casting because the mana cost is punishing, so many Holy Paladins are not eager to complete the set. He wishes Blizzard would revisit that four-piece specifically. Its Race-to-World-First appearances he attributes to raid utility — blessings and being a main source of Devotion Aura — rather than to throughput."
+    },
+    {
+      "superseded": false,
+      "class": "Paladin",
+      "spec": "Holy",
+      "creator": "MadSkillzzTV",
+      "date": "2026-09-04",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — \"12.1 Best Healers (so far) | M+ & Raid Healer Balance\" (published 2026-09-04), three weeks into Season 2. A chart-driven review of live raid HPS (Mythic and Heroic Venomous Abyss), Race-to-World-First healer compositions and top-2000 M+ key representation. He repeatedly flags the sample as thin on the late Mythic bosses and says the Archon M+ tier list on screen is not his own; only his first-person reads are distilled below, and the raid/M+ halves are scoped separately because his reads genuinely differ between them. M+ outlook.",
+      "url": "https://youtu.be/MivlWUZEWOY?t=533",
+      "claim": "Asked whether Holy Paladin is overpowered in Mythic+ he says he agrees, and by the summary he calls it probably the best healer for Mythic+ content because it fits into essentially any of the comps currently forming, including the emerging Demonology-led ones."
+    },
+    {
+      "superseded": false,
+      "class": "Priest",
+      "spec": "Holy",
+      "creator": "MadSkillzzTV",
+      "date": "2026-09-04",
+      "sentiment": "buff",
+      "bracket": "both",
+      "patchContext": "Season 2 live — \"12.1 Best Healers (so far) | M+ & Raid Healer Balance\" (published 2026-09-04), three weeks into Season 2. A chart-driven review of live raid HPS (Mythic and Heroic Venomous Abyss), Race-to-World-First healer compositions and top-2000 M+ key representation. He repeatedly flags the sample as thin on the late Mythic bosses and says the Archon M+ tier list on screen is not his own; only his first-person reads are distilled below, and the raid/M+ halves are scoped separately because his reads genuinely differ between them. He states the same read for raid and M+ outlook.",
+      "url": "https://youtu.be/MivlWUZEWOY?t=135",
+      "claim": "Holy Priest is the read he returns to most: he calls it the biggest underdog and the biggest surprise of the patch, doing really well in both raid and Mythic+ after a run of buffs. He points to it topping HPS among the early Mythic bosses and on the Heroic charts, and says Priest players are no longer effectively forced into Discipline — both specs work this season."
+    },
+    {
+      "superseded": false,
+      "class": "Evoker",
+      "spec": "Preservation",
+      "creator": "MadSkillzzTV",
+      "date": "2026-09-04",
+      "sentiment": "buff",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — \"12.1 Best Healers (so far) | M+ & Raid Healer Balance\" (published 2026-09-04), three weeks into Season 2. A chart-driven review of live raid HPS (Mythic and Heroic Venomous Abyss), Race-to-World-First healer compositions and top-2000 M+ key representation. He repeatedly flags the sample as thin on the late Mythic bosses and says the Archon M+ tier list on screen is not his own; only his first-person reads are distilled below, and the raid/M+ halves are scoped separately because his reads genuinely differ between them. Raid outlook.",
+      "url": "https://youtu.be/MivlWUZEWOY?t=328",
+      "claim": "He rates Preservation as an S-tier raid healer, citing pure HPS and the fact that Liquid, Echo and Method all brought double Preservation to Mythic Ula'tek, where he says the HPS is insane and the last one or two bosses are what actually decide a Mythic guild's tier. He also singles out Preservation and Holy Priest as being well ahead on Twin Fangs, while warning that the public-log sample there is small."
+    },
+    {
+      "superseded": false,
+      "class": "Evoker",
+      "spec": "Preservation",
+      "creator": "MadSkillzzTV",
+      "date": "2026-09-04",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — \"12.1 Best Healers (so far) | M+ & Raid Healer Balance\" (published 2026-09-04), three weeks into Season 2. A chart-driven review of live raid HPS (Mythic and Heroic Venomous Abyss), Race-to-World-First healer compositions and top-2000 M+ key representation. He repeatedly flags the sample as thin on the late Mythic bosses and says the Archon M+ tier list on screen is not his own; only his first-person reads are distilled below, and the raid/M+ halves are scoped separately because his reads genuinely differ between them. M+ outlook.",
+      "url": "https://youtu.be/MivlWUZEWOY?t=594",
+      "claim": "For keys he calls Preservation an underdog that people have been sleeping on, pointing at its healer damage as the underrated part, and says Flame Shaper is the most popular hero build. He has been playing it heavily and rates the payoff highly."
+    },
+    {
+      "superseded": false,
+      "class": "Druid",
+      "spec": "Restoration",
+      "creator": "MadSkillzzTV",
+      "date": "2026-09-04",
+      "sentiment": "buff",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — \"12.1 Best Healers (so far) | M+ & Raid Healer Balance\" (published 2026-09-04), three weeks into Season 2. A chart-driven review of live raid HPS (Mythic and Heroic Venomous Abyss), Race-to-World-First healer compositions and top-2000 M+ key representation. He repeatedly flags the sample as thin on the late Mythic bosses and says the Archon M+ tier list on screen is not his own; only his first-person reads are distilled below, and the raid/M+ halves are scoped separately because his reads genuinely differ between them. Raid outlook.",
+      "url": "https://youtu.be/MivlWUZEWOY?t=205",
+      "claim": "He calls Restoration Druid a sleeper for raid: its raw HPS is, in his words, bonkers, and while he is explicit that much of that is overhealing and that effective healing is what matters, he still thinks it is being slept on for guilds progressing on already-nerfed bosses rather than racing. He notes it was not brought to the Race to World First as much as he would have liked, and that the Regrowth-heavy, stand-still gameplay it was pushed into is not to everyone's taste even after the heart-of-the-wild buffs."
+    },
+    {
+      "superseded": false,
+      "class": "Shaman",
+      "spec": "Restoration",
+      "creator": "MadSkillzzTV",
+      "date": "2026-09-04",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — \"12.1 Best Healers (so far) | M+ & Raid Healer Balance\" (published 2026-09-04), three weeks into Season 2. A chart-driven review of live raid HPS (Mythic and Heroic Venomous Abyss), Race-to-World-First healer compositions and top-2000 M+ key representation. He repeatedly flags the sample as thin on the late Mythic bosses and says the Archon M+ tier list on screen is not his own; only his first-person reads are distilled below, and the raid/M+ halves are scoped separately because his reads genuinely differ between them. M+ outlook.",
+      "url": "https://youtu.be/MivlWUZEWOY?t=544",
+      "claim": "A more qualified read than his previous one: having now acquired the four-piece he says the new tier set is best utilised in melee comps where it is not wasted, and that it looks aimed more at raiding than at Mythic+ — in a spread comp there is a real chance of wasting it. He still expects it to do well in the physical/melee key comps specifically. He also notes most Restoration Shamans are on Totemic while the top raiders run Farseer."
+    },
+    {
+      "superseded": false,
+      "class": "Priest",
+      "spec": "Discipline",
+      "creator": "MadSkillzzTV",
+      "date": "2026-09-04",
+      "sentiment": "nerf",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — \"12.1 Best Healers (so far) | M+ & Raid Healer Balance\" (published 2026-09-04), three weeks into Season 2. A chart-driven review of live raid HPS (Mythic and Heroic Venomous Abyss), Race-to-World-First healer compositions and top-2000 M+ key representation. He repeatedly flags the sample as thin on the late Mythic bosses and says the Archon M+ tier list on screen is not his own; only his first-person reads are distilled below, and the raid/M+ halves are scoped separately because his reads genuinely differ between them. M+ outlook.",
+      "url": "https://youtu.be/MivlWUZEWOY?t=685",
+      "claim": "Discipline Priest is the one spec he names as needing the most help in Mythic+: he wants further Atonement buffs for keys, calls out its mana problems as among the worst of any healer at a time when several healers barely care about mana, and observes that on the high-key ranking every healer except Discipline has a 19 or 20 timed. He acknowledges the recent Shadow Mend mana-cost reduction but doubts it is enough on its own."
+    },
+    {
+      "superseded": false,
+      "class": "Priest",
+      "spec": "Discipline",
+      "creator": "MadSkillzzTV",
+      "date": "2026-09-04",
+      "sentiment": "buff",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — \"12.1 Best Healers (so far) | M+ & Raid Healer Balance\" (published 2026-09-04), three weeks into Season 2. A chart-driven review of live raid HPS (Mythic and Heroic Venomous Abyss), Race-to-World-First healer compositions and top-2000 M+ key representation. He repeatedly flags the sample as thin on the late Mythic bosses and says the Archon M+ tier list on screen is not his own; only his first-person reads are distilled below, and the raid/M+ halves are scoped separately because his reads genuinely differ between them. Raid outlook.",
+      "url": "https://youtu.be/MivlWUZEWOY?t=305",
+      "claim": "Raid is the opposite half of the same read: he notes Liquid, Echo and Method all brought double Discipline Priest for Coiled Altar, and attributes that to Discipline's personal damage, which he says is still really good and mattered on that fight's hard DPS checks, alongside Power Infusion."
+    },
+    {
+      "superseded": false,
+      "class": "Hunter",
+      "spec": "Beast Mastery",
+      "creator": "Dalaran Gaming",
+      "date": "2026-09-01",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — a 2h Mythic+ livestream (\"BIG CLASS BUFFS ARE LIVE THIS WEEK! BIG TRADING POST UPDATE!\", published 2026-09-01) run on his Outlaw Rogue. Almost all of it is key-running and chat interaction with no spec-strength content; the one read distilled below is his own-voice reaction to a Beast Mastery Hunter in his own group, repeated four separate times across the stream. M+ outlook. Out-of-scope material deliberately left: his Frost Death Knight and Demonology Warlock remarks are speculation and second-hand (\"apparently\"), and both classes sit outside his registered scope; the Font of Venomous Rage trinket discussion is an item-level claim and explicitly hearsay (\"I heard\").",
+      "url": "https://youtu.be/A1PXCqNKAdo?t=2230",
+      "claim": "Running keys alongside a Beast Mastery Hunter he says the Beast Mastery buffs are looking good and notes the spec has been buffed repeatedly; later, watching that Hunter hold 200k without effort, he asks whether Beast Mastery is simply cracked or has picked up very strong cleave, and says outright that hunter damage is high and the hunter buff is good. By the end of the stream he frames his own gearing goal as not wanting to be beaten by a Beast Mastery Hunter in AoE."
     }
   ],
   "metaNotes": [
