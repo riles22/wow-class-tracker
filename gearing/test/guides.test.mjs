@@ -188,11 +188,18 @@ test("harvested guide files satisfy the Phase B shape contract", async () => {
     const g = await json(`data/guides/${id}.json`);
     assert.equal(g.schemaVersion, 1, `${id}: schemaVersion`);
     assert.equal(g.sourceId, id);
-    assert.match(g.harvestedAt, /^\d{4}-\d{2}-\d{2}$/);
+    if (g.harvestedAt === null) {
+      assert.ok([...rosterKeys].some(key =>
+        !g.specs[key]?.verifiedAt && !g.coverage?.specsAbsent?.some(a => a.spec === key && a.verifiedAt)),
+      `${id}: a null source date must reflect incomplete verification coverage`);
+    } else assert.match(g.harvestedAt, /^\d{4}-\d{2}-\d{2}$/);
     assert.equal(typeof g.dated, "boolean");
     assert.ok(g.coverage && Number.isFinite(g.coverage.specsHarvested), `${id}: coverage`);
     for (const absent of g.coverage.specsAbsent)
       assert.ok(absent.spec && absent.reason, `${id}: absence must carry a reason`);
+    for (const pending of g.coverage.specsPending || [])
+      assert.ok(pending.spec && pending.reason && !pending.verifiedAt,
+        `${id}: pending verification must retain a reason, never a verification date`);
     for (const [key, spec] of Object.entries(g.specs)) {
       assert.ok(rosterKeys.has(key), `${id}: unknown spec key "${key}"`);
       assert.match(spec.guideUrl, /^https:\/\//);
@@ -287,14 +294,15 @@ test("unknown-kind rows stay capped — recipe drift trips loudly, never accumul
   }
 });
 
-test("guide coverage: every roster spec is either harvested or absent-with-reason, per source", async () => {
+test("guide coverage: every roster spec is harvested, verified absent, or pending with a reason", async () => {
   const tracker = await json("../data/specs.json");
   const rosterKeys = tracker.map((s) => `${s.spec} ${s.class}`);
   for (const id of GUIDE_SOURCES) {
     const g = await json(`data/guides/${id}.json`);
-    const covered = new Set([...Object.keys(g.specs), ...g.coverage.specsAbsent.map((a) => a.spec)]);
+    const covered = new Set([...Object.keys(g.specs), ...g.coverage.specsAbsent.map((a) => a.spec),
+      ...(g.coverage.specsPending || []).map((a) => a.spec)]);
     const missing = rosterKeys.filter((k) => !covered.has(k));
-    assert.deepEqual(missing, [], `${id}: specs with neither a record nor a recorded absence`);
+    assert.deepEqual(missing, [], `${id}: specs with neither a record nor a recorded outcome`);
   }
 });
 

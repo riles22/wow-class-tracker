@@ -282,6 +282,7 @@ jobs:
         continue-on-error: true
         env:
           ANOMALY_ACK: ${{ inputs.anomaly_ack }}
+          VALUE_MOVE_ACK: ${{ inputs.value_move_ack }}
         run: |
           set -euo pipefail
           if git diff --quiet -- data/run-manifest.json; then
@@ -360,6 +361,7 @@ jobs:
         if: always() && !cancelled()
         env:
           ANOMALY_ACK: ${{ inputs.anomaly_ack }}
+          VALUE_MOVE_ACK: ${{ inputs.value_move_ack }}
         run: |
           set -euo pipefail
           if git diff --quiet -- data/run-manifest.json; then
@@ -576,25 +578,9 @@ jobs:
           # so the old file's leading lines were not its newest: newest-120 retention fell to 1%
           # for refresh-tiers and 16% for ptr-watch, destroying the separation the whole idea
           # depended on. Measured, not argued.
-          node -e '
-            const { execSync } = require("child_process");
-            const fs = require("fs");
-            const files = execSync("git diff --name-only HEAD -- .claude/skills/", { encoding: "utf8" })
-              .split("\n").map(s => s.trim()).filter(f => f.endsWith("log.md"));
-            for (const file of files) {
-              let head;
-              try { head = execSync(`git show HEAD:${file}`, { encoding: "utf8" }); }
-              catch { continue; } // new log file: nothing to compare against
-              const lines = s => new Set(s.replace(/\r/g, "").split("\n").filter(l => l.trim()));
-              const was = lines(head), now = lines(fs.readFileSync(file, "utf8"));
-              if (!was.size) continue;
-              let kept = 0; for (const l of was) if (now.has(l)) kept++;
-              const pct = Math.round((kept / was.size) * 100);
-              if (pct < 20) {
-                console.log(`::warning::${file} retained only ${pct}% of its previous lines — even a full prune keeps ~42%, so this looks like a rewrite; check the diff before trusting this run precedent`);
-              }
-            }
-          '
+          # Filename admission is strict even though content churn only warns. The
+          # helper passes literal argv to Git and admits only HEAD's existing logs.
+          node src/check-skill-logs.mjs
           # Gate 0 diffs files it knows about; anything the artifact ADDS under data/ was
           # invisible to it and would be committed unreviewed (audit 2026-07-24, S6).
           # history/ is reset just below, so nothing legitimate trips this.
@@ -697,7 +683,7 @@ jobs:
         id: commit
         run: |
           set -euo pipefail
-          git add data/ dist/ ".claude/skills/*/log.md"
+          node src/check-skill-logs.mjs --stage
           if git diff --cached --quiet; then
             echo "Nothing to commit"
             echo "pushed=false" >> "$GITHUB_OUTPUT"

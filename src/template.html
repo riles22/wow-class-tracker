@@ -1229,6 +1229,7 @@ try {
        they did not until 2026-07-25, when the comment described a placement the markup
        never had. A browser invariant asserts the DOM order, not the comment. -->
   <div id="movers"></div>
+  <p id="forecast-grade" class="note standalone" hidden></p>
 
   <div class="matrix" id="matrix"></div>
 
@@ -1591,6 +1592,15 @@ function seasonChip(asOf, opts){
    exactly what the report card grades. projAvailable is the single predicate every
    projection surface consults — before the flip it is the old era gate unchanged. */
 const FROZEN_FC = META.frozenForecast ?? null;
+const FORECAST_REPORT = META.forecastReport ?? null;
+{
+  const host = document.getElementById('forecast-grade');
+  const report = FORECAST_REPORT;
+  if(FROZEN_FC && report?.forecastDate === FROZEN_FC.date && report.comparable && report.overall){
+    host.hidden = false;
+    host.innerHTML = `<a href="forecast-report.html"><b>Settled forecast report · +${esc(report.settleDays)} days</b></a> · ${esc(report.coverage.graded)}/${esc(report.coverage.obtainable)} cells graded · ${esc(report.overall.exactPct)}% exact · ${esc(report.overall.withinOnePct)}% within one band <span class="mnote">against publisher consensus on ${esc(report.actualDate)}. The report includes the carry-forward comparison.</span>`;
+  }
+}
 const projAvailable = () => state.era !== "live" || !!FROZEN_FC;
 /* Which baseline the forecast's confidence prose names. The LIVE computation leans on
    the current live consensus (liveLabel). The FROZEN record's prior is the PRE-LAUNCH
@@ -1633,6 +1643,10 @@ const motionScrollBehavior = () => motionReduced() ? 'auto' : 'smooth';
 
 /* Resolve what the active view shows for one spec + bracket.
    Returns { tier, score, div, tip } — score is used for tier sorting. */
+function consensusDisplayScore(c){
+  const scores = (c?.perSource ?? []).map(p=>p.score).filter(Number.isFinite);
+  return scores.length ? +(scores.reduce((a,b)=>a+b,0)/scores.length).toFixed(2) : c?.score;
+}
 function ratingFor(s, bracket){
   if(state.fight){
     const [fightBracket, slug] = state.fight.split("|");
@@ -1654,7 +1668,8 @@ function ratingFor(s, bracket){
     const c = s.consensus ? s.consensus[bracket] : null;
     if(!c) return { tier:"—", score:-1, div:false, tip:"No ratings yet" };
     const breakdown = c.perSource.map(p => `${p.label}: ${p.tier}`).join(" · ");
-    return { tier:c.tier, score:c.score, div:c.diverges, tip:`Consensus ${c.tier} — ${breakdown}` };
+    return { tier:c.tier, score:c.score, displayScore:consensusDisplayScore(c), div:c.diverges,
+             tip:`Consensus ${c.tier} (${consensusDisplayScore(c)}/100) — ${breakdown}` };
   }
   if(state.source === "projection"){
     const p = s.projection ? s.projection[bracket] : null;
@@ -1687,7 +1702,7 @@ function tierEl(r, mv){
   // Suppressed in the per-fight view: there the score is an Archon scale value, and a
   // meter labeled "Consensus/Projection score" over an Archon number would be a lie.
   const meter = ((state.source==="consensus" || state.source==="projection") && r.score>=0 && !state.fight)
-    ? `<span class="tscore" title="${state.source==="consensus"?"Consensus":"Projection"} score ${r.score}/100 (position within tier)"><i style="width:${r.score}%"></i></span>` : '';
+    ? `<span class="tscore" title="${state.source==="consensus"?"Consensus":"Projection"} score ${r.displayScore ?? r.score}/100 (position within tier)"><i style="width:${r.score}%"></i></span>` : '';
   // Fight view: the non-fight bracket shows its overall consensus tier, dimmed with a
   // dotted underline so it reads as "context, not this fight" (tooltip explains) (M4).
   /* Confidence, in the GRID rather than only the tooltip (2026-08-02 projection audit,
@@ -2504,10 +2519,12 @@ window.addEventListener('resize', ()=>{ clearTimeout(stickyTimer); stickyTimer =
 /* Single entry point for sorting — keeps the clickable headers, the Sort dropdown, and
    the Group/Rank toggle in sync, then re-renders (header carets rebuild from state.sort). */
 function setSort(key){
+  const focusKey = document.activeElement?.closest('.hsort')?.dataset.sort;
   state.sort = key;
   const sel = document.getElementById('sortsel'); if(sel) sel.value = key;
   document.querySelectorAll('#groupseg button').forEach(b=> b.setAttribute('aria-pressed', (b.dataset.g==='class') === (key==='class') ? 'true' : 'false'));
   render();
+  if(focusKey) [...matrix.querySelectorAll('.hsort')].find(b=>b.dataset.sort===focusKey)?.focus();
 }
 
 /* Drawers open lazily and survive re-renders (keyed class|spec). One delegated
@@ -3145,7 +3162,7 @@ function cmpLiveMedian(s, b){
 function openCompare(){
   const list = [...COMPARE].map(k => SPECS.find(s => `${s.class}|${s.spec}` === k)).filter(Boolean);
   if(list.length < 2) return;
-  const tierCell = (s,b)=>{ const c = s.consensus?.[b]; return c ? `<span class="tier" data-t="${esc(c.tier)}">${esc(c.tier)}</span> <span class="mnote">${c.score}/100</span>` : "—"; };
+  const tierCell = (s,b)=>{ const c = s.consensus?.[b]; return c ? `<span class="tier" data-t="${esc(c.tier)}">${esc(c.tier)}</span> <span class="mnote">${consensusDisplayScore(c)}/100</span>` : "—"; };
   const projCell = (s,b)=>{ const p = s.projection?.[b]; return p ? `<span class="tier" data-t="${esc(p.tier)}">${esc(p.tier)}</span> <span class="mnote">${p.score}/100 · confidence ${esc(p.confidence)}</span>` : "—"; };
   const crossRole = new Set(list.map(s=>s.role)).size > 1;
   const rows = [
@@ -3394,7 +3411,7 @@ function renderMovers(){
      "where we were wrong": week-one tier lists churn hard and the report card only scores
      after SETTLE_DAYS, so a verdict here would overclaim what the data can support. */
   const moversTitle = FROZEN_FC ? "Forecast vs. live consensus" : `Into ${esc(PHASE.liveLabel)} — biggest movers`;
-  host.innerHTML = `<details class="movers"><summary><b>${moversTitle}</b> <span class="mnote">${FROZEN_FC ? `our frozen ${esc(FROZEN_FC.date)} forecast against today's live reading — not yet a grade` : `our forecast vs the live consensus`} · ${movedSpecs} of ${SPECS.length} specs change tier</span></summary>
+  host.innerHTML = `<details class="movers"><summary><b>${moversTitle}</b> <span class="mnote">${FROZEN_FC ? `our frozen ${esc(FROZEN_FC.date)} forecast against today's live reading — ${FORECAST_REPORT ? 'current comparison; settled report below' : 'not yet a grade'}` : `our forecast vs the live consensus`} · ${movedSpecs} of ${SPECS.length} specs change tier</span></summary>
     <p class="mnote mvr-note">This is <b>our own 12.1 projection</b>, not a source — live consensus blended with PTR testing and Dummy Dome data, shifted by the tuning outlook. Points are forecast-score deltas. Open a spec for its full basis.</p>
     <div class="mvr-cols">
       <div><p class="d-h">${FROZEN_FC ? "Forecast above live" : `Rising into ${esc(PHASE.liveLabel)}`}</p><div class="chlist">${risers.map(cell).join("") || "<span class='mnote'>None.</span>"}</div></div>
@@ -3926,7 +3943,7 @@ function openSpecFromOverlay(cls, spec){
                  +(m.thin?" · THIN SAMPLE: only "+Number(m.n).toLocaleString()+" parses":"") };
   }
   const consCell = s => { const c = s.consensus && s.consensus[A.bracket];
-    return c ? { tier:c.tier, score:c.score, div:c.diverges, tip:"Consensus "+c.tier+" ("+c.score+"/100)" } : { tier:null, score:null, tip:"No ratings yet" }; };
+    return c ? { tier:c.tier, score:c.score, div:c.diverges, tip:"Consensus "+c.tier+" ("+consensusDisplayScore(c)+"/100)" } : { tier:null, score:null, tip:"No ratings yet" }; };
   const projCell = s => { const p = s.projection && s.projection[A.bracket];
     return p ? { tier:p.tier, score:p.score, conf:p.confidence, tip:"Our 12.1 forecast"+(FROZEN_FC?" (FROZEN pre-launch record, declared "+FROZEN_FC.date+")":"")+": "+p.tier+" ("+p.score+"/100, confidence "+p.confidence+") — "+p.basis }
              : { tier:null, score:null, tip:"No projection — nothing to project from" }; };

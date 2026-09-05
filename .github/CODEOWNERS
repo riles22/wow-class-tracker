@@ -29,6 +29,7 @@
 # The deterministic gatekeepers themselves
 /src/validate.mjs @riles22
 /src/check-refresh.mjs @riles22
+/src/check-skill-logs.mjs @riles22
 /src/apply-ratings.mjs @riles22
 /src/apply-metrics.mjs @riles22
 # The freeze lane writes the two append-only records above, so it belongs with the

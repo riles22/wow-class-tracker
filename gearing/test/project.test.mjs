@@ -567,6 +567,14 @@ test("client app: consensus-first ranking, source-labeled Builds, custom overrid
     return { document, app };
   };
   const { document, app } = startClient(data);
+  assert.match(document.ids.get("foot").innerHTML,
+    new RegExp('Icy Veins \\(verified through ' + guides.sources.icyveins.harvestedAt + '\\)'));
+  const incompleteGuideData = clone(data);
+  incompleteGuideData.guides.sources.icyveins.harvestedAt = null;
+  const incompleteGuideClient = startClient(incompleteGuideData);
+  assert.match(incompleteGuideClient.document.ids.get("foot").innerHTML,
+    /Icy Veins \(verification incomplete\)/);
+  assert.doesNotMatch(incompleteGuideClient.document.ids.get("foot").innerHTML, /\(harvested \)/);
   const specSelect = document.ids.get("spec");
   const scoringMode = document.ids.get("scoring-mode");
   const profileSelect = document.ids.get("profile");
@@ -785,9 +793,12 @@ test("the game plan shows two named components and lights potential up after a p
   const data = { raid, specs, dungeons, sheet, itemEligibility, tier, catalyst,
     catalystAllocations, guides, icons: icons.icons };
   const scripts = [...template.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)];
-  const appSource = `${scripts.at(-1)[1]}\nreturn {};`;
+  const appSource = `${scripts.at(-1)[1]}\nreturn {
+    plan: id => planFor([BY_ID[id]]), ceiling: id => maxAttainable(BY_ID[id]),
+    weapons: () => ITEMS.filter(it => isWeaponItem(it) && canUse(CUR, it) && consensusCount(it) > 0)
+  };`;
   const document = fakeDocument(data);
-  new Function("document", "innerWidth", "innerHeight", appSource)(document, 1600, 900);
+  const app = new Function("document", "innerWidth", "innerHeight", appSource)(document, 1600, 900);
 
   // Every dungeon now carries a full droppedBy attribution (the Phase D fill).
   for (const d of dungeons.dungeons)
@@ -844,4 +855,46 @@ test("the game plan shows two named components and lights potential up after a p
   // Token bosses surface guide-named TIER pieces as labeled coverage.
   assert.match(after, /\/3 \(tier\)<\/span>/, "tier coverage chips render on token bosses");
   assert.match(after, /Your potential<\/th>/);
+
+  const selectSpec = value => {
+    document.ids.get("spec").value = value;
+    document.ids.get("spec").listeners.change();
+  };
+  const paste = lines => {
+    document.ids.get("simc").value = lines.join("\n");
+    document.ids.get("parse").listeners.click();
+  };
+  // Audit F3: actual catalog items whose curated loadout allows MAIN hand only.
+  // A weak caster offhand or shield must not inflate their upgrade potential.
+  for (const [spec, id] of [["Paladin|Holy", "268211"], ["Mage|Frost", "271092"],
+    ["Warrior|Protection", "251195"]]) {
+    selectSpec(spec);
+    paste([`main_hand=x,id=${id},ilevel=344`, "off_hand=x,id=1,ilevel=280"]);
+    assert.equal(app.plan(id).named.length, 1, `${spec}: regression item must be guide-named`);
+    assert.equal(app.plan(id).potential, 0, `${spec}: a main-hand weapon cannot improve the offhand`);
+  }
+  // The corresponding shield/held-offhand IS a legal upgrade for the weak hand.
+  for (const [spec, main, slot] of [["Paladin|Holy", "268211", "Off Hand"],
+    ["Mage|Frost", "271092", "Held In Off-hand"]]) {
+    selectSpec(spec);
+    const off = app.weapons().find(it => it.slot === slot);
+    assert.ok(off, `${spec}: guide-named offhand fixture`);
+    paste([`main_hand=x,id=${main},ilevel=344`, `off_hand=x,id=${off.id},ilevel=280`]);
+    assert.equal(app.plan(off.id).potential, app.ceiling(off.id) - 280, `${spec}: legal offhand upgrade`);
+  }
+  // Legitimate dual wield may replace the weaker hand, including curated dual-Two-Hand.
+  for (const [spec, slot] of [["Demon Hunter|Devourer", "One-Hand"], ["Warrior|Fury", "Two-Hand"]]) {
+    selectSpec(spec);
+    const weapon = app.weapons().find(it => it.slot === slot);
+    assert.ok(weapon, `${spec}: named weapon fixture`);
+    paste(["main_hand=x,id=1,ilevel=344", "off_hand=x,id=2,ilevel=280"]);
+    assert.equal(app.plan(weapon.id).potential, app.ceiling(weapon.id) - 280, `${spec}: legal dual wield upgrade`);
+  }
+  selectSpec("Mage|Frost");
+  const staff = app.weapons().find(it => it.slot === "Two-Hand");
+  assert.ok(staff, "Frost Mage named two-hand fixture");
+  paste([`main_hand=x,id=${staff.id},ilevel=280`]);
+  assert.equal(app.plan(staff.id).potential, app.ceiling(staff.id) - 280, "two-hand to two-hand replacement");
+  paste(["main_hand=x,id=271092,ilevel=280", "off_hand=x,id=1,ilevel=280"]);
+  assert.equal(app.plan(staff.id).potential, null, "a change of weapon setup is not a single-hand replacement");
 });

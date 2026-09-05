@@ -270,6 +270,7 @@ export function parseSoftCaps(text) {
 
 /** Shared fetch with retries, a hard timeout, + polite spacing (residential transports). */
 export async function fetchText(url, { tries = 3, headers = {}, delayMs = 1500, timeoutMs = 30000 } = {}) {
+  let failure;
   for (let attempt = 1; attempt <= tries; attempt++) {
     try {
       const r = await fetch(url, { signal: AbortSignal.timeout(timeoutMs),
@@ -282,10 +283,11 @@ export async function fetchText(url, { tries = 3, headers = {}, delayMs = 1500, 
         return text;
       }
       if (r.status === 404) return null; // a verified absence, not a transport failure
-    } catch { /* retry below */ }
+      failure = `HTTP ${r.status}`;
+    } catch (error) { failure = error.message; }
     if (attempt < tries) await new Promise((resolve) => setTimeout(resolve, attempt * 800));
   }
-  return null;
+  throw new Error(`fetch failed for ${url}: ${failure || "no attempts"}`);
 }
 
 /** curl transport for hosts whose TLS fingerprinting 403s Node's fetch but passes curl —
@@ -294,19 +296,26 @@ export async function fetchText(url, { tries = 3, headers = {}, delayMs = 1500, 
 export async function fetchTextCurl(url, { tries = 3, delayMs = 1500, timeoutMs = 30 } = {}) {
   const { execFile } = await import("node:child_process");
   const run = () => new Promise((resolve) => {
-    execFile("curl", ["-s", "--max-time", String(timeoutMs), "-L", url],
+    execFile("curl", ["-sS", "--max-time", String(timeoutMs), "-L", "--write-out", "\n%{http_code}", url],
       { maxBuffer: 32 * 1024 * 1024, windowsHide: true },
-      (error, stdout) => resolve(error ? null : stdout));
+      (error, stdout) => {
+        const match = stdout?.match(/\n(\d{3})$/);
+        resolve({ error, status: match ? Number(match[1]) : null,
+          text: match ? stdout.slice(0, match.index) : null });
+      });
   });
+  let failure;
   for (let attempt = 1; attempt <= tries; attempt++) {
-    const text = await run();
-    if (text && text.length > 1000) {
+    const { error, status, text } = await run();
+    if (!error && status === 404) return null;
+    if (!error && status >= 200 && status < 300 && text && text.length > 1000) {
       await new Promise((resolve) => setTimeout(resolve, delayMs));
       return text;
     }
+    failure = error?.message || `HTTP ${status ?? "unknown"}${status === 200 ? ": response too short" : ""}`;
     if (attempt < tries) await new Promise((resolve) => setTimeout(resolve, attempt * 800));
   }
-  return null;
+  throw new Error(`curl fetch failed for ${url}: ${failure || "no attempts"}`);
 }
 
 /**

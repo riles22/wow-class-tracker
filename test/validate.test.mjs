@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { validateData, loadData } from "../src/validate.mjs";
+import { PHASES } from "../src/normalize.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -133,14 +134,31 @@ test("validateData enforces era↔name consistency, finite values, and metric un
   assert.ok(errors.some(e => e.includes("finite non-negative")));
   assert.ok(errors.some(e => e.includes("no PTR label")));
   assert.ok(errors.some(e => e.includes("duplicate metric")));
-  /* The marker→era check is keyed on PHASES.ptr.marker and dies with PHASES.ptr at the
-     phase flip — by design, documented at the guard in validate.mjs; the surviving
-     name-based rule ("PTR-named but carries no explicit era") covers the flip window.
-     Assert the marker check only while a cycle is open, with the marker it derives from. */
-  const { PHASES } = await import("../src/normalize.mjs");
-  if (PHASES.ptr) {
-    assert.ok(errors.some(e => e.includes(`named ${PHASES.ptr.marker} but tagged era "live"`)));
-  }
+  assert.ok(errors.some(e => e.includes('PTR-named but tagged era "live"')));
+});
+
+test("PTR metric era stays explicit and correct across active, closed, and later cycles", async () => {
+  const data = await loadData(ROOT);
+  const originalPtr = PHASES.ptr;
+  try {
+    for (const ptr of [null, { marker: "12.1 PTR", label: "12.1" }, { marker: "12.2 PTR", label: "12.2" }]) {
+      PHASES.ptr = ptr;
+      for (const marker of ["12.1 PTR", "12.2 PTR"]) {
+        const fixture = structuredClone(data);
+        const spec = fixture.specs.find(s => s.metrics?.length);
+        const metric = { ...spec.metrics[0], name: `Audit ${marker} measurement`, era: "ptr" };
+        spec.metrics.push(metric);
+        const metricErrors = () => validateData(fixture).filter(e => e.includes(metric.name));
+        assert.deepEqual(metricErrors(), [], `${marker} remains PTR during ${ptr?.marker ?? "closed cycle"}`);
+        metric.era = "live";
+        assert.ok(metricErrors().some(e => e.includes('PTR-named but tagged era "live"')),
+          `${marker} must not claim live during ${ptr?.marker ?? "closed cycle"}`);
+        delete metric.era;
+        assert.ok(metricErrors().some(e => e.includes("no explicit era")),
+          `${marker} must not rely on marker inference during ${ptr?.marker ?? "closed cycle"}`);
+      }
+    }
+  } finally { PHASES.ptr = originalPtr; }
 });
 
 test("validateData checks encounter-tiers, specsAffected, draft provenance, and full roster", async () => {

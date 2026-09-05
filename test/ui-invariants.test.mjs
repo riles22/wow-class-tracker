@@ -630,7 +630,7 @@ test("no agent-writable field can inject markup or a handler into the rendered p
           // (2026-08-12) — a deliberate one-name addition, not a pattern; the 12.2 cycle
           // adds s2 here as its own reviewed edit. Anchored both ends; any other relative
           // href, or a path prefix wrapped around one of these, is still a finding.
-          .filter(e => !/^(?:index|gearing|s1)\.html(?:#[a-z0-9=&-]*)?$/.test(e.getAttribute("href") ?? ""))
+          .filter(e => !/^(?:index|gearing|s1|forecast-report)\.html(?:#[a-z0-9=&-]*)?$/.test(e.getAttribute("href") ?? ""))
           .filter(e => !/^(https:|#|$)/.test(e.getAttribute("href") ?? "")).length,
         markVisible: document.body.innerText.includes(mark),
         // Count the sinks the probe actually reached. A poisoned field whose section never
@@ -1485,4 +1485,57 @@ test("the spark header states the real window, not a hard-coded duration", skipO
   const days = Math.round((Date.parse(dates.at(-1)) - Date.parse(dates[dates.length - n])) / 86400000);
   assert.equal(head, days + "d",
     `header "${head}" disagrees with the payload's own dates (${days}d over the last ${n} snapshots)`);
+});
+
+ui("keyboard sorting preserves the activated header's focus", async page => {
+  for(const key of ["Enter", "Space"]){
+    await page.locator('.hsort[data-sort="mplus"]').focus();
+    await page.keyboard.press(key);
+    assert.equal(await page.evaluate(()=>document.activeElement?.dataset.sort), "mplus");
+    assert.equal(await page.locator('#sortsel').inputValue(), "mplus");
+  }
+  await page.locator('#sortsel').focus();
+  await page.selectOption('#sortsel', "raid");
+  assert.equal(await page.evaluate(()=>document.activeElement?.id), "sortsel", "dropdown sorting must not steal focus");
+});
+
+ui("fractional consensus presentation explains a rounded boundary without changing scores", async page => {
+  const shown = await page.evaluate(()=>{
+    const s = SPECS[0];
+    s.consensus.mplus = { tier:"B", score:58, diverges:false,
+      perSource:[{score:57,label:"First",tier:"B"},{score:58,label:"Second",tier:"A"}] };
+    state.source = "consensus";
+    const r = ratingFor(s, "mplus");
+    const result = {tier:r.tier,score:r.score,displayScore:r.displayScore,html:tierEl(r,null)};
+    COMPARE.clear();
+    COMPARE.add(`${s.class}|${s.spec}`);
+    COMPARE.add(`${SPECS[1].class}|${SPECS[1].spec}`);
+    openCompare();
+    return {...result,compare:document.getElementById('cmp-ov').innerText};
+  });
+  assert.equal(shown.tier, "B");
+  assert.equal(shown.score, 58, "calculation and ordering remain unchanged");
+  assert.equal(shown.displayScore, 57.5);
+  assert.match(shown.html, /57\.5\/100/);
+  assert.match(shown.compare, /57\.5\/100/);
+});
+
+ui("a settled forecast report is reachable and separate from today's comparison", async page => {
+  const report = payload().meta.forecastReport;
+  if(!report){
+    assert.equal(await page.locator('#forecast-grade').isVisible(), false);
+    return;
+  }
+  const chip = page.locator('#forecast-grade');
+  assert.equal(await chip.isVisible(), true);
+  assert.match(await chip.innerText(), new RegExp(`${report.coverage.graded}/${report.coverage.obtainable} cells`));
+  assert.ok((await chip.innerText()).includes(report.actualDate));
+  assert.equal(await chip.locator('a').getAttribute('href'), 'forecast-report.html');
+  assert.ok(!(await page.locator('#movers').innerText()).includes('not yet a grade'));
+  await chip.locator('a').click();
+  await page.waitForLoadState('domcontentloaded');
+  const text = await page.locator('body').innerText();
+  assert.ok(text.includes(report.actualDate));
+  assert.match(text, /carry.forward/i);
+  assert.equal(await page.locator('script').count(), 0);
 });

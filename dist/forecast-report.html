@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">
+<title>Forecast report card — Spec Tracker</title>
+<style>
+:root{color-scheme:dark;--bg:#0c0913;--panel:#171020;--ink:#ede6f5;--muted:#b7a8c9;--gold:#e3c37b;--line:#463052}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,sans-serif}main{max-width:1240px;margin:auto;padding:32px 24px 72px}a{color:var(--gold)}a:focus-visible,summary:focus-visible,.tablewrap:focus-visible{outline:2px solid var(--gold);outline-offset:4px}header{border-bottom:1px solid var(--gold);padding-bottom:24px}h1,h2,h3{line-height:1.2}h1{font:700 clamp(28px,5vw,46px)/1.15 Georgia,serif;letter-spacing:.025em;color:var(--gold);margin:16px 0}h2{font:700 26px/1.2 Georgia,serif;color:var(--gold)}h3{font-size:19px;margin-top:28px}.eyebrow{font:12px ui-monospace,monospace;letter-spacing:.18em;color:var(--muted)}section{margin-top:36px;min-width:0}p{max-width:100ch}.lede{font-size:18px}.coverage,.notice,.pending{padding:14px 18px;border:1px solid var(--line);border-radius:8px;background:var(--panel)}.result{font-size:21px;color:var(--gold)}.tablewrap{width:100%;max-width:100%;overflow-x:auto;border:1px solid var(--line);border-radius:8px;margin:16px 0}table{width:100%;border-collapse:collapse;white-space:nowrap;font-size:13px}caption{text-align:left;padding:12px;color:var(--gold);font-weight:700}th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line)}th{background:var(--panel);color:var(--muted)}tbody tr:last-child td{border:0}.tier{color:var(--gold)}details{margin-top:20px}summary{cursor:pointer;color:var(--gold)}dl{display:grid;grid-template-columns:180px minmax(0,1fr);gap:8px 16px}dt{color:var(--muted)}dd{margin:0;overflow-wrap:anywhere}code{font-size:13px}footer{margin-top:40px;border-top:1px solid var(--line);padding-top:20px;color:var(--muted)}@media(max-width:600px){main{padding:22px 14px 44px}dl{grid-template-columns:1fr;gap:3px}dd{margin-bottom:10px}.coverage,.notice,.pending{padding:12px}}
+</style></head><body><main>
+<header><a href="index.html">← Spec Tracker</a><p class="eyebrow">SPEC TRACKER / FORECAST ACCOUNTABILITY</p><h1>Forecast report card</h1>
+<p class="lede">The forecast declared 2026-08-11, checked at two fixed settlement checkpoints.</p>
+<p>This measures agreement with <b>publisher tier-list consensus</b>, not objective game performance. Shared publisher blind spots remain ungraded. Settlement means the first saved consensus at least 14 or 28 days after launch; it does not certify that every publisher refreshed that day. Publisher-specific outcome dates are not recorded in these history snapshots.</p>
+<nav aria-label="Report checkpoints"><a href="#checkpoint-14">+14 days · 2026-09-01</a> &nbsp;·&nbsp; <a href="#checkpoint-28">+28 days · pending</a></nav></header>
+<section><h2 id="checkpoint-14">+14 days</h2><p>Declared 2026-08-11 → settled snapshot <b>2026-09-01</b>.
+    Launch 2026-08-18; first eligible date 2026-09-01.</p>
+    <p>Outcome record: <code>data/history/2026-09-01.json</code> (phase 12.1-live, consensus v6).</p>
+    <p class="coverage"><b>Coverage: 80/80 gradeable cells (100%).</b>
+    0 declined · 0 without an outcome · 0 roster gaps.
+    </p>
+    <div class="tablewrap" tabindex="0" role="region" aria-label="Consensus source composition"><table><caption>Consensus source composition</caption><thead><tr><th scope="col">Bracket</th><th scope="col">Frozen prior contributors</th><th scope="col">Settled contributors</th></tr></thead><tbody><tr><td>Raid</td><td>archon, icyveins, method, wowhead</td><td>archon, icyveins, method, wowhead</td></tr>
+<tr><td>Mythic+</td><td>archon, icyveins, method, wowhead</td><td>archon, icyveins, method, wowhead</td></tr></tbody></table></div>
+    <p class="notice">DISCLOSURE: consensusVersion moved 3 → 6 between freeze and settlement — expected at a season boundary; composition above is the authoritative comparability signal.</p><p class="result"><b>41% exact letters</b> · <b>89% within one band</b></p>
+    <p>Mean absolute error: 0.7 bands; signed bias: -0.2 bands.
+    Positive bias means the forecast was too optimistic. Carry-forward: 21% exact, 71% within one band.</p>
+    <h3>Ordering within each role</h3><p>Forecast and carry-forward use the same settled outcome. Higher is better for all ranking measures; a dash means insufficient evidence.
+    Top-k is 5 for DPS and 3 for tanks/healers. Carry-forward copies the artifact's pre-launch live consensus.</p>
+    <div class="tablewrap" tabindex="0" role="region" aria-label="Forecast versus carry-forward ordering"><table><caption>Forecast versus carry-forward ordering</caption><thead><tr><th scope="col">Bracket / role</th><th scope="col">Cells</th><th scope="col">Forecast Spearman</th><th scope="col">Carry-forward Spearman</th><th scope="col">Forecast NDCG@k</th><th scope="col">Carry-forward NDCG@k</th><th scope="col">Forecast top-k overlap</th><th scope="col">Carry-forward top-k overlap</th></tr></thead><tbody><tr><td>raid/DPS</td><td>27</td><td>0.511</td><td>-0.087</td><td>0.865</td><td>0.668</td><td>2/5</td><td>0/5</td></tr>
+<tr><td>raid/Healer</td><td>7</td><td>0.464</td><td>-0.198</td><td>0.977</td><td>0.77</td><td>2/3</td><td>1/3</td></tr>
+<tr><td>raid/Tank</td><td>6</td><td>0.841</td><td>0.464</td><td>0.954</td><td>0.837</td><td>3/3</td><td>2/3</td></tr>
+<tr><td>mplus/DPS</td><td>27</td><td>0.784</td><td>0.208</td><td>0.97</td><td>0.79</td><td>3/5</td><td>2/5</td></tr>
+<tr><td>mplus/Healer</td><td>7</td><td>0.703</td><td>0.164</td><td>0.971</td><td>0.718</td><td>2/3</td><td>2/3</td></tr>
+<tr><td>mplus/Tank</td><td>6</td><td>0.2</td><td>-0.086</td><td>0.902</td><td>0.817</td><td>1/3</td><td>1/3</td></tr></tbody></table></div>
+    <p>Raid: 3/9 settled S/A+ cells predicted S/A+ · Mythic+: 7/12 settled S/A+ cells predicted S/A+</p>
+    <h3>Every declared cell</h3><p>Scores keep their original snapshot precision; letters were assigned before rounding. A positive band difference means the settled letter is worse than the forecast.</p>
+    <div class="tablewrap" tabindex="0" role="region" aria-label="All forecast cells at +14 days"><table><caption>All forecast cells at +14 days</caption><thead><tr><th scope="col">Spec</th><th scope="col">Bracket</th><th scope="col">Forecast</th><th scope="col">Recorded score</th><th scope="col">Confidence</th><th scope="col">Carry-forward</th><th scope="col">Settled</th><th scope="col">Recorded score</th><th scope="col">Difference / status</th></tr></thead><tbody><tr><td>Death Knight Blood</td><td>Raid</td><td><b class="tier">A</b></td><td>73</td><td>low</td><td><b class="tier">B</b></td><td><b class="tier">S</b></td><td>91</td><td>-2 bands</td></tr>
+<tr><td>Death Knight Blood</td><td>Mythic+</td><td><b class="tier">A+</b></td><td>87</td><td>high</td><td><b class="tier">C</b></td><td><b class="tier">S</b></td><td>98</td><td>-1 bands</td></tr>
+<tr><td>Death Knight Frost</td><td>Raid</td><td><b class="tier">B</b></td><td>56</td><td>low</td><td><b class="tier">B</b></td><td><b class="tier">B</b></td><td>54</td><td>0 bands</td></tr>
+<tr><td>Death Knight Frost</td><td>Mythic+</td><td><b class="tier">B</b></td><td>57</td><td>medium</td><td><b class="tier">B</b></td><td><b class="tier">A</b></td><td>70</td><td>-1 bands</td></tr>
+<tr><td>Death Knight Unholy</td><td>Raid</td><td><b class="tier">A</b></td><td>61</td><td>medium</td><td><b class="tier">A</b></td><td><b class="tier">B</b></td><td>49</td><td>+1 bands</td></tr>
+<tr><td>Death Knight Unholy</td><td>Mythic+</td><td><b class="tier">A+</b></td><td>78</td><td>medium</td><td><b class="tier">S</b></td><td><b class="tier">A</b></td><td>68</td><td>+1 bands</td></tr>
+<tr><td>Demon Hunter Devourer</td><td>Raid</td><td><b class="tier">A</b></td><td>72</td><td>medium</td><td><b class="tier">A+</b></td><td><b class="tier">A</b></td><td>60</td><td>0 bands</td></tr>
+<tr><td>Demon Hunter Devourer</td><td>Mythic+</td><td><b class="tier">A+</b></td><td>83</td><td>medium</td><td><b class="tier">S</b></td><td><b class="tier">A+</b></td><td>77</td><td>0 bands</td></tr>
+<tr><td>Demon Hunter Havoc</td><td>Raid</td><td><b class="tier">A</b></td><td>66</td><td>medium</td><td><b class="tier">B</b></td><td><b class="tier">B</b></td><td>43</td><td>+1 bands</td></tr>
+<tr><td>Demon Hunter Havoc</td><td>Mythic+</td><td><b class="tier">A</b></td><td>64</td><td>medium</td><td><b class="tier">B</b></td><td><b class="tier">A</b></td><td>60</td><td>0 bands</td></tr>
+<tr><td>Demon Hunter Vengeance</td><td>Raid</td><td><b class="tier">B</b></td><td>40</td><td>low</td><td><b class="tier">C</b></td><td><b class="tier">A</b></td><td>60</td><td>-1 bands</td></tr>
+<tr><td>Demon Hunter Vengeance</td><td>Mythic+</td><td><b class="tier">A</b></td><td>66</td><td>medium</td><td><b class="tier">A</b></td><td><b class="tier">A</b></td><td>64</td><td>0 bands</td></tr>
+<tr><td>Druid Balance</td><td>Raid</td><td><b class="tier">B</b></td><td>55</td><td>medium</td><td><b class="tier">B</b></td><td><b class="tier">A</b></td><td>68</td><td>-1 bands</td></tr>
+<tr><td>Druid Balance</td><td>Mythic+</td><td><b class="tier">A</b></td><td>62</td><td>high</td><td><b class="tier">B</b></td><td><b class="tier">A</b></td><td>70</td><td>0 bands</td></tr>
+<tr><td>Druid Feral</td><td>Raid</td><td><b class="tier">B</b></td><td>44</td><td>medium</td><td><b class="tier">B</b></td><td><b class="tier">C</b></td><td>33</td><td>+1 bands</td></tr>
+<tr><td>Druid Feral</td><td>Mythic+</td><td><b class="tier">A</b></td><td>73</td><td>medium</td><td><b class="tier">A</b></td><td><b class="tier">A</b></td><td>71</td><td>0 bands</td></tr>
+<tr><td>Druid Guardian</td><td>Raid</td><td><b class="tier">A+</b></td><td>78</td><td>medium</td><td><b class="tier">A+</b></td><td><b class="tier">A</b></td><td>70</td><td>+1 bands</td></tr>
+<tr><td>Druid Guardian</td><td>Mythic+</td><td><b class="tier">B</b></td><td>54</td><td>medium</td><td><b class="tier">A+</b></td><td><b class="tier">A+</b></td><td>74</td><td>-2 bands</td></tr>
+<tr><td>Druid Restoration</td><td>Raid</td><td><b class="tier">A</b></td><td>73</td><td>medium</td><td><b class="tier">A</b></td><td><b class="tier">A</b></td><td>60</td><td>0 bands</td></tr>
+<tr><td>Druid Restoration</td><td>Mythic+</td><td><b class="tier">C</b></td><td>32</td><td>medium</td><td><b class="tier">B</b></td><td><b class="tier">C</b></td><td>39</td><td>0 bands</td></tr>
+<tr><td>Evoker Augmentation</td><td>Raid</td><td><b class="tier">B</b></td><td>46</td><td>medium</td><td><b class="tier">A</b></td><td><b class="tier">C</b></td><td>33</td><td>+1 bands</td></tr>
+<tr><td>Evoker Augmentation</td><td>Mythic+</td><td><b class="tier">C</b></td><td>38</td><td>medium</td><td><b class="tier">S</b></td><td><b class="tier">C</b></td><td>34</td><td>0 bands</td></tr>
+<tr><td>Evoker Devastation</td><td>Raid</td><td><b class="tier">A</b></td><td>64</td><td>medium</td><td><b class="tier">B</b></td><td><b class="tier">A+</b></td><td>74</td><td>-1 bands</td></tr>
+<tr><td>Evoker Devastation</td><td>Mythic+</td><td><b class="tier">B</b></td><td>40</td><td>high</td><td><b class="tier">C</b></td><td><b class="tier">B</b></td><td>55</td><td>0 bands</td></tr>
+<tr><td>Evoker Preservation</td><td>Raid</td><td><b class="tier">S</b></td><td>100</td><td>medium</td><td><b class="tier">A+</b></td><td><b class="tier">S</b></td><td>98</td><td>0 bands</td></tr>
+<tr><td>Evoker Preservation</td><td>Mythic+</td><td><b class="tier">A+</b></td><td>83</td><td>high</td><td><b class="tier">C</b></td><td><b class="tier">B</b></td><td>54</td><td>+2 bands</td></tr>
+<tr><td>Hunter Beast Mastery</td><td>Raid</td><td><b class="tier">B</b></td><td>44</td><td>low</td><td><b class="tier">C</b></td><td><b class="tier">B</b></td><td>48</td><td>0 bands</td></tr>
+<tr><td>Hunter Beast Mastery</td><td>Mythic+</td><td><b class="tier">A</b></td><td>60</td><td>medium</td><td><b class="tier">B</b></td><td><b class="tier">A</b></td><td>64</td><td>0 bands</td></tr>
+<tr><td>Hunter Marksmanship</td><td>Raid</td><td><b class="tier">A</b></td><td>68</td><td>medium</td><td><b class="tier">A+</b></td><td><b class="tier">A</b></td><td>70</td><td>0 bands</td></tr>
+<tr><td>Hunter Marksmanship</td><td>Mythic+</td><td><b class="tier">A</b></td><td>67</td><td>medium</td><td><b class="tier">B</b></td><td><b class="tier">B</b></td><td>55</td><td>+1 bands</td></tr>
+<tr><td>Hunter Survival</td><td>Raid</td><td><b class="tier">B</b></td><td>54</td><td>low</td><td><b class="tier">A</b></td><td><b class="tier">C</b></td><td>37</td><td>+1 bands</td></tr>
+<tr><td>Hunter Survival</td><td>Mythic+</td><td><b class="tier">B</b></td><td>47</td><td>medium</td><td><b class="tier">A</b></td><td><b class="tier">A</b></td><td>60</td><td>-1 bands</td></tr>
+<tr><td>Mage Arcane</td><td>Raid</td><td><b class="tier">A</b></td><td>64</td><td>medium</td><td><b class="tier">C</b></td><td><b class="tier">S</b></td><td>91</td><td>-2 bands</td></tr>
+<tr><td>Mage Arcane</td><td>Mythic+</td><td><b class="tier">A+</b></td><td>81</td><td>medium</td><td><b class="tier">B</b></td><td><b class="tier">S</b></td><td>89</td><td>-1 bands</td></tr>
+<tr><td>Mage Fire</td><td>Raid</td><td><b class="tier">C</b></td><td>37</td><td>low</td><td><b class="tier">C</b></td><td><b class="tier">B</b></td><td>43</td><td>-1 bands</td></tr>
+<tr><td>Mage Fire</td><td>Mythic+</td><td><b class="tier">C</b></td><td>36</td><td>medium</td><td><b class="tier">C</b></td><td><b class="tier">B</b></td><td>49</td><td>-1 bands</td></tr>
+<tr><td>Mage Frost</td><td>Raid</td><td><b class="tier">B</b></td><td>51</td><td>medium</td><td><b class="tier">A+</b></td><td><b class="tier">B</b></td><td>48</td><td>0 bands</td></tr>
+<tr><td>Mage Frost</td><td>Mythic+</td><td><b class="tier">B</b></td><td>40</td><td>medium</td><td><b class="tier">A</b></td><td><b class="tier">C</b></td><td>39</td><td>+1 bands</td></tr>
+<tr><td>Monk Brewmaster</td><td>Raid</td><td><b class="tier">A</b></td><td>61</td><td>low</td><td><b class="tier">B</b></td><td><b class="tier">A</b></td><td>60</td><td>0 bands</td></tr>
+<tr><td>Monk Brewmaster</td><td>Mythic+</td><td><b class="tier">B</b></td><td>40</td><td>high</td><td><b class="tier">A+</b></td><td><b class="tier">A</b></td><td>62</td><td>-1 bands</td></tr>
+<tr><td>Monk Mistweaver</td><td>Raid</td><td><b class="tier">A</b></td><td>70</td><td>low</td><td><b class="tier">A+</b></td><td><b class="tier">B</b></td><td>49</td><td>+1 bands</td></tr>
+<tr><td>Monk Mistweaver</td><td>Mythic+</td><td><b class="tier">A</b></td><td>60</td><td>medium</td><td><b class="tier">S</b></td><td><b class="tier">B</b></td><td>58</td><td>+1 bands</td></tr>
+<tr><td>Monk Windwalker</td><td>Raid</td><td><b class="tier">A</b></td><td>64</td><td>low</td><td><b class="tier">A</b></td><td><b class="tier">B</b></td><td>54</td><td>+1 bands</td></tr>
+<tr><td>Monk Windwalker</td><td>Mythic+</td><td><b class="tier">A+</b></td><td>85</td><td>medium</td><td><b class="tier">B</b></td><td><b class="tier">A+</b></td><td>77</td><td>0 bands</td></tr>
+<tr><td>Paladin Holy</td><td>Raid</td><td><b class="tier">A+</b></td><td>79</td><td>medium</td><td><b class="tier">A</b></td><td><b class="tier">A+</b></td><td>86</td><td>0 bands</td></tr>
+<tr><td>Paladin Holy</td><td>Mythic+</td><td><b class="tier">S</b></td><td>93</td><td>high</td><td><b class="tier">B</b></td><td><b class="tier">S</b></td><td>98</td><td>0 bands</td></tr>
+<tr><td>Paladin Protection</td><td>Raid</td><td><b class="tier">B</b></td><td>42</td><td>medium</td><td><b class="tier">C</b></td><td><b class="tier">B</b></td><td>52</td><td>0 bands</td></tr>
+<tr><td>Paladin Protection</td><td>Mythic+</td><td><b class="tier">B</b></td><td>57</td><td>high</td><td><b class="tier">B</b></td><td><b class="tier">A</b></td><td>66</td><td>-1 bands</td></tr>
+<tr><td>Paladin Retribution</td><td>Raid</td><td><b class="tier">B</b></td><td>41</td><td>low</td><td><b class="tier">A</b></td><td><b class="tier">B</b></td><td>47</td><td>0 bands</td></tr>
+<tr><td>Paladin Retribution</td><td>Mythic+</td><td><b class="tier">B</b></td><td>55</td><td>medium</td><td><b class="tier">A</b></td><td><b class="tier">A</b></td><td>66</td><td>-1 bands</td></tr>
+<tr><td>Priest Discipline</td><td>Raid</td><td><b class="tier">S</b></td><td>94</td><td>low</td><td><b class="tier">A+</b></td><td><b class="tier">A</b></td><td>72</td><td>+2 bands</td></tr>
+<tr><td>Priest Discipline</td><td>Mythic+</td><td><b class="tier">A</b></td><td>62</td><td>medium</td><td><b class="tier">B</b></td><td><b class="tier">C</b></td><td>39</td><td>+2 bands</td></tr>
+<tr><td>Priest Holy</td><td>Raid</td><td><b class="tier">B</b></td><td>54</td><td>low</td><td><b class="tier">B</b></td><td><b class="tier">A+</b></td><td>77</td><td>-2 bands</td></tr>
+<tr><td>Priest Holy</td><td>Mythic+</td><td><b class="tier">B</b></td><td>44</td><td>medium</td><td><b class="tier">C</b></td><td><b class="tier">B</b></td><td>48</td><td>0 bands</td></tr>
+<tr><td>Priest Shadow</td><td>Raid</td><td><b class="tier">B</b></td><td>47</td><td>medium</td><td><b class="tier">B</b></td><td><b class="tier">A+</b></td><td>74</td><td>-2 bands</td></tr>
+<tr><td>Priest Shadow</td><td>Mythic+</td><td><b class="tier">B</b></td><td>47</td><td>medium</td><td><b class="tier">A</b></td><td><b class="tier">B</b></td><td>55</td><td>0 bands</td></tr>
+<tr><td>Rogue Assassination</td><td>Raid</td><td><b class="tier">B</b></td><td>45</td><td>low</td><td><b class="tier">C</b></td><td><b class="tier">A</b></td><td>64</td><td>-1 bands</td></tr>
+<tr><td>Rogue Assassination</td><td>Mythic+</td><td><b class="tier">A</b></td><td>72</td><td>medium</td><td><b class="tier">A</b></td><td><b class="tier">A+</b></td><td>75</td><td>-1 bands</td></tr>
+<tr><td>Rogue Outlaw</td><td>Raid</td><td><b class="tier">C</b></td><td>37</td><td>medium</td><td><b class="tier">C</b></td><td><b class="tier">B</b></td><td>53</td><td>-1 bands</td></tr>
+<tr><td>Rogue Outlaw</td><td>Mythic+</td><td><b class="tier">A</b></td><td>73</td><td>medium</td><td><b class="tier">B</b></td><td><b class="tier">A+</b></td><td>84</td><td>-1 bands</td></tr>
+<tr><td>Rogue Subtlety</td><td>Raid</td><td><b class="tier">B</b></td><td>45</td><td>medium</td><td><b class="tier">B</b></td><td><b class="tier">A</b></td><td>71</td><td>-1 bands</td></tr>
+<tr><td>Rogue Subtlety</td><td>Mythic+</td><td><b class="tier">B</b></td><td>52</td><td>medium</td><td><b class="tier">A</b></td><td><b class="tier">A</b></td><td>68</td><td>-1 bands</td></tr>
+<tr><td>Shaman Elemental</td><td>Raid</td><td><b class="tier">B</b></td><td>56</td><td>medium</td><td><b class="tier">B</b></td><td><b class="tier">A</b></td><td>64</td><td>-1 bands</td></tr>
+<tr><td>Shaman Elemental</td><td>Mythic+</td><td><b class="tier">A+</b></td><td>83</td><td>high</td><td><b class="tier">A+</b></td><td><b class="tier">A+</b></td><td>86</td><td>0 bands</td></tr>
+<tr><td>Shaman Enhancement</td><td>Raid</td><td><b class="tier">B</b></td><td>55</td><td>medium</td><td><b class="tier">B</b></td><td><b class="tier">B</b></td><td>54</td><td>0 bands</td></tr>
+<tr><td>Shaman Enhancement</td><td>Mythic+</td><td><b class="tier">B</b></td><td>57</td><td>medium</td><td><b class="tier">A</b></td><td><b class="tier">A</b></td><td>60</td><td>-1 bands</td></tr>
+<tr><td>Shaman Restoration</td><td>Raid</td><td><b class="tier">A</b></td><td>69</td><td>medium</td><td><b class="tier">B</b></td><td><b class="tier">A</b></td><td>70</td><td>0 bands</td></tr>
+<tr><td>Shaman Restoration</td><td>Mythic+</td><td><b class="tier">A</b></td><td>73</td><td>high</td><td><b class="tier">A+</b></td><td><b class="tier">A+</b></td><td>77</td><td>-1 bands</td></tr>
+<tr><td>Warlock Affliction</td><td>Raid</td><td><b class="tier">B</b></td><td>51</td><td>medium</td><td><b class="tier">B</b></td><td><b class="tier">B</b></td><td>48</td><td>0 bands</td></tr>
+<tr><td>Warlock Affliction</td><td>Mythic+</td><td><b class="tier">B</b></td><td>55</td><td>medium</td><td><b class="tier">B</b></td><td><b class="tier">B</b></td><td>48</td><td>0 bands</td></tr>
+<tr><td>Warlock Demonology</td><td>Raid</td><td><b class="tier">A</b></td><td>64</td><td>low</td><td><b class="tier">A+</b></td><td><b class="tier">B</b></td><td>54</td><td>+1 bands</td></tr>
+<tr><td>Warlock Demonology</td><td>Mythic+</td><td><b class="tier">B</b></td><td>49</td><td>medium</td><td><b class="tier">A</b></td><td><b class="tier">A+</b></td><td>80</td><td>-2 bands</td></tr>
+<tr><td>Warlock Destruction</td><td>Raid</td><td><b class="tier">A</b></td><td>72</td><td>low</td><td><b class="tier">A</b></td><td><b class="tier">A+</b></td><td>74</td><td>-1 bands</td></tr>
+<tr><td>Warlock Destruction</td><td>Mythic+</td><td><b class="tier">A</b></td><td>63</td><td>medium</td><td><b class="tier">B</b></td><td><b class="tier">A</b></td><td>66</td><td>0 bands</td></tr>
+<tr><td>Warrior Arms</td><td>Raid</td><td><b class="tier">A+</b></td><td>84</td><td>medium</td><td><b class="tier">B</b></td><td><b class="tier">S</b></td><td>91</td><td>-1 bands</td></tr>
+<tr><td>Warrior Arms</td><td>Mythic+</td><td><b class="tier">S</b></td><td>92</td><td>high</td><td><b class="tier">A</b></td><td><b class="tier">S</b></td><td>89</td><td>0 bands</td></tr>
+<tr><td>Warrior Fury</td><td>Raid</td><td><b class="tier">B</b></td><td>57</td><td>medium</td><td><b class="tier">A</b></td><td><b class="tier">B</b></td><td>52</td><td>0 bands</td></tr>
+<tr><td>Warrior Fury</td><td>Mythic+</td><td><b class="tier">C</b></td><td>39</td><td>medium</td><td><b class="tier">A</b></td><td><b class="tier">B</b></td><td>55</td><td>-1 bands</td></tr>
+<tr><td>Warrior Protection</td><td>Raid</td><td><b class="tier">A</b></td><td>72</td><td>low</td><td><b class="tier">A+</b></td><td><b class="tier">A</b></td><td>67</td><td>0 bands</td></tr>
+<tr><td>Warrior Protection</td><td>Mythic+</td><td><b class="tier">A</b></td><td>67</td><td>medium</td><td><b class="tier">B</b></td><td><b class="tier">B</b></td><td>48</td><td>+1 bands</td></tr></tbody></table></div>
+  </section>
+<section><h2 id="checkpoint-28">+28 days</h2><p class="pending"><b>Pending.</b> season not settled yet — need a snapshot on or after 2026-09-15 (launch 2026-08-18 + 28d); newest post-launch is 2026-09-04</p></section>
+<section><h2>Provenance</h2><p>The artifact and its explicit history declaration agree on every forecast and prior cell. Forecast values and carry-forward priors come from the immutable artifact, never a new model run.</p>
+    <dl><dt>Artifact</dt><dd>data/forecasts/frozen-2026-08-11.json</dd>
+    <dt>Declared history</dt><dd>data/history/2026-08-11.json</dd>
+    <dt>Phase</dt><dd>12.1-ptr</dd><dt>Versions</dt><dd>Projection 13 · consensus 3 · rank 3</dd>
+    <dt>Original Git SHA</dt><dd><code>397373b300714a0ce0ed193d38be51b12e1f94b8</code></dd><dt>Original data SHA-256</dt><dd><code>c20edc631f835a08fafe1ef448b1649d1915d7a2c5da87e5568f61b626ff6441</code></dd></dl>
+    <details><summary>Source dates recorded at freeze</summary><p>These are each registry source's newest page date at freeze. An outlet that had moved ahead could contribute older frozen prior letters; those dates are disclosed separately below.</p>
+    <div class="tablewrap" tabindex="0" role="region" aria-label="Registry receipts at freeze"><table><caption>Registry receipts at freeze</caption><thead><tr><th scope="col">Source</th><th scope="col">Newest page snapshot</th></tr></thead><tbody><tr><td>archon</td><td>2026-08-10</td></tr>
+<tr><td>blizzard-ptr</td><td>—</td></tr>
+<tr><td>bloodmallet</td><td>2026-08-10</td></tr>
+<tr><td>community</td><td>2026-07-01</td></tr>
+<tr><td>icyveins</td><td>2026-08-10</td></tr>
+<tr><td>icyveins-ptr</td><td>2026-08-10</td></tr>
+<tr><td>liquid</td><td>—</td></tr>
+<tr><td>method</td><td>2026-08-10</td></tr>
+<tr><td>murlok</td><td>2026-08-10</td></tr>
+<tr><td>mythicstats</td><td>2026-08-10</td></tr>
+<tr><td>qelive</td><td>—</td></tr>
+<tr><td>raidbots</td><td>—</td></tr>
+<tr><td>robydoby</td><td>2026-08-10</td></tr>
+<tr><td>simulationcraft</td><td>2026-08-10</td></tr>
+<tr><td>warcraftlogs</td><td>2026-08-10</td></tr>
+<tr><td>wowhead</td><td>2026-08-10</td></tr>
+<tr><td>wowmeta</td><td>—</td></tr></tbody></table></div></details>
+    <details><summary>Prior letters and frozen-source receipts for every cell</summary><div class="tablewrap" tabindex="0" role="region" aria-label="Prior source receipts"><table><caption>Prior source receipts</caption><thead><tr><th scope="col">Spec</th><th scope="col">Bracket</th><th scope="col">Contributors and stored letters</th></tr></thead><tbody><tr><td>Death Knight Blood</td><td>Raid</td><td>icyveins: B · method: B · wowhead: B (frozen 2026-08-09) · archon: B</td></tr>
+<tr><td>Death Knight Blood</td><td>Mythic+</td><td>icyveins: C · method: C · wowhead: B (frozen 2026-08-09) · archon: C</td></tr>
+<tr><td>Death Knight Frost</td><td>Raid</td><td>icyveins: S · method: C · wowhead: C (frozen 2026-08-09) · archon: B</td></tr>
+<tr><td>Death Knight Frost</td><td>Mythic+</td><td>icyveins: A · method: B · wowhead: B (frozen 2026-08-09) · archon: C</td></tr>
+<tr><td>Death Knight Unholy</td><td>Raid</td><td>icyveins: A+ · method: B · wowhead: A (frozen 2026-08-09) · archon: B</td></tr>
+<tr><td>Death Knight Unholy</td><td>Mythic+</td><td>icyveins: S · method: A · wowhead: A+ (frozen 2026-08-09) · archon: S</td></tr>
+<tr><td>Demon Hunter Devourer</td><td>Raid</td><td>icyveins: A+ · method: S · wowhead: A (frozen 2026-08-09) · archon: A</td></tr>
+<tr><td>Demon Hunter Devourer</td><td>Mythic+</td><td>icyveins: S · method: A · wowhead: A+ (frozen 2026-08-09) · archon: S</td></tr>
+<tr><td>Demon Hunter Havoc</td><td>Raid</td><td>icyveins: B · method: B · wowhead: B (frozen 2026-08-09) · archon: A</td></tr>
+<tr><td>Demon Hunter Havoc</td><td>Mythic+</td><td>icyveins: A+ · method: B · wowhead: B (frozen 2026-08-09) · archon: B</td></tr>
+<tr><td>Demon Hunter Vengeance</td><td>Raid</td><td>icyveins: C · wowhead: C (frozen 2026-08-09) · archon: C</td></tr>
+<tr><td>Demon Hunter Vengeance</td><td>Mythic+</td><td>icyveins: A · method: A · wowhead: A (frozen 2026-08-09) · archon: C</td></tr>
+<tr><td>Druid Balance</td><td>Raid</td><td>icyveins: B · method: A · wowhead: C (frozen 2026-08-09) · archon: A</td></tr>
+<tr><td>Druid Balance</td><td>Mythic+</td><td>icyveins: A · method: B · wowhead: A (frozen 2026-08-09) · archon: C</td></tr>
+<tr><td>Druid Feral</td><td>Raid</td><td>icyveins: C · method: B · wowhead: B (frozen 2026-08-09) · archon: B</td></tr>
+<tr><td>Druid Feral</td><td>Mythic+</td><td>icyveins: A+ · method: A · wowhead: B (frozen 2026-08-09) · archon: A</td></tr>
+<tr><td>Druid Guardian</td><td>Raid</td><td>icyveins: S · method: A · wowhead: B (frozen 2026-08-09) · archon: S</td></tr>
+<tr><td>Druid Guardian</td><td>Mythic+</td><td>icyveins: S · method: B · wowhead: S (frozen 2026-08-09) · archon: S</td></tr>
+<tr><td>Druid Restoration</td><td>Raid</td><td>icyveins: B · method: A · wowhead: S (frozen 2026-08-09) · archon: A</td></tr>
+<tr><td>Druid Restoration</td><td>Mythic+</td><td>icyveins: B · method: A · wowhead: A (frozen 2026-08-09) · archon: C</td></tr>
+<tr><td>Evoker Augmentation</td><td>Raid</td><td>icyveins: A · method: B · wowhead: A (frozen 2026-08-09) · archon: S</td></tr>
+<tr><td>Evoker Augmentation</td><td>Mythic+</td><td>icyveins: S · method: A · wowhead: A+ (frozen 2026-08-09) · archon: S</td></tr>
+<tr><td>Evoker Devastation</td><td>Raid</td><td>icyveins: B · method: A · wowhead: B (frozen 2026-08-09) · archon: B</td></tr>
+<tr><td>Evoker Devastation</td><td>Mythic+</td><td>icyveins: C · method: B · wowhead: B (frozen 2026-08-09) · archon: C</td></tr>
+<tr><td>Evoker Preservation</td><td>Raid</td><td>icyveins: S · method: S · wowhead: A (frozen 2026-08-09) · archon: A</td></tr>
+<tr><td>Evoker Preservation</td><td>Mythic+</td><td>icyveins: C · method: B · wowhead: B (frozen 2026-08-09) · archon: C</td></tr>
+<tr><td>Hunter Beast Mastery</td><td>Raid</td><td>icyveins: B · method: C · wowhead: C (frozen 2026-08-09) · archon: C</td></tr>
+<tr><td>Hunter Beast Mastery</td><td>Mythic+</td><td>icyveins: A+ · method: B · wowhead: B (frozen 2026-08-09) · archon: B</td></tr>
+<tr><td>Hunter Marksmanship</td><td>Raid</td><td>icyveins: A+ · method: S · wowhead: A (frozen 2026-08-09) · archon: A</td></tr>
+<tr><td>Hunter Marksmanship</td><td>Mythic+</td><td>icyveins: C · method: A · wowhead: B (frozen 2026-08-09) · archon: B</td></tr>
+<tr><td>Hunter Survival</td><td>Raid</td><td>icyveins: S · method: B · wowhead: B (frozen 2026-08-09) · archon: A</td></tr>
+<tr><td>Hunter Survival</td><td>Mythic+</td><td>icyveins: A+ · method: A · wowhead: B (frozen 2026-08-09) · archon: A</td></tr>
+<tr><td>Mage Arcane</td><td>Raid</td><td>icyveins: C · method: C · wowhead: B (frozen 2026-08-09) · archon: C</td></tr>
+<tr><td>Mage Arcane</td><td>Mythic+</td><td>icyveins: B · method: B · wowhead: B (frozen 2026-08-09) · archon: C</td></tr>
+<tr><td>Mage Fire</td><td>Raid</td><td>icyveins: C · method: C · wowhead: B (frozen 2026-08-09) · archon: B</td></tr>
+<tr><td>Mage Fire</td><td>Mythic+</td><td>icyveins: C · method: C · wowhead: B (frozen 2026-08-09) · archon: B</td></tr>
+<tr><td>Mage Frost</td><td>Raid</td><td>icyveins: A+ · method: S · wowhead: A (frozen 2026-08-09) · archon: A</td></tr>
+<tr><td>Mage Frost</td><td>Mythic+</td><td>icyveins: A · method: A · wowhead: A (frozen 2026-08-09) · archon: B</td></tr>
+<tr><td>Monk Brewmaster</td><td>Raid</td><td>icyveins: A · method: A · wowhead: B (frozen 2026-08-09) · archon: C</td></tr>
+<tr><td>Monk Brewmaster</td><td>Mythic+</td><td>icyveins: A+ · method: A · wowhead: A (frozen 2026-08-09) · archon: A</td></tr>
+<tr><td>Monk Mistweaver</td><td>Raid</td><td>icyveins: B · method: S · wowhead: S (frozen 2026-08-09) · archon: S</td></tr>
+<tr><td>Monk Mistweaver</td><td>Mythic+</td><td>icyveins: S · method: A · wowhead: S (frozen 2026-08-09) · archon: S</td></tr>
+<tr><td>Monk Windwalker</td><td>Raid</td><td>icyveins: A+ · method: A · wowhead: B (frozen 2026-08-09) · archon: A</td></tr>
+<tr><td>Monk Windwalker</td><td>Mythic+</td><td>icyveins: A · method: B · wowhead: C (frozen 2026-08-09) · archon: B</td></tr>
+<tr><td>Paladin Holy</td><td>Raid</td><td>icyveins: S · method: A · wowhead: B (frozen 2026-08-09) · archon: C</td></tr>
+<tr><td>Paladin Holy</td><td>Mythic+</td><td>icyveins: B · method: B · wowhead: A (frozen 2026-08-09) · archon: C</td></tr>
+<tr><td>Paladin Protection</td><td>Raid</td><td>icyveins: B · method: C · wowhead: C (frozen 2026-08-09) · archon: C</td></tr>
+<tr><td>Paladin Protection</td><td>Mythic+</td><td>icyveins: A · method: B · wowhead: A (frozen 2026-08-09) · archon: C</td></tr>
+<tr><td>Paladin Retribution</td><td>Raid</td><td>icyveins: B · method: A · wowhead: A (frozen 2026-08-09) · archon: B</td></tr>
+<tr><td>Paladin Retribution</td><td>Mythic+</td><td>icyveins: A+ · method: B · wowhead: A (frozen 2026-08-09) · archon: A</td></tr>
+<tr><td>Priest Discipline</td><td>Raid</td><td>icyveins: S · method: A · wowhead: A (frozen 2026-08-09) · archon: S</td></tr>
+<tr><td>Priest Discipline</td><td>Mythic+</td><td>icyveins: A · method: B · wowhead: B (frozen 2026-08-09) · archon: B</td></tr>
+<tr><td>Priest Holy</td><td>Raid</td><td>icyveins: A · method: C · wowhead: B (frozen 2026-08-09) · archon: B</td></tr>
+<tr><td>Priest Holy</td><td>Mythic+</td><td>icyveins: C · method: C · wowhead: B (frozen 2026-08-09) · archon: C</td></tr>
+<tr><td>Priest Shadow</td><td>Raid</td><td>icyveins: A+ · method: B · wowhead: B (frozen 2026-08-09) · archon: B</td></tr>
+<tr><td>Priest Shadow</td><td>Mythic+</td><td>icyveins: A+ · method: B · wowhead: C (frozen 2026-08-09) · archon: A</td></tr>
+<tr><td>Rogue Assassination</td><td>Raid</td><td>icyveins: B · method: C · wowhead: B (frozen 2026-08-09) · archon: C</td></tr>
+<tr><td>Rogue Assassination</td><td>Mythic+</td><td>icyveins: A · method: B · wowhead: B (frozen 2026-08-09) · archon: A</td></tr>
+<tr><td>Rogue Outlaw</td><td>Raid</td><td>icyveins: A · method: C · wowhead: C (frozen 2026-08-09) · archon: C</td></tr>
+<tr><td>Rogue Outlaw</td><td>Mythic+</td><td>icyveins: A+ · method: C · wowhead: B (frozen 2026-08-09) · archon: A</td></tr>
+<tr><td>Rogue Subtlety</td><td>Raid</td><td>icyveins: A · method: B · wowhead: B (frozen 2026-08-09) · archon: B</td></tr>
+<tr><td>Rogue Subtlety</td><td>Mythic+</td><td>icyveins: A · method: A · wowhead: B (frozen 2026-08-09) · archon: A</td></tr>
+<tr><td>Shaman Elemental</td><td>Raid</td><td>icyveins: B · method: B · wowhead: B (frozen 2026-08-09) · archon: B</td></tr>
+<tr><td>Shaman Elemental</td><td>Mythic+</td><td>icyveins: A+ · method: A · wowhead: A (frozen 2026-08-09) · archon: A</td></tr>
+<tr><td>Shaman Enhancement</td><td>Raid</td><td>icyveins: A · method: B · wowhead: C (frozen 2026-08-09) · archon: B</td></tr>
+<tr><td>Shaman Enhancement</td><td>Mythic+</td><td>icyveins: A+ · method: B · wowhead: B (frozen 2026-08-09) · archon: A</td></tr>
+<tr><td>Shaman Restoration</td><td>Raid</td><td>icyveins: A · method: C · wowhead: B (frozen 2026-08-09) · archon: C</td></tr>
+<tr><td>Shaman Restoration</td><td>Mythic+</td><td>icyveins: A+ · method: A · wowhead: S (frozen 2026-08-09) · archon: A</td></tr>
+<tr><td>Warlock Affliction</td><td>Raid</td><td>icyveins: A · method: A · wowhead: C (frozen 2026-08-09) · archon: C</td></tr>
+<tr><td>Warlock Affliction</td><td>Mythic+</td><td>icyveins: B · method: C · wowhead: B (frozen 2026-08-09) · archon: B</td></tr>
+<tr><td>Warlock Demonology</td><td>Raid</td><td>icyveins: S · method: S · wowhead: A (frozen 2026-08-09) · archon: B</td></tr>
+<tr><td>Warlock Demonology</td><td>Mythic+</td><td>icyveins: A · method: A · wowhead: A+ (frozen 2026-08-09) · archon: A</td></tr>
+<tr><td>Warlock Destruction</td><td>Raid</td><td>icyveins: A+ · method: A · wowhead: A (frozen 2026-08-09) · archon: B</td></tr>
+<tr><td>Warlock Destruction</td><td>Mythic+</td><td>icyveins: B · method: B · wowhead: B (frozen 2026-08-09) · archon: C</td></tr>
+<tr><td>Warrior Arms</td><td>Raid</td><td>icyveins: A · method: C · wowhead: C (frozen 2026-08-09) · archon: B</td></tr>
+<tr><td>Warrior Arms</td><td>Mythic+</td><td>icyveins: A+ · method: C · wowhead: A (frozen 2026-08-09) · archon: S</td></tr>
+<tr><td>Warrior Fury</td><td>Raid</td><td>icyveins: A · method: A · wowhead: B (frozen 2026-08-09) · archon: B</td></tr>
+<tr><td>Warrior Fury</td><td>Mythic+</td><td>icyveins: A · method: B · wowhead: B (frozen 2026-08-09) · archon: A</td></tr>
+<tr><td>Warrior Protection</td><td>Raid</td><td>icyveins: S · method: S · wowhead: A (frozen 2026-08-09) · archon: A</td></tr>
+<tr><td>Warrior Protection</td><td>Mythic+</td><td>icyveins: B · method: B · wowhead: B (frozen 2026-08-09) · archon: C</td></tr></tbody></table></div></details></section>
+<footer>Each completed checkpoint keeps its first eligible historical outcome. Later refreshes do not replace it. <a href="index.html">Return to the tracker</a>.</footer>
+</main></body></html>

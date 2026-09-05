@@ -60,6 +60,27 @@ node --test test/project.test.mjs
 From the repository root, the equivalent convenience commands are
 `npm run gearing:test` and `npm run gearing:build`.
 
+Guide harvesters (`src/harvest-guide-{icyveins,wowhead,method}.mjs`) skip already
+verified specs by default; a completed no-op leaves the source file byte-for-byte
+unchanged. Use `--force` to refresh the roster, or `--spec "Frost Mage"` to verify one.
+Attempts are saved after each spec in ignored `.guide-work/<source>.json` staging.
+Any retrieval/parse failure fails the command and leaves the published guide source
+intact; rerun the same command to resume successful staged observations and retry
+failures. A changed source or requested scope refuses that staging; remove that one
+staging file to begin a new refresh. A verified HTTP 404 is an absence, while a 403,
+timeout, or unusable response is a failure. Only a completed, validated attempt
+replaces the source, through an atomic rename.
+
+Each fetched record or verified absence carries `verifiedAt`; `published` remains
+the author's publication date. The source's `harvestedAt` is the **oldest** verification
+across the required roster (null for incomplete coverage), so a one-spec refresh
+cannot make the rest appear fresh. Legacy records retain their previous source date
+when first migrated to per-spec dates. Staged retries may span dates; those dates are
+retained rather than relabeled as the promotion day.
+Unverified legacy outcomes and never-attempted specs remain in `coverage.specsPending`,
+with their original reasons preserved when available; they are retried by a normal run
+and do not count as verified absence or fresh coverage.
+
 ## Retired: SimC reference weights and the healer model lane
 
 Both lanes were removed 2026-08-18 by docs/gearing-s2-scope.md Phase A (DECISIONS G3 and
