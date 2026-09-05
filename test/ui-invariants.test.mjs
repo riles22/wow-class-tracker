@@ -1576,9 +1576,11 @@ ui("official previews keep their attribution and not-live label in mobile spec d
   assert.match(footer, /PTR preview — not live/i);
   for (const note of notes) {
     const [cls, spec] = note.specKey.split('|');
-    await page.evaluate(([cls, spec]) => openRowFor(cls, spec), [cls, spec]);
     const index = payload().specs.findIndex(s => s.class === cls && s.spec === spec);
     const row = page.locator(`.row[data-idx="${index}"]`);
+    // Follow the real pointer route. openRowFor starts smooth scrolling, which can
+    // move the header under a following click before Firefox settles the scroll.
+    await row.locator('.spec-txt').click();
     const fold = row.locator('details.dfold').filter({ has: page.locator('.preview-notes') });
     // Clicking waits for scrolling/rendering of this initially offscreen lazy row.
     // Reading innerText first can observe an unrendered content-visibility subtree.
