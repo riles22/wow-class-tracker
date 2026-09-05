@@ -1585,6 +1585,7 @@ ui("official previews keep their attribution and not-live label in mobile spec d
     await fold.locator('summary').click();
     assert.match(await fold.locator('summary').innerText(), /PTR preview.*not live/is);
     const preview = row.locator('.preview-notes');
+    await preview.waitFor({ state: 'visible' });
     assert.ok(await preview.isVisible(), `${note.specKey} has a visible preview`);
     const text = await preview.innerText();
     assert.ok(text.includes(note.summary) && text.includes(note.date));
