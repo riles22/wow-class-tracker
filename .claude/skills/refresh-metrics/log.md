@@ -16,6 +16,13 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-05 — Supported WCL leaderboard collection (reviewed local implementation)
+
+- Corrected the unsupported-rdps diagnosis: official schema identifies that enum as FFXIV-only; WoW dps/hps work with existing credentials.
+- First bounded collection:138 requests in133.6s,207 raid +319 dungeon metric rows merged,40 specs attempted across8 bosses/8 dungeons.113 raid cuts were empty or below10 entries. One Elemental/Blinding Vale cut was withheld for an upstream timestamp ahead of the collection clock; no guard relaxed.
+- Per-encounter top100-entry medians stay distinct from population medians and historical PTR receipts. New receipt checker verifies exact data, sample provenance and old-row retention against the independent pre-agent artifact. Schema and UI disclose repeated characters, sample window, checked time, role limits and source links.
+- Current item tooltips also corrected4 tier-set descriptions and corroborated Demonology's4pc assignment; see historical-notes-reconciliation-2026-09-05.md. Partial local run: previous complete manifest preserved. Two new requirements will be accounted for by the post-merge full nightly.
+
 ## 2026-09-05 (nightly, THIRD run of the day) — every metric family verified, NOTHING moved anywhere
 
 - **Murlok + Mythicstats via the trusted pre-agent collectors only** (metrics-fetch/evidence.json,

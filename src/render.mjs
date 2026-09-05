@@ -1767,16 +1767,10 @@ export function tierListHealth(sources) {
 /* Staleness measured against the data's OWN newest date — deliberately clock-free, which
    is what keeps this honest when agent-written page snapshots lie, and keeps the build a
    pure function of the data. See the note inside about where the absolute check lives. */
-/* Which Warcraft Logs pipeline a series comes from. The two are independently healthy:
-   `characterRankings(metric: rdps)` — the redistributed family, including HPS and the
-   normalized raid-testing score, and INCLUDING "Median DPS (Mythic, healer)", which is a
-   healer's damage off the same endpoint — has been erroring upstream since 2026-07-09,
-   while the deterministic raw-DPS fetch lands nightly. Grouping the banner by source alone
-   folds them together and announces fresh rows as part of an outage, misdated by weeks
-   (audit 2026-07-25). A name regex is not enough: /rDPS|HPS/ misses the healer row, which
-   is exactly the kind of row the banner must not misattribute. The rule is the inverse and
-   it is total — "raw DPS" is the raw family, everything else on this source is not. */
-const wclFamily = label => (/\braw DPS\b/i.test(label) ? "raw" : "redistributed");
+/* Keep archived metric families separate from supported live leaderboard samples.
+   Family names are stable history keys; dates alone never diagnose an API outage. */
+const wclFamily = label => /^Leaderboard median /.test(label) ? "leaderboard"
+  : (/\braw DPS\b/i.test(label) ? "raw" : "redistributed");
 
 export function dataHealth(specs, sources = null) {
   /* Keyed by (bracket, name), not name alone (2026-08-25). "Popularity" exists in BOTH
@@ -1906,6 +1900,26 @@ export function applyFrozenForecast(specs, artifact) {
     delete spec.projMovement;
   }
   return specs;
+}
+
+/* Trim only at HTML serialization: digest/snapshot/analysis callers need the full
+   archive, including takes superseded in the same refresh. Credit precedence is
+   the footer's existing first-name/first-URL rule, before any records are removed. */
+export function publicationPayload(payload) {
+  const byName = new Map();
+  const credit = (name, url) => { if (name && !byName.has(name)) byName.set(name, { name, url }); };
+  for (const cls of payload.community?.classes ?? [])
+    for (const cr of cls.creators ?? []) credit(cr.name, cr.url);
+  for (const take of payload.creatorTakes?.takes ?? []) credit(take.creator, take.url);
+  for (const cr of payload.community?.generalCreators ?? []) credit(cr.name, cr.url);
+  for (const note of payload.creatorTakes?.metaNotes ?? []) credit(note.creator, note.url);
+  return { ...payload,
+    creatorCredits: [...byName.values()],
+    creatorTakes: payload.creatorTakes ? { ...payload.creatorTakes,
+      takes: (payload.creatorTakes.takes ?? []).filter(t => !t.superseded),
+      metaNotes: (payload.creatorTakes.metaNotes ?? []).filter(n => !n.superseded),
+    } : null,
+  };
 }
 
 export function buildPayload({ specs, sources, scales, community, ptrBuilds, creatorTakes, encounterTiers, historySnapshot, historySnapshots, seasonFinal = null, frozenForecast = null, officialNotes = null, now = null }) {

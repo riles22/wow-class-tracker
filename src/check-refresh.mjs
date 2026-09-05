@@ -97,6 +97,12 @@ export function probeDate(req, data) {
     return dates[0] ?? null;
   }
   if (p.type === "metrics") return coverage(matchMetrics(p, data.specs).map(m => m.asOf).filter(Boolean).sort());
+  // A partition leaderboard can be rechecked without its included log dates moving.
+  // Its trusted sample receipt dates collection separately; never apply this probe
+  // to historical aggregates or silently restamp their source-owned asOf values.
+  if (p.type === "leaderboardChecks") return coverage(matchMetrics(p, data.specs)
+    .filter(m => m.sample?.kind === "leaderboard-entries")
+    .map(m => m.sample.observedAt?.slice(0, 10)).filter(Boolean).sort());
   if (p.type === "ptrDummy") return coverage(data.specs.map(s => s.ptrDummy?.asOf).filter(Boolean).sort());
   // Sims live on spec.fightProfile, not spec.metrics, so a "metrics" probe can't see
   // them and bloodmallet was left reading its own page snapshot (audit 2026-07-24, D3).
@@ -175,8 +181,7 @@ export function checkManifest(config, manifest, data, now, evidence = null) {
     if (!ISO_DATE.test(eDate) || Math.abs(ageDays(nowDate, eDate)) > 1) {
       errors.push(`wcl evidence: attemptedAt ${JSON.stringify(evidence.attemptedAt ?? null)} is not from this run — a stale or malformed wcl-fetch/evidence.json must not vouch for anything`);
     }
-    if (evidence.verdict === "rdps-restored") notes.push('wcl evidence: the rDPS metric family works again upstream — owner decision needed: freeze a deterministic median recipe into src/fetch-wcl.mjs targeting the live S2 zones 53/55 (see refresh-metrics SKILL.md) before any WCL cut can land');
-    if (["no-credentials", "oauth-failed", "network-failed"].includes(evidence.verdict)) {
+    if (["no-credentials", "oauth-failed", "network-failed", "merge-failed"].includes(evidence.verdict)) {
       degraded.push(`wcl evidence: ${evidence.verdict} — ${evidence.detail ?? "the deterministic WCL fetch step failed before reaching a metric conclusion"}`);
     }
   }

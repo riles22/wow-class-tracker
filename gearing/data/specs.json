@@ -8,7 +8,7 @@
     "sources": {
       "tracker": {
         "path": "data/specs.json",
-        "digest": "2901319ac206db52712a1a4c6f5785cb5802cc61fdcb7807b69f6d164b78d73c",
+        "digest": "d7f0e9bf3f41a41c01710973e73aa442161d4aa9102ffc821989218c177494b5",
         "scope": "class, spec, role, tierSet; each tier set retains its own source and asOf"
       },
       "armor": {
@@ -879,10 +879,10 @@
       "statPriorityPatch": "12.0.7",
       "statPrioritySource": "https://www.icy-veins.com/wow/restoration-druid-pve-healing-stat-priority",
       "tierSet": {
-        "set2": "Rejuvenation has a 15% chance and Nature's Swiftness has a 100% chance to grant Genesis, causing all your heal over time effects to heal for 15% more for 8 seconds. Multiple applications may overlap.",
+        "set2": "Rejuvenation has a 15% chance to grant Genesis. Genesis increases healing from all your heal over time effects by 15% for 8 seconds, and multiple applications can overlap.",
         "set4": "Nature's Swiftness, Tranquility, and Incarnation: Tree of Life or Convoke the Spirits have a 100% chance to grant Genesis, and its duration is increased by 8 seconds.",
-        "source": "https://us.forums.blizzard.com/en/wow/t/class-tuning-incoming-august-25/2339812",
-        "asOf": "2026-08-22"
+        "source": "https://www.wowhead.com/item=271528",
+        "asOf": "2026-09-05"
       }
     },
     {
@@ -1427,9 +1427,9 @@
       "statPrioritySource": "https://www.icy-veins.com/wow/arcane-mage-pve-dps-stat-priority",
       "tierSet": {
         "set2": "Arcane Missiles fires 1 additional missile and deals 5% increased damage.",
-        "set4": "Each wave of Arcane Missiles increases the damage of your next Arcane Blast, Arcane Pulse, or Prismatic Bolt by 3%, up to 40%. (2026-08-15 tuning: the per-stack bonus was reduced from 5% to 3%; the notes did not restate the cap, so it is carried forward unchanged.)",
-        "source": "https://us.forums.blizzard.com/en/wow/t/class-tuning-incoming-august-18/2336820",
-        "asOf": "2026-08-15"
+        "set4": "Each Arcane Missiles wave increases the damage of your next Arcane Blast, Arcane Pulse, or Prismatic Bolt by 3%, up to 24%.",
+        "source": "https://www.wowhead.com/item=271564",
+        "asOf": "2026-09-05"
       }
     },
     {
@@ -1511,9 +1511,9 @@
       "statPrioritySource": "https://www.icy-veins.com/wow/fire-mage-pve-dps-stat-priority",
       "tierSet": {
         "set2": "Pyroclasm causes Flamestrike and Pyroblast to always critically strike. (2026-08-31 hotfix: fixed so the guaranteed critical strike from Pyroclasm correctly grants Hot Streak — a bug fix to make the printed bonus behave as written; no value changed.)",
-        "set4": "Pyroclasm reduces the cast time of Flamestrike and Pyroblast by 20% and its damage bonus is increased by 20%.",
-        "source": "https://us.forums.blizzard.com/en/wow/t/world-of-warcraft-midnight-hotfixes-august-31/2336376",
-        "asOf": "2026-08-31"
+        "set4": "Pyroclasm reduces Flamestrike and Pyroblast cast time by 20%, and its damage bonus increases by 25%.",
+        "source": "https://www.wowhead.com/item=271564",
+        "asOf": "2026-09-05"
       }
     },
     {
@@ -2995,10 +2995,10 @@
       "statPriorityPatch": "12.0.7",
       "statPrioritySource": "https://www.icy-veins.com/wow/affliction-warlock-pve-dps-stat-priority",
       "tierSet": {
-        "set2": "Agony damage increased by 15%. Corruption damage increased by 25%. Seed of Corruption applies Unstable Affliction at 20% effectiveness to your target.",
-        "set4": "Each active Unstable Affliction increases your damage dealt by your spells and abilities by 2%, up to 6%. (2026-08-20 hotfix: a bug where the Unstable Affliction granted by the Venomous Abyss 4-piece would not grant a stack of Wither was corrected; the bonus wording itself is unchanged.)",
-        "source": "https://us.forums.blizzard.com/en/wow/t/world-of-warcraft-midnight-hotfixes-august-20/2336376",
-        "asOf": "2026-08-20"
+        "set2": "Agony deals 15% more damage, and Corruption or its Wither replacement deals 25% more damage.",
+        "set4": "Each active Unstable Affliction increases spell and ability damage by 2%, up to 6%. Seed of Corruption also applies Unstable Affliction to its target at 20% effectiveness. (2026-08-20 hotfix: corrected the set-granted Unstable Affliction failing to grant a Wither stack.)",
+        "source": "https://www.wowhead.com/item=271546",
+        "asOf": "2026-09-05"
       }
     },
     {
@@ -3080,9 +3080,9 @@
       "statPrioritySource": "https://www.icy-veins.com/wow/demonology-warlock-pve-dps-stat-priority",
       "tierSet": {
         "set2": "Wild Imp damage increased by 10%. Implosion damage increased by 20%.",
-        "set4": "When their energy depletes, Wild Imps have a 20% chance to fling themselves at their target and Implode at 350% effectiveness to their main target and 315% effectiveness to other targets. (2026-07-31 build: a tooltip fix — the bonus had displayed 150% / 125%, which is what was recorded here; the intended values were 250% / 225%. The effect itself did not change. 2026-08-15 tuning: raised to 350% / 315% — note that post attributes this Implode effect to the 2-SET bonus, while the 06-18 datamine and the 07-31 notes placed it here on the 4-set; the values are updated where the effect is stored rather than moved on Blizzard’s say-so alone.)",
-        "source": "https://us.forums.blizzard.com/en/wow/t/class-tuning-incoming-august-18/2336820",
-        "asOf": "2026-08-15"
+        "set4": "When their energy depletes, Wild Imps have a 20% chance to fling themselves at their target and Implode at 350% effectiveness to their main target and 315% effectiveness to other targets. (Verified 2026-09-05 against the current item tooltip, which assigns this effect to the 4-piece bonus. Blizzard's August 18 tuning prose labels the same effect as 2-piece.)",
+        "source": "https://www.wowhead.com/item=271546",
+        "asOf": "2026-09-05"
       }
     },
     {

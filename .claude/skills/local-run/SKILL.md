@@ -123,10 +123,13 @@ no-staleness-gate policy still holds *within* whichever scope you pick.
    section; leave PHASES and the frozen forecast closed. The four PTR
    WCL zone sweeps (54/52/56/57) are DORMANT — skip them entirely; their contract rows
    were removed at the flip, so they need no manifest excuse. Stored zone rows are the
-   closed cycle's final receipts: never refresh, never delete. The live S2 WCL zones
-   (53 raid / 55 M+, partition 1 on both) currently have NO fetch path — the standing
-   heartbeat red on wcl-live-* is OWNER-ACCEPTED (2026-08-18) and is not yours to fix
-   or ack away.
+   closed cycle's final receipts: never refresh, never delete. Supported S2 WCL
+   leaderboard collection now runs through `src/fetch-wcl.mjs` (recipe in refresh-metrics).
+   Verify `node src/check-wcl-metrics.mjs` against the pre-collection committed baseline.
+   Its new wcl-leaderboard-* requirements are separate from wcl-live-* population
+   aggregates, which still lack a verified endpoint. Do not green those older requirements
+   with leaderboard samples. The former rdps-outage diagnosis was incorrect: that enum
+   is FFXIV-only. Keep all historical values and dates unchanged.
 2. **`watch-creators`** — draining the transcript queue is the main reason this run
    exists. Honour the `skipped[]` lane (durable verified-skips), the same-lens supersede
    pass, and the `generalCreators` → `metaNotes[]` firewall.

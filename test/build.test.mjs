@@ -24,6 +24,10 @@ test("build produces the tracker and fetchable launcher icons", async () => {
   const payloadLine = html.split("\n").find(l => l.includes("const DATA ="));
   assert.ok(payloadLine, "DATA constant missing");
   assert.ok(!payloadLine.slice(payloadLine.indexOf("=")).includes("</"), "payload must escape < characters");
+  const published = JSON.parse(payloadLine.match(/const DATA = (.*);$/)[1]);
+  assert.ok(Array.isArray(published.creatorCredits), "publication must carry credits from the complete archive");
+  assert.ok(published.creatorTakes.takes.every(t => !t.superseded) && published.creatorTakes.metaNotes.every(n => !n.superseded),
+    "HTML serialization must use the compact publication payload");
 
   const icons = [
     { name: "favicon-192.png", rel: "icon", width: 192, height: 192 },

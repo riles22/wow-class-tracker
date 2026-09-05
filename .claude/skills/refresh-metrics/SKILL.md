@@ -46,21 +46,28 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
 
 ## Sources & recipes
 
-- **Warcraft Logs** (live S2 since 2026-08-18: raid **zone 53** "The Venomous Abyss"
-  partition 1, Mythic difficulty **5** size 20, 9 encounters; M+ **zone 55** "Mythic+
-  Season 2" partition 1, difficulty 10 size 5). ⚠️ Three traps re-learned at the flip:
-  (a) live and PTR zones SHARE NAMES — 53/54 are both "The Venomous Abyss", 55/56 both
-  "Mythic+ Season 2"; tell them apart by partition label and encounter count (53 has 9,
-  PTR 54 had 8), never the id pattern. (b) Partition ids restart per zone — both live S2
-  zones use partition 1. (c) Zone 46/47 are the RETIRED S1 zones; the stored live metric
-  NAMES are season-agnostic, so a zone-46/47 fetch merged under them would land 12.0.7
-  medians as the live S2 series and green the staleness gates on wrong-season data.
-  **Any zone-46/47 fetch is an S1 historical fetch and must never merge under the live
-  metric names.** Statistics-table endpoint
-  documented in CLAUDE.md → "Metrics" workflow. Needs `X-Requested-With: XMLHttpRequest`
-  + browser UA + Referer headers; response is an HTML fragment with UNCLOSED `<td>` tags
-  — parse with regex, not a strict parser. Metric names in use:
-  "Median rDPS (Mythic, all bosses)" / "Median HPS (…)" / "…(M+, all dungeons)".
+- **Warcraft Logs**: `node src/fetch-wcl.mjs` performs the supported, bounded WoW
+  leaderboard collection and applies it before the nightly agents run. Locally map
+  credentials as above without printing them. `src/wcl-live.mjs` pins the S2 identity,
+  roster, encounters, page cap, minimum sample, and exact +10 bracket mapping. Read
+  `wcl-fetch/evidence.json` plus `updates.json`; never recompute or edit these metrics
+  agent-side. Run `node src/check-wcl-metrics.mjs` after any merge.
+  New metric names start **Leaderboard median DPS/HPS (S2 Mythic/M+10: encounter,
+  top 100)**. They are per-encounter first-page medians of up to100 ranked entries
+  (minimum10), not population medians or unique-player medians. Entries may repeat
+  characters. The date range spans the partition's included logs, not a rolling week;
+  `asOf` is the newest log date and `sample.observedAt` is the check instant. Empty or
+  sparse cuts remain missing/retain prior observations. No pooling across encounters.
+  Raid: zone53, partition1, difficulty5, size20, eight pinned raid bosses excluding
+  Nymrissa3379. M+: zone55, partition1, difficulty10, size5, **bracket9 = key+10**;
+  validate `brackets.min=2,bucket=1` and each returned `hardModeLevel=bracketData=10`.
+  Five spec aliases per request, inter-request pause, one bounded transport retry,
+  hourly-budget checks, three consecutive failures stop, and12-minute total budget.
+  Success for `wcl-leaderboard-raid/mplus` requires the collector's successful bracket
+  status and matching landed rows; exact trusted updates and retained rows are checked
+  independently on publication. The old `wcl-live-raid/mplus` requirements remain
+  unreachable until a genuine aggregate endpoint is validated. New leaderboard data
+  cannot refresh their old medians. See [the reviewed recipe](../../../docs/wcl-supported-collection.md).
 - **Archon numbers** (same `__NEXT_DATA__` JSON as tiers): "95th pct DPS (Mythic)",
   "95th pct HPS (Mythic)", "95th pct DPS (Heroic)", "95th pct HPS (Heroic)",
   "M+ score (95th pct)", "Popularity" (fraction × 100, unit "%").
@@ -370,56 +377,19 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
   Referer. The sanctioned path is a free v2 GraphQL client (warcraftlogs.com/api/v2/client)
   — the runner uses it (datacenter IPs get Cloudflare-blocked on the HTML endpoint); the
   HTML endpoint works from a residential IP for local runs.
-- **WCL v2 API status (2026-07-14, probe-verified — read before re-deriving ANY of it):**
-  - **Transport is SOLVED from datacenter runners.** Recipe: browser `User-Agent` on the
-    `POST /oauth/token` call; `Origin: https://www.warcraftlogs.com` +
-    `Referer: https://www.warcraftlogs.com/` + a `sec-ch-ua` header on the
-    `/api/v2/client` POST. Without these, Cloudflare silently empty-bodies the token
-    call and 403-challenges the GraphQL call. Reference implementation: `src/wcl-probe.mjs`.
-  - **The blocker is WCL-side, not ours:** `characterRankings` throws a bare
-    "Internal server error" for the entire redistributed-credit metric family
-    (`rdps`/`ndps`/`cdps`/`bossrdps`) on EVERY encounter — (then-live S1) zone 46 and PTR zone 52
-    alike — while `dps`/`hps`/`wdps`/`default` work. Bisected argument-by-argument
-    (className/specName/difficulty/partition all fine) and reproduced deterministically.
-  - **`metric: default` is NOT a workaround:** probe-verified byte-identical to plain
-    `dps` (joined by character name, 0.00% delta on live and dummy encounters). Do not
-    substitute `dps`-family numbers under the rDPS-labeled series (honest source
-    typing), and do not rebuild statistics-table medians from rankings pages — the
-    leaderboard is a paginated top-parses list (`count` is page-local), not the parse
-    population, and zone 54's cross-boss normalized score has no API analogue at all.
-  - **Third-party scrape proxies are a dead end (probe-verified 2026-07-21):** a
-    Supadata `/v1/web/scrape` probe (owner-requested) DOES clear Cloudflare, but the
-    statistics-table fragment answers non-XHR scrapers with WCL's explicit refusal
-    ("Use the API at /v1/docs instead of scraping HTML."), and the rendered
-    statistics PAGE returns only navigation chrome — the table loads via XHR after
-    render, so no values come through (bigNumbers=0). The refusal message also
-    settles the etiquette question: WCL's stated policy is API-only, and the API is
-    exactly what's broken. Do not retry other scrape proxies; wait for the rdps fix.
-  - **Standing behavior until WCL fixes it:** ONE cheap retry per run (a single
-    `metric: rdps` query on a known-good encounter, e.g. 3176); if still 500, record
-    the WCL manifest rows named in required-sources.json (currently wcl-live-raid and
-    wcl-live-mplus) as `unreachable` with this reason and leave data
-    unchanged. On the nightly runner this check IS `src/fetch-wcl.mjs` (the
-    deterministic pre-agent step — read its `wcl-fetch/evidence.json` instead of
-    re-running anything); locally you can run the same script or the query by hand.
-    The dispatch-only workflow **"WCL API probe (diagnostic)"**
-    (`.github/workflows/wcl-probe.yml`) re-checks the whole picture in ~20s. If rdps
-    starts working: zone 52 (single encounter per target count, small population) is
-    the first candidate for an API-median recipe — validate full-population coverage
-    by paginating to the end and comparing counts before trusting any median, and
-    freeze the recipe into `src/fetch-wcl.mjs` (owner decision), never into the
-    nightly agent.
-  - **Frozen recipe #1 (owner-approved 2026-07-17): zone-52 RAW-DPS medians.**
-    `src/fetch-wcl.mjs` paginates each DPS dummy's full `metric: dps` leaderboard
-    (complete pagination or that encounter contributes nothing — rankings are
-    best-parse-per-player sorted best-first, so a partial median is biased high) and
-    merges per-spec medians via apply-metrics as
-    `"Median raw DPS (12.1 PTR Dummy Dome, NT)"` (bracket raid, era ptr, n = ranked
-    players). This is a DIFFERENT statistic from both `spec.ptrDummy` (median rDPS —
-    still frozen until WCL fixes the API) and the statistics table's per-parse
-    medians — raw DPS is never dressed up as rDPS (Aug Evoker is why), and agents
-    never re-fetch or edit these rows (manifest key `wcl-dummy-raw`, success only via
-    `evidence.landed`).
+- **WCL API correction (2026-09-05):** the official schema defines `rdps`, `ndps`
+  and `cdps` as **FFXIV-only**. Their rejection was incorrectly diagnosed as a WoW
+  outage in older logs and instructions. Supported WoW `dps`/`hps` work with existing
+  credentials. Do not probe unsupported enums to diagnose WoW health. `dps` means
+  WCL-ranked DPS; neither a `default` match nor successful Augmentation rows establish
+  raw damage or exact equivalence to an old statistics table.
+  The new reviewed leaderboard series above is the regular sanctioned API route.
+  Exact per-parse population medians and Archon aggregates still lack a verified
+  public API/export route; a listed GraphQL type does not imply a Query entrypoint.
+  Ordinary statistics pages return verification challenges. Never use proxies, replay
+  challenge cookies, scrape restricted fragments, or relabel another source to fill gaps.
+  Archived PTR raw-DPS recipe names are preserved as historical identifiers only.
+  `RAW_RECIPES=[]`; never rerun or reinterpret closed-zone data in a live refresh.
 - **Zone 54 is the 12.1 PTR raid** (Venomous Abyss), zone 56 M+ S2 PTR — PTR-quality
   data. **Zone 52 is "Dummy Dome"** — a target-dummy sim harness (Sinister Single 1T /
   Diabolical Duo 2T / Terrible Trio 3T / Fearsome Five 5T / Hazardous Healer), NOT a raid;
@@ -470,10 +440,9 @@ in run-log prose until the log outgrew the Read tool and had to be pruned.
   was only ever true through curl. Since 2026-08-10 curl itself 302s to `/human-challenge`, so
   treat this as the recipe to resume from if the endpoint reopens, not a promise that it works
   today.
-- **"rdps-broken" is a statement about the GraphQL API, not about rDPS data.** The v2
-  `characterRankings(metric: rdps)` 500 and the HTML statistics table serving rDPS fine are
-  independent facts — an evidence-file verdict of `rdps-broken` must not stop an HTML fetch, and
-  a successful HTML fetch must not be read as the API being fixed.
+- **Historical diagnostic correction:** the retired `rdps-broken` verdict cannot
+  establish a WoW outage: the API enum is FFXIV-only. Use the supported deterministic
+  collector above; do not resume restricted HTML extraction from older run recipes.
 - **`dpstype=dps` and `dpstype=rdps` return byte-identical tables for the zone-46 healer-DPS
   cut** (verified 2026-08-01), so "Median DPS (Mythic, healer)" carries no methodology ambiguity
   — do not rename it and do not re-derive the question.
