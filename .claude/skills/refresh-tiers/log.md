@@ -16,6 +16,34 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-05 (nightly, SECOND run of the day) — 240/240 rows re-parsed, ZERO letters moved; Archon walled night 13
+
+- **Icy Veins 80/80, Method 80/80, Wowhead 80/80 — 240 rows, 0 unmatched, 0 letters moved.**
+  `apply-ratings` was run on the full 240 anyway and confirmed the no-op (no diff on specs.json).
+  Counts were reconciled per page BEFORE any merge: 27 DPS / 7 healer / 6 tank on each bracket.
+- **Page self-dates all unchanged**, which is the honest explanation for a static parse: Icy Veins
+  JSON-LD dateModified 08-30 / 09-01 / 08-29 (raid) and 08-30 / 08-30 / 08-30 (M+); Wowhead 08-31 ×3
+  (raid), 08-28 / 08-26 / 09-01 (M+); Method's own "Last Updated" lines 10th August (raid) and
+  13th August (M+). Every one re-read from the page, none carried forward.
+- Era-verified from bodies and changelogs, never a substring count. All six Icy Veins and all six
+  Wowhead pages self-identify as Season 2; the Icy Veins raid-healer TITLE still says
+  "(Patch 12.0.7 / Midnight)" and is overridden by its Season 2 body, the blue-tracker body-over-title
+  precedent. Devourer present in every DPS and tank list, correctly absent from Wowhead's healer pages.
+  `seasonVerified` stays **s2** on all fourteen pages, so nothing changed and `freeze-season` had
+  nothing to observe.
+- **Archon: night 13 of the wall.** All 11 distinct registered archon.gg URLs fetched with the full
+  browser header set; every one returned **HTTP 403 + Cloudflare "Just a moment…"** (6,075-6,159 bytes)
+  with `__NEXT_DATA__` count 0. The pre-agent `source-health/evidence.json` independently caught BOTH
+  documented shapes on its two ordinary public routes the same minute — Heroic raid DPS 403
+  cloudflare-challenge, M+ DPS **HTTP 200** human-verification — which is exactly why the assertion is
+  on `__NEXT_DATA__` presence and never on the status code. Nothing solved, replayed or automated past;
+  nothing backfilled from Warcraft Logs; every archon snapshot date left untouched. Per the
+  2026-09-05 owner-confirmed retention policy the last verified S2 Archon letters still contribute, so
+  the consensus is still **four sources**.
+- Snapshot dates for the three reachable sources were already 2026-09-05 (stamped by the morning
+  nightly) and were **re-verified live rather than advanced** — recorded in the manifest rows too, so
+  a reader does not mistake an unmoved date for an unattempted fetch.
+
 ## 2026-09-05 (nightly) — all three reachable sources parsed clean and ZERO letters moved; Archon walled night 12
 
 - **Icy Veins** 6/6 pages, direct browser-UA GET, HTTP 200, 195-343 KB. `<style>` stripped first,

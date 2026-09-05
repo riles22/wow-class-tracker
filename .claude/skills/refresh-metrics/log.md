@@ -16,6 +16,55 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-05 (nightly, SECOND run of the day) — Murlok 13 and Mythicstats 21 values re-cut inside the same day; SimC and Bloodmallet byte-identical; Archon walled night 13
+
+- **Murlok — 13 rows merged, and a parser bug caught by counting.** The first pass anchored on
+  `<a class="…meta-item` and returned **26/6/6 = 38** instead of 27/7/6 = 40, because the **top-ranked
+  entry on each page writes `href` BEFORE `class`**. The two specs it silently dropped were
+  Augmentation Evoker and **Restoration Shaman — the #1 healer**, i.e. precisely the row a shortfall
+  hides. Re-anchored on `<a [^>]*meta-item`: 27/7/6 = 40, 0 unmatched. (New trap, worth keeping.)
+  Diffed at the stored integer precision: 27 identical, 13 moved, **all of them healer and tank rows**
+  and all sub-0.5% (largest Protection Paladin 3532 → 3521). Merged under the source's own
+  `<time datetime>` date **2026-09-02** — unchanged from stored, and not the rendered "Updated 6 hours
+  ago" string, which disagrees with it — so the row is **partial**, the documented WoWMeta 08-04 shape.
+- **Mythicstats — 39 rows merged, 21 moved.** `/period/latest` → period **1079**, the same weekly
+  period as the last three runs, but the window rolls within the period. Parse bounded to the
+  "Spec representation in top keys" section and read per `<li>` from the img alt + `<span class="mt-1">`
+  (never a "first percentage" regex — the bar's `height:NN.NNNN%` precedes the value). Shape-checked
+  before merging: series sums to **99.9** with role subtotals DPS 59.9 / Tank 20.0 / Healer 20.0,
+  matching the page's own printed labels (Ranged 30.8%, Melee 29.2%, Tank 20%, Healer 20%) — that sum
+  is the only thing distinguishing this column from the `/meta` per-key-presence one. Fire Mage is the
+  one roster spec absent this period; its stored row is a 0, so it adds no phantom share. Largest move
+  Arcane Mage 13.1 → 12.6.
+- **SimC — fetched, diffed, byte-identical, nothing merged.** `MID2_Raid.txt` 1.36 MB with a real
+  `DPS Ranking:` block at line 4315 (no .html fallback needed). Header build string
+  `12.1.0.69587 Live (hotfix 2026-09-04/69587, git build HEAD **aa9de89aac**)` — **unchanged from the
+  run the morning nightly merged**, which is the honest explanation for an unchanged parse. Block
+  bounded strictly to the contiguous ranking lines, stopping at the blank line before `HPS Ranking:`:
+  44 lines = Raid aggregate (skipped) + 43 profiles → 23 of 27 DPS specs by longest-prefix mapping
+  (hyphen allowed), with the 7 tank profiles correctly unmatched. All 23 values identical.
+- **Bloodmallet — fetched, diffed, byte-identical, nothing merged.** 27 specs requested with up to 3
+  retries each: 23 real charts, and the same 4 returning the 76-byte `{"status": "error"}` body on 3/3
+  each (Balance, Feral, Augmentation, Devastation — the set unchanged since 08-31). All 23 carry
+  `simc_settings.tier = MID2` read off the chart, `ptr` the STRING "0" compared explicitly; pool stays
+  tier-uniform at 23, so no drop and no ack. Per-chart timestamps all **2026-09-05**, equal to stored.
+- **WoWMeta — fetched, diffed, nothing to merge; partial.** manifest `snapshotDate` 2026-09-01 and the
+  rankings file's `Last-Modified` 2026-09-01T22:23Z **agree** (not the 08-04 pinned-manifest shape),
+  and the payload was diffed anyway: 44 blocks → whitelist {dps,hps,tank} + `sortField lowerBound` +
+  `keyRange undefined` = 40 rows, all 40 `lowerBound` identical at 1 dp.
+- **Archon (all six numeric requirements) — night 13 of the wall**, 403 + Cloudflare interstitial with
+  `__NEXT_DATA__` count 0 on all 11 registered URLs; `specRankingsSection` unreadable, so 32 + 7 + 33 +
+  7 + 40 + 79 stored rows left byte-identical and no snapshot moved. Per-boss survivability was NOT
+  substituted (the measured 2026-08-21 dead end stands).
+- **Warcraft Logs — evidence-only, no request made from this session by any means.**
+  `wcl-fetch/evidence.json` attemptedAt 2026-09-05T16:29:01Z, verdict **rdps-broken**: zone 53 enc 3470
+  and zone 55 enc 12993 both returned "Internal server error" on `metric: rdps` with 0 rankings while
+  the `dps` controls returned 100 each — upstream metric-family fault, not access (oauth true, graphql
+  true, 1/3600 points). `landed` empty, so both rows are `unreachable` and the 26-day red stands as the
+  owner-accepted signal. `dps`-family numbers were not substituted under the rDPS-labelled series.
+- Robydoby not fetched: its sheets are 12.1-PTR-cycle artifacts from a closed cycle and it sits
+  outside the refresh contract by design.
+
 ## 2026-09-05 (nightly) — Bloodmallet re-simmed the WHOLE pool overnight; SimC + Mythicstats fresh; Murlok's healer/tank pages re-cut inside the same calendar day
 
 - **Bloodmallet — 23 profiles merged, coverage 09-02 -> 09-05.** 27 requested with up to 3 retries; the

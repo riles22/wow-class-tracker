@@ -2,17 +2,10 @@
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
   "videos": [
     {
-      "id": "Ze7qcYHcbvg",
-      "creator": "Obli",
-      "title": "After the buffs, which DPS DK spec is better in Raid?",
-      "published": "2026-09-04",
-      "queuedAt": "2026-09-05"
-    },
-    {
-      "id": "l6bJ-pcX-h4",
-      "creator": "izen (Izenhart)",
-      "title": "How HARD Are M+ Season 2 Keys? | The \"Different Kind\" Of Difficulty For S2",
-      "published": "2026-09-03",
+      "id": "Fw6_unqijso",
+      "creator": "Dalaran Gaming",
+      "title": "5 Specs Blizzard Just SAVED In Season 2! (Class Buffs)",
+      "published": "2026-09-05",
       "queuedAt": "2026-09-05"
     }
   ],

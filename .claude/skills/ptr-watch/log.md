@@ -16,6 +16,34 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-05 (nightly, SECOND run of the day) — nothing new in the live 12.1 lane; the 12.1.5 PTR cycle is open and still UNINGESTED
+
+- **Four channels polled fresh**, ~2h45m after the morning nightly. (1) Wowhead news RSS — HTTP 200,
+  205 KB, 40 items parsed per `<item>` block, newest 2026-09-05 09:00 ("Tips and Tricks for Clearing
+  Black Temple"). (2) Wowhead news INDEX (`data.news.newsData`, brace-balanced from the id attribute)
+  polled as well because the index leads the RSS: 20 posts, newest id 382737. (3) Blue tracker
+  (`data.blueTracker.default`): 50 entries, ~30 unique topics, newest 2026-09-04 20:23 — only the
+  September 4 hotfix mirrors and the 12.1.5 items. No standalone live-12.1 class-tuning blue post.
+  (4) Canonical sources read directly: Kaivax hotfix topic 2336376 is still titled "…Hotfixes -
+  September 4", post 1 still at **version 31, last edited 2026-09-05T01:21:46Z** — identical to the
+  state the morning run logged, so its round-up needed no re-log; and the 12.1 dev-notes thread
+  2317811 is quiet at 19 posts, last 2026-07-31, which is what a closed cycle looks like.
+- **Nothing logged.** `data/ptr-builds.json` is unchanged at 29 entries, newest 2026-09-04.
+- The Enhancement Shaman set-bonus line in the September 4 round-up **stays deferred** to an owner
+  local run for the reason already written into that entry's label: the tier-set upkeep gate plus the
+  2026-08-23 two-page rule need `gearing/data/specs.json` resynced in the same change, and gearing/
+  never travels in the nightly refresh artifact.
+- ⚠️ **OWNER ESCALATION, second night running: the 12.1.5 PTR is open.** Linxy's "Midnight: 12.1.5 PTR
+  Development Notes" (us topic **2344395**, posted 2026-09-03T16:42Z, version 3) was read this run and
+  it carries a real CLASSES section — Demon Hunter › Devourer: Collapsing Star no longer goes on a
+  5-second cooldown when its cast is cancelled, gains extra range after the cast starts, and its
+  Fury-drain slow is now time-limited to ~1.5 casts; Void-Scarred bonuses (Demonic Intensity et al.)
+  move onto Collapsing Star casts rather than onto entering Void Metamorphosis. The news feed now
+  carries a dozen 12.1.5 articles. **Opening a cycle is an OWNER action** — new `PHASES.ptr` entry,
+  thread key, contract rows, zone probe via `node src/wcl-probe.mjs` — and `PHASES.ptr` is still null,
+  so nothing 12.1.5 was written to the feed, to a writeup, or to a take.
+- Dormant WCL PTR zone sweeps (52/54/56/57) correctly not attempted; their contract rows left at the flip.
+
 ## 2026-09-05 (nightly) — ONE new live-12.1 hotfix round-up logged (Sept 4), with its Enhancement Shaman set-bonus line deliberately DEFERRED to a local run
 
 - **Four channels polled.** (1) Wowhead news RSS — HTTP 200, 205 KB, 40 items parsed per `<item>`

@@ -16,6 +16,48 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-05 (nightly, SECOND run of the day) — 2 takes + 1 metaNote from the two pre-fetched transcripts; 1 video queued
+
+- **44 channels polled, 0 failures, 660 videos**, media:description parsed alongside the title.
+  Seen-set recomputed from structured data only (pending-transcripts `seen[]`/`skipped[]`/`videos[]`
+  plus every `youtu.be` id in a take or metaNote url): union **1232**, **288 unseen**, all 288 in-cycle
+  against the computed bound **2026-06-18** (the OLDEST date in ptr-builds.json, taken as a date and
+  not an index). 106 of the 288 match the nightly keyword filter.
+- **Both pre-fetched transcripts distilled** (`transcript-fetch/summary.json` verdict "ok",
+  requested 2, fetched 2, offsets in ms).
+  - **Obli — "After the buffs, which DPS DK spec is better in Raid?" (Ze7qcYHcbvg, 2026-09-04) → 2 RAID
+    takes**, inside his declared Frost/Unholy scope. *Frost, buff*: single target now on par with
+    Unholy in the Sept 2-3 Heroic Sszorak logs, and Frost edges ahead on two-target cleave (a theme he
+    sees on The Lost Explorers and Twin Fangs); he explicitly declines to name a better spec and says
+    gear both. *Unholy, mixed*: he raided Mythic on it this week and "wasn't impressed with the
+    damage", but keeps it ahead on the execute-heavy Coiled Altar, likes every Unholy hero build except
+    Blightfall, and played Rider of the Apocalypse himself. Both **supersede his prior same-lens raid
+    takes** (Frost 08-30, Unholy 08-28); his live M+ pair is untouched — different lens, complementary.
+    His two-hander note (≈3-4% behind dual wield at equal gear, fine for raid) is carried as a
+    weapon-choice read, not a bracket-strength claim.
+  - **izen — "How HARD Are M+ Season 2 Keys?" (l6bJ-pcX-h4, 2026-09-03) → 1 metaNote.** The video is
+    deliberately *not* about specs (he says so in the opening) and yielded exactly one spec-level read:
+    **Holy Paladin, M+, negative** — if the season keeps leaning on rot damage and healing checks as
+    keys climb he expects it to hurt Holy Paladin more than other healers, on lower flat five-target
+    rot healing at the highest keys. It supersedes his 2026-09-01 Holy Paladin M+ note. The hedge is
+    kept in the note text: he says "we will see if it will keep progressing down that road".
+  - ⚠️ **DELIBERATELY NOT DISTILLED from the izen video**: his one clause naming Preservation Evoker and
+    Restoration Shaman as "specs that could be better even right now than Holy Paladin in terms of that
+    healing". It is a bare two-item enumeration with no second, spec-specific mention, which the
+    list-mention rule excludes — and it would have moved two live reads on one clause.
+- Era framing is **"Season 2 live"** on all three, never PTR.
+- Lane hygiene: both distilled ids removed from `videos[]`; neither was sitting in `seen[]` or
+  `skipped[]`, so nothing else had to be dropped. `latest` advanced for Obli (replaced — the old text
+  described his now twice-superseded 08-28 read) and **appended** for izen rather than overwritten,
+  because his existing entry is a 13-metaNote summary and this video is a single thin read.
+- **Queued 1**: Dalaran Gaming, "5 Specs Blizzard Just SAVED In Season 2! (Class Buffs)"
+  (Fw6_unqijso, 2026-09-05). The queue stays keyword-filtered because Supadata is a **100-request
+  MONTHLY** budget. The other 105 keyword-matching in-cycle videos were left **UNSEEN, not retired** —
+  they are budget/judgment dismissals, not durable ones: Supatease and Dalaran Gaming duel and
+  patch-roundup shapes (both have long `skipped[]` precedent), boss/dungeon POVs, gearing and UI PSAs,
+  RWF day recaps, and the three **12.1.5 Devourer reaction videos** (Shadarek, VooDooSaurus, Nintern),
+  which belong to a cycle the owner has not opened.
+
 ## 2026-09-05 (nightly) — 12 takes from the two pre-fetched transcripts; MadSkillzzTV's healer review split raid/M+ across all seven healer specs
 
 - **Discovery:** 44 transcribable channels with a `channelId` polled via YouTube RSS, **0 failures**,
