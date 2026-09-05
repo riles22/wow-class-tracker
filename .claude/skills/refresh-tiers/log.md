@@ -16,6 +16,46 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-05 (nightly, FOURTH run of the day) — 240/240 rows re-parsed, ZERO letters moved; Archon walled night 15
+
+- **Icy Veins 80/80, Method 80/80, Wowhead 80/80 — 240 rows, 0 unmatched, 0 letters moved.** Per-page
+  counts reconciled BEFORE the merge (27 DPS / 7 healer / 6 tank per bracket per source); one
+  `tier-list` table per Icy Veins page, one `[tier-list=rows]` block per Wowhead page,
+  4 raid / 8 M+ `tier__tier` blocks on Method with the 8 dungeon-difficulty labels the only
+  unmatched strings (rejected by ROSTER MATCH, never by position). `apply-ratings` was run on the
+  full 240 anyway and landed a confirmed no-op.
+- **Page self-dates re-read, not carried forward, and all unchanged**: Icy Veins JSON-LD
+  dateModified 2026-08-30 (raid DPS) / 09-01 (raid healer) / 08-29 (raid tank) / 08-30 ×3 (M+);
+  Wowhead 08-31 ×3 (raid) and 08-28 / 08-26 / 09-01 (M+); Method's in-body "Last Updated"
+  10th August (raid) and 13th August (M+). Every one matches the stored `published`.
+- **Era-verified from the ranking bodies, not a substring count.** All six Icy Veins pages and all
+  six Wowhead pages self-identify as Midnight Season 2 / Patch 12.1 in their own prose ("Midnight
+  DPS Raid Tier List for Season 2", "Mythic+ Tank Rankings - Tier List for Midnight Season 2");
+  both Method pages name "the Midnight Season 2 Raid, The Venomous Abyss" and "Mythic+ ... in
+  Midnight Season 2". Devourer present in every DPS and tank list and correctly absent from the
+  two Wowhead healer pages. The Icy Veins raid-HEALER page title still reads "(Patch 12.0.7 /
+  Midnight)" — overridden by its Season 2 body per the body-over-title precedent, same as prior
+  runs. **No `seasonVerified` value changed anywhere, so `freeze-season` had nothing to observe.**
+- **Transport**, recorded per the standing rule: direct browser-UA GET for Icy Veins (200,
+  196–343 KB) and Method (200, 159/166 KB); the FULL browser header set for Wowhead (200,
+  75–341 KB). r.jina.ai deliberately not attempted on either host (IP-403 on `wowhead.com/guide/*`
+  since 2026-08-03, and it is not a murlok/wowhead lane). Icy Veins `<style>` stripped before
+  parsing; Wowhead `\/` unescaped across the whole document BEFORE locating the block, and tier
+  labels matched with tolerant whitespace.
+- **Archon: unreachable, night 15.** All 11 distinct registered archon.gg URLs fetched fresh with
+  the full header set; every one returned HTTP 403 carrying Cloudflare's "Just a moment..."
+  challenge-platform interstitial (6,054–6,180 bytes) with `__NEXT_DATA__` count **0** — the
+  assertion is on `__NEXT_DATA__` presence, never the status code. The pre-agent
+  `source-health/evidence.json` (attemptedAt 2026-09-05T20:05:54Z) independently recorded both
+  known shapes on the two ordinary public routes it probes: Heroic raid DPS 403
+  `cloudflare-challenge` (5,743 bytes) and M+ DPS **HTTP 200** `human-verification` (2,516 bytes).
+  No challenge was solved, replayed or automated past, and nothing was backfilled from Warcraft
+  Logs (hard rule 3). All archon snapshot dates and all 80 stored archon letters untouched. Per
+  the owner-confirmed retention policy (2026-09-05) Archon's last verified S2 letters still
+  contribute, so the consensus remains **four** sources.
+- Snapshots for icyveins/method/wowhead were already 2026-09-05 from the earlier runs today and were
+  RE-VERIFIED rather than advanced.
+
 ## 2026-09-05 (nightly, THIRD run of the day) — 240/240 rows re-parsed, ZERO letters moved; Archon walled night 14
 
 - **Icy Veins 80/80, Method 80/80, Wowhead 80/80 — 240 rows, 0 unmatched, 0 letters moved.** Counts

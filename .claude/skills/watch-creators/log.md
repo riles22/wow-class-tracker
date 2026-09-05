@@ -16,6 +16,73 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-05 (nightly, FOURTH run of the day) — 44 channels, 3 transcripts distilled, 3 takes, 1 queued
+
+- **Discovery**: all 44 distinct transcribable channels carrying a `channelId` polled via the
+  YouTube RSS endpoint, **0 failures**, 15 entries each = 660 videos, `media:description` parsed
+  alongside the title on the same pass. Seen-set recomputed from structured data only —
+  `pending-transcripts` `seen[]` 549 + `skipped[]` 418 + `videos[]` 4, plus 266 distinct
+  `youtu.be` ids across takes and metaNotes — **1,237** ids. Cycle bound derived from the
+  build feed as `Math.min(...builds.map(b => b.date))` = **2026-06-18**. That leaves **288**
+  unseen in-cycle videos, 193 of them keyword-relevant.
+- **Transcripts**: `transcript-fetch/summary.json` verdict **ok** — 4 requested, 3 fetched
+  (`58kKx4Wo0mQ` 349 chunks, `xAHhHStN2xw` 544, `qthDWT2G9NM` 536), `1fOYXu1WUEA` (Shadarek,
+  "Devourer Demon Hunter 12.1.5 Changes are IMPORTANT") **error:524**, so it stays queued for the
+  next drain. No YouTube or transcript-API request was made from this session.
+- **Three takes distilled, one per transcript, each verified against its own caption track before
+  being written** (every number checked against the referent the creator attached it to; no ASR
+  mangle written as a name — "Uldir tech" is Ula'tek, "voids card/guard" is Void-Scarred, "Kamazi"
+  is Kalamazi):
+  · **leak — Hunter Survival, RAID, `nerf`** (`58kKx4Wo0mQ?t=2`). A structural rather than tuning
+    read: Wildfire Bomb's cone only damages a mob when it reaches the CENTRE of its hit box where
+    other AoE need only touch it, so it cannot hit both Twin Fangs bosses nor Ula'tek plus its
+    adds (where Marksmanship's Explosive Shot can); Takedown is 8s Pack Leader / 10s Sentinel on a
+    90s cooldown with Savagery costing two points for -30s against Beast Mastery's one point for
+    -60s on Bestial Wrath; on heroic Ula'tek logs he puts Survival third from the bottom.
+    **Supersedes his 2026-08-22 raid take** (same creator, same spec, same lens, newer date). His
+    08-22 **M+** take is a different lens and stays live.
+  · **Kalamazi — Warlock Demonology, M+, `buff`** (`xAHhHStN2xw?t=651`). Reads Demonology as
+    "gapping" in keys and one of the best mass-AoE specs in the game, and uses that standing to
+    drop the Felguard: Succubus ~1,400 DPS (~6%) ahead in single target, a further ~1.2k from
+    moving the freed point to a 2% mastery node, and within ~1.5% in a 10-target AoE sim — a loss
+    he calls unnoticeable precisely because damage is not the limiter, bought back as the Fel
+    Hunter's 24s ranged spell lockout and purge against Axe Toss's 30s non-locking stun.
+    **Supersedes his 2026-08-29 M+ take**; his 08-29 raid take stays live. Note the video's raid
+    half is a per-fight PET list plus a restatement of "demo's been taking over a bit", which is
+    representation and a repeat, so **no raid take was minted from it**.
+  · **VooDooSaurus — Demon Hunter Devourer, `nerf`, bracket both, patchContext leading with
+    "12.1.5 PTR preview — NOT LIVE"** (`qthDWT2G9NM?t=26`). Collapsing Star's quality-of-life work
+    (range gained mid-cast, the 5s dropped-cast lockout gone, the Fury-drain pause capped at ~1.5
+    casts) is a clear win Annihilator gets for free; the Void-Scarred rework nets a Hunt nerf
+    (Demonic Intensity +5-10 points against Violent Transformation losing the reset AND its 25%
+    Hunt damage outright), moves that reset to a Soul Immolation Void-Scarred never casts in Void
+    metamorphosis, and drops out-of-form Intellect 15%→10% for roughly 5% less out-of-meta damage
+    against Collapsing Star gaining 5 points. His verdict: melee Void-Scarred as played is dead
+    while the caster build the changes point at cannot be assembled behind the bottom-of-tree
+    two-point gates, so Annihilator is simply the build.
+    **Deliberately NOT superseding his 2026-08-17 read**, which is a live 12.1 take — a preview of
+    an unreleased patch does not replace a current read of the live spec, and the supersession
+    guardrail says retire only what the new take genuinely replaces.
+- **Lane hygiene (step 4a)**: all three distilled ids were checked against `seen[]`/`skipped[]` and
+  none was present, so nothing had to be dropped; they left `videos[]` in the same edit.
+- **Queued: exactly one** — Nintern `JMVnCyVzlNM`, "GO BACK! | 12.1.5 PTR Devourer Patch Notes"
+  (2026-09-03). He is a registered Devourer/Havoc creator, so this is a second independent read on
+  the same 12.1.5 Devourer section VooDooSaurus covered, which is worth one Supadata request.
+  Queue is now 2 (`1fOYXu1WUEA` retry + this).
+- **Deliberately not queued, and left UNSEEN rather than retired** (these are budget/title
+  dismissals, not durable facts, so the next run reconsiders them): everything from Supatease and
+  Dalaran Gaming, including "The Meta Has Been DECIDED" and "12.1 PVP Tier List Update (Solo
+  Shuffle)" — both are PvP-framed by creator, and PvP reads must never vote in PvE; the YoDaTV /
+  Bansherz / Critcake / Shadarek / Musguete / Clandon key-run and boss-POV uploads; Tactyks'
+  Mythic boss guides and AutomaticJak's Resto Shaman M+ guide (guide-shaped content has yielded
+  zero spec-strength reads across seven verified attempts); the vault / bonus-roll videos; and
+  izen's "12.1.5 Patch | Flex Mythic Boss…", which is a patch-FEATURE reveal rather than the
+  per-spec best-and-most-popular recap shape that his metaNotes come from.
+- **No metaNotes this run** — no general-creator video with a per-spec season/meta read was
+  transcribed.
+- `latest` advanced on leak, Kalamazi and VooDooSaurus to state what was actually distilled, per
+  step 4c; nobody else's was touched.
+
 ## 2026-09-05 (nightly, THIRD run of the day) — 44 channels, 1 transcript distilled, 2 takes, 4 queued
 
 - **Discovery:** all 44 distinct transcribable channels with a channelId polled via the YouTube RSS

@@ -16,6 +16,46 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-05 (nightly, FOURTH run of the day) — official ledger clean and unchanged, no new live 12.1 tuning, 12.1.5 stays notes-only
+
+- **Official revision ledger first, per the 2026-09-05 procedure.** `official-notes/evidence.json`
+  and `pending.json` (checkedAt 2026-09-05T20:06:00Z) both come back `status: success`:
+  live-hotfixes topic 2336376 post 1 at **version 31**, `updatedAt` 2026-09-05T01:21:46Z, 99 class
+  sections; ptr-preview topic 2344395 post 1 at **version 3**, `updatedAt` 2026-09-03T22:48:20Z,
+  3 sections. Every section hash matched its stored counterpart, so every prior resolution carried
+  and **0 sections are unresolved** on either source; `removedSections` empty on both. The reviewed
+  pending ledger was written to `data/official-notes.json` — the only byte that changed is each
+  source's `checkedAt`. `check-official-notes.mjs` passes.
+- **The three 12.1.5 sections stay exactly where they are**: Devourer DH, Marksmanship Hunter and
+  Protection Warrior, each `applied` as a `notes[]` preview summary and nothing else. `PHASES.ptr`
+  untouched (still null), no 12.1.5 line written into `ptr-builds.json`, no `spec.ptr` verdict, no
+  tier set, no rating, no model input, no archived 12.1 PTR metric relabelled.
+- **Wowhead news RSS**: HTTP 200, 193 KB, 40 items parsed per `<item>` block (never by tag
+  adjacency), newest 2026-09-05 18:00 UTC. The only class-relevant item is "September 4th Hotfixes
+  - Ula'tek, Classes, Catalyst" (news 382760, posted 09-04 20:30), which is the round-up already
+  logged as the **2026-09-04** hotfix entry. Everything else is 12.1.5 datamining (loading screen,
+  Cantrip loot, maps, key bindings, mounts, delve achievement, Venomstones, warband reputations),
+  RWF coverage, encounter-only hotfixes ("Phase 2 Nerfed on Mythic Ula'tek", "Heroic Coiled Altar
+  Nerfed"), or non-WoW. **Nothing new to log; the feed's newest entry stays 2026-09-04.**
+- **News INDEX polled as well** (it leads the RSS within a run): `data.news.newsData` page 1, 20
+  posts, top id 382694 at 2026-09-05 13:00 — nothing the RSS did not already carry.
+- **Blue tracker swept** (`data.blueTracker.default`, 50 entries → ~30 unique topics). Newest blue
+  class content is Linxy's "World of Warcraft: Midnight Hotfixes - September 4" (topic 2336376),
+  i.e. the ledger's own live-hotfix source, already applied. "Week 3 of 3: Interrupts and dispels"
+  (2026-09-01) was opened and checked: topic 2343549 is a PLAYER thread whose blue content is a
+  quest-credit bug report about warlock pets — not class tuning, nothing to log. No standalone
+  Kaivax/Linxy tuning post of the "Healer Tuning - July 16" shape exists since the last run.
+- **Dev-notes thread re-polled for completeness**: `2317811.json` HTTP 200, 17 posts, highest post
+  number 19, newest Linxy post **2026-07-31** — dormant exactly as the between-cycles posture
+  predicts, and NOT a lost thread. No 12.2 PTR announcement anywhere in the sweep.
+- **Dormant lanes skipped, not marked unreachable**: the four WCL PTR zone sweeps (54 raid, 52
+  Dummy Dome, 56 M+, 57 Grotto) have no contract rows since the flip. Stored zone-52/54/56 rows
+  are the closed cycle's final receipts and were not touched, refreshed, or reinterpreted.
+- **Writeup coverage**: one spec still at `ptr: null`, Demonology Warlock, and that null is
+  deliberate (the source reported no changes). No tier-set-touching highlight landed, so the
+  tier-set upkeep gate had nothing to pair and no `tierSet.asOf` needed bumping — and therefore no
+  gearing mirror resync was required this run.
+
 ## 2026-09-05 — Historical reconciliation and current tooltip corrections
 
 - Fresh official compilation and scheduled announcements confirm all59 historical post-launch PvE sections already represented, including16 set-related sections. Replaced baseline exclusions with specific reason-only reconciliation notes; no duplicate tuning, changed dispositions or invented effective dates.

@@ -16,6 +16,72 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-05 (nightly, FOURTH run of the day) — every family verified, nothing moved; SimC date basis pinned to the report's own Last-Modified; Archon walled night 15
+
+- **Murlok + Mythicstats — via the trusted pre-agent collector only.** `metrics-fetch/evidence.json`
+  (checkedAt 2026-09-05T20:05:56Z) records Murlok's three meta pages at HTTP 200 first attempt
+  (71/42/41 KB) with `sourceDate` **2026-09-02** off the page's own `<time datetime>`
+  (`dateBasis: source-time-datetime`), 40 rows, 27/7/6 by role, no omissions; and Mythicstats
+  `/period/latest` → **period 1079** at HTTP 200, 206 KB, 39 rows, `Mage|Fire` the single omitted
+  spec, role subtotals Ranged 30.7 / Melee 29.2 / Tank 20 / Healer 20 summing to 99.9 (the
+  representation SHARE column, not the `/meta` per-key-presence one), `sourceAsOf: null` with
+  `dateBasis: observed-undated-source`. Merged `metrics-fetch/updates.json` verbatim through
+  `apply-metrics` — 79 rows, **0 values moved, 0 dates moved, 0 new**. No second parser was
+  written on either host. `check-stable-metrics` clean.
+- **Bloodmallet — fetched fresh, byte-identical.** All 27 DPS specs requested at
+  `talent_target_scaling/castingpatchwerk`, up to 3 attempts each: 23 real charts, and the same
+  four returned the 76-byte `{"status": "error"}` body on 3/3 — **Balance Druid, Feral Druid,
+  Augmentation Evoker, Devastation Evoker**, the persistent set the 09-03 MID2 adoption already
+  dropped. Every chart carried `simc_settings.tier = MID2` (read off the chart, never assumed)
+  and `ptr` the STRING `"0"`; per-chart `metadata.timestamp` dates all **2026-09-05**, SimC build
+  `aa9de89`. Targets taken from `data["MID2"][<count>]`, which is already best-build. All 23
+  profiles identical to stored in value, tier AND date; the merge landed a no-op. Pool stays
+  tier-uniform at 23.
+- **SimulationCraft — fetched fresh, byte-identical, and the date basis is now written down.**
+  `MID2_Raid.txt` HTTP 200, 1.36 MB, and it HAS a `DPS Ranking:` block so the `.html` fallback was
+  not needed. Header build string (not the visible Highcharts version):
+  `SimulationCraft 1210-01 for World of Warcraft 12.1.0.69587 Live (hotfix 2026-09-04/69587, git
+  build HEAD aa9de89aac, no-networking)` — the HEAD hash is unchanged from the previous two runs,
+  which is the honest explanation for an unchanged parse rather than a fresh sim. 44 ranking lines
+  = the `Raid` aggregate (skipped) + 43 profiles; longest-prefix mapping with a hyphen allowed
+  resolves 23 of 27 DPS specs (same four absent as Bloodmallet), the 20 unpicked names being tank
+  profiles and lesser hero variants. **Date basis, worth pinning:** the header's `hotfix
+  2026-09-04` is the GAME build, not the report's date — the file's own `Last-Modified` is
+  **Sat, 05 Sep 2026 07:28:33 GMT**, i.e. the report was regenerated today, which is why the
+  stored coverage date is 2026-09-05 and why stamping the hotfix date would have REGRESSED 23 rows
+  by a day for no reason. Merged at 2026-09-05; confirmed no-op.
+- **WoWMeta — fetched and diffed, nothing to merge; OWNER-ACCEPTED STANDING RED continues.** Two
+  plain curl calls, no headers/proxy/auth: `manifest.json` HTTP 200 (`snapshotDate` **2026-09-01**,
+  `completedAt` 2026-09-01T22:25:20Z) and `rankings/midnight/mplus/all/0.json` HTTP 200, 162 KB,
+  **Last-Modified Tue, 01 Sep 2026 22:23:28 GMT** — the two agree, so upstream is frozen rather
+  than our fetch. 44 blocks; whitelisting `categoryType ∈ {dps,hps,tank}` + `sortField ===
+  "lowerBound"` + `keyRange === undefined` gives 27+7+6 = 40 rows, all 40 identical to stored in
+  value, `n` and date. `asOf` stays the source's own 2026-09-01, four days behind the run, so the
+  row is **partial** by the success rule; the real alarm is `maxAgeDays: 8`, still unbreached.
+- **Archon — all six numeric requirements unreachable, night 15.** Same wall as the tier lanes:
+  11/11 URLs HTTP 403, Cloudflare `challenge-platform`, `__NEXT_DATA__` count 0; the pre-agent
+  `source-health` receipt independently shows the 403 and the HTTP-**200** human-verification
+  shapes on the two ordinary routes. Nothing parsed, nothing backfilled from Warcraft Logs, every
+  archon `asOf` left standing (Mythic DPS/HPS/M+ score/Popularity 2026-08-25, Heroic DPS/HPS
+  2026-08-24). Rows still emitted separately per the split-row rule so no single failure hides
+  another. Per-boss survivability remains the measured dead end — not re-run.
+- **Warcraft Logs — read from the pre-agent artifacts ONLY; no warcraftlogs.com request of any
+  kind was made from this session.** `wcl-fetch/evidence.json` attemptedAt 2026-09-05T20:03:51Z,
+  verdict `partial`: `wcl-leaderboard-raid` **success**, 207 rows (zone 53, partition 1, difficulty
+  5, size 20, minRows 200; 207 successful cuts + 113 sparse); `wcl-leaderboard-mplus` **partial**,
+  319 rows (zone 55, partition 1, difficulty 10, size 5, rankingBracket **9** = key +10,
+  `discoveryVerified: true`, minRows 280) with exactly one failed cut — Elemental Shaman on
+  encounter 12859, status `invalid`, "Ranking run timestamp is in the future". Legacy
+  `wcl-live-raid`/`wcl-live-mplus` remain `unreachable`: no verified sanctioned aggregate endpoint
+  exists, the new per-encounter top-100-entry medians are a different quantity, and `rdps` being
+  FFXIV-only is not a WoW outage. Closed PTR zone-52/54/56 rows untouched.
+  `check-wcl-metrics.mjs` clean, including against the manifest.
+- **Robydoby not refreshed** — it is the closed 12.1 PTR zone-54 curation lane, outside the refresh
+  contract by design, and the PTR cycle has been shut since 2026-08-18. Stored rows are receipts.
+- Stored precision re-checked per series before every diff (integers for SimC/WCL, 1 dp for
+  wowmeta's `lowerBound` and Archon popularity, rounded target counts for bloodmallet) so nothing
+  reported phantom movement.
+
 ## 2026-09-05 — Supported WCL leaderboard collection (reviewed local implementation)
 
 - Corrected the unsupported-rdps diagnosis: official schema identifies that enum as FFXIV-only; WoW dps/hps work with existing credentials.
