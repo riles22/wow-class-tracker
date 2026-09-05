@@ -278,8 +278,10 @@ jobs:
             UTC run date, a current full UTC startedAt instant, a <=180-character summary, and
             exactly one source row per requirement key, each with previousAsOf/newAsOf (the
             stored dates before/after this run — copy them from the actual data files, never
-            fabricate) and an honest result: "success" ONLY when the source's stored dates
-            actually advanced this run; anything less is partial/unreachable/blocked/
+            fabricate) and an honest result: "success" ONLY when this run verified the
+            source and its stored coverage date is no more than one day old, matching
+            checkManifest. A same-day recheck may confirm unchanged fresh data; it must
+            not advance a source-owned date. Failed or stale verification is partial/unreachable/blocked/
             parse_error WITH the reason; "skipped" without a detail fails the publish. NEVER
             write an "anomalyAck" field — the gate rejects any manifest carrying it. If a mass
             tier shift looks like a REAL Blizzard retune (not a parse artifact), set
@@ -341,7 +343,7 @@ jobs:
             exit 1
           fi
           node src/check-refresh.mjs --manifest
-          node src/check-stable-metrics.mjs
+          node src/check-stable-metrics.mjs --manifest data/run-manifest.json
           node src/check-official-notes.mjs
 
       - name: Recovery pass for incomplete refresh
@@ -442,7 +444,7 @@ jobs:
           npm test
           npm run build
           node src/check-refresh.mjs --manifest
-          node src/check-stable-metrics.mjs
+          node src/check-stable-metrics.mjs --manifest data/run-manifest.json
           node src/check-official-notes.mjs
           # WCL credential/config rot is invisible to the agents (they never hold the
           # secrets) — surface it deterministically as a red refresh job.
@@ -731,7 +733,7 @@ jobs:
 
       - name: Verify collected metrics and complete official note intake
         run: |
-          node src/check-stable-metrics.mjs
+          node src/check-stable-metrics.mjs --manifest data/run-manifest.json
           node src/check-official-notes.mjs
 
       - name: "Gate 2: build"

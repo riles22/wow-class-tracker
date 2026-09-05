@@ -1580,8 +1580,10 @@ ui("official previews keep their attribution and not-live label in mobile spec d
     const index = payload().specs.findIndex(s => s.class === cls && s.spec === spec);
     const row = page.locator(`.row[data-idx="${index}"]`);
     const fold = row.locator('details.dfold').filter({ has: page.locator('.preview-notes') });
-    assert.match(await fold.locator('summary').innerText(), /PTR preview.*not live/is);
+    // Clicking waits for scrolling/rendering of this initially offscreen lazy row.
+    // Reading innerText first can observe an unrendered content-visibility subtree.
     await fold.locator('summary').click();
+    assert.match(await fold.locator('summary').innerText(), /PTR preview.*not live/is);
     const preview = row.locator('.preview-notes');
     assert.ok(await preview.isVisible(), `${note.specKey} has a visible preview`);
     const text = await preview.innerText();

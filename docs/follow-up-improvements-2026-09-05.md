@@ -30,7 +30,11 @@ actual source date remains September 2 despite its relative update label.
 
 The nightly saves receipts before the agent and downloads the separate trusted
 artifact after agent output in the publisher. `check-stable-metrics.mjs` verifies
-the baseline, digest, exact values/dates and failed-source preservation. The reviewed
+the baseline, digest, exact values/dates and failed-source preservation. Nightly
+manifest claims are also bound to the receipt: a failed collection cannot claim
+success merely because retained observations are recent. Same-day successful
+rechecks can confirm fresh unchanged data without inventing later source dates.
+The reviewed
 Mythicstats registry correction changes its documented transport and public source
 link; it is an owner-reviewed registry edit, not permission for collectors to alter
 registry structure.
@@ -68,7 +72,7 @@ remain outside the publishing path, and no dependency was added to the project.
 
 ## Remaining upstream limits
 
-Validation before publication: 489 tests, 488 passed and one expected seasonal
+Validation before publication: 490 tests, 489 passed and one expected seasonal
 skip; the UI invariants ran. All three browser engines also passed their initial
 32-check suites. The new phone-preview and hostile-content checks pass, including
 preview prose escaping. Workflow YAML parses, the production build and instruction

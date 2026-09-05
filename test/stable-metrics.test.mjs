@@ -179,6 +179,20 @@ test("trusted checker rejects stale/future evidence, tuple/digest tampering and 
   assert.match(verify(result, { current: unlanded }).join(), /canonical data differs/);
 });
 
+test("optional manifest cannot claim success for failed collection even while stored rows are fresh", async () => {
+  const result = await collect({ fetchImpl: async url => url.includes("mythicstats") ? new Response("blocked", { status: 403 }) : fakeFetch(url) });
+  assert.equal(result.evidence.sources.mythicstats.status, "unreachable");
+  assert.ok(roster.some(s => s.metrics.some(m => m.source === "mythicstats" && m.asOf === "2026-09-05")));
+  assert.deepEqual(verify(result), []); // Partial local runs intentionally omit the old manifest.
+  const manifest = { sources: [{ source: "murlok", result: "partial" }, { source: "mythicstats", result: "success" }] };
+  assert.match(verify(result, { manifest }).join(), /mythicstats: manifest claims success.*unreachable/);
+  manifest.sources[1].result = "unreachable";
+  assert.deepEqual(verify(result, { manifest }), []); // Successful Murlok parse still permits stale/partial.
+  assert.match(verify(result, { manifest: { sources: manifest.sources.slice(0, 1) } }).join(), /exactly one/);
+  assert.match(verify(result, { manifest: { sources: [...manifest.sources, manifest.sources[0]] } }).join(), /exactly one/);
+  assert.match(verify(result, { manifest: null }).join(), /must contain source rows/);
+});
+
 test("trusted checker will not accept redated source-owned values, redated unchanged values, or role forgery", async () => {
   const result = await collect();
   const redated = structuredClone(result);

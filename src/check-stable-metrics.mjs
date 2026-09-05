@@ -17,7 +17,7 @@ const sorted = rows => rows.toSorted((a, b) => tuple(a).localeCompare(tuple(b)))
 const date = value => typeof value === "string" && /^\d{4}-\d{2}-\d{2}T/.test(value) && Number.isFinite(Date.parse(value));
 
 export function checkStableMetrics({ baseline, current, evidence, updates, sourcePagesBefore = null, sourcePagesAfter = null,
-  now = new Date(), liveSeason = PHASES.liveSeason, maxAgeHours = 24 }) {
+  manifest, now = new Date(), liveSeason = PHASES.liveSeason, maxAgeHours = 24 }) {
   const errors = [];
   try {
     validateRoster(baseline); validateRoster(current);
@@ -26,6 +26,7 @@ export function checkStableMetrics({ baseline, current, evidence, updates, sourc
     if (!updates || Object.keys(updates).join() !== "metrics" || !Array.isArray(updates.metrics)
       || updates.metrics.length > 80 || !hash(evidence.updatesSha256) || digest(updates) !== evidence.updatesSha256) throw new Error("Stable-metric updates do not match their trusted receipt");
     if (!evidence.sources || !isDeepStrictEqual(Object.keys(evidence.sources).sort(), Object.keys(STABLE_SERIES).sort())) throw new Error("Stable-metric receipt must include both providers");
+    if (manifest !== undefined && (!manifest || !Array.isArray(manifest.sources))) throw new Error("Stable-metric manifest must contain source rows");
     const byKey = new Map(baseline.map(s => [metricKey(s), s])), seen = new Set();
     for (const row of updates.metrics) {
       const series = STABLE_SERIES[row?.source];
@@ -42,6 +43,13 @@ export function checkStableMetrics({ baseline, current, evidence, updates, sourc
       const before = storedSeries(baseline, source), after = storedSeries(current, source);
       if (!receipt || !["success", "partial", "pending", "invalid", "unreachable"].includes(receipt.status)
         || !hash(receipt.baselineSha256) || digest(before) !== receipt.baselineSha256) throw new Error(`${source}: receipt baseline does not match trusted Git data`);
+      if (manifest !== undefined) {
+        const manifestRows = manifest.sources.filter(row => row?.source === source);
+        if (manifestRows.length !== 1) throw new Error(`${source}: manifest must contain exactly one matching source row`);
+        // Stored data can still satisfy the age gate after today's request failed.
+        // Only this run's trusted collector can establish a successful observation.
+        if (manifestRows[0].result === "success" && receipt.status !== "success") throw new Error(`${source}: manifest claims success but trusted collection is ${receipt.status}`);
+      }
       if (!Array.isArray(receipt.pages) || receipt.pages.length < 1 || receipt.pages.length > allowedPages.length) throw new Error(`${source}: invalid receipt pages`);
       for (const [i, page] of receipt.pages.entries()) {
         const requested = allowedPages[i], finalUrl = new URL(page.finalUrl);
@@ -121,22 +129,24 @@ export function checkStableMetrics({ baseline, current, evidence, updates, sourc
   return errors;
 }
 
-export async function runStableMetricCheck({ root = ROOT, evidenceDir = path.join(root, "metrics-fetch"), base = "HEAD", now } = {}) {
+export async function runStableMetricCheck({ root = ROOT, evidenceDir = path.join(root, "metrics-fetch"), base = "HEAD", manifestPath, now } = {}) {
   if (base !== "HEAD" && !/^[a-f0-9]{40}$/.test(base)) throw new Error("--base must be HEAD or an exact 40-character commit SHA");
   const commit = execFileSync("git", ["rev-parse", "--verify", `${base}^{commit}`], { cwd: root, encoding: "utf8", windowsHide: true }).trim();
   const gitJson = file => JSON.parse(execFileSync("git", ["show", `${commit}:${file}`], { cwd: root, encoding: "utf8", maxBuffer: 20 * 1024 * 1024, windowsHide: true }));
   const readJson = async file => JSON.parse(await readFile(file, "utf8"));
   return checkStableMetrics({ baseline: gitJson("data/specs.json"), current: await readJson(path.join(root, "data/specs.json")),
     sourcePagesBefore: gitJson("data/sources.json"), sourcePagesAfter: await readJson(path.join(root, "data/sources.json")),
-    evidence: await readJson(path.join(evidenceDir, "evidence.json")), updates: await readJson(path.join(evidenceDir, "updates.json")), ...(now ? { now } : {}) });
+    evidence: await readJson(path.join(evidenceDir, "evidence.json")), updates: await readJson(path.join(evidenceDir, "updates.json")),
+    ...(manifestPath !== undefined ? { manifest: await readJson(path.resolve(root, manifestPath)) } : {}), ...(now ? { now } : {}) });
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   try {
     const args = process.argv.slice(2), options = {};
+    const optionNames = { "--base": "base", "--evidence-dir": "evidenceDir", "--manifest": "manifestPath" };
     for (let i = 0; i < args.length; i += 2) {
-      if (!args[i + 1] || !["--base", "--evidence-dir"].includes(args[i])) throw new Error("Usage: node src/check-stable-metrics.mjs [--base HEAD|<sha>] [--evidence-dir <directory>]");
-      options[args[i] === "--base" ? "base" : "evidenceDir"] = args[i + 1];
+      if (!args[i + 1] || !Object.hasOwn(optionNames, args[i])) throw new Error("Usage: node src/check-stable-metrics.mjs [--base HEAD|<sha>] [--evidence-dir <directory>] [--manifest <path>]");
+      options[optionNames[args[i]]] = args[i + 1];
     }
     const errors = await runStableMetricCheck(options);
     if (errors.length) throw new Error(errors.join("\n"));
