@@ -1585,7 +1585,18 @@ ui("official previews keep their attribution and not-live label in mobile spec d
     await fold.locator('summary').click();
     assert.match(await fold.locator('summary').innerText(), /PTR preview.*not live/is);
     const preview = row.locator('.preview-notes');
-    await preview.waitFor({ state: 'visible' });
+    try {
+      await preview.waitFor({ state: 'visible', timeout: 5000 });
+    } catch (error) {
+      console.error('Preview disclosure state', await preview.evaluate(el => {
+        const state = e => ({ tag: e.tagName, cls: e.className, open: e.open, inert: e.inert,
+          display: getComputedStyle(e).display, visibility: getComputedStyle(e).visibility,
+          contentVisibility: getComputedStyle(e).contentVisibility, rect: e.getBoundingClientRect().toJSON() });
+        const parents = []; for (let e = el; e && parents.length < 8; e = e.parentElement) parents.push(state(e));
+        return { parents, scrollY, viewport: innerHeight };
+      }));
+      throw error;
+    }
     assert.ok(await preview.isVisible(), `${note.specKey} has a visible preview`);
     const text = await preview.innerText();
     assert.ok(text.includes(note.summary) && text.includes(note.date));
