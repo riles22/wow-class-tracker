@@ -615,6 +615,12 @@ try {
   .row{border-bottom:1px solid var(--hair); transition:background .12s;
        font-family:var(--mono); font-size:12px;
        content-visibility:auto; contain-intrinsic-size:auto 22px}
+  /* Phone rows must keep their real layout during pointer activation. WebKit moved
+     a different row beneath pointerup after lazy content reflowed on pointerdown,
+     losing the click (5/5 reproductions; forcing only open rows visible did not help).
+     Rendering this bounded 40-row phone list fixes the hit target; desktop retains
+     the measured content-visibility optimization above. */
+  @media(max-width:759px){ .row{content-visibility:visible} }
   .row:last-child{border-bottom:0}
   .row.clickable{cursor:pointer}
   .row.clickable:hover{background:var(--bg-3)}

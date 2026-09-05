@@ -70,11 +70,21 @@ content type and exact matching bytes, with bounded timeout/size/propagation ret
 The Pages workflow's existing concurrency lock includes verification. Browsers
 remain outside the publishing path, and no dependency was added to the project.
 
+The expanded browser checks exposed a real phone interaction defect: WebKit could
+deliver pointerdown to Marksmanship and pointerup at the same coordinates to a
+different row after lazy layout shifted the list. The click then reached the matrix
+instead of opening the intended drawer. In five repeated runs, normal lazy rows
+failed 5/5; making only open rows visible also failed 5/5; keeping all phone rows
+laid out passed 5/5. Mobile rows now use `content-visibility: visible`, while desktop
+retains `auto`. The full-roster preview test uses actual pointer clicks and verifies
+the resulting drawer content. The scoped change also passed direct Firefox and
+WebKit checks at both 390px and 1440px.
+
 ## Remaining upstream limits
 
 Validation before publication: 490 tests, 489 passed and one expected seasonal
-skip; the UI invariants ran. All three browser engines also passed their initial
-32-check suites. The new phone-preview and hostile-content checks pass, including
+skip; the UI invariants ran. All three browser engines passed their complete
+33-check suites (99/99). The new phone-preview and hostile-content checks pass, including
 preview prose escaping. Workflow YAML parses, the production build and instruction
 drift check pass, and independent reviews verified both collection boundaries.
 The official-note gate passes with zero unresolved sections.

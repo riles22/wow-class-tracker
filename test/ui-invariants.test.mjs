@@ -1578,27 +1578,21 @@ ui("official previews keep their attribution and not-live label in mobile spec d
     const [cls, spec] = note.specKey.split('|');
     const index = payload().specs.findIndex(s => s.class === cls && s.spec === spec);
     const row = page.locator(`.row[data-idx="${index}"]`);
-    // Follow the real pointer route. openRowFor starts smooth scrolling, which can
-    // move the header under a following click before Firefox settles the scroll.
+    // Use the full roster and leave earlier drawers open: their layout must not
+    // move a later spec's hit target between pointer-down and pointer-up.
+    await row.locator('.spec-txt').scrollIntoViewIfNeeded();
     await row.locator('.spec-txt').click();
+    await page.waitForFunction(index => {
+      const row = document.querySelector(`.row[data-idx="${index}"]`);
+      return row?.classList.contains('open') && !row.classList.contains('motion-enter')
+        && row.querySelector('.drawer').style.maxHeight === 'none';
+    }, index, { timeout: 5000 });
     const fold = row.locator('details.dfold').filter({ has: page.locator('.preview-notes') });
-    // Clicking waits for scrolling/rendering of this initially offscreen lazy row.
-    // Reading innerText first can observe an unrendered content-visibility subtree.
+    await fold.locator('summary').scrollIntoViewIfNeeded();
     await fold.locator('summary').click();
     assert.match(await fold.locator('summary').innerText(), /PTR preview.*not live/is);
     const preview = row.locator('.preview-notes');
-    try {
-      await preview.waitFor({ state: 'visible', timeout: 5000 });
-    } catch (error) {
-      console.error('Preview disclosure state', await preview.evaluate(el => {
-        const state = e => ({ tag: e.tagName, cls: e.className, open: e.open, inert: e.inert,
-          display: getComputedStyle(e).display, visibility: getComputedStyle(e).visibility,
-          contentVisibility: getComputedStyle(e).contentVisibility, rect: e.getBoundingClientRect().toJSON() });
-        const parents = []; for (let e = el; e && parents.length < 8; e = e.parentElement) parents.push(state(e));
-        return { parents, scrollY, viewport: innerHeight };
-      }));
-      throw error;
-    }
+    await preview.waitFor({ state: 'visible', timeout: 5000 });
     assert.ok(await preview.isVisible(), `${note.specKey} has a visible preview`);
     const text = await preview.innerText();
     assert.ok(text.includes(note.summary) && text.includes(note.date));
