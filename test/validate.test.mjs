@@ -411,7 +411,7 @@ test("tier-set mirror gate: gearing's copy must match the tracker's, and skips c
   assert.ok(errors.some(e => e.includes("Restoration Druid tierSet.set4") && e.includes("gearing/data/specs.json")));
   assert.ok(errors.some(e => e.includes("Restoration Druid tierSet.asOf")));
   // The message must name the fix — this gate fires on a human, not on the nightly.
-  assert.ok(errors.some(e => e.includes("sync-tracker-fields.mjs")));
+  assert.ok(errors.some(e => e.includes("harvest-specs.mjs")));
 
   // A repo without the subproject is not an error, and neither is gearing lagging the roster.
   assert.deepEqual(

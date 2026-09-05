@@ -1,5 +1,7 @@
 # Audit fixes and owner decisions — 2026-09-05
 
+> Historical handoff, superseded later on September 5: Riley approved all recommendations and publication. The fixes below are committed, repository protections are enabled, and fresh gearing data has been fetched. See [the refresh recovery and release report](refresh-recovery-2026-09-05.md) for the current state, validation, and remaining upstream failures. The original findings and decision rationale are retained below.
+
 Twelve of the thirteen findings in [the September 4 audit](audit-2026-09-04.md) have code fixes prepared locally. F9 is a source-policy decision and remains unchanged. The fixes are on `codex/audit-fixes-2026-09-04`, based on `4d1bde6e7f62b344928c4854dac155c779f3fa30`. They have not been committed, pushed, or deployed; the public nightly vulnerability remains until the workflow patch reaches master.
 
 No game/source data, stored forecast, history snapshot, model weight, source membership, or dependency changed. Every existing field in the generated tracker payload was compared with HEAD and is identical; only `meta.forecastReport` was added.

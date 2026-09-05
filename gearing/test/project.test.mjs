@@ -10,6 +10,7 @@ import { dungeonLootIdsFrom, parseItem, parsedItemIssues, raidBossLootIdsFrom } 
 import { extractPriority } from "../src/lib-icy-veins.mjs";
 import { validateData } from "../src/validate-data.mjs";
 import { buildGuidePayload } from "../src/lib-guides.mjs";
+import { buildSpecSync, loadSpecSyncInputs } from "../src/harvest-specs.mjs";
 
 const fromRoot = (path) => new URL(`../${path}`, import.meta.url);
 const rootPath = fileURLToPath(new URL("..", import.meta.url));
@@ -575,6 +576,14 @@ test("client app: consensus-first ranking, source-labeled Builds, custom overrid
   assert.match(incompleteGuideClient.document.ids.get("foot").innerHTML,
     /Icy Veins \(verification incomplete\)/);
   assert.doesNotMatch(incompleteGuideClient.document.ids.get("foot").innerHTML, /\(harvested \)/);
+  const syncedData = clone(data);
+  syncedData.specs = buildSpecSync(await loadSpecSyncInputs(), { checkedAt: "2026-09-05" });
+  const syncedFooter = startClient(syncedData).document.ids.get("foot").innerHTML;
+  assert.match(syncedFooter, /Spec capabilities: local inputs checked 2026-09-05/);
+  assert.match(syncedFooter, /not a new external verification/);
+  assert.match(syncedFooter, new RegExp('Legacy stat fallback: patch 12\\.0\\.7, reviewed '
+    + syncedData.specs.legacyPriority.reviewedAt));
+  assert.doesNotMatch(syncedFooter, /Spec data:.*harvested 2026-09-05/);
   const specSelect = document.ids.get("spec");
   const scoringMode = document.ids.get("scoring-mode");
   const profileSelect = document.ids.get("profile");

@@ -1539,3 +1539,20 @@ ui("a settled forecast report is reachable and separate from today's comparison"
   assert.match(text, /carry.forward/i);
   assert.equal(await page.locator('script').count(), 0);
 });
+
+ui("retained rating disclosure names actual older contributors without changing consensus", async page => {
+  const expected = await page.evaluate(()=>{
+    const ids = new Set(SPECS.flatMap(s=>['raid','mplus'].flatMap(b=>
+      (s.consensus?.[b]?.perSource ?? []).filter(p=>p.lane !== 'frozen').map(p=>p.source))));
+    return SOURCES.filter(s=>s.kind==='tier-list' && ids.has(s.id)).map(s=>({name:s.name,
+      date:s.pages.filter(p=>!p.ancillary && p.seasonVerified===PHASE.liveSeason).map(p=>p.snapshot).filter(Boolean).sort()[0]
+    })).filter(s=>s.date && s.date<META.latestSnapshot);
+  });
+  assert.equal(await page.locator('#retained-ratings').isVisible(), expected.length>0);
+  if(expected.length){
+    const text = await page.locator('#retained-ratings').innerText();
+    for(const s of expected) assert.ok(text.includes(`${s.name} last verified ${s.date}`));
+    assert.match(text,/still contribute to consensus/);
+    assert.match(text,/Freshness alerts remain active/);
+  }
+});

@@ -17,7 +17,9 @@ async function fixture(t) {
   const guide = await json("data/guides/icyveins.json");
   guide.specs = Object.fromEntries(specs.map(s => {
     const key = `${s.spec} ${s.class}`;
-    return [key, guide.specs[key]];
+    const record = structuredClone(guide.specs[key]);
+    delete record.verifiedAt; // This fixture deliberately represents a pre-receipt source.
+    return [key, record];
   }));
   guide.harvestedAt = "2026-08-01";
   guide.coverage = { specsHarvested: 2, specsAbsent: [] };
@@ -155,4 +157,19 @@ test("fetch transports distinguish origin 404 from HTTP errors and timeouts", as
     assert.match(await fetcher(`${base}/ok`, opts), /^guide body/);
     await assert.rejects(fetcher(`${base}/slow`, { ...opts, timeoutMs: fetcher === fetchText ? 20 : 0.02 }), /fetch failed/);
   }
+});
+
+test("repeated transport refusals stop early and never replace the published guide", async t => {
+  const f = await fixture(t);
+  await writeFile(join(f.root,"tracker.json"), JSON.stringify([...f.specs,
+    {spec:"Arcane",class:"Mage"},{spec:"Fire",class:"Mage"}]));
+  let calls = 0;
+  await assert.rejects(f.run({ args:["--force"], harvestSpec: async()=>{
+    calls++; throw new Error("HTTP 429 Too Many Requests");
+  } }), /stopped after three consecutive transport failures/);
+  assert.equal(calls,3);
+  assert.equal(await readFile(f.path,"utf8"),f.bytes);
+  const staging = JSON.parse(await readFile(join(f.root,".guide-work","icyveins.json"),"utf8"));
+  assert.equal(Object.keys(staging.failures).length,3);
+  assert.deepEqual(staging.verified,{});
 });

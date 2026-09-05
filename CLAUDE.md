@@ -744,10 +744,12 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   its OWN copy of `set2/set4/asOf` and renders it as fact, and nothing compared the two, so they
   drifted **five times** — most recently publishing "Genesis duration increased by 4 seconds" on
   one page of the site while the other said 8. The daily `--age` heartbeat was the sole detector
-  and the nightly *structurally cannot* clear it (publish stages `data/`, `dist/` and skill logs,
-  never `gearing/`), so every occurrence waited for a human local run. `validateData` now compares
-  `gearing/data/specs.json` against `data/specs.json` and names the fix
-  (`node gearing/src/sync-tracker-fields.mjs && npm run gearing:build`). This is the root validator
+  and the nightly originally could not clear it, so every occurrence waited for a human local
+  run. `validateData` now compares
+  `gearing/data/specs.json` against `data/specs.json`. Resynchronize with
+  `node gearing/src/harvest-specs.mjs && node gearing/src/harvest-specs.mjs --check && npm run gearing:build`.
+  **Since 2026-09-05 the trusted nightly publish stage runs that local synchronization before
+  Gate 1**, then explicitly stages the gearing data and artifact. This is the root validator
   reaching INTO `gearing/`, which it otherwise never does — read-only, one-directional, an absent
   subproject skips, and only specs present in BOTH are compared so a lagging roster is not an
   error. Consequence to know: **bumping a tracker `tierSet` now requires syncing the mirror in the
@@ -1264,16 +1266,21 @@ gearing/  the Season 2 gear & loot explorer — a SELF-CONTAINED subproject (own
           harvesters, validator, tests, build → gearing/wow-s2-gearing.html; see
           gearing/README.md). Imported 2026-08-04 from the standalone project; audited
           in docs/s2-transition-scope.md (Decision 4). The tracker build copies its
-          artifact to dist/gearing.html (copy-if-present) and the CTA row links to it.
-          Harvests are MANUAL (Wowhead unreachable from CI) — data freshness is a
-          local-run duty. Its tests run under the root `npm test` (node --test discovers
-          them). Read-only coupling: its harvest-specs reads the tracker's specs.json;
-          nothing in gearing/ writes outside gearing/, and the nightly never touches it.
+          artifact to dist/gearing.html (copy-if-present); the shared site tabs link to it.
+          Since 2026-09-05, gearing-refresh.yml refreshes Icy Veins, Wowhead and Method
+          guides weekly (Tuesday 08:37 UTC) and on manual dispatch. Loot/rule-source
+          harvests remain manual. Its tests run under the root `npm test` (node --test
+          discovers them). Read-only input coupling: harvest-specs derives capabilities
+          from the tracker and reviewed local armor, weapon and fallback inputs; nothing
+          in gearing/ writes outside gearing/. Nightly publish synchronizes and rebuilds
+          the gearing mirror. structuralSync.checkedAt records local consistency only;
+          source evidence dates and the historical 12.0.7 fallback review date stay intact.
 legacy/   original single-file tracker (pre-conversion reference)
 .github/  workflows/deploy.yml (build+deploy Pages on push) · workflows/ci.yml (tests on
           every push) · workflows/freshness.yml (daily staleness heartbeat → alert issue) ·
           workflows/nightly.yml + workflows/dispatch-nightly.yml (the refresh + its
-          auto-kick) · workflows/wcl-probe.yml (dispatch-only WCL/diagnostic probe) ·
+          auto-kick) · workflows/gearing-refresh.yml (weekly verified guide refresh) ·
+          workflows/wcl-probe.yml (dispatch-only WCL/diagnostic probe) ·
           dependabot.yml (weekly grouped action-SHA + pip bumps; requirements.txt pins
           yt-dlp) · CODEOWNERS (declares the human-owned boundary: workflows, gate
           contract, scales, registries, gatekeeper code)
@@ -1296,13 +1303,18 @@ isolated stages since the 2026-07-14 security audit (tightened by the same-day
 re-audit). First a **deterministic WCL fetch step** — the ONLY process holding
 `WCL_CLIENT_ID`/`WCL_CLIENT_SECRET` (step-scoped env) — runs `src/fetch-wcl.mjs` and
 writes `wcl-fetch/evidence.json`, uploaded as its own artifact before the agent
-starts. A second deterministic stage (`src/fetch-transcripts.mjs`, step-scoped
+starts. Since 2026-09-05, `src/fetch-source-health.mjs` also probes the two ordinary
+public Archon DPS routes and writes `source-health/evidence.json` (separate artifact).
+The prompts read this availability evidence before attempting the normal refresh;
+a reachable payload still needs normal season, coverage and source-date checks, and
+a blocked page never advances a stored data date. The transcript stage
+(`src/fetch-transcripts.mjs`, step-scoped
 OPTIONAL `TRANSCRIPT_API_KEY`) drains the agent-maintained
 `data/pending-transcripts.json` queue through the Supadata captions API
 (`mode=native` — YouTube's own auto-captions; offsets in ms) into
 `transcript-fetch/` for the agents to distill; a missing key is a clean
 "no-credentials" skip (datacenter IPs can't reach YouTube directly — 2026-07
-bot-wall, android-client workaround failed 2026-07-17). A third deterministic stage
+bot-wall, android-client workaround failed 2026-07-17). The published-date stage
 (`src/fetch-published.mjs`, no credentials) records what each published-bearing
 registry page says about its own update date into `published-evidence/evidence.json`
 (artifact, pre-agent) — the publish gate cross-checks stored `published` values
@@ -1329,7 +1341,12 @@ change to **`nightly.yml` or `dispatch-nightly.yml` specifically** lands on mast
 trigger it), via `gh workflow run` as github-actions[bot] —
 `allowed_bots` on the agent steps permits that actor.) A `workflow_dispatch` input
 `agent_model` overrides both agents' model for a single run (default
-`claude-opus-5`) — one-off model trials without editing the workflow. Publish (deterministic, no AI, holds the write token) gates on a
+`claude-opus-5`) — one-off model trials without editing the workflow. Publish (deterministic,
+no AI, holds the write token) first runs `src/check-refresh-base.mjs` against the immutable
+workflow `${{ github.sha }}` BEFORE downloading refresh output. It requires that base to
+be an ancestor of current master and rejects newer `data/` or skill-log edits, so an older
+artifact cannot overwrite them; code-only advances may proceed through the full rebuild.
+It then gates on a
 boundary guard ("Gate 0", 2026-07-18 portfolio audit: the artifact may not alter the
 gate contract `required-sources.json`, `scales.json`, or registry structure in
 `sources.json`/`community.json` beyond their agent-updatable fields — those fail the
@@ -1339,16 +1356,16 @@ baselines always come from committed history) → **`node src/freeze-season.mjs`
 deterministic season freeze: any outlet whose pages flipped season tonight has its final
 live-season letters lifted from git history, so the consensus keeps its composition
 instead of publishing a recomposition as spec movement — needs publish's `fetch-depth: 0`,
-which is why it cannot run agent-side) → `npm test` →
+which is why it cannot run agent-side) → deterministic gearing capability sync,
+`harvest-specs.mjs --check` and `npm run gearing:build` → `npm test` →
 `npm run build` → `node src/check-refresh.mjs --manifest` (which cross-checks WCL rows
 against the pre-agent evidence artifact and takes its anomaly ack ONLY from the
 human `anomaly_ack` workflow input), then snapshots, stages
 explicit paths, commits (title = the manifest summary, sanitized), pushes, and
 dispatches deploy.yml (GITHUB_TOKEN pushes don't auto-trigger workflows). Publish
-checks out CURRENT master (not the trigger sha), and a push race rebases +
-rebuilds the generated dist/ deterministically — any other conflict fails RED
-instead of silently dropping the night (2026-07-17 fix: bash `-e` is suppressed
-inside a `|| { … }` fallback group, which let a conflicted rebase pass green).
+checks out CURRENT master (not the trigger sha), subject to the refresh-base guard above.
+**A rejected push now fails RED and requires a full refresh against current master**
+(2026-09-05): no automatic rebase or partial rebuild may publish an untested merged tree.
 After a successful push, publish runs `src/digest.mjs HEAD^ HEAD` (deterministic
 buildPayload diff: tier/projection/source moves, creator-video activity from the
 pending-transcripts queue diff (distilled / verified-skipped / queued / waiting),
@@ -1369,3 +1386,16 @@ residual in `docs/security-audit-2026-07.md`. YouTube transcripts may be
 IP-blocked on runners; those videos queue as "pending" and catch up in local runs. The
 old local scheduled task and claude.ai cloud routine are retired (docs/cloud-routine.md
 records why); the local task can still be run manually for transcript catch-up.
+
+**Weekly guide publishing** (`gearing-refresh.yml`, 2026-09-05) shares the nightly
+publisher lock. Each of the three active guide harvesters runs independently with
+`--force`; failed or incomplete source verification preserves that source's published
+file. `src/check-gearing-guides.mjs` checks source identity, per-spec verification,
+dates and unexpected coverage losses before local capability sync, gearing build,
+`npm test` and the root build. Only the three guide files, capability mirror and
+generated artifacts are staged. A push race fails rather than rebasing; a successful
+push dispatches deployment and browser checks. The final step still fails the run if
+any provider failed, even when successfully verified providers were published. The
+freshness heartbeat continues to age-check current guide evidence; the historical
+12.0.7 stat fallback is checked for preserved contents and provenance rather than
+being presented as a periodically refreshed live feed.

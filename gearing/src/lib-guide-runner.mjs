@@ -74,6 +74,7 @@ export async function runGuideHarvest({ sourceId, sourceName, dated, harvestSpec
     throw new Error(`staging differs from the source or requested specs; remove ${stagePath} to start a new refresh`);
   const raid = JSON.parse(await readFile(join(root, "data", "raid-items.json"), "utf8"));
   const dungeons = JSON.parse(await readFile(join(root, "data", "dungeon-items.json"), "utf8"));
+  let consecutiveTransportFailures = 0;
   for (const spec of targets) {
     const key = `${spec.spec} ${spec.class}`;
     if (stage.verified[key]) { console.log(`  = ${key} (staged verification kept)`); continue; }
@@ -82,12 +83,17 @@ export async function runGuideHarvest({ sourceId, sourceName, dated, harvestSpec
       if (record !== null) validateRecord(record, key);
       stage.verified[key] = { verifiedAt: today, record };
       delete stage.failures[key];
+      consecutiveTransportFailures = 0;
       console.log(`  + ${key}: ${record === null ? "verified absence" : `${record.priorities.length} priorities · ${record.bis.length} BiS rows`}`);
     } catch (error) {
       stage.failures[key] = { attemptedAt: today, reason: String(error.message || error).slice(0, 300) };
+      consecutiveTransportFailures = /HTTP (?:403|429|5\d\d)|timeout|timed out|fetch failed|verification|challenge/i.test(stage.failures[key].reason)
+        ? consecutiveTransportFailures + 1 : 0;
       console.error(`  ! ${key}: ${stage.failures[key].reason}`);
     }
     await writeAtomic(stagePath, stage);
+    if (consecutiveTransportFailures >= 3)
+      throw new Error(`${sourceName}: stopped after three consecutive transport failures; published source unchanged; retry when access recovers`);
   }
   const failures = targetKeys.filter(key => !stage.verified[key]);
   if (failures.length)

@@ -810,7 +810,7 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
       if (!mirror?.tierSet || !spec.tierSet) continue;
       for (const field of ["set2", "set4", "asOf"]) {
         if ((spec.tierSet[field] ?? null) !== (mirror.tierSet[field] ?? null)) {
-          errors.push(`gearing/data/specs.json: ${spec.spec} ${spec.class} tierSet.${field} does not match data/specs.json — run \`node gearing/src/sync-tracker-fields.mjs && npm run gearing:build\` (the two pages must not state different set bonuses)`);
+          errors.push(`gearing/data/specs.json: ${spec.spec} ${spec.class} tierSet.${field} does not match data/specs.json — run \`node gearing/src/harvest-specs.mjs && npm run gearing:build\` (the two pages must not state different set bonuses)`);
         }
       }
     }

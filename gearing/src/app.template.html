@@ -2115,7 +2115,14 @@ function renderFooter() {
     + 'Dungeon data: ' + esc(DUNG.source) + ', harvested ' + esc(DUNG.harvestedAt) + '.<br>'
     + 'Direct tier data: ' + esc(TIER.source) + ', harvested ' + esc(TIER.harvestedAt) + '.<br>'
     + 'Catalyst policy: Blizzard 12.1 development notes, reviewed ' + esc(CATALYST.reviewedAt) + '.<br>'
-    + 'Spec data: ' + esc(SPECS.source) + ', harvested ' + esc(SPECS.harvestedAt) + '.<br>'
+    + (SPECS.structuralSync
+      ? 'Spec capabilities: local inputs checked ' + esc(SPECS.structuralSync.checkedAt)
+        + '; armor evidence ' + esc(SPECS.structuralSync.sources.armor.asOf || 'undated')
+        + '; weapon evidence ' + esc(SPECS.structuralSync.sources.weapons.asOf || 'undated')
+        + '. This checks consistency with recorded sources, not a new external verification.<br>'
+        + 'Legacy stat fallback: patch ' + esc(SPECS.legacyPriority.patch) + ', reviewed '
+        + esc(SPECS.legacyPriority.reviewedAt) + '; current builds use the S2 guide sources below.<br>'
+      : 'Spec data: ' + esc(SPECS.source) + ', harvested ' + esc(SPECS.harvestedAt) + '.<br>')
     + 'Item-level sheet: ' + esc(SHEET.source) + ', distilled ' + esc(SHEET.harvestedAt) + '.<br>'
     + 'Guide consensus sources: ' + Object.values(GUIDES.sources).map(s =>
       esc(s.name) + ' (' + (s.harvestedAt ? 'verified through ' + esc(s.harvestedAt)

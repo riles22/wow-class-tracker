@@ -3,14 +3,16 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
-import { verdictFor, spacedName, medianOf, buildDummyRawRows, buildPooledRawRows, RAW_RECIPES } from "../src/fetch-wcl.mjs";
+import { verdictFor, spacedName, medianOf, buildDummyRawRows, buildPooledRawRows, RAW_RECIPES,
+  oauthToken, gql, LIVE_DIAGNOSTICS, probeLiveBrackets } from "../src/fetch-wcl.mjs";
+import { checkManifest } from "../src/check-refresh.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
 /* The deterministic WCL fetch stage's verdict mapping — the publish gate and the
    nightly agent both key off these verdicts, so the branches are pinned here.
-   (Transport itself is network-bound and exercised by the dispatch-only probe
-   workflow, not unit tests.) */
+   Transport deadlines/retries and diagnostic decisions are exercised with injected
+   responses below; live upstream health is never a unit-test dependency. */
 
 test("verdictFor: missing credentials", () => {
   const r = verdictFor({ hasCreds: false, oauth: null, transportOk: false, probe: null });
@@ -54,6 +56,197 @@ test("verdictFor: no errors and no rankings is inconclusive, treated as transpor
   const r = verdictFor({ hasCreds: true, oauth: { ok: true }, transportOk: true,
     probe: { encounterId: 3176, httpStatus: 200, errors: [], rankings: 0 } });
   assert.equal(r.verdict, "network-failed");
+});
+
+const noPause = async () => {};
+const liveVerdict = evidence => verdictFor({ hasCreds: true, oauth: { ok: true }, transportOk: true,
+  brackets: evidence.brackets });
+const diagnosticQuery = ({ metrics = {}, alterZone, alterEncounter } = {}) => {
+  const calls = [];
+  const query = async (_token, q) => {
+    calls.push(q);
+    const zoneId = Number(q.match(/zone\(id: (\d+)/)?.[1]);
+    const cfg = LIVE_DIAGNOSTICS.brackets.find(c => c.zoneId === zoneId);
+    if (cfg) {
+      const zone = { id: cfg.zoneId, name: cfg.zoneName, frozen: false,
+        partitions: [{ id: cfg.partition, name: cfg.partitionName }],
+        difficulties: [{ id: cfg.difficulty, sizes: [cfg.size] }],
+        encounters: [{ id: cfg.zoneId * 100, name: "Discovered live encounter" }] };
+      alterZone?.(zone);
+      return { status: 200, json: { data: { worldData: { zone } } } };
+    }
+    const encounterId = Number(q.match(/encounter\(id: (\d+)/)?.[1]);
+    const spec = LIVE_DIAGNOSTICS.brackets.find(c => c.zoneId * 100 === encounterId);
+    assert.ok(spec, "only discovered live encounters may be queried");
+    for (const [arg, value] of Object.entries({ partition: spec.partition, difficulty: spec.difficulty, size: spec.size })) {
+      assert.ok(q.includes(`${arg}: ${value}`), `explicit ${arg} is required`);
+    }
+    assert.ok(q.includes("page: 1"), "diagnostics must not paginate");
+    const metric = q.match(/metric: (\w+)/)[1];
+    assert.ok(["rdps", "dps"].includes(metric));
+    const response = metrics[`${spec.bracket}:${metric}`] ?? (metric === "rdps" ? "error" : "working");
+    if (response === "transport") return { status: 503, json: null };
+    const encounter = { id: encounterId, zone: { id: spec.zoneId },
+      characterRankings: response === "error" ? null : { rankings: response === "empty" ? [] : [{ amount: 12345, name: "not retained" }], hasMorePages: true } };
+    alterEncounter?.(encounter, metric);
+    return { status: 200, json: { data: { worldData: { encounter } },
+      ...(response === "error" ? { errors: [{ message: "Internal server error" }] } : {}) } };
+  };
+  return { query, calls };
+};
+
+test("live diagnostics: both current brackets fail rDPS while controls work; no retired zone is queried", async () => {
+  const fixture = diagnosticQuery();
+  const evidence = await probeLiveBrackets("test-token", { query: fixture.query, pause: noPause });
+  assert.deepEqual(Object.values(evidence.brackets).map(b => b.status), ["rdps-broken", "rdps-broken"]);
+  assert.equal(fixture.calls.length, 6); // two discoveries, two rDPS, two controls
+  assert.equal(evidence.probes.length, 4);
+  assert.deepEqual(evidence.landed, {});
+  assert.equal(liveVerdict(evidence).verdict, "rdps-broken");
+  assert.ok(!JSON.stringify(evidence).includes("test-token"));
+  assert.ok(!JSON.stringify(evidence).includes("not retained"));
+  assert.ok(!JSON.stringify(evidence).includes("12345"));
+});
+
+test("live diagnostics: one recovered bracket raises the compatible notice without claiming both recovered", async () => {
+  const fixture = diagnosticQuery({ metrics: { "raid:rdps": "working" } });
+  const evidence = await probeLiveBrackets("test-token", { query: fixture.query, pause: noPause });
+  assert.equal(evidence.brackets["wcl-live-raid"].status, "recipe-needed");
+  assert.equal(evidence.brackets["wcl-live-mplus"].status, "rdps-broken");
+  assert.equal(fixture.calls.length, 5); // recovered bracket needs no raw control
+  const result = liveVerdict(evidence);
+  assert.equal(result.verdict, "rdps-restored");
+  assert.match(result.detail, /raid zone 53: recipe-needed/);
+  assert.match(result.detail, /mplus zone 55: rdps-broken/);
+  assert.deepEqual(evidence.landed, {});
+});
+
+test("live diagnostics: working rDPS still cannot vouch for fresh medians at the publish gate", async () => {
+  const fixture = diagnosticQuery({ metrics: { "raid:rdps": "working", "mplus:rdps": "working" } });
+  const evidence = await probeLiveBrackets("test-token", { query: fixture.query, pause: noPause });
+  Object.assign(evidence, liveVerdict(evidence), { attemptedAt: "2026-09-05T15:00:00Z" });
+  assert.equal(evidence.verdict, "rdps-restored");
+  assert.equal(fixture.calls.length, 4);
+  assert.deepEqual(evidence.landed, {});
+  assert.deepEqual(RAW_RECIPES, [], "closed PTR recipes cannot land rows during live diagnostics");
+  const requirements = LIVE_DIAGNOSTICS.brackets.map(b => ({ key: b.key, evidence: "wcl" }));
+  const manifest = { run: "2026-09-05", startedAt: evidence.attemptedAt, summary: "Probe is not a refresh",
+    sources: requirements.map(r => ({ source: r.key, result: "success", previousAsOf: null, newAsOf: null })) };
+  const checked = checkManifest({ requirements }, manifest, {}, "2026-09-05", evidence);
+  assert.equal(checked.errors.filter(e => e.includes("landed no data")).length, 2);
+});
+
+test("live diagnostics: failed or empty controls and empty rDPS are inconclusive, not proof of a metric outage", async () => {
+  for (const metrics of [{ "raid:dps": "error" }, { "raid:dps": "empty" }, { "raid:rdps": "empty" }]) {
+    const fixture = diagnosticQuery({ metrics });
+    const evidence = await probeLiveBrackets("test-token", { query: fixture.query, pause: noPause });
+    assert.equal(evidence.brackets["wcl-live-raid"].status, "inconclusive");
+    assert.equal(liveVerdict(evidence).verdict, "network-failed");
+  }
+});
+
+test("live diagnostics: rDPS or control transport failure stays separate from upstream metric errors", async () => {
+  for (const metric of ["rdps", "dps"]) {
+    const fixture = diagnosticQuery({ metrics: { [`raid:${metric}`]: "transport" } });
+    const evidence = await probeLiveBrackets("test-token", { query: fixture.query, pause: noPause });
+    assert.equal(evidence.brackets["wcl-live-raid"].status, "network-failed");
+    assert.equal(evidence.brackets["wcl-live-mplus"].status, "rdps-broken");
+    assert.equal(liveVerdict(evidence).verdict, "network-failed");
+  }
+});
+
+test("live diagnostics: phase, zone, partition, size and encounter identity mismatches fail closed", async () => {
+  const future = await probeLiveBrackets("test-token", { phases: { liveSeason: "s3", liveLabel: "12.2" },
+    query: async () => assert.fail("phase mismatch must not query old content"), pause: noPause });
+  assert.ok(Object.values(future.brackets).every(b => b.status === "configuration-mismatch"));
+  for (const alterZone of [z => z.id++, z => z.partitions[0].name = "PTR", z => z.difficulties[0].sizes = [],
+    z => z.frozen = true, z => z.encounters = [], z => z.partitions = {}, z => z.difficulties = {}]) {
+    const fixture = diagnosticQuery({ alterZone });
+    const evidence = await probeLiveBrackets("test-token", { query: fixture.query, pause: noPause });
+    assert.ok(Object.values(evidence.brackets).every(b => b.status === "configuration-mismatch"));
+    assert.equal(fixture.calls.length, 2);
+  }
+  const fixture = diagnosticQuery({ alterEncounter: e => e.zone.id = 54 });
+  const evidence = await probeLiveBrackets("test-token", { query: fixture.query, pause: noPause });
+  assert.ok(Object.values(evidence.brackets).every(b => b.status === "configuration-mismatch"));
+  assert.deepEqual(evidence.landed, {});
+});
+
+test("live diagnostics: failed discovery does not cascade into guessed encounter probes", async () => {
+  let calls = 0;
+  const evidence = await probeLiveBrackets("test-token", { query: async () => {
+    calls++;
+    return { status: 0, json: null };
+  }, pause: noPause });
+  assert.equal(calls, 2);
+  assert.equal(evidence.probes.length, 0);
+  assert.ok(Object.values(evidence.brackets).every(b => b.status === "network-failed"));
+  const malformed = await probeLiveBrackets("test-token", { query: async () => ({ status: 200,
+    json: { errors: { message: "unexpected error shape" } } }), pause: noPause });
+  assert.ok(Object.values(malformed.brackets).every(b => b.status === "network-failed"));
+  assert.equal(malformed.probes.length, 0);
+});
+
+test("WCL transport: transient responses retry once with deadlines; API errors and credential rejections do not retry", async () => {
+  let calls = 0;
+  const pauses = [];
+  const fetchImpl = async (_url, options) => {
+    calls++;
+    assert.ok(options.signal instanceof AbortSignal);
+    return new Response(calls === 1 ? "busy" : '{"data":{"ok":true}}', { status: calls === 1 ? 503 : 200 });
+  };
+  const r = await gql("not-a-real-token", "{query}", { fetchImpl, pause: async ms => pauses.push(ms) });
+  assert.equal(r.status, 200);
+  assert.equal(r.attempts, 2);
+  assert.deepEqual(pauses, [2000]);
+  calls = 0;
+  const graphqlError = await gql("not-a-real-token", "{query}", { fetchImpl: async () => {
+    calls++;
+    return new Response('{"errors":[{"message":"Internal server error"}]}');
+  }, pause: noPause });
+  assert.equal(calls, 1);
+  assert.equal(graphqlError.json.errors.length, 1);
+  calls = 0;
+  const denied = await oauthToken("id", "secret", { fetchImpl: async () => {
+    calls++;
+    return new Response("denied", { status: 401 });
+  }, pause: noPause });
+  assert.equal(calls, 1);
+  assert.equal(denied.ok, false);
+  assert.equal(denied.status, 401);
+  assert.equal(verdictFor({ hasCreds: true, oauth: denied }).verdict, "oauth-failed");
+});
+
+test("WCL transport: exhausted network failures remain status zero; missing OAuth tokens never count as success", async () => {
+  let calls = 0;
+  const options = { fetchImpl: async () => { calls++; throw new Error("request deadline exceeded"); }, pause: noPause };
+  const oauth = await oauthToken("id", "secret", options);
+  assert.equal(calls, 2);
+  assert.equal(oauth.ok, false);
+  assert.equal(oauth.status, 0);
+  assert.equal(verdictFor({ hasCreds: true, oauth }).verdict, "network-failed");
+  calls = 0;
+  const response = await gql("token", "{query}", options);
+  assert.equal(calls, 2);
+  assert.equal(response.status, 0);
+  assert.equal(response.json, null);
+  const noToken = await oauthToken("id", "secret", { fetchImpl: async () => new Response("{}"), pause: noPause });
+  assert.equal(noToken.ok, false);
+});
+
+test("WCL transport: the request deadline actually aborts a stalled response and stops after one retry", async () => {
+  let calls = 0;
+  const r = await gql("token", "{query}", { timeoutMs: 5, pause: noPause,
+    fetchImpl: async (_url, { signal }) => {
+      calls++;
+      return { status: 200, ok: true, text: () => new Promise((_resolve, reject) => {
+        const timer = setTimeout(() => reject(new Error("deadline failed to abort body")), 1000);
+        signal.addEventListener("abort", () => { clearTimeout(timer); reject(signal.reason); }, { once: true });
+      }) };
+    } });
+  assert.equal(calls, 2);
+  assert.equal(r.status, 0);
+  assert.match(r.textHead, /timeout/i);
 });
 
 /* --- zone-52 raw-DPS median recipe (frozen 2026-07-17) ------------------------------ */

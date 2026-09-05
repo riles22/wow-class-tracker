@@ -5,8 +5,12 @@ for Midnight Season 2 (Curse of Ula'tek) gearing — best-per-slot rankings, loo
 the full item-level ladder, and a SimC-paste upgrade check.
 
 Imported 2026-08-04 from the standalone "World of Warcraft" project. It has no npm
-dependencies and does not participate in the tracker's nightly pipeline (yet); harvests
-are run manually.
+dependencies. External harvests and local structural sync are separate operations;
+neither a successful build nor a local sync renews external evidence dates.
+The tracker nightly synchronizes local spec capabilities and rebuilds this page.
+`.github/workflows/gearing-refresh.yml` refreshes the three guide providers weekly
+(Tuesday 08:37 UTC) and on manual dispatch. Loot/rule-source harvests remain manual
+and retain their independent freshness checks.
 
 **"Offline" is load-bearing, and fonts are the easy way to break it.** The page shares the
 Spec Tracker's masthead vocabulary (2026-08-05), including its Cinzel/Inter/JetBrains Mono
@@ -46,7 +50,8 @@ of them with `typeof x === 'undefined'` or that test fails with a bare Reference
 node src/harvest-raid.mjs        # Venomous Abyss loot, per-item Wowhead tooltips
 node src/harvest-dungeons.mjs    # M+ pool loot (8 dungeons); ilvl comes from key level
 node src/harvest-tier.mjs        # Tier 36 set items
-node src/harvest-specs.mjs       # spec capabilities + stat priorities (reads ../data/specs.json)
+node src/harvest-specs.mjs       # local structural sync; preserves reviewed 12.0.7 fallback
+node src/harvest-specs.mjs --check # read-only input/output receipt verification
 node src/harvest-sheet.mjs       # Norumu sheet — CAUTION: data/sheet-rewards.json was hand-distilled
                                  # 2026-08-18 from Gandalin's launch chart (owner-supplied); re-running
                                  # this harvester as-is would regress that update. Rework in Phase B.
@@ -70,6 +75,14 @@ failures. A changed source or requested scope refuses that staging; remove that 
 staging file to begin a new refresh. A verified HTTP 404 is an absence, while a 403,
 timeout, or unusable response is a failure. Only a completed, validated attempt
 replaces the source, through an atomic rename.
+Three consecutive block/rate-limit/server/transport failures stop that source early;
+the command retains successful staging and leaves its published data unchanged.
+The weekly publisher runs `node src/check-gearing-guides.mjs` from the repository root
+before tests/build. It compares each source against trusted HEAD, requires complete
+verification receipts, and refuses more than 25% loss of specs, priorities, or BiS rows.
+Successful providers may publish independently; failed providers keep their previous
+files, and the workflow still finishes red to surface the failure. Staging artifacts
+are diagnostic only; a new scheduled run performs a new verification attempt.
 
 Each fetched record or verified absence carries `verifiedAt`; `published` remains
 the author's publication date. The source's `harvestedAt` is the **oldest** verification
@@ -107,3 +120,33 @@ docs/adr-simc-curated-profiles.md remain as the design record, marked Retired.
 
 Read-only: `src/harvest-specs.mjs` reads the tracker's curated `../data/specs.json`
 (override with `WOW_CLASS_TRACKER_SPECS`). Nothing here writes outside `gearing/`.
+
+The command performs **no network requests**. It synchronizes class/spec/role/tier-set
+fields from that roster, derives armor from the recorded raid tier-token class lists,
+and selects the reviewed weapon loadouts for `12.1-live`. Missing roster entries,
+conflicting armor evidence, absent weapon provenance and changed reviewed fallback
+priorities fail before writing. The replacement is atomic; a same-day unchanged run
+is a byte-stable no-op.
+
+The archived Icy Veins `12.0.7` fallback is reconstructed from
+`stat-priority-baseline.json` and `stat-priority-overrides.json`, preserving all ordered
+stats, variants, notes, source URLs and the original review date. It is no longer fetched
+from live pages whose patch has moved on. `specs.harvestedAt` and
+`legacyPriority.reviewedAt` retain that review date. The live S2 guide harvesters supply
+current guide priorities and keep their own verification dates.
+
+`specs.structuralSync.checkedAt` means **local source consistency was checked on that
+date**, not that game facts were fetched then. Its `sources` receipts retain scoped
+SHA-256 input digests and original armor/weapon evidence dates; every tier set retains
+its own tracker `asOf` and `source`. Missing external evidence dates remain null.
+The tracker digest covers only class, spec, role and tierSet, so unrelated metric or
+tier-consensus refreshes do not invalidate it. Legacy baseline and override digests
+are recorded separately under `legacyPriority`.
+
+Recurring integration: run `node gearing/src/harvest-specs.mjs` from the repository
+root after tracker/loot refreshes and before gearing validation/build. Stage its
+`gearing/data/specs.json` output with the other generated data. A heartbeat should call
+`checkSpecSync(doc, await loadSpecSyncInputs())` from this module before evaluating
+the age of `structuralSync.checkedAt`; the check re-derives the output and refuses
+stale/tampered receipts. Keep independent age checks on external guide/item sources.
+Do not change an old evidence date just to make the structural job green.

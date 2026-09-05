@@ -104,6 +104,16 @@ jobs:
           retention-days: 7
           path: wcl-fetch/
 
+      - name: Deterministic public-source availability evidence
+        run: node src/fetch-source-health.mjs
+
+      - name: Save public-source availability evidence
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: source-health
+          retention-days: 7
+          path: source-health/
+
       # Deterministic transcript stage (owner-approved 2026-07-17): the ONLY step
       # holding TRANSCRIPT_API_KEY (Supadata; mode=native = YouTube's own captions,
       # the same source yt-dlp read before the datacenter bot-wall). Drains the
@@ -214,13 +224,15 @@ jobs:
             keep queueing pending as before. Verdict "unauthorized" or "limit-exceeded" =
             put "TRANSCRIPT API KEY problem: <verdict>" near the top of the manifest summary.
 
-            SEASON NOTE (the 12.1-live migration LANDED 2026-08-18 — the old season-flip
-            guard is retired): the live season is S2 and pages verifying as Season 2 /
-            12.1 are the CORRECT pages. A source still describing Season 1 (Archon until
-            its S2 rebuild lands) simply stays out of the consensus via seasonVerified —
-            record it honestly, do not chase it. The night Archon flips to S2 the
-            consensus recomposes and may trip the anomaly gate: that red is DESIGNED and
-            needs the human anomaly_ack input, not an agent workaround.
+            SEASON NOTE: the live season is S2. ARCHON RETENTION (owner-confirmed
+            2026-09-05): its last verified S2 letters still contribute to consensus during
+            the access wall; an outage does not remove a source. Earlier three-source
+            claims were wrong. Read source-health/evidence.json for this run's ordinary
+            public-route diagnostics before attempting Archon; never solve/replay a human
+            verification challenge. Availability is not verified game data or a new date.
+            Report each requirement honestly, keep failed-fetch dates unchanged, and parse
+            source data only if actually accessible. Read encounter-tiers.json itself for
+            its season/date; its S1 archive remains quarantined until S2 observations land.
 
             Rebuild data/run-manifest.json from scratch for THIS run — the committed copy is
             the PREVIOUS run's record and never excuses skipping work. It must contain today's
@@ -334,6 +346,12 @@ jobs:
             transcript-fetch/ files (offsets in ms), maintain data/pending-transcripts.json
             honestly, and never fetch transcripts yourself.
 
+            ARCHON: read source-health/evidence.json for this run's public-route checks.
+            Never bypass a verification challenge or turn a successful HTTP response into
+            fresh data without parsing/era verification. Retain last verified S2 letters
+            with their original dates; they still contribute to consensus during outages.
+            Read encounter-tiers.json's actual season/date rather than copying old run prose.
+
             Rebuild data/run-manifest.json from scratch with a current UTC startedAt and one
             honest row per required source, each with previousAsOf/newAsOf copied from the real
             stored data. NEVER write an "anomalyAck" field (the gate rejects it); a real mass
@@ -444,7 +462,7 @@ jobs:
           # guarantee a dist/index.html conflict on push. The artifact still supplies
           # data/, and Gate 2 rebuilds dist/ from the freshest code either way.
           ref: master
-          fetch-depth: 0 # movement baselines + row-drop baseline + race rebase
+          fetch-depth: 0 # movement baselines + row-drop baseline + refresh-base ancestry check
 
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
@@ -456,6 +474,11 @@ jobs:
           git config user.email "120138825+riles22@users.noreply.github.com"
 
       # Overlays the agents' data/ + skill logs onto the fresh checkout.
+      - name: Refuse stale refresh output before overlay
+        env:
+          REFRESH_BASE_SHA: ${{ github.sha }}
+        run: node src/check-refresh-base.mjs
+
       - name: Download refresh output
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
@@ -627,6 +650,14 @@ jobs:
       - name: Show what the refresh changed
         run: git status --porcelain && git --no-pager diff --stat || true
 
+      # Local consistency only: preserves original weapon/armor/fallback source dates.
+      # Runs in the trusted publish stage, never accepts gearing files from an agent.
+      - name: Synchronize gearing capabilities from verified local inputs
+        run: |
+          node gearing/src/harvest-specs.mjs
+          node gearing/src/harvest-specs.mjs --check
+          npm run gearing:build
+
       - name: "Gate 1: validate + unit tests"
         run: npm test
 
@@ -684,6 +715,7 @@ jobs:
         run: |
           set -euo pipefail
           node src/check-skill-logs.mjs --stage
+          git add -- gearing/data/specs.json gearing/wow-s2-gearing.html
           if git diff --cached --quiet; then
             echo "Nothing to commit"
             echo "pushed=false" >> "$GITHUB_OUTPUT"
@@ -699,39 +731,10 @@ jobs:
           SUMMARY="$(node -e 'const m=JSON.parse(require("fs").readFileSync("data/run-manifest.json","utf8")); console.log(String(m.summary??"refresh").replace(/[^\x20-\x7E]/g," ").replace(/\s+/g," ").trim().slice(0,180))')"
           git commit -m "Nightly refresh $(date -u +%F): ${SUMMARY}" -m "Co-Authored-By: Claude <noreply@anthropic.com>"
           if ! git push origin master; then
-            # Push race: master moved between checkout and push. The old silent
-            # `|| { git pull --rebase && git push; }` fallback LOST the 2026-07-17
-            # 08:34 run's data — bash -e is suppressed inside a `||` group, so the
-            # conflicted rebase (both sides had rebuilt dist/index.html) left the
-            # step green with nothing pushed. Handle the race explicitly, and fail
-            # RED when it cannot be resolved deterministically.
-            git fetch origin master
-            if ! git rebase origin/master; then
-              conflicts="$(git diff --name-only --diff-filter=U)"
-              if [ "$conflicts" = "dist/index.html" ]; then
-                # The one expected conflict: dist/ is generated by both sides.
-                # Regenerate it on the merged tree (master's src/ + this run's data/).
-                # Stage ALL of dist/, not just index.html: one `npm run build` also rewrites
-                # dist/gearing.html and, from the flip on, dist/<season>.html. Staging a single
-                # file left the others as unstaged modifications that the push silently dropped,
-                # and it disagreed with the clean-rebase branch below, which already stages the
-                # whole directory. The conflict set was checked to be exactly dist/index.html
-                # above, so nothing unexpected can be swept in here. (audit 2026-08-14)
-                npm run build
-                git add dist/
-                GIT_EDITOR=true git rebase --continue
-              else
-                git rebase --abort || true
-                echo "::error::Publish push race with conflicts beyond generated dist/ (${conflicts}) — re-run the workflow to redo the night on current master"
-                exit 1
-              fi
-            else
-              # Clean rebase — master may still carry newer src/, so rebuild dist on it.
-              npm run build
-              git add dist/
-              git diff --cached --quiet || git commit --amend --no-edit
-            fi
-            git push origin master
+            # A manual update can change source code or gearing inputs after our gates.
+            # Replaying only the HTML build after a rebase would publish an untested tree.
+            echo "::error::Publish push rejected; re-run the full refresh against current master. No force push or partial revalidation."
+            exit 1
           fi
           echo "pushed=true" >> "$GITHUB_OUTPUT"
 

@@ -61,6 +61,15 @@ Fetch the current Midnight tier lists live and merge them into `data/specs.json`
 
 ## Gotchas (hard-won — trust these over intuition)
 
+- **Archon outage retention (owner-confirmed 2026-09-05):** last verified in-season
+  letters remain in consensus during failed fetches, with their original dates. An
+  outage does not silently remove Archon; earlier three-source claims were wrong.
+  In CI read `source-health/evidence.json` first. It checks ordinary representative
+  raid/M+ routes and catches HTTP-200 verification pages; it does not certify every
+  feed, season, page date, or any fresh observations. Never bypass a challenge or
+  stamp dates from a diagnostic. Read `encounter-tiers.json`'s actual season/date
+  before describing it; its S1 archive stays quarantined until S2 data lands.
+
 - **Archon raid pages carry THREE tierLists** (popularity/throughput/survivability).
   The default view groups by popularity — read the `metric: "throughput"` tierList.
   M+ pages use `metric: "score"`. Parse the `<script id="__NEXT_DATA__">` JSON from

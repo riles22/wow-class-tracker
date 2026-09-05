@@ -11,7 +11,7 @@
     "maxTotalMoves": 25
   },
   "gearing": {
-    "comment": "Freshness for the gearing subproject (gearing/README.md), added 2026-08-08. Deliberately a SIBLING of requirements[] rather than an entry in it: requirements[] is consumed by checkManifest as well as checkFreshness, so a row there would make the nightly publish gate demand a run-manifest entry for a subproject the nightly cannot refresh — gearing harvests are MANUAL because Wowhead is unreachable from CI. A sibling key is read only by the loop that iterates it, which is a structural guarantee rather than a convention. It is also deliberately NOT in gearing/src/validate-data.mjs, so npm test (nightly Gate 1) can never go red on a date the nightly has no way to fix. Thresholds are loose on purpose: there is no observed re-harvest cadence to calibrate against (zero re-harvests since the 2026-08-04 import), so the job here is to make rot visible, not to nag about lag. The check that actually earns its keep is tierSetSync, which measures WRONGNESS rather than age — it fires when the page is publishing tier-set text the tracker has already corrected, which is exactly the Preservation Evoker failure of 2026-08-08. Brings forward the freshness contract row listed as Phase C in docs/s2-transition-scope.md.",
+    "comment": "Freshness for the gearing subproject (gearing/README.md), added 2026-08-08. A sibling of requirements[] so the tracker run-manifest does not claim external gearing harvests. Current guide sources are refreshed by the separate weekly gearing-refresh workflow; failed providers retain their published bytes and verification dates. The nightly deterministic publish stage checks and synchronizes local capabilities before Gate 1. Owner-approved 2026-09-05: gearing-specs measures a local structuralSync receipt, validated against full output and current input digests; it does not re-date external loot, weapon or rule evidence. The 12.0.7 stat baseline is historical fallback, no longer a live age-gated feed; checkSpecSync validates its retained contents and provenance, while current stat priorities remain age-gated under all three guide sources. Age thresholds belong to the heartbeat, not the date-independent data validator. tierSetSync detects stale duplicated facts even when their dates are young. Existing external-feed age thresholds are unchanged.",
     "datasets": [
       {
         "key": "gearing-raid",
@@ -46,8 +46,9 @@
       {
         "key": "gearing-specs",
         "file": "specs.json",
-        "dateField": "harvestedAt",
-        "maxAgeDays": 30
+        "dateField": "structuralSync.checkedAt",
+        "maxAgeDays": 30,
+        "comment": "Local consistency receipt only: checkSpecSync must first verify the full output and current input digests. External evidence dates are retained separately; this date does not reverify game facts."
       },
       {
         "key": "gearing-icons",
@@ -58,12 +59,6 @@
       {
         "key": "gearing-catalyst-rules",
         "file": "catalyst-rules.json",
-        "dateField": "reviewedAt",
-        "maxAgeDays": 45
-      },
-      {
-        "key": "gearing-stat-baseline",
-        "file": "stat-priority-baseline.json",
         "dateField": "reviewedAt",
         "maxAgeDays": 45
       },
@@ -85,7 +80,8 @@
         "dateField": "harvestedAt",
         "maxAgeDays": 30
       }
-    ]
+    ],
+    "structuralSync": true
   },
   "requirements": [
     {
@@ -140,7 +136,7 @@
     },
     {
       "key": "archon-tiers",
-      "label": "Archon tier lists (raid throughput + M+ score, all roles) ARCHON WALL (opened 2026-08-25/26, held three consecutive nights as of 2026-08-27): every archon.gg application route is behind a site-wide human-verification interstitial, so all nine archon-* rows are expected to go red together. Three measured facts that a future reader needs. (1) It is NOT IP-scoped — re-tested from a residential IP on 2026-08-27, the wall held, so the datacenter-IP hypothesis is dead. (2) ITS SHAPE CHANGED FROM 403 TO 200: pages now return HTTP 200 carrying a ~2.5 KB \"Human Verification\" body with __NEXT_DATA__ count 0, so a status-only transport check would record SUCCESS and stamp a fresh snapshot over unchanged letters — assert on __NEXT_DATA__ presence, never on the status code. (3) There is no sanctioned machine lane: Archon is an RPGLogs property and publishes no Archon API (the \"API Documentation\" it links is Warcraft Logs’ own), and the Next.js data route /_next/data/<buildId>/... returns 403 {\"error\":\"Human verification required\"} — a content-type-aware, application-level refusal, i.e. deliberate rather than a default Cloudflare toggle. DO NOT attempt to solve, replay or automate past the check, and do NOT backfill these values from Warcraft Logs: Archon’s letters are Archon’s own tiering and its numbers are Archon’s own percentile cuts, so publishing ours under the archon source id would fabricate the source (hard rule 3). The honest behaviour is the one already built — consensusFor drops to Icy Veins + Method + Wowhead and the toolbar reports \"consensus of 3\". Clears if the wall lifts or an access agreement is reached.",
+      "label": "Archon tier lists (raid throughput + M+ score, all roles) ARCHON WALL (opened 2026-08-25/26, held three consecutive nights as of 2026-08-27): every archon.gg application route is behind a site-wide human-verification interstitial, so all nine archon-* rows are expected to go red together. Three measured facts that a future reader needs. (1) It is NOT IP-scoped — re-tested from a residential IP on 2026-08-27, the wall held, so the datacenter-IP hypothesis is dead. (2) ITS SHAPE CHANGED FROM 403 TO 200: pages now return HTTP 200 carrying a ~2.5 KB \"Human Verification\" body with __NEXT_DATA__ count 0, so a status-only transport check would record SUCCESS and stamp a fresh snapshot over unchanged letters — assert on __NEXT_DATA__ presence, never on the status code. (3) There is no sanctioned machine lane: Archon is an RPGLogs property and publishes no Archon API (the \"API Documentation\" it links is Warcraft Logs’ own), and the Next.js data route /_next/data/<buildId>/... returns 403 {\"error\":\"Human verification required\"} — a content-type-aware, application-level refusal, i.e. deliberate rather than a default Cloudflare toggle. DO NOT attempt to solve, replay or automate past the check, and do NOT backfill these values from Warcraft Logs: Archon’s letters are Archon’s own tiering and its numbers are Archon’s own percentile cuts, so publishing ours under the archon source id would fabricate the source (hard rule 3). OWNER-CONFIRMED RETENTION POLICY (2026-09-05): retain the last verified in-season Archon letters during this outage. Freshness alerts do not expire a source or change consensus membership. The current four-source consensus still includes Archon; the UI names its retained verification date. Keep snapshot dates unchanged until actual source data is verified. Earlier three-source claims in run notes were incorrect. Clears if the wall lifts or an access agreement is reached.",
       "maxAgeDays": 4,
       "date": {
         "type": "pages",

@@ -30,6 +30,10 @@
 /src/validate.mjs @riles22
 /src/check-refresh.mjs @riles22
 /src/check-skill-logs.mjs @riles22
+/src/check-refresh-base.mjs @riles22
+/src/check-gearing-guides.mjs @riles22
+/src/fetch-source-health.mjs @riles22
+/gearing/src/harvest-specs.mjs @riles22
 /src/apply-ratings.mjs @riles22
 /src/apply-metrics.mjs @riles22
 # The freeze lane writes the two append-only records above, so it belongs with the

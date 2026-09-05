@@ -1229,6 +1229,7 @@ try {
        they did not until 2026-07-25, when the comment described a placement the markup
        never had. A browser invariant asserts the DOM order, not the comment. -->
   <div id="movers"></div>
+  <p id="retained-ratings" class="note standalone" hidden></p>
   <p id="forecast-grade" class="note standalone" hidden></p>
 
   <div class="matrix" id="matrix"></div>
@@ -1592,6 +1593,22 @@ function seasonChip(asOf, opts){
    exactly what the report card grades. projAvailable is the single predicate every
    projection surface consults — before the flip it is the old era gate unchanged. */
 const FROZEN_FC = META.frozenForecast ?? null;
+{
+  // Snapshot age does not silently change consensus membership. Name retained
+  // contributors from the actual cells and registry dates, never a hard-coded count.
+  const contributors = new Set(SPECS.flatMap(s => ['raid','mplus'].flatMap(b =>
+    (s.consensus?.[b]?.perSource ?? []).filter(p=>p.lane !== 'frozen').map(p=>p.source))));
+  const retained = SOURCES.filter(s=>s.kind === 'tier-list' && contributors.has(s.id)).map(s=>{
+    const dates = (s.pages ?? []).filter(p=>!p.ancillary && p.seasonVerified === PHASE.liveSeason)
+      .map(p=>p.snapshot).filter(Boolean).sort();
+    return {name:s.name,date:dates[0]};
+  }).filter(s=>s.date && META.latestSnapshot && s.date < META.latestSnapshot);
+  if(retained.length){
+    const host = document.getElementById('retained-ratings');
+    host.hidden = false;
+    host.innerHTML = `<b>Retained source ratings:</b> ${retained.map(s=>`${esc(s.name)} last verified ${esc(s.date)}`).join(' · ')}. These in-season letters still contribute to consensus. Freshness alerts remain active; an outage does not silently remove a source.`;
+  }
+}
 const FORECAST_REPORT = META.forecastReport ?? null;
 {
   const host = document.getElementById('forecast-grade');
