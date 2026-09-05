@@ -79,7 +79,7 @@ The tracker also renders its OWN computed 12.1 forecast (projection lane). It is
 
 | Source | What we take | Honest label |
 |---|---|---|
-| **Warcraft Logs** | Median rDPS/HPS + parse counts (zone 46 raid, 47 M+) | population medians; parses ≈ participation |
+| **Warcraft Logs** | Retained S1 per-parse median rDPS/HPS + parse counts (zones 46/47); live S2 targets are zones 53/55, currently without an equivalent working fetch recipe | archived population medians retain their original dates; live API diagnostics are not fresh measurements |
 | **Archon (numeric layer)** | 95th-pct DPS/HPS (Mythic AND Heroic — separate families, never mixed; Heroic added 2026-08-25 as the dense early-season series), M+ score, popularity % (Mythic) | top-end throughput + representation; difficulty is part of the metric name |
 | **Murlok.io** | Avg M+ rating of each spec's top-50 players | "top-50 ceiling" — NOT popularity, NOT a tier |
 | **Bloodmallet (SimC, tier MID1)** | Best-build DPS at 1/2/3/5/8/15 targets | powers ST/Cleave/AoE fight profiles (DPS only; Augmentation unsimmable) |
@@ -131,7 +131,7 @@ What stays LIVE from this layer: the Wowhead RSS discovery lane, now watching fo
 | **Blizzard PTR dev-notes forum thread** (Linxy) | canonical per-build tuning notes; Discourse `.json` machine-readable; ~weekly; **new patch = new thread** |
 | **Wowhead news RSS + datamined posts** | discovery (exact pubDates) + mirrors; Wowhead's per-spec 12.1 articles are also the source of the tracker's `ptr` writeups |
 | **Icy Veins news** | secondary mirror (dates in slug) |
-| **Warcraft Logs zone 54** (The Venomous Abyss) | 12.1 PTR raid-testing scores — tiny n (~3–100), templated gear, tuning in flux; always "(12.1 PTR …)"-labeled, never mixed into live baselines |
+| **Warcraft Logs zone 54** (The Venomous Abyss) | Archived 12.1 PTR raid-testing scores from the closed cycle; always "(12.1 PTR …)"-labeled, never mixed into live baselines or refreshed as live S2 data |
 
 ## 6 · Community / qualitative → drawers only, never ratings
 
@@ -193,25 +193,28 @@ Policy 2026-07-08: **pull every source fresh on every run** — no staleness gat
 at-most-daily cap. The retry-with-backoff and inter-request sleeps below are kept purely
 as reliability mechanics (so fetches succeed / avoid bot-blocks), not as pull limits.
 
-- **Warcraft Logs**: v2 GraphQL API is **configured and verified** (client credentials
-  in the gitignored `.claude/skills/refresh-metrics/config.json`; token grant + zone
-  query tested 2026-07-01). HTML statistics tables remain the fallback: XHR headers,
-  fetched fresh every run (residential IP; datacenter IPs are Cloudflare-blocked on
-  the HTML endpoint). On the nightly runner, API access happens ONLY in the
-  deterministic pre-agent fetch step (`src/fetch-wcl.mjs`, 2026-07-14 re-audit) — the
-  AI agent holds no WCL credentials and consumes its evidence file instead.
-  **"Median raw DPS (12.1 PTR Dummy Dome, NT)"** plus the pooled
-  **"…(12.1 PTR Venomous Abyss, pooled)"** (zone 54, Heroic — where testing happens)
-  and **"…(12.1 PTR M+ keys, pooled)"** (zone 56) series (added 2026-07-17): per-spec
-  medians of each ranked player's best parse in RAW `dps`, computed by the fetch step
-  from complete leaderboard pagination (pooled series require EVERY discovered
-  boss/dungeon to enumerate fully, else that night contributes nothing — a missing
-  encounter would bias the pool). Honesty notes: raw DPS ≠ rDPS (no external-buff
-  redistribution — support specs like Augmentation read low by construction, which is
-  why these series never substitute for the frozen rDPS/normalized cuts and never feed
-  the projection), best-parse-per-player medians ≠ the statistics table's per-parse
-  medians, and pooled = one number across all bosses/dungeons. `n` = ranked
-  player-encounter entries.
+- **Warcraft Logs**: sanctioned v2 GraphQL access is configured. Only the deterministic
+  pre-agent step (`src/fetch-wcl.mjs`) holds the nightly WCL credentials; the AI agent
+  consumes its evidence artifact without WCL credentials. The step verifies the
+  live season's zone/partition/difficulty/size and a discovered encounter per bracket:
+  **zone 53** raid (partition 1, Mythic 5, size 20) and **zone 55** M+ (partition 1,
+  difficulty 10, size 5). It probes `rdps` with `dps` controls on failure and records
+  separate bracket statuses. Controls are diagnostics only, never replacement metrics.
+  A working leaderboard page does not reproduce the stored per-parse population
+  medians; `landed` remains empty until an equivalent reviewed live recipe exists.
+  **Verified 2026-09-05:** OAuth and GraphQL transport worked; both live `rdps` probes
+  returned Internal server error while their `dps` controls returned rankings. Ordinary
+  public requests to `/zone/statistics/53` and `/zone/statistics/55` each returned HTTP
+  403 Cloudflare verification challenges. Do not bypass a challenge or treat diagnostics
+  as a data refresh. Retained S1 medians (zones 46/47, asOf 2026-08-10) keep their original
+  values, URLs and dates until genuine S2 observations land.
+  **Closed PTR cycle:** the zone-52 Dummy Dome and pooled zone-54/56 raw-DPS recipes
+  retired on 2026-08-18 (`RAW_RECIPES = []`); they no longer run nightly. Archived
+  **"Median raw DPS (12.1 PTR Dummy Dome, NT)"**, **"…(12.1 PTR Venomous Abyss, pooled)"**
+  and **"…(12.1 PTR M+ keys, pooled)"** rows remain historical receipts. They were computed
+  from complete best-parse-per-player leaderboards (pooled cuts required every
+  discovered boss/dungeon), with `n` counting ranked player-encounter entries. This is a
+  different population from per-parse medians, and raw DPS never substitutes for rDPS.
 - **Archon / Murlok / Bloodmallet / Blizzard forums / YouTube RSS**: plain fetches every
   run, retry-with-backoff on transient 404s (reliability, not a cap).
 - **YouTube transcripts**: two transports, same captions. On the nightly runner the

@@ -306,45 +306,45 @@
     "name": "Warcraft Logs",
     "kind": "metrics",
     "author": "Warcraft Logs aggregate statistics",
-    "methodology": "Per-spec aggregate combat-log statistics: median (50th percentile) rDPS/HPS and parse counts. LIVE Season 2 raid = zone 53 \"The Venomous Abyss\" (partition 1 = 12.1, Mythic difficulty 5, size 20, 9 encounters); live S2 M+ = zone 55 (partition 1 = Season 2, difficulty 10, size 5) — both enumerated 2026-08-14, frozen until content opens. Retired-cycle zones, kept as history: S1 raid = zone 46 (Mythic difficulty 5, size 20, partition 3 = 12.0.7 — the zone's DEFAULT partition has since moved to 4 = 12.1, so recipes must pin 3); S1 M+ = zone 47 (difficulty 10, size 5, partition 1); zone 54 was the 12.1 PTR raid and zone 56 the 12.1 PTR M+ — PTR-quality, era-tagged \"ptr\", kept out of live baselines. Sanctioned long-term access is the v2 GraphQL API (free OAuth client), which DOES serve the PTR zones — the nightly reads zones 52/54/56 through it every run, so an earlier note here claiming \"PTR zones are HTML-only\" was wrong and is corrected (2026-08-08); it would have misdirected the Season-2 zone-discovery run into a transport we do not need. What the API does not currently serve is the rDPS metric family, which has returned a bare \"Internal server error\" since 2026-07-12 while metric dps on the same encounter returns normally. HTML statistics tables are the fallback for exactly that gap, fetched fresh every run (policy 2026-07-08: no at-most-daily cap) — but datacenter IPs are Cloudflare-blocked on the HTML endpoint, and as of 2026-08-08 the residential path is challenged too, so the rDPS series are currently unreachable by either transport.",
+    "methodology": "Per-spec aggregate combat-log statistics: median (50th percentile) rDPS/HPS and parse counts. Current Season 2 targets are raid zone 53 \"The Venomous Abyss\" (partition 1 = 12.1, Mythic difficulty 5, size 20, 9 encounters) and M+ zone 55 (partition 1 = Season 2, difficulty 10, size 5); official API discovery confirmed both are unfrozen on 2026-09-05. The stored live-named medians remain Season 1 observations from zones 46/47, dated 2026-08-10, and must not be presented as fresh S2 measurements. Historical S1 raid used partition 3 = 12.0.7; the retained source URLs and snapshots identify those observations. Zones 52/54/56 are the closed 12.1 PTR cycle (Dummy Dome / raid testing / M+ testing), retained as era-tagged history. Their raw-DPS recipes retired on 2026-08-18 and no longer run nightly. On the nightly runner, sanctioned v2 GraphQL access is confined to the credentialed deterministic pre-agent step: it verifies live zone identity and probes a discovered encounter in each current bracket, using raw dps only as an availability control when rdps fails. These leaderboard probes are not population medians; diagnostic recovery cannot refresh data without a reviewed equivalent live recipe. On 2026-09-05 OAuth and GraphQL transport worked, while rdps returned \"Internal server error\" in both live brackets and dps controls returned rankings. Ordinary public requests to the live zone-53/55 statistics pages also returned HTTP 403 Cloudflare verification challenges. Keep existing values and dates until an equivalent validated S2 data fetch actually lands; never substitute raw DPS for rDPS or bypass a verification challenge.",
     "pages": [
       {
         "bracket": "raid",
         "role": "All",
-        "label": "Raid statistics (zone 46, Mythic)",
+        "label": "Archived S1 raid statistics (zone 46, Mythic)",
         "url": "https://www.warcraftlogs.com/zone/statistics/46",
         "snapshot": "2026-08-10"
       },
       {
         "bracket": "mplus",
         "role": "All",
-        "label": "M+ statistics (zone 47)",
+        "label": "Archived S1 M+ statistics (zone 47)",
         "url": "https://www.warcraftlogs.com/zone/statistics/47",
         "snapshot": "2026-08-10"
       },
       {
         "bracket": "mplus",
         "role": "All",
-        "label": "12.1 PTR M+ testing (zone 56, Mythic+ Season 2 PTR)",
+        "label": "Archived 12.1 PTR M+ testing (zone 56, Mythic+ Season 2 PTR)",
         "url": "https://www.warcraftlogs.com/zone/statistics/56",
         "snapshot": "2026-08-10"
       },
       {
         "bracket": "raid",
         "role": "DPS",
-        "label": "12.1 PTR raid testing (zone 54, The Venomous Abyss)",
+        "label": "Archived 12.1 PTR raid testing (zone 54, The Venomous Abyss)",
         "url": "https://www.warcraftlogs.com/zone/statistics/54",
         "snapshot": "2026-07-28"
       },
       {
         "bracket": "raid",
         "role": "DPS",
-        "label": "12.1 PTR Dummy Dome (zone 52, fixed target counts)",
+        "label": "Archived 12.1 PTR Dummy Dome (zone 52, fixed target counts)",
         "url": "https://www.warcraftlogs.com/zone/statistics/52",
         "snapshot": "2026-08-10"
       }
     ],
-    "summary": "Median damage or healing across every logged pull, by role and bracket. rDPS strips out damage credited to external buffs, so it measures a player's own contribution rather than what their raid lent them."
+    "summary": "Per-spec median throughput and sample counts from Warcraft Logs statistics. Retained Season 1 observations stay dated; archived PTR raw-DPS medians use a separate ranked-player population. Live Season 2 diagnostic responses do not refresh these measurements."
   },
   {
     "id": "murlok",

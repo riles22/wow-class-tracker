@@ -1,0 +1,41 @@
+{
+  "url": "https://us.forums.blizzard.com/en/wow/t/world-of-warcraft-midnight-hotfixes-september-4/2336376/1",
+  "jsonUrl": "https://us.forums.blizzard.com/en/wow/t/world-of-warcraft-midnight-hotfixes-september-4/2336376.json",
+  "checkedAt": "2026-09-05T16:56:00.739Z",
+  "title": "World of Warcraft: Midnight Hotfixes - September 4",
+  "postId": 29891478,
+  "author": "Kaivax",
+  "version": 31,
+  "updatedAt": "2026-09-05T01:21:46.173Z",
+  "effectiveDate": "2026-09-04",
+  "headingPath": [
+    "September 4, 2026",
+    "Classes",
+    "Shaman",
+    "Enhancement"
+  ],
+  "bodySha256": "5d9bd453285cee508f16fdf7776dbd8c587b256f47123e6e591fd0a67e7c4123",
+  "correction": "Enhancement four-set upfront Crash Lightning damage fix; existing bonus values retained.",
+  "validation": {
+    "ptrWriteup": "Unchanged: the hotfix corrects behavior without replacing the reviewed set design. Existing attributed verdict and commentary stay intact; the dated fact amendment and patch-feed highlight carry the current correction.",
+    "classification": "buff",
+    "validationErrors": [],
+    "valueDiffs": [],
+    "outlookBefore": {
+      "direction": "flat",
+      "source": "verdict",
+      "builds": 7,
+      "buffs": 4,
+      "nerfs": 1,
+      "basis": "PTR read: Mixed · touched in 7 of 28 PTR builds · highlighted tuning lines +4/−1"
+    },
+    "outlookAfter": {
+      "direction": "flat",
+      "source": "verdict",
+      "builds": 8,
+      "buffs": 5,
+      "nerfs": 1,
+      "basis": "PTR read: Mixed · touched in 8 of 28 PTR builds · highlighted tuning lines +5/−1"
+    }
+  }
+}

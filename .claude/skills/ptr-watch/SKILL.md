@@ -77,6 +77,15 @@ posture above.
    note — attributed commentary about a dead design must say so. `npm test` enforces
    the pairing: a set-touching highlight whose spec's `tierSet.asOf` predates the
    build date fails validation (the tier-set upkeep gate in `src/validate.mjs`).
+   **Nightly tier-set publishing is supported (2026-09-05).** The old log entries
+   saying these changes must wait for an owner local run are obsolete: the trusted
+   publish job now runs `node gearing/src/harvest-specs.mjs`, its `--check`, and
+   `npm run gearing:build` BEFORE Gate 1, then explicitly stages the derived gearing
+   files. After changing a tracker tier set, run those same commands before your
+   local tests so both pages agree. Agent-generated gearing files still do not travel
+   in the refresh artifact; publish independently re-derives them from the verified
+   tracker data. Do not defer a fetched set-bonus change for that former limitation,
+   omit its highlight, or weaken either tier-set gate.
 3a. **Three channels, not one** (2026-08-01). The feed tracks official forum BUILD
    posts. Wowhead also publishes datamined tuning articles and **PTR hotfix** round-ups —
    "Last night, a few hotfixes were pushed to the Patch 12.1 PTR" — which are neither

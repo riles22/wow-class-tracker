@@ -796,9 +796,9 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
      copy of set2/set4/asOf that renders as fact in gearing's Catalyst plan. Nothing checked
      the two against each other, so the copies drifted FIVE times — most recently publishing
      "Genesis duration increased by 4 seconds" on one page of the site while the other said 8.
-     The daily `check-refresh --age` heartbeat was the only detector, and the nightly cannot
-     act on it: publish stages data/, dist/ and skill logs, never gearing/. So the drift could
-     only ever be cleared by a human local run, and stayed live until one happened.
+     The daily `check-refresh --age` heartbeat was originally the only detector, and drift
+     waited for a human local run. Since 2026-09-05, nightly publish deterministically syncs
+     and builds gearing before Gate 1, then stages those derived files explicitly.
      This is the root validator reaching INTO gearing/, which it otherwise never does — a
      deliberate, read-only coupling the owner accepted to stop the recurrence. It stays
      one-directional: nothing here writes, and an absent gearing/ simply skips.
