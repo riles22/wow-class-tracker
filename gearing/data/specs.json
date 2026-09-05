@@ -8,7 +8,7 @@
     "sources": {
       "tracker": {
         "path": "data/specs.json",
-        "digest": "41229893845569268a00bd444424854ba1d34ee4ee1920d1df656e607b80f676",
+        "digest": "2901319ac206db52712a1a4c6f5785cb5802cc61fdcb7807b69f6d164b78d73c",
         "scope": "class, spec, role, tierSet; each tier set retains its own source and asOf"
       },
       "armor": {
@@ -2828,9 +2828,9 @@
       "statPrioritySource": "https://www.icy-veins.com/wow/enhancement-shaman-pve-dps-stat-priority",
       "tierSet": {
         "set2": "Voltaic Blaze causes your primary target to erupt in a Fire Nova every 2 seconds for 6 seconds. Fire Nova deals 200% increased damage to the primary target of your Voltaic Blaze.",
-        "set4": "Fire Nova reduces the cooldown of Crash Lightning by 2 seconds and increases the damage of your next Crash Lightning by 8%, stacking up to 5 times (07-08: the Short Circuit aura now also boosts the Crash Lightning weapon-enhancement effect, averaged across stacks).",
-        "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/10",
-        "asOf": "2026-07-08"
+        "set4": "Fire Nova reduces the cooldown of Crash Lightning by 2 seconds and increases the damage of your next Crash Lightning by 8%, stacking up to 5 times (07-08: the Short Circuit aura now also boosts the Crash Lightning weapon-enhancement effect, averaged across stacks). (2026-09-04 hotfix: corrected the 4-set's increase to Crash Lightning's upfront damage.)",
+        "source": "https://us.forums.blizzard.com/en/wow/t/world-of-warcraft-midnight-hotfixes-september-4/2336376/1",
+        "asOf": "2026-09-04"
       }
     },
     {

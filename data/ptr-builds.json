@@ -5,16 +5,18 @@
     {
       "date": "2026-09-04",
       "kind": "hotfix",
-      "label": "Live 12.1 hotfixes for September 4 — a bug-fix and quality-of-life round-up. Canonical source read directly rather than off the Wowhead mirror: Kaivax's running hotfix blue post (us.forums topic 2336376), whose title has rolled to “World of Warcraft: Midnight Hotfixes - September 4” and whose post 1 is at version 31, last edited 2026-09-05T01:21:46Z; read with its heading structure INTACT. Both Balance Druid lines sit under an explicit Druid › Balance spec heading, so there is no class-wide or hero-tree attribution question. DELIBERATE OMISSION, RECORDED RATHER THAN HIDDEN: the round-up also carries an Enhancement Shaman line — “Corrected an issue where the Venomous Abyss 4-set bonus was not properly increasing the upfront damage of Crash Lightning.” — which is real 12.1 PvE tuning and belongs in this entry, but it TOUCHES A SET BONUS, so the tier-set upkeep gate requires Enhancement Shaman's spec.tierSet.asOf to advance to 2026-09-04, and since the 2026-08-23 two-page rule that also requires gearing/data/specs.json to be re-synced and the gearing artifact rebuilt in the SAME change. The nightly publish job stages only data/, dist/ and the skill logs — gearing/ never travels in the refresh artifact — so a nightly-side bump is structurally unpublishable and reds Gate 1 on the mirror mismatch (verified this run: validate reports “Enhancement Shaman tierSet.asOf does not match data/specs.json”). It is therefore left for an owner LOCAL run, exactly as the 2026-09-03 Holy Priest and 2026-09-02 Fire Mage set-bonus lines were handled; the fix is `node gearing/src/sync-tracker-fields.mjs && npm run gearing:build` alongside the tierSet bump, and the line then joins this entry with Enhancement Shaman added to specsAffected. There is no Player versus Player section in this round-up. Citation: https://us.forums.blizzard.com/en/wow/t/world-of-warcraft-midnight-hotfixes-september-4/2336376.",
+      "label": "Live 12.1 hotfixes for September 4: Balance Druid tracking and range fixes, an Enhancement Shaman Venomous Abyss 4-set bug fix, and the non-class round-up. Both class changes are explicitly spec-scoped in the official notes. Enhancement's printed bonus values are retained, with a dated amendment to the 4-set and both pages synchronized. Canonical source: Kaivax's running hotfix topic 2336376, post 1, version 31, last edited 2026-09-05T01:21:46Z. No Player versus Player section in this round-up. Citation: https://us.forums.blizzard.com/en/wow/t/world-of-warcraft-midnight-hotfixes-september-4/2336376/1.",
       "forumPostNumber": null,
       "forumUrl": null,
       "wowheadUrl": "https://www.wowhead.com/news=382760/september-4th-hotfixes-ulatek-classes-catalyst",
       "icyveinsUrl": null,
       "specsAffected": [
-        "Balance Druid"
+        "Balance Druid",
+        "Enhancement Shaman"
       ],
       "highlights": [
         "Balance Druid — Stellar Amplification can now be tracked in the Cooldown Manager; Twin Moons’ range is now increased by target combat reach, meaning it can spread to farther targets when attacking large enemies.",
+        "Enhancement Shaman — Corrected an issue where the Venomous Abyss 4-set bonus was not properly increasing the upfront damage of Crash Lightning.",
         "Non-class: the September 4 round-up also fixed applications of Ingested Venom being able to land on a target already affected by Serpent’s Bite on Ula’tek in the Venomous Abyss; restored achievement credit for collecting a Secret Souvenir during the Endeavors Vacation Season housing event (progress granted retroactively on entering a neighbourhood); stopped some non-set class armor items appearing eligible for redundant Catalyst conversion; and corrected the Preternatural Antivenom trinket absorb effect, which had a reduced cap for healer specializations and healed for a lower percentage of incoming damage than intended."
       ]
     },
