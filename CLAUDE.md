@@ -8,6 +8,19 @@ self-contained artifact — `dist/index.html`** — a personal project. It's pub
 public GitHub Pages site (https://riles22.github.io/wow-class-tracker/) that auto-deploys
 on push to `master`; the file also still opens directly in a browser.
 
+This file and `.claude/skills/*/SKILL.md` are the canonical operating instructions.
+`AGENTS.md` and the six tracked `.agents` skill adapters link here instead of
+maintaining separate procedures. `npm run instructions:check` detects adapter
+drift before both test commands; regenerate after discovery metadata changes with
+`npm run instructions:sync`. Local credentials and scratch remain ignored.
+
+**Current preview policy (2026-09-05):** 12.1.5 has a separate notes-only preview
+and official-note revision ledger in `data/official-notes.json`. It is not a new
+forecast cycle: `PHASES.ptr` stays null, live S2 rankings and the frozen 12.1 forecast
+keep their existing inputs, and archived PTR observations retain their old scope.
+Read ptr-watch for collection and per-section resolution; an older paragraph about
+waiting for 12.2 does not supersede this approved 12.1.5 notes lane.
+
 ## Commands
 
 - `npm test` — schema validation + unit tests + build smoke test
@@ -1305,6 +1318,15 @@ re-audit). First a **deterministic WCL fetch step** — the ONLY process holding
 writes `wcl-fetch/evidence.json`, uploaded as its own artifact before the agent
 starts. Since 2026-09-05, `src/fetch-source-health.mjs` also probes the two ordinary
 public Archon DPS routes and writes `source-health/evidence.json` (separate artifact).
+The Murlok/Mythicstats collectors (`src/fetch-stable-metrics.mjs`) and official-note
+collector (`src/fetch-official-notes.mjs`) likewise produce separate pre-agent
+artifacts in `metrics-fetch/` and `official-notes/`. Agents consume those receipts
+instead of inventing parsers or ignoring edited sections. Publish downloads the
+trusted copies after the agent output, then runs `check-stable-metrics.mjs` and
+`check-official-notes.mjs`: verified values must match, failed sources must remain
+unchanged, and every changed class section must have a valid disposition. An
+unresolved section blocks publication. Official-note verification dates measure
+the intake check, never a new date for the underlying tuning facts.
 The prompts read this availability evidence before attempting the normal refresh;
 a reachable payload still needs normal season, coverage and source-date checks, and
 a blocked page never advances a stored data date. The transcript stage
@@ -1399,3 +1421,10 @@ any provider failed, even when successfully verified providers were published. T
 freshness heartbeat continues to age-check current guide evidence; the historical
 12.0.7 stat fallback is checked for preserved contents and provenance rather than
 being presented as a periodically refreshed live feed.
+
+**Browser and release verification (2026-09-05):** the independent CI browser job
+runs the tracker and gearing invariants in Chromium, Firefox and WebKit. The Pages
+workflow keeps browsers outside publication and verifies all three public HTML
+pages after deployment against the normalized hashes from that build's separate
+SHA-bound artifact. A stale or mismatched page fails the deploy workflow after
+bounded propagation retries; a successful upload alone is not verification.

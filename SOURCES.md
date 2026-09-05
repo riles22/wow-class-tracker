@@ -87,9 +87,21 @@ The tracker also renders its OWN computed 12.1 forecast (projection lane). It is
 | ~~**SimulationCraft MID2 reference profiles** (`gearing/` only)~~ | **RETIRED 2026-08-18** — gearing-s2-scope Phase A removed the entire SimC reference pipeline from `gearing/`; guide-consensus ranking (Icy Veins + Wowhead + Method harvested stat priorities) replaced sim-derived weights. The ADRs (`docs/adr-simc-*.md`) are history. | |
 | **Robydoby PTR raid sheets** (Google Sheets, public CSV) | Per-spec 99th-pct raw DPS + HPS from curated WCL zone-54 testing parses, newest Venomous Abyss week (separate DPS & Healer sheets) | community-curated top-end percentile; DPS + healer specs; **best-effort — deliberately NOT in the refresh contract** (`required-sources.json`), so a volunteer sheet going quiet never reddens a night; **credit Robydoby with a visible link wherever used** (the sheets ask for it) |
 | **WoWMeta** | `lowerBound` — the 95% CI lower bound of a spec's MEAN official Blizzard M+ rating across ALL logged players | population-wide MEAN, sample-size-penalised — **not a ceiling** (Murlok is the ceiling) and not popularity. Fetch the JSON API (`data.wowmeta.com`), never the HTML: the page is a stale prerender and its letters cluster on player count. |
-| **Mythicstats** | Representation % in the top 2000 keys per weekly period | true meta-share (the axis Murlok's fixed-50 sample can't measure); JS-heavy → r.jina.ai |
+| **Mythicstats** | Representation % in the top 2000 keys per weekly period | true meta-share (the axis Murlok's fixed-50 sample can't measure); ordinary HTML at `/period/latest`, following its current-period redirect |
 
 Every metric gets a computed within-role **rank** (#n/of) at build time.
+
+**Murlok and Mythicstats collection (2026-09-05):**
+`src/fetch-stable-metrics.mjs` uses fixed ordinary public routes and tested parsers.
+Murlok requires all 27 DPS, 7 healers and 6 tanks and uses the source's `<time
+datetime>` value, never its relative age label. Mythicstats reads only the
+"Spec representation in top keys" section, checks roster and role totals, and
+distinguishes visible percentages from bar geometry. An undated unchanged
+observation keeps its original `asOf`; changed values get an explicitly
+observation-based date. Omitted zero-share specs stay absent or retain a previously
+verified zero; an omitted nonzero share blocks that source. No failed or partial
+source replaces published data. Receipts and prepared updates travel in a
+separate pre-agent artifact, checked by `src/check-stable-metrics.mjs` at publish.
 
 **The gearing SimC lane is RETIRED (2026-08-18, gearing-s2-scope Phase A).** The MID2
 scale-factor ledger, its curated run manifest, the curated-same-gear provenance campaign,
@@ -124,7 +136,21 @@ contract rows were removed at the flip; the fetch recipes are retired in
 `src/fetch-wcl.mjs` awaiting the 12.2 zone ids), and the dev-notes thread is closed.
 What stays LIVE from this layer: the Wowhead RSS discovery lane, now watching for
 **live 12.1 tuning** (hotfix round-ups → `kind: "hotfix"` feed entries) and for the
-**12.2 PTR announcement**, which re-opens everything below with new ids.
+future PTR announcements. **12.1.5 currently has a notes-only preview**, separate
+from every forecast and live-ranking input; a new notes thread never reopens the
+closed empirical or forecast cycle automatically.
+
+The deterministic official-note collector reads Blizzard's [live hotfix
+compilation](https://us.forums.blizzard.com/en/wow/t/2336376) and [12.1.5 PTR
+development notes](https://us.forums.blizzard.com/en/wow/t/midnight-1215-ptr-development-notes/2344395)
+through ordinary Discourse JSON. `data/official-notes.json` records source revisions
+and class-section hashes, with applied references, explicit irrelevant reasons or
+unresolved sections. Source edits invalidate the affected section's prior
+resolution. Historical sections seeded before September 4 are explicitly a
+baseline, not a claim of exhaustive backfill. Preview summaries are attributed
+notes in their own display lane; they never become tier letters or PTR verdicts.
+`check-official-notes.mjs` checks the ledger against a separate pre-agent artifact;
+the heartbeat alerts when intake verification is more than 48 hours old.
 
 | Source | Role |
 |---|---|

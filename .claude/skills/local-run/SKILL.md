@@ -28,8 +28,9 @@ runs (2026-07-31), which were sound but left drift the next nightly had to absor
 
 ## The procedure
 
-1. **Start from current master.** `git fetch origin master && git checkout master &&
-   git reset --hard origin/master` (or pull --ff-only). The nightly may have pushed
+1. **Inspect the working tree and start from current master.** Fetch origin, then
+   use `git switch master` and `git pull --ff-only` when the working tree permits.
+   Preserve unrelated local work; never reset it away. The nightly may have pushed
    while you slept; a local run must never rebase the night away.
 2. **Do the work through the existing skills** (refresh-tiers / refresh-metrics /
    ptr-watch / watch-creators / paste-discord). They carry the per-source gotchas; do
@@ -71,6 +72,11 @@ runs (2026-07-31), which were sound but left drift the next nightly had to absor
    old — not a fresh write from this run`. That failure is expected and correct (you
    did not do a full refresh). **Anything else it prints is real** and must be either
    fixed or explainable before pushing; it is the same output the nightly gate reads.
+   For a metric collection, also run `node src/check-stable-metrics.mjs` against the
+   fresh isolated receipts before committing. For an official-note pass, run
+   `node src/check-official-notes.mjs`; a receipt is not complete while changed or
+   removed class sections are unresolved. A source fetch failure preserves its
+   existing data and receipt dates; never fabricate a resolution or a fresh date.
 6. **Snapshot**: `node src/snapshot.mjs` whenever data changed — this is both the
    movement baseline and the freshness heartbeat's proof-of-life for runs that skip
    the manifest (a snapshot only counts if strictly newer than the manifest date, so a
@@ -112,7 +118,9 @@ no-staleness-gate policy still holds *within* whichever scope you pick.
 1. **`ptr-watch`** — now in its BETWEEN-CYCLES posture (see the ⚑ block at the top of
    its SKILL.md, added at the 2026-08-18 launch): Wowhead news RSS + official forums for
    **live 12.1 tuning** (hotfix round-ups → `kind: "hotfix"`, scheduled passes with a
-   forum post → `kind: "build"`) and for the **12.2 PTR announcement**. The four PTR
+   forum post → `kind: "build"`) and the separate **12.1.5 notes-only preview**.
+   Read the deterministic official-notes receipts and resolve every changed class
+   section; leave PHASES and the frozen forecast closed. The four PTR
    WCL zone sweeps (54/52/56/57) are DORMANT — skip them entirely; their contract rows
    were removed at the flip, so they need no manifest excuse. Stored zone rows are the
    closed cycle's final receipts: never refresh, never delete. The live S2 WCL zones
@@ -125,8 +133,8 @@ no-staleness-gate policy still holds *within* whichever scope you pick.
 3. **`refresh-tiers` / `refresh-metrics`** — scoped per above. 🛑 **Do not apply WoWMeta
    M+ rows or re-stamp their `snapshot`** while that source is under review (see
    `refresh-tiers/log.md`, 2026-07-31).
-4. **Gearing guide harvest** (duty added 2026-08-18 with the gearing overhaul; NOT part
-   of the nightly — Wowhead is unreachable from CI, so local runs are the only lane):
+4. **Gearing guide harvest** (a separate weekly workflow since 2026-09-05, with
+   local catch-up when a provider fails):
    when `gearing/data/guides/*.json` `harvestedAt` ages past ~7 days during the launch
    window (through ~09-15; the contract's 30d thresholds are the backstop, not the
    target), re-run the three harvesters from `gearing/`:

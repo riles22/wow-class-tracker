@@ -615,6 +615,12 @@ try {
   .row{border-bottom:1px solid var(--hair); transition:background .12s;
        font-family:var(--mono); font-size:12px;
        content-visibility:auto; contain-intrinsic-size:auto 22px}
+  /* Phone rows must keep their real layout during pointer activation. WebKit moved
+     a different row beneath pointerup after lazy content reflowed on pointerdown,
+     losing the click (5/5 reproductions; forcing only open rows visible did not help).
+     Rendering this bounded 40-row phone list fixes the hit target; desktop retains
+     the measured content-visibility optimization above. */
+  @media(max-width:759px){ .row{content-visibility:visible} }
   .row:last-child{border-bottom:0}
   .row.clickable{cursor:pointer}
   .row.clickable:hover{background:var(--bg-3)}
@@ -1247,6 +1253,7 @@ try {
       <div>
         <p class="foot-h">__ERA_FEED_HEADING__</p>
         <div class="srclist" id="buildfeed"></div>
+        <div id="officialnotes"></div>
         <p class="foot-h">Refresh with live logs</p>
         <div class="live" id="livelinks">
           <a href="https://www.archon.gg/wow" target="_blank" rel="noopener">archon.gg</a>
@@ -1286,6 +1293,7 @@ const SCALES = DATA.scales;
 const META = DATA.meta;
 const COMMUNITY = DATA.community || { classes: [] };
 const PTR_BUILDS = DATA.ptrBuilds || { builds: [] };
+const OFFICIAL_NOTES = DATA.officialNotes || { previews: [], unresolved: [], sources: [] };
 const CREATOR_TAKES = (DATA.creatorTakes && DATA.creatorTakes.takes) || [];
 /* Meta-outlook notes: general-creator (news-lane) per-spec season/meta reads — a
    separate lane from specialist CREATOR_TAKES. Never a source-tier/consensus input;
@@ -1990,7 +1998,7 @@ function drawerHTML(s){
   // Inner content only — the .drawer shell is emitted empty by rowHTML and filled lazily
   // on open, so render() rebuilds ~1.3K visible nodes instead of ~9.3K (85% was drawers).
   return `<div class="drawer-in"><div class="drawer-grid">
-     <div>${left}${showCycle?buildChangesHTML(s):""}${metricsHTML(s)}${showPtr?ptrDummyHTML(s):""}${timelineHTML(s)}</div>
+     <div>${left}${previewNotesHTML(s)}${showCycle?buildChangesHTML(s):""}${metricsHTML(s)}${showPtr?ptrDummyHTML(s):""}${timelineHTML(s)}</div>
      <div>${cmpBtnHTML(s)}${gearingLinkHTML(s)}${tierset}${profileHTML(s)}${sourceBreakdownHTML(s)}${takesHTML(s)}${metaNotesHTML(s)}${communityHTML(s)}</div>
    </div></div>`;
 }
@@ -2003,6 +2011,14 @@ function drawerHTML(s){
    path, and its numbers are intermediate — Holy Priest's incremental +10% and +5% are
    superseded by the notes' +16%. Stacking them as one undifferentiated date list read as
    redundant and, worse, implied the older figures were still live. */
+function previewNotesHTML(s){
+  const notes = OFFICIAL_NOTES.previews.filter(n => n.specKey === `${s.class}|${s.spec}`);
+  if(!notes.length) return "";
+  return `<section class="d-sec preview-notes" aria-label="PTR preview notes">${notes.map(n => `
+    <p class="d-h">${esc(n.patch)} PTR preview <span class="cwchip">not live</span></p>
+    <p class="d-summary">${esc(n.summary)}</p>
+    <p class="mnote"><a href="${esc(safeHref(n.url))}" target="_blank" rel="noopener">Official notes · ${esc(n.date)}</a> · revision ${esc(String(n.revision))}. Notes only; live rankings and the frozen forecast are unchanged by this preview.</p>`).join("")}</section>`;
+}
 function buildEntryHTML(b){
   return `<p class="d-h" style="margin:10px 0 4px;text-transform:none;letter-spacing:0">${esc(fmtDate(b.date))}${b.kind==="hotfix"?` · <span class="cwchip">hotfix</span>`:""}${b.forumUrl?` · <a href="${esc(safeHref(b.forumUrl))}" target="_blank" rel="noopener">${b.kind==="patch-notes"?"patch notes":`forum post${b.forumPostNumber!=null?` #${esc(String(b.forumPostNumber))}`:""}`}</a>`:b.wowheadUrl?` · <a href="${esc(safeHref(b.wowheadUrl))}" target="_blank" rel="noopener">${b.kind==="patch-notes"?"patch notes":"hotfix round-up"}</a>`:""}</p>
     <ul class="d-list">${b.lines.map(l=>`<li${l.classWide?' class="cw"':''}>${l.classWide?'<span class="cwchip">class-wide</span>':''}${esc(l.text)}</li>`).join("")}</ul>`;
@@ -2980,6 +2996,24 @@ document.getElementById('buildfeed').insertAdjacentHTML('beforeend',
   (COMMUNITY.generalCreators||[]).map(gc=>
     `<div class="srcitem"><span><a href="${esc(safeHref(gc.url))}" target="_blank" rel="noopener">${esc(gc.name)}</a> <span class="mnote">general patch coverage${gc.latest?` — latest: ${esc(gc.latest)}`:""}</span></span><span class="when">${esc(gc.verifiedDate||"")}</span></div>`
   ).join(""));
+
+/* A notes-only preview and revision queue remain separate from the live patch
+   feed. Historical baseline exclusions are disclosed, never counted as applied. */
+{
+  const el = document.getElementById('officialnotes');
+  if(OFFICIAL_NOTES.sources.length){
+    const previews = OFFICIAL_NOTES.previews;
+    const previewHTML = previews.length ? `<p class="foot-h">${[...new Set(previews.map(n=>n.patch))].map(esc).join(" / ")} PTR preview — not live</p>
+      <p class="mnote">Notes only. Live rankings and the frozen forecast keep their existing inputs.</p>
+      ${previews.map(n=>`<div class="srcitem"><span><a href="${esc(safeHref(n.url))}" target="_blank" rel="noopener">${esc(n.specKey.split('|').reverse().join(' '))}</a> <span class="mnote">${esc(n.summary)}</span></span><span class="when">${esc(n.date)}</span></div>`).join('')}` : '';
+    const unresolved = OFFICIAL_NOTES.unresolved;
+    el.innerHTML = previewHTML + `<details class="feedfold"${unresolved.length?' open':''}><summary>Official-note review · ${unresolved.length} unresolved section${unresolved.length===1?'':'s'}</summary>
+      <p class="mnote">${OFFICIAL_NOTES.applied ?? 0} applied sections; ${OFFICIAL_NOTES.irrelevant ?? 0} excluded sections, including the historical baseline. Tracking checks edits to older sections as well as newly dated notes.</p>
+      ${OFFICIAL_NOTES.sources.map(s=>`<p class="mnote"><a href="${esc(safeHref(s.url))}" target="_blank" rel="noopener">${esc(s.patch)} ${s.era==='ptr'?'PTR notes':'live hotfixes'}</a> · checked ${esc(s.checkedAt.slice(0,10))}</p>`).join('')}
+      ${unresolved.map(n=>`<p class="mnote"><a href="${esc(safeHref(n.url))}" target="_blank" rel="noopener">${esc(n.date)} · ${esc(n.class)}</a> — ${esc(n.reason)}</p>`).join('')}
+      </details>`;
+  }
+}
 
 /* reference-kind sources (e.g. Liquid Armory) join the live-links row */
 document.getElementById('livelinks').insertAdjacentHTML('beforeend',

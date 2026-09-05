@@ -1,6 +1,6 @@
 ---
 name: ptr-watch
-description: Watch patch developments and fold them into the tracker. BETWEEN CYCLES since the 2026-08-18 12.1 launch — the live lanes are Wowhead RSS + official forums for live 12.1 tuning (hotfix round-ups, scheduled tuning passes) and for the 12.2 PTR ANNOUNCEMENT; the PTR zone sweeps (54/52/56/57) are dormant until 12.2. Use when the user says "check the PTR", "any new builds?", "ptr watch", or on a scheduled/loop run.
+description: Watch live patch tuning and the isolated 12.1.5 PTR notes preview, with revision receipts and a section review ledger. The closed 12.1 forecast and old WCL PTR zones stay dormant. Use when the user says "check the PTR", "any new builds?", "ptr watch", or on a scheduled/loop run.
 ---
 
 # PTR watch — the constant-updates loop
@@ -8,15 +8,78 @@ description: Watch patch developments and fold them into the tracker. BETWEEN CY
 Idempotent check for new patch developments since the last run. If nothing is new, say
 so and change nothing.
 
+## Official revision ledger and notes-only preview (2026-09-05)
+
+**Run this before the RSS/date sweep.** A post can be edited without acquiring a new
+date or reply. The missed September 4 Enhancement set fix was such an omission; the
+ledger inventories every class section rather than trusting the latest feed date.
+
+1. Read `official-notes/evidence.json` and `official-notes/pending.json`, produced by
+   the trusted pre-agent `node src/fetch-official-notes.mjs` step. In an interactive
+   local run, run that command first. Do not overwrite a nightly's trusted receipts.
+   The configured sources are Blizzard's running live hotfix compilation (topic
+   2336376, post 1) and the 12.1.5 development thread (topic 2344395, every nonempty
+   staff post). Public replies are excluded. Source IDs and patch identity are pinned
+   in code; a new topic or forecast cycle is an owner configuration change.
+2. Compare pending sections against `data/official-notes.json`. Each source records
+   its check time and every official post's revision/updated time/body hash. Each
+   class section preserves date, category, class/spec scope, and its own outline hash.
+   Only an identical section hash retains its prior resolution. New or edited sections
+   are `resolution.disposition: "unresolved"`; removals survive in `removedSections`
+   as unresolved tombstones. Read the corresponding receipt's **text**, including
+   nested spec and hero-talent context; neither a class-name match nor a changed post
+   version is a substitute for reading all changed sections.
+3. Resolve every obligation with a specific `reason`:
+   - **Applied live tuning:** follow the existing feed/tier-set procedure below.
+     Record `references: [{kind:"build", date, highlight}]`, using the exact stored
+     highlight and the section's date. The referenced entry must be a live hotfix/build
+     after this source cycle's launch date, citing this official topic in its `forumUrl`
+     or its label's canonical-source URL. An unrelated old PTR line cannot satisfy
+     current live coverage. Every spec explicitly covered by the section must reach a referenced
+     highlight. Class-wide notes retain class-wide attribution. An existing reference
+     that no longer resolves fails the publish check.
+   - **Applied 12.1.5 preview:** record `notes: [{specKey:"Class|Spec", summary}]` with
+     concise, faithful paraphrases of the fetched official notes. Cover the section's
+     spec scope. These summaries render as **12.1.5 PTR preview — not live** only in
+     the affected drawers and footer. They never enter `ptr-builds.builds`, `spec.ptr`,
+     tier sets, live ratings, or model inputs. Keep `PHASES.ptr` null: this is not a new
+     forecast cycle, and the frozen 12.1 forecast stays unchanged.
+   - **Irrelevant:** explain the actual exclusion (for example, PvP-only UI behavior
+     outside tracked PvE scope). Do not call an unread section irrelevant. Removed
+     sections require review of retained tracker facts and an explicit exclusion reason;
+     preserve their tombstones. The initial pre-September-4 historical baseline was
+     explicitly excluded without claiming exhaustive backfill. That reason is not an
+     automatic exemption for future edits to those old sections.
+   - **Unresolved:** retain the obligation and explain what is missing. It stays
+     visible in the review queue and fails the publish gate; do not manufacture a
+     disposition to make the run green.
+4. Propose the data diff in an interactive run, then write the reviewed pending ledger
+   to `data/official-notes.json` along with any live feed/tier-set edits. Keep source
+   identities, section inventories/hashes, and check times exactly as received. A failed
+   ordinary source fetch must preserve that source's prior ledger unchanged. The check
+   reports the outage and the freshness heartbeat keeps aging its last successful check.
+   A receipt marked `invalid` means the fetched source identity, layout, or inventory
+   needs review; it fails the run immediately. Preserve the ledger and report that
+   failure for a reviewed parser/configuration fix. Do not patch gatekeeper code inside
+   a data refresh or turn an invalid receipt into an outage to bypass the gate.
+5. Run `node src/check-official-notes.mjs --base=HEAD` (or the run's trusted committed
+   base), relevant tests, and the normal build/snapshot workflow. Publish downloads the
+   independent receipt artifact after the agent's output and repeats this check. Missing
+   sections, invented source dates, silently deleted obligations, stale receipts, and
+   unresolved sections cannot pass. Never modify the source policy or raise an age
+   threshold to clear an outage.
+
 ## ⚑ BETWEEN-CYCLES POSTURE (2026-08-18, the 12.1 launch — read this first)
 
 **The 12.1 PTR cycle is CLOSED, not quiet.** 12.1 went live 2026-08-18; the PTR realm,
 its forum thread, and its WCL zones (54 raid / 52 Dummy Dome / 56 M+ / 57 grotto) are
-history. Until Blizzard announces a 12.2 PTR:
+history. The separately approved 12.1.5 notes preview above is active; it does not
+reopen those historical lanes. Until a new forecast cycle is explicitly configured:
 
 - **Live lanes (run every time):** step 2's RSS sweep — now filtered for LIVE 12.1
   tuning ("Class Tuning", "Hotfixes", tuning round-ups) and for the 12.2 PTR
-  announcement — plus step 3's feed logging and step 4's writeup flagging. Live tuning
+  announcement — plus step 3's feed logging and step 4's writeup flagging. The official
+  revision-ledger step above also runs every time. Live tuning
   logs as `kind: "hotfix"` (Wowhead round-up = citation, NO forumUrl/forumPostNumber)
   or `kind: "build"` when a scheduled pass has a citable forum post. The `specsAffected`
   ↔ `highlights` coverage gate and the tierSet upkeep gate apply to these exactly as
@@ -26,8 +89,9 @@ history. Until Blizzard announces a 12.2 PTR:
   recipes below are kept verbatim for the 12.2 cycle — transport lessons cost weeks to
   learn. Stored zone-52/54/56 rows in specs.json are the closed cycle's final receipts;
   never refresh or delete them.
-- **The thread-rediscovery gotcha is SUSPENDED**: the 12.1 thread going quiet is not a
-  lost thread — there is no thread. When the 12.2 PTR opens, starting the new cycle is
+- **The old thread-rediscovery gotcha is SUSPENDED**: the 12.1 thread going quiet is not a
+  lost thread. The isolated 12.1.5 preview uses its own configured source. When the 12.2
+  PTR opens, starting the new forecast cycle is
   an OWNER action (new `PHASES.ptr` entry, new thread key, contract rows, zone probe via
   `node src/wcl-probe.mjs`), not an agent-side thread-key update.
 

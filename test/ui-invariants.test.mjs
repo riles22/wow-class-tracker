@@ -17,7 +17,8 @@
    every push.
 
    Run locally with:
-     npm run build && npm i --no-save playwright && npx playwright install chromium && npm test
+     npm run build && npx playwright install chromium firefox webkit
+     PLAYWRIGHT_BROWSER=firefox node --test test/ui-invariants.test.mjs
    The `playwright` package ships no postinstall browser download, so omitting the third
    command leaves node_modules complete but no browser on disk — and these tests then FAIL
    (11 red) rather than skip, because a browser that will not launch is deliberately not a
@@ -37,19 +38,21 @@ const DIST = path.join(ROOT, "dist", "index.html");
 /* Chromium may be preinstalled at a pinned path (CI images, the Claude Code sandbox)
    under a build number that does not match the playwright package's expectation, which
    makes the default launch fail. Prefer an explicit executable when one is configured. */
-const EXECUTABLE = process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE || null;
+const ENGINE = process.env.PLAYWRIGHT_BROWSER || "chromium";
+if (!["chromium", "firefox", "webkit"].includes(ENGINE)) throw new Error(`Invalid PLAYWRIGHT_BROWSER: ${ENGINE}; choose chromium, firefox, or webkit.`);
+const EXECUTABLE = ENGINE === "chromium" ? process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE || null : null;
 
 async function loadPlaywright() {
   try {
-    const { chromium } = await import("playwright");
-    return chromium;
+    const playwright = await import("playwright");
+    return playwright[ENGINE];
   } catch {
     return null;
   }
 }
 
-const chromium = await loadPlaywright();
-const reason = !chromium
+const browserType = await loadPlaywright();
+const reason = !browserType
   ? "playwright not installed — UI invariants skipped (see the header of this file)"
   : !existsSync(DIST)
     ? "dist/index.html not built — run `npm run build` first"
@@ -58,7 +61,7 @@ const reason = !chromium
 /* One browser for the whole file; each test gets a fresh page. */
 let browser = null;
 const ensureBrowser = async () => {
-  if (!browser) browser = await chromium.launch(EXECUTABLE ? { executablePath: EXECUTABLE } : {});
+  if (!browser) browser = await browserType.launch(EXECUTABLE ? { executablePath: EXECUTABLE } : {});
   return browser;
 };
 const newPage = async (hash = "") => {
@@ -585,9 +588,17 @@ test("no agent-writable field can inject markup or a handler into the rendered p
     if (b0) {
       b0.specsAffected = [...new Set([...(b0.specsAffected ?? []), `${s.spec} ${s.class}`])];
       b0.highlights = [`${s.spec} ${s.class} ${TEXT_BREAK}`, ...(b0.highlights ?? [])];
-      b0.label = ATTR_BREAK;
+      // Keep the official citation that the intake ledger cross-checks while
+      // poisoning this prose sink; otherwise validation correctly rejects the fixture.
+      b0.label = `${ATTR_BREAK} ${b0.label ?? ""}`;
       await save("ptr-builds.json", builds);
     }
+
+    const official = await load("official-notes.json");
+    for (const source of Object.values(official.sources)) for (const post of source.posts)
+      for (const section of post.sections) for (const preview of section.resolution.notes ?? [])
+        preview.summary += ` ${TEXT_BREAK}`;
+    await save("official-notes.json", official);
 
     const { build } = await import("../src/build.mjs");
     await build(root);   // real pipeline, including validation
@@ -1554,5 +1565,38 @@ ui("retained rating disclosure names actual older contributors without changing 
     for(const s of expected) assert.ok(text.includes(`${s.name} last verified ${s.date}`));
     assert.match(text,/still contribute to consensus/);
     assert.match(text,/Freshness alerts remain active/);
+  }
+});
+
+ui("official previews keep their attribution and not-live label in mobile spec drawers", async page => {
+  const notes = payload().officialNotes?.previews ?? [];
+  if (!notes.length) return; // A notes lane may legitimately be empty between previews.
+  await page.setViewportSize({ width: 390, height: 844 });
+  const footer = await page.locator('#officialnotes').innerText();
+  assert.match(footer, /PTR preview — not live/i);
+  for (const note of notes) {
+    const [cls, spec] = note.specKey.split('|');
+    const index = payload().specs.findIndex(s => s.class === cls && s.spec === spec);
+    const row = page.locator(`.row[data-idx="${index}"]`);
+    // Use the full roster and leave earlier drawers open: their layout must not
+    // move a later spec's hit target between pointer-down and pointer-up.
+    await row.locator('.spec-txt').scrollIntoViewIfNeeded();
+    await row.locator('.spec-txt').click();
+    await page.waitForFunction(index => {
+      const row = document.querySelector(`.row[data-idx="${index}"]`);
+      return row?.classList.contains('open') && !row.classList.contains('motion-enter')
+        && row.querySelector('.drawer').style.maxHeight === 'none';
+    }, index, { timeout: 5000 });
+    const fold = row.locator('details.dfold').filter({ has: page.locator('.preview-notes') });
+    await fold.locator('summary').scrollIntoViewIfNeeded();
+    await fold.locator('summary').click();
+    assert.match(await fold.locator('summary').innerText(), /PTR preview.*not live/is);
+    const preview = row.locator('.preview-notes');
+    await preview.waitFor({ state: 'visible', timeout: 5000 });
+    assert.ok(await preview.isVisible(), `${note.specKey} has a visible preview`);
+    const text = await preview.innerText();
+    assert.ok(text.includes(note.summary) && text.includes(note.date));
+    assert.equal(await preview.locator('a').first().getAttribute('href'), note.url);
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth), 390);
   }
 });
