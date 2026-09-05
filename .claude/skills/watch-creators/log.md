@@ -16,6 +16,51 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-05 (nightly) — 12 takes from the two pre-fetched transcripts; MadSkillzzTV's healer review split raid/M+ across all seven healer specs
+
+- **Discovery:** 44 transcribable channels with a `channelId` polled via YouTube RSS, **0 failures**,
+  15 entries each = 660 videos, `media:description` parsed alongside the title. Seen-set recomputed
+  from structured data only — `pending-transcripts` `seen[]`/`skipped[]`/`videos[]` plus every
+  `youtu.be` id in a take or metaNote url — **union 1230**, 288 unseen, all 288 in-cycle against the
+  computed bound 2026-06-18 (`Math.min` over ptr-builds dates, taken as a DATE not an index).
+- **Distilled both pre-fetched transcripts** (`transcript-fetch/summary.json` verdict `ok`, requested 2
+  fetched 2; no API or YouTube call from this session).
+  **(a) MadSkillzzTV `MivlWUZEWOY`** "12.1 Best Healers (so far) | M+ & Raid Healer Balance"
+  (2026-09-04) — **11 takes**, one per bracket per spec, covering all seven healer specs. The raid/M+
+  split is the point of the video and the reads genuinely diverge: Mistweaver (raid **nerf**, the tier
+  set forcing 2pc-old + 2pc-new; M+ **buff**), Holy Paladin (raid **nerf** on an unused Holy
+  Light/Virtue 4pc; M+ **buff**, "probably the best healer" for keys), Discipline the mirror image
+  (raid **buff** on personal damage in the double-Disc Coiled Altar comps; M+ **nerf**, the only healer
+  without a 19-20 timed), Holy Priest **buff** in both, Preservation (raid **buff**, S-tier and double-
+  stacked by Liquid/Echo/Method; M+ **buff**, underrated healer damage), Restoration Druid raid **buff**
+  as a sleeper, Restoration Shaman M+ **mixed** — the new set is melee-comp-shaped and wasted in spread.
+  **Not distilled:** the Archon M+ tier list he displays, because he says outright "This is not my tier
+  list", and his expectations of future Blizzard buffs, which are anticipation rather than a read.
+  **(b) Dalaran Gaming `A1PXCqNKAdo`** (2026-09-01), a 2h key stream — **1 take**: Beast Mastery Hunter
+  M+ **buff**, his own-voice reaction repeated four times across the stream ("beast mastery buffs are
+  looking kind of good", "just doing 200k, not breaking a sweat", "hunter damage is real good", "don't
+  want to be beaten by beast master hunter in AoE"). Triaged out: Frost DK and Demonology remarks
+  (second-hand — "apparently" — and both classes outside his registered scope) and the Font of Venomous
+  Rage discussion (item-level AND explicitly "I heard").
+- **Supersession, 11 records, same creator + spec + SAME LENS only.** Deliberately left live: MadSkillzz's
+  09-01 `both`-scoped Restoration Druid read and Dalaran's 08-29 `both` Beast Mastery read, because a
+  narrower successor must not retire the half it does not replace (the Kalamazi over-supersede precedent).
+- **Queue:** both distilled ids removed from `videos[]` (neither sat in `seen[]` or `skipped[]`, so no
+  weaker lane record to drop). Two queued for the paid drain, both RSS-verified with an author match:
+  `Ze7qcYHcbvg` (Obli, "After the buffs, which DPS DK spec is better in Raid?", 09-04 — the description
+  confirms a Frost-vs-Unholy raid comparison and Obli is the registered Frost/Unholy specialist) and
+  `l6bJ-pcX-h4` (izen, "How HARD Are M+ Season 2 Keys?", 09-03, the generalCreators metaNotes lane).
+- **286 unseen left UNSEEN**, not marked seen — budget and relevance cuts, not durable dismissals: the
+  Supatease PvP block, gameplay PoVs and boss/dungeon guides, gearing PSAs, and the growing pile of
+  12.1.5-changes videos which have **no lane at all** until the owner opens that cycle.
+- ⚠️ **MadSkillzzTV`s `latest` is OWNER-PINNED and an agent edit of it is a no-op.** His six class
+  entries carry `managedBy: "overrides"`, so `apply-community-overrides.mjs` restores the owner text at
+  every prebuild — writing a fresh distillation summary there silently reverted inside the same run.
+  Dalaran Gaming is not override-managed and his five entries did take the new `latest`. Do not try to
+  fix this by editing `data/community-overrides.json`: it is owner-curated and Gate 0 reds the night.
+- `npm run audit:creators`: **0 HIGH, 0 MED, 9 INFO** (8 transcribable-but-never-yielding creators, plus
+  the standing "expert lane dormant between cycles" note).
+
 
 ## 2026-09-04 (nightly) — 3 pre-fetched transcripts distilled: 7 MadSkillzzTV healer takes, 3 Dalaran Gaming Rogue takes, 13 izen M+ metaNotes; 18 superseded; 2 new videos queued
 
