@@ -6,14 +6,16 @@ import { existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 
 const artifact = new URL("../wow-s2-gearing.html", import.meta.url);
-let chromium;
-try { ({ chromium } = await import("playwright")); } catch { /* optional dependency */ }
-const reason = !chromium ? "Playwright not installed" : !existsSync(fileURLToPath(artifact)) ? "gearing artifact not built" : null;
+const engine = process.env.PLAYWRIGHT_BROWSER || "chromium";
+if (!["chromium", "firefox", "webkit"].includes(engine)) throw new Error(`Invalid PLAYWRIGHT_BROWSER: ${engine}; choose chromium, firefox, or webkit.`);
+let browserType;
+try { browserType = (await import("playwright"))[engine]; } catch { /* optional dependency */ }
+const reason = !browserType ? "Playwright not installed" : !existsSync(fileURLToPath(artifact)) ? "gearing artifact not built" : null;
 
 test("gearing: every phone disclosure stays within the page and wide loot tables scroll locally",
   reason ? { skip: reason } : {}, async () => {
-    const executablePath = process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE;
-    const browser = await chromium.launch(executablePath ? { executablePath } : {});
+    const executablePath = engine === "chromium" && process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE;
+    const browser = await browserType.launch(executablePath ? { executablePath } : {});
     try {
       for (const width of [320, 390]) {
         const page = await browser.newPage({ viewport: { width, height: 844 } });

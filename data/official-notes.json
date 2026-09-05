@@ -1,0 +1,1568 @@
+{
+  "schemaVersion": 1,
+  "sources": {
+    "live-hotfixes": {
+      "topicId": 2336376,
+      "patch": "12.1",
+      "era": "live",
+      "checkedAt": "2026-09-05T18:02:13.847Z",
+      "removedSections": [],
+      "posts": [
+        {
+          "id": 29891478,
+          "postNumber": 1,
+          "version": 31,
+          "updatedAt": "2026-09-05T01:21:46.173Z",
+          "bodySha256": "443e3bd1e9d278a5993dd634c88b4587fc65b66d1c7b439437a967ae6d058635",
+          "sections": [
+            {
+              "id": "2336376:1:2026-09-04:classes:druid:1",
+              "date": "2026-09-04",
+              "category": "Classes",
+              "class": "Druid",
+              "specKeys": [
+                "Druid|Balance"
+              ],
+              "sha256": "fd5c554e2b0e0049018085727ba922d33e7c0b2ce858d0607512ae311a38532a",
+              "resolution": {
+                "disposition": "applied",
+                "reason": "Both September 4 class sections were reviewed against the official compilation and already appear in the live feed; the Enhancement set-bonus amendment is synchronized to gearing.",
+                "references": [
+                  {
+                    "kind": "build",
+                    "date": "2026-09-04",
+                    "highlight": "Balance Druid — Stellar Amplification can now be tracked in the Cooldown Manager; Twin Moons’ range is now increased by target combat reach, meaning it can spread to farther targets when attacking large enemies."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-04:classes:shaman:1",
+              "date": "2026-09-04",
+              "category": "Classes",
+              "class": "Shaman",
+              "specKeys": [
+                "Shaman|Enhancement"
+              ],
+              "sha256": "7e20dd40cb270dcae933ef510429757c053849602cbc10232e04d98620f45c56",
+              "resolution": {
+                "disposition": "applied",
+                "reason": "Both September 4 class sections were reviewed against the official compilation and already appear in the live feed; the Enhancement set-bonus amendment is synchronized to gearing.",
+                "references": [
+                  {
+                    "kind": "build",
+                    "date": "2026-09-04",
+                    "highlight": "Enhancement Shaman — Corrected an issue where the Venomous Abyss 4-set bonus was not properly increasing the upfront damage of Crash Lightning."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-03:classes:priest:1",
+              "date": "2026-09-03",
+              "category": "Classes",
+              "class": "Priest",
+              "specKeys": [
+                "Priest|Holy"
+              ],
+              "sha256": "47352919de9c93967c1d2ec300c9b451756f126cd8470dd8e9dc300cecef0711",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-03:classes:shaman:1",
+              "date": "2026-09-03",
+              "category": "Classes",
+              "class": "Shaman",
+              "specKeys": [
+                "Shaman|Restoration"
+              ],
+              "sha256": "0b4ff2d270da6e3d9cc86a27c6bb5b49a9d7382d32ffdb3964d3526680834069",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-02:classes:druid:1",
+              "date": "2026-09-02",
+              "category": "Classes",
+              "class": "Druid",
+              "specKeys": [
+                "Druid|Feral"
+              ],
+              "sha256": "86beef65d5694c2def5b0bbe4bca6ed241291f0697f92b00b7364d2bb1c01146",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-02:classes:warlock:1",
+              "date": "2026-09-02",
+              "category": "Classes",
+              "class": "Warlock",
+              "specKeys": [
+                "Warlock|Destruction"
+              ],
+              "sha256": "2c31a324c12bc5e23e4f989ec9490847383959f61ea654a68020f9ea960ae150",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-02:classes:warrior:1",
+              "date": "2026-09-02",
+              "category": "Classes",
+              "class": "Warrior",
+              "specKeys": [
+                "Warrior|Arms",
+                "Warrior|Fury",
+                "Warrior|Protection"
+              ],
+              "sha256": "a8a806b36e3177247b54e20ce0bf08a97fe3135673822a0de392d30fdf84a7d6",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-02:player-versus-player:druid:1",
+              "date": "2026-09-02",
+              "category": "Player versus Player",
+              "class": "Druid",
+              "specKeys": [
+                "Druid|Balance"
+              ],
+              "sha256": "6f13e4125d16e35f0f92a026af36d6075f1caae4eab792dd0bb6d6d41f0d4a77",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-02:player-versus-player:evoker:1",
+              "date": "2026-09-02",
+              "category": "Player versus Player",
+              "class": "Evoker",
+              "specKeys": [
+                "Evoker|Augmentation",
+                "Evoker|Devastation",
+                "Evoker|Preservation"
+              ],
+              "sha256": "bb59c7e83b3b99531955983fbd71bb0191ecec9acb5474e2bd5986595afc27bb",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-01:classes:death-knight:1",
+              "date": "2026-09-01",
+              "category": "Classes",
+              "class": "Death Knight",
+              "specKeys": [
+                "Death Knight|Frost",
+                "Death Knight|Unholy"
+              ],
+              "sha256": "ae89bcdb8b779b273070668f69546906bce495f44d011d10d382b66fc1b803d1",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-01:classes:demon-hunter:1",
+              "date": "2026-09-01",
+              "category": "Classes",
+              "class": "Demon Hunter",
+              "specKeys": [
+                "Demon Hunter|Havoc",
+                "Demon Hunter|Vengeance"
+              ],
+              "sha256": "2e2f38b13dc3bf4f680cd17a6450547d97d0aa2285e8a7eced9017e16cd7af88",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-01:classes:druid:1",
+              "date": "2026-09-01",
+              "category": "Classes",
+              "class": "Druid",
+              "specKeys": [
+                "Druid|Balance",
+                "Druid|Feral",
+                "Druid|Guardian",
+                "Druid|Restoration"
+              ],
+              "sha256": "a6bf10ec83ff224e6f2f7c0b6fff7b790f89efab405e81143e640b8a04c4ac9c",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-01:classes:hunter:1",
+              "date": "2026-09-01",
+              "category": "Classes",
+              "class": "Hunter",
+              "specKeys": [
+                "Hunter|Beast Mastery",
+                "Hunter|Survival"
+              ],
+              "sha256": "1cb293706c81f7f8008d51c5c56e5a38f2570473f8f66935334654a7755994ff",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-01:classes:mage:1",
+              "date": "2026-09-01",
+              "category": "Classes",
+              "class": "Mage",
+              "specKeys": [
+                "Mage|Fire",
+                "Mage|Frost"
+              ],
+              "sha256": "2417d716cac4e07d2835d4322ce1adc553101534030ef9cb3fb2d2389b55c4b8",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-01:classes:monk:1",
+              "date": "2026-09-01",
+              "category": "Classes",
+              "class": "Monk",
+              "specKeys": [
+                "Monk|Mistweaver",
+                "Monk|Windwalker"
+              ],
+              "sha256": "2a03e40f58a82db786419422fb4f9b7c24652f7f5f118313877465bffb75213c",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-01:classes:paladin:1",
+              "date": "2026-09-01",
+              "category": "Classes",
+              "class": "Paladin",
+              "specKeys": [
+                "Paladin|Protection"
+              ],
+              "sha256": "0fa7fc476f5ca6422b2b5c12401b2140b135997c47978c91a7cf8c8e5594b2cb",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-01:classes:priest:1",
+              "date": "2026-09-01",
+              "category": "Classes",
+              "class": "Priest",
+              "specKeys": [
+                "Priest|Discipline"
+              ],
+              "sha256": "0ec3a12b7085ec20f28dea5a8590f7bb0e502b23bc23001a22cbe2a443d9016d",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-01:classes:rogue:1",
+              "date": "2026-09-01",
+              "category": "Classes",
+              "class": "Rogue",
+              "specKeys": [
+                "Rogue|Assassination"
+              ],
+              "sha256": "9d232577679edd07b99982366851f2006a0c611d831fa868054acc5b570dfc0b",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-01:classes:shaman:1",
+              "date": "2026-09-01",
+              "category": "Classes",
+              "class": "Shaman",
+              "specKeys": [
+                "Shaman|Elemental",
+                "Shaman|Enhancement",
+                "Shaman|Restoration"
+              ],
+              "sha256": "e96b1f4a96fb78383ca6cecb14610932c1fe138d53e8a6555c7bc1156812acae",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-01:player-versus-player:demon-hunter:1",
+              "date": "2026-09-01",
+              "category": "Player versus Player",
+              "class": "Demon Hunter",
+              "specKeys": [
+                "Demon Hunter|Devourer",
+                "Demon Hunter|Havoc"
+              ],
+              "sha256": "33e7fbbb1c2494c282a2132dff2d5554e641248b4bfa5900d3764b14d4e562e5",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-01:player-versus-player:druid:1",
+              "date": "2026-09-01",
+              "category": "Player versus Player",
+              "class": "Druid",
+              "specKeys": [
+                "Druid|Balance",
+                "Druid|Feral",
+                "Druid|Guardian",
+                "Druid|Restoration"
+              ],
+              "sha256": "40c6e4f95171628456ed773b470a2b13a202728b78d57981e95b5366e754a8c4",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-01:player-versus-player:evoker:1",
+              "date": "2026-09-01",
+              "category": "Player versus Player",
+              "class": "Evoker",
+              "specKeys": [
+                "Evoker|Devastation",
+                "Evoker|Preservation"
+              ],
+              "sha256": "2a1d650c3c0553f4182a13f66171262fabe6a050f3cda3e5b0c009e98ba647d2",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-01:player-versus-player:hunter:1",
+              "date": "2026-09-01",
+              "category": "Player versus Player",
+              "class": "Hunter",
+              "specKeys": [
+                "Hunter|Beast Mastery"
+              ],
+              "sha256": "a4fa62e3727a82bf5875853e84085e53e3f631eb49b40024d3d804def7937a13",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-01:player-versus-player:mage:1",
+              "date": "2026-09-01",
+              "category": "Player versus Player",
+              "class": "Mage",
+              "specKeys": [
+                "Mage|Arcane",
+                "Mage|Fire",
+                "Mage|Frost"
+              ],
+              "sha256": "b0eaed84cc39ee9f8642fd38654422f35c678f3681fe6a1b0185986b51332303",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-01:player-versus-player:priest:1",
+              "date": "2026-09-01",
+              "category": "Player versus Player",
+              "class": "Priest",
+              "specKeys": [
+                "Priest|Discipline"
+              ],
+              "sha256": "0ccfa808a46e3386b31c373e8dc2a4eddbe5d703769ef262e20fc5b65a90ff9c",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-01:player-versus-player:rogue:1",
+              "date": "2026-09-01",
+              "category": "Player versus Player",
+              "class": "Rogue",
+              "specKeys": [
+                "Rogue|Assassination",
+                "Rogue|Outlaw",
+                "Rogue|Subtlety"
+              ],
+              "sha256": "0b953e06e1825a81a5df6cc79f97f70cbcfa45fb4c9e4ba8c3bbc9bd01b924bd",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-01:player-versus-player:shaman:1",
+              "date": "2026-09-01",
+              "category": "Player versus Player",
+              "class": "Shaman",
+              "specKeys": [
+                "Shaman|Elemental",
+                "Shaman|Enhancement"
+              ],
+              "sha256": "6d3ae50fcb7c4c0cefd0e00beffff57aab558b0ca8a1c8a53b51b50a921f4e1d",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-01:player-versus-player:warrior:1",
+              "date": "2026-09-01",
+              "category": "Player versus Player",
+              "class": "Warrior",
+              "specKeys": [
+                "Warrior|Arms",
+                "Warrior|Fury",
+                "Warrior|Protection"
+              ],
+              "sha256": "178ef3412e0cbd1c0bc2b7d870c4c7008f14368c356abeed033edb4965f91361",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-31:classes:death-knight:1",
+              "date": "2026-08-31",
+              "category": "Classes",
+              "class": "Death Knight",
+              "specKeys": [
+                "Death Knight|Unholy"
+              ],
+              "sha256": "edb08f50db8c06638318c73c77235fbac620cf16e97d8f4d9b1a769d96cf70cf",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-31:classes:druid:1",
+              "date": "2026-08-31",
+              "category": "Classes",
+              "class": "Druid",
+              "specKeys": [
+                "Druid|Restoration"
+              ],
+              "sha256": "d7e8df9cbb9c70d8a68dd0b4455f7e69265cf461bc7ff731407e4045c6d6b860",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-31:classes:mage:1",
+              "date": "2026-08-31",
+              "category": "Classes",
+              "class": "Mage",
+              "specKeys": [
+                "Mage|Fire"
+              ],
+              "sha256": "d952f9456b1ab51aed22ca2d046808c7d80222f4af56f0c972170174a8d01767",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-31:classes:monk:1",
+              "date": "2026-08-31",
+              "category": "Classes",
+              "class": "Monk",
+              "specKeys": [
+                "Monk|Mistweaver"
+              ],
+              "sha256": "a1c5e2efa6e1ec383c341f1ecb2a1f89d4b18adadb161b845543d3bd09298833",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-31:classes:priest:1",
+              "date": "2026-08-31",
+              "category": "Classes",
+              "class": "Priest",
+              "specKeys": [
+                "Priest|Holy"
+              ],
+              "sha256": "7ceb2b6314463368c168dd7e4ebd1563a093fda3de93e636f91e5df984de70d6",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-31:classes:warlock:1",
+              "date": "2026-08-31",
+              "category": "Classes",
+              "class": "Warlock",
+              "specKeys": [
+                "Warlock|Affliction"
+              ],
+              "sha256": "9be6333698fc5e4003d89b1926abbd20775aaf609ba18c1766006003459551fe",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-26:classes:demon-hunter:1",
+              "date": "2026-08-26",
+              "category": "Classes",
+              "class": "Demon Hunter",
+              "specKeys": [
+                "Demon Hunter|Devourer"
+              ],
+              "sha256": "32afbd520aab7424b751f67cade7cc024e03b5ce812cede79be6dcaff9d87324",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-26:classes:paladin:1",
+              "date": "2026-08-26",
+              "category": "Classes",
+              "class": "Paladin",
+              "specKeys": [
+                "Paladin|Protection"
+              ],
+              "sha256": "0d7f1b88f4e0454cb4cb8a7496cdda10eac0d8d9d98e002eab16ad1d1a4eeacd",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-26:classes:priest:1",
+              "date": "2026-08-26",
+              "category": "Classes",
+              "class": "Priest",
+              "specKeys": [
+                "Priest|Holy"
+              ],
+              "sha256": "500d01fd363b89d5cf02be09855c0251571a0baf605d0b3a53834ceaa869bdaf",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-26:classes:shaman:1",
+              "date": "2026-08-26",
+              "category": "Classes",
+              "class": "Shaman",
+              "specKeys": [
+                "Shaman|Elemental"
+              ],
+              "sha256": "e14b1ed54136dff1ef00fe34f5c22dd6a2cc260d2d8777187fa2959bcdf30311",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-26:classes:warrior:1",
+              "date": "2026-08-26",
+              "category": "Classes",
+              "class": "Warrior",
+              "specKeys": [
+                "Warrior|Arms",
+                "Warrior|Fury",
+                "Warrior|Protection"
+              ],
+              "sha256": "d605e021ed337b59caf9c54204fb023d8855ca05a88cd36393e38dcce49e4244",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-25:classes:death-knight:1",
+              "date": "2026-08-25",
+              "category": "Classes",
+              "class": "Death Knight",
+              "specKeys": [
+                "Death Knight|Blood",
+                "Death Knight|Frost",
+                "Death Knight|Unholy"
+              ],
+              "sha256": "13054c0d22ad05e5f110899da3c34bcd42760c58b82b935f39f6293b354743a7",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-25:classes:demon-hunter:1",
+              "date": "2026-08-25",
+              "category": "Classes",
+              "class": "Demon Hunter",
+              "specKeys": [
+                "Demon Hunter|Havoc",
+                "Demon Hunter|Vengeance"
+              ],
+              "sha256": "d8cb9b2acf5d63bed133b0723f3fb67a763555a5208858acce099942fa1d46e4",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-25:classes:druid:1",
+              "date": "2026-08-25",
+              "category": "Classes",
+              "class": "Druid",
+              "specKeys": [
+                "Druid|Restoration"
+              ],
+              "sha256": "93f4fa93eb8baa4cf55c851261c3c620126b69d3c902fa171e11483e123559fe",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-25:classes:evoker:1",
+              "date": "2026-08-25",
+              "category": "Classes",
+              "class": "Evoker",
+              "specKeys": [
+                "Evoker|Preservation"
+              ],
+              "sha256": "b19a60e2d3d7a9d73deb4428677b3f75958a76397a0db0293807ae6941ee0936",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-25:classes:hunter:1",
+              "date": "2026-08-25",
+              "category": "Classes",
+              "class": "Hunter",
+              "specKeys": [
+                "Hunter|Beast Mastery",
+                "Hunter|Survival"
+              ],
+              "sha256": "62e25c35d4ca9cad817702dbdb26d4f7bf124ba380e6407c4944489fb42d8298",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-25:classes:mage:1",
+              "date": "2026-08-25",
+              "category": "Classes",
+              "class": "Mage",
+              "specKeys": [
+                "Mage|Frost"
+              ],
+              "sha256": "39a12582036eea4a90cbb992af866170d0c3bd2471f1bc3545770391739ba231",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-25:classes:monk:1",
+              "date": "2026-08-25",
+              "category": "Classes",
+              "class": "Monk",
+              "specKeys": [
+                "Monk|Brewmaster"
+              ],
+              "sha256": "dcfb82de14512e5bb49b146ae218f9bf5b731a28d4ca46ab8fa2f23c5efd6214",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-25:classes:paladin:1",
+              "date": "2026-08-25",
+              "category": "Classes",
+              "class": "Paladin",
+              "specKeys": [
+                "Paladin|Retribution"
+              ],
+              "sha256": "b11688b8cb9d6e8ce74c0575534f94e2901dbb62b7c969bb99d0ab3ab9781b27",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-25:classes:warlock:1",
+              "date": "2026-08-25",
+              "category": "Classes",
+              "class": "Warlock",
+              "specKeys": [
+                "Warlock|Affliction",
+                "Warlock|Demonology",
+                "Warlock|Destruction"
+              ],
+              "sha256": "1a0b352fbdb69cfe505158913a1fab4605f83d71ae6b0e0f1089f62f383808d6",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-25:classes:warrior:1",
+              "date": "2026-08-25",
+              "category": "Classes",
+              "class": "Warrior",
+              "specKeys": [
+                "Warrior|Protection"
+              ],
+              "sha256": "338aea78a91e14894270bed31548a9b4e793a865ec478102ed16fc3aecec940e",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-25:player-versus-player:demon-hunter:1",
+              "date": "2026-08-25",
+              "category": "Player versus Player",
+              "class": "Demon Hunter",
+              "specKeys": [
+                "Demon Hunter|Devourer",
+                "Demon Hunter|Havoc",
+                "Demon Hunter|Vengeance"
+              ],
+              "sha256": "56b55aee2281c1bfa3a745cb9538104b0a8227460b7905e3c3d343c761936016",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-25:player-versus-player:druid:1",
+              "date": "2026-08-25",
+              "category": "Player versus Player",
+              "class": "Druid",
+              "specKeys": [
+                "Druid|Feral"
+              ],
+              "sha256": "52064ae51d5de68279972672df083dba0a8a8f2b30f8509067a52d1339e60df0",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-25:player-versus-player:evoker:1",
+              "date": "2026-08-25",
+              "category": "Player versus Player",
+              "class": "Evoker",
+              "specKeys": [
+                "Evoker|Augmentation"
+              ],
+              "sha256": "fa5100ab098f22b4732ceed0dfb7e386564ceee007a6cb77c53469b24db1a9ea",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-25:player-versus-player:hunter:1",
+              "date": "2026-08-25",
+              "category": "Player versus Player",
+              "class": "Hunter",
+              "specKeys": [
+                "Hunter|Beast Mastery",
+                "Hunter|Marksmanship",
+                "Hunter|Survival"
+              ],
+              "sha256": "b23e6010ba2a8071c34cecc4ecaf8f56e334387d95f0d7040695a2e06b05bb4c",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-25:player-versus-player:mage:1",
+              "date": "2026-08-25",
+              "category": "Player versus Player",
+              "class": "Mage",
+              "specKeys": [
+                "Mage|Fire"
+              ],
+              "sha256": "44a70b27daab747b856165d9e218087ff5eabbce4ff4b106e9b8faf2a2d5d984",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-25:player-versus-player:monk:1",
+              "date": "2026-08-25",
+              "category": "Player versus Player",
+              "class": "Monk",
+              "specKeys": [
+                "Monk|Brewmaster",
+                "Monk|Windwalker"
+              ],
+              "sha256": "f2e93d12e059e08cb800a4ff6c619a55a5a20e616a8609261be1c6c60207c899",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-25:player-versus-player:paladin:1",
+              "date": "2026-08-25",
+              "category": "Player versus Player",
+              "class": "Paladin",
+              "specKeys": [
+                "Paladin|Holy",
+                "Paladin|Protection",
+                "Paladin|Retribution"
+              ],
+              "sha256": "c515bbdaf0832de0d9c01653c01eb6010787655bf2874da27dcd5dbc6e9e4f04",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-25:player-versus-player:priest:1",
+              "date": "2026-08-25",
+              "category": "Player versus Player",
+              "class": "Priest",
+              "specKeys": [
+                "Priest|Discipline",
+                "Priest|Holy",
+                "Priest|Shadow"
+              ],
+              "sha256": "4369d677d1beaa6876fb968fa39f96ecf594a34a4f7e34c6ea8aa9b0ae92c862",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-25:player-versus-player:rogue:1",
+              "date": "2026-08-25",
+              "category": "Player versus Player",
+              "class": "Rogue",
+              "specKeys": [
+                "Rogue|Assassination",
+                "Rogue|Outlaw",
+                "Rogue|Subtlety"
+              ],
+              "sha256": "6ac1a154f3ed20163d1721cecfd401c0dc4f0b71b26626233c135bf7ee948c26",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-25:player-versus-player:shaman:1",
+              "date": "2026-08-25",
+              "category": "Player versus Player",
+              "class": "Shaman",
+              "specKeys": [
+                "Shaman|Elemental",
+                "Shaman|Restoration"
+              ],
+              "sha256": "45aa96d8cdd330d9aed3b37f2a087f284250d4d5e4b6f75b09f31f4bb6e6e59a",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-25:player-versus-player:warlock:1",
+              "date": "2026-08-25",
+              "category": "Player versus Player",
+              "class": "Warlock",
+              "specKeys": [
+                "Warlock|Affliction",
+                "Warlock|Demonology",
+                "Warlock|Destruction"
+              ],
+              "sha256": "01a9f6150270c1e69fffe0664119f096b269cf82b460abd508424ebf53b3f00e",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-25:player-versus-player:warrior:1",
+              "date": "2026-08-25",
+              "category": "Player versus Player",
+              "class": "Warrior",
+              "specKeys": [
+                "Warrior|Arms"
+              ],
+              "sha256": "1d78b3682299789a28588aa6a86d5e21c3f7e5c38e5f3a6d558af4efa03559d7",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-20:classes:demon-hunter:1",
+              "date": "2026-08-20",
+              "category": "Classes",
+              "class": "Demon Hunter",
+              "specKeys": [
+                "Demon Hunter|Havoc"
+              ],
+              "sha256": "29cc33c5e9bd358cd6cef1c70fb51ba70dab8f0ece0c58c6abc7b1e2ca6d5745",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-20:classes:druid:1",
+              "date": "2026-08-20",
+              "category": "Classes",
+              "class": "Druid",
+              "specKeys": [
+                "Druid|Restoration"
+              ],
+              "sha256": "45f77a8812b481d097d36bbb969ef741fc363a9f3b420046e4cf749718963fca",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-20:classes:hunter:1",
+              "date": "2026-08-20",
+              "category": "Classes",
+              "class": "Hunter",
+              "specKeys": [
+                "Hunter|Marksmanship"
+              ],
+              "sha256": "7d740eb1788bcfca407b2a7a4ce247d39152a86f582be1e127be2c54793de3b2",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-20:classes:priest:1",
+              "date": "2026-08-20",
+              "category": "Classes",
+              "class": "Priest",
+              "specKeys": [
+                "Priest|Holy"
+              ],
+              "sha256": "8f8d0084c14ada4a26f24324ce17b6ad54b7013fe3052ba579c298fcf2115298",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-20:classes:shaman:1",
+              "date": "2026-08-20",
+              "category": "Classes",
+              "class": "Shaman",
+              "specKeys": [
+                "Shaman|Elemental"
+              ],
+              "sha256": "f5b4fc210109f538b718826b69ac1df27a9a3305aab744b5faaed70222060576",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-20:classes:warlock:1",
+              "date": "2026-08-20",
+              "category": "Classes",
+              "class": "Warlock",
+              "specKeys": [
+                "Warlock|Affliction",
+                "Warlock|Demonology",
+                "Warlock|Destruction"
+              ],
+              "sha256": "0e2a7bfa90ae2c9d6334ba8520fb6daa4f06e937d0ecd659632d39ab6fd399e7",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-19:classes:death-knight:1",
+              "date": "2026-08-19",
+              "category": "Classes",
+              "class": "Death Knight",
+              "specKeys": [
+                "Death Knight|Blood",
+                "Death Knight|Frost",
+                "Death Knight|Unholy"
+              ],
+              "sha256": "7d0f1ee1229a18064129ad7baee8bf962eb71c28a22107e6ce386a5205b0cd8d",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-19:classes:druid:1",
+              "date": "2026-08-19",
+              "category": "Classes",
+              "class": "Druid",
+              "specKeys": [
+                "Druid|Restoration"
+              ],
+              "sha256": "0a82609721d340374d3265393e34b8e92bf7a43fe192904e4296c6713b31aab2",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-19:classes:hunter:1",
+              "date": "2026-08-19",
+              "category": "Classes",
+              "class": "Hunter",
+              "specKeys": [
+                "Hunter|Marksmanship"
+              ],
+              "sha256": "31eedb96f8e66577198dcec42bd83d21aeee5076f43539b4674ab3886c85b9f8",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-19:classes:paladin:1",
+              "date": "2026-08-19",
+              "category": "Classes",
+              "class": "Paladin",
+              "specKeys": [
+                "Paladin|Retribution"
+              ],
+              "sha256": "67d6c3a18ebc0625745357d07e7e3df19056c0fc28337847b36ee65831249a4f",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-19:classes:shaman:1",
+              "date": "2026-08-19",
+              "category": "Classes",
+              "class": "Shaman",
+              "specKeys": [
+                "Shaman|Restoration"
+              ],
+              "sha256": "19919266cb5ac8103fb289232911ec172689f8e3290d6c256ba8917033fa8f9d",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-18:classes:death-knight:1",
+              "date": "2026-08-18",
+              "category": "Classes",
+              "class": "Death Knight",
+              "specKeys": [
+                "Death Knight|Blood",
+                "Death Knight|Frost"
+              ],
+              "sha256": "a5890cfdcd98bd557a3b68d2238138df3ebcabce299a856d3cb415b8cc884cf1",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-18:classes:demon-hunter:1",
+              "date": "2026-08-18",
+              "category": "Classes",
+              "class": "Demon Hunter",
+              "specKeys": [
+                "Demon Hunter|Devourer"
+              ],
+              "sha256": "c13eb2814159d6cd5d67dd3618bda31a57c720e01c95e645300c0506bf70c173",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-18:classes:druid:1",
+              "date": "2026-08-18",
+              "category": "Classes",
+              "class": "Druid",
+              "specKeys": [
+                "Druid|Restoration"
+              ],
+              "sha256": "a1305ca6118b60101f31fb3de0b6785bfe057bda287ec18f1665b60418d8aebd",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-18:classes:hunter:1",
+              "date": "2026-08-18",
+              "category": "Classes",
+              "class": "Hunter",
+              "specKeys": [
+                "Hunter|Beast Mastery",
+                "Hunter|Marksmanship",
+                "Hunter|Survival"
+              ],
+              "sha256": "ecdbb1c0863fdc2ba546225dcb8a4301159583bfc7a015f8cc4b39e4ad21361e",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-18:classes:mage:1",
+              "date": "2026-08-18",
+              "category": "Classes",
+              "class": "Mage",
+              "specKeys": [
+                "Mage|Arcane"
+              ],
+              "sha256": "f49c2b60b402dafac8661484e1ef8cbb1ec729fa779bb70ec28c58aa1d32da5e",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-18:classes:monk:1",
+              "date": "2026-08-18",
+              "category": "Classes",
+              "class": "Monk",
+              "specKeys": [
+                "Monk|Mistweaver"
+              ],
+              "sha256": "164dc733f1c0bd511bb0d2ff284dee60c2b4541ea1afa9142c86544137e3b034",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-18:classes:paladin:1",
+              "date": "2026-08-18",
+              "category": "Classes",
+              "class": "Paladin",
+              "specKeys": [
+                "Paladin|Retribution"
+              ],
+              "sha256": "a609c338237b9ff9c5ad99065ce51eceea3fc9679b0b015418d220b643af4250",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-18:classes:priest:1",
+              "date": "2026-08-18",
+              "category": "Classes",
+              "class": "Priest",
+              "specKeys": [
+                "Priest|Discipline",
+                "Priest|Holy"
+              ],
+              "sha256": "199186b33b5c13866c5b47b7ef409e7ecd7cfc35b0f57efccfa1f251f75000b5",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-18:classes:rogue:1",
+              "date": "2026-08-18",
+              "category": "Classes",
+              "class": "Rogue",
+              "specKeys": [
+                "Rogue|Assassination",
+                "Rogue|Subtlety"
+              ],
+              "sha256": "f68a94cecee83cf64068c0a6d00285a7e8c4669d83f7685763781b4ed76ed0f1",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-18:classes:shaman:1",
+              "date": "2026-08-18",
+              "category": "Classes",
+              "class": "Shaman",
+              "specKeys": [
+                "Shaman|Elemental",
+                "Shaman|Enhancement"
+              ],
+              "sha256": "d98c24c52bb06e2be4f6f2ff675cf69968d8bc60451a1442d6603678f862d6d2",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-18:classes:warlock:1",
+              "date": "2026-08-18",
+              "category": "Classes",
+              "class": "Warlock",
+              "specKeys": [
+                "Warlock|Affliction",
+                "Warlock|Demonology",
+                "Warlock|Destruction"
+              ],
+              "sha256": "03e849a40590a5520c8db57200dacd7c301ce40cdfb7edac63d7f1817dfb7628",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-18:classes:warrior:1",
+              "date": "2026-08-18",
+              "category": "Classes",
+              "class": "Warrior",
+              "specKeys": [
+                "Warrior|Arms",
+                "Warrior|Fury",
+                "Warrior|Protection"
+              ],
+              "sha256": "0f1face81ddce7c96565f1ffa07cca0773423842a4e1da3c63950bdbd1df9dac",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-18:player-versus-player:demon-hunter:1",
+              "date": "2026-08-18",
+              "category": "Player versus Player",
+              "class": "Demon Hunter",
+              "specKeys": [
+                "Demon Hunter|Devourer"
+              ],
+              "sha256": "706aabc1b371a536a3b188355b66893350eb52daa2f98747a4b1fb5724bdd9d8",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-18:player-versus-player:druid:1",
+              "date": "2026-08-18",
+              "category": "Player versus Player",
+              "class": "Druid",
+              "specKeys": [
+                "Druid|Restoration"
+              ],
+              "sha256": "910482268d6b73525b7f221f68847b96c5d2abe1a1ca03eb78bab5c049eebd18",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-18:player-versus-player:mage:1",
+              "date": "2026-08-18",
+              "category": "Player versus Player",
+              "class": "Mage",
+              "specKeys": [
+                "Mage|Fire"
+              ],
+              "sha256": "c9610958e2cb852cf3c8f848396613caf55ca1f65aa8a93e973c82378b434c37",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-18:player-versus-player:paladin:1",
+              "date": "2026-08-18",
+              "category": "Player versus Player",
+              "class": "Paladin",
+              "specKeys": [
+                "Paladin|Holy",
+                "Paladin|Retribution"
+              ],
+              "sha256": "46d484162f6f4700cd20a202ce569d687b84959db9a3c7f7aa69f920accd48e2",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-18:player-versus-player:shaman:1",
+              "date": "2026-08-18",
+              "category": "Player versus Player",
+              "class": "Shaman",
+              "specKeys": [
+                "Shaman|Restoration"
+              ],
+              "sha256": "5cb98ff076fbadfc8b0ae0afe52648249eab8c6f1330c24b9ed8d7110742735b",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-18:player-versus-player:warlock:1",
+              "date": "2026-08-18",
+              "category": "Player versus Player",
+              "class": "Warlock",
+              "specKeys": [
+                "Warlock|Destruction"
+              ],
+              "sha256": "bd648fcf2e8f8e4cb8c815430b43ef3b961dbabb3f59c427193e9b015e184b7e",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-17:classes:hunter:1",
+              "date": "2026-08-17",
+              "category": "Classes",
+              "class": "Hunter",
+              "specKeys": [
+                "Hunter|Beast Mastery"
+              ],
+              "sha256": "4f50a6ef9942ab7d68f3f015d1d13dc52caf4ec7215cbb78809164024029bb58",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-17:classes:priest:1",
+              "date": "2026-08-17",
+              "category": "Classes",
+              "class": "Priest",
+              "specKeys": [
+                "Priest|Holy"
+              ],
+              "sha256": "c694c3d092566e07a27af5c6e45a10f582f58bb2dcbf0bb30532e65110d5645d",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-17:classes:shaman:1",
+              "date": "2026-08-17",
+              "category": "Classes",
+              "class": "Shaman",
+              "specKeys": [
+                "Shaman|Elemental",
+                "Shaman|Enhancement",
+                "Shaman|Restoration"
+              ],
+              "sha256": "797485d3a0d7ee1f61af5ef2b4fdb712fb655f9fe07b2fb58c7146cb8a3c1d2c",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-17:classes:warlock:1",
+              "date": "2026-08-17",
+              "category": "Classes",
+              "class": "Warlock",
+              "specKeys": [
+                "Warlock|Destruction"
+              ],
+              "sha256": "ac9b9712d6d1301b48c93a0af9874735f874f3e67b73c31a5784a3e0845aa540",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-14:classes:evoker:1",
+              "date": "2026-08-14",
+              "category": "Classes",
+              "class": "Evoker",
+              "specKeys": [
+                "Evoker|Devastation"
+              ],
+              "sha256": "ee9330bbbf35ccb02b7e8ac9ebdcb77205378b091e03b6425bb3a32da63b9ba8",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-14:classes:warrior:1",
+              "date": "2026-08-14",
+              "category": "Classes",
+              "class": "Warrior",
+              "specKeys": [
+                "Warrior|Arms",
+                "Warrior|Fury",
+                "Warrior|Protection"
+              ],
+              "sha256": "3dfaf84003b28d5d9996330707cae6a9ed678a436423b3a164232d9ff66c30b2",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-14:classes:warlock:1",
+              "date": "2026-08-14",
+              "category": "Classes",
+              "class": "Warlock",
+              "specKeys": [
+                "Warlock|Affliction",
+                "Warlock|Demonology",
+                "Warlock|Destruction"
+              ],
+              "sha256": "c92b13fed756c9155188fc505dece3718f70f0cee5bfc0e83c11ad5191ab3d45",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-13:classes:spirit-walk-in-the-vaults-of-atal-utek-should-now-apply-to-pets:1",
+              "date": "2026-08-13",
+              "category": "Classes",
+              "class": "Spirit Walk in the Vaults of Atal’utek should now apply to pets.",
+              "specKeys": [],
+              "sha256": "01a3eca7597b2ec4adf557a58df14de6697e7b1cd8109c8c437ea39557af182c",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-08-13:classes:warlock:1",
+              "date": "2026-08-13",
+              "category": "Classes",
+              "class": "Warlock",
+              "specKeys": [
+                "Warlock|Affliction"
+              ],
+              "sha256": "a3232fa1882b0dbc42c60522528a5acdd33d574cfd28737729d40a3e989797f2",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "ptr-preview": {
+      "topicId": 2344395,
+      "patch": "12.1.5",
+      "era": "ptr",
+      "checkedAt": "2026-09-05T18:02:13.847Z",
+      "removedSections": [],
+      "posts": [
+        {
+          "id": 29981946,
+          "postNumber": 1,
+          "version": 3,
+          "updatedAt": "2026-09-03T22:48:20.565Z",
+          "bodySha256": "970dd474c20f4305a7c9f76f485a919ee2cb887a8493a749b60987d5184d2bc2",
+          "sections": [
+            {
+              "id": "2344395:1:2026-09-03:classes:demon-hunter:1",
+              "date": "2026-09-03",
+              "category": "CLASSES",
+              "class": "Demon Hunter",
+              "specKeys": [
+                "Demon Hunter|Devourer"
+              ],
+              "sha256": "f706f7b58b3f1a2972f5373e03746e18223eac782e7a18ac79c1a1c51e8080cc",
+              "resolution": {
+                "disposition": "applied",
+                "reason": "Reviewed against the official 12.1.5 PTR class section; published only as an attributed notes preview.",
+                "notes": [
+                  {
+                    "specKey": "Demon Hunter|Devourer",
+                    "summary": "Collapsing Star gains range after casting begins and loses its cancellation cooldown. Its Fury-drain slowdown is capped at about 1.5 full casts across retries. For Void-Scarred, Demonic Intensity moves The Hunt reset to Collapsing Star and empowers Hunt damage by 30%; Violent Transformation resets Soul Immolation, losing its Hunt reset and damage bonus. Monster Rising changes outside-form Intellect from 15% to 10% and Collapsing Star damage from 15% to 20%."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "2344395:1:2026-09-03:classes:hunter:1",
+              "date": "2026-09-03",
+              "category": "CLASSES",
+              "class": "Hunter",
+              "specKeys": [
+                "Hunter|Marksmanship"
+              ],
+              "sha256": "e507d0ed593c8ad96bcdc76525f198b4b489e49f0759e5e643f38a110fbf75c2",
+              "resolution": {
+                "disposition": "applied",
+                "reason": "Reviewed against the official 12.1.5 PTR class section; published only as an attributed notes preview.",
+                "notes": [
+                  {
+                    "specKey": "Hunter|Marksmanship",
+                    "summary": "Blood Fletching replaces Unload: critical Aimed Shots apply a Master Marksman bleed for 20% of their damage and open a four-second window for additional bleed damage when abilities hit that target."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "2344395:1:2026-09-03:classes:warrior:1",
+              "date": "2026-09-03",
+              "category": "CLASSES",
+              "class": "Warrior",
+              "specKeys": [
+                "Warrior|Protection"
+              ],
+              "sha256": "aef716c83b6a1b5df312c544d3da481e6fd23f949837789eeee14e5d15cd8a8e",
+              "resolution": {
+                "disposition": "applied",
+                "reason": "Reviewed against the official 12.1.5 PTR class section; published only as an attributed notes preview.",
+                "notes": [
+                  {
+                    "specKey": "Warrior|Protection",
+                    "summary": "Execute loses optional Rage spending and its damage doubles. For Colossus, Practiced Strikes also lowers the Rage cost of Execute and Revenge by 10."
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

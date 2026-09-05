@@ -403,13 +403,13 @@
     "name": "Mythicstats",
     "kind": "metrics",
     "author": "raptoranka",
-    "methodology": "Weekly per-spec M+ meta statistics from the top 2000 keys of each reset period: representation % per spec (the meta-share axis Murlok cannot provide), spec diversity by key level, top comps. JS-heavy — fetch via r.jina.ai proxy.",
+    "methodology": "Weekly per-spec M+ meta statistics from the top 2000 keys of each reset period: representation % per spec (the meta-share axis Murlok cannot provide), spec diversity by key level, top comps. Deterministic collection reads the server-rendered Spec representation in top keys section at /period/latest after its current-period redirect. Unchanged undated observations retain their prior data dates.",
     "pages": [
       {
         "bracket": "mplus",
         "role": "All",
         "label": "Top-2000 keys representation",
-        "url": "https://mythicstats.com/",
+        "url": "https://mythicstats.com/period/latest",
         "snapshot": "2026-09-05"
       }
     ],

@@ -26,3 +26,20 @@ test("weekly guide publication isolates failed sources and keeps explicit valida
   assert.match(text,/Surface incomplete source refreshes\s+if: always\(\)/);
   assert.doesNotMatch(text,/git add \.|git add -A|git rebase|git push[^\n]*--force/);
 });
+
+test("nightly binds metric and note checks to artifacts created before the agent", () => {
+  const text = workflow("nightly");
+  const agent = text.indexOf("- name: Primary full refresh");
+  const overlay = text.indexOf("- name: Download refresh output");
+  const publishChecks = text.indexOf("- name: Verify collected metrics and complete official note intake");
+  assert.ok(agent > 0 && overlay > agent && publishChecks > overlay);
+  for (const [fetcher, download, checker] of [
+    ["fetch-stable-metrics", "Download trusted stable metric receipts", "check-stable-metrics"],
+    ["fetch-official-notes", "Download trusted official note receipts", "check-official-notes"],
+  ]) {
+    assert.ok(text.indexOf(`run: node src/${fetcher}.mjs`) < agent);
+    const trusted = text.indexOf(`- name: ${download}`);
+    assert.ok(trusted > overlay && trusted < publishChecks);
+    assert.ok(text.indexOf(`node src/${checker}.mjs`, publishChecks) < text.indexOf("- name: Commit and push explicit paths"));
+  }
+});

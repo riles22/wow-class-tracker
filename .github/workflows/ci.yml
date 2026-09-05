@@ -49,6 +49,12 @@ jobs:
   # stays green and fast.
   ui-invariants:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, firefox, webkit]
+    env:
+      PLAYWRIGHT_BROWSER: ${{ matrix.browser }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
@@ -59,6 +65,6 @@ jobs:
       - name: Install Playwright (not saved — never becomes a repo dependency)
         run: |
           npm install --no-save playwright@1.61.1
-          npx playwright install --with-deps chromium
+          npx playwright install --with-deps "$PLAYWRIGHT_BROWSER"
       - name: UI invariants
         run: node --test test/ui-invariants.test.mjs gearing/test/ui-invariants.test.mjs

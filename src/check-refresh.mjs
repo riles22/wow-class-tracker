@@ -527,6 +527,28 @@ export function checkFreshness(config, manifest, data, now, gearing = null) {
       keys.push(`${req.key}-published`);
     }
   }
+  // A successful night elsewhere must not hide a stalled official-note collector.
+  // These instants verify intake coverage; they never advance a tuning fact's date.
+  for (const id of config.officialNotes?.sources ?? []) {
+    const key = `official-notes-${id}`;
+    const source = data.officialNotes?.sources?.[id];
+    const checkedAt = source?.checkedAt;
+    const checkedMs = typeof checkedAt === "string" && ISO_INSTANT.test(checkedAt) ? Date.parse(checkedAt) : NaN;
+    const hours = (nowMs - checkedMs) / 3600000;
+    report.push(`${key}: ${checkedAt ?? "no verification receipt"}${Number.isFinite(hours) ? ` (${Math.round(hours)}h, max ${config.officialNotes.maxAgeHours}h)` : ""}`);
+    if (!Number.isFinite(hours)) {
+      violations.push(`${key}: no valid official-note verification receipt`); keys.push(key);
+    } else if (hours < -5 / 60) {
+      violations.push(`${key}: verification receipt is in the future`); keys.push(key);
+    } else if (hours > config.officialNotes.maxAgeHours) {
+      violations.push(`${key}: official-note intake has not been verified for ${Math.round(hours)}h (max ${config.officialNotes.maxAgeHours}h)`); keys.push(key);
+    }
+    const pending = [...(source?.posts ?? []).flatMap(post => post.sections ?? []), ...(source?.removedSections ?? [])]
+      .filter(section => section.resolution?.disposition === "unresolved").length;
+    if (pending) {
+      violations.push(`${key}: ${pending} official-note class section(s) still need review`); keys.push(`${key}-unresolved`);
+    }
+  }
   /* GEARING FRESHNESS (2026-08-08). The gearing subproject had no staleness surface of any
      kind: nothing in required-sources.json, check-refresh, freshness.yml, validate.mjs or
      snapshot.mjs mentioned it, and its own validator's seven "stale" strings are all COUNT
@@ -535,7 +557,7 @@ export function checkFreshness(config, manifest, data, now, gearing = null) {
      Deliberately HEARTBEAT-ONLY, and deliberately a sibling of `requirements[]` rather than an
      entry in it. requirements[] is consumed by checkManifest as well as this function, so a row
      there would make the nightly publish gate demand a run-manifest entry for a subproject the
-     nightly cannot refresh — gearing harvests are MANUAL because Wowhead is unreachable from CI.
+     tracker manifest does not claim external gearing work — guides have a separate weekly workflow.
      A sibling key is read only by the loop that iterates it. That is structural, not a
      convention. It is also NOT in gearing/src/validate-data.mjs, so `npm test` (nightly Gate 1)
      can never go red on a date the nightly has no way to fix.
@@ -551,7 +573,7 @@ export function checkFreshness(config, manifest, data, now, gearing = null) {
         report.push(`${ds.key}: ${date ?? "no dated state"}${age != null ? ` (${age}d, max ${ds.maxAgeDays}d)` : ""}`);
         if (date == null) { violations.push(`${ds.key}: gearing/data/${ds.file} carries no ${ds.dateField} date`); keys.push(ds.key); }
         else if (age > ds.maxAgeDays) {
-          violations.push(`${ds.key} (gearing/data/${ds.file}) is ${age} days stale — max ${ds.maxAgeDays}d. Gearing harvests are manual; see gearing/README.md`);
+          violations.push(`${ds.key} (gearing/data/${ds.file}) is ${age} days stale — max ${ds.maxAgeDays}d. Check the weekly guide workflow or the dataset's harvest procedure in gearing/README.md`);
           keys.push(ds.key);
         }
         if (ds.dateField === "structuralSync.checkedAt" && age != null && age < 0) {

@@ -1,4 +1,6 @@
 node_modules/
+**/AGENTS.md
+!/AGENTS.md
 *.log
 .DS_Store
 Thumbs.db
@@ -10,9 +12,13 @@ Thumbs.db
 # as an artifact, never committed
 wcl-fetch/
 
-# machine-local skills mirror (may contain the gitignored WCL config) — never commit
-.agents/
-AGENTS.md
+# Track only generated skill entry points; local credentials, logs, and scratch stay private.
+.agents/*
+!.agents/skills/
+.agents/skills/*
+!.agents/skills/*/
+.agents/skills/*/*
+!.agents/skills/*/SKILL.md
 
 # deterministic pre-agent transcript stage output (consumed in-run, never committed)
 transcript-fetch/
@@ -25,6 +31,10 @@ published-evidence/
 
 # Deterministic public-source availability receipts; diagnostics, never game data.
 source-health/
+
+# Deterministic metrics and official-note receipts travel as trusted run artifacts.
+metrics-fetch/
+official-notes/
 
 # The SimC pipeline was retired 2026-08-18 (gearing-s2-scope Phase A), but its local run
 # scratch and crash-leftover lock files may still exist on machines that ran it — keep

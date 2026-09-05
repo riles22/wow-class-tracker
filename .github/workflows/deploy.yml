@@ -46,6 +46,15 @@ jobs:
         run: npm run build
       - name: Sanity-check the artifact exists
         run: test -s dist/index.html
+      - name: Record expected page hashes for this build commit
+        run: node src/verify-deployment.mjs --create --dist dist --manifest "$RUNNER_TEMP/deployment-expected.json" --sha "$GITHUB_SHA"
+      - name: Preserve trusted verification manifest
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: deployment-expected-${{ github.run_id }}
+          path: ${{ runner.temp }}/deployment-expected.json
+          retention-days: 7
+          if-no-files-found: error
       - name: Warn if the committed dist drifted from the rebuilt one (non-fatal)
         run: |
           if ! git diff --quiet -- dist/index.html; then
@@ -63,6 +72,8 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    outputs:
+      page_url: ${{ steps.d1.outputs.page_url || steps.d2.outputs.page_url || steps.d3.outputs.page_url }}
     permissions:
       pages: write
       id-token: write
@@ -92,3 +103,28 @@ jobs:
         id: d3
         if: steps.d1.outcome == 'failure' && steps.d2.outcome == 'failure'
         uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5.0.0
+
+  # This plain-Node job remains inside the workflow-wide Pages concurrency lock,
+  # so a newer deployment cannot replace the site while these hashes are checked.
+  # Expected hashes come from THIS run's trusted build artifact, never the website.
+  verify:
+    needs: [build, deploy]
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "22"
+      - name: Download this build's expected hashes
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: deployment-expected-${{ github.run_id }}
+          path: ${{ runner.temp }}/deployment-verification
+      - name: Verify all three public pages match this commit
+        env:
+          PAGE_URL: ${{ needs.deploy.outputs.page_url }}
+        run: node src/verify-deployment.mjs --manifest "$RUNNER_TEMP/deployment-verification/deployment-expected.json" --sha "$GITHUB_SHA" --url "$PAGE_URL"

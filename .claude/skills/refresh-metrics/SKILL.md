@@ -19,7 +19,7 @@ wcl-live-raid and wcl-live-mplus) from it; never fetch warcraftlogs.com
 yourself there (the publish gate cross-checks a pre-agent copy of the evidence, so a
 fabricated WCL "success" fails the publish). Everything below applies to LOCAL runs.
 
-Local credentials come from either source, checked in this order:
+Local credentials come from these sources, checked in this order:
 1. **Environment variables** `WCL_CLIENT_ID` + `WCL_CLIENT_SECRET` (also what
    `src/fetch-wcl.mjs` reads — you can run it locally to reproduce the CI evidence).
 2. **`.claude/skills/refresh-metrics/config.json`** (see `config.json.example`) — the
@@ -31,11 +31,15 @@ Local credentials come from either source, checked in this order:
    token POST fails with a bare **401** that looks exactly like revoked credentials; that
    misread cost a local run on 2026-08-13 and was logged as a doc nit on 08-08 before
    this line was corrected.
+3. **`.agents/skills/refresh-metrics/config.json`** — the ignored machine-local legacy
+   adapter location, used only if the environment and canonical `.claude` config are
+   absent. It has the same `wclClientId` / `wclClientSecret` keys. Preserve this local
+   credential file when regenerating skill adapters; never copy it into tracked skills.
 
-If either is present, use the sanctioned v2 GraphQL API instead of HTML scraping: POST
+If credentials are present, use the sanctioned v2 GraphQL API instead of HTML scraping: POST
 client-credentials to `https://www.warcraftlogs.com/oauth/token`, then query
 `https://www.warcraftlogs.com/api/v2/client` (zone rankings/statistics by encounter,
-difficulty, metric). If NEITHER is present, use the HTML fallback below and remind the
+difficulty, metric). If none are present, use the HTML fallback below and remind the
 user ONCE per session that registering a free client at warcraftlogs.com/api/clients/
 makes this sanctioned and more reliable.
 Never commit config.json or echo the secret (env or file) into logs, commits, or reports.
@@ -118,16 +122,35 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
   so those letters have no visible parse basis at all.
   The correct behaviour is the Bloodmallet/WCL precedent — leave the stored aggregate standing,
   merge nothing, and let the staleness red be the honest signal that upstream has not rebuilt.
+- **Murlok and Mythicstats now have deterministic collectors (2026-09-05).** Nightly
+  CI runs `node src/fetch-stable-metrics.mjs` before the agent and uploads a separate
+  trusted artifact containing `metrics-fetch/evidence.json` plus `updates.json`.
+  LOCAL runs execute that same command first. Review the receipts, then merge ONLY
+  `node src/apply-metrics.mjs metrics-fetch/updates.json`; do not reimplement either
+  parser in an agent or hand-write rows. `node src/check-stable-metrics.mjs` checks the
+  merged data against the trusted receipts and Git HEAD. A failed/partial provider
+  must stay unchanged; successful rows must match exactly. The source receipts'
+  `status: success` means the complete parse succeeded, not that its source date is
+  today's date: the existing manifest freshness rules still decide success/partial.
+  The parser fixtures and regression tests live under `test/fixtures/stable-metrics`
+  and `test/stable-metrics.test.mjs`; changed upstream markup needs a reviewed parser
+  fix plus fixtures, never an ad-hoc bypass of the receipt checker.
 - **Murlok** meta pages (plain GET; **r.jina.ai does NOT work on murlok**):
-  "Top-50 avg M+ rating (ceiling)" — it is the avg rating of each spec's own top-50
-  players, NOT popularity; keep the "(ceiling)" in the name.
+  "Top-50 avg M+ rating (ceiling)" is the avg rating of each spec's own top-50
+  players, NOT popularity; keep "(ceiling)" in the name. The script validates all
+  **27 DPS / 7 healer / 6 tank** rows, contiguous ranks, matching href/labels, and
+  current-season page titles. Attribute order is irrelevant: the top-ranked link may
+  put `href` before `class`. `asOf` is the source's **`<time datetime>` date**;
+  rendered "Updated N hours ago" can be stale. Same-date value changes are merged
+  with that unchanged source date, without assigning a sample size the page omits.
 - **Mythicstats** (mythicstats.com): per-spec representation % in the top 2000 keys per
   weekly period — metric name "Top-2000 keys representation", unit "%". **Server-rendered:
   fetch `https://mythicstats.com/period/latest` directly — r.jina.ai is Cloudflare-403 on
   this host** (the old "JS-heavy, fetch via r.jina.ai" line here was stale), and the site
-  root has no data table. Note the period id in the refresh log. If `/period/latest` 302s to
-  a period that 404s (a 7.5 KB error body), that is a half-landed weekly roll, not an outage
-  — ingest the newest period that HAS data and record which.
+  root has no data table. Note the period id in the refresh log. If `/period/latest`
+  redirects to a period that 404s, the deterministic collector records **pending** and
+  preserves the entire prior series until the next retry. An older period must not be
+  given today's date to make that half-landed weekly roll look fresh.
   · **Bound the parse to the "Spec representation in top keys" section**, ending at the next
     `## ` heading or the enclosing `<section>`. Scanning the whole page for the spec-image
     pattern yields **59** rows, because the "Classes and specs" block and the per-dungeon
@@ -142,6 +165,13 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
     rows silently drop, and allow `\s*` around the number: a whitespace-strict regex returns
     **0 specs** and would zero the roster. The bar's `height: NN.NNNN%` style PRECEDES the
     value, so a "first percentage in the block" regex reads the bar height instead.
+  · **Dates and genuine absences:** current pages publish no update timestamp. The
+    receipt records `sourceAsOf: null` and `dateBasis: observed-undated-source` rather
+    than inventing a publication date. Changed/new observations use the fetch date;
+    identical values keep their existing `asOf`. If a source-owned update timestamp
+    or Last-Modified date becomes available, it is preserved. Missing chart specs get no fabricated zero:
+    an existing zero is left with its original date, while an omitted nonzero stored
+    share holds the provider for review so it cannot add phantom share to the new cut.
 - **Robydoby PTR raid sheets** (community Google Sheets, no auth — public CSV export;
   registered 2026-07-23, owner-approved): per-boss tabs of curated WCL zone-54
   testing parses with per-spec 90/95/99th-pct raw DPS. Fetch

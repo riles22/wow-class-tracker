@@ -6,6 +6,7 @@ import {
   aheadSeasonFor, consensusFor, frozenLettersFor, isLiveEra, nextPatchTierSources,
   PHASES, scoreFor
 } from "./normalize.mjs";
+import { officialNotesView } from "./official-notes.mjs";
 
 /* `seasonFinal` is data/season-final.json — each source's LAST letters about the live
    season, used only where an outlet has already moved on. Absent (null) reproduces the
@@ -1907,7 +1908,7 @@ export function applyFrozenForecast(specs, artifact) {
   return specs;
 }
 
-export function buildPayload({ specs, sources, scales, community, ptrBuilds, creatorTakes, encounterTiers, historySnapshot, historySnapshots, seasonFinal = null, frozenForecast = null, now = null }) {
+export function buildPayload({ specs, sources, scales, community, ptrBuilds, creatorTakes, encounterTiers, historySnapshot, historySnapshots, seasonFinal = null, frozenForecast = null, officialNotes = null, now = null }) {
   const scored = dummyDomeScores(metricRanks(fightLabels(decorateSpecs(specs, sources, scales, seasonFinal))));
   // Prefer the full history (skip snapshots identical to the present state); fall back to
   // the single-snapshot param for callers/tests that pass one directly.
@@ -1944,6 +1945,8 @@ export function buildPayload({ specs, sources, scales, community, ptrBuilds, cre
     scales,
     community: community ?? null,
     ptrBuilds: ptrBuilds ?? null,
+    // Deliberately assembled only after every ranking and frozen forecast is done.
+    officialNotes: officialNotesView(officialNotes),
     creatorTakes: creatorTakes ?? null,
     encounterTiers: encounterTiers ?? null,
     dataHealth: dataHealth(decorated, sources),
