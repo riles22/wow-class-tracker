@@ -331,15 +331,15 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
       if (!Number.isFinite(metric.value) || metric.value < 0) errors.push(`specs.json: ${key} metric "${metric.name}" value must be a finite non-negative number`);
       if (metric.era != null && !["live", "ptr"].includes(metric.era)) errors.push(`specs.json: ${key} metric "${metric.name}" era must be "live" or "ptr"`);
       // Era gating (hard rule 3) must agree with the display-name convention both ways:
-      // a "12.1 PTR"-named series may not claim live, and an era:"ptr" series must say PTR in its name.
-      if (PHASES.ptr && metric.name?.includes(PHASES.ptr.marker) && metric.era === "live") errors.push(`specs.json: ${key} metric "${metric.name}" is named ${PHASES.ptr.marker} but tagged era "live"`);
+      // a PTR-named series may not claim live, including retired cycles after their marker closes.
+      if (/\bPTR\b/.test(metric.name ?? "") && metric.era === "live") errors.push(`specs.json: ${key} metric "${metric.name}" is PTR-named but tagged era "live" — PTR rows must be tagged era: "ptr"`);
       if (metric.era === "ptr" && !/PTR/.test(metric.name ?? "")) errors.push(`specs.json: ${key} metric "${metric.name}" is era "ptr" but its name carries no PTR label`);
       /* A PTR-NAMED row must be era-EXPLICIT, not inference-reliant (2026-08-12). metricEra's
          fallback infers "ptr" from the name via PHASES.ptr.marker — and PHASES.ptr goes NULL
          at the phase flip, at which point every inference-reliant row silently leaks into the
          live view while its explicitly-tagged siblings stay gated (measured: 5 of 12 PTR
-         metric families rode the inference). The marker guard above dies with PHASES.ptr for
-         the same reason, so this rule matches the NAME, which survives the flip. */
+         metric families rode the inference). Both name guards survive a closed cycle or a
+         newly opened one, so retired PTR rows cannot leak into the live view. */
       if (/\bPTR\b/.test(metric.name ?? "") && metric.era == null) errors.push(`specs.json: ${key} metric "${metric.name}" is PTR-named but carries no explicit era — name inference dies at the phase flip, so PTR rows must be tagged era: "ptr" (apply-metrics preserves it)`);
       /* asOf is REQUIRED, not optional (audit 2026-08-14). check-refresh dates a metric family
          by its min-th-freshest row precisely so one fresh row cannot vouch for a stale cut —
@@ -810,7 +810,7 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
       if (!mirror?.tierSet || !spec.tierSet) continue;
       for (const field of ["set2", "set4", "asOf"]) {
         if ((spec.tierSet[field] ?? null) !== (mirror.tierSet[field] ?? null)) {
-          errors.push(`gearing/data/specs.json: ${spec.spec} ${spec.class} tierSet.${field} does not match data/specs.json — run \`node gearing/src/sync-tracker-fields.mjs && npm run gearing:build\` (the two pages must not state different set bonuses)`);
+          errors.push(`gearing/data/specs.json: ${spec.spec} ${spec.class} tierSet.${field} does not match data/specs.json — run \`node gearing/src/harvest-specs.mjs && npm run gearing:build\` (the two pages must not state different set bonuses)`);
         }
       }
     }

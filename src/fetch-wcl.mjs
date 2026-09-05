@@ -11,13 +11,11 @@
          (check-refresh --manifest) cross-checks the agent's WCL manifest rows
          against evidence the agent had no window to tamper with.
 
-   What it does today: the standing per-run protocol from the refresh-metrics skill
-   ("WCL v2 API status") — one cheap characterRankings(metric: rdps) check on a
-   known-good encounter. The whole rDPS metric family 500s server-side (bisected
-   2026-07-14), so no cut can honestly land; `landed` stays {} until WCL fixes it AND
-   the owner freezes a real median recipe into this script (zone 52 first — see the
-   skill). A manifest row for an evidence-gated requirement may claim "success" only
-   when landed[key] carries rows from this run.
+   Current diagnostics verify the live season's raid and M+ zones, then probe one
+   discovered encounter per bracket. A working raw-DPS control distinguishes rDPS
+   failures from a general outage. These are diagnostics, never population medians:
+   `landed` stays {} until an equivalent, reviewed live median recipe exists. A
+   manifest row may claim "success" only when landed[key] carries merged rows.
 
    Exit code is 0 whenever evidence was written — including upstream failure, because
    the evidence IS the product; the workflow surfaces bad verdicts (::warning:: here,
@@ -28,6 +26,7 @@ import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { applyMetrics } from "./apply-metrics.mjs";
+import { PHASES } from "./normalize.mjs";
 
 // Header recipe proven by the 2026-07-14 run (see refresh-metrics SKILL.md, "WCL v2
 // API status"): browser UA on the token POST; Origin + Referer + sec-ch-ua clear
@@ -45,13 +44,30 @@ export const gqlHeaders = token => ({
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
+// One retry for transient HTTP/network failures, with a deadline on BOTH the
+// response and its body. API-level GraphQL errors are conclusions, not retried.
+async function requestText(url, options, { fetchImpl = fetch, pause = sleep, timeoutMs = 20_000 } = {}) {
+  let result;
+  for (let attempt = 1; attempt <= 2; attempt++) {
+    try {
+      const res = await fetchImpl(url, { ...options, signal: AbortSignal.timeout(timeoutMs) });
+      result = { status: res.status, ok: res.ok, body: await res.text(), attempts: attempt };
+    } catch (err) {
+      result = { status: 0, ok: false, body: "", attempts: attempt,
+        error: err?.cause?.code ?? err?.message ?? String(err) };
+    }
+    if (![0, 408, 429, 500, 502, 503, 504].includes(result.status) || attempt === 2) return result;
+    await pause(2000);
+  }
+}
+
 /* Both transport helpers are TOTAL — a rejected fetch() (DNS, reset, TLS, proxy)
    becomes a status-0 result, never a throw. This script runs unattended before the
    nightly agent; a crash here would kill the whole refresh job, when the honest
    outcome of a network failure is simply evidence saying so (verdict network-failed). */
-export async function oauthToken(id, secret) {
+export async function oauthToken(id, secret, options) {
   try {
-    const res = await fetch("https://www.warcraftlogs.com/oauth/token", {
+    const res = await requestText("https://www.warcraftlogs.com/oauth/token", {
       method: "POST",
       headers: {
         "authorization": "Basic " + Buffer.from(`${id}:${secret}`).toString("base64"),
@@ -59,25 +75,30 @@ export async function oauthToken(id, secret) {
         "user-agent": UA
       },
       body: "grant_type=client_credentials"
-    });
-    const body = await res.text();
-    if (!res.ok) return { ok: false, status: res.status, bodyBytes: body.length };
-    try { return { ok: true, token: JSON.parse(body).access_token }; }
+    }, options);
+    const body = res.body;
+    if (!res.ok) return { ok: false, status: res.status, bodyBytes: body.length, error: res.error };
+    try {
+      const token = JSON.parse(body).access_token;
+      return typeof token === "string" && token.length
+        ? { ok: true, token } : { ok: false, status: res.status, bodyBytes: body.length };
+    }
     catch { return { ok: false, status: res.status, bodyBytes: body.length }; }
   } catch (err) {
     return { ok: false, status: 0, error: err?.cause?.code ?? err?.message ?? String(err) };
   }
 }
 
-export async function gql(token, query) {
+export async function gql(token, query, options) {
   try {
-    const res = await fetch("https://www.warcraftlogs.com/api/v2/client", {
+    const res = await requestText("https://www.warcraftlogs.com/api/v2/client", {
       method: "POST", headers: gqlHeaders(token), body: JSON.stringify({ query })
-    });
-    const text = await res.text();
+    }, options);
+    const text = res.body;
     let json = null;
     try { json = JSON.parse(text); } catch { /* Cloudflare HTML or the like */ }
-    return { status: res.status, json, textHead: text.slice(0, 120) };
+    return { status: res.status, json, attempts: res.attempts,
+      textHead: res.status === 0 ? `fetch failed: ${res.error}` : text.slice(0, 120) };
   } catch (err) {
     return { status: 0, json: null, textHead: `fetch failed: ${err?.cause?.code ?? err?.message ?? err}` };
   }
@@ -86,7 +107,7 @@ export async function gql(token, query) {
 /* Pure verdict mapping — unit-tested. `probe` is the rdps characterRankings attempt:
    { httpStatus, errors: [..gql error messages..], rankings: n } or null when it never
    ran (transport failed first). */
-export function verdictFor({ hasCreds, oauth, transportOk, probe }) {
+export function verdictFor({ hasCreds, oauth, transportOk, probe, brackets }) {
   if (!hasCreds) return {
     verdict: "no-credentials",
     detail: "WCL_CLIENT_ID / WCL_CLIENT_SECRET are not set — the fetch step ran without credentials (secret rot or workflow misconfiguration)"
@@ -96,10 +117,25 @@ export function verdictFor({ hasCreds, oauth, transportOk, probe }) {
         detail: `OAuth POST never reached WCL (${oauth.error ?? "network failure"}) — transport problem, not a credential conclusion` }
     : { verdict: "oauth-failed",
         detail: `OAuth client-credentials POST failed (HTTP ${oauth?.status ?? "?"}) — check the WCL client secrets` };
-  if (!transportOk || !probe) return {
+  if (!transportOk) return {
     verdict: "network-failed",
     detail: "GraphQL transport to /api/v2/client failed after retry (Cloudflare or network) — no metric conclusion possible this run"
   };
+  if (brackets && Object.keys(brackets).length) {
+    const entries = Object.values(brackets);
+    const summary = entries.map(b => `${b.bracket} zone ${b.zoneId}: ${b.status} (${b.detail})`).join("; ");
+    // Any recovered bracket deserves the existing owner-action notice, including
+    // partial recovery. Per-bracket status and detail never imply both recovered.
+    if (entries.some(b => b.status === "recipe-needed")) return {
+      verdict: "rdps-restored",
+      detail: `${summary}. owner decision needed: validate and freeze an equivalent live population-median recipe before any WCL cut can land; diagnostic rankings are not fresh median data`
+    };
+    return {
+      verdict: entries.every(b => b.status === "rdps-broken") ? "rdps-broken" : "network-failed",
+      detail: `${summary}. No WCL median rows landed`
+    };
+  }
+  if (!probe) return { verdict: "network-failed", detail: "No conclusive WCL probe was recorded" };
   if (probe.errors?.length) return {
     verdict: "rdps-broken",
     detail: `characterRankings(metric: rdps) on encounter ${probe.encounterId}: ${probe.errors.join("; ")} — the rDPS metric family is still broken upstream, no WCL cut can honestly land (refresh-metrics SKILL.md, "WCL v2 API status")`
@@ -114,9 +150,84 @@ export function verdictFor({ hasCreds, oauth, transportOk, probe }) {
   };
 }
 
-// Known-good encounter for the standing rdps check (zone 46 live raid, Imperator
-// Averzian) — the rdps-family bug reproduces on every encounter, so one suffices.
-const RDPS_PROBE_ENCOUNTER = 3176;
+// Owner-reviewed live identity from official API discovery, 2026-09-05. A future
+// PHASES flip must update this config rather than probing old-season content.
+export const LIVE_DIAGNOSTICS = {
+  season: "s2", label: "12.1",
+  brackets: [
+    { key: "wcl-live-raid", bracket: "raid", zoneId: 53, zoneName: "The Venomous Abyss", partition: 1, partitionName: "12.1", difficulty: 5, size: 20 },
+    { key: "wcl-live-mplus", bracket: "mplus", zoneId: 55, zoneName: "Mythic+ Season 2", partition: 1, partitionName: "Season 2", difficulty: 10, size: 5 }
+  ]
+};
+
+const responseErrors = r => r.json?.errors == null ? [] : Array.isArray(r.json.errors)
+  ? r.json.errors.map(e => typeof e?.message === "string" ? e.message : "malformed GraphQL error")
+  : ["malformed GraphQL errors"];
+const transportOk = r => r.status === 200 && r.json != null;
+
+/* Read-only diagnostics: one discovered encounter and at most two metrics per
+   bracket. Injected query/pause keep the full decision path testable offline.
+   No ranking values, player identities, or tokens enter the evidence. */
+export async function probeLiveBrackets(token, { query = gql, pause = sleep, phases = PHASES } = {}) {
+  const result = { brackets: {}, probes: [], landed: {} };
+  for (const cfg of LIVE_DIAGNOSTICS.brackets) {
+    const ev = result.brackets[cfg.key] = { bracket: cfg.bracket, zoneId: cfg.zoneId,
+      partition: cfg.partition, difficulty: cfg.difficulty, size: cfg.size, status: null, detail: null };
+    if (phases.liveSeason !== LIVE_DIAGNOSTICS.season || phases.liveLabel !== LIVE_DIAGNOSTICS.label) {
+      ev.status = "configuration-mismatch";
+      ev.detail = "live phase changed; review WCL zone configuration before probing";
+      continue;
+    }
+    await pause(600);
+    const found = await query(token, `{ worldData { zone(id: ${cfg.zoneId}) { id name frozen partitions { id name } difficulties { id sizes } encounters { id name } } } }`);
+    const zone = found.json?.data?.worldData?.zone;
+    if (!transportOk(found) || responseErrors(found).length) {
+      ev.status = "network-failed";
+      ev.detail = `zone discovery failed: ${responseErrors(found).join("; ") || `HTTP ${found.status}`}`;
+      continue;
+    }
+    const encounter = zone?.encounters?.[0];
+    if (zone?.id !== cfg.zoneId || zone.name !== cfg.zoneName || zone.frozen !== false ||
+        !Array.isArray(zone.partitions) || !zone.partitions.some(p => p?.id === cfg.partition && p.name === cfg.partitionName) ||
+        !Array.isArray(zone.difficulties) || !zone.difficulties.some(d => d?.id === cfg.difficulty && Array.isArray(d.sizes) && d.sizes.includes(cfg.size)) ||
+        !Number.isInteger(encounter?.id) || encounter.id <= 0) {
+      ev.status = "configuration-mismatch";
+      ev.detail = "discovered zone, season partition, difficulty, size, or encounter does not match the reviewed live configuration";
+      continue;
+    }
+    ev.encounterId = encounter.id;
+    ev.encounterName = encounter.name;
+    const probe = async metric => {
+      await pause(600);
+      const r = await query(token, `{ worldData { encounter(id: ${encounter.id}) { id zone { id } characterRankings(metric: ${metric}, page: 1, partition: ${cfg.partition}, difficulty: ${cfg.difficulty}, size: ${cfg.size}) } } }`);
+      const actual = r.json?.data?.worldData?.encounter;
+      const identityOk = actual?.id === encounter.id && actual?.zone?.id === cfg.zoneId;
+      const rankings = actual?.characterRankings?.rankings;
+      const errors = responseErrors(r);
+      const p = { name: `${metric}@${encounter.id}`, bracket: cfg.bracket, zoneId: cfg.zoneId, metric,
+        httpStatus: r.status, transportOk: transportOk(r), identityOk, errors,
+        rankings: Array.isArray(rankings) ? rankings.length : 0 };
+      p.ok = p.transportOk && p.identityOk && !errors.length && p.rankings > 0;
+      result.probes.push(p);
+      return p;
+    };
+    const rdps = ev.rdps = await probe("rdps");
+    if (rdps.ok) {
+      ev.status = "recipe-needed";
+      ev.detail = "rDPS page 1 returned rankings; no equivalent aggregate median recipe exists";
+      continue;
+    }
+    // A dps control diagnoses availability only. It never supplies or replaces a
+    // live rDPS/HPS metric, and its leaderboard is never labeled a median.
+    const control = ev.control = await probe("dps");
+    if (!rdps.transportOk || !control.transportOk) ev.status = "network-failed";
+    else if (!rdps.identityOk || !control.identityOk) ev.status = "configuration-mismatch";
+    else if (rdps.errors.length && control.ok) ev.status = "rdps-broken";
+    else ev.status = "inconclusive";
+    ev.detail = `rDPS: ${rdps.errors.join("; ") || `${rdps.rankings} rankings (HTTP ${rdps.httpStatus})`}; dps control: ${control.ok ? "working" : control.errors.join("; ") || `${control.rankings} rankings (HTTP ${control.httpStatus})`}`;
+  }
+  return result;
+}
 
 /* --- Frozen median recipe #1 (owner-approved 2026-07-17): zone-52 Dummy Dome
    RAW-DPS medians.
@@ -280,7 +391,7 @@ async function main() {
   const outDir = process.argv.find(a => a.startsWith("--out="))?.slice(6) ?? "wcl-fetch";
   const ID = process.env.WCL_CLIENT_ID, SECRET = process.env.WCL_CLIENT_SECRET;
 
-  const state = { hasCreds: Boolean(ID && SECRET), oauth: null, transportOk: false, probe: null };
+  const state = { hasCreds: Boolean(ID && SECRET), oauth: null, transportOk: false, brackets: null };
   const evidence = {
     attemptedAt: new Date().toISOString(),
     verdict: null,
@@ -299,29 +410,24 @@ async function main() {
     console.log(state.oauth.ok ? "✓ OAuth token issued" : `✗ OAuth POST failed (HTTP ${state.oauth.status})`);
 
     if (state.oauth.ok) {
-      // Transport check with one mechanical retry (CLAUDE.md: keep retry/backoff).
-      for (let attempt = 1; attempt <= 2 && !state.transportOk; attempt++) {
-        if (attempt > 1) await sleep(2000);
-        const rl = await gql(state.oauth.token, "{ rateLimitData { limitPerHour pointsSpentThisHour } }");
-        if (rl.json?.data?.rateLimitData) {
-          state.transportOk = true;
-          evidence.transport.graphql = true;
-          evidence.transport.rateLimit = rl.json.data.rateLimitData;
-          console.log("✓ GraphQL transport up:", JSON.stringify(rl.json.data.rateLimitData));
-        } else {
-          console.log(`✗ GraphQL transport attempt ${attempt}: HTTP ${rl.status}, ${rl.textHead.slice(0, 60)}`);
-        }
+      // gql itself has one bounded transient retry and a per-request deadline.
+      const rl = await gql(state.oauth.token, "{ rateLimitData { limitPerHour pointsSpentThisHour } }");
+      if (transportOk(rl) && !responseErrors(rl).length && rl.json.data?.rateLimitData) {
+        state.transportOk = true;
+        evidence.transport.graphql = true;
+        evidence.transport.rateLimit = rl.json.data.rateLimitData;
+        console.log("✓ GraphQL transport up:", JSON.stringify(rl.json.data.rateLimitData));
+      } else {
+        console.log(`✗ GraphQL transport: HTTP ${rl.status}, ${rl.textHead.slice(0, 60)}`);
       }
 
       if (state.transportOk) {
-        await sleep(600); // polite guest
-        const q = `{ worldData { encounter(id: ${RDPS_PROBE_ENCOUNTER}) { name characterRankings(metric: rdps, page: 1) } } }`;
-        const r = await gql(state.oauth.token, q);
-        const errors = r.json?.errors?.map(e => e.message) ?? (r.json ? [] : [`HTTP ${r.status}, non-JSON response`]);
-        const rankings = r.json?.data?.worldData?.encounter?.characterRankings?.rankings?.length ?? 0;
-        state.probe = { encounterId: RDPS_PROBE_ENCOUNTER, httpStatus: r.status, errors, rankings };
-        evidence.probes.push({ name: `rdps@${RDPS_PROBE_ENCOUNTER}`, ok: errors.length === 0 && rankings > 0, httpStatus: r.status, errors, rankings });
-        console.log(errors.length ? `✗ rdps probe: ${errors.join("; ")}` : `✓ rdps probe: ${rankings} rankings on page 1`);
+        const diagnostics = await probeLiveBrackets(state.oauth.token);
+        state.brackets = evidence.brackets = diagnostics.brackets;
+        evidence.probes = diagnostics.probes;
+        for (const ev of Object.values(evidence.brackets)) {
+          console.log(`${ev.status === "recipe-needed" ? "✓" : "✗"} ${ev.bracket} zone ${ev.zoneId}: ${ev.status} — ${ev.detail}`);
+        }
 
         // Raw-DPS median recipes (#1 zone 52 per-target, #2 zone 54 pooled, #3 zone 56
         // pooled) — metric: dps, so these run and can LAND regardless of the rdps

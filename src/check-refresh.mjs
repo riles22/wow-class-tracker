@@ -554,12 +554,20 @@ export function checkFreshness(config, manifest, data, now, gearing = null) {
           violations.push(`${ds.key} (gearing/data/${ds.file}) is ${age} days stale — max ${ds.maxAgeDays}d. Gearing harvests are manual; see gearing/README.md`);
           keys.push(ds.key);
         }
+        if (ds.dateField === "structuralSync.checkedAt" && age != null && age < 0) {
+          violations.push(`${ds.key}: local consistency check date is in the future`);
+          keys.push(ds.key);
+        }
+      }
+      if (config.gearing.structuralSync && gearing.structuralSyncError) {
+        violations.push(`gearing-specs-sync: ${gearing.structuralSyncError}`);
+        keys.push("gearing-specs-sync");
       }
       /* The check that actually earns its keep. Age only says a harvest is old; THIS says the
          page is publishing something the tracker has already corrected — which is what
          happened with a superseded Preservation Evoker set bonus. Cheap, exact, no clock. */
       if (gearing.tierSetDrift > 0) {
-        violations.push(`gearing-tierset-sync: ${gearing.tierSetDrift} spec(s) carry tier-set text the tracker has since corrected — run \`node gearing/src/sync-tracker-fields.mjs\``);
+        violations.push(`gearing-tierset-sync: ${gearing.tierSetDrift} spec(s) carry tier-set text the tracker has since corrected — run \`node gearing/src/harvest-specs.mjs\``);
         keys.push("gearing-tierset-sync");
       }
     }
@@ -645,7 +653,7 @@ if (isMain) {
       try {
         const doc = JSON.parse(await readFile(path.join(root, "gearing", "data", ds.file), "utf8"));
         present = true;
-        dates[ds.file] = doc?.[ds.dateField] ?? null;
+        dates[ds.file] = ds.dateField.split(".").reduce((value, key) => value?.[key], doc) ?? null;
       } catch { dates[ds.file] = null; }
     }
     let tierSetDrift = 0;
@@ -653,7 +661,18 @@ if (isMain) {
       const { syncTrackerFields } = await import("../gearing/src/sync-tracker-fields.mjs");
       tierSetDrift = (await syncTrackerFields({ check: true })).filter(c => c.textChanged).length;
     } catch { /* subproject absent or unreadable — the per-file report above already says so */ }
-    return { present, dates, tierSetDrift };
+    let structuralSyncError = null;
+    if (present && config.gearing.structuralSync) {
+      try {
+        const { loadSpecSyncInputs, checkSpecSync } = await import("../gearing/src/harvest-specs.mjs");
+        const doc = JSON.parse(await readFile(path.join(root, "gearing", "data", "specs.json"), "utf8"));
+        checkSpecSync(doc, await loadSpecSyncInputs({ root: path.join(root, "gearing") }));
+      } catch (error) {
+        dates["specs.json"] = null;
+        structuralSyncError = error.message;
+      }
+    }
+    return { present, dates, tierSetDrift, structuralSyncError };
   };
 
   let failures = [];

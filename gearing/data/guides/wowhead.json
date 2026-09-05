@@ -3,7 +3,7 @@
   "source": "Wowhead",
   "sourceId": "wowhead",
   "dated": true,
-  "harvestedAt": "2026-08-31",
+  "harvestedAt": "2026-09-05",
   "specs": {
     "Blood Death Knight": {
       "guideUrl": "https://www.wowhead.com/guide/classes/death-knight/blood/bis-gear",
@@ -445,11 +445,12 @@
           ],
           "note": "Flasks: The best Flask for Blood Death Knights is Flask of the Blood Knights or Flask of the Shattered Sun. Unlike prior expansions, no consumables or other effects are tied to the use of a flask. If you are specifically after damage reduction in order to guarantee survival on something, and you are certain that a flask will offset this, Flask of Thalassian Resistance is available. In addition to this, stacking versatility to just enough so that it is your first stat by rating allows you to use Potion of Recklessness as a direct defensive cooldown. · Food: Blood Death Knights have two choices at their disposal in Midnight: a primary stat feast, and a secondary stat feast. The secondary stat feat gives slightly more rating and will typically be better, but this is not always guaranteed. Primary stat: Harandar Celebration; Secondary stats: Blooming Feast; We strongly recommend simming these choices."
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Frost Death Knight": {
       "guideUrl": "https://www.wowhead.com/guide/classes/death-knight/frost/bis-gear",
-      "published": "2026-08-19",
+      "published": "2026-09-02",
       "author": "khazakdk",
       "priorities": [
         {
@@ -551,8 +552,8 @@
         {
           "list": "overall",
           "slot": "Chest",
-          "itemId": "271474",
-          "itemName": "Baleful Grave-Knight's Casque",
+          "itemId": "271477",
+          "itemName": "Baleful Grave-Knight's Breastplate",
           "sourceText": "The Coiled Altar",
           "sourceKind": "raid",
           "boss": "The Coiled Altar",
@@ -770,11 +771,12 @@
           ],
           "note": "Combat Potion: The best combat potion is Light's Potential. Another option is Draught of Rampant Abandon. The void zone dropped is fairly easy to play around as a melee DPS, but in hectic situations, you may not notice fast enough to start moving out and will lose a GCD, making it no longer worth it. · Food: The differences between the food buffs are very slight; do not worry too much about which one it is as long as you have one. Feast: Hearty Silvermoon Parade/Hearty Quel'dorei Medley; Personal Food: Royal Roast"
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Unholy Death Knight": {
       "guideUrl": "https://www.wowhead.com/guide/classes/death-knight/unholy/bis-gear",
-      "published": "2026-08-20",
+      "published": "2026-09-02",
       "author": "Taeznak",
       "priorities": [
         {
@@ -1013,7 +1015,8 @@
           ],
           "note": "Diamond: Indecipherable Eversong Diamond · Other Gems: Flawless Masterful Garnet · Consumable Cheat Sheet: Type Best Options Flask Flask of the Magisters Flask of the Shattered Sun Combat Potion Potion of Recklessness Light's Potential Health Potion Silvermoon Health Potion - Weapon Buff Thalassian Phoenix Oil Refulgent Whetstone/Refulgent Weightstone Augment Rune Void-Touched Augment Rune Food Silvermoon Parade Royal Roast Diamond Indecipherable Eversong Diamond Powerful Eversong Diamond Other Gems Flawless Masterful Garnet Flawless Deadly Amethyst · Flasks: The best Flask for Unholy Death Knights depends on your current stats. If Mastery is high enough to where using Flask of the Shattered Sun keeps Mastery higher, use this. Instead, if you need some extra Mastery to keep it as your highest stat (by rating), use Flask of the Magisters. · Combat Potion: Potion of Recklessness is always the best option for Unholy Death Knights, as our love for secondary stats knows no bounds. If Light's Potential is cheaper, it can be used instead, as Strength is still plenty valuable for us. · Weapon Buff: For their weapons, Unholy Death Knights have a few options. The best one is generally Thalassian Phoenix Oil, as the secondary stats this provides are quite good. Alternatively, you can use Refulgent Whetstone or Refulgent Weightstone, depending on your weapon type. Make sure that you buy the correct one - Whetstone for Swords and Axes, Weightstone for Maces. · Food: Unholy Death Knights are most likely using primary stat foods in Midnight. As always, sim your character to check which food is the best for your configuration of secondary stats. Feast: Silvermoon Parade; Personal Food: Royal Roast"
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Havoc Demon Hunter": {
       "guideUrl": "https://www.wowhead.com/guide/classes/demon-hunter/havoc/bis-gear",
@@ -1353,7 +1356,8 @@
           ],
           "note": "Flasks: The best Flask for Havoc Demon Hunter is Flask of the Shattered Sun, though this depends on your precise gear and Flask of the Magisters can be used if you need Mastery more than Critical Strike. · Food: In Midnight, Havoc Demon Hunters currently prefer Primary Stat food. The Feast Hearty Harandar Celebration is preferred as it also gives Stamina. Feast: Hearty Harandar Celebration; Personal Food: Royal Roast / Hearty Royal Roast"
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Devourer Demon Hunter": {
       "guideUrl": "https://www.wowhead.com/guide/classes/demon-hunter/devourer/bis-gear",
@@ -1700,7 +1704,8 @@
           ],
           "note": "Flask: Flask of the Magisters or Flask of the Shattered Sun · Food: Feast of Knowledge or Champion's Bento · Flasks: The best Flask for Devourer Demon Hunters is Flask of the Magisters, though Flask of the Blood Knights can be useful for Annihilator . Flask of the Shattered Sun can also be useful, should you have much higher Mastery relative to your Critical Strike."
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Vengeance Demon Hunter": {
       "guideUrl": "https://www.wowhead.com/guide/classes/demon-hunter/vengeance/bis-gear",
@@ -2033,11 +2038,12 @@
           ],
           "note": "Combat Potion: While there are many options for potions, Vengeance Demon Hunters will nearly always use Light's Potential. Draught of Rampant Abandon grants more stat but can get you killed due to the silence, so it's not worth the risk. Meanwhile, Potion of Recklessness will practically get you to the stat cap, so it can have niche uses. · Weapon Buff: Thalassian Phoenix Oil is a good option for Vengeance Demon Hunters because it provides both of our preferred Secondary stats. However, if you want to focus purely on damage, you can use Smuggler's Enchanted Edge for single-target or Refulgent Weightstone/Refulgent Whetstone depending on your weapon type for AoE. · Food: In Midnight, Vengeance Demon Hunters are most likely using the Primary feast due to the outsized value of Primary stat in early expansion. As always, sim your character to check which food is the best for your configuration of Secondary stats. Secondary stat food: Blooming Feast/Quel'dorei Medley (Feast), Champion's Bento/Flora Frenzy/Venom-Spiced Cutlets(Individual Food) Agility Feast: Harandar Celebration/Silvermoon Parade"
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Balance Druid": {
       "guideUrl": "https://www.wowhead.com/guide/classes/druid/balance/bis-gear",
-      "published": "2026-08-28",
+      "published": "2026-09-04",
       "author": "gamz",
       "priorities": [
         {
@@ -2376,7 +2382,8 @@
           ],
           "note": "Flasks: You should sim your character to determine the best Flask option for you. The available flasks are: Flask of the Shattered Sun Flask of the Blood Knights Flask of the Magisters Flask of Thalassian Resistance"
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Feral Druid": {
       "guideUrl": "https://www.wowhead.com/guide/classes/druid/feral/bis-gear",
@@ -2625,7 +2632,8 @@
           ],
           "note": "Flask: / Flask of the Shattered Sun (best) / Flask of the Magisters (alternative) / · Weapon Buff (Main hand): Thalassian Phoenix Oil · Weapon Buff (Off hand): Thalassian Phoenix Oil · Food: Harandar Celebration (feast) / Royal Roast / Sanguithorn Tea (Stacks with other food) · Combat Potion: While there are many options for potions, Feral Druids will use Draught of Rampant Abandon. The void pools spawned by this poiton silence you, which means you need to actively run out of them. Switching to Light's Potential is advised if the void pool mechanism becomes overwhelming. · Health Potion: The best healing potion for Feral Druids is Silvermoon Health Potion. · Weapon Buff: For Feral Druids weapons the best option is listed below: Main Hand: Thalassian Phoenix Oil · Food: In Midnight, Feral Druids will use Feasts where possible due to the relative strength of agility to Secondary stats. As always, sim your character to check which food is the best for your configuration of Secondary stats. Feast: Blooming Feast; Personal Food: Crimson Calamari; It's also worth noting that you can use Taa's such as Sanguithorn Tea alongside a regular food buff for a 5% speed increase."
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Guardian Druid": {
       "guideUrl": "https://www.wowhead.com/guide/classes/druid/guardian/bis-gear",
@@ -2941,11 +2949,12 @@
           ],
           "note": "Combat Potion: Draught of Rampant Abandon or Light's Potential"
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Restoration Druid": {
       "guideUrl": "https://www.wowhead.com/guide/classes/druid/restoration/bis-gear",
-      "published": "2026-08-12",
+      "published": "2026-09-02",
       "author": "Voulk",
       "priorities": [
         {
@@ -3331,11 +3340,12 @@
           ],
           "note": "Combat Potion: Potion of Recklessness (Preferred) / Lightfused Mana Potion (Situational) · Health Potion: You'll use Concentrated Silvermoon Health Potion as your Health potion. Make sure you keybind it and use it often! · Weapon Buff: You'll put Thalassian Phoenix Oil on your weapon in both content types. Oil of Dawn is not very good."
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Augmentation Evoker": {
       "guideUrl": "https://www.wowhead.com/guide/classes/evoker/augmentation/bis-gear",
-      "published": "2026-08-26",
+      "published": "2026-09-02",
       "author": "Jereico",
       "priorities": [
         {
@@ -3382,11 +3392,11 @@
         {
           "list": "overall",
           "slot": "Off Hand",
-          "itemId": "245769",
-          "itemName": "Aln'hara Lantern",
-          "sourceText": "Crafting",
-          "sourceKind": "crafted",
-          "boss": null,
+          "itemId": "268197",
+          "itemName": "Spine of the Hissing Abyss",
+          "sourceText": "Entombed Sentinels",
+          "sourceKind": "raid",
+          "boss": "Entombed Sentinels",
           "dungeon": null,
           "droppedBy": null
         },
@@ -3474,11 +3484,11 @@
         {
           "list": "overall",
           "slot": "Waist",
-          "itemId": "268254",
-          "itemName": "Serpentine Mixing Belt",
-          "sourceText": "Vashnik the Malignant",
-          "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
+          "itemId": "244581",
+          "itemName": "Farstrider's Trophy Belt",
+          "sourceText": "Crafting",
+          "sourceKind": "crafted",
+          "boss": null,
           "dungeon": null,
           "droppedBy": null
         },
@@ -3530,23 +3540,23 @@
         {
           "list": "overall",
           "slot": "Trinket",
+          "itemId": "270168",
+          "itemName": "Font of Venomous Rage",
+          "sourceText": "Ula'tek",
+          "sourceKind": "raid",
+          "boss": "Ula'tek",
+          "dungeon": null,
+          "droppedBy": null
+        },
+        {
+          "list": "overall",
+          "slot": "Trinket",
           "itemId": "250224",
           "itemName": "Mindpiercer's Sigil",
           "sourceText": "Voidscar Arena",
           "sourceKind": "dungeon",
           "boss": null,
           "dungeon": "Voidscar Arena",
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Trinket",
-          "itemId": "270164",
-          "itemName": "Gebbo's Bottomless Bag",
-          "sourceText": "The Lost Explorers",
-          "sourceKind": "raid",
-          "boss": "The Lost Explorers",
-          "dungeon": null,
           "droppedBy": null
         }
       ],
@@ -3669,11 +3679,12 @@
           ],
           "note": "Food: Augmentation Evokers will likely prefer to use feasts which provide Intellect over other alternative food options. Personal food can be used instead of a feast, but this comes at the cost of bonus Stamina. Feast: Hearty Silvermoon Parade; Personal Food: Hearty Royal Roast"
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Devastation Evoker": {
       "guideUrl": "https://www.wowhead.com/guide/classes/evoker/devastation/bis-gear",
-      "published": "2026-08-14",
+      "published": "2026-08-31",
       "author": "Preheat",
       "priorities": [
         {
@@ -4020,7 +4031,8 @@
           ],
           "note": "Flasks: The best Flask for Devastation Evokers is Flask of the Shattered Sun. Flask of the Magisters and Flask of the Blood Knights can also be good to push your Haste and Mastery above Versatility for Potion of Recklessness. · Combat Potion: When it comes to combat potions, they are both close. Potion of Recklessness is best if your stats are good. Light's Potential is slightly worse, but does not have any special requirements. · Health Potion: The best healing potion for Devastation Evokers is Silvermoon Health Potion. · Food: In Midnight, personal stat food is no better than feast buffs. Intellect food is equivalent to Secondary stats. As always, sim your character to check which food is the best for your configuration of Secondary stats. Feast: Harandar Celebration and Quel'dorei Medley are equal; Personal Food: Champion's Bento; In addition to food, you can also consume any tea (ex: Sanguithorn Tea) for a movement speed increase that stacks with your food buff."
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Preservation Evoker": {
       "guideUrl": "https://www.wowhead.com/guide/classes/evoker/preservation/bis-gear",
@@ -4032,14 +4044,14 @@
           "heroTalentSlug": null,
           "primary": "Intellect",
           "secondaries": [
-            "Mast",
             "Crit",
+            "Mast",
             "Haste",
             "Vers"
           ],
           "leadsWithItemLevel": false,
           "softCaps": [],
-          "raw": "Intellect > Mastery > Crit > Haste > Versatility"
+          "raw": "Intellect > Crit > Mastery > Haste > Versatility"
         },
         {
           "label": "General",
@@ -4262,11 +4274,12 @@
           ],
           "note": "Combat Potion: Potion of Recklessness (Preferred) / Lightfused Mana Potion (Situational) · Flasks: In raid, you will use Flask of the Magisters on all fights. Flask of the Blood Knights is a reasonable alternative in Mythic+, or when you value increasing your damage over adding more healing. · Health Potion: You'll use Concentrated Silvermoon Health Potion as your Health potion. Make sure you keybind it! · Weapon Buff: You'll put Thalassian Phoenix Oil on your weapon in both content types. Oil of Dawn is not competitive."
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Beast Mastery Hunter": {
       "guideUrl": "https://www.wowhead.com/guide/classes/hunter/beast-mastery/bis-gear",
-      "published": "2026-08-30",
+      "published": "2026-09-04",
       "author": "Tarlo",
       "priorities": [
         {
@@ -4635,11 +4648,12 @@
           ],
           "note": "Combat Potion: Light's Potential (Raid) / Potion of Recklessness (Near-BiS gear with low Versatility) / Liquid Luster (Mythic+) · Food: / Feasts: Harandar Celebration, or equivalent. / Personal Food: Royal Roast, or equivalent."
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Marksmanship Hunter": {
       "guideUrl": "https://www.wowhead.com/guide/classes/hunter/marksmanship/bis-gear",
-      "published": "2026-08-29",
+      "published": "2026-09-02",
       "author": "TheAzortharion",
       "priorities": [
         {
@@ -4834,11 +4848,11 @@
         {
           "list": "overall",
           "slot": "Trinket",
-          "itemId": "270173",
-          "itemName": "Zul'jin's Guillotine Technique",
-          "sourceText": "The Coiled Altar",
+          "itemId": "270168",
+          "itemName": "Font of Venomous Rage",
+          "sourceText": "Ula'tek",
           "sourceKind": "raid",
-          "boss": "The Coiled Altar",
+          "boss": "Ula'tek",
           "dungeon": null,
           "droppedBy": null
         }
@@ -4977,7 +4991,8 @@
           ],
           "note": "Food - Feast: Harandar Celebration or Silvermoon Parade · Food - Personal: Hearty Royal Roast · Combat Potion: Marksmanship Hunters should use Potion of Recklessness, which gives you a large amount of your highest secondary stat for 30 seconds and wants to be synced with your cooldowns. It is sensitive to Critical Strike actually being your highest stat when you press it, so if your gear has not got there yet, use Light's Potential instead. Stock up on Liquid Luster too and use it as your second Potion during execute. In the execute phase Bullseye gives you plenty of Critical Strike on its own, which leaves a repeat Potion of Recklessness worth much less there. Liquid Luster increases its Versatility over time, so press it about 10 seconds before Trueshot. · Food: Marksmanship Hunters prefers eating Agility food (such as Feasts) over secondary stat foods when given the option. Feast: Harandar Celebration or Silvermoon Parade; Personal Food: Hearty Royal Roast"
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Survival Hunter": {
       "guideUrl": "https://www.wowhead.com/guide/classes/hunter/survival/bis-gear",
@@ -5301,7 +5316,8 @@
             }
           ]
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Arcane Mage": {
       "guideUrl": "https://www.wowhead.com/guide/classes/mage/arcane/bis-gear",
@@ -5526,10 +5542,11 @@
             "slot": "Main Hand",
             "candidates": [
               {
-                "id": "244029",
-                "name": "Enchant Weapon - Acuity of the Ren'dorei"
+                "id": "273071",
+                "name": "Enchant Weapon - Rite of the Hash'ey"
               }
-            ]
+            ],
+            "note": "Enchant Weapon - Acuity of the Ren'dorei is most likely going to be the best weapon enchant option for people, however any one of the other max level options are just as well off."
           },
           {
             "slot": "Head",
@@ -5639,7 +5656,8 @@
             }
           ]
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Fire Mage": {
       "guideUrl": "https://www.wowhead.com/guide/classes/mage/fire/bis-gear",
@@ -6016,7 +6034,8 @@
           ],
           "note": "Flasks: The best Flask for Fire Mages is Flask of the Magisters, though Flask of the Blood Knights can be better depending on your stats. Flask of Thalassian Resistance is also a decent option for Pyroclasm builds (if they get buffed). · Combat Potion: When it comes to combat potions, Fire Mage uses Light's Potential. Notes: Sunfury Light's Potential Int pot Frostfire Potion of Recklessness Reckless pot · Health Potion: The best healing potion for Fire Mages is Silvermoon Health Potion. · Food: In Midnight, personal stat food is no better than feast buffs. Intellect food is equivalent to Secondary stats. As always, sim your character to check which food is the best for your configuration of Secondary stats. Feast: Harandar Celebration and Quel'dorei Medley are equal; Personal Food: Champion's Bento"
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Frost Mage": {
       "guideUrl": "https://www.wowhead.com/guide/classes/mage/frost/bis-gear",
@@ -6388,7 +6407,8 @@
           ],
           "note": "Combat Potion: Frost Mages should use Potion of Recklessness as their combat potion in most cases, but in rare cases you may want to use Light's Potential with your specific gear. You should simulate the two options if you want to know which is best for you. Keep in mind that if you are using Vantus Rune: Radiant, it may make Potion of Recklessness significantly worse by causing it to grant versatility. · Augment Rune: With The War Within, the new Augment Rune is Void-Touched Augment Rune. If you've farmed enough Renown, you can also use Ethereal Augment Rune or Soulgorged Augment Rune."
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Brewmaster Monk": {
       "guideUrl": "https://www.wowhead.com/guide/classes/monk/brewmaster/bis-gear",
@@ -6716,11 +6736,12 @@
           ],
           "note": "Food: (Hearty) Silvermoon Parade / (Hearty) Harandar Celebration / Royal Roast / · Flasks: Flask of Thalassian Resistance is your default flask choice in Midnight, offering the most generally useful stat of Versatility. However, both the Flask of the Shattered Sun and Flask of the Magisters can also be potent or even superior depending on your current gear. Remember, you can also acquire conjured versions of these flasks from a Cauldron of Sin'dorei Flasks, provided the Alchemist who placed it knows the recipes! · Combat Potion: Liquid Luster acts as your most consistently useful combat potion, providing a ramping Versatility bonus for a long period of time, though there are a number of competitive options in Midnight. There is also the Draught of Rampant Abandon, which grants a massive amount of Agility at the cost of potentially spawning puddles of The Void's Toll under your feet to silence and pacify your character. Raid : Liquid Luster; Mythic+ : Liquid Luster/Draught of Rampant Abandon; As with flasks, you may obtain temporary conjured versions of any of these potions from an Alchemist's Voidlight Potion Cauldron, assuming they know the recipes. · Health Potion: Concentrated Silvermoon Health Potion is the default healing potion for Brewmaster Monks, offering improved healing over a regular Silvermoon Health Potion. As a staple craft of Alchemists seeking to level the profession, you should have access to plenty of this consumable at a reasonable price, though only one may be used every 5 minutes. In addition, remember that a Warlock 's Healthstone is considered a separate healing item and will not share a cooldown with the healing potion above. Use it as another resource once per encounter! · Food: Feast: (Hearty) Silvermoon Parade/Harandar Celebration; Personal Food: There are two food items that provide the same effect of increasing your Agility: Royal Roast or Impossibly Royal Roast. Find whichever is cheapest to acquire, or consider an alternative such as Champion's Bento which increases your highest secondary stat instead.; Midnight Season 2 additionally features \"hearty\" versions of food items, which can be created by combining multiples of a given item together (such as the Hearty Silvermoon Parade). These items, in addition to being warband-bound, keep their buffs through death . Seek them out for use in areas where you are likely to die and lose an otherwise normal food buff. · Further Consumables: Though less important for your success in group content, Void-Touched Augment Rune offers a small amount of additional Agility. However, the effect will be lost on death, making this a very expensive consumable effect to maintain. All the same, aim to keep a few of these handy for those moments when you need to eke out every bit of damage from your character. Should you need access to a Bloodlust effect and a class with the ability is not available, you may also wish to hold on to a small number of drums consumables. These allow you to trigger a slightly weaker version of the bonus Haste from these spells, but that is still better than not having it at all! For Level 90 characters, the only drums that are usable are the Void-Touched Drums. Finally, you have access to a battle-resurrection consumable: Emergency Soul Link. Although these have a cast time (during which you cannot dodge), they are indispensable if your group is otherwise missing this utility. Have a few on hand, just in case, and make sure to use the higher-ranked version to remove the otherwise small chance of the effect failing!"
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Mistweaver Monk": {
       "guideUrl": "https://www.wowhead.com/guide/classes/monk/mistweaver/bis-gear",
-      "published": "2026-08-29",
+      "published": "2026-09-05",
       "author": "Swirl",
       "priorities": [
         {
@@ -7180,7 +7201,8 @@
           ],
           "note": "Invisiblity Potion: Void-Shrouded Tincture · Group Feast: Hearty Harandar Celebration · Personal Food: Hearty Royal Roast · Flasks: The best Flask for Mistweaver Monks in Midnight Season 2 is Flask of the Blood Knights, though Flask of the Shattered Sun can be used if you find yourself with too much Haste. Again, please use QE LIve to determine this for your current needs. · Combat Potion: For Mistweaver Monks, the best combat potion is Potion of Recklessness. I do not recommend using mana potions in any form of combat, but if you decide against this advice, the potion you're looking for is the Lightfused Mana Potion. · Food: With Cooking in Midnight, there are different methods of increasing your stats through food! Both feasts and personal food can increase either your Intellect or your highest secondary stat, with personal food having more combination of options albeit at a lower stat gain. By combining the same dish with itself you can make Hearty variants, that act as if you had a weaker version of the Alchemical Flavor Pocket from Dragonflight , allowing the buff from food to persist through death. For Mistweaver food options, we'll be going with Intellect-increasing foods below: Feast: Hearty Harandar Celebration; Personal Food: Hearty Royal Roast (or the Vegetarian option, Hearty Impossibly Royal Roast) · Food: In Midnight Season 2, healers will focus on gaining Mana water from Cooking! There are several options that stack very high and replenish the most amount of mana per second: Argentleaf Tea; Sanguithorn Tea; Azeroot Tea; Mana Lily Tea; Tranquility Bloom Tea; Personally, I'd suggest choosing whichever is the cheapest on the Auction House at the time, since they offer virtually no difference with the latter two not having the movement speed increase buff on them."
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Windwalker Monk": {
       "guideUrl": "https://www.wowhead.com/guide/classes/monk/windwalker/bis-gear",
@@ -7199,7 +7221,7 @@
           ],
           "leadsWithItemLevel": false,
           "softCaps": [],
-          "raw": "Agility > Haste > Critical Strike > Mastery > Versatility"
+          "raw": "Agility > Haste = Critical Strike = Mastery > Versatility"
         },
         {
           "label": "Conduit of the Celestials",
@@ -7207,13 +7229,13 @@
           "primary": "Agility",
           "secondaries": [
             "Haste",
-            "Mast",
             "Crit",
+            "Mast",
             "Vers"
           ],
           "leadsWithItemLevel": false,
           "softCaps": [],
-          "raw": "Agility > Haste > Mastery > Critical Strike > Versatility"
+          "raw": "Agility > Haste = Critical Strike = Mastery > Versatility"
         }
       ],
       "bis": [
@@ -7416,7 +7438,8 @@
           ],
           "note": "Food: Harandar Celebration or Silvermoon Parade"
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Holy Paladin": {
       "guideUrl": "https://www.wowhead.com/guide/classes/paladin/holy/bis-gear",
@@ -7757,7 +7780,8 @@
           ],
           "note": "Weapon Buff: Thalassian Phoenix Oil as Herald / Rite of Sanctification as Lightsmith · Food: In Midnight Season 2, Holy Paladins prefer using the new Secondary stat feast. Feast: Amani Cornucopia or Loa's Gathering; Personal Food: Hearty Royal Roast; Mana Drink: Sanguithorn Tea. Grants the most mana of any drink and stacks to 1000."
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Protection Paladin": {
       "guideUrl": "https://www.wowhead.com/guide/classes/paladin/protection/bis-gear",
@@ -8087,7 +8111,8 @@
           ],
           "note": "Combat Potion: Draught of Rampant Abandon or Light's Potential"
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Retribution Paladin": {
       "guideUrl": "https://www.wowhead.com/guide/classes/paladin/retribution/bis-gear",
@@ -8419,7 +8444,8 @@
           ],
           "note": "Combat Potion: Potion of Recklessness is the strongest potion generally, but requires you to have stats that accommodate it. Either Critical Strike or Mastery is fine to have as your highest stat for it, but if it's Haste then Light's Potential is better."
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Discipline Priest": {
       "guideUrl": "https://www.wowhead.com/guide/classes/priest/discipline/bis-gear",
@@ -8655,7 +8681,8 @@
           ],
           "note": "Combat Potion: There are a couple of different potions that have different useful scenarios for Discipline Priests: Raiding : Potion of Recklessness/Light's Potential ; Mythic+ : Potion of Recklessness, Light's Potential or Void-Shrouded Tincture for invisibility skips"
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Holy Priest": {
       "guideUrl": "https://www.wowhead.com/guide/classes/priest/holy/bis-gear",
@@ -8688,7 +8715,7 @@
           ],
           "leadsWithItemLevel": false,
           "softCaps": [],
-          "raw": "Intellect > Crit > Versatility = Mastery > Haste"
+          "raw": "Intellect > Haste to comfort (~20%) > Crit > Versatility = Mastery > Haste"
         },
         {
           "label": "Archon",
@@ -8716,7 +8743,7 @@
           ],
           "leadsWithItemLevel": false,
           "softCaps": [],
-          "raw": "Intellect > Versatility > Critical Strike > Haste > Mastery"
+          "raw": "Intellect > Haste to comfort (~20%) > Versatility > Critical Strike > Haste > Mastery"
         }
       ],
       "bis": [
@@ -9010,11 +9037,12 @@
           ],
           "note": "Combat Potion: There are a couple of different potions that have different useful scenarios for Holy Priests: Raiding : Potion of Recklessness/Light's Potential ; Mythic+ : Potion of Recklessness, Light's Potential or Void-Shrouded Tincture for invisibility skips · Food: In Midnight Feast: Harandar Celebration; Personal Food: Royal Roast"
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Shadow Priest": {
       "guideUrl": "https://www.wowhead.com/guide/classes/priest/shadow/bis-gear",
-      "published": "2026-08-20",
+      "published": "2026-08-31",
       "author": "EllipsisPriest",
       "priorities": [
         {
@@ -9210,7 +9238,8 @@
           ],
           "note": "Food: Shadow Priests are most likely using a feast buff over personal stat food due to stat allocation, but personal food is more than fine to use if feasts are not available. Feast: Blooming Feast; Personal Food: Royal Roast"
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Assassination Rogue": {
       "guideUrl": "https://www.wowhead.com/guide/classes/rogue/assassination/bis-gear",
@@ -9462,11 +9491,12 @@
           ],
           "note": "Flask: Flask of the Blood Knights, Flask of the Shattered Sun, or Flask of the Magisters · Combat Potion: Liquid Luster, Light's Potential, or Potion of Recklessness"
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Outlaw Rogue": {
       "guideUrl": "https://www.wowhead.com/guide/classes/rogue/outlaw/bis-gear",
-      "published": "2026-08-22",
+      "published": "2026-09-01",
       "author": "JustGuy",
       "priorities": [
         {
@@ -9513,12 +9543,12 @@
         {
           "list": "overall",
           "slot": "Off Hand",
-          "itemId": "275070",
-          "itemName": "Sharpened Lightwood Slasher",
-          "sourceText": "Altar of Fangs",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Altar of Fangs",
+          "itemId": "271093",
+          "itemName": "Zatha'tek, Breath of Corruption",
+          "sourceText": "Ula'tek",
+          "sourceKind": "raid",
+          "boss": "Ula'tek",
+          "dungeon": null,
           "droppedBy": null
         },
         {
@@ -9815,11 +9845,12 @@
           ],
           "note": "Flask: Flask of the Shattered Sun or Flask of the Blood Knights · Food: Outlaw Rogue is most likely using feast buffs in TWW due to how valuable Agility is for the class. As always, sim your character to see which food is best for your secondary stat configuration. Feast: Harandar Celebration; Personal Food: Hearty Royal Roast"
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Subtlety Rogue": {
       "guideUrl": "https://www.wowhead.com/guide/classes/rogue/subtlety/bis-gear",
-      "published": "2026-08-24",
+      "published": "2026-09-02",
       "author": "fuu1",
       "priorities": [
         {
@@ -10168,7 +10199,8 @@
           ],
           "note": "Flask: / Flask of the Magisters (best) / Flask of the Shattered Sun (alternative) / · Combat Potion: Light's Potential(default) / Potion of Recklessness (if you get Mastery) · Weapon Buff (Main hand): Thalassian Phoenix Oil · Weapon Buff (Off hand): Thalassian Phoenix Oil · Food: Silvermoon Parade (feast) / Royal Roast(personal) · Flasks: The best Flask for Subtlety Rogues is between Flask of the Shattered Sun and Flask of the Magisters. Which one is better will usually depend on your gear, and its best to use a simulation to compare. Flask of the Magisters is likely the better option. If you are below the haste breakpoints of 700, it's advised to use Fleeting Flask of the Blood Knights instead. · Combat Potion: While there are many options for potions, Subtlety Rogues will use Light's Potential. Potion of Recklessness becomes the best option if you get Mastery . The technically best potion is Draught of Rampant Abandon, but it's tricky to use. The void pools spawned by this poison silence you, which means you need to actively run out of them to use abilities. There is a short grace period before the silence effect applies. Using the potion, it seemed to proc roughly 3, often 4 times during the duration. Attacking a dummy was possible for the entire time, but it did need some practice and good positioning. The use of the potion is only recommended for encounters with big hitboxes, some amount of boss movement, or with a low amount of mechanical overhead to allow you to focus on avoiding the zones. · Weapon Buff: For their weapons, Subtlety Rogues, the best option is listed below: Main Hand: Thalassian Phoenix Oil; Off Hand: Thalassian Phoenix Oil"
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Elemental Shaman": {
       "guideUrl": "https://www.wowhead.com/guide/classes/shaman/elemental/bis-gear",
@@ -10509,7 +10541,8 @@
           ],
           "note": "Weapon Buff: If you are talented into Flametongue Weapon, do not use any weapon oils, but instead use Flametongue Weapon to imbue your weapon. Otherwise you use Thalassian Phoenix Oil."
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Enhancement Shaman": {
       "guideUrl": "https://www.wowhead.com/guide/classes/shaman/enhancement/bis-gear",
@@ -10676,7 +10709,8 @@
           ],
           "note": "Flask: either — Flask of the Magisters * · Combat Potion: ST — Liquid Luster * · Flasks: In Midnight Season 2, Flasks are now very volatile, and which you use depends on your other stats. As annoying as it is to not have a catch all answer, there's a few rules to decide which to use, so simming your character may be best here: Flask of the Magisters — If your Critical Strike is higher than your Mastery.; Flask of the Shattered Sun — If your Mastery is higher than your Critical Strike.; Flask of the Blood Knights — If your gear has next to no Haste, this can raise the floor in an emergency.; Flasks are best used this season to balance out the needs of the three stats, since they're all extremely close to each other, and can be influenced by cantrips and gear you're wearing. You can also obtain these from a Cauldron of Sin'dorei Flasks if your group is using one. · Combat Potion: Even worse than Flasks, Potions are more complicated in Season 2 as well. There's use cases for three separate potions, as annoying as that is: Potion of Recklessness — in AoE or you can guarantee it triggers Mastery or Critical Strike, this is strongest.; Liquid Luster — Stormbringer pre-potting 12s before the pull for Ascendance is roughly equal.; Light's Potential — at low gear or if you don't want the hassle, it's a fine backup.; At different gear breakpoints Potion of Recklessness can fluctuate a lot for Stormbringer , but always stays the best for Totemic . Liquid Luster also needs to be pre-potted to ramp the effect for it to stay competitive buffing your Ascendance, so needs extra care when using it. These can also be obtained from an Voidlight Potion Cauldron if your group is using one. · Weapon Buff: Unfortunately, due to the Weapon Imbues (Flametongue Weapon and Windfury Weapon) that Enhancement uses, it CANNOT use weapon enhancements such as oils or whetstones at the same time . Due to the way that Elemental Weapons works, opting out of these is not an option, so we do not use runes."
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Restoration Shaman": {
       "guideUrl": "https://www.wowhead.com/guide/classes/shaman/restoration/bis-gear",
@@ -10695,7 +10729,7 @@
           ],
           "leadsWithItemLevel": false,
           "softCaps": [],
-          "raw": "Intellect > Critical Strike > Haste > Versatility > Mastery"
+          "raw": "Intellect > Critical Strike > Haste = Versatility > Mastery"
         },
         {
           "label": "Totemic",
@@ -10709,7 +10743,7 @@
           ],
           "leadsWithItemLevel": false,
           "softCaps": [],
-          "raw": "Intellect > Critical Strike > Haste > Versatility > Mastery"
+          "raw": "Intellect > Critical Strike > Haste = Versatility > Mastery"
         }
       ],
       "bis": [
@@ -11011,7 +11045,8 @@
           ],
           "note": "Combat Potion: If your highest secondary stat is Critical Strike, then your best potion to use will always be Potion of Recklessness. The effect not only increases your healing output by a very high amount, but due to Resurgence you also gain a substantial amount of mana from this increase. While the mana by itself is not as much as what Lightfused Mana Potion gives, the combination of mana and more healing end up being better by a decent margin. The best way to use this potion during raids is to pair with Ascendance. The effect of Ascendance makes Chain Heal heal more targets which translates into more Resurgence procs, and the reduced mana cost means you can cast it a lot without mana issues. This combination results in doing an incredibly high amount of raid healing for very little mana cost, saving you more mana in the long run than what a normal mana potion would. · Health Potion: The best healing potion for Restoration Shamans is Silvermoon Health Potion."
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Affliction Warlock": {
       "guideUrl": "https://www.wowhead.com/guide/classes/warlock/affliction/bis-gear",
@@ -11271,7 +11306,8 @@
           ],
           "note": "Food: Harandar Celebration and Royal Roast · Flasks: The best Flask for Affliction Warlocks is Flask of the Magisters, though other stat flasks can still be used depending on your overall stat weighting."
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Demonology Warlock": {
       "guideUrl": "https://www.wowhead.com/guide/classes/warlock/demonology/bis-gear",
@@ -11532,7 +11568,8 @@
           ],
           "note": "Food: Demonology Warlocks are most likely using personal stat food over feast buffs as we value the baseline Intellect more than secondaries. As always, sim your character to check which food is the best for your configuration of secondary stats. Feast: Silvermoon Parade; Personal Food: Royal Roast"
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Destruction Warlock": {
       "guideUrl": "https://www.wowhead.com/guide/classes/warlock/destruction/bis-gear",
@@ -11791,7 +11828,8 @@
           ],
           "note": "Food: Harandar Celebration or Royal Roast"
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Arms Warrior": {
       "guideUrl": "https://www.wowhead.com/guide/classes/warrior/arms/bis-gear",
@@ -12117,7 +12155,8 @@
           ],
           "note": "false: The best flask for Arms Warriors is Flask of the Shattered Sun or Flask of the Blood Knights. · false: Light's Potential is recommended due to its ease of use, as Potion of Recklessness requires carefully balancing secondary stats to ensure that Critical Strike is always highest and Versatility is minimized, despite being very slightly stronger when not using Vantus Runes. Draught of Rampant Abandon also looks powerful, but the frequent need to move to avoid being silenced makes it weaker in practice. · false: Any feast, with Blooming Feast, Champion's Bento, and Flora Frenzy all providing the maximum benefit."
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Fury Warrior": {
       "guideUrl": "https://www.wowhead.com/guide/classes/warrior/fury/bis-gear",
@@ -12456,7 +12495,8 @@
           ],
           "note": "false: The best flask for Fury Warriors is Flask of the Magisters or Flask of the Blood Knights. · false: Light's Potential is recommended due to its ease of use, as Potion of Recklessness requires carefully balancing secondary stats to ensure that Mastery is always highest and Versatility is minimized, despite being very slightly stronger when not using Vantus Runes. Draught of Rampant Abandon also looks powerful, but the frequent need to move to avoid being silenced makes it weaker in practice. · false: Any feast, with Blooming Feast, Champion's Bento, and Flora Frenzy all providing the maximum benefit."
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Protection Warrior": {
       "guideUrl": "https://www.wowhead.com/guide/classes/warrior/protection/bis-gear",
@@ -12772,7 +12812,8 @@
           ],
           "note": "Combat Potion: Draught of Rampant Abandon or Light's Potential"
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     }
   },
   "coverage": {

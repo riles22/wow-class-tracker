@@ -16,6 +16,18 @@ Only these tier-list sources feed the consensus (**four** today — the table be
 | **Archon** | S/A/B/C | Statistical (Warcraft Logs parses / Blizzard leaderboards, 14-day window) | **daily** | raid tiers = *throughput* list, M+ = *score* list; mirrored at u.gg. **Raid letters read from the HEROIC list since 2026-08-25** (owner decision, early-S2: Heroic carries ~170× the Mythic parses and all 27 DPS specs; switch back — a reviewed registry edit + `CONSENSUS_VERSION` bump — once Mythic reaches 27/27 with healthy samples) |
 | ~~**WoWMeta**~~ | — | **Retyped to a metrics source 2026-07-31** — see layer 2. Its letters were Ckmeans clusters of an undocumented toggle defaulting to PLAYER COUNT (representation, not performance), and its HTML transport served a stale 2026-03-23 prerender. Consensus is now four tier-list sources. | | |
 
+**Outage retention (owner-confirmed 2026-09-05):** freshness alarms do not expire
+in-season tier-list letters. Retain each outlet's last verified observations and dates;
+the tracker explicitly names older contributors still in consensus. Archon's current
+human-verification wall therefore leaves its last verified S2 letters included. Earlier
+three-source claims in run notes were incorrect. Failed fetches never renew snapshot
+dates, and other providers' values are never published as Archon's. The encounter archive
+remains Season 1 and is quarantined from current fight views until S2 data actually lands.
+
+Nightly availability evidence uses ordinary public Archon routes and the sanctioned WCL
+API. It detects recovery but is not fresh game data; only a validated data merge may
+clear a data-age failure.
+
 ### Era-gated tier lists → their own column, never the consensus
 
 A tier list whose letters describe **12.1**, not the patch we are running. Stored in

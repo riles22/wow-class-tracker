@@ -361,6 +361,11 @@ export function launchPair(snapshots, prePhase = "12.1-ptr", { settleDays = SETT
 
 const fmt = a => a ? `${String(a.exactPct).padStart(3)}% exact · ${String(a.withinOnePct).padStart(3)}% within one band · MAE ${a.meanAbsBands} bands · bias ${a.biasBands > 0 ? "+" : ""}${a.biasBands}${a.biasScore != null ? ` (${a.biasScore > 0 ? "+" : ""}${a.biasScore} pts)` : ""} · n=${a.n}` : "—";
 
+export function reportWarnings(report) {
+  const prefix = report.consensusVersion?.comparable ? "DISCLOSURE" : "NOT COMPARABLE";
+  return (report.warnings ?? []).map(warning => `${prefix}: ${warning}`);
+}
+
 const isMain = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
 if (isMain) {
   const arg = k => { const i = process.argv.indexOf(k); return i > -1 ? process.argv[i + 1] : null; };
@@ -421,8 +426,8 @@ if (isMain) {
     }
   }
   console.log(`  forecast ${r.forecastDate} (phase ${r.forecastPhase}, projection v${r.projectionVersion}) → actual ${r.actualDate} (phase ${r.actualPhase})`);
-  // Loudly, and BEFORE any number: a grade against a moved consensus definition is not a grade.
-  for (const w of r.warnings ?? []) console.log(`  ⚠ NOT COMPARABLE: ${w}`);
+  // Disclose composition/version changes before accuracy; reserve refusal for an incomparable pair.
+  for (const w of reportWarnings(r)) console.log(`  ⚠ ${w}`);
   // Coverage before accuracy, always: a percentage without its denominator is the most
   // misleading thing this tool could print, and this is a one-shot measurement.
   const c = r.coverage;

@@ -1,25 +1,13 @@
-// Build the spec capability + stat-priority layer.
-//
-//   class/spec/role/tier-set   <- WoW Class Tracker  data/specs.json  (already curated)
-//   armour type per class      <- OUR OWN harvested tier-token class lists (self-validating)
-//   stat priority              <- Icy Veins per-spec stat-priority pages
-//
-// Icy Veins currently publishes 12.0.7 (live) priorities; Season 2 priorities do not exist
-// yet. That is recorded per spec in `statPriorityPatch` so the UI can say so out loud.
-//
-//   node src/harvest-specs.mjs
-//
-import { readFile, writeFile } from "node:fs/promises";
-import { dirname, join } from "node:path";
+// Deterministic spec-capability sync. No network requests are made here.
+// Active Season 2 guide priorities are refreshed by harvest-guide-*.mjs.
+// The reviewed 12.0.7 fallback remains unchanged and keeps its original review date.
+import { createHash } from "node:crypto";
+import { readFile, rename, writeFile } from "node:fs/promises";
+import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { extractPriority } from "./lib-icy-veins.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
-// gearing/ lives inside the wow-class-tracker repo, so the tracker's curated spec list
-// is a sibling of this subproject: <repo>/data/specs.json
-const TRACKER = process.env.WOW_CLASS_TRACKER_SPECS
-  || join(ROOT, "..", "data", "specs.json");
-const EXPECTED_LIVE_PATCH = "12.0.7";
+const LEGACY_PATCH = "12.0.7";
 const WEAPON_PATCH_CONTEXT = "12.1-live";
 
 // Primary stat is a specialization capability, not a property of how a guide happens
@@ -73,190 +61,158 @@ const EXPECTED_ARMOR_BY_CLASS = {
   Warrior: "Plate", Paladin: "Plate", "Death Knight": "Plate",
 };
 
-const slug = (s) => s.toLowerCase().replace(/['’]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-const roleSlug = (r) => (/tank/i.test(r) ? "tank" : /heal/i.test(r) ? "healing" : "dps");
+const keyOf = (s) => `${s.spec} ${s.class}`;
+const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+const digest = (data) => createHash("sha256").update(JSON.stringify(data)).digest("hex");
+const validDate = (date) => typeof date === "string" && /^\d{4}-\d{2}-\d{2}$/.test(date)
+  && Number.isFinite(Date.parse(date)) && new Date(date).toISOString().slice(0, 10) === date;
+const sourceDate = (date) => validDate(date) ? date : null;
+const trackerScope = (tracker) => tracker.map((s) => ({
+  class: s.class, spec: s.spec, role: s.role, tierSet: s.tierSet ?? null,
+}));
 
-async function fetchText(url, tries = 3) {
-  for (let attempt = 1; attempt <= tries; attempt++) {
-    try {
-      const r = await fetch(url, { headers: { "user-agent": "Mozilla/5.0 (wow-s2-gearing)" } });
-      if (r.ok) return await r.text();
-    } catch { /* retry below */ }
-    if (attempt < tries) await new Promise((resolve) => setTimeout(resolve, attempt * 400));
-  }
-  return null;
+function assertRoster(keys, expected, label) {
+  const missing = expected.filter((key) => !keys.includes(key));
+  const unexpected = keys.filter((key) => !expected.includes(key));
+  if (new Set(keys).size !== keys.length || missing.length || unexpected.length)
+    throw new Error(`${label} roster drift: missing=[${missing}] unexpected=[${unexpected}] or duplicate keys`);
 }
 
-// ---------------------------------------------------------------- inputs
-const tracker = JSON.parse(await readFile(TRACKER, "utf8"));
-const raid = JSON.parse(await readFile(join(ROOT, "data", "raid-items.json"), "utf8"));
-const PROF = JSON.parse(await readFile(join(ROOT, "data", "weapon-proficiency.json"), "utf8"));
-const OVERRIDES = JSON.parse(await readFile(join(ROOT, "data", "stat-priority-overrides.json"), "utf8"));
-const BASELINE = JSON.parse(await readFile(join(ROOT, "data", "stat-priority-baseline.json"), "utf8"));
-if (OVERRIDES._patch !== EXPECTED_LIVE_PATCH || !OVERRIDES.overrides
-  || typeof OVERRIDES.overrides !== "object")
-  throw new Error(`stat-priority-overrides.json must contain patch ${EXPECTED_LIVE_PATCH} overrides`);
-if (BASELINE.schemaVersion !== 1 || BASELINE.patch !== EXPECTED_LIVE_PATCH || !BASELINE.priorities)
-  throw new Error(`stat-priority-baseline.json must contain a reviewed ${EXPECTED_LIVE_PATCH} priority roster`);
+export async function loadSpecSyncInputs({ root = ROOT,
+  trackerPath = process.env.WOW_CLASS_TRACKER_SPECS || join(root, "..", "data", "specs.json") } = {}) {
+  const paths = { tracker: trackerPath, raid: join(root, "data", "raid-items.json"),
+    weapons: join(root, "data", "weapon-proficiency.json"),
+    overrides: join(root, "data", "stat-priority-overrides.json"),
+    baseline: join(root, "data", "stat-priority-baseline.json") };
+  return Object.fromEntries(await Promise.all(Object.entries(paths).map(async ([key, path]) =>
+    [key, JSON.parse(await readFile(path, "utf8"))])));
+}
 
-// armour type per class, straight from the tier tokens we harvested
-const ARMOR_BY_CLASS = {};
-for (const b of raid.bosses) {
-  for (const it of b.items) {
-    if (!it.classes) continue;
-    const armor = /woven/i.test(it.name) ? "Cloth" : /cured/i.test(it.name) ? "Leather"
-      : /cast/i.test(it.name) ? "Mail" : /forged/i.test(it.name) ? "Plate" : null;
+export function buildSpecSync(inputs, { checkedAt = new Date().toISOString().slice(0, 10) } = {}) {
+  const { tracker, raid, weapons, overrides, baseline } = inputs;
+  if (!validDate(checkedAt)) throw new Error("structural sync needs a valid checkedAt date");
+  if (!Array.isArray(tracker)) throw new Error("tracker roster must be an array");
+  const keys = tracker.map(keyOf);
+  assertRoster(keys, [...PRIMARY_BY_SPEC.keys()], "tracker/primary-stat");
+  if (tracker.some((s) => !["DPS", "Healer", "Tank"].includes(s.role)))
+    throw new Error("tracker roster contains an invalid role");
+  if (baseline?.schemaVersion !== 1 || baseline.patch !== LEGACY_PATCH || !baseline.priorities
+    || !validDate(baseline.reviewedAt)) throw new Error("reviewed legacy priority baseline is missing or malformed");
+  if (overrides?._patch !== LEGACY_PATCH || !overrides.overrides)
+    throw new Error("legacy priority overrides are missing or have the wrong patch");
+  if (weapons?._schemaVersion !== 2 || !weapons.specLoadouts || !weapons._provenance)
+    throw new Error("reviewed weapon-proficiency source is missing or malformed");
+  assertRoster(Object.keys(baseline.priorities), keys, "legacy baseline");
+  assertRoster(Object.keys(overrides.overrides), baseline.contextualProfileSpecs || [], "legacy contextual");
+  assertRoster(Object.keys(weapons.specLoadouts), keys, "weapon-loadout");
+
+  const armorByClass = {};
+  const tokens = [];
+  for (const boss of raid?.bosses || []) for (const item of boss.items || []) {
+    if (!Array.isArray(item.classes)) continue;
+    const armor = /woven/i.test(item.name) ? "Cloth" : /cured/i.test(item.name) ? "Leather"
+      : /cast/i.test(item.name) ? "Mail" : /forged/i.test(item.name) ? "Plate" : null;
     if (!armor) continue;
-    for (const c of it.classes) ARMOR_BY_CLASS[c.trim()] = armor;
+    tokens.push({ id: item.id, name: item.name, classes: item.classes });
+    for (const className of item.classes.map((c) => c.trim())) {
+      if (armorByClass[className] && armorByClass[className] !== armor)
+        throw new Error(`conflicting tier-token armor for ${className}`);
+      armorByClass[className] = armor;
+    }
   }
-}
-console.log("armour map derived from tier tokens:", ARMOR_BY_CLASS);
-const armorDrift = Object.entries(EXPECTED_ARMOR_BY_CLASS)
-  .filter(([className, armor]) => ARMOR_BY_CLASS[className] !== armor)
-  .map(([className, armor]) => `${className}=${ARMOR_BY_CLASS[className] || "missing"} (expected ${armor})`);
-const unknownArmorClasses = Object.keys(ARMOR_BY_CLASS).filter((className) => !EXPECTED_ARMOR_BY_CLASS[className]);
-if (armorDrift.length || unknownArmorClasses.length)
-  throw new Error(`tier-token armor map drift: ${armorDrift.concat(unknownArmorClasses.map((name) => `unexpected ${name}`)).join(", ")}`);
+  assertRoster(Object.keys(armorByClass), Object.keys(EXPECTED_ARMOR_BY_CLASS), "tier-token armor");
+  for (const [className, armor] of Object.entries(EXPECTED_ARMOR_BY_CLASS))
+    if (armorByClass[className] !== armor) throw new Error(`tier-token armor drift for ${className}`);
 
-// ---------------------------------------------------------------- build
-const trackerKeys = tracker.map((s) => `${s.spec} ${s.class}`);
-const unknownPrimary = trackerKeys.filter((key) => !PRIMARY_BY_SPEC.has(key));
-const obsoletePrimary = [...PRIMARY_BY_SPEC.keys()].filter((key) => !trackerKeys.includes(key));
-if (unknownPrimary.length || obsoletePrimary.length) {
-  throw new Error(`primary-stat map drift: missing=[${unknownPrimary.join(", ")}] obsolete=[${obsoletePrimary.join(", ")}]`);
-}
-const weaponKeys = Object.keys(PROF.specLoadouts || {});
-const unknownWeapons = trackerKeys.filter((key) => !weaponKeys.includes(key));
-const obsoleteWeapons = weaponKeys.filter((key) => !trackerKeys.includes(key));
-if (unknownWeapons.length || obsoleteWeapons.length) {
-  throw new Error(`weapon-loadout map drift: missing=[${unknownWeapons.join(", ")}] obsolete=[${obsoleteWeapons.join(", ")}]`);
-}
-const obsoleteOverrides = Object.keys(OVERRIDES.overrides).filter((key) => !trackerKeys.includes(key));
-if (obsoleteOverrides.length)
-  throw new Error(`stat-priority override map has unknown specs: ${obsoleteOverrides.join(", ")}`);
-const contextualKeys = BASELINE.contextualProfileSpecs || [];
-const missingContextual = contextualKeys.filter((key) => !OVERRIDES.overrides[key]);
-const unexpectedContextual = Object.keys(OVERRIDES.overrides).filter((key) => !contextualKeys.includes(key));
-if (missingContextual.length || unexpectedContextual.length)
-  throw new Error(`stat-priority contextual roster drift: missing=[${missingContextual.join(", ")}] unexpected=[${unexpectedContextual.join(", ")}]`);
-const baselineKeys = Object.keys(BASELINE.priorities);
-const missingBaseline = trackerKeys.filter((key) => !baselineKeys.includes(key));
-const obsoleteBaseline = baselineKeys.filter((key) => !trackerKeys.includes(key));
-if (missingBaseline.length || obsoleteBaseline.length)
-  throw new Error(`stat-priority review baseline drift: missing=[${missingBaseline.join(", ")}] obsolete=[${obsoleteBaseline.join(", ")}]`);
-
-const out = [];
-let ok = 0;
-const failed = [];
-for (const s of tracker) {
-  const url = `https://www.icy-veins.com/wow/${slug(s.spec)}-${slug(s.class)}-pve-${roleSlug(s.role)}-stat-priority`;
-  const html = await fetchText(url);
-  let { priority, patch } = html ? extractPriority(html) : { priority: null, patch: null };
-
-  const key = `${s.spec} ${s.class}`;
-  const primary = PRIMARY_BY_SPEC.get(key);
-  if (!html) failed.push(`${key}: source fetch failed`);
-  if (html && patch !== EXPECTED_LIVE_PATCH)
-    failed.push(`${key}: expected article patch ${EXPECTED_LIVE_PATCH}, got ${patch || "none"}`);
-
-  // Manual profiles are authoritative for sources with multiple build/content lists.
-  // Apply them even when the generic scraper found one valid list, otherwise the first
-  // list on the page silently wins and all other contexts disappear.
-  const ov = OVERRIDES.overrides[key];
-  if (ov) {
-    if (ov.primary && ov.primary !== primary)
-      failed.push(`${key}: override primary ${ov.primary} conflicts with ${primary}`);
-    priority = { primary, secondaries: ov.secondaries };
-    patch = ov.patch || OVERRIDES._patch || patch;
-  } else if (priority) {
-    priority.primary = primary;
-  }
-  const statSource = ov?.source || url;
-  const variants = ov?.variants?.map((variant) => ({
-    ...variant,
-    patch: variant.patch || patch,
-    source: variant.source || statSource,
-  })) || null;
-  const secondaries = priority?.secondaries || [];
-  const expectedSecondaries = new Set(["Crit", "Haste", "Mast", "Vers"]);
-  const complete = priority?.primary === primary
-    && secondaries.length === 4
-    && new Set(secondaries).size === 4
-    && secondaries.every((stat) => expectedSecondaries.has(stat));
-  if (complete) ok++; else failed.push(`${key}: incomplete priority ${JSON.stringify(priority)}`);
-  if (patch !== EXPECTED_LIVE_PATCH)
-    failed.push(`${key}: generated priority patch must be ${EXPECTED_LIVE_PATCH}, got ${patch || "none"}`);
-  if (!/^https:\/\//.test(statSource)) failed.push(`${key}: stat source is not a direct HTTPS URL`);
-  const reviewed = BASELINE.priorities[key];
-  if (reviewed.primary !== priority?.primary
-    || JSON.stringify(reviewed.secondaries) !== JSON.stringify(priority?.secondaries)
-    || reviewed.source !== statSource)
-    failed.push(`${key}: priority changed from the reviewed baseline; audit the source before updating the baseline`);
-  for (const variant of variants || []) {
-    const stats = variant.secondaries || [];
-    if (!variant.name || variant.patch !== EXPECTED_LIVE_PATCH || !/^https:\/\//.test(variant.source || "")
-      || stats.length !== 4 || new Set(stats).size !== 4
-      || stats.some((stat) => !expectedSecondaries.has(stat)))
-      failed.push(`${key}: invalid stat profile ${variant.name || "unnamed"}`);
-  }
-
-  // class name in Class Tracker vs token list ("Death Knight" both sides, "Demon Hunter" -> "DH" handled below)
-  const armor = ARMOR_BY_CLASS[s.class]
-    ?? ARMOR_BY_CLASS[s.class.replace("Demon Hunter", "Demon Hunter")]
-    ?? null;
-  if (!armor) failed.push(`${key}: armor type could not be derived from tier tokens`);
-
-  const weaponSpec = PROF.specLoadouts[key];
-  if (weaponSpec.primaryStat !== primary)
-    failed.push(`${key}: weapon primary ${weaponSpec.primaryStat || "none"} conflicts with ${primary}`);
-  const weaponLoadouts = (weaponSpec.loadouts || []).filter((loadout) =>
-    (loadout.patchContexts || weaponSpec.patchContexts || []).includes(WEAPON_PATCH_CONTEXT));
-  if (!weaponLoadouts.length) failed.push(`${key}: no weapon loadout for ${WEAPON_PATCH_CONTEXT}`);
-  if (!(weaponSpec.sourceUrls || []).length || weaponSpec.sourceUrls.some((source) => !/^https:\/\//.test(source)))
-    failed.push(`${key}: missing direct weapon source URL`);
-
-  out.push({
-    class: s.class, spec: s.spec, role: s.role,
-    armor,
-    weaponLoadouts,
-    weaponLoadoutPatchContext: WEAPON_PATCH_CONTEXT,
-    weaponLoadoutSources: weaponSpec.sourceUrls,
-    weaponLoadoutNote: weaponSpec.notes || null,
-    weaponPrimaryStatExceptions: PROF.primaryStatExceptions || null,
-    statPriority: priority,
-    statPriorityVariants: variants,
-    statPriorityNote: ov ? [ov.note, ov.caveat].filter(Boolean).join(" ") || null : null,
-    statPriorityPatch: patch,
-    statPrioritySource: priority ? statSource : null,
-    tierSet: s.tierSet ?? null,
-    // `ratings` is deliberately NOT copied (2026-08-08). Nothing in gearing reads it — not
-    // the app, not validate-data, not a test — and 27 of 40 copies had drifted from the
-    // tracker. A payload field that is silently wrong and rendered nowhere is a lie waiting
-    // for a future surface to start believing it. Read ratings from the tracker.
+  const secondariesOk = (stats) => Array.isArray(stats) && stats.length === 4
+    && new Set(stats).size === 4 && stats.every((s) => ["Crit", "Haste", "Mast", "Vers"].includes(s));
+  const specs = tracker.map((s) => {
+    const key = keyOf(s), primary = PRIMARY_BY_SPEC.get(key);
+    const reviewed = baseline.priorities[key], ov = overrides.overrides[key];
+    if (reviewed.primary !== primary || !secondariesOk(reviewed.secondaries)
+      || !/^https:\/\//.test(reviewed.source || "")) throw new Error(`${key}: invalid reviewed priority`);
+    if (ov && (ov.primary !== primary || !same(ov.secondaries, reviewed.secondaries)
+      || ov.source !== reviewed.source || (ov.patch || overrides._patch) !== LEGACY_PATCH))
+      throw new Error(`${key}: contextual priority drifted from reviewed baseline`);
+    const variants = ov?.variants?.map((v) => ({ ...v,
+      patch: v.patch || LEGACY_PATCH, source: v.source || reviewed.source })) || null;
+    if ((variants || []).some((v) => !v.name || v.patch !== LEGACY_PATCH
+      || !/^https:\/\//.test(v.source || "") || !secondariesOk(v.secondaries)))
+      throw new Error(`${key}: invalid reviewed contextual priority`);
+    const weaponSpec = weapons.specLoadouts[key];
+    const weaponLoadouts = (weaponSpec.loadouts || []).filter((l) =>
+      (l.patchContexts || weaponSpec.patchContexts || []).includes(WEAPON_PATCH_CONTEXT));
+    if (weaponSpec.primaryStat !== primary || !weaponLoadouts.length
+      || !(weaponSpec.sourceUrls || []).length
+      || weaponSpec.sourceUrls.some((url) => !/^https:\/\//.test(url)))
+      throw new Error(`${key}: invalid reviewed weapon capability`);
+    return {
+      class: s.class, spec: s.spec, role: s.role, armor: armorByClass[s.class],
+      weaponLoadouts, weaponLoadoutPatchContext: WEAPON_PATCH_CONTEXT,
+      weaponLoadoutSources: weaponSpec.sourceUrls, weaponLoadoutNote: weaponSpec.notes || null,
+      weaponPrimaryStatExceptions: weapons.primaryStatExceptions || null,
+      statPriority: { primary: reviewed.primary, secondaries: reviewed.secondaries },
+      statPriorityVariants: variants,
+      statPriorityNote: ov ? [ov.note, ov.caveat].filter(Boolean).join(" ") || null : null,
+      statPriorityPatch: LEGACY_PATCH, statPrioritySource: reviewed.source,
+      tierSet: s.tierSet ?? null,
+    };
   });
-  process.stdout.write(priority ? "." : "x");
+  // Digests describe only the fields consumed, so a ratings/metrics refresh does not
+  // invalidate structural sync. Source dates remain the dates of the recorded evidence;
+  // checkedAt attests local consistency only, never a new visit to an external source.
+  return {
+    source: "Local tracker roster and tier sets + reviewed tier-token armor and weapon capabilities",
+    harvestedAt: baseline.reviewedAt,
+    caveat: "Current stat priorities come from the Season 2 guide harvest (Icy Veins / Wowhead / Method). The statPriority field here is the reviewed 12.0.7 fallback, used only when the guide layer lacks a build. Structural sync checks local inputs; it does not reverify external game facts.",
+    structuralSync: { schemaVersion: 1, checkedAt, sources: {
+      tracker: { path: "data/specs.json", digest: digest(trackerScope(tracker)),
+        scope: "class, spec, role, tierSet; each tier set retains its own source and asOf" },
+      armor: { path: "gearing/data/raid-items.json", digest: digest(tokens),
+        asOf: sourceDate(raid.harvestedAt), scope: "tier-token item id, name and class lists" },
+      weapons: { path: "gearing/data/weapon-proficiency.json", digest: digest(weapons),
+        asOf: sourceDate(weapons.patchContexts?.[WEAPON_PATCH_CONTEXT]?.asOf), scope: WEAPON_PATCH_CONTEXT },
+    } },
+    legacyPriority: { patch: LEGACY_PATCH, reviewedAt: baseline.reviewedAt,
+      baselineDigest: digest(baseline), overridesDigest: digest(overrides),
+      provenance: baseline.provenance },
+    weaponProficiencyProvenance: weapons._provenance, armorByClass,
+    counts: { specs: specs.length, withPriority: specs.length, withArmor: specs.length,
+      withWeaponLoadouts: specs.length }, specs,
+  };
 }
-console.log("");
 
-if (failed.length) {
-  throw new Error(`refusing to overwrite data/specs.json:\n  ${failed.join("\n  ")}`);
+// Re-derive rather than trusting the receipt date or a claimed digest. A heartbeat can
+// enforce checkedAt age separately after this proves current inputs and output agree.
+export function checkSpecSync(doc, inputs) {
+  if (doc?.structuralSync?.schemaVersion !== 1 || !validDate(doc.structuralSync.checkedAt))
+    throw new Error("spec capabilities have no valid structural sync receipt; run gearing/src/harvest-specs.mjs");
+  const expected = buildSpecSync(inputs, { checkedAt: doc.structuralSync.checkedAt });
+  if (!same(doc, expected)) throw new Error("spec capability sync or its recorded provenance is stale; run gearing/src/harvest-specs.mjs");
+  return { checkedAt: doc.structuralSync.checkedAt, specs: doc.specs.length,
+    legacyReviewedAt: doc.legacyPriority.reviewedAt };
 }
 
-const doc = {
-  source: "WoW Class Tracker data/specs.json (class, spec, role, tier set) + Icy Veins stat-priority pages",
-  harvestedAt: new Date().toISOString().slice(0, 10),
-  caveat: "Stat priorities on this page come from the Season 2 guide harvest (Icy Veins / Wowhead / Method). The statPriority field here is the legacy Icy Veins 12.0.7 fallback, used only when the guide layer lacks a build.",
-  weaponProficiencyProvenance: PROF._provenance,
-  armorByClass: ARMOR_BY_CLASS,
-  counts: {
-    specs: out.length, withPriority: ok,
-    withArmor: out.filter((x) => x.armor).length,
-    withWeaponLoadouts: out.filter((x) => x.weaponLoadouts.length).length,
-  },
-  specs: out,
-};
-await writeFile(join(ROOT, "data", "specs.json"), JSON.stringify(doc, null, 2), "utf8");
+export async function runSpecSync({ root = ROOT, trackerPath, check = false, checkedAt } = {}) {
+  const inputs = await loadSpecSyncInputs({ root, trackerPath });
+  const outputPath = join(root, "data", "specs.json");
+  if (check) return checkSpecSync(JSON.parse(await readFile(outputPath, "utf8")), inputs);
+  const doc = buildSpecSync(inputs, { checkedAt });
+  const serialized = JSON.stringify(doc, null, 2) + "\n";
+  let before;
+  try { before = await readFile(outputPath, "utf8"); }
+  catch (error) { if (error.code !== "ENOENT") throw error; }
+  if (before !== serialized) {
+    const temp = outputPath + ".tmp";
+    await writeFile(temp, serialized, "utf8");
+    await rename(temp, outputPath);
+  }
+  return { changed: before !== serialized, checkedAt: doc.structuralSync.checkedAt,
+    specs: doc.specs.length, legacyReviewedAt: doc.legacyPriority.reviewedAt };
+}
 
-console.log(`\nwrote data/specs.json`);
-console.log(`  ${out.length} specs · ${ok} with stat priority · ${doc.counts.withArmor} with armour type · ${doc.counts.withWeaponLoadouts} with weapon loadouts`);
-if (failed.length) console.log(`  no priority found for: ${failed.join(", ")}`);
+if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  if (process.argv.slice(2).some((arg) => arg !== "--check")) throw new Error("usage: node gearing/src/harvest-specs.mjs [--check]");
+  const result = await runSpecSync({ check: process.argv.includes("--check") });
+  console.log(`${result.specs} spec capabilities checked ${result.checkedAt}; legacy fallback remains reviewed ${result.legacyReviewedAt}`);
+}

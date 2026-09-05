@@ -1636,8 +1636,27 @@ function slotsOf(list) {
    The plan maps GUIDE-NAMED items: like the trinket letters it is a guide-layer surface,
    so custom weights change nothing here and the note says that too. Dungeons are ordered
    by coverage (then potential); raid bosses keep encounter order — a raid has one. */
-const MAIN_HAND_EQUIV_PLAN = ['Main Hand', 'One-Hand', 'Two-Hand', 'Ranged'];
-const OFF_HAND_EQUIV_PLAN = ['Off Hand', 'Held In Off-hand'];
+function equippedWeaponLoadouts() {
+  let loadouts = CUR.weaponLoadouts || [];
+  let identified = false;
+  for (const [key, hand] of [['main_hand', 'mainHand'], ['off_hand', 'offHand']]) {
+    const eq = MYGEAR[key];
+    if (!eq) continue;
+    if (eq.item) {
+      identified = true;
+      const ids = matchingWeaponHands(CUR, eq.item)
+        .filter(match => match.hand === hand).map(match => match.loadout.id);
+      loadouts = loadouts.filter(loadout => ids.includes(loadout.id));
+    } else {
+      loadouts = loadouts.filter(loadout => !loadout.hands[hand]?.mustBeEmpty);
+    }
+  }
+  if (!identified && !MYGEAR.off_hand) {
+    const inferred = loadouts.filter(loadout => loadout.hands.offHand?.mustBeEmpty);
+    if (inferred.length) loadouts = inferred;
+  }
+  return loadouts;
+}
 function equippedIlvlBySlot() {
   // Lowest equipped ilvl per canonical slot (Finger/Trinket pairs: the one you'd replace).
   const map = {};
@@ -1659,26 +1678,26 @@ function planFor(items) {
   // A paste with no ilevel= fields (common addon exports) must never claim "+0"
   // (adversarial review, 2026-08-18: an uncomputed quantity rendered as a computed zero).
   const equipped = equippedIlvlBySlot();
+  const loadoutIds = equippedWeaponLoadouts().map(loadout => loadout.id);
   let potential = null;
   if (Object.keys(equipped).length) {
     const bestBySlot = {};
     let readable = 0;
     for (const it of named) {
-      // Weapon candidates carry slot TYPES (One-Hand/Two-Hand/Ranged) while the paste
-      // yields worn HANDS. A One-Hand can occupy EITHER hand, so it compares against the
-      // lowest equipped hand — the one you would replace, the same rule Finger/Trinket
-      // pairs get — and banks its gain in THAT hand's bucket, so two weapon candidates
-      // can never both bank one hand.
+      // A weapon only replaces a matching hand in the equipped loadout. This also
+      // handles dual-wield Two-Hand weapons without treating caster/shield offhands
+      // as a second weapon slot, or valuing an incomplete change of weapon setup.
       let slotKey, have;
-      if (MAIN_HAND_EQUIV_PLAN.includes(it.slot)) {
-        const hands = it.slot === 'One-Hand'
-          ? ['Main Hand', 'Off Hand'].filter(h => equipped[h] != null)
-          : ['Main Hand'].filter(h => equipped[h] != null);
+      if (isWeaponItem(it)) {
+        const hands = [...new Set(matchingWeaponHands(CUR, it)
+          .filter(match => loadoutIds.includes(match.loadout.id))
+          .map(match => match.hand === 'mainHand' ? 'Main Hand' : 'Off Hand'))]
+          .filter(hand => equipped[hand] != null);
         if (!hands.length) continue;
         slotKey = hands.reduce((a, b) => (equipped[a] <= equipped[b] ? a : b));
         have = equipped[slotKey];
       } else {
-        slotKey = OFF_HAND_EQUIV_PLAN.includes(it.slot) ? 'Off Hand' : it.slot;
+        slotKey = it.slot;
         have = equipped[slotKey];
         if (have == null) continue; // slot not read from the paste
       }
@@ -1721,7 +1740,7 @@ function craftedPlanCard() {
     + '<div class="sub-note">The guides name these <b>crafted</b> pieces for your spec. The harvest holds no '
     + 'crafted item data, so they are listed with their guide counts only — no fit score and no potential '
     + 'column' + (ceil ? '; the crafted item-level ceiling comes from the Item levels sheet' : '') + '.</div>'
-    + '<table class="src-tbl"><tr><th>Slot</th><th>Item</th><th>Guides naming it</th></tr>' + body + '</table></div>';
+    + '<div class="table-scroll"><table class="src-tbl"><tr><th>Slot</th><th>Item</th><th>Guides naming it</th></tr>' + body + '</table></div></div>';
 }
 
 function renderSrc() {
@@ -1793,16 +1812,16 @@ function renderSrc() {
     + ' This plan maps the guides\' picks and does not change with custom weights.</div>';
 
   $('#src').innerHTML = planNote
-    + '<div class="card"><h3>The Venomous Abyss<span>raid</span></h3><table class="src-tbl">'
-    + '<tr><th>#</th><th>Boss</th><th>Guide-named</th><th>Their picks here</th><th>Your potential</th></tr>' + raidRows + '</table></div>'
+    + '<div class="card"><h3>The Venomous Abyss<span>raid</span></h3><div class="table-scroll"><table class="src-tbl">'
+    + '<tr><th>#</th><th>Boss</th><th>Guide-named</th><th>Their picks here</th><th>Your potential</th></tr>' + raidRows + '</table></div></div>'
     + '<div style="height:16px"></div>'
-    + '<div class="card"><h3>Mythic+ dungeon pool<span>8 dungeons &middot; ordered by guide-named count</span></h3><table class="src-tbl">'
-    + '<tr><th>Expansion</th><th>Dungeon</th><th>Guide-named</th><th>Their picks here</th><th>Your potential</th></tr>' + dRows + '</table>'
+    + '<div class="card"><h3>Mythic+ dungeon pool<span>8 dungeons &middot; ordered by guide-named count</span></h3><div class="table-scroll"><table class="src-tbl">'
+    + '<tr><th>Expansion</th><th>Dungeon</th><th>Guide-named</th><th>Their picks here</th><th>Your potential</th></tr>' + dRows + '</table></div>'
     + '<div class="note" style="margin:16px 0 0"><b>Mythic+ item levels are set by key level, not by the item.</b> '
     + 'The same drop is worth more from a higher key; potential for M+ items uses the top <b>Great Vault</b> reward '
     + '(the ceiling an M+ drop can reach), not the end-of-dungeon ilvl — both columns are in the key table below.</div>'
-    + '<table class="src-tbl" style="margin-top:14px"><tr><th>Key</th><th>End of dungeon</th><th>Great Vault</th></tr>'
-    + keys + '</table></div>'
+    + '<div class="table-scroll"><table class="src-tbl" style="margin-top:14px"><tr><th>Key</th><th>End of dungeon</th><th>Great Vault</th></tr>'
+    + keys + '</table></div></div>'
     + craftedPlanCard();
 }
 
@@ -2096,10 +2115,18 @@ function renderFooter() {
     + 'Dungeon data: ' + esc(DUNG.source) + ', harvested ' + esc(DUNG.harvestedAt) + '.<br>'
     + 'Direct tier data: ' + esc(TIER.source) + ', harvested ' + esc(TIER.harvestedAt) + '.<br>'
     + 'Catalyst policy: Blizzard 12.1 development notes, reviewed ' + esc(CATALYST.reviewedAt) + '.<br>'
-    + 'Spec data: ' + esc(SPECS.source) + ', harvested ' + esc(SPECS.harvestedAt) + '.<br>'
+    + (SPECS.structuralSync
+      ? 'Spec capabilities: local inputs checked ' + esc(SPECS.structuralSync.checkedAt)
+        + '; armor evidence ' + esc(SPECS.structuralSync.sources.armor.asOf || 'undated')
+        + '; weapon evidence ' + esc(SPECS.structuralSync.sources.weapons.asOf || 'undated')
+        + '. This checks consistency with recorded sources, not a new external verification.<br>'
+        + 'Legacy stat fallback: patch ' + esc(SPECS.legacyPriority.patch) + ', reviewed '
+        + esc(SPECS.legacyPriority.reviewedAt) + '; current builds use the S2 guide sources below.<br>'
+      : 'Spec data: ' + esc(SPECS.source) + ', harvested ' + esc(SPECS.harvestedAt) + '.<br>')
     + 'Item-level sheet: ' + esc(SHEET.source) + ', distilled ' + esc(SHEET.harvestedAt) + '.<br>'
     + 'Guide consensus sources: ' + Object.values(GUIDES.sources).map(s =>
-      esc(s.name) + ' (harvested ' + esc(s.harvestedAt) + ')').join(', ')
+      esc(s.name) + ' (' + (s.harvestedAt ? 'verified through ' + esc(s.harvestedAt)
+        : 'verification incomplete') + ')').join(', ')
     + ' — each Build option names its own guide\'s update date.<br><b>'
     + esc(RAID.caveat) + '</b> ' + esc(SPECS.caveat) + '<br>'
     + '<b>Weapon loadouts are explicit, mutually exclusive configurations</b> curated from official Blizzard class pages and patch notes. '

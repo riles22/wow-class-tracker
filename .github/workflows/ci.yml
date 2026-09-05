@@ -61,4 +61,4 @@ jobs:
           npm install --no-save playwright@1.61.1
           npx playwright install --with-deps chromium
       - name: UI invariants
-        run: node --test test/ui-invariants.test.mjs
+        run: node --test test/ui-invariants.test.mjs gearing/test/ui-invariants.test.mjs

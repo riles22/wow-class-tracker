@@ -1,7 +1,37 @@
 {
-  "source": "WoW Class Tracker data/specs.json (class, spec, role, tier set) + Icy Veins stat-priority pages",
+  "source": "Local tracker roster and tier sets + reviewed tier-token armor and weapon capabilities",
   "harvestedAt": "2026-08-02",
-  "caveat": "Stat priorities on this page come from the Season 2 guide harvest (Icy Veins / Wowhead / Method). The statPriority field here is the legacy Icy Veins 12.0.7 fallback, used only when the guide layer lacks a build.",
+  "caveat": "Current stat priorities come from the Season 2 guide harvest (Icy Veins / Wowhead / Method). The statPriority field here is the reviewed 12.0.7 fallback, used only when the guide layer lacks a build. Structural sync checks local inputs; it does not reverify external game facts.",
+  "structuralSync": {
+    "schemaVersion": 1,
+    "checkedAt": "2026-09-05",
+    "sources": {
+      "tracker": {
+        "path": "data/specs.json",
+        "digest": "41229893845569268a00bd444424854ba1d34ee4ee1920d1df656e607b80f676",
+        "scope": "class, spec, role, tierSet; each tier set retains its own source and asOf"
+      },
+      "armor": {
+        "path": "gearing/data/raid-items.json",
+        "digest": "fed92aef334620d9edb4cb7a43f0a41d7d34116e5833d8f74b2d5fb1993d212d",
+        "asOf": "2026-08-18",
+        "scope": "tier-token item id, name and class lists"
+      },
+      "weapons": {
+        "path": "gearing/data/weapon-proficiency.json",
+        "digest": "df38ec6a9f07208317ccc1b6cfee34a81c5cc6194434b59736c6ef1d797382bc",
+        "asOf": "2026-08-02",
+        "scope": "12.1-live"
+      }
+    }
+  },
+  "legacyPriority": {
+    "patch": "12.0.7",
+    "reviewedAt": "2026-08-02",
+    "baselineDigest": "c648d123976e8012b76714246872ca6222d5d984a41c45c9e91798dae48da569",
+    "overridesDigest": "133bd383e65174c3e4550297968e02b859f60559d06edce5460749fe4288d02b",
+    "provenance": "Reviewed snapshot of all 40 generated specialization stat priorities in data/specs.json, preserving the exact primary stat, ordered secondary stats, and source URL used by the project on 2026-08-02."
+  },
   "weaponProficiencyProvenance": "Compiled from Blizzard's official class pages and official Midnight patch notes. Class pages establish class-wide proficiencies and preferred weapons; specLoadouts adds the hand, core-ability, and patch restrictions needed for item eligibility. See officialSources and each spec's sourceUrls.",
   "armorByClass": {
     "Priest": "Cloth",
@@ -3333,6 +3363,5 @@
         "asOf": "2026-07-08"
       }
     }
-  ],
-  "trackerFieldsSyncedAt": "2026-09-04"
+  ]
 }

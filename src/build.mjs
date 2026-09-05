@@ -2,13 +2,15 @@
    The application remains self-contained; companion icons give shortcut launchers a
    fetchable image while the inline SVG keeps a standalone file's tab icon working. */
 
-import { readFile, writeFile, mkdir, readdir } from "node:fs/promises";
+import { readFile, writeFile, mkdir, readdir, rm } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { validateData, loadData } from "./validate.mjs";
 import { buildPayload, PHASES } from "./render.mjs";
 import { renderSeasonArchive } from "./render-season-archive.mjs";
+import { loadSnapshots } from "./report-card.mjs";
+import { createForecastReport, renderForecastReport } from "./render-forecast-report.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const ICON_ASSETS = ["favicon-192.png", "apple-touch-icon.png"];
@@ -26,6 +28,11 @@ export async function build(root = ROOT) {
   }
 
   const payload = buildPayload(data);
+  // Report checkpoints outlive loadData's rolling 120-snapshot timeline window.
+  const forecastReport = createForecastReport({ ...data,
+    historySnapshots: data.frozenForecast ? await loadSnapshots(root) : [] });
+  if (forecastReport?.summary) payload.meta.forecastReport = forecastReport.summary;
+  const forecastReportHTML = renderForecastReport(forecastReport);
   // Escape "<" so the payload can never terminate the surrounding <script> block.
   const json = JSON.stringify(payload).replace(/</g, "\\u003c");
   let html = template.replace("__DATA_JSON__", () => json);
@@ -114,6 +121,8 @@ export async function build(root = ROOT) {
   await mkdir(path.join(root, "dist"), { recursive: true });
   const outPath = path.join(root, "dist", "index.html");
   await writeFile(outPath, html);
+  if (forecastReportHTML) await writeFile(path.join(root, "dist", "forecast-report.html"), forecastReportHTML);
+  else await rm(path.join(root, "dist", "forecast-report.html"), { force: true });
   await Promise.all(ICON_ASSETS.map(async name => {
     const icon = await readFile(path.join(root, "src", "assets", name));
     await writeFile(path.join(root, "dist", name), icon);

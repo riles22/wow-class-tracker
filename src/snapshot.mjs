@@ -82,7 +82,6 @@ export async function snapshot(root = ROOT, date = new Date().toISOString().slic
     ...(frozen || carriedFrozen ? { frozen: true } : {}),
     specs: nextState };
   const dir = path.join(root, "data", "history");
-  await mkdir(dir, { recursive: true });
   const outPath = path.join(dir, `${date}.json`);
 
   /* The IMMUTABLE FORECAST ARTIFACT (2026-08-03, external audit). The history snapshot
@@ -157,7 +156,6 @@ export async function snapshot(root = ROOT, date = new Date().toISOString().slic
       cells
     };
     const fDir = path.join(root, "data", "forecasts");
-    await mkdir(fDir, { recursive: true });
     frozenPath = path.join(fDir, `frozen-${date}.json`);
     frozenBody = JSON.stringify(artifact, null, 2) + "\n";
     /* The artifact is the record a post-launch audit re-derives the grade from, so a second
@@ -175,18 +173,31 @@ export async function snapshot(root = ROOT, date = new Date().toISOString().slic
       kind: a.kind, date: a.date, phase: a.phase,
       projectionVersion: a.projectionVersion, rankVersion: a.rankVersion,
       consensusVersion: a.consensusVersion, cells: a.cells });
-    const existing = await readFile(frozenPath, "utf8").then(JSON.parse).catch(() => null);
-    if (existing != null && substanceOf(existing) !== substanceOf(artifact)) {
-      throw new Error(
-        `snapshot --frozen: data/forecasts/frozen-${date}.json already exists and describes a DIFFERENT forecast. ` +
-        `That file is the immutable record the report card grades — refusing to redefine it. ` +
-        `Freeze under a different date, or delete it deliberately if the freeze is genuinely being redone.`);
+    const existingBody = await readFile(frozenPath, "utf8").catch(error => {
+      if (error.code === "ENOENT") return null;
+      throw error;
+    });
+    if (existingBody != null) {
+      const existing = JSON.parse(existingBody); // A damaged record is not permission to replace it.
+      if (existing == null || substanceOf(existing) !== substanceOf(artifact)) {
+        throw new Error(
+          `snapshot --frozen: data/forecasts/frozen-${date}.json already exists and describes a DIFFERENT forecast. ` +
+          `That file is the immutable record the report card grades — refusing to redefine it. ` +
+          `Freeze under a different date, or delete it deliberately if the freeze is genuinely being redone.`);
+      }
+      // Equivalent retries keep the ORIGINAL receipt (Git/data hashes and source dates),
+      // including its exact bytes. Equality of the forecast does not refresh its provenance.
+      frozenBody = null;
     }
   }
   /* Both writes happen only after every guard above has passed, so a refused freeze leaves
      the disk exactly as it was. */
+  await mkdir(dir, { recursive: true });
   await writeFile(outPath, JSON.stringify(snap, null, 2) + "\n");
-  if (frozenPath) await writeFile(frozenPath, frozenBody);
+  if (frozenBody != null) {
+    await mkdir(path.dirname(frozenPath), { recursive: true });
+    await writeFile(frozenPath, frozenBody);
+  }
   return { outPath, frozenPath, specs: Object.keys(snap.specs).length };
 }
 

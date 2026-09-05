@@ -1,0 +1,675 @@
+{
+  "checkedAt": "2026-09-05T16:02:25.005Z",
+  "sourceAvailability": {
+    "version": 1,
+    "attemptedAt": "2026-09-05T15:49:13.627Z",
+    "pages": [
+      {
+        "sourceId": "archon",
+        "bracket": "raid",
+        "url": "https://www.archon.gg/wow/tier-list/dps-rankings/raid/heroic/all-bosses",
+        "attemptedAt": "2026-09-05T15:49:13.627Z",
+        "httpStatus": 403,
+        "status": "blocked",
+        "reason": "The source returned a Cloudflare challenge",
+        "bodySignature": "cloudflare-challenge",
+        "bodyBytes": 5743,
+        "bodyComplete": true,
+        "bodySha256": "56e14d0f49b4cde1d781de1676bc882b83f10d3108faf9d39f22c6f06cf9e40f"
+      },
+      {
+        "sourceId": "archon",
+        "bracket": "mplus",
+        "url": "https://www.archon.gg/wow/tier-list/dps-rankings/mythic-plus/10/all-dungeons/this-week",
+        "attemptedAt": "2026-09-05T15:49:15.383Z",
+        "httpStatus": 200,
+        "status": "blocked",
+        "reason": "The source requires human verification",
+        "bodySignature": "human-verification",
+        "bodyBytes": 2516,
+        "bodyComplete": true,
+        "bodySha256": "6d6f34d4cd1b0d5e1d0bb2770f5bbb6b504f9029cc510550bdb3dd413633f21f"
+      }
+    ]
+  },
+  "wcl": {
+    "attemptedAt": "2026-09-05T15:49:06.601Z",
+    "verdict": "rdps-broken",
+    "detail": "raid zone 53: rdps-broken (rDPS: Internal server error; dps control: working); mplus zone 55: rdps-broken (rDPS: Internal server error; dps control: working). No WCL median rows landed",
+    "transport": {
+      "oauth": true,
+      "graphql": true,
+      "rateLimit": {
+        "limitPerHour": 3600,
+        "pointsSpentThisHour": 99.82
+      }
+    },
+    "probes": [
+      {
+        "name": "rdps@3470",
+        "bracket": "raid",
+        "zoneId": 53,
+        "metric": "rdps",
+        "httpStatus": 200,
+        "transportOk": true,
+        "identityOk": true,
+        "errors": [
+          "Internal server error"
+        ],
+        "rankings": 0,
+        "ok": false
+      },
+      {
+        "name": "dps@3470",
+        "bracket": "raid",
+        "zoneId": 53,
+        "metric": "dps",
+        "httpStatus": 200,
+        "transportOk": true,
+        "identityOk": true,
+        "errors": [],
+        "rankings": 100,
+        "ok": true
+      },
+      {
+        "name": "rdps@12993",
+        "bracket": "mplus",
+        "zoneId": 55,
+        "metric": "rdps",
+        "httpStatus": 200,
+        "transportOk": true,
+        "identityOk": true,
+        "errors": [
+          "Internal server error"
+        ],
+        "rankings": 0,
+        "ok": false
+      },
+      {
+        "name": "dps@12993",
+        "bracket": "mplus",
+        "zoneId": 55,
+        "metric": "dps",
+        "httpStatus": 200,
+        "transportOk": true,
+        "identityOk": true,
+        "errors": [],
+        "rankings": 100,
+        "ok": true
+      }
+    ],
+    "landed": {},
+    "brackets": {
+      "wcl-live-raid": {
+        "bracket": "raid",
+        "zoneId": 53,
+        "partition": 1,
+        "difficulty": 5,
+        "size": 20,
+        "status": "rdps-broken",
+        "detail": "rDPS: Internal server error; dps control: working",
+        "encounterId": 3470,
+        "encounterName": "Nek'zali the Soulcoiler",
+        "rdps": {
+          "name": "rdps@3470",
+          "bracket": "raid",
+          "zoneId": 53,
+          "metric": "rdps",
+          "httpStatus": 200,
+          "transportOk": true,
+          "identityOk": true,
+          "errors": [
+            "Internal server error"
+          ],
+          "rankings": 0,
+          "ok": false
+        },
+        "control": {
+          "name": "dps@3470",
+          "bracket": "raid",
+          "zoneId": 53,
+          "metric": "dps",
+          "httpStatus": 200,
+          "transportOk": true,
+          "identityOk": true,
+          "errors": [],
+          "rankings": 100,
+          "ok": true
+        }
+      },
+      "wcl-live-mplus": {
+        "bracket": "mplus",
+        "zoneId": 55,
+        "partition": 1,
+        "difficulty": 10,
+        "size": 5,
+        "status": "rdps-broken",
+        "detail": "rDPS: Internal server error; dps control: working",
+        "encounterId": 12993,
+        "encounterName": "Altar of Fangs",
+        "rdps": {
+          "name": "rdps@12993",
+          "bracket": "mplus",
+          "zoneId": 55,
+          "metric": "rdps",
+          "httpStatus": 200,
+          "transportOk": true,
+          "identityOk": true,
+          "errors": [
+            "Internal server error"
+          ],
+          "rankings": 0,
+          "ok": false
+        },
+        "control": {
+          "name": "dps@12993",
+          "bracket": "mplus",
+          "zoneId": 55,
+          "metric": "dps",
+          "httpStatus": 200,
+          "transportOk": true,
+          "identityOk": true,
+          "errors": [],
+          "rankings": 100,
+          "ok": true
+        }
+      }
+    },
+    "rawRecipes": {}
+  },
+  "guides": {
+    "admission": {
+      "changedSources": [
+        "icyveins",
+        "wowhead",
+        "method"
+      ],
+      "sources": [
+        {
+          "sourceId": "icyveins",
+          "changed": true,
+          "before": {
+            "specs": 40,
+            "priorities": 55,
+            "bis": 1884
+          },
+          "after": {
+            "specs": 40,
+            "priorities": 55,
+            "bis": 1884
+          },
+          "verifiedThrough": "2026-09-05"
+        },
+        {
+          "sourceId": "wowhead",
+          "changed": true,
+          "before": {
+            "specs": 40,
+            "priorities": 83,
+            "bis": 628
+          },
+          "after": {
+            "specs": 40,
+            "priorities": 83,
+            "bis": 628
+          },
+          "verifiedThrough": "2026-09-05"
+        },
+        {
+          "sourceId": "method",
+          "changed": true,
+          "before": {
+            "specs": 40,
+            "priorities": 46,
+            "bis": 1669
+          },
+          "after": {
+            "specs": 40,
+            "priorities": 46,
+            "bis": 1670
+          },
+          "verifiedThrough": "2026-09-05"
+        }
+      ]
+    },
+    "changes": {
+      "icyveins": {
+        "recordChangesExcludingVerification": 18,
+        "contentChangesExcludingPublication": 17,
+        "details": [
+          {
+            "spec": "Blood Death Knight",
+            "fields": [
+              "bis"
+            ],
+            "publishedBefore": "2026-08-10",
+            "publishedAfter": "2026-08-10"
+          },
+          {
+            "spec": "Guardian Druid",
+            "fields": [
+              "bis"
+            ],
+            "publishedBefore": "2026-08-10",
+            "publishedAfter": "2026-08-10"
+          },
+          {
+            "spec": "Devastation Evoker",
+            "fields": [
+              "published",
+              "bis",
+              "trinketTiers"
+            ],
+            "publishedBefore": "2026-08-10",
+            "publishedAfter": "2026-08-31"
+          },
+          {
+            "spec": "Beast Mastery Hunter",
+            "fields": [
+              "published",
+              "bis",
+              "trinketTiers"
+            ],
+            "publishedBefore": "2026-08-31",
+            "publishedAfter": "2026-09-04"
+          },
+          {
+            "spec": "Marksmanship Hunter",
+            "fields": [
+              "published",
+              "bis",
+              "trinketTiers"
+            ],
+            "publishedBefore": "2026-08-31",
+            "publishedAfter": "2026-09-02"
+          },
+          {
+            "spec": "Survival Hunter",
+            "fields": [
+              "published",
+              "trinketTiers"
+            ],
+            "publishedBefore": "2026-08-29",
+            "publishedAfter": "2026-09-04"
+          },
+          {
+            "spec": "Arcane Mage",
+            "fields": [
+              "published"
+            ],
+            "publishedBefore": "2026-08-31",
+            "publishedAfter": "2026-09-01"
+          },
+          {
+            "spec": "Fire Mage",
+            "fields": [
+              "published",
+              "bis"
+            ],
+            "publishedBefore": "2026-08-31",
+            "publishedAfter": "2026-09-01"
+          },
+          {
+            "spec": "Frost Mage",
+            "fields": [
+              "bis"
+            ],
+            "publishedBefore": "2026-08-15",
+            "publishedAfter": "2026-08-15"
+          },
+          {
+            "spec": "Mistweaver Monk",
+            "fields": [
+              "priorities"
+            ],
+            "publishedBefore": "2026-08-18",
+            "publishedAfter": "2026-08-18"
+          },
+          {
+            "spec": "Protection Paladin",
+            "fields": [
+              "published",
+              "bis"
+            ],
+            "publishedBefore": "2026-08-18",
+            "publishedAfter": "2026-09-04"
+          },
+          {
+            "spec": "Shadow Priest",
+            "fields": [
+              "enhancements"
+            ],
+            "publishedBefore": "2026-08-18",
+            "publishedAfter": "2026-08-18"
+          },
+          {
+            "spec": "Subtlety Rogue",
+            "fields": [
+              "trinketTiers",
+              "enhancements"
+            ],
+            "publishedBefore": "2026-08-10",
+            "publishedAfter": "2026-08-10"
+          },
+          {
+            "spec": "Restoration Shaman",
+            "fields": [
+              "published",
+              "bis"
+            ],
+            "publishedBefore": "2026-08-26",
+            "publishedAfter": "2026-09-02"
+          },
+          {
+            "spec": "Affliction Warlock",
+            "fields": [
+              "published",
+              "bis",
+              "trinketTiers"
+            ],
+            "publishedBefore": "2026-08-16",
+            "publishedAfter": "2026-08-31"
+          },
+          {
+            "spec": "Demonology Warlock",
+            "fields": [
+              "published",
+              "bis",
+              "trinketTiers"
+            ],
+            "publishedBefore": "2026-08-16",
+            "publishedAfter": "2026-08-31"
+          },
+          {
+            "spec": "Destruction Warlock",
+            "fields": [
+              "published",
+              "bis",
+              "trinketTiers"
+            ],
+            "publishedBefore": "2026-08-16",
+            "publishedAfter": "2026-08-31"
+          },
+          {
+            "spec": "Protection Warrior",
+            "fields": [
+              "published",
+              "bis",
+              "trinketTiers"
+            ],
+            "publishedBefore": "2026-08-24",
+            "publishedAfter": "2026-09-03"
+          }
+        ]
+      },
+      "wowhead": {
+        "recordChangesExcludingVerification": 17,
+        "contentChangesExcludingPublication": 9,
+        "details": [
+          {
+            "spec": "Frost Death Knight",
+            "fields": [
+              "published",
+              "bis"
+            ],
+            "publishedBefore": "2026-08-19",
+            "publishedAfter": "2026-09-02"
+          },
+          {
+            "spec": "Unholy Death Knight",
+            "fields": [
+              "published"
+            ],
+            "publishedBefore": "2026-08-20",
+            "publishedAfter": "2026-09-02"
+          },
+          {
+            "spec": "Balance Druid",
+            "fields": [
+              "published"
+            ],
+            "publishedBefore": "2026-08-28",
+            "publishedAfter": "2026-09-04"
+          },
+          {
+            "spec": "Restoration Druid",
+            "fields": [
+              "published"
+            ],
+            "publishedBefore": "2026-08-12",
+            "publishedAfter": "2026-09-02"
+          },
+          {
+            "spec": "Augmentation Evoker",
+            "fields": [
+              "published",
+              "bis"
+            ],
+            "publishedBefore": "2026-08-26",
+            "publishedAfter": "2026-09-02"
+          },
+          {
+            "spec": "Devastation Evoker",
+            "fields": [
+              "published"
+            ],
+            "publishedBefore": "2026-08-14",
+            "publishedAfter": "2026-08-31"
+          },
+          {
+            "spec": "Preservation Evoker",
+            "fields": [
+              "priorities"
+            ],
+            "publishedBefore": "2026-08-16",
+            "publishedAfter": "2026-08-16"
+          },
+          {
+            "spec": "Beast Mastery Hunter",
+            "fields": [
+              "published"
+            ],
+            "publishedBefore": "2026-08-30",
+            "publishedAfter": "2026-09-04"
+          },
+          {
+            "spec": "Marksmanship Hunter",
+            "fields": [
+              "published",
+              "bis"
+            ],
+            "publishedBefore": "2026-08-29",
+            "publishedAfter": "2026-09-02"
+          },
+          {
+            "spec": "Arcane Mage",
+            "fields": [
+              "enhancements"
+            ],
+            "publishedBefore": "2026-08-18",
+            "publishedAfter": "2026-08-18"
+          },
+          {
+            "spec": "Mistweaver Monk",
+            "fields": [
+              "published"
+            ],
+            "publishedBefore": "2026-08-29",
+            "publishedAfter": "2026-09-05"
+          },
+          {
+            "spec": "Windwalker Monk",
+            "fields": [
+              "priorities"
+            ],
+            "publishedBefore": "2026-08-25",
+            "publishedAfter": "2026-08-25"
+          },
+          {
+            "spec": "Holy Priest",
+            "fields": [
+              "priorities"
+            ],
+            "publishedBefore": "2026-08-24",
+            "publishedAfter": "2026-08-24"
+          },
+          {
+            "spec": "Shadow Priest",
+            "fields": [
+              "published"
+            ],
+            "publishedBefore": "2026-08-20",
+            "publishedAfter": "2026-08-31"
+          },
+          {
+            "spec": "Outlaw Rogue",
+            "fields": [
+              "published",
+              "bis"
+            ],
+            "publishedBefore": "2026-08-22",
+            "publishedAfter": "2026-09-01"
+          },
+          {
+            "spec": "Subtlety Rogue",
+            "fields": [
+              "published"
+            ],
+            "publishedBefore": "2026-08-24",
+            "publishedAfter": "2026-09-02"
+          },
+          {
+            "spec": "Restoration Shaman",
+            "fields": [
+              "priorities"
+            ],
+            "publishedBefore": "2026-08-26",
+            "publishedAfter": "2026-08-26"
+          }
+        ]
+      },
+      "method": {
+        "recordChangesExcludingVerification": 9,
+        "contentChangesExcludingPublication": 8,
+        "details": [
+          {
+            "spec": "Blood Death Knight",
+            "fields": [
+              "published"
+            ],
+            "publishedBefore": "2026-08-25",
+            "publishedAfter": "2026-09-04"
+          },
+          {
+            "spec": "Feral Druid",
+            "fields": [
+              "published",
+              "enhancements"
+            ],
+            "publishedBefore": "2026-08-30",
+            "publishedAfter": "2026-09-04"
+          },
+          {
+            "spec": "Guardian Druid",
+            "fields": [
+              "published",
+              "bis"
+            ],
+            "publishedBefore": "2026-08-15",
+            "publishedAfter": "2026-09-03"
+          },
+          {
+            "spec": "Beast Mastery Hunter",
+            "fields": [
+              "published",
+              "bis",
+              "enhancements"
+            ],
+            "publishedBefore": "2026-08-23",
+            "publishedAfter": "2026-09-05"
+          },
+          {
+            "spec": "Marksmanship Hunter",
+            "fields": [
+              "published",
+              "bis"
+            ],
+            "publishedBefore": "2026-08-23",
+            "publishedAfter": "2026-09-05"
+          },
+          {
+            "spec": "Survival Hunter",
+            "fields": [
+              "published",
+              "bis"
+            ],
+            "publishedBefore": "2026-08-12",
+            "publishedAfter": "2026-09-03"
+          },
+          {
+            "spec": "Arcane Mage",
+            "fields": [
+              "published",
+              "priorities",
+              "bis",
+              "enhancements"
+            ],
+            "publishedBefore": "2026-08-28",
+            "publishedAfter": "2026-09-05"
+          },
+          {
+            "spec": "Protection Paladin",
+            "fields": [
+              "published",
+              "bis"
+            ],
+            "publishedBefore": "2026-08-15",
+            "publishedAfter": "2026-09-03"
+          },
+          {
+            "spec": "Elemental Shaman",
+            "fields": [
+              "published",
+              "enhancements"
+            ],
+            "publishedBefore": "2026-08-23",
+            "publishedAfter": "2026-09-01"
+          }
+        ]
+      }
+    },
+    "payload": {
+      "specs": 40
+    },
+    "knownAbsences": {
+      "wowheadEnhancementShamanBisBefore": 0,
+      "wowheadEnhancementShamanBisAfter": 0
+    },
+    "run": {
+      "completedAt": "2026-09-05T15:53:59.183Z",
+      "results": [
+        {
+          "source": "icyveins",
+          "code": 0,
+          "signal": null,
+          "stopReason": null,
+          "elapsedSeconds": 231
+        },
+        {
+          "source": "wowhead",
+          "code": 0,
+          "signal": null,
+          "stopReason": null,
+          "elapsedSeconds": 239
+        },
+        {
+          "source": "method",
+          "code": 0,
+          "signal": null,
+          "stopReason": null,
+          "elapsedSeconds": 148
+        }
+      ]
+    }
+  }
+}

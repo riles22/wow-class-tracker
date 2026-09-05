@@ -405,7 +405,7 @@ test("gearing freshness is heartbeat-only and reports absence rather than passin
   // Drift fires regardless of age — this is the Preservation Evoker shape.
   const drift = checkFreshness(cfg, goodManifest(), data, "2026-08-14",
     { present: true, dates: { "raid-items.json": "2026-08-02" }, tierSetDrift: 2 });
-  assert.ok(drift.violations.some(v => v.includes("gearing-tierset-sync") && v.includes("sync-tracker-fields")),
+  assert.ok(drift.violations.some(v => v.includes("gearing-tierset-sync") && v.includes("harvest-specs")),
     JSON.stringify(drift.violations));
 
   // And it stays out of requirements[], so checkManifest can never demand a gearing row.
@@ -420,6 +420,20 @@ test("freshness heartbeat uses startedAt at full-timestamp precision — 36h mea
 
   const ok = checkFreshness(config, m, freshData(), "2026-07-15T10:00:00Z"); // 32h
   assert.deepEqual(ok.violations, []);
+});
+
+test("gearing structural receipts never hide drift or claim future verification", () => {
+  const cfg = { ...config, gearing: { structuralSync: true, datasets: [
+    { key: "gearing-specs", file: "specs.json", dateField: "structuralSync.checkedAt", maxAgeDays: 30 }
+  ] } };
+  const state = { present: true, dates: { "specs.json": "2026-08-14" }, tierSetDrift: 0 };
+  assert.ok(!checkFreshness(cfg, goodManifest(), freshData(), "2026-08-14", state).fingerprint.includes("gearing"));
+  const drift = checkFreshness(cfg, goodManifest(), freshData(), "2026-08-14",
+    {...state, structuralSyncError:"recorded provenance differs from current inputs"});
+  assert.ok(drift.fingerprint.includes("gearing-specs-sync"));
+  assert.ok(drift.violations.some(v=>v.includes("recorded provenance differs")));
+  const future = checkFreshness(cfg, goodManifest(), freshData(), "2026-08-13", state);
+  assert.ok(future.violations.some(v=>v.includes("check date is in the future")));
 });
 
 test("a newer history snapshot counts as proof of life (local refreshes count), date-grained", () => {

@@ -2,8 +2,9 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
-import { gradeSnapshot, bandIndexer, launchPair, loadSnapshots, spearman, ndcgAtK, rankingFor, carryForward } from "../src/report-card.mjs";
+import { gradeSnapshot, bandIndexer, launchPair, loadSnapshots, spearman, ndcgAtK, rankingFor, carryForward, reportWarnings } from "../src/report-card.mjs";
 import { readFile } from "node:fs/promises";
+import { execFileSync } from "node:child_process";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const SCALES = { consensus: { bands: [
@@ -42,6 +43,7 @@ test("a grade across a changed consensus definition is flagged NOT COMPARABLE (2
   assert.equal(moved.consensusVersion.comparable, false);
   assert.equal(moved.warnings.length, 1);
   assert.match(moved.warnings[0], /not on the same scale/);
+  assert.match(reportWarnings(moved)[0], /^NOT COMPARABLE:/);
 
   // An UNVERSIONED side cannot vouch for comparability either — absence is not agreement.
   const unknown = gradeSnapshot(snap("2026-08-10", cells), snap("2026-09-01", actual), SCALES);
@@ -74,6 +76,8 @@ test("recorded compositions outrank the version integer — the S2 boundary bump
     "the version move stays visible as a secondary note");
   assert.ok(!graded.warnings.some(w => /NOT comparable/.test(w)),
     "disclosure, not refusal");
+  assert.ok(reportWarnings(graded).every(w => w.startsWith("DISCLOSURE:")),
+    "accepted recompositions and version changes must not receive a refusal prefix");
 
   // Same compositions on both sides: clean, even across a version bump — nothing recomposed.
   const same = gradeSnapshot(
@@ -82,6 +86,21 @@ test("recorded compositions outrank the version integer — the S2 boundary bump
       consensusSources: { raid: ["icyveins", "method", "wowhead", "archon"] } } }, { consensusVersion: 4 }), SCALES);
   assert.equal(same.consensusVersion.comparable, true);
   assert.deepEqual(same.consensusComposition.changedBrackets, []);
+});
+
+test("the report-card CLI labels accepted warnings as disclosures", async () => {
+  const snapshots = await loadSnapshots(ROOT);
+  const pair = launchPair(snapshots);
+  assert.ok(pair.actual, "the settled checkpoint used by the published report must exist");
+  const scales = JSON.parse(await readFile(path.join(ROOT, "data", "scales.json"), "utf8"));
+  const report = gradeSnapshot(pair.forecast, pair.actual, scales, { mode: "grade" });
+  assert.equal(report.consensusVersion.comparable, true);
+  assert.ok(report.warnings.length > 0, "fixture should retain the consensus-version disclosure");
+  const output = execFileSync(process.execPath, [path.join(ROOT, "src", "report-card.mjs")],
+    { cwd: ROOT, encoding: "utf8" });
+  for (const warning of reportWarnings(report)) assert.ok(output.includes(warning));
+  assert.doesNotMatch(output, /NOT COMPARABLE:/);
+  assert.match(output, /mode: GRADE/);
 });
 
 test("a declined forecast is not scored as a miss", () => {
