@@ -149,7 +149,7 @@
     "kind": "tier-list",
     "scale": "archon",
     "author": "Archon.gg (statistical)",
-    "methodology": "Statistical tier lists computed from Warcraft Logs parses and Blizzard leaderboards — 14-day rolling window, refreshed daily. Raid tiers read from the throughput metric tier list (NOT the default popularity grouping); M+ tiers from the M+ score tier list. EARLY-S2 BASIS (owner decision 2026-08-25): the raid letters come from the HEROIC throughput list while Mythic is sparse — Heroic carries ~170x the parses and covers all 27 DPS specs where Mythic held 6 specs under 10 parses and no Fire Mage at all. Switch back to the Mythic list (a reviewed registry edit + CONSENSUS_VERSION bump) once Mythic reaches 27/27 DPS with healthy samples. The Mythic rankings pages stay registered as ancillary metric feeds. Mirrored at u.gg/wow.",
+    "methodology": "Statistical tier lists computed from Warcraft Logs parses and Blizzard leaderboards — 14-day rolling window, refreshed daily. Raid tiers read from the throughput metric tier list (NOT the default popularity grouping); M+ tiers from the M+ score tier list. EARLY-S2 BASIS (owner decision 2026-08-25): the raid letters come from the HEROIC throughput list while Mythic is sparse — Heroic carries ~170x the parses and covers all 27 DPS specs where Mythic held 6 specs under 10 parses and no Fire Mage at all. Switch back to the Mythic list (a reviewed registry edit + CONSENSUS_VERSION bump) once Mythic reaches 27/27 DPS with healthy samples. The Mythic rankings pages stay registered as ancillary metric feeds. U.GG has its own methodology and filters; it is not a verified equivalent mirror or replacement feed.",
     "pages": [
       {
         "bracket": "raid",
@@ -248,7 +248,7 @@
         "ancillary": true
       }
     ],
-    "notes": "Fetch recipe: parse the __NEXT_DATA__ JSON script tag from raw HTML (WebFetch markdown drops it). Raid pages carry three tierLists (popularity/throughput/survivability) — use metric \"throughput\"; M+ pages use metric \"score\". The Heroic raid pages (the letter basis since 2026-08-25) parse with the IDENTICAL recipe — only the /heroic/ path segment differs; the ancillary Mythic rankings pages feed the \"(Mythic)\" numeric families and survivability. Mirrored at u.gg/wow.",
+    "notes": "Fetch recipe: parse the __NEXT_DATA__ JSON script tag from raw HTML (WebFetch markdown drops it). Raid pages carry three tierLists (popularity/throughput/survivability) — use metric \"throughput\"; M+ pages use metric \"score\". The Heroic raid pages (the letter basis since 2026-08-25) parse with the IDENTICAL recipe — only the /heroic/ path segment differs; the ancillary Mythic rankings pages feed the \"(Mythic)\" numeric families and survivability. U.GG has its own methodology and filters; it is not a verified equivalent mirror or replacement feed.",
     "summary": "Letter grades computed from logged play. Raid tiers come from its THROUGHPUT list and M+ tiers from its SCORE list — never the default popularity grouping, which ranks how often a spec is played rather than how it performs."
   },
   {
@@ -305,8 +305,8 @@
     "id": "warcraftlogs",
     "name": "Warcraft Logs",
     "kind": "metrics",
-    "author": "Warcraft Logs aggregate statistics",
-    "methodology": "Per-spec aggregate combat-log statistics: median (50th percentile) rDPS/HPS and parse counts. Current Season 2 targets are raid zone 53 \"The Venomous Abyss\" (partition 1 = 12.1, Mythic difficulty 5, size 20, 9 encounters) and M+ zone 55 (partition 1 = Season 2, difficulty 10, size 5); official API discovery confirmed both are unfrozen on 2026-09-05. The stored live-named medians remain Season 1 observations from zones 46/47, dated 2026-08-10, and must not be presented as fresh S2 measurements. Historical S1 raid used partition 3 = 12.0.7; the retained source URLs and snapshots identify those observations. Zones 52/54/56 are the closed 12.1 PTR cycle (Dummy Dome / raid testing / M+ testing), retained as era-tagged history. Their raw-DPS recipes retired on 2026-08-18 and no longer run nightly. On the nightly runner, sanctioned v2 GraphQL access is confined to the credentialed deterministic pre-agent step: it verifies live zone identity and probes a discovered encounter in each current bracket, using raw dps only as an availability control when rdps fails. These leaderboard probes are not population medians; diagnostic recovery cannot refresh data without a reviewed equivalent live recipe. On 2026-09-05 OAuth and GraphQL transport worked, while rdps returned \"Internal server error\" in both live brackets and dps controls returned rankings. Ordinary public requests to the live zone-53/55 statistics pages also returned HTTP 403 Cloudflare verification challenges. Keep existing values and dates until an equivalent validated S2 data fetch actually lands; never substitute raw DPS for rDPS or bypass a verification challenge.",
+    "author": "Warcraft Logs supported WoW API; historical statistics archive",
+    "methodology": "Supported WoW dps/hps API collection, verified September 5, 2026: per-spec, per-encounter median of the first up to 100 leaderboard entries, minimum 10. Repeated characters may occur. Eight Mythic raid bosses in zone 53, partition 1, difficulty 5, size 20 (world boss Nymrissa excluded); eight zone-55 dungeons at exactly +10 (partition 1, difficulty 10, size 5, API bracket 9). Each cut is separate, with included log-date range and collection time; these are partition bests, not a rolling week or population median. WCL-ranked DPS retains provider attribution, without asserting raw damage or rDPS. Tank damage and healing throughput are not overall role effectiveness; numeric samples never become tier letters. Correction: rdps is FFXIV-only in the official schema, so its earlier failure was misdiagnosed as a WoW outage. Exact population aggregates still have no verified sanctioned endpoint. Retained S1 medians from zones 46/47 and closed PTR52/54/56 observations keep their historical names, values and dates. Old raw-DPS/player terminology is an archive label, not a verified description of current ranking semantics. No challenge bypasses.",
     "pages": [
       {
         "bracket": "raid",
@@ -342,9 +342,23 @@
         "label": "Archived 12.1 PTR Dummy Dome (zone 52, fixed target counts)",
         "url": "https://www.warcraftlogs.com/zone/statistics/52",
         "snapshot": "2026-08-10"
+      },
+      {
+        "bracket": "raid",
+        "role": "All",
+        "label": "S2 Mythic raid leaderboard samples (8 bosses; top 100 entries/spec)",
+        "url": "https://www.warcraftlogs.com/zone/rankings/53",
+        "snapshot": "2026-09-05"
+      },
+      {
+        "bracket": "mplus",
+        "role": "All",
+        "label": "S2 +10 dungeon leaderboard samples (8 dungeons; top 100 entries/spec)",
+        "url": "https://www.warcraftlogs.com/zone/rankings/55",
+        "snapshot": "2026-09-05"
       }
     ],
-    "summary": "Per-spec median throughput and sample counts from Warcraft Logs statistics. Retained Season 1 observations stay dated; archived PTR raw-DPS medians use a separate ranked-player population. Live Season 2 diagnostic responses do not refresh these measurements."
+    "summary": "Freshly checked per-encounter WoW leaderboard samples, with up to 100 entries per spec and explicit log dates. Historical population medians remain separate and dated; no new tier grades are inferred."
   },
   {
     "id": "murlok",

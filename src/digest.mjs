@@ -3,7 +3,7 @@
  * emits a compact markdown summary — tier moves (consensus, our 12.1 projection,
  * and each tier-list source), creator-video activity (distilled / skipped /
  * queued, from the pending-transcripts queue diff), new creator takes/meta
- * notes, new PTR builds, writeup-verdict changes, and the run's health line
+ * notes, official-note revisions, new PTR builds, writeup-verdict changes, and the run's health line
  * from the manifest.
  *
  * The publish job posts this as a comment on the pinned "Nightly digest" issue;
@@ -16,6 +16,7 @@ import { execFileSync } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildPayload } from "./render.mjs";
+import { OFFICIAL_NOTE_SOURCES, noteUrl } from "./official-notes.mjs";
 
 const keyOf = s => `${s.class}|${s.spec}`;
 const TIER_LABEL = { raid: "Raid", mplus: "M+" };
@@ -63,6 +64,44 @@ export function verdictChanges(oldPayload, newPayload) {
     if (o && ov !== nv) out.push(`${s.spec} ${s.class}: ${ov ?? "no writeup"} → ${nv ?? "no writeup"}`);
   }
   return out;
+}
+
+/* Compare published summaries by their receipt identity, not post version or
+   checkedAt: editing an unrelated section must not announce every note again.
+   Keep the full ledger outside the browser payload so removed summaries still
+   have their previous text and attribution in the digest. */
+export function officialNoteChanges(oldLedger, newLedger) {
+  const summaries = ledger => {
+    const rows = new Map();
+    for (const config of OFFICIAL_NOTE_SOURCES) {
+      const source = ledger?.sources?.[config.id];
+      for (const post of source?.posts ?? []) {
+        for (const section of post.sections ?? []) {
+          if (section.resolution?.disposition !== "applied") continue;
+          const texts = source.era === "ptr"
+            ? (section.resolution.notes ?? []).map(n => ({ specKey: n.specKey, summary: n.summary }))
+            : (section.resolution.references ?? []).map(r => ({ date: r.date, summary: r.highlight }));
+          if (!texts.length) continue;
+          // Sorting a copy avoids treating a reordered receipt as a changed summary.
+          texts.sort((a, b) => JSON.stringify(a).localeCompare(JSON.stringify(b)));
+          rows.set(`${config.id}|${section.id}`, { patch: source.patch, era: source.era,
+            date: section.date, class: section.class, specKeys: [...(section.specKeys ?? [])].sort(),
+            category: section.category, sha256: section.sha256, texts,
+            url: source.topicId === config.topicId ? noteUrl(config, post.postNumber)
+              : `https://us.forums.blizzard.com/en/wow/t/${source.topicId}/${post.postNumber}` });
+        }
+      }
+    }
+    return rows;
+  };
+  const was = summaries(oldLedger), now = summaries(newLedger), changes = [];
+  for (const [id, entry] of now) {
+    const before = was.get(id);
+    if (!before) changes.push({ kind: "added", ...entry });
+    else if (JSON.stringify(before) !== JSON.stringify(entry)) changes.push({ kind: "edited", ...entry, before });
+  }
+  for (const [id, entry] of was) if (!now.has(id)) changes.push({ kind: "removed", ...entry });
+  return changes.sort((a, b) => b.date.localeCompare(a.date) || a.url.localeCompare(b.url) || a.class.localeCompare(b.class));
 }
 
 const cap = (arr, n, line) => arr.slice(0, n).map(line).concat(arr.length > n ? [`- …and ${arr.length - n} more`] : []);
@@ -121,6 +160,7 @@ export function digestMarkdown({ oldPayload, newPayload, manifest, runUrl, oldPe
   const notes = notesAll.filter(n => !n.superseded);
   const builds = newEntries(oldPayload.ptrBuilds?.builds, newPayload.ptrBuilds?.builds, buildId);
   const verdicts = verdictChanges(oldPayload, newPayload);
+  const officialChanges = officialNoteChanges(oldPayload.officialNotesLedger, newPayload.officialNotesLedger);
 
   const lines = [];
   if (manifest?.summary) lines.push(`> ${md(manifest.summary)}`);
@@ -134,6 +174,20 @@ export function digestMarkdown({ oldPayload, newPayload, manifest, runUrl, oldPe
   if (builds.length) {
     lines.push(`**New PTR build${builds.length === 1 ? "" : "s"}:**`);
     lines.push(...builds.map(b => `- ${b.date} — ${md(b.label)}${b.forumUrl ? ` ([notes](${b.forumUrl}))` : ""}`), "");
+  }
+  if (officialChanges.length) {
+    lines.push(`**Official-note changes (${officialChanges.length}):**`);
+    const brief = text => { const flat = String(text ?? "").replace(/\s+/g, " ").trim(); return md(flat.slice(0, 240)) + (flat.length > 240 ? "…" : ""); };
+    const summaries = entry => brief(entry.texts.map(t => t.specKey ? `${t.specKey.split("|").reverse().join(" ")}: ${t.summary}` : t.summary).join(" · "));
+    lines.push(...cap(officialChanges, 12, change => {
+      const label = { added: "Added", edited: "Edited", removed: "Removed" }[change.kind];
+      const text = change.kind === "edited"
+        ? JSON.stringify(change.before.texts) === JSON.stringify(change.texts)
+          ? `${summaries(change)} (official section revised; tracked summary unchanged)`
+          : `Previously: ${summaries(change.before)} → Now: ${summaries(change)}`
+        : `${change.kind === "removed" ? "Previous tracked summary: " : ""}${summaries(change)}`;
+      return `- ${label} — **${md(change.class)}** (${md(change.patch)} ${change.era === "ptr" ? "PTR preview" : "live"}, ${md(change.date)}, ${md(change.category)}) — ${text} — [Blizzard notes](${change.url})`;
+    }), "");
   }
   if (verdicts.length) lines.push(`**Writeup verdicts:**`, ...verdicts.map(v => `- ${v}`), "");
   const vids = videoActivity(oldPending, newPending, takesAll, notesAll);
@@ -156,7 +210,7 @@ export function digestMarkdown({ oldPayload, newPayload, manifest, runUrl, oldPe
   }
   const videoChange = vids.distilled.length || vids.skipped.length || vids.queued.length;
   const degraded = (manifest?.sources ?? []).filter(r => r.result && r.result !== "success");
-  if (!moves.length && !takes.length && !notes.length && !builds.length && !verdicts.length && !videoChange) {
+  if (!moves.length && !takes.length && !notes.length && !builds.length && !verdicts.length && !officialChanges.length && !videoChange) {
     // "Every source re-verified fresh" was emitted on ANY no-change run, including one
     // where nothing arrived at all — the most comforting possible wording for the least
     // healthy possible night (audit 2026-07-24, A4). Say which it actually was.
@@ -170,7 +224,7 @@ export function digestMarkdown({ oldPayload, newPayload, manifest, runUrl, oldPe
 
 /* ---------- rev loading (main only — git is the data source) ---------- */
 
-const showJson = (rev, file) => JSON.parse(execFileSync("git", ["show", `${rev}:data/${file}`], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 }));
+const showJson = (rev, file) => JSON.parse(execFileSync("git", ["show", `${rev}:data/${file}`], { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"], maxBuffer: 64 * 1024 * 1024 }));
 
 /* Same read, but tolerant of the file not existing at that rev — for artifacts that entered
    the tree partway through the history the digest is asked to diff. */
@@ -206,8 +260,11 @@ export function payloadAt(rev) {
        payloadAt is the one caller that hand-assembles the shape, and it forgot. Soft-read:
        season-final.json only entered the tree 2026-08-09. (audit 2026-08-14) */
     seasonFinal: showJsonSoft(rev, "season-final.json"),
+    officialNotes: showJsonSoft(rev, "official-notes.json"),
   };
-  return buildPayload(data);
+  // Analytical-only receipt data: buildPayload's public view intentionally omits
+  // section hashes and applied live references, which a revision diff needs.
+  return { ...buildPayload(data), officialNotesLedger: data.officialNotes };
 }
 
 const isMain = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);

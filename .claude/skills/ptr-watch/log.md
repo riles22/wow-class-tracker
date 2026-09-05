@@ -16,6 +16,12 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-05 — Historical reconciliation and current tooltip corrections
+
+- Fresh official compilation and scheduled announcements confirm all59 historical post-launch PvE sections already represented, including16 set-related sections. Replaced baseline exclusions with specific reason-only reconciliation notes; no duplicate tuning, changed dispositions or invented effective dates.
+- Fresh Wowhead item tooltips271528/271564/271546 corrected Restoration2pc, Arcane4pc24% cap, Fire4pc25% damage bonus and Affliction2pc/4pc placement. Current tooltip corroborates Demonology's4pc effect despite Blizzard prose calling it2pc; discrepancy disclosed. Added dated caveats to3 archived writeups, preserving their verdicts and sources.
+- Rebuilt gearing's derived spec data. Official-note digest now reports meaningful added/edited/removed applied summaries, including notes-only PTR preview, while ignoring check-time-only changes. The preview remains separate from forecasts.
+
 ## 2026-09-05 (nightly, THIRD run of the day) — official ledger clean, no new live tuning, 12.1.5 lane untouched
 
 - **Revision ledger first, per the skill.** official-notes/evidence.json (checkedAt 18:47:09Z) reports

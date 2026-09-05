@@ -326,6 +326,7 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
 
     const metricKeys = new Set();
     for (const metric of spec.metrics ?? []) {
+      if (metric.source === "warcraftlogs" && (Object.hasOwn(metric, "class") || Object.hasOwn(metric, "spec"))) errors.push(`specs.json: ${key} WCL metric cannot override its enclosing class/spec identity`);
       if (!allSources.has(metric.source)) errors.push(`specs.json: ${key} metric from unknown source "${metric.source}"`);
       if (!BRACKETS.has(metric.bracket)) errors.push(`specs.json: ${key} metric has invalid bracket "${metric.bracket}"`);
       if (typeof metric.name !== "string" || !metric.name) errors.push(`specs.json: ${key} metric missing name`);
@@ -353,6 +354,22 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
          already carries a date. Same shape as the mandatory ptr.source rule. */
       if (metric.asOf == null) errors.push(`specs.json: ${key} metric "${metric.name}" needs an asOf date — the coverage gate dates a family by its min-th-freshest row, and an undated row cannot be counted as stale`);
       isoOk(metric.asOf, `specs.json: ${key} metric "${metric.name}" asOf`);
+      if (metric.sample != null || /^Leaderboard median /.test(metric.name ?? "")) {
+        const sample = metric.sample;
+        const validInstant = v => typeof v === "string" && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/.test(v) && Number.isFinite(Date.parse(v));
+        if (metric.source !== "warcraftlogs" || !/^Leaderboard median (DPS|HPS) \(S2 (Mythic|M\+10): .+, top 100\)$/.test(metric.name ?? "")
+          || sample?.kind !== "leaderboard-entries" || sample.cap !== 100 || !["dps", "hps"].includes(sample.metric)
+          || metric.unit !== sample.metric.toUpperCase() || (sample.metric === "hps") !== (spec.role === "Healer")
+          || !Number.isInteger(metric.n) || metric.n < 10 || metric.n > 100 || metric.era !== "live"
+          || !validInstant(sample.observedAt) || !validInstant(sample.oldestRun) || !validInstant(sample.newestRun)
+          || sample.oldestRun > sample.newestRun || sample.newestRun > sample.observedAt
+          || metric.asOf !== sample.newestRun.slice(0, 10) || typeof sample.hasMorePages !== "boolean"
+          || sample.partition !== 1 || !Number.isInteger(sample.encounterId) || sample.encounterId <= 0
+          || (metric.bracket === "raid" ? sample.zoneId !== 53 || sample.difficulty !== 5 || sample.size !== 20 || sample.keystoneLevel != null
+            : sample.zoneId !== 55 || sample.difficulty !== 10 || sample.size !== 5 || sample.keystoneLevel !== 10)) {
+          errors.push(`specs.json: ${key} metric "${metric.name}" has invalid WCL leaderboard sample provenance`);
+        }
+      }
       const mkey = `${metric.source}|${metric.bracket}|${metric.name}`;
       if (metricKeys.has(mkey)) errors.push(`specs.json: ${key} duplicate metric (${mkey}) — the upsert key must be unique per spec`);
       metricKeys.add(mkey);

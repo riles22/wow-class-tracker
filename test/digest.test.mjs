@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { tierMoves, newEntries, verdictChanges, videoActivity, digestMarkdown } from "../src/digest.mjs";
+import { tierMoves, newEntries, verdictChanges, videoActivity, digestMarkdown, officialNoteChanges } from "../src/digest.mjs";
 
 const spec = (cls, sp, over = {}) => ({ class: cls, spec: sp, ...over });
 const payload = (specs, extra = {}) => ({
@@ -206,4 +206,91 @@ test("digestMarkdown escapes untrusted third-party text (audit 2026-07-24, S1)",
   const forged = digestMarkdown({ oldPayload: p, newPayload: p,
     manifest: { summary: "fine\n**Tier moves (99 specs):**", sources: [] } });
   assert.ok(!/^\*\*Tier moves/m.test(forged), "the summary must not be able to forge a section heading");
+});
+
+const officialLedger = (summary = "Damage increased.") => ({ schemaVersion: 1, sources: {
+  "ptr-preview": { topicId: 2344395, patch: "12.1.5", era: "ptr", checkedAt: "2026-09-05T10:00:00Z", removedSections: [],
+    posts: [{ postNumber: 4, version: 2, updatedAt: "2026-09-04T10:00:00Z", bodySha256: "post-hash", sections: [
+      { id: "2344395:4:2026-09-04:classes:mage:1", date: "2026-09-04", class: "Mage", category: "Classes", specKeys: ["Mage|Fire"], sha256: "section-hash",
+        resolution: { disposition: "applied", reason: "Reviewed", notes: [{ specKey: "Mage|Fire", summary }] } },
+    ] }] },
+} });
+const previewSection = ledger => ledger.sources["ptr-preview"].posts[0].sections[0];
+
+test("official-note summaries cover addition, edit, removal and pre-ledger history", () => {
+  const first = officialLedger(), edited = officialLedger("Damage increased by a different amount.");
+  assert.deepEqual(officialNoteChanges(null, null), []);
+  assert.equal(officialNoteChanges(null, first)[0].kind, "added");
+  const change = officialNoteChanges(first, edited)[0];
+  assert.equal(change.kind, "edited");
+  assert.equal(change.before.texts[0].summary, "Damage increased.");
+  assert.equal(change.texts[0].summary, "Damage increased by a different amount.");
+  const removed = structuredClone(edited);
+  removed.sources["ptr-preview"].posts[0].sections = [];
+  removed.sources["ptr-preview"].removedSections = [{ ...previewSection(edited), resolution: { disposition: "irrelevant", reason: "Reviewed removal." } }];
+  const removal = officialNoteChanges(edited, removed)[0];
+  assert.equal(removal.kind, "removed");
+  assert.equal(removal.texts[0].summary, change.texts[0].summary);
+  assert.match(removal.url, /2344395\/4$/);
+  assert.deepEqual(officialNoteChanges(removed, structuredClone(removed)), []);
+  const excluded = structuredClone(first);
+  previewSection(excluded).resolution = { disposition: "irrelevant", reason: "Reclassified after review." };
+  assert.equal(officialNoteChanges(first, excluded)[0].kind, "removed", "withdrawing a tracked summary is visible even if its source section remains");
+  assert.deepEqual(officialNoteChanges(null, excluded), [], "excluded historical baseline is not announced as new published content");
+});
+
+test("official-note refresh timestamps and unrelated post edits stay quiet; section edits do not", () => {
+  const first = officialLedger(), next = structuredClone(first);
+  const source = next.sources["ptr-preview"];
+  source.checkedAt = "2026-09-05T12:00:00Z";
+  source.posts[0].version++;
+  source.posts[0].updatedAt = source.checkedAt;
+  source.posts[0].bodySha256 = "unrelated-post-edit";
+  previewSection(next).resolution.reason = "Rechecked without changing the summary.";
+  assert.deepEqual(officialNoteChanges(first, next), []);
+  assert.match(digestMarkdown({ oldPayload: payload([],{ officialNotesLedger: first }), newPayload: payload([],{ officialNotesLedger: next }) }), /Quiet run/);
+  previewSection(next).sha256 = "new-section-hash";
+  assert.equal(officialNoteChanges(first, next)[0].kind, "edited");
+  const text = digestMarkdown({ oldPayload: payload([],{ officialNotesLedger: first }), newPayload: payload([],{ officialNotesLedger: next }) });
+  assert.match(text, /official section revised; tracked summary unchanged/);
+  assert.doesNotMatch(text, /Quiet run/);
+});
+
+test("official-note digest includes live amendments, historical patch attribution and escaped before/after text", () => {
+  const old = officialLedger("Old **bold** [x](https://evil.test)\n- forged");
+  const next = officialLedger("New summary.");
+  const source = { topicId: 2336376, patch: "12.1", era: "live", posts: [{ postNumber: 1, sections: [{
+    ...previewSection(old), id: "2336376:1:2026-09-04:classes:mage:1", resolution: { disposition: "applied", references: [{ kind: "build", date: "2026-09-04", highlight: "Fire Mage — Corrected damage." }] },
+  }] }] };
+  next.sources["live-hotfixes"] = source;
+  const text = digestMarkdown({ oldPayload: payload([],{ officialNotesLedger: old }), newPayload: payload([],{ officialNotesLedger: next }) });
+  assert.match(text, /Official-note changes \(2\)/);
+  assert.match(text, /12\.1\.5 PTR preview/);
+  assert.match(text, /12\.1 live/);
+  assert.match(text, /Previously: Fire Mage: Old/);
+  assert.match(text, /→ Now: Fire Mage: New summary\./);
+  assert.match(text, /Corrected damage/);
+  assert.match(text, /\[Blizzard notes\]\(https:\/\/us\.forums\.blizzard\.com\/en\/wow\/t\//);
+  assert.doesNotMatch(text, /\n- forged|Old \*\*bold\*\*|\[x\]\(https:\/\/evil/);
+  const historical = structuredClone(old);
+  historical.sources["ptr-preview"].topicId = 123;
+  historical.sources["ptr-preview"].patch = "older-patch";
+  const historic = officialNoteChanges(null, historical)[0];
+  assert.equal(historic.patch, "older-patch");
+  assert.equal(historic.url, "https://us.forums.blizzard.com/en/wow/t/123/4");
+});
+
+test("official-note ordering changes do not invent edits and section identity distinguishes same-spec notes", () => {
+  const first = officialLedger();
+  previewSection(first).resolution.notes.push({ specKey: "Mage|Frost", summary: "Frost change." });
+  previewSection(first).specKeys.push("Mage|Frost");
+  const second = structuredClone(first);
+  previewSection(second).resolution.notes.reverse();
+  previewSection(second).specKeys.reverse();
+  assert.deepEqual(officialNoteChanges(first, second), []);
+  const another = structuredClone(previewSection(second));
+  another.id += ":another";
+  second.sources["ptr-preview"].posts[0].sections.push(another);
+  assert.equal(officialNoteChanges(first, second).length, 1);
+  assert.equal(officialNoteChanges(first, second)[0].kind, "added");
 });

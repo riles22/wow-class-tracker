@@ -7,7 +7,7 @@ import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { validateData, loadData } from "./validate.mjs";
-import { buildPayload, PHASES } from "./render.mjs";
+import { buildPayload, publicationPayload, PHASES } from "./render.mjs";
 import { renderSeasonArchive } from "./render-season-archive.mjs";
 import { loadSnapshots } from "./report-card.mjs";
 import { createForecastReport, renderForecastReport } from "./render-forecast-report.mjs";
@@ -34,7 +34,7 @@ export async function build(root = ROOT) {
   if (forecastReport?.summary) payload.meta.forecastReport = forecastReport.summary;
   const forecastReportHTML = renderForecastReport(forecastReport);
   // Escape "<" so the payload can never terminate the surrounding <script> block.
-  const json = JSON.stringify(payload).replace(/</g, "\\u003c");
+  const json = JSON.stringify(publicationPayload(payload)).replace(/</g, "\\u003c");
   let html = template.replace("__DATA_JSON__", () => json);
 
   /* ERA TOKENS (2026-08-11, docs/era-prose-scope.md item 1). The static masthead/footer

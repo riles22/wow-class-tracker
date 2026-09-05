@@ -102,6 +102,7 @@ jobs:
         with:
           name: wcl-evidence
           retention-days: 7
+          if-no-files-found: error
           path: wcl-fetch/
 
       - name: Deterministic public-source availability evidence
@@ -222,28 +223,22 @@ jobs:
             or ptr verdicts, reopen forecasts, or relabel archived 12.1 PTR metrics.
             Run node src/check-official-notes.mjs before finishing.
 
-            WARCRAFT LOGS: you hold NO WCL credentials. A deterministic step already ran
-            src/fetch-wcl.mjs and wrote wcl-fetch/evidence.json — your ONLY WCL input.
-            The live S2 zones are 53 (raid, The Venomous Abyss) and 55 (M+); the PTR
-            zones (52/54/56) belong to the CLOSED 12.1 cycle and are no longer fetched.
-            Write the two WCL manifest rows (wcl-live-raid, wcl-live-mplus) from the
-            evidence honestly. A WCL row may claim success ONLY when
-            evidence.landed[key] shows rows — currently none do (the transport outage
-            is an OWNER-ACCEPTED standing red; see the rows' labels in
-            data/required-sources.json), so both rows normally record the evidence
-            verdict as their degradation detail. Historically the three *-raw keys, whose
-            raw-DPS medians the fetch step merges into specs.json ITSELF before you start
-            (never re-fetch, recompute, or edit those rows; if a landed entry is absent,
-            report that key partial/unreachable/parse_error with the evidence's
-            rawRecipes[key] detail — an empty PTR zone between testing windows is
-            "partial", not an error). While the evidence reports verdict "rdps-broken",
-            the five frozen rDPS/normalized cuts are unreachable with that detail and
-            their stored data stays unchanged — the publish gate cross-checks an evidence
-            artifact uploaded before you started, which you cannot modify. If the verdict
-            is "rdps-restored", put "WCL RDPS RESTORED — owner decision needed on the
-            median recipe" at the TOP of the summary; if it is "no-credentials" or
-            "oauth-failed", surface that at the top too. Do NOT fetch anything from
-            warcraftlogs.com yourself, by any means — no API, no HTML scraping, no workarounds.
+            WARCRAFT LOGS: you hold NO WCL credentials. The deterministic collector
+            already applied supported WoW leaderboard rows and wrote wcl-fetch/evidence.json
+            plus updates.json. Never re-fetch, recompute, or edit any WCL metric row.
+            New wcl-leaderboard-raid and wcl-leaderboard-mplus manifest rows must match
+            evidence.brackets[key].status and evidence.landed[key].rows. Mark success
+            only for a successful bracket; partial/invalid/unreachable cuts keep old
+            observations unchanged and carry their actual reason (invalid -> parse_error).
+            These are per-encounter top-100-entry medians, not population medians.
+            The two older wcl-live-raid/mplus rows still record evidence.legacy[key]
+            as unreachable: no verified exact aggregate endpoint exists. New series
+            cannot green the historical aggregate requirements. rdps is FFXIV-only;
+            its failure is not a WoW outage. Closed PTR52/54/56 rows remain untouched.
+            Run node src/check-wcl-metrics.mjs --manifest data/run-manifest.json.
+            Publication verifies exact canonical rows against the separate trusted
+            pre-agent artifact. Surface no-credentials/oauth-failed/merge-failed.
+            No WCL API/HTML/proxy fetching by the agent.
 
             PTR watch must check the official forum thread and the Wowhead news RSS for new
             builds (the WCL zone-54/52 parts are evidence-only, per above). Creator watch must
@@ -343,6 +338,7 @@ jobs:
             exit 1
           fi
           node src/check-refresh.mjs --manifest
+          node src/check-wcl-metrics.mjs --manifest data/run-manifest.json
           node src/check-stable-metrics.mjs --manifest data/run-manifest.json
           node src/check-official-notes.mjs
 
@@ -376,18 +372,16 @@ jobs:
             not delete the requirement. Publish diffs the contract against master and fails
             the night red either way, so removing a requirement only wastes the run.
 
-            WARCRAFT LOGS: you hold NO WCL credentials — wcl-fetch/evidence.json (written by the
-            deterministic pre-agent step) is your only WCL input; write the two WCL manifest
-            rows (wcl-live-raid, wcl-live-mplus) from it honestly. Success is allowed ONLY where
-            evidence.landed[key] shows rows — currently none do (owner-accepted standing red
-            while the S2 transport outage lasts; the PTR *-raw recipes were retired at the
-            2026-08-18 flip and their stored rows in specs.json are final receipts — never
-            re-fetch or edit those rows); both rows stay degraded with the
-            evidence's verdict detail (the publish gate cross-checks a
-            pre-agent artifact copy you cannot modify). Do not fetch warcraftlogs.com yourself,
-            by any means. Same for YouTube transcripts: distill only from the pre-fetched
-            transcript-fetch/ files (offsets in ms), maintain data/pending-transcripts.json
-            honestly, and never fetch transcripts yourself.
+            WARCRAFT LOGS: only the deterministic wcl-fetch/evidence.json and
+            updates.json are inputs. The collector already merged supported per-encounter
+            leaderboards; never edit/recompute/refetch any WCL metric row. Account for
+            all four requirements: wcl-leaderboard-raid/mplus from brackets[key] and
+            landed[key], wcl-live-raid/mplus from legacy[key] (still unreachable exact
+            aggregates). No leaderboards under legacy median names, no rdps outage
+            diagnosis (that enum is FFXIV-only), no closed-PTR updates or HTML/proxy
+            workarounds. Run node src/check-wcl-metrics.mjs --manifest data/run-manifest.json.
+            Same for YouTube transcripts: distill only the pre-fetched transcript-fetch/
+            files, maintain the queue honestly, and never fetch transcripts yourself.
 
             ARCHON: read source-health/evidence.json for this run's public-route checks.
             Never bypass a verification challenge or turn a successful HTTP response into
@@ -444,14 +438,15 @@ jobs:
           npm test
           npm run build
           node src/check-refresh.mjs --manifest
+          node src/check-wcl-metrics.mjs --manifest data/run-manifest.json
           node src/check-stable-metrics.mjs --manifest data/run-manifest.json
           node src/check-official-notes.mjs
           # WCL credential/config rot is invisible to the agents (they never hold the
           # secrets) — surface it deterministically as a red refresh job.
           verdict="$(node -e 'console.log(JSON.parse(require("fs").readFileSync("wcl-fetch/evidence.json","utf8")).verdict ?? "")' 2>/dev/null || echo unreadable)"
           case "$verdict" in
-            no-credentials|oauth-failed|unreadable)
-              echo "::error::WCL fetch step could not authenticate (verdict: $verdict) — check WCL_CLIENT_ID/WCL_CLIENT_SECRET"
+            no-credentials|oauth-failed|merge-failed|unreadable)
+              echo "::error::WCL deterministic collection failed (verdict: $verdict) — inspect its receipt; authentication failures require checking WCL_CLIENT_ID/WCL_CLIENT_SECRET"
               exit 1;;
           esac
 
@@ -733,6 +728,7 @@ jobs:
 
       - name: Verify collected metrics and complete official note intake
         run: |
+          node src/check-wcl-metrics.mjs --manifest data/run-manifest.json
           node src/check-stable-metrics.mjs --manifest data/run-manifest.json
           node src/check-official-notes.mjs
 
@@ -902,6 +898,9 @@ jobs:
             echo
             echo "--- Gate 3 (refresh contract) ---"
             node src/check-refresh.mjs --manifest --wcl-evidence=wcl-fetch/evidence.json 2>&1 | tail -30 || true
+            echo
+            echo "--- Supported WCL collection ---"
+            node src/check-wcl-metrics.mjs --manifest data/run-manifest.json 2>&1 | tail -20 || true
             echo
             echo "--- Deterministic numeric collection ---"
             node src/check-stable-metrics.mjs --manifest data/run-manifest.json 2>&1 | tail -20 || true

@@ -13,7 +13,7 @@ Only these tier-list sources feed the consensus (**four** today — the table be
 | **Icy Veins** | S+/S/A+/A/B+/B/C (7-band since 2026-08-14, `521ceaf` — was S/A+/A/B/C) | Broad meta, general population | editorial (weeks) | per role × raid/M+ pages |
 | **Method** | S/A/B/C | Race-to-world-first output (raid w/ Method raiders; M+ by Tactyks) | editorial | may omit specs (e.g. Vengeance DH) — omitted, never invented |
 | **Wowhead** | S/A+/A/B/C/D/F | Class-writer rankings | editorial | per role pages; also the PTR datamining mirror |
-| **Archon** | S/A/B/C | Statistical (Warcraft Logs parses / Blizzard leaderboards, 14-day window) | **daily** | raid tiers = *throughput* list, M+ = *score* list; mirrored at u.gg. **Raid letters read from the HEROIC list since 2026-08-25** (owner decision, early-S2: Heroic carries ~170× the Mythic parses and all 27 DPS specs; switch back — a reviewed registry edit + `CONSENSUS_VERSION` bump — once Mythic reaches 27/27 with healthy samples) |
+| **Archon** | S/A/B/C | Statistical (Warcraft Logs parses / Blizzard leaderboards, 14-day window) | **daily** | raid tiers = *throughput* list, M+ = *score* list; U.GG is a separate provider, not a verified equivalent mirror. **Raid letters read from the HEROIC list since 2026-08-25** (owner decision, early-S2: Heroic carries ~170× the Mythic parses and all 27 DPS specs; switch back — a reviewed registry edit + `CONSENSUS_VERSION` bump — once Mythic reaches 27/27 with healthy samples) |
 | ~~**WoWMeta**~~ | — | **Retyped to a metrics source 2026-07-31** — see layer 2. Its letters were Ckmeans clusters of an undocumented toggle defaulting to PLAYER COUNT (representation, not performance), and its HTML transport served a stale 2026-03-23 prerender. Consensus is now four tier-list sources. | | |
 
 **Outage retention (owner-confirmed 2026-09-05):** freshness alarms do not expire
@@ -79,7 +79,7 @@ The tracker also renders its OWN computed 12.1 forecast (projection lane). It is
 
 | Source | What we take | Honest label |
 |---|---|---|
-| **Warcraft Logs** | Retained S1 per-parse median rDPS/HPS + parse counts (zones 46/47); live S2 targets are zones 53/55, currently without an equivalent working fetch recipe | archived population medians retain their original dates; live API diagnostics are not fresh measurements |
+| **Warcraft Logs** | S2 per-encounter DPS/HPS medians of up to100 leaderboard entries at Mythic raid/exactly+10 dungeons; explicit sample provenance | nightly sanctioned API collection; separate retained S1 population medians and closed PTR records keep historical dates |
 | **Archon (numeric layer)** | 95th-pct DPS/HPS (Mythic AND Heroic — separate families, never mixed; Heroic added 2026-08-25 as the dense early-season series), M+ score, popularity % (Mythic) | top-end throughput + representation; difficulty is part of the metric name |
 | **Murlok.io** | Avg M+ rating of each spec's top-50 players | "top-50 ceiling" — NOT popularity, NOT a tier |
 | **Bloodmallet (SimC, tier MID1)** | Best-build DPS at 1/2/3/5/8/15 targets | powers ST/Cleave/AoE fight profiles (DPS only; Augmentation unsimmable) |
@@ -205,7 +205,7 @@ the heartbeat alerts when intake verification is more than 48 hours old.
   consensus like every other role), so QE stays a linked tool and a research reference,
   never an ingestion source. Its blog publishes dated Midnight healer articles. Voulk
   himself is a creator entry (Wowhead Healing Expert — Prevoker/Resto Druid).
-- **u.gg/wow** — mirror of Archon.
+- **u.gg/wow** — separate provider with different methodology/filters; not a verified Archon mirror or dependable export.
 
 ## Audited and skipped (re-check later)
 
@@ -219,28 +219,24 @@ Policy 2026-07-08: **pull every source fresh on every run** — no staleness gat
 at-most-daily cap. The retry-with-backoff and inter-request sleeps below are kept purely
 as reliability mechanics (so fetches succeed / avoid bot-blocks), not as pull limits.
 
-- **Warcraft Logs**: sanctioned v2 GraphQL access is configured. Only the deterministic
-  pre-agent step (`src/fetch-wcl.mjs`) holds the nightly WCL credentials; the AI agent
-  consumes its evidence artifact without WCL credentials. The step verifies the
-  live season's zone/partition/difficulty/size and a discovered encounter per bracket:
-  **zone 53** raid (partition 1, Mythic 5, size 20) and **zone 55** M+ (partition 1,
-  difficulty 10, size 5). It probes `rdps` with `dps` controls on failure and records
-  separate bracket statuses. Controls are diagnostics only, never replacement metrics.
-  A working leaderboard page does not reproduce the stored per-parse population
-  medians; `landed` remains empty until an equivalent reviewed live recipe exists.
-  **Verified 2026-09-05:** OAuth and GraphQL transport worked; both live `rdps` probes
-  returned Internal server error while their `dps` controls returned rankings. Ordinary
-  public requests to `/zone/statistics/53` and `/zone/statistics/55` each returned HTTP
-  403 Cloudflare verification challenges. Do not bypass a challenge or treat diagnostics
-  as a data refresh. Retained S1 medians (zones 46/47, asOf 2026-08-10) keep their original
-  values, URLs and dates until genuine S2 observations land.
-  **Closed PTR cycle:** the zone-52 Dummy Dome and pooled zone-54/56 raw-DPS recipes
-  retired on 2026-08-18 (`RAW_RECIPES = []`); they no longer run nightly. Archived
-  **"Median raw DPS (12.1 PTR Dummy Dome, NT)"**, **"…(12.1 PTR Venomous Abyss, pooled)"**
-  and **"…(12.1 PTR M+ keys, pooled)"** rows remain historical receipts. They were computed
-  from complete best-parse-per-player leaderboards (pooled cuts required every
-  discovered boss/dungeon), with `n` counting ranked player-encounter entries. This is a
-  different population from per-parse medians, and raw DPS never substitutes for rDPS.
+- **Warcraft Logs**: sanctioned OAuth/GraphQL `dps` and `hps` collection works.
+  The pre-agent `src/fetch-wcl.mjs` holds credentials and writes independently uploaded
+  receipts; `check-wcl-metrics.mjs` checks exact numeric updates and retained data.
+  [Reviewed supported recipe](docs/wcl-supported-collection.md): eight Mythic raid bosses
+  (zone53, partition1,difficulty5,size20; world boss3379 excluded) and eight +10 dungeons
+  (zone55,partition1,difficulty10,size5,API bracket9). Per-spec per-encounter medians use
+  the first up to100 ranked **entries**, minimum10; repeated characters are possible.
+  Included log ranges, latest-log date, and collection time are displayed separately.
+  These are partition leaderboard samples, not whole-population medians or a weekly
+  window. Tank DPS/HPS alone are not overall role effectiveness; no letter grades derive
+  from them. WCL's DPS attribution is retained without asserting 'raw' or 'rDPS'.
+  **Correction 2026-09-05:** [the official enum](https://rpglogs.github.io/RPGLogsApiSdk/enums/CharacterRankingMetricType.html)
+  defines rdps as FFXIV-only; earlier WoW-outage diagnoses based on its errors were wrong.
+  The old S1 population medians and closed PTR52/54/56 records retain their values,
+  dates, and historical identifiers. The unsupported exact aggregate requirements stay
+  visibly unresolved; new leaderboard receipts cannot clear them. Ordinary statistics
+  pages still present verification challenges, which are not bypassed. An Archon aggregate
+  [access request](docs/archon-access-request-2026-09-05.md) is prepared for Riley to send.
 - **Archon / Murlok / Bloodmallet / Blizzard forums / YouTube RSS**: plain fetches every
   run, retry-with-backoff on transient 404s (reliability, not a cap).
 - **YouTube transcripts**: two transports, same captions. On the nightly runner the
